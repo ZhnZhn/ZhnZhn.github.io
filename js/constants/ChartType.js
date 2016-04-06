@@ -1,0 +1,25 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _DialogType = require('./DialogType');
+
+var addCharts = function addCharts(obj, dialogType, prefix) {
+  for (var prop in dialogType) {
+    obj[prefix + prop] = dialogType[prop];
+  }
+};
+
+var createTypeObject = function createTypeObject() {
+  var obj = {};
+  addCharts(obj, _DialogType.Quandl, 'QUANDL_');
+  addCharts(obj, _DialogType.QuandlYahoo, 'QUANDL_YAHOO_');
+  addCharts(obj, _DialogType.QuandlGoogle, 'QUANDL_GOOGLE_');
+  return obj;
+};
+
+var ChartType = createTypeObject();
+exports.default = ChartType;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\ChartType.js.map

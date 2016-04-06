@@ -1,0 +1,9 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\Step.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\Step.js",
+ "sourceRoot": "",
+ "names": [],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,SAAS;AACb,QAAO;AACL,aAAU,cAAV;AACA,WAAO,SAAP;AACA,YAAS,mBAAT;AACA,kBAAe,KAAf;AACA,WAAQ,MAAR;AACA,YAAS,MAAT;AACA,eAAW,QAAX;GAPF;CADI;;AAYN,IAAM,OAAO,gBAAM,WAAN,CAAkB;;AAC7B,4BAAQ;AACN,WACE;;QAAM,OAAO,OAAO,IAAP,EAAb;MACI,KAAK,KAAL,CAAW,IAAX;KAFN,CADM;GADqB;CAAlB,CAAP;;kBAUS"
+}

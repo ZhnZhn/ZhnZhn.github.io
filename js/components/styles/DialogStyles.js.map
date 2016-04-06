@@ -1,0 +1,9 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\styles\\DialogStyles.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\styles\\DialogStyles.js",
+ "sourceRoot": "",
+ "names": [],
+ "mappings": ";;;;;;AACA,IAAM,eAAe;;AAEnB,UAAQ;AACN,YAAQ,KAAR;GADF;AAGA,aAAY;AACV,WAAO,SAAP;AACA,aAAS,cAAT;;AAEA,eAAW,OAAX;AACA,WAAO,OAAP;AACA,kBAAc,KAAd;AACA,cAAU,MAAV;AACA,gBAAY,MAAZ;GARF;;;AAYA,uBAAqB;AACnB,iBAAa,MAAb;AACA,gBAAY,KAAZ;AACA,WAAO,SAAP;GAHF;AAKA,2BAA0B;AACxB,aAAS,cAAT;AACA,WAAO,MAAP;AACA,YAAQ,MAAR;AACA,YAAQ,mBAAR;AACA,kBAAc,KAAd;AACA,eAAW,QAAX;AACA,iBAAa,KAAb;GAPF;;CAtBI;;kBAkCS"
+}

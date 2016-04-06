@@ -1,0 +1,46 @@
+
+.button-type-a{
+  color: rgba(235,240,16,1);
+  background: linear-gradient(to top, #222222, gray);
+  border: 2px solid #696969;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 16px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.button-type-a:hover, .button-type-a:active, .button-type-a:focus{
+  border: 2px solid green;
+  box-shadow: 2px 2px 2px 2px rgba(0,255,0, 0.3);
+  outline: none;
+}
+
+.button-type-b {
+  color: rgba(235,240,16,1);
+  background: linear-gradient(to top, #804000, gray);
+  border: 2px solid #696969;
+  padding: 2px 3px;
+  border-radius: 4px;
+}
+
+.button-type-b:hover, .button-type-b:active, .button-type-b:focus {
+  border: 2px solid green;
+  outline: none;
+}
+
+.button-type-c {
+  color: rgba(235,240,16,1);
+  background: linear-gradient(to top, #804000, gray);
+  border: 2px solid #696969;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 16px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.button-type-c:hover, .button-type-c:active, .button-type-c:focus {
+  border: 2px solid green;
+  outline: none;
+}

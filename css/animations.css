@@ -1,0 +1,12 @@
+
+@keyframes animation-show-popup{
+  from { opacity: 0; transform: scaleY(0);}
+  to   { opacity: 1; transform: scaleY(1);}
+}
+
+.show-popup{
+  transform-origin: 50% 0;
+  animation-name: animation-show-popup;
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;  
+}

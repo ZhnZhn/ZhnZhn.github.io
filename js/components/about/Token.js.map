@@ -1,0 +1,9 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\Token.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\Token.js",
+ "sourceRoot": "",
+ "names": [],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,QAAQ,gBAAM,WAAN,CAAkB;;AAC9B,4BAAQ;iBACkC,KAAK,KAAL,CADlC;QACC,mCADD;QACe,qBADf;QACsB,2BADtB;;AAEN,WACE;;QAAM,OAAO,EAAC,OAAO,KAAP,EAAc,YAAY,MAAZ,EAAtB,EAAN;MACI,eAAe,MAAM,QAAN,GAAiB,QAAhC;KAFN,CAFM;GADsB;CAAlB,CAAR;;kBAWS"
+}

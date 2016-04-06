@@ -1,0 +1,24 @@
+import Reflux from 'reflux';
+
+import LoadConfig from '../logic/LoadConfig';
+
+export const ChartActionTypes = {
+  INIT_AND_SHOW_CHART : 'initAndShowChart',
+  LOAD_STOCK : 'loadStock',
+  LOAD_STOCK_COMPLETED : 'loadStockCompleted',
+  LOAD_STOCK_FAILED : 'loadStockFailed',
+  SHOW_CHART : 'showChart',
+  CLOSE_CHART : 'closeChart'
+}
+
+const ChartActions =  Reflux.createActions({
+      [ChartActionTypes.LOAD_STOCK] : {children : ['completed', 'failed']},
+      [ChartActionTypes.SHOW_CHART] : {},
+      [ChartActionTypes.CLOSE_CHART] : {}
+});
+
+ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, option){
+  LoadConfig[chartType](chartType, option, this.completed);
+})
+
+export default ChartActions

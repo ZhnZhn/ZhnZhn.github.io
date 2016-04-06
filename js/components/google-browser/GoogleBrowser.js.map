@@ -1,0 +1,9 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\google-browser\\GoogleBrowser.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\google-browser\\GoogleBrowser.js",
+ "sourceRoot": "",
+ "names": [],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;AAEA;;;;AACA;;;;AAEA,IAAM,gBAAgB,gBAAM,WAAN,CAAkB;;;AACtC,WAAQ,kBAAU;UACT,QAAS,KAAK,KAAL,CAAT,MADS;;AAEhB,aACG;AACG,kBAAQ,sBAAR;AACA;AACA,qBAAY,uCAAqB,YAArB;AACZ,sBAAa,kBAAY,aAAZ;AACb,gBAAO,KAAP;OALH,CADH,CAFgB;IAAV;CADY,CAAhB;;;;;;;;;;kBAwBS"
+}

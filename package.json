@@ -1,0 +1,40 @@
+{
+  "name": "erc",
+  "version": "0.10.0",
+  "description": "Economic RESTFul Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "jspm bundle js/**/* - [js/**/*] dependency-bundle.js",
+    "bundle-sfx": "jspm bundle-sfx --minify js/index bundle.min.js",
+    "gulp": "gulp",
+    "server" : "http-server -c-1"
+  },
+  "author": "ZhnZhn",
+  "license": "BSD-3-Clause",
+  "jspm": {
+    "dependencies": {
+      "big.js": "npm:big.js@^3.1.3",
+      "highcharts": "github:highcharts/highcharts@^4.2.3",
+      "interact.js": "npm:interact.js@^1.2.6",
+      "lodash": "npm:lodash@^4.6.1",
+      "react": "npm:react@^0.14.8",
+      "react-dom": "npm:react-dom@^0.14.8",
+      "reflux": "npm:reflux@^0.4.0"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  },
+  "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.4",
+    "gulp-concat": "^2.6.0"
+  }
+}
