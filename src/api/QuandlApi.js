@@ -4,8 +4,7 @@ import ApiUtils from '../utils/ApiUtils';
 const QuandlApi = {};
 
 QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
-QuandlApi.apiKey = "api_key=NAMdV9hFyWDgCs7PRusf";
-//QuandlApi.apiKey = "";
+QuandlApi.apiKey = "";
 
 
 QuandlApi.getRequestUrl = function(option){

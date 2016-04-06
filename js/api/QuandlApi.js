@@ -13,8 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var QuandlApi = {};
 
 QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
-QuandlApi.apiKey = "api_key=NAMdV9hFyWDgCs7PRusf";
-//QuandlApi.apiKey = "";
+QuandlApi.apiKey = "";
 
 QuandlApi.getRequestUrl = function (option) {
   var queryDate = option.fromDate && option.toDate ? "sort_order=asc&trim_start=" + option.fromDate + "&trim_end=" + option.toDate + "&" : '';

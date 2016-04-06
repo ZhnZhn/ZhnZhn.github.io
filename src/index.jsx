@@ -9,5 +9,4 @@ import ChartConfigs from './constants/ChartConfigs';
 
 Highcharts.setOptions(ChartConfigs.theme);
 
-
-render(<AppErc />, document.getElementById('app'));          
+render(<AppErc />, document.getElementById('app'));
