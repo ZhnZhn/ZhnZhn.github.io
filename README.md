@@ -17,4 +17,11 @@ The value of currency is not always USD as shows in a chart tooltip.
 Sometimes more details about data can be look at tab Info on a Chart.
 
 In that case all data load from [Quandl](https://www.quandl.com) REST services.   
-For free access exist some restriction on frequency and amount queries (50 calls per day).
+For access without Api Key exists some restriction on frequency and amount queries (50 calls per day).
+
+A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings.  
+Settings saves in browser's memory only for current WEB session.
+
+
+
+
