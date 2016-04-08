@@ -133,8 +133,15 @@ const About = React.createClass({
               Quandl
            </LinkToken>
            <Token color="gray" isFirstBalnk={true}>
-              REST services. For free access exist some restriction on frequency
+              REST services. For accessing without Api Key, exists some restriction on frequency
               and amount queries (50 calls per day).
+           </Token>
+         </p>
+         <br/>
+         <p>
+           <Token color="gray">
+             A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings.
+             Settings saves in browser's memory only for current WEB session.
            </Token>
          </p>
         </div>

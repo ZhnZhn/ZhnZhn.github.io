@@ -30,6 +30,10 @@ var _ComponentSlice = require('./ComponentSlice');
 
 var _ComponentSlice2 = _interopRequireDefault(_ComponentSlice);
 
+var _SettingSlice = require('./SettingSlice');
+
+var _SettingSlice2 = _interopRequireDefault(_SettingSlice);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ChartStore = _reflux2.default.createStore(_extends({
@@ -85,7 +89,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
     });
     this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartCont);
   }
-}, _ComponentSlice2.default));
+}, _ComponentSlice2.default, _SettingSlice2.default));
 
 exports.default = ChartStore;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ChartStore.js.map

@@ -31,6 +31,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var loadData = function loadData(dataColumn, chartType, option, onCompleted) {
   var chartId = option.value;
   if (!_ChartStore2.default.isChartExist(chartType, chartId)) {
+    option.apiKey = _ChartStore2.default.getQuandlKey();
     fetch(_QuandlApi2.default.getRequestUrl(option)).then(function (response) {
       return response.json();
     }).then(function (json) {

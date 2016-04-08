@@ -12,20 +12,23 @@
   flex-direction : row;
 }
 
-/*
-.browser {
-  z-index: 20;
-  position: relative;
-  height: 700px;
-  width: 270px;
-  padding: 5px;
-  margin-left: 10px;
-  background-color: #4D4D4D;
-  border-radius: 10px;
-  border: solid 3px #232F3B;
-  margin-left: 10px;
+.modal-root {
+  z-index: 1050;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 1;
+  background: rgba(0,0,0, 0.5) none repeat scroll 0% 0%;
+  outline: 0px none;
+  transition: opacity 0.15s linear 0s;
 }
-*/
+
+
 .header{
   width: calc(100vw - 36px);
   margin-left: 10px;

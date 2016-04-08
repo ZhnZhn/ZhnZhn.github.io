@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AppLabel from './AppLabel';
+import SettingsDialog from './SettingsDialog';
 import ToolBarButton from '../ToolBarButton';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import {BrowserType} from '../../constants/Type';
@@ -7,9 +9,15 @@ import {BrowserType} from '../../constants/Type';
 const styles = {
   rootDiv : {
     position: 'relative',
-    zIndex: 30,
-    //marginTop: '8px',
-    //marginLeft: '10px'
+    zIndex: 50,
+  },
+  appLabel : {
+    display: 'inline-block',
+    color:'#80c040',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    fontSize: '16px',
+    fontWeight: 'bold',
   }
 }
 
@@ -18,18 +26,26 @@ const HeaderBar = React.createClass({
     this.fnBrowser = function (browserType) {
       return ComponentActions.showBrowser.bind(null, browserType)
     }
-    return {}
+    return {
+      isShowSettings : false
+    }
+  },
+
+  _handlerOpenSettings(){
+    this.setState({isShowSettings: true});
+  },
+  _handlerCloseSettings(){
+    this.setState({isShowSettings: false});
   },
 
   render(){
     return (
       <div className="header" style={styles.rootDiv}>
-         <span
-           style={{color:'#80c040' , paddingLeft: '10px', paddingRight: '10px', fontSize: '16px', fontWeight: 'bold', display: 'inline-block'}}
-           title="Economic Rest Client v. 0.10.0"
-        >
-           ERC v. 0.10.0
-        </span>
+         <AppLabel
+            style={styles.appLabel}
+            title="Economic Rest Client v. 0.10.0"
+            caption="ERC v. 0.10.0"
+         />
 
         <ToolBarButton
           type="TypeA"
@@ -54,11 +70,22 @@ const HeaderBar = React.createClass({
 
          <ToolBarButton
            type="TypeA"
+           caption="Settings"
+           title="Application settings"
+           onClick={this._handlerOpenSettings}
+          />
+
+         <ToolBarButton
+           type="TypeA"
            caption="About"
            title="Description about application ERC"
            onClick={ComponentActions.showAbout}
           />
 
+          <SettingsDialog
+             isShow={this.state.isShowSettings}
+             onClose={this._handlerCloseSettings}
+          />
       </div>
     );
   }

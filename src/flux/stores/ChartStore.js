@@ -2,11 +2,13 @@ import Reflux from 'reflux';
 
 import ChartActions, {ChartActionTypes} from '../actions/ChartActions';
 import ComponentActions from '../actions/ComponentActions';
+
 import ChartType from '../../constants/ChartType';
 
 import Factory from '../logic/Factory';
 
 import ComponentSlice from './ComponentSlice';
+import SettingSlice from './SettingSlice';
 
 const ChartStore = Reflux.createStore({
   listenables : [ChartActions, ComponentActions],
@@ -70,7 +72,8 @@ const ChartStore = Reflux.createStore({
    this.trigger(ChartActionTypes.CLOSE_CHART, chartCont);
  },
 
- ...ComponentSlice
+ ...ComponentSlice,
+ ...SettingSlice
 
 })
 

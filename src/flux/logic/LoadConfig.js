@@ -1,15 +1,14 @@
 
-
 import ChartStore from '../stores/ChartStore';
 import ChartType from '../../constants/ChartType';
 import {QuandlYahoo, QuandlGoogle} from '../../constants/DialogType';
 import QuandlApi from '../../api/QuandlApi';
 import QuandlAdapter from '../../adapters/QuandlAdapter';
 
-
 const loadData = function(dataColumn, chartType, option, onCompleted){
   const chartId = option.value;
   if (!ChartStore.isChartExist(chartType, chartId)) {
+     option.apiKey = ChartStore.getQuandlKey();
      fetch(QuandlApi.getRequestUrl(option))
       .then((response)=>response.json())
       .then((json)=>{
