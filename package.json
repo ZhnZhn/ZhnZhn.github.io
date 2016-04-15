@@ -6,12 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "jspm bundle js/**/* - [js/**/*] dependency-bundle.js",
-    "bundle-sfx": "jspm bundle-sfx --minify js/index bundle.min.js",
+    "bundle-sfx": "jspm bundle-sfx --minify --skip-source-maps js/index bundle.min.js",
     "gulp": "gulp",
     "server" : "http-server -c-1"
   },
-  "author": "ZhnZhn",
+  "author": "Yevgenii Molodyi",
   "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZhnZhn/ZhnZhn.github.io.git"
+  },
   "jspm": {
     "dependencies": {
       "big.js": "npm:big.js@^3.1.3",

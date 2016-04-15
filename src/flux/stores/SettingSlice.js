@@ -6,7 +6,7 @@ const SettingSlice = {
   },
   getQuandlKey(){
     return this.setting.quandlKey;
-  }  
+  }
 }
 
 export default SettingSlice

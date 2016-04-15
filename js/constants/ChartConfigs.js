@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7,9 +7,19 @@ Object.defineProperty(exports, "__esModule", {
 var ChartConfigs = {};
 
 ChartConfigs.theme = {
+  credits: {
+    position: {
+      align: 'left',
+      x: 150,
+      verticalAlign: 'top',
+      y: 15
+    }
+  },
   chart: {
     width: 600,
     height: 300,
+    spacingTop: 20,
+    spacingBottom: 20,
     plotBackgroundColor: "rgba(77,77,77,1)",
     backgroundColor: "rgba(77,77,77,1)",
     reflow: false
@@ -17,13 +27,8 @@ ChartConfigs.theme = {
   plotOptions: {
     area: {
       fillColor: {
-        //color: {
         linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-        stops: [
-        //[0, "#003399"],
-        //[1, "#3366AA"]
-        [0, "rgba(69, 114, 167, 1)"], [1, "rgba(2, 0, 0, 0)"]]
-        //}
+        stops: [[0, "rgba(69, 114, 167, 1)"], [1, "rgba(2, 0, 0, 0)"]]
       },
       marker: {
         states: {
@@ -47,6 +52,9 @@ ChartConfigs.theme = {
     tickColor: "rgba(194,149,23,1)",
     tickWidth: 3,
     tickLenght: 5,
+    gridLineColor: "rgba(194,149,23,1)",
+    gridLineDashStyle: "ShortDashDotDot",
+    gridLineWidth: 1,
     labels: {
       style: {
         color: "rgba(194,149,23,1)",
@@ -79,7 +87,8 @@ ChartConfigs.baseAreaConfig = {
     enabled: false
   },
   xAxis: {
-    type: 'datetime'
+    type: 'datetime',
+    labels: {}
   },
   yAxis: {
     title: {
@@ -94,22 +103,27 @@ ChartConfigs.baseAreaConfig = {
       label: {
         text: 'max',
         verticalAlign: 'top',
+        //y: 15,
         style: {
-          color: 'green'
+          color: 'green',
+          fontWeight: 'bold',
+          fontSize: 'medium'
         }
       }
     }, {
       value: 0.00,
-      color: 'red',
+      color: '#ED5813',
       dashStyle: 'solid',
       width: 1,
       zIndex: 4,
       label: {
         text: 'min',
         verticalAlign: 'top',
-        y: 12,
+        y: 15,
         style: {
-          color: 'red'
+          color: '#ED5813',
+          fontWeight: 'bold',
+          fontSize: 'medium'
         }
       }
     }]
@@ -119,6 +133,74 @@ ChartConfigs.baseAreaConfig = {
   }]
 };
 
-//data: seria
+var markerExDivident = exports.markerExDivident = {
+  y: 0,
+  exValue: 0.5,
+  marker: {
+    symbol: 'circle',
+    fillColor: 'rgba(0, 128, 0, 0.9)',
+    radius: 6,
+    states: {
+      hover: {
+        enable: true,
+        fillColor: '#4D4D4D',
+        lineColor: 'green',
+        lineWidth: 2,
+        radius: 6
+      }
+    }
+  },
+  dataLabels: {
+    enabled: true,
+    inside: true,
+    style: {
+      color: 'green',
+      fontSize: '11px',
+      fontWeight: 'bold',
+      textShadow: 'none'
+    },
+    crop: false,
+    overflow: 'none',
+    y: 28,
+    formatter: function formatter() {
+      return this.point.exValue;
+    }
+  }
+};
+
+var markerSplitRatio = exports.markerSplitRatio = {
+  y: 0,
+  marker: {
+    symbol: 'circle',
+    fillColor: '#ED5813',
+    radius: 6,
+    states: {
+      hover: {
+        enable: true,
+        fillColor: '#4D4D4D',
+        lineColor: '#ED5813',
+        lineWidth: 2,
+        radius: 6
+      }
+    }
+  },
+  dataLabels: {
+    enabled: true,
+    inside: true,
+    style: {
+      color: '#ED5813',
+      fontSize: '11px',
+      fontWeight: 'bold',
+      textShadow: 'none'
+    },
+    crop: false,
+    overflow: 'none',
+    y: 28,
+    formatter: function formatter() {
+      return this.point.splitRatio;
+    }
+  }
+};
+
 exports.default = ChartConfigs;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\ChartConfigs.js.map

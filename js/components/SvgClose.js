@@ -11,12 +11,8 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
-  svgDiv: {
-    width: '12px',
-    height: '12px',
-    display: 'inline-block',
-    float: 'right',
-    marginRight: '10px'
+  svg: {
+    padding: '3px'
   }
 };
 
@@ -27,12 +23,13 @@ var SvgClose = _react2.default.createClass({
     return _react2.default.createElement(
       'div',
       {
-        style: styles.svgDiv,
+        className: 'svg-close',
         onClick: this.props.onClose
       },
       _react2.default.createElement(
         'svg',
         { viewBox: '0 0 12 12', width: '100%', height: '100%',
+          style: styles.svg,
           preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg' },
         _react2.default.createElement('path', { d: 'M 0,0 L 12,12', strokeWidth: '2', stroke: '#ED5813' }),
         _react2.default.createElement('path', { d: 'M 12,0 L 0,12', strokeWidth: '2', stroke: '#ED5813' })

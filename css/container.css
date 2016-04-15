@@ -65,3 +65,19 @@
   /*color : green;*/
   border-bottom: 1px solid #1B75BB;
 }
+
+.svg-close{
+  width: 22px;
+  height: 22px;
+  padding: 2px;
+  display: inline-block;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.svg-close:hover{
+  /*border: 2px solid #ED5813;*/
+  background-color: rgba(77,77,77,1);
+  border-radius: 50%;
+  color: green;
+}
