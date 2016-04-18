@@ -5,5 +5,5 @@
  "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\stores\\SettingSlice.js",
  "sourceRoot": "",
  "names": [],
- "mappings": ";;;;;;AACA,IAAM,eAAe;AACnB,WAAS,EAAT;AACA,sCAAa,OAAM;AACjB,SAAK,OAAL,CAAa,SAAb,GAAyB,KAAzB,CADiB;GAFA;AAKnB,wCAAc;AACZ,WAAO,KAAK,OAAL,CAAa,SAAb,CADK;GALK;CAAf;;kBAUS"
+ "mappings": ";;;;;;AACA,IAAM,eAAe;AACnB,WAAS,EAAC,WAAW,sBAAX,EAAV;AACA,sCAAa,OAAM;AACjB,SAAK,OAAL,CAAa,SAAb,GAAyB,KAAzB,CADiB;GAFA;AAKnB,wCAAc;AACZ,WAAO,KAAK,OAAL,CAAa,SAAb,CADK;GALK;CAAf;;kBAUS"
 }

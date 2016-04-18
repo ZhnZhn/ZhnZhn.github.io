@@ -12,10 +12,6 @@ var _MenuBrowser = require('../zhn/MenuBrowser');
 
 var _MenuBrowser2 = _interopRequireDefault(_MenuBrowser);
 
-var _DataBrowser = require('./DataBrowser');
-
-var _DataBrowser2 = _interopRequireDefault(_DataBrowser);
-
 var _Type = require('../../constants/Type');
 
 var _DialogContainer = require('../zhn/DialogContainer3');
@@ -34,21 +30,12 @@ var YahooBrowser = _react2.default.createClass({
 
       return _react2.default.createElement(_MenuBrowser2.default, {
          caption: 'Quandl Yahoo Stocks',
-         menuItems: _DataBrowser2.default,
          showAction: _ComponentActions.ComponentActionTypes.SHOW_BROWSER,
          browserType: _Type.BrowserType.QUANDL_YAHOO,
          store: store
       });
    }
 });
-/*
-<DialogContainer3
-   id="QY"
-   store={store}
-   initAction={ComponentActionTypes.INIT_AND_SHOW_DIALOG}
-   showAction={ComponentActionTypes.SHOW_DIALOG}
-/>
-*/
 
 exports.default = YahooBrowser;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\yahoo-browser\YahooBrowser.js.map

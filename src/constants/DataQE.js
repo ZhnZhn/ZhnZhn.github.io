@@ -15,18 +15,21 @@ const DataQE = {
 
   QE_COMMODITY_PRICE : {
       type : 'QE_COMMODITY_PRICE',
+      menuTitle : 'Commodity Prices',
       dialogCaption : 'Commodity Price',
       chartContainerCaption : 'Quandl Commodity Prices',
       dialogComp : QuandlCommoditiesDialog,
   },
   QE_CURRENCY_HISTORY : {
       type : 'QE_CURRENCY_HISTORY',
+      menuTitle : 'Currency Histories',
       dialogCaption : 'Currency History',
       chartContainerCaption : 'Quandl Currency Histories',
       dialogComp : QuandlCurrencyDialog,
   },
   QE_WORLDBANK_PRICE : {
       type : 'QE_WORLDBANK_PRICE',
+      menuTitle : 'Economic Metrics',
       dialogCaption : 'WorlBank Price',
       chartContainerCaption : 'Quandl World Bank Economic',
       dialogComp : QuandlWorldBankEconomicDialog,
@@ -37,12 +40,14 @@ const DataQE = {
 
   QE_WIKI_STOCK : {
       type : 'QE_WIKI_STOCK',
+      menuTitle : 'WIKI',
       dialogCaption : 'Wiki Stocks',
       chartContainerCaption : 'Quandl WIKI Stocks',
       fnOption : QuandlWikiStock.getTickets
   },
   QE_TOKIO_STOCK : {
       type : 'QE_TOKIO_STOCK',
+      menuTitle: 'Tokio',
       dialogCaption : 'Tokio Stocks',
       chartContainerCaption : 'Quandl Tokio Stocks',
       fnOption : QuandlTokioStock.getTickets
@@ -50,6 +55,7 @@ const DataQE = {
 
   QE_CHINA_DCE_FUTURE : {
       type : 'QE_CHINA_DCE_FUTURE',
+      menuTitle : 'China DCE',
       dialogCaption : 'China DCE Future',
       chartContainerCaption : 'Quandl China DCE Futures',
       dialogComp : QuandlFuturesChinaDceDialog,

@@ -26,6 +26,10 @@ var _Factory = require('../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
 
+var _BrowserSlice = require('./BrowserSlice');
+
+var _BrowserSlice2 = _interopRequireDefault(_BrowserSlice);
+
 var _ComponentSlice = require('./ComponentSlice');
 
 var _ComponentSlice2 = _interopRequireDefault(_ComponentSlice);
@@ -89,7 +93,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
     });
     this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartCont);
   }
-}, _ComponentSlice2.default, _SettingSlice2.default));
+}, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default));
 
 exports.default = ChartStore;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ChartStore.js.map

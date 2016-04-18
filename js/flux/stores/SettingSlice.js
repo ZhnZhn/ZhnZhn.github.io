@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var SettingSlice = {
-  setting: {},
+  setting: { quandlKey: 'NAMdV9hFyWDgCs7PRusf' },
   setQuandlKey: function setQuandlKey(value) {
     this.setting.quandlKey = value;
   },

@@ -20,24 +20,28 @@ import DialogType3 from '../components/dialogs/DialogType3';
 const DataQG = {
   QG_NASDAQ : {
      type : 'QG_NASDAQ',
+     menuTitle : 'NASDAQ',
      dialogCaption : 'NASDAQ',
      chartContainerCaption : 'Quandl Google NASDAQ',
      fnOption : GoogleNasdaq.getTickets
   },
   QG_NYSE : {
      type : 'QG_NYSE',
+     menuTitle : 'NYSE',
      dialogCaption : 'NYSE',
      chartContainerCaption : 'Quandl Google NYSE',
      fnOption : GoogleNyse.getTickets
   },
   QG_AMEX : {
      type : 'QG_AMEX',
+     menuTitle : 'NYSE AMEX',
      dialogCaption : 'AMEX',
      chartContainerCaption : 'Quandl Google AMEX',
      fnOption : GoogleNyseAmex.getTickets
   },
   QG_ARCA : {
      type : 'QG_ARCA',
+     menuTitle : 'NYSE ARCA',
      dialogCaption : 'ARCA',
      chartContainerCaption : 'Quandl Google ARCA',
      fnOption : GoogleNyseArca.getTickets
@@ -45,30 +49,35 @@ const DataQG = {
 
   QG_BRUSSELS : {
      type : 'QG_BRUSSELS',
+     menuTitle : 'Euronext Brussels',
      dialogCaption : 'Euronext Brussels',
      chartContainerCaption : 'Quandl Google Euronext Brussels',
      fnOption : GoogleBrussels.getTickets
   },
   QG_LISBON : {
      type : 'QG_LISBON',
+     menuTitle : 'Euronext Lisbon',
      dialogCaption : 'Euronext Lisbon',
      chartContainerCaption : 'Quandl Google Euronext Lisbon',
      fnOption : GoogleLisbon.getTickets
   },
   QG_TALLIN : {
     type : 'QG_TALLIN',
+    menuTitle : 'Tallin',
     dialogCaption : 'Tallin',
     chartContainerCaption : 'Quandl Google Tallin',
     fnOption : GoogleTallin.getTickets
   },
   QG_RIGA : {
     type : 'QG_RIGA',
+    menuTitle : 'Riga',
     dialogCaption : 'Riga',
     chartContainerCaption : 'Quandl Google Riga',
     fnOption : GoogleRiga.getTickets
   },
   QG_VILNIUS : {
     type : 'QG_VILNIUS',
+    menuTitle : 'Vilnius',
     dialogCaption : 'Vilnius',
     chartContainerCaption : 'Quandl Google Vilnius',
     fnOption : GoogleVilnius.getTickets
@@ -76,30 +85,35 @@ const DataQG = {
 
   QG_SHENZHEN : {
      type : 'QG_SHENZHEN',
+     menuTitle : 'Shenzhen',
      dialogCaption : 'Shenzhen',
      chartContainerCaption : 'Quandl Google Shenzhen',
      fnOption : GoogleShenzhen.getTickets
   },
   QG_SINGAPURE : {
      type : 'QG_SINGAPURE',
+     menuTitle : 'Singapure',
      dialogCaption : 'Singapure',
      chartContainerCaption : 'Quandl Google Singapure',
      fnOption : GoogleSingapure.getTickets
   },
   QG_KOREA : {
      type : 'QG_KOREA',
+     menuTitle : 'Korea',
      dialogCaption : 'Korea',
      chartContainerCaption : 'Quandl Google Korea',
      fnOption : GoogleKorea.getTickets
   },
   QG_NEWZEALAND : {
      type : 'QG_NEWZEALAND',
+     menuTitle : 'New Zealand',
      dialogCaption : 'New Zealand',
      chartContainerCaption : 'Quandl Google New Zealand',
      fnOption : GoogleNewZealand.getTickets
   },
   QG_SAO_PAOLO : {
      type : 'QG_SAO_PAOLO',
+     menuTitle : 'Sao Paolo',
      dialogCaption : 'Sao Paolo',
      chartContainerCaption : 'Quandl Google Sao Paolo',
      fnOption : GoogleSaoPaolo.getTickets

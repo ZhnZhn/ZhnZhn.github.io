@@ -7,6 +7,7 @@ import ChartType from '../../constants/ChartType';
 
 import Factory from '../logic/Factory';
 
+import BrowserSlice from './BrowserSlice';
 import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
 
@@ -72,6 +73,7 @@ const ChartStore = Reflux.createStore({
    this.trigger(ChartActionTypes.CLOSE_CHART, chartCont);
  },
 
+ ...BrowserSlice,
  ...ComponentSlice,
  ...SettingSlice
 

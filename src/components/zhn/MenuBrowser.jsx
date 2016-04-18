@@ -11,9 +11,11 @@ const styles = ContainerStyles;
 
 const MenuBrowser = React.createClass({
   getInitialState: function(){
-    let isShow = this.props.isShow ? true : false;
+    const {store, browserType, isShow} = this.props;
+    //const isShowBrowser = isShow ? true : false;
     return {
-      isShow: isShow,
+      isShow: isShow ? true : false,
+      menuItems: store.getBrowserMenu(browserType)
     }
   },
 
@@ -50,7 +52,8 @@ const MenuBrowser = React.createClass({
   },
 
   render: function(){
-    const {caption, menuItems, children} = this.props;
+    const {caption, children} = this.props;
+    const {menuItems} = this.state;
 
     let styleOpen = this.state.isShow ? {display: 'block'} : {display: 'none'};
     let classOpen = this.state.isShow ? "show-popup" : null;

@@ -30,9 +30,15 @@ var MenuBrowser = _react2.default.createClass({
   displayName: 'MenuBrowser',
 
   getInitialState: function getInitialState() {
-    var isShow = this.props.isShow ? true : false;
+    var _props = this.props;
+    var store = _props.store;
+    var browserType = _props.browserType;
+    var isShow = _props.isShow;
+    //const isShowBrowser = isShow ? true : false;
+
     return {
-      isShow: isShow
+      isShow: isShow ? true : false,
+      menuItems: store.getBrowserMenu(browserType)
     };
   },
 
@@ -68,10 +74,10 @@ var MenuBrowser = _react2.default.createClass({
 
 
   render: function render() {
-    var _props = this.props;
-    var caption = _props.caption;
-    var menuItems = _props.menuItems;
-    var children = _props.children;
+    var _props2 = this.props;
+    var caption = _props2.caption;
+    var children = _props2.children;
+    var menuItems = this.state.menuItems;
 
 
     var styleOpen = this.state.isShow ? { display: 'block' } : { display: 'none' };

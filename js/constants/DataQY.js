@@ -93,24 +93,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var DataQY = {
    QY_TORONTO: {
       type: 'QY_TORONTO',
+      menuTitle: 'Toronto',
       dialogCaption: 'Toronto',
       chartContainerCaption: 'Quandl Yahoo Toronto',
       fnOption: _YahooToronto2.default.getTickets
    },
    QY_TORONTO_VENTURE: {
       type: 'QY_TORONTO_VENTURE',
+      menuTitle: 'Toronto Ventures',
       dialogCaption: 'Toronto Ventures',
       chartContainerCaption: 'Quandl Yahoo Toronto Ventures',
       fnOption: _YahooTorontoVenture2.default.getTickets
    },
    QY_MONTREAL: {
       type: 'QY_MONTREAL',
+      menuTitle: 'Montreal',
       dialogCaption: 'Montreal',
       chartContainerCaption: 'Quandl Yahoo Montreal',
       fnOption: _YahooMontreal2.default.getTickets
    },
    QY_INDICE: {
       type: 'QY_INDICE',
+      menuTitle: 'Indices',
       dialogCaption: 'Indices',
       chartContainerCaption: 'Quandl Yahoo Indices',
       fnOption: _YahooIndice2.default.getTickets
@@ -118,54 +122,63 @@ var DataQY = {
 
    QY_LONDON: {
       type: 'QY_LONDON',
+      menuTitle: 'London',
       dialogCaption: 'London',
       chartContainerCaption: 'Quandl Yahoo London',
       fnOption: _YahooLondon2.default.getTickets
    },
    QY_PARIS: {
       type: 'QY_PARIS',
+      menuTitle: 'Paris',
       dialogCaption: 'Paris',
       chartContainerCaption: 'Quandl Yahoo Paris',
       fnOption: _YahooParis2.default.getTickets
    },
    QY_AMSTERDAM: {
       type: 'QY_AMSTERDAM',
+      menuTitle: 'Amsterdam',
       dialogCaption: 'Amsterdam',
       chartContainerCaption: 'Quandl Yahoo Amsterdam',
       fnOption: _YahooAmsterdam2.default.getTickets
    },
    QY_COPPENHAGEN: {
       type: 'QY_COPPENHAGEN',
+      menuTitle: 'Coppenhagen',
       dialogCaption: 'Coppenhagen',
       chartContainerCaption: 'Quandl Yahoo Coppenhagen',
       fnOption: _YahooCoppenhagen2.default.getTickets
    },
    QY_OSLO: {
       type: 'QY_OSLO',
+      menuTitle: 'Oslo',
       dialogCaption: 'Oslo',
       chartContainerCaption: 'Quandl Yahoo Oslo',
       fnOption: _YahooOslo2.default.getTickets
    },
    QY_STOCKHOLM: {
       type: 'QY_STOCKHOLM',
+      menuTitle: 'Stockholm',
       dialogCaption: 'Stockholm',
       chartContainerCaption: 'Quandl Yahoo Stockholm',
       fnOption: _YahooStockholm2.default.getTickets
    },
    QY_SWISS: {
       type: 'QY_SWISS',
+      menuTitle: 'Swiss',
       dialogCaption: 'Swiss',
       chartContainerCaption: 'Quandl Yahoo Swiss',
       fnOption: _YahooSwiss2.default.getTickets
    },
    QY_MILAN: {
       type: 'QY_MILAN',
+      menuTitle: 'Milan',
       dialogCaption: 'Milan',
       chartContainerCaption: 'Quandl Yahoo Milan',
       fnOption: _YahooMilan2.default.getTickets
    },
    QY_MADRID: {
       type: 'QY_MADRID',
+      menuTitle: 'Madrid',
       dialogCaption: 'Madrid',
       chartContainerCaption: 'Quandl Yahoo Madrid',
       fnOption: _YahooMadrid2.default.getTickets
@@ -173,42 +186,49 @@ var DataQY = {
 
    QY_AUSTRALIAN: {
       type: 'QY_AUSTRALIAN',
+      menuTitle: 'Australian',
       dialogCaption: 'Australian',
       chartContainerCaption: 'Quandl Yahoo Australian',
       fnOption: _YahooAustralian2.default.getTickets
    },
    QY_SHANGHAI: {
       type: 'QY_SHANGHAI',
+      menuTitle: 'Shanghai',
       dialogCaption: 'Shanghai',
       chartContainerCaption: 'Quandl Yahoo Shanghai',
       fnOption: _YahooShanghai2.default.getTickets
    },
    QY_SHENZHEN: {
       type: 'QY_SHENZHEN',
+      menuTitle: 'Shenzhen',
       dialogCaption: 'Shenzhen',
       chartContainerCaption: 'Quandl Yahoo Shenzhen',
       fnOption: _YahooShenzhen2.default.getTickets
    },
    QY_TAIWAN: {
       type: 'QY_TAIWAN',
+      menuTitle: 'Taiwan',
       dialogCaption: 'Taiwan',
       chartContainerCaption: 'Quandl Yahoo Taiwan',
       fnOption: _YahooTaiwan2.default.getTickets
    },
    QY_HONG_KONG: {
       type: 'QY_HONG_KONG',
+      menuTitle: 'Hong Kong',
       dialogCaption: 'Hong Kong',
       chartContainerCaption: 'Quandl Yahoo Hong Kong',
       fnOption: _YahooHongKong2.default.getTickets
    },
    QY_SINGAPURE: {
       type: 'QY_SINGAPURE',
+      menuTitle: 'Singapure',
       dialogCaption: 'Singapure',
       chartContainerCaption: 'Quandl Yahoo Singapure',
       fnOption: _YahooSingapure2.default.getTickets
    },
    QY_BOMBEY: {
       type: 'QY_BOMBEY',
+      menuTitle: 'Bombey',
       dialogCaption: 'Bombey',
       chartContainerCaption: 'Quandl Yahoo Bombey',
       fnOption: _YahooBombey2.default.getTickets

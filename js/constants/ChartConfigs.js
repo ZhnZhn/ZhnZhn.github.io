@@ -41,10 +41,11 @@ ChartConfigs.theme = {
     }
   },
   tooltip: {
+    backgroundColor: 'rgba(0,0,0, 0.5)',
     borderWidth: 2,
     borderRadius: 10,
-    headerFormat: '<span style="font-size: 12px">{point.key}</span><br/>',
-    pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">USD:</span><b>{point.y}</b><br/>'
+    headerFormat: '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
+    pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">USD: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
   },
   xAxis: {
     lineColor: "rgba(194,149,23,1)",

@@ -34,8 +34,8 @@ var addExDividend = function addExDividend(json, config, yPointIndex) {
          type: 'scatter',
          color: 'green',
          tooltip: {
-            headerFormat: '<span style="font-size: 12px">{point.key}</span><br/>',
-            pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Ex-Dividend:</span><b>{point.exValue}</b><br/>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price:</span><b>{point.price}</b>'
+            headerFormat: '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
+            pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Ex-Dividend: </span>' + '<span style="style="font-weight: bold; color: green;">{point.exValue}</span><br/>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.price}</span>'
          },
          data: dataExDividend
       });
@@ -61,8 +61,8 @@ var addSplitRatio = function addSplitRatio(json, config, yPointIndex) {
          color: '#ED5813',
          tooltip: {
             style: {},
-            headerFormat: '<span style="font-size: 12px">{point.key}</span><br/>',
-            pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Split Ratio:</span><b>{point.splitRatio}</b><br/>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price:</span><b>{point.price}</b>'
+            headerFormat: '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
+            pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Split Ratio: </span>' + '<span style="font-weight: bold; color: #ED5813;">{point.splitRatio}</span><br/>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.price}</span>'
          },
          data: dataSplitRatio
       });
