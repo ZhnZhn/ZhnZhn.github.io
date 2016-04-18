@@ -8,6 +8,7 @@ import DataQE from '../../constants/DataQE';
 import DataQG from '../../constants/DataQG';
 import DataQY from '../../constants/DataQY';
 
+import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
 import DateUtils from '../../utils/DateUtils';
 
@@ -21,7 +22,7 @@ const noopArr = function(){
   return [];
 }
 
-const createDialogComp = function (conf){
+const createDialogComp = function (conf, browserType){
    const dialogType = conf.type;
    const props = conf.dialogProps ? conf.dialogProps : {};
    const fnOption = conf.fnOption ? conf.fnOption : noopArr;
@@ -31,20 +32,25 @@ const createDialogComp = function (conf){
                key : dialogType,
                caption : conf.dialogCaption,
                optionStocks : fnOption(),
-               onLoad  : onLoadChart.bind(null, dialogType),
-               onShow  : onShowChart.bind(null, dialogType),
+               onLoad  : onLoadChart.bind(null, dialogType, browserType),
+               onShow  : onShowChart.bind(null, dialogType, browserType),
                initFromDate, initToDate, onTestDate,
                ...props
   });
 }
 
 const onCloseItem = ChartActions.closeChart;
-const createChartContainerComp = function(conf){
+const fnCloseChartContainer = function(chartType, browserType){
+  return ComponentActions.closeChartContainer.bind(null, chartType, browserType);
+}
+const createChartContainerComp = function(conf, browserType){
   const Comp = conf.chartContainerComp ? conf.chartContainerComp : ChartContainer2;
   return React.createElement(Comp, {
             key : conf.type,
             caption : conf.chartContainerCaption,
             chartType : conf.type,
+            browserType : browserType,
+            onCloseContainer : fnCloseChartContainer(conf.type, browserType),
             onCloseItem
   });
 }
@@ -62,12 +68,12 @@ const getDataConf = function(dialogType){
 }
 
 const Factory = {};
-Factory.createDialog = function(dialogType){
-   return createDialogComp(getDataConf(dialogType));
+Factory.createDialog = function(dialogType, browserType){
+   return createDialogComp(getDataConf(dialogType), browserType);
 }
 
-Factory.createChartContainer = function(dialogType){
-  return createChartContainerComp(getDataConf(dialogType));
+Factory.createChartContainer = function(dialogType, browserType){
+  return createChartContainerComp(getDataConf(dialogType), browserType);
 }
 
 export default Factory

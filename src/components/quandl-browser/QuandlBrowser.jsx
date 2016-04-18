@@ -12,9 +12,10 @@ const QuandlBrowser = React.createClass({
     return (
       <MenuBrowser
          caption="Quandl Economic"
-         showAction={ComponentActionTypes.SHOW_BROWSER}
          browserType={BrowserType.QUANDL}
          store={store}
+         showAction={ComponentActionTypes.SHOW_BROWSER}
+         updateAction={ComponentActionTypes.UPDATE_BROWSER_MENU}
       >
       </MenuBrowser>
     )

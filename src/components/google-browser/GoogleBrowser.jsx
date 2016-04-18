@@ -11,10 +11,11 @@ const GoogleBrowser = React.createClass({
     const {store} = this.props;
     return (
        <MenuBrowser
-          caption="Quandl Google Stocks"
-          showAction={ComponentActionTypes.SHOW_BROWSER}
+          caption="Quandl Google Stocks"          
           browserType={BrowserType.QUANDL_GOOGLE}
           store={store}
+          showAction={ComponentActionTypes.SHOW_BROWSER}
+          updateAction={ComponentActionTypes.UPDATE_BROWSER_MENU}
        >
        </MenuBrowser>
     )

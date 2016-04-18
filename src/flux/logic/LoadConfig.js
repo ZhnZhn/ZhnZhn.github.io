@@ -5,7 +5,7 @@ import {QuandlYahoo, QuandlGoogle} from '../../constants/DialogType';
 import QuandlApi from '../../api/QuandlApi';
 import QuandlAdapter from '../../adapters/QuandlAdapter';
 
-const loadData = function(dataColumn, chartType, option, onCompleted){
+const loadData = function(dataColumn, chartType, browserType, option, onCompleted){
   const chartId = option.value;
   if (!ChartStore.isChartExist(chartType, chartId)) {
      option.apiKey = ChartStore.getQuandlKey();
@@ -15,7 +15,7 @@ const loadData = function(dataColumn, chartType, option, onCompleted){
         if (!json.quandl_error){
           let config = QuandlAdapter.toConfig(json, dataColumn);
           config.stockTicket = chartId;
-          onCompleted(chartType, config);
+          onCompleted(chartType, browserType, config);
         } else {
           console.log('%cQuandl Error Message:', 'color:red;');
           console.log('%c' + json.quandl_error.message, 'color:red;');

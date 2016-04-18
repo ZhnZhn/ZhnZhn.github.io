@@ -30,8 +30,8 @@ var ChartActionTypes = exports.ChartActionTypes = {
 
 var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, { children: ['completed', 'failed'] }), _defineProperty(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), _defineProperty(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
 
-ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, option) {
-  _LoadConfig2.default[chartType](chartType, option, this.completed);
+ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserType, option) {
+  _LoadConfig2.default[chartType](chartType, browserType, option, this.completed);
 });
 
 exports.default = ChartActions;

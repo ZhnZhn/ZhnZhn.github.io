@@ -19,10 +19,14 @@ var ComponentActionTypes = exports.ComponentActionTypes = {
   SHOW_ABOUT: 'showAbout',
   SHOW_BROWSER: 'showBrowser',
   INIT_AND_SHOW_DIALOG: 'initAndShowDialog',
-  SHOW_DIALOG: 'showDialog'
+  SHOW_DIALOG: 'showDialog',
+  CLOSE_CHART_CONTAINER: 'closeChartContainer',
+  CLOSE_CHART_CONTAINER_2: 'closeChartContainer2',
+  UPDATE_BROWSER_MENU: 'updateBrowserMenu'
+
 };
 
-var ComponentActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_ABOUT, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_BROWSER, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.INIT_AND_SHOW_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_DIALOG, {}), _Reflux$createActions));
+var ComponentActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_ABOUT, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_BROWSER, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.INIT_AND_SHOW_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.CLOSE_CHART_CONTAINER, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.CLOSE_CHART_CONTAINER_2, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.UPDATE_BROWSER_MENU, {}), _Reflux$createActions));
 
 exports.default = ComponentActions;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ComponentActions.js.map

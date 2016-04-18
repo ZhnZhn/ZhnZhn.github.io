@@ -62,8 +62,21 @@
   cursor: pointer;
 }
 .row__topic__odd:hover, .row__topic__even:hover {
-  /*color : green;*/
   border-bottom: 1px solid #1B75BB;
+}
+
+.menu__badge {
+  display: inline-block;
+  /*color: rgba(164, 135, 212, 1);*/
+  color: black;
+  background-color: #232F3B;
+  float: right;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 30%;
+}
+.menu__badge:hover{
+  color: #1B75BB;
 }
 
 .svg-close{

@@ -2,6 +2,7 @@ import React from 'react';
 
 import ChartStore from '../flux/stores/ChartStore';
 import {ChartActionTypes} from '../flux/actions/ChartActions';
+import {ComponentActionTypes} from '../flux/actions/ComponentActions';
 
 import ZhHighchart from './ZhHighchart.js';
 import CaptionRow from './CaptionRow.js';
@@ -57,23 +58,29 @@ const ChartContainer2 = React.createClass({
         if (data.chartType === this.props.chartType){
           this.setState(data);
         }
+      } else if (actionType === ComponentActionTypes.CLOSE_CHART_CONTAINER_2){
+         if (data === this.props.chartType){
+           this._handlerHide();
+         }
       }
    },
 
    _handlerHide: function(){
+      const {chartType, browserType, onCloseContainer} = this.props;
+      onCloseContainer(chartType, browserType);
       this.setState({isShow: false});
    },
 
 
    renderCharts: function(){
-     const {chartType, onCloseItem} = this.props;
+     const {chartType, browserType, onCloseItem} = this.props;
      let domCharts = this.state.configs.map((config, index)=>{
        return (
          <AreaChartItem
              key={config.stockTicket}
              caption={config.stockTicket}
              config={config}
-             onCloseItem={onCloseItem.bind(null, chartType, config.stockTicket)}
+             onCloseItem={onCloseItem.bind(null, chartType, browserType, config.stockTicket)}
          />
        )
      })

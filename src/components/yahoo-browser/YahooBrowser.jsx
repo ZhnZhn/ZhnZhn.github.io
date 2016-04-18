@@ -11,10 +11,11 @@ const YahooBrowser = React.createClass({
     const {store} = this.props;
     return (
        <MenuBrowser
-          caption="Quandl Yahoo Stocks"
-          showAction={ComponentActionTypes.SHOW_BROWSER}
+          caption="Quandl Yahoo Stocks"          
           browserType={BrowserType.QUANDL_YAHOO}
           store={store}
+          showAction={ComponentActionTypes.SHOW_BROWSER}
+          updateAction={ComponentActionTypes.UPDATE_BROWSER_MENU}
        >
        </MenuBrowser>
     )

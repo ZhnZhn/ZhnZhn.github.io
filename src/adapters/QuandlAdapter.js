@@ -2,19 +2,44 @@
 import _ from 'lodash';
 
 import ChartConfigs from '../constants/ChartConfigs';
-import {markerExDivident, markerSplitRatio} from '../constants/ChartConfigs';
+import {
+        markerExDivident,
+        markerExDividentUp,
+        markerSplitRatio
+      } from '../constants/ChartConfigs';
 
 const QuandlAdapter = {};
+
+const fnCheckWithPrev = function(arr, checkedDate, predicate){
+   const length = arr.length;
+   if (length === 0){
+     return true;
+   }
+   const prevDate = arr[length-1].x;
+   if (Math.abs((checkedDate.valueOf()-prevDate.valueOf())/(24*60*60*1000)) < predicate){
+     return false;
+   } else {
+     return true;
+   }
+}
+
 
 const addExDividend = function(json, config, yPointIndex){
   let dataExDividend = [];
   json.dataset.data.forEach((point) => {
      if (point[6] !== 0){
-       let arrDate = point[0].split('-');
-       let x = Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
-       let exValue = point[6];
-       let price = point[yPointIndex];
-       dataExDividend.push(Object.assign({}, markerExDivident, {x, exValue, price}));
+       const arrDate = point[0].split('-')
+           , x = Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2])
+           , exValue = point[6]
+           , price = point[yPointIndex];
+
+       if (fnCheckWithPrev(dataExDividend, x , 14)) {
+          dataExDividend.push(Object.assign({}, markerExDivident, {x, exValue, price}));
+       } else {
+          const marker = Object.assign(_.cloneDeep(markerExDivident), {x, exValue, price});
+          marker.dataLabels.y = 0;
+          dataExDividend.push(marker);
+      }
      }
   });
 
@@ -34,6 +59,7 @@ const addExDividend = function(json, config, yPointIndex){
     });
   }
 }
+
 
 const addSplitRatio = function(json, config, yPointIndex){
   let dataSplitRatio = [];

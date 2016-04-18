@@ -51,8 +51,17 @@ var MenuBrowser = _react2.default.createClass({
   },
 
   _onStore: function _onStore(actionType, data) {
-    if (actionType === this.props.showAction && data === this.props.browserType) {
+    var _props2 = this.props;
+    var browserType = _props2.browserType;
+    var store = _props2.store;
+    var showAction = _props2.showAction;
+    var updateAction = _props2.updateAction;
+
+
+    if (actionType === showAction && data === browserType) {
       this._handlerShow();
+    } else if (actionType === updateAction && data === browserType) {
+      this.setState({ menuItems: store.getBrowserMenu(browserType) });
     }
   },
 
@@ -74,9 +83,9 @@ var MenuBrowser = _react2.default.createClass({
 
 
   render: function render() {
-    var _props2 = this.props;
-    var caption = _props2.caption;
-    var children = _props2.children;
+    var _props3 = this.props;
+    var caption = _props3.caption;
+    var children = _props3.children;
     var menuItems = this.state.menuItems;
 
 

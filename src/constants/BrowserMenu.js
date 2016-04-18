@@ -4,17 +4,31 @@ import DataQE from './DataQE';
 import DataQY from './DataQY';
 import DataQG from './DataQG';
 import ComponentActions from '../flux/actions/ComponentActions';
+import ChartActions from '../flux/actions/ChartActions';
 
-const fnClick = function(dialogType){
-  return ComponentActions.showDialog.bind(null, dialogType);
+const fnClick = function(dialogType, browserType){
+  return ComponentActions.showDialog.bind(null, dialogType, browserType);
 }
 
-const fnCreateMenu = function(menu, data){
+const fnBadgeClick = function(dialogType, browserType){
+  return ChartActions.showChart.bind(null, dialogType, browserType);
+}
+const fnBadgeClose = function(chartType){
+  return ComponentActions.closeChartContainer2.bind(null, chartType);
+}
+
+
+const fnCreateMenu = function(menu, data, browserType){
   return menu.map((menuPart) => {
-     const items = menuPart.items.map((item) =>{
+     const items = menuPart.items.map((item, index) =>{
         return {
+                 id: item.id,
                  title: data[item.id].menuTitle,
-                 onClick: fnClick(item.id)
+                 counter: 0,
+                 isOpen: false,
+                 onClick: fnClick(item.id, browserType),
+                 onBadgeClick: fnBadgeClick(item.id, browserType),
+                 onBadgeClose : fnBadgeClose(item.id),
                }
      });
      return {
@@ -118,9 +132,9 @@ const menuQuandlGoogle = [
   }
 ]
 
-const QuandlMenu = fnCreateMenu(menuQuandl, DataQE);
-const QuandlYahooMenu = fnCreateMenu(menuQuandlYahoo, DataQY);
-const QuandlGoogleMenu = fnCreateMenu(menuQuandlGoogle, DataQG);
+const QuandlMenu = fnCreateMenu(menuQuandl, DataQE, BrowserType.QUANDL);
+const QuandlYahooMenu = fnCreateMenu(menuQuandlYahoo, DataQY, BrowserType.QUANDL_YAHOO);
+const QuandlGoogleMenu = fnCreateMenu(menuQuandlGoogle, DataQG, BrowserType.QUANDL_GOOGLE);
 
 const BrowserMenu = {
   [BrowserType.QUANDL] : QuandlMenu,

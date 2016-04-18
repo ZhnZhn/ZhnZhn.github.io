@@ -26,20 +26,36 @@ var _ComponentActions = require('../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
+var _ChartActions = require('../flux/actions/ChartActions');
+
+var _ChartActions2 = _interopRequireDefault(_ChartActions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var fnClick = function fnClick(dialogType) {
-  return _ComponentActions2.default.showDialog.bind(null, dialogType);
+var fnClick = function fnClick(dialogType, browserType) {
+  return _ComponentActions2.default.showDialog.bind(null, dialogType, browserType);
 };
 
-var fnCreateMenu = function fnCreateMenu(menu, data) {
+var fnBadgeClick = function fnBadgeClick(dialogType, browserType) {
+  return _ChartActions2.default.showChart.bind(null, dialogType, browserType);
+};
+var fnBadgeClose = function fnBadgeClose(chartType) {
+  return _ComponentActions2.default.closeChartContainer2.bind(null, chartType);
+};
+
+var fnCreateMenu = function fnCreateMenu(menu, data, browserType) {
   return menu.map(function (menuPart) {
-    var items = menuPart.items.map(function (item) {
+    var items = menuPart.items.map(function (item, index) {
       return {
+        id: item.id,
         title: data[item.id].menuTitle,
-        onClick: fnClick(item.id)
+        counter: 0,
+        isOpen: false,
+        onClick: fnClick(item.id, browserType),
+        onBadgeClick: fnBadgeClick(item.id, browserType),
+        onBadgeClose: fnBadgeClose(item.id)
       };
     });
     return {
@@ -82,9 +98,9 @@ var menuQuandlGoogle = [{
   items: [{ id: _DialogType.QuandlGoogle.SHENZHEN }, { id: _DialogType.QuandlGoogle.SINGAPURE }, { id: _DialogType.QuandlGoogle.KOREA }, { id: _DialogType.QuandlGoogle.NEWZEALAND }, { id: _DialogType.QuandlGoogle.SAO_PAOLO }]
 }];
 
-var QuandlMenu = fnCreateMenu(menuQuandl, _DataQE2.default);
-var QuandlYahooMenu = fnCreateMenu(menuQuandlYahoo, _DataQY2.default);
-var QuandlGoogleMenu = fnCreateMenu(menuQuandlGoogle, _DataQG2.default);
+var QuandlMenu = fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.QUANDL);
+var QuandlYahooMenu = fnCreateMenu(menuQuandlYahoo, _DataQY2.default, _Type.BrowserType.QUANDL_YAHOO);
+var QuandlGoogleMenu = fnCreateMenu(menuQuandlGoogle, _DataQG2.default, _Type.BrowserType.QUANDL_GOOGLE);
 
 var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL, QuandlMenu), _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL_YAHOO, QuandlYahooMenu), _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL_GOOGLE, QuandlGoogleMenu), _BrowserMenu);
 

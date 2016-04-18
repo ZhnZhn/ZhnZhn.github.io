@@ -16,15 +16,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var QuandlAdapter = {};
 
+var fnCheckWithPrev = function fnCheckWithPrev(arr, checkedDate, predicate) {
+   var length = arr.length;
+   if (length === 0) {
+      return true;
+   }
+   var prevDate = arr[length - 1].x;
+   if (Math.abs((checkedDate.valueOf() - prevDate.valueOf()) / (24 * 60 * 60 * 1000)) < predicate) {
+      return false;
+   } else {
+      return true;
+   }
+};
+
 var addExDividend = function addExDividend(json, config, yPointIndex) {
    var dataExDividend = [];
    json.dataset.data.forEach(function (point) {
       if (point[6] !== 0) {
-         var arrDate = point[0].split('-');
-         var x = Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]);
-         var exValue = point[6];
-         var price = point[yPointIndex];
-         dataExDividend.push(Object.assign({}, _ChartConfigs.markerExDivident, { x: x, exValue: exValue, price: price }));
+         var arrDate = point[0].split('-'),
+             x = Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]),
+             exValue = point[6],
+             price = point[yPointIndex];
+
+         if (fnCheckWithPrev(dataExDividend, x, 14)) {
+            dataExDividend.push(Object.assign({}, _ChartConfigs.markerExDivident, { x: x, exValue: exValue, price: price }));
+         } else {
+            var marker = Object.assign(_lodash2.default.cloneDeep(_ChartConfigs.markerExDivident), { x: x, exValue: exValue, price: price });
+            marker.dataLabels.y = 0;
+            dataExDividend.push(marker);
+         }
       }
    });
 

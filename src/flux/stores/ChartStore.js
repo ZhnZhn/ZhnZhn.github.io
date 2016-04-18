@@ -1,7 +1,7 @@
 import Reflux from 'reflux';
 
 import ChartActions, {ChartActionTypes} from '../actions/ChartActions';
-import ComponentActions from '../actions/ComponentActions';
+import ComponentActions, {ComponentActionTypes} from '../actions/ComponentActions';
 
 import ChartType from '../../constants/ChartType';
 
@@ -36,7 +36,9 @@ const ChartStore = Reflux.createStore({
    return false;
  },
 
- onLoadStockCompleted(chartType, config){
+ onLoadStockCompleted(chartType, browserType, config){
+   this.addMenuItemCounter(chartType, browserType);
+
    const chartCont = this.charts[chartType];
    if (chartCont){
      chartCont.configs.unshift(config);
@@ -46,31 +48,47 @@ const ChartStore = Reflux.createStore({
      this.charts[chartType] = this.createInitConfig(chartType);
      this.charts[chartType].configs.unshift(config);
      this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
-                  Factory.createChartContainer(chartType));
+                  Factory.createChartContainer(chartType, browserType));
    }
+
+   this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
  },
 
- onShowChart(chartType){
+ onShowChart(chartType, browserType){
+
+   this.setMenuItemOpen(chartType, browserType);
 
    const chartCont = this.charts[chartType];
    if (chartCont){
      chartCont.isShow = true;
      this.trigger(ChartActionTypes.SHOW_CHART, chartCont);
+     this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
    } else {
      this.charts[chartType] = this.createInitConfig(chartType);
      this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
-                  Factory.createChartContainer(chartType));
+                  Factory.createChartContainer(chartType, browserType));
+     this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
    }
 
  },
 
- onCloseChart(chartType, chartId){
-   const chartCont = this.charts[chartType];
+ onCloseChart(chartType, browserType, chartId){
+   this.minusMenuItemCounter(chartType, browserType);
 
+   const chartCont = this.charts[chartType];
    chartCont.configs = chartCont.configs.filter(function(config){
      return config.stockTicket !== chartId;
    });
    this.trigger(ChartActionTypes.CLOSE_CHART, chartCont);
+   this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+ },
+
+ onCloseChartContainer(chartType, browserType){
+   this.setMenuItemClose(chartType, browserType);
+   this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+ },
+ onCloseChartContainer2(chartType, browserType){
+   this.trigger(ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
  },
 
  ...BrowserSlice,

@@ -30,9 +30,10 @@ var GoogleBrowser = _react2.default.createClass({
 
       return _react2.default.createElement(_MenuBrowser2.default, {
          caption: 'Quandl Google Stocks',
-         showAction: _ComponentActions.ComponentActionTypes.SHOW_BROWSER,
          browserType: _Type.BrowserType.QUANDL_GOOGLE,
-         store: store
+         store: store,
+         showAction: _ComponentActions.ComponentActionTypes.SHOW_BROWSER,
+         updateAction: _ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU
       });
    }
 });

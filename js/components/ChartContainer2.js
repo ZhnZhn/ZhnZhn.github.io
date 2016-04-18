@@ -14,6 +14,8 @@ var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
 var _ChartActions = require('../flux/actions/ChartActions');
 
+var _ComponentActions = require('../flux/actions/ComponentActions');
+
 var _ZhHighchart = require('./ZhHighchart.js');
 
 var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
@@ -76,24 +78,35 @@ var ChartContainer2 = _react2.default.createClass({
       if (data.chartType === this.props.chartType) {
         this.setState(data);
       }
+    } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
+      if (data === this.props.chartType) {
+        this._handlerHide();
+      }
     }
   },
 
   _handlerHide: function _handlerHide() {
+    var _props = this.props;
+    var chartType = _props.chartType;
+    var browserType = _props.browserType;
+    var onCloseContainer = _props.onCloseContainer;
+
+    onCloseContainer(chartType, browserType);
     this.setState({ isShow: false });
   },
 
   renderCharts: function renderCharts() {
-    var _props = this.props;
-    var chartType = _props.chartType;
-    var onCloseItem = _props.onCloseItem;
+    var _props2 = this.props;
+    var chartType = _props2.chartType;
+    var browserType = _props2.browserType;
+    var onCloseItem = _props2.onCloseItem;
 
     var domCharts = this.state.configs.map(function (config, index) {
       return _react2.default.createElement(_AreaChartItem2.default, {
         key: config.stockTicket,
         caption: config.stockTicket,
         config: config,
-        onCloseItem: onCloseItem.bind(null, chartType, config.stockTicket)
+        onCloseItem: onCloseItem.bind(null, chartType, browserType, config.stockTicket)
       });
     });
 

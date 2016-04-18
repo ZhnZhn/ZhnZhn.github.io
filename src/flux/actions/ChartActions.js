@@ -8,7 +8,7 @@ export const ChartActionTypes = {
   LOAD_STOCK_COMPLETED : 'loadStockCompleted',
   LOAD_STOCK_FAILED : 'loadStockFailed',
   SHOW_CHART : 'showChart',
-  CLOSE_CHART : 'closeChart'
+  CLOSE_CHART : 'closeChart',
 }
 
 const ChartActions =  Reflux.createActions({
@@ -17,8 +17,8 @@ const ChartActions =  Reflux.createActions({
       [ChartActionTypes.CLOSE_CHART] : {}
 });
 
-ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, option){
-  LoadConfig[chartType](chartType, option, this.completed);
+ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, browserType, option){
+  LoadConfig[chartType](chartType, browserType, option, this.completed);
 })
 
 export default ChartActions

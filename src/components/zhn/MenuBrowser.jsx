@@ -28,10 +28,13 @@ const MenuBrowser = React.createClass({
   },
 
   _onStore: function(actionType, data){
-     if (actionType === this.props.showAction
-         && data === this.props.browserType ){
+     const {browserType, store, showAction, updateAction} = this.props;
+
+     if (actionType === showAction && data === browserType ){
       this._handlerShow();
-     }
+    } else if (actionType === updateAction && data === browserType){
+      this.setState({menuItems: store.getBrowserMenu(browserType)})
+    }
   },
 
   _handlerHide: function(){
@@ -54,6 +57,7 @@ const MenuBrowser = React.createClass({
   render: function(){
     const {caption, children} = this.props;
     const {menuItems} = this.state;
+
 
     let styleOpen = this.state.isShow ? {display: 'block'} : {display: 'none'};
     let classOpen = this.state.isShow ? "show-popup" : null;

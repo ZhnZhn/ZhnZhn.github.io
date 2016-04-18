@@ -30,6 +30,10 @@ var _DataQY = require('../../constants/DataQY');
 
 var _DataQY2 = _interopRequireDefault(_DataQY);
 
+var _ComponentActions = require('../actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
 var _ChartActions = require('../actions/ChartActions');
 
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
@@ -50,7 +54,7 @@ var noopArr = function noopArr() {
   return [];
 };
 
-var createDialogComp = function createDialogComp(conf) {
+var createDialogComp = function createDialogComp(conf, browserType) {
   var dialogType = conf.type;
   var props = conf.dialogProps ? conf.dialogProps : {};
   var fnOption = conf.fnOption ? conf.fnOption : noopArr;
@@ -60,19 +64,24 @@ var createDialogComp = function createDialogComp(conf) {
     key: dialogType,
     caption: conf.dialogCaption,
     optionStocks: fnOption(),
-    onLoad: onLoadChart.bind(null, dialogType),
-    onShow: onShowChart.bind(null, dialogType),
+    onLoad: onLoadChart.bind(null, dialogType, browserType),
+    onShow: onShowChart.bind(null, dialogType, browserType),
     initFromDate: initFromDate, initToDate: initToDate, onTestDate: onTestDate
   }, props));
 };
 
 var onCloseItem = _ChartActions2.default.closeChart;
-var createChartContainerComp = function createChartContainerComp(conf) {
+var fnCloseChartContainer = function fnCloseChartContainer(chartType, browserType) {
+  return _ComponentActions2.default.closeChartContainer.bind(null, chartType, browserType);
+};
+var createChartContainerComp = function createChartContainerComp(conf, browserType) {
   var Comp = conf.chartContainerComp ? conf.chartContainerComp : _ChartContainer2.default;
   return _react2.default.createElement(Comp, {
     key: conf.type,
     caption: conf.chartContainerCaption,
     chartType: conf.type,
+    browserType: browserType,
+    onCloseContainer: fnCloseChartContainer(conf.type, browserType),
     onCloseItem: onCloseItem
   });
 };
@@ -89,12 +98,12 @@ var getDataConf = function getDataConf(dialogType) {
 };
 
 var Factory = {};
-Factory.createDialog = function (dialogType) {
-  return createDialogComp(getDataConf(dialogType));
+Factory.createDialog = function (dialogType, browserType) {
+  return createDialogComp(getDataConf(dialogType), browserType);
 };
 
-Factory.createChartContainer = function (dialogType) {
-  return createChartContainerComp(getDataConf(dialogType));
+Factory.createChartContainer = function (dialogType, browserType) {
+  return createChartContainerComp(getDataConf(dialogType), browserType);
 };
 
 exports.default = Factory;

@@ -28,7 +28,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var loadData = function loadData(dataColumn, chartType, option, onCompleted) {
+var loadData = function loadData(dataColumn, chartType, browserType, option, onCompleted) {
   var chartId = option.value;
   if (!_ChartStore2.default.isChartExist(chartType, chartId)) {
     option.apiKey = _ChartStore2.default.getQuandlKey();
@@ -38,7 +38,7 @@ var loadData = function loadData(dataColumn, chartType, option, onCompleted) {
       if (!json.quandl_error) {
         var config = _QuandlAdapter2.default.toConfig(json, dataColumn);
         config.stockTicket = chartId;
-        onCompleted(chartType, config);
+        onCompleted(chartType, browserType, config);
       } else {
         console.log('%cQuandl Error Message:', 'color:red;');
         console.log('%c' + json.quandl_error.message, 'color:red;');

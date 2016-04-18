@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _MenuBadge = require('./MenuBadge');
+
+var _MenuBadge2 = _interopRequireDefault(_MenuBadge);
+
 var _OpenClose = require('./OpenClose');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
@@ -19,10 +23,17 @@ var MenuPart = _react2.default.createClass({
   _renderMenuItems: function _renderMenuItems(items) {
     return items.map(function (item, index) {
       var className = index % 2 ? 'row__topic__even' : 'row__topic__odd';
+      var menuBadge = item.counter !== 0 ? _react2.default.createElement(_MenuBadge2.default, {
+        counter: item.counter,
+        isOpen: item.isOpen,
+        onClick: item.onBadgeClick,
+        onBadgeClose: item.onBadgeClose
+      }) : null;
       return _react2.default.createElement(
         'div',
         { key: index, className: className, onClick: item.onClick },
-        item.title
+        item.title,
+        menuBadge
       );
     });
   },

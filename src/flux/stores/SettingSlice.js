@@ -1,6 +1,6 @@
 
 const SettingSlice = {
-  setting: {quandlKey: 'NAMdV9hFyWDgCs7PRusf'},
+  setting: {},
   setQuandlKey(value){
     this.setting.quandlKey = value;
   },

@@ -10,12 +10,12 @@ const ComponentSlice = {
   onShowBrowser(browserType){
     this.trigger(ComponentActionTypes.SHOW_BROWSER, browserType);
   },
-  onShowDialog(dialogType){
+  onShowDialog(dialogType, browserType){
     if (this.dialogInit[dialogType]) {
       this.trigger(ComponentActionTypes.SHOW_DIALOG, dialogType);
     } else {
       this.dialogInit[dialogType] = true;
-      const dialogComp = Factory.createDialog(dialogType);
+      const dialogComp = Factory.createDialog(dialogType, browserType);
       this.trigger(ComponentActionTypes.INIT_AND_SHOW_DIALOG,
                          {dialogType, dialogComp});
     }

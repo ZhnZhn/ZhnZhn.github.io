@@ -20,12 +20,12 @@ var ComponentSlice = {
   onShowBrowser: function onShowBrowser(browserType) {
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_BROWSER, browserType);
   },
-  onShowDialog: function onShowDialog(dialogType) {
+  onShowDialog: function onShowDialog(dialogType, browserType) {
     if (this.dialogInit[dialogType]) {
       this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, dialogType);
     } else {
       this.dialogInit[dialogType] = true;
-      var dialogComp = _Factory2.default.createDialog(dialogType);
+      var dialogComp = _Factory2.default.createDialog(dialogType, browserType);
       this.trigger(_ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG, { dialogType: dialogType, dialogComp: dialogComp });
     }
   }

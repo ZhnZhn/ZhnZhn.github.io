@@ -19,7 +19,7 @@ ChartConfigs.theme = {
     width: 600,
     height: 300,
     spacingTop: 20,
-    spacingBottom: 20,
+    spacingBottom: 24,
     plotBackgroundColor: "rgba(77,77,77,1)",
     backgroundColor: "rgba(77,77,77,1)",
     reflow: false
@@ -45,7 +45,7 @@ ChartConfigs.theme = {
     borderWidth: 2,
     borderRadius: 10,
     headerFormat: '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
-    pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">USD: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
+    pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
   },
   xAxis: {
     lineColor: "rgba(194,149,23,1)",
@@ -162,7 +162,42 @@ var markerExDivident = exports.markerExDivident = {
     },
     crop: false,
     overflow: 'none',
-    y: 28,
+    y: 32,
+    formatter: function formatter() {
+      return this.point.exValue;
+    }
+  }
+};
+
+var markerExDividentUp = exports.markerExDividentUp = {
+  y: 0,
+  exValue: 0.5,
+  marker: {
+    symbol: 'circle',
+    fillColor: 'rgba(0, 128, 0, 0.9)',
+    radius: 6,
+    states: {
+      hover: {
+        enable: true,
+        fillColor: '#4D4D4D',
+        lineColor: 'green',
+        lineWidth: 2,
+        radius: 6
+      }
+    }
+  },
+  dataLabels: {
+    enabled: true,
+    inside: true,
+    style: {
+      color: 'green',
+      fontSize: '11px',
+      fontWeight: 'bold',
+      textShadow: 'none'
+    },
+    crop: false,
+    overflow: 'none',
+    y: 0,
     formatter: function formatter() {
       return this.point.exValue;
     }
@@ -196,7 +231,7 @@ var markerSplitRatio = exports.markerSplitRatio = {
     },
     crop: false,
     overflow: 'none',
-    y: 28,
+    y: 32,
     formatter: function formatter() {
       return this.point.splitRatio;
     }

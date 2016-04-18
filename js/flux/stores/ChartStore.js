@@ -62,7 +62,9 @@ var ChartStore = _reflux2.default.createStore(_extends({
     }
     return false;
   },
-  onLoadStockCompleted: function onLoadStockCompleted(chartType, config) {
+  onLoadStockCompleted: function onLoadStockCompleted(chartType, browserType, config) {
+    this.addMenuItemCounter(chartType, browserType);
+
     var chartCont = this.charts[chartType];
     if (chartCont) {
       chartCont.configs.unshift(config);
@@ -71,27 +73,42 @@ var ChartStore = _reflux2.default.createStore(_extends({
     } else {
       this.charts[chartType] = this.createInitConfig(chartType);
       this.charts[chartType].configs.unshift(config);
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType));
+      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
     }
+
+    this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
   },
-  onShowChart: function onShowChart(chartType) {
+  onShowChart: function onShowChart(chartType, browserType) {
+
+    this.setMenuItemOpen(chartType, browserType);
 
     var chartCont = this.charts[chartType];
     if (chartCont) {
       chartCont.isShow = true;
       this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartCont);
+      this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
     } else {
       this.charts[chartType] = this.createInitConfig(chartType);
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType));
+      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
+      this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
     }
   },
-  onCloseChart: function onCloseChart(chartType, chartId) {
-    var chartCont = this.charts[chartType];
+  onCloseChart: function onCloseChart(chartType, browserType, chartId) {
+    this.minusMenuItemCounter(chartType, browserType);
 
+    var chartCont = this.charts[chartType];
     chartCont.configs = chartCont.configs.filter(function (config) {
       return config.stockTicket !== chartId;
     });
     this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartCont);
+    this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+  },
+  onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
+    this.setMenuItemClose(chartType, browserType);
+    this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+  },
+  onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
+    this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
   }
 }, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default));
 
