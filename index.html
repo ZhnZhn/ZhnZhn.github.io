@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Economic RESTful Client v0.10.0</title>
+  <link rel="shortcut icon" href="/css/favicon.png" type="image/png" />
 
   <!--[if IE]>
       <script src="lib/es6-shim.min.js"></script>
@@ -10,7 +11,7 @@
       <script src="lib/fetch.js"></script>
   <![endif]-->
 
-  <script>
+  <script type="text/javascript">
     (function(){
       if (!Object.assign){
         var js = document.createElement('script');
@@ -29,7 +30,7 @@
   </script>
 
   <link  href="css/app.css" rel="stylesheet" />
-  
+
 
 </head>
 <body>
@@ -37,7 +38,19 @@
    <div id="app">
    </div>
 
-  <script src="bundle.min.js"></script>
+   <noscript>
+      <div class="noscript__root">
+        <div class="noscript__header">
+           <h1 class="noscript__caption">Economic RESTful Client</h1>
+        </div>
+        <div class="noscript__msg">
+          <p>It seems JavaScript in your browser disabled or not supported.</p>
+          <p>To use <a class="noscript__link" href=".">Economic RESTful Client</a>, please, enable and reload page.</p>
+        </div>
+      </div>
+   </noscript>
+
+   <script src="bundle.min.js"></script>
 
 </body>
 </html>
