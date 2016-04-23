@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ValueMovingBadge = require('./zhn/ValueMovingBadge');
+
+var _ValueMovingBadge2 = _interopRequireDefault(_ValueMovingBadge);
+
 var _SvgClose = require('./SvgClose.js');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -36,12 +40,26 @@ var styles = {
     width: '600px'
   },
   captionSpanOpen: {
+    display: 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    width: '125px',
+    fontWeight: 'bold',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    float: 'left'
   },
   captionSpanClose: {
+    display: 'inline-block',
     color: 'gray',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    width: '125px',
+    fontWeight: 'bold',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    float: 'left'
   }
 };
 
@@ -91,9 +109,12 @@ var AreaChartItem = _react2.default.createClass({
         { style: styles.headerDiv },
         _react2.default.createElement(
           'span',
-          { style: styleCaption, onClick: this._handlerToggleOpen },
+          { title: caption, style: styleCaption, onClick: this._handlerToggleOpen },
           caption
         ),
+        _react2.default.createElement(_ValueMovingBadge2.default, {
+          valueMoving: config.valueMoving
+        }),
         _react2.default.createElement(_SvgClose2.default, { onClose: onCloseItem })
       ),
       _react2.default.createElement(

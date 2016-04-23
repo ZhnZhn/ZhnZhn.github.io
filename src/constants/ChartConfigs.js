@@ -88,7 +88,11 @@ ChartConfigs.baseAreaConfig = {
   },
   xAxis: {
     type: 'datetime',
-    labels : {}
+    labels : {},
+    crosshair : {
+      color : 'yellow',
+      width : 1
+    }
   },
   yAxis: {
     title: {

@@ -1,5 +1,7 @@
 
 import _ from 'lodash';
+import Big from 'big.js';
+import {Direction} from '../constants/Type';
 
 import ChartConfigs from '../constants/ChartConfigs';
 import {
@@ -92,6 +94,79 @@ const addSplitRatio = function(json, config, yPointIndex){
   }
 }
 
+const fnGetXAxesConfig = function(){
+  return {
+    opposite : true,
+    tickLength : 0,
+    tickPosition : 'inside',
+    labels : {
+      y : -5
+    }
+  }
+}
+
+const fnGetYAxesConfig = function(maxPoint, minPoint){
+  const plotLines = [
+   {
+      value : maxPoint,
+      label : {
+        text : maxPoint
+      }
+   },
+   {
+      value : minPoint,
+      label : {
+        text : minPoint
+      }
+   }
+ ];
+
+ plotLines[0].value = maxPoint;
+ plotLines[0].label.text = maxPoint;
+ plotLines[1].value = minPoint;
+ plotLines[1].label.text = minPoint;
+
+ return {
+    opposite : true,
+    plotLines
+  }
+}
+
+const fnGetDatasetInfo = function(json){
+  return  {
+     name : json.dataset.name,
+     description : json.dataset.description,
+     newest_available_date : json.dataset.newest_available_date,
+     oldest_available_date : json.dataset.oldest_available_date,
+     frequency : json.dataset.frequency
+  };
+}
+
+const fnGetValueMoving = function(seria){
+  const len = seria.length
+      , nowValue = seria[len-1][1]
+      , bWasValue = Big(seria[len-2][1])
+      , bDelta = bWasValue.minus(nowValue)
+      , bPercent = bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2);
+
+  let direction;
+  if (bDelta.gt(0.0)){
+    direction = Direction.DOWN;
+  } else if (!bDelta.gte(0.0)){
+    direction = Direction.UP;
+  } else {
+    direction = Direction.EQUAL;
+  }
+
+
+  return {
+    value : nowValue,
+    delta : bDelta.abs().toString(),
+    percent : bPercent.toString() + '%',
+    direction
+  };
+}
+
 
 QuandlAdapter.toConfig = function(json, yPointIndex){
   let minPoint = Number.POSITIVE_INFINITY;
@@ -115,6 +190,10 @@ QuandlAdapter.toConfig = function(json, yPointIndex){
 
    config.series[0].data = seria;
 
+   config.valueMoving = fnGetValueMoving(seria);
+
+   //config.yAxis = fnGetYAxesConfig(maxPoint, minPoint);
+
    config.yAxis.plotLines[0].value = maxPoint;
    config.yAxis.plotLines[0].label.text = maxPoint;
    config.yAxis.plotLines[1].value = minPoint;
@@ -122,19 +201,8 @@ QuandlAdapter.toConfig = function(json, yPointIndex){
 
    config.yAxis.opposite = true;
 
-   config.xAxis.opposite = true;
-   config.xAxis.tickLength = 0;
-   config.xAxis.tickPosition = 'inside';
-   config.xAxis.labels.y = -5;
-
-   config.info = {
-     name : json.dataset.name,
-     description : json.dataset.description,
-     newest_available_date : json.dataset.newest_available_date,
-     oldest_available_date : json.dataset.oldest_available_date,
-     frequency : json.dataset.frequency
-   };
-
+   config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
+   config.info = fnGetDatasetInfo(json);
 
    if (json.dataset.column_names[6] === "Ex-Dividend"){
       addExDividend(json, config, yPointIndex);

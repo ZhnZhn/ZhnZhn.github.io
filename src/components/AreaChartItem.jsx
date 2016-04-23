@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ValueMovingBadge from './zhn/ValueMovingBadge';
 import SvgClose from './SvgClose.js';
 import ZhHighchart from './ZhHighchart.js';
 
@@ -19,12 +20,26 @@ const styles = {
     width: '600px'
   },
   captionSpanOpen : {
+    display : 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
     cursor: 'pointer',
+    width: '125px',
+    fontWeight : 'bold',
+    whiteSpace: 'nowrap',
+    textOverflow : 'ellipsis',
+    overflow : 'hidden',
+    float : 'left'
   },
   captionSpanClose : {
+    display : 'inline-block',
     color : 'gray',
     cursor: 'pointer',
+    width : '125px',
+    fontWeight : 'bold',
+    whiteSpace: 'nowrap',
+    textOverflow : 'ellipsis',
+    overflow : 'hidden',
+    float : 'left'
   }
 }
 
@@ -60,9 +75,12 @@ const AreaChartItem = React.createClass({
     return (
       <div style={styles.rootDiv}>
         <div style={styles.headerDiv}>
-          <span style={styleCaption} onClick={this._handlerToggleOpen}>
+          <span title={caption} style={styleCaption} onClick={this._handlerToggleOpen}>
              {caption}
           </span>
+          <ValueMovingBadge
+             valueMoving={config.valueMoving}
+          />
           <SvgClose onClose={onCloseItem} />
         </div>
         <div className={classShow} style={styleShow}>
