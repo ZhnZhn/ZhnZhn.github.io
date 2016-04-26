@@ -38,6 +38,7 @@ var loadData = function loadData(dataColumn, chartType, browserType, option, onC
       if (!json.quandl_error) {
         var config = _QuandlAdapter2.default.toConfig(json, dataColumn);
         config.stockTicket = chartId;
+        config.chart.zhId = chartId;
         onCompleted(chartType, browserType, config);
       } else {
         console.log('%cQuandl Error Message:', 'color:red;');

@@ -3,6 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.markerSplitRatio = exports.tooltipSplitRatio = exports.tooltipExDivident = exports.markerExDividentUp = exports.markerExDivident = undefined;
+
+var _highcharts = require('highcharts');
+
+var _highcharts2 = _interopRequireDefault(_highcharts);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ChartConfigs = {};
 
@@ -22,7 +29,13 @@ ChartConfigs.theme = {
     spacingBottom: 24,
     plotBackgroundColor: "rgba(77,77,77,1)",
     backgroundColor: "rgba(77,77,77,1)",
-    reflow: false
+    reflow: false,
+
+    events: {
+      load: function load() {
+        this.myTooltip = new _highcharts2.default.Tooltip(this, this.options.tooltip);
+      }
+    }
   },
   plotOptions: {
     area: {
@@ -38,12 +51,27 @@ ChartConfigs.theme = {
           }
         }
       }
+    },
+    series: {
+      stickyTracking: false,
+      events: {
+        click: function click(event) {
+          this.chart.myTooltip.refresh(event.point, event);
+        }
+      }
     }
   },
   tooltip: {
+    useHTML: true,
+    enabled: false,
+    hideDelay: 100,
+    followPointer: false,
+    shared: false,
+
     backgroundColor: 'rgba(0,0,0, 0.5)',
     borderWidth: 2,
     borderRadius: 10,
+
     headerFormat: '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
     pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
   },
@@ -81,6 +109,7 @@ ChartConfigs.theme = {
 };
 
 ChartConfigs.baseAreaConfig = {
+  chart: {},
   title: {
     text: ''
   },
@@ -134,7 +163,21 @@ ChartConfigs.baseAreaConfig = {
     }]
   },
   series: [{
-    type: 'area'
+    type: 'area',
+    tooltip: {
+      pointFormatter: function pointFormatter(obj) {
+        var point = this,
+            id = this.series.chart.userOptions.chart.zhId,
+            date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x);
+        setTimeout(function () {
+          document.getElementById(id).addEventListener('click', function () {
+            point.series.chart.myTooltip.hide();
+          });
+        }, 1);
+        return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">' + date + '</span>' + '<span id="' + id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.y + '</span><br/>';
+      },
+      headerFormat: ''
+    }
   }]
 };
 
@@ -206,6 +249,36 @@ var markerExDividentUp = exports.markerExDividentUp = {
       return this.point.exValue;
     }
   }
+};
+
+var tooltipExDivident = exports.tooltipExDivident = {
+  pointFormatter: function pointFormatter(obj) {
+    var point = this,
+        id = this.series.chart.userOptions.chart.zhId,
+        date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x);
+    setTimeout(function () {
+      document.getElementById(id).addEventListener('click', function () {
+        point.series.chart.myTooltip.hide();
+      });
+    }, 1);
+    return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">' + date + '</span>' + '<span id="' + id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Ex-Dividend: </span>' + '<span style="font-weight: bold; color: green;">' + point.exValue + '</span><br/>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.price + '</span>';
+  },
+  headerFormat: ''
+};
+
+var tooltipSplitRatio = exports.tooltipSplitRatio = {
+  pointFormatter: function pointFormatter(obj) {
+    var point = this,
+        id = this.series.chart.userOptions.chart.zhId,
+        date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x);
+    setTimeout(function () {
+      document.getElementById(id).addEventListener('click', function () {
+        point.series.chart.myTooltip.hide();
+      });
+    }, 1);
+    return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">' + date + '</span>' + '<span id="' + id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Split Ratio: </span>' + '<span style="font-weight: bold; color: #ED5813;">' + point.splitRatio + '</span><br/>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.price + '</span>';
+  },
+  headerFormat: ''
 };
 
 var markerSplitRatio = exports.markerSplitRatio = {
