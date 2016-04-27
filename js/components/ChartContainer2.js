@@ -16,6 +16,8 @@ var _ChartActions = require('../flux/actions/ChartActions');
 
 var _ComponentActions = require('../flux/actions/ComponentActions');
 
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
 var _ZhHighchart = require('./ZhHighchart.js');
 
 var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
@@ -106,6 +108,7 @@ var ChartContainer2 = _react2.default.createClass({
         key: config.stockTicket,
         caption: config.stockTicket,
         config: config,
+        onSetActive: _ComponentActions2.default.setActiveCheckbox,
         onCloseItem: onCloseItem.bind(null, chartType, browserType, config.stockTicket)
       });
     });

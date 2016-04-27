@@ -150,8 +150,8 @@ var fnGetValueMoving = function fnGetValueMoving(seria) {
   }
 
   return {
-    value: nowValue,
-    delta: bDelta.abs().toString(),
+    value: (0, _ChartConfigs.fnNumberFormat)(nowValue),
+    delta: (0, _ChartConfigs.fnNumberFormat)(bDelta.abs().toString()),
     percent: bPercent.toString() + '%',
     direction: direction
   };
@@ -184,9 +184,9 @@ QuandlAdapter.toConfig = function (json, yPointIndex) {
   //config.yAxis = fnGetYAxesConfig(maxPoint, minPoint);
 
   config.yAxis.plotLines[0].value = maxPoint;
-  config.yAxis.plotLines[0].label.text = maxPoint;
+  config.yAxis.plotLines[0].label.text = (0, _ChartConfigs.fnNumberFormat)(maxPoint);
   config.yAxis.plotLines[1].value = minPoint;
-  config.yAxis.plotLines[1].label.text = minPoint;
+  config.yAxis.plotLines[1].label.text = (0, _ChartConfigs.fnNumberFormat)(minPoint);
 
   config.yAxis.opposite = true;
 
@@ -201,6 +201,21 @@ QuandlAdapter.toConfig = function (json, yPointIndex) {
   }
 
   return config;
+};
+
+QuandlAdapter.toSeries = function (json, yPointIndex, chartId) {
+  var data = json.dataset.data.map(function (point, index) {
+    var arrDate = point[0].split('-');
+    return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
+  });
+  data = _lodash2.default.sortBy(data, '0');
+  var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12);
+
+  var configSeries = _lodash2.default.cloneDeep(_ChartConfigs.configSeriesAdded);
+  configSeries.zhValueText = valueText;
+  configSeries.data = data;
+
+  return configSeries;
 };
 
 exports.default = QuandlAdapter;

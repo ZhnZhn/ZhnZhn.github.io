@@ -1,12 +1,19 @@
 import React from 'react';
 
+import SvgCheckBox from './zhn/SvgCheckBox';
 import ValueMovingBadge from './zhn/ValueMovingBadge';
-import SvgClose from './SvgClose.js';
-import ZhHighchart from './ZhHighchart.js';
+import SvgClose from './SvgClose';
+import ZhHighchart from './ZhHighchart';
 
 import PanelDataInfo from './zhn/PanelDataInfo';
 
 const styles = {
+  show : {
+    display: 'block'
+  },
+  hide : {
+    display : 'none'
+  },
   rootDiv : {
     marginBottom: '10px'
   },
@@ -18,6 +25,10 @@ const styles = {
     paddingLeft: '10px',
     height: '25px',
     width: '600px'
+  },
+  checkBoxStyle : {
+    float: 'left',
+    marginRight: '10px'
   },
   captionSpanOpen : {
     display : 'inline-block',
@@ -44,7 +55,9 @@ const styles = {
 }
 
 const AreaChartItem = React.createClass({
-  getInitialState:function(){
+  getInitialState(){
+    this._fnOnCheck = this._handlerCheckBox.bind(null, true);
+    this._fnOnUnCheck = this._handlerCheckBox.bind(null, false);
     return {
       isOpen: true,
       isShowChart : true,
@@ -52,7 +65,7 @@ const AreaChartItem = React.createClass({
     }
   },
 
-  _handlerToggleOpen: function(){
+  _handlerToggleOpen(){
     this.state.isOpen = !this.state.isOpen;
     this.setState(this.state);
   },
@@ -65,17 +78,30 @@ const AreaChartItem = React.createClass({
     this.setState({isShowChart: true, isShowInfo: false});
   },
 
-  render: function(){
-    const {caption, config, onCloseItem} = this.props;
+  _handlerCheckBox(isCheck, checkBox){
+    this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
+  },
+
+  render(){
+    const {caption, config, onSetActive, onCloseItem} = this.props;
     const {isOpen, isShowChart, isShowInfo} = this.state;
-    const styleShow = isOpen ? {display: 'block'} : {display: 'none'};
-    const classShow = isOpen ? 'show-popup' : null;
-    const styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
+    const _styleShow = isOpen ? styles.show : styles.hide;
+    const _classShow = isOpen ? 'show-popup' : null;
+    const _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
     return (
       <div style={styles.rootDiv}>
         <div style={styles.headerDiv}>
-          <span title={caption} style={styleCaption} onClick={this._handlerToggleOpen}>
+          <SvgCheckBox
+             rootStyle={styles.checkBoxStyle}
+             onCheck={this._fnOnCheck}
+             onUnCheck={this._fnOnUnCheck}
+          />
+          <span
+             title={caption}
+             style={_styleCaption}
+             onClick={this._handlerToggleOpen}
+          >
              {caption}
           </span>
           <ValueMovingBadge
@@ -83,8 +109,9 @@ const AreaChartItem = React.createClass({
           />
           <SvgClose onClose={onCloseItem} />
         </div>
-        <div className={classShow} style={styleShow}>
+        <div className={_classShow} style={_styleShow}>
           <ZhHighchart
+              ref="chart"
               isShow={isShowChart}
               config={config}
               onClickInfo={this._handlerClickInfo}

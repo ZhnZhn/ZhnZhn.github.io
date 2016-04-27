@@ -18,29 +18,23 @@ const ZhHighchart = React.createClass({
 
   displayName: 'ZhHighchart',
 
-  getChart: function(){
-    if(!this.chart){
-      throw new Error('getChart() should not called before the ZhHighchart component is mounted');
-    }
-    return this.chart;
-  },
-
-  componentDidMount: function(){
+  componentDidMount(){
     this.renderChart(this.props.config);
   },
 
-  componentWillUnmout: function(){
+  componentWillUnmout(){
     this.chart.destroy();
   },
 
-  renderChart: function(config){
+  renderChart(config){
     if (!config){
       throw new Error('Config must be specified for the ZhHighchart');
     }
 
-    let chartConfig =  config.chart;
+    const chartConfig =  config.chart;
     this.chart = new Highcharts['Chart']({
-      ...this.props.config,
+      //...this.props.config,
+      ...config,
       chart: {
         ...chartConfig,
         renderTo: this.refs.chart
@@ -49,12 +43,12 @@ const ZhHighchart = React.createClass({
   },
 
 
-  render: function(){
+  render() {
     const {isShow, onClickInfo} = this.props;
-    const styleRootDiv = isShow ?
+    const _styleRootDiv = isShow ?
                  styles.rootDivShow : styles.rootDivHide;
      return (
-       <div style={styleRootDiv}>
+       <div style={_styleRootDiv}>
           <ButtonTab
             caption={'Info'}
             onClick={onClickInfo}
@@ -63,7 +57,15 @@ const ZhHighchart = React.createClass({
           </div>
         </div>
      )
+  },
+
+  getChart(){
+    if(!this.chart){
+      throw new Error('getChart() should not called before the ZhHighchart component is mounted');
+    }
+    return this.chart;
   }
+
 })
 
 export default ZhHighchart;

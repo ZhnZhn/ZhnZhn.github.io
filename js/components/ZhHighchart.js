@@ -35,49 +35,45 @@ var ZhHighchart = _react2.default.createClass({
 
   displayName: 'ZhHighchart',
 
-  getChart: function getChart() {
-    if (!this.chart) {
-      throw new Error('getChart() should not called before the ZhHighchart component is mounted');
-    }
-    return this.chart;
-  },
-
   componentDidMount: function componentDidMount() {
     this.renderChart(this.props.config);
   },
-
   componentWillUnmout: function componentWillUnmout() {
     this.chart.destroy();
   },
-
   renderChart: function renderChart(config) {
     if (!config) {
       throw new Error('Config must be specified for the ZhHighchart');
     }
 
     var chartConfig = config.chart;
-    this.chart = new _highcharts2.default['Chart'](_extends({}, this.props.config, {
+    this.chart = new _highcharts2.default['Chart'](_extends({}, config, {
       chart: _extends({}, chartConfig, {
         renderTo: this.refs.chart
       })
     }));
   },
-
   render: function render() {
     var _props = this.props;
     var isShow = _props.isShow;
     var onClickInfo = _props.onClickInfo;
 
-    var styleRootDiv = isShow ? styles.rootDivShow : styles.rootDivHide;
+    var _styleRootDiv = isShow ? styles.rootDivShow : styles.rootDivHide;
     return _react2.default.createElement(
       'div',
-      { style: styleRootDiv },
+      { style: _styleRootDiv },
       _react2.default.createElement(_ButtonTab2.default, {
         caption: 'Info',
         onClick: onClickInfo
       }),
       _react2.default.createElement('div', { ref: 'chart' })
     );
+  },
+  getChart: function getChart() {
+    if (!this.chart) {
+      throw new Error('getChart() should not called before the ZhHighchart component is mounted');
+    }
+    return this.chart;
   }
 });
 

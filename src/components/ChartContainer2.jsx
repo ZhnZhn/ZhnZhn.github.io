@@ -2,7 +2,7 @@ import React from 'react';
 
 import ChartStore from '../flux/stores/ChartStore';
 import {ChartActionTypes} from '../flux/actions/ChartActions';
-import {ComponentActionTypes} from '../flux/actions/ComponentActions';
+import ComponentActions, {ComponentActionTypes} from '../flux/actions/ComponentActions';
 
 import ZhHighchart from './ZhHighchart.js';
 import CaptionRow from './CaptionRow.js';
@@ -80,6 +80,7 @@ const ChartContainer2 = React.createClass({
              key={config.stockTicket}
              caption={config.stockTicket}
              config={config}
+             onSetActive={ComponentActions.setActiveCheckbox}
              onCloseItem={onCloseItem.bind(null, chartType, browserType, config.stockTicket)}
          />
        )

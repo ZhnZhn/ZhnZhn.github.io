@@ -28,6 +28,28 @@ var ComponentSlice = {
       var dialogComp = _Factory2.default.createDialog(dialogType, browserType);
       this.trigger(_ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG, { dialogType: dialogType, dialogComp: dialogComp });
     }
+  },
+  isLoadToChart: function isLoadToChart() {
+    if (this.activeChart) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  getActiveChart: function getActiveChart() {
+    return this.activeChart;
+  },
+  onSetActiveCheckbox: function onSetActiveCheckbox(isCheck, checkBox, chart) {
+    if (isCheck) {
+      if (this.activeCheckbox && this.activeCheckbox !== checkBox) {
+        this.activeCheckbox.setUnchecked();
+      }
+      this.activeCheckbox = checkBox;
+      this.activeChart = chart;
+    } else {
+      this.activeCheckbox = null;
+      this.activeChart = null;
+    }
   }
 };
 

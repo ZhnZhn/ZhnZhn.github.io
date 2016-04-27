@@ -5,11 +5,13 @@ import Big from 'big.js';
 import {Direction} from '../constants/Type';
 import ChartConfigs from '../constants/ChartConfigs';
 import {
+        fnNumberFormat,
         markerExDivident,
         markerExDividentUp,
         tooltipExDivident,
         markerSplitRatio,
-        tooltipSplitRatio
+        tooltipSplitRatio,
+        configSeriesAdded
       } from '../constants/ChartConfigs';
 
 const QuandlAdapter = {};
@@ -76,7 +78,7 @@ const addSplitRatio = function(json, config, yPointIndex){
     config.series.push({
        type: 'scatter',
        color: '#ED5813',
-       tooltip : tooltipSplitRatio,       
+       tooltip : tooltipSplitRatio,
        data : dataSplitRatio
     });
   }
@@ -148,8 +150,8 @@ const fnGetValueMoving = function(seria){
 
 
   return {
-    value : nowValue,
-    delta : bDelta.abs().toString(),
+    value : fnNumberFormat(nowValue),
+    delta : fnNumberFormat(bDelta.abs().toString()),
     percent : bPercent.toString() + '%',
     direction
   };
@@ -183,9 +185,9 @@ QuandlAdapter.toConfig = function(json, yPointIndex){
    //config.yAxis = fnGetYAxesConfig(maxPoint, minPoint);
 
    config.yAxis.plotLines[0].value = maxPoint;
-   config.yAxis.plotLines[0].label.text = maxPoint;
+   config.yAxis.plotLines[0].label.text = fnNumberFormat(maxPoint);
    config.yAxis.plotLines[1].value = minPoint;
-   config.yAxis.plotLines[1].label.text = minPoint;
+   config.yAxis.plotLines[1].label.text = fnNumberFormat(minPoint);
 
    config.yAxis.opposite = true;
 
@@ -201,5 +203,23 @@ QuandlAdapter.toConfig = function(json, yPointIndex){
 
    return config;
 };
+
+
+QuandlAdapter.toSeries = function(json, yPointIndex, chartId){
+  let data = json.dataset.data.map((point, index)=> {
+    const arrDate = point[0].split('-');
+    return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
+  });
+  data = _.sortBy(data, '0');
+  const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12);
+
+  const configSeries = _.cloneDeep(configSeriesAdded);
+  configSeries.zhValueText = valueText;
+  configSeries.data = data;
+
+  return configSeries;
+
+};
+
 
 export default QuandlAdapter;

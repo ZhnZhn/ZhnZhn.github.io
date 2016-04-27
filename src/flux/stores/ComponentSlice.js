@@ -19,6 +19,30 @@ const ComponentSlice = {
       this.trigger(ComponentActionTypes.INIT_AND_SHOW_DIALOG,
                          {dialogType, dialogComp});
     }
+  },
+
+
+  isLoadToChart(){
+    if (this.activeChart){
+      return true;
+    } else {
+      return false;
+    }
+  },
+  getActiveChart(){
+    return this.activeChart;
+  },
+  onSetActiveCheckbox(isCheck, checkBox, chart){
+     if (isCheck){
+        if (this.activeCheckbox && this.activeCheckbox !== checkBox){
+           this.activeCheckbox.setUnchecked();
+        }
+        this.activeCheckbox = checkBox;
+        this.activeChart = chart;
+     } else {
+       this.activeCheckbox = null;
+       this.activeChart = null;
+     }
   }
 }
 

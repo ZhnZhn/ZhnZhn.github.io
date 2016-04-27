@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.markerSplitRatio = exports.tooltipSplitRatio = exports.tooltipExDivident = exports.markerExDividentUp = exports.markerExDivident = undefined;
+exports.configSeriesAdded = exports.markerSplitRatio = exports.tooltipSplitRatio = exports.tooltipExDivident = exports.markerExDividentUp = exports.markerExDivident = exports.fnTooltipPointFormatter = exports.fnNumberFormat = undefined;
 
 var _highcharts = require('highcharts');
 
@@ -36,6 +36,10 @@ ChartConfigs.theme = {
         this.myTooltip = new _highcharts2.default.Tooltip(this, this.options.tooltip);
       }
     }
+  },
+  colors: ['#7cb5ec', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
+  labels: {
+    items: []
   },
   plotOptions: {
     area: {
@@ -108,8 +112,35 @@ ChartConfigs.theme = {
   }
 };
 
+var fnNumberFormat = exports.fnNumberFormat = function fnNumberFormat(value) {
+  var arrSplit = (value + '').split('.'),
+      decimal = arrSplit[1] ? arrSplit[1].length : 0;
+
+  return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
+};
+
+var fnTooltipPointFormatter = exports.fnTooltipPointFormatter = function fnTooltipPointFormatter(obj) {
+  var point = this,
+      valueText = this.series.userOptions.zhValueText,
+      id = this.series.chart.userOptions.chart.zhId,
+      date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x);
+
+  setTimeout(function () {
+    document.getElementById(id).addEventListener('click', function () {
+      point.series.chart.myTooltip.hide();
+    });
+  }, 1);
+
+  return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">' + date + '</span>' + '<span id="' + id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">' + valueText + ': </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + fnNumberFormat(point.y) + '</span><br/>';
+};
+
 ChartConfigs.baseAreaConfig = {
-  chart: {},
+  zhSeries: {
+    count: 0
+  },
+  chart: {
+    zoomType: 'x'
+  },
   title: {
     text: ''
   },
@@ -163,20 +194,17 @@ ChartConfigs.baseAreaConfig = {
     }]
   },
   series: [{
+    zhValueText: 'Value',
     type: 'area',
     tooltip: {
-      pointFormatter: function pointFormatter(obj) {
-        var point = this,
-            id = this.series.chart.userOptions.chart.zhId,
-            date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x);
-        setTimeout(function () {
-          document.getElementById(id).addEventListener('click', function () {
-            point.series.chart.myTooltip.hide();
-          });
-        }, 1);
-        return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">' + date + '</span>' + '<span id="' + id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>' + '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.y + '</span><br/>';
-      },
+      pointFormatter: fnTooltipPointFormatter,
       headerFormat: ''
+    },
+    lineWidth: 1,
+    states: {
+      hover: {
+        lineWidth: 1
+      }
     }
   }]
 };
@@ -312,6 +340,15 @@ var markerSplitRatio = exports.markerSplitRatio = {
     formatter: function formatter() {
       return this.point.splitRatio;
     }
+  }
+};
+
+var configSeriesAdded = exports.configSeriesAdded = {
+  type: 'spline',
+  lineWidth: 1,
+  tooltip: {
+    pointFormatter: fnTooltipPointFormatter,
+    headerFormat: ''
   }
 };
 

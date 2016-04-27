@@ -5,7 +5,53 @@ import {QuandlYahoo, QuandlGoogle} from '../../constants/DialogType';
 import QuandlApi from '../../api/QuandlApi';
 import QuandlAdapter from '../../adapters/QuandlAdapter';
 
+
 const loadData = function(dataColumn, chartType, browserType, option, onCompleted){
+  if (ChartStore.isLoadToChart()){
+    loadToChart(dataColumn, chartType, browserType, option);
+  } else {
+    loadToChartComp(dataColumn, chartType, browserType, option, onCompleted);
+  }
+}
+
+const loadToChart = function(dataColumn, chartType, browserType, option){
+     const chartId = option.value;
+     option.apiKey = ChartStore.getQuandlKey();
+     fetch(QuandlApi.getRequestUrl(option))
+      .then((response)=>response.json())
+      .then((json)=>{
+        if (!json.quandl_error){
+          let series = QuandlAdapter.toSeries(json, dataColumn, chartId);
+
+          const chart = ChartStore.getActiveChart();
+          const options = chart.options;
+
+          ChartStore.getActiveChart().addSeries(series, true, true);
+
+          //12symbols
+          const seriesText = (chartId.length>12) ? chartId.substring(0,12) : chartId
+              , seriesCount = options.zhSeries.count
+              , row = Math.floor(seriesCount/3)
+              , x = 110 + 100*seriesCount - row*300
+              , y = 55 + 15*row;
+
+          chart.renderer.text(seriesText, x, y)
+                .css({color: options.colors[series._colorIndex]})
+                .add();
+          options.zhSeries.count +=1;
+
+        } else {
+          console.log('%cQuandl Error Message:', 'color:red;');
+          console.log('%c' + json.quandl_error.message, 'color:red;');
+        }
+      })
+      .catch((error) => {
+        console.log('%c' + error.message, 'color:red;');
+      })
+
+}
+
+const loadToChartComp = function(dataColumn, chartType, browserType, option, onCompleted){
   const chartId = option.value;
   if (!ChartStore.isChartExist(chartType, chartId)) {
      option.apiKey = ChartStore.getQuandlKey();
