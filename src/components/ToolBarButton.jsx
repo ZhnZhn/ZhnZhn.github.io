@@ -1,27 +1,9 @@
 import React from 'react';
 
-/*
-const styles = {
-  button : {
-    color: 'rgba(235,240,16,1)',
-    background: 'linear-gradient(to top, #804000, gray)',
-    border: '2px solid #696969',
-    padding: '2px 3px',
-    borderRadius: '4px',
-  },
-  buttonTypeA : {
-    color: 'rgba(235,240,16,1)',
-    background: 'linear-gradient(to top, #222222, gray)',
-    border: '2px solid #696969',
-    padding: '2px 3px',
-    borderRadius: '4px',
-  }
-};
-*/
 
 const ToolBarButton = React.createClass({
-  render: function(){
-    //let className = this.props.isTypeA ? 'button-type-a' : 'button-type-b';
+  render(){
+
     let className;
 
     switch (this.props.type) {

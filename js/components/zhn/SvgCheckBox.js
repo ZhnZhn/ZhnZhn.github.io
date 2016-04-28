@@ -14,7 +14,8 @@ var styles = {
   rootDiv: {
     width: '16px',
     height: '16px',
-    display: 'inline-block'
+    display: 'inline-block',
+    cursor: 'pointer'
   },
   rootSvg: {
     display: 'inline-block'
