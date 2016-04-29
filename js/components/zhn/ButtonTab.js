@@ -33,12 +33,13 @@ var ButtonTab = _react2.default.createClass({
   render: function render() {
     var _props = this.props;
     var caption = _props.caption;
+    var style = _props.style;
     var onClick = _props.onClick;
 
     return _react2.default.createElement(
       'div',
       {
-        style: styles.div,
+        style: Object.assign({}, styles.div, style),
         onClick: onClick
       },
       caption

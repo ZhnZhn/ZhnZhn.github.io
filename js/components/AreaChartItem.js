@@ -85,7 +85,8 @@ var AreaChartItem = _react2.default.createClass({
     return {
       isOpen: true,
       isShowChart: true,
-      isShowInfo: false
+      isShowInfo: false,
+      isShowVolume: false
     };
   },
   _handlerToggleOpen: function _handlerToggleOpen() {
@@ -94,6 +95,9 @@ var AreaChartItem = _react2.default.createClass({
   },
   _handlerClickInfo: function _handlerClickInfo() {
     this.setState({ isShowChart: false, isShowInfo: true });
+  },
+  _handlerClickVolume: function _handlerClickVolume() {
+    this.setState({ isShowVolume: !this.state.isShowVolume });
   },
   _handlerClickChart: function _handlerClickChart() {
     this.setState({ isShowChart: true, isShowInfo: false });
@@ -111,10 +115,27 @@ var AreaChartItem = _react2.default.createClass({
     var isOpen = _state.isOpen;
     var isShowChart = _state.isShowChart;
     var isShowInfo = _state.isShowInfo;
+    var isShowVolume = _state.isShowVolume;
 
     var _styleShow = isOpen ? styles.show : styles.hide;
     var _classShow = isOpen ? 'show-popup' : null;
     var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
+
+    var _isVolumeButton = config.zhVolumeConfig ? true : false;
+
+    var _styleVolumeShow = isShowVolume ? styles.show : styles.hide;
+    var _classVolumeShow = isShowVolume ? 'show-popup' : null;
+
+    var _volumeChart = config.zhVolumeConfig ? _react2.default.createElement(
+      'div',
+      { className: _classVolumeShow, style: _styleVolumeShow },
+      _react2.default.createElement(_ZhHighchart2.default, {
+        ref: 'chartVolume',
+        isShow: true,
+        isToolBar: false,
+        config: config.zhVolumeConfig
+      })
+    ) : undefined;
 
     return _react2.default.createElement(
       'div',
@@ -147,14 +168,18 @@ var AreaChartItem = _react2.default.createClass({
         _react2.default.createElement(_ZhHighchart2.default, {
           ref: 'chart',
           isShow: isShowChart,
+          isToolBar: true,
+          isVolume: _isVolumeButton,
           config: config,
-          onClickInfo: this._handlerClickInfo
+          onClickInfo: this._handlerClickInfo,
+          onClickVolume: this._handlerClickVolume
         }),
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,
           info: config.info,
           onClickChart: this._handlerClickChart
-        })
+        }),
+        _volumeChart
       )
     );
   }

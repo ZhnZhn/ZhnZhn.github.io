@@ -7,7 +7,6 @@ import ChartConfigs from '../constants/ChartConfigs';
 import {
         fnNumberFormat,
         markerExDivident,
-        markerExDividentUp,
         tooltipExDivident,
         markerSplitRatio,
         tooltipSplitRatio,
@@ -29,61 +28,6 @@ const fnCheckWithPrev = function(arr, checkedDate, predicate){
    }
 }
 
-
-const addExDividend = function(json, config, yPointIndex){
-  let dataExDividend = [];
-  json.dataset.data.forEach((point) => {
-     if (point[6] !== 0){
-       const arrDate = point[0].split('-')
-           , x = Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2])
-           , exValue = point[6]
-           , price = point[yPointIndex];
-
-       if (fnCheckWithPrev(dataExDividend, x , 14)) {
-          dataExDividend.push(Object.assign({}, markerExDivident, {x, exValue, price}));
-       } else {
-          const marker = Object.assign(_.cloneDeep(markerExDivident), {x, exValue, price});
-          marker.dataLabels.y = 0;
-          dataExDividend.push(marker);
-      }
-     }
-  });
-
-  if (dataExDividend.length>0){
-    dataExDividend = _.sortBy(dataExDividend, 'x');
-    config.series.push({
-       type: 'scatter',
-       color: 'green',
-       tooltip : tooltipExDivident,
-       data : dataExDividend
-    });
-  }
-}
-
-
-const addSplitRatio = function(json, config, yPointIndex){
-  let dataSplitRatio = [];
-  json.dataset.data.forEach((point) => {
-     if (point[7] !== 1){
-       let arrDate = point[0].split('-');
-       let x = Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
-       let splitRatio = point[7];
-       let price = point[yPointIndex];
-       dataSplitRatio.push(Object.assign({}, markerSplitRatio, {x, splitRatio, price}));
-     }
-  });
-
-  if (dataSplitRatio.length>0){
-    dataSplitRatio = _.sortBy(dataSplitRatio, 'x');
-    config.series.push({
-       type: 'scatter',
-       color: '#ED5813',
-       tooltip : tooltipSplitRatio,
-       data : dataSplitRatio
-    });
-  }
-}
-
 const fnGetXAxesConfig = function(){
   return {
     opposite : true,
@@ -95,40 +39,14 @@ const fnGetXAxesConfig = function(){
   }
 }
 
-const fnGetYAxesConfig = function(maxPoint, minPoint){
-  const plotLines = [
-   {
-      value : maxPoint,
-      label : {
-        text : maxPoint
-      }
-   },
-   {
-      value : minPoint,
-      label : {
-        text : minPoint
-      }
-   }
- ];
-
- plotLines[0].value = maxPoint;
- plotLines[0].label.text = maxPoint;
- plotLines[1].value = minPoint;
- plotLines[1].label.text = minPoint;
-
- return {
-    opposite : true,
-    plotLines
-  }
-}
-
 const fnGetDatasetInfo = function(json){
+  const dataset = json.dataset;
   return  {
-     name : json.dataset.name,
-     description : json.dataset.description,
-     newest_available_date : json.dataset.newest_available_date,
-     oldest_available_date : json.dataset.oldest_available_date,
-     frequency : json.dataset.frequency
+     name : dataset.name,
+     description : dataset.description,
+     newest_available_date : dataset.newest_available_date,
+     oldest_available_date : dataset.oldest_available_date,
+     frequency : dataset.frequency
   };
 }
 
@@ -148,7 +66,6 @@ const fnGetValueMoving = function(seria){
     direction = Direction.EQUAL;
   }
 
-
   return {
     value : fnNumberFormat(nowValue),
     delta : fnNumberFormat(bDelta.abs().toString()),
@@ -157,53 +74,188 @@ const fnGetValueMoving = function(seria){
   };
 }
 
+const _fnConvertToUTC = function(point, result){
+   const arrDate = point[0].split('-');
+   result.dateUTC = Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
+   result.point = point;
+   return result;
+}
 
-QuandlAdapter.toConfig = function(json, yPointIndex){
-  let minPoint = Number.POSITIVE_INFINITY;
-  let maxPoint = Number.NEGATIVE_INFINITY;
-  let seria = json.dataset.data.map((point, index)=> {
-    let arrDate = point[0].split('-');
+const _fnCheckExtrems = function(result){
+  const {point, yPointIndex, maxPoint, minPoint} = result;
+  if (point[yPointIndex] && point[yPointIndex]>=maxPoint){
+    result.maxPoint = point[yPointIndex];
+  }
+  if (point[yPointIndex] && point[yPointIndex]<=minPoint){
+    result.minPoint = point[yPointIndex];
+  }
+  return result
+}
 
-    if (point[yPointIndex]>=maxPoint){
-      maxPoint = point[yPointIndex];
+const _fnAddToSeria = function(result){
+   const {seria, dateUTC, point, yPointIndex} = result;
+   seria.push([dateUTC, point[yPointIndex]]);
+
+   return result;
+}
+
+const _fnAddSplitRatio = function(result){
+  const {point, dateUTC, yPointIndex, dataSplitRatio} = result;
+  if (point[7] !== 1){
+    const x = dateUTC
+        , splitRatio = point[7]
+        , price = point[yPointIndex];
+
+    dataSplitRatio.push(Object.assign({}, markerSplitRatio, {x, splitRatio, price}));
+  }
+  return result;
+}
+
+const _fnAddExDividend = function(result){
+     const {point, dateUTC, yPointIndex, dataExDividend} = result;
+
+     if (point[6] !== 0){
+       const x = dateUTC
+           , exValue = point[6]
+           , price = point[yPointIndex];
+
+       if (fnCheckWithPrev(dataExDividend, x , 14)) {
+          dataExDividend.push(Object.assign({}, markerExDivident, {x, exValue, price}));
+       } else {
+          const marker = Object.assign(_.cloneDeep(markerExDivident), {x, exValue, price});
+          marker.dataLabels.y = 0;
+          dataExDividend.push(marker);
+       }
     }
-    if (point[yPointIndex]<=minPoint){
-      minPoint = point[yPointIndex];
-    }
 
-    return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
-  });
+    return result;
+}
 
-   const config = _.cloneDeep(ChartConfigs.baseAreaConfig);
+const _fnAddVolume = function(result){
+  const {point, dateUTC, dataVolume} = result;
+  dataVolume.push([dateUTC, point[5]])
+  return result;
+}
 
-   seria = _.sortBy(seria, '0');
+
+const _fnCreatePointFlow = function(json){
+  const fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
+      , column_names = json.dataset.column_names;
+  if (column_names[5] === "Volume"){
+    fnStep.push(_fnAddVolume);
+  }
+  if (column_names[6] === "Ex-Dividend"){
+    fnStep.push(_fnAddExDividend);
+  }
+  if (column_names[7] === "Split Ratio"){
+    fnStep.push(_fnAddSplitRatio);
+  }
+  return _.flow(fnStep);
+}
+
+const fnSeriesPipe = function(json, yPointIndex){
+  const fnPointsFlow = _fnCreatePointFlow(json)
+      , points = json.dataset.data
+      , minPoint = Number.POSITIVE_INFINITY
+      , maxPoint = Number.NEGATIVE_INFINITY
+      , seria = []
+      , dataExDividend = [], dataSplitRatio = [], dataVolume = []
+      , result = {
+          yPointIndex, minPoint, maxPoint, seria,
+          dataVolume, dataExDividend, dataSplitRatio
+        };
+
+  for(var i=0, max=points.length; i<max; i++){
+    fnPointsFlow(points[i], result);
+  }
+  result.seria = _.sortBy(result.seria, '0');
+
+  return result
+}
+
+
+const fnGetSeries = function(config, json, yPointIndex){
+   config.info = fnGetDatasetInfo(json);
+
+   const result = fnSeriesPipe(json, yPointIndex);
+
+   let {
+     seria, minPoint, maxPoint,
+     dataExDividend, dataSplitRatio, dataVolume
+   } = result;
 
    config.series[0].data = seria;
 
+   if (dataExDividend.length>0){
+     dataExDividend = _.sortBy(dataExDividend, 'x');
+     config.series.push({
+        type: 'scatter',
+        color: 'green',
+        tooltip : tooltipExDivident,
+        data : dataExDividend
+     });
+   }
+
+   if (dataSplitRatio.length>0){
+     dataSplitRatio = _.sortBy(dataSplitRatio, 'x');
+     config.series.push({
+        type: 'scatter',
+        color: ' #ED5813',
+        tooltip : tooltipSplitRatio,
+        data : dataSplitRatio
+     });
+   }
+
    config.valueMoving = fnGetValueMoving(seria);
 
-   //config.yAxis = fnGetYAxesConfig(maxPoint, minPoint);
+   let configVolume;
+   if (dataVolume.length>0){
+     dataVolume = _.sortBy(dataVolume, '0')
+     configVolume = _.cloneDeep(ChartConfigs.baseAreaConfig);
+     configVolume.series[0].data = dataVolume;
+     configVolume.series[0].zhValueText = "Volume";
+     //configVolume.series[0].type = "column";
+     configVolume.chart.height = 140;
+     configVolume.chart.spacingTop = 8,
+     configVolume.chart.spacingBottom = 10,
+     configVolume.yAxis.opposite = true;
+     configVolume.yAxis.plotLines = [];
 
-   config.yAxis.plotLines[0].value = maxPoint;
-   config.yAxis.plotLines[0].label.text = fnNumberFormat(maxPoint);
-   config.yAxis.plotLines[1].value = minPoint;
-   config.yAxis.plotLines[1].label.text = fnNumberFormat(minPoint);
+     configVolume.credits = {
+        position : {
+      	  align: 'right',
+	        x: -10,
+	        verticalAlign: 'bottom',
+	        y: -5
+        }
+     }
 
-   config.yAxis.opposite = true;
-
-   config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
-   config.info = fnGetDatasetInfo(json);
-
-   if (json.dataset.column_names[6] === "Ex-Dividend"){
-      addExDividend(json, config, yPointIndex);
    }
-   if (json.dataset.column_names[7] === "Split Ratio"){
-      addSplitRatio(json, config, yPointIndex);
-   }
+   config.zhVolumeConfig = configVolume;
 
-   return config;
-};
+   return {config, minPoint, maxPoint}
+}
 
+const fnConfigAxes = function(result){
+  const {config, minPoint, maxPoint} = result;
+
+  config.yAxis.plotLines[0].value = maxPoint;
+  config.yAxis.plotLines[0].label.text = fnNumberFormat(maxPoint);
+  config.yAxis.plotLines[1].value = minPoint;
+  config.yAxis.plotLines[1].label.text = fnNumberFormat(minPoint);
+  config.yAxis.opposite = true;
+
+  config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
+
+  return result
+}
+
+const fnQuandlFlow = _.flow(fnGetSeries, fnConfigAxes);
+
+QuandlAdapter.toConfig = function(json, yPointIndex){
+   const config = _.cloneDeep(ChartConfigs.baseAreaConfig);
+   return fnQuandlFlow(config, json, yPointIndex);
+}
 
 QuandlAdapter.toSeries = function(json, yPointIndex, chartId){
   let data = json.dataset.data.map((point, index)=> {
@@ -211,15 +263,14 @@ QuandlAdapter.toSeries = function(json, yPointIndex, chartId){
     return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
   });
   data = _.sortBy(data, '0');
-  const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12);
 
-  const configSeries = _.cloneDeep(configSeriesAdded);
+  const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
+      , configSeries = _.cloneDeep(configSeriesAdded);
+
   configSeries.zhValueText = valueText;
   configSeries.data = data;
 
   return configSeries;
-
 };
-
 
 export default QuandlAdapter;

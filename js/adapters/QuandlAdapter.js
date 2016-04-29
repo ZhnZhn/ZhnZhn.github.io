@@ -35,59 +35,6 @@ var fnCheckWithPrev = function fnCheckWithPrev(arr, checkedDate, predicate) {
   }
 };
 
-var addExDividend = function addExDividend(json, config, yPointIndex) {
-  var dataExDividend = [];
-  json.dataset.data.forEach(function (point) {
-    if (point[6] !== 0) {
-      var arrDate = point[0].split('-'),
-          x = Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]),
-          exValue = point[6],
-          price = point[yPointIndex];
-
-      if (fnCheckWithPrev(dataExDividend, x, 14)) {
-        dataExDividend.push(Object.assign({}, _ChartConfigs.markerExDivident, { x: x, exValue: exValue, price: price }));
-      } else {
-        var marker = Object.assign(_lodash2.default.cloneDeep(_ChartConfigs.markerExDivident), { x: x, exValue: exValue, price: price });
-        marker.dataLabels.y = 0;
-        dataExDividend.push(marker);
-      }
-    }
-  });
-
-  if (dataExDividend.length > 0) {
-    dataExDividend = _lodash2.default.sortBy(dataExDividend, 'x');
-    config.series.push({
-      type: 'scatter',
-      color: 'green',
-      tooltip: _ChartConfigs.tooltipExDivident,
-      data: dataExDividend
-    });
-  }
-};
-
-var addSplitRatio = function addSplitRatio(json, config, yPointIndex) {
-  var dataSplitRatio = [];
-  json.dataset.data.forEach(function (point) {
-    if (point[7] !== 1) {
-      var arrDate = point[0].split('-');
-      var x = Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]);
-      var splitRatio = point[7];
-      var price = point[yPointIndex];
-      dataSplitRatio.push(Object.assign({}, _ChartConfigs.markerSplitRatio, { x: x, splitRatio: splitRatio, price: price }));
-    }
-  });
-
-  if (dataSplitRatio.length > 0) {
-    dataSplitRatio = _lodash2.default.sortBy(dataSplitRatio, 'x');
-    config.series.push({
-      type: 'scatter',
-      color: '#ED5813',
-      tooltip: _ChartConfigs.tooltipSplitRatio,
-      data: dataSplitRatio
-    });
-  }
-};
-
 var fnGetXAxesConfig = function fnGetXAxesConfig() {
   return {
     opposite: true,
@@ -99,37 +46,14 @@ var fnGetXAxesConfig = function fnGetXAxesConfig() {
   };
 };
 
-var fnGetYAxesConfig = function fnGetYAxesConfig(maxPoint, minPoint) {
-  var plotLines = [{
-    value: maxPoint,
-    label: {
-      text: maxPoint
-    }
-  }, {
-    value: minPoint,
-    label: {
-      text: minPoint
-    }
-  }];
-
-  plotLines[0].value = maxPoint;
-  plotLines[0].label.text = maxPoint;
-  plotLines[1].value = minPoint;
-  plotLines[1].label.text = minPoint;
-
-  return {
-    opposite: true,
-    plotLines: plotLines
-  };
-};
-
 var fnGetDatasetInfo = function fnGetDatasetInfo(json) {
+  var dataset = json.dataset;
   return {
-    name: json.dataset.name,
-    description: json.dataset.description,
-    newest_available_date: json.dataset.newest_available_date,
-    oldest_available_date: json.dataset.oldest_available_date,
-    frequency: json.dataset.frequency
+    name: dataset.name,
+    description: dataset.description,
+    newest_available_date: dataset.newest_available_date,
+    oldest_available_date: dataset.oldest_available_date,
+    frequency: dataset.frequency
   };
 };
 
@@ -157,50 +81,209 @@ var fnGetValueMoving = function fnGetValueMoving(seria) {
   };
 };
 
-QuandlAdapter.toConfig = function (json, yPointIndex) {
-  var minPoint = Number.POSITIVE_INFINITY;
-  var maxPoint = Number.NEGATIVE_INFINITY;
-  var seria = json.dataset.data.map(function (point, index) {
-    var arrDate = point[0].split('-');
+var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
+  var arrDate = point[0].split('-');
+  result.dateUTC = Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]);
+  result.point = point;
+  return result;
+};
 
-    if (point[yPointIndex] >= maxPoint) {
-      maxPoint = point[yPointIndex];
+var _fnCheckExtrems = function _fnCheckExtrems(result) {
+  var point = result.point;
+  var yPointIndex = result.yPointIndex;
+  var maxPoint = result.maxPoint;
+  var minPoint = result.minPoint;
+
+  if (point[yPointIndex] && point[yPointIndex] >= maxPoint) {
+    result.maxPoint = point[yPointIndex];
+  }
+  if (point[yPointIndex] && point[yPointIndex] <= minPoint) {
+    result.minPoint = point[yPointIndex];
+  }
+  return result;
+};
+
+var _fnAddToSeria = function _fnAddToSeria(result) {
+  var seria = result.seria;
+  var dateUTC = result.dateUTC;
+  var point = result.point;
+  var yPointIndex = result.yPointIndex;
+
+  seria.push([dateUTC, point[yPointIndex]]);
+
+  return result;
+};
+
+var _fnAddSplitRatio = function _fnAddSplitRatio(result) {
+  var point = result.point;
+  var dateUTC = result.dateUTC;
+  var yPointIndex = result.yPointIndex;
+  var dataSplitRatio = result.dataSplitRatio;
+
+  if (point[7] !== 1) {
+    var x = dateUTC,
+        splitRatio = point[7],
+        price = point[yPointIndex];
+
+    dataSplitRatio.push(Object.assign({}, _ChartConfigs.markerSplitRatio, { x: x, splitRatio: splitRatio, price: price }));
+  }
+  return result;
+};
+
+var _fnAddExDividend = function _fnAddExDividend(result) {
+  var point = result.point;
+  var dateUTC = result.dateUTC;
+  var yPointIndex = result.yPointIndex;
+  var dataExDividend = result.dataExDividend;
+
+
+  if (point[6] !== 0) {
+    var x = dateUTC,
+        exValue = point[6],
+        price = point[yPointIndex];
+
+    if (fnCheckWithPrev(dataExDividend, x, 14)) {
+      dataExDividend.push(Object.assign({}, _ChartConfigs.markerExDivident, { x: x, exValue: exValue, price: price }));
+    } else {
+      var marker = Object.assign(_lodash2.default.cloneDeep(_ChartConfigs.markerExDivident), { x: x, exValue: exValue, price: price });
+      marker.dataLabels.y = 0;
+      dataExDividend.push(marker);
     }
-    if (point[yPointIndex] <= minPoint) {
-      minPoint = point[yPointIndex];
-    }
+  }
 
-    return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
-  });
+  return result;
+};
 
-  var config = _lodash2.default.cloneDeep(_ChartConfigs2.default.baseAreaConfig);
+var _fnAddVolume = function _fnAddVolume(result) {
+  var point = result.point;
+  var dateUTC = result.dateUTC;
+  var dataVolume = result.dataVolume;
 
-  seria = _lodash2.default.sortBy(seria, '0');
+  dataVolume.push([dateUTC, point[5]]);
+  return result;
+};
+
+var _fnCreatePointFlow = function _fnCreatePointFlow(json) {
+  var fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
+      column_names = json.dataset.column_names;
+  if (column_names[5] === "Volume") {
+    fnStep.push(_fnAddVolume);
+  }
+  if (column_names[6] === "Ex-Dividend") {
+    fnStep.push(_fnAddExDividend);
+  }
+  if (column_names[7] === "Split Ratio") {
+    fnStep.push(_fnAddSplitRatio);
+  }
+  return _lodash2.default.flow(fnStep);
+};
+
+var fnSeriesPipe = function fnSeriesPipe(json, yPointIndex) {
+  var fnPointsFlow = _fnCreatePointFlow(json),
+      points = json.dataset.data,
+      minPoint = Number.POSITIVE_INFINITY,
+      maxPoint = Number.NEGATIVE_INFINITY,
+      seria = [],
+      dataExDividend = [],
+      dataSplitRatio = [],
+      dataVolume = [],
+      result = {
+    yPointIndex: yPointIndex, minPoint: minPoint, maxPoint: maxPoint, seria: seria,
+    dataVolume: dataVolume, dataExDividend: dataExDividend, dataSplitRatio: dataSplitRatio
+  };
+
+  for (var i = 0, max = points.length; i < max; i++) {
+    fnPointsFlow(points[i], result);
+  }
+  result.seria = _lodash2.default.sortBy(result.seria, '0');
+
+  return result;
+};
+
+var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
+  config.info = fnGetDatasetInfo(json);
+
+  var result = fnSeriesPipe(json, yPointIndex);
+
+  var seria = result.seria;
+  var minPoint = result.minPoint;
+  var maxPoint = result.maxPoint;
+  var dataExDividend = result.dataExDividend;
+  var dataSplitRatio = result.dataSplitRatio;
+  var dataVolume = result.dataVolume;
+
 
   config.series[0].data = seria;
 
+  if (dataExDividend.length > 0) {
+    dataExDividend = _lodash2.default.sortBy(dataExDividend, 'x');
+    config.series.push({
+      type: 'scatter',
+      color: 'green',
+      tooltip: _ChartConfigs.tooltipExDivident,
+      data: dataExDividend
+    });
+  }
+
+  if (dataSplitRatio.length > 0) {
+    dataSplitRatio = _lodash2.default.sortBy(dataSplitRatio, 'x');
+    config.series.push({
+      type: 'scatter',
+      color: ' #ED5813',
+      tooltip: _ChartConfigs.tooltipSplitRatio,
+      data: dataSplitRatio
+    });
+  }
+
   config.valueMoving = fnGetValueMoving(seria);
 
-  //config.yAxis = fnGetYAxesConfig(maxPoint, minPoint);
+  var configVolume = void 0;
+  if (dataVolume.length > 0) {
+    dataVolume = _lodash2.default.sortBy(dataVolume, '0');
+    configVolume = _lodash2.default.cloneDeep(_ChartConfigs2.default.baseAreaConfig);
+    configVolume.series[0].data = dataVolume;
+    configVolume.series[0].zhValueText = "Volume";
+    //configVolume.series[0].type = "column";
+    configVolume.chart.height = 140;
+    configVolume.chart.spacingTop = 8, configVolume.chart.spacingBottom = 10, configVolume.yAxis.opposite = true;
+    configVolume.yAxis.plotLines = [];
+
+    configVolume.credits = {
+      position: {
+        align: 'right',
+        x: -10,
+        verticalAlign: 'bottom',
+        y: -5
+      }
+    };
+  }
+  config.zhVolumeConfig = configVolume;
+
+  return { config: config, minPoint: minPoint, maxPoint: maxPoint };
+};
+
+var fnConfigAxes = function fnConfigAxes(result) {
+  var config = result.config;
+  var minPoint = result.minPoint;
+  var maxPoint = result.maxPoint;
+
 
   config.yAxis.plotLines[0].value = maxPoint;
   config.yAxis.plotLines[0].label.text = (0, _ChartConfigs.fnNumberFormat)(maxPoint);
   config.yAxis.plotLines[1].value = minPoint;
   config.yAxis.plotLines[1].label.text = (0, _ChartConfigs.fnNumberFormat)(minPoint);
-
   config.yAxis.opposite = true;
 
   config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
-  config.info = fnGetDatasetInfo(json);
 
-  if (json.dataset.column_names[6] === "Ex-Dividend") {
-    addExDividend(json, config, yPointIndex);
-  }
-  if (json.dataset.column_names[7] === "Split Ratio") {
-    addSplitRatio(json, config, yPointIndex);
-  }
+  return result;
+};
 
-  return config;
+var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
+
+QuandlAdapter.toConfig = function (json, yPointIndex) {
+  var config = _lodash2.default.cloneDeep(_ChartConfigs2.default.baseAreaConfig);
+  return fnQuandlFlow(config, json, yPointIndex);
 };
 
 QuandlAdapter.toSeries = function (json, yPointIndex, chartId) {
@@ -209,9 +292,10 @@ QuandlAdapter.toSeries = function (json, yPointIndex, chartId) {
     return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
   });
   data = _lodash2.default.sortBy(data, '0');
-  var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12);
 
-  var configSeries = _lodash2.default.cloneDeep(_ChartConfigs.configSeriesAdded);
+  var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
+      configSeries = _lodash2.default.cloneDeep(_ChartConfigs.configSeriesAdded);
+
   configSeries.zhValueText = valueText;
   configSeries.data = data;
 

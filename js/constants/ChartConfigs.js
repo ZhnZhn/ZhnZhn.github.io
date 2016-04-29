@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.configSeriesAdded = exports.markerSplitRatio = exports.tooltipSplitRatio = exports.tooltipExDivident = exports.markerExDividentUp = exports.markerExDivident = exports.fnTooltipPointFormatter = exports.fnNumberFormat = undefined;
+exports.configSeriesAdded = exports.markerSplitRatio = exports.tooltipSplitRatio = exports.tooltipExDivident = exports.markerExDivident = exports.fnTooltipPointFormatter = exports.fnNumberFormat = undefined;
 
 var _highcharts = require('highcharts');
 
@@ -15,6 +15,7 @@ var ChartConfigs = {};
 
 ChartConfigs.theme = {
   credits: {
+    enabled: true,
     position: {
       align: 'left',
       x: 150,
@@ -139,7 +140,8 @@ ChartConfigs.baseAreaConfig = {
     count: 0
   },
   chart: {
-    zoomType: 'x'
+    zoomType: 'x',
+    marginRight: 45
   },
   title: {
     text: ''
@@ -238,41 +240,6 @@ var markerExDivident = exports.markerExDivident = {
     crop: false,
     overflow: 'none',
     y: 32,
-    formatter: function formatter() {
-      return this.point.exValue;
-    }
-  }
-};
-
-var markerExDividentUp = exports.markerExDividentUp = {
-  y: 0,
-  exValue: 0.5,
-  marker: {
-    symbol: 'circle',
-    fillColor: 'rgba(0, 128, 0, 0.9)',
-    radius: 6,
-    states: {
-      hover: {
-        enable: true,
-        fillColor: '#4D4D4D',
-        lineColor: 'green',
-        lineWidth: 2,
-        radius: 6
-      }
-    }
-  },
-  dataLabels: {
-    enabled: true,
-    inside: true,
-    style: {
-      color: 'green',
-      fontSize: '11px',
-      fontWeight: 'bold',
-      textShadow: 'none'
-    },
-    crop: false,
-    overflow: 'none',
-    y: 0,
     formatter: function formatter() {
       return this.point.exValue;
     }

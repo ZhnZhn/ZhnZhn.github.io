@@ -56,16 +56,29 @@ var ZhHighchart = _react2.default.createClass({
   render: function render() {
     var _props = this.props;
     var isShow = _props.isShow;
+    var isToolBar = _props.isToolBar;
+    var isVolume = _props.isVolume;
     var onClickInfo = _props.onClickInfo;
+    var onClickVolume = _props.onClickVolume;
 
     var _styleRootDiv = isShow ? styles.rootDivShow : styles.rootDivHide;
+
+    var _buttonInfo = isToolBar ? _react2.default.createElement(_ButtonTab2.default, {
+      caption: 'Info',
+      onClick: onClickInfo
+    }) : undefined;
+
+    var _buttonVolume = isVolume ? _react2.default.createElement(_ButtonTab2.default, {
+      style: { left: '350px' },
+      caption: 'Volume',
+      onClick: onClickVolume
+    }) : undefined;
+
     return _react2.default.createElement(
       'div',
       { style: _styleRootDiv },
-      _react2.default.createElement(_ButtonTab2.default, {
-        caption: 'Info',
-        onClick: onClickInfo
-      }),
+      _buttonInfo,
+      _buttonVolume,
       _react2.default.createElement('div', { ref: 'chart' })
     );
   },

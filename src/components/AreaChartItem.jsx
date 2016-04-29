@@ -61,7 +61,8 @@ const AreaChartItem = React.createClass({
     return {
       isOpen: true,
       isShowChart : true,
-      isShowInfo : false
+      isShowInfo : false,
+      isShowVolume : false
     }
   },
 
@@ -74,6 +75,10 @@ const AreaChartItem = React.createClass({
     this.setState({isShowChart: false, isShowInfo: true});
   },
 
+  _handlerClickVolume(){
+    this.setState({isShowVolume: !this.state.isShowVolume});
+  },
+
   _handlerClickChart(){
     this.setState({isShowChart: true, isShowInfo: false});
   },
@@ -84,10 +89,26 @@ const AreaChartItem = React.createClass({
 
   render(){
     const {caption, config, onSetActive, onCloseItem} = this.props;
-    const {isOpen, isShowChart, isShowInfo} = this.state;
+    const {isOpen, isShowChart, isShowInfo, isShowVolume} = this.state;
     const _styleShow = isOpen ? styles.show : styles.hide;
     const _classShow = isOpen ? 'show-popup' : null;
     const _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
+
+    const _isVolumeButton = (config.zhVolumeConfig) ? true : false;
+
+    const _styleVolumeShow = isShowVolume ? styles.show : styles.hide;
+    const _classVolumeShow = isShowVolume ? 'show-popup' : null;
+
+    const _volumeChart = (config.zhVolumeConfig) ? (
+      <div className={_classVolumeShow} style={_styleVolumeShow}>
+        <ZhHighchart
+            ref="chartVolume"
+            isShow={true}
+            isToolBar={false}
+            config={config.zhVolumeConfig}
+        />
+      </div>
+    ) : undefined;
 
     return (
       <div style={styles.rootDiv}>
@@ -113,14 +134,18 @@ const AreaChartItem = React.createClass({
           <ZhHighchart
               ref="chart"
               isShow={isShowChart}
+              isToolBar={true}
+              isVolume={_isVolumeButton}
               config={config}
               onClickInfo={this._handlerClickInfo}
+              onClickVolume={this._handlerClickVolume}
           />
           <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
               onClickChart={this._handlerClickChart}
           />
+          {_volumeChart}
         </div>
       </div>
     )

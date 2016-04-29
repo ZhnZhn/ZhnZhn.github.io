@@ -20,10 +20,10 @@ const styles = {
 
 const ButtonTab = React.createClass({
   render(){
-    const {caption, onClick} = this.props;
+    const {caption, style, onClick} = this.props;
     return (
       <div
-        style={styles.div}
+        style={Object.assign({}, styles.div, style)}
         onClick={onClick}
       >
          {caption}

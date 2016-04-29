@@ -59,7 +59,7 @@ const loadToChartComp = function(dataColumn, chartType, browserType, option, onC
       .then((response)=>response.json())
       .then((json)=>{
         if (!json.quandl_error){
-          let config = QuandlAdapter.toConfig(json, dataColumn);
+          const {config, configVolume} = QuandlAdapter.toConfig(json, dataColumn);
           config.stockTicket = chartId;
           config.chart.zhId = chartId;
           onCompleted(chartType, browserType, config);
