@@ -3,17 +3,13 @@ import React from 'react';
 import SvgCheckBox from './zhn/SvgCheckBox';
 import ValueMovingBadge from './zhn/ValueMovingBadge';
 import SvgClose from './SvgClose';
+import ButtonTab from './zhn/ButtonTab';
+import ShowHide from './zhn/ShowHide';
 import ZhHighchart from './ZhHighchart';
 
 import PanelDataInfo from './zhn/PanelDataInfo';
 
 const styles = {
-  show : {
-    display: 'block'
-  },
-  hide : {
-    display : 'none'
-  },
   rootDiv : {
     marginBottom: '10px'
   },
@@ -62,8 +58,21 @@ const AreaChartItem = React.createClass({
       isOpen: true,
       isShowChart : true,
       isShowInfo : false,
-      isShowVolume : false
+
+      isInitVolume : false, isShowVolume : false,
+      isATHVolume : false, isShowATH : false,
+      isInitHighLow : false, isShowHighLow : false,
+
+      chartsDescription : []
     }
+  },
+
+  componentDidMount(){
+  },
+
+  _handlerLoadedMetricChart(metricChart){
+     const chart = this.refs.chart.getChart();
+     chart.options.zhDetailCharts.push(metricChart);
   },
 
   _handlerToggleOpen(){
@@ -76,8 +85,42 @@ const AreaChartItem = React.createClass({
   },
 
   _handlerClickVolume(){
-    this.setState({isShowVolume: !this.state.isShowVolume});
+    const {isInitVolume, isShowVolume} = this.state;
+    if (isInitVolume){
+      this.setState({isShowVolume: !this.state.isShowVolume});
+    } else {
+      this.state.chartsDescription.push({type: 'Volume'});
+      this.setState({
+        chartsDescription : this.state.chartsDescription,
+        isShowVolume: true, isInitVolume: true
+      });
+    }
   },
+  _handlerClickATH(){
+    const {isInitATH, isShowATH} = this.state;
+    if (isInitATH){
+      this.setState({isShowATH: !isShowATH});
+    } else {
+      this.state.chartsDescription.push({type: 'ATH'});
+      this.setState({
+        chartsDescription : this.state.chartsDescription,
+        isShowATH: true, isInitATH: true
+      });
+    }
+  },
+  _handlerClickHighLow(){
+    const {isInitHighLow, isShowHighLow} = this.state;
+    if (isInitHighLow){
+      this.setState({isShowHighLow: !isShowHighLow});
+    } else {
+      this.state.chartsDescription.push({type: 'HighLow'});
+      this.setState({
+        chartsDescription : this.state.chartsDescription,
+        isShowHighLow: true, isInitHighLow: true
+      });
+    }
+  },
+
 
   _handlerClickChart(){
     this.setState({isShowChart: true, isShowInfo: false});
@@ -87,28 +130,86 @@ const AreaChartItem = React.createClass({
     this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
   },
 
+  _createChartToolBar(config){
+    const _btInfo = (config.info) ? (
+      <ButtonTab
+        caption={'Info'}
+        isShow={false}
+        style= {{color: 'gray'}}
+        onClick={this._handlerClickInfo}
+      />
+    ) : undefined;
+
+    const _btVolume = (config.zhVolumeConfig) ? (
+      <ButtonTab
+        style={{left: '350px'}}
+        caption={'Volume'}
+        isShow={false}
+        onClick={this._handlerClickVolume}
+      />
+    ) : undefined;
+
+    const _btATH = (config.zhATHConfig) ? (
+      <ButtonTab
+        style={{left: '425px'}}
+        caption={'ATH'}
+        isShow={false}
+        onClick={this._handlerClickATH}
+      />
+    ) : undefined;
+
+    const _btHL = (config.zhHighLowConfig) ? (
+      <ButtonTab
+        style={{left: '480px'}}
+        caption={'HL'}
+        isShow={false}
+        onClick={this._handlerClickHighLow}
+      />
+    ) : undefined;
+
+    return (
+      <div>
+         {_btInfo}
+         {_btVolume}
+         {_btATH}
+         {_btHL}
+      </div>
+    );
+  },
+
+  _renderMetricCharts(){
+    const {chartsDescription} = this.state;
+
+    const _metricCharts = chartsDescription.map((descr, index) => {
+      const {type} = descr
+          , _isShow = this.state['isShow' + type]
+          , _ref = 'chart' + type
+          , _config = this.props.config['zh' + type + 'Config']
+
+      return (
+        <ShowHide isShow={_isShow} key={index}>
+          <ZhHighchart
+              ref={_ref}
+              isShow={true}
+              config={_config}
+              onLoaded={this._handlerLoadedMetricChart}
+          />
+        </ShowHide>
+      )
+    })
+
+    return (
+      <div>
+        {_metricCharts}
+      </div>
+    )
+  },
+
+
   render(){
     const {caption, config, onSetActive, onCloseItem} = this.props;
-    const {isOpen, isShowChart, isShowInfo, isShowVolume} = this.state;
-    const _styleShow = isOpen ? styles.show : styles.hide;
-    const _classShow = isOpen ? 'show-popup' : null;
+    const {isOpen, isShowChart, isShowInfo} = this.state;
     const _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
-
-    const _isVolumeButton = (config.zhVolumeConfig) ? true : false;
-
-    const _styleVolumeShow = isShowVolume ? styles.show : styles.hide;
-    const _classVolumeShow = isShowVolume ? 'show-popup' : null;
-
-    const _volumeChart = (config.zhVolumeConfig) ? (
-      <div className={_classVolumeShow} style={_styleVolumeShow}>
-        <ZhHighchart
-            ref="chartVolume"
-            isShow={true}
-            isToolBar={false}
-            config={config.zhVolumeConfig}
-        />
-      </div>
-    ) : undefined;
 
     return (
       <div style={styles.rootDiv}>
@@ -130,23 +231,20 @@ const AreaChartItem = React.createClass({
           />
           <SvgClose onClose={onCloseItem} />
         </div>
-        <div className={_classShow} style={_styleShow}>
-          <ZhHighchart
+        <ShowHide isShow={isOpen}>
+           <ZhHighchart
               ref="chart"
               isShow={isShowChart}
-              isToolBar={true}
-              isVolume={_isVolumeButton}
+              toolBar={this._createChartToolBar(config)}
               config={config}
-              onClickInfo={this._handlerClickInfo}
-              onClickVolume={this._handlerClickVolume}
-          />
-          <PanelDataInfo
+           />
+           <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
               onClickChart={this._handlerClickChart}
-          />
-          {_volumeChart}
-        </div>
+           />
+          {this._renderMetricCharts()}
+        </ShowHide>
       </div>
     )
   }

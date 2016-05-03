@@ -135,13 +135,98 @@ export const fnTooltipPointFormatter = function(obj){
          '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + fnNumberFormat(point.y) + '</span><br/>';
 }
 
+export const fnVolumePointFormatter = function(obj){
+    var point = this
 
-ChartConfigs.baseAreaConfig = {
+      //, id = this.series.chart.userOptions.chart.zhId
+      , id = point.y
+      , date = Highcharts.dateFormat('%A, %b %d, %Y', point.x);
+
+    setTimeout( function(){
+          document.getElementById(id)
+                  .addEventListener('click', function(){
+                       point.series.chart.myTooltip.hide();
+           })
+    }, 1);
+
+  return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">'+ date +'</span>'+
+         '<span id="'+ id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Volume: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + fnNumberFormat(point.y) + '</span><br/>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Open: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.open + '</span>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;"> Close: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.close + '</span><br/>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Low: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.low + '</span>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;"> High: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.high + '</span><br/>';
+}
+
+export const fnATHPointFormatter = function(obj){
+    var point = this
+      , id = point.y
+      , date = Highcharts.dateFormat('%A, %b %d, %Y', point.x);
+
+    setTimeout( function(){
+          document.getElementById(id)
+                  .addEventListener('click', function(){
+                       point.series.chart.myTooltip.hide();
+           })
+    }, 1);
+
+  return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">'+ date +'</span>'+
+         '<span id="'+ id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">ATH: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.y + '%</span><br/>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Close: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.close + '</span>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;"> Open: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.open + '</span><br/>';
+}
+
+ChartConfigs.pointFormatterHighLow = function(obj){
+    var point = this
+      , id = point.y
+      , date = Highcharts.dateFormat('%A, %b %d, %Y', point.x);
+
+    setTimeout( function(){
+          document.getElementById(id)
+                  .addEventListener('click', function(){
+                       point.series.chart.myTooltip.hide();
+           })
+    }, 1);
+
+  return '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">'+ date +'</span>'+
+         '<span id="'+ id + '" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Day High: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.dayHigh + '</span></br>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Day Low: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.dayLow + '</span></br>'+
+         '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Close: </span>'+
+         '<span style="font-weight: bold; color:rgba(194,149,23,1);">' + point.close + '</span>';
+}
+
+
+ChartConfigs.fBaseAreaConfig = function(){
+  return {
+
   zhSeries : {
     count : 0
   },
+  zhDetailCharts : [],
+
   chart : {
-     zoomType : 'x',
+     zoomType : 'xy',
+     resetZoomButton: {
+                position: {
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 0,
+                    y: 5
+                },
+                relativeTo: 'chart'
+     },
      marginRight : 45
   },
   title: {
@@ -172,7 +257,6 @@ ChartConfigs.baseAreaConfig = {
        label: {
          text: 'max',
          verticalAlign: 'top',
-         //y: 15,
          style: {
            color: 'green',
            fontWeight: 'bold',
@@ -212,7 +296,33 @@ ChartConfigs.baseAreaConfig = {
       }
    }
   }]
+
+ }
 };
+
+ChartConfigs.legendVolume = {
+   enabled : true,
+   align: 'left',
+   verticalAlign: 'top',
+   x: 110,
+   y: -2,
+   floating: true,
+
+   symbolHeight: 12,
+   symbolWidth: 12,
+   symbolRadius: 6,
+
+   itemStyle : {
+     color : 'rgba(164, 135, 212, 1)'
+   },
+   itemHoverStyle : {
+     color : '#2F7ED8'
+   },
+   itemHiddenStyle : {
+     color : 'gray'
+   }
+}
+
 
 export const markerExDivident = {
   y: 0,
@@ -336,5 +446,47 @@ export const configSeriesAdded = {
     }
 }
 
+ChartConfigs.creditsMetric = {
+   position : {
+       align: 'right',
+       x: -10,
+       verticalAlign: 'bottom',
+       y: -5
+  }
+}
+
+ChartConfigs.fTitleMetric = function(text){
+ return {
+   text : text,
+   style : {
+     color : 'rgba(164, 135, 212, 1)',
+     fontSize : '14px',
+     fontWeight : 'bold',
+   },
+   floating : true,
+   align: 'left',
+   verticalAlign: 'top',
+   x: 8,
+   y: 15,
+  }
+};
+
+
+ChartConfigs.zoomMetricCharts = function(event){
+   const zhDetailCharts = this.chart.options.zhDetailCharts;
+   if (event.userMin){
+      zhDetailCharts.forEach((chart)=>{
+        chart.xAxis[0].setExtremes(
+          event.userMin, event.userMax, true, true
+        );
+      })
+   } else {
+      zhDetailCharts.forEach((chart) => {
+        chart.xAxis[0].setExtremes(
+          event.min, event.max, true, true
+        );
+      })
+   }
+}
 
 export default ChartConfigs;

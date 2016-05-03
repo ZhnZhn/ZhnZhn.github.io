@@ -6,6 +6,8 @@ import {Direction} from '../constants/Type';
 import ChartConfigs from '../constants/ChartConfigs';
 import {
         fnNumberFormat,
+        fnVolumePointFormatter,
+        fnATHPointFormatter,
         markerExDivident,
         tooltipExDivident,
         markerSplitRatio,
@@ -39,7 +41,7 @@ const fnGetXAxesConfig = function(){
   }
 }
 
-const fnGetDatasetInfo = function(json){
+const _fnGetDatasetInfo = function(json){
   const dataset = json.dataset;
   return  {
      name : dataset.name,
@@ -50,12 +52,13 @@ const fnGetDatasetInfo = function(json){
   };
 }
 
-const fnGetValueMoving = function(seria){
+const _fnGetValueMoving = function(seria){
+
   const len = seria.length
-      , nowValue = seria[len-1][1]
-      , bWasValue = Big(seria[len-2][1])
+      , nowValue = (len>0) ? seria[len-1][1] : '0.0'
+      , bWasValue = (len>1) ? Big(seria[len-2][1]) : Big(0.0)
       , bDelta = bWasValue.minus(nowValue)
-      , bPercent = bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2);
+      , bPercent = (len>1) ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : Big(0.0);
 
   let direction;
   if (bDelta.gt(0.0)){
@@ -132,15 +135,98 @@ const _fnAddExDividend = function(result){
 }
 
 const _fnAddVolume = function(result){
-  const {point, dateUTC, dataVolume} = result;
-  dataVolume.push([dateUTC, point[5]])
+  const {point, dateUTC, dataVolume, dataVolumeColumn} = result;
+  dataVolume.push([dateUTC, point[5]]);
+  if (point[4]>point[1]){
+    dataVolumeColumn.push({
+      x : dateUTC, y : point[5],
+      open : point[1], close : point[4],
+      low: point[3], high: point[2],
+      color: '#80c040'
+    });
+  } else if (point[4]<point[1]){
+    dataVolumeColumn.push({
+      x : dateUTC, y : point[5],
+      open : point[1], close : point[4],
+      low: point[3], high: point[2],
+      color: '#F44336'
+    });
+  } else {
+    dataVolumeColumn.push({
+      x : dateUTC, y : point[5],
+      open : point[1], close : point[4],
+      low: point[3], high: point[2],
+      color: 'gray'});
+  }
   return result;
 }
 
+const _fnAddATH = function(result){
+  const {dateUTC, point, seria, dataATH} = result;
+  const len = seria.length;
+  if (len>1){
+    const prevPoint = seria[len-2];
+    const bDelta = (point[1]) ? Big(prevPoint[1]).minus(point[1]) : Big('0.0');
+    const bPercent = bDelta.times(100).div(prevPoint[1]).abs().toFixed(2);
+    let color;
+    if (bDelta.gt(0.0)){
+      color = '#F44336';
+    }
+    else if (!bDelta.gte(0.0)){
+         color = '#80c040';
+    } else {
+         color = (point[1]) ? 'gray' : 'white';
+    }
 
-const _fnCreatePointFlow = function(json){
+    dataATH.push({
+      x : dateUTC,
+      y : parseFloat(bPercent),
+      close : prevPoint[1],
+      open : point[1],
+      color : color
+    })
+  }
+
+  return result;
+}
+
+const _fnAddHighLow = function(result){
+  const {dateUTC, yPointIndex, point, dataHighLow} = result;
+
+  const closeValue = point[yPointIndex]
+      , bHigh = (point[2]) ? Big(point[2]).minus(closeValue) : Big('0.0')
+      , bLow = (point[3]) ? Big(point[3]).minus(closeValue) : Big('0.0')
+      , high = (point[2]) ? point[2] : 'Uknown'
+      , low = (point[3]) ? point[3] : 'Uknown'
+
+  dataHighLow.push({
+    x : dateUTC,
+    high : parseFloat(bHigh),
+    low : parseFloat(bLow),
+    dayHigh : high,
+    dayLow : low,
+    close : closeValue
+    //color : (point[2] && point[3]) ? undefined : 'white'
+  });
+
+  return result
+}
+
+
+const _fnCreatePointFlow = function(json, yPointIndex){
+
   const fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
-      , column_names = json.dataset.column_names;
+      , column_names = json.dataset.column_names
+      , result = {
+         yPointIndex : yPointIndex,
+         minPoint : Number.POSITIVE_INFINITY,
+         maxPoint : Number.NEGATIVE_INFINITY,
+         seria : [],
+         dataVolume : [], dataVolumeColumn : [],
+         dataExDividend : [], dataSplitRatio : [],
+         dataATH : [], dataHighLow : []
+      };
+
   if (column_names[5] === "Volume"){
     fnStep.push(_fnAddVolume);
   }
@@ -150,88 +236,186 @@ const _fnCreatePointFlow = function(json){
   if (column_names[7] === "Split Ratio"){
     fnStep.push(_fnAddSplitRatio);
   }
-  return _.flow(fnStep);
+  if (column_names[1] === "Open"){
+    fnStep.push(_fnAddATH);
+  }
+  if (column_names[2] === "High" && column_names[3] === "Low"){
+    fnStep.push(_fnAddHighLow);
+  }
+  return {
+    fnPointsFlow : _.flow(fnStep),
+    result : result
+  };
 }
 
-const fnSeriesPipe = function(json, yPointIndex){
-  const fnPointsFlow = _fnCreatePointFlow(json)
-      , points = json.dataset.data
-      , minPoint = Number.POSITIVE_INFINITY
-      , maxPoint = Number.NEGATIVE_INFINITY
-      , seria = []
-      , dataExDividend = [], dataSplitRatio = [], dataVolume = []
-      , result = {
-          yPointIndex, minPoint, maxPoint, seria,
-          dataVolume, dataExDividend, dataSplitRatio
-        };
+const _fnSeriesPipe = function(json, yPointIndex){
+  const {fnPointsFlow, result} = _fnCreatePointFlow(json, yPointIndex)
+      , points = _.sortBy(json.dataset.data, '0');
 
   for(var i=0, max=points.length; i<max; i++){
     fnPointsFlow(points[i], result);
   }
-  result.seria = _.sortBy(result.seria, '0');
 
   return result
 }
 
 
+const _fnCreateIndicatorConfig = function(){
+
+  const config = ChartConfigs.fBaseAreaConfig();
+
+  config.chart.height = 140;
+  config.chart.spacingTop = 8;
+  config.chart.spacingBottom = 10;
+  config.chart.zoomType = undefined;
+
+  config.yAxis.opposite = true;
+  config.yAxis.plotLines = [];
+
+  return config;
+}
+
+const _fnCreateConfigATH = function(data){
+  if (data.length>0){
+    const config = _fnCreateIndicatorConfig();
+    config.title = ChartConfigs.fTitleMetric('ATH Chart');
+    config.credits = ChartConfigs.creditsMetric;
+
+    config.series[0].zhValueText = "ATH";
+    config.series[0].data = data;
+    config.series[0].name = "ATH";
+    config.series[0].visible = true;
+    config.series[0].type = "column";
+    config.series[0].borderWidth = 0;
+    config.series[0].pointPlacement = 'on';
+    config.series[0].minPointLength = 4;
+    config.series[0].groupPadding = 0.1;
+
+    config.series[0].tooltip = {
+      pointFormatter : fnATHPointFormatter,
+      headerFormat : ''
+    }
+    return config;
+  } else {
+    return undefined;
+  }
+}
+
+const _fnCreateConfigVolume = function(data, dataColumn){
+  if (data.length>0){
+    const config = ChartConfigs.fBaseAreaConfig();
+    config.title = ChartConfigs.fTitleMetric('Volume Chart');
+    config.legend = ChartConfigs.legendVolume;
+    config.credits = ChartConfigs.creditsMetric;
+
+    config.chart.height = 140;
+    config.chart.spacingTop = 8;
+    config.chart.spacingBottom = 10;
+    config.chart.zoomType = undefined;
+
+    config.yAxis.opposite = true;
+    config.yAxis.plotLines = [];
+
+    config.series[0].data = data;
+    config.series[0].zhValueText = "Volume";
+    config.series[0].name = "Spline";
+
+    config.series.push({
+      type : "column",
+      name : "Column",
+      data : dataColumn,
+      zhValueText : "Volume",
+      visible : false,
+      borderWidth : 0,
+      pointPlacement : 'on',
+      groupPadding : 0.1,
+      states : {
+        hover : {
+          enabled : true,
+          brightness: 0.07
+        }
+      },
+      tooltip : {
+        pointFormatter : fnVolumePointFormatter,
+        headerFormat : ''
+      }
+    });
+
+    return config;
+  } else {
+    return undefined;
+  }
+};
+
+const _fnCreateConfigHighLow = function(data){
+  if (data.length>0){
+    const config = _fnCreateIndicatorConfig();
+    config.title = ChartConfigs.fTitleMetric('HighLow Chart');
+    config.credits = ChartConfigs.creditsMetric;
+
+    config.series[0].zhValueText = "HL";
+    config.series[0].data = data;
+    config.series[0].name = "HL";
+    config.series[0].visible = true;
+    config.series[0].type = "arearange";
+
+    config.series[0].tooltip = {
+      pointFormatter : ChartConfigs.pointFormatterHighLow,
+      headerFormat : ''
+    }
+
+    return config;
+  } else {
+    return undefined;
+  }
+}
+
+const _fnAddSeriesExDivident = function(config, data){
+  if (data.length>0){
+    config.series.push({
+       type: 'scatter',
+       color: 'green',
+       tooltip : tooltipExDivident,
+       data : data
+    });
+  }
+}
+
+const _fnAddSeriesSplitRatio = function(config, data){
+  if (data.length>0){
+    config.series.push({
+       type: 'scatter',
+       color: ' #ED5813',
+       tooltip : tooltipSplitRatio,
+       data : data
+    });
+  }
+}
+
 const fnGetSeries = function(config, json, yPointIndex){
-   config.info = fnGetDatasetInfo(json);
 
-   const result = fnSeriesPipe(json, yPointIndex);
+   config.info = _fnGetDatasetInfo(json);
 
-   let {
+   const {
      seria, minPoint, maxPoint,
-     dataExDividend, dataSplitRatio, dataVolume
-   } = result;
+     dataExDividend, dataSplitRatio,
+     dataVolume, dataVolumeColumn,
+     dataATH, dataHighLow
+   } = _fnSeriesPipe(json, yPointIndex);
 
+   config.valueMoving = _fnGetValueMoving(seria);
    config.series[0].data = seria;
 
-   if (dataExDividend.length>0){
-     dataExDividend = _.sortBy(dataExDividend, 'x');
-     config.series.push({
-        type: 'scatter',
-        color: 'green',
-        tooltip : tooltipExDivident,
-        data : dataExDividend
-     });
+   config.xAxis.events = {
+     afterSetExtremes : ChartConfigs.zoomMetricCharts
    }
 
-   if (dataSplitRatio.length>0){
-     dataSplitRatio = _.sortBy(dataSplitRatio, 'x');
-     config.series.push({
-        type: 'scatter',
-        color: ' #ED5813',
-        tooltip : tooltipSplitRatio,
-        data : dataSplitRatio
-     });
-   }
+   _fnAddSeriesExDivident(config, dataExDividend);
+   _fnAddSeriesSplitRatio(config, dataSplitRatio)
 
-   config.valueMoving = fnGetValueMoving(seria);
-
-   let configVolume;
-   if (dataVolume.length>0){
-     dataVolume = _.sortBy(dataVolume, '0')
-     configVolume = _.cloneDeep(ChartConfigs.baseAreaConfig);
-     configVolume.series[0].data = dataVolume;
-     configVolume.series[0].zhValueText = "Volume";
-     //configVolume.series[0].type = "column";
-     configVolume.chart.height = 140;
-     configVolume.chart.spacingTop = 8,
-     configVolume.chart.spacingBottom = 10,
-     configVolume.yAxis.opposite = true;
-     configVolume.yAxis.plotLines = [];
-
-     configVolume.credits = {
-        position : {
-      	  align: 'right',
-	        x: -10,
-	        verticalAlign: 'bottom',
-	        y: -5
-        }
-     }
-
-   }
-   config.zhVolumeConfig = configVolume;
+   config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn);
+   config.zhATHConfig = _fnCreateConfigATH(dataATH);
+   config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow);
 
    return {config, minPoint, maxPoint}
 }
@@ -253,7 +437,7 @@ const fnConfigAxes = function(result){
 const fnQuandlFlow = _.flow(fnGetSeries, fnConfigAxes);
 
 QuandlAdapter.toConfig = function(json, yPointIndex){
-   const config = _.cloneDeep(ChartConfigs.baseAreaConfig);
+   const config = ChartConfigs.fBaseAreaConfig();
    return fnQuandlFlow(config, json, yPointIndex);
 }
 

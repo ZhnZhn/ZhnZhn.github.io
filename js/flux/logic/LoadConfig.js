@@ -76,10 +76,12 @@ var loadToChartComp = function loadToChartComp(dataColumn, chartType, browserTyp
       return response.json();
     }).then(function (json) {
       if (!json.quandl_error) {
+        //const {config, configVolume} = QuandlAdapter.toConfig(json, dataColumn);
+
         var _QuandlAdapter$toConf = _QuandlAdapter2.default.toConfig(json, dataColumn);
 
         var config = _QuandlAdapter$toConf.config;
-        var configVolume = _QuandlAdapter$toConf.configVolume;
+
 
         config.stockTicket = chartId;
         config.chart.zhId = chartId;

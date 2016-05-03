@@ -20,6 +20,9 @@ const ZhHighchart = React.createClass({
 
   componentDidMount(){
     this.renderChart(this.props.config);
+    if (this.props.onLoaded){
+      this.props.onLoaded(this.chart);
+    }
   },
 
   componentWillUnmout(){
@@ -44,37 +47,18 @@ const ZhHighchart = React.createClass({
 
 
   render() {
-    const {
-       isShow, isToolBar, isVolume,
-       onClickInfo, onClickVolume
-     } = this.props;
+    const { isShow, toolBar } = this.props;
     const _styleRootDiv = isShow ?
                  styles.rootDivShow : styles.rootDivHide;
-
-    const _buttonInfo = isToolBar ? (
-      <ButtonTab
-        caption={'Info'}
-        onClick={onClickInfo}
-      />
-    ) : undefined;
-
-    const _buttonVolume = isVolume ? (
-      <ButtonTab
-        style={{left: '350px'}}
-        caption={'Volume'}
-        onClick={onClickVolume}
-      />
-    ) : undefined;
-
      return (
        <div style={_styleRootDiv}>
-          {_buttonInfo}
-          {_buttonVolume}
+          {toolBar}
           <div ref="chart">
           </div>
         </div>
      )
   },
+
 
   getChart(){
     if(!this.chart){

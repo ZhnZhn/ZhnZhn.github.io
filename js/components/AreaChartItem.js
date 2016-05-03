@@ -20,6 +20,14 @@ var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
+var _ButtonTab = require('./zhn/ButtonTab');
+
+var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
+
+var _ShowHide = require('./zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
 var _ZhHighchart = require('./ZhHighchart');
 
 var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
@@ -31,12 +39,6 @@ var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
-  show: {
-    display: 'block'
-  },
-  hide: {
-    display: 'none'
-  },
   rootDiv: {
     marginBottom: '10px'
   },
@@ -86,8 +88,18 @@ var AreaChartItem = _react2.default.createClass({
       isOpen: true,
       isShowChart: true,
       isShowInfo: false,
-      isShowVolume: false
+
+      isInitVolume: false, isShowVolume: false,
+      isATHVolume: false, isShowATH: false,
+      isInitHighLow: false, isShowHighLow: false,
+
+      chartsDescription: []
     };
+  },
+  componentDidMount: function componentDidMount() {},
+  _handlerLoadedMetricChart: function _handlerLoadedMetricChart(metricChart) {
+    var chart = this.refs.chart.getChart();
+    chart.options.zhDetailCharts.push(metricChart);
   },
   _handlerToggleOpen: function _handlerToggleOpen() {
     this.state.isOpen = !this.state.isOpen;
@@ -97,7 +109,49 @@ var AreaChartItem = _react2.default.createClass({
     this.setState({ isShowChart: false, isShowInfo: true });
   },
   _handlerClickVolume: function _handlerClickVolume() {
-    this.setState({ isShowVolume: !this.state.isShowVolume });
+    var _state = this.state;
+    var isInitVolume = _state.isInitVolume;
+    var isShowVolume = _state.isShowVolume;
+
+    if (isInitVolume) {
+      this.setState({ isShowVolume: !this.state.isShowVolume });
+    } else {
+      this.state.chartsDescription.push({ type: 'Volume' });
+      this.setState({
+        chartsDescription: this.state.chartsDescription,
+        isShowVolume: true, isInitVolume: true
+      });
+    }
+  },
+  _handlerClickATH: function _handlerClickATH() {
+    var _state2 = this.state;
+    var isInitATH = _state2.isInitATH;
+    var isShowATH = _state2.isShowATH;
+
+    if (isInitATH) {
+      this.setState({ isShowATH: !isShowATH });
+    } else {
+      this.state.chartsDescription.push({ type: 'ATH' });
+      this.setState({
+        chartsDescription: this.state.chartsDescription,
+        isShowATH: true, isInitATH: true
+      });
+    }
+  },
+  _handlerClickHighLow: function _handlerClickHighLow() {
+    var _state3 = this.state;
+    var isInitHighLow = _state3.isInitHighLow;
+    var isShowHighLow = _state3.isShowHighLow;
+
+    if (isInitHighLow) {
+      this.setState({ isShowHighLow: !isShowHighLow });
+    } else {
+      this.state.chartsDescription.push({ type: 'HighLow' });
+      this.setState({
+        chartsDescription: this.state.chartsDescription,
+        isShowHighLow: true, isInitHighLow: true
+      });
+    }
   },
   _handlerClickChart: function _handlerClickChart() {
     this.setState({ isShowChart: true, isShowInfo: false });
@@ -105,37 +159,86 @@ var AreaChartItem = _react2.default.createClass({
   _handlerCheckBox: function _handlerCheckBox(isCheck, checkBox) {
     this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
   },
+  _createChartToolBar: function _createChartToolBar(config) {
+    var _btInfo = config.info ? _react2.default.createElement(_ButtonTab2.default, {
+      caption: 'Info',
+      isShow: false,
+      style: { color: 'gray' },
+      onClick: this._handlerClickInfo
+    }) : undefined;
+
+    var _btVolume = config.zhVolumeConfig ? _react2.default.createElement(_ButtonTab2.default, {
+      style: { left: '350px' },
+      caption: 'Volume',
+      isShow: false,
+      onClick: this._handlerClickVolume
+    }) : undefined;
+
+    var _btATH = config.zhATHConfig ? _react2.default.createElement(_ButtonTab2.default, {
+      style: { left: '425px' },
+      caption: 'ATH',
+      isShow: false,
+      onClick: this._handlerClickATH
+    }) : undefined;
+
+    var _btHL = config.zhHighLowConfig ? _react2.default.createElement(_ButtonTab2.default, {
+      style: { left: '480px' },
+      caption: 'HL',
+      isShow: false,
+      onClick: this._handlerClickHighLow
+    }) : undefined;
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      _btInfo,
+      _btVolume,
+      _btATH,
+      _btHL
+    );
+  },
+  _renderMetricCharts: function _renderMetricCharts() {
+    var _this = this;
+
+    var chartsDescription = this.state.chartsDescription;
+
+
+    var _metricCharts = chartsDescription.map(function (descr, index) {
+      var type = descr.type;
+      var _isShow = _this.state['isShow' + type];
+      var _ref = 'chart' + type;
+      var _config = _this.props.config['zh' + type + 'Config'];
+
+      return _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: _isShow, key: index },
+        _react2.default.createElement(_ZhHighchart2.default, {
+          ref: _ref,
+          isShow: true,
+          config: _config,
+          onLoaded: _this._handlerLoadedMetricChart
+        })
+      );
+    });
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      _metricCharts
+    );
+  },
   render: function render() {
     var _props = this.props;
     var caption = _props.caption;
     var config = _props.config;
     var onSetActive = _props.onSetActive;
     var onCloseItem = _props.onCloseItem;
-    var _state = this.state;
-    var isOpen = _state.isOpen;
-    var isShowChart = _state.isShowChart;
-    var isShowInfo = _state.isShowInfo;
-    var isShowVolume = _state.isShowVolume;
+    var _state4 = this.state;
+    var isOpen = _state4.isOpen;
+    var isShowChart = _state4.isShowChart;
+    var isShowInfo = _state4.isShowInfo;
 
-    var _styleShow = isOpen ? styles.show : styles.hide;
-    var _classShow = isOpen ? 'show-popup' : null;
     var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
-
-    var _isVolumeButton = config.zhVolumeConfig ? true : false;
-
-    var _styleVolumeShow = isShowVolume ? styles.show : styles.hide;
-    var _classVolumeShow = isShowVolume ? 'show-popup' : null;
-
-    var _volumeChart = config.zhVolumeConfig ? _react2.default.createElement(
-      'div',
-      { className: _classVolumeShow, style: _styleVolumeShow },
-      _react2.default.createElement(_ZhHighchart2.default, {
-        ref: 'chartVolume',
-        isShow: true,
-        isToolBar: false,
-        config: config.zhVolumeConfig
-      })
-    ) : undefined;
 
     return _react2.default.createElement(
       'div',
@@ -163,23 +266,20 @@ var AreaChartItem = _react2.default.createClass({
         _react2.default.createElement(_SvgClose2.default, { onClose: onCloseItem })
       ),
       _react2.default.createElement(
-        'div',
-        { className: _classShow, style: _styleShow },
+        _ShowHide2.default,
+        { isShow: isOpen },
         _react2.default.createElement(_ZhHighchart2.default, {
           ref: 'chart',
           isShow: isShowChart,
-          isToolBar: true,
-          isVolume: _isVolumeButton,
-          config: config,
-          onClickInfo: this._handlerClickInfo,
-          onClickVolume: this._handlerClickVolume
+          toolBar: this._createChartToolBar(config),
+          config: config
         }),
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,
           info: config.info,
           onClickChart: this._handlerClickChart
         }),
-        _volumeChart
+        this._renderMetricCharts()
       )
     );
   }

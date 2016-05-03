@@ -56,6 +56,8 @@ var PanelDataInfo = _react2.default.createClass({
       { style: styleShow },
       _react2.default.createElement(_ButtonTab2.default, {
         caption: 'Chart',
+        isShow: false,
+        style: { color: 'gray' },
         onClick: onClickChart
       }),
       _react2.default.createElement(_InfoPart2.default, {

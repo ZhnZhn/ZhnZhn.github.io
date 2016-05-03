@@ -46,7 +46,7 @@ var fnGetXAxesConfig = function fnGetXAxesConfig() {
   };
 };
 
-var fnGetDatasetInfo = function fnGetDatasetInfo(json) {
+var _fnGetDatasetInfo = function _fnGetDatasetInfo(json) {
   var dataset = json.dataset;
   return {
     name: dataset.name,
@@ -57,12 +57,13 @@ var fnGetDatasetInfo = function fnGetDatasetInfo(json) {
   };
 };
 
-var fnGetValueMoving = function fnGetValueMoving(seria) {
+var _fnGetValueMoving = function _fnGetValueMoving(seria) {
+
   var len = seria.length,
-      nowValue = seria[len - 1][1],
-      bWasValue = (0, _big2.default)(seria[len - 2][1]),
+      nowValue = len > 0 ? seria[len - 1][1] : '0.0',
+      bWasValue = len > 1 ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0),
       bDelta = bWasValue.minus(nowValue),
-      bPercent = bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2);
+      bPercent = len > 1 ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : (0, _big2.default)(0.0);
 
   var direction = void 0;
   if (bDelta.gt(0.0)) {
@@ -158,14 +159,105 @@ var _fnAddVolume = function _fnAddVolume(result) {
   var point = result.point;
   var dateUTC = result.dateUTC;
   var dataVolume = result.dataVolume;
+  var dataVolumeColumn = result.dataVolumeColumn;
 
   dataVolume.push([dateUTC, point[5]]);
+  if (point[4] > point[1]) {
+    dataVolumeColumn.push({
+      x: dateUTC, y: point[5],
+      open: point[1], close: point[4],
+      low: point[3], high: point[2],
+      color: '#80c040'
+    });
+  } else if (point[4] < point[1]) {
+    dataVolumeColumn.push({
+      x: dateUTC, y: point[5],
+      open: point[1], close: point[4],
+      low: point[3], high: point[2],
+      color: '#F44336'
+    });
+  } else {
+    dataVolumeColumn.push({
+      x: dateUTC, y: point[5],
+      open: point[1], close: point[4],
+      low: point[3], high: point[2],
+      color: 'gray' });
+  }
   return result;
 };
 
-var _fnCreatePointFlow = function _fnCreatePointFlow(json) {
+var _fnAddATH = function _fnAddATH(result) {
+  var dateUTC = result.dateUTC;
+  var point = result.point;
+  var seria = result.seria;
+  var dataATH = result.dataATH;
+
+  var len = seria.length;
+  if (len > 1) {
+    var prevPoint = seria[len - 2];
+    var bDelta = point[1] ? (0, _big2.default)(prevPoint[1]).minus(point[1]) : (0, _big2.default)('0.0');
+    var bPercent = bDelta.times(100).div(prevPoint[1]).abs().toFixed(2);
+    var color = void 0;
+    if (bDelta.gt(0.0)) {
+      color = '#F44336';
+    } else if (!bDelta.gte(0.0)) {
+      color = '#80c040';
+    } else {
+      color = point[1] ? 'gray' : 'white';
+    }
+
+    dataATH.push({
+      x: dateUTC,
+      y: parseFloat(bPercent),
+      close: prevPoint[1],
+      open: point[1],
+      color: color
+    });
+  }
+
+  return result;
+};
+
+var _fnAddHighLow = function _fnAddHighLow(result) {
+  var dateUTC = result.dateUTC;
+  var yPointIndex = result.yPointIndex;
+  var point = result.point;
+  var dataHighLow = result.dataHighLow;
+
+
+  var closeValue = point[yPointIndex],
+      bHigh = point[2] ? (0, _big2.default)(point[2]).minus(closeValue) : (0, _big2.default)('0.0'),
+      bLow = point[3] ? (0, _big2.default)(point[3]).minus(closeValue) : (0, _big2.default)('0.0'),
+      high = point[2] ? point[2] : 'Uknown',
+      low = point[3] ? point[3] : 'Uknown';
+
+  dataHighLow.push({
+    x: dateUTC,
+    high: parseFloat(bHigh),
+    low: parseFloat(bLow),
+    dayHigh: high,
+    dayLow: low,
+    close: closeValue
+    //color : (point[2] && point[3]) ? undefined : 'white'
+  });
+
+  return result;
+};
+
+var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
+
   var fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
-      column_names = json.dataset.column_names;
+      column_names = json.dataset.column_names,
+      result = {
+    yPointIndex: yPointIndex,
+    minPoint: Number.POSITIVE_INFINITY,
+    maxPoint: Number.NEGATIVE_INFINITY,
+    seria: [],
+    dataVolume: [], dataVolumeColumn: [],
+    dataExDividend: [], dataSplitRatio: [],
+    dataATH: [], dataHighLow: []
+  };
+
   if (column_names[5] === "Volume") {
     fnStep.push(_fnAddVolume);
   }
@@ -175,89 +267,194 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json) {
   if (column_names[7] === "Split Ratio") {
     fnStep.push(_fnAddSplitRatio);
   }
-  return _lodash2.default.flow(fnStep);
+  if (column_names[1] === "Open") {
+    fnStep.push(_fnAddATH);
+  }
+  if (column_names[2] === "High" && column_names[3] === "Low") {
+    fnStep.push(_fnAddHighLow);
+  }
+  return {
+    fnPointsFlow: _lodash2.default.flow(fnStep),
+    result: result
+  };
 };
 
-var fnSeriesPipe = function fnSeriesPipe(json, yPointIndex) {
-  var fnPointsFlow = _fnCreatePointFlow(json),
-      points = json.dataset.data,
-      minPoint = Number.POSITIVE_INFINITY,
-      maxPoint = Number.NEGATIVE_INFINITY,
-      seria = [],
-      dataExDividend = [],
-      dataSplitRatio = [],
-      dataVolume = [],
-      result = {
-    yPointIndex: yPointIndex, minPoint: minPoint, maxPoint: maxPoint, seria: seria,
-    dataVolume: dataVolume, dataExDividend: dataExDividend, dataSplitRatio: dataSplitRatio
-  };
+var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex) {
+  var _fnCreatePointFlow2 = _fnCreatePointFlow(json, yPointIndex);
+
+  var fnPointsFlow = _fnCreatePointFlow2.fnPointsFlow;
+  var result = _fnCreatePointFlow2.result;
+  var points = _lodash2.default.sortBy(json.dataset.data, '0');
 
   for (var i = 0, max = points.length; i < max; i++) {
     fnPointsFlow(points[i], result);
   }
-  result.seria = _lodash2.default.sortBy(result.seria, '0');
 
   return result;
 };
 
-var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
-  config.info = fnGetDatasetInfo(json);
+var _fnCreateIndicatorConfig = function _fnCreateIndicatorConfig() {
 
-  var result = fnSeriesPipe(json, yPointIndex);
+  var config = _ChartConfigs2.default.fBaseAreaConfig();
 
-  var seria = result.seria;
-  var minPoint = result.minPoint;
-  var maxPoint = result.maxPoint;
-  var dataExDividend = result.dataExDividend;
-  var dataSplitRatio = result.dataSplitRatio;
-  var dataVolume = result.dataVolume;
+  config.chart.height = 140;
+  config.chart.spacingTop = 8;
+  config.chart.spacingBottom = 10;
+  config.chart.zoomType = undefined;
 
+  config.yAxis.opposite = true;
+  config.yAxis.plotLines = [];
 
-  config.series[0].data = seria;
+  return config;
+};
 
-  if (dataExDividend.length > 0) {
-    dataExDividend = _lodash2.default.sortBy(dataExDividend, 'x');
+var _fnCreateConfigATH = function _fnCreateConfigATH(data) {
+  if (data.length > 0) {
+    var config = _fnCreateIndicatorConfig();
+    config.title = _ChartConfigs2.default.fTitleMetric('ATH Chart');
+    config.credits = _ChartConfigs2.default.creditsMetric;
+
+    config.series[0].zhValueText = "ATH";
+    config.series[0].data = data;
+    config.series[0].name = "ATH";
+    config.series[0].visible = true;
+    config.series[0].type = "column";
+    config.series[0].borderWidth = 0;
+    config.series[0].pointPlacement = 'on';
+    config.series[0].minPointLength = 4;
+    config.series[0].groupPadding = 0.1;
+
+    config.series[0].tooltip = {
+      pointFormatter: _ChartConfigs.fnATHPointFormatter,
+      headerFormat: ''
+    };
+    return config;
+  } else {
+    return undefined;
+  }
+};
+
+var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
+  if (data.length > 0) {
+    var config = _ChartConfigs2.default.fBaseAreaConfig();
+    config.title = _ChartConfigs2.default.fTitleMetric('Volume Chart');
+    config.legend = _ChartConfigs2.default.legendVolume;
+    config.credits = _ChartConfigs2.default.creditsMetric;
+
+    config.chart.height = 140;
+    config.chart.spacingTop = 8;
+    config.chart.spacingBottom = 10;
+    config.chart.zoomType = undefined;
+
+    config.yAxis.opposite = true;
+    config.yAxis.plotLines = [];
+
+    config.series[0].data = data;
+    config.series[0].zhValueText = "Volume";
+    config.series[0].name = "Spline";
+
+    config.series.push({
+      type: "column",
+      name: "Column",
+      data: dataColumn,
+      zhValueText: "Volume",
+      visible: false,
+      borderWidth: 0,
+      pointPlacement: 'on',
+      groupPadding: 0.1,
+      states: {
+        hover: {
+          enabled: true,
+          brightness: 0.07
+        }
+      },
+      tooltip: {
+        pointFormatter: _ChartConfigs.fnVolumePointFormatter,
+        headerFormat: ''
+      }
+    });
+
+    return config;
+  } else {
+    return undefined;
+  }
+};
+
+var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data) {
+  if (data.length > 0) {
+    var config = _fnCreateIndicatorConfig();
+    config.title = _ChartConfigs2.default.fTitleMetric('HighLow Chart');
+    config.credits = _ChartConfigs2.default.creditsMetric;
+
+    config.series[0].zhValueText = "HL";
+    config.series[0].data = data;
+    config.series[0].name = "HL";
+    config.series[0].visible = true;
+    config.series[0].type = "arearange";
+
+    config.series[0].tooltip = {
+      pointFormatter: _ChartConfigs2.default.pointFormatterHighLow,
+      headerFormat: ''
+    };
+
+    return config;
+  } else {
+    return undefined;
+  }
+};
+
+var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data) {
+  if (data.length > 0) {
     config.series.push({
       type: 'scatter',
       color: 'green',
       tooltip: _ChartConfigs.tooltipExDivident,
-      data: dataExDividend
+      data: data
     });
   }
+};
 
-  if (dataSplitRatio.length > 0) {
-    dataSplitRatio = _lodash2.default.sortBy(dataSplitRatio, 'x');
+var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data) {
+  if (data.length > 0) {
     config.series.push({
       type: 'scatter',
       color: ' #ED5813',
       tooltip: _ChartConfigs.tooltipSplitRatio,
-      data: dataSplitRatio
+      data: data
     });
   }
+};
 
-  config.valueMoving = fnGetValueMoving(seria);
+var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
 
-  var configVolume = void 0;
-  if (dataVolume.length > 0) {
-    dataVolume = _lodash2.default.sortBy(dataVolume, '0');
-    configVolume = _lodash2.default.cloneDeep(_ChartConfigs2.default.baseAreaConfig);
-    configVolume.series[0].data = dataVolume;
-    configVolume.series[0].zhValueText = "Volume";
-    //configVolume.series[0].type = "column";
-    configVolume.chart.height = 140;
-    configVolume.chart.spacingTop = 8, configVolume.chart.spacingBottom = 10, configVolume.yAxis.opposite = true;
-    configVolume.yAxis.plotLines = [];
+  config.info = _fnGetDatasetInfo(json);
 
-    configVolume.credits = {
-      position: {
-        align: 'right',
-        x: -10,
-        verticalAlign: 'bottom',
-        y: -5
-      }
-    };
-  }
-  config.zhVolumeConfig = configVolume;
+  var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex);
+
+  var seria = _fnSeriesPipe2.seria;
+  var minPoint = _fnSeriesPipe2.minPoint;
+  var maxPoint = _fnSeriesPipe2.maxPoint;
+  var dataExDividend = _fnSeriesPipe2.dataExDividend;
+  var dataSplitRatio = _fnSeriesPipe2.dataSplitRatio;
+  var dataVolume = _fnSeriesPipe2.dataVolume;
+  var dataVolumeColumn = _fnSeriesPipe2.dataVolumeColumn;
+  var dataATH = _fnSeriesPipe2.dataATH;
+  var dataHighLow = _fnSeriesPipe2.dataHighLow;
+
+
+  config.valueMoving = _fnGetValueMoving(seria);
+  config.series[0].data = seria;
+
+  config.xAxis.events = {
+    afterSetExtremes: _ChartConfigs2.default.zoomMetricCharts
+  };
+
+  _fnAddSeriesExDivident(config, dataExDividend);
+  _fnAddSeriesSplitRatio(config, dataSplitRatio);
+
+  config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn);
+  config.zhATHConfig = _fnCreateConfigATH(dataATH);
+  config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow);
 
   return { config: config, minPoint: minPoint, maxPoint: maxPoint };
 };
@@ -282,7 +479,7 @@ var fnConfigAxes = function fnConfigAxes(result) {
 var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
 
 QuandlAdapter.toConfig = function (json, yPointIndex) {
-  var config = _lodash2.default.cloneDeep(_ChartConfigs2.default.baseAreaConfig);
+  var config = _ChartConfigs2.default.fBaseAreaConfig();
   return fnQuandlFlow(config, json, yPointIndex);
 };
 

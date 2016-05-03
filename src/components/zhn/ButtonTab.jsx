@@ -19,12 +19,24 @@ const styles = {
 }
 
 const ButtonTab = React.createClass({
+  getInitialState(){
+    return {
+      isShow : this.props.isShow
+    }
+  },
+
+  _handlerClick(){
+    this.props.onClick();
+    this.setState({isShow: !this.state.isShow});    
+  },
+
   render(){
-    const {caption, style, onClick} = this.props;
+    const {caption, style} = this.props;
+    const _divStyle = (this.state.isShow) ? undefined : {color: 'gray'};
     return (
       <div
-        style={Object.assign({}, styles.div, style)}
-        onClick={onClick}
+        style={Object.assign({}, styles.div, style, _divStyle)}
+        onClick={this._handlerClick}
       >
          {caption}
       </div>

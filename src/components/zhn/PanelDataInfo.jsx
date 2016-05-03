@@ -37,6 +37,8 @@ const PanelDataInfo = React.createClass({
        <div style={styleShow}>
          <ButtonTab
            caption='Chart'
+           isShow={false}
+           style={{color: 'gray'}}
            onClick={onClickChart}
          />
          <InfoPart

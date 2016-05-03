@@ -30,17 +30,26 @@ var styles = {
 
 var ButtonTab = _react2.default.createClass({
   displayName: 'ButtonTab',
+  getInitialState: function getInitialState() {
+    return {
+      isShow: this.props.isShow
+    };
+  },
+  _handlerClick: function _handlerClick() {
+    this.props.onClick();
+    this.setState({ isShow: !this.state.isShow });
+  },
   render: function render() {
     var _props = this.props;
     var caption = _props.caption;
     var style = _props.style;
-    var onClick = _props.onClick;
 
+    var _divStyle = this.state.isShow ? undefined : { color: 'gray' };
     return _react2.default.createElement(
       'div',
       {
-        style: Object.assign({}, styles.div, style),
-        onClick: onClick
+        style: Object.assign({}, styles.div, style, _divStyle),
+        onClick: this._handlerClick
       },
       caption
     );
