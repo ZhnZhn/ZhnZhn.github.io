@@ -11,9 +11,10 @@ import {
         markerExDivident,
         tooltipExDivident,
         markerSplitRatio,
-        tooltipSplitRatio,
-        configSeriesAdded
+        tooltipSplitRatio
       } from '../constants/ChartConfigs';
+
+import {fnAddSeriesSma, fnRemoveSeries} from './IndicatorSma';
 
 const QuandlAdapter = {};
 
@@ -125,7 +126,7 @@ const _fnAddExDividend = function(result){
        if (fnCheckWithPrev(dataExDividend, x , 14)) {
           dataExDividend.push(Object.assign({}, markerExDivident, {x, exValue, price}));
        } else {
-          const marker = Object.assign(_.cloneDeep(markerExDivident), {x, exValue, price});
+          const marker = Object.assign(ChartConfigs.fMarkerExDividend(), {x, exValue, price});
           marker.dataLabels.y = 0;
           dataExDividend.push(marker);
        }
@@ -403,6 +404,9 @@ const fnGetSeries = function(config, json, yPointIndex){
      dataATH, dataHighLow
    } = _fnSeriesPipe(json, yPointIndex);
 
+   config.zhFnAddSeriesSma = fnAddSeriesSma;
+   config.zhFnRemoveSeries = fnRemoveSeries;
+
    config.valueMoving = _fnGetValueMoving(seria);
    config.series[0].data = seria;
 
@@ -449,7 +453,7 @@ QuandlAdapter.toSeries = function(json, yPointIndex, chartId){
   data = _.sortBy(data, '0');
 
   const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
-      , configSeries = _.cloneDeep(configSeriesAdded);
+      , configSeries = ChartConfigs.fSeries();
 
   configSeries.zhValueText = valueText;
   configSeries.data = data;

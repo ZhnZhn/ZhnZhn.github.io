@@ -47,3 +47,12 @@
   border: 2px solid green;
   outline: none;
 }
+
+.button-circle{
+  color : gray;
+  border : 2px solid gray;
+}
+.button-circle:hover{  
+  color : rgba(164, 135, 212, 1);
+  border : 2px solid rgba(164, 135, 212, 1);
+}

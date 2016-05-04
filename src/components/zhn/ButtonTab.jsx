@@ -25,9 +25,15 @@ const ButtonTab = React.createClass({
     }
   },
 
+  componentWillReceiveProps(nextProps){
+    if ( (nextProps.isShow !== this.state.isShow) ){
+      this.setState({isShow : nextProps.isShow})
+    }
+  },
+
   _handlerClick(){
     this.props.onClick();
-    this.setState({isShow: !this.state.isShow});    
+    this.setState({isShow: !this.state.isShow});
   },
 
   render(){

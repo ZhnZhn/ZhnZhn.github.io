@@ -222,8 +222,8 @@ ChartConfigs.fBaseAreaConfig = function(){
                 position: {
                     align: 'left',
                     verticalAlign: 'top',
-                    x: 0,
-                    y: 5
+                    x: 100,
+                    y: 48
                 },
                 relativeTo: 'chart'
      },
@@ -324,6 +324,7 @@ ChartConfigs.legendVolume = {
 }
 
 
+
 export const markerExDivident = {
   y: 0,
   exValue: 0.5,
@@ -355,6 +356,43 @@ export const markerExDivident = {
     y: 32,
     formatter : function(){
       return this.point.exValue;
+    }
+  }
+};
+             
+ChartConfigs.fMarkerExDividend = function(){
+  return {
+    y: 0,
+    exValue: 0.5,
+    marker : {
+      symbol: 'circle',
+      fillColor: 'rgba(0, 128, 0, 0.9)',
+      radius: 6,
+      states: {
+        hover: {
+          enable: true,
+          fillColor: '#4D4D4D',
+          lineColor: 'green',
+          lineWidth: 2,
+          radius: 6
+        }
+      }
+    },
+    dataLabels : {
+      enabled: true,
+      inside: true,
+      style : {
+        color: 'green',
+        fontSize: '11px',
+        fontWeight: 'bold',
+        textShadow: 'none'
+      },
+      crop: false,
+      overflow: 'none',
+      y: 32,
+      formatter : function(){
+        return this.point.exValue;
+      }
     }
   }
 };
@@ -437,6 +475,7 @@ export const markerSplitRatio = {
   }
 };
 
+
 export const configSeriesAdded = {
     type: 'spline',
     lineWidth : 1,
@@ -444,6 +483,19 @@ export const configSeriesAdded = {
       pointFormatter : fnTooltipPointFormatter,
       headerFormat : ''
     }
+}
+
+
+
+ChartConfigs.fSeries = function(){
+  return {
+      type: 'spline',
+      lineWidth : 1,
+      tooltip : {
+        pointFormatter : fnTooltipPointFormatter,
+        headerFormat : ''
+      }
+  }
 }
 
 ChartConfigs.creditsMetric = {

@@ -32,6 +32,10 @@ var _ZhHighchart = require('./ZhHighchart');
 
 var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
 
+var _PanelIndicator = require('./zhn/PanelIndicator');
+
+var _PanelIndicator2 = _interopRequireDefault(_PanelIndicator);
+
 var _PanelDataInfo = require('./zhn/PanelDataInfo');
 
 var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
@@ -40,7 +44,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = {
   rootDiv: {
-    marginBottom: '10px'
+    marginBottom: '10px',
+    position: 'relative'
   },
   headerDiv: {
     backgroundColor: '#232F3B',
@@ -87,6 +92,7 @@ var AreaChartItem = _react2.default.createClass({
     return {
       isOpen: true,
       isShowChart: true,
+      isShowIndicator: false,
       isShowInfo: false,
 
       isInitVolume: false, isShowVolume: false,
@@ -96,14 +102,22 @@ var AreaChartItem = _react2.default.createClass({
       chartsDescription: []
     };
   },
-  componentDidMount: function componentDidMount() {},
+  componentDidMount: function componentDidMount() {
+    this.mainChart = this.refs.chart.getChart();
+  },
   _handlerLoadedMetricChart: function _handlerLoadedMetricChart(metricChart) {
     var chart = this.refs.chart.getChart();
     chart.options.zhDetailCharts.push(metricChart);
   },
   _handlerToggleOpen: function _handlerToggleOpen() {
-    this.state.isOpen = !this.state.isOpen;
-    this.setState(this.state);
+    if (this.state.isOpen) {
+      this.setState({ isOpen: false, isShowIndicator: false });
+    } else {
+      this.setState({ isOpen: true });
+    }
+  },
+  _handlerClickIndicator: function _handlerClickIndicator() {
+    this.setState({ isShowIndicator: !this.state.isShowIndicator });
   },
   _handlerClickInfo: function _handlerClickInfo() {
     this.setState({ isShowChart: false, isShowInfo: true });
@@ -159,7 +173,20 @@ var AreaChartItem = _react2.default.createClass({
   _handlerCheckBox: function _handlerCheckBox(isCheck, checkBox) {
     this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
   },
+  _handlerAddSma: function _handlerAddSma(period) {
+    return this.mainChart.options.zhFnAddSeriesSma(this.mainChart, period);
+  },
+  _handleRemoveSeries: function _handleRemoveSeries(id) {
+    return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);
+  },
   _createChartToolBar: function _createChartToolBar(config) {
+    var _btIndicator = _react2.default.createElement(_ButtonTab2.default, {
+      caption: 'Indicator',
+      isShow: this.state.isShowIndicator,
+      style: { left: '10px' },
+      onClick: this._handlerClickIndicator
+    });
+
     var _btInfo = config.info ? _react2.default.createElement(_ButtonTab2.default, {
       caption: 'Info',
       isShow: false,
@@ -191,6 +218,7 @@ var AreaChartItem = _react2.default.createClass({
     return _react2.default.createElement(
       'div',
       null,
+      _btIndicator,
       _btInfo,
       _btVolume,
       _btATH,
@@ -237,6 +265,7 @@ var AreaChartItem = _react2.default.createClass({
     var isOpen = _state4.isOpen;
     var isShowChart = _state4.isShowChart;
     var isShowInfo = _state4.isShowInfo;
+    var isShowIndicator = _state4.isShowIndicator;
 
     var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
@@ -273,6 +302,11 @@ var AreaChartItem = _react2.default.createClass({
           isShow: isShowChart,
           toolBar: this._createChartToolBar(config),
           config: config
+        }),
+        _react2.default.createElement(_PanelIndicator2.default, {
+          isShow: isShowIndicator,
+          onAddSma: this._handlerAddSma,
+          onRemoveSeries: this._handleRemoveSeries
         }),
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,

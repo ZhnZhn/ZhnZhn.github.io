@@ -35,6 +35,11 @@ var ButtonTab = _react2.default.createClass({
       isShow: this.props.isShow
     };
   },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (nextProps.isShow !== this.state.isShow) {
+      this.setState({ isShow: nextProps.isShow });
+    }
+  },
   _handlerClick: function _handlerClick() {
     this.props.onClick();
     this.setState({ isShow: !this.state.isShow });

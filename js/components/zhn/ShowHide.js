@@ -24,13 +24,14 @@ var ShowHide = _react2.default.createClass({
   render: function render() {
     var _props = this.props;
     var isShow = _props.isShow;
+    var style = _props.style;
     var children = _props.children;
     var _styleShow = isShow ? styles.show : styles.hide;
     var _classShow = isShow ? 'show-popup' : null;
 
     return _react2.default.createElement(
       'div',
-      { className: _classShow, style: _styleShow },
+      { className: _classShow, style: Object.assign({}, style, _styleShow) },
       children
     );
   }

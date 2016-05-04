@@ -18,6 +18,8 @@ var _ChartConfigs = require('../constants/ChartConfigs');
 
 var _ChartConfigs2 = _interopRequireDefault(_ChartConfigs);
 
+var _IndicatorSma = require('./IndicatorSma');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var QuandlAdapter = {};
@@ -146,7 +148,7 @@ var _fnAddExDividend = function _fnAddExDividend(result) {
     if (fnCheckWithPrev(dataExDividend, x, 14)) {
       dataExDividend.push(Object.assign({}, _ChartConfigs.markerExDivident, { x: x, exValue: exValue, price: price }));
     } else {
-      var marker = Object.assign(_lodash2.default.cloneDeep(_ChartConfigs.markerExDivident), { x: x, exValue: exValue, price: price });
+      var marker = Object.assign(_ChartConfigs2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price });
       marker.dataLabels.y = 0;
       dataExDividend.push(marker);
     }
@@ -442,6 +444,9 @@ var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
   var dataHighLow = _fnSeriesPipe2.dataHighLow;
 
 
+  config.zhFnAddSeriesSma = _IndicatorSma.fnAddSeriesSma;
+  config.zhFnRemoveSeries = _IndicatorSma.fnRemoveSeries;
+
   config.valueMoving = _fnGetValueMoving(seria);
   config.series[0].data = seria;
 
@@ -491,7 +496,7 @@ QuandlAdapter.toSeries = function (json, yPointIndex, chartId) {
   data = _lodash2.default.sortBy(data, '0');
 
   var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
-      configSeries = _lodash2.default.cloneDeep(_ChartConfigs.configSeriesAdded);
+      configSeries = _ChartConfigs2.default.fSeries();
 
   configSeries.zhValueText = valueText;
   configSeries.data = data;

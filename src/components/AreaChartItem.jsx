@@ -7,11 +7,13 @@ import ButtonTab from './zhn/ButtonTab';
 import ShowHide from './zhn/ShowHide';
 import ZhHighchart from './ZhHighchart';
 
+import PanelIndicator from './zhn/PanelIndicator';
 import PanelDataInfo from './zhn/PanelDataInfo';
 
 const styles = {
   rootDiv : {
-    marginBottom: '10px'
+    marginBottom: '10px',
+    position : 'relative'
   },
   headerDiv: {
     backgroundColor: '#232F3B',
@@ -57,6 +59,7 @@ const AreaChartItem = React.createClass({
     return {
       isOpen: true,
       isShowChart : true,
+      isShowIndicator : false,
       isShowInfo : false,
 
       isInitVolume : false, isShowVolume : false,
@@ -68,6 +71,7 @@ const AreaChartItem = React.createClass({
   },
 
   componentDidMount(){
+    this.mainChart = this.refs.chart.getChart();
   },
 
   _handlerLoadedMetricChart(metricChart){
@@ -76,8 +80,15 @@ const AreaChartItem = React.createClass({
   },
 
   _handlerToggleOpen(){
-    this.state.isOpen = !this.state.isOpen;
-    this.setState(this.state);
+    if (this.state.isOpen){
+      this.setState({isOpen : false, isShowIndicator : false})
+    } else {
+      this.setState({isOpen : true})
+    }
+  },
+
+  _handlerClickIndicator(){
+    this.setState({isShowIndicator : !this.state.isShowIndicator});
   },
 
   _handlerClickInfo(){
@@ -130,7 +141,23 @@ const AreaChartItem = React.createClass({
     this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
   },
 
+  _handlerAddSma(period){
+    return this.mainChart.options.zhFnAddSeriesSma(this.mainChart, period);
+  },
+  _handleRemoveSeries(id){
+    return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);
+  },
+
   _createChartToolBar(config){
+     const _btIndicator = (
+       <ButtonTab
+         caption={'Indicator'}
+         isShow={this.state.isShowIndicator}
+         style= {{left: '10px'}}
+         onClick={this._handlerClickIndicator}
+       />
+     );
+
     const _btInfo = (config.info) ? (
       <ButtonTab
         caption={'Info'}
@@ -169,6 +196,7 @@ const AreaChartItem = React.createClass({
 
     return (
       <div>
+         {_btIndicator}
          {_btInfo}
          {_btVolume}
          {_btATH}
@@ -208,7 +236,7 @@ const AreaChartItem = React.createClass({
 
   render(){
     const {caption, config, onSetActive, onCloseItem} = this.props;
-    const {isOpen, isShowChart, isShowInfo} = this.state;
+    const {isOpen, isShowChart, isShowInfo, isShowIndicator} = this.state;
     const _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
     return (
@@ -237,6 +265,11 @@ const AreaChartItem = React.createClass({
               isShow={isShowChart}
               toolBar={this._createChartToolBar(config)}
               config={config}
+           />
+           <PanelIndicator
+             isShow={isShowIndicator}
+             onAddSma={this._handlerAddSma}
+             onRemoveSeries={this._handleRemoveSeries}
            />
            <PanelDataInfo
               isShow={isShowInfo}
