@@ -161,8 +161,7 @@ const AreaChartItem = React.createClass({
     const _btInfo = (config.info) ? (
       <ButtonTab
         caption={'Info'}
-        isShow={false}
-        style= {{color: 'gray'}}
+        isShow={this.state.isShowInfo}        
         onClick={this._handlerClickInfo}
       />
     ) : undefined;
@@ -171,7 +170,7 @@ const AreaChartItem = React.createClass({
       <ButtonTab
         style={{left: '350px'}}
         caption={'Volume'}
-        isShow={false}
+        isShow={this.state.isShowVolume}
         onClick={this._handlerClickVolume}
       />
     ) : undefined;
@@ -180,7 +179,7 @@ const AreaChartItem = React.createClass({
       <ButtonTab
         style={{left: '425px'}}
         caption={'ATH'}
-        isShow={false}
+        isShow={this.state.isShowATH}
         onClick={this._handlerClickATH}
       />
     ) : undefined;
@@ -189,7 +188,7 @@ const AreaChartItem = React.createClass({
       <ButtonTab
         style={{left: '480px'}}
         caption={'HL'}
-        isShow={false}
+        isShow={this.state.isShowHighLow}
         onClick={this._handlerClickHighLow}
       />
     ) : undefined;

@@ -10,24 +10,6 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  div: {
-    position: 'absolute',
-    zIndex: 10,
-    top: 0,
-    left: '300px',
-    backgroundColor: '#232F3B',
-    color: 'rgba(164, 135, 212, 1)',
-    paddingLeft: '6px',
-    paddingRight: '6px',
-    paddingTop: '3px',
-    paddingBottom: '3px',
-    borderBottomLeftRadius: '8px',
-    borderBottomRightRadius: '8px',
-    cursor: 'pointer'
-  }
-};
-
 var ButtonTab = _react2.default.createClass({
   displayName: 'ButtonTab',
   getInitialState: function getInitialState() {
@@ -49,11 +31,12 @@ var ButtonTab = _react2.default.createClass({
     var caption = _props.caption;
     var style = _props.style;
 
-    var _divStyle = this.state.isShow ? undefined : { color: 'gray' };
+    var _rootClass = this.state.isShow ? 'button-tab button-tab--show' : 'button-tab';
     return _react2.default.createElement(
       'div',
       {
-        style: Object.assign({}, styles.div, style, _divStyle),
+        className: _rootClass,
+        style: Object.assign({}, style),
         onClick: this._handlerClick
       },
       caption

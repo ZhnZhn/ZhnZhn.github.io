@@ -26,9 +26,10 @@ var SvgPlus = _react2.default.createClass({
           preserveAspectRatio: "none", xmlns: "http://www.w3.org/2000/svg"
         },
         _react2.default.createElement("path", {
-          id: "icon",
           d: "M 10,4 L 10,16 M 4,10 L 16,10",
-          strokeWidth: "2", stroke: "gray" })
+          strokeWidth: "2",
+          strokeLinecap: "round"
+        })
       )
     );
   }

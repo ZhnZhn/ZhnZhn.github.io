@@ -22,11 +22,11 @@ const SvgUp = React.createClass({
               style={styles.svg}
               preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               <path
-                  //d="M 0,0 L 11,0 6,12, 0,0"
                   d="M 0,12 L 11,12 6,0 0,12"
                   strokeWidth="1"
                   stroke="green"
                   fill="green"
+                  strokeLinejoin="miter"
                   >
               </path>
          </svg>

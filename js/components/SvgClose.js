@@ -31,8 +31,12 @@ var SvgClose = _react2.default.createClass({
         { viewBox: '0 0 12 12', width: '100%', height: '100%',
           style: styles.svg,
           preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg' },
-        _react2.default.createElement('path', { d: 'M 0,0 L 12,12', strokeWidth: '2', stroke: '#ED5813' }),
-        _react2.default.createElement('path', { d: 'M 12,0 L 0,12', strokeWidth: '2', stroke: '#ED5813' })
+        _react2.default.createElement('path', { d: 'M 0,0 L 12,12', strokeWidth: '2', stroke: '#ED5813',
+          strokeLinecap: 'round'
+        }),
+        _react2.default.createElement('path', { d: 'M 12,0 L 0,12', strokeWidth: '2', stroke: '#ED5813',
+          strokeLinecap: 'round'
+        })
       )
     );
   }

@@ -25,7 +25,9 @@ const SvgDown = React.createClass({
                   d="M 0,0 L 11,0 6,12, 0,0"
                   strokeWidth="1"
                   stroke="#ED5813"
-                  fill="#ED5813">
+                  strokeLinejoin="miter"
+                  fill="#ED5813"
+              >
               </path>
          </svg>
        </span>

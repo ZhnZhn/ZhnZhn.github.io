@@ -189,29 +189,28 @@ var AreaChartItem = _react2.default.createClass({
 
     var _btInfo = config.info ? _react2.default.createElement(_ButtonTab2.default, {
       caption: 'Info',
-      isShow: false,
-      style: { color: 'gray' },
+      isShow: this.state.isShowInfo,
       onClick: this._handlerClickInfo
     }) : undefined;
 
     var _btVolume = config.zhVolumeConfig ? _react2.default.createElement(_ButtonTab2.default, {
       style: { left: '350px' },
       caption: 'Volume',
-      isShow: false,
+      isShow: this.state.isShowVolume,
       onClick: this._handlerClickVolume
     }) : undefined;
 
     var _btATH = config.zhATHConfig ? _react2.default.createElement(_ButtonTab2.default, {
       style: { left: '425px' },
       caption: 'ATH',
-      isShow: false,
+      isShow: this.state.isShowATH,
       onClick: this._handlerClickATH
     }) : undefined;
 
     var _btHL = config.zhHighLowConfig ? _react2.default.createElement(_ButtonTab2.default, {
       style: { left: '480px' },
       caption: 'HL',
-      isShow: false,
+      isShow: this.state.isShowHighLow,
       onClick: this._handlerClickHighLow
     }) : undefined;
 

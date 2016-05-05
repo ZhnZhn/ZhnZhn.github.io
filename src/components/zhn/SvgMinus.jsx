@@ -11,9 +11,10 @@ const SvgMinus = React.createClass({
               preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
           >
           <path
-                id="icon"
                 d="M 4,10 L 16,10"
-                strokeWidth="2" stroke="gray">
+                strokeWidth="2"
+                strokeLinecap="round"                                
+          >
           </path>
          </svg>
       </div>
