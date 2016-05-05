@@ -1,7 +1,8 @@
 import React from 'react';
 
 import ShowHide from './ShowHide';
-import ButtonCircle from './ButtonCircle';
+import SvgPlus from './SvgPlus';
+import SvgMinus from './SvgMinus';
 
 const styles = {
   rootDiv : {
@@ -27,15 +28,16 @@ const styles = {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
-    height: '20px',
+    height: '26px',
     paddingLeft: '5px',
     color: 'green',
-    width: '32px',
+    width: '40px',
     fontSize: '16px',
     fontWeight: 'bold',
     backgroundColor : '#E1E1CB',
     marginLeft : '5px',
-    marginRight : '5px'
+    marginRight : '5px',
+    display : 'inline'
   }
 }
 
@@ -76,14 +78,14 @@ const PanelIndicator = React.createClass({
     }
   },
 
+
   _renderIndicators(){
     const {onRemoveSeries} = this.props;
     const _descr = this.state.descr.map((descr, index) => {
       const {id, color} = descr;
       return (
         <div key={id} style={{paddingTop: '5px'}}>
-          <ButtonCircle
-             caption={'-'}
+          <SvgMinus
              onClick={this._handlerRemoveSerias.bind(null, id)}
           />
           <span style={{color: color, paddingLeft: '8px'}}>{id}</span>
@@ -102,18 +104,17 @@ const PanelIndicator = React.createClass({
     const {value} = this.state;
     return (
       <ShowHide isShow={isShow} style={styles.rootDiv}>
-        <span style={styles.captionSpan}>SMA</span>
-        <input
-          ref="inputSMA"
-          style={styles.inputText}
-          value={value}
-          translate={false}
-          onChange={this._handlerInputChange}
-        />
-        <ButtonCircle
-          caption={'+'}
-          onClick={this._handlerAddSma}
-        />
+        <div>
+          <span style={styles.captionSpan}>SMA</span>
+          <input
+            ref="inputSMA"
+            style={styles.inputText}
+            value={value}
+            translate={false}
+            onChange={this._handlerInputChange}
+          />
+          <SvgPlus onClick={this._handlerAddSma} />
+        </div>
         {this._renderIndicators()}
       </ShowHide>
     )

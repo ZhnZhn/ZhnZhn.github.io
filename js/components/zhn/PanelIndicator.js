@@ -12,9 +12,13 @@ var _ShowHide = require('./ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
-var _ButtonCircle = require('./ButtonCircle');
+var _SvgPlus = require('./SvgPlus');
 
-var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
+var _SvgPlus2 = _interopRequireDefault(_SvgPlus);
+
+var _SvgMinus = require('./SvgMinus');
+
+var _SvgMinus2 = _interopRequireDefault(_SvgMinus);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42,15 +46,16 @@ var styles = {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
-    height: '20px',
+    height: '26px',
     paddingLeft: '5px',
     color: 'green',
-    width: '32px',
+    width: '40px',
     fontSize: '16px',
     fontWeight: 'bold',
     backgroundColor: '#E1E1CB',
     marginLeft: '5px',
-    marginRight: '5px'
+    marginRight: '5px',
+    display: 'inline'
   }
 };
 
@@ -105,8 +110,7 @@ var PanelIndicator = _react2.default.createClass({
       return _react2.default.createElement(
         'div',
         { key: id, style: { paddingTop: '5px' } },
-        _react2.default.createElement(_ButtonCircle2.default, {
-          caption: '-',
+        _react2.default.createElement(_SvgMinus2.default, {
           onClick: _this._handlerRemoveSerias.bind(null, id)
         }),
         _react2.default.createElement(
@@ -130,21 +134,22 @@ var PanelIndicator = _react2.default.createClass({
       _ShowHide2.default,
       { isShow: isShow, style: styles.rootDiv },
       _react2.default.createElement(
-        'span',
-        { style: styles.captionSpan },
-        'SMA'
+        'div',
+        null,
+        _react2.default.createElement(
+          'span',
+          { style: styles.captionSpan },
+          'SMA'
+        ),
+        _react2.default.createElement('input', {
+          ref: 'inputSMA',
+          style: styles.inputText,
+          value: value,
+          translate: false,
+          onChange: this._handlerInputChange
+        }),
+        _react2.default.createElement(_SvgPlus2.default, { onClick: this._handlerAddSma })
       ),
-      _react2.default.createElement('input', {
-        ref: 'inputSMA',
-        style: styles.inputText,
-        value: value,
-        translate: false,
-        onChange: this._handlerInputChange
-      }),
-      _react2.default.createElement(_ButtonCircle2.default, {
-        caption: '+',
-        onClick: this._handlerAddSma
-      }),
       this._renderIndicators()
     );
   }
