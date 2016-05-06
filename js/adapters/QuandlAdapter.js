@@ -292,6 +292,8 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex) {
     fnPointsFlow(points[i], result);
   }
 
+  result.zhPoints = points;
+
   return result;
 };
 
@@ -427,6 +429,15 @@ var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data) {
   }
 };
 
+var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
+  var names = json.dataset.column_names;
+  if (names[2] === 'High' && names[3] === 'Low' && names[4] === 'Close' && names[5] === 'Volume') {
+    config.zhPoints = zhPoints;
+    config.zhIsMfi = true;
+    config.zhFnGetMfiConfig = _IndicatorSma.fnGetConfigMfi;
+  }
+};
+
 var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
 
   config.info = _fnGetDatasetInfo(json);
@@ -442,8 +453,10 @@ var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
   var dataVolumeColumn = _fnSeriesPipe2.dataVolumeColumn;
   var dataATH = _fnSeriesPipe2.dataATH;
   var dataHighLow = _fnSeriesPipe2.dataHighLow;
+  var zhPoints = _fnSeriesPipe2.zhPoints;
 
 
+  _fnCheckIsMfi(config, json, zhPoints);
   config.zhFnAddSeriesSma = _IndicatorSma.fnAddSeriesSma;
   config.zhFnRemoveSeries = _IndicatorSma.fnRemoveSeries;
 

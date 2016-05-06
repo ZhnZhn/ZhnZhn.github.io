@@ -12,6 +12,10 @@ var _ShowHide = require('./ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
+var _InputText = require('./InputText');
+
+var _InputText2 = _interopRequireDefault(_InputText);
+
 var _SvgPlus = require('./SvgPlus');
 
 var _SvgPlus2 = _interopRequireDefault(_SvgPlus);
@@ -39,23 +43,10 @@ var styles = {
     paddingBottom: '5px'
   },
   captionSpan: {
+    display: 'inline-block',
     color: 'black',
-    fontWeight: 'bold'
-  },
-  inputText: {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '26px',
-    paddingLeft: '5px',
-    color: 'green',
-    width: '40px',
-    fontSize: '16px',
     fontWeight: 'bold',
-    backgroundColor: '#E1E1CB',
-    marginLeft: '5px',
-    marginRight: '5px',
-    display: 'inline'
+    width: '48px'
   }
 };
 
@@ -63,23 +54,26 @@ var PanelIndicator = _react2.default.createClass({
   displayName: 'PanelIndicator',
   getInitialState: function getInitialState() {
     return {
-      value: 50,
-      descr: []
+      descr: [],
+      mfiDescrs: []
     };
   },
-  _handlerInputChange: function _handlerInputChange(event) {
-    this.setState({ value: event.target.value });
+  _checkIfAlreadyAdded: function _checkIfAlreadyAdded(arrObj, id) {
+    var result = arrObj.find(function (obj) {
+      return obj.id === id;
+    });
+    if (result === undefined) {
+      return false;
+    } else {
+      return true;
+    }
   },
   _handlerAddSma: function _handlerAddSma() {
-    var _state = this.state;
-    var value = _state.value;
-    var descr = _state.descr;
+    var value = this.refs.inputSMA.getValue();
+    var descr = this.state.descr;
     var _id = 'SMA(' + value + ')';
-    var result = descr.find(function (d) {
-      return d.id === _id;
-    });
 
-    if (result === undefined) {
+    if (!this._checkIfAlreadyAdded(descr, _id)) {
       var color = this.props.onAddSma(value);
       if (color) {
         descr.push({
@@ -96,6 +90,27 @@ var PanelIndicator = _react2.default.createClass({
         return descr.id !== id;
       });
       this.setState({ descr: this.state.descr });
+    }
+  },
+  _handlerRemoveMfi: function _handlerRemoveMfi(id) {
+    this.props.onRemoveMfi(id);
+    this.state.mfiDescrs = this.state.mfiDescrs.filter(function (descr) {
+      return descr.id !== id;
+    });
+    this.setState({ mfiDescrs: this.state.mfiDescrs });
+  },
+  _handlerAddMfi: function _handlerAddMfi() {
+    var mfiDescrs = this.state.mfiDescrs;
+    var _value = this.refs.inputMfi.getValue();
+    var _id = 'MFI(' + _value + ')';
+
+    if (!this._checkIfAlreadyAdded(mfiDescrs, _id)) {
+      this.props.onAddMfi(_value, _id);
+      mfiDescrs.push({
+        id: _id,
+        color: 'green'
+      });
+      this.setState({ mfiDescrs: mfiDescrs });
     }
   },
   _renderIndicators: function _renderIndicators() {
@@ -126,9 +141,58 @@ var PanelIndicator = _react2.default.createClass({
       _descr
     );
   },
+  _renderMfi: function _renderMfi() {
+    var _this2 = this;
+
+    var _descr = this.state.mfiDescrs.map(function (descr, index) {
+      var id = descr.id;
+      var color = descr.color;
+
+      return _react2.default.createElement(
+        'div',
+        { key: id, style: { paddingTop: '5px' } },
+        _react2.default.createElement(_SvgMinus2.default, {
+          onClick: _this2._handlerRemoveMfi.bind(null, id)
+        }),
+        _react2.default.createElement(
+          'span',
+          { style: { color: color, paddingLeft: '8px' } },
+          id
+        )
+      );
+    });
+    return _react2.default.createElement(
+      'div',
+      null,
+      _descr
+    );
+  },
   render: function render() {
-    var isShow = this.props.isShow;
+    var _props = this.props;
+    var isShow = _props.isShow;
+    var isMfi = _props.isMfi;
     var value = this.state.value;
+
+
+    var _mfiDom = isMfi ? _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'div',
+        { style: { paddingTop: '5px' } },
+        _react2.default.createElement(
+          'span',
+          { style: styles.captionSpan },
+          'MFI'
+        ),
+        _react2.default.createElement(_InputText2.default, {
+          ref: 'inputMfi',
+          initValue: '14'
+        }),
+        _react2.default.createElement(_SvgPlus2.default, { onClick: this._handlerAddMfi })
+      ),
+      this._renderMfi()
+    ) : undefined;
 
     return _react2.default.createElement(
       _ShowHide2.default,
@@ -141,16 +205,14 @@ var PanelIndicator = _react2.default.createClass({
           { style: styles.captionSpan },
           'SMA'
         ),
-        _react2.default.createElement('input', {
+        _react2.default.createElement(_InputText2.default, {
           ref: 'inputSMA',
-          style: styles.inputText,
-          value: value,
-          translate: false,
-          onChange: this._handlerInputChange
+          initValue: '50'
         }),
         _react2.default.createElement(_SvgPlus2.default, { onClick: this._handlerAddSma })
       ),
-      this._renderIndicators()
+      this._renderIndicators(),
+      _mfiDom
     );
   }
 });

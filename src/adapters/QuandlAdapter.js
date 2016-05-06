@@ -14,7 +14,11 @@ import {
         tooltipSplitRatio
       } from '../constants/ChartConfigs';
 
-import {fnAddSeriesSma, fnRemoveSeries} from './IndicatorSma';
+import {
+        fnAddSeriesSma,
+        fnRemoveSeries,
+        fnGetConfigMfi
+      } from './IndicatorSma';
 
 const QuandlAdapter = {};
 
@@ -257,6 +261,8 @@ const _fnSeriesPipe = function(json, yPointIndex){
     fnPointsFlow(points[i], result);
   }
 
+  result.zhPoints = points;
+
   return result
 }
 
@@ -391,7 +397,17 @@ const _fnAddSeriesSplitRatio = function(config, data){
        data : data
     });
   }
-}
+};
+
+const _fnCheckIsMfi = function(config, json, zhPoints){
+  const names= json.dataset.column_names;
+  if ( names[2] === 'High' && names[3] === 'Low'  &&
+       names[4] === 'Close' && names[5] === 'Volume') {
+    config.zhPoints = zhPoints;
+    config.zhIsMfi = true;
+    config.zhFnGetMfiConfig = fnGetConfigMfi;
+  }
+};
 
 const fnGetSeries = function(config, json, yPointIndex){
 
@@ -401,9 +417,11 @@ const fnGetSeries = function(config, json, yPointIndex){
      seria, minPoint, maxPoint,
      dataExDividend, dataSplitRatio,
      dataVolume, dataVolumeColumn,
-     dataATH, dataHighLow
+     dataATH, dataHighLow,
+     zhPoints
    } = _fnSeriesPipe(json, yPointIndex);
 
+   _fnCheckIsMfi(config, json, zhPoints);
    config.zhFnAddSeriesSma = fnAddSeriesSma;
    config.zhFnRemoveSeries = fnRemoveSeries;
 

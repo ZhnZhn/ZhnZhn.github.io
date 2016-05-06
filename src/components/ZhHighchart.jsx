@@ -25,6 +25,12 @@ const ZhHighchart = React.createClass({
     }
   },
 
+  componentWillUnmount(){
+    if (this.props.onWillUnLoaded){
+      this.props.onWillUnLoaded(this.chart);
+    }
+  },
+
   componentWillUnmout(){
     this.chart.destroy();
   },
@@ -36,7 +42,6 @@ const ZhHighchart = React.createClass({
 
     const chartConfig =  config.chart;
     this.chart = new Highcharts['Chart']({
-      //...this.props.config,
       ...config,
       chart: {
         ...chartConfig,
@@ -44,7 +49,6 @@ const ZhHighchart = React.createClass({
       }
     });
   },
-
 
   render() {
     const { isShow, toolBar } = this.props;

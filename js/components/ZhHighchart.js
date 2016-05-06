@@ -41,6 +41,11 @@ var ZhHighchart = _react2.default.createClass({
       this.props.onLoaded(this.chart);
     }
   },
+  componentWillUnmount: function componentWillUnmount() {
+    if (this.props.onWillUnLoaded) {
+      this.props.onWillUnLoaded(this.chart);
+    }
+  },
   componentWillUnmout: function componentWillUnmout() {
     this.chart.destroy();
   },

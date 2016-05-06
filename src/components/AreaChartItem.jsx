@@ -66,7 +66,8 @@ const AreaChartItem = React.createClass({
       isATHVolume : false, isShowATH : false,
       isInitHighLow : false, isShowHighLow : false,
 
-      chartsDescription : []
+      chartsDescription : [],
+      mfiConfigs : [],
     }
   },
 
@@ -75,8 +76,13 @@ const AreaChartItem = React.createClass({
   },
 
   _handlerLoadedMetricChart(metricChart){
-     const chart = this.refs.chart.getChart();
-     chart.options.zhDetailCharts.push(metricChart);
+     this.mainChart.options.zhDetailCharts.push(metricChart);
+  },
+  _handlerWillUnLoadedChart(objChart){
+    const charts = this.mainChart.options.zhDetailCharts;
+    this.mainChart.options.zhDetailCharts = charts.filter((chart) => {
+      return chart !== objChart;
+    })
   },
 
   _handlerToggleOpen(){
@@ -92,7 +98,7 @@ const AreaChartItem = React.createClass({
   },
 
   _handlerClickInfo(){
-    this.setState({isShowChart: false, isShowInfo: true});
+    this.setState({isShowChart: false, isShowInfo: true, isShowIndicator: false});
   },
 
   _handlerClickVolume(){
@@ -147,6 +153,17 @@ const AreaChartItem = React.createClass({
   _handleRemoveSeries(id){
     return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);
   },
+  _handlerAddMfi(period, id){
+    const config = this.mainChart.options.zhFnGetMfiConfig(this.mainChart, period, id);
+    this.state.mfiConfigs.push({config, id});
+    this.setState({mfiConfigs: this.state.mfiConfigs});
+  },
+  _handlerRemoveMfi(id){
+    this.state.mfiConfigs = this.state.mfiConfigs.filter((objConfig) => {
+      return objConfig.id !== id;
+    })
+    this.setState({mfiConfigs: this.state.mfiConfigs});
+  },
 
   _createChartToolBar(config){
      const _btIndicator = (
@@ -161,7 +178,7 @@ const AreaChartItem = React.createClass({
     const _btInfo = (config.info) ? (
       <ButtonTab
         caption={'Info'}
-        isShow={this.state.isShowInfo}        
+        isShow={this.state.isShowInfo}
         onClick={this._handlerClickInfo}
       />
     ) : undefined;
@@ -232,10 +249,33 @@ const AreaChartItem = React.createClass({
     )
   },
 
+  _renderIndicatorCharts(arrConfigs){
+    const _indicatorCharts = arrConfigs.map((objConfig, index) => {
+      const {config, id} = objConfig;
+      return (
+        <ShowHide isShow={true} key={id}>
+          <ZhHighchart
+              isShow={true}
+              config={config}
+              onLoaded={this._handlerLoadedMetricChart}
+              onWillUnLoaded={this._handlerWillUnLoadedChart}
+          />
+        </ShowHide>
+      )
+    })
+    return (
+      <div>
+        {_indicatorCharts}
+      </div>
+    )
+  },
 
   render(){
     const {caption, config, onSetActive, onCloseItem} = this.props;
-    const {isOpen, isShowChart, isShowInfo, isShowIndicator} = this.state;
+    const {
+            isOpen, isShowChart, isShowInfo, isShowIndicator,
+            mfiConfigs
+          } = this.state;
     const _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
     return (
@@ -269,12 +309,16 @@ const AreaChartItem = React.createClass({
              isShow={isShowIndicator}
              onAddSma={this._handlerAddSma}
              onRemoveSeries={this._handleRemoveSeries}
+             isMfi={config.zhIsMfi}
+             onAddMfi={this._handlerAddMfi}
+             onRemoveMfi={this._handlerRemoveMfi}
            />
            <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
               onClickChart={this._handlerClickChart}
            />
+          {this._renderIndicatorCharts(mfiConfigs)}
           {this._renderMetricCharts()}
         </ShowHide>
       </div>

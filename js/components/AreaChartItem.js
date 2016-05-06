@@ -99,15 +99,21 @@ var AreaChartItem = _react2.default.createClass({
       isATHVolume: false, isShowATH: false,
       isInitHighLow: false, isShowHighLow: false,
 
-      chartsDescription: []
+      chartsDescription: [],
+      mfiConfigs: []
     };
   },
   componentDidMount: function componentDidMount() {
     this.mainChart = this.refs.chart.getChart();
   },
   _handlerLoadedMetricChart: function _handlerLoadedMetricChart(metricChart) {
-    var chart = this.refs.chart.getChart();
-    chart.options.zhDetailCharts.push(metricChart);
+    this.mainChart.options.zhDetailCharts.push(metricChart);
+  },
+  _handlerWillUnLoadedChart: function _handlerWillUnLoadedChart(objChart) {
+    var charts = this.mainChart.options.zhDetailCharts;
+    this.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
+      return chart !== objChart;
+    });
   },
   _handlerToggleOpen: function _handlerToggleOpen() {
     if (this.state.isOpen) {
@@ -120,7 +126,7 @@ var AreaChartItem = _react2.default.createClass({
     this.setState({ isShowIndicator: !this.state.isShowIndicator });
   },
   _handlerClickInfo: function _handlerClickInfo() {
-    this.setState({ isShowChart: false, isShowInfo: true });
+    this.setState({ isShowChart: false, isShowInfo: true, isShowIndicator: false });
   },
   _handlerClickVolume: function _handlerClickVolume() {
     var _state = this.state;
@@ -178,6 +184,17 @@ var AreaChartItem = _react2.default.createClass({
   },
   _handleRemoveSeries: function _handleRemoveSeries(id) {
     return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);
+  },
+  _handlerAddMfi: function _handlerAddMfi(period, id) {
+    var config = this.mainChart.options.zhFnGetMfiConfig(this.mainChart, period, id);
+    this.state.mfiConfigs.push({ config: config, id: id });
+    this.setState({ mfiConfigs: this.state.mfiConfigs });
+  },
+  _handlerRemoveMfi: function _handlerRemoveMfi(id) {
+    this.state.mfiConfigs = this.state.mfiConfigs.filter(function (objConfig) {
+      return objConfig.id !== id;
+    });
+    this.setState({ mfiConfigs: this.state.mfiConfigs });
   },
   _createChartToolBar: function _createChartToolBar(config) {
     var _btIndicator = _react2.default.createElement(_ButtonTab2.default, {
@@ -254,6 +271,30 @@ var AreaChartItem = _react2.default.createClass({
       _metricCharts
     );
   },
+  _renderIndicatorCharts: function _renderIndicatorCharts(arrConfigs) {
+    var _this2 = this;
+
+    var _indicatorCharts = arrConfigs.map(function (objConfig, index) {
+      var config = objConfig.config;
+      var id = objConfig.id;
+
+      return _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: true, key: id },
+        _react2.default.createElement(_ZhHighchart2.default, {
+          isShow: true,
+          config: config,
+          onLoaded: _this2._handlerLoadedMetricChart,
+          onWillUnLoaded: _this2._handlerWillUnLoadedChart
+        })
+      );
+    });
+    return _react2.default.createElement(
+      'div',
+      null,
+      _indicatorCharts
+    );
+  },
   render: function render() {
     var _props = this.props;
     var caption = _props.caption;
@@ -265,6 +306,7 @@ var AreaChartItem = _react2.default.createClass({
     var isShowChart = _state4.isShowChart;
     var isShowInfo = _state4.isShowInfo;
     var isShowIndicator = _state4.isShowIndicator;
+    var mfiConfigs = _state4.mfiConfigs;
 
     var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
@@ -305,13 +347,17 @@ var AreaChartItem = _react2.default.createClass({
         _react2.default.createElement(_PanelIndicator2.default, {
           isShow: isShowIndicator,
           onAddSma: this._handlerAddSma,
-          onRemoveSeries: this._handleRemoveSeries
+          onRemoveSeries: this._handleRemoveSeries,
+          isMfi: config.zhIsMfi,
+          onAddMfi: this._handlerAddMfi,
+          onRemoveMfi: this._handlerRemoveMfi
         }),
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,
           info: config.info,
           onClickChart: this._handlerClickChart
         }),
+        this._renderIndicatorCharts(mfiConfigs),
         this._renderMetricCharts()
       )
     );
