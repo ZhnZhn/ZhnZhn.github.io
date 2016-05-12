@@ -13,6 +13,7 @@ import PanelDataInfo from './zhn/PanelDataInfo';
 const styles = {
   rootDiv : {
     marginBottom: '10px',
+    marginRight: '25px',
     position : 'relative'
   },
   headerDiv: {
@@ -22,7 +23,8 @@ const styles = {
     paddingTop: '4px',
     paddingLeft: '10px',
     height: '25px',
-    width: '600px'
+    //width: '600px'
+    width : '100%'
   },
   checkBoxStyle : {
     float: 'left',
@@ -323,7 +325,17 @@ const AreaChartItem = React.createClass({
         </ShowHide>
       </div>
     )
+  },
+
+  reflowChart(width){    
+    //this.mainChart.reflow();
+    this.mainChart.setSize(width, this.mainChart.options.chart.height, true);
+    this.mainChart.options.zhDetailCharts.forEach((chart) => {
+      //chart.reflow();
+      chart.setSize(width, chart.options.chart.height, true);
+    });
   }
+
 });
 
 export default AreaChartItem;

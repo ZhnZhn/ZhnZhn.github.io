@@ -8,7 +8,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgClose = require('./SvgClose.js');
+var _SvgHrzResize = require('./zhn/SvgHrzResize');
+
+var _SvgHrzResize2 = _interopRequireDefault(_SvgHrzResize);
+
+var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
@@ -37,6 +41,22 @@ var CaptionRow = _react2.default.createClass({
   displayName: 'CaptionRow',
 
   render: function render() {
+    var _props = this.props;
+    var isResizable = _props.isResizable;
+    var initWidth = _props.initWidth;
+    var minWidth = _props.minWidth;
+    var maxWidth = _props.maxWidth;
+    var comp = _props.comp;
+    var onResizeAfter = _props.onResizeAfter;
+
+    var _compHrzResize = isResizable ? _react2.default.createElement(_SvgHrzResize2.default, {
+      initWidth: initWidth,
+      minWidth: minWidth,
+      maxWidth: maxWidth,
+      comp: comp,
+      onResizeAfter: onResizeAfter
+    }) : undefined;
+
     return _react2.default.createElement(
       'div',
       { style: styles.captionDiv },
@@ -45,6 +65,7 @@ var CaptionRow = _react2.default.createClass({
         { style: styles.captionSpan },
         this.props.caption
       ),
+      _compHrzResize,
       _react2.default.createElement(_SvgClose2.default, { onClose: this.props.onClose })
     );
   }

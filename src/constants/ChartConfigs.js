@@ -14,7 +14,7 @@ ChartConfigs.theme = {
       }
     },
     chart : {
-      width: 600,
+      //width: 600,
       height: 300,
       spacingTop: 20,
       spacingBottom: 24,
@@ -359,7 +359,7 @@ export const markerExDivident = {
     }
   }
 };
-             
+
 ChartConfigs.fMarkerExDividend = function(){
   return {
     y: 0,

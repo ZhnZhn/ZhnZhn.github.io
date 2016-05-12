@@ -27,5 +27,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _highchartsMore2.default)(_highcharts2.default);
 _highcharts2.default.setOptions(_ChartConfigs2.default.theme);
 
-(0, _reactDom.render)(_react2.default.createElement(_AppErc2.default, null), document.getElementById('app'));
+var _fnRemoveSpinner = function _fnRemoveSpinner() {
+  document.body.removeChild(document.getElementById('spinner'));
+};
+
+(0, _reactDom.render)(_react2.default.createElement(_AppErc2.default, null), document.getElementById('app'), _fnRemoveSpinner);
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\index.js.map

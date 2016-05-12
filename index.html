@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
   <title>Economic RESTful Client v0.10.0</title>
   <link rel="shortcut icon" href="/css/favicon.png" type="image/png" />
 
@@ -30,11 +30,88 @@
     })()
   </script>
 
+  <style>
+  [data-loader='circle']
+  {
+    width: 2.5em;
+    height: 2.5em;
+   -webkit-animation: circle infinite 1.25s linear;
+      -moz-animation: circle infinite 0.75s linear;
+        -o-animation: circle infinite 1.25s linear;
+           animation: circle infinite 1.25s linear;
+   border: 3px solid rgba(164, 135, 212, 1);
+   border-top-color: transparent;
+   border-radius: 100%;
+ }
+@-webkit-keyframes circle
+{ 100% {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+} }
+@-moz-keyframes circle
+{ 100% { transform: rotate(360deg);}}
+@-o-keyframes circle
+{ 100% {
+  -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+} }
+@keyframes circle
+{ 100% {transform: rotate(360deg);}}
+
+.spinner__wrapper {
+  position: absolute;
+  top : 5%;
+  left: 40%;
+  background-color: rgb(77, 77, 77);
+  border: solid 2px #232F3B;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 6px;
+  z-index: 100;
+  width: 14em;
+  height: 8em;
+  margin: 0.5em;
+  padding: 2em;
+  padding-top: 1em;
+  text-align: center;
+}
+.spinner__wrapper > div {
+   margin: 0.5em auto;
+}
+.spinner__descr {
+   position: absolute;
+   bottom: 0.8em;
+   left: 3em;
+   font-family: "Roboto", "Arial", "Lato", sans-serif;
+   font-size: 1em;
+   font-weight: bold;
+}
+  </style>
+
   <link  href="css/app.css" rel="stylesheet" />
 
 
 </head>
 <body>
+
+  <noscript>
+    <style type="text/css">
+     #spinner {
+       display: none;
+     }
+    </style>
+  </noscript>
+  <div id="spinner" class="spinner__wrapper">
+    <div data-loader="circle"></div>
+    <div class="spinner__descr">
+      <span style="color:#80c040;">
+        ERC&nbsp;
+      </span>
+      <span style="color:gray">
+        Loading...
+      </span>
+    </div>
+  </div>
+
 
    <div id="app">
    </div>

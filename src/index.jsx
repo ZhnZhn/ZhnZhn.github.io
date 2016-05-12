@@ -11,4 +11,8 @@ import ChartConfigs from './constants/ChartConfigs';
 HighchartsMore(Highcharts);
 Highcharts.setOptions(ChartConfigs.theme);
 
-render(<AppErc />, document.getElementById('app'));
+const _fnRemoveSpinner = function(){  
+  document.body.removeChild(document.getElementById('spinner'));
+}
+
+render(<AppErc />, document.getElementById('app'), _fnRemoveSpinner);

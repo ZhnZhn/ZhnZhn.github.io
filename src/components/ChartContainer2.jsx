@@ -4,9 +4,9 @@ import ChartStore from '../flux/stores/ChartStore';
 import {ChartActionTypes} from '../flux/actions/ChartActions';
 import ComponentActions, {ComponentActionTypes} from '../flux/actions/ComponentActions';
 
-import ZhHighchart from './ZhHighchart.js';
-import CaptionRow from './CaptionRow.js';
-import AreaChartItem from './AreaChartItem.js';
+import ZhHighchart from './ZhHighchart';
+import CaptionRow from './CaptionRow';
+import AreaChartItem from './AreaChartItem';
 
 const styles = {
   rootDiv : {
@@ -21,6 +21,14 @@ const styles = {
     height: '730px',
     overflowY: 'auto',
     marginLeft: '10px',
+
+    //paddingRight : '10px',
+    overflowX : 'hidden'
+  },
+  hrzResize : {
+    position : 'absolute',
+    top : '30px',
+    right: '0'
   },
   chartDiv : {
     overflowY: 'auto',
@@ -44,6 +52,10 @@ const compActions = [
 ];
 
 const ChartContainer2 = React.createClass({
+  getInitialState(){
+    this.childMargin = 36;
+    return {}
+  },
 
    componentWillMount: function(){
      this.unsubscribe = ChartStore.listen(this._onStore);
@@ -72,11 +84,18 @@ const ChartContainer2 = React.createClass({
    },
 
 
+   _handlerResizeAfter(parentWidth){
+     for (var i=0, max = this.state.configs.length; i<max; i++){
+        this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
+     }
+   },
+
    renderCharts: function(){
      const {chartType, browserType, onCloseItem} = this.props;
      let domCharts = this.state.configs.map((config, index)=>{
        return (
          <AreaChartItem
+             ref={'chart' + index}
              key={config.stockTicket}
              caption={config.stockTicket}
              config={config}
@@ -95,9 +114,17 @@ const ChartContainer2 = React.createClass({
      const classOpen = this.state.isShow ? "show-popup" : null;
 
      return(
-        <div className={classOpen} style={Object.assign({},styles.rootDiv, styleOpen)}>
+        <div
+           className={classOpen}
+           style={Object.assign({},styles.rootDiv, styleOpen)}
+        >
           <CaptionRow
              caption={this.props.caption}
+             isResizable={true}
+             minWidth={600}
+             maxWidth={1200}
+             comp={this}
+             onResizeAfter={this._handlerResizeAfter}
              onClose={this._handlerHide}
           />
           <div className="with-scroll" style={styles.chartDiv}>

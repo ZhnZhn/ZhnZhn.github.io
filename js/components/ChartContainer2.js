@@ -18,15 +18,15 @@ var _ComponentActions = require('../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
-var _ZhHighchart = require('./ZhHighchart.js');
+var _ZhHighchart = require('./ZhHighchart');
 
 var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
 
-var _CaptionRow = require('./CaptionRow.js');
+var _CaptionRow = require('./CaptionRow');
 
 var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
 
-var _AreaChartItem = require('./AreaChartItem.js');
+var _AreaChartItem = require('./AreaChartItem');
 
 var _AreaChartItem2 = _interopRequireDefault(_AreaChartItem);
 
@@ -44,7 +44,15 @@ var styles = {
     width: '635px',
     height: '730px',
     overflowY: 'auto',
-    marginLeft: '10px'
+    marginLeft: '10px',
+
+    //paddingRight : '10px',
+    overflowX: 'hidden'
+  },
+  hrzResize: {
+    position: 'absolute',
+    top: '30px',
+    right: '0'
   },
   chartDiv: {
     overflowY: 'auto',
@@ -65,6 +73,10 @@ var compActions = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.Char
 
 var ChartContainer2 = _react2.default.createClass({
   displayName: 'ChartContainer2',
+  getInitialState: function getInitialState() {
+    this.childMargin = 36;
+    return {};
+  },
 
 
   componentWillMount: function componentWillMount() {
@@ -97,6 +109,13 @@ var ChartContainer2 = _react2.default.createClass({
     this.setState({ isShow: false });
   },
 
+  _handlerResizeAfter: function _handlerResizeAfter(parentWidth) {
+    for (var i = 0, max = this.state.configs.length; i < max; i++) {
+      this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
+    }
+  },
+
+
   renderCharts: function renderCharts() {
     var _props2 = this.props;
     var chartType = _props2.chartType;
@@ -105,6 +124,7 @@ var ChartContainer2 = _react2.default.createClass({
 
     var domCharts = this.state.configs.map(function (config, index) {
       return _react2.default.createElement(_AreaChartItem2.default, {
+        ref: 'chart' + index,
         key: config.stockTicket,
         caption: config.stockTicket,
         config: config,
@@ -123,9 +143,17 @@ var ChartContainer2 = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      { className: classOpen, style: Object.assign({}, styles.rootDiv, styleOpen) },
+      {
+        className: classOpen,
+        style: Object.assign({}, styles.rootDiv, styleOpen)
+      },
       _react2.default.createElement(_CaptionRow2.default, {
         caption: this.props.caption,
+        isResizable: true,
+        minWidth: 600,
+        maxWidth: 1200,
+        comp: this,
+        onResizeAfter: this._handlerResizeAfter,
         onClose: this._handlerHide
       }),
       _react2.default.createElement(

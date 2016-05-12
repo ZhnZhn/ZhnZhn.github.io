@@ -1,6 +1,7 @@
 import React from 'react'
 
-import SvgClose from './SvgClose.js';
+import SvgHrzResize from './zhn/SvgHrzResize';
+import SvgClose from './SvgClose';
 
 const styles = {
   captionDiv : {
@@ -23,9 +24,21 @@ const styles = {
 
 const CaptionRow = React.createClass({
   render: function(){
+    const {isResizable, initWidth, minWidth, maxWidth, comp, onResizeAfter } = this.props;
+    const _compHrzResize = (isResizable) ? (
+      <SvgHrzResize
+         initWidth={initWidth}
+         minWidth={minWidth}
+         maxWidth={maxWidth}
+         comp={comp}
+         onResizeAfter={onResizeAfter}
+      />
+    ) : undefined;
+
     return (
       <div style={styles.captionDiv}>
         <span style={styles.captionSpan}>{this.props.caption}</span>
+        {_compHrzResize}
         <SvgClose onClose={this.props.onClose} />
       </div>
     )

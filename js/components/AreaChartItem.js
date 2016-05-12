@@ -45,6 +45,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = {
   rootDiv: {
     marginBottom: '10px',
+    marginRight: '25px',
     position: 'relative'
   },
   headerDiv: {
@@ -54,7 +55,8 @@ var styles = {
     paddingTop: '4px',
     paddingLeft: '10px',
     height: '25px',
-    width: '600px'
+    //width: '600px'
+    width: '100%'
   },
   checkBoxStyle: {
     float: 'left',
@@ -361,6 +363,14 @@ var AreaChartItem = _react2.default.createClass({
         this._renderMetricCharts()
       )
     );
+  },
+  reflowChart: function reflowChart(width) {
+    //this.mainChart.reflow();
+    this.mainChart.setSize(width, this.mainChart.options.chart.height, true);
+    this.mainChart.options.zhDetailCharts.forEach(function (chart) {
+      //chart.reflow();
+      chart.setSize(width, chart.options.chart.height, true);
+    });
   }
 });
 
