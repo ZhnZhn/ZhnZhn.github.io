@@ -14,9 +14,13 @@ var _big2 = _interopRequireDefault(_big);
 
 var _Type = require('../constants/Type');
 
-var _ChartConfigs = require('../constants/ChartConfigs');
+var _ChartConfig = require('../constants/ChartConfig');
 
-var _ChartConfigs2 = _interopRequireDefault(_ChartConfigs);
+var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+
+var _Tooltip = require('../constants/Tooltip');
+
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 var _IndicatorSma = require('./IndicatorSma');
 
@@ -77,8 +81,8 @@ var _fnGetValueMoving = function _fnGetValueMoving(seria) {
   }
 
   return {
-    value: (0, _ChartConfigs.fnNumberFormat)(nowValue),
-    delta: (0, _ChartConfigs.fnNumberFormat)(bDelta.abs().toString()),
+    value: _ChartConfig2.default.fnNumberFormat(nowValue),
+    delta: _ChartConfig2.default.fnNumberFormat(bDelta.abs().toString()),
     percent: bPercent.toString() + '%',
     direction: direction
   };
@@ -128,7 +132,7 @@ var _fnAddSplitRatio = function _fnAddSplitRatio(result) {
         splitRatio = point[7],
         price = point[yPointIndex];
 
-    dataSplitRatio.push(Object.assign({}, _ChartConfigs.markerSplitRatio, { x: x, splitRatio: splitRatio, price: price }));
+    dataSplitRatio.push(Object.assign(_ChartConfig2.default.fMarkerSplitRatio(), { x: x, splitRatio: splitRatio, price: price }));
   }
   return result;
 };
@@ -146,9 +150,9 @@ var _fnAddExDividend = function _fnAddExDividend(result) {
         price = point[yPointIndex];
 
     if (fnCheckWithPrev(dataExDividend, x, 14)) {
-      dataExDividend.push(Object.assign({}, _ChartConfigs.markerExDivident, { x: x, exValue: exValue, price: price }));
+      dataExDividend.push(Object.assign(_ChartConfig2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price }));
     } else {
-      var marker = Object.assign(_ChartConfigs2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price });
+      var marker = Object.assign(_ChartConfig2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price });
       marker.dataLabels.y = 0;
       dataExDividend.push(marker);
     }
@@ -299,7 +303,7 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex) {
 
 var _fnCreateIndicatorConfig = function _fnCreateIndicatorConfig() {
 
-  var config = _ChartConfigs2.default.fBaseAreaConfig();
+  var config = _ChartConfig2.default.fBaseAreaConfig();
 
   config.chart.height = 140;
   config.chart.spacingTop = 8;
@@ -315,8 +319,8 @@ var _fnCreateIndicatorConfig = function _fnCreateIndicatorConfig() {
 var _fnCreateConfigATH = function _fnCreateConfigATH(data) {
   if (data.length > 0) {
     var config = _fnCreateIndicatorConfig();
-    config.title = _ChartConfigs2.default.fTitleMetric('ATH Chart');
-    config.credits = _ChartConfigs2.default.creditsMetric;
+    config.title = _ChartConfig2.default.fTitleMetric('ATH Chart');
+    config.credits = _ChartConfig2.default.creditsMetric;
 
     config.series[0].zhValueText = "ATH";
     config.series[0].data = data;
@@ -329,7 +333,8 @@ var _fnCreateConfigATH = function _fnCreateConfigATH(data) {
     config.series[0].groupPadding = 0.1;
 
     config.series[0].tooltip = {
-      pointFormatter: _ChartConfigs.fnATHPointFormatter,
+      //pointFormatter : fnATHPointFormatter,
+      pointFormatter: _Tooltip2.default.fnATHPointFormatter,
       headerFormat: ''
     };
     return config;
@@ -340,10 +345,10 @@ var _fnCreateConfigATH = function _fnCreateConfigATH(data) {
 
 var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
   if (data.length > 0) {
-    var config = _ChartConfigs2.default.fBaseAreaConfig();
-    config.title = _ChartConfigs2.default.fTitleMetric('Volume Chart');
-    config.legend = _ChartConfigs2.default.legendVolume;
-    config.credits = _ChartConfigs2.default.creditsMetric;
+    var config = _ChartConfig2.default.fBaseAreaConfig();
+    config.title = _ChartConfig2.default.fTitleMetric('Volume Chart');
+    config.legend = _ChartConfig2.default.legendVolume;
+    config.credits = _ChartConfig2.default.creditsMetric;
 
     config.chart.height = 140;
     config.chart.spacingTop = 8;
@@ -373,7 +378,8 @@ var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
         }
       },
       tooltip: {
-        pointFormatter: _ChartConfigs.fnVolumePointFormatter,
+        //pointFormatter : fnVolumePointFormatter,
+        pointFormatter: _Tooltip2.default.fnVolumePointFormatter,
         headerFormat: ''
       }
     });
@@ -387,8 +393,8 @@ var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
 var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data) {
   if (data.length > 0) {
     var config = _fnCreateIndicatorConfig();
-    config.title = _ChartConfigs2.default.fTitleMetric('HighLow Chart');
-    config.credits = _ChartConfigs2.default.creditsMetric;
+    config.title = _ChartConfig2.default.fTitleMetric('HighLow Chart');
+    config.credits = _ChartConfig2.default.creditsMetric;
 
     config.series[0].zhValueText = "HL";
     config.series[0].data = data;
@@ -397,7 +403,7 @@ var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data) {
     config.series[0].type = "arearange";
 
     config.series[0].tooltip = {
-      pointFormatter: _ChartConfigs2.default.pointFormatterHighLow,
+      pointFormatter: _Tooltip2.default.fnHighLowPointFormatter,
       headerFormat: ''
     };
 
@@ -409,23 +415,13 @@ var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data) {
 
 var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data) {
   if (data.length > 0) {
-    config.series.push({
-      type: 'scatter',
-      color: 'green',
-      tooltip: _ChartConfigs.tooltipExDivident,
-      data: data
-    });
+    config.series.push(_ChartConfig2.default.fExDividendSeria(data));
   }
 };
 
 var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data) {
   if (data.length > 0) {
-    config.series.push({
-      type: 'scatter',
-      color: ' #ED5813',
-      tooltip: _ChartConfigs.tooltipSplitRatio,
-      data: data
-    });
+    config.series.push(_ChartConfig2.default.fSplitRatioSeria(data));
   }
 };
 
@@ -464,7 +460,7 @@ var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
   config.series[0].data = seria;
 
   config.xAxis.events = {
-    afterSetExtremes: _ChartConfigs2.default.zoomMetricCharts
+    afterSetExtremes: _ChartConfig2.default.zoomMetricCharts
   };
 
   _fnAddSeriesExDivident(config, dataExDividend);
@@ -484,9 +480,9 @@ var fnConfigAxes = function fnConfigAxes(result) {
 
 
   config.yAxis.plotLines[0].value = maxPoint;
-  config.yAxis.plotLines[0].label.text = (0, _ChartConfigs.fnNumberFormat)(maxPoint);
+  config.yAxis.plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(maxPoint);
   config.yAxis.plotLines[1].value = minPoint;
-  config.yAxis.plotLines[1].label.text = (0, _ChartConfigs.fnNumberFormat)(minPoint);
+  config.yAxis.plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(minPoint);
   config.yAxis.opposite = true;
 
   config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
@@ -497,7 +493,7 @@ var fnConfigAxes = function fnConfigAxes(result) {
 var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
 
 QuandlAdapter.toConfig = function (json, yPointIndex) {
-  var config = _ChartConfigs2.default.fBaseAreaConfig();
+  var config = _ChartConfig2.default.fBaseAreaConfig();
   return fnQuandlFlow(config, json, yPointIndex);
 };
 
@@ -509,7 +505,7 @@ QuandlAdapter.toSeries = function (json, yPointIndex, chartId) {
   data = _lodash2.default.sortBy(data, '0');
 
   var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
-      configSeries = _ChartConfigs2.default.fSeries();
+      configSeries = _ChartConfig2.default.fSeries();
 
   configSeries.zhValueText = valueText;
   configSeries.data = data;

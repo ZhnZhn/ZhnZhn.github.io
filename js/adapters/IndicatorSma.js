@@ -9,9 +9,9 @@ var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
 
-var _ChartConfigs = require('../constants/ChartConfigs');
+var _ChartConfig = require('../constants/ChartConfig');
 
-var _ChartConfigs2 = _interopRequireDefault(_ChartConfigs);
+var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,7 +33,7 @@ var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(chart, per
   }
 
   if (dataSma.length > 0) {
-    var config = _ChartConfigs2.default.fSeries();
+    var config = _ChartConfig2.default.fSeries();
 
     config.zhValueText = _id;
     config.lineWidth = 2;
@@ -170,11 +170,11 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
     }
   }
 
-  var config = _ChartConfigs2.default.fBaseAreaConfig();
+  var config = _ChartConfig2.default.fBaseAreaConfig();
   var titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
 
-  config.title = _ChartConfigs2.default.fTitleMetric(id + titleNotFullPoint);
-  config.credits = _ChartConfigs2.default.creditsMetric;
+  config.title = _ChartConfig2.default.fTitleMetric(id + titleNotFullPoint);
+  config.credits = _ChartConfig2.default.creditsMetric;
 
   config.chart.height = 140;
   config.chart.spacingTop = 8;

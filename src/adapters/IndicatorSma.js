@@ -1,7 +1,7 @@
 
 import Big from 'big.js';
 
-import ChartConfigs from '../constants/ChartConfigs';
+import ChartConfig from '../constants/ChartConfig';
 
 export const fnAddSeriesSma = function(chart, period){
 
@@ -21,7 +21,7 @@ export const fnAddSeriesSma = function(chart, period){
   }
 
   if (dataSma.length>0){
-    const config = ChartConfigs.fSeries();
+    const config = ChartConfig.fSeries();
 
     config.zhValueText = _id;
     config.lineWidth = 2;
@@ -139,12 +139,12 @@ export const fnGetConfigMfi = function(chart, period, id){
      }
    }
 
-   const config = ChartConfigs.fBaseAreaConfig();
+   const config = ChartConfig.fBaseAreaConfig();
    const titleNotFullPoint = (nNotFullPoint !== 0) ?
          ' Not Full Data HL:' + nNotFullPoint : '' ;
 
-   config.title = ChartConfigs.fTitleMetric(id + titleNotFullPoint);
-   config.credits = ChartConfigs.creditsMetric;
+   config.title = ChartConfig.fTitleMetric(id + titleNotFullPoint);
+   config.credits = ChartConfig.creditsMetric;
 
    config.chart.height = 140;
    config.chart.spacingTop = 8;

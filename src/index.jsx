@@ -6,12 +6,12 @@ import Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/lib/highcharts-more';
 
 import AppErc from './components/AppErc';
-import ChartConfigs from './constants/ChartConfigs';
+import ChartConfig from './constants/ChartConfig';
 
 HighchartsMore(Highcharts);
-Highcharts.setOptions(ChartConfigs.theme);
+Highcharts.setOptions(ChartConfig.theme);
 
-const _fnRemoveSpinner = function(){  
+const _fnRemoveSpinner = function(){
   document.body.removeChild(document.getElementById('spinner'));
 }
 

@@ -3,16 +3,9 @@ import _ from 'lodash';
 import Big from 'big.js';
 
 import {Direction} from '../constants/Type';
-import ChartConfigs from '../constants/ChartConfigs';
-import {
-        fnNumberFormat,
-        fnVolumePointFormatter,
-        fnATHPointFormatter,
-        markerExDivident,
-        tooltipExDivident,
-        markerSplitRatio,
-        tooltipSplitRatio
-      } from '../constants/ChartConfigs';
+
+import ChartConfig from '../constants/ChartConfig';
+import Tooltip from '../constants/Tooltip';
 
 import {
         fnAddSeriesSma,
@@ -75,8 +68,8 @@ const _fnGetValueMoving = function(seria){
   }
 
   return {
-    value : fnNumberFormat(nowValue),
-    delta : fnNumberFormat(bDelta.abs().toString()),
+    value : ChartConfig.fnNumberFormat(nowValue),
+    delta : ChartConfig.fnNumberFormat(bDelta.abs().toString()),
     percent : bPercent.toString() + '%',
     direction
   };
@@ -114,7 +107,7 @@ const _fnAddSplitRatio = function(result){
         , splitRatio = point[7]
         , price = point[yPointIndex];
 
-    dataSplitRatio.push(Object.assign({}, markerSplitRatio, {x, splitRatio, price}));
+    dataSplitRatio.push(Object.assign(ChartConfig.fMarkerSplitRatio(), {x, splitRatio, price}));
   }
   return result;
 }
@@ -128,9 +121,9 @@ const _fnAddExDividend = function(result){
            , price = point[yPointIndex];
 
        if (fnCheckWithPrev(dataExDividend, x , 14)) {
-          dataExDividend.push(Object.assign({}, markerExDivident, {x, exValue, price}));
+          dataExDividend.push(Object.assign(ChartConfig.fMarkerExDividend(), {x, exValue, price}));
        } else {
-          const marker = Object.assign(ChartConfigs.fMarkerExDividend(), {x, exValue, price});
+          const marker = Object.assign(ChartConfig.fMarkerExDividend(), {x, exValue, price});
           marker.dataLabels.y = 0;
           dataExDividend.push(marker);
        }
@@ -269,7 +262,7 @@ const _fnSeriesPipe = function(json, yPointIndex){
 
 const _fnCreateIndicatorConfig = function(){
 
-  const config = ChartConfigs.fBaseAreaConfig();
+  const config = ChartConfig.fBaseAreaConfig();
 
   config.chart.height = 140;
   config.chart.spacingTop = 8;
@@ -285,8 +278,8 @@ const _fnCreateIndicatorConfig = function(){
 const _fnCreateConfigATH = function(data){
   if (data.length>0){
     const config = _fnCreateIndicatorConfig();
-    config.title = ChartConfigs.fTitleMetric('ATH Chart');
-    config.credits = ChartConfigs.creditsMetric;
+    config.title = ChartConfig.fTitleMetric('ATH Chart');
+    config.credits = ChartConfig.creditsMetric;
 
     config.series[0].zhValueText = "ATH";
     config.series[0].data = data;
@@ -299,7 +292,8 @@ const _fnCreateConfigATH = function(data){
     config.series[0].groupPadding = 0.1;
 
     config.series[0].tooltip = {
-      pointFormatter : fnATHPointFormatter,
+      //pointFormatter : fnATHPointFormatter,
+      pointFormatter : Tooltip.fnATHPointFormatter,
       headerFormat : ''
     }
     return config;
@@ -310,10 +304,10 @@ const _fnCreateConfigATH = function(data){
 
 const _fnCreateConfigVolume = function(data, dataColumn){
   if (data.length>0){
-    const config = ChartConfigs.fBaseAreaConfig();
-    config.title = ChartConfigs.fTitleMetric('Volume Chart');
-    config.legend = ChartConfigs.legendVolume;
-    config.credits = ChartConfigs.creditsMetric;
+    const config = ChartConfig.fBaseAreaConfig();
+    config.title = ChartConfig.fTitleMetric('Volume Chart');
+    config.legend = ChartConfig.legendVolume;
+    config.credits = ChartConfig.creditsMetric;
 
     config.chart.height = 140;
     config.chart.spacingTop = 8;
@@ -343,7 +337,8 @@ const _fnCreateConfigVolume = function(data, dataColumn){
         }
       },
       tooltip : {
-        pointFormatter : fnVolumePointFormatter,
+        //pointFormatter : fnVolumePointFormatter,
+        pointFormatter : Tooltip.fnVolumePointFormatter,
         headerFormat : ''
       }
     });
@@ -357,8 +352,8 @@ const _fnCreateConfigVolume = function(data, dataColumn){
 const _fnCreateConfigHighLow = function(data){
   if (data.length>0){
     const config = _fnCreateIndicatorConfig();
-    config.title = ChartConfigs.fTitleMetric('HighLow Chart');
-    config.credits = ChartConfigs.creditsMetric;
+    config.title = ChartConfig.fTitleMetric('HighLow Chart');
+    config.credits = ChartConfig.creditsMetric;
 
     config.series[0].zhValueText = "HL";
     config.series[0].data = data;
@@ -367,7 +362,7 @@ const _fnCreateConfigHighLow = function(data){
     config.series[0].type = "arearange";
 
     config.series[0].tooltip = {
-      pointFormatter : ChartConfigs.pointFormatterHighLow,
+      pointFormatter : Tooltip.fnHighLowPointFormatter,
       headerFormat : ''
     }
 
@@ -379,23 +374,13 @@ const _fnCreateConfigHighLow = function(data){
 
 const _fnAddSeriesExDivident = function(config, data){
   if (data.length>0){
-    config.series.push({
-       type: 'scatter',
-       color: 'green',
-       tooltip : tooltipExDivident,
-       data : data
-    });
+    config.series.push(ChartConfig.fExDividendSeria(data));
   }
 }
 
 const _fnAddSeriesSplitRatio = function(config, data){
   if (data.length>0){
-    config.series.push({
-       type: 'scatter',
-       color: ' #ED5813',
-       tooltip : tooltipSplitRatio,
-       data : data
-    });
+    config.series.push(ChartConfig.fSplitRatioSeria(data));
   }
 };
 
@@ -429,7 +414,7 @@ const fnGetSeries = function(config, json, yPointIndex){
    config.series[0].data = seria;
 
    config.xAxis.events = {
-     afterSetExtremes : ChartConfigs.zoomMetricCharts
+     afterSetExtremes : ChartConfig.zoomMetricCharts
    }
 
    _fnAddSeriesExDivident(config, dataExDividend);
@@ -446,9 +431,9 @@ const fnConfigAxes = function(result){
   const {config, minPoint, maxPoint} = result;
 
   config.yAxis.plotLines[0].value = maxPoint;
-  config.yAxis.plotLines[0].label.text = fnNumberFormat(maxPoint);
+  config.yAxis.plotLines[0].label.text = ChartConfig.fnNumberFormat(maxPoint);
   config.yAxis.plotLines[1].value = minPoint;
-  config.yAxis.plotLines[1].label.text = fnNumberFormat(minPoint);
+  config.yAxis.plotLines[1].label.text = ChartConfig.fnNumberFormat(minPoint);
   config.yAxis.opposite = true;
 
   config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
@@ -459,7 +444,7 @@ const fnConfigAxes = function(result){
 const fnQuandlFlow = _.flow(fnGetSeries, fnConfigAxes);
 
 QuandlAdapter.toConfig = function(json, yPointIndex){
-   const config = ChartConfigs.fBaseAreaConfig();
+   const config = ChartConfig.fBaseAreaConfig();
    return fnQuandlFlow(config, json, yPointIndex);
 }
 
@@ -471,7 +456,7 @@ QuandlAdapter.toSeries = function(json, yPointIndex, chartId){
   data = _.sortBy(data, '0');
 
   const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
-      , configSeries = ChartConfigs.fSeries();
+      , configSeries = ChartConfig.fSeries();
 
   configSeries.zhValueText = valueText;
   configSeries.data = data;

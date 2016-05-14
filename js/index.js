@@ -18,14 +18,14 @@ var _AppErc = require('./components/AppErc');
 
 var _AppErc2 = _interopRequireDefault(_AppErc);
 
-var _ChartConfigs = require('./constants/ChartConfigs');
+var _ChartConfig = require('./constants/ChartConfig');
 
-var _ChartConfigs2 = _interopRequireDefault(_ChartConfigs);
+var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _highchartsMore2.default)(_highcharts2.default);
-_highcharts2.default.setOptions(_ChartConfigs2.default.theme);
+_highcharts2.default.setOptions(_ChartConfig2.default.theme);
 
 var _fnRemoveSpinner = function _fnRemoveSpinner() {
   document.body.removeChild(document.getElementById('spinner'));
