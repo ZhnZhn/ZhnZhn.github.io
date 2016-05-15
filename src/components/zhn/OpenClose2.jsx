@@ -3,6 +3,7 @@ import React from 'react';
 const styles = {
   rootDiv: {
     backgroundColor: '#4D4D4D',
+    lineHeight: 1.5
   },
   divSvg : {
     width: '16px',

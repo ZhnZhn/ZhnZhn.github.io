@@ -44,6 +44,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = {
   rootDiv: {
+    lineHeight: 1.5,
     marginBottom: '10px',
     marginRight: '25px',
     position: 'relative'
@@ -54,7 +55,8 @@ var styles = {
     borderTopRightRadius: '10px',
     paddingTop: '4px',
     paddingLeft: '10px',
-    height: '25px',
+    lineHeight: 1.5,
+    //height: '25px',
     //width: '600px'
     width: '100%'
   },

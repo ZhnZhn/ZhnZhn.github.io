@@ -12,6 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = {
   rootDiv: {
+    lineHeight: 1.5,
     backgroundColor: '#4D4D4D'
   },
   labelCaption: {

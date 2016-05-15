@@ -43,6 +43,7 @@
 }
 
 .row__topic__odd {
+  line-height: 1.5;
   background-color: #404040;
   color: black;
   font-size: 16px;
@@ -53,6 +54,7 @@
   cursor: pointer;
 }
 .row__topic__even {
+  line-height: 1.5;
   color: black;
   font-size: 16px;
   font-weight: bold;

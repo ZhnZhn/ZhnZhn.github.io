@@ -3,6 +3,7 @@ import React from 'react';
 
 const styles = {
   rootDiv: {
+    lineHeight: 1.5, 
     backgroundColor: '#4D4D4D',
   },
   labelCaption: {

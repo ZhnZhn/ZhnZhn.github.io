@@ -12,7 +12,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = {
   rootDiv: {
-    backgroundColor: '#4D4D4D'
+    backgroundColor: '#4D4D4D',
+    lineHeight: 1.5
   },
   divSvg: {
     width: '16px',

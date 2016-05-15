@@ -10,15 +10,19 @@ const _fnNumberFormat = function(value){
 };
 
 const _fnBaseTooltip = function(date, id, valueText, value){
-  return `<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
-  <span id="${id}" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>
+  return `<div id="${id}" class="not-selected" style="padding-bottom:5px; cursor: pointer;">
+  <span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
+  <span style="display: inline-block; margin-left: 10px; color: #ED5813;">X</span>
+  </div>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">${valueText}: </span>
   <span style="font-weight: bold; color:rgba(194,149,23,1);">${value}</span><br/>`
 }
 
 const _fnExDividend = function(date, id, valueText, value, point){
-  return `<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
-  <span id="${id}" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>
+  return `<div id="${id}" class="not-selected" style="padding-bottom:5px; cursor: pointer;">
+  <span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
+  <span style="display: inline-block; margin-left: 10px; color: #ED5813;">X</span>
+  </div>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Ex-Dividend: </span>
   <span style="font-weight: bold; color: green;">${point.exValue}</span><br/>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price: </span>
@@ -26,8 +30,10 @@ const _fnExDividend = function(date, id, valueText, value, point){
 }
 
 const _fnSplitRatio = function(date, id, valueText, value, point){
-  return `<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
-  <span id="${id}" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>
+  return `<div id="${id}" class="not-selected" style="padding-bottom:5px; cursor: pointer;">
+  <span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
+  <span style="display: inline-block; margin-left: 10px; color: #ED5813;">X</span>
+  </div>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Split Ratio: </span>
   <span style="font-weight: bold; color: #ED5813;">${point.splitRatio}</span><br/>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Stock Price: </span>
@@ -35,8 +41,10 @@ const _fnSplitRatio = function(date, id, valueText, value, point){
 }
 
 const _fnVolumeTooltip = function(date, id, value, point){
-  return `<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
-  <span id="${id}" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>
+  return `<div id="${id}" class="not-selected" style="padding-bottom:5px; cursor: pointer;">
+  <span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
+  <span style="display: inline-block; margin-left: 10px; color: #ED5813;">X</span>
+  </div>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Volume: </span>
   <span style="font-weight: bold; color:rgba(194,149,23,1);">${value}</span><br/>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Open: </span>
@@ -50,8 +58,10 @@ const _fnVolumeTooltip = function(date, id, value, point){
 }
 
 const _fnATHTooltip = function(date, id, value, point){
-   return `<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
-   <span id="${id}" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>
+   return `<div id="${id}" class="not-selected" style="padding-bottom:5px; cursor:pointer;">
+   <span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
+   <span style="display: inline-block; margin-left: 10px; color: #ED5813;">X</span>
+   </div>
    <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">ATH: </span>
    <span style="font-weight: bold; color:rgba(194,149,23,1);">${point.y}%</span><br/>
    <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Close: </span>
@@ -61,8 +71,10 @@ const _fnATHTooltip = function(date, id, value, point){
 }
 
 const _fnHighLowTooltip = function(date, id, value, point){
-  return `<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">${date}</span>
-  <span id="${id}" style="display: inline-block; margin-left: 10px; color: #ED5813; cursor: pointer;">[x]</span></br>
+  return `<div id="${id}" class="not-selected" style="padding-bottom:5px; cursor:pointer;">
+  <span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);line-height:1.5;">${date}</span>
+  <span style="display: inline-block; margin-left: 10px; color: #ED5813;">X</span>
+  </div>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Day High: </span>
   <span style="font-weight: bold; color:rgba(194,149,23,1);">${point.dayHigh}</span></br>
   <span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Day Low: </span>
