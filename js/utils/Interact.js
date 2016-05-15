@@ -59,7 +59,7 @@ Interact.makeDragable = function (domNode) {
         },
         */
         onmove: Interact.dragMoveListener,
-        onend: Interact.dragEndListener });
+        onend: Interact.dragEndListener }).preventDefault(false);
 };
 
 exports.default = Interact;
