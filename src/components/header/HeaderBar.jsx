@@ -70,6 +70,13 @@ const HeaderBar = React.createClass({
 
          <ToolBarButton
            type="TypeA"
+           caption="Watch"
+           title="Watch List Browser"
+           onClick={this.fnBrowser(BrowserType.WATCH_LIST)}
+         />
+
+         <ToolBarButton
+           type="TypeA"
            caption="Settings"
            title="Application settings"
            onClick={this._handlerOpenSettings}

@@ -10,6 +10,7 @@ import Factory from '../logic/Factory';
 import BrowserSlice from './BrowserSlice';
 import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
+import WatchListSlice from './WatchListSlice';
 
 const ChartStore = Reflux.createStore({
   listenables : [ChartActions, ComponentActions],
@@ -93,7 +94,8 @@ const ChartStore = Reflux.createStore({
 
  ...BrowserSlice,
  ...ComponentSlice,
- ...SettingSlice
+ ...SettingSlice,
+ ...WatchListSlice
 
 })
 

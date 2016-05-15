@@ -88,6 +88,12 @@ var HeaderBar = _react2.default.createClass({
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
+        caption: 'Watch',
+        title: 'Watch List Browser',
+        onClick: this.fnBrowser(_Type.BrowserType.WATCH_LIST)
+      }),
+      _react2.default.createElement(_ToolBarButton2.default, {
+        type: 'TypeA',
         caption: 'Settings',
         title: 'Application settings',
         onClick: this._handlerOpenSettings

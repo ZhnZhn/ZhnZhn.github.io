@@ -1,18 +1,12 @@
 import React from 'react';
 
-
+import Browser from './Browser';
 import CaptionRow from '../CaptionRow';
 import MenuPart from './MenuPart';
-
-
-import ContainerStyles from '../styles/ContainerStyles.js';
-const styles = ContainerStyles;
-
 
 const MenuBrowser = React.createClass({
   getInitialState: function(){
     const {store, browserType, isShow} = this.props;
-    //const isShowBrowser = isShow ? true : false;
     return {
       isShow: isShow ? true : false,
       menuItems: store.getBrowserMenu(browserType)
@@ -22,7 +16,6 @@ const MenuBrowser = React.createClass({
   componentWillMount: function(){
     this.unsubscribe = this.props.store.listen(this._onStore);
   },
-
   componentWillUnmount: function(){
     this.unsubscribe();
   },
@@ -38,15 +31,11 @@ const MenuBrowser = React.createClass({
   },
 
   _handlerHide: function(){
-    this.state.isShow = false;
-    this.setState(this.state);
+    this.setState({isShow : false});
   },
-
   _handlerShow: function(){
-    this.state.isShow = true;
-    this.setState(this.state);
+    this.setState({isShow : true});
   },
-
 
   _renderMenuParts(menuItems){
     return menuItems.map((menuPart, index) => {
@@ -55,21 +44,17 @@ const MenuBrowser = React.createClass({
   },
 
   render: function(){
-    const {caption, children} = this.props;
-    const {menuItems} = this.state;
-
-
-    let styleOpen = this.state.isShow ? {display: 'block'} : {display: 'none'};
-    let classOpen = this.state.isShow ? "show-popup" : null;
+    const {caption, children} = this.props
+        , {menuItems, isShow} = this.state;
     return (
-       <div className={classOpen} style={Object.assign({}, styles.browserRootDiv, styleOpen)}>
-         <CaptionRow
-            caption={caption}
-            onClose={this._handlerHide}
-         />
-         {this._renderMenuParts(menuItems)}
-         {children}
-       </div>
+       <Browser isShow={isShow}>
+          <CaptionRow
+             caption={caption}
+             onClose={this._handlerHide}
+          />
+          {this._renderMenuParts(menuItems)}
+          {children}
+       </Browser>
     )
   }
 });

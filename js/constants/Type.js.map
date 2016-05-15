@@ -5,5 +5,5 @@
  "file": "D:\\_Dev\\_React\\_ERC\\js\\constants\\Type.js",
  "sourceRoot": "",
  "names": [],
- "mappings": ";;;;;AACO,IAAM,oCAAc;AACxB,UAAS,QAAT;AACA,gBAAe,aAAf;AACA,iBAAgB,cAAhB;CAHU;;AAMN,IAAM,gCAAY;AACvB,MAAK,IAAL;AACA,QAAO,MAAP;AACA,SAAQ,OAAR;CAHW"
+ "mappings": ";;;;;AACO,IAAM,oCAAc;AACxB,WAAS,QAAT;AACA,iBAAe,aAAf;AACA,kBAAgB,cAAhB;AACA,eAAa,WAAb;CAJU;;AAON,IAAM,gCAAY;AACvB,OAAK,IAAL;AACA,SAAO,MAAP;AACA,UAAQ,OAAR;CAHW"
 }

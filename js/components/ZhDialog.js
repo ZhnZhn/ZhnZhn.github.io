@@ -99,7 +99,8 @@ var ZhDialog = _react2.default.createClass({
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeC',
         caption: 'Close',
-        onClick: this.props.onClose
+        onClick: this.props.onClose,
+        onTouchStart: this.props.onClose
       })
     );
   },

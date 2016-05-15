@@ -83,6 +83,7 @@ const ZhDialog = React.createClass({
            type="TypeC"
            caption="Close"
            onClick={this.props.onClose}
+           onTouchStart={this.props.onClose}
         />
       </div>
     );

@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Browser = require('./Browser');
+
+var _Browser2 = _interopRequireDefault(_Browser);
+
 var _CaptionRow = require('../CaptionRow');
 
 var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
@@ -18,13 +22,7 @@ var _MenuPart = require('./MenuPart');
 
 var _MenuPart2 = _interopRequireDefault(_MenuPart);
 
-var _ContainerStyles = require('../styles/ContainerStyles.js');
-
-var _ContainerStyles2 = _interopRequireDefault(_ContainerStyles);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _ContainerStyles2.default;
 
 var MenuBrowser = _react2.default.createClass({
   displayName: 'MenuBrowser',
@@ -34,7 +32,6 @@ var MenuBrowser = _react2.default.createClass({
     var store = _props.store;
     var browserType = _props.browserType;
     var isShow = _props.isShow;
-    //const isShowBrowser = isShow ? true : false;
 
     return {
       isShow: isShow ? true : false,
@@ -45,7 +42,6 @@ var MenuBrowser = _react2.default.createClass({
   componentWillMount: function componentWillMount() {
     this.unsubscribe = this.props.store.listen(this._onStore);
   },
-
   componentWillUnmount: function componentWillUnmount() {
     this.unsubscribe();
   },
@@ -66,13 +62,10 @@ var MenuBrowser = _react2.default.createClass({
   },
 
   _handlerHide: function _handlerHide() {
-    this.state.isShow = false;
-    this.setState(this.state);
+    this.setState({ isShow: false });
   },
-
   _handlerShow: function _handlerShow() {
-    this.state.isShow = true;
-    this.setState(this.state);
+    this.setState({ isShow: true });
   },
 
   _renderMenuParts: function _renderMenuParts(menuItems) {
@@ -86,14 +79,13 @@ var MenuBrowser = _react2.default.createClass({
     var _props3 = this.props;
     var caption = _props3.caption;
     var children = _props3.children;
-    var menuItems = this.state.menuItems;
+    var _state = this.state;
+    var menuItems = _state.menuItems;
+    var isShow = _state.isShow;
 
-
-    var styleOpen = this.state.isShow ? { display: 'block' } : { display: 'none' };
-    var classOpen = this.state.isShow ? "show-popup" : null;
     return _react2.default.createElement(
-      'div',
-      { className: classOpen, style: Object.assign({}, styles.browserRootDiv, styleOpen) },
+      _Browser2.default,
+      { isShow: isShow },
       _react2.default.createElement(_CaptionRow2.default, {
         caption: caption,
         onClose: this._handlerHide

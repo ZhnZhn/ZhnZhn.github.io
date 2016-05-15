@@ -14,6 +14,11 @@ var styles = {
   rootDiv: {
     backgroundColor: '#4D4D4D'
   },
+  divSvg: {
+    width: '16px',
+    height: '16px',
+    display: 'inline-block'
+  },
   labelCaption: {
     paddingLeft: '4px',
     verticalAlign: 'top',
@@ -28,17 +33,21 @@ var styles = {
   }
 };
 
-var OpenClose = _react2.default.createClass({
-  displayName: 'OpenClose',
+var pathOpen = "M 2,14 L 14,14 14,2 2,14";
+var pathClose = "M 2,2 L 14,8 2,14 2,2";
+
+var OpenClose2 = _react2.default.createClass({
+  displayName: 'OpenClose2',
 
   getInitialState: function getInitialState() {
-    var isOpen = this.props.isClose ? false : true;
+    var isOpen = this.props.isClose ? false : true,
+        fillOpen = this.props.fillOpen ? this.props.fillOpen : 'yellow',
+        fillClose = this.props.fillClose ? this.props.fillClose : '#4D4D4D';
+
     return {
       isOpen: isOpen,
-      pathOpen: "M 2,14 L 14,14 14,2 2,14",
-      fillOpen: "yellow",
-      pathClose: "M 2,2 L 14,8 2,14 2,2",
-      fillClose: "#4D4D4D"
+      fillOpen: fillOpen,
+      fillClose: fillClose
     };
   },
 
@@ -54,12 +63,12 @@ var OpenClose = _react2.default.createClass({
         displayDivStyle = void 0,
         classShow = void 0;
     if (this.state.isOpen) {
-      pathV = this.state.pathOpen;
+      pathV = pathOpen;
       fillV = this.state.fillOpen;
       displayDivStyle = 'block';
       classShow = 'show-popup';
     } else {
-      pathV = this.state.pathClose;
+      pathV = pathClose;
       fillV = this.state.fillClose;
       displayDivStyle = 'none';
       classShow = null;
@@ -67,13 +76,13 @@ var OpenClose = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      { style: styles.rootDiv },
+      { style: Object.assign({}, styles.rootDiv, this.props.style) },
       _react2.default.createElement(
         'div',
         { onClick: this._handlerClickOpenClose },
         _react2.default.createElement(
           'div',
-          { style: { width: '16px', height: '16px', display: 'inline-block' } },
+          { style: styles.divSvg },
           _react2.default.createElement(
             'svg',
             {
@@ -84,7 +93,7 @@ var OpenClose = _react2.default.createClass({
             _react2.default.createElement('path', {
               d: pathV,
               fill: fillV,
-              strokeWidth: '1', stroke: 'yellow'
+              strokeWidth: '1', stroke: this.state.fillOpen
             })
           )
         ),
@@ -103,5 +112,5 @@ var OpenClose = _react2.default.createClass({
   }
 });
 
-exports.default = OpenClose;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\OpenClose.js.map
+exports.default = OpenClose2;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\OpenClose2.js.map

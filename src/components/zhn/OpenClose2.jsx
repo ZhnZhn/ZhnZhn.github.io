@@ -1,9 +1,13 @@
 import React from 'react';
 
-
 const styles = {
   rootDiv: {
     backgroundColor: '#4D4D4D',
+  },
+  divSvg : {
+    width: '16px',
+    height: '16px',
+    display: 'inline-block'
   },
   labelCaption: {
     paddingLeft: '4px',
@@ -19,15 +23,19 @@ const styles = {
   }
 };
 
-const OpenClose = React.createClass({
+const pathOpen = "M 2,14 L 14,14 14,2 2,14";
+const pathClose = "M 2,2 L 14,8 2,14 2,2";
+
+const OpenClose2 = React.createClass({
    getInitialState: function(){
-      const isOpen = (this.props.isClose) ? false : true;
+      const isOpen = (this.props.isClose) ? false : true
+          , fillOpen = (this.props.fillOpen) ? this.props.fillOpen : 'yellow'
+          , fillClose = (this.props.fillClose) ? this.props.fillClose : '#4D4D4D';
+
       return {
         isOpen: isOpen,
-        pathOpen: "M 2,14 L 14,14 14,2 2,14",
-        fillOpen: "yellow",
-        pathClose: "M 2,2 L 14,8 2,14 2,2",
-        fillClose: "#4D4D4D"
+        fillOpen: fillOpen,
+        fillClose: fillClose
       };
    },
 
@@ -41,22 +49,23 @@ const OpenClose = React.createClass({
 
     let pathV, fillV, displayDivStyle, classShow;
     if (this.state.isOpen){
-      pathV = this.state.pathOpen;
+      pathV = pathOpen;
       fillV = this.state.fillOpen;
       displayDivStyle = 'block';
       classShow = 'show-popup';
 
     } else {
-      pathV = this.state.pathClose;
+      pathV = pathClose;
       fillV = this.state.fillClose;
       displayDivStyle = 'none';
       classShow = null;
     }
 
+
     return (
-      <div style={styles.rootDiv}>
+      <div style={Object.assign({}, styles.rootDiv, this.props.style)}>
         <div onClick={this._handlerClickOpenClose}>
-          <div style={{width: '16px', height: '16px', display: 'inline-block'}}>
+          <div style={styles.divSvg}>
              <svg
                 viewBox="0 0 16 16" width="100%" height="100%"
                 preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +74,7 @@ const OpenClose = React.createClass({
              <path
                 d={pathV}
                 fill={fillV}
-                strokeWidth="1" stroke="yellow"
+                strokeWidth="1" stroke={this.state.fillOpen}
              >
              </path>
              </svg>
@@ -82,4 +91,4 @@ const OpenClose = React.createClass({
   }
 });
 
-export default OpenClose;
+export default OpenClose2;

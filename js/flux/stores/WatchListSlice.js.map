@@ -1,0 +1,9 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\stores\\WatchListSlice.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\stores\\WatchListSlice.js",
+ "sourceRoot": "",
+ "names": [],
+ "mappings": ";;;;;;AACA,IAAM,iBAAiB;AACrB,aAAY;AACV,YAAS,CACP;AACG,aAAQ,kBAAR;AACA,aAAQ,CACN;AACE,eAAQ,OAAR;OAFI,CAAR;KAHI,EASP,EAAE,OAAQ,aAAR,EATK,EAUP,EAAE,OAAQ,QAAR,EAVK,EAWP,EAAE,OAAQ,SAAR,EAXK,CAAT;GADF;AAeA,wCAAc;AACZ,WAAO,KAAK,SAAL,CADK;GAhBO;CAAjB;;kBAqBS"
+}
