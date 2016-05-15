@@ -70,7 +70,7 @@ var OpenClose = _react2.default.createClass({
       { style: styles.rootDiv },
       _react2.default.createElement(
         'div',
-        { onClick: this._handlerClickOpenClose },
+        { className: 'not-selected', onClick: this._handlerClickOpenClose },
         _react2.default.createElement(
           'div',
           { style: { width: '16px', height: '16px', display: 'inline-block' } },

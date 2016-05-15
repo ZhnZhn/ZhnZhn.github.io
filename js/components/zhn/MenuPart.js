@@ -22,7 +22,7 @@ var MenuPart = _react2.default.createClass({
   displayName: 'MenuPart',
   _renderMenuItems: function _renderMenuItems(items) {
     return items.map(function (item, index) {
-      var className = index % 2 ? 'row__topic__even' : 'row__topic__odd';
+      var className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
       var menuBadge = item.counter !== 0 ? _react2.default.createElement(_MenuBadge2.default, {
         counter: item.counter,
         isOpen: item.isOpen,
@@ -31,7 +31,11 @@ var MenuPart = _react2.default.createClass({
       }) : null;
       return _react2.default.createElement(
         'div',
-        { key: index, className: className, onClick: item.onClick },
+        {
+          key: index,
+          className: className,
+          onClick: item.onClick
+        },
         item.title,
         menuBadge
       );

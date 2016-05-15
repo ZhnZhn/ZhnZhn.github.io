@@ -83,7 +83,6 @@ const ZhDialog = React.createClass({
            type="TypeC"
            caption="Close"
            onClick={this.props.onClose}
-           onTouchStart={this.props.onClose}
         />
       </div>
     );
@@ -95,14 +94,7 @@ const ZhDialog = React.createClass({
       children
     } = this.props;
 
-
-   /*
-   let index = 0
-   let childrenWithProps = React.Children.map(this.props.children, function(child) {
-           return React.cloneElement(child, {key : index++});
-   });
-   */
-
+   
     let styleShow = this.props.isShow ? {display: 'block'} : {display: 'none'};
     let classShow = this.props.isShow ? 'show-popup' : null;
 

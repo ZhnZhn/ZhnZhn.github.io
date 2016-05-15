@@ -326,6 +326,7 @@ var AreaChartItem = _react2.default.createClass({
         _react2.default.createElement(
           'span',
           {
+            className: 'not-selected',
             title: caption,
             style: _styleCaption,
             onClick: this._handlerToggleOpen

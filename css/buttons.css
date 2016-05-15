@@ -97,7 +97,7 @@
   width: 22px;
   height: 22px;
   padding: 2px;
-  display: inline-block;  
+  display: inline-block;
   border-radius: 50%;
   border: 2px solid gray;
   stroke : gray;
@@ -106,4 +106,11 @@
 .svg-resize:hover{
   border : 2px solid rgba(164, 135, 212, 1);
   stroke : rgba(164, 135, 212, 1);
+}
+
+.not-selected {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
 }

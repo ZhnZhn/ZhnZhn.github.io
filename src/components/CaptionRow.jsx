@@ -37,7 +37,12 @@ const CaptionRow = React.createClass({
 
     return (
       <div style={styles.captionDiv}>
-        <span style={styles.captionSpan}>{this.props.caption}</span>
+         <span
+            className="not-selected"
+            style={styles.captionSpan}
+         >
+           {this.props.caption}
+        </span>
         {_compHrzResize}
         <SvgClose onClose={this.props.onClose} />
       </div>

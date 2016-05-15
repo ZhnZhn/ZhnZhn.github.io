@@ -21,7 +21,7 @@ const ButtonTab = React.createClass({
   render(){
     const {caption, style} = this.props;
     const _rootClass = (this.state.isShow) ?
-              'button-tab button-tab--show' : 'button-tab';
+              'button-tab button-tab--show not-selected' : 'button-tab not-selected';
     return (
       <div
         className={_rootClass}

@@ -99,8 +99,7 @@ var ZhDialog = _react2.default.createClass({
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeC',
         caption: 'Close',
-        onClick: this.props.onClose,
-        onTouchStart: this.props.onClose
+        onClick: this.props.onClose
       })
     );
   },
@@ -110,12 +109,6 @@ var ZhDialog = _react2.default.createClass({
     var caption = _props.caption;
     var children = _props.children;
 
-    /*
-    let index = 0
-    let childrenWithProps = React.Children.map(this.props.children, function(child) {
-            return React.cloneElement(child, {key : index++});
-    });
-    */
 
     var styleShow = this.props.isShow ? { display: 'block' } : { display: 'none' };
     var classShow = this.props.isShow ? 'show-popup' : null;

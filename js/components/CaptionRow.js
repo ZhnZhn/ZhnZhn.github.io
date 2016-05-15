@@ -62,7 +62,10 @@ var CaptionRow = _react2.default.createClass({
       { style: styles.captionDiv },
       _react2.default.createElement(
         'span',
-        { style: styles.captionSpan },
+        {
+          className: 'not-selected',
+          style: styles.captionSpan
+        },
         this.props.caption
       ),
       _compHrzResize,

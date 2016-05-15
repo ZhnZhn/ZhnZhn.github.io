@@ -7,7 +7,7 @@ const MenuPart = React.createClass({
 
   _renderMenuItems(items){
     return items.map((item, index) => {
-      const className = (index % 2) ? 'row__topic__even' : 'row__topic__odd';
+      const className = (index % 2) ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
       const menuBadge = (item.counter !== 0) ? (
                     <MenuBadge
                       counter={item.counter}
@@ -17,7 +17,11 @@ const MenuPart = React.createClass({
                    />
                  ) : null;
       return (
-         <div key={index} className={className} onClick={item.onClick}>
+         <div
+             key={index}
+             className={className}
+             onClick={item.onClick}
+          >
             {item.title}
             {menuBadge}
          </div>

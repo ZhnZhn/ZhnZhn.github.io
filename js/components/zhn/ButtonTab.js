@@ -31,7 +31,7 @@ var ButtonTab = _react2.default.createClass({
     var caption = _props.caption;
     var style = _props.style;
 
-    var _rootClass = this.state.isShow ? 'button-tab button-tab--show' : 'button-tab';
+    var _rootClass = this.state.isShow ? 'button-tab button-tab--show not-selected' : 'button-tab not-selected';
     return _react2.default.createElement(
       'div',
       {

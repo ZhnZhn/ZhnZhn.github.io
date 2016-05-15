@@ -289,6 +289,7 @@ const AreaChartItem = React.createClass({
              onUnCheck={this._fnOnUnCheck}
           />
           <span
+             className="not-selected"
              title={caption}
              style={_styleCaption}
              onClick={this._handlerToggleOpen}
@@ -327,7 +328,7 @@ const AreaChartItem = React.createClass({
     )
   },
 
-  reflowChart(width){    
+  reflowChart(width){
     //this.mainChart.reflow();
     this.mainChart.setSize(width, this.mainChart.options.chart.height, true);
     this.mainChart.options.zhDetailCharts.forEach((chart) => {
