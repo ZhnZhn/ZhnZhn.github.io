@@ -21,12 +21,16 @@ var Browser = _react2.default.createClass({
   render: function render() {
     var _props = this.props;
     var isShow = _props.isShow;
+    var style = _props.style;
     var children = _props.children;
-    var styleOpen = isShow ? { display: 'block' } : { display: 'none' };
-    var classOpen = isShow ? "show-popup" : null;
+    var _styleOpen = isShow ? { display: 'block' } : { display: 'none' };
+    var _classOpen = isShow ? "show-popup" : null;
     return _react2.default.createElement(
       'div',
-      { className: classOpen, style: Object.assign({}, styles.browserRootDiv, styleOpen) },
+      {
+        className: _classOpen,
+        style: Object.assign({}, styles.browserRootDiv, style, _styleOpen)
+      },
       children
     );
   }

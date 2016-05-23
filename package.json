@@ -22,6 +22,7 @@
       "highcharts": "github:highcharts/highcharts@^4.2.3",
       "highcharts-more": "npm:highcharts-more@^0.1.2",
       "interact.js": "npm:interact.js@^1.2.6",
+      "localforage": "npm:localforage@^1.4.2",
       "lodash": "npm:lodash@^4.6.1",
       "react": "npm:react@^0.14.8",
       "react-dom": "npm:react-dom@^0.14.8",

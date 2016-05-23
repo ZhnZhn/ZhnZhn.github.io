@@ -58,29 +58,43 @@ var OpenClose2 = _react2.default.createClass({
   },
 
   render: function render() {
+    var _props = this.props;
+    var style = _props.style;
+    var styleNotSelected = _props.styleNotSelected;
+    var styleCaption = _props.styleCaption;
+    var caption = _props.caption;
+    var children = _props.children;
 
-    var pathV = void 0,
-        fillV = void 0,
-        displayDivStyle = void 0,
-        classShow = void 0;
+
+    var _pathV = void 0,
+        _fillV = void 0,
+        _displayDivStyle = void 0,
+        _classShow = void 0,
+        _styleNotSelected = void 0;
     if (this.state.isOpen) {
-      pathV = pathOpen;
-      fillV = this.state.fillOpen;
-      displayDivStyle = 'block';
-      classShow = 'show-popup';
+      _pathV = pathOpen;
+      _fillV = this.state.fillOpen;
+      _displayDivStyle = 'block';
+      _classShow = 'show-popup';
+      _styleNotSelected = null;
     } else {
-      pathV = pathClose;
-      fillV = this.state.fillClose;
-      displayDivStyle = 'none';
-      classShow = null;
+      _pathV = pathClose;
+      _fillV = this.state.fillClose;
+      _displayDivStyle = 'none';
+      _classShow = null;
+      _styleNotSelected = styleNotSelected;
     }
 
     return _react2.default.createElement(
       'div',
-      { style: Object.assign({}, styles.rootDiv, this.props.style) },
+      { style: Object.assign({}, styles.rootDiv, style) },
       _react2.default.createElement(
         'div',
-        { onClick: this._handlerClickOpenClose },
+        {
+          className: 'not-selected',
+          style: _styleNotSelected,
+          onClick: this._handlerClickOpenClose
+        },
         _react2.default.createElement(
           'div',
           { style: styles.divSvg },
@@ -92,22 +106,22 @@ var OpenClose2 = _react2.default.createClass({
               style: { display: 'inline-block' }
             },
             _react2.default.createElement('path', {
-              d: pathV,
-              fill: fillV,
+              d: _pathV,
+              fill: _fillV,
               strokeWidth: '1', stroke: this.state.fillOpen
             })
           )
         ),
         _react2.default.createElement(
           'span',
-          { style: styles.labelCaption },
-          this.props.caption
+          { style: Object.assign({}, styles.labelCaption, styleCaption) },
+          caption
         )
       ),
       _react2.default.createElement(
         'div',
-        { className: classShow, style: { display: displayDivStyle } },
-        this.props.children
+        { className: _classShow, style: { display: _displayDivStyle } },
+        children
       )
     );
   }

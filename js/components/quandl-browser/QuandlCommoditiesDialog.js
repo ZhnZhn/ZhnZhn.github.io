@@ -4,9 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _WithValidation = require('../dialogs/WithValidation');
+
+var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ZhDialog = require('../ZhDialog');
 
@@ -40,10 +46,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var QuandlCommoditiesDialog = _react2.default.createClass({
-  displayName: 'QuandlCommoditiesDialog',
-
-
+var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
+  displayName: 'QuandlCommoditiesDialog'
+}, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     return {
       itemType: null,
@@ -55,7 +60,6 @@ var QuandlCommoditiesDialog = _react2.default.createClass({
       isFirstRender: true
     };
   },
-
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
       if (this.props.isShow === nextProps.isShow) {
@@ -64,7 +68,6 @@ var QuandlCommoditiesDialog = _react2.default.createClass({
     }
     return true;
   },
-
   _handlerSelectType: function _handlerSelectType(itemType) {
     if (itemType !== null) {
       this.state.itemType = itemType;
@@ -76,16 +79,14 @@ var QuandlCommoditiesDialog = _react2.default.createClass({
       this.state.itemCommodity = null;
     }
   },
-
   _handlerSelectCommodity: function _handlerSelectCommodity(itemCommodity) {
     this.state.itemCommodity = itemCommodity;
   },
-
   _handlerLoad: function _handlerLoad(event) {
 
     event.target.focus();
-
-    if (this._validateInput()) {
+    var validationMessages = this._getValidationMessages();
+    if (validationMessages.isValid) {
       var _refs$datesFragment$g = this.refs.datesFragment.getValues();
 
       var fromDate = _refs$datesFragment$g.fromDate;
@@ -103,37 +104,23 @@ var QuandlCommoditiesDialog = _react2.default.createClass({
       };
       this.props.onLoad(option);
     }
-    this.setState(this.state);
+    this._updateValidationMessages(validationMessages);
   },
-
-  _validateInput: function _validateInput() {
-    var result = true;
-    this.state.validationMessages = [];
-
+  _getValidationMessages: function _getValidationMessages() {
+    var validationMessages = [];
     if (!this.state.itemType) {
-      this.state.validationMessages.push("Type is Required to Select");
-      result = false;
+      validationMessages.push("Type is Required to Select");
     }
-
     if (!this.state.itemCommodity) {
-      this.state.validationMessages.push("Commodity is Required to Select");
-      result = false;
+      validationMessages.push("Commodity is Required to Select");
     }
-
     if (!this.refs.datesFragment.isValid()) {
-      this.state.validationMessages.push("Some Date is not in Valid Format");
-      result = false;
+      validationMessages.push("Some Date is not in Valid Format");
     }
+    validationMessages.isValid = validationMessages.length === 0 ? true : false;
 
-    return result;
+    return validationMessages;
   },
-
-  /*
-    _handlerShowChart: function(){
-      QuandlActions.showChart();
-    },
-    */
-
   render: function render() {
     var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -166,7 +153,7 @@ var QuandlCommoditiesDialog = _react2.default.createClass({
         isShow: isShow,
         commandButtons: commandButtons,
         onShowChart: onShow,
-        onClose: this.props.onClose
+        onClose: this._handlerClose
       },
       _react2.default.createElement(
         'div',
@@ -211,7 +198,7 @@ var QuandlCommoditiesDialog = _react2.default.createClass({
       })
     );
   }
-});
+}));
 
 exports.default = QuandlCommoditiesDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\QuandlCommoditiesDialog.js.map

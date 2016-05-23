@@ -23,9 +23,8 @@
   overflow-x: hidden;
   overflow-y: auto;
   opacity: 1;
-  background: rgba(0,0,0, 0.5) none repeat scroll 0% 0%;
+  background: rgba(0,0,0, 0.35) none repeat scroll 0% 0%;
   outline: 0px none;
-  transition: opacity 0.15s linear 0s;
 }
 
 

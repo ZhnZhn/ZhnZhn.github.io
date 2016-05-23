@@ -17,9 +17,11 @@ var createTypeObject = function createTypeObject() {
   addCharts(obj, _DialogType.Quandl, 'QUANDL_');
   addCharts(obj, _DialogType.QuandlYahoo, 'QUANDL_YAHOO_');
   addCharts(obj, _DialogType.QuandlGoogle, 'QUANDL_GOOGLE_');
+  obj['WATCH_LIST'] = 'WL_WATCH_LIST';
   return obj;
 };
 
 var ChartType = createTypeObject();
+
 exports.default = ChartType;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\ChartType.js.map

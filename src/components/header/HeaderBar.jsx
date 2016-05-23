@@ -1,10 +1,10 @@
 import React from 'react';
 
+import ProgressLoading from './ProgressLoading';
 import AppLabel from './AppLabel';
-import SettingsDialog from './SettingsDialog';
 import ToolBarButton from '../ToolBarButton';
 import ComponentActions from '../../flux/actions/ComponentActions';
-import {BrowserType} from '../../constants/Type';
+import {BrowserType, ModalDialog} from '../../constants/Type';
 
 const styles = {
   rootDiv : {
@@ -26,21 +26,14 @@ const HeaderBar = React.createClass({
     this.fnBrowser = function (browserType) {
       return ComponentActions.showBrowser.bind(null, browserType)
     }
-    return {
-      isShowSettings : false
-    }
-  },
-
-  _handlerOpenSettings(){
-    this.setState({isShowSettings: true});
-  },
-  _handlerCloseSettings(){
-    this.setState({isShowSettings: false});
+    return { }
   },
 
   render(){
+    const {store} = this.props;
     return (
       <div className="header" style={styles.rootDiv}>
+         <ProgressLoading store={store} />
          <AppLabel
             style={styles.appLabel}
             title="Economic Rest Client v. 0.10.0"
@@ -79,7 +72,7 @@ const HeaderBar = React.createClass({
            type="TypeA"
            caption="Settings"
            title="Application settings"
-           onClick={this._handlerOpenSettings}
+           onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.SETTINGS)}
           />
 
          <ToolBarButton
@@ -89,10 +82,6 @@ const HeaderBar = React.createClass({
            onClick={ComponentActions.showAbout}
           />
 
-          <SettingsDialog
-             isShow={this.state.isShowSettings}
-             onClose={this._handlerCloseSettings}
-          />
       </div>
     );
   }

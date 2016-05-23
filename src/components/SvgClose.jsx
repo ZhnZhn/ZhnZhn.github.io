@@ -7,11 +7,13 @@ const styles = {
 };
 
 const SvgClose = React.createClass({
-   render: function(){
+   render(){
+     const {style, onClose} = this.props;
      return (
        <div
           className="svg-close"
-          onClick={this.props.onClose}
+          onClick={onClose}
+          style={style}
        >
          <svg viewBox="0 0 12 12" width="100%" height="100%"
               style={styles.svg}
@@ -21,7 +23,7 @@ const SvgClose = React.createClass({
               >
               </path>
               <path d="M 12,0 L 0,12" strokeWidth="2" stroke="#ED5813"
-                    strokeLinecap="round"                                
+                    strokeLinecap="round"
               >
               </path>
          </svg>

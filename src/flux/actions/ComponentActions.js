@@ -8,7 +8,10 @@ export const ComponentActionTypes = {
   CLOSE_CHART_CONTAINER : 'closeChartContainer',
   CLOSE_CHART_CONTAINER_2 : 'closeChartContainer2',
   UPDATE_BROWSER_MENU : 'updateBrowserMenu',
-  SET_ACTIVE_CHECKBOX : 'setActiveCheckbox'
+  SET_ACTIVE_CHECKBOX : 'setActiveCheckbox',
+
+  SHOW_MODAL_DIALOG : 'showModalDialog',
+  UPDATE_WATCH_BROWSER : 'updateWatchBrowser'
 }
 
 const ComponentActions = Reflux.createActions({
@@ -19,7 +22,10 @@ const ComponentActions = Reflux.createActions({
   [ComponentActionTypes.CLOSE_CHART_CONTAINER] : {},
   [ComponentActionTypes.CLOSE_CHART_CONTAINER_2] : {},
   [ComponentActionTypes.UPDATE_BROWSER_MENU] : {},
-  [ComponentActionTypes.SET_ACTIVE_CHECKBOX] : {}
+  [ComponentActionTypes.SET_ACTIVE_CHECKBOX] : {},
+
+  [ComponentActionTypes.SHOW_MODAL_DIALOG] : {},
+  [ComponentActionTypes.UPDATE_WATCH_BROWSER] : {}
 });
 
 export default ComponentActions

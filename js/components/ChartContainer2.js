@@ -18,6 +18,8 @@ var _ComponentActions = require('../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
+var _Type = require('../constants/Type');
+
 var _ZhHighchart = require('./ZhHighchart');
 
 var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
@@ -25,6 +27,10 @@ var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
 var _CaptionRow = require('./CaptionRow');
 
 var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
+
+var _SvgHrzResize = require('./zhn/SvgHrzResize');
+
+var _SvgHrzResize2 = _interopRequireDefault(_SvgHrzResize);
 
 var _AreaChartItem = require('./AreaChartItem');
 
@@ -123,13 +129,16 @@ var ChartContainer2 = _react2.default.createClass({
     var onCloseItem = _props2.onCloseItem;
 
     var domCharts = this.state.configs.map(function (config, index) {
+      var id = config.zhConfig.id;
+
       return _react2.default.createElement(_AreaChartItem2.default, {
         ref: 'chart' + index,
-        key: config.stockTicket,
-        caption: config.stockTicket,
+        key: id,
+        caption: id,
         config: config,
         onSetActive: _ComponentActions2.default.setActiveCheckbox,
-        onCloseItem: onCloseItem.bind(null, chartType, browserType, config.stockTicket)
+        onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
+        onAddToWatch: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH)
       });
     });
 
@@ -147,15 +156,19 @@ var ChartContainer2 = _react2.default.createClass({
         className: classOpen,
         style: Object.assign({}, styles.rootDiv, styleOpen)
       },
-      _react2.default.createElement(_CaptionRow2.default, {
-        caption: this.props.caption,
-        isResizable: true,
-        minWidth: 600,
-        maxWidth: 1200,
-        comp: this,
-        onResizeAfter: this._handlerResizeAfter,
-        onClose: this._handlerHide
-      }),
+      _react2.default.createElement(
+        _CaptionRow2.default,
+        {
+          caption: this.props.caption,
+          onClose: this._handlerHide
+        },
+        _react2.default.createElement(_SvgHrzResize2.default, {
+          minWidth: 600,
+          maxWidth: 1200,
+          comp: this,
+          onResizeAfter: this._handlerResizeAfter
+        })
+      ),
       _react2.default.createElement(
         'div',
         { className: 'with-scroll', style: styles.chartDiv },

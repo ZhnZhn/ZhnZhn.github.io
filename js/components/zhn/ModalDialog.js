@@ -18,8 +18,23 @@ var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
+var ClassNames = {
+  SHOWING: 'show-popup',
+  HIDING: 'hide-popup'
+};
+
+var Styles = {
+  SHOW: {
+    display: 'block'
+  },
+  HIDE: {
+    display: 'none'
+  },
+  HIDE_POPUP: {
+    opacity: 0,
+    transform: 'scaleY(0)'
+  },
+  ROOT_DIV: {
     position: 'absolute',
     top: '20%',
     left: '40%',
@@ -30,41 +45,49 @@ var styles = {
     boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
     zIndex: 10
   },
-  captionDiv: {
+  CAPTON_DIV: {
     padding: '5px',
     color: 'rgba(164, 135, 212,1)',
     backgroundColor: '#232F3B',
     textAlign: 'center',
     fontSize: '18px'
   },
-  rowDiv: {
-    margin: '5px'
-  },
-  labelSpan: {
-    color: '#1B75BB',
-    display: 'inline-block',
-    textAlign: 'right',
-    width: '90px'
-  },
-  commandDiv: {
+  COMMAND_DIV: {
     cursor: 'default',
     float: 'right',
     marginTop: '8px',
     marginBottom: '10px',
     marginRight: '4px'
-  },
-  inputText: {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
-    color: 'green'
   }
 };
 
 var ModalDialog = _react2.default.createClass({
   displayName: 'ModalDialog',
+
+  propTypes: {
+    isShow: _react2.default.PropTypes.bool,
+    timeout: _react2.default.PropTypes.number,
+    caption: _react2.default.PropTypes.string,
+    onClose: _react2.default.PropTypes.func
+  },
+  getDefaultProps: function getDefaultProps() {
+    return {
+      timeout: 450
+    };
+  },
+  getInitialState: function getInitialState() {
+    this.wasClosing = false;
+    return {};
+  },
+  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+    var _this = this;
+
+    if (this.wasClosing) {
+      setTimeout(function () {
+        _this.setState({});
+      }, this.props.timeout);
+    }
+  },
   _handlerClickDialog: function _handlerClickDialog(event) {
     event.stopPropagation();
   },
@@ -77,7 +100,7 @@ var ModalDialog = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      { style: styles.commandDiv },
+      { style: Styles.COMMAND_DIV },
       commandButtons,
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeC',
@@ -89,44 +112,52 @@ var ModalDialog = _react2.default.createClass({
 
   render: function render() {
     var _props2 = this.props;
-    var caption = _props2.caption;
     var isShow = _props2.isShow;
+    var caption = _props2.caption;
     var children = _props2.children;
     var onClose = _props2.onClose;
 
 
-    var _rootStyle = isShow ? { display: 'block' } : { display: 'none' };
+    var _className = void 0,
+        _style = void 0;
+
+    if (this.wasClosing) {
+      _style = Styles.HIDE;
+      this.wasClosing = false;
+    } else {
+      _className = isShow ? ClassNames.SHOWING : ClassNames.HIDING;
+      _style = isShow ? Styles.SHOW : Styles.HIDE_POPUP;
+      if (!isShow) {
+        this.wasClosing = true;
+      }
+    }
 
     return _react2.default.createElement(
       'div',
-      { className: 'modal-root', style: _rootStyle, onClick: onClose },
+      {
+        className: _className,
+        style: Object.assign({}, Styles.ROOT_DIV, _style),
+        onClick: this._handlerClickDialog
+      },
       _react2.default.createElement(
         'div',
-        {
-          ref: 'rootDiv',
-          className: 'show-popup',
-          style: styles.rootDiv,
-          onClick: this._handlerClickDialog
-        },
+        { style: Styles.CAPTON_DIV },
         _react2.default.createElement(
-          'div',
-          { style: styles.captionDiv },
-          _react2.default.createElement(
-            'span',
-            null,
-            caption
-          ),
-          _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
-        ),
-        _react2.default.createElement(
-          'div',
+          'span',
           null,
-          children
+          caption
         ),
-        this._renderCommandButton()
-      )
+        _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        children
+      ),
+      this._renderCommandButton()
     );
   }
+
 });
 
 exports.default = ModalDialog;

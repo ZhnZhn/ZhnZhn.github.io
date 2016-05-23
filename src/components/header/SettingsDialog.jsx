@@ -11,12 +11,22 @@ import DialogStyles from '../styles/DialogStyles'
 const styles = DialogStyles;
 
 const SettingsDialog = React.createClass({
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
+    }
+    return true;
+  },
+
   _handlerSet(){
     ChartStore.setQuandlKey(this.refs.input.getValue());
     this.props.onClose();
   },
 
   render(){
+
+
     const commandButtons =[
        <ToolBarButton
           key="a"

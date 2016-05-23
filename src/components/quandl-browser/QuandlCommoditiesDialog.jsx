@@ -1,5 +1,7 @@
 import React from 'react';
 
+import WithValidation from '../dialogs/WithValidation';
+
 import ZhDialog from '../ZhDialog';
 import ZhSelect from '../ZhSelect';
 import ToolBarButton from '../ToolBarButton';
@@ -14,8 +16,8 @@ import DialogStyles from '../styles/DialogStyles';
 const styles = DialogStyles;
 
 const QuandlCommoditiesDialog = React.createClass({
-
-  getInitialState: function(){
+  ...WithValidation,
+  getInitialState(){
     return {
        itemType: null,
        itemCommodity: null,
@@ -27,7 +29,7 @@ const QuandlCommoditiesDialog = React.createClass({
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
           return false;
@@ -36,7 +38,7 @@ const QuandlCommoditiesDialog = React.createClass({
     return true;
   },
 
-  _handlerSelectType: function(itemType){
+  _handlerSelectType(itemType){
       if (itemType!==null){
         this.state.itemType = itemType;
         this.state.itemCommodity = null;
@@ -48,15 +50,15 @@ const QuandlCommoditiesDialog = React.createClass({
       }
   },
 
-  _handlerSelectCommodity: function(itemCommodity){
+  _handlerSelectCommodity(itemCommodity){
      this.state.itemCommodity = itemCommodity;
   },
 
-  _handlerLoad: function(event){
+  _handlerLoad(event){
 
     event.target.focus();
-
-    if (this._validateInput()){
+    const validationMessages = this._getValidationMessages();
+    if (validationMessages.isValid) {
       const {fromDate, toDate} = this.refs.datesFragment.getValues();
       const {itemType, itemCommodity} = this.state;
       const option = {
@@ -66,40 +68,29 @@ const QuandlCommoditiesDialog = React.createClass({
         fromDate: fromDate,
         toDate: toDate,
       }
-      this.props.onLoad(option);      
+      this.props.onLoad(option);
     }
-    this.setState(this.state);
+    this._updateValidationMessages(validationMessages);
   },
 
-  _validateInput: function(){
-      let result = true;
-      this.state.validationMessages = [];
-
+  _getValidationMessages(){
+      const validationMessages = [];
       if (!this.state.itemType){
-        this.state.validationMessages.push("Type is Required to Select");
-        result = false;
+        validationMessages.push("Type is Required to Select");
       }
-
       if (!this.state.itemCommodity){
-        this.state.validationMessages.push("Commodity is Required to Select");
-        result = false;
+        validationMessages.push("Commodity is Required to Select");
       }
-
       if (!this.refs.datesFragment.isValid()){
-        this.state.validationMessages.push("Some Date is not in Valid Format");
-        result = false;
+        validationMessages.push("Some Date is not in Valid Format");
       }
+      validationMessages.isValid = (validationMessages.length === 0) ? true : false;
 
-      return result;
+      return validationMessages;
    },
 
-/*
-  _handlerShowChart: function(){
-    QuandlActions.showChart();
-  },
-  */
 
-  render: function(){
+  render(){
     let commandButtons =[
        <ToolBarButton
           key="a"
@@ -127,7 +118,7 @@ const QuandlCommoditiesDialog = React.createClass({
              isShow={isShow}
              commandButtons={commandButtons}
              onShowChart={onShow}
-             onClose={this.props.onClose}
+             onClose={this._handlerClose}
          >
 
              <div style={styles.rowDiv} key="1">

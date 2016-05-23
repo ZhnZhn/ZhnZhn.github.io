@@ -1,5 +1,7 @@
 import React from 'react';
 
+import WithValidation from '../dialogs/WithValidation';
+
 import ZhDialog from '../ZhDialog';
 import ToolBarButton from '../ToolBarButton';
 import ZhSelect from '../ZhSelect';
@@ -15,7 +17,8 @@ import DialogStyles from '../styles/DialogStyles';
 const styles = DialogStyles;
 
 const QuandlWorldBankEconomicDialog = React.createClass({
-  getInitialState: function(){
+  ...WithValidation,
+  getInitialState(){
     return {
       optionCountries: ISO3Country.getCountries(),
       optionMetrics: QuandlWorldBankEconomic.getMetrics(),
@@ -25,7 +28,7 @@ const QuandlWorldBankEconomicDialog = React.createClass({
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
           return false;
@@ -34,19 +37,18 @@ const QuandlWorldBankEconomicDialog = React.createClass({
     return true;
   },
 
-  _handlerSelectCountry: function(itemCountry){
+  _handlerSelectCountry(itemCountry){
     this.state.itemCountry = itemCountry;
   },
 
-  _handlerSelectMetric: function(itemMetric){
+  _handlerSelectMetric(itemMetric){
     this.state.itemMetric = itemMetric;
   },
 
-
-
-  _handlerLoad: function(event){
+  _handlerLoad(event){
     event.target.focus();
-    if (this._validateInput()){
+    const validationMessages = this._getValidationMessages();
+    if (validationMessages.isValid){
       const {fromDate, toDate} = this.refs.datesFragment.getValues();
       const {itemCountry, itemMetric} = this.state;
       const option = {
@@ -58,32 +60,26 @@ const QuandlWorldBankEconomicDialog = React.createClass({
       }
       this.props.onLoad(option);
     }
-    this.setState(this.state);
+    this._updateValidationMessages(validationMessages);
   },
 
-  _validateInput: function(){
-    let result = true;
-    this.state.validationMessages = [];
-
+  _getValidationMessages(){
+    const validationMessages = [];
     if (!this.state.itemCountry){
-      this.state.validationMessages.push("Country is Required to Select");
-      result = false;
+      validationMessages.push("Country is Required to Select");
     }
-
     if (!this.state.itemMetric){
-      this.state.validationMessages.push("Metric is Required to Select");
-      result = false;
+      validationMessages.push("Metric is Required to Select");
     }
-
     if (!this.refs.datesFragment.isValid()){
-      this.state.validationMessages.push("Some Date is not in Valid Format");
-      result = false;
+      validationMessages.push("Some Date is not in Valid Format");
     }
+    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
 
-    return result;
+    return validationMessages;
   },
 
-  render: function(){
+  render(){
     let commandButtons =[
        <ToolBarButton
           key="a"
@@ -99,7 +95,7 @@ const QuandlWorldBankEconomicDialog = React.createClass({
             caption="World Bank Economic"
             isShow={isShow}
             commandButtons={commandButtons}
-            onClose={onClose}
+            onClose={this._handlerClose}
             onShowChart={onShow}
       >
          <div style={styles.rowDiv} key="1">

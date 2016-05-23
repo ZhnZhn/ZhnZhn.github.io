@@ -1,0 +1,30 @@
+
+.tp__header{
+   position: relative;
+   padding-bottom:5px;
+   padding-right: 20px;
+   font-size: 12px;
+   font-weight: bold;
+   cursor: pointer;
+ }
+ .tp__header__caption{
+   color:rgba(194,149,23,1);
+ }
+ .tp__header__close{
+   display: inline-block;
+   position: absolute;
+   right: 0;
+   color: #ED5813;
+ }
+ .tp__body {
+   font-weight:bold;
+ }
+ .tp__body__title {
+   color:rgba(69, 114, 167, 1);
+ }
+ .tp__body__value {
+   color:rgba(194,149,23,1);
+ }
+ .tp__body__value_exdividend{
+   color: green;
+ }

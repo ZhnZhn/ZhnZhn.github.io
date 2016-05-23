@@ -6,6 +6,7 @@ import ChartConfig from '../constants/ChartConfig';
 export const fnAddSeriesSma = function(chart, period){
 
   const _id = 'SMA(' + period + ')'
+      , parentId = chart.options.zhConfig.id
       , dataSma = []
       , data = chart.series[0].data;
 
@@ -21,15 +22,16 @@ export const fnAddSeriesSma = function(chart, period){
   }
 
   if (dataSma.length>0){
-    const config = ChartConfig.fSeries();
+    const seria = ChartConfig.fSeries();
 
-    config.zhValueText = _id;
-    config.lineWidth = 2;
-    config.data = dataSma;
+    seria.zhSeriaId = parentId + '_' + _id;
+    seria.zhValueText = _id;
+    seria.lineWidth = 2;
+    seria.data = dataSma;
 
-    chart.addSeries(config, true, true)
+    chart.addSeries(seria, true, true)
 
-    return chart.options.colors[config['_colorIndex']];
+    return chart.options.colors[seria['_colorIndex']];
 
   } else {
     console.log('It seems, there are not enough data for SMA(' + period + ')');
@@ -67,6 +69,7 @@ const _fnGetPriceAndFlow = function(point){
 export const fnGetConfigMfi = function(chart, period, id){
 
   const data = chart.options.zhPoints
+       , parentId = chart.options.zhConfig.id
        , dataMcad = []
        , nPeriod = parseFloat(period) + 1;
 
@@ -154,8 +157,9 @@ export const fnGetConfigMfi = function(chart, period, id){
    config.yAxis.opposite = true;
    config.yAxis.plotLines = [];
 
-   config.series[0].data = dataMcad;
+   config.series[0].zhSeriaId = parentId + '_' + id;
    config.series[0].zhValueText = id;
+   config.series[0].data = dataMcad;
    config.series[0].name = "Spline";
    config.series[0].type = "spline";
    config.series[0].color = "green";

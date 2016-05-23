@@ -76,6 +76,20 @@
   font-weight: bold;
 }
 
+.arrow-down{
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  height: 0;
+  width: 0;
+  margin-left: 6px;
+  border-width: 5px;
+  border-style : solid;
+  border-top-color: inherit;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
 
 .button-circle {
     display : inline-block;

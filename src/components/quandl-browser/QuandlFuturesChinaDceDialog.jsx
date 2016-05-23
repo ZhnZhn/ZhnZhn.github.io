@@ -1,5 +1,7 @@
 import React from 'react';
 
+import WithValidation from '../dialogs/WithValidation';
+
 import ZhDialog from '../ZhDialog';
 import ZhSelect from '../ZhSelect';
 import ToolBarButton from '../ToolBarButton';
@@ -14,16 +16,16 @@ import DialogStyles from '../styles/DialogStyles'
 const styles = DialogStyles;
 
 const QuandlFuturesChinaDceDialog = React.createClass({
-  getInitialState: function(){
+  ...WithValidation,
+  getInitialState(){
     return {
       optionCodes: QuandlChinaDceFuture.getTickets(),
       code: null,
       validationMessages: [],
-      firstNotValidedInput: null,
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
           return false;
@@ -32,26 +34,14 @@ const QuandlFuturesChinaDceDialog = React.createClass({
     return true;
   },
 
-  _setInputFocus: function(){
-    if (this.state.firstNotValidedInput){
-      this.refs.selectStock.focusInput();
-    }
-  },
-
-  componentDidUpdate: function(){
-    if (this.props.isShow){
-      this._setInputFocus();
-    }
-  },
-
-  _handlerSelectCode: function(code){
+  _handlerSelectCode(code){
     this.state.code = code;
   },
 
-
-  _handlerLoad: function(event){
+  _handlerLoad(event){
      event.target.focus();
-     if (this._validateInput()){
+     const validationMessages = this._getValidationMessages();
+     if (validationMessages.isValid){
        const option = {
           value : this.state.code.value,
           code : this.state.code
@@ -59,26 +49,20 @@ const QuandlFuturesChinaDceDialog = React.createClass({
        this.props.onLoad(option);
 
      }
-     this.setState(this.state);
+     this._updateValidationMessages(validationMessages);
   },
 
-  _validateInput: function(){
-    let result = true;
-    this.state.validationMessages = [];
-
-    this.state.firstNotValidedInput = null;
-
+  _getValidationMessages(){
+    const validationMessages = [];
     if (!this.state.code){
-      this.state.validationMessages.push("Code is Required to Select");
-      this.state.firstNotValidedInput = 'selectStock';
-      result = false;
+      validationMessages.push("Code is Required to Select");
     }
-
-    return result;
+    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
+    return validationMessages;
   },
 
 
-  render: function(){
+  render(){
     let commandButtons =[
        <ToolBarButton
           key="a"
@@ -96,7 +80,7 @@ const QuandlFuturesChinaDceDialog = React.createClass({
            isShow={isShow}
            commandButtons={commandButtons}
            onShowChart={onShow}
-           onClose={onClose}
+           onClose={this._handlerClose}
        >
          <div style={styles.rowDiv} key="1">
            <span style={styles.labelSpan}>

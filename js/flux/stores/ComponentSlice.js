@@ -31,7 +31,7 @@ var ComponentSlice = {
   },
   isLoadToChart: function isLoadToChart() {
     if (this.activeChart) {
-      return true;
+      return this.activeChart.options.zhConfig.id;
     } else {
       return false;
     }
@@ -50,6 +50,10 @@ var ComponentSlice = {
       this.activeCheckbox = null;
       this.activeChart = null;
     }
+  },
+  onShowModalDialog: function onShowModalDialog(modalDialogType, option) {
+    option.modalDialogType = modalDialogType;
+    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   }
 };
 

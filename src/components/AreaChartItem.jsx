@@ -15,6 +15,7 @@ const styles = {
     lineHeight : 1.5,
     marginBottom: '10px',
     marginRight: '25px',
+    //marginRight: '10px',
     position : 'relative'
   },
   headerDiv: {
@@ -101,6 +102,11 @@ const AreaChartItem = React.createClass({
     this.setState({isShowIndicator : !this.state.isShowIndicator});
   },
 
+  _handlerAddToWatch(){
+    const {caption, config, onAddToWatch} = this.props;
+    onAddToWatch( {caption, config} );
+  },
+
   _handlerClickInfo(){
     this.setState({isShowChart: false, isShowInfo: true, isShowIndicator: false});
   },
@@ -176,8 +182,19 @@ const AreaChartItem = React.createClass({
          isShow={this.state.isShowIndicator}
          style= {{left: '10px'}}
          onClick={this._handlerClickIndicator}
-       />
+       >
+         <span className={'arrow-down'}></span>
+       </ButtonTab>
      );
+
+    const _btAdd = (
+      <ButtonTab
+        style={{left: '240px'}}
+        caption={'Add'}
+        isShow={false}
+        onClick={this._handlerAddToWatch}
+      />
+    );
 
     const _btInfo = (config.info) ? (
       <ButtonTab
@@ -217,6 +234,7 @@ const AreaChartItem = React.createClass({
     return (
       <div>
          {_btIndicator}
+         {_btAdd}
          {_btInfo}
          {_btVolume}
          {_btATH}

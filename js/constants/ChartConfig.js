@@ -197,6 +197,7 @@ ChartConfig.fBaseAreaConfig = function () {
     },
     series: [{
       zhValueText: 'Value',
+      turboThreshold: 20000,
       type: 'area',
       tooltip: {
         pointFormatter: _Tooltip2.default.fnBasePointFormatter,
@@ -283,7 +284,7 @@ ChartConfig.fMarkerSplitRatio = function () {
   return objPoint;
 };
 
-var _fScatterSeria = function _fScatterSeria(color, pointFormatter, data) {
+var _fScatterSeria = function _fScatterSeria(color, pointFormatter, data, zhSeriaId) {
   return {
     type: 'scatter',
     color: color,
@@ -291,14 +292,15 @@ var _fScatterSeria = function _fScatterSeria(color, pointFormatter, data) {
       pointFormatter: pointFormatter,
       headerFormat: ''
     },
-    data: data
+    data: data,
+    zhSeriaId: zhSeriaId
   };
 };
-ChartConfig.fExDividendSeria = function (data) {
-  return _fScatterSeria('green', _Tooltip2.default.fnExDividendPointFormatter, data);
+ChartConfig.fExDividendSeria = function (data, chartId) {
+  return _fScatterSeria('green', _Tooltip2.default.fnExDividendPointFormatter, data, chartId + '_ExDivident');
 };
-ChartConfig.fSplitRatioSeria = function (data) {
-  return _fScatterSeria('#ED5813', _Tooltip2.default.fnSplitRatioPointFormatter, data);
+ChartConfig.fSplitRatioSeria = function (data, chartId) {
+  return _fScatterSeria('#ED5813', _Tooltip2.default.fnSplitRatioPointFormatter, data, chartId + '_SplitRatio');
 };
 
 ChartConfig.fSeries = function () {

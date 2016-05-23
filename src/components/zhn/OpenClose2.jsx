@@ -48,24 +48,32 @@ const OpenClose2 = React.createClass({
 
   render: function(){
 
-    let pathV, fillV, displayDivStyle, classShow;
+    const {style, styleNotSelected, styleCaption, caption, children} = this.props;
+
+    let _pathV, _fillV, _displayDivStyle, _classShow, _styleNotSelected;
     if (this.state.isOpen){
-      pathV = pathOpen;
-      fillV = this.state.fillOpen;
-      displayDivStyle = 'block';
-      classShow = 'show-popup';
+      _pathV = pathOpen;
+      _fillV = this.state.fillOpen;
+      _displayDivStyle = 'block';
+      _classShow = 'show-popup';
+      _styleNotSelected = null;
 
     } else {
-      pathV = pathClose;
-      fillV = this.state.fillClose;
-      displayDivStyle = 'none';
-      classShow = null;
+      _pathV = pathClose;
+      _fillV = this.state.fillClose;
+      _displayDivStyle = 'none';
+      _classShow = null;
+      _styleNotSelected = styleNotSelected;
     }
 
 
     return (
-      <div style={Object.assign({}, styles.rootDiv, this.props.style)}>
-        <div onClick={this._handlerClickOpenClose}>
+      <div style={Object.assign({}, styles.rootDiv, style)}>
+        <div
+           className="not-selected"
+           style={_styleNotSelected}
+           onClick={this._handlerClickOpenClose}
+         >
           <div style={styles.divSvg}>
              <svg
                 viewBox="0 0 16 16" width="100%" height="100%"
@@ -73,19 +81,19 @@ const OpenClose2 = React.createClass({
                 style={{display: 'inline-block'}}
               >
              <path
-                d={pathV}
-                fill={fillV}
+                d={_pathV}
+                fill={_fillV}
                 strokeWidth="1" stroke={this.state.fillOpen}
              >
              </path>
              </svg>
          </div>
-         <span style={styles.labelCaption} >
-            {this.props.caption}
+         <span style={Object.assign({}, styles.labelCaption, styleCaption)} >
+            {caption}
          </span>
-      </div>
-      <div className={classShow} style={{display: displayDivStyle}}>
-        {this.props.children}
+       </div>
+      <div className={_classShow} style={{display: _displayDivStyle}}>
+        {children}
       </div>
      </div>
     )

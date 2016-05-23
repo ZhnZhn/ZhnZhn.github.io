@@ -8,6 +8,8 @@ import DataQE from '../../constants/DataQE';
 import DataQG from '../../constants/DataQG';
 import DataQY from '../../constants/DataQY';
 
+import DataWL from '../../constants/DataWL';
+
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
 import DateUtils from '../../utils/DateUtils';
@@ -59,7 +61,9 @@ const createChartContainerComp = function(conf, browserType){
 const hmDialogData = {
   QE : DataQE,
   QG : DataQG,
-  QY : DataQY
+  QY : DataQY,
+
+  WL : DataWL
 }
 
 const getDataConf = function(dialogType){

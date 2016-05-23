@@ -1,5 +1,7 @@
 import React from 'react';
 
+import WithValidation from './WithValidation';
+
 import ZhDialog from '../ZhDialog';
 import ZhSelect from '../ZhSelect';
 import ToolBarButton from '../ToolBarButton';
@@ -11,14 +13,15 @@ const styles = DialogStyles;
 
 
 const DialogType3 = React.createClass({
-  getInitialState: function(){
+  ...WithValidation,
+  getInitialState(){        
     return {
       stock: null,
       validationMessages: [],
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
           return false;
@@ -27,13 +30,14 @@ const DialogType3 = React.createClass({
     return true;
   },
 
-  _handlerSelectStock: function(stock){
+  _handlerSelectStock(stock){
     this.state.stock = stock;
   },
 
-  _handlerLoad: function(event){
+  _handlerLoad(event){
      event.target.focus();
-     if (this._validateInput()){
+     const validationMessages = this._getValidationMessages();
+     if (validationMessages.isValid){
        const {fromDate, toDate} = this.refs.datesFragment.getValues();
        const option = {
          value : this.state.stock.value,
@@ -43,28 +47,24 @@ const DialogType3 = React.createClass({
        }
        this.props.onLoad(option);
      }
-     this.setState(this.state);
+     this._updateValidationMessages(validationMessages);
   },
 
-  _validateInput: function(){
-    let result = true;
-    this.state.validationMessages = [];
-
+  _getValidationMessages(){
+    const validationMessages = [];
     if (!this.state.stock){
-      this.state.validationMessages.push("Stock is Required to Select");
-      result = false;
+      validationMessages.push("Stock is Required to Select");
     }
-
     if (!this.refs.datesFragment.isValid()){
-      this.state.validationMessages.push("Some Date is not in Valid Format");
-      result = false;
+      validationMessages.push("Some Date is not in Valid Format");
     }
+    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
 
-    return result;
+    return validationMessages;
   },
 
 
-  render: function(){
+  render(){
     let commandButtons =[
        <ToolBarButton
           key="a"
@@ -89,7 +89,7 @@ const DialogType3 = React.createClass({
            isShow={isShow}
            commandButtons={commandButtons}
            onShowChart={onShow}
-           onClose={onClose}
+           onClose={this._handlerClose}
        >
          <div style={styles.rowDiv} key="1">
            <span style={styles.labelSpan}>

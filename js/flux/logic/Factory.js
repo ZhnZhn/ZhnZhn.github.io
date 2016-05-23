@@ -30,6 +30,10 @@ var _DataQY = require('../../constants/DataQY');
 
 var _DataQY2 = _interopRequireDefault(_DataQY);
 
+var _DataWL = require('../../constants/DataWL');
+
+var _DataWL2 = _interopRequireDefault(_DataWL);
+
 var _ComponentActions = require('../actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -89,7 +93,9 @@ var createChartContainerComp = function createChartContainerComp(conf, browserTy
 var hmDialogData = {
   QE: _DataQE2.default,
   QG: _DataQG2.default,
-  QY: _DataQY2.default
+  QY: _DataQY2.default,
+
+  WL: _DataWL2.default
 };
 
 var getDataConf = function getDataConf(dialogType) {

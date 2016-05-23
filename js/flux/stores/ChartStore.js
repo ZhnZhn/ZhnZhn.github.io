@@ -18,9 +18,15 @@ var _ComponentActions = require('../actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
+var _WatchActions = require('../actions/WatchActions');
+
+var _WatchActions2 = _interopRequireDefault(_WatchActions);
+
 var _ChartType = require('../../constants/ChartType');
 
 var _ChartType2 = _interopRequireDefault(_ChartType);
+
+var _Type = require('../../constants/Type');
 
 var _Factory = require('../logic/Factory');
 
@@ -44,10 +50,22 @@ var _WatchListSlice2 = _interopRequireDefault(_WatchListSlice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _consoleLogStyle = 'color:rgb(237, 88, 19);';
+var _fnLogLoadError = function _fnLogLoadError(_ref) {
+  var caption = _ref.caption;
+  var descr = _ref.descr;
+  var chartId = _ref.chartId;
+
+  console.log('%c' + caption + ':' + chartId, _consoleLogStyle);
+  console.log('%c' + descr, _consoleLogStyle);
+};
+
 var ChartStore = _reflux2.default.createStore(_extends({
-  listenables: [_ChartActions2.default, _ComponentActions2.default],
+  listenables: [_ChartActions2.default, _ComponentActions2.default, _WatchActions2.default],
   charts: {},
-  init: function init() {},
+  init: function init() {
+    this.initWatchList();
+  },
   createInitConfig: function createInitConfig(chartType) {
     return { chartType: chartType, configs: [], isShow: true };
   },
@@ -58,33 +76,50 @@ var ChartStore = _reflux2.default.createStore(_extends({
     if (!this.charts[chartType]) {
       return false;
     }
-    var arr = this.charts[chartType].configs;
-    for (var i = 0, max = arr.length; i < max; i++) {
-      if (arr[i].stockTicket === chartId) {
+    var configs = this.charts[chartType].configs;
+    for (var i = 0, max = configs.length; i < max; i++) {
+      if (configs[i].zhConfig.id === chartId) {
         return true;
       }
     }
     return false;
   },
+  onLoadStock: function onLoadStock() {
+    this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK);
+  },
   onLoadStockCompleted: function onLoadStockCompleted(chartType, browserType, config) {
-    this.addMenuItemCounter(chartType, browserType);
+    if (browserType !== _Type.BrowserType.WATCH_LIST) {
+      this.addMenuItemCounter(chartType, browserType);
+    }
 
     var chartCont = this.charts[chartType];
     if (chartCont) {
       chartCont.configs.unshift(config);
       chartCont.isShow = true;
+
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, chartCont);
     } else {
       this.charts[chartType] = this.createInitConfig(chartType);
       this.charts[chartType].configs.unshift(config);
+
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
     }
 
     this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
   },
+  onLoadStockAdded: function onLoadStockAdded() {
+    this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_ADDED);
+  },
+  onLoadStockFailed: function onLoadStockFailed(option) {
+    this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_FAILED, option);
+    option.modalDialogType = _Type.ModalDialog.ALERT;
+    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+    _fnLogLoadError(option);
+  },
   onShowChart: function onShowChart(chartType, browserType) {
-
-    this.setMenuItemOpen(chartType, browserType);
+    if (browserType !== _Type.BrowserType.WATCH_LIST) {
+      this.setMenuItemOpen(chartType, browserType);
+    }
 
     var chartCont = this.charts[chartType];
     if (chartCont) {
@@ -98,18 +133,27 @@ var ChartStore = _reflux2.default.createStore(_extends({
     }
   },
   onCloseChart: function onCloseChart(chartType, browserType, chartId) {
-    this.minusMenuItemCounter(chartType, browserType);
+    if (browserType !== _Type.BrowserType.WATCH_LIST) {
+      this.minusMenuItemCounter(chartType, browserType);
+    }
 
     var chartCont = this.charts[chartType];
     chartCont.configs = chartCont.configs.filter(function (config) {
-      return config.stockTicket !== chartId;
+      return config.zhConfig.id !== chartId;
     });
+
+    if (this.activeChart && this.activeChart.options.zhConfig.id === chartId) {
+      this.activeChart = null;
+      this.activeChart = null;
+    }
     this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartCont);
     this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
   },
   onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
-    this.setMenuItemClose(chartType, browserType);
-    this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+    if (browserType !== _Type.BrowserType.WATCH_LIST) {
+      this.setMenuItemClose(chartType, browserType);
+      this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+    }
   },
   onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
     this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);

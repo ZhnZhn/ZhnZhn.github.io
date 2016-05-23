@@ -4,9 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _WithValidation = require('../dialogs/WithValidation');
+
+var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ZhDialog = require('../ZhDialog');
 
@@ -44,9 +50,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var QuandlWorldBankEconomicDialog = _react2.default.createClass({
-  displayName: 'QuandlWorldBankEconomicDialog',
-
+var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({
+  displayName: 'QuandlWorldBankEconomicDialog'
+}, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     return {
       optionCountries: _ISO3Country2.default.getCountries(),
@@ -56,7 +62,6 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass({
       validationMessages: []
     };
   },
-
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
       if (this.props.isShow === nextProps.isShow) {
@@ -65,18 +70,16 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass({
     }
     return true;
   },
-
   _handlerSelectCountry: function _handlerSelectCountry(itemCountry) {
     this.state.itemCountry = itemCountry;
   },
-
   _handlerSelectMetric: function _handlerSelectMetric(itemMetric) {
     this.state.itemMetric = itemMetric;
   },
-
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
-    if (this._validateInput()) {
+    var validationMessages = this._getValidationMessages();
+    if (validationMessages.isValid) {
       var _refs$datesFragment$g = this.refs.datesFragment.getValues();
 
       var fromDate = _refs$datesFragment$g.fromDate;
@@ -94,31 +97,23 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass({
       };
       this.props.onLoad(option);
     }
-    this.setState(this.state);
+    this._updateValidationMessages(validationMessages);
   },
-
-  _validateInput: function _validateInput() {
-    var result = true;
-    this.state.validationMessages = [];
-
+  _getValidationMessages: function _getValidationMessages() {
+    var validationMessages = [];
     if (!this.state.itemCountry) {
-      this.state.validationMessages.push("Country is Required to Select");
-      result = false;
+      validationMessages.push("Country is Required to Select");
     }
-
     if (!this.state.itemMetric) {
-      this.state.validationMessages.push("Metric is Required to Select");
-      result = false;
+      validationMessages.push("Metric is Required to Select");
     }
-
     if (!this.refs.datesFragment.isValid()) {
-      this.state.validationMessages.push("Some Date is not in Valid Format");
-      result = false;
+      validationMessages.push("Some Date is not in Valid Format");
     }
+    validationMessages.isValid = validationMessages.length === 0 ? true : false;
 
-    return result;
+    return validationMessages;
   },
-
   render: function render() {
     var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -138,7 +133,7 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass({
         caption: 'World Bank Economic',
         isShow: isShow,
         commandButtons: commandButtons,
-        onClose: onClose,
+        onClose: this._handlerClose,
         onShowChart: onShow
       },
       _react2.default.createElement(
@@ -182,7 +177,7 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass({
       })
     );
   }
-});
+}));
 
 exports.default = QuandlWorldBankEconomicDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\QuandlWorldBankEconomicDialog.js.map

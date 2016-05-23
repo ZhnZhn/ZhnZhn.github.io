@@ -12,6 +12,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ButtonTab = _react2.default.createClass({
   displayName: 'ButtonTab',
+
+  propTypes: {
+    isShow: _react2.default.PropTypes.bool,
+    caption: _react2.default.PropTypes.string,
+    style: _react2.default.PropTypes.object,
+    onClick: _react2.default.PropTypes.func
+  },
+
   getInitialState: function getInitialState() {
     return {
       isShow: this.props.isShow
@@ -30,6 +38,7 @@ var ButtonTab = _react2.default.createClass({
     var _props = this.props;
     var caption = _props.caption;
     var style = _props.style;
+    var children = _props.children;
 
     var _rootClass = this.state.isShow ? 'button-tab button-tab--show not-selected' : 'button-tab not-selected';
     return _react2.default.createElement(
@@ -39,7 +48,8 @@ var ButtonTab = _react2.default.createClass({
         style: Object.assign({}, style),
         onClick: this._handlerClick
       },
-      caption
+      caption,
+      children
     );
   }
 });

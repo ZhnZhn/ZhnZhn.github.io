@@ -23,15 +23,16 @@ var ChartActionTypes = exports.ChartActionTypes = {
   INIT_AND_SHOW_CHART: 'initAndShowChart',
   LOAD_STOCK: 'loadStock',
   LOAD_STOCK_COMPLETED: 'loadStockCompleted',
+  LOAD_STOCK_ADDED: 'loadStockAdded',
   LOAD_STOCK_FAILED: 'loadStockFailed',
   SHOW_CHART: 'showChart',
   CLOSE_CHART: 'closeChart'
 };
 
-var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, { children: ['completed', 'failed'] }), _defineProperty(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), _defineProperty(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
+var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, { children: ['completed', 'added', 'failed'] }), _defineProperty(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), _defineProperty(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
 
 ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserType, option) {
-  _LoadConfig2.default[chartType](chartType, browserType, option, this.completed);
+  _LoadConfig2.default[chartType](chartType, browserType, option, this.completed, this.added, this.failed);
 });
 
 exports.default = ChartActions;

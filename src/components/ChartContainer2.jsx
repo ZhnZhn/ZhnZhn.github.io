@@ -3,9 +3,11 @@ import React from 'react';
 import ChartStore from '../flux/stores/ChartStore';
 import {ChartActionTypes} from '../flux/actions/ChartActions';
 import ComponentActions, {ComponentActionTypes} from '../flux/actions/ComponentActions';
+import {ModalDialog} from '../constants/Type';
 
 import ZhHighchart from './ZhHighchart';
 import CaptionRow from './CaptionRow';
+import SvgHrzResize from './zhn/SvgHrzResize';
 import AreaChartItem from './AreaChartItem';
 
 const styles = {
@@ -65,7 +67,7 @@ const ChartContainer2 = React.createClass({
      this.unsubscribe();
    },
 
-   _onStore: function(actionType, data){
+   _onStore: function(actionType, data){      
       if (isInArray(compActions, actionType)) {
         if (data.chartType === this.props.chartType){
           this.setState(data);
@@ -93,14 +95,16 @@ const ChartContainer2 = React.createClass({
    renderCharts: function(){
      const {chartType, browserType, onCloseItem} = this.props;
      let domCharts = this.state.configs.map((config, index)=>{
+       const {id} = config.zhConfig;
        return (
          <AreaChartItem
              ref={'chart' + index}
-             key={config.stockTicket}
-             caption={config.stockTicket}
+             key={id}
+             caption={id}
              config={config}
              onSetActive={ComponentActions.setActiveCheckbox}
-             onCloseItem={onCloseItem.bind(null, chartType, browserType, config.stockTicket)}
+             onCloseItem={onCloseItem.bind(null, chartType, browserType, id)}
+             onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
          />
        )
      })
@@ -120,13 +124,15 @@ const ChartContainer2 = React.createClass({
         >
           <CaptionRow
              caption={this.props.caption}
-             isResizable={true}
-             minWidth={600}
-             maxWidth={1200}
-             comp={this}
-             onResizeAfter={this._handlerResizeAfter}
              onClose={this._handlerHide}
-          />
+          >
+             <SvgHrzResize
+               minWidth={600}
+               maxWidth={1200}
+               comp={this}
+               onResizeAfter={this._handlerResizeAfter}
+             />
+          </CaptionRow>
           <div className="with-scroll" style={styles.chartDiv}>
             {this.renderCharts()}
           </div>

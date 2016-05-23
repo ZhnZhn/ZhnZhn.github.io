@@ -34,11 +34,18 @@ var styles = _DialogStyles2.default;
 
 var SettingsDialog = _react2.default.createClass({
   displayName: 'SettingsDialog',
+  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+      return false;
+    }
+    return true;
+  },
   _handlerSet: function _handlerSet() {
     _ChartStore2.default.setQuandlKey(this.refs.input.getValue());
     this.props.onClose();
   },
   render: function render() {
+
     var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',

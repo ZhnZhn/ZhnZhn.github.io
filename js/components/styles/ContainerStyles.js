@@ -13,7 +13,9 @@ var ContainerStyles = {
     border: 'solid 3px #232F3B',
     position: 'relative',
     height: '730px',
-    width: '270px',
+    //width: '270px',
+    minWidth: '270px',
+    maxWidth: '400px',
     marginLeft: '10px'
   },
   aboutRootDiv: {

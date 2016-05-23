@@ -8,13 +8,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ProgressLoading = require('./ProgressLoading');
+
+var _ProgressLoading2 = _interopRequireDefault(_ProgressLoading);
+
 var _AppLabel = require('./AppLabel');
 
 var _AppLabel2 = _interopRequireDefault(_AppLabel);
-
-var _SettingsDialog = require('./SettingsDialog');
-
-var _SettingsDialog2 = _interopRequireDefault(_SettingsDialog);
 
 var _ToolBarButton = require('../ToolBarButton');
 
@@ -49,20 +49,15 @@ var HeaderBar = _react2.default.createClass({
     this.fnBrowser = function (browserType) {
       return _ComponentActions2.default.showBrowser.bind(null, browserType);
     };
-    return {
-      isShowSettings: false
-    };
-  },
-  _handlerOpenSettings: function _handlerOpenSettings() {
-    this.setState({ isShowSettings: true });
-  },
-  _handlerCloseSettings: function _handlerCloseSettings() {
-    this.setState({ isShowSettings: false });
+    return {};
   },
   render: function render() {
+    var store = this.props.store;
+
     return _react2.default.createElement(
       'div',
       { className: 'header', style: styles.rootDiv },
+      _react2.default.createElement(_ProgressLoading2.default, { store: store }),
       _react2.default.createElement(_AppLabel2.default, {
         style: styles.appLabel,
         title: 'Economic Rest Client v. 0.10.0',
@@ -96,17 +91,13 @@ var HeaderBar = _react2.default.createClass({
         type: 'TypeA',
         caption: 'Settings',
         title: 'Application settings',
-        onClick: this._handlerOpenSettings
+        onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
         caption: 'About',
         title: 'Description about application ERC',
         onClick: _ComponentActions2.default.showAbout
-      }),
-      _react2.default.createElement(_SettingsDialog2.default, {
-        isShow: this.state.isShowSettings,
-        onClose: this._handlerCloseSettings
       })
     );
   }

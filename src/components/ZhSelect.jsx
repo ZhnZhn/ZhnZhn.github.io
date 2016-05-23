@@ -43,8 +43,11 @@ const styles = {
     position: 'relative',
     textAlign: 'center',
     verticalAlign: 'middle',
-    width: '25px',
-    paddingRight: '5px'
+    //width: '25px',
+    width: '35px',
+    paddingRight: '5px',
+    marginLeft: '10px'
+
   },
   arrow : {
    borderColor: '#999 transparent transparent',
@@ -400,8 +403,8 @@ const ZhSelect = React.createClass({
     let styleHr = null;
     if (this.props.width){
       styleDivWidth = { width: this.props.width+'px' };
-      styleInputWidth = { width: (this.props.width-20) + 'px'};
-      styleHr = { width: (this.props.width-30) + 'px'};
+      styleInputWidth = { width: (this.props.width-30) + 'px'};
+      styleHr = { width: (this.props.width-40) + 'px'};
     }
 
     let domOptions = null;

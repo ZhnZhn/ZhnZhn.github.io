@@ -193,6 +193,7 @@ ChartConfig.fBaseAreaConfig = function(){
   },
   series: [{
     zhValueText : 'Value',
+    turboThreshold : 20000,
     type: 'area',
     tooltip : {
       pointFormatter : Tooltip.fnBasePointFormatter,
@@ -278,7 +279,7 @@ ChartConfig.fMarkerSplitRatio = function(){
   return objPoint;
 }
 
-const _fScatterSeria = function(color, pointFormatter, data){
+const _fScatterSeria = function(color, pointFormatter, data, zhSeriaId){
   return {
     type: 'scatter',
     color: color,
@@ -286,14 +287,15 @@ const _fScatterSeria = function(color, pointFormatter, data){
       pointFormatter : pointFormatter,
       headerFormat : ''
     },
-    data : data
+    data : data,
+    zhSeriaId : zhSeriaId
   }
 }
-ChartConfig.fExDividendSeria = function(data){
-  return _fScatterSeria('green', Tooltip.fnExDividendPointFormatter, data);
+ChartConfig.fExDividendSeria = function(data, chartId){
+  return _fScatterSeria('green', Tooltip.fnExDividendPointFormatter, data, chartId + '_ExDivident');
 }
-ChartConfig.fSplitRatioSeria = function(data){
-  return _fScatterSeria('#ED5813', Tooltip.fnSplitRatioPointFormatter, data);
+ChartConfig.fSplitRatioSeria = function(data, chartId){
+  return _fScatterSeria('#ED5813', Tooltip.fnSplitRatioPointFormatter, data, chartId + '_SplitRatio');
 }
 
 ChartConfig.fSeries = function(){

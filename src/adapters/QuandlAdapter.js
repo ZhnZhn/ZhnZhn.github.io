@@ -275,12 +275,13 @@ const _fnCreateIndicatorConfig = function(){
   return config;
 }
 
-const _fnCreateConfigATH = function(data){
+const _fnCreateConfigATH = function(data, chartId){
   if (data.length>0){
     const config = _fnCreateIndicatorConfig();
     config.title = ChartConfig.fTitleMetric('ATH Chart');
     config.credits = ChartConfig.creditsMetric;
 
+    config.series[0].zhSeriaId = chartId + "_ATH";
     config.series[0].zhValueText = "ATH";
     config.series[0].data = data;
     config.series[0].name = "ATH";
@@ -292,7 +293,6 @@ const _fnCreateConfigATH = function(data){
     config.series[0].groupPadding = 0.1;
 
     config.series[0].tooltip = {
-      //pointFormatter : fnATHPointFormatter,
       pointFormatter : Tooltip.fnATHPointFormatter,
       headerFormat : ''
     }
@@ -302,7 +302,7 @@ const _fnCreateConfigATH = function(data){
   }
 }
 
-const _fnCreateConfigVolume = function(data, dataColumn){
+const _fnCreateConfigVolume = function(data, dataColumn, chartId){
   if (data.length>0){
     const config = ChartConfig.fBaseAreaConfig();
     config.title = ChartConfig.fTitleMetric('Volume Chart');
@@ -318,14 +318,18 @@ const _fnCreateConfigVolume = function(data, dataColumn){
     config.yAxis.plotLines = [];
 
     config.series[0].data = data;
-    config.series[0].zhValueText = "Volume";
     config.series[0].name = "Spline";
+    config.series[0].zhValueText = "Volume";
+    config.series[0].zhSeriaId = chartId + '_VolumeArea';
 
     config.series.push({
+      zhSeriaId : chartId + '_VolumeColumn',
+      zhValueText : "Volume",
+      turboThreshold : 20000,
       type : "column",
       name : "Column",
       data : dataColumn,
-      zhValueText : "Volume",
+
       visible : false,
       borderWidth : 0,
       pointPlacement : 'on',
@@ -337,7 +341,6 @@ const _fnCreateConfigVolume = function(data, dataColumn){
         }
       },
       tooltip : {
-        //pointFormatter : fnVolumePointFormatter,
         pointFormatter : Tooltip.fnVolumePointFormatter,
         headerFormat : ''
       }
@@ -349,12 +352,13 @@ const _fnCreateConfigVolume = function(data, dataColumn){
   }
 };
 
-const _fnCreateConfigHighLow = function(data){
+const _fnCreateConfigHighLow = function(data, chartId){
   if (data.length>0){
     const config = _fnCreateIndicatorConfig();
     config.title = ChartConfig.fTitleMetric('HighLow Chart');
     config.credits = ChartConfig.creditsMetric;
 
+    config.series[0].zhSeriaId = chartId + '_HL';
     config.series[0].zhValueText = "HL";
     config.series[0].data = data;
     config.series[0].name = "HL";
@@ -372,15 +376,15 @@ const _fnCreateConfigHighLow = function(data){
   }
 }
 
-const _fnAddSeriesExDivident = function(config, data){
+const _fnAddSeriesExDivident = function(config, data, chartId){
   if (data.length>0){
-    config.series.push(ChartConfig.fExDividendSeria(data));
+    config.series.push(ChartConfig.fExDividendSeria(data, chartId));
   }
 }
 
-const _fnAddSeriesSplitRatio = function(config, data){
+const _fnAddSeriesSplitRatio = function(config, data, chartId){
   if (data.length>0){
-    config.series.push(ChartConfig.fSplitRatioSeria(data));
+    config.series.push(ChartConfig.fSplitRatioSeria(data, chartId));
   }
 };
 
@@ -394,7 +398,7 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
   }
 };
 
-const fnGetSeries = function(config, json, yPointIndex){
+const fnGetSeries = function(config, json, yPointIndex, chartId){
 
    config.info = _fnGetDatasetInfo(json);
 
@@ -412,17 +416,18 @@ const fnGetSeries = function(config, json, yPointIndex){
 
    config.valueMoving = _fnGetValueMoving(seria);
    config.series[0].data = seria;
+   config.series[0].zhSeriaId = chartId;
 
    config.xAxis.events = {
      afterSetExtremes : ChartConfig.zoomMetricCharts
    }
 
-   _fnAddSeriesExDivident(config, dataExDividend);
-   _fnAddSeriesSplitRatio(config, dataSplitRatio)
+   _fnAddSeriesExDivident(config, dataExDividend, chartId);
+   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId)
 
-   config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn);
-   config.zhATHConfig = _fnCreateConfigATH(dataATH);
-   config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow);
+   config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn, chartId);
+   config.zhATHConfig = _fnCreateConfigATH(dataATH, chartId);
+   config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow, chartId);
 
    return {config, minPoint, maxPoint}
 }
@@ -443,12 +448,12 @@ const fnConfigAxes = function(result){
 
 const fnQuandlFlow = _.flow(fnGetSeries, fnConfigAxes);
 
-QuandlAdapter.toConfig = function(json, yPointIndex){
+QuandlAdapter.toConfig = function(json, yPointIndex, chartId){
    const config = ChartConfig.fBaseAreaConfig();
-   return fnQuandlFlow(config, json, yPointIndex);
+   return fnQuandlFlow(config, json, yPointIndex, chartId);
 }
 
-QuandlAdapter.toSeries = function(json, yPointIndex, chartId){
+QuandlAdapter.toSeries = function(json, yPointIndex, chartId, parentId){
   let data = json.dataset.data.map((point, index)=> {
     const arrDate = point[0].split('-');
     return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
@@ -458,6 +463,7 @@ QuandlAdapter.toSeries = function(json, yPointIndex, chartId){
   const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
       , configSeries = ChartConfig.fSeries();
 
+  configSeries.zhSeriaId = parentId + '_' + chartId;
   configSeries.zhValueText = valueText;
   configSeries.data = data;
 

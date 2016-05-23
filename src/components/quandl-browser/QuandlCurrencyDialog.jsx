@@ -1,5 +1,7 @@
 import React from 'react';
 
+import WithValidation from '../dialogs/WithValidation';
+
 import ZhDialog from '../ZhDialog';
 import ZhSelect from '../ZhSelect';
 import ToolBarButton from '../ToolBarButton';
@@ -14,8 +16,8 @@ import DialogStyles from '../styles/DialogStyles';
 const styles = DialogStyles;
 
 const QuandlCurrencyDialog = React.createClass({
-
-  getInitialState: function(){
+  ...WithValidation,
+  getInitialState(){
     return {
        currencySource: null,
        currency: null,
@@ -25,7 +27,7 @@ const QuandlCurrencyDialog = React.createClass({
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
           return false;
@@ -34,22 +36,22 @@ const QuandlCurrencyDialog = React.createClass({
     return true;
   },
 
-  _handlerSelectSource: function(currencySource){
+  _handlerSelectSource(currencySource){
      this.state.currencySource = currencySource;
      this.state.currency = null;
      this.state.optionCurrencies = QuandlCurrency.getCurrencies(currencySource);
      this.setState(this.state);
   },
 
-  _handlerSelectCurrency: function(currency){
+  _handlerSelectCurrency(currency){
      this.state.currency = currency;
   },
 
 
-  _handlerLoad: function(event){
+  _handlerLoad(event){
     event.target.focus();
-
-    if (this._validateInput()){
+    const validationMessages = this._getValidationMessages();
+    if (validationMessages.isValid){
       const {fromDate, toDate} = this.refs.datesFragment.getValues();
       const {currencySource, currency} = this.state;
       const option = {
@@ -59,41 +61,30 @@ const QuandlCurrencyDialog = React.createClass({
         fromDate: fromDate,
         toDate: toDate
       }
-      this.props.onLoad(option);      
+      this.props.onLoad(option);
     }
-    this.setState(this.state);
+    this._updateValidationMessages(validationMessages);
   },
 
-  _validateInput: function(){
-    let result = true;
-    this.state.validationMessages = [];
+  _getValidationMessages(){
+    const validationMessages = [];
 
     if (!this.state.currencySource){
-      this.state.validationMessages.push("Source is Required to Select");
-      result = false;
+      validationMessages.push("Source is Required to Select");
     }
-
     if (!this.state.currency){
-      this.state.validationMessages.push("Currency is Required to Select");
-      result = false;
+      validationMessages.push("Currency is Required to Select");
     }
-
     if (!this.refs.datesFragment.isValid()){
-      this.state.validationMessages.push("Some Date is not in Valid Format");
-      result = false;
+      validationMessages.push("Some Date is not in Valid Format");
     }
+    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
 
-    return result;
+    return validationMessages;
   },
 
- /*
-  _handlerShowChart: function(){
-    QuandlCurrencyActions.showChart();
-  },
-  */
 
-
-  render: function(){
+  render(){
     let commandButtons =[
        <ToolBarButton
           key="a"
@@ -111,7 +102,7 @@ const QuandlCurrencyDialog = React.createClass({
             isShow={isShow}
             commandButtons={commandButtons}
             onShowChart={onShow}
-            onClose={onClose}
+            onClose={this._handlerClose}
          >
              <div style={styles.rowDiv} key="1">
                <span style={styles.labelSpan}>

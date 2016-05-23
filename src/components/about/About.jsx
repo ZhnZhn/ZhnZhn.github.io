@@ -11,7 +11,6 @@ import LinkToken from './LinkToken';
 import ContainerStyles from '../styles/ContainerStyles.js';
 const styles = ContainerStyles;
 
-
 const About = React.createClass({
   getInitialState(){
     return {
@@ -48,7 +47,7 @@ const About = React.createClass({
             caption="About"
             onClose={this._handlerClose}
          />
-         <div style={{paddingLeft: '5px', paddingRight: '5px'}}>
+         <div style={{paddingLeft: '5px', paddingRight: '5px', lineHeight : 1.4}}>
          <p>
            <Token color="#80c040">
              ERC

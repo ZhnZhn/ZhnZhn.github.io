@@ -1,6 +1,13 @@
 import React from 'react';
 
 const ButtonTab = React.createClass({
+  propTypes : {
+    isShow : React.PropTypes.bool,
+    caption : React.PropTypes.string,
+    style : React.PropTypes.object,
+    onClick : React.PropTypes.func
+  },
+
   getInitialState(){
     return {
       isShow : this.props.isShow
@@ -19,7 +26,7 @@ const ButtonTab = React.createClass({
   },
 
   render(){
-    const {caption, style} = this.props;
+    const {caption, style, children} = this.props;
     const _rootClass = (this.state.isShow) ?
               'button-tab button-tab--show not-selected' : 'button-tab not-selected';
     return (
@@ -29,6 +36,7 @@ const ButtonTab = React.createClass({
         onClick={this._handlerClick}
       >
          {caption}
+         {children}
       </div>
     );
   }

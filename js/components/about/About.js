@@ -76,7 +76,7 @@ var About = _react2.default.createClass({
       }),
       _react2.default.createElement(
         'div',
-        { style: { paddingLeft: '5px', paddingRight: '5px' } },
+        { style: { paddingLeft: '5px', paddingRight: '5px', lineHeight: 1.4 } },
         _react2.default.createElement(
           'p',
           null,

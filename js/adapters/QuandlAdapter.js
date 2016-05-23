@@ -316,12 +316,13 @@ var _fnCreateIndicatorConfig = function _fnCreateIndicatorConfig() {
   return config;
 };
 
-var _fnCreateConfigATH = function _fnCreateConfigATH(data) {
+var _fnCreateConfigATH = function _fnCreateConfigATH(data, chartId) {
   if (data.length > 0) {
     var config = _fnCreateIndicatorConfig();
     config.title = _ChartConfig2.default.fTitleMetric('ATH Chart');
     config.credits = _ChartConfig2.default.creditsMetric;
 
+    config.series[0].zhSeriaId = chartId + "_ATH";
     config.series[0].zhValueText = "ATH";
     config.series[0].data = data;
     config.series[0].name = "ATH";
@@ -333,7 +334,6 @@ var _fnCreateConfigATH = function _fnCreateConfigATH(data) {
     config.series[0].groupPadding = 0.1;
 
     config.series[0].tooltip = {
-      //pointFormatter : fnATHPointFormatter,
       pointFormatter: _Tooltip2.default.fnATHPointFormatter,
       headerFormat: ''
     };
@@ -343,7 +343,7 @@ var _fnCreateConfigATH = function _fnCreateConfigATH(data) {
   }
 };
 
-var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
+var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn, chartId) {
   if (data.length > 0) {
     var config = _ChartConfig2.default.fBaseAreaConfig();
     config.title = _ChartConfig2.default.fTitleMetric('Volume Chart');
@@ -359,14 +359,18 @@ var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
     config.yAxis.plotLines = [];
 
     config.series[0].data = data;
-    config.series[0].zhValueText = "Volume";
     config.series[0].name = "Spline";
+    config.series[0].zhValueText = "Volume";
+    config.series[0].zhSeriaId = chartId + '_VolumeArea';
 
     config.series.push({
+      zhSeriaId: chartId + '_VolumeColumn',
+      zhValueText: "Volume",
+      turboThreshold: 20000,
       type: "column",
       name: "Column",
       data: dataColumn,
-      zhValueText: "Volume",
+
       visible: false,
       borderWidth: 0,
       pointPlacement: 'on',
@@ -378,7 +382,6 @@ var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
         }
       },
       tooltip: {
-        //pointFormatter : fnVolumePointFormatter,
         pointFormatter: _Tooltip2.default.fnVolumePointFormatter,
         headerFormat: ''
       }
@@ -390,12 +393,13 @@ var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn) {
   }
 };
 
-var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data) {
+var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data, chartId) {
   if (data.length > 0) {
     var config = _fnCreateIndicatorConfig();
     config.title = _ChartConfig2.default.fTitleMetric('HighLow Chart');
     config.credits = _ChartConfig2.default.creditsMetric;
 
+    config.series[0].zhSeriaId = chartId + '_HL';
     config.series[0].zhValueText = "HL";
     config.series[0].data = data;
     config.series[0].name = "HL";
@@ -413,15 +417,15 @@ var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data) {
   }
 };
 
-var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data) {
+var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, chartId) {
   if (data.length > 0) {
-    config.series.push(_ChartConfig2.default.fExDividendSeria(data));
+    config.series.push(_ChartConfig2.default.fExDividendSeria(data, chartId));
   }
 };
 
-var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data) {
+var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chartId) {
   if (data.length > 0) {
-    config.series.push(_ChartConfig2.default.fSplitRatioSeria(data));
+    config.series.push(_ChartConfig2.default.fSplitRatioSeria(data, chartId));
   }
 };
 
@@ -434,7 +438,7 @@ var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   }
 };
 
-var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
+var fnGetSeries = function fnGetSeries(config, json, yPointIndex, chartId) {
 
   config.info = _fnGetDatasetInfo(json);
 
@@ -458,17 +462,18 @@ var fnGetSeries = function fnGetSeries(config, json, yPointIndex) {
 
   config.valueMoving = _fnGetValueMoving(seria);
   config.series[0].data = seria;
+  config.series[0].zhSeriaId = chartId;
 
   config.xAxis.events = {
     afterSetExtremes: _ChartConfig2.default.zoomMetricCharts
   };
 
-  _fnAddSeriesExDivident(config, dataExDividend);
-  _fnAddSeriesSplitRatio(config, dataSplitRatio);
+  _fnAddSeriesExDivident(config, dataExDividend, chartId);
+  _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId);
 
-  config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn);
-  config.zhATHConfig = _fnCreateConfigATH(dataATH);
-  config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow);
+  config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn, chartId);
+  config.zhATHConfig = _fnCreateConfigATH(dataATH, chartId);
+  config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow, chartId);
 
   return { config: config, minPoint: minPoint, maxPoint: maxPoint };
 };
@@ -492,12 +497,12 @@ var fnConfigAxes = function fnConfigAxes(result) {
 
 var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
 
-QuandlAdapter.toConfig = function (json, yPointIndex) {
+QuandlAdapter.toConfig = function (json, yPointIndex, chartId) {
   var config = _ChartConfig2.default.fBaseAreaConfig();
-  return fnQuandlFlow(config, json, yPointIndex);
+  return fnQuandlFlow(config, json, yPointIndex, chartId);
 };
 
-QuandlAdapter.toSeries = function (json, yPointIndex, chartId) {
+QuandlAdapter.toSeries = function (json, yPointIndex, chartId, parentId) {
   var data = json.dataset.data.map(function (point, index) {
     var arrDate = point[0].split('-');
     return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
@@ -507,6 +512,7 @@ QuandlAdapter.toSeries = function (json, yPointIndex, chartId) {
   var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
       configSeries = _ChartConfig2.default.fSeries();
 
+  configSeries.zhSeriaId = parentId + '_' + chartId;
   configSeries.zhValueText = valueText;
   configSeries.data = data;
 

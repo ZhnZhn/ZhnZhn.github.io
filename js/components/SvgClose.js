@@ -18,13 +18,17 @@ var styles = {
 
 var SvgClose = _react2.default.createClass({
   displayName: 'SvgClose',
-
   render: function render() {
+    var _props = this.props;
+    var style = _props.style;
+    var onClose = _props.onClose;
+
     return _react2.default.createElement(
       'div',
       {
         className: 'svg-close',
-        onClick: this.props.onClose
+        onClick: onClose,
+        style: style
       },
       _react2.default.createElement(
         'svg',

@@ -47,6 +47,7 @@ var styles = {
     lineHeight: 1.5,
     marginBottom: '10px',
     marginRight: '25px',
+    //marginRight: '10px',
     position: 'relative'
   },
   headerDiv: {
@@ -129,6 +130,14 @@ var AreaChartItem = _react2.default.createClass({
   _handlerClickIndicator: function _handlerClickIndicator() {
     this.setState({ isShowIndicator: !this.state.isShowIndicator });
   },
+  _handlerAddToWatch: function _handlerAddToWatch() {
+    var _props = this.props;
+    var caption = _props.caption;
+    var config = _props.config;
+    var onAddToWatch = _props.onAddToWatch;
+
+    onAddToWatch({ caption: caption, config: config });
+  },
   _handlerClickInfo: function _handlerClickInfo() {
     this.setState({ isShowChart: false, isShowInfo: true, isShowIndicator: false });
   },
@@ -201,11 +210,22 @@ var AreaChartItem = _react2.default.createClass({
     this.setState({ mfiConfigs: this.state.mfiConfigs });
   },
   _createChartToolBar: function _createChartToolBar(config) {
-    var _btIndicator = _react2.default.createElement(_ButtonTab2.default, {
-      caption: 'Indicator',
-      isShow: this.state.isShowIndicator,
-      style: { left: '10px' },
-      onClick: this._handlerClickIndicator
+    var _btIndicator = _react2.default.createElement(
+      _ButtonTab2.default,
+      {
+        caption: 'Indicator',
+        isShow: this.state.isShowIndicator,
+        style: { left: '10px' },
+        onClick: this._handlerClickIndicator
+      },
+      _react2.default.createElement('span', { className: 'arrow-down' })
+    );
+
+    var _btAdd = _react2.default.createElement(_ButtonTab2.default, {
+      style: { left: '240px' },
+      caption: 'Add',
+      isShow: false,
+      onClick: this._handlerAddToWatch
     });
 
     var _btInfo = config.info ? _react2.default.createElement(_ButtonTab2.default, {
@@ -239,6 +259,7 @@ var AreaChartItem = _react2.default.createClass({
       'div',
       null,
       _btIndicator,
+      _btAdd,
       _btInfo,
       _btVolume,
       _btATH,
@@ -300,11 +321,11 @@ var AreaChartItem = _react2.default.createClass({
     );
   },
   render: function render() {
-    var _props = this.props;
-    var caption = _props.caption;
-    var config = _props.config;
-    var onSetActive = _props.onSetActive;
-    var onCloseItem = _props.onCloseItem;
+    var _props2 = this.props;
+    var caption = _props2.caption;
+    var config = _props2.config;
+    var onSetActive = _props2.onSetActive;
+    var onCloseItem = _props2.onCloseItem;
     var _state4 = this.state;
     var isOpen = _state4.isOpen;
     var isShowChart = _state4.isShowChart;

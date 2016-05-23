@@ -4,9 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _WithValidation = require('../dialogs/WithValidation');
+
+var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ZhDialog = require('../ZhDialog');
 
@@ -40,18 +46,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var QuandlFuturesChinaDceDialog = _react2.default.createClass({
-  displayName: 'QuandlFuturesChinaDceDialog',
-
+var QuandlFuturesChinaDceDialog = _react2.default.createClass(_extends({
+  displayName: 'QuandlFuturesChinaDceDialog'
+}, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     return {
       optionCodes: _QuandlChinaDceFuture2.default.getTickets(),
       code: null,
-      validationMessages: [],
-      firstNotValidedInput: null
+      validationMessages: []
     };
   },
-
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
       if (this.props.isShow === nextProps.isShow) {
@@ -60,50 +64,29 @@ var QuandlFuturesChinaDceDialog = _react2.default.createClass({
     }
     return true;
   },
-
-  _setInputFocus: function _setInputFocus() {
-    if (this.state.firstNotValidedInput) {
-      this.refs.selectStock.focusInput();
-    }
-  },
-
-  componentDidUpdate: function componentDidUpdate() {
-    if (this.props.isShow) {
-      this._setInputFocus();
-    }
-  },
-
   _handlerSelectCode: function _handlerSelectCode(code) {
     this.state.code = code;
   },
-
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
-    if (this._validateInput()) {
+    var validationMessages = this._getValidationMessages();
+    if (validationMessages.isValid) {
       var option = {
         value: this.state.code.value,
         code: this.state.code
       };
       this.props.onLoad(option);
     }
-    this.setState(this.state);
+    this._updateValidationMessages(validationMessages);
   },
-
-  _validateInput: function _validateInput() {
-    var result = true;
-    this.state.validationMessages = [];
-
-    this.state.firstNotValidedInput = null;
-
+  _getValidationMessages: function _getValidationMessages() {
+    var validationMessages = [];
     if (!this.state.code) {
-      this.state.validationMessages.push("Code is Required to Select");
-      this.state.firstNotValidedInput = 'selectStock';
-      result = false;
+      validationMessages.push("Code is Required to Select");
     }
-
-    return result;
+    validationMessages.isValid = validationMessages.length === 0 ? true : false;
+    return validationMessages;
   },
-
   render: function render() {
     var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -125,7 +108,7 @@ var QuandlFuturesChinaDceDialog = _react2.default.createClass({
         isShow: isShow,
         commandButtons: commandButtons,
         onShowChart: onShow,
-        onClose: onClose
+        onClose: this._handlerClose
       },
       _react2.default.createElement(
         'div',
@@ -148,7 +131,7 @@ var QuandlFuturesChinaDceDialog = _react2.default.createClass({
       })
     );
   }
-});
+}));
 
 exports.default = QuandlFuturesChinaDceDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\QuandlFuturesChinaDceDialog.js.map

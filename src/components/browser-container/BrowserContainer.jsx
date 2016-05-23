@@ -18,7 +18,7 @@ const BrowserContainer = React.createClass({
            <QuandlBrowser store={store} />
            <YahooBrowser store={store} />
            <GoogleBrowser store={store} />
-           <WatchBrowser store={store} />
+           <WatchBrowser store={store}  />
 
            <DialogContainer3
               maxDialog={3}
