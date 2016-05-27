@@ -7,6 +7,7 @@ import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
 import {BrowserType} from '../../constants/Type';
 import ChartType from '../../constants/ChartType';
+import ValidationMessages from '../../constants/ValidationMessages';
 
 import ModalDialog from '../zhn/ModalDialog';
 import ToolBarButton from '../ToolBarButton';
@@ -51,7 +52,7 @@ const LoadItemDialog = React.createClass({
     if (validationMessages.isValid){
       const {data, onClose} = this.props
           , {caption, dataColumn} = data
-          , {fromDate, toDate} = this.refs.datesFragment.getValues()
+          , {fromDate, toDate} = this.datesFragment.getValues()
           , option = {
              value : caption,
              stock: caption,
@@ -66,13 +67,11 @@ const LoadItemDialog = React.createClass({
   },
 
   _getValidationMessages(){
-    const validationMessages = [];
-    if (!this.refs.datesFragment.isValid()){
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
-
-    return validationMessages;
+    let   msg = [];
+    const {isValid, datesMsg} = this.datesFragment.getValidation();
+    if (!isValid) { msg = msg.concat(datesMsg); }
+    msg.isValid = (msg.length === 0) ? true : false;
+    return msg;
   },
 
   render(){
@@ -105,7 +104,7 @@ const LoadItemDialog = React.createClass({
 
         <DatesFragment
             key="2"
-            ref="datesFragment"
+            ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
             onTestDate={onTestDate}

@@ -28,6 +28,10 @@ var _ChartType = require('../../constants/ChartType');
 
 var _ChartType2 = _interopRequireDefault(_ChartType);
 
+var _ValidationMessages = require('../../constants/ValidationMessages');
+
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+
 var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
@@ -92,10 +96,10 @@ var LoadItemDialog = _react2.default.createClass(_extends({
       var caption = data.caption;
       var dataColumn = data.dataColumn;
 
-      var _refs$datesFragment$g = this.refs.datesFragment.getValues();
+      var _datesFragment$getVal = this.datesFragment.getValues();
 
-      var fromDate = _refs$datesFragment$g.fromDate;
-      var toDate = _refs$datesFragment$g.toDate;
+      var fromDate = _datesFragment$getVal.fromDate;
+      var toDate = _datesFragment$getVal.toDate;
       var option = {
         value: caption,
         stock: caption,
@@ -109,15 +113,22 @@ var LoadItemDialog = _react2.default.createClass(_extends({
     this._updateValidationMessages(validationMessages);
   },
   _getValidationMessages: function _getValidationMessages() {
-    var validationMessages = [];
-    if (!this.refs.datesFragment.isValid()) {
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = validationMessages.length === 0 ? true : false;
+    var msg = [];
 
-    return validationMessages;
+    var _datesFragment$getVal2 = this.datesFragment.getValidation();
+
+    var isValid = _datesFragment$getVal2.isValid;
+    var datesMsg = _datesFragment$getVal2.datesMsg;
+
+    if (!isValid) {
+      msg = msg.concat(datesMsg);
+    }
+    msg.isValid = msg.length === 0 ? true : false;
+    return msg;
   },
   render: function render() {
+    var _this = this;
+
     var _props2 = this.props;
     var isShow = _props2.isShow;
     var data = _props2.data;
@@ -158,7 +169,9 @@ var LoadItemDialog = _react2.default.createClass(_extends({
       ),
       _react2.default.createElement(_DatesFragment2.default, {
         key: '2',
-        ref: 'datesFragment',
+        ref: function ref(c) {
+          return _this.datesFragment = c;
+        },
         initFromDate: initFromDate,
         initToDate: initToDate,
         onTestDate: onTestDate
