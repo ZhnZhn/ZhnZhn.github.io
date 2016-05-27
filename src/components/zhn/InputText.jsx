@@ -19,9 +19,14 @@ const styles = {
 }
 
 const InputText = React.createClass({
+  displayName : 'InputText',
+  propTypes : {
+    initValue : React.PropTypes.string,
+    style : React.PropTypes.object
+  },
   getDefaultProps(){
     return {
-      initValue : ''
+      initValue : '',
     }
   },
 
@@ -31,16 +36,18 @@ const InputText = React.createClass({
     }
   },
 
+
   _handlerInputChange(event){
     this.setState({value : event.target.value})
   },
 
   render(){
-    const {value} = this.state;
+    const {style} = this.props
+        , {value} = this.state;
     return (
       <input
         type="text"
-        style={styles.inputText}
+        style={Object.assign({}, styles.inputText, style)}
         value={value}
         translate={false}
         onChange={this._handlerInputChange}
@@ -50,6 +57,9 @@ const InputText = React.createClass({
 
   getValue(){
     return this.state.value;
+  },
+  setValue(value){
+    this.setState({value})
   }
 })
 

@@ -50,15 +50,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({
-  displayName: 'QuandlWorldBankEconomicDialog'
-}, _WithValidation2.default, {
+var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({}, _WithValidation2.default, {
+
+  displayName: 'QuandlWorldBankEconomicDialog',
+
   getInitialState: function getInitialState() {
+    this.country = null;
+    this.metric = null;
     return {
       optionCountries: _ISO3Country2.default.getCountries(),
       optionMetrics: _QuandlWorldBankEconomic2.default.getMetrics(),
-      itemCountry: null,
-      itemMetric: null,
       validationMessages: []
     };
   },
@@ -70,28 +71,25 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({
     }
     return true;
   },
-  _handlerSelectCountry: function _handlerSelectCountry(itemCountry) {
-    this.state.itemCountry = itemCountry;
+  _handlerSelectCountry: function _handlerSelectCountry(country) {
+    this.country = country;
   },
-  _handlerSelectMetric: function _handlerSelectMetric(itemMetric) {
-    this.state.itemMetric = itemMetric;
+  _handlerSelectMetric: function _handlerSelectMetric(metric) {
+    this.metric = metric;
   },
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      var _refs$datesFragment$g = this.refs.datesFragment.getValues();
+      var _datesFragment$getVal = this.datesFragment.getValues();
 
-      var fromDate = _refs$datesFragment$g.fromDate;
-      var toDate = _refs$datesFragment$g.toDate;
-      var _state = this.state;
-      var itemCountry = _state.itemCountry;
-      var itemMetric = _state.itemMetric;
+      var fromDate = _datesFragment$getVal.fromDate;
+      var toDate = _datesFragment$getVal.toDate;
 
       var option = {
-        value: 'WWDI/' + itemCountry.value + '_' + itemMetric.value,
-        country: itemCountry,
-        metric: itemMetric,
+        value: 'WWDI/' + this.country.value + '_' + this.metric.value,
+        country: this.country,
+        metric: this.metric,
         fromDate: fromDate,
         toDate: toDate
       };
@@ -100,39 +98,58 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({
     this._updateValidationMessages(validationMessages);
   },
   _getValidationMessages: function _getValidationMessages() {
-    var validationMessages = [];
-    if (!this.state.itemCountry) {
-      validationMessages.push("Country is Required to Select");
-    }
-    if (!this.state.itemMetric) {
-      validationMessages.push("Metric is Required to Select");
-    }
-    if (!this.refs.datesFragment.isValid()) {
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = validationMessages.length === 0 ? true : false;
+    var msgOnNotSelected = this.props.msgOnNotSelected;
 
-    return validationMessages;
+    var msg = [];
+
+    if (!this.country) {
+      msg.push(msgOnNotSelected('Country'));
+    }
+    if (!this.metric) {
+      msg.push(msgOnNotSelected('Metric'));
+    }
+
+    var _datesFragment$getVal2 = this.datesFragment.getValidation();
+
+    var isValid = _datesFragment$getVal2.isValid;
+    var datesMsg = _datesFragment$getVal2.datesMsg;
+
+    if (!isValid) {
+      msg = msg.concat(datesMsg);
+    }
+
+    msg.isValid = msg.length === 0 ? true : false;
+
+    return msg;
   },
   render: function render() {
-    var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _this = this;
+
+    var _props = this.props;
+    var isShow = _props.isShow;
+    var onShow = _props.onShow;
+    var onClose = _props.onClose;
+    var initFromDate = _props.initFromDate;
+    var initToDate = _props.initToDate;
+    var msgOnNotValidFormat = _props.msgOnNotValidFormat;
+    var onTestDate = _props.onTestDate;
+    var _state = this.state;
+    var optionCountries = _state.optionCountries;
+    var optionMetrics = _state.optionMetrics;
+    var validationMessages = _state.validationMessages;
+    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
 
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var onShow = _props.onShow;
-    var onClose = _props.onClose;
-
     return _react2.default.createElement(
       _ZhDialog2.default,
       {
         caption: 'World Bank Economic',
         isShow: isShow,
-        commandButtons: commandButtons,
+        commandButtons: _commandButtons,
         onClose: this._handlerClose,
         onShowChart: onShow
       },
@@ -147,7 +164,7 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
           onSelect: this._handlerSelectCountry,
-          options: this.state.optionCountries
+          options: optionCountries
         })
       ),
       _react2.default.createElement(
@@ -161,19 +178,22 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
           onSelect: this._handlerSelectMetric,
-          options: this.state.optionMetrics
+          options: optionMetrics
         })
       ),
       _react2.default.createElement(_DatesFragment2.default, {
         key: '3',
-        ref: 'datesFragment',
-        initFromDate: this.props.initFromDate,
-        initToDate: this.props.initToDate,
-        onTestDate: this.props.onTestDate
+        ref: function ref(c) {
+          return _this.datesFragment = c;
+        },
+        initFromDate: initFromDate,
+        initToDate: initToDate,
+        msgOnNotValidFormat: msgOnNotValidFormat,
+        onTestDate: onTestDate
       }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         key: '4',
-        validationMessages: this.state.validationMessages
+        validationMessages: validationMessages
       })
     );
   }

@@ -46,13 +46,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var QuandlCurrencyDialog = _react2.default.createClass(_extends({
-  displayName: 'QuandlCurrencyDialog'
-}, _WithValidation2.default, {
+var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidation2.default, {
+
+  displayName: 'QuandlCurrencyDialog',
+
   getInitialState: function getInitialState() {
+    this.source = null;
+    this.currency = null;
     return {
-      currencySource: null,
-      currency: null,
       optionCurrencySources: _QuandlCurrency2.default.getCurrencySource(),
       optionCurrencies: [],
       validationMessages: []
@@ -66,31 +67,32 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({
     }
     return true;
   },
-  _handlerSelectSource: function _handlerSelectSource(currencySource) {
-    this.state.currencySource = currencySource;
-    this.state.currency = null;
-    this.state.optionCurrencies = _QuandlCurrency2.default.getCurrencies(currencySource);
-    this.setState(this.state);
+  _handlerSelectSource: function _handlerSelectSource(source) {
+    if (source && source.value) {
+      this.source = source;
+      this.currency = null;
+      this.setState({ optionCurrencies: _QuandlCurrency2.default.getCurrencies(source) });
+    } else {
+      this.source = null;
+      this.currency = null;
+    }
   },
   _handlerSelectCurrency: function _handlerSelectCurrency(currency) {
-    this.state.currency = currency;
+    this.currency = currency;
   },
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      var _refs$datesFragment$g = this.refs.datesFragment.getValues();
+      var _datesFragment$getVal = this.datesFragment.getValues();
 
-      var fromDate = _refs$datesFragment$g.fromDate;
-      var toDate = _refs$datesFragment$g.toDate;
-      var _state = this.state;
-      var currencySource = _state.currencySource;
-      var currency = _state.currency;
+      var fromDate = _datesFragment$getVal.fromDate;
+      var toDate = _datesFragment$getVal.toDate;
 
       var option = {
-        value: currencySource.value + '/' + currency.value,
-        source: currencySource,
-        currency: currency,
+        value: this.source.value + '/' + this.currency.value,
+        source: this.source,
+        currency: this.currency,
         fromDate: fromDate,
         toDate: toDate
       };
@@ -99,41 +101,58 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({
     this._updateValidationMessages(validationMessages);
   },
   _getValidationMessages: function _getValidationMessages() {
-    var validationMessages = [];
+    var msgOnNotSelected = this.props.msgOnNotSelected;
 
-    if (!this.state.currencySource) {
-      validationMessages.push("Source is Required to Select");
-    }
-    if (!this.state.currency) {
-      validationMessages.push("Currency is Required to Select");
-    }
-    if (!this.refs.datesFragment.isValid()) {
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = validationMessages.length === 0 ? true : false;
+    var msg = [];
 
-    return validationMessages;
+    if (!this.source) {
+      msg.push(msgOnNotSelected('Source'));
+    }
+    if (!this.currency) {
+      msg.push(msgOnNotSelected('Currency'));
+    }
+
+    var _datesFragment$getVal2 = this.datesFragment.getValidation();
+
+    var isValid = _datesFragment$getVal2.isValid;
+    var datesMsg = _datesFragment$getVal2.datesMsg;
+
+    if (!isValid) {
+      msg = msg.concat(datesMsg);
+    }
+
+    msg.isValid = msg.length === 0 ? true : false;
+
+    return msg;
   },
   render: function render() {
-    var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _this = this;
+
+    var _props = this.props;
+    var isShow = _props.isShow;
+    var onShow = _props.onShow;
+    var onClose = _props.onClose;
+    var initFromDate = _props.initFromDate;
+    var initToDate = _props.initToDate;
+    var msgOnNotValidFormat = _props.msgOnNotValidFormat;
+    var onTestDate = _props.onTestDate;
+    var _state = this.state;
+    var optionCurrencySources = _state.optionCurrencySources;
+    var optionCurrencies = _state.optionCurrencies;
+    var validationMessages = _state.validationMessages;
+    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
 
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var onShow = _props.onShow;
-    var onClose = _props.onClose;
-
-
     return _react2.default.createElement(
       _ZhDialog2.default,
       {
         caption: 'Quandl Currency Histories',
         isShow: isShow,
-        commandButtons: commandButtons,
+        commandButtons: _commandButtons,
         onShowChart: onShow,
         onClose: this._handlerClose
       },
@@ -148,7 +167,7 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
           onSelect: this._handlerSelectSource,
-          options: this.state.optionCurrencySources
+          options: optionCurrencySources
         })
       ),
       _react2.default.createElement(
@@ -162,19 +181,22 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
           onSelect: this._handlerSelectCurrency,
-          options: this.state.optionCurrencies
+          options: optionCurrencies
         })
       ),
       _react2.default.createElement(_DatesFragment2.default, {
         key: '3',
-        ref: 'datesFragment',
-        initFromDate: this.props.initFromDate,
-        initToDate: this.props.initToDate,
-        onTestDate: this.props.onTestDate
+        ref: function ref(c) {
+          return _this.datesFragment = c;
+        },
+        initFromDate: initFromDate,
+        initToDate: initToDate,
+        msgOnNotValidFormat: msgOnNotValidFormat,
+        onTestDate: onTestDate
       }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         key: '4',
-        validationMessages: this.state.validationMessages
+        validationMessages: validationMessages
       })
     );
   }

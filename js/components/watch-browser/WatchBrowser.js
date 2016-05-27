@@ -53,7 +53,7 @@ var styles = {
     paddingRight: 0
   },
   btCircle: {
-    marginLeft: '10px'
+    marginLeft: '20px'
   },
   scrollDiv: {
     overflowY: 'auto',
@@ -137,6 +137,12 @@ var WatchBrowser = _react2.default.createClass({
     event.stopPropagation();
     _WatchActions2.default.removeItem(option);
   },
+  _handlerEditGroup: function _handlerEditGroup() {
+    _ComponentActions2.default.showModalDialog(_Type.ModalDialog.EDIT_WATCH_GROUP);
+  },
+  _handlerEditList: function _handlerEditList() {
+    _ComponentActions2.default.showModalDialog(_Type.ModalDialog.EDIT_WATCH_LIST);
+  },
   _renderWatchList: function _renderWatchList(watchList) {
     var _this = this;
 
@@ -206,13 +212,36 @@ var WatchBrowser = _react2.default.createClass({
       );
     });
   },
+  _renderEditBar: function _renderEditBar(isModeEdit) {
+    if (isModeEdit) {
+      return _react2.default.createElement(
+        'div',
+        { style: { marginBottom: '10px' } },
+        _react2.default.createElement(_ButtonCircle2.default, {
+          caption: 'GROUP',
+          className: 'bt__watch__bar',
+          isWithoutDefault: true,
+          onClick: this._handlerEditGroup
+        }),
+        _react2.default.createElement(_ButtonCircle2.default, {
+          caption: 'LIST',
+          className: 'bt__watch__bar',
+          isWithoutDefault: true,
+          style: { marginLeft: '20px' },
+          onClick: this._handlerEditList
+        })
+      );
+    } else {
+      return null;
+    }
+  },
   render: function render() {
     var _state = this.state;
     var isShow = _state.isShow;
     var isModeEdit = _state.isModeEdit;
     var watchList = _state.watchList;
 
-    var _captionEV = isModeEdit ? 'E' : 'V';
+    var _captionEV = isModeEdit ? 'V' : 'E';
     return _react2.default.createElement(
       _Browser2.default,
       { isShow: isShow, style: { paddingRight: 0 } },
@@ -233,6 +262,7 @@ var WatchBrowser = _react2.default.createClass({
           onClick: this._handlerToggleEditMode
         })
       ),
+      this._renderEditBar(isModeEdit),
       _react2.default.createElement(
         _ScrollPane2.default,
         { style: styles.scrollDiv },

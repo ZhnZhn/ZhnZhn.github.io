@@ -63,21 +63,32 @@ var Styles = {
 
 var ModalDialog = _react2.default.createClass({
   displayName: 'ModalDialog',
-
   propTypes: {
     isShow: _react2.default.PropTypes.bool,
+    isWithButton: _react2.default.PropTypes.bool,
     timeout: _react2.default.PropTypes.number,
     caption: _react2.default.PropTypes.string,
     onClose: _react2.default.PropTypes.func
   },
   getDefaultProps: function getDefaultProps() {
     return {
+      isWithButton: true,
+      isNotUpdate: false,
       timeout: 450
+
     };
   },
   getInitialState: function getInitialState() {
     this.wasClosing = false;
     return {};
+  },
+  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps !== this.props) {
+      if (nextProps.isNotUpdate) {
+        return false;
+      }
+    }
+    return true;
   },
   componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
     var _this = this;
@@ -113,6 +124,7 @@ var ModalDialog = _react2.default.createClass({
   render: function render() {
     var _props2 = this.props;
     var isShow = _props2.isShow;
+    var isWithButton = _props2.isWithButton;
     var caption = _props2.caption;
     var children = _props2.children;
     var onClose = _props2.onClose;
@@ -154,7 +166,7 @@ var ModalDialog = _react2.default.createClass({
         null,
         children
       ),
-      this._renderCommandButton()
+      isWithButton && this._renderCommandButton()
     );
   }
 

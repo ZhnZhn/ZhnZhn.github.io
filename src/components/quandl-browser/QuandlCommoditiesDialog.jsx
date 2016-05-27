@@ -18,14 +18,12 @@ const styles = DialogStyles;
 const QuandlCommoditiesDialog = React.createClass({
   ...WithValidation,
   getInitialState(){
+    this.type = null;
+    this.commodity = null;
     return {
-       itemType: null,
-       itemCommodity: null,
        optionTypes: QuandlCommodity.getCommodityTypes(),
        optionCommodities: [],
-       inputErrMsg: null,
        validationMessages: [],
-       isFirstRender: true,
     }
   },
 
@@ -38,33 +36,30 @@ const QuandlCommoditiesDialog = React.createClass({
     return true;
   },
 
-  _handlerSelectType(itemType){
-      if (itemType!==null){
-        this.state.itemType = itemType;
-        this.state.itemCommodity = null;
-        this.state.optionCommodities = QuandlCommodity.getCommodities(itemType.value);
-        this.setState(this.state);
-      } else {
-        this.state.itemType = null;
-        this.state.itemCommodity = null;
-      }
+  _handlerSelectType(type){
+     if (type && type.value){
+       this.type = type;
+       this.commodity = null;
+       this.setState({optionCommodities: QuandlCommodity.getCommodities(type.value)});
+    } else {
+       this.type = null;
+       this.commodity = null;
+    }
   },
 
-  _handlerSelectCommodity(itemCommodity){
-     this.state.itemCommodity = itemCommodity;
+  _handlerSelectCommodity(commodity){
+     this.commodity = commodity;
   },
 
   _handlerLoad(event){
-
     event.target.focus();
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      const {fromDate, toDate} = this.refs.datesFragment.getValues();
-      const {itemType, itemCommodity} = this.state;
+      const {fromDate, toDate} = this.datesFragment.getValues();      
       const option = {
-        value : itemCommodity.value,
-        type: itemType,
-        commodity: itemCommodity,
+        value : this.commodity.value,
+        type: this.type,
+        commodity: this.commodity,
         fromDate: fromDate,
         toDate: toDate,
       }
@@ -74,24 +69,27 @@ const QuandlCommoditiesDialog = React.createClass({
   },
 
   _getValidationMessages(){
-      const validationMessages = [];
-      if (!this.state.itemType){
-        validationMessages.push("Type is Required to Select");
-      }
-      if (!this.state.itemCommodity){
-        validationMessages.push("Commodity is Required to Select");
-      }
-      if (!this.refs.datesFragment.isValid()){
-        validationMessages.push("Some Date is not in Valid Format");
-      }
-      validationMessages.isValid = (validationMessages.length === 0) ? true : false;
+      const {msgOnNotSelected} = this.props;
+      let   msg = [];
 
-      return validationMessages;
+      if (!this.type)     { msg.push(msgOnNotSelected('Type')); }
+      if (!this.commodity){ msg.push(msgOnNotSelected('Commodity')); }
+
+      const {isValid, datesMsg} = this.datesFragment.getValidation();
+      if (!isValid) { msg = msg.concat(datesMsg); }
+
+      msg.isValid = (msg.length === 0) ? true : false;
+
+      return msg;
    },
 
-
   render(){
-    let commandButtons =[
+    const {
+           isShow, onShow, onClose,
+           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
+          } = this.props
+        , {optionTypes, optionCommodities, validationMessages} = this.state
+        , _commandButtons = [
        <ToolBarButton
           key="a"
           type="TypeC"
@@ -100,27 +98,14 @@ const QuandlCommoditiesDialog = React.createClass({
        />
     ];
 
-    let optionTypes, optionCommodities;
-    if (this.state.isFirstRender){
-      optionTypes = this.state.optionTypes;
-      optionCommodities = this.state.optionCommodities;
-    } else {
-      optionTypes = [];
-      optionCommodities = [];
-      this.state.isFirstRender = false;
-    }
-
-    const {isShow, onShow, onClose} = this.props;
-
     return(
         <ZhDialog
              caption="Quandl Commodity Prices"
              isShow={isShow}
-             commandButtons={commandButtons}
+             commandButtons={_commandButtons}
              onShowChart={onShow}
              onClose={this._handlerClose}
          >
-
              <div style={styles.rowDiv} key="1">
                <span style={styles.labelSpan}>
                   Type:
@@ -128,11 +113,9 @@ const QuandlCommoditiesDialog = React.createClass({
                <ZhSelect
                   width="250"
                   onSelect={this._handlerSelectType}
-                  //options={optionTypes}
-                  options={this.state.optionTypes}
+                  options={optionTypes}
                 />
              </div>
-
              <div style={styles.rowDiv} key="2">
                <span style={styles.labelSpan}>
                   Commodity:
@@ -140,22 +123,21 @@ const QuandlCommoditiesDialog = React.createClass({
                <ZhSelect
                   width="250"
                   onSelect={this._handlerSelectCommodity}
-                  //options={optionCommodities}
-                  options={this.state.optionCommodities}
+                  options={optionCommodities}
                 />
              </div>
              <DatesFragment
                  key="3"
-                 ref="datesFragment"
-                 initFromDate={this.props.initFromDate}
-                 initToDate={this.props.initToDate}
-                 onTestDate={this.props.onTestDate}
+                 ref={c => this.datesFragment = c}
+                 initFromDate={initFromDate}
+                 initToDate={initToDate}
+                 msgOnNotValidFormat={msgOnNotValidFormat}
+                 onTestDate={onTestDate}
              />
              <ValidationMessagesFragment
                  key="4"
-                 validationMessages={this.state.validationMessages}
+                 validationMessages={validationMessages}
              />
-
         </ZhDialog>
     );
   }

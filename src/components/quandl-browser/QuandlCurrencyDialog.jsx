@@ -17,10 +17,13 @@ const styles = DialogStyles;
 
 const QuandlCurrencyDialog = React.createClass({
   ...WithValidation,
+
+  displayName : 'QuandlCurrencyDialog',
+
   getInitialState(){
+    this.source = null;
+    this.currency = null;
     return {
-       currencySource: null,
-       currency: null,
        optionCurrencySources: QuandlCurrency.getCurrencySource(),
        optionCurrencies: [],
        validationMessages: [],
@@ -36,15 +39,19 @@ const QuandlCurrencyDialog = React.createClass({
     return true;
   },
 
-  _handlerSelectSource(currencySource){
-     this.state.currencySource = currencySource;
-     this.state.currency = null;
-     this.state.optionCurrencies = QuandlCurrency.getCurrencies(currencySource);
-     this.setState(this.state);
+  _handlerSelectSource(source){
+     if (source && source.value){
+       this.source = source;
+       this.currency = null;
+       this.setState({optionCurrencies:QuandlCurrency.getCurrencies(source)})
+     } else {
+       this.source = null;
+       this.currency = null;
+     }
   },
 
   _handlerSelectCurrency(currency){
-     this.state.currency = currency;
+     this.currency = currency;
   },
 
 
@@ -52,12 +59,11 @@ const QuandlCurrencyDialog = React.createClass({
     event.target.focus();
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
-      const {fromDate, toDate} = this.refs.datesFragment.getValues();
-      const {currencySource, currency} = this.state;
+      const {fromDate, toDate} = this.datesFragment.getValues();      
       const option = {
-        value : currencySource.value + '/' + currency.value,
-        source: currencySource,
-        currency: currency,
+        value : this.source.value + '/' + this.currency.value,
+        source: this.source,
+        currency: this.currency,
         fromDate: fromDate,
         toDate: toDate
       }
@@ -67,25 +73,27 @@ const QuandlCurrencyDialog = React.createClass({
   },
 
   _getValidationMessages(){
-    const validationMessages = [];
+    const {msgOnNotSelected} = this.props;
+    let   msg = [];
 
-    if (!this.state.currencySource){
-      validationMessages.push("Source is Required to Select");
-    }
-    if (!this.state.currency){
-      validationMessages.push("Currency is Required to Select");
-    }
-    if (!this.refs.datesFragment.isValid()){
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
+    if (!this.source)   { msg.push(msgOnNotSelected('Source')); }
+    if (!this.currency) { msg.push(msgOnNotSelected('Currency')); }
 
-    return validationMessages;
+    const {isValid, datesMsg} = this.datesFragment.getValidation();
+    if (!isValid) { msg = msg.concat(datesMsg); }
+
+    msg.isValid = (msg.length === 0) ? true : false;
+
+    return msg;
   },
 
-
   render(){
-    let commandButtons =[
+    const {
+           isShow, onShow, onClose,
+           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
+          } = this.props
+       , {optionCurrencySources, optionCurrencies, validationMessages} = this.state
+       , _commandButtons =[
        <ToolBarButton
           key="a"
           type="TypeC"
@@ -94,13 +102,11 @@ const QuandlCurrencyDialog = React.createClass({
        />
     ];
 
-    const {isShow, onShow, onClose} = this.props;
-
     return(
          <ZhDialog
             caption="Quandl Currency Histories"
             isShow={isShow}
-            commandButtons={commandButtons}
+            commandButtons={_commandButtons}
             onShowChart={onShow}
             onClose={this._handlerClose}
          >
@@ -111,7 +117,7 @@ const QuandlCurrencyDialog = React.createClass({
                <ZhSelect
                   width="250"
                   onSelect={this._handlerSelectSource}
-                  options={this.state.optionCurrencySources}
+                  options={optionCurrencySources}
                 />
              </div>
              <div style={styles.rowDiv} key="2">
@@ -121,22 +127,22 @@ const QuandlCurrencyDialog = React.createClass({
                <ZhSelect
                   width="250"
                   onSelect={this._handlerSelectCurrency}
-                  options={this.state.optionCurrencies}
+                  options={optionCurrencies}
                 />
              </div>
              <DatesFragment
                  key="3"
-                 ref="datesFragment"
-                 initFromDate={this.props.initFromDate}
-                 initToDate={this.props.initToDate}
-                 onTestDate={this.props.onTestDate}
+                 ref={c => this.datesFragment = c}
+                 initFromDate={initFromDate}
+                 initToDate={initToDate}
+                 msgOnNotValidFormat={msgOnNotValidFormat}
+                 onTestDate={onTestDate}
              />
              <ValidationMessagesFragment
                  key="4"
-                 validationMessages={this.state.validationMessages}
+                 validationMessages={validationMessages}
              />
        </ZhDialog>
-
     );
   }
 });

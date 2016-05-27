@@ -6,13 +6,6 @@ export const BrowserType = {
    WATCH_LIST : 'WatchList'
 }
 
-/*
-const BrowserConfig = {
-  [BrowserType.QUANDL] : {
-  }
-}
-*/
-
 export const Direction = {
   UP : 'up',
   DOWN : 'down',
@@ -20,8 +13,11 @@ export const Direction = {
 }
 
 export const ModalDialog = {
+  INFO : 'info',
   ALERT : 'alert',
-  SETTINGS : 'settings', 
+  SETTINGS : 'settings',
   ADD_TO_WATCH : 'addToWatch',
-  LOAD_ITEM : 'loadItem'
+  LOAD_ITEM : 'loadItem',
+  EDIT_WATCH_GROUP : 'editWatchGroup',
+  EDIT_WATCH_LIST : 'editWatchList'
 }

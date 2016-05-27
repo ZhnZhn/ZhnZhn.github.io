@@ -28,13 +28,17 @@ var ButtonCircle = _react2.default.createClass({
   render: function render() {
     var _props = this.props;
     var caption = _props.caption;
+    var className = _props.className;
     var style = _props.style;
+    var isWithoutDefault = _props.isWithoutDefault;
     var onClick = _props.onClick;
-
+    var _className = className ? className + ' not-selected' : 'not-selected';
+    var _style = isWithoutDefault ? style : Object.assign({}, styles.rootSpan, style);
     return _react2.default.createElement(
       'span',
       {
-        style: Object.assign({}, styles.rootSpan, style),
+        className: _className,
+        style: _style,
         onClick: onClick
       },
       caption

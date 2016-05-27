@@ -48,20 +48,34 @@ const Styles = {
 
 
 const ModalDialog = React.createClass({
+   displayName : 'ModalDialog',
    propTypes : {
      isShow : React.PropTypes.bool,
+     isWithButton : React.PropTypes.bool,
      timeout : React.PropTypes.number,
      caption : React.PropTypes.string,
      onClose : React.PropTypes.func
    },
    getDefaultProps(){
      return {
-       timeout : 450
+       isWithButton : true,
+       isNotUpdate : false,
+       timeout : 450,
+
      }
    },
    getInitialState(){
      this.wasClosing = false;
      return {}
+   },
+
+   shouldComponentUpdate(nextProps, nextState){
+     if (nextProps !== this.props){
+       if (nextProps.isNotUpdate){
+         return false;
+       }
+     }
+     return true;
    },
 
    componentDidUpdate(prevProps, prevState){
@@ -91,7 +105,7 @@ const ModalDialog = React.createClass({
   },
 
   render: function(){
-    const { isShow, caption, children, onClose } = this.props;
+    const { isShow, isWithButton, caption, children, onClose } = this.props;
 
     let _className, _style;
 
@@ -121,7 +135,7 @@ const ModalDialog = React.createClass({
                {children}
              </div>
 
-            {this._renderCommandButton()}
+            {isWithButton && this._renderCommandButton()}
 
         </div>
     );

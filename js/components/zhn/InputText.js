@@ -30,6 +30,10 @@ var styles = {
 
 var InputText = _react2.default.createClass({
   displayName: 'InputText',
+  propTypes: {
+    initValue: _react2.default.PropTypes.string,
+    style: _react2.default.PropTypes.object
+  },
   getDefaultProps: function getDefaultProps() {
     return {
       initValue: ''
@@ -44,11 +48,12 @@ var InputText = _react2.default.createClass({
     this.setState({ value: event.target.value });
   },
   render: function render() {
+    var style = this.props.style;
     var value = this.state.value;
 
     return _react2.default.createElement('input', {
       type: 'text',
-      style: styles.inputText,
+      style: Object.assign({}, styles.inputText, style),
       value: value,
       translate: false,
       onChange: this._handlerInputChange
@@ -56,6 +61,9 @@ var InputText = _react2.default.createClass({
   },
   getValue: function getValue() {
     return this.state.value;
+  },
+  setValue: function setValue(value) {
+    this.setState({ value: value });
   }
 });
 

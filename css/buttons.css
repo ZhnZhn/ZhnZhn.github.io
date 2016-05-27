@@ -123,6 +123,25 @@
   stroke : rgba(164, 135, 212, 1);
 }
 
+.bt__watch__bar{
+  display: inline-block;
+  text-align: center;
+  font-weight : bold;
+  margin-left: 10px;
+  padding : 6px 12px;
+  border-radius : 20px;
+  width : auto;
+  height : auto;
+  border : 2px solid gray;
+  color : gray;
+  cursor: pointer;
+  transition: color, border-color 200ms ease-out;
+}
+.bt__watch__bar:hover {
+  color : #80c040;
+  border-color: #80c040;  
+}
+
 .not-selected {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome all / Safari all / Opera */

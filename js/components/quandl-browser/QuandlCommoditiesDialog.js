@@ -50,14 +50,12 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
   displayName: 'QuandlCommoditiesDialog'
 }, _WithValidation2.default, {
   getInitialState: function getInitialState() {
+    this.type = null;
+    this.commodity = null;
     return {
-      itemType: null,
-      itemCommodity: null,
       optionTypes: _QuandlCommodity2.default.getCommodityTypes(),
       optionCommodities: [],
-      inputErrMsg: null,
-      validationMessages: [],
-      isFirstRender: true
+      validationMessages: []
     };
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
@@ -68,37 +66,32 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
     }
     return true;
   },
-  _handlerSelectType: function _handlerSelectType(itemType) {
-    if (itemType !== null) {
-      this.state.itemType = itemType;
-      this.state.itemCommodity = null;
-      this.state.optionCommodities = _QuandlCommodity2.default.getCommodities(itemType.value);
-      this.setState(this.state);
+  _handlerSelectType: function _handlerSelectType(type) {
+    if (type && type.value) {
+      this.type = type;
+      this.commodity = null;
+      this.setState({ optionCommodities: _QuandlCommodity2.default.getCommodities(type.value) });
     } else {
-      this.state.itemType = null;
-      this.state.itemCommodity = null;
+      this.type = null;
+      this.commodity = null;
     }
   },
-  _handlerSelectCommodity: function _handlerSelectCommodity(itemCommodity) {
-    this.state.itemCommodity = itemCommodity;
+  _handlerSelectCommodity: function _handlerSelectCommodity(commodity) {
+    this.commodity = commodity;
   },
   _handlerLoad: function _handlerLoad(event) {
-
     event.target.focus();
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      var _refs$datesFragment$g = this.refs.datesFragment.getValues();
+      var _datesFragment$getVal = this.datesFragment.getValues();
 
-      var fromDate = _refs$datesFragment$g.fromDate;
-      var toDate = _refs$datesFragment$g.toDate;
-      var _state = this.state;
-      var itemType = _state.itemType;
-      var itemCommodity = _state.itemCommodity;
+      var fromDate = _datesFragment$getVal.fromDate;
+      var toDate = _datesFragment$getVal.toDate;
 
       var option = {
-        value: itemCommodity.value,
-        type: itemType,
-        commodity: itemCommodity,
+        value: this.commodity.value,
+        type: this.type,
+        commodity: this.commodity,
         fromDate: fromDate,
         toDate: toDate
       };
@@ -107,51 +100,58 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
     this._updateValidationMessages(validationMessages);
   },
   _getValidationMessages: function _getValidationMessages() {
-    var validationMessages = [];
-    if (!this.state.itemType) {
-      validationMessages.push("Type is Required to Select");
-    }
-    if (!this.state.itemCommodity) {
-      validationMessages.push("Commodity is Required to Select");
-    }
-    if (!this.refs.datesFragment.isValid()) {
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = validationMessages.length === 0 ? true : false;
+    var msgOnNotSelected = this.props.msgOnNotSelected;
 
-    return validationMessages;
+    var msg = [];
+
+    if (!this.type) {
+      msg.push(msgOnNotSelected('Type'));
+    }
+    if (!this.commodity) {
+      msg.push(msgOnNotSelected('Commodity'));
+    }
+
+    var _datesFragment$getVal2 = this.datesFragment.getValidation();
+
+    var isValid = _datesFragment$getVal2.isValid;
+    var datesMsg = _datesFragment$getVal2.datesMsg;
+
+    if (!isValid) {
+      msg = msg.concat(datesMsg);
+    }
+
+    msg.isValid = msg.length === 0 ? true : false;
+
+    return msg;
   },
   render: function render() {
-    var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _this = this;
+
+    var _props = this.props;
+    var isShow = _props.isShow;
+    var onShow = _props.onShow;
+    var onClose = _props.onClose;
+    var initFromDate = _props.initFromDate;
+    var initToDate = _props.initToDate;
+    var msgOnNotValidFormat = _props.msgOnNotValidFormat;
+    var onTestDate = _props.onTestDate;
+    var _state = this.state;
+    var optionTypes = _state.optionTypes;
+    var optionCommodities = _state.optionCommodities;
+    var validationMessages = _state.validationMessages;
+    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
 
-    var optionTypes = void 0,
-        optionCommodities = void 0;
-    if (this.state.isFirstRender) {
-      optionTypes = this.state.optionTypes;
-      optionCommodities = this.state.optionCommodities;
-    } else {
-      optionTypes = [];
-      optionCommodities = [];
-      this.state.isFirstRender = false;
-    }
-
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var onShow = _props.onShow;
-    var onClose = _props.onClose;
-
-
     return _react2.default.createElement(
       _ZhDialog2.default,
       {
         caption: 'Quandl Commodity Prices',
         isShow: isShow,
-        commandButtons: commandButtons,
+        commandButtons: _commandButtons,
         onShowChart: onShow,
         onClose: this._handlerClose
       },
@@ -165,9 +165,8 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
         ),
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
-          onSelect: this._handlerSelectType
-          //options={optionTypes}
-          , options: this.state.optionTypes
+          onSelect: this._handlerSelectType,
+          options: optionTypes
         })
       ),
       _react2.default.createElement(
@@ -180,21 +179,23 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
         ),
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
-          onSelect: this._handlerSelectCommodity
-          //options={optionCommodities}
-          , options: this.state.optionCommodities
+          onSelect: this._handlerSelectCommodity,
+          options: optionCommodities
         })
       ),
       _react2.default.createElement(_DatesFragment2.default, {
         key: '3',
-        ref: 'datesFragment',
-        initFromDate: this.props.initFromDate,
-        initToDate: this.props.initToDate,
-        onTestDate: this.props.onTestDate
+        ref: function ref(c) {
+          return _this.datesFragment = c;
+        },
+        initFromDate: initFromDate,
+        initToDate: initToDate,
+        msgOnNotValidFormat: msgOnNotValidFormat,
+        onTestDate: onTestDate
       }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         key: '4',
-        validationMessages: this.state.validationMessages
+        validationMessages: validationMessages
       })
     );
   }

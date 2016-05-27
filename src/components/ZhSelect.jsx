@@ -99,20 +99,36 @@ const styles = {
 }
 
 const ZhSelect = React.createClass({
+  getDefaultProps(){
+    return {
+      options : [],
+      isUpdateOptions : false
+    }
+  },
   getInitialState: function(){
+     this.domOptionsCache = null;
+     this.indexActiveOption = 0;
      return {
        value: '',
        isShowOption: false,
        options: this.props.options,
-       indexActiveOption: 0,
-       domOptionsCache: null,
        isValidDomOptionsCache: false,
        isLocalMode: false,
      }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState){
+  componentWillReceiveProps: function(nextProps){
     if (this.props !== nextProps){
+      if (this.props.options !== nextProps.options
+          || nextProps.isUpdateOptions){
+        //New options come from Parent - Clear domCache, Init State
+        this._setStateToInit(nextProps.options);
+      }
+    }
+  },
+
+  shouldComponentUpdate: function(nextProps, nextState){
+    if (this.props !== nextProps || nextProps.isUpdateOptions) {
       nextState.isLocalMode = false;
     } else {
       nextState.isLocalMode = true;
@@ -121,23 +137,27 @@ const ZhSelect = React.createClass({
     return true;
   },
 
-
-  componentWillReceiveProps: function(nextProps){
-    if (this.props !== nextProps){
-      if (this.props.options !== nextProps.options){
-        //New options come from Parent - Clear domCache, Init State
-        this.state.isValidDomOptionsCache = false;
-        this.state.value = '';
-        this.state.isShowOption = false;
-        this.state.indexActiveOption = 0;
-        this.state.options = nextProps.options;
-        //console.log("componentWillReceiveProps this.props.options !== nextProps.options");
-      }
+  componentDidUpdate: function(){
+     //Decorate Active Option
+     if (this.state.isShowOption){
+       let domActiveOption = this._getDomForActiveOption();
+       this._decorateOfDomActiveOption(domActiveOption);
+       this._makeVisibleOfDomActiveOption(domActiveOption);
     }
   },
 
+  _setStateToInit(options){
+    this.indexActiveOption = 0;
+    this.setState({
+      value : '',
+      isShowOption : false,
+      options : options,
+      isValidDomOptionsCache : false
+    });
+  },
+
   _getDomForActiveOption: function(){
-    return this.refs["v"+this.state.indexActiveOption];
+    return this.refs["v"+this.indexActiveOption];
   },
 
   _decorateOfDomActiveOption: function(domActiveOption){
@@ -147,13 +167,13 @@ const ZhSelect = React.createClass({
   },
 
   _decorateActiveOption: function(){
-    let domActiveOption = this.refs["v"+this.state.indexActiveOption];
+    let domActiveOption = this.refs["v"+this.indexActiveOption];
     domActiveOption.classList.add("option-row__active");
   },
 
   _undecorateActiveOption: function(){
-    if (this.refs["v" + this.state.indexActiveOption]){
-      this.refs["v" + this.state.indexActiveOption].classList.remove("option-row__active");
+    if (this.refs["v" + this.indexActiveOption]){
+      this.refs["v" + this.indexActiveOption].classList.remove("option-row__active");
     }
   },
 
@@ -166,66 +186,54 @@ const ZhSelect = React.createClass({
   _makeVisibleOfDomActiveOption: function(domActiveOption){
     if (domActiveOption){
       const offsetTop = domActiveOption.offsetTop;
-      const scrollTop = this.refs.options.scrollTop;
+      const scrollTop = this.domOptions.scrollTop;
       if ( (offsetTop - scrollTop) > 70){
-         this.refs.options.scrollTop += (offsetTop - scrollTop - 70);
+         this.domOptions.scrollTop += (offsetTop - scrollTop - 70);
       }
       if ( (offsetTop - scrollTop) < 0){
-        this.refs.options.scrollTop= 0;
+        this.domOptions.scrollTop= 0;
       }
     }
   },
 
   _makeVisibleActiveOption: function(){
-    let domActiveOption = this.refs["v"+this.state.indexActiveOption];
+    let domActiveOption = this.refs["v"+this.indexActiveOption];
 
     let offsetTop = domActiveOption.offsetTop;
-    let scrollTop = this.refs.options.scrollTop;
+    let scrollTop = this.domOptions.scrollTop;
     if ( (offsetTop - scrollTop) > 70){
-        this.refs.options.scrollTop += (offsetTop - scrollTop - 70);
-    }
-  },
-
-  componentDidUpdate: function(){
-     //Decorate Active Option
-     if (this.state.isShowOption){
-       let domActiveOption = this._getDomForActiveOption();
-       this._decorateOfDomActiveOption(domActiveOption);
-       this._makeVisibleOfDomActiveOption(domActiveOption);
+        this.domOptions.scrollTop += (offsetTop - scrollTop - 70);
     }
   },
 
   _filterOptionsToState: function(options, value){
-     this.state.value = value;
-     this.state.isShowOption = true;
+     const valueFor = value.toLowerCase();
 
-     value = value.toLowerCase();
-     this.state.options = _.filter(options, function(option){
-       return option.caption.toLowerCase().indexOf(value) !== -1
+     return _.filter(options, function(option){
+       return option.caption.toLowerCase().indexOf(valueFor) !== -1
      });
   },
 
   _handlerInputChange: function(event){
-    let value;
-    value = event.target.value;
-
+    const value = event.target.value;
+    let arr = [];
     if (value.length !== this.state.value.length){
-
       if ( value.length>this.state.value.length){
-        this._filterOptionsToState(this.state.options, value);
+        arr = this._filterOptionsToState(this.state.options, value);
       } else if ( value.length<this.state.value.length) {
-        this._filterOptionsToState(this.props.options, value);
+        arr = this._filterOptionsToState(this.props.options, value);
       }
-
-      if (this.state.options.length === 0){
-        this.state.options.push({caption: 'No results found', value: 'noresult'});
+      if (arr.length === 0){
+        arr.push({caption: 'No results found', value: 'noresult'});
       }
-
       this._undecorateActiveOption();
-      this.state.indexActiveOption = 0;
-      this.state.isValidDomOptionsCache = false;
-      this.setState(this.state);
-
+      this.indexActiveOption = 0;
+      this.setState({
+        value : value,
+        isShowOption : true,
+        isValidDomOptionsCache : false,
+        options : arr
+      })
     }
   },
 
@@ -233,39 +241,36 @@ const ZhSelect = React.createClass({
     switch(event.keyCode){
       // enter
       case 13:
-        let item = this.state.options[this.state.indexActiveOption];
+         const item = this.state.options[this.indexActiveOption];
 
-         this.state.value = this.state.options[this.state.indexActiveOption].caption;
-         this.state.isShowOption = false;
-         this.state.isValidDomOptionsCache = true;
-         this.setState(this.state);
+         if (item && item.caption){
+           this.setState({
+             value : item.caption,
+             isShowOption : false,
+             isValidDomOptionsCache : true
+           });
 
-         if (item.value !== 'noresult'){
-           this.props.onSelect(item);
-         } else {
-           this.props.onSelect(null);
+           if (item.value !== 'noresult'){
+             this.props.onSelect(item);
+           } else {
+             this.props.onSelect(null);
+           }
          }
       break;
       //escape
       case 27:
         if (this.state.isShowOption){
-          this.state.isShowOption = false;
-          this.setState(this.state);
+          this.setState({isShowOption : false});
         } else {
-           this.state.value = '';
-           this.state.isShowOption = false;
-           this.state.options = this.props.options;
-           this.state.indexActiveOption = 0;
-           this.state.isValidDomOptionsCache = false;
-           this.setState(this.state);
-           this.props.onSelect(null);
+          this._undecorateActiveOption();
+          this._setStateToInit(this.props.options);
+          this.props.onSelect(null);
         }
       break;
       //down
       case 40:
         if (!this.state.isShowOption){
-          this.state.isShowOption = true;
-          this.setState(this.state);
+          this.setState({isShowOption : true});
         } else {
           event.preventDefault();
 
@@ -274,19 +279,19 @@ const ZhSelect = React.createClass({
           if (domActiveOption){
              this._undecorateOfDomActiveOption(domActiveOption);
 
-             this.state.indexActiveOption += 1;
-             if (this.state.indexActiveOption>=this.state.options.length){
-                this.state.indexActiveOption = 0;
-                this.refs.options.scrollTop = 0;
+             this.indexActiveOption += 1;
+             if (this.indexActiveOption>=this.state.options.length){
+                this.indexActiveOption = 0;
+                this.domOptions.scrollTop = 0;
              }
 
              domActiveOption = this._getDomForActiveOption();
              this._decorateOfDomActiveOption(domActiveOption)
 
-             const offsetTop = this.refs["v"+this.state.indexActiveOption].offsetTop;
-             const scrollTop = this.refs.options.scrollTop;
+             const offsetTop = this.refs["v"+this.indexActiveOption].offsetTop;
+             const scrollTop = this.domOptions.scrollTop;
              if ( (offsetTop - scrollTop) > 70){
-                this.refs.options.scrollTop += (offsetTop - scrollTop - 70);
+                this.domOptions.scrollTop += (offsetTop - scrollTop - 70);
              }
           }
         }
@@ -300,20 +305,20 @@ const ZhSelect = React.createClass({
           if (domActiveOption){
             this._undecorateOfDomActiveOption(domActiveOption);
 
-            this.state.indexActiveOption -= 1;
-            if (this.state.indexActiveOption < 0){
-              this.state.indexActiveOption = this.state.options.length - 1;
-              const offsetTop2 = this.refs["v"+this.state.indexActiveOption].offsetTop;
-              this.refs.options.scrollTop = offsetTop2;
+            this.indexActiveOption -= 1;
+            if (this.indexActiveOption < 0){
+              this.indexActiveOption = this.state.options.length - 1;
+              const offsetTop2 = this.refs["v"+this.indexActiveOption].offsetTop;
+              this.domOptions.scrollTop = offsetTop2;
             }
 
             domActiveOption = this._getDomForActiveOption();
             this._decorateOfDomActiveOption(domActiveOption);
 
             const offsetTop = domActiveOption.offsetTop;
-            const scrollTop = this.refs.options.scrollTop;
+            const scrollTop = this.domOptions.scrollTop;
             if ( (offsetTop - scrollTop) < 70){
-              this.refs.options.scrollTop -= ( 70 - (offsetTop - scrollTop) );
+              this.domOptions.scrollTop -= ( 70 - (offsetTop - scrollTop) );
             }
           }
         }
@@ -323,70 +328,64 @@ const ZhSelect = React.createClass({
   },
 
   _handlerToggleOptions: function(){
-    this.state.isShowOption = ! this.state.isShowOption;
-    this.setState(this.state);
+    this.setState({isShowOption: !this.state.isShowOption});
   },
 
   _handlerClickOption: function(item, index, event){
-    this.state.indexActiveOption = index;
-    this.state.value = item.caption;
-    this.state.isShowOption = false;
-    this.setState(this.state);
-
+    this.indexActiveOption = index;
+    this.setState({
+      value : item.caption,
+      isShowOption : false
+    });
     this.props.onSelect(item);
   },
 
 
   renderOptions: function(){
-    let styleOptions = this.state.isShowOption ? {display: 'block'} : { display: 'none'};
-    let domOptions;
+    const {isShowOption, options, isValidDomOptionsCache} = this.state;
 
-    if (this.state.options){
-      if (!this.state.isValidDomOptionsCache){
-         domOptions = this.state.options.map((item, index)=>{
-           let styleDiv = (index % 2 === 0) ? styles.itemOdd : styles.itemEven;
+    let _domOptions;
+    if (options){
+      if (!isValidDomOptionsCache){
+         _domOptions = options.map((item, index)=>{
+           const _styleDiv = (index % 2 === 0) ? styles.itemOdd : styles.itemEven;
            return (
              <div
                 className="option-row"
-                style={Object.assign({},styles.itemDiv,styleDiv)}
+                style={Object.assign({}, styles.itemDiv, _styleDiv)}
                 key={index}
                 ref={"v"+index}
-                onClick={this._handlerClickOption.bind(this, item, index)}>{item.caption}</div>
+                onClick={this._handlerClickOption.bind(this, item, index)}
+              >
+                {item.caption}
+            </div>
            )
         });
-        this.state.domOptionsCache = domOptions;
+        this.domOptionsCache = _domOptions;
       } else {
-        domOptions = this.state.domOptionsCache;
+        _domOptions = this.domOptionsCache;
       }
     }
 
-    let styleDivWidth = null;
-    if (this.props.width){
-      styleDivWidth = { width: this.props.width+'px' };
-    }
-
-    let numberFilteredItems;
-    if (this.state.options[0]){
-      if (this.state.options[0].value !== 'noresult'){
-        numberFilteredItems = this.state.options.length;
-      } else {
-        numberFilteredItems = 0;
-      }
-    } else {
-      numberFilteredItems = 0;
-    }
-
-    let numberAllItems = this.props.options ? this.props.options.length : 0;
-
+    const {width} = this.props
+        ,  _styleOptions = isShowOption ? {display: 'block'} : { display: 'none'}
+        , _styleDivWidth = (width) ? { width: width+'px'} : null
+        , _numberFilteredItems = (options[0] && (options[0].value !== 'noresult') ) ?
+                                  options.length : 0
+        , _numberAllItems = this.props.options ? this.props.options.length : 0;
 
     return (
-        <div style={Object.assign({}, styles.rootOptionDiv, styleOptions, styleDivWidth)}>
-          <div ref="options" key="1" style={Object.assign({}, styles.optionDiv, styleOptions, styleDivWidth)}>
-            {domOptions}
+        <div style={Object.assign({}, styles.rootOptionDiv, _styleOptions, _styleDivWidth)}>
+          <div
+             ref={c => this.domOptions = c}
+             key="1"
+             style={Object.assign({}, styles.optionDiv, _styleOptions, _styleDivWidth)}
+           >
+            {_domOptions}
           </div>
           <div key="2" style={styles.optionsFooter}>
             <span style={styles.fileredSpan}>
-              Filtered {numberFilteredItems} : {numberAllItems}
+              Filtered {_numberFilteredItems} : {_numberAllItems}
             </span>
           </div>
         </div>
@@ -394,35 +393,29 @@ const ZhSelect = React.createClass({
   },
 
   render: function(){
-    let value = this.state.value;
-    let styleOptions = this.state.isShowOption ? {display: 'block'} : { display: 'none'};
-    let styleArrow = this.state.isShowOption ? {borderColor: '#1B75BB transparent transparent'} : null;
+    const {width} = this.props
+        , {value, isLocalMode, isShowOption } = this.state;
 
-    let styleDivWidth = null;
-    let styleInputWidth = null;
-    let styleHr = null;
-    if (this.props.width){
-      styleDivWidth = { width: this.props.width+'px' };
-      styleInputWidth = { width: (this.props.width-30) + 'px'};
-      styleHr = { width: (this.props.width-40) + 'px'};
+    const _styleArrow = isShowOption ? {borderColor: '#1B75BB transparent transparent'} : null;
+
+    let _styleDivWidth = null;
+    let _styleInputWidth = null;
+    let _styleHr = null;
+    if (width){
+      _styleDivWidth = { width: width + 'px' };
+      _styleInputWidth = { width: (width-30) + 'px'};
+      _styleHr = { width: (width-40) + 'px'};
     }
 
-    let domOptions = null;
-    if (this.state.isLocalMode){
-      domOptions =  this.renderOptions();
-    } else {
-      if (this.state.isShowOption){
-        domOptions =  this.renderOptions();
-      }
-    }
+    const _domOptions = (isLocalMode || isShowOption) ? this.renderOptions() : null;
 
     return (
-      <div style={Object.assign({},styles.rootDiv, styleDivWidth)}>
+      <div style={Object.assign({},styles.rootDiv, _styleDivWidth)}>
         <input
-           ref="inputText"
+           ref={c => this.domInputText = c}
            type="text"
            value={value}
-           style={Object.assign({},styles.inputText,styleInputWidth)}
+           style={Object.assign({},styles.inputText, _styleInputWidth)}
            placeholder="Select..."
            translate={false}
            onChange={this._handlerInputChange}
@@ -430,22 +423,22 @@ const ZhSelect = React.createClass({
         <span
            style={styles.arrowCell}
            onClick={this._handlerToggleOptions}>
-          <span style={Object.assign({},styles.arrow, styleArrow)}></span>
+          <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
         </span>
 
-        <hr style={Object.assign({},styles.inputHr, styleHr)}></hr>
+        <hr style={Object.assign({},styles.inputHr, _styleHr)}></hr>
+        {_domOptions}
 
-        {domOptions}
       </div>
     )
   },
 
   focusInput: function(){
-    this.refs.inputText.focus();
+    this.domInputText.focus();
   },
 
   focusNotValidInput: function(){
-    this.refs.inputText.focus();
+    this.domInputText.focus();
   },
 
 });

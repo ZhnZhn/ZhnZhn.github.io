@@ -23,8 +23,8 @@ const styles = {
     paddingRight: 0
   },
   btCircle : {
-    marginLeft: '10px'
-  },
+    marginLeft: '20px',
+  },  
   scrollDiv : {
     overflowY: 'auto',
     height: '92%',
@@ -106,6 +106,13 @@ const WatchBrowser = React.createClass({
     WatchActions.removeItem(option);
   },
 
+  _handlerEditGroup(){
+    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_GROUP);
+  },
+  _handlerEditList(){
+    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_LIST);
+  },
+
   _renderWatchList(watchList){
      return watchList.groups.map((group, index) => {
        const {caption, lists} = group;
@@ -121,7 +128,7 @@ const WatchBrowser = React.createClass({
      })
   },
 
-  _renderLists(lists, groupCaption){    
+  _renderLists(lists, groupCaption){
     return lists.map((list, index) => {
       const {caption, items} = list;
       return (
@@ -166,11 +173,33 @@ const WatchBrowser = React.createClass({
       })
   },
 
-
+  _renderEditBar(isModeEdit){
+    if (isModeEdit){
+      return (
+        <div style={{marginBottom: '10px'}}>
+           <ButtonCircle
+             caption={'GROUP'}
+             className={'bt__watch__bar'}
+             isWithoutDefault={true}
+             onClick={this._handlerEditGroup}
+          />
+          <ButtonCircle
+             caption={'LIST'}
+             className={'bt__watch__bar'}
+             isWithoutDefault={true}
+             style={{marginLeft: '20px'}}
+             onClick={this._handlerEditList}
+          />
+        </div>
+      )
+    } else {
+      return null;
+    }
+  },
 
   render(){
     const {isShow, isModeEdit, watchList} = this.state;
-    const _captionEV = (isModeEdit) ? 'E' : 'V';
+    const _captionEV = (isModeEdit) ? 'V' : 'E';
     return (
        <Browser isShow={isShow} style={{paddingRight: 0}}>
          <CaptionRow
@@ -188,6 +217,7 @@ const WatchBrowser = React.createClass({
               onClick={this._handlerToggleEditMode}
            />
          </CaptionRow>
+         {this._renderEditBar(isModeEdit)}
          <ScrollPane style={styles.scrollDiv}>
            {watchList && this._renderWatchList(watchList)}
          </ScrollPane>

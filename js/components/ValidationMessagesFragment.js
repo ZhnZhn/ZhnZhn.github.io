@@ -15,13 +15,24 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = _DialogStyles2.default;
+var Styles = {
+  MSG_SPAN: {
+    whiteSpace: 'pre'
+  }
+};
 
 var ValidationMessagesFragment = _react2.default.createClass({
   displayName: 'ValidationMessagesFragment',
-
-
-  _renderValidationMessages: function _renderValidationMessages() {
-    var messages = this.props.validationMessages.map(function (msg, index) {
+  propTypes: {
+    validationMessages: _react2.default.PropTypes.array
+  },
+  getDefaultProps: function getDefaultProps() {
+    return {
+      validationMessages: []
+    };
+  },
+  _renderValidationMessages: function _renderValidationMessages(validationMessages) {
+    return validationMessages.map(function (msg, index) {
       return _react2.default.createElement(
         'div',
         { key: index },
@@ -32,20 +43,19 @@ var ValidationMessagesFragment = _react2.default.createClass({
         ),
         _react2.default.createElement(
           'span',
-          null,
+          { style: Styles.MSG_SPAN },
           msg
         )
       );
     });
-
-    return messages;
   },
-
   render: function render() {
+    var validationMessages = this.props.validationMessages;
+
     return _react2.default.createElement(
       'div',
       { style: styles.validationContainer },
-      this._renderValidationMessages()
+      this._renderValidationMessages(validationMessages)
     );
   }
 });

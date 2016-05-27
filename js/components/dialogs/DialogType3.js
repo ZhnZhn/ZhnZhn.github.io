@@ -34,7 +34,7 @@ var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
 
-var _DialogStyles = require('../styles/DialogStyles.js');
+var _DialogStyles = require('../styles/DialogStyles');
 
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
@@ -42,12 +42,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var DialogType3 = _react2.default.createClass(_extends({
-  displayName: 'DialogType3'
-}, _WithValidation2.default, {
+var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.default, {
+
+  displayName: 'DialogType3',
+
   getInitialState: function getInitialState() {
+    this.stock = null;
     return {
-      stock: null,
       validationMessages: []
     };
   },
@@ -60,20 +61,20 @@ var DialogType3 = _react2.default.createClass(_extends({
     return true;
   },
   _handlerSelectStock: function _handlerSelectStock(stock) {
-    this.state.stock = stock;
+    this.stock = stock;
   },
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      var _refs$datesFragment$g = this.refs.datesFragment.getValues();
+      var _datesFragment$getVal = this.datesFragment.getValues();
 
-      var fromDate = _refs$datesFragment$g.fromDate;
-      var toDate = _refs$datesFragment$g.toDate;
+      var fromDate = _datesFragment$getVal.fromDate;
+      var toDate = _datesFragment$getVal.toDate;
 
       var option = {
-        value: this.state.stock.value,
-        stock: this.state.stock,
+        value: this.stock.value,
+        stock: this.stock,
         fromDate: fromDate,
         toDate: toDate
       };
@@ -82,24 +83,24 @@ var DialogType3 = _react2.default.createClass(_extends({
     this._updateValidationMessages(validationMessages);
   },
   _getValidationMessages: function _getValidationMessages() {
-    var validationMessages = [];
-    if (!this.state.stock) {
-      validationMessages.push("Stock is Required to Select");
+    var msg = [];
+    if (!this.stock) {
+      msg.push(this.props.msgOnNotSelected('Stock'));
     }
-    if (!this.refs.datesFragment.isValid()) {
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = validationMessages.length === 0 ? true : false;
 
-    return validationMessages;
+    var _datesFragment$getVal2 = this.datesFragment.getValidation();
+
+    var isValid = _datesFragment$getVal2.isValid;
+    var datesMsg = _datesFragment$getVal2.datesMsg;
+
+    if (!isValid) {
+      msg = msg.concat(datesMsg);
+    }
+    msg.isValid = msg.length === 0 ? true : false;
+    return msg;
   },
   render: function render() {
-    var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Load',
-      onClick: this._handlerLoad
-    })];
+    var _this = this;
 
     var _props = this.props;
     var caption = _props.caption;
@@ -109,16 +110,22 @@ var DialogType3 = _react2.default.createClass(_extends({
     var optionStocks = _props.optionStocks;
     var initFromDate = _props.initFromDate;
     var initToDate = _props.initToDate;
+    var msgOnNotValidFormat = _props.msgOnNotValidFormat;
     var onTestDate = _props.onTestDate;
     var validationMessages = this.state.validationMessages;
-
+    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+      key: 'a',
+      type: 'TypeC',
+      caption: 'Load',
+      onClick: this._handlerLoad
+    })];
 
     return _react2.default.createElement(
       _ZhDialog2.default,
       {
         caption: caption,
         isShow: isShow,
-        commandButtons: commandButtons,
+        commandButtons: _commandButtons,
         onShowChart: onShow,
         onClose: this._handlerClose
       },
@@ -138,9 +145,12 @@ var DialogType3 = _react2.default.createClass(_extends({
       ),
       _react2.default.createElement(_DatesFragment2.default, {
         key: '2',
-        ref: 'datesFragment',
+        ref: function ref(c) {
+          return _this.datesFragment = c;
+        },
         initFromDate: initFromDate,
         initToDate: initToDate,
+        msgOnNotValidFormat: msgOnNotValidFormat,
         onTestDate: onTestDate
       }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {

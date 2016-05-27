@@ -51,7 +51,9 @@ var ComponentSlice = {
       this.activeChart = null;
     }
   },
-  onShowModalDialog: function onShowModalDialog(modalDialogType, option) {
+  onShowModalDialog: function onShowModalDialog(modalDialogType) {
+    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
     option.modalDialogType = modalDialogType;
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   }

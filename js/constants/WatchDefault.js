@@ -26,5 +26,12 @@ var WatchDefault = {
   }]
 };
 
+WatchDefault.fDefaultGroup = function (_ref) {
+  var _ref$caption = _ref.caption;
+  var caption = _ref$caption === undefined ? 'Default' : _ref$caption;
+
+  return { caption: caption };
+};
+
 exports.default = WatchDefault;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WatchDefault.js.map

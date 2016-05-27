@@ -46,13 +46,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var QuandlFuturesChinaDceDialog = _react2.default.createClass(_extends({
-  displayName: 'QuandlFuturesChinaDceDialog'
-}, _WithValidation2.default, {
+var QuandlFuturesChinaDceDialog = _react2.default.createClass(_extends({}, _WithValidation2.default, {
+  displayName: 'QuandlFuturesChinaDceDialog',
   getInitialState: function getInitialState() {
+    this.code = null;
     return {
       optionCodes: _QuandlChinaDceFuture2.default.getTickets(),
-      code: null,
       validationMessages: []
     };
   },
@@ -65,48 +64,52 @@ var QuandlFuturesChinaDceDialog = _react2.default.createClass(_extends({
     return true;
   },
   _handlerSelectCode: function _handlerSelectCode(code) {
-    this.state.code = code;
+    this.code = code;
   },
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
       var option = {
-        value: this.state.code.value,
-        code: this.state.code
+        value: this.code.value,
+        code: this.code
       };
       this.props.onLoad(option);
     }
     this._updateValidationMessages(validationMessages);
   },
   _getValidationMessages: function _getValidationMessages() {
-    var validationMessages = [];
-    if (!this.state.code) {
-      validationMessages.push("Code is Required to Select");
+    var msgOnNotSelected = this.props.msgOnNotSelected;
+    var msg = [];
+
+    if (!this.code) {
+      msg.push(msgOnNotSelected('Code'));
     }
-    validationMessages.isValid = validationMessages.length === 0 ? true : false;
-    return validationMessages;
+
+    msg.isValid = msg.length === 0 ? true : false;
+    return msg;
   },
   render: function render() {
-    var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props = this.props;
+    var isShow = _props.isShow;
+    var onShow = _props.onShow;
+    var onClose = _props.onClose;
+    var _state = this.state;
+    var optionCodes = _state.optionCodes;
+    var validationMessages = _state.validationMessages;
+    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
 
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var onShow = _props.onShow;
-    var onClose = _props.onClose;
-
-
     return _react2.default.createElement(
       _ZhDialog2.default,
       {
         caption: 'Futures China DCE',
         isShow: isShow,
-        commandButtons: commandButtons,
+        commandButtons: _commandButtons,
         onShowChart: onShow,
         onClose: this._handlerClose
       },
@@ -119,15 +122,14 @@ var QuandlFuturesChinaDceDialog = _react2.default.createClass(_extends({
           'Code:'
         ),
         _react2.default.createElement(_ZhSelect2.default, {
-          ref: 'selectStock',
           width: '250',
           onSelect: this._handlerSelectCode,
-          options: this.state.optionCodes
+          options: optionCodes
         })
       ),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         key: '3',
-        validationMessages: this.state.validationMessages
+        validationMessages: validationMessages
       })
     );
   }

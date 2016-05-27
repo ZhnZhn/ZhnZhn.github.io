@@ -10,6 +10,8 @@ import DataQY from '../../constants/DataQY';
 
 import DataWL from '../../constants/DataWL';
 
+import ValidationMessages from '../../constants/ValidationMessages';
+
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
 import DateUtils from '../../utils/DateUtils';
@@ -34,6 +36,8 @@ const createDialogComp = function (conf, browserType){
                key : dialogType,
                caption : conf.dialogCaption,
                optionStocks : fnOption(),
+               msgOnNotSelected : ValidationMessages.NOT_SELECTED,
+               msgOnNotValidFormat : ValidationMessages.NOT_VALID_FORMAT,
                onLoad  : onLoadChart.bind(null, dialogType, browserType),
                onShow  : onShowChart.bind(null, dialogType, browserType),
                initFromDate, initToDate, onTestDate,

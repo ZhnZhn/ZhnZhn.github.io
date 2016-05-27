@@ -17,10 +17,11 @@ const styles = DialogStyles;
 
 const QuandlFuturesChinaDceDialog = React.createClass({
   ...WithValidation,
+  displayName : 'QuandlFuturesChinaDceDialog',
   getInitialState(){
+    this.code = null;
     return {
       optionCodes: QuandlChinaDceFuture.getTickets(),
-      code: null,
       validationMessages: [],
     }
   },
@@ -35,7 +36,7 @@ const QuandlFuturesChinaDceDialog = React.createClass({
   },
 
   _handlerSelectCode(code){
-    this.state.code = code;
+    this.code = code;
   },
 
   _handlerLoad(event){
@@ -43,27 +44,29 @@ const QuandlFuturesChinaDceDialog = React.createClass({
      const validationMessages = this._getValidationMessages();
      if (validationMessages.isValid){
        const option = {
-          value : this.state.code.value,
-          code : this.state.code
+          value : this.code.value,
+          code : this.code
        };
        this.props.onLoad(option);
-
      }
      this._updateValidationMessages(validationMessages);
   },
 
   _getValidationMessages(){
-    const validationMessages = [];
-    if (!this.state.code){
-      validationMessages.push("Code is Required to Select");
-    }
-    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
-    return validationMessages;
+    const {msgOnNotSelected} = this.props
+        , msg = [];
+
+    if (!this.code) { msg.push(msgOnNotSelected('Code')); }
+
+    msg.isValid = (msg.length === 0) ? true : false;
+    return msg;
   },
 
 
   render(){
-    let commandButtons =[
+    const {isShow, onShow, onClose} = this.props
+        , {optionCodes, validationMessages} = this.state
+        , _commandButtons =[
        <ToolBarButton
           key="a"
           type="TypeC"
@@ -72,13 +75,11 @@ const QuandlFuturesChinaDceDialog = React.createClass({
        />
     ];
 
-    const {isShow, onShow, onClose} = this.props;
-
     return (
        <ZhDialog
            caption="Futures China DCE"
            isShow={isShow}
-           commandButtons={commandButtons}
+           commandButtons={_commandButtons}
            onShowChart={onShow}
            onClose={this._handlerClose}
        >
@@ -87,15 +88,14 @@ const QuandlFuturesChinaDceDialog = React.createClass({
              Code:
            </span>
            <ZhSelect
-             ref="selectStock"
              width="250"
              onSelect={this._handlerSelectCode}
-             options={this.state.optionCodes}
+             options={optionCodes}
            />
         </div>
         <ValidationMessagesFragment
             key="3"
-            validationMessages={this.state.validationMessages}
+            validationMessages={validationMessages}
         />
       </ZhDialog>
     );

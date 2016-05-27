@@ -3,26 +3,39 @@ import React from 'react';
 import DialogStyles from './styles/DialogStyles.js';
 
 const styles = DialogStyles;
+const Styles = {
+  MSG_SPAN : {
+    whiteSpace : 'pre'
+  }
+}
 
 const ValidationMessagesFragment = React.createClass({
+   displayName : 'ValidationMessagesFragment',
+   propTypes : {
+     validationMessages : React.PropTypes.array
+   },
+   getDefaultProps(){
+     return {
+       validationMessages : []
+     }
+   },
 
-  _renderValidationMessages: function(){
-    let messages = this.props.validationMessages.map((msg, index)=>{
+  _renderValidationMessages(validationMessages){
+    return validationMessages.map((msg, index)=>{
       return (
         <div key={index}>
           <div style={styles.validationMessageNumber}>{index+1}</div>
-          <span>{msg}</span>
+          <span style={Styles.MSG_SPAN}>{msg}</span>
         </div>
       )
-    });
-
-    return messages;
+    });    
   },
 
-  render: function(){
+  render(){
+    const {validationMessages} = this.props;
     return (
       <div style={styles.validationContainer}>
-        {this._renderValidationMessages()}
+        {this._renderValidationMessages(validationMessages)}
       </div>
     )
   }

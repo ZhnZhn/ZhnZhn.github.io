@@ -8,15 +8,18 @@ import ToolBarButton from '../ToolBarButton';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
-import DialogStyles from '../styles/DialogStyles.js'
+import DialogStyles from '../styles/DialogStyles'
 const styles = DialogStyles;
 
 
 const DialogType3 = React.createClass({
   ...WithValidation,
-  getInitialState(){        
-    return {
-      stock: null,
+
+  displayName : 'DialogType3',
+
+  getInitialState(){
+    this.stock = null
+    return {      
       validationMessages: [],
     }
   },
@@ -31,17 +34,17 @@ const DialogType3 = React.createClass({
   },
 
   _handlerSelectStock(stock){
-    this.state.stock = stock;
+    this.stock = stock
   },
 
   _handlerLoad(event){
      event.target.focus();
      const validationMessages = this._getValidationMessages();
      if (validationMessages.isValid){
-       const {fromDate, toDate} = this.refs.datesFragment.getValues();
+       const {fromDate, toDate} = this.datesFragment.getValues();
        const option = {
-         value : this.state.stock.value,
-         stock: this.state.stock,
+         value : this.stock.value,
+         stock: this.stock,
          fromDate: fromDate,
          toDate: toDate,
        }
@@ -51,21 +54,22 @@ const DialogType3 = React.createClass({
   },
 
   _getValidationMessages(){
-    const validationMessages = [];
-    if (!this.state.stock){
-      validationMessages.push("Stock is Required to Select");
-    }
-    if (!this.refs.datesFragment.isValid()){
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
-
-    return validationMessages;
+    let msg = [];
+    if (!this.stock) { msg.push(this.props.msgOnNotSelected('Stock'));}
+    const {isValid, datesMsg} = this.datesFragment.getValidation();
+    if (!isValid) { msg = msg.concat(datesMsg); }
+    msg.isValid = (msg.length === 0) ? true : false;
+    return msg;
   },
 
-
   render(){
-    let commandButtons =[
+    const {
+            caption, isShow, onShow, onClose,
+            optionStocks,
+            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
+          } = this.props
+        , {validationMessages} = this.state
+        , _commandButtons = [
        <ToolBarButton
           key="a"
           type="TypeC"
@@ -74,20 +78,11 @@ const DialogType3 = React.createClass({
        />
     ];
 
-    const {
-            caption, isShow, onShow, onClose,
-            optionStocks,
-            initFromDate, initToDate, onTestDate
-          } = this.props;
-
-    const {validationMessages} = this.state;
-
     return (
-
        <ZhDialog
            caption={caption}
            isShow={isShow}
-           commandButtons={commandButtons}
+           commandButtons={_commandButtons}
            onShowChart={onShow}
            onClose={this._handlerClose}
        >
@@ -103,9 +98,10 @@ const DialogType3 = React.createClass({
         </div>
         <DatesFragment
             key="2"
-            ref="datesFragment"
+            ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
+            msgOnNotValidFormat={msgOnNotValidFormat}
             onTestDate={onTestDate}
         />
         <ValidationMessagesFragment

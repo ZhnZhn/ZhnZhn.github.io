@@ -15,10 +15,13 @@ const styles = {
 
 const ButtonCircle = React.createClass({
   render(){
-    const {caption, style, onClick} = this.props;
+    const {caption, className, style, isWithoutDefault, onClick} = this.props
+        , _className = (className) ? className + ' not-selected' : 'not-selected'
+        , _style = (isWithoutDefault) ? style : Object.assign({}, styles.rootSpan, style);
     return (
       <span
-         style={Object.assign({}, styles.rootSpan, style)}
+         className={_className}
+         style={_style}
          onClick={onClick}
       >
          {caption}

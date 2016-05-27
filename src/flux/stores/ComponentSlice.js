@@ -23,7 +23,7 @@ const ComponentSlice = {
 
 
   isLoadToChart(){
-    if (this.activeChart){      
+    if (this.activeChart){
       return this.activeChart.options.zhConfig.id;
     } else {
       return false;
@@ -45,7 +45,7 @@ const ComponentSlice = {
      }
   },
 
-  onShowModalDialog(modalDialogType, option){
+  onShowModalDialog(modalDialogType, option={}){
     option.modalDialogType = modalDialogType;
     this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   }

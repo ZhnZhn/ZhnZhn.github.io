@@ -1,72 +1,89 @@
 import React from 'react';
 
-import ZhDateField from './ZhDateField.js';
-import DialogStyles from './styles/DialogStyles.js';
+import ZhDateField from './ZhDateField';
+import DialogStyles from './styles/DialogStyles';
 
 const styles = DialogStyles;
 
 const DatesFragment = React.createClass({
+  displayName : 'DatesFragment',
+  getDefaultProps(){
+    return  {
+      msgOnNotValidFormat : (item) => '${item} is not in valid format'
+    }
+  },
 
-  render: function(){
+  render(){
+    const {initFromDate, initToDate, onTestDate} = this.props;
     return (
         <div>
-
           <div style={styles.rowDiv}>
             <span style={styles.labelSpan}>
                From Date:
             </span>
             <ZhDateField
-               ref="fromDate"
-               initValue={this.props.initFromDate}
+               ref={c => this.fromDate = c}
+               initValue={initFromDate}
                errorMsg="YYYY-MM-DD format must be"
-               onTest={this.props.onTestDate}
+               onTest={onTestDate}
             />
          </div>
-
          <div style={styles.rowDiv}>
             <span style={styles.labelSpan}>
               To Date:
             </span>
             <ZhDateField
-                 ref="toDate"
-                 initValue={this.props.initToDate}
+                 ref={c => this.toDate = c}
+                 initValue={initToDate}
                  errorMsg="YYYY-MM-DD format must be"
-                 onTest={this.props.onTestDate}
+                 onTest={onTestDate}
             />
          </div>
-
        </div>
     );
   },
 
-  getValues: function(){
+  getValues(){
     return {
-             fromDate: this.refs.fromDate.getValue(),
-             toDate: this.refs.toDate.getValue()
-           }
+      fromDate: this.fromDate.getValue(),
+      toDate: this.toDate.getValue()
+    }
   },
 
-  isValid: function(){
-    if (!this.refs.fromDate.isValid()) {
+  /*
+  isValid(){
+    if (!this.fromDate.isValid()) {
       return false;
     }
-    if (!this.refs.toDate.isValid()) {
+    if (!this.toDate.isValid()) {
       return false;
     }
     return true;
   },
+  */
 
-  focusInput: function(){
-    this.refs.fromDate.focusInput();
+  getValidation(){
+    const {msgOnNotValidFormat} = this.props
+        ,  datesMsg = [];
+    if (!this.fromDate.isValid()) { datesMsg.push(msgOnNotValidFormat('From Date')); }
+    if (!this.toDate.isValid())   { datesMsg.push(msgOnNotValidFormat('To Date')); }
+    if (datesMsg.length>0){
+      return { isValid: false, datesMsg }
+    }
+    return { isValid : true}
   },
 
-  focusNotValidInput: function(){
-    if (!this.refs.fromDate.isValid()){
-       this.refs.fromDate.focusInput();
+  focusInput(){
+    this.fromDate.focusInput();
+  },
+
+  focusNotValidInput(){
+    if (!this.fromDate.isValid()){
+       this.fromDate.focusInput();
        return true;
     }
-    if (!this.refs.toDate.isValid()){
-      this.refs.toDate.focusInput();
+    if (!this.toDate.isValid()){
+      this.toDate.focusInput();
       return true;
     }
     return false;

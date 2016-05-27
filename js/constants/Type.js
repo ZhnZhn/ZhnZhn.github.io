@@ -10,13 +10,6 @@ var BrowserType = exports.BrowserType = {
   WATCH_LIST: 'WatchList'
 };
 
-/*
-const BrowserConfig = {
-  [BrowserType.QUANDL] : {
-  }
-}
-*/
-
 var Direction = exports.Direction = {
   UP: 'up',
   DOWN: 'down',
@@ -24,9 +17,12 @@ var Direction = exports.Direction = {
 };
 
 var ModalDialog = exports.ModalDialog = {
+  INFO: 'info',
   ALERT: 'alert',
   SETTINGS: 'settings',
   ADD_TO_WATCH: 'addToWatch',
-  LOAD_ITEM: 'loadItem'
+  LOAD_ITEM: 'loadItem',
+  EDIT_WATCH_GROUP: 'editWatchGroup',
+  EDIT_WATCH_LIST: 'editWatchList'
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

@@ -18,12 +18,15 @@ const styles = DialogStyles;
 
 const QuandlWorldBankEconomicDialog = React.createClass({
   ...WithValidation,
+
+  displayName : 'QuandlWorldBankEconomicDialog',
+
   getInitialState(){
+    this.country = null;
+    this.metric = null;
     return {
       optionCountries: ISO3Country.getCountries(),
       optionMetrics: QuandlWorldBankEconomic.getMetrics(),
-      itemCountry: null,
-      itemMetric: null,
       validationMessages: [],
     }
   },
@@ -37,24 +40,23 @@ const QuandlWorldBankEconomicDialog = React.createClass({
     return true;
   },
 
-  _handlerSelectCountry(itemCountry){
-    this.state.itemCountry = itemCountry;
+  _handlerSelectCountry(country){
+    this.country = country;
   },
 
-  _handlerSelectMetric(itemMetric){
-    this.state.itemMetric = itemMetric;
+  _handlerSelectMetric(metric){
+    this.metric = metric;
   },
 
   _handlerLoad(event){
     event.target.focus();
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
-      const {fromDate, toDate} = this.refs.datesFragment.getValues();
-      const {itemCountry, itemMetric} = this.state;
+      const {fromDate, toDate} = this.datesFragment.getValues();      
       const option = {
-        value: 'WWDI/' + itemCountry.value + '_' + itemMetric.value,
-        country: itemCountry,
-        metric: itemMetric,
+        value: 'WWDI/' + this.country.value + '_' + this.metric.value,
+        country: this.country,
+        metric: this.metric,
         fromDate: fromDate,
         toDate: toDate,
       }
@@ -64,23 +66,27 @@ const QuandlWorldBankEconomicDialog = React.createClass({
   },
 
   _getValidationMessages(){
-    const validationMessages = [];
-    if (!this.state.itemCountry){
-      validationMessages.push("Country is Required to Select");
-    }
-    if (!this.state.itemMetric){
-      validationMessages.push("Metric is Required to Select");
-    }
-    if (!this.refs.datesFragment.isValid()){
-      validationMessages.push("Some Date is not in Valid Format");
-    }
-    validationMessages.isValid = (validationMessages.length === 0) ? true : false;
+    const {msgOnNotSelected} = this.props;
+    let   msg = [];
 
-    return validationMessages;
+    if (!this.country) { msg.push(msgOnNotSelected('Country')); }
+    if (!this.metric)  { msg.push(msgOnNotSelected('Metric')); }
+
+    const {isValid, datesMsg} = this.datesFragment.getValidation();
+    if (!isValid) { msg = msg.concat(datesMsg); }
+
+    msg.isValid = (msg.length === 0) ? true : false;
+
+    return msg;
   },
 
   render(){
-    let commandButtons =[
+    const {
+           isShow, onShow, onClose,
+           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
+          } = this.props
+       , {optionCountries, optionMetrics, validationMessages} = this.state
+       , _commandButtons = [
        <ToolBarButton
           key="a"
           type="TypeC"
@@ -89,12 +95,11 @@ const QuandlWorldBankEconomicDialog = React.createClass({
        />
     ];
 
-    const {isShow, onShow, onClose} = this.props;
     return (
       <ZhDialog
             caption="World Bank Economic"
             isShow={isShow}
-            commandButtons={commandButtons}
+            commandButtons={_commandButtons}
             onClose={this._handlerClose}
             onShowChart={onShow}
       >
@@ -105,7 +110,7 @@ const QuandlWorldBankEconomicDialog = React.createClass({
            <ZhSelect
              width="250"
              onSelect={this._handlerSelectCountry}
-             options={this.state.optionCountries}
+             options={optionCountries}
           />
         </div>
         <div style={styles.rowDiv} key="2">
@@ -115,19 +120,20 @@ const QuandlWorldBankEconomicDialog = React.createClass({
           <ZhSelect
             width="250"
             onSelect={this._handlerSelectMetric}
-            options={this.state.optionMetrics}
+            options={optionMetrics}
           />
        </div>
        <DatesFragment
           key="3"
-          ref="datesFragment"
-          initFromDate={this.props.initFromDate}
-          initToDate={this.props.initToDate}
-          onTestDate={this.props.onTestDate}
+          ref={c => this.datesFragment = c}
+          initFromDate={initFromDate}
+          initToDate={initToDate}
+          msgOnNotValidFormat={msgOnNotValidFormat}
+          onTestDate={onTestDate}
         />
        <ValidationMessagesFragment
           key="4"
-          validationMessages={this.state.validationMessages}
+          validationMessages={validationMessages}
         />
      </ZhDialog>
     );

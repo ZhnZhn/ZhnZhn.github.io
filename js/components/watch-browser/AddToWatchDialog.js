@@ -18,6 +18,10 @@ var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
+var _ValidationMessages = require('../../constants/ValidationMessages');
+
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+
 var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
@@ -46,10 +50,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var AddToWatchDialog = _react2.default.createClass(_extends({
-  displayName: 'AddToWatchDialog'
-}, _WithValidation2.default, {
+var actionCompleted = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
+    actionFailed = _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
+    forActionType = _WatchActions.WatchActionTypes.ADD_ITEM;
 
+var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2.default, {
+
+  displayName: 'AddToWatchDialog',
   propTypes: {
     isShow: _react2.default.PropTypes.bool.isRequired,
     data: _react2.default.PropTypes.object.isRequired,
@@ -67,6 +74,38 @@ var AddToWatchDialog = _react2.default.createClass(_extends({
       validationMessages: []
     };
   },
+  componentDidMount: function componentDidMount() {
+    this.unsubscribe = this.props.store.listen(this._onStore);
+  },
+  componetWillUnmount: function componetWillUnmount() {
+    this.unsubscribe();
+  },
+  _onStore: function _onStore(actionType, data) {
+    if (actionType === actionCompleted && data.forActionType === forActionType) {
+      if (this.state.validationMessages.length > 0) {
+        this.setState({ validationMessages: [] });
+      }
+      this.props.onClose();
+    } else if (actionType === actionFailed && data.forActionType === forActionType) {
+      this.setState({ validationMessages: data.messages });
+    }
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props && nextProps.isShow !== this.props.isShow) {
+      var groups = nextProps.store.getWatchGroups();
+      if (groups !== this.state.groupOptions) {
+        this.groupCaption = null;
+        this.listCaption = null;
+        this.setState({ groupOptions: groups, listOptions: [] });
+      } else if (this.groupCaption) {
+        var lists = nextProps.store.getWatchListsByGroup(this.groupCaption);
+        if (lists !== this.state.listOptions) {
+          this.listCaption = null;
+          this.setState({ listOptions: lists });
+        }
+      }
+    }
+  },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
@@ -74,17 +113,25 @@ var AddToWatchDialog = _react2.default.createClass(_extends({
     return true;
   },
   _handlerSelectGroup: function _handlerSelectGroup(group) {
-    var store = this.props.store;
+    if (group && group.caption) {
+      var store = this.props.store;
 
-    this.groupCaption = group.caption;
-    if (group.lists) {
-      this.setState({ listOptions: group.lists });
+      this.groupCaption = group.caption;
+      if (group.lists) {
+        this.setState({ listOptions: group.lists });
+      } else {
+        this.setState({ listOptions: [] });
+      }
     } else {
-      this.setState({ listOptions: [] });
+      this.groupCaption = null;
     }
   },
   _handlerSelectList: function _handlerSelectList(list) {
-    this.listCaption = list.caption;
+    if (list && list.caption) {
+      this.listCaption = list.caption;
+    } else {
+      this.listCaption = null;
+    }
   },
   _handlerAdd: function _handlerAdd() {
     var validationMessages = this._getValidationMessages();
@@ -99,21 +146,26 @@ var AddToWatchDialog = _react2.default.createClass(_extends({
 
 
       _WatchActions2.default.addItem({ caption: caption, groupCaption: groupCaption, listCaption: listCaption, config: config });
-      onClose();
+    } else {
+      this._updateValidationMessages(validationMessages);
     }
-    this._updateValidationMessages(validationMessages);
   },
   _getValidationMessages: function _getValidationMessages() {
-    var validationMessages = [];
+    var msg = [];
     if (!this.groupCaption) {
-      validationMessages.push("Group is Required to Select");
+      msg.push(_ValidationMessages2.default.NOT_SELECTED('Group'));
     }
     if (!this.listCaption) {
-      validationMessages.push("List is Required to Select");
+      msg.push(_ValidationMessages2.default.NOT_SELECTED('List'));
     }
-    validationMessages.isValid = validationMessages.length === 0 ? true : false;
-
-    return validationMessages;
+    msg.isValid = msg.length === 0 ? true : false;
+    return msg;
+  },
+  _handlerClose: function _handlerClose() {
+    if (this.state.validationMessages.length > 0) {
+      this.setState({ validationMessages: [] });
+    }
+    this.props.onClose();
   },
   render: function render() {
     var _props2 = this.props;
@@ -145,12 +197,12 @@ var AddToWatchDialog = _react2.default.createClass(_extends({
         _react2.default.createElement(
           'span',
           { style: styles.labelSpan },
-          'Groups:'
+          'Group:'
         ),
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
-          onSelect: this._handlerSelectGroup,
-          options: groupOptions
+          options: groupOptions,
+          onSelect: this._handlerSelectGroup
         })
       ),
       _react2.default.createElement(
@@ -159,7 +211,7 @@ var AddToWatchDialog = _react2.default.createClass(_extends({
         _react2.default.createElement(
           'span',
           { style: styles.labelSpan },
-          'Lists:'
+          'List:'
         ),
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',

@@ -95,3 +95,14 @@
   border-radius: 50%;
   color: green;
 }
+
+/*TabPane*/
+.tabpane__tabs::before{
+  content: " ";
+  display: table;
+}
+.tabpane__tabs::after{
+  clear: both;
+  content: " ";
+  display: table;
+}
