@@ -28,10 +28,6 @@ var _ChartType = require('../../constants/ChartType');
 
 var _ChartType2 = _interopRequireDefault(_ChartType);
 
-var _ValidationMessages = require('../../constants/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
 var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);

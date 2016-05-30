@@ -73,7 +73,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }]
 }, {
   caption: 'Futures',
-  items: [{ id: _DialogType.Quandl.CHINA_DCE_FUTURE }]
+  items: [{ id: _DialogType.Quandl.CHINA_DCE_FUTURE }, { id: _DialogType.Quandl.CHINA_ZCE_FUTURE }]
 }];
 
 var menuQuandlYahoo = [{
@@ -95,7 +95,7 @@ var menuQuandlGoogle = [{
   items: [{ id: _DialogType.QuandlGoogle.BRUSSELS }, { id: _DialogType.QuandlGoogle.LISBON }, { id: _DialogType.QuandlGoogle.TALLIN }, { id: _DialogType.QuandlGoogle.RIGA }, { id: _DialogType.QuandlGoogle.VILNIUS }]
 }, {
   caption: 'World Stocks',
-  items: [{ id: _DialogType.QuandlGoogle.SHENZHEN }, { id: _DialogType.QuandlGoogle.SINGAPURE }, { id: _DialogType.QuandlGoogle.KOREA }, { id: _DialogType.QuandlGoogle.NEWZEALAND }, { id: _DialogType.QuandlGoogle.SAO_PAOLO }]
+  items: [{ id: _DialogType.QuandlGoogle.SHENZHEN }, { id: _DialogType.QuandlGoogle.SINGAPURE }, { id: _DialogType.QuandlGoogle.KOREA }, { id: _DialogType.QuandlGoogle.TAILAND }, { id: _DialogType.QuandlGoogle.NEWZEALAND }, { id: _DialogType.QuandlGoogle.SAO_PAOLO }]
 }];
 
 var QuandlMenu = fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.QUANDL);

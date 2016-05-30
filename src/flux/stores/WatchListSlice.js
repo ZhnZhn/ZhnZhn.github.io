@@ -5,7 +5,8 @@ import {ComponentActionTypes} from '../actions/ComponentActions';
 import {WatchActionTypes} from '../actions/WatchActions';
 import WatchDefault from '../../constants/WatchDefault';
 import {ModalDialog}  from '../../constants/Type';
-import ValidationMessages from '../../constants/ValidationMessages'
+import Msg from '../../constants/Msg';
+
 
 const key = 'watchList';
 
@@ -17,16 +18,16 @@ const _fnOpenInfoDialog = function(descr){
 }
 
 const _fResultNotFound = function(itemType, name){
-  return {isDone : false, message : ValidationMessages.NOT_FOUND_ITEM(itemType, name)}
+  return {isDone : false, message : Msg.NOT_FOUND_ITEM(itemType, name)}
 }
 const _fResultGroupExisted = function(caption){
-  return {isDone : false, message : ValidationMessages.GROUP_EXISTED(caption)}
+  return {isDone : false, message : Msg.GROUP_EXISTED(caption)}
 }
 const _fResultListExisted = function(captionList, captionGroup){
-  return {isDone : false, message : ValidationMessages.LIST_EXISTED(captionList, captionGroup)}
+  return {isDone : false, message : Msg.LIST_EXISTED(captionList, captionGroup)}
 }
 const _fResultItemExisted = function(caption, captionList){
-  return {isDone : false, message : ValidationMessages.ITEM_EXISTED(caption, captionList)}
+  return {isDone : false, message : Msg.ITEM_EXISTED(caption, captionList)}
 }
 
 const _fnFilter = function(arr, caption){
@@ -200,11 +201,11 @@ const WatchListSlice = {
     if (this.isWatchEdited){
        LocalForage.setItem(key , this.watchList).then(()=>{
          this.isWatchEdited = false;
-         _fnOpenInfoDialog(ValidationMessages.WATCH_SAVED)
-         console.log(ValidationMessages.WATCH_SAVED);
+         _fnOpenInfoDialog(Msg.WATCH_SAVED)
+         console.log(Msg.WATCH_SAVED);
        })
     } else {
-       _fnOpenInfoDialog(ValidationMessages.WATCH_PREV);
+       _fnOpenInfoDialog(Msg.WATCH_PREV);
     }
   },
 

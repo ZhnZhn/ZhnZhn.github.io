@@ -37,6 +37,24 @@ const styles = {
     maxHeight: '200px',
     overflow: 'auto',
   },
+  spinnerCell : {
+    position: 'relative',
+    left: '8px',
+    top: '4px',
+    display: 'inline-block',
+    width: '16px',
+    height: '16px',
+  },
+  spinnerFailedCell : {
+    position: 'relative',
+    left: '8px',
+    top: '4px',
+    display: 'inline-block',
+    width: '16px',
+    height: '16px',
+    borderColor : '#F44336',
+    cursor : 'pointer'
+  },
   arrowCell:{
     cursor: 'pointer',
     //display: table-cell
@@ -102,16 +120,24 @@ const ZhSelect = React.createClass({
   getDefaultProps(){
     return {
       options : [],
+      optionName : '',
+      optionNames : '',
       isUpdateOptions : false
     }
   },
   getInitialState: function(){
      this.domOptionsCache = null;
      this.indexActiveOption = 0;
+     const {optionName, optionNames} = this.props
+         , _optionName = (optionName) ? ' ' + optionName : ''
+         , _optionNames = (optionNames) ? ' ' + optionNames :
+                    (optionName) ? _optionName : '';
      return {
        value: '',
        isShowOption: false,
        options: this.props.options,
+       optionName : _optionName,
+       optionNames : _optionNames,
        isValidDomOptionsCache: false,
        isLocalMode: false,
      }
@@ -392,6 +418,35 @@ const ZhSelect = React.createClass({
     )
   },
 
+  _renderAfterInput(isLoading, isLoadingFailed, _styleArrow){
+    if (!isLoading && !isLoadingFailed){
+      return (
+        <span
+           style={styles.arrowCell}
+           onClick={this._handlerToggleOptions}>
+          <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
+        </span>
+      );
+    } else if (isLoading){
+      return (
+        <span
+          style={styles.spinnerCell}
+          data-loader="circle"
+        >
+        </span>
+      )
+    } else if (isLoadingFailed) {
+      return (
+        <span
+          style={styles.spinnerFailedCell}
+          data-loader="circle-failed"
+          onClick={this.props.onLoadOption}
+         >
+        </span>
+      )
+    }
+  },
+
   render: function(){
     const {width} = this.props
         , {value, isLocalMode, isShowOption } = this.state;
@@ -409,6 +464,41 @@ const ZhSelect = React.createClass({
 
     const _domOptions = (isLocalMode || isShowOption) ? this.renderOptions() : null;
 
+    const  {isLoading, isLoadingFailed} = this.props
+        ,  {optionName, optionNames} = this.state;
+
+    let _domAfterInput, _placeholder;
+    if (!isLoading && !isLoadingFailed){
+      _placeholder=`Select${optionName}...`;
+      _domAfterInput = (
+        <span
+           style={styles.arrowCell}
+           onClick={this._handlerToggleOptions}>
+          <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
+        </span>
+      );
+    } else if (isLoading){
+      _placeholder=`Loading${optionNames}...`;
+      _domAfterInput = (
+        <span
+          style={styles.spinnerCell}
+          data-loader="circle"
+        >
+        </span>
+      );
+    } else if (isLoadingFailed) {
+       _placeholder=`Loading${optionNames} Failed`;
+       _domAfterInput = (
+        <span
+          style={styles.spinnerFailedCell}
+          data-loader="circle-failed"
+          onClick={this.props.onLoadOption}
+         >
+        </span>
+      )
+    }
+
+
     return (
       <div style={Object.assign({},styles.rootDiv, _styleDivWidth)}>
         <input
@@ -416,15 +506,20 @@ const ZhSelect = React.createClass({
            type="text"
            value={value}
            style={Object.assign({},styles.inputText, _styleInputWidth)}
-           placeholder="Select..."
+           placeholder={_placeholder}
            translate={false}
            onChange={this._handlerInputChange}
-           onKeyDown={this._handlerInputKeyDown}></input>
+           onKeyDown={this._handlerInputKeyDown}>
+        </input>
+        {_domAfterInput}
+        {/*this._renderAfterInput(this.props.isLoading, this.props.isLoadingFailed, _styleArrow)*/}
+        {/*
         <span
            style={styles.arrowCell}
            onClick={this._handlerToggleOptions}>
           <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
         </span>
+      */}
 
         <hr style={Object.assign({},styles.inputHr, _styleHr)}></hr>
         {_domOptions}

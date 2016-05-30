@@ -38,7 +38,7 @@ var ProgressLoading = _react2.default.createClass({
   _onStore: function _onStore(actionType, option) {
     if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK) {
       this.setState({ completed: 35, color: Colors.LOADING });
-    } else if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED || actionType === _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART || actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_ADDED) {
+    } else if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED || actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_ADDED) {
       this.setState({ completed: 100, color: Colors.LOADING });
     } else if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_FAILED) {
       this.setState({ completed: 100, color: Colors.FAILED });

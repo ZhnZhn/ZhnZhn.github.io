@@ -12,9 +12,9 @@ var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
-var _ValidationMessages = require('../../constants/ValidationMessages');
+var _Msg = require('../../constants/Msg');
 
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+var _Msg2 = _interopRequireDefault(_Msg);
 
 var _ModalDialog = require('../zhn/ModalDialog');
 
@@ -81,7 +81,7 @@ var EditGroupDialog = _react2.default.createClass({
             actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
             actionFailed: _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
             forActionType: _WatchActions.WatchActionTypes.ADD_GROUP,
-            msgOnIsEmptyName: _ValidationMessages2.default.IS_EMPTY_NAME,
+            msgOnIsEmptyName: _Msg2.default.IS_EMPTY_NAME,
             onCreate: _WatchActions2.default.addGroup,
             onClose: onClose
           })
@@ -94,8 +94,8 @@ var EditGroupDialog = _react2.default.createClass({
             actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
             actionFailed: _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
             forActionType: _WatchActions.WatchActionTypes.RENAME_GROUP,
-            msgOnNotSelect: _ValidationMessages2.default.NOT_SELECTED,
-            msgOnIsEmptyName: _ValidationMessages2.default.IS_EMPTY_NAME,
+            msgOnNotSelect: _Msg2.default.NOT_SELECTED,
+            msgOnIsEmptyName: _Msg2.default.IS_EMPTY_NAME,
             onRename: _WatchActions2.default.renameGroup,
             onClose: onClose
           })
@@ -107,7 +107,7 @@ var EditGroupDialog = _react2.default.createClass({
             store: store,
             actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
             forActionType: _WatchActions.WatchActionTypes.DELETE_GROUP,
-            msgOnNotSelect: _ValidationMessages2.default.NOT_SELECTED,
+            msgOnNotSelect: _Msg2.default.NOT_SELECTED,
             onDelete: _WatchActions2.default.deleteGroup,
             onClose: onClose
           })

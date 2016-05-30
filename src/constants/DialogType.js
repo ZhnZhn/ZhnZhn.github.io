@@ -34,7 +34,8 @@ const qeSources = [
   'WIKI_STOCK',
   'TOKIO_STOCK',
 
-  'CHINA_DCE_FUTURE'
+  'CHINA_DCE_FUTURE',
+  'CHINA_ZCE_FUTURE'
 ];
 const Quandl = createTypeObject(qeSources, 'QE');
 
@@ -46,7 +47,7 @@ const qgSources = [
   'BRUSSELS', 'LISBON',
   'TALLIN', 'RIGA', 'VILNIUS',
 
-  'SHENZHEN', 'SINGAPURE', 'KOREA',
+  'SHENZHEN', 'SINGAPURE', 'KOREA', 'TAILAND',
   'NEWZEALAND',
   'SAO_PAOLO'
 ];

@@ -18,6 +18,10 @@ var _ChartType2 = _interopRequireDefault(_ChartType);
 
 var _DialogType = require('../../constants/DialogType');
 
+var _Msg = require('../../constants/Msg');
+
+var _Msg2 = _interopRequireDefault(_Msg);
+
 var _QuandlApi = require('../../api/QuandlApi');
 
 var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
@@ -30,23 +34,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var AlertMsgs = {
-  ALREADY_EXIST: {
-    caption: 'Check Error',
-    descr: 'The chart for this code has already existed in a container. Please close it and load again.'
-  },
-  NETWORK_ERROR: {
-    caption: 'Network Error',
-    descr: 'Network error is encountered. Failed to fetch. It seems you offline or maybe a DNS lookup failure.'
-  }
-};
-
 var _fnCatchLoadError = function _fnCatchLoadError(error, chartId, onFailed) {
   var caption = void 0,
       descr = void 0;
   if (error instanceof TypeError) {
-    caption = AlertMsgs.NETWORK_ERROR.caption;
-    descr = AlertMsgs.NETWORK_ERROR.descr;
+    caption = _Msg2.default.Alert.NETWORK_ERROR.caption;
+    descr = _Msg2.default.Alert.NETWORK_ERROR.descr;
   } else {
     caption = error.zhCaption ? error.zhCaption : 'Runtime Error';
     descr = error.message;
@@ -128,9 +121,9 @@ var loadToChartComp = function loadToChartComp(dataColumn, chartType, browserTyp
       _fnCatchLoadError(error, chartId, onFailed);
     });
   } else {
-    var _AlertMsgs$ALREADY_EX = AlertMsgs.ALREADY_EXIST;
-    var caption = _AlertMsgs$ALREADY_EX.caption;
-    var descr = _AlertMsgs$ALREADY_EX.descr;
+    var _Msg$Alert$ALREADY_EX = _Msg2.default.Alert.ALREADY_EXIST;
+    var caption = _Msg$Alert$ALREADY_EX.caption;
+    var descr = _Msg$Alert$ALREADY_EX.descr;
 
     onFailed({ caption: caption, descr: descr, chartId: chartId });
   }
@@ -138,11 +131,12 @@ var loadToChartComp = function loadToChartComp(dataColumn, chartType, browserTyp
 
 var fnLoad1 = loadData.bind(null, 1);
 var fnLoad4 = loadData.bind(null, 4);
+var fnLoad5 = loadData.bind(null, 5);
 var fnLoadOption = function fnLoadOption(chartType, browserType, option, fnCompleted, fnFailed) {
   loadData(option.dataColumn, chartType, browserType, option, fnCompleted, fnFailed);
 };
 
-var LoadConfig = (_LoadConfig = {}, _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CURRENCY_HISTORY, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_COMMODITY_PRICE, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WORLDBANK_PRICE, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WIKI_STOCK, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_TOKIO_STOCK, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_DCE_FUTURE, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.WATCH_LIST, fnLoadOption), _LoadConfig);
+var LoadConfig = (_LoadConfig = {}, _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CURRENCY_HISTORY, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_COMMODITY_PRICE, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WORLDBANK_PRICE, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WIKI_STOCK, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_TOKIO_STOCK, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_DCE_FUTURE, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_ZCE_FUTURE, fnLoad5), _defineProperty(_LoadConfig, _ChartType2.default.WATCH_LIST, fnLoadOption), _LoadConfig);
 
 var addConfig = function addConfig(obj, fn) {
   for (var key in obj) {

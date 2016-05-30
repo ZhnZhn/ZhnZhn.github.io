@@ -3,7 +3,7 @@ import React from 'react';
 import WatchActions from '../../flux/actions/WatchActions';
 import {WatchActionTypes} from '../../flux/actions/WatchActions';
 
-import ValidationMessages from '../../constants/ValidationMessages';
+import Msg from '../../constants/Msg';
 
 import ModalDialog from '../zhn/ModalDialog';
 import TabPane from '../zhn/TabPane';
@@ -44,8 +44,8 @@ const EditListDialog = React.createClass({
                 actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}
                 actionFailed={WatchActionTypes.EDIT_WATCH_FAILED}
                 forActionType={WatchActionTypes.CREATE_LIST}
-                msgOnNotSelect={ValidationMessages.NOT_SELECTED}
-                msgOnIsEmptyName={ValidationMessages.IS_EMPTY_NAME}
+                msgOnNotSelect={Msg.NOT_SELECTED}
+                msgOnIsEmptyName={Msg.IS_EMPTY_NAME}
                 onCreate={WatchActions.createList}
                 onClose={onClose} />
            </Tab>
@@ -55,8 +55,8 @@ const EditListDialog = React.createClass({
                 actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}
                 actionFailed={WatchActionTypes.EDIT_WATCH_FAILED}
                 forActionType={WatchActionTypes.RENAME_LIST}
-                msgOnNotSelect={ValidationMessages.NOT_SELECTED}
-                msgOnIsEmptyName={ValidationMessages.IS_EMPTY_NAME}
+                msgOnNotSelect={Msg.NOT_SELECTED}
+                msgOnIsEmptyName={Msg.IS_EMPTY_NAME}
                 onRename={WatchActions.renameList}
                 onClose={onClose}
              />
@@ -67,7 +67,7 @@ const EditListDialog = React.createClass({
                 actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}
                 actionFailed={WatchActionTypes.EDIT_WATCH_FAILED}
                 forActionType={WatchActionTypes.DELETE_LIST}
-                msgOnNotSelect={ValidationMessages.NOT_SELECTED}
+                msgOnNotSelect={Msg.NOT_SELECTED}
                 onDelete={WatchActions.deleteList}
                 onClose={onClose}
              />

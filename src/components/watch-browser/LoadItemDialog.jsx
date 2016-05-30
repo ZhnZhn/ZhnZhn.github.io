@@ -7,7 +7,6 @@ import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
 import {BrowserType} from '../../constants/Type';
 import ChartType from '../../constants/ChartType';
-import ValidationMessages from '../../constants/ValidationMessages';
 
 import ModalDialog from '../zhn/ModalDialog';
 import ToolBarButton from '../ToolBarButton';

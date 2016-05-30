@@ -34,9 +34,9 @@ var _DataWL = require('../../constants/DataWL');
 
 var _DataWL2 = _interopRequireDefault(_DataWL);
 
-var _ValidationMessages = require('../../constants/ValidationMessages');
+var _Msg = require('../../constants/Msg');
 
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+var _Msg2 = _interopRequireDefault(_Msg);
 
 var _ComponentActions = require('../actions/ComponentActions');
 
@@ -72,8 +72,10 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     key: dialogType,
     caption: conf.dialogCaption,
     optionStocks: fnOption(),
-    msgOnNotSelected: _ValidationMessages2.default.NOT_SELECTED,
-    msgOnNotValidFormat: _ValidationMessages2.default.NOT_VALID_FORMAT,
+    optionURI: conf.optionURI,
+    optionsJsonProp: conf.optionsJsonProp,
+    msgOnNotSelected: _Msg2.default.NOT_SELECTED,
+    msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
     onLoad: onLoadChart.bind(null, dialogType, browserType),
     onShow: onShowChart.bind(null, dialogType, browserType),
     initFromDate: initFromDate, initToDate: initToDate, onTestDate: onTestDate

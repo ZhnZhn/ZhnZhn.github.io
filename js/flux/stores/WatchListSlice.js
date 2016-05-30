@@ -20,9 +20,9 @@ var _WatchDefault2 = _interopRequireDefault(_WatchDefault);
 
 var _Type = require('../../constants/Type');
 
-var _ValidationMessages = require('../../constants/ValidationMessages');
+var _Msg = require('../../constants/Msg');
 
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+var _Msg2 = _interopRequireDefault(_Msg);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,16 +38,16 @@ var _fnOpenInfoDialog = function _fnOpenInfoDialog(descr) {
 };
 
 var _fResultNotFound = function _fResultNotFound(itemType, name) {
-  return { isDone: false, message: _ValidationMessages2.default.NOT_FOUND_ITEM(itemType, name) };
+  return { isDone: false, message: _Msg2.default.NOT_FOUND_ITEM(itemType, name) };
 };
 var _fResultGroupExisted = function _fResultGroupExisted(caption) {
-  return { isDone: false, message: _ValidationMessages2.default.GROUP_EXISTED(caption) };
+  return { isDone: false, message: _Msg2.default.GROUP_EXISTED(caption) };
 };
 var _fResultListExisted = function _fResultListExisted(captionList, captionGroup) {
-  return { isDone: false, message: _ValidationMessages2.default.LIST_EXISTED(captionList, captionGroup) };
+  return { isDone: false, message: _Msg2.default.LIST_EXISTED(captionList, captionGroup) };
 };
 var _fResultItemExisted = function _fResultItemExisted(caption, captionList) {
-  return { isDone: false, message: _ValidationMessages2.default.ITEM_EXISTED(caption, captionList) };
+  return { isDone: false, message: _Msg2.default.ITEM_EXISTED(caption, captionList) };
 };
 
 var _fnFilter = function _fnFilter(arr, caption) {
@@ -246,11 +246,11 @@ var WatchListSlice = {
     if (this.isWatchEdited) {
       _localforage2.default.setItem(key, this.watchList).then(function () {
         _this2.isWatchEdited = false;
-        _fnOpenInfoDialog(_ValidationMessages2.default.WATCH_SAVED);
-        console.log(_ValidationMessages2.default.WATCH_SAVED);
+        _fnOpenInfoDialog(_Msg2.default.WATCH_SAVED);
+        console.log(_Msg2.default.WATCH_SAVED);
       });
     } else {
-      _fnOpenInfoDialog(_ValidationMessages2.default.WATCH_PREV);
+      _fnOpenInfoDialog(_Msg2.default.WATCH_PREV);
     }
   },
   _onEditWatch: function _onEditWatch(result, forActionType) {

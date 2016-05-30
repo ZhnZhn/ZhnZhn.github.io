@@ -18,11 +18,27 @@ var _CaptionRow = require('../CaptionRow');
 
 var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
 
+var _ScrollPane = require('./ScrollPane');
+
+var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
+
 var _MenuPart = require('./MenuPart');
 
 var _MenuPart2 = _interopRequireDefault(_MenuPart);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Styles = {
+  browser: {
+    paddingRight: '0'
+  },
+  scrollDiv: {
+    overflowY: 'auto',
+    height: '92%',
+    //height: 'calc(100vh - 90px)',
+    paddingRight: '10px'
+  }
+};
 
 var MenuBrowser = _react2.default.createClass({
   displayName: 'MenuBrowser',
@@ -85,13 +101,17 @@ var MenuBrowser = _react2.default.createClass({
 
     return _react2.default.createElement(
       _Browser2.default,
-      { isShow: isShow },
+      { isShow: isShow, style: Styles.browser },
       _react2.default.createElement(_CaptionRow2.default, {
         caption: caption,
         onClose: this._handlerHide
       }),
-      this._renderMenuParts(menuItems),
-      children
+      _react2.default.createElement(
+        _ScrollPane2.default,
+        { style: Styles.scrollDiv },
+        this._renderMenuParts(menuItems),
+        children
+      )
     );
   }
 });

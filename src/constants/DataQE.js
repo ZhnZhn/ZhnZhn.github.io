@@ -8,7 +8,7 @@ import DialogType3 from '../components/dialogs/DialogType3';
 import QuandlCommoditiesDialog from '../components/quandl-browser/QuandlCommoditiesDialog';
 import QuandlCurrencyDialog from '../components/quandl-browser/QuandlCurrencyDialog';
 import QuandlWorldBankEconomicDialog from '../components/quandl-browser/QuandlWorldBankEconomicDialog';
-import QuandlFuturesChinaDceDialog from '../components/quandl-browser/QuandlFuturesChinaDceDialog';
+import FuturesDialog from '../components/quandl-browser/FuturesDialog';
 
 
 const DataQE = {
@@ -56,9 +56,20 @@ const DataQE = {
   QE_CHINA_DCE_FUTURE : {
       type : 'QE_CHINA_DCE_FUTURE',
       menuTitle : 'China DCE',
-      dialogCaption : 'China DCE Future',
+      dialogCaption : 'China DCE Futures',
       chartContainerCaption : 'Quandl China DCE Futures',
-      dialogComp : QuandlFuturesChinaDceDialog,
+      dialogComp : FuturesDialog,
+      optionURI : './data/quandl/china_dce_futures.json',
+      optionsJsonProp : 'futures'
+  },
+  QE_CHINA_ZCE_FUTURE : {
+      type : 'QE_CHINA_ZCE_FUTURE',
+      menuTitle : 'China ZCE',
+      dialogCaption : 'China ZCE Futures',
+      chartContainerCaption : 'Quandl China ZCE Futures',
+      dialogComp : FuturesDialog,
+      optionURI : './data/quandl/china_zce_futures.json',
+      optionsJsonProp : 'futures'
   }
 
 };

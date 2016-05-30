@@ -2,7 +2,21 @@ import React from 'react';
 
 import Browser from './Browser';
 import CaptionRow from '../CaptionRow';
+import ScrollPane from './ScrollPane';
 import MenuPart from './MenuPart';
+
+const Styles = {
+  browser : {
+    paddingRight: '0'
+  },
+  scrollDiv : {
+    overflowY: 'auto',
+    height: '92%',
+    //height: 'calc(100vh - 90px)',
+    paddingRight: '10px'
+  }
+};
+
 
 const MenuBrowser = React.createClass({
   getInitialState: function(){
@@ -47,13 +61,15 @@ const MenuBrowser = React.createClass({
     const {caption, children} = this.props
         , {menuItems, isShow} = this.state;
     return (
-       <Browser isShow={isShow}>
+       <Browser isShow={isShow} style={Styles.browser}>
           <CaptionRow
              caption={caption}
              onClose={this._handlerHide}
           />
-          {this._renderMenuParts(menuItems)}
-          {children}
+          <ScrollPane style={Styles.scrollDiv}>
+            {this._renderMenuParts(menuItems)}
+            {children}
+          </ScrollPane>
        </Browser>
     )
   }

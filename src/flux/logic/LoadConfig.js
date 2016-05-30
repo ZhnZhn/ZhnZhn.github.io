@@ -2,25 +2,17 @@
 import ChartStore from '../stores/ChartStore';
 import ChartType from '../../constants/ChartType';
 import {QuandlYahoo, QuandlGoogle} from '../../constants/DialogType';
+import Msg from '../../constants/Msg';
+
 import QuandlApi from '../../api/QuandlApi';
 import QuandlAdapter from '../../adapters/QuandlAdapter';
 
-const AlertMsgs = {
-  ALREADY_EXIST : {
-    caption : 'Check Error',
-    descr: 'The chart for this code has already existed in a container. Please close it and load again.'
-  },
-  NETWORK_ERROR : {
-    caption : 'Network Error',
-    descr: 'Network error is encountered. Failed to fetch. It seems you offline or maybe a DNS lookup failure.'
-  }
-}
 
 const _fnCatchLoadError = function(error, chartId, onFailed){
   let caption, descr;
   if (error instanceof TypeError){
-    caption = AlertMsgs.NETWORK_ERROR.caption;
-    descr = AlertMsgs.NETWORK_ERROR.descr;
+    caption = Msg.Alert.NETWORK_ERROR.caption;
+    descr = Msg.Alert.NETWORK_ERROR.descr;
   } else {
     caption = (error.zhCaption) ? error.zhCaption : 'Runtime Error';
     descr = error.message;
@@ -98,13 +90,14 @@ const loadToChartComp = function(dataColumn, chartType, browserType, option,
         _fnCatchLoadError(error, chartId, onFailed);
       })
   } else {
-    const {caption, descr} = AlertMsgs.ALREADY_EXIST
+    const {caption, descr} = Msg.Alert.ALREADY_EXIST
     onFailed({caption, descr, chartId});
   }
 }
 
 const fnLoad1 = loadData.bind(null, 1);
 const fnLoad4 = loadData.bind(null, 4);
+const fnLoad5 = loadData.bind(null, 5);
 const fnLoadOption = function(chartType, browserType, option, fnCompleted, fnFailed){
   loadData(option.dataColumn, chartType, browserType, option, fnCompleted, fnFailed);
 }
@@ -116,6 +109,7 @@ const LoadConfig = {
   [ChartType.QUANDL_WIKI_STOCK] : fnLoad4,
   [ChartType.QUANDL_TOKIO_STOCK] : fnLoad4,
   [ChartType.QUANDL_CHINA_DCE_FUTURE] : fnLoad4,
+  [ChartType.QUANDL_CHINA_ZCE_FUTURE] : fnLoad5,
 
   [ChartType.WATCH_LIST] : fnLoadOption
 }

@@ -32,9 +32,9 @@ var _QuandlWorldBankEconomicDialog = require('../components/quandl-browser/Quand
 
 var _QuandlWorldBankEconomicDialog2 = _interopRequireDefault(_QuandlWorldBankEconomicDialog);
 
-var _QuandlFuturesChinaDceDialog = require('../components/quandl-browser/QuandlFuturesChinaDceDialog');
+var _FuturesDialog = require('../components/quandl-browser/FuturesDialog');
 
-var _QuandlFuturesChinaDceDialog2 = _interopRequireDefault(_QuandlFuturesChinaDceDialog);
+var _FuturesDialog2 = _interopRequireDefault(_FuturesDialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -83,9 +83,20 @@ var DataQE = {
     QE_CHINA_DCE_FUTURE: {
         type: 'QE_CHINA_DCE_FUTURE',
         menuTitle: 'China DCE',
-        dialogCaption: 'China DCE Future',
+        dialogCaption: 'China DCE Futures',
         chartContainerCaption: 'Quandl China DCE Futures',
-        dialogComp: _QuandlFuturesChinaDceDialog2.default
+        dialogComp: _FuturesDialog2.default,
+        optionURI: './data/quandl/china_dce_futures.json',
+        optionsJsonProp: 'futures'
+    },
+    QE_CHINA_ZCE_FUTURE: {
+        type: 'QE_CHINA_ZCE_FUTURE',
+        menuTitle: 'China ZCE',
+        dialogCaption: 'China ZCE Futures',
+        chartContainerCaption: 'Quandl China ZCE Futures',
+        dialogComp: _FuturesDialog2.default,
+        optionURI: './data/quandl/china_zce_futures.json',
+        optionsJsonProp: 'futures'
     }
 
 };

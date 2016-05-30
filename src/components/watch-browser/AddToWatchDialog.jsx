@@ -4,7 +4,8 @@ import WithValidation from '../dialogs/WithValidation';
 
 import WatchActions from '../../flux/actions/WatchActions';
 import {WatchActionTypes} from '../../flux/actions/WatchActions';
-import ValidationMessages from '../../constants/ValidationMessages';
+import Msg from '../../constants/Msg';
+
 
 import ModalDialog from '../zhn/ModalDialog';
 import ToolBarButton from '../ToolBarButton';
@@ -109,15 +110,15 @@ const AddToWatchDialog = React.createClass({
           , {caption, config} = data
           , {groupCaption, listCaption} = this;
 
-      WatchActions.addItem({caption, groupCaption, listCaption, config});      
+      WatchActions.addItem({caption, groupCaption, listCaption, config});
     } else {
       this._updateValidationMessages(validationMessages);
     }
   },
   _getValidationMessages(){
     const msg = [];
-    if (!this.groupCaption){ msg.push(ValidationMessages.NOT_SELECTED('Group'));}
-    if (!this.listCaption) { msg.push(ValidationMessages.NOT_SELECTED('List'));}
+    if (!this.groupCaption){ msg.push(Msg.NOT_SELECTED('Group'));}
+    if (!this.listCaption) { msg.push(Msg.NOT_SELECTED('List'));}
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
   },

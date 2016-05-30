@@ -102,6 +102,8 @@ var ChartStore = _reflux2.default.createStore(_extends({
       this.charts[chartType] = this.createInitConfig(chartType);
       this.charts[chartType].configs.unshift(config);
 
+      this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED);
+
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
     }
 

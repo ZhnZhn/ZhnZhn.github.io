@@ -50,6 +50,24 @@ var styles = {
     maxHeight: '200px',
     overflow: 'auto'
   },
+  spinnerCell: {
+    position: 'relative',
+    left: '8px',
+    top: '4px',
+    display: 'inline-block',
+    width: '16px',
+    height: '16px'
+  },
+  spinnerFailedCell: {
+    position: 'relative',
+    left: '8px',
+    top: '4px',
+    display: 'inline-block',
+    width: '16px',
+    height: '16px',
+    borderColor: '#F44336',
+    cursor: 'pointer'
+  },
   arrowCell: {
     cursor: 'pointer',
     //display: table-cell
@@ -116,6 +134,8 @@ var ZhSelect = _react2.default.createClass({
   getDefaultProps: function getDefaultProps() {
     return {
       options: [],
+      optionName: '',
+      optionNames: '',
       isUpdateOptions: false
     };
   },
@@ -123,10 +143,17 @@ var ZhSelect = _react2.default.createClass({
   getInitialState: function getInitialState() {
     this.domOptionsCache = null;
     this.indexActiveOption = 0;
+    var _props = this.props;
+    var optionName = _props.optionName;
+    var optionNames = _props.optionNames;
+    var _optionName = optionName ? ' ' + optionName : '';
+    var _optionNames = optionNames ? ' ' + optionNames : optionName ? _optionName : '';
     return {
       value: '',
       isShowOption: false,
       options: this.props.options,
+      optionName: _optionName,
+      optionNames: _optionNames,
       isValidDomOptionsCache: false,
       isLocalMode: false
     };
@@ -423,6 +450,30 @@ var ZhSelect = _react2.default.createClass({
     );
   },
 
+  _renderAfterInput: function _renderAfterInput(isLoading, isLoadingFailed, _styleArrow) {
+    if (!isLoading && !isLoadingFailed) {
+      return _react2.default.createElement(
+        'span',
+        {
+          style: styles.arrowCell,
+          onClick: this._handlerToggleOptions },
+        _react2.default.createElement('span', { style: Object.assign({}, styles.arrow, _styleArrow) })
+      );
+    } else if (isLoading) {
+      return _react2.default.createElement('span', {
+        style: styles.spinnerCell,
+        'data-loader': 'circle'
+      });
+    } else if (isLoadingFailed) {
+      return _react2.default.createElement('span', {
+        style: styles.spinnerFailedCell,
+        'data-loader': 'circle-failed',
+        onClick: this.props.onLoadOption
+      });
+    }
+  },
+
+
   render: function render() {
     var _this2 = this;
 
@@ -446,6 +497,40 @@ var ZhSelect = _react2.default.createClass({
 
     var _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
+    var _props2 = this.props;
+    var isLoading = _props2.isLoading;
+    var isLoadingFailed = _props2.isLoadingFailed;
+    var _state3 = this.state;
+    var optionName = _state3.optionName;
+    var optionNames = _state3.optionNames;
+
+
+    var _domAfterInput = void 0,
+        _placeholder = void 0;
+    if (!isLoading && !isLoadingFailed) {
+      _placeholder = 'Select' + optionName + '...';
+      _domAfterInput = _react2.default.createElement(
+        'span',
+        {
+          style: styles.arrowCell,
+          onClick: this._handlerToggleOptions },
+        _react2.default.createElement('span', { style: Object.assign({}, styles.arrow, _styleArrow) })
+      );
+    } else if (isLoading) {
+      _placeholder = 'Loading' + optionNames + '...';
+      _domAfterInput = _react2.default.createElement('span', {
+        style: styles.spinnerCell,
+        'data-loader': 'circle'
+      });
+    } else if (isLoadingFailed) {
+      _placeholder = 'Loading' + optionNames + ' Failed';
+      _domAfterInput = _react2.default.createElement('span', {
+        style: styles.spinnerFailedCell,
+        'data-loader': 'circle-failed',
+        onClick: this.props.onLoadOption
+      });
+    }
+
     return _react2.default.createElement(
       'div',
       { style: Object.assign({}, styles.rootDiv, _styleDivWidth) },
@@ -456,17 +541,11 @@ var ZhSelect = _react2.default.createClass({
         type: 'text',
         value: value,
         style: Object.assign({}, styles.inputText, _styleInputWidth),
-        placeholder: 'Select...',
+        placeholder: _placeholder,
         translate: false,
         onChange: this._handlerInputChange,
         onKeyDown: this._handlerInputKeyDown }),
-      _react2.default.createElement(
-        'span',
-        {
-          style: styles.arrowCell,
-          onClick: this._handlerToggleOptions },
-        _react2.default.createElement('span', { style: Object.assign({}, styles.arrow, _styleArrow) })
-      ),
+      _domAfterInput,
       _react2.default.createElement('hr', { style: Object.assign({}, styles.inputHr, _styleHr) }),
       _domOptions
     );

@@ -65,6 +65,8 @@ const ChartStore = Reflux.createStore({
       this.charts[chartType] = this.createInitConfig(chartType);
       this.charts[chartType].configs.unshift(config);
 
+      this.trigger(ChartActionTypes.LOAD_STOCK_COMPLETED);
+
       this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
                   Factory.createChartContainer(chartType, browserType));
     }

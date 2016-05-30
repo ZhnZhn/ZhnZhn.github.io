@@ -1,6 +1,7 @@
 import React from 'react';
 
 import WithValidation from './WithValidation';
+import WithLoadOptions from './WithLoadOptions';
 
 import ZhDialog from '../ZhDialog';
 import ZhSelect from '../ZhSelect';
@@ -14,13 +15,26 @@ const styles = DialogStyles;
 
 const DialogType3 = React.createClass({
   ...WithValidation,
+  ...WithLoadOptions,
 
   displayName : 'DialogType3',
 
   getInitialState(){
-    this.stock = null
-    return {      
+    this.stock = null;
+    this.OPTIONS_STATE_PROP = 'optionStocks';
+    const _isLoading = (this.props.optionURI) ? true : false
+        , _optionStocks = (this.props.optionURI) ? [] : this.props.optionStocks;
+    return {
+      isLoading : _isLoading,
+      isLoadingFailed : false,
+      optionStocks : _optionStocks,
       validationMessages: [],
+    }
+  },
+
+  componentDidMount(){
+    if (this.props.optionURI){
+       this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
     }
   },
 
@@ -31,6 +45,25 @@ const DialogType3 = React.createClass({
        }
     }
     return true;
+  },
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps !== this.props){
+       if (this.state.isLoadingFailed && this.props.optionURI && this.props.isShow){
+         this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
+       }
+    }
+  },
+
+  componetWillUnmount(){
+    this._unmountWithLoadOptions();
+  },
+
+
+  _handlerLoadOptions(){
+     if (this.props.optionURI){
+       this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
+     }
   },
 
   _handlerSelectStock(stock){
@@ -64,11 +97,10 @@ const DialogType3 = React.createClass({
 
   render(){
     const {
-            caption, isShow, onShow, onClose,
-            optionStocks,
+            caption, isShow, onShow, onClose,            
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , {validationMessages} = this.state
+        , {isLoading, isLoadingFailed, optionStocks, validationMessages} = this.state
         , _commandButtons = [
        <ToolBarButton
           key="a"
@@ -92,8 +124,12 @@ const DialogType3 = React.createClass({
            </span>
            <ZhSelect
              width="250"
-             onSelect={this._handlerSelectStock}
              options={optionStocks}
+             optionNames={'Stockes'}
+             isLoading={isLoading}
+             isLoadingFailed={isLoadingFailed}
+             onLoadOption={this._handlerLoadOptions}
+             onSelect={this._handlerSelectStock}
            />
         </div>
         <DatesFragment

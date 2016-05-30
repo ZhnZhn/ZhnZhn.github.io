@@ -58,6 +58,7 @@ const menuQuandl = [
     caption : 'Futures',
     items : [
       { id : Quandl.CHINA_DCE_FUTURE },
+      { id : Quandl.CHINA_ZCE_FUTURE },
     ]
   }
 ];
@@ -126,6 +127,7 @@ const menuQuandlGoogle = [
       { id : QuandlGoogle.SHENZHEN },
       { id : QuandlGoogle.SINGAPURE },
       { id : QuandlGoogle.KOREA },
+      { id : QuandlGoogle.TAILAND },
       { id : QuandlGoogle.NEWZEALAND },
       { id : QuandlGoogle.SAO_PAOLO }
     ]

@@ -3,7 +3,7 @@ import React from 'react';
 import WatchActions from '../../flux/actions/WatchActions';
 import {WatchActionTypes} from '../../flux/actions/WatchActions';
 
-import ValidationMessages from '../../constants/ValidationMessages';
+import Msg from '../../constants/Msg';
 
 import ModalDialog from '../zhn/ModalDialog';
 import TabPane from '../zhn/TabPane';
@@ -43,7 +43,7 @@ const EditGroupDialog = React.createClass({
                 actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}
                 actionFailed={WatchActionTypes.EDIT_WATCH_FAILED}
                 forActionType={WatchActionTypes.ADD_GROUP}
-                msgOnIsEmptyName={ValidationMessages.IS_EMPTY_NAME}
+                msgOnIsEmptyName={Msg.IS_EMPTY_NAME}
                 onCreate={WatchActions.addGroup}
                 onClose={onClose}
               />
@@ -54,8 +54,8 @@ const EditGroupDialog = React.createClass({
                 actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}
                 actionFailed={WatchActionTypes.EDIT_WATCH_FAILED}
                 forActionType={WatchActionTypes.RENAME_GROUP}
-                msgOnNotSelect={ValidationMessages.NOT_SELECTED}
-                msgOnIsEmptyName={ValidationMessages.IS_EMPTY_NAME}
+                msgOnNotSelect={Msg.NOT_SELECTED}
+                msgOnIsEmptyName={Msg.IS_EMPTY_NAME}
                 onRename={WatchActions.renameGroup}
                 onClose={onClose}
              />
@@ -65,7 +65,7 @@ const EditGroupDialog = React.createClass({
                 store={store}
                 actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}
                 forActionType={WatchActionTypes.DELETE_GROUP}
-                msgOnNotSelect={ValidationMessages.NOT_SELECTED}
+                msgOnNotSelect={Msg.NOT_SELECTED}
                 onDelete={WatchActions.deleteGroup}
                 onClose={onClose}
              />

@@ -3,13 +3,24 @@ import React from 'react';
 import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
 import {ChartActionTypes} from '../../flux/actions/ChartActions';
 
+import ScrollPane from '../zhn/ScrollPane';
 import CaptionRow from '../CaptionRow';
 import Step from './Step';
 import Token from './Token';
 import LinkToken from './LinkToken';
 
+
 import ContainerStyles from '../styles/ContainerStyles.js';
 const styles = ContainerStyles;
+
+const Styles = {
+  scrollDiv : {
+    overflowY: 'auto',
+    height: '92%',
+    //height: 'calc(100vh - 90px)',
+    paddingRight: '10px'
+  }
+};
 
 const About = React.createClass({
   getInitialState(){
@@ -47,6 +58,9 @@ const About = React.createClass({
             caption="About"
             onClose={this._handlerClose}
          />
+
+         <ScrollPane style={Styles.scrollDiv}>
+
          <div style={{paddingLeft: '5px', paddingRight: '5px', lineHeight : 1.4}}>
          <p>
            <Token color="#80c040">
@@ -144,7 +158,12 @@ const About = React.createClass({
            </Token>
          </p>
         </div>
+
+        </ScrollPane>
+
       </div>
+
+
     );
   }
 });

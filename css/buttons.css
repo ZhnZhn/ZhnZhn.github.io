@@ -139,7 +139,7 @@
 }
 .bt__watch__bar:hover {
   color : #80c040;
-  border-color: #80c040;  
+  border-color: #80c040;
 }
 
 .not-selected {
@@ -149,4 +149,12 @@
   -moz-user-select: none;      /* Firefox all */
   -ms-user-select: none;       /* IE 10+ */
   user-select: none;           /* Likely future */
+}
+
+[data-loader='circle-failed']{
+  width: 2.5em;
+  height: 2.5em;
+  border: 3px solid rgba(164, 135, 212, 1);
+  border-top-color: transparent;
+  border-radius: 100%;
 }

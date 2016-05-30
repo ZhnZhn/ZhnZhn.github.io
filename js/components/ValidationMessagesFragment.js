@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DialogStyles = require('./styles/DialogStyles.js');
+var _DialogStyles = require('./styles/DialogStyles');
 
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 

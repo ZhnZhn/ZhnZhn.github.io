@@ -8,6 +8,7 @@ import {ModalDialog} from '../constants/Type';
 import ZhHighchart from './ZhHighchart';
 import CaptionRow from './CaptionRow';
 import SvgHrzResize from './zhn/SvgHrzResize';
+import ScrollPane from './zhn/ScrollPane';
 import AreaChartItem from './AreaChartItem';
 
 const styles = {
@@ -21,16 +22,20 @@ const styles = {
     position: 'relative',
     width: '635px',
     height: '730px',
-    overflowY: 'auto',
+    height: 'calc(100vh - 61px)',
+    overflowY: 'hidden',
     marginLeft: '10px',
-
-    //paddingRight : '10px',
     overflowX : 'hidden'
   },
   hrzResize : {
     position : 'absolute',
     top : '30px',
     right: '0'
+  },
+  scrollDiv : {
+    overflowY: 'auto',
+    height: '92%',
+    paddingRight: '10px'
   },
   chartDiv : {
     overflowY: 'auto',
@@ -67,9 +72,9 @@ const ChartContainer2 = React.createClass({
      this.unsubscribe();
    },
 
-   _onStore: function(actionType, data){      
+   _onStore: function(actionType, data){
       if (isInArray(compActions, actionType)) {
-        if (data.chartType === this.props.chartType){
+        if (data && data.chartType === this.props.chartType){
           this.setState(data);
         }
       } else if (actionType === ComponentActionTypes.CLOSE_CHART_CONTAINER_2){
@@ -114,7 +119,6 @@ const ChartContainer2 = React.createClass({
 
    render: function(){
      const styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'};
-     //const classOpen = this.state.isShow ? "with-scroll show-popup" : "with-scroll";
      const classOpen = this.state.isShow ? "show-popup" : null;
 
      return(
@@ -133,9 +137,10 @@ const ChartContainer2 = React.createClass({
                onResizeAfter={this._handlerResizeAfter}
              />
           </CaptionRow>
-          <div className="with-scroll" style={styles.chartDiv}>
+
+          <ScrollPane style={styles.scrollDiv}>
             {this.renderCharts()}
-          </div>
+          </ScrollPane>
 
         </div>
      )

@@ -14,6 +14,10 @@ var _WithValidation = require('./WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
+var _WithLoadOptions = require('./WithLoadOptions');
+
+var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -42,15 +46,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.default, {
+var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.default, _WithLoadOptions2.default, {
 
   displayName: 'DialogType3',
 
   getInitialState: function getInitialState() {
     this.stock = null;
+    this.OPTIONS_STATE_PROP = 'optionStocks';
+    var _isLoading = this.props.optionURI ? true : false,
+        _optionStocks = this.props.optionURI ? [] : this.props.optionStocks;
     return {
+      isLoading: _isLoading,
+      isLoadingFailed: false,
+      optionStocks: _optionStocks,
       validationMessages: []
     };
+  },
+  componentDidMount: function componentDidMount() {
+    if (this.props.optionURI) {
+      this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
+    }
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -59,6 +74,21 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
       }
     }
     return true;
+  },
+  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      if (this.state.isLoadingFailed && this.props.optionURI && this.props.isShow) {
+        this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
+      }
+    }
+  },
+  componetWillUnmount: function componetWillUnmount() {
+    this._unmountWithLoadOptions();
+  },
+  _handlerLoadOptions: function _handlerLoadOptions() {
+    if (this.props.optionURI) {
+      this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
+    }
   },
   _handlerSelectStock: function _handlerSelectStock(stock) {
     this.stock = stock;
@@ -107,12 +137,15 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     var isShow = _props.isShow;
     var onShow = _props.onShow;
     var onClose = _props.onClose;
-    var optionStocks = _props.optionStocks;
     var initFromDate = _props.initFromDate;
     var initToDate = _props.initToDate;
     var msgOnNotValidFormat = _props.msgOnNotValidFormat;
     var onTestDate = _props.onTestDate;
-    var validationMessages = this.state.validationMessages;
+    var _state = this.state;
+    var isLoading = _state.isLoading;
+    var isLoadingFailed = _state.isLoadingFailed;
+    var optionStocks = _state.optionStocks;
+    var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
@@ -139,8 +172,12 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
         ),
         _react2.default.createElement(_ZhSelect2.default, {
           width: '250',
-          onSelect: this._handlerSelectStock,
-          options: optionStocks
+          options: optionStocks,
+          optionNames: 'Stockes',
+          isLoading: isLoading,
+          isLoadingFailed: isLoadingFailed,
+          onLoadOption: this._handlerLoadOptions,
+          onSelect: this._handlerSelectStock
         })
       ),
       _react2.default.createElement(_DatesFragment2.default, {

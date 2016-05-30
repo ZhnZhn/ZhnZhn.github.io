@@ -18,9 +18,9 @@ var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
-var _ValidationMessages = require('../../constants/ValidationMessages');
+var _Msg = require('../../constants/Msg');
 
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+var _Msg2 = _interopRequireDefault(_Msg);
 
 var _ModalDialog = require('../zhn/ModalDialog');
 
@@ -153,10 +153,10 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
   _getValidationMessages: function _getValidationMessages() {
     var msg = [];
     if (!this.groupCaption) {
-      msg.push(_ValidationMessages2.default.NOT_SELECTED('Group'));
+      msg.push(_Msg2.default.NOT_SELECTED('Group'));
     }
     if (!this.listCaption) {
-      msg.push(_ValidationMessages2.default.NOT_SELECTED('List'));
+      msg.push(_Msg2.default.NOT_SELECTED('List'));
     }
     msg.isValid = msg.length === 0 ? true : false;
     return msg;

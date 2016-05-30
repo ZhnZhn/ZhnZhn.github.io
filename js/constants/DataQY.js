@@ -4,86 +4,6 @@ Object.defineProperty(exports, "__esModule", {
    value: true
 });
 
-var _YahooIndice = require('../services/qy/YahooIndice');
-
-var _YahooIndice2 = _interopRequireDefault(_YahooIndice);
-
-var _YahooToronto = require('../services/qy/YahooToronto');
-
-var _YahooToronto2 = _interopRequireDefault(_YahooToronto);
-
-var _YahooTorontoVenture = require('../services/qy/YahooTorontoVenture');
-
-var _YahooTorontoVenture2 = _interopRequireDefault(_YahooTorontoVenture);
-
-var _YahooMontreal = require('../services/qy/YahooMontreal');
-
-var _YahooMontreal2 = _interopRequireDefault(_YahooMontreal);
-
-var _YahooLondon = require('../services/qy/YahooLondon');
-
-var _YahooLondon2 = _interopRequireDefault(_YahooLondon);
-
-var _YahooParis = require('../services/qy/YahooParis');
-
-var _YahooParis2 = _interopRequireDefault(_YahooParis);
-
-var _YahooAmsterdam = require('../services/qy/YahooAmsterdam');
-
-var _YahooAmsterdam2 = _interopRequireDefault(_YahooAmsterdam);
-
-var _YahooCoppenhagen = require('../services/qy/YahooCoppenhagen');
-
-var _YahooCoppenhagen2 = _interopRequireDefault(_YahooCoppenhagen);
-
-var _YahooOslo = require('../services/qy/YahooOslo');
-
-var _YahooOslo2 = _interopRequireDefault(_YahooOslo);
-
-var _YahooStockholm = require('../services/qy/YahooStockholm');
-
-var _YahooStockholm2 = _interopRequireDefault(_YahooStockholm);
-
-var _YahooSwiss = require('../services/qy/YahooSwiss');
-
-var _YahooSwiss2 = _interopRequireDefault(_YahooSwiss);
-
-var _YahooMilan = require('../services/qy/YahooMilan');
-
-var _YahooMilan2 = _interopRequireDefault(_YahooMilan);
-
-var _YahooMadrid = require('../services/qy/YahooMadrid');
-
-var _YahooMadrid2 = _interopRequireDefault(_YahooMadrid);
-
-var _YahooAustralian = require('../services/qy/YahooAustralian');
-
-var _YahooAustralian2 = _interopRequireDefault(_YahooAustralian);
-
-var _YahooShanghai = require('../services/qy/YahooShanghai');
-
-var _YahooShanghai2 = _interopRequireDefault(_YahooShanghai);
-
-var _YahooShenzhen = require('../services/qy/YahooShenzhen');
-
-var _YahooShenzhen2 = _interopRequireDefault(_YahooShenzhen);
-
-var _YahooTaiwan = require('../services/qy/YahooTaiwan');
-
-var _YahooTaiwan2 = _interopRequireDefault(_YahooTaiwan);
-
-var _YahooHongKong = require('../services/qy/YahooHongKong');
-
-var _YahooHongKong2 = _interopRequireDefault(_YahooHongKong);
-
-var _YahooSingapure = require('../services/qy/YahooSingapure');
-
-var _YahooSingapure2 = _interopRequireDefault(_YahooSingapure);
-
-var _YahooBombey = require('../services/qy/YahooBombey');
-
-var _YahooBombey2 = _interopRequireDefault(_YahooBombey);
-
 var _DialogType = require('../components/dialogs/DialogType3');
 
 var _DialogType2 = _interopRequireDefault(_DialogType);
@@ -96,28 +16,32 @@ var DataQY = {
       menuTitle: 'Toronto',
       dialogCaption: 'Toronto',
       chartContainerCaption: 'Quandl Yahoo Toronto',
-      fnOption: _YahooToronto2.default.getTickets
+      optionURI: './data/yahoo/toronto.json',
+      optionsJsonProp: 'tickets'
    },
    QY_TORONTO_VENTURE: {
       type: 'QY_TORONTO_VENTURE',
       menuTitle: 'Toronto Ventures',
       dialogCaption: 'Toronto Ventures',
       chartContainerCaption: 'Quandl Yahoo Toronto Ventures',
-      fnOption: _YahooTorontoVenture2.default.getTickets
+      optionURI: './data/yahoo/toronto-ventures.json',
+      optionsJsonProp: 'tickets'
    },
    QY_MONTREAL: {
       type: 'QY_MONTREAL',
       menuTitle: 'Montreal',
       dialogCaption: 'Montreal',
       chartContainerCaption: 'Quandl Yahoo Montreal',
-      fnOption: _YahooMontreal2.default.getTickets
+      optionURI: './data/yahoo/montreal.json',
+      optionsJsonProp: 'tickets'
    },
    QY_INDICE: {
       type: 'QY_INDICE',
       menuTitle: 'Indices',
       dialogCaption: 'Indices',
       chartContainerCaption: 'Quandl Yahoo Indices',
-      fnOption: _YahooIndice2.default.getTickets
+      optionURI: './data/yahoo/indices.json',
+      optionsJsonProp: 'indices'
    },
 
    QY_LONDON: {
@@ -125,63 +49,72 @@ var DataQY = {
       menuTitle: 'London',
       dialogCaption: 'London',
       chartContainerCaption: 'Quandl Yahoo London',
-      fnOption: _YahooLondon2.default.getTickets
+      optionURI: './data/yahoo/london.json',
+      optionsJsonProp: 'tickets'
    },
    QY_PARIS: {
       type: 'QY_PARIS',
       menuTitle: 'Paris',
       dialogCaption: 'Paris',
       chartContainerCaption: 'Quandl Yahoo Paris',
-      fnOption: _YahooParis2.default.getTickets
+      optionURI: './data/yahoo/paris.json',
+      optionsJsonProp: 'tickets'
    },
    QY_AMSTERDAM: {
       type: 'QY_AMSTERDAM',
       menuTitle: 'Amsterdam',
       dialogCaption: 'Amsterdam',
       chartContainerCaption: 'Quandl Yahoo Amsterdam',
-      fnOption: _YahooAmsterdam2.default.getTickets
+      optionURI: './data/yahoo/amsterdam.json',
+      optionsJsonProp: 'tickets'
    },
    QY_COPPENHAGEN: {
       type: 'QY_COPPENHAGEN',
       menuTitle: 'Coppenhagen',
       dialogCaption: 'Coppenhagen',
       chartContainerCaption: 'Quandl Yahoo Coppenhagen',
-      fnOption: _YahooCoppenhagen2.default.getTickets
+      optionURI: './data/yahoo/coppenhagen.json',
+      optionsJsonProp: 'tickets'
    },
    QY_OSLO: {
       type: 'QY_OSLO',
       menuTitle: 'Oslo',
       dialogCaption: 'Oslo',
       chartContainerCaption: 'Quandl Yahoo Oslo',
-      fnOption: _YahooOslo2.default.getTickets
+      optionURI: './data/yahoo/oslo.json',
+      optionsJsonProp: 'tickets'
    },
    QY_STOCKHOLM: {
       type: 'QY_STOCKHOLM',
       menuTitle: 'Stockholm',
       dialogCaption: 'Stockholm',
       chartContainerCaption: 'Quandl Yahoo Stockholm',
-      fnOption: _YahooStockholm2.default.getTickets
+      optionURI: './data/yahoo/stockholm.json',
+      optionsJsonProp: 'tickets'
    },
    QY_SWISS: {
       type: 'QY_SWISS',
       menuTitle: 'Swiss',
       dialogCaption: 'Swiss',
       chartContainerCaption: 'Quandl Yahoo Swiss',
-      fnOption: _YahooSwiss2.default.getTickets
+      optionURI: './data/yahoo/swiss.json',
+      optionsJsonProp: 'tickets'
    },
    QY_MILAN: {
       type: 'QY_MILAN',
       menuTitle: 'Milan',
       dialogCaption: 'Milan',
       chartContainerCaption: 'Quandl Yahoo Milan',
-      fnOption: _YahooMilan2.default.getTickets
+      optionURI: './data/yahoo/milan.json',
+      optionsJsonProp: 'tickets'
    },
    QY_MADRID: {
       type: 'QY_MADRID',
       menuTitle: 'Madrid',
       dialogCaption: 'Madrid',
       chartContainerCaption: 'Quandl Yahoo Madrid',
-      fnOption: _YahooMadrid2.default.getTickets
+      optionURI: './data/yahoo/madrid.json',
+      optionsJsonProp: 'tickets'
    },
 
    QY_AUSTRALIAN: {
@@ -189,49 +122,56 @@ var DataQY = {
       menuTitle: 'Australian',
       dialogCaption: 'Australian',
       chartContainerCaption: 'Quandl Yahoo Australian',
-      fnOption: _YahooAustralian2.default.getTickets
+      optionURI: './data/yahoo/australian.json',
+      optionsJsonProp: 'tickets'
    },
    QY_SHANGHAI: {
       type: 'QY_SHANGHAI',
       menuTitle: 'Shanghai',
       dialogCaption: 'Shanghai',
       chartContainerCaption: 'Quandl Yahoo Shanghai',
-      fnOption: _YahooShanghai2.default.getTickets
+      optionURI: './data/yahoo/shanghai.json',
+      optionsJsonProp: 'tickets'
    },
    QY_SHENZHEN: {
       type: 'QY_SHENZHEN',
       menuTitle: 'Shenzhen',
       dialogCaption: 'Shenzhen',
       chartContainerCaption: 'Quandl Yahoo Shenzhen',
-      fnOption: _YahooShenzhen2.default.getTickets
+      optionURI: './data/yahoo/shenzhen.json',
+      optionsJsonProp: 'tickets'
    },
    QY_TAIWAN: {
       type: 'QY_TAIWAN',
       menuTitle: 'Taiwan',
       dialogCaption: 'Taiwan',
       chartContainerCaption: 'Quandl Yahoo Taiwan',
-      fnOption: _YahooTaiwan2.default.getTickets
+      optionURI: './data/yahoo/taiwan.json',
+      optionsJsonProp: 'tickets'
    },
    QY_HONG_KONG: {
       type: 'QY_HONG_KONG',
       menuTitle: 'Hong Kong',
       dialogCaption: 'Hong Kong',
       chartContainerCaption: 'Quandl Yahoo Hong Kong',
-      fnOption: _YahooHongKong2.default.getTickets
+      optionURI: './data/yahoo/hongkong.json',
+      optionsJsonProp: 'tickets'
    },
    QY_SINGAPURE: {
       type: 'QY_SINGAPURE',
       menuTitle: 'Singapure',
       dialogCaption: 'Singapure',
       chartContainerCaption: 'Quandl Yahoo Singapure',
-      fnOption: _YahooSingapure2.default.getTickets
+      optionURI: './data/yahoo/singapure.json',
+      optionsJsonProp: 'tickets'
    },
    QY_BOMBEY: {
       type: 'QY_BOMBEY',
       menuTitle: 'Bombey',
       dialogCaption: 'Bombey',
       chartContainerCaption: 'Quandl Yahoo Bombey',
-      fnOption: _YahooBombey2.default.getTickets
+      optionURI: './data/yahoo/bombey.json',
+      optionsJsonProp: 'tickets'
    }
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DialogStyles from './styles/DialogStyles.js';
+import DialogStyles from './styles/DialogStyles';
 
 const styles = DialogStyles;
 const Styles = {
@@ -28,7 +28,7 @@ const ValidationMessagesFragment = React.createClass({
           <span style={Styles.MSG_SPAN}>{msg}</span>
         </div>
       )
-    });    
+    });
   },
 
   render(){

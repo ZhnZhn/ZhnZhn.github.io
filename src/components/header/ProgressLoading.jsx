@@ -24,8 +24,7 @@ const ProgressLoading = React.createClass({
   _onStore(actionType, option){
       if (actionType === ChartActionTypes.LOAD_STOCK){
         this.setState({completed: 35, color: Colors.LOADING});
-      } else if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED
-                 || actionType === ChartActionTypes.INIT_AND_SHOW_CHART
+      } else if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED                 
                  || actionType === ChartActionTypes.LOAD_STOCK_ADDED){
         this.setState({completed: 100, color: Colors.LOADING});
       } else if (actionType === ChartActionTypes.LOAD_STOCK_FAILED){

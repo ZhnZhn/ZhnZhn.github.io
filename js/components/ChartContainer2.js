@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _rootDiv;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -32,14 +34,20 @@ var _SvgHrzResize = require('./zhn/SvgHrzResize');
 
 var _SvgHrzResize2 = _interopRequireDefault(_SvgHrzResize);
 
+var _ScrollPane = require('./zhn/ScrollPane');
+
+var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
+
 var _AreaChartItem = require('./AreaChartItem');
 
 var _AreaChartItem2 = _interopRequireDefault(_AreaChartItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var styles = {
-  rootDiv: {
+  rootDiv: (_rootDiv = {
     backgroundColor: '#4D4D4D',
     //padding: '5px',
     paddingTop: '5px',
@@ -48,17 +56,17 @@ var styles = {
     border: 'solid 3px #232F3B',
     position: 'relative',
     width: '635px',
-    height: '730px',
-    overflowY: 'auto',
-    marginLeft: '10px',
-
-    //paddingRight : '10px',
-    overflowX: 'hidden'
-  },
+    height: '730px'
+  }, _defineProperty(_rootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_rootDiv, 'overflowY', 'hidden'), _defineProperty(_rootDiv, 'marginLeft', '10px'), _defineProperty(_rootDiv, 'overflowX', 'hidden'), _rootDiv),
   hrzResize: {
     position: 'absolute',
     top: '30px',
     right: '0'
+  },
+  scrollDiv: {
+    overflowY: 'auto',
+    height: '92%',
+    paddingRight: '10px'
   },
   chartDiv: {
     overflowY: 'auto',
@@ -95,7 +103,7 @@ var ChartContainer2 = _react2.default.createClass({
 
   _onStore: function _onStore(actionType, data) {
     if (isInArray(compActions, actionType)) {
-      if (data.chartType === this.props.chartType) {
+      if (data && data.chartType === this.props.chartType) {
         this.setState(data);
       }
     } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
@@ -147,7 +155,6 @@ var ChartContainer2 = _react2.default.createClass({
 
   render: function render() {
     var styleOpen = this.state.isShow ? { display: 'inline-block' } : { display: 'none' };
-    //const classOpen = this.state.isShow ? "with-scroll show-popup" : "with-scroll";
     var classOpen = this.state.isShow ? "show-popup" : null;
 
     return _react2.default.createElement(
@@ -170,8 +177,8 @@ var ChartContainer2 = _react2.default.createClass({
         })
       ),
       _react2.default.createElement(
-        'div',
-        { className: 'with-scroll', style: styles.chartDiv },
+        _ScrollPane2.default,
+        { style: styles.scrollDiv },
         this.renderCharts()
       )
     );

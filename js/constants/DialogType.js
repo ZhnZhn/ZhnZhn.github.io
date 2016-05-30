@@ -16,10 +16,10 @@ var createTypeObject = function createTypeObject(arr, id) {
 var qySources = ['ETF', 'INDICE', 'MUTUAL_FUNDS', 'TORONTO', 'TORONTO_VENTURE', 'MONTREAL', 'LONDON', 'PARIS', 'AMSTERDAM', 'COPPENHAGEN', 'OSLO', 'STOCKHOLM', 'SWISS', 'MILAN', 'MADRID', 'AUSTRALIAN', 'SHANGHAI', 'SHENZHEN', 'TAIWAN', 'HONG_KONG', 'SINGAPURE', 'BOMBEY'];
 var QuandlYahoo = createTypeObject(qySources, 'QY');
 
-var qeSources = ['CURRENCY_HISTORY', 'COMMODITY_PRICE', 'WORLDBANK_PRICE', 'WIKI_STOCK', 'TOKIO_STOCK', 'CHINA_DCE_FUTURE'];
+var qeSources = ['CURRENCY_HISTORY', 'COMMODITY_PRICE', 'WORLDBANK_PRICE', 'WIKI_STOCK', 'TOKIO_STOCK', 'CHINA_DCE_FUTURE', 'CHINA_ZCE_FUTURE'];
 var Quandl = createTypeObject(qeSources, 'QE');
 
-var qgSources = ['NASDAQ', 'NYSE', 'AMEX', 'ARCA', 'BRUSSELS', 'LISBON', 'TALLIN', 'RIGA', 'VILNIUS', 'SHENZHEN', 'SINGAPURE', 'KOREA', 'NEWZEALAND', 'SAO_PAOLO'];
+var qgSources = ['NASDAQ', 'NYSE', 'AMEX', 'ARCA', 'BRUSSELS', 'LISBON', 'TALLIN', 'RIGA', 'VILNIUS', 'SHENZHEN', 'SINGAPURE', 'KOREA', 'TAILAND', 'NEWZEALAND', 'SAO_PAOLO'];
 var QuandlGoogle = createTypeObject(qgSources, 'QG');
 
 exports.QuandlYahoo = QuandlYahoo;
