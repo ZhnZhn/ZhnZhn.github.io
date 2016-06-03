@@ -88,13 +88,15 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidat
 
       var fromDate = _datesFragment$getVal.fromDate;
       var toDate = _datesFragment$getVal.toDate;
+      var dataColumn = this.props.dataColumn;
 
       var option = {
         value: this.source.value + '/' + this.currency.value,
         source: this.source,
         currency: this.currency,
         fromDate: fromDate,
-        toDate: toDate
+        toDate: toDate,
+        dataColumn: dataColumn
       };
       this.props.onLoad(option);
     }

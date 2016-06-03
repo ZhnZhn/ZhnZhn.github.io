@@ -31,6 +31,7 @@ const createDialogComp = function (conf, browserType){
    const props = conf.dialogProps ? conf.dialogProps : {};
    const fnOption = conf.fnOption ? conf.fnOption : noopArr;
    const Comp = conf.dialogComp ? conf.dialogComp : DialogType3;
+   
 
    return  React.createElement(Comp, {
                key : dialogType,
@@ -38,6 +39,7 @@ const createDialogComp = function (conf, browserType){
                optionStocks : fnOption(),
                optionURI : conf.optionURI,
                optionsJsonProp : conf.optionsJsonProp,
+               dataColumn : conf.dataColumn,
                msgOnNotSelected : Msg.NOT_SELECTED,
                msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
                onLoad  : onLoadChart.bind(null, dialogType, browserType),

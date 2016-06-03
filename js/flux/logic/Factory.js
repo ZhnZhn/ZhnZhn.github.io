@@ -74,6 +74,7 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     optionStocks: fnOption(),
     optionURI: conf.optionURI,
     optionsJsonProp: conf.optionsJsonProp,
+    dataColumn: conf.dataColumn,
     msgOnNotSelected: _Msg2.default.NOT_SELECTED,
     msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
     onLoad: onLoadChart.bind(null, dialogType, browserType),

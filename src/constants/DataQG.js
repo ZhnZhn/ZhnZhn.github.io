@@ -8,7 +8,8 @@ const DataQG = {
      dialogCaption : 'NASDAQ',
      chartContainerCaption : 'Quandl Google NASDAQ',
      optionURI : './data/google/nasdaq.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_NYSE : {
      type : 'QG_NYSE',
@@ -16,7 +17,8 @@ const DataQG = {
      dialogCaption : 'NYSE',
      chartContainerCaption : 'Quandl Google NYSE',
      optionURI : './data/google/nyse.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_AMEX : {
      type : 'QG_AMEX',
@@ -24,7 +26,8 @@ const DataQG = {
      dialogCaption : 'AMEX',
      chartContainerCaption : 'Quandl Google AMEX',
      optionURI : './data/google/nyse-amex.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_ARCA : {
      type : 'QG_ARCA',
@@ -32,7 +35,8 @@ const DataQG = {
      dialogCaption : 'ARCA',
      chartContainerCaption : 'Quandl Google ARCA',
      optionURI : './data/google/nyse-arca.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
 
   QG_BRUSSELS : {
@@ -41,7 +45,8 @@ const DataQG = {
      dialogCaption : 'Euronext Brussels',
      chartContainerCaption : 'Quandl Google Euronext Brussels',
      optionURI : './data/google/brussels.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_LISBON : {
      type : 'QG_LISBON',
@@ -49,7 +54,8 @@ const DataQG = {
      dialogCaption : 'Euronext Lisbon',
      chartContainerCaption : 'Quandl Google Euronext Lisbon',
      optionURI : './data/google/lisbon.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_TALLIN : {
     type : 'QG_TALLIN',
@@ -57,7 +63,8 @@ const DataQG = {
     dialogCaption : 'Tallin',
     chartContainerCaption : 'Quandl Google Tallin',
     optionURI : './data/google/tallin.json',
-    optionsJsonProp : 'tickets'
+    optionsJsonProp : 'tickets',
+    dataColumn : 4
   },
   QG_RIGA : {
     type : 'QG_RIGA',
@@ -65,7 +72,8 @@ const DataQG = {
     dialogCaption : 'Riga',
     chartContainerCaption : 'Quandl Google Riga',
     optionURI : './data/google/riga.json',
-    optionsJsonProp : 'tickets'
+    optionsJsonProp : 'tickets',
+    dataColumn : 4
   },
   QG_VILNIUS : {
     type : 'QG_VILNIUS',
@@ -73,7 +81,8 @@ const DataQG = {
     dialogCaption : 'Vilnius',
     chartContainerCaption : 'Quandl Google Vilnius',
     optionURI : './data/google/vilnius.json',
-    optionsJsonProp : 'tickets'
+    optionsJsonProp : 'tickets',
+    dataColumn : 4
   },
 
   QG_SHENZHEN : {
@@ -82,7 +91,8 @@ const DataQG = {
      dialogCaption : 'Shenzhen',
      chartContainerCaption : 'Quandl Google Shenzhen',
      optionURI : './data/google/shenzhen.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_SINGAPURE : {
      type : 'QG_SINGAPURE',
@@ -90,7 +100,8 @@ const DataQG = {
      dialogCaption : 'Singapure',
      chartContainerCaption : 'Quandl Google Singapure',
      optionURI : './data/google/singapure.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_KOREA : {
      type : 'QG_KOREA',
@@ -98,7 +109,8 @@ const DataQG = {
      dialogCaption : 'Korea',
      chartContainerCaption : 'Quandl Google Korea',
      optionURI : './data/google/korea.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_TAILAND : {
      type : 'QG_TAILAND',
@@ -106,7 +118,8 @@ const DataQG = {
      dialogCaption : 'Tailand',
      chartContainerCaption : 'Quandl Google Tailand',
      optionURI : './data/google/tailand.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_NEWZEALAND : {
      type : 'QG_NEWZEALAND',
@@ -114,7 +127,8 @@ const DataQG = {
      dialogCaption : 'New Zealand',
      chartContainerCaption : 'Quandl Google New Zealand',
      optionURI : './data/google/newzealand.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   },
   QG_SAO_PAOLO : {
      type : 'QG_SAO_PAOLO',
@@ -122,7 +136,8 @@ const DataQG = {
      dialogCaption : 'Sao Paolo',
      chartContainerCaption : 'Quandl Google Sao Paolo',
      optionURI : './data/google/saopaolo.json',
-     optionsJsonProp : 'tickets'
+     optionsJsonProp : 'tickets',
+     dataColumn : 4
   }
 }
 

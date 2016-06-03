@@ -55,13 +55,15 @@ const QuandlCommoditiesDialog = React.createClass({
     event.target.focus();
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      const {fromDate, toDate} = this.datesFragment.getValues();      
+      const {fromDate, toDate} = this.datesFragment.getValues()
+          , {dataColumn} = this.props;
       const option = {
         value : this.commodity.value,
         type: this.type,
         commodity: this.commodity,
         fromDate: fromDate,
         toDate: toDate,
+        dataColumn : dataColumn
       }
       this.props.onLoad(option);
     }

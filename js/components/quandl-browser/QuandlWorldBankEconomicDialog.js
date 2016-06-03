@@ -85,13 +85,15 @@ var QuandlWorldBankEconomicDialog = _react2.default.createClass(_extends({}, _Wi
 
       var fromDate = _datesFragment$getVal.fromDate;
       var toDate = _datesFragment$getVal.toDate;
+      var dataColumn = this.props.dataColumn;
 
       var option = {
         value: 'WWDI/' + this.country.value + '_' + this.metric.value,
         country: this.country,
         metric: this.metric,
         fromDate: fromDate,
-        toDate: toDate
+        toDate: toDate,
+        dataColumn: dataColumn
       };
       this.props.onLoad(option);
     }

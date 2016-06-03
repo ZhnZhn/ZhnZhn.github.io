@@ -20,8 +20,9 @@ const _fnCatchLoadError = function(error, chartId, onFailed){
   onFailed({caption, descr ,chartId});
 }
 
-const loadData = function(dataColumn, chartType, browserType, option, onCompleted, onAdded, onFailed){
+const loadData = function(chartType, browserType, option, onCompleted, onAdded, onFailed){
   const parentId = ChartStore.isLoadToChart();
+  const {dataColumn} = option;
   if (!parentId){
     loadToChartComp(dataColumn, chartType, browserType, option, onCompleted, onFailed);
   } else {
@@ -95,23 +96,16 @@ const loadToChartComp = function(dataColumn, chartType, browserType, option,
   }
 }
 
-const fnLoad1 = loadData.bind(null, 1);
-const fnLoad4 = loadData.bind(null, 4);
-const fnLoad5 = loadData.bind(null, 5);
-const fnLoadOption = function(chartType, browserType, option, fnCompleted, fnFailed){
-  loadData(option.dataColumn, chartType, browserType, option, fnCompleted, fnFailed);
-}
-
 const LoadConfig = {
-  [ChartType.QUANDL_CURRENCY_HISTORY] : fnLoad1,
-  [ChartType.QUANDL_COMMODITY_PRICE] : fnLoad1,
-  [ChartType.QUANDL_WORLDBANK_PRICE] : fnLoad1,
-  [ChartType.QUANDL_WIKI_STOCK] : fnLoad4,
-  [ChartType.QUANDL_TOKIO_STOCK] : fnLoad4,
-  [ChartType.QUANDL_CHINA_DCE_FUTURE] : fnLoad4,
-  [ChartType.QUANDL_CHINA_ZCE_FUTURE] : fnLoad5,
+  [ChartType.QUANDL_CURRENCY_HISTORY] : loadData,
+  [ChartType.QUANDL_COMMODITY_PRICE] : loadData,
+  [ChartType.QUANDL_WORLDBANK_PRICE] : loadData,
+  [ChartType.QUANDL_WIKI_STOCK] : loadData,
+  [ChartType.QUANDL_TOKIO_STOCK] : loadData,
+  [ChartType.QUANDL_CHINA_DCE_FUTURE] : loadData,
+  [ChartType.QUANDL_CHINA_ZCE_FUTURE] : loadData,
 
-  [ChartType.WATCH_LIST] : fnLoadOption
+  [ChartType.WATCH_LIST] : loadData
 }
 
 const addConfig = function(obj, fn){
@@ -119,8 +113,8 @@ const addConfig = function(obj, fn){
     LoadConfig[obj[key]] = fn;
   }
 }
-addConfig(QuandlGoogle, fnLoad4);
-addConfig(QuandlYahoo, fnLoad4);
+addConfig(QuandlGoogle, loadData);
+addConfig(QuandlYahoo, loadData);
 
 
 export default LoadConfig

@@ -91,9 +91,12 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
     event.target.focus();
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
+      var dataColumn = this.props.dataColumn;
+
       var option = {
         value: this.code.value,
-        code: this.code
+        code: this.code,
+        dataColumn: dataColumn
       };
       this.props.onLoad(option);
     }

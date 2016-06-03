@@ -59,13 +59,15 @@ const QuandlCurrencyDialog = React.createClass({
     event.target.focus();
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
-      const {fromDate, toDate} = this.datesFragment.getValues();      
+      const {fromDate, toDate} = this.datesFragment.getValues()
+          , {dataColumn} = this.props;
       const option = {
         value : this.source.value + '/' + this.currency.value,
         source: this.source,
         currency: this.currency,
         fromDate: fromDate,
-        toDate: toDate
+        toDate: toDate,
+        dataColumn : dataColumn
       }
       this.props.onLoad(option);
     }

@@ -1,7 +1,5 @@
 
 
-import QuandlWikiStock from '../services/qe/QuandlWikiStock';
-import QuandlTokioStock from '../services/qe/QuandlTokioStock';
 import DateUtils from '../utils/DateUtils';
 
 import DialogType3 from '../components/dialogs/DialogType3';
@@ -19,6 +17,7 @@ const DataQE = {
       dialogCaption : 'Commodity Price',
       chartContainerCaption : 'Quandl Commodity Prices',
       dialogComp : QuandlCommoditiesDialog,
+      dataColumn : 1
   },
   QE_CURRENCY_HISTORY : {
       type : 'QE_CURRENCY_HISTORY',
@@ -26,6 +25,7 @@ const DataQE = {
       dialogCaption : 'Currency History',
       chartContainerCaption : 'Quandl Currency Histories',
       dialogComp : QuandlCurrencyDialog,
+      dataColumn : 1
   },
   QE_WORLDBANK_PRICE : {
       type : 'QE_WORLDBANK_PRICE',
@@ -35,7 +35,8 @@ const DataQE = {
       dialogComp : QuandlWorldBankEconomicDialog,
       dialogProps : {
         initFromDate : DateUtils.getFromDate(7)
-      }
+      },
+      dataColumn : 1
   },
 
   QE_WIKI_STOCK : {
@@ -43,14 +44,18 @@ const DataQE = {
       menuTitle : 'WIKI',
       dialogCaption : 'Wiki Stocks',
       chartContainerCaption : 'Quandl WIKI Stocks',
-      fnOption : QuandlWikiStock.getTickets
+      optionURI : './data/quandl/wiki.json',
+      optionsJsonProp : 'tickets',
+      dataColumn : 4
   },
   QE_TOKIO_STOCK : {
       type : 'QE_TOKIO_STOCK',
       menuTitle: 'Tokio',
       dialogCaption : 'Tokio Stocks',
       chartContainerCaption : 'Quandl Tokio Stocks',
-      fnOption : QuandlTokioStock.getTickets
+      optionURI : './data/quandl/tokio.json',
+      optionsJsonProp : 'tickets',
+      dataColumn : 4
   },
 
   QE_CHINA_DCE_FUTURE : {
@@ -60,7 +65,8 @@ const DataQE = {
       chartContainerCaption : 'Quandl China DCE Futures',
       dialogComp : FuturesDialog,
       optionURI : './data/quandl/china_dce_futures.json',
-      optionsJsonProp : 'futures'
+      optionsJsonProp : 'futures',
+      dataColumn : 4
   },
   QE_CHINA_ZCE_FUTURE : {
       type : 'QE_CHINA_ZCE_FUTURE',
@@ -69,7 +75,8 @@ const DataQE = {
       chartContainerCaption : 'Quandl China ZCE Futures',
       dialogComp : FuturesDialog,
       optionURI : './data/quandl/china_zce_futures.json',
-      optionsJsonProp : 'futures'
+      optionsJsonProp : 'futures',
+      dataColumn : 5
   }
 
 };

@@ -17,7 +17,8 @@ var DataQY = {
       dialogCaption: 'Toronto',
       chartContainerCaption: 'Quandl Yahoo Toronto',
       optionURI: './data/yahoo/toronto.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_TORONTO_VENTURE: {
       type: 'QY_TORONTO_VENTURE',
@@ -25,7 +26,8 @@ var DataQY = {
       dialogCaption: 'Toronto Ventures',
       chartContainerCaption: 'Quandl Yahoo Toronto Ventures',
       optionURI: './data/yahoo/toronto-ventures.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_MONTREAL: {
       type: 'QY_MONTREAL',
@@ -33,7 +35,8 @@ var DataQY = {
       dialogCaption: 'Montreal',
       chartContainerCaption: 'Quandl Yahoo Montreal',
       optionURI: './data/yahoo/montreal.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_INDICE: {
       type: 'QY_INDICE',
@@ -41,7 +44,8 @@ var DataQY = {
       dialogCaption: 'Indices',
       chartContainerCaption: 'Quandl Yahoo Indices',
       optionURI: './data/yahoo/indices.json',
-      optionsJsonProp: 'indices'
+      optionsJsonProp: 'indices',
+      dataColumn: 4
    },
 
    QY_LONDON: {
@@ -50,7 +54,8 @@ var DataQY = {
       dialogCaption: 'London',
       chartContainerCaption: 'Quandl Yahoo London',
       optionURI: './data/yahoo/london.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_PARIS: {
       type: 'QY_PARIS',
@@ -58,7 +63,8 @@ var DataQY = {
       dialogCaption: 'Paris',
       chartContainerCaption: 'Quandl Yahoo Paris',
       optionURI: './data/yahoo/paris.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_AMSTERDAM: {
       type: 'QY_AMSTERDAM',
@@ -66,7 +72,8 @@ var DataQY = {
       dialogCaption: 'Amsterdam',
       chartContainerCaption: 'Quandl Yahoo Amsterdam',
       optionURI: './data/yahoo/amsterdam.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_COPPENHAGEN: {
       type: 'QY_COPPENHAGEN',
@@ -74,7 +81,8 @@ var DataQY = {
       dialogCaption: 'Coppenhagen',
       chartContainerCaption: 'Quandl Yahoo Coppenhagen',
       optionURI: './data/yahoo/coppenhagen.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_OSLO: {
       type: 'QY_OSLO',
@@ -82,7 +90,8 @@ var DataQY = {
       dialogCaption: 'Oslo',
       chartContainerCaption: 'Quandl Yahoo Oslo',
       optionURI: './data/yahoo/oslo.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_STOCKHOLM: {
       type: 'QY_STOCKHOLM',
@@ -90,7 +99,8 @@ var DataQY = {
       dialogCaption: 'Stockholm',
       chartContainerCaption: 'Quandl Yahoo Stockholm',
       optionURI: './data/yahoo/stockholm.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_SWISS: {
       type: 'QY_SWISS',
@@ -98,7 +108,8 @@ var DataQY = {
       dialogCaption: 'Swiss',
       chartContainerCaption: 'Quandl Yahoo Swiss',
       optionURI: './data/yahoo/swiss.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_MILAN: {
       type: 'QY_MILAN',
@@ -106,7 +117,8 @@ var DataQY = {
       dialogCaption: 'Milan',
       chartContainerCaption: 'Quandl Yahoo Milan',
       optionURI: './data/yahoo/milan.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_MADRID: {
       type: 'QY_MADRID',
@@ -114,7 +126,8 @@ var DataQY = {
       dialogCaption: 'Madrid',
       chartContainerCaption: 'Quandl Yahoo Madrid',
       optionURI: './data/yahoo/madrid.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
 
    QY_AUSTRALIAN: {
@@ -123,7 +136,8 @@ var DataQY = {
       dialogCaption: 'Australian',
       chartContainerCaption: 'Quandl Yahoo Australian',
       optionURI: './data/yahoo/australian.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_SHANGHAI: {
       type: 'QY_SHANGHAI',
@@ -131,7 +145,8 @@ var DataQY = {
       dialogCaption: 'Shanghai',
       chartContainerCaption: 'Quandl Yahoo Shanghai',
       optionURI: './data/yahoo/shanghai.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_SHENZHEN: {
       type: 'QY_SHENZHEN',
@@ -139,7 +154,8 @@ var DataQY = {
       dialogCaption: 'Shenzhen',
       chartContainerCaption: 'Quandl Yahoo Shenzhen',
       optionURI: './data/yahoo/shenzhen.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_TAIWAN: {
       type: 'QY_TAIWAN',
@@ -147,7 +163,8 @@ var DataQY = {
       dialogCaption: 'Taiwan',
       chartContainerCaption: 'Quandl Yahoo Taiwan',
       optionURI: './data/yahoo/taiwan.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_HONG_KONG: {
       type: 'QY_HONG_KONG',
@@ -155,7 +172,8 @@ var DataQY = {
       dialogCaption: 'Hong Kong',
       chartContainerCaption: 'Quandl Yahoo Hong Kong',
       optionURI: './data/yahoo/hongkong.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_SINGAPURE: {
       type: 'QY_SINGAPURE',
@@ -163,7 +181,8 @@ var DataQY = {
       dialogCaption: 'Singapure',
       chartContainerCaption: 'Quandl Yahoo Singapure',
       optionURI: './data/yahoo/singapure.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    },
    QY_BOMBEY: {
       type: 'QY_BOMBEY',
@@ -171,7 +190,8 @@ var DataQY = {
       dialogCaption: 'Bombey',
       chartContainerCaption: 'Quandl Yahoo Bombey',
       optionURI: './data/yahoo/bombey.json',
-      optionsJsonProp: 'tickets'
+      optionsJsonProp: 'tickets',
+      dataColumn: 4
    }
 };
 

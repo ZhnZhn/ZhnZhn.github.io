@@ -101,12 +101,14 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
 
       var fromDate = _datesFragment$getVal.fromDate;
       var toDate = _datesFragment$getVal.toDate;
+      var dataColumn = this.props.dataColumn;
 
       var option = {
         value: this.stock.value,
         stock: this.stock,
         fromDate: fromDate,
-        toDate: toDate
+        toDate: toDate,
+        dataColumn: dataColumn
       };
       this.props.onLoad(option);
     }

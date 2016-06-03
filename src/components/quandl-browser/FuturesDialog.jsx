@@ -66,9 +66,11 @@ const FuturesDialog = React.createClass({
      event.target.focus();
      const validationMessages = this._getValidationMessages();
      if (validationMessages.isValid){
+       const {dataColumn} = this.props;
        const option = {
           value : this.code.value,
-          code : this.code
+          code : this.code,
+          dataColumn : dataColumn
        };
        this.props.onLoad(option);
      }

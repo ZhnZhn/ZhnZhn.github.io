@@ -47,8 +47,10 @@ var _fnCatchLoadError = function _fnCatchLoadError(error, chartId, onFailed) {
   onFailed({ caption: caption, descr: descr, chartId: chartId });
 };
 
-var loadData = function loadData(dataColumn, chartType, browserType, option, onCompleted, onAdded, onFailed) {
+var loadData = function loadData(chartType, browserType, option, onCompleted, onAdded, onFailed) {
   var parentId = _ChartStore2.default.isLoadToChart();
+  var dataColumn = option.dataColumn;
+
   if (!parentId) {
     loadToChartComp(dataColumn, chartType, browserType, option, onCompleted, onFailed);
   } else {
@@ -129,22 +131,15 @@ var loadToChartComp = function loadToChartComp(dataColumn, chartType, browserTyp
   }
 };
 
-var fnLoad1 = loadData.bind(null, 1);
-var fnLoad4 = loadData.bind(null, 4);
-var fnLoad5 = loadData.bind(null, 5);
-var fnLoadOption = function fnLoadOption(chartType, browserType, option, fnCompleted, fnFailed) {
-  loadData(option.dataColumn, chartType, browserType, option, fnCompleted, fnFailed);
-};
-
-var LoadConfig = (_LoadConfig = {}, _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CURRENCY_HISTORY, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_COMMODITY_PRICE, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WORLDBANK_PRICE, fnLoad1), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WIKI_STOCK, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_TOKIO_STOCK, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_DCE_FUTURE, fnLoad4), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_ZCE_FUTURE, fnLoad5), _defineProperty(_LoadConfig, _ChartType2.default.WATCH_LIST, fnLoadOption), _LoadConfig);
+var LoadConfig = (_LoadConfig = {}, _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CURRENCY_HISTORY, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_COMMODITY_PRICE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WORLDBANK_PRICE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WIKI_STOCK, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_TOKIO_STOCK, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_DCE_FUTURE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_ZCE_FUTURE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.WATCH_LIST, loadData), _LoadConfig);
 
 var addConfig = function addConfig(obj, fn) {
   for (var key in obj) {
     LoadConfig[obj[key]] = fn;
   }
 };
-addConfig(_DialogType.QuandlGoogle, fnLoad4);
-addConfig(_DialogType.QuandlYahoo, fnLoad4);
+addConfig(_DialogType.QuandlGoogle, loadData);
+addConfig(_DialogType.QuandlYahoo, loadData);
 
 exports.default = LoadConfig;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadConfig.js.map

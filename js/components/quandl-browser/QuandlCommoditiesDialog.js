@@ -87,13 +87,15 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
 
       var fromDate = _datesFragment$getVal.fromDate;
       var toDate = _datesFragment$getVal.toDate;
+      var dataColumn = this.props.dataColumn;
 
       var option = {
         value: this.commodity.value,
         type: this.type,
         commodity: this.commodity,
         fromDate: fromDate,
-        toDate: toDate
+        toDate: toDate,
+        dataColumn: dataColumn
       };
       this.props.onLoad(option);
     }

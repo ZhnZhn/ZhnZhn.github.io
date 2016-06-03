@@ -74,12 +74,14 @@ const DialogType3 = React.createClass({
      event.target.focus();
      const validationMessages = this._getValidationMessages();
      if (validationMessages.isValid){
-       const {fromDate, toDate} = this.datesFragment.getValues();
+       const {fromDate, toDate} = this.datesFragment.getValues()
+           , {dataColumn} = this.props;
        const option = {
          value : this.stock.value,
          stock: this.stock,
          fromDate: fromDate,
          toDate: toDate,
+         dataColumn : dataColumn
        }
        this.props.onLoad(option);
      }
@@ -97,7 +99,7 @@ const DialogType3 = React.createClass({
 
   render(){
     const {
-            caption, isShow, onShow, onClose,            
+            caption, isShow, onShow, onClose,
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {isLoading, isLoadingFailed, optionStocks, validationMessages} = this.state
