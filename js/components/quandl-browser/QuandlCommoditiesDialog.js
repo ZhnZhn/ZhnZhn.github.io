@@ -18,9 +18,9 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _ZhSelect = require('../ZhSelect');
+var _RowInputSelect = require('../dialogs/RowInputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
 var _ToolBarButton = require('../ToolBarButton');
 
@@ -38,13 +38,7 @@ var _QuandlCommodity = require('../../services/qe/QuandlCommodity');
 
 var _QuandlCommodity2 = _interopRequireDefault(_QuandlCommodity);
 
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
 
 var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
   displayName: 'QuandlCommoditiesDialog'
@@ -81,27 +75,9 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
   },
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
-    var validationMessages = this._getValidationMessages();
-    if (validationMessages.isValid) {
-      var _datesFragment$getVal = this.datesFragment.getValues();
-
-      var fromDate = _datesFragment$getVal.fromDate;
-      var toDate = _datesFragment$getVal.toDate;
-      var dataColumn = this.props.dataColumn;
-
-      var option = {
-        value: this.commodity.value,
-        type: this.type,
-        commodity: this.commodity,
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn: dataColumn
-      };
-      this.props.onLoad(option);
-    }
-    this._updateValidationMessages(validationMessages);
+    this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
-  _getValidationMessages: function _getValidationMessages() {
+  _createValidationMessages: function _createValidationMessages() {
     var msgOnNotSelected = this.props.msgOnNotSelected;
 
     var msg = [];
@@ -113,10 +89,10 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
       msg.push(msgOnNotSelected('Commodity'));
     }
 
-    var _datesFragment$getVal2 = this.datesFragment.getValidation();
+    var _datesFragment$getVal = this.datesFragment.getValidation();
 
-    var isValid = _datesFragment$getVal2.isValid;
-    var datesMsg = _datesFragment$getVal2.datesMsg;
+    var isValid = _datesFragment$getVal.isValid;
+    var datesMsg = _datesFragment$getVal.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -125,6 +101,26 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
     msg.isValid = msg.length === 0 ? true : false;
 
     return msg;
+  },
+  _createLoadOption: function _createLoadOption() {
+    var _datesFragment$getVal2 = this.datesFragment.getValues();
+
+    var fromDate = _datesFragment$getVal2.fromDate;
+    var toDate = _datesFragment$getVal2.toDate;
+    var dataColumn = this.props.dataColumn;
+
+    return {
+      value: this.commodity.value,
+      type: this.type,
+      commodity: this.commodity,
+      fromDate: fromDate,
+      toDate: toDate,
+      dataColumn: dataColumn
+    };
+  },
+  _handlerClose: function _handlerClose() {
+    this._handlerWithValidationClose(this._createValidationMessages);
+    this.props.onClose();
   },
   render: function render() {
     var _this = this;
@@ -157,36 +153,17 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
         onShowChart: onShow,
         onClose: this._handlerClose
       },
-      _react2.default.createElement(
-        'div',
-        { style: styles.rowDiv, key: '1' },
-        _react2.default.createElement(
-          'span',
-          { style: styles.labelSpan },
-          'Type:'
-        ),
-        _react2.default.createElement(_ZhSelect2.default, {
-          width: '250',
-          onSelect: this._handlerSelectType,
-          options: optionTypes
-        })
-      ),
-      _react2.default.createElement(
-        'div',
-        { style: styles.rowDiv, key: '2' },
-        _react2.default.createElement(
-          'span',
-          { style: styles.labelSpan },
-          'Commodity:'
-        ),
-        _react2.default.createElement(_ZhSelect2.default, {
-          width: '250',
-          onSelect: this._handlerSelectCommodity,
-          options: optionCommodities
-        })
-      ),
+      _react2.default.createElement(_RowInputSelect2.default, {
+        caption: 'Type:',
+        options: optionTypes,
+        onSelect: this._handlerSelectType
+      }),
+      _react2.default.createElement(_RowInputSelect2.default, {
+        caption: 'Commodity:',
+        options: optionCommodities,
+        onSelect: this._handlerSelectCommodity
+      }),
       _react2.default.createElement(_DatesFragment2.default, {
-        key: '3',
         ref: function ref(c) {
           return _this.datesFragment = c;
         },
@@ -196,7 +173,6 @@ var QuandlCommoditiesDialog = _react2.default.createClass(_extends({
         onTestDate: onTestDate
       }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        key: '4',
         validationMessages: validationMessages
       })
     );

@@ -3,7 +3,7 @@ import React from 'react';
 import WithValidation from '../dialogs/WithValidation';
 
 import ZhDialog from '../ZhDialog';
-import ZhSelect from '../ZhSelect';
+import RowInputSelect from '../dialogs/RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
 
 import DatesFragment from '../DatesFragment';
@@ -11,9 +11,6 @@ import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
 import QuandlCommodity from '../../services/qe/QuandlCommodity';
 
-import DialogStyles from '../styles/DialogStyles';
-
-const styles = DialogStyles;
 
 const QuandlCommoditiesDialog = React.createClass({
   ...WithValidation,
@@ -52,25 +49,13 @@ const QuandlCommoditiesDialog = React.createClass({
   },
 
   _handlerLoad(event){
-    event.target.focus();
-    const validationMessages = this._getValidationMessages();
-    if (validationMessages.isValid) {
-      const {fromDate, toDate} = this.datesFragment.getValues()
-          , {dataColumn} = this.props;
-      const option = {
-        value : this.commodity.value,
-        type: this.type,
-        commodity: this.commodity,
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn : dataColumn
-      }
-      this.props.onLoad(option);
-    }
-    this._updateValidationMessages(validationMessages);
-  },
-
-  _getValidationMessages(){
+     event.target.focus();
+     this._handlerWithValidationLoad(
+       this._createValidationMessages(),
+       this._createLoadOption
+     );
+  },    
+  _createValidationMessages(){
       const {msgOnNotSelected} = this.props;
       let   msg = [];
 
@@ -83,6 +68,22 @@ const QuandlCommoditiesDialog = React.createClass({
       msg.isValid = (msg.length === 0) ? true : false;
 
       return msg;
+   },
+   _createLoadOption(){
+     const {fromDate, toDate} = this.datesFragment.getValues()
+         , {dataColumn} = this.props;
+     return {
+       value : this.commodity.value,
+       type: this.type,
+       commodity: this.commodity,
+       fromDate: fromDate,
+       toDate: toDate,
+       dataColumn : dataColumn
+     }
+   },
+   _handlerClose(){
+     this._handlerWithValidationClose(this._createValidationMessages);
+     this.props.onClose();
    },
 
   render(){
@@ -108,28 +109,17 @@ const QuandlCommoditiesDialog = React.createClass({
              onShowChart={onShow}
              onClose={this._handlerClose}
          >
-             <div style={styles.rowDiv} key="1">
-               <span style={styles.labelSpan}>
-                  Type:
-               </span>
-               <ZhSelect
-                  width="250"
-                  onSelect={this._handlerSelectType}
-                  options={optionTypes}
-                />
-             </div>
-             <div style={styles.rowDiv} key="2">
-               <span style={styles.labelSpan}>
-                  Commodity:
-               </span>
-               <ZhSelect
-                  width="250"
-                  onSelect={this._handlerSelectCommodity}
-                  options={optionCommodities}
-                />
-             </div>
-             <DatesFragment
-                 key="3"
+            <RowInputSelect
+                caption={'Type:'}
+                options={optionTypes}
+                onSelect={this._handlerSelectType}
+            />
+            <RowInputSelect
+                caption={'Commodity:'}
+                options={optionCommodities}
+                onSelect={this._handlerSelectCommodity}
+            />
+            <DatesFragment
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
@@ -137,7 +127,6 @@ const QuandlCommoditiesDialog = React.createClass({
                  onTestDate={onTestDate}
              />
              <ValidationMessagesFragment
-                 key="4"
                  validationMessages={validationMessages}
              />
         </ZhDialog>

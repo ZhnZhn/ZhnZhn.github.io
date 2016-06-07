@@ -29,7 +29,11 @@ const QuandlYahoo = createTypeObject(qySources, 'QY');
 const qeSources = [
   'CURRENCY_HISTORY',
   'COMMODITY_PRICE',
+  'COMMODITY_TRADE',
+  'GLOBAL_INDICATOR',
   'WORLDBANK_PRICE',
+  'CPI_INFLATION',
+  'BIG_MAC',
 
   'WIKI_STOCK',
   'TOKIO_STOCK',

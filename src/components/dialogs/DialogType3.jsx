@@ -4,14 +4,10 @@ import WithValidation from './WithValidation';
 import WithLoadOptions from './WithLoadOptions';
 
 import ZhDialog from '../ZhDialog';
-import ZhSelect from '../ZhSelect';
+import RowInputSelect from './RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
-
-import DialogStyles from '../styles/DialogStyles'
-const styles = DialogStyles;
-
 
 const DialogType3 = React.createClass({
   ...WithValidation,
@@ -61,9 +57,9 @@ const DialogType3 = React.createClass({
 
 
   _handlerLoadOptions(){
-     if (this.props.optionURI){
+     //if (this.props.optionURI){
        this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
-     }
+     //}
   },
 
   _handlerSelectStock(stock){
@@ -71,35 +67,66 @@ const DialogType3 = React.createClass({
   },
 
   _handlerLoad(event){
+    event.target.focus();
+    this._handlerWithValidationLoad(
+      this._createValidationMessages(),
+      this._createLoadOption
+    );
+  },
+  /*
+  _handlerLoad(event){
      event.target.focus();
      const validationMessages = this._getValidationMessages();
      if (validationMessages.isValid){
        const {fromDate, toDate} = this.datesFragment.getValues()
-           , {dataColumn} = this.props;
+           , {dataColumn, fnItemCaption} = this.props
+           , _itemCaption = (typeof fnItemCaption === 'function') ?
+                          fnItemCaption(this.stock.value) : undefined;
        const option = {
          value : this.stock.value,
          stock: this.stock,
          fromDate: fromDate,
          toDate: toDate,
-         dataColumn : dataColumn
+         dataColumn : dataColumn,
+         itemCaption : _itemCaption
        }
        this.props.onLoad(option);
      }
      this._updateValidationMessages(validationMessages);
   },
-
-  _getValidationMessages(){
+  */
+  _createValidationMessages(){
+    const {itemCaption='Stock'} = this.props;
     let msg = [];
-    if (!this.stock) { msg.push(this.props.msgOnNotSelected('Stock'));}
+    if (!this.stock) { msg.push(this.props.msgOnNotSelected(itemCaption));}
     const {isValid, datesMsg} = this.datesFragment.getValidation();
     if (!isValid) { msg = msg.concat(datesMsg); }
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
   },
+  _createLoadOption(){
+    const {fromDate, toDate} = this.datesFragment.getValues()
+        , {dataColumn, fnItemCaption} = this.props
+        , _itemCaption = (typeof fnItemCaption === 'function') ?
+                       fnItemCaption(this.stock.value) : undefined;
+    return {
+      value : this.stock.value,
+      stock: this.stock,
+      fromDate: fromDate,
+      toDate: toDate,
+      dataColumn : dataColumn,
+      itemCaption : _itemCaption
+    }
+  },
+  _handlerClose(){
+    this._handlerWithValidationClose(this._createValidationMessages);
+    this.props.onClose()
+  },
 
   render(){
     const {
             caption, isShow, onShow, onClose,
+            itemCaption='Stock:', optionNames='Stocks',
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {isLoading, isLoadingFailed, optionStocks, validationMessages} = this.state
@@ -120,22 +147,16 @@ const DialogType3 = React.createClass({
            onShowChart={onShow}
            onClose={this._handlerClose}
        >
-         <div style={styles.rowDiv} key="1">
-           <span style={styles.labelSpan}>
-             Stock:
-           </span>
-           <ZhSelect
-             width="250"
-             options={optionStocks}
-             optionNames={'Stockes'}
-             isLoading={isLoading}
-             isLoadingFailed={isLoadingFailed}
-             onLoadOption={this._handlerLoadOptions}
-             onSelect={this._handlerSelectStock}
-           />
-        </div>
+         <RowInputSelect
+            caption={itemCaption}
+            options={optionStocks}
+            optionNames={optionNames}
+            isLoading={isLoading}
+            isLoadingFailed={isLoadingFailed}
+            onLoadOption={this._handlerLoadOptions}
+            onSelect={this._handlerSelectStock}
+         />
         <DatesFragment
-            key="2"
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
@@ -143,7 +164,6 @@ const DialogType3 = React.createClass({
             onTestDate={onTestDate}
         />
         <ValidationMessagesFragment
-            key="3"
             validationMessages={validationMessages}
         />
       </ZhDialog>

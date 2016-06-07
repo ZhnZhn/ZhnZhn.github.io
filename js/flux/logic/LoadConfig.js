@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _LoadConfig;
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _ChartStore = require('../stores/ChartStore');
@@ -38,8 +36,13 @@ var _fnCatchLoadError = function _fnCatchLoadError(error, chartId, onFailed) {
   var caption = void 0,
       descr = void 0;
   if (error instanceof TypeError) {
-    caption = _Msg2.default.Alert.NETWORK_ERROR.caption;
-    descr = _Msg2.default.Alert.NETWORK_ERROR.descr;
+    if (error.message.indexOf('fetch') !== -1) {
+      caption = _Msg2.default.Alert.NETWORK_ERROR.caption;
+      descr = _Msg2.default.Alert.NETWORK_ERROR.descr;
+    } else {
+      caption = error.zhCaption ? error.zhCaption : 'Runtime Error';
+      descr = error.message;
+    }
   } else {
     caption = error.zhCaption ? error.zhCaption : 'Runtime Error';
     descr = error.message;
@@ -49,12 +52,10 @@ var _fnCatchLoadError = function _fnCatchLoadError(error, chartId, onFailed) {
 
 var loadData = function loadData(chartType, browserType, option, onCompleted, onAdded, onFailed) {
   var parentId = _ChartStore2.default.isLoadToChart();
-  var dataColumn = option.dataColumn;
-
   if (!parentId) {
-    loadToChartComp(dataColumn, chartType, browserType, option, onCompleted, onFailed);
+    loadToChartComp(chartType, browserType, option, onCompleted, onFailed);
   } else {
-    loadToChart(dataColumn, chartType, browserType, option, parentId, onAdded, onFailed);
+    loadToChart(chartType, browserType, option, parentId, onAdded, onFailed);
   }
 };
 
@@ -73,8 +74,10 @@ var _fnAddSeriesToChart = function _fnAddSeriesToChart(chart, series, label) {
   options.zhSeries.count += 1;
 };
 
-var loadToChart = function loadToChart(dataColumn, chartType, browserType, option, parentId, onAdded, onFailed) {
+var loadToChart = function loadToChart(chartType, browserType, option, parentId, onAdded, onFailed) {
   var chartId = option.value;
+  var dataColumn = option.dataColumn;
+
   option.apiKey = _ChartStore2.default.getQuandlKey();
   fetch(_QuandlApi2.default.getRequestUrl(option)).then(function (response) {
     return Promise.all([Promise.resolve(response), response.json()]);
@@ -96,8 +99,10 @@ var loadToChart = function loadToChart(dataColumn, chartType, browserType, optio
   });
 };
 
-var loadToChartComp = function loadToChartComp(dataColumn, chartType, browserType, option, onCompleted, onFailed) {
+var loadToChartComp = function loadToChartComp(chartType, browserType, option, onCompleted, onFailed) {
   var chartId = option.value;
+  var dataColumn = option.dataColumn;
+
   if (!_ChartStore2.default.isChartExist(chartType, chartId)) {
     option.apiKey = _ChartStore2.default.getQuandlKey();
     fetch(_QuandlApi2.default.getRequestUrl(option)).then(function (response) {
@@ -115,7 +120,8 @@ var loadToChartComp = function loadToChartComp(dataColumn, chartType, browserTyp
 
         config.zhConfig = {
           id: chartId,
-          dataColumn: dataColumn
+          dataColumn: dataColumn,
+          itemCaption: option.itemCaption
         };
         onCompleted(chartType, browserType, config);
       }
@@ -131,13 +137,14 @@ var loadToChartComp = function loadToChartComp(dataColumn, chartType, browserTyp
   }
 };
 
-var LoadConfig = (_LoadConfig = {}, _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CURRENCY_HISTORY, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_COMMODITY_PRICE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WORLDBANK_PRICE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_WIKI_STOCK, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_TOKIO_STOCK, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_DCE_FUTURE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.QUANDL_CHINA_ZCE_FUTURE, loadData), _defineProperty(_LoadConfig, _ChartType2.default.WATCH_LIST, loadData), _LoadConfig);
+var LoadConfig = _defineProperty({}, _ChartType2.default.WATCH_LIST, loadData);
 
 var addConfig = function addConfig(obj, fn) {
   for (var key in obj) {
     LoadConfig[obj[key]] = fn;
   }
 };
+addConfig(_DialogType.Quandl, loadData);
 addConfig(_DialogType.QuandlGoogle, loadData);
 addConfig(_DialogType.QuandlYahoo, loadData);
 

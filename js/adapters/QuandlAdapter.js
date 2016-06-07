@@ -66,10 +66,10 @@ var _fnGetDatasetInfo = function _fnGetDatasetInfo(json) {
 var _fnGetValueMoving = function _fnGetValueMoving(seria) {
 
   var len = seria.length,
-      nowValue = len > 0 ? seria[len - 1][1] : '0.0',
-      bWasValue = len > 1 ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0),
+      nowValue = len > 0 ? seria[len - 1][1] ? seria[len - 1][1] : '0.0' : '0.0',
+      bWasValue = len > 1 ? seria[len - 2][1] ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0) : (0, _big2.default)(0.0),
       bDelta = bWasValue.minus(nowValue),
-      bPercent = len > 1 ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : (0, _big2.default)(0.0);
+      bPercent = len > 1 && !bWasValue.eq((0, _big2.default)(0.0)) ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : (0, _big2.default)(0.0);
 
   var direction = void 0;
   if (bDelta.gt(0.0)) {

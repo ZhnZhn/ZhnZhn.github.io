@@ -1,0 +1,410 @@
+{
+  "indicators" : [
+{
+  "caption" : "Agricultural Production Index", "value" : "AGPROD",
+  "columns" : [
+    { "caption" : "Gross Production 1999-2001 (1000 I$)" , "value" : 1},
+    { "caption" : "Net Production 1999-2001 (1000 I$)" , "value" : 2},
+    { "caption" : "Gross PIN (base 1999-2001) (I$)" , "value" : 3},
+    { "caption" : "Grs per capita PIN (base 1999-2001) (I$)" , "value" : 4},
+    { "caption" : "Net PIN (base 1999-2001) (I$)" , "value" : 5},
+    { "caption" : "Net per capita PIN (base 1999-2001) (I$)" , "value" : 6}
+  ]
+},{
+  "caption" : "Arable, Forested and Total Land", "value" : "LND",
+  "columns" : [
+    { "caption" : "Total Land Area (1000 Ha)" , "value" : 1},
+    { "caption" : "Arable Land Area (1000 Ha)" , "value" : 2},
+    { "caption" : "Forested Area (1000 Ha)" , "value" : 3},
+    { "caption" : "Arable %" , "value" : 4},
+    { "caption" : "Forested %" , "value" : 5}
+  ]
+},{
+  "caption" : "Balance of Payments", "value" : "BOP",
+  "columns" : [
+{ "caption" : "TRADE BALANCE" , "value" : 1},
+{ "caption" : "SERVICES: DEBIT" , "value" : 2},
+{ "caption" : "SERVICES: CREDIT" , "value" : 3},
+{ "caption" : "OVERALL BALANCE" , "value" : 4},
+{ "caption" : "OTHER INVESTMENT LIAB.; N.I.E." , "value" : 5},
+{ "caption" : "OTHER INVESTMENT ASSETS" , "value" : 6},
+{ "caption" : "OI OTHER SECTORS LIAB" , "value" : 7},
+{ "caption" : "OI MON AUTH LIAB" , "value" : 8},
+{ "caption" : "OI GEN GOVT LIAB" , "value" : 9},
+{ "caption" : "OI GEN GOVT ASSETS" , "value" : 10},
+{ "caption" : "OI BANKS LIAB" , "value" : 11},
+{ "caption" : "NET ERRORS AND OMISSIONS" , "value" : 12},
+{ "caption" : "INCOME: DEBIT" , "value" : 13},
+{ "caption" : "INCOME: CREDIT" , "value" : 14},
+{ "caption" : "GOODS IMPORTS: F.O.B" , "value" : 15},
+{ "caption" : "GOODS EXPORTS: F.O.B." , "value" : 16},
+{ "caption" : "FINANCIAL ACCOUNT; N.I.E.", "value" : 17},
+{ "caption" : "CURRENT TRANSFERS: DEB", "value" : 18},
+{ "caption" : "CURRENT TRANSFERS; N.I.E. : CRE", "value" : 19},
+{ "caption" : "CURRENT ACCOUNT; N.I.E.", "value" : 20},
+{ "caption" : "BALANCE ON GOODS; SERV. & INC.", "value" : 21},
+{ "caption" : "BALANCE ON GOODS AND SERVICES", "value" : 22},
+{ "caption" : "PORTFOLIO INVESTMENT LIAB.; N.I.E.", "value" : 23},
+{ "caption" : "PORTFOLIO INVESTMENT ASSETS", "value" : 24},
+{ "caption" : "PI EQUITY SECURITIES LIAB", "value" : 25},
+{ "caption" : "PI EQUITY SECURITIES ASSETS", "value" : 26},
+{ "caption" : "PI DEBT SECURITIES LIAB", "value" : 27},
+{ "caption" : "PI DEBT SECURITIES ASSETS", "value" : 28},
+{ "caption" : "OI OTHER SECTORS ASSETS", "value" : 29},
+{ "caption" : "OI MON AUTH ASSETS", "value" : 30},
+{ "caption" : "OI BANKS ASSETS", "value" : 31},
+{ "caption" : "DIRECT INVESTMENT ABROAD", "value" : 32},
+{ "caption" : "DIR. INVEST. IN REP. ECON.; N.I.E.", "value" : 33},
+{ "caption" : "CAPITAL ACCOUNT: DEBIT", "value" : 34},
+{ "caption" : "CAPITAL ACCOUNT; N.I.E.", "value" : 35},
+{ "caption" : "CAPITAL ACCOUNT; N.I.E.: CREDIT", "value" : 36},
+{ "caption" : "FINAN DERIVATIVES: NET", "value" : 37},
+{ "caption" : "FINAN DERIVATIVES: LIABIL", "value" : 38},
+{ "caption" : "FINAN DERIVATIVES: ASSETS", "value" : 39}
+  ]
+},{
+  "caption" : "Carbon Dioxide Emissions", "value" : "CO2",
+  "columns" : [
+    { "caption" : "CO2 Emissions in kilotons" , "value" : 1},
+    { "caption" : "CO2 Emissions in tons per capita" , "value" : 2},
+    { "caption" : "CO2 Emissions in kg per $1 GDP at PPP" , "value" : 3}
+  ]
+},{
+   "caption" : "Cereal Production Index", "value" : "CEREAL",
+   "columns" : [
+{ "caption" : "Seed (tonnes)", "value" : 1},
+{ "caption" : "Gross Production 1999-2001 (1000 I$)", "value" : 2},
+{ "caption" : "Net Production 1999-2001 (1000 I$)", "value" : 3},
+{ "caption" : "Area Harvested (Ha)", "value" : 4},
+{ "caption" : "Yield (hg/Ha)", "value" : 5},
+{ "caption" : "Gross PIN (base 1999-2001) (I$)", "value" : 6},
+{ "caption" : "Grs per capita PIN (base 1999-2001) (I$)", "value" : 7},
+{ "caption" : "Net PIN (base 1999-2001) (I$)", "value" : 8},
+{ "caption" : "Net per capita PIN (base 1999-2001) (I$)", "value" : 9},
+{ "caption" : "Production Quantity (tonnes)", "value" : 10}
+   ]
+ },{
+  "caption" : "Child Mortality Rate", "value" : "CHLMOR",
+  "columns" : [
+{ "caption" : "Const. mortality (Medium)", "value" : 1},
+{ "caption" : "Constant-fertility scenario", "value" : 2},
+{ "caption" : "High variant", "value" : 3},
+{ "caption" : "Instant replacement", "value" : 4},
+{ "caption" : "Low variant", "value" : 5},
+{ "caption" : "Medium variant", "value" : 6},
+{ "caption" : "No change (Const. Fer.; Mor.; Zero migration)", "value" : 7},
+{ "caption" : "Zero migration (Medium)", "value" : 8}
+  ]
+},{
+  "caption" : "Currency Reserves", "value" : "IFSV",
+  "columns" : [
+{ "caption" : "TOTAL RESERVES MINUS GOLD (MILLIONS OF SDRS)", "value" : 1},
+{ "caption" : "SDR HOLDINGS (MILLIONS OF SDRS)", "value" : 2},
+{ "caption" : "SDR HOLDING IN % OF ALLOCATION (PERCENT PER ANNU)", "value" : 3},
+{ "caption" : "RESERVE TRANCHE POSITION (MILLIONS OF SDRS)", "value" : 4},
+{ "caption" : "RESERVE POSITION IN THE FUND (MILLIONS OF US$)", "value" : 5},
+{ "caption" : "RESERVE POSITION IN THE FUND (MILLIONS OF SDRS)", "value" : 6},
+{ "caption" : "INTERNATIONAL RESERVES (MILLIONS OF SDRS)", "value" : 7},
+{ "caption" : "HOLDINGS OF SDRS (MILLIONS OF US$)", "value" : 8},
+{ "caption" : "GOLD IN MILLION OUNCES (MILL.FIN.TROY OZ)", "value" : 9},
+{ "caption" : "FOREIGN EXCHANGE (MILLIONS OF SDRS)", "value" : 10}
+  ]
+},
+{ "caption" : "Development Assistance Donated", "value" : "ODADNR"},
+{ "caption" : "Development Assistance Received", "value" : "ODARCV"},
+{
+   "caption" : "Education Enrolment", "value" : "ENROL",
+   "columns" : [
+{ "caption" : "Primary Total Enrollment" , "value" : 1},
+{ "caption" : "Primary Male Enrollment" , "value" : 2},
+{ "caption" : "Primary Female Enrollment" , "value" : 3},
+{ "caption" : "Primary Male Percentage" , "value" : 4},
+{ "caption" : "Primary Female Percentage" , "value" : 5},
+{ "caption" : "Secondary Total Percentage" , "value" : 6},
+{ "caption" : "Secondary Male Percentage" , "value" : 7},
+{ "caption" : "Secondary Female Percentage" , "value" : 8},
+{ "caption" : "Tertiary Total Enrollment" , "value" : 9},
+{ "caption" : "Tertiary Male Enrollment" , "value" : 10},
+{ "caption" : "Tertiary Female Enrollment" , "value" : 11},
+{ "caption" : "Tertiary Male Percentage" , "value" : 12},
+{ "caption" : "Tertiary Female Percentage" , "value" : 13}
+   ]
+ },
+{ "caption" : "External Debt", "value" : "IFDBT"},
+{
+  "caption" : "Female Employment by Sector", "value" : "EMPF",
+  "columns" : [
+{ "caption" : "Total.", "value" : 1},
+{ "caption" : "A-B.", "value" : 2},
+{ "caption" : "C. Mining and Quarrying", "value" : 3},
+{ "caption" : "D. Manufacturing", "value" : 4},
+{ "caption" : "E. Electricity; Gas and Water Supply", "value" : 5},
+{ "caption" : "F. Construction", "value" : 6},
+{ "caption" : "G. Wholesale and Retail Trade; Repair of Motor Vehicles; Motorcycles and Personal and Household Goods", "value" : 7},
+{ "caption" : "H. Hotels and Restaurants", "value" : 8},
+{ "caption" : "I. Transport; Storage and Communications", "value" : 9},
+{ "caption" : "M. Education", "value" : 10},
+{ "caption" : "N. Health and Social Work", "value" : 11},
+{ "caption" : "A. Agriculture; Hunting and Forestry", "value" : 12},
+{ "caption" : "B. Fishing", "value" : 13},
+{ "caption" : "J. Financial Intermediation", "value" : 14},
+{ "caption" : "K. Real Estate; Renting and Business Activities", "value" : 15},
+{ "caption" : "L. Public Administration and Defence; Compulsory Social Security", "value" : 16},
+{ "caption" : "P. Households with Employed Persons", "value" : 17},
+{ "caption" : "Q. Extra-Territorial Organizations and Bodies", "value" : 18},
+{ "caption" : "X. Not classifiable by economic activity", "value" : 19},
+{ "caption" : "O. Other Community;Social and Personal Service Activities", "value" : 20},
+{ "caption" : "2-9.", "value" : 21},
+{ "caption" : "1. Agriculture; Hunting; Forestry and Fishing", "value" : 22},
+{ "caption" : "2. Mining and Quarrying", "value" : 23},
+{ "caption" : "3. Manufacturing", "value" : 24},
+{ "caption" : "4. Electricity; Gas and Water", "value" : 25},
+{ "caption" : "5. Construction", "value" : 26},
+{ "caption" : "6. Wholesale and Retail Trade and Restaurants and Hotels", "value" : 27},
+{ "caption" : "7. Transport; Storage and Communication", "value" : 28},
+{ "caption" : "8. Financing; Insurance; Real Estate and Business Services", "value" : 29},
+{ "caption" : "9. Community; Social and Personal Services", "value" : 30},
+{ "caption" : "0. Activities not Adequately Defined", "value" : 31},
+{ "caption" : "J-K.", "value" : 32},
+{ "caption" : "L-O.", "value" : 33},
+{ "caption" : "P-Q.", "value" : 34}
+  ]
+},{
+  "caption" : "Fertility Projection", "value" : "TOTFER",
+  "columns" : [
+{ "caption" : "Const. mortality (Medium)", "value" : 1},
+{ "caption" : "Constant-fertility scenario", "value" : 2},
+{ "caption" : "High variant", "value" : 3},
+{ "caption" : "Instant replacement", "value" : 4},
+{ "caption" : "Low variant", "value" : 5},
+{ "caption" : "Medium variant", "value" : 6},
+{ "caption" : "No change (Const. Fer.; Mor.; Zero migration)", "value" : 7},
+{ "caption" : "Zero migration (Medium)", "value" : 8}
+  ]
+},
+{ "caption" : "Fixed Line Telephones", "value" : "FIXTEL"},
+{
+  "caption" : "Infant Mortality Rate", "value" : "INFMOR",
+  "columns" : [
+{ "caption" : "Const. mortality (Medium)", "value" : 1},
+{ "caption" : "Constant-fertility scenario", "value" : 2},
+{ "caption" : "High variant", "value" : 3},
+{ "caption" : "Instant replacement", "value" : 4},
+{ "caption" : "Low variant", "value" : 5},
+{ "caption" : "Medium variant", "value" : 6},
+{ "caption" : "No change (Const. Fer.; Mor.; Zero migration)", "value" : 7},
+{ "caption" : "Zero migration (Medium)", "value" : 8}
+  ]
+},
+{ "caption" : "Inflation", "value" : "INFL"},
+{
+   "caption" : "Interest Rates", "value" : "IFIR",
+   "columns" : [
+{ "caption" : "DEPOSIT RATE" , "value" : 1},
+{ "caption" : "DISCOUNT RATE (END OF PERIOD)" , "value" : 2},
+{ "caption" : "DISCOUNTS(-)OR PREMIUMS F.R." , "value" : 3},
+{ "caption" : "LOANS;HOUSEHOLDS;STOCKS;UP TO 1 YR" , "value" : 4},
+{ "caption" : "LOANS;HOUSEHOLDS;NEW BUS;FLOATING &" , "value" : 5},
+{ "caption" : "LOANS;HOUSEHOLDS;HOUSE PURCH;NEW BUS" , "value" : 6},
+{ "caption" : "LOANS;HOUSEHOLDS;HOUSE PURCH; STOCKS" , "value" : 7},
+{ "caption" : "LOANS;CORPS;STOCKS; UP TO 1 YR" , "value" : 8},
+{ "caption" : "LOANS;CORPS;NEW BUS;OVER EURO 1 MIL;" , "value" : 9},
+{ "caption" : "DEPS;HOUSEHOLDS;STOCKS;UP TO 2 YRS" , "value" : 10},
+{ "caption" : "DEPS;HOUSEHOLDS;NEW BUS; UP TO 1 YR" , "value" : 11},
+{ "caption" : "DEPS;CORPS;STOCKS;UP TO 2 YRS" , "value" : 12},
+{ "caption" : "DEPS;CORPS;NEW BUS;UP TO 1 YR" , "value" : 13},
+{ "caption" : "PRIME LENDING RATE" , "value" : 14},
+{ "caption" : "TREASURY PAPER" , "value" : 15},
+{ "caption" : "CALL MONEY RATE" , "value" : 16}
+   ]
+ },
+{ "caption" : "Internet Penetration", "value" : "NETPEN"},
+{
+  "caption" : "Life Expectancy Projections", "value" : "LIFEXP",
+  "columns" : [
+{ "caption" : "Const. mortality (Medium)", "value" : 1},
+{ "caption" : "Constant-fertility scenario", "value" : 2},
+{ "caption" : "High variant", "value" : 3},
+{ "caption" : "Instant replacement", "value" : 4},
+{ "caption" : "Low variant", "value" : 5},
+{ "caption" : "Medium variant", "value" : 6},
+{ "caption" : "No change (Const. Fer.; Mor.; Zero migration)", "value" : 7},
+{ "caption" : "Zero migration (Medium)", "value" : 8}
+  ]
+},{
+  "caption" : "Male Employment by Sector", "value" : "EMPM",
+  "columns" : [
+{ "caption" : "Total.", "value" : 1},
+{ "caption" : "A-B.", "value" : 2},
+{ "caption" : "C. Mining and Quarrying", "value" : 3},
+{ "caption" : "D. Manufacturing", "value" : 4},
+{ "caption" : "E. Electricity; Gas and Water Supply", "value" : 5},
+{ "caption" : "F. Construction", "value" : 6},
+{ "caption" : "G. Wholesale and Retail Trade; Repair of Motor Vehicles; Motorcycles and Personal and Household Goods", "value" : 7},
+{ "caption" : "H. Hotels and Restaurants", "value" : 8},
+{ "caption" : "I. Transport; Storage and Communications", "value" : 9},
+{ "caption" : "M. Education", "value" : 10},
+{ "caption" : "N. Health and Social Work", "value" : 11},
+{ "caption" : "A. Agriculture; Hunting and Forestry", "value" : 12},
+{ "caption" : "B. Fishing", "value" : 13},
+{ "caption" : "J. Financial Intermediation", "value" : 14},
+{ "caption" : "K. Real Estate; Renting and Business Activities", "value" : 15},
+{ "caption" : "L. Public Administration and Defence; Compulsory Social Security", "value" : 16},
+{ "caption" : "P. Households with Employed Persons", "value" : 17},
+{ "caption" : "Q. Extra-Territorial Organizations and Bodies", "value" : 18},
+{ "caption" : "X. Not classifiable by economic activity", "value" : 19},
+{ "caption" : "O. Other Community;Social and Personal Service Activities", "value" : 20},
+{ "caption" : "2-9.", "value" : 21},
+{ "caption" : "1. Agriculture; Hunting; Forestry and Fishing", "value" : 22},
+{ "caption" : "2. Mining and Quarrying", "value" : 23},
+{ "caption" : "3. Manufacturing", "value" : 24},
+{ "caption" : "4. Electricity; Gas and Water", "value" : 25},
+{ "caption" : "5. Construction", "value" : 26},
+{ "caption" : "6. Wholesale and Retail Trade and Restaurants and Hotels", "value" : 27},
+{ "caption" : "7. Transport; Storage and Communication", "value" : 28},
+{ "caption" : "8. Financing; Insurance; Real Estate and Business Services", "value" : 29},
+{ "caption" : "9. Community; Social and Personal Services", "value" : 30},
+{ "caption" : "0. Activities not Adequately Defined", "value" : 31},
+{ "caption" : "J-K.", "value" : 32},
+{ "caption" : "L-O.", "value" : 33},
+{ "caption" : "P-Q.", "value" : 34}
+  ]
+},
+{ "caption" : "Maternal Mortality Rate", "value" : "MATMOR"},
+{ "caption" : "Mobile and Cellular Telephones", "value" : "MOBTEL"},
+{
+  "caption" : "Population Density Projections", "value" : "POPDEN",
+  "columns" : [
+{ "caption" : "Const. mortality (Medium)", "value" : 1},
+{ "caption" : "Constant-fertility scenario", "value" : 2},
+{ "caption" : "High variant", "value" : 3},
+{ "caption" : "Instant replacement", "value" : 4},
+{ "caption" : "Low variant", "value" : 5},
+{ "caption" : "Medium variant", "value" : 6},
+{ "caption" : "No change (Const. Fer.; Mor.; Zero migration)", "value" : 7},
+{ "caption" : "Zero migration (Medium)", "value" : 8}
+  ]
+},
+{
+  "caption" : "Population Growth Projections", "value" : "POPCHG",
+  "columns" : [
+{ "caption" : "Const. mortality (Medium)", "value" : 1},
+{ "caption" : "Constant-fertility scenario", "value" : 2},
+{ "caption" : "High variant", "value" : 3},
+{ "caption" : "Instant replacement", "value" : 4},
+{ "caption" : "Low variant", "value" : 5},
+{ "caption" : "Medium variant", "value" : 6},
+{ "caption" : "No change (Const. Fer.; Mor.; Zero migration)", "value" : 7},
+{ "caption" : "Zero migration (Medium)", "value" : 8}
+  ]
+},
+{
+  "caption" : "Population Projections", "value" : "POPTOT",
+  "columns" : [
+{ "caption" : "Const. mortality (Medium)", "value" : 1},
+{ "caption" : "Constant-fertility scenario", "value" : 2},
+{ "caption" : "High variant", "value" : 3},
+{ "caption" : "Instant replacement", "value" : 4},
+{ "caption" : "Low variant", "value" : 5},
+{ "caption" : "Medium variant", "value" : 6},
+{ "caption" : "No change (Const. Fer.; Mor.; Zero migration)", "value" : 7},
+{ "caption" : "Zero migration (Medium)", "value" : 8}
+  ]
+},{
+  "caption" : "Public Expenditure on Education", "value" : "EDSPEND",
+  "columns" : [
+{ "caption" : "Percentage of Gross National Income", "value" : 1},
+{ "caption" : "Percentage of Total Government Expenditure", "value" : 2}
+  ]
+},{
+  "caption" : "Total Employment by Sector", "value" : "EMPTOT",
+  "columns" : [
+{ "caption" : "Total.", "value" : 1},
+{ "caption" : "A-B.", "value" : 2},
+{ "caption" : "C. Mining and Quarrying", "value" : 3},
+{ "caption" : "D. Manufacturing", "value" : 4},
+{ "caption" : "E. Electricity; Gas and Water Supply", "value" : 5},
+{ "caption" : "F. Construction", "value" : 6},
+{ "caption" : "G. Wholesale and Retail Trade; Repair of Motor Vehicles; Motorcycles and Personal and Household Goods", "value" : 7},
+{ "caption" : "H. Hotels and Restaurants", "value" : 8},
+{ "caption" : "I. Transport; Storage and Communications", "value" : 9},
+{ "caption" : "M. Education", "value" : 10},
+{ "caption" : "N. Health and Social Work", "value" : 11},
+{ "caption" : "A. Agriculture; Hunting and Forestry", "value" : 12},
+{ "caption" : "B. Fishing", "value" : 13},
+{ "caption" : "J. Financial Intermediation", "value" : 14},
+{ "caption" : "K. Real Estate; Renting and Business Activities", "value" : 15},
+{ "caption" : "L. Public Administration and Defence; Compulsory Social Security", "value" : 16},
+{ "caption" : "P. Households with Employed Persons", "value" : 17},
+{ "caption" : "Q. Extra-Territorial Organizations and Bodies", "value" : 18},
+{ "caption" : "X. Not classifiable by economic activity", "value" : 19},
+{ "caption" : "O. Other Community;Social and Personal Service Activities", "value" : 20},
+{ "caption" : "2-9.", "value" : 21},
+{ "caption" : "1. Agriculture; Hunting; Forestry and Fishing", "value" : 22},
+{ "caption" : "2. Mining and Quarrying", "value" : 23},
+{ "caption" : "3. Manufacturing", "value" : 24},
+{ "caption" : "4. Electricity; Gas and Water", "value" : 25},
+{ "caption" : "5. Construction", "value" : 26},
+{ "caption" : "6. Wholesale and Retail Trade and Restaurants and Hotels", "value" : 27},
+{ "caption" : "7. Transport; Storage and Communication", "value" : 28},
+{ "caption" : "8. Financing; Insurance; Real Estate and Business Services", "value" : 29},
+{ "caption" : "9. Community; Social and Personal Services", "value" : 30},
+{ "caption" : "0. Activities not Adequately Defined", "value" : 31},
+{ "caption" : "J-K.", "value" : 32},
+{ "caption" : "L-O.", "value" : 33},
+{ "caption" : "P-Q.", "value" : 34}
+  ]
+},{
+  "caption" : "Trade of Goods", "value" : "TRADE",
+  "columns" : [
+{ "caption" : "Import", "value" : 1},
+{ "caption" : "Export", "value" : 2}
+  ]
+},{
+  "caption" : "Unemployment Level", "value" : "UNEMP",
+  "columns" : [
+{ "caption" : "Both Genders: Total Coverage: All Unemployed", "value" : 1},
+{ "caption" : "Both Genders: Total Coverage: First-Time Job Seekers", "value" : 2},
+{ "caption" : "Both Genders: Total Coverage: Previously Employed", "value" : 3},
+{ "caption" : "Both Genders: Registered Unemployment: All Unemployed", "value" : 4},
+{ "caption" : "Both Genders: Registered Unemployment: First-Time Job Seekers", "value" : 5},
+{ "caption" : "Both Genders: Registered Unemployment: Previously Employed", "value" : 6},
+{ "caption" : "Men: Total Coverage: All Unemployed", "value" : 7},
+{ "caption" : "Men: Total Coverage: First-Time Job Seekers", "value" : 8},
+{ "caption" : "Men: Total Coverage: Previously Employed", "value" : 9},
+{ "caption" : "Men: Registered Unemployment: All Unemployed", "value" : 10},
+{ "caption" : "Men: Registered Unemployment: First-Time Job Seekers", "value" : 11},
+{ "caption" : "Men: Registered Unemployment: Previously Employed", "value" : 12},
+{ "caption" : "Women: Total Coverage: All Unemployed", "value" : 13},
+{ "caption" : "Women: Total Coverage: First-Time Job Seekers", "value" : 14},
+{ "caption" : "Women: Total Coverage: Previously Employed", "value" : 15},
+{ "caption" : "Women: Registered Unemployment: All Unemployed", "value" : 16},
+{ "caption" : "Women: Registered Unemployment: First-Time Job Seekers", "value" : 17},
+{ "caption" : "Women: Registered Unemployment: Previously Employed", "value" : 18}
+  ]
+},{
+  "caption" : "Unemployment Rates", "value" : "UNRATE",
+  "columns" : [
+{ "caption" : "Both Genders: Total Coverage: All Unemployed", "value" : 1},
+{ "caption" : "Both Genders: Registered Unemployment: All Unemployed", "value" : 2},
+{ "caption" : "Men: Total Coverage: All Unemployed", "value" : 3},
+{ "caption" : "Men: Registered Unemployment: All Unemployed", "value" : 4},
+{ "caption" : "Women: Total Coverage: All Unemployed", "value" : 5},
+{ "caption" : "Women: Registered Unemployment: All Unemployed", "value" : 6}
+  ]
+},{
+   "caption" : "Water and Sanitation", "value" : "H2O",
+   "columns" : [
+{ "caption" : "Improved Water %", "value" : 1},
+{ "caption" : "Improved Sanitation %", "value" : 2}
+   ]
+ },{
+  "caption" : "Wholesale Prices", "value" : "WPR",
+  "columns" : [
+{ "caption" : "INDUSTRIAL PRODUCTION PRICES; INDEX NUMBER", "value" : 1},
+{ "caption" : "PPI / WPI; INDEX NUMBER", "value" : 1},
+{ "caption" : "REER FROM REL.WPI; INDEX NUMBER", "value" : 1}
+  ]
+}
+  ]
+}

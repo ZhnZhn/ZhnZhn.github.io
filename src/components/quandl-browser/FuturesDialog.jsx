@@ -4,21 +4,17 @@ import WithValidation from '../dialogs/WithValidation';
 import WithLoadOptions from '../dialogs/WithLoadOptions';
 
 import ZhDialog from '../ZhDialog';
-import ZhSelect from '../ZhSelect';
+import RowInputSelect from '../dialogs/RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
 
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
-import DialogStyles from '../styles/DialogStyles'
-
-const styles = DialogStyles;
-
 const FuturesDialog = React.createClass({
   ...WithValidation,
   ...WithLoadOptions,
 
-  displayName : 'QuandlFuturesChinaDceDialog',
+  displayName : 'FuturesDialog',
   getInitialState(){
     this.code = null;
     this.OPTIONS_STATE_PROP = 'optionCodes';
@@ -61,23 +57,14 @@ const FuturesDialog = React.createClass({
   _handlerSelectCode(code){
     this.code = code;
   },
-
   _handlerLoad(event){
-     event.target.focus();
-     const validationMessages = this._getValidationMessages();
-     if (validationMessages.isValid){
-       const {dataColumn} = this.props;
-       const option = {
-          value : this.code.value,
-          code : this.code,
-          dataColumn : dataColumn
-       };
-       this.props.onLoad(option);
-     }
-     this._updateValidationMessages(validationMessages);
+    event.target.focus();
+    this._handlerWithValidationLoad(
+      this._createValidationMessages(),
+      this._createLoadOption
+    );
   },
-
-  _getValidationMessages(){
+  _createValidationMessages(){
     const {msgOnNotSelected} = this.props
         , msg = [];
 
@@ -86,7 +73,18 @@ const FuturesDialog = React.createClass({
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
   },
-
+  _createLoadOption(){
+    const {dataColumn} = this.props;
+    return {
+       value : this.code.value,
+       code : this.code,
+       dataColumn : dataColumn
+    };
+  },
+  _handlerClose(){
+    this._handlerWithValidationClose(this._createValidationMessages);
+    this.props.onClose();
+  },
 
   render(){
     const {isShow, caption, onShow, onClose} = this.props
@@ -108,24 +106,18 @@ const FuturesDialog = React.createClass({
            onShowChart={onShow}
            onClose={this._handlerClose}
        >
-         <div style={styles.rowDiv} key="1">
-           <span style={styles.labelSpan}>
-             Code:
-           </span>
-           <ZhSelect
-             width="250"
+          <RowInputSelect
+             caption={'Code:'}
              isLoading={isLoading}
              isLoadingFailed={isLoadingFailed}
-             onLoadOption={this._handlerLoadOptions}
              options={optionCodes}
              optionNames={'Codes'}
+             onLoadOption={this._handlerLoadOptions}
              onSelect={this._handlerSelectCode}
-           />
-        </div>
-        <ValidationMessagesFragment
-            key="3"
+          />
+          <ValidationMessagesFragment
             validationMessages={validationMessages}
-        />
+          />
       </ZhDialog>
     );
   }

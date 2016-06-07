@@ -8,15 +8,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgClose = require('./SvgClose.js');
+var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
-var _ToolBarButton = require('./ToolBarButton.js');
+var _ToolBarButton = require('./ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
 
-var _Interact = require('../utils/Interact.js');
+var _Interact = require('../utils/Interact');
 
 var _Interact2 = _interopRequireDefault(_Interact);
 
@@ -35,20 +35,10 @@ var styles = {
   },
   captionDiv: {
     padding: '5px',
-    //color: 'yellow',
     color: 'rgba(164, 135, 212,1)',
     backgroundColor: '#232F3B',
     textAlign: 'center',
     fontSize: '18px'
-  },
-  rowDiv: {
-    margin: '5px'
-  },
-  labelSpan: {
-    color: '#1B75BB',
-    display: 'inline-block',
-    textAlign: 'right',
-    width: '90px'
   },
   commandDiv: {
     cursor: 'default',
@@ -56,69 +46,55 @@ var styles = {
     marginTop: '8px',
     marginBottom: '10px',
     marginRight: '4px'
-  },
-  inputText: {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
-    color: 'green'
   }
 };
 
 var ZhDialog = _react2.default.createClass({
   displayName: 'ZhDialog',
-
-
   componentDidMount: function componentDidMount() {
-    _Interact2.default.makeDragable(this.refs['rootDiv']);
+    _Interact2.default.makeDragable(this.domRootDiv);
   },
-
-  _renderChildren: function _renderChildren() {
-    var domChildren = this.props.children.map(function (component, index) {
-      return _react2.default.createElement('component', { key: index });
-    });
-    return _react2.default.createElement(
-      'div',
-      { style: { cursor: 'default' } },
-      domChildren
-    );
-  },
-
   _renderCommandButton: function _renderCommandButton() {
+    var _props = this.props;
+    var commandButtons = _props.commandButtons;
+    var onShowChart = _props.onShowChart;
+    var onClose = _props.onClose;
+
     return _react2.default.createElement(
       'div',
       { style: styles.commandDiv },
-      this.props.commandButtons,
+      commandButtons,
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeC',
         caption: 'Show',
-        onClick: this.props.onShowChart
+        onClick: onShowChart
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeC',
         caption: 'Close',
-        onClick: this.props.onClose
+        onClick: onClose
       })
     );
   },
-
   render: function render() {
-    var _props = this.props;
-    var caption = _props.caption;
-    var children = _props.children;
+    var _this = this;
 
-
-    var styleShow = this.props.isShow ? { display: 'block' } : { display: 'none' };
-    var classShow = this.props.isShow ? 'show-popup' : null;
+    var _props2 = this.props;
+    var isShow = _props2.isShow;
+    var caption = _props2.caption;
+    var children = _props2.children;
+    var onClose = _props2.onClose;
+    var _styleShow = isShow ? { display: 'block' } : { display: 'none' };
+    var _classShow = isShow ? 'show-popup' : null;
 
     return _react2.default.createElement(
       'div',
       {
-        ref: 'rootDiv',
-        className: classShow,
-        style: Object.assign({}, styles.rootDiv, styleShow)
+        ref: function ref(c) {
+          return _this.domRootDiv = c;
+        },
+        className: _classShow,
+        style: Object.assign({}, styles.rootDiv, _styleShow)
       },
       _react2.default.createElement(
         'div',
@@ -128,7 +104,7 @@ var ZhDialog = _react2.default.createClass({
           null,
           caption
         ),
-        _react2.default.createElement(_SvgClose2.default, { onClose: this.props.onClose })
+        _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
       ),
       _react2.default.createElement(
         'div',

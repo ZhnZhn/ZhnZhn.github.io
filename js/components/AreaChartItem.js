@@ -326,7 +326,8 @@ var AreaChartItem = _react2.default.createClass({
     var config = _props2.config;
     var onSetActive = _props2.onSetActive;
     var onCloseItem = _props2.onCloseItem;
-    var _state4 = this.state;
+    var itemCaption = config.zhConfig.itemCaption;
+    var _itemCaption = itemCaption ? itemCaption : caption;var _state4 = this.state;
     var isOpen = _state4.isOpen;
     var isShowChart = _state4.isShowChart;
     var isShowInfo = _state4.isShowInfo;
@@ -354,7 +355,7 @@ var AreaChartItem = _react2.default.createClass({
             style: _styleCaption,
             onClick: this._handlerToggleOpen
           },
-          caption
+          _itemCaption
         ),
         _react2.default.createElement(_ValueMovingBadge2.default, {
           valueMoving: config.valueMoving

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SvgClose from './SvgClose.js';
-import ToolBarButton from './ToolBarButton.js';
+import SvgClose from './SvgClose';
+import ToolBarButton from './ToolBarButton';
 
-import Interact from '../utils/Interact.js';
+import Interact from '../utils/Interact';
 
 const styles = {
   rootDiv: {
@@ -18,20 +18,10 @@ const styles = {
   },
   captionDiv:{
     padding: '5px',
-    //color: 'yellow',
     color: 'rgba(164, 135, 212,1)',
     backgroundColor: '#232F3B',
     textAlign: 'center',
     fontSize: '18px',
-  },
-  rowDiv: {
-    margin: '5px'
-  },
-  labelSpan : {
-    color: '#1B75BB',
-    display: 'inline-block',
-    textAlign: 'right',
-    width: '90px'
   },
   commandDiv : {
      cursor: 'default',
@@ -39,84 +29,56 @@ const styles = {
      marginTop: '8px',
      marginBottom: '10px',
      marginRight: '4px'
-  },
-  inputText: {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
-    color: 'green'
-  },
+  }
 };
 
 
 const ZhDialog = React.createClass({
 
-  componentDidMount: function(){
-     Interact.makeDragable(this.refs['rootDiv']);
+  componentDidMount(){
+     Interact.makeDragable(this.domRootDiv);
   },
 
-  _renderChildren: function(){
-    let domChildren = this.props.children.map((component, index) =>{
-      return <component key={index} />
-    })
-    return (
-       <div style={{cursor: 'default'}}>
-          {domChildren}
-       </div>
-    )
-  },
-
-  _renderCommandButton: function(){
+  _renderCommandButton(){
+    const {commandButtons, onShowChart, onClose} = this.props;
     return (
       <div style={styles.commandDiv}>
 
-        {this.props.commandButtons}
+        {commandButtons}
 
         <ToolBarButton
            type="TypeC"
            caption="Show"
-           onClick={this.props.onShowChart}
+           onClick={onShowChart}
         />
         <ToolBarButton
            type="TypeC"
            caption="Close"
-           onClick={this.props.onClose}
+           onClick={onClose}
         />
       </div>
     );
   },
 
-  render: function(){
-    const {
-      caption,
-      children
-    } = this.props;
-
-   
-    let styleShow = this.props.isShow ? {display: 'block'} : {display: 'none'};
-    let classShow = this.props.isShow ? 'show-popup' : null;
+  render(){
+    const { isShow, caption, children, onClose} = this.props
+        , _styleShow = isShow ? {display: 'block'} : {display: 'none'}
+        , _classShow = isShow ? 'show-popup' : null;
 
     return (
       <div
-           ref="rootDiv"
-           className={classShow}
-           style={Object.assign({}, styles.rootDiv, styleShow)}
+           ref={c => this.domRootDiv = c}
+           className={_classShow}
+           style={Object.assign({}, styles.rootDiv, _styleShow)}
       >
-
         <div style={styles.captionDiv}>
           <span>{caption}</span>
-          <SvgClose onClose={this.props.onClose} />
+          <SvgClose onClose={onClose} />
         </div>
-
         <div style={{cursor: 'default'}}>
            {children}
         </div>
-
-
         {this._renderCommandButton()}
-
       </div>
     );
   }

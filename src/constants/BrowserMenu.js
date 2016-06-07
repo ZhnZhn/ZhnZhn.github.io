@@ -44,7 +44,11 @@ const menuQuandl = [
      items : [
        { id : Quandl.CURRENCY_HISTORY },
        { id : Quandl.COMMODITY_PRICE },
-       { id : Quandl.WORLDBANK_PRICE }
+       //{ id : Quandl.COMMODITY_TRADE},
+       { id : Quandl.GLOBAL_INDICATOR},
+       { id : Quandl.WORLDBANK_PRICE },
+       { id : Quandl.CPI_INFLATION },
+       { id : Quandl.BIG_MAC}
      ]
   },
   {

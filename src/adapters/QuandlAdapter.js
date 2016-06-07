@@ -53,10 +53,13 @@ const _fnGetDatasetInfo = function(json){
 const _fnGetValueMoving = function(seria){
 
   const len = seria.length
-      , nowValue = (len>0) ? seria[len-1][1] : '0.0'
-      , bWasValue = (len>1) ? Big(seria[len-2][1]) : Big(0.0)
+      , nowValue = (len>0) ?
+            ( (seria[len-1][1]) ? seria[len-1][1] : '0.0' ) : '0.0'
+      , bWasValue = (len>1) ?
+            ( (seria[len-2][1] ) ? Big(seria[len-2][1]) : Big(0.0) ) : Big(0.0)
       , bDelta = bWasValue.minus(nowValue)
-      , bPercent = (len>1) ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : Big(0.0);
+      , bPercent = (len>1 && !bWasValue.eq(Big(0.0)) )
+           ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : Big(0.0);
 
   let direction;
   if (bDelta.gt(0.0)){

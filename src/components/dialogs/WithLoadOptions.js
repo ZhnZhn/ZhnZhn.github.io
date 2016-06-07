@@ -12,7 +12,12 @@ const _fnShowAlertDialog = function(caption, descr){
 }
 
 const WithLoadOptions =  {
-  _loadOptions({toStateProp, uri, fnOnCompleted, fnOnFailed, retryServer=3, retryNetwork=1}){
+  _loadOptions(option){
+    const {
+            toStateProp, isLoadingProp, isLoadingFailedProp,
+            uri, optionJsonProp,
+            fnOnCompleted, fnOnFailed, retryServer=3, retryNetwork=1
+          } = option;
     fetch(uri)
       .then((response) => {
          const {status, statusText} = response;
@@ -20,53 +25,46 @@ const WithLoadOptions =  {
             return response.json();
          } else if (status>=400 && status<500){
             _fnShowAlertDialog('Client Error:', status + ' ' + statusText);
-            fnOnFailed();
+            fnOnFailed(null, isLoadingProp, isLoadingFailedProp);
             return null;
          } else if (status>=500 && status<600) {
-           if (retryServer === 0) {
-             retryServer -= 1;
-             this._loadOptionsID = setTimeout( this._loadOptions({
-                toStateProp, uri, fnOnCompleted, fnOnFailed,
-                retryServer, retryNetwork
-             }), 3E3);
+           if (retryServer !== 0) {
+             option.retryServer = retryServer - 1;
+             this._loadOptionsID = setTimeout( this._loadOptions(option), 3E3);
            } else {
               _fnShowAlertDialog('Server Error:', status + ' ' + statusText);
-              fnOnFailed();
+              fnOnFailed(null, isLoadingProp, isLoadingFailedProp);
            }
            return null;
          }
       })
       .then((json) => {
         if (json) {
-          fnOnCompleted({toStateProp, json});
+          fnOnCompleted({toStateProp, isLoadingProp, json, optionJsonProp});
         }
       })
       .catch((error) => {
         if (retryNetwork === 0){
-           fnOnFailed(error);
+           fnOnFailed(error, isLoadingProp, isLoadingFailedProp);
         } else {
-          retryNetwork -= 1;
-          this._loadOptionsID = setTimeout( this._loadOptions({
-            toStateProp, uri, fnOnCompleted, fnOnFailed,
-            retryServer, retryNetwork
-          }), 2E3);
+          option.retryNetwork = retryNetwork - 1;
+          this._loadOptionsID = setTimeout( this._loadOptions(option), 2E3);
         }
       })
   },
 
-  _onLoadOptionsCompleted({toStateProp, json}){
-    const {optionsJsonProp} = this.props;
-    if (toStateProp && optionsJsonProp) {
+  _onLoadOptionsCompleted({toStateProp, isLoadingProp, json, optionJsonProp}){
+    if (toStateProp && optionJsonProp) {
        this.setState({
-         isLoading: false,
-         [toStateProp] : json[optionsJsonProp]
+         [isLoadingProp] : false,
+         [toStateProp] : json[optionJsonProp]
        });
     }
   },
-  _onLoadOptionsFailed(error){
+  _onLoadOptionsFailed(error, isLoadingProp, isLoadingFailedProp){
     this.setState({
-       isLoading : false,
-       isLoadingFailed : true
+       [isLoadingProp] : false,
+       [isLoadingFailedProp] : true
     })
     if (error instanceof TypeError){
       _fnShowAlertDialog(
@@ -76,14 +74,19 @@ const WithLoadOptions =  {
     }
   },
 
-  _handlerWithLoadOptions(toStateProp){
-    const {optionURI} = this.props;
-    if (optionURI) {
+  _handlerWithLoadOptions(
+       toStateProp, isLoadingProp='isLoading', isLoadingFailedProp='isLoadingFailed',
+       optionURI, optionJsonProp
+   ){
+    if (this.props.optionURI || optionURI) {
+      const _uri = (optionURI) ? optionURI : this.props.optionURI
+          , _jsonProp = (optionJsonProp) ? optionJsonProp : this.props.optionsJsonProp;
       this.setState(
-           {isLoading:true, isLoadingFailed: false},
+           {[isLoadingProp]:true, [isLoadingFailedProp]: false},
            this._loadOptions({
-             toStateProp,
-             uri : optionURI,
+             toStateProp, isLoadingProp, isLoadingFailedProp,
+             uri : _uri,
+             optionJsonProp : _jsonProp,
              fnOnCompleted : this._onLoadOptionsCompleted,
              fnOnFailed: this._onLoadOptionsFailed
            })

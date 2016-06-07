@@ -293,7 +293,9 @@ const AreaChartItem = React.createClass({
   },
 
   render(){
-    const {caption, config, onSetActive, onCloseItem} = this.props;
+    const {caption, config, onSetActive, onCloseItem} = this.props
+        , {itemCaption} = config.zhConfig
+        , _itemCaption = (itemCaption) ? itemCaption : caption;
     const {
             isOpen, isShowChart, isShowInfo, isShowIndicator,
             mfiConfigs
@@ -314,7 +316,7 @@ const AreaChartItem = React.createClass({
              style={_styleCaption}
              onClick={this._handlerToggleOpen}
           >
-             {caption}
+             {_itemCaption}
           </span>
           <ValueMovingBadge
              valueMoving={config.valueMoving}

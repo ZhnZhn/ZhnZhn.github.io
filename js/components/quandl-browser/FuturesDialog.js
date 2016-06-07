@@ -22,9 +22,9 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _ZhSelect = require('../ZhSelect');
+var _RowInputSelect = require('../dialogs/RowInputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
 var _ToolBarButton = require('../ToolBarButton');
 
@@ -38,17 +38,11 @@ var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
 
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
 
 var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.default, _WithLoadOptions2.default, {
 
-  displayName: 'QuandlFuturesChinaDceDialog',
+  displayName: 'FuturesDialog',
   getInitialState: function getInitialState() {
     this.code = null;
     this.OPTIONS_STATE_PROP = 'optionCodes';
@@ -89,20 +83,9 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
   },
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
-    var validationMessages = this._getValidationMessages();
-    if (validationMessages.isValid) {
-      var dataColumn = this.props.dataColumn;
-
-      var option = {
-        value: this.code.value,
-        code: this.code,
-        dataColumn: dataColumn
-      };
-      this.props.onLoad(option);
-    }
-    this._updateValidationMessages(validationMessages);
+    this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
-  _getValidationMessages: function _getValidationMessages() {
+  _createValidationMessages: function _createValidationMessages() {
     var msgOnNotSelected = this.props.msgOnNotSelected;
     var msg = [];
 
@@ -112,6 +95,19 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
 
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
+  },
+  _createLoadOption: function _createLoadOption() {
+    var dataColumn = this.props.dataColumn;
+
+    return {
+      value: this.code.value,
+      code: this.code,
+      dataColumn: dataColumn
+    };
+  },
+  _handlerClose: function _handlerClose() {
+    this._handlerWithValidationClose(this._createValidationMessages);
+    this.props.onClose();
   },
   render: function render() {
     var _props = this.props;
@@ -140,26 +136,16 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
         onShowChart: onShow,
         onClose: this._handlerClose
       },
-      _react2.default.createElement(
-        'div',
-        { style: styles.rowDiv, key: '1' },
-        _react2.default.createElement(
-          'span',
-          { style: styles.labelSpan },
-          'Code:'
-        ),
-        _react2.default.createElement(_ZhSelect2.default, {
-          width: '250',
-          isLoading: isLoading,
-          isLoadingFailed: isLoadingFailed,
-          onLoadOption: this._handlerLoadOptions,
-          options: optionCodes,
-          optionNames: 'Codes',
-          onSelect: this._handlerSelectCode
-        })
-      ),
+      _react2.default.createElement(_RowInputSelect2.default, {
+        caption: 'Code:',
+        isLoading: isLoading,
+        isLoadingFailed: isLoadingFailed,
+        options: optionCodes,
+        optionNames: 'Codes',
+        onLoadOption: this._handlerLoadOptions,
+        onSelect: this._handlerSelectCode
+      }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        key: '3',
         validationMessages: validationMessages
       })
     );

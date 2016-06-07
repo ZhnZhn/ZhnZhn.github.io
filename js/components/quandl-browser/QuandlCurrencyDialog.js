@@ -18,9 +18,9 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _ZhSelect = require('../ZhSelect');
+var _RowInputSelect = require('../dialogs/RowInputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
 var _ToolBarButton = require('../ToolBarButton');
 
@@ -38,13 +38,7 @@ var _QuandlCurrency = require('../../services/qe/QuandlCurrency');
 
 var _QuandlCurrency2 = _interopRequireDefault(_QuandlCurrency);
 
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
 
 var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidation2.default, {
 
@@ -82,27 +76,9 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidat
   },
   _handlerLoad: function _handlerLoad(event) {
     event.target.focus();
-    var validationMessages = this._getValidationMessages();
-    if (validationMessages.isValid) {
-      var _datesFragment$getVal = this.datesFragment.getValues();
-
-      var fromDate = _datesFragment$getVal.fromDate;
-      var toDate = _datesFragment$getVal.toDate;
-      var dataColumn = this.props.dataColumn;
-
-      var option = {
-        value: this.source.value + '/' + this.currency.value,
-        source: this.source,
-        currency: this.currency,
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn: dataColumn
-      };
-      this.props.onLoad(option);
-    }
-    this._updateValidationMessages(validationMessages);
+    this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
-  _getValidationMessages: function _getValidationMessages() {
+  _createValidationMessages: function _createValidationMessages() {
     var msgOnNotSelected = this.props.msgOnNotSelected;
 
     var msg = [];
@@ -114,10 +90,10 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidat
       msg.push(msgOnNotSelected('Currency'));
     }
 
-    var _datesFragment$getVal2 = this.datesFragment.getValidation();
+    var _datesFragment$getVal = this.datesFragment.getValidation();
 
-    var isValid = _datesFragment$getVal2.isValid;
-    var datesMsg = _datesFragment$getVal2.datesMsg;
+    var isValid = _datesFragment$getVal.isValid;
+    var datesMsg = _datesFragment$getVal.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -127,17 +103,39 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidat
 
     return msg;
   },
+  _createLoadOption: function _createLoadOption() {
+    var _datesFragment$getVal2 = this.datesFragment.getValues();
+
+    var fromDate = _datesFragment$getVal2.fromDate;
+    var toDate = _datesFragment$getVal2.toDate;
+    var _props = this.props;
+    var dataColumn = _props.dataColumn;
+    var fnValue = _props.fnValue;
+
+    return {
+      value: fnValue(this.source.value, this.currency.value),
+      source: this.source,
+      currency: this.currency,
+      fromDate: fromDate,
+      toDate: toDate,
+      dataColumn: dataColumn
+    };
+  },
+  _handlerClose: function _handlerClose() {
+    this._handlerWithValidationClose(this._createValidationMessages);
+    this.props.onClose();
+  },
   render: function render() {
     var _this = this;
 
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var onShow = _props.onShow;
-    var onClose = _props.onClose;
-    var initFromDate = _props.initFromDate;
-    var initToDate = _props.initToDate;
-    var msgOnNotValidFormat = _props.msgOnNotValidFormat;
-    var onTestDate = _props.onTestDate;
+    var _props2 = this.props;
+    var isShow = _props2.isShow;
+    var onShow = _props2.onShow;
+    var onClose = _props2.onClose;
+    var initFromDate = _props2.initFromDate;
+    var initToDate = _props2.initToDate;
+    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
+    var onTestDate = _props2.onTestDate;
     var _state = this.state;
     var optionCurrencySources = _state.optionCurrencySources;
     var optionCurrencies = _state.optionCurrencies;
@@ -158,36 +156,17 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidat
         onShowChart: onShow,
         onClose: this._handlerClose
       },
-      _react2.default.createElement(
-        'div',
-        { style: styles.rowDiv, key: '1' },
-        _react2.default.createElement(
-          'span',
-          { style: styles.labelSpan },
-          'Source:'
-        ),
-        _react2.default.createElement(_ZhSelect2.default, {
-          width: '250',
-          onSelect: this._handlerSelectSource,
-          options: optionCurrencySources
-        })
-      ),
-      _react2.default.createElement(
-        'div',
-        { style: styles.rowDiv, key: '2' },
-        _react2.default.createElement(
-          'span',
-          { style: styles.labelSpan },
-          'Currency:'
-        ),
-        _react2.default.createElement(_ZhSelect2.default, {
-          width: '250',
-          onSelect: this._handlerSelectCurrency,
-          options: optionCurrencies
-        })
-      ),
+      _react2.default.createElement(_RowInputSelect2.default, {
+        caption: 'Source:',
+        options: optionCurrencySources,
+        onSelect: this._handlerSelectSource
+      }),
+      _react2.default.createElement(_RowInputSelect2.default, {
+        caption: 'Currency:',
+        options: optionCurrencies,
+        onSelect: this._handlerSelectCurrency
+      }),
       _react2.default.createElement(_DatesFragment2.default, {
-        key: '3',
         ref: function ref(c) {
           return _this.datesFragment = c;
         },
@@ -197,7 +176,6 @@ var QuandlCurrencyDialog = _react2.default.createClass(_extends({}, _WithValidat
         onTestDate: onTestDate
       }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        key: '4',
         validationMessages: validationMessages
       })
     );

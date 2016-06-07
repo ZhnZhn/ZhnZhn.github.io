@@ -10,19 +10,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _WithValidation = require('./WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
-
-var _WithLoadOptions = require('./WithLoadOptions');
-
-var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
-
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _RowInputSelect = require('./RowInputSelect');
+var _WithLoadOptions = require('../dialogs/WithLoadOptions');
+
+var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
+
+var _WithValidation = require('../dialogs/WithValidation');
+
+var _WithValidation2 = _interopRequireDefault(_WithValidation);
+
+var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
@@ -40,26 +40,23 @@ var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFra
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.default, _WithLoadOptions2.default, {
-
-  displayName: 'DialogType3',
-
+var BigMacDialog = _react2.default.createClass(_extends({
+  displayName: 'BigMacDialog'
+}, _WithLoadOptions2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
-    this.stock = null;
-    this.OPTIONS_STATE_PROP = 'optionStocks';
-    var _isLoading = this.props.optionURI ? true : false,
-        _optionStocks = this.props.optionURI ? [] : this.props.optionStocks;
+    this.country = null;
+    this.metric = null;
     return {
-      isLoading: _isLoading,
-      isLoadingFailed: false,
-      optionStocks: _optionStocks,
+      isLoadingCountries: false,
+      isLoadingCountriesFailed: false,
+      optionCountries: [],
+      optionMetrics: [{ caption: 'Local Price', value: 1 }, { caption: 'Dollar Exchange', value: 2 }, { caption: 'Dollar Price', value: 3 }, { caption: 'Dollar PPP', value: 4 }, { caption: 'Dollar Valuation', value: 5 }],
+
       validationMessages: []
     };
   },
   componentDidMount: function componentDidMount() {
-    if (this.props.optionURI) {
-      this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
-    }
+    this._handlerLoadCountry();
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -71,56 +68,34 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   },
   componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      if (this.state.isLoadingFailed && this.props.optionURI && this.props.isShow) {
-        this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
+      if (this.state.isLoadingCountriesFailed && this.props.isShow) {
+        this._handlerLoadCountry();
       }
     }
   },
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();
   },
-  _handlerLoadOptions: function _handlerLoadOptions() {
-    //if (this.props.optionURI){
-    this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
-    //}
+  _handlerLoadCountry: function _handlerLoadCountry() {
+    var _props = this.props;
+    var countryURI = _props.countryURI;
+    var countryJsonProp = _props.countryJsonProp;
+
+    this._handlerWithLoadOptions('optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed', countryURI, countryJsonProp);
   },
-  _handlerSelectStock: function _handlerSelectStock(stock) {
-    this.stock = stock;
+  _handlerSelectCountry: function _handlerSelectCountry(country) {
+    this.country = country;
   },
-  _handlerLoad: function _handlerLoad(event) {
-    event.target.focus();
+  _handlerSelectMetric: function _handlerSelectMetric(metric) {
+    this.metric = metric;
+  },
+  _handlerLoad: function _handlerLoad() {
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
-
-  /*
-  _handlerLoad(event){
-     event.target.focus();
-     const validationMessages = this._getValidationMessages();
-     if (validationMessages.isValid){
-       const {fromDate, toDate} = this.datesFragment.getValues()
-           , {dataColumn, fnItemCaption} = this.props
-           , _itemCaption = (typeof fnItemCaption === 'function') ?
-                          fnItemCaption(this.stock.value) : undefined;
-       const option = {
-         value : this.stock.value,
-         stock: this.stock,
-         fromDate: fromDate,
-         toDate: toDate,
-         dataColumn : dataColumn,
-         itemCaption : _itemCaption
-       }
-       this.props.onLoad(option);
-     }
-     this._updateValidationMessages(validationMessages);
-  },
-  */
   _createValidationMessages: function _createValidationMessages() {
-    var _props$itemCaption = this.props.itemCaption;
-    var itemCaption = _props$itemCaption === undefined ? 'Stock' : _props$itemCaption;
-
     var msg = [];
-    if (!this.stock) {
-      msg.push(this.props.msgOnNotSelected(itemCaption));
+    if (!this.country) {
+      msg.push(this.props.msgOnNotSelected('Country'));
     }
 
     var _datesFragment$getVal = this.datesFragment.getValidation();
@@ -139,17 +114,15 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _props = this.props;
-    var dataColumn = _props.dataColumn;
-    var fnItemCaption = _props.fnItemCaption;
-    var _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
+    var _dataColumn = this.metric ? this.metric.value : 1;
+    var fnValue = this.props.fnValue;
+
     return {
-      value: this.stock.value,
-      stock: this.stock,
+      value: fnValue(this.country.value),
       fromDate: fromDate,
       toDate: toDate,
-      dataColumn: dataColumn,
-      itemCaption: _itemCaption
+      dataColumn: _dataColumn,
+      itemCaption: this.country.caption
     };
   },
   _handlerClose: function _handlerClose() {
@@ -160,22 +133,18 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     var _this = this;
 
     var _props2 = this.props;
-    var caption = _props2.caption;
     var isShow = _props2.isShow;
     var onShow = _props2.onShow;
     var onClose = _props2.onClose;
-    var _props2$itemCaption = _props2.itemCaption;
-    var itemCaption = _props2$itemCaption === undefined ? 'Stock:' : _props2$itemCaption;
-    var _props2$optionNames = _props2.optionNames;
-    var optionNames = _props2$optionNames === undefined ? 'Stocks' : _props2$optionNames;
     var initFromDate = _props2.initFromDate;
     var initToDate = _props2.initToDate;
     var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
     var onTestDate = _props2.onTestDate;
     var _state = this.state;
-    var isLoading = _state.isLoading;
-    var isLoadingFailed = _state.isLoadingFailed;
-    var optionStocks = _state.optionStocks;
+    var optionCountries = _state.optionCountries;
+    var isLoadingCountries = _state.isLoadingCountries;
+    var isLoadingCountriesFailed = _state.isLoadingCountriesFailed;
+    var optionMetrics = _state.optionMetrics;
     var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -187,20 +156,25 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     return _react2.default.createElement(
       _ZhDialog2.default,
       {
-        caption: caption,
+        caption: 'Economist Big Mac Index',
         isShow: isShow,
         commandButtons: _commandButtons,
         onShowChart: onShow,
         onClose: this._handlerClose
       },
       _react2.default.createElement(_RowInputSelect2.default, {
-        caption: itemCaption,
-        options: optionStocks,
-        optionNames: optionNames,
-        isLoading: isLoading,
-        isLoadingFailed: isLoadingFailed,
-        onLoadOption: this._handlerLoadOptions,
-        onSelect: this._handlerSelectStock
+        caption: 'Country:',
+        options: optionCountries,
+        optionNames: 'Countries',
+        isLoading: isLoadingCountries,
+        isLoadingFailed: isLoadingCountriesFailed,
+        onLoadOption: this._handlerLoadCountry,
+        onSelect: this._handlerSelectCountry
+      }),
+      _react2.default.createElement(_RowInputSelect2.default, {
+        caption: 'Metric:',
+        options: optionMetrics,
+        onSelect: this._handlerSelectMetric
       }),
       _react2.default.createElement(_DatesFragment2.default, {
         ref: function ref(c) {
@@ -218,5 +192,5 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   }
 }));
 
-exports.default = DialogType3;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType3.js.map
+exports.default = BigMacDialog;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\BigMacDialog.js.map
