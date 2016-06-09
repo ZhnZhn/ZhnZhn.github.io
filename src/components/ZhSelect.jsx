@@ -464,12 +464,12 @@ const ZhSelect = React.createClass({
 
     const _domOptions = (isLocalMode || isShowOption) ? this.renderOptions() : null;
 
-    const  {isLoading, isLoadingFailed} = this.props
+    const  {isLoading, isLoadingFailed, placeholder} = this.props
         ,  {optionName, optionNames} = this.state;
 
     let _domAfterInput, _placeholder;
     if (!isLoading && !isLoadingFailed){
-      _placeholder=`Select${optionName}...`;
+      _placeholder= (placeholder) ? placeholder : `Select${optionName}...`;
       _domAfterInput = (
         <span
            style={styles.arrowCell}

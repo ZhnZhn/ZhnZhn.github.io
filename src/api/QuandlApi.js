@@ -29,21 +29,13 @@ const CheckCaptions = {
   CLIENT : 'Request Error',
   SERVER : 'Response Error'
 }
-QuandlApi.checkResponse = function(response, json){
-    const {status, statusText} = response;
-    if (status>=200 && status<400){
-      return true;
-    } else if (status>=400 && status<500){
-     if (json.quandl_error && json.quandl_error.message){
-       throw {zhCaption : CheckCaptions.CLIENT, message : json.quandl_error.message }
-     } else {
-       throw {zhCaption : CheckCaptions.CLIENT, message : statusText }
-     }
-    } else if (status>=500 && status<600){
-       throw {zhCaption : CheckCaptions.SERVER, message : statusText }
-    } else {
-      return false;
-    }
+
+QuandlApi.checkResponse = function(json){
+  if (json.quandl_error && json.quandl_error.message){
+     throw {zhCaption : CheckCaptions.CLIENT, message : json.quandl_error.message }
+  }
+  return true;
 }
+
 
 export default QuandlApi;

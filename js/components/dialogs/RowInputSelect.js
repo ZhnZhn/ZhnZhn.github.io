@@ -29,6 +29,7 @@ var RowInputSelect = _react2.default.createClass({
     var isLoadingFailed = _props.isLoadingFailed;
     var options = _props.options;
     var optionNames = _props.optionNames;
+    var placeholder = _props.placeholder;
     var onLoadOption = _props.onLoadOption;
     var onSelect = _props.onSelect;
 
@@ -46,6 +47,7 @@ var RowInputSelect = _react2.default.createClass({
         isLoadingFailed: isLoadingFailed,
         options: options,
         optionNames: optionNames,
+        placeholder: placeholder,
         onLoadOption: onLoadOption,
         onSelect: onSelect
       })

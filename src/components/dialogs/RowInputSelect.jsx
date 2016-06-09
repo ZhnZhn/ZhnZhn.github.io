@@ -10,7 +10,7 @@ const RowInputSelect = React.createClass({
     const {
            caption,
            isLoading, isLoadingFailed,
-           options, optionNames,
+           options, optionNames, placeholder,
            onLoadOption, onSelect
          } = this.props;
     return (
@@ -24,6 +24,7 @@ const RowInputSelect = React.createClass({
             isLoadingFailed={isLoadingFailed}
             options={options}
             optionNames={optionNames}
+            placeholder={placeholder}
             onLoadOption={onLoadOption}
             onSelect={onSelect}
           />

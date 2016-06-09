@@ -438,8 +438,20 @@ var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   }
 };
 
-var fnGetSeries = function fnGetSeries(config, json, yPointIndex, chartId) {
+var _fnCreateZhConfig = function _fnCreateZhConfig(option) {
+  return {
+    id: option.value,
+    dataColumn: option.dataColumn,
+    itemCaption: option.itemCaption
+  };
+};
 
+//const fnGetSeries = function(config, json, yPointIndex, chartId){
+var fnGetSeries = function fnGetSeries(config, json, option) {
+  var yPointIndex = option.dataColumn,
+      chartId = option.value;
+
+  config.zhConfig = _fnCreateZhConfig(option);
   config.info = _fnGetDatasetInfo(json);
 
   var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex);
@@ -497,12 +509,16 @@ var fnConfigAxes = function fnConfigAxes(result) {
 
 var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
 
-QuandlAdapter.toConfig = function (json, yPointIndex, chartId) {
+QuandlAdapter.toConfig = function (json, option) {
   var config = _ChartConfig2.default.fBaseAreaConfig();
-  return fnQuandlFlow(config, json, yPointIndex, chartId);
+  return fnQuandlFlow(config, json, option);
 };
 
-QuandlAdapter.toSeries = function (json, yPointIndex, chartId, parentId) {
+QuandlAdapter.toSeries = function (json, option) {
+  var yPointIndex = option.dataColumn,
+      chartId = option.value,
+      parentId = option.parentId;
+
   var data = json.dataset.data.map(function (point, index) {
     var arrDate = point[0].split('-');
     return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];

@@ -1,9 +1,11 @@
 
 const WithValidation = {
 
-  _handlerWithValidationLoad(validationMessages, fnCreateOption){
-    if (validationMessages.isValid){
-      this.props.onLoad(fnCreateOption());
+  _handlerWithValidationLoad(
+      validationMessages, fnCreateOption, onLoad = this.props.onLoad
+  ){
+    if (validationMessages.isValid){      
+      onLoad(fnCreateOption());
     }
     this._updateValidationMessages(validationMessages);
   },

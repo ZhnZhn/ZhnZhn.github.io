@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var WithValidation = {
   _handlerWithValidationLoad: function _handlerWithValidationLoad(validationMessages, fnCreateOption) {
+    var onLoad = arguments.length <= 2 || arguments[2] === undefined ? this.props.onLoad : arguments[2];
+
     if (validationMessages.isValid) {
-      this.props.onLoad(fnCreateOption());
+      onLoad(fnCreateOption());
     }
     this._updateValidationMessages(validationMessages);
   },

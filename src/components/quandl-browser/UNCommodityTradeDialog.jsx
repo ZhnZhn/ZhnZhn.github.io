@@ -9,8 +9,15 @@ import ToolBarButton from '../ToolBarButton';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
-import DialogStyles from '../styles/DialogStyles';
-const styles = DialogStyles;
+const Placeholder = {
+  TRADE : {
+    INIT : 'First Load Meta',
+    SELECT : 'Select...'
+  }
+};
+const Filter = {
+  DEFAULT : 'Default Empty'
+};
 
 const UNCommodityTradeDialog = React.createClass({
   ...WithLoadOptions,
@@ -19,7 +26,9 @@ const UNCommodityTradeDialog = React.createClass({
   getInitialState(){
     this.nation = null;
     this.commodity = null;
+    this.tradeFilter = null;
     this.trade = null;
+    this.optionTrades = null;
 
     return {
       isLoadingCountries : false,
@@ -30,10 +39,20 @@ const UNCommodityTradeDialog = React.createClass({
       isLoadingCommoditiesFailed : false,
       optionCommodities : [],
 
-      optionTrades : [
-        {caption: 'Import', value: 1},
-        {caption: 'Export', value: 3}
+      optionTradeFilter : [
+        {caption: 'Default Empty Filter', value: Filter.DEFAULT},
+        {caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)'},
+        {caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)'},
+        {caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)'},
+        {caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)'},
+        {caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)'}
+
       ],
+
+      isLoadingTrade : false,
+      isLoadingTradeFailed : false,
+      optionTrades : [],
+      placeholderTrade : Placeholder.TRADE.INIT,
 
       validationMessages: []
     }
@@ -68,6 +87,33 @@ const UNCommodityTradeDialog = React.createClass({
     this._unmountWithLoadOptions();
   },
 
+  _initTrade(){
+    this.trade = null;
+    this.optionTrades = null;
+    this.setState({
+      optionTrades: [],
+      placeholderTrade: Placeholder.TRADE.INIT,
+      isLoadingTradeFailed : false
+    });
+  },
+
+  _filterTrade(){
+    let options;
+    if (this.tradeFilter && this.optionTrades){
+      const filterValue = this.tradeFilter.value;
+      if (filterValue !== Filter.DEFAULT){
+        options = this.optionTrades.filter((item,index)=>{
+           return item.caption.indexOf(filterValue) !== -1;
+        })
+      } else {
+        options = this.optionTrades;
+      }
+    } else {
+      options = this.optionTrades;
+    }
+    return options;
+  },
+
   _handlerLoadNation(){
     const {countryURI, countryJsonProp} = this.props;
     this._handlerWithLoadOptions(
@@ -84,20 +130,31 @@ const UNCommodityTradeDialog = React.createClass({
   },
   _handlerSelectNation(nation){
     this.nation = nation;
+    this._initTrade();
   },
   _handlerSelectCommodity(commodity){
     this.commodity = commodity;
+    this._initTrade();
+  },
+  _handlerSelectTradeFilter(filter){
+     this.tradeFilter = filter;
+     this.setState({optionTrades: this._filterTrade()});
   },
   _handlerSelectTrade(trade){
     this.trade = trade;
   },
-  _handlerLoad(){
+  _handlerLoadMeta(){
     this._handlerWithValidationLoad(
-      this._createValidationMessages(),
-      this._createLoadOption
+      this._createMetaValidationMessages(),
+      this._createLoadMetaOption,
+      this._loadMeta
     );
   },
-  _createValidationMessages(){
+  _loadMeta(option){
+    this.props.onLoad(option);
+    this.setState({isLoadingTrade: true});
+  },
+  _createMetaValidationMessages(){
      let msg = [];
      if (!this.nation)    { msg.push(this.props.msgOnNotSelected('Nation'));}
      if (!this.commodity) { msg.push(this.props.msgOnNotSelected('Commodity'));}
@@ -106,7 +163,42 @@ const UNCommodityTradeDialog = React.createClass({
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   },
-  _createLoadOption(){
+  _createLoadMetaOption(){
+    const {fromDate, toDate} = this.datesFragment.getValues()
+        , {fnValue} = this.props;
+    return {
+       value : fnValue(this.commodity.value, this.nation.value),
+       fromDate: fromDate,
+       toDate: toDate,
+       isLoadMeta : true,
+       onLoad : this._setOptionTrades,
+       onFailed : this._loadMetaOptionFailed
+    }
+  },
+  _setOptionTrades(optionTrades){
+    this.optionTrades = optionTrades;
+    this.setState({
+      optionTrades: this._filterTrade(),
+      isLoadingTrade: false,
+      placeholderTrade: Placeholder.TRADE.SELECT
+    });
+  },
+  _loadMetaOptionFailed(){
+    this.setState({isLoadingTrade:false, isLoadingTradeFailed:true})
+  },
+  _handlerLoadData(){
+    this._handlerWithValidationLoad(
+      this._createDataValidationMessages(),
+      this._createLoadDataOption
+    );
+  },
+  _createDataValidationMessages(){
+     let msg = [];
+     if (!this.trade)  {msg.push(this.props.msgOnNotSelected('Trade'));}
+     msg.isValid = (msg.length === 0) ? true : false;
+     return msg;
+  },
+  _createLoadDataOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
         , _dataColumn = (this.trade) ? this.trade.value : this.props.dataColumn
         , {fnValue} = this.props;
@@ -114,7 +206,7 @@ const UNCommodityTradeDialog = React.createClass({
        value : fnValue(this.commodity.value, this.nation.value),
        fromDate: fromDate,
        toDate: toDate,
-       dataColumn : _dataColumn
+       dataColumn : _dataColumn,
     }
   },
   _handlerClose(){
@@ -131,15 +223,22 @@ const UNCommodityTradeDialog = React.createClass({
         , {
            optionCountries, isLoadingCountries, isLoadingCountriesFailed,
            optionCommodities, isLoadingCommodities, isLoadingCommoditiesFailed,
-           optionTrades,
+           optionTradeFilter,
+           isLoadingTrade, isLoadingTradeFailed, optionTrades, placeholderTrade,
            validationMessages
          } = this.state
         , _commandButtons = [
        <ToolBarButton
           key="a"
           type="TypeC"
-          caption="Load"
-          onClick={this._handlerLoad}
+          caption="Load Meta"
+          onClick={this._handlerLoadMeta}
+       />,
+       <ToolBarButton
+          key="b"
+          type="TypeC"
+          caption="Load Data"
+          onClick={this._handlerLoadData}
        />
     ];
 
@@ -170,9 +269,21 @@ const UNCommodityTradeDialog = React.createClass({
                 onSelect={this._handlerSelectCommodity}
              />
              <RowInputSelect
+               caption={'Filter Trade:'}
+               options={optionTradeFilter}
+               placeholder={'Filter...'}
+               onSelect={this._handlerSelectTradeFilter}
+             />
+             <RowInputSelect
                caption={'Trade:'}
                options={optionTrades}
+               optionNames={'Meta'}
+               isLoading={isLoadingTrade}
+               isLoadingFailed={isLoadingTradeFailed}
+               placeholder={placeholderTrade}
+               onLoadOption={this._handlerLoadMeta}
                onSelect={this._handlerSelectTrade}
+
              />
              <DatesFragment
                  ref={c => this.datesFragment = c}

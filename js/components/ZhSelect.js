@@ -500,6 +500,7 @@ var ZhSelect = _react2.default.createClass({
     var _props2 = this.props;
     var isLoading = _props2.isLoading;
     var isLoadingFailed = _props2.isLoadingFailed;
+    var placeholder = _props2.placeholder;
     var _state3 = this.state;
     var optionName = _state3.optionName;
     var optionNames = _state3.optionNames;
@@ -508,7 +509,7 @@ var ZhSelect = _react2.default.createClass({
     var _domAfterInput = void 0,
         _placeholder = void 0;
     if (!isLoading && !isLoadingFailed) {
-      _placeholder = 'Select' + optionName + '...';
+      _placeholder = placeholder ? placeholder : 'Select' + optionName + '...';
       _domAfterInput = _react2.default.createElement(
         'span',
         {
