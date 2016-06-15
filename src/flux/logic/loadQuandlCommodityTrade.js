@@ -30,6 +30,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
   } else {
     const {caption, descr} = Msg.Alert.ALREADY_EXIST
     onFailed({caption, descr, chartId});
+    option.onFailed();  
   }
 }
 

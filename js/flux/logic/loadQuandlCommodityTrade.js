@@ -55,6 +55,7 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
     var descr = _Msg$Alert$ALREADY_EX.descr;
 
     onFailed({ caption: caption, descr: descr, chartId: chartId });
+    option.onFailed();
   }
 };
 

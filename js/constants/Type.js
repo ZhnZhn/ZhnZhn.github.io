@@ -25,4 +25,10 @@ var ModalDialog = exports.ModalDialog = {
   EDIT_WATCH_GROUP: 'editWatchGroup',
   EDIT_WATCH_LIST: 'editWatchList'
 };
+
+var ChartType = exports.ChartType = {
+  AREA: 'AREA',
+  SEMI_DONUT: 'SEMI_DONUT',
+  STACKED_AREA: 'STACKED_AREA'
+};
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

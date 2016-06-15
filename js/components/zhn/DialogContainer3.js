@@ -18,8 +18,7 @@ var styles = {
     position: 'absolute',
     top: '70px',
     left: '10px',
-    //width: '1100px',
-    width: '95%'
+    width: '99%'
   }
 };
 

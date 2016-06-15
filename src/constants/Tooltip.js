@@ -84,6 +84,24 @@ const _fnHighLowTooltip = function({date, id, value, point}){
   </div>`
 }
 
+const _fnPieTooltip = function({id, value, point}){
+  return _fnTooltipHeader(point.nameFull, id) +
+  `<div class="tp__body">
+  <span class="tp__body__title">Value: </span>
+  <span class="tp__body__value">${value}</span></br>
+  </div>`
+}
+
+const _fnStackedAreaTooltip = function({id, value, point}){
+  return _fnTooltipHeader(point.nameFull, id) +
+  `<div class="tp__body">
+  <span class="tp__body__title">Year: </span>
+  <span class="tp__body__value">${point.category}</span></br>
+  <span class="tp__body__title">Value: </span>
+  <span class="tp__body__value">${value}</span></br>
+  </div>`
+}
+
 const _fnAddHandlerClose = function(id, point){
   setTimeout( function(){
           document.getElementById(id)
@@ -115,5 +133,8 @@ Tooltip.fnSplitRatioPointFormatter = _fnBasePointFormatter(_fnSplitRatio, false,
 Tooltip.fnVolumePointFormatter = _fnBasePointFormatter(_fnVolumeTooltip, false, true);
 Tooltip.fnATHPointFormatter = _fnBasePointFormatter(_fnATHTooltip, false, false);
 Tooltip.fnHighLowPointFormatter = _fnBasePointFormatter(_fnHighLowTooltip, false, false);
+
+Tooltip.fnPiePointFormatter = _fnBasePointFormatter(_fnPieTooltip, false, true);
+Tooltip.fnStackedAreaPointFormatter = _fnBasePointFormatter(_fnStackedAreaTooltip, false, true);
 
 export default Tooltip

@@ -4,17 +4,51 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
+
+var _Chart = require('./Chart');
+
+var _Chart2 = _interopRequireDefault(_Chart);
 
 var _Tooltip = require('./Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
+var _WithPieChart = require('./WithPieChart');
+
+var _WithPieChart2 = _interopRequireDefault(_WithPieChart);
+
+var _WithStackAreaChart = require('./WithStackAreaChart');
+
+var _WithStackAreaChart2 = _interopRequireDefault(_WithStackAreaChart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChartConfig = {};
+var ChartConfig = _extends({}, _WithPieChart2.default, _WithStackAreaChart2.default);
+
+var _fnCreateMonochromePieColors = function _fnCreateMonochromePieColors(_ref) {
+  var _ref$base = _ref.base1;
+  var base1 = _ref$base === undefined ? '#7cb5ec' : _ref$base;
+  var _ref$base2 = _ref.base2;
+  var base2 = _ref$base2 === undefined ? '#90ed7d' : _ref$base2;
+
+  var colors = [],
+      i;
+
+  for (i = 0; i < 4; i += 1) {
+    // Start out with a darkened base color (negative brighten), and end
+    // up with a much brighter color
+    colors.push(_highcharts2.default.Color(base1).brighten((i - 3) / 7).get());
+  }
+  for (i = 0; i < 4; i += 1) {
+    colors.push(_highcharts2.default.Color(base2).brighten((i - 3) / 7).get());
+  }
+  return colors;
+};
 
 ChartConfig.theme = {
   credits: {
@@ -28,9 +62,9 @@ ChartConfig.theme = {
   },
   chart: {
     //width: 600,
-    height: 300,
-    spacingTop: 20,
-    spacingBottom: 24,
+    height: _Chart2.default.HEIGHT,
+    spacingTop: _Chart2.default.SPACING_TOP,
+    spacingBottom: _Chart2.default.SPACING_BOTTOM,
     plotBackgroundColor: "rgba(77,77,77,1)",
     backgroundColor: "rgba(77,77,77,1)",
     reflow: false,
@@ -67,6 +101,11 @@ ChartConfig.theme = {
           this.chart.zhTooltip.refresh(event.point, event);
         }
       }
+    },
+    pie: {
+      colors: _fnCreateMonochromePieColors({
+        base1: '#7cb5ec', base2: '#90ed7d'
+      })
     }
   },
   tooltip: {

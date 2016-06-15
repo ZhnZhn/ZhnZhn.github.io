@@ -5,9 +5,8 @@ const styles = {
     zIndex : 30,
     position: 'absolute',
     top: '70px',
-    left: '10px',
-    //width: '1100px',
-    width: '95%',
+    left: '10px',    
+    width: '99%',
   }
 };
 

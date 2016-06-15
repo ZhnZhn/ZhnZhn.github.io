@@ -2,8 +2,8 @@
 import _ from 'lodash';
 import Big from 'big.js';
 
-import {Direction} from '../constants/Type';
-
+import {ChartType} from '../constants/Type';
+import Chart from '../constants/Chart';
 import ChartConfig from '../constants/ChartConfig';
 import Tooltip from '../constants/Tooltip';
 
@@ -12,6 +12,13 @@ import {
         fnRemoveSeries,
         fnGetConfigMfi
       } from './IndicatorSma';
+import {
+        fnCreateZhConfig,
+        fnCreateDatasetInfo,
+        fnCreateValueMovingFromSeria
+      } from './QuandlAdapterFn';
+import {fCreatePieConfig} from './QuandlAdapterToPie';
+import {fCreateStackedAreaConfig} from './QuandlAdapterToStackedArea';
 
 const QuandlAdapter = {};
 
@@ -28,55 +35,6 @@ const fnCheckWithPrev = function(arr, checkedDate, predicate){
    }
 }
 
-const fnGetXAxesConfig = function(){
-  return {
-    opposite : true,
-    tickLength : 0,
-    tickPosition : 'inside',
-    labels : {
-      y : -5
-    }
-  }
-}
-
-const _fnGetDatasetInfo = function(json){
-  const dataset = json.dataset;
-  return  {
-     name : dataset.name,
-     description : dataset.description,
-     newest_available_date : dataset.newest_available_date,
-     oldest_available_date : dataset.oldest_available_date,
-     frequency : dataset.frequency
-  };
-}
-
-const _fnGetValueMoving = function(seria){
-
-  const len = seria.length
-      , nowValue = (len>0) ?
-            ( (seria[len-1][1]) ? seria[len-1][1] : '0.0' ) : '0.0'
-      , bWasValue = (len>1) ?
-            ( (seria[len-2][1] ) ? Big(seria[len-2][1]) : Big(0.0) ) : Big(0.0)
-      , bDelta = bWasValue.minus(nowValue)
-      , bPercent = (len>1 && !bWasValue.eq(Big(0.0)) )
-           ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : Big(0.0);
-
-  let direction;
-  if (bDelta.gt(0.0)){
-    direction = Direction.DOWN;
-  } else if (!bDelta.gte(0.0)){
-    direction = Direction.UP;
-  } else {
-    direction = Direction.EQUAL;
-  }
-
-  return {
-    value : ChartConfig.fnNumberFormat(nowValue),
-    delta : ChartConfig.fnNumberFormat(bDelta.abs().toString()),
-    percent : bPercent.toString() + '%',
-    direction
-  };
-}
 
 const _fnConvertToUTC = function(point, result){
    const arrDate = point[0].split('-');
@@ -401,21 +359,13 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
   }
 };
 
-const _fnCreateZhConfig = function(option){
-  return {
-    id : option.value,
-    dataColumn: option.dataColumn,
-    itemCaption : option.itemCaption
-  }
-}
 
-//const fnGetSeries = function(config, json, yPointIndex, chartId){
 const fnGetSeries = function(config, json, option){
    const yPointIndex = option.dataColumn
        , chartId = option.value;
 
-   config.zhConfig = _fnCreateZhConfig(option);
-   config.info = _fnGetDatasetInfo(json);
+   config.zhConfig = fnCreateZhConfig(option);
+   config.info = fnCreateDatasetInfo(json);
 
    const {
      seria, minPoint, maxPoint,
@@ -429,7 +379,7 @@ const fnGetSeries = function(config, json, option){
    config.zhFnAddSeriesSma = fnAddSeriesSma;
    config.zhFnRemoveSeries = fnRemoveSeries;
 
-   config.valueMoving = _fnGetValueMoving(seria);
+   config.valueMoving = fnCreateValueMovingFromSeria(seria);
    config.series[0].data = seria;
    config.series[0].zhSeriaId = chartId;
 
@@ -456,7 +406,8 @@ const fnConfigAxes = function(result){
   config.yAxis.plotLines[1].label.text = ChartConfig.fnNumberFormat(minPoint);
   config.yAxis.opposite = true;
 
-  config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
+  //config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
+  config.xAxis = Chart.fXAxisOpposite(config.xAxis);
 
   return result
 }
@@ -464,9 +415,21 @@ const fnConfigAxes = function(result){
 const fnQuandlFlow = _.flow(fnGetSeries, fnConfigAxes);
 
 QuandlAdapter.toConfig = function(json, option){
-   const config = ChartConfig.fBaseAreaConfig();
-   return fnQuandlFlow(config, json, option);
+   const {seriaType=ChartType.AREA} = option;
+
+   switch (seriaType) {
+     case ChartType.AREA :
+        const config = ChartConfig.fBaseAreaConfig();
+        return fnQuandlFlow(config, json, option);
+      case ChartType.SEMI_DONUT :
+        return fCreatePieConfig(json, option);
+      case ChartType.STACKED_AREA :
+        return fCreateStackedAreaConfig(json, option);
+      default :
+        return fnQuandlFlow(ChartConfig.fBaseAreaConfig(), json, option);
+   }
 }
+
 
 QuandlAdapter.toSeries = function(json, option){
   const yPointIndex = option.dataColumn

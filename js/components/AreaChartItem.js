@@ -210,7 +210,7 @@ var AreaChartItem = _react2.default.createClass({
     this.setState({ mfiConfigs: this.state.mfiConfigs });
   },
   _createChartToolBar: function _createChartToolBar(config) {
-    var _btIndicator = _react2.default.createElement(
+    var _btIndicator = !config.zhConfig.isWithoutIndicator ? _react2.default.createElement(
       _ButtonTab2.default,
       {
         caption: 'Indicator',
@@ -219,14 +219,14 @@ var AreaChartItem = _react2.default.createClass({
         onClick: this._handlerClickIndicator
       },
       _react2.default.createElement('span', { className: 'arrow-down' })
-    );
+    ) : undefined;
 
-    var _btAdd = _react2.default.createElement(_ButtonTab2.default, {
+    var _btAdd = !config.zhConfig.isWithoutAdd ? _react2.default.createElement(_ButtonTab2.default, {
       style: { left: '240px' },
       caption: 'Add',
       isShow: false,
       onClick: this._handlerAddToWatch
-    });
+    }) : undefined;
 
     var _btInfo = config.info ? _react2.default.createElement(_ButtonTab2.default, {
       caption: 'Info',

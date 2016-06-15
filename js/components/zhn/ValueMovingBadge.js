@@ -50,6 +50,16 @@ var styles = {
 
 var ValueMovingBadge = _react2.default.createClass({
   displayName: 'ValueMovingBadge',
+  getDefaultProps: function getDefaultProps() {
+    return {
+      valueMoving: {
+        value: 0,
+        delta: 0,
+        percent: 0,
+        direction: _Type.Direction.EQUAL
+      }
+    };
+  },
   render: function render() {
     var _props$valueMoving = this.props.valueMoving;
     var value = _props$valueMoving.value;

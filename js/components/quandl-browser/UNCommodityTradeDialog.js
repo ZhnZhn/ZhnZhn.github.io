@@ -10,6 +10,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Type = require('../../constants/Type');
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -22,9 +24,21 @@ var _WithValidation = require('../dialogs/WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
+var _Row = require('../dialogs/Row');
+
+var _Row2 = _interopRequireDefault(_Row);
+
 var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
+
+var _ButtonCircle = require('../zhn/ButtonCircle');
+
+var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
+
+var _ShowHide = require('../zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
 var _ToolBarButton = require('../ToolBarButton');
 
@@ -47,20 +61,36 @@ var Placeholder = {
   }
 };
 var Filter = {
-  DEFAULT: 'Default Empty'
+  DEFAULT: 'Default Empty',
+  IMPORT: 'Import - Trade (USD)',
+  REIMPORT: 'Re-Import - Trade (USD)'
+};
+var Styles = {
+  ROW: {
+    paddingTop: '4px',
+    paddingBottom: '8px'
+  },
+  BUTTON_CIRCLE: {
+    marginLeft: '20px'
+  }
 };
 
 var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   displayName: 'UNCommodityTradeDialog'
 }, _WithLoadOptions2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
-    this.nation = null;
-    this.commodity = null;
+    this.country = null;
+    this.chapter = null;
     this.tradeFilter = null;
-    this.trade = null;
+    this.subheading = null;
     this.optionTrades = null;
+    this.chartType = null;
 
     return {
+      isShowFilter: false,
+      isShowDate: true,
+      isShowChartType: false,
+
       isLoadingCountries: false,
       isLoadingCountriesFailed: false,
       optionCountries: [],
@@ -69,19 +99,20 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       isLoadingCommoditiesFailed: false,
       optionCommodities: [],
 
-      optionTradeFilter: [{ caption: 'Default Empty Filter', value: Filter.DEFAULT }, { caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)' }, { caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)' }, { caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)' }, { caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)' }, { caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)' }],
-
+      optionTradeFilter: [{ caption: 'Default : Empty Filter', value: Filter.DEFAULT }, { caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)' }, { caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)' }, { caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)' }, { caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)' }, { caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)' }],
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
       optionTrades: [],
       placeholderTrade: Placeholder.TRADE.INIT,
 
+      optionChartTypes: [{ caption: 'Default : Area', value: _Type.ChartType.AREA }, { caption: 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: _Type.ChartType.SEMI_DONUT }, { caption: 'Stacked Area : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_AREA }],
+
       validationMessages: []
     };
   },
   componentDidMount: function componentDidMount() {
-    this._handlerLoadNation();
-    this._handlerLoadCommodity();
+    this._handlerLoadCountry();
+    this._handlerLoadChapter();
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -94,10 +125,10 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       if (this.state.isLoadingCountriesFailed && this.props.isShow) {
-        this._handlerLoadNation();
+        this._handlerLoadCountry();
       }
       if (this.state.isLoadingCommoditiesFailed && this.props.isShow) {
-        this._handlerLoadCommodity();
+        this._handlerLoadChapter();
       }
     }
   },
@@ -105,7 +136,7 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     this._unmountWithLoadOptions();
   },
   _initTrade: function _initTrade() {
-    this.trade = null;
+    this.subheading = null;
     this.optionTrades = null;
     this.setState({
       optionTrades: [],
@@ -124,6 +155,11 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
           options = _this.optionTrades.filter(function (item, index) {
             return item.caption.indexOf(filterValue) !== -1;
           });
+          if (filterValue === Filter.IMPORT) {
+            options = options.filter(function (item, index) {
+              return item.caption.indexOf(Filter.REIMPORT) === -1;
+            });
+          }
         } else {
           options = _this.optionTrades;
         }
@@ -133,26 +169,47 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     }
     return options;
   },
-  _handlerLoadNation: function _handlerLoadNation() {
+  _handlerClickAll: function _handlerClickAll() {
+    var _state = this.state;
+    var isShowFilter = _state.isShowFilter;
+    var isShowDate = _state.isShowDate;
+    var isShowChartType = _state.isShowChartType;
+    var _isShow = isShowFilter || isShowDate || isShowChartType ? false : true;
+    this.setState({
+      isShowFilter: _isShow,
+      isShowDate: _isShow,
+      isShowChartType: _isShow
+    });
+  },
+  _handlerClickFilter: function _handlerClickFilter() {
+    this.setState({ isShowFilter: !this.state.isShowFilter });
+  },
+  _handlerClickDate: function _handlerClickDate() {
+    this.setState({ isShowDate: !this.state.isShowDate });
+  },
+  _handlerClickChartType: function _handlerClickChartType() {
+    this.setState({ isShowChartType: !this.state.isShowChartType });
+  },
+  _handlerLoadCountry: function _handlerLoadCountry() {
     var _props = this.props;
     var countryURI = _props.countryURI;
     var countryJsonProp = _props.countryJsonProp;
 
     this._handlerWithLoadOptions('optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed', countryURI, countryJsonProp);
   },
-  _handlerLoadCommodity: function _handlerLoadCommodity() {
+  _handlerLoadChapter: function _handlerLoadChapter() {
     var _props2 = this.props;
     var commodityURI = _props2.commodityURI;
     var commodityJsonProp = _props2.commodityJsonProp;
 
     this._handlerWithLoadOptions('optionCommodities', 'isLoadingCommodities', 'isLoadingCommoditiesFailed', commodityURI, commodityJsonProp);
   },
-  _handlerSelectNation: function _handlerSelectNation(nation) {
-    this.nation = nation;
+  _handlerSelectCountry: function _handlerSelectCountry(country) {
+    this.country = country;
     this._initTrade();
   },
-  _handlerSelectCommodity: function _handlerSelectCommodity(commodity) {
-    this.commodity = commodity;
+  _handlerSelectChapter: function _handlerSelectChapter(chapter) {
+    this.chapter = chapter;
     this._initTrade();
   },
   _handlerSelectTradeFilter: function _handlerSelectTradeFilter(filter) {
@@ -160,7 +217,10 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     this.setState({ optionTrades: this._filterTrade() });
   },
   _handlerSelectTrade: function _handlerSelectTrade(trade) {
-    this.trade = trade;
+    this.subheading = trade;
+  },
+  _handlerSelectChartType: function _handlerSelectChartType(chartType) {
+    this.chartType = chartType;
   },
   _handlerLoadMeta: function _handlerLoadMeta() {
     this._handlerWithValidationLoad(this._createMetaValidationMessages(), this._createLoadMetaOption, this._loadMeta);
@@ -171,11 +231,11 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   },
   _createMetaValidationMessages: function _createMetaValidationMessages() {
     var msg = [];
-    if (!this.nation) {
-      msg.push(this.props.msgOnNotSelected('Nation'));
+    if (!this.country) {
+      msg.push(this.props.msgOnNotSelected('Country'));
     }
-    if (!this.commodity) {
-      msg.push(this.props.msgOnNotSelected('Commodity'));
+    if (!this.chapter) {
+      msg.push(this.props.msgOnNotSelected('Subheading'));
     }
 
     var _datesFragment$getVal = this.datesFragment.getValidation();
@@ -197,7 +257,7 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     var fnValue = this.props.fnValue;
 
     return {
-      value: fnValue(this.commodity.value, this.nation.value),
+      value: fnValue(this.chapter.value, this.country.value),
       fromDate: fromDate,
       toDate: toDate,
       isLoadMeta: true,
@@ -210,6 +270,7 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     this.setState({
       optionTrades: this._filterTrade(),
       isLoadingTrade: false,
+      isLoadingTradeFailed: false,
       placeholderTrade: Placeholder.TRADE.SELECT
     });
   },
@@ -221,8 +282,14 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   },
   _createDataValidationMessages: function _createDataValidationMessages() {
     var msg = [];
-    if (!this.trade) {
-      msg.push(this.props.msgOnNotSelected('Trade'));
+    if (!this.chartType || this.chartType.value === _Type.ChartType.AREA) {
+      if (!this.subheading) {
+        msg.push(this.props.msgOnNotSelected('Subheading'));
+      }
+    } else {
+      if (!this.tradeFilter) {
+        msg.push(this.props.msgOnNotSelected('Trade Filter'));
+      }
     }
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
@@ -232,18 +299,32 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
 
     var fromDate = _datesFragment$getVal3.fromDate;
     var toDate = _datesFragment$getVal3.toDate;
-    var _dataColumn = this.trade ? this.trade.value : this.props.dataColumn;
+    var _dataColumn = this.subheading ? this.subheading.value : this.props.dataColumn;
     var fnValue = this.props.fnValue;
-
+    var _chartType = this.chartType ? this.chartType.value : undefined;
+    var _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption;
     return {
-      value: fnValue(this.commodity.value, this.nation.value),
+      value: fnValue(this.chapter.value, this.country.value),
       fromDate: fromDate,
       toDate: toDate,
-      dataColumn: _dataColumn
+      dataColumn: _dataColumn,
+      seriaType: _chartType,
+      sliceItems: this._createSpliceItems(),
+      title: _title,
+      subtitle: this.chapter.caption
     };
   },
+  _createSpliceItems: function _createSpliceItems() {
+    return this.state.optionTrades.map(function (item, index) {
+      var _caption = item.caption.split('-')[0];
+      return {
+        caption: _caption,
+        value: item.value
+      };
+    });
+  },
   _handlerClose: function _handlerClose() {
-    this._handlerWithValidationClose(this._createValidationMessages);
+    this._handlerWithValidationClose(this._createMetaValidationMessages);
     this.props.onClose();
   },
   render: function render() {
@@ -257,19 +338,23 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     var initToDate = _props3.initToDate;
     var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
     var onTestDate = _props3.onTestDate;
-    var _state = this.state;
-    var optionCountries = _state.optionCountries;
-    var isLoadingCountries = _state.isLoadingCountries;
-    var isLoadingCountriesFailed = _state.isLoadingCountriesFailed;
-    var optionCommodities = _state.optionCommodities;
-    var isLoadingCommodities = _state.isLoadingCommodities;
-    var isLoadingCommoditiesFailed = _state.isLoadingCommoditiesFailed;
-    var optionTradeFilter = _state.optionTradeFilter;
-    var isLoadingTrade = _state.isLoadingTrade;
-    var isLoadingTradeFailed = _state.isLoadingTradeFailed;
-    var optionTrades = _state.optionTrades;
-    var placeholderTrade = _state.placeholderTrade;
-    var validationMessages = _state.validationMessages;
+    var _state2 = this.state;
+    var isShowFilter = _state2.isShowFilter;
+    var isShowDate = _state2.isShowDate;
+    var isShowChartType = _state2.isShowChartType;
+    var optionCountries = _state2.optionCountries;
+    var isLoadingCountries = _state2.isLoadingCountries;
+    var isLoadingCountriesFailed = _state2.isLoadingCountriesFailed;
+    var optionCommodities = _state2.optionCommodities;
+    var isLoadingCommodities = _state2.isLoadingCommodities;
+    var isLoadingCommoditiesFailed = _state2.isLoadingCommoditiesFailed;
+    var optionTradeFilter = _state2.optionTradeFilter;
+    var isLoadingTrade = _state2.isLoadingTrade;
+    var isLoadingTradeFailed = _state2.isLoadingTradeFailed;
+    var optionTrades = _state2.optionTrades;
+    var placeholderTrade = _state2.placeholderTrade;
+    var optionChartTypes = _state2.optionChartTypes;
+    var validationMessages = _state2.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
@@ -291,32 +376,60 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
         onShowChart: onShow,
         onClose: this._handlerClose
       },
+      _react2.default.createElement(
+        _Row2.default,
+        { style: Styles.ROW },
+        _react2.default.createElement(_ButtonCircle2.default, {
+          caption: 'A',
+          style: Styles.BUTTON_CIRCLE,
+          onClick: this._handlerClickAll
+        }),
+        _react2.default.createElement(_ButtonCircle2.default, {
+          caption: 'F',
+          style: Styles.BUTTON_CIRCLE,
+          onClick: this._handlerClickFilter
+        }),
+        _react2.default.createElement(_ButtonCircle2.default, {
+          caption: 'D',
+          style: Styles.BUTTON_CIRCLE,
+          onClick: this._handlerClickDate
+        }),
+        _react2.default.createElement(_ButtonCircle2.default, {
+          caption: 'C',
+          style: Styles.BUTTON_CIRCLE,
+          onClick: this._handlerClickChartType
+        })
+      ),
       _react2.default.createElement(_RowInputSelect2.default, {
         caption: 'Country:',
         options: optionCountries,
         optionNames: 'Countries',
         isLoading: isLoadingCountries,
         isLoadingFailed: isLoadingCountriesFailed,
-        onLoadOption: this._handlerLoadNation,
-        onSelect: this._handlerSelectNation
+        onLoadOption: this._handlerLoadCountry,
+        onSelect: this._handlerSelectCountry
       }),
       _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Commodity:',
+        caption: 'Chapter:',
         options: optionCommodities,
-        optionNames: 'Commodities',
+        optionNames: 'Chapters',
         isLoading: isLoadingCommodities,
         isLoadingFailed: isLoadingCommoditiesFailed,
-        onLoadOption: this._handlerLoadCommodity,
-        onSelect: this._handlerSelectCommodity
+        onLoadOption: this._handlerLoadChapter,
+        onSelect: this._handlerSelectChapter
       }),
+      _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowFilter },
+        _react2.default.createElement(_RowInputSelect2.default, {
+          caption: 'Filter Trade:',
+          options: optionTradeFilter,
+          placeholder: 'Filter...',
+          onSelect: this._handlerSelectTradeFilter
+        })
+      ),
       _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Filter Trade:',
-        options: optionTradeFilter,
-        placeholder: 'Filter...',
-        onSelect: this._handlerSelectTradeFilter
-      }),
-      _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Trade:',
+        caption: 'Subheading:',
         options: optionTrades,
         optionNames: 'Meta',
         isLoading: isLoadingTrade,
@@ -326,15 +439,28 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
         onSelect: this._handlerSelectTrade
 
       }),
-      _react2.default.createElement(_DatesFragment2.default, {
-        ref: function ref(c) {
-          return _this2.datesFragment = c;
-        },
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        msgOnNotValidFormat: msgOnNotValidFormat,
-        onTestDate: onTestDate
-      }),
+      _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowDate },
+        _react2.default.createElement(_DatesFragment2.default, {
+          ref: function ref(c) {
+            return _this2.datesFragment = c;
+          },
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          msgOnNotValidFormat: msgOnNotValidFormat,
+          onTestDate: onTestDate
+        })
+      ),
+      _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowChartType },
+        _react2.default.createElement(_RowInputSelect2.default, {
+          caption: 'Chart Type:',
+          options: optionChartTypes,
+          onSelect: this._handlerSelectChartType
+        })
+      ),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         validationMessages: validationMessages
       })

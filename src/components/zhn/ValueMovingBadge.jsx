@@ -31,8 +31,18 @@ const styles = {
 }
 
 const ValueMovingBadge = React.createClass({
+  getDefaultProps(){
+    return{
+       valueMoving : {
+         value : 0,
+         delta : 0,
+         percent : 0,
+         direction : Direction.EQUAL
+       }
+    }
+  },
   render(){
-    const {value, delta, percent, direction} = this.props.valueMoving
+    const {value, delta, percent, direction} = this.props.valueMoving;
 
     let _svgDirection, _dStyle;
     if (direction === Direction.DOWN){

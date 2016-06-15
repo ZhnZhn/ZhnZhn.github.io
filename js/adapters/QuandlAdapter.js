@@ -14,6 +14,10 @@ var _big2 = _interopRequireDefault(_big);
 
 var _Type = require('../constants/Type');
 
+var _Chart = require('../constants/Chart');
+
+var _Chart2 = _interopRequireDefault(_Chart);
+
 var _ChartConfig = require('../constants/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
@@ -23,6 +27,12 @@ var _Tooltip = require('../constants/Tooltip');
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 var _IndicatorSma = require('./IndicatorSma');
+
+var _QuandlAdapterFn = require('./QuandlAdapterFn');
+
+var _QuandlAdapterToPie = require('./QuandlAdapterToPie');
+
+var _QuandlAdapterToStackedArea = require('./QuandlAdapterToStackedArea');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39,53 +49,6 @@ var fnCheckWithPrev = function fnCheckWithPrev(arr, checkedDate, predicate) {
   } else {
     return true;
   }
-};
-
-var fnGetXAxesConfig = function fnGetXAxesConfig() {
-  return {
-    opposite: true,
-    tickLength: 0,
-    tickPosition: 'inside',
-    labels: {
-      y: -5
-    }
-  };
-};
-
-var _fnGetDatasetInfo = function _fnGetDatasetInfo(json) {
-  var dataset = json.dataset;
-  return {
-    name: dataset.name,
-    description: dataset.description,
-    newest_available_date: dataset.newest_available_date,
-    oldest_available_date: dataset.oldest_available_date,
-    frequency: dataset.frequency
-  };
-};
-
-var _fnGetValueMoving = function _fnGetValueMoving(seria) {
-
-  var len = seria.length,
-      nowValue = len > 0 ? seria[len - 1][1] ? seria[len - 1][1] : '0.0' : '0.0',
-      bWasValue = len > 1 ? seria[len - 2][1] ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0) : (0, _big2.default)(0.0),
-      bDelta = bWasValue.minus(nowValue),
-      bPercent = len > 1 && !bWasValue.eq((0, _big2.default)(0.0)) ? bDelta.times(100).div(bWasValue.toString()).abs().toFixed(2) : (0, _big2.default)(0.0);
-
-  var direction = void 0;
-  if (bDelta.gt(0.0)) {
-    direction = _Type.Direction.DOWN;
-  } else if (!bDelta.gte(0.0)) {
-    direction = _Type.Direction.UP;
-  } else {
-    direction = _Type.Direction.EQUAL;
-  }
-
-  return {
-    value: _ChartConfig2.default.fnNumberFormat(nowValue),
-    delta: _ChartConfig2.default.fnNumberFormat(bDelta.abs().toString()),
-    percent: bPercent.toString() + '%',
-    direction: direction
-  };
 };
 
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
@@ -438,21 +401,12 @@ var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   }
 };
 
-var _fnCreateZhConfig = function _fnCreateZhConfig(option) {
-  return {
-    id: option.value,
-    dataColumn: option.dataColumn,
-    itemCaption: option.itemCaption
-  };
-};
-
-//const fnGetSeries = function(config, json, yPointIndex, chartId){
 var fnGetSeries = function fnGetSeries(config, json, option) {
   var yPointIndex = option.dataColumn,
       chartId = option.value;
 
-  config.zhConfig = _fnCreateZhConfig(option);
-  config.info = _fnGetDatasetInfo(json);
+  config.zhConfig = (0, _QuandlAdapterFn.fnCreateZhConfig)(option);
+  config.info = (0, _QuandlAdapterFn.fnCreateDatasetInfo)(json);
 
   var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex);
 
@@ -472,7 +426,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.zhFnAddSeriesSma = _IndicatorSma.fnAddSeriesSma;
   config.zhFnRemoveSeries = _IndicatorSma.fnRemoveSeries;
 
-  config.valueMoving = _fnGetValueMoving(seria);
+  config.valueMoving = (0, _QuandlAdapterFn.fnCreateValueMovingFromSeria)(seria);
   config.series[0].data = seria;
   config.series[0].zhSeriaId = chartId;
 
@@ -502,7 +456,8 @@ var fnConfigAxes = function fnConfigAxes(result) {
   config.yAxis.plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(minPoint);
   config.yAxis.opposite = true;
 
-  config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
+  //config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
+  config.xAxis = _Chart2.default.fXAxisOpposite(config.xAxis);
 
   return result;
 };
@@ -510,8 +465,21 @@ var fnConfigAxes = function fnConfigAxes(result) {
 var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
 
 QuandlAdapter.toConfig = function (json, option) {
-  var config = _ChartConfig2.default.fBaseAreaConfig();
-  return fnQuandlFlow(config, json, option);
+  var _option$seriaType = option.seriaType;
+  var seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType;
+
+
+  switch (seriaType) {
+    case _Type.ChartType.AREA:
+      var config = _ChartConfig2.default.fBaseAreaConfig();
+      return fnQuandlFlow(config, json, option);
+    case _Type.ChartType.SEMI_DONUT:
+      return (0, _QuandlAdapterToPie.fCreatePieConfig)(json, option);
+    case _Type.ChartType.STACKED_AREA:
+      return (0, _QuandlAdapterToStackedArea.fCreateStackedAreaConfig)(json, option);
+    default:
+      return fnQuandlFlow(_ChartConfig2.default.fBaseAreaConfig(), json, option);
+  }
 };
 
 QuandlAdapter.toSeries = function (json, option) {

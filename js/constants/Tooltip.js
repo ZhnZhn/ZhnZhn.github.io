@@ -78,6 +78,22 @@ var _fnHighLowTooltip = function _fnHighLowTooltip(_ref6) {
   return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Day High: </span>\n  <span class="tp__body__value">' + point.dayHigh + '</span></br>\n  <span class="tp__body__title">Day Low: </span>\n  <span class="tp__body__value">' + point.dayLow + '</span></br>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.close + '</span>\n  </div>');
 };
 
+var _fnPieTooltip = function _fnPieTooltip(_ref7) {
+  var id = _ref7.id;
+  var value = _ref7.value;
+  var point = _ref7.point;
+
+  return _fnTooltipHeader(point.nameFull, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  </div>');
+};
+
+var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref8) {
+  var id = _ref8.id;
+  var value = _ref8.value;
+  var point = _ref8.point;
+
+  return _fnTooltipHeader(point.nameFull, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Year: </span>\n  <span class="tp__body__value">' + point.category + '</span></br>\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  </div>');
+};
+
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
     document.getElementById(id).addEventListener('click', function _fnHide() {
@@ -108,6 +124,9 @@ Tooltip.fnSplitRatioPointFormatter = _fnBasePointFormatter(_fnSplitRatio, false,
 Tooltip.fnVolumePointFormatter = _fnBasePointFormatter(_fnVolumeTooltip, false, true);
 Tooltip.fnATHPointFormatter = _fnBasePointFormatter(_fnATHTooltip, false, false);
 Tooltip.fnHighLowPointFormatter = _fnBasePointFormatter(_fnHighLowTooltip, false, false);
+
+Tooltip.fnPiePointFormatter = _fnBasePointFormatter(_fnPieTooltip, false, true);
+Tooltip.fnStackedAreaPointFormatter = _fnBasePointFormatter(_fnStackedAreaTooltip, false, true);
 
 exports.default = Tooltip;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Tooltip.js.map

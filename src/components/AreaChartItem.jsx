@@ -176,7 +176,7 @@ const AreaChartItem = React.createClass({
   },
 
   _createChartToolBar(config){
-     const _btIndicator = (
+     const _btIndicator = (!config.zhConfig.isWithoutIndicator) ? (
        <ButtonTab
          caption={'Indicator'}
          isShow={this.state.isShowIndicator}
@@ -185,16 +185,16 @@ const AreaChartItem = React.createClass({
        >
          <span className={'arrow-down'}></span>
        </ButtonTab>
-     );
+     ) : undefined;
 
-    const _btAdd = (
+    const _btAdd = (!config.zhConfig.isWithoutAdd) ? (
       <ButtonTab
         style={{left: '240px'}}
         caption={'Add'}
         isShow={false}
         onClick={this._handlerAddToWatch}
       />
-    );
+    ) : undefined;
 
     const _btInfo = (config.info) ? (
       <ButtonTab

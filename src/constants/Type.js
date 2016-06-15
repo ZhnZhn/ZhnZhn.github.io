@@ -21,3 +21,9 @@ export const ModalDialog = {
   EDIT_WATCH_GROUP : 'editWatchGroup',
   EDIT_WATCH_LIST : 'editWatchList'
 }
+
+export const ChartType = {
+  AREA : 'AREA',
+  SEMI_DONUT : 'SEMI_DONUT',
+  STACKED_AREA : 'STACKED_AREA'
+}

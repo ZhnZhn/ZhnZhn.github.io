@@ -1,8 +1,33 @@
 import Highcharts from 'highcharts';
 
+import Chart from './Chart';
 import Tooltip from './Tooltip';
+import WithPieChart from './WithPieChart';
+import WithStackAreaChart from './WithStackAreaChart';
 
-const ChartConfig = {};
+const ChartConfig = {
+  ...WithPieChart,
+  ...WithStackAreaChart
+};
+
+
+const _fnCreateMonochromePieColors = function({
+  base1='#7cb5ec',
+  base2='#90ed7d'
+}){
+  var colors = [],
+      i;
+
+  for (i = 0; i < 4; i += 1) {
+      // Start out with a darkened base color (negative brighten), and end
+      // up with a much brighter color
+      colors.push(Highcharts.Color(base1).brighten((i - 3) / 7).get());
+  }
+  for (i = 0; i < 4; i += 1) {
+      colors.push(Highcharts.Color(base2).brighten((i - 3) / 7).get());
+  }
+  return colors;
+}
 
 ChartConfig.theme = {
     credits: {
@@ -16,9 +41,9 @@ ChartConfig.theme = {
     },
     chart : {
       //width: 600,
-      height: 300,
-      spacingTop: 20,
-      spacingBottom: 24,
+      height: Chart.HEIGHT,
+      spacingTop: Chart.SPACING_TOP,
+      spacingBottom: Chart.SPACING_BOTTOM,
       plotBackgroundColor: "rgba(77,77,77,1)",
       backgroundColor : "rgba(77,77,77,1)",
       reflow: false,
@@ -59,6 +84,11 @@ ChartConfig.theme = {
             this.chart.zhTooltip.refresh(event.point, event);
           }
         },
+      },
+      pie : {
+        colors : _fnCreateMonochromePieColors({
+          base1:'#7cb5ec', base2:'#90ed7d'
+        })
       }
     },
     tooltip: {
