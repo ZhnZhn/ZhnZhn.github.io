@@ -4,10 +4,12 @@ import Chart from './Chart';
 import Tooltip from './Tooltip';
 import WithPieChart from './WithPieChart';
 import WithStackAreaChart from './WithStackAreaChart';
+import WithStackedColumn from './WithStackedColumn';
 
 const ChartConfig = {
   ...WithPieChart,
-  ...WithStackAreaChart
+  ...WithStackAreaChart,
+  ...WithStackedColumn
 };
 
 

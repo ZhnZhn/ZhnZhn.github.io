@@ -23,6 +23,7 @@ const _fnCreateMonoColors = function({
 
 const Chart = {
   HEIGHT : 300,
+  STACKED_HEIGHT : 500,
   LEGEND_ROW_HEIGHT : 32,
 
   SPACING_TOP : 20,

@@ -26,9 +26,13 @@ var _WithStackAreaChart = require('./WithStackAreaChart');
 
 var _WithStackAreaChart2 = _interopRequireDefault(_WithStackAreaChart);
 
+var _WithStackedColumn = require('./WithStackedColumn');
+
+var _WithStackedColumn2 = _interopRequireDefault(_WithStackedColumn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChartConfig = _extends({}, _WithPieChart2.default, _WithStackAreaChart2.default);
+var ChartConfig = _extends({}, _WithPieChart2.default, _WithStackAreaChart2.default, _WithStackedColumn2.default);
 
 var _fnCreateMonochromePieColors = function _fnCreateMonochromePieColors(_ref) {
   var _ref$base = _ref.base1;

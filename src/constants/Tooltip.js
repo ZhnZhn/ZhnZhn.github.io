@@ -9,8 +9,8 @@ const _fnNumberFormat = function(value){
   return Highcharts.numberFormat(value, decimal, '.', ' ');
 };
 
-const _fnTooltipHeader = function(date, id){
-  return `<div id="${id}" class="tp__header not-selected" >
+const _fnTooltipHeader = function(date, id, cssClass=''){
+  return `<div id="${id}" class="tp__header not-selected ${cssClass}">
   <span class="tp__header__caption">${date}</span>
   <span class="tp__header__close">X</span>
   </div>`
@@ -85,20 +85,25 @@ const _fnHighLowTooltip = function({date, id, value, point}){
 }
 
 const _fnPieTooltip = function({id, value, point}){
-  return _fnTooltipHeader(point.nameFull, id) +
-  `<div class="tp__body">
+  return _fnTooltipHeader(point.nameFull, id, 'tp--fs16') +
+  `<div class="tp__body tp--fs16">
   <span class="tp__body__title">Value: </span>
   <span class="tp__body__value">${value}</span></br>
   </div>`
 }
 
 const _fnStackedAreaTooltip = function({id, value, point}){
-  return _fnTooltipHeader(point.nameFull, id) +
-  `<div class="tp__body">
+  const {nameFull, category, percent='0.0', total=0} = point;
+  return _fnTooltipHeader(nameFull, id, 'tp--fs16') +
+  `<div class="tp__body tp--fs16">
   <span class="tp__body__title">Year: </span>
-  <span class="tp__body__value">${point.category}</span></br>
+  <span class="tp__body__value">${category}</span></br>
   <span class="tp__body__title">Value: </span>
   <span class="tp__body__value">${value}</span></br>
+  <span class="tp__body__title">Percent: </span>
+  <span class="tp__body__value">${percent}</span></br>
+  <span class="tp__body__title">Total: </span>
+  <span class="tp__body__value">${_fnNumberFormat(total)}</span></br>
   </div>`
 }
 

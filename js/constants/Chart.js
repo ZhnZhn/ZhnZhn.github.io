@@ -35,6 +35,7 @@ var _fnCreateMonoColors = function _fnCreateMonoColors(_ref) {
 
 var Chart = {
   HEIGHT: 300,
+  STACKED_HEIGHT: 500,
   LEGEND_ROW_HEIGHT: 32,
 
   SPACING_TOP: 20,

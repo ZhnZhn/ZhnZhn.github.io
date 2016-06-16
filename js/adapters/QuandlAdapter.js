@@ -34,6 +34,8 @@ var _QuandlAdapterToPie = require('./QuandlAdapterToPie');
 
 var _QuandlAdapterToStackedArea = require('./QuandlAdapterToStackedArea');
 
+var _QuandlToStackedColumn = require('./QuandlToStackedColumn');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var QuandlAdapter = {};
@@ -477,6 +479,8 @@ QuandlAdapter.toConfig = function (json, option) {
       return (0, _QuandlAdapterToPie.fCreatePieConfig)(json, option);
     case _Type.ChartType.STACKED_AREA:
       return (0, _QuandlAdapterToStackedArea.fCreateStackedAreaConfig)(json, option);
+    case _Type.ChartType.STACKED_COLUMN:
+      return (0, _QuandlToStackedColumn.fCreateStackedColumnConfig)(json, option);
     default:
       return fnQuandlFlow(_ChartConfig2.default.fBaseAreaConfig(), json, option);
   }

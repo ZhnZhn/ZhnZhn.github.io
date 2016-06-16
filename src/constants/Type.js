@@ -25,5 +25,6 @@ export const ModalDialog = {
 export const ChartType = {
   AREA : 'AREA',
   SEMI_DONUT : 'SEMI_DONUT',
-  STACKED_AREA : 'STACKED_AREA'
+  STACKED_AREA : 'STACKED_AREA',
+  STACKED_COLUMN : 'STACKED_COLUMN'
 }

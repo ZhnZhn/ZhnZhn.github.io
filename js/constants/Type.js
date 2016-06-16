@@ -29,6 +29,7 @@ var ModalDialog = exports.ModalDialog = {
 var ChartType = exports.ChartType = {
   AREA: 'AREA',
   SEMI_DONUT: 'SEMI_DONUT',
-  STACKED_AREA: 'STACKED_AREA'
+  STACKED_AREA: 'STACKED_AREA',
+  STACKED_COLUMN: 'STACKED_COLUMN'
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

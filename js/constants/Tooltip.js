@@ -19,7 +19,9 @@ var _fnNumberFormat = function _fnNumberFormat(value) {
 };
 
 var _fnTooltipHeader = function _fnTooltipHeader(date, id) {
-  return '<div id="' + id + '" class="tp__header not-selected" >\n  <span class="tp__header__caption">' + date + '</span>\n  <span class="tp__header__close">X</span>\n  </div>';
+  var cssClass = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+
+  return '<div id="' + id + '" class="tp__header not-selected ' + cssClass + '">\n  <span class="tp__header__caption">' + date + '</span>\n  <span class="tp__header__close">X</span>\n  </div>';
 };
 
 var _fnBaseTooltip = function _fnBaseTooltip(_ref) {
@@ -83,15 +85,21 @@ var _fnPieTooltip = function _fnPieTooltip(_ref7) {
   var value = _ref7.value;
   var point = _ref7.point;
 
-  return _fnTooltipHeader(point.nameFull, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  </div>');
+  return _fnTooltipHeader(point.nameFull, id, 'tp--fs16') + ('<div class="tp__body tp--fs16">\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  </div>');
 };
 
 var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref8) {
   var id = _ref8.id;
   var value = _ref8.value;
   var point = _ref8.point;
+  var nameFull = point.nameFull;
+  var category = point.category;
+  var _point$percent = point.percent;
+  var percent = _point$percent === undefined ? '0.0' : _point$percent;
+  var _point$total = point.total;
+  var total = _point$total === undefined ? 0 : _point$total;
 
-  return _fnTooltipHeader(point.nameFull, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Year: </span>\n  <span class="tp__body__value">' + point.category + '</span></br>\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  </div>');
+  return _fnTooltipHeader(nameFull, id, 'tp--fs16') + ('<div class="tp__body tp--fs16">\n  <span class="tp__body__title">Year: </span>\n  <span class="tp__body__value">' + category + '</span></br>\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  <span class="tp__body__title">Percent: </span>\n  <span class="tp__body__value">' + percent + '</span></br>\n  <span class="tp__body__title">Total: </span>\n  <span class="tp__body__value">' + _fnNumberFormat(total) + '</span></br>\n  </div>');
 };
 
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {

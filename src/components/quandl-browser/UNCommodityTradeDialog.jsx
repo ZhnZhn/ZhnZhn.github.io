@@ -76,7 +76,8 @@ const UNCommodityTradeDialog = React.createClass({
       optionChartTypes : [
         {caption : 'Default : Area', value: ChartType.AREA},
         {caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: ChartType.SEMI_DONUT},
-        {caption : 'Stacked Area : Total Top90, On Recent Year', value: ChartType.STACKED_AREA}
+        {caption : 'Stacked Area : Total Top90, On Recent Year', value: ChartType.STACKED_AREA},
+        {caption : 'Stacked Column : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN}
       ],
 
       validationMessages: []
