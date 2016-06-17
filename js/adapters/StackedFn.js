@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fnCreateStackedConfig = undefined;
+exports.fnCreateStackedConfig = exports.fnCalcTotal = undefined;
 
 var _rFactorySeria2;
 
@@ -31,9 +31,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var _rFactorySeria = (_rFactorySeria2 = {}, _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN, _ChartConfig2.default.fStackedColumnSeria), _rFactorySeria2);
 
-var _fnCalcTotal = function _fnCalcTotal() {
-  var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-  var jsonData = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+var fnCalcTotal = exports.fnCalcTotal = function fnCalcTotal() {
+  var jsonData = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var items = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
 
   var _bTotal = (0, _big2.default)('0.0');
   for (var i = 0, max = items.length; i < max; i++) {
@@ -122,7 +122,7 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
 
   jsonData = jsonData.reverse();
   jsonData.forEach(function (yearData, i) {
-    var yearTotal100 = _fnCalcTotal(items100, yearData),
+    var yearTotal100 = fnCalcTotal(yearData, items100),
         yearTotal90 = (0, _big2.default)('0.0');
     categories.push(yearData[0].split('-')[0]);
     items90.forEach(function (item, itemIndex) {
@@ -169,7 +169,7 @@ var fnCreateStackedConfig = exports.fnCreateStackedConfig = function fnCreateSta
   var referenceData = _fnCreateReferenceDat.referenceData;
   var bTotal = _fnCreateReferenceDat.bTotal;
   var items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9);
-  var bPrevTotal = _fnCalcTotal(items100, jsonData[1]);
+  var bPrevTotal = fnCalcTotal(jsonData[1], items100);
 
   var _fnCreateStackedSerie = _fnCreateStackedSeries({
     jsonData: jsonData, items100: items100, items90: items90, zhSeriaId: zhSeriaId, chartType: chartType

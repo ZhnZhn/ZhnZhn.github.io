@@ -11,18 +11,10 @@ const WithPieChart = {
      },
      zhDetailCharts : []  ,
 
+     credits : Chart.fCreditsRightBottom(),
      title : Chart.fTitle(),
      subtitle : Chart.fSubtitle(),
-     legend : {
-       //floating: true,
-       //y : 300,
-       itemStyle : {
-         color: 'black',
-         cursor: 'pointer',
-         fontSize: '16px',
-         fontWeight: 'normal'
-       }
-     }
+     legend : Chart.fLegend()
    }
 },
 
@@ -79,10 +71,9 @@ fInnerPieSeria({center, year, bTotal}){
        enabled : isDataLabels,
        distance : -5
      },
-     tooltip : {
-       pointFormatter : Tooltip.fnPiePointFormatter,
-       headerFormat : ''
-     }
+
+     tooltip : Chart.fTooltip(Tooltip.fnPiePointFormatter)
+
   }
 }
 

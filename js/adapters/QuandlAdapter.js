@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _rToConfig2;
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -28,15 +30,19 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 var _IndicatorSma = require('./IndicatorSma');
 
-var _QuandlAdapterFn = require('./QuandlAdapterFn');
+var _QuandlFn = require('./QuandlFn');
 
-var _QuandlAdapterToPie = require('./QuandlAdapterToPie');
+var _QuandlToPie = require('./QuandlToPie');
 
-var _QuandlAdapterToStackedArea = require('./QuandlAdapterToStackedArea');
+var _QuandlToStackedArea = require('./QuandlToStackedArea');
 
 var _QuandlToStackedColumn = require('./QuandlToStackedColumn');
 
+var _QuandlToTreeMap = require('./QuandlToTreeMap');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var QuandlAdapter = {};
 
@@ -407,8 +413,8 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   var yPointIndex = option.dataColumn,
       chartId = option.value;
 
-  config.zhConfig = (0, _QuandlAdapterFn.fnCreateZhConfig)(option);
-  config.info = (0, _QuandlAdapterFn.fnCreateDatasetInfo)(json);
+  config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
+  config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
 
   var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex);
 
@@ -428,7 +434,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.zhFnAddSeriesSma = _IndicatorSma.fnAddSeriesSma;
   config.zhFnRemoveSeries = _IndicatorSma.fnRemoveSeries;
 
-  config.valueMoving = (0, _QuandlAdapterFn.fnCreateValueMovingFromSeria)(seria);
+  config.valueMoving = (0, _QuandlFn.fnCreateValueMovingFromSeria)(seria);
   config.series[0].data = seria;
   config.series[0].zhSeriaId = chartId;
 
@@ -466,24 +472,19 @@ var fnConfigAxes = function fnConfigAxes(result) {
 
 var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
 
+var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
+  var config = _ChartConfig2.default.fBaseAreaConfig();
+  return fnQuandlFlow(config, json, option);
+};
+
+var _rToConfig = (_rToConfig2 = {}, _defineProperty(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), _defineProperty(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), _rToConfig2);
+
 QuandlAdapter.toConfig = function (json, option) {
   var _option$seriaType = option.seriaType;
   var seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType;
 
 
-  switch (seriaType) {
-    case _Type.ChartType.AREA:
-      var config = _ChartConfig2.default.fBaseAreaConfig();
-      return fnQuandlFlow(config, json, option);
-    case _Type.ChartType.SEMI_DONUT:
-      return (0, _QuandlAdapterToPie.fCreatePieConfig)(json, option);
-    case _Type.ChartType.STACKED_AREA:
-      return (0, _QuandlAdapterToStackedArea.fCreateStackedAreaConfig)(json, option);
-    case _Type.ChartType.STACKED_COLUMN:
-      return (0, _QuandlToStackedColumn.fCreateStackedColumnConfig)(json, option);
-    default:
-      return fnQuandlFlow(_ChartConfig2.default.fBaseAreaConfig(), json, option);
-  }
+  return _rToConfig[seriaType](json, option);
 };
 
 QuandlAdapter.toSeries = function (json, option) {

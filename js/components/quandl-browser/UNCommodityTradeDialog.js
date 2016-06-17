@@ -63,7 +63,9 @@ var Placeholder = {
 var Filter = {
   DEFAULT: 'Default Empty',
   IMPORT: 'Import - Trade (USD)',
-  REIMPORT: 'Re-Import - Trade (USD)'
+  EXPORT: 'Export - Trade (USD)',
+  REIMPORT: 'Re-Import - Trade (USD)',
+  REEXPORT: 'Re-Export - Trade (USD)'
 };
 var Styles = {
   ROW: {
@@ -99,13 +101,13 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       isLoadingCommoditiesFailed: false,
       optionCommodities: [],
 
-      optionTradeFilter: [{ caption: 'Default : Empty Filter', value: Filter.DEFAULT }, { caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)' }, { caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)' }, { caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)' }, { caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)' }, { caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)' }],
+      optionTradeFilter: [{ caption: 'Default : Empty Filter', value: Filter.DEFAULT }, { caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)' }, { caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)' }, { caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)' }, { caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)' }, { caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)' }, { caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)' }],
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
       optionTrades: [],
       placeholderTrade: Placeholder.TRADE.INIT,
 
-      optionChartTypes: [{ caption: 'Default : Area', value: _Type.ChartType.AREA }, { caption: 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: _Type.ChartType.SEMI_DONUT }, { caption: 'Stacked Area : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_AREA }, { caption: 'Stacked Column : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_COLUMN }],
+      optionChartTypes: [{ caption: 'Default : Area', value: _Type.ChartType.AREA }, { caption: 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: _Type.ChartType.SEMI_DONUT }, { caption: 'Stacked Area : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_AREA }, { caption: 'Stacked Column : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_COLUMN }, { caption: 'Tree Map : On Recent Year', value: _Type.ChartType.TREE_MAP }],
 
       validationMessages: []
     };
@@ -158,6 +160,11 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
           if (filterValue === Filter.IMPORT) {
             options = options.filter(function (item, index) {
               return item.caption.indexOf(Filter.REIMPORT) === -1;
+            });
+          }
+          if (filterValue === Filter.EXPORT) {
+            options = options.filter(function (item, index) {
+              return item.caption.indexOf(Filter.REEXPORT) === -1;
             });
           }
         } else {
@@ -315,12 +322,13 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     };
   },
   _createSpliceItems: function _createSpliceItems() {
+    var _filterLength = this.tradeFilter.value.length + 2;
     return this.state.optionTrades.map(function (item, index) {
-      var _caption = item.caption.split('-')[0];
-      return {
-        caption: _caption,
-        value: item.value
-      };
+      var value = item.value;
+      var caption = item.caption;
+
+      caption = caption.substring(0, caption.length - _filterLength);
+      return { caption: caption, value: value };
     });
   },
   _handlerClose: function _handlerClose() {

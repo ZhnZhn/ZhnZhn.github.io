@@ -22,24 +22,18 @@ var WithStackAreaChart = {
       },
       zhDetailCharts: [],
 
+      credits: _Chart2.default.fCreditsRightBottom(),
       chart: {
         type: 'area',
         spacingTop: _Chart2.default.SPACING_TOP,
         spacingBottom: _Chart2.default.SPACING_BOTTOM,
 
         zoomType: 'xy',
-        resetZoomButton: {
-          position: {
-            align: 'left',
-            verticalAlign: 'top',
-            x: 100,
-            y: 48
-          },
-          relativeTo: 'chart'
-        }
+        resetZoomButton: _Chart2.default.fResetZoomButton()
       },
       title: _Chart2.default.fTitle({ y: 40 }),
       subtitle: _Chart2.default.fSubtitle({ y: 60 }),
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnStackedAreaPointFormatter),
 
       xAxis: _Chart2.default.fXAxisOpposite({
         categories: [],
@@ -50,53 +44,13 @@ var WithStackAreaChart = {
           width: 1,
           zIndex: 2
         }
-        //maxPadding:0,
-        //minPadding:0
       }),
-      yAxis: {
-        opposite: true,
-        title: {
-          text: ''
-        }
-      },
-
-      tooltip: {
-        pointFormatter: _Tooltip2.default.fnStackedAreaPointFormatter,
-        headerFormat: ''
-      },
+      yAxis: _Chart2.default.fYAxisOpposite(),
 
       plotOptions: {
-        area: {
-          stacking: 'normal',
-          //lineColor: 'black',
-          lineColor: 'yellow',
-          lineWidth: 0,
-          marker: {
-            enabled: false,
-            lineWidth: 1,
-            //lineColor: 'black'
-            //lineColor: '#232F3B'
-            lineColor: '#a487d4'
-          },
-          state: {
-            hover: {
-              lineWidth: 2
-            },
-            halo: {
-              opacity: 0.25,
-              size: 10
-            }
-          }
-        }
+        area: _Chart2.default.fPlotOptionsArea({ stacking: 'normal' })
       },
-      legend: {
-        itemStyle: {
-          color: 'black',
-          cursor: 'pointer',
-          fontSize: '16px',
-          fontWeight: 'normal'
-        }
-      }
+      legend: _Chart2.default.fLegend()
     };
   },
   fStackAreaSeria: function fStackAreaSeria(_ref) {
@@ -123,4 +77,4 @@ var WithStackAreaChart = {
 };
 
 exports.default = WithStackAreaChart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithStackAreaChart.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithStackedArea.js.map

@@ -11,7 +11,7 @@ import {
          fnCreateValueMoving,
          fnCreatePercent,
          fnSetTitleToConfig
-       } from './QuandlAdapterFn';
+       } from './QuandlFn';
 
 
 const _fnCalcPieLegendHeight = function(length){

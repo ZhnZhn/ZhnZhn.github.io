@@ -30,6 +30,7 @@ var ChartType = exports.ChartType = {
   AREA: 'AREA',
   SEMI_DONUT: 'SEMI_DONUT',
   STACKED_AREA: 'STACKED_AREA',
-  STACKED_COLUMN: 'STACKED_COLUMN'
+  STACKED_COLUMN: 'STACKED_COLUMN',
+  TREE_MAP: 'TREE_MAP'
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

@@ -4,11 +4,14 @@ import {render} from 'react-dom';
 
 import Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/lib/highcharts-more';
+import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 
 import AppErc from './components/AppErc';
 import ChartConfig from './constants/ChartConfig';
 
 HighchartsMore(Highcharts);
+HighchartsTreemap(Highcharts);
+
 Highcharts.setOptions(ChartConfig.theme);
 
 const _fnRemoveSpinner = function(){

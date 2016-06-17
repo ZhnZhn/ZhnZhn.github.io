@@ -23,7 +23,7 @@ var _ChartConfig = require('../constants/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _QuandlAdapterFn = require('./QuandlAdapterFn');
+var _QuandlFn = require('./QuandlFn');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,7 +36,7 @@ var _fnCalcPieLegendHeight = function _fnCalcPieLegendHeight(length) {
 };
 
 var _fnAddPercentToItem = function _fnAddPercentToItem(item, bTotal) {
-  var _bPercent = (0, _QuandlAdapterFn.fnCreatePercent)({ bValue: (0, _big2.default)(item.y), bTotal: bTotal });
+  var _bPercent = (0, _QuandlFn.fnCreatePercent)({ bValue: (0, _big2.default)(item.y), bTotal: bTotal });
   if ((0, _big2.default)(_bPercent).gte('10.00')) {
     item.name = item.name + ' ' + _bPercent;
   } else {
@@ -71,7 +71,7 @@ var _fnCreateTopDonutData = function _fnCreateTopDonutData(_ref) {
   if (!bArrTotal.eq(bTotal)) {
     bArrTotal = bTotal.minus(bArrTotal);
     arr.push({
-      name: 'Other ' + (0, _QuandlAdapterFn.fnCreatePercent)({ bValue: bArrTotal, bTotal: bTotal }),
+      name: 'Other ' + (0, _QuandlFn.fnCreatePercent)({ bValue: bArrTotal, bTotal: bTotal }),
       nameFull: 'Other',
       color: 'gray',
       y: parseFloat(bArrTotal)
@@ -143,22 +143,22 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
     data: _dataTop2
   })];
 
-  (0, _QuandlAdapterFn.fnSetTitleToConfig)(config, option);
+  (0, _QuandlFn.fnSetTitleToConfig)(config, option);
 
   config.chart = {
     height: _fnCalcPieLegendHeight(_dataTop1.length)
   };
 
-  config.valueMoving = (0, _QuandlAdapterFn.fnCreateValueMoving)({
+  config.valueMoving = (0, _QuandlFn.fnCreateValueMoving)({
     bNowValue: _bTotal1,
     bPrevValue: _bTotal2
   });
-  config.zhConfig = (0, _QuandlAdapterFn.fnCreateZhConfig)(option);
+  config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;
   config.zhConfig.isWithoutIndicator = true;
-  config.info = (0, _QuandlAdapterFn.fnCreateDatasetInfo)(json);
+  config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
 
   return { config: config };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlAdapterToPie.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToPie.js.map

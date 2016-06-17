@@ -89,4 +89,4 @@ var fnSetTitleToConfig = exports.fnSetTitleToConfig = function fnSetTitleToConfi
   config.title.text = title ? title : '';
   config.subtitle.text = subtitle ? subtitle + ':' : '';
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlAdapterFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlFn.js.map

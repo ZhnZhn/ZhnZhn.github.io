@@ -2,14 +2,17 @@ import Highcharts from 'highcharts';
 
 import Chart from './Chart';
 import Tooltip from './Tooltip';
-import WithPieChart from './WithPieChart';
-import WithStackAreaChart from './WithStackAreaChart';
+
+import WithPie from './WithPie';
+import WithStackedArea from './WithStackedArea';
 import WithStackedColumn from './WithStackedColumn';
+import WithTreeMap from './WithTreeMap';
 
 const ChartConfig = {
-  ...WithPieChart,
-  ...WithStackAreaChart,
-  ...WithStackedColumn
+  ...WithPie,
+  ...WithStackedArea,
+  ...WithStackedColumn,
+  ...WithTreeMap
 };
 
 

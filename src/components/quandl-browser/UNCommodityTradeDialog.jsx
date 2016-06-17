@@ -23,7 +23,9 @@ const Placeholder = {
 const Filter = {
   DEFAULT : 'Default Empty',
   IMPORT : 'Import - Trade (USD)',
-  REIMPORT : 'Re-Import - Trade (USD)'
+  EXPORT : 'Export - Trade (USD)',
+  REIMPORT : 'Re-Import - Trade (USD)',
+  REEXPORT : 'Re-Export - Trade (USD)'
 };
 const Styles = {
   ROW : {
@@ -66,7 +68,8 @@ const UNCommodityTradeDialog = React.createClass({
         {caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)'},
         {caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)'},
         {caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)'},
-        {caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)'}
+        {caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)'},
+        {caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)'},
       ],
       isLoadingTrade : false,
       isLoadingTradeFailed : false,
@@ -77,7 +80,8 @@ const UNCommodityTradeDialog = React.createClass({
         {caption : 'Default : Area', value: ChartType.AREA},
         {caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: ChartType.SEMI_DONUT},
         {caption : 'Stacked Area : Total Top90, On Recent Year', value: ChartType.STACKED_AREA},
-        {caption : 'Stacked Column : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN}
+        {caption : 'Stacked Column : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN},
+        {caption : 'Tree Map : On Recent Year', value: ChartType.TREE_MAP}
       ],
 
       validationMessages: []
@@ -134,6 +138,11 @@ const UNCommodityTradeDialog = React.createClass({
         if (filterValue === Filter.IMPORT){
            options = options.filter((item,index)=>{
               return item.caption.indexOf(Filter.REIMPORT) === -1;
+           })
+        }
+        if (filterValue === Filter.EXPORT){
+           options = options.filter((item,index)=>{
+             return item.caption.indexOf(Filter.REEXPORT) === -1;
            })
         }
       } else {
@@ -275,12 +284,11 @@ const UNCommodityTradeDialog = React.createClass({
     }
   },
   _createSpliceItems(){
+     const _filterLength = this.tradeFilter.value.length + 2;
      return this.state.optionTrades.map((item, index) => {
-        const _caption = item.caption.split('-')[0]
-        return {
-          caption : _caption,
-          value : item.value
-        }
+        let {value, caption} = item;
+        caption = caption.substring( 0, (caption.length - _filterLength) );
+        return { caption, value }
      })
   },
   _handlerClose(){

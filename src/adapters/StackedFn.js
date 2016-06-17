@@ -11,7 +11,7 @@ const _rFactorySeria = {
   [ChartType.STACKED_COLUMN] : ChartConfig.fStackedColumnSeria
 }
 
-const _fnCalcTotal = function(items=[], jsonData=[]){
+export const fnCalcTotal = function(jsonData=[], items=[]){
    let _bTotal = Big('0.0');
    for(let i=0, max=items.length; i<max; i++ ){
      let y = jsonData[items[i].value]
@@ -90,7 +90,7 @@ const _fnCreateStackedSeries = function({
 
    jsonData = jsonData.reverse();
    jsonData.forEach((yearData, i) =>{
-     let yearTotal100 = _fnCalcTotal(items100, yearData)
+     let yearTotal100 = fnCalcTotal(yearData, items100)
        , yearTotal90  = Big('0.0')
      categories.push(yearData[0].split('-')[0]);
      items90.forEach((item, itemIndex) => {
@@ -132,7 +132,7 @@ export const fnCreateStackedConfig = function({
  }){
   const {referenceData , bTotal} = _fnCreateReferenceDataAndTotal(jsonData[0], items100)
       , items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9)
-      , bPrevTotal = _fnCalcTotal(items100, jsonData[1])
+      , bPrevTotal = fnCalcTotal(jsonData[1], items100)
       , { series, categories } = _fnCreateStackedSeries({
           jsonData, items100, items90, zhSeriaId, chartType
         });

@@ -16,10 +16,11 @@ import {
         fnCreateZhConfig,
         fnCreateDatasetInfo,
         fnCreateValueMovingFromSeria
-      } from './QuandlAdapterFn';
-import {fCreatePieConfig} from './QuandlAdapterToPie';
-import {fCreateStackedAreaConfig} from './QuandlAdapterToStackedArea';
+      } from './QuandlFn';
+import {fCreatePieConfig} from './QuandlToPie';
+import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
 import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
+import {fCreateTreeMapConfig} from './QuandlToTreeMap';
 
 const QuandlAdapter = {};
 
@@ -415,22 +416,23 @@ const fnConfigAxes = function(result){
 
 const fnQuandlFlow = _.flow(fnGetSeries, fnConfigAxes);
 
+const _fCreateAreaConfig = function(json, option){
+  const config = ChartConfig.fBaseAreaConfig();
+  return fnQuandlFlow(config, json, option);
+}
+
+const _rToConfig = {
+  [ChartType.AREA] : _fCreateAreaConfig,
+  [ChartType.SEMI_DONUT] : fCreatePieConfig,
+  [ChartType.STACKED_AREA] : fCreateStackedAreaConfig,
+  [ChartType.STACKED_COLUMN] : fCreateStackedColumnConfig,
+  [ChartType.TREE_MAP] : fCreateTreeMapConfig
+}
+
 QuandlAdapter.toConfig = function(json, option){
    const {seriaType=ChartType.AREA} = option;
-
-   switch (seriaType) {
-     case ChartType.AREA :
-        const config = ChartConfig.fBaseAreaConfig();
-        return fnQuandlFlow(config, json, option);
-      case ChartType.SEMI_DONUT :
-        return fCreatePieConfig(json, option);
-      case ChartType.STACKED_AREA :
-        return fCreateStackedAreaConfig(json, option);
-      case ChartType.STACKED_COLUMN :
-        return fCreateStackedColumnConfig(json, option);
-      default :
-        return fnQuandlFlow(ChartConfig.fBaseAreaConfig(), json, option);
-   }
+   
+   return _rToConfig[seriaType](json, option);
 }
 
 

@@ -22,18 +22,10 @@ var WithPieChart = {
       },
       zhDetailCharts: [],
 
+      credits: _Chart2.default.fCreditsRightBottom(),
       title: _Chart2.default.fTitle(),
       subtitle: _Chart2.default.fSubtitle(),
-      legend: {
-        //floating: true,
-        //y : 300,
-        itemStyle: {
-          color: 'black',
-          cursor: 'pointer',
-          fontSize: '16px',
-          fontWeight: 'normal'
-        }
-      }
+      legend: _Chart2.default.fLegend()
     };
   },
   fInnerPieSeria: function fInnerPieSeria(_ref) {
@@ -95,13 +87,12 @@ var WithPieChart = {
         enabled: isDataLabels,
         distance: -5
       },
-      tooltip: {
-        pointFormatter: _Tooltip2.default.fnPiePointFormatter,
-        headerFormat: ''
-      }
+
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnPiePointFormatter)
+
     };
   }
 };
 
 exports.default = WithPieChart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithPieChart.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithPie.js.map

@@ -14,6 +14,10 @@ var _highchartsMore = require('highcharts/lib/highcharts-more');
 
 var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
+var _treemap = require('highcharts/lib/modules/treemap');
+
+var _treemap2 = _interopRequireDefault(_treemap);
+
 var _AppErc = require('./components/AppErc');
 
 var _AppErc2 = _interopRequireDefault(_AppErc);
@@ -25,6 +29,8 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _highchartsMore2.default)(_highcharts2.default);
+(0, _treemap2.default)(_highcharts2.default);
+
 _highcharts2.default.setOptions(_ChartConfig2.default.theme);
 
 var _fnRemoveSpinner = function _fnRemoveSpinner() {

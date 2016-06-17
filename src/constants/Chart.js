@@ -22,18 +22,56 @@ const _fnCreateMonoColors = function({
 
 
 const Chart = {
+  COLOR_PERIOD : 4/7,
+  COLOR_LOW_LEVEL : -3/7,
+  COLOR_OPACITY : 0.75,
+  COLOR_BASE1 : '#7CB5EC',
+  COLOR_BASE2 : '#90ED7D',
+
   HEIGHT : 300,
   STACKED_HEIGHT : 500,
   LEGEND_ROW_HEIGHT : 32,
 
   SPACING_TOP : 20,
   SPACING_BOTTOM : 24,
+  MARGIN_TOP : 60,
 
   _monoColors : _fnCreateMonoColors({}),
+
+  fCreateMonoColor(base='#7CB5EC', deltaColor=0, opacity=0.75){
+    return Highcharts.Color(base)
+                      .brighten( (this.COLOR_LOW_LEVEL) + deltaColor)
+                      .setOpacity(opacity)
+                      .get()
+  },
 
   fnGetMonoColor(index){
      const colorIndex = index % 8;
      return  this._monoColors[colorIndex];
+  },
+
+  fCreditsRightBottom(option={}){
+    return merge({
+       enabled : true,
+       position : {
+           align: 'right',
+           x: -10,
+           verticalAlign: 'bottom',
+           y: -5
+      }
+    }, option)
+  },
+
+  fResetZoomButton(option={}){
+    return merge({
+       position: {
+          align: 'left',
+          verticalAlign: 'top',
+          x: 100,
+          y: 48
+       },
+       relativeTo: 'chart'
+    }, option)
   },
 
   fTitle(option={}){
@@ -44,6 +82,7 @@ const Chart = {
        x: 25,
        y: 25,
        style: {
+         fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
          color: '#a487d4',
          fontSize: '16px',
          fontWeight: 'bold'
@@ -59,10 +98,19 @@ const Chart = {
       y: 45,
       style: {
         color: 'black',
+        fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
         fontSize: '16px',
-        fontWeight: 'normal'
+        fontWeight: 'bold'
+        //fontWeight: 'normal'
       }
     }, option)
+  },
+
+  fTooltip(fnPointFormatter){
+    return {
+        pointFormatter : fnPointFormatter,
+        headerFormat : ''
+    }
   },
 
   fXAxisOpposite(option={}){
@@ -73,6 +121,75 @@ const Chart = {
       labels : {
         y : -5
       }
+    }, option)
+  },
+
+  fYAxisOpposite(option={}){
+    return merge({
+       opposite: true,
+       title: {
+          text: ''
+       }
+    }, option)
+  },
+
+  fPlotOptionsArea(option={}){
+    return merge({
+      lineColor: 'yellow',
+      lineWidth: 0,
+      marker: {
+          enabled : false,
+          lineWidth: 1,
+          lineColor: '#a487d4'
+      },
+      state : {
+        hover : {
+          lineWidth : 2
+        },
+        halo : {
+          opacity: 0.25,
+          size : 10
+        }
+      }
+    }, option);
+  },
+
+  fPlotOptionsColumn(option={}){
+    return merge({
+        lineColor: 'yellow',
+        lineWidth: 0,
+        marker: {
+            enabled : false,
+            lineWidth: 1,
+            lineColor: '#a487d4'
+        },
+        state : {
+          hover : {
+            lineWidth : 2
+          },
+          halo : {
+            opacity: 0.25,
+            size : 10
+          }
+        }
+    }, option)
+  },
+
+  fLegend(option={}){
+    return merge({
+       //itemMarginBottom : 5,
+       symbolHeight: 14,
+       symbolWidth: 14,
+       symbolRadius: 7,
+       useHTML: true,
+       itemStyle : {
+         color: 'black',
+         cursor: 'pointer',
+         fontSize: '16px',
+         fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
+         fontWeight: 'bold',
+         lineHeight : 1.5
+       }
     }, option)
   }
 

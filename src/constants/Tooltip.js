@@ -107,6 +107,22 @@ const _fnStackedAreaTooltip = function({id, value, point}){
   </div>`
 }
 
+const _fnTreeMapTooltip = function({id, point}){
+  const {nameFull, year, value='0.0', percent='0.0', total=0} = point;
+  return _fnTooltipHeader(nameFull, id, 'tp--fs16') +
+  `<div class="tp__body tp--fs16">
+  <span class="tp__body__title">Year: </span>
+  <span class="tp__body__value">${year}</span></br>
+  <span class="tp__body__title">Value: </span>
+  <span class="tp__body__value">${_fnNumberFormat(value)}</span></br>
+  <span class="tp__body__title">Percent: </span>
+  <span class="tp__body__value">${percent}</span></br>
+  <span class="tp__body__title">Total: </span>
+  <span class="tp__body__value">${_fnNumberFormat(total)}</span></br>
+  </div>`
+}
+
+
 const _fnAddHandlerClose = function(id, point){
   setTimeout( function(){
           document.getElementById(id)
@@ -141,5 +157,6 @@ Tooltip.fnHighLowPointFormatter = _fnBasePointFormatter(_fnHighLowTooltip, false
 
 Tooltip.fnPiePointFormatter = _fnBasePointFormatter(_fnPieTooltip, false, true);
 Tooltip.fnStackedAreaPointFormatter = _fnBasePointFormatter(_fnStackedAreaTooltip, false, true);
+Tooltip.fnTreeMapPointFormatter = _fnBasePointFormatter(_fnTreeMapTooltip, false, true);
 
 export default Tooltip

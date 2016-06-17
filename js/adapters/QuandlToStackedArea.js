@@ -17,7 +17,7 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 var _StackedFn = require('./StackedFn');
 
-var _QuandlAdapterFn = require('./QuandlAdapterFn');
+var _QuandlFn = require('./QuandlFn');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43,19 +43,19 @@ var fCreateStackedAreaConfig = exports.fCreateStackedAreaConfig = function fCrea
   config.xAxis.categories = categories;
   config.chart.height = _Chart2.default.STACKED_HEIGHT;
 
-  (0, _QuandlAdapterFn.fnSetTitleToConfig)(config, option);
+  (0, _QuandlFn.fnSetTitleToConfig)(config, option);
 
-  config.valueMoving = (0, _QuandlAdapterFn.fnCreateValueMoving)({
+  config.valueMoving = (0, _QuandlFn.fnCreateValueMoving)({
     bNowValue: bNowTotal,
     bPrevValue: bPrevTotal
   });
 
-  config.zhConfig = (0, _QuandlAdapterFn.fnCreateZhConfig)(option);
+  config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;
   config.zhConfig.isWithoutIndicator = true;
-  config.info = (0, _QuandlAdapterFn.fnCreateDatasetInfo)(json);
+  config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
 
   return { config: config };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlAdapterToStackedArea.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToStackedArea.js.map

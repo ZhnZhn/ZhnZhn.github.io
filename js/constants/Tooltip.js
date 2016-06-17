@@ -102,6 +102,21 @@ var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref8) {
   return _fnTooltipHeader(nameFull, id, 'tp--fs16') + ('<div class="tp__body tp--fs16">\n  <span class="tp__body__title">Year: </span>\n  <span class="tp__body__value">' + category + '</span></br>\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  <span class="tp__body__title">Percent: </span>\n  <span class="tp__body__value">' + percent + '</span></br>\n  <span class="tp__body__title">Total: </span>\n  <span class="tp__body__value">' + _fnNumberFormat(total) + '</span></br>\n  </div>');
 };
 
+var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref9) {
+  var id = _ref9.id;
+  var point = _ref9.point;
+  var nameFull = point.nameFull;
+  var year = point.year;
+  var _point$value = point.value;
+  var value = _point$value === undefined ? '0.0' : _point$value;
+  var _point$percent2 = point.percent;
+  var percent = _point$percent2 === undefined ? '0.0' : _point$percent2;
+  var _point$total2 = point.total;
+  var total = _point$total2 === undefined ? 0 : _point$total2;
+
+  return _fnTooltipHeader(nameFull, id, 'tp--fs16') + ('<div class="tp__body tp--fs16">\n  <span class="tp__body__title">Year: </span>\n  <span class="tp__body__value">' + year + '</span></br>\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + _fnNumberFormat(value) + '</span></br>\n  <span class="tp__body__title">Percent: </span>\n  <span class="tp__body__value">' + percent + '</span></br>\n  <span class="tp__body__title">Total: </span>\n  <span class="tp__body__value">' + _fnNumberFormat(total) + '</span></br>\n  </div>');
+};
+
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
     document.getElementById(id).addEventListener('click', function _fnHide() {
@@ -135,6 +150,7 @@ Tooltip.fnHighLowPointFormatter = _fnBasePointFormatter(_fnHighLowTooltip, false
 
 Tooltip.fnPiePointFormatter = _fnBasePointFormatter(_fnPieTooltip, false, true);
 Tooltip.fnStackedAreaPointFormatter = _fnBasePointFormatter(_fnStackedAreaTooltip, false, true);
+Tooltip.fnTreeMapPointFormatter = _fnBasePointFormatter(_fnTreeMapTooltip, false, true);
 
 exports.default = Tooltip;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Tooltip.js.map

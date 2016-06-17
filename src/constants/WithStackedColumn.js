@@ -12,31 +12,19 @@ const WithStackedColumn = {
       },
       zhDetailCharts : []  ,
 
+      credits : Chart.fCreditsRightBottom(),
       chart: {
         type: 'column',
         spacingTop: Chart.SPACING_TOP,
         spacingBottom: Chart.SPACING_BOTTOM,
 
         zoomType : 'xy',
-        resetZoomButton: {
-             position: {
-                 align: 'left',
-                 verticalAlign: 'top',
-                 x: 100,
-                 y: 48
-             },
-             relativeTo: 'chart'
-        }        
+        resetZoomButton : Chart.fResetZoomButton()
       },
 
       title : Chart.fTitle({y:40}),
       subtitle : Chart.fSubtitle({y:60}),
-
-      /*
-      xAxis : {
-        categories : []
-      },
-      */
+      tooltip : Chart.fTooltip(Tooltip.fnStackedAreaPointFormatter),
 
       xAxis: Chart.fXAxisOpposite({
         categories:[],
@@ -49,47 +37,12 @@ const WithStackedColumn = {
         }
       }),
 
-      yAxis: {
-        opposite: true,
-        title: {
-          text: ''
-        }
-      },
-
-      tooltip: {
-        pointFormatter : Tooltip.fnStackedAreaPointFormatter,
-        headerFormat : ''
-      },
+      yAxis: Chart.fYAxisOpposite(),
 
       plotOptions: {
-           column: {
-               stacking: 'normal',
-               lineColor: 'yellow',
-               lineWidth: 0,
-               marker: {
-                   enabled : false,
-                   lineWidth: 1,
-                   lineColor: '#a487d4'
-               },
-               state : {
-                 hover : {
-                   lineWidth : 2
-                 },
-                 halo : {
-                   opacity: 0.25,
-                   size : 10
-                 }
-               }
-           }
+           column: Chart.fPlotOptionsColumn({stacking : 'normal'})
      },
-     legend : {
-       itemStyle : {
-         color: 'black',
-         cursor: 'pointer',
-         fontSize: '16px',
-         fontWeight: 'normal'
-       }
-     }
+     legend : Chart.fLegend()
    }
  },
 
