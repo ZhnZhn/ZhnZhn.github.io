@@ -1,5 +1,4 @@
 
-
 import _ from 'lodash';
 import Big from 'big.js';
 
@@ -15,23 +14,35 @@ import {
   fnSetTitleToConfig
 } from './QuandlFn';
 
-import { fnCalcTotal } from './StackedFn';
+import { fnCalcTotal, fnCreateSparkData } from './StackedFn';
 
-const _fnCreateDataAndTotal = function(yearData=[], items=[]){
-  const year = (yearData[0]) ? yearData[0].split('-')[0] : '';
-  let data = []
-    , bTotal = Big('0.0');
+const _fnCreateYearTotals = function(jsonData, items){
+   const bYearTotals = [];
+   jsonData.forEach((year, yearIndex) =>{
+      bYearTotals.push( fnCalcTotal(year, items) );
+   })
+   return bYearTotals;
+}
+
+const _fnCreateDataAndTotal = function(jsonData=[], items=[], bYearTotals=[]){
+  const yearData = jsonData[0]
+     , _year = (yearData[0]) ? yearData[0].split('-')[0] : ''
+     , bTotal = ( bYearTotals[0] ) ? bYearTotals[0] : Big('0.0');
+  let data = [];
 
   items.forEach((item, itemIndex) =>{
-    let value = yearData[item.value];
-    if (value){
+    const { value, caption } = item
+        , _value = yearData[value];
+    if (_value){
+       const { sparkvalues, sparkpercent } = fnCreateSparkData(jsonData, value, bYearTotals);
        data.push({
-          year : year,
-          name : item.caption,
-          nameFull: item.caption,
-          value : value,
+          sparkvalues : sparkvalues.reverse(),
+          sparkpercent : sparkpercent.reverse(),
+          year : _year,
+          name : caption,
+          nameFull: caption,
+          value : _value,
         });
-       bTotal = bTotal.plus(value);
     }
   });
 
@@ -96,8 +107,8 @@ export const fCreateTreeMapConfig = function(json, option){
      ,  zhSeriaId = `${value}_${ChartType.TREE_MAP}`
      ,  jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []
      ,  chartType = ChartType.TREE_MAP
-
-     , {data, bTotal } = _fnCreateDataAndTotal(jsonData[0], items100)
+     ,  bYearTotals = _fnCreateYearTotals(jsonData, items100)
+     , {data, bTotal } = _fnCreateDataAndTotal(jsonData, items100, bYearTotals)
      , {level60, level90} = _fnCalcLevelAndSetPercent(data, bTotal)
      , bPrevTotal = fnCalcTotal(jsonData[1], items100);
 
@@ -106,6 +117,8 @@ export const fCreateTreeMapConfig = function(json, option){
   config.series = [ ChartConfig.fCreateTreeMapSeria(zhSeriaId, data) ];
   config.chart.height = Chart.STACKED_HEIGHT;
 
+  const yearTitle = (jsonData[0] && jsonData[0][0]) ? jsonData[0][0].split('-')[0] : ''
+  option.title = `${yearTitle}:${option.title}`;
   fnSetTitleToConfig(config, option);
 
   config.valueMoving = fnCreateValueMoving({

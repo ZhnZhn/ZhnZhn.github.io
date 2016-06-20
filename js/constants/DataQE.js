@@ -122,6 +122,28 @@ var DataQE = {
         },
         dataColumn: 1
     },
+    QE_IMF_CROSSCOUNTRY: {
+        type: 'QE_IMF_CROSSCOUNTRY',
+        menuTitle: 'IMF Cross Country Metrics',
+        dialogCaption: 'IMF Cross Country Metrics',
+        chartContainerCaption: 'Quandl IMF Cross Country Metrics',
+        dialogComp: _DialogType4.default,
+        dialogProps: {
+            isTreeItem: true,
+            initFromDate: _DateUtils2.default.getFromDate(7),
+            oneCaption: 'Country',
+            oneURI: './data/quandl/iso3-countries.json',
+            oneJsonProp: 'countries',
+            twoCaption: 'Group',
+            twoURI: './data/quandl/imf-metric-groups.json',
+            twoJsonProp: 'groups',
+            threeCaption: 'Metric',
+            fnValue: function fnValue(country, metric) {
+                return 'ODA/' + country + '_' + metric;
+            }
+        },
+        dataColumn: 1
+    },
     QE_CPI_INFLATION: {
         type: 'QE_CPI_INFLATION',
         menuTitle: 'CPI & Inflation',

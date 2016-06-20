@@ -477,7 +477,7 @@ var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   return fnQuandlFlow(config, json, option);
 };
 
-var _rToConfig = (_rToConfig2 = {}, _defineProperty(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), _defineProperty(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), _rToConfig2);
+var _rToConfig = (_rToConfig2 = {}, _defineProperty(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), _defineProperty(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), _rToConfig2);
 
 QuandlAdapter.toConfig = function (json, option) {
   var _option$seriaType = option.seriaType;

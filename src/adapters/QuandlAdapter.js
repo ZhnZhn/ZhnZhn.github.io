@@ -425,13 +425,15 @@ const _rToConfig = {
   [ChartType.AREA] : _fCreateAreaConfig,
   [ChartType.SEMI_DONUT] : fCreatePieConfig,
   [ChartType.STACKED_AREA] : fCreateStackedAreaConfig,
+  [ChartType.STACKED_AREA_PERCENT] : fCreateStackedAreaConfig,
   [ChartType.STACKED_COLUMN] : fCreateStackedColumnConfig,
+  [ChartType.STACKED_COLUMN_PERCENT] : fCreateStackedColumnConfig,
   [ChartType.TREE_MAP] : fCreateTreeMapConfig
 }
 
 QuandlAdapter.toConfig = function(json, option){
    const {seriaType=ChartType.AREA} = option;
-   
+
    return _rToConfig[seriaType](json, option);
 }
 

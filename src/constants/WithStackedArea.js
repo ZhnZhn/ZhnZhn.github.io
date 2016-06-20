@@ -4,7 +4,7 @@ import Chart from './Chart';
 import Tooltip from './Tooltip';
 
 const WithStackAreaChart = {
-   fBaseStackAreaConfig(){
+   fBaseStackAreaConfig({ stacking='normal' }){
      return {
        zhSeries : {
          count : 0
@@ -37,7 +37,7 @@ const WithStackAreaChart = {
        yAxis: Chart.fYAxisOpposite(),
 
        plotOptions: {
-            area: Chart.fPlotOptionsArea({ stacking: 'normal' })
+            area: Chart.fPlotOptionsArea({ stacking })
       },
       legend : Chart.fLegend()
     }

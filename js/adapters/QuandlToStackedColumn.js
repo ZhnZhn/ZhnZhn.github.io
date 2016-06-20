@@ -22,16 +22,19 @@ var _QuandlFn = require('./QuandlFn');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var fCreateStackedColumnConfig = exports.fCreateStackedColumnConfig = function fCreateStackedColumnConfig(json, option) {
-   var config = _ChartConfig2.default.fBaseStackedColumnConfig();
+   var chartType = option.seriaType;
+   var stacking = chartType === _Type.ChartType.STACKED_COLUMN_PERCENT ? 'percent' : 'normal';
+   var PERCENT = stacking === 'percent' ? ':PERCENT' : '';
+   var config = _ChartConfig2.default.fBaseStackedColumnConfig({ stacking: stacking });
    var _option$sliceItems = option.sliceItems;
    var items100 = _option$sliceItems === undefined ? [] : _option$sliceItems;
    var _option$value = option.value;
    var value = _option$value === undefined ? '' : _option$value;
-   var zhSeriaId = value + '_' + _Type.ChartType.STACKED_COLUMN;
+   var zhSeriaId = value + '_' + chartType;
    var jsonData = json.dataset && json.dataset.data ? json.dataset.data : [];
-   var chartType = _Type.ChartType.STACKED_COLUMN;
+   //, chartType = ChartType.STACKED_COLUMN
 
-   var _fnCreateStackedConfi = (0, _StackedFn.fnCreateStackedConfig)({ jsonData: jsonData, items100: items100, zhSeriaId: zhSeriaId, chartType: chartType });
+   var _fnCreateStackedConfi = (0, _StackedFn.fnCreateStackedConfig)({ jsonData: jsonData, items100: items100, zhSeriaId: zhSeriaId, chartType: chartType, stacking: stacking });
 
    var bNowTotal = _fnCreateStackedConfi.bNowTotal;
    var bPrevTotal = _fnCreateStackedConfi.bPrevTotal;
@@ -43,6 +46,7 @@ var fCreateStackedColumnConfig = exports.fCreateStackedColumnConfig = function f
    config.xAxis.categories = categories;
    config.chart.height = _Chart2.default.STACKED_HEIGHT;
 
+   option.title = '' + option.title + PERCENT;
    (0, _QuandlFn.fnSetTitleToConfig)(config, option);
 
    config.valueMoving = (0, _QuandlFn.fnCreateValueMoving)({

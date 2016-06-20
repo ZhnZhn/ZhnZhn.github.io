@@ -3,7 +3,7 @@
    position: relative;
    padding-bottom:5px;
    padding-right: 20px;
-   font-size: 12px;
+   font-size: 16px;
    font-weight: bold;
    cursor: pointer;
  }
@@ -17,8 +17,21 @@
    color: #ED5813;
  }
  .tp__body {
+   font-size: 16px;
    font-weight:bold;
  }
+
+ .tp__body__part1:after{
+   content: "";
+   display: table;
+   clear: both;
+ }
+ .tp__body__sparklines{
+   height: 50px;
+   width: 100px;
+   padding-bottom: 5px;
+ }
+
  .tp__body__title {
    color:rgba(69, 114, 167, 1);
  }
@@ -27,8 +40,4 @@
  }
  .tp__body__value_exdividend{
    color: green;
- }
-
- .tp--fs16{
-   font-size: 16px;
  }

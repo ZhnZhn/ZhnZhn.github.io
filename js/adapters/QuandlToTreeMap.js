@@ -29,24 +29,42 @@ var _StackedFn = require('./StackedFn');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fnCreateDataAndTotal = function _fnCreateDataAndTotal() {
-  var yearData = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-  var items = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+var _fnCreateYearTotals = function _fnCreateYearTotals(jsonData, items) {
+  var bYearTotals = [];
+  jsonData.forEach(function (year, yearIndex) {
+    bYearTotals.push((0, _StackedFn.fnCalcTotal)(year, items));
+  });
+  return bYearTotals;
+};
 
-  var year = yearData[0] ? yearData[0].split('-')[0] : '';
-  var data = [],
-      bTotal = (0, _big2.default)('0.0');
+var _fnCreateDataAndTotal = function _fnCreateDataAndTotal() {
+  var jsonData = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var items = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+  var bYearTotals = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
+
+  var yearData = jsonData[0],
+      _year = yearData[0] ? yearData[0].split('-')[0] : '',
+      bTotal = bYearTotals[0] ? bYearTotals[0] : (0, _big2.default)('0.0');
+  var data = [];
 
   items.forEach(function (item, itemIndex) {
-    var value = yearData[item.value];
-    if (value) {
+    var value = item.value;
+    var caption = item.caption;
+    var _value = yearData[value];
+    if (_value) {
+      var _fnCreateSparkData = (0, _StackedFn.fnCreateSparkData)(jsonData, value, bYearTotals);
+
+      var sparkvalues = _fnCreateSparkData.sparkvalues;
+      var sparkpercent = _fnCreateSparkData.sparkpercent;
+
       data.push({
-        year: year,
-        name: item.caption,
-        nameFull: item.caption,
-        value: value
+        sparkvalues: sparkvalues.reverse(),
+        sparkpercent: sparkpercent.reverse(),
+        year: _year,
+        name: caption,
+        nameFull: caption,
+        value: _value
       });
-      bTotal = bTotal.plus(value);
     }
   });
 
@@ -115,8 +133,9 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
   var zhSeriaId = value + '_' + _Type.ChartType.TREE_MAP;
   var jsonData = json.dataset && json.dataset.data ? json.dataset.data : [];
   var chartType = _Type.ChartType.TREE_MAP;
+  var bYearTotals = _fnCreateYearTotals(jsonData, items100);
 
-  var _fnCreateDataAndTotal2 = _fnCreateDataAndTotal(jsonData[0], items100);
+  var _fnCreateDataAndTotal2 = _fnCreateDataAndTotal(jsonData, items100, bYearTotals);
 
   var data = _fnCreateDataAndTotal2.data;
   var bTotal = _fnCreateDataAndTotal2.bTotal;
@@ -132,6 +151,8 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
   config.series = [_ChartConfig2.default.fCreateTreeMapSeria(zhSeriaId, data)];
   config.chart.height = _Chart2.default.STACKED_HEIGHT;
 
+  var yearTitle = jsonData[0] && jsonData[0][0] ? jsonData[0][0].split('-')[0] : '';
+  option.title = yearTitle + ':' + option.title;
   (0, _QuandlFn.fnSetTitleToConfig)(config, option);
 
   config.valueMoving = (0, _QuandlFn.fnCreateValueMoving)({

@@ -80,7 +80,9 @@ const UNCommodityTradeDialog = React.createClass({
         {caption : 'Default : Area', value: ChartType.AREA},
         {caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: ChartType.SEMI_DONUT},
         {caption : 'Stacked Area : Total Top90, On Recent Year', value: ChartType.STACKED_AREA},
+        {caption : 'Stacked Area Percent : Total Top90, On Recent Year', value: ChartType.STACKED_AREA_PERCENT},
         {caption : 'Stacked Column : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN},
+        {caption : 'Stacked Column Percent : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN_PERCENT},
         {caption : 'Tree Map : On Recent Year', value: ChartType.TREE_MAP}
       ],
 

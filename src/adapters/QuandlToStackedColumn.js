@@ -15,19 +15,22 @@ import {
 
 
 export const fCreateStackedColumnConfig = function(json, option){
-   const config = ChartConfig.fBaseStackedColumnConfig()
+   const { seriaType:chartType } = option
+       , stacking = (chartType === ChartType.STACKED_COLUMN_PERCENT) ? 'percent' : 'normal'
+       , PERCENT = ( stacking === 'percent' ) ? ':PERCENT' : ''
+       , config = ChartConfig.fBaseStackedColumnConfig({ stacking })
        , {sliceItems:items100=[], value=''} = option
-       , zhSeriaId = `${value}_${ChartType.STACKED_COLUMN}`
+       , zhSeriaId = `${value}_${chartType}`
        , jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []
-       , chartType = ChartType.STACKED_COLUMN
+       //, chartType = ChartType.STACKED_COLUMN
        , {bNowTotal, bPrevTotal, series, categories} =
-            fnCreateStackedConfig({jsonData, items100, zhSeriaId, chartType})
+            fnCreateStackedConfig({jsonData, items100, zhSeriaId, chartType, stacking })
 
    config.series = series;
    config.xAxis.categories = categories;
    config.chart.height = Chart.STACKED_HEIGHT;
 
-
+   option.title = `${option.title}${PERCENT}`
    fnSetTitleToConfig(config, option);
 
    config.valueMoving = fnCreateValueMoving({

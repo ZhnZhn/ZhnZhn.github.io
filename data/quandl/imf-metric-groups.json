@@ -1,0 +1,72 @@
+{
+  "groups" : [
+    {
+      "caption" : "Balance of Payments", "value" : "Balance of Payments",
+      "columns" : [
+        { "caption" : "Current Account Balance, % of GDP", "value" : "BCA_NGDPD"},
+        { "caption" : "Current Account Balance, USD Billions", "value" : "BCA"}
+      ]
+    },{
+      "caption" : "Inflation", "value" : "Inflation",
+      "columns" : [
+        { "caption" : "Inflation % change, Average Consumer Prices", "value" : "PCPIPCH"},
+        { "caption" : "Inflation % change, End of Period Consumer Prices", "value" : "PCPIEPCH"},
+        { "caption" : "Inflation Index, Average Consumer Prices", "value" : "PCPI"},
+        { "caption" : "Inflation Index, End of Period Consumer Prices", "value" : "PCPIE"}
+      ]
+    },{
+      "caption" : "Government Finance", "value" : "Government Finance",
+      "columns" : [
+        { "caption" : "General Government Gross Debt, % of GDP", "value" : "GGXWDG_NGDP"},
+        { "caption" : "General Government Gross Debt, USD Billions", "value" : "GGXWDG"},
+        { "caption" : "General Government Net Debt, % of GDP", "value" : "GGXWDN_NGDP"},
+        { "caption" : "General Government Net Debt, USD Billions", "value" : "GGXWDN"},
+        { "caption" : "General Government Net Lending/Borrowing, % of GDP", "value" : "GGXCNL_NGDP"},
+        { "caption" : "General Government Net Lending/Borrowing, USD Billions", "value" : "GGXCNL"},
+        { "caption" : "General Government Primary Net Lending/Borrowing, % of GDP Billions", "value" : "GGXONLB_NGDP"},
+        { "caption" : "General Government Primary Net Lending/Borrowing, USD Billions", "value" : "GGXONLB"},
+        { "caption" : "General Government Revenue, % of GDP", "value" : "GGR_NGDP"},
+        { "caption" : "General Government Revenue, USD Billions", "value" : "GGR"},
+        { "caption" : "General Government Structural Balance, % of GDP", "value" : "GGSB_NPGDP"},
+        { "caption" : "General Government Structural Balance, USD Billions", "value" : "GGSB"},
+        { "caption" : "General Government Total Expenditure, % of GDP", "value" : "GGX_NGDP"},
+        { "caption" : "General Government Total Expenditure, USD Billions", "value" : "GGX"}
+      ]
+    },{
+      "caption" : "National Accounts", "value" : "National Accounts",
+      "columns" : [
+        { "caption" : "Country GDP based on PPP Valuation, USD Billions", "value" : "PPPGDP"},
+        { "caption" : "Share of World GDP based on PPP, %", "value" : "PPPSH"},
+        { "caption" : "Implied PPP Conversion Rate, LCU per USD", "value" : "PPPEX"},
+        { "caption" : "GDP per Capita at Constant Prices, LCU", "value" : "NGDPRPC"},
+        { "caption" : "GDP per Capita at Current Prices, LCU", "value" : "NGDPPC"},
+        { "caption" : "GDP per Capita at Current Prices, USD", "value" : "NGDPDPC"},
+        { "caption" : "Per Capita GDP based on PPP Valuation, USD", "value" : "PPPPC"},
+        { "caption" : "GDP at Constant Prices, % change", "value" : "NGDP_RPCH"},
+        { "caption" : "GDP at Constant Prices, LCU Billions", "value" : "NGDP_R"},
+        { "caption" : "GDP at Current Prices, LCU Billions", "value" : "NGDP"},
+        { "caption" : "GDP at Current Prices, USD Billions", "value" : "NGDPD"},
+        { "caption" : "GDP Corresponding to Fiscal Year, Current Prices, LCU Billions", "value" : "NGDP_FY"},
+        { "caption" : "Output Gap, % of potential GDP", "value" : "NGAP_NPGDP"},
+        { "caption" : "GDP Deflator", "value" : "NGDP_D"},
+        { "caption" : "Gross National Savings, % of GDP", "value" : "NGSD_NGDP"},
+        { "caption" : "Total Investment, % of GDP", "value" : "NID_NGDP"}
+      ]
+    },{
+      "caption" : "People", "value" : "People",
+      "columns" : [
+        { "caption" : "Population, Millions", "value" : "LP"},
+        { "caption" : "Employment, Millions", "value" : "LE"},
+        { "caption" : "Unemployment Rate, % of Total Labor Force", "value" : "LUR"}
+      ]
+    },{
+      "caption" : "Trade", "value" : "Trade",
+      "columns" : [
+        { "caption" : "Exports of Goods and services, % change", "value" : "TX_RPCH"},
+        { "caption" : "Exports of Goods, % change", "value" : "TXG_RPCH"},
+        { "caption" : "Imports of Goods and services, % change", "value" : "TM_RPCH"},
+        { "caption" : "Imports of Goods, % change", "value" : "TMG_RPCH"}
+      ]
+    }
+  ]
+}

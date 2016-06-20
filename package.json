@@ -24,6 +24,7 @@
       "localforage": "npm:localforage@^1.4.2",
       "lodash": "npm:lodash@^4.6.1",
       "react": "npm:react@^0.14.8",
+      "react-addons-shallow-compare": "npm:react-addons-shallow-compare@0.14.8",
       "react-dom": "npm:react-dom@^0.14.8",
       "reflux": "npm:reflux@^0.4.0"
     },

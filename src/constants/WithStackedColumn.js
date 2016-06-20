@@ -5,7 +5,7 @@ import Tooltip from './Tooltip';
 
 const WithStackedColumn = {
 
-  fBaseStackedColumnConfig(){
+  fBaseStackedColumnConfig({ stacking='normal' }){
     return {
       zhSeries : {
         count : 0
@@ -40,7 +40,7 @@ const WithStackedColumn = {
       yAxis: Chart.fYAxisOpposite(),
 
       plotOptions: {
-           column: Chart.fPlotOptionsColumn({stacking : 'normal'})
+           column: Chart.fPlotOptionsColumn({ stacking })
      },
      legend : Chart.fLegend()
    }

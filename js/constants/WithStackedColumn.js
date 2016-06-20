@@ -15,7 +15,10 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var WithStackedColumn = {
-  fBaseStackedColumnConfig: function fBaseStackedColumnConfig() {
+  fBaseStackedColumnConfig: function fBaseStackedColumnConfig(_ref) {
+    var _ref$stacking = _ref.stacking;
+    var stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
+
     return {
       zhSeries: {
         count: 0
@@ -50,18 +53,18 @@ var WithStackedColumn = {
       yAxis: _Chart2.default.fYAxisOpposite(),
 
       plotOptions: {
-        column: _Chart2.default.fPlotOptionsColumn({ stacking: 'normal' })
+        column: _Chart2.default.fPlotOptionsColumn({ stacking: stacking })
       },
       legend: _Chart2.default.fLegend()
     };
   },
-  fStackedColumnSeria: function fStackedColumnSeria(_ref) {
-    var zhSeriaId = _ref.zhSeriaId;
-    var name = _ref.name;
-    var _ref$data = _ref.data;
-    var data = _ref$data === undefined ? [] : _ref$data;
-    var _ref$color = _ref.color;
-    var color = _ref$color === undefined ? 'gray' : _ref$color;
+  fStackedColumnSeria: function fStackedColumnSeria(_ref2) {
+    var zhSeriaId = _ref2.zhSeriaId;
+    var name = _ref2.name;
+    var _ref2$data = _ref2.data;
+    var data = _ref2$data === undefined ? [] : _ref2$data;
+    var _ref2$color = _ref2.color;
+    var color = _ref2$color === undefined ? 'gray' : _ref2$color;
 
     return {
       zhSeriaId: zhSeriaId,

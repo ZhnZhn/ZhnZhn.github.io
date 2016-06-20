@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fnCreateStackedConfig = exports.fnCalcTotal = undefined;
+exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal = undefined;
 
 var _rFactorySeria2;
 
@@ -25,11 +25,13 @@ var _ChartConfig = require('../constants/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
+var _QuandlFn = require('./QuandlFn');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _rFactorySeria = (_rFactorySeria2 = {}, _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN, _ChartConfig2.default.fStackedColumnSeria), _rFactorySeria2);
+var _rFactorySeria = (_rFactorySeria2 = {}, _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA_PERCENT, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN, _ChartConfig2.default.fStackedColumnSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN_PERCENT, _ChartConfig2.default.fStackedColumnSeria), _rFactorySeria2);
 
 var fnCalcTotal = exports.fnCalcTotal = function fnCalcTotal() {
   var jsonData = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -114,6 +116,7 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
   var items90 = _ref2.items90;
   var zhSeriaId = _ref2.zhSeriaId;
   var chartType = _ref2.chartType;
+  var stacking = _ref2.stacking;
 
   var fSeria = _rFactorySeria[chartType],
       series = _fnInitSeries({ items: items90, zhSeriaId: zhSeriaId, chartType: chartType, fSeria: fSeria }),
@@ -123,8 +126,8 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
   jsonData = jsonData.reverse();
   jsonData.forEach(function (yearData, i) {
     var yearTotal100 = fnCalcTotal(yearData, items100),
-        yearTotal90 = (0, _big2.default)('0.0');
-    categories.push(yearData[0].split('-')[0]);
+        yearTotal90 = (0, _big2.default)('0.0'),
+        isFullYearData = true;
     items90.forEach(function (item, itemIndex) {
       var y = yearData[item._jsonIndex],
           percent = y ? _fnCalcPercent(yearTotal100, (0, _big2.default)(y)) : '0.0%';
@@ -136,15 +139,24 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
       });
       if (y) {
         yearTotal90 = yearTotal90.plus(y);
+      } else {
+        isFullYearData = false;
       }
     });
-    var yOther = parseInt(yearTotal100.minus(yearTotal90).toString(), 10);
-    dataOther.push({
-      y: yOther,
-      nameFull: 'Other',
-      percent: _fnCalcPercent(yearTotal100, (0, _big2.default)(yOther)),
-      total: parseInt(yearTotal100.toString(), 10)
-    });
+    if (stacking === 'percent' && !isFullYearData && categories.length === 0) {
+      items90.forEach(function (item, itemIndex) {
+        series[itemIndex].data = [];
+      });
+    } else {
+      categories.push(yearData[0].split('-')[0]);
+      var yOther = parseInt(yearTotal100.minus(yearTotal90).toString(), 10);
+      dataOther.push({
+        y: yOther,
+        nameFull: 'Other',
+        percent: _fnCalcPercent(yearTotal100, (0, _big2.default)(yOther)),
+        total: parseInt(yearTotal100.toString(), 10)
+      });
+    }
   });
 
   series.push(fSeria({
@@ -163,6 +175,8 @@ var fnCreateStackedConfig = exports.fnCreateStackedConfig = function fnCreateSta
   var zhSeriaId = _ref3.zhSeriaId;
   var _ref3$chartType = _ref3.chartType;
   var chartType = _ref3$chartType === undefined ? _Type.ChartType.STACKED_AREA : _ref3$chartType;
+  var _ref3$stacking = _ref3.stacking;
+  var stacking = _ref3$stacking === undefined ? 'normal' : _ref3$stacking;
 
   var _fnCreateReferenceDat = _fnCreateReferenceDataAndTotal(jsonData[0], items100);
 
@@ -172,7 +186,7 @@ var fnCreateStackedConfig = exports.fnCreateStackedConfig = function fnCreateSta
   var bPrevTotal = fnCalcTotal(jsonData[1], items100);
 
   var _fnCreateStackedSerie = _fnCreateStackedSeries({
-    jsonData: jsonData, items100: items100, items90: items90, zhSeriaId: zhSeriaId, chartType: chartType
+    jsonData: jsonData, items100: items100, items90: items90, zhSeriaId: zhSeriaId, chartType: chartType, stacking: stacking
   });
 
   var series = _fnCreateStackedSerie.series;
@@ -180,5 +194,24 @@ var fnCreateStackedConfig = exports.fnCreateStackedConfig = function fnCreateSta
 
 
   return { bNowTotal: bTotal, bPrevTotal: bPrevTotal, series: series, categories: categories };
+};
+
+var fnCreateSparkData = exports.fnCreateSparkData = function fnCreateSparkData(jsonData, itemIndex, bYearTotals) {
+  var sparkvalues = [],
+      sparkpercent = [];
+
+  jsonData.forEach(function (yearData, yearIndex) {
+    sparkvalues.push(yearData[itemIndex]);
+    if (yearData[itemIndex]) {
+      sparkpercent.push(parseFloat((0, _QuandlFn.fnCreatePercent)({
+        bValue: (0, _big2.default)(yearData[itemIndex]),
+        bTotal: bYearTotals[yearIndex]
+      }), 10));
+    } else {
+      sparkpercent.push(null);
+    }
+  });
+
+  return { sparkvalues: sparkvalues, sparkpercent: sparkpercent };
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\StackedFn.js.map
