@@ -54,6 +54,7 @@ const ModalDialog = React.createClass({
      isWithButton : React.PropTypes.bool,
      timeout : React.PropTypes.number,
      caption : React.PropTypes.string,
+     style : React.PropTypes.object,
      onClose : React.PropTypes.func
    },
    getDefaultProps(){
@@ -105,7 +106,7 @@ const ModalDialog = React.createClass({
   },
 
   render: function(){
-    const { isShow, isWithButton, caption, children, onClose } = this.props;
+    const { isShow, isWithButton, caption, style, children, onClose } = this.props;
 
     let _className, _style;
 
@@ -123,7 +124,7 @@ const ModalDialog = React.createClass({
     return (
          <div
              className={_className}
-             style={Object.assign({}, Styles.ROOT_DIV, _style)}
+             style={Object.assign({}, Styles.ROOT_DIV, style, _style)}
              onClick={this._handlerClickDialog}
          >
               <div style={Styles.CAPTON_DIV}>

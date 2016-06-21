@@ -28,6 +28,7 @@ const DataQE = {
       chartContainerCaption : 'Quandl United Nations Commodity Trade',
       dialogComp : UNCommodityTradeDialog,
       dialogProps : {
+        descrUrl: './data/quandl/un-commodity-trade.html',
         initFromDate : DateUtils.getFromDate(10),
         countryURI : './data/quandl/country-area.json',
         countryJsonProp : 'countries',
@@ -44,6 +45,7 @@ const DataQE = {
       chartContainerCaption : 'Quandl United Nations Global Indicator',
       dialogComp : DialogType5,
       dialogProps : {
+        descrUrl: './data/quandl/un-global-indicator.html',
         initFromDate : DateUtils.getFromDate(10),
         oneCaption : 'Country',
         oneURI : './data/quandl/country-area.json',
@@ -69,11 +71,12 @@ const DataQE = {
   },
   QE_WORLDBANK_PRICE : {
       type : 'QE_WORLDBANK_PRICE',
-      menuTitle : 'WB Economic Metrics',
+      menuTitle : 'WB Economic Metric',
       dialogCaption : 'WorlBank Economic Metric',
-      chartContainerCaption : 'Quandl World Bank Economic Metrics',
+      chartContainerCaption : 'Quandl World Bank Economic Metric',
       dialogComp : DialogType5,
       dialogProps : {
+        descrUrl: './data/quandl/wb-development-indicator.html',
         isTreeItem : true,
         initFromDate : DateUtils.getFromDate(7),
         oneCaption : 'Country',
@@ -89,11 +92,12 @@ const DataQE = {
   },
   QE_IMF_CROSSCOUNTRY : {
       type : 'QE_IMF_CROSSCOUNTRY',
-      menuTitle : 'IMF Cross Country Metrics',
-      dialogCaption : 'IMF Cross Country Metrics',
-      chartContainerCaption : 'Quandl IMF Cross Country Metrics',
+      menuTitle : 'IMF Cross Country Metric',
+      dialogCaption : 'IMF Cross Country Metric',
+      chartContainerCaption : 'Quandl IMF Cross Country Metric',
       dialogComp : DialogType5,
       dialogProps : {
+        descrUrl: './data/quandl/imf-crosscountry-metric.html',
         isTreeItem : true,
         initFromDate : DateUtils.getFromDate(7),
         oneCaption : 'Country',

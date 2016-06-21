@@ -68,6 +68,7 @@ var ModalDialog = _react2.default.createClass({
     isWithButton: _react2.default.PropTypes.bool,
     timeout: _react2.default.PropTypes.number,
     caption: _react2.default.PropTypes.string,
+    style: _react2.default.PropTypes.object,
     onClose: _react2.default.PropTypes.func
   },
   getDefaultProps: function getDefaultProps() {
@@ -126,6 +127,7 @@ var ModalDialog = _react2.default.createClass({
     var isShow = _props2.isShow;
     var isWithButton = _props2.isWithButton;
     var caption = _props2.caption;
+    var style = _props2.style;
     var children = _props2.children;
     var onClose = _props2.onClose;
 
@@ -148,7 +150,7 @@ var ModalDialog = _react2.default.createClass({
       'div',
       {
         className: _className,
-        style: Object.assign({}, Styles.ROOT_DIV, _style),
+        style: Object.assign({}, Styles.ROOT_DIV, style, _style),
         onClick: this._handlerClickDialog
       },
       _react2.default.createElement(

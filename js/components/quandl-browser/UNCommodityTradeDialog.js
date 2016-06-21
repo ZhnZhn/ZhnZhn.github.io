@@ -12,6 +12,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Type = require('../../constants/Type');
 
+var _ComponentActions = require('../../flux/actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -24,17 +28,13 @@ var _WithValidation = require('../dialogs/WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
-var _Row = require('../dialogs/Row');
+var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
-var _Row2 = _interopRequireDefault(_Row);
+var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
 var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _ButtonCircle = require('../zhn/ButtonCircle');
-
-var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -67,15 +67,6 @@ var Filter = {
   REIMPORT: 'Re-Import - Trade (USD)',
   REEXPORT: 'Re-Export - Trade (USD)'
 };
-var Styles = {
-  ROW: {
-    paddingTop: '4px',
-    paddingBottom: '8px'
-  },
-  BUTTON_CIRCLE: {
-    marginLeft: '20px'
-  }
-};
 
 var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   displayName: 'UNCommodityTradeDialog'
@@ -87,6 +78,8 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     this.subheading = null;
     this.optionTrades = null;
     this.chartType = null;
+
+    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }, { caption: 'A', onClick: this._handlerClickAll }, { caption: 'F', onClick: this._handlerClickFilter }, { caption: 'D', onClick: this._handlerClickDate }, { caption: 'C', onClick: this._handlerClickChartType }];
 
     return {
       isShowFilter: false,
@@ -175,6 +168,11 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       options = this.optionTrades;
     }
     return options;
+  },
+  _handlerClickInfo: function _handlerClickInfo() {
+    _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, {
+      descrUrl: this.props.descrUrl
+    });
   },
   _handlerClickAll: function _handlerClickAll() {
     var _state = this.state;
@@ -384,30 +382,9 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
         onShowChart: onShow,
         onClose: this._handlerClose
       },
-      _react2.default.createElement(
-        _Row2.default,
-        { style: Styles.ROW },
-        _react2.default.createElement(_ButtonCircle2.default, {
-          caption: 'A',
-          style: Styles.BUTTON_CIRCLE,
-          onClick: this._handlerClickAll
-        }),
-        _react2.default.createElement(_ButtonCircle2.default, {
-          caption: 'F',
-          style: Styles.BUTTON_CIRCLE,
-          onClick: this._handlerClickFilter
-        }),
-        _react2.default.createElement(_ButtonCircle2.default, {
-          caption: 'D',
-          style: Styles.BUTTON_CIRCLE,
-          onClick: this._handlerClickDate
-        }),
-        _react2.default.createElement(_ButtonCircle2.default, {
-          caption: 'C',
-          style: Styles.BUTTON_CIRCLE,
-          onClick: this._handlerClickChartType
-        })
-      ),
+      _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        buttons: this.toolbarButtons
+      }),
       _react2.default.createElement(_RowInputSelect2.default, {
         caption: 'Country:',
         options: optionCountries,

@@ -5,7 +5,8 @@ const LinkToken = React.createClass({
     const {isFirstBalnk, color, href, children} = this.props;
     return (
       <a
-        style={{color: color, fontWeight: 'bold', textDecoration : 'none'}}
+        className="descr__quandl-link"
+        style={{color: color}}
         target="_blank"
         href={href}
       >

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {ChartType} from '../../constants/Type';
+import {ChartType, ModalDialog} from '../../constants/Type';
+import ComponentActions from '../../flux/actions/ComponentActions';
 
 import ZhDialog from '../ZhDialog';
 import WithLoadOptions from '../dialogs/WithLoadOptions';
 import WithValidation from '../dialogs/WithValidation';
-import Row from '../dialogs/Row';
+import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import RowInputSelect from '../dialogs/RowInputSelect';
-import ButtonCircle from '../zhn/ButtonCircle';
 import ShowHide from '../zhn/ShowHide';
 import ToolBarButton from '../ToolBarButton';
 
@@ -27,15 +27,6 @@ const Filter = {
   REIMPORT : 'Re-Import - Trade (USD)',
   REEXPORT : 'Re-Export - Trade (USD)'
 };
-const Styles = {
-  ROW : {
-    paddingTop: '4px',
-    paddingBottom: '8px'
-  },
-  BUTTON_CIRCLE : {
-    marginLeft: '20px'
-  }
-}
 
 const UNCommodityTradeDialog = React.createClass({
   ...WithLoadOptions,
@@ -48,6 +39,14 @@ const UNCommodityTradeDialog = React.createClass({
     this.subheading = null;
     this.optionTrades = null;
     this.chartType = null;
+
+    this.toolbarButtons = [
+      { caption:'I', onClick: this._handlerClickInfo },
+      { caption:'A', onClick: this._handlerClickAll },
+      { caption:'F', onClick: this._handlerClickFilter },
+      { caption:'D', onClick: this._handlerClickDate },
+      { caption:'C', onClick: this._handlerClickChartType }
+    ];
 
     return {
       isShowFilter : false,
@@ -154,6 +153,12 @@ const UNCommodityTradeDialog = React.createClass({
       options = this.optionTrades;
     }
     return options;
+  },
+
+  _handlerClickInfo(){
+    ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, {
+      descrUrl: this.props.descrUrl
+    });
   },
 
   _handlerClickAll(){
@@ -336,28 +341,9 @@ const UNCommodityTradeDialog = React.createClass({
              onShowChart={onShow}
              onClose={this._handlerClose}
          >
-             <Row style={Styles.ROW}>
-               <ButtonCircle
-                 caption={'A'}
-                 style={Styles.BUTTON_CIRCLE}
-                 onClick={this._handlerClickAll}
-               />
-               <ButtonCircle
-                 caption={'F'}
-                 style={Styles.BUTTON_CIRCLE}
-                 onClick={this._handlerClickFilter}
-               />
-               <ButtonCircle
-                 caption={'D'}
-                 style={Styles.BUTTON_CIRCLE}
-                 onClick={this._handlerClickDate}
-               />
-               <ButtonCircle
-                 caption={'C'}
-                 style={Styles.BUTTON_CIRCLE}
-                 onClick={this._handlerClickChartType}
-               />
-             </Row>
+             <ToolbarButtonCircle
+               buttons={this.toolbarButtons}
+             />
 
              <RowInputSelect
                 caption={'Country:'}

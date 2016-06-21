@@ -1,17 +1,28 @@
 
 import Big from 'big.js';
+import createDOMPurify from 'dompurify';
 
 import {Direction} from '../constants/Type';
 import ChartConfig from '../constants/ChartConfig';
 
+const DOMPurify = createDOMPurify(window)
+
+
 export const fnCreateDatasetInfo = function(json){
-  const dataset = json.dataset;
+  const { dataset={} } = json
+      , {
+         name='', description='',
+         newest_available_date='', oldest_available_date='',
+         frequency=''
+       } = dataset
+      , _description = DOMPurify.sanitize( description );
+
   return  {
-     name : dataset.name,
-     description : dataset.description,
-     newest_available_date : dataset.newest_available_date,
-     oldest_available_date : dataset.oldest_available_date,
-     frequency : dataset.frequency
+     name : name,
+     description : _description,
+     newest_available_date : newest_available_date,
+     oldest_available_date : oldest_available_date,
+     frequency : frequency
   };
 }
 

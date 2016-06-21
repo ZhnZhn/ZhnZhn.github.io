@@ -3,6 +3,7 @@ import React from 'react';
 import ModalDialogContainer from '../zhn/ModalDialogContainer';
 import InfoDialog from './InfoDialog';
 import AlertDialog from './AlertDialog';
+import DescriptionDialog from './DescriptionDialog';
 import SettingsDialog from '../header/SettingsDialog';
 import AddToWatchDialog from '../watch-browser/AddToWatchDialog';
 import LoadItemDialog from '../watch-browser/LoadItemDialog';
@@ -15,6 +16,7 @@ import {ModalDialog} from '../../constants/Type';
 const _hmDialogs = {
   [ModalDialog.INFO] : InfoDialog,
   [ModalDialog.ALERT] : AlertDialog,
+  [ModalDialog.DESCRIPTION] : DescriptionDialog,
   [ModalDialog.SETTINGS] : SettingsDialog,
   [ModalDialog.ADD_TO_WATCH] : AddToWatchDialog,
   [ModalDialog.LOAD_ITEM] : LoadItemDialog,

@@ -22,6 +22,10 @@ var _AlertDialog = require('./AlertDialog');
 
 var _AlertDialog2 = _interopRequireDefault(_AlertDialog);
 
+var _DescriptionDialog = require('./DescriptionDialog');
+
+var _DescriptionDialog2 = _interopRequireDefault(_DescriptionDialog);
+
 var _SettingsDialog = require('../header/SettingsDialog');
 
 var _SettingsDialog2 = _interopRequireDefault(_SettingsDialog);
@@ -50,7 +54,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _hmDialogs = (_hmDialogs2 = {}, _defineProperty(_hmDialogs2, _Type.ModalDialog.INFO, _InfoDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.ALERT, _AlertDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.SETTINGS, _SettingsDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.ADD_TO_WATCH, _AddToWatchDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.LOAD_ITEM, _LoadItemDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.EDIT_WATCH_GROUP, _EditGroupDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.EDIT_WATCH_LIST, _EditListDialog2.default), _hmDialogs2);
+var _hmDialogs = (_hmDialogs2 = {}, _defineProperty(_hmDialogs2, _Type.ModalDialog.INFO, _InfoDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.ALERT, _AlertDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.DESCRIPTION, _DescriptionDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.SETTINGS, _SettingsDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.ADD_TO_WATCH, _AddToWatchDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.LOAD_ITEM, _LoadItemDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.EDIT_WATCH_GROUP, _EditGroupDialog2.default), _defineProperty(_hmDialogs2, _Type.ModalDialog.EDIT_WATCH_LIST, _EditListDialog2.default), _hmDialogs2);
 
 var DialogContainer = _react2.default.createClass({
   displayName: 'DialogContainer',

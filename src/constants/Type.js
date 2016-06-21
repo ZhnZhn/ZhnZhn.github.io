@@ -15,6 +15,7 @@ export const Direction = {
 export const ModalDialog = {
   INFO : 'info',
   ALERT : 'alert',
+  DESCRIPTION : 'DESCRIPTION',
   SETTINGS : 'settings',
   ADD_TO_WATCH : 'addToWatch',
   LOAD_ITEM : 'loadItem',

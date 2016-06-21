@@ -9,6 +9,10 @@ var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
 
+var _dompurify = require('dompurify');
+
+var _dompurify2 = _interopRequireDefault(_dompurify);
+
 var _Type = require('../constants/Type');
 
 var _ChartConfig = require('../constants/ChartConfig');
@@ -17,14 +21,29 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var DOMPurify = (0, _dompurify2.default)(window);
+
 var fnCreateDatasetInfo = exports.fnCreateDatasetInfo = function fnCreateDatasetInfo(json) {
-  var dataset = json.dataset;
+  var _json$dataset = json.dataset;
+  var dataset = _json$dataset === undefined ? {} : _json$dataset;
+  var _dataset$name = dataset.name;
+  var name = _dataset$name === undefined ? '' : _dataset$name;
+  var _dataset$description = dataset.description;
+  var description = _dataset$description === undefined ? '' : _dataset$description;
+  var _dataset$newest_avail = dataset.newest_available_date;
+  var newest_available_date = _dataset$newest_avail === undefined ? '' : _dataset$newest_avail;
+  var _dataset$oldest_avail = dataset.oldest_available_date;
+  var oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail;
+  var _dataset$frequency = dataset.frequency;
+  var frequency = _dataset$frequency === undefined ? '' : _dataset$frequency;
+  var _description = DOMPurify.sanitize(description);
+
   return {
-    name: dataset.name,
-    description: dataset.description,
-    newest_available_date: dataset.newest_available_date,
-    oldest_available_date: dataset.oldest_available_date,
-    frequency: dataset.frequency
+    name: name,
+    description: _description,
+    newest_available_date: newest_available_date,
+    oldest_available_date: oldest_available_date,
+    frequency: frequency
   };
 };
 

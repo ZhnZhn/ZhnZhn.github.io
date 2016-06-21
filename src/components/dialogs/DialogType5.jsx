@@ -1,13 +1,18 @@
 import React from 'react';
 
+import {ModalDialog} from '../../constants/Type';
+import ComponentActions from '../../flux/actions/ComponentActions';
+
 import ZhDialog from '../ZhDialog';
-import WithLoadOptions from '../dialogs/WithLoadOptions';
-import WithValidation from '../dialogs/WithValidation';
-import RowInputSelect from '../dialogs/RowInputSelect';
+import WithLoadOptions from './WithLoadOptions';
+import WithValidation from './WithValidation';
+import ToolbarButtonCircle from './ToolbarButtonCircle';
+import RowInputSelect from './RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
 
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ShowHide from '../zhn/ShowHide';
 
 const defaultColumns = [
   {caption : 'Value', value: 1}
@@ -22,7 +27,14 @@ const DialogType5 = React.createClass({
     this.two = null;
     this.three = null;
 
+    this.toolbarButtons = [
+      { caption: 'I', onClick: this._handlerClickInfo },
+      { caption: 'D', onClick: this._handlerClickDate },
+    ];
+
     return {
+      isShowDate : true,
+
       isLoadingOne : false,
       isLoadingOneFailed : false,
       optionOne : [],
@@ -67,6 +79,16 @@ const DialogType5 = React.createClass({
 
   componetWillUnmount(){
     this._unmountWithLoadOptions();
+  },
+
+  _handlerClickInfo(){    
+    ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, {
+      descrUrl: this.props.descrUrl
+    });
+  },
+
+  _handlerClickDate(){
+    this.setState({isShowDate: !this.state.isShowDate});
   },
 
   _handlerLoadOne(){
@@ -156,6 +178,7 @@ const DialogType5 = React.createClass({
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
+           isShowDate,
            optionOne, isLoadingOne, isLoadingOneFailed,
            optionTwo, isLoadingTwo, isLoadingTwoFailed,
            optionThree,
@@ -178,6 +201,9 @@ const DialogType5 = React.createClass({
              onShowChart={onShow}
              onClose={this._handlerClose}
          >
+             <ToolbarButtonCircle
+                buttons={this.toolbarButtons}
+             />
              <RowInputSelect
                 caption={oneCaption}
                 options={optionOne}
@@ -201,13 +227,15 @@ const DialogType5 = React.createClass({
                options={optionThree}
                onSelect={this._handlerSelectThree}
              />
-             <DatesFragment
+             <ShowHide isShow={isShowDate}>
+               <DatesFragment
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
-             />
+               />
+             </ShowHide>
              <ValidationMessagesFragment
                  validationMessages={validationMessages}
              />

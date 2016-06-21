@@ -19,6 +19,7 @@ var Direction = exports.Direction = {
 var ModalDialog = exports.ModalDialog = {
   INFO: 'info',
   ALERT: 'alert',
+  DESCRIPTION: 'DESCRIPTION',
   SETTINGS: 'settings',
   ADD_TO_WATCH: 'addToWatch',
   LOAD_ITEM: 'loadItem',

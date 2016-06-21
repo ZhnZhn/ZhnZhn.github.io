@@ -18,6 +18,8 @@ var _InfoPart2 = _interopRequireDefault(_InfoPart);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var DESCR_CSS_CLASS = 'info__descr';
+
 var styles = {
   rootShow: {
     position: 'relative',
@@ -30,8 +32,18 @@ var styles = {
     position: 'relative',
     display: 'none'
   },
+  rootStyle: {
+    marginTop: '4px'
+  },
   label: {
     color: '#1B75BB',
+    fontWeight: 'bold'
+  },
+  text: {
+    fontWeight: 'bold'
+  },
+  textDescr: {
+    color: 'gray',
     fontWeight: 'bold'
   }
 };
@@ -48,7 +60,6 @@ var PanelDataInfo = _react2.default.createClass({
     var newest_available_date = info.newest_available_date;
     var oldest_available_date = info.oldest_available_date;
     var frequency = info.frequency;
-
     var styleShow = isShow ? styles.rootShow : styles.rootHide;
 
     return _react2.default.createElement(
@@ -62,29 +73,36 @@ var PanelDataInfo = _react2.default.createClass({
       _react2.default.createElement(_InfoPart2.default, {
         caption: 'Name: ',
         text: name,
-        styleCaption: styles.label
+        styleCaption: styles.label,
+        styleText: styles.text
       }),
       _react2.default.createElement(_InfoPart2.default, {
         caption: 'Newest Date: ',
         text: newest_available_date,
-        rootStyle: { marginTop: '4px' },
-        styleCaption: styles.label
+        rootStyle: styles.rootStyle,
+        styleCaption: styles.label,
+        styleText: styles.text
       }),
       _react2.default.createElement(_InfoPart2.default, {
         caption: 'Oldest Date: ',
         text: oldest_available_date,
-        styleCaption: styles.label
+        styleCaption: styles.label,
+        styleText: styles.text
       }),
       _react2.default.createElement(_InfoPart2.default, {
         caption: 'Frequency: ',
         text: frequency,
-        styleCaption: styles.label
+        styleCaption: styles.label,
+        styleText: styles.text
       }),
       _react2.default.createElement(_InfoPart2.default, {
-        caption: 'Description: ',
+        caption: '',
         text: description,
-        rootStyle: { marginTop: '4px' },
-        styleCaption: styles.label
+        isHtml: true,
+        classText: DESCR_CSS_CLASS,
+        rootStyle: styles.rootStyle,
+        styleCaption: styles.label,
+        styleText: styles.textDescr
       })
     );
   }

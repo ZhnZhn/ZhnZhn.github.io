@@ -10,19 +10,29 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Type = require('../../constants/Type');
+
+var _ComponentActions = require('../../flux/actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _WithLoadOptions = require('../dialogs/WithLoadOptions');
+var _WithLoadOptions = require('./WithLoadOptions');
 
 var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
 
-var _WithValidation = require('../dialogs/WithValidation');
+var _WithValidation = require('./WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
-var _RowInputSelect = require('../dialogs/RowInputSelect');
+var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
+
+var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
+var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
@@ -38,6 +48,10 @@ var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
 
+var _ShowHide = require('../zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var defaultColumns = [{ caption: 'Value', value: 1 }];
@@ -50,7 +64,11 @@ var DialogType5 = _react2.default.createClass(_extends({
     this.two = null;
     this.three = null;
 
+    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }, { caption: 'D', onClick: this._handlerClickDate }];
+
     return {
+      isShowDate: true,
+
       isLoadingOne: false,
       isLoadingOneFailed: false,
       optionOne: [],
@@ -88,6 +106,14 @@ var DialogType5 = _react2.default.createClass(_extends({
   },
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();
+  },
+  _handlerClickInfo: function _handlerClickInfo() {
+    _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, {
+      descrUrl: this.props.descrUrl
+    });
+  },
+  _handlerClickDate: function _handlerClickDate() {
+    this.setState({ isShowDate: !this.state.isShowDate });
   },
   _handlerLoadOne: function _handlerLoadOne() {
     var _props = this.props;
@@ -203,6 +229,7 @@ var DialogType5 = _react2.default.createClass(_extends({
     var msgOnNotValidFormat = _props5.msgOnNotValidFormat;
     var onTestDate = _props5.onTestDate;
     var _state = this.state;
+    var isShowDate = _state.isShowDate;
     var optionOne = _state.optionOne;
     var isLoadingOne = _state.isLoadingOne;
     var isLoadingOneFailed = _state.isLoadingOneFailed;
@@ -227,6 +254,9 @@ var DialogType5 = _react2.default.createClass(_extends({
         onShowChart: onShow,
         onClose: this._handlerClose
       },
+      _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        buttons: this.toolbarButtons
+      }),
       _react2.default.createElement(_RowInputSelect2.default, {
         caption: oneCaption,
         options: optionOne,
@@ -250,15 +280,19 @@ var DialogType5 = _react2.default.createClass(_extends({
         options: optionThree,
         onSelect: this._handlerSelectThree
       }),
-      _react2.default.createElement(_DatesFragment2.default, {
-        ref: function ref(c) {
-          return _this.datesFragment = c;
-        },
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        msgOnNotValidFormat: msgOnNotValidFormat,
-        onTestDate: onTestDate
-      }),
+      _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowDate },
+        _react2.default.createElement(_DatesFragment2.default, {
+          ref: function ref(c) {
+            return _this.datesFragment = c;
+          },
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          msgOnNotValidFormat: msgOnNotValidFormat,
+          onTestDate: onTestDate
+        })
+      ),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         validationMessages: validationMessages
       })
