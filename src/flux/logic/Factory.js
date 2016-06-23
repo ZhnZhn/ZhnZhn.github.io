@@ -11,6 +11,7 @@ import DataQY from '../../constants/DataQY';
 import DataWL from '../../constants/DataWL';
 
 import Msg from '../../constants/Msg';
+import { ModalDialog } from '../../constants/Type';
 
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
@@ -26,12 +27,16 @@ const noopArr = function(){
   return [];
 }
 
+const _showModalDialogDescription = function(option){
+  ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, option);
+}
+
 const createDialogComp = function (conf, browserType){
-   const dialogType = conf.type;
-   const props = conf.dialogProps ? conf.dialogProps : {};
-   const fnOption = conf.fnOption ? conf.fnOption : noopArr;
-   const Comp = conf.dialogComp ? conf.dialogComp : DialogType3;
-   
+   const dialogType = conf.type
+       , props = conf.dialogProps ? conf.dialogProps : {}
+       , fnOption = conf.fnOption ? conf.fnOption : noopArr
+       , Comp = conf.dialogComp ? conf.dialogComp : DialogType3
+       , onClickInfo = (props.descrUrl) ? _showModalDialogDescription : undefined;
 
    return  React.createElement(Comp, {
                key : dialogType,
@@ -45,6 +50,7 @@ const createDialogComp = function (conf, browserType){
                onLoad  : onLoadChart.bind(null, dialogType, browserType),
                onShow  : onShowChart.bind(null, dialogType, browserType),
                initFromDate, initToDate, onTestDate,
+               onClickInfo,
                ...props
   });
 }

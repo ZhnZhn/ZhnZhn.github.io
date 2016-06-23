@@ -22,6 +22,10 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
+var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
+
+var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
 var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -46,6 +50,7 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
   getInitialState: function getInitialState() {
     this.code = null;
     this.OPTIONS_STATE_PROP = 'optionCodes';
+    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }];
     var _isLoading = this.props.optionURI ? true : false;
     return {
       isLoading: _isLoading,
@@ -74,6 +79,13 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
   },
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();
+  },
+  _handlerClickInfo: function _handlerClickInfo() {
+    var _props = this.props;
+    var descrUrl = _props.descrUrl;
+    var onClickInfo = _props.onClickInfo;
+
+    onClickInfo({ descrUrl: descrUrl });
   },
   _handlerLoadOptions: function _handlerLoadOptions() {
     this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
@@ -110,11 +122,11 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
     this.props.onClose();
   },
   render: function render() {
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var caption = _props.caption;
-    var onShow = _props.onShow;
-    var onClose = _props.onClose;
+    var _props2 = this.props;
+    var isShow = _props2.isShow;
+    var caption = _props2.caption;
+    var onShow = _props2.onShow;
+    var onClose = _props2.onClose;
     var _state = this.state;
     var isLoading = _state.isLoading;
     var isLoadingFailed = _state.isLoadingFailed;
@@ -136,6 +148,9 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
         onShowChart: onShow,
         onClose: this._handlerClose
       },
+      _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        buttons: this.toolbarButtons
+      }),
       _react2.default.createElement(_RowInputSelect2.default, {
         caption: 'Code:',
         isLoading: isLoading,

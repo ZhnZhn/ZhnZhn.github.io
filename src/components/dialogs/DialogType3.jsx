@@ -4,6 +4,7 @@ import WithValidation from './WithValidation';
 import WithLoadOptions from './WithLoadOptions';
 
 import ZhDialog from '../ZhDialog';
+import ToolbarButtonCircle from './ToolbarButtonCircle';
 import RowInputSelect from './RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
 import DatesFragment from '../DatesFragment';
@@ -18,8 +19,13 @@ const DialogType3 = React.createClass({
   getInitialState(){
     this.stock = null;
     this.OPTIONS_STATE_PROP = 'optionStocks';
-    const _isLoading = (this.props.optionURI) ? true : false
-        , _optionStocks = (this.props.optionURI) ? [] : this.props.optionStocks;
+    const { optionURI, optionStocks, descrUrl} = this.props
+        , _isLoading = (optionURI) ? true : false
+        , _optionStocks = (optionURI) ? [] : optionStocks;
+
+    this.toolbarButtons = (descrUrl)
+         ?  [{ caption: 'I', onClick: this._handlerClickInfo }] : [];
+
     return {
       isLoading : _isLoading,
       isLoadingFailed : false,
@@ -55,11 +61,13 @@ const DialogType3 = React.createClass({
     this._unmountWithLoadOptions();
   },
 
+  _handlerClickInfo(){
+    const {descrUrl, onClickInfo} = this.props;
+    onClickInfo({ descrUrl });
+  },
 
   _handlerLoadOptions(){
-     //if (this.props.optionURI){
-       this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
-     //}
+    this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
   },
 
   _handlerSelectStock(stock){
@@ -73,28 +81,7 @@ const DialogType3 = React.createClass({
       this._createLoadOption
     );
   },
-  /*
-  _handlerLoad(event){
-     event.target.focus();
-     const validationMessages = this._getValidationMessages();
-     if (validationMessages.isValid){
-       const {fromDate, toDate} = this.datesFragment.getValues()
-           , {dataColumn, fnItemCaption} = this.props
-           , _itemCaption = (typeof fnItemCaption === 'function') ?
-                          fnItemCaption(this.stock.value) : undefined;
-       const option = {
-         value : this.stock.value,
-         stock: this.stock,
-         fromDate: fromDate,
-         toDate: toDate,
-         dataColumn : dataColumn,
-         itemCaption : _itemCaption
-       }
-       this.props.onLoad(option);
-     }
-     this._updateValidationMessages(validationMessages);
-  },
-  */
+
   _createValidationMessages(){
     const {itemCaption='Stock'} = this.props;
     let msg = [];
@@ -147,6 +134,9 @@ const DialogType3 = React.createClass({
            onShowChart={onShow}
            onClose={this._handlerClose}
        >
+         <ToolbarButtonCircle
+           buttons={this.toolbarButtons}
+         />
          <RowInputSelect
             caption={itemCaption}
             options={optionStocks}

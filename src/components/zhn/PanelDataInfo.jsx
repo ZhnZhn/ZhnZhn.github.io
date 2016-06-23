@@ -26,7 +26,8 @@ const styles = {
     fontWeight : 'bold'
   },
   text : {
-    fontWeight : 'bold'
+    fontWeight : 'bold',
+    color : 'black'
   },
   textDescr : {
     color : 'gray',

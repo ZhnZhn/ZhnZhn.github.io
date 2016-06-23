@@ -22,6 +22,10 @@ var _WithValidation = require('../dialogs/WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
+var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
+
+var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
 var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -29,6 +33,10 @@ var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 var _ToolBarButton = require('../ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+
+var _ShowHide = require('../zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
 var _DatesFragment = require('../DatesFragment');
 
@@ -46,7 +54,9 @@ var BigMacDialog = _react2.default.createClass(_extends({
   getInitialState: function getInitialState() {
     this.country = null;
     this.metric = null;
+    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }, { caption: 'D', onClick: this._handlerClickDate }];
     return {
+      isShowDate: true,
       isLoadingCountries: false,
       isLoadingCountriesFailed: false,
       optionCountries: [],
@@ -76,10 +86,20 @@ var BigMacDialog = _react2.default.createClass(_extends({
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();
   },
-  _handlerLoadCountry: function _handlerLoadCountry() {
+  _handlerClickInfo: function _handlerClickInfo() {
     var _props = this.props;
-    var countryURI = _props.countryURI;
-    var countryJsonProp = _props.countryJsonProp;
+    var descrUrl = _props.descrUrl;
+    var onClickInfo = _props.onClickInfo;
+
+    onClickInfo({ descrUrl: descrUrl });
+  },
+  _handlerClickDate: function _handlerClickDate() {
+    this.setState({ isShowDate: !this.state.isShowDate });
+  },
+  _handlerLoadCountry: function _handlerLoadCountry() {
+    var _props2 = this.props;
+    var countryURI = _props2.countryURI;
+    var countryJsonProp = _props2.countryJsonProp;
 
     this._handlerWithLoadOptions('optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed', countryURI, countryJsonProp);
   },
@@ -132,15 +152,16 @@ var BigMacDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var onShow = _props2.onShow;
-    var onClose = _props2.onClose;
-    var initFromDate = _props2.initFromDate;
-    var initToDate = _props2.initToDate;
-    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
-    var onTestDate = _props2.onTestDate;
+    var _props3 = this.props;
+    var isShow = _props3.isShow;
+    var onShow = _props3.onShow;
+    var onClose = _props3.onClose;
+    var initFromDate = _props3.initFromDate;
+    var initToDate = _props3.initToDate;
+    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
+    var onTestDate = _props3.onTestDate;
     var _state = this.state;
+    var isShowDate = _state.isShowDate;
     var optionCountries = _state.optionCountries;
     var isLoadingCountries = _state.isLoadingCountries;
     var isLoadingCountriesFailed = _state.isLoadingCountriesFailed;
@@ -162,6 +183,9 @@ var BigMacDialog = _react2.default.createClass(_extends({
         onShowChart: onShow,
         onClose: this._handlerClose
       },
+      _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        buttons: this.toolbarButtons
+      }),
       _react2.default.createElement(_RowInputSelect2.default, {
         caption: 'Country:',
         options: optionCountries,
@@ -176,15 +200,19 @@ var BigMacDialog = _react2.default.createClass(_extends({
         options: optionMetrics,
         onSelect: this._handlerSelectMetric
       }),
-      _react2.default.createElement(_DatesFragment2.default, {
-        ref: function ref(c) {
-          return _this.datesFragment = c;
-        },
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        msgOnNotValidFormat: msgOnNotValidFormat,
-        onTestDate: onTestDate
-      }),
+      _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowDate },
+        _react2.default.createElement(_DatesFragment2.default, {
+          ref: function ref(c) {
+            return _this.datesFragment = c;
+          },
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          msgOnNotValidFormat: msgOnNotValidFormat,
+          onTestDate: onTestDate
+        })
+      ),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         validationMessages: validationMessages
       })

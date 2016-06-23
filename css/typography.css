@@ -31,3 +31,7 @@
   border-bottom-width: medium;
   /*border-bottom-width: 2px;*/
 }
+
+.descr-datasource span {
+  color: black;
+}

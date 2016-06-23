@@ -48,15 +48,14 @@ var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var defaultColumns = [{ caption: 'Value', value: 1 }];
+var defaultColumns = [];
 
-var DialogType5 = _react2.default.createClass(_extends({
-  displayName: 'DialogType5'
+var DialogType4A = _react2.default.createClass(_extends({
+  displayName: 'DialogType4A'
 }, _WithLoadOptions2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     this.one = null;
     this.two = null;
-    this.three = null;
 
     this.toolbarButtons = [{ caption: 'D', onClick: this._handlerClickDate }];
     if (this.props.onClickInfo) {
@@ -70,18 +69,13 @@ var DialogType5 = _react2.default.createClass(_extends({
       isLoadingOneFailed: false,
       optionOne: [],
 
-      isLoadingTwo: false,
-      isLoadingTwoFailed: false,
       optionTwo: [],
-
-      optionThree: [{ caption: 'Import', value: 1 }, { caption: 'Export', value: 3 }],
 
       validationMessages: []
     };
   },
   componentDidMount: function componentDidMount() {
     this._handlerLoadOne();
-    this._handlerLoadTwo();
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -95,9 +89,6 @@ var DialogType5 = _react2.default.createClass(_extends({
     if (prevProps !== this.props) {
       if (this.state.isLoadingOneFailed && this.props.isShow) {
         this._handlerLoadOne();
-      }
-      if (this.state.isLoadingTwoFailed && this.props.isShow) {
-        this._handlerLoadTwo();
       }
     }
   },
@@ -121,42 +112,32 @@ var DialogType5 = _react2.default.createClass(_extends({
 
     this._handlerWithLoadOptions('optionOne', 'isLoadingOne', 'isLoadingOneFailed', oneURI, oneJsonProp);
   },
-  _handlerLoadTwo: function _handlerLoadTwo() {
-    var _props3 = this.props;
-    var twoURI = _props3.twoURI;
-    var twoJsonProp = _props3.twoJsonProp;
-
-    this._handlerWithLoadOptions('optionTwo', 'isLoadingTwo', 'isLoadingTwoFailed', twoURI, twoJsonProp);
-  },
   _handlerSelectOne: function _handlerSelectOne(one) {
     this.one = one;
+    if (one) {
+      if (one.columns) {
+        this.two = null;
+        this.setState({ optionTwo: one.columns });
+      } else {
+        this.two = null;
+        this.setState({ optionTwo: defaultColumns });
+      }
+    } else {
+      this.two = null;
+      this.setState({ optionTwo: defaultColumns });
+    }
   },
   _handlerSelectTwo: function _handlerSelectTwo(two) {
     this.two = two;
-    if (two) {
-      if (two.columns) {
-        this.three = null;
-        this.setState({ optionThree: two.columns });
-      } else {
-        this.three = null;
-        this.setState({ optionThree: defaultColumns });
-      }
-    } else {
-      this.three = null;
-      this.setState({ optionThree: [] });
-    }
-  },
-  _handlerSelectThree: function _handlerSelectThree(three) {
-    this.three = three;
   },
   _handlerLoad: function _handlerLoad() {
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var _props4 = this.props;
-    var oneCaption = _props4.oneCaption;
-    var twoCaption = _props4.twoCaption;
-    var threeCaption = _props4.threeCaption;
+    var _props3 = this.props;
+    var oneCaption = _props3.oneCaption;
+    var twoCaption = _props3.twoCaption;
+    var threeCaption = _props3.threeCaption;
 
     var msg = [];
 
@@ -165,9 +146,6 @@ var DialogType5 = _react2.default.createClass(_extends({
     }
     if (!this.two) {
       msg.push(this.props.msgOnNotSelected(twoCaption));
-    }
-    if (!this.three) {
-      msg.push(this.props.msgOnNotSelected(threeCaption));
     }
 
     var _datesFragment$getVal = this.datesFragment.getValidation();
@@ -186,27 +164,16 @@ var DialogType5 = _react2.default.createClass(_extends({
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _props5 = this.props;
-    var fnValue = _props5.fnValue;
-    var isTreeItem = _props5.isTreeItem;
-    var dataColumn = _props5.dataColumn;
+    var _props4 = this.props;
+    var fnValue = _props4.fnValue;
+    var dataColumn = _props4.dataColumn;
 
-    if (!isTreeItem) {
-      var _dataColumn = this.three ? this.three.value : 1;
-      return {
-        value: fnValue(this.one.value, this.two.value),
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn: _dataColumn
-      };
-    } else {
-      return {
-        value: fnValue(this.one.value, this.three.value),
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn: dataColumn
-      };
-    }
+    return {
+      value: fnValue(this.one.value, this.two.value),
+      fromDate: fromDate,
+      toDate: toDate,
+      dataColumn: dataColumn
+    };
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
@@ -215,27 +182,23 @@ var DialogType5 = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props6 = this.props;
-    var caption = _props6.caption;
-    var oneCaption = _props6.oneCaption;
-    var twoCaption = _props6.twoCaption;
-    var threeCaption = _props6.threeCaption;
-    var isShow = _props6.isShow;
-    var onShow = _props6.onShow;
-    var onClose = _props6.onClose;
-    var initFromDate = _props6.initFromDate;
-    var initToDate = _props6.initToDate;
-    var msgOnNotValidFormat = _props6.msgOnNotValidFormat;
-    var onTestDate = _props6.onTestDate;
+    var _props5 = this.props;
+    var caption = _props5.caption;
+    var oneCaption = _props5.oneCaption;
+    var twoCaption = _props5.twoCaption;
+    var isShow = _props5.isShow;
+    var onShow = _props5.onShow;
+    var onClose = _props5.onClose;
+    var initFromDate = _props5.initFromDate;
+    var initToDate = _props5.initToDate;
+    var msgOnNotValidFormat = _props5.msgOnNotValidFormat;
+    var onTestDate = _props5.onTestDate;
     var _state = this.state;
     var isShowDate = _state.isShowDate;
     var optionOne = _state.optionOne;
     var isLoadingOne = _state.isLoadingOne;
     var isLoadingOneFailed = _state.isLoadingOneFailed;
     var optionTwo = _state.optionTwo;
-    var isLoadingTwo = _state.isLoadingTwo;
-    var isLoadingTwoFailed = _state.isLoadingTwoFailed;
-    var optionThree = _state.optionThree;
     var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -268,16 +231,7 @@ var DialogType5 = _react2.default.createClass(_extends({
       _react2.default.createElement(_RowInputSelect2.default, {
         caption: twoCaption,
         options: optionTwo,
-        optionNames: 'Items',
-        isLoading: isLoadingTwo,
-        isLoadingFailed: isLoadingTwoFailed,
-        onLoadOption: this._handlerLoadTwo,
         onSelect: this._handlerSelectTwo
-      }),
-      _react2.default.createElement(_RowInputSelect2.default, {
-        caption: threeCaption,
-        options: optionThree,
-        onSelect: this._handlerSelectThree
       }),
       _react2.default.createElement(
         _ShowHide2.default,
@@ -299,5 +253,5 @@ var DialogType5 = _react2.default.createClass(_extends({
   }
 }));
 
-exports.default = DialogType5;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType5.js.map
+exports.default = DialogType4A;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4A.js.map

@@ -4,6 +4,7 @@ import WithValidation from '../dialogs/WithValidation';
 import WithLoadOptions from '../dialogs/WithLoadOptions';
 
 import ZhDialog from '../ZhDialog';
+import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
 
@@ -18,6 +19,9 @@ const FuturesDialog = React.createClass({
   getInitialState(){
     this.code = null;
     this.OPTIONS_STATE_PROP = 'optionCodes';
+    this.toolbarButtons = [
+      { caption: 'I', onClick: this._handlerClickInfo }
+    ];
     const _isLoading = (this.props.optionURI) ? true : false;
     return {
       isLoading : _isLoading,
@@ -48,6 +52,11 @@ const FuturesDialog = React.createClass({
   },
   componetWillUnmount(){
     this._unmountWithLoadOptions();
+  },
+
+  _handlerClickInfo(){
+    const {descrUrl, onClickInfo} = this.props;
+    onClickInfo({ descrUrl });
   },
 
   _handlerLoadOptions(){
@@ -106,6 +115,9 @@ const FuturesDialog = React.createClass({
            onShowChart={onShow}
            onClose={this._handlerClose}
        >
+          <ToolbarButtonCircle
+            buttons={this.toolbarButtons}
+          />
           <RowInputSelect
              caption={'Code:'}
              isLoading={isLoading}

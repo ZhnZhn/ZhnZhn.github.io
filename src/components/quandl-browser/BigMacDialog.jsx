@@ -3,8 +3,10 @@ import React from 'react';
 import ZhDialog from '../ZhDialog';
 import WithLoadOptions from '../dialogs/WithLoadOptions';
 import WithValidation from '../dialogs/WithValidation';
+import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
+import ShowHide from '../zhn/ShowHide';
 
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
@@ -16,7 +18,12 @@ const BigMacDialog = React.createClass({
   getInitialState(){
      this.country = null;
      this.metric =null;
+     this.toolbarButtons = [
+       { caption: 'I', onClick: this._handlerClickInfo },
+       { caption: 'D', onClick: this._handlerClickDate }
+     ];
      return {
+        isShowDate : true,
         isLoadingCountries : false,
         isLoadingCountriesFailed : false,
         optionCountries : [],
@@ -55,6 +62,14 @@ const BigMacDialog = React.createClass({
 
   componetWillUnmount(){
     this._unmountWithLoadOptions();
+  },
+
+  _handlerClickInfo(){
+    const {descrUrl, onClickInfo} = this.props;
+    onClickInfo({ descrUrl });
+  },
+  _handlerClickDate(){
+    this.setState({isShowDate: !this.state.isShowDate});
   },
 
   _handlerLoadCountry(){
@@ -108,6 +123,7 @@ const BigMacDialog = React.createClass({
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
+           isShowDate,
            optionCountries, isLoadingCountries, isLoadingCountriesFailed,
            optionMetrics,
            validationMessages
@@ -129,6 +145,9 @@ const BigMacDialog = React.createClass({
            onShowChart={onShow}
            onClose={this._handlerClose}
        >
+           <ToolbarButtonCircle
+             buttons={this.toolbarButtons}
+           />
            <RowInputSelect
               caption={'Country:'}
               options={optionCountries}
@@ -143,13 +162,15 @@ const BigMacDialog = React.createClass({
               options={optionMetrics}
               onSelect={this._handlerSelectMetric}
            />
-           <DatesFragment
-               ref={c => this.datesFragment = c}
-               initFromDate={initFromDate}
-               initToDate={initToDate}
-               msgOnNotValidFormat={msgOnNotValidFormat}
-               onTestDate={onTestDate}
-           />
+           <ShowHide isShow={isShowDate}>
+             <DatesFragment
+                 ref={c => this.datesFragment = c}
+                 initFromDate={initFromDate}
+                 initToDate={initToDate}
+                 msgOnNotValidFormat={msgOnNotValidFormat}
+                 onTestDate={onTestDate}
+             />
+           </ShowHide>
            <ValidationMessagesFragment
                validationMessages={validationMessages}
            />

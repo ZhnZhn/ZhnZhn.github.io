@@ -22,6 +22,10 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
+var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
+
+var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -47,8 +51,15 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   getInitialState: function getInitialState() {
     this.stock = null;
     this.OPTIONS_STATE_PROP = 'optionStocks';
-    var _isLoading = this.props.optionURI ? true : false,
-        _optionStocks = this.props.optionURI ? [] : this.props.optionStocks;
+    var _props = this.props;
+    var optionURI = _props.optionURI;
+    var optionStocks = _props.optionStocks;
+    var descrUrl = _props.descrUrl;
+    var _isLoading = optionURI ? true : false;
+    var _optionStocks = optionURI ? [] : optionStocks;
+
+    this.toolbarButtons = descrUrl ? [{ caption: 'I', onClick: this._handlerClickInfo }] : [];
+
     return {
       isLoading: _isLoading,
       isLoadingFailed: false,
@@ -79,10 +90,15 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();
   },
+  _handlerClickInfo: function _handlerClickInfo() {
+    var _props2 = this.props;
+    var descrUrl = _props2.descrUrl;
+    var onClickInfo = _props2.onClickInfo;
+
+    onClickInfo({ descrUrl: descrUrl });
+  },
   _handlerLoadOptions: function _handlerLoadOptions() {
-    //if (this.props.optionURI){
     this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
-    //}
   },
   _handlerSelectStock: function _handlerSelectStock(stock) {
     this.stock = stock;
@@ -91,29 +107,6 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     event.target.focus();
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
-
-  /*
-  _handlerLoad(event){
-     event.target.focus();
-     const validationMessages = this._getValidationMessages();
-     if (validationMessages.isValid){
-       const {fromDate, toDate} = this.datesFragment.getValues()
-           , {dataColumn, fnItemCaption} = this.props
-           , _itemCaption = (typeof fnItemCaption === 'function') ?
-                          fnItemCaption(this.stock.value) : undefined;
-       const option = {
-         value : this.stock.value,
-         stock: this.stock,
-         fromDate: fromDate,
-         toDate: toDate,
-         dataColumn : dataColumn,
-         itemCaption : _itemCaption
-       }
-       this.props.onLoad(option);
-     }
-     this._updateValidationMessages(validationMessages);
-  },
-  */
   _createValidationMessages: function _createValidationMessages() {
     var _props$itemCaption = this.props.itemCaption;
     var itemCaption = _props$itemCaption === undefined ? 'Stock' : _props$itemCaption;
@@ -139,9 +132,9 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _props = this.props;
-    var dataColumn = _props.dataColumn;
-    var fnItemCaption = _props.fnItemCaption;
+    var _props3 = this.props;
+    var dataColumn = _props3.dataColumn;
+    var fnItemCaption = _props3.fnItemCaption;
     var _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
     return {
       value: this.stock.value,
@@ -159,19 +152,19 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var caption = _props2.caption;
-    var isShow = _props2.isShow;
-    var onShow = _props2.onShow;
-    var onClose = _props2.onClose;
-    var _props2$itemCaption = _props2.itemCaption;
-    var itemCaption = _props2$itemCaption === undefined ? 'Stock:' : _props2$itemCaption;
-    var _props2$optionNames = _props2.optionNames;
-    var optionNames = _props2$optionNames === undefined ? 'Stocks' : _props2$optionNames;
-    var initFromDate = _props2.initFromDate;
-    var initToDate = _props2.initToDate;
-    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
-    var onTestDate = _props2.onTestDate;
+    var _props4 = this.props;
+    var caption = _props4.caption;
+    var isShow = _props4.isShow;
+    var onShow = _props4.onShow;
+    var onClose = _props4.onClose;
+    var _props4$itemCaption = _props4.itemCaption;
+    var itemCaption = _props4$itemCaption === undefined ? 'Stock:' : _props4$itemCaption;
+    var _props4$optionNames = _props4.optionNames;
+    var optionNames = _props4$optionNames === undefined ? 'Stocks' : _props4$optionNames;
+    var initFromDate = _props4.initFromDate;
+    var initToDate = _props4.initToDate;
+    var msgOnNotValidFormat = _props4.msgOnNotValidFormat;
+    var onTestDate = _props4.onTestDate;
     var _state = this.state;
     var isLoading = _state.isLoading;
     var isLoadingFailed = _state.isLoadingFailed;
@@ -193,6 +186,9 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
         onShowChart: onShow,
         onClose: this._handlerClose
       },
+      _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        buttons: this.toolbarButtons
+      }),
       _react2.default.createElement(_RowInputSelect2.default, {
         caption: itemCaption,
         options: optionStocks,

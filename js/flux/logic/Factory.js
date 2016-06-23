@@ -38,6 +38,8 @@ var _Msg = require('../../constants/Msg');
 
 var _Msg2 = _interopRequireDefault(_Msg);
 
+var _Type = require('../../constants/Type');
+
 var _ComponentActions = require('../actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -62,11 +64,16 @@ var noopArr = function noopArr() {
   return [];
 };
 
+var _showModalDialogDescription = function _showModalDialogDescription(option) {
+  _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, option);
+};
+
 var createDialogComp = function createDialogComp(conf, browserType) {
-  var dialogType = conf.type;
-  var props = conf.dialogProps ? conf.dialogProps : {};
-  var fnOption = conf.fnOption ? conf.fnOption : noopArr;
-  var Comp = conf.dialogComp ? conf.dialogComp : _DialogType2.default;
+  var dialogType = conf.type,
+      props = conf.dialogProps ? conf.dialogProps : {},
+      fnOption = conf.fnOption ? conf.fnOption : noopArr,
+      Comp = conf.dialogComp ? conf.dialogComp : _DialogType2.default,
+      onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined;
 
   return _react2.default.createElement(Comp, _extends({
     key: dialogType,
@@ -79,7 +86,8 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
     onLoad: onLoadChart.bind(null, dialogType, browserType),
     onShow: onShowChart.bind(null, dialogType, browserType),
-    initFromDate: initFromDate, initToDate: initToDate, onTestDate: onTestDate
+    initFromDate: initFromDate, initToDate: initToDate, onTestDate: onTestDate,
+    onClickInfo: onClickInfo
   }, props));
 };
 
