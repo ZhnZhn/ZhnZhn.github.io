@@ -2,6 +2,8 @@
 ERC is a economic RESTFul client.
 With it you can view economic free open data from WEB.
 
+![alt text](screenshots/currency.png "Currency History")
+
 **1.** Choose a data source from the header bar.  
 **2.** Choose a dataset menu item in a Browser.  
 **3.** Select a data item and enter query date in a dragable Dialog.  
