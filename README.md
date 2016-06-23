@@ -1,4 +1,4 @@
-# ERC
+# [ERC] (http://zhnzhn.github.io)
 ERC is a economic RESTFul client.
 With it you can view economic free open data from WEB.
 
@@ -21,6 +21,11 @@ For access without Api Key exists some restriction on frequency and amount queri
 
 A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings.  
 Settings saves in browser's memory only for current WEB session.
+
+## License
+
+This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016, Yevhenii Molodyi.
+
 
 
 
