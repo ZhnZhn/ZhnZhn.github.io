@@ -20,14 +20,12 @@ A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Setting
 Settings saves in browser's memory only for current WEB session.
 
 ### Attention
-
 For one item from Dialog can be only one Chart in a container. 
-If you want change query parameters for it, close the chart in the container and load data again.  
-The value of currency is not always USD as shows in a chart tooltip. 
+If you want change query parameters for it, close the chart in the container and load data again.
+The value of currency is not always USD as shows in a chart tooltip.
 Sometimes more details about data can be look at tab Info on a Chart.
 
 ## License
-
 This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016, Yevhenii Molodyi.
 
 
