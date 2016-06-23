@@ -97,7 +97,7 @@ const WithLoadOptions =  {
     if (this._loadOptionsID){
       clearTimeout(this._loadOptionsID)
     }
-  },
+  }
 };
 
 export default WithLoadOptions

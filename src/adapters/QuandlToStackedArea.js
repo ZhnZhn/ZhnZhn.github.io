@@ -8,8 +8,7 @@ import { fnCreateStackedConfig  } from './StackedFn'
 import {
   fnCreateZhConfig,
   fnCreateDatasetInfo,
-  fnCreateValueMoving,
-  fnCreatePercent,
+  fnCreateValueMoving,  
   fnSetTitleToConfig
 } from './QuandlFn';
 

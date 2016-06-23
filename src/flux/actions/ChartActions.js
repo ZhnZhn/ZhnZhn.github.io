@@ -9,7 +9,7 @@ export const ChartActionTypes = {
   LOAD_STOCK_ADDED : 'loadStockAdded',
   LOAD_STOCK_FAILED : 'loadStockFailed',
   SHOW_CHART : 'showChart',
-  CLOSE_CHART : 'closeChart',
+  CLOSE_CHART : 'closeChart'
 }
 
 const ChartActions =  Reflux.createActions({

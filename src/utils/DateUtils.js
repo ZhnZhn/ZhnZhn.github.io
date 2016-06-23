@@ -2,7 +2,7 @@
 let DateUtils = {};
 
 DateUtils.isValidDate = function isValidDate(str){
-  	// STRING FORMAT yyyy-mm-dd
+	 // STRING FORMAT yyyy-mm-dd
 	 if(str=="" || str==null){return false;}
 
 	 // m[1] is year 'YYYY' * m[2] is month 'MM' * m[3] is day 'DD'

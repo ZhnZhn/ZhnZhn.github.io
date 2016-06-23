@@ -202,7 +202,7 @@ const iso3Countries = [
 		   { caption: "Republic of Yemen", value: "YEM"},
 		   { caption: "Yugoslavia", value: "YUG"},
 		   { caption: "Zambia", value: "ZMB"},
-		   { caption: "Zimbabwe", value: "ZWE"},
+		   { caption: "Zimbabwe", value: "ZWE"}
 ];
 
 ISO3Country.getCountries = function(){

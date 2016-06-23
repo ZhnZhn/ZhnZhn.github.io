@@ -8,8 +8,6 @@ var _BrowserMenu = require('../../constants/BrowserMenu');
 
 var _BrowserMenu2 = _interopRequireDefault(_BrowserMenu);
 
-var _Type = require('../../constants/Type');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var fnFindObj = function fnFindObj(menu, chartType) {

@@ -1,6 +1,4 @@
 
-import DialogType3 from '../components/dialogs/DialogType3';
-
 const DataQY = {
   QY_TORONTO : {
      type : 'QY_TORONTO',

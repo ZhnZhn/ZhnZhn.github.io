@@ -38,7 +38,7 @@ ChartConfig.theme = {
     credits: {
       enabled : true,
       position: {
-       	align: 'left',
+        align: 'left',
 	      x: 150,
 	      verticalAlign: 'top',
         y: 15
@@ -88,7 +88,7 @@ ChartConfig.theme = {
           click : function(event) {
             this.chart.zhTooltip.refresh(event.point, event);
           }
-        },
+        }
       },
       pie : {
         colors : _fnCreateMonochromePieColors({
@@ -109,7 +109,7 @@ ChartConfig.theme = {
 
       headerFormat: '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
       pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>'+
-                   '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>',
+                   '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
     },
     xAxis: {
       lineColor: "rgba(194,149,23,1)",
@@ -177,7 +177,7 @@ ChartConfig.fBaseAreaConfig = function(){
     text: ''
   },
   legend: {
-    enabled: false,
+    enabled: false
   },
   xAxis: {
     type: 'datetime',
@@ -223,7 +223,7 @@ ChartConfig.fBaseAreaConfig = function(){
            fontSize: 'medium'
          }
       }
-    },
+    }
    ]
   },
   series: [{
@@ -359,13 +359,13 @@ ChartConfig.fTitleMetric = function(text){
    style : {
      color : 'rgba(164, 135, 212, 1)',
      fontSize : '14px',
-     fontWeight : 'bold',
+     fontWeight : 'bold'
    },
    floating : true,
    align: 'left',
    verticalAlign: 'top',
    x: 8,
-   y: 15,
+   y: 15
   }
 };
 

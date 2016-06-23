@@ -1,6 +1,5 @@
 
 import BrowserMenu from '../../constants/BrowserMenu';
-import {BrowserType} from '../../constants/Type';
 
 const fnFindObj = function(menu, chartType){
   for (var i=0, maxPart=menu.length; i<maxPart; i++){

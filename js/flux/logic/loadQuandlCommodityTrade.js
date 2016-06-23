@@ -25,10 +25,6 @@ var _QuandlApi = require('../../api/QuandlApi');
 
 var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
 
-var _QuandlAdapter = require('../../adapters/QuandlAdapter');
-
-var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
-
 var _loadQuandl = require('./loadQuandl');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

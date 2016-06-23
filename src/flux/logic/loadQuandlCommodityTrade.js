@@ -7,7 +7,6 @@ import ChartStore from '../stores/ChartStore';
 import Msg from '../../constants/Msg';
 
 import QuandlApi from '../../api/QuandlApi';
-import QuandlAdapter from '../../adapters/QuandlAdapter';
 
 import {fnFetchToChartComp, fnFetchToChart} from './loadQuandl';
 
@@ -30,7 +29,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
   } else {
     const {caption, descr} = Msg.Alert.ALREADY_EXIST
     onFailed({caption, descr, chartId});
-    option.onFailed();  
+    option.onFailed();
   }
 }
 
@@ -61,7 +60,7 @@ const _loadToChart = function(option, onAdded, onFailed){
     onFetch : _onFetch,
     onCompleted : onAdded,
     onCatch : fnCatch,
-    onFailed : _onFailed,
+    onFailed : _onFailed
   })
 }
 

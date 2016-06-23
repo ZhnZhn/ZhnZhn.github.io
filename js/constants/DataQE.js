@@ -8,17 +8,13 @@ var _DateUtils = require('../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
-var _DialogType = require('../components/dialogs/DialogType3');
-
-var _DialogType2 = _interopRequireDefault(_DialogType);
-
 var _DialogType4A = require('../components/dialogs/DialogType4A');
 
 var _DialogType4A2 = _interopRequireDefault(_DialogType4A);
 
-var _DialogType3 = require('../components/dialogs/DialogType5');
+var _DialogType = require('../components/dialogs/DialogType5');
 
-var _DialogType4 = _interopRequireDefault(_DialogType3);
+var _DialogType2 = _interopRequireDefault(_DialogType);
 
 var _UNCommodityTradeDialog = require('../components/quandl-browser/UNCommodityTradeDialog');
 
@@ -78,7 +74,7 @@ var DataQE = {
     menuTitle: 'UN Global Indicator',
     dialogCaption: 'United Nations Global Indicator',
     chartContainerCaption: 'Quandl United Nations Global Indicator',
-    dialogComp: _DialogType4.default,
+    dialogComp: _DialogType2.default,
     dialogProps: {
       descrUrl: './data/quandl/un-global-indicator.html',
       initFromDate: _DateUtils2.default.getFromDate(10),
@@ -118,7 +114,7 @@ var DataQE = {
     menuTitle: 'WB Economic Metric',
     dialogCaption: 'WorlBank Economic Metric',
     chartContainerCaption: 'Quandl World Bank Economic Metric',
-    dialogComp: _DialogType4.default,
+    dialogComp: _DialogType2.default,
     dialogProps: {
       descrUrl: './data/quandl/wb-development-indicator.html',
       isTreeItem: true,
@@ -141,7 +137,7 @@ var DataQE = {
     menuTitle: 'IMF Cross Country Metric',
     dialogCaption: 'IMF Cross Country Metric',
     chartContainerCaption: 'Quandl IMF Cross Country Metric',
-    dialogComp: _DialogType4.default,
+    dialogComp: _DialogType2.default,
     dialogProps: {
       descrUrl: './data/quandl/imf-crosscountry-metric.html',
       isTreeItem: true,

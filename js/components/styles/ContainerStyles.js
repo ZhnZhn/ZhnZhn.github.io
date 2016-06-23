@@ -16,6 +16,7 @@ var ContainerStyles = {
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
     position: 'relative',
+    /* eslint-disable no-dupe-keys */
     height: '730px'
   }, _defineProperty(_browserRootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_browserRootDiv, 'minWidth', '270px'), _defineProperty(_browserRootDiv, 'maxWidth', '400px'), _defineProperty(_browserRootDiv, 'marginLeft', '10px'), _defineProperty(_browserRootDiv, 'paddingBottom', '32px'), _browserRootDiv),
   aboutRootDiv: (_aboutRootDiv = {
@@ -25,6 +26,7 @@ var ContainerStyles = {
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
     position: 'relative',
+    /* eslint-disable no-dupe-keys */
     height: '730px'
   }, _defineProperty(_aboutRootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_aboutRootDiv, 'minWidth', '700px'), _defineProperty(_aboutRootDiv, 'maxWidth', '700px'), _defineProperty(_aboutRootDiv, 'marginLeft', '10px'), _defineProperty(_aboutRootDiv, 'paddingRight', '0'), _defineProperty(_aboutRootDiv, 'paddingBottom', '32px'), _aboutRootDiv)
 };

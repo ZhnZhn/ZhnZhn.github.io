@@ -6,3 +6,4 @@ config.js
 dependency-bundle.js
 dependency-bundle.js.map
 erc.html
+lint.txt

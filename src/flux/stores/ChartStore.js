@@ -4,7 +4,6 @@ import ChartActions, {ChartActionTypes} from '../actions/ChartActions';
 import ComponentActions, {ComponentActionTypes} from '../actions/ComponentActions';
 import WatchActions from '../actions/WatchActions';
 
-import ChartType from '../../constants/ChartType';
 import {BrowserType, ModalDialog} from '../../constants/Type';
 
 import Factory from '../logic/Factory';

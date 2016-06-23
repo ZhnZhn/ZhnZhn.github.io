@@ -13,7 +13,7 @@ const WithTreeMap = {
        credits : Chart.fCreditsRightBottom(),
        chart: {
          type: 'treemap',
-         marginTop : Chart.MARGIN_TOP,
+         marginTop : Chart.MARGIN_TOP
        },
        title : Chart.fTitle({y:10}),
        subtitle : Chart.fSubtitle({y:30, style : {fontWeight: 'bold'}}),
@@ -37,7 +37,7 @@ const WithTreeMap = {
              //fontWeight: 'normal',
              fontWeight: 'bold',
              color : 'black',
-             textShadow: 'none',
+             textShadow: 'none'
            }
          },
          data : data,

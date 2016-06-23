@@ -22,10 +22,6 @@ var _WatchActions = require('../actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
-var _ChartType = require('../../constants/ChartType');
-
-var _ChartType2 = _interopRequireDefault(_ChartType);
-
 var _Type = require('../../constants/Type');
 
 var _Factory = require('../logic/Factory');

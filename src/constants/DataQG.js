@@ -1,6 +1,4 @@
 
-import DialogType3 from '../components/dialogs/DialogType3';
-
 const DataQG = {
   QG_NASDAQ : {
      type : 'QG_NASDAQ',
@@ -36,7 +34,7 @@ const DataQG = {
        optionURI : './data/google/nyse-amex.json',
        optionsJsonProp : 'tickets',
        dataColumn : 4
-     },
+     }
   },
   QG_ARCA : {
      type : 'QG_ARCA',
@@ -182,7 +180,7 @@ const DataQG = {
        optionURI : './data/google/saopaolo.json',
        optionsJsonProp : 'tickets',
        dataColumn : 4
-    }   
+    }
   }
 }
 

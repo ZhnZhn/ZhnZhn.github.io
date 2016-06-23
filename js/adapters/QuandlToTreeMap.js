@@ -132,7 +132,6 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
   var value = _option$value === undefined ? '' : _option$value;
   var zhSeriaId = value + '_' + _Type.ChartType.TREE_MAP;
   var jsonData = json.dataset && json.dataset.data ? json.dataset.data : [];
-  var chartType = _Type.ChartType.TREE_MAP;
   var bYearTotals = _fnCreateYearTotals(jsonData, items100);
 
   var _fnCreateDataAndTotal2 = _fnCreateDataAndTotal(jsonData, items100, bYearTotals);

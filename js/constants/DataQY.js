@@ -4,12 +4,6 @@ Object.defineProperty(exports, "__esModule", {
    value: true
 });
 
-var _DialogType = require('../components/dialogs/DialogType3');
-
-var _DialogType2 = _interopRequireDefault(_DialogType);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var DataQY = {
    QY_TORONTO: {
       type: 'QY_TORONTO',

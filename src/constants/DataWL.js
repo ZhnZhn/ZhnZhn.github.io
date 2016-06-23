@@ -4,7 +4,7 @@ const DataWL = {
         type : 'WL_WATCH_LIST',
         menuTitle : 'Watch List',
         dialogCaption : 'Watch List',
-        chartContainerCaption : 'Watch List',
+        chartContainerCaption : 'Watch List'
     }
 }
 

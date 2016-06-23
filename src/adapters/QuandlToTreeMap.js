@@ -41,7 +41,7 @@ const _fnCreateDataAndTotal = function(jsonData=[], items=[], bYearTotals=[]){
           year : _year,
           name : caption,
           nameFull: caption,
-          value : _value,
+          value : _value
         });
     }
   });
@@ -106,7 +106,6 @@ export const fCreateTreeMapConfig = function(json, option){
      ,  {sliceItems:items100=[], value=''} = option
      ,  zhSeriaId = `${value}_${ChartType.TREE_MAP}`
      ,  jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []
-     ,  chartType = ChartType.TREE_MAP
      ,  bYearTotals = _fnCreateYearTotals(jsonData, items100)
      , {data, bTotal } = _fnCreateDataAndTotal(jsonData, items100, bYearTotals)
      , {level60, level90} = _fnCalcLevelAndSetPercent(data, bTotal)

@@ -12,7 +12,7 @@ const DialogStyles = {
     width: '100px',
     paddingRight: '5px',
     fontSize: '16px',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
 
   //ValidationMessagesFragment
@@ -29,7 +29,7 @@ const DialogStyles = {
     borderRadius: '50%',
     textAlign: 'center',
     marginRight: '5px'
-  },
+  }
 
 }
 

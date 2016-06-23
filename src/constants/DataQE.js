@@ -2,7 +2,6 @@
 
 import DateUtils from '../utils/DateUtils';
 
-import DialogType3 from '../components/dialogs/DialogType3';
 import DialogType4A from '../components/dialogs/DialogType4A';
 import DialogType5 from '../components/dialogs/DialogType5';
 

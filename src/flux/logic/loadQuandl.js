@@ -18,7 +18,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
       onFetch : fnFetchToChartComp,
       onCompleted : onCompleted,
       onCatch : fnCatch,
-      onFailed : onFailed,
+      onFailed : onFailed
     })
   } else {
     const {caption, descr} = Msg.Alert.ALREADY_EXIST
@@ -40,7 +40,7 @@ const _loadToChart = function(option, onAdded, onFailed){
     onFetch : fnFetchToChart,
     onCompleted : onAdded,
     onCatch : fnCatch,
-    onFailed : onFailed,
+    onFailed : onFailed
   })
 }
 

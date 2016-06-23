@@ -28,7 +28,7 @@ const fnCreateMenu = function(menu, data, browserType){
                  isOpen: false,
                  onClick: fnClick(item.id, browserType),
                  onBadgeClick: fnBadgeClick(item.id, browserType),
-                 onBadgeClose : fnBadgeClose(item.id),
+                 onBadgeClose : fnBadgeClose(item.id)
                }
      });
      return {
@@ -63,7 +63,7 @@ const menuQuandl = [
     caption : 'Futures',
     items : [
       { id : Quandl.CHINA_DCE_FUTURE },
-      { id : Quandl.CHINA_ZCE_FUTURE },
+      { id : Quandl.CHINA_ZCE_FUTURE }
     ]
   }
 ];
@@ -123,7 +123,7 @@ const menuQuandlGoogle = [
        { id : QuandlGoogle.LISBON },
        { id : QuandlGoogle.TALLIN },
        { id : QuandlGoogle.RIGA },
-       { id : QuandlGoogle.VILNIUS },
+       { id : QuandlGoogle.VILNIUS }
      ]
   },
   {

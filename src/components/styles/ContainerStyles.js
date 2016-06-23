@@ -7,8 +7,10 @@ const ContainerStyles = {
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
     position: 'relative',
+    /* eslint-disable no-dupe-keys */
     height: '730px',
     height: 'calc(100vh - 61px)',
+    /* eslint-disable no-dupe-keys */
     //width: '270px',
     minWidth: '270px',
     maxWidth: '400px',
@@ -23,9 +25,10 @@ const ContainerStyles = {
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
     position: 'relative',
+    /* eslint-disable no-dupe-keys */
     height: '730px',
-    //46px 5px 10px
     height: 'calc(100vh - 61px)',
+    /* eslint-enable no-dupe-keys */
     minWidth: '700px',
     maxWidth: '700px',
     marginLeft: '10px',
