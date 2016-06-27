@@ -4,10 +4,10 @@ With it you can view economic free open data from WEB.
 
 ![alt text](screenshots/currency.png?raw=true "Currency History")
 
-**1.** **Choose a data source from the header bar.**
-**2.** **Choose a dataset menu item in a Browser.** 
-**3.** **Select a data item and enter query date in a dragable Dialog.** 
-**4.** **Click a button Load.** 
+**1.** **Choose a data source from the header bar.**  
+**2.** **Choose a dataset menu item in a Browser.**   
+**3.** **Select a data item and enter query date in a dragable Dialog.**   
+**4.** **Click a button Load.**   
 The result will be shown in a Chart in a Chart container.  
 
 After clicking a button Show in a Dialog will be opened Chart container with Charts or empty.   
