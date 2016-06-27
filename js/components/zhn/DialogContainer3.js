@@ -68,7 +68,6 @@ var DialogContainer3 = _react2.default.createClass({
 
   _onStore: function _onStore(actionType, data) {
     var _props = this.props;
-    var id = _props.id;
     var initAction = _props.initAction;
     var showAction = _props.showAction;
 

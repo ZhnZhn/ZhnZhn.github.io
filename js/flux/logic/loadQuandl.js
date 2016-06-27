@@ -31,6 +31,7 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
   var chartId = option.value;
   var chartType = option.chartType;
 
+
   if (!_ChartStore2.default.isChartExist(chartType, chartId)) {
     (0, _fn.fnFetch)({
       uri: _QuandlApi2.default.getRequestUrl(option),
@@ -46,7 +47,9 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
     var caption = _Msg$Alert$ALREADY_EX.caption;
     var descr = _Msg$Alert$ALREADY_EX.descr;
 
-    onFailed({ caption: caption, descr: descr, chartId: chartId });
+    option.alertCaption = caption;
+    option.alertDescr = descr;
+    onFailed(option);
   }
 };
 

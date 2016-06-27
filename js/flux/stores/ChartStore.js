@@ -18,6 +18,10 @@ var _ComponentActions = require('../actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
+var _BrowserActions = require('../actions/BrowserActions');
+
+var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
+
 var _WatchActions = require('../actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
@@ -46,18 +50,18 @@ var _WatchListSlice2 = _interopRequireDefault(_WatchListSlice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _consoleLogStyle = 'color:rgb(237, 88, 19);';
+var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 var _fnLogLoadError = function _fnLogLoadError(_ref) {
-  var caption = _ref.caption;
-  var descr = _ref.descr;
-  var chartId = _ref.chartId;
+  var alertCaption = _ref.alertCaption;
+  var alertDescr = _ref.alertDescr;
+  var alertItemId = _ref.alertItemId;
 
-  console.log('%c' + caption + ':' + chartId, _consoleLogStyle);
-  console.log('%c' + descr, _consoleLogStyle);
+  console.log('%c' + alertCaption + ':' + alertItemId, CONSOLE_LOG_STYLE);
+  console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 };
 
 var ChartStore = _reflux2.default.createStore(_extends({
-  listenables: [_ChartActions2.default, _ComponentActions2.default, _WatchActions2.default],
+  listenables: [_ChartActions2.default, _ComponentActions2.default, _BrowserActions2.default, _WatchActions2.default],
   charts: {},
   init: function init() {
     this.initWatchList();
@@ -79,6 +83,12 @@ var ChartStore = _reflux2.default.createStore(_extends({
       }
     }
     return false;
+  },
+  showAlertDialog: function showAlertDialog() {
+    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+    option.modalDialogType = _Type.ModalDialog.ALERT;
+    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   },
   onLoadStock: function onLoadStock() {
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK);
@@ -103,15 +113,15 @@ var ChartStore = _reflux2.default.createStore(_extends({
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
     }
 
-    this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
   },
   onLoadStockAdded: function onLoadStockAdded() {
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_ADDED);
   },
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_FAILED, option);
-    option.modalDialogType = _Type.ModalDialog.ALERT;
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+    option.alertItemId = option.value;
+    this.showAlertDialog(option);
     _fnLogLoadError(option);
   },
   onShowChart: function onShowChart(chartType, browserType) {
@@ -123,11 +133,11 @@ var ChartStore = _reflux2.default.createStore(_extends({
     if (chartCont) {
       chartCont.isShow = true;
       this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartCont);
-      this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
     } else {
       this.charts[chartType] = this.createInitConfig(chartType);
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
-      this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
     }
   },
   onCloseChart: function onCloseChart(chartType, browserType, chartId) {
@@ -145,12 +155,12 @@ var ChartStore = _reflux2.default.createStore(_extends({
       this.activeChart = null;
     }
     this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartCont);
-    this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
   },
   onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
     if (browserType !== _Type.BrowserType.WATCH_LIST) {
       this.setMenuItemClose(chartType, browserType);
-      this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
     }
   },
   onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {

@@ -8,17 +8,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Type = require('../../constants/Type');
+
 var _QuandlBrowser = require('../quandl-browser/QuandlBrowser');
 
 var _QuandlBrowser2 = _interopRequireDefault(_QuandlBrowser);
-
-var _YahooBrowser = require('../yahoo-browser/YahooBrowser');
-
-var _YahooBrowser2 = _interopRequireDefault(_YahooBrowser);
-
-var _GoogleBrowser = require('../google-browser/GoogleBrowser');
-
-var _GoogleBrowser2 = _interopRequireDefault(_GoogleBrowser);
 
 var _WatchBrowser = require('../watch-browser/WatchBrowser');
 
@@ -28,27 +22,63 @@ var _DialogContainer = require('../zhn/DialogContainer3');
 
 var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
 
-var _ComponentActions = require('../../flux/actions/ComponentActions');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BrowserContainer = _react2.default.createClass({
   displayName: 'BrowserContainer',
-  render: function render() {
+  getInitialState: function getInitialState() {
+    return {
+      elBrowsers: []
+    };
+  },
+  componentWillMount: function componentWillMount() {
     var store = this.props.store;
+
+    this.unsubscribe = store.listen(this._onStore);
+  },
+  componentWillUnmount: function componentWillUnmount() {
+    this.unsubscribe();
+  },
+  _onStore: function _onStore(actionType, data) {
+    if (actionType === this.props.initBrowserAction) {
+      this.state.elBrowsers.unshift(data);
+      this.setState(this.state);
+    }
+  },
+  render: function render() {
+    var _props = this.props;
+    var store = _props.store;
+    var showBrowserAction = _props.showBrowserAction;
+    var updateBrowserAction = _props.updateBrowserAction;
+    var updateWatchAction = _props.updateWatchAction;
+    var initDialogAction = _props.initDialogAction;
+    var showDialogAction = _props.showDialogAction;
+    var elBrowsers = this.state.elBrowsers;
+
 
     return _react2.default.createElement(
       'div',
       { className: 'hrz-container' },
-      _react2.default.createElement(_QuandlBrowser2.default, { store: store }),
-      _react2.default.createElement(_YahooBrowser2.default, { store: store }),
-      _react2.default.createElement(_GoogleBrowser2.default, { store: store }),
-      _react2.default.createElement(_WatchBrowser2.default, { store: store }),
+      _react2.default.createElement(_QuandlBrowser2.default, {
+        browserType: _Type.BrowserType.QUANDL,
+        caption: 'Quandl Economic',
+        store: store,
+        showAction: showBrowserAction,
+        updateAction: updateBrowserAction
+      }),
+      _react2.default.createElement(_WatchBrowser2.default, {
+        browserType: _Type.BrowserType.WATCH_LIST,
+        caption: 'Watch List',
+        store: store,
+        showAction: showBrowserAction,
+        updateAction: updateWatchAction
+      }),
+      elBrowsers,
       _react2.default.createElement(_DialogContainer2.default, {
         maxDialog: 3,
         store: store,
-        initAction: _ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG,
-        showAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG
+        initAction: initDialogAction,
+        showAction: showDialogAction
       })
     );
   }

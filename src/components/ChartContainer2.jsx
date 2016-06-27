@@ -5,7 +5,6 @@ import {ChartActionTypes} from '../flux/actions/ChartActions';
 import ComponentActions, {ComponentActionTypes} from '../flux/actions/ComponentActions';
 import {ModalDialog} from '../constants/Type';
 
-import ZhHighchart from './ZhHighchart';
 import CaptionRow from './CaptionRow';
 import SvgHrzResize from './zhn/SvgHrzResize';
 import ScrollPane from './zhn/ScrollPane';
@@ -14,15 +13,16 @@ import AreaChartItem from './AreaChartItem';
 const styles = {
   rootDiv : {
     backgroundColor: '#4D4D4D',
-    //padding: '5px',
     paddingTop : '5px',
     paddingLeft : '5px',
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
     position: 'relative',
     width: '635px',
+    /* eslint-disable no-dupe-keys */
     height: '730px',
     height: 'calc(100vh - 61px)',
+    /* eslint-enable no-dupe-keys */
     overflowY: 'hidden',
     marginLeft: '10px',
     overflowX : 'hidden'

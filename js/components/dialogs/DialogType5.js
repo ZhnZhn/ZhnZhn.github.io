@@ -190,6 +190,7 @@ var DialogType5 = _react2.default.createClass(_extends({
     var fnValue = _props5.fnValue;
     var isTreeItem = _props5.isTreeItem;
     var dataColumn = _props5.dataColumn;
+    var loadId = _props5.loadId;
 
     if (!isTreeItem) {
       var _dataColumn = this.three ? this.three.value : 1;
@@ -197,14 +198,16 @@ var DialogType5 = _react2.default.createClass(_extends({
         value: fnValue(this.one.value, this.two.value),
         fromDate: fromDate,
         toDate: toDate,
-        dataColumn: _dataColumn
+        dataColumn: _dataColumn,
+        loadId: loadId
       };
     } else {
       return {
         value: fnValue(this.one.value, this.three.value),
         fromDate: fromDate,
         toDate: toDate,
-        dataColumn: dataColumn
+        dataColumn: dataColumn,
+        loadId: loadId
       };
     }
   },

@@ -55,9 +55,9 @@ var AlertDialog = _react2.default.createClass({
     var isShow = _props.isShow;
     var data = _props.data;
     var onClose = _props.onClose;
-    var caption = data.caption;
-    var chartId = data.chartId;
-    var descr = data.descr;
+    var alertCaption = data.alertCaption;
+    var alertItemId = data.alertItemId;
+    var alertDescr = data.alertDescr;
 
     return _react2.default.createElement(
       _ModalDialog2.default,
@@ -72,11 +72,11 @@ var AlertDialog = _react2.default.createClass({
         _react2.default.createElement(
           'p',
           { style: Styles.CAPTION },
-          caption + ': ',
+          alertCaption + ': ',
           _react2.default.createElement(
             'span',
             { style: Styles.ITEM_ID },
-            chartId
+            alertItemId
           )
         )
       ),
@@ -86,7 +86,7 @@ var AlertDialog = _react2.default.createClass({
         _react2.default.createElement(
           'p',
           { style: Styles.DESCR },
-          descr
+          alertDescr
         )
       )
     );

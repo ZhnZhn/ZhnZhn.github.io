@@ -8,9 +8,9 @@ export const fnFetch = function({
       if (status>=200 && status<400){
         return response.json();
       } else if (status>=400 && status<500){
-         throw {zhCaption : 'Request Error', message : `${status} : ${statusText}` }
+         throw {errCaption : 'Request Error', message : `${status} : ${statusText}` }
       } else if (status>=500 && status<600){
-         throw {zhCaption : 'Response Error', message : `${status} : ${statusText}` }
+         throw {errCaption : 'Response Error', message : `${status} : ${statusText}` }
       }
     })
     .then((json) => {
@@ -32,19 +32,15 @@ export const fnFetchText = function({
       if (status>=200 && status<400){
         return response.text();
       } else if (status>=400 && status<500){
-         throw {zhCaption : 'Request Error', message : `${status} : ${statusText}` }
+         throw {errCaption : 'Request Error', message : `${status} : ${statusText}` }
       } else if (status>=500 && status<600){
-         throw {zhCaption : 'Response Error', message : `${status} : ${statusText}` }
+         throw {errCaption : 'Response Error', message : `${status} : ${statusText}` }
       }
     })
     .then((text) => {
        onFetch({ text });
-       //if (onCheckResponse(json)){
-         //onFetch({text, option, onCompleted});
-       //}
     })
     .catch((error) => {
-       console.log(error);
-       //onCatch({error, option, onFailed})
+       console.log(error);       
     })
 }

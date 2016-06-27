@@ -17,7 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = _DialogStyles2.default;
 var Styles = {
   MSG_SPAN: {
-    whiteSpace: 'pre'
+    whiteSpace: 'pre',
+    fontWeight: 'bold'
   }
 };
 

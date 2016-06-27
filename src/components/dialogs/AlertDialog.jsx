@@ -38,7 +38,7 @@ const AlertDialog = React.createClass({
 
   render(){
     const {isShow, data, onClose} = this.props
-        , {caption, chartId, descr} = data
+        , {alertCaption, alertItemId, alertDescr} = data
     return (
       <ModalDialog
         caption="Alert"
@@ -47,12 +47,12 @@ const AlertDialog = React.createClass({
       >
          <div style={styles.rowDiv} key="1">
             <p style={Styles.CAPTION}>
-              {caption + ': '}
-              <span style={Styles.ITEM_ID}>{chartId}</span>
+              {alertCaption + ': '}
+              <span style={Styles.ITEM_ID}>{alertItemId}</span>
             </p>
          </div>
          <div style={styles.rowDiv} key="2">
-            <p style={Styles.DESCR}>{descr}</p>
+            <p style={Styles.DESCR}>{alertDescr}</p>
          </div>
 
       </ModalDialog>

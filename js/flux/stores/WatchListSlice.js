@@ -12,6 +12,8 @@ var _ComponentActions = require('../actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
+var _BrowserActions = require('../actions/BrowserActions');
+
 var _WatchActions = require('../actions/WatchActions');
 
 var _WatchDefault = require('../../constants/WatchDefault');
@@ -28,7 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var key = 'watchList';
+var STORAGE_KEY = 'watchList';
 
 var _fnOpenInfoDialog = function _fnOpenInfoDialog(descr) {
   _ComponentActions2.default.showModalDialog(_Type.ModalDialog.INFO, {
@@ -211,12 +213,12 @@ var WatchListSlice = {
   initWatchList: function initWatchList() {
     var _this = this;
 
-    _localforage2.default.getItem(key).then(function (value) {
+    _localforage2.default.getItem(STORAGE_KEY).then(function (value) {
       _this.watchList = value ? value : _WatchDefault2.default;
-      _this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_WATCH_BROWSER, _this.watchList);
+      _this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, _this.watchList);
     }).catch(function () {
       _this.watchList = _WatchDefault2.default;
-      _this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_WATCH_BROWSER, _this.watchList);
+      _this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, _this.watchList);
     });
   },
   getWatchList: function getWatchList() {
@@ -238,13 +240,13 @@ var WatchListSlice = {
   onRemoveItem: function onRemoveItem(option) {
     _fnRemoveItem(this.watchList, option);
     this.isWatchEdited = true;
-    this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
   },
   onSaveWatch: function onSaveWatch() {
     var _this2 = this;
 
     if (this.isWatchEdited) {
-      _localforage2.default.setItem(key, this.watchList).then(function () {
+      _localforage2.default.setItem(STORAGE_KEY, this.watchList).then(function () {
         _this2.isWatchEdited = false;
         _fnOpenInfoDialog(_Msg2.default.WATCH_SAVED);
         console.log(_Msg2.default.WATCH_SAVED);
@@ -256,7 +258,7 @@ var WatchListSlice = {
   _onEditWatch: function _onEditWatch(result, forActionType) {
     if (result.isDone) {
       this.isWatchEdited = true;
-      this.trigger(_ComponentActions.ComponentActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
       this.trigger(_WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED, { forActionType: forActionType });
     } else {
       this.trigger(_WatchActions.WatchActionTypes.EDIT_WATCH_FAILED, {

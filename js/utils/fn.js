@@ -19,9 +19,9 @@ var fnFetch = exports.fnFetch = function fnFetch(_ref) {
       if (status >= 200 && status < 400) {
          return response.json();
       } else if (status >= 400 && status < 500) {
-         throw { zhCaption: 'Request Error', message: status + ' : ' + statusText };
+         throw { errCaption: 'Request Error', message: status + ' : ' + statusText };
       } else if (status >= 500 && status < 600) {
-         throw { zhCaption: 'Response Error', message: status + ' : ' + statusText };
+         throw { errCaption: 'Response Error', message: status + ' : ' + statusText };
       }
    }).then(function (json) {
       if (onCheckResponse(json)) {
@@ -43,18 +43,14 @@ var fnFetchText = exports.fnFetchText = function fnFetchText(_ref2) {
       if (status >= 200 && status < 400) {
          return response.text();
       } else if (status >= 400 && status < 500) {
-         throw { zhCaption: 'Request Error', message: status + ' : ' + statusText };
+         throw { errCaption: 'Request Error', message: status + ' : ' + statusText };
       } else if (status >= 500 && status < 600) {
-         throw { zhCaption: 'Response Error', message: status + ' : ' + statusText };
+         throw { errCaption: 'Response Error', message: status + ' : ' + statusText };
       }
    }).then(function (text) {
       onFetch({ text: text });
-      //if (onCheckResponse(json)){
-      //onFetch({text, option, onCompleted});
-      //}
    }).catch(function (error) {
       console.log(error);
-      //onCatch({error, option, onFailed})
    });
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\fn.js.map

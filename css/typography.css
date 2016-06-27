@@ -28,8 +28,7 @@
   text-decoration: none;
 }
 .descr-datasource a:hover, .descr__quandl-link:hover {
-  border-bottom-width: medium;
-  /*border-bottom-width: 2px;*/
+  border-bottom-width: medium;  
 }
 
 .descr-datasource span {

@@ -22,10 +22,6 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
 var _Type = require('../constants/Type');
 
-var _ZhHighchart = require('./ZhHighchart');
-
-var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
-
 var _CaptionRow = require('./CaptionRow');
 
 var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
@@ -49,13 +45,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var styles = {
   rootDiv: (_rootDiv = {
     backgroundColor: '#4D4D4D',
-    //padding: '5px',
     paddingTop: '5px',
     paddingLeft: '5px',
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
     position: 'relative',
     width: '635px',
+    /* eslint-disable no-dupe-keys */
     height: '730px'
   }, _defineProperty(_rootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_rootDiv, 'overflowY', 'hidden'), _defineProperty(_rootDiv, 'marginLeft', '10px'), _defineProperty(_rootDiv, 'overflowX', 'hidden'), _rootDiv),
   hrzResize: {

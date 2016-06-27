@@ -5,8 +5,8 @@ const styles = {
     zIndex : 30,
     position: 'absolute',
     top: '70px',
-    left: '10px',    
-    width: '99%',
+    left: '10px',
+    width: '99%'
   }
 };
 
@@ -53,7 +53,7 @@ const DialogContainer3 = React.createClass({
    },
 
    _onStore: function(actionType, data){
-      const {id, initAction, showAction} = this.props;
+      const {initAction, showAction} = this.props;
       if (actionType === showAction){
 
          if (!this.state.dialog[data]){

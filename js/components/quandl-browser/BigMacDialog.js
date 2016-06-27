@@ -135,14 +135,17 @@ var BigMacDialog = _react2.default.createClass(_extends({
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
     var _dataColumn = this.metric ? this.metric.value : 1;
-    var fnValue = this.props.fnValue;
+    var _props3 = this.props;
+    var loadId = _props3.loadId;
+    var fnValue = _props3.fnValue;
 
     return {
       value: fnValue(this.country.value),
       fromDate: fromDate,
       toDate: toDate,
       dataColumn: _dataColumn,
-      itemCaption: this.country.caption
+      itemCaption: this.country.caption,
+      loadId: loadId
     };
   },
   _handlerClose: function _handlerClose() {
@@ -152,14 +155,14 @@ var BigMacDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props3 = this.props;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var onClose = _props3.onClose;
-    var initFromDate = _props3.initFromDate;
-    var initToDate = _props3.initToDate;
-    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
-    var onTestDate = _props3.onTestDate;
+    var _props4 = this.props;
+    var isShow = _props4.isShow;
+    var onShow = _props4.onShow;
+    var onClose = _props4.onClose;
+    var initFromDate = _props4.initFromDate;
+    var initToDate = _props4.initToDate;
+    var msgOnNotValidFormat = _props4.msgOnNotValidFormat;
+    var onTestDate = _props4.onTestDate;
     var _state = this.state;
     var isShowDate = _state.isShowDate;
     var optionCountries = _state.optionCountries;

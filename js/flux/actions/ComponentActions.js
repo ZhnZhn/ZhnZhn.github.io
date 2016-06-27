@@ -17,19 +17,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var ComponentActionTypes = exports.ComponentActionTypes = {
   SHOW_ABOUT: 'showAbout',
-  SHOW_BROWSER: 'showBrowser',
+
   INIT_AND_SHOW_DIALOG: 'initAndShowDialog',
   SHOW_DIALOG: 'showDialog',
   CLOSE_CHART_CONTAINER: 'closeChartContainer',
   CLOSE_CHART_CONTAINER_2: 'closeChartContainer2',
-  UPDATE_BROWSER_MENU: 'updateBrowserMenu',
   SET_ACTIVE_CHECKBOX: 'setActiveCheckbox',
 
-  SHOW_MODAL_DIALOG: 'showModalDialog',
-  UPDATE_WATCH_BROWSER: 'updateWatchBrowser'
+  SHOW_MODAL_DIALOG: 'showModalDialog'
 };
 
-var ComponentActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_ABOUT, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_BROWSER, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.INIT_AND_SHOW_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.CLOSE_CHART_CONTAINER, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.CLOSE_CHART_CONTAINER_2, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.UPDATE_BROWSER_MENU, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SET_ACTIVE_CHECKBOX, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_MODAL_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.UPDATE_WATCH_BROWSER, {}), _Reflux$createActions));
+var ComponentActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_ABOUT, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.INIT_AND_SHOW_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_DIALOG, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.CLOSE_CHART_CONTAINER, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.CLOSE_CHART_CONTAINER_2, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SET_ACTIVE_CHECKBOX, {}), _defineProperty(_Reflux$createActions, ComponentActionTypes.SHOW_MODAL_DIALOG, {}), _Reflux$createActions));
 
 exports.default = ComponentActions;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ComponentActions.js.map

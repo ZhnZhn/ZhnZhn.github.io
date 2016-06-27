@@ -14,14 +14,6 @@ var _DataQE = require('./DataQE');
 
 var _DataQE2 = _interopRequireDefault(_DataQE);
 
-var _DataQY = require('./DataQY');
-
-var _DataQY2 = _interopRequireDefault(_DataQY);
-
-var _DataQG = require('./DataQG');
-
-var _DataQG2 = _interopRequireDefault(_DataQG);
-
 var _ComponentActions = require('../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -76,33 +68,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.CHINA_DCE_FUTURE }, { id: _DialogType.Quandl.CHINA_ZCE_FUTURE }]
 }];
 
-var menuQuandlYahoo = [{
-  caption: 'North American Stocks',
-  items: [{ id: _DialogType.QuandlYahoo.TORONTO }, { id: _DialogType.QuandlYahoo.TORONTO_VENTURE }, { id: _DialogType.QuandlYahoo.MONTREAL }, { id: _DialogType.QuandlYahoo.INDICE }]
-}, {
-  caption: 'European Stocks',
-  items: [{ id: _DialogType.QuandlYahoo.LONDON }, { id: _DialogType.QuandlYahoo.PARIS }, { id: _DialogType.QuandlYahoo.AMSTERDAM }, { id: _DialogType.QuandlYahoo.COPPENHAGEN }, { id: _DialogType.QuandlYahoo.OSLO }, { id: _DialogType.QuandlYahoo.STOCKHOLM }, { id: _DialogType.QuandlYahoo.SWISS }, { id: _DialogType.QuandlYahoo.MILAN }, { id: _DialogType.QuandlYahoo.MADRID }]
-}, {
-  caption: 'World Stocks',
-  items: [{ id: _DialogType.QuandlYahoo.AUSTRALIAN }, { id: _DialogType.QuandlYahoo.SHANGHAI }, { id: _DialogType.QuandlYahoo.SHENZHEN }, { id: _DialogType.QuandlYahoo.TAIWAN }, { id: _DialogType.QuandlYahoo.HONG_KONG }, { id: _DialogType.QuandlYahoo.SINGAPURE }, { id: _DialogType.QuandlYahoo.BOMBEY }]
-}];
-
-var menuQuandlGoogle = [{
-  caption: 'North American Stocks',
-  items: [{ id: _DialogType.QuandlGoogle.NASDAQ }, { id: _DialogType.QuandlGoogle.NYSE }, { id: _DialogType.QuandlGoogle.AMEX }, { id: _DialogType.QuandlGoogle.ARCA }]
-}, {
-  caption: 'European Stocks',
-  items: [{ id: _DialogType.QuandlGoogle.BRUSSELS }, { id: _DialogType.QuandlGoogle.LISBON }, { id: _DialogType.QuandlGoogle.TALLIN }, { id: _DialogType.QuandlGoogle.RIGA }, { id: _DialogType.QuandlGoogle.VILNIUS }]
-}, {
-  caption: 'World Stocks',
-  items: [{ id: _DialogType.QuandlGoogle.SHENZHEN }, { id: _DialogType.QuandlGoogle.SINGAPURE }, { id: _DialogType.QuandlGoogle.KOREA }, { id: _DialogType.QuandlGoogle.TAILAND }, { id: _DialogType.QuandlGoogle.NEWZEALAND }, { id: _DialogType.QuandlGoogle.SAO_PAOLO }]
-}];
-
-var QuandlMenu = fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.QUANDL);
-var QuandlYahooMenu = fnCreateMenu(menuQuandlYahoo, _DataQY2.default, _Type.BrowserType.QUANDL_YAHOO);
-var QuandlGoogleMenu = fnCreateMenu(menuQuandlGoogle, _DataQG2.default, _Type.BrowserType.QUANDL_GOOGLE);
-
-var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL, QuandlMenu), _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL_YAHOO, QuandlYahooMenu), _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL_GOOGLE, QuandlGoogleMenu), _BrowserMenu);
+var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.QUANDL)), _defineProperty(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);
 
 exports.default = BrowserMenu;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserMenu.js.map

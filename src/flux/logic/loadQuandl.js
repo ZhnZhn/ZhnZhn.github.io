@@ -8,8 +8,8 @@ import QuandlApi from '../../api/QuandlApi';
 import QuandlAdapter from '../../adapters/QuandlAdapter';
 
 const _loadToChartComp = function(option, onCompleted, onFailed){
-  const chartId = option.value
-      , {chartType} = option;
+  const {value:chartId, chartType } = option;
+
   if (!ChartStore.isChartExist(chartType, chartId)) {
     fnFetch({
       uri : QuandlApi.getRequestUrl(option),
@@ -21,8 +21,10 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
       onFailed : onFailed
     })
   } else {
-    const {caption, descr} = Msg.Alert.ALREADY_EXIST
-    onFailed({caption, descr, chartId});
+    const {caption, descr} = Msg.Alert.ALREADY_EXIST;
+    option.alertCaption = caption;
+    option.alertDescr = descr;
+    onFailed(option);
   }
 }
 

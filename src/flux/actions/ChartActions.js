@@ -19,7 +19,9 @@ const ChartActions =  Reflux.createActions({
 });
 
 ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, browserType, option){
-  LoadConfig[chartType](chartType, browserType, option, this.completed, this.added, this.failed);
+  //LoadConfig[chartType](chartType, browserType, option, this.completed, this.added, this.failed);
+  const { loadId='Q' } = option;
+  LoadConfig[loadId](chartType, browserType, option, this.completed, this.added, this.failed);
 })
 
 export default ChartActions

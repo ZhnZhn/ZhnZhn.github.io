@@ -1,5 +1,5 @@
 {
-  "tikets" : [
+  "tickets" : [
   { "ticket":"ATM", "value":"GOOG/NZE_ATM", "caption":"A2 Corp Ltd (ATM)" },
   { "ticket":"AMP", "value":"GOOG/NZE_AMP", "caption":"AMP Ltd (AMP)" },
   { "ticket":"APN", "value":"GOOG/NZE_APN", "caption":"APN News &amp; Media Limited Ordinary Shares (APN)" },

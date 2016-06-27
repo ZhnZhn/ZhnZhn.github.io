@@ -68,7 +68,7 @@ const UNCommodityTradeDialog = React.createClass({
         {caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)'},
         {caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)'},
         {caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)'},
-        {caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)'},
+        {caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)'}
       ],
       isLoadingTrade : false,
       isLoadingTradeFailed : false,
@@ -233,14 +233,15 @@ const UNCommodityTradeDialog = React.createClass({
   },
   _createLoadMetaOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
-        , {fnValue} = this.props;
+        , {loadId, fnValue} = this.props;
     return {
        value : fnValue(this.chapter.value, this.country.value),
        fromDate: fromDate,
        toDate: toDate,
        isLoadMeta : true,
        onLoad : this._setOptionTrades,
-       onFailed : this._loadMetaOptionFailed
+       onFailed : this._loadMetaOptionFailed,
+       loadId : loadId
     }
   },
   _setOptionTrades(optionTrades){
@@ -264,9 +265,17 @@ const UNCommodityTradeDialog = React.createClass({
   _createDataValidationMessages(){
      let msg = [];
      if ( !this.chartType || this.chartType.value === ChartType.AREA){
-       if (!this.subheading)  {msg.push(this.props.msgOnNotSelected('Subheading'));}
+       if (!this.subheading)  {
+         msg.push(this.props.msgOnNotSelected('Subheading'));
+       }
      } else {
-       if (!this.tradeFilter) {msg.push(this.props.msgOnNotSelected('Trade Filter'));}
+       const { placeholderTrade } = this.state;
+       if (placeholderTrade === Placeholder.TRADE.INIT){
+         msg.push(Placeholder.TRADE.INIT);
+       }
+       if (!this.tradeFilter) {
+         msg.push(this.props.msgOnNotSelected('Trade Filter'));
+       }
      }
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
@@ -274,7 +283,7 @@ const UNCommodityTradeDialog = React.createClass({
   _createLoadDataOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
         , _dataColumn = (this.subheading) ? this.subheading.value : this.props.dataColumn
-        , {fnValue} = this.props
+        , {loadId, fnValue} = this.props
         , _chartType = (this.chartType) ? this.chartType.value : undefined
         , _title = (this.tradeFilter) ?
                    `${this.country.caption}:${this.tradeFilter.caption}` :
@@ -287,7 +296,8 @@ const UNCommodityTradeDialog = React.createClass({
        seriaType : _chartType,
        sliceItems : this._createSpliceItems(),
        title : _title,
-       subtitle: this.chapter.caption
+       subtitle: this.chapter.caption,
+       loadId : loadId
     }
   },
   _createSpliceItems(){
@@ -306,7 +316,7 @@ const UNCommodityTradeDialog = React.createClass({
 
   render(){
     const {
-           isShow, onShow, onClose,
+           isShow, onShow,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {

@@ -29,32 +29,6 @@ var _loadQuandl = require('./loadQuandl');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) {
-  var chartId = option.value;
-  var chartType = option.chartType;
-
-  if (!_ChartStore2.default.isChartExist(chartType, chartId)) {
-    var _onFetch = option.isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChartComp,
-        _onFailed = option.isLoadMeta ? _fnFailed.bind(null, option, onFailed) : onFailed;
-    (0, _fn.fnFetch)({
-      uri: _QuandlApi2.default.getRequestUrl(option),
-      option: option,
-      onCheckResponse: _QuandlApi2.default.checkResponse,
-      onFetch: _onFetch,
-      onCompleted: onCompleted,
-      onCatch: _fnCatch.fnCatch,
-      onFailed: _onFailed
-    });
-  } else {
-    var _Msg$Alert$ALREADY_EX = _Msg2.default.Alert.ALREADY_EXIST;
-    var caption = _Msg$Alert$ALREADY_EX.caption;
-    var descr = _Msg$Alert$ALREADY_EX.descr;
-
-    onFailed({ caption: caption, descr: descr, chartId: chartId });
-    option.onFailed();
-  }
-};
-
 var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
   var json = _ref.json;
   var option = _ref.option;
@@ -70,14 +44,46 @@ var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
   option.onLoad(optionTrades);
 };
 
-var _fnFailed = function _fnFailed(option, onFailed, optionFailed) {
+var _fnFailedLoadMeta = function _fnFailedLoadMeta(option, onFailed, optionFailed) {
   option.onFailed();
   onFailed(optionFailed);
 };
 
+var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) {
+  var chartId = option.value;
+  var chartType = option.chartType;
+
+
+  if (!_ChartStore2.default.isChartExist(chartType, chartId)) {
+    var isLoadMeta = option.isLoadMeta;
+    var _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChartComp;
+    var _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
+    (0, _fn.fnFetch)({
+      uri: _QuandlApi2.default.getRequestUrl(option),
+      option: option,
+      onCheckResponse: _QuandlApi2.default.checkResponse,
+      onFetch: _onFetch,
+      onCompleted: onCompleted,
+      onCatch: _fnCatch.fnCatch,
+      onFailed: _onFailed
+    });
+  } else {
+    var _Msg$Alert$ALREADY_EX = _Msg2.default.Alert.ALREADY_EXIST;
+    var caption = _Msg$Alert$ALREADY_EX.caption;
+    var descr = _Msg$Alert$ALREADY_EX.descr;
+
+    option.alertCaption = caption;
+    option.alertDescr = descr;
+    onFailed(option);
+    //onFailed({caption, descr, chartId});
+    option.onFailed();
+  }
+};
+
 var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
-  var _onFetch = option.isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChart,
-      _onFailed = option.isLoadMeta ? _fnFailed.bind(null, option, onFailed) : onFailed;
+  var isLoadMeta = option.isLoadMeta;
+  var _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChart;
+  var _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
   (0, _fn.fnFetch)({
     uri: _QuandlApi2.default.getRequestUrl(option),
     option: option,

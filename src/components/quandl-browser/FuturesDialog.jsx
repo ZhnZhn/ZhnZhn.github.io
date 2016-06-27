@@ -27,7 +27,7 @@ const FuturesDialog = React.createClass({
       isLoading : _isLoading,
       isLoadingFailed : false,
       optionCodes : [],
-      validationMessages: [],
+      validationMessages: []
     }
   },
 
@@ -83,11 +83,12 @@ const FuturesDialog = React.createClass({
     return msg;
   },
   _createLoadOption(){
-    const {dataColumn} = this.props;
+    const {dataColumn, loadId} = this.props;
     return {
        value : this.code.value,
        code : this.code,
-       dataColumn : dataColumn
+       dataColumn : dataColumn,
+       loadId : loadId
     };
   },
   _handlerClose(){

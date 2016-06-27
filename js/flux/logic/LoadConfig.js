@@ -8,26 +8,18 @@ var _ChartType = require('../../constants/ChartType');
 
 var _ChartType2 = _interopRequireDefault(_ChartType);
 
-var _DialogType = require('../../constants/DialogType');
-
 var _loadQuandl = require('./loadQuandl');
 
 var _loadQuandlCommodityTrade = require('./loadQuandlCommodityTrade');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var LoadConfig = {};
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var addConfig = function addConfig(obj, fn) {
-  for (var key in obj) {
-    LoadConfig[obj[key]] = fn;
-  }
-};
-addConfig(_DialogType.Quandl, _loadQuandl.loadQuandl);
-addConfig(_DialogType.QuandlGoogle, _loadQuandl.loadQuandl);
-addConfig(_DialogType.QuandlYahoo, _loadQuandl.loadQuandl);
-LoadConfig[_ChartType2.default.WATCH_LIST] = _loadQuandl.loadQuandl;
-LoadConfig[_ChartType2.default.QUANDL_COMMODITY_TRADE] = _loadQuandlCommodityTrade.loadQuandlCommodityTrade;
+var LoadConfig = _defineProperty({
+  Q: _loadQuandl.loadQuandl,
+  QCT: _loadQuandlCommodityTrade.loadQuandlCommodityTrade
+}, _ChartType2.default.WATCH_LIST, _loadQuandl.loadQuandl);
 
 exports.default = LoadConfig;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadConfig.js.map

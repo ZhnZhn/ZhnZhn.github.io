@@ -16,12 +16,14 @@ var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
-    display: 'flex',
-    flexDirection: 'row'
+/*
+const styles = {
+  rootDiv : {
+    display : 'flex',
+    flexDirection : 'row'
   }
 };
+*/
 
 var ComponentHrzContainer = _react2.default.createClass({
   displayName: 'ComponentHrzContainer',

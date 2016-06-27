@@ -1,14 +1,13 @@
 
 import LocalForage from 'localforage';
 import ComponentActions from '../actions/ComponentActions';
-import {ComponentActionTypes} from '../actions/ComponentActions';
-import {WatchActionTypes} from '../actions/WatchActions';
+import { BrowserActionTypes } from '../actions/BrowserActions';
+import { WatchActionTypes } from '../actions/WatchActions';
 import WatchDefault from '../../constants/WatchDefault';
-import {ModalDialog}  from '../../constants/Type';
+import { ModalDialog }  from '../../constants/Type';
 import Msg from '../../constants/Msg';
 
-
-const key = 'watchList';
+const STORAGE_KEY = 'watchList';
 
 const _fnOpenInfoDialog = function(descr){
   ComponentActions.showModalDialog(ModalDialog.INFO, {
@@ -167,13 +166,13 @@ const WatchListSlice = {
   isWatchEdited : false,
   //watchList : null,
   initWatchList(){
-    LocalForage.getItem(key).then((value) => {
+    LocalForage.getItem(STORAGE_KEY).then((value) => {
       this.watchList = (value) ? value : WatchDefault;
-      this.trigger(ComponentActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+      this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
     })
     .catch(() => {
       this.watchList = WatchDefault;
-      this.trigger(ComponentActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+      this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
     })
   },
   getWatchList(){
@@ -194,12 +193,12 @@ const WatchListSlice = {
   onRemoveItem(option){
     _fnRemoveItem(this.watchList, option);
     this.isWatchEdited = true;
-    this.trigger(ComponentActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+    this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
   },
 
   onSaveWatch(){
     if (this.isWatchEdited){
-       LocalForage.setItem(key , this.watchList).then(()=>{
+       LocalForage.setItem(STORAGE_KEY , this.watchList).then(()=>{
          this.isWatchEdited = false;
          _fnOpenInfoDialog(Msg.WATCH_SAVED)
          console.log(Msg.WATCH_SAVED);
@@ -212,7 +211,7 @@ const WatchListSlice = {
   _onEditWatch(result, forActionType){
     if (result.isDone){
       this.isWatchEdited = true;
-      this.trigger(ComponentActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
+      this.trigger(BrowserActionTypes.UPDATE_WATCH_BROWSER, this.watchList);
       this.trigger(WatchActionTypes.EDIT_WATCH_COMPLETED, {forActionType});
     } else {
       this.trigger(WatchActionTypes.EDIT_WATCH_FAILED, {

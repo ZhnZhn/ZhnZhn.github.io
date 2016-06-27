@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {BrowserType, ModalDialog} from '../../constants/Type';
+import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
-import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
+//import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
 import WatchActions from '../../flux/actions/WatchActions';
 
 import Browser from '../zhn/Browser';
@@ -12,19 +12,19 @@ import ScrollPane from '../zhn/ScrollPane';
 import OpenClose2 from '../zhn/OpenClose2';
 import SvgClose from '../SvgClose';
 
-
+/*
 const showAction = ComponentActionTypes.SHOW_BROWSER
     , browserType = BrowserType.WATCH_LIST
     , updateViewAction = ComponentActionTypes.UPDATE_WATCH_BROWSER;
-
+*/
 
 const styles = {
   browser : {
     paddingRight: 0
   },
   btCircle : {
-    marginLeft: '20px',
-  },  
+    marginLeft: '20px'
+  },
   scrollDiv : {
     overflowY: 'auto',
     height: '92%',
@@ -49,7 +49,7 @@ const styles = {
     width: '100%',
     maxWidth: '250px',
     textOverflow: 'ellipsis',
-    overflow: 'hidden',
+    overflow: 'hidden'
 
   },
   itemNotSelected : {
@@ -68,7 +68,7 @@ const WatchBrowser = React.createClass({
     return {
       isShow : false,
       isModeEdit : false,
-      watchList : store.getWatchList(),
+      watchList : store.getWatchList()
     }
   },
 
@@ -79,10 +79,10 @@ const WatchBrowser = React.createClass({
     this.unsubscribe();
   },
   _onStore: function(actionType, data){
-     const {store} = this.props;
+     const { browserType, showAction, updateAction } = this.props;
      if (actionType === showAction && data === browserType ){
       this._handlerShow();
-    } else if (actionType === updateViewAction) {
+    } else if (actionType === updateAction) {
       this.setState({watchList: data})
     }
   },
@@ -198,12 +198,13 @@ const WatchBrowser = React.createClass({
   },
 
   render(){
-    const {isShow, isModeEdit, watchList} = this.state;
-    const _captionEV = (isModeEdit) ? 'V' : 'E';
+    const { caption } = this.props
+        , { isShow, isModeEdit, watchList } = this.state
+        , _captionEV = (isModeEdit) ? 'V' : 'E';
     return (
        <Browser isShow={isShow} style={{paddingRight: 0}}>
          <CaptionRow
-            caption="Watch List"
+            caption={caption}
             onClose={this._handlerHide}
          >
            <ButtonCircle

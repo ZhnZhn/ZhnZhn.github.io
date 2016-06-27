@@ -44,9 +44,11 @@ var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var showAction = _ComponentActions.ComponentActionTypes.SHOW_BROWSER,
-    browserType = _Type.BrowserType.WATCH_LIST,
-    updateViewAction = _ComponentActions.ComponentActionTypes.UPDATE_WATCH_BROWSER;
+/*
+const showAction = ComponentActionTypes.SHOW_BROWSER
+    , browserType = BrowserType.WATCH_LIST
+    , updateViewAction = ComponentActionTypes.UPDATE_WATCH_BROWSER;
+*/
 
 var styles = {
   browser: {
@@ -91,6 +93,8 @@ var styles = {
     right: 0
   }
 };
+//import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
+
 
 var WatchBrowser = _react2.default.createClass({
   displayName: 'WatchBrowser',
@@ -112,11 +116,14 @@ var WatchBrowser = _react2.default.createClass({
     this.unsubscribe();
   },
   _onStore: function _onStore(actionType, data) {
-    var store = this.props.store;
+    var _props = this.props;
+    var browserType = _props.browserType;
+    var showAction = _props.showAction;
+    var updateAction = _props.updateAction;
 
     if (actionType === showAction && data === browserType) {
       this._handlerShow();
-    } else if (actionType === updateViewAction) {
+    } else if (actionType === updateAction) {
       this.setState({ watchList: data });
     }
   },
@@ -236,11 +243,11 @@ var WatchBrowser = _react2.default.createClass({
     }
   },
   render: function render() {
+    var caption = this.props.caption;
     var _state = this.state;
     var isShow = _state.isShow;
     var isModeEdit = _state.isModeEdit;
     var watchList = _state.watchList;
-
     var _captionEV = isModeEdit ? 'V' : 'E';
     return _react2.default.createElement(
       _Browser2.default,
@@ -248,7 +255,7 @@ var WatchBrowser = _react2.default.createClass({
       _react2.default.createElement(
         _CaptionRow2.default,
         {
-          caption: 'Watch List',
+          caption: caption,
           onClose: this._handlerHide
         },
         _react2.default.createElement(_ButtonCircle2.default, {

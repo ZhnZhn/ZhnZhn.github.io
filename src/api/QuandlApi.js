@@ -13,9 +13,9 @@ QuandlApi.getRequestUrl = function(option){
 
   let apiKey;
   if (option.apiKey){
-    apiKey = (queryDate) ?
-        `&api_key=${option.apiKey}` :
-        `api_key=${option.apiKey}`;
+    apiKey = (queryDate)
+       ? `&api_key=${option.apiKey}`
+       : `api_key=${option.apiKey}`;
   } else {
     apiKey = QuandlApi.BLANK;
   }
@@ -25,14 +25,10 @@ QuandlApi.getRequestUrl = function(option){
   return ApiUtils.createUri(uri);
 }
 
-const CheckCaptions = {
-  CLIENT : 'Request Error',
-  SERVER : 'Response Error'
-}
-
+const REQUEST_ERROR = 'Request Error';
 QuandlApi.checkResponse = function(json){
   if (json.quandl_error && json.quandl_error.message){
-     throw {zhCaption : CheckCaptions.CLIENT, message : json.quandl_error.message }
+     throw {errCaption : REQUEST_ERROR, message : json.quandl_error.message }
   }
   return true;
 }

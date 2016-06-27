@@ -2,6 +2,7 @@ import Reflux from 'reflux';
 
 import ChartActions, {ChartActionTypes} from '../actions/ChartActions';
 import ComponentActions, {ComponentActionTypes} from '../actions/ComponentActions';
+import BrowserActions, {BrowserActionTypes} from '../actions/BrowserActions';
 import WatchActions from '../actions/WatchActions';
 
 import {BrowserType, ModalDialog} from '../../constants/Type';
@@ -13,15 +14,17 @@ import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
 import WatchListSlice from './WatchListSlice';
 
-const _consoleLogStyle = 'color:rgb(237, 88, 19);';
-const _fnLogLoadError = function({caption, descr, chartId}){
-  console.log('%c'+ caption + ':' + chartId, _consoleLogStyle);
-  console.log('%c' + descr, _consoleLogStyle);
+const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
+const _fnLogLoadError = function({
+  alertCaption, alertDescr, alertItemId
+}){
+  console.log('%c'+ alertCaption + ':' + alertItemId, CONSOLE_LOG_STYLE);
+  console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 }
 
 
 const ChartStore = Reflux.createStore({
-  listenables : [ChartActions, ComponentActions, WatchActions],
+  listenables : [ChartActions, ComponentActions, BrowserActions, WatchActions],
   charts : {},
   init(){
     this.initWatchList()
@@ -44,6 +47,10 @@ const ChartStore = Reflux.createStore({
      }
    }
    return false;
+ },
+ showAlertDialog(option={}){
+   option.modalDialogType = ModalDialog.ALERT;
+   this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, option);
  },
 
  onLoadStock(){
@@ -70,15 +77,15 @@ const ChartStore = Reflux.createStore({
                   Factory.createChartContainer(chartType, browserType));
     }
 
-    this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
  },
  onLoadStockAdded(){
     this.trigger(ChartActionTypes.LOAD_STOCK_ADDED);
  },
  onLoadStockFailed(option){
    this.trigger(ChartActionTypes.LOAD_STOCK_FAILED, option);
-   option.modalDialogType = ModalDialog.ALERT;
-   this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+   option.alertItemId = option.value;
+   this.showAlertDialog(option);
    _fnLogLoadError(option);
  },
 
@@ -91,12 +98,12 @@ const ChartStore = Reflux.createStore({
    if (chartCont){
      chartCont.isShow = true;
      this.trigger(ChartActionTypes.SHOW_CHART, chartCont);
-     this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+     this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
    } else {
      this.charts[chartType] = this.createInitConfig(chartType);
      this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
                   Factory.createChartContainer(chartType, browserType));
-     this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+     this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
    }
 
  },
@@ -116,13 +123,13 @@ const ChartStore = Reflux.createStore({
      this.activeChart = null;
    }
    this.trigger(ChartActionTypes.CLOSE_CHART, chartCont);
-   this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+   this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
  },
 
  onCloseChartContainer(chartType, browserType){
    if (browserType !== BrowserType.WATCH_LIST){
      this.setMenuItemClose(chartType, browserType);
-     this.trigger(ComponentActionTypes.UPDATE_BROWSER_MENU, browserType);
+     this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
    }
  },
  onCloseChartContainer2(chartType, browserType){

@@ -30,7 +30,7 @@ const DialogType3 = React.createClass({
       isLoading : _isLoading,
       isLoadingFailed : false,
       optionStocks : _optionStocks,
-      validationMessages: [],
+      validationMessages: []
     }
   },
 
@@ -93,7 +93,7 @@ const DialogType3 = React.createClass({
   },
   _createLoadOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
-        , {dataColumn, fnItemCaption} = this.props
+        , {dataColumn, loadId, fnItemCaption} = this.props
         , _itemCaption = (typeof fnItemCaption === 'function') ?
                        fnItemCaption(this.stock.value) : undefined;
     return {
@@ -102,7 +102,8 @@ const DialogType3 = React.createClass({
       fromDate: fromDate,
       toDate: toDate,
       dataColumn : dataColumn,
-      itemCaption : _itemCaption
+      itemCaption : _itemCaption,
+      loadId : loadId
     }
   },
   _handlerClose(){
@@ -112,7 +113,7 @@ const DialogType3 = React.createClass({
 
   render(){
     const {
-            caption, isShow, onShow, onClose,
+            caption, isShow, onShow,
             itemCaption='Stock:', optionNames='Stocks',
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props

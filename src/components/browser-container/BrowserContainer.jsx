@@ -1,30 +1,63 @@
 
 import React from 'react';
 
+import {BrowserType} from '../../constants/Type';
+
 import QuandlBrowser from '../quandl-browser/QuandlBrowser';
-import YahooBrowser from '../yahoo-browser/YahooBrowser';
-import GoogleBrowser from '../google-browser/GoogleBrowser';
 import WatchBrowser from '../watch-browser/WatchBrowser';
-
 import DialogContainer3 from '../zhn/DialogContainer3';
-import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
-
 
 const BrowserContainer = React.createClass({
+  getInitialState(){
+    return {
+      elBrowsers : []
+    }
+  },
+
+  componentWillMount(){
+    const { store } = this.props;
+    this.unsubscribe = store.listen(this._onStore);
+  },
+  componentWillUnmount(){
+    this.unsubscribe();
+  },
+  _onStore(actionType, data){
+     if (actionType === this.props.initBrowserAction){
+       this.state.elBrowsers.unshift(data);
+       this.setState(this.state);
+     }
+  },
+
   render(){
-    const {store} = this.props;
+    const {
+            store, showBrowserAction, updateBrowserAction,
+            updateWatchAction,
+            initDialogAction, showDialogAction
+          } = this.props
+        , { elBrowsers } = this.state;
+
     return (
       <div className="hrz-container">
-           <QuandlBrowser store={store} />
-           <YahooBrowser store={store} />
-           <GoogleBrowser store={store} />
-           <WatchBrowser store={store}  />
-
+           <QuandlBrowser
+              browserType={BrowserType.QUANDL}
+              caption="Quandl Economic"
+              store={store}
+              showAction={showBrowserAction}
+              updateAction={updateBrowserAction}
+           />
+           <WatchBrowser
+              browserType={BrowserType.WATCH_LIST}
+              caption="Watch List"
+              store={store}
+              showAction={showBrowserAction}
+              updateAction={updateWatchAction}
+            />
+           {elBrowsers}
            <DialogContainer3
               maxDialog={3}
               store={store}
-              initAction={ComponentActionTypes.INIT_AND_SHOW_DIALOG}
-              showAction={ComponentActionTypes.SHOW_DIALOG}
+              initAction={initDialogAction}
+              showAction={showDialogAction}
            />
       </div>
     );

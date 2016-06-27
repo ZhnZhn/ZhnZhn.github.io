@@ -24,6 +24,10 @@ var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
+var _BrowserActions = require('../../flux/actions/BrowserActions');
+
+var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
+
 var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -43,13 +47,30 @@ var styles = {
   }
 };
 
+var BrowserConfig = {
+  GOOGLE: {
+    browserType: 'QD',
+    caption: 'Quandl Google Stocks',
+    sourceMenuUrl: './data/google/source-menu.json'
+  },
+  YAHOO: {
+    browserType: 'QY',
+    caption: 'Quandl Yahoo Stocks',
+    sourceMenuUrl: './data/yahoo/source-menu.json'
+  }
+};
+
 var HeaderBar = _react2.default.createClass({
   displayName: 'HeaderBar',
   getInitialState: function getInitialState() {
     this.fnBrowser = function (browserType) {
-      return _ComponentActions2.default.showBrowser.bind(null, browserType);
+      return _BrowserActions2.default.showBrowser.bind(null, browserType);
     };
+
     return {};
+  },
+  _handlerClickDynamic: function _handlerClickDynamic(browserConfig) {
+    _BrowserActions2.default.showBrowserDynamic(browserConfig);
   },
   render: function render() {
     var store = this.props.store;
@@ -73,13 +94,13 @@ var HeaderBar = _react2.default.createClass({
         type: 'TypeA',
         caption: 'Yahoo',
         title: 'Quandl Yahoo Stocks Browser',
-        onClick: this.fnBrowser(_Type.BrowserType.QUANDL_YAHOO)
+        onClick: this._handlerClickDynamic.bind(null, BrowserConfig.YAHOO)
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
         caption: 'Google',
         title: 'Quandl Google Stocks Browser',
-        onClick: this.fnBrowser(_Type.BrowserType.QUANDL_GOOGLE)
+        onClick: this._handlerClickDynamic.bind(null, BrowserConfig.GOOGLE)
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',

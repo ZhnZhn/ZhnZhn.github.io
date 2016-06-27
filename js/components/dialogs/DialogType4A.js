@@ -167,12 +167,14 @@ var DialogType4A = _react2.default.createClass(_extends({
     var _props4 = this.props;
     var fnValue = _props4.fnValue;
     var dataColumn = _props4.dataColumn;
+    var loadId = _props4.loadId;
 
     return {
       value: fnValue(this.one.value, this.two.value),
       fromDate: fromDate,
       toDate: toDate,
-      dataColumn: dataColumn
+      dataColumn: dataColumn,
+      loadId: loadId
     };
   },
   _handlerClose: function _handlerClose() {

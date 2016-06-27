@@ -2,20 +2,22 @@
 import Msg from '../../constants/Msg';
 
 export const fnCatch = function({error, option, onFailed}){
-  const chartId = option.value;
-
-  let caption, descr;
   if (error instanceof TypeError){
     if (error.message.indexOf('fetch') !== -1) {
-       caption = Msg.Alert.NETWORK_ERROR.caption;
-       descr = Msg.Alert.NETWORK_ERROR.descr;
+       option.alertCaption = Msg.Alert.NETWORK_ERROR.caption;
+       option.alertDescr = Msg.Alert.NETWORK_ERROR.descr;
     } else {
-      caption = (error.zhCaption) ? error.zhCaption : 'Runtime Error';
-      descr = error.message;
+       option.alertCaption = (error.errCaption)
+           ? error.errCaption
+           : Msg.Alert.RUNTIME_ERROR.caption;
+       option.alertDescr = error.message;
     }
   } else {
-    caption = (error.zhCaption) ? error.zhCaption : 'Runtime Error';
-    descr = error.message;
+     option.alertCaption = (error.errCaption)
+        ? error.errCaption
+        : Msg.Alert.RUNTIME_ERROR.caption;
+     option.alertDescr = error.message;
   }
-  onFailed({caption, descr ,chartId});
+
+  onFailed(option);
 }

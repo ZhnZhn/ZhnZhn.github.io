@@ -14,25 +14,29 @@ var _DialogType = require('../../components/dialogs/DialogType3');
 
 var _DialogType2 = _interopRequireDefault(_DialogType);
 
+var _DialogType4A = require('../../components/dialogs/DialogType4A');
+
+var _DialogType4A2 = _interopRequireDefault(_DialogType4A);
+
+var _DialogType3 = require('../../components/dialogs/DialogType5');
+
+var _DialogType4 = _interopRequireDefault(_DialogType3);
+
+var _UNCommodityTradeDialog = require('../../components/quandl-browser/UNCommodityTradeDialog');
+
+var _UNCommodityTradeDialog2 = _interopRequireDefault(_UNCommodityTradeDialog);
+
+var _BigMacDialog = require('../../components/quandl-browser/BigMacDialog');
+
+var _BigMacDialog2 = _interopRequireDefault(_BigMacDialog);
+
+var _FuturesDialog = require('../../components/quandl-browser/FuturesDialog');
+
+var _FuturesDialog2 = _interopRequireDefault(_FuturesDialog);
+
 var _ChartContainer = require('../../components/ChartContainer2');
 
 var _ChartContainer2 = _interopRequireDefault(_ChartContainer);
-
-var _DataQE = require('../../constants/DataQE');
-
-var _DataQE2 = _interopRequireDefault(_DataQE);
-
-var _DataQG = require('../../constants/DataQG');
-
-var _DataQG2 = _interopRequireDefault(_DataQG);
-
-var _DataQY = require('../../constants/DataQY');
-
-var _DataQY2 = _interopRequireDefault(_DataQY);
-
-var _DataWL = require('../../constants/DataWL');
-
-var _DataWL2 = _interopRequireDefault(_DataWL);
 
 var _Msg = require('../../constants/Msg');
 
@@ -52,7 +56,42 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
+var _SourceBrowserDynamic = require('../../components/browser-container/SourceBrowserDynamic');
+
+var _SourceBrowserDynamic2 = _interopRequireDefault(_SourceBrowserDynamic);
+
+var _ChartStore = require('../stores/ChartStore');
+
+var _ChartStore2 = _interopRequireDefault(_ChartStore);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _rDialog = {
+  DialogType3: _DialogType2.default,
+  DialogType4A: _DialogType4A2.default,
+  DialogType5: _DialogType4.default,
+  UNCommodityTradeDialog: _UNCommodityTradeDialog2.default,
+  BigMacDialog: _BigMacDialog2.default,
+  FuturesDialog: _FuturesDialog2.default
+};
+
+var _rFnValue = {
+  RTwo: function RTwo(one, two) {
+    return '' + two;
+  },
+  ROneTwo: function ROneTwo(one, two) {
+    return one + '/' + two;
+  },
+  RPrefixOne: function RPrefixOne(prefix, one) {
+    return prefix + '_' + one;
+  },
+  RPrefixOneTwo: function RPrefixOneTwo(prefix, one, two) {
+    return prefix + '/' + one + '_' + two;
+  },
+  RPrefixTwoOne: function RPrefixTwoOne(prefix, one, two) {
+    return prefix + '/' + two + '_' + one;
+  }
+};
 
 var onLoadChart = _ChartActions2.default.loadStock,
     onShowChart = _ChartActions2.default.showChart,
@@ -60,9 +99,11 @@ var onLoadChart = _ChartActions2.default.loadStock,
     initToDate = _DateUtils2.default.getToDate(),
     onTestDate = _DateUtils2.default.isValidDate;
 
-var noopArr = function noopArr() {
+/*
+const noopArr = function(){
   return [];
-};
+}
+*/
 
 var _showModalDialogDescription = function _showModalDialogDescription(option) {
   _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, option);
@@ -71,14 +112,14 @@ var _showModalDialogDescription = function _showModalDialogDescription(option) {
 var createDialogComp = function createDialogComp(conf, browserType) {
   var dialogType = conf.type,
       props = conf.dialogProps ? conf.dialogProps : {},
-      fnOption = conf.fnOption ? conf.fnOption : noopArr,
-      Comp = conf.dialogComp ? conf.dialogComp : _DialogType2.default,
+      Comp = conf.dialogType ? _rDialog[conf.dialogType] ? _rDialog[conf.dialogType] : _DialogType2.default : _DialogType2.default,
+      _initFromDate = props.nInitFromDate ? _DateUtils2.default.getFromDate(props.nInitFromDate) : initFromDate,
+      _fnValue = props.valueFn ? props.valueFnPrefix ? _rFnValue[props.valueFn].bind(null, props.valueFnPrefix) : _rFnValue[props.valueFn] : undefined,
       onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined;
 
   return _react2.default.createElement(Comp, _extends({
     key: dialogType,
     caption: conf.dialogCaption,
-    optionStocks: fnOption(),
     optionURI: conf.optionURI,
     optionsJsonProp: conf.optionsJsonProp,
     dataColumn: conf.dataColumn,
@@ -86,7 +127,9 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
     onLoad: onLoadChart.bind(null, dialogType, browserType),
     onShow: onShowChart.bind(null, dialogType, browserType),
-    initFromDate: initFromDate, initToDate: initToDate, onTestDate: onTestDate,
+    fnValue: _fnValue,
+    initFromDate: _initFromDate,
+    initToDate: initToDate, onTestDate: onTestDate,
     onClickInfo: onClickInfo
   }, props));
 };
@@ -107,17 +150,9 @@ var createChartContainerComp = function createChartContainerComp(conf, browserTy
   });
 };
 
-var hmDialogData = {
-  QE: _DataQE2.default,
-  QG: _DataQG2.default,
-  QY: _DataQY2.default,
-
-  WL: _DataWL2.default
-};
-
 var getDataConf = function getDataConf(dialogType) {
   var dataId = dialogType.split('_')[0];
-  return hmDialogData[dataId][dialogType];
+  return _ChartStore2.default.getSourceConfig(dataId, dialogType);
 };
 
 var Factory = {};
@@ -127,6 +162,22 @@ Factory.createDialog = function (dialogType, browserType) {
 
 Factory.createChartContainer = function (dialogType, browserType) {
   return createChartContainerComp(getDataConf(dialogType), browserType);
+};
+
+Factory.createBrowserDynamic = function (_ref) {
+  var browserType = _ref.browserType;
+  var _ref$caption = _ref.caption;
+  var caption = _ref$caption === undefined ? '' : _ref$caption;
+  var sourceMenuUrl = _ref.sourceMenuUrl;
+
+  return _react2.default.createElement(_SourceBrowserDynamic2.default, {
+    key: browserType,
+    browserType: browserType,
+    store: _ChartStore2.default,
+    isInitShow: true,
+    caption: caption,
+    sourceMenuUrl: sourceMenuUrl
+  });
 };
 
 exports.default = Factory;

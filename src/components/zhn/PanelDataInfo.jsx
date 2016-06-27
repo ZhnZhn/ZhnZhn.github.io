@@ -12,11 +12,11 @@ const styles = {
     display: 'block',
     paddingTop : '24px',
     paddingRight : '20px',
-    paddingLeft : '8px',
+    paddingLeft : '8px'
   },
   rootHide : {
     position: 'relative',
-    display: 'none',
+    display: 'none'
   },
   rootStyle : {
     marginTop: '4px'
@@ -27,7 +27,8 @@ const styles = {
   },
   text : {
     fontWeight : 'bold',
-    color : 'black'
+    color : 'black',
+    textTransform: 'capitalize'
   },
   textDescr : {
     color : 'gray',

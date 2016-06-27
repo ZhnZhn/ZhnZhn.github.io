@@ -1,15 +1,5 @@
 
 
-import DateUtils from '../utils/DateUtils';
-
-import DialogType4A from '../components/dialogs/DialogType4A';
-import DialogType5 from '../components/dialogs/DialogType5';
-
-import UNCommodityTradeDialog from '../components/quandl-browser/UNCommodityTradeDialog';
-import BigMacDialog from '../components/quandl-browser/BigMacDialog';
-import FuturesDialog from '../components/quandl-browser/FuturesDialog';
-
-
 const DataQE = {
 
   QE_COMMODITY_PRICE : {
@@ -17,14 +7,17 @@ const DataQE = {
       menuTitle : 'Commodity Prices',
       dialogCaption : 'Commodity Price',
       chartContainerCaption : 'Quandl Commodity Prices',
-      dialogComp : DialogType4A,
+      dialogType : 'DialogType4A',
       dialogProps : {
         descrUrl: './data/quandl/commodity-price.html',
+        nInitFromDate : 4,
         oneCaption : 'Type',
         oneURI : './data/quandl/commodity-price.json',
         oneJsonProp : 'commodities',
         twoCaption : 'Commodity',
-        fnValue : (type, commodity) => `${commodity}`
+        valueFn : 'RTwo',
+        //fnValue : (type, commodity) => `${commodity}`
+        loadId : 'Q'
       },
       dataColumn : 1
   },
@@ -33,15 +26,18 @@ const DataQE = {
       menuTitle : 'UN Commodity Trade',
       dialogCaption : 'United Nations Commodity Trade',
       chartContainerCaption : 'Quandl United Nations Commodity Trade',
-      dialogComp : UNCommodityTradeDialog,
+      dialogType : 'UNCommodityTradeDialog',
       dialogProps : {
         descrUrl: './data/quandl/un-commodity-trade.html',
-        initFromDate : DateUtils.getFromDate(10),
+        nInitFromDate : 10,
         countryURI : './data/quandl/country-area.json',
         countryJsonProp : 'countries',
         commodityURI : './data/quandl/commodity-items.json',
         commodityJsonProp : 'items',
-        fnValue : (item, country) => `UCOM/${item}_${country}`
+        valueFn : 'RPrefixOneTwo',
+        valueFnPrefix : 'UCOM',
+        //fnValue : (item, country) => `UCOM/${item}_${country}`
+        loadId : 'QCT'
       },
       dataColumn : 1
   },
@@ -50,10 +46,10 @@ const DataQE = {
       menuTitle : 'UN Global Indicator',
       dialogCaption : 'United Nations Global Indicator',
       chartContainerCaption : 'Quandl United Nations Global Indicator',
-      dialogComp : DialogType5,
+      dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/un-global-indicator.html',
-        initFromDate : DateUtils.getFromDate(10),
+        nInitFromDate : 10,
         oneCaption : 'Country',
         oneURI : './data/quandl/country-area.json',
         oneJsonProp : 'countries',
@@ -61,7 +57,10 @@ const DataQE = {
         twoURI : './data/quandl/un-global-indicators.json',
         twoJsonProp : 'indicators',
         threeCaption : 'Metric',
-        fnValue : (country, item) => `UGID/${item}_${country}`
+        valueFn : 'RPrefixTwoOne',
+        valueFnPrefix : 'UGID',
+        //fnValue : (country, item) => `UGID/${item}_${country}`
+        loadId : 'Q'
       },
       dataColumn : 1
   },
@@ -70,14 +69,16 @@ const DataQE = {
       menuTitle : 'Currency History',
       dialogCaption : 'Currency History',
       chartContainerCaption : 'Quandl Currency History',
-      dialogComp : DialogType4A,
+      dialogType : 'DialogType4A',
       dialogProps : {
         descrUrl: './data/quandl/currency-history.html',
         oneCaption : 'Source',
         oneURI : './data/quandl/currency-history.json',
         oneJsonProp : 'sources',
         twoCaption : 'Currency',
-        fnValue : (source, currency) => `${source}/${currency}`
+        valueFn : 'ROneTwo',
+        //fnValue : (source, currency) => `${source}/${currency}`
+        loadId : 'Q'
       },
       dataColumn : 1
   },
@@ -86,11 +87,11 @@ const DataQE = {
       menuTitle : 'WB Economic Metric',
       dialogCaption : 'WorlBank Economic Metric',
       chartContainerCaption : 'Quandl World Bank Economic Metric',
-      dialogComp : DialogType5,
+      dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/wb-development-indicator.html',
         isTreeItem : true,
-        initFromDate : DateUtils.getFromDate(7),
+        nInitFromDate : 7,
         oneCaption : 'Country',
         oneURI : './data/quandl/iso3-countries.json',
         oneJsonProp : 'countries',
@@ -98,7 +99,10 @@ const DataQE = {
         twoURI : './data/quandl/wb-metric-groups.json',
         twoJsonProp : 'groups',
         threeCaption : 'Metric',
-        fnValue : (country, metric) => `WWDI/${country}_${metric}`
+        valueFn : 'RPrefixOneTwo',
+        valueFnPrefix : 'WWDI',
+        //fnValue : (country, metric) => `WWDI/${country}_${metric}`
+        loadId : 'Q'
       },
       dataColumn : 1
   },
@@ -107,11 +111,11 @@ const DataQE = {
       menuTitle : 'IMF Cross Country Metric',
       dialogCaption : 'IMF Cross Country Metric',
       chartContainerCaption : 'Quandl IMF Cross Country Metric',
-      dialogComp : DialogType5,
+      dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/imf-crosscountry-metric.html',
         isTreeItem : true,
-        initFromDate : DateUtils.getFromDate(7),
+        nInitFromDate : 7,
         oneCaption : 'Country',
         oneURI : './data/quandl/iso3-countries.json',
         oneJsonProp : 'countries',
@@ -119,7 +123,10 @@ const DataQE = {
         twoURI : './data/quandl/imf-metric-groups.json',
         twoJsonProp : 'groups',
         threeCaption : 'Metric',
-        fnValue : (country, metric) => `ODA/${country}_${metric}`
+        valueFn : 'RPrefixOneTwo',
+        valueFnPrefix : 'ODA',
+        //fnValue : (country, metric) => `ODA/${country}_${metric}`
+        loadId : 'Q'
       },
       dataColumn : 1
   },
@@ -133,9 +140,10 @@ const DataQE = {
       optionURI : './data/quandl/rate-cpi-inflation.json',
       optionsJsonProp : 'codes',
       optionNames : 'Codes',
-      initFromDate : DateUtils.getFromDate(7),
+      nInitFromDate : 7,
       itemCaption : 'Metric:',
-      fnItemCaption : (value) => value.split('/')[1]
+      fnItemCaption : (value) => value.split('/')[1],
+      loadId : 'Q'
     },
     dataColumn : 1
   },
@@ -144,13 +152,16 @@ const DataQE = {
       menuTitle : 'Big Mac Index',
       dialogCaption : 'Economist Big Mac Index',
       chartContainerCaption : 'Quandl Economist Big Mac Index',
-      dialogComp : BigMacDialog,
+      dialogType : 'BigMacDialog',
       dialogProps : {
         descrUrl : './data/quandl/big-mac-index.html',
-        initFromDate : DateUtils.getFromDate(12),
+        nInitFromDate : 12,
         countryURI : './data/quandl/big-mac-countries.json',
         countryJsonProp : 'countries',
-        fnValue : (country) => `ECONOMIST/BIGMAC_${country}`
+        valueFn : 'RPrefixOne',
+        valueFnPrefix : 'ECONOMIST/BIGMAC',
+        //fnValue : (country) => `ECONOMIST/BIGMAC_${country}`
+        loadId : 'Q'
       },
       dataColumn : 1
   },
@@ -163,7 +174,8 @@ const DataQE = {
       dialogProps : {
         descrUrl : './data/quandl/wiki.html',
         optionURI : './data/quandl/wiki.json',
-        optionsJsonProp : 'tickets'
+        optionsJsonProp : 'tickets',
+        loadId : 'Q'
       },
       dataColumn : 4
   },
@@ -175,7 +187,8 @@ const DataQE = {
       dialogProps : {
         descrUrl : './data/quandl/tokio.html',
         optionURI : './data/quandl/tokio.json',
-        optionsJsonProp : 'tickets'
+        optionsJsonProp : 'tickets',
+        loadId : 'Q'
       },
       dataColumn : 4
   },
@@ -185,11 +198,12 @@ const DataQE = {
       menuTitle : 'China DCE',
       dialogCaption : 'China DCE Futures',
       chartContainerCaption : 'Quandl China DCE Futures',
-      dialogComp : FuturesDialog,
+      dialogType : 'FuturesDialog',
       dialogProps : {
         descrUrl : './data/quandl/china-dce-futures.html',
         optionURI : './data/quandl/china_dce_futures.json',
-        optionsJsonProp : 'futures'
+        optionsJsonProp : 'futures',
+        loadId : 'Q'
       },
       dataColumn : 4
   },
@@ -198,11 +212,12 @@ const DataQE = {
       menuTitle : 'China ZCE',
       dialogCaption : 'China ZCE Futures',
       chartContainerCaption : 'Quandl China ZCE Futures',
-      dialogComp : FuturesDialog,
+      dialogType : 'FuturesDialog',
       dialogProps : {
         descrUrl : './data/quandl/china-zce-futures.html',
         optionURI : './data/quandl/china_zce_futures.json',
-        optionsJsonProp : 'futures'
+        optionsJsonProp : 'futures',
+        loadId : 'Q'
       },
       dataColumn : 5
   }

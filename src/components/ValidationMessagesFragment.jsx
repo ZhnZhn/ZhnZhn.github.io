@@ -5,7 +5,8 @@ import DialogStyles from './styles/DialogStyles';
 const styles = DialogStyles;
 const Styles = {
   MSG_SPAN : {
-    whiteSpace : 'pre'
+    whiteSpace : 'pre',
+    fontWeight : 'bold'
   }
 }
 

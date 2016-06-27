@@ -58,8 +58,8 @@ const MenuBrowser = React.createClass({
   },
 
   render: function(){
-    const {caption, children} = this.props
-        , {menuItems, isShow} = this.state;
+    const { caption, children } = this.props
+        , { menuItems, isShow } = this.state;
     return (
        <Browser isShow={isShow} style={Styles.browser}>
           <CaptionRow

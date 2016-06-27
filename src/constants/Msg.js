@@ -18,6 +18,9 @@ const Msg = {
         caption : 'Check Error',
         descr: 'The chart for this code has already existed in a container. Please close it and load again.'
      },
+     RUNTIME_ERROR : {
+        caption : 'Runtime Error'
+     },
      NETWORK_ERROR : {
         caption : 'Network Error',
         descr: 'Network error is encountered. Failed to fetch. It seems you offline or maybe a DNS lookup failure.'

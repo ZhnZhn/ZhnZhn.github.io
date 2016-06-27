@@ -17,9 +17,6 @@ var ComponentSlice = {
   onShowAbout: function onShowAbout() {
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_ABOUT);
   },
-  onShowBrowser: function onShowBrowser(browserType) {
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_BROWSER, browserType);
-  },
   onShowDialog: function onShowDialog(dialogType, browserType) {
     if (this.dialogInit[dialogType]) {
       this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, dialogType);

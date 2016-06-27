@@ -134,6 +134,7 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     var toDate = _datesFragment$getVal2.toDate;
     var _props3 = this.props;
     var dataColumn = _props3.dataColumn;
+    var loadId = _props3.loadId;
     var fnItemCaption = _props3.fnItemCaption;
     var _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
     return {
@@ -142,7 +143,8 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
       fromDate: fromDate,
       toDate: toDate,
       dataColumn: dataColumn,
-      itemCaption: _itemCaption
+      itemCaption: _itemCaption,
+      loadId: loadId
     };
   },
   _handlerClose: function _handlerClose() {
@@ -156,7 +158,6 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     var caption = _props4.caption;
     var isShow = _props4.isShow;
     var onShow = _props4.onShow;
-    var onClose = _props4.onClose;
     var _props4$itemCaption = _props4.itemCaption;
     var itemCaption = _props4$itemCaption === undefined ? 'Stock:' : _props4$itemCaption;
     var _props4$optionNames = _props4.optionNames;

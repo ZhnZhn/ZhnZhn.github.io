@@ -259,7 +259,9 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var fnValue = this.props.fnValue;
+    var _props3 = this.props;
+    var loadId = _props3.loadId;
+    var fnValue = _props3.fnValue;
 
     return {
       value: fnValue(this.chapter.value, this.country.value),
@@ -267,7 +269,8 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       toDate: toDate,
       isLoadMeta: true,
       onLoad: this._setOptionTrades,
-      onFailed: this._loadMetaOptionFailed
+      onFailed: this._loadMetaOptionFailed,
+      loadId: loadId
     };
   },
   _setOptionTrades: function _setOptionTrades(optionTrades) {
@@ -292,6 +295,11 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
         msg.push(this.props.msgOnNotSelected('Subheading'));
       }
     } else {
+      var placeholderTrade = this.state.placeholderTrade;
+
+      if (placeholderTrade === Placeholder.TRADE.INIT) {
+        msg.push(Placeholder.TRADE.INIT);
+      }
       if (!this.tradeFilter) {
         msg.push(this.props.msgOnNotSelected('Trade Filter'));
       }
@@ -305,7 +313,9 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     var fromDate = _datesFragment$getVal3.fromDate;
     var toDate = _datesFragment$getVal3.toDate;
     var _dataColumn = this.subheading ? this.subheading.value : this.props.dataColumn;
-    var fnValue = this.props.fnValue;
+    var _props4 = this.props;
+    var loadId = _props4.loadId;
+    var fnValue = _props4.fnValue;
     var _chartType = this.chartType ? this.chartType.value : undefined;
     var _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption;
     return {
@@ -316,7 +326,8 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       seriaType: _chartType,
       sliceItems: this._createSpliceItems(),
       title: _title,
-      subtitle: this.chapter.caption
+      subtitle: this.chapter.caption,
+      loadId: loadId
     };
   },
   _createSpliceItems: function _createSpliceItems() {
@@ -336,14 +347,13 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this2 = this;
 
-    var _props3 = this.props;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var onClose = _props3.onClose;
-    var initFromDate = _props3.initFromDate;
-    var initToDate = _props3.initToDate;
-    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
-    var onTestDate = _props3.onTestDate;
+    var _props5 = this.props;
+    var isShow = _props5.isShow;
+    var onShow = _props5.onShow;
+    var initFromDate = _props5.initFromDate;
+    var initToDate = _props5.initToDate;
+    var msgOnNotValidFormat = _props5.msgOnNotValidFormat;
+    var onTestDate = _props5.onTestDate;
     var _state2 = this.state;
     var isShowFilter = _state2.isShowFilter;
     var isShowDate = _state2.isShowDate;

@@ -120,12 +120,13 @@ const DialogType4A = React.createClass({
   },
   _createLoadOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
-        , {fnValue, dataColumn} = this.props;
+        , {fnValue, dataColumn, loadId} = this.props;
     return {
          value : fnValue(this.one.value, this.two.value),
          fromDate: fromDate,
          toDate: toDate,
-         dataColumn : dataColumn
+         dataColumn : dataColumn,
+         loadId : loadId
       }
   },
   _handlerClose(){

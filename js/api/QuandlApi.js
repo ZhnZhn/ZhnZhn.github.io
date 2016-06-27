@@ -30,14 +30,10 @@ QuandlApi.getRequestUrl = function (option) {
   return _ApiUtils2.default.createUri(uri);
 };
 
-var CheckCaptions = {
-  CLIENT: 'Request Error',
-  SERVER: 'Response Error'
-};
-
+var REQUEST_ERROR = 'Request Error';
 QuandlApi.checkResponse = function (json) {
   if (json.quandl_error && json.quandl_error.message) {
-    throw { zhCaption: CheckCaptions.CLIENT, message: json.quandl_error.message };
+    throw { errCaption: REQUEST_ERROR, message: json.quandl_error.message };
   }
   return true;
 };

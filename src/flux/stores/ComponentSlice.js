@@ -7,17 +7,16 @@ const ComponentSlice = {
   onShowAbout(){
     this.trigger(ComponentActionTypes.SHOW_ABOUT);
   },
-  onShowBrowser(browserType){
-    this.trigger(ComponentActionTypes.SHOW_BROWSER, browserType);
-  },
   onShowDialog(dialogType, browserType){
     if (this.dialogInit[dialogType]) {
       this.trigger(ComponentActionTypes.SHOW_DIALOG, dialogType);
     } else {
       this.dialogInit[dialogType] = true;
       const dialogComp = Factory.createDialog(dialogType, browserType);
-      this.trigger(ComponentActionTypes.INIT_AND_SHOW_DIALOG,
-                         {dialogType, dialogComp});
+      this.trigger(
+        ComponentActionTypes.INIT_AND_SHOW_DIALOG,
+        {dialogType, dialogComp}
+      );
     }
   },
 

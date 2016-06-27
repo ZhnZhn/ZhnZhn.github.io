@@ -143,21 +143,23 @@ const DialogType5 = React.createClass({
   },
   _createLoadOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
-        , {fnValue, isTreeItem, dataColumn} = this.props;
+        , {fnValue, isTreeItem, dataColumn, loadId} = this.props;
     if (!isTreeItem){
       const _dataColumn = (this.three) ? this.three.value : 1;
       return {
          value : fnValue(this.one.value, this.two.value),
          fromDate: fromDate,
          toDate: toDate,
-         dataColumn : _dataColumn
+         dataColumn : _dataColumn,
+         loadId : loadId
       }
     } else {
       return {
         value : fnValue(this.one.value, this.three.value),
         fromDate: fromDate,
         toDate: toDate,
-        dataColumn : dataColumn
+        dataColumn : dataColumn,
+        loadId : loadId
       }
     }
   },

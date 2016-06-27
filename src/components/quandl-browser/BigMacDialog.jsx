@@ -32,7 +32,7 @@ const BigMacDialog = React.createClass({
           { caption : 'Dollar Exchange', value : 2},
           { caption : 'Dollar Price', value : 3},
           { caption : 'Dollar PPP', value : 4},
-          { caption : 'Dollar Valuation', value : 5},
+          { caption : 'Dollar Valuation', value : 5}
         ],
 
         validationMessages: []
@@ -102,13 +102,14 @@ const BigMacDialog = React.createClass({
   _createLoadOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
         , _dataColumn = (this.metric) ? this.metric.value : 1
-        , {fnValue} = this.props;
+        , {loadId, fnValue} = this.props;
     return {
        value : fnValue(this.country.value),
        fromDate: fromDate,
        toDate: toDate,
        dataColumn : _dataColumn,
-       itemCaption : this.country.caption
+       itemCaption : this.country.caption,
+       loadId : loadId
     }
   },
   _handlerClose(){

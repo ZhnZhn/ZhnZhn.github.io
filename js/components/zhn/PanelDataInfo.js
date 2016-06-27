@@ -41,7 +41,8 @@ var styles = {
   },
   text: {
     fontWeight: 'bold',
-    color: 'black'
+    color: 'black',
+    textTransform: 'capitalize'
   },
   textDescr: {
     color: 'gray',

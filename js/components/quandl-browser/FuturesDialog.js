@@ -109,12 +109,15 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var dataColumn = this.props.dataColumn;
+    var _props2 = this.props;
+    var dataColumn = _props2.dataColumn;
+    var loadId = _props2.loadId;
 
     return {
       value: this.code.value,
       code: this.code,
-      dataColumn: dataColumn
+      dataColumn: dataColumn,
+      loadId: loadId
     };
   },
   _handlerClose: function _handlerClose() {
@@ -122,11 +125,11 @@ var FuturesDialog = _react2.default.createClass(_extends({}, _WithValidation2.de
     this.props.onClose();
   },
   render: function render() {
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var caption = _props2.caption;
-    var onShow = _props2.onShow;
-    var onClose = _props2.onClose;
+    var _props3 = this.props;
+    var isShow = _props3.isShow;
+    var caption = _props3.caption;
+    var onShow = _props3.onShow;
+    var onClose = _props3.onClose;
     var _state = this.state;
     var isLoading = _state.isLoading;
     var isLoadingFailed = _state.isLoadingFailed;
