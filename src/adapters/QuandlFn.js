@@ -45,7 +45,7 @@ export const fnCreateValueMoving = function({
   bNowValue=Big('0.0'), bPrevValue=Big('0.0')
 }){
 
-  let _bDelta = bPrevValue.minus(bNowValue).abs()
+  let _bDelta = bPrevValue.minus(bNowValue)
     , _direction;
   if (_bDelta.gt(0.0)){
     _direction = Direction.DOWN;
@@ -54,6 +54,8 @@ export const fnCreateValueMoving = function({
   } else {
     _direction = Direction.EQUAL;
   }
+
+  _bDelta = _bDelta.abs();
 
   const _bPercent = fnCreatePercent({bValue:_bDelta, bTotal: bPrevValue});
 

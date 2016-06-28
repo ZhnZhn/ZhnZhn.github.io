@@ -73,7 +73,7 @@ var fnCreateValueMoving = exports.fnCreateValueMoving = function fnCreateValueMo
   var bPrevValue = _ref2$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref2$bPrevValue;
 
 
-  var _bDelta = bPrevValue.minus(bNowValue).abs(),
+  var _bDelta = bPrevValue.minus(bNowValue),
       _direction = void 0;
   if (_bDelta.gt(0.0)) {
     _direction = _Type.Direction.DOWN;
@@ -82,6 +82,8 @@ var fnCreateValueMoving = exports.fnCreateValueMoving = function fnCreateValueMo
   } else {
     _direction = _Type.Direction.EQUAL;
   }
+
+  _bDelta = _bDelta.abs();
 
   var _bPercent = fnCreatePercent({ bValue: _bDelta, bTotal: bPrevValue });
 
