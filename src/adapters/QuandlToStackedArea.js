@@ -8,7 +8,7 @@ import { fnCreateStackedConfig  } from './StackedFn'
 import {
   fnCreateZhConfig,
   fnCreateDatasetInfo,
-  fnCreateValueMoving,  
+  fnCreateValueMoving,
   fnSetTitleToConfig
 } from './QuandlFn';
 
@@ -35,7 +35,10 @@ export const fCreateStackedAreaConfig = function(json, option){
     bNowValue  : bNowTotal,
     bPrevValue : bPrevTotal
   });
-
+  config.valueMoving.date = ( categories && categories.length>1 )
+     ? categories[categories.length-1]
+     : '' ;
+    
   config.zhConfig = fnCreateZhConfig(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;

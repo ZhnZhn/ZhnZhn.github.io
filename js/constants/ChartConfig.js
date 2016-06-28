@@ -142,7 +142,8 @@ ChartConfig.theme = {
     labels: {
       style: {
         color: "rgba(194,149,23,1)",
-        fontWeight: "rgba(194,149,23,1)"
+        fontWeight: "bold",
+        fontSize: "14px"
       }
     }
   },
@@ -157,7 +158,8 @@ ChartConfig.theme = {
     labels: {
       style: {
         color: "rgba(194,149,23,1)",
-        fontWeight: "rgba(194,149,23,1)"
+        fontWeight: "bold",
+        fontSize: "14px"
       }
     }
   }
@@ -189,7 +191,7 @@ ChartConfig.fBaseAreaConfig = function () {
         },
         relativeTo: 'chart'
       },
-      marginRight: 45
+      marginRight: 60
     },
     title: {
       text: ''

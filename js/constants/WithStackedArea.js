@@ -34,8 +34,8 @@ var WithStackAreaChart = {
         zoomType: 'xy',
         resetZoomButton: _Chart2.default.fResetZoomButton()
       },
-      title: _Chart2.default.fTitle({ y: 40 }),
-      subtitle: _Chart2.default.fSubtitle({ y: 60 }),
+      title: _Chart2.default.fTitle({ y: 45 }),
+      subtitle: _Chart2.default.fSubtitle({ y: 65 }),
       tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnStackedAreaPointFormatter),
 
       xAxis: _Chart2.default.fXAxisOpposite({

@@ -18,7 +18,7 @@ export const fnFetch = function({
          onFetch({json, option, onCompleted});
        }
     })
-    .catch((error) => {
+    .catch((error) => {       
        onCatch({error, option, onFailed})
     })
 }
@@ -41,6 +41,6 @@ export const fnFetchText = function({
        onFetch({ text });
     })
     .catch((error) => {
-       console.log(error);       
+       console.log(error);
     })
 }

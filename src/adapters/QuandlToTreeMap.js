@@ -9,7 +9,7 @@ import ChartConfig from '../constants/ChartConfig';
 import {
   fnCreateZhConfig,
   fnCreateDatasetInfo,
-  fnCreateValueMoving,
+  fnCreateValueMoving,  
   fnCreatePercent,
   fnSetTitleToConfig
 } from './QuandlFn';
@@ -124,6 +124,7 @@ export const fCreateTreeMapConfig = function(json, option){
     bNowValue  : bTotal,
     bPrevValue : bPrevTotal
   });
+  config.valueMoving.date = yearTitle;
 
   config.zhConfig = fnCreateZhConfig(option);
   config.zhConfig.id = zhSeriaId;

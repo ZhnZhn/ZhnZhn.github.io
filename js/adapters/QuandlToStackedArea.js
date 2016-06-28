@@ -52,6 +52,7 @@ var fCreateStackedAreaConfig = exports.fCreateStackedAreaConfig = function fCrea
     bNowValue: bNowTotal,
     bPrevValue: bPrevTotal
   });
+  config.valueMoving.date = categories && categories.length > 1 ? categories[categories.length - 1] : '';
 
   config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
   config.zhConfig.id = zhSeriaId;

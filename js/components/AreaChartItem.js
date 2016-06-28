@@ -147,7 +147,7 @@ var AreaChartItem = _react2.default.createClass({
     var isShowVolume = _state.isShowVolume;
 
     if (isInitVolume) {
-      this.setState({ isShowVolume: !this.state.isShowVolume });
+      this.setState({ isShowVolume: !isShowVolume });
     } else {
       this.state.chartsDescription.push({ type: 'Volume' });
       this.setState({
@@ -324,7 +324,6 @@ var AreaChartItem = _react2.default.createClass({
     var _props2 = this.props;
     var caption = _props2.caption;
     var config = _props2.config;
-    var onSetActive = _props2.onSetActive;
     var onCloseItem = _props2.onCloseItem;
     var itemCaption = config.zhConfig.itemCaption;
     var _itemCaption = itemCaption ? itemCaption : caption;var _state4 = this.state;

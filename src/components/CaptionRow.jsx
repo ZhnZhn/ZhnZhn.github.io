@@ -12,7 +12,7 @@ const styles = {
     paddingTop: '4px',
     paddingLeft: '10px',
     marginRight: '5px',
-    marginBottom: '10px',
+    marginBottom: '10px'
   },
   captionSpan: {
     fontSize: '18px',

@@ -15,7 +15,8 @@ import {
 import {
         fnCreateZhConfig,
         fnCreateDatasetInfo,
-        fnCreateValueMovingFromSeria
+        fnCreateValueMovingFromSeria,
+        fnGetRecentDate
       } from './QuandlFn';
 import {fCreatePieConfig} from './QuandlToPie';
 import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
@@ -382,6 +383,7 @@ const fnGetSeries = function(config, json, option){
    config.zhFnRemoveSeries = fnRemoveSeries;
 
    config.valueMoving = fnCreateValueMovingFromSeria(seria);
+   config.valueMoving.date = fnGetRecentDate(seria, json);
    config.series[0].data = seria;
    config.series[0].zhSeriaId = chartId;
 

@@ -72,7 +72,7 @@ const AreaChartItem = React.createClass({
       isInitHighLow : false, isShowHighLow : false,
 
       chartsDescription : [],
-      mfiConfigs : [],
+      mfiConfigs : []
     }
   },
 
@@ -114,7 +114,7 @@ const AreaChartItem = React.createClass({
   _handlerClickVolume(){
     const {isInitVolume, isShowVolume} = this.state;
     if (isInitVolume){
-      this.setState({isShowVolume: !this.state.isShowVolume});
+      this.setState({isShowVolume: !isShowVolume});
     } else {
       this.state.chartsDescription.push({type: 'Volume'});
       this.setState({
@@ -293,7 +293,7 @@ const AreaChartItem = React.createClass({
   },
 
   render(){
-    const {caption, config, onSetActive, onCloseItem} = this.props
+    const {caption, config, onCloseItem} = this.props
         , {itemCaption} = config.zhConfig
         , _itemCaption = (itemCaption) ? itemCaption : caption;
     const {

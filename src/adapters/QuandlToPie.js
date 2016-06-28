@@ -114,7 +114,6 @@ export const fCreatePieConfig = function(json, option){
         zhSeriaId : zhSeriaId,
         center  : ['20%', '80%'],
         data : _dataTop1,
-        //isDataLabels : true,
         isShowInLegend : true
       })
     , ChartConfig.fInnerPieSeria({
@@ -139,6 +138,8 @@ export const fCreatePieConfig = function(json, option){
      bNowValue : _bTotal1,
      bPrevValue: _bTotal2
    });
+   config.valueMoving.date = _year1;
+
    config.zhConfig = fnCreateZhConfig(option);
    config.zhConfig.id = zhSeriaId;
    config.zhConfig.isWithoutAdd = true;

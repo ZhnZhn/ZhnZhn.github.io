@@ -48,12 +48,14 @@ DateUtils.isValidDate = function isValidDate(str) {
 };
 
 DateUtils.getFromDate = function (yearMinus) {
-	var dateNow = new Date();
-	var yearTo = dateNow.getUTCFullYear();
+	var dateNow = new Date(),
+	    yearTo = dateNow.getUTCFullYear();
+
 	var monthTo = dateNow.getUTCMonth() + 1;
 	if (monthTo < 10) {
 		monthTo = "0" + monthTo;
 	}
+
 	var dayTo = dateNow.getUTCDate();
 	if (dayTo < 10) {
 		dayTo = "0" + dayTo;
@@ -63,12 +65,14 @@ DateUtils.getFromDate = function (yearMinus) {
 };
 
 DateUtils.getToDate = function () {
-	var dateNow = new Date();
-	var yearTo = dateNow.getUTCFullYear();
+	var dateNow = new Date(),
+	    yearTo = dateNow.getUTCFullYear();
+
 	var monthTo = dateNow.getUTCMonth() + 1;
 	if (monthTo < 10) {
 		monthTo = "0" + monthTo;
 	}
+
 	var dayTo = dateNow.getUTCDate();
 	if (dayTo < 10) {
 		dayTo = "0" + dayTo;

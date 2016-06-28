@@ -3,15 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fnSetTitleToConfig = exports.fnCreateValueMovingFromSeria = exports.fnCreateValueMoving = exports.fnCreatePercent = exports.fnCreateZhConfig = exports.fnCreateDatasetInfo = undefined;
+exports.fnSetTitleToConfig = exports.fnGetRecentDate = exports.fnCreateValueMovingFromSeria = exports.fnCreateValueMoving = exports.fnCreatePercent = exports.fnCreateZhConfig = exports.fnCreateDatasetInfo = undefined;
 
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
 
-var _dompurify = require('dompurify');
+var _purify = require('purify');
 
-var _dompurify2 = _interopRequireDefault(_dompurify);
+var _purify2 = _interopRequireDefault(_purify);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
 
 var _Type = require('../constants/Type');
 
@@ -20,8 +24,6 @@ var _ChartConfig = require('../constants/ChartConfig');
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var DOMPurify = (0, _dompurify2.default)(window);
 
 var fnCreateDatasetInfo = exports.fnCreateDatasetInfo = function fnCreateDatasetInfo(json) {
   var _json$dataset = json.dataset;
@@ -36,7 +38,7 @@ var fnCreateDatasetInfo = exports.fnCreateDatasetInfo = function fnCreateDataset
   var oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail;
   var _dataset$frequency = dataset.frequency;
   var frequency = _dataset$frequency === undefined ? '' : _dataset$frequency;
-  var _description = DOMPurify.sanitize(description);
+  var _description = _purify2.default.sanitize(description);
 
   return {
     name: name,
@@ -71,10 +73,8 @@ var fnCreateValueMoving = exports.fnCreateValueMoving = function fnCreateValueMo
   var bPrevValue = _ref2$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref2$bPrevValue;
 
 
-  var _bDelta = bPrevValue.minus(bNowValue),
-      _bPercent = fnCreatePercent({ bValue: _bDelta, bTotal: bPrevValue });
-
-  var _direction = void 0;
+  var _bDelta = bPrevValue.minus(bNowValue).abs(),
+      _direction = void 0;
   if (_bDelta.gt(0.0)) {
     _direction = _Type.Direction.DOWN;
   } else if (!_bDelta.gte(0.0)) {
@@ -83,9 +83,17 @@ var fnCreateValueMoving = exports.fnCreateValueMoving = function fnCreateValueMo
     _direction = _Type.Direction.EQUAL;
   }
 
+  var _bPercent = fnCreatePercent({ bValue: _bDelta, bTotal: bPrevValue });
+
+  var _bNowValue = (0, _big2.default)(bNowValue);
+  if (_bNowValue.gt('1000000')) {
+    _bNowValue = bNowValue.toFixed(0);
+    _bDelta = _bDelta.toFixed(0);
+  }
+
   return {
-    value: _ChartConfig2.default.fnNumberFormat(bNowValue),
-    delta: _ChartConfig2.default.fnNumberFormat(_bDelta.abs().toString()),
+    value: _ChartConfig2.default.fnNumberFormat(_bNowValue),
+    delta: _ChartConfig2.default.fnNumberFormat(_bDelta),
     percent: _bPercent.toString() + '%',
     direction: _direction
   };
@@ -97,6 +105,19 @@ var fnCreateValueMovingFromSeria = exports.fnCreateValueMovingFromSeria = functi
       bPrevValue = len > 1 ? seria[len - 2][1] ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0) : (0, _big2.default)(0.0);
 
   return fnCreateValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue });
+};
+
+var fnGetRecentDate = exports.fnGetRecentDate = function fnGetRecentDate() {
+  var seria = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var json = arguments[1];
+  var len = seria.length;
+  var _json$dataset2 = json.dataset;
+  var dataset = _json$dataset2 === undefined ? {} : _json$dataset2;
+  var _dataset$frequency2 = dataset.frequency;
+  var frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2;
+  var _formatPattern = frequency.toLowerCase() === 'annual' ? 'YYYY' : 'DD-MM-YYYY';
+  var date = len > 0 && seria[len - 1][0] ? seria[len - 1][0] : '';
+  return (0, _moment2.default)(date).format(_formatPattern);
 };
 
 var fnSetTitleToConfig = exports.fnSetTitleToConfig = function fnSetTitleToConfig() {

@@ -435,6 +435,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.zhFnRemoveSeries = _IndicatorSma.fnRemoveSeries;
 
   config.valueMoving = (0, _QuandlFn.fnCreateValueMovingFromSeria)(seria);
+  config.valueMoving.date = (0, _QuandlFn.fnGetRecentDate)(seria, json);
   config.series[0].data = seria;
   config.series[0].zhSeriaId = chartId;
 

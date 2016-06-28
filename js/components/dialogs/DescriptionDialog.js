@@ -8,9 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _dompurify = require('dompurify');
+var _purify = require('purify');
 
-var _dompurify2 = _interopRequireDefault(_dompurify);
+var _purify2 = _interopRequireDefault(_purify);
 
 var _fn = require('../../utils/fn');
 
@@ -19,8 +19,6 @@ var _ModalDialog = require('../zhn/ModalDialog');
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var DOMPurify = (0, _dompurify2.default)(window);
 
 var DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
 var Style = {
@@ -81,10 +79,9 @@ var DescriptionDialog = _react2.default.createClass({
   render: function render() {
     var _props = this.props;
     var isShow = _props.isShow;
-    var data = _props.data;
     var onClose = _props.onClose;
     var descrHtml = this.state.descrHtml;
-    var _html = DOMPurify.sanitize(descrHtml);
+    var _html = _purify2.default.sanitize(descrHtml);
 
     return _react2.default.createElement(
       _ModalDialog2.default,

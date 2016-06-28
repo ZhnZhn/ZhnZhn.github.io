@@ -131,7 +131,6 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
     zhSeriaId: zhSeriaId,
     center: ['20%', '80%'],
     data: _dataTop1,
-    //isDataLabels : true,
     isShowInLegend: true
   }), _ChartConfig2.default.fInnerPieSeria({
     center: ['70%', '80%'],
@@ -153,6 +152,8 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
     bNowValue: _bTotal1,
     bPrevValue: _bTotal2
   });
+  config.valueMoving.date = _year1;
+
   config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;

@@ -20,8 +20,8 @@ const WithStackAreaChart = {
          zoomType : 'xy',
          resetZoomButton : Chart.fResetZoomButton()
        },
-       title : Chart.fTitle({y:40}),
-       subtitle : Chart.fSubtitle({y:60}),
+       title : Chart.fTitle({y:45}),
+       subtitle : Chart.fSubtitle({y:65}),
        tooltip : Chart.fTooltip(Tooltip.fnStackedAreaPointFormatter),
 
        xAxis: Chart.fXAxisOpposite({

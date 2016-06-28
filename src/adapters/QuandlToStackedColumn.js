@@ -8,7 +8,7 @@ import { fnCreateStackedConfig } from './StackedFn';
 import {
   fnCreateZhConfig,
   fnCreateDatasetInfo,
-  fnCreateValueMoving,  
+  fnCreateValueMoving,
   fnSetTitleToConfig
 } from './QuandlFn';
 
@@ -21,7 +21,6 @@ export const fCreateStackedColumnConfig = function(json, option){
        , {sliceItems:items100=[], value=''} = option
        , zhSeriaId = `${value}_${chartType}`
        , jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []
-       //, chartType = ChartType.STACKED_COLUMN
        , {bNowTotal, bPrevTotal, series, categories} =
             fnCreateStackedConfig({jsonData, items100, zhSeriaId, chartType, stacking })
 
@@ -36,6 +35,9 @@ export const fCreateStackedColumnConfig = function(json, option){
      bNowValue  : bNowTotal,
      bPrevValue : bPrevTotal
    });
+   config.valueMoving.date = ( categories && categories.length>1 )
+      ? categories[categories.length-1]
+      : '' ;
 
    config.zhConfig = fnCreateZhConfig(option);
    config.zhConfig.id = zhSeriaId;

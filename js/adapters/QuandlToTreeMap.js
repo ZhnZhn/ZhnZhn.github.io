@@ -158,6 +158,7 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
     bNowValue: bTotal,
     bPrevValue: bPrevTotal
   });
+  config.valueMoving.date = yearTitle;
 
   config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
   config.zhConfig.id = zhSeriaId;

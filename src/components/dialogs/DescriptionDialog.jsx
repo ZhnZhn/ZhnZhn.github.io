@@ -1,16 +1,13 @@
 import React from 'react';
-import createDOMPurify from 'dompurify';
+import DOMPurify from 'purify';
 
 import { fnFetchText } from '../../utils/fn';
-
 import ModalDialog from '../zhn/ModalDialog';
-
-const DOMPurify = createDOMPurify(window);
 
 const DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
 const Style = {
   DIALOG : {
-    top: '10%', 
+    top: '10%',
     left: '10%',
     width:'auto',
     maxWidth:'80%'
@@ -66,7 +63,7 @@ const DescriptionDialog = React.createClass({
   },
 
   render(){
-    const { isShow, data, onClose } = this.props
+    const { isShow, onClose } = this.props
         , { descrHtml } = this.state
         , _html = DOMPurify.sanitize(descrHtml);
 

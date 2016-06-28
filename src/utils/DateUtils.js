@@ -1,5 +1,5 @@
 
-let DateUtils = {};
+const DateUtils = {};
 
 DateUtils.isValidDate = function isValidDate(str){
 	 // STRING FORMAT yyyy-mm-dd
@@ -30,14 +30,16 @@ DateUtils.isValidDate = function isValidDate(str){
 
 
 DateUtils.getFromDate = function(yearMinus){
-	let dateNow = new Date();
-	let yearTo = dateNow.getUTCFullYear();
+	const dateNow = new Date()
+	    , yearTo = dateNow.getUTCFullYear();
+
 	let monthTo = dateNow.getUTCMonth() + 1;
-	if (monthTo<10){
+	if ( monthTo<10 ){
 		monthTo = "0" + monthTo;
 	}
+
 	let dayTo = dateNow.getUTCDate();
-	if (dayTo<10){
+	if ( dayTo<10 ){
 		dayTo = "0" + dayTo;
 	}
 
@@ -45,14 +47,16 @@ DateUtils.getFromDate = function(yearMinus){
 }
 
 DateUtils.getToDate = function(){
-	let dateNow = new Date();
-	let yearTo = dateNow.getUTCFullYear();
+	const dateNow = new Date()
+	    , yearTo = dateNow.getUTCFullYear();
+
 	let monthTo = dateNow.getUTCMonth() + 1;
-	if (monthTo<10){
-		monthTo = "0"+monthTo;
+	if ( monthTo<10 ){
+		monthTo = "0" + monthTo;
 	}
+
 	let dayTo = dateNow.getUTCDate();
-	if (dayTo<10){
+	if ( dayTo<10 ){
 		dayTo = "0" + dayTo;
 	}
 

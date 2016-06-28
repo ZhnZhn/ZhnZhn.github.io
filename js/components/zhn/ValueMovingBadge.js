@@ -37,6 +37,11 @@ var styles = {
     marginLeft: '5px',
     fontWeight: 'bold'
   },
+  dateSpan: {
+    marginLeft: '10px',
+    color: '#2F7ED8',
+    fontWeight: 'bold'
+  },
   up: {
     color: 'green'
   },
@@ -56,7 +61,8 @@ var ValueMovingBadge = _react2.default.createClass({
         value: 0,
         delta: 0,
         percent: 0,
-        direction: _Type.Direction.EQUAL
+        direction: _Type.Direction.EQUAL,
+        date: ''
       }
     };
   },
@@ -66,6 +72,7 @@ var ValueMovingBadge = _react2.default.createClass({
     var delta = _props$valueMoving.delta;
     var percent = _props$valueMoving.percent;
     var direction = _props$valueMoving.direction;
+    var date = _props$valueMoving.date;
 
 
     var _svgDirection = void 0,
@@ -99,6 +106,11 @@ var ValueMovingBadge = _react2.default.createClass({
         'span',
         { style: Object.assign({}, styles.deltaSpan, _dStyle) },
         delta
+      ),
+      _react2.default.createElement(
+        'span',
+        { style: styles.dateSpan },
+        date
       )
     );
   }

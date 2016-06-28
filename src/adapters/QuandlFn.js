@@ -1,12 +1,10 @@
 
 import Big from 'big.js';
-import createDOMPurify from 'dompurify';
+import DOMPurify from 'purify';
+import moment from 'moment';
 
 import {Direction} from '../constants/Type';
 import ChartConfig from '../constants/ChartConfig';
-
-const DOMPurify = createDOMPurify(window)
-
 
 export const fnCreateDatasetInfo = function(json){
   const { dataset={} } = json
@@ -47,10 +45,8 @@ export const fnCreateValueMoving = function({
   bNowValue=Big('0.0'), bPrevValue=Big('0.0')
 }){
 
-  const _bDelta = bPrevValue.minus(bNowValue)
-      , _bPercent = fnCreatePercent({bValue:_bDelta, bTotal: bPrevValue})
-
-  let _direction;
+  let _bDelta = bPrevValue.minus(bNowValue).abs()
+    , _direction;
   if (_bDelta.gt(0.0)){
     _direction = Direction.DOWN;
   } else if (!_bDelta.gte(0.0)){
@@ -59,9 +55,17 @@ export const fnCreateValueMoving = function({
     _direction = Direction.EQUAL;
   }
 
+  const _bPercent = fnCreatePercent({bValue:_bDelta, bTotal: bPrevValue});
+
+  let _bNowValue = Big(bNowValue);
+  if ( _bNowValue.gt('1000000') ){
+    _bNowValue = bNowValue.toFixed(0);
+    _bDelta = _bDelta.toFixed(0);
+  }
+
   return {
-    value : ChartConfig.fnNumberFormat(bNowValue),
-    delta : ChartConfig.fnNumberFormat(_bDelta.abs().toString()),
+    value : ChartConfig.fnNumberFormat(_bNowValue),
+    delta : ChartConfig.fnNumberFormat(_bDelta),
     percent : _bPercent.toString() + '%',
     direction : _direction
   };
@@ -69,12 +73,28 @@ export const fnCreateValueMoving = function({
 
 export const fnCreateValueMovingFromSeria = function(seria){
   const len = seria.length
-      , bNowValue = (len>0) ?
-            ( (seria[len-1][1]) ? seria[len-1][1] : '0.0' ) : '0.0'
-      , bPrevValue = (len>1) ?
-            ( (seria[len-2][1] ) ? Big(seria[len-2][1]) : Big(0.0) ) : Big(0.0);
+      , bNowValue = (len>0)
+           ? ( (seria[len-1][1]) ? seria[len-1][1] : '0.0' )
+           : '0.0'
+      , bPrevValue = (len>1)
+           ? ( (seria[len-2][1] ) ? Big(seria[len-2][1]) : Big(0.0) )
+           : Big(0.0);
 
   return  fnCreateValueMoving({bNowValue, bPrevValue})
+}
+
+export const fnGetRecentDate = function(seria=[], json){
+   const len = seria.length
+       , { dataset={} } = json
+       , { frequency='' } = dataset
+       , _formatPattern = ( frequency.toLowerCase() === 'annual' )
+             ? 'YYYY'
+             : 'DD-MM-YYYY'
+       , date = ( len>0 && seria[len-1][0] )
+            ? seria[len-1][0]
+            : ''
+   return moment(date).format(_formatPattern);
+
 }
 
 export const fnSetTitleToConfig = function(config={}, option={}){

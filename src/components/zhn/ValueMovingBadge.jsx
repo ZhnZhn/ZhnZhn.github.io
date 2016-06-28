@@ -19,6 +19,11 @@ const styles = {
     marginLeft : '5px',
     fontWeight : 'bold'
   },
+  dateSpan : {
+    marginLeft: '10px',
+    color : '#2F7ED8',
+    fontWeight : 'bold'
+  },
   up : {
     color: 'green'
   },
@@ -37,12 +42,13 @@ const ValueMovingBadge = React.createClass({
          value : 0,
          delta : 0,
          percent : 0,
-         direction : Direction.EQUAL
+         direction : Direction.EQUAL,
+         date : ''
        }
     }
   },
   render(){
-    const {value, delta, percent, direction} = this.props.valueMoving;
+    const { value, delta, percent, direction, date } = this.props.valueMoving;
 
     let _svgDirection, _dStyle;
     if (direction === Direction.DOWN){
@@ -67,6 +73,9 @@ const ValueMovingBadge = React.createClass({
          </span>
          <span style={Object.assign({}, styles.deltaSpan, _dStyle)}>
            {delta}
+         </span>
+         <span style={styles.dateSpan}>
+           {date}
          </span>
       </span>
     )
