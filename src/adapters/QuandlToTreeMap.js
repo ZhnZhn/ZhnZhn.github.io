@@ -1,5 +1,5 @@
 
-import _ from 'lodash';
+import sortBy from 'lodash/sortBy';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
@@ -9,7 +9,7 @@ import ChartConfig from '../constants/ChartConfig';
 import {
   fnCreateZhConfig,
   fnCreateDatasetInfo,
-  fnCreateValueMoving,  
+  fnCreateValueMoving,
   fnCreatePercent,
   fnSetTitleToConfig
 } from './QuandlFn';
@@ -46,7 +46,7 @@ const _fnCreateDataAndTotal = function(jsonData=[], items=[], bYearTotals=[]){
     }
   });
 
-  data = _.sortBy(data, 'value').reverse();
+  data = sortBy(data, 'value').reverse();
 
   return {data, bTotal};
 }

@@ -81,5 +81,10 @@ DateUtils.getToDate = function () {
 	return yearTo + "-" + monthTo + "-" + dayTo;
 };
 
+DateUtils.formatTo = function (millisUTC) {
+	var d = new Date(millisUTC);
+	return ("0" + d.getUTCDate()).slice(-2) + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + d.getUTCFullYear();
+};
+
 exports.default = DateUtils;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\DateUtils.js.map

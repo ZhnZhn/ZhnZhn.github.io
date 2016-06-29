@@ -7,9 +7,9 @@ exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal 
 
 var _rFactorySeria2;
 
-var _lodash = require('lodash');
+var _sortBy = require('lodash/sortBy');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _sortBy2 = _interopRequireDefault(_sortBy);
 
 var _big = require('big.js');
 
@@ -66,7 +66,7 @@ var _fnCreateReferenceDataAndTotal = function _fnCreateReferenceDataAndTotal(jso
     }
   });
 
-  _data = _lodash2.default.sortBy(_data, 'y').reverse();
+  _data = (0, _sortBy2.default)(_data, 'y').reverse();
 
   return { referenceData: _data, bTotal: _bTotal };
 };

@@ -1,5 +1,6 @@
 
-import _ from 'lodash';
+import flow from 'lodash/flow';
+import sortBy from 'lodash/sortBy';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
@@ -205,14 +206,14 @@ const _fnCreatePointFlow = function(json, yPointIndex){
     fnStep.push(_fnAddHighLow);
   }
   return {
-    fnPointsFlow : _.flow(fnStep),
+    fnPointsFlow : flow(fnStep),
     result : result
   };
 }
 
 const _fnSeriesPipe = function(json, yPointIndex){
   const {fnPointsFlow, result} = _fnCreatePointFlow(json, yPointIndex)
-      , points = _.sortBy(json.dataset.data, '0');
+      , points = sortBy(json.dataset.data, '0');
 
   for(var i=0, max=points.length; i<max; i++){
     fnPointsFlow(points[i], result);
@@ -416,7 +417,7 @@ const fnConfigAxes = function(result){
   return result
 }
 
-const fnQuandlFlow = _.flow(fnGetSeries, fnConfigAxes);
+const fnQuandlFlow = flow(fnGetSeries, fnConfigAxes);
 
 const _fCreateAreaConfig = function(json, option){
   const config = ChartConfig.fBaseAreaConfig();
@@ -449,7 +450,7 @@ QuandlAdapter.toSeries = function(json, option){
     const arrDate = point[0].split('-');
     return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
   });
-  data = _.sortBy(data, '0');
+  data = sortBy(data, '0');
 
   const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
       , configSeries = ChartConfig.fSeries();

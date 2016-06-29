@@ -1,5 +1,5 @@
 
-import _ from 'lodash';
+import sortBy from 'lodash/sortBy';
 
 import { fnFetch } from '../../utils/fn';
 import { fnCatch } from './fnCatch';
@@ -18,7 +18,7 @@ const _fnFetchToChartComp = function({ json, option, onCompleted }){
   for (let i=1; i<max; i++){
     optionTrades.push({caption: arr[i], value: i});
   }
-  optionTrades = _.sortBy(optionTrades, 'caption');
+  optionTrades = sortBy(optionTrades, 'caption');
   option.onLoad(optionTrades);
 }
 
@@ -52,7 +52,6 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
     option.alertCaption = caption;
     option.alertDescr = descr;
     onFailed(option);
-    //onFailed({caption, descr, chartId});
     option.onFailed();
   }
 }

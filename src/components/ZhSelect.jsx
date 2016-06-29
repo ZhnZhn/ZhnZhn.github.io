@@ -1,12 +1,11 @@
 import React from 'react';
-import _ from 'lodash';
 
 const styles = {
   rootDiv: {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
-    width: '160px',
+    width: '160px'
 
   },
   inputText: {
@@ -18,7 +17,7 @@ const styles = {
     color: 'green',
     width: '140px',
     fontSize: '16px',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   rootOptionDiv: {
     position: 'absolute',
@@ -35,7 +34,7 @@ const styles = {
     //height: '160px',
     minHeight: '160px',
     maxHeight: '200px',
-    overflow: 'auto',
+    overflow: 'auto'
   },
   spinnerCell : {
     position: 'relative',
@@ -43,7 +42,7 @@ const styles = {
     top: '4px',
     display: 'inline-block',
     width: '16px',
-    height: '16px',
+    height: '16px'
   },
   spinnerFailedCell : {
     position: 'relative',
@@ -84,14 +83,14 @@ const styles = {
    margin: 0,
    marginLeft: '10px',
    marginBottom: '5px',
-   width: '150px',
+   width: '150px'
 
  },
   itemDiv:{
     cursor: 'pointer',
     paddingTop: '4px',
     paddingLeft: '5px',
-    paddingBottom: '4px',
+    paddingBottom: '4px'
     //lineHeight: '14px'
   },
   itemOdd: {
@@ -139,7 +138,7 @@ const ZhSelect = React.createClass({
        optionName : _optionName,
        optionNames : _optionNames,
        isValidDomOptionsCache: false,
-       isLocalMode: false,
+       isLocalMode: false
      }
   },
 
@@ -234,10 +233,9 @@ const ZhSelect = React.createClass({
 
   _filterOptionsToState: function(options, value){
      const valueFor = value.toLowerCase();
-
-     return _.filter(options, function(option){
+     return options.filter( (option, i) => {
        return option.caption.toLowerCase().indexOf(valueFor) !== -1
-     });
+     })     
   },
 
   _handlerInputChange: function(event){
@@ -512,15 +510,6 @@ const ZhSelect = React.createClass({
            onKeyDown={this._handlerInputKeyDown}>
         </input>
         {_domAfterInput}
-        {/*this._renderAfterInput(this.props.isLoading, this.props.isLoadingFailed, _styleArrow)*/}
-        {/*
-        <span
-           style={styles.arrowCell}
-           onClick={this._handlerToggleOptions}>
-          <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
-        </span>
-      */}
-
         <hr style={Object.assign({},styles.inputHr, _styleHr)}></hr>
         {_domOptions}
 
@@ -534,7 +523,7 @@ const ZhSelect = React.createClass({
 
   focusNotValidInput: function(){
     this.domInputText.focus();
-  },
+  }
 
 });
 

@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fCreateTreeMapConfig = undefined;
 
-var _lodash = require('lodash');
+var _sortBy = require('lodash/sortBy');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _sortBy2 = _interopRequireDefault(_sortBy);
 
 var _big = require('big.js');
 
@@ -68,7 +68,7 @@ var _fnCreateDataAndTotal = function _fnCreateDataAndTotal() {
     }
   });
 
-  data = _lodash2.default.sortBy(data, 'value').reverse();
+  data = (0, _sortBy2.default)(data, 'value').reverse();
 
   return { data: data, bTotal: bTotal };
 };

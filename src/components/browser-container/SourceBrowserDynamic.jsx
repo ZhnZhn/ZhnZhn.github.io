@@ -3,8 +3,11 @@ import React from 'react';
 import MenuBrowserDynamic from '../zhn/MenuBrowserDynamic';
 import BrowserActions, {BrowserActionTypes} from '../../flux/actions/BrowserActions';
 
-
 const SourceBrowserDynamic = React.createClass({
+  shouldComponentUpdate(){
+    return false;
+  },
+
   render(){
     const props = this.props;
     return (

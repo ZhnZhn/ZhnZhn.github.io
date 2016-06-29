@@ -1,5 +1,5 @@
 
-import _ from 'lodash';
+import sortBy from 'lodash/sortBy';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
@@ -45,7 +45,7 @@ const _fnCreateReferenceDataAndTotal = function(jsonData, items){
     }
   });
 
-  _data = _.sortBy(_data, 'y').reverse();
+  _data = sortBy(_data, 'y').reverse();
 
   return {referenceData : _data, bTotal : _bTotal}
 }

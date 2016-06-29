@@ -1,5 +1,5 @@
 
-import {merge} from 'lodash';
+import merge from 'lodash/merge';
 import Highcharts from 'highcharts';
 
 const _fnCreateMonoColors = function({

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import sortBy from 'lodash/sortBy';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
@@ -95,12 +95,12 @@ export const fCreatePieConfig = function(json, option){
    });
 
    const _dataTop1 = _fnCreateTopDonutData({
-     data : _.sortBy(_data1, 'y').reverse(),
+     data : sortBy(_data1, 'y').reverse(),
      bTotal : _bTotal1,
      isPercent : true
    });
    const _dataTop2 = _fnCreateTopDonutData({
-     data: _.sortBy(_data2, 'y').reverse(),
+     data: sortBy(_data2, 'y').reverse(),
      bTotal: _bTotal2
    });
 

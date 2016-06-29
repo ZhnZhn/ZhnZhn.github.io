@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
@@ -105,8 +101,8 @@ var styles = {
     paddingTop: '4px',
     paddingLeft: '5px',
     paddingBottom: '4px'
+    //lineHeight: '14px'
   },
-  //lineHeight: '14px'
   itemOdd: {
     backgroundColor: '#C3C3AC'
   },
@@ -250,8 +246,7 @@ var ZhSelect = _react2.default.createClass({
 
   _filterOptionsToState: function _filterOptionsToState(options, value) {
     var valueFor = value.toLowerCase();
-
-    return _lodash2.default.filter(options, function (option) {
+    return options.filter(function (option, i) {
       return option.caption.toLowerCase().indexOf(valueFor) !== -1;
     });
   },

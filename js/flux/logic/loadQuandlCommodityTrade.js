@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loadQuandlCommodityTrade = undefined;
 
-var _lodash = require('lodash');
+var _sortBy = require('lodash/sortBy');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _sortBy2 = _interopRequireDefault(_sortBy);
 
 var _fn = require('../../utils/fn');
 
@@ -40,7 +40,7 @@ var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
   for (var i = 1; i < max; i++) {
     optionTrades.push({ caption: arr[i], value: i });
   }
-  optionTrades = _lodash2.default.sortBy(optionTrades, 'caption');
+  optionTrades = (0, _sortBy2.default)(optionTrades, 'caption');
   option.onLoad(optionTrades);
 };
 
@@ -75,7 +75,6 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
     option.alertCaption = caption;
     option.alertDescr = descr;
     onFailed(option);
-    //onFailed({caption, descr, chartId});
     option.onFailed();
   }
 };

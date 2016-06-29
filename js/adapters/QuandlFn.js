@@ -13,9 +13,9 @@ var _purify = require('purify');
 
 var _purify2 = _interopRequireDefault(_purify);
 
-var _moment = require('moment');
+var _DateUtils = require('../utils/DateUtils');
 
-var _moment2 = _interopRequireDefault(_moment);
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
 var _Type = require('../constants/Type');
 
@@ -117,9 +117,9 @@ var fnGetRecentDate = exports.fnGetRecentDate = function fnGetRecentDate() {
   var dataset = _json$dataset2 === undefined ? {} : _json$dataset2;
   var _dataset$frequency2 = dataset.frequency;
   var frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2;
-  var _formatPattern = frequency.toLowerCase() === 'annual' ? 'YYYY' : 'DD-MM-YYYY';
-  var date = len > 0 && seria[len - 1][0] ? seria[len - 1][0] : '';
-  return (0, _moment2.default)(date).format(_formatPattern);
+  var millisUTC = len > 0 && seria[len - 1][0] && typeof seria[len - 1][0] === 'number' ? seria[len - 1][0] : '';
+  var d = millisUTC ? frequency.toLowerCase() === 'annual' ? new Date(millisUTC).getUTCFullYear() : _DateUtils2.default.formatTo(millisUTC) : '';
+  return d;
 };
 
 var fnSetTitleToConfig = exports.fnSetTitleToConfig = function fnSetTitleToConfig() {

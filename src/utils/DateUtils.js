@@ -63,4 +63,12 @@ DateUtils.getToDate = function(){
 	return yearTo + "-" + monthTo + "-" + dayTo;
 }
 
+DateUtils.formatTo = function(millisUTC){
+  const d = new Date(millisUTC);
+  return ("0" + d.getUTCDate()).slice(-2)
+         + "-" + ("0" + (d.getUTCMonth() + 1) ).slice(-2)
+         + "-" + d.getUTCFullYear() ;
+}
+
+
 export default DateUtils;

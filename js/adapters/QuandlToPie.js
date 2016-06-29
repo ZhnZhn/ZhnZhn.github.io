@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fCreatePieConfig = undefined;
 
-var _lodash = require('lodash');
+var _sortBy = require('lodash/sortBy');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _sortBy2 = _interopRequireDefault(_sortBy);
 
 var _big = require('big.js');
 
@@ -114,12 +114,12 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
   });
 
   var _dataTop1 = _fnCreateTopDonutData({
-    data: _lodash2.default.sortBy(_data1, 'y').reverse(),
+    data: (0, _sortBy2.default)(_data1, 'y').reverse(),
     bTotal: _bTotal1,
     isPercent: true
   });
   var _dataTop2 = _fnCreateTopDonutData({
-    data: _lodash2.default.sortBy(_data2, 'y').reverse(),
+    data: (0, _sortBy2.default)(_data2, 'y').reverse(),
     bTotal: _bTotal2
   });
 

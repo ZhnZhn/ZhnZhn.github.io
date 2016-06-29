@@ -23,19 +23,14 @@
       "highcharts": "github:highcharts/highcharts@^4.2.3",
       "interact.js": "npm:interact.js@^1.2.6",
       "localforage": "npm:localforage@^1.4.2",
-      "lodash": "npm:lodash@^4.6.1",
-      "moment": "npm:moment@^2.13.0",
+      "lodash": "npm:lodash@^4.13.1",
       "purify": "github:cure53/DOMPurify@^0.8.2",
-      "react": "npm:react@^0.14.8",
-      "react-addons-shallow-compare": "npm:react-addons-shallow-compare@0.14.8",
-      "react-dom": "npm:react-dom@^0.14.8",
-      "reflux": "npm:reflux@^0.4.0"
+      "react": "npm:react@^15.1.0",
+      "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^15.1.0",
+      "react-dom": "npm:react-dom@^15.1.0",
+      "reflux": "npm:reflux@^0.4.1"
     },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4"
-    }
+    "devDependencies": {}
   },
   "devDependencies": {
     "babel-core": "^6.7.4",

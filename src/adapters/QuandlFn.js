@@ -1,8 +1,7 @@
-
 import Big from 'big.js';
 import DOMPurify from 'purify';
-import moment from 'moment';
 
+import DateUtils from '../utils/DateUtils';
 import {Direction} from '../constants/Type';
 import ChartConfig from '../constants/ChartConfig';
 
@@ -89,14 +88,15 @@ export const fnGetRecentDate = function(seria=[], json){
    const len = seria.length
        , { dataset={} } = json
        , { frequency='' } = dataset
-       , _formatPattern = ( frequency.toLowerCase() === 'annual' )
-             ? 'YYYY'
-             : 'DD-MM-YYYY'
-       , date = ( len>0 && seria[len-1][0] )
+       , millisUTC = ( len>0 && seria[len-1][0] && typeof seria[len-1][0]==='number' )
             ? seria[len-1][0]
             : ''
-   return moment(date).format(_formatPattern);
-
+       , d = ( millisUTC )
+           ? ( frequency.toLowerCase() === 'annual' )
+                 ? new Date(millisUTC).getUTCFullYear()
+                 : DateUtils.formatTo(millisUTC)
+           : '';
+    return d
 }
 
 export const fnSetTitleToConfig = function(config={}, option={}){

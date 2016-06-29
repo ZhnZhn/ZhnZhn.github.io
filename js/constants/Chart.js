@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _lodash = require('lodash');
+var _merge = require('lodash/merge');
+
+var _merge2 = _interopRequireDefault(_merge);
 
 var _highcharts = require('highcharts');
 
@@ -64,7 +66,7 @@ var Chart = {
   fCreditsRightBottom: function fCreditsRightBottom() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       enabled: true,
       position: {
         align: 'right',
@@ -77,7 +79,7 @@ var Chart = {
   fResetZoomButton: function fResetZoomButton() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       position: {
         align: 'left',
         verticalAlign: 'top',
@@ -90,7 +92,7 @@ var Chart = {
   fTitle: function fTitle() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       text: '',
       floating: true,
       align: 'left',
@@ -107,7 +109,7 @@ var Chart = {
   fSubtitle: function fSubtitle() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       text: '',
       floating: true,
       align: 'left',
@@ -131,7 +133,7 @@ var Chart = {
   fXAxisOpposite: function fXAxisOpposite() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       opposite: true,
       tickLength: 0,
       tickPosition: 'inside',
@@ -143,7 +145,7 @@ var Chart = {
   fYAxisOpposite: function fYAxisOpposite() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       opposite: true,
       title: {
         text: ''
@@ -153,7 +155,7 @@ var Chart = {
   fPlotOptionsArea: function fPlotOptionsArea() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       lineColor: 'yellow',
       lineWidth: 0,
       marker: {
@@ -175,7 +177,7 @@ var Chart = {
   fPlotOptionsColumn: function fPlotOptionsColumn() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       lineColor: 'yellow',
       lineWidth: 0,
       marker: {
@@ -197,7 +199,7 @@ var Chart = {
   fLegend: function fLegend() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodash.merge)({
+    return (0, _merge2.default)({
       //itemMarginBottom : 5,
       symbolHeight: 14,
       symbolWidth: 14,

@@ -6,9 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _rToConfig2;
 
-var _lodash = require('lodash');
+var _flow = require('lodash/flow');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _flow2 = _interopRequireDefault(_flow);
+
+var _sortBy = require('lodash/sortBy');
+
+var _sortBy2 = _interopRequireDefault(_sortBy);
 
 var _big = require('big.js');
 
@@ -251,7 +255,7 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
     fnStep.push(_fnAddHighLow);
   }
   return {
-    fnPointsFlow: _lodash2.default.flow(fnStep),
+    fnPointsFlow: (0, _flow2.default)(fnStep),
     result: result
   };
 };
@@ -261,7 +265,7 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex) {
 
   var fnPointsFlow = _fnCreatePointFlow2.fnPointsFlow;
   var result = _fnCreatePointFlow2.result;
-  var points = _lodash2.default.sortBy(json.dataset.data, '0');
+  var points = (0, _sortBy2.default)(json.dataset.data, '0');
 
   for (var i = 0, max = points.length; i < max; i++) {
     fnPointsFlow(points[i], result);
@@ -471,7 +475,7 @@ var fnConfigAxes = function fnConfigAxes(result) {
   return result;
 };
 
-var fnQuandlFlow = _lodash2.default.flow(fnGetSeries, fnConfigAxes);
+var fnQuandlFlow = (0, _flow2.default)(fnGetSeries, fnConfigAxes);
 
 var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   var config = _ChartConfig2.default.fBaseAreaConfig();
@@ -497,7 +501,7 @@ QuandlAdapter.toSeries = function (json, option) {
     var arrDate = point[0].split('-');
     return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
   });
-  data = _lodash2.default.sortBy(data, '0');
+  data = (0, _sortBy2.default)(data, '0');
 
   var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
       configSeries = _ChartConfig2.default.fSeries();
