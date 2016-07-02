@@ -33,12 +33,12 @@ const ProgressLine = React.createClass({
     if (this.wasCompleted){
       this.idCompleted = setTimeout(()=>{
         this.idCompleted = null;
-        this.setState();
+        this.forceUpdate();
       }, 800)
     } else if (this.wasOpacied){
       this.idOpacied = setTimeout(()=>{
         this.idOpacied = null;
-        this.setState();
+        this.forceUpdate();        
       }, 800)
     }
   },

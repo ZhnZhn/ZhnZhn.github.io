@@ -7,7 +7,7 @@ import MenuPart from './MenuPart';
 
 const Styles = {
   browser : {
-    paddingRight: '0'
+    paddingRight: '0px'
   },
   scrollDiv : {
     overflowY: 'auto',

@@ -44,12 +44,12 @@ var ProgressLine = _react2.default.createClass({
     if (this.wasCompleted) {
       this.idCompleted = setTimeout(function () {
         _this.idCompleted = null;
-        _this.setState();
+        _this.forceUpdate();
       }, 800);
     } else if (this.wasOpacied) {
       this.idOpacied = setTimeout(function () {
         _this.idOpacied = null;
-        _this.setState();
+        _this.forceUpdate();
       }, 800);
     }
   },

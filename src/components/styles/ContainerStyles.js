@@ -32,7 +32,7 @@ const ContainerStyles = {
     minWidth: '700px',
     maxWidth: '700px',
     marginLeft: '10px',
-    paddingRight: '0',
+    paddingRight: '0px',
     paddingBottom: '32px'
   }
 }

@@ -28,7 +28,7 @@ var ContainerStyles = {
     position: 'relative',
     /* eslint-disable no-dupe-keys */
     height: '730px'
-  }, _defineProperty(_aboutRootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_aboutRootDiv, 'minWidth', '700px'), _defineProperty(_aboutRootDiv, 'maxWidth', '700px'), _defineProperty(_aboutRootDiv, 'marginLeft', '10px'), _defineProperty(_aboutRootDiv, 'paddingRight', '0'), _defineProperty(_aboutRootDiv, 'paddingBottom', '32px'), _aboutRootDiv)
+  }, _defineProperty(_aboutRootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_aboutRootDiv, 'minWidth', '700px'), _defineProperty(_aboutRootDiv, 'maxWidth', '700px'), _defineProperty(_aboutRootDiv, 'marginLeft', '10px'), _defineProperty(_aboutRootDiv, 'paddingRight', '0px'), _defineProperty(_aboutRootDiv, 'paddingBottom', '32px'), _aboutRootDiv)
 };
 
 exports.default = ContainerStyles;

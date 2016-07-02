@@ -44,15 +44,9 @@ var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const showAction = ComponentActionTypes.SHOW_BROWSER
-    , browserType = BrowserType.WATCH_LIST
-    , updateViewAction = ComponentActionTypes.UPDATE_WATCH_BROWSER;
-*/
-
 var styles = {
   browser: {
-    paddingRight: 0
+    paddingRight: '0px'
   },
   btCircle: {
     marginLeft: '20px'
@@ -93,8 +87,6 @@ var styles = {
     right: 0
   }
 };
-//import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
-
 
 var WatchBrowser = _react2.default.createClass({
   displayName: 'WatchBrowser',
@@ -251,7 +243,7 @@ var WatchBrowser = _react2.default.createClass({
     var _captionEV = isModeEdit ? 'V' : 'E';
     return _react2.default.createElement(
       _Browser2.default,
-      { isShow: isShow, style: { paddingRight: 0 } },
+      { isShow: isShow, style: styles.browser },
       _react2.default.createElement(
         _CaptionRow2.default,
         {

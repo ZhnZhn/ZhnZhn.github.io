@@ -2,7 +2,6 @@ import React from 'react';
 
 import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
-//import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
 import WatchActions from '../../flux/actions/WatchActions';
 
 import Browser from '../zhn/Browser';
@@ -12,15 +11,10 @@ import ScrollPane from '../zhn/ScrollPane';
 import OpenClose2 from '../zhn/OpenClose2';
 import SvgClose from '../SvgClose';
 
-/*
-const showAction = ComponentActionTypes.SHOW_BROWSER
-    , browserType = BrowserType.WATCH_LIST
-    , updateViewAction = ComponentActionTypes.UPDATE_WATCH_BROWSER;
-*/
 
 const styles = {
   browser : {
-    paddingRight: 0
+    paddingRight: '0px'
   },
   btCircle : {
     marginLeft: '20px'
@@ -202,7 +196,7 @@ const WatchBrowser = React.createClass({
         , { isShow, isModeEdit, watchList } = this.state
         , _captionEV = (isModeEdit) ? 'V' : 'E';
     return (
-       <Browser isShow={isShow} style={{paddingRight: 0}}>
+       <Browser isShow={isShow} style={styles.browser}>
          <CaptionRow
             caption={caption}
             onClose={this._handlerHide}
