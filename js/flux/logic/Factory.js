@@ -82,6 +82,9 @@ var _rFnValue = {
   ROneTwo: function ROneTwo(one, two) {
     return one + '/' + two;
   },
+  ROneDashTwo: function ROneDashTwo(one, two) {
+    return one + '_' + two;
+  },
   RPrefixOne: function RPrefixOne(prefix, one) {
     return prefix + '_' + one;
   },

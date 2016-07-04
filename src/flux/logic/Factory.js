@@ -37,6 +37,7 @@ const _rDialog = {
 const _rFnValue = {
   RTwo : (one, two) => `${two}`,
   ROneTwo : (one, two) => `${one}/${two}`,
+  ROneDashTwo : (one, two) => `${one}_${two}`,
   RPrefixOne : (prefix, one) => `${prefix}_${one}`,
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`

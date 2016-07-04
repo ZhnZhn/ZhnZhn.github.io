@@ -192,6 +192,24 @@ const DataQE = {
       },
       dataColumn : 4
   },
+  QE_UNICORN_RESEARCH : {
+    type : 'QE_UNICORN_RESEARCH',
+    menuTitle : 'Unicorn Research',
+    dialogCaption : 'Unicorn Research Corporation',
+    chartContainerCaption : 'Quandl Unicorn Research Corporation',
+    dialogType : 'DialogType4A',
+    dialogProps : {
+      descrUrl: './data/quandl/unicorn-research.html',
+      oneCaption : 'Exchange',
+      oneURI : './data/quandl/unicorn-research.json',
+      oneJsonProp : 'exchanges',
+      twoCaption : 'Metric',
+      valueFn : 'ROneDashTwo',
+      //fnValue : (source, currency) => `${source}/${currency}`
+      loadId : 'Q'
+    },
+    dataColumn : 1
+  },
 
   QE_CHINA_DCE_FUTURE : {
       type : 'QE_CHINA_DCE_FUTURE',

@@ -1,0 +1,41 @@
+{
+  "exchanges" : [
+    {
+      "caption" : "AMEX", "value": "URC/AMEX" ,
+      "columns" : [
+         { "caption" : "Number of Stocks Making 52-Week Lows", "value" : "52W_LO" },
+         { "caption" : "Number of Stocks Making 52-Week Highs", "value" : "52W_HI" },
+         { "caption" : "Number of Stocks with Prices Advancing", "value" : "ADV" },
+         { "caption" : "Number of Stocks with Prices Unchanged", "value" : "UNCH" },
+         { "caption" : "Number of Stocks with Prices Declining", "value" : "DEC" },
+         { "caption" : "Volume of Stocks with Prices Advancing", "value" : "ADV_VOL" },
+         { "caption" : "Volume of Stocks with Prices Unchanged", "value" : "UNCH_VOL" },
+         { "caption" : "Volume of Stocks with Prices Declining", "value" : "DEC_VOL" }
+      ]
+    },{
+      "caption" : "NASDAQ", "value": "URC/NASDAQ" ,
+      "columns" : [
+         { "caption" : "Number of Stocks Making 52-Week Lows", "value" : "52W_LO" },
+         { "caption" : "Number of Stocks Making 52-Week Highs", "value" : "52W_HI" },
+         { "caption" : "Number of Stocks with Prices Advancing", "value" : "ADV" },
+         { "caption" : "Number of Stocks with Prices Unchanged", "value" : "UNCH" },
+         { "caption" : "Number of Stocks with Prices Declining", "value" : "DEC" },
+         { "caption" : "Volume of Stocks with Prices Advancing", "value" : "ADV_VOL" },
+         { "caption" : "Volume of Stocks with Prices Unchanged", "value" : "UNCH_VOL" },
+         { "caption" : "Volume of Stocks with Prices Declining", "value" : "DEC_VOL" }
+      ]
+    },{
+      "caption" : "NYSE", "value": "URC/NYSE" ,
+      "columns" : [
+         { "caption" : "Number of Stocks Making 52-Week Lows", "value" : "52W_LO" },
+         { "caption" : "Number of Stocks Making 52-Week Highs", "value" : "52W_HI" },
+         { "caption" : "Number of Stocks with Prices Advancing", "value" : "ADV" },
+         { "caption" : "Number of Stocks with Prices Unchanged", "value" : "UNCH" },         
+         { "caption" : "Number of Stocks with Prices Declining", "value" : "DEC" },
+         { "caption" : "Volume of Stocks with Prices Advancing", "value" : "ADV_VOL" },
+         { "caption" : "Volume of Stocks with Prices Unchanged", "value" : "UNCH_VOL" },
+         { "caption" : "Volume of Stocks with Prices Declining", "value" : "DEC_VOL" }
+      ]
+    }
+  ]
+}
