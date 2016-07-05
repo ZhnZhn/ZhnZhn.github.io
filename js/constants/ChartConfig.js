@@ -62,16 +62,16 @@ ChartConfig.theme = {
   credits: {
     enabled: true,
     position: {
-      align: 'left',
-      x: 150,
-      verticalAlign: 'top',
-      y: 15
+      align: 'right',
+      x: -10,
+      verticalAlign: 'bottom',
+      y: -5
     }
   },
   chart: {
     //width: 600,
     height: _Chart2.default.HEIGHT,
-    spacingTop: _Chart2.default.SPACING_TOP,
+    spacingTop: _Chart2.default.THEME_SPACING_TOP,
     spacingBottom: _Chart2.default.SPACING_BOTTOM,
     plotBackgroundColor: "rgba(77,77,77,1)",
     backgroundColor: "rgba(77,77,77,1)",
@@ -186,8 +186,8 @@ ChartConfig.fBaseAreaConfig = function () {
         position: {
           align: 'left',
           verticalAlign: 'top',
-          x: 100,
-          y: 48
+          x: 10,
+          y: 0
         },
         relativeTo: 'chart'
       },
@@ -361,15 +361,6 @@ ChartConfig.fSeries = function () {
       headerFormat: ''
     }
   };
-};
-
-ChartConfig.creditsMetric = {
-  position: {
-    align: 'right',
-    x: -10,
-    verticalAlign: 'bottom',
-    y: -5
-  }
 };
 
 ChartConfig.fTitleMetric = function (text) {

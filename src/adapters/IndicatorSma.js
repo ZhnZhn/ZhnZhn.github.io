@@ -146,8 +146,7 @@ export const fnGetConfigMfi = function(chart, period, id){
    const titleNotFullPoint = (nNotFullPoint !== 0) ?
          ' Not Full Data HL:' + nNotFullPoint : '' ;
 
-   config.title = ChartConfig.fTitleMetric(id + titleNotFullPoint);
-   config.credits = ChartConfig.creditsMetric;
+   config.title = ChartConfig.fTitleMetric(id + titleNotFullPoint);   
 
    config.chart.height = 140;
    config.chart.spacingTop = 8;

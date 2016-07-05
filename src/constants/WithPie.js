@@ -12,8 +12,8 @@ const WithPieChart = {
      zhDetailCharts : []  ,
 
      credits : Chart.fCreditsRightBottom(),
-     title : Chart.fTitle(),
-     subtitle : Chart.fSubtitle(),
+     title : Chart.fTitle({ y:Chart.SEMIDONUT_TITLE_Y }),
+     subtitle : Chart.fSubtitle({ y:Chart.SEMIDONUT_SUBTITLE_Y }),
      legend : Chart.fLegend()
    }
 },

@@ -32,9 +32,20 @@ const Chart = {
   STACKED_HEIGHT : 500,
   LEGEND_ROW_HEIGHT : 32,
 
+  THEME_SPACING_TOP: 5,
   SPACING_TOP : 20,
+  STACKED_SPACING_TOP : 25,
   SPACING_BOTTOM : 24,
   MARGIN_TOP : 60,
+  TREEMAP_MARGIN_TOP : 50,
+
+  STACKED_TITLE_Y : -10,
+  STACKED_SUBTITLE_Y : 10,
+  TREEMAP_TITLE_Y : 15,
+  TREEMAP_SUBTITLE_Y : 35,
+  SEMIDONUT_TITLE_Y : 15,
+  SEMIDONUT_SUBTITLE_Y: 35,
+
 
   _monoColors : _fnCreateMonoColors({}),
 
@@ -65,10 +76,10 @@ const Chart = {
   fResetZoomButton(option={}){
     return merge({
        position: {
-          align: 'left',
+          align: 'right',
           verticalAlign: 'top',
-          x: 100,
-          y: 48
+          x: 0,
+          y: 0
        },
        relativeTo: 'chart'
     }, option)
@@ -101,7 +112,6 @@ const Chart = {
         fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
         fontSize: '16px',
         fontWeight: 'bold'
-        //fontWeight: 'normal'
       }
     }, option)
   },

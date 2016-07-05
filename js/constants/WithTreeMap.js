@@ -26,10 +26,10 @@ var WithTreeMap = {
       credits: _Chart2.default.fCreditsRightBottom(),
       chart: {
         type: 'treemap',
-        marginTop: _Chart2.default.MARGIN_TOP
+        marginTop: _Chart2.default.TREEMAP_MARGIN_TOP
       },
-      title: _Chart2.default.fTitle({ y: 10 }),
-      subtitle: _Chart2.default.fSubtitle({ y: 30, style: { fontWeight: 'bold' } }),
+      title: _Chart2.default.fTitle({ y: _Chart2.default.TREEMAP_TITLE_Y }),
+      subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.TREEMAP_SUBTITLE_Y }),
       tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnTreeMapPointFormatter)
     };
   },

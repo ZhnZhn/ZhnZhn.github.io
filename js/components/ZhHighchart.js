@@ -14,16 +14,13 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
-var _ButtonTab = require('./zhn/ButtonTab');
-
-var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
   rootDivShow: {
     position: 'relative',
-    display: 'block'
+    display: 'block',
+    zIndex: 1
   },
   rootDivHide: {
     position: 'relative',

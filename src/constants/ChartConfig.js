@@ -37,17 +37,17 @@ const _fnCreateMonochromePieColors = function({
 ChartConfig.theme = {
     credits: {
       enabled : true,
-      position: {
-        align: 'left',
-	      x: 150,
-	      verticalAlign: 'top',
-        y: 15
+      position : {
+          align: 'right',
+          x: -10,
+          verticalAlign: 'bottom',
+          y: -5
       }
     },
     chart : {
       //width: 600,
       height: Chart.HEIGHT,
-      spacingTop: Chart.SPACING_TOP,
+      spacingTop: Chart.THEME_SPACING_TOP,
       spacingBottom: Chart.SPACING_BOTTOM,
       plotBackgroundColor: "rgba(77,77,77,1)",
       backgroundColor : "rgba(77,77,77,1)",
@@ -168,8 +168,8 @@ ChartConfig.fBaseAreaConfig = function(){
                 position: {
                     align: 'left',
                     verticalAlign: 'top',
-                    x: 100,
-                    y: 48
+                    x: 10,
+                    y: 0
                 },
                 relativeTo: 'chart'
      },
@@ -343,15 +343,6 @@ ChartConfig.fSeries = function(){
         pointFormatter : Tooltip.fnBasePointFormatter,
         headerFormat : ''
       }
-  }
-}
-
-ChartConfig.creditsMetric = {
-   position : {
-       align: 'right',
-       x: -10,
-       verticalAlign: 'bottom',
-       y: -5
   }
 }
 

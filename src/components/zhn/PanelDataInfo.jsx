@@ -10,7 +10,7 @@ const styles = {
   rootShow : {
     position: 'relative',
     display: 'block',
-    paddingTop : '24px',
+    paddingTop : '34px',
     paddingRight : '20px',
     paddingLeft : '8px'
   },
@@ -51,37 +51,37 @@ const PanelDataInfo = React.createClass({
     return (
        <div style={styleShow}>
          <ButtonTab
-           caption='Chart'
+           caption="Chart"
            isShow={false}
            onClick={onClickChart}
          />
          <InfoPart
-            caption='Name: '
+            caption="Name: "
             text={name}
             styleCaption={styles.label}
             styleText={styles.text}
          />
          <InfoPart
-            caption='Newest Date: '
+            caption="Newest Date: "
             text={newest_available_date}
             rootStyle={styles.rootStyle}
             styleCaption={styles.label}
             styleText={styles.text}
          />
          <InfoPart
-            caption='Oldest Date: '
+            caption="Oldest Date: "
             text={oldest_available_date}
             styleCaption={styles.label}
             styleText={styles.text}
          />
          <InfoPart
-            caption='Frequency: '
+            caption="Frequency: "
             text={frequency}
             styleCaption={styles.label}
             styleText={styles.text}
          />
          <InfoPart
-            caption=''
+            caption=""
             text={description}
             isHtml={true}
             classText={DESCR_CSS_CLASS}

@@ -257,7 +257,7 @@ var AreaChartItem = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      null,
+      { style: { position: 'relative', height: '30px', backgroundColor: 'transparent', zIndex: 2 } },
       _btIndicator,
       _btAdd,
       _btInfo,
@@ -364,11 +364,12 @@ var AreaChartItem = _react2.default.createClass({
       _react2.default.createElement(
         _ShowHide2.default,
         { isShow: isOpen },
+        isShowChart && this._createChartToolBar(config),
         _react2.default.createElement(_ZhHighchart2.default, {
           ref: 'chart',
-          isShow: isShowChart,
-          toolBar: this._createChartToolBar(config),
-          config: config
+          isShow: isShowChart
+          //toolBar={this._createChartToolBar(config)}
+          , config: config
         }),
         _react2.default.createElement(_PanelIndicator2.default, {
           isShow: isShowIndicator,

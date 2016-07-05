@@ -15,15 +15,15 @@ const WithStackedColumn = {
       credits : Chart.fCreditsRightBottom(),
       chart: {
         type: 'column',
-        spacingTop: Chart.SPACING_TOP,
+        spacingTop: Chart.STACKED_SPACING_TOP,
         spacingBottom: Chart.SPACING_BOTTOM,
 
         zoomType : 'xy',
         resetZoomButton : Chart.fResetZoomButton()
       },
 
-      title : Chart.fTitle({y:45}),
-      subtitle : Chart.fSubtitle({y:65}),
+      title : Chart.fTitle({ y:Chart.STACKED_TITLE_Y }),
+      subtitle : Chart.fSubtitle({ y:Chart.STACKED_SUBTITLE_Y }),
       tooltip : Chart.fTooltip(Tooltip.fnStackedAreaPointFormatter),
 
       xAxis: Chart.fXAxisOpposite({

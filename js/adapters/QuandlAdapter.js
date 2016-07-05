@@ -296,7 +296,6 @@ var _fnCreateConfigATH = function _fnCreateConfigATH(data, chartId) {
   if (data.length > 0) {
     var config = _fnCreateIndicatorConfig();
     config.title = _ChartConfig2.default.fTitleMetric('ATH Chart');
-    config.credits = _ChartConfig2.default.creditsMetric;
 
     config.series[0].zhSeriaId = chartId + "_ATH";
     config.series[0].zhValueText = "ATH";
@@ -324,7 +323,6 @@ var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn, cha
     var config = _ChartConfig2.default.fBaseAreaConfig();
     config.title = _ChartConfig2.default.fTitleMetric('Volume Chart');
     config.legend = _ChartConfig2.default.legendVolume;
-    config.credits = _ChartConfig2.default.creditsMetric;
 
     config.chart.height = 140;
     config.chart.spacingTop = 8;
@@ -373,7 +371,6 @@ var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data, chartId) {
   if (data.length > 0) {
     var config = _fnCreateIndicatorConfig();
     config.title = _ChartConfig2.default.fTitleMetric('HighLow Chart');
-    config.credits = _ChartConfig2.default.creditsMetric;
 
     config.series[0].zhSeriaId = chartId + '_HL';
     config.series[0].zhValueText = "HL";
@@ -450,6 +447,9 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
 
   _fnAddSeriesExDivident(config, dataExDividend, chartId);
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId);
+  if (dataExDividend.length !== 0 || dataSplitRatio.length !== 0) {
+    config.chart.spacingBottom = 40;
+  }
 
   config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn, chartId);
   config.zhATHConfig = _fnCreateConfigATH(dataATH, chartId);
@@ -470,7 +470,6 @@ var fnConfigAxes = function fnConfigAxes(result) {
   config.yAxis.plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(minPoint);
   config.yAxis.opposite = true;
 
-  //config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
   config.xAxis = _Chart2.default.fXAxisOpposite(config.xAxis);
 
   return result;

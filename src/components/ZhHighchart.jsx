@@ -1,12 +1,11 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 
-import ButtonTab from './zhn/ButtonTab';
-
 const styles = {
   rootDivShow : {
     position : 'relative',
-    display : 'block'
+    display : 'block',
+    zIndex : 1
   },
   rootDivHide : {
     position : 'relative',

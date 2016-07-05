@@ -88,17 +88,19 @@ const HeaderBar = React.createClass({
 
          <ToolBarButton
            type="TypeA"
-           caption="Settings"
-           title="Application settings"
-           onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.SETTINGS)}
-          />
-
-         <ToolBarButton
-           type="TypeA"
+           style={{ float: 'right', marginRight: '20px'}}
            caption="About"
            title="Description about application ERC"
            onClick={ComponentActions.showAbout}
           />
+
+          <ToolBarButton
+            type="TypeA"
+            style={{ float: 'right'}}
+            caption="Settings"
+            title="Application settings"
+            onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.SETTINGS)}
+           />
 
       </div>
     );

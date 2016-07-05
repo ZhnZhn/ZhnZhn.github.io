@@ -13,10 +13,10 @@ const WithTreeMap = {
        credits : Chart.fCreditsRightBottom(),
        chart: {
          type: 'treemap',
-         marginTop : Chart.MARGIN_TOP
+         marginTop : Chart.TREEMAP_MARGIN_TOP
        },
-       title : Chart.fTitle({y:10}),
-       subtitle : Chart.fSubtitle({y:30, style : {fontWeight: 'bold'}}),
+       title : Chart.fTitle({ y:Chart.TREEMAP_TITLE_Y }),
+       subtitle : Chart.fSubtitle({ y:Chart.TREEMAP_SUBTITLE_Y }),
        tooltip: Chart.fTooltip(Tooltip.fnTreeMapPointFormatter)
      }
    },

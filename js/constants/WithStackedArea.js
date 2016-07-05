@@ -28,14 +28,14 @@ var WithStackAreaChart = {
       credits: _Chart2.default.fCreditsRightBottom(),
       chart: {
         type: 'area',
-        spacingTop: _Chart2.default.SPACING_TOP,
+        spacingTop: _Chart2.default.STACKED_SPACING_TOP,
         spacingBottom: _Chart2.default.SPACING_BOTTOM,
 
         zoomType: 'xy',
         resetZoomButton: _Chart2.default.fResetZoomButton()
       },
-      title: _Chart2.default.fTitle({ y: 45 }),
-      subtitle: _Chart2.default.fSubtitle({ y: 65 }),
+      title: _Chart2.default.fTitle({ y: _Chart2.default.STACKED_TITLE_Y }),
+      subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.STACKED_SUBTITLE_Y }),
       tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnStackedAreaPointFormatter),
 
       xAxis: _Chart2.default.fXAxisOpposite({

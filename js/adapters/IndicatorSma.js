@@ -177,7 +177,6 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
   var titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
 
   config.title = _ChartConfig2.default.fTitleMetric(id + titleNotFullPoint);
-  config.credits = _ChartConfig2.default.creditsMetric;
 
   config.chart.height = 140;
   config.chart.spacingTop = 8;

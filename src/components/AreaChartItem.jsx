@@ -232,7 +232,7 @@ const AreaChartItem = React.createClass({
     ) : undefined;
 
     return (
-      <div>
+      <div style={ {position: 'relative', height: '30px', backgroundColor: 'transparent', zIndex: 2} }>
          {_btIndicator}
          {_btAdd}
          {_btInfo}
@@ -324,10 +324,11 @@ const AreaChartItem = React.createClass({
           <SvgClose onClose={onCloseItem} />
         </div>
         <ShowHide isShow={isOpen}>
+           {isShowChart && this._createChartToolBar(config)}
            <ZhHighchart
               ref="chart"
               isShow={isShowChart}
-              toolBar={this._createChartToolBar(config)}
+              //toolBar={this._createChartToolBar(config)}
               config={config}
            />
            <PanelIndicator

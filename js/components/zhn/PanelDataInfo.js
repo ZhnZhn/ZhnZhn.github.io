@@ -24,7 +24,7 @@ var styles = {
   rootShow: {
     position: 'relative',
     display: 'block',
-    paddingTop: '24px',
+    paddingTop: '34px',
     paddingRight: '20px',
     paddingLeft: '8px'
   },

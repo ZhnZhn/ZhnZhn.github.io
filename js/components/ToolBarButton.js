@@ -13,26 +13,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ToolBarButton = _react2.default.createClass({
   displayName: 'ToolBarButton',
   render: function render() {
+    var _props = this.props;
+    var type = _props.type;
+    var style = _props.style;
+    var title = _props.title;
+    var caption = _props.caption;
+    var onClick = _props.onClick;
 
-    var className = void 0;
 
-    switch (this.props.type) {
+    var _className = void 0;
+    switch (type) {
       case 'TypeA':
-        className = 'button-type-a';break;
+        _className = 'button-type-a';break;
       case 'TypeC':
-        className = 'button-type-c';break;
+        _className = 'button-type-c';break;
       default:
-        className = 'button-type-b';
+        _className = 'button-type-b';
     }
 
     return _react2.default.createElement(
       'button',
       {
-        className: className,
-        title: this.props.title,
-        onClick: this.props.onClick
+        className: _className,
+        style: style,
+        title: title,
+        onClick: onClick
       },
-      this.props.caption
+      caption
     );
   }
 });

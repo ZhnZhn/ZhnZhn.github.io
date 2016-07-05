@@ -110,15 +110,17 @@ var HeaderBar = _react2.default.createClass({
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
-        caption: 'Settings',
-        title: 'Application settings',
-        onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
-      }),
-      _react2.default.createElement(_ToolBarButton2.default, {
-        type: 'TypeA',
+        style: { float: 'right', marginRight: '20px' },
         caption: 'About',
         title: 'Description about application ERC',
         onClick: _ComponentActions2.default.showAbout
+      }),
+      _react2.default.createElement(_ToolBarButton2.default, {
+        type: 'TypeA',
+        style: { float: 'right' },
+        caption: 'Settings',
+        title: 'Application settings',
+        onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
       })
     );
   }

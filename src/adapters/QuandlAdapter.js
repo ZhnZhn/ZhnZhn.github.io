@@ -58,7 +58,7 @@ const _fnCheckExtrems = function(result){
   ){
     result.minPoint = point[yPointIndex];
   }
-  
+
   return result
 }
 
@@ -248,7 +248,6 @@ const _fnCreateConfigATH = function(data, chartId){
   if (data.length>0){
     const config = _fnCreateIndicatorConfig();
     config.title = ChartConfig.fTitleMetric('ATH Chart');
-    config.credits = ChartConfig.creditsMetric;
 
     config.series[0].zhSeriaId = chartId + "_ATH";
     config.series[0].zhValueText = "ATH";
@@ -275,8 +274,7 @@ const _fnCreateConfigVolume = function(data, dataColumn, chartId){
   if (data.length>0){
     const config = ChartConfig.fBaseAreaConfig();
     config.title = ChartConfig.fTitleMetric('Volume Chart');
-    config.legend = ChartConfig.legendVolume;
-    config.credits = ChartConfig.creditsMetric;
+    config.legend = ChartConfig.legendVolume;    
 
     config.chart.height = 140;
     config.chart.spacingTop = 8;
@@ -325,7 +323,6 @@ const _fnCreateConfigHighLow = function(data, chartId){
   if (data.length>0){
     const config = _fnCreateIndicatorConfig();
     config.title = ChartConfig.fTitleMetric('HighLow Chart');
-    config.credits = ChartConfig.creditsMetric;
 
     config.series[0].zhSeriaId = chartId + '_HL';
     config.series[0].zhValueText = "HL";
@@ -397,7 +394,10 @@ const fnGetSeries = function(config, json, option){
    }
 
    _fnAddSeriesExDivident(config, dataExDividend, chartId);
-   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId)
+   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId);
+   if ( dataExDividend.length !== 0 || dataSplitRatio.length !== 0){
+     config.chart.spacingBottom = 40;
+   }
 
    config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn, chartId);
    config.zhATHConfig = _fnCreateConfigATH(dataATH, chartId);
@@ -415,7 +415,6 @@ const fnConfigAxes = function(result){
   config.yAxis.plotLines[1].label.text = ChartConfig.fnNumberFormat(minPoint);
   config.yAxis.opposite = true;
 
-  //config.xAxis = Object.assign({}, config.xAxis, fnGetXAxesConfig());
   config.xAxis = Chart.fXAxisOpposite(config.xAxis);
 
   return result

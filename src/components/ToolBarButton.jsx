@@ -3,22 +3,23 @@ import React from 'react';
 
 const ToolBarButton = React.createClass({
   render(){
+    const { type, style, title, caption, onClick} = this.props;
 
-    let className;
-
-    switch (this.props.type) {
-      case 'TypeA': className = 'button-type-a'; break;
-      case 'TypeC': className = 'button-type-c'; break;
-      default     : className = 'button-type-b';
+    let _className;
+    switch (type) {
+      case 'TypeA': _className = 'button-type-a'; break;
+      case 'TypeC': _className = 'button-type-c'; break;
+      default     : _className = 'button-type-b';
     }
 
     return (
       <button
-           className={className}
-           title={this.props.title}
-           onClick={this.props.onClick}
+           className={_className}
+           style={style}
+           title={title}
+           onClick={onClick}
        >
-         {this.props.caption}
+         {caption}
       </button>
     );
   }
