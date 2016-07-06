@@ -411,10 +411,23 @@ var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   }
 };
 
-var fnGetSeries = function fnGetSeries(config, json, option) {
-  var yPointIndex = option.dataColumn,
-      chartId = option.value;
+var _fnSetChartTitle = function _fnSetChartTitle(config, option) {
+  var title = option.title;
+  var subtitle = option.subtitle;
 
+  if (title) {
+    config.chart.spacingTop = _Chart2.default.STACKED_SPACING_TOP;
+    config.title = _Chart2.default.fTitle({ text: title, y: _Chart2.default.STACKED_TITLE_Y });
+    config.subtitle = _Chart2.default.fSubtitle({ text: subtitle, y: _Chart2.default.STACKED_SUBTITLE_Y });
+  }
+};
+
+var fnGetSeries = function fnGetSeries(config, json, option) {
+  var yPointIndex = option.dataColumn;
+  var chartId = option.value;
+
+
+  _fnSetChartTitle(config, option);
   config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
   config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
 
@@ -462,12 +475,13 @@ var fnConfigAxes = function fnConfigAxes(result) {
   var config = result.config;
   var minPoint = result.minPoint;
   var maxPoint = result.maxPoint;
+  var _maxPoint = parseFloat((0, _big2.default)(maxPoint).round(4).toString(), 10);
+  var _minPoint = parseFloat((0, _big2.default)(minPoint).round(4).toString(), 10);
 
-
-  config.yAxis.plotLines[0].value = maxPoint;
-  config.yAxis.plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(maxPoint);
-  config.yAxis.plotLines[1].value = minPoint;
-  config.yAxis.plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(minPoint);
+  config.yAxis.plotLines[0].value = _maxPoint;
+  config.yAxis.plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(_maxPoint);
+  config.yAxis.plotLines[1].value = _minPoint;
+  config.yAxis.plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(_minPoint);
   config.yAxis.opposite = true;
 
   config.xAxis = _Chart2.default.fXAxisOpposite(config.xAxis);

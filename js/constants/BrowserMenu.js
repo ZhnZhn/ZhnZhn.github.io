@@ -66,6 +66,9 @@ var menuQuandl = [{
 }, {
   caption: 'Futures',
   items: [{ id: _DialogType.Quandl.CHINA_DCE_FUTURE }, { id: _DialogType.Quandl.CHINA_ZCE_FUTURE }]
+}, {
+  caption: 'Real Estate',
+  items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }]
 }];
 
 var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.QUANDL)), _defineProperty(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);

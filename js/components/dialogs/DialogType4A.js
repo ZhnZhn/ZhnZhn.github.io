@@ -137,7 +137,6 @@ var DialogType4A = _react2.default.createClass(_extends({
     var _props3 = this.props;
     var oneCaption = _props3.oneCaption;
     var twoCaption = _props3.twoCaption;
-    var threeCaption = _props3.threeCaption;
 
     var msg = [];
 
@@ -174,7 +173,9 @@ var DialogType4A = _react2.default.createClass(_extends({
       fromDate: fromDate,
       toDate: toDate,
       dataColumn: dataColumn,
-      loadId: loadId
+      loadId: loadId,
+      title: this.one.caption,
+      subtitle: this.two.caption
     };
   },
   _handlerClose: function _handlerClose() {
@@ -190,7 +191,6 @@ var DialogType4A = _react2.default.createClass(_extends({
     var twoCaption = _props5.twoCaption;
     var isShow = _props5.isShow;
     var onShow = _props5.onShow;
-    var onClose = _props5.onClose;
     var initFromDate = _props5.initFromDate;
     var initToDate = _props5.initToDate;
     var msgOnNotValidFormat = _props5.msgOnNotValidFormat;

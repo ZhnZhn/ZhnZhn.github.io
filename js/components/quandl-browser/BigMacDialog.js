@@ -135,6 +135,7 @@ var BigMacDialog = _react2.default.createClass(_extends({
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
     var _dataColumn = this.metric ? this.metric.value : 1;
+    var _subtitle = this.metric ? this.metric.caption : this.state.optionMetrics[0].caption;
     var _props3 = this.props;
     var loadId = _props3.loadId;
     var fnValue = _props3.fnValue;
@@ -145,7 +146,9 @@ var BigMacDialog = _react2.default.createClass(_extends({
       toDate: toDate,
       dataColumn: _dataColumn,
       itemCaption: this.country.caption,
-      loadId: loadId
+      loadId: loadId,
+      title: this.country.caption,
+      subtitle: _subtitle
     };
   },
   _handlerClose: function _handlerClose() {
@@ -158,7 +161,6 @@ var BigMacDialog = _react2.default.createClass(_extends({
     var _props4 = this.props;
     var isShow = _props4.isShow;
     var onShow = _props4.onShow;
-    var onClose = _props4.onClose;
     var initFromDate = _props4.initFromDate;
     var initToDate = _props4.initToDate;
     var msgOnNotValidFormat = _props4.msgOnNotValidFormat;

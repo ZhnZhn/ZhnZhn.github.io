@@ -54,11 +54,11 @@ export const fnCreateValueMoving = function({
     _direction = Direction.EQUAL;
   }
 
-  _bDelta = _bDelta.abs();
+  _bDelta = _bDelta.abs().round(4);
 
   const _bPercent = fnCreatePercent({bValue:_bDelta, bTotal: bPrevValue});
 
-  let _bNowValue = Big(bNowValue);
+  let _bNowValue = Big(bNowValue).round(4);
   if ( _bNowValue.gt('1000000') ){
     _bNowValue = bNowValue.toFixed(0);
     _bDelta = _bDelta.toFixed(0);

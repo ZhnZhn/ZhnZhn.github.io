@@ -93,6 +93,9 @@ var _rFnValue = {
   },
   RPrefixTwoOne: function RPrefixTwoOne(prefix, one, two) {
     return prefix + '/' + two + '_' + one;
+  },
+  RZill: function RZill(one, two, three) {
+    return 'ZILL/' + two + three + '_' + one;
   }
 };
 

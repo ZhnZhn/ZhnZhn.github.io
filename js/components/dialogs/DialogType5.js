@@ -188,27 +188,43 @@ var DialogType5 = _react2.default.createClass(_extends({
     var toDate = _datesFragment$getVal2.toDate;
     var _props5 = this.props;
     var fnValue = _props5.fnValue;
-    var isTreeItem = _props5.isTreeItem;
+    var fnValueType = _props5.fnValueType;
     var dataColumn = _props5.dataColumn;
     var loadId = _props5.loadId;
 
-    if (!isTreeItem) {
-      var _dataColumn = this.three ? this.three.value : 1;
-      return {
-        value: fnValue(this.one.value, this.two.value),
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn: _dataColumn,
-        loadId: loadId
-      };
-    } else {
-      return {
-        value: fnValue(this.one.value, this.three.value),
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn: dataColumn,
-        loadId: loadId
-      };
+
+    switch (fnValueType) {
+      case 'TreeItem':
+        return {
+          value: fnValue(this.one.value, this.three.value),
+          fromDate: fromDate,
+          toDate: toDate,
+          dataColumn: dataColumn,
+          loadId: loadId,
+          title: this.one.caption + ':' + this.two.caption,
+          subtitle: this.three.caption
+        };
+      case 'PlusTreeItem':
+        return {
+          value: fnValue(this.one.value, this.two.value, this.three.value),
+          fromDate: fromDate,
+          toDate: toDate,
+          dataColumn: dataColumn,
+          loadId: loadId,
+          title: this.two.caption + ':' + this.three.caption,
+          subtitle: this.one.caption
+        };
+      default:
+        var _dataColumn = this.three ? this.three.value : 1;
+        return {
+          value: fnValue(this.one.value, this.two.value),
+          fromDate: fromDate,
+          toDate: toDate,
+          dataColumn: _dataColumn,
+          loadId: loadId,
+          title: this.one.caption + ':' + this.two.caption,
+          subtitle: this.three.caption
+        };
     }
   },
   _handlerClose: function _handlerClose() {
@@ -225,7 +241,6 @@ var DialogType5 = _react2.default.createClass(_extends({
     var threeCaption = _props6.threeCaption;
     var isShow = _props6.isShow;
     var onShow = _props6.onShow;
-    var onClose = _props6.onClose;
     var initFromDate = _props6.initFromDate;
     var initToDate = _props6.initToDate;
     var msgOnNotValidFormat = _props6.msgOnNotValidFormat;

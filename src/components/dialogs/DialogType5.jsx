@@ -142,26 +142,42 @@ const DialogType5 = React.createClass({
      return msg;
   },
   _createLoadOption(){
-    const {fromDate, toDate} = this.datesFragment.getValues()
-        , {fnValue, isTreeItem, dataColumn, loadId} = this.props;
-    if (!isTreeItem){
-      const _dataColumn = (this.three) ? this.three.value : 1;
-      return {
-         value : fnValue(this.one.value, this.two.value),
-         fromDate: fromDate,
-         toDate: toDate,
-         dataColumn : _dataColumn,
-         loadId : loadId
-      }
-    } else {
-      return {
-        value : fnValue(this.one.value, this.three.value),
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn : dataColumn,
-        loadId : loadId
-      }
-    }
+    const { fromDate, toDate } = this.datesFragment.getValues()
+        , { fnValue, fnValueType, dataColumn, loadId } = this.props;
+
+    switch (fnValueType) {
+      case 'TreeItem':
+          return {
+            value : fnValue(this.one.value, this.three.value),
+            fromDate: fromDate,
+            toDate: toDate,
+            dataColumn : dataColumn,
+            loadId : loadId,
+            title : `${this.one.caption}:${this.two.caption}`,
+            subtitle : this.three.caption
+          }
+     case 'PlusTreeItem':
+         return {
+           value : fnValue(this.one.value, this.two.value, this.three.value),
+           fromDate: fromDate,
+           toDate: toDate,
+           dataColumn : dataColumn,
+           loadId : loadId,
+           title : `${this.two.caption}:${this.three.caption}`,
+           subtitle : this.one.caption
+         }
+     default:
+         const _dataColumn = (this.three) ? this.three.value : 1;
+         return {
+           value : fnValue(this.one.value, this.two.value),
+           fromDate: fromDate,
+           toDate: toDate,
+           dataColumn : _dataColumn,
+           loadId : loadId,
+           title : `${this.one.caption}:${this.two.caption}`,
+           subtitle : this.three.caption
+         }
+    }    
   },
   _handlerClose(){
     this._handlerWithValidationClose(this._createValidationMessages);
@@ -172,7 +188,7 @@ const DialogType5 = React.createClass({
   render(){
     const {
            caption, oneCaption, twoCaption, threeCaption,
-           isShow, onShow, onClose,
+           isShow, onShow,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {

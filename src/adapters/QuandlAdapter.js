@@ -274,7 +274,7 @@ const _fnCreateConfigVolume = function(data, dataColumn, chartId){
   if (data.length>0){
     const config = ChartConfig.fBaseAreaConfig();
     config.title = ChartConfig.fTitleMetric('Volume Chart');
-    config.legend = ChartConfig.legendVolume;    
+    config.legend = ChartConfig.legendVolume;
 
     config.chart.height = 140;
     config.chart.spacingTop = 8;
@@ -364,11 +364,19 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
   }
 };
 
+const _fnSetChartTitle = function(config, option){
+  const { title, subtitle } = option;
+  if (title){
+    config.chart.spacingTop = Chart.STACKED_SPACING_TOP;
+    config.title = Chart.fTitle({ text: title, y:Chart.STACKED_TITLE_Y });
+    config.subtitle = Chart.fSubtitle({ text: subtitle, y:Chart.STACKED_SUBTITLE_Y });
+  }
+}
 
 const fnGetSeries = function(config, json, option){
-   const yPointIndex = option.dataColumn
-       , chartId = option.value;
+   const { dataColumn:yPointIndex, value:chartId } = option;
 
+   _fnSetChartTitle(config, option);
    config.zhConfig = fnCreateZhConfig(option);
    config.info = fnCreateDatasetInfo(json);
 
@@ -407,12 +415,14 @@ const fnGetSeries = function(config, json, option){
 }
 
 const fnConfigAxes = function(result){
-  const {config, minPoint, maxPoint} = result;
+  const {config, minPoint, maxPoint} = result
+      , _maxPoint = parseFloat(Big(maxPoint).round(4).toString(), 10)
+      , _minPoint = parseFloat(Big(minPoint).round(4).toString(), 10)
 
-  config.yAxis.plotLines[0].value = maxPoint;
-  config.yAxis.plotLines[0].label.text = ChartConfig.fnNumberFormat(maxPoint);
-  config.yAxis.plotLines[1].value = minPoint;
-  config.yAxis.plotLines[1].label.text = ChartConfig.fnNumberFormat(minPoint);
+  config.yAxis.plotLines[0].value = _maxPoint;
+  config.yAxis.plotLines[0].label.text = ChartConfig.fnNumberFormat(_maxPoint);
+  config.yAxis.plotLines[1].value = _minPoint;
+  config.yAxis.plotLines[1].label.text = ChartConfig.fnNumberFormat(_minPoint);
   config.yAxis.opposite = true;
 
   config.xAxis = Chart.fXAxisOpposite(config.xAxis);

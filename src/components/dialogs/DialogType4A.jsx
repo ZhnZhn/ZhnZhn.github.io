@@ -107,7 +107,7 @@ const DialogType4A = React.createClass({
     );
   },
   _createValidationMessages(){
-     const {oneCaption, twoCaption, threeCaption} = this.props;
+     const { oneCaption, twoCaption } = this.props;
      let msg = [];
 
      if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
@@ -126,7 +126,9 @@ const DialogType4A = React.createClass({
          fromDate: fromDate,
          toDate: toDate,
          dataColumn : dataColumn,
-         loadId : loadId
+         loadId : loadId,
+         title : this.one.caption,
+         subtitle : this.two.caption
       }
   },
   _handlerClose(){
@@ -138,7 +140,7 @@ const DialogType4A = React.createClass({
   render(){
     const {
            caption, oneCaption, twoCaption,
-           isShow, onShow, onClose,
+           isShow, onShow,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {

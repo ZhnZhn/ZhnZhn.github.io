@@ -30,8 +30,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _highchartsMore2.default)(_highcharts2.default);
 (0, _treemap2.default)(_highcharts2.default);
-
 _highcharts2.default.setOptions(_ChartConfig2.default.theme);
+
+_highcharts2.default.wrap(_highcharts2.default.Chart.prototype, 'showCredits', function (next, credits) {
+  next.call(this, credits);
+
+  if (credits.enabled) {
+    this.credits.element.onclick = function () {
+      var link = document.createElement('a');
+      link.rel = "noopener noreferrer";
+      link.target = credits.targer;
+      link.href = credits.href;
+      link.click();
+    };
+  }
+});
 
 var _fnRemoveSpinner = function _fnRemoveSpinner() {
   document.body.removeChild(document.getElementById('spinner'));

@@ -83,11 +83,11 @@ var fnCreateValueMoving = exports.fnCreateValueMoving = function fnCreateValueMo
     _direction = _Type.Direction.EQUAL;
   }
 
-  _bDelta = _bDelta.abs();
+  _bDelta = _bDelta.abs().round(4);
 
   var _bPercent = fnCreatePercent({ bValue: _bDelta, bTotal: bPrevValue });
 
-  var _bNowValue = (0, _big2.default)(bNowValue);
+  var _bNowValue = (0, _big2.default)(bNowValue).round(4);
   if (_bNowValue.gt('1000000')) {
     _bNowValue = bNowValue.toFixed(0);
     _bDelta = _bDelta.toFixed(0);

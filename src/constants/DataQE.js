@@ -90,7 +90,6 @@ const DataQE = {
       dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/wb-development-indicator.html',
-        isTreeItem : true,
         nInitFromDate : 7,
         oneCaption : 'Country',
         oneURI : './data/quandl/iso3-countries.json',
@@ -99,6 +98,7 @@ const DataQE = {
         twoURI : './data/quandl/wb-metric-groups.json',
         twoJsonProp : 'groups',
         threeCaption : 'Metric',
+        fnValueType : 'TreeItem',
         valueFn : 'RPrefixOneTwo',
         valueFnPrefix : 'WWDI',
         //fnValue : (country, metric) => `WWDI/${country}_${metric}`
@@ -114,7 +114,6 @@ const DataQE = {
       dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/imf-crosscountry-metric.html',
-        isTreeItem : true,
         nInitFromDate : 7,
         oneCaption : 'Country',
         oneURI : './data/quandl/iso3-countries.json',
@@ -123,6 +122,7 @@ const DataQE = {
         twoURI : './data/quandl/imf-metric-groups.json',
         twoJsonProp : 'groups',
         threeCaption : 'Metric',
+        fnValueType : 'TreeItem',
         valueFn : 'RPrefixOneTwo',
         valueFnPrefix : 'ODA',
         //fnValue : (country, metric) => `ODA/${country}_${metric}`
@@ -238,6 +238,28 @@ const DataQE = {
         loadId : 'Q'
       },
       dataColumn : 5
+  },
+  QE_ZILLOW_REAL_ESTATE : {
+      type : 'QE_ZILLOW_REAL_ESTATE',
+      menuTitle : 'Zillow Research',
+      dialogCaption : 'Zillow Real Estate Research',
+      chartContainerCaption : 'Quandl Zillow Real Estate Research',
+      dialogType : 'DialogType5',
+      dialogProps : {
+        descrUrl: './data/quandl/zillow.html',
+        nInitFromDate : 10,
+        oneCaption : 'Indicator',
+        oneURI : './data/quandl/zillow-indicators.json',
+        oneJsonProp : 'indicators',
+        twoCaption : 'Area Type',
+        twoURI : './data/quandl/zillow-area.json',
+        twoJsonProp : 'places',
+        threeCaption : 'Area Code',
+        fnValueType : 'PlusTreeItem',
+        valueFn : 'RZill',
+        loadId : 'Q'
+      },
+      dataColumn : 1
   }
 
 };

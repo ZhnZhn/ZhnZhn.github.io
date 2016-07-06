@@ -41,7 +41,9 @@ const qeSources = [
   'UNICORN_RESEARCH',
 
   'CHINA_DCE_FUTURE',
-  'CHINA_ZCE_FUTURE'
+  'CHINA_ZCE_FUTURE',
+
+  'ZILLOW_REAL_ESTATE'
 ];
 const Quandl = createTypeObject(qeSources, 'QE');
 

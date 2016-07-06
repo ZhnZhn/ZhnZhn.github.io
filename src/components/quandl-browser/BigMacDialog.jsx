@@ -102,6 +102,9 @@ const BigMacDialog = React.createClass({
   _createLoadOption(){
     const {fromDate, toDate} = this.datesFragment.getValues()
         , _dataColumn = (this.metric) ? this.metric.value : 1
+        , _subtitle = (this.metric)
+              ? this.metric.caption
+              : this.state.optionMetrics[0].caption
         , {loadId, fnValue} = this.props;
     return {
        value : fnValue(this.country.value),
@@ -109,7 +112,9 @@ const BigMacDialog = React.createClass({
        toDate: toDate,
        dataColumn : _dataColumn,
        itemCaption : this.country.caption,
-       loadId : loadId
+       loadId : loadId,
+       title : this.country.caption,
+       subtitle : _subtitle
     }
   },
   _handlerClose(){
@@ -120,7 +125,7 @@ const BigMacDialog = React.createClass({
 
   render(){
     const {
-           isShow, onShow, onClose,
+           isShow, onShow,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {

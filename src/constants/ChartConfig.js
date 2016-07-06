@@ -42,7 +42,9 @@ ChartConfig.theme = {
           x: -10,
           verticalAlign: 'bottom',
           y: -5
-      }
+      },
+      target : '_blank',
+      href : 'http://www.highcharts.com'
     },
     chart : {
       //width: 600,
