@@ -25,8 +25,10 @@ var styles = {
 var SvgCheckBox = _react2.default.createClass({
   displayName: 'SvgCheckBox',
   getInitialState: function getInitialState() {
-    var isOnCheck = typeof this.props.onCheck === 'function' ? true : false;
-    var isOnUnCheck = typeof this.props.onUnCheck === 'function' ? true : false;
+    var isOnCheck = typeof this.props.onCheck === 'function' ? true : false,
+        isOnUnCheck = typeof this.props.onUnCheck === 'function' ? true : false;
+
+    this.chartType = this.props.chartType ? this.props.chartType : 'Uknown';
     return {
       isChecked: false,
       isOnCheck: isOnCheck,

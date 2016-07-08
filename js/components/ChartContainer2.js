@@ -138,6 +138,7 @@ var ChartContainer2 = _react2.default.createClass({
       return _react2.default.createElement(_AreaChartItem2.default, {
         ref: 'chart' + index,
         key: id,
+        chartType: chartType,
         caption: id,
         config: config,
         onSetActive: _ComponentActions2.default.setActiveCheckbox,

@@ -52,7 +52,10 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
     option.alertCaption = caption;
     option.alertDescr = descr;
     onFailed(option);
-    option.onFailed();
+    
+    if ( typeof option.onFailed === 'function'){
+      option.onFailed();
+    }
   }
 }
 

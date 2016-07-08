@@ -21,7 +21,8 @@ const styles = {
   },
   dateSpan : {
     marginLeft: '10px',
-    color : '#2F7ED8',
+    //color : '#2F7ED8',
+    color: '#FDB316',
     fontWeight : 'bold'
   },
   up : {

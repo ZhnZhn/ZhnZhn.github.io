@@ -1,9 +1,6 @@
 import Highcharts from 'highcharts';
-
-import React from 'react';
 import { render } from 'react-dom';
 
-import { Sparklines } from '../components/zhnSparklines/Sparklines';
 import SparkFactory from '../components/factories/SparkFactory';
 
 const SPARKLINES_SUFFIX_ID = 'sparklines'
@@ -36,7 +33,7 @@ const _fnTooltipSparkType4 = function({
   <div class="tp__body__part1" style="width:${fullWidth}px;" >
     <div style="float:left;padding-right:10px;width:${width}px;">
       <span class="tp__body__title">Year: </span>
-      <span class="tp__body__value">${year}</span></br>
+      <span class="tp__body__year">${year}</span></br>
       <span class="tp__body__title">Value: </span>
       <span class="tp__body__value">${value}</span></br>
     </div>
@@ -103,10 +100,10 @@ const _fnATHTooltip = function({date, id, value, point}){
    return _fnTooltipHeader(date, id) +
    `<div class="tp__body">
    <span class="tp__body__title">ATH: </span>
-   <span class="tp__body__value">${point.y}%</span><br/>
-   <span class="tp__body__title">Close: </span>
-   <span class="tp__body__value">${point.close}</span>
-   <span class="tp__body__title"> Open: </span>
+   <span class="tp__body__value" style="color:${point.color};">${point.y}%</span><br/>
+   <span class="tp__body__title">Prev Close: </span>
+   <span class="tp__body__value">${point.close}</span><br/>
+   <span class="tp__body__title">Next Open: </span>
    <span class="tp__body__value">${point.open}</span><br/>
    </div>`
 }
@@ -114,10 +111,12 @@ const _fnATHTooltip = function({date, id, value, point}){
 const _fnHighLowTooltip = function({date, id, value, point}){
   return _fnTooltipHeader(date, id) +
   `<div class="tp__body">
+  <span class="tp__body__title">Open: </span>
+  <span class="tp__body__value">${point.open}</span><br/>
   <span class="tp__body__title">Day High: </span>
-  <span class="tp__body__value">${point.dayHigh}</span></br>
+  <span class="tp__body__value">${point.dayHigh}</span><br/>
   <span class="tp__body__title">Day Low: </span>
-  <span class="tp__body__value">${point.dayLow}</span></br>
+  <span class="tp__body__value">${point.dayLow}</span><br/>
   <span class="tp__body__title">Close: </span>
   <span class="tp__body__value">${point.close}</span>
   </div>`

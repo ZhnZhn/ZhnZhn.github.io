@@ -322,17 +322,18 @@ var AreaChartItem = _react2.default.createClass({
   },
   render: function render() {
     var _props2 = this.props;
+    var chartType = _props2.chartType;
     var caption = _props2.caption;
     var config = _props2.config;
     var onCloseItem = _props2.onCloseItem;
     var itemCaption = config.zhConfig.itemCaption;
-    var _itemCaption = itemCaption ? itemCaption : caption;var _state4 = this.state;
+    var _itemCaption = itemCaption ? itemCaption : caption;
+    var _state4 = this.state;
     var isOpen = _state4.isOpen;
     var isShowChart = _state4.isShowChart;
     var isShowInfo = _state4.isShowInfo;
     var isShowIndicator = _state4.isShowIndicator;
     var mfiConfigs = _state4.mfiConfigs;
-
     var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
     return _react2.default.createElement(
@@ -343,6 +344,7 @@ var AreaChartItem = _react2.default.createClass({
         { style: styles.headerDiv },
         _react2.default.createElement(_SvgCheckBox2.default, {
           rootStyle: styles.checkBoxStyle,
+          chartType: chartType,
           onCheck: this._fnOnCheck,
           onUnCheck: this._fnOnUnCheck
         }),
@@ -367,9 +369,8 @@ var AreaChartItem = _react2.default.createClass({
         isShowChart && this._createChartToolBar(config),
         _react2.default.createElement(_ZhHighchart2.default, {
           ref: 'chart',
-          isShow: isShowChart
-          //toolBar={this._createChartToolBar(config)}
-          , config: config
+          isShow: isShowChart,
+          config: config
         }),
         _react2.default.createElement(_PanelIndicator2.default, {
           isShow: isShowIndicator,

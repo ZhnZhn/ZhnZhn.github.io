@@ -208,6 +208,7 @@ var _fnAddHighLow = function _fnAddHighLow(result) {
 
 
   var closeValue = point[yPointIndex],
+      openValue = point[1] ? point[1] : 'Uknown',
       bHigh = point[2] ? (0, _big2.default)(point[2]).minus(closeValue) : (0, _big2.default)('0.0'),
       bLow = point[3] ? (0, _big2.default)(point[3]).minus(closeValue) : (0, _big2.default)('0.0'),
       high = point[2] ? point[2] : 'Uknown',
@@ -217,10 +218,10 @@ var _fnAddHighLow = function _fnAddHighLow(result) {
     x: dateUTC,
     high: parseFloat(bHigh),
     low: parseFloat(bLow),
+    open: openValue,
     dayHigh: high,
     dayLow: low,
     close: closeValue
-    //color : (point[2] && point[3]) ? undefined : 'white'
   });
 
   return result;
@@ -273,6 +274,7 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex) {
   }
 
   result.zhPoints = points;
+  result.minY = _Chart2.default.calcMinY(result);
 
   return result;
 };
@@ -281,13 +283,17 @@ var _fnCreateIndicatorConfig = function _fnCreateIndicatorConfig() {
 
   var config = _ChartConfig2.default.fBaseAreaConfig();
 
-  config.chart.height = 140;
+  config.chart.height = 160;
   config.chart.spacingTop = 8;
   config.chart.spacingBottom = 10;
   config.chart.zoomType = undefined;
 
   config.yAxis.opposite = true;
   config.yAxis.plotLines = [];
+
+  config.yAxis.startOnTick = true;
+  config.yAxis.endOnTick = true;
+  config.yAxis.tickPixelInterval = 60;
 
   return config;
 };
@@ -320,17 +326,13 @@ var _fnCreateConfigATH = function _fnCreateConfigATH(data, chartId) {
 
 var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn, chartId) {
   if (data.length > 0) {
-    var config = _ChartConfig2.default.fBaseAreaConfig();
-    config.title = _ChartConfig2.default.fTitleMetric('Volume Chart');
+    var config = _fnCreateIndicatorConfig();
+    config.chart.height = 160;
+    config.yAxis.endOnTick = false;
+    config.yAxis.tickPixelInterval = 40;
+
+    config.title = _ChartConfig2.default.fTitleMetric('Volume Chart:');
     config.legend = _ChartConfig2.default.legendVolume;
-
-    config.chart.height = 140;
-    config.chart.spacingTop = 8;
-    config.chart.spacingBottom = 10;
-    config.chart.zoomType = undefined;
-
-    config.yAxis.opposite = true;
-    config.yAxis.plotLines = [];
 
     config.series[0].data = data;
     config.series[0].name = "Spline";
@@ -378,6 +380,7 @@ var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data, chartId) {
     config.series[0].name = "HL";
     config.series[0].visible = true;
     config.series[0].type = "arearange";
+    config.series[0].color = '#2D7474';
 
     config.series[0].tooltip = {
       pointFormatter: _Tooltip2.default.fnHighLowPointFormatter,
@@ -390,14 +393,22 @@ var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data, chartId) {
   }
 };
 
-var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, chartId) {
+var _fnSetYForPoints = function _fnSetYForPoints(data, y) {
+  for (var i = 0, max = data.length; i < max; i++) {
+    data[i].y = y;
+  }
+};
+
+var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, chartId, y) {
   if (data.length > 0) {
+    _fnSetYForPoints(data, y);
     config.series.push(_ChartConfig2.default.fExDividendSeria(data, chartId));
   }
 };
 
-var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chartId) {
+var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chartId, y) {
   if (data.length > 0) {
+    _fnSetYForPoints(data, y);
     config.series.push(_ChartConfig2.default.fSplitRatioSeria(data, chartId));
   }
 };
@@ -436,6 +447,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   var seria = _fnSeriesPipe2.seria;
   var minPoint = _fnSeriesPipe2.minPoint;
   var maxPoint = _fnSeriesPipe2.maxPoint;
+  var minY = _fnSeriesPipe2.minY;
   var dataExDividend = _fnSeriesPipe2.dataExDividend;
   var dataSplitRatio = _fnSeriesPipe2.dataSplitRatio;
   var dataVolume = _fnSeriesPipe2.dataVolume;
@@ -458,8 +470,8 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
     afterSetExtremes: _ChartConfig2.default.zoomMetricCharts
   };
 
-  _fnAddSeriesExDivident(config, dataExDividend, chartId);
-  _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId);
+  _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
+  _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
   if (dataExDividend.length !== 0 || dataSplitRatio.length !== 0) {
     config.chart.spacingBottom = 40;
   }
@@ -468,13 +480,14 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.zhATHConfig = _fnCreateConfigATH(dataATH, chartId);
   config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow, chartId);
 
-  return { config: config, minPoint: minPoint, maxPoint: maxPoint };
+  return { config: config, minPoint: minPoint, maxPoint: maxPoint, minY: minY };
 };
 
 var fnConfigAxes = function fnConfigAxes(result) {
   var config = result.config;
   var minPoint = result.minPoint;
   var maxPoint = result.maxPoint;
+  var minY = result.minY;
   var _maxPoint = parseFloat((0, _big2.default)(maxPoint).round(4).toString(), 10);
   var _minPoint = parseFloat((0, _big2.default)(minPoint).round(4).toString(), 10);
 
@@ -483,6 +496,7 @@ var fnConfigAxes = function fnConfigAxes(result) {
   config.yAxis.plotLines[1].value = _minPoint;
   config.yAxis.plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(_minPoint);
   config.yAxis.opposite = true;
+  config.yAxis.min = minY;
 
   config.xAxis = _Chart2.default.fXAxisOpposite(config.xAxis);
 
@@ -506,6 +520,23 @@ QuandlAdapter.toConfig = function (json, option) {
   return _rToConfig[seriaType](json, option);
 };
 
+var _fnFindMinY = function _fnFindMinY() {
+  var data = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+  var minY = Number.POSITIVE_INFINITY;
+  for (var i = 0, max = data.length; i < max; i++) {
+    if (data[i][1] < minY) {
+      minY = data[i][1];
+    }
+  }
+
+  if (minY !== Number.POSITIVE_INFINITY) {
+    return minY;
+  } else {
+    return undefined;
+  }
+};
+
 QuandlAdapter.toSeries = function (json, option) {
   var yPointIndex = option.dataColumn,
       chartId = option.value,
@@ -523,6 +554,7 @@ QuandlAdapter.toSeries = function (json, option) {
   configSeries.zhSeriaId = parentId + '_' + chartId;
   configSeries.zhValueText = valueText;
   configSeries.data = data;
+  configSeries.minY = _fnFindMinY(data);
 
   return configSeries;
 };

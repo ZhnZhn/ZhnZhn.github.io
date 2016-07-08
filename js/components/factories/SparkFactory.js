@@ -23,7 +23,7 @@ var SparkFactory = {
             svgWidth: 100,
             data: data
          },
-         _react2.default.createElement(_Sparklines.SparklinesLine, { color: 'rgba(194,149,23,1)' }),
+         _react2.default.createElement(_Sparklines.SparklinesLine, { color: 'yellow' }),
          _react2.default.createElement(_Sparklines.SparklinesReferenceLine, {
             style: { stroke: 'red', strokeOpacity: .75, strokeDasharray: '5, 3' },
             type: 'avg'
@@ -45,7 +45,7 @@ var SparkFactory = {
             max: 100
          },
          _react2.default.createElement(_Sparklines.SparklinesBars, {
-            style: { stroke: "black", strokeWidth: "1", fill: "rgba(194,149,23,1)", fillOpacity: "0.9" },
+            style: { stroke: "black", strokeWidth: "1", fill: "yellow", fillOpacity: "0.9" },
             pointIndex: pointIndex
          })
       );

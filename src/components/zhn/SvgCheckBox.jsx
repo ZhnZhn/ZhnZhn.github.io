@@ -15,8 +15,10 @@ const styles = {
 const SvgCheckBox = React.createClass({
 
   getInitialState(){
-    const isOnCheck = (typeof this.props.onCheck === 'function') ? true : false;
-    const isOnUnCheck = (typeof this.props.onUnCheck === 'function') ? true : false;
+    const isOnCheck = (typeof this.props.onCheck === 'function') ? true : false
+        , isOnUnCheck = (typeof this.props.onUnCheck === 'function') ? true : false;
+
+    this.chartType = (this.props.chartType) ? this.props.chartType : 'Uknown';
     return {
       isChecked: false,
       isOnCheck,
@@ -76,7 +78,7 @@ const SvgCheckBox = React.createClass({
 
   setUnchecked(){
     this.setState({isChecked : false});
-  },
+  }
 
 })
 

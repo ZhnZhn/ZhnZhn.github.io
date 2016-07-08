@@ -293,20 +293,21 @@ const AreaChartItem = React.createClass({
   },
 
   render(){
-    const {caption, config, onCloseItem} = this.props
+    const { chartType, caption, config, onCloseItem } = this.props
         , {itemCaption} = config.zhConfig
-        , _itemCaption = (itemCaption) ? itemCaption : caption;
-    const {
+        , _itemCaption = (itemCaption) ? itemCaption : caption
+        , {
             isOpen, isShowChart, isShowInfo, isShowIndicator,
             mfiConfigs
-          } = this.state;
-    const _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
+        } = this.state
+        , _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
     return (
       <div style={styles.rootDiv}>
         <div style={styles.headerDiv}>
           <SvgCheckBox
              rootStyle={styles.checkBoxStyle}
+             chartType={chartType}
              onCheck={this._fnOnCheck}
              onUnCheck={this._fnOnUnCheck}
           />
@@ -327,8 +328,7 @@ const AreaChartItem = React.createClass({
            {isShowChart && this._createChartToolBar(config)}
            <ZhHighchart
               ref="chart"
-              isShow={isShowChart}
-              //toolBar={this._createChartToolBar(config)}
+              isShow={isShowChart}              
               config={config}
            />
            <PanelIndicator

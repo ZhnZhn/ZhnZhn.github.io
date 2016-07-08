@@ -105,6 +105,7 @@ const ChartContainer2 = React.createClass({
          <AreaChartItem
              ref={'chart' + index}
              key={id}
+             chartType={chartType}
              caption={id}
              config={config}
              onSetActive={ComponentActions.setActiveCheckbox}

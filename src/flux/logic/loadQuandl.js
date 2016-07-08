@@ -56,12 +56,13 @@ const fnFetchToChart = function({json, option, onCompleted}){
 
 const _fnAddSeriesToChart = function(chart, series, label){
   const options = chart.options;
+
   //12symbols
   const seriesText = (label.length>12) ? label.substring(0,12) : label
       , seriesCount = options.zhSeries.count
       , row = Math.floor(seriesCount/3)
-      , x = 110 + 100*seriesCount - row*300
-      , y = 55 + 15*row;
+      , x = 145 + 100*seriesCount - row*300
+      , y = 95 + 15*row;
 
   chart.addSeries(series, true, true);
   chart.renderer.text(seriesText, x, y)
@@ -69,6 +70,10 @@ const _fnAddSeriesToChart = function(chart, series, label){
         .add();
 
    options.zhSeries.count +=1;
+
+   if ( (series.minY !== undefined) && options.yAxis[0].min>series.minY ){
+      chart.yAxis[0].update({ min: series.minY, startOnTick: true });
+   }
 }
 
 

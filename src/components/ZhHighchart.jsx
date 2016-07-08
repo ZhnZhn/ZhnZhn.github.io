@@ -18,15 +18,17 @@ const ZhHighchart = React.createClass({
   displayName: 'ZhHighchart',
 
   componentDidMount(){
-    this.renderChart(this.props.config);
-    if (this.props.onLoaded){
-      this.props.onLoaded(this.chart);
+    const { config, onLoaded } = this.props;
+    this.renderChart(config);
+    if ( typeof onLoaded === 'function' ){
+      onLoaded(this.chart);
     }
   },
 
   componentWillUnmount(){
-    if (this.props.onWillUnLoaded){
-      this.props.onWillUnLoaded(this.chart);
+    const { onWillUnLoaded } = this.props;
+    if ( typeof onWillUnLoaded === 'function' ){
+      onWillUnLoaded(this.chart);
     }
   },
 
@@ -50,12 +52,11 @@ const ZhHighchart = React.createClass({
   },
 
   render() {
-    const { isShow, toolBar } = this.props;
-    const _styleRootDiv = isShow ?
-                 styles.rootDivShow : styles.rootDivHide;
-     return (
+    const { isShow } = this.props
+        , _styleRootDiv = isShow ? styles.rootDivShow : styles.rootDivHide;
+
+    return (
        <div style={_styleRootDiv}>
-          {toolBar}
           <div ref="chart">
           </div>
         </div>

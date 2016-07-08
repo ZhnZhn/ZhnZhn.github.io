@@ -143,6 +143,10 @@ const Chart = {
     }, option)
   },
 
+  calcMinY({ minPoint, maxPoint }){
+    return minPoint - ((maxPoint-minPoint)*30/180)
+  },
+
   fPlotOptionsArea(option={}){
     return merge({
       lineColor: 'yellow',

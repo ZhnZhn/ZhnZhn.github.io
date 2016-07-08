@@ -43,6 +43,15 @@ const ComponentSlice = {
        this.activeChart = null;
      }
   },
+  uncheckActiveCheckbox(chartType){
+    if ( this.activeCheckbox
+         && this.activeCheckbox.chartType === chartType
+    ){
+       this.activeCheckbox.setUnchecked();
+       this.activeCheckbox = null;
+       this.activeChart = null;
+    }
+  },
 
   onShowModalDialog(modalDialogType, option={}){
     option.modalDialogType = modalDialogType;

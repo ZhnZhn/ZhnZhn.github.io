@@ -133,33 +133,35 @@ ChartConfig.theme = {
     pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
   },
   xAxis: {
-    lineColor: "rgba(194,149,23,1)",
+    lineColor: "gray",
     lineWidth: 3,
-    tickColor: "rgba(194,149,23,1)",
+    tickColor: '#FDB316',
     tickWidth: 3,
     tickLenght: 5,
-    gridLineColor: "rgba(194,149,23,1)",
+    gridLineColor: "gray",
+    //gridLineColor: '#FDB316',
     gridLineDashStyle: "ShortDashDotDot",
     gridLineWidth: 1,
     labels: {
       style: {
-        color: "rgba(194,149,23,1)",
+        color: '#FDB316',
         fontWeight: "bold",
-        fontSize: "14px"
+        fontSize: "15px"
       }
     }
   },
   yAxis: {
-    lineColor: "rgba(194,149,23,1)",
+    lineColor: "gray",
     lineWidth: 3,
-    tickColor: "rgba(194,149,23,1)",
+    tickColor: '#2f7ed8',
     tickWidth: 3,
     tickLenght: 5,
-    gridLineColor: "rgba(194,149,23,1)",
+    gridLineColor: "gray",
+    //gridLineColor: '#2f7ed8',
     gridLineDashStyle: "ShortDashDotDot",
     labels: {
       style: {
-        color: "rgba(194,149,23,1)",
+        color: '#2f7ed8',
         fontWeight: "bold",
         fontSize: "14px"
       }
@@ -186,9 +188,9 @@ ChartConfig.fBaseAreaConfig = function () {
       zoomType: 'xy',
       resetZoomButton: {
         position: {
-          align: 'left',
+          align: 'right',
           verticalAlign: 'top',
-          x: 10,
+          x: -10,
           y: 0
         },
         relativeTo: 'chart'
@@ -210,11 +212,17 @@ ChartConfig.fBaseAreaConfig = function () {
       }
     },
     yAxis: {
+      endOnTick: false,
+      maxPadding: 0.15,
+      //startOnTick : true,
+      startOnTick: false,
+      minPadding: 0.15,
       title: {
         text: ''
       },
       plotLines: [{
-        value: 0.00,
+        //value: 0.00 ,
+        value: undefined,
         color: 'green',
         dashStyle: 'solid',
         width: 1,
@@ -229,7 +237,8 @@ ChartConfig.fBaseAreaConfig = function () {
           }
         }
       }, {
-        value: 0.00,
+        //value:  0.00 ,
+        value: undefined,
         color: '#ED5813',
         dashStyle: 'solid',
         width: 1,
@@ -268,8 +277,8 @@ ChartConfig.legendVolume = {
   enabled: true,
   align: 'left',
   verticalAlign: 'top',
-  x: 110,
-  y: -2,
+  x: 124,
+  y: -8,
   floating: true,
 
   symbolHeight: 12,
@@ -277,7 +286,8 @@ ChartConfig.legendVolume = {
   symbolRadius: 6,
 
   itemStyle: {
-    color: 'rgba(164, 135, 212, 1)'
+    color: 'rgba(164, 135, 212, 1)',
+    fontSize: '16px'
   },
   itemHoverStyle: {
     color: '#2F7ED8'
@@ -370,7 +380,7 @@ ChartConfig.fTitleMetric = function (text) {
     text: text,
     style: {
       color: 'rgba(164, 135, 212, 1)',
-      fontSize: '14px',
+      fontSize: '16px',
       fontWeight: 'bold'
     },
     floating: true,

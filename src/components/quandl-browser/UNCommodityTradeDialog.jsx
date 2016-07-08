@@ -288,13 +288,16 @@ const UNCommodityTradeDialog = React.createClass({
         , _title = (this.tradeFilter) ?
                    `${this.country.caption}:${this.tradeFilter.caption}` :
                    `${this.country.caption}`
+        , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )       
+              ? this._createSpliceItems()
+              : undefined
     return {
        value : fnValue(this.chapter.value, this.country.value),
        fromDate: fromDate,
        toDate: toDate,
        dataColumn : _dataColumn,
        seriaType : _chartType,
-       sliceItems : this._createSpliceItems(),
+       sliceItems : _sliceItems,
        title : _title,
        subtitle: this.chapter.caption,
        loadId : loadId
@@ -306,7 +309,7 @@ const UNCommodityTradeDialog = React.createClass({
         let {value, caption} = item;
         caption = caption.substring( 0, (caption.length - _filterLength) );
         return { caption, value }
-     })
+    })
   },
   _handlerClose(){
     this._handlerWithValidationClose(this._createMetaValidationMessages);

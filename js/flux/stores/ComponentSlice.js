@@ -48,6 +48,13 @@ var ComponentSlice = {
       this.activeChart = null;
     }
   },
+  uncheckActiveCheckbox: function uncheckActiveCheckbox(chartType) {
+    if (this.activeCheckbox && this.activeCheckbox.chartType === chartType) {
+      this.activeCheckbox.setUnchecked();
+      this.activeCheckbox = null;
+      this.activeChart = null;
+    }
+  },
   onShowModalDialog: function onShowModalDialog(modalDialogType) {
     var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 

@@ -159,6 +159,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
   },
   onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
     if (browserType !== _Type.BrowserType.WATCH_LIST) {
+      this.uncheckActiveCheckbox(chartType);
       this.setMenuItemClose(chartType, browserType);
       this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
     }

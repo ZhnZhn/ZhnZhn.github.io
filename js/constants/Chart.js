@@ -161,6 +161,12 @@ var Chart = {
       }
     }, option);
   },
+  calcMinY: function calcMinY(_ref2) {
+    var minPoint = _ref2.minPoint;
+    var maxPoint = _ref2.maxPoint;
+
+    return minPoint - (maxPoint - minPoint) * 30 / 180;
+  },
   fPlotOptionsArea: function fPlotOptionsArea() {
     var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 

@@ -33,14 +33,20 @@ var ZhHighchart = _react2.default.createClass({
   displayName: 'ZhHighchart',
 
   componentDidMount: function componentDidMount() {
-    this.renderChart(this.props.config);
-    if (this.props.onLoaded) {
-      this.props.onLoaded(this.chart);
+    var _props = this.props;
+    var config = _props.config;
+    var onLoaded = _props.onLoaded;
+
+    this.renderChart(config);
+    if (typeof onLoaded === 'function') {
+      onLoaded(this.chart);
     }
   },
   componentWillUnmount: function componentWillUnmount() {
-    if (this.props.onWillUnLoaded) {
-      this.props.onWillUnLoaded(this.chart);
+    var onWillUnLoaded = this.props.onWillUnLoaded;
+
+    if (typeof onWillUnLoaded === 'function') {
+      onWillUnLoaded(this.chart);
     }
   },
   componentWillUnmout: function componentWillUnmout() {
@@ -59,15 +65,12 @@ var ZhHighchart = _react2.default.createClass({
     }));
   },
   render: function render() {
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var toolBar = _props.toolBar;
-
+    var isShow = this.props.isShow;
     var _styleRootDiv = isShow ? styles.rootDivShow : styles.rootDivHide;
+
     return _react2.default.createElement(
       'div',
       { style: _styleRootDiv },
-      toolBar,
       _react2.default.createElement('div', { ref: 'chart' })
     );
   },

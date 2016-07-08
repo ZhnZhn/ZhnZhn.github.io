@@ -20,7 +20,7 @@ const SparkFactory = {
           svgWidth={100}
           data={data}
        >
-          <SparklinesLine color="rgba(194,149,23,1)" />
+          <SparklinesLine color="yellow" />
           <SparklinesReferenceLine
                style={ {stroke: 'red', strokeOpacity: .75, strokeDasharray: '5, 3'} }
                type="avg"
@@ -30,7 +30,6 @@ const SparkFactory = {
        </Sparklines>
      )
   },
-
   createSparkbars(data, pointIndex){
     return (
       <Sparklines
@@ -43,7 +42,7 @@ const SparkFactory = {
          max={100}
       >
          <SparklinesBars
-            style={{ stroke: "black", strokeWidth: "1", fill: "rgba(194,149,23,1)", fillOpacity: "0.9" }}
+            style={{ stroke: "black", strokeWidth: "1", fill: "yellow", fillOpacity: "0.9" }}
             pointIndex={pointIndex}
          />
       </Sparklines>

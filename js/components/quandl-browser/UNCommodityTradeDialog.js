@@ -318,13 +318,14 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     var fnValue = _props4.fnValue;
     var _chartType = this.chartType ? this.chartType.value : undefined;
     var _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption;
+    var _sliceItems = !(!this.chartType || this.chartType.value === _Type.ChartType.AREA) ? this._createSpliceItems() : undefined;
     return {
       value: fnValue(this.chapter.value, this.country.value),
       fromDate: fromDate,
       toDate: toDate,
       dataColumn: _dataColumn,
       seriaType: _chartType,
-      sliceItems: this._createSpliceItems(),
+      sliceItems: _sliceItems,
       title: _title,
       subtitle: this.chapter.caption,
       loadId: loadId
