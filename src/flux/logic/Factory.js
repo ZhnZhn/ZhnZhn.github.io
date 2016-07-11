@@ -41,7 +41,8 @@ const _rFnValue = {
   RPrefixOne : (prefix, one) => `${prefix}_${one}`,
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
-  RZill : (one, two, three) => `ZILL/${two}${three}_${one}`
+  RZill : (one, two, three) => `ZILL/${two}${three}_${one}`,
+  RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`
 }
 
 const onLoadChart = ChartActions.loadStock,
@@ -75,7 +76,7 @@ const createDialogComp = function (conf, browserType){
                    : _rFnValue[props.valueFn]
             : undefined
        , onClickInfo = (props.descrUrl) ? _showModalDialogDescription : undefined;
-    
+
    return  React.createElement(Comp, {
                key : dialogType,
                caption : conf.dialogCaption,

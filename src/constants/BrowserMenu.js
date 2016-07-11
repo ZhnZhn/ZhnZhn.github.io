@@ -41,24 +41,27 @@ const menuQuandl = [
      caption : 'Economic',
      items : [
        { id : Quandl.CURRENCY_HISTORY },
-       { id : Quandl.COMMODITY_PRICE },
-       { id : Quandl.COMMODITY_TRADE},
-       { id : Quandl.GLOBAL_INDICATOR},
+       { id : Quandl.GLOBAL_INDICATOR },
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
        { id : Quandl.CPI_INFLATION },
-       { id : Quandl.BIG_MAC}
+       { id : Quandl.BIG_MAC }
      ]
-  },
-  {
+  },{
+     caption : 'Commodity',
+     items : [
+       { id : Quandl.COMMODITY_PRICE },
+       { id : Quandl.COMMODITY_TRADE },
+       { id : Quandl.JODI_WORLD_GAS }
+     ]
+  },{
      caption : 'World Stocks',
      items : [
        { id : Quandl.TOKIO_STOCK },
        { id : Quandl.WIKI_STOCK },
        { id : Quandl.UNICORN_RESEARCH }
      ]
-  },
-  {
+  },{
     caption : 'Futures',
     items : [
       { id : Quandl.CHINA_DCE_FUTURE },

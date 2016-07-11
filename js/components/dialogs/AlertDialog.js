@@ -38,7 +38,8 @@ var Styles = {
     width: '400px',
     paddingLeft: '10px',
     fontWeight: 'bold',
-    lineHeight: 1.4
+    lineHeight: 1.4,
+    whiteSpace: 'pre-line'
   }
 };
 

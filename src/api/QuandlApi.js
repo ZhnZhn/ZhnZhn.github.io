@@ -25,10 +25,25 @@ QuandlApi.getRequestUrl = function(option){
   return ApiUtils.createUri(uri);
 }
 
-const REQUEST_ERROR = 'Request Error';
+const REQUEST_ERROR = 'Request Error'
+    , DATASET_EMPTY = 'Dataset Empty';
 QuandlApi.checkResponse = function(json){
-  if (json.quandl_error && json.quandl_error.message){
-     throw {errCaption : REQUEST_ERROR, message : json.quandl_error.message }
+  const { quandl_error, dataset={} } = json;
+  if ( quandl_error ){
+     if ( quandl_error.message ) {
+        throw { errCaption : REQUEST_ERROR, message : json.quandl_error.message }
+     } else {
+        throw { errCaption : REQUEST_ERROR, message : '' }
+     }
+  } else if ( !dataset.data || dataset.data.length === 0 ){
+      const { newest_available_date='', oldest_available_date='' } = dataset;
+      throw {
+         errCaption : DATASET_EMPTY,
+         message : `Result dataset for request is empty:
+                    Newest Date: ${newest_available_date}
+                    Oldest Date: ${oldest_available_date}`
+      }
+
   }
   return true;
 }

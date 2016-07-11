@@ -41,6 +41,28 @@ const DataQE = {
       },
       dataColumn : 1
   },
+  QE_JODI_WORLD_GAS : {
+    type : 'QE_JODI_WORLD_GAS',
+    menuTitle : 'JODI World Gas',
+    dialogCaption : 'JODI World Gas',
+    chartContainerCaption : 'Quandl JODI World Gas',
+    dialogType : 'DialogType5',
+    dialogProps : {
+      descrUrl: './data/quandl/jodi.html',
+      nInitFromDate : 3,
+      oneCaption : 'Country',
+      oneURI : './data/quandl/jodi-country-iso.json',
+      oneJsonProp : 'countries',
+      twoCaption : 'Product',
+      twoURI : './data/quandl/jodi-gas-products.json',
+      twoJsonProp : 'products',
+      threeCaption : 'Flow',
+      fnValueType : 'PlusTreeItem',
+      valueFn : 'RJodiGas',
+      loadId : 'Q'
+    },
+    dataColumn : 1
+  },
   QE_GLOBAL_INDICATOR : {
       type : 'QE_GLOBAL_INDICATOR',
       menuTitle : 'UN Global Indicator',

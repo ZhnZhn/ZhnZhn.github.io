@@ -1,7 +1,8 @@
+'use strict';
 
-var gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    cleanCss = require('gulp-clean-css');
+var gulp = require('gulp')
+  , concat = require('gulp-concat')
+  , cleanCss = require('gulp-clean-css');
 
 gulp.task('styles', function(){
   return gulp.src(['css/*.css', '!css/app.css'])

@@ -1,16 +1,17 @@
 'use strict';
+
 const webpack = require('webpack')
     , HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
      erc: "./js/index.js",
-     lib: [ 
+     lib: [
             "react", "react-dom", "react-addons-shallow-compare", "reflux",
             "big.js", "interact.js", "localforage",
-            "lodash/sortBy", "lodash/merge", "lodash/flow", 
+            "lodash/sortBy", "lodash/merge", "lodash/flow",
             "purify",
-            "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap" 
+            "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap"
           ]
   },
   output: {
@@ -29,7 +30,7 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'lib'
-    }),    
+    }),
     new webpack.optimize.UglifyJsPlugin({
         compress: {
            warnings: false
@@ -39,9 +40,9 @@ module.exports = {
         }
     }),
     new HtmlWebpackPlugin({
-        filename: '../index.html', 
+        filename: '../index.html',
         template: './template/index.ejs',
-        inject: 'body' 
+        inject: 'body'
     })
   ]
 };
