@@ -2,13 +2,13 @@
 import React from 'react';
 
 import DialogType3 from '../../components/dialogs/DialogType3';
-
 import DialogType4A from '../../components/dialogs/DialogType4A';
 import DialogType5 from '../../components/dialogs/DialogType5';
 
 import UNCommodityTradeDialog from '../../components/quandl-browser/UNCommodityTradeDialog';
 import BigMacDialog from '../../components/quandl-browser/BigMacDialog';
 import FuturesDialog from '../../components/quandl-browser/FuturesDialog';
+import JodiWorldOilDialog from '../../components/quandl-browser/JodiWorldOilDialog';
 
 import ChartContainer2 from '../../components/ChartContainer2';
 
@@ -30,7 +30,8 @@ const _rDialog = {
   DialogType5 : DialogType5,
   UNCommodityTradeDialog : UNCommodityTradeDialog,
   BigMacDialog : BigMacDialog,
-  FuturesDialog : FuturesDialog
+  FuturesDialog : FuturesDialog,
+  JodiWorldOilDialog : JodiWorldOilDialog
 }
 
 
@@ -41,8 +42,11 @@ const _rFnValue = {
   RPrefixOne : (prefix, one) => `${prefix}_${one}`,
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
+
   RZill : (one, two, three) => `ZILL/${two}${three}_${one}`,
-  RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`
+
+  RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`,
+  RJodiOil : (country, product, flow, units) => `JODI/OIL_${product}${flow}${units}_${country}`
 }
 
 const onLoadChart = ChartActions.loadStock,

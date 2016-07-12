@@ -34,6 +34,10 @@ var _FuturesDialog = require('../../components/quandl-browser/FuturesDialog');
 
 var _FuturesDialog2 = _interopRequireDefault(_FuturesDialog);
 
+var _JodiWorldOilDialog = require('../../components/quandl-browser/JodiWorldOilDialog');
+
+var _JodiWorldOilDialog2 = _interopRequireDefault(_JodiWorldOilDialog);
+
 var _ChartContainer = require('../../components/ChartContainer2');
 
 var _ChartContainer2 = _interopRequireDefault(_ChartContainer);
@@ -72,7 +76,8 @@ var _rDialog = {
   DialogType5: _DialogType4.default,
   UNCommodityTradeDialog: _UNCommodityTradeDialog2.default,
   BigMacDialog: _BigMacDialog2.default,
-  FuturesDialog: _FuturesDialog2.default
+  FuturesDialog: _FuturesDialog2.default,
+  JodiWorldOilDialog: _JodiWorldOilDialog2.default
 };
 
 var _rFnValue = {
@@ -94,11 +99,16 @@ var _rFnValue = {
   RPrefixTwoOne: function RPrefixTwoOne(prefix, one, two) {
     return prefix + '/' + two + '_' + one;
   },
+
   RZill: function RZill(one, two, three) {
     return 'ZILL/' + two + three + '_' + one;
   },
+
   RJodiGas: function RJodiGas(one, two, three) {
     return 'JODI/GAS_' + two + three + '_' + one;
+  },
+  RJodiOil: function RJodiOil(country, product, flow, units) {
+    return 'JODI/OIL_' + product + flow + units + '_' + country;
   }
 };
 

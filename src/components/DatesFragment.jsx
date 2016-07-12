@@ -50,18 +50,6 @@ const DatesFragment = React.createClass({
     }
   },
 
-  /*
-  isValid(){
-    if (!this.fromDate.isValid()) {
-      return false;
-    }
-    if (!this.toDate.isValid()) {
-      return false;
-    }
-    return true;
-  },
-  */
-
   getValidation(){
     const {msgOnNotValidFormat} = this.props
         ,  datesMsg = [];
@@ -87,7 +75,7 @@ const DatesFragment = React.createClass({
       return true;
     }
     return false;
-  },
+  }
 
 });
 

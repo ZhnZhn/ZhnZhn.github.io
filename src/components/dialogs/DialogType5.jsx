@@ -2,6 +2,7 @@ import React from 'react';
 
 import ZhDialog from '../ZhDialog';
 import WithLoadOptions from './WithLoadOptions';
+import WithToolbar from './WithToolbar';
 import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import RowInputSelect from './RowInputSelect';
@@ -17,6 +18,7 @@ const defaultColumns = [
 
 const DialogType5 = React.createClass({
   ...WithLoadOptions,
+  ...WithToolbar,
   ...WithValidation,
 
   getInitialState(){
@@ -24,10 +26,7 @@ const DialogType5 = React.createClass({
     this.two = null;
     this.three = null;
 
-    this.toolbarButtons = [{ caption: 'D', onClick: this._handlerClickDate }];
-    if (this.props.onClickInfo) {
-      this.toolbarButtons.unshift({ caption: 'I', onClick: this._handlerClickInfo });
-    }
+    this.toolbarButtons = this._createType2WithToolbar();
 
     return {
       isShowDate : true,
@@ -77,16 +76,7 @@ const DialogType5 = React.createClass({
   componetWillUnmount(){
     this._unmountWithLoadOptions();
   },
-
-  _handlerClickInfo(){
-    const {descrUrl, onClickInfo} = this.props;
-    onClickInfo({ descrUrl });
-  },
-
-  _handlerClickDate(){
-    this.setState({isShowDate: !this.state.isShowDate});
-  },
-
+  
   _handlerLoadOne(){
     const {oneURI, oneJsonProp} = this.props;
     this._handlerWithLoadOptions(
@@ -138,6 +128,7 @@ const DialogType5 = React.createClass({
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
      if (!isValid) { msg = msg.concat(datesMsg); }
+
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   },
@@ -177,7 +168,7 @@ const DialogType5 = React.createClass({
            title : `${this.one.caption}:${this.two.caption}`,
            subtitle : this.three.caption
          }
-    }    
+    }
   },
   _handlerClose(){
     this._handlerWithValidationClose(this._createValidationMessages);

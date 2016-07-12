@@ -1,11 +1,12 @@
 'use strict';
 
-const webpack = require('webpack')
+const path = require('path')
+    , webpack = require('webpack')
     , HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-     erc: "./js/index.js",
+     erc: path.resolve('js', 'index.js'),
      lib: [
             "react", "react-dom", "react-addons-shallow-compare", "reflux",
             "big.js", "interact.js", "localforage",
@@ -15,7 +16,7 @@ module.exports = {
           ]
   },
   output: {
-      path: "./app",
+      path: path.resolve('app'),
       filename: "[name]_[chunkhash].js",
       chunkFilename: "[chunkhash].js"
   },
@@ -40,8 +41,8 @@ module.exports = {
         }
     }),
     new HtmlWebpackPlugin({
-        filename: '../index.html',
-        template: './template/index.ejs',
+        filename: path.resolve('index.html'),
+        template: path.resolve('template', 'index.ejs'),
         inject: 'body'
     })
   ]

@@ -18,6 +18,10 @@ var _WithLoadOptions = require('./WithLoadOptions');
 
 var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
 
+var _WithToolbar = require('./WithToolbar');
+
+var _WithToolbar2 = _interopRequireDefault(_WithToolbar);
+
 var _WithValidation = require('./WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
@@ -52,15 +56,12 @@ var defaultColumns = [];
 
 var DialogType4A = _react2.default.createClass(_extends({
   displayName: 'DialogType4A'
-}, _WithLoadOptions2.default, _WithValidation2.default, {
+}, _WithLoadOptions2.default, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     this.one = null;
     this.two = null;
 
-    this.toolbarButtons = [{ caption: 'D', onClick: this._handlerClickDate }];
-    if (this.props.onClickInfo) {
-      this.toolbarButtons.unshift({ caption: 'I', onClick: this._handlerClickInfo });
-    }
+    this.toolbarButtons = this._createType2WithToolbar();
 
     return {
       isShowDate: true,
@@ -95,20 +96,10 @@ var DialogType4A = _react2.default.createClass(_extends({
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();
   },
-  _handlerClickInfo: function _handlerClickInfo() {
-    var _props = this.props;
-    var descrUrl = _props.descrUrl;
-    var onClickInfo = _props.onClickInfo;
-
-    onClickInfo({ descrUrl: descrUrl });
-  },
-  _handlerClickDate: function _handlerClickDate() {
-    this.setState({ isShowDate: !this.state.isShowDate });
-  },
   _handlerLoadOne: function _handlerLoadOne() {
-    var _props2 = this.props;
-    var oneURI = _props2.oneURI;
-    var oneJsonProp = _props2.oneJsonProp;
+    var _props = this.props;
+    var oneURI = _props.oneURI;
+    var oneJsonProp = _props.oneJsonProp;
 
     this._handlerWithLoadOptions('optionOne', 'isLoadingOne', 'isLoadingOneFailed', oneURI, oneJsonProp);
   },
@@ -134,9 +125,9 @@ var DialogType4A = _react2.default.createClass(_extends({
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var _props3 = this.props;
-    var oneCaption = _props3.oneCaption;
-    var twoCaption = _props3.twoCaption;
+    var _props2 = this.props;
+    var oneCaption = _props2.oneCaption;
+    var twoCaption = _props2.twoCaption;
 
     var msg = [];
 
@@ -163,10 +154,10 @@ var DialogType4A = _react2.default.createClass(_extends({
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _props4 = this.props;
-    var fnValue = _props4.fnValue;
-    var dataColumn = _props4.dataColumn;
-    var loadId = _props4.loadId;
+    var _props3 = this.props;
+    var fnValue = _props3.fnValue;
+    var dataColumn = _props3.dataColumn;
+    var loadId = _props3.loadId;
 
     return {
       value: fnValue(this.one.value, this.two.value),
@@ -185,16 +176,16 @@ var DialogType4A = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props5 = this.props;
-    var caption = _props5.caption;
-    var oneCaption = _props5.oneCaption;
-    var twoCaption = _props5.twoCaption;
-    var isShow = _props5.isShow;
-    var onShow = _props5.onShow;
-    var initFromDate = _props5.initFromDate;
-    var initToDate = _props5.initToDate;
-    var msgOnNotValidFormat = _props5.msgOnNotValidFormat;
-    var onTestDate = _props5.onTestDate;
+    var _props4 = this.props;
+    var caption = _props4.caption;
+    var oneCaption = _props4.oneCaption;
+    var twoCaption = _props4.twoCaption;
+    var isShow = _props4.isShow;
+    var onShow = _props4.onShow;
+    var initFromDate = _props4.initFromDate;
+    var initToDate = _props4.initToDate;
+    var msgOnNotValidFormat = _props4.msgOnNotValidFormat;
+    var onTestDate = _props4.onTestDate;
     var _state = this.state;
     var isShowDate = _state.isShowDate;
     var optionOne = _state.optionOne;

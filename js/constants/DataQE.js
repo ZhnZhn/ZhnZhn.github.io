@@ -68,6 +68,29 @@ var DataQE = {
     },
     dataColumn: 1
   },
+  QE_JODI_WORLD_OIL: {
+    type: 'QE_JODI_WORLD_OIL',
+    menuTitle: 'JODI World Oil',
+    dialogCaption: 'JODI World Oil',
+    chartContainerCaption: 'Quandl JODI World Oil',
+    dialogType: 'JodiWorldOilDialog',
+    dialogProps: {
+      descrUrl: './data/quandl/jodi.html',
+      nInitFromDate: 3,
+      oneCaption: 'Country',
+      oneURI: './data/quandl/jodi-country-iso.json',
+      oneJsonProp: 'countries',
+
+      parentChildURI: './data/quandl/jodi-oil-products.json',
+      parentCaption: 'Product',
+      parentJsonProp: 'products',
+      childCaption: 'Flow',
+
+      valueFn: 'RJodiOil',
+      loadId: 'Q'
+    },
+    dataColumn: 1
+  },
   QE_GLOBAL_INDICATOR: {
     type: 'QE_GLOBAL_INDICATOR',
     menuTitle: 'UN Global Indicator',

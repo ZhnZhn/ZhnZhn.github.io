@@ -40,7 +40,7 @@ const WithLoadOptions =  {
       })
       .then((json) => {
         if (json) {
-          fnOnCompleted({toStateProp, isLoadingProp, json, optionJsonProp});
+          fnOnCompleted({ toStateProp, isLoadingProp, json, optionJsonProp });
         }
       })
       .catch((error) => {
@@ -53,7 +53,7 @@ const WithLoadOptions =  {
       })
   },
 
-  _onLoadOptionsCompleted({toStateProp, isLoadingProp, json, optionJsonProp}){
+  _onLoadOptionsCompleted({ toStateProp, isLoadingProp, json, optionJsonProp }){
     if (toStateProp && optionJsonProp) {
        this.setState({
          [isLoadingProp] : false,

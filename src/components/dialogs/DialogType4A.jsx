@@ -2,6 +2,7 @@ import React from 'react';
 
 import ZhDialog from '../ZhDialog';
 import WithLoadOptions from './WithLoadOptions';
+import WithToolbar from './WithToolbar';
 import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import RowInputSelect from './RowInputSelect';
@@ -15,17 +16,15 @@ const defaultColumns = [];
 
 const DialogType4A = React.createClass({
   ...WithLoadOptions,
+  ...WithToolbar,
   ...WithValidation,
 
   getInitialState(){
     this.one = null;
     this.two = null;
 
-    this.toolbarButtons = [{ caption: 'D', onClick: this._handlerClickDate }];
-    if (this.props.onClickInfo) {
-      this.toolbarButtons.unshift({ caption: 'I', onClick: this._handlerClickInfo });
-    }
-
+    this.toolbarButtons = this._createType2WithToolbar();
+        
     return {
       isShowDate : true,
 
@@ -62,15 +61,6 @@ const DialogType4A = React.createClass({
 
   componetWillUnmount(){
     this._unmountWithLoadOptions();
-  },
-
-  _handlerClickInfo(){
-    const {descrUrl, onClickInfo} = this.props;
-    onClickInfo({ descrUrl });
-  },
-
-  _handlerClickDate(){
-    this.setState({isShowDate: !this.state.isShowDate});
   },
 
   _handlerLoadOne(){

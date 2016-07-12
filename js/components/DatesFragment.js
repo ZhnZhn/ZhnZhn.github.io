@@ -82,20 +82,6 @@ var DatesFragment = _react2.default.createClass({
       toDate: this.toDate.getValue()
     };
   },
-
-
-  /*
-  isValid(){
-    if (!this.fromDate.isValid()) {
-      return false;
-    }
-    if (!this.toDate.isValid()) {
-      return false;
-    }
-    return true;
-  },
-  */
-
   getValidation: function getValidation() {
     var msgOnNotValidFormat = this.props.msgOnNotValidFormat;
     var datesMsg = [];

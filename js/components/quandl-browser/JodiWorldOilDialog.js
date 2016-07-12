@@ -34,13 +34,13 @@ var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
+var _SelectParentChild = require('../dialogs/SelectParentChild');
+
+var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
+
 var _ToolBarButton = require('../ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
 var _DatesFragment = require('../DatesFragment');
 
@@ -50,29 +50,36 @@ var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
 
+var _ShowHide = require('../zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BigMacDialog = _react2.default.createClass(_extends({
-  displayName: 'BigMacDialog'
+var unitOptions = [{ "caption": "Thousand Barrels per day (kb/d)", "value": "KD" }, { "caption": "Thousand Barrels (kbbl)", "value": "KB" }, { "caption": "Thousand Kilolitres (kl)", "value": "KL" }, { "caption": "Thousand Metric Tons (kmt)", "value": "KT" }, { "caption": "Conversion factor barrels/ktons", "value": "BK" }];
+
+var JodiWorldOilDialog = _react2.default.createClass(_extends({
+  displayName: 'JodiWorldOilDialog'
 }, _WithLoadOptions2.default, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     this.country = null;
-    this.metric = null;
+    this.product = null;
+    this.flow = null;
+    this.units = null;
 
     this.toolbarButtons = this._createType2WithToolbar();
-
     return {
       isShowDate: true,
-      isLoadingCountries: false,
-      isLoadingCountriesFailed: false,
-      optionCountries: [],
-      optionMetrics: [{ caption: 'Local Price', value: 1 }, { caption: 'Dollar Exchange', value: 2 }, { caption: 'Dollar Price', value: 3 }, { caption: 'Dollar PPP', value: 4 }, { caption: 'Dollar Valuation', value: 5 }],
+
+      isLoadingOne: false,
+      isLoadingOneFailed: false,
+      optionOne: [],
 
       validationMessages: []
     };
   },
   componentDidMount: function componentDidMount() {
-    this._handlerLoadCountry();
+    this._handlerLoadOne();
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -84,34 +91,50 @@ var BigMacDialog = _react2.default.createClass(_extends({
   },
   componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      if (this.state.isLoadingCountriesFailed && this.props.isShow) {
-        this._handlerLoadCountry();
+      if (this.state.isLoadingOneFailed && this.props.isShow) {
+        this._handlerLoadOne();
       }
     }
   },
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();
   },
-  _handlerLoadCountry: function _handlerLoadCountry() {
+  _handlerLoadOne: function _handlerLoadOne() {
     var _props = this.props;
-    var countryURI = _props.countryURI;
-    var countryJsonProp = _props.countryJsonProp;
+    var oneURI = _props.oneURI;
+    var oneJsonProp = _props.oneJsonProp;
 
-    this._handlerWithLoadOptions('optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed', countryURI, countryJsonProp);
+    this._handlerWithLoadOptions('optionOne', 'isLoadingOne', 'isLoadingOneFailed', oneURI, oneJsonProp);
   },
   _handlerSelectCountry: function _handlerSelectCountry(country) {
     this.country = country;
   },
-  _handlerSelectMetric: function _handlerSelectMetric(metric) {
-    this.metric = metric;
+  _handlerSelectUnits: function _handlerSelectUnits(units) {
+    this.units = units;
   },
   _handlerLoad: function _handlerLoad() {
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
+    var msgOnNotSelected = this.props.msgOnNotSelected;
+
     var msg = [];
+
     if (!this.country) {
-      msg.push(this.props.msgOnNotSelected('Country'));
+      msg.push(msgOnNotSelected('Country'));
+    }
+
+    var _productFlow$getValid = this.productFlow.getValidation();
+
+    var isValid1 = _productFlow$getValid.isValid;
+    var msg1 = _productFlow$getValid.msg;
+
+    if (!isValid1) {
+      msg = msg.concat(msg1);
+    }
+
+    if (!this.units) {
+      this.units = unitOptions[0];
     }
 
     var _datesFragment$getVal = this.datesFragment.getValidation();
@@ -122,29 +145,33 @@ var BigMacDialog = _react2.default.createClass(_extends({
     if (!isValid) {
       msg = msg.concat(datesMsg);
     }
+
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
+    var _productFlow$getValue = this.productFlow.getValues();
+
+    var product = _productFlow$getValue.parent;
+    var flow = _productFlow$getValue.child;
+
     var _datesFragment$getVal2 = this.datesFragment.getValues();
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _dataColumn = this.metric ? this.metric.value : 1;
-    var _subtitle = this.metric ? this.metric.caption : this.state.optionMetrics[0].caption;
     var _props2 = this.props;
-    var loadId = _props2.loadId;
     var fnValue = _props2.fnValue;
+    var dataColumn = _props2.dataColumn;
+    var loadId = _props2.loadId;
 
     return {
-      value: fnValue(this.country.value),
+      value: fnValue(this.country.value, product.value, flow.value, this.units.value),
       fromDate: fromDate,
       toDate: toDate,
-      dataColumn: _dataColumn,
-      itemCaption: this.country.caption,
+      dataColumn: dataColumn,
       loadId: loadId,
-      title: this.country.caption,
-      subtitle: _subtitle
+      title: this.country.caption + ':' + product.caption,
+      subtitle: flow.caption + ':' + this.units.caption
     };
   },
   _handlerClose: function _handlerClose() {
@@ -155,18 +182,24 @@ var BigMacDialog = _react2.default.createClass(_extends({
     var _this = this;
 
     var _props3 = this.props;
+    var caption = _props3.caption;
     var isShow = _props3.isShow;
     var onShow = _props3.onShow;
+    var oneCaption = _props3.oneCaption;
+    var parentCaption = _props3.parentCaption;
+    var parentChildURI = _props3.parentChildURI;
+    var parentJsonProp = _props3.parentJsonProp;
+    var childCaption = _props3.childCaption;
+    var msgOnNotSelected = _props3.msgOnNotSelected;
     var initFromDate = _props3.initFromDate;
     var initToDate = _props3.initToDate;
     var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
     var onTestDate = _props3.onTestDate;
     var _state = this.state;
+    var isLoadingOne = _state.isLoadingOne;
+    var isLoadingOneFailed = _state.isLoadingOneFailed;
+    var optionOne = _state.optionOne;
     var isShowDate = _state.isShowDate;
-    var optionCountries = _state.optionCountries;
-    var isLoadingCountries = _state.isLoadingCountries;
-    var isLoadingCountriesFailed = _state.isLoadingCountriesFailed;
-    var optionMetrics = _state.optionMetrics;
     var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -178,7 +211,7 @@ var BigMacDialog = _react2.default.createClass(_extends({
     return _react2.default.createElement(
       _ZhDialog2.default,
       {
-        caption: 'Economist Big Mac Index',
+        caption: caption,
         isShow: isShow,
         commandButtons: _commandButtons,
         onShowChart: onShow,
@@ -188,18 +221,29 @@ var BigMacDialog = _react2.default.createClass(_extends({
         buttons: this.toolbarButtons
       }),
       _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Country:',
-        options: optionCountries,
-        optionNames: 'Countries',
-        isLoading: isLoadingCountries,
-        isLoadingFailed: isLoadingCountriesFailed,
-        onLoadOption: this._handlerLoadCountry,
+        caption: oneCaption,
+        options: optionOne,
+        optionNames: 'Items',
+        isLoading: isLoadingOne,
+        isLoadingFailed: isLoadingOneFailed,
+        onLoadOption: this._handlerLoadOne,
         onSelect: this._handlerSelectCountry
       }),
+      _react2.default.createElement(_SelectParentChild2.default, {
+        ref: function ref(c) {
+          return _this.productFlow = c;
+        },
+        uri: parentChildURI,
+        parentCaption: parentCaption,
+        parentOptionNames: 'Items',
+        parentJsonProp: parentJsonProp,
+        childCaption: childCaption,
+        msgOnNotSelected: msgOnNotSelected
+      }),
       _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Metric:',
-        options: optionMetrics,
-        onSelect: this._handlerSelectMetric
+        caption: 'Units',
+        options: unitOptions,
+        onSelect: this._handlerSelectUnits
       }),
       _react2.default.createElement(
         _ShowHide2.default,
@@ -221,5 +265,5 @@ var BigMacDialog = _react2.default.createClass(_extends({
   }
 }));
 
-exports.default = BigMacDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\BigMacDialog.js.map
+exports.default = JodiWorldOilDialog;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\JodiWorldOilDialog.js.map

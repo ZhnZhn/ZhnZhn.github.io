@@ -2,6 +2,7 @@ import React from 'react';
 
 import ZhDialog from '../ZhDialog';
 import WithLoadOptions from '../dialogs/WithLoadOptions';
+import WithToolbar from '../dialogs/WithToolbar';
 import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import RowInputSelect from '../dialogs/RowInputSelect';
@@ -13,15 +14,15 @@ import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
 const BigMacDialog = React.createClass({
   ...WithLoadOptions,
+  ...WithToolbar,
   ...WithValidation,
 
   getInitialState(){
      this.country = null;
      this.metric =null;
-     this.toolbarButtons = [
-       { caption: 'I', onClick: this._handlerClickInfo },
-       { caption: 'D', onClick: this._handlerClickDate }
-     ];
+
+     this.toolbarButtons = this._createType2WithToolbar();
+
      return {
         isShowDate : true,
         isLoadingCountries : false,
@@ -64,14 +65,6 @@ const BigMacDialog = React.createClass({
     this._unmountWithLoadOptions();
   },
 
-  _handlerClickInfo(){
-    const {descrUrl, onClickInfo} = this.props;
-    onClickInfo({ descrUrl });
-  },
-  _handlerClickDate(){
-    this.setState({isShowDate: !this.state.isShowDate});
-  },
-
   _handlerLoadCountry(){
     const {countryURI, countryJsonProp} = this.props;
     this._handlerWithLoadOptions(
@@ -94,7 +87,7 @@ const BigMacDialog = React.createClass({
   _createValidationMessages(){
      let msg = [];
      if (!this.country) { msg.push(this.props.msgOnNotSelected('Country'));}
-     const {isValid, datesMsg} = this.datesFragment.getValidation();
+     const { isValid, datesMsg } = this.datesFragment.getValidation();
      if (!isValid) { msg = msg.concat(datesMsg); }
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
