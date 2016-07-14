@@ -280,13 +280,13 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
     fnStep.push(_fnAddSplitRatio);
   }
 
-  if (open) {
+  if (open !== -1) {
     fnStep.push(_fnAddATH.bind(null, {
       open: open
     }));
   }
 
-  if (high && low) {
+  if (high !== -1 && low !== -1) {
     fnStep.push(_fnAddHighLow.bind(null, {
       open: open, high: high, low: low
     }));
