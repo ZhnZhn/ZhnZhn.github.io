@@ -68,7 +68,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]
 }, {
   caption: 'Futures',
-  items: [{ id: _DialogType.Quandl.CHINA_DCE_FUTURE }, { id: _DialogType.Quandl.CHINA_ZCE_FUTURE }]
+  items: [{ id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }]
 }, {
   caption: 'Real Estate',
   items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }]

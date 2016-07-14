@@ -4,10 +4,10 @@ import Msg from '../../constants/Msg';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import {ModalDialog} from '../../constants/Type';
 
-const _fnShowAlertDialog = function(caption, descr){
+const _fnShowAlertDialog = function(alertCaption, alertDescr){
   const modalDialogType = ModalDialog.ALERT;
   ComponentActions.showModalDialog(
-    ModalDialog.ALERT, {caption, descr, modalDialogType}
+    ModalDialog.ALERT, { alertCaption, alertDescr, modalDialogType }
   );
 }
 
@@ -65,7 +65,7 @@ const WithLoadOptions =  {
     this.setState({
        [isLoadingProp] : false,
        [isLoadingFailedProp] : true
-    })
+    })    
     if (error instanceof TypeError){
       _fnShowAlertDialog(
          Msg.Alert.NETWORK_ERROR.caption,

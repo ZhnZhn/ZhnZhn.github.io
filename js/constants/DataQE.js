@@ -227,9 +227,9 @@ var DataQE = {
       descrUrl: './data/quandl/wiki.html',
       optionURI: './data/quandl/wiki.json',
       optionsJsonProp: 'tickets',
-      loadId: 'Q'
-    },
-    dataColumn: 4
+      loadId: 'Q',
+      columnName: 'Close'
+    }
   },
   QE_TOKIO_STOCK: {
     type: 'QE_TOKIO_STOCK',
@@ -240,9 +240,9 @@ var DataQE = {
       descrUrl: './data/quandl/tokio.html',
       optionURI: './data/quandl/tokio.json',
       optionsJsonProp: 'tickets',
-      loadId: 'Q'
-    },
-    dataColumn: 4
+      loadId: 'Q',
+      columnName: 'Close'
+    }
   },
   QE_UNICORN_RESEARCH: {
     type: 'QE_UNICORN_RESEARCH',
@@ -263,33 +263,50 @@ var DataQE = {
     dataColumn: 1
   },
 
-  QE_CHINA_DCE_FUTURE: {
-    type: 'QE_CHINA_DCE_FUTURE',
-    menuTitle: 'China DCE',
-    dialogCaption: 'China DCE Futures',
-    chartContainerCaption: 'Quandl China DCE Futures',
-    dialogType: 'FuturesDialog',
+  QE_DCE_FUTURE: {
+    type: 'QE_DCE_FUTURE',
+    menuTitle: 'Dalian CE',
+    dialogCaption: 'Dalian CE Futures',
+    chartContainerCaption: 'Quandl Dalian Commodities Exchange Futures',
+    dialogType: 'Futures3Dialog',
     dialogProps: {
-      descrUrl: './data/quandl/china-dce-futures.html',
-      optionURI: './data/quandl/china_dce_futures.json',
-      optionsJsonProp: 'futures',
-      loadId: 'Q'
-    },
-    dataColumn: 4
+      descrUrl: './data/quandl/dce-futures.html',
+      futuresURI: './data/quandl/dce-futures.json',
+      valueFn: 'RFutures',
+      valueFnPrefix: 'DCE',
+      loadId: 'Q',
+      columnName: 'Settle'
+    }
   },
-  QE_CHINA_ZCE_FUTURE: {
-    type: 'QE_CHINA_ZCE_FUTURE',
-    menuTitle: 'China ZCE',
-    dialogCaption: 'China ZCE Futures',
-    chartContainerCaption: 'Quandl China ZCE Futures',
-    dialogType: 'FuturesDialog',
+  QE_ZCE_FUTURE: {
+    type: 'QE_ZCE_FUTURE',
+    menuTitle: 'Zhengzhou CE',
+    dialogCaption: 'Zhengzhou CE Futures',
+    chartContainerCaption: 'Quandl Zhengzhou Commodities Exchange Futures',
+    dialogType: 'Futures3Dialog',
     dialogProps: {
-      descrUrl: './data/quandl/china-zce-futures.html',
-      optionURI: './data/quandl/china_zce_futures.json',
-      optionsJsonProp: 'futures',
-      loadId: 'Q'
-    },
-    dataColumn: 5
+      descrUrl: './data/quandl/zce-futures.html',
+      futuresURI: './data/quandl/zce-futures.json',
+      valueFn: 'RFutures',
+      valueFnPrefix: 'ZCE',
+      loadId: 'Q',
+      columnName: 'Settle'
+    }
+  },
+  QE_SHANGHAI_FUTURE: {
+    type: 'QE_SHANGHAI_FUTURE',
+    menuTitle: 'Shanghai FE',
+    dialogCaption: 'Shanghai FE',
+    chartContainerCaption: 'Quandl Shanghai Futures Exchange',
+    dialogType: 'Futures3Dialog',
+    dialogProps: {
+      descrUrl: './data/quandl/shanghai-futures.html',
+      futuresURI: './data/quandl/shanghai-futures.json',
+      valueFn: 'RFutures',
+      valueFnPrefix: 'SHFE',
+      loadId: 'Q',
+      columnName: 'Settle'
+    }
   },
   QE_ZILLOW_REAL_ESTATE: {
     type: 'QE_ZILLOW_REAL_ESTATE',

@@ -34,10 +34,6 @@ var _ZhSelect = require('../ZhSelect');
 
 var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
 
-var _InputSecret = require('../zhn/InputSecret');
-
-var _InputSecret2 = _interopRequireDefault(_InputSecret);
-
 var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);

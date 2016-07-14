@@ -45,7 +45,7 @@ const DialogContainer = React.createClass({
   _onStore(actionType, option){
      if (actionType === ComponentActionTypes.SHOW_MODAL_DIALOG){
        const type = option.modalDialogType
-           , {inits, shows, data, dialogs } = this.state;
+           , { inits, shows, data, dialogs } = this.state;
 
        data[type] = option;
        shows[type] = true;

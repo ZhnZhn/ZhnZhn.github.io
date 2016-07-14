@@ -90,6 +90,7 @@ var LoadItemDialog = _react2.default.createClass(_extends({
       var data = _props.data;
       var onClose = _props.onClose;
       var caption = data.caption;
+      var columnName = data.columnName;
       var dataColumn = data.dataColumn;
 
       var _datesFragment$getVal = this.datesFragment.getValues();
@@ -101,6 +102,7 @@ var LoadItemDialog = _react2.default.createClass(_extends({
         stock: caption,
         fromDate: fromDate,
         toDate: toDate,
+        columnName: columnName,
         dataColumn: dataColumn
       };
       _ChartActions2.default.loadStock(_ChartType2.default.WATCH_LIST, _Type.BrowserType.WATCH_LIST, option);

@@ -14,10 +14,6 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _WithLoadOptions = require('./WithLoadOptions');
-
-var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
-
 var _WithToolbar = require('./WithToolbar');
 
 var _WithToolbar2 = _interopRequireDefault(_WithToolbar);
@@ -30,9 +26,9 @@ var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _RowInputSelect = require('./RowInputSelect');
+var _SelectParentChild = require('./SelectParentChild');
 
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
+var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
 var _ToolBarButton = require('../ToolBarButton');
 
@@ -52,31 +48,15 @@ var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var defaultColumns = [];
-
 var DialogType4A = _react2.default.createClass(_extends({
   displayName: 'DialogType4A'
-}, _WithLoadOptions2.default, _WithToolbar2.default, _WithValidation2.default, {
+}, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
-    this.one = null;
-    this.two = null;
-
     this.toolbarButtons = this._createType2WithToolbar();
-
     return {
       isShowDate: true,
-
-      isLoadingOne: false,
-      isLoadingOneFailed: false,
-      optionOne: [],
-
-      optionTwo: [],
-
       validationMessages: []
     };
-  },
-  componentDidMount: function componentDidMount() {
-    this._handlerLoadOne();
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -86,56 +66,19 @@ var DialogType4A = _react2.default.createClass(_extends({
     }
     return true;
   },
-  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      if (this.state.isLoadingOneFailed && this.props.isShow) {
-        this._handlerLoadOne();
-      }
-    }
-  },
-  componetWillUnmount: function componetWillUnmount() {
-    this._unmountWithLoadOptions();
-  },
-  _handlerLoadOne: function _handlerLoadOne() {
-    var _props = this.props;
-    var oneURI = _props.oneURI;
-    var oneJsonProp = _props.oneJsonProp;
-
-    this._handlerWithLoadOptions('optionOne', 'isLoadingOne', 'isLoadingOneFailed', oneURI, oneJsonProp);
-  },
-  _handlerSelectOne: function _handlerSelectOne(one) {
-    this.one = one;
-    if (one) {
-      if (one.columns) {
-        this.two = null;
-        this.setState({ optionTwo: one.columns });
-      } else {
-        this.two = null;
-        this.setState({ optionTwo: defaultColumns });
-      }
-    } else {
-      this.two = null;
-      this.setState({ optionTwo: defaultColumns });
-    }
-  },
-  _handlerSelectTwo: function _handlerSelectTwo(two) {
-    this.two = two;
-  },
   _handlerLoad: function _handlerLoad() {
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var _props2 = this.props;
-    var oneCaption = _props2.oneCaption;
-    var twoCaption = _props2.twoCaption;
-
     var msg = [];
 
-    if (!this.one) {
-      msg.push(this.props.msgOnNotSelected(oneCaption));
-    }
-    if (!this.two) {
-      msg.push(this.props.msgOnNotSelected(twoCaption));
+    var _parentChild$getValid = this.parentChild.getValidation();
+
+    var isValid1 = _parentChild$getValid.isValid;
+    var msg1 = _parentChild$getValid.msg;
+
+    if (!isValid1) {
+      msg = msg.concat(msg1);
     }
 
     var _datesFragment$getVal = this.datesFragment.getValidation();
@@ -146,27 +89,33 @@ var DialogType4A = _react2.default.createClass(_extends({
     if (!isValid) {
       msg = msg.concat(datesMsg);
     }
+
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
+    var _parentChild$getValue = this.parentChild.getValues();
+
+    var one = _parentChild$getValue.parent;
+    var two = _parentChild$getValue.child;
+
     var _datesFragment$getVal2 = this.datesFragment.getValues();
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _props3 = this.props;
-    var fnValue = _props3.fnValue;
-    var dataColumn = _props3.dataColumn;
-    var loadId = _props3.loadId;
+    var _props = this.props;
+    var fnValue = _props.fnValue;
+    var dataColumn = _props.dataColumn;
+    var loadId = _props.loadId;
 
     return {
-      value: fnValue(this.one.value, this.two.value),
+      value: fnValue(one.value, two.value),
       fromDate: fromDate,
       toDate: toDate,
       dataColumn: dataColumn,
       loadId: loadId,
-      title: this.one.caption,
-      subtitle: this.two.caption
+      title: one.caption,
+      subtitle: two.caption
     };
   },
   _handlerClose: function _handlerClose() {
@@ -176,22 +125,21 @@ var DialogType4A = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props4 = this.props;
-    var caption = _props4.caption;
-    var oneCaption = _props4.oneCaption;
-    var twoCaption = _props4.twoCaption;
-    var isShow = _props4.isShow;
-    var onShow = _props4.onShow;
-    var initFromDate = _props4.initFromDate;
-    var initToDate = _props4.initToDate;
-    var msgOnNotValidFormat = _props4.msgOnNotValidFormat;
-    var onTestDate = _props4.onTestDate;
+    var _props2 = this.props;
+    var caption = _props2.caption;
+    var oneCaption = _props2.oneCaption;
+    var oneURI = _props2.oneURI;
+    var oneJsonProp = _props2.oneJsonProp;
+    var twoCaption = _props2.twoCaption;
+    var msgOnNotSelected = _props2.msgOnNotSelected;
+    var isShow = _props2.isShow;
+    var onShow = _props2.onShow;
+    var initFromDate = _props2.initFromDate;
+    var initToDate = _props2.initToDate;
+    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
+    var onTestDate = _props2.onTestDate;
     var _state = this.state;
     var isShowDate = _state.isShowDate;
-    var optionOne = _state.optionOne;
-    var isLoadingOne = _state.isLoadingOne;
-    var isLoadingOneFailed = _state.isLoadingOneFailed;
-    var optionTwo = _state.optionTwo;
     var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -212,19 +160,17 @@ var DialogType4A = _react2.default.createClass(_extends({
       _react2.default.createElement(_ToolbarButtonCircle2.default, {
         buttons: this.toolbarButtons
       }),
-      _react2.default.createElement(_RowInputSelect2.default, {
-        caption: oneCaption,
-        options: optionOne,
-        optionNames: 'Items',
-        isLoading: isLoadingOne,
-        isLoadingFailed: isLoadingOneFailed,
-        onLoadOption: this._handlerLoadOne,
-        onSelect: this._handlerSelectOne
-      }),
-      _react2.default.createElement(_RowInputSelect2.default, {
-        caption: twoCaption,
-        options: optionTwo,
-        onSelect: this._handlerSelectTwo
+      _react2.default.createElement(_SelectParentChild2.default, {
+        ref: function ref(c) {
+          return _this.parentChild = c;
+        },
+        isShow: isShow,
+        uri: oneURI,
+        parentCaption: oneCaption,
+        parentOptionNames: 'Items',
+        parentJsonProp: oneJsonProp,
+        childCaption: twoCaption,
+        msgOnNotSelected: msgOnNotSelected
       }),
       _react2.default.createElement(
         _ShowHide2.default,

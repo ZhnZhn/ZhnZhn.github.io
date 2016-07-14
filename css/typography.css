@@ -36,3 +36,13 @@
 .descr-datasource span {
   color: black;
 }
+
+.descr-datasource__link {
+  color: #0b8fff;
+  font-weight: bold;
+  border-bottom: thin solid;
+  text-decoration: none;
+}
+.descr-datasource__link:hover {
+  border-bottom-width: medium;
+}

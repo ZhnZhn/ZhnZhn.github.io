@@ -26,6 +26,7 @@ export const fnCreateDatasetInfo = function(json){
 export const fnCreateZhConfig = function(option){
   return {
     id : option.value,
+    columnName : option.columnName,
     dataColumn: option.dataColumn,
     itemCaption : option.itemCaption
   }
@@ -103,4 +104,20 @@ export const fnSetTitleToConfig = function(config={}, option={}){
   const {title, subtitle} = option;
   config.title.text = (title) ? title : '';
   config.subtitle.text = (subtitle) ? `${subtitle}:` : '';
+}
+
+export const fnFindColumnIndex = function(obj, columnName=''){
+   const column_names = (Array.isArray(obj))
+           ? obj
+           : (obj.dataset.column_names) ? obj.dataset.column_names : []
+       , _columnName = columnName.toLowerCase();
+
+   if ( columnName && column_names ) {
+      for (let i=0, max=column_names.length; i<max; i++){
+        if (column_names[i].toLowerCase() === _columnName){
+          return i;
+        }
+      }
+   }
+   return -1;
 }

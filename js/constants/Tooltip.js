@@ -65,7 +65,7 @@ var _fnExDividend = function _fnExDividend(_ref3) {
   var value = _ref3.value;
   var point = _ref3.point;
 
-  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Ex-Dividend: </span>\n  <span style="color: green;">' + point.exValue + '</span><br/>\n  <span class="tp__body__title">Stock Price: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
+  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Ex-Dividend: </span>\n  <span style="color: green;">' + point.exValue + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
 };
 
 var _fnSplitRatio = function _fnSplitRatio(_ref4) {
@@ -75,7 +75,7 @@ var _fnSplitRatio = function _fnSplitRatio(_ref4) {
   var value = _ref4.value;
   var point = _ref4.point;
 
-  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Split Ratio: </span>\n  <span style="color: #ED5813;">' + point.splitRatio + '</span><br/>\n  <span class="tp__body__title">Stock Price: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
+  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Split Ratio: </span>\n  <span style="color: #ED5813;">' + point.splitRatio + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
 };
 
 var _fnVolumeTooltip = function _fnVolumeTooltip(_ref5) {
@@ -83,8 +83,23 @@ var _fnVolumeTooltip = function _fnVolumeTooltip(_ref5) {
   var id = _ref5.id;
   var value = _ref5.value;
   var point = _ref5.point;
+  var _point$_open = point._open;
 
-  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Volume: </span>\n  <span class="tp__body__value">' + value + '</span><br/>\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + point.open + '</span>\n  <span class="tp__body__title"> Close: </span>\n  <span class="tp__body__value">' + point.close + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + point.low + '</span>\n  <span class="tp__body__title"> High: </span>\n  <span class="tp__body__value">' + point.high + '</span>\n  </div>');
+  var _open = _point$_open === undefined ? '' : _point$_open;
+
+  var _point$_close = point._close;
+
+  var _close = _point$_close === undefined ? '' : _point$_close;
+
+  var _point$_low = point._low;
+
+  var _low = _point$_low === undefined ? '' : _point$_low;
+
+  var _point$_high = point._high;
+
+  var _high = _point$_high === undefined ? '' : _point$_high;
+
+  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Volume: </span>\n  <span class="tp__body__value">' + value + '</span><br/>\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + _open + '</span>\n  <span class="tp__body__title"> Close: </span>\n  <span class="tp__body__value">' + _close + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + _low + '</span>\n  <span class="tp__body__title"> High: </span>\n  <span class="tp__body__value">' + _high + '</span>\n  </div>');
 };
 
 var _fnATHTooltip = function _fnATHTooltip(_ref6) {
@@ -102,7 +117,7 @@ var _fnHighLowTooltip = function _fnHighLowTooltip(_ref7) {
   var value = _ref7.value;
   var point = _ref7.point;
 
-  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + point.open + '</span><br/>\n  <span class="tp__body__title">Day High: </span>\n  <span class="tp__body__value">' + point.dayHigh + '</span><br/>\n  <span class="tp__body__title">Day Low: </span>\n  <span class="tp__body__value">' + point.dayLow + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.close + '</span>\n  </div>');
+  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + point.open + '</span><br/>\n  <span class="tp__body__title">High: </span>\n  <span class="tp__body__value">' + point.dayHigh + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + point.dayLow + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.close + '</span>\n  </div>');
 };
 
 var _fnPieTooltip = function _fnPieTooltip(_ref8) {

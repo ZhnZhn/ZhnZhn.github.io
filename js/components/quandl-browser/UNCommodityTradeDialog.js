@@ -20,10 +20,6 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _WithLoadOptions = require('../dialogs/WithLoadOptions');
-
-var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
-
 var _WithValidation = require('../dialogs/WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
@@ -31,6 +27,10 @@ var _WithValidation2 = _interopRequireDefault(_WithValidation);
 var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
+var _SelectWithLoad = require('../dialogs/SelectWithLoad');
+
+var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
 var _RowInputSelect = require('../dialogs/RowInputSelect');
 
@@ -70,7 +70,7 @@ var Filter = {
 
 var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   displayName: 'UNCommodityTradeDialog'
-}, _WithLoadOptions2.default, _WithValidation2.default, {
+}, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     this.country = null;
     this.chapter = null;
@@ -86,14 +86,6 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       isShowDate: true,
       isShowChartType: false,
 
-      isLoadingCountries: false,
-      isLoadingCountriesFailed: false,
-      optionCountries: [],
-
-      isLoadingCommodities: false,
-      isLoadingCommoditiesFailed: false,
-      optionCommodities: [],
-
       optionTradeFilter: [{ caption: 'Default : Empty Filter', value: Filter.DEFAULT }, { caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)' }, { caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)' }, { caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)' }, { caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)' }, { caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)' }, { caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)' }],
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
@@ -105,10 +97,6 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       validationMessages: []
     };
   },
-  componentDidMount: function componentDidMount() {
-    this._handlerLoadCountry();
-    this._handlerLoadChapter();
-  },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
       if (this.props.isShow === nextProps.isShow) {
@@ -116,19 +104,6 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       }
     }
     return true;
-  },
-  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      if (this.state.isLoadingCountriesFailed && this.props.isShow) {
-        this._handlerLoadCountry();
-      }
-      if (this.state.isLoadingCommoditiesFailed && this.props.isShow) {
-        this._handlerLoadChapter();
-      }
-    }
-  },
-  componetWillUnmount: function componetWillUnmount() {
-    this._unmountWithLoadOptions();
   },
   _initTrade: function _initTrade() {
     this.subheading = null;
@@ -195,20 +170,6 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   _handlerClickChartType: function _handlerClickChartType() {
     this.setState({ isShowChartType: !this.state.isShowChartType });
   },
-  _handlerLoadCountry: function _handlerLoadCountry() {
-    var _props = this.props;
-    var countryURI = _props.countryURI;
-    var countryJsonProp = _props.countryJsonProp;
-
-    this._handlerWithLoadOptions('optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed', countryURI, countryJsonProp);
-  },
-  _handlerLoadChapter: function _handlerLoadChapter() {
-    var _props2 = this.props;
-    var commodityURI = _props2.commodityURI;
-    var commodityJsonProp = _props2.commodityJsonProp;
-
-    this._handlerWithLoadOptions('optionCommodities', 'isLoadingCommodities', 'isLoadingCommoditiesFailed', commodityURI, commodityJsonProp);
-  },
   _handlerSelectCountry: function _handlerSelectCountry(country) {
     this.country = country;
     this._initTrade();
@@ -259,9 +220,9 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _props3 = this.props;
-    var loadId = _props3.loadId;
-    var fnValue = _props3.fnValue;
+    var _props = this.props;
+    var loadId = _props.loadId;
+    var fnValue = _props.fnValue;
 
     return {
       value: fnValue(this.chapter.value, this.country.value),
@@ -313,9 +274,9 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     var fromDate = _datesFragment$getVal3.fromDate;
     var toDate = _datesFragment$getVal3.toDate;
     var _dataColumn = this.subheading ? this.subheading.value : this.props.dataColumn;
-    var _props4 = this.props;
-    var loadId = _props4.loadId;
-    var fnValue = _props4.fnValue;
+    var _props2 = this.props;
+    var loadId = _props2.loadId;
+    var fnValue = _props2.fnValue;
     var _chartType = this.chartType ? this.chartType.value : undefined;
     var _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption;
     var _sliceItems = !(!this.chartType || this.chartType.value === _Type.ChartType.AREA) ? this._createSpliceItems() : undefined;
@@ -348,23 +309,21 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this2 = this;
 
-    var _props5 = this.props;
-    var isShow = _props5.isShow;
-    var onShow = _props5.onShow;
-    var initFromDate = _props5.initFromDate;
-    var initToDate = _props5.initToDate;
-    var msgOnNotValidFormat = _props5.msgOnNotValidFormat;
-    var onTestDate = _props5.onTestDate;
+    var _props3 = this.props;
+    var isShow = _props3.isShow;
+    var onShow = _props3.onShow;
+    var countryURI = _props3.countryURI;
+    var countryJsonProp = _props3.countryJsonProp;
+    var commodityURI = _props3.commodityURI;
+    var commodityJsonProp = _props3.commodityJsonProp;
+    var initFromDate = _props3.initFromDate;
+    var initToDate = _props3.initToDate;
+    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
+    var onTestDate = _props3.onTestDate;
     var _state2 = this.state;
     var isShowFilter = _state2.isShowFilter;
     var isShowDate = _state2.isShowDate;
     var isShowChartType = _state2.isShowChartType;
-    var optionCountries = _state2.optionCountries;
-    var isLoadingCountries = _state2.isLoadingCountries;
-    var isLoadingCountriesFailed = _state2.isLoadingCountriesFailed;
-    var optionCommodities = _state2.optionCommodities;
-    var isLoadingCommodities = _state2.isLoadingCommodities;
-    var isLoadingCommoditiesFailed = _state2.isLoadingCommoditiesFailed;
     var optionTradeFilter = _state2.optionTradeFilter;
     var isLoadingTrade = _state2.isLoadingTrade;
     var isLoadingTradeFailed = _state2.isLoadingTradeFailed;
@@ -396,22 +355,20 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       _react2.default.createElement(_ToolbarButtonCircle2.default, {
         buttons: this.toolbarButtons
       }),
-      _react2.default.createElement(_RowInputSelect2.default, {
+      _react2.default.createElement(_SelectWithLoad2.default, {
+        isShow: isShow,
+        uri: countryURI,
+        jsonProp: countryJsonProp,
         caption: 'Country:',
-        options: optionCountries,
         optionNames: 'Countries',
-        isLoading: isLoadingCountries,
-        isLoadingFailed: isLoadingCountriesFailed,
-        onLoadOption: this._handlerLoadCountry,
         onSelect: this._handlerSelectCountry
       }),
-      _react2.default.createElement(_RowInputSelect2.default, {
+      _react2.default.createElement(_SelectWithLoad2.default, {
+        isShow: isShow,
+        uri: commodityURI,
+        jsonProp: commodityJsonProp,
         caption: 'Chapter:',
-        options: optionCommodities,
         optionNames: 'Chapters',
-        isLoading: isLoadingCommodities,
-        isLoadingFailed: isLoadingCommoditiesFailed,
-        onLoadOption: this._handlerLoadChapter,
         onSelect: this._handlerSelectChapter
       }),
       _react2.default.createElement(

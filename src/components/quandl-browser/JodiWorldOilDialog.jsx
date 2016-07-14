@@ -1,11 +1,11 @@
 import React from 'react';
 
 import ZhDialog from '../ZhDialog';
-import WithLoadOptions from '../dialogs/WithLoadOptions';
 import WithToolbar from '../dialogs/WithToolbar';
 import WithValidation from '../dialogs/WithValidation';
 
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
+import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import SelectParentChild from '../dialogs/SelectParentChild';
 import ToolBarButton from '../ToolBarButton';
@@ -24,7 +24,6 @@ const unitOptions = [
 
 
 const JodiWorldOilDialog = React.createClass({
-   ...WithLoadOptions,
    ...WithToolbar,
    ...WithValidation,
 
@@ -37,17 +36,10 @@ const JodiWorldOilDialog = React.createClass({
       this.toolbarButtons = this._createType2WithToolbar();
       return {
         isShowDate : true,
-
-        isLoadingOne : false,
-        isLoadingOneFailed : false,
-        optionOne : [],
-
         validationMessages : []
       }
    },
-   componentDidMount(){
-     this._handlerLoadOne();
-   },
+
    shouldComponentUpdate(nextProps, nextState){
      if (this.props !== nextProps){
         if (this.props.isShow === nextProps.isShow){
@@ -55,24 +47,6 @@ const JodiWorldOilDialog = React.createClass({
         }
      }
      return true;
-   },
-   componentDidUpdate(prevProps, prevState){
-     if (prevProps !== this.props){
-        if (this.state.isLoadingOneFailed && this.props.isShow){
-          this._handlerLoadOne();
-        }
-     }
-   },
-   componetWillUnmount(){
-     this._unmountWithLoadOptions();
-   },
-
-   _handlerLoadOne(){
-     const { oneURI, oneJsonProp } = this.props;
-     this._handlerWithLoadOptions(
-           'optionOne', 'isLoadingOne', 'isLoadingOneFailed',
-           oneURI, oneJsonProp
-     );
    },
 
    _handlerSelectCountry(country){
@@ -128,18 +102,12 @@ const JodiWorldOilDialog = React.createClass({
 
    render(){
      const {
-             caption,
-             isShow, onShow,
-             oneCaption,
-             parentCaption, parentChildURI, parentJsonProp, childCaption,
-             msgOnNotSelected,
+             caption, isShow, onShow,
+             oneCaption, oneURI, oneJsonProp,
+             parentCaption, parentChildURI, parentJsonProp, childCaption, msgOnNotSelected,
              initFromDate, initToDate, msgOnNotValidFormat, onTestDate
            } = this.props
-         , {
-             isLoadingOne, isLoadingOneFailed, optionOne,
-             isShowDate,
-             validationMessages
-           } = this.state
+         , { isShowDate, validationMessages } = this.state
          , _commandButtons = [
                <ToolBarButton
                   key="a"
@@ -161,17 +129,17 @@ const JodiWorldOilDialog = React.createClass({
             buttons={this.toolbarButtons}
           />
 
-          <RowInputSelect
-            caption={oneCaption}
-            options={optionOne}
-            optionNames={'Items'}
-            isLoading={isLoadingOne}
-            isLoadingFailed={isLoadingOneFailed}
-            onLoadOption={this._handlerLoadOne}
-            onSelect={this._handlerSelectCountry}
+          <SelectWithLoad
+             isShow={isShow}
+             uri={oneURI}
+             jsonProp={oneJsonProp}
+             caption={oneCaption}
+             optionNames={'Items'}
+             onSelect={this._handlerSelectCountry}
           />
           <SelectParentChild
              ref={c => this.productFlow = c}
+             isShow={isShow}
              uri={parentChildURI}
              parentCaption={parentCaption}
              parentOptionNames="Items"

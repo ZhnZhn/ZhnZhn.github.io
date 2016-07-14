@@ -1,42 +1,26 @@
 import React from 'react';
 
 import WithValidation from './WithValidation';
-import WithLoadOptions from './WithLoadOptions';
 
 import ZhDialog from '../ZhDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import RowInputSelect from './RowInputSelect';
+import SelectWithLoad from './SelectWithLoad';
 import ToolBarButton from '../ToolBarButton';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
 const DialogType3 = React.createClass({
   ...WithValidation,
-  ...WithLoadOptions,
 
   displayName : 'DialogType3',
 
   getInitialState(){
     this.stock = null;
-    this.OPTIONS_STATE_PROP = 'optionStocks';
-    const { optionURI, optionStocks, descrUrl} = this.props
-        , _isLoading = (optionURI) ? true : false
-        , _optionStocks = (optionURI) ? [] : optionStocks;
-
-    this.toolbarButtons = (descrUrl)
+    this.toolbarButtons = (this.props.descrUrl)
          ?  [{ caption: 'I', onClick: this._handlerClickInfo }] : [];
 
     return {
-      isLoading : _isLoading,
-      isLoadingFailed : false,
-      optionStocks : _optionStocks,
       validationMessages: []
-    }
-  },
-
-  componentDidMount(){
-    if (this.props.optionURI){
-       this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
     }
   },
 
@@ -49,25 +33,9 @@ const DialogType3 = React.createClass({
     return true;
   },
 
-  componentDidUpdate(prevProps, prevState){
-    if (prevProps !== this.props){
-       if (this.state.isLoadingFailed && this.props.optionURI && this.props.isShow){
-         this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
-       }
-    }
-  },
-
-  componetWillUnmount(){
-    this._unmountWithLoadOptions();
-  },
-
   _handlerClickInfo(){
     const {descrUrl, onClickInfo} = this.props;
     onClickInfo({ descrUrl });
-  },
-
-  _handlerLoadOptions(){
-    this._handlerWithLoadOptions(this.OPTIONS_STATE_PROP);
   },
 
   _handlerSelectStock(stock){
@@ -81,9 +49,8 @@ const DialogType3 = React.createClass({
       this._createLoadOption
     );
   },
-
   _createValidationMessages(){
-    const {itemCaption='Stock'} = this.props;
+    const { itemCaption='Stock' } = this.props;
     let msg = [];
     if (!this.stock) { msg.push(this.props.msgOnNotSelected(itemCaption));}
     const {isValid, datesMsg} = this.datesFragment.getValidation();
@@ -92,15 +59,17 @@ const DialogType3 = React.createClass({
     return msg;
   },
   _createLoadOption(){
-    const {fromDate, toDate} = this.datesFragment.getValues()
-        , {dataColumn, loadId, fnItemCaption} = this.props
+    const { fromDate, toDate } = this.datesFragment.getValues()
+        , { columnName, dataColumn, loadId, fnItemCaption } = this.props
         , _itemCaption = (typeof fnItemCaption === 'function') ?
                        fnItemCaption(this.stock.value) : undefined;
     return {
+      title: this.stock.caption,
       value : this.stock.value,
       stock: this.stock,
       fromDate: fromDate,
       toDate: toDate,
+      columnName : columnName,
       dataColumn : dataColumn,
       itemCaption : _itemCaption,
       loadId : loadId
@@ -114,10 +83,11 @@ const DialogType3 = React.createClass({
   render(){
     const {
             caption, isShow, onShow,
+            optionURI, optionsJsonProp,
             itemCaption='Stock:', optionNames='Stocks',
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , {isLoading, isLoadingFailed, optionStocks, validationMessages} = this.state
+        , { validationMessages } = this.state
         , _commandButtons = [
        <ToolBarButton
           key="a"
@@ -138,25 +108,25 @@ const DialogType3 = React.createClass({
          <ToolbarButtonCircle
            buttons={this.toolbarButtons}
          />
-         <RowInputSelect
-            caption={itemCaption}
-            options={optionStocks}
-            optionNames={optionNames}
-            isLoading={isLoading}
-            isLoadingFailed={isLoadingFailed}
-            onLoadOption={this._handlerLoadOptions}
-            onSelect={this._handlerSelectStock}
+         <SelectWithLoad
+           isShow={isShow}
+           uri={optionURI}
+           jsonProp={optionsJsonProp}
+           caption={itemCaption}
+           optionNames={optionNames}
+           onSelect={this._handlerSelectStock}
          />
-        <DatesFragment
+
+         <DatesFragment
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
             msgOnNotValidFormat={msgOnNotValidFormat}
             onTestDate={onTestDate}
-        />
-        <ValidationMessagesFragment
+         />
+         <ValidationMessagesFragment
             validationMessages={validationMessages}
-        />
+         />
       </ZhDialog>
     );
   }

@@ -1,56 +1,29 @@
 import React from 'react';
 
 import ZhDialog from '../ZhDialog';
-import WithLoadOptions from './WithLoadOptions';
 import WithToolbar from './WithToolbar';
 import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import RowInputSelect from './RowInputSelect';
+import SelectWithLoad from './SelectWithLoad';
+import SelectParentChild from './SelectParentChild';
 import ToolBarButton from '../ToolBarButton';
 
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 import ShowHide from '../zhn/ShowHide';
 
-const defaultColumns = [
-  {caption : 'Value', value: 1}
-]
-
 const DialogType5 = React.createClass({
-  ...WithLoadOptions,
   ...WithToolbar,
   ...WithValidation,
 
   getInitialState(){
     this.one = null;
-    this.two = null;
-    this.three = null;
-
     this.toolbarButtons = this._createType2WithToolbar();
 
     return {
       isShowDate : true,
-
-      isLoadingOne : false,
-      isLoadingOneFailed : false,
-      optionOne : [],
-
-      isLoadingTwo : false,
-      isLoadingTwoFailed : false,
-      optionTwo : [],
-
-      optionThree : [
-        {caption: 'Import', value: 1},
-        {caption: 'Export', value: 3}
-      ],
-
       validationMessages: []
     }
-  },
-
-  componentDidMount(){
-    this._handlerLoadOne();
-    this._handlerLoadTwo();
   },
 
   shouldComponentUpdate(nextProps, nextState){
@@ -62,56 +35,10 @@ const DialogType5 = React.createClass({
     return true;
   },
 
-  componentDidUpdate(prevProps, prevState){
-    if (prevProps !== this.props){
-       if (this.state.isLoadingOneFailed && this.props.isShow){
-         this._handlerLoadOne();
-       }
-       if (this.state.isLoadingTwoFailed && this.props.isShow){
-         this._handlerLoadTwo();
-       }
-    }
-  },
-
-  componetWillUnmount(){
-    this._unmountWithLoadOptions();
-  },
-  
-  _handlerLoadOne(){
-    const {oneURI, oneJsonProp} = this.props;
-    this._handlerWithLoadOptions(
-          'optionOne', 'isLoadingOne', 'isLoadingOneFailed',
-          oneURI, oneJsonProp
-    );
-  },
-  _handlerLoadTwo(){
-    const {twoURI, twoJsonProp} = this.props;
-    this._handlerWithLoadOptions(
-         'optionTwo', 'isLoadingTwo', 'isLoadingTwoFailed',
-         twoURI, twoJsonProp
-    );
-  },
   _handlerSelectOne(one){
     this.one = one;
   },
-  _handlerSelectTwo(two){
-    this.two = two;
-    if (two) {
-      if (two.columns) {
-        this.three = null;
-        this.setState({optionThree: two.columns});
-      } else {
-        this.three = null;
-        this.setState({optionThree: defaultColumns});
-      }
-    } else {
-      this.three = null;
-      this.setState({optionThree: []});
-    }
-  },
-  _handlerSelectThree(three){
-    this.three = three;
-  },
+
   _handlerLoad(){
     this._handlerWithValidationLoad(
       this._createValidationMessages(),
@@ -119,12 +46,13 @@ const DialogType5 = React.createClass({
     );
   },
   _createValidationMessages(){
-     const {oneCaption, twoCaption, threeCaption} = this.props;
+     const { oneCaption } = this.props;
      let msg = [];
 
      if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
-     if (!this.two)    { msg.push(this.props.msgOnNotSelected(twoCaption));}
-     if (!this.three)  { msg.push(this.props.msgOnNotSelected(threeCaption));}
+
+     const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
+     if (!isValid1) { msg = msg.concat(msg1); }
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
      if (!isValid) { msg = msg.concat(datesMsg); }
@@ -133,40 +61,41 @@ const DialogType5 = React.createClass({
      return msg;
   },
   _createLoadOption(){
-    const { fromDate, toDate } = this.datesFragment.getValues()
+    const { parent:two, child:three } = this.parentChild.getValues()
+        , { fromDate, toDate } = this.datesFragment.getValues()
         , { fnValue, fnValueType, dataColumn, loadId } = this.props;
 
     switch (fnValueType) {
       case 'TreeItem':
           return {
-            value : fnValue(this.one.value, this.three.value),
+            value : fnValue(this.one.value, three.value),
             fromDate: fromDate,
             toDate: toDate,
             dataColumn : dataColumn,
             loadId : loadId,
-            title : `${this.one.caption}:${this.two.caption}`,
-            subtitle : this.three.caption
+            title : `${this.one.caption}:${two.caption}`,
+            subtitle : three.caption
           }
      case 'PlusTreeItem':
          return {
-           value : fnValue(this.one.value, this.two.value, this.three.value),
+           value : fnValue(this.one.value, two.value, three.value),
            fromDate: fromDate,
            toDate: toDate,
            dataColumn : dataColumn,
            loadId : loadId,
-           title : `${this.two.caption}:${this.three.caption}`,
+           title : `${two.caption}:${three.caption}`,
            subtitle : this.one.caption
          }
      default:
-         const _dataColumn = (this.three) ? this.three.value : 1;
+         const _dataColumn = (three) ? three.value : 1;
          return {
-           value : fnValue(this.one.value, this.two.value),
+           value : fnValue(this.one.value, two.value),
            fromDate: fromDate,
            toDate: toDate,
            dataColumn : _dataColumn,
            loadId : loadId,
-           title : `${this.one.caption}:${this.two.caption}`,
-           subtitle : this.three.caption
+           title : `${this.one.caption}:${two.caption}`,
+           subtitle : three.caption
          }
     }
   },
@@ -178,17 +107,12 @@ const DialogType5 = React.createClass({
 
   render(){
     const {
-           caption, oneCaption, twoCaption, threeCaption,
-           isShow, onShow,
+           caption, isShow, onShow,
+           oneCaption, oneURI, oneJsonProp,
+           twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,           
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , {
-           isShowDate,
-           optionOne, isLoadingOne, isLoadingOneFailed,
-           optionTwo, isLoadingTwo, isLoadingTwoFailed,
-           optionThree,
-           validationMessages
-         } = this.state
+        , { isShowDate, validationMessages } = this.state
         , _commandButtons = [
        <ToolBarButton
           key="a"
@@ -209,29 +133,26 @@ const DialogType5 = React.createClass({
              <ToolbarButtonCircle
                 buttons={this.toolbarButtons}
              />
-             <RowInputSelect
-                caption={oneCaption}
-                options={optionOne}
-                optionNames={'Items'}
-                isLoading={isLoadingOne}
-                isLoadingFailed={isLoadingOneFailed}
-                onLoadOption={this._handlerLoadOne}
-                onSelect={this._handlerSelectOne}
+             <SelectWithLoad
+               isShow={isShow}
+               uri={oneURI}
+               jsonProp={oneJsonProp}
+               caption={oneCaption}
+               optionNames={'Items'}
+               onSelect={this._handlerSelectOne}
              />
-             <RowInputSelect
-                caption={twoCaption}
-                options={optionTwo}
-                optionNames={'Items'}
-                isLoading={isLoadingTwo}
-                isLoadingFailed={isLoadingTwoFailed}
-                onLoadOption={this._handlerLoadTwo}
-                onSelect={this._handlerSelectTwo}
+
+             <SelectParentChild
+                 ref={c => this.parentChild = c}
+                 isShow={isShow}
+                 uri={twoURI}
+                 parentCaption={twoCaption}
+                 parentOptionNames="Items"
+                 parentJsonProp={twoJsonProp}
+                 childCaption={threeCaption}
+                 msgOnNotSelected={msgOnNotSelected}
              />
-             <RowInputSelect
-               caption={threeCaption}
-               options={optionThree}
-               onSelect={this._handlerSelectThree}
-             />
+
              <ShowHide isShow={isShowDate}>
                <DatesFragment
                  ref={c => this.datesFragment = c}

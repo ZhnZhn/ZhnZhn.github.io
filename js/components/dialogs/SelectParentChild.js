@@ -27,6 +27,7 @@ var SelectParentChild = _react2.default.createClass(_extends({
 }, _WithLoadOptions2.default, {
   getDefaultProps: function getDefaultProps() {
     return {
+      isShow: true,
       msgOnNotSelected: function msgOnNotSelected(item) {
         return item + ' is not selected';
       }
@@ -45,6 +46,13 @@ var SelectParentChild = _react2.default.createClass(_extends({
   },
   componentDidMount: function componentDidMount() {
     this._handlerLoadParentOptions();
+  },
+  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      if (this.state.isLoadingFailed && this.props.isShow) {
+        this._handlerLoadParentOptions();
+      }
+    }
   },
   componetWillUnmount: function componetWillUnmount() {
     this._unmountWithLoadOptions();

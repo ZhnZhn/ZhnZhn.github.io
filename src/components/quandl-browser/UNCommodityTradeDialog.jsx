@@ -4,9 +4,9 @@ import {ChartType, ModalDialog} from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
 
 import ZhDialog from '../ZhDialog';
-import WithLoadOptions from '../dialogs/WithLoadOptions';
 import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
+import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import ShowHide from '../zhn/ShowHide';
 import ToolBarButton from '../ToolBarButton';
@@ -29,7 +29,6 @@ const Filter = {
 };
 
 const UNCommodityTradeDialog = React.createClass({
-  ...WithLoadOptions,
   ...WithValidation,
 
   getInitialState(){
@@ -52,14 +51,6 @@ const UNCommodityTradeDialog = React.createClass({
       isShowFilter : false,
       isShowDate : true,
       isShowChartType : false,
-
-      isLoadingCountries : false,
-      isLoadingCountriesFailed : false,
-      optionCountries : [],
-
-      isLoadingCommodities : false,
-      isLoadingCommoditiesFailed : false,
-      optionCommodities : [],
 
       optionTradeFilter : [
         {caption: 'Default : Empty Filter', value: Filter.DEFAULT},
@@ -89,11 +80,6 @@ const UNCommodityTradeDialog = React.createClass({
     }
   },
 
-  componentDidMount(){
-    this._handlerLoadCountry();
-    this._handlerLoadChapter();
-  },
-
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
@@ -101,21 +87,6 @@ const UNCommodityTradeDialog = React.createClass({
        }
     }
     return true;
-  },
-
-  componentDidUpdate(prevProps, prevState){
-    if (prevProps !== this.props){
-       if (this.state.isLoadingCountriesFailed && this.props.isShow){
-         this._handlerLoadCountry();
-       }
-       if (this.state.isLoadingCommoditiesFailed && this.props.isShow){
-         this._handlerLoadChapter();
-       }
-    }
-  },
-
-  componetWillUnmount(){
-    this._unmountWithLoadOptions();
   },
 
   _initTrade(){
@@ -179,20 +150,7 @@ const UNCommodityTradeDialog = React.createClass({
   _handlerClickChartType(){
     this.setState({isShowChartType: !this.state.isShowChartType});
   },
-  _handlerLoadCountry(){
-    const {countryURI, countryJsonProp} = this.props;
-    this._handlerWithLoadOptions(
-          'optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed',
-          countryURI, countryJsonProp
-    );
-  },
-  _handlerLoadChapter(){
-    const {commodityURI, commodityJsonProp} = this.props;
-    this._handlerWithLoadOptions(
-         'optionCommodities', 'isLoadingCommodities', 'isLoadingCommoditiesFailed',
-         commodityURI, commodityJsonProp
-    );
-  },
+
   _handlerSelectCountry(country){
     this.country = country;
     this._initTrade();
@@ -203,7 +161,7 @@ const UNCommodityTradeDialog = React.createClass({
   },
   _handlerSelectTradeFilter(filter){
      this.tradeFilter = filter;
-     this.setState({optionTrades: this._filterTrade()});
+     this.setState({ optionTrades: this._filterTrade() });
   },
   _handlerSelectTrade(trade){
     this.subheading = trade;
@@ -220,20 +178,20 @@ const UNCommodityTradeDialog = React.createClass({
   },
   _loadMeta(option){
     this.props.onLoad(option);
-    this.setState({isLoadingTrade: true});
+    this.setState({ isLoadingTrade: true });
   },
   _createMetaValidationMessages(){
      let msg = [];
-     if (!this.country)    { msg.push(this.props.msgOnNotSelected('Country'));}
-     if (!this.chapter) { msg.push(this.props.msgOnNotSelected('Subheading'));}
-     const {isValid, datesMsg} = this.datesFragment.getValidation();
+     if (!this.country)  { msg.push(this.props.msgOnNotSelected('Country'));}
+     if (!this.chapter)  { msg.push(this.props.msgOnNotSelected('Subheading'));}
+     const { isValid, datesMsg } = this.datesFragment.getValidation();
      if (!isValid) { msg = msg.concat(datesMsg); }
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   },
   _createLoadMetaOption(){
-    const {fromDate, toDate} = this.datesFragment.getValues()
-        , {loadId, fnValue} = this.props;
+    const { fromDate, toDate } = this.datesFragment.getValues()
+        , { loadId, fnValue } = this.props;
     return {
        value : fnValue(this.chapter.value, this.country.value),
        fromDate: fromDate,
@@ -254,7 +212,7 @@ const UNCommodityTradeDialog = React.createClass({
     });
   },
   _loadMetaOptionFailed(){
-    this.setState({isLoadingTrade:false, isLoadingTradeFailed:true})
+    this.setState({ isLoadingTrade:false, isLoadingTradeFailed:true })
   },
   _handlerLoadData(){
     this._handlerWithValidationLoad(
@@ -288,7 +246,7 @@ const UNCommodityTradeDialog = React.createClass({
         , _title = (this.tradeFilter) ?
                    `${this.country.caption}:${this.tradeFilter.caption}` :
                    `${this.country.caption}`
-        , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )       
+        , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )
               ? this._createSpliceItems()
               : undefined
     return {
@@ -320,12 +278,12 @@ const UNCommodityTradeDialog = React.createClass({
   render(){
     const {
            isShow, onShow,
+           countryURI, countryJsonProp,
+           commodityURI, commodityJsonProp,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
            isShowFilter, isShowDate, isShowChartType,
-           optionCountries, isLoadingCountries, isLoadingCountriesFailed,
-           optionCommodities, isLoadingCommodities, isLoadingCommoditiesFailed,
            optionTradeFilter,
            isLoadingTrade, isLoadingTradeFailed, optionTrades, placeholderTrade,
            optionChartTypes,
@@ -358,24 +316,23 @@ const UNCommodityTradeDialog = React.createClass({
                buttons={this.toolbarButtons}
              />
 
-             <RowInputSelect
-                caption={'Country:'}
-                options={optionCountries}
-                optionNames={'Countries'}
-                isLoading={isLoadingCountries}
-                isLoadingFailed={isLoadingCountriesFailed}
-                onLoadOption={this._handlerLoadCountry}
-                onSelect={this._handlerSelectCountry}
+             <SelectWithLoad
+               isShow={isShow}
+               uri={countryURI}
+               jsonProp={countryJsonProp}
+               caption={'Country:'}
+               optionNames={'Countries'}
+               onSelect={this._handlerSelectCountry}
              />
-             <RowInputSelect
-                caption={'Chapter:'}
-                options={optionCommodities}
-                optionNames={'Chapters'}
-                isLoading={isLoadingCommodities}
-                isLoadingFailed={isLoadingCommoditiesFailed}
-                onLoadOption={this._handlerLoadChapter}
-                onSelect={this._handlerSelectChapter}
+             <SelectWithLoad
+               isShow={isShow}
+               uri={commodityURI}
+               jsonProp={commodityJsonProp}
+               caption={'Chapter:'}
+               optionNames={'Chapters'}
+               onSelect={this._handlerSelectChapter}
              />
+
              <ShowHide isShow={isShowFilter}>
                <RowInputSelect
                  caption={'Filter Trade:'}

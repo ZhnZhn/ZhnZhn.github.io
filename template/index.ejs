@@ -29,6 +29,13 @@
         js.src = 'lib/fetch.js';
         document.head.appendChild(js);
       }
+
+      if (!Array.isArray) {
+        Array.isArray = function(arg) {
+           return Object.prototype.toString.call(arg) === '[object Array]';
+        };
+      }
+
     })()
   </script>
 
@@ -130,6 +137,6 @@
       </div>
    </noscript>
 
-   
+
 </body>
 </html>

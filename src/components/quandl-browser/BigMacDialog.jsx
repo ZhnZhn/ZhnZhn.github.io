@@ -1,10 +1,10 @@
 import React from 'react';
 
 import ZhDialog from '../ZhDialog';
-import WithLoadOptions from '../dialogs/WithLoadOptions';
 import WithToolbar from '../dialogs/WithToolbar';
 import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
+import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import ToolBarButton from '../ToolBarButton';
 import ShowHide from '../zhn/ShowHide';
@@ -13,7 +13,6 @@ import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
 const BigMacDialog = React.createClass({
-  ...WithLoadOptions,
   ...WithToolbar,
   ...WithValidation,
 
@@ -25,9 +24,6 @@ const BigMacDialog = React.createClass({
 
      return {
         isShowDate : true,
-        isLoadingCountries : false,
-        isLoadingCountriesFailed : false,
-        optionCountries : [],
         optionMetrics : [
           { caption : 'Local Price', value : 1},
           { caption : 'Dollar Exchange', value : 2},
@@ -40,10 +36,6 @@ const BigMacDialog = React.createClass({
      }
   },
 
-  componentDidMount(){
-    this._handlerLoadCountry();
-  },
-
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
@@ -53,25 +45,6 @@ const BigMacDialog = React.createClass({
     return true;
   },
 
-  componentDidUpdate(prevProps, prevState){
-    if (prevProps !== this.props){
-       if (this.state.isLoadingCountriesFailed && this.props.isShow){
-         this._handlerLoadCountry();
-       }
-    }
-  },
-
-  componetWillUnmount(){
-    this._unmountWithLoadOptions();
-  },
-
-  _handlerLoadCountry(){
-    const {countryURI, countryJsonProp} = this.props;
-    this._handlerWithLoadOptions(
-          'optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed',
-          countryURI, countryJsonProp
-    );
-  },
   _handlerSelectCountry(country){
     this.country = country;
   },
@@ -115,18 +88,13 @@ const BigMacDialog = React.createClass({
     this.props.onClose();
   },
 
-
   render(){
     const {
            isShow, onShow,
+           countryURI, countryJsonProp,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , {
-           isShowDate,
-           optionCountries, isLoadingCountries, isLoadingCountriesFailed,
-           optionMetrics,
-           validationMessages
-         } = this.state
+        , { isShowDate, optionMetrics, validationMessages } = this.state
         , _commandButtons = [
        <ToolBarButton
           key="a"
@@ -147,14 +115,14 @@ const BigMacDialog = React.createClass({
            <ToolbarButtonCircle
              buttons={this.toolbarButtons}
            />
-           <RowInputSelect
-              caption={'Country:'}
-              options={optionCountries}
-              optionNames={'Countries'}
-              isLoading={isLoadingCountries}
-              isLoadingFailed={isLoadingCountriesFailed}
-              onLoadOption={this._handlerLoadCountry}
-              onSelect={this._handlerSelectCountry}
+
+           <SelectWithLoad
+             isShow={isShow}
+             uri={countryURI}
+             jsonProp={countryJsonProp}
+             caption={'Country:'}
+             optionNames={'Countries'}
+             onSelect={this._handlerSelectCountry}
            />
            <RowInputSelect
               caption={'Metric:'}

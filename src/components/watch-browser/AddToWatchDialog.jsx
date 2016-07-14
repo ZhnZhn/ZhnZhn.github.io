@@ -10,7 +10,6 @@ import Msg from '../../constants/Msg';
 import ModalDialog from '../zhn/ModalDialog';
 import ToolBarButton from '../ToolBarButton';
 import ZhSelect from '../ZhSelect';
-import InputSecret from '../zhn/InputSecret';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
 import DialogStyles from '../styles/DialogStyles'

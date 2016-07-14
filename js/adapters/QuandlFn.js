@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fnSetTitleToConfig = exports.fnGetRecentDate = exports.fnCreateValueMovingFromSeria = exports.fnCreateValueMoving = exports.fnCreatePercent = exports.fnCreateZhConfig = exports.fnCreateDatasetInfo = undefined;
+exports.fnFindColumnIndex = exports.fnSetTitleToConfig = exports.fnGetRecentDate = exports.fnCreateValueMovingFromSeria = exports.fnCreateValueMoving = exports.fnCreatePercent = exports.fnCreateZhConfig = exports.fnCreateDatasetInfo = undefined;
 
 var _big = require('big.js');
 
@@ -52,6 +52,7 @@ var fnCreateDatasetInfo = exports.fnCreateDatasetInfo = function fnCreateDataset
 var fnCreateZhConfig = exports.fnCreateZhConfig = function fnCreateZhConfig(option) {
   return {
     id: option.value,
+    columnName: option.columnName,
     dataColumn: option.dataColumn,
     itemCaption: option.itemCaption
   };
@@ -130,5 +131,21 @@ var fnSetTitleToConfig = exports.fnSetTitleToConfig = function fnSetTitleToConfi
 
   config.title.text = title ? title : '';
   config.subtitle.text = subtitle ? subtitle + ':' : '';
+};
+
+var fnFindColumnIndex = exports.fnFindColumnIndex = function fnFindColumnIndex(obj) {
+  var columnName = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+
+  var column_names = Array.isArray(obj) ? obj : obj.dataset.column_names ? obj.dataset.column_names : [],
+      _columnName = columnName.toLowerCase();
+
+  if (columnName && column_names) {
+    for (var i = 0, max = column_names.length; i < max; i++) {
+      if (column_names[i].toLowerCase() === _columnName) {
+        return i;
+      }
+    }
+  }
+  return -1;
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlFn.js.map

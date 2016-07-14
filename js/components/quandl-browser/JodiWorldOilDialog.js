@@ -14,10 +14,6 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _WithLoadOptions = require('../dialogs/WithLoadOptions');
-
-var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
-
 var _WithToolbar = require('../dialogs/WithToolbar');
 
 var _WithToolbar2 = _interopRequireDefault(_WithToolbar);
@@ -29,6 +25,10 @@ var _WithValidation2 = _interopRequireDefault(_WithValidation);
 var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
+var _SelectWithLoad = require('../dialogs/SelectWithLoad');
+
+var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
 var _RowInputSelect = require('../dialogs/RowInputSelect');
 
@@ -60,7 +60,7 @@ var unitOptions = [{ "caption": "Thousand Barrels per day (kb/d)", "value": "KD"
 
 var JodiWorldOilDialog = _react2.default.createClass(_extends({
   displayName: 'JodiWorldOilDialog'
-}, _WithLoadOptions2.default, _WithToolbar2.default, _WithValidation2.default, {
+}, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     this.country = null;
     this.product = null;
@@ -70,16 +70,8 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
     this.toolbarButtons = this._createType2WithToolbar();
     return {
       isShowDate: true,
-
-      isLoadingOne: false,
-      isLoadingOneFailed: false,
-      optionOne: [],
-
       validationMessages: []
     };
-  },
-  componentDidMount: function componentDidMount() {
-    this._handlerLoadOne();
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -88,23 +80,6 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
       }
     }
     return true;
-  },
-  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      if (this.state.isLoadingOneFailed && this.props.isShow) {
-        this._handlerLoadOne();
-      }
-    }
-  },
-  componetWillUnmount: function componetWillUnmount() {
-    this._unmountWithLoadOptions();
-  },
-  _handlerLoadOne: function _handlerLoadOne() {
-    var _props = this.props;
-    var oneURI = _props.oneURI;
-    var oneJsonProp = _props.oneJsonProp;
-
-    this._handlerWithLoadOptions('optionOne', 'isLoadingOne', 'isLoadingOneFailed', oneURI, oneJsonProp);
   },
   _handlerSelectCountry: function _handlerSelectCountry(country) {
     this.country = country;
@@ -159,10 +134,10 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
 
     var fromDate = _datesFragment$getVal2.fromDate;
     var toDate = _datesFragment$getVal2.toDate;
-    var _props2 = this.props;
-    var fnValue = _props2.fnValue;
-    var dataColumn = _props2.dataColumn;
-    var loadId = _props2.loadId;
+    var _props = this.props;
+    var fnValue = _props.fnValue;
+    var dataColumn = _props.dataColumn;
+    var loadId = _props.loadId;
 
     return {
       value: fnValue(this.country.value, product.value, flow.value, this.units.value),
@@ -181,24 +156,23 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props3 = this.props;
-    var caption = _props3.caption;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var oneCaption = _props3.oneCaption;
-    var parentCaption = _props3.parentCaption;
-    var parentChildURI = _props3.parentChildURI;
-    var parentJsonProp = _props3.parentJsonProp;
-    var childCaption = _props3.childCaption;
-    var msgOnNotSelected = _props3.msgOnNotSelected;
-    var initFromDate = _props3.initFromDate;
-    var initToDate = _props3.initToDate;
-    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
-    var onTestDate = _props3.onTestDate;
+    var _props2 = this.props;
+    var caption = _props2.caption;
+    var isShow = _props2.isShow;
+    var onShow = _props2.onShow;
+    var oneCaption = _props2.oneCaption;
+    var oneURI = _props2.oneURI;
+    var oneJsonProp = _props2.oneJsonProp;
+    var parentCaption = _props2.parentCaption;
+    var parentChildURI = _props2.parentChildURI;
+    var parentJsonProp = _props2.parentJsonProp;
+    var childCaption = _props2.childCaption;
+    var msgOnNotSelected = _props2.msgOnNotSelected;
+    var initFromDate = _props2.initFromDate;
+    var initToDate = _props2.initToDate;
+    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
+    var onTestDate = _props2.onTestDate;
     var _state = this.state;
-    var isLoadingOne = _state.isLoadingOne;
-    var isLoadingOneFailed = _state.isLoadingOneFailed;
-    var optionOne = _state.optionOne;
     var isShowDate = _state.isShowDate;
     var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
@@ -220,19 +194,19 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
       _react2.default.createElement(_ToolbarButtonCircle2.default, {
         buttons: this.toolbarButtons
       }),
-      _react2.default.createElement(_RowInputSelect2.default, {
+      _react2.default.createElement(_SelectWithLoad2.default, {
+        isShow: isShow,
+        uri: oneURI,
+        jsonProp: oneJsonProp,
         caption: oneCaption,
-        options: optionOne,
         optionNames: 'Items',
-        isLoading: isLoadingOne,
-        isLoadingFailed: isLoadingOneFailed,
-        onLoadOption: this._handlerLoadOne,
         onSelect: this._handlerSelectCountry
       }),
       _react2.default.createElement(_SelectParentChild2.default, {
         ref: function ref(c) {
           return _this.productFlow = c;
         },
+        isShow: isShow,
         uri: parentChildURI,
         parentCaption: parentCaption,
         parentOptionNames: 'Items',

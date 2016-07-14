@@ -75,17 +75,18 @@ const _fnFindList = function(group, captionList){
 const _fnAddItem = function(watchList, item){
   const {caption, groupCaption, listCaption, config} = item
       , {zhConfig} = config
-      , {dataColumn, id} = zhConfig
+      , { columnName, dataColumn, id} = zhConfig
       , toGroup = _fnFindGroup(watchList, groupCaption)
       , toList = _fnFindList(toGroup, listCaption)
       , items = toList.items;
+  
   if ( _fnCheckIsInArraySameCaption(items, caption) ){
     return _fResultItemExisted(caption, listCaption);
   }
   if (items){
-    toList.items.push({ caption, dataColumn, id });
+    toList.items.push({ caption, columnName, dataColumn, id });
   } else {
-    toList.items = [{ caption, dataColumn, id }];
+    toList.items = [{ caption, columnName, dataColumn, id }];
   }
   return {isDone : true}
 }

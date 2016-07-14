@@ -65,8 +65,9 @@ const menuQuandl = [
   },{
     caption : 'Futures',
     items : [
-      { id : Quandl.CHINA_DCE_FUTURE },
-      { id : Quandl.CHINA_ZCE_FUTURE }
+      { id : Quandl.DCE_FUTURE },
+      { id : Quandl.ZCE_FUTURE },
+      { id : Quandl.SHANGHAI_FUTURE }
     ]
   },{
     caption : 'Real Estate',

@@ -100,18 +100,20 @@ var _fnAddItem = function _fnAddItem(watchList, item) {
   var listCaption = item.listCaption;
   var config = item.config;
   var zhConfig = config.zhConfig;
+  var columnName = zhConfig.columnName;
   var dataColumn = zhConfig.dataColumn;
   var id = zhConfig.id;
   var toGroup = _fnFindGroup(watchList, groupCaption);
   var toList = _fnFindList(toGroup, listCaption);
   var items = toList.items;
+
   if (_fnCheckIsInArraySameCaption(items, caption)) {
     return _fResultItemExisted(caption, listCaption);
   }
   if (items) {
-    toList.items.push({ caption: caption, dataColumn: dataColumn, id: id });
+    toList.items.push({ caption: caption, columnName: columnName, dataColumn: dataColumn, id: id });
   } else {
-    toList.items = [{ caption: caption, dataColumn: dataColumn, id: id }];
+    toList.items = [{ caption: caption, columnName: columnName, dataColumn: dataColumn, id: id }];
   }
   return { isDone: true };
 };

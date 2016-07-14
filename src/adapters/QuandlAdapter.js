@@ -17,7 +17,8 @@ import {
         fnCreateZhConfig,
         fnCreateDatasetInfo,
         fnCreateValueMovingFromSeria,
-        fnGetRecentDate
+        fnGetRecentDate,
+        fnFindColumnIndex
       } from './QuandlFn';
 import {fCreatePieConfig} from './QuandlToPie';
 import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
@@ -102,80 +103,91 @@ const _fnAddExDividend = function(result){
     return result;
 }
 
-const _fnAddVolume = function(result){
-  const {point, dateUTC, dataVolume, dataVolumeColumn} = result;
-  dataVolume.push([dateUTC, point[5]]);
-  if (point[4]>point[1]){
+const _fnAddVolume = function(optionIndex, result){
+  const { volume, open=1, close=4, low=3, high=2 } = optionIndex
+      , { point, dateUTC, dataVolume, dataVolumeColumn } = result;
+  dataVolume.push([dateUTC, point[volume]]);
+  if (point[close]>point[open]){
     dataVolumeColumn.push({
-      x : dateUTC, y : point[5],
-      open : point[1], close : point[4],
-      low: point[3], high: point[2],
+      x : dateUTC, y : point[volume],
+      _open : point[open], _close : point[close],
+      _low: point[low], _high: point[high],
       color: '#80c040'
     });
-  } else if (point[4]<point[1]){
+  } else if (point[close]<point[open]){
     dataVolumeColumn.push({
-      x : dateUTC, y : point[5],
-      open : point[1], close : point[4],
-      low: point[3], high: point[2],
+      x : dateUTC, y : point[volume],
+      _open : point[open], _close : point[close],
+      _low: point[low], _high: point[high],
       color: '#F44336'
     });
   } else {
     dataVolumeColumn.push({
-      x : dateUTC, y : point[5],
-      open : point[1], close : point[4],
-      low: point[3], high: point[2],
-      color: 'gray'});
+      x : dateUTC, y : point[volume],
+      _open : point[open], _close : point[close],
+      _low: point[low], _high: point[high],
+      color: 'gray'
+    });
   }
   return result;
 }
 
-const _fnAddATH = function(result){
-  const { dateUTC, point, seria, dataATH } = result;
-  const len = seria.length;
+const _fnAddATH = function(optionIndex, result){
+  const { open=1 } = optionIndex
+      , { dateUTC, point, seria, dataATH } = result
+      , len = seria.length;
+
   if (len>1){
-    const prevPoint = seria[len-2];
-    const bDelta = (point[1]) ? Big(prevPoint[1]).minus(point[1]) : Big('0.0');
-    const bPercent = bDelta.times(100).div(prevPoint[1]).abs().toFixed(2);
-    let color;
-    if (bDelta.gt(0.0)){
-      color = '#F44336';
+    const prevPoint = seria[len-2]
+        , _closePrev = prevPoint[1]
+        , _bDelta = (point[open] && _closePrev)
+            ? Big(_closePrev).minus(point[open])
+            : Big('0.0')
+        , _bPercent = ( _closePrev )
+            ? _bDelta.times(100).div(_closePrev).abs().toFixed(2)
+            : Big('0.0');
+
+    let _color;
+    if (_bDelta.gt(0.0)){
+      _color = '#F44336';
     }
-    else if (!bDelta.gte(0.0)){
-         color = '#80c040';
+    else if (!_bDelta.gte(0.0)){
+      _color = '#80c040';
     } else {
-         color = (point[1]) ? 'gray' : 'white';
+      _color = (point[open]) ? 'gray' : 'white';
     }
 
     dataATH.push({
       x : dateUTC,
-      y : parseFloat(bPercent),
-      close : prevPoint[1],
-      open : point[1],
-      color : color
+      y : parseFloat(_bPercent),
+      close : _closePrev,
+      open : (point[open]) ? point[open] : 'Unknown',
+      color : _color
     })
   }
 
   return result;
 }
 
-const _fnAddHighLow = function(result){
-  const { dateUTC, yPointIndex, point, dataHighLow } = result;
+const _fnAddHighLow = function(optionIndex, result){
+  const { open=1, high=2, low=3 } = optionIndex
+      , { dateUTC, yPointIndex, point, dataHighLow } = result;
 
-  const closeValue = point[yPointIndex]
-      , openValue = (point[1]) ? point[1] : 'Uknown'
-      , bHigh = (point[2]) ? Big(point[2]).minus(closeValue) : Big('0.0')
-      , bLow = (point[3]) ? Big(point[3]).minus(closeValue) : Big('0.0')
-      , high = (point[2]) ? point[2] : 'Uknown'
-      , low = (point[3]) ? point[3] : 'Uknown'
+  const _closeValue = point[yPointIndex]
+      , _openValue = (point[open]) ? point[open] : 'Unknown'
+      , _bHigh = (point[high]) ? Big(point[high]).minus(_closeValue) : Big('0.0')
+      , _bLow = (point[low]) ? Big(point[low]).minus(_closeValue) : Big('0.0')
+      , _dayHigh = (point[high]) ? point[high] : 'Unknown'
+      , _dayLow = (point[low]) ? point[low] : 'Unknown'
 
   dataHighLow.push({
     x : dateUTC,
-    high : parseFloat(bHigh),
-    low : parseFloat(bLow),
-    open : openValue,
-    dayHigh : high,
-    dayLow : low,
-    close : closeValue
+    high : parseFloat(_bHigh),
+    low : parseFloat(_bLow),
+    open : _openValue,
+    dayHigh : _dayHigh,
+    dayLow : _dayLow,
+    close : _closeValue
   });
 
   return result
@@ -196,21 +208,38 @@ const _fnCreatePointFlow = function(json, yPointIndex){
          dataATH : [], dataHighLow : []
       };
 
-  if (column_names[5] === "Volume"){
-    fnStep.push(_fnAddVolume);
+  const open = fnFindColumnIndex(column_names, "Open")
+      , close = fnFindColumnIndex(column_names, "Close")
+      , low = fnFindColumnIndex(column_names, "Low")
+      , high = fnFindColumnIndex(column_names, "High")
+      , volume = fnFindColumnIndex(column_names, "Volume");
+
+  if ( volume !== -1){
+    fnStep.push(_fnAddVolume.bind(null, {
+      volume, open, close, low, high
+    }));
   }
+
   if (column_names[6] === "Ex-Dividend"){
     fnStep.push(_fnAddExDividend);
   }
   if (column_names[7] === "Split Ratio"){
     fnStep.push(_fnAddSplitRatio);
   }
-  if (column_names[1] === "Open"){
-    fnStep.push(_fnAddATH);
+
+
+  if ( open ){
+    fnStep.push(_fnAddATH.bind(null, {
+      open
+    }));
   }
-  if (column_names[2] === "High" && column_names[3] === "Low"){
-    fnStep.push(_fnAddHighLow);
+
+  if (high && low){
+    fnStep.push(_fnAddHighLow.bind(null, {
+      open, high, low
+    }));
   }
+
   return {
     fnPointsFlow : flow(fnStep),
     result : result
@@ -445,8 +474,25 @@ const fnConfigAxes = function(result){
 
 const fnQuandlFlow = flow(fnGetSeries, fnConfigAxes);
 
+const _fnGetDataColumnIndex = function(json, option){
+  const { columnName, dataColumn } = option
+      , _dataColumn = fnFindColumnIndex(json, columnName)
+      , _columnIndex = (_dataColumn !== -1)
+            ? _dataColumn
+            : (dataColumn) ? dataColumn : 1;
+
+   return _columnIndex;
+}
+
 const _fCreateAreaConfig = function(json, option){
-  const config = ChartConfig.fBaseAreaConfig();
+  const config = ChartConfig.fBaseAreaConfig()
+      , { columnName } = option;
+
+  option.dataColumn = _fnGetDataColumnIndex(json, option);
+  if ( columnName ){
+    config.series[0].zhValueText = columnName;
+  }
+
   return fnQuandlFlow(config, json, option);
 }
 
@@ -483,9 +529,8 @@ const _fnFindMinY = function(data=[]){
 }
 
 QuandlAdapter.toSeries = function(json, option){
-  const yPointIndex = option.dataColumn
-      , chartId = option.value
-      , parentId = option.parentId;
+  const { value:chartId, parentId } = option
+      , yPointIndex = _fnGetDataColumnIndex(json, option);
 
   let data = json.dataset.data.map((point, index)=> {
     const arrDate = point[0].split('-');

@@ -65,7 +65,7 @@ const _fnExDividend = function({date, id, valueText, value, point}){
   `<div class="tp__body">
   <span class="tp__body__title">Ex-Dividend: </span>
   <span style="color: green;">${point.exValue}</span><br/>
-  <span class="tp__body__title">Stock Price: </span>
+  <span class="tp__body__title">Close: </span>
   <span class="tp__body__value">${point.price}</span>
   </div>`
 }
@@ -75,24 +75,25 @@ const _fnSplitRatio = function({date, id, valueText, value, point}){
   `<div class="tp__body">
   <span class="tp__body__title">Split Ratio: </span>
   <span style="color: #ED5813;">${point.splitRatio}</span><br/>
-  <span class="tp__body__title">Stock Price: </span>
+  <span class="tp__body__title">Close: </span>
   <span class="tp__body__value">${point.price}</span>
   </div>`
 }
 
-const _fnVolumeTooltip = function({date, id, value, point}){
+const _fnVolumeTooltip = function({ date, id, value, point }){
+  const { _open='', _close='', _low='', _high='' } = point;
   return _fnTooltipHeader(date, id) +
   `<div class="tp__body">
   <span class="tp__body__title">Volume: </span>
   <span class="tp__body__value">${value}</span><br/>
   <span class="tp__body__title">Open: </span>
-  <span class="tp__body__value">${point.open}</span>
+  <span class="tp__body__value">${_open}</span>
   <span class="tp__body__title"> Close: </span>
-  <span class="tp__body__value">${point.close}</span><br/>
+  <span class="tp__body__value">${_close}</span><br/>
   <span class="tp__body__title">Low: </span>
-  <span class="tp__body__value">${point.low}</span>
+  <span class="tp__body__value">${_low}</span>
   <span class="tp__body__title"> High: </span>
-  <span class="tp__body__value">${point.high}</span>
+  <span class="tp__body__value">${_high}</span>
   </div>`
 }
 
@@ -113,9 +114,9 @@ const _fnHighLowTooltip = function({date, id, value, point}){
   `<div class="tp__body">
   <span class="tp__body__title">Open: </span>
   <span class="tp__body__value">${point.open}</span><br/>
-  <span class="tp__body__title">Day High: </span>
+  <span class="tp__body__title">High: </span>
   <span class="tp__body__value">${point.dayHigh}</span><br/>
-  <span class="tp__body__title">Day Low: </span>
+  <span class="tp__body__title">Low: </span>
   <span class="tp__body__value">${point.dayLow}</span><br/>
   <span class="tp__body__title">Close: </span>
   <span class="tp__body__value">${point.close}</span>

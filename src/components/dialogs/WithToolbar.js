@@ -1,6 +1,7 @@
 
 const WithToolbar = {
 
+
   _createType2WithToolbar(){
     const toolbarButtons = [];
 

@@ -137,91 +137,111 @@ var _fnAddExDividend = function _fnAddExDividend(result) {
   return result;
 };
 
-var _fnAddVolume = function _fnAddVolume(result) {
+var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
+  var volume = optionIndex.volume;
+  var _optionIndex$open = optionIndex.open;
+  var open = _optionIndex$open === undefined ? 1 : _optionIndex$open;
+  var _optionIndex$close = optionIndex.close;
+  var close = _optionIndex$close === undefined ? 4 : _optionIndex$close;
+  var _optionIndex$low = optionIndex.low;
+  var low = _optionIndex$low === undefined ? 3 : _optionIndex$low;
+  var _optionIndex$high = optionIndex.high;
+  var high = _optionIndex$high === undefined ? 2 : _optionIndex$high;
   var point = result.point;
   var dateUTC = result.dateUTC;
   var dataVolume = result.dataVolume;
   var dataVolumeColumn = result.dataVolumeColumn;
 
-  dataVolume.push([dateUTC, point[5]]);
-  if (point[4] > point[1]) {
+  dataVolume.push([dateUTC, point[volume]]);
+  if (point[close] > point[open]) {
     dataVolumeColumn.push({
-      x: dateUTC, y: point[5],
-      open: point[1], close: point[4],
-      low: point[3], high: point[2],
+      x: dateUTC, y: point[volume],
+      _open: point[open], _close: point[close],
+      _low: point[low], _high: point[high],
       color: '#80c040'
     });
-  } else if (point[4] < point[1]) {
+  } else if (point[close] < point[open]) {
     dataVolumeColumn.push({
-      x: dateUTC, y: point[5],
-      open: point[1], close: point[4],
-      low: point[3], high: point[2],
+      x: dateUTC, y: point[volume],
+      _open: point[open], _close: point[close],
+      _low: point[low], _high: point[high],
       color: '#F44336'
     });
   } else {
     dataVolumeColumn.push({
-      x: dateUTC, y: point[5],
-      open: point[1], close: point[4],
-      low: point[3], high: point[2],
-      color: 'gray' });
+      x: dateUTC, y: point[volume],
+      _open: point[open], _close: point[close],
+      _low: point[low], _high: point[high],
+      color: 'gray'
+    });
   }
   return result;
 };
 
-var _fnAddATH = function _fnAddATH(result) {
+var _fnAddATH = function _fnAddATH(optionIndex, result) {
+  var _optionIndex$open2 = optionIndex.open;
+  var open = _optionIndex$open2 === undefined ? 1 : _optionIndex$open2;
   var dateUTC = result.dateUTC;
   var point = result.point;
   var seria = result.seria;
   var dataATH = result.dataATH;
-
   var len = seria.length;
+
   if (len > 1) {
-    var prevPoint = seria[len - 2];
-    var bDelta = point[1] ? (0, _big2.default)(prevPoint[1]).minus(point[1]) : (0, _big2.default)('0.0');
-    var bPercent = bDelta.times(100).div(prevPoint[1]).abs().toFixed(2);
-    var color = void 0;
-    if (bDelta.gt(0.0)) {
-      color = '#F44336';
-    } else if (!bDelta.gte(0.0)) {
-      color = '#80c040';
+    var prevPoint = seria[len - 2],
+        _closePrev = prevPoint[1],
+        _bDelta = point[open] && _closePrev ? (0, _big2.default)(_closePrev).minus(point[open]) : (0, _big2.default)('0.0'),
+        _bPercent = _closePrev ? _bDelta.times(100).div(_closePrev).abs().toFixed(2) : (0, _big2.default)('0.0');
+
+    var _color = void 0;
+    if (_bDelta.gt(0.0)) {
+      _color = '#F44336';
+    } else if (!_bDelta.gte(0.0)) {
+      _color = '#80c040';
     } else {
-      color = point[1] ? 'gray' : 'white';
+      _color = point[open] ? 'gray' : 'white';
     }
 
     dataATH.push({
       x: dateUTC,
-      y: parseFloat(bPercent),
-      close: prevPoint[1],
-      open: point[1],
-      color: color
+      y: parseFloat(_bPercent),
+      close: _closePrev,
+      open: point[open] ? point[open] : 'Unknown',
+      color: _color
     });
   }
 
   return result;
 };
 
-var _fnAddHighLow = function _fnAddHighLow(result) {
+var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
+  var _optionIndex$open3 = optionIndex.open;
+  var open = _optionIndex$open3 === undefined ? 1 : _optionIndex$open3;
+  var _optionIndex$high2 = optionIndex.high;
+  var high = _optionIndex$high2 === undefined ? 2 : _optionIndex$high2;
+  var _optionIndex$low2 = optionIndex.low;
+  var low = _optionIndex$low2 === undefined ? 3 : _optionIndex$low2;
   var dateUTC = result.dateUTC;
   var yPointIndex = result.yPointIndex;
   var point = result.point;
   var dataHighLow = result.dataHighLow;
 
 
-  var closeValue = point[yPointIndex],
-      openValue = point[1] ? point[1] : 'Uknown',
-      bHigh = point[2] ? (0, _big2.default)(point[2]).minus(closeValue) : (0, _big2.default)('0.0'),
-      bLow = point[3] ? (0, _big2.default)(point[3]).minus(closeValue) : (0, _big2.default)('0.0'),
-      high = point[2] ? point[2] : 'Uknown',
-      low = point[3] ? point[3] : 'Uknown';
+  var _closeValue = point[yPointIndex],
+      _openValue = point[open] ? point[open] : 'Unknown',
+      _bHigh = point[high] ? (0, _big2.default)(point[high]).minus(_closeValue) : (0, _big2.default)('0.0'),
+      _bLow = point[low] ? (0, _big2.default)(point[low]).minus(_closeValue) : (0, _big2.default)('0.0'),
+      _dayHigh = point[high] ? point[high] : 'Unknown',
+      _dayLow = point[low] ? point[low] : 'Unknown';
 
   dataHighLow.push({
     x: dateUTC,
-    high: parseFloat(bHigh),
-    low: parseFloat(bLow),
-    open: openValue,
-    dayHigh: high,
-    dayLow: low,
-    close: closeValue
+    high: parseFloat(_bHigh),
+    low: parseFloat(_bLow),
+    open: _openValue,
+    dayHigh: _dayHigh,
+    dayLow: _dayLow,
+    close: _closeValue
   });
 
   return result;
@@ -241,21 +261,37 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
     dataATH: [], dataHighLow: []
   };
 
-  if (column_names[5] === "Volume") {
-    fnStep.push(_fnAddVolume);
+  var open = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Open"),
+      close = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Close"),
+      low = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Low"),
+      high = (0, _QuandlFn.fnFindColumnIndex)(column_names, "High"),
+      volume = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Volume");
+
+  if (volume !== -1) {
+    fnStep.push(_fnAddVolume.bind(null, {
+      volume: volume, open: open, close: close, low: low, high: high
+    }));
   }
+
   if (column_names[6] === "Ex-Dividend") {
     fnStep.push(_fnAddExDividend);
   }
   if (column_names[7] === "Split Ratio") {
     fnStep.push(_fnAddSplitRatio);
   }
-  if (column_names[1] === "Open") {
-    fnStep.push(_fnAddATH);
+
+  if (open) {
+    fnStep.push(_fnAddATH.bind(null, {
+      open: open
+    }));
   }
-  if (column_names[2] === "High" && column_names[3] === "Low") {
-    fnStep.push(_fnAddHighLow);
+
+  if (high && low) {
+    fnStep.push(_fnAddHighLow.bind(null, {
+      open: open, high: high, low: low
+    }));
   }
+
   return {
     fnPointsFlow: (0, _flow2.default)(fnStep),
     result: result
@@ -505,8 +541,25 @@ var fnConfigAxes = function fnConfigAxes(result) {
 
 var fnQuandlFlow = (0, _flow2.default)(fnGetSeries, fnConfigAxes);
 
+var _fnGetDataColumnIndex = function _fnGetDataColumnIndex(json, option) {
+  var columnName = option.columnName;
+  var dataColumn = option.dataColumn;
+  var _dataColumn = (0, _QuandlFn.fnFindColumnIndex)(json, columnName);
+  var _columnIndex = _dataColumn !== -1 ? _dataColumn : dataColumn ? dataColumn : 1;
+
+  return _columnIndex;
+};
+
 var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   var config = _ChartConfig2.default.fBaseAreaConfig();
+  var columnName = option.columnName;
+
+
+  option.dataColumn = _fnGetDataColumnIndex(json, option);
+  if (columnName) {
+    config.series[0].zhValueText = columnName;
+  }
+
   return fnQuandlFlow(config, json, option);
 };
 
@@ -538,9 +591,9 @@ var _fnFindMinY = function _fnFindMinY() {
 };
 
 QuandlAdapter.toSeries = function (json, option) {
-  var yPointIndex = option.dataColumn,
-      chartId = option.value,
-      parentId = option.parentId;
+  var chartId = option.value;
+  var parentId = option.parentId;
+  var yPointIndex = _fnGetDataColumnIndex(json, option);
 
   var data = json.dataset.data.map(function (point, index) {
     var arrDate = point[0].split('-');

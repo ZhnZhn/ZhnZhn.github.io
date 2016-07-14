@@ -1,45 +1,26 @@
 import React from 'react';
 
 import ZhDialog from '../ZhDialog';
-import WithLoadOptions from './WithLoadOptions';
 import WithToolbar from './WithToolbar';
 import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import RowInputSelect from './RowInputSelect';
+import SelectParentChild from './SelectParentChild';
 import ToolBarButton from '../ToolBarButton';
 
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 import ShowHide from '../zhn/ShowHide';
 
-const defaultColumns = [];
-
 const DialogType4A = React.createClass({
-  ...WithLoadOptions,
   ...WithToolbar,
   ...WithValidation,
 
   getInitialState(){
-    this.one = null;
-    this.two = null;
-
     this.toolbarButtons = this._createType2WithToolbar();
-        
     return {
       isShowDate : true,
-
-      isLoadingOne : false,
-      isLoadingOneFailed : false,
-      optionOne : [],
-
-      optionTwo : [],
-
       validationMessages: []
     }
-  },
-
-  componentDidMount(){
-    this._handlerLoadOne();
   },
 
   shouldComponentUpdate(nextProps, nextState){
@@ -51,45 +32,6 @@ const DialogType4A = React.createClass({
     return true;
   },
 
-  componentDidUpdate(prevProps, prevState){
-    if (prevProps !== this.props){
-       if (this.state.isLoadingOneFailed && this.props.isShow){
-         this._handlerLoadOne();
-       }
-    }
-  },
-
-  componetWillUnmount(){
-    this._unmountWithLoadOptions();
-  },
-
-  _handlerLoadOne(){
-    const {oneURI, oneJsonProp} = this.props;
-    this._handlerWithLoadOptions(
-          'optionOne', 'isLoadingOne', 'isLoadingOneFailed',
-          oneURI, oneJsonProp
-    );
-  },
-
-  _handlerSelectOne(one){
-    this.one = one;
-    if (one) {
-      if (one.columns) {
-        this.two = null;
-        this.setState({ optionTwo: one.columns });
-      } else {
-        this.two = null;
-        this.setState({ optionTwo: defaultColumns });
-      }
-    } else {
-      this.two = null;
-      this.setState({ optionTwo: defaultColumns });
-    }
-  },
-  _handlerSelectTwo(two){
-    this.two = two;
-  },
-
   _handlerLoad(){
     this._handlerWithValidationLoad(
       this._createValidationMessages(),
@@ -97,28 +39,29 @@ const DialogType4A = React.createClass({
     );
   },
   _createValidationMessages(){
-     const { oneCaption, twoCaption } = this.props;
      let msg = [];
 
-     if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
-     if (!this.two)    { msg.push(this.props.msgOnNotSelected(twoCaption));}
+     const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
+     if (!isValid1) { msg = msg.concat(msg1); }
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
      if (!isValid) { msg = msg.concat(datesMsg); }
+
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   },
   _createLoadOption(){
-    const {fromDate, toDate} = this.datesFragment.getValues()
-        , {fnValue, dataColumn, loadId} = this.props;
+    const { parent:one, child:two } = this.parentChild.getValues()
+        , { fromDate, toDate } = this.datesFragment.getValues()
+        , { fnValue, dataColumn, loadId } = this.props;
     return {
-         value : fnValue(this.one.value, this.two.value),
+         value : fnValue(one.value, two.value),
          fromDate: fromDate,
          toDate: toDate,
          dataColumn : dataColumn,
          loadId : loadId,
-         title : this.one.caption,
-         subtitle : this.two.caption
+         title : one.caption,
+         subtitle : two.caption
       }
   },
   _handlerClose(){
@@ -126,19 +69,13 @@ const DialogType4A = React.createClass({
     this.props.onClose();
   },
 
-
   render(){
     const {
-           caption, oneCaption, twoCaption,
+           caption, oneCaption, oneURI, oneJsonProp, twoCaption, msgOnNotSelected,
            isShow, onShow,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , {
-           isShowDate,
-           optionOne, isLoadingOne, isLoadingOneFailed,
-           optionTwo,
-           validationMessages
-         } = this.state
+        , { isShowDate, validationMessages } = this.state
         , _commandButtons = [
        <ToolBarButton
           key="a"
@@ -150,29 +87,27 @@ const DialogType4A = React.createClass({
 
     return(
         <ZhDialog
-             caption={caption}
-             isShow={isShow}
-             commandButtons={_commandButtons}
-             onShowChart={onShow}
-             onClose={this._handlerClose}
+           caption={caption}
+           isShow={isShow}
+           commandButtons={_commandButtons}
+           onShowChart={onShow}
+           onClose={this._handlerClose}
          >
              <ToolbarButtonCircle
                 buttons={this.toolbarButtons}
              />
-             <RowInputSelect
-                caption={oneCaption}
-                options={optionOne}
-                optionNames={'Items'}
-                isLoading={isLoadingOne}
-                isLoadingFailed={isLoadingOneFailed}
-                onLoadOption={this._handlerLoadOne}
-                onSelect={this._handlerSelectOne}
+
+             <SelectParentChild
+                 ref={c => this.parentChild = c}
+                 isShow={isShow}
+                 uri={oneURI}
+                 parentCaption={oneCaption}
+                 parentOptionNames="Items"
+                 parentJsonProp={oneJsonProp}
+                 childCaption={twoCaption}
+                 msgOnNotSelected={msgOnNotSelected}
              />
-             <RowInputSelect
-                caption={twoCaption}
-                options={optionTwo}
-                onSelect={this._handlerSelectTwo}
-             />
+
              <ShowHide isShow={isShowDate}>
                <DatesFragment
                  ref={c => this.datesFragment = c}

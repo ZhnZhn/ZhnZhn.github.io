@@ -54,7 +54,7 @@ const ComponentSlice = {
   },
 
   onShowModalDialog(modalDialogType, option={}){
-    option.modalDialogType = modalDialogType;
+    option.modalDialogType = modalDialogType;    
     this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   }
 }

@@ -14,10 +14,6 @@ var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _WithLoadOptions = require('../dialogs/WithLoadOptions');
-
-var _WithLoadOptions2 = _interopRequireDefault(_WithLoadOptions);
-
 var _WithToolbar = require('../dialogs/WithToolbar');
 
 var _WithToolbar2 = _interopRequireDefault(_WithToolbar);
@@ -29,6 +25,10 @@ var _WithValidation2 = _interopRequireDefault(_WithValidation);
 var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
+var _SelectWithLoad = require('../dialogs/SelectWithLoad');
+
+var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
 var _RowInputSelect = require('../dialogs/RowInputSelect');
 
@@ -54,7 +54,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var BigMacDialog = _react2.default.createClass(_extends({
   displayName: 'BigMacDialog'
-}, _WithLoadOptions2.default, _WithToolbar2.default, _WithValidation2.default, {
+}, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     this.country = null;
     this.metric = null;
@@ -63,16 +63,10 @@ var BigMacDialog = _react2.default.createClass(_extends({
 
     return {
       isShowDate: true,
-      isLoadingCountries: false,
-      isLoadingCountriesFailed: false,
-      optionCountries: [],
       optionMetrics: [{ caption: 'Local Price', value: 1 }, { caption: 'Dollar Exchange', value: 2 }, { caption: 'Dollar Price', value: 3 }, { caption: 'Dollar PPP', value: 4 }, { caption: 'Dollar Valuation', value: 5 }],
 
       validationMessages: []
     };
-  },
-  componentDidMount: function componentDidMount() {
-    this._handlerLoadCountry();
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -81,23 +75,6 @@ var BigMacDialog = _react2.default.createClass(_extends({
       }
     }
     return true;
-  },
-  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      if (this.state.isLoadingCountriesFailed && this.props.isShow) {
-        this._handlerLoadCountry();
-      }
-    }
-  },
-  componetWillUnmount: function componetWillUnmount() {
-    this._unmountWithLoadOptions();
-  },
-  _handlerLoadCountry: function _handlerLoadCountry() {
-    var _props = this.props;
-    var countryURI = _props.countryURI;
-    var countryJsonProp = _props.countryJsonProp;
-
-    this._handlerWithLoadOptions('optionCountries', 'isLoadingCountries', 'isLoadingCountriesFailed', countryURI, countryJsonProp);
   },
   _handlerSelectCountry: function _handlerSelectCountry(country) {
     this.country = country;
@@ -132,9 +109,9 @@ var BigMacDialog = _react2.default.createClass(_extends({
     var toDate = _datesFragment$getVal2.toDate;
     var _dataColumn = this.metric ? this.metric.value : 1;
     var _subtitle = this.metric ? this.metric.caption : this.state.optionMetrics[0].caption;
-    var _props2 = this.props;
-    var loadId = _props2.loadId;
-    var fnValue = _props2.fnValue;
+    var _props = this.props;
+    var loadId = _props.loadId;
+    var fnValue = _props.fnValue;
 
     return {
       value: fnValue(this.country.value),
@@ -154,18 +131,17 @@ var BigMacDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props3 = this.props;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var initFromDate = _props3.initFromDate;
-    var initToDate = _props3.initToDate;
-    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
-    var onTestDate = _props3.onTestDate;
+    var _props2 = this.props;
+    var isShow = _props2.isShow;
+    var onShow = _props2.onShow;
+    var countryURI = _props2.countryURI;
+    var countryJsonProp = _props2.countryJsonProp;
+    var initFromDate = _props2.initFromDate;
+    var initToDate = _props2.initToDate;
+    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
+    var onTestDate = _props2.onTestDate;
     var _state = this.state;
     var isShowDate = _state.isShowDate;
-    var optionCountries = _state.optionCountries;
-    var isLoadingCountries = _state.isLoadingCountries;
-    var isLoadingCountriesFailed = _state.isLoadingCountriesFailed;
     var optionMetrics = _state.optionMetrics;
     var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
@@ -187,13 +163,12 @@ var BigMacDialog = _react2.default.createClass(_extends({
       _react2.default.createElement(_ToolbarButtonCircle2.default, {
         buttons: this.toolbarButtons
       }),
-      _react2.default.createElement(_RowInputSelect2.default, {
+      _react2.default.createElement(_SelectWithLoad2.default, {
+        isShow: isShow,
+        uri: countryURI,
+        jsonProp: countryJsonProp,
         caption: 'Country:',
-        options: optionCountries,
         optionNames: 'Countries',
-        isLoading: isLoadingCountries,
-        isLoadingFailed: isLoadingCountriesFailed,
-        onLoadOption: this._handlerLoadCountry,
         onSelect: this._handlerSelectCountry
       }),
       _react2.default.createElement(_RowInputSelect2.default, {

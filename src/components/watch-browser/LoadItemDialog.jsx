@@ -49,14 +49,15 @@ const LoadItemDialog = React.createClass({
   _handlerLoad(){
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
-      const {data, onClose} = this.props
-          , {caption, dataColumn} = data
-          , {fromDate, toDate} = this.datesFragment.getValues()
+      const { data, onClose } = this.props
+          , { caption, columnName, dataColumn } = data
+          , { fromDate, toDate } = this.datesFragment.getValues()
           , option = {
              value : caption,
              stock: caption,
              fromDate: fromDate,
              toDate: toDate,
+             columnName,
              dataColumn
           }
       ChartActions.loadStock(ChartType.WATCH_LIST, BrowserType.WATCH_LIST, option);

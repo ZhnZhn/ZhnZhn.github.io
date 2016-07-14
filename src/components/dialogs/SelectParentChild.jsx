@@ -10,6 +10,7 @@ const SelectParentChild = React.createClass({
 
   getDefaultProps(){
     return  {
+      isShow : true,
       msgOnNotSelected : (item) => `${item} is not selected`
     }
   },
@@ -27,6 +28,13 @@ const SelectParentChild = React.createClass({
 
   componentDidMount(){
     this._handlerLoadParentOptions();
+  },
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps !== this.props){
+       if (this.state.isLoadingFailed && this.props.isShow){
+         this._handlerLoadParentOptions();
+       }
+    }
   },
   componetWillUnmount(){
     this._unmountWithLoadOptions();
