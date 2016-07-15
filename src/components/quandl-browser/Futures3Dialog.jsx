@@ -120,8 +120,8 @@ const Futures3Dialog = React.createClass({
                ref={c => this.itemMonth = c}
                isShow={isShow}
                uri={futuresURI}
-               parentCaption="Commodity"
-               parentOptionNames="Commodities"
+               parentCaption="Futures"
+               parentOptionNames="Futures"
                parentJsonProp="futures"
                childCaption="Month"
                msgOnNotSelected={msgOnNotSelected}

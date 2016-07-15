@@ -64,10 +64,12 @@ const menuQuandl = [
      ]
   },{
     caption : 'Futures',
-    items : [
+    items : [      
+      { id : Quandl.CHINA_FINANCE_FUTURE},
       { id : Quandl.DCE_FUTURE },
       { id : Quandl.ZCE_FUTURE },
-      { id : Quandl.SHANGHAI_FUTURE }
+      { id : Quandl.SHANGHAI_FUTURE },
+      { id : Quandl.ICE_FUTURE }
     ]
   },{
     caption : 'Real Estate',

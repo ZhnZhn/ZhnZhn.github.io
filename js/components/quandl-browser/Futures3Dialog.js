@@ -155,8 +155,8 @@ var Futures3Dialog = _react2.default.createClass(_extends({
         },
         isShow: isShow,
         uri: futuresURI,
-        parentCaption: 'Commodity',
-        parentOptionNames: 'Commodities',
+        parentCaption: 'Futures',
+        parentOptionNames: 'Futures',
         parentJsonProp: 'futures',
         childCaption: 'Month',
         msgOnNotSelected: msgOnNotSelected

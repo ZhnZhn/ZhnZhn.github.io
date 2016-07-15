@@ -255,7 +255,22 @@ const DataQE = {
     },
     dataColumn : 1
   },
-
+  
+  QE_CHINA_FINANCE_FUTURE : {
+      type : 'QE_CHINA_FINANCE_FUTURE',
+      menuTitle : 'China Finance FE',
+      dialogCaption : 'China Finance FE',
+      chartContainerCaption : 'Quandl China Finance Futures Exchange',
+      dialogType : 'Futures3Dialog',
+      dialogProps : {
+        descrUrl : './data/quandl/china-finance-futures.html',
+        futuresURI : './data/quandl/china-finance-futures.json',
+        valueFn : 'RFutures',
+        valueFnPrefix : 'CFFEX',
+        loadId : 'Q',
+        columnName : 'Settle'
+      }
+  },
   QE_DCE_FUTURE : {
       type : 'QE_DCE_FUTURE',
       menuTitle : 'Dalian CE',
@@ -301,6 +316,22 @@ const DataQE = {
         columnName : 'Settle'
       }
   },
+  QE_ICE_FUTURE : {
+      type : 'QE_ICE_FUTURE',
+      menuTitle : 'Intercontinental FE',
+      dialogCaption : 'Intercontinental FE',
+      chartContainerCaption : 'Quandl Intercontinental Futures Exchange',
+      dialogType : 'Futures3Dialog',
+      dialogProps : {
+        descrUrl : './data/quandl/ice-futures.html',
+        futuresURI : './data/quandl/ice-futures.json',
+        valueFn : 'RFutures',
+        valueFnPrefix : 'ICE',
+        loadId : 'Q',
+        columnName : 'Settle'
+      }
+  },
+
   QE_ZILLOW_REAL_ESTATE : {
       type : 'QE_ZILLOW_REAL_ESTATE',
       menuTitle : 'Zillow Research',

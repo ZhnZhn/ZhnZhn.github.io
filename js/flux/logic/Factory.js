@@ -30,10 +30,6 @@ var _BigMacDialog = require('../../components/quandl-browser/BigMacDialog');
 
 var _BigMacDialog2 = _interopRequireDefault(_BigMacDialog);
 
-var _FuturesDialog = require('../../components/quandl-browser/FuturesDialog');
-
-var _FuturesDialog2 = _interopRequireDefault(_FuturesDialog);
-
 var _Futures3Dialog = require('../../components/quandl-browser/Futures3Dialog');
 
 var _Futures3Dialog2 = _interopRequireDefault(_Futures3Dialog);
@@ -80,7 +76,6 @@ var _rDialog = {
   DialogType5: _DialogType4.default,
   UNCommodityTradeDialog: _UNCommodityTradeDialog2.default,
   BigMacDialog: _BigMacDialog2.default,
-  FuturesDialog: _FuturesDialog2.default,
   Futures3Dialog: _Futures3Dialog2.default,
   JodiWorldOilDialog: _JodiWorldOilDialog2.default
 };
