@@ -17,7 +17,9 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 var _StackedFn = require('./StackedFn');
 
-var _QuandlFn = require('./QuandlFn');
+var _QuandlFn = require('./QuandlFn2');
+
+var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,19 +48,19 @@ var fCreateStackedColumnConfig = exports.fCreateStackedColumnConfig = function f
    config.chart.height = _Chart2.default.STACKED_HEIGHT;
 
    option.title = '' + option.title + PERCENT;
-   (0, _QuandlFn.fnSetTitleToConfig)(config, option);
+   _QuandlFn2.default.setTitleToConfig(config, option);
 
-   config.valueMoving = (0, _QuandlFn.fnCreateValueMoving)({
+   config.valueMoving = _QuandlFn2.default.createValueMoving({
       bNowValue: bNowTotal,
       bPrevValue: bPrevTotal
    });
    config.valueMoving.date = categories && categories.length > 1 ? categories[categories.length - 1] : '';
 
-   config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
+   config.zhConfig = _QuandlFn2.default.createZhConfig(option);
    config.zhConfig.id = zhSeriaId;
    config.zhConfig.isWithoutAdd = true;
    config.zhConfig.isWithoutIndicator = true;
-   config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
+   config.info = _QuandlFn2.default.createDatasetInfo(json);
 
    return { config: config };
 };

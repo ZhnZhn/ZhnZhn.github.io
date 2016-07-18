@@ -28,13 +28,11 @@ var _ChartConfig = require('../constants/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _Tooltip = require('../constants/Tooltip');
-
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
 var _IndicatorSma = require('./IndicatorSma');
 
-var _QuandlFn = require('./QuandlFn');
+var _QuandlFn = require('./QuandlFn2');
+
+var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
 var _QuandlToPie = require('./QuandlToPie');
 
@@ -48,20 +46,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var QuandlAdapter = {};
+var C = {
+  OPEN: "Open",
+  CLOSE: "Close",
+  LOW: "Low",
+  HIGH: "High",
+  VOLUME: "Volume",
+  EX_DIVIDEND: "Ex-Dividend",
+  SPLIT_RATIO: "Split Ratio",
+  UNKNOWN: "Unknown",
 
-var fnCheckWithPrev = function fnCheckWithPrev(arr, checkedDate, predicate) {
-  var length = arr.length;
-  if (length === 0) {
-    return true;
-  }
-  var prevDate = arr[length - 1].x;
-  if (Math.abs((checkedDate.valueOf() - prevDate.valueOf()) / (24 * 60 * 60 * 1000)) < predicate) {
-    return false;
-  } else {
-    return true;
-  }
+  COLOR_GREEN: "#80c040",
+  COLOR_RED: "#F44336",
+  COLOR_WHITE: "white",
+  COLOR_GRAY: "gray"
 };
+var QuandlAdapter = {};
 
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
   var arrDate = point[0].split('-');
@@ -97,15 +97,15 @@ var _fnAddToSeria = function _fnAddToSeria(result) {
   return result;
 };
 
-var _fnAddSplitRatio = function _fnAddSplitRatio(result) {
+var _fnAddSplitRatio = function _fnAddSplitRatio(splitRationIndex, result) {
   var point = result.point;
   var dateUTC = result.dateUTC;
   var yPointIndex = result.yPointIndex;
   var dataSplitRatio = result.dataSplitRatio;
 
-  if (point[7] !== 1) {
+  if (point[splitRationIndex] !== 1) {
     var x = dateUTC,
-        splitRatio = point[7],
+        splitRatio = point[splitRationIndex],
         price = point[yPointIndex];
 
     dataSplitRatio.push(Object.assign(_ChartConfig2.default.fMarkerSplitRatio(), { x: x, splitRatio: splitRatio, price: price }));
@@ -113,19 +113,19 @@ var _fnAddSplitRatio = function _fnAddSplitRatio(result) {
   return result;
 };
 
-var _fnAddExDividend = function _fnAddExDividend(result) {
+var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
   var point = result.point;
   var dateUTC = result.dateUTC;
   var yPointIndex = result.yPointIndex;
   var dataExDividend = result.dataExDividend;
 
 
-  if (point[6] !== 0) {
+  if (point[exDividendIndex] !== 0) {
     var x = dateUTC,
-        exValue = point[6],
+        exValue = point[exDividendIndex],
         price = point[yPointIndex];
 
-    if (fnCheckWithPrev(dataExDividend, x, 14)) {
+    if (_QuandlFn2.default.isPrevDateAfter(dataExDividend, x, 14)) {
       dataExDividend.push(Object.assign(_ChartConfig2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price }));
     } else {
       var marker = Object.assign(_ChartConfig2.default.fMarkerExDividend(), { x: x, exValue: exValue, price: price });
@@ -158,21 +158,21 @@ var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
       x: dateUTC, y: point[volume],
       _open: point[open], _close: point[close],
       _low: point[low], _high: point[high],
-      color: '#80c040'
+      color: C.COLOR_GREEN
     });
   } else if (point[close] < point[open]) {
     dataVolumeColumn.push({
       x: dateUTC, y: point[volume],
       _open: point[open], _close: point[close],
       _low: point[low], _high: point[high],
-      color: '#F44336'
+      color: C.COLOR_RED
     });
   } else {
     dataVolumeColumn.push({
       x: dateUTC, y: point[volume],
       _open: point[open], _close: point[close],
       _low: point[low], _high: point[high],
-      color: 'gray'
+      color: C.COLOR_GRAY
     });
   }
   return result;
@@ -195,18 +195,18 @@ var _fnAddATH = function _fnAddATH(optionIndex, result) {
 
     var _color = void 0;
     if (_bDelta.gt(0.0)) {
-      _color = '#F44336';
+      _color = C.COLOR_RED;
     } else if (!_bDelta.gte(0.0)) {
-      _color = '#80c040';
+      _color = C.COLOR_GREEN;
     } else {
-      _color = point[open] ? 'gray' : 'white';
+      _color = point[open] ? C.COLOR_GRAY : C.COLOR_WHITE;
     }
 
     dataATH.push({
       x: dateUTC,
       y: parseFloat(_bPercent),
       close: _closePrev,
-      open: point[open] ? point[open] : 'Unknown',
+      open: point[open] ? point[open] : C.UNKNOWN,
       color: _color
     });
   }
@@ -228,11 +228,11 @@ var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
 
 
   var _closeValue = point[yPointIndex],
-      _openValue = point[open] ? point[open] : 'Unknown',
+      _openValue = point[open] ? point[open] : C.UNKNOWN,
       _bHigh = point[high] ? (0, _big2.default)(point[high]).minus(_closeValue) : (0, _big2.default)('0.0'),
       _bLow = point[low] ? (0, _big2.default)(point[low]).minus(_closeValue) : (0, _big2.default)('0.0'),
-      _dayHigh = point[high] ? point[high] : 'Unknown',
-      _dayLow = point[low] ? point[low] : 'Unknown';
+      _dayHigh = point[high] ? point[high] : C.UNKNOWN,
+      _dayLow = point[low] ? point[low] : C.UNKNOWN;
 
   dataHighLow.push({
     x: dateUTC,
@@ -261,11 +261,13 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
     dataATH: [], dataHighLow: []
   };
 
-  var open = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Open"),
-      close = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Close"),
-      low = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Low"),
-      high = (0, _QuandlFn.fnFindColumnIndex)(column_names, "High"),
-      volume = (0, _QuandlFn.fnFindColumnIndex)(column_names, "Volume");
+  var open = _QuandlFn2.default.findColumnIndex(column_names, C.OPEN),
+      close = _QuandlFn2.default.findColumnIndex(column_names, C.CLOSE),
+      low = _QuandlFn2.default.findColumnIndex(column_names, C.LOW),
+      high = _QuandlFn2.default.findColumnIndex(column_names, C.HIGH),
+      volume = _QuandlFn2.default.findColumnIndex(column_names, C.VOLUME),
+      exDividend = _QuandlFn2.default.findColumnIndex(column_names, C.EX_DIVIDEND),
+      splitRatio = _QuandlFn2.default.findColumnIndex(column_names, C.SPLIT_RATIO);
 
   if (volume !== -1) {
     fnStep.push(_fnAddVolume.bind(null, {
@@ -273,23 +275,19 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
     }));
   }
 
-  if (column_names[6] === "Ex-Dividend") {
-    fnStep.push(_fnAddExDividend);
+  if (exDividend !== -1) {
+    fnStep.push(_fnAddExDividend.bind(null, exDividend));
   }
-  if (column_names[7] === "Split Ratio") {
-    fnStep.push(_fnAddSplitRatio);
+  if (splitRatio !== -1) {
+    fnStep.push(_fnAddSplitRatio.bind(null, splitRatio));
   }
 
   if (open !== -1) {
-    fnStep.push(_fnAddATH.bind(null, {
-      open: open
-    }));
+    fnStep.push(_fnAddATH.bind(null, { open: open }));
   }
 
   if (high !== -1 && low !== -1) {
-    fnStep.push(_fnAddHighLow.bind(null, {
-      open: open, high: high, low: low
-    }));
+    fnStep.push(_fnAddHighLow.bind(null, { open: open, high: high, low: low }));
   }
 
   return {
@@ -315,120 +313,6 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex) {
   return result;
 };
 
-var _fnCreateIndicatorConfig = function _fnCreateIndicatorConfig() {
-
-  var config = _ChartConfig2.default.fBaseAreaConfig();
-
-  config.chart.height = 160;
-  config.chart.spacingTop = 8;
-  config.chart.spacingBottom = 10;
-  config.chart.zoomType = undefined;
-
-  config.yAxis.opposite = true;
-  config.yAxis.plotLines = [];
-
-  config.yAxis.startOnTick = true;
-  config.yAxis.endOnTick = true;
-  config.yAxis.tickPixelInterval = 60;
-
-  return config;
-};
-
-var _fnCreateConfigATH = function _fnCreateConfigATH(data, chartId) {
-  if (data.length > 0) {
-    var config = _fnCreateIndicatorConfig();
-    config.title = _ChartConfig2.default.fTitleMetric('ATH Chart');
-
-    config.series[0].zhSeriaId = chartId + "_ATH";
-    config.series[0].zhValueText = "ATH";
-    config.series[0].data = data;
-    config.series[0].name = "ATH";
-    config.series[0].visible = true;
-    config.series[0].type = "column";
-    config.series[0].borderWidth = 0;
-    config.series[0].pointPlacement = 'on';
-    config.series[0].minPointLength = 4;
-    config.series[0].groupPadding = 0.1;
-
-    config.series[0].tooltip = {
-      pointFormatter: _Tooltip2.default.fnATHPointFormatter,
-      headerFormat: ''
-    };
-    return config;
-  } else {
-    return undefined;
-  }
-};
-
-var _fnCreateConfigVolume = function _fnCreateConfigVolume(data, dataColumn, chartId) {
-  if (data.length > 0) {
-    var config = _fnCreateIndicatorConfig();
-    config.chart.height = 160;
-    config.yAxis.endOnTick = false;
-    config.yAxis.tickPixelInterval = 40;
-
-    config.title = _ChartConfig2.default.fTitleMetric('Volume Chart:');
-    config.legend = _ChartConfig2.default.legendVolume;
-
-    config.series[0].data = data;
-    config.series[0].name = "Spline";
-    config.series[0].zhValueText = "Volume";
-    config.series[0].zhSeriaId = chartId + '_VolumeArea';
-
-    config.series.push({
-      zhSeriaId: chartId + '_VolumeColumn',
-      zhValueText: "Volume",
-      turboThreshold: 20000,
-      type: "column",
-      name: "Column",
-      data: dataColumn,
-
-      visible: false,
-      borderWidth: 0,
-      pointPlacement: 'on',
-      groupPadding: 0.1,
-      states: {
-        hover: {
-          enabled: true,
-          brightness: 0.07
-        }
-      },
-      tooltip: {
-        pointFormatter: _Tooltip2.default.fnVolumePointFormatter,
-        headerFormat: ''
-      }
-    });
-
-    return config;
-  } else {
-    return undefined;
-  }
-};
-
-var _fnCreateConfigHighLow = function _fnCreateConfigHighLow(data, chartId) {
-  if (data.length > 0) {
-    var config = _fnCreateIndicatorConfig();
-    config.title = _ChartConfig2.default.fTitleMetric('HighLow Chart');
-
-    config.series[0].zhSeriaId = chartId + '_HL';
-    config.series[0].zhValueText = "HL";
-    config.series[0].data = data;
-    config.series[0].name = "HL";
-    config.series[0].visible = true;
-    config.series[0].type = "arearange";
-    config.series[0].color = '#2D7474';
-
-    config.series[0].tooltip = {
-      pointFormatter: _Tooltip2.default.fnHighLowPointFormatter,
-      headerFormat: ''
-    };
-
-    return config;
-  } else {
-    return undefined;
-  }
-};
-
 var _fnSetYForPoints = function _fnSetYForPoints(data, y) {
   for (var i = 0, max = data.length; i < max; i++) {
     data[i].y = y;
@@ -439,6 +323,7 @@ var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, chart
   if (data.length > 0) {
     _fnSetYForPoints(data, y);
     config.series.push(_ChartConfig2.default.fExDividendSeria(data, chartId));
+    config.chart.spacingBottom = 40;
   }
 };
 
@@ -446,12 +331,13 @@ var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chart
   if (data.length > 0) {
     _fnSetYForPoints(data, y);
     config.series.push(_ChartConfig2.default.fSplitRatioSeria(data, chartId));
+    config.chart.spacingBottom = 40;
   }
 };
 
 var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   var names = json.dataset.column_names;
-  if (names[2] === 'High' && names[3] === 'Low' && names[4] === 'Close' && names[5] === 'Volume') {
+  if (names[2] === C.HIGH && names[3] === C.LOW && names[4] === C.CLOSE && names[5] === C.VOLUME) {
     config.zhPoints = zhPoints;
     config.zhIsMfi = true;
     config.zhFnGetMfiConfig = _IndicatorSma.fnGetConfigMfi;
@@ -475,8 +361,8 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
 
 
   _fnSetChartTitle(config, option);
-  config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
-  config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
+  config.zhConfig = _QuandlFn2.default.createZhConfig(option);
+  config.info = _QuandlFn2.default.createDatasetInfo(json);
 
   var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex);
 
@@ -497,8 +383,8 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.zhFnAddSeriesSma = _IndicatorSma.fnAddSeriesSma;
   config.zhFnRemoveSeries = _IndicatorSma.fnRemoveSeries;
 
-  config.valueMoving = (0, _QuandlFn.fnCreateValueMovingFromSeria)(seria);
-  config.valueMoving.date = (0, _QuandlFn.fnGetRecentDate)(seria, json);
+  config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(seria);
+  config.valueMoving.date = _QuandlFn2.default.getRecentDate(seria, json);
   config.series[0].data = seria;
   config.series[0].zhSeriaId = chartId;
 
@@ -508,13 +394,10 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
 
   _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
-  if (dataExDividend.length !== 0 || dataSplitRatio.length !== 0) {
-    config.chart.spacingBottom = 40;
-  }
 
-  config.zhVolumeConfig = _fnCreateConfigVolume(dataVolume, dataVolumeColumn, chartId);
-  config.zhATHConfig = _fnCreateConfigATH(dataATH, chartId);
-  config.zhHighLowConfig = _fnCreateConfigHighLow(dataHighLow, chartId);
+  config.zhVolumeConfig = dataVolume.length > 0 ? _ChartConfig2.default.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume) : undefined;
+  config.zhATHConfig = dataATH.length > 0 ? _ChartConfig2.default.fIndicatorATHConfig(chartId, dataATH) : undefined;
+  config.zhHighLowConfig = dataHighLow.length > 0 ? _ChartConfig2.default.fIndicatorHighLowConfig(chartId, dataHighLow) : undefined;
 
   return { config: config, minPoint: minPoint, maxPoint: maxPoint, minY: minY };
 };
@@ -541,21 +424,12 @@ var fnConfigAxes = function fnConfigAxes(result) {
 
 var fnQuandlFlow = (0, _flow2.default)(fnGetSeries, fnConfigAxes);
 
-var _fnGetDataColumnIndex = function _fnGetDataColumnIndex(json, option) {
-  var columnName = option.columnName;
-  var dataColumn = option.dataColumn;
-  var _dataColumn = (0, _QuandlFn.fnFindColumnIndex)(json, columnName);
-  var _columnIndex = _dataColumn !== -1 ? _dataColumn : dataColumn ? dataColumn : 1;
-
-  return _columnIndex;
-};
-
 var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   var config = _ChartConfig2.default.fBaseAreaConfig();
   var columnName = option.columnName;
 
 
-  option.dataColumn = _fnGetDataColumnIndex(json, option);
+  option.dataColumn = _QuandlFn2.default.getDataColumnIndex(json, option);
   if (columnName) {
     config.series[0].zhValueText = columnName;
   }
@@ -593,7 +467,7 @@ var _fnFindMinY = function _fnFindMinY() {
 QuandlAdapter.toSeries = function (json, option) {
   var chartId = option.value;
   var parentId = option.parentId;
-  var yPointIndex = _fnGetDataColumnIndex(json, option);
+  var yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option);
 
   var data = json.dataset.data.map(function (point, index) {
     var arrDate = point[0].split('-');

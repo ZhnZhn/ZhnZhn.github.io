@@ -31,6 +31,7 @@ var Msg = {
   NOT_VALID_FORMAT: function NOT_VALID_FORMAT(item) {
     return item + ' is not in valid format.';
   },
+  TEST_DATE_OR_EMPTY: "YYYY-MM-DD format must be OR Empty",
 
   Alert: {
     ALREADY_EXIST: {

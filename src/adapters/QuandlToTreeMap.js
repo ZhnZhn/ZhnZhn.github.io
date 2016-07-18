@@ -6,13 +6,8 @@ import {ChartType} from '../constants/Type';
 import Chart from '../constants/Chart';
 import ChartConfig from '../constants/ChartConfig';
 
-import {
-  fnCreateZhConfig,
-  fnCreateDatasetInfo,
-  fnCreateValueMoving,
-  fnCreatePercent,
-  fnSetTitleToConfig
-} from './QuandlFn';
+import QuandlFn2 from './QuandlFn2';
+
 
 import { fnCalcTotal, fnCreateSparkData } from './StackedFn';
 
@@ -58,7 +53,7 @@ const _fnCalcLevelAndSetPercent = function(data, bTotal){
 
    data.forEach((point, pointIndex) => {
       const {value, name} = point
-          , percent = fnCreatePercent({
+          , percent = QuandlFn2.createPercent({
               bValue: Big(value), bTotal: bTotal
             }).toString();
       point.total = bTotal.toString();
@@ -118,19 +113,19 @@ export const fCreateTreeMapConfig = function(json, option){
 
   const yearTitle = (jsonData[0] && jsonData[0][0]) ? jsonData[0][0].split('-')[0] : ''
   option.title = `${yearTitle}:${option.title}`;
-  fnSetTitleToConfig(config, option);
+  QuandlFn2.setTitleToConfig(config, option);
 
-  config.valueMoving = fnCreateValueMoving({
+  config.valueMoving = QuandlFn2.createValueMoving({
     bNowValue  : bTotal,
     bPrevValue : bPrevTotal
   });
   config.valueMoving.date = yearTitle;
 
-  config.zhConfig = fnCreateZhConfig(option);
+  config.zhConfig = QuandlFn2.createZhConfig(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;
   config.zhConfig.isWithoutIndicator = true;
-  config.info = fnCreateDatasetInfo(json);
+  config.info = QuandlFn2.createDatasetInfo(json);
 
 
   return {config}

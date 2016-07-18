@@ -21,7 +21,6 @@ var DataQE = {
       oneJsonProp: 'commodities',
       twoCaption: 'Commodity',
       valueFn: 'RTwo',
-      //fnValue : (type, commodity) => `${commodity}`
       loadId: 'Q'
     },
     dataColumn: 1
@@ -41,7 +40,6 @@ var DataQE = {
       commodityJsonProp: 'items',
       valueFn: 'RPrefixOneTwo',
       valueFnPrefix: 'UCOM',
-      //fnValue : (item, country) => `UCOM/${item}_${country}`
       loadId: 'QCT'
     },
     dataColumn: 1
@@ -109,7 +107,6 @@ var DataQE = {
       threeCaption: 'Metric',
       valueFn: 'RPrefixTwoOne',
       valueFnPrefix: 'UGID',
-      //fnValue : (country, item) => `UGID/${item}_${country}`
       loadId: 'Q'
     },
     dataColumn: 1
@@ -127,10 +124,9 @@ var DataQE = {
       oneJsonProp: 'sources',
       twoCaption: 'Currency',
       valueFn: 'ROneTwo',
-      //fnValue : (source, currency) => `${source}/${currency}`
-      loadId: 'Q'
-    },
-    dataColumn: 1
+      loadId: 'Q',
+      columnName: 'Value'
+    }
   },
   QE_WORLDBANK_PRICE: {
     type: 'QE_WORLDBANK_PRICE',
@@ -151,7 +147,6 @@ var DataQE = {
       fnValueType: 'TreeItem',
       valueFn: 'RPrefixOneTwo',
       valueFnPrefix: 'WWDI',
-      //fnValue : (country, metric) => `WWDI/${country}_${metric}`
       loadId: 'Q'
     },
     dataColumn: 1
@@ -175,7 +170,6 @@ var DataQE = {
       fnValueType: 'TreeItem',
       valueFn: 'RPrefixOneTwo',
       valueFnPrefix: 'ODA',
-      //fnValue : (country, metric) => `ODA/${country}_${metric}`
       loadId: 'Q'
     },
     dataColumn: 1
@@ -195,9 +189,9 @@ var DataQE = {
       fnItemCaption: function fnItemCaption(value) {
         return value.split('/')[1];
       },
-      loadId: 'Q'
-    },
-    dataColumn: 1
+      loadId: 'Q',
+      columnName: 'Value'
+    }
   },
   QE_BIG_MAC: {
     type: 'QE_BIG_MAC',
@@ -220,9 +214,9 @@ var DataQE = {
 
   QE_WIKI_STOCK: {
     type: 'QE_WIKI_STOCK',
-    menuTitle: 'WIKI',
+    menuTitle: 'Wiki',
     dialogCaption: 'Wiki Stock Prices',
-    chartContainerCaption: 'Quandl WIKI Stock Prices',
+    chartContainerCaption: 'Quandl Wiki Stock Prices',
     dialogProps: {
       descrUrl: './data/quandl/wiki.html',
       optionURI: './data/quandl/wiki.json',
@@ -323,6 +317,21 @@ var DataQE = {
       columnName: 'Settle'
     }
   },
+  QE_LIFFE_FUTURE: {
+    type: 'QE_LIFFE_FUTURE',
+    menuTitle: 'LIFFE FD',
+    dialogCaption: 'LIFFE FD',
+    chartContainerCaption: 'Quandl LIFFE FD',
+    dialogType: 'Futures3Dialog',
+    dialogProps: {
+      descrUrl: './data/quandl/liffe-futures.html',
+      futuresURI: './data/quandl/liffe-futures.json',
+      valueFn: 'RFutures',
+      valueFnPrefix: 'LIFFE',
+      loadId: 'Q',
+      columnName: 'Settle'
+    }
+  },
   QE_ICE_FUTURE: {
     type: 'QE_ICE_FUTURE',
     menuTitle: 'Intercontinental FE',
@@ -335,7 +344,25 @@ var DataQE = {
       valueFn: 'RFutures',
       valueFnPrefix: 'ICE',
       loadId: 'Q',
-      columnName: 'Settle'
+      columnName: 'Settle',
+      isContinious: true,
+      nInitFromDate: 2
+    }
+  },
+  QE_WIKI_FUTURE: {
+    type: 'QE_WIKI_FUTURE',
+    menuTitle: 'Wiki Continuous',
+    dialogCaption: 'Wiki Continuous Futures',
+    chartContainerCaption: 'Quandl Wiki Continuous Futures',
+    dialogType: 'FuturesWikiDialog',
+    dialogProps: {
+      descrUrl: './data/quandl/wiki-futures.html',
+      futuresURI: './data/quandl/wiki-futures.json',
+      valueFn: 'RWikiFutures',
+      loadId: 'Q',
+      columnName: 'Settle',
+      isContinious: true,
+      nInitFromDate: 2
     }
   },
 

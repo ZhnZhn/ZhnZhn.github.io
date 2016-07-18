@@ -1,18 +1,10 @@
 
 import React from 'react';
 
-import DialogType3 from '../../components/dialogs/DialogType3';
-import DialogType4A from '../../components/dialogs/DialogType4A';
-import DialogType5 from '../../components/dialogs/DialogType5';
-
-import UNCommodityTradeDialog from '../../components/quandl-browser/UNCommodityTradeDialog';
-import BigMacDialog from '../../components/quandl-browser/BigMacDialog';
-import Futures3Dialog from '../../components/quandl-browser/Futures3Dialog';
-import JodiWorldOilDialog from '../../components/quandl-browser/JodiWorldOilDialog';
+import RouterDialog from './RouterDialog';
+import RouterFnValue from './RouterFnValue';
 
 import ChartContainer2 from '../../components/ChartContainer2';
-
-
 
 import Msg from '../../constants/Msg';
 import { ModalDialog } from '../../constants/Type';
@@ -24,38 +16,13 @@ import DateUtils from '../../utils/DateUtils';
 import SourceBrowserDynamic from '../../components/browser-container/SourceBrowserDynamic';
 import ChartStore from '../stores/ChartStore';
 
-const _rDialog = {
-  DialogType3 : DialogType3,
-  DialogType4A : DialogType4A,
-  DialogType5 : DialogType5,
-  UNCommodityTradeDialog : UNCommodityTradeDialog,
-  BigMacDialog : BigMacDialog,  
-  Futures3Dialog : Futures3Dialog,
-  JodiWorldOilDialog : JodiWorldOilDialog
-}
+const onLoadChart = ChartActions.loadStock
+    , onShowChart = ChartActions.showChart
+    , initFromDate = DateUtils.getFromDate(2)
+    , initToDate = DateUtils.getToDate()
+    , onTestDate = DateUtils.isValidDate
+    , onTestDateOrEmpty = DateUtils.isValidDateOrEmpty;
 
-
-const _rFnValue = {
-  RTwo : (one, two) => `${two}`,
-  ROneTwo : (one, two) => `${one}/${two}`,
-  ROneDashTwo : (one, two) => `${one}_${two}`,
-  RPrefixOne : (prefix, one) => `${prefix}_${one}`,
-  RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
-  RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
-
-  RZill : (one, two, three) => `ZILL/${two}${three}_${one}`,
-
-  RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`,
-  RJodiOil : (country, product, flow, units) => `JODI/OIL_${product}${flow}${units}_${country}`,
-
-  RFutures : (prefix, item, month, year) => `${prefix}/${item}${month}${year}`
-}
-
-const onLoadChart = ChartActions.loadStock,
-      onShowChart = ChartActions.showChart,
-      initFromDate = DateUtils.getFromDate(2),
-      initToDate = DateUtils.getToDate(),
-      onTestDate = DateUtils.isValidDate;
 
 /*
 const noopArr = function(){
@@ -71,17 +38,26 @@ const createDialogComp = function (conf, browserType){
    const dialogType = conf.type
        , props = conf.dialogProps ? conf.dialogProps : {}
        , Comp = (conf.dialogType)
-            ? (_rDialog[conf.dialogType]) ? _rDialog[conf.dialogType] : DialogType3
-            : DialogType3
+            ? (RouterDialog[conf.dialogType])
+                  ? RouterDialog[conf.dialogType]
+                  : RouterDialog.DEFAULT
+            : RouterDialog.DEFAULT
        , _initFromDate = (props.nInitFromDate)
             ? DateUtils.getFromDate(props.nInitFromDate)
             : initFromDate
        , _fnValue = (props.valueFn)
             ? (props.valueFnPrefix )
-                   ? _rFnValue[props.valueFn].bind(null, props.valueFnPrefix)
-                   : _rFnValue[props.valueFn]
+                   ? RouterFnValue[props.valueFn].bind(null, props.valueFnPrefix)
+                   : RouterFnValue[props.valueFn]
             : undefined
-       , onClickInfo = (props.descrUrl) ? _showModalDialogDescription : undefined;
+       , onClickInfo = (props.descrUrl)
+            ? _showModalDialogDescription
+            : undefined;
+
+       if (props.isContinious) {
+         props.msgTestDateOrEmpty = Msg.TEST_DATE_OR_EMPTY;
+         props.onTestDateOrEmpty = onTestDateOrEmpty;
+       }
 
    return  React.createElement(Comp, {
                key : dialogType,

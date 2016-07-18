@@ -3,15 +3,9 @@ import {ChartType} from '../constants/Type';
 import Chart from '../constants/Chart';
 import ChartConfig from '../constants/ChartConfig';
 
-import { fnCreateStackedConfig  } from './StackedFn'
+import { fnCreateStackedConfig  } from './StackedFn';
 
-import {
-  fnCreateZhConfig,
-  fnCreateDatasetInfo,
-  fnCreateValueMoving,
-  fnSetTitleToConfig
-} from './QuandlFn';
-
+import QuandlFn2 from './QuandlFn2';
 
 export const fCreateStackedAreaConfig = function(json, option){
   const { seriaType:chartType } = option
@@ -29,21 +23,21 @@ export const fCreateStackedAreaConfig = function(json, option){
   config.chart.height = Chart.STACKED_HEIGHT;
 
   option.title = `${option.title}${PERCENT}`
-  fnSetTitleToConfig(config, option);
+  QuandlFn2.setTitleToConfig(config, option);
 
-  config.valueMoving = fnCreateValueMoving({
+  config.valueMoving = QuandlFn2.createValueMoving({
     bNowValue  : bNowTotal,
     bPrevValue : bPrevTotal
   });
   config.valueMoving.date = ( categories && categories.length>1 )
      ? categories[categories.length-1]
      : '' ;
-    
-  config.zhConfig = fnCreateZhConfig(option);
+
+  config.zhConfig = QuandlFn2.createZhConfig(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;
   config.zhConfig.isWithoutIndicator = true;
-  config.info = fnCreateDatasetInfo(json);
+  config.info = QuandlFn2.createDatasetInfo(json);
 
   return {config}
 }

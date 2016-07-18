@@ -1,7 +1,7 @@
 {
   "commodities" : [
     {
-      "caption": "A Metal", "value": "a-metal",
+      "caption": "Precious Metal", "value": "a-metal",
       "columns" : [
         { "caption": "Gold, World Gold Council", "value": "WGC/GOLD_DAILY_USD"},
         { "caption": "Gold, Bundesbank", "value": "BUNDESBANK/BBK01_WT5511"},
@@ -16,7 +16,7 @@
         { "caption": "Ruthenium", "value": "JOHNMATT/RUTH"}
       ]
     },{
-       "caption": "Metal", "value": "metal",
+       "caption": " Industrial Metal", "value": "metal",
        "columns" : [
   		   { "caption": "Aluminum, ODA", "value": "ODA/PALUM_USD"},
   		   { "caption": "Shanghai Aluminum Futures 2016", "value": "SHFE/ALV2016"},

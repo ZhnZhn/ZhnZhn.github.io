@@ -5,6 +5,7 @@ import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectParentChild from '../dialogs/SelectParentChild';
 import RowInputSelect from '../dialogs/RowInputSelect';
+import RowDate from '../dialogs/RowDate';
 import ToolBarButton from '../ToolBarButton';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
@@ -57,7 +58,7 @@ const Futures3Dialog = React.createClass({
     );
   },
   _createValidationMessages(){
-    const { msgOnNotSelected } = this.props
+    const { msgOnNotSelected, msgOnNotValidFormat, isContinious } = this.props
     let   msg = [];
 
     const { isValid:isValid1, msg:msg1 } = this.itemMonth.getValidation();
@@ -65,22 +66,30 @@ const Futures3Dialog = React.createClass({
 
     if (!this.year) { msg.push(msgOnNotSelected('Year')); }
 
+    if (isContinious && !this.fromDate.isValid()){
+      msg.push(msgOnNotValidFormat('From Date'));
+    }
+
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
   },
   _createLoadOption(){
     const { parent:item, child:month } = this.itemMonth.getValues()
-        , { fnValue, columnName, dataColumn, loadId } = this.props
-        , _subtitle = ( columnName )
+        , { fnValue, columnName, dataColumn, loadId, isContinious } = this.props
+        , _subtitle = (columnName)
               ? `${month.caption}:${this.year.caption}:${columnName}`
-              : `${month.caption}:${this.year.caption}`;
+              : `${month.caption}:${this.year.caption}`
+        , _fromDate = (isContinious)
+              ? this.fromDate.getValue()
+              : undefined  ;
     return {
        value : fnValue(item.value, month.value, this.year.value ),
        title : item.caption,
        subtitle : _subtitle,
        columnName : columnName,
        dataColumn : dataColumn,
-       loadId : loadId
+       loadId : loadId,
+       fromDate : _fromDate
     };
   },
 
@@ -89,10 +98,23 @@ const Futures3Dialog = React.createClass({
     this.props.onClose();
   },
 
+  _renderFromDate(initFromDate, onTestDate, msgTestDate){
+    return (
+       <RowDate
+          ref={ c => this.fromDate = c}
+          labelTitle="From Date:"
+          initValue={initFromDate}
+          errorMsg={msgTestDate}
+          onTestDate={onTestDate}
+       />
+    );
+  },
+
   render(){
     const {
             isShow, caption, onShow,
-            futuresURI, msgOnNotSelected
+            futuresURI, msgOnNotSelected,
+            isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
@@ -131,6 +153,7 @@ const Futures3Dialog = React.createClass({
               options={yearOptions}
               onSelect={this._handlerSelectYear}
            />
+           {isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty)}
            <ValidationMessagesFragment
               validationMessages={validationMessages}
            />

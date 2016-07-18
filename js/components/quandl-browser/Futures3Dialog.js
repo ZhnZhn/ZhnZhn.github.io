@@ -30,6 +30,10 @@ var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
+var _RowDate = require('../dialogs/RowDate');
+
+var _RowDate2 = _interopRequireDefault(_RowDate);
+
 var _ToolBarButton = require('../ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
@@ -76,7 +80,10 @@ var Futures3Dialog = _react2.default.createClass(_extends({
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var msgOnNotSelected = this.props.msgOnNotSelected;
+    var _props2 = this.props;
+    var msgOnNotSelected = _props2.msgOnNotSelected;
+    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
+    var isContinious = _props2.isContinious;
 
     var msg = [];
 
@@ -93,6 +100,10 @@ var Futures3Dialog = _react2.default.createClass(_extends({
       msg.push(msgOnNotSelected('Year'));
     }
 
+    if (isContinious && !this.fromDate.isValid()) {
+      msg.push(msgOnNotValidFormat('From Date'));
+    }
+
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
   },
@@ -101,34 +112,54 @@ var Futures3Dialog = _react2.default.createClass(_extends({
 
     var item = _itemMonth$getValues.parent;
     var month = _itemMonth$getValues.child;
-    var _props2 = this.props;
-    var fnValue = _props2.fnValue;
-    var columnName = _props2.columnName;
-    var dataColumn = _props2.dataColumn;
-    var loadId = _props2.loadId;
+    var _props3 = this.props;
+    var fnValue = _props3.fnValue;
+    var columnName = _props3.columnName;
+    var dataColumn = _props3.dataColumn;
+    var loadId = _props3.loadId;
+    var isContinious = _props3.isContinious;
     var _subtitle = columnName ? month.caption + ':' + this.year.caption + ':' + columnName : month.caption + ':' + this.year.caption;
+    var _fromDate = isContinious ? this.fromDate.getValue() : undefined;
     return {
       value: fnValue(item.value, month.value, this.year.value),
       title: item.caption,
       subtitle: _subtitle,
       columnName: columnName,
       dataColumn: dataColumn,
-      loadId: loadId
+      loadId: loadId,
+      fromDate: _fromDate
     };
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
     this.props.onClose();
   },
-  render: function render() {
+  _renderFromDate: function _renderFromDate(initFromDate, onTestDate, msgTestDate) {
     var _this = this;
 
-    var _props3 = this.props;
-    var isShow = _props3.isShow;
-    var caption = _props3.caption;
-    var onShow = _props3.onShow;
-    var futuresURI = _props3.futuresURI;
-    var msgOnNotSelected = _props3.msgOnNotSelected;
+    return _react2.default.createElement(_RowDate2.default, {
+      ref: function ref(c) {
+        return _this.fromDate = c;
+      },
+      labelTitle: 'From Date:',
+      initValue: initFromDate,
+      errorMsg: msgTestDate,
+      onTestDate: onTestDate
+    });
+  },
+  render: function render() {
+    var _this2 = this;
+
+    var _props4 = this.props;
+    var isShow = _props4.isShow;
+    var caption = _props4.caption;
+    var onShow = _props4.onShow;
+    var futuresURI = _props4.futuresURI;
+    var msgOnNotSelected = _props4.msgOnNotSelected;
+    var isContinious = _props4.isContinious;
+    var initFromDate = _props4.initFromDate;
+    var onTestDateOrEmpty = _props4.onTestDateOrEmpty;
+    var msgTestDateOrEmpty = _props4.msgTestDateOrEmpty;
     var validationMessages = this.state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
@@ -151,7 +182,7 @@ var Futures3Dialog = _react2.default.createClass(_extends({
       }),
       _react2.default.createElement(_SelectParentChild2.default, {
         ref: function ref(c) {
-          return _this.itemMonth = c;
+          return _this2.itemMonth = c;
         },
         isShow: isShow,
         uri: futuresURI,
@@ -166,6 +197,7 @@ var Futures3Dialog = _react2.default.createClass(_extends({
         options: yearOptions,
         onSelect: this._handlerSelectYear
       }),
+      isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         validationMessages: validationMessages
       })

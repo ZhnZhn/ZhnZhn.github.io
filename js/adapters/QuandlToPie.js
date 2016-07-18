@@ -23,7 +23,9 @@ var _ChartConfig = require('../constants/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _QuandlFn = require('./QuandlFn');
+var _QuandlFn = require('./QuandlFn2');
+
+var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,7 +38,7 @@ var _fnCalcPieLegendHeight = function _fnCalcPieLegendHeight(length) {
 };
 
 var _fnAddPercentToItem = function _fnAddPercentToItem(item, bTotal) {
-  var _bPercent = (0, _QuandlFn.fnCreatePercent)({ bValue: (0, _big2.default)(item.y), bTotal: bTotal });
+  var _bPercent = _QuandlFn2.default.createPercent({ bValue: (0, _big2.default)(item.y), bTotal: bTotal });
   if ((0, _big2.default)(_bPercent).gte('10.00')) {
     item.name = item.name + ' ' + _bPercent;
   } else {
@@ -71,7 +73,7 @@ var _fnCreateTopDonutData = function _fnCreateTopDonutData(_ref) {
   if (!bArrTotal.eq(bTotal)) {
     bArrTotal = bTotal.minus(bArrTotal);
     arr.push({
-      name: 'Other ' + (0, _QuandlFn.fnCreatePercent)({ bValue: bArrTotal, bTotal: bTotal }),
+      name: 'Other ' + _QuandlFn2.default.createPercent({ bValue: bArrTotal, bTotal: bTotal }),
       nameFull: 'Other',
       color: 'gray',
       y: parseFloat(bArrTotal)
@@ -142,23 +144,23 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
     data: _dataTop2
   })];
 
-  (0, _QuandlFn.fnSetTitleToConfig)(config, option);
+  _QuandlFn2.default.setTitleToConfig(config, option);
 
   config.chart = {
     height: _fnCalcPieLegendHeight(_dataTop1.length)
   };
 
-  config.valueMoving = (0, _QuandlFn.fnCreateValueMoving)({
+  config.valueMoving = _QuandlFn2.default.createValueMoving({
     bNowValue: _bTotal1,
     bPrevValue: _bTotal2
   });
   config.valueMoving.date = _year1;
 
-  config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
+  config.zhConfig = _QuandlFn2.default.createZhConfig(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;
   config.zhConfig.isWithoutIndicator = true;
-  config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
+  config.info = _QuandlFn2.default.createDatasetInfo(json);
 
   return { config: config };
 };

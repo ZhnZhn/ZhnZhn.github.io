@@ -3,12 +3,14 @@ import Highcharts from 'highcharts';
 import Chart from './Chart';
 import Tooltip from './Tooltip';
 
+import WithIndicator from './WithIndicator';
 import WithPie from './WithPie';
 import WithStackedArea from './WithStackedArea';
 import WithStackedColumn from './WithStackedColumn';
 import WithTreeMap from './WithTreeMap';
 
 const ChartConfig = {
+  ...WithIndicator,
   ...WithPie,
   ...WithStackedArea,
   ...WithStackedColumn,

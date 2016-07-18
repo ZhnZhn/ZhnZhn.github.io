@@ -23,7 +23,9 @@ var _ChartConfig = require('../constants/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _QuandlFn = require('./QuandlFn');
+var _QuandlFn = require('./QuandlFn2');
+
+var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
 var _StackedFn = require('./StackedFn');
 
@@ -81,7 +83,7 @@ var _fnCalcLevelAndSetPercent = function _fnCalcLevelAndSetPercent(data, bTotal)
   data.forEach(function (point, pointIndex) {
     var value = point.value;
     var name = point.name;
-    var percent = (0, _QuandlFn.fnCreatePercent)({
+    var percent = _QuandlFn2.default.createPercent({
       bValue: (0, _big2.default)(value), bTotal: bTotal
     }).toString();
     point.total = bTotal.toString();
@@ -152,19 +154,19 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
 
   var yearTitle = jsonData[0] && jsonData[0][0] ? jsonData[0][0].split('-')[0] : '';
   option.title = yearTitle + ':' + option.title;
-  (0, _QuandlFn.fnSetTitleToConfig)(config, option);
+  _QuandlFn2.default.setTitleToConfig(config, option);
 
-  config.valueMoving = (0, _QuandlFn.fnCreateValueMoving)({
+  config.valueMoving = _QuandlFn2.default.createValueMoving({
     bNowValue: bTotal,
     bPrevValue: bPrevTotal
   });
   config.valueMoving.date = yearTitle;
 
-  config.zhConfig = (0, _QuandlFn.fnCreateZhConfig)(option);
+  config.zhConfig = _QuandlFn2.default.createZhConfig(option);
   config.zhConfig.id = zhSeriaId;
   config.zhConfig.isWithoutAdd = true;
   config.zhConfig.isWithoutIndicator = true;
-  config.info = (0, _QuandlFn.fnCreateDatasetInfo)(json);
+  config.info = _QuandlFn2.default.createDatasetInfo(json);
 
   return { config: config };
 };

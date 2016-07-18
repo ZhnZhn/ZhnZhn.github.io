@@ -5,13 +5,7 @@ import {ChartType} from '../constants/Type';
 import Chart from '../constants/Chart';
 import ChartConfig from '../constants/ChartConfig';
 
-import {
-         fnCreateZhConfig,
-         fnCreateDatasetInfo,
-         fnCreateValueMoving,
-         fnCreatePercent,
-         fnSetTitleToConfig
-       } from './QuandlFn';
+import QuandlFn2 from './QuandlFn2';
 
 
 const _fnCalcPieLegendHeight = function(length){
@@ -23,7 +17,7 @@ const _fnCalcPieLegendHeight = function(length){
 }
 
 const _fnAddPercentToItem = function(item, bTotal){
-  const _bPercent = fnCreatePercent({ bValue : Big(item.y), bTotal: bTotal});
+  const _bPercent = QuandlFn2.createPercent({ bValue : Big(item.y), bTotal: bTotal});
   if (Big(_bPercent).gte('10.00')) {
      item.name = item.name + ' ' + _bPercent;
   } else {
@@ -54,7 +48,7 @@ const _fnCreateTopDonutData = function({
   if (!bArrTotal.eq(bTotal)) {
     bArrTotal = bTotal.minus(bArrTotal);
     arr.push({
-      name : 'Other ' + fnCreatePercent({ bValue: bArrTotal, bTotal: bTotal}),
+      name : 'Other ' + QuandlFn2.createPercent({ bValue: bArrTotal, bTotal: bTotal}),
       nameFull : 'Other',
       color : 'gray',
       y : parseFloat(bArrTotal)
@@ -128,23 +122,23 @@ export const fCreatePieConfig = function(json, option){
      })
    ];
 
-   fnSetTitleToConfig(config, option);
+   QuandlFn2.setTitleToConfig(config, option);
 
    config.chart = {
      height : _fnCalcPieLegendHeight(_dataTop1.length)
    }
 
-   config.valueMoving = fnCreateValueMoving({
+   config.valueMoving = QuandlFn2.createValueMoving({
      bNowValue : _bTotal1,
      bPrevValue: _bTotal2
    });
    config.valueMoving.date = _year1;
 
-   config.zhConfig = fnCreateZhConfig(option);
+   config.zhConfig = QuandlFn2.createZhConfig(option);
    config.zhConfig.id = zhSeriaId;
    config.zhConfig.isWithoutAdd = true;
    config.zhConfig.isWithoutIndicator = true;
-   config.info = fnCreateDatasetInfo(json);
+   config.info = QuandlFn2.createDatasetInfo(json);
 
    return {config}
 }

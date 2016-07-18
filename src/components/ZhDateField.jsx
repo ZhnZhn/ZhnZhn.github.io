@@ -26,15 +26,15 @@ const styles = {
     margin: 0,
     marginLeft: '10px',
     marginBottom: '5px',
-    width: '230px',
+    width: '230px'
   },
   errMsg: {
     color: '#F44336',
     paddingLeft: '10px',
     paddingBottom: '5px',
     fontSize: '12px',
-    fontWeight: 'bold',
-  },
+    fontWeight: 'bold'
+  }
 };
 
 
@@ -45,7 +45,7 @@ const ZhDateField = React.createClass({
       return {
         value: initValue,
         errorInput: null,
-        isValid: true,
+        isValid: true
       }
   },
 
@@ -105,7 +105,7 @@ const ZhDateField = React.createClass({
 
   focusInput: function(){
     this.refs.inputDate.focus();
-  },
+  }
 
 });
 

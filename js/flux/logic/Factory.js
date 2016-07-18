@@ -10,33 +10,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DialogType = require('../../components/dialogs/DialogType3');
+var _RouterDialog = require('./RouterDialog');
 
-var _DialogType2 = _interopRequireDefault(_DialogType);
+var _RouterDialog2 = _interopRequireDefault(_RouterDialog);
 
-var _DialogType4A = require('../../components/dialogs/DialogType4A');
+var _RouterFnValue = require('./RouterFnValue');
 
-var _DialogType4A2 = _interopRequireDefault(_DialogType4A);
-
-var _DialogType3 = require('../../components/dialogs/DialogType5');
-
-var _DialogType4 = _interopRequireDefault(_DialogType3);
-
-var _UNCommodityTradeDialog = require('../../components/quandl-browser/UNCommodityTradeDialog');
-
-var _UNCommodityTradeDialog2 = _interopRequireDefault(_UNCommodityTradeDialog);
-
-var _BigMacDialog = require('../../components/quandl-browser/BigMacDialog');
-
-var _BigMacDialog2 = _interopRequireDefault(_BigMacDialog);
-
-var _Futures3Dialog = require('../../components/quandl-browser/Futures3Dialog');
-
-var _Futures3Dialog2 = _interopRequireDefault(_Futures3Dialog);
-
-var _JodiWorldOilDialog = require('../../components/quandl-browser/JodiWorldOilDialog');
-
-var _JodiWorldOilDialog2 = _interopRequireDefault(_JodiWorldOilDialog);
+var _RouterFnValue2 = _interopRequireDefault(_RouterFnValue);
 
 var _ChartContainer = require('../../components/ChartContainer2');
 
@@ -70,57 +50,12 @@ var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _rDialog = {
-  DialogType3: _DialogType2.default,
-  DialogType4A: _DialogType4A2.default,
-  DialogType5: _DialogType4.default,
-  UNCommodityTradeDialog: _UNCommodityTradeDialog2.default,
-  BigMacDialog: _BigMacDialog2.default,
-  Futures3Dialog: _Futures3Dialog2.default,
-  JodiWorldOilDialog: _JodiWorldOilDialog2.default
-};
-
-var _rFnValue = {
-  RTwo: function RTwo(one, two) {
-    return '' + two;
-  },
-  ROneTwo: function ROneTwo(one, two) {
-    return one + '/' + two;
-  },
-  ROneDashTwo: function ROneDashTwo(one, two) {
-    return one + '_' + two;
-  },
-  RPrefixOne: function RPrefixOne(prefix, one) {
-    return prefix + '_' + one;
-  },
-  RPrefixOneTwo: function RPrefixOneTwo(prefix, one, two) {
-    return prefix + '/' + one + '_' + two;
-  },
-  RPrefixTwoOne: function RPrefixTwoOne(prefix, one, two) {
-    return prefix + '/' + two + '_' + one;
-  },
-
-  RZill: function RZill(one, two, three) {
-    return 'ZILL/' + two + three + '_' + one;
-  },
-
-  RJodiGas: function RJodiGas(one, two, three) {
-    return 'JODI/GAS_' + two + three + '_' + one;
-  },
-  RJodiOil: function RJodiOil(country, product, flow, units) {
-    return 'JODI/OIL_' + product + flow + units + '_' + country;
-  },
-
-  RFutures: function RFutures(prefix, item, month, year) {
-    return prefix + '/' + item + month + year;
-  }
-};
-
 var onLoadChart = _ChartActions2.default.loadStock,
     onShowChart = _ChartActions2.default.showChart,
     initFromDate = _DateUtils2.default.getFromDate(2),
     initToDate = _DateUtils2.default.getToDate(),
-    onTestDate = _DateUtils2.default.isValidDate;
+    onTestDate = _DateUtils2.default.isValidDate,
+    onTestDateOrEmpty = _DateUtils2.default.isValidDateOrEmpty;
 
 /*
 const noopArr = function(){
@@ -135,10 +70,15 @@ var _showModalDialogDescription = function _showModalDialogDescription(option) {
 var createDialogComp = function createDialogComp(conf, browserType) {
   var dialogType = conf.type,
       props = conf.dialogProps ? conf.dialogProps : {},
-      Comp = conf.dialogType ? _rDialog[conf.dialogType] ? _rDialog[conf.dialogType] : _DialogType2.default : _DialogType2.default,
+      Comp = conf.dialogType ? _RouterDialog2.default[conf.dialogType] ? _RouterDialog2.default[conf.dialogType] : _RouterDialog2.default.DEFAULT : _RouterDialog2.default.DEFAULT,
       _initFromDate = props.nInitFromDate ? _DateUtils2.default.getFromDate(props.nInitFromDate) : initFromDate,
-      _fnValue = props.valueFn ? props.valueFnPrefix ? _rFnValue[props.valueFn].bind(null, props.valueFnPrefix) : _rFnValue[props.valueFn] : undefined,
+      _fnValue = props.valueFn ? props.valueFnPrefix ? _RouterFnValue2.default[props.valueFn].bind(null, props.valueFnPrefix) : _RouterFnValue2.default[props.valueFn] : undefined,
       onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined;
+
+  if (props.isContinious) {
+    props.msgTestDateOrEmpty = _Msg2.default.TEST_DATE_OR_EMPTY;
+    props.onTestDateOrEmpty = onTestDateOrEmpty;
+  }
 
   return _react2.default.createElement(Comp, _extends({
     key: dialogType,

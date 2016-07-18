@@ -27,24 +27,31 @@ DateUtils.isValidDate = function isValidDate(str) {
 		return false;
 	}
 
-	var ret = true; //RETURN VALUE
-	var thisYear = new Date().getFullYear(); //YEAR NOW
-	var minYear = 1999; //MIN YEAR
+	var thisYear = new Date().getFullYear();
+	var minYear = 1999;
 
 	// YEAR CHECK
 	if (m[1].length < 4 || m[1] < minYear || m[1] > thisYear) {
-		ret = false;
+		return false;
 	}
 	// MONTH CHECK
 	if (m[2].length < 2 || m[2] < 1 || m[2] > 12) {
-		ret = false;
+		return false;
 	}
 	// DAY CHECK
 	if (m[3].length < 2 || m[3] < 1 || m[3] > 31) {
-		ret = false;
+		return false;
 	}
 
-	return ret;
+	return true;
+};
+
+DateUtils.isValidDateOrEmpty = function (str) {
+	if (str === '') {
+		return true;
+	} else {
+		return DateUtils.isValidDate(str);
+	}
 };
 
 DateUtils.getFromDate = function (yearMinus) {

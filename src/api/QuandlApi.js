@@ -7,22 +7,39 @@ QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
 QuandlApi.BLANK = '';
 
 QuandlApi.getRequestUrl = function(option){
-  const queryDate = (option.fromDate && option.toDate) ?
-       `sort_order=asc&trim_start=${option.fromDate}&trim_end=${option.toDate}` :
-        QuandlApi.BLANK;
+  const { value, fromDate, toDate, apiKey } = option;
 
-  let apiKey;
-  if (option.apiKey){
-    apiKey = (queryDate)
-       ? `&api_key=${option.apiKey}`
-       : `api_key=${option.apiKey}`;
+  let _queryDate;
+  if ( fromDate || toDate ){
+    _queryDate = 'sort_order=asc';
+    if (fromDate) {
+      _queryDate = _queryDate + `&trim_start=${fromDate}`;
+    }
+    if (toDate){
+      _queryDate = _queryDate + `&trim_end=${toDate}`;
+    }
   } else {
-    apiKey = QuandlApi.BLANK;
+    _queryDate = QuandlApi.BLANK;
+  }
+  
+  /*
+  const _queryDate = (fromDate && toDate)
+          ? `sort_order=asc&trim_start=${fromDate}&trim_end=${toDate}`
+          : QuandlApi.BLANK;
+  */
+
+  let _apiKey;
+  if (apiKey){
+    _apiKey = (_queryDate)
+       ? `&api_key=${apiKey}`
+       : `api_key=${apiKey}`;
+  } else {
+    _apiKey = QuandlApi.BLANK;
   }
 
-  const uri = `${QuandlApi.rootUrl}${option.value}.json?${queryDate}${apiKey}`;
+  const _uri = `${QuandlApi.rootUrl}${value}.json?${_queryDate}${_apiKey}`;
 
-  return ApiUtils.createUri(uri);
+  return ApiUtils.createUri(_uri);
 }
 
 const REQUEST_ERROR = 'Request Error'

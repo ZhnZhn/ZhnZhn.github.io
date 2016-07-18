@@ -16,18 +16,41 @@ QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
 QuandlApi.BLANK = '';
 
 QuandlApi.getRequestUrl = function (option) {
-  var queryDate = option.fromDate && option.toDate ? 'sort_order=asc&trim_start=' + option.fromDate + '&trim_end=' + option.toDate : QuandlApi.BLANK;
+  var value = option.value;
+  var fromDate = option.fromDate;
+  var toDate = option.toDate;
+  var apiKey = option.apiKey;
 
-  var apiKey = void 0;
-  if (option.apiKey) {
-    apiKey = queryDate ? '&api_key=' + option.apiKey : 'api_key=' + option.apiKey;
+
+  var _queryDate = void 0;
+  if (fromDate || toDate) {
+    _queryDate = 'sort_order=asc';
+    if (fromDate) {
+      _queryDate = _queryDate + ('&trim_start=' + fromDate);
+    }
+    if (toDate) {
+      _queryDate = _queryDate + ('&trim_end=' + toDate);
+    }
   } else {
-    apiKey = QuandlApi.BLANK;
+    _queryDate = QuandlApi.BLANK;
   }
 
-  var uri = '' + QuandlApi.rootUrl + option.value + '.json?' + queryDate + apiKey;
+  /*
+  const _queryDate = (fromDate && toDate)
+          ? `sort_order=asc&trim_start=${fromDate}&trim_end=${toDate}`
+          : QuandlApi.BLANK;
+  */
 
-  return _ApiUtils2.default.createUri(uri);
+  var _apiKey = void 0;
+  if (apiKey) {
+    _apiKey = _queryDate ? '&api_key=' + apiKey : 'api_key=' + apiKey;
+  } else {
+    _apiKey = QuandlApi.BLANK;
+  }
+
+  var _uri = '' + QuandlApi.rootUrl + value + '.json?' + _queryDate + _apiKey;
+
+  return _ApiUtils2.default.createUri(_uri);
 };
 
 var REQUEST_ERROR = 'Request Error',

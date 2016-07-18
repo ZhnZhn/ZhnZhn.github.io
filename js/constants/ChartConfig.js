@@ -18,6 +18,10 @@ var _Tooltip = require('./Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
+var _WithIndicator = require('./WithIndicator');
+
+var _WithIndicator2 = _interopRequireDefault(_WithIndicator);
+
 var _WithPie = require('./WithPie');
 
 var _WithPie2 = _interopRequireDefault(_WithPie);
@@ -36,7 +40,7 @@ var _WithTreeMap2 = _interopRequireDefault(_WithTreeMap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChartConfig = _extends({}, _WithPie2.default, _WithStackedArea2.default, _WithStackedColumn2.default, _WithTreeMap2.default);
+var ChartConfig = _extends({}, _WithIndicator2.default, _WithPie2.default, _WithStackedArea2.default, _WithStackedColumn2.default, _WithTreeMap2.default);
 
 var _fnCreateMonochromePieColors = function _fnCreateMonochromePieColors(_ref) {
   var _ref$base = _ref.base1;

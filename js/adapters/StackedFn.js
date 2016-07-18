@@ -25,7 +25,9 @@ var _ChartConfig = require('../constants/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _QuandlFn = require('./QuandlFn');
+var _QuandlFn = require('./QuandlFn2');
+
+var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -203,7 +205,7 @@ var fnCreateSparkData = exports.fnCreateSparkData = function fnCreateSparkData(j
   jsonData.forEach(function (yearData, yearIndex) {
     sparkvalues.push(yearData[itemIndex]);
     if (yearData[itemIndex]) {
-      sparkpercent.push(parseFloat((0, _QuandlFn.fnCreatePercent)({
+      sparkpercent.push(parseFloat(_QuandlFn2.default.createPercent({
         bValue: (0, _big2.default)(yearData[itemIndex]),
         bTotal: bYearTotals[yearIndex]
       }), 10));

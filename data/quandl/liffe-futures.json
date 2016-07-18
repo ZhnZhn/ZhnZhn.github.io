@@ -1,0 +1,135 @@
+{
+  "futures" : [
+    {
+      "caption" : "Agriculture : Cocoa" , "value" : "C",
+      "columns" : [
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "December", "value" : "Z"}
+      ]
+    },{
+      "caption" : "Agriculture : Robusta Coffee" , "value" : "RC",
+      "columns" : [
+        { "caption" : "January", "value" : "F" },
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "July", "value" : "N" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "November", "value" : "X" }
+      ]
+    },{
+      "caption" : "Agriculture : Corn" , "value" : "EMA",
+      "columns" : [
+        { "caption" : "January", "value" : "F" },
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "August", "value" : "Q" },
+        { "caption" : "November", "value" : "X" }
+      ]
+    },{
+      "caption" : "Agriculture : Malting Barley" , "value" : "EOB",
+      "columns" : [
+        { "caption" : "January", "value" : "F" },
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "November", "value" : "X" }
+      ]
+    },{
+      "caption" : "Agriculture : Milling Wheat" , "value" : "EBM",
+      "columns" : [
+        { "caption" : "January", "value" : "F" },
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "November", "value" : "X" },
+        { "caption" : "December", "value" : "Z"}
+      ]
+    },{
+      "caption" : "Agriculture : Feed Wheat" , "value" : "T",
+      "columns" : [
+        { "caption" : "January", "value" : "F" },
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "November", "value" : "X" }
+      ]
+    },{
+      "caption" : "Agriculture : Rapeseed" , "value" : "ECO",
+      "columns" : [
+        { "caption" : "February", "value" : "G"},
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "August", "value" : "Q" },
+        { "caption" : "November", "value" : "X" }
+      ]
+    },{
+      "caption" : "Agriculture : Skimmed Milk Powder" , "value" : "EPL",
+      "columns" : [
+        { "caption" : "January", "value" : "F" },
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "July", "value" : "N" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "November", "value" : "X" }
+      ]
+    },
+    {
+      "caption" : "Agriculture : White Sugar" , "value" : "W",
+      "columns" : [
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "August", "value" : "Q" },
+        { "caption" : "October", "value" : "V"},
+        { "caption" : "December", "value" : "Z"}
+      ]
+    },{
+      "caption" : "Index : AEX Index" , "value" : "FTI",
+      "columns" : [
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "December", "value" : "Z"}
+      ]
+    },{
+      "caption" : "Index : Mini AEX Index" , "value" : "MFA",
+      "columns" : [
+        { "caption" : "January", "value" : "F" },
+        { "caption" : "February", "value" : "G"},
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "April", "value" : "J"},
+        { "caption" : "May", "value" : "K" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "July", "value" : "N" },
+        { "caption" : "August", "value" : "Q" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "October", "value" : "V"},
+        { "caption" : "November", "value" : "X" },
+        { "caption" : "December", "value" : "Z"}
+      ]
+    },{
+      "caption" : "Index : FTSEUROFIRST 80 Index" , "value" : "FEF",
+      "columns" : [
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "December", "value" : "Z"}
+      ]
+    },{
+      "caption" : "Rate : Short Gilt" , "value" : "G",
+      "columns" : [
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "December", "value" : "Z"}
+      ]
+    },{
+      "caption" : "Rate : Long Gilt" , "value" : "R",
+      "columns" : [
+        { "caption" : "March", "value" : "H" },
+        { "caption" : "June", "value" : "M" },
+        { "caption" : "September", "value" : "U" },
+        { "caption" : "December", "value" : "Z"}
+      ]
+    }
+  ]
+}
