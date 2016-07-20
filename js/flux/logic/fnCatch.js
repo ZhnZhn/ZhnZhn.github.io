@@ -17,7 +17,10 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
    var onFailed = _ref.onFailed;
 
    if (error instanceof TypeError) {
-      if (!error.errCaption && error.message.indexOf('fetch') !== -1) {
+      if (error.message.indexOf('code 503') !== -1) {
+         option.alertCaption = _Msg2.default.Alert.SERVICE_UNAVAILABLE.caption;
+         option.alertDescr = _Msg2.default.Alert.SERVICE_UNAVAILABLE.descr;
+      } else if (error.message.indexOf('fetch') !== -1) {
          option.alertCaption = _Msg2.default.Alert.NETWORK_ERROR.caption;
          option.alertDescr = _Msg2.default.Alert.NETWORK_ERROR.descr;
       } else {

@@ -128,18 +128,19 @@ const QuandlFn2 = {
           }
         }
      }
-     return -1;
+     return undefined;
   },
 
   getDataColumnIndex(json, option){
     const { columnName, dataColumn } = option
         , _dataColumn = this.findColumnIndex(json, columnName)
-        , _columnIndex = (_dataColumn !== -1)
+        , _columnIndex = (_dataColumn)
               ? _dataColumn
               : (dataColumn) ? dataColumn : 1;
 
      return _columnIndex;
   }
+
 };
 
 export default QuandlFn2

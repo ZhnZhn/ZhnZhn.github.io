@@ -116,6 +116,7 @@ var Futures3Dialog = _react2.default.createClass(_extends({
     var fnValue = _props3.fnValue;
     var columnName = _props3.columnName;
     var dataColumn = _props3.dataColumn;
+    var seriaColumnNames = _props3.seriaColumnNames;
     var loadId = _props3.loadId;
     var isContinious = _props3.isContinious;
     var _subtitle = columnName ? month.caption + ':' + this.year.caption + ':' + columnName : month.caption + ':' + this.year.caption;
@@ -127,7 +128,8 @@ var Futures3Dialog = _react2.default.createClass(_extends({
       columnName: columnName,
       dataColumn: dataColumn,
       loadId: loadId,
-      fromDate: _fromDate
+      fromDate: _fromDate,
+      seriaColumnNames: seriaColumnNames
     };
   },
   _handlerClose: function _handlerClose() {

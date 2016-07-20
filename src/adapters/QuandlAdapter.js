@@ -27,6 +27,7 @@ const C = {
   SPLIT_RATIO : "Split Ratio",
   UNKNOWN : "Unknown",
 
+  COLOR_BLUE : "#7cb5ec",
   COLOR_GREEN : "#80c040",
   COLOR_RED : "#F44336",
   COLOR_WHITE : "white",
@@ -83,7 +84,6 @@ const _fnAddExDividend = function(exDividendIndex, result){
        const x = dateUTC
            , exValue = point[exDividendIndex]
            , price = point[yPointIndex];
-
 
        if (QuandlFn2.isPrevDateAfter(dataExDividend, x , 14)) {
           dataExDividend.push(Object.assign(ChartConfig.fMarkerExDividend(), {x, exValue, price}));
@@ -187,8 +187,31 @@ const _fnAddHighLow = function(optionIndex, result){
   return result
 }
 
+const _fnAddCustomSeries = function(columns, result){
+   const { dateUTC, point, legendSeries } = result;
+   for (var i=0, max=columns.length ; i<max; i++ ){
+      legendSeries[i].data.push([dateUTC, point[columns[i]]])
+   }
+}
 
-const _fnCreatePointFlow = function(json, yPointIndex){
+const _fLegendConfig = function(seriaColumnNames, column_names){
+  const legendSeries = []
+      , columns =[];
+
+  for (let i=0, max=seriaColumnNames.length; i<max; i++ ){
+     const columnName = seriaColumnNames[i]
+         , columnIndex = QuandlFn2.findColumnIndex(column_names, columnName);
+     if (columnIndex) {
+        const { color, symbol } = Chart.fSeriaMarkerConfig(columnName);
+        legendSeries.push({ data: [], name : columnName, color, symbol });
+        columns.push(columnIndex);
+     }
+  }
+
+  return { legendSeries, columns }
+}
+
+const _fnCreatePointFlow = function(json, yPointIndex, option){
 
   const fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
       , column_names = json.dataset.column_names
@@ -210,25 +233,36 @@ const _fnCreatePointFlow = function(json, yPointIndex){
       , exDividend = QuandlFn2.findColumnIndex(column_names, C.EX_DIVIDEND)
       , splitRatio = QuandlFn2.findColumnIndex(column_names, C.SPLIT_RATIO);
 
-  if ( volume !== -1){
+  if (volume){
     fnStep.push(_fnAddVolume.bind(null, {
       volume, open, close, low, high
     }));
   }
 
-  if (exDividend !== -1){
+  if (exDividend) {
     fnStep.push(_fnAddExDividend.bind(null, exDividend));
   }
-  if (splitRatio !== -1){
+
+  if (splitRatio){
     fnStep.push(_fnAddSplitRatio.bind(null, splitRatio));
   }
 
-  if ( open !== -1 ){
+  if (open){
     fnStep.push(_fnAddATH.bind(null, { open }));
   }
 
-  if (high !== -1 && low !== -1){
+  if (high && low ){
     fnStep.push(_fnAddHighLow.bind(null, { open, high, low }));
+  }
+
+  const { seriaColumnNames } = option;
+  if (seriaColumnNames) {
+    const { legendSeries, columns } = _fLegendConfig(seriaColumnNames, column_names);
+
+    if (legendSeries.length !== 0){
+      result.legendSeries = legendSeries
+      fnStep.push(_fnAddCustomSeries.bind(null, columns));
+    }
   }
 
   return {
@@ -237,8 +271,8 @@ const _fnCreatePointFlow = function(json, yPointIndex){
   };
 }
 
-const _fnSeriesPipe = function(json, yPointIndex){
-  const {fnPointsFlow, result} = _fnCreatePointFlow(json, yPointIndex)
+const _fnSeriesPipe = function(json, yPointIndex, option){
+  const {fnPointsFlow, result} = _fnCreatePointFlow(json, yPointIndex, option)
       , points = sortBy(json.dataset.data, '0');
 
   for(var i=0, max=points.length; i<max; i++){
@@ -292,6 +326,41 @@ const _fnSetChartTitle = function(config, option){
   }
 }
 
+const _fnSetLegendSeriesToConfig = function(legendSeries, config, chartId){
+  const legend = []
+      , _len = config.series.length;
+
+  if (_len !== 0){
+     legend.push({
+        name: config.series[0].zhValueText,
+        index: 0,
+        color: C.COLOR_BLUE,
+        isVisible : true
+    });
+  }
+
+  for (let i=0, max=legendSeries.length; i<max; i++){
+    const { data, name, color, symbol } = legendSeries[i];
+
+    config.series.push(ChartConfig.fSeries({
+       zhSeriaId : i + '_' + chartId,
+       zhValueText : name,
+       visible : false,
+       marker : Chart.fSeriaMarker({ color, symbol }),
+       color: color,
+       data : data       
+    }));
+    legend.push({
+       name : name,
+       index : _len + i,
+       color : color,
+       isVisible : false
+     });
+  }
+
+  config.zhConfig.legend = legend;
+};
+
 const fnGetSeries = function(config, json, option){
    const { dataColumn:yPointIndex, value:chartId } = option;
 
@@ -304,8 +373,8 @@ const fnGetSeries = function(config, json, option){
      dataExDividend, dataSplitRatio,
      dataVolume, dataVolumeColumn,
      dataATH, dataHighLow,
-     zhPoints
-   } = _fnSeriesPipe(json, yPointIndex);
+     legendSeries, zhPoints
+   } = _fnSeriesPipe(json, yPointIndex, option);
 
    _fnCheckIsMfi(config, json, zhPoints);
    config.zhFnAddSeriesSma = fnAddSeriesSma;
@@ -332,6 +401,11 @@ const fnGetSeries = function(config, json, option){
    config.zhHighLowConfig = (dataHighLow.length>0)
             ? ChartConfig.fIndicatorHighLowConfig(chartId, dataHighLow)
             : undefined;
+
+    if (legendSeries){
+      _fnSetLegendSeriesToConfig(legendSeries, config, chartId);
+      config.zhConfig.isWithLegend = true;
+    }
 
    return { config, minPoint, maxPoint, minY }
 }

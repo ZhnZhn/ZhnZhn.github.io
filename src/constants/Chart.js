@@ -205,6 +205,39 @@ const Chart = {
          lineHeight : 1.5
        }
     }, option)
+  },
+
+
+  fSeriaMarkerConfig(columnName){
+    if (columnName.toLowerCase() === 'open' || columnName.toLowerCase() === 'open interest'){
+      return { color : '#90ed7d', symbol: 'circle' };
+    } else if (columnName.toLowerCase() === 'high'){
+      return { color: 'green', symbol : 'circle' };
+    } else if (columnName.toLowerCase() === 'low'){
+      return { color : '#ED5813', symbol : 'circle' };
+    } else if (columnName.toLowerCase() === 'adj. close'){
+      return { color : '#f15c80', symbol: 'diamond' } ;
+    }
+
+    return { color: undefined, symbol: undefined};
+  },
+
+  fSeriaMarker({ color, symbol }){
+    return {
+      radius : 4,
+      symbol : symbol,
+      states : {
+        hover : {
+          fillColor: 'yellow',
+          lineColor: 'yellow',
+          lineWidth: 1,
+          lineWidthPlus: 0,
+          enabled: true,
+          radius: 2,
+          radiusPlus: 0
+        }
+      }
+    }
   }
 
 };

@@ -151,13 +151,13 @@ var QuandlFn2 = {
         }
       }
     }
-    return -1;
+    return undefined;
   },
   getDataColumnIndex: function getDataColumnIndex(json, option) {
     var columnName = option.columnName;
     var dataColumn = option.dataColumn;
     var _dataColumn = this.findColumnIndex(json, columnName);
-    var _columnIndex = _dataColumn !== -1 ? _dataColumn : dataColumn ? dataColumn : 1;
+    var _columnIndex = _dataColumn ? _dataColumn : dataColumn ? dataColumn : 1;
 
     return _columnIndex;
   }

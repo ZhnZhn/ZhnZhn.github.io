@@ -1,4 +1,5 @@
 import Highcharts from 'highcharts';
+import merge from 'lodash/merge';
 
 import Chart from './Chart';
 import Tooltip from './Tooltip';
@@ -35,6 +36,35 @@ const _fnCreateMonochromePieColors = function({
   }
   return colors;
 }
+
+const _handlerMouserOverPoint = function(event){
+   const chart = this.series.chart
+       , x = this.x
+       , y = this.y
+       , plotX = this.plotX
+       , plotY = this.plotY
+       , date = Highcharts.dateFormat('%d-%m-%Y', x);
+
+   if (chart.xCrossLabel) {
+     chart.xCrossLabel.attr({
+       x : plotX,
+       text: date
+     });
+     chart.yCrossLabel.attr({
+       x : chart.yAxis[0].width + 16,
+       y: plotY + chart.plotTop,
+       text: y
+     });
+   } else {
+     chart.xCrossLabel = chart.renderer.text(date, plotX, 50)
+                           .css({ color: 'yellow', fontSize: '15px'})
+                           .add();
+     chart.yCrossLabel = chart.renderer.text(y, chart.yAxis[0].width + 16 , plotY + chart.plotTop)
+                           .css({ color: 'yellow', fontSize: '15px'})
+                           .add();
+   }
+}
+
 
 ChartConfig.theme = {
     credits: {
@@ -80,13 +110,26 @@ ChartConfig.theme = {
         marker: {
           states: {
             hover : {
+              fillColor: 'yellow',
+              lineColor: 'yellow',
+              lineWidth: 1,
+              lineWidthPlus: 0,
               enabled: true,
-              radiusPlus: 2
+              radius: 2,
+              radiusPlus: 0
             }
           }
-        }
+        }        
       },
       series : {
+        states : {
+          hover : {
+            halo : {
+              opacity : 0.35,
+              size : 16
+            }
+          }
+        },
         stickyTracking : false,
         events : {
           click : function(event) {
@@ -254,6 +297,11 @@ ChartConfig.fBaseAreaConfig = function(){
       hover: {
          lineWidth : 1
       }
+   },
+   point : {
+     events : {
+       mouseOver : _handlerMouserOverPoint
+     }
    }
   }]
  }
@@ -349,15 +397,15 @@ ChartConfig.fSplitRatioSeria = function(data, chartId){
   return _fScatterSeria('#ED5813', Tooltip.fnSplitRatioPointFormatter, data, chartId + '_SplitRatio');
 }
 
-ChartConfig.fSeries = function(){
-  return {
+ChartConfig.fSeries = function(option={}){
+  return merge({
       type: 'spline',
       lineWidth : 1,
       tooltip : {
         pointFormatter : Tooltip.fnBasePointFormatter,
         headerFormat : ''
       }
-  }
+  }, option);
 }
 
 ChartConfig.fTitleMetric = function(text){

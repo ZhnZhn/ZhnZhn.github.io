@@ -6,6 +6,7 @@ import SvgClose from './SvgClose';
 import ButtonTab from './zhn/ButtonTab';
 import ShowHide from './zhn/ShowHide';
 import ZhHighchart from './ZhHighchart';
+import Legend from './zhn/Legend';
 
 import PanelIndicator from './zhn/PanelIndicator';
 import PanelDataInfo from './zhn/PanelDataInfo';
@@ -59,12 +60,14 @@ const styles = {
 
 const AreaChartItem = React.createClass({
   getInitialState(){
+    this.is2H = false;
     this._fnOnCheck = this._handlerCheckBox.bind(null, true);
     this._fnOnUnCheck = this._handlerCheckBox.bind(null, false);
     return {
       isOpen: true,
       isShowChart : true,
       isShowIndicator : false,
+      isShowLegend : false,
       isShowInfo : false,
 
       isInitVolume : false, isShowVolume : false,
@@ -99,7 +102,27 @@ const AreaChartItem = React.createClass({
   },
 
   _handlerClickIndicator(){
-    this.setState({isShowIndicator : !this.state.isShowIndicator});
+    this.setState({ isShowIndicator : !this.state.isShowIndicator });
+  },
+
+  _handlerClickLegend(){
+    this.setState({ isShowLegend : !this.state.isShowLegend });
+  },
+  _handlerToggleSeria(seriaIndex){
+    const seria = this.mainChart.series[seriaIndex];
+    if (seria.visible){
+      seria.hide()
+    }  else {
+      seria.show();
+    }
+  },
+
+  _handlerClick2H(){
+    const height = (this.is2H)
+           ? this.mainChart.options.chart.height/2
+           : this.mainChart.options.chart.height*2;
+    this.setChartHeight(height);
+    this.is2H = !this.is2H;
   },
 
   _handlerAddToWatch(){
@@ -187,6 +210,24 @@ const AreaChartItem = React.createClass({
        </ButtonTab>
      ) : undefined;
 
+    const _btLegend = (config.zhConfig.isWithLegend) ? (
+      <ButtonTab
+        style={{left: '115px'}}
+        caption={'Legend'}
+        isShow={this.state.isShowLegend}
+        onClick={this._handlerClickLegend}
+      />
+    ) : undefined ;
+
+    const _bt2HChart = (
+      <ButtonTab
+        style={{left: '190px'}}
+        caption={'x2H'}
+        isShow={this.is2H}
+        onClick={this._handlerClick2H}
+      />
+    );
+
     const _btAdd = (!config.zhConfig.isWithoutAdd) ? (
       <ButtonTab
         style={{left: '240px'}}
@@ -234,6 +275,8 @@ const AreaChartItem = React.createClass({
     return (
       <div style={ {position: 'relative', height: '30px', backgroundColor: 'transparent', zIndex: 2} }>
          {_btIndicator}
+         {_btLegend}
+         {_bt2HChart}
          {_btAdd}
          {_btInfo}
          {_btVolume}
@@ -241,6 +284,20 @@ const AreaChartItem = React.createClass({
          {_btHL}
       </div>
     );
+  },
+
+  _renderLegend(config){
+    const { isShowLegend } = this.state;
+    const _compLegend = (config.zhConfig.isWithLegend) ? (
+      <ShowHide isShow={isShowLegend}>
+        <Legend
+           legend={config.zhConfig.legend}
+           onClickItem={this._handlerToggleSeria}
+        />
+      </ShowHide>
+    ) : undefined
+
+    return _compLegend
   },
 
   _renderMetricCharts(){
@@ -328,7 +385,7 @@ const AreaChartItem = React.createClass({
            {isShowChart && this._createChartToolBar(config)}
            <ZhHighchart
               ref="chart"
-              isShow={isShowChart}              
+              isShow={isShowChart}
               config={config}
            />
            <PanelIndicator
@@ -344,6 +401,7 @@ const AreaChartItem = React.createClass({
               info={config.info}
               onClickChart={this._handlerClickChart}
            />
+          {this._renderLegend(config)}
           {this._renderIndicatorCharts(mfiConfigs)}
           {this._renderMetricCharts()}
         </ShowHide>
@@ -352,12 +410,17 @@ const AreaChartItem = React.createClass({
   },
 
   reflowChart(width){
-    //this.mainChart.reflow();
-    this.mainChart.setSize(width, this.mainChart.options.chart.height, true);
+    this.mainChart.options.chart.width = width;
+    this.mainChart.reflow();
     this.mainChart.options.zhDetailCharts.forEach((chart) => {
       //chart.reflow();
       chart.setSize(width, chart.options.chart.height, true);
     });
+  },
+
+  setChartHeight(height){
+    this.mainChart.options.chart.height = height;
+    this.mainChart.reflow();
   }
 
 });

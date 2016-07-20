@@ -56,6 +56,7 @@ var C = {
   SPLIT_RATIO: "Split Ratio",
   UNKNOWN: "Unknown",
 
+  COLOR_BLUE: "#7cb5ec",
   COLOR_GREEN: "#80c040",
   COLOR_RED: "#F44336",
   COLOR_WHITE: "white",
@@ -247,7 +248,38 @@ var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
   return result;
 };
 
-var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
+var _fnAddCustomSeries = function _fnAddCustomSeries(columns, result) {
+  var dateUTC = result.dateUTC;
+  var point = result.point;
+  var legendSeries = result.legendSeries;
+
+  for (var i = 0, max = columns.length; i < max; i++) {
+    legendSeries[i].data.push([dateUTC, point[columns[i]]]);
+  }
+};
+
+var _fLegendConfig = function _fLegendConfig(seriaColumnNames, column_names) {
+  var legendSeries = [],
+      columns = [];
+
+  for (var i = 0, max = seriaColumnNames.length; i < max; i++) {
+    var columnName = seriaColumnNames[i],
+        columnIndex = _QuandlFn2.default.findColumnIndex(column_names, columnName);
+    if (columnIndex) {
+      var _Chart$fSeriaMarkerCo = _Chart2.default.fSeriaMarkerConfig(columnName);
+
+      var color = _Chart$fSeriaMarkerCo.color;
+      var symbol = _Chart$fSeriaMarkerCo.symbol;
+
+      legendSeries.push({ data: [], name: columnName, color: color, symbol: symbol });
+      columns.push(columnIndex);
+    }
+  }
+
+  return { legendSeries: legendSeries, columns: columns };
+};
+
+var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) {
 
   var fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
       column_names = json.dataset.column_names,
@@ -269,25 +301,41 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
       exDividend = _QuandlFn2.default.findColumnIndex(column_names, C.EX_DIVIDEND),
       splitRatio = _QuandlFn2.default.findColumnIndex(column_names, C.SPLIT_RATIO);
 
-  if (volume !== -1) {
+  if (volume) {
     fnStep.push(_fnAddVolume.bind(null, {
       volume: volume, open: open, close: close, low: low, high: high
     }));
   }
 
-  if (exDividend !== -1) {
+  if (exDividend) {
     fnStep.push(_fnAddExDividend.bind(null, exDividend));
   }
-  if (splitRatio !== -1) {
+
+  if (splitRatio) {
     fnStep.push(_fnAddSplitRatio.bind(null, splitRatio));
   }
 
-  if (open !== -1) {
+  if (open) {
     fnStep.push(_fnAddATH.bind(null, { open: open }));
   }
 
-  if (high !== -1 && low !== -1) {
+  if (high && low) {
     fnStep.push(_fnAddHighLow.bind(null, { open: open, high: high, low: low }));
+  }
+
+  var seriaColumnNames = option.seriaColumnNames;
+
+  if (seriaColumnNames) {
+    var _fLegendConfig2 = _fLegendConfig(seriaColumnNames, column_names);
+
+    var legendSeries = _fLegendConfig2.legendSeries;
+    var columns = _fLegendConfig2.columns;
+
+
+    if (legendSeries.length !== 0) {
+      result.legendSeries = legendSeries;
+      fnStep.push(_fnAddCustomSeries.bind(null, columns));
+    }
   }
 
   return {
@@ -296,8 +344,8 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex) {
   };
 };
 
-var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex) {
-  var _fnCreatePointFlow2 = _fnCreatePointFlow(json, yPointIndex);
+var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex, option) {
+  var _fnCreatePointFlow2 = _fnCreatePointFlow(json, yPointIndex, option);
 
   var fnPointsFlow = _fnCreatePointFlow2.fnPointsFlow;
   var result = _fnCreatePointFlow2.result;
@@ -355,6 +403,46 @@ var _fnSetChartTitle = function _fnSetChartTitle(config, option) {
   }
 };
 
+var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSeries, config, chartId) {
+  var legend = [],
+      _len = config.series.length;
+
+  if (_len !== 0) {
+    legend.push({
+      name: config.series[0].zhValueText,
+      index: 0,
+      color: C.COLOR_BLUE,
+      isVisible: true
+    });
+  }
+
+  for (var i = 0, max = legendSeries.length; i < max; i++) {
+    var _legendSeries$i = legendSeries[i];
+    var data = _legendSeries$i.data;
+    var name = _legendSeries$i.name;
+    var color = _legendSeries$i.color;
+    var symbol = _legendSeries$i.symbol;
+
+
+    config.series.push(_ChartConfig2.default.fSeries({
+      zhSeriaId: i + '_' + chartId,
+      zhValueText: name,
+      visible: false,
+      marker: _Chart2.default.fSeriaMarker({ color: color, symbol: symbol }),
+      color: color,
+      data: data
+    }));
+    legend.push({
+      name: name,
+      index: _len + i,
+      color: color,
+      isVisible: false
+    });
+  }
+
+  config.zhConfig.legend = legend;
+};
+
 var fnGetSeries = function fnGetSeries(config, json, option) {
   var yPointIndex = option.dataColumn;
   var chartId = option.value;
@@ -364,7 +452,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.zhConfig = _QuandlFn2.default.createZhConfig(option);
   config.info = _QuandlFn2.default.createDatasetInfo(json);
 
-  var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex);
+  var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex, option);
 
   var seria = _fnSeriesPipe2.seria;
   var minPoint = _fnSeriesPipe2.minPoint;
@@ -376,6 +464,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   var dataVolumeColumn = _fnSeriesPipe2.dataVolumeColumn;
   var dataATH = _fnSeriesPipe2.dataATH;
   var dataHighLow = _fnSeriesPipe2.dataHighLow;
+  var legendSeries = _fnSeriesPipe2.legendSeries;
   var zhPoints = _fnSeriesPipe2.zhPoints;
 
 
@@ -398,6 +487,11 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.zhVolumeConfig = dataVolume.length > 0 ? _ChartConfig2.default.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume) : undefined;
   config.zhATHConfig = dataATH.length > 0 ? _ChartConfig2.default.fIndicatorATHConfig(chartId, dataATH) : undefined;
   config.zhHighLowConfig = dataHighLow.length > 0 ? _ChartConfig2.default.fIndicatorHighLowConfig(chartId, dataHighLow) : undefined;
+
+  if (legendSeries) {
+    _fnSetLegendSeriesToConfig(legendSeries, config, chartId);
+    config.zhConfig.isWithLegend = true;
+  }
 
   return { config: config, minPoint: minPoint, maxPoint: maxPoint, minY: minY };
 };

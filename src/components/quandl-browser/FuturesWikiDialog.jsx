@@ -14,7 +14,7 @@ const typeOptions = [
   { caption: 'Continuous Contract #2', value: 2 },
   { caption: 'Continuous Contract #3', value: 3 },
   { caption: 'Continuous Contract #4', value: 4 },
-  { caption: 'Continuous Contract #5', value: 5 }
+  { caption: 'Continuous Contract #5', value: 5 }  
 ]
 
 const Futures3Dialog = React.createClass({
@@ -76,14 +76,14 @@ const Futures3Dialog = React.createClass({
     const { parent:exchange, child:item } = this.exchangeItem.getValues()
         , { fnValue, columnName, dataColumn, loadId, isContinious } = this.props
         , _subtitle = (columnName)
-              ? `${item.caption}:${this.type.caption}:${columnName}`
-              : `${item.caption}:${this.type.caption}`
+              ? `${this.type.caption}:${columnName}`
+              : `${this.type.caption}`
         , _fromDate = (isContinious)
               ? this.fromDate.getValue()
               : undefined  ;
     return {
        value : fnValue(exchange.value, item.value, this.type.value ),
-       title : item.caption,
+       title : `${exchange.caption}:${item.caption}`,
        subtitle : _subtitle,
        columnName : columnName,
        dataColumn : dataColumn,

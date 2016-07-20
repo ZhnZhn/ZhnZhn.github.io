@@ -32,6 +32,10 @@ var _ZhHighchart = require('./ZhHighchart');
 
 var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
 
+var _Legend = require('./zhn/Legend');
+
+var _Legend2 = _interopRequireDefault(_Legend);
+
 var _PanelIndicator = require('./zhn/PanelIndicator');
 
 var _PanelIndicator2 = _interopRequireDefault(_PanelIndicator);
@@ -92,12 +96,14 @@ var styles = {
 var AreaChartItem = _react2.default.createClass({
   displayName: 'AreaChartItem',
   getInitialState: function getInitialState() {
+    this.is2H = false;
     this._fnOnCheck = this._handlerCheckBox.bind(null, true);
     this._fnOnUnCheck = this._handlerCheckBox.bind(null, false);
     return {
       isOpen: true,
       isShowChart: true,
       isShowIndicator: false,
+      isShowLegend: false,
       isShowInfo: false,
 
       isInitVolume: false, isShowVolume: false,
@@ -129,6 +135,22 @@ var AreaChartItem = _react2.default.createClass({
   },
   _handlerClickIndicator: function _handlerClickIndicator() {
     this.setState({ isShowIndicator: !this.state.isShowIndicator });
+  },
+  _handlerClickLegend: function _handlerClickLegend() {
+    this.setState({ isShowLegend: !this.state.isShowLegend });
+  },
+  _handlerToggleSeria: function _handlerToggleSeria(seriaIndex) {
+    var seria = this.mainChart.series[seriaIndex];
+    if (seria.visible) {
+      seria.hide();
+    } else {
+      seria.show();
+    }
+  },
+  _handlerClick2H: function _handlerClick2H() {
+    var height = this.is2H ? this.mainChart.options.chart.height / 2 : this.mainChart.options.chart.height * 2;
+    this.setChartHeight(height);
+    this.is2H = !this.is2H;
   },
   _handlerAddToWatch: function _handlerAddToWatch() {
     var _props = this.props;
@@ -221,6 +243,20 @@ var AreaChartItem = _react2.default.createClass({
       _react2.default.createElement('span', { className: 'arrow-down' })
     ) : undefined;
 
+    var _btLegend = config.zhConfig.isWithLegend ? _react2.default.createElement(_ButtonTab2.default, {
+      style: { left: '115px' },
+      caption: 'Legend',
+      isShow: this.state.isShowLegend,
+      onClick: this._handlerClickLegend
+    }) : undefined;
+
+    var _bt2HChart = _react2.default.createElement(_ButtonTab2.default, {
+      style: { left: '190px' },
+      caption: 'x2H',
+      isShow: this.is2H,
+      onClick: this._handlerClick2H
+    });
+
     var _btAdd = !config.zhConfig.isWithoutAdd ? _react2.default.createElement(_ButtonTab2.default, {
       style: { left: '240px' },
       caption: 'Add',
@@ -259,12 +295,28 @@ var AreaChartItem = _react2.default.createClass({
       'div',
       { style: { position: 'relative', height: '30px', backgroundColor: 'transparent', zIndex: 2 } },
       _btIndicator,
+      _btLegend,
+      _bt2HChart,
       _btAdd,
       _btInfo,
       _btVolume,
       _btATH,
       _btHL
     );
+  },
+  _renderLegend: function _renderLegend(config) {
+    var isShowLegend = this.state.isShowLegend;
+
+    var _compLegend = config.zhConfig.isWithLegend ? _react2.default.createElement(
+      _ShowHide2.default,
+      { isShow: isShowLegend },
+      _react2.default.createElement(_Legend2.default, {
+        legend: config.zhConfig.legend,
+        onClickItem: this._handlerToggleSeria
+      })
+    ) : undefined;
+
+    return _compLegend;
   },
   _renderMetricCharts: function _renderMetricCharts() {
     var _this = this;
@@ -385,18 +437,23 @@ var AreaChartItem = _react2.default.createClass({
           info: config.info,
           onClickChart: this._handlerClickChart
         }),
+        this._renderLegend(config),
         this._renderIndicatorCharts(mfiConfigs),
         this._renderMetricCharts()
       )
     );
   },
   reflowChart: function reflowChart(width) {
-    //this.mainChart.reflow();
-    this.mainChart.setSize(width, this.mainChart.options.chart.height, true);
+    this.mainChart.options.chart.width = width;
+    this.mainChart.reflow();
     this.mainChart.options.zhDetailCharts.forEach(function (chart) {
       //chart.reflow();
       chart.setSize(width, chart.options.chart.height, true);
     });
+  },
+  setChartHeight: function setChartHeight(height) {
+    this.mainChart.options.chart.height = height;
+    this.mainChart.reflow();
   }
 });
 

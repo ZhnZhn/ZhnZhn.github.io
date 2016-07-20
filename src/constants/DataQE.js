@@ -199,7 +199,6 @@ const DataQE = {
         countryJsonProp : 'countries',
         valueFn : 'RPrefixOne',
         valueFnPrefix : 'ECONOMIST/BIGMAC',
-        //fnValue : (country) => `ECONOMIST/BIGMAC_${country}`
         loadId : 'Q'
       },
       dataColumn : 1
@@ -215,7 +214,8 @@ const DataQE = {
         optionURI : './data/quandl/wiki.json',
         optionsJsonProp : 'tickets',
         loadId : 'Q',
-        columnName : 'Close'
+        columnName : 'Close',
+        seriaColumnNames : [ 'Open', 'High', 'Low', 'Adj. Close' ]
       }
   },
   QE_TOKIO_STOCK : {
@@ -228,7 +228,8 @@ const DataQE = {
         optionURI : './data/quandl/tokio.json',
         optionsJsonProp : 'tickets',
         loadId : 'Q',
-        columnName : 'Close'
+        columnName : 'Close',
+        seriaColumnNames : [ 'Open', 'High', 'Low']
       }
   },
   QE_UNICORN_RESEARCH : {
@@ -244,7 +245,6 @@ const DataQE = {
       oneJsonProp : 'exchanges',
       twoCaption : 'Metric',
       valueFn : 'ROneDashTwo',
-      //fnValue : (source, currency) => `${source}/${currency}`
       loadId : 'Q'
     },
     dataColumn : 1
@@ -262,7 +262,8 @@ const DataQE = {
         valueFn : 'RFutures',
         valueFnPrefix : 'CFFEX',
         loadId : 'Q',
-        columnName : 'Settle'
+        columnName : 'Settle',
+        seriaColumnNames : ['Open Interest']
       }
   },
   QE_DCE_FUTURE : {

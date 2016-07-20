@@ -75,7 +75,7 @@ const Futures3Dialog = React.createClass({
   },
   _createLoadOption(){
     const { parent:item, child:month } = this.itemMonth.getValues()
-        , { fnValue, columnName, dataColumn, loadId, isContinious } = this.props
+        , { fnValue, columnName, dataColumn, seriaColumnNames, loadId, isContinious } = this.props
         , _subtitle = (columnName)
               ? `${month.caption}:${this.year.caption}:${columnName}`
               : `${month.caption}:${this.year.caption}`
@@ -89,7 +89,8 @@ const Futures3Dialog = React.createClass({
        columnName : columnName,
        dataColumn : dataColumn,
        loadId : loadId,
-       fromDate : _fromDate
+       fromDate : _fromDate,
+       seriaColumnNames : seriaColumnNames
     };
   },
 

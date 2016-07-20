@@ -118,11 +118,11 @@ var Futures3Dialog = _react2.default.createClass(_extends({
     var dataColumn = _props3.dataColumn;
     var loadId = _props3.loadId;
     var isContinious = _props3.isContinious;
-    var _subtitle = columnName ? item.caption + ':' + this.type.caption + ':' + columnName : item.caption + ':' + this.type.caption;
+    var _subtitle = columnName ? this.type.caption + ':' + columnName : '' + this.type.caption;
     var _fromDate = isContinious ? this.fromDate.getValue() : undefined;
     return {
       value: fnValue(exchange.value, item.value, this.type.value),
-      title: item.caption,
+      title: exchange.caption + ':' + item.caption,
       subtitle: _subtitle,
       columnName: columnName,
       dataColumn: dataColumn,

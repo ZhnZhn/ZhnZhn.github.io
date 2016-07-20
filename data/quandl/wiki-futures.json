@@ -20,6 +20,26 @@
         { "caption" : "Milling Wheat" , "value" : "WA" }
       ]
     },{
+      "caption" : "LIFFE FE", "value" : "LIFFE",
+      "columns" : [
+         { "caption" : "Agriculture : Cocoa" , "value" : "C" },
+         { "caption" : "Agriculture : Robusta Coffee" , "value" : "RC" },
+         { "caption" : "Agriculture : Corn" , "value" : "EMA" },
+         { "caption" : "Agriculture : Malting Barley" , "value" : "EOB" },
+         { "caption" : "Agriculture : Milling Wheat" , "value" : "EBM" },
+         { "caption" : "Agriculture : Feed Wheat" , "value" : "T" },
+         { "caption" : "Agriculture : Rapeseed" , "value" : "ECO" },
+         { "caption" : "Agriculture : Skimmed Milk Powder" , "value" : "EPL" },
+         { "caption" : "Agriculture : White Sugar" , "value" : "W" },
+
+         { "caption" : "Index : AEX Index" , "value" : "FTI" },
+         { "caption" : "Index : Mini AEX Index" , "value" : "MFA" },
+         { "caption" : "Index : FTSEUROFIRST 80 Index" , "value" : "FEF" },
+
+         { "caption" : "Rate : Short Gilt" , "value" : "G" },
+         { "caption" : "Rate : Long Gilt" , "value" : "R" }
+      ]
+    },{
       "caption" : "Shanghai FE", "value" : "SHFE",
       "columns" : [
         { "caption" : "Metal : Copper" , "value" : "CU" },
@@ -29,7 +49,7 @@
         { "caption" : "Metal : Gold" , "value" : "AU" },
         { "caption" : "Metal : Silver" , "value" : "AG" },
         { "caption" : "Metal : Steel Rebar" , "value" : "RB" },
-        { "caption" : "Metal : Steel Wire Rod" , "value" : "WR" }        
+        { "caption" : "Metal : Steel Wire Rod" , "value" : "WR" }
        ]
     }
   ]

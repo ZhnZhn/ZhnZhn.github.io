@@ -102,6 +102,7 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     var _props2 = this.props;
     var columnName = _props2.columnName;
     var dataColumn = _props2.dataColumn;
+    var seriaColumnNames = _props2.seriaColumnNames;
     var loadId = _props2.loadId;
     var fnItemCaption = _props2.fnItemCaption;
     var _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
@@ -114,7 +115,8 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
       columnName: columnName,
       dataColumn: dataColumn,
       itemCaption: _itemCaption,
-      loadId: loadId
+      loadId: loadId,
+      seriaColumnNames: seriaColumnNames
     };
   },
   _handlerClose: function _handlerClose() {
