@@ -14,7 +14,7 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var WithStackAreaChart = {
+var WithStackAreaConfig = {
   fBaseStackAreaConfig: function fBaseStackAreaConfig(_ref) {
     var _ref$stacking = _ref.stacking;
     var stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
@@ -42,16 +42,13 @@ var WithStackAreaChart = {
         categories: [],
         startOnTick: false,
         min: 1,
-        crosshair: {
-          color: 'yellow',
-          width: 1,
-          zIndex: 2
-        }
+        crosshair: _Chart2.default.fCrosshair()
       }),
       yAxis: _Chart2.default.fYAxisOpposite(),
 
       plotOptions: {
-        area: _Chart2.default.fPlotOptionsArea({ stacking: stacking })
+        area: _Chart2.default.fPlotOptionsArea({ stacking: stacking }),
+        series: _Chart2.default.fPlotOptionsSeries()
       },
       legend: _Chart2.default.fLegend()
     };
@@ -79,5 +76,5 @@ var WithStackAreaChart = {
   }
 };
 
-exports.default = WithStackAreaChart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithStackedArea.js.map
+exports.default = WithStackAreaConfig;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedAreaConfig.js.map

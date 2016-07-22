@@ -4,8 +4,9 @@ import sortBy from 'lodash/sortBy';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
-import Chart from '../constants/Chart';
-import ChartConfig from '../constants/ChartConfig';
+import Chart from '../charts/Chart';
+import ChartConfig from '../charts/ChartConfig';
+import ChartLegend from '../charts/ChartLegend';
 
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from './IndicatorSma';
 
@@ -27,7 +28,7 @@ const C = {
   SPLIT_RATIO : "Split Ratio",
   UNKNOWN : "Unknown",
 
-  COLOR_BLUE : "#7cb5ec",
+  COLOR_BLUE : "#2f7ed8", // #7cb5ec
   COLOR_GREEN : "#80c040",
   COLOR_RED : "#F44336",
   COLOR_WHITE : "white",
@@ -202,8 +203,7 @@ const _fLegendConfig = function(seriaColumnNames, column_names){
      const columnName = seriaColumnNames[i]
          , columnIndex = QuandlFn2.findColumnIndex(column_names, columnName);
      if (columnIndex) {
-        const { color, symbol } = Chart.fSeriaMarkerConfig(columnName);
-        legendSeries.push({ data: [], name : columnName, color, symbol });
+        legendSeries.push(ChartLegend.fLegendConfig(columnName));
         columns.push(columnIndex);
      }
   }
@@ -340,22 +340,33 @@ const _fnSetLegendSeriesToConfig = function(legendSeries, config, chartId){
   }
 
   for (let i=0, max=legendSeries.length; i<max; i++){
-    const { data, name, color, symbol } = legendSeries[i];
+    const { data, name, color, symbol, isSecondAxes } = legendSeries[i]
+        , seria = ChartConfig.fSeries({
+             zhSeriaId : i + '_' + chartId,
+             zhValueText : name,
+             visible : false,
+             marker : Chart.fSeriaMarker({ color, symbol }),
+             color: color,
+             data : data
+          });
 
-    config.series.push(ChartConfig.fSeries({
-       zhSeriaId : i + '_' + chartId,
-       zhValueText : name,
-       visible : false,
-       marker : Chart.fSeriaMarker({ color, symbol }),
-       color: color,
-       data : data       
-    }));
-    legend.push({
-       name : name,
-       index : _len + i,
-       color : color,
-       isVisible : false
-     });
+     if (!isSecondAxes){
+        config.series.push(seria);
+        legend.push({
+          name : name,
+          index : config.series.length - 1,
+          color : color,
+          isVisible : false
+        });
+     } else {
+       legend.push({
+          name : name,
+          color : color,
+          isVisible : false,
+          isSecondAxes : true,
+          seria : seria
+        });
+     }
   }
 
   config.zhConfig.legend = legend;
@@ -385,10 +396,6 @@ const fnGetSeries = function(config, json, option){
    config.series[0].data = seria;
    config.series[0].zhSeriaId = chartId;
 
-   config.xAxis.events = {
-     afterSetExtremes : ChartConfig.zoomMetricCharts
-   }
-
    _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
    _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
@@ -414,15 +421,14 @@ const fnConfigAxes = function(result){
   const { config, minPoint, maxPoint, minY } = result
       , _maxPoint = parseFloat(Big(maxPoint).round(4).toString(), 10)
       , _minPoint = parseFloat(Big(minPoint).round(4).toString(), 10)
+      , plotLines = config.yAxis.plotLines;
 
-  config.yAxis.plotLines[0].value = _maxPoint;
-  config.yAxis.plotLines[0].label.text = ChartConfig.fnNumberFormat(_maxPoint);
-  config.yAxis.plotLines[1].value = _minPoint;
-  config.yAxis.plotLines[1].label.text = ChartConfig.fnNumberFormat(_minPoint);
-  config.yAxis.opposite = true;
+  plotLines[0].value = _maxPoint;
+  plotLines[0].label.text = ChartConfig.fnNumberFormat(_maxPoint);
+  plotLines[1].value = _minPoint;
+  plotLines[1].label.text = ChartConfig.fnNumberFormat(_minPoint);
+
   config.yAxis.min = minY;
-
-  config.xAxis = Chart.fXAxisOpposite(config.xAxis);
 
   return result
 }

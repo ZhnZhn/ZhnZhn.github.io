@@ -18,7 +18,7 @@ var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
 var _Type = require('../constants/Type');
 
-var _ChartConfig = require('../constants/ChartConfig');
+var _ChartConfig = require('../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 

@@ -139,13 +139,8 @@ var AreaChartItem = _react2.default.createClass({
   _handlerClickLegend: function _handlerClickLegend() {
     this.setState({ isShowLegend: !this.state.isShowLegend });
   },
-  _handlerToggleSeria: function _handlerToggleSeria(seriaIndex) {
-    var seria = this.mainChart.series[seriaIndex];
-    if (seria.visible) {
-      seria.hide();
-    } else {
-      seria.show();
-    }
+  _handlerToggleSeria: function _handlerToggleSeria(item) {
+    this.mainChart.options.zhToggleSeria(this.mainChart, item);
   },
   _handlerClick2H: function _handlerClick2H() {
     var height = this.is2H ? this.mainChart.options.chart.height / 2 : this.mainChart.options.chart.height * 2;
@@ -161,7 +156,10 @@ var AreaChartItem = _react2.default.createClass({
     onAddToWatch({ caption: caption, config: config });
   },
   _handlerClickInfo: function _handlerClickInfo() {
-    this.setState({ isShowChart: false, isShowInfo: true, isShowIndicator: false });
+    this.setState({
+      isShowInfo: true, isShowChart: false,
+      isShowLegend: false, isShowIndicator: false
+    });
   },
   _handlerClickVolume: function _handlerClickVolume() {
     var _state = this.state;

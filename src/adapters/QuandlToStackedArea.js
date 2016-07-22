@@ -1,7 +1,7 @@
 
 import {ChartType} from '../constants/Type';
-import Chart from '../constants/Chart';
-import ChartConfig from '../constants/ChartConfig';
+import Chart from '../charts/Chart';
+import ChartConfig from '../charts/ChartConfig';
 
 import { fnCreateStackedConfig  } from './StackedFn';
 

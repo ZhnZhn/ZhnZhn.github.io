@@ -1,7 +1,7 @@
 import Chart from './Chart';
 import Tooltip from './Tooltip';
 
-const WithTreeMap = {
+const WithTreeMapConfig = {
    fBaseTreeMapConfig(){
      return {
 
@@ -34,7 +34,6 @@ const WithTreeMap = {
            style : {
              fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
              fontSize: '14px',
-             //fontWeight: 'normal',
              fontWeight: 'bold',
              color : 'black',
              textShadow: 'none'
@@ -52,4 +51,4 @@ const WithTreeMap = {
 
 }
 
-export default WithTreeMap
+export default WithTreeMapConfig

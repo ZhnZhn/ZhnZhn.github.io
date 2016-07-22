@@ -1,7 +1,7 @@
 
 import Big from 'big.js';
 
-import ChartConfig from '../constants/ChartConfig';
+import ChartConfig from '../charts/ChartConfig';
 
 export const fnAddSeriesSma = function(chart, period){
 
@@ -110,7 +110,7 @@ export const fnGetConfigMfi = function(chart, period, id){
          })
        }
      } else {
-        const {bTp, bRmf, isFullData} = _fnGetPriceAndFlow(point);
+        const { bTp, bRmf, isFullData } = _fnGetPriceAndFlow(point);
         if (!isFullData) { nNotFullPoint+=1;}
 
         let isNegative;
@@ -127,9 +127,9 @@ export const fnGetConfigMfi = function(chart, period, id){
           bPositiveFlow = bPositiveFlow.minus(dataMcad[i-period].rmf);
         }
 
-        const bMFR_PlusOne = bPositiveFlow.div(bNegativeFlow.toFixed(4)).plus('1');
-        const bRatio = Big('100').div(bMFR_PlusOne.toFixed(4));
-        const bY = Big('100').minus(bRatio.toFixed(4));
+        const bMFR_PlusOne = bPositiveFlow.div(bNegativeFlow.toFixed(4)).plus('1')
+            , bRatio = Big('100').div(bMFR_PlusOne.toFixed(4))
+            , bY = Big('100').minus(bRatio.toFixed(4));
 
         dataMcad.push({
           x : _fnConvertToUTC(point[0]),
@@ -142,26 +142,13 @@ export const fnGetConfigMfi = function(chart, period, id){
      }
    }
 
-   const config = ChartConfig.fBaseAreaConfig();
-   const titleNotFullPoint = (nNotFullPoint !== 0) ?
-         ' Not Full Data HL:' + nNotFullPoint : '' ;
+   const titleNotFullPoint = (nNotFullPoint !== 0)
+           ? ' Not Full Data HL:' + nNotFullPoint
+           : ''
+       , config = ChartConfig.fIndicatorMfiConfig(
+           id, parentId, id + titleNotFullPoint, dataMcad
+         ) ;
 
-   config.title = ChartConfig.fTitleMetric(id + titleNotFullPoint);   
-
-   config.chart.height = 140;
-   config.chart.spacingTop = 8;
-   config.chart.spacingBottom = 10;
-   config.chart.zoomType = undefined;
-
-   config.yAxis.opposite = true;
-   config.yAxis.plotLines = [];
-
-   config.series[0].zhSeriaId = parentId + '_' + id;
-   config.series[0].zhValueText = id;
-   config.series[0].data = dataMcad;
-   config.series[0].name = "Spline";
-   config.series[0].type = "spline";
-   config.series[0].color = "green";
 
    return config;
 }

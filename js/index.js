@@ -22,7 +22,7 @@ var _AppErc = require('./components/AppErc');
 
 var _AppErc2 = _interopRequireDefault(_AppErc);
 
-var _ChartConfig = require('./constants/ChartConfig');
+var _ChartConfig = require('./charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
@@ -34,7 +34,6 @@ _highcharts2.default.setOptions(_ChartConfig2.default.theme);
 
 _highcharts2.default.wrap(_highcharts2.default.Chart.prototype, 'showCredits', function (next, credits) {
   next.call(this, credits);
-
   if (credits.enabled) {
     this.credits.element.onclick = function () {
       var link = document.createElement('a');

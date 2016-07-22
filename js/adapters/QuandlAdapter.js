@@ -20,13 +20,17 @@ var _big2 = _interopRequireDefault(_big);
 
 var _Type = require('../constants/Type');
 
-var _Chart = require('../constants/Chart');
+var _Chart = require('../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
-var _ChartConfig = require('../constants/ChartConfig');
+var _ChartConfig = require('../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+
+var _ChartLegend = require('../charts/ChartLegend');
+
+var _ChartLegend2 = _interopRequireDefault(_ChartLegend);
 
 var _IndicatorSma = require('./IndicatorSma');
 
@@ -56,7 +60,7 @@ var C = {
   SPLIT_RATIO: "Split Ratio",
   UNKNOWN: "Unknown",
 
-  COLOR_BLUE: "#7cb5ec",
+  COLOR_BLUE: "#2f7ed8", // #7cb5ec
   COLOR_GREEN: "#80c040",
   COLOR_RED: "#F44336",
   COLOR_WHITE: "white",
@@ -266,12 +270,7 @@ var _fLegendConfig = function _fLegendConfig(seriaColumnNames, column_names) {
     var columnName = seriaColumnNames[i],
         columnIndex = _QuandlFn2.default.findColumnIndex(column_names, columnName);
     if (columnIndex) {
-      var _Chart$fSeriaMarkerCo = _Chart2.default.fSeriaMarkerConfig(columnName);
-
-      var color = _Chart$fSeriaMarkerCo.color;
-      var symbol = _Chart$fSeriaMarkerCo.symbol;
-
-      legendSeries.push({ data: [], name: columnName, color: color, symbol: symbol });
+      legendSeries.push(_ChartLegend2.default.fLegendConfig(columnName));
       columns.push(columnIndex);
     }
   }
@@ -422,22 +421,33 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
     var name = _legendSeries$i.name;
     var color = _legendSeries$i.color;
     var symbol = _legendSeries$i.symbol;
-
-
-    config.series.push(_ChartConfig2.default.fSeries({
+    var isSecondAxes = _legendSeries$i.isSecondAxes;
+    var seria = _ChartConfig2.default.fSeries({
       zhSeriaId: i + '_' + chartId,
       zhValueText: name,
       visible: false,
       marker: _Chart2.default.fSeriaMarker({ color: color, symbol: symbol }),
       color: color,
       data: data
-    }));
-    legend.push({
-      name: name,
-      index: _len + i,
-      color: color,
-      isVisible: false
     });
+
+    if (!isSecondAxes) {
+      config.series.push(seria);
+      legend.push({
+        name: name,
+        index: config.series.length - 1,
+        color: color,
+        isVisible: false
+      });
+    } else {
+      legend.push({
+        name: name,
+        color: color,
+        isVisible: false,
+        isSecondAxes: true,
+        seria: seria
+      });
+    }
   }
 
   config.zhConfig.legend = legend;
@@ -477,10 +487,6 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   config.series[0].data = seria;
   config.series[0].zhSeriaId = chartId;
 
-  config.xAxis.events = {
-    afterSetExtremes: _ChartConfig2.default.zoomMetricCharts
-  };
-
   _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
@@ -503,15 +509,14 @@ var fnConfigAxes = function fnConfigAxes(result) {
   var minY = result.minY;
   var _maxPoint = parseFloat((0, _big2.default)(maxPoint).round(4).toString(), 10);
   var _minPoint = parseFloat((0, _big2.default)(minPoint).round(4).toString(), 10);
+  var plotLines = config.yAxis.plotLines;
 
-  config.yAxis.plotLines[0].value = _maxPoint;
-  config.yAxis.plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(_maxPoint);
-  config.yAxis.plotLines[1].value = _minPoint;
-  config.yAxis.plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(_minPoint);
-  config.yAxis.opposite = true;
+  plotLines[0].value = _maxPoint;
+  plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(_maxPoint);
+  plotLines[1].value = _minPoint;
+  plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(_minPoint);
+
   config.yAxis.min = minY;
-
-  config.xAxis = _Chart2.default.fXAxisOpposite(config.xAxis);
 
   return result;
 };

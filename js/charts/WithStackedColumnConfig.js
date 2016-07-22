@@ -14,7 +14,7 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var WithStackedColumn = {
+var WithStackedColumnConfig = {
   fBaseStackedColumnConfig: function fBaseStackedColumnConfig(_ref) {
     var _ref$stacking = _ref.stacking;
     var stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
@@ -43,17 +43,13 @@ var WithStackedColumn = {
         categories: [],
         startOnTick: false,
         min: 1,
-        crosshair: {
-          color: 'yellow',
-          width: 1,
-          zIndex: 2
-        }
+        crosshair: _Chart2.default.fCrosshair()
       }),
-
       yAxis: _Chart2.default.fYAxisOpposite(),
 
       plotOptions: {
-        column: _Chart2.default.fPlotOptionsColumn({ stacking: stacking })
+        column: _Chart2.default.fPlotOptionsColumn({ stacking: stacking }),
+        series: _Chart2.default.fPlotOptionsSeries()
       },
       legend: _Chart2.default.fLegend()
     };
@@ -98,5 +94,5 @@ var WithStackedColumn = {
   }
 };
 
-exports.default = WithStackedColumn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithStackedColumn.js.map
+exports.default = WithStackedColumnConfig;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedColumnConfig.js.map

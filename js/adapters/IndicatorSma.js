@@ -9,7 +9,7 @@ var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
 
-var _ChartConfig = require('../constants/ChartConfig');
+var _ChartConfig = require('../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
@@ -158,9 +158,9 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
         bPositiveFlow = bPositiveFlow.minus(dataMcad[i - period].rmf);
       }
 
-      var bMFR_PlusOne = bPositiveFlow.div(bNegativeFlow.toFixed(4)).plus('1');
-      var bRatio = (0, _big2.default)('100').div(bMFR_PlusOne.toFixed(4));
-      var bY = (0, _big2.default)('100').minus(bRatio.toFixed(4));
+      var bMFR_PlusOne = bPositiveFlow.div(bNegativeFlow.toFixed(4)).plus('1'),
+          bRatio = (0, _big2.default)('100').div(bMFR_PlusOne.toFixed(4)),
+          bY = (0, _big2.default)('100').minus(bRatio.toFixed(4));
 
       dataMcad.push({
         x: _fnConvertToUTC(point[0]),
@@ -173,25 +173,8 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
     }
   }
 
-  var config = _ChartConfig2.default.fBaseAreaConfig();
-  var titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '';
-
-  config.title = _ChartConfig2.default.fTitleMetric(id + titleNotFullPoint);
-
-  config.chart.height = 140;
-  config.chart.spacingTop = 8;
-  config.chart.spacingBottom = 10;
-  config.chart.zoomType = undefined;
-
-  config.yAxis.opposite = true;
-  config.yAxis.plotLines = [];
-
-  config.series[0].zhSeriaId = parentId + '_' + id;
-  config.series[0].zhValueText = id;
-  config.series[0].data = dataMcad;
-  config.series[0].name = "Spline";
-  config.series[0].type = "spline";
-  config.series[0].color = "green";
+  var titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '',
+      config = _ChartConfig2.default.fIndicatorMfiConfig(id, parentId, id + titleNotFullPoint, dataMcad);
 
   return config;
 };

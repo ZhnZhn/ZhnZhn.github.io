@@ -1,9 +1,7 @@
-
-
 import Chart from './Chart';
 import Tooltip from './Tooltip';
 
-const WithStackAreaChart = {
+const WithStackAreaConfig = {
    fBaseStackAreaConfig({ stacking='normal' }){
      return {
        zhSeries : {
@@ -28,16 +26,13 @@ const WithStackAreaChart = {
          categories:[],
          startOnTick: false,
          min: 1,
-         crosshair : {
-           color : 'yellow',
-           width : 1,
-           zIndex : 2
-         }
+         crosshair : Chart.fCrosshair()
        }),
        yAxis: Chart.fYAxisOpposite(),
 
        plotOptions: {
-            area: Chart.fPlotOptionsArea({ stacking })
+          area: Chart.fPlotOptionsArea({ stacking }),
+          series : Chart.fPlotOptionsSeries()
       },
       legend : Chart.fLegend()
     }
@@ -59,4 +54,4 @@ const WithStackAreaChart = {
   }
 }
 
-export default WithStackAreaChart
+export default WithStackAreaConfig

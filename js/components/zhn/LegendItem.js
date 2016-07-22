@@ -47,11 +47,9 @@ var LegendItem = _react2.default.createClass({
     var item = _props.item;
     var onClickItem = _props.onClickItem;
 
-    onClickItem(item.index);
+    onClickItem(item);
     this.setState({ isVisible: !this.state.isVisible });
   },
-
-  //borderColor: '#a487d4'
   render: function render() {
     var item = this.props.item;
     var isVisible = this.state.isVisible;

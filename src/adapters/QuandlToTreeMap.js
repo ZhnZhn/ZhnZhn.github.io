@@ -3,8 +3,8 @@ import sortBy from 'lodash/sortBy';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
-import Chart from '../constants/Chart';
-import ChartConfig from '../constants/ChartConfig';
+import Chart from '../charts/Chart';
+import ChartConfig from '../charts/ChartConfig';
 
 import QuandlFn2 from './QuandlFn2';
 

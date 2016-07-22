@@ -7,7 +7,8 @@ import HighchartsMore from 'highcharts/lib/highcharts-more';
 import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 
 import AppErc from './components/AppErc';
-import ChartConfig from './constants/ChartConfig';
+
+import ChartConfig from './charts/ChartConfig';
 
 HighchartsMore(Highcharts);
 HighchartsTreemap(Highcharts);
@@ -15,7 +16,6 @@ Highcharts.setOptions(ChartConfig.theme);
 
 Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (next, credits) {
    next.call(this, credits);
-
    if (credits.enabled) {
      this.credits.element.onclick = function(){
        var link = document.createElement('a');
@@ -25,9 +25,7 @@ Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (next, credi
        link.click();
      }
    }
-
 });
-
 
 const _fnRemoveSpinner = function(){
   document.body.removeChild(document.getElementById('spinner'));

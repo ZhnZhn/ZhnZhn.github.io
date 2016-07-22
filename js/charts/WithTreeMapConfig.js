@@ -14,7 +14,7 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var WithTreeMap = {
+var WithTreeMapConfig = {
   fBaseTreeMapConfig: function fBaseTreeMapConfig() {
     return {
 
@@ -46,7 +46,6 @@ var WithTreeMap = {
         style: {
           fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
           fontSize: '14px',
-          //fontWeight: 'normal',
           fontWeight: 'bold',
           color: 'black',
           textShadow: 'none'
@@ -63,5 +62,5 @@ var WithTreeMap = {
   }
 };
 
-exports.default = WithTreeMap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithTreeMap.js.map
+exports.default = WithTreeMapConfig;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithTreeMapConfig.js.map

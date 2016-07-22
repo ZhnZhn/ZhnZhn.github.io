@@ -222,7 +222,7 @@ var DataQE = {
       optionsJsonProp: 'tickets',
       loadId: 'Q',
       columnName: 'Close',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Adj. Close']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adj. Close']
     }
   },
   QE_TOKIO_STOCK: {
@@ -236,7 +236,7 @@ var DataQE = {
       optionsJsonProp: 'tickets',
       loadId: 'Q',
       columnName: 'Close',
-      seriaColumnNames: ['Open', 'High', 'Low']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume']
     }
   },
   QE_UNICORN_RESEARCH: {
@@ -270,7 +270,7 @@ var DataQE = {
       valueFnPrefix: 'CFFEX',
       loadId: 'Q',
       columnName: 'Settle',
-      seriaColumnNames: ['Open Interest']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover']
     }
   },
   QE_DCE_FUTURE: {
@@ -285,7 +285,8 @@ var DataQE = {
       valueFn: 'RFutures',
       valueFnPrefix: 'DCE',
       loadId: 'Q',
-      columnName: 'Settle'
+      columnName: 'Settle',
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover']
     }
   },
   QE_ZCE_FUTURE: {
@@ -300,7 +301,8 @@ var DataQE = {
       valueFn: 'RFutures',
       valueFnPrefix: 'ZCE',
       loadId: 'Q',
-      columnName: 'Settle'
+      columnName: 'Settle',
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover']
     }
   },
   QE_SHANGHAI_FUTURE: {
@@ -315,7 +317,8 @@ var DataQE = {
       valueFn: 'RFutures',
       valueFnPrefix: 'SHFE',
       loadId: 'Q',
-      columnName: 'Settle'
+      columnName: 'Settle',
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'O.I.']
     }
   },
   QE_LIFFE_FUTURE: {
@@ -330,7 +333,8 @@ var DataQE = {
       valueFn: 'RFutures',
       valueFnPrefix: 'LIFFE',
       loadId: 'Q',
-      columnName: 'Settle'
+      columnName: 'Settle',
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Prev. Day Open Interest']
     }
   },
   QE_ICE_FUTURE: {
@@ -346,6 +350,7 @@ var DataQE = {
       valueFnPrefix: 'ICE',
       loadId: 'Q',
       columnName: 'Settle',
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Prev. Day Open Interest'],
       isContinious: true,
       nInitFromDate: 2
     }
@@ -362,6 +367,7 @@ var DataQE = {
       valueFn: 'RWikiFutures',
       loadId: 'Q',
       columnName: 'Settle',
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Prev. Day Open Interest'],
       isContinious: true,
       nInitFromDate: 2
     }

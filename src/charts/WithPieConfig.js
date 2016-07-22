@@ -1,8 +1,7 @@
-
 import Chart from './Chart';
 import Tooltip from './Tooltip';
 
-const WithPieChart = {
+const WithPieConfig = {
 
  fBasePieConfig(){
    return {
@@ -79,4 +78,4 @@ fInnerPieSeria({center, year, bTotal}){
 
 }
 
-export default WithPieChart
+export default WithPieConfig

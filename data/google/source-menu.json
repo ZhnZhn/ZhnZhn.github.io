@@ -39,7 +39,8 @@
            "descrUrl" : "./data/google/google.html",
            "optionURI" : "./data/google/nasdaq.json",
            "optionsJsonProp" : "tickets",
-           "columnName" : "Close"
+           "columnName" : "Close",
+           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
          }
       },
      "QD_NYSE" : {
@@ -51,7 +52,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/nyse.json",
          "optionsJsonProp" : "tickets",
-         "columnName" : "Close"
+         "columnName" : "Close",
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
      },
      "QD_AMEX" : {
@@ -63,7 +65,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/nyse-amex.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
      },
      "QD_ARCA" : {
@@ -75,7 +78,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/nyse-arca.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
      },
      "QD_BRUSSELS" : {
@@ -87,7 +91,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/brussels.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
      },
      "QD_LISBON" : {
@@ -99,7 +104,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/lisbon.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
      },
      "QD_TALLIN" : {
@@ -111,7 +117,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/tallin.json",
          "optionsJsonProp"  : "tickets",
-         "columnName" : "Close"
+         "columnName" : "Close",
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
      },
      "QD_RIGA" : {
@@ -123,7 +130,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/riga.json",
          "optionsJsonProp"  : "tickets",
-         "columnName" : "Close"
+         "columnName" : "Close",
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
      },
      "QD_VILNIUS" : {
@@ -135,7 +143,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/vilnius.json",
          "optionsJsonProp"  : "tickets",
-         "columnName" : "Close"
+         "columnName" : "Close",
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
      },
      "QD_SHENZHEN" : {
@@ -147,7 +156,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/shenzhen.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
      },
      "QD_SINGAPURE" : {
@@ -159,7 +169,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/singapure.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
      },
      "QD_KOREA" : {
@@ -171,7 +182,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/korea.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
      },
      "QD_TAILAND" : {
@@ -183,7 +195,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/tailand.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
      },
      "QD_NEWZEALAND" : {
@@ -195,7 +208,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/newzealand.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
      },
      "QD_SAO_PAOLO" : {
@@ -207,9 +221,9 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/saopaolo.json",
           "optionsJsonProp"  : "tickets",
-          "columnName" : "Close"
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
      }
-
    }
 }

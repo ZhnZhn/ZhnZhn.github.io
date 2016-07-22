@@ -108,13 +108,8 @@ const AreaChartItem = React.createClass({
   _handlerClickLegend(){
     this.setState({ isShowLegend : !this.state.isShowLegend });
   },
-  _handlerToggleSeria(seriaIndex){
-    const seria = this.mainChart.series[seriaIndex];
-    if (seria.visible){
-      seria.hide()
-    }  else {
-      seria.show();
-    }
+  _handlerToggleSeria(item){
+    this.mainChart.options.zhToggleSeria(this.mainChart, item);
   },
 
   _handlerClick2H(){
@@ -131,7 +126,10 @@ const AreaChartItem = React.createClass({
   },
 
   _handlerClickInfo(){
-    this.setState({isShowChart: false, isShowInfo: true, isShowIndicator: false});
+    this.setState({
+      isShowInfo: true, isShowChart: false,
+      isShowLegend: false, isShowIndicator: false
+    });
   },
 
   _handlerClickVolume(){
@@ -147,11 +145,11 @@ const AreaChartItem = React.createClass({
     }
   },
   _handlerClickATH(){
-    const {isInitATH, isShowATH} = this.state;
+    const { isInitATH, isShowATH } = this.state;
     if (isInitATH){
       this.setState({isShowATH: !isShowATH});
     } else {
-      this.state.chartsDescription.push({type: 'ATH'});
+      this.state.chartsDescription.push({type: 'ATH'})
       this.setState({
         chartsDescription : this.state.chartsDescription,
         isShowATH: true, isInitATH: true

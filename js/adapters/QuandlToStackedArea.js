@@ -7,11 +7,11 @@ exports.fCreateStackedAreaConfig = undefined;
 
 var _Type = require('../constants/Type');
 
-var _Chart = require('../constants/Chart');
+var _Chart = require('../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
-var _ChartConfig = require('../constants/ChartConfig');
+var _ChartConfig = require('../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 

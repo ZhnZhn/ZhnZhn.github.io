@@ -1,9 +1,8 @@
-
 import Chart from './Chart';
 import Tooltip from './Tooltip';
 
 
-const WithStackedColumn = {
+const WithStackedColumnConfig = {
 
   fBaseStackedColumnConfig({ stacking='normal' }){
     return {
@@ -30,17 +29,13 @@ const WithStackedColumn = {
         categories:[],
         startOnTick: false,
         min: 1,
-        crosshair : {
-          color : 'yellow',
-          width : 1,
-          zIndex : 2
-        }
+        crosshair : Chart.fCrosshair()
       }),
-
       yAxis: Chart.fYAxisOpposite(),
 
       plotOptions: {
-           column: Chart.fPlotOptionsColumn({ stacking })
+           column: Chart.fPlotOptionsColumn({ stacking }),
+           series : Chart.fPlotOptionsSeries()
      },
      legend : Chart.fLegend()
    }
@@ -80,4 +75,4 @@ const WithStackedColumn = {
 
 }
 
-export default WithStackedColumn
+export default WithStackedColumnConfig

@@ -3,7 +3,7 @@ import DOMPurify from 'purify';
 
 import DateUtils from '../utils/DateUtils';
 import { Direction } from '../constants/Type';
-import ChartConfig from '../constants/ChartConfig';
+import ChartConfig from '../charts/ChartConfig';
 
 const QuandlFn2 = {
 

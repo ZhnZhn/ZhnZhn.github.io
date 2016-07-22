@@ -14,7 +14,7 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var WithPieChart = {
+var WithPieConfig = {
   fBasePieConfig: function fBasePieConfig() {
     return {
       zhSeries: {
@@ -94,5 +94,5 @@ var WithPieChart = {
   }
 };
 
-exports.default = WithPieChart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WithPie.js.map
+exports.default = WithPieConfig;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithPieConfig.js.map

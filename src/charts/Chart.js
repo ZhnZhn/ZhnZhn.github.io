@@ -2,21 +2,22 @@
 import merge from 'lodash/merge';
 import Highcharts from 'highcharts';
 
-const _fnCreateMonoColors = function({
-        base1='#7cb5ec',base2='#90ed7d'
-}){
-  var colors = []
-   , i;
+import COLOR from '../constants/Color';
+import Tooltip from './Tooltip';
 
-  for (i = 0; i < 4; i += 1) {
+const _fMonoColors = function({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }){
+  const colors = []
+
+  for (let i = 0; i < 4; i += 1) {
     // Start out with a darkened base color (negative brighten), and end
     // up with a much brighter color
    colors.push(Highcharts.Color(base1).brighten((i - 3) / 7).setOpacity(0.75).get());
-   //console.log(Highcharts.Color(base1));
+
   }
-  for (i = 0; i < 4; i += 1) {
+  for (let i = 0; i < 4; i += 1) {
      colors.push(Highcharts.Color(base2).brighten((i - 3) / 7).setOpacity(0.75).get());
   }
+
   return colors;
 }
 
@@ -25,8 +26,8 @@ const Chart = {
   COLOR_PERIOD : 4/7,
   COLOR_LOW_LEVEL : -3/7,
   COLOR_OPACITY : 0.75,
-  COLOR_BASE1 : '#7CB5EC',
-  COLOR_BASE2 : '#90ED7D',
+  COLOR_BASE1 : COLOR.MONO_BASE1,
+  COLOR_BASE2 : COLOR.MONO_BASE2,
 
   HEIGHT : 300,
   STACKED_HEIGHT : 500,
@@ -47,9 +48,22 @@ const Chart = {
   SEMIDONUT_SUBTITLE_Y: 35,
 
 
-  _monoColors : _fnCreateMonoColors({}),
+  _monoColors : _fMonoColors({}),
 
-  fCreateMonoColor(base='#7CB5EC', deltaColor=0, opacity=0.75){
+  fMonoPieColors({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}){
+    const colors = [];
+
+    for (let i = 0; i < 4; i += 1) {
+      colors.push(Highcharts.Color(base1).brighten((i - 3) / 7).get());
+    }
+    for (let i = 0; i < 4; i += 1) {
+      colors.push(Highcharts.Color(base2).brighten((i - 3) / 7).get());
+    }
+
+    return colors;
+  },
+
+  fCreateMonoColor(base=COLOR.MONO_BASE1, deltaColor=0, opacity=0.75){
     return Highcharts.Color(base)
                       .brighten( (this.COLOR_LOW_LEVEL) + deltaColor)
                       .setOpacity(opacity)
@@ -93,8 +107,8 @@ const Chart = {
        x: 25,
        y: 25,
        style: {
+         color: COLOR.CHART_TITLE,
          fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-         color: '#a487d4',
          fontSize: '16px',
          fontWeight: 'bold'
        }
@@ -108,7 +122,7 @@ const Chart = {
       x: 25,
       y: 45,
       style: {
-        color: 'black',
+        color: COLOR.CHART_SUBTITLE,
         fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
         fontSize: '16px',
         fontWeight: 'bold'
@@ -116,14 +130,110 @@ const Chart = {
     }, option)
   },
 
-  fTooltip(fnPointFormatter){
+ fTitleIndicator(text){
+   return {
+     text : text,
+     style : {
+       color: COLOR.METRIC_TITLE,
+       fontSize : '16px',
+       fontWeight : 'bold'
+     },
+     floating : true,
+     align: 'left',
+     verticalAlign: 'top',
+     x: 8,
+     y: 15
+    }
+ },
+
+fBaseConfig(){
+  return {
+    zhSeries : {
+      count : 0
+    },
+    chart : {
+      marginRight : 60
+    },
+    title: {
+      text: ''
+    },
+    legend: {
+      enabled: false
+    },
+    xAxis: {
+      type: 'datetime',
+      labels : {},
+      crosshair : Chart.fCrosshair()
+    },
+    yAxis: {
+      endOnTick : false,
+      maxPadding : 0.15,
+      startOnTick : false,
+      minPadding : 0.15,
+      opposite : true,
+      showEmpty : true,
+      title: {
+        text: ''
+      }
+    },
+    series: [{
+      zhValueText : 'Value',
+      turboThreshold : 20000,
+      type: 'area',
+      tooltip : Chart.fTooltip(Tooltip.fnBasePointFormatter),
+      lineWidth : 1,
+      states: {
+        hover: {
+          lineWidth : 1
+        }
+     }
+    }]
+  }
+},
+
+fEventsMouseOver(fn){
+  return {
+    events : {
+      mouseOver : fn
+   }
+  }
+},
+
+fTooltip(fnPointFormatter){
+  return {
+    pointFormatter : fnPointFormatter,
+    headerFormat : ''
+  }
+},
+
+fCrosshair(){
     return {
-        pointFormatter : fnPointFormatter,
-        headerFormat : ''
+      color : COLOR.CROSSHAIR,
+      width : 1,
+      zIndex : 2
     }
   },
 
-  fXAxisOpposite(option={}){
+  fPlotLine(color, text){
+    return {
+      value: undefined ,
+      color: color,
+      dashStyle: 'solid',
+      width: 1,
+      zIndex: 4,
+      label: {
+        text: text,
+        verticalAlign: 'top',
+        style: {
+          color: color,
+          fontWeight: 'bold',
+          fontSize: 'medium'
+        }
+     }
+   }
+ },
+
+ fXAxisOpposite(option={}){
     return merge({
       opposite : true,
       tickLength : 0,
@@ -143,26 +253,49 @@ const Chart = {
     }, option)
   },
 
+  fSecondYAxis(name, color){
+    return {
+      id: name,
+
+      gridLineWidth: 0,
+
+      endOnTick : false,
+      maxPadding : 0.15,
+      startOnTick : false,
+      minPadding : 0.15,
+
+      title: {
+          text: ''
+      },
+      lineWidth: 2,
+      lineColor: color,
+      tickColor: color,
+      labels: {
+        style: {
+          color : color,
+          fontWeight: "bold",
+          fontSize: "14px"
+        }
+      }
+    }
+  },
+
   calcMinY({ minPoint, maxPoint }){
     return minPoint - ((maxPoint-minPoint)*30/180)
   },
 
   fPlotOptionsArea(option={}){
     return merge({
-      lineColor: 'yellow',
+      lineColor: COLOR.AREA_HOVER_LINE,
       lineWidth: 0,
       marker: {
           enabled : false,
           lineWidth: 1,
-          lineColor: '#a487d4'
+          lineColor: COLOR.AREA_MARKER_LINE
       },
       state : {
         hover : {
           lineWidth : 2
-        },
-        halo : {
-          opacity: 0.25,
-          size : 10
         }
       }
     }, option);
@@ -170,34 +303,45 @@ const Chart = {
 
   fPlotOptionsColumn(option={}){
     return merge({
-        lineColor: 'yellow',
+        lineColor: COLOR.COLUMN_HOVER_LINE,
         lineWidth: 0,
         marker: {
             enabled : false,
             lineWidth: 1,
-            lineColor: '#a487d4'
+            lineColor: COLOR.COLUMN_MARKER_LINE
         },
         state : {
           hover : {
             lineWidth : 2
-          },
-          halo : {
-            opacity: 0.25,
-            size : 10
           }
         }
     }, option)
   },
 
+  fPlotOptionsSeries(option={}){
+    return merge({
+      states : {
+        hover : {
+          halo : {
+            attributes : {
+              fill : COLOR.HALO_BASE
+            },
+            opacity : 0.35,
+            size : 16
+          }
+        }
+      }
+    }, option)
+  },
+
   fLegend(option={}){
     return merge({
-       //itemMarginBottom : 5,
        symbolHeight: 14,
        symbolWidth: 14,
        symbolRadius: 7,
        useHTML: true,
        itemStyle : {
-         color: 'black',
+         color: COLOR.LEGEND_ITEM,
          cursor: 'pointer',
          fontSize: '16px',
          fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
@@ -208,28 +352,14 @@ const Chart = {
   },
 
 
-  fSeriaMarkerConfig(columnName){
-    if (columnName.toLowerCase() === 'open' || columnName.toLowerCase() === 'open interest'){
-      return { color : '#90ed7d', symbol: 'circle' };
-    } else if (columnName.toLowerCase() === 'high'){
-      return { color: 'green', symbol : 'circle' };
-    } else if (columnName.toLowerCase() === 'low'){
-      return { color : '#ED5813', symbol : 'circle' };
-    } else if (columnName.toLowerCase() === 'adj. close'){
-      return { color : '#f15c80', symbol: 'diamond' } ;
-    }
-
-    return { color: undefined, symbol: undefined};
-  },
-
-  fSeriaMarker({ color, symbol }){
+ fSeriaMarker({ color, symbol }){
     return {
       radius : 4,
       symbol : symbol,
       states : {
         hover : {
-          fillColor: 'yellow',
-          lineColor: 'yellow',
+          fillColor: COLOR.MARKER_HOVER_FILL,
+          lineColor: COLOR.MARKER_HOVER_LINE,
           lineWidth: 1,
           lineWidthPlus: 0,
           enabled: true,
