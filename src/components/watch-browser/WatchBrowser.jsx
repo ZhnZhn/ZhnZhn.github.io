@@ -77,22 +77,22 @@ const WatchBrowser = React.createClass({
      if (actionType === showAction && data === browserType ){
       this._handlerShow();
     } else if (actionType === updateAction) {
-      this.setState({watchList: data})
+      this.setState({ watchList: data })
     }
   },
 
   _handlerHide(){
-     this.setState({isShow : false})
+     this.setState({ isShow : false })
   },
   _handlerShow(){
-     this.setState({isShow : true})
+     this.setState({ isShow : true })
   },
 
   _handlerSaveWatch(){
     WatchActions.saveWatch();
   },
   _handlerToggleEditMode(){
-    this.setState({isModeEdit : !this.state.isModeEdit});
+    this.setState({ isModeEdit : !this.state.isModeEdit });
   },
 
   _handlerRemoveItem(option, event){

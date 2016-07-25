@@ -1,33 +1,34 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LinkToken = _react2.default.createClass({
-  displayName: "LinkToken",
+  displayName: 'LinkToken',
   render: function render() {
     var _props = this.props;
-    var isFirstBalnk = _props.isFirstBalnk;
+    var isFirstBlank = _props.isFirstBlank;
     var color = _props.color;
     var href = _props.href;
     var children = _props.children;
-
+    var _firstChart = isFirstBlank ? ' ' : undefined;
     return _react2.default.createElement(
-      "a",
+      'a',
       {
-        className: "descr__quandl-link",
+        className: 'descr__quandl-link',
         style: { color: color },
-        target: "_blank",
+        target: '_blank',
         href: href
       },
-      isFirstBalnk ? ' ' + children : children
+      _firstChart,
+      children
     );
   }
 });

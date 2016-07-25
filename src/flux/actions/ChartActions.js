@@ -12,14 +12,32 @@ export const ChartActionTypes = {
   CLOSE_CHART : 'closeChart'
 }
 
+const _fnOnChangeStore = function(actionType, data){
+   if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED ||
+       actionType === ChartActionTypes.LOAD_STOCK_ADDED ||
+       actionType === ChartActionTypes.LOAD_STOCK_FAILED )
+   {
+     ChartActions[ChartActionTypes.LOAD_STOCK].isLoadInProgress = false;
+   }
+}
+
 const ChartActions =  Reflux.createActions({
-      [ChartActionTypes.LOAD_STOCK] : {children : ['completed', 'added', 'failed']},
+      [ChartActionTypes.LOAD_STOCK] : {
+         children : ['completed', 'added', 'failed'],
+         isLoadInProgress : false
+       },
       [ChartActionTypes.SHOW_CHART] : {},
       [ChartActionTypes.CLOSE_CHART] : {}
 });
 
+ChartActions.fnOnChangeStore = _fnOnChangeStore
+
+
+ChartActions[ChartActionTypes.LOAD_STOCK].shouldEmit = function(value){
+  return !this.isLoadInProgress;
+}
 ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, browserType, option){
-  //LoadConfig[chartType](chartType, browserType, option, this.completed, this.added, this.failed);
+  this.isLoadInProgress = true;
   const { loadId='Q' } = option;
   LoadConfig[loadId](chartType, browserType, option, this.completed, this.added, this.failed);
 })

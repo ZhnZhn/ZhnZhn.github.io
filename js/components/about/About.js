@@ -103,7 +103,7 @@ var About = _react2.default.createClass({
             ),
             _react2.default.createElement(
               _Token2.default,
-              { color: 'gray', isFirstBalnk: true },
+              { color: 'gray', isFirstBlank: true },
               'is a economic RESTFul client.'
             )
           ),
@@ -123,7 +123,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(_Step2.default, { step: '1' }),
             _react2.default.createElement(
               _Token2.default,
-              { color: 'black', isFirstBalnk: true },
+              { color: 'black', isFirstBlank: true },
               'Choose a data source from the header bar'
             )
           ),
@@ -133,7 +133,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(_Step2.default, { step: '2' }),
             _react2.default.createElement(
               _Token2.default,
-              { color: 'black', isFirstBalnk: true },
+              { color: 'black', isFirstBlank: true },
               'Choose a dataset menu item in a Browser'
             )
           ),
@@ -143,7 +143,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(_Step2.default, { step: '3' }),
             _react2.default.createElement(
               _Token2.default,
-              { color: 'black', isFirstBalnk: true },
+              { color: 'black', isFirstBlank: true },
               'Select a data item and enter query date in a dragable Dialog'
             )
           ),
@@ -153,7 +153,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(_Step2.default, { step: '4' }),
             _react2.default.createElement(
               _Token2.default,
-              { color: 'black', isFirstBalnk: true },
+              { color: 'black', isFirstBlank: true },
               'Click a button Load'
             )
           ),
@@ -196,7 +196,7 @@ var About = _react2.default.createClass({
             ),
             _react2.default.createElement(
               _Token2.default,
-              { color: 'gray', isFirstBalnk: true },
+              { color: 'gray', isFirstBlank: true },
               'For one item from Dialog can be only one Chart in a container. If you want change query parameters for it, close the chart in the container and load data again.'
             )
           ),
@@ -223,14 +223,24 @@ var About = _react2.default.createClass({
               {
                 href: 'https://www.quandl.com/',
                 color: '#E05927',
-                isFirstBalnk: true
+                isFirstBlank: true
               },
               'Quandl'
             ),
             _react2.default.createElement(
               _Token2.default,
-              { color: 'gray', isFirstBalnk: true },
-              'REST services. For accessing without Api Key, exists some restriction on frequency and amount queries (50 calls per day).'
+              { color: 'gray', isFirstBlank: true },
+              'REST services. For accessing without Api Key, exists some restriction on frequency and amount queries (',
+              _react2.default.createElement(
+                _Token2.default,
+                { color: 'black' },
+                '50 calls per day'
+              ),
+              _react2.default.createElement(
+                _Token2.default,
+                { color: 'gray' },
+                ').'
+              )
             )
           ),
           _react2.default.createElement('br', null),

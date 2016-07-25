@@ -40,10 +40,13 @@ const QuandlFn2 = {
 
   createZhConfig(option){
     return {
+      title : option.title,
       id : option.value,
       columnName : option.columnName,
       dataColumn: option.dataColumn,
-      itemCaption : option.itemCaption
+      itemCaption : option.itemCaption,
+      fromDate : option.fromDate,
+      seriaColumnNames : option.seriaColumnNames
     }
   },
 

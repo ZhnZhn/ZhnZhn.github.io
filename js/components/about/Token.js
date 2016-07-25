@@ -14,14 +14,15 @@ var Token = _react2.default.createClass({
   displayName: 'Token',
   render: function render() {
     var _props = this.props;
-    var isFirstBalnk = _props.isFirstBalnk;
+    var isFirstBlank = _props.isFirstBlank;
     var color = _props.color;
     var children = _props.children;
-
+    var _firstChart = isFirstBlank ? ' ' : undefined;
     return _react2.default.createElement(
       'span',
       { style: { color: color, fontWeight: 'bold' } },
-      isFirstBalnk ? ' ' + children : children
+      _firstChart,
+      children
     );
   }
 });

@@ -27,7 +27,8 @@ const ChartStore = Reflux.createStore({
   listenables : [ChartActions, ComponentActions, BrowserActions, WatchActions],
   charts : {},
   init(){
-    this.initWatchList()
+    this.initWatchList();
+    this.listen(ChartActions.fnOnChangeStore);
   },
 
  createInitConfig(chartType){

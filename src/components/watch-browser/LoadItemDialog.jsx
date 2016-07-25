@@ -27,10 +27,11 @@ const LoadItemDialog = React.createClass({
    },
 
    getInitialState(){
-     const {initFromDate, initToDate, onTestDate} = this.props.data
-         , _initFromDate = (initFromDate) ? initFromDate : DateUtils.getFromDate(2)
+     const { fromDate, initToDate, onTestDate } = this.props.data
+         , _initFromDate = (fromDate) ? fromDate : DateUtils.getFromDate(2)
          , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
          , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate
+
     return {
       initFromDate : _initFromDate,
       initToDate : _initToDate,
@@ -50,15 +51,17 @@ const LoadItemDialog = React.createClass({
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
-          , { caption, columnName, dataColumn } = data
+          , { title, caption, columnName, dataColumn, seriaColumnNames } = data
           , { fromDate, toDate } = this.datesFragment.getValues()
           , option = {
+             title : title,
              value : caption,
              stock: caption,
              fromDate: fromDate,
              toDate: toDate,
              columnName,
-             dataColumn
+             dataColumn,
+             seriaColumnNames
           }
       ChartActions.loadStock(ChartType.WATCH_LIST, BrowserType.WATCH_LIST, option);
       onClose();
@@ -68,14 +71,14 @@ const LoadItemDialog = React.createClass({
 
   _getValidationMessages(){
     let   msg = [];
-    const {isValid, datesMsg} = this.datesFragment.getValidation();
+    const { isValid, datesMsg } = this.datesFragment.getValidation();
     if (!isValid) { msg = msg.concat(datesMsg); }
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
   },
 
   render(){
-    const { isShow, data, onClose } = this.props
+    const { isShow, data } = this.props
         , { caption } = data
         , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
         , _commandButtons = [

@@ -66,7 +66,7 @@ const About = React.createClass({
            <Token color="#80c040">
              ERC
            </Token>
-           <Token color="gray" isFirstBalnk={true}>
+           <Token color="gray" isFirstBlank={true}>
              is a economic RESTFul client.
            </Token>
          </p>
@@ -78,25 +78,25 @@ const About = React.createClass({
           <br/>
           <p>
             <Step step="1" />
-            <Token color="black" isFirstBalnk={true}>
+            <Token color="black" isFirstBlank={true}>
                Choose a data source from the header bar
             </Token>
           </p>
           <p style={{marginTop: '3px'}}>
             <Step step="2" />
-            <Token color="black" isFirstBalnk={true}>
+            <Token color="black" isFirstBlank={true}>
                Choose a dataset menu item in a Browser
             </Token>
           </p>
           <p style={{marginTop: '3px'}}>
             <Step step="3" />
-            <Token color="black" isFirstBalnk={true}>
+            <Token color="black" isFirstBlank={true}>
                Select a data item and enter query date in a dragable Dialog
             </Token>
           </p>
           <p style={{marginTop: '3px'}}>
              <Step step="4" />
-             <Token color="black" isFirstBalnk={true}>
+             <Token color="black" isFirstBlank={true}>
                 Click a button Load
              </Token>
           </p>
@@ -122,7 +122,7 @@ const About = React.createClass({
             <Token color="#F44336">
                Attention:
             </Token>
-            <Token color="gray" isFirstBalnk={true}>
+            <Token color="gray" isFirstBlank={true}>
               For one item from Dialog can be only one Chart in a container. If you want change query parameters for it,
               close the chart in the container and load data again.
             </Token>
@@ -141,13 +141,13 @@ const About = React.createClass({
            <LinkToken
               href="https://www.quandl.com/"
               color="#E05927"
-              isFirstBalnk={true}
+              isFirstBlank={true}
            >
               Quandl
            </LinkToken>
-           <Token color="gray" isFirstBalnk={true}>
+           <Token color="gray" isFirstBlank={true}>
               REST services. For accessing without Api Key, exists some restriction on frequency
-              and amount queries (50 calls per day).
+              and amount queries (<Token color="black">50 calls per day</Token><Token color="gray">).</Token>
            </Token>
          </p>
          <br/>

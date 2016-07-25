@@ -2,7 +2,8 @@ import React from 'react';
 
 const LinkToken = React.createClass({
   render(){
-    const {isFirstBalnk, color, href, children} = this.props;
+    const { isFirstBlank, color, href, children } = this.props
+        , _firstChart = (isFirstBlank) ? ' ' : undefined;
     return (
       <a
         className="descr__quandl-link"
@@ -10,7 +11,8 @@ const LinkToken = React.createClass({
         target="_blank"
         href={href}
       >
-         {isFirstBalnk ? ' ' + children : children}
+         {_firstChart}
+         {children}         
       </a>
     );
   }

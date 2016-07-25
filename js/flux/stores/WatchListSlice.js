@@ -100,9 +100,12 @@ var _fnAddItem = function _fnAddItem(watchList, item) {
   var listCaption = item.listCaption;
   var config = item.config;
   var zhConfig = config.zhConfig;
+  var title = zhConfig.title;
   var columnName = zhConfig.columnName;
   var dataColumn = zhConfig.dataColumn;
   var id = zhConfig.id;
+  var fromDate = zhConfig.fromDate;
+  var seriaColumnNames = zhConfig.seriaColumnNames;
   var toGroup = _fnFindGroup(watchList, groupCaption);
   var toList = _fnFindList(toGroup, listCaption);
   var items = toList.items;
@@ -111,9 +114,13 @@ var _fnAddItem = function _fnAddItem(watchList, item) {
     return _fResultItemExisted(caption, listCaption);
   }
   if (items) {
-    toList.items.push({ caption: caption, columnName: columnName, dataColumn: dataColumn, id: id });
+    toList.items.push({
+      title: title, caption: caption, columnName: columnName, dataColumn: dataColumn, id: id, fromDate: fromDate, seriaColumnNames: seriaColumnNames
+    });
   } else {
-    toList.items = [{ caption: caption, columnName: columnName, dataColumn: dataColumn, id: id }];
+    toList.items = [{
+      title: title, caption: caption, columnName: columnName, dataColumn: dataColumn, id: id, fromDate: fromDate, seriaColumnNames: seriaColumnNames
+    }];
   }
   return { isDone: true };
 };

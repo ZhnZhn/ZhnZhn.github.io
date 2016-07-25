@@ -65,6 +65,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
   charts: {},
   init: function init() {
     this.initWatchList();
+    this.listen(_ChartActions2.default.fnOnChangeStore);
   },
   createInitConfig: function createInitConfig(chartType) {
     return { chartType: chartType, configs: [], isShow: true };

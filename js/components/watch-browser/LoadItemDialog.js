@@ -64,12 +64,13 @@ var LoadItemDialog = _react2.default.createClass(_extends({
 
   getInitialState: function getInitialState() {
     var _props$data = this.props.data;
-    var initFromDate = _props$data.initFromDate;
+    var fromDate = _props$data.fromDate;
     var initToDate = _props$data.initToDate;
     var onTestDate = _props$data.onTestDate;
-    var _initFromDate = initFromDate ? initFromDate : _DateUtils2.default.getFromDate(2);
+    var _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2);
     var _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate();
     var _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
+
     return {
       initFromDate: _initFromDate,
       initToDate: _initToDate,
@@ -89,21 +90,25 @@ var LoadItemDialog = _react2.default.createClass(_extends({
       var _props = this.props;
       var data = _props.data;
       var onClose = _props.onClose;
+      var title = data.title;
       var caption = data.caption;
       var columnName = data.columnName;
       var dataColumn = data.dataColumn;
+      var seriaColumnNames = data.seriaColumnNames;
 
       var _datesFragment$getVal = this.datesFragment.getValues();
 
       var fromDate = _datesFragment$getVal.fromDate;
       var toDate = _datesFragment$getVal.toDate;
       var option = {
+        title: title,
         value: caption,
         stock: caption,
         fromDate: fromDate,
         toDate: toDate,
         columnName: columnName,
-        dataColumn: dataColumn
+        dataColumn: dataColumn,
+        seriaColumnNames: seriaColumnNames
       };
       _ChartActions2.default.loadStock(_ChartType2.default.WATCH_LIST, _Type.BrowserType.WATCH_LIST, option);
       onClose();
@@ -130,7 +135,6 @@ var LoadItemDialog = _react2.default.createClass(_extends({
     var _props2 = this.props;
     var isShow = _props2.isShow;
     var data = _props2.data;
-    var onClose = _props2.onClose;
     var caption = data.caption;
     var _state = this.state;
     var initFromDate = _state.initFromDate;

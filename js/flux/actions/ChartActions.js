@@ -29,10 +29,24 @@ var ChartActionTypes = exports.ChartActionTypes = {
   CLOSE_CHART: 'closeChart'
 };
 
-var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, { children: ['completed', 'added', 'failed'] }), _defineProperty(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), _defineProperty(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
+var _fnOnChangeStore = function _fnOnChangeStore(actionType, data) {
+  if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED || actionType === ChartActionTypes.LOAD_STOCK_ADDED || actionType === ChartActionTypes.LOAD_STOCK_FAILED) {
+    ChartActions[ChartActionTypes.LOAD_STOCK].isLoadInProgress = false;
+  }
+};
 
+var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, {
+  children: ['completed', 'added', 'failed'],
+  isLoadInProgress: false
+}), _defineProperty(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), _defineProperty(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
+
+ChartActions.fnOnChangeStore = _fnOnChangeStore;
+
+ChartActions[ChartActionTypes.LOAD_STOCK].shouldEmit = function (value) {
+  return !this.isLoadInProgress;
+};
 ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserType, option) {
-  //LoadConfig[chartType](chartType, browserType, option, this.completed, this.added, this.failed);
+  this.isLoadInProgress = true;
   var _option$loadId = option.loadId;
   var loadId = _option$loadId === undefined ? 'Q' : _option$loadId;
 
