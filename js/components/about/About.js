@@ -233,7 +233,7 @@ var About = _react2.default.createClass({
               'REST services. For accessing without Api Key, exists some restriction on frequency and amount queries (',
               _react2.default.createElement(
                 _Token2.default,
-                { color: 'black' },
+                { color: '#2f7ed8' },
                 '50 calls per day'
               ),
               _react2.default.createElement(

@@ -48,6 +48,10 @@ var _WatchListSlice = require('./WatchListSlice');
 
 var _WatchListSlice2 = _interopRequireDefault(_WatchListSlice);
 
+var _WithLimitRemaining = require('./WithLimitRemaining');
+
+var _WithLimitRemaining2 = _interopRequireDefault(_WithLimitRemaining);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
@@ -73,13 +77,13 @@ var ChartStore = _reflux2.default.createStore(_extends({
   getConfigs: function getConfigs(chartType) {
     return this.charts[chartType];
   },
-  isChartExist: function isChartExist(chartType, chartId) {
+  isChartExist: function isChartExist(chartType, key) {
     if (!this.charts[chartType]) {
       return false;
     }
     var configs = this.charts[chartType].configs;
     for (var i = 0, max = configs.length; i < max; i++) {
-      if (configs[i].zhConfig.id === chartId) {
+      if (configs[i].zhConfig.key === key) {
         return true;
       }
     }
@@ -105,13 +109,14 @@ var ChartStore = _reflux2.default.createStore(_extends({
       chartCont.isShow = true;
 
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, chartCont);
+      this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);
     } else {
       this.charts[chartType] = this.createInitConfig(chartType);
       this.charts[chartType].configs.unshift(config);
 
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED);
-
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
+      this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);
     }
 
     this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
@@ -168,7 +173,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
   onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
     this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
   }
-}, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _WatchListSlice2.default));
+}, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default));
 
 exports.default = ChartStore;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ChartStore.js.map

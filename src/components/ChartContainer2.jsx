@@ -10,6 +10,8 @@ import SvgHrzResize from './zhn/SvgHrzResize';
 import ScrollPane from './zhn/ScrollPane';
 import AreaChartItem from './AreaChartItem';
 
+const CHILD_MARGIN = 36;
+
 const styles = {
   rootDiv : {
     backgroundColor: '#4D4D4D',
@@ -60,19 +62,19 @@ const compActions = [
 
 const ChartContainer2 = React.createClass({
   getInitialState(){
-    this.childMargin = 36;
+    this.childMargin = CHILD_MARGIN;
     return {}
   },
 
-   componentWillMount: function(){
+   componentWillMount(){
      this.unsubscribe = ChartStore.listen(this._onStore);
      this.setState(ChartStore.getConfigs(this.props.chartType));
    },
-   componentWillUnmount: function(){
+   componentWillUnmount(){
      this.unsubscribe();
    },
 
-   _onStore: function(actionType, data){
+   _onStore(actionType, data){
       if (isInArray(compActions, actionType)) {
         if (data && data.chartType === this.props.chartType){
           this.setState(data);
@@ -84,12 +86,11 @@ const ChartContainer2 = React.createClass({
       }
    },
 
-   _handlerHide: function(){
-      const {chartType, browserType, onCloseContainer} = this.props;
+   _handlerHide(){
+      const { chartType, browserType, onCloseContainer } = this.props;
       onCloseContainer(chartType, browserType);
       this.setState({isShow: false});
    },
-
 
    _handlerResizeAfter(parentWidth){
      for (var i=0, max = this.state.configs.length; i<max; i++){
@@ -97,14 +98,14 @@ const ChartContainer2 = React.createClass({
      }
    },
 
-   renderCharts: function(){
-     const {chartType, browserType, onCloseItem} = this.props;
+   renderCharts(){
+     const { chartType, browserType, onCloseItem } = this.props;
      let domCharts = this.state.configs.map((config, index)=>{
-       const {id} = config.zhConfig;
+       const {id, key} = config.zhConfig;
        return (
          <AreaChartItem
              ref={'chart' + index}
-             key={id}
+             key={key}
              chartType={chartType}
              caption={id}
              config={config}
@@ -118,9 +119,9 @@ const ChartContainer2 = React.createClass({
      return domCharts;
    },
 
-   render: function(){
-     const styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'};
-     const classOpen = this.state.isShow ? "show-popup" : null;
+   render(){
+     const styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'}
+         , classOpen = this.state.isShow ? "show-popup" : null;
 
      return(
         <div

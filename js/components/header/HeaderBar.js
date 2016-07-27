@@ -20,6 +20,10 @@ var _ToolBarButton = require('../ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
 
+var _LimitRemainingLabel = require('./LimitRemainingLabel');
+
+var _LimitRemainingLabel2 = _interopRequireDefault(_LimitRemainingLabel);
+
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -121,6 +125,10 @@ var HeaderBar = _react2.default.createClass({
         caption: 'Settings',
         title: 'Application settings',
         onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
+      }),
+      _react2.default.createElement(_LimitRemainingLabel2.default, {
+        store: store,
+        style: { float: 'right', paddingTop: '5px' }
       })
     );
   }

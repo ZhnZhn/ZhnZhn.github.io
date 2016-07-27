@@ -42,11 +42,13 @@ const QuandlFn2 = {
     return {
       title : option.title,
       id : option.value,
+      key : option.key,
       columnName : option.columnName,
       dataColumn: option.dataColumn,
       itemCaption : option.itemCaption,
       fromDate : option.fromDate,
-      seriaColumnNames : option.seriaColumnNames
+      seriaColumnNames : option.seriaColumnNames,
+      limitRemaining : option.limitRemaining
     }
   },
 

@@ -32,3 +32,8 @@ export const ChartType = {
   STACKED_COLUMN_PERCENT : 'STACKED_COLUMN_PERCENT',
   TREE_MAP : 'TREE_MAP'
 }
+
+export const LoadType = {
+  Q : 'Q',
+  QCT : 'QCT'
+}

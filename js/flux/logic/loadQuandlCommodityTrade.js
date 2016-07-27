@@ -17,10 +17,6 @@ var _ChartStore = require('../stores/ChartStore');
 
 var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
-var _Msg = require('../../constants/Msg');
-
-var _Msg2 = _interopRequireDefault(_Msg);
-
 var _QuandlApi = require('../../api/QuandlApi');
 
 var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
@@ -50,36 +46,18 @@ var _fnFailedLoadMeta = function _fnFailedLoadMeta(option, onFailed, optionFaile
 };
 
 var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) {
-  var chartId = option.value;
-  var chartType = option.chartType;
-
-
-  if (!_ChartStore2.default.isChartExist(chartType, chartId)) {
-    var isLoadMeta = option.isLoadMeta;
-    var _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChartComp;
-    var _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
-    (0, _fn.fnFetch)({
-      uri: _QuandlApi2.default.getRequestUrl(option),
-      option: option,
-      onCheckResponse: _QuandlApi2.default.checkResponse,
-      onFetch: _onFetch,
-      onCompleted: onCompleted,
-      onCatch: _fnCatch.fnCatch,
-      onFailed: _onFailed
-    });
-  } else {
-    var _Msg$Alert$ALREADY_EX = _Msg2.default.Alert.ALREADY_EXIST;
-    var caption = _Msg$Alert$ALREADY_EX.caption;
-    var descr = _Msg$Alert$ALREADY_EX.descr;
-
-    option.alertCaption = caption;
-    option.alertDescr = descr;
-    onFailed(option);
-
-    if (typeof option.onFailed === 'function') {
-      option.onFailed();
-    }
-  }
+  var isLoadMeta = option.isLoadMeta;
+  var _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChartComp;
+  var _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
+  (0, _fn.fnFetch)({
+    uri: _QuandlApi2.default.getRequestUrl(option),
+    option: option,
+    onCheckResponse: _QuandlApi2.default.checkResponse,
+    onFetch: _onFetch,
+    onCompleted: onCompleted,
+    onCatch: _fnCatch.fnCatch,
+    onFailed: _onFailed
+  });
 };
 
 var _loadToChart = function _loadToChart(option, onAdded, onFailed) {

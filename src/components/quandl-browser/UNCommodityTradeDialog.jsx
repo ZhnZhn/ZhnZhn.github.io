@@ -198,6 +198,7 @@ const UNCommodityTradeDialog = React.createClass({
        toDate: toDate,
        isLoadMeta : true,
        onLoad : this._setOptionTrades,
+       onCancel : this._loadMetaOptionCancel,
        onFailed : this._loadMetaOptionFailed,
        loadId : loadId
     }
@@ -210,6 +211,13 @@ const UNCommodityTradeDialog = React.createClass({
       isLoadingTradeFailed: false,
       placeholderTrade: Placeholder.TRADE.SELECT
     });
+  },
+  _loadMetaOptionCancel(){
+    this.setState({
+      isLoadingTrade: false,
+      isLoadingTradeFailed: false,
+      placeholderTrade: Placeholder.TRADE.SELECT
+    })
   },
   _loadMetaOptionFailed(){
     this.setState({ isLoadingTrade:false, isLoadingTradeFailed:true })
@@ -242,7 +250,7 @@ const UNCommodityTradeDialog = React.createClass({
     const {fromDate, toDate} = this.datesFragment.getValues()
         , _dataColumn = (this.subheading) ? this.subheading.value : this.props.dataColumn
         , {loadId, fnValue} = this.props
-        , _chartType = (this.chartType) ? this.chartType.value : undefined
+        , _chartType = (this.chartType) ? this.chartType.value : ChartType.AREA
         , _title = (this.tradeFilter) ?
                    `${this.country.caption}:${this.tradeFilter.caption}` :
                    `${this.country.caption}`

@@ -147,7 +147,7 @@ const About = React.createClass({
            </LinkToken>
            <Token color="gray" isFirstBlank={true}>
               REST services. For accessing without Api Key, exists some restriction on frequency
-              and amount queries (<Token color="black">50 calls per day</Token><Token color="gray">).</Token>
+              and amount queries (<Token color="#2f7ed8">50 calls per day</Token><Token color="gray">).</Token>
            </Token>
          </p>
          <br/>

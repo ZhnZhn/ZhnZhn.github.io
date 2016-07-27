@@ -2,30 +2,20 @@
 import {fnFetch} from '../../utils/fn';
 import {fnCatch} from './fnCatch';
 import ChartStore from '../stores/ChartStore';
-import Msg from '../../constants/Msg';
 
 import QuandlApi from '../../api/QuandlApi';
 import QuandlAdapter from '../../adapters/QuandlAdapter';
 
 const _loadToChartComp = function(option, onCompleted, onFailed){
-  const {value:chartId, chartType } = option;
-
-  if (!ChartStore.isChartExist(chartType, chartId)) {
-    fnFetch({
-      uri : QuandlApi.getRequestUrl(option),
-      option : option,
-      onCheckResponse : QuandlApi.checkResponse,
-      onFetch : fnFetchToChartComp,
-      onCompleted : onCompleted,
-      onCatch : fnCatch,
-      onFailed : onFailed
-    })
-  } else {
-    const {caption, descr} = Msg.Alert.ALREADY_EXIST;
-    option.alertCaption = caption;
-    option.alertDescr = descr;
-    onFailed(option);
-  }
+  fnFetch({
+    uri : QuandlApi.getRequestUrl(option),
+    option : option,
+    onCheckResponse : QuandlApi.checkResponse,
+    onFetch : fnFetchToChartComp,
+    onCompleted : onCompleted,
+    onCatch : fnCatch,
+    onFailed : onFailed
+  })
 }
 
 const fnFetchToChartComp = function({json, option, onCompleted}){

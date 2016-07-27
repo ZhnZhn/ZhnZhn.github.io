@@ -1,20 +1,26 @@
 
+const LIMIT_REMAINING = 'X-RateLimit-Remaining';
+
 export const fnFetch = function({
    uri, option, onCheckResponse, onFetch, onCompleted, onFailed, onCatch
  }){
   fetch(uri)
     .then((response) => {
-      const { status, statusText } = response;
+      const { status, statusText, headers } = response;
       if (status>=200 && status<400){
-        return response.json();
+        return Promise.all([
+           Promise.resolve(headers.get(LIMIT_REMAINING)),
+           response.json()
+        ]);
       } else if (status>=400 && status<500){
          throw { errCaption : 'Request Error', message : `${status} : ${statusText}` }
       } else if (status>=500 && status<600){
          throw { errCaption : 'Response Error', message : `${status} : ${statusText}` }
       }
     })
-    .then((json) => {
+    .then(([limitRemaining, json ]) => {
        if (onCheckResponse(json)){
+         option.limitRemaining = limitRemaining;
          onFetch({ json, option, onCompleted });
        }
     })

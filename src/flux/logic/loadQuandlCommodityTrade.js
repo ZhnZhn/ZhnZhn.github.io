@@ -4,7 +4,6 @@ import sortBy from 'lodash/sortBy';
 import { fnFetch } from '../../utils/fn';
 import { fnCatch } from './fnCatch';
 import ChartStore from '../stores/ChartStore';
-import Msg from '../../constants/Msg';
 
 import QuandlApi from '../../api/QuandlApi';
 
@@ -28,35 +27,22 @@ const _fnFailedLoadMeta = function(option, onFailed, optionFailed){
 }
 
 const _loadToChartComp = function(option, onCompleted, onFailed){
-  const {value:chartId, chartType} = option;
-
-  if (!ChartStore.isChartExist(chartType, chartId)) {
-     const { isLoadMeta } = option
-         , _onFetch = (isLoadMeta)
-                ? _fnFetchToChartComp
-                : fnFetchToChartComp
-         , _onFailed = (isLoadMeta)
-                ? _fnFailedLoadMeta.bind(null, option, onFailed)
-                : onFailed;
-     fnFetch({
-       uri : QuandlApi.getRequestUrl(option),
-       option : option,
-       onCheckResponse : QuandlApi.checkResponse,
-       onFetch : _onFetch,
-       onCompleted : onCompleted,
-       onCatch : fnCatch,
-       onFailed : _onFailed
-     })
-  } else {
-    const {caption, descr} = Msg.Alert.ALREADY_EXIST
-    option.alertCaption = caption;
-    option.alertDescr = descr;
-    onFailed(option);
-    
-    if ( typeof option.onFailed === 'function'){
-      option.onFailed();
-    }
-  }
+   const { isLoadMeta } = option
+       , _onFetch = (isLoadMeta)
+            ? _fnFetchToChartComp
+            : fnFetchToChartComp
+       , _onFailed = (isLoadMeta)
+            ? _fnFailedLoadMeta.bind(null, option, onFailed)
+            : onFailed;
+   fnFetch({
+     uri : QuandlApi.getRequestUrl(option),
+     option : option,
+     onCheckResponse : QuandlApi.checkResponse,
+     onFetch : _onFetch,
+     onCompleted : onCompleted,
+     onCatch : fnCatch,
+     onFailed : _onFailed
+   })
 }
 
 const _loadToChart = function(option, onAdded, onFailed){

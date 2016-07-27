@@ -13,6 +13,7 @@ import BrowserSlice from './BrowserSlice';
 import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
 import WatchListSlice from './WatchListSlice';
+import WithLimitRemaining from './WithLimitRemaining';
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 const _fnLogLoadError = function({
@@ -37,13 +38,13 @@ const ChartStore = Reflux.createStore({
  getConfigs(chartType){
    return this.charts[chartType];
  },
- isChartExist(chartType, chartId){
+ isChartExist(chartType, key){
    if (!this.charts[chartType]){
      return false;
    }
    const configs = this.charts[chartType].configs;
    for (var i=0, max=configs.length; i<max; i++){
-     if (configs[i].zhConfig.id === chartId){
+     if (configs[i].zhConfig.key === key){
        return true;
      }
    }
@@ -68,14 +69,15 @@ const ChartStore = Reflux.createStore({
        chartCont.isShow = true;
 
        this.trigger(ChartActionTypes.LOAD_STOCK_COMPLETED, chartCont);
+       this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);
      } else {
       this.charts[chartType] = this.createInitConfig(chartType);
       this.charts[chartType].configs.unshift(config);
 
       this.trigger(ChartActionTypes.LOAD_STOCK_COMPLETED);
-
       this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
                   Factory.createChartContainer(chartType, browserType));
+      this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);            
     }
 
     this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
@@ -141,7 +143,8 @@ const ChartStore = Reflux.createStore({
  ...BrowserSlice,
  ...ComponentSlice,
  ...SettingSlice,
- ...WatchListSlice
+ ...WatchListSlice,
+ ...WithLimitRemaining
 
 })
 

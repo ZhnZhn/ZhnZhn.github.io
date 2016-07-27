@@ -230,6 +230,7 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       toDate: toDate,
       isLoadMeta: true,
       onLoad: this._setOptionTrades,
+      onCancel: this._loadMetaOptionCancel,
       onFailed: this._loadMetaOptionFailed,
       loadId: loadId
     };
@@ -238,6 +239,13 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     this.optionTrades = optionTrades;
     this.setState({
       optionTrades: this._filterTrade(),
+      isLoadingTrade: false,
+      isLoadingTradeFailed: false,
+      placeholderTrade: Placeholder.TRADE.SELECT
+    });
+  },
+  _loadMetaOptionCancel: function _loadMetaOptionCancel() {
+    this.setState({
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
       placeholderTrade: Placeholder.TRADE.SELECT
@@ -277,7 +285,7 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     var _props2 = this.props;
     var loadId = _props2.loadId;
     var fnValue = _props2.fnValue;
-    var _chartType = this.chartType ? this.chartType.value : undefined;
+    var _chartType = this.chartType ? this.chartType.value : _Type.ChartType.AREA;
     var _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption;
     var _sliceItems = !(!this.chartType || this.chartType.value === _Type.ChartType.AREA) ? this._createSpliceItems() : undefined;
     return {

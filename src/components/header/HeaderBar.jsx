@@ -3,6 +3,7 @@ import React from 'react';
 import ProgressLoading from './ProgressLoading';
 import AppLabel from './AppLabel';
 import ToolBarButton from '../ToolBarButton';
+import LimitRemainingLabel from './LimitRemainingLabel';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import BrowserActions from '../../flux/actions/BrowserActions';
 import {BrowserType, ModalDialog} from '../../constants/Type';
@@ -100,6 +101,11 @@ const HeaderBar = React.createClass({
             caption="Settings"
             title="Application settings"
             onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.SETTINGS)}
+           />
+
+           <LimitRemainingLabel
+              store={store}
+              style={{ float: 'right', paddingTop: '5px' }}
            />
 
       </div>

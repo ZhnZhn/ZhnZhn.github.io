@@ -42,6 +42,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var CHILD_MARGIN = 36;
+
 var styles = {
   rootDiv: (_rootDiv = {
     backgroundColor: '#4D4D4D',
@@ -84,11 +86,9 @@ var compActions = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.Char
 var ChartContainer2 = _react2.default.createClass({
   displayName: 'ChartContainer2',
   getInitialState: function getInitialState() {
-    this.childMargin = 36;
+    this.childMargin = CHILD_MARGIN;
     return {};
   },
-
-
   componentWillMount: function componentWillMount() {
     this.unsubscribe = _ChartStore2.default.listen(this._onStore);
     this.setState(_ChartStore2.default.getConfigs(this.props.chartType));
@@ -96,7 +96,6 @@ var ChartContainer2 = _react2.default.createClass({
   componentWillUnmount: function componentWillUnmount() {
     this.unsubscribe();
   },
-
   _onStore: function _onStore(actionType, data) {
     if (isInArray(compActions, actionType)) {
       if (data && data.chartType === this.props.chartType) {
@@ -108,7 +107,6 @@ var ChartContainer2 = _react2.default.createClass({
       }
     }
   },
-
   _handlerHide: function _handlerHide() {
     var _props = this.props;
     var chartType = _props.chartType;
@@ -118,14 +116,11 @@ var ChartContainer2 = _react2.default.createClass({
     onCloseContainer(chartType, browserType);
     this.setState({ isShow: false });
   },
-
   _handlerResizeAfter: function _handlerResizeAfter(parentWidth) {
     for (var i = 0, max = this.state.configs.length; i < max; i++) {
       this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
     }
   },
-
-
   renderCharts: function renderCharts() {
     var _props2 = this.props;
     var chartType = _props2.chartType;
@@ -133,11 +128,13 @@ var ChartContainer2 = _react2.default.createClass({
     var onCloseItem = _props2.onCloseItem;
 
     var domCharts = this.state.configs.map(function (config, index) {
-      var id = config.zhConfig.id;
+      var _config$zhConfig = config.zhConfig;
+      var id = _config$zhConfig.id;
+      var key = _config$zhConfig.key;
 
       return _react2.default.createElement(_AreaChartItem2.default, {
         ref: 'chart' + index,
-        key: id,
+        key: key,
         chartType: chartType,
         caption: id,
         config: config,
@@ -149,10 +146,9 @@ var ChartContainer2 = _react2.default.createClass({
 
     return domCharts;
   },
-
   render: function render() {
-    var styleOpen = this.state.isShow ? { display: 'inline-block' } : { display: 'none' };
-    var classOpen = this.state.isShow ? "show-popup" : null;
+    var styleOpen = this.state.isShow ? { display: 'inline-block' } : { display: 'none' },
+        classOpen = this.state.isShow ? "show-popup" : null;
 
     return _react2.default.createElement(
       'div',

@@ -36,4 +36,9 @@ var ChartType = exports.ChartType = {
   STACKED_COLUMN_PERCENT: 'STACKED_COLUMN_PERCENT',
   TREE_MAP: 'TREE_MAP'
 };
+
+var LoadType = exports.LoadType = {
+  Q: 'Q',
+  QCT: 'QCT'
+};
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

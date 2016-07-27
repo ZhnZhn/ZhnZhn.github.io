@@ -5,6 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var Msg = {
+  setAlertMsg: function setAlertMsg(option, msg) {
+    var caption = msg.caption;
+    var descr = msg.descr;
+
+    option.alertCaption = caption;
+    option.alertDescr = descr;
+  },
+
   WATCH_SAVED: 'Watch List has been saved.',
   WATCH_PREV: 'Watch List has not been edited\nfrom previous save.',
 
@@ -36,7 +44,15 @@ var Msg = {
   Alert: {
     ALREADY_EXIST: {
       caption: 'Check Error',
-      descr: 'The chart for this code has already existed in a container. Please close it and load again.'
+      descr: 'The chart for this code has already existed in a container. Please, close it and load again.'
+    },
+    LOADING_IN_PROGRESS: {
+      caption: 'Loading In Progress Error',
+      descr: 'Loading the chart for this item-code in progress.\nIt seems several clicks on button Load repeatedly happend.'
+    },
+    DOUBLE_LOAD_META: {
+      caption: 'Double Load Meta Error',
+      descr: 'Meta data for this code already have been loaded.'
     },
     RUNTIME_ERROR: {
       caption: 'Runtime Error'
