@@ -35,6 +35,7 @@ const qeSources = [
   'GLOBAL_INDICATOR',
   'WORLDBANK_PRICE',
   'IMF_CROSSCOUNTRY',
+  'EU_COMMISSION',
   'CPI_INFLATION',
   'BIG_MAC',
 

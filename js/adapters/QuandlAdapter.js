@@ -81,10 +81,10 @@ var _fnCheckExtrems = function _fnCheckExtrems(result) {
   var maxPoint = result.maxPoint;
   var minPoint = result.minPoint;
 
-  if (point[yPointIndex] && point[yPointIndex] >= maxPoint) {
+  if (!(point[yPointIndex] == null) && point[yPointIndex] >= maxPoint) {
     result.maxPoint = point[yPointIndex];
   }
-  if (point[yPointIndex] && point[yPointIndex] <= minPoint || point[yPointIndex] === 0) {
+  if (!(point[yPointIndex] == null) && point[yPointIndex] <= minPoint) {
     result.minPoint = point[yPointIndex];
   }
 

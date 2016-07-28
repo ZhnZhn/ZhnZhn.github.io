@@ -54,7 +54,8 @@ const QuandlFn2 = {
 
   createPercent({ bValue=Big('0.0'), bTotal=Big('0.0') }){
     return (!bTotal.eq(Big(0.0)) )
-              ? bValue.times(100).div(bTotal).abs().toFixed(2) : Big(0.0);
+              ? bValue.times(100).div(bTotal).abs().toFixed(2)
+              : Big(0.0);    
   },
 
   createValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){

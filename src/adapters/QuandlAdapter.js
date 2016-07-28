@@ -46,13 +46,10 @@ const _fnConvertToUTC = function(point, result){
 
 const _fnCheckExtrems = function(result){
   const {point, yPointIndex, maxPoint, minPoint} = result;
-  if (point[yPointIndex] && point[yPointIndex]>=maxPoint){
+  if (!(point[yPointIndex] == null) && point[yPointIndex]>=maxPoint){
     result.maxPoint = point[yPointIndex];
   }
-  if (
-       ( point[yPointIndex] && point[yPointIndex]<=minPoint )
-       || point[yPointIndex] === 0
-  ){
+  if (!(point[yPointIndex] == null) && point[yPointIndex]<=minPoint) {
     result.minPoint = point[yPointIndex];
   }
 

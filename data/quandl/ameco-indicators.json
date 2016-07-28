@@ -1,0 +1,67 @@
+{
+  "groups" : [
+    {
+      "caption" : "Export of good and services", "value" : "Export",
+      "columns" : [
+{ "caption" : "At current prices", "value" : "1_0_99_0_UXGS" },
+{ "caption" : "Weighted, At current prices", "value" : "1_1_0_0_UXGS" },
+{ "caption" : "Weighted, At 2010 prices", "value" : "1_2_0_0_OXGS" },
+
+{ "caption" : "Only goods, At current prices", "value" : "1_0_99_0_UXGN" },
+{ "caption" : "Only goods, Weighted, At current prices", "value" : "1_1_0_0_UXGN" },
+{ "caption" : "Only goods, Weighted, At 2010 prices", "value" : "1_2_0_0_OXGN" },
+
+{ "caption" : "Only services, At current prices", "value" : "1_0_99_0_UXSN" },
+{ "caption" : "Only services, Weighted, At current prices", "value" : "1_1_0_0_UXSN" },
+{ "caption" : "Only services, Weighted, At 2010 prices", "value" : "1_2_0_0_OXSN" },
+
+{ "caption" : "Extra EU exports of goods; Foreign trade statistics (1960-1998 Former EU-15)", "value" : "1_0_99_0_DXGE" },
+{ "caption" : "Extra EU imports of goods; Foreign trade statistics (1960-1998 Former EU-15)", "value" : "1_0_99_0_DMGE" },
+
+{ "caption" : "Performance relative to 9 industrial countries", "value" : "3_0_0_424_OXGSQ" },
+{ "caption" : "Performance relative to the rest of 37 industrial countries", "value" : "3_0_0_437_OXGSQ" },
+{ "caption" : "Performance relative to the rest of the former EU-15", "value" : "3_0_0_415_OXGSQ" }
+      ]
+    },{
+      "caption" : "Imports of goods and services", "value" : "Imports",
+      "columns" :  [
+{ "caption" : "At current prices", "value" : "1_0_99_0_UMGS" },
+{ "caption" : "Weighted, At current prices", "value" : "1_1_0_0_UMGS" },
+{ "caption" : "Weighted, At 2010 prices", "value" : "1_2_0_0_OMGS" },
+
+{ "caption" : "Only goods, At current prices", "value" : "1_0_99_0_UMGN" },
+{ "caption" : "Only goods,  Weighted, At current prices", "value" : "1_1_0_0_UMGN" },
+{ "caption" : "Only goods, Weighted, At 2010 prices", "value" : "1_2_0_0_OMGN" },
+
+{ "caption" : "Only services, At current prices", "value" : "1_0_99_0_UMSN" },
+{ "caption" : "Only services, Weighted, At current prices", "value" : "1_1_0_0_UMSN" },
+{ "caption" : "Only services, Weighted, At 2010 prices", "value" : "1_2_0_0_OMSN" }
+      ]
+    },{
+      "caption" : "Taxes", "value" : "Taxes",
+      "columns" : [
+{ "caption" : "Capital taxes: (Mrd CAD)" , "value" : "1_0_0_0_UTKG" },
+{ "caption" : "Capital taxes: (Mrd ECU/EUR)" , "value" : "1_0_99_0_UTKG" },
+{ "caption" : "Capital taxes: (Percentage of GDP)" , "value" : "1_0_319_0_UTKG" },
+{ "caption" : "Current tax burden: (Mrd CAD)" , "value" : "1_0_0_0_UTCT" },
+{ "caption" : "Current tax burden: (Mrd ECU/EUR)" , "value" : "1_0_99_0_UTCT" },
+{ "caption" : "Current tax burden: (Percentage of GDP, At Current Price)" , "value" : "1_0_319_0_UTCT" },
+{ "caption" : "Current taxes on income and wealth (direct taxes): (Mrd CAD)" , "value" : "1_0_0_0_UTYG" },
+{ "caption" : "Current taxes on income and wealth (direct taxes): (Mrd ECU/EUR)" , "value" : "1_0_99_0_UTYG" },
+{ "caption" : "Current taxes on income and wealth (direct taxes): (Percentage of GDP)" , "value" : "1_0_319_0_UTYG" },
+{ "caption" : "Current taxes on income and wealth: corporations (Mrd ECU/EUR)" , "value" : "1_0_99_0_UTYC" },
+{ "caption" : "Current taxes on income and wealth: corporations (Mrd JPY)" , "value" : "1_0_0_0_UTYC" },
+{ "caption" : "Current taxes on income and wealth: households and NPISH (Mrd ECU/EUR)" , "value" : "1_0_99_0_UTYH" },
+{ "caption" : "Current taxes on income and wealth: households and NPISH (Mrd JPY)" , "value" : "1_0_0_0_UTYH" },
+{ "caption" : "Taxes linked to imports and production (indirect taxes): (Mrd CAD)" , "value" : "1_0_0_0_UTVG" },
+{ "caption" : "Taxes linked to imports and production (indirect taxes): (Mrd ECU/EUR)" , "value" : "1_0_99_0_UTVG" },
+{ "caption" : "Taxes linked to imports and production (indirect taxes): (Percentage of GDP)" , "value" : "1_0_319_0_UTVG" }
+      ]
+    },{
+      "caption" : "Yield", "value" : "Yield",
+      "columns" : [
+{ "caption" : "Yield curve (%)", "value" : "1_1_0_0_IYN" }
+      ]
+    }
+  ]
+}

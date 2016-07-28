@@ -169,6 +169,29 @@ const DataQE = {
       },
       dataColumn : 1
   },
+  QE_EU_COMMISSION : {
+      type : 'QE_EU_COMMISSION',
+      menuTitle : 'EU Commission Annual',
+      dialogCaption : 'EU Commission Annual',
+      chartContainerCaption : 'Quandl EU Commission Annual',
+      dialogType : 'DialogType5',
+      dialogProps : {
+        descrUrl: './data/quandl/ameco.html',
+        nInitFromDate : 20,
+        oneCaption : 'Country',
+        oneURI : './data/quandl/ameco-countries.json',
+        oneJsonProp : 'countries',
+        twoCaption : 'Group',
+        twoURI : './data/quandl/ameco-indicators.json',
+        twoJsonProp : 'groups',
+        threeCaption : 'Metric',
+        fnValueType : 'TreeItem',
+        valueFn : 'RPrefixOneTwo',
+        valueFnPrefix : 'AMECO',
+        loadId : 'Q'
+      },
+      dataColumn : 1
+  },
   QE_CPI_INFLATION : {
     type : 'QE_CPI_INFLATION',
     menuTitle : 'CPI & Inflation',
