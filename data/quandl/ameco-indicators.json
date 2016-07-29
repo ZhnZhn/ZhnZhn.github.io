@@ -1,6 +1,13 @@
 {
   "groups" : [
     {
+      "caption" : "Consume Price Index", "value" : "CPI",
+      "columns" : [
+{ "caption" : "CPI, All-items (2010 = 100)" ,  "value" : "3_0_0_0_ZCPIN" },
+{ "caption" : "Harmonised CPI, All-items (2005 = 100)" ,  "value" : "1_0_0_0_ZCPIH" }
+      ]
+    },
+    {
       "caption" : "Export of good and services", "value" : "Export",
       "columns" : [
 { "caption" : "At current prices", "value" : "1_0_99_0_UXGS" },
@@ -38,6 +45,18 @@
 { "caption" : "Only services, Weighted, At 2010 prices", "value" : "1_2_0_0_OMSN" }
       ]
     },{
+      "caption" : "Interest rates", "value" : "",
+      "columns" : [
+{ "caption" : "Nominal long-term", "value" : "1_1_0_0_ILN" },
+{ "caption" : "Nominal long-term, Weighted", "value" : "1_3_0_0_ILN" },
+{ "caption" : "Nominal short-term", "value" : "1_1_0_0_ISN" },
+{ "caption" : "Nominal short-term, Weighted", "value" : "1_3_0_0_ISN" },
+{ "caption" : "Real long-term (deflator GDP)", "value" : "1_1_0_0_ILRV" },
+{ "caption" : "Real long-term (deflator private consumption)", "value" : "1_3_0_0_ILRC" },
+{ "caption" : "Real short-term (deflator GDP)", "value" : "1_1_0_0_ISRV" },
+{ "caption" : "Real short-term (deflator private consumption)", "value" : "1_3_0_0_ISRC" }
+      ]
+    },{
       "caption" : "Taxes", "value" : "Taxes",
       "columns" : [
 { "caption" : "Capital taxes: (Mrd CAD)" , "value" : "1_0_0_0_UTKG" },
@@ -56,6 +75,12 @@
 { "caption" : "Taxes linked to imports and production (indirect taxes): (Mrd CAD)" , "value" : "1_0_0_0_UTVG" },
 { "caption" : "Taxes linked to imports and production (indirect taxes): (Mrd ECU/EUR)" , "value" : "1_0_99_0_UTVG" },
 { "caption" : "Taxes linked to imports and production (indirect taxes): (Percentage of GDP)" , "value" : "1_0_319_0_UTVG" }
+      ]
+    },{
+      "caption" : "Unemployment", "value" : "Unemployment",
+      "columns" : [
+{ "caption" : "Rate (EUROSTAT)", "value" : "1_0_0_0_ZUTN" },
+{ "caption" : "Total (EUROSTAT 1000 persons)", "value" : "1_0_0_0_NUTN" }
       ]
     },{
       "caption" : "Yield", "value" : "Yield",

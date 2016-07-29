@@ -32,17 +32,9 @@ var _LinkToken = require('./LinkToken');
 
 var _LinkToken2 = _interopRequireDefault(_LinkToken);
 
-var _IconQuandl = require('./IconQuandl');
+var _IconLogoBar = require('./IconLogoBar');
 
-var _IconQuandl2 = _interopRequireDefault(_IconQuandl);
-
-var _IconGitHub = require('./IconGitHub');
-
-var _IconGitHub2 = _interopRequireDefault(_IconGitHub);
-
-var _IconHighcharts = require('./IconHighcharts');
-
-var _IconHighcharts2 = _interopRequireDefault(_IconHighcharts);
+var _IconLogoBar2 = _interopRequireDefault(_IconLogoBar);
 
 var _ContainerStyles = require('../styles/ContainerStyles.js');
 
@@ -58,10 +50,6 @@ var Styles = {
     height: '92%',
     //height: 'calc(100vh - 90px)',
     paddingRight: '10px'
-  },
-  LINK_DIV: {
-    textAlign: 'center',
-    paddingTop: '20px'
   }
 };
 
@@ -269,13 +257,7 @@ var About = _react2.default.createClass({
               'A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings. Settings saves in browser\'s memory only for current WEB session.'
             )
           ),
-          _react2.default.createElement(
-            'div',
-            { style: Styles.LINK_DIV },
-            _react2.default.createElement(_IconQuandl2.default, null),
-            _react2.default.createElement(_IconGitHub2.default, null),
-            _react2.default.createElement(_IconHighcharts2.default, null)
-          )
+          _react2.default.createElement(_IconLogoBar2.default, null)
         )
       )
     );

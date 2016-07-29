@@ -8,10 +8,7 @@ import CaptionRow from '../CaptionRow';
 import Step from './Step';
 import Token from './Token';
 import LinkToken from './LinkToken';
-import IconQuandl from './IconQuandl';
-import IconGitHub from './IconGitHub';
-import IconHighcharts from './IconHighcharts';
-
+import IconLogoBar from './IconLogoBar';
 
 import ContainerStyles from '../styles/ContainerStyles.js';
 const styles = ContainerStyles;
@@ -22,10 +19,6 @@ const Styles = {
     height: '92%',
     //height: 'calc(100vh - 90px)',
     paddingRight: '10px'
-  },
-  LINK_DIV : {
-    textAlign : 'center',
-    paddingTop: '20px'
   }
 };
 
@@ -164,11 +157,7 @@ const About = React.createClass({
              Settings saves in browser's memory only for current WEB session.
            </Token>
          </p>
-         <div style={Styles.LINK_DIV}>
-            <IconQuandl />
-            <IconGitHub />
-            <IconHighcharts />
-         </div>
+         <IconLogoBar />
         </div>
 
         </ScrollPane>
