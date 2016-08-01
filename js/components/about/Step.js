@@ -10,8 +10,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  step: {
+var STYLES = {
+  STEP: {
     display: 'inline-block',
     color: '#80c040',
     border: '2px solid #80c040',
@@ -22,16 +22,13 @@ var styles = {
   }
 };
 
-var Step = _react2.default.createClass({
-  displayName: 'Step',
-  render: function render() {
-    return _react2.default.createElement(
-      'span',
-      { style: styles.step },
-      this.props.step
-    );
-  }
-});
+var Step = function Step(props) {
+  return _react2.default.createElement(
+    'span',
+    { style: STYLES.STEP },
+    props.step
+  );
+};
 
 exports.default = Step;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\Step.js.map

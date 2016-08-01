@@ -32,3 +32,17 @@
   from { opacity: 1; transform: scaleY(1);}
   to   { opacity: 0; transform: scaleY(0);}
 }
+
+.scaleY-enter{
+  transform-origin: 50% 0;
+  opacity: 0,
+  transform: scaleY(0);
+}
+.scaleY-enter.scaleY-enter-active{
+  transform-origin: 50% 0;
+  transform: scaleY(1);
+  opacity: 1;
+  transition: transform, opacity 400ms ease-out;
+}
+.scaleY-leave{}
+.scaleY-leave.scaleY-leave-active{}  

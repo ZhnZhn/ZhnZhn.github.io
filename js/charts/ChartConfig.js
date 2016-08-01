@@ -10,6 +10,22 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
+var _highchartsMore = require('highcharts/lib/highcharts-more');
+
+var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
+
+var _treemap = require('highcharts/lib/modules/treemap');
+
+var _treemap2 = _interopRequireDefault(_treemap);
+
+var _exporting = require('highcharts/lib/modules/exporting');
+
+var _exporting2 = _interopRequireDefault(_exporting);
+
+var _offlineExporting = require('highcharts/lib/modules/offline-exporting');
+
+var _offlineExporting2 = _interopRequireDefault(_offlineExporting);
+
 var _merge = require('lodash/merge');
 
 var _merge2 = _interopRequireDefault(_merge);
@@ -52,7 +68,28 @@ var _WithTreeMapConfig2 = _interopRequireDefault(_WithTreeMapConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChartConfig = _extends({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default);
+var ChartConfig = _extends({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default, {
+  init: function init() {
+    (0, _highchartsMore2.default)(_highcharts2.default);
+    (0, _treemap2.default)(_highcharts2.default);
+    (0, _exporting2.default)(_highcharts2.default);
+    (0, _offlineExporting2.default)(_highcharts2.default);
+    _highcharts2.default.setOptions(ChartConfig.theme);
+
+    _highcharts2.default.wrap(_highcharts2.default.Chart.prototype, 'showCredits', function (next, credits) {
+      next.call(this, credits);
+      if (credits.enabled) {
+        this.credits.element.onclick = function () {
+          var link = document.createElement('a');
+          link.rel = "noopener noreferrer";
+          link.target = credits.targer;
+          link.href = credits.href;
+          link.click();
+        };
+      }
+    });
+  }
+});
 
 ChartConfig.theme = {
   credits: {
@@ -85,6 +122,94 @@ ChartConfig.theme = {
   colors: ['#7cb5ec', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
   labels: {
     items: []
+  },
+  exporting: {
+    fallbackToExportServer: false,
+    chartOptions: {
+      chart: {
+        plotBackgroundColor: _Color2.default.PLOT_PRINT,
+        backgroundColor: _Color2.default.CHART_PRINT
+      },
+      title: {
+        x: 0,
+        y: 5
+      },
+      subtitle: {
+        x: 0,
+        y: 22
+      },
+      plotOptions: {
+        area: {
+          fillColor: _Color2.default.AREA_FILL_PRINT
+        },
+        arearange: {
+          fillColor: _Color2.default.AREA_FILL_PRINT
+        }
+      },
+      xAxis: {
+        lineWidth: 2,
+        lineColor: _Color2.default.LINE_PRINT,
+        gridLineColor: _Color2.default.GRID_LINE_PRINT
+      },
+      yAxis: {
+        lineWidth: 2,
+        lineColor: _Color2.default.LINE_PRINT,
+        gridLineColor: _Color2.default.GRID_LINE_PRINT
+      },
+      labels: {
+        items: [{
+          html: 'ERC https://zhnzhn.github.io',
+          style: {
+            left: '0px',
+            top: '-70px',
+            color: _Color2.default.LABEL_LINK,
+            'font-size': '9px'
+          }
+        }]
+      }
+    }
+  },
+  navigation: {
+    buttonOptions: {
+      align: 'left',
+      x: -10,
+      y: -20,
+      theme: {
+        fill: _Color2.default.BG_TITLE,
+        states: {
+          hover: {
+            fill: _Color2.default.BG_TITLE,
+            'stroke-width': 2,
+            stroke: _Color2.default.HOVER
+          },
+          select: {
+            fill: _Color2.default.BG_TITLE,
+            'stroke-width': 3,
+            stroke: _Color2.default.HOVER
+          }
+        }
+      }
+    },
+    menuItemStyle: {
+      'font-size': '16px',
+      'font-weight': 'bold',
+      color: _Color2.default.ITEM,
+      'line-height': '1.6',
+      cursor: 'pointer'
+    },
+    menuItemHoverStyle: {
+      color: _Color2.default.HOVER,
+      background: _Color2.default.BG_ITEM_HOVER
+    },
+    menuStyle: {
+      position: 'relative',
+      top: '8px',
+      border: '2px solid',
+      'border-color': _Color2.default.BG_TITLE,
+      'border-radius': '5px',
+      'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
+      background: _Color2.default.CHART
+    }
   },
   plotOptions: {
     area: {

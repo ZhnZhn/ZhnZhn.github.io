@@ -2,6 +2,7 @@ import React from 'react';
 
 import ProgressLoading from './ProgressLoading';
 import AppLabel from './AppLabel';
+import IconLogoErc from './IconLogoErc';
 import ToolBarButton from '../ToolBarButton';
 import LimitRemainingLabel from './LimitRemainingLabel';
 import ComponentActions from '../../flux/actions/ComponentActions';
@@ -16,6 +17,7 @@ const styles = {
   appLabel : {
     display: 'inline-block',
     color:'#80c040',
+    marginLeft: '35px',
     paddingLeft: '10px',
     paddingRight: '10px',
     fontSize: '16px',
@@ -54,9 +56,9 @@ const HeaderBar = React.createClass({
     return (
       <div className="header" style={styles.rootDiv}>
          <ProgressLoading store={store} />
+         <IconLogoErc />
          <AppLabel
-            style={styles.appLabel}
-            title="Economic Rest Client v. 0.10.0"
+            style={styles.appLabel}            
             caption="ERC v. 0.10.0"
          />
 

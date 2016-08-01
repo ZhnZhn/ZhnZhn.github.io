@@ -1,3 +1,10 @@
+.icon__erc{
+  display: inline-block;
+  width : 32px;
+  height : 32px;
+  cursor: default;
+}
+
 .icon__quandl{
   position: relative;
   top: -16px;

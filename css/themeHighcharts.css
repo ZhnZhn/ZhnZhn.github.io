@@ -1,0 +1,10 @@
+.highcharts-button {
+  cursor: pointer ! important;
+}
+
+.highcharts-contextmenu hr {
+   border-style : solid;
+   border-color : #232f3b;
+   margin-top: 5px;
+   margin-bottom: 5px;
+}

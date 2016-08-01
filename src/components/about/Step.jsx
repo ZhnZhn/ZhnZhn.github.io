@@ -1,7 +1,7 @@
 import React from 'react';
 
-const styles = {
-  step : {
+const STYLES = {
+  STEP : {
     display : 'inline-block',
     color: '#80c040',
     border : '2px solid #80c040',
@@ -12,14 +12,12 @@ const styles = {
   }
 }
 
-const Step = React.createClass({
-  render(){
+const Step = (props) => {
     return (
-      <span style={styles.step}>
-         {this.props.step}
+      <span style={STYLES.STEP}>
+         {props.step}
       </span>
     );
-  }
-});
+};
 
 export default Step

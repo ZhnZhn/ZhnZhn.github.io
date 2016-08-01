@@ -1,4 +1,9 @@
 import Highcharts from 'highcharts';
+import HighchartsMore from 'highcharts/lib/highcharts-more';
+import HighchartsTreemap from 'highcharts/lib/modules/treemap';
+import HighchartsExporting from 'highcharts/lib/modules/exporting';
+import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
+
 import merge from 'lodash/merge';
 
 import COLOR from '../constants/Color';
@@ -17,7 +22,28 @@ const ChartConfig = {
   ...WithPie,
   ...WithStackedArea,
   ...WithStackedColumn,
-  ...WithTreeMap
+  ...WithTreeMap,
+
+  init(){
+    HighchartsMore(Highcharts);
+    HighchartsTreemap(Highcharts);
+    HighchartsExporting(Highcharts);
+    HighchartsOfflineExporting(Highcharts);
+    Highcharts.setOptions(ChartConfig.theme);
+
+    Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (next, credits) {
+       next.call(this, credits);
+       if (credits.enabled) {
+         this.credits.element.onclick = function(){
+           var link = document.createElement('a');
+           link.rel = "noopener noreferrer";
+           link.target = credits.targer;
+           link.href = credits.href;
+           link.click();
+         }
+       }
+    });
+  }
 };
 
 ChartConfig.theme = {
@@ -52,6 +78,96 @@ ChartConfig.theme = {
              '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
     labels : {
       items : []
+    },
+    exporting : {
+      fallbackToExportServer : false,
+      chartOptions : {
+        chart : {
+          plotBackgroundColor: COLOR.PLOT_PRINT,
+          backgroundColor : COLOR.CHART_PRINT
+        },
+        title : {
+          x: 0,
+          y: 5
+        },
+        subtitle : {
+          x: 0,
+          y: 22
+        },
+        plotOptions: {
+          area: {
+            fillColor: COLOR.AREA_FILL_PRINT
+          },
+          arearange: {
+            fillColor: COLOR.AREA_FILL_PRINT
+          }
+        },
+        xAxis : {
+          lineWidth: 2,
+          lineColor: COLOR.LINE_PRINT,
+          gridLineColor: COLOR.GRID_LINE_PRINT
+        },
+        yAxis : {
+          lineWidth: 2,
+          lineColor: COLOR.LINE_PRINT,
+          gridLineColor: COLOR.GRID_LINE_PRINT
+        },
+        labels : {
+          items : [
+            {
+              html : 'ERC https://zhnzhn.github.io',
+              style : {
+                left : '0px',
+                top : '-70px',
+                color: COLOR.LABEL_LINK,
+                'font-size': '9px'
+              }
+            }
+          ]
+        }
+      }
+    },
+    navigation : {
+      buttonOptions : {
+        align : 'left',
+        x: -10,
+        y: -20,
+        theme : {
+          fill : COLOR.BG_TITLE,
+          states : {
+            hover : {              
+              fill : COLOR.BG_TITLE,
+              'stroke-width' : 2,
+              stroke : COLOR.HOVER
+            },
+            select : {
+              fill : COLOR.BG_TITLE,
+              'stroke-width' : 3,
+              stroke : COLOR.HOVER
+            }
+          }
+        }
+      },
+      menuItemStyle : {
+        'font-size' : '16px',
+        'font-weight' : 'bold',
+         color : COLOR.ITEM,
+         'line-height' : '1.6',
+         cursor : 'pointer'
+      },
+      menuItemHoverStyle : {
+        color : COLOR.HOVER,
+        background : COLOR.BG_ITEM_HOVER
+      },
+      menuStyle : {
+        position : 'relative',
+        top : '8px',
+        border : '2px solid',
+        'border-color' : COLOR.BG_TITLE,
+        'border-radius' : '5px',
+        'box-shadow': 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
+        background : COLOR.CHART
+      }
     },
     plotOptions: {
       area: {

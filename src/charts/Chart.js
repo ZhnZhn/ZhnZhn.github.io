@@ -95,6 +95,24 @@ const Chart = {
           x: 0,
           y: 0
        },
+       theme : {
+         fill : COLOR.BG_TITLE,
+         stroke : COLOR.BG_TITLE,
+         r : 4,
+         style : {
+           color : COLOR.TITLE_SHOW
+         },
+         states : {
+           hover : {
+             fill : COLOR.BG_TITLE,
+             stroke : COLOR.HOVER,
+             'stroke-width' : 2,
+             style : {
+               color : COLOR.HOVER
+             }
+           }
+         }
+       },
        relativeTo: 'chart'
     }, option)
   },

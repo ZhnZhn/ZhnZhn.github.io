@@ -5,6 +5,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var COLOR = {
+  CHART_PRINT: 'white',
+  PLOT_PRINT: 'white',
+  LINE_PRINT: 'black',
+  GRID_LINE_PRINT: 'gray',
+  AREA_FILL_PRINT: 'transparent',
+  LABEL_LINK: '#909090',
+
+  BG_TITLE: '#232f3b',
+  TITLE_HIDE: 'gray',
+  TITLE_SHOW: '#a487d4',
+  ITEM: 'black',
+  BG_ITEM_HOVER: '#4572a5',
+  HOVER: 'yellow',
+
   CHART: '#4d4d4d',
   PLOT: '#4d4d4d',
   PLOT_G1: "rgba(69, 114, 167, 1)",

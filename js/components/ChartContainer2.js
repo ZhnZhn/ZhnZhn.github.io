@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
+
+var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+
 var _ChartStore = require('../flux/stores/ChartStore');
 
 var _ChartStore2 = _interopRequireDefault(_ChartStore);
@@ -147,7 +151,12 @@ var ChartContainer2 = _react2.default.createClass({
     return domCharts;
   },
   render: function render() {
-    var styleOpen = this.state.isShow ? { display: 'inline-block' } : { display: 'none' },
+    var transitionOption = {
+      transitionName: "scaleY",
+      transitionEnterTimeout: 400,
+      transitionLeaveTimeout: 1
+    },
+        styleOpen = this.state.isShow ? { display: 'inline-block' } : { display: 'none' },
         classOpen = this.state.isShow ? "show-popup" : null;
 
     return _react2.default.createElement(
@@ -172,7 +181,11 @@ var ChartContainer2 = _react2.default.createClass({
       _react2.default.createElement(
         _ScrollPane2.default,
         { style: styles.scrollDiv },
-        this.renderCharts()
+        _react2.default.createElement(
+          _reactAddonsCssTransitionGroup2.default,
+          transitionOption,
+          this.renderCharts()
+        )
       )
     );
   }

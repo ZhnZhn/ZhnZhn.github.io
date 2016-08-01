@@ -67,7 +67,7 @@ const About = React.createClass({
              ERC
            </Token>
            <Token color="gray" isFirstBlank={true}>
-             is a economic RESTFul client.
+             is a economic RESTful client.
            </Token>
          </p>
          <p>

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ChartStore from '../flux/stores/ChartStore';
 import {ChartActionTypes} from '../flux/actions/ChartActions';
@@ -120,7 +121,12 @@ const ChartContainer2 = React.createClass({
    },
 
    render(){
-     const styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'}
+     const transitionOption = {
+             transitionName : "scaleY",
+             transitionEnterTimeout : 400,
+             transitionLeaveTimeout : 1
+           }
+         , styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'}
          , classOpen = this.state.isShow ? "show-popup" : null;
 
      return(
@@ -141,7 +147,9 @@ const ChartContainer2 = React.createClass({
           </CaptionRow>
 
           <ScrollPane style={styles.scrollDiv}>
-            {this.renderCharts()}
+            <ReactCSSTransitionGroup {...transitionOption} >
+              {this.renderCharts()}
+            </ReactCSSTransitionGroup>
           </ScrollPane>
 
         </div>

@@ -53,6 +53,17 @@ var WithIndicatorConfig = {
         var yAxis = config.yAxis;
 
 
+        config.navigation = {
+            buttonOptions: {
+                y: 20
+            },
+            menuStyle: {
+                position: 'relative',
+                top: '-24px',
+                left: '28px'
+            }
+        };
+
         chart.height = 160;
         chart.spacingTop = 8;
         chart.spacingBottom = 10;

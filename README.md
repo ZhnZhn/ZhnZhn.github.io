@@ -1,5 +1,5 @@
 # [ERC] (https://zhnzhn.github.io)
-ERC is a economic RESTFul client.
+ERC is a economic RESTful client.
 With it you can view economic free open data from WEB.
 
 ![alt text](screenshots/currency.png?raw=true "Currency History")

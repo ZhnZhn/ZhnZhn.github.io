@@ -8,11 +8,14 @@ module.exports = {
   entry: {
      erc: path.resolve('js', 'index.js'),
      lib: [
-            "react", "react-dom", "react-addons-shallow-compare", "reflux",
+            "react", "react-dom", 
+            "react-addons-shallow-compare", "react-addons-css-transition-group",
+            "reflux",
             "big.js", "interact.js", "localforage",
             "lodash/sortBy", "lodash/merge", "lodash/flow",
             "purify",
-            "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap"
+            "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
+            "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting"
           ]
   },
   output: {

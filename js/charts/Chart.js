@@ -122,6 +122,24 @@ var Chart = {
         x: 0,
         y: 0
       },
+      theme: {
+        fill: _Color2.default.BG_TITLE,
+        stroke: _Color2.default.BG_TITLE,
+        r: 4,
+        style: {
+          color: _Color2.default.TITLE_SHOW
+        },
+        states: {
+          hover: {
+            fill: _Color2.default.BG_TITLE,
+            stroke: _Color2.default.HOVER,
+            'stroke-width': 2,
+            style: {
+              color: _Color2.default.HOVER
+            }
+          }
+        }
+      },
       relativeTo: 'chart'
     }, option);
   },

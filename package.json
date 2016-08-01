@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "jspm bundle js/**/* - [js/**/*] dependency-bundle.js",
     "bundle-sfx": "jspm bundle-sfx --minify --skip-source-maps js/index bundle.min.js",
-    "build": "webpack --colors --progress", 
+    "build": "webpack --colors --progress",
     "gulp": "gulp",
     "lint": "eslint src",
     "start": "http-server -c-1"
@@ -26,9 +26,10 @@
       "localforage": "npm:localforage@^1.4.2",
       "lodash": "npm:lodash@^4.13.1",
       "purify": "github:cure53/DOMPurify@^0.8.2",
-      "react": "npm:react@^15.1.0",
-      "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^15.1.0",
-      "react-dom": "npm:react-dom@^15.1.0",
+      "react": "npm:react@^15.3.0",
+      "react-addons-css-transition-group": "npm:react-addons-css-transition-group@^15.3.0",
+      "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^15.3.0",
+      "react-dom": "npm:react-dom@^15.3.0",
       "reflux": "npm:reflux@^0.4.1"
     },
     "devDependencies": {}

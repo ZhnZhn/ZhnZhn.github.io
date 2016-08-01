@@ -16,6 +16,10 @@ var _AppLabel = require('./AppLabel');
 
 var _AppLabel2 = _interopRequireDefault(_AppLabel);
 
+var _IconLogoErc = require('./IconLogoErc');
+
+var _IconLogoErc2 = _interopRequireDefault(_IconLogoErc);
+
 var _ToolBarButton = require('../ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
@@ -44,6 +48,7 @@ var styles = {
   appLabel: {
     display: 'inline-block',
     color: '#80c040',
+    marginLeft: '35px',
     paddingLeft: '10px',
     paddingRight: '10px',
     fontSize: '16px',
@@ -83,9 +88,9 @@ var HeaderBar = _react2.default.createClass({
       'div',
       { className: 'header', style: styles.rootDiv },
       _react2.default.createElement(_ProgressLoading2.default, { store: store }),
+      _react2.default.createElement(_IconLogoErc2.default, null),
       _react2.default.createElement(_AppLabel2.default, {
         style: styles.appLabel,
-        title: 'Economic Rest Client v. 0.10.0',
         caption: 'ERC v. 0.10.0'
       }),
       _react2.default.createElement(_ToolBarButton2.default, {

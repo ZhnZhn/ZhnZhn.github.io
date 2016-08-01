@@ -108,7 +108,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray', isFirstBlank: true },
-              'is a economic RESTFul client.'
+              'is a economic RESTful client.'
             )
           ),
           _react2.default.createElement(
