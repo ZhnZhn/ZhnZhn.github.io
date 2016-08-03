@@ -1,5 +1,5 @@
 
-const rootUrl = "http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
+const rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
     , queryTail = "&precision=1&sinceTimePeriod=1996M01";
 
 const REQUEST_ERROR = 'Request Error'
@@ -23,7 +23,7 @@ const EuroStatApi = {
     }
     return true
   }
-  
+
 }
 
 export default EuroStatApi

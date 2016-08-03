@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var rootUrl = "http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",
+var rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",
     queryTail = "&precision=1&sinceTimePeriod=1996M01";
 
 var REQUEST_ERROR = 'Request Error',
