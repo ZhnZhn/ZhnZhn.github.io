@@ -30,6 +30,21 @@
         { "caption" : "Total services" , "value" : "CP-HIS" }
       ]
     },{
+      "caption" : "Economic sentiment indicator", "value" : "teibs010" ,
+      "columns" : [
+        { "caption" : "ESI" , "value" : "" }
+      ]
+    },{
+      "caption" : "Retail trade deflated turnover", "value" : "teiis240",
+      "columns" : [
+        { "caption" : "Index of deflated turnover" , "value" : "TOVV" }
+      ]
+    },{
+      "caption" : "GDP per inhabitant", "value" : "tsdec100",
+      "columns" : [
+        { "caption" : "Real GDP per capita", "value" : "" }
+      ]
+    },{
       "caption" : "Industry Energy", "value" : "ei_isen_m" ,
       "columns" : [
         { "caption" : "Consumption of electricity (Gwh)" , "value" : "IS-CEL-GWH" },

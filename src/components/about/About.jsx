@@ -89,7 +89,7 @@ const About = React.createClass({
             ,
           </Token>
           <LinkToken
-             href="http://ec.europa.eu/eurostat/web/main/home"
+             href="http://ec.europa.eu/eurostat"
              color="#009ae5"
              isFirstBlank={true}
           >
@@ -187,7 +187,7 @@ const About = React.createClass({
              For loading data from
            </Token>
            <LinkToken
-              href="http://ec.europa.eu/eurostat/web/main/home"
+              href="http://ec.europa.eu/eurostat"
               color="#009ae5"
               isFirstBlank={true}
            >

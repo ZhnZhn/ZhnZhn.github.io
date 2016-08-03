@@ -5,7 +5,7 @@ const IconEurostat = (props) => {
     <a
       className="icon__eurostat"
       title="Eurostat"
-      href="http://ec.europa.eu/eurostat/web/main/home"
+      href="http://ec.europa.eu/eurostat"
     >
       eurostat
     </a>

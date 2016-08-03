@@ -16,7 +16,13 @@ var EuroStatApi = {
     var metric = option.metric;
     var geo = option.geo;
 
-    return "" + rootUrl + group + "?geo=" + geo + "&indic=" + metric + queryTail;
+
+    var _param = "geo=" + geo;
+    if (metric) {
+      _param = _param + "&indic=" + metric;
+    }
+
+    return "" + rootUrl + group + "?" + _param + queryTail;
   },
   checkResponse: function checkResponse(json) {
     var error = json.error;

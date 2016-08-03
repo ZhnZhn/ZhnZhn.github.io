@@ -8,8 +8,14 @@ const REQUEST_ERROR = 'Request Error'
 const EuroStatApi = {
 
   getRequestUrl(option){
-    const { group, metric, geo } = option
-    return `${rootUrl}${group}?geo=${geo}&indic=${metric}${queryTail}`;
+    const { group, metric, geo } = option;
+
+    let   _param = `geo=${geo}`
+    if (metric){
+      _param = `${_param}&indic=${metric}`
+    }
+    
+    return `${rootUrl}${group}?${_param}${queryTail}`;
   },
 
   checkResponse(json) {

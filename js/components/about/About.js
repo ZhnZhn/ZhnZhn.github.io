@@ -142,7 +142,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _LinkToken2.default,
               {
-                href: 'http://ec.europa.eu/eurostat/web/main/home',
+                href: 'http://ec.europa.eu/eurostat',
                 color: '#009ae5',
                 isFirstBlank: true
               },
@@ -303,7 +303,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _LinkToken2.default,
               {
-                href: 'http://ec.europa.eu/eurostat/web/main/home',
+                href: 'http://ec.europa.eu/eurostat',
                 color: '#009ae5',
                 isFirstBlank: true
               },
