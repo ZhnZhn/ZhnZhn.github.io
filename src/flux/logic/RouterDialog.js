@@ -8,10 +8,11 @@ import BigMacDialog from '../../components/quandl-browser/BigMacDialog';
 import Futures3Dialog from '../../components/quandl-browser/Futures3Dialog';
 import FuturesWikiDialog from '../../components/quandl-browser/FuturesWikiDialog';
 import JodiWorldOilDialog from '../../components/quandl-browser/JodiWorldOilDialog';
+import EuroStatDialog from '../../components/quandl-browser/EuroStatDialog';
 
 const RouterDialog = {
   'DEFAULT' : DialogType3,
-  
+
   DialogType3 : DialogType3,
   DialogType4A : DialogType4A,
   DialogType5 : DialogType5,
@@ -19,7 +20,8 @@ const RouterDialog = {
   BigMacDialog : BigMacDialog,
   Futures3Dialog : Futures3Dialog,
   FuturesWikiDialog : FuturesWikiDialog,
-  JodiWorldOilDialog : JodiWorldOilDialog
+  JodiWorldOilDialog : JodiWorldOilDialog,
+  EuroStatDialog : EuroStatDialog
 }
 
 export default RouterDialog

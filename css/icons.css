@@ -79,3 +79,20 @@
   border-width: 6px;
   fill: yellow;
 }
+
+.icon__eurostat {
+  display: inline-block;
+  font-size: 32px;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: normal;
+  color: #009ae5;
+  padding: 6px 16px;
+  border: 3px solid #232f3b;
+  text-decoration: none;
+  transition: color, border-color, border-width 200ms ease-out;
+}
+.icon__eurostat:hover {
+  border-color: #2f7ed8;
+  border-width: 6px;
+  color: yellow;
+}

@@ -74,6 +74,30 @@ const About = React.createClass({
            <Token color="gray">
              With it you can view economic free open data from WEB.
           </Token>
+          <br/>
+          <Token color="gray">
+            Data providers :
+          </Token>
+          <LinkToken
+             href="https://www.quandl.com/"
+             color="#E05927"
+             isFirstBlank={true}
+          >
+             Quandl
+          </LinkToken>
+          <Token color="gray">
+            ,
+          </Token>
+          <LinkToken
+             href="http://ec.europa.eu/eurostat/web/main/home"
+             color="#009ae5"
+             isFirstBlank={true}
+          >
+             Eurostat
+          </LinkToken>
+          <Token color="gray">
+            .
+          </Token>
          </p>
           <br/>
           <p>
@@ -136,7 +160,7 @@ const About = React.createClass({
          <br/>
          <p>
            <Token color="gray">
-             In that case all data load from
+             In that case of data loading from
            </Token>
            <LinkToken
               href="https://www.quandl.com/"
@@ -146,7 +170,7 @@ const About = React.createClass({
               Quandl
            </LinkToken>
            <Token color="gray" isFirstBlank={true}>
-              REST services. For accessing without Api Key, exists some restriction on frequency
+              data provider, for accessing without Api Key, exists some restriction on frequency
               and amount queries (<Token color="#2f7ed8">50 calls per day</Token><Token color="gray">).</Token>
            </Token>
          </p>
@@ -155,6 +179,22 @@ const About = React.createClass({
            <Token color="gray">
              A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings.
              Settings saves in browser's memory only for current WEB session.
+           </Token>
+         </p>
+         <br/>
+         <p>
+           <Token color="gray">
+             For loading data from
+           </Token>
+           <LinkToken
+              href="http://ec.europa.eu/eurostat/web/main/home"
+              color="#009ae5"
+              isFirstBlank={true}
+           >
+              Eurostat
+           </LinkToken>
+           <Token color="gray" isFirstBlank={true}>
+             data provider does not exist any restriction.
            </Token>
          </p>
          <IconLogoBar />

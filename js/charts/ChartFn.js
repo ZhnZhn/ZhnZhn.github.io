@@ -26,6 +26,25 @@ var C = {
 };
 
 var ChartFn = {
+  addSeriaWithRenderLabel: function addSeriaWithRenderLabel(chart, series, label) {
+    var options = chart.options;
+
+    //12symbols
+    var seriesText = label.length > 12 ? label.substring(0, 12) : label,
+        seriesCount = options.zhSeries.count,
+        row = Math.floor(seriesCount / 3),
+        x = 145 + 100 * seriesCount - row * 300,
+        y = 95 + 15 * row;
+
+    chart.addSeries(series, true, true);
+    chart.renderer.text(seriesText, x, y).css({ color: options.colors[series._colorIndex] }).add();
+
+    options.zhSeries.count += 1;
+
+    if (series.minY !== undefined && options.yAxis[0].min > series.minY) {
+      chart.yAxis[0].update({ min: series.minY, startOnTick: true });
+    }
+  },
   handlerMouserOverPoint: function handlerMouserOverPoint(event) {
     var chart = this.series.chart,
         x = this.x,

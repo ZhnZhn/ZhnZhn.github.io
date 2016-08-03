@@ -98,7 +98,10 @@ var ChartStore = _reflux2.default.createStore(_extends({
   onLoadStock: function onLoadStock() {
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK);
   },
-  onLoadStockCompleted: function onLoadStockCompleted(chartType, browserType, config) {
+  onLoadStockCompleted: function onLoadStockCompleted(option, config) {
+    var chartType = option.chartType;
+    var browserType = option.browserType;
+
     if (browserType !== _Type.BrowserType.WATCH_LIST) {
       this.addMenuItemCounter(chartType, browserType);
     }

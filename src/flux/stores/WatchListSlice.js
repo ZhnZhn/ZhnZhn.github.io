@@ -75,7 +75,7 @@ const _fnFindList = function(group, captionList){
 const _fnAddItem = function(watchList, item){
   const {caption, groupCaption, listCaption, config} = item
       , {zhConfig} = config
-      , { title, columnName, dataColumn, id, fromDate, seriaColumnNames } = zhConfig
+      , { title, subtitle, columnName, dataColumn, id, fromDate, seriaColumnNames } = zhConfig
       , toGroup = _fnFindGroup(watchList, groupCaption)
       , toList = _fnFindList(toGroup, listCaption)
       , items = toList.items;
@@ -85,11 +85,11 @@ const _fnAddItem = function(watchList, item){
   }
   if (items){
     toList.items.push({
-       title, caption, columnName, dataColumn, id, fromDate, seriaColumnNames
+       title, subtitle, caption, columnName, dataColumn, id, fromDate, seriaColumnNames
     });
   } else {
     toList.items = [{
-      title, caption, columnName, dataColumn, id, fromDate, seriaColumnNames
+      title, subtitle, caption, columnName, dataColumn, id, fromDate, seriaColumnNames
     }];
   }
   return {isDone : true}

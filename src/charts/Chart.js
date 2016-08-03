@@ -117,6 +117,12 @@ const Chart = {
     }, option)
   },
 
+  setDefaultTitle(config, title, subtitle){
+    config.chart.spacingTop = this.STACKED_SPACING_TOP;
+    config.title = this.fTitle({ text : title, y: this.STACKED_TITLE_Y });
+    config.subtitle = this.fSubtitle({ text : subtitle, y : this.STACKED_SUBTITLE_Y });
+  },
+
   fTitle(option={}){
     return merge({
        text: '',
@@ -299,7 +305,11 @@ fCrosshair(){
   },
 
   calcMinY({ minPoint, maxPoint }){
-    return minPoint - ((maxPoint-minPoint)*30/180)
+    if ( maxPoint>Number.NEGATIVE_INFINITY && minPoint<Number.POSITIVE_INFINITY){
+       return minPoint - ((maxPoint-minPoint)*30/180)
+    } else {
+      return undefined;
+    }
   },
 
   fPlotOptionsArea(option={}){

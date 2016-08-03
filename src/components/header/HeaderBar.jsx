@@ -58,8 +58,8 @@ const HeaderBar = React.createClass({
          <ProgressLoading store={store} />
          <IconLogoErc />
          <AppLabel
-            style={styles.appLabel}            
-            caption="ERC v. 0.10.0"
+            style={styles.appLabel}
+            caption="ERC v. 0.11.0"
          />
 
         <ToolBarButton

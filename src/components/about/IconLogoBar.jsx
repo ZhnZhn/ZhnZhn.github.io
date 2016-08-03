@@ -4,11 +4,12 @@ import IconQuandl from './IconQuandl';
 import IconGitHub from './IconGitHub';
 import IconReact from './IconReact';
 import IconHighcharts from './IconHighcharts';
+import IconEurostat from './IconEurostat';
 
 const STYLE = {
   ROOT : {
     textAlign : 'center',
-    paddingTop: '20px'    
+    paddingTop: '20px'
   }
 }
 
@@ -19,6 +20,7 @@ const IconLogoBar = (props) => {
        <IconGitHub />
        <IconReact />
        <IconHighcharts />
+       <IconEurostat />
     </div>
   );
 }

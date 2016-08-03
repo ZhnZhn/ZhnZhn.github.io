@@ -197,6 +197,24 @@ var DataQE = {
     },
     dataColumn: 1
   },
+  QE_EU_STAT: {
+    type: 'QE_EU_STAT',
+    menuTitle: 'EuroStat',
+    dialogCaption: 'European Statistics',
+    chartContainerCaption: 'European Statistics',
+    dialogType: 'EuroStatDialog',
+    dialogProps: {
+      descrUrl: './data/eurostat/eurostat.html',
+      oneCaption: 'Country',
+      oneURI: './data/eurostat/countries.json',
+      oneJsonProp: 'countries',
+      twoCaption: 'Group',
+      twoURI: './data/eurostat/group-metric.json',
+      twoJsonProp: 'groups',
+      threeCaption: 'Metric',
+      loadId: 'EU_STAT'
+    }
+  },
   QE_CPI_INFLATION: {
     type: 'QE_CPI_INFLATION',
     menuTitle: 'CPI & Inflation',

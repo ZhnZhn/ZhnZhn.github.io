@@ -51,10 +51,11 @@ const LoadItemDialog = React.createClass({
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
-          , { title, caption, columnName, dataColumn, seriaColumnNames } = data
+          , { title, subtitle, caption, columnName, dataColumn, seriaColumnNames } = data
           , { fromDate, toDate } = this.datesFragment.getValues()
           , option = {
              title : title,
+             subtitle : subtitle,
              value : caption,
              stock: caption,
              fromDate: fromDate,

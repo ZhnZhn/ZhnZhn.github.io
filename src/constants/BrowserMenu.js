@@ -45,6 +45,7 @@ const menuQuandl = [
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
        { id : Quandl.EU_COMMISSION},
+       { id : Quandl.EU_STAT},
        { id : Quandl.CPI_INFLATION },
        { id : Quandl.BIG_MAC }
      ]

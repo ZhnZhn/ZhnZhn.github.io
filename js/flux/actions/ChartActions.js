@@ -109,7 +109,9 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserTyp
   var _option$loadId = option.loadId;
   var loadId = _option$loadId === undefined ? 'Q' : _option$loadId;
 
-  _LoadConfig2.default[loadId](chartType, browserType, option, this.completed, this.added, this.failed);
+  option.chartType = chartType;
+  option.browserType = browserType;
+  _LoadConfig2.default[loadId](option, this.completed, this.added, this.failed);
 });
 
 exports.default = ChartActions;

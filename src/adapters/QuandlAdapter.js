@@ -34,7 +34,6 @@ const C = {
   COLOR_WHITE : "white",
   COLOR_GRAY : "gray"
 }
-const QuandlAdapter = {};
 
 
 const _fnConvertToUTC = function(point, result){
@@ -317,9 +316,7 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
 const _fnSetChartTitle = function(config, option){
   const { title, subtitle } = option;
   if (title){
-    config.chart.spacingTop = Chart.STACKED_SPACING_TOP;
-    config.title = Chart.fTitle({ text: title, y:Chart.STACKED_TITLE_Y });
-    config.subtitle = Chart.fSubtitle({ text: subtitle, y:Chart.STACKED_SUBTITLE_Y });
+    Chart.setDefaultTitle(config, title, subtitle);
   }
 }
 
@@ -454,47 +451,34 @@ const _rToConfig = {
   [ChartType.TREE_MAP] : fCreateTreeMapConfig
 }
 
-QuandlAdapter.toConfig = function(json, option){
-   const {seriaType=ChartType.AREA} = option;
+const QuandlAdapter = {
+  toConfig(json, option){
+     const {seriaType=ChartType.AREA} = option;
 
-   return _rToConfig[seriaType](json, option);
-}
+     return _rToConfig[seriaType](json, option);
+  },
 
+  toSeries(json, option){
+    const { value:chartId, parentId } = option
+        , yPointIndex = QuandlFn2.getDataColumnIndex(json, option);
 
-const _fnFindMinY = function(data=[]){
-  let minY = Number.POSITIVE_INFINITY;
-  for (let i=0, max=data.length; i<max; i++){
-    if ( data[i][1]<minY ) {
-      minY = data[i][1]
-    }
+    let data = json.dataset.data.map((point, index)=> {
+      const arrDate = point[0].split('-');
+      return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
+    });
+    data = sortBy(data, '0');
+
+    const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
+        , configSeries = ChartConfig.fSeries();
+
+    configSeries.zhSeriaId = parentId + '_' + chartId;
+    configSeries.zhValueText = valueText;
+    configSeries.data = data;
+    configSeries.minY = QuandlFn2.findMinY(data);
+
+    return configSeries;
   }
 
-  if ( minY !== Number.POSITIVE_INFINITY) {
-    return minY;
-  } else {
-    return undefined;
-  }
 }
-
-QuandlAdapter.toSeries = function(json, option){
-  const { value:chartId, parentId } = option
-      , yPointIndex = QuandlFn2.getDataColumnIndex(json, option);
-
-  let data = json.dataset.data.map((point, index)=> {
-    const arrDate = point[0].split('-');
-    return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
-  });
-  data = sortBy(data, '0');
-
-  const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
-      , configSeries = ChartConfig.fSeries();
-
-  configSeries.zhSeriaId = parentId + '_' + chartId;
-  configSeries.zhValueText = valueText;
-  configSeries.data = data;
-  configSeries.minY = _fnFindMinY(data);
-
-  return configSeries;
-};
 
 export default QuandlAdapter;

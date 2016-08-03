@@ -154,7 +154,7 @@ var ChartContainer2 = _react2.default.createClass({
     var transitionOption = {
       transitionName: "scaleY",
       transitionEnterTimeout: 400,
-      transitionLeaveTimeout: 1
+      transitionLeave: false
     },
         styleOpen = this.state.isShow ? { display: 'inline-block' } : { display: 'none' },
         classOpen = this.state.isShow ? "show-popup" : null;

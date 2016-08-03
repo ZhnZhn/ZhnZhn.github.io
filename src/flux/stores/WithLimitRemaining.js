@@ -1,5 +1,4 @@
-const CHANNEL = 'WITH_LIMIT_REMAINING'
-    , UNKNOWN = 'Unknown';
+const CHANNEL = 'WITH_LIMIT_REMAINING';
 
 const WithLimitRemaining = {
 
@@ -11,9 +10,6 @@ const WithLimitRemaining = {
   },
 
   triggerWithLimitRemaining(limitRemaining){
-    if (limitRemaining == null){
-      limitRemaining = UNKNOWN;
-    }
     this.emitter.emit(CHANNEL, limitRemaining);
   }
 }

@@ -91,6 +91,7 @@ var LoadItemDialog = _react2.default.createClass(_extends({
       var data = _props.data;
       var onClose = _props.onClose;
       var title = data.title;
+      var subtitle = data.subtitle;
       var caption = data.caption;
       var columnName = data.columnName;
       var dataColumn = data.dataColumn;
@@ -102,6 +103,7 @@ var LoadItemDialog = _react2.default.createClass(_extends({
       var toDate = _datesFragment$getVal.toDate;
       var option = {
         title: title,
+        subtitle: subtitle,
         value: caption,
         stock: caption,
         fromDate: fromDate,

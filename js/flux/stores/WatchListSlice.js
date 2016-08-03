@@ -101,6 +101,7 @@ var _fnAddItem = function _fnAddItem(watchList, item) {
   var config = item.config;
   var zhConfig = config.zhConfig;
   var title = zhConfig.title;
+  var subtitle = zhConfig.subtitle;
   var columnName = zhConfig.columnName;
   var dataColumn = zhConfig.dataColumn;
   var id = zhConfig.id;
@@ -115,11 +116,11 @@ var _fnAddItem = function _fnAddItem(watchList, item) {
   }
   if (items) {
     toList.items.push({
-      title: title, caption: caption, columnName: columnName, dataColumn: dataColumn, id: id, fromDate: fromDate, seriaColumnNames: seriaColumnNames
+      title: title, subtitle: subtitle, caption: caption, columnName: columnName, dataColumn: dataColumn, id: id, fromDate: fromDate, seriaColumnNames: seriaColumnNames
     });
   } else {
     toList.items = [{
-      title: title, caption: caption, columnName: columnName, dataColumn: dataColumn, id: id, fromDate: fromDate, seriaColumnNames: seriaColumnNames
+      title: title, subtitle: subtitle, caption: caption, columnName: columnName, dataColumn: dataColumn, id: id, fromDate: fromDate, seriaColumnNames: seriaColumnNames
     }];
   }
   return { isDone: true };

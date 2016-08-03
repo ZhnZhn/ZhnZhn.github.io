@@ -58,7 +58,8 @@ const ChartStore = Reflux.createStore({
  onLoadStock(){
    this.trigger(ChartActionTypes.LOAD_STOCK);
  },
- onLoadStockCompleted(chartType, browserType, config){
+ onLoadStockCompleted(option, config){
+     const { chartType, browserType } = option;
      if (browserType !== BrowserType.WATCH_LIST){
        this.addMenuItemCounter(chartType, browserType);
      }
@@ -77,7 +78,7 @@ const ChartStore = Reflux.createStore({
       this.trigger(ChartActionTypes.LOAD_STOCK_COMPLETED);
       this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
                   Factory.createChartContainer(chartType, browserType));
-      this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);            
+      this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);
     }
 
     this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);

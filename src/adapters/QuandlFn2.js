@@ -41,6 +41,7 @@ const QuandlFn2 = {
   createZhConfig(option){
     return {
       title : option.title,
+      subtitle : (option.subtitle) ? option.subtitle : '',
       id : option.value,
       key : option.key,
       columnName : option.columnName,
@@ -55,7 +56,7 @@ const QuandlFn2 = {
   createPercent({ bValue=Big('0.0'), bTotal=Big('0.0') }){
     return (!bTotal.eq(Big(0.0)) )
               ? bValue.times(100).div(bTotal).abs().toFixed(2)
-              : Big(0.0);    
+              : Big(0.0);
   },
 
   createValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){
@@ -145,6 +146,21 @@ const QuandlFn2 = {
               : (dataColumn) ? dataColumn : 1;
 
      return _columnIndex;
+  },
+
+  findMinY(data=[]){
+    let minY = Number.POSITIVE_INFINITY;
+    for (let i=0, max=data.length; i<max; i++){
+      if ( data[i][1]<minY ) {
+        minY = data[i][1]
+      }
+    }
+
+    if ( minY !== Number.POSITIVE_INFINITY) {
+      return minY;
+    } else {
+      return undefined;
+    }
   }
 
 };

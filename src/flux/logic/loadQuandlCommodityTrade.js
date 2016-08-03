@@ -65,15 +65,13 @@ const _loadToChart = function(option, onAdded, onFailed){
 
 
 const loadQuandlCommodityTrade = function(
-  chartType, browserType, option, onCompleted, onAdded, onFailed
+  option, onCompleted, onAdded, onFailed
 ){
   const parentId = ChartStore.isLoadToChart();
 
   option.apiKey = ChartStore.getQuandlKey();
 
-  if (!parentId){
-    option.chartType = chartType;
-    option.browserType = browserType;
+  if (!parentId){    
     _loadToChartComp(option, onCompleted, onFailed);
   } else {
     option.parentId = parentId;

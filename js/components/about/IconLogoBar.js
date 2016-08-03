@@ -24,6 +24,10 @@ var _IconHighcharts = require('./IconHighcharts');
 
 var _IconHighcharts2 = _interopRequireDefault(_IconHighcharts);
 
+var _IconEurostat = require('./IconEurostat');
+
+var _IconEurostat2 = _interopRequireDefault(_IconEurostat);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var STYLE = {
@@ -40,7 +44,8 @@ var IconLogoBar = function IconLogoBar(props) {
     _react2.default.createElement(_IconQuandl2.default, null),
     _react2.default.createElement(_IconGitHub2.default, null),
     _react2.default.createElement(_IconReact2.default, null),
-    _react2.default.createElement(_IconHighcharts2.default, null)
+    _react2.default.createElement(_IconHighcharts2.default, null),
+    _react2.default.createElement(_IconEurostat2.default, null)
   );
 };
 

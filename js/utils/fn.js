@@ -22,9 +22,9 @@ var fnFetch = exports.fnFetch = function fnFetch(_ref) {
       var statusText = response.statusText;
       var headers = response.headers;
 
-      if (status >= 200 && status < 400) {
+      if (status >= 200 && status <= 400) {
          return Promise.all([Promise.resolve(headers.get(LIMIT_REMAINING)), response.json()]);
-      } else if (status >= 400 && status < 500) {
+      } else if (status > 400 && status < 500) {
          throw { errCaption: 'Request Error', message: status + ' : ' + statusText };
       } else if (status >= 500 && status < 600) {
          throw { errCaption: 'Response Error', message: status + ' : ' + statusText };

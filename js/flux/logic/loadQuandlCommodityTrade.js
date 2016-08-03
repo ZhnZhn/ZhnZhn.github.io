@@ -75,14 +75,12 @@ var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
   });
 };
 
-var loadQuandlCommodityTrade = function loadQuandlCommodityTrade(chartType, browserType, option, onCompleted, onAdded, onFailed) {
+var loadQuandlCommodityTrade = function loadQuandlCommodityTrade(option, onCompleted, onAdded, onFailed) {
   var parentId = _ChartStore2.default.isLoadToChart();
 
   option.apiKey = _ChartStore2.default.getQuandlKey();
 
   if (!parentId) {
-    option.chartType = chartType;
-    option.browserType = browserType;
     _loadToChartComp(option, onCompleted, onFailed);
   } else {
     option.parentId = parentId;

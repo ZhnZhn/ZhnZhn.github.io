@@ -37,7 +37,9 @@ var LimitRemainingLabel = _react2.default.createClass({
     this.unsubscribe();
   },
   _onStore: function _onStore(value) {
-    this.setState({ value: value });
+    if (!(value == null)) {
+      this.setState({ value: value });
+    }
   },
   render: function render() {
     var style = this.props.style;

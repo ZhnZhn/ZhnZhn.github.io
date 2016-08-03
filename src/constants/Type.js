@@ -35,5 +35,6 @@ export const ChartType = {
 
 export const LoadType = {
   Q : 'Q',
-  QCT : 'QCT'
+  QCT : 'QCT',
+  EU_STAT : 'EU_STAT'
 }

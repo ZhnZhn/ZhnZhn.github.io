@@ -3,8 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var CHANNEL = 'WITH_LIMIT_REMAINING',
-    UNKNOWN = 'Unknown';
+var CHANNEL = 'WITH_LIMIT_REMAINING';
 
 var WithLimitRemaining = {
   listenWithLimitRemaining: function listenWithLimitRemaining(fnHandler) {
@@ -16,9 +15,6 @@ var WithLimitRemaining = {
     };
   },
   triggerWithLimitRemaining: function triggerWithLimitRemaining(limitRemaining) {
-    if (limitRemaining == null) {
-      limitRemaining = UNKNOWN;
-    }
     this.emitter.emit(CHANNEL, limitRemaining);
   }
 };

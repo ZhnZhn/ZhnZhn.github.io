@@ -123,8 +123,8 @@ const ChartContainer2 = React.createClass({
    render(){
      const transitionOption = {
              transitionName : "scaleY",
-             transitionEnterTimeout : 400,
-             transitionLeaveTimeout : 1
+             transitionEnterTimeout : 400,             
+             transitionLeave : false
            }
          , styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'}
          , classOpen = this.state.isShow ? "show-popup" : null;

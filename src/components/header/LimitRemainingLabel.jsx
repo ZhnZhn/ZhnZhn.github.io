@@ -26,7 +26,9 @@ const LimitRemainingLabel = React.createClass({
   },
 
   _onStore(value){
-    this.setState({ value: value });
+    if ( !(value == null) ) {
+      this.setState({ value: value });
+    }  
   },
 
   render(){

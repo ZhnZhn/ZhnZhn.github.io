@@ -36,6 +36,10 @@ var _JodiWorldOilDialog = require('../../components/quandl-browser/JodiWorldOilD
 
 var _JodiWorldOilDialog2 = _interopRequireDefault(_JodiWorldOilDialog);
 
+var _EuroStatDialog = require('../../components/quandl-browser/EuroStatDialog');
+
+var _EuroStatDialog2 = _interopRequireDefault(_EuroStatDialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterDialog = {
@@ -48,7 +52,8 @@ var RouterDialog = {
   BigMacDialog: _BigMacDialog2.default,
   Futures3Dialog: _Futures3Dialog2.default,
   FuturesWikiDialog: _FuturesWikiDialog2.default,
-  JodiWorldOilDialog: _JodiWorldOilDialog2.default
+  JodiWorldOilDialog: _JodiWorldOilDialog2.default,
+  EuroStatDialog: _EuroStatDialog2.default
 };
 
 exports.default = RouterDialog;

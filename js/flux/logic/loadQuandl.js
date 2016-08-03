@@ -13,6 +13,10 @@ var _ChartStore = require('../stores/ChartStore');
 
 var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
+var _ChartFn = require('../../charts/ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
 var _QuandlApi = require('../../api/QuandlApi');
 
 var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
@@ -43,10 +47,8 @@ var fnFetchToChartComp = function fnFetchToChartComp(_ref) {
   var _QuandlAdapter$toConf = _QuandlAdapter2.default.toConfig(json, option);
 
   var config = _QuandlAdapter$toConf.config;
-  var chartType = option.chartType;
-  var browserType = option.browserType;
 
-  onCompleted(chartType, browserType, config);
+  onCompleted(option, config);
 };
 
 var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
@@ -68,39 +70,16 @@ var fnFetchToChart = function fnFetchToChart(_ref2) {
 
   var series = _QuandlAdapter2.default.toSeries(json, option),
       chart = _ChartStore2.default.getActiveChart();
-  _fnAddSeriesToChart(chart, series, option.value);
 
+  _ChartFn2.default.addSeriaWithRenderLabel(chart, series, option.value);
   onCompleted();
 };
 
-var _fnAddSeriesToChart = function _fnAddSeriesToChart(chart, series, label) {
-  var options = chart.options;
-
-  //12symbols
-  var seriesText = label.length > 12 ? label.substring(0, 12) : label,
-      seriesCount = options.zhSeries.count,
-      row = Math.floor(seriesCount / 3),
-      x = 145 + 100 * seriesCount - row * 300,
-      y = 95 + 15 * row;
-
-  chart.addSeries(series, true, true);
-  chart.renderer.text(seriesText, x, y).css({ color: options.colors[series._colorIndex] }).add();
-
-  options.zhSeries.count += 1;
-
-  if (series.minY !== undefined && options.yAxis[0].min > series.minY) {
-    chart.yAxis[0].update({ min: series.minY, startOnTick: true });
-  }
-};
-
-var loadQuandl = function loadQuandl(chartType, browserType, option, onCompleted, onAdded, onFailed) {
+var loadQuandl = function loadQuandl(option, onCompleted, onAdded, onFailed) {
   var parentId = _ChartStore2.default.isLoadToChart();
-
   option.apiKey = _ChartStore2.default.getQuandlKey();
 
   if (!parentId) {
-    option.chartType = chartType;
-    option.browserType = browserType;
     _loadToChartComp(option, onCompleted, onFailed);
   } else {
     option.parentId = parentId;

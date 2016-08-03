@@ -118,6 +118,40 @@ var About = _react2.default.createClass({
               _Token2.default,
               { color: 'gray' },
               'With it you can view economic free open data from WEB.'
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'gray' },
+              'Data providers :'
+            ),
+            _react2.default.createElement(
+              _LinkToken2.default,
+              {
+                href: 'https://www.quandl.com/',
+                color: '#E05927',
+                isFirstBlank: true
+              },
+              'Quandl'
+            ),
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'gray' },
+              ','
+            ),
+            _react2.default.createElement(
+              _LinkToken2.default,
+              {
+                href: 'http://ec.europa.eu/eurostat/web/main/home',
+                color: '#009ae5',
+                isFirstBlank: true
+              },
+              'Eurostat'
+            ),
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'gray' },
+              '.'
             )
           ),
           _react2.default.createElement('br', null),
@@ -220,7 +254,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
-              'In that case all data load from'
+              'In that case of data loading from'
             ),
             _react2.default.createElement(
               _LinkToken2.default,
@@ -234,7 +268,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray', isFirstBlank: true },
-              'REST services. For accessing without Api Key, exists some restriction on frequency and amount queries (',
+              'data provider, for accessing without Api Key, exists some restriction on frequency and amount queries (',
               _react2.default.createElement(
                 _Token2.default,
                 { color: '#2f7ed8' },
@@ -255,6 +289,30 @@ var About = _react2.default.createClass({
               _Token2.default,
               { color: 'gray' },
               'A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings. Settings saves in browser\'s memory only for current WEB session.'
+            )
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'gray' },
+              'For loading data from'
+            ),
+            _react2.default.createElement(
+              _LinkToken2.default,
+              {
+                href: 'http://ec.europa.eu/eurostat/web/main/home',
+                color: '#009ae5',
+                isFirstBlank: true
+              },
+              'Eurostat'
+            ),
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'gray', isFirstBlank: true },
+              'data provider does not exist any restriction.'
             )
           ),
           _react2.default.createElement(_IconLogoBar2.default, null)

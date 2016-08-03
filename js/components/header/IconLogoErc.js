@@ -23,7 +23,7 @@ var IconLogoErc = function IconLogoErc(props) {
     'span',
     {
       className: 'icon__erc',
-      title: 'ERC : Economic RESTful Client v. 0.10.0',
+      title: 'ERC : Economic RESTful Client v. 0.11.0',
       style: STYLE.ROOT
     },
     _react2.default.createElement(

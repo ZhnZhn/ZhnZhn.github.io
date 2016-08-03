@@ -90,7 +90,9 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, browserType
   }
 
   const { loadId='Q' } = option;
-  LoadConfig[loadId](chartType, browserType, option, this.completed, this.added, this.failed);
+  option.chartType = chartType;
+  option.browserType = browserType;
+  LoadConfig[loadId](option, this.completed, this.added, this.failed);
 })
 
 export default ChartActions

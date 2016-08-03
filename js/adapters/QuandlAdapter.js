@@ -66,7 +66,6 @@ var C = {
   COLOR_WHITE: "white",
   COLOR_GRAY: "gray"
 };
-var QuandlAdapter = {};
 
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
   var arrDate = point[0].split('-');
@@ -396,9 +395,7 @@ var _fnSetChartTitle = function _fnSetChartTitle(config, option) {
   var subtitle = option.subtitle;
 
   if (title) {
-    config.chart.spacingTop = _Chart2.default.STACKED_SPACING_TOP;
-    config.title = _Chart2.default.fTitle({ text: title, y: _Chart2.default.STACKED_TITLE_Y });
-    config.subtitle = _Chart2.default.fSubtitle({ text: subtitle, y: _Chart2.default.STACKED_SUBTITLE_Y });
+    _Chart2.default.setDefaultTitle(config, title, subtitle);
   }
 };
 
@@ -538,51 +535,35 @@ var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
 
 var _rToConfig = (_rToConfig2 = {}, _defineProperty(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), _defineProperty(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), _defineProperty(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), _rToConfig2);
 
-QuandlAdapter.toConfig = function (json, option) {
-  var _option$seriaType = option.seriaType;
-  var seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType;
+var QuandlAdapter = {
+  toConfig: function toConfig(json, option) {
+    var _option$seriaType = option.seriaType;
+    var seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType;
 
 
-  return _rToConfig[seriaType](json, option);
-};
+    return _rToConfig[seriaType](json, option);
+  },
+  toSeries: function toSeries(json, option) {
+    var chartId = option.value;
+    var parentId = option.parentId;
+    var yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option);
 
-var _fnFindMinY = function _fnFindMinY() {
-  var data = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+    var data = json.dataset.data.map(function (point, index) {
+      var arrDate = point[0].split('-');
+      return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
+    });
+    data = (0, _sortBy2.default)(data, '0');
 
-  var minY = Number.POSITIVE_INFINITY;
-  for (var i = 0, max = data.length; i < max; i++) {
-    if (data[i][1] < minY) {
-      minY = data[i][1];
-    }
+    var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
+        configSeries = _ChartConfig2.default.fSeries();
+
+    configSeries.zhSeriaId = parentId + '_' + chartId;
+    configSeries.zhValueText = valueText;
+    configSeries.data = data;
+    configSeries.minY = _QuandlFn2.default.findMinY(data);
+
+    return configSeries;
   }
-
-  if (minY !== Number.POSITIVE_INFINITY) {
-    return minY;
-  } else {
-    return undefined;
-  }
-};
-
-QuandlAdapter.toSeries = function (json, option) {
-  var chartId = option.value;
-  var parentId = option.parentId;
-  var yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option);
-
-  var data = json.dataset.data.map(function (point, index) {
-    var arrDate = point[0].split('-');
-    return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
-  });
-  data = (0, _sortBy2.default)(data, '0');
-
-  var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
-      configSeries = _ChartConfig2.default.fSeries();
-
-  configSeries.zhSeriaId = parentId + '_' + chartId;
-  configSeries.zhValueText = valueText;
-  configSeries.data = data;
-  configSeries.minY = _fnFindMinY(data);
-
-  return configSeries;
 };
 
 exports.default = QuandlAdapter;

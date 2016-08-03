@@ -63,6 +63,7 @@ var QuandlFn2 = {
   createZhConfig: function createZhConfig(option) {
     return {
       title: option.title,
+      subtitle: option.subtitle ? option.subtitle : '',
       id: option.value,
       key: option.key,
       columnName: option.columnName,
@@ -165,6 +166,22 @@ var QuandlFn2 = {
     var _columnIndex = _dataColumn ? _dataColumn : dataColumn ? dataColumn : 1;
 
     return _columnIndex;
+  },
+  findMinY: function findMinY() {
+    var data = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+    var minY = Number.POSITIVE_INFINITY;
+    for (var i = 0, max = data.length; i < max; i++) {
+      if (data[i][1] < minY) {
+        minY = data[i][1];
+      }
+    }
+
+    if (minY !== Number.POSITIVE_INFINITY) {
+      return minY;
+    } else {
+      return undefined;
+    }
   }
 };
 
