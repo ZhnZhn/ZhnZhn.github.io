@@ -17,6 +17,9 @@ import WithStackedArea from './WithStackedAreaConfig';
 import WithStackedColumn from './WithStackedColumnConfig';
 import WithTreeMap from './WithTreeMapConfig';
 
+import ComponentActions from '../flux/actions/ComponentActions';
+import { ModalDialog } from '../constants/Type';
+
 const ChartConfig = {
   ...WithIndicator,
   ...WithPie,
@@ -43,6 +46,15 @@ const ChartConfig = {
          }
        }
     });
+
+    Highcharts.wrap(Highcharts.Chart.prototype, 'exportChartLocal', function (fn, ...args) {
+       if (args.length === 0) {
+         ComponentActions.showModalDialog(ModalDialog.CUSTOMIZE_EXPORT, { fn: fn, chart: this });
+       } else {
+         fn.apply(this, args);
+       }
+    });
+
   }
 };
 
@@ -135,7 +147,7 @@ ChartConfig.theme = {
         theme : {
           fill : COLOR.BG_TITLE,
           states : {
-            hover : {              
+            hover : {
               fill : COLOR.BG_TITLE,
               'stroke-width' : 2,
               stroke : COLOR.HOVER

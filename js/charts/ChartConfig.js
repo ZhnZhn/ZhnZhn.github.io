@@ -66,6 +66,12 @@ var _WithTreeMapConfig = require('./WithTreeMapConfig');
 
 var _WithTreeMapConfig2 = _interopRequireDefault(_WithTreeMapConfig);
 
+var _ComponentActions = require('../flux/actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
+var _Type = require('../constants/Type');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ChartConfig = _extends({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default, {
@@ -86,6 +92,18 @@ var ChartConfig = _extends({}, _WithIndicatorConfig2.default, _WithPieConfig2.de
           link.href = credits.href;
           link.click();
         };
+      }
+    });
+
+    _highcharts2.default.wrap(_highcharts2.default.Chart.prototype, 'exportChartLocal', function (fn) {
+      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (args.length === 0) {
+        _ComponentActions2.default.showModalDialog(_Type.ModalDialog.CUSTOMIZE_EXPORT, { fn: fn, chart: this });
+      } else {
+        fn.apply(this, args);
       }
     });
   }

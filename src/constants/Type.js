@@ -17,6 +17,7 @@ export const ModalDialog = {
   ALERT : 'alert',
   DESCRIPTION : 'DESCRIPTION',
   SETTINGS : 'settings',
+  CUSTOMIZE_EXPORT : 'CUSTOMIZE_EXPORT',
   ADD_TO_WATCH : 'addToWatch',
   LOAD_ITEM : 'loadItem',
   EDIT_WATCH_GROUP : 'editWatchGroup',

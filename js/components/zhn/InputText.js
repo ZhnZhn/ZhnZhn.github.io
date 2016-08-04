@@ -44,6 +44,11 @@ var InputText = _react2.default.createClass({
       value: this.props.initValue
     };
   },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
+      this.setState({ value: nextProps.initValue });
+    }
+  },
   _handlerInputChange: function _handlerInputChange(event) {
     this.setState({ value: event.target.value });
   },

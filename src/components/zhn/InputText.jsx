@@ -26,7 +26,7 @@ const InputText = React.createClass({
   },
   getDefaultProps(){
     return {
-      initValue : '',
+      initValue : ''
     }
   },
 
@@ -36,9 +36,15 @@ const InputText = React.createClass({
     }
   },
 
+  componentWillReceiveProps(nextProps){
+    if (nextProps !== this.props){
+      this.setState({ value : nextProps.initValue });
+    }
+  },
+
 
   _handlerInputChange(event){
-    this.setState({value : event.target.value})
+    this.setState({ value : event.target.value })
   },
 
   render(){
