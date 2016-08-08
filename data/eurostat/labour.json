@@ -1,0 +1,8 @@
+{
+  "metrics" : [
+    { "caption" : "Minimum wages" , "value" : "tps00155" },
+    { "caption" : "Average hourly labour costs", "value" : "tps00173" },
+    { "caption" : "Social security and other labour costs paid by employer" , "value" : "tps00114" },
+    { "caption" : "Gender gap in unadjusted form, %" , "value" : "tsdsc340" }
+  ]
+}

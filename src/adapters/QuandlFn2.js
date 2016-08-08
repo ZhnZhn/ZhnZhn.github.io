@@ -96,9 +96,12 @@ const QuandlFn2 = {
              : '0.0'
         , bPrevValue = (len>1)
              ? ( (seria[len-2][1] ) ? Big(seria[len-2][1]) : Big(0.0) )
-             : Big(0.0);
+             : Big(0.0)
+        , date = (len>0)
+             ? DateUtils.formatTo(seria[len-1][0])
+             : ''
 
-    return  this.createValueMoving({ bNowValue, bPrevValue })
+    return  { ...this.createValueMoving({ bNowValue, bPrevValue }), date }
   },
 
   getRecentDate(seria=[], json){

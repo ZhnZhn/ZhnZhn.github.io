@@ -5,6 +5,7 @@ import AppLabel from './AppLabel';
 import IconLogoErc from './IconLogoErc';
 import ToolBarButton from '../ToolBarButton';
 import LimitRemainingLabel from './LimitRemainingLabel';
+import PanelBrowsers from './PanelBrowsers';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import BrowserActions from '../../flux/actions/BrowserActions';
 import {BrowserType, ModalDialog} from '../../constants/Type';
@@ -35,24 +36,41 @@ const BrowserConfig = {
     browserType: 'QY',
     caption: 'Quandl Yahoo Stocks',
     sourceMenuUrl : './data/yahoo/source-menu.json'
+  },
+  EUROSTAT : {
+    browserType: 'ES',
+    caption: 'European Statistics',
+    sourceMenuUrl : './data/eurostat/source-menu.json'
   }
 }
 
 const HeaderBar = React.createClass({
   getInitialState(){
-    this.fnBrowser = function (browserType) {
-      return BrowserActions.showBrowser.bind(null, browserType)
+    return {
+       isDS : false
     }
-
-    return { }
   },
 
+  _handlerClickQuandl(){
+    BrowserActions.showBrowser(BrowserType.QUANDL);
+    this.setState({ isDS: false });
+  },
   _handlerClickDynamic(browserConfig){
     BrowserActions.showBrowserDynamic(browserConfig);
+    this.setState({ isDS: false });
+  },
+  _handlerClickWatch(){
+    BrowserActions.showBrowser(BrowserType.WATCH_LIST);
+    this.setState({ isDS: false });
+  },
+
+  _handlerClickDS(){
+    this.setState({ isDS: !this.state.isDS });
   },
 
   render(){
-    const {store} = this.props;
+    const { store } = this.props
+        , { isDS } = this.state;
     return (
       <div className="header" style={styles.rootDiv}>
          <ProgressLoading store={store} />
@@ -62,31 +80,35 @@ const HeaderBar = React.createClass({
             caption="ERC v. 0.11.0"
          />
 
+         <ToolBarButton
+           type="TypeA"
+           caption="DS"
+           title="Data Source Browsers"
+           onClick={this._handlerClickDS}
+         >
+           <span className={'arrow-down'}></span>
+         </ToolBarButton>
+
+
         <ToolBarButton
           type="TypeA"
           caption="Quandl"
-          title="Quandl DataSets Browser"
-          onClick={this.fnBrowser(BrowserType.QUANDL)}
+          title="Quandl Economic Browser"
+          onClick={this._handlerClickQuandl}
         />
 
         <ToolBarButton
            type="TypeA"
-           caption="Yahoo"
-           title="Quandl Yahoo Stocks Browser"
-           onClick={this._handlerClickDynamic.bind(null, BrowserConfig.YAHOO)}
+           caption="Eurostat"
+           title="European Statistics Browser"
+           onClick={this._handlerClickDynamic.bind(null, BrowserConfig.EUROSTAT)}
         />
-        <ToolBarButton
-           type="TypeA"
-           caption="Google"
-           title="Quandl Google Stocks Browser"
-           onClick={this._handlerClickDynamic.bind(null, BrowserConfig.GOOGLE)}
-         />
 
          <ToolBarButton
            type="TypeA"
            caption="Watch"
            title="Watch List Browser"
-           onClick={this.fnBrowser(BrowserType.WATCH_LIST)}
+           onClick={this._handlerClickWatch}
          />
 
          <ToolBarButton
@@ -110,6 +132,13 @@ const HeaderBar = React.createClass({
               style={{ float: 'right', paddingTop: '5px' }}
            />
 
+           <PanelBrowsers
+              isShow={isDS}
+              browserConfig={BrowserConfig}
+              onClickQuandl={this._handlerClickQuandl}
+              onClickDynamic={this._handlerClickDynamic}
+              onClickWatch={this._handlerClickWatch}
+           />
       </div>
     );
   }

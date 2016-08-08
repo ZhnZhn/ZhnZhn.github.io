@@ -16,22 +16,24 @@ var _QuandlFn = require('./QuandlFn2');
 
 var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
-var _DateUtils = require('../utils/DateUtils');
-
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
+
 var _rFrequency = {
-  default: 'Monthly',
+  default: '',
   m: 'Monthly',
   q: 'Quarterly'
 };
 
-var _createDataSourceLink = function _createDataSourceLink(json) {
+var _crDataSourceLink = function _crDataSourceLink(json) {
   var href = json.href;
 
   return href ? '<a href=' + href + '>Eurostat Data Link</a>' : '';
+};
+
+var _crSubTitle = function _crSubTitle(subTitle) {
+  return '<span style="color:black;font-weight:bold;">' + subTitle + '</span>';
 };
 
 var EuroStatFn = {
@@ -49,7 +51,6 @@ var EuroStatFn = {
     config.info = this.createDatasetInfo(json, option);
 
     config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(data);
-    config.valueMoving.date = _DateUtils2.default.formatTo(data[data.length - 1][0]);
     config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
   },
@@ -97,12 +98,25 @@ var EuroStatFn = {
     };
   },
   createDatasetInfo: function createDatasetInfo(json, option) {
-    var arr = option.group.split('_');
+    var _option$group = option.group;
+    var group = _option$group === undefined ? '' : _option$group;
+    var arr = group.split('_');
     var _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default;
     var _json$extension = json.extension;
     var extension = _json$extension === undefined ? {} : _json$extension;
     var description = extension.description;
-    var _descr = description ? description + '<br/>' + _createDataSourceLink(json) : _createDataSourceLink(json);
+    var subTitle = extension.subTitle;
+
+
+    var _descr = '';
+    if (subTitle) {
+      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br/>';
+    }
+    if (description) {
+      _descr = _descr + description + '<br/>';
+    }
+    _descr = _descr + _crDataSourceLink(json);
+
     return {
       name: json.label,
       description: _descr,

@@ -1,0 +1,10 @@
+{
+  "indicators" : [
+    { "caption" : "House Price Index (2010=100), quarterly" , "value" : "teicp270?indic=TOTAL&unit=I2010_NSA" },
+    { "caption" : "House Price Index (2010=100), deflated, quarterly" , "value" : "tipsho30?unit=INX_Q" },
+    { "caption" : "Residential construction, % of GDP, annual" , "value" : "tipsna50?asset=N111G&unit=PC_GDP" },
+    { "caption" : "Final consumption expenditure of households and non-profit institutions serving households, M, quarterly" , "value" : "tipsho41?unit=CP_MNAC&s_adj=NSA&na_item=P31_S14_S15" },
+    { "caption" : "Final consumption expenditure of households and non-profit institutions serving households, % of GDP, quarterly" , "value" : "tipsho41?unit=PC_GDP&s_adj=NSA&na_item=P31_S14_S15" },
+    { "caption" : "Building Permits (2010=100), monthly" , "value" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2010_SCA" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "indicators" : [
+    { "caption" : "Unemployment rate, adjusted, % of labour force", "value" : "ei_lmhr_m?indic=LM-UN-T-TOT&s_adj=SA" },
+    { "caption" : "Inflation, 2015=100, % change", "value" : "teicp000?unit=I2015" },
+    { "caption" : "Industrial production excluding construction, 2010=100, % change", "value" : "teiis080?nace_r2=B-D&unit=I2010_SCA" },
+    { "caption" : "Government deficit/surplus, annual, % of GDP", "value" : "teina200?unit=PC_GDP" },
+    { "caption" : "Government gross debt, annual, % of GDP", "value" : "teina225?unit=PC_GDP" },
+    { "caption" : "Labour cost, % change previous quarter", "value" : "teilm100?unit=PCH_Q1_SCA" },
+    { "caption" : "Labour cost, % change same quarter previous year", "value" : "teilm100?unit=PCH_Q4_CA" },
+    { "caption" : "GDP, % change previous quarter", "value" : "teina011?unit=PCH_Q1_SCA" },
+    { "caption" : "GDP, % change same quarter previous year", "value" : "teina011?unit=PCH_Q4_NSA" },
+    { "caption" : "GDP per inhabitant, euro", "value" : "tsdec100?unit=CLV10_EUR_HAB" }
+  ]
+}

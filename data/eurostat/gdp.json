@@ -1,0 +1,14 @@
+{
+  "metrics" : [
+    { "caption" : "GDP at market prices, M EUR", "value" : "tec00001" },
+    { "caption" : "Compensation of employees, M EUR", "value" : "tec00013"},
+    { "caption" : "Taxes on production and imports less subsidies, M EUR", "value" : "tec00016"},
+    { "caption" : "Final consumption expenditure of households and non-profit institutions serving households, M EUR", "value" : "tec00009"},
+    { "caption" : "Final consumption expenditure of general government, M EUR", "value" : "tec00010"},
+    { "caption" : "Gross fixed capital formation (investments), M EUR", "value" : "tec00011"},
+    { "caption" : "Export goods and services, M EUR", "value" : "tec00110?na_item=P6"},
+    { "caption" : "Imports goods and services, M EUR", "value" : "tec00110?na_item=P7"},
+    { "caption" : "GDP per capita in PPS (EU28=100)", "value" : "tec00114"},
+    { "caption" : "Real GDP growth rate - volume", "value" : "tec00115"}
+  ]
+}

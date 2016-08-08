@@ -18,6 +18,7 @@ var ToolBarButton = _react2.default.createClass({
     var style = _props.style;
     var title = _props.title;
     var caption = _props.caption;
+    var children = _props.children;
     var onClick = _props.onClick;
 
 
@@ -39,7 +40,8 @@ var ToolBarButton = _react2.default.createClass({
         title: title,
         onClick: onClick
       },
-      caption
+      caption,
+      children
     );
   }
 });

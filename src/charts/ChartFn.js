@@ -26,7 +26,7 @@ const ChartFn = {
 
     chart.addSeries(series, true, true);
     chart.renderer.text(seriesText, x, y)
-          .css({color: options.colors[series._colorIndex]})
+          .css({ color: options.colors[series._colorIndex], 'font-size': '16px' })
           .add();
 
     options.zhSeries.count +=1;

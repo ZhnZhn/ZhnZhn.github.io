@@ -17,12 +17,20 @@ var EuroStatApi = {
     var geo = option.geo;
 
 
-    var _param = "geo=" + geo;
-    if (metric) {
-      _param = _param + "&indic=" + metric;
+    var _param = "geo=" + geo,
+        _group = void 0;
+
+    if (group) {
+      _group = group + "?";
+      if (metric) {
+        _param = _param + "&indic=" + metric;
+      }
+    } else {
+      _group = metric.indexOf('?') === -1 ? metric + "?" : metric;
+      _param = "&" + _param;
     }
 
-    return "" + rootUrl + group + "?" + _param + queryTail;
+    return "" + rootUrl + _group + _param + queryTail;
   },
   checkResponse: function checkResponse(json) {
     var error = json.error;

@@ -5,6 +5,7 @@ const RouterFnValue = {
   ROneDashTwo : (one, two) => `${one}_${two}`,
   RPrefixOne : (prefix, one) => `${prefix}_${one}`,
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
+  RPrefixOneTwoWithoutDash : (prefix, one, two) => `${prefix}/${one}${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
 
   RZill : (one, two, three) => `ZILL/${two}${three}_${one}`,

@@ -116,8 +116,6 @@ var PanelIndicator = _react2.default.createClass({
   _renderIndicators: function _renderIndicators() {
     var _this = this;
 
-    var onRemoveSeries = this.props.onRemoveSeries;
-
     var _descr = this.state.descr.map(function (descr, index) {
       var id = descr.id;
       var color = descr.color;
@@ -171,7 +169,6 @@ var PanelIndicator = _react2.default.createClass({
     var _props = this.props;
     var isShow = _props.isShow;
     var isMfi = _props.isMfi;
-    var value = this.state.value;
 
 
     var _mfiDom = isMfi ? _react2.default.createElement(

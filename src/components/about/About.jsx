@@ -103,7 +103,7 @@ const About = React.createClass({
           <p>
             <Step step="1" />
             <Token color="black" isFirstBlank={true}>
-               Choose a data source from the header bar
+               Choose a data source Browser from the header bar
             </Token>
           </p>
           <p style={{marginTop: '3px'}}>
@@ -115,13 +115,19 @@ const About = React.createClass({
           <p style={{marginTop: '3px'}}>
             <Step step="3" />
             <Token color="black" isFirstBlank={true}>
-               Select a data item and enter query date in a dragable Dialog
+               Select params and enter query date in a dragable Dialog
             </Token>
           </p>
           <p style={{marginTop: '3px'}}>
              <Step step="4" />
              <Token color="black" isFirstBlank={true}>
                 Click a button Load
+             </Token>
+          </p>
+          <p style={{marginTop: '3px'}}>
+             <Step step="5" />
+             <Token color="black" isFirstBlank={true}>
+                Also you can export chart to png, jpg, svg, print to pdf
              </Token>
           </p>
           <p style={{marginTop: '3px'}}>

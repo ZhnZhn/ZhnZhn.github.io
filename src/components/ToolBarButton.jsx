@@ -3,7 +3,7 @@ import React from 'react';
 
 const ToolBarButton = React.createClass({
   render(){
-    const { type, style, title, caption, onClick} = this.props;
+    const { type, style, title, caption, children, onClick} = this.props;
 
     let _className;
     switch (type) {
@@ -20,6 +20,7 @@ const ToolBarButton = React.createClass({
            onClick={onClick}
        >
          {caption}
+         {children}
       </button>
     );
   }

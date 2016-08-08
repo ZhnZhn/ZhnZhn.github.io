@@ -29,6 +29,7 @@
 
 
 .header{
+  position : relative;
   width: calc(100vw - 36px);
   margin-left: 10px;
   margin-right: 26px;
@@ -65,6 +66,19 @@
 }
 .row__topic__odd:hover, .row__topic__even:hover {
   border-bottom: 1px solid #1B75BB;
+}
+
+.item__quandl{
+  color: #e05927;
+  line-height: 2;
+}
+.item__eurostat{
+  color: #009ae5;
+  line-height: 2;
+}
+.item__watch{
+  color: #80c040;
+  line-height: 2;
 }
 
 .menu__badge {

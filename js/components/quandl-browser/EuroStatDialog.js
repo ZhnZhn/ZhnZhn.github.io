@@ -49,7 +49,7 @@ var EuroStatDialog = _react2.default.createClass(_extends({
 }, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
     this.one = null;
-    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }];
+    this.toolbarButtons = [{ caption: 'I', onClick: this._clickInfoWithToolbar }];
 
     return {
       validationMessages: []
@@ -62,13 +62,6 @@ var EuroStatDialog = _react2.default.createClass(_extends({
       }
     }
     return true;
-  },
-  _handlerClickInfo: function _handlerClickInfo() {
-    var _props = this.props;
-    var descrUrl = _props.descrUrl;
-    var onClickInfo = _props.onClickInfo;
-
-    onClickInfo({ descrUrl: descrUrl });
   },
   _handlerSelectOne: function _handlerSelectOne(one) {
     this.one = one;
@@ -122,18 +115,18 @@ var EuroStatDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var caption = _props2.caption;
-    var isShow = _props2.isShow;
-    var onShow = _props2.onShow;
-    var oneCaption = _props2.oneCaption;
-    var oneURI = _props2.oneURI;
-    var oneJsonProp = _props2.oneJsonProp;
-    var twoCaption = _props2.twoCaption;
-    var twoURI = _props2.twoURI;
-    var twoJsonProp = _props2.twoJsonProp;
-    var threeCaption = _props2.threeCaption;
-    var msgOnNotSelected = _props2.msgOnNotSelected;
+    var _props = this.props;
+    var caption = _props.caption;
+    var isShow = _props.isShow;
+    var onShow = _props.onShow;
+    var oneCaption = _props.oneCaption;
+    var oneURI = _props.oneURI;
+    var oneJsonProp = _props.oneJsonProp;
+    var twoCaption = _props.twoCaption;
+    var twoURI = _props.twoURI;
+    var twoJsonProp = _props.twoJsonProp;
+    var threeCaption = _props.threeCaption;
+    var msgOnNotSelected = _props.msgOnNotSelected;
     var validationMessages = this.state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',

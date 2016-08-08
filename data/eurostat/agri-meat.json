@@ -1,0 +1,12 @@
+{
+  "metrics" : [
+    { "caption" : "Pigs, 1000t", "value" : "tag00042"},
+    { "caption" : "Cattle, 1000t", "value" : "tag00044"},
+    { "caption" : "Sheep and goats, 1000t", "value" : "tag00045"},
+    { "caption" : "Poultry, 1000t", "value" : "tag00043"},
+    { "caption" : "Number of dairy cows, 1000 head", "value" : "tag00014"},
+    { "caption" : "Number of cattle, 1000 head", "value" : "tag00016"},
+    { "caption" : "Number of sheep, 1000 head", "value" : "tag00017"},
+    { "caption" : "Number of pigs, 1000 head", "value" : "tag00018"}
+  ]
+}

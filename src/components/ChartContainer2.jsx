@@ -23,8 +23,8 @@ const styles = {
     position: 'relative',
     width: '635px',
     /* eslint-disable no-dupe-keys */
-    height: '730px',
-    height: 'calc(100vh - 61px)',
+    height: '730px',    
+    height: 'calc(100vh - 71px)',
     /* eslint-enable no-dupe-keys */
     overflowY: 'hidden',
     marginLeft: '10px',
@@ -123,7 +123,7 @@ const ChartContainer2 = React.createClass({
    render(){
      const transitionOption = {
              transitionName : "scaleY",
-             transitionEnterTimeout : 400,             
+             transitionEnterTimeout : 400,
              transitionLeave : false
            }
          , styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'}

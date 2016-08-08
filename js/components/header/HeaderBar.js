@@ -28,6 +28,10 @@ var _LimitRemainingLabel = require('./LimitRemainingLabel');
 
 var _LimitRemainingLabel2 = _interopRequireDefault(_LimitRemainingLabel);
 
+var _PanelBrowsers = require('./PanelBrowsers');
+
+var _PanelBrowsers2 = _interopRequireDefault(_PanelBrowsers);
+
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -66,23 +70,39 @@ var BrowserConfig = {
     browserType: 'QY',
     caption: 'Quandl Yahoo Stocks',
     sourceMenuUrl: './data/yahoo/source-menu.json'
+  },
+  EUROSTAT: {
+    browserType: 'ES',
+    caption: 'European Statistics',
+    sourceMenuUrl: './data/eurostat/source-menu.json'
   }
 };
 
 var HeaderBar = _react2.default.createClass({
   displayName: 'HeaderBar',
   getInitialState: function getInitialState() {
-    this.fnBrowser = function (browserType) {
-      return _BrowserActions2.default.showBrowser.bind(null, browserType);
+    return {
+      isDS: false
     };
-
-    return {};
+  },
+  _handlerClickQuandl: function _handlerClickQuandl() {
+    _BrowserActions2.default.showBrowser(_Type.BrowserType.QUANDL);
+    this.setState({ isDS: false });
   },
   _handlerClickDynamic: function _handlerClickDynamic(browserConfig) {
     _BrowserActions2.default.showBrowserDynamic(browserConfig);
+    this.setState({ isDS: false });
+  },
+  _handlerClickWatch: function _handlerClickWatch() {
+    _BrowserActions2.default.showBrowser(_Type.BrowserType.WATCH_LIST);
+    this.setState({ isDS: false });
+  },
+  _handlerClickDS: function _handlerClickDS() {
+    this.setState({ isDS: !this.state.isDS });
   },
   render: function render() {
     var store = this.props.store;
+    var isDS = this.state.isDS;
 
     return _react2.default.createElement(
       'div',
@@ -93,29 +113,33 @@ var HeaderBar = _react2.default.createClass({
         style: styles.appLabel,
         caption: 'ERC v. 0.11.0'
       }),
+      _react2.default.createElement(
+        _ToolBarButton2.default,
+        {
+          type: 'TypeA',
+          caption: 'DS',
+          title: 'Data Source Browsers',
+          onClick: this._handlerClickDS
+        },
+        _react2.default.createElement('span', { className: 'arrow-down' })
+      ),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
         caption: 'Quandl',
-        title: 'Quandl DataSets Browser',
-        onClick: this.fnBrowser(_Type.BrowserType.QUANDL)
+        title: 'Quandl Economic Browser',
+        onClick: this._handlerClickQuandl
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
-        caption: 'Yahoo',
-        title: 'Quandl Yahoo Stocks Browser',
-        onClick: this._handlerClickDynamic.bind(null, BrowserConfig.YAHOO)
-      }),
-      _react2.default.createElement(_ToolBarButton2.default, {
-        type: 'TypeA',
-        caption: 'Google',
-        title: 'Quandl Google Stocks Browser',
-        onClick: this._handlerClickDynamic.bind(null, BrowserConfig.GOOGLE)
+        caption: 'Eurostat',
+        title: 'European Statistics Browser',
+        onClick: this._handlerClickDynamic.bind(null, BrowserConfig.EUROSTAT)
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
         caption: 'Watch',
         title: 'Watch List Browser',
-        onClick: this.fnBrowser(_Type.BrowserType.WATCH_LIST)
+        onClick: this._handlerClickWatch
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
@@ -134,6 +158,13 @@ var HeaderBar = _react2.default.createClass({
       _react2.default.createElement(_LimitRemainingLabel2.default, {
         store: store,
         style: { float: 'right', paddingTop: '5px' }
+      }),
+      _react2.default.createElement(_PanelBrowsers2.default, {
+        isShow: isDS,
+        browserConfig: BrowserConfig,
+        onClickQuandl: this._handlerClickQuandl,
+        onClickDynamic: this._handlerClickDynamic,
+        onClickWatch: this._handlerClickWatch
       })
     );
   }

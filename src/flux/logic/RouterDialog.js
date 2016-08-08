@@ -2,6 +2,7 @@
 import DialogType3 from '../../components/dialogs/DialogType3';
 import DialogType4A from '../../components/dialogs/DialogType4A';
 import DialogType5 from '../../components/dialogs/DialogType5';
+import DialogEurostat from '../../components/dialogs/DialogEurostat';
 
 import UNCommodityTradeDialog from '../../components/quandl-browser/UNCommodityTradeDialog';
 import BigMacDialog from '../../components/quandl-browser/BigMacDialog';
@@ -16,6 +17,7 @@ const RouterDialog = {
   DialogType3 : DialogType3,
   DialogType4A : DialogType4A,
   DialogType5 : DialogType5,
+  DialogEurostat : DialogEurostat,
   UNCommodityTradeDialog : UNCommodityTradeDialog,
   BigMacDialog : BigMacDialog,
   Futures3Dialog : Futures3Dialog,

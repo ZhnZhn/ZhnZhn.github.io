@@ -10,7 +10,9 @@ const _fnCreateQuandlKey = function(option){
 }
 
 const _fnCreateEuroStatKey = function(option){
-  return `${option.geo}_${option.group}_${option.metric}`;
+  const { geo='', group='', metric='' } = option
+      , _metric = metric.replace('?', '_');
+  return `${geo}_${group}_${_metric}`;
 }
 
 const LogicUtils = {

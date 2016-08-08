@@ -9,7 +9,7 @@ const ContainerStyles = {
     position: 'relative',
     /* eslint-disable no-dupe-keys */
     height: '730px',
-    height: 'calc(100vh - 61px)',
+    height: 'calc(100vh - 71px)',
     /* eslint-disable no-dupe-keys */
     //width: '270px',
     minWidth: '270px',
@@ -27,7 +27,7 @@ const ContainerStyles = {
     position: 'relative',
     /* eslint-disable no-dupe-keys */
     height: '730px',
-    height: 'calc(100vh - 61px)',
+    height: 'calc(100vh - 71px)',
     /* eslint-enable no-dupe-keys */
     minWidth: '700px',
     maxWidth: '700px',

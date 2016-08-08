@@ -1,0 +1,14 @@
+{
+  "indicators" : [
+    { "caption" : "Total sales of pesticides, t", "value" : "tag00084" },
+    { "caption" : "Sales of pesticides - Fungicides, t", "value" : "tag00085" },
+    { "caption" : "Sales of pesticides - Herbicides, t", "value" : "tag00086" },
+    { "caption" : "Sales of pesticides - Insecticides, t", "value" : "tag00087" },
+    { "caption" : "Sales of pesticides - Other pesticides, t", "value" : "tag00088" },
+    { "caption" : "Nitrogen, t of N, Fertilizers Europe", "value" : "tag00090" },
+    { "caption" : "Phosphorus, t of P, Fertilizers Europe", "value" : "tag00091" },
+    { "caption" : "Potassium, t of K, Fertilizers Europe", "value" : "tag00092" },
+    { "caption" : "Gross nutrient balance on agricultural land, Nitrogen N, kg per ha", "value" : "t2020_rn310?nutrient=N&indic_ag=BAL_UAA&unit=KG" },
+    { "caption" : "Gross nutrient balance on agricultural land, Phosphorus P, kg per ha", "value" : "t2020_rn310?nutrient=P&indic_ag=BAL_UAA&unit=KG" }
+  ]
+}

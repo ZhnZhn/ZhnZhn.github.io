@@ -5,10 +5,11 @@ Data providers: [Quandl](https://www.quandl.com), [Eurostat](http://ec.europa.eu
 
 ![alt text](screenshots/currency.png?raw=true "Currency History")
 
-**1.** **Choose a data source from the header bar.**  
+**1.** **Choose a data source Browser from the header bar.**  
 **2.** **Choose a dataset menu item in a Browser.**   
-**3.** **Select a data item and enter query date in a dragable Dialog.**   
+**3.** **Select params and enter query date in a dragable Dialog.**   
 **4.** **Click a button Load.**   
+**5.** **Also you can export chart to png, jpg, svg, print to pdf.**  
 The result will be shown in a Chart in a Chart container.  
 
 After clicking a button Show in a Dialog will be opened Chart container with Charts or empty.   

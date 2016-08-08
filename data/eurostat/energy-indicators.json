@@ -1,0 +1,11 @@
+{
+  "indicators" : [
+    { "caption" : "Implicit tax rate on energy", "value" : "tsdcc360" },
+    { "caption" : "Market share of the largest generator in the electricity market", "value" : "ten00119?unit=PC&product=9000&indic_en=119500" },                                                                                                          
+    { "caption" : "Energy intensity of the economy", "value" : "tsdec360?indic_en=119600&product=0000&unit=KGOE_TEUR" },
+    { "caption" : "Share of renewable energy in gross final energy consumption", "value" : "t2020_31?unit=PC&indic_eu=T2020_31" },
+    { "caption" : "Electricity generated from renewable sources", "value" : "tsdcc330?indic_en=119820&unit=PC" },
+    { "caption" : "Combined heat and power generation", "value" : "tsdcc350" },
+    { "caption" : "Greenhouse gas emissions intensity of energy consumption", "value" : "tsdcc220?indic_nrg=B_100900&product=0000&unit=KTOE" }
+  ]
+}

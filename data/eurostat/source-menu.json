@@ -1,0 +1,383 @@
+{
+  "menu" : [
+    {
+      "caption" : "Economic",
+      "items" : [
+        { "id" : "ES_8_ECONOMIC" },
+        { "id" : "ES_CPI" },
+        { "id" : "ES_LABOUR" },
+        { "id" : "ES_SOCIAL" },
+        { "id" : "ES_GDP" },
+        { "id" : "ES_UNEMP" },
+        { "id" : "ES_INDIC"}
+      ]
+    },{
+      "caption" : "Energy",
+      "items" : [
+        { "id" : "ES_E_INDIC" },
+        { "id" : "ES_E_STAT_Q" },
+        { "id" : "ES_E_STAT_PR" },
+        { "id" : "ES_I_ENERGY" }
+      ]
+    },{
+      "caption" : "Finance",
+      "items" : [
+        { "id" : "ES_F_PUBLIC" },
+        { "id" : "ES_F_INTEREST" }
+      ]
+    },{
+      "caption" : "Agriculture",
+      "items" : [
+        { "id" : "ES_AGRI_PRICES" },
+        { "id" : "ES_AGRI_MILK" },
+        { "id" : "ES_AGRI_MEAT" },
+        { "id" : "ES_AGRI_ENVI" }
+      ]
+    },{
+      "caption" : "High-Tech Industry",
+      "items" : [
+        { "id" : "ES_HT_INDIC" }
+      ]
+    },{
+      "caption" : "Real Estate",
+      "items" : [
+        { "id" : "ES_RE_INDIC" }
+      ]
+    }
+  ],
+  "items" : {
+    "ES_8_ECONOMIC" : {
+      "type" : "ES_8_ECONOMIC",
+      "menuTitle" : "8 Economic Indicators",
+      "dialogCaption" : "8 Economic Indicators",
+      "chartContainerCaption" : "Eurostat 8 Economic Indicators",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat-economic-trends-app.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Indicator",
+        "twoURI" : "./data/eurostat/8-economic-indicators.json",
+        "twoJsonProp" : "indicators",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_CPI" : {
+      "type" : "ES_CPI",
+      "menuTitle" : "CPI (2015=100)",
+      "dialogCaption" : "CPI (2015=100)",
+      "chartContainerCaption" : "Eurostat Consume Price Index",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "CPI",
+        "twoURI" : "./data/eurostat/cpi.json",
+        "twoJsonProp" : "cpis",
+        "loadId" : "EU_STAT",
+        "group" : "ei_cphi_m"
+      }
+    },
+    "ES_LABOUR" : {
+      "type" : "ES_LABOUR",
+      "menuTitle" : "Labour Cost",
+      "dialogCaption" : "Labour Cost",
+      "chartContainerCaption" : "Eurostat Labour Cost",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/labour.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_SOCIAL" : {
+      "type" : "ES_SOCIAL",
+      "menuTitle" : "Social Protection",
+      "dialogCaption" : "Social Protection",
+      "chartContainerCaption" : "Eurostat Social Protection",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/social-protection.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_GDP" : {
+      "type" : "ES_GDP",
+      "menuTitle" : "GDP",
+      "dialogCaption" : "Gross Domestic Product",
+      "chartContainerCaption" : "Eurostat Gross Domestic Product",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/gdp.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_UNEMP" : {
+      "type" : "ES_UNEMP",
+      "menuTitle" : "Unemployment (unadjusted)",
+      "dialogCaption" : "Unemployment (unadjusted)",
+      "chartContainerCaption" : "Eurostat Unemployment (unadjusted)",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/unemployment.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT",
+        "group" : "ei_lmhr_m"
+      }
+    },
+    "ES_INDIC" : {
+        "type" : "ES_INDIC",
+        "menuTitle" : "Indicators",
+        "dialogCaption" : "Economic Indicators",
+        "chartContainerCaption" : "Eurostat Economic Indicators",
+        "dialogType" : "EuroStatDialog",
+        "dialogProps" : {
+          "descrUrl": "./data/eurostat/eurostat.html",
+          "oneCaption" : "Country",
+          "oneURI" : "./data/eurostat/countries.json",
+          "oneJsonProp" : "countries",
+          "twoCaption" : "Group",
+          "twoURI" : "./data/eurostat/group-metric.json",
+          "twoJsonProp" : "groups",
+          "threeCaption" : "Metric",
+          "loadId" : "EU_STAT"
+        }
+    },
+
+    "ES_E_INDIC" : {
+        "type" : "ES_E_INDIC",
+        "menuTitle" : "Main Indicators",
+        "dialogCaption" : "Energy Main Indicators",
+        "chartContainerCaption" : "Eurostat Energy Main Indicators",
+        "dialogType" : "DialogEurostat",
+        "dialogProps" : {
+          "descrUrl": "./data/eurostat/eurostat.html",
+          "oneCaption" : "Country",
+          "oneURI" : "./data/eurostat/countries.json",
+          "oneJsonProp" : "countries",
+          "twoCaption" : "Indicators",
+          "twoURI" : "./data/eurostat/energy-indicators.json",
+          "twoJsonProp" : "indicators",
+          "loadId" : "EU_STAT"
+        }
+    },
+    "ES_E_STAT_Q" : {
+        "type" : "ES_E_STAT_Q",
+        "menuTitle" : "Statistics Quantities",
+        "dialogCaption" : "Energy Statistics Quantities",
+        "chartContainerCaption" : "Eurostat Energy Statistics Quantities",
+        "dialogType" : "EuroStatDialog",
+        "dialogProps" : {
+          "descrUrl": "./data/eurostat/eurostat.html",
+          "oneCaption" : "Country",
+          "oneURI" : "./data/eurostat/countries.json",
+          "oneJsonProp" : "countries",
+          "twoCaption" : "Group",
+          "twoURI" : "./data/eurostat/energy-statistics-quantities.json",
+          "twoJsonProp" : "groups",
+          "threeCaption" : "Metric",
+          "loadId" : "EU_STAT"
+        }
+    },
+    "ES_E_STAT_PR" : {
+        "type" : "ES_E_STAT_PR",
+        "menuTitle" : "Statistics Prices",
+        "dialogCaption" : "Energy Statistics Prices",
+        "chartContainerCaption" : "Eurostat Energy Statistics Prices",
+        "dialogType" : "DialogEurostat",
+        "dialogProps" : {
+          "descrUrl": "./data/eurostat/eurostat.html",
+          "oneCaption" : "Country",
+          "oneURI" : "./data/eurostat/countries.json",
+          "oneJsonProp" : "countries",
+          "twoCaption" : "Item",
+          "twoURI" : "./data/eurostat/energy-statistic-prices.json",
+          "twoJsonProp" : "items",
+          "loadId" : "EU_STAT"
+        }
+    },
+    "ES_I_ENERGY" : {
+      "type" : "ES_I_ENERGY",
+      "menuTitle" : "Industry Energy",
+      "dialogCaption" : "Industry Energy",
+      "chartContainerCaption" : "Eurostat Industry Energy",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/industry-energy.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT",
+        "group" : "ei_isen_m"
+      }
+    },
+
+    "ES_F_PUBLIC" : {
+      "type" : "ES_F_PUBLIC",
+      "menuTitle" : "Government Public",
+      "dialogCaption" : "Government Public",
+      "chartContainerCaption" : "Eurostat Finance Government Public",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/finance-public.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_F_INTEREST" : {
+      "type" : "ES_F_INTEREST",
+      "menuTitle" : "Interest Rates",
+      "dialogCaption" : "Interest Rates",
+      "chartContainerCaption" : "Eurostat Finance Interest Rates",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/interest-rates.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT"
+      }
+    },
+
+    "ES_AGRI_PRICES" : {
+      "type" : "ES_AGRI_PRICES",
+      "menuTitle" : "Selling Prices",
+      "dialogCaption" : "Agriculture Selling Prices",
+      "chartContainerCaption" : "Eurostat Agriculture Selling Prices",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Price",
+        "twoURI" : "./data/eurostat/agri-prices.json",
+        "twoJsonProp" : "prices",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_AGRI_MILK" : {
+      "type" : "ES_AGRI_MILK",
+      "menuTitle" : "Milk Production",
+      "dialogCaption" : "Agriculture Milk Production",
+      "chartContainerCaption" : "Eurostat Agriculture Milk Production",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/agri-milk.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_AGRI_MEAT" : {
+      "type" : "ES_AGRI_MEAT",
+      "menuTitle" : "Meat Production & Livestock",
+      "dialogCaption" : "Meat Production & Livestock",
+      "chartContainerCaption" : "Eurostat Meat Production & Livestock",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/agri-meat.json",
+        "twoJsonProp" : "metrics",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_AGRI_ENVI" : {
+      "type" : "ES_AGRI_ENVI",
+      "menuTitle" : "Enviroment Indicators",
+      "dialogCaption" : "Agri-Enviroment Indicators",
+      "chartContainerCaption" : "Eurostat Agri-Enviroment Indicators",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Indicator",
+        "twoURI" : "./data/eurostat/agri-envi.json",
+        "twoJsonProp" : "indicators",
+        "loadId" : "EU_STAT"
+      }
+    },
+
+    "ES_HT_INDIC" : {
+      "type" : "ES_HT_INDIC",
+      "menuTitle" : "High-Tech Indicators",
+      "dialogCaption" : "High-Tech Indicators",
+      "chartContainerCaption" : "High-Tech Indicators",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Indicator",
+        "twoURI" : "./data/eurostat/high-tech-indicators.json",
+        "twoJsonProp" : "indicators",
+        "loadId" : "EU_STAT"
+      }
+    },
+
+    "ES_RE_INDIC" : {
+      "type" : "ES_RE_INDIC",
+      "menuTitle" : "House Price Indicators",
+      "dialogCaption" : "House Price Indicators",
+      "chartContainerCaption" : "Eurostat House Indicators",
+      "dialogType" : "DialogEurostat",
+      "dialogProps" : {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "twoCaption" : "Indicator",
+        "twoURI" : "./data/eurostat/real-estate-index.json",
+        "twoJsonProp" : "indicators",
+        "loadId" : "EU_STAT"
+      }
+    }
+  }
+}

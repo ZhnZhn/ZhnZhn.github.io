@@ -1,0 +1,6 @@
+{
+  "metrics" : [
+    { "caption" : "Long term government bond yields, Maastricht definition (average)" , "value" : "ei_mfir_m?indic=MF-LTGBY-RT" },
+    { "caption" : "Long term government bond yields" , "value" : "teimf050" }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "items" : [
+    { "caption" : "Electricity prices, household, medium size", "value" : "ten00117?indic_en=MSHH&unit=EUR_KWH" },
+    { "caption" : "Electricity prices, industries, medium size", "value" : "ten00117?indic_en=MSIND&unit=EUR_KWH" },
+    { "caption" : "Gas prices, household, medium size", "value" : "ten00118?indic_en=MSHH&unit=GJ_GCV" },
+    { "caption" : "Gas prices, industries, medium size", "value" : "ten00118?indic_en=MSIND&unit=GJ_GCV" }
+  ]
+}

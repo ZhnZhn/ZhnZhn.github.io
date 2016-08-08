@@ -94,7 +94,6 @@ const PanelIndicator = React.createClass({
   },
 
   _renderIndicators(){
-    const {onRemoveSeries} = this.props;
     const _descr = this.state.descr.map((descr, index) => {
       const {id, color} = descr;
       return (
@@ -133,8 +132,7 @@ const PanelIndicator = React.createClass({
   },
 
   render(){
-    const {isShow, isMfi} = this.props
-        , {value} = this.state;
+    const {isShow, isMfi} = this.props        
 
     const _mfiDom = (isMfi) ? (
       <div>

@@ -1,0 +1,9 @@
+{
+  "metrics" : [
+    { "caption" : "Government deficit/surplus, annual, % of GDP" , "value" : "teina200?unit=PC_GDP" },
+    { "caption" : "Government deficit/surplus, quarterly, % of GDP" , "value" : "teina205?unit=PC_GDP_NSA" },
+    { "caption" : "Government fixed investment, annual, % of GDP", "value" : "teina210?unit=PC_GDP" },
+    { "caption" : "Government gross debt, annual, % of GDP", "value" : "teina225?unit=PC_GDP" },
+    { "caption" : "Government gross debt, quarterly, % of GDP", "value" : "teina230?unit=PC_GDP" }
+  ]
+}

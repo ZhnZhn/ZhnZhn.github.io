@@ -11,7 +11,14 @@ var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
 };
 
 var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
-  return option.geo + '_' + option.group + '_' + option.metric;
+  var _option$geo = option.geo;
+  var geo = _option$geo === undefined ? '' : _option$geo;
+  var _option$group = option.group;
+  var group = _option$group === undefined ? '' : _option$group;
+  var _option$metric = option.metric;
+  var metric = _option$metric === undefined ? '' : _option$metric;
+  var _metric = metric.replace('?', '_');
+  return geo + '_' + group + '_' + _metric;
 };
 
 var LogicUtils = {

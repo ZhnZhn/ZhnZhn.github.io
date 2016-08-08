@@ -18,7 +18,7 @@ const _fnCreateData = function(timeIndex, value){
         if (pointValue<=min) { min = pointValue; }
      }
   })
-
+    
   return { data, max, min }
 }
 

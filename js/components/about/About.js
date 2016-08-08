@@ -162,7 +162,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'black', isFirstBlank: true },
-              'Choose a data source from the header bar'
+              'Choose a data source Browser from the header bar'
             )
           ),
           _react2.default.createElement(
@@ -182,7 +182,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'black', isFirstBlank: true },
-              'Select a data item and enter query date in a dragable Dialog'
+              'Select params and enter query date in a dragable Dialog'
             )
           ),
           _react2.default.createElement(
@@ -193,6 +193,16 @@ var About = _react2.default.createClass({
               _Token2.default,
               { color: 'black', isFirstBlank: true },
               'Click a button Load'
+            )
+          ),
+          _react2.default.createElement(
+            'p',
+            { style: { marginTop: '3px' } },
+            _react2.default.createElement(_Step2.default, { step: '5' }),
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'black', isFirstBlank: true },
+              'Also you can export chart to png, jpg, svg, print to pdf'
             )
           ),
           _react2.default.createElement(

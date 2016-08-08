@@ -2,19 +2,24 @@ import ChartConfig from '../charts/ChartConfig';
 import Chart from '../charts/Chart';
 
 import QuandlFn2 from './QuandlFn2';
-import DateUtils from '../utils/DateUtils';
+
+const SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 
 const _rFrequency = {
-  default : 'Monthly',
+  default : '',
   m : 'Monthly',
   q : 'Quarterly'
 }
 
-const _createDataSourceLink = function(json){
+const _crDataSourceLink = function(json){
   const { href } = json
   return (href)
             ? `<a href=${href}>Eurostat Data Link</a>`
             : '';
+}
+
+const _crSubTitle = function(subTitle){
+  return `<span style="color:black;font-weight:bold;">${subTitle}</span>`;
 }
 
 const EuroStatFn = {
@@ -27,7 +32,6 @@ const EuroStatFn = {
     config.info = this.createDatasetInfo(json, option);
 
     config.valueMoving = QuandlFn2.createValueMovingFromSeria(data);
-    config.valueMoving.date = DateUtils.formatTo(data[data.length-1][0]);
     config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
   },
@@ -76,15 +80,23 @@ const EuroStatFn = {
   },
 
   createDatasetInfo(json, option){
-    const arr = option.group.split('_')
+    const  { group='' } = option
+        ,  arr = group.split('_')
         , _frequency = (_rFrequency[arr[arr.length-1]])
               ? _rFrequency[arr[arr.length-1]]
               : _rFrequency.default
         , { extension={} } = json
-        , { description } = extension
-        , _descr = (description)
-            ? description + '<br/>' + _createDataSourceLink(json)
-            : _createDataSourceLink(json)
+        , { description, subTitle } = extension;
+
+    let _descr = '';
+    if (subTitle){
+      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br/>';
+    }
+    if (description) {
+      _descr = _descr + description + '<br/>';
+    }
+    _descr = _descr + _crDataSourceLink(json);
+
     return {
       name : json.label,
       description : _descr,

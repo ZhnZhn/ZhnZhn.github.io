@@ -59,7 +59,7 @@ var styles = {
     width: '635px',
     /* eslint-disable no-dupe-keys */
     height: '730px'
-  }, _defineProperty(_rootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_rootDiv, 'overflowY', 'hidden'), _defineProperty(_rootDiv, 'marginLeft', '10px'), _defineProperty(_rootDiv, 'overflowX', 'hidden'), _rootDiv),
+  }, _defineProperty(_rootDiv, 'height', 'calc(100vh - 71px)'), _defineProperty(_rootDiv, 'overflowY', 'hidden'), _defineProperty(_rootDiv, 'marginLeft', '10px'), _defineProperty(_rootDiv, 'overflowX', 'hidden'), _rootDiv),
   hrzResize: {
     position: 'absolute',
     top: '30px',

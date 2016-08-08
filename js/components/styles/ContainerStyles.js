@@ -18,7 +18,7 @@ var ContainerStyles = {
     position: 'relative',
     /* eslint-disable no-dupe-keys */
     height: '730px'
-  }, _defineProperty(_browserRootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_browserRootDiv, 'minWidth', '270px'), _defineProperty(_browserRootDiv, 'maxWidth', '400px'), _defineProperty(_browserRootDiv, 'marginLeft', '10px'), _defineProperty(_browserRootDiv, 'paddingBottom', '32px'), _browserRootDiv),
+  }, _defineProperty(_browserRootDiv, 'height', 'calc(100vh - 71px)'), _defineProperty(_browserRootDiv, 'minWidth', '270px'), _defineProperty(_browserRootDiv, 'maxWidth', '400px'), _defineProperty(_browserRootDiv, 'marginLeft', '10px'), _defineProperty(_browserRootDiv, 'paddingBottom', '32px'), _browserRootDiv),
   aboutRootDiv: (_aboutRootDiv = {
     zIndex: 20,
     backgroundColor: '#4D4D4D',
@@ -28,7 +28,7 @@ var ContainerStyles = {
     position: 'relative',
     /* eslint-disable no-dupe-keys */
     height: '730px'
-  }, _defineProperty(_aboutRootDiv, 'height', 'calc(100vh - 61px)'), _defineProperty(_aboutRootDiv, 'minWidth', '700px'), _defineProperty(_aboutRootDiv, 'maxWidth', '700px'), _defineProperty(_aboutRootDiv, 'marginLeft', '10px'), _defineProperty(_aboutRootDiv, 'paddingRight', '0px'), _defineProperty(_aboutRootDiv, 'paddingBottom', '32px'), _aboutRootDiv)
+  }, _defineProperty(_aboutRootDiv, 'height', 'calc(100vh - 71px)'), _defineProperty(_aboutRootDiv, 'minWidth', '700px'), _defineProperty(_aboutRootDiv, 'maxWidth', '700px'), _defineProperty(_aboutRootDiv, 'marginLeft', '10px'), _defineProperty(_aboutRootDiv, 'paddingRight', '0px'), _defineProperty(_aboutRootDiv, 'paddingBottom', '32px'), _aboutRootDiv)
 };
 
 exports.default = ContainerStyles;

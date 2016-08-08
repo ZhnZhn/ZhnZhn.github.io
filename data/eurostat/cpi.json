@@ -1,0 +1,29 @@
+{
+  "cpis" : [
+    { "caption" : "All items" , "value" : "CP-HI00" },
+    { "caption" : "All items excuding energy" , "value" : "CP-HI00XE" },
+    { "caption" : "All items excuding energy, food, alcohol and tobacco" , "value" : "CP-HI00XEF" },
+    { "caption" : "All items excuding energy and unprocessed food" , "value" : "CP-HI00XEFU" },
+    { "caption" : "All items excuding energy and seasonal food" , "value" : "CP-HI00XES" },
+    { "caption" : "All items excuding tobacco" , "value" : "CP-HI00XTB" },
+    { "caption" : "Food and non-alcohol beverages" , "value" : "CP-HI01" },
+    { "caption" : "Alcoholic beverages and tobacco" , "value" : "CP-HI02" },
+    { "caption" : "Clothing and footwear" , "value" : "CP-HI03" },
+    { "caption" : "Housing, water, electricity, gas and other fuels" , "value" : "CP-HI04" },
+    { "caption" : "Furnishings, household equipment and maintance" , "value" : "CP-HI05" },
+    { "caption" : "Health" , "value" : "CP-HI06" },
+    { "caption" : "Transport" , "value" : "CP-HI07" },
+    { "caption" : "Communication" , "value" : "CP-HI08" },
+    { "caption" : "Recreation and culture" , "value" : "CP-HI09" },
+    { "caption" : "Education" , "value" : "CP-HI10" },
+    { "caption" : "Hotels, cafes and restaurants" , "value" : "CP-HI11" },
+    { "caption" : "Miscellaneous goods and services" , "value" : "CP-HI12" },
+    { "caption" : "Energy" , "value" : "CP-HIE" },
+    { "caption" : "Food" , "value" : "CP-HIF" },
+    { "caption" : "Unprocessed food" , "value" : "CP-HIFU" },
+    { "caption" : "Total goods" , "value" : "CP-HIG" },
+    { "caption" : "Industrial goods" , "value" : "CP-HIIG" },
+    { "caption" : "Non-energy industrial goods" , "value" : "CP-HIIGXE" },
+    { "caption" : "Total services" , "value" : "CP-HIS" }
+  ]
+}

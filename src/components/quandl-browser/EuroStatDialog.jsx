@@ -18,7 +18,7 @@ const EuroStatDialog = React.createClass({
   getInitialState(){
     this.one = null;
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handlerClickInfo }
+      { caption: 'I', onClick: this._clickInfoWithToolbar }
     ];
 
     return {
@@ -34,12 +34,7 @@ const EuroStatDialog = React.createClass({
     }
     return true;
   },
-
-  _handlerClickInfo(){
-    const { descrUrl, onClickInfo } = this.props;
-    onClickInfo({ descrUrl });
-  },
-
+  
   _handlerSelectOne(one){
     this.one = one;
   },

@@ -1,0 +1,14 @@
+{
+  "metrics" : [
+    { "caption" : "Consumption of electricity (Gwh)" , "value" : "IS-CEL-GWH" },
+    { "caption" : "Consumption of natural gas, Total (GCV)" , "value" : "IS-CNG-TJ" },
+    { "caption" : "Imports of electricity (Gwh)" , "value" : "IS-IEL-GWH" },
+    { "caption" : "Imports of natural gas (GCV)" , "value" : "IS-ING-TJ" },
+    { "caption" : "Production of electricity (Gwh)" , "value" : "IS-PEL-GWH" },
+    { "caption" : "Production of natural gas (GCV)" , "value" : "IS-PNG-TJ" },
+    { "caption" : "Inland deliveries of gas/diesel oil (1000t)" , "value" : "IS-IDGD-T" },
+    { "caption" : "Inland deliveries of motor spirit (1000t)" , "value" : "IS-IDMS-T" },
+    { "caption" : "Refinery output of gas/diesel oil (1000t)" , "value" : "IS-ROGD-T" },
+    { "caption" : "Refinery output of motor spirit (1000t)" , "value" : "IS-ROMS-T" }
+  ]
+}

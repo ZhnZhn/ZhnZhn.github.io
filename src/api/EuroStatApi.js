@@ -10,12 +10,21 @@ const EuroStatApi = {
   getRequestUrl(option){
     const { group, metric, geo } = option;
 
-    let   _param = `geo=${geo}`
-    if (metric){
-      _param = `${_param}&indic=${metric}`
+    let _param = `geo=${geo}`
+      , _group;
+
+    if (group){
+      _group = `${group}?`;
+      if (metric){
+        _param = `${_param}&indic=${metric}`;
+      }
+    } else {
+      _group = ( metric.indexOf('?') === -1) ? `${metric}?` : metric ;
+      _param = `&${_param}`;
     }
-    
-    return `${rootUrl}${group}?${_param}${queryTail}`;
+
+
+    return `${rootUrl}${_group}${_param}${queryTail}`;
   },
 
   checkResponse(json) {

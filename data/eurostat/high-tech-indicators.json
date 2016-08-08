@@ -1,0 +1,11 @@
+{
+  "indicators" : [
+    { "caption" : "Venture Capital Investments, % of GDP", "value" : "tin00141?expend=INV_VEN&unit=PC_GDP" },
+    { "caption" : "High-Tech Export, % of exports", "value" : "tin00140?unit=PC" },
+    { "caption" : "Employment in High and Medium-High Technology Manufacturing Sectors", "value" : "tsc00011?unit=PC_EMP&sex=T&nace_r2=C_HTC_MH" },
+    { "caption" : "Employment in Knowledge-Intensive Service Sectors", "value" : "tsc00011?unit=PC_EMP&sex=T&nace_r2=KIS" },
+    { "caption" : "Human Resources in Science and Technology, Total", "value" : "tsc00025?unit=PC_ACT&category=HRST&age=Y25-64&sex=T" },
+    { "caption" : "Patent Applications to the European Patent Office (EPO) by Priority Year, Number ", "value" : "tsc00009?unit=NR" },
+    { "caption" : "High-Tech Patent Applications to the European Patent Office (EPO) by Priority Year, per M inhabitans ", "value" : "tsc00009?unit=P_MHAB&ipc=HT" }
+  ]
+}
