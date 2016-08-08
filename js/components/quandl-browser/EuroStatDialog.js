@@ -105,7 +105,10 @@ var EuroStatDialog = _react2.default.createClass(_extends({
       loadId: loadId,
       itemCaption: this.one.caption,
       title: this.one.caption,
-      subtitle: group.caption + ':' + metric.caption
+      subtitle: group.caption + ':' + metric.caption,
+      alertItemId: this.one.caption + ':' + metric.caption,
+      alertGeo: this.one.caption,
+      alertMetric: metric.caption
     };
   },
   _handlerClose: function _handlerClose() {

@@ -81,7 +81,9 @@ const BrowserSlice = {
     })
   },
   onLoadBrowserDynamicFailed(option){
-    option.alertItemId = option.caption;
+    option.alertItemId = (option.alertItemId)
+              ? option.alertItemId
+              : option.caption;
     this.showAlertDialog(option);
   }
 

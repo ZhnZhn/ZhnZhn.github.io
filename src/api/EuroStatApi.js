@@ -5,6 +5,11 @@ const rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
 const REQUEST_ERROR = 'Request Error'
     , MESSAGE_HEADER = '400 : Bad Request\n';
 
+const _crDetailMsg = function(option){
+  const {alertGeo='', alertMetric=''} = option
+  return `\n\nIt seems country-dataset doesn't exsist.\n${alertGeo}:${alertMetric}`
+}
+
 const EuroStatApi = {
 
   getRequestUrl(option){
@@ -27,11 +32,14 @@ const EuroStatApi = {
     return `${rootUrl}${_group}${_param}${queryTail}`;
   },
 
-  checkResponse(json) {
+  checkResponse(json, option) {
     const { error } = json
     if ( error ){
        if ( error.label ) {
-          throw { errCaption : REQUEST_ERROR, message : MESSAGE_HEADER + error.label }
+          throw {
+              errCaption : REQUEST_ERROR,
+              message : MESSAGE_HEADER + error.label + _crDetailMsg(option)
+          }
        } else {
           throw { errCaption : REQUEST_ERROR, message : '' }
        }

@@ -34,7 +34,7 @@ const EuroStatDialog = React.createClass({
     }
     return true;
   },
-  
+
   _handlerSelectOne(one){
     this.one = one;
   },
@@ -68,7 +68,10 @@ const EuroStatDialog = React.createClass({
       loadId : loadId,
       itemCaption: this.one.caption,
       title : this.one.caption,
-      subtitle : `${group.caption}:${metric.caption}`
+      subtitle : `${group.caption}:${metric.caption}`,
+      alertItemId : `${this.one.caption}:${metric.caption}`,
+      alertGeo : this.one.caption,
+      alertMetric : metric.caption
     }
   },
 

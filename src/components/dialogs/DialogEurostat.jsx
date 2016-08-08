@@ -69,7 +69,10 @@ const DialogEurostat = React.createClass({
       loadId : loadId,
       itemCaption: this.one.caption,
       title : this.one.caption,
-      subtitle : this.two.caption
+      subtitle : this.two.caption,
+      alertItemId : `${this.one.caption}:${this.two.caption}`,
+      alertGeo : this.one.caption,
+      alertMetric : this.two.caption
     }
   },
 

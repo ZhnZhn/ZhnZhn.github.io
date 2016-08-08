@@ -22,6 +22,7 @@ var styles = _DialogStyles2.default;
 
 var Styles = {
   CAPTION: {
+    display: 'inline-block',
     width: '400px',
     paddingLeft: '10px',
     color: '#F44336',
@@ -43,6 +44,8 @@ var Styles = {
   }
 };
 
+var ELLIPSIS = '...';
+
 var AlertDialog = _react2.default.createClass({
   displayName: 'AlertDialog',
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
@@ -59,7 +62,7 @@ var AlertDialog = _react2.default.createClass({
     var alertCaption = data.alertCaption;
     var alertItemId = data.alertItemId;
     var alertDescr = data.alertDescr;
-
+    var _alertItemId = alertItemId.substring(0, 20) + ELLIPSIS;
     return _react2.default.createElement(
       _ModalDialog2.default,
       {
@@ -71,13 +74,13 @@ var AlertDialog = _react2.default.createClass({
         'div',
         { style: styles.rowDiv, key: '1' },
         _react2.default.createElement(
-          'p',
+          'span',
           { style: Styles.CAPTION },
           alertCaption + ': ',
           _react2.default.createElement(
             'span',
-            { style: Styles.ITEM_ID },
-            alertItemId
+            { style: Styles.ITEM_ID, title: alertItemId },
+            _alertItemId
           )
         )
       ),

@@ -7,6 +7,7 @@ const styles = DialogStyles;
 
 const Styles = {
   CAPTION : {
+    display : 'inline-block',
     width : '400px',
     paddingLeft : '10px',
     color : '#F44336',
@@ -28,6 +29,8 @@ const Styles = {
   }
 }
 
+const ELLIPSIS = '...';
+
 const AlertDialog = React.createClass({
 
   shouldComponentUpdate(nextProps, nextState){
@@ -40,6 +43,7 @@ const AlertDialog = React.createClass({
   render(){
     const {isShow, data, onClose} = this.props
         , {alertCaption, alertItemId, alertDescr} = data
+        , _alertItemId = alertItemId.substring(0,20) + ELLIPSIS
     return (
       <ModalDialog
         caption="Alert"
@@ -47,10 +51,12 @@ const AlertDialog = React.createClass({
         onClose={onClose}
       >
          <div style={styles.rowDiv} key="1">
-            <p style={Styles.CAPTION}>
+            <span style={Styles.CAPTION}>
               {alertCaption + ': '}
-              <span style={Styles.ITEM_ID}>{alertItemId}</span>
-            </p>
+              <span style={Styles.ITEM_ID} title={alertItemId}>
+                {_alertItemId}
+              </span>
+            </span>
          </div>
          <div style={styles.rowDiv} key="2">
             <p style={Styles.DESCR}>{alertDescr}</p>

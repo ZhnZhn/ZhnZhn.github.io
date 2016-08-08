@@ -35,7 +35,7 @@ var fnFetch = exports.fnFetch = function fnFetch(_ref) {
       var limitRemaining = _ref3[0];
       var json = _ref3[1];
 
-      if (onCheckResponse(json)) {
+      if (onCheckResponse(json, option)) {
          option.limitRemaining = limitRemaining;
          onFetch({ json: json, option: option, onCompleted: onCompleted });
       }

@@ -129,7 +129,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
   },
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_FAILED, option);
-    option.alertItemId = option.value;
+    option.alertItemId = option.alertItemId ? option.alertItemId : option.value;
     this.showAlertDialog(option);
     _fnLogLoadError(option);
   },
