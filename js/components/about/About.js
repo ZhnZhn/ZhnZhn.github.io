@@ -298,7 +298,12 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
-              'A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings. Settings saves in browser\'s memory only for current WEB session.'
+              'A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings. Settings saves in browser\'s memory only for current WEB session.',
+              _react2.default.createElement(
+                'p',
+                null,
+                'Premium Free Sample Data can be requested only with Quandl Api Key.'
+              )
             )
           ),
           _react2.default.createElement('br', null),

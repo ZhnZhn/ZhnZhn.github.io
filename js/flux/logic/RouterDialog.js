@@ -8,13 +8,17 @@ var _DialogType = require('../../components/dialogs/DialogType3');
 
 var _DialogType2 = _interopRequireDefault(_DialogType);
 
+var _DialogType3 = require('../../components/dialogs/DialogType4');
+
+var _DialogType4 = _interopRequireDefault(_DialogType3);
+
 var _DialogType4A = require('../../components/dialogs/DialogType4A');
 
 var _DialogType4A2 = _interopRequireDefault(_DialogType4A);
 
-var _DialogType3 = require('../../components/dialogs/DialogType5');
+var _DialogType5 = require('../../components/dialogs/DialogType5');
 
-var _DialogType4 = _interopRequireDefault(_DialogType3);
+var _DialogType6 = _interopRequireDefault(_DialogType5);
 
 var _DialogEurostat = require('../../components/dialogs/DialogEurostat');
 
@@ -50,8 +54,9 @@ var RouterDialog = {
   'DEFAULT': _DialogType2.default,
 
   DialogType3: _DialogType2.default,
+  DialogType4: _DialogType4.default,
   DialogType4A: _DialogType4A2.default,
-  DialogType5: _DialogType4.default,
+  DialogType5: _DialogType6.default,
   DialogEurostat: _DialogEurostat2.default,
   UNCommodityTradeDialog: _UNCommodityTradeDialog2.default,
   BigMacDialog: _BigMacDialog2.default,

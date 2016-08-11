@@ -61,6 +61,11 @@ var styles = {
 };
 
 var BrowserConfig = {
+  EUROSTAT: {
+    browserType: 'ES',
+    caption: 'European Statistics',
+    sourceMenuUrl: './data/eurostat/source-menu.json'
+  },
   GOOGLE: {
     browserType: 'QD',
     caption: 'Quandl Google Stocks',
@@ -71,10 +76,10 @@ var BrowserConfig = {
     caption: 'Quandl Yahoo Stocks',
     sourceMenuUrl: './data/yahoo/source-menu.json'
   },
-  EUROSTAT: {
-    browserType: 'ES',
-    caption: 'European Statistics',
-    sourceMenuUrl: './data/eurostat/source-menu.json'
+  PREMIUM_SAMPLE: {
+    browserType: 'QPS',
+    caption: 'Quandl Premium Sample',
+    sourceMenuUrl: './data/quandl-sample/source-menu.json'
   }
 };
 

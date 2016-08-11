@@ -77,8 +77,6 @@ var fnFetchToChart = function fnFetchToChart(_ref2) {
 
 var loadQuandl = function loadQuandl(option, onCompleted, onAdded, onFailed) {
   var parentId = _ChartStore2.default.isLoadToChart();
-  option.apiKey = _ChartStore2.default.getQuandlKey();
-
   if (!parentId) {
     _loadToChartComp(option, onCompleted, onFailed);
   } else {

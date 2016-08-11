@@ -1,5 +1,6 @@
 
 import DialogType3 from '../../components/dialogs/DialogType3';
+import DialogType4 from '../../components/dialogs/DialogType4';
 import DialogType4A from '../../components/dialogs/DialogType4A';
 import DialogType5 from '../../components/dialogs/DialogType5';
 import DialogEurostat from '../../components/dialogs/DialogEurostat';
@@ -15,6 +16,7 @@ const RouterDialog = {
   'DEFAULT' : DialogType3,
 
   DialogType3 : DialogType3,
+  DialogType4 : DialogType4,
   DialogType4A : DialogType4A,
   DialogType5 : DialogType5,
   DialogEurostat : DialogEurostat,

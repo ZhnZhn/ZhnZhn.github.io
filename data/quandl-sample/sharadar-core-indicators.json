@@ -1,0 +1,13 @@
+{
+  "indicators" : [
+    { "caption" : "Earning Before Interest & Taxes (EBIT)", "value" : "EBIT_MRQ" },
+    { "caption" : "Earning per Basic Share", "value" : "EPS_MRQ" },
+    { "caption" : "Capital Expenditure", "value" : "CAPEX_MRQ" },
+    { "caption" : "Dividends per Basic Common Share", "value" : "DPS_MRQ" },
+    { "caption" : "Gross Profit", "value" : "GP_MRQ" },
+    { "caption" : "Net Cash Flow from Operations", "value" : "NCFO_MRQ" },
+    { "caption" : "Revenues", "value" : "REVENUE_MRQ" },        
+    { "caption" : "Shareholders Equity", "value" : "EQUITY_MRQ" },
+    { "caption" : "Total Assets", "value" : "ASSETS_MRQ" }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "menu" : [
+    {
+      "caption" : "Stocks",
+      "items" : [
+        { "id" : "QPS_STOCKS" }
+      ]
+    }
+  ],
+  "items" : {
+    "QPS_STOCKS" : {
+      "type" : "QPS_STOCKS",
+      "menuTitle" : "Sharadar : US Core",
+      "dialogCaption" : "Core US Fundamentals",
+      "chartContainerCaption" : "Quandl : Sharadar : Core US Fundamentals",
+      "dialogType" : "DialogType4",
+      "dialogProps" : {
+        "descrUrl": "./data/quandl-sample/sharadar-core.html",
+        "nInitFromDate" : 10,
+        "oneCaption" : "Stock",
+        "oneURI" : "./data/quandl-sample/sharadar-core-stocks.json",
+        "oneJsonProp" : "stocks",
+        "twoCaption" : "Indicator",
+        "twoURI" : "./data/quandl-sample/sharadar-core-indicators.json",
+        "twoJsonProp" : "indicators",
+        "valueFn" : "RPrefixOneTwo",
+        "valueFnPrefix" : "SF1",
+        "loadId" : "Q",
+        "dataColumn" : 1,
+        "isPremium" : true
+      }
+    }
+  }
+}

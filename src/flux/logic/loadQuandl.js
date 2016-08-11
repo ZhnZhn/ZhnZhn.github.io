@@ -46,13 +46,11 @@ const fnFetchToChart = function({ json, option, onCompleted }){
 
 const loadQuandl = function(option, onCompleted, onAdded, onFailed){
   const parentId = ChartStore.isLoadToChart();
-  option.apiKey = ChartStore.getQuandlKey();
-
   if (!parentId){
-    _loadToChartComp(option, onCompleted, onFailed);
+     _loadToChartComp(option, onCompleted, onFailed);
   } else {
-    option.parentId = parentId;
-    _loadToChart(option, onAdded, onFailed);
+     option.parentId = parentId;
+     _loadToChart(option, onAdded, onFailed);
   }
 }
 

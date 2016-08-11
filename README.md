@@ -19,7 +19,8 @@ In that case of loading data from [Quandl](https://www.quandl.com) data provider
 for access without Api Key exists some restriction on frequency and amount queries (50 calls per day).
 
 A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings.  
-Settings saves in browser's memory only for current WEB session.
+Settings saves in browser's memory only for current WEB session.  
+Premium Free Sample Data can be requested only with Quandl Api Key.
 
 For loading data from [Eurostat](http://ec.europa.eu/eurostat/web/main/home) data provider does not exist any restriction.  
 

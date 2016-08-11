@@ -185,6 +185,7 @@ const About = React.createClass({
            <Token color="gray">
              A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings.
              Settings saves in browser's memory only for current WEB session.
+             <p>Premium Free Sample Data can be requested only with Quandl Api Key.</p>
            </Token>
          </p>
          <br/>

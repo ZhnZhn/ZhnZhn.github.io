@@ -81,8 +81,11 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function () {
 
   option.key = key;
   this.isShouldEmit = true;
+  option.apiKey = _ChartStore2.default.getQuandlKey();
 
-  if (isDoublingLoad) {
+  if (option.isPremium && !option.apiKey) {
+    this.cancelLoad(option, _Msg2.default.Alert.PREMIUM_WITHOUT_KEY, false);
+  } else if (isDoublingLoad) {
     this.cancelLoad(option, _Msg2.default.Alert.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta) {
     this.cancelLoad(option, _Msg2.default.Alert.DOUBLE_LOAD_META, false);
