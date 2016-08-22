@@ -1,0 +1,87 @@
+{
+  "metrics" : [
+    {
+      "caption" : "Aggregate Coal Mine Average Employees", "value" : "AVERAGE_EMPLOYEES",
+      "columns" : [
+        { "caption" : "Surface : Annual" , "value" : "SUR_A" },
+        { "caption" : "Underground : Annual" , "value" : "UND_A" },
+        { "caption" : "Total : Annual" , "value" : "TOT_A" }
+      ]
+    },{
+      "caption" : "Aggregate Coal Mine Labor Hours", "value" : "LABOR_HOURS",
+      "columns" : [
+        { "caption" : "Surface : Annual" , "value" : "SUR_A" },
+        { "caption" : "Underground : Annual" , "value" : "UND_A" },
+        { "caption" : "Total : Annual" , "value" : "TOT_A" }
+      ]
+    },{
+      "caption" : "Aggregate Coal Mine Productivity", "value" : "PRODUCTIVITY",
+      "columns" : [
+        { "caption" : "Surface : Annual" , "value" : "SUR_A" },
+        { "caption" : "Underground : Annual" , "value" : "UND_A" },
+        { "caption" : "Total : Annual" , "value" : "TOT_A" }
+      ]
+    },{
+      "caption" : "Average Price By Rank", "value" : "PRICE_BY_RANK",
+      "columns" : [
+        { "caption" : "All Coal : Annual", "value" : "TOT_A" },
+        { "caption" : "Anthracite : Annual", "value" : "ANT_A" },
+        { "caption" : "Bituminous : Annual", "value" : "BIT_A" },
+        { "caption" : "Subbituminous : Annual", "value" : "SUB_A" },
+        { "caption" : "Lignite : Annual", "value" : "LIG_A" }
+      ]
+    },{
+      "caption" : "Market Average Price", "value" : "MARKET_PRICE",
+      "columns" : [
+        { "caption" : "Captive : Annual", "value" : "CAP_A" },
+        { "caption" : "Open Market : Annual", "value" : "OPM_A" }
+      ]
+    },{
+      "caption" : "Market Sales", "value" : "MARKET_SALES",
+      "columns" : [
+        { "caption" : "Captive : Annual", "value" : "CAP_A" },
+        { "caption" : "Open Market : Annual", "value" : "OPM_A" }
+      ]
+    },{
+      "caption" : "Price : Electric Utility", "value" : "COST",
+      "columns" : [
+        { "caption" : "Quarterly 1" , "value" : "1_Q" }
+      ]
+    },{
+      "caption" : "Productive Capacity : Surface", "value" : "PRODUCTIVE_CAP_SUR",
+      "columns" : [
+        { "caption" : "Annual" , "value" : "A" }
+      ]
+    },{
+      "caption" : "Productive Capacity : Underground", "value" : "PRODUCTIVE_CAP_UND",
+      "columns" : [
+        { "caption" : "Annual" , "value" : "A" }
+      ]
+    },{
+      "caption" : "Coal Mine Ending Stocks : Total", "value" : "PROD_DIST_STOCKS_TOT",
+      "columns" : [
+        { "caption" : "Annual" , "value" : "A" }
+      ]
+    },{
+      "caption" : "Productive Capacity : Total", "value" : "PRODUCTIVE_CAP_TOT",
+      "columns" : [
+        { "caption" : "Annual" , "value" : "A" }
+      ]
+    },{
+      "caption" : "Recoverable Reserves at Producing Mines : Surface", "value" : "RECOVER_RESERVE_SUR",
+      "columns" : [
+        { "caption" : "Annual" , "value" : "A" }
+      ]
+    },{
+      "caption" : "Recoverable Reserves at Producing Mines : Underground", "value" : "RECOVER_RESERVE_UND",
+      "columns" : [
+        { "caption" : "Annual" , "value" : "A" }
+      ]
+    },{
+      "caption" : "Recoverable Reserves at Producing Mines : Total", "value" : "RECOVER_RESERVE_TOT",
+      "columns" : [
+        { "caption" : "Annual" , "value" : "A" }
+      ]
+    }
+  ]
+}

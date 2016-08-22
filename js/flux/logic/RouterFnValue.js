@@ -37,6 +37,9 @@ var RouterFnValue = {
   RJodiOil: function RJodiOil(country, product, flow, units) {
     return "JODI/OIL_" + product + flow + units + "_" + country;
   },
+  REiaCoal: function REiaCoal(one, two, three) {
+    return "EIA/COAL_" + two + "_" + one + "_" + three;
+  },
 
   RFutures: function RFutures(prefix, item, month, year) {
     return prefix + "/" + item + month + year;

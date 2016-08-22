@@ -143,7 +143,7 @@ var DialogType5 = _react2.default.createClass(_extends({
           toDate: toDate,
           dataColumn: dataColumn,
           loadId: loadId,
-          title: two.caption + ':' + three.caption,
+          title: two.caption + ' : ' + three.caption,
           subtitle: this.one.caption
         };
       default:

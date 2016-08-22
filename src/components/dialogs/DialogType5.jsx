@@ -83,7 +83,7 @@ const DialogType5 = React.createClass({
            toDate: toDate,
            dataColumn : dataColumn,
            loadId : loadId,
-           title : `${two.caption}:${three.caption}`,
+           title : `${two.caption} : ${three.caption}`,
            subtitle : this.one.caption
          }
      default:
@@ -109,7 +109,7 @@ const DialogType5 = React.createClass({
     const {
            caption, isShow, onShow,
            oneCaption, oneURI, oneJsonProp,
-           twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,           
+           twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , { isShowDate, validationMessages } = this.state

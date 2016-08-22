@@ -84,6 +84,27 @@ const DataQE = {
     },
     dataColumn : 1
   },
+  QE_EIA_COAL : {
+    type : 'QE_EIA_COAL',
+    menuTitle : 'U.S. EIA Coal Mines',
+    dialogCaption : 'U.S. EIA Coal Mines',
+    chartContainerCaption : 'Quandl U.S. Energy Information Administration',
+    dialogType : 'DialogType5',
+    dialogProps : {
+      descrUrl: './data/quandl/eia.html',
+      nInitFromDate : 12,
+      oneCaption : 'Area',
+      oneURI : './data/quandl/eia-coal-areas.json',
+      oneJsonProp : 'areas',
+      twoCaption : 'Metric',
+      twoURI : './data/quandl/eia-coal-metrics.json',
+      twoJsonProp : 'metrics',
+      threeCaption : 'Frequency',
+      valueFn : 'REiaCoal',
+      fnValueType : 'PlusTreeItem',
+      loadId : 'Q'
+    }
+  },
   QE_GLOBAL_INDICATOR : {
       type : 'QE_GLOBAL_INDICATOR',
       menuTitle : 'UN Global Indicator',

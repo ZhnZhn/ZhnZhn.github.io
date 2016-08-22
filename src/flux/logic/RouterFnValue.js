@@ -12,6 +12,7 @@ const RouterFnValue = {
 
   RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`,
   RJodiOil : (country, product, flow, units) => `JODI/OIL_${product}${flow}${units}_${country}`,
+  REiaCoal : (one, two, three) => `EIA/COAL_${two}_${one}_${three}`,
 
   RFutures : (prefix, item, month, year) => `${prefix}/${item}${month}${year}`,
   RWikiFutures : (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`

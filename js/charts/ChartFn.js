@@ -15,6 +15,12 @@ var _Chart2 = _interopRequireDefault(_Chart);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var C = {
+  SERIA_LABEL_CHARS: 12,
+  SERIA_LABELS_IN_ROW: 3,
+  SERIA_LABEL_X_DELTA: 145,
+  SERIA_LABEL_Y_DELTA: 95,
+  SERIA_LABEL_WIDTH: 125,
+  SERIA_LABEL_HEIGHT: 20,
   DATE_PATTERN: '%d-%m-%Y',
   ATTR_LABEL: {
     zIndex: 100
@@ -29,12 +35,11 @@ var ChartFn = {
   addSeriaWithRenderLabel: function addSeriaWithRenderLabel(chart, series, label) {
     var options = chart.options;
 
-    //12symbols
-    var seriesText = label.length > 12 ? label.substring(0, 12) : label,
+    var seriesText = label.length > C.SERIA_LABEL_CHARS ? label.substring(0, C.SERIA_LABEL_CHARS) : label,
         seriesCount = options.zhSeries.count,
-        row = Math.floor(seriesCount / 3),
-        x = 145 + 100 * seriesCount - row * 300,
-        y = 95 + 15 * row;
+        row = Math.floor(seriesCount / C.SERIA_LABELS_IN_ROW),
+        x = C.SERIA_LABEL_X_DELTA + C.SERIA_LABEL_WIDTH * seriesCount - row * (C.SERIA_LABEL_WIDTH * C.SERIA_LABELS_IN_ROW),
+        y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT * row;
 
     chart.addSeries(series, true, true);
     chart.renderer.text(seriesText, x, y).css({ color: options.colors[series._colorIndex], 'font-size': '16px' }).add();

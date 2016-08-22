@@ -54,7 +54,8 @@ const menuQuandl = [
        { id : Quandl.COMMODITY_PRICE },
        { id : Quandl.COMMODITY_TRADE },
        { id : Quandl.JODI_WORLD_GAS },
-       { id : Quandl.JODI_WORLD_OIL }
+       { id : Quandl.JODI_WORLD_OIL },
+       { id : Quandl.EIA_COAL }
      ]
   },{
      caption : 'World Stocks',
