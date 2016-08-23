@@ -162,3 +162,8 @@
   border-top-color: transparent;
   border-radius: 100%;
 }
+
+button::-moz-focus-inner {
+  border : 0;
+  outline: 0;
+}
