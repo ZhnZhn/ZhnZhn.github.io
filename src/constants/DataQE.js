@@ -86,8 +86,8 @@ const DataQE = {
   },
   QE_EIA_COAL : {
     type : 'QE_EIA_COAL',
-    menuTitle : 'U.S. EIA Coal Mines',
-    dialogCaption : 'U.S. EIA Coal Mines',
+    menuTitle : 'U.S. EIA Coal Mining',
+    dialogCaption : 'U.S. EIA Coal Mining',
     chartContainerCaption : 'Quandl U.S. Energy Information Administration',
     dialogType : 'DialogType5',
     dialogProps : {
