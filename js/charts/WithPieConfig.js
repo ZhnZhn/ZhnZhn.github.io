@@ -25,7 +25,8 @@ var WithPieConfig = {
       credits: _Chart2.default.fCreditsRightBottom(),
       title: _Chart2.default.fTitle({ y: _Chart2.default.SEMIDONUT_TITLE_Y }),
       subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.SEMIDONUT_SUBTITLE_Y }),
-      legend: _Chart2.default.fLegend()
+      legend: _Chart2.default.fLegend(),
+      navigation: _Chart2.default.fNavigation()
     };
   },
   fInnerPieSeria: function fInnerPieSeria(_ref) {

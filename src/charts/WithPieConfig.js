@@ -8,12 +8,13 @@ const WithPieConfig = {
      zhSeries : {
        count : 0
      },
-     zhDetailCharts : []  ,
+     zhDetailCharts : [],
 
      credits : Chart.fCreditsRightBottom(),
      title : Chart.fTitle({ y:Chart.SEMIDONUT_TITLE_Y }),
      subtitle : Chart.fSubtitle({ y:Chart.SEMIDONUT_SUBTITLE_Y }),
-     legend : Chart.fLegend()
+     legend : Chart.fLegend(),
+     navigation : Chart.fNavigation()
    }
 },
 

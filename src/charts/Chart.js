@@ -170,6 +170,14 @@ const Chart = {
     }
  },
 
+ fNavigation(){
+   return {     
+     buttonOptions : {
+       y : 5
+     }
+   }
+ },
+
 fBaseConfig(){
   return {
     zhSeries : {

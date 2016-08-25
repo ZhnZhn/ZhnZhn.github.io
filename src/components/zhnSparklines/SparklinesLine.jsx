@@ -1,8 +1,7 @@
 import React from 'react';
 
-class SparklinesLine extends React.Component {
-    render() {
-        const { points, width, height, margin, color, style } = this.props
+const SparklinesLine = (props) => {
+        const { points=[], height, margin, color, style } = props
             , linePoints = points
                 .map((p) => [p.x, p.y])
                 .reduce((a, b) => a.concat(b))
@@ -32,7 +31,6 @@ class SparklinesLine extends React.Component {
                 <polyline points={linePoints.join(' ')} style={lineStyle} />
             </g>
         )
-    }
 }
 
 SparklinesLine.propTypes = {

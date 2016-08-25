@@ -7,30 +7,49 @@ import SparklinesBars from './SparklinesBars';
 
 import SparklinesReferenceLine from './SparklinesReferenceLine';
 
-//import SparklinesCurve from './SparklinesCurve';
-//import SparklinesNormalBand from './SparklinesNormalBand';
-
 import dataToPoints from './dataProcessing/dataToPoints';
 import shallowCompare from 'react-addons-shallow-compare';
 
+const DEFAULT_DATA = []
+    , DEFAULT_WIDTH=240
+    , DEFAULT_HEIGHT=60
+    , DEFAULT_RATIO='none'
+    , DEFAULT_MARGIN = 2
 
-class Sparklines extends React.Component {
-    constructor (props) {
-        super(props);
-    }
+
+const Sparklines = React.createClass({
+     propTypes : {
+        data: React.PropTypes.array,
+        limit: React.PropTypes.number,
+        width: React.PropTypes.number,
+        height: React.PropTypes.number,
+        svgWidth: React.PropTypes.number,
+        svgHeight: React.PropTypes.number,
+        preserveAspectRatio: React.PropTypes.string,
+        margin: React.PropTypes.number,
+        style: React.PropTypes.object,
+        min: React.PropTypes.number,
+        max: React.PropTypes.number
+     },
 
     shouldComponentUpdate(nextProps) {
         return shallowCompare(this, nextProps);
-    }
+    },
 
     render() {
-        const { data, limit, width, height, svgWidth, svgHeight, preserveAspectRatio, margin, style, max, min } = this.props;
+        const {
+               data=DEFAULT_DATA, limit,
+               width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
+               svgWidth, svgHeight,
+               preserveAspectRatio=DEFAULT_RATIO,
+               margin=DEFAULT_MARGIN, style, max, min
+             } = this.props;
 
         if (data.length === 0) return null;
 
-        const points = dataToPoints({ data, limit, width, height, margin, max, min });
+        const points = dataToPoints({ data, limit, width, height, margin, max, min })
+            , svgOpts = { style: style, viewBox: `0 0 ${width} ${height}`, preserveAspectRatio: preserveAspectRatio };
 
-        const svgOpts = { style: style, viewBox: `0 0 ${width} ${height}`, preserveAspectRatio: preserveAspectRatio };
         if (svgWidth > 0) svgOpts.width = svgWidth;
         if (svgHeight > 0) svgOpts.height = svgHeight;
 
@@ -42,31 +61,6 @@ class Sparklines extends React.Component {
             </svg>
         );
     }
-}
-
-Sparklines.propTypes = {
-    data: React.PropTypes.array,
-    limit: React.PropTypes.number,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    svgWidth: React.PropTypes.number,
-    svgHeight: React.PropTypes.number,
-    preserveAspectRatio: React.PropTypes.string,
-    margin: React.PropTypes.number,
-    style: React.PropTypes.object,
-    min: React.PropTypes.number,
-    max: React.PropTypes.number
-};
-
-Sparklines.defaultProps = {
-    data: [],
-    width: 240,
-    height: 60,
-    //Scale the graphic content of the given element non-uniformly if necessary such that the element's bounding box exactly matches the viewport rectangle.
-    preserveAspectRatio: 'none', //https://www.w3.org/TR/SVG/coords.html#PreserveAspectRatioAttribute
-    margin: 2
-};
+})
 
 export { Sparklines, SparklinesLine, SparklinesSpots, SparklinesSpot, SparklinesBars, SparklinesReferenceLine }
-
-//export { Sparklines, SparklinesLine, SparklinesCurve, SparklinesBars, SparklinesSpots, SparklinesReferenceLine, SparklinesNormalBand }

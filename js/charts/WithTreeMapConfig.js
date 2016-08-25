@@ -30,7 +30,8 @@ var WithTreeMapConfig = {
       },
       title: _Chart2.default.fTitle({ y: _Chart2.default.TREEMAP_TITLE_Y }),
       subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.TREEMAP_SUBTITLE_Y }),
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnTreeMapPointFormatter)
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnTreeMapPointFormatter),
+      navigation: _Chart2.default.fNavigation()
     };
   },
   fCreateTreeMapSeria: function fCreateTreeMapSeria(zhSeriaId, data) {

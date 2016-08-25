@@ -1,30 +1,25 @@
 import React from 'react';
 import calcDirection from './dataProcessing/calcDirection';
 
-class SparklinesSpot extends React.Component {
+const SparklinesSpot = (props) => {
+  const {
+          points, size, style, spotColors,
+          pointIndex
+        } = props
+      , pointSpot = (
+          <circle
+             cx={points[pointIndex].x}
+             cy={points[pointIndex].y}
+             r={size}
+             style={style || { fill: spotColors[calcDirection(points, pointIndex)] }}
+          />
+        );
 
-    render() {
-
-        const {
-                points, width, height,
-                size, style, spotColors,
-                pointIndex
-              } = this.props
-            , pointSpot = (
-                <circle
-                   cx={points[pointIndex].x}
-                   cy={points[pointIndex].y}
-                   r={size}
-                   style={style || { fill: spotColors[calcDirection(points, pointIndex)] }}
-                />
-              );
-
-        return (
-            <g>
-              {pointSpot}
-            </g>
-        )
-    }
+    return (
+        <g>
+          {pointSpot}
+        </g>
+    )
 }
 
 SparklinesSpot.propTypes = {

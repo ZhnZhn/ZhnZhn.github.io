@@ -1,34 +1,37 @@
 import React from 'react';
 import calcDirection from './dataProcessing/calcDirection';
 
-class SparklinesBars extends React.Component {
-    render() {
+const SparklinesBars = (props) => {
+  const { points=[], height, style={}, barWidth, pointIndex=-1, barStrokeColors } = props
+      , { strokeWidth=0 } = style
+      , _width = barWidth ||
+            (
+              points && points.length >= 2
+                 ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth))
+                 : 0
+            );
 
-        const { points, height, style, barWidth, pointIndex=-1, barStrokeColors } = this.props
-            , strokeWidth = 1 * ((style && style.strokeWidth) || 0)
-            , width = barWidth || (points && points.length >= 2 ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth)) : 0);
-
-        return (
-            <g>
-                {points.map((p, i) => {
-                    const _style = ( i === pointIndex)
-                             ? Object.assign({}, style, { fill: barStrokeColors[calcDirection(points, pointIndex)]} )
-                             : style;
-                    return (
-                      <rect
-                         key={i}
-                         x={Math.ceil(p.x - strokeWidth * i)}
-                         y={Math.ceil(p.y)}
-                         width={Math.ceil(width)}
-                         height={Math.ceil(Math.max(0, height - p.y))}
-                         style={_style}
-                      />
-                    );
-                  }
-                )}
-            </g>
-        )
-    }
+  return (
+      <g>
+          {points.map((p, i) => {
+              const { x, y } = p
+                  , _style = ( i === pointIndex)
+                       ? Object.assign({}, style, { fill: barStrokeColors[calcDirection(points, pointIndex)]} )
+                       : style;
+              return (
+                <rect
+                   key={i}
+                   x={Math.ceil(x - strokeWidth * i)}
+                   y={Math.ceil(y)}
+                   width={Math.ceil(_width)}
+                   height={Math.ceil(Math.max(0, height - y))}
+                   style={_style}
+                />
+              );
+            }
+          )}
+      </g>
+  )
 }
 
 SparklinesBars.propTypes = {

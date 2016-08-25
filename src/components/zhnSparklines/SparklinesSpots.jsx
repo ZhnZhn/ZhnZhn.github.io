@@ -1,42 +1,40 @@
 import React from 'react';
 
-class SparklinesSpots extends React.Component {
+if (!Math.sign) {
+  Math.sign = function(x) { return x > 0 ? 1 : -1; }
+}
 
-    lastDirection(points) {
-        Math.sign = Math.sign || function(x) { return x > 0 ? 1 : -1; }
+const calcEndSpotDirection = function(points) {
+  return points.length < 2
+          ? 0
+          : Math.sign(points[points.length - 2].y - points[points.length - 1].y);
+}
 
-        return points.length < 2
-            ? 0
-            : Math.sign(points[points.length - 2].y - points[points.length - 1].y);
-    }
-
-    render() {
-
-        const { points, width, height, size, style, spotColors } = this.props
-            , startSpot = (
-                     <circle
-                        cx={points[0].x}
-                        cy={points[0].y}
-                        r={size}
-                        style={style}
-                      />
-              )
-            , endSpot = (
-                     <circle
-                        cx={points[points.length - 1].x}
-                        cy={points[points.length - 1].y}
-                        r={size}
-                        style={style || { fill: spotColors[this.lastDirection(points)] }}
-                     />
-              );
-
-        return (
-            <g>
-                {style && startSpot}
-                {endSpot}
-            </g>
+const SparklinesSpots = (props) => {
+  const { points, size, style, spotColors } = props
+      , startSpot = (
+               <circle
+                  cx={points[0].x}
+                  cy={points[0].y}
+                  r={size}
+                  style={style}
+                />
         )
-    }
+      , endSpot = (
+               <circle
+                  cx={points[points.length - 1].x}
+                  cy={points[points.length - 1].y}
+                  r={size}
+                  style={style || { fill: spotColors[calcEndSpotDirection(points)] }}
+               />
+        );
+
+    return (
+        <g>
+            {style && startSpot}
+            {endSpot}
+        </g>
+    )
 }
 
 SparklinesSpots.propTypes = {

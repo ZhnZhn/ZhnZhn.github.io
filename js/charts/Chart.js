@@ -197,6 +197,13 @@ var Chart = {
       y: 15
     };
   },
+  fNavigation: function fNavigation() {
+    return {
+      buttonOptions: {
+        y: 5
+      }
+    };
+  },
   fBaseConfig: function fBaseConfig() {
     return {
       zhSeries: {
