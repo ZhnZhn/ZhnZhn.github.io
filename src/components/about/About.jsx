@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
-import {ChartActionTypes} from '../../flux/actions/ChartActions';
+import { ComponentActionTypes } from '../../flux/actions/ComponentActions';
+import { ChartActionTypes } from '../../flux/actions/ChartActions';
 
 import ScrollPane from '../zhn/ScrollPane';
 import CaptionRow from '../CaptionRow';
@@ -29,10 +29,10 @@ const About = React.createClass({
     }
   },
 
-  componentWillMount: function(){
+  componentWillMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
   },
-  componentWillUnmount: function(){
+  componentWillUnmount(){
     this.unsubscribe();
   },
   _onStore(actionType, data){
@@ -46,14 +46,21 @@ const About = React.createClass({
   },
 
   _handlerClose(){
-    this.setState({isShow : false});
+    this.setState({ isShow : false });
   },
   render(){
-    const classOpen = this.state.isShow ? "show-popup" : null;
-    let styleOpen = this.state.isShow ? {display: 'block'} : {display: 'none'};
-
+    const { isShow } = this.state
+        ,  _classOpen = isShow
+              ? "show-popup"
+              : null
+        , _styleOpen = isShow
+              ? {display: 'block'}
+              : {display: 'none'};
     return (
-      <div className={classOpen} style={Object.assign({}, styles.aboutRootDiv, styleOpen)}>
+      <div
+        className={_classOpen}
+        style={Object.assign({}, styles.aboutRootDiv, _styleOpen)}
+       >
          <CaptionRow
             caption="About"
             onClose={this._handlerClose}
@@ -67,12 +74,12 @@ const About = React.createClass({
              ERC
            </Token>
            <Token color="gray" isFirstBlank={true}>
-             is a economic RESTful client.
+             is an economic RESTful client.
            </Token>
          </p>
          <p>
            <Token color="gray">
-             With it you can view economic free open data from WEB.
+             With it, you can view economic free open data from WEB.
           </Token>
           <br/>
           <Token color="gray">
@@ -115,7 +122,7 @@ const About = React.createClass({
           <p style={{marginTop: '3px'}}>
             <Step step="3" />
             <Token color="black" isFirstBlank={true}>
-               Select params and enter query date in a dragable Dialog
+               Select params and enter query date in a draggable Dialog
             </Token>
           </p>
           <p style={{marginTop: '3px'}}>
@@ -127,7 +134,7 @@ const About = React.createClass({
           <p style={{marginTop: '3px'}}>
              <Step step="5" />
              <Token color="black" isFirstBlank={true}>
-                Also you can export chart to png, jpg, svg, print to pdf
+                Also you can export chart to PNG, JPG, SVG, print to PDF
              </Token>
           </p>
           <p style={{marginTop: '3px'}}>
@@ -144,7 +151,7 @@ const About = React.createClass({
           </p>
           <p>
             <Token color="gray">
-              In one time max three Dalogs can be opened.
+              In one time max three Dialogs can be opened.
             </Token>
           </p>
           <br/>
@@ -153,7 +160,7 @@ const About = React.createClass({
                Attention:
             </Token>
             <Token color="gray" isFirstBlank={true}>
-              For one item from Dialog can be only one Chart in a container. If you want change query parameters for it,
+              For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it,
               close the chart in the container and load data again.
             </Token>
          </p>
@@ -176,16 +183,16 @@ const About = React.createClass({
               Quandl
            </LinkToken>
            <Token color="gray" isFirstBlank={true}>
-              data provider, for accessing without Api Key, exists some restriction on frequency
+              data provider, for accessing without API Key, exists some restriction on frequency
               and amount queries (<Token color="#2f7ed8">50 calls per day</Token><Token color="gray">).</Token>
            </Token>
          </p>
          <br/>
          <p>
            <Token color="gray">
-             A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings.
-             Settings saves in browser's memory only for current WEB session.
-             <p>Premium Free Sample Data can be requested only with Quandl Api Key.</p>
+             A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.
+             Settings save in browser's memory only for a current WEB session.
+             <p>Premium Free Sample Data can be requested only with Quandl API Key.</p>
            </Token>
          </p>
          <br/>
@@ -201,7 +208,7 @@ const About = React.createClass({
               Eurostat
            </LinkToken>
            <Token color="gray" isFirstBlank={true}>
-             data provider does not exist any restriction.
+             does not exist any restrictions.
            </Token>
          </p>
          <IconLogoBar />

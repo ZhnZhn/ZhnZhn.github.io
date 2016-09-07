@@ -60,8 +60,6 @@ var About = _react2.default.createClass({
       isShow: this.props.isShow
     };
   },
-
-
   componentWillMount: function componentWillMount() {
     this.unsubscribe = this.props.store.listen(this._onStore);
   },
@@ -81,12 +79,15 @@ var About = _react2.default.createClass({
     this.setState({ isShow: false });
   },
   render: function render() {
-    var classOpen = this.state.isShow ? "show-popup" : null;
-    var styleOpen = this.state.isShow ? { display: 'block' } : { display: 'none' };
-
+    var isShow = this.state.isShow;
+    var _classOpen = isShow ? "show-popup" : null;
+    var _styleOpen = isShow ? { display: 'block' } : { display: 'none' };
     return _react2.default.createElement(
       'div',
-      { className: classOpen, style: Object.assign({}, styles.aboutRootDiv, styleOpen) },
+      {
+        className: _classOpen,
+        style: Object.assign({}, styles.aboutRootDiv, _styleOpen)
+      },
       _react2.default.createElement(_CaptionRow2.default, {
         caption: 'About',
         onClose: this._handlerClose
@@ -108,7 +109,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray', isFirstBlank: true },
-              'is a economic RESTful client.'
+              'is an economic RESTful client.'
             )
           ),
           _react2.default.createElement(
@@ -117,7 +118,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
-              'With it you can view economic free open data from WEB.'
+              'With it, you can view economic free open data from WEB.'
             ),
             _react2.default.createElement('br', null),
             _react2.default.createElement(
@@ -182,7 +183,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'black', isFirstBlank: true },
-              'Select params and enter query date in a dragable Dialog'
+              'Select params and enter query date in a draggable Dialog'
             )
           ),
           _react2.default.createElement(
@@ -202,7 +203,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'black', isFirstBlank: true },
-              'Also you can export chart to png, jpg, svg, print to pdf'
+              'Also you can export chart to PNG, JPG, SVG, print to PDF'
             )
           ),
           _react2.default.createElement(
@@ -230,7 +231,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
-              'In one time max three Dalogs can be opened.'
+              'In one time max three Dialogs can be opened.'
             )
           ),
           _react2.default.createElement('br', null),
@@ -245,7 +246,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray', isFirstBlank: true },
-              'For one item from Dialog can be only one Chart in a container. If you want change query parameters for it, close the chart in the container and load data again.'
+              'For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it, close the chart in the container and load data again.'
             )
           ),
           _react2.default.createElement(
@@ -278,7 +279,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray', isFirstBlank: true },
-              'data provider, for accessing without Api Key, exists some restriction on frequency and amount queries (',
+              'data provider, for accessing without API Key, exists some restriction on frequency and amount queries (',
               _react2.default.createElement(
                 _Token2.default,
                 { color: '#2f7ed8' },
@@ -298,11 +299,11 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
-              'A Quandl Api Key, for using with ERC, can be set in dialog Settings/User Settings. Settings saves in browser\'s memory only for current WEB session.',
+              'A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings. Settings save in browser\'s memory only for a current WEB session.',
               _react2.default.createElement(
                 'p',
                 null,
-                'Premium Free Sample Data can be requested only with Quandl Api Key.'
+                'Premium Free Sample Data can be requested only with Quandl API Key.'
               )
             )
           ),
@@ -327,7 +328,7 @@ var About = _react2.default.createClass({
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray', isFirstBlank: true },
-              'data provider does not exist any restriction.'
+              'does not exist any restrictions.'
             )
           ),
           _react2.default.createElement(_IconLogoBar2.default, null)

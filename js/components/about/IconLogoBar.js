@@ -42,7 +42,11 @@ var IconLogoBar = function IconLogoBar(props) {
     'div',
     { style: STYLE.ROOT },
     _react2.default.createElement(_IconQuandl2.default, null),
-    _react2.default.createElement(_IconGitHub2.default, null),
+    _react2.default.createElement(_IconGitHub2.default, {
+      className: 'icon__github',
+      title: 'GitHub ERC',
+      uri: 'https://github.com/ZhnZhn/ZhnZhn.github.io'
+    }),
     _react2.default.createElement(_IconReact2.default, null),
     _react2.default.createElement(_IconHighcharts2.default, null),
     _react2.default.createElement(_IconEurostat2.default, null)

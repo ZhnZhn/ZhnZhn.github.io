@@ -31,6 +31,7 @@ var SvgHrzResize = _react2.default.createClass({
     this.delta = 0;
     this.step = 1;
     this.countStep = 0;
+    this.isResizeAfter = typeof this.props.onResizeAfter === 'function' ? true : false;
     return {};
   },
   componentDidMount: function componentDidMount() {
@@ -84,7 +85,7 @@ var SvgHrzResize = _react2.default.createClass({
     this.step = 1;
     this.countStep = 0;
 
-    if (isOnResizeAfter) {
+    if (isOnResizeAfter && this.isResizeAfter) {
       this.props.onResizeAfter(this.currentWidth);
     }
   },

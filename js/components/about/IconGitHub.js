@@ -11,12 +11,16 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var IconGitHub = function IconGitHub(props) {
+  var className = props.className;
+  var title = props.title;
+  var uri = props.uri;
+
   return _react2.default.createElement(
     "a",
     {
-      className: "icon__github",
-      title: "GitHub",
-      href: "https://github.com/ZhnZhn/ZhnZhn.github.io"
+      className: className,
+      title: title,
+      href: uri
     },
     _react2.default.createElement(
       "svg",

@@ -1,6 +1,6 @@
 {
   "name": "erc",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Economic RESTFul Client",
   "main": "index.js",
   "scripts": {
