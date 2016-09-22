@@ -4,9 +4,27 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _WithDnDStyle = require('./with/WithDnDStyle');
+
+var _WithDnDStyle2 = _interopRequireDefault(_WithDnDStyle);
+
+var _createHandlerDnDGroup = require('./with/createHandlerDnDGroup');
+
+var _createHandlerDnDGroup2 = _interopRequireDefault(_createHandlerDnDGroup);
+
+var _createHandlerDnDList = require('./with/createHandlerDnDList');
+
+var _createHandlerDnDList2 = _interopRequireDefault(_createHandlerDnDList);
+
+var _createHandlerDnDItem = require('./with/createHandlerDnDItem');
+
+var _createHandlerDnDItem2 = _interopRequireDefault(_createHandlerDnDItem);
 
 var _Type = require('../../constants/Type');
 
@@ -38,11 +56,17 @@ var _OpenClose = require('../zhn/OpenClose2');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
-var _SvgClose = require('../SvgClose');
+var _WatchItem = require('./WatchItem');
 
-var _SvgClose2 = _interopRequireDefault(_SvgClose);
+var _WatchItem2 = _interopRequireDefault(_WatchItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var DRAG = {
+  GROUP: 'GROUP',
+  LIST: 'LIST',
+  ITEM: 'ITEM'
+};
 
 var styles = {
   browser: {
@@ -57,39 +81,23 @@ var styles = {
     paddingRight: '10px'
   },
   groupDiv: {
+    lineHeight: 2
+  },
+  listDiv: {
     marginLeft: '8px',
     paddingLeft: '12px',
     borderLeft: '1px solid yellow',
     lineHeight: 2
   },
-  itemDiv: {
-    position: 'relative',
-    paddingRight: '40px',
-    lineHeight: 1.4,
-    paddingTop: '5px',
-    paddingBottom: '5px'
-  },
-  itemSpan: {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    width: '100%',
-    maxWidth: '250px',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
-
-  },
   itemNotSelected: {
     borderBottom: '1px solid rgba(128, 192, 64, 0.6)',
     marginRight: '10px'
-  },
-  svgClose: {
-    position: 'absolute',
-    right: 0
   }
 };
 
-var WatchBrowser = _react2.default.createClass({
-  displayName: 'WatchBrowser',
+var WatchBrowser = _react2.default.createClass(_extends({
+  displayName: 'WatchBrowser'
+}, _WithDnDStyle2.default, (0, _createHandlerDnDGroup2.default)(DRAG, _WatchActions2.default), (0, _createHandlerDnDList2.default)(DRAG, _WatchActions2.default), (0, _createHandlerDnDItem2.default)(DRAG, _WatchActions2.default), {
   getInitialState: function getInitialState() {
     var store = this.props.store;
 
@@ -132,10 +140,6 @@ var WatchBrowser = _react2.default.createClass({
   _handlerToggleEditMode: function _handlerToggleEditMode() {
     this.setState({ isModeEdit: !this.state.isModeEdit });
   },
-  _handlerRemoveItem: function _handlerRemoveItem(option, event) {
-    event.stopPropagation();
-    _WatchActions2.default.removeItem(option);
-  },
   _handlerEditGroup: function _handlerEditGroup() {
     _ComponentActions2.default.showModalDialog(_Type.ModalDialog.EDIT_WATCH_GROUP);
   },
@@ -145,6 +149,8 @@ var WatchBrowser = _react2.default.createClass({
   _renderWatchList: function _renderWatchList(watchList) {
     var _this = this;
 
+    var isModeEdit = this.state.isModeEdit;
+
     return watchList.groups.map(function (group, index) {
       var caption = group.caption;
       var lists = group.lists;
@@ -153,8 +159,16 @@ var WatchBrowser = _react2.default.createClass({
         _OpenClose2.default,
         {
           key: index,
+          style: styles.groupDiv,
           caption: caption,
-          isClose: true
+          isClose: true,
+          isDraggable: isModeEdit,
+          option: { caption: caption },
+          onDragStart: _this._handlerDragStartGroup,
+          onDragEnter: _this._handlerDragEnterGroup,
+          onDragOver: _this._handlerDragOverGroup,
+          onDragLeave: _this._handlerDragLeaveGroup,
+          onDrop: _this._handlerDropGroup
         },
         lists && _this._renderLists(lists, caption)
       );
@@ -162,6 +176,8 @@ var WatchBrowser = _react2.default.createClass({
   },
   _renderLists: function _renderLists(lists, groupCaption) {
     var _this2 = this;
+
+    var isModeEdit = this.state.isModeEdit;
 
     return lists.map(function (list, index) {
       var caption = list.caption;
@@ -172,14 +188,28 @@ var WatchBrowser = _react2.default.createClass({
         {
           key: index,
           fillOpen: '#80c040',
-          style: styles.groupDiv,
+          style: styles.listDiv,
           styleNotSelected: styles.itemNotSelected,
           caption: caption,
-          isClose: true
+          isClose: true,
+          isDraggable: isModeEdit,
+          option: { groupCaption: groupCaption, caption: caption },
+          onDragStart: _this2._handlerDragStartList,
+          onDragEnter: _this2._handlerDragEnterList,
+          onDragOver: _this2._handlerDragOverList,
+          onDragLeave: _this2._handlerDragLeaveList,
+          onDrop: _this2._handlerDropList
         },
         items && _this2._renderItems(items, groupCaption, caption)
       );
     });
+  },
+  _handlerClickItem: function _handlerClickItem(item) {
+    _ComponentActions2.default.showModalDialog(_Type.ModalDialog.LOAD_ITEM, item);
+  },
+  _handlerRemoveItem: function _handlerRemoveItem(option, event) {
+    event.stopPropagation();
+    _WatchActions2.default.removeItem(option);
   },
   _renderItems: function _renderItems(items, groupCaption, listCaption) {
     var _this3 = this;
@@ -187,28 +217,23 @@ var WatchBrowser = _react2.default.createClass({
     var isModeEdit = this.state.isModeEdit;
 
     return items.map(function (item, index) {
-      var _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
-      var caption = item.caption;
       var id = item.id;
-      var _btClose = isModeEdit ? _react2.default.createElement(_SvgClose2.default, {
-        style: styles.svgClose,
-        onClose: _this3._handlerRemoveItem.bind(null, { groupCaption: groupCaption, listCaption: listCaption, caption: caption })
-      }) : undefined;
-      return _react2.default.createElement(
-        'div',
-        {
-          key: id,
-          className: _className,
-          onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.LOAD_ITEM, item),
-          style: styles.itemDiv
-        },
-        _react2.default.createElement(
-          'span',
-          { style: styles.itemSpan },
-          caption
-        ),
-        _btClose
-      );
+      var caption = item.caption;
+      var _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
+      return _react2.default.createElement(_WatchItem2.default, {
+        key: id,
+        className: _className,
+        isModeEdit: isModeEdit,
+        item: item,
+        option: { groupCaption: groupCaption, listCaption: listCaption, caption: caption },
+        onClick: _this3._handlerClickItem,
+        onClose: _this3._handlerRemoveItem,
+        onDragStart: _this3._handlerDragStartItem,
+        onDragOver: _this3._handlerDragOverItem,
+        onDragEnter: _this3._handlerDragEnterItem,
+        onDragLeave: _this3._handlerDragLeaveItem,
+        onDrop: _this3._handlerDropItem
+      });
     });
   },
   _renderEditBar: function _renderEditBar(isModeEdit) {
@@ -269,7 +294,7 @@ var WatchBrowser = _react2.default.createClass({
       )
     );
   }
-});
+}));
 
 exports.default = WatchBrowser;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\WatchBrowser.js.map

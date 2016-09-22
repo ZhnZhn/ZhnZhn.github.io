@@ -41,6 +41,7 @@ var ChartType = exports.ChartType = {
 var LoadType = exports.LoadType = {
   Q: 'Q',
   QCT: 'QCT',
-  EU_STAT: 'EU_STAT'
+  EU_STAT: 'EU_STAT',
+  WL: 'WL'
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

@@ -52,8 +52,4 @@ const WatchDefault = {
     ]
 }
 
-WatchDefault.fDefaultGroup = function({caption='Default'}){
-  return { caption }
-}
-
 export default WatchDefault

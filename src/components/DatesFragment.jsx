@@ -55,6 +55,11 @@ const DatesFragment = React.createClass({
         ,  datesMsg = [];
     if (!this.fromDate.isValid()) { datesMsg.push(msgOnNotValidFormat('From Date')); }
     if (!this.toDate.isValid())   { datesMsg.push(msgOnNotValidFormat('To Date')); }
+
+    if (this.fromDate.getValue().trim() > this.toDate.getValue().trim() ) {
+      datesMsg.push('From Date is near that To Date');
+    }
+
     if (datesMsg.length>0){
       return { isValid: false, datesMsg }
     }

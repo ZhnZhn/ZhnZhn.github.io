@@ -10,7 +10,8 @@ const LoadConfig = {
   [LoadType.Q] : loadQuandl,
   [LoadType.QCT] : loadQuandlCommodityTrade,
   [LoadType.EU_STAT] : loadEuroStat,
-  [ChartType.WATCH_LIST] : loadQuandl
+  [ChartType.WATCH_LIST] : loadQuandl,
+  [LoadType.WL] : loadQuandl
 };
 
 export default LoadConfig

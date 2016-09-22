@@ -5,7 +5,7 @@ import WithValidation from '../dialogs/WithValidation';
 import DateUtils from '../../utils/DateUtils';
 
 import ChartActions from '../../flux/actions/ChartActions';
-import {BrowserType} from '../../constants/Type';
+import {BrowserType, LoadType} from '../../constants/Type';
 import ChartType from '../../constants/ChartType';
 
 import ModalDialog from '../zhn/ModalDialog';
@@ -51,7 +51,7 @@ const LoadItemDialog = React.createClass({
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
-          , { title, subtitle, caption, columnName, dataColumn, seriaColumnNames } = data
+          , { id, title, subtitle, caption, columnName, dataColumn, seriaColumnNames } = data
           , { fromDate, toDate } = this.datesFragment.getValues()
           , option = {
              title : title,
@@ -60,6 +60,8 @@ const LoadItemDialog = React.createClass({
              stock: caption,
              fromDate: fromDate,
              toDate: toDate,
+             loadId : LoadType.WL,
+             id,
              columnName,
              dataColumn,
              seriaColumnNames

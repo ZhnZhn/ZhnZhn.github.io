@@ -44,7 +44,7 @@ var _SettingSlice = require('./SettingSlice');
 
 var _SettingSlice2 = _interopRequireDefault(_SettingSlice);
 
-var _WatchListSlice = require('./WatchListSlice');
+var _WatchListSlice = require('../watch-list/WatchListSlice');
 
 var _WatchListSlice2 = _interopRequireDefault(_WatchListSlice);
 

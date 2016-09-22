@@ -24,6 +24,8 @@ const LogicUtils = {
         return _fnCreateQuandlKey(option);
       case LoadType.EU_STAT:
          return _fnCreateEuroStatKey(option);
+      case LoadType.WL:
+         return option.id;      
       default :
         return 'key'
     }

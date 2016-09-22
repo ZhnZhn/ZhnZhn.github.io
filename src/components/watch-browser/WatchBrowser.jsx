@@ -1,5 +1,10 @@
 import React from 'react';
 
+import WithDnDStyle from './with/WithDnDStyle';
+import createHandlerDnDGroup from './with/createHandlerDnDGroup';
+import createHandlerDnDList from './with/createHandlerDnDList';
+import createHandlerDnDItem from './with/createHandlerDnDItem';
+
 import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import WatchActions from '../../flux/actions/WatchActions';
@@ -9,8 +14,14 @@ import CaptionRow from '../CaptionRow';
 import ButtonCircle from '../zhn/ButtonCircle';
 import ScrollPane from '../zhn/ScrollPane';
 import OpenClose2 from '../zhn/OpenClose2';
-import SvgClose from '../SvgClose';
+import WatchItem from './WatchItem';
 
+
+const DRAG = {
+  GROUP : 'GROUP',
+  LIST : 'LIST',
+  ITEM : 'ITEM'
+};
 
 const styles = {
   browser : {
@@ -25,38 +36,26 @@ const styles = {
     paddingRight: '10px'
   },
   groupDiv : {
+    lineHeight : 2
+  },
+  listDiv : {
     marginLeft : '8px',
     paddingLeft : '12px',
     borderLeft : '1px solid yellow',
     lineHeight : 2
   },
-  itemDiv : {
-    position: 'relative',
-    paddingRight: '40px',
-    lineHeight : 1.4,
-    paddingTop : '5px',
-    paddingBottom: '5px'
-  },
-  itemSpan : {
-    display: 'inline-block',
-    verticalAlign : 'middle',
-    width: '100%',
-    maxWidth: '250px',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
-
-  },
   itemNotSelected : {
     borderBottom : '1px solid rgba(128, 192, 64, 0.6)',
     marginRight : '10px'
-  },
-  svgClose : {
-    position: 'absolute',
-    right: 0
   }
 };
 
 const WatchBrowser = React.createClass({
+  ...WithDnDStyle,
+  ...createHandlerDnDGroup(DRAG, WatchActions),
+  ...createHandlerDnDList(DRAG, WatchActions),
+  ...createHandlerDnDItem(DRAG, WatchActions),
+
   getInitialState(){
     const {store} = this.props;
     return {
@@ -95,11 +94,6 @@ const WatchBrowser = React.createClass({
     this.setState({ isModeEdit : !this.state.isModeEdit });
   },
 
-  _handlerRemoveItem(option, event){
-    event.stopPropagation();
-    WatchActions.removeItem(option);
-  },
-
   _handlerEditGroup(){
     ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_GROUP);
   },
@@ -108,13 +102,22 @@ const WatchBrowser = React.createClass({
   },
 
   _renderWatchList(watchList){
+     const { isModeEdit } = this.state;
      return watchList.groups.map((group, index) => {
        const {caption, lists} = group;
        return (
                <OpenClose2
                   key={index}
+                  style={styles.groupDiv}
                   caption={caption}
                   isClose={true}
+                  isDraggable={isModeEdit}
+                  option={{ caption }}
+                  onDragStart={this._handlerDragStartGroup}
+                  onDragEnter={this._handlerDragEnterGroup}
+                  onDragOver={this._handlerDragOverGroup}
+                  onDragLeave={this._handlerDragLeaveGroup}
+                  onDrop={this._handlerDropGroup}
                 >
                 {lists && this._renderLists(lists, caption)}
                 </OpenClose2>
@@ -123,16 +126,24 @@ const WatchBrowser = React.createClass({
   },
 
   _renderLists(lists, groupCaption){
+    const { isModeEdit } = this.state;
     return lists.map((list, index) => {
       const {caption, items} = list;
       return (
         <OpenClose2
            key={index}
            fillOpen={'#80c040'}
-           style={styles.groupDiv}
+           style={styles.listDiv}
            styleNotSelected={styles.itemNotSelected}
            caption={caption}
            isClose={true}
+           isDraggable={isModeEdit}
+           option={{ groupCaption, caption }}
+           onDragStart={this._handlerDragStartList}
+           onDragEnter={this._handlerDragEnterList}
+           onDragOver={this._handlerDragOverList}
+           onDragLeave={this._handlerDragLeaveList}
+           onDrop={this._handlerDropList}
         >
          {items && this._renderItems(items, groupCaption, caption)}
         </OpenClose2>
@@ -140,32 +151,39 @@ const WatchBrowser = React.createClass({
     })
   },
 
+  _handlerClickItem(item){
+    ComponentActions.showModalDialog(ModalDialog.LOAD_ITEM, item);
+  },
+  _handlerRemoveItem(option, event){
+    event.stopPropagation();
+    WatchActions.removeItem(option);
+  },
+
   _renderItems(items, groupCaption, listCaption) {
       const {isModeEdit} = this.state;
       return items.map((item, index) => {
-        const _className = (index % 2) ? 'row__topic__even not-selected' : 'row__topic__odd not-selected'
-            , {caption, id} = item
-            , _btClose = (isModeEdit) ? (
-                 <SvgClose
-                    style={styles.svgClose}
-                    onClose={this._handlerRemoveItem.bind(null, {groupCaption, listCaption, caption})}
-                 />
-               ) : undefined;
+        const { id, caption } = item
+            , _className = (index % 2)
+                 ? 'row__topic__even not-selected'
+                 : 'row__topic__odd not-selected'
         return (
-             <div
+            <WatchItem
                key={id}
                className={_className}
-               onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.LOAD_ITEM, item)}
-               style={styles.itemDiv}
-             >
-               <span style={styles.itemSpan}>
-                 {caption}
-               </span>
-               {_btClose}
-            </div>
-        )
+               isModeEdit={isModeEdit}
+               item={item}
+               option={{ groupCaption, listCaption, caption }}
+               onClick={this._handlerClickItem}
+               onClose={this._handlerRemoveItem}
+               onDragStart={this._handlerDragStartItem}
+               onDragOver={this._handlerDragOverItem}
+               onDragEnter={this._handlerDragEnterItem}
+               onDragLeave={this._handlerDragLeaveItem}
+               onDrop={this._handlerDropItem}
+            />
+        );
       })
-  },
+    },
 
   _renderEditBar(isModeEdit){
     if (isModeEdit){

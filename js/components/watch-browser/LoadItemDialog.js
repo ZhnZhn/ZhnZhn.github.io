@@ -90,6 +90,7 @@ var LoadItemDialog = _react2.default.createClass(_extends({
       var _props = this.props;
       var data = _props.data;
       var onClose = _props.onClose;
+      var id = data.id;
       var title = data.title;
       var subtitle = data.subtitle;
       var caption = data.caption;
@@ -108,6 +109,8 @@ var LoadItemDialog = _react2.default.createClass(_extends({
         stock: caption,
         fromDate: fromDate,
         toDate: toDate,
+        loadId: _Type.LoadType.WL,
+        id: id,
         columnName: columnName,
         dataColumn: dataColumn,
         seriaColumnNames: seriaColumnNames

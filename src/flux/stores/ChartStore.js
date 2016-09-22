@@ -12,7 +12,7 @@ import Factory from '../logic/Factory';
 import BrowserSlice from './BrowserSlice';
 import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
-import WatchListSlice from './WatchListSlice';
+import WatchListSlice from '../watch-list/WatchListSlice';
 import WithLimitRemaining from './WithLimitRemaining';
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';

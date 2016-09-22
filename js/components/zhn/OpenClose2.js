@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -39,7 +41,6 @@ var pathClose = "M 2,2 L 14,8 2,14 2,2";
 
 var OpenClose2 = _react2.default.createClass({
   displayName: 'OpenClose2',
-
   getInitialState: function getInitialState() {
     var isOpen = this.props.isClose ? false : true,
         fillOpen = this.props.fillOpen ? this.props.fillOpen : 'yellow',
@@ -51,20 +52,32 @@ var OpenClose2 = _react2.default.createClass({
       fillClose: fillClose
     };
   },
-
   _handlerClickOpenClose: function _handlerClickOpenClose() {
     this.state.isOpen = !this.state.isOpen;
     this.setState(this.state);
   },
-
   render: function render() {
     var _props = this.props;
     var style = _props.style;
     var styleNotSelected = _props.styleNotSelected;
     var styleCaption = _props.styleCaption;
     var caption = _props.caption;
+    var isDraggable = _props.isDraggable;
+    var option = _props.option;
+    var onDragStart = _props.onDragStart;
+    var onDragEnter = _props.onDragEnter;
+    var onDragOver = _props.onDragOver;
+    var onDragLeave = _props.onDragLeave;
+    var onDrop = _props.onDrop;
     var children = _props.children;
-
+    var _dragOption = isDraggable ? {
+      draggable: true,
+      onDragStart: onDragStart.bind(null, option),
+      onDrop: onDrop.bind(null, option),
+      onDragEnter: onDragEnter,
+      onDragOver: onDragOver,
+      onDragLeave: onDragLeave
+    } : undefined;
 
     var _pathV = void 0,
         _fillV = void 0,
@@ -90,11 +103,11 @@ var OpenClose2 = _react2.default.createClass({
       { style: Object.assign({}, styles.rootDiv, style) },
       _react2.default.createElement(
         'div',
-        {
+        _extends({
           className: 'not-selected',
           style: _styleNotSelected,
           onClick: this._handlerClickOpenClose
-        },
+        }, _dragOption),
         _react2.default.createElement(
           'div',
           { style: styles.divSvg },

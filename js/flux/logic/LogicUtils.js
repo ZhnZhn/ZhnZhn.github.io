@@ -30,6 +30,8 @@ var LogicUtils = {
         return _fnCreateQuandlKey(option);
       case _Type.LoadType.EU_STAT:
         return _fnCreateEuroStatKey(option);
+      case _Type.LoadType.WL:
+        return option.id;
       default:
         return 'key';
     }

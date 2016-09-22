@@ -40,6 +40,9 @@ var styles = {
     textAlign: 'center',
     fontSize: '18px'
   },
+  childrenDiv: {
+    cursor: 'default'
+  },
   commandDiv: {
     cursor: 'default',
     float: 'right',
@@ -54,12 +57,7 @@ var ZhDialog = _react2.default.createClass({
   componentDidMount: function componentDidMount() {
     _Interact2.default.makeDragable(this.domRootDiv);
   },
-  _renderCommandButton: function _renderCommandButton() {
-    var _props = this.props;
-    var commandButtons = _props.commandButtons;
-    var onShowChart = _props.onShowChart;
-    var onClose = _props.onClose;
-
+  _renderCommandButton: function _renderCommandButton(commandButtons, onShowChart, onClose) {
     return _react2.default.createElement(
       'div',
       { style: styles.commandDiv },
@@ -79,13 +77,15 @@ var ZhDialog = _react2.default.createClass({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var caption = _props2.caption;
-    var children = _props2.children;
-    var onClose = _props2.onClose;
+    var _props = this.props;
+    var isShow = _props.isShow;
+    var caption = _props.caption;
+    var children = _props.children;
+    var commandButtons = _props.commandButtons;
+    var onShowChart = _props.onShowChart;
+    var onClose = _props.onClose;
     var _styleShow = isShow ? { display: 'block' } : { display: 'none' };
-    var _classShow = isShow ? 'show-popup' : null;
+    var _classShow = isShow ? 'show-popup' : undefined;
 
     return _react2.default.createElement(
       'div',
@@ -101,17 +101,17 @@ var ZhDialog = _react2.default.createClass({
         { style: styles.captionDiv },
         _react2.default.createElement(
           'span',
-          null,
+          { className: 'not-selected' },
           caption
         ),
         _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
       ),
       _react2.default.createElement(
         'div',
-        { style: { cursor: 'default' } },
+        { style: styles.childrenDiv },
         children
       ),
-      this._renderCommandButton()
+      this._renderCommandButton(commandButtons, onShowChart, onClose)
     );
   }
 });
