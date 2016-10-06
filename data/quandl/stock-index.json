@@ -1,0 +1,30 @@
+{
+  "indexes" : [
+    { "caption" : "Dow Jones" , "value" : "YAHOO/INDEX_DJI" },
+    { "caption" : "Dow Jones (GOOGLE)" , "value" : "GOOG/INDEXDJX_DJI" },
+    { "caption" : "Nyse 100 US" , "value" : "YAHOO/INDEX_NY" },
+    { "caption" : "Nyse Composite" , "value" : "YAHOO/INDEX_NYA" },
+    { "caption" : "S&P 500" , "value" : "YAHOO/INDEX_GSPC" },
+    { "caption" : "S&P 100" , "value" : "YAHOO/INDEX_OEX" },
+    { "caption" : "Russell 3000", "value" : "YAHOO/INDEX_RUA" },
+    { "caption" : "Russell 2000" , "value" : "YAHOO/INDEX_RUT" },
+    { "caption" : "Russell 1000" , "value" : "YAHOO/INDEX_RUI" },
+    { "caption" : "Wilshire 5000 Total Market", "value" : "YAHOO/INDEX_W5000" },
+    { "caption" : "IPC, Mexico" , "value" : "YAHOO/INDEX_MXX" },
+    { "caption" : "MERVAL, Argentina" , "value" : "YAHOO/INDEX_MERV" },
+    { "caption" : "IBOVESPA, Brazil" , "value" : "YAHOO/INDEX_BVSP" },
+    { "caption" : "Euro Stoxx 50" , "value" : "YAHOO/INDEX_STOXX50E" },
+    { "caption" : "DAX, German" , "value" : "YAHOO/INDEX_GDAXI" },
+    { "caption" : "CAC 40, France" , "value" : "YAHOO/INDEX_FCHI" },
+    { "caption" : "IBEX 35, Spain" , "value" : "YAHOO/INDEX_IBEX" },
+    { "caption" : "AEX, Amsterdam" , "value" : "YAHOO/INDEX_AEX" },
+    { "caption" : "Nikkei 500, Japan (NIKKEI)" , "value" : "NIKKEI/500SA" },
+    { "caption" : "Nikkei 225, Japan" , "value" : "YAHOO/INDEX_N225" },
+    { "caption" : "KOSPI, Korea", "value" : "YAHOO/INDEX_KS11" },
+    { "caption" : "Hang Seng, Hong Kong" , "value" : "YAHOO/INDEX_HSI" },
+    { "caption" : "Shanghai Composite, China" , "value" : "YAHOO/INDEX_SSEC" },
+    { "caption" : "Jakarta, Indonesia" , "value" : "YAHOO/INDEX_JKSE" },
+    { "caption" : "SENSEX, India" , "value" : "YAHOO/INDEX_BSESN" },
+    { "caption" : "S&P/ASX 200, Australia" , "value" : "YAHOO/INDEX_AXJO" }
+  ]
+}

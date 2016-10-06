@@ -26,7 +26,7 @@
     { "ticket":"FTAS", "value":"YAHOO/INDEX_FTAS", "caption":"FTSE All-Share Index  (FTAS)" },
     { "ticket":"KLSE", "value":"YAHOO/INDEX_KLSE", "caption":"FTSE Bursa Malaysia Kuala Lumpur Composite Index  (KLSE)" },
     { "ticket":"WICZH_L", "value":"YAHOO/INDEX_WICZH_L", "caption":"FTSE Czech Republic Index (WICZH_L)" },
-    { "ticket":"WIHUN_L", "value":"YAHOO/INDEX_WIHUN_L", "caption":"FTSE HUngary Index (WIHUN_L)" },
+    { "ticket":"WIHUN_L", "value":"YAHOO/INDEX_WIHUN_L", "caption":"FTSE Hungary Index (WIHUN_L)" },
     { "ticket":"FTSEMIB_MI", "value":"YAHOO/INDEX_FTSEMIB_MI", "caption":"FTSE MIB Index  (FTSEMIB_MI)" },
     { "ticket":"WIPOL_L", "value":"YAHOO/INDEX_WIPOL_L", "caption":"FTSE Poland Index (WIPOL_L)" },
     { "ticket":"WITHA_L", "value":"YAHOO/INDEX_WITHA_L", "caption":"FTSE Thailand Index (WITHA_L)" },

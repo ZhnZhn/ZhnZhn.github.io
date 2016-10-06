@@ -10,7 +10,8 @@ var DateUtils = {};
 
 DateUtils.isValidDate = function isValidDate(str) {
 	// STRING FORMAT yyyy-mm-dd
-	if (str == "" || str == null) {
+
+	if (Object.prototype.toString.call(str) !== "[object String]" || !str || str.trim().length !== 10) {
 		return false;
 	}
 

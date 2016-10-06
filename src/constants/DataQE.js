@@ -276,6 +276,20 @@ const DataQE = {
         seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume']
       }
   },
+  QE_STOCK_INDEXES : {
+      type : 'QE_STOCK_INDEXES',
+      menuTitle: 'Indices',
+      dialogCaption : 'Stock Indices',
+      chartContainerCaption : 'Quandl Stock Indices',
+      dialogProps : {
+        descrUrl : './data/yahoo/yahoo.html',
+        optionURI : './data/quandl/stock-index.json',
+        optionsJsonProp : 'indexes',
+        loadId : 'Q',
+        columnName : 'Close',
+        seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume']
+      }
+  },
   QE_UNICORN_RESEARCH : {
     type : 'QE_UNICORN_RESEARCH',
     menuTitle : 'Unicorn Research',

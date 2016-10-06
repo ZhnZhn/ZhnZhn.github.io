@@ -62,6 +62,7 @@ const menuQuandl = [
      items : [
        { id : Quandl.TOKIO_STOCK },
        { id : Quandl.WIKI_STOCK },
+       { id : Quandl.STOCK_INDEXES},
        { id : Quandl.UNICORN_RESEARCH }
      ]
   },{

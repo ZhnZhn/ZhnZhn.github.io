@@ -60,7 +60,8 @@ var AlertDialog = _react2.default.createClass({
     var data = _props.data;
     var onClose = _props.onClose;
     var alertCaption = data.alertCaption;
-    var alertItemId = data.alertItemId;
+    var _data$alertItemId = data.alertItemId;
+    var alertItemId = _data$alertItemId === undefined ? '' : _data$alertItemId;
     var alertDescr = data.alertDescr;
     var _alertItemId = alertItemId.substring(0, 20) + ELLIPSIS;
     return _react2.default.createElement(

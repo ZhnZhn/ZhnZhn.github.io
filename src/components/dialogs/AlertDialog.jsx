@@ -42,7 +42,7 @@ const AlertDialog = React.createClass({
 
   render(){
     const {isShow, data, onClose} = this.props
-        , {alertCaption, alertItemId, alertDescr} = data
+        , {alertCaption, alertItemId='', alertDescr} = data
         , _alertItemId = alertItemId.substring(0,20) + ELLIPSIS
     return (
       <ModalDialog

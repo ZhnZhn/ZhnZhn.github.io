@@ -26,10 +26,10 @@
       "localforage": "npm:localforage@^1.4.2",
       "lodash": "npm:lodash@^4.13.1",
       "purify": "github:cure53/DOMPurify@^0.8.2",
-      "react": "npm:react@^15.3.1",
-      "react-addons-css-transition-group": "npm:react-addons-css-transition-group@^15.3.1",
-      "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^15.3.1",
-      "react-dom": "npm:react-dom@^15.3.1",
+      "react": "npm:react@^15.3.2",
+      "react-addons-css-transition-group": "npm:react-addons-css-transition-group@^15.3.2",
+      "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^15.3.2",
+      "react-dom": "npm:react-dom@^15.3.2",
       "reflux": "npm:reflux@0.4.1"
     },
     "devDependencies": {}

@@ -42,6 +42,7 @@ const qeSources = [
 
   'WIKI_STOCK',
   'TOKIO_STOCK',
+  'STOCK_INDEXES',
   'UNICORN_RESEARCH',
 
   'CHINA_FINANCE_FUTURE',
