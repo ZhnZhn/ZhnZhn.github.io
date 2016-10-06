@@ -1,0 +1,71 @@
+{
+  "menu" : [
+    {
+      "caption" : "Average Retail Prices",
+      "items" : [
+        { "id" : "QFS_PRICE_MEAT" },
+        { "id" : "QFS_PRICE_SEA" },
+        { "id" : "QFS_PRICE_MILK" },
+        { "id" : "QFS_PRICE_VEGETABLES" }
+      ]
+    }
+  ],
+  "items" : {
+    "QFS_PRICE_MEAT" : {
+      "type" : "QFS_PRICE_MEAT",
+      "menuTitle" : "Meat",
+      "dialogCaption" : "Meat Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/meat-prices.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_SEA" : {
+      "type" : "QFS_PRICE_SEA",
+      "menuTitle" : "Sea Product",
+      "dialogCaption" : "Sea Product Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/sea-product-prices.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_MILK" : {
+      "type" : "QFS_PRICE_MILK",
+      "menuTitle" : "Milk, cheese, egg, fatty",
+      "dialogCaption" : "Miscelleneous Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/milk-prices.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_VEGETABLES" : {
+      "type" : "QFS_PRICE_VEGETABLES",
+      "menuTitle" : "Vegetables",
+      "dialogCaption" : "Vegetables Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/vegetable-prices.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "columnName" : "Value"
+      }
+    }
+  }
+}

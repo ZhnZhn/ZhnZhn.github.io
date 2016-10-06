@@ -1,0 +1,15 @@
+{
+  "items" : [
+    { "caption" : "Extra Fine Butter (250 g)" , "value" : "INSEE/162_000442490_M" },
+    { "caption" : "Pasteurised Camembert with 45% of Fat, Made in Normandy (250 g)" , "value" : "INSEE/162_000442484_M" },
+    { "caption" : "French Emmental (1 kg)" , "value" : "INSEE/162_000442487_M" },
+    { "caption" : "Spreadable Processed Cheese (170 g)" , "value" : "INSEE/162_000442488_M" },
+    { "caption" : "Sunflower Oil (1 litre)" , "value" : "INSEE/162_000442493_M" },
+    { "caption" : "Extra-Virgin Olive Oil (1 litre)" , "value" : "INSEE/162_000442491_M" },
+    { "caption" : "Pasteurised Full Fat Milk (1 litre)" , "value" : "INSEE/162_000442479_M" },
+    { "caption" : "Semi-Skimmed UHT Milk (1 litre)" , "value" : "INSEE/162_000442480_M" },
+    { "caption" : "Plain Chipmunks with 40% of Fat (180 g)" , "value" : "INSEE/162_000442483_M" },
+    { "caption" : "Fruit Yoghurt Made with Full Fat Milk (250 g)" , "value" : "INSEE/162_000849399_M" },
+    { "caption" : "Plain Yoghurt (500 g)" , "value" : "INSEE/162_000849398_M" }
+  ]
+}

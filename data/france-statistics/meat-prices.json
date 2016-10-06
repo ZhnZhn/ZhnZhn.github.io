@@ -1,0 +1,17 @@
+{
+  "items" : [
+    { "caption" : "Beef: Flank Steak (1 kg)" , "value" : "INSEE/160_000442436_M" },
+    { "caption" : "Beef: T-Bone Steak (1 kg)" , "value" : "INSEE/160_000442437_M" },
+    { "caption" : "Beef: Entrecote (1 kg)" , "value" : "INSEE/160_000442435_M" },
+    { "caption" : "Beef: Sirloin Steak (1 kg)" , "value" : "INSEE/160_000442433_M" },
+    { "caption" : "Beef: Fillet (1 kg)" , "value" : "INSEE/160_000442432_M" },
+    { "caption" : "Beef: Rump (1 kg)" , "value" : "INSEE/160_000442434_M" },
+    { "caption" : "Fresh Veal Liver (1 kg)" , "value" : "INSEE/160_000442454_M" },
+    { "caption" : "Higher Ham (1 kg)" , "value" : "INSEE/160_000849397_M" },
+    { "caption" : "Whole Rabbit (1 kg)" , "value" : "INSEE/160_000442453_M" },
+    { "caption" : "Pig: Chine with Bone (1 kg)" , "value" : "INSEE/160_000442450_M" },
+    { "caption" : "Pig: Fillet Roast (1 kg)" , "value" : "INSEE/160_000442448_M" },
+    { "caption" : "Industrial Chopped Steak (1 kg)" , "value" : "INSEE/160_000849396_M" },
+    { "caption" : "Veal: Cutlet (1 kg)" , "value" : "INSEE/160_000442441_M" }
+  ]
+}

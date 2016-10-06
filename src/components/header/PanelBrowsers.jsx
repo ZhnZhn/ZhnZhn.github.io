@@ -63,7 +63,13 @@ const PanelBrowsers = (props) => {
           Quandl Premium Sample
         </div>
         <div
-          className="row__topic__even item__watch"
+          className="row__topic__even item__quandl"
+          onClick={onClickDynamic.bind(null, browserConfig.FRANCE_STATISTICS)}
+        >
+          Quandl France Statistics
+        </div>
+        <div
+          className="row__topic__odd item__watch"
           onClick={onClickWatch}
         >
           Watch

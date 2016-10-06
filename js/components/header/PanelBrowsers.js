@@ -91,7 +91,15 @@ var PanelBrowsers = function PanelBrowsers(props) {
       _react2.default.createElement(
         'div',
         {
-          className: 'row__topic__even item__watch',
+          className: 'row__topic__even item__quandl',
+          onClick: onClickDynamic.bind(null, browserConfig.FRANCE_STATISTICS)
+        },
+        'Quandl France Statistics'
+      ),
+      _react2.default.createElement(
+        'div',
+        {
+          className: 'row__topic__odd item__watch',
           onClick: onClickWatch
         },
         'Watch'

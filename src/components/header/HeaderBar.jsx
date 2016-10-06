@@ -46,6 +46,11 @@ const BrowserConfig = {
     browserType: 'QPS',
     caption: 'Quandl Premium Sample',
     sourceMenuUrl : './data/quandl-sample/source-menu.json'
+  },
+  FRANCE_STATISTICS : {
+    browserType: 'QFS',
+    caption: 'Quandl France Statistics',
+    sourceMenuUrl: './data/france-statistics/source-menu.json'
   }
 }
 
