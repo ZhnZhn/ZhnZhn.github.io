@@ -1,18 +1,18 @@
 {
   "items" : [
-    { "caption" : "Monkfish (Lotte) in Slice (1 kg)" , "value" : "INSEE/161_000641405_M" },
-    { "caption" : "Frozen Breaded Cod (400 g)" , "value" : "INSEE/161_000442469_M" },
-    { "caption" : "Whole Great Scallops (1 kg)" , "value" : "INSEE/161_000641416_M" },
-    { "caption" : "Shrimps (1 kg)" , "value" : "INSEE/161_000641417_M" },
-    { "caption" : "Tropical Prawns (1 kg)" , "value" : "INSEE/161_000641354_M" },
-    { "caption" : "Whiting Fillet (1 kg)" , "value" : "INSEE/161_000641408_M" },
-    { "caption" : "Medium-Caliber Cupped Oysters (per dozen)" , "value" : "INSEE/161_000641355_M" },
-    { "caption" : "Raw Norway Lobster (1 kg)" , "value" : "INSEE/161_000641357_M" },
-    { "caption" : "Common Dabs (1 kg)" , "value" : "INSEE/161_000641353_M" },
-    { "caption" : "Bouchot Mussels (1 kg)" , "value" : "INSEE/161_000641418_M" },
-    { "caption" : "Catshark (1 kg)" , "value" : "INSEE/161_000641411_M" },
-    { "caption" : "Sole (1 kg)" , "value" : "INSEE/161_000641413_M" },
-    { "caption" : "Canned Tuna in Brine (160 g)" , "value" : "INSEE/161_000442470_M" },
-    { "caption" : "Crabs (1 kg)" , "value" : "INSEE/161_000641419_M" }
+    { "caption" : "Monkfish (Lotte) in Slice (1 kg)" , "value" : "000641405" },
+    { "caption" : "Frozen Breaded Cod (400 g)" , "value" : "000442469" },
+    { "caption" : "Whole Great Scallops (1 kg)" , "value" : "000641416" },
+    { "caption" : "Shrimps (1 kg)" , "value" : "000641417" },
+    { "caption" : "Tropical Prawns (1 kg)" , "value" : "000641354" },
+    { "caption" : "Whiting Fillet (1 kg)" , "value" : "000641408" },
+    { "caption" : "Medium-Caliber Cupped Oysters (per dozen)" , "value" : "000641355" },
+    { "caption" : "Raw Norway Lobster (1 kg)" , "value" : "000641357" },
+    { "caption" : "Common Dabs (1 kg)" , "value" : "000641353" },
+    { "caption" : "Bouchot Mussels (1 kg)" , "value" : "000641418" },
+    { "caption" : "Catshark (1 kg)" , "value" : "000641411" },
+    { "caption" : "Sole (1 kg)" , "value" : "000641413" },
+    { "caption" : "Canned Tuna in Brine (160 g)" , "value" : "000442470" },
+    { "caption" : "Crabs (1 kg)" , "value" : "000641419" }
   ]
 }

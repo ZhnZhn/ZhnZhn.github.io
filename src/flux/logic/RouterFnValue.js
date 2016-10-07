@@ -15,7 +15,10 @@ const RouterFnValue = {
   REiaCoal : (one, two, three) => `EIA/COAL_${two}_${one}_${three}`,
 
   RFutures : (prefix, item, month, year) => `${prefix}/${item}${month}${year}`,
-  RWikiFutures : (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`
+  RWikiFutures : (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`,
+
+  RPrefixInseeM : (prefix, item) => `INSEE/${prefix}_${item}_M`,
+  RPrefixInseeTwoM : (prefix, group, item) => `INSEE/${prefix}_${item}_M`
 };
 
 export default RouterFnValue

@@ -104,11 +104,14 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     var dataColumn = _props2.dataColumn;
     var seriaColumnNames = _props2.seriaColumnNames;
     var loadId = _props2.loadId;
+    var fnValue = _props2.fnValue;
     var fnItemCaption = _props2.fnItemCaption;
+    var _value = typeof fnValue === 'function' ? fnValue(this.stock.value) : this.stock.value;
     var _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
     return {
+      //value : this.stock.value,
+      value: _value,
       title: this.stock.caption,
-      value: this.stock.value,
       stock: this.stock,
       fromDate: fromDate,
       toDate: toDate,

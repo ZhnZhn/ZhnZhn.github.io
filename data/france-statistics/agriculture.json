@@ -1,0 +1,169 @@
+{
+  "groups" : [
+    {
+      "caption" : "Cereals" , "value" : "",
+      "columns" : [
+        { "caption" : "Barley for Milling", "value" : "001663628" },
+        { "caption" : "Barley for Malting", "value" : "001663629" },
+        { "caption" : "Soft Wheat", "value" : "001663630" },
+        { "caption" : "Durum Wheat", "value" : "001663631" },
+        { "caption" : "Oats", "value" : "001663632" },
+        { "caption" : "Sorghum", "value" : "001663633" },
+        { "caption" : "Triticale", "value" : "001663634" },
+        { "caption" : "Maize", "value" : "001663635" }
+      ]
+    },{
+      "caption" : "Potatoes", "value" : "",
+      "columns" : [
+        { "caption" : "New Potatoes", "value" : "001663638" },
+        { "caption" : "Firm-Fleshed Potatoes", "value" : "001663640" },
+        { "caption" : "Normal-Flesh Potatoes", "value" : "001663642" },
+        { "caption" : "Potatoes for Starch", "value" : "001663643" },
+        { "caption" : "Potatoes for Industry", "value" : "001663644" }
+      ]
+    },{
+      "caption" : "Wine", "value" : "" ,
+      "columns" : [
+        { "caption" : "Protected Designation of Origin (PDO) Wines, Except Wines for Champagne", "value" : "001663647" },
+        { "caption" : "Wines with IGP and without IG", "value" : "001663648" }
+      ]
+    },{
+      "caption" : "Oil Seeds", "value" : "" ,
+      "columns" : [
+        { "caption" : "Rape" , "value" : "001663652" },
+        { "caption" : "Sunflower" , "value" : "001663653" },
+        { "caption" : "Soya" , "value" : "001663654" }
+      ]
+    },{
+      "caption" : "Product of Horticulture", "value" : "" ,
+      "columns" : [
+        { "caption" : "Roses" , "value" : "001663657" },
+        { "caption" : "Carnation" , "value" : "001663658" },
+        { "caption" : "Tulip" , "value" : "001663659" },
+        { "caption" : "Gladiolus" , "value" : "001663660" },
+        { "caption" : "Chrysanthemum" , "value" : "001663661" },
+        { "caption" : "Anemones" , "value" : "001663662" },
+        { "caption" : "Dahlia" , "value" : "001663663" },
+        { "caption" : "Gerbera" , "value" : "001663664" },
+        { "caption" : "Iris" , "value" : "001663665" },
+        { "caption" : "Lilium" , "value" : "001663666" },
+        { "caption" : "Snapdragon" , "value" : "001663667" },
+        { "caption" : "Lily of the Valley" , "value" : "001663668" },
+        { "caption" : "Ranunculus" , "value" : "001663669" },
+        { "caption" : "Christmas Tree" , "value" : "001663670" },
+        { "caption" : "Potted Plants" , "value" : "001663671" },
+        { "caption" : "Bedding Plants" , "value" : "001663672" },
+        { "caption" : "Nursery Plants" , "value" : "001663673" }
+      ]
+    },{
+      "caption" : "Seeds", "value" : "" ,
+      "columns" : [
+        { "caption" : "Cereal Seeds" , "value" : "001663676" },
+        { "caption" : "Fodder Seeds and Other" , "value" : "001663677" },
+        { "caption" : "Potatoes Seeds" , "value" : "001663678" }
+      ]
+    },{
+      "caption" : "Crop Products", "value" : "" ,
+      "columns" : [
+        { "caption" : "Beets" , "value" : "001663679" },
+        { "caption" : "Fodder" , "value" : "001663680" },
+        { "caption" : "Pulses" , "value" : "001663681" },
+        { "caption" : "Field Peas" , "value" : "001663682" },
+        { "caption" : "Tobacco" , "value" : "001663683" },
+        { "caption" : "Flax" , "value" : "001663684" },
+        { "caption" : "Hops" , "value" : "001663685" }
+      ]
+    },{
+      "caption" : "Animals", "value" : "",
+      "columns" : [
+        { "caption" : "Store Cattle", "value" : "001663689" },
+        { "caption" : "Beef Cattle All", "value" : "001663690" },
+        { "caption" : "Young Cattle", "value" : "001663691" },
+        { "caption" : "Steers", "value" : "001663693" },
+        { "caption" : "Heifers", "value" : "001663694" },
+        { "caption" : "Cows", "value" : "001663695" },
+        { "caption" : "Bulls", "value" : "001663696" },
+        { "caption" : "Calves All", "value" : "001663697" },
+        { "caption" : "Calves for Slaughter", "value" : "001663698" },
+        { "caption" : "Eight-Day Old Calves", "value" : "001663699" },
+        { "caption" : "Pigs", "value" : "001663700" },
+        { "caption" : "Sheep", "value" : "001663692" },
+        { "caption" : "Equidae", "value" : "001663701" },
+        { "caption" : "Female and Male Turkeys", "value" : "001663704" },
+        { "caption" : "Ducks for Roasting", "value" : "001663705" },
+        { "caption" : "Quality-Label Chicken", "value" : "001663707" },
+        { "caption" : "Standart Chicken", "value" : "001663708" },
+        { "caption" : "Quality-Label Guinea Fowl", "value" : "001663710" },
+        { "caption" : "Guinea Fowl (other)", "value" : "001663711" },
+        { "caption" : "Rabbits", "value" : "001663712" }
+      ]
+    },{
+      "caption" : "Milk, Eggs" , "value" : "",
+      "columns" : [
+        { "caption" : "Cows Milk", "value" : "001663715" },
+        { "caption" : "Ewes Milk", "value" : "001663716" },
+        { "caption" : "Goats Milk", "value" : "001663717" },
+        { "caption" : "Eggs", "value" : "001663718" }
+      ]
+    },{
+      "caption" : "Fresh Fruits" , "value" : "",
+      "columns" : [
+        { "caption" : "Apricot" , "value" : "001663722" },
+        { "caption" : "Cherry" , "value" : "001663723" },
+        { "caption" : "Chestnuts" , "value" : "001663724" },
+        { "caption" : "Clementines" , "value" : "001663725" },
+        { "caption" : "Strawberries" , "value" : "001663726" },
+        { "caption" : "Raspberries" , "value" : "001663727" },
+        { "caption" : "Kiwi Fruit" , "value" : "001663728" },
+        { "caption" : "Walnuts" , "value" : "001663729" },
+        { "caption" : "Nectarine" , "value" : "001663731" },
+        { "caption" : "Pear Summer" , "value" : "001663735" },
+        { "caption" : "Pear Autumn" , "value" : "001663736" },
+        { "caption" : "Pear Winter" , "value" : "001663737" },
+        { "caption" : "Apple All" , "value" : "001663738" },
+        { "caption" : "Apple Golden" , "value" : "001663739" },
+        { "caption" : "Apple Gala" , "value" : "001663740" },
+        { "caption" : "Apple, Other Varieties" , "value" : "001663741" },
+        { "caption" : "Plums" , "value" : "001663742" },
+        { "caption" : "Grapes" , "value" : "001663743" }
+      ]
+    },{
+      "caption" : "Fresh Vegetables" , "value" : "",
+      "columns" : [
+        { "caption" : "Garlic" , "value" : "001663745"},
+        { "caption" : "Globe Artichokes", "value" : "001663746"},
+        { "caption" : "Asparagus" , "value" : "001663747"},
+        { "caption" : "Eggplants" , "value" : "001663748"},
+        { "caption" : "Beetroot" , "value" : "001663749"},
+        { "caption" : "Carrot" , "value" : "001663750"},
+        { "caption" : "Celeriac" , "value" : "001663751"},
+        { "caption" : "Round Cabbage" , "value" : "001663752"},
+        { "caption" : "Cauliflowers" , "value" : "001663754"},
+        { "caption" : "Cucumbers" , "value" : "001663755"},
+        { "caption" : "Courgettes" , "value" : "001663756"},
+        { "caption" : "Shallot" , "value" : "001663757"},
+        { "caption" : "Endives" , "value" : "001663758"},
+        { "caption" : "Mushrooms" , "value" : "001688558"},
+        { "caption" : "Beans for Shelling" , "value" : "001663760"},
+        { "caption" : "Melon" , "value" : "001663762"},
+        { "caption" : "Turnip" , "value" : "001663763"},
+        { "caption" : "Parsley" , "value" : "001663765"},
+        { "caption" : "Leek" , "value" : "001663766"},
+        { "caption" : "Capsicum" , "value" : "001663767"},
+        { "caption" : "Radish" , "value" : "001663768"},
+        { "caption" : "Lettuce" , "value" : "001663769"},
+        { "caption" : "Coloured Onion" , "value" : "001688559"},
+        { "caption" : "Pumpkin" , "value" : "001688560"},
+        { "caption" : "Chicory All" , "value" : "001663770" },
+        { "caption" : "Chicory : Curly Endive" , "value" : "001663772" },
+        { "caption" : "Chicory : Plain-Leaved Endive" , "value" : "001663773" },
+        { "caption" : "Lettuce All" , "value" : "001663774" },
+        { "caption" : "Lettuce : Webb" , "value" : "001663775" },
+        { "caption" : "Lettuce : Lettuce" , "value" : "001663776" },
+        { "caption" : "Lettuce : Cutting" , "value" : "001688561" },
+        { "caption" : "Corn Salad" , "value" : "001663777" },
+        { "caption" : "Tomatoes" , "value" : "001663778" }
+      ]
+    }
+  ]
+}

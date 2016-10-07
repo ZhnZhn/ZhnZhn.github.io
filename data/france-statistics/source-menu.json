@@ -6,7 +6,20 @@
         { "id" : "QFS_PRICE_MEAT" },
         { "id" : "QFS_PRICE_SEA" },
         { "id" : "QFS_PRICE_MILK" },
-        { "id" : "QFS_PRICE_VEGETABLES" }
+        { "id" : "QFS_PRICE_VEGETABLES" },
+        { "id" : "QFS_PRICE_FRUITS" },
+        { "id" : "QFS_PRICE_BREAD" },
+        { "id" : "QFS_PRICE_DRINKS" },
+        { "id" : "QFS_PRICE_HOUSING" },
+        { "id" : "QFS_PRICE_USE_VEHICLES" },
+        { "id" : "QFS_PRICE_CARE" },
+        { "id" : "QFS_PRICE_CAFES" },
+        { "id" : "QFS_PRICE_FLOWERS" }
+      ]
+    },{
+      "caption" : "Producer Price Indices",
+      "items" : [
+        { "id" : "QFS_PRICE_AGRI" }
       ]
     }
   ],
@@ -22,6 +35,8 @@
         "optionsJsonProp" : "items",
         "itemCaption" : "Item:",
         "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "160",
         "columnName" : "Value"
       }
     },
@@ -36,12 +51,14 @@
         "optionsJsonProp" : "items",
         "itemCaption" : "Item:",
         "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "161",
         "columnName" : "Value"
       }
     },
     "QFS_PRICE_MILK" : {
       "type" : "QFS_PRICE_MILK",
-      "menuTitle" : "Milk, cheese, egg, fatty",
+      "menuTitle" : "Milk, Cheese, Egg, Fatty",
       "dialogCaption" : "Miscelleneous Average Prices",
       "chartContainerCaption" : "Quandl France Statistics",
       "dialogProps" : {
@@ -50,6 +67,8 @@
         "optionsJsonProp" : "items",
         "itemCaption" : "Item:",
         "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "162",
         "columnName" : "Value"
       }
     },
@@ -64,6 +83,155 @@
         "optionsJsonProp" : "items",
         "itemCaption" : "Item:",
         "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "163",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_FRUITS" : {
+      "type" : "QFS_PRICE_FRUITS",
+      "menuTitle" : "Fruits",
+      "dialogCaption" : "Fruits Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/fruits.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "164",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_BREAD" : {
+      "type" : "QFS_PRICE_BREAD",
+      "menuTitle" : "Bread, Cereals",
+      "dialogCaption" : "Miscelleneous Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/bread.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "165",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_DRINKS" : {
+      "type" : "QFS_PRICE_DRINKS",
+      "menuTitle" : "Drinks",
+      "dialogCaption" : "Drinks Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/drinks.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "166",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_HOUSING" : {
+      "type" : "QFS_PRICE_HOUSING",
+      "menuTitle" : "Housing, Heating, Lighting",
+      "dialogCaption" : "Housing Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/housing.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "168",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_USE_VEHICLES" : {
+      "type" : "QFS_PRICE_USE_VEHICLES",
+      "menuTitle" : "Use of Leisure Vehicles",
+      "dialogCaption" : "Use of Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/use-vehicles.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "169",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_CARE" : {
+      "type" : "QFS_PRICE_CARE",
+      "menuTitle" : "Care & Personal Product",
+      "dialogCaption" : "Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/personal-product.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "170",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_CAFES" : {
+      "type" : "QFS_PRICE_CAFES",
+      "menuTitle" : "Cafés, hotels",
+      "dialogCaption" : "Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/cafes.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "171",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_PRICE_FLOWERS" : {
+      "type" : "QFS_PRICE_FLOWERS",
+      "menuTitle" : "Flowers",
+      "dialogCaption" : "Flowers Average Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/flowers.json",
+        "optionsJsonProp" : "items",
+        "itemCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeM",
+        "valueFnPrefix" : "396",
+        "columnName" : "Value"
+      }
+    },
+
+    "QFS_PRICE_AGRI" : {
+      "type" : "QFS_PRICE_AGRI",
+      "menuTitle" : "Agriculture (base 2010)",
+      "dialogCaption" : "Agricaulture Prices",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Group:",
+        "oneURI" : "./data/france-statistics/agriculture.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Item:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1465",
         "columnName" : "Value"
       }
     }

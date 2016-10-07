@@ -1,0 +1,9 @@
+{
+  "items" : [
+    { "caption" : "Petrol Premium-Grade Unleaded, Octane Rating 95 (1 litre)" , "value" : "000849411" },
+    { "caption" : "Petrol Premium-Grade Unleaded, Octane Rating 98 (1 litre)" , "value" : "000442589" },
+    { "caption" : "Diesel (1 litre)" , "value" : "000442588" },
+    { "caption" : "Autobody Repair (1h, including VAT)" , "value" : "000849401" },
+    { "caption" : "Auto Mechanics (1h, including VAT)" , "value" : "000849400" }
+  ]
+}
