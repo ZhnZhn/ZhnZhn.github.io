@@ -1,8 +1,8 @@
 import React from 'react';
 
-const HIDE_PERIOD = 15000
+const HIDE_PERIOD = 30000
     , ANIMATION_PERIOD = 1100
-    , MSG = 'This website uses cookies to collect statistics for better experience.'
+    , MSG = 'This website uses cookies from Google Analytics with anonymizeIp to collect statistics for better experience.'
     , BTN_TITLE = 'Got it!';
 
 const STYLE = {

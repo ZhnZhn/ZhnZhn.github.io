@@ -10,9 +10,9 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HIDE_PERIOD = 15000,
+var HIDE_PERIOD = 30000,
     ANIMATION_PERIOD = 1100,
-    MSG = 'This website uses cookies to collect statistics for better experience.',
+    MSG = 'This website uses cookies from Google Analytics with anonymizeIp to collect statistics for better experience.',
     BTN_TITLE = 'Got it!';
 
 var STYLE = {
