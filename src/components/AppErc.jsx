@@ -9,6 +9,8 @@ import About from './about/About';
 import ComponentHrzContainer from './chart-container/ComponentHrzContainer';
 import DialogContainer from './dialogs/DialogContainer';
 
+import ConsentCookiePopup from './zhn/ConsentCookiePopup';
+
 import { ComponentActionTypes } from '../flux/actions/ComponentActions';
 import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 
@@ -31,6 +33,7 @@ const AppErc = React.createClass({
            <ComponentHrzContainer />
        </div>
        <DialogContainer store={ChartStore} />
+       <ConsentCookiePopup />
      </div>
     )
   }

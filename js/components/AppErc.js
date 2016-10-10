@@ -32,6 +32,10 @@ var _DialogContainer = require('./dialogs/DialogContainer');
 
 var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
 
+var _ConsentCookiePopup = require('./zhn/ConsentCookiePopup');
+
+var _ConsentCookiePopup2 = _interopRequireDefault(_ConsentCookiePopup);
+
 var _ComponentActions = require('../flux/actions/ComponentActions');
 
 var _BrowserActions = require('../flux/actions/BrowserActions');
@@ -60,7 +64,8 @@ var AppErc = _react2.default.createClass({
         _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
         _react2.default.createElement(_ComponentHrzContainer2.default, null)
       ),
-      _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default })
+      _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default }),
+      _react2.default.createElement(_ConsentCookiePopup2.default, null)
     );
   }
 });
