@@ -10,6 +10,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var ContainerStyles = {
   browserRootDiv: (_browserRootDiv = {
+    flexShrink: 0,
     zIndex: 20,
     backgroundColor: '#4D4D4D',
     padding: '5px',

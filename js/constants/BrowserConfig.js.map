@@ -1,0 +1,9 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\constants\\BrowserConfig.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\constants\\BrowserConfig.js",
+ "sourceRoot": "",
+ "names": [],
+ "mappings": ";;;;;;AACA,IAAM,gBAAgB;AACpB,YAAW;AACT,iBAAa,IAAb;AACA,aAAS,qBAAT;AACA,mBAAgB,kCAAhB;GAHF;AAKA,UAAS;AACP,iBAAa,IAAb;AACA,aAAS,wBAAT;AACA,mBAAgB,gCAAhB;GAHF;AAKA,SAAQ;AACN,iBAAa,IAAb;AACA,aAAS,uBAAT;AACA,mBAAgB,+BAAhB;GAHF;AAKA,kBAAiB;AACf,iBAAa,KAAb;AACA,aAAS,uBAAT;AACA,mBAAgB,uCAAhB;GAHF;AAKA,qBAAoB;AAClB,iBAAa,KAAb;AACA,aAAS,4BAAT;AACA,mBAAe,2CAAf;GAHF;CArBI;;kBA4BS"
+}

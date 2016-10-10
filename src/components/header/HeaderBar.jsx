@@ -8,7 +8,9 @@ import LimitRemainingLabel from './LimitRemainingLabel';
 import PanelBrowsers from './PanelBrowsers';
 import ComponentActions from '../../flux/actions/ComponentActions';
 import BrowserActions from '../../flux/actions/BrowserActions';
-import {BrowserType, ModalDialog} from '../../constants/Type';
+import BrowserConfig from '../../constants/BrowserConfig';
+import { BrowserType, ModalDialog } from '../../constants/Type';
+
 
 const styles = {
   rootDiv : {
@@ -23,34 +25,6 @@ const styles = {
     paddingRight: '10px',
     fontSize: '16px',
     fontWeight: 'bold'
-  }
-}
-
-const BrowserConfig = {
-  EUROSTAT : {
-    browserType: 'ES',
-    caption: 'European Statistics',
-    sourceMenuUrl : './data/eurostat/source-menu.json'
-  },
-  GOOGLE : {
-    browserType: 'QD',
-    caption: 'Quandl Google Stocks',
-    sourceMenuUrl : './data/google/source-menu.json'
-  },
-  YAHOO : {
-    browserType: 'QY',
-    caption: 'Quandl Yahoo Stocks',
-    sourceMenuUrl : './data/yahoo/source-menu.json'
-  },
-  PREMIUM_SAMPLE : {
-    browserType: 'QPS',
-    caption: 'Quandl Premium Sample',
-    sourceMenuUrl : './data/quandl-sample/source-menu.json'
-  },
-  FRANCE_STATISTICS : {
-    browserType: 'QFS',
-    caption: 'Quandl France Statistics',
-    sourceMenuUrl: './data/france-statistics/source-menu.json'
   }
 }
 

@@ -44,11 +44,12 @@ var MenuPart = _react2.default.createClass({
   render: function render() {
     var _props = this.props;
     var caption = _props.caption;
+    var isInitClose = _props.isInitClose;
     var items = _props.items;
 
     return _react2.default.createElement(
       _OpenClose2.default,
-      { caption: caption },
+      { caption: caption, isClose: isInitClose },
       this._renderMenuItems(items)
     );
   }

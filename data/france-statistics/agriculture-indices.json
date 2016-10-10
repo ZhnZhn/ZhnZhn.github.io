@@ -5,8 +5,8 @@
       "columns" : [
         { "caption" : "Barley for Milling", "value" : "001663628" },
         { "caption" : "Barley for Malting", "value" : "001663629" },
-        { "caption" : "Soft Wheat", "value" : "001663630" },
-        { "caption" : "Durum Wheat", "value" : "001663631" },
+        { "caption" : "Wheat Soft", "value" : "001663630" },
+        { "caption" : "Wheat Durum", "value" : "001663631" },
         { "caption" : "Oats", "value" : "001663632" },
         { "caption" : "Sorghum", "value" : "001663633" },
         { "caption" : "Triticale", "value" : "001663634" },
@@ -16,8 +16,8 @@
       "caption" : "Potatoes", "value" : "",
       "columns" : [
         { "caption" : "New Potatoes", "value" : "001663638" },
-        { "caption" : "Firm-Fleshed Potatoes", "value" : "001663640" },
-        { "caption" : "Normal-Flesh Potatoes", "value" : "001663642" },
+        { "caption" : "Potatoes Firm-Fleshed", "value" : "001663640" },
+        { "caption" : "Potatoes Normal-Flesh", "value" : "001663642" },
         { "caption" : "Potatoes for Starch", "value" : "001663643" },
         { "caption" : "Potatoes for Industry", "value" : "001663644" }
       ]
@@ -84,17 +84,19 @@
         { "caption" : "Cows", "value" : "001663695" },
         { "caption" : "Bulls", "value" : "001663696" },
         { "caption" : "Calves All", "value" : "001663697" },
-        { "caption" : "Calves for Slaughter", "value" : "001663698" },
-        { "caption" : "Eight-Day Old Calves", "value" : "001663699" },
+        { "caption" : "Calves : For Slaughter", "value" : "001663698" },
+        { "caption" : "Calves : Eight-Day Old", "value" : "001663699" },
         { "caption" : "Pigs", "value" : "001663700" },
         { "caption" : "Sheep", "value" : "001663692" },
         { "caption" : "Equidae", "value" : "001663701" },
         { "caption" : "Female and Male Turkeys", "value" : "001663704" },
         { "caption" : "Ducks for Roasting", "value" : "001663705" },
-        { "caption" : "Quality-Label Chicken", "value" : "001663707" },
-        { "caption" : "Standart Chicken", "value" : "001663708" },
-        { "caption" : "Quality-Label Guinea Fowl", "value" : "001663710" },
-        { "caption" : "Guinea Fowl (other)", "value" : "001663711" },
+        { "caption" : "Chicken All" , "value" : "001663706" },
+        { "caption" : "Chicken : Quality-Label", "value" : "001663707" },
+        { "caption" : "Chicken : Standart", "value" : "001663708" },
+        { "caption" : "Guinea Fowl All" , "value" : "001663709" },
+        { "caption" : "Guinea Fowl : Quality-Label", "value" : "001663710" },
+        { "caption" : "Guinea Fowl : Other", "value" : "001663711" },
         { "caption" : "Rabbits", "value" : "001663712" }
       ]
     },{
@@ -121,9 +123,9 @@
         { "caption" : "Pear Autumn" , "value" : "001663736" },
         { "caption" : "Pear Winter" , "value" : "001663737" },
         { "caption" : "Apple All" , "value" : "001663738" },
-        { "caption" : "Apple Golden" , "value" : "001663739" },
-        { "caption" : "Apple Gala" , "value" : "001663740" },
-        { "caption" : "Apple, Other Varieties" , "value" : "001663741" },
+        { "caption" : "Apple : Golden" , "value" : "001663739" },
+        { "caption" : "Apple : Gala" , "value" : "001663740" },
+        { "caption" : "Apple : Other Varieties" , "value" : "001663741" },
         { "caption" : "Plums" , "value" : "001663742" },
         { "caption" : "Grapes" , "value" : "001663743" }
       ]
@@ -162,7 +164,22 @@
         { "caption" : "Lettuce : Lettuce" , "value" : "001663776" },
         { "caption" : "Lettuce : Cutting" , "value" : "001688561" },
         { "caption" : "Corn Salad" , "value" : "001663777" },
-        { "caption" : "Tomatoes" , "value" : "001663778" }
+        { "caption" : "Tomatoes" , "value" : "001663778" },
+        { "caption" : "Banana" , "value" : "001663790" }
+      ]
+    },{
+      "caption" : "Fruits & Vegetables for Processing", "value" : "",
+      "columns" : [
+        { "caption" : "Peas" , "value" : "001663780" },
+        { "caption" : "Green Beans" , "value" : "001663781" },
+        { "caption" : "Flageolet" , "value" : "001663782" },
+        { "caption" : "Broccoli" , "value" : "001663783" },
+        { "caption" : "Celery" , "value" : "001663784" },
+        { "caption" : "Cauliflower" , "value" : "001663785" },
+        { "caption" : "Spinach" , "value" : "001663785" },
+        { "caption" : "Baby Carrots" , "value" : "001663787" },
+        { "caption" : "Salsify" , "value" : "001663788" },
+        { "caption" : "Large Carrots" , "value" : "001663789" }
       ]
     }
   ]

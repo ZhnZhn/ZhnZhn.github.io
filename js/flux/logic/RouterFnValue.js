@@ -48,11 +48,11 @@ var RouterFnValue = {
     return "CHRIS/" + exchange + "_" + item + type;
   },
 
-  RPrefixInseeM: function RPrefixInseeM(prefix, item) {
-    return "INSEE/" + prefix + "_" + item + "_M";
-  },
   RPrefixInseeTwoM: function RPrefixInseeTwoM(prefix, group, item) {
     return "INSEE/" + prefix + "_" + item + "_M";
+  },
+  RInseeTwoM: function RInseeTwoM(group, item) {
+    return "INSEE/" + group + "_" + item + "_M";
   }
 };
 

@@ -1,6 +1,7 @@
 
 const ContainerStyles = {
   browserRootDiv : {
+    flexShrink : 0,
     zIndex: 20,
     backgroundColor: '#4D4D4D',
     padding: '5px',

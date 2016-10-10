@@ -1,9 +1,0 @@
-{
-  "items" : [
-    { "caption" : "Household Fuel Oil: 1000 Litres (delivered at home)" , "value" : "000442573" },
-    { "caption" : "Compressed Butane, without Deposit (13 kg)" , "value" : "000442572" },
-    { "caption" : "Distribution of 120 m3 of Water (subscribtion including taxes), Including Public Bodies (resource convervation, pollution and VNF tax)" , "value" : "001634676" },
-    { "caption" : "Plumbing Works (hour of workforce including taxes)" , "value" : "000442580" },
-    { "caption" : "Electrical Maintenance (hour of workforce, taxes included)" , "value" : "000496225" }
-  ]
-}

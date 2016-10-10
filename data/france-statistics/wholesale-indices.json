@@ -1,0 +1,108 @@
+{
+  "groups" : [
+    {
+       "caption" : "Fruits" , "value" : "",
+       "columns" : [
+         { "caption" : "Bigaroon" , "value" : "001617121" },
+         { "caption" : "Strawberry" , "value" : "001617122" },
+         { "caption" : "Kiwi" , "value" : "001617123" },
+         { "caption" : "Nectarine" , "value" : "001617124" },
+         { "caption" : "Peach" , "value" : "001617125" },
+         { "caption" : "Pear" , "value" : "001617126" },
+         { "caption" : "Apple" , "value" : "001617127" },
+         { "caption" : "Prune" , "value" : "001617128" },
+         { "caption" : "Grape" , "value" : "001617129" },
+         { "caption" : "Melon" , "value" : "001617130" }
+       ]
+    },{
+       "caption" : "Fruits Exotic" , "value" : "",
+       "columns" : [
+         { "caption" : "Pineapple" , "value" : "001617132" },
+         { "caption" : "Avocado" , "value" : "001617133" },
+         { "caption" : "Banana" , "value" : "001617134" },
+         { "caption" : "Lemon" , "value" : "001617135" },
+         { "caption" : "Clementine" , "value" : "001617136" },
+         { "caption" : "Orange" , "value" : "001617137" },
+         { "caption" : "Pomelo" , "value" : "001617138" },
+         { "caption" : "Apricot" , "value" : "001617139" }
+       ]
+    },{
+      "caption" : "Vegetables" , "value" : "",
+      "columns" : [
+        { "caption" : "Eggplant" , "value" : "001617119" },
+        { "caption" : "Garlic" , "value" : "001617140" },
+        { "caption" : "Artichoke" , "value" : "001617141" },
+        { "caption" : "Cauliflower" , "value" : "001617142" },
+        { "caption" : "Asparagus" , "value" : "001617143" },
+        { "caption" : "Carrot" , "value" : "001617144" },
+        { "caption" : "Mushroom" , "value" : "001617145" },
+        { "caption" : "Kale" , "value" : "001617146" },
+        { "caption" : "Cucumber" , "value" : "001617147" },
+        { "caption" : "Zucchini" , "value" : "001617148" },
+        { "caption" : "Endive" , "value" : "001617149" },
+        { "caption" : "Green Bean" , "value" : "001617150" },
+        { "caption" : "Lettuce" , "value" : "001617151" },
+        { "caption" : "Turnip" , "value" : "001617152" },
+        { "caption" : "Onion" , "value" : "001617153" },
+        { "caption" : "Leek" , "value" : "001617154" },
+        { "caption" : "Capsicum" , "value" : "001617155" },
+        { "caption" : "Pink Radish" , "value" : "001617156" },
+        { "caption" : "Tomato" , "value" : "001617157" },
+        { "caption" : "Potato All" , "value" : "001617158" },
+        { "caption" : "Potato : Early" , "value" : "001617160" },
+        { "caption" : "Potato : Waxy Flesh Ware" , "value" : "001617159" },
+        { "caption" : "Potato : Normal Flesh Ware" , "value" : "001617161" }
+      ]
+    },{
+      "caption" : "Seafood" , "value" : "",
+      "columns" : [
+        { "caption" : "Bar" , "value" : "001617162" },
+        { "caption" : "Cod" , "value" : "001617163" },
+        { "caption" : "Common Bream" , "value" : "001617164" },
+        { "caption" : "Oyster" , "value" : "001617165" },
+        { "caption" : "Burbot" , "value" : "001617166" },
+        { "caption" : "Whiting" , "value" : "001617167" },
+        { "caption" : "Hake" , "value" : "001617168" },
+        { "caption" : "Ray" , "value" : "001617169" },
+        { "caption" : "Red Mullet" , "value" : "001617170" },
+        { "caption" : "Salmon" , "value" : "001617171" },
+        { "caption" : "Sole" , "value" : "001617172" },
+        { "caption" : "Tuna" , "value" : "001617173" },
+        { "caption" : "Turbot" , "value" : "001617174" },
+        { "caption" : "Shrimp" , "value" : "001617175" },
+        { "caption" : "Trout" , "value" : "001617176" },
+        { "caption" : "Mussel" , "value" : "001617177" }
+      ]
+    },{
+      "caption" : "Meat" , "value" : "",
+      "columns" : [
+        { "caption" : "Rooster" , "value" : "001617179" },
+        { "caption" : "Duck" , "value" : "001617180" },
+        { "caption" : "Turkey" , "value" : "001617181" },
+        { "caption" : "Guinea Fowl" , "value" : "001617182" },
+        { "caption" : "Duck Foie Gras" , "value" : "001617183" },
+        { "caption" : "Rabbit" , "value" : "001617184" },
+        { "caption" : "Beef Oval" , "value" : "001617186" },
+        { "caption" : "Veal Oval" , "value" : "001617187" },
+        { "caption" : "Beef" , "value" : "001617188" },
+        { "caption" : "Veal" , "value" : "001617189" },
+        { "caption" : "Lamb" , "value" : "001617190" },
+        { "caption" : "Pork" , "value" : "001617191" }
+      ]
+    },{
+      "caption" : "Eggs and Dairy Product", "value" : "",
+      "columns" : [
+        { "caption" : "Cheese : Flowered Crust" , "value" : "001617194" },
+        { "caption" : "Cheese : Ring-Washed" , "value" : "001617195" },
+        { "caption" : "Cheese : Pressed Uncooked" , "value" : "001617196" },
+        { "caption" : "Cheese : Pressed Cooked" , "value" : "001617197" },
+        { "caption" : "Cheese : Blue-Veined Cows Milk" , "value" : "001617198" },
+        { "caption" : "Cheese : Sheep" , "value" : "001617199" },
+        { "caption" : "Cheese : Goat" , "value" : "001617200" },
+        { "caption" : "Butter" , "value" : "001617201" },
+        { "caption" : "Drinking Milk" , "value" : "001617202" },
+        { "caption" : "Eggs" , "value" : "001617203" }
+      ]
+    }
+  ]
+}

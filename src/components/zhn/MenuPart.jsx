@@ -30,9 +30,9 @@ const MenuPart = React.createClass({
   },
 
   render(){
-    const {caption, items} = this.props;
+    const {caption, isInitClose, items} = this.props;
     return (
-      <OpenClose caption={caption}>
+      <OpenClose caption={caption} isClose={isInitClose}>
           {this._renderMenuItems(items)}
       </OpenClose>
     )

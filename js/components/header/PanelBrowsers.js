@@ -70,7 +70,7 @@ var PanelBrowsers = function PanelBrowsers(props) {
           className: 'row__topic__odd item__quandl',
           onClick: onClickDynamic.bind(null, browserConfig.YAHOO)
         },
-        'Quandl Yahoo Stocks'
+        'Quandl : Yahoo Stocks'
       ),
       _react2.default.createElement(
         'div',
@@ -78,7 +78,7 @@ var PanelBrowsers = function PanelBrowsers(props) {
           className: 'row__topic__even item__quandl',
           onClick: onClickDynamic.bind(null, browserConfig.GOOGLE)
         },
-        'Quandl Google Stocks'
+        'Quandl : Google Stocks'
       ),
       _react2.default.createElement(
         'div',
@@ -94,7 +94,7 @@ var PanelBrowsers = function PanelBrowsers(props) {
           className: 'row__topic__even item__quandl',
           onClick: onClickDynamic.bind(null, browserConfig.FRANCE_STATISTICS)
         },
-        'Quandl France Statistics'
+        'Quandl : France Statistics'
       ),
       _react2.default.createElement(
         'div',

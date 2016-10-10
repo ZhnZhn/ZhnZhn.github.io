@@ -3,8 +3,8 @@ import React from 'react';
 
 const styles = {
   rootDiv: {
-    lineHeight: 1.5, 
-    backgroundColor: '#4D4D4D',
+    lineHeight: 2,
+    backgroundColor: '#4D4D4D'
   },
   labelCaption: {
     paddingLeft: '4px',
@@ -13,7 +13,7 @@ const styles = {
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
   itemRow : {
     backgroundColor: '#404040'

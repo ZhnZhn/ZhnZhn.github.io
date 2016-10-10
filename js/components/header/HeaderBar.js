@@ -40,6 +40,10 @@ var _BrowserActions = require('../../flux/actions/BrowserActions');
 
 var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 
+var _BrowserConfig = require('../../constants/BrowserConfig');
+
+var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
+
 var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -57,34 +61,6 @@ var styles = {
     paddingRight: '10px',
     fontSize: '16px',
     fontWeight: 'bold'
-  }
-};
-
-var BrowserConfig = {
-  EUROSTAT: {
-    browserType: 'ES',
-    caption: 'European Statistics',
-    sourceMenuUrl: './data/eurostat/source-menu.json'
-  },
-  GOOGLE: {
-    browserType: 'QD',
-    caption: 'Quandl Google Stocks',
-    sourceMenuUrl: './data/google/source-menu.json'
-  },
-  YAHOO: {
-    browserType: 'QY',
-    caption: 'Quandl Yahoo Stocks',
-    sourceMenuUrl: './data/yahoo/source-menu.json'
-  },
-  PREMIUM_SAMPLE: {
-    browserType: 'QPS',
-    caption: 'Quandl Premium Sample',
-    sourceMenuUrl: './data/quandl-sample/source-menu.json'
-  },
-  FRANCE_STATISTICS: {
-    browserType: 'QFS',
-    caption: 'Quandl France Statistics',
-    sourceMenuUrl: './data/france-statistics/source-menu.json'
   }
 };
 
@@ -143,7 +119,7 @@ var HeaderBar = _react2.default.createClass({
         type: 'TypeA',
         caption: 'Eurostat',
         title: 'European Statistics Browser',
-        onClick: this._handlerClickDynamic.bind(null, BrowserConfig.EUROSTAT)
+        onClick: this._handlerClickDynamic.bind(null, _BrowserConfig2.default.EUROSTAT)
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
@@ -171,7 +147,7 @@ var HeaderBar = _react2.default.createClass({
       }),
       _react2.default.createElement(_PanelBrowsers2.default, {
         isShow: isDS,
-        browserConfig: BrowserConfig,
+        browserConfig: _BrowserConfig2.default,
         onClickQuandl: this._handlerClickQuandl,
         onClickDynamic: this._handlerClickDynamic,
         onClickWatch: this._handlerClickWatch

@@ -16,22 +16,25 @@ const fnBadgeClose = function(chartType){
 }
 
 
-const fnCreateMenu = function(menu, data, browserType){
+const fnCreateMenu = function(menu=[], data, browserType){
   return menu.map((menuPart) => {
-     const items = menuPart.items.map((item, index) =>{
-        return {
-                 id: item.id,
-                 title: data[item.id].menuTitle,
-                 counter: 0,
-                 isOpen: false,
-                 onClick: fnClick(item.id, browserType),
-                 onBadgeClick: fnBadgeClick(item.id, browserType),
-                 onBadgeClose : fnBadgeClose(item.id)
+     const { caption, isInitClose, items=[] } = menuPart
+         , _items = items.map((item, index) =>{
+               const { id } = item
+               return {
+                  id: id,
+                  title: data[id].menuTitle,
+                  counter: 0,
+                  isOpen: false,
+                  onClick: fnClick(id, browserType),
+                  onBadgeClick: fnBadgeClick(id, browserType),
+                  onBadgeClose : fnBadgeClose(id)
                }
      });
      return {
-        caption: menuPart.caption,
-        items: items
+        caption: caption,
+        isInitClose: isInitClose,
+        items: _items
      }
   })
 }
@@ -49,7 +52,7 @@ const menuQuandl = [
        { id : Quandl.BIG_MAC }
      ]
   },{
-     caption : 'Commodity',
+     caption : 'Commodity', isInitClose : true,
      items : [
        { id : Quandl.COMMODITY_PRICE },
        { id : Quandl.COMMODITY_TRADE },
@@ -66,7 +69,7 @@ const menuQuandl = [
        { id : Quandl.UNICORN_RESEARCH }
      ]
   },{
-    caption : 'Futures',
+    caption : 'Futures', isInitClose : true,
     items : [
       { id : Quandl.CHINA_FINANCE_FUTURE},
       { id : Quandl.DCE_FUTURE },
@@ -77,7 +80,7 @@ const menuQuandl = [
       { id : Quandl.WIKI_FUTURE }
     ]
   },{
-    caption : 'Real Estate',
+    caption : 'Real Estate', isInitClose : true,
     items : [
       { id : Quandl.ZILLOW_REAL_ESTATE }
     ]

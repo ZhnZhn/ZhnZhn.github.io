@@ -37,22 +37,33 @@ var fnBadgeClose = function fnBadgeClose(chartType) {
   return _ComponentActions2.default.closeChartContainer2.bind(null, chartType);
 };
 
-var fnCreateMenu = function fnCreateMenu(menu, data, browserType) {
+var fnCreateMenu = function fnCreateMenu() {
+  var menu = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var data = arguments[1];
+  var browserType = arguments[2];
+
   return menu.map(function (menuPart) {
-    var items = menuPart.items.map(function (item, index) {
+    var caption = menuPart.caption;
+    var isInitClose = menuPart.isInitClose;
+    var _menuPart$items = menuPart.items;
+    var items = _menuPart$items === undefined ? [] : _menuPart$items;
+    var _items = items.map(function (item, index) {
+      var id = item.id;
+
       return {
-        id: item.id,
-        title: data[item.id].menuTitle,
+        id: id,
+        title: data[id].menuTitle,
         counter: 0,
         isOpen: false,
-        onClick: fnClick(item.id, browserType),
-        onBadgeClick: fnBadgeClick(item.id, browserType),
-        onBadgeClose: fnBadgeClose(item.id)
+        onClick: fnClick(id, browserType),
+        onBadgeClick: fnBadgeClick(id, browserType),
+        onBadgeClose: fnBadgeClose(id)
       };
     });
     return {
-      caption: menuPart.caption,
-      items: items
+      caption: caption,
+      isInitClose: isInitClose,
+      items: _items
     };
   });
 };
@@ -61,16 +72,16 @@ var menuQuandl = [{
   caption: 'Economic',
   items: [{ id: _DialogType.Quandl.CURRENCY_HISTORY }, { id: _DialogType.Quandl.GLOBAL_INDICATOR }, { id: _DialogType.Quandl.WORLDBANK_PRICE }, { id: _DialogType.Quandl.IMF_CROSSCOUNTRY }, { id: _DialogType.Quandl.EU_COMMISSION }, { id: _DialogType.Quandl.CPI_INFLATION }, { id: _DialogType.Quandl.BIG_MAC }]
 }, {
-  caption: 'Commodity',
+  caption: 'Commodity', isInitClose: true,
   items: [{ id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.EIA_COAL }]
 }, {
   caption: 'World Stocks',
   items: [{ id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.STOCK_INDEXES }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]
 }, {
-  caption: 'Futures',
+  caption: 'Futures', isInitClose: true,
   items: [{ id: _DialogType.Quandl.CHINA_FINANCE_FUTURE }, { id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }, { id: _DialogType.Quandl.LIFFE_FUTURE }, { id: _DialogType.Quandl.ICE_FUTURE }, { id: _DialogType.Quandl.WIKI_FUTURE }]
 }, {
-  caption: 'Real Estate',
+  caption: 'Real Estate', isInitClose: true,
   items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }]
 }];
 
