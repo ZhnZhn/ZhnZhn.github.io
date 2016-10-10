@@ -18,6 +18,19 @@
     "type": "git",
     "url": "https://github.com/ZhnZhn/ZhnZhn.github.io.git"
   },
+  "keywords": [
+     "Quandl",
+     "Eurostat"
+     "macroeconomics",
+     "economics",
+     "trade",     
+     "currency",
+     "stock prices",
+     "stock indices",
+     "GDP",
+     "CPI",
+     "commodity" 
+   ],
   "jspm": {
     "dependencies": {
       "big.js": "npm:big.js@^3.1.3",
