@@ -10,15 +10,17 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HIDE_PERIOD = 30000,
+var HIDE_PERIOD = 300000,
     ANIMATION_PERIOD = 1100,
-    MSG = 'This website uses cookies from Google Analytics with anonymizeIp to collect statistics for better experience.',
-    BTN_TITLE = 'Got it!';
+    MSG = 'Can website collect statistics, by using session cookies from Google Analytics with anonymizeIp, for better experience ?',
+    BTN_OK_TITLE = "OK",
+    BTN_NO_TITLE = "NO, not today.";
 
 var STYLE = {
   ROOT__SHOW: {
-    opacity: '1',
-    top: '52px'
+    opacity: '0.9',
+    //top : '52px'
+    bottom: '0px'
   },
   ROOT_HIDE: {
     display: 'none'
@@ -39,12 +41,13 @@ var ConsentCookiePopup = _react2.default.createClass({
     var _this = this;
 
     this.timeID = setTimeout(function () {
+      _this.props.onNoAnswer();
       _this._startHidingAnimation();
     }, HIDE_PERIOD);
 
     setTimeout(function () {
       _this.setState({ isOpacity: false });
-    }, 0);
+    }, 500);
   },
   _startHidingAnimation: function _startHidingAnimation() {
     this.hideID = setTimeout(this._hidePopup, ANIMATION_PERIOD);
@@ -53,9 +56,17 @@ var ConsentCookiePopup = _react2.default.createClass({
   _hidePopup: function _hidePopup() {
     this.setState({ isDisplay: false });
   },
-  _handlerClickBtn: function _handlerClickBtn() {
+  _handlerClickOk: function _handlerClickOk() {
     if (!this.hideId) {
       clearTimeout(this.timeID);
+      this.props.onAnswerYes();
+      this._startHidingAnimation();
+    }
+  },
+  _handlerClickNo: function _handlerClickNo() {
+    if (!this.hideId) {
+      clearTimeout(this.timeID);
+      this.props.onAnswerNo();
       this._startHidingAnimation();
     }
   },
@@ -78,15 +89,23 @@ var ConsentCookiePopup = _react2.default.createClass({
         MSG
       ),
       _react2.default.createElement(
-        'p',
+        'div',
         { className: 'consent__row' },
         _react2.default.createElement(
           'span',
           {
             className: 'consent__btn',
-            onClick: this._handlerClickBtn
+            onClick: this._handlerClickOk
           },
-          BTN_TITLE
+          BTN_OK_TITLE
+        ),
+        _react2.default.createElement(
+          'span',
+          {
+            className: 'consent__btn',
+            onClick: this._handlerClickNo
+          },
+          BTN_NO_TITLE
         )
       )
     );

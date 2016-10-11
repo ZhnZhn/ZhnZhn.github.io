@@ -40,6 +40,10 @@ var _ComponentActions = require('../flux/actions/ComponentActions');
 
 var _BrowserActions = require('../flux/actions/BrowserActions');
 
+var _AnalyticActions = require('../flux/actions/AnalyticActions');
+
+var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AppErc = _react2.default.createClass({
@@ -65,7 +69,11 @@ var AppErc = _react2.default.createClass({
         _react2.default.createElement(_ComponentHrzContainer2.default, null)
       ),
       _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default }),
-      _react2.default.createElement(_ConsentCookiePopup2.default, null)
+      _react2.default.createElement(_ConsentCookiePopup2.default, {
+        onAnswerYes: _AnalyticActions2.default.answerYes,
+        onAnswerNo: _AnalyticActions2.default.answerNo,
+        onNoAnswer: _AnalyticActions2.default.noAnswer
+      })
     );
   }
 });

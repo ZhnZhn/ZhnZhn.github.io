@@ -3,6 +3,7 @@ import Reflux from 'reflux';
 import ChartActions, {ChartActionTypes} from '../actions/ChartActions';
 import ComponentActions, {ComponentActionTypes} from '../actions/ComponentActions';
 import BrowserActions, {BrowserActionTypes} from '../actions/BrowserActions';
+import AnalyticActions from '../actions/AnalyticActions';
 import WatchActions from '../actions/WatchActions';
 
 import {BrowserType, ModalDialog} from '../../constants/Type';
@@ -12,6 +13,7 @@ import Factory from '../logic/Factory';
 import BrowserSlice from './BrowserSlice';
 import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
+import AnalyticSlice from './AnalyticSlice';
 import WatchListSlice from '../watch-list/WatchListSlice';
 import WithLimitRemaining from './WithLimitRemaining';
 
@@ -25,7 +27,9 @@ const _fnLogLoadError = function({
 
 
 const ChartStore = Reflux.createStore({
-  listenables : [ChartActions, ComponentActions, BrowserActions, WatchActions],
+  listenables : [
+     ChartActions, ComponentActions, BrowserActions, AnalyticActions, WatchActions
+  ],
   charts : {},
   init(){
     this.initWatchList();
@@ -146,6 +150,7 @@ const ChartStore = Reflux.createStore({
  ...BrowserSlice,
  ...ComponentSlice,
  ...SettingSlice,
+ ...AnalyticSlice,
  ...WatchListSlice,
  ...WithLimitRemaining
 

@@ -13,6 +13,7 @@ import ConsentCookiePopup from './zhn/ConsentCookiePopup';
 
 import { ComponentActionTypes } from '../flux/actions/ComponentActions';
 import { BrowserActionTypes } from '../flux/actions/BrowserActions';
+import AnalyticActions from '../flux/actions/AnalyticActions';
 
 const AppErc = React.createClass({
   render(){
@@ -33,7 +34,11 @@ const AppErc = React.createClass({
            <ComponentHrzContainer />
        </div>
        <DialogContainer store={ChartStore} />
-       <ConsentCookiePopup />
+       <ConsentCookiePopup
+          onAnswerYes={AnalyticActions.answerYes}
+          onAnswerNo={AnalyticActions.answerNo}
+          onNoAnswer={AnalyticActions.noAnswer}
+       />
      </div>
     )
   }

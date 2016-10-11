@@ -22,6 +22,10 @@ var _BrowserActions = require('../actions/BrowserActions');
 
 var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 
+var _AnalyticActions = require('../actions/AnalyticActions');
+
+var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
+
 var _WatchActions = require('../actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
@@ -44,6 +48,10 @@ var _SettingSlice = require('./SettingSlice');
 
 var _SettingSlice2 = _interopRequireDefault(_SettingSlice);
 
+var _AnalyticSlice = require('./AnalyticSlice');
+
+var _AnalyticSlice2 = _interopRequireDefault(_AnalyticSlice);
+
 var _WatchListSlice = require('../watch-list/WatchListSlice');
 
 var _WatchListSlice2 = _interopRequireDefault(_WatchListSlice);
@@ -65,7 +73,7 @@ var _fnLogLoadError = function _fnLogLoadError(_ref) {
 };
 
 var ChartStore = _reflux2.default.createStore(_extends({
-  listenables: [_ChartActions2.default, _ComponentActions2.default, _BrowserActions2.default, _WatchActions2.default],
+  listenables: [_ChartActions2.default, _ComponentActions2.default, _BrowserActions2.default, _AnalyticActions2.default, _WatchActions2.default],
   charts: {},
   init: function init() {
     this.initWatchList();
@@ -176,7 +184,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
   onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
     this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
   }
-}, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default));
+}, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default));
 
 exports.default = ChartStore;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ChartStore.js.map

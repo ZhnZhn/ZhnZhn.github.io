@@ -1,14 +1,16 @@
 import React from 'react';
 
-const HIDE_PERIOD = 30000
+const HIDE_PERIOD = 300000
     , ANIMATION_PERIOD = 1100
-    , MSG = 'This website uses cookies from Google Analytics with anonymizeIp to collect statistics for better experience.'
-    , BTN_TITLE = 'Got it!';
+    , MSG = 'Can website collect statistics, by using session cookies from Google Analytics with anonymizeIp, for better experience ?'
+    , BTN_OK_TITLE = "OK"
+    , BTN_NO_TITLE = "NO, not today.";
 
 const STYLE = {
   ROOT__SHOW : {
-     opacity: '1',
-     top : '52px'
+     opacity: '0.9',
+     //top : '52px'
+     bottom : '0px'
   },
   ROOT_HIDE : {
      display: 'none'
@@ -28,12 +30,13 @@ const ConsentCookiePopup = React.createClass({
 
   componentDidMount(){
     this.timeID = setTimeout( () => {
+      this.props.onNoAnswer();
       this._startHidingAnimation();
     }, HIDE_PERIOD);
 
     setTimeout(()=>{
       this.setState({ isOpacity: false });
-    }, 0);
+    }, 500);
   },
 
   _startHidingAnimation(){
@@ -44,9 +47,18 @@ const ConsentCookiePopup = React.createClass({
      this.setState({ isDisplay : false });
   },
 
-  _handlerClickBtn(){
+  _handlerClickOk(){
     if (!this.hideId) {
       clearTimeout(this.timeID);
+      this.props.onAnswerYes();
+      this._startHidingAnimation();
+    }
+  },
+
+  _handlerClickNo(){
+    if (!this.hideId) {
+      clearTimeout(this.timeID);
+      this.props.onAnswerNo();
       this._startHidingAnimation();
     }
   },
@@ -68,14 +80,20 @@ const ConsentCookiePopup = React.createClass({
          <p className="consent__msg">
              {MSG}
          </p>
-         <p className="consent__row">
+         <div className="consent__row">
            <span
               className="consent__btn"
-              onClick={this._handlerClickBtn}
+              onClick={this._handlerClickOk}
            >
-              {BTN_TITLE}
+              {BTN_OK_TITLE}
            </span>
-         </p>
+           <span
+              className="consent__btn"
+              onClick={this._handlerClickNo}
+           >
+              {BTN_NO_TITLE}
+           </span>
+         </div>
       </div>
     );
   }
