@@ -110,6 +110,20 @@ var DataQE = {
       loadId: 'Q'
     }
   },
+  QE_ROGERS_INDICES: {
+    type: 'QE_ROGERS_INDICES',
+    menuTitle: 'Rogers Indices',
+    dialogCaption: 'Rogers International Indices',
+    chartContainerCaption: 'Quandl Rogers International Commodity Indices',
+    dialogProps: {
+      descrUrl: './data/quandl/rogers-indices.html',
+      optionURI: './data/quandl/rogers-indices.json',
+      optionsJsonProp: 'indices',
+      nInitFromDate: 12,
+      loadId: 'Q',
+      columnName: 'Value'
+    }
+  },
   QE_GLOBAL_INDICATOR: {
     type: 'QE_GLOBAL_INDICATOR',
     menuTitle: 'UN Global Indicator',

@@ -12,6 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var QuandlApi = {};
 
+/*order=asc&rows=12*/
+/*https://www.quandl.com/api/v3/databases/RICI.json downloads*/
+
 QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
 QuandlApi.BLANK = '';
 

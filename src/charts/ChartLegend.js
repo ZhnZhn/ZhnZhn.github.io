@@ -12,7 +12,8 @@ const C = {
   ADJ_CLOSE_2 : 'adjusted close',
   PRE_SETTLE : 'pre settle',
   CLOSE : 'close',
-  TURNOVER : 'turnover'
+  TURNOVER : 'turnover',
+  TRADES : 'trades'
 }
 
 const ChartLegend = {
@@ -56,9 +57,13 @@ const ChartLegend = {
           { color : COLOR.S_PRE_SETTLE, symbol: 'diamond' }
         );
       case C.TURNOVER:
-      return Object.assign({}, baseConfig,
-        { color : COLOR.S_TURNOVER, symbol: 'diamond', isSecondAxes: true }
-      );
+        return Object.assign({}, baseConfig,
+          { color : COLOR.S_TURNOVER, symbol: 'diamond', isSecondAxes: true }
+        );
+      case C.TRADES:
+        return Object.assign({}, baseConfig,
+          { color : COLOR.S_TRADES, symbol: 'diamond', isSecondAxes: true }
+        );
       default:
        return Object.assign({}, baseConfig,
          { color: undefined, symbol: undefined, isSecondAxes: undefined}

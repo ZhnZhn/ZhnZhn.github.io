@@ -9,7 +9,7 @@
         { "id" : "QD_ARCA" }
       ]
     },{
-      "caption" : "European Stocks",
+      "caption" : "European Stocks", "isInitClose" : true,
       "items" : [
         { "id": "QD_BRUSSELS" },
         { "id": "QD_LISBON" },

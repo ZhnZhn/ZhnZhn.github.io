@@ -5,6 +5,11 @@
       "items" : [
         { "id" : "QPS_STOCKS" }
       ]
+    },{
+      "caption" : "Currency Trade",
+      "items" : [
+        { "id" : "QPS_CLSM" }
+      ]
     }
   ],
   "items" : {
@@ -29,6 +34,22 @@
         "dataColumn" : 1,
         "isPremium" : true
       }
+    },
+    "QPS_CLSM" : {
+      "type" : "QPS_CLSM",
+      "menuTitle" : "CLS FX (Monthly)",
+      "dialogCaption" : "CLS FX Volume Data (Monthly)",
+      "chartContainerCaption" : "Quandl : CLS FX Volume Data (Monthly)",
+      "dialogProps" : {
+        "descrUrl" : "./data/quandl-sample/cls-fx.html",
+        "optionURI" : "./data/quandl-sample/clsm-monthly.json",
+        "optionsJsonProp" : "items",
+        "loadId" : "Q",
+        "columnName" : "Volume",
+        "seriaColumnNames" : [ "Trades"],
+        "isPremium" : true
+      }
+
     }
   }
 }

@@ -25,16 +25,18 @@ const QuandlFn2 = {
          , {
            name='', description='',
            newest_available_date='', oldest_available_date='',
-           frequency=''
+           frequency='',
+           database_code='', dataset_code=''
           } = dataset
          , _description = DOMPurify.sanitize( description );
 
-     return  {
-       name : name,
-       description : _description,
-       newest_available_date : newest_available_date,
-       oldest_available_date : oldest_available_date,
-       frequency : frequency
+     return  {              
+       name,
+       newest_available_date,
+       oldest_available_date,
+       frequency,
+       database_code, dataset_code,
+       description : _description
     };
   },
 

@@ -1,0 +1,8 @@
+{
+  "indices" : [
+    { "caption" : "Commodity Index" , "value" : "RICI/RICI" },
+    { "caption" : "Energy Commodity Index" , "value" : "RICI/RICIE" },
+    { "caption" : "Metals Commodity Index" , "value" : "RICI/RICIM" },
+    { "caption" : "Agriculture Commodity Index" , "value" : "RICI/RICIA" }
+  ]
+}

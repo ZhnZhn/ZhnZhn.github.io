@@ -3,6 +3,9 @@ import ApiUtils from '../utils/ApiUtils';
 
 const QuandlApi = {};
 
+/*order=asc&rows=12*/
+/*https://www.quandl.com/api/v3/databases/RICI.json downloads*/
+
 QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
 QuandlApi.BLANK = '';
 
@@ -21,7 +24,7 @@ QuandlApi.getRequestUrl = function(option){
   } else {
     _queryDate = QuandlApi.BLANK;
   }
-  
+
   /*
   const _queryDate = (fromDate && toDate)
           ? `sort_order=asc&trim_start=${fromDate}&trim_end=${toDate}`

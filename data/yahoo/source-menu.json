@@ -1,7 +1,7 @@
 {
   "menu" : [
     {
-       "caption" : "North American Stocks",
+       "caption" : "North American Stocks", "isInitClose" : true,
        "items" : [
          { "id"  : "QY_TORONTO" },
          { "id"  : "QY_TORONTO_VENTURE" },
@@ -22,7 +22,7 @@
          { "id"  : "QY_MADRID" }
        ]
     },{
-      "caption" : "World Stocks",
+      "caption" : "World Stocks", "isInitClose" : true,
       "items" : [
         { "id"  : "QY_AUSTRALIAN" },
         { "id"  : "QY_SHANGHAI" },

@@ -4,7 +4,10 @@ import React from 'react';
 import ButtonTab from './ButtonTab';
 import InfoPart from './InfoPart';
 
-const DESCR_CSS_CLASS = 'info__descr';
+const DESCR_CSS_CLASS = 'info__descr'
+    , LINK_CODE_CLASS = 'descr__quandl-link'
+    , LINK_CODE_CAPTION = 'Quandl Data Link'
+    , QUANDL_DATA_BASE = 'https://www.quandl.com/data/';
 
 const styles = {
   rootShow : {
@@ -21,9 +24,20 @@ const styles = {
   rootStyle : {
     marginTop: '4px'
   },
+  rootStyleDescription : {
+    marginTop: '10px'
+  },
   label : {
+    display : 'inline-block',
     color : '#1B75BB',
+    width : '110px',
+    textAlign : 'right',
+    paddingRight : '5px',
     fontWeight : 'bold'
+  },
+  codeLink : {
+    display : 'inline-block' ,
+    paddingTop : '10px'
   },
   text : {
     fontWeight : 'bold',
@@ -37,16 +51,33 @@ const styles = {
 }
 
 const PanelDataInfo = React.createClass({
+
+  _renderLinkCode(dbCode, dsCode){
+    if (!dbCode || !dsCode){
+      return undefined;
+    }
+    return (
+      <a
+        className={LINK_CODE_CLASS}
+        style={styles.codeLink}
+        href={`${QUANDL_DATA_BASE}${dbCode}/${dsCode}`}
+      >
+        {`${LINK_CODE_CAPTION} ${dbCode}/${dsCode}`}
+      </a>
+    )
+  },
+
   render(){
     const {isShow, onClickChart, info} = this.props
         , {
-             name, description,
+             name,
              newest_available_date,
              oldest_available_date,
-             frequency
+             frequency,
+             database_code, dataset_code,
+             description
            } = info
         , styleShow = isShow ? styles.rootShow : styles.rootHide;
-
 
     return (
        <div style={styleShow}>
@@ -56,9 +87,9 @@ const PanelDataInfo = React.createClass({
            onClick={onClickChart}
          />
          <InfoPart
-            caption="Name: "
+            caption=""
             text={name}
-            styleCaption={styles.label}
+            styleCaption={{ display: 'none' }}
             styleText={styles.text}
          />
          <InfoPart
@@ -80,13 +111,13 @@ const PanelDataInfo = React.createClass({
             styleCaption={styles.label}
             styleText={styles.text}
          />
+         {this._renderLinkCode(database_code, dataset_code)}
          <InfoPart
             caption=""
             text={description}
             isHtml={true}
             classText={DESCR_CSS_CLASS}
-            rootStyle={styles.rootStyle}
-            styleCaption={styles.label}
+            rootStyle={styles.rootStyleDescription}
             styleText={styles.textDescr}
          />
        </div>

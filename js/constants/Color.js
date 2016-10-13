@@ -72,7 +72,8 @@ var COLOR = {
   S_OPEN_INTEREST: '#8085e9',
   S_TURNOVER: '#6b8f4b',
   S_PRE_SETTLE: '#e77f32',
-  S_CLOSE: 'black'
+  S_CLOSE: 'black',
+  S_TRADES: 'black'
   //S_CLOSE : '#8d3960'
 
 };

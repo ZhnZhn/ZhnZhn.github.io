@@ -12,7 +12,7 @@
         { "id" : "ES_INDIC"}
       ]
     },{
-      "caption" : "Energy",
+      "caption" : "Energy", "isInitClose" : true,
       "items" : [
         { "id" : "ES_E_INDIC" },
         { "id" : "ES_E_STAT_Q" },
@@ -20,13 +20,13 @@
         { "id" : "ES_I_ENERGY" }
       ]
     },{
-      "caption" : "Finance",
+      "caption" : "Finance", "isInitClose" : true,
       "items" : [
         { "id" : "ES_F_PUBLIC" },
         { "id" : "ES_F_INTEREST" }
       ]
     },{
-      "caption" : "Agriculture",
+      "caption" : "Agriculture", "isInitClose" : true,
       "items" : [
         { "id" : "ES_AGRI_PRICES" },
         { "id" : "ES_AGRI_MILK" },
@@ -34,12 +34,12 @@
         { "id" : "ES_AGRI_ENVI" }
       ]
     },{
-      "caption" : "High-Tech Industry",
+      "caption" : "High-Tech Industry", "isInitClose" : true,
       "items" : [
         { "id" : "ES_HT_INDIC" }
       ]
     },{
-      "caption" : "Real Estate",
+      "caption" : "Real Estate", "isInitClose" : true,
       "items" : [
         { "id" : "ES_RE_INDIC" }
       ]

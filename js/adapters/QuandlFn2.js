@@ -52,14 +52,19 @@ var QuandlFn2 = {
     var oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail;
     var _dataset$frequency = dataset.frequency;
     var frequency = _dataset$frequency === undefined ? '' : _dataset$frequency;
+    var _dataset$database_cod = dataset.database_code;
+    var database_code = _dataset$database_cod === undefined ? '' : _dataset$database_cod;
+    var _dataset$dataset_code = dataset.dataset_code;
+    var dataset_code = _dataset$dataset_code === undefined ? '' : _dataset$dataset_code;
     var _description = _purify2.default.sanitize(description);
 
     return {
       name: name,
-      description: _description,
       newest_available_date: newest_available_date,
       oldest_available_date: oldest_available_date,
-      frequency: frequency
+      frequency: frequency,
+      database_code: database_code, dataset_code: dataset_code,
+      description: _description
     };
   },
   createZhConfig: function createZhConfig(option) {

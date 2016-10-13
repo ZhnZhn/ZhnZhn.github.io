@@ -39,6 +39,7 @@ const qeSources = [
   'EU_COMMISSION',
   'CPI_INFLATION',
   'BIG_MAC',
+  'ROGERS_INDICES',
 
   'WIKI_STOCK',
   'TOKIO_STOCK',
