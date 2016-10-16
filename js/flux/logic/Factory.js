@@ -80,6 +80,10 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     props.onTestDateOrEmpty = onTestDateOrEmpty;
   }
 
+  if (!props.loadId) {
+    props.loadId = _Type.LoadType.Q;
+  }
+
   return _react2.default.createElement(Comp, _extends({
     key: dialogType,
     caption: conf.dialogCaption,

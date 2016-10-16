@@ -7,7 +7,7 @@ import RouterFnValue from './RouterFnValue';
 import ChartContainer2 from '../../components/ChartContainer2';
 
 import Msg from '../../constants/Msg';
-import { ModalDialog } from '../../constants/Type';
+import { ModalDialog, LoadType } from '../../constants/Type';
 
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
@@ -57,6 +57,10 @@ const createDialogComp = function (conf, browserType){
        if (props.isContinious) {
          props.msgTestDateOrEmpty = Msg.TEST_DATE_OR_EMPTY;
          props.onTestDateOrEmpty = onTestDateOrEmpty;
+       }
+
+       if (!props.loadId){
+         props.loadId = LoadType.Q;
        }
 
    return  React.createElement(Comp, {
