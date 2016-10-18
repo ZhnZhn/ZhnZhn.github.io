@@ -27,9 +27,13 @@ const BrowserActions = Reflux.createActions({
 });
 
 const _fnFetchSourceMenu = function({ json, option, onCompleted }){
+  /*
   const { menu, items } = json
       , { browserType } = option;
   onCompleted({ menu, items, browserType });
+  */
+  const { browserType } = option;
+  onCompleted({ json, browserType });
 }
 
 BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function(option){

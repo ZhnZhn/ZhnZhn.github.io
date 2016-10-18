@@ -85,7 +85,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }]
 }];
 
-var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.QUANDL, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.QUANDL)), _defineProperty(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);
+var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.ECONOMIC, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.ECONOMIC)), _defineProperty(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);
 
 exports.default = BrowserMenu;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserMenu.js.map

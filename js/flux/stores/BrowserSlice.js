@@ -8,6 +8,10 @@ var _BrowserMenu = require('../../constants/BrowserMenu');
 
 var _BrowserMenu2 = _interopRequireDefault(_BrowserMenu);
 
+var _BrowserConfig = require('../../constants/BrowserConfig');
+
+var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
+
 var _Factory = require('../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
@@ -17,6 +21,10 @@ var _BrowserActions = require('../actions/BrowserActions');
 var _DataQE = require('../../constants/DataQE');
 
 var _DataQE2 = _interopRequireDefault(_DataQE);
+
+var _DataUS = require('../../constants/DataUS');
+
+var _DataUS2 = _interopRequireDefault(_DataUS);
 
 var _DataWL = require('../../constants/DataWL');
 
@@ -49,24 +57,36 @@ var BrowserSlice = {
   browserMenu: _BrowserMenu2.default,
   routeDialog: {
     QE: _DataQE2.default,
-
+    QUS: _DataUS2.default,
     WL: _DataWL2.default
+
   },
 
   getBrowserMenu: function getBrowserMenu(browserType) {
     return this.browserMenu[browserType];
   },
+  isWithItemCounter: function isWithItemCounter(browserType) {
+    return !_BrowserConfig2.default[browserType].withoutItemCounter;
+  },
   setMenuItemOpen: function setMenuItemOpen(chartType, browserType) {
-    fnSetIsOpen(chartType, this.browserMenu, browserType, true);
+    if (this.isWithItemCounter(browserType)) {
+      fnSetIsOpen(chartType, this.browserMenu, browserType, true);
+    }
   },
   setMenuItemClose: function setMenuItemClose(chartType, browserType) {
-    fnSetIsOpen(chartType, this.browserMenu, browserType, false);
+    if (this.isWithItemCounter(browserType)) {
+      fnSetIsOpen(chartType, this.browserMenu, browserType, false);
+    }
   },
   addMenuItemCounter: function addMenuItemCounter(chartType, browserType) {
-    fnAddCounter(chartType, browserType, this.browserMenu, 1);
+    if (this.isWithItemCounter(browserType)) {
+      fnAddCounter(chartType, browserType, this.browserMenu, 1);
+    }
   },
   minusMenuItemCounter: function minusMenuItemCounter(chartType, browserType) {
-    fnAddCounter(chartType, browserType, this.browserMenu, -1);
+    if (this.isWithItemCounter(browserType)) {
+      fnAddCounter(chartType, browserType, this.browserMenu, -1);
+    }
   },
   getSourceConfig: function getSourceConfig(browserId, sourceId) {
     return this.routeDialog[browserId][sourceId];
@@ -86,15 +106,23 @@ var BrowserSlice = {
     }
   },
   onLoadBrowserDynamicCompleted: function onLoadBrowserDynamicCompleted(option) {
-    var menu = option.menu;
-    var items = option.items;
+    var json = option.json;
     var browserType = option.browserType;
-    var elMenu = _BrowserMenu2.default.createMenu(menu, items, browserType);
-    this.routeDialog[browserType] = items;
-    this.browserMenu[browserType] = elMenu;
-    this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-      menuItems: elMenu, browserType: browserType
-    });
+
+    if (this.isWithItemCounter(browserType)) {
+      var menu = json.menu;
+      var items = json.items;
+      var elMenu = _BrowserMenu2.default.createMenu(menu, items, browserType);
+      this.routeDialog[browserType] = items;
+      this.browserMenu[browserType] = elMenu;
+      this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+        menuItems: elMenu, browserType: browserType
+      });
+    } else {
+      this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+        json: json, browserType: browserType
+      });
+    }
   },
   onLoadBrowserDynamicFailed: function onLoadBrowserDynamicFailed(option) {
     option.alertItemId = option.alertItemId ? option.alertItemId : option.caption;

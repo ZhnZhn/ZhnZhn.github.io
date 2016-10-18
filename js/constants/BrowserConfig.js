@@ -4,33 +4,51 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var BrowserConfig = {
-  EUROSTAT: {
-    browserType: 'ES',
-    caption: 'European Statistics',
-    sourceMenuUrl: './data/eurostat/source-menu.json'
-  },
-  GOOGLE: {
-    browserType: 'QD',
-    caption: 'Quandl : Google Stocks',
-    sourceMenuUrl: './data/google/source-menu.json'
-  },
-  YAHOO: {
-    browserType: 'QY',
-    caption: 'Quandl : Yahoo Stocks',
-    sourceMenuUrl: './data/yahoo/source-menu.json'
-  },
-  PREMIUM_SAMPLE: {
-    browserType: 'QPS',
-    caption: 'Quandl Premium Sample',
-    sourceMenuUrl: './data/quandl-sample/source-menu.json'
-  },
-  FRANCE_STATISTICS: {
-    browserType: 'QFS',
-    caption: 'Quandl : France Statistics',
-    sourceMenuUrl: './data/france-statistics/source-menu.json'
-  }
-};
+var _BrowserConfig;
+
+var _Type = require('./Type');
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
+  browserType: _Type.BrowserType.EUROSTAT,
+  isDynamic: true,
+  caption: 'European Statistics',
+  sourceMenuUrl: './data/eurostat/source-menu.json'
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
+  browserType: _Type.BrowserType.ECONOMIC,
+  isDynamic: false
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.GOOGLE, {
+  browserType: _Type.BrowserType.GOOGLE,
+  isDynamic: true,
+  caption: 'Quandl : Google Stocks',
+  sourceMenuUrl: './data/google/source-menu.json'
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.YAHOO, {
+  browserType: _Type.BrowserType.YAHOO,
+  isDynamic: true,
+  caption: 'Quandl : Yahoo Stocks',
+  sourceMenuUrl: './data/yahoo/source-menu.json'
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.PREMIUM_SAMPLE, {
+  browserType: _Type.BrowserType.PREMIUM_SAMPLE,
+  isDynamic: true,
+  caption: 'Quandl Premium Sample',
+  sourceMenuUrl: './data/quandl-sample/source-menu.json'
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.FRANCE_STATISTICS, {
+  browserType: _Type.BrowserType.FRANCE_STATISTICS,
+  isDynamic: true,
+  caption: 'Quandl : France Statistics',
+  sourceMenuUrl: './data/france-statistics/source-menu.json'
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
+  browserType: _Type.BrowserType.US_STOCKS,
+  isDynamic: true,
+  caption: 'Quandl : US Stocks by Sectors',
+  sourceMenuUrl: './data/us-stocks/source-menu.json',
+  withoutItemCounter: true
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {
+  browserType: _Type.BrowserType.WATCH_LIST,
+  isDynamic: false,
+  withoutItemCounter: true
+}), _BrowserConfig);
 
 exports.default = BrowserConfig;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserConfig.js.map

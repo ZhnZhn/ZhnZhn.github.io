@@ -37,11 +37,15 @@ var _fnFetchSourceMenu = function _fnFetchSourceMenu(_ref) {
   var json = _ref.json;
   var option = _ref.option;
   var onCompleted = _ref.onCompleted;
-  var menu = json.menu;
-  var items = json.items;
+
+  /*
+  const { menu, items } = json
+      , { browserType } = option;
+  onCompleted({ menu, items, browserType });
+  */
   var browserType = option.browserType;
 
-  onCompleted({ menu: menu, items: items, browserType: browserType });
+  onCompleted({ json: json, browserType: browserType });
 };
 
 BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function (option) {

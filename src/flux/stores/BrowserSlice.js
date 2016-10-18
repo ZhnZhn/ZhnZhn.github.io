@@ -1,11 +1,12 @@
 
 import BrowserMenu from '../../constants/BrowserMenu';
+import BrowserConfig from '../../constants/BrowserConfig';
 
 import Factory from '../logic/Factory';
 import { BrowserActionTypes } from '../actions/BrowserActions';
 
 import DataQE from '../../constants/DataQE';
-
+import DataUS from '../../constants/DataUS';
 import DataWL from '../../constants/DataWL';
 
 const fnFindObj = function(menu, chartType){
@@ -33,24 +34,36 @@ const BrowserSlice = {
   browserMenu : BrowserMenu,
   routeDialog : {
     QE : DataQE,
-
+    QUS : DataUS,
     WL : DataWL
+
   },
 
   getBrowserMenu(browserType){
      return this.browserMenu[browserType];
   },
+  isWithItemCounter(browserType){
+    return !BrowserConfig[browserType].withoutItemCounter;
+  },
   setMenuItemOpen(chartType, browserType){
-    fnSetIsOpen(chartType, this.browserMenu, browserType, true);
+    if (this.isWithItemCounter(browserType)){
+       fnSetIsOpen(chartType, this.browserMenu, browserType, true);
+    }
   },
   setMenuItemClose(chartType, browserType){
-    fnSetIsOpen(chartType, this.browserMenu, browserType, false);
+    if (this.isWithItemCounter(browserType)){
+      fnSetIsOpen(chartType, this.browserMenu, browserType, false);
+    }
   },
   addMenuItemCounter(chartType, browserType){
-    fnAddCounter(chartType, browserType, this.browserMenu, 1);
+    if (this.isWithItemCounter(browserType)){
+      fnAddCounter(chartType, browserType, this.browserMenu, 1);
+    }
   },
   minusMenuItemCounter(chartType, browserType){
-    fnAddCounter(chartType, browserType, this.browserMenu, -1);
+    if (this.isWithItemCounter(browserType)){
+      fnAddCounter(chartType, browserType, this.browserMenu, -1);
+    }
   },
 
   getSourceConfig(browserId, sourceId){
@@ -72,13 +85,20 @@ const BrowserSlice = {
     }
   },
   onLoadBrowserDynamicCompleted(option){
-    const { menu, items, browserType } = option
-        , elMenu = BrowserMenu.createMenu(menu, items, browserType);
-    this.routeDialog[browserType] = items;
-    this.browserMenu[browserType] = elMenu;
-    this.trigger(BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-      menuItems : elMenu, browserType: browserType
-    })
+    const { json, browserType } = option;
+    if (this.isWithItemCounter(browserType)){
+      const { menu, items } = json
+          , elMenu = BrowserMenu.createMenu(menu, items, browserType);
+      this.routeDialog[browserType] = items;
+      this.browserMenu[browserType] = elMenu;
+      this.trigger(BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+         menuItems : elMenu, browserType: browserType
+      })
+    } else {
+      this.trigger(BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+               json, browserType
+      })
+    }
   },
   onLoadBrowserDynamicFailed(option){
     option.alertItemId = (option.alertItemId)

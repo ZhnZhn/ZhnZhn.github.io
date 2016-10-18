@@ -39,7 +39,8 @@ const BrowserContainer = React.createClass({
     return (
       <div className="hrz-container">
            <QuandlBrowser
-              browserType={BrowserType.QUANDL}
+              //browserType={BrowserType.QUANDL}
+              browserType={BrowserType.ECONOMIC}
               caption="Quandl Economic"
               store={store}
               showAction={showBrowserAction}

@@ -3,6 +3,7 @@ import React from 'react';
 
 import RouterDialog from './RouterDialog';
 import RouterFnValue from './RouterFnValue';
+import RouterBrowser from './RouterBrowser';
 
 import ChartContainer2 from '../../components/ChartContainer2';
 
@@ -13,7 +14,6 @@ import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
 import DateUtils from '../../utils/DateUtils';
 
-import SourceBrowserDynamic from '../../components/browser-container/SourceBrowserDynamic';
 import ChartStore from '../stores/ChartStore';
 
 const onLoadChart = ChartActions.loadStock
@@ -103,26 +103,27 @@ const getDataConf = function(dialogType){
   return ChartStore.getSourceConfig(dataId, dialogType);
 }
 
-const Factory = {};
-Factory.createDialog = function(dialogType, browserType){
+const Factory = {
+  createDialog(dialogType, browserType){
    return createDialogComp(getDataConf(dialogType), browserType);
-}
+ },
 
-Factory.createChartContainer = function(dialogType, browserType){
+ createChartContainer(dialogType, browserType){
   return createChartContainerComp(getDataConf(dialogType), browserType);
-}
+ },
 
-Factory.createBrowserDynamic = function({
-  browserType, caption='' , sourceMenuUrl
-}){
-  return React.createElement(SourceBrowserDynamic , {
-     key : browserType,
-     browserType : browserType,
-     store : ChartStore,
-     isInitShow : true,
-     caption : caption,
-     sourceMenuUrl : sourceMenuUrl
-  })
+ createBrowserDynamic({ browserType, caption='' , sourceMenuUrl})
+ {
+    const comp = RouterBrowser[browserType] || RouterBrowser.DEFAULT;
+    return React.createElement(comp , {
+      key : browserType,
+      browserType : browserType,
+      store : ChartStore,
+      isInitShow : true,
+      caption : caption,
+      sourceMenuUrl : sourceMenuUrl
+    });
+  }
 }
 
 export default Factory

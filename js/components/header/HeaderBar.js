@@ -72,7 +72,8 @@ var HeaderBar = _react2.default.createClass({
     };
   },
   _handlerClickQuandl: function _handlerClickQuandl() {
-    _BrowserActions2.default.showBrowser(_Type.BrowserType.QUANDL);
+    //BrowserActions.showBrowser(BrowserType.QUANDL);
+    _BrowserActions2.default.showBrowser(_Type.BrowserType.ECONOMIC);
     this.setState({ isDS: false });
   },
   _handlerClickDynamic: function _handlerClickDynamic(browserConfig) {
@@ -147,6 +148,7 @@ var HeaderBar = _react2.default.createClass({
       }),
       _react2.default.createElement(_PanelBrowsers2.default, {
         isShow: isDS,
+        BROWSER: _Type.BrowserType,
         browserConfig: _BrowserConfig2.default,
         onClickQuandl: this._handlerClickQuandl,
         onClickDynamic: this._handlerClickDynamic,

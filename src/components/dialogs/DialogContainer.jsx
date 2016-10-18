@@ -18,10 +18,10 @@ const DialogContainer = React.createClass({
     }
   },
 
-  componentDidMount: function(){
+  componentDidMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
   },
-  componentWillUnmount: function(){
+  componentWillUnmount(){
     this.unsubscribe();
   },
   _onStore(actionType, option){

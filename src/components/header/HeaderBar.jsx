@@ -36,7 +36,8 @@ const HeaderBar = React.createClass({
   },
 
   _handlerClickQuandl(){
-    BrowserActions.showBrowser(BrowserType.QUANDL);
+    //BrowserActions.showBrowser(BrowserType.QUANDL);
+    BrowserActions.showBrowser(BrowserType.ECONOMIC);
     this.setState({ isDS: false });
   },
   _handlerClickDynamic(browserConfig){
@@ -118,9 +119,10 @@ const HeaderBar = React.createClass({
 
            <PanelBrowsers
               isShow={isDS}
+              BROWSER={BrowserType}
               browserConfig={BrowserConfig}
               onClickQuandl={this._handlerClickQuandl}
-              onClickDynamic={this._handlerClickDynamic}
+              onClickDynamic={this._handlerClickDynamic}              
               onClickWatch={this._handlerClickWatch}
            />
       </div>

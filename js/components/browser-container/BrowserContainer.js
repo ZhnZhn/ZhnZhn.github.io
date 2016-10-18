@@ -59,8 +59,9 @@ var BrowserContainer = _react2.default.createClass({
     return _react2.default.createElement(
       'div',
       { className: 'hrz-container' },
-      _react2.default.createElement(_QuandlBrowser2.default, {
-        browserType: _Type.BrowserType.QUANDL,
+      _react2.default.createElement(_QuandlBrowser2.default
+      //browserType={BrowserType.QUANDL}
+      , { browserType: _Type.BrowserType.ECONOMIC,
         caption: 'Quandl Economic',
         store: store,
         showAction: showBrowserAction,

@@ -34,8 +34,6 @@ var DialogContainer = _react2.default.createClass({
       currentDialog: null
     };
   },
-
-
   componentDidMount: function componentDidMount() {
     this.unsubscribe = this.props.store.listen(this._onStore);
   },

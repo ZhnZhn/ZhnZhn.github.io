@@ -110,9 +110,8 @@ var ChartStore = _reflux2.default.createStore(_extends({
     var chartType = option.chartType;
     var browserType = option.browserType;
 
-    if (browserType !== _Type.BrowserType.WATCH_LIST) {
-      this.addMenuItemCounter(chartType, browserType);
-    }
+
+    this.addMenuItemCounter(chartType, browserType);
 
     var chartCont = this.charts[chartType];
     if (chartCont) {
@@ -142,9 +141,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
     _fnLogLoadError(option);
   },
   onShowChart: function onShowChart(chartType, browserType) {
-    if (browserType !== _Type.BrowserType.WATCH_LIST) {
-      this.setMenuItemOpen(chartType, browserType);
-    }
+    this.setMenuItemOpen(chartType, browserType);
 
     var chartCont = this.charts[chartType];
     if (chartCont) {
@@ -158,9 +155,8 @@ var ChartStore = _reflux2.default.createStore(_extends({
     }
   },
   onCloseChart: function onCloseChart(chartType, browserType, chartId) {
-    if (browserType !== _Type.BrowserType.WATCH_LIST) {
-      this.minusMenuItemCounter(chartType, browserType);
-    }
+
+    this.minusMenuItemCounter(chartType, browserType);
 
     var chartCont = this.charts[chartType];
     chartCont.configs = chartCont.configs.filter(function (config) {
@@ -175,7 +171,7 @@ var ChartStore = _reflux2.default.createStore(_extends({
     this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
   },
   onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
-    if (browserType !== _Type.BrowserType.WATCH_LIST) {
+    if (this.isWithItemCounter(browserType)) {
       this.uncheckActiveCheckbox(chartType);
       this.setMenuItemClose(chartType, browserType);
       this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);

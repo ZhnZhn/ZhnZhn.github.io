@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -22,11 +20,13 @@ var _ScrollPane = require('./ScrollPane');
 
 var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
 
-var _MenuPart = require('./MenuPart');
+var _MenuListType = require('./MenuListType2');
 
-var _MenuPart2 = _interopRequireDefault(_MenuPart);
+var _MenuListType2 = _interopRequireDefault(_MenuListType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import MenuPart from './MenuPart';
 
 var Styles = {
   browser: {
@@ -40,8 +40,8 @@ var Styles = {
   }
 };
 
-var MenuBrowserDynamic = _react2.default.createClass({
-  displayName: 'MenuBrowserDynamic',
+var MenuBrowserDynamic2 = _react2.default.createClass({
+  displayName: 'MenuBrowserDynamic2',
   getInitialState: function getInitialState() {
     var isInitShow = this.props.isInitShow;
 
@@ -77,17 +77,13 @@ var MenuBrowserDynamic = _react2.default.createClass({
   _onStore: function _onStore(actionType, data) {
     var _props2 = this.props;
     var browserType = _props2.browserType;
-    var store = _props2.store;
     var showAction = _props2.showAction;
-    var updateAction = _props2.updateAction;
     var loadCompletedAction = _props2.loadCompletedAction;
 
     if (actionType === showAction && data === browserType) {
       this._handlerShow();
     } else if (actionType === loadCompletedAction && data.browserType === browserType) {
-      this.setState({ menuItems: data.menuItems, isLoaded: true });
-    } else if (actionType === updateAction && data === browserType) {
-      this.setState({ menuItems: store.getBrowserMenu(browserType) });
+      this.setState({ menuItems: data.json, isLoaded: true });
     }
   },
   _handlerHide: function _handlerHide() {
@@ -95,13 +91,6 @@ var MenuBrowserDynamic = _react2.default.createClass({
   },
   _handlerShow: function _handlerShow() {
     this.setState({ isShow: true });
-  },
-  _renderMenuParts: function _renderMenuParts() {
-    var menuItems = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-
-    return menuItems.map(function (menuPart, index) {
-      return _react2.default.createElement(_MenuPart2.default, _extends({ key: index }, menuPart));
-    });
   },
   render: function render() {
     var _props3 = this.props;
@@ -122,12 +111,12 @@ var MenuBrowserDynamic = _react2.default.createClass({
       _react2.default.createElement(
         _ScrollPane2.default,
         { style: Styles.scrollDiv },
-        this._renderMenuParts(menuItems),
+        _react2.default.createElement(_MenuListType2.default, { model: menuItems }),
         children
       )
     );
   }
 });
 
-exports.default = MenuBrowserDynamic;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuBrowserDynamic.js.map
+exports.default = MenuBrowserDynamic2;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuBrowserDynamic2.js.map

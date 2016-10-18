@@ -19,22 +19,23 @@ const STYLE = {
     paddingTop : '5px',
     paddingBottom : '5px',
 
-    width: '250px'
+    width: '280px'
   }
 }
 
 
 const PanelBrowsers = (props) => {
   const {
-          isShow, browserConfig,
+          isShow, BROWSER, browserConfig,
           onClickQuandl, onClickDynamic, onClickWatch
         } = props;
+
   return (
     <ShowHide isShow={isShow} style={STYLE.ROOT}>
       <div>
         <div
           className="row__topic__odd item__eurostat"
-          onClick={onClickDynamic.bind(null, browserConfig.EUROSTAT)}
+          onClick={onClickDynamic.bind(null, browserConfig[BROWSER.EUROSTAT])}
         >
           Eurostat
         </div>
@@ -46,30 +47,36 @@ const PanelBrowsers = (props) => {
         </div>
         <div
           className="row__topic__odd item__quandl"
-          onClick={onClickDynamic.bind(null, browserConfig.YAHOO)}
+          onClick={onClickDynamic.bind(null, browserConfig[BROWSER.YAHOO])}
         >
           Quandl : Yahoo Stocks
         </div>
         <div
           className="row__topic__even item__quandl"
-          onClick={onClickDynamic.bind(null, browserConfig.GOOGLE)}
+          onClick={onClickDynamic.bind(null, browserConfig[BROWSER.GOOGLE])}
         >
           Quandl : Google Stocks
         </div>
         <div
           className="row__topic__odd item__quandl"
-          onClick={onClickDynamic.bind(null, browserConfig.PREMIUM_SAMPLE)}
+          onClick={onClickDynamic.bind(null, browserConfig[BROWSER.PREMIUM_SAMPLE])}
         >
           Quandl Premium Sample
         </div>
         <div
           className="row__topic__even item__quandl"
-          onClick={onClickDynamic.bind(null, browserConfig.FRANCE_STATISTICS)}
+          onClick={onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])}
         >
           Quandl : France Statistics
         </div>
         <div
-          className="row__topic__odd item__watch"
+          className="row__topic__odd item__quandl"
+          onClick={onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])}
+        >
+          Quandl : US Stocks By Sectors
+        </div>
+        <div
+          className="row__topic__even item__watch"
           onClick={onClickWatch}
         >
           Watch

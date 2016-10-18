@@ -89,7 +89,8 @@ const menuQuandl = [
 ];
 
 const BrowserMenu = {
-  [BrowserType.QUANDL] : fnCreateMenu(menuQuandl, DataQE, BrowserType.QUANDL),
+  //[BrowserType.QUANDL] : fnCreateMenu(menuQuandl, DataQE, BrowserType.QUANDL),
+  [BrowserType.ECONOMIC] : fnCreateMenu(menuQuandl, DataQE, BrowserType.ECONOMIC),
 
   createMenu : fnCreateMenu
 }

@@ -6,7 +6,7 @@ import BrowserActions, {BrowserActionTypes} from '../actions/BrowserActions';
 import AnalyticActions from '../actions/AnalyticActions';
 import WatchActions from '../actions/WatchActions';
 
-import {BrowserType, ModalDialog} from '../../constants/Type';
+import { ModalDialog } from '../../constants/Type';
 
 import Factory from '../logic/Factory';
 
@@ -64,9 +64,8 @@ const ChartStore = Reflux.createStore({
  },
  onLoadStockCompleted(option, config){
      const { chartType, browserType } = option;
-     if (browserType !== BrowserType.WATCH_LIST){
-       this.addMenuItemCounter(chartType, browserType);
-     }
+
+     this.addMenuItemCounter(chartType, browserType);
 
      const chartCont = this.charts[chartType];
      if (chartCont){
@@ -100,9 +99,7 @@ const ChartStore = Reflux.createStore({
  },
 
  onShowChart(chartType, browserType){
-   if (browserType !== BrowserType.WATCH_LIST){
-     this.setMenuItemOpen(chartType, browserType);
-   }
+   this.setMenuItemOpen(chartType, browserType);
 
    const chartCont = this.charts[chartType];
    if (chartCont){
@@ -119,9 +116,8 @@ const ChartStore = Reflux.createStore({
  },
 
  onCloseChart(chartType, browserType, chartId){
-   if (browserType !== BrowserType.WATCH_LIST){
-     this.minusMenuItemCounter(chartType, browserType);
-   }
+
+   this.minusMenuItemCounter(chartType, browserType);
 
    const chartCont = this.charts[chartType];
    chartCont.configs = chartCont.configs.filter(function(config){
@@ -137,7 +133,7 @@ const ChartStore = Reflux.createStore({
  },
 
  onCloseChartContainer(chartType, browserType){
-   if (browserType !== BrowserType.WATCH_LIST){
+   if(this.isWithItemCounter(browserType)){
      this.uncheckActiveCheckbox(chartType);
      this.setMenuItemClose(chartType, browserType);
      this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);

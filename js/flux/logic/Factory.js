@@ -18,6 +18,10 @@ var _RouterFnValue = require('./RouterFnValue');
 
 var _RouterFnValue2 = _interopRequireDefault(_RouterFnValue);
 
+var _RouterBrowser = require('./RouterBrowser');
+
+var _RouterBrowser2 = _interopRequireDefault(_RouterBrowser);
+
 var _ChartContainer = require('../../components/ChartContainer2');
 
 var _ChartContainer2 = _interopRequireDefault(_ChartContainer);
@@ -39,10 +43,6 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
-var _SourceBrowserDynamic = require('../../components/browser-container/SourceBrowserDynamic');
-
-var _SourceBrowserDynamic2 = _interopRequireDefault(_SourceBrowserDynamic);
 
 var _ChartStore = require('../stores/ChartStore');
 
@@ -122,29 +122,29 @@ var getDataConf = function getDataConf(dialogType) {
   return _ChartStore2.default.getSourceConfig(dataId, dialogType);
 };
 
-var Factory = {};
-Factory.createDialog = function (dialogType, browserType) {
-  return createDialogComp(getDataConf(dialogType), browserType);
-};
+var Factory = {
+  createDialog: function createDialog(dialogType, browserType) {
+    return createDialogComp(getDataConf(dialogType), browserType);
+  },
+  createChartContainer: function createChartContainer(dialogType, browserType) {
+    return createChartContainerComp(getDataConf(dialogType), browserType);
+  },
+  createBrowserDynamic: function createBrowserDynamic(_ref) {
+    var browserType = _ref.browserType;
+    var _ref$caption = _ref.caption;
+    var caption = _ref$caption === undefined ? '' : _ref$caption;
+    var sourceMenuUrl = _ref.sourceMenuUrl;
 
-Factory.createChartContainer = function (dialogType, browserType) {
-  return createChartContainerComp(getDataConf(dialogType), browserType);
-};
-
-Factory.createBrowserDynamic = function (_ref) {
-  var browserType = _ref.browserType;
-  var _ref$caption = _ref.caption;
-  var caption = _ref$caption === undefined ? '' : _ref$caption;
-  var sourceMenuUrl = _ref.sourceMenuUrl;
-
-  return _react2.default.createElement(_SourceBrowserDynamic2.default, {
-    key: browserType,
-    browserType: browserType,
-    store: _ChartStore2.default,
-    isInitShow: true,
-    caption: caption,
-    sourceMenuUrl: sourceMenuUrl
-  });
+    var comp = _RouterBrowser2.default[browserType] || _RouterBrowser2.default.DEFAULT;
+    return _react2.default.createElement(comp, {
+      key: browserType,
+      browserType: browserType,
+      store: _ChartStore2.default,
+      isInitShow: true,
+      caption: caption,
+      sourceMenuUrl: sourceMenuUrl
+    });
+  }
 };
 
 exports.default = Factory;

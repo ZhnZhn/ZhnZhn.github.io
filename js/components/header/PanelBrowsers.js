@@ -31,16 +31,18 @@ var STYLE = {
     paddingTop: '5px',
     paddingBottom: '5px',
 
-    width: '250px'
+    width: '280px'
   }
 };
 
 var PanelBrowsers = function PanelBrowsers(props) {
   var isShow = props.isShow;
+  var BROWSER = props.BROWSER;
   var browserConfig = props.browserConfig;
   var onClickQuandl = props.onClickQuandl;
   var onClickDynamic = props.onClickDynamic;
   var onClickWatch = props.onClickWatch;
+
 
   return _react2.default.createElement(
     _ShowHide2.default,
@@ -52,7 +54,7 @@ var PanelBrowsers = function PanelBrowsers(props) {
         'div',
         {
           className: 'row__topic__odd item__eurostat',
-          onClick: onClickDynamic.bind(null, browserConfig.EUROSTAT)
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.EUROSTAT])
         },
         'Eurostat'
       ),
@@ -68,7 +70,7 @@ var PanelBrowsers = function PanelBrowsers(props) {
         'div',
         {
           className: 'row__topic__odd item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig.YAHOO)
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.YAHOO])
         },
         'Quandl : Yahoo Stocks'
       ),
@@ -76,7 +78,7 @@ var PanelBrowsers = function PanelBrowsers(props) {
         'div',
         {
           className: 'row__topic__even item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig.GOOGLE)
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.GOOGLE])
         },
         'Quandl : Google Stocks'
       ),
@@ -84,7 +86,7 @@ var PanelBrowsers = function PanelBrowsers(props) {
         'div',
         {
           className: 'row__topic__odd item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig.PREMIUM_SAMPLE)
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.PREMIUM_SAMPLE])
         },
         'Quandl Premium Sample'
       ),
@@ -92,14 +94,22 @@ var PanelBrowsers = function PanelBrowsers(props) {
         'div',
         {
           className: 'row__topic__even item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig.FRANCE_STATISTICS)
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])
         },
         'Quandl : France Statistics'
       ),
       _react2.default.createElement(
         'div',
         {
-          className: 'row__topic__odd item__watch',
+          className: 'row__topic__odd item__quandl',
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])
+        },
+        'Quandl : US Stocks By Sectors'
+      ),
+      _react2.default.createElement(
+        'div',
+        {
+          className: 'row__topic__even item__watch',
           onClick: onClickWatch
         },
         'Watch'

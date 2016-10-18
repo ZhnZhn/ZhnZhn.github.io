@@ -1,0 +1,5985 @@
+{
+  "meta": {
+    "caption" : "text",
+    "level1" : "children",
+    "level2" : "children",
+    "level3" : "children"
+  },
+  "children": [
+    {
+      "text": "Basic Materials",
+      "children": [
+        {
+          "text": "Agricultural Chemicals",
+          "children": [
+            {
+              "id": "DD",
+              "text": "DD - E. I. du Pont de Nemours and Company",
+              "leaf": true
+            },
+            {
+              "id": "MON",
+              "text": "MON - Monsanto Co.",
+              "leaf": true
+            },
+            {
+              "id": "SYT",
+              "text": "SYT - Syngenta AG",
+              "leaf": true
+            },
+            {
+              "id": "POT",
+              "text": "POT - Potash Corp. of Saskatchewan, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MOS",
+              "text": "MOS - The Mosaic Company",
+              "leaf": true
+            },
+            {
+              "id": "AGU",
+              "text": "AGU - Agrium Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CF",
+              "text": "CF - CF Industries Holdings, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Aluminum",
+          "children": [
+            {
+              "id": "AA",
+              "text": "AA - Alcoa, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ACH",
+              "text": "ACH - Aluminum Corporation Of China Limited",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Chemicals - Major Diversified",
+          "children": [
+            {
+              "id": "DOW",
+              "text": "DOW - The Dow Chemical Company",
+              "leaf": true
+            },
+            {
+              "id": "PX",
+              "text": "PX - Praxair Inc.",
+              "leaf": true
+            },
+            {
+              "id": "APD",
+              "text": "APD - Air Products & Chemicals Inc.",
+              "leaf": true
+            },
+            {
+              "id": "EMN",
+              "text": "EMN - Eastman Chemical Co.",
+              "leaf": true
+            },
+            {
+              "id": "FMC",
+              "text": "FMC - FMC Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CE",
+              "text": "CE - Celanese Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SQM",
+              "text": "SQM - Chemical & Mining Co. of Chile Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ARG",
+              "text": "ARG - Airgas Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ASH",
+              "text": "ASH - Ashland Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HUN",
+              "text": "HUN - Huntsman Corporation",
+              "leaf": true
+            },
+            {
+              "id": "BAK",
+              "text": "BAK - Braskem S.A.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Copper",
+          "children": [
+            {
+              "id": "FCX",
+              "text": "FCX - Freeport-McMoRan Copper & Gold Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SCCO",
+              "text": "SCCO - Southern Copper Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Gold",
+          "children": [
+            {
+              "id": "ABX",
+              "text": "ABX - Barrick Gold Corporation",
+              "leaf": true
+            },
+            {
+              "id": "GG",
+              "text": "GG - Goldcorp Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NEM",
+              "text": "NEM - Newmont Mining Corp.",
+              "leaf": true
+            },
+            {
+              "id": "GOLD",
+              "text": "GOLD - Randgold Resources Limited",
+              "leaf": true
+            },
+            {
+              "id": "AU",
+              "text": "AU - AngloGold Ashanti Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "FNV",
+              "text": "FNV - Franco-Nevada Corporation",
+              "leaf": true
+            },
+            {
+              "id": "AUY",
+              "text": "AUY - Yamana Gold, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AEM",
+              "text": "AEM - Agnico-Eagle Mines Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "KGC",
+              "text": "KGC - Kinross Gold Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Independent Oil & Gas",
+          "children": [
+            {
+              "id": "COP",
+              "text": "COP - ConocoPhillips",
+              "leaf": true
+            },
+            {
+              "id": "OXY",
+              "text": "OXY - Occidental Petroleum Corporation",
+              "leaf": true
+            },
+            {
+              "id": "EPD",
+              "text": "EPD - Enterprise Products Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "EOG",
+              "text": "EOG - EOG Resources, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SU",
+              "text": "SU - Suncor Energy Inc.",
+              "leaf": true
+            },
+            {
+              "id": "APC",
+              "text": "APC - Anadarko Petroleum Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CNQ",
+              "text": "CNQ - Canadian Natural Resources Limited",
+              "leaf": true
+            },
+            {
+              "id": "APA",
+              "text": "APA - Apache Corp.",
+              "leaf": true
+            },
+            {
+              "id": "DVN",
+              "text": "DVN - Devon Energy Corporation",
+              "leaf": true
+            },
+            {
+              "id": "PXD",
+              "text": "PXD - Pioneer Natural Resources Co.",
+              "leaf": true
+            },
+            {
+              "id": "HES",
+              "text": "HES - Hess Corporation",
+              "leaf": true
+            },
+            {
+              "id": "NBL",
+              "text": "NBL - Noble Energy, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MRO",
+              "text": "MRO - Marathon Oil Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CLR",
+              "text": "CLR - Continental Resources Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CHK",
+              "text": "CHK - Chesapeake Energy Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SWN",
+              "text": "SWN - Southwestern Energy Co.",
+              "leaf": true
+            },
+            {
+              "id": "EQT",
+              "text": "EQT - EQT Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RRC",
+              "text": "RRC - Range Resources Corporation",
+              "leaf": true
+            },
+            {
+              "id": "COG",
+              "text": "COG - Cabot Oil & Gas Corporation",
+              "leaf": true
+            },
+            {
+              "id": "MUR",
+              "text": "MUR - Murphy Oil Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TLM",
+              "text": "TLM - Talisman Energy Inc.",
+              "leaf": true
+            },
+            {
+              "id": "XEC",
+              "text": "XEC - Cimarex Energy Co.",
+              "leaf": true
+            },
+            {
+              "id": "LINE",
+              "text": "LINE - Linn Energy, LLC",
+              "leaf": true
+            },
+            {
+              "id": "CNX",
+              "text": "CNX - CONSOL Energy Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CIE",
+              "text": "CIE - Cobalt International Energy, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ENLK",
+              "text": "ENLK - EnLink Midstream Partners, LP",
+              "leaf": true
+            },
+            {
+              "id": "GPOR",
+              "text": "GPOR - Gulfport Energy Corp.",
+              "leaf": true
+            },
+            {
+              "id": "DNR",
+              "text": "DNR - Denbury Resources Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NFG",
+              "text": "NFG - National Fuel Gas Co.",
+              "leaf": true
+            },
+            {
+              "id": "EGN",
+              "text": "EGN - Energen Corp.",
+              "leaf": true
+            },
+            {
+              "id": "BTE",
+              "text": "BTE - Baytex Energy Corp.",
+              "leaf": true
+            },
+            {
+              "id": "SM",
+              "text": "SM - SM Energy Company",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Industrial Metals & Minerals",
+          "children": [
+            {
+              "id": "BBL",
+              "text": "BBL - BHP Billiton plc",
+              "leaf": true
+            },
+            {
+              "id": "BHP",
+              "text": "BHP - BHP Billiton Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "RIO",
+              "text": "RIO - Rio Tinto plc",
+              "leaf": true
+            },
+            {
+              "id": "VALE",
+              "text": "VALE - Vale S.A.",
+              "leaf": true
+            },
+            {
+              "id": "TCK",
+              "text": "TCK - Teck Resources Limited",
+              "leaf": true
+            },
+            {
+              "id": "CCJ",
+              "text": "CCJ - Cameco Corp.",
+              "leaf": true
+            },
+            {
+              "id": "TRQ",
+              "text": "TRQ - Turquoise Hill Resources Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "BTU",
+              "text": "BTU - Peabody Energy Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Major Integrated Oil & Gas",
+          "children": [
+            {
+              "id": "XOM",
+              "text": "XOM - Exxon Mobil Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RDS-B",
+              "text": "RDS-B - Royal Dutch Shell plc",
+              "leaf": true
+            },
+            {
+              "id": "CVX",
+              "text": "CVX - Chevron Corporation",
+              "leaf": true
+            },
+            {
+              "id": "PTR",
+              "text": "PTR - PetroChina Co. Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "TOT",
+              "text": "TOT - Total SA",
+              "leaf": true
+            },
+            {
+              "id": "BP",
+              "text": "BP - BP plc",
+              "leaf": true
+            },
+            {
+              "id": "SNP",
+              "text": "SNP - China Petroleum & Chemical Corp.",
+              "leaf": true
+            },
+            {
+              "id": "E",
+              "text": "E - Eni SpA",
+              "leaf": true
+            },
+            {
+              "id": "STO",
+              "text": "STO - Statoil ASA",
+              "leaf": true
+            },
+            {
+              "id": "EC",
+              "text": "EC - Ecopetrol SA",
+              "leaf": true
+            },
+            {
+              "id": "IMO",
+              "text": "IMO - Imperial Oil Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "SSL",
+              "text": "SSL - Sasol Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "ECA",
+              "text": "ECA - Encana Corporation",
+              "leaf": true
+            },
+            {
+              "id": "YPF",
+              "text": "YPF - YPF S.A.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Nonmetallic Mineral Mining",
+          "children": [
+            {
+              "id": "YZC",
+              "text": "YZC - Yanzhou Coal Mining Co. Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Oil & Gas Drilling & Exploration",
+          "children": [
+            {
+              "id": "PBR-A",
+              "text": "PBR-A - Petroleo Brasileiro",
+              "leaf": true
+            },
+            {
+              "id": "PBR",
+              "text": "PBR - Petroleo Brasileiro",
+              "leaf": true
+            },
+            {
+              "id": "CEO",
+              "text": "CEO - CNOOC Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "CVE",
+              "text": "CVE - Cenovus Energy Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SDRL",
+              "text": "SDRL - SeaDrill Limited",
+              "leaf": true
+            },
+            {
+              "id": "AR",
+              "text": "AR - Antero Resources Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RIG",
+              "text": "RIG - Transocean Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "CXO",
+              "text": "CXO - Concho Resources, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ESV",
+              "text": "ESV - Ensco plc",
+              "leaf": true
+            },
+            {
+              "id": "HP",
+              "text": "HP - Helmerich & Payne Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WLL",
+              "text": "WLL - Whiting Petroleum Corp.",
+              "leaf": true
+            },
+            {
+              "id": "NE",
+              "text": "NE - Noble Corp.",
+              "leaf": true
+            },
+            {
+              "id": "NBR",
+              "text": "NBR - Nabors Industries Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "VET",
+              "text": "VET - Vermilion Energy Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DO",
+              "text": "DO - Diamond Offshore Drilling Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Oil & Gas Equipment & Services",
+          "children": [
+            {
+              "id": "SLB",
+              "text": "SLB - Schlumberger Limited",
+              "leaf": true
+            },
+            {
+              "id": "HAL",
+              "text": "HAL - Halliburton Company",
+              "leaf": true
+            },
+            {
+              "id": "NOV",
+              "text": "NOV - National Oilwell Varco, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BHI",
+              "text": "BHI - Baker Hughes Incorporated",
+              "leaf": true
+            },
+            {
+              "id": "WFT",
+              "text": "WFT - Weatherford International Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "CAM",
+              "text": "CAM - Cameron International Corporation",
+              "leaf": true
+            },
+            {
+              "id": "FTI",
+              "text": "FTI - FMC Technologies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ACMP",
+              "text": "ACMP - Access Midstream Partners, L.P.",
+              "leaf": true
+            },
+            {
+              "id": "CLB",
+              "text": "CLB - Core Laboratories NV",
+              "leaf": true
+            },
+            {
+              "id": "OII",
+              "text": "OII - Oceaneering International, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OIS",
+              "text": "OIS - Oil States International Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SPN",
+              "text": "SPN - Superior Energy Services, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Oil & Gas Pipelines",
+          "children": [
+            {
+              "id": "ENB",
+              "text": "ENB - Enbridge Inc.",
+              "leaf": true
+            },
+            {
+              "id": "KMP",
+              "text": "KMP - Kinder Morgan Energy Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "KMI",
+              "text": "KMI - Kinder Morgan, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TRP",
+              "text": "TRP - TransCanada Corp.",
+              "leaf": true
+            },
+            {
+              "id": "WMB",
+              "text": "WMB - Williams Companies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ETE",
+              "text": "ETE - Energy Transfer Equity, L.P.",
+              "leaf": true
+            },
+            {
+              "id": "SE",
+              "text": "SE - Spectra Energy Corp.",
+              "leaf": true
+            },
+            {
+              "id": "PAA",
+              "text": "PAA - Plains All American Pipeline, L.P.",
+              "leaf": true
+            },
+            {
+              "id": "ETP",
+              "text": "ETP - Energy Transfer Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "PAGP",
+              "text": "PAGP - Plains GP Holdings, L.P.",
+              "leaf": true
+            },
+            {
+              "id": "MMP",
+              "text": "MMP - Magellan Midstream Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "SEP",
+              "text": "SEP - Spectra Energy Partners, LP",
+              "leaf": true
+            },
+            {
+              "id": "LNG",
+              "text": "LNG - Cheniere Energy, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OKS",
+              "text": "OKS - ONEOK Partners, L.P.",
+              "leaf": true
+            },
+            {
+              "id": "PBA",
+              "text": "PBA - Pembina Pipeline Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CQP",
+              "text": "CQP - Cheniere Energy Partners LP.",
+              "leaf": true
+            },
+            {
+              "id": "MWE",
+              "text": "MWE - MarkWest Energy Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "WGP",
+              "text": "WGP - Western Gas Equity Partners, LP",
+              "leaf": true
+            },
+            {
+              "id": "EEP",
+              "text": "EEP - Enbridge Energy Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "KMR",
+              "text": "KMR - Kinder Morgan Management LLC",
+              "leaf": true
+            },
+            {
+              "id": "SXL",
+              "text": "SXL - Sunoco Logistics Partners L.P.",
+              "leaf": true
+            },
+            {
+              "id": "BPL",
+              "text": "BPL - Buckeye Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "WES",
+              "text": "WES - Western Gas Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "EPB",
+              "text": "EPB - El Paso Pipeline Partners, L.P.",
+              "leaf": true
+            },
+            {
+              "id": "NGLS",
+              "text": "NGLS - Targa Resources Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "RGP",
+              "text": "RGP - Regency Energy Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "QEP",
+              "text": "QEP - QEP Resources, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DPM",
+              "text": "DPM - DCP Midstream Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "GEL",
+              "text": "GEL - Genesis Energy LP",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Oil & Gas Refining & Marketing",
+          "children": [
+            {
+              "id": "PSX",
+              "text": "PSX - Phillips 66",
+              "leaf": true
+            },
+            {
+              "id": "VLO",
+              "text": "VLO - Valero Energy Corporation",
+              "leaf": true
+            },
+            {
+              "id": "MPC",
+              "text": "MPC - Marathon Petroleum Corporation",
+              "leaf": true
+            },
+            {
+              "id": "WPZ",
+              "text": "WPZ - Williams Partners L.P.",
+              "leaf": true
+            },
+            {
+              "id": "UGP",
+              "text": "UGP - Ultrapar Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HFC",
+              "text": "HFC - HollyFrontier Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TSO",
+              "text": "TSO - Tesoro Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ENLC",
+              "text": "ENLC - EnLink Midstream, LLC",
+              "leaf": true
+            },
+            {
+              "id": "SHI",
+              "text": "SHI - Sinopec Shanghai Petrochemical Co. Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Silver",
+          "children": [
+            {
+              "id": "SLW",
+              "text": "SLW - Silver Wheaton Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Specialty Chemicals",
+          "children": [
+            {
+              "id": "LYB",
+              "text": "LYB - LyondellBasell Industries NV",
+              "leaf": true
+            },
+            {
+              "id": "PPG",
+              "text": "PPG - PPG Industries Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SHW",
+              "text": "SHW - The Sherwin-Williams Company",
+              "leaf": true
+            },
+            {
+              "id": "SIAL",
+              "text": "SIAL - Sigma-Aldrich Corporation",
+              "leaf": true
+            },
+            {
+              "id": "WLK",
+              "text": "WLK - Westlake Chemical Corp.",
+              "leaf": true
+            },
+            {
+              "id": "IFF",
+              "text": "IFF - International Flavors & Fragrances Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GRA",
+              "text": "GRA - W.R. Grace & Co.",
+              "leaf": true
+            },
+            {
+              "id": "MEOH",
+              "text": "MEOH - Methanex Corp.",
+              "leaf": true
+            },
+            {
+              "id": "VAL",
+              "text": "VAL - The Valspar Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RPM",
+              "text": "RPM - RPM International Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALB",
+              "text": "ALB - Albemarle Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ROC",
+              "text": "ROC - Rockwood Holdings, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NEU",
+              "text": "NEU - NewMarket Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Steel & Iron",
+          "children": [
+            {
+              "id": "MT",
+              "text": "MT - Arcelor Mittal",
+              "leaf": true
+            },
+            {
+              "id": "PKX",
+              "text": "PKX - POSCO",
+              "leaf": true
+            },
+            {
+              "id": "NUE",
+              "text": "NUE - Nucor Corporation",
+              "leaf": true
+            },
+            {
+              "id": "GGB",
+              "text": "GGB - Gerdau S.A.",
+              "leaf": true
+            },
+            {
+              "id": "SSLT",
+              "text": "SSLT - Sesa Sterlite Limited",
+              "leaf": true
+            },
+            {
+              "id": "SID",
+              "text": "SID - Companhia Siderurgica Nacional",
+              "leaf": true
+            },
+            {
+              "id": "TX",
+              "text": "TX - Ternium S.A.",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Conglomerates",
+      "children": [
+        {
+          "text": "Conglomerates",
+          "children": [
+            {
+              "id": "MITSY",
+              "text": "MITSY - Mitsui & Co. Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "IEP",
+              "text": "IEP - Icahn Enterprises, L.P.",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Consumer Goods",
+      "children": [
+        {
+          "text": "Appliances",
+          "children": [
+            {
+              "id": "WHR",
+              "text": "WHR - Whirlpool Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Auto Manufacturers - Major",
+          "children": [
+            {
+              "id": "TM",
+              "text": "TM - Toyota Motor Corporation",
+              "leaf": true
+            },
+            {
+              "id": "HMC",
+              "text": "HMC - Honda Motor Co., Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "F",
+              "text": "F - Ford Motor Co.",
+              "leaf": true
+            },
+            {
+              "id": "GM",
+              "text": "GM - General Motors Company",
+              "leaf": true
+            },
+            {
+              "id": "NSANY",
+              "text": "NSANY - Nissan Motor Co., Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "TSLA",
+              "text": "TSLA - Tesla Motors, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TTM",
+              "text": "TTM - Tata Motors Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Auto Parts",
+          "children": [
+            {
+              "id": "JCI",
+              "text": "JCI - Johnson Controls Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DLPH",
+              "text": "DLPH - Delphi Automotive PLC",
+              "leaf": true
+            },
+            {
+              "id": "BWA",
+              "text": "BWA - BorgWarner Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALV",
+              "text": "ALV - Autoliv, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TRW",
+              "text": "TRW - TRW Automotive Holdings Corp.",
+              "leaf": true
+            },
+            {
+              "id": "LKQ",
+              "text": "LKQ - LKQ Corp.",
+              "leaf": true
+            },
+            {
+              "id": "LEA",
+              "text": "LEA - Lear Corp.",
+              "leaf": true
+            },
+            {
+              "id": "WBC",
+              "text": "WBC - WABCO Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALSN",
+              "text": "ALSN - Allison Transmission Holdings, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Beverages - Brewers",
+          "children": [
+            {
+              "id": "BUD",
+              "text": "BUD - Anheuser-Busch InBev",
+              "leaf": true
+            },
+            {
+              "id": "FMX",
+              "text": "FMX - Fomento Econ",
+              "leaf": true
+            },
+            {
+              "id": "TAP",
+              "text": "TAP - Molson Coors Brewing Company",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Beverages - Soft Drinks",
+          "children": [
+            {
+              "id": "KO",
+              "text": "KO - The Coca-Cola Company",
+              "leaf": true
+            },
+            {
+              "id": "PEP",
+              "text": "PEP - Pepsico, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CCE",
+              "text": "CCE - Coca-Cola Enterprises Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MNST",
+              "text": "MNST - Monster Beverage Corporation",
+              "leaf": true
+            },
+            {
+              "id": "DPS",
+              "text": "DPS - Dr Pepper Snapple Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CCH",
+              "text": "CCH - Coca-Cola Hellenic Bottling Company S.A.",
+              "leaf": true
+            },
+            {
+              "id": "KOF",
+              "text": "KOF - Coca-Cola FEMSA S.A.B de C.V.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Beverages - Wineries & Distillers",
+          "children": [
+            {
+              "id": "DEO",
+              "text": "DEO - Diageo plc",
+              "leaf": true
+            },
+            {
+              "id": "BF-B",
+              "text": "BF-B - Brown-Forman Corporation",
+              "leaf": true
+            },
+            {
+              "id": "STZ",
+              "text": "STZ - Constellation Brands Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BEAM",
+              "text": "BEAM - Beam, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Business Equipment",
+          "children": [
+            {
+              "id": "CAJ",
+              "text": "CAJ - Canon Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PBI",
+              "text": "PBI - Pitney Bowes Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AVY",
+              "text": "AVY - Avery Dennison Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Cigarettes",
+          "children": [
+            {
+              "id": "PM",
+              "text": "PM - Philip Morris International, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BTI",
+              "text": "BTI - British American Tobacco plc",
+              "leaf": true
+            },
+            {
+              "id": "MO",
+              "text": "MO - Altria Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "RAI",
+              "text": "RAI - Reynolds American Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LO",
+              "text": "LO - Lorillard, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Cleaning Products",
+          "children": [
+            {
+              "id": "ECL",
+              "text": "ECL - Ecolab Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CHD",
+              "text": "CHD - Church & Dwight Co. Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Confectioners",
+          "children": [
+            {
+              "id": "MDLZ",
+              "text": "MDLZ - Mondelez International, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HSY",
+              "text": "HSY - Hershey Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Electronic Equipment",
+          "children": [
+            {
+              "id": "AAPL",
+              "text": "AAPL - Apple Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PHG",
+              "text": "PHG - Koninklijke Philips Electronics NV",
+              "leaf": true
+            },
+            {
+              "id": "SNE",
+              "text": "SNE - Sony Corporation",
+              "leaf": true
+            },
+            {
+              "id": "HAR",
+              "text": "HAR - Harman International Industries Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Farm Products",
+          "children": [
+            {
+              "id": "ADM",
+              "text": "ADM - Archer Daniels Midland Company",
+              "leaf": true
+            },
+            {
+              "id": "BG",
+              "text": "BG - Bunge Limited",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Food - Major Diversified",
+          "children": [
+            {
+              "id": "KRFT",
+              "text": "KRFT - Kraft Foods Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WWAV",
+              "text": "WWAV - The WhiteWave Foods Company",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Home Furnishings & Fixtures",
+          "children": [
+            {
+              "id": "MHK",
+              "text": "MHK - Mohawk Industries Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FBHS",
+              "text": "FBHS - Fortune Brands Home & Security, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Housewares & Accessories",
+          "children": [
+            {
+              "id": "CLX",
+              "text": "CLX - The Clorox Company",
+              "leaf": true
+            },
+            {
+              "id": "NWL",
+              "text": "NWL - Newell Rubbermaid Inc.",
+              "leaf": true
+            },
+            {
+              "id": "JAH",
+              "text": "JAH - Jarden Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Meat Products",
+          "children": [
+            {
+              "id": "BRFS",
+              "text": "BRFS - BRF - Brasil Foods S.A.",
+              "leaf": true
+            },
+            {
+              "id": "TSN",
+              "text": "TSN - Tyson Foods Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HRL",
+              "text": "HRL - Hormel Foods Corp.",
+              "leaf": true
+            },
+            {
+              "id": "LUK",
+              "text": "LUK - Leucadia National Corp.",
+              "leaf": true
+            },
+            {
+              "id": "PPC",
+              "text": "PPC - Pilgrim's Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Packaging & Containers",
+          "children": [
+            {
+              "id": "IP",
+              "text": "IP - International Paper Co.",
+              "leaf": true
+            },
+            {
+              "id": "BLL",
+              "text": "BLL - Ball Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RKT",
+              "text": "RKT - Rock-Tenn Co.",
+              "leaf": true
+            },
+            {
+              "id": "PKG",
+              "text": "PKG - Packaging Corp. of America",
+              "leaf": true
+            },
+            {
+              "id": "MWV",
+              "text": "MWV - MeadWestvaco Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CCK",
+              "text": "CCK - Crown Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SEE",
+              "text": "SEE - Sealed Air Corporation",
+              "leaf": true
+            },
+            {
+              "id": "OI",
+              "text": "OI - Owens-Illinois, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Paper & Paper Products",
+          "children": [
+            {
+              "id": "FBR",
+              "text": "FBR - Fibria Celulose SA",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Personal Products",
+          "children": [
+            {
+              "id": "PG",
+              "text": "PG - Procter & Gamble Co.",
+              "leaf": true
+            },
+            {
+              "id": "UL",
+              "text": "UL - Unilever plc",
+              "leaf": true
+            },
+            {
+              "id": "UN",
+              "text": "UN - Unilever NV",
+              "leaf": true
+            },
+            {
+              "id": "CL",
+              "text": "CL - Colgate-Palmolive Co.",
+              "leaf": true
+            },
+            {
+              "id": "KMB",
+              "text": "KMB - Kimberly-Clark Corporation",
+              "leaf": true
+            },
+            {
+              "id": "EL",
+              "text": "EL - Estee Lauder Companies Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AVP",
+              "text": "AVP - Avon Products Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ENR",
+              "text": "ENR - Energizer Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "COTY",
+              "text": "COTY - Coty Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HLF",
+              "text": "HLF - Herbalife Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "NUS",
+              "text": "NUS - Nu Skin Enterprises Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Processed & Packaged Goods",
+          "children": [
+            {
+              "id": "GIS",
+              "text": "GIS - General Mills, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "K",
+              "text": "K - Kellogg Company",
+              "leaf": true
+            },
+            {
+              "id": "MJN",
+              "text": "MJN - Mead Johnson Nutrition Company",
+              "leaf": true
+            },
+            {
+              "id": "GMCR",
+              "text": "GMCR - Green Mountain Coffee Roasters Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CPB",
+              "text": "CPB - Campbell Soup Co.",
+              "leaf": true
+            },
+            {
+              "id": "CAG",
+              "text": "CAG - ConAgra Foods, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SJM",
+              "text": "SJM - The J. M. Smucker Company",
+              "leaf": true
+            },
+            {
+              "id": "MKC",
+              "text": "MKC - McCormick & Co. Inc.",
+              "leaf": true
+            },
+            {
+              "id": "INGR",
+              "text": "INGR - Ingredion Incorporated",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Recreational Goods, Other",
+          "children": [
+            {
+              "id": "FOSL",
+              "text": "FOSL - Fossil, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Recreational Vehicles",
+          "children": [
+            {
+              "id": "HOG",
+              "text": "HOG - Harley-Davidson, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PII",
+              "text": "PII - Polaris Industries, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Rubber & Plastics",
+          "children": [
+            {
+              "id": "GT",
+              "text": "GT - Goodyear Tire & Rubber Co.",
+              "leaf": true
+            },
+            {
+              "id": "CSL",
+              "text": "CSL - Carlisle Companies Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Textile - Apparel Clothing",
+          "children": [
+            {
+              "id": "VFC",
+              "text": "VFC - V.F. Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RL",
+              "text": "RL - Ralph Lauren Corporation",
+              "leaf": true
+            },
+            {
+              "id": "UA",
+              "text": "UA - Under Armour, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PVH",
+              "text": "PVH - PVH Corp.",
+              "leaf": true
+            },
+            {
+              "id": "LULU",
+              "text": "LULU - Lululemon Athletica Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HBI",
+              "text": "HBI - Hanesbrands Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GIL",
+              "text": "GIL - Gildan Activewear Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Textile - Apparel Footwear & Accessories",
+          "children": [
+            {
+              "id": "NKE",
+              "text": "NKE - Nike Inc.",
+              "leaf": true
+            },
+            {
+              "id": "COH",
+              "text": "COH - Coach, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FL",
+              "text": "FL - Foot Locker, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Toys & Games",
+          "children": [
+            {
+              "id": "MAT",
+              "text": "MAT - Mattel Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HAS",
+              "text": "HAS - Hasbro Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Trucks & Other Vehicles",
+          "children": [
+            {
+              "id": "PCAR",
+              "text": "PCAR - PACCAR Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OSK",
+              "text": "OSK - Oshkosh Corporation",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Financial",
+      "children": [
+        {
+          "text": "Accident & Health Insurance",
+          "children": [
+            {
+              "id": "AFL",
+              "text": "AFL - AFLAC Inc.",
+              "leaf": true
+            },
+            {
+              "id": "UNM",
+              "text": "UNM - Unum Group",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Asset Management",
+          "children": [
+            {
+              "id": "BLK",
+              "text": "BLK - BlackRock, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BK",
+              "text": "BK - The Bank of New York Mellon Corporation",
+              "leaf": true
+            },
+            {
+              "id": "BX",
+              "text": "BX - The Blackstone Group",
+              "leaf": true
+            },
+            {
+              "id": "BEN",
+              "text": "BEN - Franklin Resources Inc.",
+              "leaf": true
+            },
+            {
+              "id": "STT",
+              "text": "STT - State Street Corp.",
+              "leaf": true
+            },
+            {
+              "id": "TROW",
+              "text": "TROW - T. Rowe Price Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AMP",
+              "text": "AMP - Ameriprise Financial Inc.",
+              "leaf": true
+            },
+            {
+              "id": "KKR",
+              "text": "KKR - Kohlberg Kravis Roberts & Co.",
+              "leaf": true
+            },
+            {
+              "id": "IVZ",
+              "text": "IVZ - Invesco Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "NTRS",
+              "text": "NTRS - Northern Trust Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CG",
+              "text": "CG - The Carlyle Group LP",
+              "leaf": true
+            },
+            {
+              "id": "AMG",
+              "text": "AMG - Affiliated Managers Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "VOYA",
+              "text": "VOYA - Voya Financial, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OAK",
+              "text": "OAK - Oaktree Capital Group, LLC",
+              "leaf": true
+            },
+            {
+              "id": "LAZ",
+              "text": "LAZ - Lazard Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "WDR",
+              "text": "WDR - Waddell & Reed Financial Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LM",
+              "text": "LM - Legg Mason Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SEIC",
+              "text": "SEIC - SEI Investments Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Credit Services",
+          "children": [
+            {
+              "id": "V",
+              "text": "V - Visa, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AXP",
+              "text": "AXP - American Express Company",
+              "leaf": true
+            },
+            {
+              "id": "MA",
+              "text": "MA - Mastercard Incorporated",
+              "leaf": true
+            },
+            {
+              "id": "COF",
+              "text": "COF - Capital One Financial Corp.",
+              "leaf": true
+            },
+            {
+              "id": "DFS",
+              "text": "DFS - Discover Financial Services",
+              "leaf": true
+            },
+            {
+              "id": "IX",
+              "text": "IX - ORIX Corp.",
+              "leaf": true
+            },
+            {
+              "id": "SLM",
+              "text": "SLM - SLM Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CIT",
+              "text": "CIT - CIT Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WU",
+              "text": "WU - Western Union Co.",
+              "leaf": true
+            },
+            {
+              "id": "EFX",
+              "text": "EFX - Equifax Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TSS",
+              "text": "TSS - Total System Services, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Diversified Investments",
+          "children": [
+            {
+              "id": "ICE",
+              "text": "ICE - IntercontinentalExchange, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NDAQ",
+              "text": "NDAQ - Nasdaq OMX Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ARCC",
+              "text": "ARCC - Ares Capital Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Exchange Traded Fund",
+          "children": [
+            {
+              "id": "IVV",
+              "text": "IVV - iShares S&P 500 Index",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Foreign Money Center Banks",
+          "children": [
+            {
+              "id": "HSBC",
+              "text": "HSBC - HSBC Holdings plc",
+              "leaf": true
+            },
+            {
+              "id": "SAN",
+              "text": "SAN - Banco Santander-Chile",
+              "leaf": true
+            },
+            {
+              "id": "WBK",
+              "text": "WBK - Westpac Banking Corporation",
+              "leaf": true
+            },
+            {
+              "id": "LYG",
+              "text": "LYG - Lloyds Banking Group plc",
+              "leaf": true
+            },
+            {
+              "id": "UBS",
+              "text": "UBS - UBS AG",
+              "leaf": true
+            },
+            {
+              "id": "BCS",
+              "text": "BCS - Barclays PLC",
+              "leaf": true
+            },
+            {
+              "id": "RBS",
+              "text": "RBS - The Royal Bank of Scotland Group plc",
+              "leaf": true
+            },
+            {
+              "id": "CS",
+              "text": "CS - Credit Suisse Group",
+              "leaf": true
+            },
+            {
+              "id": "EWBC",
+              "text": "EWBC - East West Bancorp, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Foreign Regional Banks",
+          "children": [
+            {
+              "id": "ITUB",
+              "text": "ITUB - Itau Unibanco Holding S.A.",
+              "leaf": true
+            },
+            {
+              "id": "BBVA",
+              "text": "BBVA - Banco Bilbao Vizcaya Argentaria, S.A.",
+              "leaf": true
+            },
+            {
+              "id": "BBDO",
+              "text": "BBDO - Banco Bradesco S.A.",
+              "leaf": true
+            },
+            {
+              "id": "BBD",
+              "text": "BBD - Banco Bradesco S.A.",
+              "leaf": true
+            },
+            {
+              "id": "SMFG",
+              "text": "SMFG - Sumitomo Mitsui Financial Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MFG",
+              "text": "MFG - Mizuho Financial Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DB",
+              "text": "DB - Deutsche Bank AG",
+              "leaf": true
+            },
+            {
+              "id": "HDB",
+              "text": "HDB - HDFC Bank Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "BSBR",
+              "text": "BSBR - Banco Santander (Brasil) S.A.",
+              "leaf": true
+            },
+            {
+              "id": "SHG",
+              "text": "SHG - Shinhan Financial Group Company Limited",
+              "leaf": true
+            },
+            {
+              "id": "BSMX",
+              "text": "BSMX - Grupo Financiero Santander Mexico, S.A.B. de C.V.",
+              "leaf": true
+            },
+            {
+              "id": "KB",
+              "text": "KB - KB Financial Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "IRE",
+              "text": "IRE - The Governor and Company of The Bank of Ireland",
+              "leaf": true
+            },
+            {
+              "id": "CIB",
+              "text": "CIB - Bancolombia S.A.",
+              "leaf": true
+            },
+            {
+              "id": "BCH",
+              "text": "BCH - Banco de Chile",
+              "leaf": true
+            },
+            {
+              "id": "WF",
+              "text": "WF - Woori Finance Holdings Co., Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Insurance Brokers",
+          "children": [
+            {
+              "id": "MMC",
+              "text": "MMC - Marsh & McLennan Companies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AON",
+              "text": "AON - Aon Corporation",
+              "leaf": true
+            },
+            {
+              "id": "WSH",
+              "text": "WSH - Willis Group Holdings Public Limited Company",
+              "leaf": true
+            },
+            {
+              "id": "AJG",
+              "text": "AJG - Arthur J Gallagher & Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Investment Brokerage - National",
+          "children": [
+            {
+              "id": "GS",
+              "text": "GS - The Goldman Sachs Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MS",
+              "text": "MS - Morgan Stanley",
+              "leaf": true
+            },
+            {
+              "id": "SCHW",
+              "text": "SCHW - The Charles Schwab Corporation",
+              "leaf": true
+            },
+            {
+              "id": "NMR",
+              "text": "NMR - Nomura Holdings, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CME",
+              "text": "CME - CME Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AMTD",
+              "text": "AMTD - TD Ameritrade Holding Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ETFC",
+              "text": "ETFC - E*TRADE Financial Corporation",
+              "leaf": true
+            },
+            {
+              "id": "LPLA",
+              "text": "LPLA - LPL Investment Holdings Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Investment Brokerage - Regional",
+          "children": [
+            {
+              "id": "RJF",
+              "text": "RJF - Raymond James Financial Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Life Insurance",
+          "children": [
+            {
+              "id": "LFC",
+              "text": "LFC - China Life Insurance Co. Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "PUK",
+              "text": "PUK - Prudential plc",
+              "leaf": true
+            },
+            {
+              "id": "MET",
+              "text": "MET - MetLife, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ING",
+              "text": "ING - ING Groep NV",
+              "leaf": true
+            },
+            {
+              "id": "PRU",
+              "text": "PRU - Prudential Financial, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MFC",
+              "text": "MFC - Manulife Financial Corporation",
+              "leaf": true
+            },
+            {
+              "id": "AV",
+              "text": "AV - Aviva plc",
+              "leaf": true
+            },
+            {
+              "id": "AEG",
+              "text": "AEG - AEGON N.V.",
+              "leaf": true
+            },
+            {
+              "id": "PFG",
+              "text": "PFG - Principal Financial Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LNC",
+              "text": "LNC - Lincoln National Corp.",
+              "leaf": true
+            },
+            {
+              "id": "GNW",
+              "text": "GNW - Genworth Financial Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TMK",
+              "text": "TMK - Torchmark Corp.",
+              "leaf": true
+            },
+            {
+              "id": "RGA",
+              "text": "RGA - Reinsurance Group of America Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Money Center Banks",
+          "children": [
+            {
+              "id": "WFC",
+              "text": "WFC - Wells Fargo & Company",
+              "leaf": true
+            },
+            {
+              "id": "JPM",
+              "text": "JPM - JPMorgan Chase & Co.",
+              "leaf": true
+            },
+            {
+              "id": "BAC",
+              "text": "BAC - Bank of America Corporation",
+              "leaf": true
+            },
+            {
+              "id": "C",
+              "text": "C - Citigroup, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "RY",
+              "text": "RY - Royal Bank of Canada",
+              "leaf": true
+            },
+            {
+              "id": "TD",
+              "text": "TD - The Toronto-Dominion Bank",
+              "leaf": true
+            },
+            {
+              "id": "MTU",
+              "text": "MTU - Mitsubishi UFJ Financial Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BNS",
+              "text": "BNS - The Bank Of Nova Scotia",
+              "leaf": true
+            },
+            {
+              "id": "BMO",
+              "text": "BMO - Bank of Montreal",
+              "leaf": true
+            },
+            {
+              "id": "PNC",
+              "text": "PNC - PNC Financial Services Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CM",
+              "text": "CM - Canadian Imperial Bank of Commerce",
+              "leaf": true
+            },
+            {
+              "id": "IBN",
+              "text": "IBN - ICICI Bank Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "STI",
+              "text": "STI - SunTrust Banks, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BSAC",
+              "text": "BSAC - Banco Santander-Chile",
+              "leaf": true
+            },
+            {
+              "id": "BAP",
+              "text": "BAP - Credicorp Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "NBG",
+              "text": "NBG - National Bank of Greece SA",
+              "leaf": true
+            },
+            {
+              "id": "CMA",
+              "text": "CMA - Comerica Incorporated",
+              "leaf": true
+            },
+            {
+              "id": "FRC",
+              "text": "FRC - First Republic Bank",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Mortgage Investment",
+          "children": [
+            {
+              "id": "SC",
+              "text": "SC - Santander Consumer USA Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OCN",
+              "text": "OCN - Ocwen Financial Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Property & Casualty Insurance",
+          "children": [
+            {
+              "id": "BRK-A",
+              "text": "BRK-A - Berkshire Hathaway Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AIG",
+              "text": "AIG - American International Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ACE",
+              "text": "ACE - ACE Limited",
+              "leaf": true
+            },
+            {
+              "id": "TRV",
+              "text": "TRV - The Travelers Companies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALL",
+              "text": "ALL - The Allstate Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CB",
+              "text": "CB - The Chubb Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SLF",
+              "text": "SLF - Sun Life Financial Inc.",
+              "leaf": true
+            },
+            {
+              "id": "L",
+              "text": "L - Loews Corporation",
+              "leaf": true
+            },
+            {
+              "id": "HIG",
+              "text": "HIG - Hartford Financial Services Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PGR",
+              "text": "PGR - Progressive Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CNA",
+              "text": "CNA - CNA Financial Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RE",
+              "text": "RE - Everest Re Group Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "XL",
+              "text": "XL - XL Group plc",
+              "leaf": true
+            },
+            {
+              "id": "MKL",
+              "text": "MKL - Markel Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CINF",
+              "text": "CINF - Cincinnati Financial Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ACGL",
+              "text": "ACGL - Arch Capital Group Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "Y",
+              "text": "Y - Alleghany Corp.",
+              "leaf": true
+            },
+            {
+              "id": "PRE",
+              "text": "PRE - PartnerRe Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "WRB",
+              "text": "WRB - W.R. Berkley Corporation",
+              "leaf": true
+            },
+            {
+              "id": "AXS",
+              "text": "AXS - Axis Capital Holdings Limited",
+              "leaf": true
+            },
+            {
+              "id": "AFG",
+              "text": "AFG - American Financial Group Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Property Management",
+          "children": [
+            {
+              "id": "BPO",
+              "text": "BPO - Brookfield Properties Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CBG",
+              "text": "CBG - CBRE Group, Inc",
+              "leaf": true
+            },
+            {
+              "id": "RLGY",
+              "text": "RLGY - Realogy Holdings Corp.",
+              "leaf": true
+            },
+            {
+              "id": "JLL",
+              "text": "JLL - Jones Lang Lasalle Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Real Estate Development",
+          "children": [
+            {
+              "id": "BAM",
+              "text": "BAM - Brookfield Asset Management Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HHC",
+              "text": "HHC - The Howard Hughes Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Regional - Midwest Banks",
+          "children": [
+            {
+              "id": "USB",
+              "text": "USB - U.S. Bancorp",
+              "leaf": true
+            },
+            {
+              "id": "FITB",
+              "text": "FITB - Fifth Third Bancorp",
+              "leaf": true
+            },
+            {
+              "id": "KEY",
+              "text": "KEY - KeyCorp",
+              "leaf": true
+            },
+            {
+              "id": "HBAN",
+              "text": "HBAN - Huntington Bancshares Incorporated",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Regional - Northeast Banks",
+          "children": [
+            {
+              "id": "MTB",
+              "text": "MTB - M&T Bank Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SBNY",
+              "text": "SBNY - Signature Bank",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Regional - Pacific Banks",
+          "children": [
+            {
+              "id": "ZION",
+              "text": "ZION - Zions Bancorp.",
+              "leaf": true
+            },
+            {
+              "id": "SIVB",
+              "text": "SIVB - SVB Financial Group",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Regional - Southeast Banks",
+          "children": [
+            {
+              "id": "BBT",
+              "text": "BBT - BB&T Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RF",
+              "text": "RF - Regions Financial Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Regional - Southwest  Banks",
+          "children": [
+            {
+              "id": "BOKF",
+              "text": "BOKF - BOK Financial Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CFR",
+              "text": "CFR - Cullen/Frost Bankers, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "REIT - Diversified",
+          "children": [
+            {
+              "id": "AMT",
+              "text": "AMT - American Tower Corporation",
+              "leaf": true
+            },
+            {
+              "id": "VNO",
+              "text": "VNO - Vornado Realty Trust",
+              "leaf": true
+            },
+            {
+              "id": "NLY",
+              "text": "NLY - Annaly Capital Management, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ARCP",
+              "text": "ARCP - American Realty Capital Properties, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WPC",
+              "text": "WPC - W. P. Carey & Co. LLC",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "REIT - Healthcare Facilities",
+          "children": [
+            {
+              "id": "VTR",
+              "text": "VTR - Ventas, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HCP",
+              "text": "HCP - HCP, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HCN",
+              "text": "HCN - Health Care REIT, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "REIT - Hotel/Motel",
+          "children": [
+            {
+              "id": "HST",
+              "text": "HST - Host Hotels & Resorts Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "REIT - Industrial",
+          "children": [
+            {
+              "id": "PSA",
+              "text": "PSA - Public Storage",
+              "leaf": true
+            },
+            {
+              "id": "PLD",
+              "text": "PLD - Prologis, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "EXR",
+              "text": "EXR - Extra Space Storage Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DRE",
+              "text": "DRE - Duke Realty Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "REIT - Office",
+          "children": [
+            {
+              "id": "BXP",
+              "text": "BXP - Boston Properties Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DLR",
+              "text": "DLR - Digital Realty Trust Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LPT",
+              "text": "LPT - Liberty Property Trust",
+              "leaf": true
+            },
+            {
+              "id": "ARE",
+              "text": "ARE - Alexandria Real Estate Equities Inc.",
+              "leaf": true
+            },
+            {
+              "id": "KRC",
+              "text": "KRC - Kilroy Realty Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "REIT - Residential",
+          "children": [
+            {
+              "id": "EQR",
+              "text": "EQR - Equity Residential",
+              "leaf": true
+            },
+            {
+              "id": "AVB",
+              "text": "AVB - Avalonbay Communities Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AGNC",
+              "text": "AGNC - American Capital Agency Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ESS",
+              "text": "ESS - Essex Property Trust Inc.",
+              "leaf": true
+            },
+            {
+              "id": "UDR",
+              "text": "UDR - UDR, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CPT",
+              "text": "CPT - Camden Property Trust",
+              "leaf": true
+            },
+            {
+              "id": "MAA",
+              "text": "MAA - Mid-America Apartment Communities Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "REIT - Retail",
+          "children": [
+            {
+              "id": "SPG",
+              "text": "SPG - Simon Property Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GGP",
+              "text": "GGP - General Growth Properties Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SLG",
+              "text": "SLG - SL Green Realty Corp.",
+              "leaf": true
+            },
+            {
+              "id": "O",
+              "text": "O - Realty Income Corp.",
+              "leaf": true
+            },
+            {
+              "id": "KIM",
+              "text": "KIM - Kimco Realty Corporation",
+              "leaf": true
+            },
+            {
+              "id": "MAC",
+              "text": "MAC - Macerich Co.",
+              "leaf": true
+            },
+            {
+              "id": "FRT",
+              "text": "FRT - Federal Realty Investment Trust",
+              "leaf": true
+            },
+            {
+              "id": "DDR",
+              "text": "DDR - DDR Corp.",
+              "leaf": true
+            },
+            {
+              "id": "NRF",
+              "text": "NRF - NorthStar Realty Finance Corp.",
+              "leaf": true
+            },
+            {
+              "id": "REG",
+              "text": "REG - Regency Centers Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Savings & Loans",
+          "children": [
+            {
+              "id": "NYCB",
+              "text": "NYCB - New York Community Bancorp Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HCBK",
+              "text": "HCBK - Hudson City Bancorp, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Surety & Title Insurance",
+          "children": [
+            {
+              "id": "FNF",
+              "text": "FNF - Fidelity National Financial, Inc.",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Healthcare",
+      "children": [
+        {
+          "text": "Biotechnology",
+          "children": [
+            {
+              "id": "GILD",
+              "text": "GILD - Gilead Sciences Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AMGN",
+              "text": "AMGN - Amgen Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BIIB",
+              "text": "BIIB - Biogen Idec Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CELG",
+              "text": "CELG - Celgene Corporation",
+              "leaf": true
+            },
+            {
+              "id": "REGN",
+              "text": "REGN - Regeneron Pharmaceuticals, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALXN",
+              "text": "ALXN - Alexion Pharmaceuticals, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ILMN",
+              "text": "ILMN - Illumina Inc.",
+              "leaf": true
+            },
+            {
+              "id": "VRTX",
+              "text": "VRTX - Vertex Pharmaceuticals Incorporated",
+              "leaf": true
+            },
+            {
+              "id": "BMRN",
+              "text": "BMRN - BioMarin Pharmaceutical Inc.",
+              "leaf": true
+            },
+            {
+              "id": "JAZZ",
+              "text": "JAZZ - Jazz Pharmaceuticals plc",
+              "leaf": true
+            },
+            {
+              "id": "INCY",
+              "text": "INCY - Incyte Corporation",
+              "leaf": true
+            },
+            {
+              "id": "QCOR",
+              "text": "QCOR - Questcor Pharmaceuticals, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CBST",
+              "text": "CBST - Cubist Pharmaceuticals Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Diagnostic Substances",
+          "children": [
+            {
+              "id": "IDXX",
+              "text": "IDXX - IDEXX Laboratories, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Drug Delivery",
+          "children": [
+            {
+              "id": "VRX",
+              "text": "VRX - Valeant Pharmaceuticals International, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALKS",
+              "text": "ALKS - Alkermes plc",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Drug Manufacturers - Major",
+          "children": [
+            {
+              "id": "JNJ",
+              "text": "JNJ - Johnson & Johnson",
+              "leaf": true
+            },
+            {
+              "id": "NVS",
+              "text": "NVS - Novartis AG",
+              "leaf": true
+            },
+            {
+              "id": "PFE",
+              "text": "PFE - Pfizer Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MRK",
+              "text": "MRK - Merck & Co. Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SNY",
+              "text": "SNY - Sanofi",
+              "leaf": true
+            },
+            {
+              "id": "GSK",
+              "text": "GSK - GlaxoSmithKline plc",
+              "leaf": true
+            },
+            {
+              "id": "AZN",
+              "text": "AZN - AstraZeneca PLC",
+              "leaf": true
+            },
+            {
+              "id": "BMY",
+              "text": "BMY - Bristol-Myers Squibb Company",
+              "leaf": true
+            },
+            {
+              "id": "ABBV",
+              "text": "ABBV - AbbVie Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LLY",
+              "text": "LLY - Eli Lilly & Co.",
+              "leaf": true
+            },
+            {
+              "id": "ICPT",
+              "text": "ICPT - Intercept Pharmaceuticals, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Drug Manufacturers - Other",
+          "children": [
+            {
+              "id": "NVO",
+              "text": "NVO - Novo Nordisk A/S",
+              "leaf": true
+            },
+            {
+              "id": "TEVA",
+              "text": "TEVA - Teva Pharmaceutical Industries Limited",
+              "leaf": true
+            },
+            {
+              "id": "AGN",
+              "text": "AGN - Allergan Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FRX",
+              "text": "FRX - Forest Laboratories Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ENDP",
+              "text": "ENDP - Endo Pharmaceuticals Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "RDY",
+              "text": "RDY - Dr. Reddy's Laboratories Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "PCYC",
+              "text": "PCYC - Pharmacyclics Inc.",
+              "leaf": true
+            },
+            {
+              "id": "UTHR",
+              "text": "UTHR - United Therapeutics Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TARO",
+              "text": "TARO - Taro Pharmaceutical Industries Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Drug Related Products",
+          "children": [
+            {
+              "id": "PRGO",
+              "text": "PRGO - Perrigo Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Drugs - Generic",
+          "children": [
+            {
+              "id": "ACT",
+              "text": "ACT - Actavis plc",
+              "leaf": true
+            },
+            {
+              "id": "MYL",
+              "text": "MYL - Mylan, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ZTS",
+              "text": "ZTS - Zoetis Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HSP",
+              "text": "HSP - Hospira Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SLXP",
+              "text": "SLXP - Salix Pharmaceuticals Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Health Care Plans",
+          "children": [
+            {
+              "id": "UNH",
+              "text": "UNH - Unitedhealth Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ESRX",
+              "text": "ESRX - Express Scripts Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WLP",
+              "text": "WLP - WellPoint Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AET",
+              "text": "AET - Aetna Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CI",
+              "text": "CI - Cigna Corp.",
+              "leaf": true
+            },
+            {
+              "id": "HUM",
+              "text": "HUM - Humana Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Hospitals",
+          "children": [
+            {
+              "id": "HCA",
+              "text": "HCA - HCA Holdings, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "UHS",
+              "text": "UHS - Universal Health Services Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Long-Term Care Facilities",
+          "children": [
+            {
+              "id": "EVHC",
+              "text": "EVHC - Envision Healthcare Holdings, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Medical Appliances & Equipment",
+          "children": [
+            {
+              "id": "ABT",
+              "text": "ABT - Abbott Laboratories",
+              "leaf": true
+            },
+            {
+              "id": "MDT",
+              "text": "MDT - Medtronic, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SYK",
+              "text": "SYK - Stryker Corp.",
+              "leaf": true
+            },
+            {
+              "id": "STJ",
+              "text": "STJ - St. Jude Medical Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BSX",
+              "text": "BSX - Boston Scientific Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ISRG",
+              "text": "ISRG - Intuitive Surgical, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ZMH",
+              "text": "ZMH - Zimmer Holdings, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SNN",
+              "text": "SNN - Smith & Nephew plc",
+              "leaf": true
+            },
+            {
+              "id": "EW",
+              "text": "EW - Edwards Lifesciences Corp.",
+              "leaf": true
+            },
+            {
+              "id": "VAR",
+              "text": "VAR - Varian Medical Systems Inc.",
+              "leaf": true
+            },
+            {
+              "id": "RMD",
+              "text": "RMD - ResMed Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HOLX",
+              "text": "HOLX - Hologic Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Medical Instruments & Supplies",
+          "children": [
+            {
+              "id": "BAX",
+              "text": "BAX - Baxter International Inc.",
+              "leaf": true
+            },
+            {
+              "id": "COV",
+              "text": "COV - Covidien plc",
+              "leaf": true
+            },
+            {
+              "id": "BDX",
+              "text": "BDX - Becton, Dickinson and Company",
+              "leaf": true
+            },
+            {
+              "id": "BCR",
+              "text": "BCR - CR Bard Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CFN",
+              "text": "CFN - CareFusion Corporation",
+              "leaf": true
+            },
+            {
+              "id": "XRAY",
+              "text": "XRAY - DENTSPLY International Inc.",
+              "leaf": true
+            },
+            {
+              "id": "COO",
+              "text": "COO - The Cooper Companies Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Medical Laboratories & Research",
+          "children": [
+            {
+              "id": "TMO",
+              "text": "TMO - Thermo Fisher Scientific, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "A",
+              "text": "A - Agilent Technologies Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DGX",
+              "text": "DGX - Quest Diagnostics Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LH",
+              "text": "LH - Laboratory Corp. of America Holdings",
+              "leaf": true
+            },
+            {
+              "id": "Q",
+              "text": "Q - Quintiles Transnational Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CVD",
+              "text": "CVD - Covance Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PKI",
+              "text": "PKI - PerkinElmer Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Specialized Health Services",
+          "children": [
+            {
+              "id": "FMS",
+              "text": "FMS - Fresenius Medical Care AG & Co. KGAA",
+              "leaf": true
+            },
+            {
+              "id": "DVA",
+              "text": "DVA - DaVita, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MD",
+              "text": "MD - MEDNAX, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OCR",
+              "text": "OCR - Omnicare Inc.",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Industrial Goods",
+      "children": [
+        {
+          "text": "Aerospace/Defense - Major Diversified",
+          "children": [
+            {
+              "id": "NOC",
+              "text": "NOC - Northrop Grumman Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TXT",
+              "text": "TXT - Textron Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Aerospace/Defense Products & Services",
+          "children": [
+            {
+              "id": "UTX",
+              "text": "UTX - United Technologies Corp.",
+              "leaf": true
+            },
+            {
+              "id": "BA",
+              "text": "BA - Boeing Co.",
+              "leaf": true
+            },
+            {
+              "id": "LMT",
+              "text": "LMT - Lockheed Martin Corporation",
+              "leaf": true
+            },
+            {
+              "id": "GD",
+              "text": "GD - General Dynamics Corp.",
+              "leaf": true
+            },
+            {
+              "id": "RTN",
+              "text": "RTN - Raytheon Co.",
+              "leaf": true
+            },
+            {
+              "id": "COL",
+              "text": "COL - Rockwell Collins Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LLL",
+              "text": "LLL - L-3 Communications Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TDG",
+              "text": "TDG - TransDigm Group Incorporated",
+              "leaf": true
+            },
+            {
+              "id": "BEAV",
+              "text": "BEAV - BE Aerospace Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ERJ",
+              "text": "ERJ - Embraer SA",
+              "leaf": true
+            },
+            {
+              "id": "HII",
+              "text": "HII - Huntington Ingalls Industries, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Cement",
+          "children": [
+            {
+              "id": "CRH",
+              "text": "CRH - CRH plc",
+              "leaf": true
+            },
+            {
+              "id": "CX",
+              "text": "CX - CEMEX, S.A.B. de C.V.",
+              "leaf": true
+            },
+            {
+              "id": "JHX",
+              "text": "JHX - James Hardie Industries SE",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Diversified Machinery",
+          "children": [
+            {
+              "id": "GE",
+              "text": "GE - General Electric Company",
+              "leaf": true
+            },
+            {
+              "id": "MMM",
+              "text": "MMM - 3M Co.",
+              "leaf": true
+            },
+            {
+              "id": "HON",
+              "text": "HON - Honeywell International Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ABB",
+              "text": "ABB - ABB Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "DHR",
+              "text": "DHR - Danaher Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ITW",
+              "text": "ITW - Illinois Tool Works Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ETN",
+              "text": "ETN - Eaton Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CMI",
+              "text": "CMI - Cummins Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ROK",
+              "text": "ROK - Rockwell Automation Inc.",
+              "leaf": true
+            },
+            {
+              "id": "IR",
+              "text": "IR - Ingersoll-Rand Plc",
+              "leaf": true
+            },
+            {
+              "id": "DOV",
+              "text": "DOV - Dover Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ROP",
+              "text": "ROP - Roper Industries Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AME",
+              "text": "AME - Ametek Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FLS",
+              "text": "FLS - Flowserve Corp.",
+              "leaf": true
+            },
+            {
+              "id": "PLL",
+              "text": "PLL - Pall Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CFX",
+              "text": "CFX - Colfax Corporation",
+              "leaf": true
+            },
+            {
+              "id": "XYL",
+              "text": "XYL - Xylem Inc.",
+              "leaf": true
+            },
+            {
+              "id": "IEX",
+              "text": "IEX - IDEX Corporation",
+              "leaf": true
+            },
+            {
+              "id": "MIDD",
+              "text": "MIDD - Middleby Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Farm & Construction Machinery",
+          "children": [
+            {
+              "id": "CAT",
+              "text": "CAT - Caterpillar Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DE",
+              "text": "DE - Deere & Company",
+              "leaf": true
+            },
+            {
+              "id": "CNHI",
+              "text": "CNHI - CNH Industrial N.V.",
+              "leaf": true
+            },
+            {
+              "id": "JOY",
+              "text": "JOY - Joy Global, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AGCO",
+              "text": "AGCO - AGCO Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "General Building Materials",
+          "children": [
+            {
+              "id": "VMC",
+              "text": "VMC - Vulcan Materials Company",
+              "leaf": true
+            },
+            {
+              "id": "MAS",
+              "text": "MAS - Masco Corporation",
+              "leaf": true
+            },
+            {
+              "id": "MLM",
+              "text": "MLM - Martin Marietta Materials Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OC",
+              "text": "OC - Owens Corning",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "General Contractors",
+          "children": [
+            {
+              "id": "CBI",
+              "text": "CBI - Chicago Bridge & Iron Company N.V.",
+              "leaf": true
+            },
+            {
+              "id": "PWR",
+              "text": "PWR - Quanta Services, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Heavy Construction",
+          "children": [
+            {
+              "id": "FLR",
+              "text": "FLR - Fluor Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Industrial Electrical Equipment",
+          "children": [
+            {
+              "id": "EMR",
+              "text": "EMR - Emerson Electric Co.",
+              "leaf": true
+            },
+            {
+              "id": "NJ",
+              "text": "NJ - Nidec Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Industrial Equipment & Components",
+          "children": [
+            {
+              "id": "PH",
+              "text": "PH - Parker Hannifin Corporation",
+              "leaf": true
+            },
+            {
+              "id": "PNR",
+              "text": "PNR - Pentair, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Lumber, Wood Production",
+          "children": [
+            {
+              "id": "WY",
+              "text": "WY - Weyerhaeuser Co.",
+              "leaf": true
+            },
+            {
+              "id": "PCL",
+              "text": "PCL - Plum Creek Timber Co. Inc.",
+              "leaf": true
+            },
+            {
+              "id": "RYN",
+              "text": "RYN - Rayonier Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Machine Tools & Accessories",
+          "children": [
+            {
+              "id": "SWK",
+              "text": "SWK - Stanley Black & Decker, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TKR",
+              "text": "TKR - Timken Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Metal Fabrication",
+          "children": [
+            {
+              "id": "PCP",
+              "text": "PCP - Precision Castparts Corp.",
+              "leaf": true
+            },
+            {
+              "id": "TS",
+              "text": "TS - Tenaris SA",
+              "leaf": true
+            },
+            {
+              "id": "RS",
+              "text": "RS - Reliance Steel & Aluminum Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Pollution & Treatment Controls",
+          "children": [
+            {
+              "id": "DCI",
+              "text": "DCI - Donaldson Company, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Residential Construction",
+          "children": [
+            {
+              "id": "LEN",
+              "text": "LEN - Lennar Corp.",
+              "leaf": true
+            },
+            {
+              "id": "PHM",
+              "text": "PHM - PulteGroup, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DHI",
+              "text": "DHI - DR Horton Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TOL",
+              "text": "TOL - Toll Brothers Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NVR",
+              "text": "NVR - NVR Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Small Tools & Accessories",
+          "children": [
+            {
+              "id": "MKTAY",
+              "text": "MKTAY - Makita Corp.",
+              "leaf": true
+            },
+            {
+              "id": "SNA",
+              "text": "SNA - Snap-on Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LECO",
+              "text": "LECO - Lincoln Electric Holdings Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Waste Management",
+          "children": [
+            {
+              "id": "WM",
+              "text": "WM - Waste Management, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "RSG",
+              "text": "RSG - Republic Services, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "VE",
+              "text": "VE - Veolia Environnement S.A.",
+              "leaf": true
+            },
+            {
+              "id": "SRCL",
+              "text": "SRCL - Stericycle, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WCN",
+              "text": "WCN - Waste Connections Inc.",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Services",
+      "children": [
+        {
+          "text": "Advertising Agencies",
+          "children": [
+            {
+              "id": "WPPGY",
+              "text": "WPPGY - WPP plc",
+              "leaf": true
+            },
+            {
+              "id": "OMC",
+              "text": "OMC - Omnicom Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "IPG",
+              "text": "IPG - The Interpublic Group of Companies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LAMR",
+              "text": "LAMR - Lamar Advertising Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Air Delivery & Freight Services",
+          "children": [
+            {
+              "id": "UPS",
+              "text": "UPS - United Parcel Service, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FDX",
+              "text": "FDX - FedEx Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CHRW",
+              "text": "CHRW - CH Robinson Worldwide Inc.",
+              "leaf": true
+            },
+            {
+              "id": "EXPD",
+              "text": "EXPD - Expeditors International of Washington Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Apparel Stores",
+          "children": [
+            {
+              "id": "LUX",
+              "text": "LUX - Luxottica Group SpA",
+              "leaf": true
+            },
+            {
+              "id": "GPS",
+              "text": "GPS - Gap Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LB",
+              "text": "LB - L Brands, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ROST",
+              "text": "ROST - Ross Stores Inc.",
+              "leaf": true
+            },
+            {
+              "id": "JWN",
+              "text": "JWN - Nordstrom Inc.",
+              "leaf": true
+            },
+            {
+              "id": "URBN",
+              "text": "URBN - Urban Outfitters Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Auto Dealerships",
+          "children": [
+            {
+              "id": "KMX",
+              "text": "KMX - CarMax Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AN",
+              "text": "AN - AutoNation Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Auto Parts Stores",
+          "children": [
+            {
+              "id": "AZO",
+              "text": "AZO - AutoZone Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ORLY",
+              "text": "ORLY - O'Reilly Automotive Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AAP",
+              "text": "AAP - Advance Auto Parts Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Auto Parts Wholesale",
+          "children": [
+            {
+              "id": "MGA",
+              "text": "MGA - Magna International, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GPC",
+              "text": "GPC - Genuine Parts Company",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Broadcasting - Radio",
+          "children": [
+            {
+              "id": "SIRI",
+              "text": "SIRI - SIRIUS XM Radio Inc.",
+              "leaf": true
+            },
+            {
+              "id": "P",
+              "text": "P - Pandora Media, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Broadcasting - TV",
+          "children": [
+            {
+              "id": "TV",
+              "text": "TV - Grupo Televisa, S.A.B.",
+              "leaf": true
+            },
+            {
+              "id": "LMCA",
+              "text": "LMCA - Liberty Capital Group",
+              "leaf": true
+            },
+            {
+              "id": "SNI",
+              "text": "SNI - Scripps Networks Interactive, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NWSA",
+              "text": "NWSA - News Corp.",
+              "leaf": true
+            },
+            {
+              "id": "LVNTA",
+              "text": "LVNTA - Liberty Ventures",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Business Services",
+          "children": [
+            {
+              "id": "PCLN",
+              "text": "PCLN - priceline.com Incorporated",
+              "leaf": true
+            },
+            {
+              "id": "MHFI",
+              "text": "MHFI - McGraw Hill Financial, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MCO",
+              "text": "MCO - Moody's Corp.",
+              "leaf": true
+            },
+            {
+              "id": "FISV",
+              "text": "FISV - Fiserv, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ADS",
+              "text": "ADS - Alliance Data Systems Corporation",
+              "leaf": true
+            },
+            {
+              "id": "VRSK",
+              "text": "VRSK - Verisk Analytics, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FLT",
+              "text": "FLT - FleetCor Technologies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CTAS",
+              "text": "CTAS - Cintas Corporation",
+              "leaf": true
+            },
+            {
+              "id": "VNTV",
+              "text": "VNTV - Vantiv, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GPN",
+              "text": "GPN - Global Payments Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Catalog & Mail Order Houses",
+          "children": [
+            {
+              "id": "AMZN",
+              "text": "AMZN - Amazon.com Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LINTA",
+              "text": "LINTA - Liberty Interactive, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "CATV Systems",
+          "children": [
+            {
+              "id": "DTV",
+              "text": "DTV - DIRECTV, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TWC",
+              "text": "TWC - Time Warner Cable Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LBTYA",
+              "text": "LBTYA - Liberty Global Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DISH",
+              "text": "DISH - Dish Network Corp.",
+              "leaf": true
+            },
+            {
+              "id": "NFLX",
+              "text": "NFLX - Netflix, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DISCA",
+              "text": "DISCA - Discovery Communications, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CHTR",
+              "text": "CHTR - Charter Communications Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SJR",
+              "text": "SJR - Shaw Communications, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Department Stores",
+          "children": [
+            {
+              "id": "TJX",
+              "text": "TJX - The TJX Companies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "M",
+              "text": "M - Macy's, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "KSS",
+              "text": "KSS - Kohl's Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Discount, Variety Stores",
+          "children": [
+            {
+              "id": "WMT",
+              "text": "WMT - Wal-Mart Stores Inc.",
+              "leaf": true
+            },
+            {
+              "id": "COST",
+              "text": "COST - Costco Wholesale Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TGT",
+              "text": "TGT - Target Corp.",
+              "leaf": true
+            },
+            {
+              "id": "DG",
+              "text": "DG - Dollar General Corporation",
+              "leaf": true
+            },
+            {
+              "id": "DLTR",
+              "text": "DLTR - Dollar Tree, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "VIPS",
+              "text": "VIPS - Vipshop Holdings Limited",
+              "leaf": true
+            },
+            {
+              "id": "FDO",
+              "text": "FDO - Family Dollar Stores Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ZU",
+              "text": "ZU - zulily, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Drug Stores",
+          "children": [
+            {
+              "id": "CVS",
+              "text": "CVS - CVS Caremark Corporation",
+              "leaf": true
+            },
+            {
+              "id": "WAG",
+              "text": "WAG - Walgreen Co.",
+              "leaf": true
+            },
+            {
+              "id": "RAD",
+              "text": "RAD - Rite Aid Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Drugs Wholesale",
+          "children": [
+            {
+              "id": "MCK",
+              "text": "MCK - McKesson Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CAH",
+              "text": "CAH - Cardinal Health, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ABC",
+              "text": "ABC - AmerisourceBergen Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Electronics Stores",
+          "children": [
+            {
+              "id": "BBY",
+              "text": "BBY - Best Buy Co. Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GME",
+              "text": "GME - GameStop Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Electronics Wholesale",
+          "children": [
+            {
+              "id": "AVT",
+              "text": "AVT - Avnet Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ARW",
+              "text": "ARW - Arrow Electronics, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Entertainment - Diversified",
+          "children": [
+            {
+              "id": "DIS",
+              "text": "DIS - Walt Disney Co.",
+              "leaf": true
+            },
+            {
+              "id": "CMCSA",
+              "text": "CMCSA - Comcast Corporation",
+              "leaf": true
+            },
+            {
+              "id": "FOXA",
+              "text": "FOXA - Twenty-First Century Fox, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TWX",
+              "text": "TWX - Time Warner Inc.",
+              "leaf": true
+            },
+            {
+              "id": "VIAB",
+              "text": "VIAB - Viacom, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CBS",
+              "text": "CBS - CBS Corporation",
+              "leaf": true
+            },
+            {
+              "id": "AMCX",
+              "text": "AMCX - AMC Networks Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Food Wholesale",
+          "children": [
+            {
+              "id": "SYY",
+              "text": "SYY - Sysco Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Gaming Activities",
+          "children": [
+            {
+              "id": "KING",
+              "text": "KING - King Digital Entertainment plc",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "General Entertainment",
+          "children": [
+            {
+              "id": "CUK",
+              "text": "CUK - Carnival plc",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Grocery Stores",
+          "children": [
+            {
+              "id": "KR",
+              "text": "KR - The Kroger Co.",
+              "leaf": true
+            },
+            {
+              "id": "WFM",
+              "text": "WFM - Whole Foods Market, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CBD",
+              "text": "CBD - Companhia Brasileira de Distribuicao",
+              "leaf": true
+            },
+            {
+              "id": "SWY",
+              "text": "SWY - Safeway Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DEG",
+              "text": "DEG - Etablissements Delhaize Freres et Cie Le Lion S.A.",
+              "leaf": true
+            },
+            {
+              "id": "SFM",
+              "text": "SFM - Sprouts Farmers Market, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Home Furnishing Stores",
+          "children": [
+            {
+              "id": "BBBY",
+              "text": "BBBY - Bed Bath & Beyond Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WSM",
+              "text": "WSM - Williams-Sonoma Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Home Improvement Stores",
+          "children": [
+            {
+              "id": "HD",
+              "text": "HD - The Home Depot, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LOW",
+              "text": "LOW - Lowe's Companies Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Industrial Equipment Wholesale",
+          "children": [
+            {
+              "id": "GWW",
+              "text": "GWW - W.W. Grainger, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FAST",
+              "text": "FAST - Fastenal Company",
+              "leaf": true
+            },
+            {
+              "id": "MSM",
+              "text": "MSM - MSC Industrial Direct Co. Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HDS",
+              "text": "HDS - HD Supply Holdings, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Jewelry Stores",
+          "children": [
+            {
+              "id": "TIF",
+              "text": "TIF - Tiffany & Co.",
+              "leaf": true
+            },
+            {
+              "id": "SIG",
+              "text": "SIG - Signet Jewelers Limited",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Lodging",
+          "children": [
+            {
+              "id": "HLT",
+              "text": "HLT - Hilton Worldwide Holdings Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MAR",
+              "text": "MAR - Marriott International, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "HOT",
+              "text": "HOT - Starwood Hotels & Resorts Worldwide Inc.",
+              "leaf": true
+            },
+            {
+              "id": "EXPE",
+              "text": "EXPE - Expedia Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WYN",
+              "text": "WYN - Wyndham Worldwide Corporation",
+              "leaf": true
+            },
+            {
+              "id": "H",
+              "text": "H - Hyatt Hotels Corporation",
+              "leaf": true
+            },
+            {
+              "id": "IHG",
+              "text": "IHG - Intercontinental Hotels Group plc",
+              "leaf": true
+            },
+            {
+              "id": "CTRP",
+              "text": "CTRP - Ctrip.com International Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Major Airlines",
+          "children": [
+            {
+              "id": "DAL",
+              "text": "DAL - Delta Air Lines Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AAL",
+              "text": "AAL - American Airlines Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "UAL",
+              "text": "UAL - United Continental Holdings, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CEA",
+              "text": "CEA - China Eastern Airlines Corp. Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Management Services",
+          "children": [
+            {
+              "id": "TW",
+              "text": "TW - Towers Watson & Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Medical Equipment Wholesale",
+          "children": [
+            {
+              "id": "HSIC",
+              "text": "HSIC - Henry Schein, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Personal Services",
+          "children": [
+            {
+              "id": "HRB",
+              "text": "HRB - H&R Block, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Publishing - Books",
+          "children": [
+            {
+              "id": "PSO",
+              "text": "PSO - Pearson plc",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Publishing - Newspapers",
+          "children": [
+            {
+              "id": "GCI",
+              "text": "GCI - Gannett Co., Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GHC",
+              "text": "GHC - Graham Holdings",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Publishing - Periodicals",
+          "children": [
+            {
+              "id": "RUK",
+              "text": "RUK - Reed Elsevier plc",
+              "leaf": true
+            },
+            {
+              "id": "ENL",
+              "text": "ENL - Reed Elsevier NV",
+              "leaf": true
+            },
+            {
+              "id": "TRI",
+              "text": "TRI - Thomson Reuters Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Railroads",
+          "children": [
+            {
+              "id": "UNP",
+              "text": "UNP - Union Pacific Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CNI",
+              "text": "CNI - Canadian National Railway Company",
+              "leaf": true
+            },
+            {
+              "id": "NSC",
+              "text": "NSC - Norfolk Southern Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CSX",
+              "text": "CSX - CSX Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CP",
+              "text": "CP - Canadian Pacific Railway Limited",
+              "leaf": true
+            },
+            {
+              "id": "KSU",
+              "text": "KSU - Kansas City Southern",
+              "leaf": true
+            },
+            {
+              "id": "WAB",
+              "text": "WAB - Westinghouse Air Brake Technologies Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TRN",
+              "text": "TRN - Trinity Industries Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GWR",
+              "text": "GWR - Genesee & Wyoming Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Regional Airlines",
+          "children": [
+            {
+              "id": "LUV",
+              "text": "LUV - Southwest Airlines Co.",
+              "leaf": true
+            },
+            {
+              "id": "RYAAY",
+              "text": "RYAAY - Ryanair Holdings plc",
+              "leaf": true
+            },
+            {
+              "id": "LFL",
+              "text": "LFL - LAN Airlines S.A.",
+              "leaf": true
+            },
+            {
+              "id": "CPA",
+              "text": "CPA - Copa Holdings SA",
+              "leaf": true
+            },
+            {
+              "id": "ALK",
+              "text": "ALK - Alaska Air Group, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Rental & Leasing Services",
+          "children": [
+            {
+              "id": "HTZ",
+              "text": "HTZ - Hertz Global Holdings, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SBAC",
+              "text": "SBAC - SBA Communications Corp.",
+              "leaf": true
+            },
+            {
+              "id": "URI",
+              "text": "URI - United Rentals, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CAR",
+              "text": "CAR - Avis Budget Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "UHAL",
+              "text": "UHAL - AMERCO",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Research Services",
+          "children": [
+            {
+              "id": "QGEN",
+              "text": "QGEN - Qiagen NV",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Resorts & Casinos",
+          "children": [
+            {
+              "id": "LVS",
+              "text": "LVS - Las Vegas Sands Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CCL",
+              "text": "CCL - Carnival Corporation",
+              "leaf": true
+            },
+            {
+              "id": "WYNN",
+              "text": "WYNN - Wynn Resorts Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "MPEL",
+              "text": "MPEL - Melco Crown Entertainment Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "MGM",
+              "text": "MGM - MGM Resorts International",
+              "leaf": true
+            },
+            {
+              "id": "RCL",
+              "text": "RCL - Royal Caribbean Cruises Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Restaurants",
+          "children": [
+            {
+              "id": "MCD",
+              "text": "MCD - McDonald's Corp.",
+              "leaf": true
+            },
+            {
+              "id": "YUM",
+              "text": "YUM - Yum! Brands, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CMG",
+              "text": "CMG - Chipotle Mexican Grill, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BKW",
+              "text": "BKW - Burger King Worldwide, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "THI",
+              "text": "THI - Tim Hortons Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DRI",
+              "text": "DRI - Darden Restaurants, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DNKN",
+              "text": "DNKN - Dunkin' Brands Group, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Security & Protection Services",
+          "children": [
+            {
+              "id": "TYC",
+              "text": "TYC - Tyco International Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "ADT",
+              "text": "ADT - The ADT Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Shipping",
+          "children": [
+            {
+              "id": "KEX",
+              "text": "KEX - Kirby Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Specialty Eateries",
+          "children": [
+            {
+              "id": "SBUX",
+              "text": "SBUX - Starbucks Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ARMK",
+              "text": "ARMK - ARAMARK Holdings Corporation",
+              "leaf": true
+            },
+            {
+              "id": "PNRA",
+              "text": "PNRA - Panera Bread Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Specialty Retail, Other",
+          "children": [
+            {
+              "id": "EBAY",
+              "text": "EBAY - eBay Inc.",
+              "leaf": true
+            },
+            {
+              "id": "KORS",
+              "text": "KORS - Michael Kors Holdings Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "CNCO",
+              "text": "CNCO - Cencosud S.A.",
+              "leaf": true
+            },
+            {
+              "id": "TSCO",
+              "text": "TSCO - Tractor Supply Company",
+              "leaf": true
+            },
+            {
+              "id": "SPLS",
+              "text": "SPLS - Staples, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PETM",
+              "text": "PETM - PetSmart, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ULTA",
+              "text": "ULTA - Ulta Salon, Cosmetics & Fragrance, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Sporting Goods Stores",
+          "children": [
+            {
+              "id": "DKS",
+              "text": "DKS - Dick's Sporting Goods Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Staffing & Outsourcing Services",
+          "children": [
+            {
+              "id": "PAYX",
+              "text": "PAYX - Paychex, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MAN",
+              "text": "MAN - ManpowerGroup",
+              "leaf": true
+            },
+            {
+              "id": "RHI",
+              "text": "RHI - Robert Half International Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Technical Services",
+          "children": [
+            {
+              "id": "JEC",
+              "text": "JEC - Jacobs Engineering Group Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Trucking",
+          "children": [
+            {
+              "id": "JBHT",
+              "text": "JBHT - JB Hunt Transport Services Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ODFL",
+              "text": "ODFL - Old Dominion Freight Line Inc.",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Technology",
+      "children": [
+        {
+          "text": "Application Software",
+          "children": [
+            {
+              "id": "ORCL",
+              "text": "ORCL - Oracle Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SAP",
+              "text": "SAP - SAP AG",
+              "leaf": true
+            },
+            {
+              "id": "CRM",
+              "text": "CRM - Salesforce.com",
+              "leaf": true
+            },
+            {
+              "id": "ADBE",
+              "text": "ADBE - Adobe Systems Inc.",
+              "leaf": true
+            },
+            {
+              "id": "INTU",
+              "text": "INTU - Intuit Inc.",
+              "leaf": true
+            },
+            {
+              "id": "WDAY",
+              "text": "WDAY - Workday, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "RHT",
+              "text": "RHT - Red Hat, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CTRX",
+              "text": "CTRX - Catamaran Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SPLK",
+              "text": "SPLK - Splunk, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FEYE",
+              "text": "FEYE - FireEye, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ANSS",
+              "text": "ANSS - Ansys, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "OTEX",
+              "text": "OTEX - Open Text Corp.",
+              "leaf": true
+            },
+            {
+              "id": "NUAN",
+              "text": "NUAN - Nuance Communications, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MSCI",
+              "text": "MSCI - MSCI Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Business Software & Services",
+          "children": [
+            {
+              "id": "MSFT",
+              "text": "MSFT - Microsoft Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ADP",
+              "text": "ADP - Automatic Data Processing, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CTSH",
+              "text": "CTSH - Cognizant Technology Solutions Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CA",
+              "text": "CA - CA Technologies",
+              "leaf": true
+            },
+            {
+              "id": "CTXS",
+              "text": "CTXS - Citrix Systems, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "DOX",
+              "text": "DOX - Amdocs Limited",
+              "leaf": true
+            },
+            {
+              "id": "FFIV",
+              "text": "FFIV - F5 Networks, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "N",
+              "text": "N - NetSuite Inc.",
+              "leaf": true
+            },
+            {
+              "id": "IRM",
+              "text": "IRM - Iron Mountain Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Communication Equipment",
+          "children": [
+            {
+              "id": "QCOM",
+              "text": "QCOM - QUALCOMM Incorporated",
+              "leaf": true
+            },
+            {
+              "id": "ERIC",
+              "text": "ERIC - LM Ericsson Telephone Co.",
+              "leaf": true
+            },
+            {
+              "id": "NOK",
+              "text": "NOK - Nokia Corporation",
+              "leaf": true
+            },
+            {
+              "id": "MSI",
+              "text": "MSI - Motorola Solutions, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALU",
+              "text": "ALU - Alcatel-Lucent, S.A.",
+              "leaf": true
+            },
+            {
+              "id": "HRS",
+              "text": "HRS - Harris Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Computer Peripherals",
+          "children": [
+            {
+              "id": "DDD",
+              "text": "DDD - 3D Systems Corp.",
+              "leaf": true
+            },
+            {
+              "id": "SSYS",
+              "text": "SSYS - Stratasys Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Data Storage Devices",
+          "children": [
+            {
+              "id": "EMC",
+              "text": "EMC - EMC Corporation",
+              "leaf": true
+            },
+            {
+              "id": "WDC",
+              "text": "WDC - Western Digital Corp.",
+              "leaf": true
+            },
+            {
+              "id": "STX",
+              "text": "STX - Seagate Technology PLC",
+              "leaf": true
+            },
+            {
+              "id": "SNDK",
+              "text": "SNDK - SanDisk Corp.",
+              "leaf": true
+            },
+            {
+              "id": "NTAP",
+              "text": "NTAP - NetApp, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TDC",
+              "text": "TDC - Teradata Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Diversified Communication Services",
+          "children": [
+            {
+              "id": "DCM",
+              "text": "DCM - NTT DOCOMO, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BT",
+              "text": "BT - BT Group plc",
+              "leaf": true
+            },
+            {
+              "id": "CCI",
+              "text": "CCI - Crown Castle International Corp.",
+              "leaf": true
+            },
+            {
+              "id": "TI",
+              "text": "TI - Telecom Italia SpA",
+              "leaf": true
+            },
+            {
+              "id": "TLK",
+              "text": "TLK - Perusahaan Perseroan (Persero) PT Telekomunikasi Indonesia Tbk.",
+              "leaf": true
+            },
+            {
+              "id": "TI-A",
+              "text": "TI-A - Telecom Italia SpA",
+              "leaf": true
+            },
+            {
+              "id": "LVLT",
+              "text": "LVLT - Level 3 Communications Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Diversified Computer Systems",
+          "children": [
+            {
+              "id": "HPQ",
+              "text": "HPQ - Hewlett-Packard Company",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Diversified Electronics",
+          "children": [
+            {
+              "id": "GLW",
+              "text": "GLW - Corning Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TEL",
+              "text": "TEL - TE Connectivity Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "KYO",
+              "text": "KYO - Kyocera Corp.",
+              "leaf": true
+            },
+            {
+              "id": "APH",
+              "text": "APH - Amphenol Corporation",
+              "leaf": true
+            },
+            {
+              "id": "LPL",
+              "text": "LPL - LG Display Co., Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "HUB-B",
+              "text": "HUB-B - Hubbell Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AYI",
+              "text": "AYI - Acuity Brands, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Healthcare Information Services",
+          "children": [
+            {
+              "id": "CERN",
+              "text": "CERN - Cerner Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ATHN",
+              "text": "ATHN - athenahealth, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PINC",
+              "text": "PINC - Premier, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Information & Delivery Services",
+          "children": [
+            {
+              "id": "NLSN",
+              "text": "NLSN - Nielsen Holdings N.V.",
+              "leaf": true
+            },
+            {
+              "id": "IHS",
+              "text": "IHS - IHS Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Information Technology Services",
+          "children": [
+            {
+              "id": "IBM",
+              "text": "IBM - International Business Machines Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ACN",
+              "text": "ACN - Accenture plc",
+              "leaf": true
+            },
+            {
+              "id": "WIT",
+              "text": "WIT - Wipro Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "FIS",
+              "text": "FIS - Fidelity National Information Services, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "XRX",
+              "text": "XRX - Xerox Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CSC",
+              "text": "CSC - Computer Sciences Corporation",
+              "leaf": true
+            },
+            {
+              "id": "IMS",
+              "text": "IMS - Invesco Insured Municipal Securities",
+              "leaf": true
+            },
+            {
+              "id": "NOW",
+              "text": "NOW - ServiceNow, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "IT",
+              "text": "IT - Gartner Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NCR",
+              "text": "NCR - NCR Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CDW",
+              "text": "CDW - CDW Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Internet Information Providers",
+          "children": [
+            {
+              "id": "GOOGL",
+              "text": "GOOGL - Google Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GOOG",
+              "text": "GOOG - Google Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FB",
+              "text": "FB - Facebook, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BIDU",
+              "text": "BIDU - Baidu, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "YHOO",
+              "text": "YHOO - Yahoo! Inc.",
+              "leaf": true
+            },
+            {
+              "id": "TWTR",
+              "text": "TWTR - Twitter, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LNKD",
+              "text": "LNKD - LinkedIn Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TRIP",
+              "text": "TRIP - TripAdvisor Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AKAM",
+              "text": "AKAM - Akamai Technologies, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "YNDX",
+              "text": "YNDX - Yandex N.V.",
+              "leaf": true
+            },
+            {
+              "id": "VRSN",
+              "text": "VRSN - VeriSign, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "IACI",
+              "text": "IACI - IAC/InterActiveCorp.",
+              "leaf": true
+            },
+            {
+              "id": "SFUN",
+              "text": "SFUN - SouFun Holdings Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "GRPN",
+              "text": "GRPN - Groupon, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Internet Service Providers",
+          "children": [
+            {
+              "id": "QIHU",
+              "text": "QIHU - Qihoo 360 Technology Co. Ltd",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Internet Software & Services",
+          "children": [
+            {
+              "id": "NTES",
+              "text": "NTES - NetEase.com, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GIB",
+              "text": "GIB - CGI Group, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "EQIX",
+              "text": "EQIX - Equinix, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Multimedia & Graphics Software",
+          "children": [
+            {
+              "id": "ATVI",
+              "text": "ATVI - Activision Blizzard, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "EA",
+              "text": "EA - Electronic Arts Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Networking & Communication Devices",
+          "children": [
+            {
+              "id": "CSCO",
+              "text": "CSCO - Cisco Systems, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "JNPR",
+              "text": "JNPR - Juniper Networks, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "PANW",
+              "text": "PANW - Palo Alto Networks, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Printed Circuit Boards",
+          "children": [
+            {
+              "id": "FLEX",
+              "text": "FLEX - Flextronics International Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Scientific & Technical Instruments",
+          "children": [
+            {
+              "id": "GRMN",
+              "text": "GRMN - Garmin Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "TRMB",
+              "text": "TRMB - Trimble Navigation Limited",
+              "leaf": true
+            },
+            {
+              "id": "WAT",
+              "text": "WAT - Waters Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ST",
+              "text": "ST - Sensata Technologies Holding NV",
+              "leaf": true
+            },
+            {
+              "id": "MTD",
+              "text": "MTD - Mettler-Toledo International, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FLIR",
+              "text": "FLIR - FLIR Systems, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ALLE",
+              "text": "ALLE - Allegion plc",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Security Software & Services",
+          "children": [
+            {
+              "id": "SYMC",
+              "text": "SYMC - Symantec Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CHKP",
+              "text": "CHKP - Check Point Software Technologies Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Semiconductor - Broad Line",
+          "children": [
+            {
+              "id": "INTC",
+              "text": "INTC - Intel Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TXN",
+              "text": "TXN - Texas Instruments Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AVGO",
+              "text": "AVGO - Avago Technologies Limited",
+              "leaf": true
+            },
+            {
+              "id": "NXPI",
+              "text": "NXPI - NXP Semiconductors NV",
+              "leaf": true
+            },
+            {
+              "id": "MXIM",
+              "text": "MXIM - Maxim Integrated Products Inc.",
+              "leaf": true
+            },
+            {
+              "id": "STM",
+              "text": "STM - STMicroelectronics NV",
+              "leaf": true
+            },
+            {
+              "id": "FSL",
+              "text": "FSL - Freescale Semiconductor Holdings I, Ltd.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Semiconductor Equipment & Materials",
+          "children": [
+            {
+              "id": "ASML",
+              "text": "ASML - ASML Holding NV",
+              "leaf": true
+            },
+            {
+              "id": "AMAT",
+              "text": "AMAT - Applied Materials Inc.",
+              "leaf": true
+            },
+            {
+              "id": "KLAC",
+              "text": "KLAC - KLA-Tencor Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ASX",
+              "text": "ASX - Advanced Semiconductor Engineering Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LRCX",
+              "text": "LRCX - Lam Research Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CREE",
+              "text": "CREE - Cree, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SNPS",
+              "text": "SNPS - Synopsys Inc.",
+              "leaf": true
+            },
+            {
+              "id": "UMC",
+              "text": "UMC - United Microelectronics Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Semiconductor - Integrated Circuits",
+          "children": [
+            {
+              "id": "TSM",
+              "text": "TSM - Taiwan Semiconductor Manufacturing Co. Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "BRCM",
+              "text": "BRCM - Broadcom Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ADI",
+              "text": "ADI - Analog Devices Inc.",
+              "leaf": true
+            },
+            {
+              "id": "XLNX",
+              "text": "XLNX - Xilinx Inc.",
+              "leaf": true
+            },
+            {
+              "id": "MRVL",
+              "text": "MRVL - Marvell Technology Group Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "SWKS",
+              "text": "SWKS - Skyworks Solutions Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Semiconductor- Memory Chips",
+          "children": [
+            {
+              "id": "MU",
+              "text": "MU - Micron Technology Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Semiconductor - Specialized",
+          "children": [
+            {
+              "id": "ARMH",
+              "text": "ARMH - ARM Holdings plc",
+              "leaf": true
+            },
+            {
+              "id": "LLTC",
+              "text": "LLTC - Linear Technology Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ALTR",
+              "text": "ALTR - Altera Corp.",
+              "leaf": true
+            },
+            {
+              "id": "NVDA",
+              "text": "NVDA - NVIDIA Corporation",
+              "leaf": true
+            },
+            {
+              "id": "MCHP",
+              "text": "MCHP - Microchip Technology Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FSLR",
+              "text": "FSLR - First Solar, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "LSI",
+              "text": "LSI - LSI Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SCTY",
+              "text": "SCTY - SolarCity Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Technical & System Software",
+          "children": [
+            {
+              "id": "VMW",
+              "text": "VMW - VMware, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "INFY",
+              "text": "INFY - Infosys Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "ADSK",
+              "text": "ADSK - Autodesk, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CNQR",
+              "text": "CNQR - Concur Technologies, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Telecom Services - Domestic",
+          "children": [
+            {
+              "id": "VZ",
+              "text": "VZ - Verizon Communications Inc.",
+              "leaf": true
+            },
+            {
+              "id": "T",
+              "text": "T - AT&T, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BCE",
+              "text": "BCE - BCE, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CHT",
+              "text": "CHT - Chunghwa Telecom Co. Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "CTL",
+              "text": "CTL - CenturyLink, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FTR",
+              "text": "FTR - Frontier Communications Corporation",
+              "leaf": true
+            },
+            {
+              "id": "WIN",
+              "text": "WIN - Windstream Corporation",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Telecom Services - Foreign",
+          "children": [
+            {
+              "id": "TEF",
+              "text": "TEF - Telefonica, S.A.",
+              "leaf": true
+            },
+            {
+              "id": "NTT",
+              "text": "NTT - Nippon Telegraph & Telephone Corp.",
+              "leaf": true
+            },
+            {
+              "id": "ORAN",
+              "text": "ORAN - Orange",
+              "leaf": true
+            },
+            {
+              "id": "CHA",
+              "text": "CHA - China Telecom Corp. Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "PHI",
+              "text": "PHI - Philippine Long Distance Telephone Co.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Wireless Communications",
+          "children": [
+            {
+              "id": "CHL",
+              "text": "CHL - China Mobile Limited",
+              "leaf": true
+            },
+            {
+              "id": "VOD",
+              "text": "VOD - Vodafone Group plc",
+              "leaf": true
+            },
+            {
+              "id": "AMX",
+              "text": "AMX - America Movil S.A.B. de C.V.",
+              "leaf": true
+            },
+            {
+              "id": "CHU",
+              "text": "CHU - China Unicom (Hong Kong) Limited",
+              "leaf": true
+            },
+            {
+              "id": "S",
+              "text": "S - Sprint Nextel Corp.",
+              "leaf": true
+            },
+            {
+              "id": "TMUS",
+              "text": "TMUS - T-Mobile US, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "VIV",
+              "text": "VIV - Telefonica Brasil, S.A.",
+              "leaf": true
+            },
+            {
+              "id": "TU",
+              "text": "TU - TELUS Corporation",
+              "leaf": true
+            },
+            {
+              "id": "RCI",
+              "text": "RCI - Rogers Communications Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SKM",
+              "text": "SKM - SK Telecom Co. Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "MBT",
+              "text": "MBT - Mobile Telesystems OJSC",
+              "leaf": true
+            },
+            {
+              "id": "VIP",
+              "text": "VIP - VimpelCom Ltd.",
+              "leaf": true
+            },
+            {
+              "id": "TKC",
+              "text": "TKC - Turkcell Iletisim Hizmetleri AS",
+              "leaf": true
+            },
+            {
+              "id": "TSU",
+              "text": "TSU - TIM Participacoes S.A.",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Utilities",
+      "children": [
+        {
+          "text": "Diversified Utilities",
+          "children": [
+            {
+              "id": "SI",
+              "text": "SI - Siemens AG",
+              "leaf": true
+            },
+            {
+              "id": "DUK",
+              "text": "DUK - Duke Energy Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SO",
+              "text": "SO - Southern Company",
+              "leaf": true
+            },
+            {
+              "id": "EXC",
+              "text": "EXC - Exelon Corporation",
+              "leaf": true
+            },
+            {
+              "id": "SRE",
+              "text": "SRE - Sempra Energy",
+              "leaf": true
+            },
+            {
+              "id": "PEG",
+              "text": "PEG - Public Service Enterprise Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ED",
+              "text": "ED - Consolidated Edison Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NU",
+              "text": "NU - Northeast Utilities",
+              "leaf": true
+            },
+            {
+              "id": "NI",
+              "text": "NI - NiSource Inc.",
+              "leaf": true
+            },
+            {
+              "id": "NRG",
+              "text": "NRG - NRG Energy, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AEE",
+              "text": "AEE - Ameren Corporation",
+              "leaf": true
+            },
+            {
+              "id": "BEP",
+              "text": "BEP - Brookfield Renewable Energy Partners LP",
+              "leaf": true
+            },
+            {
+              "id": "MDU",
+              "text": "MDU - MDU Resources Group Inc.",
+              "leaf": true
+            },
+            {
+              "id": "BIP",
+              "text": "BIP - Brookfield Infrastructure Partners L.P.",
+              "leaf": true
+            },
+            {
+              "id": "UGI",
+              "text": "UGI - UGI Corp.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Electric Utilities",
+          "children": [
+            {
+              "id": "NEE",
+              "text": "NEE - NextEra Energy, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "D",
+              "text": "D - Dominion Resources, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "AEP",
+              "text": "AEP - American Electric Power Co., Inc.",
+              "leaf": true
+            },
+            {
+              "id": "KEP",
+              "text": "KEP - Korea Electric Power Corp.",
+              "leaf": true
+            },
+            {
+              "id": "PPL",
+              "text": "PPL - PPL Corporation",
+              "leaf": true
+            },
+            {
+              "id": "PCG",
+              "text": "PCG - PG&E Corp.",
+              "leaf": true
+            },
+            {
+              "id": "EIX",
+              "text": "EIX - Edison International",
+              "leaf": true
+            },
+            {
+              "id": "XEL",
+              "text": "XEL - Xcel Energy Inc.",
+              "leaf": true
+            },
+            {
+              "id": "FE",
+              "text": "FE - FirstEnergy Corp.",
+              "leaf": true
+            },
+            {
+              "id": "DTE",
+              "text": "DTE - DTE Energy Co.",
+              "leaf": true
+            },
+            {
+              "id": "HNP",
+              "text": "HNP - Huaneng Power International Inc.",
+              "leaf": true
+            },
+            {
+              "id": "ETR",
+              "text": "ETR - Entergy Corporation",
+              "leaf": true
+            },
+            {
+              "id": "EOC",
+              "text": "EOC - Empresa Nacional de Electricidad S.A.",
+              "leaf": true
+            },
+            {
+              "id": "WEC",
+              "text": "WEC - Wisconsin Energy Corp.",
+              "leaf": true
+            },
+            {
+              "id": "AES",
+              "text": "AES - The AES Corporation",
+              "leaf": true
+            },
+            {
+              "id": "CIG",
+              "text": "CIG - Cia Energetica de Minas Gerais",
+              "leaf": true
+            },
+            {
+              "id": "CPN",
+              "text": "CPN - Calpine Corp.",
+              "leaf": true
+            },
+            {
+              "id": "CMS",
+              "text": "CMS - CMS Energy Corp.",
+              "leaf": true
+            },
+            {
+              "id": "SCG",
+              "text": "SCG - SCANA Corp.",
+              "leaf": true
+            },
+            {
+              "id": "OGE",
+              "text": "OGE - OGE Energy Corp.",
+              "leaf": true
+            },
+            {
+              "id": "LNT",
+              "text": "LNT - Alliant Energy Corporation",
+              "leaf": true
+            },
+            {
+              "id": "PNW",
+              "text": "PNW - Pinnacle West Capital Corporation",
+              "leaf": true
+            },
+            {
+              "id": "ITC",
+              "text": "ITC - ITC Holdings Corp.",
+              "leaf": true
+            },
+            {
+              "id": "POM",
+              "text": "POM - Pepco Holdings, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Foreign Utilities",
+          "children": [
+            {
+              "id": "ENI",
+              "text": "ENI - Enersis S.A.",
+              "leaf": true
+            },
+            {
+              "id": "CPL",
+              "text": "CPL - CPFL Energia S.A.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Gas Utilities",
+          "children": [
+            {
+              "id": "NGG",
+              "text": "NGG - National Grid plc",
+              "leaf": true
+            },
+            {
+              "id": "OKE",
+              "text": "OKE - ONEOK Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CNP",
+              "text": "CNP - CenterPoint Energy, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "GAS",
+              "text": "GAS - AGL Resources Inc.",
+              "leaf": true
+            },
+            {
+              "id": "CQH",
+              "text": "CQH - Cheniere Energy Partners LP Holdings, LLC",
+              "leaf": true
+            },
+            {
+              "id": "ATO",
+              "text": "ATO - Atmos Energy Corporation",
+              "leaf": true
+            },
+            {
+              "id": "TEG",
+              "text": "TEG - Integrys Energy Group, Inc.",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Water Utilities",
+          "children": [
+            {
+              "id": "AWK",
+              "text": "AWK - American Water Works Company, Inc.",
+              "leaf": true
+            },
+            {
+              "id": "SBS",
+              "text": "SBS - Companhia de Saneamento Basico do Estado de Sao Paulo",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

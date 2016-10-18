@@ -3,7 +3,8 @@ import React from 'react';
 import Browser from './Browser';
 import CaptionRow from '../CaptionRow';
 import ScrollPane from './ScrollPane';
-import MenuPart from './MenuPart';
+import MenuListType2 from './MenuListType2';
+//import MenuPart from './MenuPart';
 
 const Styles = {
   browser : {
@@ -18,7 +19,7 @@ const Styles = {
 };
 
 
-const MenuBrowserDynamic = React.createClass({
+const MenuBrowserDynamic2 = React.createClass({
   getInitialState(){
     const { isInitShow } = this.props;
     return {
@@ -49,32 +50,25 @@ const MenuBrowserDynamic = React.createClass({
   },
 
   _onStore(actionType, data){
-    const { browserType, store, showAction, updateAction, loadCompletedAction } = this.props;
+    const { browserType, showAction, loadCompletedAction } = this.props;
     if (actionType === showAction && data === browserType){
       this._handlerShow();
     } else if (actionType === loadCompletedAction && data.browserType === browserType){
-      this.setState({ menuItems: data.menuItems, isLoaded : true });
-    } else if (actionType === updateAction && data === browserType){
-      this.setState({ menuItems: store.getBrowserMenu(browserType) });
+      this.setState({ menuItems: data.json, isLoaded : true });
     }
   },
 
   _handlerHide(){
-    this.setState({ isShow : false });
+    this.setState({isShow : false});
   },
   _handlerShow(){
-    this.setState({ isShow : true });
-  },
-
-  _renderMenuParts(menuItems=[]){
-    return menuItems.map((menuPart, index) => {
-      return (<MenuPart key={index} {...menuPart} />)
-    });
+    this.setState({isShow : true});
   },
 
   render(){
     const {caption, children} = this.props
         , {menuItems, isShow} = this.state;
+
 
     return (
        <Browser isShow={isShow} style={Styles.browser}>
@@ -83,7 +77,7 @@ const MenuBrowserDynamic = React.createClass({
              onClose={this._handlerHide}
           />
           <ScrollPane style={Styles.scrollDiv}>
-            {this._renderMenuParts(menuItems)}
+            <MenuListType2 model={menuItems} />
             {children}
           </ScrollPane>
        </Browser>
@@ -92,4 +86,4 @@ const MenuBrowserDynamic = React.createClass({
 });
 
 
-export default MenuBrowserDynamic;
+export default MenuBrowserDynamic2;
