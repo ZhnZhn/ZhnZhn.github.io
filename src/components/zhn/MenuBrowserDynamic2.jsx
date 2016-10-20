@@ -2,6 +2,7 @@ import React from 'react';
 
 import Browser from './Browser';
 import CaptionRow from '../CaptionRow';
+import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import ScrollPane from './ScrollPane';
 import MenuListType2 from './MenuListType2';
 //import MenuPart from './MenuPart';
@@ -22,6 +23,11 @@ const Styles = {
 const MenuBrowserDynamic2 = React.createClass({
   getInitialState(){
     const { isInitShow } = this.props;
+
+    this.toolbarButtons = [
+      { caption: 'I', onClick: this._handlerClickInfo }
+    ];
+
     return {
       isShow: isInitShow ? true : false,
       isLoaded : false,
@@ -65,8 +71,13 @@ const MenuBrowserDynamic2 = React.createClass({
     this.setState({isShow : true});
   },
 
+  _handlerClickInfo(){
+    const {descrUrl, onClickInfo} = this.props;
+    onClickInfo({ descrUrl });
+  },
+
   render(){
-    const {caption, children} = this.props
+    const {caption, children, modalDialogType, ItemComp} = this.props
         , {menuItems, isShow} = this.state;
 
 
@@ -76,8 +87,15 @@ const MenuBrowserDynamic2 = React.createClass({
              caption={caption}
              onClose={this._handlerHide}
           />
+          <ToolbarButtonCircle
+            buttons={this.toolbarButtons}
+          />
           <ScrollPane style={Styles.scrollDiv}>
-            <MenuListType2 model={menuItems} />
+            <MenuListType2
+               model={menuItems}
+               modalDialogType={modalDialogType}
+               ItemComp={ItemComp}
+            />
             {children}
           </ScrollPane>
        </Browser>

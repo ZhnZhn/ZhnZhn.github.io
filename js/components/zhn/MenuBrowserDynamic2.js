@@ -16,6 +16,10 @@ var _CaptionRow = require('../CaptionRow');
 
 var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
 
+var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
+
+var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
 var _ScrollPane = require('./ScrollPane');
 
 var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
@@ -44,6 +48,9 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
   displayName: 'MenuBrowserDynamic2',
   getInitialState: function getInitialState() {
     var isInitShow = this.props.isInitShow;
+
+
+    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }];
 
     return {
       isShow: isInitShow ? true : false,
@@ -92,10 +99,19 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
   _handlerShow: function _handlerShow() {
     this.setState({ isShow: true });
   },
-  render: function render() {
+  _handlerClickInfo: function _handlerClickInfo() {
     var _props3 = this.props;
-    var caption = _props3.caption;
-    var children = _props3.children;
+    var descrUrl = _props3.descrUrl;
+    var onClickInfo = _props3.onClickInfo;
+
+    onClickInfo({ descrUrl: descrUrl });
+  },
+  render: function render() {
+    var _props4 = this.props;
+    var caption = _props4.caption;
+    var children = _props4.children;
+    var modalDialogType = _props4.modalDialogType;
+    var ItemComp = _props4.ItemComp;
     var _state = this.state;
     var menuItems = _state.menuItems;
     var isShow = _state.isShow;
@@ -108,10 +124,17 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
         caption: caption,
         onClose: this._handlerHide
       }),
+      _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        buttons: this.toolbarButtons
+      }),
       _react2.default.createElement(
         _ScrollPane2.default,
         { style: Styles.scrollDiv },
-        _react2.default.createElement(_MenuListType2.default, { model: menuItems }),
+        _react2.default.createElement(_MenuListType2.default, {
+          model: menuItems,
+          modalDialogType: modalDialogType,
+          ItemComp: ItemComp
+        }),
         children
       )
     );

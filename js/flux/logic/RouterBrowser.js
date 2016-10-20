@@ -17,7 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var RouterBrowser = {
    DEFAULT: _SourceBrowserDynamic2.default,
 
-   QUS: _SourceBrowserDynamic4.default
+   QUS: _SourceBrowserDynamic4.default,
+   NS: _SourceBrowserDynamic4.default
 };
 
 exports.default = RouterBrowser;

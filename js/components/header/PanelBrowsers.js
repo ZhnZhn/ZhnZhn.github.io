@@ -104,12 +104,20 @@ var PanelBrowsers = function PanelBrowsers(props) {
           className: 'row__topic__odd item__quandl',
           onClick: onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])
         },
-        'Quandl : US Stocks By Sectors'
+        'Quandl : Stocks By Sectors'
       ),
       _react2.default.createElement(
         'div',
         {
-          className: 'row__topic__even item__watch',
+          className: 'row__topic__even item__quandl',
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.NYSE_STOCKS])
+        },
+        'Quandl : US NYSE by Sectors'
+      ),
+      _react2.default.createElement(
+        'div',
+        {
+          className: 'row__topic__odd item__watch',
           onClick: onClickWatch
         },
         'Watch'

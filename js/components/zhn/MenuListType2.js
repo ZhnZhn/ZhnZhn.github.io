@@ -12,8 +12,6 @@ var _OpenClose = require('./OpenClose2');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
-var _Type = require('../../constants/Type');
-
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -43,7 +41,7 @@ var STYLE = {
   },
   ITEM_DIV: {
     position: 'relative',
-    paddingRight: '40px',
+    paddingRight: '10px',
     lineHeight: 1.4,
     paddingTop: '5px',
     paddingBottom: '5px'
@@ -52,27 +50,30 @@ var STYLE = {
     display: 'inline-block',
     verticalAlign: 'middle',
     width: '100%',
-    maxWidth: '250px',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
+    //maxWidth: '250px',
+    //direction: "ltr",
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   }
 };
 
-var _handlerClickItem = function _handlerClickItem(item) {
-  _ComponentActions2.default.showModalDialog(_Type.ModalDialog.US_STOCK_BY_SECTOR, item);
+var _handlerClickItem = function _handlerClickItem(item, modalDialogType) {
+  _ComponentActions2.default.showModalDialog(modalDialogType, item);
 };
 
 var Item = function Item(_ref) {
   var caption = _ref.caption;
   var className = _ref.className;
   var item = _ref.item;
+  var modalDialogType = _ref.modalDialogType;
 
   return _react2.default.createElement(
     'div',
     {
       className: className,
       style: STYLE.ITEM_DIV,
-      onClick: _handlerClickItem.bind(null, item)
+      onClick: _handlerClickItem.bind(null, item, modalDialogType)
     },
     _react2.default.createElement(
       'span',
@@ -96,16 +97,32 @@ var MenuListType2 = _react2.default.createClass({
   _renderLevel3: function _renderLevel3() {
     var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
     var captionProp = arguments[1];
+    var _props = this.props;
+    var modalDialogType = _props.modalDialogType;
+    var ItemComp = _props.ItemComp;
 
     return items.map(function (item, index) {
       var caption = item[captionProp],
           _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
-      return _react2.default.createElement(Item, {
+      return _react2.default.createElement(ItemComp, {
         key: index,
         className: _className,
         caption: caption,
-        item: item
+        item: item,
+        modalDialogType: modalDialogType
       });
+
+      /*
+       return (
+           <Item
+             key={index}
+             className={_className}
+             caption={caption}
+             item={item}
+             modalDialogType={modalDialogType}
+           />
+       );
+      */
     });
   },
   _renderLevel2: function _renderLevel2() {

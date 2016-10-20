@@ -5,7 +5,8 @@ import SourceBrowserDynamic2 from '../../components/browser-container/SourceBrow
 const RouterBrowser = {
    DEFAULT : SourceBrowserDynamic,
 
-   QUS : SourceBrowserDynamic2
+   QUS : SourceBrowserDynamic2,
+   NS : SourceBrowserDynamic2
 };
 
 export default RouterBrowser

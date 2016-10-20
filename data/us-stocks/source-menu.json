@@ -1,9 +1,9 @@
 {
   "meta": {
-    "caption" : "text",
-    "level1" : "children",
-    "level2" : "children",
-    "level3" : "children"
+        "caption": "text",
+        "level1": "children",
+        "level2": "children",
+        "level3": "children"
   },
   "children": [
     {

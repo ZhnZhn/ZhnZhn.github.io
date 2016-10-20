@@ -2,7 +2,6 @@ import React from 'react';
 
 import OpenClose2 from './OpenClose2'
 
-import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
 
 
@@ -29,7 +28,7 @@ const STYLE = {
   },
   ITEM_DIV : {
     position: 'relative',
-    paddingRight: '40px',
+    paddingRight: '10px',
     lineHeight : 1.4,
     paddingTop : '5px',
     paddingBottom: '5px'
@@ -38,22 +37,24 @@ const STYLE = {
     display: 'inline-block',
     verticalAlign : 'middle',
     width: '100%',
-    maxWidth: '250px',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
+    //maxWidth: '250px',
+    //direction: "ltr",
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   }
 }
 
-const _handlerClickItem = (item) => {
-  ComponentActions.showModalDialog(ModalDialog.US_STOCK_BY_SECTOR, item);
+const _handlerClickItem = (item, modalDialogType) => {
+  ComponentActions.showModalDialog(modalDialogType, item);
 }
 
-const Item = ({ caption, className, item }) => {
+const Item = ({ caption, className, item, modalDialogType }) => {
   return (
     <div
       className={className}
       style={STYLE.ITEM_DIV}
-      onClick={_handlerClickItem.bind(null, item)}
+      onClick={_handlerClickItem.bind(null, item, modalDialogType)}
     >
       <span style={STYLE.ITEM_SPAN}>
         {caption}
@@ -76,19 +77,33 @@ const MenuListType2 = React.createClass({
   },
 
  _renderLevel3(items=[], captionProp){
+   const { modalDialogType, ItemComp } = this.props;
    return items.map((item, index) => {
      const caption  = item[captionProp]
          , _className = (index % 2)
               ? 'row__topic__even not-selected'
               : 'row__topic__odd not-selected'
      return (
+       <ItemComp
+          key={index}
+          className={_className}
+          caption={caption}
+          item={item}
+          modalDialogType={modalDialogType}
+       />
+     );
+
+    /*
+     return (
          <Item
            key={index}
            className={_className}
            caption={caption}
            item={item}
+           modalDialogType={modalDialogType}
          />
      );
+    */
    })
  },
 

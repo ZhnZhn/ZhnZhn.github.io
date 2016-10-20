@@ -22,6 +22,10 @@ var _RouterBrowser = require('./RouterBrowser');
 
 var _RouterBrowser2 = _interopRequireDefault(_RouterBrowser);
 
+var _RouterBrowserItem = require('../../components/browser-items/RouterBrowserItem');
+
+var _RouterBrowserItem2 = _interopRequireDefault(_RouterBrowserItem);
+
 var _ChartContainer = require('../../components/ChartContainer2');
 
 var _ChartContainer2 = _interopRequireDefault(_ChartContainer);
@@ -129,20 +133,28 @@ var Factory = {
   createChartContainer: function createChartContainer(dialogType, browserType) {
     return createChartContainerComp(getDataConf(dialogType), browserType);
   },
-  createBrowserDynamic: function createBrowserDynamic(_ref) {
-    var browserType = _ref.browserType;
-    var _ref$caption = _ref.caption;
-    var caption = _ref$caption === undefined ? '' : _ref$caption;
-    var sourceMenuUrl = _ref.sourceMenuUrl;
-
+  createBrowserDynamic: function createBrowserDynamic(option) {
+    var browserType = option.browserType;
+    var _option$caption = option.caption;
+    var caption = _option$caption === undefined ? '' : _option$caption;
+    var sourceMenuUrl = option.sourceMenuUrl;
+    var modalDialogType = option.modalDialogType;
+    var itemType = option.itemType;
+    var descrUrl = option.descrUrl;
     var comp = _RouterBrowser2.default[browserType] || _RouterBrowser2.default.DEFAULT;
+    var ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined;
+    var onClickInfo = typeof ItemComp !== "undefined" ? _showModalDialogDescription : undefined;
     return _react2.default.createElement(comp, {
       key: browserType,
       browserType: browserType,
       store: _ChartStore2.default,
       isInitShow: true,
       caption: caption,
-      sourceMenuUrl: sourceMenuUrl
+      sourceMenuUrl: sourceMenuUrl,
+      modalDialogType: modalDialogType,
+      ItemComp: ItemComp,
+      onClickInfo: onClickInfo,
+      descrUrl: descrUrl
     });
   }
 };

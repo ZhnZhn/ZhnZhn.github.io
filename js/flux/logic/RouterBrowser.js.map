@@ -5,5 +5,5 @@
  "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\RouterBrowser.js",
  "sourceRoot": "",
  "names": [],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAGA,IAAM,gBAAgB;AACnB,0CADmB;;AAGnB,sCAHmB;CAAhB;;kBAMS"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAGA,IAAM,gBAAgB;AACnB,0CADmB;;AAGnB,sCAHmB;AAInB,qCAJmB;CAAhB;;kBAOS"
 }

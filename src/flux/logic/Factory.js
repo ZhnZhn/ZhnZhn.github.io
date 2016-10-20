@@ -5,6 +5,8 @@ import RouterDialog from './RouterDialog';
 import RouterFnValue from './RouterFnValue';
 import RouterBrowser from './RouterBrowser';
 
+import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
+
 import ChartContainer2 from '../../components/ChartContainer2';
 
 import Msg from '../../constants/Msg';
@@ -112,16 +114,30 @@ const Factory = {
   return createChartContainerComp(getDataConf(dialogType), browserType);
  },
 
- createBrowserDynamic({ browserType, caption='' , sourceMenuUrl})
+ createBrowserDynamic(option)
  {
-    const comp = RouterBrowser[browserType] || RouterBrowser.DEFAULT;
+    const {
+             browserType, caption='' , sourceMenuUrl,
+             modalDialogType, itemType, descrUrl
+           } = option
+        , comp = RouterBrowser[browserType] || RouterBrowser.DEFAULT
+        , ItemComp = (itemType)
+              ? ( RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT )
+              : undefined
+        , onClickInfo = (typeof ItemComp !== "undefined")
+             ? _showModalDialogDescription
+             : undefined
     return React.createElement(comp , {
       key : browserType,
       browserType : browserType,
       store : ChartStore,
       isInitShow : true,
       caption : caption,
-      sourceMenuUrl : sourceMenuUrl
+      sourceMenuUrl : sourceMenuUrl,
+      modalDialogType : modalDialogType,
+      ItemComp : ItemComp,
+      onClickInfo : onClickInfo,
+      descrUrl : descrUrl
     });
   }
 }
