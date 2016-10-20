@@ -15,7 +15,8 @@ module.exports = {
             "lodash/sortBy", "lodash/merge", "lodash/flow",
             "purify",
             "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
-            "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting"
+            "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",
+            "accounting" 
           ]
   },
   output: {
