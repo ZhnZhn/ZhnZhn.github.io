@@ -17,6 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var STYLE = {
   ITEM_DIV: {
     position: 'relative',
+    minWidth: '350px',
     paddingRight: '10px',
     lineHeight: 1.4,
     paddingTop: '5px',

@@ -5,6 +5,7 @@ import ComponentActions from '../../flux/actions/ComponentActions';
 const STYLE = {
   ITEM_DIV : {
     position: 'relative',
+    minWidth : '350px',
     paddingRight: '10px',
     lineHeight : 1.4,
     paddingTop : '5px',
