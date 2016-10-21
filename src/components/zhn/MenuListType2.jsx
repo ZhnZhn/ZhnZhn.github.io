@@ -2,8 +2,6 @@ import React from 'react';
 
 import OpenClose2 from './OpenClose2'
 
-import ComponentActions from '../../flux/actions/ComponentActions';
-
 
 const MODEL_PROP = {
   CAPTION : 'caption',
@@ -45,25 +43,6 @@ const STYLE = {
   }
 }
 
-const _handlerClickItem = (item, modalDialogType) => {
-  ComponentActions.showModalDialog(modalDialogType, item);
-}
-
-const Item = ({ caption, className, item, modalDialogType }) => {
-  return (
-    <div
-      className={className}
-      style={STYLE.ITEM_DIV}
-      onClick={_handlerClickItem.bind(null, item, modalDialogType)}
-    >
-      <span style={STYLE.ITEM_SPAN}>
-        {caption}
-      </span>
-   </div>
-  );
-}
-
-
 const MenuListType2 = React.createClass({
   getInitialState(){
     return {}
@@ -77,7 +56,7 @@ const MenuListType2 = React.createClass({
   },
 
  _renderLevel3(items=[], captionProp){
-   const { modalDialogType, ItemComp } = this.props;
+   const { ItemComp, onClickItem } = this.props;
    return items.map((item, index) => {
      const caption  = item[captionProp]
          , _className = (index % 2)
@@ -89,21 +68,9 @@ const MenuListType2 = React.createClass({
           className={_className}
           caption={caption}
           item={item}
-          modalDialogType={modalDialogType}
+          onClickItem={onClickItem}
        />
      );
-
-    /*
-     return (
-         <Item
-           key={index}
-           className={_className}
-           caption={caption}
-           item={item}
-           modalDialogType={modalDialogType}
-         />
-     );
-    */
    })
  },
 
@@ -154,6 +121,9 @@ const MenuListType2 = React.createClass({
 
   render(){
     const { model } = this.props
+
+    console.log(this.props);
+
     return (
       <div>
          {this._renderLevel1(model)}

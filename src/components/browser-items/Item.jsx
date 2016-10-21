@@ -1,7 +1,5 @@
 import React from 'react';
 
-import ComponentActions from '../../flux/actions/ComponentActions';
-
 const STYLE = {
   ITEM_DIV : {
     position: 'relative',
@@ -23,16 +21,17 @@ const STYLE = {
   }
 }
 
-const _handlerClickItem = (item, modalDialogType) => {
-  ComponentActions.showModalDialog(modalDialogType, item);
-}
-
-const Item = ({ caption, className, item, modalDialogType, children }) => {
+const Item = (props) => {
+  const  {
+           caption, className,
+           item, onClickItem,
+           children
+         } = props
   return (
     <div
       className={className}
       style={STYLE.ITEM_DIV}
-      onClick={_handlerClickItem.bind(null, item, modalDialogType)}
+      onClick={onClickItem.bind(null, item)}
     >
       <span style={STYLE.ITEM_SPAN}>
         {caption}

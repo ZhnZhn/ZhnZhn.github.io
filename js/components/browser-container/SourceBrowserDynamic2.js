@@ -18,6 +18,10 @@ var _BrowserActions = require('../../flux/actions/BrowserActions');
 
 var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 
+var _ComponentActions = require('../../flux/actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SourceBrowserDynamic2 = _react2.default.createClass({
@@ -30,7 +34,8 @@ var SourceBrowserDynamic2 = _react2.default.createClass({
       caption: 'Source Browser',
       showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
       loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
-      onLoadMenu: _BrowserActions2.default.loadBrowserDynamic
+      onLoadMenu: _BrowserActions2.default.loadBrowserDynamic,
+      onShowLoadDialog: _ComponentActions2.default.showModalDialog
     }, this.props));
   }
 });

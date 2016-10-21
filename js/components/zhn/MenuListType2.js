@@ -12,10 +12,6 @@ var _OpenClose = require('./OpenClose2');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
-var _ComponentActions = require('../../flux/actions/ComponentActions');
-
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MODEL_PROP = {
@@ -58,31 +54,6 @@ var STYLE = {
   }
 };
 
-var _handlerClickItem = function _handlerClickItem(item, modalDialogType) {
-  _ComponentActions2.default.showModalDialog(modalDialogType, item);
-};
-
-var Item = function Item(_ref) {
-  var caption = _ref.caption;
-  var className = _ref.className;
-  var item = _ref.item;
-  var modalDialogType = _ref.modalDialogType;
-
-  return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: STYLE.ITEM_DIV,
-      onClick: _handlerClickItem.bind(null, item, modalDialogType)
-    },
-    _react2.default.createElement(
-      'span',
-      { style: STYLE.ITEM_SPAN },
-      caption
-    )
-  );
-};
-
 var MenuListType2 = _react2.default.createClass({
   displayName: 'MenuListType2',
   getInitialState: function getInitialState() {
@@ -98,8 +69,8 @@ var MenuListType2 = _react2.default.createClass({
     var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
     var captionProp = arguments[1];
     var _props = this.props;
-    var modalDialogType = _props.modalDialogType;
     var ItemComp = _props.ItemComp;
+    var onClickItem = _props.onClickItem;
 
     return items.map(function (item, index) {
       var caption = item[captionProp],
@@ -109,20 +80,8 @@ var MenuListType2 = _react2.default.createClass({
         className: _className,
         caption: caption,
         item: item,
-        modalDialogType: modalDialogType
+        onClickItem: onClickItem
       });
-
-      /*
-       return (
-           <Item
-             key={index}
-             className={_className}
-             caption={caption}
-             item={item}
-             modalDialogType={modalDialogType}
-           />
-       );
-      */
     });
   },
   _renderLevel2: function _renderLevel2() {
@@ -183,6 +142,9 @@ var MenuListType2 = _react2.default.createClass({
   },
   render: function render() {
     var model = this.props.model;
+
+
+    console.log(this.props);
 
     return _react2.default.createElement(
       'div',

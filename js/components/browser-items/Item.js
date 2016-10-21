@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ComponentActions = require('../../flux/actions/ComponentActions');
-
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var STYLE = {
@@ -35,23 +31,19 @@ var STYLE = {
   }
 };
 
-var _handlerClickItem = function _handlerClickItem(item, modalDialogType) {
-  _ComponentActions2.default.showModalDialog(modalDialogType, item);
-};
-
-var Item = function Item(_ref) {
-  var caption = _ref.caption;
-  var className = _ref.className;
-  var item = _ref.item;
-  var modalDialogType = _ref.modalDialogType;
-  var children = _ref.children;
+var Item = function Item(props) {
+  var caption = props.caption;
+  var className = props.className;
+  var item = props.item;
+  var onClickItem = props.onClickItem;
+  var children = props.children;
 
   return _react2.default.createElement(
     'div',
     {
       className: className,
       style: STYLE.ITEM_DIV,
-      onClick: _handlerClickItem.bind(null, item, modalDialogType)
+      onClick: onClickItem.bind(null, item)
     },
     _react2.default.createElement(
       'span',

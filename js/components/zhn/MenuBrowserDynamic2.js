@@ -20,6 +20,14 @@ var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
+var _ShowHide = require('./ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
+var _WrapperInputSearch = require('../zhn-select/WrapperInputSearch');
+
+var _WrapperInputSearch2 = _interopRequireDefault(_WrapperInputSearch);
+
 var _ScrollPane = require('./ScrollPane');
 
 var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
@@ -30,11 +38,12 @@ var _MenuListType2 = _interopRequireDefault(_MenuListType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import MenuPart from './MenuPart';
+var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
 
 var Styles = {
   browser: {
-    paddingRight: '0'
+    paddingRight: '0',
+    minWidth: '300px'
   },
   scrollDiv: {
     overflowY: 'auto',
@@ -50,10 +59,11 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
     var isInitShow = this.props.isInitShow;
 
 
-    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }];
+    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }, { caption: 'S', onClick: this._handlerClickSearch }];
 
     return {
       isShow: isInitShow ? true : false,
+      isShowSearch: false,
       isLoaded: false,
       menuItems: []
     };
@@ -106,16 +116,34 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
 
     onClickInfo({ descrUrl: descrUrl });
   },
-  render: function render() {
+  _handlerClickSearch: function _handlerClickSearch() {
+    this.setState({ isShowSearch: !this.state.isShowSearch });
+  },
+  _handlerClickItem: function _handlerClickItem(item) {
     var _props4 = this.props;
-    var caption = _props4.caption;
-    var children = _props4.children;
     var modalDialogType = _props4.modalDialogType;
-    var ItemComp = _props4.ItemComp;
+    var onShowLoadDialog = _props4.onShowLoadDialog;
+
+    onShowLoadDialog(modalDialogType, item);
+  },
+  render: function render() {
+    var _props5 = this.props;
+    var caption = _props5.caption;
+    var children = _props5.children;
+    var ItemComp = _props5.ItemComp;
     var _state = this.state;
     var menuItems = _state.menuItems;
     var isShow = _state.isShow;
-
+    var isShowSearch = _state.isShowSearch;
+    var _wrapperSearch = menuItems.length !== 0 ? _react2.default.createElement(
+      _ShowHide2.default,
+      { isShow: isShowSearch },
+      _react2.default.createElement(_WrapperInputSearch2.default, {
+        placeholder: SEARCH_PLACEHOLDER,
+        data: menuItems,
+        onSelect: this._handlerClickItem
+      })
+    ) : undefined;
 
     return _react2.default.createElement(
       _Browser2.default,
@@ -127,13 +155,14 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
       _react2.default.createElement(_ToolbarButtonCircle2.default, {
         buttons: this.toolbarButtons
       }),
+      _wrapperSearch,
       _react2.default.createElement(
         _ScrollPane2.default,
         { style: Styles.scrollDiv },
         _react2.default.createElement(_MenuListType2.default, {
           model: menuItems,
-          modalDialogType: modalDialogType,
-          ItemComp: ItemComp
+          ItemComp: ItemComp,
+          onClickItem: this._handlerClickItem
         }),
         children
       )

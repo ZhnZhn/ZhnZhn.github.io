@@ -3,13 +3,19 @@ import React from 'react';
 import Browser from './Browser';
 import CaptionRow from '../CaptionRow';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
+
+import ShowHide from './ShowHide';
+import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
+
 import ScrollPane from './ScrollPane';
 import MenuListType2 from './MenuListType2';
-//import MenuPart from './MenuPart';
+
+const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 
 const Styles = {
   browser : {
-    paddingRight: '0'
+    paddingRight: '0',
+    minWidth: '300px'
   },
   scrollDiv : {
     overflowY: 'auto',
@@ -25,11 +31,13 @@ const MenuBrowserDynamic2 = React.createClass({
     const { isInitShow } = this.props;
 
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handlerClickInfo }
+      { caption: 'I', onClick: this._handlerClickInfo },
+      { caption: 'S', onClick: this._handlerClickSearch }
     ];
 
     return {
       isShow: isInitShow ? true : false,
+      isShowSearch : false,
       isLoaded : false,
       menuItems: []
     }
@@ -75,11 +83,32 @@ const MenuBrowserDynamic2 = React.createClass({
     const {descrUrl, onClickInfo} = this.props;
     onClickInfo({ descrUrl });
   },
+  _handlerClickSearch(){
+    this.setState({ isShowSearch: !this.state.isShowSearch });
+  },
+
+
+  _handlerClickItem(item){
+    const { modalDialogType, onShowLoadDialog } = this.props;
+    onShowLoadDialog(modalDialogType, item);
+  },
 
   render(){
-    const {caption, children, modalDialogType, ItemComp} = this.props
-        , {menuItems, isShow} = this.state;
-
+    const {
+            caption, children, ItemComp
+          } = this.props
+        , { menuItems, isShow, isShowSearch } = this.state
+        , _wrapperSearch = (menuItems.length !== 0)
+               ? (
+                   <ShowHide isShow={isShowSearch}>
+                     <WrapperInputSearch
+                       placeholder={SEARCH_PLACEHOLDER}
+                       data={menuItems}
+                       onSelect={this._handlerClickItem}
+                     />
+                   </ShowHide>
+                 )
+               : undefined;
 
     return (
        <Browser isShow={isShow} style={Styles.browser}>
@@ -90,11 +119,14 @@ const MenuBrowserDynamic2 = React.createClass({
           <ToolbarButtonCircle
             buttons={this.toolbarButtons}
           />
+
+          {_wrapperSearch}
+
           <ScrollPane style={Styles.scrollDiv}>
             <MenuListType2
                model={menuItems}
-               modalDialogType={modalDialogType}
                ItemComp={ItemComp}
+               onClickItem={this._handlerClickItem}
             />
             {children}
           </ScrollPane>
