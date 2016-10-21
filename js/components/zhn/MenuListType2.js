@@ -144,8 +144,6 @@ var MenuListType2 = _react2.default.createClass({
     var model = this.props.model;
 
 
-    console.log(this.props);
-
     return _react2.default.createElement(
       'div',
       null,

@@ -121,7 +121,8 @@ const InputSearch = React.createClass({
       options : [],
       optionName : '',
       optionNames : '',
-      isUpdateOptions : false
+      isUpdateOptions : false,
+      propCaption : 'caption'
     }
   },
 
@@ -129,13 +130,16 @@ const InputSearch = React.createClass({
      this.domOptionsCache = null;
      this.indexActiveOption = 0;
 
-     const { optionName, optionNames } = this.props
+     const { optionName, optionNames, propCaption } = this.props
          , _optionName = (optionName)
                   ? ' ' + optionName
                   : ''
          , _optionNames = (optionNames)
                   ? ' ' + optionNames
                   : (optionName) ? _optionName : '';
+
+     this.propCaption = propCaption;
+
      return {
         value: '',
         isShowOption: false,
@@ -238,9 +242,10 @@ const InputSearch = React.createClass({
   },
 
   _filterOptionsToState(options, value){
-     const valueFor = value.toLowerCase();
+     const valueFor = value.toLowerCase()
+         , _caption = this.propCaption;
      return options.filter( (option, i) => {
-       return option.caption.toLowerCase().indexOf(valueFor) !== -1
+       return option[_caption].toLowerCase().indexOf(valueFor) !== -1;
      })
   },
 
@@ -254,7 +259,7 @@ const InputSearch = React.createClass({
         arr = this._filterOptionsToState(this.props.options, value);
       }
       if (arr.length === 0){
-        arr.push({caption: 'No results found', value: 'noresult'});
+        arr.push({[this.propCaption]: 'No results found', value: 'noresult'});
       }
       this._undecorateActiveOption();
       this.indexActiveOption = 0;
@@ -273,9 +278,9 @@ const InputSearch = React.createClass({
       case 13:
          const item = this.state.options[this.indexActiveOption];
 
-         if (item && item.caption){
+         if (item && item[this.propCaption]){
            this.setState({
-             value : item.caption,
+             value : item[this.propCaption],
              isShowOption : false,
              isValidDomOptionsCache : true
            });
@@ -364,7 +369,7 @@ const InputSearch = React.createClass({
   _handlerClickOption(item, index, event){
     this.indexActiveOption = index;
     this.setState({
-      value : item.caption,
+      value : item[this.propCaption],
       isShowOption : false
     });
     this.props.onSelect(item);
@@ -377,6 +382,7 @@ const InputSearch = React.createClass({
     let _domOptions;
     if (options){
       if (!isValidDomOptionsCache){
+         const _caption = this.propCaption;
          _domOptions = options.map((item, index)=>{
             const _styleDiv = (index % 2 === 0)
                      ? styles.itemOdd
@@ -389,7 +395,7 @@ const InputSearch = React.createClass({
                 style={Object.assign({}, styles.itemDiv, _styleDiv)}
                 onClick={this._handlerClickOption.bind(this, item, index)}
               >
-                {item.caption}
+                {item[_caption]}
             </div>
            )
         });

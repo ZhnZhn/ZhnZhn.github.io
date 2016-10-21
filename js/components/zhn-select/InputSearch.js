@@ -10,6 +10,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var styles = {
   rootDiv: {
     position: 'relative',
@@ -132,7 +134,8 @@ var InputSearch = _react2.default.createClass({
       options: [],
       optionName: '',
       optionNames: '',
-      isUpdateOptions: false
+      isUpdateOptions: false,
+      propCaption: 'caption'
     };
   },
   getInitialState: function getInitialState() {
@@ -142,8 +145,12 @@ var InputSearch = _react2.default.createClass({
     var _props = this.props;
     var optionName = _props.optionName;
     var optionNames = _props.optionNames;
+    var propCaption = _props.propCaption;
     var _optionName = optionName ? ' ' + optionName : '';
     var _optionNames = optionNames ? ' ' + optionNames : optionName ? _optionName : '';
+
+    this.propCaption = propCaption;
+
     return {
       value: '',
       isShowOption: false,
@@ -232,9 +239,10 @@ var InputSearch = _react2.default.createClass({
     }
   },
   _filterOptionsToState: function _filterOptionsToState(options, value) {
-    var valueFor = value.toLowerCase();
+    var valueFor = value.toLowerCase(),
+        _caption = this.propCaption;
     return options.filter(function (option, i) {
-      return option.caption.toLowerCase().indexOf(valueFor) !== -1;
+      return option[_caption].toLowerCase().indexOf(valueFor) !== -1;
     });
   },
   _handlerInputChange: function _handlerInputChange(event) {
@@ -247,7 +255,9 @@ var InputSearch = _react2.default.createClass({
         arr = this._filterOptionsToState(this.props.options, value);
       }
       if (arr.length === 0) {
-        arr.push({ caption: 'No results found', value: 'noresult' });
+        var _arr$push;
+
+        arr.push((_arr$push = {}, _defineProperty(_arr$push, this.propCaption, 'No results found'), _defineProperty(_arr$push, 'value', 'noresult'), _arr$push));
       }
       this._undecorateActiveOption();
       this.indexActiveOption = 0;
@@ -265,9 +275,9 @@ var InputSearch = _react2.default.createClass({
       case 13:
         var item = this.state.options[this.indexActiveOption];
 
-        if (item && item.caption) {
+        if (item && item[this.propCaption]) {
           this.setState({
-            value: item.caption,
+            value: item[this.propCaption],
             isShowOption: false,
             isValidDomOptionsCache: true
           });
@@ -355,7 +365,7 @@ var InputSearch = _react2.default.createClass({
   _handlerClickOption: function _handlerClickOption(item, index, event) {
     this.indexActiveOption = index;
     this.setState({
-      value: item.caption,
+      value: item[this.propCaption],
       isShowOption: false
     });
     this.props.onSelect(item);
@@ -372,21 +382,24 @@ var InputSearch = _react2.default.createClass({
     var _domOptions = void 0;
     if (options) {
       if (!isValidDomOptionsCache) {
-        _domOptions = options.map(function (item, index) {
-          var _styleDiv = index % 2 === 0 ? styles.itemOdd : styles.itemEven;
-          return _react2.default.createElement(
-            'div',
-            {
-              key: index,
-              ref: "v" + index,
-              className: 'option-row',
-              style: Object.assign({}, styles.itemDiv, _styleDiv),
-              onClick: _this._handlerClickOption.bind(_this, item, index)
-            },
-            item.caption
-          );
-        });
-        this.domOptionsCache = _domOptions;
+        (function () {
+          var _caption = _this.propCaption;
+          _domOptions = options.map(function (item, index) {
+            var _styleDiv = index % 2 === 0 ? styles.itemOdd : styles.itemEven;
+            return _react2.default.createElement(
+              'div',
+              {
+                key: index,
+                ref: "v" + index,
+                className: 'option-row',
+                style: Object.assign({}, styles.itemDiv, _styleDiv),
+                onClick: _this._handlerClickOption.bind(_this, item, index)
+              },
+              item[_caption]
+            );
+          });
+          _this.domOptionsCache = _domOptions;
+        })();
       } else {
         _domOptions = this.domOptionsCache;
       }

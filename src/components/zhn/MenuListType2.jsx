@@ -121,9 +121,7 @@ const MenuListType2 = React.createClass({
 
   render(){
     const { model } = this.props
-
-    console.log(this.props);
-
+    
     return (
       <div>
          {this._renderLevel1(model)}

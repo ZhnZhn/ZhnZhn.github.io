@@ -32,6 +32,10 @@ var _ScrollPane = require('./ScrollPane');
 
 var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
 
+var _SpinnerLoading = require('./SpinnerLoading');
+
+var _SpinnerLoading2 = _interopRequireDefault(_SpinnerLoading);
+
 var _MenuListType = require('./MenuListType2');
 
 var _MenuListType2 = _interopRequireDefault(_MenuListType);
@@ -40,16 +44,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
 
-var Styles = {
-  browser: {
+var CLASS = {
+  BROWSER: "scroll-browser-by",
+  BROWSER_WITH_SEARCH: "scroll-browser-by--search"
+};
+
+var STYLE = {
+  BROWSER: {
     paddingRight: '0',
     minWidth: '300px'
   },
-  scrollDiv: {
-    overflowY: 'auto',
-    height: '92%',
-    //height: 'calc(100vh - 90px)',
-    paddingRight: '10px'
+  WRAPPER_SEARCH: {
+    paddingBottom: '8px'
+  },
+  SPINNER_LOADING: {
+    position: 'relative',
+    display: 'block',
+    textAlign: 'middle',
+    margin: '0 auto',
+    marginTop: '32px',
+    width: '32px',
+    height: '32px'
   }
 };
 
@@ -64,6 +79,7 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
     return {
       isShow: isInitShow ? true : false,
       isShowSearch: false,
+      scrollClass: CLASS.BROWSER,
       isLoaded: false,
       menuItems: []
     };
@@ -117,7 +133,17 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
     onClickInfo({ descrUrl: descrUrl });
   },
   _handlerClickSearch: function _handlerClickSearch() {
-    this.setState({ isShowSearch: !this.state.isShowSearch });
+    if (this.state.isShowSearch) {
+      this.setState({
+        isShowSearch: false,
+        scrollClass: CLASS.BROWSER
+      });
+    } else {
+      this.setState({
+        isShowSearch: true,
+        scrollClass: CLASS.BROWSER_WITH_SEARCH
+      });
+    }
   },
   _handlerClickItem: function _handlerClickItem(item) {
     var _props4 = this.props;
@@ -135,19 +161,21 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
     var menuItems = _state.menuItems;
     var isShow = _state.isShow;
     var isShowSearch = _state.isShowSearch;
+    var scrollClass = _state.scrollClass;
     var _wrapperSearch = menuItems.length !== 0 ? _react2.default.createElement(
       _ShowHide2.default,
       { isShow: isShowSearch },
       _react2.default.createElement(_WrapperInputSearch2.default, {
+        style: STYLE.WRAPPER_SEARCH,
         placeholder: SEARCH_PLACEHOLDER,
         data: menuItems,
         onSelect: this._handlerClickItem
       })
     ) : undefined;
-
+    var _spinnerLoading = menuItems.length === 0 ? _react2.default.createElement(_SpinnerLoading2.default, { style: STYLE.SPINNER_LOADING }) : undefined;
     return _react2.default.createElement(
       _Browser2.default,
-      { isShow: isShow, style: Styles.browser },
+      { isShow: isShow, style: STYLE.BROWSER },
       _react2.default.createElement(_CaptionRow2.default, {
         caption: caption,
         onClose: this._handlerHide
@@ -158,7 +186,8 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
       _wrapperSearch,
       _react2.default.createElement(
         _ScrollPane2.default,
-        { style: Styles.scrollDiv },
+        { className: scrollClass },
+        _spinnerLoading,
         _react2.default.createElement(_MenuListType2.default, {
           model: menuItems,
           ItemComp: ItemComp,

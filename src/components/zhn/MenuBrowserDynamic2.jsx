@@ -8,20 +8,32 @@ import ShowHide from './ShowHide';
 import WrapperInputSearch from '../zhn-select/WrapperInputSearch';
 
 import ScrollPane from './ScrollPane';
+import SpinnerLoading from './SpinnerLoading';
 import MenuListType2 from './MenuListType2';
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 
-const Styles = {
-  browser : {
+const CLASS = {
+  BROWSER : "scroll-browser-by",
+  BROWSER_WITH_SEARCH : "scroll-browser-by--search"
+}
+
+const STYLE = {
+  BROWSER : {
     paddingRight: '0',
     minWidth: '300px'
   },
-  scrollDiv : {
-    overflowY: 'auto',
-    height: '92%',
-    //height: 'calc(100vh - 90px)',
-    paddingRight: '10px'
+  WRAPPER_SEARCH : {
+     paddingBottom: '8px'
+  },
+  SPINNER_LOADING : {
+    position: 'relative',
+    display: 'block',
+    textAlign: 'middle',
+    margin: '0 auto',
+    marginTop: '32px',
+    width: '32px',
+    height: '32px'
   }
 };
 
@@ -38,6 +50,7 @@ const MenuBrowserDynamic2 = React.createClass({
     return {
       isShow: isInitShow ? true : false,
       isShowSearch : false,
+      scrollClass : CLASS.BROWSER,
       isLoaded : false,
       menuItems: []
     }
@@ -84,7 +97,17 @@ const MenuBrowserDynamic2 = React.createClass({
     onClickInfo({ descrUrl });
   },
   _handlerClickSearch(){
-    this.setState({ isShowSearch: !this.state.isShowSearch });
+    if (this.state.isShowSearch){
+      this.setState({
+         isShowSearch: false,
+         scrollClass: CLASS.BROWSER
+       });
+    } else {
+      this.setState({
+         isShowSearch: true,
+         scrollClass: CLASS.BROWSER_WITH_SEARCH
+       });
+    }
   },
 
 
@@ -97,21 +120,24 @@ const MenuBrowserDynamic2 = React.createClass({
     const {
             caption, children, ItemComp
           } = this.props
-        , { menuItems, isShow, isShowSearch } = this.state
+        , { menuItems, isShow, isShowSearch, scrollClass } = this.state
         , _wrapperSearch = (menuItems.length !== 0)
                ? (
                    <ShowHide isShow={isShowSearch}>
                      <WrapperInputSearch
+                       style={STYLE.WRAPPER_SEARCH}
                        placeholder={SEARCH_PLACEHOLDER}
                        data={menuItems}
                        onSelect={this._handlerClickItem}
                      />
                    </ShowHide>
                  )
-               : undefined;
-
+               : undefined
+         , _spinnerLoading = (menuItems.length === 0)
+               ? (<SpinnerLoading style={STYLE.SPINNER_LOADING}/>)
+               : undefined
     return (
-       <Browser isShow={isShow} style={Styles.browser}>
+       <Browser isShow={isShow} style={STYLE.BROWSER}>
           <CaptionRow
              caption={caption}
              onClose={this._handlerHide}
@@ -122,7 +148,8 @@ const MenuBrowserDynamic2 = React.createClass({
 
           {_wrapperSearch}
 
-          <ScrollPane style={Styles.scrollDiv}>
+          <ScrollPane className={scrollClass}>
+            {_spinnerLoading}
             <MenuListType2
                model={menuItems}
                ItemComp={ItemComp}
