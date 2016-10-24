@@ -45,6 +45,7 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   sourceMenuUrl: './data/us-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.US_STOCK_BY_SECTOR,
+  itemOptionType: 'ItemTopicOption',
   itemType: 'Item',
   descrUrl: './data/us-stocks/description.html'
 }), _defineProperty(_BrowserConfig, _Type.BrowserType.NYSE_STOCKS, {
@@ -54,6 +55,7 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   sourceMenuUrl: './data/nyse-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
+  itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
 }), _defineProperty(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {

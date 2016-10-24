@@ -24,7 +24,9 @@ const STYLE = {
     minWidth: '300px'
   },
   WRAPPER_SEARCH : {
-     paddingBottom: '8px'
+     paddingBottom: '8px',
+     width: '100%',
+     paddingRight: '24px'
   },
   SPINNER_LOADING : {
     position: 'relative',
@@ -118,7 +120,8 @@ const MenuBrowserDynamic2 = React.createClass({
 
   render(){
     const {
-            caption, children, ItemComp
+            caption, children,
+            ItemOptionComp, ItemComp
           } = this.props
         , { menuItems, isShow, isShowSearch, scrollClass } = this.state
         , _wrapperSearch = (menuItems.length !== 0)
@@ -128,6 +131,7 @@ const MenuBrowserDynamic2 = React.createClass({
                        style={STYLE.WRAPPER_SEARCH}
                        placeholder={SEARCH_PLACEHOLDER}
                        data={menuItems}
+                       ItemOptionComp={ItemOptionComp}
                        onSelect={this._handlerClickItem}
                      />
                    </ShowHide>

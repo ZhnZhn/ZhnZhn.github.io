@@ -22,6 +22,10 @@ var _RouterBrowser = require('./RouterBrowser');
 
 var _RouterBrowser2 = _interopRequireDefault(_RouterBrowser);
 
+var _RouterItemOption = require('../../components/zhn-select/RouterItemOption');
+
+var _RouterItemOption2 = _interopRequireDefault(_RouterItemOption);
+
 var _RouterBrowserItem = require('../../components/browser-items/RouterBrowserItem');
 
 var _RouterBrowserItem2 = _interopRequireDefault(_RouterBrowserItem);
@@ -139,9 +143,11 @@ var Factory = {
     var caption = _option$caption === undefined ? '' : _option$caption;
     var sourceMenuUrl = option.sourceMenuUrl;
     var modalDialogType = option.modalDialogType;
+    var itemOptionType = option.itemOptionType;
     var itemType = option.itemType;
     var descrUrl = option.descrUrl;
     var comp = _RouterBrowser2.default[browserType] || _RouterBrowser2.default.DEFAULT;
+    var ItemOptionComp = itemOptionType ? _RouterItemOption2.default[itemOptionType] || _RouterBrowserItem2.default.DEFAULT : _RouterBrowserItem2.default.DEFAULT;
     var ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined;
     var onClickInfo = typeof ItemComp !== "undefined" ? _showModalDialogDescription : undefined;
     return _react2.default.createElement(comp, {
@@ -152,6 +158,7 @@ var Factory = {
       caption: caption,
       sourceMenuUrl: sourceMenuUrl,
       modalDialogType: modalDialogType,
+      ItemOptionComp: ItemOptionComp,
       ItemComp: ItemComp,
       onClickInfo: onClickInfo,
       descrUrl: descrUrl

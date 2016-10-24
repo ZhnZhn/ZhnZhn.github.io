@@ -42,6 +42,7 @@ const BrowserConfig = {
     sourceMenuUrl: './data/us-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.US_STOCK_BY_SECTOR,
+    itemOptionType: 'ItemTopicOption',
     itemType : 'Item',
     descrUrl : './data/us-stocks/description.html'
   },
@@ -52,6 +53,7 @@ const BrowserConfig = {
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
+    itemOptionType: 'ItemTopicOption',
     itemType : 'ItemWithCap',
     descrUrl : './data/nyse-stocks/nyse-stocks.html'
   },

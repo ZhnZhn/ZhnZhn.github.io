@@ -17,7 +17,7 @@ module.exports = {
             "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
             "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",
             "accounting" 
-          ]
+          ],
   },
   output: {
       path: path.resolve('app'),
@@ -34,7 +34,7 @@ module.exports = {
        }
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'lib'
+      names: ['lib', 'manifest']
     }),
     new webpack.optimize.UglifyJsPlugin({
         compress: {

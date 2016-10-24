@@ -55,7 +55,9 @@ var STYLE = {
     minWidth: '300px'
   },
   WRAPPER_SEARCH: {
-    paddingBottom: '8px'
+    paddingBottom: '8px',
+    width: '100%',
+    paddingRight: '24px'
   },
   SPINNER_LOADING: {
     position: 'relative',
@@ -156,6 +158,7 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
     var _props5 = this.props;
     var caption = _props5.caption;
     var children = _props5.children;
+    var ItemOptionComp = _props5.ItemOptionComp;
     var ItemComp = _props5.ItemComp;
     var _state = this.state;
     var menuItems = _state.menuItems;
@@ -169,6 +172,7 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
         style: STYLE.WRAPPER_SEARCH,
         placeholder: SEARCH_PLACEHOLDER,
         data: menuItems,
+        ItemOptionComp: ItemOptionComp,
         onSelect: this._handlerClickItem
       })
     ) : undefined;

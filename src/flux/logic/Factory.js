@@ -5,6 +5,7 @@ import RouterDialog from './RouterDialog';
 import RouterFnValue from './RouterFnValue';
 import RouterBrowser from './RouterBrowser';
 
+import RouterItemOption from '../../components/zhn-select/RouterItemOption';
 import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
 
 import ChartContainer2 from '../../components/ChartContainer2';
@@ -118,9 +119,12 @@ const Factory = {
  {
     const {
              browserType, caption='' , sourceMenuUrl,
-             modalDialogType, itemType, descrUrl
+             modalDialogType, itemOptionType, itemType, descrUrl
            } = option
         , comp = RouterBrowser[browserType] || RouterBrowser.DEFAULT
+        , ItemOptionComp = (itemOptionType)
+              ? ( RouterItemOption[itemOptionType] || RouterBrowserItem.DEFAULT )
+              : RouterBrowserItem.DEFAULT
         , ItemComp = (itemType)
               ? ( RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT )
               : undefined
@@ -135,6 +139,7 @@ const Factory = {
       caption : caption,
       sourceMenuUrl : sourceMenuUrl,
       modalDialogType : modalDialogType,
+      ItemOptionComp: ItemOptionComp,
       ItemComp : ItemComp,
       onClickInfo : onClickInfo,
       descrUrl : descrUrl

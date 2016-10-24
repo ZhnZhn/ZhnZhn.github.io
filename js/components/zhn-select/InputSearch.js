@@ -18,7 +18,8 @@ var styles = {
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     //width: '95%',
-    width: '160px'
+    //width: '160px',
+    width: '100%'
   },
   inputText: {
     background: 'transparent none repeat scroll 0 0',
@@ -27,7 +28,9 @@ var styles = {
     height: '30px',
     paddingLeft: '10px',
     color: 'green',
-    width: '140px',
+    //width: '140px',
+    width: '100%',
+    paddingRight: '40px',
     fontSize: '16px',
     fontWeight: 'bold'
   },
@@ -36,13 +39,15 @@ var styles = {
     left: 0,
     backgroundColor: '#E1E1CB',
     color: 'green',
-    width: '160px',
+    //width: '160px',
+    width: '100%',
     //height: '160px',
     zIndex: '10',
     borderBottomLeftRadius: '5px',
     borderBottomRightRadius: '5px'
   },
   optionDiv: {
+    width: '100%',
     //height: '160px',
     minHeight: '160px',
     maxHeight: '200px',
@@ -67,15 +72,18 @@ var styles = {
     cursor: 'pointer'
   },
   arrowCell: {
+    position: 'absolute',
+    top: '10px',
+    right: '0px',
     cursor: 'pointer',
     //display: table-cell
-    position: 'relative',
+    //position: 'relative',
     textAlign: 'center',
     verticalAlign: 'middle',
     //width: '25px',
     width: '35px',
-    paddingRight: '5px',
-    marginLeft: '10px'
+    paddingRight: '5px'
+    //marginLeft: '10px'
 
   },
   arrow: {
@@ -95,7 +103,8 @@ var styles = {
     margin: 0,
     marginLeft: '10px',
     marginBottom: '5px',
-    width: '150px'
+    marginRight: '40px'
+    //width: '150px'
 
   },
   itemDiv: {
@@ -373,6 +382,7 @@ var InputSearch = _react2.default.createClass({
   renderOptions: function renderOptions() {
     var _this = this;
 
+    var ItemOptionComp = this.props.ItemOptionComp;
     var _state = this.state;
     var isShowOption = _state.isShowOption;
     var options = _state.options;
@@ -395,7 +405,10 @@ var InputSearch = _react2.default.createClass({
                 style: Object.assign({}, styles.itemDiv, _styleDiv),
                 onClick: _this._handlerClickOption.bind(_this, item, index)
               },
-              item[_caption]
+              _react2.default.createElement(ItemOptionComp, {
+                item: item,
+                propCaption: _caption
+              })
             );
           });
           _this.domOptionsCache = _domOptions;
@@ -405,15 +418,13 @@ var InputSearch = _react2.default.createClass({
       }
     }
 
-    var width = this.props.width;
-    var _styleOptions = isShowOption ? { display: 'block' } : { display: 'none' };
-    var _styleDivWidth = width ? { width: width + 'px' } : null;
-    var _numberFilteredItems = options[0] && options[0].value !== 'noresult' ? options.length : 0;
-    var _numberAllItems = this.props.options ? this.props.options.length : 0;
+    var _styleOptions = isShowOption ? { display: 'block' } : { display: 'none' },
+        _numberFilteredItems = options[0] && options[0].value !== 'noresult' ? options.length : 0,
+        _numberAllItems = this.props.options ? this.props.options.length : 0;
 
     return _react2.default.createElement(
       'div',
-      { style: Object.assign({}, styles.rootOptionDiv, _styleOptions, _styleDivWidth) },
+      { style: Object.assign({}, styles.rootOptionDiv, _styleOptions) },
       _react2.default.createElement(
         'div',
         {
@@ -421,7 +432,7 @@ var InputSearch = _react2.default.createClass({
             return _this.domOptions = c;
           },
           key: '1',
-          style: Object.assign({}, styles.optionDiv, _styleOptions, _styleDivWidth)
+          style: Object.assign({}, styles.optionDiv, _styleOptions)
         },
         _domOptions
       ),
@@ -464,7 +475,6 @@ var InputSearch = _react2.default.createClass({
   render: function render() {
     var _this2 = this;
 
-    var width = this.props.width;
     var _state2 = this.state;
     var value = _state2.value;
     var isLocalMode = _state2.isLocalMode;
@@ -472,15 +482,6 @@ var InputSearch = _react2.default.createClass({
 
 
     var _styleArrow = isShowOption ? { borderColor: '#1B75BB transparent transparent' } : null;
-
-    var _styleDivWidth = null;
-    var _styleInputWidth = null;
-    var _styleHr = null;
-    if (width) {
-      _styleDivWidth = { width: width + 'px' };
-      _styleInputWidth = { width: width - 30 + 'px' };
-      _styleHr = { width: width - 40 + 'px' };
-    }
 
     var _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
@@ -521,20 +522,20 @@ var InputSearch = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      { style: Object.assign({}, styles.rootDiv, _styleDivWidth) },
+      { style: Object.assign({}, styles.rootDiv) },
       _react2.default.createElement('input', {
         ref: function ref(c) {
           return _this2.domInputText = c;
         },
         type: 'text',
         value: value,
-        style: Object.assign({}, styles.inputText, _styleInputWidth),
+        style: Object.assign({}, styles.inputText),
         placeholder: _placeholder,
         translate: false,
         onChange: this._handlerInputChange,
         onKeyDown: this._handlerInputKeyDown }),
       _domAfterInput,
-      _react2.default.createElement('hr', { style: Object.assign({}, styles.inputHr, _styleHr) }),
+      _react2.default.createElement('hr', { style: Object.assign({}, styles.inputHr) }),
       _domOptions
     );
   },

@@ -6,7 +6,8 @@ const styles = {
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     //width: '95%',
-    width: '160px'
+    //width: '160px',
+    width: '100%'
   },
   inputText: {
     background: 'transparent none repeat scroll 0 0',
@@ -15,7 +16,9 @@ const styles = {
     height: '30px',
     paddingLeft: '10px',
     color: 'green',
-    width: '140px',
+    //width: '140px',
+    width: '100%',
+    paddingRight: '40px',
     fontSize: '16px',
     fontWeight: 'bold'
   },
@@ -24,13 +27,15 @@ const styles = {
     left: 0,
     backgroundColor: '#E1E1CB',
     color: 'green',
-    width: '160px',
+    //width: '160px',
+    width: '100%',
     //height: '160px',
     zIndex: '10',
     borderBottomLeftRadius : '5px',
     borderBottomRightRadius : '5px'
   },
   optionDiv: {
+    width: '100%',
     //height: '160px',
     minHeight: '160px',
     maxHeight: '200px',
@@ -55,15 +60,18 @@ const styles = {
     cursor : 'pointer'
   },
   arrowCell:{
+    position: 'absolute',
+    top: '10px',
+    right: '0px',
     cursor: 'pointer',
     //display: table-cell
-    position: 'relative',
+    //position: 'relative',
     textAlign: 'center',
     verticalAlign: 'middle',
     //width: '25px',
     width: '35px',
-    paddingRight: '5px',
-    marginLeft: '10px'
+    paddingRight: '5px'
+    //marginLeft: '10px'
 
   },
   arrow : {
@@ -83,7 +91,8 @@ const styles = {
    margin: 0,
    marginLeft: '10px',
    marginBottom: '5px',
-   width: '150px'
+   marginRight: '40px'
+   //width: '150px'
 
  },
   itemDiv:{
@@ -377,7 +386,8 @@ const InputSearch = React.createClass({
 
 
   renderOptions(){
-    const {isShowOption, options, isValidDomOptionsCache} = this.state;
+    const { ItemOptionComp } = this.props
+         , { isShowOption, options, isValidDomOptionsCache } = this.state;
 
     let _domOptions;
     if (options){
@@ -395,7 +405,10 @@ const InputSearch = React.createClass({
                 style={Object.assign({}, styles.itemDiv, _styleDiv)}
                 onClick={this._handlerClickOption.bind(this, item, index)}
               >
-                {item[_caption]}
+                <ItemOptionComp
+                   item={item}
+                   propCaption={_caption}
+                />
             </div>
            )
         });
@@ -405,19 +418,17 @@ const InputSearch = React.createClass({
       }
     }
 
-    const {width} = this.props
-        ,  _styleOptions = isShowOption ? {display: 'block'} : { display: 'none'}
-        , _styleDivWidth = (width) ? { width: width+'px'} : null
+    const _styleOptions = isShowOption ? {display: 'block'} : { display: 'none'}
         , _numberFilteredItems = (options[0] && (options[0].value !== 'noresult') ) ?
                                   options.length : 0
         , _numberAllItems = this.props.options ? this.props.options.length : 0;
 
     return (
-        <div style={Object.assign({}, styles.rootOptionDiv, _styleOptions, _styleDivWidth)}>
+        <div style={Object.assign({}, styles.rootOptionDiv, _styleOptions)}>
           <div
              ref={c => this.domOptions = c}
              key="1"
-             style={Object.assign({}, styles.optionDiv, _styleOptions, _styleDivWidth)}
+             style={Object.assign({}, styles.optionDiv, _styleOptions)}
            >
             {_domOptions}
           </div>
@@ -460,19 +471,10 @@ const InputSearch = React.createClass({
   },
 
   render(){
-    const {width} = this.props
-        , {value, isLocalMode, isShowOption } = this.state;
+    const {value, isLocalMode, isShowOption } = this.state;
 
     const _styleArrow = isShowOption ? {borderColor: '#1B75BB transparent transparent'} : null;
 
-    let _styleDivWidth = null;
-    let _styleInputWidth = null;
-    let _styleHr = null;
-    if (width){
-      _styleDivWidth = { width: width + 'px' };
-      _styleInputWidth = { width: (width-30) + 'px'};
-      _styleHr = { width: (width-40) + 'px'};
-    }
 
     const _domOptions = (isLocalMode || isShowOption) ? this.renderOptions() : null;
 
@@ -512,19 +514,19 @@ const InputSearch = React.createClass({
 
 
     return (
-      <div style={Object.assign({},styles.rootDiv, _styleDivWidth)}>
+      <div style={Object.assign({},styles.rootDiv)}>
         <input
            ref={c => this.domInputText = c}
            type="text"
            value={value}
-           style={Object.assign({},styles.inputText, _styleInputWidth)}
+           style={Object.assign({},styles.inputText)}
            placeholder={_placeholder}
            translate={false}
            onChange={this._handlerInputChange}
            onKeyDown={this._handlerInputKeyDown}>
         </input>
         {_domAfterInput}
-        <hr style={Object.assign({},styles.inputHr, _styleHr)}></hr>
+        <hr style={Object.assign({},styles.inputHr)}></hr>
         {_domOptions}
 
       </div>

@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _TransformFn = require('./TransformFn');
+
+var _TransformFn2 = _interopRequireDefault(_TransformFn);
+
 var _InputSearch = require('./InputSearch');
 
 var _InputSearch2 = _interopRequireDefault(_InputSearch);
@@ -24,34 +28,16 @@ var WrapperInputSearch = _react2.default.createClass({
       this.props.onSelect(item);
     }
   },
-  _createOptions: function _createOptions(data, meta) {
-    var level1 = meta.level1;
-    var level2 = meta.level2;
-    var level3 = meta.level3;
-    var _options = [];
-
-    for (var i1 = 0, l1 = data[level1].length; i1 < l1; i1++) {
-      var industry = data[level1][i1];
-      for (var i2 = 0, l2 = industry[level2].length; i2 < l2; i2++) {
-        var sector = industry[level2][i2];
-        for (var i3 = 0, l3 = sector[level3].length; i3 < l3; i3++) {
-          var item = sector[level3][i3];
-          _options.push(item);
-        }
-      }
-    }
-
-    return _options;
-  },
   render: function render() {
     var _props = this.props;
     var style = _props.style;
     var _props$placeholder = _props.placeholder;
     var placeholder = _props$placeholder === undefined ? '' : _props$placeholder;
     var data = _props.data;
+    var ItemOptionComp = _props.ItemOptionComp;
     var meta = data.meta;
     var caption = meta.caption;
-    var _options = this._createOptions(data, meta);
+    var _options = _TransformFn2.default.fromLevel3(data);
 
     return _react2.default.createElement(
       'div',
@@ -60,7 +46,7 @@ var WrapperInputSearch = _react2.default.createClass({
         placeholder: placeholder,
         propCaption: caption,
         options: _options,
-        width: 280,
+        ItemOptionComp: ItemOptionComp,
         onSelect: this._handlerSelectItem
       })
     );
