@@ -17,6 +17,7 @@ var BrowserType = exports.BrowserType = {
 
    US_STOCKS: 'QUS',
    NYSE_STOCKS: 'NS',
+   NASDAQ_STOCKS: 'NQS',
 
    WATCH_LIST: 'WL'
 };

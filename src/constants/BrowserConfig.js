@@ -38,7 +38,7 @@ const BrowserConfig = {
   [BrowserType.US_STOCKS] : {
     browserType : BrowserType.US_STOCKS,
     isDynamic : true,
-    caption: 'Quandl : Stocks by Sectors',
+    caption: 'Stocks by Sectors',
     sourceMenuUrl: './data/us-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.US_STOCK_BY_SECTOR,
@@ -49,7 +49,7 @@ const BrowserConfig = {
   [BrowserType.NYSE_STOCKS] : {
     browserType : BrowserType.NYSE_STOCKS,
     isDynamic : true,
-    caption: 'Quandl : US NYSE by Sectors',
+    caption: 'US NYSE by Sectors',
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
@@ -57,6 +57,18 @@ const BrowserConfig = {
     itemType : 'ItemWithCap',
     descrUrl : './data/nyse-stocks/nyse-stocks.html'
   },
+  [BrowserType.NASDAQ_STOCKS] : {
+    browserType : BrowserType.NASDAQ_STOCKS,
+    isDynamic : true,
+    caption: 'US NASDAQ by Sectors',
+    sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
+    withoutItemCounter : true,
+    modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
+    itemOptionType: 'ItemTopicOption',
+    itemType : 'ItemWithCap',
+    descrUrl : './data/nasdaq-stocks/nasdaq-stocks.html'
+  },
+
   [BrowserType.WATCH_LIST] : {
     browserType : BrowserType.WATCH_LIST,
     isDynamic : false,

@@ -41,7 +41,7 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
 }), _defineProperty(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,
-  caption: 'Quandl : Stocks by Sectors',
+  caption: 'Stocks by Sectors',
   sourceMenuUrl: './data/us-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.US_STOCK_BY_SECTOR,
@@ -51,13 +51,23 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
 }), _defineProperty(_BrowserConfig, _Type.BrowserType.NYSE_STOCKS, {
   browserType: _Type.BrowserType.NYSE_STOCKS,
   isDynamic: true,
-  caption: 'Quandl : US NYSE by Sectors',
+  caption: 'US NYSE by Sectors',
   sourceMenuUrl: './data/nyse-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.NASDAQ_STOCKS, {
+  browserType: _Type.BrowserType.NASDAQ_STOCKS,
+  isDynamic: true,
+  caption: 'US NASDAQ by Sectors',
+  sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
+  withoutItemCounter: true,
+  modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
+  itemOptionType: 'ItemTopicOption',
+  itemType: 'ItemWithCap',
+  descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
 }), _defineProperty(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {
   browserType: _Type.BrowserType.WATCH_LIST,
   isDynamic: false,
