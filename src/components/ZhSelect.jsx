@@ -75,6 +75,9 @@ const styles = {
    height: '0px',
    width: '0px'
  },
+ arrow_show : {
+    borderColor: '#1B75BB transparent transparent'
+ },
  inputHr: {
    borderWidth: 'medium medium 1px',
    borderStyle: 'none none solid',
@@ -124,7 +127,7 @@ const ZhSelect = React.createClass({
       isUpdateOptions : false
     }
   },
-  getInitialState: function(){
+  getInitialState(){
      this.domOptionsCache = null;
      this.indexActiveOption = 0;
      const {optionName, optionNames} = this.props
@@ -142,7 +145,7 @@ const ZhSelect = React.createClass({
      }
   },
 
-  componentWillReceiveProps: function(nextProps){
+  componentWillReceiveProps(nextProps){
     if (this.props !== nextProps){
       if (this.props.options !== nextProps.options
           || nextProps.isUpdateOptions){
@@ -152,7 +155,7 @@ const ZhSelect = React.createClass({
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps || nextProps.isUpdateOptions) {
       nextState.isLocalMode = false;
     } else {
@@ -162,7 +165,7 @@ const ZhSelect = React.createClass({
     return true;
   },
 
-  componentDidUpdate: function(){
+  componentDidUpdate(){
      //Decorate Active Option
      if (this.state.isShowOption){
        let domActiveOption = this._getDomForActiveOption();
@@ -181,34 +184,34 @@ const ZhSelect = React.createClass({
     });
   },
 
-  _getDomForActiveOption: function(){
+  _getDomForActiveOption(){
     return this.refs["v"+this.indexActiveOption];
   },
 
-  _decorateOfDomActiveOption: function(domActiveOption){
+  _decorateOfDomActiveOption(domActiveOption){
     if (domActiveOption){
       domActiveOption.classList.add("option-row__active");
     }
   },
 
-  _decorateActiveOption: function(){
+  _decorateActiveOption(){
     let domActiveOption = this.refs["v"+this.indexActiveOption];
     domActiveOption.classList.add("option-row__active");
   },
 
-  _undecorateActiveOption: function(){
+  _undecorateActiveOption(){
     if (this.refs["v" + this.indexActiveOption]){
       this.refs["v" + this.indexActiveOption].classList.remove("option-row__active");
     }
   },
 
-  _undecorateOfDomActiveOption: function(domActiveOption){
+  _undecorateOfDomActiveOption(domActiveOption){
      if (domActiveOption){
        domActiveOption.classList.remove("option-row__active");
     }
   },
 
-  _makeVisibleOfDomActiveOption: function(domActiveOption){
+  _makeVisibleOfDomActiveOption(domActiveOption){
     if (domActiveOption){
       const offsetTop = domActiveOption.offsetTop;
       const scrollTop = this.domOptions.scrollTop;
@@ -221,7 +224,7 @@ const ZhSelect = React.createClass({
     }
   },
 
-  _makeVisibleActiveOption: function(){
+  _makeVisibleActiveOption(){
     let domActiveOption = this.refs["v"+this.indexActiveOption];
 
     let offsetTop = domActiveOption.offsetTop;
@@ -231,14 +234,14 @@ const ZhSelect = React.createClass({
     }
   },
 
-  _filterOptionsToState: function(options, value){
+  _filterOptionsToState(options, value){
      const valueFor = value.toLowerCase();
      return options.filter( (option, i) => {
        return option.caption.toLowerCase().indexOf(valueFor) !== -1
-     })     
+     })
   },
 
-  _handlerInputChange: function(event){
+  _handlerInputChange(event){
     const value = event.target.value;
     let arr = [];
     if (value.length !== this.state.value.length){
@@ -261,7 +264,7 @@ const ZhSelect = React.createClass({
     }
   },
 
-  _handlerInputKeyDown: function(event){
+  _handlerInputKeyDown(event){
     switch(event.keyCode){
       // enter
       case 13:
@@ -351,7 +354,7 @@ const ZhSelect = React.createClass({
     }
   },
 
-  _handlerToggleOptions: function(){
+  _handlerToggleOptions(){
     this.setState({isShowOption: !this.state.isShowOption});
   },
 
@@ -365,7 +368,7 @@ const ZhSelect = React.createClass({
   },
 
 
-  renderOptions: function(){
+  renderOptions(){
     const {isShowOption, options, isValidDomOptionsCache} = this.state;
 
     let _domOptions;
@@ -416,40 +419,14 @@ const ZhSelect = React.createClass({
     )
   },
 
-  _renderAfterInput(isLoading, isLoadingFailed, _styleArrow){
-    if (!isLoading && !isLoadingFailed){
-      return (
-        <span
-           style={styles.arrowCell}
-           onClick={this._handlerToggleOptions}>
-          <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
-        </span>
-      );
-    } else if (isLoading){
-      return (
-        <span
-          style={styles.spinnerCell}
-          data-loader="circle"
-        >
-        </span>
-      )
-    } else if (isLoadingFailed) {
-      return (
-        <span
-          style={styles.spinnerFailedCell}
-          data-loader="circle-failed"
-          onClick={this.props.onLoadOption}
-         >
-        </span>
-      )
-    }
-  },
 
-  render: function(){
+  render(){
     const {width} = this.props
         , {value, isLocalMode, isShowOption } = this.state;
 
-    const _styleArrow = isShowOption ? {borderColor: '#1B75BB transparent transparent'} : null;
+    const _styleArrow = isShowOption
+              ? styles.arrow_show
+              : null;
 
     let _styleDivWidth = null;
     let _styleInputWidth = null;
@@ -460,14 +437,18 @@ const ZhSelect = React.createClass({
       _styleHr = { width: (width-40) + 'px'};
     }
 
-    const _domOptions = (isLocalMode || isShowOption) ? this.renderOptions() : null;
+    const _domOptions = (isLocalMode || isShowOption)
+             ? this.renderOptions()
+             : null;
 
     const  {isLoading, isLoadingFailed, placeholder} = this.props
         ,  {optionName, optionNames} = this.state;
 
     let _domAfterInput, _placeholder;
     if (!isLoading && !isLoadingFailed){
-      _placeholder= (placeholder) ? placeholder : `Select${optionName}...`;
+      _placeholder= (placeholder)
+            ? placeholder
+            : `Select${optionName}...`;
       _domAfterInput = (
         <span
            style={styles.arrowCell}

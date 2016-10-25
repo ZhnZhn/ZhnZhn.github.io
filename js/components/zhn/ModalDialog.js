@@ -126,8 +126,9 @@ var ModalDialog = _react2.default.createClass({
     var _props2 = this.props;
     var isShow = _props2.isShow;
     var isWithButton = _props2.isWithButton;
-    var caption = _props2.caption;
     var style = _props2.style;
+    var caption = _props2.caption;
+    var styleCaption = _props2.styleCaption;
     var children = _props2.children;
     var onClose = _props2.onClose;
 
@@ -158,7 +159,7 @@ var ModalDialog = _react2.default.createClass({
         { style: Styles.CAPTON_DIV },
         _react2.default.createElement(
           'span',
-          null,
+          { style: styleCaption },
           caption
         ),
         _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
@@ -171,7 +172,6 @@ var ModalDialog = _react2.default.createClass({
       isWithButton && this._renderCommandButton()
     );
   }
-
 });
 
 exports.default = ModalDialog;

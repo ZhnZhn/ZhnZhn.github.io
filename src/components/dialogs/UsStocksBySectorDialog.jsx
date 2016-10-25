@@ -5,16 +5,24 @@ import WithValidation from '../dialogs/WithValidation';
 import DateUtils from '../../utils/DateUtils';
 
 import ChartActions from '../../flux/actions/ChartActions';
-//import ComponentActions from '../../flux/actions/ComponentActions';
+
 import {BrowserType, LoadType} from '../../constants/Type';
 import ChartType from '../../constants/ChartType';
 
 import ModalDialog from '../zhn/ModalDialog';
-//import ToolbarButtonCircle from './ToolbarButtonCircle';
+
 import ToolBarButton from '../ToolBarButton';
 import RowInputSelect from './RowInputSelect';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
+
+
+const STYLE = {
+  CAPTION_SPAN : {
+    display: 'inline-block',
+    maxWidth: '295px'
+  }
+};
 
 
 const sourceOptions = [
@@ -122,15 +130,12 @@ const UsStocksBySectorDialog = React.createClass({
     return (
       <ModalDialog
          caption={text}
+         styleCaption={STYLE.CAPTION_SPAN}
          isShow={isShow}
          commandButtons={_commandButtons}
          onClose={this._handlerClose}
       >
-      {/*
-        <ToolbarButtonCircle
-          buttons={this.toolbarButtons}
-        />
-      */}
+
         <RowInputSelect
            caption="Data Source"
            placeholder="Default: YAHOO"

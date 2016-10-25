@@ -1,12 +1,14 @@
 import React from 'react';
 
+import ArrowCell from './ArrowCell';
+
+const MAX_WITHOUT_ANIMATION = 800
+
 const styles = {
   rootDiv: {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
-    //width: '95%',
-    //width: '160px',
     width: '100%'
   },
   inputText: {
@@ -16,7 +18,6 @@ const styles = {
     height: '30px',
     paddingLeft: '10px',
     color: 'green',
-    //width: '140px',
     width: '100%',
     paddingRight: '40px',
     fontSize: '16px',
@@ -27,7 +28,6 @@ const styles = {
     left: 0,
     backgroundColor: '#E1E1CB',
     color: 'green',
-    //width: '160px',
     width: '100%',
     //height: '160px',
     zIndex: '10',
@@ -59,30 +59,6 @@ const styles = {
     borderColor : '#F44336',
     cursor : 'pointer'
   },
-  arrowCell:{
-    position: 'absolute',
-    top: '10px',
-    right: '0px',
-    cursor: 'pointer',
-    //display: table-cell
-    //position: 'relative',
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    //width: '25px',
-    width: '35px',
-    paddingRight: '5px'
-    //marginLeft: '10px'
-
-  },
-  arrow : {
-   borderColor: '#999 transparent transparent',
-   borderStyle: 'solid',
-   borderWidth: '5px 5px 2.5px',
-   //borderWidth: '10px 10px 5px',
-   display: 'inline-block',
-   height: '0px',
-   width: '0px'
- },
  inputHr: {
    borderWidth: 'medium medium 1px',
    borderStyle: 'none none solid',
@@ -93,7 +69,9 @@ const styles = {
    marginBottom: '5px',
    marginRight: '40px'
    //width: '150px'
-
+ },
+ arrow_show : {
+    borderColor: '#1B75BB transparent transparent'
  },
   itemDiv:{
     cursor: 'pointer',
@@ -281,6 +259,15 @@ const InputSearch = React.createClass({
     }
   },
 
+  _startAfterInputAnimation(){
+    if (this.state.options.length>MAX_WITHOUT_ANIMATION){
+      this.arrowCell.startAnimation();
+    }
+  },
+  _stopAfterInputAnimation(){
+    this.arrowCell.stopAnimation();
+  },
+
   _handlerInputKeyDown(event){
     switch(event.keyCode){
       // enter
@@ -314,7 +301,13 @@ const InputSearch = React.createClass({
       //down
       case 40:
         if (!this.state.isShowOption){
-          this.setState({isShowOption : true});
+
+          this._startAfterInputAnimation();
+          setTimeout(
+             () => { this.setState({ isShowOption : true }, this._stopAfterInputAnimation) },
+             0
+          );
+
         } else {
           event.preventDefault();
 
@@ -372,7 +365,15 @@ const InputSearch = React.createClass({
   },
 
   _handlerToggleOptions(){
-    this.setState({ isShowOption: !this.state.isShowOption });
+    if (this.state.isShowOption){
+       this.setState({ isShowOption: false });
+    } else {
+      this._startAfterInputAnimation()
+      setTimeout(
+        () => this.setState({ isShowOption: true}, this._stopAfterInputAnimation),
+        1
+      )
+    }
   },
 
   _handlerClickOption(item, index, event){
@@ -441,55 +442,30 @@ const InputSearch = React.createClass({
     )
   },
 
-  _renderAfterInput(isLoading, isLoadingFailed, _styleArrow){
-    if (!isLoading && !isLoadingFailed){
-      return (
-        <span
-           style={styles.arrowCell}
-           onClick={this._handlerToggleOptions}>
-          <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
-        </span>
-      );
-    } else if (isLoading){
-      return (
-        <span
-          style={styles.spinnerCell}
-          data-loader="circle"
-        >
-        </span>
-      )
-    } else if (isLoadingFailed) {
-      return (
-        <span
-          style={styles.spinnerFailedCell}
-          data-loader="circle-failed"
-          onClick={this.props.onLoadOption}
-         >
-        </span>
-      )
-    }
-  },
-
   render(){
     const {value, isLocalMode, isShowOption } = this.state;
 
-    const _styleArrow = isShowOption ? {borderColor: '#1B75BB transparent transparent'} : null;
-
-
-    const _domOptions = (isLocalMode || isShowOption) ? this.renderOptions() : null;
+    const _styleArrow = isShowOption
+              ? styles.arrow_show
+              : null;
+    const _domOptions = (isLocalMode || isShowOption)
+              ? this.renderOptions()
+              : null;
 
     const  {isLoading, isLoadingFailed, placeholder} = this.props
         ,  {optionName, optionNames} = this.state;
 
     let _domAfterInput, _placeholder;
     if (!isLoading && !isLoadingFailed){
-      _placeholder= (placeholder) ? placeholder : `Select${optionName}...`;
+      _placeholder= (placeholder)
+            ? placeholder
+            : `Select${optionName}...`;
       _domAfterInput = (
-        <span
-           style={styles.arrowCell}
-           onClick={this._handlerToggleOptions}>
-          <span style={Object.assign({}, styles.arrow, _styleArrow)}></span>
-        </span>
+        <ArrowCell
+           ref={ (c) => this.arrowCell = c}
+           styleArrow={_styleArrow}
+           onClick={this._handlerToggleOptions}
+        />
       );
     } else if (isLoading){
       _placeholder=`Loading${optionNames}...`;

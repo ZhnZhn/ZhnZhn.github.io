@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-//import ComponentActions from '../../flux/actions/ComponentActions';
-
-//import ToolbarButtonCircle from './ToolbarButtonCircle';
-
 
 var _react = require('react');
 
@@ -53,6 +49,13 @@ var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var STYLE = {
+  CAPTION_SPAN: {
+    display: 'inline-block',
+    maxWidth: '295px'
+  }
+};
 
 var sourceOptions = [{ caption: "YAHOO", "value": "YAHOO/" }, { caption: "WIKI", "value": "WIKI/" }, { caption: "GOOG/NYSE", "value": "GOOG/NYSE_" }, { caption: "GOOG/NASDAQ", "value": "GOOG/NASDAQ_" }];
 
@@ -174,6 +177,7 @@ var UsStocksBySectorDialog = _react2.default.createClass(_extends({
       _ModalDialog2.default,
       {
         caption: text,
+        styleCaption: STYLE.CAPTION_SPAN,
         isShow: isShow,
         commandButtons: _commandButtons,
         onClose: this._handlerClose

@@ -28,14 +28,14 @@ const Styles = {
     border: 'solid 2px #232F3B',
     borderRadius: '5px',
     boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
-    zIndex: 10,
+    zIndex: 10
   },
   CAPTON_DIV:{
     padding: '5px',
     color: 'rgba(164, 135, 212,1)',
     backgroundColor: '#232F3B',
     textAlign: 'center',
-    fontSize: '18px',
+    fontSize: '18px'
   },
   COMMAND_DIV : {
      cursor: 'default',
@@ -61,7 +61,7 @@ const ModalDialog = React.createClass({
      return {
        isWithButton : true,
        isNotUpdate : false,
-       timeout : 450,
+       timeout : 450
 
      }
    },
@@ -105,8 +105,12 @@ const ModalDialog = React.createClass({
     );
   },
 
-  render: function(){
-    const { isShow, isWithButton, caption, style, children, onClose } = this.props;
+  render(){
+    const {
+            isShow, isWithButton, style,
+            caption, styleCaption,
+            children, onClose
+          } = this.props;
 
     let _className, _style;
 
@@ -128,7 +132,7 @@ const ModalDialog = React.createClass({
              onClick={this._handlerClickDialog}
          >
               <div style={Styles.CAPTON_DIV}>
-                 <span>{caption}</span>
+                 <span style={styleCaption}>{caption}</span>
                  <SvgClose onClose={onClose} />
               </div>
 

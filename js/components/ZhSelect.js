@@ -85,6 +85,9 @@ var styles = {
     height: '0px',
     width: '0px'
   },
+  arrow_show: {
+    borderColor: '#1B75BB transparent transparent'
+  },
   inputHr: {
     borderWidth: 'medium medium 1px',
     borderStyle: 'none none solid',
@@ -135,7 +138,6 @@ var ZhSelect = _react2.default.createClass({
       isUpdateOptions: false
     };
   },
-
   getInitialState: function getInitialState() {
     this.domOptionsCache = null;
     this.indexActiveOption = 0;
@@ -154,7 +156,6 @@ var ZhSelect = _react2.default.createClass({
       isLocalMode: false
     };
   },
-
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
       if (this.props.options !== nextProps.options || nextProps.isUpdateOptions) {
@@ -163,7 +164,6 @@ var ZhSelect = _react2.default.createClass({
       }
     }
   },
-
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
     if (this.props !== nextProps || nextProps.isUpdateOptions) {
       nextState.isLocalMode = false;
@@ -173,7 +173,6 @@ var ZhSelect = _react2.default.createClass({
 
     return true;
   },
-
   componentDidUpdate: function componentDidUpdate() {
     //Decorate Active Option
     if (this.state.isShowOption) {
@@ -182,7 +181,6 @@ var ZhSelect = _react2.default.createClass({
       this._makeVisibleOfDomActiveOption(domActiveOption);
     }
   },
-
   _setStateToInit: function _setStateToInit(options) {
     this.indexActiveOption = 0;
     this.setState({
@@ -192,35 +190,28 @@ var ZhSelect = _react2.default.createClass({
       isValidDomOptionsCache: false
     });
   },
-
-
   _getDomForActiveOption: function _getDomForActiveOption() {
     return this.refs["v" + this.indexActiveOption];
   },
-
   _decorateOfDomActiveOption: function _decorateOfDomActiveOption(domActiveOption) {
     if (domActiveOption) {
       domActiveOption.classList.add("option-row__active");
     }
   },
-
   _decorateActiveOption: function _decorateActiveOption() {
     var domActiveOption = this.refs["v" + this.indexActiveOption];
     domActiveOption.classList.add("option-row__active");
   },
-
   _undecorateActiveOption: function _undecorateActiveOption() {
     if (this.refs["v" + this.indexActiveOption]) {
       this.refs["v" + this.indexActiveOption].classList.remove("option-row__active");
     }
   },
-
   _undecorateOfDomActiveOption: function _undecorateOfDomActiveOption(domActiveOption) {
     if (domActiveOption) {
       domActiveOption.classList.remove("option-row__active");
     }
   },
-
   _makeVisibleOfDomActiveOption: function _makeVisibleOfDomActiveOption(domActiveOption) {
     if (domActiveOption) {
       var offsetTop = domActiveOption.offsetTop;
@@ -233,7 +224,6 @@ var ZhSelect = _react2.default.createClass({
       }
     }
   },
-
   _makeVisibleActiveOption: function _makeVisibleActiveOption() {
     var domActiveOption = this.refs["v" + this.indexActiveOption];
 
@@ -243,14 +233,12 @@ var ZhSelect = _react2.default.createClass({
       this.domOptions.scrollTop += offsetTop - scrollTop - 70;
     }
   },
-
   _filterOptionsToState: function _filterOptionsToState(options, value) {
     var valueFor = value.toLowerCase();
     return options.filter(function (option, i) {
       return option.caption.toLowerCase().indexOf(valueFor) !== -1;
     });
   },
-
   _handlerInputChange: function _handlerInputChange(event) {
     var value = event.target.value;
     var arr = [];
@@ -273,7 +261,6 @@ var ZhSelect = _react2.default.createClass({
       });
     }
   },
-
   _handlerInputKeyDown: function _handlerInputKeyDown(event) {
     switch (event.keyCode) {
       // enter
@@ -364,10 +351,10 @@ var ZhSelect = _react2.default.createClass({
         /*console.log(event.keyCode);*/return;
     }
   },
-
   _handlerToggleOptions: function _handlerToggleOptions() {
     this.setState({ isShowOption: !this.state.isShowOption });
   },
+
 
   _handlerClickOption: function _handlerClickOption(item, index, event) {
     this.indexActiveOption = index;
@@ -444,31 +431,6 @@ var ZhSelect = _react2.default.createClass({
       )
     );
   },
-
-  _renderAfterInput: function _renderAfterInput(isLoading, isLoadingFailed, _styleArrow) {
-    if (!isLoading && !isLoadingFailed) {
-      return _react2.default.createElement(
-        'span',
-        {
-          style: styles.arrowCell,
-          onClick: this._handlerToggleOptions },
-        _react2.default.createElement('span', { style: Object.assign({}, styles.arrow, _styleArrow) })
-      );
-    } else if (isLoading) {
-      return _react2.default.createElement('span', {
-        style: styles.spinnerCell,
-        'data-loader': 'circle'
-      });
-    } else if (isLoadingFailed) {
-      return _react2.default.createElement('span', {
-        style: styles.spinnerFailedCell,
-        'data-loader': 'circle-failed',
-        onClick: this.props.onLoadOption
-      });
-    }
-  },
-
-
   render: function render() {
     var _this2 = this;
 
@@ -479,7 +441,7 @@ var ZhSelect = _react2.default.createClass({
     var isShowOption = _state2.isShowOption;
 
 
-    var _styleArrow = isShowOption ? { borderColor: '#1B75BB transparent transparent' } : null;
+    var _styleArrow = isShowOption ? styles.arrow_show : null;
 
     var _styleDivWidth = null;
     var _styleInputWidth = null;
@@ -546,6 +508,7 @@ var ZhSelect = _react2.default.createClass({
       _domOptions
     );
   },
+
 
   focusInput: function focusInput() {
     this.domInputText.focus();

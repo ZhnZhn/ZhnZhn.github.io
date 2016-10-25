@@ -53,6 +53,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ABSENT = "Absent",
     ABSENT_VALIDATION_MSG = "Data Source for this item Absent";
 
+var STYLE = {
+  CAPTION_SPAN: {
+    display: 'inline-block',
+    maxWidth: '295px'
+  }
+};
+
 var StocksBySectorDialog = _react2.default.createClass(_extends({
   displayName: 'StocksBySectorDialog'
 }, _WithValidation2.default, {
@@ -171,6 +178,7 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       _ModalDialog2.default,
       {
         caption: text,
+        styleCaption: STYLE.CAPTION_SPAN,
         isShow: isShow,
         commandButtons: _commandButtons,
         onClose: this._handlerClose

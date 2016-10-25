@@ -19,6 +19,13 @@ import ValidationMessagesFragment from '../ValidationMessagesFragment';
 const ABSENT = "Absent"
     , ABSENT_VALIDATION_MSG = "Data Source for this item Absent"
 
+const STYLE = {
+  CAPTION_SPAN : {
+    display: 'inline-block',
+    maxWidth: '295px'
+  }
+}
+
 const StocksBySectorDialog = React.createClass({
    ...WithValidation,
    propTypes : {
@@ -118,6 +125,7 @@ const StocksBySectorDialog = React.createClass({
     return (
       <ModalDialog
          caption={text}
+         styleCaption={STYLE.CAPTION_SPAN}
          isShow={isShow}
          commandButtons={_commandButtons}
          onClose={this._handlerClose}

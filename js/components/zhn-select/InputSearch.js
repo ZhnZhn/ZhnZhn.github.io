@@ -8,17 +8,21 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ArrowCell = require('./ArrowCell');
+
+var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var MAX_WITHOUT_ANIMATION = 800;
 
 var styles = {
   rootDiv: {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
-    //width: '95%',
-    //width: '160px',
     width: '100%'
   },
   inputText: {
@@ -28,7 +32,6 @@ var styles = {
     height: '30px',
     paddingLeft: '10px',
     color: 'green',
-    //width: '140px',
     width: '100%',
     paddingRight: '40px',
     fontSize: '16px',
@@ -39,7 +42,6 @@ var styles = {
     left: 0,
     backgroundColor: '#E1E1CB',
     color: 'green',
-    //width: '160px',
     width: '100%',
     //height: '160px',
     zIndex: '10',
@@ -71,30 +73,6 @@ var styles = {
     borderColor: '#F44336',
     cursor: 'pointer'
   },
-  arrowCell: {
-    position: 'absolute',
-    top: '10px',
-    right: '0px',
-    cursor: 'pointer',
-    //display: table-cell
-    //position: 'relative',
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    //width: '25px',
-    width: '35px',
-    paddingRight: '5px'
-    //marginLeft: '10px'
-
-  },
-  arrow: {
-    borderColor: '#999 transparent transparent',
-    borderStyle: 'solid',
-    borderWidth: '5px 5px 2.5px',
-    //borderWidth: '10px 10px 5px',
-    display: 'inline-block',
-    height: '0px',
-    width: '0px'
-  },
   inputHr: {
     borderWidth: 'medium medium 1px',
     borderStyle: 'none none solid',
@@ -105,7 +83,9 @@ var styles = {
     marginBottom: '5px',
     marginRight: '40px'
     //width: '150px'
-
+  },
+  arrow_show: {
+    borderColor: '#1B75BB transparent transparent'
   },
   itemDiv: {
     cursor: 'pointer',
@@ -278,7 +258,17 @@ var InputSearch = _react2.default.createClass({
       });
     }
   },
+  _startAfterInputAnimation: function _startAfterInputAnimation() {
+    if (this.state.options.length > MAX_WITHOUT_ANIMATION) {
+      this.arrowCell.startAnimation();
+    }
+  },
+  _stopAfterInputAnimation: function _stopAfterInputAnimation() {
+    this.arrowCell.stopAnimation();
+  },
   _handlerInputKeyDown: function _handlerInputKeyDown(event) {
+    var _this = this;
+
     switch (event.keyCode) {
       // enter
       case 13:
@@ -311,7 +301,11 @@ var InputSearch = _react2.default.createClass({
       //down
       case 40:
         if (!this.state.isShowOption) {
-          this.setState({ isShowOption: true });
+
+          this._startAfterInputAnimation();
+          setTimeout(function () {
+            _this.setState({ isShowOption: true }, _this._stopAfterInputAnimation);
+          }, 0);
         } else {
           event.preventDefault();
 
@@ -369,7 +363,16 @@ var InputSearch = _react2.default.createClass({
     }
   },
   _handlerToggleOptions: function _handlerToggleOptions() {
-    this.setState({ isShowOption: !this.state.isShowOption });
+    var _this2 = this;
+
+    if (this.state.isShowOption) {
+      this.setState({ isShowOption: false });
+    } else {
+      this._startAfterInputAnimation();
+      setTimeout(function () {
+        return _this2.setState({ isShowOption: true }, _this2._stopAfterInputAnimation);
+      }, 1);
+    }
   },
   _handlerClickOption: function _handlerClickOption(item, index, event) {
     this.indexActiveOption = index;
@@ -380,7 +383,7 @@ var InputSearch = _react2.default.createClass({
     this.props.onSelect(item);
   },
   renderOptions: function renderOptions() {
-    var _this = this;
+    var _this3 = this;
 
     var ItemOptionComp = this.props.ItemOptionComp;
     var _state = this.state;
@@ -393,7 +396,7 @@ var InputSearch = _react2.default.createClass({
     if (options) {
       if (!isValidDomOptionsCache) {
         (function () {
-          var _caption = _this.propCaption;
+          var _caption = _this3.propCaption;
           _domOptions = options.map(function (item, index) {
             var _styleDiv = index % 2 === 0 ? styles.itemOdd : styles.itemEven;
             return _react2.default.createElement(
@@ -403,7 +406,7 @@ var InputSearch = _react2.default.createClass({
                 ref: "v" + index,
                 className: 'option-row',
                 style: Object.assign({}, styles.itemDiv, _styleDiv),
-                onClick: _this._handlerClickOption.bind(_this, item, index)
+                onClick: _this3._handlerClickOption.bind(_this3, item, index)
               },
               _react2.default.createElement(ItemOptionComp, {
                 item: item,
@@ -411,7 +414,7 @@ var InputSearch = _react2.default.createClass({
               })
             );
           });
-          _this.domOptionsCache = _domOptions;
+          _this3.domOptionsCache = _domOptions;
         })();
       } else {
         _domOptions = this.domOptionsCache;
@@ -429,7 +432,7 @@ var InputSearch = _react2.default.createClass({
         'div',
         {
           ref: function ref(c) {
-            return _this.domOptions = c;
+            return _this3.domOptions = c;
           },
           key: '1',
           style: Object.assign({}, styles.optionDiv, _styleOptions)
@@ -450,30 +453,8 @@ var InputSearch = _react2.default.createClass({
       )
     );
   },
-  _renderAfterInput: function _renderAfterInput(isLoading, isLoadingFailed, _styleArrow) {
-    if (!isLoading && !isLoadingFailed) {
-      return _react2.default.createElement(
-        'span',
-        {
-          style: styles.arrowCell,
-          onClick: this._handlerToggleOptions },
-        _react2.default.createElement('span', { style: Object.assign({}, styles.arrow, _styleArrow) })
-      );
-    } else if (isLoading) {
-      return _react2.default.createElement('span', {
-        style: styles.spinnerCell,
-        'data-loader': 'circle'
-      });
-    } else if (isLoadingFailed) {
-      return _react2.default.createElement('span', {
-        style: styles.spinnerFailedCell,
-        'data-loader': 'circle-failed',
-        onClick: this.props.onLoadOption
-      });
-    }
-  },
   render: function render() {
-    var _this2 = this;
+    var _this4 = this;
 
     var _state2 = this.state;
     var value = _state2.value;
@@ -481,8 +462,7 @@ var InputSearch = _react2.default.createClass({
     var isShowOption = _state2.isShowOption;
 
 
-    var _styleArrow = isShowOption ? { borderColor: '#1B75BB transparent transparent' } : null;
-
+    var _styleArrow = isShowOption ? styles.arrow_show : null;
     var _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
     var _props2 = this.props;
@@ -498,13 +478,13 @@ var InputSearch = _react2.default.createClass({
         _placeholder = void 0;
     if (!isLoading && !isLoadingFailed) {
       _placeholder = placeholder ? placeholder : 'Select' + optionName + '...';
-      _domAfterInput = _react2.default.createElement(
-        'span',
-        {
-          style: styles.arrowCell,
-          onClick: this._handlerToggleOptions },
-        _react2.default.createElement('span', { style: Object.assign({}, styles.arrow, _styleArrow) })
-      );
+      _domAfterInput = _react2.default.createElement(_ArrowCell2.default, {
+        ref: function ref(c) {
+          return _this4.arrowCell = c;
+        },
+        styleArrow: _styleArrow,
+        onClick: this._handlerToggleOptions
+      });
     } else if (isLoading) {
       _placeholder = 'Loading' + optionNames + '...';
       _domAfterInput = _react2.default.createElement('span', {
@@ -525,7 +505,7 @@ var InputSearch = _react2.default.createClass({
       { style: Object.assign({}, styles.rootDiv) },
       _react2.default.createElement('input', {
         ref: function ref(c) {
-          return _this2.domInputText = c;
+          return _this4.domInputText = c;
         },
         type: 'text',
         value: value,
