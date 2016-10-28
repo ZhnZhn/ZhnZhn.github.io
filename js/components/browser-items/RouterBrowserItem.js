@@ -12,13 +12,18 @@ var _ItemWithCap = require('./ItemWithCap');
 
 var _ItemWithCap2 = _interopRequireDefault(_ItemWithCap);
 
+var _ItemLse = require('./ItemLse');
+
+var _ItemLse2 = _interopRequireDefault(_ItemLse);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterBrowserItem = {
   DEFAULT: _Item2.default,
 
   Item: _Item2.default,
-  ItemWithCap: _ItemWithCap2.default
+  ItemWithCap: _ItemWithCap2.default,
+  ItemLse: _ItemLse2.default
 };
 
 exports.default = RouterBrowserItem;

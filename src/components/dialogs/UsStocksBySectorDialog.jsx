@@ -6,8 +6,8 @@ import DateUtils from '../../utils/DateUtils';
 
 import ChartActions from '../../flux/actions/ChartActions';
 
-import {BrowserType, LoadType} from '../../constants/Type';
-import ChartType from '../../constants/ChartType';
+import { LoadType } from '../../constants/Type';
+
 
 import ModalDialog from '../zhn/ModalDialog';
 
@@ -65,13 +65,6 @@ const UsStocksBySectorDialog = React.createClass({
      return true;
    },
 
-   /*
-   _handlerClickInfo(){
-     ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, {
-       descrUrl: './data/quandl/currency-history.html' }
-     );
-   },
-   */
 
    _handlerSelectDataSource(dataSource){
      this.dataSource = dataSource
@@ -81,7 +74,8 @@ const UsStocksBySectorDialog = React.createClass({
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
-          , { id, text } = data
+          , { item={}, chartContainerType, browserType } = data
+          , { id, text } = item
           , { fromDate, toDate } = this.datesFragment.getValues()
           , _dataSource = (this.dataSource)
                   ? this.dataSource.value
@@ -98,9 +92,9 @@ const UsStocksBySectorDialog = React.createClass({
              id : _value,
              columnName : 'Close',
              seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ]
-             //descrUrl : './data/quandl/currency-history.html'
           }
-      ChartActions.loadStock(ChartType.QUS_STOCKS, BrowserType.US_STOCKS, option);
+
+      ChartActions.loadStock(chartContainerType, browserType, option);
       onClose();
     }
     this._updateValidationMessages(validationMessages);
@@ -115,8 +109,9 @@ const UsStocksBySectorDialog = React.createClass({
   },
 
   render(){
-    const { isShow, data } = this.props
-        , { text } = data
+    const { isShow, data={} } = this.props
+        , { item={}, onShow } = data
+        , { text } = item
         , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
         , _commandButtons = [
        <ToolBarButton
@@ -124,6 +119,12 @@ const UsStocksBySectorDialog = React.createClass({
           type="TypeC"
           caption="Load"
           onClick={this._handlerLoad}
+       />,
+       <ToolBarButton
+          key="b"
+          type="TypeC"
+          caption="Show"
+          onClick={onShow}
        />
     ];
 

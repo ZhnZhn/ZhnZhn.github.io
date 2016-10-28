@@ -23,7 +23,7 @@ const styles = {
     position: 'relative',
     width: '635px',
     /* eslint-disable no-dupe-keys */
-    height: '730px',    
+    height: '730px',
     height: 'calc(100vh - 71px)',
     /* eslint-enable no-dupe-keys */
     overflowY: 'hidden',
@@ -120,7 +120,7 @@ const ChartContainer2 = React.createClass({
      return domCharts;
    },
 
-   render(){
+   render(){     
      const transitionOption = {
              transitionName : "scaleY",
              transitionEnterTimeout : 400,

@@ -42,6 +42,8 @@ const BrowserConfig = {
     sourceMenuUrl: './data/us-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.US_STOCK_BY_SECTOR,
+    chartContainerType : BrowserType.US_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
+    chartContainerCaption : 'Quandl : Stocks by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType : 'Item',
     descrUrl : './data/us-stocks/description.html'
@@ -53,6 +55,8 @@ const BrowserConfig = {
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
+    chartContainerType : BrowserType.NYSE_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
+    chartContainerCaption : 'Quandl : US NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType : 'ItemWithCap',
     descrUrl : './data/nyse-stocks/nyse-stocks.html'
@@ -64,9 +68,24 @@ const BrowserConfig = {
     sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
+    chartContainerType : BrowserType.NASDAQ_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
+    chartContainerCaption : 'Quandl : US NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType : 'ItemWithCap',
     descrUrl : './data/nasdaq-stocks/nasdaq-stocks.html'
+  },
+  [BrowserType.LONDON_STOCKS] : {
+    browserType : BrowserType.LONDON_STOCKS,
+    isDynamic : true,
+    caption: 'London Stocks by Sectors',
+    sourceMenuUrl: './data/london-stocks/source-menu.json',
+    withoutItemCounter : true,
+    modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
+    chartContainerType : BrowserType.LONDON_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
+    chartContainerCaption : 'Quandl : London Stock Exchange by Sectors',
+    itemOptionType: 'ItemTopicOption',
+    itemType : 'ItemLse',
+    descrUrl : './data/london-stocks/lse-stocks.html'
   },
 
   [BrowserType.WATCH_LIST] : {

@@ -6,7 +6,6 @@ const path = require('path')
 
 module.exports = {
   entry: {
-     erc: path.resolve('js', 'index.js'),
      lib: [
             "react", "react-dom", 
             "react-addons-shallow-compare", "react-addons-css-transition-group",
@@ -18,6 +17,7 @@ module.exports = {
             "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",
             "accounting" 
           ],
+    erc: path.resolve('js', 'index.js')
   },
   output: {
       path: path.resolve('app'),

@@ -1,7 +1,7 @@
-import {Quandl, QuandlYahoo, QuandlGoogle} from './DialogType';
+import { Quandl, QuandlYahoo, QuandlGoogle } from './DialogType';
 
 const addCharts = function(obj, dialogType, prefix){
-    for(var prop in dialogType){
+    for(let prop in dialogType){
          obj[prefix + prop] = dialogType[prop];
     }
 }
@@ -12,7 +12,7 @@ const createTypeObject = function(){
   addCharts(obj, QuandlYahoo, 'QUANDL_YAHOO_');
   addCharts(obj, QuandlGoogle, 'QUANDL_GOOGLE_');
   obj['WATCH_LIST'] = 'WL_WATCH_LIST';
-  obj['QUS_STOCKS'] = 'QUS_STOCKS_BY_SECTOR';
+
   return obj;
 }
 

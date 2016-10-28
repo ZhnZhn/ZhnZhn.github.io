@@ -150,9 +150,16 @@ var MenuBrowserDynamic2 = _react2.default.createClass({
   _handlerClickItem: function _handlerClickItem(item) {
     var _props4 = this.props;
     var modalDialogType = _props4.modalDialogType;
+    var browserType = _props4.browserType;
+    var chartContainerType = _props4.chartContainerType;
     var onShowLoadDialog = _props4.onShowLoadDialog;
+    var onShowContainer = _props4.onShowContainer;
 
-    onShowLoadDialog(modalDialogType, item);
+
+    onShowLoadDialog(modalDialogType, {
+      item: item, browserType: browserType, chartContainerType: chartContainerType,
+      onShow: onShowContainer
+    });
   },
   render: function render() {
     var _props5 = this.props;

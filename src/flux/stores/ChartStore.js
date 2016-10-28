@@ -134,7 +134,7 @@ const ChartStore = Reflux.createStore({
 
  onCloseChartContainer(chartType, browserType){
    this.uncheckActiveCheckbox(chartType);
-   if(this.isWithItemCounter(browserType)){     
+   if(this.isWithItemCounter(browserType)){
      this.setMenuItemClose(chartType, browserType);
      this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
    }

@@ -6,8 +6,7 @@ import DateUtils from '../../utils/DateUtils';
 
 import ChartActions from '../../flux/actions/ChartActions';
 
-import {BrowserType, LoadType} from '../../constants/Type';
-import ChartType from '../../constants/ChartType';
+import { LoadType } from '../../constants/Type';
 
 import ModalDialog from '../zhn/ModalDialog';
 import RowText from './RowText';
@@ -72,7 +71,8 @@ const StocksBySectorDialog = React.createClass({
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
-          , { id, text } = data
+          , { item={}, browserType, chartContainerType } = data
+          , { id, text } = item
           , { fromDate, toDate } = this.datesFragment.getValues()
           , option = {
              title : text,
@@ -87,7 +87,7 @@ const StocksBySectorDialog = React.createClass({
              seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ]
           }
 
-      ChartActions.loadStock(ChartType.QUS_STOCKS, BrowserType.US_STOCKS, option);
+      ChartActions.loadStock(chartContainerType, browserType, option);
       onClose();
     }
     this._updateValidationMessages(validationMessages);
@@ -96,7 +96,8 @@ const StocksBySectorDialog = React.createClass({
   _getValidationMessages(){
     let   msg = [];
     const { data } = this.props
-        , { id } = data
+        , { item } = data
+        , { id } = item
         , _arr = id.split('/');
 
     if (!(_arr.length>1)) { msg.push(ABSENT_VALIDATION_MSG);}
@@ -108,8 +109,9 @@ const StocksBySectorDialog = React.createClass({
   },
 
   render(){
-    const { isShow, data } = this.props
-        , { text, id } = data
+    const { isShow, data={} } = this.props
+        , { item={}, onShow } = data
+        , { text, id } = item
         , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
         , _commandButtons = [
              <ToolBarButton
@@ -117,6 +119,12 @@ const StocksBySectorDialog = React.createClass({
                 type="TypeC"
                 caption="Load"
                 onClick={this._handlerLoad}
+             />,
+             <ToolBarButton
+                key="b"
+                type="TypeC"
+                caption="Show"
+                onClick={onShow}
              />
           ]
         , _arr = id.split('/')

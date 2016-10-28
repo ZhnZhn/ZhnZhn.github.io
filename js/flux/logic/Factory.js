@@ -52,6 +52,10 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
+var _BrowserConfig = require('../../constants/BrowserConfig');
+
+var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
+
 var _ChartStore = require('../stores/ChartStore');
 
 var _ChartStore2 = _interopRequireDefault(_ChartStore);
@@ -113,35 +117,42 @@ var onCloseItem = _ChartActions2.default.closeChart;
 var fnCloseChartContainer = function fnCloseChartContainer(chartType, browserType) {
   return _ComponentActions2.default.closeChartContainer.bind(null, chartType, browserType);
 };
-var createChartContainerComp = function createChartContainerComp(conf, browserType) {
-  var Comp = conf.chartContainerComp ? conf.chartContainerComp : _ChartContainer2.default;
+var createChartContainerComp = function createChartContainerComp() {
+  var conf = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var browserType = arguments[1];
+
+  var Comp = conf.chartContainerComp ? conf.chartContainerComp : _ChartContainer2.default,
+      _type = conf.type ? conf.type : _BrowserConfig2.default[browserType].chartContainerType,
+      _caption = conf.chartContainerCaption ? conf.chartContainerCaption : _BrowserConfig2.default[browserType].chartContainerCaption;
+
   return _react2.default.createElement(Comp, {
-    key: conf.type,
-    caption: conf.chartContainerCaption,
-    chartType: conf.type,
+    key: _type,
+    caption: _caption,
+    chartType: _type,
     browserType: browserType,
-    onCloseContainer: fnCloseChartContainer(conf.type, browserType),
+    onCloseContainer: fnCloseChartContainer(_type, browserType),
     onCloseItem: onCloseItem
   });
 };
 
-var getDataConf = function getDataConf(dialogType) {
-  var dataId = dialogType.split('_')[0];
-  return _ChartStore2.default.getSourceConfig(dataId, dialogType);
+var _getDialogConf = function _getDialogConf(dialogType) {
+  var _browserId = dialogType.split('_')[0];
+  return _ChartStore2.default.getSourceConfig(_browserId, dialogType);
 };
 
 var Factory = {
   createDialog: function createDialog(dialogType, browserType) {
-    return createDialogComp(getDataConf(dialogType), browserType);
+    return createDialogComp(_getDialogConf(dialogType), browserType);
   },
   createChartContainer: function createChartContainer(dialogType, browserType) {
-    return createChartContainerComp(getDataConf(dialogType), browserType);
+    return createChartContainerComp(_getDialogConf(dialogType), browserType);
   },
   createBrowserDynamic: function createBrowserDynamic(option) {
     var browserType = option.browserType;
     var _option$caption = option.caption;
     var caption = _option$caption === undefined ? '' : _option$caption;
     var sourceMenuUrl = option.sourceMenuUrl;
+    var chartContainerType = option.chartContainerType;
     var modalDialogType = option.modalDialogType;
     var itemOptionType = option.itemOptionType;
     var itemType = option.itemType;
@@ -150,6 +161,8 @@ var Factory = {
     var ItemOptionComp = itemOptionType ? _RouterItemOption2.default[itemOptionType] || _RouterBrowserItem2.default.DEFAULT : _RouterBrowserItem2.default.DEFAULT;
     var ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined;
     var onClickInfo = typeof ItemComp !== "undefined" ? _showModalDialogDescription : undefined;
+    var onShowContainer = _ChartActions2.default.showChart.bind(null, chartContainerType, browserType);
+
     return _react2.default.createElement(comp, {
       key: browserType,
       browserType: browserType,
@@ -158,10 +171,12 @@ var Factory = {
       caption: caption,
       sourceMenuUrl: sourceMenuUrl,
       modalDialogType: modalDialogType,
+      chartContainerType: chartContainerType,
       ItemOptionComp: ItemOptionComp,
       ItemComp: ItemComp,
+      descrUrl: descrUrl,
       onClickInfo: onClickInfo,
-      descrUrl: descrUrl
+      onShowContainer: onShowContainer
     });
   }
 };

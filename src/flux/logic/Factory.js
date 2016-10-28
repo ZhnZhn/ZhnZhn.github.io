@@ -17,6 +17,8 @@ import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
 import DateUtils from '../../utils/DateUtils';
 
+import BrowserConfig from '../../constants/BrowserConfig';
+
 import ChartStore from '../stores/ChartStore';
 
 const onLoadChart = ChartActions.loadStock
@@ -88,37 +90,47 @@ const onCloseItem = ChartActions.closeChart;
 const fnCloseChartContainer = function(chartType, browserType){
   return ComponentActions.closeChartContainer.bind(null, chartType, browserType);
 }
-const createChartContainerComp = function(conf, browserType){
-  const Comp = conf.chartContainerComp ? conf.chartContainerComp : ChartContainer2;
+const createChartContainerComp = function(conf={}, browserType){
+  const Comp = (conf.chartContainerComp)
+                 ? conf.chartContainerComp
+                 : ChartContainer2
+      , _type = (conf.type)
+             ? conf.type
+             : BrowserConfig[browserType].chartContainerType
+      , _caption = (conf.chartContainerCaption)
+             ? conf.chartContainerCaption
+             : BrowserConfig[browserType].chartContainerCaption;
+
   return React.createElement(Comp, {
-            key : conf.type,
-            caption : conf.chartContainerCaption,
-            chartType : conf.type,
+            key : _type,
+            caption : _caption,
+            chartType : _type,
             browserType : browserType,
-            onCloseContainer : fnCloseChartContainer(conf.type, browserType),
+            onCloseContainer : fnCloseChartContainer(_type, browserType),
             onCloseItem
   });
 }
 
 
-const getDataConf = function(dialogType){
-  const dataId = dialogType.split('_')[0];
-  return ChartStore.getSourceConfig(dataId, dialogType);
+const _getDialogConf = function(dialogType){
+  const _browserId = dialogType.split('_')[0];
+  return ChartStore.getSourceConfig(_browserId, dialogType);
 }
 
 const Factory = {
   createDialog(dialogType, browserType){
-   return createDialogComp(getDataConf(dialogType), browserType);
+   return createDialogComp(_getDialogConf(dialogType), browserType);
  },
 
  createChartContainer(dialogType, browserType){
-  return createChartContainerComp(getDataConf(dialogType), browserType);
+  return createChartContainerComp(_getDialogConf(dialogType), browserType);
  },
 
  createBrowserDynamic(option)
  {
     const {
              browserType, caption='' , sourceMenuUrl,
+             chartContainerType,
              modalDialogType, itemOptionType, itemType, descrUrl
            } = option
         , comp = RouterBrowser[browserType] || RouterBrowser.DEFAULT
@@ -131,6 +143,8 @@ const Factory = {
         , onClickInfo = (typeof ItemComp !== "undefined")
              ? _showModalDialogDescription
              : undefined
+        , onShowContainer = ChartActions.showChart.bind(null, chartContainerType, browserType)
+
     return React.createElement(comp , {
       key : browserType,
       browserType : browserType,
@@ -139,10 +153,12 @@ const Factory = {
       caption : caption,
       sourceMenuUrl : sourceMenuUrl,
       modalDialogType : modalDialogType,
+      chartContainerType : chartContainerType,
       ItemOptionComp: ItemOptionComp,
       ItemComp : ItemComp,
+      descrUrl : descrUrl,
       onClickInfo : onClickInfo,
-      descrUrl : descrUrl
+      onShowContainer : onShowContainer
     });
   }
 }

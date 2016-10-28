@@ -24,10 +24,6 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 var _Type = require('../../constants/Type');
 
-var _ChartType = require('../../constants/ChartType');
-
-var _ChartType2 = _interopRequireDefault(_ChartType);
-
 var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
@@ -106,8 +102,12 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       var _props = this.props;
       var data = _props.data;
       var onClose = _props.onClose;
-      var id = data.id;
-      var text = data.text;
+      var _data$item = data.item;
+      var item = _data$item === undefined ? {} : _data$item;
+      var browserType = data.browserType;
+      var chartContainerType = data.chartContainerType;
+      var id = item.id;
+      var text = item.text;
 
       var _datesFragment$getVal = this.datesFragment.getValues();
 
@@ -126,7 +126,7 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
         seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close']
       };
 
-      _ChartActions2.default.loadStock(_ChartType2.default.QUS_STOCKS, _Type.BrowserType.US_STOCKS, option);
+      _ChartActions2.default.loadStock(chartContainerType, browserType, option);
       onClose();
     }
     this._updateValidationMessages(validationMessages);
@@ -134,7 +134,8 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
   _getValidationMessages: function _getValidationMessages() {
     var msg = [];
     var data = this.props.data;
-    var id = data.id;
+    var item = data.item;
+    var id = item.id;
     var _arr = id.split('/');
 
     if (!(_arr.length > 1)) {
@@ -157,9 +158,13 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
 
     var _props2 = this.props;
     var isShow = _props2.isShow;
-    var data = _props2.data;
-    var text = data.text;
-    var id = data.id;
+    var _props2$data = _props2.data;
+    var data = _props2$data === undefined ? {} : _props2$data;
+    var _data$item2 = data.item;
+    var item = _data$item2 === undefined ? {} : _data$item2;
+    var onShow = data.onShow;
+    var text = item.text;
+    var id = item.id;
     var _state = this.state;
     var initFromDate = _state.initFromDate;
     var initToDate = _state.initToDate;
@@ -170,6 +175,11 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
+    }), _react2.default.createElement(_ToolBarButton2.default, {
+      key: 'b',
+      type: 'TypeC',
+      caption: 'Show',
+      onClick: onShow
     })];
     var _arr = id.split('/');
     var _text = _arr.length > 1 ? id.split('/')[0] : ABSENT;

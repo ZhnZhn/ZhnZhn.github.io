@@ -45,6 +45,8 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   sourceMenuUrl: './data/us-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.US_STOCK_BY_SECTOR,
+  chartContainerType: _Type.BrowserType.US_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
+  chartContainerCaption: 'Quandl : Stocks by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'Item',
   descrUrl: './data/us-stocks/description.html'
@@ -55,6 +57,8 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   sourceMenuUrl: './data/nyse-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
+  chartContainerType: _Type.BrowserType.NYSE_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
+  chartContainerCaption: 'Quandl : US NYSE by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
@@ -65,9 +69,23 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
+  chartContainerType: _Type.BrowserType.NASDAQ_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
+  chartContainerCaption: 'Quandl : US NASDAQ by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
+}), _defineProperty(_BrowserConfig, _Type.BrowserType.LONDON_STOCKS, {
+  browserType: _Type.BrowserType.LONDON_STOCKS,
+  isDynamic: true,
+  caption: 'London Stocks by Sectors',
+  sourceMenuUrl: './data/london-stocks/source-menu.json',
+  withoutItemCounter: true,
+  modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
+  chartContainerType: _Type.BrowserType.LONDON_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
+  chartContainerCaption: 'Quandl : London Stock Exchange by Sectors',
+  itemOptionType: 'ItemTopicOption',
+  itemType: 'ItemLse',
+  descrUrl: './data/london-stocks/lse-stocks.html'
 }), _defineProperty(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {
   browserType: _Type.BrowserType.WATCH_LIST,
   isDynamic: false,

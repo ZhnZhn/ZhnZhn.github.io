@@ -8,7 +8,8 @@ const RouterBrowser = {
 
   [BrowserType.US_STOCKS] : SourceBrowserDynamic2,
   [BrowserType.NYSE_STOCKS] : SourceBrowserDynamic2,
-  [BrowserType.NASDAQ_STOCKS] : SourceBrowserDynamic2
+  [BrowserType.NASDAQ_STOCKS] : SourceBrowserDynamic2,
+  [BrowserType.LONDON_STOCKS] : SourceBrowserDynamic2
 };
 
 export default RouterBrowser

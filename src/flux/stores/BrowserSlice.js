@@ -1,12 +1,12 @@
 
 import BrowserMenu from '../../constants/BrowserMenu';
 import BrowserConfig from '../../constants/BrowserConfig';
+import { BrowserType } from '../../constants/Type';
 
 import Factory from '../logic/Factory';
 import { BrowserActionTypes } from '../actions/BrowserActions';
 
 import DataQE from '../../constants/DataQE';
-import DataUS from '../../constants/DataUS';
 import DataWL from '../../constants/DataWL';
 
 const fnFindObj = function(menu, chartType){
@@ -34,9 +34,7 @@ const BrowserSlice = {
   browserMenu : BrowserMenu,
   routeDialog : {
     QE : DataQE,
-    QUS : DataUS,
     WL : DataWL
-
   },
 
   getBrowserMenu(browserType){
@@ -67,6 +65,10 @@ const BrowserSlice = {
   },
 
   getSourceConfig(browserId, sourceId){
+    if (sourceId.indexOf(BrowserType.STOCKS_BY_SECTORS) > 0){
+      return BrowserConfig[browserId];
+    }
+
     return this.routeDialog[browserId][sourceId];
   },
 
@@ -89,6 +91,7 @@ const BrowserSlice = {
     if (this.isWithItemCounter(browserType)){
       const { menu, items } = json
           , elMenu = BrowserMenu.createMenu(menu, items, browserType);
+
       this.routeDialog[browserType] = items;
       this.browserMenu[browserType] = elMenu;
       this.trigger(BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {

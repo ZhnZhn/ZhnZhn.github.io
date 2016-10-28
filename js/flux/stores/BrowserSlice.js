@@ -12,6 +12,8 @@ var _BrowserConfig = require('../../constants/BrowserConfig');
 
 var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
 
+var _Type = require('../../constants/Type');
+
 var _Factory = require('../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
@@ -21,10 +23,6 @@ var _BrowserActions = require('../actions/BrowserActions');
 var _DataQE = require('../../constants/DataQE');
 
 var _DataQE2 = _interopRequireDefault(_DataQE);
-
-var _DataUS = require('../../constants/DataUS');
-
-var _DataUS2 = _interopRequireDefault(_DataUS);
 
 var _DataWL = require('../../constants/DataWL');
 
@@ -57,9 +55,7 @@ var BrowserSlice = {
   browserMenu: _BrowserMenu2.default,
   routeDialog: {
     QE: _DataQE2.default,
-    QUS: _DataUS2.default,
     WL: _DataWL2.default
-
   },
 
   getBrowserMenu: function getBrowserMenu(browserType) {
@@ -89,6 +85,10 @@ var BrowserSlice = {
     }
   },
   getSourceConfig: function getSourceConfig(browserId, sourceId) {
+    if (sourceId.indexOf(_Type.BrowserType.STOCKS_BY_SECTORS) > 0) {
+      return _BrowserConfig2.default[browserId];
+    }
+
     return this.routeDialog[browserId][sourceId];
   },
   onShowBrowser: function onShowBrowser(browserType) {
@@ -113,6 +113,7 @@ var BrowserSlice = {
       var menu = json.menu;
       var items = json.items;
       var elMenu = _BrowserMenu2.default.createMenu(menu, items, browserType);
+
       this.routeDialog[browserType] = items;
       this.browserMenu[browserType] = elMenu;
       this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
