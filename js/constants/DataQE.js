@@ -262,7 +262,7 @@ var DataQE = {
       nInitFromDate: 12,
       countryURI: './data/quandl/big-mac-countries.json',
       countryJsonProp: 'countries',
-      valueFn: 'RPrefixOne',
+      valueFn: 'RPrefixDashOne',
       valueFnPrefix: 'ECONOMIST/BIGMAC',
       loadId: 'Q'
     },
@@ -278,6 +278,8 @@ var DataQE = {
       descrUrl: './data/quandl/wiki.html',
       optionURI: './data/quandl/wiki.json',
       optionsJsonProp: 'tickets',
+      valueFn: "RPrefixOne",
+      valueFnPrefix: "WIKI",
       loadId: 'Q',
       columnName: 'Close',
       seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adj. Close']
@@ -292,6 +294,8 @@ var DataQE = {
       descrUrl: './data/quandl/tokio.html',
       optionURI: './data/quandl/tokio.json',
       optionsJsonProp: 'tickets',
+      valueFn: "RPrefixOne",
+      valueFnPrefix: "TSE",
       loadId: 'Q',
       columnName: 'Close',
       seriaColumnNames: ['Open', 'High', 'Low', 'Volume']

@@ -25,6 +25,12 @@ var STYLE = {
   CAP: {
     paddingRight: '8px'
   },
+  COUNTRY: {
+    display: 'display-inline',
+    color: 'gray',
+    width: '35px',
+    float: 'right'
+  },
   DATE: {
     display: 'display-inline',
     color: 'rgb(253, 179, 22)',
@@ -36,6 +42,7 @@ var STYLE = {
 var ItemLse = function ItemLse(props) {
   var item = props.item;
   var cap = item.cap;
+  var c = item.c;
   var date = item.date;
   var _cap = cap === 0 ? NA : _accounting2.default.formatMoney(cap, "£") + ML;
   return _react2.default.createElement(
@@ -53,6 +60,11 @@ var ItemLse = function ItemLse(props) {
         'span',
         { style: STYLE.DATE },
         date
+      ),
+      _react2.default.createElement(
+        'span',
+        { style: STYLE.COUNTRY },
+        c
       )
     )
   );

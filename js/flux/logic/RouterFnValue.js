@@ -15,6 +15,9 @@ var RouterFnValue = {
     return one + "_" + two;
   },
   RPrefixOne: function RPrefixOne(prefix, one) {
+    return prefix + "/" + one;
+  },
+  RPrefixDashOne: function RPrefixDashOne(prefix, one) {
     return prefix + "_" + one;
   },
   RPrefixOneTwo: function RPrefixOneTwo(prefix, one, two) {

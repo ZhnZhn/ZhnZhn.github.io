@@ -39,6 +39,8 @@
            "descrUrl" : "./data/google/google.html",
            "optionURI" : "./data/google/nasdaq.json",
            "optionsJsonProp" : "tickets",
+           "valueFn" : "RPrefixDashOne",
+           "valueFnPrefix" : "GOOG/NASDAQ",
            "columnName" : "Close",
            "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
          }
@@ -52,6 +54,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/nyse.json",
          "optionsJsonProp" : "tickets",
+         "valueFn" : "RPrefixDashOne",
+         "valueFnPrefix" : "GOOG/NYSE",
          "columnName" : "Close",
          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
@@ -65,6 +69,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/nyse-amex.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/AMEX",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
@@ -78,6 +84,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/nyse-arca.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/NYSEARCA",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
@@ -91,6 +99,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/brussels.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/EBR",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
@@ -104,6 +114,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/lisbon.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/ELI",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
@@ -117,6 +129,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/tallin.json",
          "optionsJsonProp"  : "tickets",
+         "valueFn" : "RPrefixDashOne",
+         "valueFnPrefix" : "GOOG/TAL",
          "columnName" : "Close",
          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
@@ -130,6 +144,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/riga.json",
          "optionsJsonProp"  : "tickets",
+         "valueFn" : "RPrefixDashOne",
+         "valueFnPrefix" : "GOOG/RSE",
          "columnName" : "Close",
          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
@@ -143,6 +159,8 @@
          "descrUrl" : "./data/google/google.html",
          "optionURI" : "./data/google/vilnius.json",
          "optionsJsonProp"  : "tickets",
+         "valueFn" : "RPrefixDashOne",
+         "valueFnPrefix" : "GOOG/VSE",
          "columnName" : "Close",
          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
@@ -156,6 +174,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/shenzhen.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/SHE",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
@@ -169,6 +189,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/singapure.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/SGX",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
@@ -182,6 +204,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/korea.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/KRX",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
@@ -195,6 +219,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/tailand.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/BKK",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
@@ -208,6 +234,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/newzealand.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/NZE",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
         }
@@ -221,6 +249,8 @@
           "descrUrl" : "./data/google/google.html",
           "optionURI" : "./data/google/saopaolo.json",
           "optionsJsonProp"  : "tickets",
+          "valueFn" : "RPrefixDashOne",
+          "valueFnPrefix" : "GOOG/BVMF",
           "columnName" : "Close",
           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
        }
