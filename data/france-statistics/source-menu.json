@@ -1,6 +1,11 @@
 {
   "menu" : [
     {
+      "caption" : "Macro-Economic",
+      "items" : [
+        { "id" : "QFS_GDP_BALANCE" }
+      ]
+    },{
       "caption" : "Foreign Trade Of",
       "items" : [
         { "id" : "QFS_TRADE_EUROPE" }
@@ -15,6 +20,25 @@
     }
   ],
   "items" : {
+    "QFS_GDP_BALANCE" : {
+      "type" : "QFS_GDP_BALANCE",
+      "menuTitle" : "GDP Balance (base 2010)",
+      "dialogCaption" : "GDP Balance",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Group:",
+        "oneURI" : "./data/france-statistics/gdp-balance.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Item:",
+        "nInitFromDate" : 16,
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoA",
+        "valueFnPrefix" : "1560",
+        "columnName" : "Value"
+      }
+    },
     "QFS_TRADE_EUROPE" : {
       "type" : "QFS_TRADE_EUROPE",
       "menuTitle" : "Europe",

@@ -19,7 +19,9 @@ const RouterFnValue = {
   RWikiFutures : (exchange, item, type) => `CHRIS/${exchange}_${item}${type}`,
 
   RPrefixInseeTwoM : (prefix, group, item) => `INSEE/${prefix}_${item}_M`,
-  RInseeTwoM : (group, item) => `INSEE/${group}_${item}_M`
+  RInseeTwoM : (group, item) => `INSEE/${group}_${item}_M`,
+  RPrefixInseeTwoA : (prefix, group, item) => `INSEE/${prefix}_${item}_A`
+
 };
 
 export default RouterFnValue

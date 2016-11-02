@@ -1,0 +1,88 @@
+{
+  "groups" : [
+    {
+      "caption" : "GDP - Gross Domestic Product" , "value" : "",
+      "columns" : [
+        { "caption" : "Current Price", "value" : "001690355" },
+        { "caption" : "Chained Base Year Price (unbalanced)", "value" : "001690354" },
+        { "caption" : "Chained Base Year Price Index (unbalanced)", "value" : "001690357" },
+        { "caption" : "Chained in Volume", "value" : "001710891" }
+      ]
+    },{
+      "caption" : "GDP per Capita" , "value" : "",
+      "columns" : [
+        { "caption" : "Current Price", "value" : "001710892" },
+        { "caption" : "Chained Base Year Price (unbalanced)", "value" : "001710893" }
+      ]
+    },{
+      "caption" : "RNB - Gross National Income" , "value" : "",
+      "columns" : [
+        { "caption" : "Current Price", "value" : "001710896" },
+        { "caption" : "Chained Base Year Price (unbalanced)", "value" : "001710894" }
+      ]
+    },{
+      "caption" : "RNB per Capita" , "value" : "",
+      "columns" : [
+        { "caption" : "Current Price", "value" : "001710897" },
+        { "caption" : "Chained Base Year Price (unbalanced)", "value" : "001710895" }
+      ]
+    },{
+      "caption" : "B11 - External Balance of Goods and Services" , "value" : "",
+      "columns" : [
+        { "caption" : "Manufacturing : Current Price", "value" : "001717284" },
+        { "caption" : "Market Services : Current Price", "value" : "001717300" },
+        { "caption" : "Contribution to Changes in the GDP in Volume", "value" : "001710788" }
+      ]
+    },{
+      "caption" : "P3 - Final Consumption Expenditure" , "value" : "",
+      "columns" : [
+        { "caption" : "All Products : Current Price", "value" : "001702086" },
+        { "caption" : "All Products : Chained Base Year Price (unbalanced)", "value" : "001702085" },
+        { "caption" : "All Products : Chained Base Year Price Index (unbalanced)", "value" : "001702084" }
+      ]
+    },{
+      "caption" : "P51G - Gross Fixed Capital Formation" , "value" : "",
+      "columns" : [
+        { "caption" : "All Products : Current Price", "value" : "001701404" },
+        { "caption" : "All Products : Chained Base Year Price (unbalanced)", "value" : "001701403" },
+        { "caption" : "All Products : Chained Base Year Price Index (unbalanced)", "value" : "001701402" }
+      ]
+    },{
+      "caption" : "P52 - Change in Inventories" , "value" : "",
+      "columns" : [
+        { "caption" : "All Products : Current Price", "value" : "001702199" },
+        { "caption" : "All Products : Chained Base Year Price (unbalanced)", "value" : "001702198" }
+      ]
+    },{
+      "caption" : "P53 - Acquisitions Less Disposals of Valuables" , "value" : "",
+      "columns" : [
+        { "caption" : "All Products : Current Price", "value" : "001702277" },
+        { "caption" : "All Products : Chained Base Year Price (unbalanced)", "value" : "001702276" }
+      ]
+    },{
+      "caption" : "P6 - Exports of Goods and Services" , "value" : "",
+      "columns" : [
+        { "caption" : "All Products : Current Price", "value" : "001701676" },
+        { "caption" : "All Products : Chained Base Year Price (unbalanced)", "value" : "001701675" },
+        { "caption" : "All Products : Chained Base Year Price Index (unbalanced)", "value" : "001701674" }
+      ]
+    },{
+      "caption" : "P7 - Imports of Goods and Services" , "value" : "",
+      "columns" : [
+        { "caption" : "All Products : Current Price", "value" : "001699072" },
+        { "caption" : "All Products : Chained Base Year Price (unbalanced)", "value" : "001699071" },
+        { "caption" : "All Products : Chained Base Year Price Index (unbalanced)", "value" : "001699070" }
+      ]
+    },{
+      "caption" : "P6-P7-P8 - External Balance CIF/FOB" , "value" : "",
+      "columns" : [
+        { "caption" : "All Products : Current Price", "value" : "001717279" },
+        { "caption" : "Services : Current Price", "value" : "001717278" },
+        { "caption" : "Energy : Current Price", "value" : "001717275" },
+        { "caption" : "Transport Equipment : Current Price", "value" : "001717276" },
+        { "caption" : "Agro-Food Goods : Current Price", "value" : "001717274" },
+        { "caption" : "Other Industrial Goods : Current Price", "value" : "001717277" }
+      ]
+    }
+  ]
+}

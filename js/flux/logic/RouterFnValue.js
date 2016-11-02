@@ -56,7 +56,11 @@ var RouterFnValue = {
   },
   RInseeTwoM: function RInseeTwoM(group, item) {
     return "INSEE/" + group + "_" + item + "_M";
+  },
+  RPrefixInseeTwoA: function RPrefixInseeTwoA(prefix, group, item) {
+    return "INSEE/" + prefix + "_" + item + "_A";
   }
+
 };
 
 exports.default = RouterFnValue;
