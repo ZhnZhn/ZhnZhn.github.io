@@ -8,7 +8,14 @@
     },{
       "caption" : "Foreign Trade Of",
       "items" : [
-        { "id" : "QFS_TRADE_EUROPE" }
+        { "id" : "QFS_TRADE_PRODUCT_A17" },
+        { "id" : "QFS_TRADE_PRODUCT_A38" },
+        { "id" : "QFS_TRADE_AREA" },
+        { "id" : "QFS_TRADE_EUROPE" },
+        { "id" : "QFS_TRADE_AFRICA" },
+        { "id" : "QFS_TRADE_AMERICA" },
+        { "id" : "QFS_TRADE_MIDDLE_EAST" },
+        { "id" : "QFS_TRADE_ASIA_OCEANIA" }
       ]
     },{
       "caption" : "Prices & Price Indices",
@@ -39,6 +46,61 @@
         "columnName" : "Value"
       }
     },
+
+    "QFS_TRADE_PRODUCT_A17" : {
+      "type" : "QFS_TRADE_PRODUCT_A17",
+      "menuTitle" : "Product Level A17",
+      "dialogCaption" : "Foreign Trade of Product Level A17",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Product:",
+        "oneURI" : "./data/france-statistics/trade-product-a17.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Trade:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1059",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_TRADE_PRODUCT_A38" : {
+      "type" : "QFS_TRADE_PRODUCT_A38",
+      "menuTitle" : "Product Level A38",
+      "dialogCaption" : "Foreign Trade of Product Level A38",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Product:",
+        "oneURI" : "./data/france-statistics/trade-product-a38.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Trade:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1060",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_TRADE_AREA" : {
+      "type" : "QFS_TRADE_AREA",
+      "menuTitle" : "Area or Zone",
+      "dialogCaption" : "Foreign Trade of Area or Zone",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Area:",
+        "oneURI" : "./data/france-statistics/trade-area.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Trade:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1061",
+        "columnName" : "Value"
+      }
+    },
     "QFS_TRADE_EUROPE" : {
       "type" : "QFS_TRADE_EUROPE",
       "menuTitle" : "Europe",
@@ -54,6 +116,78 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1062",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_TRADE_AFRICA" : {
+      "type" : "QFS_TRADE_AFRICA",
+      "menuTitle" : "Africa",
+      "dialogCaption" : "Foreign Trade of Africa",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Country:",
+        "oneURI" : "./data/france-statistics/trade-africa.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Trade:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1063",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_TRADE_AMERICA" : {
+      "type" : "QFS_TRADE_AMERICA",
+      "menuTitle" : "America",
+      "dialogCaption" : "Foreign Trade of America",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Country:",
+        "oneURI" : "./data/france-statistics/trade-america.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Trade:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1064",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_TRADE_MIDDLE_EAST" : {
+      "type" : "QFS_TRADE_MIDDLE_EAST",
+      "menuTitle" : "Middle East",
+      "dialogCaption" : "Foreign Trade of Middle East",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Country:",
+        "oneURI" : "./data/france-statistics/trade-middle-east.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Trade:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1065",
+        "columnName" : "Value"
+      }
+    },
+    "QFS_TRADE_ASIA_OCEANIA" : {
+      "type" : "QFS_TRADE_ASIA_OCEANIA",
+      "menuTitle" : "Asia & Oceania",
+      "dialogCaption" : "Foreign Trade of Asia & Oceania",
+      "chartContainerCaption" : "Quandl France Statistics",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "oneCaption" : "Country:",
+        "oneURI" : "./data/france-statistics/trade-asia-oceania.json",
+        "oneJsonProp" : "groups",
+        "twoCaption" : "Trade:",
+        "loadId" : "Q",
+        "valueFn" : "RPrefixInseeTwoM",
+        "valueFnPrefix" : "1066",
         "columnName" : "Value"
       }
     },
