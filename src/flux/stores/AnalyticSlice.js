@@ -1,10 +1,13 @@
 
-const USER_ANSWER_NO = 'erc-answer-no'
-    , USER_NO_ANSWER = 'erc-no-answer'
+const LABEL = {
+  ANSWER_OK : 'Answer Ok',
+  ANSWER_NO : 'Answer No',
+  NO_ANSWER : 'No Answer'
+}
 
 const Logic = {
 
-  sendPageView(userId){
+  sendPageView(eventLabel){
     /* eslint-disable no-undef */
     if (window && window.ga){
       ga('create' , 'UA-85488410-1', {
@@ -12,10 +15,16 @@ const Logic = {
           'cookieExpires' : 0
       })
       ga('set', 'anonymizeIp', true);
-      if (userId) {
-        ga('set', 'userId', userId);
-      }
       ga('send', 'pageview');
+
+      if (eventLabel) {
+        ga('send', {
+          hitType : 'event',
+          eventCategory : 'User',
+          eventAction : 'Answer',
+          eventLabel : eventLabel
+        });
+      }
     }
     /* eslint-enable no-undef */
   },
@@ -40,13 +49,13 @@ const AnalyticSlice = {
 
   onAnswerYes(){
     this.isCanTrack = true;
-    Logic.sendPageView();
+    Logic.sendPageView(LABEL.ANSWER_OK);
   },
   onAnswerNo(){
-    Logic.sendPageView(USER_ANSWER_NO);
+    Logic.sendPageView(LABEL.ANSWER_NO);
   },
   onNoAnswer(){
-    Logic.sendPageView(USER_NO_ANSWER);
+    Logic.sendPageView(LABEL.NO_ANSWER);
   },
 
   analyticSendEvent(option){
