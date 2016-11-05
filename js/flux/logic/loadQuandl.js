@@ -72,7 +72,7 @@ var fnFetchToChart = function fnFetchToChart(_ref2) {
       chart = _ChartStore2.default.getActiveChart();
 
   _ChartFn2.default.addSeriaWithRenderLabel(chart, series, option.value);
-  onCompleted();
+  onCompleted(option);
 };
 
 var loadQuandl = function loadQuandl(option, onCompleted, onAdded, onFailed) {

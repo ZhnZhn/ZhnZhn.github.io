@@ -22,6 +22,22 @@ var Logic = {
       ga('send', 'pageview');
     }
     /* eslint-enable no-undef */
+  },
+  sendItemEvent: function sendItemEvent(_ref) {
+    var eventAction = _ref.eventAction;
+    var eventLabel = _ref.eventLabel;
+
+    /* eslint-disable no-undef */
+    if (window && window.ga && eventLabel) {
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'Item',
+        eventAction: eventAction,
+        eventLabel: eventLabel,
+        eventValue: 1
+      });
+    }
+    /* eslint-enable no-undef */
   }
 };
 
@@ -37,6 +53,11 @@ var AnalyticSlice = {
   },
   onNoAnswer: function onNoAnswer() {
     Logic.sendPageView(USER_NO_ANSWER);
+  },
+  analyticSendEvent: function analyticSendEvent(option) {
+    if (this.isCanTrack) {
+      Logic.sendItemEvent(option);
+    }
   }
 };
 

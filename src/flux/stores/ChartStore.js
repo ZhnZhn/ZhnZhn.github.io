@@ -17,6 +17,11 @@ import AnalyticSlice from './AnalyticSlice';
 import WatchListSlice from '../watch-list/WatchListSlice';
 import WithLimitRemaining from './WithLimitRemaining';
 
+const EVENT_ACTION = {
+  LOAD : 'Load',
+  ADD  : 'Add'
+}
+
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 const _fnLogLoadError = function({
   alertCaption, alertDescr, alertItemId
@@ -85,9 +90,18 @@ const ChartStore = Reflux.createStore({
     }
 
     this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.analyticSendEvent({
+       eventAction : EVENT_ACTION.LOAD,
+       eventLabel : chartType
+     });
  },
- onLoadStockAdded(){
+ onLoadStockAdded(option={}){
+    const { chartType } = option;
     this.trigger(ChartActionTypes.LOAD_STOCK_ADDED);
+    this.analyticSendEvent({
+       eventAction : EVENT_ACTION.ADD,
+       eventLabel : chartType
+     });
  },
  onLoadStockFailed(option){
    this.trigger(ChartActionTypes.LOAD_STOCK_FAILED, option);

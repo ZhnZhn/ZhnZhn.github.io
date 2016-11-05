@@ -3,6 +3,7 @@ const USER_ANSWER_NO = 'erc-answer-no'
     , USER_NO_ANSWER = 'erc-no-answer'
 
 const Logic = {
+
   sendPageView(userId){
     /* eslint-disable no-undef */
     if (window && window.ga){
@@ -15,6 +16,20 @@ const Logic = {
         ga('set', 'userId', userId);
       }
       ga('send', 'pageview');
+    }
+    /* eslint-enable no-undef */
+  },
+
+  sendItemEvent({ eventAction, eventLabel }){
+    /* eslint-disable no-undef */
+    if (window && window.ga && eventLabel){
+      ga('send', {
+        hitType : 'event',
+        eventCategory : 'Item',
+        eventAction : eventAction,
+        eventLabel : eventLabel,
+        eventValue : 1
+      })
     }
     /* eslint-enable no-undef */
   }
@@ -32,6 +47,12 @@ const AnalyticSlice = {
   },
   onNoAnswer(){
     Logic.sendPageView(USER_NO_ANSWER);
+  },
+
+  analyticSendEvent(option){
+    if (this.isCanTrack){
+      Logic.sendItemEvent(option);
+    }
   }
 
 };

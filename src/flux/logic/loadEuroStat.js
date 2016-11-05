@@ -42,7 +42,7 @@ const fnFetchToChart = function({ json, option, onCompleted }){
       , chart = ChartStore.getActiveChart();
 
   ChartFn.addSeriaWithRenderLabel(chart, series, option.itemCaption);
-  onCompleted();
+  onCompleted(option);
 }
 
 const loadEuroStat = function(option, onCompleted, onAdded, onFailed){

@@ -62,6 +62,11 @@ var _WithLimitRemaining2 = _interopRequireDefault(_WithLimitRemaining);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var EVENT_ACTION = {
+  LOAD: 'Load',
+  ADD: 'Add'
+};
+
 var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 var _fnLogLoadError = function _fnLogLoadError(_ref) {
   var alertCaption = _ref.alertCaption;
@@ -130,9 +135,20 @@ var ChartStore = _reflux2.default.createStore(_extends({
     }
 
     this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+    this.analyticSendEvent({
+      eventAction: EVENT_ACTION.LOAD,
+      eventLabel: chartType
+    });
   },
   onLoadStockAdded: function onLoadStockAdded() {
+    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var chartType = option.chartType;
+
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_ADDED);
+    this.analyticSendEvent({
+      eventAction: EVENT_ACTION.ADD,
+      eventLabel: chartType
+    });
   },
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_FAILED, option);

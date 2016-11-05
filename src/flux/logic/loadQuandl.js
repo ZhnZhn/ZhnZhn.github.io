@@ -41,7 +41,7 @@ const fnFetchToChart = function({ json, option, onCompleted }){
       , chart = ChartStore.getActiveChart();
 
   ChartFn.addSeriaWithRenderLabel(chart, series, option.value);
-  onCompleted();
+  onCompleted(option);
 }
 
 const loadQuandl = function(option, onCompleted, onAdded, onFailed){
