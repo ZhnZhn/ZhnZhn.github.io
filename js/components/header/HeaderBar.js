@@ -120,7 +120,7 @@ var HeaderBar = _react2.default.createClass({
         type: 'TypeA',
         caption: 'Eurostat',
         title: 'European Statistics Browser',
-        onClick: this._handlerClickDynamic.bind(null, _BrowserConfig2.default.EUROSTAT)
+        onClick: this._handlerClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',

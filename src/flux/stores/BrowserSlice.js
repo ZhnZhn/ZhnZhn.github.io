@@ -77,7 +77,7 @@ const BrowserSlice = {
   },
 
   onShowBrowserDynamic(option){
-    const { browserType } = option;
+    const { browserType } = option;    
     if (!this.browserMenu[browserType]) {
        const elBrowser = Factory.createBrowserDynamic(option);
        this.browserMenu[browserType] = [];

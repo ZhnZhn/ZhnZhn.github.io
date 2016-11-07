@@ -102,7 +102,7 @@ const ChartContainer2 = React.createClass({
    renderCharts(){
      const { chartType, browserType, onCloseItem } = this.props;
      let domCharts = this.state.configs.map((config, index)=>{
-       const {id, key} = config.zhConfig;
+       const { id, key } = config.zhConfig;
        return (
          <AreaChartItem
              ref={'chart' + index}
@@ -120,7 +120,7 @@ const ChartContainer2 = React.createClass({
      return domCharts;
    },
 
-   render(){     
+   render(){
      const transitionOption = {
              transitionName : "scaleY",
              transitionEnterTimeout : 400,

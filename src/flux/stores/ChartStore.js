@@ -69,7 +69,7 @@ const ChartStore = Reflux.createStore({
  },
  onLoadStockCompleted(option, config){
      const { chartType, browserType } = option;
-
+     
      this.addMenuItemCounter(chartType, browserType);
 
      const chartCont = this.charts[chartType];

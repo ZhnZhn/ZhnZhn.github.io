@@ -40,7 +40,7 @@ const HeaderBar = React.createClass({
     BrowserActions.showBrowser(BrowserType.ECONOMIC);
     this.setState({ isDS: false });
   },
-  _handlerClickDynamic(browserConfig){
+  _handlerClickDynamic(browserConfig){    
     BrowserActions.showBrowserDynamic(browserConfig);
     this.setState({ isDS: false });
   },
@@ -86,7 +86,7 @@ const HeaderBar = React.createClass({
            type="TypeA"
            caption="Eurostat"
            title="European Statistics Browser"
-           onClick={this._handlerClickDynamic.bind(null, BrowserConfig.EUROSTAT)}
+           onClick={this._handlerClickDynamic.bind(null, BrowserConfig[BrowserType.EUROSTAT])}
         />
 
          <ToolBarButton
@@ -122,7 +122,7 @@ const HeaderBar = React.createClass({
               BROWSER={BrowserType}
               browserConfig={BrowserConfig}
               onClickQuandl={this._handlerClickQuandl}
-              onClickDynamic={this._handlerClickDynamic}              
+              onClickDynamic={this._handlerClickDynamic}
               onClickWatch={this._handlerClickWatch}
            />
       </div>
