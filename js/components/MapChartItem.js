@@ -90,7 +90,7 @@ var MapChartItem = _react2.default.createClass({
 
     var map = _leaflet2.default.map('map_' + caption).setView([58.00, 10.00], 3);
 
-    _leaflet2.default.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    _leaflet2.default.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       id: 'addis',
       attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);

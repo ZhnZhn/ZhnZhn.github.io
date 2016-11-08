@@ -70,7 +70,7 @@ const MapChartItem = React.createClass({
     const { caption } = this.props
     const map = L.map(`map_${caption}`).setView([58.00, 10.00], 3);
 
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
              id: 'addis',
              attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
    }).addTo(map);
