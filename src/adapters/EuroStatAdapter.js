@@ -18,21 +18,28 @@ const _fnCreateData = function(timeIndex, value){
         if (pointValue<=min) { min = pointValue; }
      }
   })
-    
+
   return { data, max, min }
 }
 
 const EuroStatAdapter = {
   toConfig(json, option){
-    const timeIndex = json.dimension.time.category.index
-        , value = json.value
-        , { data, max, min } = _fnCreateData(timeIndex, value)
-        , config = ChartConfig.fBaseAreaConfig();
+    const { zhCompType } = option;
 
-   EuroStatFn.setDataAndInfo({ config, data, json, option });
-   EuroStatFn.setLineExtrems({ config, max, min });
+      const timeIndex = json.dimension.time.category.index
+          , value = json.value
+          , { data, max, min } = _fnCreateData(timeIndex, value)
+          , config = ChartConfig.fBaseAreaConfig();
 
-   return { config };
+       EuroStatFn.setDataAndInfo({ config, data, json, option });
+       EuroStatFn.setLineExtrems({ config, max, min });
+
+       if (zhCompType){
+         config.json = json
+         config.zhMapSlice = option.zhMapSlice
+       }
+
+       return { config };
  },
 
   toSeries(json, option){

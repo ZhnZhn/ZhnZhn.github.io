@@ -13,8 +13,10 @@ const _crDetailMsg = function(option){
 const EuroStatApi = {
 
   getRequestUrl(option){
-    const { group, metric, geo } = option;
 
+    const { group, metric, geo, zhCompType, mapValue } = option;
+
+    if (!zhCompType){
     let _param = `geo=${geo}`
       , _group;
 
@@ -30,6 +32,10 @@ const EuroStatApi = {
 
 
     return `${rootUrl}${_group}${_param}${queryTail}`;
+  } else {
+    //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
+    return `${rootUrl}${mapValue}`;
+  }
   },
 
   checkResponse(json, option) {

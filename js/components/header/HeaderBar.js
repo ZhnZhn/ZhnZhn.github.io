@@ -51,7 +51,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = {
   rootDiv: {
     position: 'relative',
-    zIndex: 50
+    zIndex: 1050
   },
   appLabel: {
     display: 'inline-block',

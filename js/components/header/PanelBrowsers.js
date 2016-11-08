@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var STYLE = {
   ROOT: {
     position: 'absolute',
-    zIndex: 10,
+    zIndex: 1010,
     top: '45px',
     left: '80px',
 

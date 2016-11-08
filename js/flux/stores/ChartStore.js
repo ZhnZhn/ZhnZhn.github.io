@@ -114,7 +114,11 @@ var ChartStore = _reflux2.default.createStore(_extends({
   onLoadStockCompleted: function onLoadStockCompleted(option, config) {
     var chartType = option.chartType;
     var browserType = option.browserType;
+    var zhCompType = option.zhCompType;
 
+    if (zhCompType) {
+      config.zhCompType = zhCompType;
+    }
 
     this.addMenuItemCounter(chartType, browserType);
 

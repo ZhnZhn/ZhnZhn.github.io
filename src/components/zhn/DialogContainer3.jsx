@@ -2,7 +2,7 @@ import React from 'react';
 
 const styles = {
   rootDiv: {
-    zIndex : 30,
+    zIndex : 1030,
     position: 'absolute',
     top: '70px',
     left: '10px',

@@ -24,22 +24,29 @@ var EuroStatApi = {
     var group = option.group;
     var metric = option.metric;
     var geo = option.geo;
+    var zhCompType = option.zhCompType;
+    var mapValue = option.mapValue;
 
 
-    var _param = "geo=" + geo,
-        _group = void 0;
+    if (!zhCompType) {
+      var _param = "geo=" + geo,
+          _group = void 0;
 
-    if (group) {
-      _group = group + "?";
-      if (metric) {
-        _param = _param + "&indic=" + metric;
+      if (group) {
+        _group = group + "?";
+        if (metric) {
+          _param = _param + "&indic=" + metric;
+        }
+      } else {
+        _group = metric.indexOf('?') === -1 ? metric + "?" : metric;
+        _param = "&" + _param;
       }
-    } else {
-      _group = metric.indexOf('?') === -1 ? metric + "?" : metric;
-      _param = "&" + _param;
-    }
 
-    return "" + rootUrl + _group + _param + queryTail;
+      return "" + rootUrl + _group + _param + queryTail;
+    } else {
+      //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
+      return "" + rootUrl + mapValue;
+    }
   },
   checkResponse: function checkResponse(json, option) {
     var error = json.error;

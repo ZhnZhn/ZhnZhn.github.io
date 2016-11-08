@@ -10,6 +10,7 @@ import CaptionRow from './CaptionRow';
 import SvgHrzResize from './zhn/SvgHrzResize';
 import ScrollPane from './zhn/ScrollPane';
 import AreaChartItem from './AreaChartItem';
+import MapChartItem from './MapChartItem';
 
 const CHILD_MARGIN = 36;
 
@@ -95,26 +96,42 @@ const ChartContainer2 = React.createClass({
 
    _handlerResizeAfter(parentWidth){
      for (var i=0, max = this.state.configs.length; i<max; i++){
-        this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
+        if (typeof this.refs['chart' + i].reflowChart === 'function'){
+          this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
+        }  
      }
    },
 
    renderCharts(){
      const { chartType, browserType, onCloseItem } = this.props;
      let domCharts = this.state.configs.map((config, index)=>{
-       const { id, key } = config.zhConfig;
-       return (
-         <AreaChartItem
-             ref={'chart' + index}
-             key={key}
-             chartType={chartType}
-             caption={id}
-             config={config}
-             onSetActive={ComponentActions.setActiveCheckbox}
-             onCloseItem={onCloseItem.bind(null, chartType, browserType, id)}
-             onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
-         />
-       )
+       const { zhConfig, zhCompType} = config
+          ,  { id, key } = zhConfig ;
+       if (!zhCompType) {
+           return (
+             <AreaChartItem
+                 ref={'chart' + index}
+                 key={key}
+                 chartType={chartType}
+                 caption={id}
+                 config={config}
+                 onSetActive={ComponentActions.setActiveCheckbox}
+                 onCloseItem={onCloseItem.bind(null, chartType, browserType, id)}
+                 onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
+             />
+           );
+        } else {
+          return (
+            <MapChartItem
+               ref={'chart' + index}
+               key={key}
+               chartType={chartType}
+               caption={id}
+               config={config}
+               onCloseItem={onCloseItem.bind(null, chartType, browserType, id)}
+            />
+          );
+        }
      })
 
      return domCharts;
@@ -147,7 +164,7 @@ const ChartContainer2 = React.createClass({
           </CaptionRow>
 
           <ScrollPane style={styles.scrollDiv}>
-            <ReactCSSTransitionGroup {...transitionOption} >
+            <ReactCSSTransitionGroup {...transitionOption} component="div">
               {this.renderCharts()}
             </ReactCSSTransitionGroup>
           </ScrollPane>

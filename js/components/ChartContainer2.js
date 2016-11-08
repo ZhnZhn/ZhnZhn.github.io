@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _rootDiv;
 
 var _react = require('react');
@@ -41,6 +43,10 @@ var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
 var _AreaChartItem = require('./AreaChartItem');
 
 var _AreaChartItem2 = _interopRequireDefault(_AreaChartItem);
+
+var _MapChartItem = require('./MapChartItem');
+
+var _MapChartItem2 = _interopRequireDefault(_MapChartItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -122,7 +128,9 @@ var ChartContainer2 = _react2.default.createClass({
   },
   _handlerResizeAfter: function _handlerResizeAfter(parentWidth) {
     for (var i = 0, max = this.state.configs.length; i < max; i++) {
-      this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
+      if (typeof this.refs['chart' + i].reflowChart === 'function') {
+        this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
+      }
     }
   },
   renderCharts: function renderCharts() {
@@ -132,20 +140,32 @@ var ChartContainer2 = _react2.default.createClass({
     var onCloseItem = _props2.onCloseItem;
 
     var domCharts = this.state.configs.map(function (config, index) {
-      var _config$zhConfig = config.zhConfig;
-      var id = _config$zhConfig.id;
-      var key = _config$zhConfig.key;
+      var zhConfig = config.zhConfig;
+      var zhCompType = config.zhCompType;
+      var id = zhConfig.id;
+      var key = zhConfig.key;
 
-      return _react2.default.createElement(_AreaChartItem2.default, {
-        ref: 'chart' + index,
-        key: key,
-        chartType: chartType,
-        caption: id,
-        config: config,
-        onSetActive: _ComponentActions2.default.setActiveCheckbox,
-        onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
-        onAddToWatch: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH)
-      });
+      if (!zhCompType) {
+        return _react2.default.createElement(_AreaChartItem2.default, {
+          ref: 'chart' + index,
+          key: key,
+          chartType: chartType,
+          caption: id,
+          config: config,
+          onSetActive: _ComponentActions2.default.setActiveCheckbox,
+          onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
+          onAddToWatch: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH)
+        });
+      } else {
+        return _react2.default.createElement(_MapChartItem2.default, {
+          ref: 'chart' + index,
+          key: key,
+          chartType: chartType,
+          caption: id,
+          config: config,
+          onCloseItem: onCloseItem.bind(null, chartType, browserType, id)
+        });
+      }
     });
 
     return domCharts;
@@ -183,7 +203,7 @@ var ChartContainer2 = _react2.default.createClass({
         { style: styles.scrollDiv },
         _react2.default.createElement(
           _reactAddonsCssTransitionGroup2.default,
-          transitionOption,
+          _extends({}, transitionOption, { component: 'div' }),
           this.renderCharts()
         )
       )

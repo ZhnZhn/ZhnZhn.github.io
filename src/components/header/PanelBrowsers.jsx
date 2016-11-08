@@ -5,7 +5,7 @@ import ShowHide from '../zhn/ShowHide';
 const STYLE = {
   ROOT : {
     position : 'absolute',
-    zIndex : 10,
+    zIndex : 1010,
     top : '45px',
     left : '80px',
 

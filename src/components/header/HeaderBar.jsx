@@ -15,7 +15,7 @@ import { BrowserType, ModalDialog } from '../../constants/Type';
 const styles = {
   rootDiv : {
     position: 'relative',
-    zIndex: 50
+    zIndex: 1050
   },
   appLabel : {
     display: 'inline-block',
@@ -40,7 +40,7 @@ const HeaderBar = React.createClass({
     BrowserActions.showBrowser(BrowserType.ECONOMIC);
     this.setState({ isDS: false });
   },
-  _handlerClickDynamic(browserConfig){    
+  _handlerClickDynamic(browserConfig){
     BrowserActions.showBrowserDynamic(browserConfig);
     this.setState({ isDS: false });
   },

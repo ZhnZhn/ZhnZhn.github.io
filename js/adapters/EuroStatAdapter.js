@@ -38,6 +38,7 @@ var _fnCreateData = function _fnCreateData(timeIndex, value) {
 
 var EuroStatAdapter = {
   toConfig: function toConfig(json, option) {
+    var zhCompType = option.zhCompType;
     var timeIndex = json.dimension.time.category.index;
     var value = json.value;
 
@@ -50,6 +51,11 @@ var EuroStatAdapter = {
 
     _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
     _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min });
+
+    if (zhCompType) {
+      config.json = json;
+      config.zhMapSlice = option.zhMapSlice;
+    }
 
     return { config: config };
   },

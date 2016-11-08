@@ -51,7 +51,7 @@
       "menuTitle" : "8 Economic Indicators",
       "dialogCaption" : "8 Economic Indicators",
       "chartContainerCaption" : "Eurostat 8 Economic Indicators",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat-economic-trends-app.html",
         "oneCaption" : "Country",

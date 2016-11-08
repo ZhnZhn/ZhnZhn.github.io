@@ -68,8 +68,11 @@ const ChartStore = Reflux.createStore({
    this.trigger(ChartActionTypes.LOAD_STOCK);
  },
  onLoadStockCompleted(option, config){
-     const { chartType, browserType } = option;
-     
+     const { chartType, browserType, zhCompType } = option;
+     if (zhCompType){
+       config.zhCompType = zhCompType;
+     }
+
      this.addMenuItemCounter(chartType, browserType);
 
      const chartCont = this.charts[chartType];
