@@ -2,10 +2,10 @@ import React from 'react';
 
 import L from 'leaflet';
 
-import EuroStatToMap from '../adapters/EuroStatToMap';
+import EuroStatToMap from '../../adapters/EuroStatToMap';
 
-import SvgClose from './SvgClose';
-import ShowHide from './zhn/ShowHide';
+import SvgClose from '../SvgClose';
+import ShowHide from '../zhn/ShowHide';
 
 const styles = {
   rootDiv : {

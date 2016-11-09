@@ -24,10 +24,6 @@ var _ChartActions = require('../flux/actions/ChartActions');
 
 var _ComponentActions = require('../flux/actions/ComponentActions');
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-var _Type = require('../constants/Type');
-
 var _CaptionRow = require('./CaptionRow');
 
 var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
@@ -40,19 +36,16 @@ var _ScrollPane = require('./zhn/ScrollPane');
 
 var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
 
-var _AreaChartItem = require('./AreaChartItem');
+var _ItemFactory = require('./factories/ItemFactory');
 
-var _AreaChartItem2 = _interopRequireDefault(_AreaChartItem);
-
-var _MapChartItem = require('./MapChartItem');
-
-var _MapChartItem2 = _interopRequireDefault(_MapChartItem);
+var _ItemFactory2 = _interopRequireDefault(_ItemFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var CHILD_MARGIN = 36;
+var CSS_CLASS_SHOW_POPUP = "show-popup",
+    CHILD_MARGIN = 36;
 
 var styles = {
   rootDiv: (_rootDiv = {
@@ -79,11 +72,16 @@ var styles = {
   chartDiv: {
     overflowY: 'auto',
     height: '680px'
+  },
+  transitionOption: {
+    transitionName: "scaleY",
+    transitionEnterTimeout: 400,
+    transitionLeave: false
   }
 };
 
 var isInArray = function isInArray(array, value) {
-  for (var i = 0; i < array.length; i++) {
+  for (var i = 0, len = array.length; i < len; i++) {
     if (array[i] === value) {
       return true;
     }
@@ -133,57 +131,31 @@ var ChartContainer2 = _react2.default.createClass({
       }
     }
   },
-  renderCharts: function renderCharts() {
+  _renderCharts: function _renderCharts() {
     var _props2 = this.props;
     var chartType = _props2.chartType;
     var browserType = _props2.browserType;
     var onCloseItem = _props2.onCloseItem;
 
-    var domCharts = this.state.configs.map(function (config, index) {
+
+    return this.state.configs.map(function (config, index) {
       var zhConfig = config.zhConfig;
-      var zhCompType = config.zhCompType;
       var id = zhConfig.id;
-      var key = zhConfig.key;
 
-      if (!zhCompType) {
-        return _react2.default.createElement(_AreaChartItem2.default, {
-          ref: 'chart' + index,
-          key: key,
-          chartType: chartType,
-          caption: id,
-          config: config,
-          onSetActive: _ComponentActions2.default.setActiveCheckbox,
-          onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
-          onAddToWatch: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH)
-        });
-      } else {
-        return _react2.default.createElement(_MapChartItem2.default, {
-          ref: 'chart' + index,
-          key: key,
-          chartType: chartType,
-          caption: id,
-          config: config,
-          onCloseItem: onCloseItem.bind(null, chartType, browserType, id)
-        });
-      }
+
+      return _ItemFactory2.default.createItem(config, index, { chartType: chartType }, { onCloseItem: onCloseItem.bind(null, chartType, browserType, id) });
     });
-
-    return domCharts;
   },
   render: function render() {
-    var transitionOption = {
-      transitionName: "scaleY",
-      transitionEnterTimeout: 400,
-      transitionLeave: false
-    },
-        styleOpen = this.state.isShow ? { display: 'inline-block' } : { display: 'none' },
-        classOpen = this.state.isShow ? "show-popup" : null;
+    var isShow = this.state.isShow;
 
+    var _styleIsShow = isShow ? { display: 'inline-block' } : { display: 'none' };
+    var _classIsShow = isShow ? CSS_CLASS_SHOW_POPUP : undefined;
     return _react2.default.createElement(
       'div',
       {
-        className: classOpen,
-        style: Object.assign({}, styles.rootDiv, styleOpen)
+        className: _classIsShow,
+        style: Object.assign({}, styles.rootDiv, _styleIsShow)
       },
       _react2.default.createElement(
         _CaptionRow2.default,
@@ -203,8 +175,10 @@ var ChartContainer2 = _react2.default.createClass({
         { style: styles.scrollDiv },
         _react2.default.createElement(
           _reactAddonsCssTransitionGroup2.default,
-          _extends({}, transitionOption, { component: 'div' }),
-          this.renderCharts()
+          _extends({}, styles.transitionOption, {
+            component: 'div'
+          }),
+          this._renderCharts()
         )
       )
     );

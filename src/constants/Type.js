@@ -57,3 +57,8 @@ export const LoadType = {
   EU_STAT : 'EU_STAT',
   WL : 'WL'
 }
+
+export const CompItemType = {
+  CHART_AREA : 'CHART_AREA',
+  EUROSTAT_MAP : 'EUROSTAT_MAP'
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CompItemType } from '../../constants/Type';
+
 import ZhDialog from '../ZhDialog';
 
 import WithValidation from './WithValidation';
@@ -14,7 +16,7 @@ import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
 const chartTypeOptions = [
     {caption : 'Default : Area', value: 'AREA'},
-    {caption : 'Map' , value: 'MAP'}
+    {caption : 'Map' , value: 'MAP', compType : CompItemType.EUROSTAT_MAP}
 ]
 
 const DialogEurostat2 = React.createClass({
@@ -73,8 +75,8 @@ const DialogEurostat2 = React.createClass({
   },
   _createLoadOption(){
     const { loadId, group } = this.props
-        , _zhCompType = ( this.chartType && this.chartType.value === 'MAP')
-             ? 'EuroStatMap'
+        , _zhCompType = ( this.chartType && this.chartType.value !== 'AREA')
+             ? this.chartType.compType
              : undefined;
     return {
       geo : this.one.value,

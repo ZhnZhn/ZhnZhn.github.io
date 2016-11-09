@@ -61,4 +61,9 @@ var LoadType = exports.LoadType = {
    EU_STAT: 'EU_STAT',
    WL: 'WL'
 };
+
+var CompItemType = exports.CompItemType = {
+   CHART_AREA: 'CHART_AREA',
+   EUROSTAT_MAP: 'EUROSTAT_MAP'
+};
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

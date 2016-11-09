@@ -10,6 +10,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Type = require('../../constants/Type');
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -44,7 +46,7 @@ var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFra
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var chartTypeOptions = [{ caption: 'Default : Area', value: 'AREA' }, { caption: 'Map', value: 'MAP' }];
+var chartTypeOptions = [{ caption: 'Default : Area', value: 'AREA' }, { caption: 'Map', value: 'MAP', compType: _Type.CompItemType.EUROSTAT_MAP }];
 
 var DialogEurostat2 = _react2.default.createClass(_extends({
   displayName: 'DialogEurostat2'
@@ -101,7 +103,7 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     var _props2 = this.props;
     var loadId = _props2.loadId;
     var group = _props2.group;
-    var _zhCompType = this.chartType && this.chartType.value === 'MAP' ? 'EuroStatMap' : undefined;
+    var _zhCompType = this.chartType && this.chartType.value !== 'AREA' ? this.chartType.compType : undefined;
     return {
       geo: this.one.value,
       group: group,

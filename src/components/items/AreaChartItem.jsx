@@ -1,15 +1,15 @@
 import React from 'react';
 
-import SvgCheckBox from './zhn/SvgCheckBox';
-import ValueMovingBadge from './zhn/ValueMovingBadge';
-import SvgClose from './SvgClose';
-import ButtonTab from './zhn/ButtonTab';
-import ShowHide from './zhn/ShowHide';
-import ZhHighchart from './ZhHighchart';
-import Legend from './zhn/Legend';
+import SvgCheckBox from '../zhn/SvgCheckBox';
+import ValueMovingBadge from '../zhn/ValueMovingBadge';
+import SvgClose from '../SvgClose';
+import ButtonTab from '../zhn/ButtonTab';
+import ShowHide from '../zhn/ShowHide';
+import ZhHighchart from '../ZhHighchart';
+import Legend from '../zhn/Legend';
 
-import PanelIndicator from './zhn/PanelIndicator';
-import PanelDataInfo from './zhn/PanelDataInfo';
+import PanelIndicator from '../zhn/PanelIndicator';
+import PanelDataInfo from '../zhn/PanelDataInfo';
 
 const styles = {
   rootDiv : {

@@ -98,7 +98,7 @@ var HeaderBar = _react2.default.createClass({
       _react2.default.createElement(_IconLogoErc2.default, null),
       _react2.default.createElement(_AppLabel2.default, {
         style: styles.appLabel,
-        caption: 'ERC v. 0.11.0'
+        caption: 'ERC v0.12.0'
       }),
       _react2.default.createElement(
         _ToolBarButton2.default,

@@ -3,7 +3,7 @@
     {
       "caption" : "Unemployment rate, adjusted, % of labour force",
       "value" : "ei_lmhr_m?indic=LM-UN-T-TOT&s_adj=SA",
-      "mapValue" : "ei_lmhr_m?precision=1&s_adj=NSA&time=2016M08",
+      "mapValue" : "ei_lmhr_m?s_adj=NSA&time=2016M08",
       "mapSlice" : { "time" : "2016M08", "s_adj" : "NSA", "indic" : "LM-UN-T-TOT" }
     },{
       "caption" : "Inflation, 2015=100, % change",

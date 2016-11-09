@@ -2,17 +2,18 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ChartStore from '../flux/stores/ChartStore';
-import {ChartActionTypes} from '../flux/actions/ChartActions';
-import ComponentActions, {ComponentActionTypes} from '../flux/actions/ComponentActions';
-import {ModalDialog} from '../constants/Type';
+import { ChartActionTypes } from '../flux/actions/ChartActions';
+
+import { ComponentActionTypes } from '../flux/actions/ComponentActions';
 
 import CaptionRow from './CaptionRow';
 import SvgHrzResize from './zhn/SvgHrzResize';
 import ScrollPane from './zhn/ScrollPane';
-import AreaChartItem from './AreaChartItem';
-import MapChartItem from './MapChartItem';
 
-const CHILD_MARGIN = 36;
+import ItemFactory from './factories/ItemFactory';
+
+const CSS_CLASS_SHOW_POPUP = "show-popup"
+    , CHILD_MARGIN = 36;
 
 const styles = {
   rootDiv : {
@@ -44,11 +45,16 @@ const styles = {
   chartDiv : {
     overflowY: 'auto',
     height : '680px'
+  },
+  transitionOption : {
+    transitionName : "scaleY",
+    transitionEnterTimeout : 400,
+    transitionLeave : false
   }
 };
 
 const isInArray = function(array, value){
-  for (var i=0; i<array.length; i++){
+  for (let i=0, len=array.length; i<len; i++){
     if (array[i] === value){
       return true;
     }
@@ -65,7 +71,7 @@ const compActions = [
 const ChartContainer2 = React.createClass({
   getInitialState(){
     this.childMargin = CHILD_MARGIN;
-    return {}
+    return {};
   },
 
    componentWillMount(){
@@ -91,65 +97,45 @@ const ChartContainer2 = React.createClass({
    _handlerHide(){
       const { chartType, browserType, onCloseContainer } = this.props;
       onCloseContainer(chartType, browserType);
-      this.setState({isShow: false});
+      this.setState({ isShow: false });
    },
 
    _handlerResizeAfter(parentWidth){
-     for (var i=0, max = this.state.configs.length; i<max; i++){
+     for (let i=0, max = this.state.configs.length; i<max; i++){
         if (typeof this.refs['chart' + i].reflowChart === 'function'){
           this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
-        }  
+        }
      }
    },
 
-   renderCharts(){
+   _renderCharts(){
      const { chartType, browserType, onCloseItem } = this.props;
-     let domCharts = this.state.configs.map((config, index)=>{
-       const { zhConfig, zhCompType} = config
-          ,  { id, key } = zhConfig ;
-       if (!zhCompType) {
-           return (
-             <AreaChartItem
-                 ref={'chart' + index}
-                 key={key}
-                 chartType={chartType}
-                 caption={id}
-                 config={config}
-                 onSetActive={ComponentActions.setActiveCheckbox}
-                 onCloseItem={onCloseItem.bind(null, chartType, browserType, id)}
-                 onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
-             />
-           );
-        } else {
-          return (
-            <MapChartItem
-               ref={'chart' + index}
-               key={key}
-               chartType={chartType}
-               caption={id}
-               config={config}
-               onCloseItem={onCloseItem.bind(null, chartType, browserType, id)}
-            />
-          );
-        }
-     })
 
-     return domCharts;
+     return this.state.configs.map((config, index) => {
+       const { zhConfig } = config
+          ,  { id } = zhConfig
+
+       return ItemFactory.createItem(
+             config, index,
+             { chartType },
+             { onCloseItem : onCloseItem.bind(null, chartType, browserType, id) }
+       );
+     });
    },
 
    render(){
-     const transitionOption = {
-             transitionName : "scaleY",
-             transitionEnterTimeout : 400,
-             transitionLeave : false
-           }
-         , styleOpen = this.state.isShow ? {display: 'inline-block'} : {display: 'none'}
-         , classOpen = this.state.isShow ? "show-popup" : null;
+     const { isShow } = this.state
 
+          , _styleIsShow = (isShow)
+               ? {display: 'inline-block'}
+               : {display: 'none'}
+         , _classIsShow = (isShow)
+               ? CSS_CLASS_SHOW_POPUP
+               : undefined;
      return(
         <div
-           className={classOpen}
-           style={Object.assign({},styles.rootDiv, styleOpen)}
+           className={_classIsShow}
+           style={Object.assign({}, styles.rootDiv, _styleIsShow)}
         >
           <CaptionRow
              caption={this.props.caption}
@@ -164,8 +150,11 @@ const ChartContainer2 = React.createClass({
           </CaptionRow>
 
           <ScrollPane style={styles.scrollDiv}>
-            <ReactCSSTransitionGroup {...transitionOption} component="div">
-              {this.renderCharts()}
+            <ReactCSSTransitionGroup
+               {...styles.transitionOption}
+               component="div"
+            >
+               { this._renderCharts() }
             </ReactCSSTransitionGroup>
           </ScrollPane>
 

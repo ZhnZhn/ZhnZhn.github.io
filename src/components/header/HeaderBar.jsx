@@ -62,7 +62,7 @@ const HeaderBar = React.createClass({
          <IconLogoErc />
          <AppLabel
             style={styles.appLabel}
-            caption="ERC v. 0.11.0"
+            caption="ERC v0.12.0"
          />
 
          <ToolBarButton
