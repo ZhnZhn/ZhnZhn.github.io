@@ -34,18 +34,22 @@ const styles = {
     display : 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
     cursor: 'pointer',
-    width: '450px',
+    width: '410px',
     fontWeight : 'bold',
     whiteSpace: 'nowrap',
     textOverflow : 'ellipsis',
     overflow : 'hidden',
     float : 'left'
   },
+  timeSpan : {
+    color : 'rgb(253, 179, 22)',
+    fontWeight : 'bold'
+  },
   captionSpanClose : {
     display : 'inline-block',
     color : 'gray',
     cursor: 'pointer',
-    width : '450px',
+    width : '410px',
     fontWeight : 'bold',
     whiteSpace: 'nowrap',
     textOverflow : 'ellipsis',
@@ -84,20 +88,15 @@ const MapChartItem = React.createClass({
         const { config } = this.props
             , { json, zhMapSlice } = config
          EuroStatToMap.createCholoplethMap(
-           json, geoJson,
-           zhMapSlice,
-           //{ time : '2016M08', 's_adj' : 'NSA', 'indic' : 'LM-UN-T-TOT' },
-           map
+           json, geoJson, zhMapSlice, map
          );
      })
   },
 
   render(){
     const { caption, config, onCloseItem } = this.props
-        , { json } = config
-        //, { zhConfig } = config
-        //, { itemCaption } = zhConfig
-        //, _itemCaption = (itemCaption) ? itemCaption : caption
+        , { json={}, zhDialog={} } = config
+        , { subtitle='', time='' } = zhDialog
         , { isOpen } = this.state
         , _styleCaption = isOpen
               ? styles.captionSpanOpen
@@ -108,13 +107,14 @@ const MapChartItem = React.createClass({
         <div style={styles.headerDiv}>
           <span
              className="not-selected"
-             //title={caption}
              title={json.label}
              style={_styleCaption}
              onClick={this._handlerToggleOpen}
           >
-             {/*_itemCaption*/}
-             {json.label}
+             {subtitle}
+          </span>
+          <span style={styles.timeSpan}>
+            {time}
           </span>
           <SvgClose onClose={onCloseItem} />
         </div>

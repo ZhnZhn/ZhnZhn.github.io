@@ -12,6 +12,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Type = require('../../constants/Type');
 
+var _DateUtils = require('../../utils/DateUtils');
+
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -36,6 +40,10 @@ var _ToolBarButton = require('../ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
 
+var _ShowHide = require('../zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -48,17 +56,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var chartTypeOptions = [{ caption: 'Default : Area', value: 'AREA' }, { caption: 'Map', value: 'MAP', compType: _Type.CompItemType.EUROSTAT_MAP }];
 
+/*
+let dateDefault = '2016Q1';
+let dateOptions = [
+  { caption: '2016Q1', value : '2016Q1' },
+  { caption: '2016Q2', value : '2016Q2' }
+]
+*/
+
 var DialogEurostat2 = _react2.default.createClass(_extends({
   displayName: 'DialogEurostat2'
 }, _WithValidation2.default, _WithToolbar2.default, {
   getInitialState: function getInitialState() {
     this.one = null;
     this.two = null;
+    this.date = null;
     this.chartType = null;
 
     this.toolbarButtons = [{ caption: 'I', onClick: this._clickInfoWithToolbar }];
 
     return {
+      isShowDate: false,
+      dateDefault: 'Before Select Indicator',
+      dateOptions: [],
       validationMessages: []
     };
   },
@@ -73,11 +93,32 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
   _handlerSelectOne: function _handlerSelectOne(one) {
     this.one = one;
   },
+  _updateForDate: function _updateForDate() {
+    var frequency = this.two ? this.two.mapFrequency : undefined,
+        config = frequency ? _DateUtils2.default.createEurostatSelect(frequency) : { dateDefault: 'Before Select Indicator', options: [] };
+
+    this.setState({
+      isShowDate: true,
+      dateDefault: config.dateDefault,
+      dateOptions: config.options
+    });
+  },
   _handlerSelectTwo: function _handlerSelectTwo(two) {
     this.two = two;
+    if (this.chartType && this.chartType.value === 'MAP') {
+      this._updateForDate();
+    }
   },
   _handlerSelectChartType: function _handlerSelectChartType(chartType) {
     this.chartType = chartType;
+    if (chartType && chartType.value === 'MAP') {
+      this._updateForDate();
+    } else {
+      this.setState({ isShowDate: false });
+    }
+  },
+  _handlerSelectDate: function _handlerSelectDate(date) {
+    this.date = date;
   },
   _handlerLoad: function _handlerLoad() {
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
@@ -89,8 +130,10 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
 
     var msg = [];
 
-    if (!this.one) {
-      msg.push(this.props.msgOnNotSelected(oneCaption));
+    if (!(this.chartType && this.chartType.value === 'MAP')) {
+      if (!this.one) {
+        msg.push(this.props.msgOnNotSelected(oneCaption));
+      }
     }
     if (!this.two) {
       msg.push(this.props.msgOnNotSelected(twoCaption));
@@ -103,21 +146,32 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     var _props2 = this.props;
     var loadId = _props2.loadId;
     var group = _props2.group;
-    var _zhCompType = this.chartType && this.chartType.value !== 'AREA' ? this.chartType.compType : undefined;
+    var _countryValue = this.one ? this.one.value : 'EU 28';
+    var _countryCaption = this.one ? this.one.caption : 'EU 28';
+
+    var _zhCompType = undefined,
+        _time = undefined;
+
+    if (this.chartType && this.chartType.value !== 'AREA') {
+      _zhCompType = this.chartType.compType;
+      _time = this.date ? this.date.value : this.state.dateDefault;
+    }
+
     return {
-      geo: this.one.value,
+      geo: _countryValue,
       group: group,
       metric: this.two.value,
       loadId: loadId,
-      itemCaption: this.one.caption,
-      title: this.one.caption,
+      itemCaption: _countryCaption,
+      title: _countryCaption,
       subtitle: this.two.caption,
-      alertItemId: this.one.caption + ':' + this.two.caption,
-      alertGeo: this.one.caption,
+      alertItemId: _countryCaption + ':' + this.two.caption,
+      alertGeo: _countryCaption,
       alertMetric: this.two.caption,
       zhCompType: _zhCompType,
       mapValue: this.two.mapValue,
-      zhMapSlice: this.two.mapSlice
+      zhMapSlice: _extends({}, this.two.mapSlice, { time: _time }),
+      time: _time
     };
   },
   _handlerClose: function _handlerClose() {
@@ -135,7 +189,11 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     var twoCaption = _props3.twoCaption;
     var twoURI = _props3.twoURI;
     var twoJsonProp = _props3.twoJsonProp;
-    var validationMessages = this.state.validationMessages;
+    var _state = this.state;
+    var isShowDate = _state.isShowDate;
+    var dateDefault = _state.dateDefault;
+    var dateOptions = _state.dateOptions;
+    var validationMessages = _state.validationMessages;
     var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
@@ -177,6 +235,16 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
         options: chartTypeOptions,
         onSelect: this._handlerSelectChartType
       }),
+      _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowDate },
+        _react2.default.createElement(_RowInputSelect2.default, {
+          caption: 'For Date',
+          placeholder: dateDefault,
+          options: dateOptions,
+          onSelect: this._handlerSelectDate
+        })
+      ),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
         validationMessages: validationMessages
       })

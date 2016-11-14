@@ -53,18 +53,22 @@ var styles = {
     display: 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
     cursor: 'pointer',
-    width: '450px',
+    width: '410px',
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     float: 'left'
   },
+  timeSpan: {
+    color: 'rgb(253, 179, 22)',
+    fontWeight: 'bold'
+  },
   captionSpanClose: {
     display: 'inline-block',
     color: 'gray',
     cursor: 'pointer',
-    width: '450px',
+    width: '410px',
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -102,9 +106,7 @@ var MapChartItem = _react2.default.createClass({
       var json = config.json;
       var zhMapSlice = config.zhMapSlice;
 
-      _EuroStatToMap2.default.createCholoplethMap(json, geoJson, zhMapSlice,
-      //{ time : '2016M08', 's_adj' : 'NSA', 'indic' : 'LM-UN-T-TOT' },
-      map);
+      _EuroStatToMap2.default.createCholoplethMap(json, geoJson, zhMapSlice, map);
     });
   },
   render: function render() {
@@ -112,10 +114,14 @@ var MapChartItem = _react2.default.createClass({
     var caption = _props.caption;
     var config = _props.config;
     var onCloseItem = _props.onCloseItem;
-    var json = config.json;
-    //, { zhConfig } = config
-    //, { itemCaption } = zhConfig
-    //, _itemCaption = (itemCaption) ? itemCaption : caption
+    var _config$json = config.json;
+    var json = _config$json === undefined ? {} : _config$json;
+    var _config$zhDialog = config.zhDialog;
+    var zhDialog = _config$zhDialog === undefined ? {} : _config$zhDialog;
+    var _zhDialog$subtitle = zhDialog.subtitle;
+    var subtitle = _zhDialog$subtitle === undefined ? '' : _zhDialog$subtitle;
+    var _zhDialog$time = zhDialog.time;
+    var time = _zhDialog$time === undefined ? '' : _zhDialog$time;
     var isOpen = this.state.isOpen;
     var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
@@ -128,13 +134,17 @@ var MapChartItem = _react2.default.createClass({
         _react2.default.createElement(
           'span',
           {
-            className: 'not-selected'
-            //title={caption}
-            , title: json.label,
+            className: 'not-selected',
+            title: json.label,
             style: _styleCaption,
             onClick: this._handlerToggleOpen
           },
-          json.label
+          subtitle
+        ),
+        _react2.default.createElement(
+          'span',
+          { style: styles.timeSpan },
+          time
         ),
         _react2.default.createElement(_SvgClose2.default, { onClose: onCloseItem })
       ),

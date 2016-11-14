@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CompItemType } from '../../constants/Type';
+import DateUtils from '../../utils/DateUtils';
 
 import ZhDialog from '../ZhDialog';
 
@@ -10,6 +11,7 @@ import WithToolbar from './WithToolbar';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import ToolBarButton from '../ToolBarButton';
+import ShowHide from '../zhn/ShowHide';
 import RowInputSelect from './RowInputSelect';
 
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
@@ -19,6 +21,14 @@ const chartTypeOptions = [
     {caption : 'Map' , value: 'MAP', compType : CompItemType.EUROSTAT_MAP}
 ]
 
+/*
+let dateDefault = '2016Q1';
+let dateOptions = [
+  { caption: '2016Q1', value : '2016Q1' },
+  { caption: '2016Q2', value : '2016Q2' }
+]
+*/
+
 const DialogEurostat2 = React.createClass({
   ...WithValidation,
   ...WithToolbar,
@@ -26,6 +36,7 @@ const DialogEurostat2 = React.createClass({
   getInitialState(){
     this.one = null;
     this.two = null;
+    this.date = null;
     this.chartType = null;
 
     this.toolbarButtons = [
@@ -33,6 +44,9 @@ const DialogEurostat2 = React.createClass({
     ];
 
     return {
+      isShowDate : false,
+      dateDefault : 'Before Select Indicator',
+      dateOptions : [],
       validationMessages: []
     }
   },
@@ -49,12 +63,40 @@ const DialogEurostat2 = React.createClass({
   _handlerSelectOne(one){
     this.one = one;
   },
+
+  _updateForDate(){
+    const frequency = (this.two)
+             ? this.two.mapFrequency
+             : undefined
+         , config = (frequency)
+             ? DateUtils.createEurostatSelect(frequency)
+             : { dateDefault : 'Before Select Indicator' , options : [] };
+
+    this.setState({
+       isShowDate : true,
+       dateDefault : config.dateDefault,
+       dateOptions : config.options
+    });
+  },
+
   _handlerSelectTwo(two){
     this.two = two;
+    if (this.chartType && this.chartType.value === 'MAP'){
+      this._updateForDate();
+    }
   },
 
   _handlerSelectChartType(chartType){
     this.chartType = chartType
+    if (chartType && chartType.value === 'MAP'){
+      this._updateForDate();
+    } else {
+      this.setState({ isShowDate : false });
+    }
+  },
+
+  _handlerSelectDate(date){
+    this.date = date;
   },
 
   _handlerLoad(){
@@ -67,7 +109,9 @@ const DialogEurostat2 = React.createClass({
      const { oneCaption, twoCaption } = this.props;
      let msg = [];
 
-     if (!this.one) { msg.push(this.props.msgOnNotSelected(oneCaption)); }
+     if ( !(this.chartType && this.chartType.value === 'MAP') ){
+        if (!this.one) { msg.push(this.props.msgOnNotSelected(oneCaption)); }
+     }
      if (!this.two) { msg.push(this.props.msgOnNotSelected(twoCaption)); }
 
      msg.isValid = (msg.length === 0) ? true : false;
@@ -75,23 +119,38 @@ const DialogEurostat2 = React.createClass({
   },
   _createLoadOption(){
     const { loadId, group } = this.props
-        , _zhCompType = ( this.chartType && this.chartType.value !== 'AREA')
-             ? this.chartType.compType
-             : undefined;
+         , _countryValue = (this.one)
+             ? this.one.value
+             : 'EU 28'
+         , _countryCaption = (this.one)
+             ? this.one.caption
+             : 'EU 28'
+
+    let _zhCompType = undefined
+    , _time = undefined;
+
+    if (this.chartType && this.chartType.value !== 'AREA'){
+      _zhCompType = this.chartType.compType;
+      _time = (this.date)
+         ? this.date.value
+         : this.state.dateDefault
+    }
+
     return {
-      geo : this.one.value,
+      geo : _countryValue,
       group : group,
       metric : this.two.value,
       loadId : loadId,
-      itemCaption: this.one.caption,
-      title : this.one.caption,
+      itemCaption: _countryCaption,
+      title : _countryCaption,
       subtitle : this.two.caption,
-      alertItemId : `${this.one.caption}:${this.two.caption}`,
-      alertGeo : this.one.caption,
+      alertItemId : `${_countryCaption}:${this.two.caption}`,
+      alertGeo : _countryCaption,
       alertMetric : this.two.caption,
       zhCompType : _zhCompType,
       mapValue : this.two.mapValue,
-      zhMapSlice : this.two.mapSlice
+      zhMapSlice : { ...this.two.mapSlice, time : _time },
+      time : _time
     }
   },
 
@@ -107,7 +166,7 @@ const DialogEurostat2 = React.createClass({
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp
           } = this.props
-        , { validationMessages } = this.state
+        , { isShowDate, dateDefault, dateOptions, validationMessages } = this.state
         , _commandButtons = [
        <ToolBarButton
           key="a"
@@ -153,6 +212,14 @@ const DialogEurostat2 = React.createClass({
                options={chartTypeOptions}
                onSelect={this._handlerSelectChartType}
              />
+             <ShowHide isShow={isShowDate}>
+               <RowInputSelect
+                  caption={'For Date'}
+                  placeholder={dateDefault}
+                  options={dateOptions}
+                  onSelect={this._handlerSelectDate}
+               />
+             </ShowHide>
 
              <ValidationMessagesFragment
                  validationMessages={validationMessages}

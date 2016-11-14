@@ -53,6 +53,8 @@ var EuroStatAdapter = {
     _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min });
 
     if (zhCompType) {
+      config.zhDialog = option;
+      config.zhDialog.apiKey = '';
       config.json = json;
       config.zhMapSlice = option.zhMapSlice;
     }

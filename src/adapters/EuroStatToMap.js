@@ -40,6 +40,11 @@ const _fnMergeGeoAndValue = function(sGeo, dGeo, json){
       if (maxValue<cell.value) { maxValue = cell.value; }
     }
   })
+  if (points.length === 0){
+    const point = [ 0, 0];
+    point.id = 'ID';
+    points.push(point);
+  }
   return { minValue, maxValue, points }
 }
 
@@ -122,7 +127,9 @@ const _fnCalcUpper = function(_clusters, index){
   const _arrL = _clusters[index].points
       , _arrH = _clusters[index+1].points
       , _upLow = _arrL[_arrL.length-1][0]
-      , _upUp = _arrH[0][0];
+      , _upUp = ( _arrH[0] )
+           ? _arrH[0][0]
+           : _upLow;
 
   return (_upLow + (_upUp - _upLow)/2);
 }
@@ -174,8 +181,10 @@ const EuroStatToMap = {
   createCholoplethMap(statJson, geoJson, configSlice, map){
     const  ds = JSONstat(statJson).Dataset(0)
          , dGeo = ds.Dimension("geo")
+         , _dGeo = (dGeo) ? dGeo : []
          , sGeo = ds.Data(configSlice)
-         , { minValue, maxValue, points } = _fnMergeGeoAndValue(sGeo, dGeo, geoJson)
+         , _sGeo = (sGeo) ? sGeo : []
+         , { minValue, maxValue, points } = _fnMergeGeoAndValue(_sGeo, _dGeo, geoJson)
          , _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
          , _hmIdCluster = _fnCreateHmIdCluster(_clusters);
 
@@ -189,8 +198,11 @@ const EuroStatToMap = {
        onEachFeature : _fnOnEachFeature.bind(null, infoControl)
     }).addTo(map);
 
-    const gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters)
-    gradeControl.addTo(map);
+
+    if ( points.length > 1) {
+      const gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters)
+      gradeControl.addTo(map);
+    }
   }
 };
 

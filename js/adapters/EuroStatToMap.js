@@ -55,6 +55,11 @@ var _fnMergeGeoAndValue = function _fnMergeGeoAndValue(sGeo, dGeo, json) {
       }
     }
   });
+  if (points.length === 0) {
+    var point = [0, 0];
+    point.id = 'ID';
+    points.push(point);
+  }
   return { minValue: minValue, maxValue: maxValue, points: points };
 };
 
@@ -168,7 +173,7 @@ var _fnCalcUpper = function _fnCalcUpper(_clusters, index) {
   var _arrL = _clusters[index].points,
       _arrH = _clusters[index + 1].points,
       _upLow = _arrL[_arrL.length - 1][0],
-      _upUp = _arrH[0][0];
+      _upUp = _arrH[0] ? _arrH[0][0] : _upLow;
 
   return _upLow + (_upUp - _upLow) / 2;
 };
@@ -219,9 +224,11 @@ var EuroStatToMap = {
   createCholoplethMap: function createCholoplethMap(statJson, geoJson, configSlice, map) {
     var ds = (0, _jsonstat2.default)(statJson).Dataset(0);
     var dGeo = ds.Dimension("geo");
+    var _dGeo = dGeo ? dGeo : [];
     var sGeo = ds.Data(configSlice);
+    var _sGeo = sGeo ? sGeo : [];
 
-    var _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(sGeo, dGeo, geoJson);
+    var _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(_sGeo, _dGeo, geoJson);
 
     var minValue = _fnMergeGeoAndValue2.minValue;
     var maxValue = _fnMergeGeoAndValue2.maxValue;
@@ -239,8 +246,10 @@ var EuroStatToMap = {
       onEachFeature: _fnOnEachFeature.bind(null, infoControl)
     }).addTo(map);
 
-    var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters);
-    gradeControl.addTo(map);
+    if (points.length > 1) {
+      var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters);
+      gradeControl.addTo(map);
+    }
   }
 };
 

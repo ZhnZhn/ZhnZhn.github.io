@@ -14,7 +14,7 @@ const EuroStatApi = {
 
   getRequestUrl(option){
 
-    const { group, metric, geo, zhCompType, mapValue } = option;
+    const { group, metric, geo, zhCompType, mapValue, time } = option;
 
     if (!zhCompType){
     let _param = `geo=${geo}`
@@ -34,7 +34,7 @@ const EuroStatApi = {
     return `${rootUrl}${_group}${_param}${queryTail}`;
   } else {
     //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
-    return `${rootUrl}${mapValue}`;
+    return `${rootUrl}${mapValue}&time=${time}`;
   }
   },
 

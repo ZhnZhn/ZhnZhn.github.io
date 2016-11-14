@@ -26,6 +26,7 @@ var EuroStatApi = {
     var geo = option.geo;
     var zhCompType = option.zhCompType;
     var mapValue = option.mapValue;
+    var time = option.time;
 
 
     if (!zhCompType) {
@@ -45,7 +46,7 @@ var EuroStatApi = {
       return "" + rootUrl + _group + _param + queryTail;
     } else {
       //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
-      return "" + rootUrl + mapValue;
+      return "" + rootUrl + mapValue + "&time=" + time;
     }
   },
   checkResponse: function checkResponse(json, option) {

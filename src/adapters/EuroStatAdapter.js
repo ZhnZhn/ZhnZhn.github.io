@@ -35,6 +35,8 @@ const EuroStatAdapter = {
        EuroStatFn.setLineExtrems({ config, max, min });
 
        if (zhCompType){
+         config.zhDialog = option
+         config.zhDialog.apiKey = ''
          config.json = json
          config.zhMapSlice = option.zhMapSlice
        }
