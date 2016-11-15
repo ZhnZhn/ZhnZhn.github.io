@@ -4,7 +4,7 @@
     { "caption" : "Male, Total, Rates (%)" , "value" : "LM-UN-M-TOT" },
     { "caption" : "Female, Total, Rates (%)" , "value" : "LM-UN-F-TOT" },
     { "caption" : "Total, Over 25, Rates (%)" , "value" : "LM-UN-T-GT25" },
-    { "caption" : "Total, Under 25, , Rates (%)" , "value" : "LM-UN-T-LE25" },
+    { "caption" : "Total, Under 25, Rates (%)" , "value" : "LM-UN-T-LE25" },
     { "caption" : "Male, Over 25, Rates (%)" , "value" : "LM-UN-M-GT25" },
     { "caption" : "Male, Under 25, Rates (%)" , "value" : "LM-UN-M-LE25" },
     { "caption" : "Female, Over 25, Rates (%)" , "value" : "LM-UN-F-GT25" },

@@ -1,5 +1,5 @@
 
-const _fnForMonthSelect = function(){
+const _fnForMonthSelect = function(mapDateDf=2){
 	const options = []
 	, dNow = new Date(Date.now())
 
@@ -23,7 +23,7 @@ const _fnForMonthSelect = function(){
 				value : `${y}M12`
 			})
 		}
-		if (i === 2){
+		if (i === mapDateDf){
 			dateDefault = `${y}M${ (m+1>9) ? m+1 : '0'+(m+1)}`
 		}
 	}
@@ -31,7 +31,7 @@ const _fnForMonthSelect = function(){
 	return { options, dateDefault };
 }
 
-const _fnForQuarterSelect = function(){
+const _fnForQuarterSelect = function(mapDateDf=1){
 	const options = []
 	, dNow = new Date(Date.now())
 
@@ -53,7 +53,7 @@ const _fnForQuarterSelect = function(){
 			 value : `${y}Q${qNow}`
 		 })
 
-		 if (i === 1) {
+		 if (i === mapDateDf) {
 		    dateDefault = `${y}Q${qNow}`
 		 }
 
@@ -63,19 +63,19 @@ const _fnForQuarterSelect = function(){
 	return { options, dateDefault };
 };
 
-const _fnForYearSelect = function(){
+const _fnForYearSelect = function(mapDateDf=1){
 	const options = []
 	, dNow = new Date(Date.now())
 
 	let dateDefault
 	, y = dNow.getUTCFullYear()
   , i;
-	for (i=0; i<3; i++){
+	for (i=0; i<8; i++){
 		options.push({
 			caption: y,
 			value: y
 		});
-		if ( i === 1) {
+		if ( i === mapDateDf) {
 			dateDefault = y;
 		}
 		y = y - 1;
@@ -165,13 +165,13 @@ const DateUtils = {
 	         + "-" + d.getUTCFullYear() ;
 	},
 
-	createEurostatSelect(frequency='M'){
+	createEurostatSelect(frequency='M', mapDateDf){
 		 if (frequency === 'M'){
-			 return _fnForMonthSelect();
+			 return _fnForMonthSelect(mapDateDf);
 		 } else if ( frequency === 'Q'){
-			 return _fnForQuarterSelect();
+			 return _fnForQuarterSelect(mapDateDf);
 		 } else if ( frequency === 'Y'){
-			 return _fnForYearSelect();
+			 return _fnForYearSelect(mapDateDf);
 		 }
 	}
 

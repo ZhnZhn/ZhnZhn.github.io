@@ -221,7 +221,7 @@ var _fnOnEachFeature = function _fnOnEachFeature(infoControl, feature, layer) {
 };
 
 var EuroStatToMap = {
-  createCholoplethMap: function createCholoplethMap(statJson, geoJson, configSlice, map) {
+  createChoroplethMap: function createChoroplethMap(statJson, geoJson, configSlice, map) {
     var ds = (0, _jsonstat2.default)(statJson).Dataset(0);
     var dGeo = ds.Dimension("geo");
     var _dGeo = dGeo ? dGeo : [];

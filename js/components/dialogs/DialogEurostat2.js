@@ -16,6 +16,10 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
+var _EuroStatFn = require('../../adapters/EuroStatFn');
+
+var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -54,15 +58,13 @@ var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFra
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var chartTypeOptions = [{ caption: 'Default : Area', value: 'AREA' }, { caption: 'Map', value: 'MAP', compType: _Type.CompItemType.EUROSTAT_MAP }];
+var DATE_PLACEHOLDER = 'Before Select Indicator',
+    COUNTRY_CAPTION_DF = 'EU',
+    MAP_FREQUENCY_DF = 'M',
+    AREA = 'AREA',
+    MAP = 'MAP';
 
-/*
-let dateDefault = '2016Q1';
-let dateOptions = [
-  { caption: '2016Q1', value : '2016Q1' },
-  { caption: '2016Q2', value : '2016Q2' }
-]
-*/
+var chartTypeOptions = [{ caption: 'Default : Area', value: AREA }, { caption: 'Map', value: MAP, compType: _Type.CompItemType.EUROSTAT_MAP }];
 
 var DialogEurostat2 = _react2.default.createClass(_extends({
   displayName: 'DialogEurostat2'
@@ -77,7 +79,7 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
 
     return {
       isShowDate: false,
-      dateDefault: 'Before Select Indicator',
+      dateDefault: DATE_PLACEHOLDER,
       dateOptions: [],
       validationMessages: []
     };
@@ -94,8 +96,9 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     this.one = one;
   },
   _updateForDate: function _updateForDate() {
-    var frequency = this.two ? this.two.mapFrequency : undefined,
-        config = frequency ? _DateUtils2.default.createEurostatSelect(frequency) : { dateDefault: 'Before Select Indicator', options: [] };
+    var frequency = this.two ? this.props.mapFrequency ? this.props.mapFrequency : this.two.mapFrequency ? this.two.mapFrequency : MAP_FREQUENCY_DF : undefined;
+    var mapDateDf = this.props.mapDateDf;
+    var config = frequency ? _DateUtils2.default.createEurostatSelect(frequency, mapDateDf) : { dateDefault: DATE_PLACEHOLDER, options: [] };
 
     this.setState({
       isShowDate: true,
@@ -105,13 +108,13 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
   },
   _handlerSelectTwo: function _handlerSelectTwo(two) {
     this.two = two;
-    if (this.chartType && this.chartType.value === 'MAP') {
+    if (this.chartType && this.chartType.value === MAP) {
       this._updateForDate();
     }
   },
   _handlerSelectChartType: function _handlerSelectChartType(chartType) {
     this.chartType = chartType;
-    if (chartType && chartType.value === 'MAP') {
+    if (chartType && chartType.value === MAP) {
       this._updateForDate();
     } else {
       this.setState({ isShowDate: false });
@@ -130,7 +133,7 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
 
     var msg = [];
 
-    if (!(this.chartType && this.chartType.value === 'MAP')) {
+    if (!(this.chartType && this.chartType.value === MAP)) {
       if (!this.one) {
         msg.push(this.props.msgOnNotSelected(oneCaption));
       }
@@ -146,15 +149,24 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     var _props2 = this.props;
     var loadId = _props2.loadId;
     var group = _props2.group;
-    var _countryValue = this.one ? this.one.value : 'EU 28';
-    var _countryCaption = this.one ? this.one.caption : 'EU 28';
+    var _countryValue = this.one ? this.one.value : COUNTRY_CAPTION_DF;
+    var _countryCaption = this.one ? this.one.caption : COUNTRY_CAPTION_DF;
 
     var _zhCompType = undefined,
-        _time = undefined;
+        _time = undefined,
+        _mapValue = this.two.mapValue,
+        _mapSlice = this.two.mapSlice;
 
-    if (this.chartType && this.chartType.value !== 'AREA') {
+    if (this.chartType && this.chartType.value !== AREA) {
       _zhCompType = this.chartType.compType;
       _time = this.date ? this.date.value : this.state.dateDefault;
+
+      if (!_mapValue) {
+        _mapValue = _EuroStatFn2.default.createMapValue(this.props, this.two);
+      }
+      if (!_mapSlice) {
+        _mapSlice = _EuroStatFn2.default.createMapSlice(this.props, this.two);
+      }
     }
 
     return {
@@ -169,8 +181,8 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
       alertGeo: _countryCaption,
       alertMetric: this.two.caption,
       zhCompType: _zhCompType,
-      mapValue: this.two.mapValue,
-      zhMapSlice: _extends({}, this.two.mapSlice, { time: _time }),
+      mapValue: _mapValue,
+      zhMapSlice: _extends({}, _mapSlice, { time: _time }),
       time: _time
     };
   },

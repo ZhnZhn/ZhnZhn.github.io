@@ -16,7 +16,7 @@ var _crDetailMsg = function _crDetailMsg(option) {
   var _option$alertMetric = option.alertMetric;
   var alertMetric = _option$alertMetric === undefined ? '' : _option$alertMetric;
 
-  return "\n\nIt seems country-dataset doesn't exsist.\n" + alertGeo + ":" + alertMetric;
+  return "\n\nIt seems country-dataset doesn't exsist.\n" + alertGeo + ":" + alertMetric + "\n\nIf you use For Date input field in Dialog\ntry to use more late date.";
 };
 
 var EuroStatApi = {
@@ -47,6 +47,7 @@ var EuroStatApi = {
     } else {
       //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
       return "" + rootUrl + mapValue + "&time=" + time;
+      //return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
     }
   },
   checkResponse: function checkResponse(json, option) {

@@ -68,7 +68,7 @@
       "menuTitle" : "CPI (2015=100)",
       "dialogCaption" : "CPI (2015=100)",
       "chartContainerCaption" : "Eurostat Consume Price Index",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -78,7 +78,11 @@
         "twoURI" : "./data/eurostat/cpi.json",
         "twoJsonProp" : "cpis",
         "loadId" : "EU_STAT",
-        "group" : "ei_cphi_m"
+        "group" : "ei_cphi_m",
+        "mapType" : "I",
+        "mapSlice" : {
+           "unit" : "HICP2015"
+        }
       }
     },
     "ES_LABOUR" : {
@@ -86,7 +90,7 @@
       "menuTitle" : "Labour Cost",
       "dialogCaption" : "Labour Cost",
       "chartContainerCaption" : "Eurostat Labour Cost",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -95,7 +99,9 @@
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/labour.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "mapType" : "Z",
+        "mapFrequency" : "Y"
       }
     },
     "ES_SOCIAL" : {
@@ -103,7 +109,7 @@
       "menuTitle" : "Social Protection",
       "dialogCaption" : "Social Protection",
       "chartContainerCaption" : "Eurostat Social Protection",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -112,7 +118,10 @@
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/social-protection.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "mapType" : "Z",
+        "mapFrequency" : "Y",
+        "mapDateDf" : 2
       }
     },
     "ES_GDP" : {
@@ -120,7 +129,7 @@
       "menuTitle" : "GDP",
       "dialogCaption" : "Gross Domestic Product",
       "chartContainerCaption" : "Eurostat Gross Domestic Product",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -137,7 +146,7 @@
       "menuTitle" : "Unemployment (unadjusted)",
       "dialogCaption" : "Unemployment (unadjusted)",
       "chartContainerCaption" : "Eurostat Unemployment (unadjusted)",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -147,7 +156,12 @@
         "twoURI" : "./data/eurostat/unemployment.json",
         "twoJsonProp" : "metrics",
         "loadId" : "EU_STAT",
-        "group" : "ei_lmhr_m"
+        "group" : "ei_lmhr_m",
+        "mapFrequency" : "M",
+        "mapType" : "I",
+        "mapSlice" : {
+           "s_adj" : "NSA"
+        }
       }
     },
     "ES_INDIC" : {
@@ -174,7 +188,7 @@
         "menuTitle" : "Main Indicators",
         "dialogCaption" : "Energy Main Indicators",
         "chartContainerCaption" : "Eurostat Energy Main Indicators",
-        "dialogType" : "DialogEurostat",
+        "dialogType" : "DialogEurostat2",
         "dialogProps" : {
           "descrUrl": "./data/eurostat/eurostat.html",
           "oneCaption" : "Country",
@@ -183,7 +197,8 @@
           "twoCaption" : "Indicators",
           "twoURI" : "./data/eurostat/energy-indicators.json",
           "twoJsonProp" : "indicators",
-          "loadId" : "EU_STAT"
+          "loadId" : "EU_STAT",
+          "mapDateDf" : 2
         }
     },
     "ES_E_STAT_Q" : {
@@ -209,7 +224,7 @@
         "menuTitle" : "Statistics Prices",
         "dialogCaption" : "Energy Statistics Prices",
         "chartContainerCaption" : "Eurostat Energy Statistics Prices",
-        "dialogType" : "DialogEurostat",
+        "dialogType" : "DialogEurostat2",
         "dialogProps" : {
           "descrUrl": "./data/eurostat/eurostat.html",
           "oneCaption" : "Country",
@@ -245,7 +260,7 @@
       "menuTitle" : "Government Public",
       "dialogCaption" : "Government Public",
       "chartContainerCaption" : "Eurostat Finance Government Public",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -262,7 +277,7 @@
       "menuTitle" : "Interest Rates",
       "dialogCaption" : "Interest Rates",
       "chartContainerCaption" : "Eurostat Finance Interest Rates",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -280,7 +295,7 @@
       "menuTitle" : "Selling Prices",
       "dialogCaption" : "Agriculture Selling Prices",
       "chartContainerCaption" : "Eurostat Agriculture Selling Prices",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -289,7 +304,10 @@
         "twoCaption" : "Price",
         "twoURI" : "./data/eurostat/agri-prices.json",
         "twoJsonProp" : "prices",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "mapType" : "Z",
+        "mapFrequency" : "Y",
+        "mapDateDf" : 1
       }
     },
     "ES_AGRI_MILK" : {
@@ -297,7 +315,7 @@
       "menuTitle" : "Milk Production",
       "dialogCaption" : "Agriculture Milk Production",
       "chartContainerCaption" : "Eurostat Agriculture Milk Production",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -306,7 +324,10 @@
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/agri-milk.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "mapType" : "Z",
+        "mapFrequency" : "Y",
+        "mapDateDf" : 1
       }
     },
     "ES_AGRI_MEAT" : {
@@ -314,7 +335,7 @@
       "menuTitle" : "Meat Production & Livestock",
       "dialogCaption" : "Meat Production & Livestock",
       "chartContainerCaption" : "Eurostat Meat Production & Livestock",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",
@@ -323,7 +344,10 @@
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/agri-meat.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "mapType" : "Z",
+        "mapFrequency" : "Y",
+        "mapDateDf" : 1
       }
     },
     "ES_AGRI_ENVI" : {

@@ -22,6 +22,36 @@ const _crSubTitle = function(subTitle){
   return `<span style="color:black;font-weight:bold;">${subTitle}</span>`;
 }
 
+
+const _fnMapValueI = function(props, item){
+  const { group } = props
+      , { value } = item
+  return `${group}?indic=${value}`;
+};
+const _fnMapValueZ = function(props, item){
+  const { value } = item
+  return `${value}?`;
+};
+const _rMapValue = {
+  "I" : _fnMapValueI,
+  "Z" : _fnMapValueZ
+}
+
+const _fnMapSliceI = function(props, item){
+  const { mapSlice } = props
+      , { value } = item
+  return { ...mapSlice, indic : value };
+};
+const _fnMapSliceZ = function(){
+  return { };
+};
+
+const _rMapSlice = {
+  "I" : _fnMapSliceI,
+  "Z" : _fnMapSliceZ
+}
+
+
 const EuroStatFn = {
 
   setDataAndInfo({ config, data, json, option }){
@@ -108,6 +138,21 @@ const EuroStatFn = {
 
   findMinY(data){
     return QuandlFn2.findMinY(data);
+  },
+
+  createMapValue(props, item){
+     const { mapType } = props
+         , _fnCreate = _rMapValue[mapType]
+
+     if (_fnCreate) { return _fnCreate(props, item); }
+     else { return undefined; }
+  },
+  createMapSlice(props, item){
+    const { mapType } = props
+        , _fnCreate = _rMapSlice[mapType]
+
+    if (_fnCreate) { return _fnCreate(props, item); }
+    else { return undefined; }
   }
 
 }

@@ -87,7 +87,7 @@ const MapChartItem = React.createClass({
      .then( (geoJson) => {
         const { config } = this.props
             , { json, zhMapSlice } = config
-         EuroStatToMap.createCholoplethMap(
+         EuroStatToMap.createChoroplethMap(
            json, geoJson, zhMapSlice, map
          );
      })

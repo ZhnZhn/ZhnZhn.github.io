@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 var _fnForMonthSelect = function _fnForMonthSelect() {
+	var mapDateDf = arguments.length <= 0 || arguments[0] === undefined ? 2 : arguments[0];
+
 	var options = [],
 	    dNow = new Date(Date.now());
 
@@ -30,7 +32,7 @@ var _fnForMonthSelect = function _fnForMonthSelect() {
 				value: y + 'M12'
 			});
 		}
-		if (i === 2) {
+		if (i === mapDateDf) {
 			dateDefault = y + 'M' + (m + 1 > 9 ? m + 1 : '0' + (m + 1));
 		}
 	}
@@ -39,6 +41,8 @@ var _fnForMonthSelect = function _fnForMonthSelect() {
 };
 
 var _fnForQuarterSelect = function _fnForQuarterSelect() {
+	var mapDateDf = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+
 	var options = [],
 	    dNow = new Date(Date.now());
 
@@ -60,7 +64,7 @@ var _fnForQuarterSelect = function _fnForQuarterSelect() {
 			value: y + 'Q' + qNow
 		});
 
-		if (i === 1) {
+		if (i === mapDateDf) {
 			dateDefault = y + 'Q' + qNow;
 		}
 
@@ -71,18 +75,20 @@ var _fnForQuarterSelect = function _fnForQuarterSelect() {
 };
 
 var _fnForYearSelect = function _fnForYearSelect() {
+	var mapDateDf = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+
 	var options = [],
 	    dNow = new Date(Date.now());
 
 	var dateDefault = void 0,
 	    y = dNow.getUTCFullYear(),
 	    i = void 0;
-	for (i = 0; i < 3; i++) {
+	for (i = 0; i < 8; i++) {
 		options.push({
 			caption: y,
 			value: y
 		});
-		if (i === 1) {
+		if (i === mapDateDf) {
 			dateDefault = y;
 		}
 		y = y - 1;
@@ -175,13 +181,14 @@ var DateUtils = {
 	},
 	createEurostatSelect: function createEurostatSelect() {
 		var frequency = arguments.length <= 0 || arguments[0] === undefined ? 'M' : arguments[0];
+		var mapDateDf = arguments[1];
 
 		if (frequency === 'M') {
-			return _fnForMonthSelect();
+			return _fnForMonthSelect(mapDateDf);
 		} else if (frequency === 'Q') {
-			return _fnForQuarterSelect();
+			return _fnForQuarterSelect(mapDateDf);
 		} else if (frequency === 'Y') {
-			return _fnForYearSelect();
+			return _fnForYearSelect(mapDateDf);
 		}
 	}
 };

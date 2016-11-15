@@ -106,7 +106,7 @@ var MapChartItem = _react2.default.createClass({
       var json = config.json;
       var zhMapSlice = config.zhMapSlice;
 
-      _EuroStatToMap2.default.createCholoplethMap(json, geoJson, zhMapSlice, map);
+      _EuroStatToMap2.default.createChoroplethMap(json, geoJson, zhMapSlice, map);
     });
   },
   render: function render() {

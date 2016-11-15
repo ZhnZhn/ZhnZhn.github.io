@@ -178,7 +178,7 @@ const _fnOnEachFeature = function(infoControl, feature, layer){
 
 
 const EuroStatToMap = {
-  createCholoplethMap(statJson, geoJson, configSlice, map){
+  createChoroplethMap(statJson, geoJson, configSlice, map){
     const  ds = JSONstat(statJson).Dataset(0)
          , dGeo = ds.Dimension("geo")
          , _dGeo = (dGeo) ? dGeo : []

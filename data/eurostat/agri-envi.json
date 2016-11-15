@@ -8,7 +8,12 @@
     { "caption" : "Nitrogen, t of N, Fertilizers Europe", "value" : "tag00090" },
     { "caption" : "Phosphorus, t of P, Fertilizers Europe", "value" : "tag00091" },
     { "caption" : "Potassium, t of K, Fertilizers Europe", "value" : "tag00092" },
-    { "caption" : "Gross nutrient balance on agricultural land, Nitrogen N, kg per ha", "value" : "t2020_rn310?nutrient=N&indic_ag=BAL_UAA&unit=KG" },
-    { "caption" : "Gross nutrient balance on agricultural land, Phosphorus P, kg per ha", "value" : "t2020_rn310?nutrient=P&indic_ag=BAL_UAA&unit=KG" }
+    {
+      "caption" : "Gross nutrient balance on agricultural land, Nitrogen N, kg per ha",
+      "value" : "t2020_rn310?nutrient=N&indic_ag=BAL_UAA&unit=KG"
+    },{
+      "caption" : "Gross nutrient balance on agricultural land, Phosphorus P, kg per ha",
+      "value" : "t2020_rn310?nutrient=P&indic_ag=BAL_UAA&unit=KG"
+    }
   ]
 }
