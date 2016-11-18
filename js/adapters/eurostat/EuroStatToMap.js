@@ -4,19 +4,26 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _leaflet = require('leaflet');
-
-var _leaflet2 = _interopRequireDefault(_leaflet);
-
 var _jsonstat = require('jsonstat');
 
 var _jsonstat2 = _interopRequireDefault(_jsonstat);
 
-var _kMeans = require('../math/k-means');
+var _kMeans = require('../../math/k-means');
 
 var _kMeans2 = _interopRequireDefault(_kMeans);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/*eslint-disable no-undef */
+if (process.env.NODE_ENV !== 'development') {
+  System.config({
+    baseURL: "/"
+  });
+}
+/*eslint-enable no-undef */
+
+var URL_LEAFLET = 'lib/leaflet.js',
+    URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json';
 
 var NUMBER_OF_CLUSTERS = 6,
     NUMBER_OF_ITERATION = 100,
@@ -150,10 +157,10 @@ var _fnStyle = function _fnStyle(feature) {
   };
 };
 
-var _fnCreateInfoControl = function _fnCreateInfoControl() {
-  var wgInfo = _leaflet2.default.control();
+var _fnCreateInfoControl = function _fnCreateInfoControl(L) {
+  var wgInfo = L.control();
   wgInfo.onAdd = function (map) {
-    this._div = _leaflet2.default.DomUtil.create('div', 'control-info');
+    this._div = L.DomUtil.create('div', 'control-info');
     this.update();
     return this._div;
   };
@@ -182,11 +189,11 @@ var _fnCreateItemInnerHtml = function _fnCreateItemInnerHtml(color, from, to) {
   return '<i style="opacity:0.7;background:' + color + ';">' + from + '&ndash;' + to + '</i><br/>';
 };
 
-var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, _clusters) {
-  var gradeContorl = _leaflet2.default.control({ position: 'bottomleft' });
+var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, _clusters, L) {
+  var gradeContorl = L.control({ position: 'bottomleft' });
 
   gradeContorl.onAdd = function (map) {
-    var _div = _leaflet2.default.DomUtil.create('div', 'control-grade');
+    var _div = L.DomUtil.create('div', 'control-grade');
 
     var _upperPrev = Math.round(_fnCalcUpper(_clusters, 0));
     _div.innerHTML = _fnCreateItemInnerHtml(_clusterColors[0], Math.floor(minValue), _upperPrev);
@@ -220,38 +227,94 @@ var _fnOnEachFeature = function _fnOnEachFeature(infoControl, feature, layer) {
   });
 };
 
+var _createChoroplethMap = function _createChoroplethMap(option) {
+  var statJson = option.jsonCube;
+  var geoJson = option.geoJson;
+  var configSlice = option.zhMapSlice;
+  var map = option.map;
+  var L = option.L;
+  var ds = (0, _jsonstat2.default)(statJson).Dataset(0);
+  var dGeo = ds.Dimension("geo");
+  var _dGeo = dGeo ? dGeo : [];
+  var sGeo = ds.Data(configSlice);
+  var _sGeo = sGeo ? sGeo : [];
+
+  var _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(_sGeo, _dGeo, geoJson);
+
+  var minValue = _fnMergeGeoAndValue2.minValue;
+  var maxValue = _fnMergeGeoAndValue2.maxValue;
+  var points = _fnMergeGeoAndValue2.points;
+  var _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION);
+  var _hmIdCluster = _fnCreateHmIdCluster(_clusters);
+
+  _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
+
+  var infoControl = _fnCreateInfoControl(L);
+  infoControl.addTo(map);
+
+  L.geoJSON(geoJson, {
+    style: _fnStyle,
+    onEachFeature: _fnOnEachFeature.bind(null, infoControl)
+  }).addTo(map);
+
+  if (points.length > 1) {
+    var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters, L);
+    gradeControl.addTo(map);
+  }
+
+  return option;
+};
+
 var EuroStatToMap = {
-  createChoroplethMap: function createChoroplethMap(statJson, geoJson, configSlice, map) {
-    var ds = (0, _jsonstat2.default)(statJson).Dataset(0);
-    var dGeo = ds.Dimension("geo");
-    var _dGeo = dGeo ? dGeo : [];
-    var sGeo = ds.Data(configSlice);
-    var _sGeo = sGeo ? sGeo : [];
+  hmUrlGeoJson: {},
+  L: undefined,
 
-    var _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(_sGeo, _dGeo, geoJson);
+  getLeaflet: function getLeaflet() {
+    var _this = this;
 
-    var minValue = _fnMergeGeoAndValue2.minValue;
-    var maxValue = _fnMergeGeoAndValue2.maxValue;
-    var points = _fnMergeGeoAndValue2.points;
-    var _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION);
-    var _hmIdCluster = _fnCreateHmIdCluster(_clusters);
-
-    _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
-
-    var infoControl = _fnCreateInfoControl();
-    infoControl.addTo(map);
-
-    _leaflet2.default.geoJSON(geoJson, {
-      style: _fnStyle,
-      onEachFeature: _fnOnEachFeature.bind(null, infoControl)
-    }).addTo(map);
-
-    if (points.length > 1) {
-      var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters);
-      gradeControl.addTo(map);
+    if (this.L) {
+      return Promise.resolve(this.L);
+    } else {
+      return System.import(URL_LEAFLET).then(function (L) {
+        return _this.L = L;
+      });
     }
+  },
+  getGeoJson: function getGeoJson(url) {
+    var _this2 = this;
+
+    var geoJson = this.hmUrlGeoJson[url];
+    if (geoJson) {
+      return Promise.resolve(geoJson);
+    } else {
+      return fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (geoJson) {
+        return _this2.hmUrlGeoJson[url] = geoJson;
+      });
+    }
+  },
+  drawChoroplethMap: function drawChoroplethMap(id, jsonCube, zhMapSlice) {
+    var _this3 = this;
+
+    return this.getLeaflet().then(function (L) {
+      var map = L.map(id).setView([58.00, 10.00], 3);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        id: 'addis',
+        attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+      return { jsonCube: jsonCube, zhMapSlice: zhMapSlice, L: L, map: map };
+    }).then(function (option) {
+      return _this3.getGeoJson(URL_EU_GEOJSON).then(function (geoJson) {
+        option.geoJson = geoJson;
+        return option;
+      });
+    }).then(function (option) {
+      return Promise.resolve(_createChoroplethMap(option));
+    });
   }
 };
 
 exports.default = EuroStatToMap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\EuroStatToMap.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatToMap.js.map

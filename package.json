@@ -47,7 +47,8 @@
       "react-addons-css-transition-group": "npm:react-addons-css-transition-group@^15.3.2",
       "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^15.3.2",
       "react-dom": "npm:react-dom@^15.3.2",
-      "reflux": "npm:reflux@0.4.1"
+      "reflux": "npm:reflux@0.4.1",
+      "systemjs": "npm:systemjs@^0.19.41"
     },
     "devDependencies": {}
   },
@@ -69,6 +70,6 @@
     "gulp-rev": "^7.1.2",
     "html-webpack-plugin": "^2.22.0",
     "jspm": "^0.16.39",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.3"
   }
 }

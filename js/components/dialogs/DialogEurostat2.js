@@ -16,7 +16,7 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
-var _EuroStatFn = require('../../adapters/EuroStatFn');
+var _EuroStatFn = require('../../adapters/eurostat/EuroStatFn');
 
 var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
 

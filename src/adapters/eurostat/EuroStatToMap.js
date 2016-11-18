@@ -1,8 +1,21 @@
 
-import L from 'leaflet';
+
 import JSONstat from 'jsonstat';
 
-import clusterMaker from '../math/k-means';
+import clusterMaker from '../../math/k-means';
+
+
+/*eslint-disable no-undef */
+if ( process.env.NODE_ENV !== 'development'){
+  System.config({
+    baseURL: "/"
+  });
+}
+/*eslint-enable no-undef */
+
+const URL_LEAFLET = 'lib/leaflet.js'
+    , URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json';
+
 
 const NUMBER_OF_CLUSTERS = 6
     , NUMBER_OF_ITERATION = 100
@@ -41,7 +54,7 @@ const _fnMergeGeoAndValue = function(sGeo, dGeo, json){
     }
   })
   if (points.length === 0){
-    const point = [ 0, 0];
+    const point = [0, 0];
     point.id = 'ID';
     points.push(point);
   }
@@ -106,7 +119,7 @@ const _fnStyle = function(feature){
 }
 
 
-const _fnCreateInfoControl = function(){
+const _fnCreateInfoControl = function(L){
   const wgInfo = L.control();
   wgInfo.onAdd = function(map){
     this._div = L.DomUtil.create('div', 'control-info');
@@ -138,7 +151,7 @@ const _fnCreateItemInnerHtml = function(color, from, to){
   return `<i style="opacity:0.7;background:${color};">${from}&ndash;${to}</i><br/>`;
 }
 
-const _fnCreateGradeControl = function(minValue, maxValue, _clusters){
+const _fnCreateGradeControl = function(minValue, maxValue, _clusters, L){
   const gradeContorl = L.control({ position: 'bottomleft' })
 
 
@@ -176,33 +189,81 @@ const _fnOnEachFeature = function(infoControl, feature, layer){
    })
 }
 
+const _createChoroplethMap = function(option){
+  const { jsonCube:statJson, geoJson, zhMapSlice:configSlice, map, L } = option
+       , ds = JSONstat(statJson).Dataset(0)
+       , dGeo = ds.Dimension("geo")
+       , _dGeo = (dGeo) ? dGeo : []
+       , sGeo = ds.Data(configSlice)
+       , _sGeo = (sGeo) ? sGeo : []
+       , { minValue, maxValue, points } = _fnMergeGeoAndValue(_sGeo, _dGeo, geoJson)
+       , _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
+       , _hmIdCluster = _fnCreateHmIdCluster(_clusters);
+
+  _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
+
+  const infoControl = _fnCreateInfoControl(L);
+  infoControl.addTo(map);
+
+  L.geoJSON(geoJson, {
+     style : _fnStyle,
+     onEachFeature : _fnOnEachFeature.bind(null, infoControl)
+  }).addTo(map);
+
+
+  if ( points.length > 1) {
+    const gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters, L)
+    gradeControl.addTo(map);
+  }
+
+  return option;
+}
 
 const EuroStatToMap = {
-  createChoroplethMap(statJson, geoJson, configSlice, map){
-    const  ds = JSONstat(statJson).Dataset(0)
-         , dGeo = ds.Dimension("geo")
-         , _dGeo = (dGeo) ? dGeo : []
-         , sGeo = ds.Data(configSlice)
-         , _sGeo = (sGeo) ? sGeo : []
-         , { minValue, maxValue, points } = _fnMergeGeoAndValue(_sGeo, _dGeo, geoJson)
-         , _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
-         , _hmIdCluster = _fnCreateHmIdCluster(_clusters);
+  hmUrlGeoJson : {},
+  L : undefined,
 
-    _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
-
-    const infoControl = _fnCreateInfoControl();
-    infoControl.addTo(map);
-
-    L.geoJSON(geoJson, {
-       style : _fnStyle,
-       onEachFeature : _fnOnEachFeature.bind(null, infoControl)
-    }).addTo(map);
-
-
-    if ( points.length > 1) {
-      const gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters)
-      gradeControl.addTo(map);
+  getLeaflet(){
+    if (this.L){
+      return Promise.resolve(this.L);
+    } else {
+      return System.import(URL_LEAFLET)
+                .then( L => { return this.L = L; })
     }
+  },
+
+  getGeoJson(url){
+     const geoJson = this.hmUrlGeoJson[url]
+     if (geoJson){
+       return Promise.resolve(geoJson);
+     } else {
+       return fetch(url)
+               .then( (response) => { return response.json(); })
+               .then( (geoJson ) => { return this.hmUrlGeoJson[url] = geoJson; })
+     }
+  },
+
+  drawChoroplethMap(id, jsonCube, zhMapSlice){
+    return this.getLeaflet()
+             .then( (L) => {
+                const map = L.map(id).setView([58.00, 10.00], 3);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                     id: 'addis',
+                     attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+                return { jsonCube, zhMapSlice, L, map };
+             })
+             .then ( (option) => {
+                 return this.getGeoJson(URL_EU_GEOJSON)
+                           .then( (geoJson) => {
+                              option.geoJson = geoJson;
+                              return option;
+                           });
+            })
+            .then( (option) => {
+                return Promise.resolve(_createChoroplethMap(option));
+            });
   }
 };
 

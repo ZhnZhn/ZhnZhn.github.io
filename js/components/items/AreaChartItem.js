@@ -90,6 +90,12 @@ var styles = {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     float: 'left'
+  },
+  tabDiv: {
+    position: 'relative',
+    height: '30px',
+    backgroundColor: 'transparent',
+    zIndex: 2
   }
 };
 
@@ -291,7 +297,7 @@ var AreaChartItem = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      { style: { position: 'relative', height: '30px', backgroundColor: 'transparent', zIndex: 2 } },
+      { style: styles.tabDiv },
       _btIndicator,
       _btLegend,
       _bt2HChart,

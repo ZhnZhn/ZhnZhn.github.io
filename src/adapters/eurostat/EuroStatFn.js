@@ -1,7 +1,9 @@
-import ChartConfig from '../charts/ChartConfig';
-import Chart from '../charts/Chart';
+import ChartConfig from '../../charts/ChartConfig';
+import Chart from '../../charts/Chart';
 
-import QuandlFn2 from './QuandlFn2';
+import QuandlFn2 from '../QuandlFn2';
+
+import ChoroplethMapSlice from './ChoroplethMapSlice';
 
 const SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 
@@ -21,36 +23,6 @@ const _crDataSourceLink = function(json){
 const _crSubTitle = function(subTitle){
   return `<span style="color:black;font-weight:bold;">${subTitle}</span>`;
 }
-
-
-const _fnMapValueI = function(props, item){
-  const { group } = props
-      , { value } = item
-  return `${group}?indic=${value}`;
-};
-const _fnMapValueZ = function(props, item){
-  const { value } = item
-  return `${value}?`;
-};
-const _rMapValue = {
-  "I" : _fnMapValueI,
-  "Z" : _fnMapValueZ
-}
-
-const _fnMapSliceI = function(props, item){
-  const { mapSlice } = props
-      , { value } = item
-  return { ...mapSlice, indic : value };
-};
-const _fnMapSliceZ = function(){
-  return { };
-};
-
-const _rMapSlice = {
-  "I" : _fnMapSliceI,
-  "Z" : _fnMapSliceZ
-}
-
 
 const EuroStatFn = {
 
@@ -140,20 +112,7 @@ const EuroStatFn = {
     return QuandlFn2.findMinY(data);
   },
 
-  createMapValue(props, item){
-     const { mapType } = props
-         , _fnCreate = _rMapValue[mapType]
-
-     if (_fnCreate) { return _fnCreate(props, item); }
-     else { return undefined; }
-  },
-  createMapSlice(props, item){
-    const { mapType } = props
-        , _fnCreate = _rMapSlice[mapType]
-
-    if (_fnCreate) { return _fnCreate(props, item); }
-    else { return undefined; }
-  }
+  ...ChoroplethMapSlice
 
 }
 

@@ -8,11 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _leaflet = require('leaflet');
-
-var _leaflet2 = _interopRequireDefault(_leaflet);
-
-var _EuroStatToMap = require('../../adapters/EuroStatToMap');
+var _EuroStatToMap = require('../../adapters/eurostat/EuroStatToMap');
 
 var _EuroStatToMap2 = _interopRequireDefault(_EuroStatToMap);
 
@@ -20,9 +16,17 @@ var _SvgClose = require('../SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
+var _ButtonTab = require('../zhn/ButtonTab');
+
+var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
+
 var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
+var _PanelDataInfo = require('../zhn/PanelDataInfo');
+
+var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62,7 +66,8 @@ var styles = {
   },
   timeSpan: {
     color: 'rgb(253, 179, 22)',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingLeft: '16px'
   },
   captionSpanClose: {
     display: 'inline-block',
@@ -74,14 +79,32 @@ var styles = {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     float: 'left'
+  },
+  tabDiv: {
+    position: 'relative',
+    height: '30px',
+    backgroundColor: 'transparent',
+    zIndex: 2
+  },
+  mapDiv: {
+    height: '400px'
+  },
+  displayBlock: {
+    display: 'block'
+  },
+  displayNone: {
+    display: 'none'
   }
 };
 
 var MapChartItem = _react2.default.createClass({
   displayName: 'MapChartItem',
   getInitialState: function getInitialState() {
+    this.map = undefined;
+
     return {
-      isOpen: true
+      isOpen: true,
+      isShowInfo: false
     };
   },
   _handlerToggleOpen: function _handlerToggleOpen() {
@@ -90,30 +113,40 @@ var MapChartItem = _react2.default.createClass({
   componentDidMount: function componentDidMount() {
     var _this = this;
 
-    var caption = this.props.caption;
-
-    var map = _leaflet2.default.map('map_' + caption).setView([58.00, 10.00], 3);
-
-    _leaflet2.default.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      id: 'addis',
-      attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    fetch('data/geo/eu-stat.geo.json').then(function (response) {
-      return response.json();
-    }).then(function (geoJson) {
-      var config = _this.props.config;
-      var json = config.json;
-      var zhMapSlice = config.zhMapSlice;
-
-      _EuroStatToMap2.default.createChoroplethMap(json, geoJson, zhMapSlice, map);
-    });
-  },
-  render: function render() {
     var _props = this.props;
     var caption = _props.caption;
     var config = _props.config;
-    var onCloseItem = _props.onCloseItem;
+    var jsonCube = config.json;
+    var zhMapSlice = config.zhMapSlice;
+
+
+    _EuroStatToMap2.default.drawChoroplethMap('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
+      _this.map = option.map;
+      return undefined;
+    });
+  },
+  _handlerClickInfo: function _handlerClickInfo() {
+    this.setState({ isShowInfo: true });
+  },
+  _handlerClickChart: function _handlerClickChart() {
+    this.setState({ isShowInfo: false });
+  },
+  _renderTabToolbar: function _renderTabToolbar() {
+    return _react2.default.createElement(
+      'div',
+      { style: styles.tabDiv },
+      _react2.default.createElement(_ButtonTab2.default, {
+        caption: 'Info',
+        isShow: this.state.isShowInfo,
+        onClick: this._handlerClickInfo
+      })
+    );
+  },
+  render: function render() {
+    var _props2 = this.props;
+    var caption = _props2.caption;
+    var config = _props2.config;
+    var onCloseItem = _props2.onCloseItem;
     var _config$json = config.json;
     var json = _config$json === undefined ? {} : _config$json;
     var _config$zhDialog = config.zhDialog;
@@ -122,8 +155,11 @@ var MapChartItem = _react2.default.createClass({
     var subtitle = _zhDialog$subtitle === undefined ? '' : _zhDialog$subtitle;
     var _zhDialog$time = zhDialog.time;
     var time = _zhDialog$time === undefined ? '' : _zhDialog$time;
-    var isOpen = this.state.isOpen;
+    var _state = this.state;
+    var isOpen = _state.isOpen;
+    var isShowInfo = _state.isShowInfo;
     var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
+    var _styleMap = isShowInfo ? styles.displayNone : styles.displayBlock;
 
     return _react2.default.createElement(
       'div',
@@ -151,14 +187,20 @@ var MapChartItem = _react2.default.createClass({
       _react2.default.createElement(
         _ShowHide2.default,
         { isShow: isOpen },
+        !isShowInfo && this._renderTabToolbar(),
         _react2.default.createElement(
           'div',
           {
             id: 'map_' + caption,
-            style: { height: '400px' }
+            style: Object.assign({}, styles.mapDiv, _styleMap)
           },
-          'MapChartItem'
-        )
+          'MapChartItem Loading...'
+        ),
+        _react2.default.createElement(_PanelDataInfo2.default, {
+          isShow: isShowInfo,
+          info: config.info,
+          onClickChart: this._handlerClickChart
+        })
       )
     );
   }

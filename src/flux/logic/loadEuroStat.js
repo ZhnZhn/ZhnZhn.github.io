@@ -5,7 +5,7 @@ import ChartStore from '../stores/ChartStore';
 
 import ChartFn from '../../charts/ChartFn';
 import EuroStatApi from '../../api/EuroStatApi';
-import EuroStatAdapter from '../../adapters/EuroStatAdapter';
+import EuroStatAdapter from '../../adapters/eurostat/EuroStatAdapter';
 
 const _loadToChartComp = function(option, onCompleted, onFailed){
   fnFetch({

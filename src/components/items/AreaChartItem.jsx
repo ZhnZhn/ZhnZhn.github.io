@@ -55,6 +55,12 @@ const styles = {
     textOverflow : 'ellipsis',
     overflow : 'hidden',
     float : 'left'
+  },
+  tabDiv : {
+    position: 'relative',
+    height: '30px',
+    backgroundColor: 'transparent',
+    zIndex: 2
   }
 }
 
@@ -271,7 +277,7 @@ const AreaChartItem = React.createClass({
     ) : undefined;
 
     return (
-      <div style={ {position: 'relative', height: '30px', backgroundColor: 'transparent', zIndex: 2} }>
+      <div style={styles.tabDiv}>
          {_btIndicator}
          {_btLegend}
          {_bt2HChart}

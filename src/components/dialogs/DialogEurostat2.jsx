@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
-import EuroStatFn from '../../adapters/EuroStatFn';
+import EuroStatFn from '../../adapters/eurostat/EuroStatFn';
 
 import ZhDialog from '../ZhDialog';
 

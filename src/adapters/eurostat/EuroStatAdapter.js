@@ -1,4 +1,5 @@
-import ChartConfig from '../charts/ChartConfig';
+import ChartConfig from '../../charts/ChartConfig';
+
 import EuroStatFn from './EuroStatFn';
 
 const _fnCreateData = function(timeIndex, value){

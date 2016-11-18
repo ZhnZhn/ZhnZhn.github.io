@@ -21,7 +21,7 @@ var _EuroStatApi = require('../../api/EuroStatApi');
 
 var _EuroStatApi2 = _interopRequireDefault(_EuroStatApi);
 
-var _EuroStatAdapter = require('../../adapters/EuroStatAdapter');
+var _EuroStatAdapter = require('../../adapters/eurostat/EuroStatAdapter');
 
 var _EuroStatAdapter2 = _interopRequireDefault(_EuroStatAdapter);
 

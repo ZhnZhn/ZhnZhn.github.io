@@ -16,7 +16,7 @@ module.exports = {
             "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
             "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",
             "accounting",
-            "leaflet","jsonstat" 
+            "jsonstat"            
           ],
     erc: path.resolve('js', 'index.js')
   },
@@ -26,7 +26,7 @@ module.exports = {
       chunkFilename: "[chunkhash].js"
   },
   resolve: {
-    modulesDirectories: ['node_modules', 'local_modules']
+    modulesDirectories: ['local_modules', 'node_modules']
   },
   plugins : [
     new webpack.DefinePlugin({

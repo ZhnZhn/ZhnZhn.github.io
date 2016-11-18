@@ -6,17 +6,21 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _ChartConfig = require('../charts/ChartConfig');
+var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _Chart = require('../charts/Chart');
+var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
-var _QuandlFn = require('./QuandlFn2');
+var _QuandlFn = require('../QuandlFn2');
 
 var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
+
+var _ChoroplethMapSlice = require('./ChoroplethMapSlice');
+
+var _ChoroplethMapSlice2 = _interopRequireDefault(_ChoroplethMapSlice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,38 +42,7 @@ var _crSubTitle = function _crSubTitle(subTitle) {
   return '<span style="color:black;font-weight:bold;">' + subTitle + '</span>';
 };
 
-var _fnMapValueI = function _fnMapValueI(props, item) {
-  var group = props.group;
-  var value = item.value;
-
-  return group + '?indic=' + value;
-};
-var _fnMapValueZ = function _fnMapValueZ(props, item) {
-  var value = item.value;
-
-  return value + '?';
-};
-var _rMapValue = {
-  "I": _fnMapValueI,
-  "Z": _fnMapValueZ
-};
-
-var _fnMapSliceI = function _fnMapSliceI(props, item) {
-  var mapSlice = props.mapSlice;
-  var value = item.value;
-
-  return _extends({}, mapSlice, { indic: value });
-};
-var _fnMapSliceZ = function _fnMapSliceZ() {
-  return {};
-};
-
-var _rMapSlice = {
-  "I": _fnMapSliceI,
-  "Z": _fnMapSliceZ
-};
-
-var EuroStatFn = {
+var EuroStatFn = _extends({
   setDataAndInfo: function setDataAndInfo(_ref) {
     var config = _ref.config;
     var data = _ref.data;
@@ -160,28 +133,8 @@ var EuroStatFn = {
   },
   findMinY: function findMinY(data) {
     return _QuandlFn2.default.findMinY(data);
-  },
-  createMapValue: function createMapValue(props, item) {
-    var mapType = props.mapType;
-    var _fnCreate = _rMapValue[mapType];
-
-    if (_fnCreate) {
-      return _fnCreate(props, item);
-    } else {
-      return undefined;
-    }
-  },
-  createMapSlice: function createMapSlice(props, item) {
-    var mapType = props.mapType;
-    var _fnCreate = _rMapSlice[mapType];
-
-    if (_fnCreate) {
-      return _fnCreate(props, item);
-    } else {
-      return undefined;
-    }
   }
-};
+}, _ChoroplethMapSlice2.default);
 
 exports.default = EuroStatFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\EuroStatFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatFn.js.map

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import L from 'leaflet';
-
-import EuroStatToMap from '../../adapters/EuroStatToMap';
+import EuroStatToMap from '../../adapters/eurostat/EuroStatToMap';
 
 import SvgClose from '../SvgClose';
+import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
+import PanelDataInfo from '../zhn/PanelDataInfo';
 
 const styles = {
   rootDiv : {
@@ -43,7 +43,8 @@ const styles = {
   },
   timeSpan : {
     color : 'rgb(253, 179, 22)',
-    fontWeight : 'bold'
+    fontWeight : 'bold',
+    paddingLeft : '16px'
   },
   captionSpanClose : {
     display : 'inline-block',
@@ -55,52 +56,80 @@ const styles = {
     textOverflow : 'ellipsis',
     overflow : 'hidden',
     float : 'left'
+  },
+  tabDiv : {
+    position: 'relative',
+    height: '30px',
+    backgroundColor: 'transparent',
+    zIndex: 2
+  },
+  mapDiv : {
+    height : '400px'
+  },
+  displayBlock : {
+    display : 'block'
+  },
+  displayNone : {
+    display : 'none'
   }
 }
 
 
 const MapChartItem = React.createClass({
   getInitialState(){
+    this.map = undefined;
+
     return {
-      isOpen : true
+      isOpen : true,
+      isShowInfo : false
     }
   },
 
   _handlerToggleOpen(){
-     this.setState({ isOpen : !this.state.isOpen})
+     this.setState({ isOpen : !this.state.isOpen })
   },
 
   componentDidMount(){
-    const { caption } = this.props
-    const map = L.map(`map_${caption}`).setView([58.00, 10.00], 3);
+    const { caption, config } = this.props
+        , { json:jsonCube, zhMapSlice } = config
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-             id: 'addis',
-             attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-   }).addTo(map);
+    EuroStatToMap.drawChoroplethMap(`map_${caption}`, jsonCube, zhMapSlice)
+                 .then( (option) => {
+                     this.map = option.map;
+                     return undefined;
+                 });
+  },
 
+  _handlerClickInfo(){
+    this.setState({ isShowInfo : true });
+  },
+  _handlerClickChart(){
+    this.setState({ isShowInfo : false });
+  },
 
-   fetch('data/geo/eu-stat.geo.json')
-     .then( (response) => {
-       return response.json();
-     })
-     .then( (geoJson) => {
-        const { config } = this.props
-            , { json, zhMapSlice } = config
-         EuroStatToMap.createChoroplethMap(
-           json, geoJson, zhMapSlice, map
-         );
-     })
+  _renderTabToolbar(){
+    return (
+      <div style={styles.tabDiv}>
+         <ButtonTab
+            caption={'Info'}
+            isShow={this.state.isShowInfo}
+            onClick={this._handlerClickInfo}
+         />
+      </div>
+    );
   },
 
   render(){
     const { caption, config, onCloseItem } = this.props
         , { json={}, zhDialog={} } = config
         , { subtitle='', time='' } = zhDialog
-        , { isOpen } = this.state
+        , { isOpen, isShowInfo } = this.state
         , _styleCaption = isOpen
               ? styles.captionSpanOpen
-              : styles.captionSpanClose;
+              : styles.captionSpanClose
+        , _styleMap = isShowInfo
+              ? styles.displayNone
+              : styles.displayBlock;
 
     return (
       <div style={styles.rootDiv}>
@@ -119,12 +148,18 @@ const MapChartItem = React.createClass({
           <SvgClose onClose={onCloseItem} />
         </div>
         <ShowHide isShow={isOpen}>
+           {!isShowInfo && this._renderTabToolbar()}
            <div
               id={`map_${caption}`}
-              style={{ height: '400px'}}
+              style={Object.assign({}, styles.mapDiv, _styleMap)}
            >
-             MapChartItem
+             MapChartItem Loading...
            </div>
+           <PanelDataInfo
+              isShow={isShowInfo}
+              info={config.info}
+              onClickChart={this._handlerClickChart}
+           />
         </ShowHide>
       </div>
     )

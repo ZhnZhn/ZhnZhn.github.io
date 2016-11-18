@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ChartConfig = require('../charts/ChartConfig');
+var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
@@ -83,4 +83,4 @@ var EuroStatAdapter = {
 };
 
 exports.default = EuroStatAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\EuroStatAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatAdapter.js.map
