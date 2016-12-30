@@ -1,6 +1,6 @@
 
-import flow from 'lodash/flow';
-import sortBy from 'lodash/sortBy';
+import flow from 'lodash.flow';
+import sortBy from 'lodash.sortby';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';

@@ -4,7 +4,7 @@ import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 import HighchartsExporting from 'highcharts/lib/modules/exporting';
 import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
-import merge from 'lodash/merge';
+import merge from 'lodash.merge';
 
 import COLOR from '../constants/Color';
 import Chart from './Chart';

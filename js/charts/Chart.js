@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _merge = require('lodash/merge');
+var _lodash = require('lodash.merge');
 
-var _merge2 = _interopRequireDefault(_merge);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _highcharts = require('highcharts');
 
@@ -23,10 +23,10 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _fMonoColors = function _fMonoColors(_ref) {
-  var _ref$base = _ref.base1;
-  var base1 = _ref$base === undefined ? _Color2.default.MONO_BASE1 : _ref$base;
-  var _ref$base2 = _ref.base2;
-  var base2 = _ref$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref$base2;
+  var _ref$base = _ref.base1,
+      base1 = _ref$base === undefined ? _Color2.default.MONO_BASE1 : _ref$base,
+      _ref$base2 = _ref.base2,
+      base2 = _ref$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref$base2;
 
   var colors = [];
 
@@ -70,12 +70,11 @@ var Chart = {
   _monoColors: _fMonoColors({}),
 
   fMonoPieColors: function fMonoPieColors() {
-    var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-    var _ref2$base = _ref2.base1;
-    var base1 = _ref2$base === undefined ? _Color2.default.MONO_BASE1 : _ref2$base;
-    var _ref2$base2 = _ref2.base2;
-    var base2 = _ref2$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref2$base2;
+    var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref2$base = _ref2.base1,
+        base1 = _ref2$base === undefined ? _Color2.default.MONO_BASE1 : _ref2$base,
+        _ref2$base2 = _ref2.base2,
+        base2 = _ref2$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref2$base2;
 
     var colors = [];
 
@@ -89,9 +88,9 @@ var Chart = {
     return colors;
   },
   fCreateMonoColor: function fCreateMonoColor() {
-    var base = arguments.length <= 0 || arguments[0] === undefined ? _Color2.default.MONO_BASE1 : arguments[0];
-    var deltaColor = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
-    var opacity = arguments.length <= 2 || arguments[2] === undefined ? 0.75 : arguments[2];
+    var base = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _Color2.default.MONO_BASE1;
+    var deltaColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var opacity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.75;
 
     return _highcharts2.default.Color(base).brighten(this.COLOR_LOW_LEVEL + deltaColor).setOpacity(opacity).get();
   },
@@ -100,9 +99,9 @@ var Chart = {
     return this._monoColors[colorIndex];
   },
   fCreditsRightBottom: function fCreditsRightBottom() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       enabled: true,
       position: {
         align: 'right',
@@ -113,9 +112,9 @@ var Chart = {
     }, option);
   },
   fResetZoomButton: function fResetZoomButton() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       position: {
         align: 'right',
         verticalAlign: 'top',
@@ -149,9 +148,9 @@ var Chart = {
     config.subtitle = this.fSubtitle({ text: subtitle, y: this.STACKED_SUBTITLE_Y });
   },
   fTitle: function fTitle() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       text: '',
       floating: true,
       align: 'left',
@@ -166,9 +165,9 @@ var Chart = {
     }, option);
   },
   fSubtitle: function fSubtitle() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       text: '',
       floating: true,
       align: 'left',
@@ -287,9 +286,9 @@ var Chart = {
     };
   },
   fXAxisOpposite: function fXAxisOpposite() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       opposite: true,
       tickLength: 0,
       tickPosition: 'inside',
@@ -299,9 +298,9 @@ var Chart = {
     }, option);
   },
   fYAxisOpposite: function fYAxisOpposite() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       opposite: true,
       title: {
         text: ''
@@ -335,8 +334,8 @@ var Chart = {
     };
   },
   calcMinY: function calcMinY(_ref3) {
-    var minPoint = _ref3.minPoint;
-    var maxPoint = _ref3.maxPoint;
+    var minPoint = _ref3.minPoint,
+        maxPoint = _ref3.maxPoint;
 
     if (maxPoint > Number.NEGATIVE_INFINITY && minPoint < Number.POSITIVE_INFINITY) {
       return minPoint - (maxPoint - minPoint) * 30 / 180;
@@ -345,9 +344,9 @@ var Chart = {
     }
   },
   fPlotOptionsArea: function fPlotOptionsArea() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       lineColor: _Color2.default.AREA_HOVER_LINE,
       lineWidth: 0,
       marker: {
@@ -363,9 +362,9 @@ var Chart = {
     }, option);
   },
   fPlotOptionsColumn: function fPlotOptionsColumn() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       lineColor: _Color2.default.COLUMN_HOVER_LINE,
       lineWidth: 0,
       marker: {
@@ -381,9 +380,9 @@ var Chart = {
     }, option);
   },
   fPlotOptionsSeries: function fPlotOptionsSeries() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       states: {
         hover: {
           halo: {
@@ -398,9 +397,9 @@ var Chart = {
     }, option);
   },
   fLegend: function fLegend() {
-    var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _merge2.default)({
+    return (0, _lodash2.default)({
       symbolHeight: 14,
       symbolWidth: 14,
       symbolRadius: 7,
@@ -416,8 +415,8 @@ var Chart = {
     }, option);
   },
   fSeriaMarker: function fSeriaMarker(_ref4) {
-    var color = _ref4.color;
-    var symbol = _ref4.symbol;
+    var color = _ref4.color,
+        symbol = _ref4.symbol;
 
     return {
       radius: 4,

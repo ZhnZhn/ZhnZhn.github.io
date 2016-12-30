@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _merge = require('lodash/merge');
+var _lodash = require('lodash.merge');
 
-var _merge2 = _interopRequireDefault(_merge);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84,13 +84,13 @@ var ChartExportConfig = {
     return this.DEFAULT;
   },
   fBlackAxis: function fBlackAxis() {
-    return (0, _merge2.default)({}, this.BLACK_AXIS);
+    return (0, _lodash2.default)({}, this.BLACK_AXIS);
   },
   fBlackAxisTitle: function fBlackAxisTitle() {
-    return (0, _merge2.default)({}, this.BLACK_AXIS, this.BLACK_TITLE);
+    return (0, _lodash2.default)({}, this.BLACK_AXIS, this.BLACK_TITLE);
   },
   fBlackAll: function fBlackAll() {
-    return (0, _merge2.default)({}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
+    return (0, _lodash2.default)({}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
   },
   createOptionStyles: function createOptionStyles() {
     return [{ caption: 'Default', value: {} }, {

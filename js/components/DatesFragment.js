@@ -32,10 +32,11 @@ var DatesFragment = _react2.default.createClass({
   render: function render() {
     var _this = this;
 
-    var _props = this.props;
-    var initFromDate = _props.initFromDate;
-    var initToDate = _props.initToDate;
-    var onTestDate = _props.onTestDate;
+    var _props = this.props,
+        initFromDate = _props.initFromDate,
+        initToDate = _props.initToDate,
+        nForecastDate = _props.nForecastDate,
+        onTestDate = _props.onTestDate;
 
     return _react2.default.createElement(
       'div',
@@ -70,6 +71,7 @@ var DatesFragment = _react2.default.createClass({
             return _this.toDate = c;
           },
           initValue: initToDate,
+          nForecastDate: nForecastDate,
           errorMsg: 'YYYY-MM-DD format must be',
           onTest: onTestDate
         })
@@ -83,14 +85,20 @@ var DatesFragment = _react2.default.createClass({
     };
   },
   getValidation: function getValidation() {
-    var msgOnNotValidFormat = this.props.msgOnNotValidFormat;
-    var datesMsg = [];
+    var msgOnNotValidFormat = this.props.msgOnNotValidFormat,
+        datesMsg = [];
+
     if (!this.fromDate.isValid()) {
       datesMsg.push(msgOnNotValidFormat('From Date'));
     }
     if (!this.toDate.isValid()) {
       datesMsg.push(msgOnNotValidFormat('To Date'));
     }
+
+    if (this.fromDate.getValue().trim() > this.toDate.getValue().trim()) {
+      datesMsg.push('From Date is near that To Date');
+    }
+
     if (datesMsg.length > 0) {
       return { isValid: false, datesMsg: datesMsg };
     }

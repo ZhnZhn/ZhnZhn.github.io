@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fCreatePieConfig = undefined;
 
-var _sortBy = require('lodash/sortBy');
+var _lodash = require('lodash.sortby');
 
-var _sortBy2 = _interopRequireDefault(_sortBy);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _big = require('big.js');
 
@@ -47,12 +47,12 @@ var _fnAddPercentToItem = function _fnAddPercentToItem(item, bTotal) {
 };
 
 var _fnCreateTopDonutData = function _fnCreateTopDonutData(_ref) {
-  var _ref$data = _ref.data;
-  var data = _ref$data === undefined ? [] : _ref$data;
-  var _ref$bTotal = _ref.bTotal;
-  var bTotal = _ref$bTotal === undefined ? (0, _big2.default)('0.0') : _ref$bTotal;
-  var _ref$isPercent = _ref.isPercent;
-  var isPercent = _ref$isPercent === undefined ? false : _ref$isPercent;
+  var _ref$data = _ref.data,
+      data = _ref$data === undefined ? [] : _ref$data,
+      _ref$bTotal = _ref.bTotal,
+      bTotal = _ref$bTotal === undefined ? (0, _big2.default)('0.0') : _ref$bTotal,
+      _ref$isPercent = _ref.isPercent,
+      isPercent = _ref$isPercent === undefined ? false : _ref$isPercent;
 
   var arr = [],
       _bTotal90 = bTotal.times(0.9);
@@ -83,19 +83,20 @@ var _fnCreateTopDonutData = function _fnCreateTopDonutData(_ref) {
 };
 
 var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json, option) {
-  var config = _ChartConfig2.default.fBasePieConfig();
-  var _option$sliceItems = option.sliceItems;
-  var items = _option$sliceItems === undefined ? [] : _option$sliceItems;
-  var _option$value = option.value;
-  var value = _option$value === undefined ? '' : _option$value;
-  var zhSeriaId = value + '_' + _Type.ChartType.SEMI_DONUT;
-  var jsonData = json.dataset && json.dataset.data ? json.dataset.data : [];
-  var jsonData1 = jsonData[0];
-  var jsonData2 = jsonData[1];
-  var _year1 = jsonData1[0] ? jsonData1[0].split('-')[0] : '';
-  var _year2 = jsonData2[0] ? jsonData2[0].split('-')[0] : '';
-  var _data1 = [];
-  var _data2 = [];
+  var config = _ChartConfig2.default.fBasePieConfig(),
+      _option$sliceItems = option.sliceItems,
+      items = _option$sliceItems === undefined ? [] : _option$sliceItems,
+      _option$value = option.value,
+      value = _option$value === undefined ? '' : _option$value,
+      zhSeriaId = value + '_' + _Type.ChartType.SEMI_DONUT,
+      jsonData = json.dataset && json.dataset.data ? json.dataset.data : [],
+      jsonData1 = jsonData[0],
+      jsonData2 = jsonData[1],
+      _year1 = jsonData1[0] ? jsonData1[0].split('-')[0] : '',
+      _year2 = jsonData2[0] ? jsonData2[0].split('-')[0] : '',
+      _data1 = [],
+      _data2 = [];
+
 
   var _bTotal1 = (0, _big2.default)('0.0');
   var _bTotal2 = (0, _big2.default)('0.0');
@@ -116,12 +117,12 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
   });
 
   var _dataTop1 = _fnCreateTopDonutData({
-    data: (0, _sortBy2.default)(_data1, 'y').reverse(),
+    data: (0, _lodash2.default)(_data1, 'y').reverse(),
     bTotal: _bTotal1,
     isPercent: true
   });
   var _dataTop2 = _fnCreateTopDonutData({
-    data: (0, _sortBy2.default)(_data2, 'y').reverse(),
+    data: (0, _lodash2.default)(_data2, 'y').reverse(),
     bTotal: _bTotal2
   });
 

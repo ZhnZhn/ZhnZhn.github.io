@@ -14,7 +14,7 @@ const DatesFragment = React.createClass({
   },
 
   render(){
-    const {initFromDate, initToDate, onTestDate} = this.props;
+    const {initFromDate, initToDate, nForecastDate, onTestDate} = this.props;
     return (
         <div>
           <div style={styles.rowDiv}>
@@ -35,6 +35,7 @@ const DatesFragment = React.createClass({
             <ZhDateField
                  ref={c => this.toDate = c}
                  initValue={initToDate}
+                 nForecastDate={nForecastDate}
                  errorMsg="YYYY-MM-DD format must be"
                  onTest={onTestDate}
             />

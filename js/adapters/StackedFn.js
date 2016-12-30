@@ -7,9 +7,9 @@ exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal 
 
 var _rFactorySeria2;
 
-var _sortBy = require('lodash/sortBy');
+var _lodash = require('lodash.sortby');
 
-var _sortBy2 = _interopRequireDefault(_sortBy);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _big = require('big.js');
 
@@ -36,8 +36,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var _rFactorySeria = (_rFactorySeria2 = {}, _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA_PERCENT, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN, _ChartConfig2.default.fStackedColumnSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN_PERCENT, _ChartConfig2.default.fStackedColumnSeria), _rFactorySeria2);
 
 var fnCalcTotal = exports.fnCalcTotal = function fnCalcTotal() {
-  var jsonData = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-  var items = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+  var jsonData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var items = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
   var _bTotal = (0, _big2.default)('0.0');
   for (var i = 0, max = items.length; i < max; i++) {
@@ -68,7 +68,7 @@ var _fnCreateReferenceDataAndTotal = function _fnCreateReferenceDataAndTotal(jso
     }
   });
 
-  _data = (0, _sortBy2.default)(_data, 'y').reverse();
+  _data = (0, _lodash2.default)(_data, 'y').reverse();
 
   return { referenceData: _data, bTotal: _bTotal };
 };
@@ -92,33 +92,33 @@ var _fnCreateDataTopPercent = function _fnCreateDataTopPercent(data, bTotal, per
 };
 
 var _fnInitSeries = function _fnInitSeries(_ref) {
-  var items = _ref.items;
-  var zhSeriaId = _ref.zhSeriaId;
-  var chartType = _ref.chartType;
-  var fSeria = _ref.fSeria;
+  var items = _ref.items,
+      zhSeriaId = _ref.zhSeriaId,
+      chartType = _ref.chartType,
+      fSeria = _ref.fSeria;
 
   return items.map(function (item, itemIndex) {
-    var color = _Chart2.default.fnGetMonoColor(itemIndex);
-    var name = item.name;
+    var color = _Chart2.default.fnGetMonoColor(itemIndex),
+        name = item.name;
 
     return fSeria({ zhSeriaId: zhSeriaId, name: name, color: color });
   });
 };
 
 var _fnCalcPercent = function _fnCalcPercent() {
-  var bTotal = arguments.length <= 0 || arguments[0] === undefined ? (0, _big2.default)('0.0') : arguments[0];
-  var bValue = arguments.length <= 1 || arguments[1] === undefined ? (0, _big2.default)('0.0') : arguments[1];
+  var bTotal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _big2.default)('0.0');
+  var bValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (0, _big2.default)('0.0');
 
   return !bTotal.eq((0, _big2.default)(0.0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) + '%' : (0, _big2.default)(0.0) + '%';
 };
 
 var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
-  var jsonData = _ref2.jsonData;
-  var items100 = _ref2.items100;
-  var items90 = _ref2.items90;
-  var zhSeriaId = _ref2.zhSeriaId;
-  var chartType = _ref2.chartType;
-  var stacking = _ref2.stacking;
+  var jsonData = _ref2.jsonData,
+      items100 = _ref2.items100,
+      items90 = _ref2.items90,
+      zhSeriaId = _ref2.zhSeriaId,
+      chartType = _ref2.chartType,
+      stacking = _ref2.stacking;
 
   var fSeria = _rFactorySeria[chartType],
       series = _fnInitSeries({ items: items90, zhSeriaId: zhSeriaId, chartType: chartType, fSeria: fSeria }),
@@ -172,28 +172,24 @@ var _fnCreateStackedSeries = function _fnCreateStackedSeries(_ref2) {
 };
 
 var fnCreateStackedConfig = exports.fnCreateStackedConfig = function fnCreateStackedConfig(_ref3) {
-  var jsonData = _ref3.jsonData;
-  var items100 = _ref3.items100;
-  var zhSeriaId = _ref3.zhSeriaId;
-  var _ref3$chartType = _ref3.chartType;
-  var chartType = _ref3$chartType === undefined ? _Type.ChartType.STACKED_AREA : _ref3$chartType;
-  var _ref3$stacking = _ref3.stacking;
-  var stacking = _ref3$stacking === undefined ? 'normal' : _ref3$stacking;
+  var jsonData = _ref3.jsonData,
+      items100 = _ref3.items100,
+      zhSeriaId = _ref3.zhSeriaId,
+      _ref3$chartType = _ref3.chartType,
+      chartType = _ref3$chartType === undefined ? _Type.ChartType.STACKED_AREA : _ref3$chartType,
+      _ref3$stacking = _ref3.stacking,
+      stacking = _ref3$stacking === undefined ? 'normal' : _ref3$stacking;
 
-  var _fnCreateReferenceDat = _fnCreateReferenceDataAndTotal(jsonData[0], items100);
-
-  var referenceData = _fnCreateReferenceDat.referenceData;
-  var bTotal = _fnCreateReferenceDat.bTotal;
-  var items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9);
-  var bPrevTotal = fnCalcTotal(jsonData[1], items100);
-
-  var _fnCreateStackedSerie = _fnCreateStackedSeries({
+  var _fnCreateReferenceDat = _fnCreateReferenceDataAndTotal(jsonData[0], items100),
+      referenceData = _fnCreateReferenceDat.referenceData,
+      bTotal = _fnCreateReferenceDat.bTotal,
+      items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9),
+      bPrevTotal = fnCalcTotal(jsonData[1], items100),
+      _fnCreateStackedSerie = _fnCreateStackedSeries({
     jsonData: jsonData, items100: items100, items90: items90, zhSeriaId: zhSeriaId, chartType: chartType, stacking: stacking
-  });
-
-  var series = _fnCreateStackedSerie.series;
-  var categories = _fnCreateStackedSerie.categories;
-
+  }),
+      series = _fnCreateStackedSerie.series,
+      categories = _fnCreateStackedSerie.categories;
 
   return { bNowTotal: bTotal, bPrevTotal: bPrevTotal, series: series, categories: categories };
 };

@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _fnForMonthSelect = function _fnForMonthSelect() {
-	var mapDateDf = arguments.length <= 0 || arguments[0] === undefined ? 2 : arguments[0];
+	var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
 
 	var options = [],
 	    dNow = new Date(Date.now());
@@ -41,7 +41,7 @@ var _fnForMonthSelect = function _fnForMonthSelect() {
 };
 
 var _fnForQuarterSelect = function _fnForQuarterSelect() {
-	var mapDateDf = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+	var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
 	var options = [],
 	    dNow = new Date(Date.now());
@@ -75,7 +75,7 @@ var _fnForQuarterSelect = function _fnForQuarterSelect() {
 };
 
 var _fnForYearSelect = function _fnForYearSelect() {
-	var mapDateDf = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+	var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
 	var options = [],
 	    dNow = new Date(Date.now());
@@ -99,6 +99,8 @@ var _fnForYearSelect = function _fnForYearSelect() {
 
 var DateUtils = {
 	isValidDate: function isValidDate(str) {
+		var nForecastDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
 		// STRING FORMAT yyyy-mm-dd
 
 		if (Object.prototype.toString.call(str) !== "[object String]" || !str || str.trim().length !== 10) {
@@ -122,7 +124,7 @@ var DateUtils = {
 		var minYear = 1999;
 
 		// YEAR CHECK
-		if (m[1].length < 4 || m[1] < minYear || m[1] > thisYear) {
+		if (m[1].length < 4 || m[1] < minYear || m[1] > thisYear + nForecastDate) {
 			return false;
 		}
 		// MONTH CHECK
@@ -180,7 +182,7 @@ var DateUtils = {
 		return ("0" + d.getUTCDate()).slice(-2) + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + d.getUTCFullYear();
 	},
 	createEurostatSelect: function createEurostatSelect() {
-		var frequency = arguments.length <= 0 || arguments[0] === undefined ? 'M' : arguments[0];
+		var frequency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'M';
 		var mapDateDf = arguments[1];
 
 		if (frequency === 'M') {

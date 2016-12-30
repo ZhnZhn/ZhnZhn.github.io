@@ -87,12 +87,12 @@ const DialogType5 = React.createClass({
            subtitle : this.one.caption
          }
      default:
-         const _dataColumn = (three) ? three.value : 1;
+         //const _dataColumn = (three) ? three.value : 1;
          return {
            value : fnValue(this.one.value, two.value),
            fromDate: fromDate,
            toDate: toDate,
-           dataColumn : _dataColumn,
+           dataColumn : (three) ? three.value : 1,
            loadId : loadId,
            title : `${this.one.caption}:${two.caption}`,
            subtitle : three.caption
@@ -110,7 +110,7 @@ const DialogType5 = React.createClass({
            caption, isShow, onShow,
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
-           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
+           initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , { isShowDate, validationMessages } = this.state
         , _commandButtons = [
@@ -158,6 +158,7 @@ const DialogType5 = React.createClass({
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
+                 nForecastDate={nForecastDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />

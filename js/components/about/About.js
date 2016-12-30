@@ -79,9 +79,10 @@ var About = _react2.default.createClass({
     this.setState({ isShow: false });
   },
   render: function render() {
-    var isShow = this.state.isShow;
-    var _classOpen = isShow ? "show-popup" : null;
-    var _styleOpen = isShow ? { display: 'block' } : { display: 'none' };
+    var isShow = this.state.isShow,
+        _classOpen = isShow ? "show-popup" : null,
+        _styleOpen = isShow ? { display: 'block' } : { display: 'none' };
+
     return _react2.default.createElement(
       'div',
       {
@@ -283,13 +284,38 @@ var About = _react2.default.createClass({
               _react2.default.createElement(
                 _Token2.default,
                 { color: '#2f7ed8' },
-                '50 calls per day'
+                '50 per day/1 at a time'
               ),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'gray' },
                 ').'
               )
+            )
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'gray' },
+              'According to Quandl, anonymous requests can be deprecated soon. With API Key'
+            )
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'gray' },
+              'you will be have (',
+              _react2.default.createElement(
+                _Token2.default,
+                { color: '#2f7ed8' },
+                '50 000 per day/1 at a time'
+              ),
+              '). It\'s free of charge to receive.'
             )
           ),
           _react2.default.createElement('br', null),

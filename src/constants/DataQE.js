@@ -190,6 +190,7 @@ const DataQE = {
       dialogProps : {
         descrUrl: './data/quandl/imf-crosscountry-metric.html',
         nInitFromDate : 7,
+        nForecastDate : 5,
         oneCaption : 'Country',
         oneURI : './data/quandl/iso3-countries.json',
         oneJsonProp : 'countries',

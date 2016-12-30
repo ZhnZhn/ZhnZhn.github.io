@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _rToConfig2;
 
-var _flow = require('lodash/flow');
+var _lodash = require('lodash.flow');
 
-var _flow2 = _interopRequireDefault(_flow);
+var _lodash2 = _interopRequireDefault(_lodash);
 
-var _sortBy = require('lodash/sortBy');
+var _lodash3 = require('lodash.sortby');
 
-var _sortBy2 = _interopRequireDefault(_sortBy);
+var _lodash4 = _interopRequireDefault(_lodash3);
 
 var _big = require('big.js');
 
@@ -75,10 +75,10 @@ var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
 };
 
 var _fnCheckExtrems = function _fnCheckExtrems(result) {
-  var point = result.point;
-  var yPointIndex = result.yPointIndex;
-  var maxPoint = result.maxPoint;
-  var minPoint = result.minPoint;
+  var point = result.point,
+      yPointIndex = result.yPointIndex,
+      maxPoint = result.maxPoint,
+      minPoint = result.minPoint;
 
   if (!(point[yPointIndex] == null) && point[yPointIndex] >= maxPoint) {
     result.maxPoint = point[yPointIndex];
@@ -91,10 +91,10 @@ var _fnCheckExtrems = function _fnCheckExtrems(result) {
 };
 
 var _fnAddToSeria = function _fnAddToSeria(result) {
-  var seria = result.seria;
-  var dateUTC = result.dateUTC;
-  var point = result.point;
-  var yPointIndex = result.yPointIndex;
+  var seria = result.seria,
+      dateUTC = result.dateUTC,
+      point = result.point,
+      yPointIndex = result.yPointIndex;
 
   seria.push([dateUTC, point[yPointIndex]]);
 
@@ -102,10 +102,10 @@ var _fnAddToSeria = function _fnAddToSeria(result) {
 };
 
 var _fnAddSplitRatio = function _fnAddSplitRatio(splitRationIndex, result) {
-  var point = result.point;
-  var dateUTC = result.dateUTC;
-  var yPointIndex = result.yPointIndex;
-  var dataSplitRatio = result.dataSplitRatio;
+  var point = result.point,
+      dateUTC = result.dateUTC,
+      yPointIndex = result.yPointIndex,
+      dataSplitRatio = result.dataSplitRatio;
 
   if (point[splitRationIndex] !== 1) {
     var x = dateUTC,
@@ -118,10 +118,10 @@ var _fnAddSplitRatio = function _fnAddSplitRatio(splitRationIndex, result) {
 };
 
 var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
-  var point = result.point;
-  var dateUTC = result.dateUTC;
-  var yPointIndex = result.yPointIndex;
-  var dataExDividend = result.dataExDividend;
+  var point = result.point,
+      dateUTC = result.dateUTC,
+      yPointIndex = result.yPointIndex,
+      dataExDividend = result.dataExDividend;
 
 
   if (point[exDividendIndex] !== 0) {
@@ -142,19 +142,19 @@ var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
 };
 
 var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
-  var volume = optionIndex.volume;
-  var _optionIndex$open = optionIndex.open;
-  var open = _optionIndex$open === undefined ? 1 : _optionIndex$open;
-  var _optionIndex$close = optionIndex.close;
-  var close = _optionIndex$close === undefined ? 4 : _optionIndex$close;
-  var _optionIndex$low = optionIndex.low;
-  var low = _optionIndex$low === undefined ? 3 : _optionIndex$low;
-  var _optionIndex$high = optionIndex.high;
-  var high = _optionIndex$high === undefined ? 2 : _optionIndex$high;
-  var point = result.point;
-  var dateUTC = result.dateUTC;
-  var dataVolume = result.dataVolume;
-  var dataVolumeColumn = result.dataVolumeColumn;
+  var volume = optionIndex.volume,
+      _optionIndex$open = optionIndex.open,
+      open = _optionIndex$open === undefined ? 1 : _optionIndex$open,
+      _optionIndex$close = optionIndex.close,
+      close = _optionIndex$close === undefined ? 4 : _optionIndex$close,
+      _optionIndex$low = optionIndex.low,
+      low = _optionIndex$low === undefined ? 3 : _optionIndex$low,
+      _optionIndex$high = optionIndex.high,
+      high = _optionIndex$high === undefined ? 2 : _optionIndex$high,
+      point = result.point,
+      dateUTC = result.dateUTC,
+      dataVolume = result.dataVolume,
+      dataVolumeColumn = result.dataVolumeColumn;
 
   dataVolume.push([dateUTC, point[volume]]);
   if (point[close] > point[open]) {
@@ -183,13 +183,14 @@ var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
 };
 
 var _fnAddATH = function _fnAddATH(optionIndex, result) {
-  var _optionIndex$open2 = optionIndex.open;
-  var open = _optionIndex$open2 === undefined ? 1 : _optionIndex$open2;
-  var dateUTC = result.dateUTC;
-  var point = result.point;
-  var seria = result.seria;
-  var dataATH = result.dataATH;
-  var len = seria.length;
+  var _optionIndex$open2 = optionIndex.open,
+      open = _optionIndex$open2 === undefined ? 1 : _optionIndex$open2,
+      dateUTC = result.dateUTC,
+      point = result.point,
+      seria = result.seria,
+      dataATH = result.dataATH,
+      len = seria.length;
+
 
   if (len > 1) {
     var prevPoint = seria[len - 2],
@@ -219,16 +220,16 @@ var _fnAddATH = function _fnAddATH(optionIndex, result) {
 };
 
 var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
-  var _optionIndex$open3 = optionIndex.open;
-  var open = _optionIndex$open3 === undefined ? 1 : _optionIndex$open3;
-  var _optionIndex$high2 = optionIndex.high;
-  var high = _optionIndex$high2 === undefined ? 2 : _optionIndex$high2;
-  var _optionIndex$low2 = optionIndex.low;
-  var low = _optionIndex$low2 === undefined ? 3 : _optionIndex$low2;
-  var dateUTC = result.dateUTC;
-  var yPointIndex = result.yPointIndex;
-  var point = result.point;
-  var dataHighLow = result.dataHighLow;
+  var _optionIndex$open3 = optionIndex.open,
+      open = _optionIndex$open3 === undefined ? 1 : _optionIndex$open3,
+      _optionIndex$high2 = optionIndex.high,
+      high = _optionIndex$high2 === undefined ? 2 : _optionIndex$high2,
+      _optionIndex$low2 = optionIndex.low,
+      low = _optionIndex$low2 === undefined ? 3 : _optionIndex$low2,
+      dateUTC = result.dateUTC,
+      yPointIndex = result.yPointIndex,
+      point = result.point,
+      dataHighLow = result.dataHighLow;
 
 
   var _closeValue = point[yPointIndex],
@@ -252,9 +253,9 @@ var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
 };
 
 var _fnAddCustomSeries = function _fnAddCustomSeries(columns, result) {
-  var dateUTC = result.dateUTC;
-  var point = result.point;
-  var legendSeries = result.legendSeries;
+  var dateUTC = result.dateUTC,
+      point = result.point,
+      legendSeries = result.legendSeries;
 
   for (var i = 0, max = columns.length; i < max; i++) {
     legendSeries[i].data.push([dateUTC, point[columns[i]]]);
@@ -324,11 +325,9 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) 
   var seriaColumnNames = option.seriaColumnNames;
 
   if (seriaColumnNames) {
-    var _fLegendConfig2 = _fLegendConfig(seriaColumnNames, column_names);
-
-    var legendSeries = _fLegendConfig2.legendSeries;
-    var columns = _fLegendConfig2.columns;
-
+    var _fLegendConfig2 = _fLegendConfig(seriaColumnNames, column_names),
+        legendSeries = _fLegendConfig2.legendSeries,
+        columns = _fLegendConfig2.columns;
 
     if (legendSeries.length !== 0) {
       result.legendSeries = legendSeries;
@@ -337,17 +336,16 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) 
   }
 
   return {
-    fnPointsFlow: (0, _flow2.default)(fnStep),
+    fnPointsFlow: (0, _lodash2.default)(fnStep),
     result: result
   };
 };
 
 var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex, option) {
-  var _fnCreatePointFlow2 = _fnCreatePointFlow(json, yPointIndex, option);
-
-  var fnPointsFlow = _fnCreatePointFlow2.fnPointsFlow;
-  var result = _fnCreatePointFlow2.result;
-  var points = (0, _sortBy2.default)(json.dataset.data, '0');
+  var _fnCreatePointFlow2 = _fnCreatePointFlow(json, yPointIndex, option),
+      fnPointsFlow = _fnCreatePointFlow2.fnPointsFlow,
+      result = _fnCreatePointFlow2.result,
+      points = (0, _lodash4.default)(json.dataset.data, '0');
 
   for (var i = 0, max = points.length; i < max; i++) {
     fnPointsFlow(points[i], result);
@@ -391,8 +389,8 @@ var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
 };
 
 var _fnSetChartTitle = function _fnSetChartTitle(config, option) {
-  var title = option.title;
-  var subtitle = option.subtitle;
+  var title = option.title,
+      subtitle = option.subtitle;
 
   if (title) {
     _Chart2.default.setDefaultTitle(config, title, subtitle);
@@ -413,13 +411,13 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
   }
 
   for (var i = 0, max = legendSeries.length; i < max; i++) {
-    var _legendSeries$i = legendSeries[i];
-    var data = _legendSeries$i.data;
-    var name = _legendSeries$i.name;
-    var color = _legendSeries$i.color;
-    var symbol = _legendSeries$i.symbol;
-    var isSecondAxes = _legendSeries$i.isSecondAxes;
-    var seria = _ChartConfig2.default.fSeries({
+    var _legendSeries$i = legendSeries[i],
+        data = _legendSeries$i.data,
+        name = _legendSeries$i.name,
+        color = _legendSeries$i.color,
+        symbol = _legendSeries$i.symbol,
+        isSecondAxes = _legendSeries$i.isSecondAxes,
+        seria = _ChartConfig2.default.fSeries({
       zhSeriaId: i + '_' + chartId,
       zhValueText: name,
       visible: false,
@@ -451,29 +449,27 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
 };
 
 var fnGetSeries = function fnGetSeries(config, json, option) {
-  var yPointIndex = option.dataColumn;
-  var chartId = option.value;
+  var yPointIndex = option.dataColumn,
+      chartId = option.value;
 
 
   _fnSetChartTitle(config, option);
   config.zhConfig = _QuandlFn2.default.createZhConfig(option);
   config.info = _QuandlFn2.default.createDatasetInfo(json);
 
-  var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex, option);
-
-  var seria = _fnSeriesPipe2.seria;
-  var minPoint = _fnSeriesPipe2.minPoint;
-  var maxPoint = _fnSeriesPipe2.maxPoint;
-  var minY = _fnSeriesPipe2.minY;
-  var dataExDividend = _fnSeriesPipe2.dataExDividend;
-  var dataSplitRatio = _fnSeriesPipe2.dataSplitRatio;
-  var dataVolume = _fnSeriesPipe2.dataVolume;
-  var dataVolumeColumn = _fnSeriesPipe2.dataVolumeColumn;
-  var dataATH = _fnSeriesPipe2.dataATH;
-  var dataHighLow = _fnSeriesPipe2.dataHighLow;
-  var legendSeries = _fnSeriesPipe2.legendSeries;
-  var zhPoints = _fnSeriesPipe2.zhPoints;
-
+  var _fnSeriesPipe2 = _fnSeriesPipe(json, yPointIndex, option),
+      seria = _fnSeriesPipe2.seria,
+      minPoint = _fnSeriesPipe2.minPoint,
+      maxPoint = _fnSeriesPipe2.maxPoint,
+      minY = _fnSeriesPipe2.minY,
+      dataExDividend = _fnSeriesPipe2.dataExDividend,
+      dataSplitRatio = _fnSeriesPipe2.dataSplitRatio,
+      dataVolume = _fnSeriesPipe2.dataVolume,
+      dataVolumeColumn = _fnSeriesPipe2.dataVolumeColumn,
+      dataATH = _fnSeriesPipe2.dataATH,
+      dataHighLow = _fnSeriesPipe2.dataHighLow,
+      legendSeries = _fnSeriesPipe2.legendSeries,
+      zhPoints = _fnSeriesPipe2.zhPoints;
 
   _fnCheckIsMfi(config, json, zhPoints);
   config.zhFnAddSeriesSma = _IndicatorSma.fnAddSeriesSma;
@@ -500,13 +496,13 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
 };
 
 var fnConfigAxes = function fnConfigAxes(result) {
-  var config = result.config;
-  var minPoint = result.minPoint;
-  var maxPoint = result.maxPoint;
-  var minY = result.minY;
-  var _maxPoint = parseFloat((0, _big2.default)(maxPoint).round(4).toString(), 10);
-  var _minPoint = parseFloat((0, _big2.default)(minPoint).round(4).toString(), 10);
-  var plotLines = config.yAxis.plotLines;
+  var config = result.config,
+      minPoint = result.minPoint,
+      maxPoint = result.maxPoint,
+      minY = result.minY,
+      _maxPoint = parseFloat((0, _big2.default)(maxPoint).round(4).toString(), 10),
+      _minPoint = parseFloat((0, _big2.default)(minPoint).round(4).toString(), 10),
+      plotLines = config.yAxis.plotLines;
 
   plotLines[0].value = _maxPoint;
   plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(_maxPoint);
@@ -518,11 +514,11 @@ var fnConfigAxes = function fnConfigAxes(result) {
   return result;
 };
 
-var fnQuandlFlow = (0, _flow2.default)(fnGetSeries, fnConfigAxes);
+var fnQuandlFlow = (0, _lodash2.default)(fnGetSeries, fnConfigAxes);
 
 var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
-  var config = _ChartConfig2.default.fBaseAreaConfig();
-  var columnName = option.columnName;
+  var config = _ChartConfig2.default.fBaseAreaConfig(),
+      columnName = option.columnName;
 
 
   option.dataColumn = _QuandlFn2.default.getDataColumnIndex(json, option);
@@ -537,22 +533,22 @@ var _rToConfig = (_rToConfig2 = {}, _defineProperty(_rToConfig2, _Type.ChartType
 
 var QuandlAdapter = {
   toConfig: function toConfig(json, option) {
-    var _option$seriaType = option.seriaType;
-    var seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType;
+    var _option$seriaType = option.seriaType,
+        seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType;
 
 
     return _rToConfig[seriaType](json, option);
   },
   toSeries: function toSeries(json, option) {
-    var chartId = option.value;
-    var parentId = option.parentId;
-    var yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option);
+    var chartId = option.value,
+        parentId = option.parentId,
+        yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option);
 
     var data = json.dataset.data.map(function (point, index) {
       var arrDate = point[0].split('-');
       return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
     });
-    data = (0, _sortBy2.default)(data, '0');
+    data = (0, _lodash4.default)(data, '0');
 
     var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
         configSeries = _ChartConfig2.default.fSeries();

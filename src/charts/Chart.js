@@ -1,5 +1,5 @@
 
-import merge from 'lodash/merge';
+import merge from 'lodash.merge';
 import Highcharts from 'highcharts';
 
 import COLOR from '../constants/Color';
@@ -171,7 +171,7 @@ const Chart = {
  },
 
  fNavigation(){
-   return {     
+   return {
      buttonOptions : {
        y : 5
      }

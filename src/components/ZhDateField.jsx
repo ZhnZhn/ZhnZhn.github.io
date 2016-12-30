@@ -1,13 +1,13 @@
 import React from 'react';
 
-const styles = {
-  rootDiv: {
+const STYLE = {
+  ROOT : {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     width: '250px'
   },
-  inputText: {
+  INPUT : {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -18,7 +18,7 @@ const styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  inputHr: {
+  HR : {
     borderWidth: 'medium medium 1px',
     borderStyle: 'none none solid',
     borderColor: 'red',
@@ -28,7 +28,13 @@ const styles = {
     marginBottom: '5px',
     width: '230px'
   },
-  errMsg: {
+  HR_VALID : {
+     borderColor: '#1B75BB'
+  },
+  HR_NOT_VALID : {
+     borderColor: '#F44336'
+  },
+  ERR_MSG : {
     color: '#F44336',
     paddingLeft: '10px',
     paddingBottom: '5px',
@@ -39,8 +45,8 @@ const styles = {
 
 
 const ZhDateField = React.createClass({
-  getInitialState: function(){
-      let initValue = this.props.initValue ? this.props.initValue : '';
+  getInitialState(){
+      const initValue = this.props.initValue ? this.props.initValue : '';
 
       return {
         value: initValue,
@@ -49,62 +55,75 @@ const ZhDateField = React.createClass({
       }
   },
 
-  _handlerChangeValue: function(event){
-    this.state.value = event.target.value;
-    if (!this.props.onTest(this.state.value)) {
-      this.state.isValid = false;
+  _handlerChangeValue(event){
+    const { onTest, nForecastDate } = this.props
+         , value = event.target.value
+    if (!onTest(value, nForecastDate)){
+      this.setState({
+         value : value,
+         isValid : false
+      })
     } else {
-      this.state.isValid = true;
-      this.state.errorInput = null;
+      this.setState({
+         value : value,
+         isValid : true,
+         errorInput : null
+      })
     }
-    this.setState(this.state);
   },
 
-  _handlerBlurValue: function(){
-    if (!this.props.onTest(this.state.value)) {
-      this.state.errorInput = this.props.errorMsg;
-      this.state.isValid = false;
+  _handlerBlurValue(){
+    const { onTest, nForecastDate, errorMsg } = this.props
+        , { value } = this.state
+    if (!onTest(value, nForecastDate)){
+      this.setState({
+        errorInput : errorMsg,
+        isValid : false
+      })
     } else {
-      this.state.errorInput = null;
-      this.state.isValid = true;
+      this.setState({
+        errorInput : null,
+        isValid : true
+      })
     }
-    this.setState(this.state);
   },
 
-  render: function(){
-    let styleHr = this.state.isValid ? {borderColor: '#1B75BB'} : {borderColor: '#F44336'};
+  render(){
+    const  { value, errorInput } = this.state
+        , _styleHr = this.state.isValid
+            ? STYLE.HR_VALID
+            : STYLE.HR_NOT_VALID
 
     return (
-      <div style={styles.rootDiv}>
+      <div style={STYLE.ROOT}>
         <input
-           ref="inputDate"
+           ref={input => this.inputDate = input }
            type="text"
-           style={styles.inputText}
-           translate={false}
+           style={STYLE.INPUT}
            placeholder="YYYY-MM-DD"
-           value={this.state.value}
+           value={value}
            onChange={this._handlerChangeValue}
            onBlur={this._handlerBlurValue}
         >
         </input>
-        <hr style={Object.assign({}, styles.inputHr, styleHr)}></hr>
-        <div style={styles.errMsg}>
-          {this.state.errorInput}
+        <hr style={Object.assign({}, STYLE.HR, _styleHr)}></hr>
+        <div style={STYLE.ERR_MSG}>
+          {errorInput}
         </div>
       </div>
     );
   },
 
-  getValue: function(){
+  getValue(){
     return this.state.value;
   },
 
-  isValid: function(){
+  isValid(){
     return this.state.isValid;
   },
 
-  focusInput: function(){
-    this.refs.inputDate.focus();
+  focusInput(){
+    this.inputDate.focus();
   }
 
 });

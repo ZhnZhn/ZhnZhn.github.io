@@ -77,7 +77,7 @@ const About = React.createClass({
              is an economic RESTful client.
            </Token>
          </p>
-         <p>          
+         <p>
            <Token color="gray">
              With it, you can view economic free open data from WEB.
           </Token>
@@ -184,7 +184,18 @@ const About = React.createClass({
            </LinkToken>
            <Token color="gray" isFirstBlank={true}>
               data provider, for accessing without API Key, exists some restriction on frequency
-              and amount queries (<Token color="#2f7ed8">50 calls per day</Token><Token color="gray">).</Token>
+              and amount queries (<Token color="#2f7ed8">50 per day/1 at a time</Token><Token color="gray">).</Token>
+           </Token>
+         </p>
+         <br/>
+         <p>
+           <Token color="gray">
+             According to Quandl, anonymous requests can be deprecated soon. With API Key
+           </Token>
+         </p>
+         <p>
+           <Token color="gray">
+             you will be have (<Token color="#2f7ed8">50 000 per day/1 at a time</Token>). It's free of charge to receive.
            </Token>
          </p>
          <br/>

@@ -86,7 +86,7 @@ const _fnForYearSelect = function(mapDateDf=1){
 
 const DateUtils = {
 
-	isValidDate(str){
+	isValidDate(str, nForecastDate=0){
 		 // STRING FORMAT yyyy-mm-dd
 
 		 if ( Object.prototype.toString.call(str) !== "[object String]" ||
@@ -107,7 +107,7 @@ const DateUtils = {
 		 let minYear = 1999;
 
 		// YEAR CHECK
-		 if( (m[1].length < 4) || m[1] < minYear || m[1] > thisYear) { return false; }
+		 if( (m[1].length < 4) || m[1] < minYear || m[1] > thisYear + nForecastDate) { return false; }
 		// MONTH CHECK
 		 if( (m[2].length < 2) || m[2] < 1 || m[2] > 12) { return false;}
 		// DAY CHECK

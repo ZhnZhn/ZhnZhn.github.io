@@ -1,5 +1,5 @@
 
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash.sortby';
 
 import { fnFetch } from '../../utils/fn';
 import { fnCatch } from './fnCatch';
@@ -71,7 +71,7 @@ const loadQuandlCommodityTrade = function(
 
   option.apiKey = ChartStore.getQuandlKey();
 
-  if (!parentId){    
+  if (!parentId){
     _loadToChartComp(option, onCompleted, onFailed);
   } else {
     option.parentId = parentId;

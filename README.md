@@ -16,7 +16,10 @@ After clicking a button Show in a Dialog will be opened Chart container with Cha
 After closing a Chart container all Charts remains. In one time max three Dalogs can be opened.
 
 In that case of loading data from [Quandl](https://www.quandl.com) data provider,   
-for access without API Key exists some restriction on frequency and amount queries (50 calls per day).
+for access without API Key exists some restriction on frequency and amount queries (50 per day/1 at a time).
+
+According to Quandl, anonymous requests can be deprecated soon. With API Key  
+you will be have (50 000 per day/1 at a time). It's free of charge to receive.
 
 A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.  
 Settings save in browser's memory only for a current WEB session.  

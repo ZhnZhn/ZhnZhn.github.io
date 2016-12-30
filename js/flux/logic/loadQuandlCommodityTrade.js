@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loadQuandlCommodityTrade = undefined;
 
-var _sortBy = require('lodash/sortBy');
+var _lodash = require('lodash.sortby');
 
-var _sortBy2 = _interopRequireDefault(_sortBy);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _fn = require('../../utils/fn');
 
@@ -26,9 +26,9 @@ var _loadQuandl = require('./loadQuandl');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
-  var json = _ref.json;
-  var option = _ref.option;
-  var onCompleted = _ref.onCompleted;
+  var json = _ref.json,
+      option = _ref.option,
+      onCompleted = _ref.onCompleted;
 
   var arr = json.dataset.column_names,
       max = arr.length;
@@ -36,7 +36,7 @@ var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
   for (var i = 1; i < max; i++) {
     optionTrades.push({ caption: arr[i], value: i });
   }
-  optionTrades = (0, _sortBy2.default)(optionTrades, 'caption');
+  optionTrades = (0, _lodash2.default)(optionTrades, 'caption');
   option.onLoad(optionTrades);
 };
 
@@ -46,9 +46,10 @@ var _fnFailedLoadMeta = function _fnFailedLoadMeta(option, onFailed, optionFaile
 };
 
 var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) {
-  var isLoadMeta = option.isLoadMeta;
-  var _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChartComp;
-  var _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
+  var isLoadMeta = option.isLoadMeta,
+      _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChartComp,
+      _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
+
   (0, _fn.fnFetch)({
     uri: _QuandlApi2.default.getRequestUrl(option),
     option: option,
@@ -61,9 +62,10 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
 };
 
 var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
-  var isLoadMeta = option.isLoadMeta;
-  var _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChart;
-  var _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
+  var isLoadMeta = option.isLoadMeta,
+      _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChart,
+      _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
+
   (0, _fn.fnFetch)({
     uri: _QuandlApi2.default.getRequestUrl(option),
     option: option,

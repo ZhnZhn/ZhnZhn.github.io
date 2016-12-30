@@ -26,9 +26,9 @@ var _offlineExporting = require('highcharts/lib/modules/offline-exporting');
 
 var _offlineExporting2 = _interopRequireDefault(_offlineExporting);
 
-var _merge = require('lodash/merge');
+var _lodash = require('lodash.merge');
 
-var _merge2 = _interopRequireDefault(_merge);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _Color = require('../constants/Color');
 
@@ -349,7 +349,7 @@ ChartConfig.fBaseAreaConfig = function () {
 };
 
 ChartConfig.fMarkerExDividend = function () {
-  var color = arguments.length <= 0 || arguments[0] === undefined ? _Color2.default.EX_DIVIDEND : arguments[0];
+  var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _Color2.default.EX_DIVIDEND;
 
   return {
     y: 0,
@@ -412,9 +412,9 @@ ChartConfig.fSplitRatioSeria = function (data, chartId) {
 };
 
 ChartConfig.fSeries = function () {
-  var option = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  return (0, _merge2.default)({
+  return (0, _lodash2.default)({
     type: 'spline',
     lineWidth: 1,
     tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatter)

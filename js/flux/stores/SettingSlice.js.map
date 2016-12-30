@@ -4,6 +4,13 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\stores\\SettingSlice.js",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\stores\\SettingSlice.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AACA,IAAM,eAAe;AACnB,WAAS,EAAT;AACA,sCAAa,OAAM;AACjB,SAAK,OAAL,CAAa,SAAb,GAAyB,KAAzB,CADiB;GAFA;AAKnB,wCAAc;AACZ,WAAO,KAAK,OAAL,CAAa,SAAb,CADK;GALK;CAAf;;kBAUS"
+ "names": [
+  "SettingSlice",
+  "setting",
+  "setQuandlKey",
+  "value",
+  "quandlKey",
+  "getQuandlKey"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,eAAe;AACnBC,WAAS,EADU;AAEnBC,cAFmB,wBAENC,KAFM,EAEA;AACjB,SAAKF,OAAL,CAAaG,SAAb,GAAyBD,KAAzB;AACD,GAJkB;AAKnBE,cALmB,0BAKL;AACZ,WAAO,KAAKJ,OAAL,CAAaG,SAApB;AACD;AAPkB,CAArB;;kBAUeJ,Y"
 }

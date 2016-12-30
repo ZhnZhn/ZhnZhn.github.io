@@ -8,9 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _merge = require('lodash/merge');
+var _lodash = require('lodash.merge');
 
-var _merge2 = _interopRequireDefault(_merge);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _ChartExportConfig = require('../../charts/ChartExportConfig');
 
@@ -111,11 +111,11 @@ var CustomizeExportDialog = _react2.default.createClass({
     this.exportStyle = item.value;
   },
   _handlerExport: function _handlerExport() {
-    var _props = this.props;
-    var data = _props.data;
-    var onClose = _props.onClose;
-    var chart = data.chart;
-    var fn = data.fn;
+    var _props = this.props,
+        data = _props.data,
+        onClose = _props.onClose,
+        chart = data.chart,
+        fn = data.fn;
 
 
     var _inputOption = {
@@ -130,7 +130,7 @@ var CustomizeExportDialog = _react2.default.createClass({
         text: this.inputSubtitle.getValue()
       }
     };
-    var _customOption = (0, _merge2.default)(_inputOption, this.exportStyle);
+    var _customOption = (0, _lodash2.default)(_inputOption, this.exportStyle);
 
     fn.apply(chart, [null, _customOption]);
     onClose();
@@ -138,26 +138,27 @@ var CustomizeExportDialog = _react2.default.createClass({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var data = _props2.data;
-    var onClose = _props2.onClose;
-    var chart = data.chart;
-    var chartWidth = chart.chartWidth;
-    var chartHeight = chart.chartHeight;
-    var options = chart.options;
-    var title = options.title.text;
-    var subtitle = options.subtitle.text;
-    var _state = this.state;
-    var isShowDimension = _state.isShowDimension;
-    var isShowTitle = _state.isShowTitle;
-    var isShowStyle = _state.isShowStyle;
-    var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props2 = this.props,
+        isShow = _props2.isShow,
+        data = _props2.data,
+        onClose = _props2.onClose,
+        chart = data.chart,
+        chartWidth = chart.chartWidth,
+        chartHeight = chart.chartHeight,
+        options = chart.options,
+        title = options.title.text,
+        subtitle = options.subtitle.text,
+        _state = this.state,
+        isShowDimension = _state.isShowDimension,
+        isShowTitle = _state.isShowTitle,
+        isShowStyle = _state.isShowStyle,
+        commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Export',
       onClick: this._handlerExport
     })];
+
 
     return _react2.default.createElement(
       _ModalDialog2.default,

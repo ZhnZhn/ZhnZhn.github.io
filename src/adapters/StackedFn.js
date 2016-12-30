@@ -1,5 +1,5 @@
 
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash.sortby';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
