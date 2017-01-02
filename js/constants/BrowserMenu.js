@@ -38,16 +38,16 @@ var fnBadgeClose = function fnBadgeClose(chartType) {
 };
 
 var fnCreateMenu = function fnCreateMenu() {
-  var menu = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var menu = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var data = arguments[1];
   var browserType = arguments[2];
 
   return menu.map(function (menuPart) {
-    var caption = menuPart.caption;
-    var isInitClose = menuPart.isInitClose;
-    var _menuPart$items = menuPart.items;
-    var items = _menuPart$items === undefined ? [] : _menuPart$items;
-    var _items = items.map(function (item, index) {
+    var caption = menuPart.caption,
+        isInitClose = menuPart.isInitClose,
+        _menuPart$items = menuPart.items,
+        items = _menuPart$items === undefined ? [] : _menuPart$items,
+        _items = items.map(function (item, index) {
       var id = item.id;
 
       return {
@@ -60,6 +60,7 @@ var fnCreateMenu = function fnCreateMenu() {
         onBadgeClose: fnBadgeClose(id)
       };
     });
+
     return {
       caption: caption,
       isInitClose: isInitClose,
@@ -76,7 +77,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }]
 }, {
   caption: 'World Stocks',
-  items: [{ id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.STOCK_INDEXES }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]
+  items: [{ id: _DialogType.Quandl.EURONEXT_STOCK }, { id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.STOCK_INDEXES }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]
 }, {
   caption: 'Futures', isInitClose: true,
   items: [{ id: _DialogType.Quandl.CHINA_FINANCE_FUTURE }, { id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }, { id: _DialogType.Quandl.LIFFE_FUTURE }, { id: _DialogType.Quandl.ICE_FUTURE }, { id: _DialogType.Quandl.WIKI_FUTURE }]

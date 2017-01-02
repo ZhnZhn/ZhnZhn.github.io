@@ -41,6 +41,7 @@ const qeSources = [
   'BIG_MAC',
   'ROGERS_INDICES',
 
+  'EURONEXT_STOCK',
   'WIKI_STOCK',
   'TOKIO_STOCK',
   'STOCK_INDEXES',

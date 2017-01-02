@@ -263,6 +263,22 @@ const DataQE = {
       dataColumn : 1
   },
 
+  QE_EURONEXT_STOCK : {
+      type : 'QE_EURONEXT_STOCK',
+      menuTitle : 'Euronext from 50',
+      dialogCaption : 'Euronext Stock Prices',
+      chartContainerCaption : 'Quandl Euronext Stock Prices',
+      dialogProps : {
+        descrUrl : './data/quandl/euronext.html',
+        optionURI : './data/quandl/euronext.json',
+        optionsJsonProp : 'tickets',
+        valueFn : "RPrefixOne",
+        valueFnPrefix : "EURONEXT",
+        loadId : 'Q',
+        columnName : 'Last',
+        seriaColumnNames : [ 'Open', 'High', 'Low', 'Last', 'Volume' ]
+      }
+  },
   QE_WIKI_STOCK : {
       type : 'QE_WIKI_STOCK',
       menuTitle : 'Wiki',

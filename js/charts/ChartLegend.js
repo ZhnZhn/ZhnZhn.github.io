@@ -22,6 +22,7 @@ var C = {
   ADJ_CLOSE_2: 'adjusted close',
   PRE_SETTLE: 'pre settle',
   CLOSE: 'close',
+  LAST: 'last',
   TURNOVER: 'turnover',
   TRADES: 'trades'
 };
@@ -45,7 +46,7 @@ var ChartLegend = {
         return Object.assign({}, baseConfig, { color: _Color2.default.S_VOLUME, symbol: 'diamond', isSecondAxes: true });
       case C.ADJ_CLOSE:case C.ADJ_CLOSE_2:
         return Object.assign({}, baseConfig, { color: _Color2.default.S_ADJ_CLOSE, symbol: 'diamond' });
-      case C.CLOSE:
+      case C.CLOSE:case C.LAST:
         return Object.assign({}, baseConfig, { color: _Color2.default.S_CLOSE, symbol: 'diamond' });
       case C.PRE_SETTLE:
         return Object.assign({}, baseConfig, { color: _Color2.default.S_PRE_SETTLE, symbol: 'diamond' });

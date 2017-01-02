@@ -64,6 +64,7 @@ const menuQuandl = [
   },{
      caption : 'World Stocks',
      items : [
+       { id : Quandl.EURONEXT_STOCK },
        { id : Quandl.TOKIO_STOCK },
        { id : Quandl.WIKI_STOCK },
        { id : Quandl.STOCK_INDEXES},

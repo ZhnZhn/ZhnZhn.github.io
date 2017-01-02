@@ -12,6 +12,7 @@ const C = {
   ADJ_CLOSE_2 : 'adjusted close',
   PRE_SETTLE : 'pre settle',
   CLOSE : 'close',
+  LAST : 'last',
   TURNOVER : 'turnover',
   TRADES : 'trades'
 }
@@ -48,7 +49,7 @@ const ChartLegend = {
         return Object.assign({}, baseConfig,
           { color : COLOR.S_ADJ_CLOSE, symbol: 'diamond' }
         );
-      case C.CLOSE:
+      case C.CLOSE: case C.LAST:
         return Object.assign({}, baseConfig,
           { color : COLOR.S_CLOSE, symbol: 'diamond' }
         );

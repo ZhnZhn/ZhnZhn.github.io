@@ -1,0 +1,42 @@
+{
+  "tickets" : [
+    { "value" : "AI", "caption" : "Air Liquide (AI)" },
+    { "value" : "AIR", "caption" : "Airbus Group (AIR)" },
+    { "value" : "ALVD", "caption" : "Allianz (ALVD)" },
+    { "value" : "ABI", "caption" : "Ab Inbev (ABI)" },
+    { "value" : "ASML", "caption" : "Asml Holding (ASML)" },
+    { "value" : "CS", "caption" : "Axa (CS)" },
+    { "value" : "BBV", "caption" : "Banco Bilbao Vizc (BBV)" },
+    { "value" : "SANTA", "caption" : "Banco Santander (SANTA)" },
+    { "value" : "", "caption" : "" },
+    
+    { "value" : "BNP", "caption" : "Bnp Paribas Act A (BNP)" },
+    { "value" : "CA", "caption" : "Carrefour (CA)" },
+    { "value" : "SGO", "caption" : "Saint Gobain (SGO)" },
+    { "value" : "DTEL", "caption" : "Deutsche Telekom (DTEL)" },
+    { "value" : "ENGI", "caption" : "Engie (ENGI)" },
+    { "value" : "ENI", "caption" : "Eni (ENI)" },
+    { "value" : "EI", "caption" : "Essilor Intl (EI)" },
+    { "value" : "BN", "caption" : "Danone (BN)" },
+
+    { "value" : "INGA", "caption" : "Ing Groep N V (INGA)" },
+    { "value" : "OR", "caption" : "L'Oreal (OR)" },
+    { "value" : "MC", "caption" : "Lvmh (MC)" },
+    { "value" : "NOKIA", "caption" : "Nokia (NOKIA)" },
+    { "value" : "ORA", "caption" : "Orange (ORA)" },
+    { "value" : "PHIA", "caption" : "Philips Kon (PHIA)" },
+    { "value" : "SAF", "caption" : "Safran (SAF)" },
+    { "value" : "SAN", "caption" : "Sanofi (SAN)" },
+    { "value" : "SAP", "caption" : "Sapec (SAP)" },
+    { "value" : "SU", "caption" : "Schneider Electric (SU)" },
+
+    { "value" : "SIA", "caption" : "Siemens (SIA)" },
+    { "value" : "TFA", "caption" : "Telefonica (TFA)" },
+    { "value" : "FP", "caption" : "Total (FP)" },
+    { "value" : "UL", "caption" : "Unibail-Rodamco (UL)" },
+    { "value" : "UNA", "caption" : "Unilever Dr (UNA)" },
+    { "value" : "DG", "caption" : "Vinci (DG)" },
+    { "value" : "VIV", "caption" : "Vivendi (VIV)" },
+    { "value" : "VWA", "caption" : "Volkswagen (VWA)" }
+  ]
+}
