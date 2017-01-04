@@ -84,7 +84,13 @@ var createDialogComp = function createDialogComp(conf, browserType) {
       props = conf.dialogProps ? conf.dialogProps : {},
       Comp = conf.dialogType ? _RouterDialog2.default[conf.dialogType] ? _RouterDialog2.default[conf.dialogType] : _RouterDialog2.default.DEFAULT : _RouterDialog2.default.DEFAULT,
       _initFromDate = props.nInitFromDate ? _DateUtils2.default.getFromDate(props.nInitFromDate) : initFromDate,
-      _fnValue = props.valueFn ? props.valueFnPrefix ? _RouterFnValue2.default[props.valueFn].bind(null, props.valueFnPrefix) : _RouterFnValue2.default[props.valueFn] : undefined,
+      _fnValue = props.valueFn ? props.valueFnPrefix ? _RouterFnValue2.default[props.valueFn].bind(null, props.valueFnPrefix) : _RouterFnValue2.default[props.valueFn] : undefined
+  /*
+   , _fnLink = (props.linkFn)
+        ? RouterFnLink[props.linkFn]
+        : undefined
+  */
+  ,
       onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined;
 
   if (props.isContinious) {
@@ -107,6 +113,7 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     onLoad: onLoadChart.bind(null, dialogType, browserType),
     onShow: onShowChart.bind(null, dialogType, browserType),
     fnValue: _fnValue,
+    //fnLink : _fnLink,
     initFromDate: _initFromDate,
     initToDate: initToDate, onTestDate: onTestDate,
     onClickInfo: onClickInfo
@@ -118,7 +125,7 @@ var fnCloseChartContainer = function fnCloseChartContainer(chartType, browserTyp
   return _ComponentActions2.default.closeChartContainer.bind(null, chartType, browserType);
 };
 var createChartContainerComp = function createChartContainerComp() {
-  var conf = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var conf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var browserType = arguments[1];
 
   var Comp = conf.chartContainerComp ? conf.chartContainerComp : _ChartContainer2.default,
@@ -148,20 +155,20 @@ var Factory = {
     return createChartContainerComp(_getDialogConf(dialogType), browserType);
   },
   createBrowserDynamic: function createBrowserDynamic(option) {
-    var browserType = option.browserType;
-    var _option$caption = option.caption;
-    var caption = _option$caption === undefined ? '' : _option$caption;
-    var sourceMenuUrl = option.sourceMenuUrl;
-    var chartContainerType = option.chartContainerType;
-    var modalDialogType = option.modalDialogType;
-    var itemOptionType = option.itemOptionType;
-    var itemType = option.itemType;
-    var descrUrl = option.descrUrl;
-    var comp = _RouterBrowser2.default[browserType] || _RouterBrowser2.default.DEFAULT;
-    var ItemOptionComp = itemOptionType ? _RouterItemOption2.default[itemOptionType] || _RouterBrowserItem2.default.DEFAULT : _RouterBrowserItem2.default.DEFAULT;
-    var ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined;
-    var onClickInfo = typeof ItemComp !== "undefined" ? _showModalDialogDescription : undefined;
-    var onShowContainer = _ChartActions2.default.showChart.bind(null, chartContainerType, browserType);
+    var browserType = option.browserType,
+        _option$caption = option.caption,
+        caption = _option$caption === undefined ? '' : _option$caption,
+        sourceMenuUrl = option.sourceMenuUrl,
+        chartContainerType = option.chartContainerType,
+        modalDialogType = option.modalDialogType,
+        itemOptionType = option.itemOptionType,
+        itemType = option.itemType,
+        descrUrl = option.descrUrl,
+        comp = _RouterBrowser2.default[browserType] || _RouterBrowser2.default.DEFAULT,
+        ItemOptionComp = itemOptionType ? _RouterItemOption2.default[itemOptionType] || _RouterBrowserItem2.default.DEFAULT : _RouterBrowserItem2.default.DEFAULT,
+        ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined,
+        onClickInfo = typeof ItemComp !== "undefined" ? _showModalDialogDescription : undefined,
+        onShowContainer = _ChartActions2.default.showChart.bind(null, chartContainerType, browserType);
 
     return _react2.default.createElement(comp, {
       key: browserType,

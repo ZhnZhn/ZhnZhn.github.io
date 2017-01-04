@@ -50,6 +50,22 @@ const styles = {
   }
 }
 
+const EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/'
+
+const RouterFnLink = {
+  EURONEXT : (item) => {
+    return (
+      <a
+        className="native-link"
+        style={styles.codeLink}
+        href={`${EURONEXT_BASE}${item.isin}-${item.market}`}
+      >
+        {`Euronext Link ${item.caption}`}
+      </a>
+    );
+  }
+};
+
 const PanelDataInfo = React.createClass({
 
   _renderLinkCode(dbCode, dsCode){
@@ -67,8 +83,18 @@ const PanelDataInfo = React.createClass({
     )
   },
 
+  _renderNativeLink(linkFn, item){
+    const fnLink = RouterFnLink[linkFn]
+    if (typeof fnLink === 'function'){
+      return fnLink(item);
+    } else {
+      return undefined;
+    }
+
+  },
+
   render(){
-    const {isShow, onClickChart, info} = this.props
+    const {isShow, info, zhInfo, onClickChart } = this.props
         , {
              name,
              newest_available_date,
@@ -77,8 +103,9 @@ const PanelDataInfo = React.createClass({
              database_code, dataset_code,
              description
            } = info
-        , styleShow = isShow ? styles.rootShow : styles.rootHide;
-
+         , { item, linkFn } = zhInfo
+         , styleShow = isShow ? styles.rootShow : styles.rootHide;
+    
     return (
        <div style={styleShow}>
          <ButtonTab
@@ -120,6 +147,7 @@ const PanelDataInfo = React.createClass({
             rootStyle={styles.rootStyleDescription}
             styleText={styles.textDescr}
          />
+         {this._renderNativeLink(linkFn, item)}
        </div>
     )
   }

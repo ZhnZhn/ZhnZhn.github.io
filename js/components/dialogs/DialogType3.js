@@ -61,9 +61,9 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     return true;
   },
   _handlerClickInfo: function _handlerClickInfo() {
-    var _props = this.props;
-    var descrUrl = _props.descrUrl;
-    var onClickInfo = _props.onClickInfo;
+    var _props = this.props,
+        descrUrl = _props.descrUrl,
+        onClickInfo = _props.onClickInfo;
 
     onClickInfo({ descrUrl: descrUrl });
   },
@@ -75,18 +75,17 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var _props$itemCaption = this.props.itemCaption;
-    var itemCaption = _props$itemCaption === undefined ? 'Stock' : _props$itemCaption;
+    var _props$itemCaption = this.props.itemCaption,
+        itemCaption = _props$itemCaption === undefined ? 'Stock' : _props$itemCaption;
 
     var msg = [];
     if (!this.stock) {
       msg.push(this.props.msgOnNotSelected(itemCaption));
     }
 
-    var _datesFragment$getVal = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal.isValid;
-    var datesMsg = _datesFragment$getVal.datesMsg;
+    var _datesFragment$getVal = this.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal.isValid,
+        datesMsg = _datesFragment$getVal.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -95,19 +94,20 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _datesFragment$getVal2 = this.datesFragment.getValues();
+    var _datesFragment$getVal2 = this.datesFragment.getValues(),
+        fromDate = _datesFragment$getVal2.fromDate,
+        toDate = _datesFragment$getVal2.toDate,
+        _props2 = this.props,
+        columnName = _props2.columnName,
+        dataColumn = _props2.dataColumn,
+        seriaColumnNames = _props2.seriaColumnNames,
+        loadId = _props2.loadId,
+        fnValue = _props2.fnValue,
+        fnItemCaption = _props2.fnItemCaption,
+        linkFn = _props2.linkFn,
+        _value = typeof fnValue === 'function' ? fnValue(this.stock.value) : this.stock.value,
+        _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
 
-    var fromDate = _datesFragment$getVal2.fromDate;
-    var toDate = _datesFragment$getVal2.toDate;
-    var _props2 = this.props;
-    var columnName = _props2.columnName;
-    var dataColumn = _props2.dataColumn;
-    var seriaColumnNames = _props2.seriaColumnNames;
-    var loadId = _props2.loadId;
-    var fnValue = _props2.fnValue;
-    var fnItemCaption = _props2.fnItemCaption;
-    var _value = typeof fnValue === 'function' ? fnValue(this.stock.value) : this.stock.value;
-    var _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
     return {
       //value : this.stock.value,
       value: _value,
@@ -119,6 +119,7 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
       dataColumn: dataColumn,
       itemCaption: _itemCaption,
       loadId: loadId,
+      linkFn: linkFn,
       seriaColumnNames: seriaColumnNames
     };
   },
@@ -129,27 +130,28 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   render: function render() {
     var _this = this;
 
-    var _props3 = this.props;
-    var caption = _props3.caption;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var optionURI = _props3.optionURI;
-    var optionsJsonProp = _props3.optionsJsonProp;
-    var _props3$itemCaption = _props3.itemCaption;
-    var itemCaption = _props3$itemCaption === undefined ? 'Stock:' : _props3$itemCaption;
-    var _props3$optionNames = _props3.optionNames;
-    var optionNames = _props3$optionNames === undefined ? 'Stocks' : _props3$optionNames;
-    var initFromDate = _props3.initFromDate;
-    var initToDate = _props3.initToDate;
-    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
-    var onTestDate = _props3.onTestDate;
-    var validationMessages = this.state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props3 = this.props,
+        caption = _props3.caption,
+        isShow = _props3.isShow,
+        onShow = _props3.onShow,
+        optionURI = _props3.optionURI,
+        optionsJsonProp = _props3.optionsJsonProp,
+        _props3$itemCaption = _props3.itemCaption,
+        itemCaption = _props3$itemCaption === undefined ? 'Stock:' : _props3$itemCaption,
+        _props3$optionNames = _props3.optionNames,
+        optionNames = _props3$optionNames === undefined ? 'Stocks' : _props3$optionNames,
+        initFromDate = _props3.initFromDate,
+        initToDate = _props3.initToDate,
+        msgOnNotValidFormat = _props3.msgOnNotValidFormat,
+        onTestDate = _props3.onTestDate,
+        validationMessages = this.state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
+
 
     return _react2.default.createElement(
       _ZhDialog2.default,

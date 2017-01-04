@@ -9,6 +9,16 @@
   border-bottom-width: medium;
 }
 
+.native-link {
+  color: #0b8fff;
+  font-weight: bold;
+  border-bottom: thin solid;
+  text-decoration: none;
+}
+.native-link:hover{
+  border-bottom-width: medium;
+}
+
 .descr-datasource  h1 {
   color: rgba(164, 135, 212, 1);
   font-size: 18px;

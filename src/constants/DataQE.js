@@ -265,7 +265,7 @@ const DataQE = {
 
   QE_EURONEXT_STOCK : {
       type : 'QE_EURONEXT_STOCK',
-      menuTitle : 'Euronext from 50',
+      menuTitle : 'Euronext',
       dialogCaption : 'Euronext Stock Prices',
       chartContainerCaption : 'Quandl Euronext Stock Prices',
       dialogProps : {
@@ -274,6 +274,7 @@ const DataQE = {
         optionsJsonProp : 'tickets',
         valueFn : "RPrefixOne",
         valueFnPrefix : "EURONEXT",
+        linkFn : "EURONEXT",
         loadId : 'Q',
         columnName : 'Last',
         seriaColumnNames : [ 'Open', 'High', 'Low', 'Last', 'Volume' ]

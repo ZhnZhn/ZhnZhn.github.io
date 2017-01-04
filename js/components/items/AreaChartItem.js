@@ -154,10 +154,10 @@ var AreaChartItem = _react2.default.createClass({
     this.is2H = !this.is2H;
   },
   _handlerAddToWatch: function _handlerAddToWatch() {
-    var _props = this.props;
-    var caption = _props.caption;
-    var config = _props.config;
-    var onAddToWatch = _props.onAddToWatch;
+    var _props = this.props,
+        caption = _props.caption,
+        config = _props.config,
+        onAddToWatch = _props.onAddToWatch;
 
     onAddToWatch({ caption: caption, config: config });
   },
@@ -168,9 +168,9 @@ var AreaChartItem = _react2.default.createClass({
     });
   },
   _handlerClickVolume: function _handlerClickVolume() {
-    var _state = this.state;
-    var isInitVolume = _state.isInitVolume;
-    var isShowVolume = _state.isShowVolume;
+    var _state = this.state,
+        isInitVolume = _state.isInitVolume,
+        isShowVolume = _state.isShowVolume;
 
     if (isInitVolume) {
       this.setState({ isShowVolume: !isShowVolume });
@@ -183,9 +183,9 @@ var AreaChartItem = _react2.default.createClass({
     }
   },
   _handlerClickATH: function _handlerClickATH() {
-    var _state2 = this.state;
-    var isInitATH = _state2.isInitATH;
-    var isShowATH = _state2.isShowATH;
+    var _state2 = this.state,
+        isInitATH = _state2.isInitATH,
+        isShowATH = _state2.isShowATH;
 
     if (isInitATH) {
       this.setState({ isShowATH: !isShowATH });
@@ -198,9 +198,9 @@ var AreaChartItem = _react2.default.createClass({
     }
   },
   _handlerClickHighLow: function _handlerClickHighLow() {
-    var _state3 = this.state;
-    var isInitHighLow = _state3.isInitHighLow;
-    var isShowHighLow = _state3.isShowHighLow;
+    var _state3 = this.state,
+        isInitHighLow = _state3.isInitHighLow,
+        isShowHighLow = _state3.isShowHighLow;
 
     if (isInitHighLow) {
       this.setState({ isShowHighLow: !isShowHighLow });
@@ -329,10 +329,11 @@ var AreaChartItem = _react2.default.createClass({
 
 
     var _metricCharts = chartsDescription.map(function (descr, index) {
-      var type = descr.type;
-      var _isShow = _this.state['isShow' + type];
-      var _ref = 'chart' + type;
-      var _config = _this.props.config['zh' + type + 'Config'];
+      var type = descr.type,
+          _isShow = _this.state['isShow' + type],
+          _ref = 'chart' + type,
+          _config = _this.props.config['zh' + type + 'Config'];
+
 
       return _react2.default.createElement(
         _ShowHide2.default,
@@ -356,8 +357,8 @@ var AreaChartItem = _react2.default.createClass({
     var _this2 = this;
 
     var _indicatorCharts = arrConfigs.map(function (objConfig, index) {
-      var config = objConfig.config;
-      var id = objConfig.id;
+      var config = objConfig.config,
+          id = objConfig.id;
 
       return _react2.default.createElement(
         _ShowHide2.default,
@@ -377,20 +378,20 @@ var AreaChartItem = _react2.default.createClass({
     );
   },
   render: function render() {
-    var _props2 = this.props;
-    var chartType = _props2.chartType;
-    var caption = _props2.caption;
-    var config = _props2.config;
-    var onCloseItem = _props2.onCloseItem;
-    var itemCaption = config.zhConfig.itemCaption;
-    var _itemCaption = itemCaption ? itemCaption : caption;
-    var _state4 = this.state;
-    var isOpen = _state4.isOpen;
-    var isShowChart = _state4.isShowChart;
-    var isShowInfo = _state4.isShowInfo;
-    var isShowIndicator = _state4.isShowIndicator;
-    var mfiConfigs = _state4.mfiConfigs;
-    var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
+    var _props2 = this.props,
+        chartType = _props2.chartType,
+        caption = _props2.caption,
+        config = _props2.config,
+        onCloseItem = _props2.onCloseItem,
+        itemCaption = config.zhConfig.itemCaption,
+        _itemCaption = itemCaption ? itemCaption : caption,
+        _state4 = this.state,
+        isOpen = _state4.isOpen,
+        isShowChart = _state4.isShowChart,
+        isShowInfo = _state4.isShowInfo,
+        isShowIndicator = _state4.isShowIndicator,
+        mfiConfigs = _state4.mfiConfigs,
+        _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
 
     return _react2.default.createElement(
       'div',
@@ -439,6 +440,7 @@ var AreaChartItem = _react2.default.createClass({
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,
           info: config.info,
+          zhInfo: config.zhConfig,
           onClickChart: this._handlerClickChart
         }),
         this._renderLegend(config),

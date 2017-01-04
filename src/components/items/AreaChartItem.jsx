@@ -354,7 +354,10 @@ const AreaChartItem = React.createClass({
   },
 
   render(){
-    const { chartType, caption, config, onCloseItem } = this.props
+    const {
+            chartType, caption, config,
+            onCloseItem,
+          } = this.props
         , {itemCaption} = config.zhConfig
         , _itemCaption = (itemCaption) ? itemCaption : caption
         , {
@@ -362,7 +365,7 @@ const AreaChartItem = React.createClass({
             mfiConfigs
         } = this.state
         , _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
-
+    
     return (
       <div style={styles.rootDiv}>
         <div style={styles.headerDiv}>
@@ -403,6 +406,7 @@ const AreaChartItem = React.createClass({
            <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
+              zhInfo={config.zhConfig}
               onClickChart={this._handlerClickChart}
            />
           {this._renderLegend(config)}

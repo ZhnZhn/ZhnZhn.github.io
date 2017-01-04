@@ -40,23 +40,23 @@ var QuandlFn2 = {
     }
   },
   createDatasetInfo: function createDatasetInfo(json) {
-    var _json$dataset = json.dataset;
-    var dataset = _json$dataset === undefined ? {} : _json$dataset;
-    var _dataset$name = dataset.name;
-    var name = _dataset$name === undefined ? '' : _dataset$name;
-    var _dataset$description = dataset.description;
-    var description = _dataset$description === undefined ? '' : _dataset$description;
-    var _dataset$newest_avail = dataset.newest_available_date;
-    var newest_available_date = _dataset$newest_avail === undefined ? '' : _dataset$newest_avail;
-    var _dataset$oldest_avail = dataset.oldest_available_date;
-    var oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail;
-    var _dataset$frequency = dataset.frequency;
-    var frequency = _dataset$frequency === undefined ? '' : _dataset$frequency;
-    var _dataset$database_cod = dataset.database_code;
-    var database_code = _dataset$database_cod === undefined ? '' : _dataset$database_cod;
-    var _dataset$dataset_code = dataset.dataset_code;
-    var dataset_code = _dataset$dataset_code === undefined ? '' : _dataset$dataset_code;
-    var _description = _purify2.default.sanitize(description);
+    var _json$dataset = json.dataset,
+        dataset = _json$dataset === undefined ? {} : _json$dataset,
+        _dataset$name = dataset.name,
+        name = _dataset$name === undefined ? '' : _dataset$name,
+        _dataset$description = dataset.description,
+        description = _dataset$description === undefined ? '' : _dataset$description,
+        _dataset$newest_avail = dataset.newest_available_date,
+        newest_available_date = _dataset$newest_avail === undefined ? '' : _dataset$newest_avail,
+        _dataset$oldest_avail = dataset.oldest_available_date,
+        oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail,
+        _dataset$frequency = dataset.frequency,
+        frequency = _dataset$frequency === undefined ? '' : _dataset$frequency,
+        _dataset$database_cod = dataset.database_code,
+        database_code = _dataset$database_cod === undefined ? '' : _dataset$database_cod,
+        _dataset$dataset_code = dataset.dataset_code,
+        dataset_code = _dataset$dataset_code === undefined ? '' : _dataset$dataset_code,
+        _description = _purify2.default.sanitize(description);
 
     return {
       name: name,
@@ -68,7 +68,10 @@ var QuandlFn2 = {
     };
   },
   createZhConfig: function createZhConfig(option) {
+    //console.log('createZhConfig');
+    //console.log(option);
     return {
+      item: option.stock,
       title: option.title,
       subtitle: option.subtitle ? option.subtitle : '',
       id: option.value,
@@ -78,22 +81,23 @@ var QuandlFn2 = {
       itemCaption: option.itemCaption,
       fromDate: option.fromDate,
       seriaColumnNames: option.seriaColumnNames,
+      linkFn: option.linkFn,
       limitRemaining: option.limitRemaining
     };
   },
   createPercent: function createPercent(_ref) {
-    var _ref$bValue = _ref.bValue;
-    var bValue = _ref$bValue === undefined ? (0, _big2.default)('0.0') : _ref$bValue;
-    var _ref$bTotal = _ref.bTotal;
-    var bTotal = _ref$bTotal === undefined ? (0, _big2.default)('0.0') : _ref$bTotal;
+    var _ref$bValue = _ref.bValue,
+        bValue = _ref$bValue === undefined ? (0, _big2.default)('0.0') : _ref$bValue,
+        _ref$bTotal = _ref.bTotal,
+        bTotal = _ref$bTotal === undefined ? (0, _big2.default)('0.0') : _ref$bTotal;
 
     return !bTotal.eq((0, _big2.default)(0.0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) : (0, _big2.default)(0.0);
   },
   createValueMoving: function createValueMoving(_ref2) {
-    var _ref2$bNowValue = _ref2.bNowValue;
-    var bNowValue = _ref2$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref2$bNowValue;
-    var _ref2$bPrevValue = _ref2.bPrevValue;
-    var bPrevValue = _ref2$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref2$bPrevValue;
+    var _ref2$bNowValue = _ref2.bNowValue,
+        bNowValue = _ref2$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref2$bNowValue,
+        _ref2$bPrevValue = _ref2.bPrevValue,
+        bPrevValue = _ref2$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref2$bPrevValue;
 
 
     var _bDelta = bPrevValue.minus(bNowValue),
@@ -132,28 +136,29 @@ var QuandlFn2 = {
     return _extends({}, this.createValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), { date: date });
   },
   getRecentDate: function getRecentDate() {
-    var seria = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+    var seria = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var json = arguments[1];
-    var len = seria.length;
-    var _json$dataset2 = json.dataset;
-    var dataset = _json$dataset2 === undefined ? {} : _json$dataset2;
-    var _dataset$frequency2 = dataset.frequency;
-    var frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2;
-    var millisUTC = len > 0 && seria[len - 1][0] && typeof seria[len - 1][0] === 'number' ? seria[len - 1][0] : '';
-    var d = millisUTC ? frequency.toLowerCase() === 'annual' ? new Date(millisUTC).getUTCFullYear() : _DateUtils2.default.formatTo(millisUTC) : '';
+    var len = seria.length,
+        _json$dataset2 = json.dataset,
+        dataset = _json$dataset2 === undefined ? {} : _json$dataset2,
+        _dataset$frequency2 = dataset.frequency,
+        frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2,
+        millisUTC = len > 0 && seria[len - 1][0] && typeof seria[len - 1][0] === 'number' ? seria[len - 1][0] : '',
+        d = millisUTC ? frequency.toLowerCase() === 'annual' ? new Date(millisUTC).getUTCFullYear() : _DateUtils2.default.formatTo(millisUTC) : '';
+
     return d;
   },
   setTitleToConfig: function setTitleToConfig() {
-    var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-    var title = option.title;
-    var subtitle = option.subtitle;
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var title = option.title,
+        subtitle = option.subtitle;
 
     config.title.text = title ? title : '';
     config.subtitle.text = subtitle ? subtitle + ':' : '';
   },
   findColumnIndex: function findColumnIndex(obj) {
-    var columnName = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+    var columnName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
     var column_names = Array.isArray(obj) ? obj : obj.dataset.column_names ? obj.dataset.column_names : [],
         _columnName = columnName.toLowerCase();
@@ -168,15 +173,15 @@ var QuandlFn2 = {
     return undefined;
   },
   getDataColumnIndex: function getDataColumnIndex(json, option) {
-    var columnName = option.columnName;
-    var dataColumn = option.dataColumn;
-    var _dataColumn = this.findColumnIndex(json, columnName);
-    var _columnIndex = _dataColumn ? _dataColumn : dataColumn ? dataColumn : 1;
+    var columnName = option.columnName,
+        dataColumn = option.dataColumn,
+        _dataColumn = this.findColumnIndex(json, columnName),
+        _columnIndex = _dataColumn ? _dataColumn : dataColumn ? dataColumn : 1;
 
     return _columnIndex;
   },
   findMinY: function findMinY() {
-    var data = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
     var minY = Number.POSITIVE_INFINITY;
     for (var i = 0, max = data.length; i < max; i++) {

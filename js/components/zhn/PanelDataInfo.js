@@ -64,6 +64,22 @@ var styles = {
   }
 };
 
+var EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/';
+
+var RouterFnLink = {
+  EURONEXT: function EURONEXT(item) {
+    return _react2.default.createElement(
+      'a',
+      {
+        className: 'native-link',
+        style: styles.codeLink,
+        href: '' + EURONEXT_BASE + item.isin + '-' + item.market
+      },
+      'Euronext Link ' + item.caption
+    );
+  }
+};
+
 var PanelDataInfo = _react2.default.createClass({
   displayName: 'PanelDataInfo',
   _renderLinkCode: function _renderLinkCode(dbCode, dsCode) {
@@ -80,19 +96,31 @@ var PanelDataInfo = _react2.default.createClass({
       LINK_CODE_CAPTION + ' ' + dbCode + '/' + dsCode
     );
   },
+  _renderNativeLink: function _renderNativeLink(linkFn, item) {
+    var fnLink = RouterFnLink[linkFn];
+    if (typeof fnLink === 'function') {
+      return fnLink(item);
+    } else {
+      return undefined;
+    }
+  },
   render: function render() {
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var onClickChart = _props.onClickChart;
-    var info = _props.info;
-    var name = info.name;
-    var newest_available_date = info.newest_available_date;
-    var oldest_available_date = info.oldest_available_date;
-    var frequency = info.frequency;
-    var database_code = info.database_code;
-    var dataset_code = info.dataset_code;
-    var description = info.description;
-    var styleShow = isShow ? styles.rootShow : styles.rootHide;
+    var _props = this.props,
+        isShow = _props.isShow,
+        info = _props.info,
+        zhInfo = _props.zhInfo,
+        onClickChart = _props.onClickChart,
+        name = info.name,
+        newest_available_date = info.newest_available_date,
+        oldest_available_date = info.oldest_available_date,
+        frequency = info.frequency,
+        database_code = info.database_code,
+        dataset_code = info.dataset_code,
+        description = info.description,
+        item = zhInfo.item,
+        linkFn = zhInfo.linkFn,
+        styleShow = isShow ? styles.rootShow : styles.rootHide;
+
 
     return _react2.default.createElement(
       'div',
@@ -135,7 +163,8 @@ var PanelDataInfo = _react2.default.createClass({
         classText: DESCR_CSS_CLASS,
         rootStyle: styles.rootStyleDescription,
         styleText: styles.textDescr
-      })
+      }),
+      this._renderNativeLink(linkFn, item)
     );
   }
 });

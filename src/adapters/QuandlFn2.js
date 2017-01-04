@@ -30,7 +30,7 @@ const QuandlFn2 = {
           } = dataset
          , _description = DOMPurify.sanitize( description );
 
-     return  {              
+     return  {
        name,
        newest_available_date,
        oldest_available_date,
@@ -41,7 +41,10 @@ const QuandlFn2 = {
   },
 
   createZhConfig(option){
+    //console.log('createZhConfig');
+    //console.log(option);
     return {
+      item : option.stock,
       title : option.title,
       subtitle : (option.subtitle) ? option.subtitle : '',
       id : option.value,
@@ -51,6 +54,7 @@ const QuandlFn2 = {
       itemCaption : option.itemCaption,
       fromDate : option.fromDate,
       seriaColumnNames : option.seriaColumnNames,
+      linkFn : option.linkFn,
       limitRemaining : option.limitRemaining
     }
   },

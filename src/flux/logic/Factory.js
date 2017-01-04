@@ -55,6 +55,11 @@ const createDialogComp = function (conf, browserType){
                    ? RouterFnValue[props.valueFn].bind(null, props.valueFnPrefix)
                    : RouterFnValue[props.valueFn]
             : undefined
+      /*
+       , _fnLink = (props.linkFn)
+            ? RouterFnLink[props.linkFn]
+            : undefined
+      */
        , onClickInfo = (props.descrUrl)
             ? _showModalDialogDescription
             : undefined;
@@ -79,6 +84,7 @@ const createDialogComp = function (conf, browserType){
                onLoad  : onLoadChart.bind(null, dialogType, browserType),
                onShow  : onShowChart.bind(null, dialogType, browserType),
                fnValue : _fnValue,
+               //fnLink : _fnLink,
                initFromDate : _initFromDate,
                initToDate, onTestDate,
                onClickInfo,

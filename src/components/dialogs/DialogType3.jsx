@@ -60,7 +60,11 @@ const DialogType3 = React.createClass({
   },
   _createLoadOption(){
     const { fromDate, toDate } = this.datesFragment.getValues()
-        , { columnName, dataColumn, seriaColumnNames, loadId, fnValue, fnItemCaption } = this.props
+        , {
+            columnName, dataColumn, seriaColumnNames, loadId,
+            fnValue, fnItemCaption,
+            linkFn
+          } = this.props
         , _value = (typeof fnValue === 'function')
                   ? fnValue(this.stock.value) : this.stock.value
         , _itemCaption = (typeof fnItemCaption === 'function')
@@ -76,6 +80,7 @@ const DialogType3 = React.createClass({
       dataColumn : dataColumn,
       itemCaption : _itemCaption,
       loadId : loadId,
+      linkFn : linkFn,
       seriaColumnNames
     }
   },
