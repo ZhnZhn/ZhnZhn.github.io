@@ -12,17 +12,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var QuandlApi = {};
 
-/*order=asc&rows=12*/
-/*https://www.quandl.com/api/v3/databases/RICI.json downloads*/
-
 QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
 QuandlApi.BLANK = '';
 
 QuandlApi.getRequestUrl = function (option) {
-  var value = option.value;
-  var fromDate = option.fromDate;
-  var toDate = option.toDate;
-  var apiKey = option.apiKey;
+  var value = option.value,
+      fromDate = option.fromDate,
+      toDate = option.toDate,
+      apiKey = option.apiKey;
 
 
   var _queryDate = void 0;
@@ -37,12 +34,6 @@ QuandlApi.getRequestUrl = function (option) {
   } else {
     _queryDate = QuandlApi.BLANK;
   }
-
-  /*
-  const _queryDate = (fromDate && toDate)
-          ? `sort_order=asc&trim_start=${fromDate}&trim_end=${toDate}`
-          : QuandlApi.BLANK;
-  */
 
   var _apiKey = void 0;
   if (apiKey) {
@@ -59,9 +50,9 @@ QuandlApi.getRequestUrl = function (option) {
 var REQUEST_ERROR = 'Request Error',
     DATASET_EMPTY = 'Dataset Empty';
 QuandlApi.checkResponse = function (json) {
-  var quandl_error = json.quandl_error;
-  var _json$dataset = json.dataset;
-  var dataset = _json$dataset === undefined ? {} : _json$dataset;
+  var quandl_error = json.quandl_error,
+      _json$dataset = json.dataset,
+      dataset = _json$dataset === undefined ? {} : _json$dataset;
 
   if (quandl_error) {
     if (quandl_error.message) {
@@ -70,10 +61,10 @@ QuandlApi.checkResponse = function (json) {
       throw { errCaption: REQUEST_ERROR, message: '' };
     }
   } else if (!dataset.data || dataset.data.length === 0) {
-    var _dataset$newest_avail = dataset.newest_available_date;
-    var newest_available_date = _dataset$newest_avail === undefined ? '' : _dataset$newest_avail;
-    var _dataset$oldest_avail = dataset.oldest_available_date;
-    var oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail;
+    var _dataset$newest_avail = dataset.newest_available_date,
+        newest_available_date = _dataset$newest_avail === undefined ? '' : _dataset$newest_avail,
+        _dataset$oldest_avail = dataset.oldest_available_date,
+        oldest_available_date = _dataset$oldest_avail === undefined ? '' : _dataset$oldest_avail;
 
     throw {
       errCaption: DATASET_EMPTY,

@@ -9,18 +9,18 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var LIMIT_REMAINING = 'X-RateLimit-Remaining';
 
 var fnFetch = exports.fnFetch = function fnFetch(_ref) {
-   var uri = _ref.uri;
-   var option = _ref.option;
-   var onCheckResponse = _ref.onCheckResponse;
-   var onFetch = _ref.onFetch;
-   var onCompleted = _ref.onCompleted;
-   var onFailed = _ref.onFailed;
-   var onCatch = _ref.onCatch;
+   var uri = _ref.uri,
+       option = _ref.option,
+       onCheckResponse = _ref.onCheckResponse,
+       onFetch = _ref.onFetch,
+       onCompleted = _ref.onCompleted,
+       onFailed = _ref.onFailed,
+       onCatch = _ref.onCatch;
 
    fetch(uri).then(function (response) {
-      var status = response.status;
-      var statusText = response.statusText;
-      var headers = response.headers;
+      var status = response.status,
+          statusText = response.statusText,
+          headers = response.headers;
 
       if (status >= 200 && status <= 400) {
          return Promise.all([Promise.resolve(headers.get(LIMIT_REMAINING)), response.json()]);
@@ -30,10 +30,9 @@ var fnFetch = exports.fnFetch = function fnFetch(_ref) {
          throw { errCaption: 'Response Error', message: status + ' : ' + statusText };
       }
    }).then(function (_ref2) {
-      var _ref3 = _slicedToArray(_ref2, 2);
-
-      var limitRemaining = _ref3[0];
-      var json = _ref3[1];
+      var _ref3 = _slicedToArray(_ref2, 2),
+          limitRemaining = _ref3[0],
+          json = _ref3[1];
 
       if (onCheckResponse(json, option)) {
          option.limitRemaining = limitRemaining;
@@ -45,12 +44,12 @@ var fnFetch = exports.fnFetch = function fnFetch(_ref) {
 };
 
 var fnFetchText = exports.fnFetchText = function fnFetchText(_ref4) {
-   var uri = _ref4.uri;
-   var onFetch = _ref4.onFetch;
+   var uri = _ref4.uri,
+       onFetch = _ref4.onFetch;
 
    fetch(uri).then(function (response) {
-      var status = response.status;
-      var statusText = response.statusText;
+      var status = response.status,
+          statusText = response.statusText;
 
       if (status >= 200 && status < 400) {
          return response.text();

@@ -6,7 +6,7 @@ export const fnFetch = function({
  }){
   fetch(uri)
     .then((response) => {
-      const { status, statusText, headers } = response;      
+      const { status, statusText, headers } = response;
       if (status>=200 && status<=400){
         return Promise.all([
            Promise.resolve(headers.get(LIMIT_REMAINING)),
