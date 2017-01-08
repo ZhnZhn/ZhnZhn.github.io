@@ -51,9 +51,10 @@ const styles = {
 }
 
 const EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/'
+    , NASDAQ_BASE = 'https://www.nasdaq.com/symbol/'
 
 const RouterFnLink = {
-  EURONEXT : (item) => {
+  EURONEXT : (item) => {    
     return (
       <a
         className="native-link"
@@ -61,6 +62,22 @@ const RouterFnLink = {
         href={`${EURONEXT_BASE}${item.isin}-${item.market}`}
       >
         {`Euronext Link ${item.caption}`}
+      </a>
+    );
+  },
+  NASDAQ : (item) => {
+    const { text='', value } = item
+        , _ticket = (value)
+              ? value.trim()
+              : text.split('-')[0].trim()
+
+    return (
+      <a
+        className="native-link"
+        style={styles.codeLink}
+        href={`${NASDAQ_BASE}${_ticket}`}
+      >
+        {`NASDAQ Link ${_ticket}`}
       </a>
     );
   }
@@ -94,7 +111,7 @@ const PanelDataInfo = React.createClass({
   },
 
   render(){
-    const {isShow, info, zhInfo, onClickChart } = this.props
+    const {isShow, info, zhInfo={}, onClickChart } = this.props
         , {
              name,
              newest_available_date,
@@ -104,8 +121,10 @@ const PanelDataInfo = React.createClass({
              description
            } = info
          , { item, linkFn } = zhInfo
-         , styleShow = isShow ? styles.rootShow : styles.rootHide;
-    
+         , styleShow = isShow
+             ? styles.rootShow
+             : styles.rootHide;
+
     return (
        <div style={styleShow}>
          <ButtonTab

@@ -64,7 +64,8 @@ var styles = {
   }
 };
 
-var EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/';
+var EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/',
+    NASDAQ_BASE = 'https://www.nasdaq.com/symbol/';
 
 var RouterFnLink = {
   EURONEXT: function EURONEXT(item) {
@@ -76,6 +77,22 @@ var RouterFnLink = {
         href: '' + EURONEXT_BASE + item.isin + '-' + item.market
       },
       'Euronext Link ' + item.caption
+    );
+  },
+  NASDAQ: function NASDAQ(item) {
+    var _item$text = item.text,
+        text = _item$text === undefined ? '' : _item$text,
+        value = item.value,
+        _ticket = value ? value.trim() : text.split('-')[0].trim();
+
+    return _react2.default.createElement(
+      'a',
+      {
+        className: 'native-link',
+        style: styles.codeLink,
+        href: '' + NASDAQ_BASE + _ticket
+      },
+      'NASDAQ Link ' + _ticket
     );
   }
 };
@@ -108,7 +125,8 @@ var PanelDataInfo = _react2.default.createClass({
     var _props = this.props,
         isShow = _props.isShow,
         info = _props.info,
-        zhInfo = _props.zhInfo,
+        _props$zhInfo = _props.zhInfo,
+        zhInfo = _props$zhInfo === undefined ? {} : _props$zhInfo,
         onClickChart = _props.onClickChart,
         name = info.name,
         newest_available_date = info.newest_available_date,

@@ -67,13 +67,13 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
   },
 
   getInitialState: function getInitialState() {
-    var _props$data = this.props.data;
-    var fromDate = _props$data.fromDate;
-    var initToDate = _props$data.initToDate;
-    var onTestDate = _props$data.onTestDate;
-    var _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2);
-    var _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate();
-    var _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
+    var _props$data = this.props.data,
+        fromDate = _props$data.fromDate,
+        initToDate = _props$data.initToDate,
+        onTestDate = _props$data.onTestDate,
+        _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
+        _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
+        _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
 
     return {
       initFromDate: _initFromDate,
@@ -93,35 +93,32 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
     }
     return true;
   },
-  _handlerSelectDataSource: function _handlerSelectDataSource(dataSource) {
-    this.dataSource = dataSource;
-  },
   _handlerLoad: function _handlerLoad() {
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      var _props = this.props;
-      var data = _props.data;
-      var onClose = _props.onClose;
-      var _data$item = data.item;
-      var item = _data$item === undefined ? {} : _data$item;
-      var browserType = data.browserType;
-      var chartContainerType = data.chartContainerType;
-      var id = item.id;
-      var text = item.text;
-
-      var _datesFragment$getVal = this.datesFragment.getValues();
-
-      var fromDate = _datesFragment$getVal.fromDate;
-      var toDate = _datesFragment$getVal.toDate;
-      var option = {
+      var _props = this.props,
+          data = _props.data,
+          onClose = _props.onClose,
+          _data$item = data.item,
+          item = _data$item === undefined ? {} : _data$item,
+          browserType = data.browserType,
+          chartContainerType = data.chartContainerType,
+          id = item.id,
+          text = item.text,
+          _datesFragment$getVal = this.datesFragment.getValues(),
+          fromDate = _datesFragment$getVal.fromDate,
+          toDate = _datesFragment$getVal.toDate,
+          option = {
         title: text,
         //subtitle : subtitle,
         value: id,
-        stock: id,
+        //stock: id,
+        stock: item,
         fromDate: fromDate,
         toDate: toDate,
         loadId: _Type.LoadType.WL,
         id: id,
+        linkFn: 'NASDAQ',
         columnName: 'Close',
         seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close']
       };
@@ -133,19 +130,19 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
   },
   _getValidationMessages: function _getValidationMessages() {
     var msg = [];
-    var data = this.props.data;
-    var item = data.item;
-    var id = item.id;
-    var _arr = id.split('/');
+    var data = this.props.data,
+        item = data.item,
+        id = item.id,
+        _arr = id.split('/');
+
 
     if (!(_arr.length > 1)) {
       msg.push(ABSENT_VALIDATION_MSG);
     }
 
-    var _datesFragment$getVal2 = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal2.isValid;
-    var datesMsg = _datesFragment$getVal2.datesMsg;
+    var _datesFragment$getVal2 = this.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal2.isValid,
+        datesMsg = _datesFragment$getVal2.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -156,21 +153,21 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var _props2$data = _props2.data;
-    var data = _props2$data === undefined ? {} : _props2$data;
-    var _data$item2 = data.item;
-    var item = _data$item2 === undefined ? {} : _data$item2;
-    var onShow = data.onShow;
-    var text = item.text;
-    var id = item.id;
-    var _state = this.state;
-    var initFromDate = _state.initFromDate;
-    var initToDate = _state.initToDate;
-    var onTestDate = _state.onTestDate;
-    var validationMessages = _state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props2 = this.props,
+        isShow = _props2.isShow,
+        _props2$data = _props2.data,
+        data = _props2$data === undefined ? {} : _props2$data,
+        _data$item2 = data.item,
+        item = _data$item2 === undefined ? {} : _data$item2,
+        onShow = data.onShow,
+        text = item.text,
+        id = item.id,
+        _state = this.state,
+        initFromDate = _state.initFromDate,
+        initToDate = _state.initToDate,
+        onTestDate = _state.onTestDate,
+        validationMessages = _state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
@@ -180,9 +177,9 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       type: 'TypeC',
       caption: 'Show',
       onClick: onShow
-    })];
-    var _arr = id.split('/');
-    var _text = _arr.length > 1 ? id.split('/')[0] : ABSENT;
+    })],
+        _arr = id.split('/'),
+        _text = _arr.length > 1 ? id.split('/')[0] : ABSENT;
 
     return _react2.default.createElement(
       _ModalDialog2.default,

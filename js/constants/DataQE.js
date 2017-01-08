@@ -298,6 +298,7 @@ var DataQE = {
       optionsJsonProp: 'tickets',
       valueFn: "RPrefixOne",
       valueFnPrefix: "WIKI",
+      linkFn: "NASDAQ",
       loadId: 'Q',
       columnName: 'Close',
       seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adj. Close']

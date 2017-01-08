@@ -62,11 +62,7 @@ const StocksBySectorDialog = React.createClass({
      }
      return true;
    },
-
-   _handlerSelectDataSource(dataSource){
-     this.dataSource = dataSource
-   },
-
+   
   _handlerLoad(){
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
@@ -78,11 +74,13 @@ const StocksBySectorDialog = React.createClass({
              title : text,
              //subtitle : subtitle,
              value : id,
-             stock: id,
+             //stock: id,
+             stock : item,
              fromDate: fromDate,
              toDate: toDate,
              loadId : LoadType.WL,
              id : id,
+             linkFn : 'NASDAQ',
              columnName : 'Close',
              seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ]
           }
