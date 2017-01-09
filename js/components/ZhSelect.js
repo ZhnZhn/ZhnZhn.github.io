@@ -141,11 +141,13 @@ var ZhSelect = _react2.default.createClass({
   getInitialState: function getInitialState() {
     this.domOptionsCache = null;
     this.indexActiveOption = 0;
-    var _props = this.props;
-    var optionName = _props.optionName;
-    var optionNames = _props.optionNames;
-    var _optionName = optionName ? ' ' + optionName : '';
-    var _optionNames = optionNames ? ' ' + optionNames : optionName ? _optionName : '';
+
+    var _props = this.props,
+        optionName = _props.optionName,
+        optionNames = _props.optionNames,
+        _optionName = optionName ? ' ' + optionName : '',
+        _optionNames = optionNames ? ' ' + optionNames : optionName ? _optionName : '';
+
     return {
       value: '',
       isShowOption: false,
@@ -265,90 +267,98 @@ var ZhSelect = _react2.default.createClass({
     switch (event.keyCode) {
       // enter
       case 13:
-        var item = this.state.options[this.indexActiveOption];
+        {
+          var item = this.state.options[this.indexActiveOption];
 
-        if (item && item.caption) {
-          this.setState({
-            value: item.caption,
-            isShowOption: false,
-            isValidDomOptionsCache: true
-          });
+          if (item && item.caption) {
+            this.setState({
+              value: item.caption,
+              isShowOption: false,
+              isValidDomOptionsCache: true
+            });
 
-          if (item.value !== 'noresult') {
-            this.props.onSelect(item);
-          } else {
-            this.props.onSelect(null);
+            if (item.value !== 'noresult') {
+              this.props.onSelect(item);
+            } else {
+              this.props.onSelect(null);
+            }
           }
+          break;
         }
-        break;
       //escape
       case 27:
-        if (this.state.isShowOption) {
-          this.setState({ isShowOption: false });
-        } else {
-          this._undecorateActiveOption();
-          this._setStateToInit(this.props.options);
-          this.props.onSelect(null);
+        {
+          if (this.state.isShowOption) {
+            this.setState({ isShowOption: false });
+          } else {
+            this._undecorateActiveOption();
+            this._setStateToInit(this.props.options);
+            this.props.onSelect(null);
+          }
+          break;
         }
-        break;
       //down
       case 40:
-        if (!this.state.isShowOption) {
-          this.setState({ isShowOption: true });
-        } else {
-          event.preventDefault();
+        {
+          if (!this.state.isShowOption) {
+            this.setState({ isShowOption: true });
+          } else {
+            event.preventDefault();
 
-          var domActiveOption = this._getDomForActiveOption();
+            var domActiveOption = this._getDomForActiveOption();
 
-          if (domActiveOption) {
-            this._undecorateOfDomActiveOption(domActiveOption);
+            if (domActiveOption) {
+              this._undecorateOfDomActiveOption(domActiveOption);
 
-            this.indexActiveOption += 1;
-            if (this.indexActiveOption >= this.state.options.length) {
-              this.indexActiveOption = 0;
-              this.domOptions.scrollTop = 0;
-            }
+              this.indexActiveOption += 1;
+              if (this.indexActiveOption >= this.state.options.length) {
+                this.indexActiveOption = 0;
+                this.domOptions.scrollTop = 0;
+              }
 
-            domActiveOption = this._getDomForActiveOption();
-            this._decorateOfDomActiveOption(domActiveOption);
+              domActiveOption = this._getDomForActiveOption();
+              this._decorateOfDomActiveOption(domActiveOption);
 
-            var offsetTop = this.refs["v" + this.indexActiveOption].offsetTop;
-            var scrollTop = this.domOptions.scrollTop;
-            if (offsetTop - scrollTop > 70) {
-              this.domOptions.scrollTop += offsetTop - scrollTop - 70;
+              var offsetTop = this.refs["v" + this.indexActiveOption].offsetTop;
+              var scrollTop = this.domOptions.scrollTop;
+              if (offsetTop - scrollTop > 70) {
+                this.domOptions.scrollTop += offsetTop - scrollTop - 70;
+              }
             }
           }
+          break;
         }
-        break;
       //up
       case 38:
-        if (this.state.isShowOption) {
-          event.preventDefault();
+        {
+          if (this.state.isShowOption) {
+            event.preventDefault();
 
-          var _domActiveOption = this._getDomForActiveOption();
-          if (_domActiveOption) {
-            this._undecorateOfDomActiveOption(_domActiveOption);
+            var _domActiveOption = this._getDomForActiveOption();
+            if (_domActiveOption) {
+              this._undecorateOfDomActiveOption(_domActiveOption);
 
-            this.indexActiveOption -= 1;
-            if (this.indexActiveOption < 0) {
-              this.indexActiveOption = this.state.options.length - 1;
-              var offsetTop2 = this.refs["v" + this.indexActiveOption].offsetTop;
-              this.domOptions.scrollTop = offsetTop2;
-            }
+              this.indexActiveOption -= 1;
+              if (this.indexActiveOption < 0) {
+                this.indexActiveOption = this.state.options.length - 1;
+                var offsetTop2 = this.refs["v" + this.indexActiveOption].offsetTop;
+                this.domOptions.scrollTop = offsetTop2;
+              }
 
-            _domActiveOption = this._getDomForActiveOption();
-            this._decorateOfDomActiveOption(_domActiveOption);
+              _domActiveOption = this._getDomForActiveOption();
+              this._decorateOfDomActiveOption(_domActiveOption);
 
-            var _offsetTop = _domActiveOption.offsetTop;
-            var _scrollTop = this.domOptions.scrollTop;
-            if (_offsetTop - _scrollTop < 70) {
-              this.domOptions.scrollTop -= 70 - (_offsetTop - _scrollTop);
+              var _offsetTop = _domActiveOption.offsetTop;
+              var _scrollTop = this.domOptions.scrollTop;
+              if (_offsetTop - _scrollTop < 70) {
+                this.domOptions.scrollTop -= 70 - (_offsetTop - _scrollTop);
+              }
             }
           }
+          break;
         }
-        break;
       default:
-        /*console.log(event.keyCode);*/return;
+        return undefined;
     }
   },
   _handlerToggleOptions: function _handlerToggleOptions() {
@@ -368,10 +378,10 @@ var ZhSelect = _react2.default.createClass({
   renderOptions: function renderOptions() {
     var _this = this;
 
-    var _state = this.state;
-    var isShowOption = _state.isShowOption;
-    var options = _state.options;
-    var isValidDomOptionsCache = _state.isValidDomOptionsCache;
+    var _state = this.state,
+        isShowOption = _state.isShowOption,
+        options = _state.options,
+        isValidDomOptionsCache = _state.isValidDomOptionsCache;
 
 
     var _domOptions = void 0;
@@ -397,11 +407,12 @@ var ZhSelect = _react2.default.createClass({
       }
     }
 
-    var width = this.props.width;
-    var _styleOptions = isShowOption ? { display: 'block' } : { display: 'none' };
-    var _styleDivWidth = width ? { width: width + 'px' } : null;
-    var _numberFilteredItems = options[0] && options[0].value !== 'noresult' ? options.length : 0;
-    var _numberAllItems = this.props.options ? this.props.options.length : 0;
+    var width = this.props.width,
+        _styleOptions = isShowOption ? { display: 'block' } : { display: 'none' },
+        _styleDivWidth = width ? { width: width + 'px' } : null,
+        _numberFilteredItems = options[0] && options[0].value !== 'noresult' ? options.length : 0,
+        _numberAllItems = this.props.options ? this.props.options.length : 0;
+
 
     return _react2.default.createElement(
       'div',
@@ -434,11 +445,11 @@ var ZhSelect = _react2.default.createClass({
   render: function render() {
     var _this2 = this;
 
-    var width = this.props.width;
-    var _state2 = this.state;
-    var value = _state2.value;
-    var isLocalMode = _state2.isLocalMode;
-    var isShowOption = _state2.isShowOption;
+    var width = this.props.width,
+        _state2 = this.state,
+        value = _state2.value,
+        isLocalMode = _state2.isLocalMode,
+        isShowOption = _state2.isShowOption;
 
 
     var _styleArrow = isShowOption ? styles.arrow_show : null;
@@ -454,13 +465,13 @@ var ZhSelect = _react2.default.createClass({
 
     var _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
-    var _props2 = this.props;
-    var isLoading = _props2.isLoading;
-    var isLoadingFailed = _props2.isLoadingFailed;
-    var placeholder = _props2.placeholder;
-    var _state3 = this.state;
-    var optionName = _state3.optionName;
-    var optionNames = _state3.optionNames;
+    var _props2 = this.props,
+        isLoading = _props2.isLoading,
+        isLoadingFailed = _props2.isLoadingFailed,
+        placeholder = _props2.placeholder,
+        _state3 = this.state,
+        optionName = _state3.optionName,
+        optionNames = _state3.optionNames;
 
 
     var _domAfterInput = void 0,

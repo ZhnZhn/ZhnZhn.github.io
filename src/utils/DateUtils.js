@@ -72,11 +72,11 @@ const _fnForYearSelect = function(mapDateDf=1){
   , i;
 	for (i=0; i<8; i++){
 		options.push({
-			caption: y,
-			value: y
+			caption: ''+y,
+			value: ''+y
 		});
 		if ( i === mapDateDf) {
-			dateDefault = y;
+			dateDefault = ''+y;
 		}
 		y = y - 1;
 	}

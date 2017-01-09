@@ -55,14 +55,16 @@ var STYLE = {
 
 var ZhDateField = _react2.default.createClass({
   displayName: 'ZhDateField',
-  getInitialState: function getInitialState() {
-    var initValue = this.props.initValue ? this.props.initValue : '';
-
+  _createInitialState: function _createInitialState(props) {
+    var _initValue = props.initValue ? props.initValue : '';
     return {
-      value: initValue,
-      errorInput: null,
+      value: _initValue,
+      errorInput: undefined,
       isValid: true
     };
+  },
+  getInitialState: function getInitialState() {
+    return this._createInitialState(this.props);
   },
   _handlerChangeValue: function _handlerChangeValue(event) {
     var _props = this.props,
@@ -79,7 +81,7 @@ var ZhDateField = _react2.default.createClass({
       this.setState({
         value: value,
         isValid: true,
-        errorInput: null
+        errorInput: undefined
       });
     }
   },
@@ -97,7 +99,7 @@ var ZhDateField = _react2.default.createClass({
       });
     } else {
       this.setState({
-        errorInput: null,
+        errorInput: undefined,
         isValid: true
       });
     }

@@ -9,7 +9,7 @@ const DatesFragment = React.createClass({
   displayName : 'DatesFragment',
   getDefaultProps(){
     return  {
-      msgOnNotValidFormat : (item) => '${item} is not in valid format'
+      msgOnNotValidFormat : (item='Date') => `${item} is not in valid format`
     }
   },
 
@@ -60,7 +60,7 @@ const DatesFragment = React.createClass({
     if (this.fromDate.getValue().trim() > this.toDate.getValue().trim() ) {
       datesMsg.push('From Date is near that To Date');
     }
-
+    
     if (datesMsg.length>0){
       return { isValid: false, datesMsg }
     }

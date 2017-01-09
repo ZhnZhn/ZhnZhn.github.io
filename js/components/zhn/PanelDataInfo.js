@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _RouterNativeLink = require('../native-links/RouterNativeLink');
+
+var _RouterNativeLink2 = _interopRequireDefault(_RouterNativeLink);
+
 var _ButtonTab = require('./ButtonTab');
 
 var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
@@ -16,12 +20,13 @@ var _InfoPart = require('./InfoPart');
 
 var _InfoPart2 = _interopRequireDefault(_InfoPart);
 
+var _OpenClose = require('./OpenClose2');
+
+var _OpenClose2 = _interopRequireDefault(_OpenClose);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DESCR_CSS_CLASS = 'info__descr',
-    LINK_CODE_CLASS = 'descr__quandl-link',
-    LINK_CODE_CAPTION = 'Quandl Data Link',
-    QUANDL_DATA_BASE = 'https://www.quandl.com/data/';
+var DESCR_CSS_CLASS = 'info__descr';
 
 var styles = {
   rootShow: {
@@ -49,14 +54,13 @@ var styles = {
     paddingRight: '5px',
     fontWeight: 'bold'
   },
-  codeLink: {
-    display: 'inline-block',
-    paddingTop: '10px'
-  },
   text: {
     fontWeight: 'bold',
     color: 'black',
     textTransform: 'capitalize'
+  },
+  description: {
+    paddingTop: '12px'
   },
   textDescr: {
     color: 'gray',
@@ -64,59 +68,20 @@ var styles = {
   }
 };
 
-var EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/',
-    NASDAQ_BASE = 'https://www.nasdaq.com/symbol/';
-
-var RouterFnLink = {
-  EURONEXT: function EURONEXT(item) {
-    return _react2.default.createElement(
-      'a',
-      {
-        className: 'native-link',
-        style: styles.codeLink,
-        href: '' + EURONEXT_BASE + item.isin + '-' + item.market
-      },
-      'Euronext Link ' + item.caption
-    );
-  },
-  NASDAQ: function NASDAQ(item) {
-    var _item$text = item.text,
-        text = _item$text === undefined ? '' : _item$text,
-        value = item.value,
-        _ticket = value ? value.trim() : text.split('-')[0].trim();
-
-    return _react2.default.createElement(
-      'a',
-      {
-        className: 'native-link',
-        style: styles.codeLink,
-        href: '' + NASDAQ_BASE + _ticket
-      },
-      'NASDAQ Link ' + _ticket
-    );
-  }
-};
-
 var PanelDataInfo = _react2.default.createClass({
   displayName: 'PanelDataInfo',
-  _renderLinkCode: function _renderLinkCode(dbCode, dsCode) {
+  _renderQuandlLink: function _renderQuandlLink(dbCode, dsCode) {
     if (!dbCode || !dsCode) {
       return undefined;
+    } else {
+      var Comp = _RouterNativeLink2.default['QUANDL'];
+      return _react2.default.createElement(Comp, { dbCode: dbCode, dsCode: dsCode });
     }
-    return _react2.default.createElement(
-      'a',
-      {
-        className: LINK_CODE_CLASS,
-        style: styles.codeLink,
-        href: '' + QUANDL_DATA_BASE + dbCode + '/' + dsCode
-      },
-      LINK_CODE_CAPTION + ' ' + dbCode + '/' + dsCode
-    );
   },
   _renderNativeLink: function _renderNativeLink(linkFn, item) {
-    var fnLink = RouterFnLink[linkFn];
-    if (typeof fnLink === 'function') {
-      return fnLink(item);
+    var Comp = _RouterNativeLink2.default[linkFn];
+    if (typeof Comp !== 'undefined') {
+      return _react2.default.createElement(Comp, { item: item });
     } else {
       return undefined;
     }
@@ -134,11 +99,12 @@ var PanelDataInfo = _react2.default.createClass({
         frequency = info.frequency,
         database_code = info.database_code,
         dataset_code = info.dataset_code,
-        description = info.description,
+        _info$description = info.description,
+        description = _info$description === undefined ? '' : _info$description,
         item = zhInfo.item,
         linkFn = zhInfo.linkFn,
-        styleShow = isShow ? styles.rootShow : styles.rootHide;
-
+        styleShow = isShow ? styles.rootShow : styles.rootHide,
+        _isDescriptionClose = description.length > 200 ? true : false;
 
     return _react2.default.createElement(
       'div',
@@ -173,15 +139,23 @@ var PanelDataInfo = _react2.default.createClass({
         styleCaption: styles.label,
         styleText: styles.text
       }),
-      this._renderLinkCode(database_code, dataset_code),
-      _react2.default.createElement(_InfoPart2.default, {
-        caption: '',
-        text: description,
-        isHtml: true,
-        classText: DESCR_CSS_CLASS,
-        rootStyle: styles.rootStyleDescription,
-        styleText: styles.textDescr
-      }),
+      this._renderQuandlLink(database_code, dataset_code),
+      _react2.default.createElement(
+        _OpenClose2.default,
+        {
+          caption: 'Description',
+          isClose: _isDescriptionClose,
+          style: styles.description
+        },
+        _react2.default.createElement(_InfoPart2.default, {
+          caption: '',
+          text: description,
+          isHtml: true,
+          classText: DESCR_CSS_CLASS,
+          rootStyle: styles.rootStyleDescription,
+          styleText: styles.textDescr
+        })
+      ),
       this._renderNativeLink(linkFn, item)
     );
   }

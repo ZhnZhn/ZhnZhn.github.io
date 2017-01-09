@@ -267,7 +267,7 @@ const ZhSelect = React.createClass({
   _handlerInputKeyDown(event){
     switch(event.keyCode){
       // enter
-      case 13:
+      case 13:{
          const item = this.state.options[this.indexActiveOption];
 
          if (item && item.caption){
@@ -283,9 +283,9 @@ const ZhSelect = React.createClass({
              this.props.onSelect(null);
            }
          }
-      break;
+      break;}
       //escape
-      case 27:
+      case 27:{
         if (this.state.isShowOption){
           this.setState({isShowOption : false});
         } else {
@@ -293,9 +293,9 @@ const ZhSelect = React.createClass({
           this._setStateToInit(this.props.options);
           this.props.onSelect(null);
         }
-      break;
+      break;}
       //down
-      case 40:
+      case 40:{
         if (!this.state.isShowOption){
           this.setState({isShowOption : true});
         } else {
@@ -322,9 +322,9 @@ const ZhSelect = React.createClass({
              }
           }
         }
-      break;
+      break;}
       //up
-      case 38:
+      case 38:{
         if (this.state.isShowOption){
           event.preventDefault();
 
@@ -349,8 +349,8 @@ const ZhSelect = React.createClass({
             }
           }
         }
-      break;
-      default: /*console.log(event.keyCode);*/ return;
+      break;}
+      default:return undefined;
     }
   },
 

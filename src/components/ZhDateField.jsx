@@ -45,16 +45,21 @@ const STYLE = {
 
 
 const ZhDateField = React.createClass({
-  getInitialState(){
-      const initValue = this.props.initValue ? this.props.initValue : '';
-
+  _createInitialState(props){
+      const _initValue = props.initValue
+                ? props.initValue
+                : '';
       return {
-        value: initValue,
-        errorInput: null,
+        value: _initValue,
+        errorInput: undefined,
         isValid: true
       }
   },
 
+  getInitialState(){
+     return this._createInitialState(this.props);
+  },
+  
   _handlerChangeValue(event){
     const { onTest, nForecastDate } = this.props
          , value = event.target.value
@@ -67,7 +72,7 @@ const ZhDateField = React.createClass({
       this.setState({
          value : value,
          isValid : true,
-         errorInput : null
+         errorInput : undefined
       })
     }
   },
@@ -82,7 +87,7 @@ const ZhDateField = React.createClass({
       })
     } else {
       this.setState({
-        errorInput : null,
+        errorInput : undefined,
         isValid : true
       })
     }

@@ -1,0 +1,18 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\EuronextLink.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\EuronextLink.js",
+ "sourceRoot": "",
+ "names": [
+  "EURONEXT_BASE",
+  "CAPTION",
+  "EuronextLink",
+  "item",
+  "caption",
+  "LINK",
+  "isin",
+  "market"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,gBAAgB,gDAAtB;AAAA,IACMC,UAAU,eADhB;;AAGA,IAAMC,eAAe,SAAfA,YAAe;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,EAAR;AAAA,0BAAYC,OAAZ;AAAA,MAAYA,OAAZ,gCAAoBH,OAApB;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,aADZ;AAEE,aAAO,eAAMI,IAFf;AAGE,iBAASL,aAAT,GAAyBG,KAAKG,IAA9B,SAAsCH,KAAKI;AAH7C;AAKMH,WALN,SAKiBD,KAAKC;AALtB,GADmB;AAAA,CAArB;;kBAUeF,Y"
+}

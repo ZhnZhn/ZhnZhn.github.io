@@ -27,12 +27,13 @@ var STYLE = {
 };
 
 var RowText = function RowText(_ref) {
-  var caption = _ref.caption;
-  var text = _ref.text;
+  var caption = _ref.caption,
+      text = _ref.text,
+      styleRoot = _ref.styleRoot;
 
   return _react2.default.createElement(
     'div',
-    { style: STYLE.ROOT_DIV },
+    { style: Object.assign({}, STYLE.ROOT_DIV, styleRoot) },
     _react2.default.createElement(
       'span',
       { style: STYLE.LABEL_SPAN },

@@ -1,13 +1,13 @@
 
 import React from 'react';
 
+import RouterNativeLink from '../native-links/RouterNativeLink';
+
 import ButtonTab from './ButtonTab';
 import InfoPart from './InfoPart';
+import OpenClose2 from './OpenClose2';
 
 const DESCR_CSS_CLASS = 'info__descr'
-    , LINK_CODE_CLASS = 'descr__quandl-link'
-    , LINK_CODE_CAPTION = 'Quandl Data Link'
-    , QUANDL_DATA_BASE = 'https://www.quandl.com/data/';
 
 const styles = {
   rootShow : {
@@ -35,14 +35,13 @@ const styles = {
     paddingRight : '5px',
     fontWeight : 'bold'
   },
-  codeLink : {
-    display : 'inline-block' ,
-    paddingTop : '10px'
-  },
   text : {
     fontWeight : 'bold',
     color : 'black',
     textTransform: 'capitalize'
+  },
+  description : {
+    paddingTop : '12px'
   },
   textDescr : {
     color : 'gray',
@@ -50,64 +49,24 @@ const styles = {
   }
 }
 
-const EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/'
-    , NASDAQ_BASE = 'https://www.nasdaq.com/symbol/'
-
-const RouterFnLink = {
-  EURONEXT : (item) => {    
-    return (
-      <a
-        className="native-link"
-        style={styles.codeLink}
-        href={`${EURONEXT_BASE}${item.isin}-${item.market}`}
-      >
-        {`Euronext Link ${item.caption}`}
-      </a>
-    );
-  },
-  NASDAQ : (item) => {
-    const { text='', value } = item
-        , _ticket = (value)
-              ? value.trim()
-              : text.split('-')[0].trim()
-
-    return (
-      <a
-        className="native-link"
-        style={styles.codeLink}
-        href={`${NASDAQ_BASE}${_ticket}`}
-      >
-        {`NASDAQ Link ${_ticket}`}
-      </a>
-    );
-  }
-};
-
 const PanelDataInfo = React.createClass({
 
-  _renderLinkCode(dbCode, dsCode){
+  _renderQuandlLink(dbCode, dsCode){
     if (!dbCode || !dsCode){
       return undefined;
+    } else {
+      const Comp = RouterNativeLink['QUANDL'];
+      return (<Comp dbCode={dbCode} dsCode={dsCode} />);
     }
-    return (
-      <a
-        className={LINK_CODE_CLASS}
-        style={styles.codeLink}
-        href={`${QUANDL_DATA_BASE}${dbCode}/${dsCode}`}
-      >
-        {`${LINK_CODE_CAPTION} ${dbCode}/${dsCode}`}
-      </a>
-    )
   },
 
   _renderNativeLink(linkFn, item){
-    const fnLink = RouterFnLink[linkFn]
-    if (typeof fnLink === 'function'){
-      return fnLink(item);
+    const Comp = RouterNativeLink[linkFn]
+    if (typeof Comp !== 'undefined') {
+      return (<Comp item={item} />);
     } else {
       return undefined;
     }
-
   },
 
   render(){
@@ -118,13 +77,16 @@ const PanelDataInfo = React.createClass({
              oldest_available_date,
              frequency,
              database_code, dataset_code,
-             description
+             description=''
            } = info
          , { item, linkFn } = zhInfo
          , styleShow = isShow
              ? styles.rootShow
-             : styles.rootHide;
-
+             : styles.rootHide
+        , _isDescriptionClose = (description.length>200)
+                ? true
+                : false;
+             
     return (
        <div style={styleShow}>
          <ButtonTab
@@ -157,15 +119,21 @@ const PanelDataInfo = React.createClass({
             styleCaption={styles.label}
             styleText={styles.text}
          />
-         {this._renderLinkCode(database_code, dataset_code)}
-         <InfoPart
-            caption=""
-            text={description}
-            isHtml={true}
-            classText={DESCR_CSS_CLASS}
-            rootStyle={styles.rootStyleDescription}
-            styleText={styles.textDescr}
-         />
+         {this._renderQuandlLink(database_code, dataset_code)}
+         <OpenClose2
+             caption="Description"
+             isClose={_isDescriptionClose}
+             style={styles.description}
+         >
+           <InfoPart
+              caption=""
+              text={description}
+              isHtml={true}
+              classText={DESCR_CSS_CLASS}
+              rootStyle={styles.rootStyleDescription}
+              styleText={styles.textDescr}
+           />
+         </OpenClose2>
          {this._renderNativeLink(linkFn, item)}
        </div>
     )

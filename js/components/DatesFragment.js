@@ -24,8 +24,9 @@ var DatesFragment = _react2.default.createClass({
   displayName: 'DatesFragment',
   getDefaultProps: function getDefaultProps() {
     return {
-      msgOnNotValidFormat: function msgOnNotValidFormat(item) {
-        return '${item} is not in valid format';
+      msgOnNotValidFormat: function msgOnNotValidFormat() {
+        var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Date';
+        return item + ' is not in valid format';
       }
     };
   },

@@ -16,9 +16,9 @@ const STYLE = {
   }
 }
 
-const RowText = ({ caption, text }) => {
+const RowText = ({ caption, text, styleRoot }) => {
   return (
-    <div style={STYLE.ROOT_DIV}>
+    <div style={Object.assign({}, STYLE.ROOT_DIV, styleRoot)}>
       <span style={STYLE.LABEL_SPAN}>
         {caption}
       </span>

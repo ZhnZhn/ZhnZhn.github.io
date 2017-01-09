@@ -28,13 +28,25 @@ var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
+var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
+
+var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+
 var _RowText = require('./RowText');
 
 var _RowText2 = _interopRequireDefault(_RowText);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ShowHide = require('../zhn/ShowHide');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
+var _Row = require('./Row');
+
+var _Row2 = _interopRequireDefault(_Row);
+
+var _NasdaqLink = require('../native-links/NasdaqLink');
+
+var _NasdaqLink2 = _interopRequireDefault(_NasdaqLink);
 
 var _DatesFragment = require('../DatesFragment');
 
@@ -43,6 +55,10 @@ var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+
+var _ToolBarButton = require('../ToolBarButton');
+
+var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,6 +69,27 @@ var STYLE = {
   CAPTION_SPAN: {
     display: 'inline-block',
     maxWidth: '295px'
+  },
+  SOURCE_ROOT: {
+    lineHeight: 1.5,
+    marginBottom: '0px'
+  },
+  LINK_SHOW_HIDE: {
+    marginBottom: '10px'
+  },
+  LINK_ROOT: {
+    marginTop: '0px',
+    marginBottom: '0px',
+    lineHeight: 1.5,
+    fontWeight: 'bold'
+  },
+  LINK_CAPTION: {
+    color: '#1B75BB',
+    display: 'inline-block',
+    textAlign: 'right',
+    width: '100px',
+    paddingRight: '5px',
+    fontSize: '16px'
   }
 };
 
@@ -66,25 +103,36 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
     onClose: _react2.default.PropTypes.func.isRequired
   },
 
-  getInitialState: function getInitialState() {
-    var _props$data = this.props.data,
-        fromDate = _props$data.fromDate,
-        initToDate = _props$data.initToDate,
-        onTestDate = _props$data.onTestDate,
+  _createInitialState: function _createInitialState(props) {
+    var _props$data = props.data,
+        data = _props$data === undefined ? {} : _props$data,
+        _data$item = data.item,
+        item = _data$item === undefined ? {} : _data$item,
+        fromDate = data.fromDate,
+        initToDate = data.initToDate,
+        onTestDate = data.onTestDate,
+        _item$id = item.id,
+        id = _item$id === undefined ? '' : _item$id,
+        _isShowLink = id.split('/').length > 1 ? false : true,
         _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
         _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
         _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
 
     return {
+      isShowLink: _isShowLink,
       initFromDate: _initFromDate,
       initToDate: _initToDate,
       onTestDate: _onTestDate,
       validationMessages: []
     };
   },
+  getInitialState: function getInitialState() {
+    this.toolbarButtons = [{ caption: 'L', onClick: this._handleClickLink }];
+    return this._createInitialState(this.props);
+  },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data && this.state.validationMessages.length !== 0) {
-      this.setState({ validationMessages: [] });
+    if (this.props.data !== nextProps.data) {
+      this.setState(this._createInitialState(nextProps));
     }
   },
   shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
@@ -93,14 +141,17 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
     }
     return true;
   },
+  _handleClickLink: function _handleClickLink() {
+    this.setState({ isShowLink: !this.state.isShowLink });
+  },
   _handlerLoad: function _handlerLoad() {
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
       var _props = this.props,
           data = _props.data,
           onClose = _props.onClose,
-          _data$item = data.item,
-          item = _data$item === undefined ? {} : _data$item,
+          _data$item2 = data.item,
+          item = _data$item2 === undefined ? {} : _data$item2,
           browserType = data.browserType,
           chartContainerType = data.chartContainerType,
           id = item.id,
@@ -157,12 +208,14 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
         isShow = _props2.isShow,
         _props2$data = _props2.data,
         data = _props2$data === undefined ? {} : _props2$data,
-        _data$item2 = data.item,
-        item = _data$item2 === undefined ? {} : _data$item2,
+        _data$item3 = data.item,
+        item = _data$item3 === undefined ? {} : _data$item3,
         onShow = data.onShow,
         text = item.text,
-        id = item.id,
+        _item$id2 = item.id,
+        id = _item$id2 === undefined ? '' : _item$id2,
         _state = this.state,
+        isShowLink = _state.isShowLink,
         initFromDate = _state.initFromDate,
         initToDate = _state.initToDate,
         onTestDate = _state.onTestDate,
@@ -190,13 +243,29 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
         commandButtons: _commandButtons,
         onClose: this._handlerClose
       },
-      _react2.default.createElement(_RowText2.default, {
-        key: '1',
-        caption: 'Source:',
-        text: _text
+      _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        buttons: this.toolbarButtons
       }),
+      _react2.default.createElement(_RowText2.default, {
+        caption: 'Source:',
+        text: _text,
+        styleRoot: STYLE.SOURCE_ROOT
+      }),
+      _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowLink, style: STYLE.LINK_SHOW_HIDE },
+        _react2.default.createElement(
+          _Row2.default,
+          { style: STYLE.LINK_ROOT },
+          _react2.default.createElement(
+            'span',
+            { style: STYLE.LINK_CAPTION },
+            'Link:'
+          ),
+          _react2.default.createElement(_NasdaqLink2.default, { item: item, caption: 'NASDAQ' })
+        )
+      ),
       _react2.default.createElement(_DatesFragment2.default, {
-        key: '2',
         ref: function ref(c) {
           return _this.datesFragment = c;
         },
@@ -205,7 +274,6 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
         onTestDate: onTestDate
       }),
       _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        key: '3',
         validationMessages: validationMessages
       })
     );
