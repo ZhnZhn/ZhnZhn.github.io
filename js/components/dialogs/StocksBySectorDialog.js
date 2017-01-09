@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _WithValidation = require('../dialogs/WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
-
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -23,6 +19,10 @@ var _ChartActions = require('../../flux/actions/ChartActions');
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 var _Type = require('../../constants/Type');
+
+var _WithValidation = require('../dialogs/WithValidation');
+
+var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ModalDialog = require('../zhn/ModalDialog');
 
@@ -103,17 +103,28 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
     onClose: _react2.default.PropTypes.func.isRequired
   },
 
-  _createInitialState: function _createInitialState(props) {
+  _getItemSource: function _getItemSource(props) {
     var _props$data = props.data,
         data = _props$data === undefined ? {} : _props$data,
         _data$item = data.item,
         item = _data$item === undefined ? {} : _data$item,
+        _item$id = item.id,
+        id = _item$id === undefined ? '' : _item$id,
+        arr = id.split('/');
+
+    if (arr.length < 2) {
+      return ABSENT;
+    } else {
+      return arr[0];
+    }
+  },
+  _createInitialState: function _createInitialState(props) {
+    var _props$data2 = props.data,
+        data = _props$data2 === undefined ? {} : _props$data2,
         fromDate = data.fromDate,
         initToDate = data.initToDate,
         onTestDate = data.onTestDate,
-        _item$id = item.id,
-        id = _item$id === undefined ? '' : _item$id,
-        _isShowLink = id.split('/').length > 1 ? false : true,
+        _isShowLink = this._getItemSource(props) !== ABSENT ? false : true,
         _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
         _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
         _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
@@ -181,13 +192,8 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
   },
   _getValidationMessages: function _getValidationMessages() {
     var msg = [];
-    var data = this.props.data,
-        item = data.item,
-        id = item.id,
-        _arr = id.split('/');
 
-
-    if (!(_arr.length > 1)) {
+    if (this._getItemSource(this.props) === ABSENT) {
       msg.push(ABSENT_VALIDATION_MSG);
     }
 
@@ -212,8 +218,6 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
         item = _data$item3 === undefined ? {} : _data$item3,
         onShow = data.onShow,
         text = item.text,
-        _item$id2 = item.id,
-        id = _item$id2 === undefined ? '' : _item$id2,
         _state = this.state,
         isShowLink = _state.isShowLink,
         initFromDate = _state.initFromDate,
@@ -231,8 +235,7 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       caption: 'Show',
       onClick: onShow
     })],
-        _arr = id.split('/'),
-        _text = _arr.length > 1 ? id.split('/')[0] : ABSENT;
+        _source = this._getItemSource(this.props);
 
     return _react2.default.createElement(
       _ModalDialog2.default,
@@ -248,7 +251,7 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       }),
       _react2.default.createElement(_RowText2.default, {
         caption: 'Source:',
-        text: _text,
+        text: _source,
         styleRoot: STYLE.SOURCE_ROOT
       }),
       _react2.default.createElement(

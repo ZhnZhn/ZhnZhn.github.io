@@ -1,23 +1,16 @@
 import React from 'react';
 
-import WithValidation from '../dialogs/WithValidation';
-
 import DateUtils from '../../utils/DateUtils';
-
 import ChartActions from '../../flux/actions/ChartActions';
-
 import { LoadType } from '../../constants/Type';
 
-
-
+import WithValidation from '../dialogs/WithValidation';
 import ModalDialog from '../zhn/ModalDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import RowText from './RowText';
-
 import ShowHide from '../zhn/ShowHide';
 import Row from './Row';
 import NasdaqLink from '../native-links/NasdaqLink';
-
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 import ToolBarButton from '../ToolBarButton';
@@ -62,11 +55,24 @@ const StocksBySectorDialog = React.createClass({
      onClose : React.PropTypes.func.isRequired
    },
 
+   _getItemSource(props){
+     const { data={} } = props
+         , { item={} } = data
+         , { id='' } = item
+         , arr = id.split('/');
+      if (arr.length<2){
+        return ABSENT;
+      } else {
+        return arr[0];
+      }
+   },
+
    _createInitialState(props){
      const { data={} } = props
-         , { item={}, fromDate, initToDate, onTestDate } = data
-         , { id='' } = item
-         , _isShowLink = (id.split('/').length>1) ? false : true
+         , { fromDate, initToDate, onTestDate } = data
+         , _isShowLink = (this._getItemSource(props) !== ABSENT)
+              ? false
+              : true
          , _initFromDate = (fromDate) ? fromDate : DateUtils.getFromDate(2)
          , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
          , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate
@@ -131,13 +137,11 @@ const StocksBySectorDialog = React.createClass({
   },
 
   _getValidationMessages(){
-    let   msg = [];
-    const { data } = this.props
-        , { item } = data
-        , { id } = item
-        , _arr = id.split('/');
+    let  msg = [];
 
-    if (!(_arr.length>1)) { msg.push(ABSENT_VALIDATION_MSG);}
+    if (this._getItemSource(this.props) === ABSENT) {
+      msg.push(ABSENT_VALIDATION_MSG);
+    }
 
     const { isValid, datesMsg } = this.datesFragment.getValidation();
     if (!isValid) { msg = msg.concat(datesMsg); }
@@ -148,7 +152,7 @@ const StocksBySectorDialog = React.createClass({
   render(){
     const { isShow, data={} } = this.props
         , { item={}, onShow } = data
-        , { text, id='' } = item
+        , { text } = item
         , {
             isShowLink,
             initFromDate, initToDate, onTestDate,
@@ -168,8 +172,8 @@ const StocksBySectorDialog = React.createClass({
                 onClick={onShow}
              />
           ]
-        , _arr = id.split('/')
-        , _text = (_arr.length>1) ? id.split('/')[0] : ABSENT ;
+        , _source = this._getItemSource(this.props)
+
 
     return (
       <ModalDialog
@@ -184,7 +188,7 @@ const StocksBySectorDialog = React.createClass({
         />
         <RowText
           caption="Source:"
-          text={_text}
+          text={_source}
           styleRoot={STYLE.SOURCE_ROOT}
         />
         <ShowHide isShow={isShowLink} style={STYLE.LINK_SHOW_HIDE}>

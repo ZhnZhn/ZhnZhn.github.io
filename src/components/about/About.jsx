@@ -223,6 +223,11 @@ const About = React.createClass({
            </Token>
          </p>
          <IconLogoBar />
+         <p>
+           <Token color="black">
+             *Logos Fair Use.
+           </Token>
+         </p>
         </div>
 
         </ScrollPane>

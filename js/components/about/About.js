@@ -357,7 +357,16 @@ var About = _react2.default.createClass({
               'does not exist any restrictions.'
             )
           ),
-          _react2.default.createElement(_IconLogoBar2.default, null)
+          _react2.default.createElement(_IconLogoBar2.default, null),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              _Token2.default,
+              { color: 'black' },
+              '*Logos Fair Use.'
+            )
+          )
         )
       )
     );

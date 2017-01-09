@@ -15,8 +15,8 @@
   border: 3px solid #232f3b;
   padding: 14px 16px 10px;
   transition: border-color, border-width, fill 200ms ease-out;
-  stroke : #e15829;
-  fill : #e15829;
+  stroke : #E95424;
+  fill : #E95424;
 }
 .icon__quandl:hover{
   border-color: #2f7ed8;
