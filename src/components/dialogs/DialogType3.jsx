@@ -1,5 +1,7 @@
 import React from 'react';
 
+import createLoadOptions from '../../flux/creaters/type3';
+
 import WithValidation from './WithValidation';
 
 import ZhDialog from '../ZhDialog';
@@ -15,7 +17,7 @@ const DialogType3 = React.createClass({
   displayName : 'DialogType3',
 
   getInitialState(){
-    this.stock = null;
+    this.stock = undefined;
     this.toolbarButtons = (this.props.descrUrl)
          ?  [{ caption: 'I', onClick: this._handlerClickInfo }] : [];
 
@@ -39,7 +41,7 @@ const DialogType3 = React.createClass({
   },
 
   _handlerSelectStock(stock){
-    this.stock = stock
+    this.stock = stock;
   },
 
   _handlerLoad(event){
@@ -60,29 +62,10 @@ const DialogType3 = React.createClass({
   },
   _createLoadOption(){
     const { fromDate, toDate } = this.datesFragment.getValues()
-        , {
-            columnName, dataColumn, seriaColumnNames, loadId,
-            fnValue, fnItemCaption,
-            linkFn
-          } = this.props
-        , _value = (typeof fnValue === 'function')
-                  ? fnValue(this.stock.value) : this.stock.value
-        , _itemCaption = (typeof fnItemCaption === 'function')
-                  ? fnItemCaption(this.stock.value) : undefined;
-    return {
-      //value : this.stock.value,
-      value : _value,
-      title: this.stock.caption,
-      stock: this.stock,
-      fromDate: fromDate,
-      toDate: toDate,
-      columnName : columnName,
-      dataColumn : dataColumn,
-      itemCaption : _itemCaption,
-      loadId : loadId,
-      linkFn : linkFn,
-      seriaColumnNames
-    }
+    return createLoadOptions(
+        this.props,
+        { stock : this.stock, fromDate, toDate }
+    );
   },
   _handlerClose(){
     this._handlerWithValidationClose(this._createValidationMessages);

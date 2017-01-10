@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _type = require('../../flux/creaters/type3');
+
+var _type2 = _interopRequireDefault(_type);
+
 var _WithValidation = require('./WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
@@ -45,7 +49,7 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   displayName: 'DialogType3',
 
   getInitialState: function getInitialState() {
-    this.stock = null;
+    this.stock = undefined;
     this.toolbarButtons = this.props.descrUrl ? [{ caption: 'I', onClick: this._handlerClickInfo }] : [];
 
     return {
@@ -96,32 +100,9 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   _createLoadOption: function _createLoadOption() {
     var _datesFragment$getVal2 = this.datesFragment.getValues(),
         fromDate = _datesFragment$getVal2.fromDate,
-        toDate = _datesFragment$getVal2.toDate,
-        _props2 = this.props,
-        columnName = _props2.columnName,
-        dataColumn = _props2.dataColumn,
-        seriaColumnNames = _props2.seriaColumnNames,
-        loadId = _props2.loadId,
-        fnValue = _props2.fnValue,
-        fnItemCaption = _props2.fnItemCaption,
-        linkFn = _props2.linkFn,
-        _value = typeof fnValue === 'function' ? fnValue(this.stock.value) : this.stock.value,
-        _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(this.stock.value) : undefined;
+        toDate = _datesFragment$getVal2.toDate;
 
-    return {
-      //value : this.stock.value,
-      value: _value,
-      title: this.stock.caption,
-      stock: this.stock,
-      fromDate: fromDate,
-      toDate: toDate,
-      columnName: columnName,
-      dataColumn: dataColumn,
-      itemCaption: _itemCaption,
-      loadId: loadId,
-      linkFn: linkFn,
-      seriaColumnNames: seriaColumnNames
-    };
+    return (0, _type2.default)(this.props, { stock: this.stock, fromDate: fromDate, toDate: toDate });
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
@@ -130,20 +111,20 @@ var DialogType3 = _react2.default.createClass(_extends({}, _WithValidation2.defa
   render: function render() {
     var _this = this;
 
-    var _props3 = this.props,
-        caption = _props3.caption,
-        isShow = _props3.isShow,
-        onShow = _props3.onShow,
-        optionURI = _props3.optionURI,
-        optionsJsonProp = _props3.optionsJsonProp,
-        _props3$itemCaption = _props3.itemCaption,
-        itemCaption = _props3$itemCaption === undefined ? 'Stock:' : _props3$itemCaption,
-        _props3$optionNames = _props3.optionNames,
-        optionNames = _props3$optionNames === undefined ? 'Stocks' : _props3$optionNames,
-        initFromDate = _props3.initFromDate,
-        initToDate = _props3.initToDate,
-        msgOnNotValidFormat = _props3.msgOnNotValidFormat,
-        onTestDate = _props3.onTestDate,
+    var _props2 = this.props,
+        caption = _props2.caption,
+        isShow = _props2.isShow,
+        onShow = _props2.onShow,
+        optionURI = _props2.optionURI,
+        optionsJsonProp = _props2.optionsJsonProp,
+        _props2$itemCaption = _props2.itemCaption,
+        itemCaption = _props2$itemCaption === undefined ? 'Stock:' : _props2$itemCaption,
+        _props2$optionNames = _props2.optionNames,
+        optionNames = _props2$optionNames === undefined ? 'Stocks' : _props2$optionNames,
+        initFromDate = _props2.initFromDate,
+        initToDate = _props2.initToDate,
+        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
+        onTestDate = _props2.onTestDate,
         validationMessages = this.state.validationMessages,
         _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import createLoadOptions from '../../flux/creaters/type4';
+
 import ZhDialog from '../ZhDialog';
 import WithToolbar from './WithToolbar';
 import WithValidation from './WithValidation';
@@ -52,17 +54,12 @@ const DialogType4A = React.createClass({
   },
   _createLoadOption(){
     const { parent:one, child:two } = this.parentChild.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues()
-        , { fnValue, dataColumn, loadId } = this.props;
-    return {
-         value : fnValue(one.value, two.value),
-         fromDate: fromDate,
-         toDate: toDate,
-         dataColumn : dataColumn,
-         loadId : loadId,
-         title : one.caption,
-         subtitle : two.caption
-      }
+        , { fromDate, toDate } = this.datesFragment.getValues();
+        
+    return createLoadOptions(
+       this.props,
+       { one, two, fromDate, toDate }
+     );
   },
   _handlerClose(){
     this._handlerWithValidationClose(this._createValidationMessages);

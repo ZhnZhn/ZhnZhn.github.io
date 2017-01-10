@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _type = require('../../flux/creaters/type4');
+
+var _type2 = _interopRequireDefault(_type);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -72,19 +76,17 @@ var DialogType4A = _react2.default.createClass(_extends({
   _createValidationMessages: function _createValidationMessages() {
     var msg = [];
 
-    var _parentChild$getValid = this.parentChild.getValidation();
-
-    var isValid1 = _parentChild$getValid.isValid;
-    var msg1 = _parentChild$getValid.msg;
+    var _parentChild$getValid = this.parentChild.getValidation(),
+        isValid1 = _parentChild$getValid.isValid,
+        msg1 = _parentChild$getValid.msg;
 
     if (!isValid1) {
       msg = msg.concat(msg1);
     }
 
-    var _datesFragment$getVal = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal.isValid;
-    var datesMsg = _datesFragment$getVal.datesMsg;
+    var _datesFragment$getVal = this.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal.isValid,
+        datesMsg = _datesFragment$getVal.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -94,29 +96,14 @@ var DialogType4A = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _parentChild$getValue = this.parentChild.getValues();
+    var _parentChild$getValue = this.parentChild.getValues(),
+        one = _parentChild$getValue.parent,
+        two = _parentChild$getValue.child,
+        _datesFragment$getVal2 = this.datesFragment.getValues(),
+        fromDate = _datesFragment$getVal2.fromDate,
+        toDate = _datesFragment$getVal2.toDate;
 
-    var one = _parentChild$getValue.parent;
-    var two = _parentChild$getValue.child;
-
-    var _datesFragment$getVal2 = this.datesFragment.getValues();
-
-    var fromDate = _datesFragment$getVal2.fromDate;
-    var toDate = _datesFragment$getVal2.toDate;
-    var _props = this.props;
-    var fnValue = _props.fnValue;
-    var dataColumn = _props.dataColumn;
-    var loadId = _props.loadId;
-
-    return {
-      value: fnValue(one.value, two.value),
-      fromDate: fromDate,
-      toDate: toDate,
-      dataColumn: dataColumn,
-      loadId: loadId,
-      title: one.caption,
-      subtitle: two.caption
-    };
+    return (0, _type2.default)(this.props, { one: one, two: two, fromDate: fromDate, toDate: toDate });
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
@@ -125,28 +112,29 @@ var DialogType4A = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var caption = _props2.caption;
-    var oneCaption = _props2.oneCaption;
-    var oneURI = _props2.oneURI;
-    var oneJsonProp = _props2.oneJsonProp;
-    var twoCaption = _props2.twoCaption;
-    var msgOnNotSelected = _props2.msgOnNotSelected;
-    var isShow = _props2.isShow;
-    var onShow = _props2.onShow;
-    var initFromDate = _props2.initFromDate;
-    var initToDate = _props2.initToDate;
-    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
-    var onTestDate = _props2.onTestDate;
-    var _state = this.state;
-    var isShowDate = _state.isShowDate;
-    var validationMessages = _state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props = this.props,
+        caption = _props.caption,
+        oneCaption = _props.oneCaption,
+        oneURI = _props.oneURI,
+        oneJsonProp = _props.oneJsonProp,
+        twoCaption = _props.twoCaption,
+        msgOnNotSelected = _props.msgOnNotSelected,
+        isShow = _props.isShow,
+        onShow = _props.onShow,
+        initFromDate = _props.initFromDate,
+        initToDate = _props.initToDate,
+        msgOnNotValidFormat = _props.msgOnNotValidFormat,
+        onTestDate = _props.onTestDate,
+        _state = this.state,
+        isShowDate = _state.isShowDate,
+        validationMessages = _state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
+
 
     return _react2.default.createElement(
       _ZhDialog2.default,

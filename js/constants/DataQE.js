@@ -78,12 +78,10 @@ var DataQE = {
       oneCaption: 'Country',
       oneURI: './data/quandl/jodi-country-iso.json',
       oneJsonProp: 'countries',
-
       parentChildURI: './data/quandl/jodi-oil-products.json',
       parentCaption: 'Product',
       parentJsonProp: 'products',
       childCaption: 'Flow',
-
       valueFn: 'RJodiOil',
       loadId: 'Q'
     },

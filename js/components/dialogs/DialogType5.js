@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _type = require('../../flux/creaters/type5');
+
+var _type2 = _interopRequireDefault(_type);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -56,7 +60,7 @@ var DialogType5 = _react2.default.createClass(_extends({
   displayName: 'DialogType5'
 }, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
-    this.one = null;
+    this.one = undefined;
     this.toolbarButtons = this._createType2WithToolbar();
 
     return {
@@ -112,46 +116,9 @@ var DialogType5 = _react2.default.createClass(_extends({
         three = _parentChild$getValue.child,
         _datesFragment$getVal2 = this.datesFragment.getValues(),
         fromDate = _datesFragment$getVal2.fromDate,
-        toDate = _datesFragment$getVal2.toDate,
-        _props = this.props,
-        fnValue = _props.fnValue,
-        fnValueType = _props.fnValueType,
-        dataColumn = _props.dataColumn,
-        loadId = _props.loadId;
+        toDate = _datesFragment$getVal2.toDate;
 
-    switch (fnValueType) {
-      case 'TreeItem':
-        return {
-          value: fnValue(this.one.value, three.value),
-          fromDate: fromDate,
-          toDate: toDate,
-          dataColumn: dataColumn,
-          loadId: loadId,
-          title: this.one.caption + ':' + two.caption,
-          subtitle: three.caption
-        };
-      case 'PlusTreeItem':
-        return {
-          value: fnValue(this.one.value, two.value, three.value),
-          fromDate: fromDate,
-          toDate: toDate,
-          dataColumn: dataColumn,
-          loadId: loadId,
-          title: two.caption + ' : ' + three.caption,
-          subtitle: this.one.caption
-        };
-      default:
-        //const _dataColumn = (three) ? three.value : 1;
-        return {
-          value: fnValue(this.one.value, two.value),
-          fromDate: fromDate,
-          toDate: toDate,
-          dataColumn: three ? three.value : 1,
-          loadId: loadId,
-          title: this.one.caption + ':' + two.caption,
-          subtitle: three.caption
-        };
-    }
+    return (0, _type2.default)(this.props, { one: this.one, two: two, three: three, fromDate: fromDate, toDate: toDate });
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
@@ -160,23 +127,23 @@ var DialogType5 = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props,
-        caption = _props2.caption,
-        isShow = _props2.isShow,
-        onShow = _props2.onShow,
-        oneCaption = _props2.oneCaption,
-        oneURI = _props2.oneURI,
-        oneJsonProp = _props2.oneJsonProp,
-        twoCaption = _props2.twoCaption,
-        twoURI = _props2.twoURI,
-        twoJsonProp = _props2.twoJsonProp,
-        threeCaption = _props2.threeCaption,
-        msgOnNotSelected = _props2.msgOnNotSelected,
-        initFromDate = _props2.initFromDate,
-        initToDate = _props2.initToDate,
-        nForecastDate = _props2.nForecastDate,
-        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
-        onTestDate = _props2.onTestDate,
+    var _props = this.props,
+        caption = _props.caption,
+        isShow = _props.isShow,
+        onShow = _props.onShow,
+        oneCaption = _props.oneCaption,
+        oneURI = _props.oneURI,
+        oneJsonProp = _props.oneJsonProp,
+        twoCaption = _props.twoCaption,
+        twoURI = _props.twoURI,
+        twoJsonProp = _props.twoJsonProp,
+        threeCaption = _props.threeCaption,
+        msgOnNotSelected = _props.msgOnNotSelected,
+        initFromDate = _props.initFromDate,
+        initToDate = _props.initToDate,
+        nForecastDate = _props.nForecastDate,
+        msgOnNotValidFormat = _props.msgOnNotValidFormat,
+        onTestDate = _props.onTestDate,
         _state = this.state,
         isShowDate = _state.isShowDate,
         validationMessages = _state.validationMessages,

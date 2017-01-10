@@ -1,5 +1,7 @@
 import React from 'react';
 
+import createLoadOptions from '../../flux/creaters/type4';
+
 import ZhDialog from '../ZhDialog';
 import WithToolbar from './WithToolbar';
 import WithValidation from './WithValidation';
@@ -16,8 +18,8 @@ const DialogType4 = React.createClass({
   ...WithValidation,
 
   getInitialState(){
-    this.one = null;
-    this.two = null;
+    this.one = undefined;
+    this.two = undefined;
     this.toolbarButtons = this._createType2WithToolbar();
     return {
       isShowDate : true,
@@ -61,18 +63,11 @@ const DialogType4 = React.createClass({
      return msg;
   },
   _createLoadOption(){
-    const { fromDate, toDate } = this.datesFragment.getValues()
-        , { fnValue, dataColumn, loadId, isPremium } = this.props;
-    return {
-         value : fnValue(this.one.value, this.two.value),
-         fromDate: fromDate,
-         toDate: toDate,
-         dataColumn : dataColumn,
-         loadId : loadId,
-         title : this.one.caption,
-         subtitle : this.two.caption,
-         isPremium : isPremium
-      }
+    const { fromDate, toDate } = this.datesFragment.getValues();
+    return createLoadOptions(
+      this.props,
+      { one : this.one, two : this.two, fromDate, toDate }
+    );    
   },
 
   _handlerClose(){

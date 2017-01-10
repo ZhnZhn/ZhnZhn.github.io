@@ -1,5 +1,7 @@
 import React from 'react';
 
+import createLoadOptions from '../../flux/creaters/type5';
+
 import ZhDialog from '../ZhDialog';
 import WithToolbar from './WithToolbar';
 import WithValidation from './WithValidation';
@@ -17,7 +19,7 @@ const DialogType5 = React.createClass({
   ...WithValidation,
 
   getInitialState(){
-    this.one = null;
+    this.one = undefined;
     this.toolbarButtons = this._createType2WithToolbar();
 
     return {
@@ -62,48 +64,16 @@ const DialogType5 = React.createClass({
   },
   _createLoadOption(){
     const { parent:two, child:three } = this.parentChild.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues()
-        , { fnValue, fnValueType, dataColumn, loadId } = this.props;
-
-    switch (fnValueType) {
-      case 'TreeItem':
-          return {
-            value : fnValue(this.one.value, three.value),
-            fromDate: fromDate,
-            toDate: toDate,
-            dataColumn : dataColumn,
-            loadId : loadId,
-            title : `${this.one.caption}:${two.caption}`,
-            subtitle : three.caption
-          }
-     case 'PlusTreeItem':
-         return {
-           value : fnValue(this.one.value, two.value, three.value),
-           fromDate: fromDate,
-           toDate: toDate,
-           dataColumn : dataColumn,
-           loadId : loadId,
-           title : `${two.caption} : ${three.caption}`,
-           subtitle : this.one.caption
-         }
-     default:
-         //const _dataColumn = (three) ? three.value : 1;
-         return {
-           value : fnValue(this.one.value, two.value),
-           fromDate: fromDate,
-           toDate: toDate,
-           dataColumn : (three) ? three.value : 1,
-           loadId : loadId,
-           title : `${this.one.caption}:${two.caption}`,
-           subtitle : three.caption
-         }
-    }
+        , { fromDate, toDate } = this.datesFragment.getValues();
+    return createLoadOptions(
+      this.props,
+      { one : this.one, two, three, fromDate, toDate }
+    );
   },
   _handlerClose(){
     this._handlerWithValidationClose(this._createValidationMessages);
     this.props.onClose();
   },
-
 
   render(){
     const {
