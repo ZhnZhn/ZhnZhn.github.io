@@ -1,5 +1,7 @@
 import React from 'react';
 
+import createLoadOptions from '../../flux/creaters/futures3'
+
 import ZhDialog from '../ZhDialog';
 import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
@@ -22,12 +24,10 @@ const Futures3Dialog = React.createClass({
   ...WithValidation,
 
   getInitialState(){
-    this.year = null;
-
+    this.year = undefined;
     this.toolbarButtons = [
       { caption: 'I', onClick: this._handlerClickInfo }
     ];
-
     return {
       validationMessages : []
     }
@@ -75,6 +75,11 @@ const Futures3Dialog = React.createClass({
   },
   _createLoadOption(){
     const { parent:item, child:month } = this.itemMonth.getValues()
+        , { isContinious } = this.props
+        , fromDate = (isContinious)
+              ? this.fromDate.getValue()
+              : undefined ;
+        /*
         , { fnValue, columnName, dataColumn, seriaColumnNames, loadId, isContinious } = this.props
         , _subtitle = (columnName)
               ? `${month.caption}:${this.year.caption}:${columnName}`
@@ -82,6 +87,13 @@ const Futures3Dialog = React.createClass({
         , _fromDate = (isContinious)
               ? this.fromDate.getValue()
               : undefined  ;
+        */
+
+    return createLoadOptions(
+      this.props,
+      { item, month, year : this.year, fromDate }
+    )
+    /*
     return {
        value : fnValue(item.value, month.value, this.year.value ),
        title : item.caption,
@@ -91,7 +103,7 @@ const Futures3Dialog = React.createClass({
        loadId : loadId,
        fromDate : _fromDate,
        seriaColumnNames : seriaColumnNames
-    };
+    };*/
   },
 
   _handlerClose(){

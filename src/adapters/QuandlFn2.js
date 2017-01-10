@@ -28,7 +28,7 @@ const QuandlFn2 = {
            frequency='',
            database_code='', dataset_code=''
           } = dataset
-         , _description = DOMPurify.sanitize( description );
+         , _description = DOMPurify.sanitize(description)                                   ;
 
      return  {
        name,
@@ -41,8 +41,6 @@ const QuandlFn2 = {
   },
 
   createZhConfig(option){
-    //console.log('createZhConfig');
-    //console.log(option);
     return {
       item : option.stock,
       title : option.title,

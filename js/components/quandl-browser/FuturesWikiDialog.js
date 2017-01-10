@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _futuresWiki = require('../../flux/creaters/futuresWiki');
+
+var _futuresWiki2 = _interopRequireDefault(_futuresWiki);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -50,8 +54,7 @@ var Futures3Dialog = _react2.default.createClass(_extends({
   displayName: 'Futures3Dialog'
 }, _WithValidation2.default, {
   getInitialState: function getInitialState() {
-    this.type = null;
-
+    this.type = undefined;
     this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }];
 
     return {
@@ -67,9 +70,9 @@ var Futures3Dialog = _react2.default.createClass(_extends({
     return true;
   },
   _handlerClickInfo: function _handlerClickInfo() {
-    var _props = this.props;
-    var descrUrl = _props.descrUrl;
-    var onClickInfo = _props.onClickInfo;
+    var _props = this.props,
+        descrUrl = _props.descrUrl,
+        onClickInfo = _props.onClickInfo;
 
     onClickInfo({ descrUrl: descrUrl });
   },
@@ -80,17 +83,16 @@ var Futures3Dialog = _react2.default.createClass(_extends({
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var _props2 = this.props;
-    var msgOnNotSelected = _props2.msgOnNotSelected;
-    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
-    var isContinious = _props2.isContinious;
+    var _props2 = this.props,
+        msgOnNotSelected = _props2.msgOnNotSelected,
+        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
+        isContinious = _props2.isContinious;
 
     var msg = [];
 
-    var _exchangeItem$getVali = this.exchangeItem.getValidation();
-
-    var isValid1 = _exchangeItem$getVali.isValid;
-    var msg1 = _exchangeItem$getVali.msg;
+    var _exchangeItem$getVali = this.exchangeItem.getValidation(),
+        isValid1 = _exchangeItem$getVali.isValid,
+        msg1 = _exchangeItem$getVali.msg;
 
     if (!isValid1) {
       msg = msg.concat(msg1);
@@ -108,29 +110,25 @@ var Futures3Dialog = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _exchangeItem$getValu = this.exchangeItem.getValues();
+    var _exchangeItem$getValu = this.exchangeItem.getValues(),
+        exchange = _exchangeItem$getValu.parent,
+        item = _exchangeItem$getValu.child,
+        isContinious = this.props.isContinious,
+        fromDate = isContinious ? this.fromDate.getValue() : undefined;
 
-    var exchange = _exchangeItem$getValu.parent;
-    var item = _exchangeItem$getValu.child;
-    var _props3 = this.props;
-    var fnValue = _props3.fnValue;
-    var columnName = _props3.columnName;
-    var dataColumn = _props3.dataColumn;
-    var seriaColumnNames = _props3.seriaColumnNames;
-    var loadId = _props3.loadId;
-    var isContinious = _props3.isContinious;
-    var _subtitle = columnName ? this.type.caption + ':' + columnName : '' + this.type.caption;
-    var _fromDate = isContinious ? this.fromDate.getValue() : undefined;
+    return (0, _futuresWiki2.default)(this.props, { exchange: exchange, item: item, type: this.type, fromDate: fromDate });
+    /*
     return {
-      value: fnValue(exchange.value, item.value, this.type.value),
-      title: exchange.caption + ':' + item.caption,
-      subtitle: _subtitle,
-      columnName: columnName,
-      seriaColumnNames: seriaColumnNames,
-      dataColumn: dataColumn,
-      loadId: loadId,
-      fromDate: _fromDate
+       value : fnValue(exchange.value, item.value, this.type.value ),
+       title : `${exchange.caption}:${item.caption}`,
+       subtitle : _subtitle,
+       columnName : columnName,
+       seriaColumnNames: seriaColumnNames,
+       dataColumn : dataColumn,
+       loadId : loadId,
+       fromDate : _fromDate
     };
+    */
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
@@ -152,23 +150,24 @@ var Futures3Dialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this2 = this;
 
-    var _props4 = this.props;
-    var isShow = _props4.isShow;
-    var caption = _props4.caption;
-    var onShow = _props4.onShow;
-    var futuresURI = _props4.futuresURI;
-    var msgOnNotSelected = _props4.msgOnNotSelected;
-    var isContinious = _props4.isContinious;
-    var initFromDate = _props4.initFromDate;
-    var onTestDateOrEmpty = _props4.onTestDateOrEmpty;
-    var msgTestDateOrEmpty = _props4.msgTestDateOrEmpty;
-    var validationMessages = this.state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props3 = this.props,
+        isShow = _props3.isShow,
+        caption = _props3.caption,
+        onShow = _props3.onShow,
+        futuresURI = _props3.futuresURI,
+        msgOnNotSelected = _props3.msgOnNotSelected,
+        isContinious = _props3.isContinious,
+        initFromDate = _props3.initFromDate,
+        onTestDateOrEmpty = _props3.onTestDateOrEmpty,
+        msgTestDateOrEmpty = _props3.msgTestDateOrEmpty,
+        validationMessages = this.state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
+
 
     return _react2.default.createElement(
       _ZhDialog2.default,

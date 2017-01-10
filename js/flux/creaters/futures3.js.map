@@ -1,0 +1,29 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\creaters\\futures3.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\creaters\\futures3.js",
+ "sourceRoot": "",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "fnValue",
+  "columnName",
+  "dataColumn",
+  "seriaColumnNames",
+  "loadId",
+  "item",
+  "month",
+  "year",
+  "fromDate",
+  "_value",
+  "value",
+  "undefined",
+  "_subtitle",
+  "caption",
+  "title",
+  "subtitle"
+ ],
+ "mappings": ";;;;;;AACA;;AAEA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,UAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,UAAfC,OAAe,uEAAP,EAAO;;AAAA,UAE1CC,OAF0C,GAIxCF,KAJwC,CAE1CE,OAF0C;AAAA,UAEjCC,UAFiC,GAIxCH,KAJwC,CAEjCG,UAFiC;AAAA,UAErBC,UAFqB,GAIxCJ,KAJwC,CAErBI,UAFqB;AAAA,UAG1CC,gBAH0C,GAIxCL,KAJwC,CAG1CK,gBAH0C;AAAA,UAGxBC,MAHwB,GAIxCN,KAJwC,CAGxBM,MAHwB;AAAA,UAK1CC,IAL0C,GAKVN,OALU,CAK1CM,IAL0C;AAAA,UAKpCC,KALoC,GAKVP,OALU,CAKpCO,KALoC;AAAA,UAK7BC,IAL6B,GAKVR,OALU,CAK7BQ,IAL6B;AAAA,UAKvBC,QALuB,GAKVT,OALU,CAKvBS,QALuB;AAAA,UAM5CC,MAN4C,GAMnC,cAAKT,OAAL,IACHA,QAAQK,KAAKK,KAAb,EAAoBJ,MAAMI,KAA1B,EAAiCH,KAAKG,KAAtC,CADG,GAEHC,SARsC;AAAA,UAS5CC,SAT4C,GAS/BX,UAAD,GACHK,MAAMO,OADH,SACcN,KAAKM,OADnB,SAC8BZ,UAD9B,GAEHK,MAAMO,OAFH,SAEcN,KAAKM,OAXa;;AAalD,aAAO;AACJH,mBAAQD,MADJ;AAEJK,mBAAQT,KAAKQ,OAFT;AAGJE,sBAAWH,SAHP;AAIJX,wBAAaA,UAJT;AAKJC,wBAAaA,UALT;AAMJE,oBAASA,MANL;AAOJI,sBAAWA,QAPP;AAQJL,8BAAmBA;AARf,OAAP;AAUD,CAvBD;;kBAyBeN,iB"
+}

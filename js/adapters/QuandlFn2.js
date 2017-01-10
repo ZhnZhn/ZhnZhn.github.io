@@ -68,8 +68,6 @@ var QuandlFn2 = {
     };
   },
   createZhConfig: function createZhConfig(option) {
-    //console.log('createZhConfig');
-    //console.log(option);
     return {
       item: option.stock,
       title: option.title,
