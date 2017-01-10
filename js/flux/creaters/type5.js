@@ -1,8 +1,10 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _is = require('../../utils/is');
 
 var _crDefault = function _crDefault(props, options) {
   var fnValue = props.fnValue,
@@ -12,7 +14,7 @@ var _crDefault = function _crDefault(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
-      _value = typeof fnValue === "function" ? fnValue(one.value, two.value) : undefined;
+      _value = (0, _is.isFunction)(fnValue) ? fnValue(one.value, two.value) : undefined;
 
   return {
     value: _value,
@@ -20,7 +22,7 @@ var _crDefault = function _crDefault(props, options) {
     toDate: toDate,
     dataColumn: three ? three.value : 1,
     loadId: loadId,
-    title: one.caption + ":" + two.caption,
+    title: one.caption + ':' + two.caption,
     subtitle: three.caption
   };
 };
@@ -34,7 +36,7 @@ var _crTreeItem = function _crTreeItem(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
-      _value = typeof fnValue === "function" ? fnValue(one.value, three.value) : undefined;
+      _value = (0, _is.isFunction)(fnValue) ? fnValue(one.value, three.value) : undefined;
 
   return {
     value: _value,
@@ -42,7 +44,7 @@ var _crTreeItem = function _crTreeItem(props, options) {
     toDate: toDate,
     dataColumn: dataColumn,
     loadId: loadId,
-    title: one.caption + ":" + two.caption,
+    title: one.caption + ':' + two.caption,
     subtitle: three.caption
   };
 };
@@ -56,7 +58,7 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
-      _value = typeof fnValue === "function" ? fnValue(one.value, two.value, three.value) : undefined;
+      _value = (0, _is.isFunction)(fnValue) ? fnValue(one.value, two.value, three.value) : undefined;
 
   return {
     value: _value,
@@ -64,7 +66,7 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
     toDate: toDate,
     dataColumn: dataColumn,
     loadId: loadId,
-    title: two.caption + " : " + three.caption,
+    title: two.caption + ' : ' + three.caption,
     subtitle: one.caption
   };
 };
@@ -81,7 +83,7 @@ var createLoadOptions = function createLoadOptions() {
   var fnValueType = props.fnValueType,
       _createLoadOption = _rFn[fnValueType];
 
-  if (typeof _createLoadOption === 'function') {
+  if ((0, _is.isFunction)(_createLoadOption)) {
     return _createLoadOption(props, options);
   } else {
     return _rFn.DEFAULT(props, options);

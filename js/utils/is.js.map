@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\is.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\is.js",
+ "sourceRoot": "",
+ "names": [
+  "isFunction",
+  "fn",
+  "is",
+  "function"
+ ],
+ "mappings": ";;;;;AACO,IAAMA,kCAAa,SAAbA,UAAa,CAACC,EAAD,EAAQ;AAChC,SAAQ,OAAOA,EAAP,KAAc,UAAtB;AACD,CAFM;;AAIP,IAAMC,KAAK;AACTC,YAAWH;AADF,CAAX;;kBAIeE,E"
+}

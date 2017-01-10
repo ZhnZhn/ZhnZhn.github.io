@@ -1,9 +1,9 @@
-
+import { isFunction } from '../../utils/is'
 
 const createLoadOptions = (props={}, options={}) => {
   const { fnValue, dataColumn, loadId, isPremium } = props
       , { one, two, fromDate, toDate } = options
-      , _value = (typeof fnValue === 'function')
+      , _value = isFunction(fnValue)
            ? fnValue(one.value, two.value)
            : undefined
   return {

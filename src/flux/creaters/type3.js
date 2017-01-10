@@ -1,4 +1,5 @@
 
+import { isFunction } from '../../utils/is'
 
 const createLoadOptions = (props={}, options={}) => {
   const {
@@ -7,10 +8,10 @@ const createLoadOptions = (props={}, options={}) => {
           linkFn
         } = props
       , { fromDate, toDate, stock } = options
-      , _value = (typeof fnValue === 'function')
-                ? fnValue(stock.value) : stock.value
-      , _itemCaption = (typeof fnItemCaption === 'function')
-                ? fnItemCaption(stock.value) : undefined;
+      , _value = isFunction(fnValue)
+            ? fnValue(stock.value) : stock.value
+      , _itemCaption = isFunction(fnItemCaption)
+            ? fnItemCaption(stock.value) : undefined;
   return {
     //value : this.stock.value,
     value : _value,
