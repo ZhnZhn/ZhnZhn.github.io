@@ -1,5 +1,7 @@
 import React from 'react';
 
+import createLoadOptions from '../../flux/creaters/eurostat'
+
 import ZhDialog from '../ZhDialog';
 
 import WithValidation from './WithValidation';
@@ -16,8 +18,8 @@ const DialogEurostat = React.createClass({
   ...WithToolbar,
 
   getInitialState(){
-    this.one = null;
-    this.two = null;
+    this.one = undefined;
+    this.two = undefined;
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar }
     ];
@@ -60,27 +62,16 @@ const DialogEurostat = React.createClass({
      return msg;
   },
   _createLoadOption(){
-    const { loadId, group } = this.props;
-
-    return {
-      geo : this.one.value,
-      group : group,
-      metric : this.two.value,
-      loadId : loadId,
-      itemCaption: this.one.caption,
-      title : this.one.caption,
-      subtitle : this.two.caption,
-      alertItemId : `${this.one.caption}:${this.two.caption}`,
-      alertGeo : this.one.caption,
-      alertMetric : this.two.caption
-    }
+    return createLoadOptions(
+      this.props,
+      { one : this.one, two : this.two }
+    )
   },
 
   _handlerClose(){
     this._handlerWithValidationClose(this._createValidationMessages);
     this.props.onClose();
   },
-
 
   render(){
     const {

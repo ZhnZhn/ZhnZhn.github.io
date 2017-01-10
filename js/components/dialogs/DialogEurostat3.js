@@ -10,27 +10,31 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _eurostat = require('../../flux/creaters/eurostat3');
+
+var _eurostat2 = _interopRequireDefault(_eurostat);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
 
-var _WithToolbar = require('../dialogs/WithToolbar');
+var _WithToolbar = require('./WithToolbar');
 
 var _WithToolbar2 = _interopRequireDefault(_WithToolbar);
 
-var _WithValidation = require('../dialogs/WithValidation');
+var _WithValidation = require('./WithValidation');
 
 var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
+var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _SelectWithLoad = require('../dialogs/SelectWithLoad');
+var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
-var _SelectParentChild = require('../dialogs/SelectParentChild');
+var _SelectParentChild = require('./SelectParentChild');
 
 var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
@@ -44,11 +48,11 @@ var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFra
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EuroStatDialog = _react2.default.createClass(_extends({
-  displayName: 'EuroStatDialog'
+var DialogEurostat3 = _react2.default.createClass(_extends({
+  displayName: 'DialogEurostat3'
 }, _WithToolbar2.default, _WithValidation2.default, {
   getInitialState: function getInitialState() {
-    this.one = null;
+    this.one = undefined;
     this.toolbarButtons = [{ caption: 'I', onClick: this._clickInfoWithToolbar }];
 
     return {
@@ -78,10 +82,9 @@ var EuroStatDialog = _react2.default.createClass(_extends({
       msg.push(this.props.msgOnNotSelected(oneCaption));
     }
 
-    var _parentChild$getValid = this.parentChild.getValidation();
-
-    var isValid1 = _parentChild$getValid.isValid;
-    var msg1 = _parentChild$getValid.msg;
+    var _parentChild$getValid = this.parentChild.getValidation(),
+        isValid1 = _parentChild$getValid.isValid,
+        msg1 = _parentChild$getValid.msg;
 
     if (!isValid1) {
       msg = msg.concat(msg1);
@@ -91,25 +94,11 @@ var EuroStatDialog = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _parentChild$getValue = this.parentChild.getValues();
+    var _parentChild$getValue = this.parentChild.getValues(),
+        group = _parentChild$getValue.parent,
+        metric = _parentChild$getValue.child;
 
-    var group = _parentChild$getValue.parent;
-    var metric = _parentChild$getValue.child;
-    var loadId = this.props.loadId;
-
-
-    return {
-      geo: this.one.value,
-      group: group.value,
-      metric: metric.value,
-      loadId: loadId,
-      itemCaption: this.one.caption,
-      title: this.one.caption,
-      subtitle: group.caption + ':' + metric.caption,
-      alertItemId: this.one.caption + ':' + metric.caption,
-      alertGeo: this.one.caption,
-      alertMetric: metric.caption
-    };
+    return (0, _eurostat2.default)(this.props, { one: this.one, group: group, metric: metric });
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
@@ -118,25 +107,26 @@ var EuroStatDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props = this.props;
-    var caption = _props.caption;
-    var isShow = _props.isShow;
-    var onShow = _props.onShow;
-    var oneCaption = _props.oneCaption;
-    var oneURI = _props.oneURI;
-    var oneJsonProp = _props.oneJsonProp;
-    var twoCaption = _props.twoCaption;
-    var twoURI = _props.twoURI;
-    var twoJsonProp = _props.twoJsonProp;
-    var threeCaption = _props.threeCaption;
-    var msgOnNotSelected = _props.msgOnNotSelected;
-    var validationMessages = this.state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props = this.props,
+        caption = _props.caption,
+        isShow = _props.isShow,
+        onShow = _props.onShow,
+        oneCaption = _props.oneCaption,
+        oneURI = _props.oneURI,
+        oneJsonProp = _props.oneJsonProp,
+        twoCaption = _props.twoCaption,
+        twoURI = _props.twoURI,
+        twoJsonProp = _props.twoJsonProp,
+        threeCaption = _props.threeCaption,
+        msgOnNotSelected = _props.msgOnNotSelected,
+        validationMessages = this.state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
+
 
     return _react2.default.createElement(
       _ZhDialog2.default,
@@ -177,5 +167,5 @@ var EuroStatDialog = _react2.default.createClass(_extends({
   }
 }));
 
-exports.default = EuroStatDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\EuroStatDialog.js.map
+exports.default = DialogEurostat3;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat3.js.map

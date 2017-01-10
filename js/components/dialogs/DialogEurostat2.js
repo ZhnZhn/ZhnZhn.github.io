@@ -10,15 +10,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _eurostat = require('../../flux/creaters/eurostat2');
+
+var _eurostat2 = _interopRequireDefault(_eurostat);
+
 var _Type = require('../../constants/Type');
 
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
-var _EuroStatFn = require('../../adapters/eurostat/EuroStatFn');
-
-var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
 
 var _ZhDialog = require('../ZhDialog');
 
@@ -59,7 +59,6 @@ var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFra
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DATE_PLACEHOLDER = 'Before Select Indicator',
-    COUNTRY_CAPTION_DF = 'EU',
     MAP_FREQUENCY_DF = 'M',
     AREA = 'AREA',
     MAP = 'MAP';
@@ -70,10 +69,10 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
   displayName: 'DialogEurostat2'
 }, _WithValidation2.default, _WithToolbar2.default, {
   getInitialState: function getInitialState() {
-    this.one = null;
-    this.two = null;
-    this.date = null;
-    this.chartType = null;
+    this.one = undefined;
+    this.two = undefined;
+    this.date = undefined;
+    this.chartType = undefined;
 
     this.toolbarButtons = [{ caption: 'I', onClick: this._clickInfoWithToolbar }];
 
@@ -96,9 +95,10 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     this.one = one;
   },
   _updateForDate: function _updateForDate() {
-    var frequency = this.two ? this.props.mapFrequency ? this.props.mapFrequency : this.two.mapFrequency ? this.two.mapFrequency : MAP_FREQUENCY_DF : undefined;
-    var mapDateDf = this.props.mapDateDf;
-    var config = frequency ? _DateUtils2.default.createEurostatSelect(frequency, mapDateDf) : { dateDefault: DATE_PLACEHOLDER, options: [] };
+    var frequency = this.two ? this.props.mapFrequency ? this.props.mapFrequency : this.two.mapFrequency ? this.two.mapFrequency : MAP_FREQUENCY_DF : undefined,
+        mapDateDf = this.props.mapDateDf,
+        config = frequency ? _DateUtils2.default.createEurostatSelect(frequency, mapDateDf) : { dateDefault: DATE_PLACEHOLDER, options: [] };
+
 
     this.setState({
       isShowDate: true,
@@ -127,9 +127,9 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var _props = this.props;
-    var oneCaption = _props.oneCaption;
-    var twoCaption = _props.twoCaption;
+    var _props = this.props,
+        oneCaption = _props.oneCaption,
+        twoCaption = _props.twoCaption;
 
     var msg = [];
 
@@ -146,72 +146,41 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _props2 = this.props;
-    var loadId = _props2.loadId;
-    var group = _props2.group;
-    var _countryValue = this.one ? this.one.value : COUNTRY_CAPTION_DF;
-    var _countryCaption = this.one ? this.one.caption : COUNTRY_CAPTION_DF;
+    var one = this.one,
+        two = this.two,
+        chartType = this.chartType,
+        date = this.date,
+        dateDefault = this.state.dateDefault;
 
-    var _zhCompType = undefined,
-        _time = undefined,
-        _mapValue = this.two.mapValue,
-        _mapSlice = this.two.mapSlice;
-
-    if (this.chartType && this.chartType.value !== AREA) {
-      _zhCompType = this.chartType.compType;
-      _time = this.date ? this.date.value : this.state.dateDefault;
-
-      if (!_mapValue) {
-        _mapValue = _EuroStatFn2.default.createMapValue(this.props, this.two);
-      }
-      if (!_mapSlice) {
-        _mapSlice = _EuroStatFn2.default.createMapSlice(this.props, this.two);
-      }
-    }
-
-    return {
-      geo: _countryValue,
-      group: group,
-      metric: this.two.value,
-      loadId: loadId,
-      itemCaption: _countryCaption,
-      title: _countryCaption,
-      subtitle: this.two.caption,
-      alertItemId: _countryCaption + ':' + this.two.caption,
-      alertGeo: _countryCaption,
-      alertMetric: this.two.caption,
-      zhCompType: _zhCompType,
-      mapValue: _mapValue,
-      zhMapSlice: _extends({}, _mapSlice, { time: _time }),
-      time: _time
-    };
+    return (0, _eurostat2.default)(this.props, { one: one, two: two, chartType: chartType, date: date, dateDefault: dateDefault });
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
     this.props.onClose();
   },
   render: function render() {
-    var _props3 = this.props;
-    var caption = _props3.caption;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var oneCaption = _props3.oneCaption;
-    var oneURI = _props3.oneURI;
-    var oneJsonProp = _props3.oneJsonProp;
-    var twoCaption = _props3.twoCaption;
-    var twoURI = _props3.twoURI;
-    var twoJsonProp = _props3.twoJsonProp;
-    var _state = this.state;
-    var isShowDate = _state.isShowDate;
-    var dateDefault = _state.dateDefault;
-    var dateOptions = _state.dateOptions;
-    var validationMessages = _state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props2 = this.props,
+        caption = _props2.caption,
+        isShow = _props2.isShow,
+        onShow = _props2.onShow,
+        oneCaption = _props2.oneCaption,
+        oneURI = _props2.oneURI,
+        oneJsonProp = _props2.oneJsonProp,
+        twoCaption = _props2.twoCaption,
+        twoURI = _props2.twoURI,
+        twoJsonProp = _props2.twoJsonProp,
+        _state = this.state,
+        isShowDate = _state.isShowDate,
+        dateDefault = _state.dateDefault,
+        dateOptions = _state.dateOptions,
+        validationMessages = _state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
+
 
     return _react2.default.createElement(
       _ZhDialog2.default,

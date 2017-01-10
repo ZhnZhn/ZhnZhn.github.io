@@ -4,6 +4,21 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\RouterDialog.js",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\RouterDialog.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAM,eAAe;AACnB,iCADmB;;AAGnB,mCAHmB;AAInB,mCAJmB;AAKnB,sCALmB;AAMnB,mCANmB;AAOnB,0CAPmB;AAQnB,2CARmB;AASnB,0DATmB;AAUnB,sCAVmB;AAWnB,0CAXmB;AAYnB,gDAZmB;AAanB,kDAbmB;AAcnB,0CAdmB;CAAf;;kBAiBS"
+ "names": [
+  "RouterDialog",
+  "DEFAULT",
+  "DialogType3",
+  "DialogType4",
+  "DialogType4A",
+  "DialogType5",
+  "DialogEurostat",
+  "DialogEurostat2",
+  "DialogEurostat3",
+  "UNCommodityTradeDialog",
+  "BigMacDialog",
+  "Futures3Dialog",
+  "FuturesWikiDialog",
+  "JodiWorldOilDialog"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAGA,IAAMA,eAAe;AACnBC,+BADmB;;AAGnBC,mCAHmB;AAInBC,mCAJmB;AAKnBC,sCALmB;AAMnBC,mCANmB;AAOnBC,0CAPmB;AAQnBC,2CARmB;AASnBC,2CATmB;AAUnBC,0DAVmB;AAWnBC,sCAXmB;AAYnBC,0CAZmB;AAanBC,gDAbmB;AAcnBC;AAdmB,CAArB;;kBAiBeb,Y"
 }

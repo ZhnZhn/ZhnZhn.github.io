@@ -1,22 +1,22 @@
 import React from 'react';
 
-import ZhDialog from '../ZhDialog';
-import WithToolbar from '../dialogs/WithToolbar';
-import WithValidation from '../dialogs/WithValidation';
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
-import SelectWithLoad from '../dialogs/SelectWithLoad';
-import SelectParentChild from '../dialogs/SelectParentChild';
-import ToolBarButton from '../ToolBarButton';
+import createLoadOptions from '../../flux/creaters/eurostat3';
 
+import ZhDialog from '../ZhDialog';
+import WithToolbar from './WithToolbar';
+import WithValidation from './WithValidation';
+import ToolbarButtonCircle from './ToolbarButtonCircle';
+import SelectWithLoad from './SelectWithLoad';
+import SelectParentChild from './SelectParentChild';
+import ToolBarButton from '../ToolBarButton';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
-
-const EuroStatDialog = React.createClass({
+const DialogEurostat3 = React.createClass({
   ...WithToolbar,
   ...WithValidation,
 
   getInitialState(){
-    this.one = null;
+    this.one = undefined;
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar }
     ];
@@ -59,20 +59,11 @@ const EuroStatDialog = React.createClass({
   },
   _createLoadOption(){
     const { parent:group, child:metric } = this.parentChild.getValues()
-        , { loadId } = this.props;
 
-    return {
-      geo : this.one.value,
-      group : group.value,
-      metric : metric.value,
-      loadId : loadId,
-      itemCaption: this.one.caption,
-      title : this.one.caption,
-      subtitle : `${group.caption}:${metric.caption}`,
-      alertItemId : `${this.one.caption}:${metric.caption}`,
-      alertGeo : this.one.caption,
-      alertMetric : metric.caption
-    }
+    return createLoadOptions(
+      this.props,
+      { one : this.one, group, metric }
+    );
   },
 
   _handlerClose(){
@@ -115,7 +106,6 @@ const EuroStatDialog = React.createClass({
                optionNames={'Items'}
                onSelect={this._handlerSelectOne}
              />
-
              <SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
@@ -126,7 +116,6 @@ const EuroStatDialog = React.createClass({
                  childCaption={threeCaption}
                  msgOnNotSelected={msgOnNotSelected}
              />
-
              <ValidationMessagesFragment
                  validationMessages={validationMessages}
              />
@@ -135,4 +124,4 @@ const EuroStatDialog = React.createClass({
   }
 });
 
-export default EuroStatDialog
+export default DialogEurostat3

@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _eurostat = require('../../flux/creaters/eurostat');
+
+var _eurostat2 = _interopRequireDefault(_eurostat);
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -44,8 +48,8 @@ var DialogEurostat = _react2.default.createClass(_extends({
   displayName: 'DialogEurostat'
 }, _WithValidation2.default, _WithToolbar2.default, {
   getInitialState: function getInitialState() {
-    this.one = null;
-    this.two = null;
+    this.one = undefined;
+    this.two = undefined;
     this.toolbarButtons = [{ caption: 'I', onClick: this._clickInfoWithToolbar }];
 
     return {
@@ -70,9 +74,9 @@ var DialogEurostat = _react2.default.createClass(_extends({
     this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
   },
   _createValidationMessages: function _createValidationMessages() {
-    var _props = this.props;
-    var oneCaption = _props.oneCaption;
-    var twoCaption = _props.twoCaption;
+    var _props = this.props,
+        oneCaption = _props.oneCaption,
+        twoCaption = _props.twoCaption;
 
     var msg = [];
 
@@ -87,46 +91,31 @@ var DialogEurostat = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _props2 = this.props;
-    var loadId = _props2.loadId;
-    var group = _props2.group;
-
-
-    return {
-      geo: this.one.value,
-      group: group,
-      metric: this.two.value,
-      loadId: loadId,
-      itemCaption: this.one.caption,
-      title: this.one.caption,
-      subtitle: this.two.caption,
-      alertItemId: this.one.caption + ':' + this.two.caption,
-      alertGeo: this.one.caption,
-      alertMetric: this.two.caption
-    };
+    return (0, _eurostat2.default)(this.props, { one: this.one, two: this.two });
   },
   _handlerClose: function _handlerClose() {
     this._handlerWithValidationClose(this._createValidationMessages);
     this.props.onClose();
   },
   render: function render() {
-    var _props3 = this.props;
-    var caption = _props3.caption;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var oneCaption = _props3.oneCaption;
-    var oneURI = _props3.oneURI;
-    var oneJsonProp = _props3.oneJsonProp;
-    var twoCaption = _props3.twoCaption;
-    var twoURI = _props3.twoURI;
-    var twoJsonProp = _props3.twoJsonProp;
-    var validationMessages = this.state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props2 = this.props,
+        caption = _props2.caption,
+        isShow = _props2.isShow,
+        onShow = _props2.onShow,
+        oneCaption = _props2.oneCaption,
+        oneURI = _props2.oneURI,
+        oneJsonProp = _props2.oneJsonProp,
+        twoCaption = _props2.twoCaption,
+        twoURI = _props2.twoURI,
+        twoJsonProp = _props2.twoJsonProp,
+        validationMessages = this.state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
+
 
     return _react2.default.createElement(
       _ZhDialog2.default,

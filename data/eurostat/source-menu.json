@@ -169,7 +169,7 @@
         "menuTitle" : "Indicators",
         "dialogCaption" : "Economic Indicators",
         "chartContainerCaption" : "Eurostat Economic Indicators",
-        "dialogType" : "EuroStatDialog",
+        "dialogType" : "DialogEurostat3",
         "dialogProps" : {
           "descrUrl": "./data/eurostat/eurostat.html",
           "oneCaption" : "Country",
@@ -206,7 +206,7 @@
         "menuTitle" : "Statistics Quantities",
         "dialogCaption" : "Energy Statistics Quantities",
         "chartContainerCaption" : "Eurostat Energy Statistics Quantities",
-        "dialogType" : "EuroStatDialog",
+        "dialogType" : "DialogEurostat3",
         "dialogProps" : {
           "descrUrl": "./data/eurostat/eurostat.html",
           "oneCaption" : "Country",

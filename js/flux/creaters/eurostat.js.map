@@ -1,0 +1,31 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\creaters\\eurostat.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\creaters\\eurostat.js",
+ "sourceRoot": "",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "loadId",
+  "group",
+  "one",
+  "two",
+  "oneValue",
+  "value",
+  "caption",
+  "oneCaption",
+  "twoValue",
+  "twoCaption",
+  "geo",
+  "metric",
+  "itemCaption",
+  "title",
+  "subtitle",
+  "alertItemId",
+  "alertGeo",
+  "alertMetric"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;AAAA,MAC1CC,MAD0C,GACxBF,KADwB,CAC1CE,MAD0C;AAAA,MAClCC,KADkC,GACxBH,KADwB,CAClCG,KADkC;AAAA,MAE1CC,GAF0C,GAE7BH,OAF6B,CAE1CG,GAF0C;AAAA,MAErCC,GAFqC,GAE7BJ,OAF6B,CAErCI,GAFqC;AAAA,MAGpCC,QAHoC,GAGAF,GAHA,CAG1CG,KAH0C;AAAA,qBAGAH,GAHA,CAG1BI,OAH0B;AAAA,MAGlBC,UAHkB,gCAGP,EAHO;AAAA,MAIpCC,QAJoC,GAIAL,GAJA,CAI1CE,KAJ0C;AAAA,qBAIAF,GAJA,CAI1BG,OAJ0B;AAAA,MAIlBG,UAJkB,gCAIP,EAJO;;AAKlD,SAAO;AACLC,SAAMN,QADD;AAELH,WAAQA,KAFH;AAGLU,YAASH,QAHJ;AAILR,YAASA,MAJJ;AAKLY,iBAAaL,UALR;AAMLM,WAAQN,UANH;AAOLO,cAAWL,UAPN;AAQLM,iBAAiBR,UAAjB,SAA+BE,UAR1B;AASLO,cAAWT,UATN;AAULU,iBAAcR;AAVT,GAAP;AAYD,CAjBD;;kBAmBeZ,iB"
+}
