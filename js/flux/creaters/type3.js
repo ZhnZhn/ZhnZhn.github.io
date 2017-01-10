@@ -20,8 +20,8 @@ var createLoadOptions = function createLoadOptions() {
       fromDate = options.fromDate,
       toDate = options.toDate,
       stock = options.stock,
-      _value = (0, _is.isFunction)(fnValue) ? fnValue(stock.value) : stock.value,
-      _itemCaption = (0, _is.isFunction)(fnItemCaption) ? fnItemCaption(stock.value) : undefined;
+      _value = (0, _is.isFn)(fnValue) ? fnValue(stock.value) : stock.value,
+      _itemCaption = (0, _is.isFn)(fnItemCaption) ? fnItemCaption(stock.value) : undefined;
 
   return {
     //value : this.stock.value,

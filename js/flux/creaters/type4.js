@@ -18,7 +18,7 @@ var createLoadOptions = function createLoadOptions() {
          two = options.two,
          fromDate = options.fromDate,
          toDate = options.toDate,
-         _value = (0, _is.isFunction)(fnValue) ? fnValue(one.value, two.value) : undefined;
+         _value = (0, _is.isFn)(fnValue) ? fnValue(one.value, two.value) : undefined;
 
      return {
           value: _value,

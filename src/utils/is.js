@@ -1,10 +1,10 @@
 
-export const isFunction = (fn) => {
+export const isFn = (fn) => {
   return (typeof fn === 'function')
 }
 
 const is = {
-  function : isFunction
+  fn : isFn
 }
 
 export default is

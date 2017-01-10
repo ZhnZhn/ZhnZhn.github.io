@@ -5,10 +5,9 @@
  "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\is.js",
  "sourceRoot": "",
  "names": [
-  "isFunction",
+  "isFn",
   "fn",
-  "is",
-  "function"
+  "is"
  ],
- "mappings": ";;;;;AACO,IAAMA,kCAAa,SAAbA,UAAa,CAACC,EAAD,EAAQ;AAChC,SAAQ,OAAOA,EAAP,KAAc,UAAtB;AACD,CAFM;;AAIP,IAAMC,KAAK;AACTC,YAAWH;AADF,CAAX;;kBAIeE,E"
+ "mappings": ";;;;;AACO,IAAMA,sBAAO,SAAPA,IAAO,CAACC,EAAD,EAAQ;AAC1B,SAAQ,OAAOA,EAAP,KAAc,UAAtB;AACD,CAFM;;AAIP,IAAMC,KAAK;AACTD,MAAKD;AADI,CAAX;;kBAIeE,E"
 }

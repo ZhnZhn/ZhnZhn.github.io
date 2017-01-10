@@ -1,5 +1,5 @@
 
-import { isFunction } from '../../utils/is'
+import { isFn } from '../../utils/is'
 
 const createLoadOptions = (props={}, options={}) => {
   const {
@@ -8,9 +8,9 @@ const createLoadOptions = (props={}, options={}) => {
           linkFn
         } = props
       , { fromDate, toDate, stock } = options
-      , _value = isFunction(fnValue)
+      , _value = isFn(fnValue)
             ? fnValue(stock.value) : stock.value
-      , _itemCaption = isFunction(fnItemCaption)
+      , _itemCaption = isFn(fnItemCaption)
             ? fnItemCaption(stock.value) : undefined;
   return {
     //value : this.stock.value,
