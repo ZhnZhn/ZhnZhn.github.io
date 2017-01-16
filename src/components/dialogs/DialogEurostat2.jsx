@@ -1,10 +1,11 @@
 import React from 'react';
 
+
 import createLoadOptions from '../../flux/creaters/eurostat2'
 
 import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
-
+import { isStrInArr } from '../../utils/is';
 
 import ZhDialog from '../ZhDialog';
 import WithValidation from './WithValidation';
@@ -21,12 +22,22 @@ import ValidationMessagesFragment from '../ValidationMessagesFragment';
 const  DATE_PLACEHOLDER = 'Before Select Indicator'
      , MAP_FREQUENCY_DF = 'M'
      , AREA = 'AREA'
-     , MAP = 'MAP' ;
+     , MAP = 'MAP'
+     , categoryTypes = [ 'MAP', 'COLUMN', 'BAR'];
 
 const chartTypeOptions = [
     { caption : 'Default : Area', value: AREA },
-    { caption : 'Map' , value: MAP, compType : CompItemType.EUROSTAT_MAP }
+    { caption : 'Map : All Countries' , value: MAP, compType : CompItemType.EUROSTAT_MAP },
+    { caption : 'Column : All Countries', value: 'COLUMN' },
+    { caption : 'Bar : All Countries', value: 'BAR' }
 ]
+
+const isCategoryType = (chartType) => {
+  if (!chartType){
+    return false;
+  }
+  return isStrInArr(chartType.value)(categoryTypes);
+}
 
 const DialogEurostat2 = React.createClass({
   ...WithValidation,
@@ -64,6 +75,7 @@ const DialogEurostat2 = React.createClass({
   },
 
   _updateForDate(){
+    this.date = undefined;
     const frequency = (this.two)
              ? (this.props.mapFrequency)
                   ? this.props.mapFrequency
@@ -85,14 +97,14 @@ const DialogEurostat2 = React.createClass({
 
   _handlerSelectTwo(two){
     this.two = two;
-    if (this.chartType && this.chartType.value === MAP){
+    if(isCategoryType(this.chartType)){
       this._updateForDate();
     }
   },
 
   _handlerSelectChartType(chartType){
-    this.chartType = chartType
-    if (chartType && chartType.value === MAP){
+    this.chartType = chartType;
+    if(isCategoryType(this.chartType)){
       this._updateForDate();
     } else {
       this.setState({ isShowDate : false });
@@ -113,7 +125,7 @@ const DialogEurostat2 = React.createClass({
      const { oneCaption, twoCaption } = this.props;
      let msg = [];
 
-     if ( !(this.chartType && this.chartType.value === MAP) ){
+     if(!isCategoryType(this.chartType)){
         if (!this.one) { msg.push(this.props.msgOnNotSelected(oneCaption)); }
      }
      if (!this.two) { msg.push(this.props.msgOnNotSelected(twoCaption)); }

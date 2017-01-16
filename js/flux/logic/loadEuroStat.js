@@ -40,15 +40,12 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
 };
 
 var fnFetchToChartComp = function fnFetchToChartComp(_ref) {
-  var json = _ref.json;
-  var option = _ref.option;
-  var onCompleted = _ref.onCompleted;
+  var json = _ref.json,
+      option = _ref.option,
+      onCompleted = _ref.onCompleted;
 
-  //console.log(json);
-
-  var _EuroStatAdapter$toCo = _EuroStatAdapter2.default.toConfig(json, option);
-
-  var config = _EuroStatAdapter$toCo.config;
+  var _EuroStatAdapter$toCo = _EuroStatAdapter2.default.toConfig(json, option),
+      config = _EuroStatAdapter$toCo.config;
 
   onCompleted(option, config);
 };
@@ -66,12 +63,12 @@ var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
 };
 
 var fnFetchToChart = function fnFetchToChart(_ref2) {
-  var json = _ref2.json;
-  var option = _ref2.option;
-  var onCompleted = _ref2.onCompleted;
+  var json = _ref2.json,
+      option = _ref2.option,
+      onCompleted = _ref2.onCompleted;
 
-  var series = _EuroStatAdapter2.default.toSeries(json, option),
-      chart = _ChartStore2.default.getActiveChart();
+  var chart = _ChartStore2.default.getActiveChart(),
+      series = _EuroStatAdapter2.default.toSeries(json, option, chart);
 
   _ChartFn2.default.addSeriaWithRenderLabel(chart, series, option.itemCaption);
   onCompleted(option);

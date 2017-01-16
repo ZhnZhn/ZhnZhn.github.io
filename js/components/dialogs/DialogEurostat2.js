@@ -20,6 +20,8 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
+var _is = require('../../utils/is');
+
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
@@ -61,9 +63,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var DATE_PLACEHOLDER = 'Before Select Indicator',
     MAP_FREQUENCY_DF = 'M',
     AREA = 'AREA',
-    MAP = 'MAP';
+    MAP = 'MAP',
+    categoryTypes = ['MAP', 'COLUMN', 'BAR'];
 
-var chartTypeOptions = [{ caption: 'Default : Area', value: AREA }, { caption: 'Map', value: MAP, compType: _Type.CompItemType.EUROSTAT_MAP }];
+var chartTypeOptions = [{ caption: 'Default : Area', value: AREA }, { caption: 'Map : All Countries', value: MAP, compType: _Type.CompItemType.EUROSTAT_MAP }, { caption: 'Column : All Countries', value: 'COLUMN' }, { caption: 'Bar : All Countries', value: 'BAR' }];
+
+var isCategoryType = function isCategoryType(chartType) {
+  if (!chartType) {
+    return false;
+  }
+  return (0, _is.isStrInArr)(chartType.value)(categoryTypes);
+};
 
 var DialogEurostat2 = _react2.default.createClass(_extends({
   displayName: 'DialogEurostat2'
@@ -95,6 +105,7 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
     this.one = one;
   },
   _updateForDate: function _updateForDate() {
+    this.date = undefined;
     var frequency = this.two ? this.props.mapFrequency ? this.props.mapFrequency : this.two.mapFrequency ? this.two.mapFrequency : MAP_FREQUENCY_DF : undefined,
         mapDateDf = this.props.mapDateDf,
         config = frequency ? _DateUtils2.default.createEurostatSelect(frequency, mapDateDf) : { dateDefault: DATE_PLACEHOLDER, options: [] };
@@ -108,13 +119,13 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
   },
   _handlerSelectTwo: function _handlerSelectTwo(two) {
     this.two = two;
-    if (this.chartType && this.chartType.value === MAP) {
+    if (isCategoryType(this.chartType)) {
       this._updateForDate();
     }
   },
   _handlerSelectChartType: function _handlerSelectChartType(chartType) {
     this.chartType = chartType;
-    if (chartType && chartType.value === MAP) {
+    if (isCategoryType(this.chartType)) {
       this._updateForDate();
     } else {
       this.setState({ isShowDate: false });
@@ -133,7 +144,7 @@ var DialogEurostat2 = _react2.default.createClass(_extends({
 
     var msg = [];
 
-    if (!(this.chartType && this.chartType.value === MAP)) {
+    if (!isCategoryType(this.chartType)) {
       if (!this.one) {
         msg.push(this.props.msgOnNotSelected(oneCaption));
       }

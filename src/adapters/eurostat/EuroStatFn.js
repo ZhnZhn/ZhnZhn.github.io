@@ -26,16 +26,48 @@ const _crSubTitle = function(subTitle){
 
 const EuroStatFn = {
 
+  createData(timeIndex, value){
+    const data = [];
+    let max = Number.NEGATIVE_INFINITY
+      , min = Number.POSITIVE_INFINITY;
+
+    Object.keys(timeIndex).map((key) => {
+       const pointValue = value[timeIndex[key]];
+       if ( !(pointValue == null) ){
+         data.push([
+            this.convertToUTC(key),
+            pointValue
+          ]);
+
+          if (pointValue>=max) { max = pointValue; }
+          if (pointValue<=min) { min = pointValue; }
+       }
+    })
+
+    return { data, max, min };
+  },
+
   setDataAndInfo({ config, data, json, option }){
-    const { title, subtitle } = option;
+    const { title, subtitle, seriaType } = option;
     Chart.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(option);
     config.info = this.createDatasetInfo(json, option);
 
-    config.valueMoving = QuandlFn2.createValueMovingFromSeria(data);
+    if (seriaType === 'AREA'){
+      config.valueMoving = QuandlFn2.createValueMovingFromSeria(data);
+    }
     config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
+  },
+
+  setCategories({ config, categories, min, time, subtitle}){
+    config.xAxis.categories = categories
+    config.yAxis.min = min;
+    config.series[0].name = time;
+
+    config.zhConfig.itemCaption = `EU:${subtitle}`;
+    config.zhConfig.itemTime = time;
   },
 
   convertToUTC(str){
@@ -72,10 +104,11 @@ const EuroStatFn = {
   },
 
   createZhConfig(option){
+    const { key, itemCaption } = option
     return {
-      id : option.key,
-      key : option.key,
-      itemCaption : option.itemCaption,
+      id : key,
+      key : key,      
+      itemCaption : itemCaption,
       isWithoutIndicator : true,
       isWithoutAdd : true
     }
@@ -113,7 +146,6 @@ const EuroStatFn = {
   },
 
   ...ChoroplethMapSlice
-
 }
 
 export default EuroStatFn

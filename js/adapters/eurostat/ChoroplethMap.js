@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsonstat = require('jsonstat');
+var _JsonStatFn = require('./JsonStatFn');
 
-var _jsonstat2 = _interopRequireDefault(_jsonstat);
+var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
 
 var _kMeans = require('../../math/k-means');
 
@@ -23,16 +23,18 @@ if (process.env.NODE_ENV !== 'development') {
 /*eslint-enable no-undef */
 
 var URL_LEAFLET = 'lib/leaflet.js',
-    URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json';
-
-var NUMBER_OF_CLUSTERS = 6,
+    URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
+    NUMBER_OF_CLUSTERS = 6,
     NUMBER_OF_ITERATION = 100,
     _clusterColors = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
-var _findFeature = function _findFeature(arr, value) {
-  var i = void 0,
-      len = void 0;
-  for (i = 0, len = arr.length; i < len; i++) {
+var _findFeature = function _findFeature() {
+  var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var value = arguments[1];
+
+  var i = 0,
+      len = arr.length;
+  for (; i < len; i++) {
     var feature = arr[i];
     if (feature.properties.id === value) {
       return feature;
@@ -74,33 +76,7 @@ var _fnCreateClusters = function _fnCreateClusters(points, n, iteration) {
   _kMeans2.default.k(n);
   _kMeans2.default.iterations(iteration);
   _kMeans2.default.data(points);
-
-  var _clusters = _kMeans2.default.clusters().sort(function (a, b) {
-    if (a.centroid[0] < b.centroid[0]) {
-      return -1;
-    }
-    if (a.centroid[0] > b.centroid[0]) {
-      return 1;
-    }
-    if (a.centroid[0] === b.centroid[0]) {
-      return 0;
-    }
-  });
-  _clusters.forEach(function (cluster) {
-    cluster.points = cluster.points.sort(function (a, b) {
-      if (a[0] < b[0]) {
-        return -1;
-      }
-      if (a[0] > b[0]) {
-        return 1;
-      }
-      if (a[0] === b[0]) {
-        return 0;
-      }
-    });
-  });
-
-  return _clusters;
+  return _kMeans2.default.unarySortedClusters();
 };
 
 var _fnCreateHmIdCluster = function _fnCreateHmIdCluster(clusters) {
@@ -166,8 +142,8 @@ var _fnCreateInfoControl = function _fnCreateInfoControl(L) {
   };
   wgInfo.update = function (props) {
     if (props) {
-      var label = props.label;
-      var value = props.value;
+      var label = props.label,
+          value = props.value;
 
 
       this._div.innerHTML = '<b>' + label + '</b><br><b>' + (value ? value : 'uknown') + '</b>';
@@ -191,7 +167,6 @@ var _fnCreateItemInnerHtml = function _fnCreateItemInnerHtml(color, from, to) {
 
 var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, _clusters, L) {
   var gradeContorl = L.control({ position: 'bottomleft' });
-
   gradeContorl.onAdd = function (map) {
     var _div = L.DomUtil.create('div', 'control-grade');
 
@@ -228,24 +203,20 @@ var _fnOnEachFeature = function _fnOnEachFeature(infoControl, feature, layer) {
 };
 
 var _createChoroplethMap = function _createChoroplethMap(option) {
-  var statJson = option.jsonCube;
-  var geoJson = option.geoJson;
-  var configSlice = option.zhMapSlice;
-  var map = option.map;
-  var L = option.L;
-  var ds = (0, _jsonstat2.default)(statJson).Dataset(0);
-  var dGeo = ds.Dimension("geo");
-  var _dGeo = dGeo ? dGeo : [];
-  var sGeo = ds.Data(configSlice);
-  var _sGeo = sGeo ? sGeo : [];
-
-  var _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(_sGeo, _dGeo, geoJson);
-
-  var minValue = _fnMergeGeoAndValue2.minValue;
-  var maxValue = _fnMergeGeoAndValue2.maxValue;
-  var points = _fnMergeGeoAndValue2.points;
-  var _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION);
-  var _hmIdCluster = _fnCreateHmIdCluster(_clusters);
+  var statJson = option.jsonCube,
+      geoJson = option.geoJson,
+      configSlice = option.zhMapSlice,
+      map = option.map,
+      L = option.L,
+      _JsonStatFn$createGeo = _JsonStatFn2.default.createGeoSlice(statJson, configSlice),
+      dGeo = _JsonStatFn$createGeo.dGeo,
+      sGeo = _JsonStatFn$createGeo.sGeo,
+      _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(sGeo, dGeo, geoJson),
+      minValue = _fnMergeGeoAndValue2.minValue,
+      maxValue = _fnMergeGeoAndValue2.maxValue,
+      points = _fnMergeGeoAndValue2.points,
+      _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
+      _hmIdCluster = _fnCreateHmIdCluster(_clusters);
 
   _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
 
@@ -265,7 +236,7 @@ var _createChoroplethMap = function _createChoroplethMap(option) {
   return option;
 };
 
-var EuroStatToMap = {
+var ChoroplethMap = {
   hmUrlGeoJson: {},
   L: undefined,
 
@@ -294,7 +265,7 @@ var EuroStatToMap = {
       });
     }
   },
-  drawChoroplethMap: function drawChoroplethMap(id, jsonCube, zhMapSlice) {
+  draw: function draw(id, jsonCube, zhMapSlice) {
     var _this3 = this;
 
     return this.getLeaflet().then(function (L) {
@@ -316,5 +287,5 @@ var EuroStatToMap = {
   }
 };
 
-exports.default = EuroStatToMap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatToMap.js.map
+exports.default = ChoroplethMap;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\ChoroplethMap.js.map

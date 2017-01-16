@@ -1,11 +1,12 @@
 import React from 'react';
 
-import EuroStatToMap from '../../adapters/eurostat/EuroStatToMap';
+import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
 import SvgClose from '../SvgClose';
 import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
 import PanelDataInfo from '../zhn/PanelDataInfo';
+import SpinnerLoading from '../zhn/SpinnerLoading';
 
 const styles = {
   rootDiv : {
@@ -66,6 +67,15 @@ const styles = {
   mapDiv : {
     height : '400px'
   },
+  spinnerLoading : {
+    position: 'relative',
+    display: 'block',
+    textAlign: 'middle',
+    margin: '0 auto',
+    marginTop: '64px',
+    width: '32px',
+    height: '32px'
+  },
   displayBlock : {
     display : 'block'
   },
@@ -78,7 +88,6 @@ const styles = {
 const MapChartItem = React.createClass({
   getInitialState(){
     this.map = undefined;
-
     return {
       isOpen : true,
       isShowInfo : false
@@ -93,7 +102,7 @@ const MapChartItem = React.createClass({
     const { caption, config } = this.props
         , { json:jsonCube, zhMapSlice } = config
 
-    EuroStatToMap.drawChoroplethMap(`map_${caption}`, jsonCube, zhMapSlice)
+    ChoroplethMap.draw(`map_${caption}`, jsonCube, zhMapSlice)
                  .then( (option) => {
                      this.map = option.map;
                      return undefined;
@@ -153,7 +162,7 @@ const MapChartItem = React.createClass({
               id={`map_${caption}`}
               style={Object.assign({}, styles.mapDiv, _styleMap)}
            >
-             MapChartItem Loading...
+             <SpinnerLoading style={styles.spinnerLoading} />
            </div>
            <PanelDataInfo
               isShow={isShowInfo}

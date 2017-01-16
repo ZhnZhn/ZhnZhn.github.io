@@ -1,62 +1,39 @@
-import ChartConfig from '../../charts/ChartConfig';
+import toArea from './toArea';
+import toColumn from './toColumn';
+import toBar from './toBar';
+import toMap from './toMap';
 
-import EuroStatFn from './EuroStatFn';
 
-const _fnCreateData = function(timeIndex, value){
-  const data = [];
-  let max = Number.NEGATIVE_INFINITY
-    , min = Number.POSITIVE_INFINITY;
+const _rToConfig = {
+  AREA : toArea.createConfig,
+  MAP : toMap.createConfig,
+  COLUMN : toColumn.createConfig,
+  BAR : toBar.createConfig
+}
 
-  Object.keys(timeIndex).map((key) => {
-     const pointValue = value[timeIndex[key]];
-     if ( !(pointValue == null) ){
-       data.push([
-          EuroStatFn.convertToUTC(key),
-          pointValue
-        ]);
-
-        if (pointValue>=max) { max = pointValue; }
-        if (pointValue<=min) { min = pointValue; }
-     }
-  })
-
-  return { data, max, min }
+const _rToSeria = {
+  AREA : toArea.createSeria,
+  COLUMN : toColumn.createSeria,
+  BAR : toColumn.createSeria
 }
 
 const EuroStatAdapter = {
   toConfig(json, option){
-    const { zhCompType } = option;
-
-      const timeIndex = json.dimension.time.category.index
-          , value = json.value
-          , { data, max, min } = _fnCreateData(timeIndex, value)
-          , config = ChartConfig.fBaseAreaConfig();
-
-       EuroStatFn.setDataAndInfo({ config, data, json, option });
-       EuroStatFn.setLineExtrems({ config, max, min });
-
-       if (zhCompType){
-         config.zhDialog = option
-         config.zhDialog.apiKey = ''
-         config.json = json
-         config.zhMapSlice = option.zhMapSlice
-       }
+    const { seriaType='AREA' } = option
+         , fnToConfig = _rToConfig[seriaType]
+         , config = (typeof fnToConfig !== 'undefined')
+             ? fnToConfig(json, option)
+             : {} ;
 
        return { config };
  },
 
-  toSeries(json, option){
-    const timeIndex = json.dimension.time.category.index
-        , value = json.value
-        , valueText = option.itemCaption
-        , seria = ChartConfig.fSeries()
-        , { data } = _fnCreateData(timeIndex, value);
-
-    seria.zhSeriaId = option.key;
-    seria.zhValueText = valueText;
-    seria.data = data
-
-    seria.minY = EuroStatFn.findMinY(data);
+  toSeries(json, option, chart){
+    const { seriaType='AREA' } = option
+         , fnToSeria = _rToSeria[seriaType]
+         , seria = (typeof fnToSeria !== 'undefined')
+             ? fnToSeria(json, option, chart)
+             : undefined ;
 
     return seria;
   }

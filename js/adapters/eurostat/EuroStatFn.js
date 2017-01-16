@@ -43,22 +43,62 @@ var _crSubTitle = function _crSubTitle(subTitle) {
 };
 
 var EuroStatFn = _extends({
+  createData: function createData(timeIndex, value) {
+    var _this = this;
+
+    var data = [];
+    var max = Number.NEGATIVE_INFINITY,
+        min = Number.POSITIVE_INFINITY;
+
+    Object.keys(timeIndex).map(function (key) {
+      var pointValue = value[timeIndex[key]];
+      if (!(pointValue == null)) {
+        data.push([_this.convertToUTC(key), pointValue]);
+
+        if (pointValue >= max) {
+          max = pointValue;
+        }
+        if (pointValue <= min) {
+          min = pointValue;
+        }
+      }
+    });
+
+    return { data: data, max: max, min: min };
+  },
   setDataAndInfo: function setDataAndInfo(_ref) {
-    var config = _ref.config;
-    var data = _ref.data;
-    var json = _ref.json;
-    var option = _ref.option;
-    var title = option.title;
-    var subtitle = option.subtitle;
+    var config = _ref.config,
+        data = _ref.data,
+        json = _ref.json,
+        option = _ref.option;
+    var title = option.title,
+        subtitle = option.subtitle,
+        seriaType = option.seriaType;
 
     _Chart2.default.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(option);
     config.info = this.createDatasetInfo(json, option);
 
-    config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(data);
+    if (seriaType === 'AREA') {
+      config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(data);
+    }
     config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
+  },
+  setCategories: function setCategories(_ref2) {
+    var config = _ref2.config,
+        categories = _ref2.categories,
+        min = _ref2.min,
+        time = _ref2.time,
+        subtitle = _ref2.subtitle;
+
+    config.xAxis.categories = categories;
+    config.yAxis.min = min;
+    config.series[0].name = time;
+
+    config.zhConfig.itemCaption = 'EU:' + subtitle;
+    config.zhConfig.itemTime = time;
   },
   convertToUTC: function convertToUTC(str) {
     if (str.indexOf('M') !== -1) {
@@ -76,10 +116,10 @@ var EuroStatFn = _extends({
       return Date.UTC(str, 11, 31);
     }
   },
-  setLineExtrems: function setLineExtrems(_ref2) {
-    var config = _ref2.config;
-    var max = _ref2.max;
-    var min = _ref2.min;
+  setLineExtrems: function setLineExtrems(_ref3) {
+    var config = _ref3.config,
+        max = _ref3.max,
+        min = _ref3.min;
 
     var plotLines = config.yAxis.plotLines;
 
@@ -95,24 +135,26 @@ var EuroStatFn = _extends({
     config.yAxis.min = _Chart2.default.calcMinY({ maxPoint: max, minPoint: min });
   },
   createZhConfig: function createZhConfig(option) {
+    var key = option.key,
+        itemCaption = option.itemCaption;
+
     return {
-      id: option.key,
-      key: option.key,
-      itemCaption: option.itemCaption,
+      id: key,
+      key: key,
+      itemCaption: itemCaption,
       isWithoutIndicator: true,
       isWithoutAdd: true
     };
   },
   createDatasetInfo: function createDatasetInfo(json, option) {
-    var _option$group = option.group;
-    var group = _option$group === undefined ? '' : _option$group;
-    var arr = group.split('_');
-    var _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default;
-    var _json$extension = json.extension;
-    var extension = _json$extension === undefined ? {} : _json$extension;
-    var description = extension.description;
-    var subTitle = extension.subTitle;
-
+    var _option$group = option.group,
+        group = _option$group === undefined ? '' : _option$group,
+        arr = group.split('_'),
+        _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default,
+        _json$extension = json.extension,
+        extension = _json$extension === undefined ? {} : _json$extension,
+        description = extension.description,
+        subTitle = extension.subTitle;
 
     var _descr = '';
     if (subTitle) {

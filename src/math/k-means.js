@@ -92,6 +92,18 @@ const kmeans = function(data, config) {
 };
 
 
+//fn for sort clusters
+const compareUnaryCentroid = (a, b) => {
+  if ( a.centroid[0] < b.centroid[0] ) { return -1;}
+  if ( a.centroid[0] > b.centroid[0] ) { return 1;}
+  if ( a.centroid[0] === b.centroid[0] ) { return 0;}
+};
+const compareUnaryPoint = (a, b) => {
+  if ( a[0] < b[0] ) { return -1;}
+  if ( a[0] > b[0] ) { return 1;}
+  if ( a[0] === b[0] ) { return 0;}
+};
+
 const clusterMaker = {
 
   data: getterSetter([], function(arrayOfArrays) {
@@ -122,7 +134,17 @@ const clusterMaker = {
 
   k: getterSetter(undefined, function(value) { return ((value % 1 == 0) & (value > 0)) }),
 
-  iterations: getterSetter(Math.pow(10, 3), function(value) { return ((value % 1 == 0) & (value > 0)) })
+  iterations: getterSetter(Math.pow(10, 3), function(value) { return ((value % 1 == 0) & (value > 0)) }),
+
+
+  unarySortedClusters() {
+    return this.clusters()
+        .sort(compareUnaryCentroid)
+        .map( (cluster) => {
+           cluster.points = cluster.points.sort(compareUnaryPoint);
+           return cluster;
+        });
+  }
 
 };
 

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import SvgCheckBox from '../zhn/SvgCheckBox';
-import ValueMovingBadge from '../zhn/ValueMovingBadge';
-import SvgClose from '../SvgClose';
+import Header from './Header';
 import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
 import ZhHighchart from '../ZhHighchart';
@@ -19,43 +17,6 @@ const styles = {
     //marginRight: '10px',
     position : 'relative'
   },
-  headerDiv: {
-    backgroundColor: '#232F3B',
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px',
-    paddingTop: '4px',
-    paddingLeft: '10px',
-    lineHeight: 1.5,
-    //height: '25px',
-    //width: '600px'
-    width : '100%'
-  },
-  checkBoxStyle : {
-    float: 'left',
-    marginRight: '10px'
-  },
-  captionSpanOpen : {
-    display : 'inline-block',
-    color: 'rgba(164, 135, 212, 1)',
-    cursor: 'pointer',
-    width: '125px',
-    fontWeight : 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow : 'ellipsis',
-    overflow : 'hidden',
-    float : 'left'
-  },
-  captionSpanClose : {
-    display : 'inline-block',
-    color : 'gray',
-    cursor: 'pointer',
-    width : '125px',
-    fontWeight : 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow : 'ellipsis',
-    overflow : 'hidden',
-    float : 'left'
-  },
   tabDiv : {
     position: 'relative',
     height: '30px',
@@ -67,8 +28,8 @@ const styles = {
 const AreaChartItem = React.createClass({
   getInitialState(){
     this.is2H = false;
-    this._fnOnCheck = this._handlerCheckBox.bind(null, true);
-    this._fnOnUnCheck = this._handlerCheckBox.bind(null, false);
+    this._fnOnCheck = this._handlerCheckBox.bind(this, true);
+    this._fnOnUnCheck = this._handlerCheckBox.bind(this, false);
     return {
       isOpen: true,
       isShowChart : true,
@@ -358,36 +319,27 @@ const AreaChartItem = React.createClass({
             chartType, caption, config,
             onCloseItem,
           } = this.props
-        , {itemCaption} = config.zhConfig
+        , {itemCaption, itemTime} = config.zhConfig
         , _itemCaption = (itemCaption) ? itemCaption : caption
         , {
             isOpen, isShowChart, isShowInfo, isShowIndicator,
             mfiConfigs
-        } = this.state
-        , _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
-    
+        } = this.state;
+
     return (
       <div style={styles.rootDiv}>
-        <div style={styles.headerDiv}>
-          <SvgCheckBox
-             rootStyle={styles.checkBoxStyle}
-             chartType={chartType}
-             onCheck={this._fnOnCheck}
-             onUnCheck={this._fnOnUnCheck}
-          />
-          <span
-             className="not-selected"
-             title={caption}
-             style={_styleCaption}
-             onClick={this._handlerToggleOpen}
-          >
-             {_itemCaption}
-          </span>
-          <ValueMovingBadge
-             valueMoving={config.valueMoving}
-          />
-          <SvgClose onClose={onCloseItem} />
-        </div>
+         <Header
+            isOpen={isOpen}
+            chartType={chartType}
+            onCheck={this._fnOnCheck}
+            onUnCheck={this._fnOnUnCheck}
+            itemCaption={_itemCaption}
+            itemTitle={caption}
+            itemTime={itemTime}
+            onToggle={this._handlerToggleOpen}
+            valueMoving={config.valueMoving}
+            onClose={onCloseItem}
+         />
         <ShowHide isShow={isOpen}>
            {isShowChart && this._createChartToolBar(config)}
            <ZhHighchart
@@ -420,10 +372,12 @@ const AreaChartItem = React.createClass({
   reflowChart(width){
     this.mainChart.options.chart.width = width;
     this.mainChart.reflow();
-    this.mainChart.options.zhDetailCharts.forEach((chart) => {
-      //chart.reflow();
-      chart.setSize(width, chart.options.chart.height, true);
-    });
+    if (Array.isArray(this.mainChart.options.zhDetailCharts)) {
+      this.mainChart.options.zhDetailCharts.forEach((chart) => {
+        //chart.reflow();
+        chart.setSize(width, chart.options.chart.height, true);
+      });
+    }
   },
 
   setChartHeight(height){

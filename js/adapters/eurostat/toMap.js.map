@@ -1,0 +1,28 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\eurostat\\toMap.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\eurostat\\toMap.js",
+ "sourceRoot": "",
+ "names": [
+  "toMap",
+  "createConfig",
+  "json",
+  "option",
+  "dimension",
+  "time",
+  "category",
+  "index",
+  "value",
+  "createData",
+  "timeIndex",
+  "data",
+  "config",
+  "fBaseAreaConfig",
+  "setDataAndInfo",
+  "zhDialog",
+  "apiKey",
+  "zhMapSlice"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAGA,IAAMA,QAAQ;AACZC,mBAAe,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AACzB,0BAAYD,KAAKE,SAAL,CAAeC,IAAf,CAAoBC,QAApB,CAA6BC,KAAzC;AAAA,cACAC,KADA,GACQN,KAAKM,KADb;AAAA,sCAEW,qBAAWC,UAAX,CAAsBC,SAAtB,EAAiCF,KAAjC,CAFX;AAAA,cAEEG,IAFF,yBAEEA,IAFF;AAAA,cAGAC,MAHA,GAGS,sBAAYC,eAAZ,EAHT;;;AAKL,+BAAWC,cAAX,CAA0B,EAAEF,cAAF,EAAUD,UAAV,EAAgBT,UAAhB,EAAsBC,cAAtB,EAA1B;;AAEAS,iBAAOG,QAAP,GAAkBZ,MAAlB;AACAS,iBAAOG,QAAP,CAAgBC,MAAhB,GAAyB,EAAzB;AACAJ,iBAAOV,IAAP,GAAcA,IAAd;AACAU,iBAAOK,UAAP,GAAoBd,OAAOc,UAA3B;;AAEA,iBAAOL,MAAP;AACF;AAfW,CAAd;;kBAkBeZ,K"
+}

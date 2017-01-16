@@ -293,7 +293,7 @@ var ZhSelect = _react2.default.createClass({
           } else {
             this._undecorateActiveOption();
             this._setStateToInit(this.props.options);
-            this.props.onSelect(null);
+            this.props.onSelect(undefined);
           }
           break;
         }

@@ -8,17 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgCheckBox = require('../zhn/SvgCheckBox');
+var _Header = require('./Header');
 
-var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
-
-var _ValueMovingBadge = require('../zhn/ValueMovingBadge');
-
-var _ValueMovingBadge2 = _interopRequireDefault(_ValueMovingBadge);
-
-var _SvgClose = require('../SvgClose');
-
-var _SvgClose2 = _interopRequireDefault(_SvgClose);
+var _Header2 = _interopRequireDefault(_Header);
 
 var _ButtonTab = require('../zhn/ButtonTab');
 
@@ -54,43 +46,6 @@ var styles = {
     //marginRight: '10px',
     position: 'relative'
   },
-  headerDiv: {
-    backgroundColor: '#232F3B',
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px',
-    paddingTop: '4px',
-    paddingLeft: '10px',
-    lineHeight: 1.5,
-    //height: '25px',
-    //width: '600px'
-    width: '100%'
-  },
-  checkBoxStyle: {
-    float: 'left',
-    marginRight: '10px'
-  },
-  captionSpanOpen: {
-    display: 'inline-block',
-    color: 'rgba(164, 135, 212, 1)',
-    cursor: 'pointer',
-    width: '125px',
-    fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    float: 'left'
-  },
-  captionSpanClose: {
-    display: 'inline-block',
-    color: 'gray',
-    cursor: 'pointer',
-    width: '125px',
-    fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    float: 'left'
-  },
   tabDiv: {
     position: 'relative',
     height: '30px',
@@ -103,8 +58,8 @@ var AreaChartItem = _react2.default.createClass({
   displayName: 'AreaChartItem',
   getInitialState: function getInitialState() {
     this.is2H = false;
-    this._fnOnCheck = this._handlerCheckBox.bind(null, true);
-    this._fnOnUnCheck = this._handlerCheckBox.bind(null, false);
+    this._fnOnCheck = this._handlerCheckBox.bind(this, true);
+    this._fnOnUnCheck = this._handlerCheckBox.bind(this, false);
     return {
       isOpen: true,
       isShowChart: true,
@@ -383,43 +338,32 @@ var AreaChartItem = _react2.default.createClass({
         caption = _props2.caption,
         config = _props2.config,
         onCloseItem = _props2.onCloseItem,
-        itemCaption = config.zhConfig.itemCaption,
+        _config$zhConfig = config.zhConfig,
+        itemCaption = _config$zhConfig.itemCaption,
+        itemTime = _config$zhConfig.itemTime,
         _itemCaption = itemCaption ? itemCaption : caption,
         _state4 = this.state,
         isOpen = _state4.isOpen,
         isShowChart = _state4.isShowChart,
         isShowInfo = _state4.isShowInfo,
         isShowIndicator = _state4.isShowIndicator,
-        mfiConfigs = _state4.mfiConfigs,
-        _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
+        mfiConfigs = _state4.mfiConfigs;
 
     return _react2.default.createElement(
       'div',
       { style: styles.rootDiv },
-      _react2.default.createElement(
-        'div',
-        { style: styles.headerDiv },
-        _react2.default.createElement(_SvgCheckBox2.default, {
-          rootStyle: styles.checkBoxStyle,
-          chartType: chartType,
-          onCheck: this._fnOnCheck,
-          onUnCheck: this._fnOnUnCheck
-        }),
-        _react2.default.createElement(
-          'span',
-          {
-            className: 'not-selected',
-            title: caption,
-            style: _styleCaption,
-            onClick: this._handlerToggleOpen
-          },
-          _itemCaption
-        ),
-        _react2.default.createElement(_ValueMovingBadge2.default, {
-          valueMoving: config.valueMoving
-        }),
-        _react2.default.createElement(_SvgClose2.default, { onClose: onCloseItem })
-      ),
+      _react2.default.createElement(_Header2.default, {
+        isOpen: isOpen,
+        chartType: chartType,
+        onCheck: this._fnOnCheck,
+        onUnCheck: this._fnOnUnCheck,
+        itemCaption: _itemCaption,
+        itemTitle: caption,
+        itemTime: itemTime,
+        onToggle: this._handlerToggleOpen,
+        valueMoving: config.valueMoving,
+        onClose: onCloseItem
+      }),
       _react2.default.createElement(
         _ShowHide2.default,
         { isShow: isOpen },
@@ -452,10 +396,12 @@ var AreaChartItem = _react2.default.createClass({
   reflowChart: function reflowChart(width) {
     this.mainChart.options.chart.width = width;
     this.mainChart.reflow();
-    this.mainChart.options.zhDetailCharts.forEach(function (chart) {
-      //chart.reflow();
-      chart.setSize(width, chart.options.chart.height, true);
-    });
+    if (Array.isArray(this.mainChart.options.zhDetailCharts)) {
+      this.mainChart.options.zhDetailCharts.forEach(function (chart) {
+        //chart.reflow();
+        chart.setSize(width, chart.options.chart.height, true);
+      });
+    }
   },
   setChartHeight: function setChartHeight(height) {
     this.mainChart.options.chart.height = height;

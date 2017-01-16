@@ -10,9 +10,12 @@ const _fnCreateQuandlKey = function(option){
 }
 
 const _fnCreateEuroStatKey = function(option){
-  const { geo='', group='', metric='' } = option
+  const {
+          geo='', group='', metric='',
+          seriaType='AREA', time=''
+         } = option
       , _metric = metric.replace('?', '_');
-  return `${geo}_${group}_${_metric}`;
+  return `${geo}_${group}_${_metric}_${seriaType}_${time}`;
 }
 
 const LogicUtils = {
@@ -25,7 +28,7 @@ const LogicUtils = {
       case LoadType.EU_STAT:
          return _fnCreateEuroStatKey(option);
       case LoadType.WL:
-         return option.id;      
+         return option.id;
       default :
         return 'key'
     }

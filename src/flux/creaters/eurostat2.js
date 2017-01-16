@@ -6,7 +6,8 @@ const COUNTRY_CAPTION_DF = 'EU'
 
 const createLoadOptions = (props={}, options={}) => {
   const { loadId, group } = props
-      , { one, two={}, chartType, date, dateDefault } = options
+      , { one, two={}, chartType={}, date, dateDefault } = options
+      , { value:chartTypeValue='AREA' } = chartType
 
       , _countryValue = (one)
           ? one.value
@@ -19,7 +20,7 @@ const createLoadOptions = (props={}, options={}) => {
   , _time = undefined
   , _mapValue = two.mapValue
   , _mapSlice = two.mapSlice;
-
+  
   if (chartType && chartType.value !== AREA){
     _zhCompType = chartType.compType;
     _time = (date) ? date.value : dateDefault;
@@ -39,6 +40,7 @@ const createLoadOptions = (props={}, options={}) => {
     alertItemId : `${_countryCaption}:${two.caption}`,
     alertGeo : _countryCaption,
     alertMetric : two.caption,
+    seriaType : chartTypeValue,
     zhCompType : _zhCompType,
     mapValue : _mapValue,
     zhMapSlice : { ..._mapSlice, time : _time },

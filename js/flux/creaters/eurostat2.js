@@ -24,9 +24,12 @@ var createLoadOptions = function createLoadOptions() {
       one = options.one,
       _options$two = options.two,
       two = _options$two === undefined ? {} : _options$two,
-      chartType = options.chartType,
+      _options$chartType = options.chartType,
+      chartType = _options$chartType === undefined ? {} : _options$chartType,
       date = options.date,
       dateDefault = options.dateDefault,
+      _chartType$value = chartType.value,
+      chartTypeValue = _chartType$value === undefined ? 'AREA' : _chartType$value,
       _countryValue = one ? one.value : COUNTRY_CAPTION_DF,
       _countryCaption = one ? one.caption : COUNTRY_CAPTION_DF;
 
@@ -58,6 +61,7 @@ var createLoadOptions = function createLoadOptions() {
     alertItemId: _countryCaption + ':' + two.caption,
     alertGeo: _countryCaption,
     alertMetric: two.caption,
+    seriaType: chartTypeValue,
     zhCompType: _zhCompType,
     mapValue: _mapValue,
     zhMapSlice: _extends({}, _mapSlice, { time: _time }),

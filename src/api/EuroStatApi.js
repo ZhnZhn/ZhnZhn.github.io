@@ -1,4 +1,6 @@
 
+import { isStrInArr } from '../utils/is';
+
 const rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
     , queryTail = "&precision=1&sinceTimePeriod=1996M01";
 
@@ -10,28 +12,36 @@ const _crDetailMsg = function(option){
   return `\n\nIt seems country-dataset doesn't exsist.\n${alertGeo}:${alertMetric}\n\nIf you use For Date input field in Dialog\ntry to use more late date.`
 }
 
+const _categoryTypes = [ 'MAP', 'COLUMN', 'BAR' ];
+
+
 const EuroStatApi = {
 
   getRequestUrl(option){
+    const {
+            group, metric, geo,
+            mapValue, time,
+            seriaType
+          } = option;
 
-    const { group, metric, geo, zhCompType, mapValue, time } = option;
-
-    if (!zhCompType){
-    let _param = `geo=${geo}`
-      , _group;
-
-    if (group){
-      _group = `${group}?`;
-      if (metric){
-        _param = `${_param}&indic=${metric}`;
+    if (!isStrInArr(seriaType)(_categoryTypes)){
+      let _param = `geo=${geo}`
+        , _group;
+      if (group){
+        _group = `${group}?`;
+        if (metric){
+          _param = `${_param}&indic=${metric}`;
+        }
+      } else {
+        _group = (metric.indexOf('?') === -1)
+           ? `${metric}?`
+           : metric ;
+        _param = `&${_param}`;
       }
-    } else {
-      _group = ( metric.indexOf('?') === -1) ? `${metric}?` : metric ;
-      _param = `&${_param}`;
-    }
 
-
-    return `${rootUrl}${_group}${_param}${queryTail}`;
+      return `${rootUrl}${_group}${_param}${queryTail}`;
+  } else if (seriaType === 'COLUMN') {
+    return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
   } else {
     //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
     return `${rootUrl}${mapValue}&time=${time}`;
@@ -41,17 +51,17 @@ const EuroStatApi = {
 
   checkResponse(json, option) {
     const { error } = json
-    if ( error ){
-       if ( error.label ) {
+    if (error){
+       if (error.label) {
           throw {
-              errCaption : REQUEST_ERROR,
-              message : MESSAGE_HEADER + error.label + _crDetailMsg(option)
-          }
+            errCaption : REQUEST_ERROR,
+            message : MESSAGE_HEADER + error.label + _crDetailMsg(option)
+          };
        } else {
-          throw { errCaption : REQUEST_ERROR, message : '' }
+          throw { errCaption : REQUEST_ERROR, message : '' };
        }
     }
-    return true
+    return true;
   }
 
 }

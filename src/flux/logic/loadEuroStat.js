@@ -19,8 +19,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
   })
 }
 
-const fnFetchToChartComp = function({json, option, onCompleted}){
-  //console.log(json);
+const fnFetchToChartComp = function({json, option, onCompleted}){  
   const { config } = EuroStatAdapter.toConfig(json, option);
   onCompleted(option, config);
 }
@@ -38,8 +37,8 @@ const _loadToChart = function(option, onAdded, onFailed){
 }
 
 const fnFetchToChart = function({ json, option, onCompleted }){
-  const series = EuroStatAdapter.toSeries(json, option)
-      , chart = ChartStore.getActiveChart();
+  const chart = ChartStore.getActiveChart()
+  , series = EuroStatAdapter.toSeries(json, option, chart);
 
   ChartFn.addSeriaWithRenderLabel(chart, series, option.itemCaption);
   onCompleted(option);

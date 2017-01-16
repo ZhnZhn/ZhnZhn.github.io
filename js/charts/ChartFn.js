@@ -34,7 +34,9 @@ var C = {
 var ChartFn = {
   addSeriaWithRenderLabel: function addSeriaWithRenderLabel(chart, series, label) {
     var options = chart.options;
-
+    if (!options.zhSeries) {
+      options.zhSeries = {};
+    }
     var seriesText = label.length > C.SERIA_LABEL_CHARS ? label.substring(0, C.SERIA_LABEL_CHARS) : label,
         seriesCount = options.zhSeries.count,
         row = Math.floor(seriesCount / C.SERIA_LABELS_IN_ROW),
@@ -76,11 +78,11 @@ var ChartFn = {
     }
   },
   toggleSeria: function toggleSeria(chart, item) {
-    var name = item.name;
-    var color = item.color;
-    var index = item.index;
-    var isSecondAxes = item.isSecondAxes;
-    var seria = item.seria;
+    var name = item.name,
+        color = item.color,
+        index = item.index,
+        isSecondAxes = item.isSecondAxes,
+        seria = item.seria;
 
 
     if (isSecondAxes) {

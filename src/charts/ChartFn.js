@@ -22,7 +22,9 @@ const C = {
 const ChartFn = {
   addSeriaWithRenderLabel(chart, series, label){
     const options = chart.options;
-    
+    if (!options.zhSeries){
+      options.zhSeries = {}
+    }                       
     const seriesText = (label.length>C.SERIA_LABEL_CHARS)
               ? label.substring(0,C.SERIA_LABEL_CHARS)
               : label

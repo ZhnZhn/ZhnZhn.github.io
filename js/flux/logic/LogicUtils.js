@@ -11,14 +11,19 @@ var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
 };
 
 var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
-  var _option$geo = option.geo;
-  var geo = _option$geo === undefined ? '' : _option$geo;
-  var _option$group = option.group;
-  var group = _option$group === undefined ? '' : _option$group;
-  var _option$metric = option.metric;
-  var metric = _option$metric === undefined ? '' : _option$metric;
-  var _metric = metric.replace('?', '_');
-  return geo + '_' + group + '_' + _metric;
+  var _option$geo = option.geo,
+      geo = _option$geo === undefined ? '' : _option$geo,
+      _option$group = option.group,
+      group = _option$group === undefined ? '' : _option$group,
+      _option$metric = option.metric,
+      metric = _option$metric === undefined ? '' : _option$metric,
+      _option$seriaType = option.seriaType,
+      seriaType = _option$seriaType === undefined ? 'AREA' : _option$seriaType,
+      _option$time = option.time,
+      time = _option$time === undefined ? '' : _option$time,
+      _metric = metric.replace('?', '_');
+
+  return geo + '_' + group + '_' + _metric + '_' + seriaType + '_' + time;
 };
 
 var LogicUtils = {

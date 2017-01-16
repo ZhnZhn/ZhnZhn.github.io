@@ -8,9 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _EuroStatToMap = require('../../adapters/eurostat/EuroStatToMap');
+var _ChoroplethMap = require('../../adapters/eurostat/ChoroplethMap');
 
-var _EuroStatToMap2 = _interopRequireDefault(_EuroStatToMap);
+var _ChoroplethMap2 = _interopRequireDefault(_ChoroplethMap);
 
 var _SvgClose = require('../SvgClose');
 
@@ -27,6 +27,10 @@ var _ShowHide2 = _interopRequireDefault(_ShowHide);
 var _PanelDataInfo = require('../zhn/PanelDataInfo');
 
 var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
+
+var _SpinnerLoading = require('../zhn/SpinnerLoading');
+
+var _SpinnerLoading2 = _interopRequireDefault(_SpinnerLoading);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89,6 +93,15 @@ var styles = {
   mapDiv: {
     height: '400px'
   },
+  spinnerLoading: {
+    position: 'relative',
+    display: 'block',
+    textAlign: 'middle',
+    margin: '0 auto',
+    marginTop: '64px',
+    width: '32px',
+    height: '32px'
+  },
   displayBlock: {
     display: 'block'
   },
@@ -101,7 +114,6 @@ var MapChartItem = _react2.default.createClass({
   displayName: 'MapChartItem',
   getInitialState: function getInitialState() {
     this.map = undefined;
-
     return {
       isOpen: true,
       isShowInfo: false
@@ -113,14 +125,14 @@ var MapChartItem = _react2.default.createClass({
   componentDidMount: function componentDidMount() {
     var _this = this;
 
-    var _props = this.props;
-    var caption = _props.caption;
-    var config = _props.config;
-    var jsonCube = config.json;
-    var zhMapSlice = config.zhMapSlice;
+    var _props = this.props,
+        caption = _props.caption,
+        config = _props.config,
+        jsonCube = config.json,
+        zhMapSlice = config.zhMapSlice;
 
 
-    _EuroStatToMap2.default.drawChoroplethMap('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
+    _ChoroplethMap2.default.draw('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
       _this.map = option.map;
       return undefined;
     });
@@ -143,23 +155,23 @@ var MapChartItem = _react2.default.createClass({
     );
   },
   render: function render() {
-    var _props2 = this.props;
-    var caption = _props2.caption;
-    var config = _props2.config;
-    var onCloseItem = _props2.onCloseItem;
-    var _config$json = config.json;
-    var json = _config$json === undefined ? {} : _config$json;
-    var _config$zhDialog = config.zhDialog;
-    var zhDialog = _config$zhDialog === undefined ? {} : _config$zhDialog;
-    var _zhDialog$subtitle = zhDialog.subtitle;
-    var subtitle = _zhDialog$subtitle === undefined ? '' : _zhDialog$subtitle;
-    var _zhDialog$time = zhDialog.time;
-    var time = _zhDialog$time === undefined ? '' : _zhDialog$time;
-    var _state = this.state;
-    var isOpen = _state.isOpen;
-    var isShowInfo = _state.isShowInfo;
-    var _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose;
-    var _styleMap = isShowInfo ? styles.displayNone : styles.displayBlock;
+    var _props2 = this.props,
+        caption = _props2.caption,
+        config = _props2.config,
+        onCloseItem = _props2.onCloseItem,
+        _config$json = config.json,
+        json = _config$json === undefined ? {} : _config$json,
+        _config$zhDialog = config.zhDialog,
+        zhDialog = _config$zhDialog === undefined ? {} : _config$zhDialog,
+        _zhDialog$subtitle = zhDialog.subtitle,
+        subtitle = _zhDialog$subtitle === undefined ? '' : _zhDialog$subtitle,
+        _zhDialog$time = zhDialog.time,
+        time = _zhDialog$time === undefined ? '' : _zhDialog$time,
+        _state = this.state,
+        isOpen = _state.isOpen,
+        isShowInfo = _state.isShowInfo,
+        _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose,
+        _styleMap = isShowInfo ? styles.displayNone : styles.displayBlock;
 
     return _react2.default.createElement(
       'div',
@@ -194,7 +206,7 @@ var MapChartItem = _react2.default.createClass({
             id: 'map_' + caption,
             style: Object.assign({}, styles.mapDiv, _styleMap)
           },
-          'MapChartItem Loading...'
+          _react2.default.createElement(_SpinnerLoading2.default, { style: styles.spinnerLoading })
         ),
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,

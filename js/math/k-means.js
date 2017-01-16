@@ -115,6 +115,30 @@ var kmeans = function kmeans(data, config) {
   };
 };
 
+//fn for sort clusters
+var compareUnaryCentroid = function compareUnaryCentroid(a, b) {
+  if (a.centroid[0] < b.centroid[0]) {
+    return -1;
+  }
+  if (a.centroid[0] > b.centroid[0]) {
+    return 1;
+  }
+  if (a.centroid[0] === b.centroid[0]) {
+    return 0;
+  }
+};
+var compareUnaryPoint = function compareUnaryPoint(a, b) {
+  if (a[0] < b[0]) {
+    return -1;
+  }
+  if (a[0] > b[0]) {
+    return 1;
+  }
+  if (a[0] === b[0]) {
+    return 0;
+  }
+};
+
 var clusterMaker = {
 
   data: getterSetter([], function (arrayOfArrays) {
@@ -150,8 +174,14 @@ var clusterMaker = {
 
   iterations: getterSetter(Math.pow(10, 3), function (value) {
     return value % 1 == 0 & value > 0;
-  })
+  }),
 
+  unarySortedClusters: function unarySortedClusters() {
+    return this.clusters().sort(compareUnaryCentroid).map(function (cluster) {
+      cluster.points = cluster.points.sort(compareUnaryPoint);
+      return cluster;
+    });
+  }
 };
 
 exports.default = clusterMaker;
