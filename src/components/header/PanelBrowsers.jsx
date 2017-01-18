@@ -2,6 +2,7 @@ import React from 'react';
 
 import ShowHide from '../zhn/ShowHide';
 
+/*
 const STYLE = {
   ROOT : {
     position : 'absolute',
@@ -22,16 +23,19 @@ const STYLE = {
     width: '280px'
   }
 }
-
+*/
 
 const PanelBrowsers = (props) => {
   const {
-          isShow, BROWSER, browserConfig,
+          className, isShow, BROWSER, browserConfig,
           onClickQuandl, onClickDynamic, onClickWatch
         } = props;
 
   return (
-    <ShowHide isShow={isShow} style={STYLE.ROOT}>
+    <ShowHide
+       className={className}
+       isShow={isShow}
+    >
       <div>
         <div
           className="row__topic__odd item__eurostat"

@@ -4,6 +4,11 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\header\\AppLabel.jsx",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\header\\AppLabel.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,WAAW,gBAAM,WAAN,CAAkB;;AACjC,4BAAQ;iBAC0B,KAAK,KAAL,CAD1B;QACC,qBADD;QACQ,qBADR;QACe,yBADf;;AAEN,WACE;;QAAM,OAAO,KAAP,EAAc,OAAO,KAAP,EAApB;MACG,OADH;KADF,CAFM;GADyB;CAAlB,CAAX;;kBAWS"
+ "names": [
+  "AppLabel",
+  "className",
+  "caption",
+  "title"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,WAAW,SAAXA,QAAW;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,OAAd,QAAcA,OAAd;AAAA,MAAuBC,KAAvB,QAAuBA,KAAvB;AAAA,SACf;AAAA;AAAA;AACG,iBAAWF,SADd;AAEG,aAAOE;AAFV;AAIGD;AAJH,GADe;AAAA,CAAjB;;kBASeF,Q"
 }

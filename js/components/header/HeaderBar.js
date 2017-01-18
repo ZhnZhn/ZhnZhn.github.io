@@ -56,6 +56,7 @@ var styles = {
   appLabel: {
     display: 'inline-block',
     color: '#80c040',
+    marginTop: '8px',
     marginLeft: '35px',
     paddingLeft: '10px',
     paddingRight: '10px',
@@ -88,21 +89,25 @@ var HeaderBar = _react2.default.createClass({
     this.setState({ isDS: !this.state.isDS });
   },
   render: function render() {
-    var store = this.props.store;
-    var isDS = this.state.isDS;
+    var store = this.props.store,
+        isDS = this.state.isDS;
 
     return _react2.default.createElement(
       'div',
       { className: 'header', style: styles.rootDiv },
       _react2.default.createElement(_ProgressLoading2.default, { store: store }),
-      _react2.default.createElement(_IconLogoErc2.default, null),
+      _react2.default.createElement(_IconLogoErc2.default, {
+        className: 'header__icon-erc',
+        title: 'ERC : Economic RESTful Client v0.12.0'
+      }),
       _react2.default.createElement(_AppLabel2.default, {
-        style: styles.appLabel,
+        className: 'header__app-label',
         caption: 'ERC v0.12.0'
       }),
       _react2.default.createElement(
         _ToolBarButton2.default,
         {
+          style: { marginTop: '8px', marginLeft: '10px' },
           type: 'TypeA',
           caption: 'DS',
           title: 'Data Source Browsers',
@@ -111,18 +116,21 @@ var HeaderBar = _react2.default.createClass({
         _react2.default.createElement('span', { className: 'arrow-down' })
       ),
       _react2.default.createElement(_ToolBarButton2.default, {
+        style: { marginTop: '8px' },
         type: 'TypeA',
         caption: 'Quandl',
         title: 'Quandl Economic Browser',
         onClick: this._handlerClickQuandl
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
+        style: { marginTop: '8px' },
         type: 'TypeA',
         caption: 'Eurostat',
         title: 'European Statistics Browser',
         onClick: this._handlerClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
+        style: { marginTop: '8px' },
         type: 'TypeA',
         caption: 'Watch',
         title: 'Watch List Browser',
@@ -130,23 +138,24 @@ var HeaderBar = _react2.default.createClass({
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
-        style: { float: 'right', marginRight: '20px' },
+        style: { float: 'right', marginRight: '20px', marginTop: '8px' },
         caption: 'About',
         title: 'Description about application ERC',
         onClick: _ComponentActions2.default.showAbout
       }),
       _react2.default.createElement(_ToolBarButton2.default, {
         type: 'TypeA',
-        style: { float: 'right' },
+        style: { float: 'right', marginTop: '8px' },
         caption: 'Settings',
         title: 'Application settings',
         onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
       }),
       _react2.default.createElement(_LimitRemainingLabel2.default, {
         store: store,
-        style: { float: 'right', paddingTop: '5px' }
+        style: { float: 'right', paddingTop: '14px' }
       }),
       _react2.default.createElement(_PanelBrowsers2.default, {
+        className: 'header__panel-browser',
         isShow: isDS,
         BROWSER: _Type.BrowserType,
         browserConfig: _BrowserConfig2.default,

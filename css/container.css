@@ -28,22 +28,6 @@
   outline: 0px none;
 }
 
-
-.header{
-  position : relative;
-  width: calc(100vw - 36px);
-  margin-left: 10px;
-  margin-right: 26px;
-  background-color: rgba(77, 77, 77, 1);
-  min-height: 46px;
-  max-height: 46px;
-  border : 3px solid #232F3B;
-  border-top: none;
-  padding-top: 8px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
 .row__topic__odd {
   line-height: 2;
   background-color: #404040;

@@ -20,6 +20,7 @@ const styles = {
   appLabel : {
     display: 'inline-block',
     color:'#80c040',
+    marginTop: '8px',
     marginLeft: '35px',
     paddingLeft: '10px',
     paddingRight: '10px',
@@ -59,13 +60,17 @@ const HeaderBar = React.createClass({
     return (
       <div className="header" style={styles.rootDiv}>
          <ProgressLoading store={store} />
-         <IconLogoErc />
+         <IconLogoErc
+            className="header__icon-erc"
+            title="ERC : Economic RESTful Client v0.12.0"
+         />
          <AppLabel
-            style={styles.appLabel}
+            className="header__app-label"
             caption="ERC v0.12.0"
          />
 
          <ToolBarButton
+           style={{ marginTop: '8px', marginLeft: '10px' }}
            type="TypeA"
            caption="DS"
            title="Data Source Browsers"
@@ -76,6 +81,7 @@ const HeaderBar = React.createClass({
 
 
         <ToolBarButton
+          style={{ marginTop: '8px' }}
           type="TypeA"
           caption="Quandl"
           title="Quandl Economic Browser"
@@ -83,6 +89,7 @@ const HeaderBar = React.createClass({
         />
 
         <ToolBarButton
+           style={{ marginTop: '8px' }}
            type="TypeA"
            caption="Eurostat"
            title="European Statistics Browser"
@@ -90,6 +97,7 @@ const HeaderBar = React.createClass({
         />
 
          <ToolBarButton
+           style={{ marginTop: '8px' }}
            type="TypeA"
            caption="Watch"
            title="Watch List Browser"
@@ -98,7 +106,7 @@ const HeaderBar = React.createClass({
 
          <ToolBarButton
            type="TypeA"
-           style={{ float: 'right', marginRight: '20px'}}
+           style={{ float: 'right', marginRight: '20px', marginTop: '8px'}}
            caption="About"
            title="Description about application ERC"
            onClick={ComponentActions.showAbout}
@@ -106,7 +114,7 @@ const HeaderBar = React.createClass({
 
           <ToolBarButton
             type="TypeA"
-            style={{ float: 'right'}}
+            style={{ float: 'right', marginTop: '8px'}}
             caption="Settings"
             title="Application settings"
             onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.SETTINGS)}
@@ -114,10 +122,11 @@ const HeaderBar = React.createClass({
 
            <LimitRemainingLabel
               store={store}
-              style={{ float: 'right', paddingTop: '5px' }}
+              style={{ float: 'right', paddingTop: '14px' }}
            />
 
            <PanelBrowsers
+              className="header__panel-browser"
               isShow={isDS}
               BROWSER={BrowserType}
               browserConfig={BrowserConfig}

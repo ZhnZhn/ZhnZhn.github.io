@@ -11,12 +11,20 @@ const styles = {
 
 const ShowHide = React.createClass({
   render(){
-    const {isShow, style, children} = this.props
+    const {isShow, className, style, children} = this.props
         , _styleShow = isShow ? styles.show : styles.hide
-        , _classShow = isShow ? 'show-popup' : null;
+        , _classShow = isShow ? 'show-popup' : ''
+        , _className = (className)
+              ? `${className} ${_classShow}`
+              : (_classShow !== '')
+                   ? _classShow
+                   : undefined;
 
     return (
-      <div className={_classShow} style={Object.assign({}, style, _styleShow)}>
+      <div
+        className={_className}
+        style={Object.assign({}, style, _styleShow)}
+      >
         {children}
       </div>
     )

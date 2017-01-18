@@ -1,5 +1,6 @@
 import React from 'react';
 
+/*
 const STYLE = {
   ROOT : {
     position: 'absolute',
@@ -7,13 +8,14 @@ const STYLE = {
     left: '5px'
   }
 }
+*/
 
-const IconLogoErc = (props) => {
+const IconLogoErc = ({ className, title }) => {  
   return (
     <span
-       className="icon__erc"
-       title="ERC : Economic RESTful Client v. 0.11.0"
-       style={STYLE.ROOT}
+       className={className}
+       title={title}
+       //style={STYLE.ROOT}
     >
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
          fill-rule="evenodd"
