@@ -8,7 +8,7 @@ import ChartConfig from './charts/ChartConfig';
 ChartConfig.init();
 
 const _fnRemoveSpinner = function(){
-  document.body.removeChild(document.getElementById('spinner'));
+  document.body.removeChild(document.getElementById('loading'));
 }
 
 render(<AppErc />, document.getElementById('app'), _fnRemoveSpinner);

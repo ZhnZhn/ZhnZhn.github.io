@@ -19,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _ChartConfig2.default.init();
 
 var _fnRemoveSpinner = function _fnRemoveSpinner() {
-  document.body.removeChild(document.getElementById('spinner'));
+  document.body.removeChild(document.getElementById('loading'));
 };
 
 (0, _reactDom.render)(_react2.default.createElement(_AppErc2.default, null), document.getElementById('app'), _fnRemoveSpinner);

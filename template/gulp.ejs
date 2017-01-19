@@ -72,37 +72,38 @@
 @keyframes circle
 { 100% {transform: rotate(360deg);}}
 
-.spinner__wrapper {
-  position: absolute;
-  top : 5%;
-  left: 40%;
+.wrapper {
+  margin: 0 auto;
+  margin-top: 3em;
   background-color: rgb(77, 77, 77);
   border: solid 2px #232F3B;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 6px;
   z-index: 100;
   width: 14em;
-  height: 8em;
-  margin: 0.5em;
-  padding: 2em;
   padding-top: 1em;
+  padding-bottom: 1.5em;
   text-align: center;
 }
-.spinner__wrapper > div {
-   margin: 0.5em auto;
+.wrapper__loading {
+  margin: 0.5em auto;
 }
-.spinner__descr {
-   position: absolute;
-   bottom: 0.8em;
-   left: 3em;
+.wrapper__descr {
+   margin-top: 1em;
    font-family: "Roboto", "Arial", "Lato", sans-serif;
    font-size: 1em;
    font-weight: bold;
 }
-  </style>
+.wrapper__app {
+  color:#80c040;
+  display:block;
+  padding-bottom:0.5em;
+}
+
+</style>
 
   <!-- inject:css -->
-  <link rel="stylesheet" href="/css/app-bde63f19dd.min.css">
+  <link rel="stylesheet" href="/css/app-9c1d4092e8.min.css">
   <!-- endinject  -->
 
 </head>
@@ -116,10 +117,10 @@
      }
     </style>
   </noscript>
-  <div id="spinner" class="spinner__wrapper">
-    <div data-loader="circle"></div>
-    <div class="spinner__descr">
-      <span style="color:#80c040;">
+  <div id="loading" class="wrapper">
+    <div data-loader="circle" class="wrapper__loading"></div>
+    <div class="wrapper__descr">
+      <span class="wrapper__app">
         ERC&nbsp;
       </span>
       <span style="color:gray">
@@ -127,6 +128,7 @@
       </span>
     </div>
   </div>
+
 
   <!--googleon: snippet-->
 

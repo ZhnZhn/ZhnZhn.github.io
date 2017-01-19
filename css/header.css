@@ -1,22 +1,20 @@
 
 .header{
-  position : relative;
+  position : relative;  
   width: calc(100vw - 36px);
   margin-left: 10px;
   margin-right: 26px;
   background-color: rgba(77, 77, 77, 1);
-  min-height: 46px;
-  max-height: 46px;
   border : 3px solid #232F3B;
   border-top: none;
-  /*padding-top: 8px;*/
+  padding-bottom: 3px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 @media screen and (max-width:580px){
   .header {
-    min-height: 84px;
-    max-height: 84px;
+    min-height: 82px;
+    max-height: 82px;
   }
 }
 

@@ -4,6 +4,13 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\index.jsx",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\index.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;AACA;;;;AACA;;AAEA;;;;AACA;;;;;;AAEA,sBAAY,IAAZ;;AAEA,IAAM,mBAAmB,SAAnB,gBAAmB,GAAU;AACjC,WAAS,IAAT,CAAc,WAAd,CAA0B,SAAS,cAAT,CAAwB,SAAxB,CAA1B,EADiC;CAAV;;AAIzB,sBAAO,qDAAP,EAAmB,SAAS,cAAT,CAAwB,KAAxB,CAAnB,EAAmD,gBAAnD"
+ "names": [
+  "init",
+  "_fnRemoveSpinner",
+  "document",
+  "body",
+  "removeChild",
+  "getElementById"
+ ],
+ "mappings": ";;AACA;;;;AACA;;AAEA;;;;AACA;;;;;;AAEA,sBAAYA,IAAZ;;AAEA,IAAMC,mBAAmB,SAAnBA,gBAAmB,GAAU;AACjCC,WAASC,IAAT,CAAcC,WAAd,CAA0BF,SAASG,cAAT,CAAwB,SAAxB,CAA1B;AACD,CAFD;;AAIA,sBAAO,qDAAP,EAAmBH,SAASG,cAAT,CAAwB,KAAxB,CAAnB,EAAmDJ,gBAAnD"
 }
