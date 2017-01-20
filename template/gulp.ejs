@@ -40,8 +40,47 @@
            return Object.prototype.toString.call(arg) === '[object Array]';
         };
       }
-
     })()
+
+    var preloader = {w:1, hm:{},
+      _getEl:function(id){
+        if (!this.hm[id]){this.hm[id] = document.getElementById(id);}
+        return this.hm[id];
+      },
+      _setStyle:function(id,n,v){
+        this._getEl(id).style[n]=v;
+      },
+      _setText:function(id,t){
+        this._getEl(id).textContent=t;
+      },
+      done:function(p){
+        this.w = this.w + p;
+        this._setText('msg',(this.w!==100)?'Loading '+this.w+'%...':'Loaded 100%');
+        this._setStyle('loaded', 'width', this.w+'%');
+      },
+      hiding:function(){
+        this._setStyle('preloader','opacity',0.5);
+      },
+      errCss:function(el, failed){
+         if (failed || (el.sheet.cssRules && !el.sheet.cssRules.length)){
+           this.isErrCss = true;
+           this._setStyle('css-missed','display','block');
+           this._setStyle('msg-reload','display','block');
+         }
+      },
+      errScript:function(){
+        this.isErrScript = true;
+        this._setStyle('bundle-missed','display','block');
+        this._setStyle('msg-reload','display','block');
+      },
+      stop:function(){
+        var arr = ['','-webkit-','-moz-','-o-']
+        ,i=0, len=arr.length,n='animation-play-state';
+        for(;i<len;i++){ this._setStyle('circle', arr[i]+n, 'paused'); }
+        this._setText('msg','Loaded '+this.w+'%');
+      }
+    };
+
   </script>
 
   <style>
@@ -84,6 +123,7 @@
   padding-top: 1em;
   padding-bottom: 1.5em;
   text-align: center;
+  transition: opacity 100ms ease-out;
 }
 .wrapper__loading {
   margin: 0.5em auto;
@@ -99,11 +139,26 @@
   display:block;
   padding-bottom:0.5em;
 }
+.wrapper__loaded {
+  width: 0;
+  height: 3px;
+  background-color: #80c040;
+}
+.wrapper__error {
+  display: none;
+  color: #F44336;
+  margin-top: 8px;
+}
+.wrapper__reload {
+  display: none;
+  color: black;
+  margin-top: 8px;
+}
 
 </style>
 
   <!-- inject:css -->
-  <link rel="stylesheet" href="/css/app-9c1d4092e8.min.css">
+  <link rel="stylesheet" href="/css/app-9c1d4092e8.min.css" onload="preloader.done(3)" onerror="preloader.errCss(this, true)" />
   <!-- endinject  -->
 
 </head>
@@ -117,21 +172,30 @@
      }
     </style>
   </noscript>
-  <div id="loading" class="wrapper">
-    <div data-loader="circle" class="wrapper__loading"></div>
+  <div id="preloader" class="wrapper">
+    <div id="circle" data-loader="circle" class="wrapper__loading"></div>
     <div class="wrapper__descr">
       <span class="wrapper__app">
         ERC&nbsp;
       </span>
-      <span style="color:gray">
-        Loading...
-      </span>
+      <div id='msg' style="color:gray">
+        Loading 1%...
+      </div>
+      <div id="loaded" class="wrapper__loaded">
+      </div>
+      <div id="css-missed" class="wrapper__error">
+        Error on load css.
+      </div>
+      <div id="bundle-missed" class="wrapper__error">
+        Error on load bundle.
+      </div>
+      <div id="msg-reload" class="wrapper__reload">
+        *Maybe, missed in locale cache.
+        Please, reload page through browser's toolbar.
+      </div>
     </div>
   </div>
-
-
   <!--googleon: snippet-->
-
 
    <div id="app">
    </div>
@@ -157,6 +221,12 @@
 
  <script type="text/javascript" src="lib/system-csp-production.js"></script>
 
+ <!--
+   onload="preloader.done(1)" onerror="preloader.errScript()"
+   onload="preloader.done(65)" onerror="preloader.errScript()"
+   onload="preloader.done(30)" onerror="preloader.errScript()"
+ -->
+ <script type="text/javascript">if(preloader && preloader.isErrScript){preloader.stop();}</script>
  <!-- Google Analytics -->
  <script>
   if ( window && window.location.href.indexOf("https://zhnzhn.github.io") > -1){
@@ -167,7 +237,6 @@
   }
 </script>
 <!-- Google Analytics -->
-
 
 </body>
 </html>

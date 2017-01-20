@@ -16,11 +16,29 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_ChartConfig2.default.init();
-
-var _fnRemoveSpinner = function _fnRemoveSpinner() {
-  document.body.removeChild(document.getElementById('loading'));
+var _fnRenderApp = function _fnRenderApp() {
+  document.body.removeChild(document.getElementById('preloader'));
+  (0, _reactDom.render)(_react2.default.createElement(_AppErc2.default, null), document.getElementById('app'));
 };
 
-(0, _reactDom.render)(_react2.default.createElement(_AppErc2.default, null), document.getElementById('app'), _fnRemoveSpinner);
+var _fnLoading = function _fnLoading() {
+  /*eslint-disable no-undef*/
+  if (preloader) {
+    if (!preloader.isErrCss && !preloader.isErrScript) {
+      preloader.hiding();
+      setTimeout(function () {
+        preloader = undefined;
+        _fnRenderApp();
+      }, 100);
+    } else {
+      preloader.stop();
+    }
+    /*eslint-enable no-undef*/
+  } else {
+    _fnRenderApp();
+  }
+};
+
+_ChartConfig2.default.init();
+_fnLoading();
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\index.js.map

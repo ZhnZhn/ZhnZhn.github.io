@@ -5,12 +5,20 @@
  "file": "D:\\_Dev\\_React\\_ERC\\js\\index.js",
  "sourceRoot": "",
  "names": [
-  "init",
-  "_fnRemoveSpinner",
+  "_fnRenderApp",
   "document",
   "body",
   "removeChild",
-  "getElementById"
+  "getElementById",
+  "_fnLoading",
+  "preloader",
+  "isErrCss",
+  "isErrScript",
+  "hiding",
+  "setTimeout",
+  "undefined",
+  "stop",
+  "init"
  ],
- "mappings": ";;AACA;;;;AACA;;AAEA;;;;AACA;;;;;;AAEA,sBAAYA,IAAZ;;AAEA,IAAMC,mBAAmB,SAAnBA,gBAAmB,GAAU;AACjCC,WAASC,IAAT,CAAcC,WAAd,CAA0BF,SAASG,cAAT,CAAwB,SAAxB,CAA1B;AACD,CAFD;;AAIA,sBAAO,qDAAP,EAAmBH,SAASG,cAAT,CAAwB,KAAxB,CAAnB,EAAmDJ,gBAAnD"
+ "mappings": ";;AACA;;;;AACA;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,eAAe,SAAfA,YAAe,GAAU;AAC7BC,WAASC,IAAT,CAAcC,WAAd,CAA0BF,SAASG,cAAT,CAAwB,WAAxB,CAA1B;AACA,wBAAO,qDAAP,EAAmBH,SAASG,cAAT,CAAwB,KAAxB,CAAnB;AACD,CAHD;;AAKA,IAAMC,aAAa,SAAbA,UAAa,GAAU;AAC3B;AACA,MAAIC,SAAJ,EAAe;AACb,QAAI,CAACA,UAAUC,QAAX,IAAuB,CAACD,UAAUE,WAAtC,EAAkD;AAChDF,gBAAUG,MAAV;AACAC,iBAAY,YAAU;AACpBJ,oBAAYK,SAAZ;AACAX;AACD,OAHD,EAGG,GAHH;AAID,KAND,MAMO;AACLM,gBAAUM,IAAV;AACD;AACH;AACC,GAXD,MAWO;AACLZ;AACD;AACF,CAhBD;;AAkBA,sBAAYa,IAAZ;AACAR"
 }
