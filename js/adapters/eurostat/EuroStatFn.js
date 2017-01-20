@@ -158,10 +158,10 @@ var EuroStatFn = _extends({
 
     var _descr = '';
     if (subTitle) {
-      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br/>';
+      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br>';
     }
     if (description) {
-      _descr = _descr + description + '<br/>';
+      _descr = _descr + description + '<br>';
     }
     _descr = _descr + _crDataSourceLink(json);
 

@@ -107,7 +107,7 @@ const EuroStatFn = {
     const { key, itemCaption } = option
     return {
       id : key,
-      key : key,      
+      key : key,
       itemCaption : itemCaption,
       isWithoutIndicator : true,
       isWithoutAdd : true
@@ -125,10 +125,10 @@ const EuroStatFn = {
 
     let _descr = '';
     if (subTitle){
-      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br/>';
+      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br>';
     }
     if (description) {
-      _descr = _descr + description + '<br/>';
+      _descr = _descr + description + '<br>';
     }
     _descr = _descr + _crDataSourceLink(json);
 

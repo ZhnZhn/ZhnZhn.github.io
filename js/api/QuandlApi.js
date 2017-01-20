@@ -4,16 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ApiUtils = require('../utils/ApiUtils');
-
-var _ApiUtils2 = _interopRequireDefault(_ApiUtils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var QuandlApi = {};
-
-QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
-QuandlApi.BLANK = '';
+var QuandlApi = {
+  rootUrl: "https://www.quandl.com/api/v3/datasets/",
+  BLANK: ''
+};
 
 QuandlApi.getRequestUrl = function (option) {
   var value = option.value,
@@ -44,7 +38,7 @@ QuandlApi.getRequestUrl = function (option) {
 
   var _uri = '' + QuandlApi.rootUrl + value + '.json?' + _queryDate + _apiKey;
 
-  return _ApiUtils2.default.createUri(_uri);
+  return _uri;
 };
 
 var REQUEST_ERROR = 'Request Error',

@@ -1,10 +1,8 @@
 
-import ApiUtils from '../utils/ApiUtils';
-
-const QuandlApi = {};
-
-QuandlApi.rootUrl = "https://www.quandl.com/api/v3/datasets/";
-QuandlApi.BLANK = '';
+const QuandlApi = {
+  rootUrl : "https://www.quandl.com/api/v3/datasets/",
+  BLANK : ''
+};
 
 QuandlApi.getRequestUrl = function(option){
   const { value, fromDate, toDate, apiKey } = option;
@@ -33,7 +31,8 @@ QuandlApi.getRequestUrl = function(option){
 
   const _uri = `${QuandlApi.rootUrl}${value}.json?${_queryDate}${_apiKey}`;
 
-  return ApiUtils.createUri(_uri);
+
+  return _uri;
 }
 
 const REQUEST_ERROR = 'Request Error'

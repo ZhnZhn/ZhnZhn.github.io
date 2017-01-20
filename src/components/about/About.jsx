@@ -19,6 +19,19 @@ const Styles = {
     height: '92%',
     //height: 'calc(100vh - 90px)',
     paddingRight: '10px'
+  },
+  DIV_WRAPPER : {
+    paddingLeft: '5px',
+    paddingRight: '5px',
+    lineHeight : 1.4,
+    color: 'gray',
+    fontWeight: 'bold'
+  },
+  P_BOTTOM : {
+    marginBottom: '1em'
+  },
+  MARGIN_TOP : {
+    marginTop: '3px'
   }
 };
 
@@ -68,7 +81,7 @@ const About = React.createClass({
 
          <ScrollPane style={Styles.scrollDiv}>
 
-         <div style={{paddingLeft: '5px', paddingRight: '5px', lineHeight : 1.4}}>
+         <div style={Styles.DIV_WRAPPER}>
          <p>
            <Token color="#80c040">
              ERC
@@ -78,10 +91,9 @@ const About = React.createClass({
            </Token>
          </p>
          <p>
-           <Token color="gray">
-             With it, you can view economic free open data from WEB.
-          </Token>
-          <br/>
+           With it, you can view economic free open data from WEB.
+         </p>
+         <p style={Styles.P_BOTTOM}>
           <Token color="gray">
             Data providers :
           </Token>
@@ -106,55 +118,46 @@ const About = React.createClass({
             .
           </Token>
          </p>
-          <br/>
           <p>
             <Step step="1" />
             <Token color="black" isFirstBlank={true}>
                Choose a data source Browser from the header bar
             </Token>
           </p>
-          <p style={{marginTop: '3px'}}>
+          <p style={Styles.MARGIN_TOP}>
             <Step step="2" />
             <Token color="black" isFirstBlank={true}>
                Choose a dataset menu item in a Browser
             </Token>
           </p>
-          <p style={{marginTop: '3px'}}>
+          <p style={Styles.MARGIN_TOP}>
             <Step step="3" />
             <Token color="black" isFirstBlank={true}>
                Select params and enter query date in a draggable Dialog
             </Token>
           </p>
-          <p style={{marginTop: '3px'}}>
+          <p style={Styles.MARGIN_TOP}>
              <Step step="4" />
              <Token color="black" isFirstBlank={true}>
                 Click a button Load
              </Token>
           </p>
-          <p style={{marginTop: '3px'}}>
+          <p style={Styles.MARGIN_TOP}>
              <Step step="5" />
              <Token color="black" isFirstBlank={true}>
                 Also you can export chart to PNG, JPG, SVG, print to PDF
              </Token>
           </p>
-          <p style={{marginTop: '3px'}}>
-             <Token color="gray">
-                The result will be shown in a Chart in a Chart container.
-             </Token>
-          </p>
-          <br/>
-          <p>
-            <Token color="gray">
-              After clicking a button Show in a Dialog will be opened Chart container with Charts
-              or empty. After closing a Chart container all Charts remains.
-            </Token>
+          <p style={Object.assign({}, Styles.P_BOTTOM, Styles.MARGIN_TOP)}>
+            The result will be shown in a Chart in a Chart container.
           </p>
           <p>
-            <Token color="gray">
-              In one time max three Dialogs can be opened.
-            </Token>
+             After clicking a button Show in a Dialog will be opened Chart container with Charts
+             or empty. After closing a Chart container all Charts remains.
           </p>
-          <br/>
+          <p style={Styles.P_BOTTOM}>
+             In one time max three Dialogs can be opened.
+          </p>
           <p>
             <Token color="#F44336">
                Attention:
@@ -164,14 +167,11 @@ const About = React.createClass({
               close the chart in the container and load data again.
             </Token>
          </p>
-         <p>
-           <Token color="gray">
+         <p style={Styles.P_BOTTOM}>
              The value of currency is not always USD as shows in a chart tooltip.
              Sometimes more details about data can be look at tab Info on a Chart.
-           </Token>
          </p>
-         <br/>
-         <p>
+         <p style={Styles.P_BOTTOM}>
            <Token color="gray">
              In that case of data loading from
            </Token>
@@ -187,26 +187,21 @@ const About = React.createClass({
               and amount queries (<Token color="#2f7ed8">50 per day/1 at a time</Token><Token color="gray">).</Token>
            </Token>
          </p>
-         <br/>
          <p>
-           <Token color="gray">
-             According to Quandl, anonymous requests can be deprecated soon. With API Key
-           </Token>
+            According to Quandl, anonymous requests can be deprecated soon. With API Key
          </p>
-         <p>
+         <p style={Styles.P_BOTTOM}>
            <Token color="gray">
              you will be have (<Token color="#2f7ed8">50 000 per day/1 at a time</Token>). It's free of charge to receive.
            </Token>
          </p>
-         <br/>
          <p>
-           <Token color="gray">
              A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.
              Settings save in browser's memory only for a current WEB session.
-             <p>Premium Free Sample Data can be requested only with Quandl API Key.</p>
-           </Token>
          </p>
-         <br/>
+         <p style={Styles.P_BOTTOM}>
+            Premium Free Sample Data can be requested only with Quandl API Key.
+         </p>
          <p>
            <Token color="gray">
              For loading data from
@@ -229,12 +224,8 @@ const About = React.createClass({
            </Token>
          </p>
         </div>
-
         </ScrollPane>
-
       </div>
-
-
     );
   }
 });

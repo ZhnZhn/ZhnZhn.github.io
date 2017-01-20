@@ -50,6 +50,19 @@ var Styles = {
     height: '92%',
     //height: 'calc(100vh - 90px)',
     paddingRight: '10px'
+  },
+  DIV_WRAPPER: {
+    paddingLeft: '5px',
+    paddingRight: '5px',
+    lineHeight: 1.4,
+    color: 'gray',
+    fontWeight: 'bold'
+  },
+  P_BOTTOM: {
+    marginBottom: '1em'
+  },
+  MARGIN_TOP: {
+    marginTop: '3px'
   }
 };
 
@@ -98,7 +111,7 @@ var About = _react2.default.createClass({
         { style: Styles.scrollDiv },
         _react2.default.createElement(
           'div',
-          { style: { paddingLeft: '5px', paddingRight: '5px', lineHeight: 1.4 } },
+          { style: Styles.DIV_WRAPPER },
           _react2.default.createElement(
             'p',
             null,
@@ -116,12 +129,11 @@ var About = _react2.default.createClass({
           _react2.default.createElement(
             'p',
             null,
-            _react2.default.createElement(
-              _Token2.default,
-              { color: 'gray' },
-              'With it, you can view economic free open data from WEB.'
-            ),
-            _react2.default.createElement('br', null),
+            'With it, you can view economic free open data from WEB.'
+          ),
+          _react2.default.createElement(
+            'p',
+            { style: Styles.P_BOTTOM },
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
@@ -156,7 +168,6 @@ var About = _react2.default.createClass({
               '.'
             )
           ),
-          _react2.default.createElement('br', null),
           _react2.default.createElement(
             'p',
             null,
@@ -169,7 +180,7 @@ var About = _react2.default.createClass({
           ),
           _react2.default.createElement(
             'p',
-            { style: { marginTop: '3px' } },
+            { style: Styles.MARGIN_TOP },
             _react2.default.createElement(_Step2.default, { step: '2' }),
             _react2.default.createElement(
               _Token2.default,
@@ -179,7 +190,7 @@ var About = _react2.default.createClass({
           ),
           _react2.default.createElement(
             'p',
-            { style: { marginTop: '3px' } },
+            { style: Styles.MARGIN_TOP },
             _react2.default.createElement(_Step2.default, { step: '3' }),
             _react2.default.createElement(
               _Token2.default,
@@ -189,7 +200,7 @@ var About = _react2.default.createClass({
           ),
           _react2.default.createElement(
             'p',
-            { style: { marginTop: '3px' } },
+            { style: Styles.MARGIN_TOP },
             _react2.default.createElement(_Step2.default, { step: '4' }),
             _react2.default.createElement(
               _Token2.default,
@@ -199,7 +210,7 @@ var About = _react2.default.createClass({
           ),
           _react2.default.createElement(
             'p',
-            { style: { marginTop: '3px' } },
+            { style: Styles.MARGIN_TOP },
             _react2.default.createElement(_Step2.default, { step: '5' }),
             _react2.default.createElement(
               _Token2.default,
@@ -209,33 +220,19 @@ var About = _react2.default.createClass({
           ),
           _react2.default.createElement(
             'p',
-            { style: { marginTop: '3px' } },
-            _react2.default.createElement(
-              _Token2.default,
-              { color: 'gray' },
-              'The result will be shown in a Chart in a Chart container.'
-            )
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'p',
-            null,
-            _react2.default.createElement(
-              _Token2.default,
-              { color: 'gray' },
-              'After clicking a button Show in a Dialog will be opened Chart container with Charts or empty. After closing a Chart container all Charts remains.'
-            )
+            { style: Object.assign({}, Styles.P_BOTTOM, Styles.MARGIN_TOP) },
+            'The result will be shown in a Chart in a Chart container.'
           ),
           _react2.default.createElement(
             'p',
             null,
-            _react2.default.createElement(
-              _Token2.default,
-              { color: 'gray' },
-              'In one time max three Dialogs can be opened.'
-            )
+            'After clicking a button Show in a Dialog will be opened Chart container with Charts or empty. After closing a Chart container all Charts remains.'
           ),
-          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'p',
+            { style: Styles.P_BOTTOM },
+            'In one time max three Dialogs can be opened.'
+          ),
           _react2.default.createElement(
             'p',
             null,
@@ -252,17 +249,12 @@ var About = _react2.default.createClass({
           ),
           _react2.default.createElement(
             'p',
-            null,
-            _react2.default.createElement(
-              _Token2.default,
-              { color: 'gray' },
-              'The value of currency is not always USD as shows in a chart tooltip. Sometimes more details about data can be look at tab Info on a Chart.'
-            )
+            { style: Styles.P_BOTTOM },
+            'The value of currency is not always USD as shows in a chart tooltip. Sometimes more details about data can be look at tab Info on a Chart.'
           ),
-          _react2.default.createElement('br', null),
           _react2.default.createElement(
             'p',
-            null,
+            { style: Styles.P_BOTTOM },
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
@@ -293,19 +285,14 @@ var About = _react2.default.createClass({
               )
             )
           ),
-          _react2.default.createElement('br', null),
           _react2.default.createElement(
             'p',
             null,
-            _react2.default.createElement(
-              _Token2.default,
-              { color: 'gray' },
-              'According to Quandl, anonymous requests can be deprecated soon. With API Key'
-            )
+            'According to Quandl, anonymous requests can be deprecated soon. With API Key'
           ),
           _react2.default.createElement(
             'p',
-            null,
+            { style: Styles.P_BOTTOM },
             _react2.default.createElement(
               _Token2.default,
               { color: 'gray' },
@@ -318,22 +305,16 @@ var About = _react2.default.createClass({
               '). It\'s free of charge to receive.'
             )
           ),
-          _react2.default.createElement('br', null),
           _react2.default.createElement(
             'p',
             null,
-            _react2.default.createElement(
-              _Token2.default,
-              { color: 'gray' },
-              'A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings. Settings save in browser\'s memory only for a current WEB session.',
-              _react2.default.createElement(
-                'p',
-                null,
-                'Premium Free Sample Data can be requested only with Quandl API Key.'
-              )
-            )
+            'A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings. Settings save in browser\'s memory only for a current WEB session.'
           ),
-          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'p',
+            { style: Styles.P_BOTTOM },
+            'Premium Free Sample Data can be requested only with Quandl API Key.'
+          ),
           _react2.default.createElement(
             'p',
             null,
