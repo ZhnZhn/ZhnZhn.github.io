@@ -48,7 +48,7 @@ module.exports = {
     new HtmlWebpackPlugin({
         filename: path.resolve('index.html'),
         template: path.resolve('template', 'index.ejs'),
-        inject: 'body'
+        inject: false
     })
   ]
 };

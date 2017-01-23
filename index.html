@@ -20,19 +20,20 @@
   <![endif]-->
 
   <script>
-    (function(){
+    'use strict';
+    ;(function(){
+      var polyfill = {
+        add : function(path){
+          var js = document.createElement('script');
+          js.src = path;
+          document.head.appendChild(js);
+          return polyfill;
+        }
+      };
       if (!Object.assign){
-        var js = document.createElement('script');
-        js.src = 'lib/es6-shim.min.js';
-        document.head.appendChild(js);
-
-        js = document.createElement('script');
-        js.src = 'lib/es6-promise.min.js';
-        document.head.appendChild(js);
-
-        js = document.createElement('script');
-        js.src = 'lib/fetch.js';
-        document.head.appendChild(js);
+        polyfill.add('lib/es6-shim.js')
+                .add('lib/es6-promise.js')
+                .add('lib/fetch.js');
       }
       if (!Array.isArray) {
         Array.isArray = function(arg) {
@@ -41,44 +42,51 @@
       }
     })()
 
-    var preloader = {w:1, hm:{},
-      _getEl:function(id){
-        if (!this.hm[id]){ this.hm[id] = document.getElementById(id);}
-        return this.hm[id];
-      },
-      _setStyle:function(id,n,v){
-        this._getEl(id).style[n]=v;
-      },
-      _setText:function(id,t){
-        this._getEl(id).textContent=t;
-      },
-      done:function(p){
-        this.w = this.w + p;
-        this._setText('msg',(this.w !== 100)?'Loading '+this.w+'%...':'Loaded 100%');
-        this._setStyle('loaded', 'width', this.w+'%');
-      },
-      hiding:function(){
-        this._setStyle('preloader','opacity',0.5);
-      },
-      errCss:function(el, failed){
-         if (failed || (el.sheet.cssRules && !el.sheet.cssRules.length)){
-           this.isErrCss = true;
-           this._setStyle('css-missed','display','block');
-           this._setStyle('msg-reload','display','block');
-         }
-      },
-      errScript:function(){
-        this.isErrScript = true;
-        this._setStyle('bundle-missed','display','block');
-        this._setStyle('msg-reload','display','block');
-      },
-      stop:function(){
-        var arr = ['','-webkit-','-moz-','-o-']
-        ,i=0, len=arr.length,n='animation-play-state';
-        for(;i<len;i++){ this._setStyle('circle', arr[i]+n, 'paused'); }
-        this._setText('msg','Loaded '+this.w+'%');
-      }
-    };
+    var preloader = (function(){
+      var obj, hm={};
+      var _getEl = function(id){
+        if (!hm[id]){hm[id] = document.getElementById(id);}
+        return hm[id];
+      };
+      var _setStyle = function(id,n,v){
+         var el = _getEl(id);
+         if (el) {el.style[n]=v;}
+         return;
+      };
+      var _setText = function(id,t){
+         var el = _getEl(id);
+         if (el) {el.textContent=t;}
+         return;
+      };
+      obj = {
+        w:1,
+        done:function(p){
+          obj.w = obj.w + p;
+          _setText('msg',(obj.w!==100)?'Loading '+obj.w+'%...':'Loaded 100%')
+          _setStyle('loaded', 'width', obj.w+'%');
+        },
+        hiding:function(){
+          _setStyle('preloader','opacity',0.5);
+        },
+        errCss:function(){
+           obj.isErrCss = true;
+           _setStyle('css-missed','display','block');
+           _setStyle('msg-reload','display','block');
+        },
+        errScript:function(){
+          obj.isErrScript = true;
+          _setStyle('bundle-missed','display','block');
+          _setStyle('msg-reload','display','block');
+        },
+        stop:function(){
+          var arr = ['','-webkit-','-moz-','-o-'], i=0, len=arr.length, n='animation-play-state';
+          for(;i<len;i++){ _setStyle('circle', arr[i]+n, 'paused'); }
+          _setText('msg','Loaded '+obj.w+'%');
+        }
+      };
+       return obj;
+    })();
+
   </script>
 
   <style>
@@ -154,9 +162,7 @@
 }
 
 </style>
-
-  <link rel="stylesheet" href="css/app-9c1d4092e8.min.css" onload="preloader.done(3)" onerror="preloader.errCss(this, true)">
-
+  <link rel="stylesheet" href="css/app-9c1d4092e8.min.css" onload="preloader.done(3)" onerror="preloader.errCss()">
 </head>
 <body>
 
@@ -217,10 +223,11 @@
 
  <script src="lib/system-csp-production.js"></script>
 
- <script src="app/manifest_ecad3721257d470820ba.js" onload="preloader.done(1)" onerror="preloader.errScript()"></script>
+ <script src="app/manifest_c9f97fdbedb85098056a.js" onload="preloader.done(1)" onerror="preloader.errScript()"></script>
  <script src="app/lib_40f8a1b9df9189f9dd3d.js" onload="preloader.done(65)" onerror="preloader.errScript()"></script>
- <script src="app/erc_25d1499f753c3444a115.js" onload="preloader.done(30)" onerror="preloader.errScript()"></script>
- <script>if(preloader && preloader.isErrScript){preloader.stop();}</script>
+ <script src="app/erc_06ce6d0d4f89229bfbcd.js" onload="preloader.done(30)" onerror="preloader.errScript()"></script>
+
+ <script>if(preloader){if(preloader.isErrScript){preloader.stop();}}</script>
  <!-- Google Analytics -->
  <script>
   if ( window && window.location.href.indexOf("https://zhnzhn.github.io") > -1){
@@ -231,5 +238,6 @@
   }
 </script>
 <!-- Google Analytics -->
+
 </body>
 </html>

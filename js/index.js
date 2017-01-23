@@ -22,18 +22,14 @@ var _fnRenderApp = function _fnRenderApp() {
 };
 
 var _fnLoading = function _fnLoading() {
-  /*eslint-disable no-undef*/
+  var preloader = window.preloader;
   if (preloader) {
     if (!preloader.isErrCss && !preloader.isErrScript) {
       preloader.hiding();
-      setTimeout(function () {
-        preloader = undefined;
-        _fnRenderApp();
-      }, 100);
+      setTimeout(_fnRenderApp(), 100);
     } else {
       preloader.stop();
     }
-    /*eslint-enable no-undef*/
   } else {
     _fnRenderApp();
   }

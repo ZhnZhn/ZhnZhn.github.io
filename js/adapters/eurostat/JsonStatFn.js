@@ -16,6 +16,27 @@ var _fnStyle = require('../../utils/fnStyle');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var hmIdCountry = {
+  "AT": "Austria", "BE": "Belgium", "BG": "Bulgaria",
+  "CH": "Switzerland", "CY": "Cyprus", "CZ": "Czech Republic",
+  "DE": "Germany", "DK": "Denmark",
+  "EA": "EA", "EA18": "EA18", "EA19": "EA19",
+  "EE": "Estonia", "EL": "Greece", "ES": "Spain",
+  "EU": "EU", "EU28": "EU28",
+  "FI": "Finland", "FR": "France", "HR": "Croatia", "HU": "Hungary",
+  "IE": "Ireland", "IS": "Iceland", "IT": "Italy", "JP": "Japan",
+  "LT": "Lithuania", "LU": "Luxembourg", "LV": "Latvia",
+  "MT": "Malta", "ME": "Montenegro", "MK": "Macedonia",
+  "NL": "Netherlands", "NO": "Norway", "PL": "Poland", "PT": "Portugal",
+  "RO": "Romania", "RS": "Serbia", "SE": "Sweden", "SI": "Slovenia", "SK": "Slovakia",
+  "TR": "Turkey", "UK": "United Kingdom", "US": "United States"
+};
+
+var _fnIdToCountry = function _fnIdToCountry(id) {
+  var name = hmIdCountry[id];
+  return name ? name : id;
+};
+
 var _combineToArr = function _combineToArr(dGeo, sGeo) {
   var arr = [];
   dGeo.forEach(function (id, index) {
@@ -34,7 +55,7 @@ var _splitForConfig = function _splitForConfig(arr) {
     var id = item.id,
         value = item.value;
 
-    categories.push(id);
+    categories.push(_fnIdToCountry(id));
     data.push(value);
     if (value >= max) {
       max = value;
@@ -52,7 +73,7 @@ var _combineToHm = function _combineToHm(ids, sGeo) {
   var hm = {};
   ids.forEach(function (id, index) {
     if (sGeo[index] != null && sGeo[index].value != null) {
-      hm[id] = sGeo[index].value;
+      hm[_fnIdToCountry(id)] = sGeo[index].value;
     }
   });
   return hm;

@@ -3,11 +3,32 @@ import sortBy from 'lodash.sortby';
 
 import { Box, getFromNullable } from '../../utils/fnStyle'
 
+const hmIdCountry = {
+  "AT":"Austria","BE":"Belgium","BG":"Bulgaria",
+  "CH":"Switzerland","CY":"Cyprus","CZ":"Czech Republic",
+  "DE":"Germany","DK":"Denmark",
+  "EA":"EA","EA18":"EA18","EA19":"EA19",
+  "EE":"Estonia","EL":"Greece","ES":"Spain",
+  "EU":"EU","EU28":"EU28",
+  "FI":"Finland","FR":"France","HR":"Croatia","HU":"Hungary",
+  "IE":"Ireland","IS":"Iceland","IT":"Italy","JP":"Japan",
+  "LT":"Lithuania","LU":"Luxembourg","LV":"Latvia",
+  "MT":"Malta","ME":"Montenegro", "MK":"Macedonia",
+  "NL":"Netherlands","NO":"Norway","PL":"Poland","PT":"Portugal",
+  "RO":"Romania","RS":"Serbia","SE":"Sweden","SI":"Slovenia","SK":"Slovakia",
+  "TR":"Turkey","UK":"United Kingdom","US":"United States"
+}
+
+const _fnIdToCountry = (id) => {
+   const name = hmIdCountry[id];
+   return (name) ? name : id;
+}
+
 const _combineToArr = (dGeo, sGeo) => {
-  const arr = []
+  const arr = [];
   dGeo.forEach((id, index) => {
     if (sGeo[index] != null && sGeo[index].value != null){
-      arr.push({ id, value : sGeo[index].value })
+      arr.push({ id, value : sGeo[index].value });
     }
   })
   return arr;
@@ -19,7 +40,7 @@ const _splitForConfig = (arr) => {
      , min = Number.POSITIVE_INFINITY;
    arr.forEach((item) => {
      const { id, value } = item
-     categories.push(id);
+     categories.push(_fnIdToCountry(id));
      data.push(value);
      if (value>=max) { max = value; }
      if (value<=min) { min = value; }
@@ -33,7 +54,7 @@ const _combineToHm = (ids, sGeo) => {
   const hm = {};
   ids.forEach((id, index) => {
     if (sGeo[index] != null && sGeo[index].value != null){
-      hm[id] = sGeo[index].value;
+      hm[_fnIdToCountry(id)] = sGeo[index].value;
     }
   })
   return hm;
@@ -50,7 +71,6 @@ const _trHmToData = (hm, categories) => {
   })
   return data;
 }
-
 
 const JsonStatFn = {
   createGeoSlice : (json, configSlice) => {

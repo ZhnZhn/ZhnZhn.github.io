@@ -13,7 +13,7 @@
     { "caption" : "IPC, Mexico" , "value" : "YAHOO/INDEX_MXX" },
     { "caption" : "MERVAL, Argentina" , "value" : "YAHOO/INDEX_MERV" },
     { "caption" : "IBOVESPA, Brazil" , "value" : "YAHOO/INDEX_BVSP" },
-    { "caption" : "Euro Stoxx 50" , "value" : "YAHOO/INDEX_STOXX50E" },
+    { "caption" : "EuroStoxx 50" , "value" : "YAHOO/INDEX_STOXX50E" },
     { "caption" : "DAX, German" , "value" : "YAHOO/INDEX_GDAXI" },
     { "caption" : "CAC 40, France" , "value" : "YAHOO/INDEX_FCHI" },
     { "caption" : "IBEX 35, Spain" , "value" : "YAHOO/INDEX_IBEX" },

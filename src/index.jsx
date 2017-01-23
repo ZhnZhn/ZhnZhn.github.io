@@ -11,18 +11,14 @@ const _fnRenderApp = function(){
 }
 
 const _fnLoading = function(){
-  /*eslint-disable no-undef*/
+  const preloader = window.preloader;
   if (preloader) {
     if (!preloader.isErrCss && !preloader.isErrScript){
       preloader.hiding();
-      setTimeout( function(){
-        preloader = undefined;
-        _fnRenderApp();
-      }, 100)
+      setTimeout( _fnRenderApp(), 100);
     } else {
       preloader.stop();
     }
-  /*eslint-enable no-undef*/
   } else {
     _fnRenderApp()
   }
