@@ -238,7 +238,7 @@
       <script src="<%=fileName %>" onload="preloader.done(30)" onerror="preloader.errScript()"></script>
     <% }
  } %>
- <script>if(preloader){if(preloader.isErrScript){preloader.stop();}preloader=undefined;}</script>
+ <script>if(preloader && preloader.isErrScript){preloader.stop();}}</script> 
  <!-- Google Analytics -->
  <script>
   if ( window && window.location.href.indexOf("https://zhnzhn.github.io") > -1){
