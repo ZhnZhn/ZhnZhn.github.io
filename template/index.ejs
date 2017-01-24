@@ -16,7 +16,7 @@
   <!--[if IE]>
       <script src="lib/es6-shim.min.js"></script>
       <script src="lib/es6-promise.min.js"></script>
-      <script src="lib/fetch.js"></script>
+      <script src="lib/fetch.min.js"></script>
   <![endif]-->
 
   <script>
@@ -31,9 +31,9 @@
         }
       };
       if (!Object.assign){
-        polyfill.add('lib/es6-shim.js')
-                .add('lib/es6-promise.js')
-                .add('lib/fetch.js');
+        polyfill.add('lib/es6-shim.min.js')
+                .add('lib/es6-promise.min.js')
+                .add('lib/fetch.min.js');
       }
       if (!Array.isArray) {
         Array.isArray = function(arg) {
@@ -42,7 +42,7 @@
       }
     })()
 
-    var preloader = (function(){
+    var preloader = (function(n){
       var obj, hm={};
       var _getEl = function(id){
         if (!hm[id]){hm[id] = document.getElementById(id);}
@@ -59,11 +59,14 @@
          return;
       };
       obj = {
-        w:1,
+        w:1, n:n, d:0
         done:function(p){
-          obj.w = obj.w + p;
+          obj.w += p;
           _setText('msg',(obj.w!==100)?'Loading '+obj.w+'%...':'Loaded 100%')
           _setStyle('loaded', 'width', obj.w+'%');
+          if ((++obj.d) === obj.n){
+            window.preloader = undefined;
+          }
         },
         hiding:function(){
           _setStyle('preloader','opacity',0.5);
@@ -85,7 +88,7 @@
         }
       };
        return obj;
-    })();
+    })(4);
   </script>
 
   <style>
