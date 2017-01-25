@@ -59,7 +59,7 @@
          return;
       };
       obj = {
-        w:1, n:n, d:0
+        w:1, n:n, d:0,
         done:function(p){
           obj.w += p;
           _setText('msg',(obj.w!==100)?'Loading '+obj.w+'%...':'Loaded 100%')
@@ -238,7 +238,7 @@
       <script src="<%=fileName %>" onload="preloader.done(30)" onerror="preloader.errScript()"></script>
     <% }
  } %>
- <script>if(preloader && preloader.isErrScript){preloader.stop();}}</script> 
+ <script>if(preloader && preloader.isErrScript){preloader.stop();}</script>
  <!-- Google Analytics -->
  <script>
   if ( window && window.location.href.indexOf("https://zhnzhn.github.io") > -1){
