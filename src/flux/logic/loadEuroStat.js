@@ -19,9 +19,16 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
   })
 }
 
-const fnFetchToChartComp = function({json, option, onCompleted}){  
-  const { config } = EuroStatAdapter.toConfig(json, option);
-  onCompleted(option, config);
+const fnFetchToChartComp = function({json, option, onCompleted}){
+  const config = EuroStatAdapter.toConfig(json, option);
+  if (typeof config.then !== 'function'){
+     onCompleted(option, config);
+  } else {
+    config.then((config) => {      
+      onCompleted(option, config);
+      return undefined;
+    })
+  }
 }
 
 const _loadToChart = function(option, onAdded, onFailed){

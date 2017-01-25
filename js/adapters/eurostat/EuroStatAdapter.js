@@ -43,7 +43,7 @@ var EuroStatAdapter = {
         config = typeof fnToConfig !== 'undefined' ? fnToConfig(json, option) : {};
 
 
-    return { config: config };
+    return config;
   },
   toSeries: function toSeries(json, option, chart) {
     var _option$seriaType2 = option.seriaType,

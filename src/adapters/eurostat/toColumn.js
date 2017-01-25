@@ -6,13 +6,13 @@ import EuroStatFn from './EuroStatFn';
 const toColumn = {
   createConfig : (json, option) => {
     const { zhMapSlice:configSlice, time='', subtitle='' } = option
-    , { categories, data, min } = JsonStatFn.trJsonToCategory(json, configSlice)
-    , config = FactoryChart.createColumnConfig()
-
-    EuroStatFn.setDataAndInfo({ config, data, json, option });
-    EuroStatFn.setCategories({ config, categories, min, time, subtitle });
-    
-    return config;
+    return JsonStatFn.trJsonToCategory(json, configSlice)
+             .then(({ categories, data, min }) => {
+                 const config = FactoryChart.createColumnConfig();
+                 EuroStatFn.setDataAndInfo({ config, data, json, option });
+                 EuroStatFn.setCategories({ config, categories, min, time, subtitle });
+                 return config;
+             });
   },
 
   createSeria : (json, option, chart) => {

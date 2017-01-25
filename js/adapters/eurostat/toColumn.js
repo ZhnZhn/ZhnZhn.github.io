@@ -24,17 +24,18 @@ var toColumn = {
         _option$time = option.time,
         time = _option$time === undefined ? '' : _option$time,
         _option$subtitle = option.subtitle,
-        subtitle = _option$subtitle === undefined ? '' : _option$subtitle,
-        _JsonStatFn$trJsonToC = _JsonStatFn2.default.trJsonToCategory(json, configSlice),
-        categories = _JsonStatFn$trJsonToC.categories,
-        data = _JsonStatFn$trJsonToC.data,
-        min = _JsonStatFn$trJsonToC.min,
-        config = _FactoryChart2.default.createColumnConfig();
+        subtitle = _option$subtitle === undefined ? '' : _option$subtitle;
 
-    _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
-    _EuroStatFn2.default.setCategories({ config: config, categories: categories, min: min, time: time, subtitle: subtitle });
+    return _JsonStatFn2.default.trJsonToCategory(json, configSlice).then(function (_ref) {
+      var categories = _ref.categories,
+          data = _ref.data,
+          min = _ref.min;
 
-    return config;
+      var config = _FactoryChart2.default.createColumnConfig();
+      _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
+      _EuroStatFn2.default.setCategories({ config: config, categories: categories, min: min, time: time, subtitle: subtitle });
+      return config;
+    });
   },
 
   createSeria: function createSeria(json, option, chart) {

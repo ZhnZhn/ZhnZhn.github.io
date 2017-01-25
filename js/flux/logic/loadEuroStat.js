@@ -44,10 +44,15 @@ var fnFetchToChartComp = function fnFetchToChartComp(_ref) {
       option = _ref.option,
       onCompleted = _ref.onCompleted;
 
-  var _EuroStatAdapter$toCo = _EuroStatAdapter2.default.toConfig(json, option),
-      config = _EuroStatAdapter$toCo.config;
-
-  onCompleted(option, config);
+  var config = _EuroStatAdapter2.default.toConfig(json, option);
+  if (typeof config.then !== 'function') {
+    onCompleted(option, config);
+  } else {
+    config.then(function (config) {
+      onCompleted(option, config);
+      return undefined;
+    });
+  }
 };
 
 var _loadToChart = function _loadToChart(option, onAdded, onFailed) {

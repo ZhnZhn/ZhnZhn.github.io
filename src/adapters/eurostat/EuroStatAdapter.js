@@ -24,8 +24,8 @@ const EuroStatAdapter = {
          , config = (typeof fnToConfig !== 'undefined')
              ? fnToConfig(json, option)
              : {} ;
-
-       return { config };
+       
+       return config;
  },
 
   toSeries(json, option, chart){

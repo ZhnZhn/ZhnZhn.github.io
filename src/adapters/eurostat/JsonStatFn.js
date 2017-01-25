@@ -3,20 +3,23 @@ import sortBy from 'lodash.sortby';
 
 import { Box, getFromNullable } from '../../utils/fnStyle'
 
-const hmIdCountry = {
-  "AT":"Austria","BE":"Belgium","BG":"Bulgaria",
-  "CH":"Switzerland","CY":"Cyprus","CZ":"Czech Republic",
-  "DE":"Germany","DK":"Denmark",
-  "EA":"EA","EA18":"EA18","EA19":"EA19",
-  "EE":"Estonia","EL":"Greece","ES":"Spain",
-  "EU":"EU","EU28":"EU28",
-  "FI":"Finland","FR":"France","HR":"Croatia","HU":"Hungary",
-  "IE":"Ireland","IS":"Iceland","IT":"Italy","JP":"Japan",
-  "LT":"Lithuania","LU":"Luxembourg","LV":"Latvia",
-  "MT":"Malta","ME":"Montenegro", "MK":"Macedonia",
-  "NL":"Netherlands","NO":"Norway","PL":"Poland","PT":"Portugal",
-  "RO":"Romania","RS":"Serbia","SE":"Sweden","SI":"Slovenia","SK":"Slovakia",
-  "TR":"Turkey","UK":"United Kingdom","US":"United States"
+const URL_ID_COUNTRY = './data/eurostat/id-country.json';
+
+let hmIdCountry = {};
+let isHmFetched = false;
+const _fnFetchHmIdCountry = () => {
+   return (!isHmFetched)
+      ? fetch(URL_ID_COUNTRY)
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => {
+             hmIdCountry = json.hm;
+             isHmFetched = true;
+             return hmIdCountry;
+          })
+          .catch((err) => { return hmIdCountry; })
+     : Promise.resolve(hmIdCountry);
 }
 
 const _fnIdToCountry = (id) => {
@@ -83,9 +86,12 @@ const JsonStatFn = {
 
   trJsonToCategory : (json, configSlice) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
-    return Box( _combineToArr(dGeo.id, sGeo) )
-             .map( (arr) => sortBy(arr, ['value', 'id']))
-             .fold(_splitForConfig);
+
+    return _fnFetchHmIdCountry().then(() => {
+       return Box( _combineToArr(dGeo.id, sGeo) )
+               .map( (arr) => sortBy(arr, ['value', 'id']))
+               .fold(_splitForConfig);
+       });
   },
   trJsonToSeria : (json, configSlice, categories) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);

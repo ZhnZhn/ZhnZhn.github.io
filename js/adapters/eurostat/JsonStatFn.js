@@ -16,20 +16,20 @@ var _fnStyle = require('../../utils/fnStyle');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var hmIdCountry = {
-  "AT": "Austria", "BE": "Belgium", "BG": "Bulgaria",
-  "CH": "Switzerland", "CY": "Cyprus", "CZ": "Czech Republic",
-  "DE": "Germany", "DK": "Denmark",
-  "EA": "EA", "EA18": "EA18", "EA19": "EA19",
-  "EE": "Estonia", "EL": "Greece", "ES": "Spain",
-  "EU": "EU", "EU28": "EU28",
-  "FI": "Finland", "FR": "France", "HR": "Croatia", "HU": "Hungary",
-  "IE": "Ireland", "IS": "Iceland", "IT": "Italy", "JP": "Japan",
-  "LT": "Lithuania", "LU": "Luxembourg", "LV": "Latvia",
-  "MT": "Malta", "ME": "Montenegro", "MK": "Macedonia",
-  "NL": "Netherlands", "NO": "Norway", "PL": "Poland", "PT": "Portugal",
-  "RO": "Romania", "RS": "Serbia", "SE": "Sweden", "SI": "Slovenia", "SK": "Slovakia",
-  "TR": "Turkey", "UK": "United Kingdom", "US": "United States"
+var URL_ID_COUNTRY = './data/eurostat/id-country.json';
+
+var hmIdCountry = {};
+var isHmFetched = false;
+var _fnFetchHmIdCountry = function _fnFetchHmIdCountry() {
+  return !isHmFetched ? fetch(URL_ID_COUNTRY).then(function (response) {
+    return response.json();
+  }).then(function (json) {
+    hmIdCountry = json.hm;
+    isHmFetched = true;
+    return hmIdCountry;
+  }).catch(function (err) {
+    return hmIdCountry;
+  }) : Promise.resolve(hmIdCountry);
 };
 
 var _fnIdToCountry = function _fnIdToCountry(id) {
@@ -104,9 +104,11 @@ var JsonStatFn = {
         dGeo = _JsonStatFn$createGeo.dGeo,
         sGeo = _JsonStatFn$createGeo.sGeo;
 
-    return (0, _fnStyle.Box)(_combineToArr(dGeo.id, sGeo)).map(function (arr) {
-      return (0, _lodash2.default)(arr, ['value', 'id']);
-    }).fold(_splitForConfig);
+    return _fnFetchHmIdCountry().then(function () {
+      return (0, _fnStyle.Box)(_combineToArr(dGeo.id, sGeo)).map(function (arr) {
+        return (0, _lodash2.default)(arr, ['value', 'id']);
+      }).fold(_splitForConfig);
+    });
   },
   trJsonToSeria: function trJsonToSeria(json, configSlice, categories) {
     var _JsonStatFn$createGeo2 = JsonStatFn.createGeoSlice(json, configSlice),
