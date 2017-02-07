@@ -4,15 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class, _class2, _temp, _initialiseProps;
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _WithValidation = require('../dialogs/WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _DateUtils = require('../../utils/DateUtils');
 
@@ -44,7 +42,17 @@ var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
 
 var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
 
+var _withValidationLoad = require('./decorators/withValidationLoad');
+
+var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var STYLE = {
   CAPTION_SPAN: {
@@ -55,64 +63,131 @@ var STYLE = {
 
 var sourceOptions = [{ caption: "YAHOO", "value": "YAHOO/" }, { caption: "WIKI", "value": "WIKI/" }, { caption: "GOOG/NYSE", "value": "GOOG/NYSE_" }, { caption: "GOOG/NASDAQ", "value": "GOOG/NASDAQ_" }];
 
-var UsStocksBySectorDialog = _react2.default.createClass(_extends({
-  displayName: 'UsStocksBySectorDialog'
-}, _WithValidation2.default, {
-  propTypes: {
-    isShow: _react2.default.PropTypes.bool.isRequired,
-    data: _react2.default.PropTypes.object.isRequired,
-    store: _react2.default.PropTypes.object,
-    onClose: _react2.default.PropTypes.func.isRequired
-  },
+var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
+  _inherits(UsStocksBySectorDialog, _Component);
 
-  getInitialState: function getInitialState() {
-    var _props$data = this.props.data;
-    var fromDate = _props$data.fromDate;
-    var initToDate = _props$data.initToDate;
-    var onTestDate = _props$data.onTestDate;
-    var _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2);
-    var _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate();
-    var _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
+  function UsStocksBySectorDialog(props) {
+    _classCallCheck(this, UsStocksBySectorDialog);
 
-    this.dataSource = undefined;
-    //this.toolbarButtons =  [{ caption: 'I', onClick: this._handlerClickInfo }];
+    var _this = _possibleConstructorReturn(this, (UsStocksBySectorDialog.__proto__ || Object.getPrototypeOf(UsStocksBySectorDialog)).call(this));
 
-    return {
+    _initialiseProps.call(_this);
+
+    _this.dataSource = undefined;
+
+    var _props$data = props.data,
+        fromDate = _props$data.fromDate,
+        initToDate = _props$data.initToDate,
+        onTestDate = _props$data.onTestDate,
+        _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
+        _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
+        _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
+
+    _this.state = {
       initFromDate: _initFromDate,
       initToDate: _initToDate,
       onTestDate: _onTestDate,
       validationMessages: []
     };
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
+
+    return _this;
+  }
+
+  _createClass(UsStocksBySectorDialog, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+        return false;
+      }
+      return true;
     }
-    return true;
-  },
-  _handlerSelectDataSource: function _handlerSelectDataSource(dataSource) {
-    this.dataSource = dataSource;
-  },
-  _handlerLoad: function _handlerLoad() {
-    var validationMessages = this._getValidationMessages();
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          isShow = _props.isShow,
+          _props$data2 = _props.data,
+          data = _props$data2 === undefined ? {} : _props$data2,
+          _data$item = data.item,
+          item = _data$item === undefined ? {} : _data$item,
+          onShow = data.onShow,
+          text = item.text,
+          _state = this.state,
+          initFromDate = _state.initFromDate,
+          initToDate = _state.initToDate,
+          onTestDate = _state.onTestDate,
+          validationMessages = _state.validationMessages,
+          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+        key: 'a',
+        type: 'TypeC',
+        caption: 'Load',
+        onClick: this._handleLoad
+      }), _react2.default.createElement(_ToolBarButton2.default, {
+        key: 'b',
+        type: 'TypeC',
+        caption: 'Show',
+        onClick: onShow
+      })];
+
+
+      return _react2.default.createElement(
+        _ModalDialog2.default,
+        {
+          caption: text,
+          styleCaption: STYLE.CAPTION_SPAN,
+          isShow: isShow,
+          commandButtons: _commandButtons,
+          onClose: this._handleClose
+        },
+        _react2.default.createElement(_RowInputSelect2.default, {
+          caption: 'Data Source',
+          placeholder: 'Default: YAHOO',
+          options: sourceOptions,
+          onSelect: this._handleSelectDataSource
+        }),
+        _react2.default.createElement(_DatesFragment2.default, {
+          ref: function ref(c) {
+            return _this2.datesFragment = c;
+          },
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          onTestDate: onTestDate
+        }),
+        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+          validationMessages: validationMessages
+        })
+      );
+    }
+  }]);
+
+  return UsStocksBySectorDialog;
+}(_react.Component), _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
+
+  this._handleSelectDataSource = function (dataSource) {
+    _this3.dataSource = dataSource;
+  };
+
+  this._handleLoad = function () {
+    var validationMessages = _this3._getValidationMessages();
     if (validationMessages.isValid) {
-      var _props = this.props;
-      var data = _props.data;
-      var onClose = _props.onClose;
-      var _data$item = data.item;
-      var item = _data$item === undefined ? {} : _data$item;
-      var chartContainerType = data.chartContainerType;
-      var browserType = data.browserType;
-      var id = item.id;
-      var text = item.text;
-
-      var _datesFragment$getVal = this.datesFragment.getValues();
-
-      var fromDate = _datesFragment$getVal.fromDate;
-      var toDate = _datesFragment$getVal.toDate;
-      var _dataSource = this.dataSource ? this.dataSource.value : 'YAHOO/';
-      var _value = '' + _dataSource + id;
-      var option = {
+      var _props2 = _this3.props,
+          data = _props2.data,
+          onClose = _props2.onClose,
+          _data$item2 = data.item,
+          item = _data$item2 === undefined ? {} : _data$item2,
+          chartContainerType = data.chartContainerType,
+          browserType = data.browserType,
+          id = item.id,
+          text = item.text,
+          _datesFragment$getVal = _this3.datesFragment.getValues(),
+          fromDate = _datesFragment$getVal.fromDate,
+          toDate = _datesFragment$getVal.toDate,
+          _dataSource = _this3.dataSource ? _this3.dataSource.value : 'YAHOO/',
+          _value = '' + _dataSource + id,
+          option = {
         title: text,
         //subtitle : subtitle,
         value: _value,
@@ -128,81 +203,41 @@ var UsStocksBySectorDialog = _react2.default.createClass(_extends({
       _ChartActions2.default.loadStock(chartContainerType, browserType, option);
       onClose();
     }
-    this._updateValidationMessages(validationMessages);
-  },
-  _getValidationMessages: function _getValidationMessages() {
+    _this3._updateValidationMessages(validationMessages);
+  };
+
+  this._getValidationMessages = function () {
     var msg = [];
 
-    var _datesFragment$getVal2 = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal2.isValid;
-    var datesMsg = _datesFragment$getVal2.datesMsg;
+    var _datesFragment$getVal2 = _this3.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal2.isValid,
+        datesMsg = _datesFragment$getVal2.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
     }
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
-  },
-  render: function render() {
-    var _this = this;
+  };
 
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var _props2$data = _props2.data;
-    var data = _props2$data === undefined ? {} : _props2$data;
-    var _data$item2 = data.item;
-    var item = _data$item2 === undefined ? {} : _data$item2;
-    var onShow = data.onShow;
-    var text = item.text;
-    var _state = this.state;
-    var initFromDate = _state.initFromDate;
-    var initToDate = _state.initToDate;
-    var onTestDate = _state.onTestDate;
-    var validationMessages = _state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Load',
-      onClick: this._handlerLoad
-    }), _react2.default.createElement(_ToolBarButton2.default, {
-      key: 'b',
-      type: 'TypeC',
-      caption: 'Show',
-      onClick: onShow
-    })];
+  this._handleClose = function () {
+    if (_this3.state.validationMessages.length > 0) {
+      _this3.setState({ validationMessages: _this3._getValidationMessages() });
+    }
+    _this3.props.onClose();
+  };
+}, _temp)) || _class;
 
-    return _react2.default.createElement(
-      _ModalDialog2.default,
-      {
-        caption: text,
-        styleCaption: STYLE.CAPTION_SPAN,
-        isShow: isShow,
-        commandButtons: _commandButtons,
-        onClose: this._handlerClose
-      },
-      _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Data Source',
-        placeholder: 'Default: YAHOO',
-        options: sourceOptions,
-        onSelect: this._handlerSelectDataSource
-      }),
-      _react2.default.createElement(_DatesFragment2.default, {
-        key: '2',
-        ref: function ref(c) {
-          return _this.datesFragment = c;
-        },
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        onTestDate: onTestDate
-      }),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        key: '3',
-        validationMessages: validationMessages
-      })
-    );
-  }
-}));
+UsStocksBySectorDialog.propTypes = {
+  isShow: _react.PropTypes.bool.isRequired,
+  data: _react.PropTypes.object.isRequired,
+  store: _react.PropTypes.object,
+  onClose: _react.PropTypes.func.isRequired
+};
+UsStocksBySectorDialog.defaultProps = {
+  data: {}
+};
+UsStocksBySectorDialog.displaName = 'UsStocksBySectorDialog';
 
 exports.default = UsStocksBySectorDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map

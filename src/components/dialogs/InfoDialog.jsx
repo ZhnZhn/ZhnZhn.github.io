@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ModalDialog from '../zhn/ModalDialog';
 import DialogStyles from '../styles/DialogStyles'
@@ -24,14 +24,18 @@ const Styles = {
   }
 }
 
-const InfoDialog = React.createClass({
+class InfoDialog extends Component {
+
+  constructor(props){
+    super();
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
-  },
+  }
 
   render(){
     const {isShow, data, onClose} = this.props
@@ -54,6 +58,8 @@ const InfoDialog = React.createClass({
       </ModalDialog>
     )
   }
-});
+}
+
+InfoDialog.displayName = 'InfoDialog';
 
 export default InfoDialog

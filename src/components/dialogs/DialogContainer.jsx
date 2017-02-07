@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ModalDialogContainer from '../zhn/ModalDialogContainer';
 import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
@@ -6,25 +6,27 @@ import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
 import RouterModalDialog from './RouterModalDialog';
 const _hmDialogs = RouterModalDialog;
 
-const DialogContainer = React.createClass({
-  getInitialState(){
-    return {
-      isShow : false,
-      inits : {},
-      shows : {},
-      data : {},
-      dialogs : [],
-      currentDialog : null
-    }
-  },
+class DialogContainer extends Component {
+  state = {
+    isShow : false,
+    inits : {},
+    shows : {},
+    data : {},
+    dialogs : [],
+    currentDialog : null
+  }
+
+  constructor(props){
+    super();
+  }
 
   componentDidMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
-  },
+  }
   componentWillUnmount(){
     this.unsubscribe();
-  },
-  _onStore(actionType, option){
+  }
+  _onStore = (actionType, option) => {
      if (actionType === ComponentActionTypes.SHOW_MODAL_DIALOG){
        const type = option.modalDialogType
            , { inits, shows, data, dialogs } = this.state;
@@ -39,14 +41,14 @@ const DialogContainer = React.createClass({
          this.setState({isShow: true, currentDialog: type, shows, data, dialogs});
        }
      }
-  },
+  }
 
-  _handlerClose(type){
+  _handleClose = (type) => {
     this.state.shows[type] = false;
     this.setState({isShow : false, currentDialog: null, shows : this.state.shows})
-  },
+  }
 
-  _renderDialogs(){
+  _renderDialogs = () => {
     const {store} = this.props
         , {shows, data} = this.state;
 
@@ -57,21 +59,24 @@ const DialogContainer = React.createClass({
            isShow: shows[type],
            data: data[type],
            store : store,
-           onClose: this._handlerClose.bind(null, type)})
+           onClose: this._handleClose.bind(null, type)})
     })
-  },
+  }
+
   render(){
     const {isShow, currentDialog} = this.state;
 
     return (
       <ModalDialogContainer
           isShow={isShow}
-          onClose={this._handlerClose.bind(null, currentDialog)}
+          onClose={this._handleClose.bind(null, currentDialog)}
       >
          {this._renderDialogs()}
      </ModalDialogContainer>
     )
   }
-});
+}
+
+DialogContainer.displayName = 'DialogContainer';
 
 export default DialogContainer

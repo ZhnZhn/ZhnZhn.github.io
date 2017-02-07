@@ -16,20 +16,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = _DialogStyles2.default;
 
-var Row = _react2.default.createClass({
-  displayName: 'Row',
-  render: function render() {
-    var _props = this.props;
-    var style = _props.style;
-    var children = _props.children;
-
-    return _react2.default.createElement(
-      'div',
-      { style: Object.assign({}, styles.rowDiv, style) },
-      children
-    );
-  }
-});
+var Row = function Row(_ref) {
+  var style = _ref.style,
+      children = _ref.children;
+  return _react2.default.createElement(
+    'div',
+    { style: Object.assign({}, styles.rowDiv, style) },
+    children
+  );
+};
 
 exports.default = Row;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\Row.js.map

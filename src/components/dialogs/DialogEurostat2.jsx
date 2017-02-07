@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat2'
 
@@ -8,8 +7,6 @@ import DateUtils from '../../utils/DateUtils';
 import { isStrInArr } from '../../utils/is';
 
 import ZhDialog from '../ZhDialog';
-import WithValidation from './WithValidation';
-import WithToolbar from './WithToolbar';
 
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
@@ -18,6 +15,9 @@ import ShowHide from '../zhn/ShowHide';
 import RowInputSelect from './RowInputSelect';
 
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
+
+import withToolbar from './decorators/withToolbar';
+import withValidationLoad from './decorators/withValidationLoad';
 
 const  DATE_PLACEHOLDER = 'Before Select Indicator'
      , MAP_FREQUENCY_DF = 'M'
@@ -39,11 +39,20 @@ const isCategoryType = (chartType) => {
   return isStrInArr(chartType.value)(categoryTypes);
 }
 
-const DialogEurostat2 = React.createClass({
-  ...WithValidation,
-  ...WithToolbar,
 
-  getInitialState(){
+@withToolbar
+@withValidationLoad
+class DialogEurostat2 extends Component {
+
+  state = {
+    isShowDate : false,
+    dateDefault : DATE_PLACEHOLDER,
+    dateOptions : [],
+    validationMessages: []
+  }
+
+  constructor(props){
+    super();
     this.one = undefined;
     this.two = undefined;
     this.date = undefined;
@@ -52,14 +61,7 @@ const DialogEurostat2 = React.createClass({
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar }
     ];
-
-    return {
-      isShowDate : false,
-      dateDefault : DATE_PLACEHOLDER,
-      dateOptions : [],
-      validationMessages: []
-    }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -68,13 +70,13 @@ const DialogEurostat2 = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerSelectOne(one){
+  _handleSelectOne = (one) => {
     this.one = one;
-  },
+  }
 
-  _updateForDate(){
+  _updateForDate = () => {
     this.date = undefined;
     const frequency = (this.two)
              ? (this.props.mapFrequency)
@@ -93,35 +95,35 @@ const DialogEurostat2 = React.createClass({
        dateDefault : config.dateDefault,
        dateOptions : config.options
     });
-  },
+  }
 
-  _handlerSelectTwo(two){
+  _handleSelectTwo = (two) => {
     this.two = two;
     if(isCategoryType(this.chartType)){
       this._updateForDate();
     }
-  },
+  }
 
-  _handlerSelectChartType(chartType){
+  _handleSelectChartType = (chartType) => {
     this.chartType = chartType;
     if(isCategoryType(this.chartType)){
       this._updateForDate();
     } else {
       this.setState({ isShowDate : false });
     }
-  },
+  }
 
-  _handlerSelectDate(date){
+  _handleSelectDate = (date) => {
     this.date = date;
-  },
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
     );
-  },
-  _createValidationMessages(){
+  }
+  _createValidationMessages = () => {
      const { oneCaption, twoCaption } = this.props;
      let msg = [];
 
@@ -132,21 +134,20 @@ const DialogEurostat2 = React.createClass({
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     const { one, two, chartType, date } = this
         , { dateDefault } = this.state;
     return createLoadOptions(
       this.props,
       { one, two, chartType, date, dateDefault }
     );
-  },
+  }
 
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
-
+  }
 
   render(){
     const {
@@ -160,7 +161,7 @@ const DialogEurostat2 = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />
     ];
 
@@ -170,7 +171,7 @@ const DialogEurostat2 = React.createClass({
              isShow={isShow}
              commandButtons={_commandButtons}
              onShowChart={onShow}
-             onClose={this._handlerClose}
+             onClose={this._handleClose}
          >
              <ToolbarButtonCircle
                buttons={this.toolbarButtons}
@@ -181,7 +182,7 @@ const DialogEurostat2 = React.createClass({
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames={'Items'}
-               onSelect={this._handlerSelectOne}
+               onSelect={this._handleSelectOne}
              />
              <SelectWithLoad
                isShow={isShow}
@@ -189,20 +190,20 @@ const DialogEurostat2 = React.createClass({
                jsonProp={twoJsonProp}
                caption={twoCaption}
                optionNames={'Items'}
-               onSelect={this._handlerSelectTwo}
+               onSelect={this._handleSelectTwo}
              />
              <RowInputSelect
                caption={'Chart Type'}
                placeholder={'Default: Area'}
                options={chartTypeOptions}
-               onSelect={this._handlerSelectChartType}
+               onSelect={this._handleSelectChartType}
              />
              <ShowHide isShow={isShowDate}>
                <RowInputSelect
                   caption={'For Date'}
                   placeholder={dateDefault}
                   options={dateOptions}
-                  onSelect={this._handlerSelectDate}
+                  onSelect={this._handleSelectDate}
                />
              </ShowHide>
              <ValidationMessagesFragment
@@ -211,6 +212,8 @@ const DialogEurostat2 = React.createClass({
         </ZhDialog>
     );
   }
-});
+}
+
+DialogEurostat2.displayName = 'DialogEurostat2';
 
 export default DialogEurostat2

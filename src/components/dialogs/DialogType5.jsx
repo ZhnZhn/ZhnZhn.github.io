@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type5';
 
 import ZhDialog from '../ZhDialog';
-import WithToolbar from './WithToolbar';
-import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import SelectParentChild from './SelectParentChild';
@@ -14,19 +12,22 @@ import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 import ShowHide from '../zhn/ShowHide';
 
-const DialogType5 = React.createClass({
-  ...WithToolbar,
-  ...WithValidation,
+import withToolbar from './decorators/withToolbar';
+import withValidationLoad from './decorators/withValidationLoad'
 
-  getInitialState(){
-    this.one = undefined;
-    this.toolbarButtons = this._createType2WithToolbar();
+@withToolbar
+@withValidationLoad
+class  DialogType5 extends Component {
 
-    return {
-      isShowDate : true,
-      validationMessages: []
-    }
-  },
+  state = {
+    isShowDate : true,
+    validationMessages: []
+  }
+
+  constructor(props){
+    super();
+    this.toolbarButtons = this._createType2WithToolbar(props);
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -35,19 +36,19 @@ const DialogType5 = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerSelectOne(one){
+  _handleSelectOne = (one) => {
     this.one = one;
-  },
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
     );
-  },
-  _createValidationMessages(){
+  }
+  _createValidationMessages = () => {
      const { oneCaption } = this.props;
      let msg = [];
 
@@ -61,19 +62,19 @@ const DialogType5 = React.createClass({
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     const { parent:two, child:three } = this.parentChild.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues();
     return createLoadOptions(
       this.props,
       { one : this.one, two, three, fromDate, toDate }
     );
-  },
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  }
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
+  }
 
   render(){
     const {
@@ -88,7 +89,7 @@ const DialogType5 = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />
     ];
 
@@ -98,7 +99,7 @@ const DialogType5 = React.createClass({
              isShow={isShow}
              commandButtons={_commandButtons}
              onShowChart={onShow}
-             onClose={this._handlerClose}
+             onClose={this._handleClose}
          >
              <ToolbarButtonCircle
                 buttons={this.toolbarButtons}
@@ -109,7 +110,7 @@ const DialogType5 = React.createClass({
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames={'Items'}
-               onSelect={this._handlerSelectOne}
+               onSelect={this._handleSelectOne}
              />
 
              <SelectParentChild
@@ -139,6 +140,8 @@ const DialogType5 = React.createClass({
         </ZhDialog>
     );
   }
-});
+}
+
+DialogType5.displayName = 'DialogType5';
 
 export default DialogType5

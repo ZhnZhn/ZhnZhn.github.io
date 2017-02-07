@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class, _class2, _temp, _initialiseProps;
 
 var _react = require('react');
 
@@ -19,10 +21,6 @@ var _ChartActions = require('../../flux/actions/ChartActions');
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 var _Type = require('../../constants/Type');
-
-var _WithValidation = require('../dialogs/WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ModalDialog = require('../zhn/ModalDialog');
 
@@ -60,7 +58,17 @@ var _ToolBarButton = require('../ToolBarButton');
 
 var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
 
+var _withValidationLoad = require('./decorators/withValidationLoad');
+
+var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var ABSENT = "Absent",
     ABSENT_VALIDATION_MSG = "Data Source for this item Absent";
@@ -93,21 +101,132 @@ var STYLE = {
   }
 };
 
-var StocksBySectorDialog = _react2.default.createClass(_extends({
-  displayName: 'StocksBySectorDialog'
-}, _WithValidation2.default, {
-  propTypes: {
-    isShow: _react2.default.PropTypes.bool.isRequired,
-    data: _react2.default.PropTypes.object.isRequired,
-    store: _react2.default.PropTypes.object,
-    onClose: _react2.default.PropTypes.func.isRequired
-  },
+var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
+  _inherits(StocksBySectorDialog, _Component);
 
-  _getItemSource: function _getItemSource(props) {
-    var _props$data = props.data,
-        data = _props$data === undefined ? {} : _props$data,
-        _data$item = data.item,
-        item = _data$item === undefined ? {} : _data$item,
+  function StocksBySectorDialog(props) {
+    _classCallCheck(this, StocksBySectorDialog);
+
+    var _this = _possibleConstructorReturn(this, (StocksBySectorDialog.__proto__ || Object.getPrototypeOf(StocksBySectorDialog)).call(this));
+
+    _initialiseProps.call(_this);
+
+    _this.toolbarButtons = [{ caption: 'L', onClick: _this._handleClickLink }];
+    _this.state = _this._createInitialState(props);
+    return _this;
+  }
+
+  _createClass(StocksBySectorDialog, [{
+    key: 'componentWillReceiveProps',
+
+
+    /*
+    getInitialState(){
+     this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }];
+     return this._createInitialState(this.props);
+    },
+    */
+
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props.data !== nextProps.data) {
+        this.setState(this._createInitialState(nextProps));
+      }
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+        return false;
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          isShow = _props.isShow,
+          _props$data = _props.data,
+          data = _props$data === undefined ? {} : _props$data,
+          _data$item = data.item,
+          item = _data$item === undefined ? {} : _data$item,
+          onShow = data.onShow,
+          text = item.text,
+          _state = this.state,
+          isShowLink = _state.isShowLink,
+          initFromDate = _state.initFromDate,
+          initToDate = _state.initToDate,
+          onTestDate = _state.onTestDate,
+          validationMessages = _state.validationMessages,
+          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+        key: 'a',
+        type: 'TypeC',
+        caption: 'Load',
+        onClick: this._handleLoad
+      }), _react2.default.createElement(_ToolBarButton2.default, {
+        key: 'b',
+        type: 'TypeC',
+        caption: 'Show',
+        onClick: onShow
+      })],
+          _source = this._getItemSource(this.props);
+
+      return _react2.default.createElement(
+        _ModalDialog2.default,
+        {
+          caption: text,
+          styleCaption: STYLE.CAPTION_SPAN,
+          isShow: isShow,
+          commandButtons: _commandButtons,
+          onClose: this._handleClose
+        },
+        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+          buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_RowText2.default, {
+          caption: 'Source:',
+          text: _source,
+          styleRoot: STYLE.SOURCE_ROOT
+        }),
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isShowLink, style: STYLE.LINK_SHOW_HIDE },
+          _react2.default.createElement(
+            _Row2.default,
+            { style: STYLE.LINK_ROOT },
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.LINK_CAPTION },
+              'Link:'
+            ),
+            _react2.default.createElement(_NasdaqLink2.default, { item: item, caption: 'NASDAQ' })
+          )
+        ),
+        _react2.default.createElement(_DatesFragment2.default, {
+          ref: function ref(c) {
+            return _this2.datesFragment = c;
+          },
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          onTestDate: onTestDate
+        }),
+        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+          validationMessages: validationMessages
+        })
+      );
+    }
+  }]);
+
+  return StocksBySectorDialog;
+}(_react.Component), _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
+
+  this._getItemSource = function (props) {
+    var _props$data2 = props.data,
+        data = _props$data2 === undefined ? {} : _props$data2,
+        _data$item2 = data.item,
+        item = _data$item2 === undefined ? {} : _data$item2,
         _item$id = item.id,
         id = _item$id === undefined ? '' : _item$id,
         arr = id.split('/');
@@ -117,14 +236,15 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
     } else {
       return arr[0];
     }
-  },
-  _createInitialState: function _createInitialState(props) {
-    var _props$data2 = props.data,
-        data = _props$data2 === undefined ? {} : _props$data2,
+  };
+
+  this._createInitialState = function (props) {
+    var _props$data3 = props.data,
+        data = _props$data3 === undefined ? {} : _props$data3,
         fromDate = data.fromDate,
         initToDate = data.initToDate,
         onTestDate = data.onTestDate,
-        _isShowLink = this._getItemSource(props) !== ABSENT ? false : true,
+        _isShowLink = _this3._getItemSource(props) !== ABSENT ? false : true,
         _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
         _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
         _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
@@ -136,38 +256,25 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       onTestDate: _onTestDate,
       validationMessages: []
     };
-  },
-  getInitialState: function getInitialState() {
-    this.toolbarButtons = [{ caption: 'L', onClick: this._handleClickLink }];
-    return this._createInitialState(this.props);
-  },
-  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data) {
-      this.setState(this._createInitialState(nextProps));
-    }
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  },
-  _handleClickLink: function _handleClickLink() {
-    this.setState({ isShowLink: !this.state.isShowLink });
-  },
-  _handlerLoad: function _handlerLoad() {
-    var validationMessages = this._getValidationMessages();
+  };
+
+  this._handleClickLink = function () {
+    _this3.setState({ isShowLink: !_this3.state.isShowLink });
+  };
+
+  this._handleLoad = function () {
+    var validationMessages = _this3._getValidationMessages();
     if (validationMessages.isValid) {
-      var _props = this.props,
-          data = _props.data,
-          onClose = _props.onClose,
-          _data$item2 = data.item,
-          item = _data$item2 === undefined ? {} : _data$item2,
+      var _props2 = _this3.props,
+          data = _props2.data,
+          onClose = _props2.onClose,
+          _data$item3 = data.item,
+          item = _data$item3 === undefined ? {} : _data$item3,
           browserType = data.browserType,
           chartContainerType = data.chartContainerType,
           id = item.id,
           text = item.text,
-          _datesFragment$getVal = this.datesFragment.getValues(),
+          _datesFragment$getVal = _this3.datesFragment.getValues(),
           fromDate = _datesFragment$getVal.fromDate,
           toDate = _datesFragment$getVal.toDate,
           option = {
@@ -188,16 +295,17 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
       _ChartActions2.default.loadStock(chartContainerType, browserType, option);
       onClose();
     }
-    this._updateValidationMessages(validationMessages);
-  },
-  _getValidationMessages: function _getValidationMessages() {
+    _this3._updateValidationMessages(validationMessages);
+  };
+
+  this._getValidationMessages = function () {
     var msg = [];
 
-    if (this._getItemSource(this.props) === ABSENT) {
+    if (_this3._getItemSource(_this3.props) === ABSENT) {
       msg.push(ABSENT_VALIDATION_MSG);
     }
 
-    var _datesFragment$getVal2 = this.datesFragment.getValidation(),
+    var _datesFragment$getVal2 = _this3.datesFragment.getValidation(),
         isValid = _datesFragment$getVal2.isValid,
         datesMsg = _datesFragment$getVal2.datesMsg;
 
@@ -206,82 +314,23 @@ var StocksBySectorDialog = _react2.default.createClass(_extends({
     }
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
-  },
-  render: function render() {
-    var _this = this;
+  };
 
-    var _props2 = this.props,
-        isShow = _props2.isShow,
-        _props2$data = _props2.data,
-        data = _props2$data === undefined ? {} : _props2$data,
-        _data$item3 = data.item,
-        item = _data$item3 === undefined ? {} : _data$item3,
-        onShow = data.onShow,
-        text = item.text,
-        _state = this.state,
-        isShowLink = _state.isShowLink,
-        initFromDate = _state.initFromDate,
-        initToDate = _state.initToDate,
-        onTestDate = _state.onTestDate,
-        validationMessages = _state.validationMessages,
-        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Load',
-      onClick: this._handlerLoad
-    }), _react2.default.createElement(_ToolBarButton2.default, {
-      key: 'b',
-      type: 'TypeC',
-      caption: 'Show',
-      onClick: onShow
-    })],
-        _source = this._getItemSource(this.props);
+  this._handleClose = function () {
+    if (_this3.state.validationMessages.length > 0) {
+      _this3.setState({ validationMessages: _this3._getValidationMessages() });
+    }
+    _this3.props.onClose();
+  };
+}, _temp)) || _class;
 
-    return _react2.default.createElement(
-      _ModalDialog2.default,
-      {
-        caption: text,
-        styleCaption: STYLE.CAPTION_SPAN,
-        isShow: isShow,
-        commandButtons: _commandButtons,
-        onClose: this._handlerClose
-      },
-      _react2.default.createElement(_ToolbarButtonCircle2.default, {
-        buttons: this.toolbarButtons
-      }),
-      _react2.default.createElement(_RowText2.default, {
-        caption: 'Source:',
-        text: _source,
-        styleRoot: STYLE.SOURCE_ROOT
-      }),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShowLink, style: STYLE.LINK_SHOW_HIDE },
-        _react2.default.createElement(
-          _Row2.default,
-          { style: STYLE.LINK_ROOT },
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.LINK_CAPTION },
-            'Link:'
-          ),
-          _react2.default.createElement(_NasdaqLink2.default, { item: item, caption: 'NASDAQ' })
-        )
-      ),
-      _react2.default.createElement(_DatesFragment2.default, {
-        ref: function ref(c) {
-          return _this.datesFragment = c;
-        },
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        onTestDate: onTestDate
-      }),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        validationMessages: validationMessages
-      })
-    );
-  }
-}));
+StocksBySectorDialog.propTypes = {
+  isShow: _react.PropTypes.bool.isRequired,
+  data: _react.PropTypes.object.isRequired,
+  store: _react.PropTypes.object,
+  onClose: _react.PropTypes.func.isRequired
+};
+StocksBySectorDialog.displayName = 'StocksBySectorDialog';
 
 exports.default = StocksBySectorDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\StocksBySectorDialog.js.map

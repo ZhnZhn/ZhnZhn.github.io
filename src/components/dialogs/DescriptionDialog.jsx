@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import DOMPurify from 'purify';
 
 import { fnFetchText } from '../../utils/fn';
@@ -17,18 +17,14 @@ const Style = {
   }
 }
 
+class DescriptionDialog extends Component {
+  state = {
+    descrHtml: ''
+  }
 
-const DescriptionDialog = React.createClass({
-  getDefaultProps(){
-    return {
-      data: {}
-    }
-  },
-  getInitialState(){
-    return {
-      descrHtml: ''
-    }
-  },
+  constructor(props){
+    super();
+  }
 
   componentWillReceiveProps(nextProps){
     if (
@@ -38,29 +34,29 @@ const DescriptionDialog = React.createClass({
     ) {
       this._loadDescr(nextProps.data.descrUrl);
     }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
-  },
+  }
 
   componentDidMount(){
     this._loadDescr(this.props.data.descrUrl);
-  },
+  }
 
-  _loadDescr( descrUrl='' ){
+  _loadDescr = ( descrUrl='' ) => {
      if ( descrUrl ) {
        fnFetchText({ uri: descrUrl, onFetch: this._setDescrHtml})
      } else {
        this._setDescrHtml();
      }
-  },
-  _setDescrHtml({ text=DESCR_EMPTY }={}){
+  }
+  _setDescrHtml = ({ text=DESCR_EMPTY }={}) => {
     this.setState({ descrHtml: text })
-  },
+  }
 
   render(){
     const { isShow, onClose } = this.props
@@ -82,6 +78,9 @@ const DescriptionDialog = React.createClass({
        </ModalDialog>
     )
   }
-});
+}
+
+DescriptionDialog.defaultProps = { data: {} };
+DescriptionDialog.displayName = 'DescriptionDialog';
 
 export default DescriptionDialog

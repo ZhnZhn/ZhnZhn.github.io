@@ -5,32 +5,17 @@ import DialogStyles from '../styles/DialogStyles';
 
 const styles = DialogStyles;
 
-const RowInputSelect = React.createClass({
-  render(){
-    const {
-           caption,
-           isLoading, isLoadingFailed,
-           options, optionNames, placeholder,
-           onLoadOption, onSelect
-         } = this.props;
-    return (
-       <div style={styles.rowDiv}>
-          <span style={styles.labelSpan}>
-             {caption}
-          </span>
-          <ZhSelect
-            width="250"
-            isLoading={isLoading}
-            isLoadingFailed={isLoadingFailed}
-            options={options}
-            optionNames={optionNames}
-            placeholder={placeholder}
-            onLoadOption={onLoadOption}
-            onSelect={onSelect}
-          />
-      </div>
-   );
- }
-});
+const RowInputSelect = ({ caption, ...rest }) => (
+   <div style={styles.rowDiv}>
+      <span style={styles.labelSpan}>
+         {caption}
+      </span>
+      <ZhSelect
+         width="250"
+         {...rest}            
+      />
+  </div>
+);
+
 
 export default RowInputSelect

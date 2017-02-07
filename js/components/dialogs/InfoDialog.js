@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -17,6 +19,12 @@ var _DialogStyles = require('../styles/DialogStyles');
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var styles = _DialogStyles2.default;
 
@@ -39,50 +47,66 @@ var Styles = {
   }
 };
 
-var InfoDialog = _react2.default.createClass({
-  displayName: 'InfoDialog',
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  },
-  render: function render() {
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var data = _props.data;
-    var onClose = _props.onClose;
-    var caption = data.caption;
-    var descr = data.descr;
+var InfoDialog = function (_Component) {
+  _inherits(InfoDialog, _Component);
 
-    return _react2.default.createElement(
-      _ModalDialog2.default,
-      {
-        caption: 'Information',
-        isShow: isShow,
-        onClose: onClose
-      },
-      _react2.default.createElement(
-        'div',
-        { style: styles.rowDiv, key: '1' },
-        _react2.default.createElement(
-          'p',
-          { style: Styles.CAPTION },
-          caption
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { style: styles.rowDiv, key: '2' },
-        _react2.default.createElement(
-          'p',
-          { style: Styles.DESCR },
-          descr
-        )
-      )
-    );
+  function InfoDialog(props) {
+    _classCallCheck(this, InfoDialog);
+
+    return _possibleConstructorReturn(this, (InfoDialog.__proto__ || Object.getPrototypeOf(InfoDialog)).call(this));
   }
-});
+
+  _createClass(InfoDialog, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+        return false;
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          isShow = _props.isShow,
+          data = _props.data,
+          onClose = _props.onClose,
+          caption = data.caption,
+          descr = data.descr;
+
+      return _react2.default.createElement(
+        _ModalDialog2.default,
+        {
+          caption: 'Information',
+          isShow: isShow,
+          onClose: onClose
+        },
+        _react2.default.createElement(
+          'div',
+          { style: styles.rowDiv, key: '1' },
+          _react2.default.createElement(
+            'p',
+            { style: Styles.CAPTION },
+            caption
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: styles.rowDiv, key: '2' },
+          _react2.default.createElement(
+            'p',
+            { style: Styles.DESCR },
+            descr
+          )
+        )
+      );
+    }
+  }]);
+
+  return InfoDialog;
+}(_react.Component);
+
+InfoDialog.displayName = 'InfoDialog';
 
 exports.default = InfoDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\InfoDialog.js.map

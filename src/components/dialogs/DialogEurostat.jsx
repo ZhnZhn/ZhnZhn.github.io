@@ -1,33 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat'
 
 import ZhDialog from '../ZhDialog';
-
-import WithValidation from './WithValidation';
-import WithToolbar from './WithToolbar';
-
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import ToolBarButton from '../ToolBarButton';
 
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
-const DialogEurostat = React.createClass({
-  ...WithValidation,
-  ...WithToolbar,
+import withToolbar from './decorators/withToolbar';
+import withValidationLoad from './decorators/withValidationLoad';
 
-  getInitialState(){
+@withToolbar
+@withValidationLoad
+class DialogEurostat extends Component {
+
+  state = {
+    validationMessages: []
+  }
+
+  constructor(props){
+    super();
     this.one = undefined;
     this.two = undefined;
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar }
     ];
-
-    return {
-      validationMessages: []
-    }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -36,22 +36,22 @@ const DialogEurostat = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerSelectOne(one){
+  _handleSelectOne = (one) => {
     this.one = one;
-  },
-  _handlerSelectTwo(two){
+  }
+  _handleSelectTwo = (two) => {
     this.two = two;
-  },
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
     );
-  },
-  _createValidationMessages(){
+  }
+  _createValidationMessages = () => {
      const { oneCaption, twoCaption } = this.props;
      let msg = [];
 
@@ -60,18 +60,18 @@ const DialogEurostat = React.createClass({
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     return createLoadOptions(
       this.props,
       { one : this.one, two : this.two }
     )
-  },
+  }
 
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
+  }
 
   render(){
     const {
@@ -85,7 +85,7 @@ const DialogEurostat = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />
     ];
 
@@ -95,7 +95,7 @@ const DialogEurostat = React.createClass({
              isShow={isShow}
              commandButtons={_commandButtons}
              onShowChart={onShow}
-             onClose={this._handlerClose}
+             onClose={this._handleClose}
          >
              <ToolbarButtonCircle
                buttons={this.toolbarButtons}
@@ -107,7 +107,7 @@ const DialogEurostat = React.createClass({
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames={'Items'}
-               onSelect={this._handlerSelectOne}
+               onSelect={this._handleSelectOne}
              />
 
              <SelectWithLoad
@@ -116,7 +116,7 @@ const DialogEurostat = React.createClass({
                jsonProp={twoJsonProp}
                caption={twoCaption}
                optionNames={'Items'}
-               onSelect={this._handlerSelectTwo}
+               onSelect={this._handleSelectTwo}
              />
 
              <ValidationMessagesFragment
@@ -125,6 +125,8 @@ const DialogEurostat = React.createClass({
         </ZhDialog>
     );
   }
-});
+}
 
-export default DialogEurostat
+DialogEurostat.displayName = 'DialogEurostat';
+
+export default DialogEurostat;

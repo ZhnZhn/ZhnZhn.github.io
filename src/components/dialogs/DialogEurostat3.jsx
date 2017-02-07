@@ -1,30 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat3';
 
 import ZhDialog from '../ZhDialog';
-import WithToolbar from './WithToolbar';
-import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import SelectParentChild from './SelectParentChild';
 import ToolBarButton from '../ToolBarButton';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
-const DialogEurostat3 = React.createClass({
-  ...WithToolbar,
-  ...WithValidation,
+import withToolbar from './decorators/withToolbar';
+import withValidationLoad from './decorators/withValidationLoad';
 
-  getInitialState(){
+
+@withToolbar
+@withValidationLoad
+class DialogEurostat3 extends Component {
+
+  state = {
+    validationMessages: []
+  }
+
+  constructor(props){
+    super();
     this.one = undefined;
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar }
     ];
-
-    return {
-      validationMessages: []
-    }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -33,19 +36,19 @@ const DialogEurostat3 = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerSelectOne(one){
+  _handleSelectOne = (one) => {
     this.one = one;
-  },
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
     );
-  },
-  _createValidationMessages(){
+  }
+  _createValidationMessages = () => {
      const { oneCaption } = this.props;
      let msg = [];
 
@@ -56,20 +59,20 @@ const DialogEurostat3 = React.createClass({
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     const { parent:group, child:metric } = this.parentChild.getValues()
 
     return createLoadOptions(
       this.props,
       { one : this.one, group, metric }
     );
-  },
+  }
 
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
+  }
 
   render(){
     const {
@@ -83,7 +86,7 @@ const DialogEurostat3 = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />
     ];
 
@@ -93,7 +96,7 @@ const DialogEurostat3 = React.createClass({
              isShow={isShow}
              commandButtons={_commandButtons}
              onShowChart={onShow}
-             onClose={this._handlerClose}
+             onClose={this._handleClose}
          >
              <ToolbarButtonCircle
                 buttons={this.toolbarButtons}
@@ -104,7 +107,7 @@ const DialogEurostat3 = React.createClass({
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames={'Items'}
-               onSelect={this._handlerSelectOne}
+               onSelect={this._handleSelectOne}
              />
              <SelectParentChild
                  ref={c => this.parentChild = c}
@@ -122,6 +125,8 @@ const DialogEurostat3 = React.createClass({
         </ZhDialog>
     );
   }
-});
+}
+
+DialogEurostat3.displayName = 'DialogEurostat3';
 
 export default DialogEurostat3

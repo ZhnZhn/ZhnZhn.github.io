@@ -4,6 +4,9 @@
                 "*.jsx",
                 "*.es6"
              ],    
+    "plugins" : [
+        "transform-decorators-legacy"
+    ],
     "presets" : [
                    "es2015",
                    "react",

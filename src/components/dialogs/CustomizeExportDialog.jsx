@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import merge from 'lodash.merge';
 
 import ChartExportConfig from '../../charts/ChartExportConfig';
@@ -46,44 +46,46 @@ const STYLE = {
   }
 }
 
-const CustomizeExportDialog = React.createClass({
-  getInitialState(){
+class CustomizeExportDialog extends Component {
+  state = {
+    isShowDimension : true,
+    isShowTitle : true,
+    isShowStyle : true
+  }
+
+  constructor(props){
+    super();
     this.exportStyle = {};
     this.toolbarButtons = [
-      { caption: 'D', onClick: this._handlerClickDimension },
-      { caption: 'T', onClick: this._handlerClickTitle },
-      { caption: 'S', onClick: this._handlerClickStyle }
+      { caption: 'D', onClick: this._handleClickDimension },
+      { caption: 'T', onClick: this._handleClickTitle },
+      { caption: 'S', onClick: this._handleClickStyle }
     ];
     this.optionStyles = ChartExportConfig.createOptionStyles();
-    return {
-       isShowDimension : true,
-       isShowTitle : true,
-       isShowStyle : true
-    }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
-  },
+  }
 
-  _handlerClickDimension(){
+  _handleClickDimension = () => {
     this.setState({ isShowDimension: !this.state.isShowDimension });
-  },
-  _handlerClickTitle(){
+  }
+  _handleClickTitle = () => {
     this.setState({ isShowTitle: !this.state.isShowTitle });
-  },
-  _handlerClickStyle(){
+  }
+  _handleClickStyle = () => {
     this.setState({ isShowStyle: !this.state.isShowStyle });
-  },
+  }
 
-  _handlerSelectStyle(item){
+  _handleSelectStyle = (item) => {
     this.exportStyle = item.value;
-  },
+  }
 
-  _handlerExport(){
+  _handleExport = () => {
     const { data, onClose } = this.props
         , { chart, fn } = data
 
@@ -103,7 +105,7 @@ const CustomizeExportDialog = React.createClass({
 
     fn.apply(chart, [null, _customOption]);
     onClose();
-  },
+  }
 
   render(){
     const {isShow, data, onClose} = this.props
@@ -117,7 +119,7 @@ const CustomizeExportDialog = React.createClass({
                 key="a"
                 type="TypeC"
                 caption="Export"
-                onClick={this._handlerExport}
+                onClick={this._handleExport}
              />
           ];
 
@@ -173,13 +175,15 @@ const CustomizeExportDialog = React.createClass({
              width="250"
              options={this.optionStyles}
              placeholder="Default"
-             onSelect={this._handlerSelectStyle}
+             onSelect={this._handleSelectStyle}
            />
          </div>
          </ShowHide>
       </ModalDialog>
     )
   }
-});
+}
+
+CustomizeExportDialog.displayName = 'CustomizeExportDialog';
 
 export default CustomizeExportDialog

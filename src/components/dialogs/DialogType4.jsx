@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type4';
 
 import ZhDialog from '../ZhDialog';
-import WithToolbar from './WithToolbar';
-import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import ToolBarButton from '../ToolBarButton';
 
@@ -13,19 +11,24 @@ import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 import ShowHide from '../zhn/ShowHide';
 
-const DialogType4 = React.createClass({
-  ...WithToolbar,
-  ...WithValidation,
+import withToolbar from './decorators/withToolbar';
+import withValidationLoad from './decorators/withValidationLoad'
 
-  getInitialState(){
+@withToolbar
+@withValidationLoad
+class DialogType4 extends Component {
+
+  state = {
+    isShowDate : true,
+    validationMessages: []
+  }
+
+  constructor(props){
+    super();
     this.one = undefined;
     this.two = undefined;
-    this.toolbarButtons = this._createType2WithToolbar();
-    return {
-      isShowDate : true,
-      validationMessages: []
-    }
-  },
+    this.toolbarButtons = this._createType2WithToolbar(props);
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -34,22 +37,22 @@ const DialogType4 = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerSelectOne(one){
+  _handleSelectOne = (one) => {
     this.one = one;
-  },
-  _handlerSelectTwo(two){
+  }
+  _handleSelectTwo = (two) => {
     this.two = two;
-  },
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
     );
-  },
-  _createValidationMessages(){
+  }
+  _createValidationMessages = () => {
      const { oneCaption, twoCaption, msgOnNotSelected } = this.props;
      let msg = [];
 
@@ -61,19 +64,19 @@ const DialogType4 = React.createClass({
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues();
     return createLoadOptions(
       this.props,
       { one : this.one, two : this.two, fromDate, toDate }
-    );    
-  },
+    );
+  }
 
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
+  }
 
   render(){
     const {
@@ -88,7 +91,7 @@ const DialogType4 = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />
     ];
 
@@ -98,7 +101,7 @@ const DialogType4 = React.createClass({
            isShow={isShow}
            commandButtons={_commandButtons}
            onShowChart={onShow}
-           onClose={this._handlerClose}
+           onClose={this._handleClose}
          >
              <ToolbarButtonCircle
                 buttons={this.toolbarButtons}
@@ -110,7 +113,7 @@ const DialogType4 = React.createClass({
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames={'Stocks'}
-               onSelect={this._handlerSelectOne}
+               onSelect={this._handleSelectOne}
              />
 
              <SelectWithLoad
@@ -119,7 +122,7 @@ const DialogType4 = React.createClass({
                jsonProp={twoJsonProp}
                caption={twoCaption}
                optionNames={'Indicators'}
-               onSelect={this._handlerSelectTwo}
+               onSelect={this._handleSelectTwo}
              />
 
              <ShowHide isShow={isShowDate}>
@@ -137,6 +140,8 @@ const DialogType4 = React.createClass({
         </ZhDialog>
     );
   }
-});
+}
+
+DialogType4.displayName = 'DialogType4';
 
 export default DialogType4

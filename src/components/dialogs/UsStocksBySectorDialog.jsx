@@ -1,21 +1,16 @@
-import React from 'react';
-
-import WithValidation from '../dialogs/WithValidation';
+import React, { Component, PropTypes } from 'react';
 
 import DateUtils from '../../utils/DateUtils';
-
 import ChartActions from '../../flux/actions/ChartActions';
-
 import { LoadType } from '../../constants/Type';
 
-
 import ModalDialog from '../zhn/ModalDialog';
-
 import ToolBarButton from '../ToolBarButton';
 import RowInputSelect from './RowInputSelect';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
+import withValidationLoad from './decorators/withValidationLoad';
 
 const STYLE = {
   CAPTION_SPAN : {
@@ -24,7 +19,6 @@ const STYLE = {
   }
 };
 
-
 const sourceOptions = [
   { caption: "YAHOO" , "value" : "YAHOO/" },
   { caption: "WIKI" , "value" : "WIKI/" },
@@ -32,45 +26,40 @@ const sourceOptions = [
   { caption: "GOOG/NASDAQ" , "value" : "GOOG/NASDAQ_" }
 ]
 
-const UsStocksBySectorDialog = React.createClass({
-   ...WithValidation,
-   propTypes : {
-     isShow  : React.PropTypes.bool.isRequired,
-     data    : React.PropTypes.object.isRequired,
-     store   : React.PropTypes.object,
-     onClose : React.PropTypes.func.isRequired
-   },
 
-   getInitialState(){
-     const { fromDate, initToDate, onTestDate } = this.props.data
+@withValidationLoad
+class UsStocksBySectorDialog extends Component {
+
+   constructor(props){
+     super();
+     this.dataSource = undefined;
+
+     const { fromDate, initToDate, onTestDate } = props.data
          , _initFromDate = (fromDate) ? fromDate : DateUtils.getFromDate(2)
          , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
-         , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate
+         , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
 
-    this.dataSource = undefined;
-    //this.toolbarButtons =  [{ caption: 'I', onClick: this._handlerClickInfo }];
+     this.state = {
+       initFromDate : _initFromDate,
+       initToDate : _initToDate,
+       onTestDate : _onTestDate,
+       validationMessages : []
+     }
 
-    return {
-      initFromDate : _initFromDate,
-      initToDate : _initToDate,
-      onTestDate : _onTestDate,
-      validationMessages : []
-      }
-   },
+   }
 
    shouldComponentUpdate(nextProps, nextState){
      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
        return false;
      }
      return true;
-   },
+   }
 
-
-   _handlerSelectDataSource(dataSource){
+   _handleSelectDataSource = (dataSource) => {
      this.dataSource = dataSource
-   },
+   }
 
-  _handlerLoad(){
+  _handleLoad = () => {
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
@@ -98,15 +87,22 @@ const UsStocksBySectorDialog = React.createClass({
       onClose();
     }
     this._updateValidationMessages(validationMessages);
-  },
+  }
 
-  _getValidationMessages(){
+  _getValidationMessages = () => {
     let   msg = [];
     const { isValid, datesMsg } = this.datesFragment.getValidation();
     if (!isValid) { msg = msg.concat(datesMsg); }
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
-  },
+  }
+
+  _handleClose = () => {
+    if (this.state.validationMessages.length > 0){
+      this.setState({validationMessages : this._getValidationMessages()});
+    }
+    this.props.onClose();
+  }
 
   render(){
     const { isShow, data={} } = this.props
@@ -118,7 +114,7 @@ const UsStocksBySectorDialog = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />,
        <ToolBarButton
           key="b"
@@ -134,29 +130,37 @@ const UsStocksBySectorDialog = React.createClass({
          styleCaption={STYLE.CAPTION_SPAN}
          isShow={isShow}
          commandButtons={_commandButtons}
-         onClose={this._handlerClose}
+         onClose={this._handleClose}
       >
-
         <RowInputSelect
            caption="Data Source"
            placeholder="Default: YAHOO"
            options={sourceOptions}
-           onSelect={this._handlerSelectDataSource}
+           onSelect={this._handleSelectDataSource}
         />
         <DatesFragment
-            key="2"
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
             onTestDate={onTestDate}
         />
         <ValidationMessagesFragment
-            key="3"
             validationMessages={validationMessages}
         />
       </ModalDialog>
     )
   }
-});
+}
+
+UsStocksBySectorDialog.propTypes = {
+  isShow  : PropTypes.bool.isRequired,
+  data    : PropTypes.object.isRequired,
+  store   : PropTypes.object,
+  onClose : PropTypes.func.isRequired
+};
+UsStocksBySectorDialog.defaultProps = {
+  data : {}
+};
+UsStocksBySectorDialog.displaName = 'UsStocksBySectorDialog';
 
 export default UsStocksBySectorDialog

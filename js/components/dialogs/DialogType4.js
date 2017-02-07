@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class;
 
 var _react = require('react');
 
@@ -17,14 +19,6 @@ var _type2 = _interopRequireDefault(_type);
 var _ZhDialog = require('../ZhDialog');
 
 var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
-
-var _WithToolbar = require('./WithToolbar');
-
-var _WithToolbar2 = _interopRequireDefault(_WithToolbar);
-
-var _WithValidation = require('./WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
@@ -50,149 +44,185 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
+var _withToolbar = require('./decorators/withToolbar');
+
+var _withToolbar2 = _interopRequireDefault(_withToolbar);
+
+var _withValidationLoad = require('./decorators/withValidationLoad');
+
+var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DialogType4 = _react2.default.createClass(_extends({
-  displayName: 'DialogType4'
-}, _WithToolbar2.default, _WithValidation2.default, {
-  getInitialState: function getInitialState() {
-    this.one = undefined;
-    this.two = undefined;
-    this.toolbarButtons = this._createType2WithToolbar();
-    return {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
+  _inherits(DialogType4, _Component);
+
+  function DialogType4(props) {
+    _classCallCheck(this, DialogType4);
+
+    var _this = _possibleConstructorReturn(this, (DialogType4.__proto__ || Object.getPrototypeOf(DialogType4)).call(this));
+
+    _this.state = {
       isShowDate: true,
       validationMessages: []
     };
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      if (this.props.isShow === nextProps.isShow) {
-        return false;
+
+    _this._handleSelectOne = function (one) {
+      _this.one = one;
+    };
+
+    _this._handleSelectTwo = function (two) {
+      _this.two = two;
+    };
+
+    _this._handleLoad = function () {
+      _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
+    };
+
+    _this._createValidationMessages = function () {
+      var _this$props = _this.props,
+          oneCaption = _this$props.oneCaption,
+          twoCaption = _this$props.twoCaption,
+          msgOnNotSelected = _this$props.msgOnNotSelected;
+
+      var msg = [];
+
+      if (!_this.one) {
+        msg.push(msgOnNotSelected(oneCaption));
       }
-    }
-    return true;
-  },
-  _handlerSelectOne: function _handlerSelectOne(one) {
-    this.one = one;
-  },
-  _handlerSelectTwo: function _handlerSelectTwo(two) {
-    this.two = two;
-  },
-  _handlerLoad: function _handlerLoad() {
-    this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
-  },
-  _createValidationMessages: function _createValidationMessages() {
-    var _props = this.props,
-        oneCaption = _props.oneCaption,
-        twoCaption = _props.twoCaption,
-        msgOnNotSelected = _props.msgOnNotSelected;
+      if (!_this.two) {
+        msg.push(msgOnNotSelected(twoCaption));
+      }
 
-    var msg = [];
+      var _this$datesFragment$g = _this.datesFragment.getValidation(),
+          isValid = _this$datesFragment$g.isValid,
+          datesMsg = _this$datesFragment$g.datesMsg;
 
-    if (!this.one) {
-      msg.push(msgOnNotSelected(oneCaption));
-    }
-    if (!this.two) {
-      msg.push(msgOnNotSelected(twoCaption));
-    }
+      if (!isValid) {
+        msg = msg.concat(datesMsg);
+      }
 
-    var _datesFragment$getVal = this.datesFragment.getValidation(),
-        isValid = _datesFragment$getVal.isValid,
-        datesMsg = _datesFragment$getVal.datesMsg;
+      msg.isValid = msg.length === 0 ? true : false;
+      return msg;
+    };
 
-    if (!isValid) {
-      msg = msg.concat(datesMsg);
-    }
+    _this._createLoadOption = function () {
+      var _this$datesFragment$g2 = _this.datesFragment.getValues(),
+          fromDate = _this$datesFragment$g2.fromDate,
+          toDate = _this$datesFragment$g2.toDate;
 
-    msg.isValid = msg.length === 0 ? true : false;
-    return msg;
-  },
-  _createLoadOption: function _createLoadOption() {
-    var _datesFragment$getVal2 = this.datesFragment.getValues(),
-        fromDate = _datesFragment$getVal2.fromDate,
-        toDate = _datesFragment$getVal2.toDate;
+      return (0, _type2.default)(_this.props, { one: _this.one, two: _this.two, fromDate: fromDate, toDate: toDate });
+    };
 
-    return (0, _type2.default)(this.props, { one: this.one, two: this.two, fromDate: fromDate, toDate: toDate });
-  },
-  _handlerClose: function _handlerClose() {
-    this._handlerWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
-  },
-  render: function render() {
-    var _this = this;
+    _this._handleClose = function () {
+      _this._handleWithValidationClose(_this._createValidationMessages);
+      _this.props.onClose();
+    };
 
-    var _props2 = this.props,
-        caption = _props2.caption,
-        isShow = _props2.isShow,
-        onShow = _props2.onShow,
-        oneCaption = _props2.oneCaption,
-        oneURI = _props2.oneURI,
-        oneJsonProp = _props2.oneJsonProp,
-        twoCaption = _props2.twoCaption,
-        twoURI = _props2.twoURI,
-        twoJsonProp = _props2.twoJsonProp,
-        initFromDate = _props2.initFromDate,
-        initToDate = _props2.initToDate,
-        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
-        onTestDate = _props2.onTestDate,
-        _state = this.state,
-        isShowDate = _state.isShowDate,
-        validationMessages = _state.validationMessages,
-        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Load',
-      onClick: this._handlerLoad
-    })];
-
-
-    return _react2.default.createElement(
-      _ZhDialog2.default,
-      {
-        caption: caption,
-        isShow: isShow,
-        commandButtons: _commandButtons,
-        onShowChart: onShow,
-        onClose: this._handlerClose
-      },
-      _react2.default.createElement(_ToolbarButtonCircle2.default, {
-        buttons: this.toolbarButtons
-      }),
-      _react2.default.createElement(_SelectWithLoad2.default, {
-        isShow: isShow,
-        uri: oneURI,
-        jsonProp: oneJsonProp,
-        caption: oneCaption,
-        optionNames: 'Stocks',
-        onSelect: this._handlerSelectOne
-      }),
-      _react2.default.createElement(_SelectWithLoad2.default, {
-        isShow: isShow,
-        uri: twoURI,
-        jsonProp: twoJsonProp,
-        caption: twoCaption,
-        optionNames: 'Indicators',
-        onSelect: this._handlerSelectTwo
-      }),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShowDate },
-        _react2.default.createElement(_DatesFragment2.default, {
-          ref: function ref(c) {
-            return _this.datesFragment = c;
-          },
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          msgOnNotValidFormat: msgOnNotValidFormat,
-          onTestDate: onTestDate
-        })
-      ),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        validationMessages: validationMessages
-      })
-    );
+    _this.one = undefined;
+    _this.two = undefined;
+    _this.toolbarButtons = _this._createType2WithToolbar(props);
+    return _this;
   }
-}));
+
+  _createClass(DialogType4, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props !== nextProps) {
+        if (this.props.isShow === nextProps.isShow) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          caption = _props.caption,
+          isShow = _props.isShow,
+          onShow = _props.onShow,
+          oneCaption = _props.oneCaption,
+          oneURI = _props.oneURI,
+          oneJsonProp = _props.oneJsonProp,
+          twoCaption = _props.twoCaption,
+          twoURI = _props.twoURI,
+          twoJsonProp = _props.twoJsonProp,
+          initFromDate = _props.initFromDate,
+          initToDate = _props.initToDate,
+          msgOnNotValidFormat = _props.msgOnNotValidFormat,
+          onTestDate = _props.onTestDate,
+          _state = this.state,
+          isShowDate = _state.isShowDate,
+          validationMessages = _state.validationMessages,
+          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+        key: 'a',
+        type: 'TypeC',
+        caption: 'Load',
+        onClick: this._handleLoad
+      })];
+
+
+      return _react2.default.createElement(
+        _ZhDialog2.default,
+        {
+          caption: caption,
+          isShow: isShow,
+          commandButtons: _commandButtons,
+          onShowChart: onShow,
+          onClose: this._handleClose
+        },
+        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+          buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_SelectWithLoad2.default, {
+          isShow: isShow,
+          uri: oneURI,
+          jsonProp: oneJsonProp,
+          caption: oneCaption,
+          optionNames: 'Stocks',
+          onSelect: this._handleSelectOne
+        }),
+        _react2.default.createElement(_SelectWithLoad2.default, {
+          isShow: isShow,
+          uri: twoURI,
+          jsonProp: twoJsonProp,
+          caption: twoCaption,
+          optionNames: 'Indicators',
+          onSelect: this._handleSelectTwo
+        }),
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isShowDate },
+          _react2.default.createElement(_DatesFragment2.default, {
+            ref: function ref(c) {
+              return _this2.datesFragment = c;
+            },
+            initFromDate: initFromDate,
+            initToDate: initToDate,
+            msgOnNotValidFormat: msgOnNotValidFormat,
+            onTestDate: onTestDate
+          })
+        ),
+        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+          validationMessages: validationMessages
+        })
+      );
+    }
+  }]);
+
+  return DialogType4;
+}(_react.Component)) || _class) || _class;
+
+DialogType4.displayName = 'DialogType4';
 
 exports.default = DialogType4;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map

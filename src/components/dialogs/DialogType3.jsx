@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type3';
-
-import WithValidation from './WithValidation';
 
 import ZhDialog from '../ZhDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
@@ -11,20 +9,23 @@ import ToolBarButton from '../ToolBarButton';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 
-const DialogType3 = React.createClass({
-  ...WithValidation,
+import withValidationLoad from './decorators/withValidationLoad';
 
-  displayName : 'DialogType3',
+@withValidationLoad
+class DialogType3 extends Component {
 
-  getInitialState(){
+  state = {
+    validationMessages: []
+  }
+
+  constructor(props){
+    super(props);
+
     this.stock = undefined;
-    this.toolbarButtons = (this.props.descrUrl)
-         ?  [{ caption: 'I', onClick: this._handlerClickInfo }] : [];
-
-    return {
-      validationMessages: []
-    }
-  },
+    this.toolbarButtons = (props.descrUrl)
+         ?  [{ caption: 'I', onClick: this._handleClickInfo }]
+         : [];
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -33,25 +34,25 @@ const DialogType3 = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerClickInfo(){
+  _handleClickInfo = () => {
     const {descrUrl, onClickInfo} = this.props;
     onClickInfo({ descrUrl });
-  },
+  }
 
-  _handlerSelectStock(stock){
+  _handleSelectStock = (stock) => {
     this.stock = stock;
-  },
+  }
 
-  _handlerLoad(event){
+  _handleLoad = (event) => {
     event.target.focus();
-    this._handlerWithValidationLoad(
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
     );
-  },
-  _createValidationMessages(){
+  }
+  _createValidationMessages = () => {
     const { itemCaption='Stock' } = this.props;
     let msg = [];
     if (!this.stock) { msg.push(this.props.msgOnNotSelected(itemCaption));}
@@ -59,18 +60,18 @@ const DialogType3 = React.createClass({
     if (!isValid) { msg = msg.concat(datesMsg); }
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues()
     return createLoadOptions(
         this.props,
         { stock : this.stock, fromDate, toDate }
     );
-  },
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
-    this.props.onClose()
-  },
+  }
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
+    this.props.onClose();
+  }
 
   render(){
     const {
@@ -85,7 +86,7 @@ const DialogType3 = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />
     ];
 
@@ -95,7 +96,7 @@ const DialogType3 = React.createClass({
            isShow={isShow}
            commandButtons={_commandButtons}
            onShowChart={onShow}
-           onClose={this._handlerClose}
+           onClose={this._handleClose}
        >
          <ToolbarButtonCircle
            buttons={this.toolbarButtons}
@@ -106,7 +107,7 @@ const DialogType3 = React.createClass({
            jsonProp={optionsJsonProp}
            caption={itemCaption}
            optionNames={optionNames}
-           onSelect={this._handlerSelectStock}
+           onSelect={this._handleSelectStock}
          />
 
          <DatesFragment
@@ -122,6 +123,8 @@ const DialogType3 = React.createClass({
       </ZhDialog>
     );
   }
-});
+}
+
+DialogType3.displayName = 'DialogType3';
 
 export default DialogType3;

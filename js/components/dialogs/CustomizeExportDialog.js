@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -46,6 +48,12 @@ var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var styles = _DialogStyles2.default;
 
 var STYLE = {
@@ -80,192 +88,214 @@ var STYLE = {
   }
 };
 
-var CustomizeExportDialog = _react2.default.createClass({
-  displayName: 'CustomizeExportDialog',
-  getInitialState: function getInitialState() {
-    this.exportStyle = {};
-    this.toolbarButtons = [{ caption: 'D', onClick: this._handlerClickDimension }, { caption: 'T', onClick: this._handlerClickTitle }, { caption: 'S', onClick: this._handlerClickStyle }];
-    this.optionStyles = _ChartExportConfig2.default.createOptionStyles();
-    return {
+var CustomizeExportDialog = function (_Component) {
+  _inherits(CustomizeExportDialog, _Component);
+
+  function CustomizeExportDialog(props) {
+    _classCallCheck(this, CustomizeExportDialog);
+
+    var _this = _possibleConstructorReturn(this, (CustomizeExportDialog.__proto__ || Object.getPrototypeOf(CustomizeExportDialog)).call(this));
+
+    _this.state = {
       isShowDimension: true,
       isShowTitle: true,
       isShowStyle: true
     };
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
-    }
-    return true;
-  },
-  _handlerClickDimension: function _handlerClickDimension() {
-    this.setState({ isShowDimension: !this.state.isShowDimension });
-  },
-  _handlerClickTitle: function _handlerClickTitle() {
-    this.setState({ isShowTitle: !this.state.isShowTitle });
-  },
-  _handlerClickStyle: function _handlerClickStyle() {
-    this.setState({ isShowStyle: !this.state.isShowStyle });
-  },
-  _handlerSelectStyle: function _handlerSelectStyle(item) {
-    this.exportStyle = item.value;
-  },
-  _handlerExport: function _handlerExport() {
-    var _props = this.props,
-        data = _props.data,
-        onClose = _props.onClose,
-        chart = data.chart,
-        fn = data.fn;
 
-
-    var _inputOption = {
-      chart: {
-        width: this.inputWidth.getValue(),
-        height: this.inputHeight.getValue()
-      },
-      title: {
-        text: this.inputTitle.getValue()
-      },
-      subtitle: {
-        text: this.inputSubtitle.getValue()
-      }
+    _this._handleClickDimension = function () {
+      _this.setState({ isShowDimension: !_this.state.isShowDimension });
     };
-    var _customOption = (0, _lodash2.default)(_inputOption, this.exportStyle);
 
-    fn.apply(chart, [null, _customOption]);
-    onClose();
-  },
-  render: function render() {
-    var _this = this;
+    _this._handleClickTitle = function () {
+      _this.setState({ isShowTitle: !_this.state.isShowTitle });
+    };
 
-    var _props2 = this.props,
-        isShow = _props2.isShow,
-        data = _props2.data,
-        onClose = _props2.onClose,
-        chart = data.chart,
-        chartWidth = chart.chartWidth,
-        chartHeight = chart.chartHeight,
-        options = chart.options,
-        title = options.title.text,
-        subtitle = options.subtitle.text,
-        _state = this.state,
-        isShowDimension = _state.isShowDimension,
-        isShowTitle = _state.isShowTitle,
-        isShowStyle = _state.isShowStyle,
-        commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Export',
-      onClick: this._handlerExport
-    })];
+    _this._handleClickStyle = function () {
+      _this.setState({ isShowStyle: !_this.state.isShowStyle });
+    };
+
+    _this._handleSelectStyle = function (item) {
+      _this.exportStyle = item.value;
+    };
+
+    _this._handleExport = function () {
+      var _this$props = _this.props,
+          data = _this$props.data,
+          onClose = _this$props.onClose,
+          chart = data.chart,
+          fn = data.fn;
 
 
-    return _react2.default.createElement(
-      _ModalDialog2.default,
-      {
-        caption: 'Customize Export Chart',
-        isShow: isShow,
-        commandButtons: commandButtons,
-        onClose: onClose
-      },
-      _react2.default.createElement(_ToolbarButtonCircle2.default, {
-        buttons: this.toolbarButtons
-      }),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShowDimension },
+      var _inputOption = {
+        chart: {
+          width: _this.inputWidth.getValue(),
+          height: _this.inputHeight.getValue()
+        },
+        title: {
+          text: _this.inputTitle.getValue()
+        },
+        subtitle: {
+          text: _this.inputSubtitle.getValue()
+        }
+      };
+      var _customOption = (0, _lodash2.default)(_inputOption, _this.exportStyle);
+
+      fn.apply(chart, [null, _customOption]);
+      onClose();
+    };
+
+    _this.exportStyle = {};
+    _this.toolbarButtons = [{ caption: 'D', onClick: _this._handleClickDimension }, { caption: 'T', onClick: _this._handleClickTitle }, { caption: 'S', onClick: _this._handleClickStyle }];
+    _this.optionStyles = _ChartExportConfig2.default.createOptionStyles();
+    return _this;
+  }
+
+  _createClass(CustomizeExportDialog, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+        return false;
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          isShow = _props.isShow,
+          data = _props.data,
+          onClose = _props.onClose,
+          chart = data.chart,
+          chartWidth = chart.chartWidth,
+          chartHeight = chart.chartHeight,
+          options = chart.options,
+          title = options.title.text,
+          subtitle = options.subtitle.text,
+          _state = this.state,
+          isShowDimension = _state.isShowDimension,
+          isShowTitle = _state.isShowTitle,
+          isShowStyle = _state.isShowStyle,
+          commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+        key: 'a',
+        type: 'TypeC',
+        caption: 'Export',
+        onClick: this._handleExport
+      })];
+
+
+      return _react2.default.createElement(
+        _ModalDialog2.default,
+        {
+          caption: 'Customize Export Chart',
+          isShow: isShow,
+          commandButtons: commandButtons,
+          onClose: onClose
+        },
+        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+          buttons: this.toolbarButtons
+        }),
         _react2.default.createElement(
-          'div',
-          { style: styles.rowDiv, key: '1' },
+          _ShowHide2.default,
+          { isShow: isShowDimension },
           _react2.default.createElement(
-            'span',
-            { style: STYLE.LABEL_WIDTH },
-            'Dimension:'
-          ),
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.LABEL_HEIGHT },
-            'Width:'
-          ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: function ref(c) {
-              return _this.inputWidth = c;
-            },
-            initValue: chartWidth,
-            style: STYLE.INPUT_NUMBER
-          }),
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.LABEL_HEIGHT },
-            'Height:'
-          ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: function ref(c) {
-              return _this.inputHeight = c;
-            },
-            initValue: chartHeight,
-            style: STYLE.INPUT_NUMBER
-          })
-        )
-      ),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShowTitle },
-        _react2.default.createElement(
-          'div',
-          { style: Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP), key: '2' },
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.LABEL_WIDTH },
-            'Title:'
-          ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: function ref(c) {
-              return _this.inputTitle = c;
-            },
-            initValue: title,
-            style: STYLE.INPUT_TEXT
-          })
+            'div',
+            { style: styles.rowDiv, key: '1' },
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.LABEL_WIDTH },
+              'Dimension:'
+            ),
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.LABEL_HEIGHT },
+              'Width:'
+            ),
+            _react2.default.createElement(_InputText2.default, {
+              ref: function ref(c) {
+                return _this2.inputWidth = c;
+              },
+              initValue: chartWidth,
+              style: STYLE.INPUT_NUMBER
+            }),
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.LABEL_HEIGHT },
+              'Height:'
+            ),
+            _react2.default.createElement(_InputText2.default, {
+              ref: function ref(c) {
+                return _this2.inputHeight = c;
+              },
+              initValue: chartHeight,
+              style: STYLE.INPUT_NUMBER
+            })
+          )
         ),
         _react2.default.createElement(
-          'div',
-          { style: styles.rowDiv, key: '3' },
+          _ShowHide2.default,
+          { isShow: isShowTitle },
           _react2.default.createElement(
-            'span',
-            { style: STYLE.LABEL_WIDTH },
-            'Subtitle:'
+            'div',
+            { style: Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP), key: '2' },
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.LABEL_WIDTH },
+              'Title:'
+            ),
+            _react2.default.createElement(_InputText2.default, {
+              ref: function ref(c) {
+                return _this2.inputTitle = c;
+              },
+              initValue: title,
+              style: STYLE.INPUT_TEXT
+            })
           ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: function ref(c) {
-              return _this.inputSubtitle = c;
-            },
-            initValue: subtitle,
-            style: STYLE.INPUT_TEXT
-          })
-        )
-      ),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShowStyle },
+          _react2.default.createElement(
+            'div',
+            { style: styles.rowDiv, key: '3' },
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.LABEL_WIDTH },
+              'Subtitle:'
+            ),
+            _react2.default.createElement(_InputText2.default, {
+              ref: function ref(c) {
+                return _this2.inputSubtitle = c;
+              },
+              initValue: subtitle,
+              style: STYLE.INPUT_TEXT
+            })
+          )
+        ),
         _react2.default.createElement(
-          'div',
-          { style: Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP), key: '4' },
+          _ShowHide2.default,
+          { isShow: isShowStyle },
           _react2.default.createElement(
-            'span',
-            { style: STYLE.LABEL_WIDTH },
-            'Style:'
-          ),
-          _react2.default.createElement(_ZhSelect2.default, {
-            width: '250',
-            options: this.optionStyles,
-            placeholder: 'Default',
-            onSelect: this._handlerSelectStyle
-          })
+            'div',
+            { style: Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP), key: '4' },
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.LABEL_WIDTH },
+              'Style:'
+            ),
+            _react2.default.createElement(_ZhSelect2.default, {
+              width: '250',
+              options: this.optionStyles,
+              placeholder: 'Default',
+              onSelect: this._handleSelectStyle
+            })
+          )
         )
-      )
-    );
-  }
-});
+      );
+    }
+  }]);
+
+  return CustomizeExportDialog;
+}(_react.Component);
+
+CustomizeExportDialog.displayName = 'CustomizeExportDialog';
 
 exports.default = CustomizeExportDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\CustomizeExportDialog.js.map

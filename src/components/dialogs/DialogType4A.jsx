@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type4';
 
 import ZhDialog from '../ZhDialog';
-import WithToolbar from './WithToolbar';
-import WithValidation from './WithValidation';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectParentChild from './SelectParentChild';
 import ToolBarButton from '../ToolBarButton';
@@ -13,17 +11,21 @@ import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 import ShowHide from '../zhn/ShowHide';
 
-const DialogType4A = React.createClass({
-  ...WithToolbar,
-  ...WithValidation,
+import withToolbar from './decorators/withToolbar';
+import withValidationLoad from './decorators/withValidationLoad';
 
-  getInitialState(){
-    this.toolbarButtons = this._createType2WithToolbar();
-    return {
-      isShowDate : true,
-      validationMessages: []
-    }
-  },
+@withToolbar
+@withValidationLoad
+class DialogType4A extends Component {
+  state = {
+    isShowDate : true,
+    validationMessages: []
+  }
+
+  constructor(props){
+    super();
+    this.toolbarButtons = this._createType2WithToolbar(props);
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -32,15 +34,15 @@ const DialogType4A = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
     );
-  },
-  _createValidationMessages(){
+  }
+  _createValidationMessages = () => {
      let msg = [];
 
      const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
@@ -51,20 +53,20 @@ const DialogType4A = React.createClass({
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     const { parent:one, child:two } = this.parentChild.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues();
-        
+
     return createLoadOptions(
        this.props,
        { one, two, fromDate, toDate }
      );
-  },
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  }
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
+  }
 
   render(){
     const {
@@ -78,7 +80,7 @@ const DialogType4A = React.createClass({
           key="a"
           type="TypeC"
           caption="Load"
-          onClick={this._handlerLoad}
+          onClick={this._handleLoad}
        />
     ];
 
@@ -88,7 +90,7 @@ const DialogType4A = React.createClass({
            isShow={isShow}
            commandButtons={_commandButtons}
            onShowChart={onShow}
-           onClose={this._handlerClose}
+           onClose={this._handleClose}
          >
              <ToolbarButtonCircle
                 buttons={this.toolbarButtons}
@@ -120,6 +122,8 @@ const DialogType4A = React.createClass({
         </ZhDialog>
     );
   }
-});
+}
+
+DialogType4A.displayName = 'DialogType4A';
 
 export default DialogType4A

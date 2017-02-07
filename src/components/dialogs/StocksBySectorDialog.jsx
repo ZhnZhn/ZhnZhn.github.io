@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
 import { LoadType } from '../../constants/Type';
 
-import WithValidation from '../dialogs/WithValidation';
 import ModalDialog from '../zhn/ModalDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import RowText from './RowText';
@@ -14,6 +13,8 @@ import NasdaqLink from '../native-links/NasdaqLink';
 import DatesFragment from '../DatesFragment';
 import ValidationMessagesFragment from '../ValidationMessagesFragment';
 import ToolBarButton from '../ToolBarButton';
+
+import withValidationLoad from './decorators/withValidationLoad';
 
 const ABSENT = "Absent"
     , ABSENT_VALIDATION_MSG = "Data Source for this item Absent"
@@ -46,16 +47,16 @@ const STYLE = {
   }
 }
 
-const StocksBySectorDialog = React.createClass({
-   ...WithValidation,
-   propTypes : {
-     isShow  : React.PropTypes.bool.isRequired,
-     data    : React.PropTypes.object.isRequired,
-     store   : React.PropTypes.object,
-     onClose : React.PropTypes.func.isRequired
-   },
+@withValidationLoad
+class StocksBySectorDialog extends Component {
 
-   _getItemSource(props){
+   constructor(props){
+     super();
+     this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }];
+     this.state = this._createInitialState(props);
+   }
+
+   _getItemSource = (props) => {
      const { data={} } = props
          , { item={} } = data
          , { id='' } = item
@@ -65,9 +66,9 @@ const StocksBySectorDialog = React.createClass({
       } else {
         return arr[0];
       }
-   },
+   }
 
-   _createInitialState(props){
+   _createInitialState = (props) => {
      const { data={} } = props
          , { fromDate, initToDate, onTestDate } = data
          , _isShowLink = (this._getItemSource(props) !== ABSENT)
@@ -84,31 +85,33 @@ const StocksBySectorDialog = React.createClass({
         onTestDate : _onTestDate,
         validationMessages : []
       }
-   },
+   }
 
+   /*
    getInitialState(){
     this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }];
     return this._createInitialState(this.props);
    },
+   */
 
    componentWillReceiveProps(nextProps){
      if ( this.props.data !== nextProps.data) {
        this.setState(this._createInitialState(nextProps));
      }
-   },
+   }
 
    shouldComponentUpdate(nextProps, nextState){
      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
        return false;
      }
      return true;
-   },
+   }
 
-  _handleClickLink(){
+  _handleClickLink = () => {
      this.setState({ isShowLink: !this.state.isShowLink })
-  },
+  }
 
-  _handlerLoad(){
+  _handleLoad = () => {
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
@@ -134,9 +137,9 @@ const StocksBySectorDialog = React.createClass({
       onClose();
     }
     this._updateValidationMessages(validationMessages);
-  },
+  }
 
-  _getValidationMessages(){
+  _getValidationMessages = () => {
     let  msg = [];
 
     if (this._getItemSource(this.props) === ABSENT) {
@@ -147,7 +150,15 @@ const StocksBySectorDialog = React.createClass({
     if (!isValid) { msg = msg.concat(datesMsg); }
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
-  },
+  }
+
+  _handleClose = () => {    
+    if (this.state.validationMessages.length > 0){
+      this.setState({validationMessages : this._getValidationMessages()});
+    }
+    this.props.onClose();
+  }
+
 
   render(){
     const { isShow, data={} } = this.props
@@ -163,7 +174,7 @@ const StocksBySectorDialog = React.createClass({
                 key="a"
                 type="TypeC"
                 caption="Load"
-                onClick={this._handlerLoad}
+                onClick={this._handleLoad}
              />,
              <ToolBarButton
                 key="b"
@@ -181,7 +192,7 @@ const StocksBySectorDialog = React.createClass({
          styleCaption={STYLE.CAPTION_SPAN}
          isShow={isShow}
          commandButtons={_commandButtons}
-         onClose={this._handlerClose}
+         onClose={this._handleClose}
       >
         <ToolbarButtonCircle
           buttons={this.toolbarButtons}
@@ -211,6 +222,14 @@ const StocksBySectorDialog = React.createClass({
       </ModalDialog>
     )
   }
-});
+}
+
+StocksBySectorDialog.propTypes = {
+  isShow  : PropTypes.bool.isRequired,
+  data    : PropTypes.object.isRequired,
+  store   : PropTypes.object,
+  onClose : PropTypes.func.isRequired
+};
+StocksBySectorDialog.displayName = 'StocksBySectorDialog';
 
 export default StocksBySectorDialog
