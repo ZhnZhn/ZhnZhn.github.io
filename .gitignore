@@ -11,3 +11,6 @@ erc.html
 index_jspm.html
 lint.txt
 lib-dev
+stats.json
+report.html
+out.txt
