@@ -1,53 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import WithLoadOptions from './WithLoadOptions';
 import RowInputSelect from './RowInputSelect';
+import withLoadOptions from './decorators/withLoadOptions';
 
 const defaultChildOptions = [];
 
-const SelectParentChild = React.createClass({
-  ...WithLoadOptions,
 
-  getDefaultProps(){
-    return  {
-      isShow : true,
-      msgOnNotSelected : (item) => `${item} is not selected`
-    }
-  },
-  getInitialState(){
+@withLoadOptions
+class SelectParentChild extends Component {
+
+
+  static defaultProps = {
+    isShow : true,
+    msgOnNotSelected : (item) => `${item} is not selected`
+  }
+
+  state = {
+    parentOptions : [],
+    isLoading : false,
+    isLoadingFailed : false,
+    childOptions : []
+  }
+
+  constructor(props){
+    super();
     this.parent = null;
     this.child = null;
-    return {
-      parentOptions : [],
-      isLoading : false,
-      isLoadingFailed : false,
-
-      childOptions : []
-    }
-  },
+  }
 
   componentDidMount(){
     this._handlerLoadParentOptions();
-  },
+  }
   componentDidUpdate(prevProps, prevState){
     if (prevProps !== this.props){
        if (this.state.isLoadingFailed && this.props.isShow){
          this._handlerLoadParentOptions();
        }
     }
-  },
+  }
   componetWillUnmount(){
     this._unmountWithLoadOptions();
-  },
+  }
 
-  _handlerLoadParentOptions(){
+  _handlerLoadParentOptions = () => {
     const { uri, parentJsonProp } = this.props;
     this._handlerWithLoadOptions(
           'parentOptions', 'isLoading', 'isLoadingFailed',
           uri, parentJsonProp
     );
-  },
-  _handlerSelectParent(parent){
+  }
+  _handlerSelectParent = (parent) => {
     this.parent = parent;
     if (parent) {
       if (parent.columns) {
@@ -61,10 +63,10 @@ const SelectParentChild = React.createClass({
       this.child = null;
       this.setState({ childOptions: [] });
     }
-  },
-  _handlerSelectChild(child){
+  }
+  _handlerSelectChild = (child) => {
     this.child = child;
-  },
+  }
 
   render(){
     const {
@@ -93,9 +95,9 @@ const SelectParentChild = React.createClass({
          />
       </div>
     )
-  },
+  }
 
-  getValidation(){
+  getValidation = () => {
      const msg = []
          , { parentCaption, childCaption, msgOnNotSelected } = this.props;
      if (!this.parent){
@@ -109,15 +111,14 @@ const SelectParentChild = React.createClass({
        return { isValid: false, msg }
      }
      return { isValid : true }
-  },
+  }
 
-  getValues(){
+  getValues = () => {
     return {
       parent : this.parent,
       child : this.child
     }
   }
-
-});
+}
 
 export default SelectParentChild

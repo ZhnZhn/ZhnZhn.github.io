@@ -9,7 +9,7 @@ const _createType2WithToolbar = function(props){
   return toolbarButtons;
 }
 
-const _clickInfoWithToolbar = function(){  
+const _clickInfoWithToolbar = function(){
   const { descrUrl, onClickInfo } = this.props;
   onClickInfo({ descrUrl });
 }

@@ -105,7 +105,7 @@ var DialogEurostat = (0, _withToolbar2.default)(_class = (0, _withValidationLoad
 
     _this.one = undefined;
     _this.two = undefined;
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar }];
+    _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
     return _this;
   }
 

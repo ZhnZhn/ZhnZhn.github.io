@@ -1,50 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import WithLoadOptions from './WithLoadOptions';
+
 import ZhSelect from '../ZhSelect';
 import DialogStyles from '../styles/DialogStyles';
+import withLoadOptions from './decorators/withLoadOptions';
 
 const Styles = DialogStyles;
 
-const SelectWithLoad = React.createClass({
-    ...WithLoadOptions,
+@withLoadOptions
+class SelectWithLoad extends Component {
+    static defaultProps = { isShow : true }
 
-    displayName: 'SelectWithLoad',
-
-    getDefaultProps(){
-      return {
-        isShow : true
-      }
-    },
-    getInitialState(){
-        return {
-          options : [],
-          isLoading : false,
-          isLoadingFailed : false
-        }
-    },
+    state = {
+      options : [],
+      isLoading : false,
+      isLoadingFailed : false
+    }
 
     componentDidMount(){
       this._handlerLoadOptions();
-    },
+    }
     componentDidUpdate(prevProps, prevState){
       if (prevProps !== this.props){
          if (this.state.isLoadingFailed && this.props.isShow){
            this._handlerLoadOptions();
          }
       }
-    },
+    }
     componetWillUnmount(){
       this._unmountWithLoadOptions();
-    },
+    }
 
-    _handlerLoadOptions(){
+    _handlerLoadOptions = () => {
       const { uri, jsonProp } = this.props;
       this._handlerWithLoadOptions(
             'options', 'isLoading', 'isLoadingFailed',
             uri, jsonProp
-      );      
-    },
+      );
+    }
 
     render(){
       const { caption, optionNames, placeholder, onSelect } = this.props
@@ -68,6 +61,7 @@ const SelectWithLoad = React.createClass({
        </div>
       );
     }
-});
+}
+
 
 export default SelectWithLoad

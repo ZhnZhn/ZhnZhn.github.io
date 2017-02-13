@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Row from './Row';
 import ButtonCircle from '../zhn/ButtonCircle';
 
-const Styles = {
+const STYLE = {
   ROW : {
     paddingTop: '4px',
     paddingBottom: '8px'
@@ -13,36 +13,40 @@ const Styles = {
   }
 }
 
-const ToolbarButtonCircle = React.createClass({
+//const ToolbarButtonCircle = React.createClass({
+class ToolbarButtonCircle extends Component {
+
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps.buttons === this.props.buttons){
       return false;
     }
     return true;
-  },
+  }
 
-  _renderButtons(buttons=[]){
+  _renderButtons = (buttons=[]) => {
     return buttons.map((button, index) => {
       const {caption, onClick} = button
       return (
         <ButtonCircle
           key={caption + index}
           caption={caption}
-          style={Styles.BUTTON_CIRCLE}
+          style={STYLE.BUTTON_CIRCLE}
           onClick={onClick}
         />
       );
     })
-  },
+  }
 
   render(){
     const { buttons } = this.props;
     return (
-      <Row style={Styles.ROW}>
+      <Row style={STYLE.ROW}>
         {this._renderButtons(buttons)}
       </Row>
     )
   }
-});
+
+}
+//});
 
 export default ToolbarButtonCircle

@@ -25,7 +25,8 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 var styles = _DialogStyles2.default;
 
 var RowInputSelect = function RowInputSelect(_ref) {
-   var caption = _ref.caption,
+   var _ref$caption = _ref.caption,
+       caption = _ref$caption === undefined ? '' : _ref$caption,
        rest = _objectWithoutProperties(_ref, ['caption']);
 
    return _react2.default.createElement(
