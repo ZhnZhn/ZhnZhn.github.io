@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const styles = {
   rootDiv: {
@@ -20,54 +20,43 @@ const styles = {
   }
 }
 
-const InputSecret = React.createClass({
-  getInitialState(){
-    return {
-      value : ''
-    }
-  },
+class InputSecret extends Component {
+  state = {
+    value: ''
+  }
 
-  _handlerChangeValue(event){
+  _handleChangeValue = (event) => {
+    this.setState({ value: event.target.value });
+  }
 
-    /*
-    if (!this.props.onTest(this.state.value)) {
-      this.state.isValid = false;
-    } else {
-      this.state.isValid = true;
-      this.state.errorInput = null;
-    }
-    */
-    this.setState({value: event.target.value});
-  },
-
-  _handlerBlurValue(){
-
-  },
+  /*
+  _handlerBlurValue = () => {
+  }
+  */
 
   render(){
-    const {placeholder} = this.props;
+    const {placeholder} = this.props
+        , { value } = this.state;
     return (
       <div style={styles.rootDiv}>
         <input
-           ref="input"
            autocomplete="off"
            type="password"
            style={styles.inputText}
            translate={false}
            placeholder={placeholder}
-           value={this.state.value}
-           onChange={this._handlerChangeValue}
-           onBlur={this._handlerBlurValue}
+           value={value}
+           onChange={this._handleChangeValue}
+           //onBlur={this._handlerBlurValue}
         >
         </input>
       </div>
     )
-  },
+  }
 
   getValue(){
     return this.state.value;
   }
-
-});
+}
 
 export default InputSecret

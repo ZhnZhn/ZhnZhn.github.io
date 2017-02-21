@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const MenuBadge = React.createClass({
-  _handlerClickBadge(event){
+const S = {
+  BADGE_OPENED : {
+    color: 'rgba(164, 135, 212, 1)'
+  }
+}
+
+class MenuBadge extends Component {
+  _handleClickBadge = (event) => {
      event.stopPropagation();
      if (!this.props.isOpen){
        this.props.onClick();
      } else {
        this.props.onBadgeClose();
      }
-  },
+  }
 
   render(){
-    const {counter, isOpen, onClick} = this.props;
-    const spanStyle = isOpen ? {color: 'rgba(164, 135, 212, 1)'} : null;
+    const {counter, isOpen} = this.props;
+    const spanStyle = isOpen
+             ? S.BADGE_OPENED
+             : null;
     return (
       <span
          className="menu__badge"
          style={spanStyle}
-         onClick={this._handlerClickBadge}>
+         onClick={this._handleClickBadge}>
          {counter}
       </span>
     )
   }
-});
+}
 
 export default MenuBadge

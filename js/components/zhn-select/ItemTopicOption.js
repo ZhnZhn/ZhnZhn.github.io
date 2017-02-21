@@ -14,7 +14,7 @@ var _ItemOption2 = _interopRequireDefault(_ItemOption);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLE = {
+var S = {
   TOPIC: {
     width: '100%',
     whiteSpace: 'nowrap',
@@ -33,7 +33,7 @@ var ItemTopicOption = function ItemTopicOption(props) {
     _react2.default.createElement(_ItemOption2.default, props),
     _react2.default.createElement(
       'div',
-      { style: STYLE.TOPIC },
+      { style: S.TOPIC },
       item.topic
     )
   );

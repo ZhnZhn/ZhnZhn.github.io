@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { Component, PropTypes } from 'react';
 
 const ClassNames = {
   INIT : 'modal-root',
@@ -19,21 +18,20 @@ const Styles = {
   }
 }
 
-const ModalDialogContainer = React.createClass({
-  propTypes : {
-    isShow  : React.PropTypes.bool,
-    timeout : React.PropTypes.number,
-    onClose : React.PropTypes.func
-  },
-  getDefaultProps(){
-    return {
-      timeout : 450
-    }
-  },
-  getInitialState(){
+class ModalDialogContainer extends Component {
+  static propTypes = {
+    isShow  : PropTypes.bool,
+    timeout : PropTypes.number,
+    onClose : PropTypes.func
+  }
+  static defaultProps = {
+    timeout : 450
+  }
+
+  constructor(props){
+    super();
     this.wasClosing = true;
-    return {}
-  },
+  }
 
   componentDidUpdate(prevProps, prevState){
     if (this.wasClosing){
@@ -41,7 +39,7 @@ const ModalDialogContainer = React.createClass({
         this.setState({});
       }, this.props.timeout)
     }
-  },
+  }
 
   render(){
     const {isShow, children, onClose} = this.props;
@@ -64,7 +62,6 @@ const ModalDialogContainer = React.createClass({
       </div>
     )
   }
-
-});
+}
 
 export default ModalDialogContainer

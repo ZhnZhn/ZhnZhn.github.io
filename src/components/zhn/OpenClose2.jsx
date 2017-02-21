@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const styles = {
   rootDiv: {
@@ -27,27 +27,24 @@ const styles = {
 const pathOpen = "M 2,14 L 14,14 14,2 2,14";
 const pathClose = "M 2,2 L 14,8 2,14 2,2";
 
-const OpenClose2 = React.createClass({
-   getInitialState(){
-      const isOpen = (this.props.isClose) ? false : true
-          , fillOpen = (this.props.fillOpen) ? this.props.fillOpen : 'yellow'
-          , fillClose = (this.props.fillClose) ? this.props.fillClose : '#4D4D4D';
-
-      return {
+class OpenClose2 extends Component {
+   constructor(props){
+     super();
+     const isOpen = (props.isClose) ? false : true
+         , fillOpen = (props.fillOpen) ? props.fillOpen : 'yellow'
+         , fillClose = (props.fillClose) ? props.fillClose : '#4D4D4D';
+      this.state = {
         isOpen: isOpen,
         fillOpen: fillOpen,
         fillClose: fillClose
-      };
-   },
+      }
+   }
 
-  _handlerClickOpenClose(){
-    this.state.isOpen = !this.state.isOpen;
-    this.setState(this.state);
-  },
-
+  _handleClickOpenClose = () => {
+    this.setState(prev => ({ isOpen: !prev.isOpen }));
+  }
 
   render(){
-
     const {
             style, styleNotSelected, styleCaption, caption,
             isDraggable, option, onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop,
@@ -80,13 +77,12 @@ const OpenClose2 = React.createClass({
       _styleNotSelected = styleNotSelected;
     }
 
-
     return (
       <div style={Object.assign({}, styles.rootDiv, style)}>
         <div
            className="not-selected"
            style={_styleNotSelected}
-           onClick={this._handlerClickOpenClose}
+           onClick={this._handleClickOpenClose}
            {..._dragOption}
          >
           <div style={styles.divSvg}>
@@ -113,6 +109,6 @@ const OpenClose2 = React.createClass({
      </div>
     )
   }
-});
+}
 
 export default OpenClose2;

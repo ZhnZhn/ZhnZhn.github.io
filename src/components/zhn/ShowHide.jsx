@@ -1,25 +1,24 @@
 import React from 'react';
 
-const styles = {
-  show : {
+const SHOW_POPUP = 'show-popup'
+const S = {
+  SHOW : {
     display: 'block'
   },
-  hide : {
+  HIDE : {
     display : 'none'
   }
 };
 
-const ShowHide = React.createClass({
-  render(){
-    const {isShow, className, style, children} = this.props
-        , _styleShow = isShow ? styles.show : styles.hide
-        , _classShow = isShow ? 'show-popup' : ''
+const ShowHide = (props) => {
+    const {isShow, className, style, children} = props
+        , _styleShow = isShow ? S.SHOW : S.HIDE
+        , _classShow = isShow ? SHOW_POPUP : ''
         , _className = (className)
               ? `${className} ${_classShow}`
               : (_classShow !== '')
                    ? _classShow
                    : undefined;
-
     return (
       <div
         className={_className}
@@ -27,8 +26,8 @@ const ShowHide = React.createClass({
       >
         {children}
       </div>
-    )
-  }
-});
+    );
+ }
+
 
 export default ShowHide

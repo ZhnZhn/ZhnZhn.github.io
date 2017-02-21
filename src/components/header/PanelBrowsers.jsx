@@ -2,29 +2,6 @@ import React from 'react';
 
 import ShowHide from '../zhn/ShowHide';
 
-/*
-const STYLE = {
-  ROOT : {
-    position : 'absolute',
-    zIndex : 1010,
-    top : '45px',
-    left : '80px',
-
-    backgroundColor: 'rgb(77, 77, 77)',
-    border : '2px solid rgb(35, 47, 59)',
-    borderBottom: '4px solid green',
-    borderRadius : '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-
-    padding : '10px',
-    paddingTop : '5px',
-    paddingBottom : '5px',
-
-    width: '280px'
-  }
-}
-*/
-
 const PanelBrowsers = (props) => {
   const {
           className, isShow, BROWSER, browserConfig,

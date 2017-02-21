@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -42,6 +44,12 @@ var _MenuListType2 = _interopRequireDefault(_MenuListType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
 
 var CLASS = {
@@ -70,145 +78,171 @@ var STYLE = {
   }
 };
 
-var MenuBrowserDynamic2 = _react2.default.createClass({
-  displayName: 'MenuBrowserDynamic2',
-  getInitialState: function getInitialState() {
-    var isInitShow = this.props.isInitShow;
+var MenuBrowserDynamic2 = function (_Component) {
+  _inherits(MenuBrowserDynamic2, _Component);
+
+  function MenuBrowserDynamic2(props) {
+    _classCallCheck(this, MenuBrowserDynamic2);
+
+    var _this = _possibleConstructorReturn(this, (MenuBrowserDynamic2.__proto__ || Object.getPrototypeOf(MenuBrowserDynamic2)).call(this));
+
+    _this._loadMenu = function () {
+      var _this$props = _this.props,
+          browserType = _this$props.browserType,
+          caption = _this$props.caption,
+          sourceMenuUrl = _this$props.sourceMenuUrl,
+          onLoadMenu = _this$props.onLoadMenu;
+
+      onLoadMenu({ browserType: browserType, caption: caption, sourceMenuUrl: sourceMenuUrl });
+    };
+
+    _this._onStore = function (actionType, data) {
+      var _this$props2 = _this.props,
+          browserType = _this$props2.browserType,
+          showAction = _this$props2.showAction,
+          loadCompletedAction = _this$props2.loadCompletedAction;
+
+      if (actionType === showAction && data === browserType) {
+        _this._handleShow();
+      } else if (actionType === loadCompletedAction && data.browserType === browserType) {
+        _this.setState({ menuItems: data.json, isLoaded: true });
+      }
+    };
+
+    _this._handleHide = function () {
+      _this.setState({ isShow: false });
+    };
+
+    _this._handleShow = function () {
+      _this.setState({ isShow: true });
+    };
+
+    _this._handleClickInfo = function () {
+      var _this$props3 = _this.props,
+          descrUrl = _this$props3.descrUrl,
+          onClickInfo = _this$props3.onClickInfo;
+
+      onClickInfo({ descrUrl: descrUrl });
+    };
+
+    _this._handleClickSearch = function () {
+      if (_this.state.isShowSearch) {
+        _this.setState({
+          isShowSearch: false,
+          scrollClass: CLASS.BROWSER
+        });
+      } else {
+        _this.setState({
+          isShowSearch: true,
+          scrollClass: CLASS.BROWSER_WITH_SEARCH
+        });
+      }
+    };
+
+    _this._handleClickItem = function (item) {
+      var _this$props4 = _this.props,
+          modalDialogType = _this$props4.modalDialogType,
+          browserType = _this$props4.browserType,
+          chartContainerType = _this$props4.chartContainerType,
+          onShowLoadDialog = _this$props4.onShowLoadDialog,
+          onShowContainer = _this$props4.onShowContainer;
 
 
-    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }, { caption: 'S', onClick: this._handlerClickSearch }];
+      onShowLoadDialog(modalDialogType, {
+        item: item, browserType: browserType, chartContainerType: chartContainerType,
+        onShow: onShowContainer
+      });
+    };
 
-    return {
+    var isInitShow = props.isInitShow;
+
+    _this.toolbarButtons = [{ caption: 'I', onClick: _this._handleClickInfo.bind(_this) }, { caption: 'S', onClick: _this._handleClickSearch.bind(_this) }];
+    _this.state = {
       isShow: isInitShow ? true : false,
       isShowSearch: false,
       scrollClass: CLASS.BROWSER,
       isLoaded: false,
       menuItems: []
     };
-  },
-  componentWillMount: function componentWillMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  },
-  componentDidMount: function componentDidMount() {
-    this._loadMenu();
-  },
-  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
-    if (!nextState.isLoaded && nextState.isShow) {
+    return _this;
+  }
+
+  _createClass(MenuBrowserDynamic2, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.unsubscribe = this.props.store.listen(this._onStore);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       this._loadMenu();
     }
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    this.unsubscribe();
-  },
-  _loadMenu: function _loadMenu() {
-    var _props = this.props;
-    var browserType = _props.browserType;
-    var caption = _props.caption;
-    var sourceMenuUrl = _props.sourceMenuUrl;
-    var onLoadMenu = _props.onLoadMenu;
-
-    onLoadMenu({ browserType: browserType, caption: caption, sourceMenuUrl: sourceMenuUrl });
-  },
-  _onStore: function _onStore(actionType, data) {
-    var _props2 = this.props;
-    var browserType = _props2.browserType;
-    var showAction = _props2.showAction;
-    var loadCompletedAction = _props2.loadCompletedAction;
-
-    if (actionType === showAction && data === browserType) {
-      this._handlerShow();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType) {
-      this.setState({ menuItems: data.json, isLoaded: true });
+  }, {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps, nextState) {
+      if (!nextState.isLoaded && nextState.isShow) {
+        this._loadMenu();
+      }
     }
-  },
-  _handlerHide: function _handlerHide() {
-    this.setState({ isShow: false });
-  },
-  _handlerShow: function _handlerShow() {
-    this.setState({ isShow: true });
-  },
-  _handlerClickInfo: function _handlerClickInfo() {
-    var _props3 = this.props;
-    var descrUrl = _props3.descrUrl;
-    var onClickInfo = _props3.onClickInfo;
-
-    onClickInfo({ descrUrl: descrUrl });
-  },
-  _handlerClickSearch: function _handlerClickSearch() {
-    if (this.state.isShowSearch) {
-      this.setState({
-        isShowSearch: false,
-        scrollClass: CLASS.BROWSER
-      });
-    } else {
-      this.setState({
-        isShowSearch: true,
-        scrollClass: CLASS.BROWSER_WITH_SEARCH
-      });
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unsubscribe();
     }
-  },
-  _handlerClickItem: function _handlerClickItem(item) {
-    var _props4 = this.props;
-    var modalDialogType = _props4.modalDialogType;
-    var browserType = _props4.browserType;
-    var chartContainerType = _props4.chartContainerType;
-    var onShowLoadDialog = _props4.onShowLoadDialog;
-    var onShowContainer = _props4.onShowContainer;
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          caption = _props.caption,
+          children = _props.children,
+          ItemOptionComp = _props.ItemOptionComp,
+          ItemComp = _props.ItemComp,
+          _state = this.state,
+          menuItems = _state.menuItems,
+          isShow = _state.isShow,
+          isShowSearch = _state.isShowSearch,
+          scrollClass = _state.scrollClass,
+          _wrapperSearch = menuItems.length !== 0 ? _react2.default.createElement(
+        _ShowHide2.default,
+        { isShow: isShowSearch },
+        _react2.default.createElement(_WrapperInputSearch2.default, {
+          style: STYLE.WRAPPER_SEARCH,
+          placeholder: SEARCH_PLACEHOLDER,
+          data: menuItems,
+          ItemOptionComp: ItemOptionComp,
+          onSelect: this._handleClickItem
+        })
+      ) : undefined,
+          _spinnerLoading = menuItems.length === 0 ? _react2.default.createElement(_SpinnerLoading2.default, { style: STYLE.SPINNER_LOADING }) : undefined;
 
-
-    onShowLoadDialog(modalDialogType, {
-      item: item, browserType: browserType, chartContainerType: chartContainerType,
-      onShow: onShowContainer
-    });
-  },
-  render: function render() {
-    var _props5 = this.props;
-    var caption = _props5.caption;
-    var children = _props5.children;
-    var ItemOptionComp = _props5.ItemOptionComp;
-    var ItemComp = _props5.ItemComp;
-    var _state = this.state;
-    var menuItems = _state.menuItems;
-    var isShow = _state.isShow;
-    var isShowSearch = _state.isShowSearch;
-    var scrollClass = _state.scrollClass;
-    var _wrapperSearch = menuItems.length !== 0 ? _react2.default.createElement(
-      _ShowHide2.default,
-      { isShow: isShowSearch },
-      _react2.default.createElement(_WrapperInputSearch2.default, {
-        style: STYLE.WRAPPER_SEARCH,
-        placeholder: SEARCH_PLACEHOLDER,
-        data: menuItems,
-        ItemOptionComp: ItemOptionComp,
-        onSelect: this._handlerClickItem
-      })
-    ) : undefined;
-    var _spinnerLoading = menuItems.length === 0 ? _react2.default.createElement(_SpinnerLoading2.default, { style: STYLE.SPINNER_LOADING }) : undefined;
-    return _react2.default.createElement(
-      _Browser2.default,
-      { isShow: isShow, style: STYLE.BROWSER },
-      _react2.default.createElement(_CaptionRow2.default, {
-        caption: caption,
-        onClose: this._handlerHide
-      }),
-      _react2.default.createElement(_ToolbarButtonCircle2.default, {
-        buttons: this.toolbarButtons
-      }),
-      _wrapperSearch,
-      _react2.default.createElement(
-        _ScrollPane2.default,
-        { className: scrollClass },
-        _spinnerLoading,
-        _react2.default.createElement(_MenuListType2.default, {
-          model: menuItems,
-          ItemComp: ItemComp,
-          onClickItem: this._handlerClickItem
+      return _react2.default.createElement(
+        _Browser2.default,
+        { isShow: isShow, style: STYLE.BROWSER },
+        _react2.default.createElement(_CaptionRow2.default, {
+          caption: caption,
+          onClose: this._handleHide
         }),
-        children
-      )
-    );
-  }
-});
+        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+          buttons: this.toolbarButtons
+        }),
+        _wrapperSearch,
+        _react2.default.createElement(
+          _ScrollPane2.default,
+          { className: scrollClass },
+          _spinnerLoading,
+          _react2.default.createElement(_MenuListType2.default, {
+            model: menuItems,
+            ItemComp: ItemComp,
+            onClickItem: this._handleClickItem
+          }),
+          children
+        )
+      );
+    }
+  }]);
+
+  return MenuBrowserDynamic2;
+}(_react.Component);
 
 exports.default = MenuBrowserDynamic2;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuBrowserDynamic2.js.map

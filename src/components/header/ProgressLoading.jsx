@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import {ChartActionTypes} from '../../flux/actions/ChartActions';
 import ProgressLine from '../zhn/ProgressLine';
@@ -8,33 +8,32 @@ const Colors = {
   FAILED : 'rgb(237, 88, 19)'
 };
 
-const ProgressLoading = React.createClass({
-  getInitialState(){
-    return {
-      completed : 0,
-      color : Colors.LOADING
-    }
-  },
+
+class ProgressLoading extends Component {
+  state = {
+    completed : 0,
+    color : Colors.LOADING
+  }
+
   componentDidMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
-  },
+  }
   componentWillUnmount(){
     this.unsubscribe();
-  },
-  _onStore(actionType, option){
+  }
+  _onStore = (actionType, option) => {
       if (actionType === ChartActionTypes.LOAD_STOCK){
         this.setState({completed: 35, color: Colors.LOADING});
-      } else if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED                 
+      } else if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED
                  || actionType === ChartActionTypes.LOAD_STOCK_ADDED){
         this.setState({completed: 100, color: Colors.LOADING});
       } else if (actionType === ChartActionTypes.LOAD_STOCK_FAILED){
         this.setState({completed: 100, color: Colors.FAILED})
       }
-  },
-
+  }
 
   render(){
-    const {completed, color} = this.state;
+    const { completed, color } = this.state;
     return (
       <ProgressLine
          height={3}
@@ -43,6 +42,6 @@ const ProgressLoading = React.createClass({
       />
     )
   }
-});
+}
 
 export default ProgressLoading

@@ -15,33 +15,29 @@ import { ComponentActionTypes } from '../flux/actions/ComponentActions';
 import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const AppErc = React.createClass({
-  render(){
-    return (
-      <div>
-        <HeaderBar store={ChartStore} />
-        <div className="component-container">
-           <BrowserContainer
-              store={ChartStore}
-              showBrowserAction={BrowserActionTypes.SHOW_BROWSER}
-              initBrowserAction={BrowserActionTypes.INIT_BROWSER_DYNAMIC}
-              updateBrowserAction={BrowserActionTypes.UPDATE_BROWSER_MENU}
-              updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
-              initDialogAction={ComponentActionTypes.INIT_AND_SHOW_DIALOG}
-              showDialogAction={ComponentActionTypes.SHOW_DIALOG}
-           />
-           <About store={ChartStore} isShow={true} />
-           <ComponentHrzContainer />
-       </div>
-       <DialogContainer store={ChartStore} />
-       <ConsentCookiePopup
-          onAnswerYes={AnalyticActions.answerYes}
-          onAnswerNo={AnalyticActions.answerNo}
-          onNoAnswer={AnalyticActions.noAnswer}
+const AppErc = () => (
+  <div>
+    <HeaderBar store={ChartStore} />
+    <div className="component-container">
+       <BrowserContainer
+          store={ChartStore}
+          showBrowserAction={BrowserActionTypes.SHOW_BROWSER}
+          initBrowserAction={BrowserActionTypes.INIT_BROWSER_DYNAMIC}
+          updateBrowserAction={BrowserActionTypes.UPDATE_BROWSER_MENU}
+          updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
+          initDialogAction={ComponentActionTypes.INIT_AND_SHOW_DIALOG}
+          showDialogAction={ComponentActionTypes.SHOW_DIALOG}
        />
-     </div>
-    )
-  }
-});
+       <About store={ChartStore} isShow={true} />
+       <ComponentHrzContainer />
+   </div>
+   <DialogContainer store={ChartStore} />
+   <ConsentCookiePopup
+      onAnswerYes={AnalyticActions.answerYes}
+      onAnswerNo={AnalyticActions.answerNo}
+      onNoAnswer={AnalyticActions.noAnswer}
+   />
+ </div>
+)
 
 export default AppErc

@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -13,6 +15,12 @@ var _OpenClose = require('./OpenClose2');
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var MODEL_PROP = {
   CAPTION: 'caption',
@@ -54,103 +62,114 @@ var STYLE = {
   }
 };
 
-var MenuListType2 = _react2.default.createClass({
-  displayName: 'MenuListType2',
-  getInitialState: function getInitialState() {
-    return {};
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (this.state === nextState && this.props.model === nextProps.model) {
-      return false;
+var MenuListType2 = function (_Component) {
+  _inherits(MenuListType2, _Component);
+
+  function MenuListType2() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, MenuListType2);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
     }
-    return true;
-  },
-  _renderLevel3: function _renderLevel3() {
-    var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-    var captionProp = arguments[1];
-    var _props = this.props;
-    var ItemComp = _props.ItemComp;
-    var onClickItem = _props.onClickItem;
 
-    return items.map(function (item, index) {
-      var caption = item[captionProp],
-          _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
-      return _react2.default.createElement(ItemComp, {
-        key: index,
-        className: _className,
-        caption: caption,
-        item: item,
-        onClickItem: onClickItem
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MenuListType2.__proto__ || Object.getPrototypeOf(MenuListType2)).call.apply(_ref, [this].concat(args))), _this), _this.state = {}, _this._renderLevel3 = function () {
+      var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var captionProp = arguments[1];
+      var _this$props = _this.props,
+          ItemComp = _this$props.ItemComp,
+          onClickItem = _this$props.onClickItem;
+
+      return items.map(function (item, index) {
+        var caption = item[captionProp],
+            _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
+        return _react2.default.createElement(ItemComp, {
+          key: index,
+          className: _className,
+          caption: caption,
+          item: item,
+          onClickItem: onClickItem
+        });
       });
-    });
-  },
-  _renderLevel2: function _renderLevel2() {
-    var lists = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+    }, _this._renderLevel2 = function () {
+      var lists = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var captionProp = arguments[1];
+      var itemsProp = arguments[2];
 
-    var _this = this;
+      return lists.map(function (list, index) {
+        var caption = list[captionProp],
+            items = list[itemsProp];
+        return _react2.default.createElement(
+          _OpenClose2.default,
+          {
+            key: index,
+            fillOpen: '#80c040',
+            style: STYLE.LIST_DIV,
+            styleNotSelected: STYLE.LIST_DIV_NOT_SELECTED,
+            isClose: true,
+            caption: caption
+          },
+          _this._renderLevel3(items, captionProp)
+        );
+      });
+    }, _this._renderLevel1 = function () {
+      var model = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    var captionProp = arguments[1];
-    var itemsProp = arguments[2];
+      var _model$meta = model.meta,
+          meta = _model$meta === undefined ? {} : _model$meta,
+          caption = meta.caption,
+          level1 = meta.level1,
+          level2 = meta.level2,
+          level3 = meta.level3,
+          _captionProp = caption || MODEL_PROP.CAPTION,
+          _groupsProp = level1 || MODEL_PROP.GROUPS,
+          _listsProp = level2 || MODEL_PROP.LISTS,
+          _itemsProp = level3 || MODEL_PROP.ITEMS,
+          groups = model[_groupsProp] || [];
 
-    return lists.map(function (list, index) {
-      var caption = list[captionProp],
-          items = list[itemsProp];
-      return _react2.default.createElement(
-        _OpenClose2.default,
-        {
-          key: index,
-          fillOpen: '#80c040',
-          style: STYLE.LIST_DIV,
-          styleNotSelected: STYLE.LIST_DIV_NOT_SELECTED,
-          isClose: true,
-          caption: caption
-        },
-        _this._renderLevel3(items, captionProp)
-      );
-    });
-  },
-  _renderLevel1: function _renderLevel1() {
-    var _this2 = this;
-
-    var model = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-    var _model$meta = model.meta;
-    var meta = _model$meta === undefined ? {} : _model$meta;
-    var caption = meta.caption;
-    var level1 = meta.level1;
-    var level2 = meta.level2;
-    var level3 = meta.level3;
-    var _captionProp = caption || MODEL_PROP.CAPTION;
-    var _groupsProp = level1 || MODEL_PROP.GROUPS;
-    var _listsProp = level2 || MODEL_PROP.LISTS;
-    var _itemsProp = level3 || MODEL_PROP.ITEMS;
-    var groups = model[_groupsProp] || [];
-
-    return groups.map(function (group, index) {
-      var caption = group[_captionProp],
-          lists = group[_listsProp];
-      return _react2.default.createElement(
-        _OpenClose2.default,
-        {
-          key: index,
-          style: STYLE.GROUP_DIV,
-          isClose: true,
-          caption: caption
-        },
-        _this2._renderLevel2(lists, _captionProp, _itemsProp)
-      );
-    });
-  },
-  render: function render() {
-    var model = this.props.model;
-
-
-    return _react2.default.createElement(
-      'div',
-      null,
-      this._renderLevel1(model)
-    );
+      return groups.map(function (group, index) {
+        var caption = group[_captionProp],
+            lists = group[_listsProp];
+        return _react2.default.createElement(
+          _OpenClose2.default,
+          {
+            key: index,
+            style: STYLE.GROUP_DIV,
+            isClose: true,
+            caption: caption
+          },
+          _this._renderLevel2(lists, _captionProp, _itemsProp)
+        );
+      });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-});
+
+  _createClass(MenuListType2, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.state === nextState && this.props.model === nextProps.model) {
+        return false;
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var model = this.props.model;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        this._renderLevel1(model)
+      );
+    }
+  }]);
+
+  return MenuListType2;
+}(_react.Component);
 
 exports.default = MenuListType2;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuListType2.js.map

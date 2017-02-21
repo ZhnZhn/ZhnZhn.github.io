@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import OpenClose2 from './OpenClose2'
 
@@ -43,19 +43,18 @@ const STYLE = {
   }
 }
 
-const MenuListType2 = React.createClass({
-  getInitialState(){
-    return {}
-  },
+
+class MenuListType2 extends Component{
+  state = {}
 
   shouldComponentUpdate(nextProps, nextState){
       if (this.state === nextState && this.props.model === nextProps.model){
         return false;
       }
       return true;
-  },
+  }
 
- _renderLevel3(items=[], captionProp){
+ _renderLevel3 = (items=[], captionProp) => {
    const { ItemComp, onClickItem } = this.props;
    return items.map((item, index) => {
      const caption  = item[captionProp]
@@ -72,9 +71,9 @@ const MenuListType2 = React.createClass({
        />
      );
    })
- },
+ }
 
-  _renderLevel2(lists=[], captionProp, itemsProp){
+  _renderLevel2 = (lists=[], captionProp, itemsProp) => {
     return lists.map((list, index) => {
       const  caption  = list[captionProp]
       , items = list[itemsProp]
@@ -91,10 +90,9 @@ const MenuListType2 = React.createClass({
         </OpenClose2>
       );
     })
-  },
+  }
 
-  _renderLevel1(model={}){
-
+  _renderLevel1 = (model={}) => {
      const { meta={} } = model
      , { caption, level1, level2, level3 } = meta
      , _captionProp = caption || MODEL_PROP.CAPTION
@@ -117,17 +115,16 @@ const MenuListType2 = React.createClass({
           </OpenClose2>
         );
      })
-  },
+  }
 
   render(){
-    const { model } = this.props
-    
+    const { model } = this.props;
     return (
       <div>
          {this._renderLevel1(model)}
       </div>
     )
   }
-});
+}
 
 export default MenuListType2

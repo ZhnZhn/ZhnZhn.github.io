@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const Style = {
   ROOT : {
@@ -25,20 +25,23 @@ const Style = {
   }
 }
 
-
-const LegendItem = React.createClass({
-  getInitialState(){
-    return {
-      isVisible : this.props.item.isVisible
+class LegendItem extends Component {
+  static defaultProps = {
+    item : {}
+  }
+  constructor(props){
+    super();
+    this.state = {
+      isVisible : props.item.isVisible
     }
-  },
+  }
 
-  _handlerClickItem(){
+  _handleClickItem = () => {
      const { item, onClickItem } = this.props
      onClickItem(item);
      this.setState({ isVisible: !this.state.isVisible })
-  },
- 
+  }
+
   render(){
     const { item } = this.props
         , { isVisible } = this.state
@@ -51,7 +54,7 @@ const LegendItem = React.createClass({
     return (
       <span
          style={Object.assign({}, Style.ROOT, _styleRoot)}
-         onClick={this._handlerClickItem}
+         onClick={this._handleClickItem}
       >
         <span style={Object.assign({}, Style.CIRCLE, _styleCircle)}>
         </span>
@@ -63,6 +66,6 @@ const LegendItem = React.createClass({
      </span>
     )
   }
-});
+}
 
 export default LegendItem

@@ -4,6 +4,18 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\Step.jsx",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\Step.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,SAAS;AACb,QAAO;AACL,aAAU,cAAV;AACA,WAAO,SAAP;AACA,YAAS,mBAAT;AACA,kBAAe,KAAf;AACA,WAAQ,MAAR;AACA,YAAS,MAAT;AACA,eAAW,QAAX;GAPF;CADI;;AAYN,IAAM,OAAO,SAAP,IAAO,CAAC,KAAD,EAAW;AACpB,SACE;;MAAM,OAAO,OAAO,IAAP,EAAb;IACI,MAAM,IAAN;GAFN,CADoB;CAAX;;kBAQE"
+ "names": [
+  "S",
+  "STEP",
+  "display",
+  "color",
+  "border",
+  "borderRadius",
+  "width",
+  "height",
+  "textAlign",
+  "Step",
+  "step"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAO;AACLC,aAAU,cADL;AAELC,WAAO,SAFF;AAGLC,YAAS,mBAHJ;AAILC,kBAAe,KAJV;AAKLC,WAAQ,MALH;AAMLC,YAAS,MANJ;AAOLC,eAAW;AAPN;AADC,CAAV;;AAYA,IAAMC,OAAO,SAAPA,IAAO;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,GAAR;AAAA,SACX;AAAA;AAAA,MAAM,OAAOV,EAAEC,IAAf;AACKS;AADL,GADW;AAAA,CAAb;;kBAMeD,I"
 }

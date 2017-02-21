@@ -1,12 +1,13 @@
 import React from 'react';
 
-const styles = {
-  liStyle : {
+const S = {
+  LI : {
     float : 'left',
     display : 'inline-block',
 
     backgroundColor : '#232F3B',
-    color : 'rgba(164, 135, 212, 1)',
+
+    //color : 'rgba(164, 135, 212, 1)',
     color : 'gray',
     paddingLeft : '10px',
     paddingRight : '10px',
@@ -21,25 +22,24 @@ const styles = {
     border: '2px solid gray',
     borderBottom : 'none',
     //borderTop : 'none'
+  },
+  SELECTED : {
+    borderColor : 'rgba(164, 135, 212, 1)',
+    color : 'rgba(164, 135, 212, 1)'
   }
 }
 
-const Tab = React.createClass({
-  render(){
-    const {title, isSelected, onClick} = this.props;
-    const selectedStyle = (isSelected) ?
-      //{backgroundColor : '#2C2828', color : 'rgba(164, 135, 212, 1)'}
-      {borderColor : 'rgba(164, 135, 212, 1)', color : 'rgba(164, 135, 212, 1)'}
-      : null;
+const Tab = (props) => {
+    const {title, isSelected, onClick} = props;
+    const _selectedStyle = (isSelected) ? S.SELECTED : null;
     return (
        <li
-          style={Object.assign({}, styles.liStyle, selectedStyle)}
+          style={Object.assign({}, S.LI, _selectedStyle)}
           onClick={onClick}
        >
           <span>{title}</span>
        </li>
     )
-  }
-});
+}
 
 export default Tab

@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+   value: true
 });
 
 var _react = require('react');
@@ -46,37 +46,34 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AppErc = _react2.default.createClass({
-  displayName: 'AppErc',
-  render: function render() {
-    return _react2.default.createElement(
+var AppErc = function AppErc() {
+   return _react2.default.createElement(
       'div',
       null,
       _react2.default.createElement(_HeaderBar2.default, { store: _ChartStore2.default }),
       _react2.default.createElement(
-        'div',
-        { className: 'component-container' },
-        _react2.default.createElement(_BrowserContainer2.default, {
-          store: _ChartStore2.default,
-          showBrowserAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER,
-          initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
-          updateBrowserAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
-          updateWatchAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER,
-          initDialogAction: _ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG,
-          showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG
-        }),
-        _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
-        _react2.default.createElement(_ComponentHrzContainer2.default, null)
+         'div',
+         { className: 'component-container' },
+         _react2.default.createElement(_BrowserContainer2.default, {
+            store: _ChartStore2.default,
+            showBrowserAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER,
+            initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+            updateBrowserAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
+            updateWatchAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER,
+            initDialogAction: _ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG,
+            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG
+         }),
+         _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
+         _react2.default.createElement(_ComponentHrzContainer2.default, null)
       ),
       _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default }),
       _react2.default.createElement(_ConsentCookiePopup2.default, {
-        onAnswerYes: _AnalyticActions2.default.answerYes,
-        onAnswerNo: _AnalyticActions2.default.answerNo,
-        onNoAnswer: _AnalyticActions2.default.noAnswer
+         onAnswerYes: _AnalyticActions2.default.answerYes,
+         onAnswerNo: _AnalyticActions2.default.answerNo,
+         onNoAnswer: _AnalyticActions2.default.noAnswer
       })
-    );
-  }
-});
+   );
+};
 
 exports.default = AppErc;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\AppErc.js.map

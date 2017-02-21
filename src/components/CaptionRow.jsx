@@ -2,8 +2,8 @@ import React from 'react'
 
 import SvgClose from './SvgClose';
 
-const styles = {
-  captionDiv : {
+const STYLE = {
+  ROOT : {
     backgroundColor: '#232F3B',
     color: 'rgba(164, 135, 212, 1)',
     height: '28px',
@@ -14,30 +14,24 @@ const styles = {
     marginRight: '5px',
     marginBottom: '10px'
   },
-  captionSpan: {
+  CAPTION : {
     fontSize: '18px',
     fontWeight: '500',
     paddingRight: '8px'
   }
 };
 
-const CaptionRow = React.createClass({
-  render(){
-    const {caption, children, onClose } = this.props;
-
-    return (
-      <div style={styles.captionDiv}>
-         <span
-            className="not-selected"
-            style={styles.captionSpan}
-         >
-           {caption}
-        </span>
-        {children}
-        <SvgClose onClose={onClose} />
-      </div>
-    )
-  }
-});
+const CaptionRow = ({ caption, children, onClose }) => (
+  <div style={STYLE.ROOT}>
+     <span
+        className="not-selected"
+        style={STYLE.CAPTION}
+     >
+       {caption}
+    </span>
+    {children}
+    <SvgClose onClose={onClose} />
+  </div>
+)
 
 export default CaptionRow;

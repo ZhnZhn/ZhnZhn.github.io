@@ -7,7 +7,7 @@ const path = require('path')
 module.exports = {
   entry: {
      lib: [
-            "react", "react-dom",
+            "react", "react-dom", "raven-js",
             "react-addons-shallow-compare", "react-addons-css-transition-group",
             "reflux",
             "big.js", "interact.js", "localforage",

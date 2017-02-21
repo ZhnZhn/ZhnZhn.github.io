@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import TransformFn from './TransformFn';
 import InputSearch from './InputSearch';
 
-const WrapperInputSearch = React.createClass({
+class WrapperInputSearch extends Component {
 
   shouldComponentUpdate(){
     return false;
-  },
+  }
 
-  _handlerSelectItem(item){
+  _handleSelectItem = (item) => {
      if (item){
       this.props.onSelect(item);
      }
-  },
+  }
 
   render(){
-    const  { style, placeholder='', data, ItemOptionComp } = this.props
+    const  { style, placeholder='', data={}, ItemOptionComp } = this.props
          , { meta } = data
-         , { caption } = meta
+         , { caption={} } = meta
          , _options = TransformFn.fromLevel3(data);
 
     return (
@@ -28,11 +28,11 @@ const WrapperInputSearch = React.createClass({
            propCaption={caption}
            options={_options}
            ItemOptionComp={ItemOptionComp}
-           onSelect={this._handlerSelectItem}
+           onSelect={this._handleSelectItem}
         />
      </div>
     );
   }
-});
+}
 
 export default WrapperInputSearch

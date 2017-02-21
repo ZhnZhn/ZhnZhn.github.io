@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const styles = {
   rootDiv: {
@@ -118,32 +118,36 @@ const styles = {
   }
 }
 
-const ZhSelect = React.createClass({
-  getDefaultProps(){
-    return {
-      options : [],
-      optionName : '',
-      optionNames : '',
-      isUpdateOptions : false
+class ZhSelect extends Component {
+  static defaultProps = {
+    options : [],
+    optionName : '',
+    optionNames : '',
+    isUpdateOptions : false
+  }
+
+  constructor(props){
+    super();
+    this.domOptionsCache = null;
+    this.indexActiveOption = 0;
+
+    const {optionName, optionNames} = props
+        , _optionName = (optionName)
+             ? ' ' + optionName
+             : ''
+        , _optionNames = (optionNames)
+             ? ' ' + optionNames
+             : (optionName) ? _optionName : '';
+    this.state = {
+      value: '',
+      isShowOption: false,
+      options: props.options,
+      optionName : _optionName,
+      optionNames : _optionNames,
+      isValidDomOptionsCache: false,
+      isLocalMode: false
     }
-  },
-  getInitialState(){
-     this.domOptionsCache = null;
-     this.indexActiveOption = 0;
-     const {optionName, optionNames} = this.props
-         , _optionName = (optionName) ? ' ' + optionName : ''
-         , _optionNames = (optionNames) ? ' ' + optionNames :
-                    (optionName) ? _optionName : '';
-     return {
-       value: '',
-       isShowOption: false,
-       options: this.props.options,
-       optionName : _optionName,
-       optionNames : _optionNames,
-       isValidDomOptionsCache: false,
-       isLocalMode: false
-     }
-  },
+  }
 
   componentWillReceiveProps(nextProps){
     if (this.props !== nextProps){
@@ -153,7 +157,7 @@ const ZhSelect = React.createClass({
         this._setStateToInit(nextProps.options);
       }
     }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps || nextProps.isUpdateOptions) {
@@ -163,7 +167,7 @@ const ZhSelect = React.createClass({
     }
 
     return true;
-  },
+  }
 
   componentDidUpdate(){
      //Decorate Active Option
@@ -172,9 +176,9 @@ const ZhSelect = React.createClass({
        this._decorateOfDomActiveOption(domActiveOption);
        this._makeVisibleOfDomActiveOption(domActiveOption);
     }
-  },
+  }
 
-  _setStateToInit(options){
+  _setStateToInit = (options) => {
     this.indexActiveOption = 0;
     this.setState({
       value : '',
@@ -182,36 +186,36 @@ const ZhSelect = React.createClass({
       options : options,
       isValidDomOptionsCache : false
     });
-  },
+  }
 
-  _getDomForActiveOption(){
+  _getDomForActiveOption = () => {
     return this.refs["v"+this.indexActiveOption];
-  },
+  }
 
-  _decorateOfDomActiveOption(domActiveOption){
+  _decorateOfDomActiveOption = (domActiveOption) => {
     if (domActiveOption){
       domActiveOption.classList.add("option-row__active");
     }
-  },
+  }
 
-  _decorateActiveOption(){
+  _decorateActiveOption = () => {
     let domActiveOption = this.refs["v"+this.indexActiveOption];
     domActiveOption.classList.add("option-row__active");
-  },
+  }
 
-  _undecorateActiveOption(){
+  _undecorateActiveOption = () => {
     if (this.refs["v" + this.indexActiveOption]){
       this.refs["v" + this.indexActiveOption].classList.remove("option-row__active");
     }
-  },
+  }
 
-  _undecorateOfDomActiveOption(domActiveOption){
+  _undecorateOfDomActiveOption = (domActiveOption) => {
      if (domActiveOption){
        domActiveOption.classList.remove("option-row__active");
     }
-  },
+  }
 
-  _makeVisibleOfDomActiveOption(domActiveOption){
+  _makeVisibleOfDomActiveOption = (domActiveOption) => {
     if (domActiveOption){
       const offsetTop = domActiveOption.offsetTop;
       const scrollTop = this.domOptions.scrollTop;
@@ -222,9 +226,9 @@ const ZhSelect = React.createClass({
         this.domOptions.scrollTop= 0;
       }
     }
-  },
+  }
 
-  _makeVisibleActiveOption(){
+  _makeVisibleActiveOption = () => {
     let domActiveOption = this.refs["v"+this.indexActiveOption];
 
     let offsetTop = domActiveOption.offsetTop;
@@ -232,16 +236,16 @@ const ZhSelect = React.createClass({
     if ( (offsetTop - scrollTop) > 70){
         this.domOptions.scrollTop += (offsetTop - scrollTop - 70);
     }
-  },
+  }
 
-  _filterOptionsToState(options, value){
+  _filterOptionsToState = (options, value) => {
      const valueFor = value.toLowerCase();
      return options.filter( (option, i) => {
        return option.caption.toLowerCase().indexOf(valueFor) !== -1
      })
-  },
+  }
 
-  _handlerInputChange(event){
+  _handlerInputChange = (event) => {
     const value = event.target.value;
     let arr = [];
     if (value.length !== this.state.value.length){
@@ -262,9 +266,9 @@ const ZhSelect = React.createClass({
         options : arr
       })
     }
-  },
+  }
 
-  _handlerInputKeyDown(event){
+  _handlerInputKeyDown = (event) => {
     switch(event.keyCode){
       // enter
       case 13:{
@@ -352,23 +356,22 @@ const ZhSelect = React.createClass({
       break;}
       default:return undefined;
     }
-  },
+  }
 
-  _handlerToggleOptions(){
+  _handlerToggleOptions = () => {
     this.setState({isShowOption: !this.state.isShowOption});
-  },
+  }
 
-  _handlerClickOption: function(item, index, event){
+  _handlerClickOption = (item, index, event) => {
     this.indexActiveOption = index;
     this.setState({
       value : item.caption,
       isShowOption : false
     });
     this.props.onSelect(item);
-  },
+  }
 
-
-  renderOptions(){
+  renderOptions = () => {
     const {isShowOption, options, isValidDomOptionsCache} = this.state;
 
     let _domOptions;
@@ -417,25 +420,23 @@ const ZhSelect = React.createClass({
           </div>
         </div>
     )
-  },
-
+  }
 
   render(){
     const {width} = this.props
-        , {value, isLocalMode, isShowOption } = this.state;
-
-    const _styleArrow = isShowOption
+        , {value, isLocalMode, isShowOption } = this.state
+        , _styleArrow = isShowOption
               ? styles.arrow_show
+              : null
+        , _styleDivWidth = (width)
+              ? { width : `${width}px`}
+              : null
+       , _styleInputWidth = (width)
+              ? { width : `${width-30}px`}
+              : null
+       , _styleHr = (width)
+              ? { width: `${width-40}px`}
               : null;
-
-    let _styleDivWidth = null;
-    let _styleInputWidth = null;
-    let _styleHr = null;
-    if (width){
-      _styleDivWidth = { width: width + 'px' };
-      _styleInputWidth = { width: (width-30) + 'px'};
-      _styleHr = { width: (width-40) + 'px'};
-    }
 
     const _domOptions = (isLocalMode || isShowOption)
              ? this.renderOptions()
@@ -477,7 +478,6 @@ const ZhSelect = React.createClass({
       )
     }
 
-
     return (
       <div style={Object.assign({},styles.rootDiv, _styleDivWidth)}>
         <input
@@ -496,16 +496,14 @@ const ZhSelect = React.createClass({
 
       </div>
     )
-  },
-
-  focusInput: function(){
-    this.domInputText.focus();
-  },
-
-  focusNotValidInput: function(){
-    this.domInputText.focus();
   }
 
-});
+  focusInput = () => {
+    this.domInputText.focus();
+  }
+  focusNotValidInput = () => {
+    this.domInputText.focus();
+  }
+}
 
 export default ZhSelect;

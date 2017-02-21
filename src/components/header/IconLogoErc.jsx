@@ -1,21 +1,10 @@
 import React from 'react';
 
-/*
-const STYLE = {
-  ROOT : {
-    position: 'absolute',
-    top: '7px',
-    left: '5px'
-  }
-}
-*/
-
-const IconLogoErc = ({ className, title }) => {  
+const IconLogoErc = ({ className, title }) => {
   return (
     <span
        className={className}
        title={title}
-       //style={STYLE.ROOT}
     >
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
          fill-rule="evenodd"

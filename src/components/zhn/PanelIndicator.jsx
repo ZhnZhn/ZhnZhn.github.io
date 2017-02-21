@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ShowHide from './ShowHide';
 import InputText from './InputText';
@@ -29,24 +29,22 @@ const styles = {
   }
 }
 
-const PanelIndicator = React.createClass({
-  getInitialState(){
-     return {
-       descr : [],
-       mfiDescrs : []
-     }
-  },
+class PanelIndicator extends Component {
+  state = {
+    descr : [],
+    mfiDescrs : []
+  }
 
-  _checkIfAlreadyAdded(arrObj, id){
+  _checkIfAlreadyAdded = (arrObj, id) => {
     const result = arrObj.find(obj => obj.id === id);
     if (result === undefined){
       return false;
     } else {
       return true;
     }
-  },
+  }
 
-  _handlerAddSma(){
+  _handleAddSma = () => {
     const value = this.refs.inputSMA.getValue()
         , {descr} = this.state
         , _id = 'SMA(' + value + ')';
@@ -61,24 +59,24 @@ const PanelIndicator = React.createClass({
         this.setState({descr : descr});
        }
     }
-  },
-  _handlerRemoveSerias(id){
+  }
+  _handleRemoveSerias = (id) => {
     if (this.props.onRemoveSeries(id)){
        this.state.descr = this.state.descr.filter((descr) =>{
          return descr.id !== id
        });
        this.setState({descr : this.state.descr});
     }
-  },
-  _handlerRemoveMfi(id){
+  }
+  _handleRemoveMfi = (id) => {
     this.props.onRemoveMfi(id);
     this.state.mfiDescrs = this.state.mfiDescrs.filter((descr) =>{
          return descr.id !== id
     });
     this.setState({mfiDescrs : this.state.mfiDescrs});
-  },
+  }
 
-  _handlerAddMfi(){
+  _handleAddMfi = () => {
     const {mfiDescrs} = this.state
         , _value = this.refs.inputMfi.getValue()
         , _id = 'MFI(' + _value + ')';
@@ -91,15 +89,15 @@ const PanelIndicator = React.createClass({
         });
         this.setState({mfiDescrs : mfiDescrs});
     }
-  },
+  }
 
-  _renderIndicators(){
+  _renderIndicators = () => {
     const _descr = this.state.descr.map((descr, index) => {
       const {id, color} = descr;
       return (
         <div key={id} style={{paddingTop: '5px'}}>
           <SvgMinus
-             onClick={this._handlerRemoveSerias.bind(null, id)}
+             onClick={this._handleRemoveSerias.bind(null, id)}
           />
           <span style={{color: color, paddingLeft: '8px'}}>{id}</span>
         </div>
@@ -110,15 +108,15 @@ const PanelIndicator = React.createClass({
          {_descr}
       </div>
     )
-  },
+  }
 
-  _renderMfi(){
+  _renderMfi = () => {
     const _descr = this.state.mfiDescrs.map((descr, index) => {
       const {id, color} = descr;
       return (
         <div key={id} style={{paddingTop: '5px'}}>
           <SvgMinus
-             onClick={this._handlerRemoveMfi.bind(null, id)}
+             onClick={this._handleRemoveMfi.bind(null, id)}
           />
           <span style={{color: color, paddingLeft: '8px'}}>{id}</span>
         </div>
@@ -129,10 +127,10 @@ const PanelIndicator = React.createClass({
          {_descr}
       </div>
     )
-  },
+  }
 
   render(){
-    const {isShow, isMfi} = this.props        
+    const {isShow, isMfi} = this.props
 
     const _mfiDom = (isMfi) ? (
       <div>
@@ -142,11 +140,11 @@ const PanelIndicator = React.createClass({
               ref="inputMfi"
               initValue="14"
             />
-            <SvgPlus onClick={this._handlerAddMfi} />
+            <SvgPlus onClick={this._handleAddMfi} />
         </div>
         {this._renderMfi()}
       </div>
-    ) : undefined;
+    ) : null;
 
     return (
       <ShowHide isShow={isShow} style={styles.rootDiv}>
@@ -156,7 +154,7 @@ const PanelIndicator = React.createClass({
              ref="inputSMA"
              initValue="50"
           />
-          <SvgPlus onClick={this._handlerAddSma} />
+          <SvgPlus onClick={this._handleAddSma} />
         </div>
         {this._renderIndicators()}
 
@@ -165,6 +163,6 @@ const PanelIndicator = React.createClass({
       </ShowHide>
     )
   }
-});
+}
 
 export default PanelIndicator

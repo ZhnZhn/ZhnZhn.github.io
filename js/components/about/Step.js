@@ -10,7 +10,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLES = {
+var S = {
   STEP: {
     display: 'inline-block',
     color: '#80c040',
@@ -22,11 +22,13 @@ var STYLES = {
   }
 };
 
-var Step = function Step(props) {
+var Step = function Step(_ref) {
+  var _ref$step = _ref.step,
+      step = _ref$step === undefined ? '0' : _ref$step;
   return _react2.default.createElement(
     'span',
-    { style: STYLES.STEP },
-    props.step
+    { style: S.STEP },
+    step
   );
 };
 

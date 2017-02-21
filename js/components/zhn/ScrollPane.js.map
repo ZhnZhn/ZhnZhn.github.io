@@ -4,6 +4,11 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\ScrollPane.jsx",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\ScrollPane.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,aAAa,gBAAM,WAAN,CAAkB;;AACnC,4BAAQ;iBACkC,KAAK,KAAL,CADlC;QACC,qBADD;kCACQ,UADR;QACQ,6CAAU,sBADlB;QACsB,2BADtB;;AAEN,WACE;;QAAK,4BAA0B,SAA1B,EAAuC,OAAO,KAAP,EAA5C;MACI,QADJ;KADF,CAFM;GAD2B;CAAlB,CAAb;;kBAWS"
+ "names": [
+  "ScrollPane",
+  "style",
+  "className",
+  "children"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,aAAa,SAAbA,UAAa;AAAA,OAAGC,KAAH,QAAGA,KAAH;AAAA,6BAAUC,SAAV;AAAA,OAAUA,SAAV,kCAAoB,EAApB;AAAA,OAAwBC,QAAxB,QAAwBA,QAAxB;AAAA,UAChB;AAAA;AAAA,QAAK,4BAA0BD,SAA/B,EAA4C,OAAOD,KAAnD;AACIE;AADJ,IADgB;AAAA,CAAnB;;kBAMeH,U"
 }

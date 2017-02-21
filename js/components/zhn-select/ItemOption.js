@@ -10,7 +10,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLE = {
+var S = {
   CAPTION: {
     width: '100%',
     whiteSpace: 'nowrap',
@@ -19,13 +19,13 @@ var STYLE = {
   }
 };
 
-var ItemOption = function ItemOption(props) {
-  var item = props.item;
-  var propCaption = props.propCaption;
-
+var ItemOption = function ItemOption(_ref) {
+  var _ref$item = _ref.item,
+      item = _ref$item === undefined ? {} : _ref$item,
+      propCaption = _ref.propCaption;
   return _react2.default.createElement(
     'div',
-    { style: STYLE.CAPTION },
+    { style: S.CAPTION },
     item[propCaption]
   );
 };

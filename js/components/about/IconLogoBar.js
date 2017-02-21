@@ -30,7 +30,7 @@ var _IconEurostat2 = _interopRequireDefault(_IconEurostat);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLE = {
+var S = {
   ROOT: {
     textAlign: 'center',
     paddingTop: '20px'
@@ -40,7 +40,7 @@ var STYLE = {
 var IconLogoBar = function IconLogoBar(props) {
   return _react2.default.createElement(
     'div',
-    { style: STYLE.ROOT },
+    { style: S.ROOT },
     _react2.default.createElement(_IconQuandl2.default, null),
     _react2.default.createElement(_IconGitHub2.default, {
       className: 'icon__github',

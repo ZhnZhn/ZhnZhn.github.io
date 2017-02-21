@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const STYLE = {
   LABEL : {
@@ -11,25 +11,24 @@ const STYLE = {
   }
 }
 
-const LimitRemainingLabel = React.createClass({
-  getInitialState(){
-    return {
-      value : ''
-    }
-  },
+class LimitRemainingLabel extends Component {
+  state = {
+    value : ''
+  }
+
   componentWillMount(){
     const { store } = this.props;
     this.unsubscribe = store.listenWithLimitRemaining(this._onStore);
-  },
+  }
   componentWillUnmount(){
     this.unsubscribe();
-  },
+  }
 
-  _onStore(value){
+  _onStore = (value) => {
     if ( !(value == null) ) {
       this.setState({ value: value });
-    }  
-  },
+    }
+  }
 
   render(){
     const { style } = this.props
@@ -41,6 +40,6 @@ const LimitRemainingLabel = React.createClass({
        </span>
     );
   }
-})
+}
 
 export default LimitRemainingLabel

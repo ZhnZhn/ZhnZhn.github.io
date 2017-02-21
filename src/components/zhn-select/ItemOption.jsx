@@ -1,6 +1,6 @@
 import React from 'react';
 
-const STYLE = {
+const S = {
   CAPTION : {
     width: '100%',
     whiteSpace: 'nowrap',
@@ -9,13 +9,10 @@ const STYLE = {
   }
 }
 
-const ItemOption = (props) => {
-  const { item, propCaption } = props;
-  return (
-    <div style={STYLE.CAPTION}>
-      {item[propCaption]}
-    </div>
-  );
-}
+const ItemOption = ({ item={}, propCaption }) => (
+  <div style={S.CAPTION}>
+    {item[propCaption]}
+  </div>
+)
 
 export default ItemOption

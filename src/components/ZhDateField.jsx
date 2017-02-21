@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const STYLE = {
   ROOT : {
@@ -43,24 +43,17 @@ const STYLE = {
   }
 };
 
+class ZhDateField extends Component {
+   constructor(props){
+     super();
+     this.state = {
+       value: props.initValue ? props.initValue : '',
+       errorInput: undefined,
+       isValid: true
+     }
+   }
 
-const ZhDateField = React.createClass({
-  _createInitialState(props){
-      const _initValue = props.initValue
-                ? props.initValue
-                : '';
-      return {
-        value: _initValue,
-        errorInput: undefined,
-        isValid: true
-      }
-  },
-
-  getInitialState(){
-     return this._createInitialState(this.props);
-  },
-  
-  _handlerChangeValue(event){
+  _handleChangeValue = (event) => {
     const { onTest, nForecastDate } = this.props
          , value = event.target.value
     if (!onTest(value, nForecastDate)){
@@ -75,9 +68,9 @@ const ZhDateField = React.createClass({
          errorInput : undefined
       })
     }
-  },
+  }
 
-  _handlerBlurValue(){
+  _handleBlurValue = () => {
     const { onTest, nForecastDate, errorMsg } = this.props
         , { value } = this.state
     if (!onTest(value, nForecastDate)){
@@ -91,14 +84,13 @@ const ZhDateField = React.createClass({
         isValid : true
       })
     }
-  },
+  }
 
   render(){
-    const  { value, errorInput } = this.state
-        , _styleHr = this.state.isValid
+    const  { value, errorInput, isValid } = this.state
+        , _styleHr = isValid
             ? STYLE.HR_VALID
-            : STYLE.HR_NOT_VALID
-
+            : STYLE.HR_NOT_VALID;
     return (
       <div style={STYLE.ROOT}>
         <input
@@ -107,8 +99,8 @@ const ZhDateField = React.createClass({
            style={STYLE.INPUT}
            placeholder="YYYY-MM-DD"
            value={value}
-           onChange={this._handlerChangeValue}
-           onBlur={this._handlerBlurValue}
+           onChange={this._handleChangeValue}
+           onBlur={this._handleBlurValue}
         >
         </input>
         <hr style={Object.assign({}, STYLE.HR, _styleHr)}></hr>
@@ -117,20 +109,17 @@ const ZhDateField = React.createClass({
         </div>
       </div>
     );
-  },
-
-  getValue(){
-    return this.state.value;
-  },
-
-  isValid(){
-    return this.state.isValid;
-  },
-
-  focusInput(){
-    this.inputDate.focus();
   }
 
-});
+  getValue = () => {
+    return this.state.value;
+  }
+  isValid = () => {
+    return this.state.isValid;
+  }
+  focusInput = () => {
+    this.inputDate.focus();
+  }
+}
 
-export default ZhDateField;
+export default ZhDateField

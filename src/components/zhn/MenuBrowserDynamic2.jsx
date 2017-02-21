@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Browser from './Browser';
 import CaptionRow from '../CaptionRow';
@@ -39,66 +39,64 @@ const STYLE = {
   }
 };
 
-
-const MenuBrowserDynamic2 = React.createClass({
-  getInitialState(){
-    const { isInitShow } = this.props;
-
+class MenuBrowserDynamic2 extends Component {
+  constructor(props){
+    super();
+    const { isInitShow } = props;
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handlerClickInfo },
-      { caption: 'S', onClick: this._handlerClickSearch }
+      { caption: 'I', onClick: this._handleClickInfo.bind(this) },
+      { caption: 'S', onClick: this._handleClickSearch.bind(this) }
     ];
-
-    return {
+    this.state = {
       isShow: isInitShow ? true : false,
       isShowSearch : false,
       scrollClass : CLASS.BROWSER,
       isLoaded : false,
       menuItems: []
     }
-  },
+  }
 
   componentWillMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
-  },
+  }
   componentDidMount(){
     this._loadMenu();
-  },
+  }
   componentWillUpdate(nextProps, nextState){
      if (!nextState.isLoaded && nextState.isShow){
        this._loadMenu();
      }
-  },
+  }
   componentWillUnmount(){
     this.unsubscribe();
-  },
+  }
 
-  _loadMenu(){
+  _loadMenu = () => {
     const { browserType, caption, sourceMenuUrl, onLoadMenu } = this.props;
     onLoadMenu({ browserType, caption, sourceMenuUrl });
-  },
+  }
 
-  _onStore(actionType, data){
+  _onStore = (actionType, data) => {
     const { browserType, showAction, loadCompletedAction } = this.props;
     if (actionType === showAction && data === browserType){
-      this._handlerShow();
+      this._handleShow();
     } else if (actionType === loadCompletedAction && data.browserType === browserType){
       this.setState({ menuItems: data.json, isLoaded : true });
     }
-  },
+  }
 
-  _handlerHide(){
+  _handleHide = () => {
     this.setState({isShow : false});
-  },
-  _handlerShow(){
+  }
+  _handleShow = () => {
     this.setState({isShow : true});
-  },
+  }
 
-  _handlerClickInfo(){
+  _handleClickInfo = () => {
     const {descrUrl, onClickInfo} = this.props;
     onClickInfo({ descrUrl });
-  },
-  _handlerClickSearch(){
+  }
+  _handleClickSearch = () => {
     if (this.state.isShowSearch){
       this.setState({
          isShowSearch: false,
@@ -110,20 +108,19 @@ const MenuBrowserDynamic2 = React.createClass({
          scrollClass: CLASS.BROWSER_WITH_SEARCH
        });
     }
-  },
+  }
 
-
-  _handlerClickItem(item){
+  _handleClickItem = (item) => {
     const {
       modalDialogType, browserType, chartContainerType,
       onShowLoadDialog, onShowContainer
     } = this.props;
-    
+
     onShowLoadDialog(modalDialogType, {
       item, browserType, chartContainerType,
       onShow : onShowContainer
     });
-  },
+  }
 
   render(){
     const {
@@ -139,7 +136,7 @@ const MenuBrowserDynamic2 = React.createClass({
                        placeholder={SEARCH_PLACEHOLDER}
                        data={menuItems}
                        ItemOptionComp={ItemOptionComp}
-                       onSelect={this._handlerClickItem}
+                       onSelect={this._handleClickItem}
                      />
                    </ShowHide>
                  )
@@ -151,7 +148,7 @@ const MenuBrowserDynamic2 = React.createClass({
        <Browser isShow={isShow} style={STYLE.BROWSER}>
           <CaptionRow
              caption={caption}
-             onClose={this._handlerHide}
+             onClose={this._handleHide}
           />
           <ToolbarButtonCircle
             buttons={this.toolbarButtons}
@@ -164,14 +161,13 @@ const MenuBrowserDynamic2 = React.createClass({
             <MenuListType2
                model={menuItems}
                ItemComp={ItemComp}
-               onClickItem={this._handlerClickItem}
+               onClickItem={this._handleClickItem}
             />
             {children}
           </ScrollPane>
        </Browser>
     )
   }
-});
-
+}
 
 export default MenuBrowserDynamic2;

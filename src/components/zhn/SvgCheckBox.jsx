@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const styles = {
   rootDiv : {
@@ -12,31 +12,32 @@ const styles = {
   }
 }
 
-const SvgCheckBox = React.createClass({
+class SvgCheckBox extends Component {
+  constructor(props){
+    super();
 
-  getInitialState(){
-    const isOnCheck = (typeof this.props.onCheck === 'function') ? true : false
-        , isOnUnCheck = (typeof this.props.onUnCheck === 'function') ? true : false;
+    const { onCheck, onUnCheck, chartType } = props
+        , isOnCheck = (typeof onCheck === 'function') ? true : false
+        , isOnUnCheck = (typeof onUnCheck === 'function') ? true : false;
 
-    this.chartType = (this.props.chartType) ? this.props.chartType : 'Uknown';
-    return {
-      isChecked: false,
-      isOnCheck,
-      isOnUnCheck
+    this.chartType = (chartType) ? chartType : 'Uknown';
+
+    this.state = {
+        isChecked: false,
+        isOnCheck,
+        isOnUnCheck
     }
-  },
+  }
 
-  _handlerClick(){
+  _handleClick = () => {
     const {isChecked, isOnCheck, isOnUnCheck} = this.state;
-
     if (!isChecked && isOnCheck){
       this.props.onCheck(this);
     } else if (isOnUnCheck){
       this.props.onUnCheck(this);
     }
-
     this.setState({isChecked: !isChecked});
-  },
+  }
 
   render(){
     const {rootStyle} = this.props;
@@ -56,7 +57,7 @@ const SvgCheckBox = React.createClass({
     return (
       <div
            style={Object.assign({}, styles.rootDiv, rootStyle)}
-           onClick={this._handlerClick}
+           onClick={this._handleClick}
       >
         <svg viewBox="0 0 16 16" width="100%" height="100%"
              preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
@@ -74,12 +75,11 @@ const SvgCheckBox = React.createClass({
 
       </div>
     )
-  },
-
-  setUnchecked(){
-    this.setState({isChecked : false});
   }
 
-})
+  setUnchecked = () => {
+    this.setState({ isChecked : false });
+  }
+}
 
-export default SvgCheckBox;
+export default SvgCheckBox

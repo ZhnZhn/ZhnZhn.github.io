@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const styles = {
-  rootDiv: {
+const S = {
+  ROOT: {
     zIndex : 1030,
     position: 'absolute',
     top: '70px',
@@ -22,40 +22,39 @@ const getObjToFirst = function(arr, keyValue){
 }
 
 
-const DialogContainer3 = React.createClass({
-  getInitialState: function(){
+class DialogContainer3 extends Component {
+  constructor(props){
+    super();
     this._activeDialogs = [];
-    return {
+    this.state = {
       dialog: {},
       compDialogs : []
     }
-  },
+  }
 
-   componentWillMount: function(){
+   componentWillMount(){
      this.unsubscribe = this.props.store.listen(this._onStore);
-   },
-
-   componentWillUnmount: function(){
+   }
+   componentWillUnmount(){
      this.unsubscribe();
-   },
+   }
 
-   _checkActiveDialogs(dialogType){
+   _checkActiveDialogs = (dialogType) => {
      this._activeDialogs.push(dialogType);
      if (this._activeDialogs.length > this.props.maxDialog){
        this.state.dialog[this._activeDialogs[0]] = false;
        this._activeDialogs = this._activeDialogs.slice(1);
      }
-   },
-   filterActiveDialogs(dialogType){
+   }
+   filterActiveDialogs = (dialogType) => {
      this._activeDialogs = this._activeDialogs.filter((value) => {
          return value !== dialogType;
      })
-   },
+   }
 
-   _onStore: function(actionType, data){
+   _onStore = (actionType, data) => {
       const {initAction, showAction} = this.props;
       if (actionType === showAction){
-
          if (!this.state.dialog[data]){
             this.state.dialog[data] = true;
             this._checkActiveDialogs(data);
@@ -64,16 +63,14 @@ const DialogContainer3 = React.createClass({
          this.setState(this.state);
 
       } else if (actionType === initAction) {
-
          this.state.dialog[data.dialogType] = true;
          this.state.compDialogs.push(data.dialogComp);
          this._checkActiveDialogs(data.dialogType);
          this.setState(this.state);
-
       }
-   },
+   }
 
-  _handlerToggleDialog: function(dialogType){
+  _handlerToggleDialog = (dialogType) => {
     const {dialog} = this.state;
     dialog[dialogType] = !dialog[dialogType];
     this.setState(this.state);
@@ -82,9 +79,9 @@ const DialogContainer3 = React.createClass({
       this.filterActiveDialogs(dialogType);
       document.getElementsByTagName('html')[0].style.cursor = '';
     }
-  },
+  }
 
-  _renderDialogs(){
+  _renderDialogs = () => {
     const {dialog, compDialogs} = this.state;
     return compDialogs.map((compDialog, index) => {
        return React.cloneElement(compDialog,
@@ -94,16 +91,15 @@ const DialogContainer3 = React.createClass({
              onClose : this._handlerToggleDialog.bind(this, compDialog.key)
           });
     })
-  },
+  }
 
   render(){
     return (
-      <div style={styles.rootDiv}>
+      <div style={S.ROOT}>
         {this._renderDialogs()}
       </div>
     );
   }
-
-});
+}
 
 export default DialogContainer3;

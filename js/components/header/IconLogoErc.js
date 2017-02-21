@@ -10,16 +10,6 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const STYLE = {
-  ROOT : {
-    position: 'absolute',
-    top: '7px',
-    left: '5px'
-  }
-}
-*/
-
 var IconLogoErc = function IconLogoErc(_ref) {
   var className = _ref.className,
       title = _ref.title;
@@ -29,7 +19,6 @@ var IconLogoErc = function IconLogoErc(_ref) {
     {
       className: className,
       title: title
-      //style={STYLE.ROOT}
     },
     _react2.default.createElement(
       "svg",

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Browser from './Browser';
 import CaptionRow from '../CaptionRow';
 import ScrollPane from './ScrollPane';
 import MenuPart from './MenuPart';
 
-const Styles = {
-  browser : {
+const S = {
+  BROWSER : {
     paddingRight: '0px'
   },
-  scrollDiv : {
+  SCROLL_DIV : {
     overflowY: 'auto',
     height: '92%',
     //height: 'calc(100vh - 90px)',
@@ -17,63 +17,61 @@ const Styles = {
   }
 };
 
-
-const MenuBrowser = React.createClass({
-  getInitialState: function(){
-    const {store, browserType, isShow} = this.props;
-    return {
+class MenuBrowser extends Component {
+  constructor(props){
+    super();
+    const {store, browserType, isShow} = props;
+    this.state = {
       isShow: isShow ? true : false,
       menuItems: store.getBrowserMenu(browserType)
     }
-  },
+  }
 
-  componentWillMount: function(){
+  componentWillMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
-  },
-  componentWillUnmount: function(){
+  }
+  componentWillUnmount(){
     this.unsubscribe();
-  },
+  }
 
-  _onStore: function(actionType, data){
+  _onStore = (actionType, data) => {
      const {browserType, store, showAction, updateAction} = this.props;
-
      if (actionType === showAction && data === browserType ){
-      this._handlerShow();
-    } else if (actionType === updateAction && data === browserType){
+      this._handleShow();
+     } else if (actionType === updateAction && data === browserType){
       this.setState({menuItems: store.getBrowserMenu(browserType)})
-    }
-  },
+     }
+  }
 
-  _handlerHide: function(){
+  _handleHide = () => {
     this.setState({isShow : false});
-  },
-  _handlerShow: function(){
+  }
+  _handleShow = () => {
     this.setState({isShow : true});
-  },
+  }
 
-  _renderMenuParts(menuItems){
+  _renderMenuParts = (menuItems) => {
     return menuItems.map((menuPart, index) => {
       return (<MenuPart key={index} {...menuPart} />)
     });
-  },
+  }
 
-  render: function(){
+  render(){
     const { caption, children } = this.props
         , { menuItems, isShow } = this.state;
     return (
-       <Browser isShow={isShow} style={Styles.browser}>
+       <Browser isShow={isShow} style={S.BROWSER}>
           <CaptionRow
              caption={caption}
-             onClose={this._handlerHide}
+             onClose={this._handleHide}
           />
-          <ScrollPane style={Styles.scrollDiv}>
+          <ScrollPane style={S.SCROLL_DIV}>
             {this._renderMenuParts(menuItems)}
             {children}
           </ScrollPane>
        </Browser>
     )
   }
-});
+}
 
-
-export default MenuBrowser;
+export default MenuBrowser

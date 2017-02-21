@@ -4,6 +4,16 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-select\\ItemOption.jsx",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-select\\ItemOption.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,QAAQ;AACZ,WAAU;AACR,WAAO,MAAP;AACA,gBAAY,QAAZ;AACA,cAAU,QAAV;AACA,kBAAc,UAAd;GAJF;CADI;;AASN,IAAM,aAAa,SAAb,UAAa,CAAC,KAAD,EAAW;MACpB,OAAsB,MAAtB,KADoB;MACd,cAAgB,MAAhB,YADc;;AAE5B,SACE;;MAAK,OAAO,MAAM,OAAN,EAAZ;IACG,KAAK,WAAL,CADH;GADF,CAF4B;CAAX;;kBASJ"
+ "names": [
+  "S",
+  "CAPTION",
+  "width",
+  "whiteSpace",
+  "overflow",
+  "textOverflow",
+  "ItemOption",
+  "item",
+  "propCaption"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAU;AACRC,WAAO,MADC;AAERC,gBAAY,QAFJ;AAGRC,cAAU,QAHF;AAIRC,kBAAc;AAJN;AADF,CAAV;;AASA,IAAMC,aAAa,SAAbA,UAAa;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,EAAR;AAAA,MAAYC,WAAZ,QAAYA,WAAZ;AAAA,SACjB;AAAA;AAAA,MAAK,OAAOR,EAAEC,OAAd;AACGM,SAAKC,WAAL;AADH,GADiB;AAAA,CAAnB;;kBAMeF,U"
 }

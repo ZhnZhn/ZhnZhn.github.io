@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { Component } from 'react';
 
 const styles = {
   rootDiv: {
@@ -20,43 +19,46 @@ const styles = {
   }
 };
 
-const OpenClose = React.createClass({
-   getInitialState: function(){
-      const isOpen = (this.props.isClose) ? false : true;
-      return {
-        isOpen: isOpen,
-        pathOpen: "M 2,14 L 14,14 14,2 2,14",
-        fillOpen: "yellow",
-        pathClose: "M 2,2 L 14,8 2,14 2,2",
-        fillClose: "#4D4D4D"
-      };
-   },
+class OpenClose extends Component {
+   constructor(props){
+     super();
+     const isOpen = (props.isClose) ? false : true;
+     this.state = {
+       isOpen: isOpen,
+       pathOpen: "M 2,14 L 14,14 14,2 2,14",
+       fillOpen: "yellow",
+       pathClose: "M 2,2 L 14,8 2,14 2,2",
+       fillClose: "#4D4D4D"
+     }
+   }
 
-  _handlerClickOpenClose: function(){
-    this.state.isOpen = !this.state.isOpen;
-    this.setState(this.state);
-  },
+  _handleClickOpenClose = () => {
+    this.setState(prev => ({ isOpen: !prev.isOpen }));
+  }
 
-
-  render: function(){
-
+  render(){
+    const { caption, children } = this.props
+        , {
+            isOpen,
+            pathOpen, fillOpen,
+            pathClose, fillClose
+          } = this.state;
     let pathV, fillV, displayDivStyle, classShow;
-    if (this.state.isOpen){
-      pathV = this.state.pathOpen;
-      fillV = this.state.fillOpen;
+    if (isOpen){
+      pathV = pathOpen;
+      fillV = fillOpen;
       displayDivStyle = 'block';
       classShow = 'show-popup';
-
     } else {
-      pathV = this.state.pathClose;
-      fillV = this.state.fillClose;
+      pathV = pathClose;
+      fillV = fillClose;
       displayDivStyle = 'none';
       classShow = null;
     }
 
     return (
       <div style={styles.rootDiv}>
-        <div className="not-selected" onClick={this._handlerClickOpenClose}>
+        <div className="not-selected" onClick={this._handleClickOpenClose}>
           <div style={{width: '16px', height: '16px', display: 'inline-block'}}>
              <svg
                 viewBox="0 0 16 16" width="100%" height="100%"
@@ -72,15 +74,15 @@ const OpenClose = React.createClass({
              </svg>
          </div>
          <span style={styles.labelCaption} >
-            {this.props.caption}
+            {caption}
          </span>
       </div>
       <div className={classShow} style={{display: displayDivStyle}}>
-        {this.props.children}
+        {children}
       </div>
      </div>
-    )
-  }
-});
+    );
+   }
+}
 
-export default OpenClose;
+export default OpenClose

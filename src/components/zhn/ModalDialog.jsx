@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes} from 'react';
 
 import SvgClose from '../SvgClose.js';
 import ToolBarButton from '../ToolBarButton.js';
@@ -46,29 +46,25 @@ const Styles = {
   }
 };
 
+class ModalDialog extends Component {
+   static propTypes = {
+     isShow : PropTypes.bool,
+     isWithButton : PropTypes.bool,
+     timeout : PropTypes.number,
+     caption : PropTypes.string,
+     style : PropTypes.object,
+     onClose : PropTypes.func
+   }
+   static defaultProps = {
+     isWithButton : true,
+     isNotUpdate : false,
+     timeout : 450
+   }
 
-const ModalDialog = React.createClass({
-   displayName : 'ModalDialog',
-   propTypes : {
-     isShow : React.PropTypes.bool,
-     isWithButton : React.PropTypes.bool,
-     timeout : React.PropTypes.number,
-     caption : React.PropTypes.string,
-     style : React.PropTypes.object,
-     onClose : React.PropTypes.func
-   },
-   getDefaultProps(){
-     return {
-       isWithButton : true,
-       isNotUpdate : false,
-       timeout : 450
-
-     }
-   },
-   getInitialState(){
+   constructor(props){
+     super()
      this.wasClosing = false;
-     return {}
-   },
+   }
 
    shouldComponentUpdate(nextProps, nextState){
      if (nextProps !== this.props){
@@ -77,7 +73,7 @@ const ModalDialog = React.createClass({
        }
      }
      return true;
-   },
+   }
 
    componentDidUpdate(prevProps, prevState){
      if (this.wasClosing){
@@ -85,13 +81,13 @@ const ModalDialog = React.createClass({
          this.setState({});
        }, this.props.timeout)
      }
-   },
+   }
 
-  _handlerClickDialog(event){
+  _handleClickDialog = (event) => {
     event.stopPropagation();
-  },
+   }
 
-  _renderCommandButton: function(){
+  _renderCommandButton = () => {
     const {commandButtons, onClose} = this.props;
     return (
       <div style={Styles.COMMAND_DIV}>
@@ -103,7 +99,7 @@ const ModalDialog = React.createClass({
         />
       </div>
     );
-  },
+  }
 
   render(){
     const {
@@ -129,23 +125,19 @@ const ModalDialog = React.createClass({
          <div
              className={_className}
              style={Object.assign({}, Styles.ROOT_DIV, style, _style)}
-             onClick={this._handlerClickDialog}
+             onClick={this._handleClickDialog}
          >
-              <div style={Styles.CAPTON_DIV}>
-                 <span style={styleCaption}>{caption}</span>
-                 <SvgClose onClose={onClose} />
-              </div>
-
+             <div style={Styles.CAPTON_DIV}>
+                <span style={styleCaption}>{caption}</span>
+                <SvgClose onClose={onClose} />
+             </div>
              <div>
                {children}
              </div>
-
             {isWithButton && this._renderCommandButton()}
-
         </div>
     );
   }
-
-});
+}
 
 export default ModalDialog;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { ComponentActionTypes } from '../../flux/actions/ComponentActions';
 import { ChartActionTypes } from '../../flux/actions/ChartActions';
@@ -35,20 +35,30 @@ const Styles = {
   }
 };
 
-const About = React.createClass({
+//const About = React.createClass({
+class About extends Component {
+  constructor(props){
+    super();
+    this.state = {
+      isShow : props.isShow
+    }
+  }
+
+  /*
   getInitialState(){
     return {
       isShow : this.props.isShow
     }
   },
+  */
 
   componentWillMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
-  },
+  }
   componentWillUnmount(){
     this.unsubscribe();
-  },
-  _onStore(actionType, data){
+  }
+  _onStore = (actionType, data) => {
     if (actionType === ComponentActionTypes.SHOW_ABOUT){
       this.setState({isShow : true});
     } else if (actionType === ChartActionTypes.INIT_AND_SHOW_CHART){
@@ -56,11 +66,12 @@ const About = React.createClass({
     } else if (actionType === ChartActionTypes.SHOW_CHART){
       this.setState({isShow : false});
     }
-  },
+  }
 
-  _handlerClose(){
+  _handleClose = () => {
     this.setState({ isShow : false });
-  },
+  }
+
   render(){
     const { isShow } = this.state
         ,  _classOpen = isShow
@@ -76,9 +87,9 @@ const About = React.createClass({
        >
          <CaptionRow
             caption="About"
-            onClose={this._handlerClose}
+            onClose={this._handleClose}
          />
-
+         
          <ScrollPane style={Styles.scrollDiv}>
 
          <div style={Styles.DIV_WRAPPER}>
@@ -228,6 +239,7 @@ const About = React.createClass({
       </div>
     );
   }
-});
+}
+//});
 
 export default About

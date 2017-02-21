@@ -1,7 +1,8 @@
 import React from 'react';
 
-const styles = {
-  rootSpan : {
+const NOT_SELECTED = 'not-selected';
+const S = {
+  ROOT : {
     display : 'inline-block',
     color: '#80c040',
     border : '2px solid #80c040',
@@ -11,13 +12,19 @@ const styles = {
     textAlign: 'center',
     cursor: 'pointer'
   }
-}
+};
 
-const ButtonCircle = React.createClass({
-  render(){
-    const {caption, className, style, isWithoutDefault, onClick} = this.props
-        , _className = (className) ? className + ' not-selected' : 'not-selected'
-        , _style = (isWithoutDefault) ? style : Object.assign({}, styles.rootSpan, style);
+const ButtonCircle = (props) => {
+    const {
+           caption='', className, style,
+           isWithoutDefault, onClick
+         } = props
+        , _className = (className)
+             ? `${className} ${NOT_SELECTED}`
+             : NOT_SELECTED
+        , _style = (isWithoutDefault)
+             ? style
+             : Object.assign({}, S.ROOT, style);
     return (
       <span
          className={_className}
@@ -27,7 +34,6 @@ const ButtonCircle = React.createClass({
          {caption}
       </span>
     );
-  }
-});
+}
 
 export default ButtonCircle

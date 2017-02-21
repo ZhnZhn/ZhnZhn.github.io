@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ModalDialog from '../zhn/ModalDialog';
 import InputSecret from '../zhn/InputSecret';
@@ -10,29 +10,27 @@ import DialogStyles from '../styles/DialogStyles'
 
 const styles = DialogStyles;
 
-const SettingsDialog = React.createClass({
+class SettingsDialog extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
-  },
+  }
 
-  _handlerSet(){
-    ChartStore.setQuandlKey(this.refs.input.getValue());
+  _handleSet = () => {
+    ChartStore.setQuandlKey(this.inputEl.getValue());
     this.props.onClose();
-  },
+  }
 
   render(){
-
-
     const commandButtons =[
        <ToolBarButton
           key="a"
           type="TypeC"
           caption="Set"
-          onClick={this._handlerSet}
+          onClick={this._handleSet}
        />
     ];
     const {isShow, onClose} = this.props;
@@ -43,18 +41,18 @@ const SettingsDialog = React.createClass({
             commandButtons={commandButtons}
             onClose={onClose}
          >
-           <div style={styles.rowDiv} key="1">
+           <div style={styles.rowDiv}>
               <span style={styles.labelSpan}>
                 Quandl:
               </span>
               <InputSecret
-                 ref="input"
+                 ref={ c => this.inputEl = c}
                  placeholder="Quandl API Key"
               />
            </div>
          </ModalDialog>
     )
   }
-});
+}
 
 export default SettingsDialog

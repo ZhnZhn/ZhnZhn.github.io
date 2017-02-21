@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ChartStore from '../flux/stores/ChartStore';
@@ -12,8 +12,10 @@ import ScrollPane from './zhn/ScrollPane';
 
 import ItemFactory from './factories/ItemFactory';
 
-const CSS_CLASS_SHOW_POPUP = "show-popup"
-    , CHILD_MARGIN = 36;
+const SHOW_POPUP = "show-popup"
+    , CHILD_MARGIN = 36
+    , RESIZE_MIN_WIDTH = 600
+    , RESIZE_MAX_WIDTH = 1200;
 
 const styles = {
   rootDiv : {
@@ -50,11 +52,18 @@ const styles = {
     transitionName : "scaleY",
     transitionEnterTimeout : 400,
     transitionLeave : false
+  },
+  inlineBlock : {
+    display : 'inline-block'
+  },
+  none : {
+    display: 'none'
   }
 };
 
-const isInArray = function(array, value){
-  for (let i=0, len=array.length; i<len; i++){
+const isInArray = function(array=[], value){
+  let i=0, len=array.length;
+  for (; i<len; i++){
     if (array[i] === value){
       return true;
     }
@@ -68,69 +77,71 @@ const compActions = [
   ChartActionTypes.CLOSE_CHART
 ];
 
-const ChartContainer2 = React.createClass({
-  getInitialState(){
+
+class ChartContainer2 extends Component {
+
+  constructor(props){
+    super();
     this.childMargin = CHILD_MARGIN;
-    return {};
-  },
+    this.state = {};
+  }
 
-   componentWillMount(){
-     this.unsubscribe = ChartStore.listen(this._onStore);
-     this.setState(ChartStore.getConfigs(this.props.chartType));
-   },
-   componentWillUnmount(){
-     this.unsubscribe();
-   },
+  componentWillMount(){
+    this.unsubscribe = ChartStore.listen(this._onStore);
+    this.setState(ChartStore.getConfigs(this.props.chartType));
+  }
+  componentWillUnmount(){
+    this.unsubscribe();
+  }
 
-   _onStore(actionType, data){
+   _onStore = (actionType, data) => {
       if (isInArray(compActions, actionType)) {
         if (data && data.chartType === this.props.chartType){
           this.setState(data);
         }
       } else if (actionType === ComponentActionTypes.CLOSE_CHART_CONTAINER_2){
          if (data === this.props.chartType){
-           this._handlerHide();
+           this._handleHide();
          }
       }
-   },
+   }
 
-   _handlerHide(){
+   _handleHide = () => {
       const { chartType, browserType, onCloseContainer } = this.props;
       onCloseContainer(chartType, browserType);
       this.setState({ isShow: false });
-   },
+   }
 
-   _handlerResizeAfter(parentWidth){
-     for (let i=0, max = this.state.configs.length; i<max; i++){
+   _handleResizeAfter = (parentWidth) => {
+     let i=0, max = this.state.configs.length;
+     for (; i<max; i++){
         if (typeof this.refs['chart' + i].reflowChart === 'function'){
           this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
         }
      }
-   },
+   }
 
-   _renderCharts(){
+   _renderCharts = () => {
      const { chartType, browserType, onCloseItem } = this.props;
-
      return this.state.configs.map((config, index) => {
-       const { zhConfig } = config
-          ,  { id } = zhConfig
-
+       const { zhConfig={} } = config
+           , { id } = zhConfig;
        return ItemFactory.createItem(
              config, index,
              { chartType },
              { onCloseItem : onCloseItem.bind(null, chartType, browserType, id) }
        );
      });
-   },
+   }
 
    render(){
-     const { isShow } = this.state
-
+     const  { caption } = this.props
+          , { isShow } = this.state
           , _styleIsShow = (isShow)
-               ? {display: 'inline-block'}
-               : {display: 'none'}
+               ? styles.inlineBlock
+               : styles.none
          , _classIsShow = (isShow)
-               ? CSS_CLASS_SHOW_POPUP
+               ? SHOW_POPUP
                : undefined;
      return(
         <div
@@ -138,14 +149,14 @@ const ChartContainer2 = React.createClass({
            style={Object.assign({}, styles.rootDiv, _styleIsShow)}
         >
           <CaptionRow
-             caption={this.props.caption}
-             onClose={this._handlerHide}
+             caption={caption}
+             onClose={this._handleHide}
           >
              <SvgHrzResize
-               minWidth={600}
-               maxWidth={1200}
+               minWidth={RESIZE_MIN_WIDTH}
+               maxWidth={RESIZE_MAX_WIDTH}
                comp={this}
-               onResizeAfter={this._handlerResizeAfter}
+               onResizeAfter={this._handleResizeAfter}
              />
           </CaptionRow>
 
@@ -161,6 +172,6 @@ const ChartContainer2 = React.createClass({
         </div>
      )
    }
-})
+}
 
-export default ChartContainer2;
+export default ChartContainer2

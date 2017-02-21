@@ -4,6 +4,9 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\IconEurostat.jsx",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconEurostat.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,eAAe,SAAf,YAAe,CAAC,KAAD,EAAW;AAC9B,SACE;;;AACE,iBAAU,gBAAV;AACA,aAAM,UAAN;AACA,YAAK,8BAAL;KAHF;;GADF,CAD8B;CAAX;;kBAYN"
+ "names": [
+  "IconEurostat",
+  "props"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,eAAe,SAAfA,YAAe,CAACC,KAAD;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,gBADZ;AAEE,aAAM,UAFR;AAGE,YAAK;AAHP;AAAA;AAAA,GADmB;AAAA,CAArB;;kBAUeD,Y"
 }

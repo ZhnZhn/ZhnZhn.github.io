@@ -6,6 +6,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _ravenJs = require('raven-js');
+
+var _ravenJs2 = _interopRequireDefault(_ravenJs);
+
 var _AppErc = require('./components/AppErc');
 
 var _AppErc2 = _interopRequireDefault(_AppErc);
@@ -15,6 +19,12 @@ var _ChartConfig = require('./charts/ChartConfig');
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* eslint-disable no-undef */
+if (process.env.NODE_ENV === 'production') {
+  /* eslint-enable no-undef */
+  _ravenJs2.default.config('https://f3e7d09d8d0748af80791d51e5bc83e3@sentry.io/138634').install();
+}
 
 var _fnRenderApp = function _fnRenderApp() {
   document.body.removeChild(document.getElementById('preloader'));

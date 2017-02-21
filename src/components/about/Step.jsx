@@ -1,6 +1,6 @@
 import React from 'react';
 
-const STYLES = {
+const S = {
   STEP : {
     display : 'inline-block',
     color: '#80c040',
@@ -12,12 +12,10 @@ const STYLES = {
   }
 }
 
-const Step = (props) => {
-    return (
-      <span style={STYLES.STEP}>
-         {props.step}
-      </span>
-    );
-};
+const Step = ({ step='0' }) => (
+  <span style={S.STEP}>
+      {step}
+  </span>
+);
 
 export default Step

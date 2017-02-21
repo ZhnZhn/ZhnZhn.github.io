@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import SvgClose from './SvgClose';
 import ToolBarButton from './ToolBarButton';
@@ -35,14 +35,12 @@ const styles = {
   }
 };
 
-
-const ZhDialog = React.createClass({
-
+class ZhDialog extends Component {
   componentDidMount(){
-     Interact.makeDragable(this.domRootDiv);
-  },
+     Interact.makeDragable(this.rootDivEl);
+  }
 
-  _renderCommandButton(commandButtons, onShowChart, onClose){
+  _renderCommandButton = (commandButtons, onShowChart, onClose) => {
     return (
       <div style={styles.commandDiv}>
         {commandButtons}
@@ -58,7 +56,7 @@ const ZhDialog = React.createClass({
         />
       </div>
     );
-  },
+  }
 
   render(){
     const {
@@ -67,10 +65,9 @@ const ZhDialog = React.createClass({
          } = this.props
         , _styleShow = isShow ? {display: 'block'} : {display: 'none'}
         , _classShow = isShow ? 'show-popup' : undefined;
-
     return (
       <div
-           ref={c => this.domRootDiv = c}
+           ref={c => this.rootDivEl = c}
            className={_classShow}
            style={Object.assign({}, styles.rootDiv, _styleShow)}
       >
@@ -87,6 +84,6 @@ const ZhDialog = React.createClass({
       </div>
     );
   }
-});
+}
 
-export default ZhDialog;
+export default ZhDialog

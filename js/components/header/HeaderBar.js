@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -48,6 +50,12 @@ var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var styles = {
   rootDiv: {
     position: 'relative',
@@ -65,107 +73,120 @@ var styles = {
   }
 };
 
-var HeaderBar = _react2.default.createClass({
-  displayName: 'HeaderBar',
-  getInitialState: function getInitialState() {
-    return {
-      isDS: false
-    };
-  },
-  _handlerClickQuandl: function _handlerClickQuandl() {
-    //BrowserActions.showBrowser(BrowserType.QUANDL);
-    _BrowserActions2.default.showBrowser(_Type.BrowserType.ECONOMIC);
-    this.setState({ isDS: false });
-  },
-  _handlerClickDynamic: function _handlerClickDynamic(browserConfig) {
-    _BrowserActions2.default.showBrowserDynamic(browserConfig);
-    this.setState({ isDS: false });
-  },
-  _handlerClickWatch: function _handlerClickWatch() {
-    _BrowserActions2.default.showBrowser(_Type.BrowserType.WATCH_LIST);
-    this.setState({ isDS: false });
-  },
-  _handlerClickDS: function _handlerClickDS() {
-    this.setState({ isDS: !this.state.isDS });
-  },
-  render: function render() {
-    var store = this.props.store,
-        isDS = this.state.isDS;
+var HeaderBar = function (_Component) {
+  _inherits(HeaderBar, _Component);
 
-    return _react2.default.createElement(
-      'div',
-      { className: 'header', style: styles.rootDiv },
-      _react2.default.createElement(_ProgressLoading2.default, { store: store }),
-      _react2.default.createElement(_IconLogoErc2.default, {
-        className: 'header__icon-erc',
-        title: 'ERC : Economic RESTful Client v0.12.0'
-      }),
-      _react2.default.createElement(_AppLabel2.default, {
-        className: 'header__app-label',
-        caption: 'ERC v0.12.0'
-      }),
-      _react2.default.createElement(
-        _ToolBarButton2.default,
-        {
-          style: { marginTop: '8px', marginLeft: '10px' },
-          type: 'TypeA',
-          caption: 'DS',
-          title: 'Data Source Browsers',
-          onClick: this._handlerClickDS
-        },
-        _react2.default.createElement('span', { className: 'arrow-down' })
-      ),
-      _react2.default.createElement(_ToolBarButton2.default, {
-        style: { marginTop: '8px' },
-        type: 'TypeA',
-        caption: 'Quandl',
-        title: 'Quandl Economic Browser',
-        onClick: this._handlerClickQuandl
-      }),
-      _react2.default.createElement(_ToolBarButton2.default, {
-        style: { marginTop: '8px' },
-        type: 'TypeA',
-        caption: 'Eurostat',
-        title: 'European Statistics Browser',
-        onClick: this._handlerClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
-      }),
-      _react2.default.createElement(_ToolBarButton2.default, {
-        style: { marginTop: '8px' },
-        type: 'TypeA',
-        caption: 'Watch',
-        title: 'Watch List Browser',
-        onClick: this._handlerClickWatch
-      }),
-      _react2.default.createElement(_ToolBarButton2.default, {
-        type: 'TypeA',
-        style: { float: 'right', marginRight: '20px', marginTop: '8px' },
-        caption: 'About',
-        title: 'Description about application ERC',
-        onClick: _ComponentActions2.default.showAbout
-      }),
-      _react2.default.createElement(_ToolBarButton2.default, {
-        type: 'TypeA',
-        style: { float: 'right', marginTop: '8px' },
-        caption: 'Settings',
-        title: 'Application settings',
-        onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
-      }),
-      _react2.default.createElement(_LimitRemainingLabel2.default, {
-        store: store,
-        style: { float: 'right', paddingTop: '14px' }
-      }),
-      _react2.default.createElement(_PanelBrowsers2.default, {
-        className: 'header__panel-browser',
-        isShow: isDS,
-        BROWSER: _Type.BrowserType,
-        browserConfig: _BrowserConfig2.default,
-        onClickQuandl: this._handlerClickQuandl,
-        onClickDynamic: this._handlerClickDynamic,
-        onClickWatch: this._handlerClickWatch
-      })
-    );
+  function HeaderBar() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, HeaderBar);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      isDS: false
+    }, _this._handleClickQuandl = function () {
+      //BrowserActions.showBrowser(BrowserType.QUANDL);
+      _BrowserActions2.default.showBrowser(_Type.BrowserType.ECONOMIC);
+      _this.setState({ isDS: false });
+    }, _this._handleClickDynamic = function (browserConfig) {
+      _BrowserActions2.default.showBrowserDynamic(browserConfig);
+      _this.setState({ isDS: false });
+    }, _this._handleClickWatch = function () {
+      _BrowserActions2.default.showBrowser(_Type.BrowserType.WATCH_LIST);
+      _this.setState({ isDS: false });
+    }, _this._handleClickDS = function () {
+      _this.setState({ isDS: !_this.state.isDS });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-});
+
+  _createClass(HeaderBar, [{
+    key: 'render',
+    value: function render() {
+      var store = this.props.store,
+          isDS = this.state.isDS;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'header', style: styles.rootDiv },
+        _react2.default.createElement(_ProgressLoading2.default, { store: store }),
+        _react2.default.createElement(_IconLogoErc2.default, {
+          className: 'header__icon-erc',
+          title: 'ERC : Economic RESTful Client v0.12.0'
+        }),
+        _react2.default.createElement(_AppLabel2.default, {
+          className: 'header__app-label',
+          caption: 'ERC v0.12.0'
+        }),
+        _react2.default.createElement(
+          _ToolBarButton2.default,
+          {
+            style: { marginTop: '8px', marginLeft: '10px' },
+            type: 'TypeA',
+            caption: 'DS',
+            title: 'Data Source Browsers',
+            onClick: this._handleClickDS
+          },
+          _react2.default.createElement('span', { className: 'arrow-down' })
+        ),
+        _react2.default.createElement(_ToolBarButton2.default, {
+          style: { marginTop: '8px' },
+          type: 'TypeA',
+          caption: 'Quandl',
+          title: 'Quandl Economic Browser',
+          onClick: this._handleClickQuandl
+        }),
+        _react2.default.createElement(_ToolBarButton2.default, {
+          style: { marginTop: '8px' },
+          type: 'TypeA',
+          caption: 'Eurostat',
+          title: 'European Statistics Browser',
+          onClick: this._handleClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
+        }),
+        _react2.default.createElement(_ToolBarButton2.default, {
+          style: { marginTop: '8px' },
+          type: 'TypeA',
+          caption: 'Watch',
+          title: 'Watch List Browser',
+          onClick: this._handleClickWatch
+        }),
+        _react2.default.createElement(_ToolBarButton2.default, {
+          type: 'TypeA',
+          style: { float: 'right', marginRight: '20px', marginTop: '8px' },
+          caption: 'About',
+          title: 'Description about application ERC',
+          onClick: _ComponentActions2.default.showAbout
+        }),
+        _react2.default.createElement(_ToolBarButton2.default, {
+          type: 'TypeA',
+          style: { float: 'right', marginTop: '8px' },
+          caption: 'Settings',
+          title: 'Application settings',
+          onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
+        }),
+        _react2.default.createElement(_LimitRemainingLabel2.default, {
+          store: store,
+          style: { float: 'right', paddingTop: '14px' }
+        }),
+        _react2.default.createElement(_PanelBrowsers2.default, {
+          className: 'header__panel-browser',
+          isShow: isDS,
+          BROWSER: _Type.BrowserType,
+          browserConfig: _BrowserConfig2.default,
+          onClickQuandl: this._handleClickQuandl,
+          onClickDynamic: this._handleClickDynamic,
+          onClickWatch: this._handleClickWatch
+        })
+      );
+    }
+  }]);
+
+  return HeaderBar;
+}(_react.Component);
 
 exports.default = HeaderBar;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\HeaderBar.js.map

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const styles = {
   ulStyle : {
@@ -10,48 +10,32 @@ const styles = {
   }
 };
 
-const TabPane = React.createClass({
-  displayName : 'TabPane',
+class TabPane extends Component {
 
-  getInitialState(){
-    const components = this.props.children.map((tab, index) => {
+  constructor(props){
+    super();
+    const components = props.children.map((tab, index) => {
        return  React.cloneElement(tab.props.children, { key : 'comp' + index });
     })
-
-    return {
+    this.state = {
       selectedTabIndex : 0,
       components
     }
-  },
+  }
 
-  _handlerClickTab(index){
+  _handleClickTab = (index) => {
     this.setState({selectedTabIndex : index});
-  },
+  }
 
-  _renderTabs(children){
+  _renderTabs = (children) => {
        const {selectedTabIndex} = this.state;
        return children.map((tab, index) => {
           const isSelected = (index === selectedTabIndex) ? true : false;
-          return React.cloneElement(tab, { key : index, onClick : this._handlerClickTab.bind(null, index), isSelected })
+          return React.cloneElement(tab, { key : index, onClick : this._handleClickTab.bind(null, index), isSelected })
        })
-  },
+  }
 
-  _renderComponents(children){
-      const {selectedTabIndex} = this.state;
-      return children.map((tab, index) => {
-         const divStyle = (index === selectedTabIndex)
-                    ? {display: 'block', width: "100%", height : "100%"}
-                    : {display : 'none'};
-         const comp = React.cloneElement(tab.props.children, { key : index, ref : 'comp' + index});
-         return (
-             <div style={divStyle}>
-                {comp}
-             </div>
-           )
-      })
-  },
-
-  _renderComponents2(){
+  _renderComponents = () => {
       const {selectedTabIndex, components} = this.state;
       return components.map((comp, index) => {
          const divStyle = (index === selectedTabIndex)
@@ -63,7 +47,7 @@ const TabPane = React.createClass({
              </div>
            )
       })
-  },
+  }
 
   render(){
     const { children, width, height } = this.props;
@@ -73,16 +57,15 @@ const TabPane = React.createClass({
            {this._renderTabs(children)}
         </ul>
         <div style={ {width: "100%", height : "100%"}}>
-           {this._renderComponents2()}
+           {this._renderComponents()}
         </div>
       </div>
     )
-  },
-
-  getSelectedTabIndex(){
-    return this.state.selectedTabIndex;
   }
 
-});
+  getSelectedTabIndex = () => {
+    return this.state.selectedTabIndex;
+  }
+}
 
 export default TabPane

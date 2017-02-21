@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ZhDateField from './ZhDateField';
 import DialogStyles from './styles/DialogStyles';
 
 const styles = DialogStyles;
 
-const DatesFragment = React.createClass({
-  displayName : 'DatesFragment',
-  getDefaultProps(){
-    return  {
-      msgOnNotValidFormat : (item='Date') => `${item} is not in valid format`
-    }
-  },
+const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
+const NEAR_ERR_MSG = "From Date is near that To Date";
+
+class DatesFragment extends Component {
+  static defaultProps = {
+    msgOnNotValidFormat : (item='Date') => `${item} is not in valid format`
+  }
 
   render(){
-    const {initFromDate, initToDate, nForecastDate, onTestDate} = this.props;
+    const {
+            initFromDate, initToDate,
+            nForecastDate, onTestDate
+        } = this.props;
     return (
         <div>
           <div style={styles.rowDiv}>
@@ -24,7 +27,7 @@ const DatesFragment = React.createClass({
             <ZhDateField
                ref={c => this.fromDate = c}
                initValue={initFromDate}
-               errorMsg="YYYY-MM-DD format must be"
+               errorMsg={FORMAT_ERR_MSG}
                onTest={onTestDate}
             />
          </div>
@@ -36,42 +39,42 @@ const DatesFragment = React.createClass({
                  ref={c => this.toDate = c}
                  initValue={initToDate}
                  nForecastDate={nForecastDate}
-                 errorMsg="YYYY-MM-DD format must be"
+                 errorMsg={FORMAT_ERR_MSG}
                  onTest={onTestDate}
             />
          </div>
        </div>
     );
-  },
+  }
 
-  getValues(){
+  getValues = () => {
     return {
       fromDate: this.fromDate.getValue(),
       toDate: this.toDate.getValue()
     }
-  },
+  }
 
-  getValidation(){
-    const {msgOnNotValidFormat} = this.props
-        ,  datesMsg = [];
+  getValidation = () => {
+    const { msgOnNotValidFormat } = this.props
+        , datesMsg = [];
     if (!this.fromDate.isValid()) { datesMsg.push(msgOnNotValidFormat('From Date')); }
     if (!this.toDate.isValid())   { datesMsg.push(msgOnNotValidFormat('To Date')); }
 
     if (this.fromDate.getValue().trim() > this.toDate.getValue().trim() ) {
-      datesMsg.push('From Date is near that To Date');
+      datesMsg.push(NEAR_ERR_MSG);
     }
-    
+
     if (datesMsg.length>0){
       return { isValid: false, datesMsg }
     }
     return { isValid : true}
-  },
+  }
 
-  focusInput(){
+  focusInput = () => {
     this.fromDate.focusInput();
-  },
+  }
 
-  focusNotValidInput(){
+  focusNotValidInput = () => {
     if (!this.fromDate.isValid()){
        this.fromDate.focusInput();
        return true;
@@ -82,7 +85,6 @@ const DatesFragment = React.createClass({
     }
     return false;
   }
+}
 
-});
-
-export default DatesFragment;
+export default DatesFragment

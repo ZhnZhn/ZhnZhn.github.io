@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _rootDiv;
 
 var _react = require('react');
@@ -42,10 +44,18 @@ var _ItemFactory2 = _interopRequireDefault(_ItemFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var CSS_CLASS_SHOW_POPUP = "show-popup",
-    CHILD_MARGIN = 36;
+var SHOW_POPUP = "show-popup",
+    CHILD_MARGIN = 36,
+    RESIZE_MIN_WIDTH = 600,
+    RESIZE_MAX_WIDTH = 1200;
 
 var styles = {
   rootDiv: (_rootDiv = {
@@ -77,11 +87,22 @@ var styles = {
     transitionName: "scaleY",
     transitionEnterTimeout: 400,
     transitionLeave: false
+  },
+  inlineBlock: {
+    display: 'inline-block'
+  },
+  none: {
+    display: 'none'
   }
 };
 
-var isInArray = function isInArray(array, value) {
-  for (var i = 0, len = array.length; i < len; i++) {
+var isInArray = function isInArray() {
+  var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var value = arguments[1];
+
+  var i = 0,
+      len = array.length;
+  for (; i < len; i++) {
     if (array[i] === value) {
       return true;
     }
@@ -91,99 +112,121 @@ var isInArray = function isInArray(array, value) {
 
 var compActions = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, _ChartActions.ChartActionTypes.CLOSE_CHART];
 
-var ChartContainer2 = _react2.default.createClass({
-  displayName: 'ChartContainer2',
-  getInitialState: function getInitialState() {
-    this.childMargin = CHILD_MARGIN;
-    return {};
-  },
-  componentWillMount: function componentWillMount() {
-    this.unsubscribe = _ChartStore2.default.listen(this._onStore);
-    this.setState(_ChartStore2.default.getConfigs(this.props.chartType));
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    this.unsubscribe();
-  },
-  _onStore: function _onStore(actionType, data) {
-    if (isInArray(compActions, actionType)) {
-      if (data && data.chartType === this.props.chartType) {
-        this.setState(data);
+var ChartContainer2 = function (_Component) {
+  _inherits(ChartContainer2, _Component);
+
+  function ChartContainer2(props) {
+    _classCallCheck(this, ChartContainer2);
+
+    var _this = _possibleConstructorReturn(this, (ChartContainer2.__proto__ || Object.getPrototypeOf(ChartContainer2)).call(this));
+
+    _this._onStore = function (actionType, data) {
+      if (isInArray(compActions, actionType)) {
+        if (data && data.chartType === _this.props.chartType) {
+          _this.setState(data);
+        }
+      } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
+        if (data === _this.props.chartType) {
+          _this._handleHide();
+        }
       }
-    } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
-      if (data === this.props.chartType) {
-        this._handlerHide();
+    };
+
+    _this._handleHide = function () {
+      var _this$props = _this.props,
+          chartType = _this$props.chartType,
+          browserType = _this$props.browserType,
+          onCloseContainer = _this$props.onCloseContainer;
+
+      onCloseContainer(chartType, browserType);
+      _this.setState({ isShow: false });
+    };
+
+    _this._handleResizeAfter = function (parentWidth) {
+      var i = 0,
+          max = _this.state.configs.length;
+      for (; i < max; i++) {
+        if (typeof _this.refs['chart' + i].reflowChart === 'function') {
+          _this.refs['chart' + i].reflowChart(parentWidth - _this.childMargin);
+        }
       }
-    }
-  },
-  _handlerHide: function _handlerHide() {
-    var _props = this.props;
-    var chartType = _props.chartType;
-    var browserType = _props.browserType;
-    var onCloseContainer = _props.onCloseContainer;
+    };
 
-    onCloseContainer(chartType, browserType);
-    this.setState({ isShow: false });
-  },
-  _handlerResizeAfter: function _handlerResizeAfter(parentWidth) {
-    for (var i = 0, max = this.state.configs.length; i < max; i++) {
-      if (typeof this.refs['chart' + i].reflowChart === 'function') {
-        this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
-      }
-    }
-  },
-  _renderCharts: function _renderCharts() {
-    var _props2 = this.props;
-    var chartType = _props2.chartType;
-    var browserType = _props2.browserType;
-    var onCloseItem = _props2.onCloseItem;
+    _this._renderCharts = function () {
+      var _this$props2 = _this.props,
+          chartType = _this$props2.chartType,
+          browserType = _this$props2.browserType,
+          onCloseItem = _this$props2.onCloseItem;
 
+      return _this.state.configs.map(function (config, index) {
+        var _config$zhConfig = config.zhConfig,
+            zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
+            id = zhConfig.id;
 
-    return this.state.configs.map(function (config, index) {
-      var zhConfig = config.zhConfig;
-      var id = zhConfig.id;
+        return _ItemFactory2.default.createItem(config, index, { chartType: chartType }, { onCloseItem: onCloseItem.bind(null, chartType, browserType, id) });
+      });
+    };
 
-
-      return _ItemFactory2.default.createItem(config, index, { chartType: chartType }, { onCloseItem: onCloseItem.bind(null, chartType, browserType, id) });
-    });
-  },
-  render: function render() {
-    var isShow = this.state.isShow;
-
-    var _styleIsShow = isShow ? { display: 'inline-block' } : { display: 'none' };
-    var _classIsShow = isShow ? CSS_CLASS_SHOW_POPUP : undefined;
-    return _react2.default.createElement(
-      'div',
-      {
-        className: _classIsShow,
-        style: Object.assign({}, styles.rootDiv, _styleIsShow)
-      },
-      _react2.default.createElement(
-        _CaptionRow2.default,
-        {
-          caption: this.props.caption,
-          onClose: this._handlerHide
-        },
-        _react2.default.createElement(_SvgHrzResize2.default, {
-          minWidth: 600,
-          maxWidth: 1200,
-          comp: this,
-          onResizeAfter: this._handlerResizeAfter
-        })
-      ),
-      _react2.default.createElement(
-        _ScrollPane2.default,
-        { style: styles.scrollDiv },
-        _react2.default.createElement(
-          _reactAddonsCssTransitionGroup2.default,
-          _extends({}, styles.transitionOption, {
-            component: 'div'
-          }),
-          this._renderCharts()
-        )
-      )
-    );
+    _this.childMargin = CHILD_MARGIN;
+    _this.state = {};
+    return _this;
   }
-});
+
+  _createClass(ChartContainer2, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.unsubscribe = _ChartStore2.default.listen(this._onStore);
+      this.setState(_ChartStore2.default.getConfigs(this.props.chartType));
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unsubscribe();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var caption = this.props.caption,
+          isShow = this.state.isShow,
+          _styleIsShow = isShow ? styles.inlineBlock : styles.none,
+          _classIsShow = isShow ? SHOW_POPUP : undefined;
+
+      return _react2.default.createElement(
+        'div',
+        {
+          className: _classIsShow,
+          style: Object.assign({}, styles.rootDiv, _styleIsShow)
+        },
+        _react2.default.createElement(
+          _CaptionRow2.default,
+          {
+            caption: caption,
+            onClose: this._handleHide
+          },
+          _react2.default.createElement(_SvgHrzResize2.default, {
+            minWidth: RESIZE_MIN_WIDTH,
+            maxWidth: RESIZE_MAX_WIDTH,
+            comp: this,
+            onResizeAfter: this._handleResizeAfter
+          })
+        ),
+        _react2.default.createElement(
+          _ScrollPane2.default,
+          { style: styles.scrollDiv },
+          _react2.default.createElement(
+            _reactAddonsCssTransitionGroup2.default,
+            _extends({}, styles.transitionOption, {
+              component: 'div'
+            }),
+            this._renderCharts()
+          )
+        )
+      );
+    }
+  }]);
+
+  return ChartContainer2;
+}(_react.Component);
 
 exports.default = ChartContainer2;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ChartContainer2.js.map

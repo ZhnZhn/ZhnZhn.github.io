@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const HIDE_PERIOD = 300000
     , ANIMATION_PERIOD = 1100
@@ -17,16 +17,16 @@ const STYLE = {
   }
 }
 
-const ConsentCookiePopup = React.createClass({
-
-  getInitialState(){
+class ConsentCookiePopup extends Component{
+  constructor(props){
+    super();
     this.timeID = undefined;
     this.hideID = undefined;
-    return {
+    this.state = {
       isOpacity : true,
       isDisplay : true
     }
-  },
+  }
 
   componentDidMount(){
     this.timeID = setTimeout( () => {
@@ -37,31 +37,31 @@ const ConsentCookiePopup = React.createClass({
     setTimeout(()=>{
       this.setState({ isOpacity: false });
     }, 500);
-  },
+  }
 
-  _startHidingAnimation(){
+  _startHidingAnimation = () => {
     this.hideID = setTimeout(this._hidePopup, ANIMATION_PERIOD);
     this.setState({ isOpacity: true });
-  },
-  _hidePopup(){
+  }
+  _hidePopup = () => {
      this.setState({ isDisplay : false });
-  },
+  }
 
-  _handlerClickOk(){
+  _handleClickOk = () => {
     if (!this.hideId) {
       clearTimeout(this.timeID);
       this.props.onAnswerYes();
       this._startHidingAnimation();
     }
-  },
+  }
 
-  _handlerClickNo(){
+  _handleClickNo = () => {
     if (!this.hideId) {
       clearTimeout(this.timeID);
       this.props.onAnswerNo();
       this._startHidingAnimation();
     }
-  },
+  }
 
   render(){
     const { isOpacity, isDisplay } = this.state
@@ -70,8 +70,7 @@ const ConsentCookiePopup = React.createClass({
                : STYLE.ROOT__SHOW
         , _displayStyle = (isDisplay)
                ? undefined
-               : STYLE.ROOT_HIDE
-
+               : STYLE.ROOT_HIDE;
     return (
       <div
          className="consent"
@@ -83,13 +82,13 @@ const ConsentCookiePopup = React.createClass({
          <div className="consent__row">
            <span
               className="consent__btn"
-              onClick={this._handlerClickOk}
+              onClick={this._handleClickOk}
            >
               {BTN_OK_TITLE}
            </span>
            <span
               className="consent__btn"
-              onClick={this._handlerClickNo}
+              onClick={this._handleClickNo}
            >
               {BTN_NO_TITLE}
            </span>
@@ -97,6 +96,6 @@ const ConsentCookiePopup = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default ConsentCookiePopup

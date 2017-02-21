@@ -2,7 +2,7 @@ import React from 'react';
 
 import ItemOption from './ItemOption'
 
-const STYLE = {
+const S = {
   TOPIC : {
     width: '100%',
     whiteSpace : 'nowrap',
@@ -17,7 +17,7 @@ const ItemTopicOption = (props) => {
   return (
      <div>
        <ItemOption {...props} />
-       <div style={STYLE.TOPIC}>
+       <div style={S.TOPIC}>
          {item.topic}
        </div>
      </div>

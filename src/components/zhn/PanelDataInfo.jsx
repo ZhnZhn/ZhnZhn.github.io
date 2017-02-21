@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
@@ -49,25 +49,25 @@ const styles = {
   }
 }
 
-const PanelDataInfo = React.createClass({
+class PanelDataInfo extends Component {
 
-  _renderQuandlLink(dbCode, dsCode){
+  _renderQuandlLink = (dbCode, dsCode) => {
     if (!dbCode || !dsCode){
-      return undefined;
+      return null;
     } else {
       const Comp = RouterNativeLink['QUANDL'];
       return (<Comp dbCode={dbCode} dsCode={dsCode} />);
     }
-  },
+  }
 
-  _renderNativeLink(linkFn, item){
+  _renderNativeLink = (linkFn, item) => {
     const Comp = RouterNativeLink[linkFn]
     if (typeof Comp !== 'undefined') {
       return (<Comp item={item} />);
     } else {
-      return undefined;
+      return null;
     }
-  },
+  }
 
   render(){
     const {isShow, info, zhInfo={}, onClickChart } = this.props
@@ -86,7 +86,7 @@ const PanelDataInfo = React.createClass({
         , _isDescriptionClose = (description.length>200)
                 ? true
                 : false;
-             
+
     return (
        <div style={styleShow}>
          <ButtonTab
@@ -138,6 +138,6 @@ const PanelDataInfo = React.createClass({
        </div>
     )
   }
-});
+}
 
 export default PanelDataInfo
