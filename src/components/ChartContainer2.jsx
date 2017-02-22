@@ -26,10 +26,8 @@ const styles = {
     border: 'solid 3px #232F3B',
     position: 'relative',
     width: '635px',
-    /* eslint-disable no-dupe-keys */
-    height: '730px',
     height: 'calc(100vh - 71px)',
-    /* eslint-enable no-dupe-keys */
+    minHeight: '500px',    
     overflowY: 'hidden',
     marginLeft: '10px',
     overflowX : 'hidden'

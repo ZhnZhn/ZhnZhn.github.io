@@ -8,8 +8,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _rootDiv;
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -50,15 +48,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var SHOW_POPUP = "show-popup",
     CHILD_MARGIN = 36,
     RESIZE_MIN_WIDTH = 600,
     RESIZE_MAX_WIDTH = 1200;
 
 var styles = {
-  rootDiv: (_rootDiv = {
+  rootDiv: {
     backgroundColor: '#4D4D4D',
     paddingTop: '5px',
     paddingLeft: '5px',
@@ -66,9 +62,12 @@ var styles = {
     border: 'solid 3px #232F3B',
     position: 'relative',
     width: '635px',
-    /* eslint-disable no-dupe-keys */
-    height: '730px'
-  }, _defineProperty(_rootDiv, 'height', 'calc(100vh - 71px)'), _defineProperty(_rootDiv, 'overflowY', 'hidden'), _defineProperty(_rootDiv, 'marginLeft', '10px'), _defineProperty(_rootDiv, 'overflowX', 'hidden'), _rootDiv),
+    height: 'calc(100vh - 71px)',
+    minHeight: '500px',
+    overflowY: 'hidden',
+    marginLeft: '10px',
+    overflowX: 'hidden'
+  },
   hrzResize: {
     position: 'absolute',
     top: '30px',

@@ -3,14 +3,6 @@ import React from 'react';
 import {ChartActionTypes} from '../../flux/actions/ChartActions';
 import ChartStore from '../../flux/stores/ChartStore';
 
-/*
-const styles = {
-  rootDiv : {
-    display : 'flex',
-    flexDirection : 'row'
-  }
-};
-*/
 
 const ComponentHrzContainer = React.createClass({
   getInitialState(){

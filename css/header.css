@@ -2,6 +2,7 @@
 .header{
   position : relative;  
   width: calc(100vw - 36px);
+  min-width: 550px;
   margin-left: 10px;
   margin-right: 26px;
   background-color: rgba(77, 77, 77, 1);
@@ -11,12 +12,14 @@
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+/*
 @media screen and (max-width:580px){
   .header {
     min-height: 82px;
     max-height: 82px;
   }
 }
+*/
 
 .header__icon-erc{
   display: inline-block;

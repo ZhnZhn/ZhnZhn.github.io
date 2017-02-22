@@ -74,8 +74,6 @@ var Styles = {
   }
 };
 
-//const About = React.createClass({
-
 var About = function (_Component) {
   _inherits(About, _Component);
 
@@ -103,14 +101,6 @@ var About = function (_Component) {
     };
     return _this;
   }
-
-  /*
-  getInitialState(){
-    return {
-      isShow : this.props.isShow
-    }
-  },
-  */
 
   _createClass(About, [{
     key: 'componentWillMount',
@@ -389,7 +379,6 @@ var About = function (_Component) {
 
   return About;
 }(_react.Component);
-//});
 
 exports.default = About;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\About.js.map

@@ -7,11 +7,10 @@ const ContainerStyles = {
     padding: '5px',
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
-    position: 'relative',
-    /* eslint-disable no-dupe-keys */
-    height: '730px',
+    position: 'relative',    
+    //height: '730px',
     height: 'calc(100vh - 71px)',
-    /* eslint-disable no-dupe-keys */
+    minHeight: '500px',
     //width: '270px',
     minWidth: '270px',
     maxWidth: '400px',
@@ -26,11 +25,10 @@ const ContainerStyles = {
     borderRadius: '10px',
     border: 'solid 3px #232F3B',
     position: 'relative',
-    /* eslint-disable no-dupe-keys */
-    height: '730px',
+    //height: '730px',
     height: 'calc(100vh - 71px)',
-    /* eslint-enable no-dupe-keys */
-    minWidth: '700px',
+    minHeight: '500px',
+    minWidth: '300px',
     maxWidth: '700px',
     marginLeft: '10px',
     paddingRight: '0px',

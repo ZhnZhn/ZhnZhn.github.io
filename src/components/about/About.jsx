@@ -35,7 +35,7 @@ const Styles = {
   }
 };
 
-//const About = React.createClass({
+
 class About extends Component {
   constructor(props){
     super();
@@ -43,14 +43,6 @@ class About extends Component {
       isShow : props.isShow
     }
   }
-
-  /*
-  getInitialState(){
-    return {
-      isShow : this.props.isShow
-    }
-  },
-  */
 
   componentWillMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
@@ -89,7 +81,7 @@ class About extends Component {
             caption="About"
             onClose={this._handleClose}
          />
-         
+
          <ScrollPane style={Styles.scrollDiv}>
 
          <div style={Styles.DIV_WRAPPER}>
@@ -240,6 +232,5 @@ class About extends Component {
     );
   }
 }
-//});
 
 export default About

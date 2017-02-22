@@ -4,6 +4,24 @@
  "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\styles\\ContainerStyles.js",
  "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\styles\\ContainerStyles.js",
  "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;;;;;AACA,IAAM,kBAAkB;AACtB;AACE,gBAAa,CAAb;AACA,YAAQ,EAAR;AACA,qBAAiB,SAAjB;AACA,aAAS,KAAT;AACA,kBAAc,MAAd;AACA,YAAQ,mBAAR;AACA,cAAU,UAAV;;AAEA,YAAQ,OAAR;gDACQ,oEAGE,uDACA,yDACE,2DAEG,yBAjBjB;AAmBA;AACE,YAAQ,EAAR;AACA,qBAAiB,SAAjB;AACA,aAAS,KAAT;AACA,kBAAc,MAAd;AACA,YAAQ,mBAAR;AACA,cAAU,UAAV;;AAEA,YAAQ,OAAR;8CACQ,kEAEE,qDACA,uDACE,wDACE,wDACC,uBAfjB;CApBI;;kBAuCS"
+ "names": [
+  "ContainerStyles",
+  "browserRootDiv",
+  "flexShrink",
+  "zIndex",
+  "backgroundColor",
+  "padding",
+  "borderRadius",
+  "border",
+  "position",
+  "height",
+  "minHeight",
+  "minWidth",
+  "maxWidth",
+  "marginLeft",
+  "paddingBottom",
+  "aboutRootDiv",
+  "paddingRight"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,kBAAkB;AACtBC,kBAAiB;AACfC,gBAAa,CADE;AAEfC,YAAQ,EAFO;AAGfC,qBAAiB,SAHF;AAIfC,aAAS,KAJM;AAKfC,kBAAc,MALC;AAMfC,YAAQ,mBANO;AAOfC,cAAU,UAPK;AAQf;AACAC,YAAQ,oBATO;AAUfC,eAAW,OAVI;AAWf;AACAC,cAAU,OAZK;AAafC,cAAU,OAbK;AAcfC,gBAAY,MAdG;;AAgBfC,mBAAe;AAhBA,GADK;AAmBtBC,gBAAe;AACbZ,YAAQ,EADK;AAEbC,qBAAiB,SAFJ;AAGbC,aAAS,KAHI;AAIbC,kBAAc,MAJD;AAKbC,YAAQ,mBALK;AAMbC,cAAU,UANG;AAOb;AACAC,YAAQ,oBARK;AASbC,eAAW,OATE;AAUbC,cAAU,OAVG;AAWbC,cAAU,OAXG;AAYbC,gBAAY,MAZC;AAabG,kBAAc,KAbD;AAcbF,mBAAe;AAdF;AAnBO,CAAxB;;kBAqCed,e"
 }
