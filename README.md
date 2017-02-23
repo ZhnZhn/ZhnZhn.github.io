@@ -34,7 +34,7 @@ The value of currency is not always USD as shows in a chart tooltip.
 Sometimes more details about data can be look at tab Info on a Chart.
 
 ## License
-This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016, Yevhenii Molodyi.
+This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016-present, Yevhenii Molodyi.
 
 
 
