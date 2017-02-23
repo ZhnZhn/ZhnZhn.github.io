@@ -1,17 +1,14 @@
 
 .header{
-  position : relative;  
-  width: calc(100vw - 36px);
+  position : relative;
+  width: 100%;
   min-width: 550px;
-  margin-left: 10px;
   margin-right: 26px;
   background-color: rgba(77, 77, 77, 1);
-  border : 3px solid #232F3B;
-  border-top: none;
-  padding-bottom: 3px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  padding-bottom: 6px;
+  padding-left: 12px;
 }
+
 /*
 @media screen and (max-width:580px){
   .header {
@@ -28,7 +25,7 @@
   cursor: default;
   position: absolute;
   top: 7px;
-  left: 5px;
+  left: 12px;
 }
 .header__app-label {
   display: inline-block;
@@ -36,7 +33,6 @@
   margin-top: 8px;
   margin-left: 35px;
   padding-left: 10px;
-  /*padding-right: 10px;*/
   font-size: 16px;
   font-weight: bold;
 }

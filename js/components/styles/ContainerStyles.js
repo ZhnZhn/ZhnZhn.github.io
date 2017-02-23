@@ -9,35 +9,26 @@ var ContainerStyles = {
     flexShrink: 0,
     zIndex: 20,
     backgroundColor: '#4D4D4D',
-    padding: '5px',
-    borderRadius: '10px',
-    border: 'solid 3px #232F3B',
+    padding: '8px 3px 35px 8px',
     position: 'relative',
-    //height: '730px',
     height: 'calc(100vh - 71px)',
     minHeight: '500px',
-    //width: '270px',
     minWidth: '270px',
     maxWidth: '400px',
-    marginLeft: '10px',
-
-    paddingBottom: '32px'
+    marginLeft: '10px'
   },
   aboutRootDiv: {
     zIndex: 20,
     backgroundColor: '#4D4D4D',
-    padding: '5px',
-    borderRadius: '10px',
-    border: 'solid 3px #232F3B',
+    padding: '8px',
     position: 'relative',
-    //height: '730px',
     height: 'calc(100vh - 71px)',
     minHeight: '500px',
     minWidth: '300px',
     maxWidth: '700px',
     marginLeft: '10px',
-    paddingRight: '0px',
-    paddingBottom: '32px'
+    paddingRight: '3px',
+    paddingBottom: '35px'
   }
 };
 

@@ -50,8 +50,23 @@
   color : green;
 }
 
+
 @media only screen and (max-width : 975px) {
   .consent {
     height: 150px;
+  }
+}
+@media only screen and (max-width : 525px) {
+  .consent {
+    height: 200px;
+  }
+}
+@media only screen and (max-width : 330px) {
+  .consent {
+    height: 230px;
+  }
+  .consent__btn{
+    margin-left: 16px;
+    margin-right: 16px;
   }
 }

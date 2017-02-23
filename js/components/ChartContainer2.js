@@ -56,10 +56,7 @@ var SHOW_POPUP = "show-popup",
 var styles = {
   rootDiv: {
     backgroundColor: '#4D4D4D',
-    paddingTop: '5px',
-    paddingLeft: '5px',
-    borderRadius: '10px',
-    border: 'solid 3px #232F3B',
+    padding: '8px 3px 3px 8px',
     position: 'relative',
     width: '635px',
     height: 'calc(100vh - 71px)',

@@ -23,7 +23,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* eslint-disable no-undef */
 if (process.env.NODE_ENV === 'production') {
   /* eslint-enable no-undef */
-  _ravenJs2.default.config('https://f3e7d09d8d0748af80791d51e5bc83e3@sentry.io/138634').install();
+  if (window && window.location && window.location.href.indexOf("https://zhnzhn.github.io") > -1) {
+    _ravenJs2.default.config('https://f3e7d09d8d0748af80791d51e5bc83e3@sentry.io/138634').install();
+  }
 }
 
 var _fnRenderApp = function _fnRenderApp() {
