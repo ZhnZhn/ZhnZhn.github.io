@@ -18,9 +18,9 @@ var _ScrollPane = require('../zhn/ScrollPane');
 
 var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
 
-var _CaptionRow = require('../CaptionRow');
+var _BrowserCaption = require('../zhn/BrowserCaption');
 
-var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
+var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
 
 var _Step = require('./Step');
 
@@ -56,11 +56,10 @@ var Styles = {
   scrollDiv: {
     overflowY: 'auto',
     height: '92%',
-    //height: 'calc(100vh - 90px)',
     paddingRight: '10px'
   },
   DIV_WRAPPER: {
-    paddingLeft: '5px',
+    paddingLeft: '12px',
     paddingRight: '5px',
     lineHeight: 1.4,
     color: 'gray',
@@ -125,7 +124,7 @@ var About = function (_Component) {
           className: _classOpen,
           style: Object.assign({}, styles.aboutRootDiv, _styleOpen)
         },
-        _react2.default.createElement(_CaptionRow2.default, {
+        _react2.default.createElement(_BrowserCaption2.default, {
           caption: 'About',
           onClose: this._handleClose
         }),

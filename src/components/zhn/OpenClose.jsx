@@ -5,6 +5,12 @@ const styles = {
     lineHeight: 2,
     backgroundColor: '#4D4D4D'
   },
+  rootSvg: {
+    display: 'inline-block',
+    width: '16px',
+    height: '16px',
+    marginLeft: '8px'
+  },
   labelCaption: {
     paddingLeft: '4px',
     verticalAlign: 'top',
@@ -59,7 +65,7 @@ class OpenClose extends Component {
     return (
       <div style={styles.rootDiv}>
         <div className="not-selected" onClick={this._handleClickOpenClose}>
-          <div style={{width: '16px', height: '16px', display: 'inline-block'}}>
+          <div style={styles.rootSvg}>
              <svg
                 viewBox="0 0 16 16" width="100%" height="100%"
                 preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"

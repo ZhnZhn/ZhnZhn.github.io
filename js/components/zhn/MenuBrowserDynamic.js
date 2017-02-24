@@ -16,9 +16,9 @@ var _Browser = require('./Browser');
 
 var _Browser2 = _interopRequireDefault(_Browser);
 
-var _CaptionRow = require('../CaptionRow');
+var _BrowserCaption = require('./BrowserCaption');
 
-var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
+var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
 
 var _ScrollPane = require('./ScrollPane');
 
@@ -43,8 +43,8 @@ var Styles = {
   scrollDiv: {
     overflowY: 'auto',
     height: '92%',
-    //height: 'calc(100vh - 90px)',
-    paddingRight: '10px'
+    paddingRight: '10px',
+    paddingBottom: '4px'
   }
 };
 
@@ -143,7 +143,7 @@ var MenuBrowserDynamic = function (_Component) {
       return _react2.default.createElement(
         _Browser2.default,
         { isShow: isShow, style: Styles.browser },
-        _react2.default.createElement(_CaptionRow2.default, {
+        _react2.default.createElement(_BrowserCaption2.default, {
           caption: caption,
           onClose: this._handleHide
         }),

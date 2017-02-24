@@ -26,9 +26,10 @@ var styles = {
     lineHeight: 1.5
   },
   divSvg: {
+    display: 'inline-block',
     width: '16px',
     height: '16px',
-    display: 'inline-block'
+    marginLeft: '8px'
   },
   labelCaption: {
     paddingLeft: '4px',

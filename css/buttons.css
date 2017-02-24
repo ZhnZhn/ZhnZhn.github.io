@@ -120,6 +120,7 @@
   border-radius: 50%;
   border: 2px solid gray;
   stroke : gray;
+  line-height: initial;
   cursor: pointer;
 }
 .svg-resize:hover{

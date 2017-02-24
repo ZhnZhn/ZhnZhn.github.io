@@ -55,7 +55,8 @@ const qeSources = [
   'ICE_FUTURE',
   'WIKI_FUTURE',
 
-  'ZILLOW_REAL_ESTATE'
+  'ZILLOW_REAL_ESTATE',
+  'FMAC'
 ];
 const Quandl = createTypeObject(qeSources, 'QE');
 

@@ -4,7 +4,7 @@ import { ComponentActionTypes } from '../../flux/actions/ComponentActions';
 import { ChartActionTypes } from '../../flux/actions/ChartActions';
 
 import ScrollPane from '../zhn/ScrollPane';
-import CaptionRow from '../CaptionRow';
+import BrowserCaption from '../zhn/BrowserCaption';
 import Step from './Step';
 import Token from './Token';
 import LinkToken from './LinkToken';
@@ -17,11 +17,10 @@ const Styles = {
   scrollDiv : {
     overflowY: 'auto',
     height: '92%',
-    //height: 'calc(100vh - 90px)',
     paddingRight: '10px'
   },
   DIV_WRAPPER : {
-    paddingLeft: '5px',
+    paddingLeft: '12px',
     paddingRight: '5px',
     lineHeight : 1.4,
     color: 'gray',
@@ -77,7 +76,7 @@ class About extends Component {
         className={_classOpen}
         style={Object.assign({}, styles.aboutRootDiv, _styleOpen)}
        >
-         <CaptionRow
+         <BrowserCaption
             caption="About"
             onClose={this._handleClose}
          />

@@ -1,18 +1,17 @@
 import React from 'react'
 
-import SvgClose from './SvgClose';
+import SvgClose from '../SvgClose';
 
 const STYLE = {
   ROOT : {
     backgroundColor: '#232F3B',
     color: 'rgba(164, 135, 212, 1)',
-    height: '28px',
-    borderBottomLeftRadius: '10px',
-    borderBottomRightRadius: '10px',
+    lineHeight: '1.8',
     paddingTop: '4px',
     paddingLeft: '10px',
-    marginRight: '5px',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    borderTopLeftRadius: '4px',
+    borderTopRightRadius: '4px'
   },
   CAPTION : {
     fontSize: '18px',
@@ -21,7 +20,7 @@ const STYLE = {
   }
 };
 
-const CaptionRow = ({ caption, children, onClose }) => (
+const BrowserCaption = ({ caption, children, onClose }) => (
   <div style={STYLE.ROOT}>
      <span
         className="not-selected"
@@ -30,8 +29,11 @@ const CaptionRow = ({ caption, children, onClose }) => (
        {caption}
     </span>
     {children}
-    <SvgClose onClose={onClose} />
+    <SvgClose
+      style={{ position: 'relative', top: '3px' }}
+      onClose={onClose}
+    />
   </div>
 )
 
-export default CaptionRow;
+export default BrowserCaption;

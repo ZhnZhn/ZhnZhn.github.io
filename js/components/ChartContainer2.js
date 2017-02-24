@@ -24,9 +24,9 @@ var _ChartActions = require('../flux/actions/ChartActions');
 
 var _ComponentActions = require('../flux/actions/ComponentActions');
 
-var _CaptionRow = require('./CaptionRow');
+var _BrowserCaption = require('./zhn/BrowserCaption');
 
-var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
+var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
 
 var _SvgHrzResize = require('./zhn/SvgHrzResize');
 
@@ -56,13 +56,15 @@ var SHOW_POPUP = "show-popup",
 var styles = {
   rootDiv: {
     backgroundColor: '#4D4D4D',
-    padding: '8px 3px 3px 8px',
+    //padding : '8px 3px 3px 8px',    
+    padding: '0px 0px 3px 0px',
     position: 'relative',
+    borderRadius: '4px',
     width: '635px',
     height: 'calc(100vh - 71px)',
     minHeight: '500px',
-    overflowY: 'hidden',
     marginLeft: '10px',
+    overflowY: 'hidden',
     overflowX: 'hidden'
   },
   hrzResize: {
@@ -194,7 +196,7 @@ var ChartContainer2 = function (_Component) {
           style: Object.assign({}, styles.rootDiv, _styleIsShow)
         },
         _react2.default.createElement(
-          _CaptionRow2.default,
+          _BrowserCaption2.default,
           {
             caption: caption,
             onClose: this._handleHide

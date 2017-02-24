@@ -43,7 +43,7 @@ var styles = {
     lineHeight: 1.5,
     marginBottom: '10px',
     marginRight: '25px',
-    //marginRight: '10px',
+    marginLeft: '8px',
     position: 'relative'
   },
   tabDiv: {

@@ -6,7 +6,7 @@ import { ChartActionTypes } from '../flux/actions/ChartActions';
 
 import { ComponentActionTypes } from '../flux/actions/ComponentActions';
 
-import CaptionRow from './CaptionRow';
+import BrowserCaption from './zhn/BrowserCaption';
 import SvgHrzResize from './zhn/SvgHrzResize';
 import ScrollPane from './zhn/ScrollPane';
 
@@ -20,13 +20,15 @@ const SHOW_POPUP = "show-popup"
 const styles = {
   rootDiv : {
     backgroundColor: '#4D4D4D',
-    padding : '8px 3px 3px 8px',    
+    //padding : '8px 3px 3px 8px',    
+    padding : '0px 0px 3px 0px',
     position: 'relative',
+    borderRadius: '4px',
     width: '635px',
     height: 'calc(100vh - 71px)',
     minHeight: '500px',
-    overflowY: 'hidden',
     marginLeft: '10px',
+    overflowY: 'hidden',
     overflowX : 'hidden'
   },
   hrzResize : {
@@ -143,7 +145,7 @@ class ChartContainer2 extends Component {
            className={_classIsShow}
            style={Object.assign({}, styles.rootDiv, _styleIsShow)}
         >
-          <CaptionRow
+          <BrowserCaption
              caption={caption}
              onClose={this._handleHide}
           >
@@ -153,7 +155,7 @@ class ChartContainer2 extends Component {
                comp={this}
                onResizeAfter={this._handleResizeAfter}
              />
-          </CaptionRow>
+          </BrowserCaption>
 
           <ScrollPane style={styles.scrollDiv}>
             <ReactCSSTransitionGroup

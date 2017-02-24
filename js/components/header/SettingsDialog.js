@@ -40,6 +40,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = _DialogStyles2.default;
 
+var S = {
+  MODAL: {
+    position: 'static',
+    width: '400px',
+    height: '120px',
+    margin: '70px auto 0px'
+  }
+};
+
 var SettingsDialog = function (_Component) {
   _inherits(SettingsDialog, _Component);
 
@@ -86,6 +95,7 @@ var SettingsDialog = function (_Component) {
       return _react2.default.createElement(
         _ModalDialog2.default,
         {
+          style: S.MODAL,
           caption: 'User Settings',
           isShow: isShow,
           commandButtons: commandButtons,

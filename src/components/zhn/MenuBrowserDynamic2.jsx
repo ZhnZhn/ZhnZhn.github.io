@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Browser from './Browser';
-import CaptionRow from '../CaptionRow';
+import BrowserCaption from './BrowserCaption';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 
 import ShowHide from './ShowHide';
@@ -21,6 +21,7 @@ const CLASS = {
 const STYLE = {
   BROWSER : {
     paddingRight: '0',
+    paddingBottom: '4px',
     minWidth: '300px'
   },
   WRAPPER_SEARCH : {
@@ -146,10 +147,10 @@ class MenuBrowserDynamic2 extends Component {
                : undefined
     return (
        <Browser isShow={isShow} style={STYLE.BROWSER}>
-          <CaptionRow
-             caption={caption}
-             onClose={this._handleHide}
-          />
+           <BrowserCaption
+              caption={caption}
+              onClose={this._handleHide}
+           />
           <ToolbarButtonCircle
             buttons={this.toolbarButtons}
           />

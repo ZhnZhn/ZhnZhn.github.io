@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Browser from './Browser';
-import CaptionRow from '../CaptionRow';
+import BrowserCaption from './BrowserCaption';
 import ScrollPane from './ScrollPane';
 import MenuPart from './MenuPart';
 
@@ -12,11 +12,10 @@ const Styles = {
   scrollDiv : {
     overflowY: 'auto',
     height: '92%',
-    //height: 'calc(100vh - 90px)',
-    paddingRight: '10px'
+    paddingRight: '10px',
+    paddingBottom: '4px'
   }
 };
-
 
 class MenuBrowserDynamic extends Component{
   constructor(props){
@@ -78,10 +77,10 @@ class MenuBrowserDynamic extends Component{
 
     return (
        <Browser isShow={isShow} style={Styles.browser}>
-          <CaptionRow
-             caption={caption}
-             onClose={this._handleHide}
-          />
+         <BrowserCaption
+            caption={caption}
+            onClose={this._handleHide}
+         />
           <ScrollPane style={Styles.scrollDiv}>
             {this._renderMenuParts(menuItems)}
             {children}

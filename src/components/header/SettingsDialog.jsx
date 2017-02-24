@@ -10,6 +10,15 @@ import DialogStyles from '../styles/DialogStyles'
 
 const styles = DialogStyles;
 
+const S = {
+  MODAL : {
+    position : 'static',
+    width: '400px',
+    height: '120px',
+    margin: '70px auto 0px'
+  }
+}
+
 class SettingsDialog extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
@@ -36,6 +45,7 @@ class SettingsDialog extends Component {
     const {isShow, onClose} = this.props;
     return (
          <ModalDialog
+            style={S.MODAL}
             caption="User Settings"
             isShow={isShow}
             commandButtons={commandButtons}

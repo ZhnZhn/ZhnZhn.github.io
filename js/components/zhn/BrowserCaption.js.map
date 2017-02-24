@@ -1,0 +1,30 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\BrowserCaption.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\BrowserCaption.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "ROOT",
+  "backgroundColor",
+  "color",
+  "lineHeight",
+  "paddingTop",
+  "paddingLeft",
+  "marginBottom",
+  "borderTopLeftRadius",
+  "borderTopRightRadius",
+  "CAPTION",
+  "fontSize",
+  "fontWeight",
+  "paddingRight",
+  "BrowserCaption",
+  "caption",
+  "children",
+  "onClose",
+  "position",
+  "top"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,qBAAiB,SADZ;AAELC,WAAO,wBAFF;AAGLC,gBAAY,KAHP;AAILC,gBAAY,KAJP;AAKLC,iBAAa,MALR;AAMLC,kBAAc,MANT;AAOLC,yBAAqB,KAPhB;AAQLC,0BAAsB;AARjB,GADK;AAWZC,WAAU;AACRC,cAAU,MADF;AAERC,gBAAY,KAFJ;AAGRC,kBAAc;AAHN;AAXE,CAAd;;AAkBA,IAAMC,iBAAiB,SAAjBA,cAAiB;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,QAAZ,QAAYA,QAAZ;AAAA,MAAsBC,OAAtB,QAAsBA,OAAtB;AAAA,SACrB;AAAA;AAAA,MAAK,OAAOjB,MAAMC,IAAlB;AACG;AAAA;AAAA;AACG,mBAAU,cADb;AAEG,eAAOD,MAAMU;AAFhB;AAIGK;AAJH,KADH;AAOGC,YAPH;AAQE;AACE,aAAO,EAAEE,UAAU,UAAZ,EAAwBC,KAAK,KAA7B,EADT;AAEE,eAASF;AAFX;AARF,GADqB;AAAA,CAAvB;;kBAgBeH,c"
+}

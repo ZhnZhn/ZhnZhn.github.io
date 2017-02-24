@@ -10,7 +10,7 @@ import ComponentActions from '../../flux/actions/ComponentActions';
 import WatchActions from '../../flux/actions/WatchActions';
 
 import Browser from '../zhn/Browser';
-import CaptionRow from '../CaptionRow';
+import BrowserCaption from '../zhn/BrowserCaption';
 import ButtonCircle from '../zhn/ButtonCircle';
 import ScrollPane from '../zhn/ScrollPane';
 import OpenClose2 from '../zhn/OpenClose2';
@@ -28,7 +28,10 @@ const styles = {
     paddingRight: '0px'
   },
   btCircle : {
-    marginLeft: '20px'
+    marginLeft: '20px',
+    lineHeight: 'initial',
+    position: 'relative',
+    top: '-2px'
   },
   scrollDiv : {
     overflowY: 'auto',
@@ -215,10 +218,10 @@ const WatchBrowser = React.createClass({
         , _captionEV = (isModeEdit) ? 'V' : 'E';
     return (
        <Browser isShow={isShow} style={styles.browser}>
-         <CaptionRow
+          <BrowserCaption
             caption={caption}
             onClose={this._handlerHide}
-         >
+          >         
            <ButtonCircle
              caption={'S'}
              style={styles.btCircle}
@@ -229,7 +232,7 @@ const WatchBrowser = React.createClass({
               style={styles.btCircle}
               onClick={this._handlerToggleEditMode}
            />
-         </CaptionRow>
+         </BrowserCaption>
          {this._renderEditBar(isModeEdit)}
          <ScrollPane style={styles.scrollDiv}>
            {watchList && this._renderWatchList(watchList)}

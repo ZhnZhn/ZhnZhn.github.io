@@ -480,6 +480,24 @@ const DataQE = {
         loadId : 'Q'
       },
       dataColumn : 1
+  },
+  QE_FMAC : {
+    type : 'QE_FMAC',
+    menuTitle : 'Freddie Mac',
+    dialogCaption : 'Freddie Mac',
+    chartContainerCaption : 'Quandl Freddie Mac',
+    dialogProps : {
+      itemCaption : "Item:",
+      optionNames : "items",
+      nInitFromDate : 15,
+      descrUrl : './data/quandl/fmac.html',
+      optionURI : './data/quandl/fmac.json',
+      optionsJsonProp : 'tickets',
+      valueFn : "RPrefixOne",
+      valueFnPrefix : "FMAC",
+      loadId : 'Q',
+      columnName : 'Value'
+    }
   }
 
 };

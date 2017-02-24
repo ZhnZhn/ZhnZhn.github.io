@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Browser from './Browser';
-import CaptionRow from '../CaptionRow';
+import BrowserCaption from './BrowserCaption';
 import ScrollPane from './ScrollPane';
 import MenuPart from './MenuPart';
 
@@ -12,8 +12,8 @@ const S = {
   SCROLL_DIV : {
     overflowY: 'auto',
     height: '92%',
-    //height: 'calc(100vh - 90px)',
-    paddingRight: '10px'
+    paddingRight: '10px',
+    paddingBottom: '4px'
   }
 };
 
@@ -61,7 +61,7 @@ class MenuBrowser extends Component {
         , { menuItems, isShow } = this.state;
     return (
        <Browser isShow={isShow} style={S.BROWSER}>
-          <CaptionRow
+          <BrowserCaption
              caption={caption}
              onClose={this._handleHide}
           />

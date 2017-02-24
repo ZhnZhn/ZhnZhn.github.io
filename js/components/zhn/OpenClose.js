@@ -23,6 +23,12 @@ var styles = {
     lineHeight: 2,
     backgroundColor: '#4D4D4D'
   },
+  rootSvg: {
+    display: 'inline-block',
+    width: '16px',
+    height: '16px',
+    marginLeft: '8px'
+  },
   labelCaption: {
     paddingLeft: '4px',
     verticalAlign: 'top',
@@ -99,7 +105,7 @@ var OpenClose = function (_Component) {
           { className: 'not-selected', onClick: this._handleClickOpenClose },
           _react2.default.createElement(
             'div',
-            { style: { width: '16px', height: '16px', display: 'inline-block' } },
+            { style: styles.rootSvg },
             _react2.default.createElement(
               'svg',
               {

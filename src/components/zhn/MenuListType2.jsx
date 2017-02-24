@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import OpenClose2 from './OpenClose2'
 
-
 const MODEL_PROP = {
   CAPTION : 'caption',
   GROUPS : 'groups',
@@ -22,7 +21,7 @@ const STYLE = {
   },
   LIST_DIV_NOT_SELECTED : {
     borderBottom : '1px solid rgba(128, 192, 64, 0.6)',
-    marginRight : '10px'
+    marginRight : '2px'
   },
   ITEM_DIV : {
     position: 'relative',

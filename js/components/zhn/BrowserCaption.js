@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgClose = require('./SvgClose');
+var _SvgClose = require('../SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
@@ -18,13 +18,12 @@ var STYLE = {
   ROOT: {
     backgroundColor: '#232F3B',
     color: 'rgba(164, 135, 212, 1)',
-    height: '28px',
-    borderBottomLeftRadius: '10px',
-    borderBottomRightRadius: '10px',
+    lineHeight: '1.8',
     paddingTop: '4px',
     paddingLeft: '10px',
-    marginRight: '5px',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    borderTopLeftRadius: '4px',
+    borderTopRightRadius: '4px'
   },
   CAPTION: {
     fontSize: '18px',
@@ -33,7 +32,7 @@ var STYLE = {
   }
 };
 
-var CaptionRow = function CaptionRow(_ref) {
+var BrowserCaption = function BrowserCaption(_ref) {
   var caption = _ref.caption,
       children = _ref.children,
       onClose = _ref.onClose;
@@ -49,9 +48,12 @@ var CaptionRow = function CaptionRow(_ref) {
       caption
     ),
     children,
-    _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
+    _react2.default.createElement(_SvgClose2.default, {
+      style: { position: 'relative', top: '3px' },
+      onClose: onClose
+    })
   );
 };
 
-exports.default = CaptionRow;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\CaptionRow.js.map
+exports.default = BrowserCaption;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\BrowserCaption.js.map

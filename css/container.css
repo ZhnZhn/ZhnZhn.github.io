@@ -28,6 +28,31 @@
   outline: 0px none;
 }
 
+.row__topic:nth-child(odd) {
+  line-height: 2;
+  background-color: #404040;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 12px;
+  cursor: pointer;
+}
+.row__topic:nth-child(even) {
+  line-height: 2;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 12px;
+  cursor: pointer;
+}
+.row__topic:hover {
+  border-bottom: 1px solid #1B75BB;
+}
+
 .row__topic__odd {
   line-height: 2;
   background-color: #404040;

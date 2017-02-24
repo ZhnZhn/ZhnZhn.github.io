@@ -40,9 +40,9 @@ var _Browser = require('../zhn/Browser');
 
 var _Browser2 = _interopRequireDefault(_Browser);
 
-var _CaptionRow = require('../CaptionRow');
+var _BrowserCaption = require('../zhn/BrowserCaption');
 
-var _CaptionRow2 = _interopRequireDefault(_CaptionRow);
+var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
 
 var _ButtonCircle = require('../zhn/ButtonCircle');
 
@@ -73,7 +73,10 @@ var styles = {
     paddingRight: '0px'
   },
   btCircle: {
-    marginLeft: '20px'
+    marginLeft: '20px',
+    lineHeight: 'initial',
+    position: 'relative',
+    top: '-2px'
   },
   scrollDiv: {
     overflowY: 'auto',
@@ -116,10 +119,10 @@ var WatchBrowser = _react2.default.createClass(_extends({
     this.unsubscribe();
   },
   _onStore: function _onStore(actionType, data) {
-    var _props = this.props;
-    var browserType = _props.browserType;
-    var showAction = _props.showAction;
-    var updateAction = _props.updateAction;
+    var _props = this.props,
+        browserType = _props.browserType,
+        showAction = _props.showAction,
+        updateAction = _props.updateAction;
 
     if (actionType === showAction && data === browserType) {
       this._handlerShow();
@@ -152,8 +155,8 @@ var WatchBrowser = _react2.default.createClass(_extends({
     var isModeEdit = this.state.isModeEdit;
 
     return watchList.groups.map(function (group, index) {
-      var caption = group.caption;
-      var lists = group.lists;
+      var caption = group.caption,
+          lists = group.lists;
 
       return _react2.default.createElement(
         _OpenClose2.default,
@@ -180,8 +183,8 @@ var WatchBrowser = _react2.default.createClass(_extends({
     var isModeEdit = this.state.isModeEdit;
 
     return lists.map(function (list, index) {
-      var caption = list.caption;
-      var items = list.items;
+      var caption = list.caption,
+          items = list.items;
 
       return _react2.default.createElement(
         _OpenClose2.default,
@@ -217,9 +220,10 @@ var WatchBrowser = _react2.default.createClass(_extends({
     var isModeEdit = this.state.isModeEdit;
 
     return items.map(function (item, index) {
-      var id = item.id;
-      var caption = item.caption;
-      var _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
+      var id = item.id,
+          caption = item.caption,
+          _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
+
       return _react2.default.createElement(_WatchItem2.default, {
         key: id,
         className: _className,
@@ -260,17 +264,18 @@ var WatchBrowser = _react2.default.createClass(_extends({
     }
   },
   render: function render() {
-    var caption = this.props.caption;
-    var _state = this.state;
-    var isShow = _state.isShow;
-    var isModeEdit = _state.isModeEdit;
-    var watchList = _state.watchList;
-    var _captionEV = isModeEdit ? 'V' : 'E';
+    var caption = this.props.caption,
+        _state = this.state,
+        isShow = _state.isShow,
+        isModeEdit = _state.isModeEdit,
+        watchList = _state.watchList,
+        _captionEV = isModeEdit ? 'V' : 'E';
+
     return _react2.default.createElement(
       _Browser2.default,
       { isShow: isShow, style: styles.browser },
       _react2.default.createElement(
-        _CaptionRow2.default,
+        _BrowserCaption2.default,
         {
           caption: caption,
           onClose: this._handlerHide
