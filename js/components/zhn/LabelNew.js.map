@@ -1,0 +1,18 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\LabelNew.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\LabelNew.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "LABEL",
+  "display",
+  "color",
+  "backgroundColor",
+  "marginLeft",
+  "marginRight",
+  "LabelNew"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,SAAQ;AACNC,aAAS,cADH;AAENC,WAAO,SAFD;AAGNC,qBAAiB,aAHX;AAINC,gBAAY,MAJN;AAKNC,iBAAa;AALP;AADA,CAAV;;AAUA,IAAMC,WAAW,SAAXA,QAAW;AAAA,SACf;AAAA;AAAA,MAAM,OAAOP,EAAEC,KAAf;AAAA;AAAA,GADe;AAAA,CAAjB;;kBAMeM,Q"
+}

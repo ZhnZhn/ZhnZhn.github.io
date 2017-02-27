@@ -39,6 +39,8 @@ const qeSources = [
   'EU_COMMISSION',
   'CPI_INFLATION',
   'BIG_MAC',
+  'GDT',
+  'BLSI',
   'ROGERS_INDICES',
 
   'EURONEXT_STOCK',

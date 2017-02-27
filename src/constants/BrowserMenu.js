@@ -20,10 +20,11 @@ const fnCreateMenu = function(menu=[], data, browserType){
   return menu.map((menuPart) => {
      const { caption, isInitClose, items=[] } = menuPart
          , _items = items.map((item, index) =>{
-               const { id } = item
+               const { id, isNew=false } = item
                return {
                   id: id,
                   title: data[id].menuTitle,
+                  isNew : isNew,
                   counter: 0,
                   isOpen: false,
                   onClick: fnClick(id, browserType),
@@ -47,10 +48,16 @@ const menuQuandl = [
        { id : Quandl.GLOBAL_INDICATOR },
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
-       { id : Quandl.EU_COMMISSION},
-       { id : Quandl.CPI_INFLATION },
-       { id : Quandl.BIG_MAC }
+       { id : Quandl.EU_COMMISSION}
      ]
+  },{
+    caption : 'Inflation & Prices', isInitClose : true,
+    items : [
+      { id : Quandl.CPI_INFLATION },
+      { id : Quandl.BIG_MAC },
+      { id : Quandl.GDT, isNew: true },
+      { id : Quandl.BLSI, isNew: true }
+    ]
   },{
      caption : 'Commodity', isInitClose : true,
      items : [
@@ -85,7 +92,7 @@ const menuQuandl = [
     caption : 'Real Estate', isInitClose : true,
     items : [
       { id : Quandl.ZILLOW_REAL_ESTATE },
-      { id : Quandl.FMAC }
+      { id : Quandl.FMAC, isNew: true }
     ]
   }
 ];

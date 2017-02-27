@@ -260,6 +260,42 @@ const DataQE = {
       },
       dataColumn : 1
   },
+  QE_GDT : {
+    type : 'QE_GDT',
+    menuTitle : 'Global Dairy Trade',
+    dialogCaption : 'Global Dairy Trade',
+    chartContainerCaption : 'Quandl Global Dairy Trade',
+    dialogProps : {
+      itemCaption : "Item:",
+      optionNames : "items",
+      nInitFromDate : 7,
+      descrUrl : './data/quandl/gdt.html',
+      optionURI : './data/quandl/gdt.json',
+      optionsJsonProp : 'tickets',
+      valueFn : "RPrefixOne",
+      valueFnPrefix : "GDT",
+      loadId : 'Q',
+      columnName : 'Value'
+    }
+  },
+  QE_BLSI : {
+    type : 'QE_BLSI',
+    menuTitle : 'U.S. BLS Inflation',
+    dialogCaption : 'U.S. BLS Inflation & Prices',
+    chartContainerCaption : 'Quandl U.S. BLS Inflation & Prices',
+    dialogProps : {
+      itemCaption : "Item:",
+      optionNames : "items",
+      nInitFromDate : 15,
+      descrUrl : './data/quandl/blsi.html',
+      optionURI : './data/quandl/blsi.json',
+      optionsJsonProp : 'tickets',
+      valueFn : "RPrefixOne",
+      valueFnPrefix : "BLSI",
+      loadId : 'Q',
+      columnName : 'Value'
+    }
+  },
 
   QE_EURONEXT_STOCK : {
       type : 'QE_EURONEXT_STOCK',

@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _LabelNew = require('./LabelNew');
+
+var _LabelNew2 = _interopRequireDefault(_LabelNew);
+
 var _MenuBadge = require('./MenuBadge');
 
 var _MenuBadge2 = _interopRequireDefault(_MenuBadge);
@@ -42,12 +46,13 @@ var MenuPart = function (_Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MenuPart.__proto__ || Object.getPrototypeOf(MenuPart)).call.apply(_ref, [this].concat(args))), _this), _this._renderMenuItems = function (items) {
       return items.map(function (item, index) {
-        var menuBadge = item.counter !== 0 ? _react2.default.createElement(_MenuBadge2.default, {
+        var menuBadgeEl = item.counter !== 0 ? _react2.default.createElement(_MenuBadge2.default, {
           counter: item.counter,
           isOpen: item.isOpen,
           onClick: item.onBadgeClick,
           onBadgeClose: item.onBadgeClose
         }) : null;
+        var labelNewEl = item.isNew ? _react2.default.createElement(_LabelNew2.default, null) : null;
         return _react2.default.createElement(
           'div',
           {
@@ -56,7 +61,8 @@ var MenuPart = function (_Component) {
             onClick: item.onClick
           },
           item.title,
-          menuBadge
+          menuBadgeEl,
+          labelNewEl
         );
       });
     }, _temp), _possibleConstructorReturn(_this, _ret);

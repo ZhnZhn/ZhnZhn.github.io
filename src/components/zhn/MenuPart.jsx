@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+import LabelNew from './LabelNew';
 import MenuBadge from './MenuBadge';
 import OpenClose from './OpenClose';
 
 class MenuPart extends Component {
   _renderMenuItems = (items) => {
-    return items.map((item, index) => {
-      const menuBadge = (item.counter !== 0) ? (
+    return items.map((item, index) => {      
+      const menuBadgeEl = (item.counter !== 0)
+                ? (
                     <MenuBadge
                       counter={item.counter}
                       isOpen={item.isOpen}
@@ -14,14 +16,18 @@ class MenuPart extends Component {
                       onBadgeClose={item.onBadgeClose}
                    />
                  ) : null;
+      const labelNewEl = (item.isNew)
+              ? ( <LabelNew /> )
+              : null;
       return (
          <div
-             key={index}             
+             key={index}
              className="row__topic not-selected"
              onClick={item.onClick}
           >
             {item.title}
-            {menuBadge}
+            {menuBadgeEl}
+            {labelNewEl}
          </div>
       )
     })
