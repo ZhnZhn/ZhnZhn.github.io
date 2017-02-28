@@ -131,12 +131,12 @@ var InputSearch = _react2.default.createClass({
     this.domOptionsCache = null;
     this.indexActiveOption = 0;
 
-    var _props = this.props;
-    var optionName = _props.optionName;
-    var optionNames = _props.optionNames;
-    var propCaption = _props.propCaption;
-    var _optionName = optionName ? ' ' + optionName : '';
-    var _optionNames = optionNames ? ' ' + optionNames : optionName ? _optionName : '';
+    var _props = this.props,
+        optionName = _props.optionName,
+        optionNames = _props.optionNames,
+        propCaption = _props.propCaption,
+        _optionName = optionName ? ' ' + optionName : '',
+        _optionNames = optionNames ? ' ' + optionNames : optionName ? _optionName : '';
 
     this.propCaption = propCaption;
 
@@ -385,11 +385,11 @@ var InputSearch = _react2.default.createClass({
   renderOptions: function renderOptions() {
     var _this3 = this;
 
-    var ItemOptionComp = this.props.ItemOptionComp;
-    var _state = this.state;
-    var isShowOption = _state.isShowOption;
-    var options = _state.options;
-    var isValidDomOptionsCache = _state.isValidDomOptionsCache;
+    var ItemOptionComp = this.props.ItemOptionComp,
+        _state = this.state,
+        isShowOption = _state.isShowOption,
+        options = _state.options,
+        isValidDomOptionsCache = _state.isValidDomOptionsCache;
 
 
     var _domOptions = void 0;
@@ -456,22 +456,22 @@ var InputSearch = _react2.default.createClass({
   render: function render() {
     var _this4 = this;
 
-    var _state2 = this.state;
-    var value = _state2.value;
-    var isLocalMode = _state2.isLocalMode;
-    var isShowOption = _state2.isShowOption;
+    var _state2 = this.state,
+        value = _state2.value,
+        isLocalMode = _state2.isLocalMode,
+        isShowOption = _state2.isShowOption;
 
 
     var _styleArrow = isShowOption ? styles.arrow_show : null;
     var _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
-    var _props2 = this.props;
-    var isLoading = _props2.isLoading;
-    var isLoadingFailed = _props2.isLoadingFailed;
-    var placeholder = _props2.placeholder;
-    var _state3 = this.state;
-    var optionName = _state3.optionName;
-    var optionNames = _state3.optionNames;
+    var _props2 = this.props,
+        isLoading = _props2.isLoading,
+        isLoadingFailed = _props2.isLoadingFailed,
+        placeholder = _props2.placeholder,
+        _state3 = this.state,
+        optionName = _state3.optionName,
+        optionNames = _state3.optionNames;
 
 
     var _domAfterInput = void 0,
@@ -504,6 +504,11 @@ var InputSearch = _react2.default.createClass({
       'div',
       { style: Object.assign({}, styles.rootDiv) },
       _react2.default.createElement('input', {
+        name: 'text',
+        autoComplete: 'new-text',
+        autoCorrect: 'off',
+        autoCapitalize: 'off',
+        spellCheck: false,
         ref: function ref(c) {
           return _this4.domInputText = c;
         },

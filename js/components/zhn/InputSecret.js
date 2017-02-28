@@ -38,6 +38,18 @@ var styles = {
   }
 };
 
+var _maskValue = function _maskValue() {
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+  var len = value.length;
+  var i = 0,
+      str = '';
+  for (i; i < len; i++) {
+    str = str + 'X';
+  }
+  return str;
+};
+
 var InputSecret = function (_Component) {
   _inherits(InputSecret, _Component);
 
@@ -55,42 +67,43 @@ var InputSecret = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InputSecret.__proto__ || Object.getPrototypeOf(InputSecret)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       value: ''
     }, _this._handleChangeValue = function (event) {
-      _this.setState({ value: event.target.value });
+      _this.secret = event.target.value;
+      _this.setState({ value: _maskValue(_this.secret) });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(InputSecret, [{
     key: 'render',
-
-
-    /*
-    _handlerBlurValue = () => {
-    }
-    */
-
     value: function render() {
-      var placeholder = this.props.placeholder,
+      var _props = this.props,
+          placeholder = _props.placeholder,
+          _props$maxLength = _props.maxLength,
+          maxLength = _props$maxLength === undefined ? "32" : _props$maxLength,
           value = this.state.value;
 
       return _react2.default.createElement(
         'div',
         { style: styles.rootDiv },
         _react2.default.createElement('input', {
-          autocomplete: 'off',
+          name: 'secret',
+          autoComplete: 'new-secret',
+          autoCorrect: 'off',
+          autoCapitalize: 'off',
+          spellCheck: false,
           type: 'password',
           style: styles.inputText,
           translate: false,
           placeholder: placeholder,
-          value: value,
+          maxLength: maxLength,
+          defaultValue: value,
           onChange: this._handleChangeValue
-          //onBlur={this._handlerBlurValue}
         })
       );
     }
   }, {
     key: 'getValue',
     value: function getValue() {
-      return this.state.value;
+      return this.secret;
     }
   }]);
 

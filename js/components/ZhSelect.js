@@ -530,6 +530,11 @@ var ZhSelect = (_temp = _class = function (_Component) {
         'div',
         { style: Object.assign({}, styles.rootDiv, _styleDivWidth) },
         _react2.default.createElement('input', {
+          name: 'text',
+          autoComplete: 'new-text',
+          autoCorrect: 'off',
+          autoCapitalize: 'off',
+          spellCheck: false,
           ref: function ref(c) {
             return _this2.domInputText = c;
           },

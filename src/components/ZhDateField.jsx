@@ -94,6 +94,11 @@ class ZhDateField extends Component {
     return (
       <div style={STYLE.ROOT}>
         <input
+           name="text-date"
+           autoComplete="new-text-date"
+           autoCorrect="off"
+           autoCapitalize="off"
+           spellCheck={false}
            ref={input => this.inputDate = input }
            type="text"
            style={STYLE.INPUT}

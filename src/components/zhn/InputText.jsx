@@ -50,6 +50,11 @@ class InputText extends Component {
         , {value} = this.state;
     return (
       <input
+        name="text"
+        autoComplete="new-text"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
         type="text"
         style={Object.assign({}, S.INPUT_TEXT, style)}
         value={value}

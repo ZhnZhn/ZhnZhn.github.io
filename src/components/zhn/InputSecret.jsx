@@ -20,34 +20,44 @@ const styles = {
   }
 }
 
+const _maskValue = (value='') => {
+  const len = value.length
+  let i=0, str = ''
+  for (i; i<len; i++){
+    str = str + 'X'
+  }
+  return str;
+}
+
 class InputSecret extends Component {
+
   state = {
     value: ''
   }
 
   _handleChangeValue = (event) => {
-    this.setState({ value: event.target.value });
+    this.secret = event.target.value;
+    this.setState({ value: _maskValue(this.secret) });
   }
-
-  /*
-  _handlerBlurValue = () => {
-  }
-  */
 
   render(){
-    const {placeholder} = this.props
+    const { placeholder, maxLength="32" } = this.props
         , { value } = this.state;
     return (
       <div style={styles.rootDiv}>
         <input
-           autocomplete="off"
+           name="secret"
+           autoComplete="new-secret"
+           autoCorrect="off"
+           autoCapitalize="off"
+           spellCheck={false}
            type="password"
            style={styles.inputText}
            translate={false}
            placeholder={placeholder}
-           value={value}
+           maxLength={maxLength}
+           defaultValue={value}
            onChange={this._handleChangeValue}
-           //onBlur={this._handlerBlurValue}
         >
         </input>
       </div>
@@ -55,7 +65,7 @@ class InputSecret extends Component {
   }
 
   getValue(){
-    return this.state.value;
+    return this.secret;
   }
 }
 

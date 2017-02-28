@@ -144,6 +144,11 @@ var ZhDateField = function (_Component) {
         'div',
         { style: STYLE.ROOT },
         _react2.default.createElement('input', {
+          name: 'text-date',
+          autoComplete: 'new-text-date',
+          autoCorrect: 'off',
+          autoCapitalize: 'off',
+          spellCheck: false,
           ref: function ref(input) {
             return _this2.inputDate = input;
           },

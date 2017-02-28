@@ -481,6 +481,11 @@ class ZhSelect extends Component {
     return (
       <div style={Object.assign({},styles.rootDiv, _styleDivWidth)}>
         <input
+           name="text"
+           autoComplete="new-text"
+           autoCorrect="off"
+           autoCapitalize="off"
+           spellCheck={false}
            ref={c => this.domInputText = c}
            type="text"
            value={value}

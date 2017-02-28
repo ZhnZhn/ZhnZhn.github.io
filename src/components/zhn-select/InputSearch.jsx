@@ -492,6 +492,11 @@ const InputSearch = React.createClass({
     return (
       <div style={Object.assign({},styles.rootDiv)}>
         <input
+           name="text"
+           autoComplete="new-text"
+           autoCorrect="off"
+           autoCapitalize="off"
+           spellCheck={false}
            ref={c => this.domInputText = c}
            type="text"
            value={value}

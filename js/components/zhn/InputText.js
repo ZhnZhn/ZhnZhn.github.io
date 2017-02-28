@@ -78,6 +78,11 @@ var InputText = (_temp = _class = function (_Component) {
           value = this.state.value;
 
       return _react2.default.createElement('input', {
+        name: 'text',
+        autoComplete: 'new-text',
+        autoCorrect: 'off',
+        autoCapitalize: 'off',
+        spellCheck: false,
         type: 'text',
         style: Object.assign({}, S.INPUT_TEXT, style),
         value: value,
