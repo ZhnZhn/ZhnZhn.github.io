@@ -33,4 +33,4 @@ var Step = function Step(_ref) {
 };
 
 exports.default = Step;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\Step.js.map
+//# sourceMappingURL=Step.js.map

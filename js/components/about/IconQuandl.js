@@ -41,4 +41,4 @@ var IconQuandl = function IconQuandl(props) {
 };
 
 exports.default = IconQuandl;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconQuandl.js.map
+//# sourceMappingURL=IconQuandl.js.map

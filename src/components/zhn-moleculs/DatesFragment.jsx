@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import ZhDateField from './ZhDateField';
-import DialogStyles from './styles/DialogStyles';
+import DateField from '../zhn/DateField';
+import DialogStyles from '../styles/DialogStyles';
 
 const styles = DialogStyles;
 
@@ -24,7 +24,7 @@ class DatesFragment extends Component {
             <span style={styles.labelSpan}>
                From Date:
             </span>
-            <ZhDateField
+            <DateField
                ref={c => this.fromDate = c}
                initValue={initFromDate}
                errorMsg={FORMAT_ERR_MSG}
@@ -35,7 +35,7 @@ class DatesFragment extends Component {
             <span style={styles.labelSpan}>
               To Date:
             </span>
-            <ZhDateField
+            <DateField
                  ref={c => this.toDate = c}
                  initValue={initToDate}
                  nForecastDate={nForecastDate}

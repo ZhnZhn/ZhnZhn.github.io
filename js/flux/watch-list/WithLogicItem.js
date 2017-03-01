@@ -12,21 +12,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var WithLogicItem = {
   addItem: function addItem(watchList, item) {
-    var caption = item.caption;
-    var groupCaption = item.groupCaption;
-    var listCaption = item.listCaption;
-    var config = item.config;
-    var zhConfig = config.zhConfig;
-    var title = zhConfig.title;
-    var subtitle = zhConfig.subtitle;
-    var columnName = zhConfig.columnName;
-    var dataColumn = zhConfig.dataColumn;
-    var id = zhConfig.id;
-    var fromDate = zhConfig.fromDate;
-    var seriaColumnNames = zhConfig.seriaColumnNames;
-    var toGroup = _LogicFn2.default.findGroup(watchList, groupCaption);
-    var toList = _LogicFn2.default.findList(toGroup, listCaption);
-    var items = toList.items;
+    var caption = item.caption,
+        groupCaption = item.groupCaption,
+        listCaption = item.listCaption,
+        config = item.config,
+        zhConfig = config.zhConfig,
+        title = zhConfig.title,
+        subtitle = zhConfig.subtitle,
+        columnName = zhConfig.columnName,
+        dataColumn = zhConfig.dataColumn,
+        id = zhConfig.id,
+        fromDate = zhConfig.fromDate,
+        seriaColumnNames = zhConfig.seriaColumnNames,
+        toGroup = _LogicFn2.default.findGroup(watchList, groupCaption),
+        toList = _LogicFn2.default.findList(toGroup, listCaption),
+        items = toList.items;
 
     if (_LogicFn2.default.checkIsInArraySameCaption(items, caption)) {
       return _LogicFn2.default.fResultItemExisted(caption, listCaption);
@@ -43,9 +43,9 @@ var WithLogicItem = {
     return { isDone: true };
   },
   removeItem: function removeItem(watchList, _ref) {
-    var groupCaption = _ref.groupCaption;
-    var listCaption = _ref.listCaption;
-    var caption = _ref.caption;
+    var groupCaption = _ref.groupCaption,
+        listCaption = _ref.listCaption,
+        caption = _ref.caption;
 
     var groupFrom = _LogicFn2.default.findGroup(watchList, groupCaption),
         listFrom = _LogicFn2.default.findList(groupFrom, listCaption);
@@ -55,4 +55,4 @@ var WithLogicItem = {
 };
 
 exports.default = WithLogicItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WithLogicItem.js.map
+//# sourceMappingURL=WithLogicItem.js.map

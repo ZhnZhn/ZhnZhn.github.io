@@ -23,4 +23,4 @@ var ScrollPane = function ScrollPane(_ref) {
 };
 
 exports.default = ScrollPane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ScrollPane.js.map
+//# sourceMappingURL=ScrollPane.js.map

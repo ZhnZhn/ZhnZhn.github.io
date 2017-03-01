@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\quandl-browser\\QuandlBrowser.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\quandl-browser\\QuandlBrowser.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAM,gBAAgB,gBAAM,WAAN,CAAkB;;AACtC,4BAAQ;AACN,QAAM,QAAQ,KAAK,KAAL,CADR;AAEN,WACE,qDAAiB,KAAjB,CADF,CAFM;GAD8B;CAAlB,CAAhB;;kBASS"
-}
+{"version":3,"sources":["../../../src/components/quandl-browser/QuandlBrowser.jsx"],"names":["QuandlBrowser","createClass","render","props"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,gBAAgB,gBAAMC,WAAN,CAAkB;AAAA;AACtCC,QADsC,oBAC9B;AACN,QAAMC,QAAQ,KAAKA,KAAnB;AACA,WACE,qDAAiBA,KAAjB,CADF;AAGD;AANqC,CAAlB,CAAtB;;kBASeH,a","file":"QuandlBrowser.js","sourcesContent":["import React from 'react';\r\n\r\nimport MenuBrowser from '../zhn/MenuBrowser';\r\n\r\nconst QuandlBrowser = React.createClass({\r\n  render(){\r\n    const props = this.props;\r\n    return (\r\n      <MenuBrowser {...props} />\r\n    )\r\n  }\r\n});\r\n\r\nexport default QuandlBrowser;\r\n"]}

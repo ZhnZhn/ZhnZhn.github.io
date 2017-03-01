@@ -12,7 +12,7 @@ var _ChoroplethMap = require('../../adapters/eurostat/ChoroplethMap');
 
 var _ChoroplethMap2 = _interopRequireDefault(_ChoroplethMap);
 
-var _SvgClose = require('../SvgClose');
+var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
@@ -219,4 +219,4 @@ var MapChartItem = _react2.default.createClass({
 });
 
 exports.default = MapChartItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\MapChartItem.js.map
+//# sourceMappingURL=MapChartItem.js.map

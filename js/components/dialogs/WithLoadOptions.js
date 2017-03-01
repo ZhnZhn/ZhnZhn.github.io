@@ -27,21 +27,21 @@ var WithLoadOptions = {
   _loadOptions: function _loadOptions(option) {
     var _this = this;
 
-    var toStateProp = option.toStateProp;
-    var isLoadingProp = option.isLoadingProp;
-    var isLoadingFailedProp = option.isLoadingFailedProp;
-    var uri = option.uri;
-    var optionJsonProp = option.optionJsonProp;
-    var fnOnCompleted = option.fnOnCompleted;
-    var fnOnFailed = option.fnOnFailed;
-    var _option$retryServer = option.retryServer;
-    var retryServer = _option$retryServer === undefined ? 3 : _option$retryServer;
-    var _option$retryNetwork = option.retryNetwork;
-    var retryNetwork = _option$retryNetwork === undefined ? 1 : _option$retryNetwork;
+    var toStateProp = option.toStateProp,
+        isLoadingProp = option.isLoadingProp,
+        isLoadingFailedProp = option.isLoadingFailedProp,
+        uri = option.uri,
+        optionJsonProp = option.optionJsonProp,
+        fnOnCompleted = option.fnOnCompleted,
+        fnOnFailed = option.fnOnFailed,
+        _option$retryServer = option.retryServer,
+        retryServer = _option$retryServer === undefined ? 3 : _option$retryServer,
+        _option$retryNetwork = option.retryNetwork,
+        retryNetwork = _option$retryNetwork === undefined ? 1 : _option$retryNetwork;
 
     fetch(uri).then(function (response) {
-      var status = response.status;
-      var statusText = response.statusText;
+      var status = response.status,
+          statusText = response.statusText;
 
       if (status >= 200 && status < 400) {
         return response.json();
@@ -73,10 +73,10 @@ var WithLoadOptions = {
     });
   },
   _onLoadOptionsCompleted: function _onLoadOptionsCompleted(_ref) {
-    var toStateProp = _ref.toStateProp;
-    var isLoadingProp = _ref.isLoadingProp;
-    var json = _ref.json;
-    var optionJsonProp = _ref.optionJsonProp;
+    var toStateProp = _ref.toStateProp,
+        isLoadingProp = _ref.isLoadingProp,
+        json = _ref.json,
+        optionJsonProp = _ref.optionJsonProp;
 
     if (toStateProp && optionJsonProp) {
       var _setState;
@@ -93,8 +93,8 @@ var WithLoadOptions = {
     }
   },
   _handlerWithLoadOptions: function _handlerWithLoadOptions(toStateProp) {
-    var isLoadingProp = arguments.length <= 1 || arguments[1] === undefined ? 'isLoading' : arguments[1];
-    var isLoadingFailedProp = arguments.length <= 2 || arguments[2] === undefined ? 'isLoadingFailed' : arguments[2];
+    var isLoadingProp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'isLoading';
+    var isLoadingFailedProp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'isLoadingFailed';
     var optionURI = arguments[3];
     var optionJsonProp = arguments[4];
 
@@ -120,4 +120,4 @@ var WithLoadOptions = {
 };
 
 exports.default = WithLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\WithLoadOptions.js.map
+//# sourceMappingURL=WithLoadOptions.js.map

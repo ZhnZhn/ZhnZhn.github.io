@@ -12,9 +12,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZhDateField = require('../ZhDateField');
+var _DateField = require('../zhn/DateField');
 
-var _ZhDateField2 = _interopRequireDefault(_ZhDateField);
+var _DateField2 = _interopRequireDefault(_DateField);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
@@ -71,7 +71,7 @@ var RowDate = (_temp2 = _class = function (_Component) {
           { style: Styles.labelSpan },
           labelTitle
         ),
-        _react2.default.createElement(_ZhDateField2.default, {
+        _react2.default.createElement(_DateField2.default, {
           ref: function ref(c) {
             return _this2.inputDate = c;
           },
@@ -91,4 +91,4 @@ var RowDate = (_temp2 = _class = function (_Component) {
   onTestDate: _react.PropTypes.func
 }, _temp2);
 exports.default = RowDate;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowDate.js.map
+//# sourceMappingURL=RowDate.js.map

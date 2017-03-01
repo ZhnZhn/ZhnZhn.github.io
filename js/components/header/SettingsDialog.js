@@ -18,9 +18,9 @@ var _InputSecret = require('../zhn/InputSecret');
 
 var _InputSecret2 = _interopRequireDefault(_InputSecret);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 var _ChartStore = require('../../flux/stores/ChartStore');
 
@@ -82,7 +82,7 @@ var SettingsDialog = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+      var commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
         caption: 'Set',
@@ -124,4 +124,4 @@ var SettingsDialog = function (_Component) {
 }(_react.Component);
 
 exports.default = SettingsDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\SettingsDialog.js.map
+//# sourceMappingURL=SettingsDialog.js.map

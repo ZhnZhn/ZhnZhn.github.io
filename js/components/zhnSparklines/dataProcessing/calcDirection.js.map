@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhnSparklines\\dataProcessing\\calcDirection.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhnSparklines\\dataProcessing\\calcDirection.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;kBAAe,UAAC,MAAD,EAAS,UAAT,EAAwB;AACrC,OAAK,IAAL,GAAY,KAAK,IAAL,IAAa,UAAS,CAAT,EAAY;AAAE,WAAO,IAAI,CAAJ,GAAQ,CAAR,GAAY,CAAC,CAAD,CAArB;GAAZ,CADY;;AAGrC,SAAO,MAAE,CAAO,MAAP,GAAgB,CAAhB,IAAsB,eAAe,CAAf,GACzB,CADC,GAED,KAAK,IAAL,CAAU,OAAO,aAAa,CAAb,CAAP,CAAuB,CAAvB,GAA2B,OAAO,UAAP,EAAmB,CAAnB,CAFpC,CAH8B;CAAxB"
-}
+{"version":3,"sources":["../../../../src/components/zhnSparklines/dataProcessing/calcDirection.js"],"names":["points","pointIndex","Math","sign","x","length","y"],"mappings":";;;;;;kBAAe,UAACA,MAAD,EAASC,UAAT,EAAwB;AACrCC,OAAKC,IAAL,GAAYD,KAAKC,IAAL,IAAa,UAASC,CAAT,EAAY;AAAE,WAAOA,IAAI,CAAJ,GAAQ,CAAR,GAAY,CAAC,CAApB;AAAwB,GAA/D;;AAEA,SAASJ,OAAOK,MAAP,GAAgB,CAAhB,IAAsBJ,eAAe,CAAvC,GACD,CADC,GAEDC,KAAKC,IAAL,CAAUH,OAAOC,aAAa,CAApB,EAAuBK,CAAvB,GAA2BN,OAAOC,UAAP,EAAmBK,CAAxD,CAFN;AAGD,C","file":"calcDirection.js","sourcesContent":["export default (points, pointIndex) => {\r\n  Math.sign = Math.sign || function(x) { return x > 0 ? 1 : -1; }\r\n\r\n  return ( points.length < 2  || pointIndex === 0)\r\n      ? 0\r\n      : Math.sign(points[pointIndex - 1].y - points[pointIndex].y);\r\n}\r\n"]}

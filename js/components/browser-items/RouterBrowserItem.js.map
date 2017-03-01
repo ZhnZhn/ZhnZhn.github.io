@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-items\\RouterBrowserItem.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-items\\RouterBrowserItem.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAM,oBAAoB;AACxB,yBADwB;;AAGxB,sBAHwB;AAIxB,oCAJwB;AAKxB,4BALwB;CAApB;;kBAQS"
-}
+{"version":3,"sources":["../../../src/components/browser-items/RouterBrowserItem.js"],"names":["RouterBrowserItem","DEFAULT","Item","ItemWithCap","ItemLse"],"mappings":";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,oBAAoB;AACxBC,yBADwB;;AAGxBC,sBAHwB;AAIxBC,oCAJwB;AAKxBC;AALwB,CAA1B;;kBAQeJ,iB","file":"RouterBrowserItem.js","sourcesContent":["import Item from './Item';\r\nimport ItemWithCap from './ItemWithCap';\r\nimport ItemLse from './ItemLse';\r\n\r\nconst RouterBrowserItem = {\r\n  DEFAULT : Item,\r\n\r\n  Item : Item,\r\n  ItemWithCap : ItemWithCap,\r\n  ItemLse : ItemLse\r\n};\r\n\r\nexport default RouterBrowserItem\r\n"]}

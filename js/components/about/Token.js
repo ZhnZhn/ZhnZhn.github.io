@@ -11,10 +11,11 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Token = function Token(props) {
-   var isFirstBlank = props.isFirstBlank;
-   var color = props.color;
-   var children = props.children;
-   var _firstChart = isFirstBlank ? ' ' : undefined;
+   var isFirstBlank = props.isFirstBlank,
+       color = props.color,
+       children = props.children,
+       _firstChart = isFirstBlank ? ' ' : undefined;
+
    return _react2.default.createElement(
       'span',
       { style: { color: color, fontWeight: 'bold' } },
@@ -24,4 +25,4 @@ var Token = function Token(props) {
 };
 
 exports.default = Token;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\Token.js.map
+//# sourceMappingURL=Token.js.map

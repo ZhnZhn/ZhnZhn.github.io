@@ -212,4 +212,4 @@ var fnCreateSparkData = exports.fnCreateSparkData = function fnCreateSparkData(j
 
   return { sparkvalues: sparkvalues, sparkpercent: sparkpercent };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\StackedFn.js.map
+//# sourceMappingURL=StackedFn.js.map

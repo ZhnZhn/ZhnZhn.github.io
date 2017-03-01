@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-import ZhSelect from '../ZhSelect';
+import InputSelect from '../zhn/InputSelect';
 import DialogStyles from '../styles/DialogStyles';
 import withLoadOptions from './decorators/withLoadOptions';
 
@@ -48,7 +48,7 @@ class SelectWithLoad extends Component {
            <span style={Styles.labelSpan}>
               {caption}
            </span>
-           <ZhSelect
+           <InputSelect
              width="250"
              isLoading={isLoading}
              isLoadingFailed={isLoadingFailed}

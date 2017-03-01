@@ -34,4 +34,4 @@ var EuronextLink = function EuronextLink(_ref) {
 };
 
 exports.default = EuronextLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\EuronextLink.js.map
+//# sourceMappingURL=EuronextLink.js.map

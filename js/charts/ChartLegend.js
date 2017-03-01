@@ -61,4 +61,4 @@ var ChartLegend = {
 };
 
 exports.default = ChartLegend;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartLegend.js.map
+//# sourceMappingURL=ChartLegend.js.map

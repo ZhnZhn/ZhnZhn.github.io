@@ -27,4 +27,4 @@ var WatchDefault = {
 };
 
 exports.default = WatchDefault;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\WatchDefault.js.map
+//# sourceMappingURL=WatchDefault.js.map

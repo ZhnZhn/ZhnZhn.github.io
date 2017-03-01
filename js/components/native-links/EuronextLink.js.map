@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\EuronextLink.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\EuronextLink.js",
- "sourceRoot": "",
- "names": [
-  "EURONEXT_BASE",
-  "CAPTION",
-  "EuronextLink",
-  "item",
-  "caption",
-  "LINK",
-  "isin",
-  "market"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,gBAAgB,gDAAtB;AAAA,IACMC,UAAU,eADhB;;AAGA,IAAMC,eAAe,SAAfA,YAAe;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,EAAR;AAAA,0BAAYC,OAAZ;AAAA,MAAYA,OAAZ,gCAAoBH,OAApB;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,aADZ;AAEE,aAAO,eAAMI,IAFf;AAGE,iBAASL,aAAT,GAAyBG,KAAKG,IAA9B,SAAsCH,KAAKI;AAH7C;AAKMH,WALN,SAKiBD,KAAKC;AALtB,GADmB;AAAA,CAArB;;kBAUeF,Y"
-}
+{"version":3,"sources":["../../../src/components/native-links/EuronextLink.jsx"],"names":["EURONEXT_BASE","CAPTION","EuronextLink","item","caption","LINK","isin","market"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,gBAAgB,gDAAtB;AAAA,IACMC,UAAU,eADhB;;AAGA,IAAMC,eAAe,SAAfA,YAAe;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,EAAR;AAAA,0BAAYC,OAAZ;AAAA,MAAYA,OAAZ,gCAAoBH,OAApB;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,aADZ;AAEE,aAAO,eAAMI,IAFf;AAGE,iBAASL,aAAT,GAAyBG,KAAKG,IAA9B,SAAsCH,KAAKI;AAH7C;AAKMH,WALN,SAKiBD,KAAKC;AALtB,GADmB;AAAA,CAArB;;kBAUeF,Y","file":"EuronextLink.js","sourcesContent":["import React from 'react';\r\n\r\nimport STYLE from './Link.Style';\r\n\r\nconst EURONEXT_BASE = 'https://www.euronext.com/en/products/equities/'\r\n    , CAPTION = 'Euronext Link'\r\n\r\nconst EuronextLink = ({ item={}, caption=CAPTION }) => (\r\n  <a\r\n    className=\"native-link\"\r\n    style={STYLE.LINK}\r\n    href={`${EURONEXT_BASE}${item.isin}-${item.market}`}\r\n  >\r\n    {`${caption} ${item.caption}`}\r\n  </a>\r\n)\r\n\r\nexport default EuronextLink\r\n"]}

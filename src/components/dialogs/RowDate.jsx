@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import ZhDateField from '../ZhDateField';
+import DateField from '../zhn/DateField';
 import DialogStyles from '../styles/DialogStyles';
 
 const Styles = DialogStyles;
@@ -20,7 +20,7 @@ class RowDate extends Component {
         <span style={Styles.labelSpan}>
            {labelTitle}
         </span>
-        <ZhDateField
+        <DateField
            ref={c => this.inputDate = c}
            initValue={initValue}
            errorMsg={errorMsg}

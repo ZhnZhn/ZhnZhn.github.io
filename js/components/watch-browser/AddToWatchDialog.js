@@ -26,17 +26,17 @@ var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _ZhSelect = require('../ZhSelect');
+var _InputSelect = require('../zhn/InputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
@@ -110,8 +110,7 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
   },
   _handlerSelectGroup: function _handlerSelectGroup(group) {
     if (group && group.caption) {
-      var store = this.props.store;
-
+      //const {store} = this.props;
       this.groupCaption = group.caption;
       if (group.lists) {
         this.setState({ listOptions: group.lists });
@@ -132,13 +131,11 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
   _handlerAdd: function _handlerAdd() {
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      var _props = this.props;
-      var data = _props.data;
-      var onClose = _props.onClose;
-      var caption = data.caption;
-      var config = data.config;
-      var groupCaption = this.groupCaption;
-      var listCaption = this.listCaption;
+      var data = this.props.data,
+          caption = data.caption,
+          config = data.config,
+          groupCaption = this.groupCaption,
+          listCaption = this.listCaption;
 
 
       _WatchActions2.default.addItem({ caption: caption, groupCaption: groupCaption, listCaption: listCaption, config: config });
@@ -164,21 +161,21 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
     this.props.onClose();
   },
   render: function render() {
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var data = _props2.data;
-    var onClose = _props2.onClose;
-    var caption = data.caption;
-    var _state = this.state;
-    var groupOptions = _state.groupOptions;
-    var listOptions = _state.listOptions;
-    var validationMessages = _state.validationMessages;
-    var commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props = this.props,
+        isShow = _props.isShow,
+        data = _props.data,
+        caption = data.caption,
+        _state = this.state,
+        groupOptions = _state.groupOptions,
+        listOptions = _state.listOptions,
+        validationMessages = _state.validationMessages,
+        commandButtons = [_react2.default.createElement(_ActionButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Add',
       onClick: this._handlerAdd
     })];
+
     return _react2.default.createElement(
       _ModalDialog2.default,
       {
@@ -195,7 +192,7 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
           { style: styles.labelSpan },
           'Group:'
         ),
-        _react2.default.createElement(_ZhSelect2.default, {
+        _react2.default.createElement(_InputSelect2.default, {
           width: '250',
           options: groupOptions,
           onSelect: this._handlerSelectGroup
@@ -209,7 +206,7 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
           { style: styles.labelSpan },
           'List:'
         ),
-        _react2.default.createElement(_ZhSelect2.default, {
+        _react2.default.createElement(_InputSelect2.default, {
           width: '250',
           onSelect: this._handlerSelectList,
           options: listOptions
@@ -229,8 +226,7 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
           caption
         )
       ),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        key: '4',
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       })
     );
@@ -238,4 +234,4 @@ var AddToWatchDialog = _react2.default.createClass(_extends({}, _WithValidation2
 }));
 
 exports.default = AddToWatchDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\AddToWatchDialog.js.map
+//# sourceMappingURL=AddToWatchDialog.js.map

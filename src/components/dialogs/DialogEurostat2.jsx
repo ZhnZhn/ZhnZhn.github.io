@@ -6,15 +6,15 @@ import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
 import { isStrInArr } from '../../utils/is';
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 import ShowHide from '../zhn/ShowHide';
 import RowInputSelect from './RowInputSelect';
 
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 import withToolbar from './decorators/withToolbar';
 import withValidationLoad from './decorators/withValidationLoad';
@@ -157,7 +157,7 @@ class DialogEurostat2 extends Component {
           } = this.props
         , { isShowDate, dateDefault, dateOptions, validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
@@ -166,7 +166,7 @@ class DialogEurostat2 extends Component {
     ];
 
     return(
-        <ZhDialog
+        <DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={_commandButtons}
@@ -206,10 +206,10 @@ class DialogEurostat2 extends Component {
                   onSelect={this._handleSelectDate}
                />
              </ShowHide>
-             <ValidationMessagesFragment
+             <ValidationMessages
                  validationMessages={validationMessages}
              />
-        </ZhDialog>
+        </DraggableDialog>
     );
   }
 }

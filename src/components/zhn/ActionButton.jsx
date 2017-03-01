@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ToolBarButton = (props) => {
+const ActionButton = (props) => {
     const {
             type, style, title, caption,
             children, onClick
@@ -24,4 +24,4 @@ const ToolBarButton = (props) => {
      );
 }
 
-export default ToolBarButton
+export default ActionButton

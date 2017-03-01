@@ -30,7 +30,7 @@ var _RouterBrowserItem = require('../../components/browser-items/RouterBrowserIt
 
 var _RouterBrowserItem2 = _interopRequireDefault(_RouterBrowserItem);
 
-var _ChartContainer = require('../../components/ChartContainer2');
+var _ChartContainer = require('../../components/zhn-containers/ChartContainer');
 
 var _ChartContainer2 = _interopRequireDefault(_ChartContainer);
 
@@ -189,4 +189,4 @@ var Factory = {
 };
 
 exports.default = Factory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\Factory.js.map
+//# sourceMappingURL=Factory.js.map

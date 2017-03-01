@@ -29,4 +29,4 @@ var LabelNew = function LabelNew() {
 };
 
 exports.default = LabelNew;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\LabelNew.js.map
+//# sourceMappingURL=LabelNew.js.map

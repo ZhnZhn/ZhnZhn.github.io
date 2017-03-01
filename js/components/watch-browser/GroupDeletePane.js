@@ -12,13 +12,13 @@ var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58,10 +58,10 @@ var GroupDeletePane = _react2.default.createClass({
     this.unsubscribe();
   },
   _onStore: function _onStore(actionType, data) {
-    var _props = this.props;
-    var actionCompleted = _props.actionCompleted;
-    var forActionType = _props.forActionType;
-    var store = _props.store;
+    var _props = this.props,
+        actionCompleted = _props.actionCompleted,
+        forActionType = _props.forActionType,
+        store = _props.store;
 
     if (actionType === actionCompleted) {
       if (data.forActionType === forActionType) {
@@ -90,10 +90,10 @@ var GroupDeletePane = _react2.default.createClass({
     }
   },
   render: function render() {
-    var onClose = this.props.onClose;
-    var _state = this.state;
-    var groupOptions = _state.groupOptions;
-    var validationMessages = _state.validationMessages;
+    var onClose = this.props.onClose,
+        _state = this.state,
+        groupOptions = _state.groupOptions,
+        validationMessages = _state.validationMessages;
 
 
     return _react2.default.createElement(
@@ -105,18 +105,18 @@ var GroupDeletePane = _react2.default.createClass({
         //isUpdateOptions={true}
         , onSelect: this._handlerSelectGroup
       }),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       }),
       _react2.default.createElement(
         'div',
         { style: Styles.COMMAND_DIV },
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Delete',
           onClick: this._handlerDeleteGroup
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Close',
           onClick: onClose
@@ -127,4 +127,4 @@ var GroupDeletePane = _react2.default.createClass({
 });
 
 exports.default = GroupDeletePane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\GroupDeletePane.js.map
+//# sourceMappingURL=GroupDeletePane.js.map

@@ -57,10 +57,10 @@ var EditListDialog = _react2.default.createClass({
     return true;
   },
   render: function render() {
-    var _props = this.props;
-    var isShow = _props.isShow;
-    var store = _props.store;
-    var onClose = _props.onClose;
+    var _props = this.props,
+        isShow = _props.isShow,
+        store = _props.store,
+        onClose = _props.onClose;
 
     return _react2.default.createElement(
       _ModalDialog2.default,
@@ -119,4 +119,4 @@ var EditListDialog = _react2.default.createClass({
 });
 
 exports.default = EditListDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\EditListDialog.js.map
+//# sourceMappingURL=EditListDialog.js.map

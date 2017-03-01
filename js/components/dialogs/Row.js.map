@@ -1,17 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\Row.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\Row.js",
- "sourceRoot": "",
- "names": [
-  "styles",
-  "Row",
-  "style",
-  "children",
-  "Object",
-  "assign",
-  "rowDiv"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AACA,IAAMA,+BAAN;;AAEA,IAAMC,MAAM,SAANA,GAAM;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,SACV;AAAA;AAAA,MAAK,OAAOC,OAAOC,MAAP,CAAc,EAAd,EAAiBL,OAAOM,MAAxB,EAAgCJ,KAAhC,CAAZ;AACGC;AADH,GADU;AAAA,CAAZ;;kBAMeF,G"
-}
+{"version":3,"sources":["../../../src/components/dialogs/Row.jsx"],"names":["styles","Row","style","children","Object","assign","rowDiv"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AACA,IAAMA,+BAAN;;AAEA,IAAMC,MAAM,SAANA,GAAM;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,SACV;AAAA;AAAA,MAAK,OAAOC,OAAOC,MAAP,CAAc,EAAd,EAAiBL,OAAOM,MAAxB,EAAgCJ,KAAhC,CAAZ;AACGC;AADH,GADU;AAAA,CAAZ;;kBAMeF,G","file":"Row.js","sourcesContent":["import React from 'react';\r\n\r\nimport DialogStyles from '../styles/DialogStyles';\r\nconst styles = DialogStyles;\r\n\r\nconst Row = ({ style, children }) => (\r\n  <div style={Object.assign({},styles.rowDiv, style)}>\r\n    {children}\r\n  </div>\r\n);\r\n\r\nexport default Row\r\n"]}

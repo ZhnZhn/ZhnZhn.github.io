@@ -11,4 +11,4 @@ exports.default = function (points, pointIndex) {
 
   return points.length < 2 || pointIndex === 0 ? 0 : Math.sign(points[pointIndex - 1].y - points[pointIndex].y);
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhnSparklines\dataProcessing\calcDirection.js.map
+//# sourceMappingURL=calcDirection.js.map

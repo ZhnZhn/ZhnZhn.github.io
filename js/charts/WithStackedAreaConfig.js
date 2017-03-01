@@ -16,8 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var WithStackAreaConfig = {
   fBaseStackAreaConfig: function fBaseStackAreaConfig(_ref) {
-    var _ref$stacking = _ref.stacking;
-    var stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
+    var _ref$stacking = _ref.stacking,
+        stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
 
     return {
       zhSeries: {
@@ -54,12 +54,12 @@ var WithStackAreaConfig = {
     };
   },
   fStackAreaSeria: function fStackAreaSeria(_ref2) {
-    var zhSeriaId = _ref2.zhSeriaId;
-    var name = _ref2.name;
-    var _ref2$data = _ref2.data;
-    var data = _ref2$data === undefined ? [] : _ref2$data;
-    var _ref2$color = _ref2.color;
-    var color = _ref2$color === undefined ? 'gray' : _ref2$color;
+    var zhSeriaId = _ref2.zhSeriaId,
+        name = _ref2.name,
+        _ref2$data = _ref2.data,
+        data = _ref2$data === undefined ? [] : _ref2$data,
+        _ref2$color = _ref2.color,
+        color = _ref2$color === undefined ? 'gray' : _ref2$color;
 
     return {
       zhSeriaId: zhSeriaId,
@@ -77,4 +77,4 @@ var WithStackAreaConfig = {
 };
 
 exports.default = WithStackAreaConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedAreaConfig.js.map
+//# sourceMappingURL=WithStackedAreaConfig.js.map

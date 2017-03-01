@@ -61,13 +61,13 @@ var STYLE = {
   }
 };
 
-var ZhDateField = function (_Component) {
-  _inherits(ZhDateField, _Component);
+var DateField = function (_Component) {
+  _inherits(DateField, _Component);
 
-  function ZhDateField(props) {
-    _classCallCheck(this, ZhDateField);
+  function DateField(props) {
+    _classCallCheck(this, DateField);
 
-    var _this = _possibleConstructorReturn(this, (ZhDateField.__proto__ || Object.getPrototypeOf(ZhDateField)).call(this));
+    var _this = _possibleConstructorReturn(this, (DateField.__proto__ || Object.getPrototypeOf(DateField)).call(this));
 
     _this._handleChangeValue = function (event) {
       var _this$props = _this.props,
@@ -129,7 +129,7 @@ var ZhDateField = function (_Component) {
     return _this;
   }
 
-  _createClass(ZhDateField, [{
+  _createClass(DateField, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -169,8 +169,8 @@ var ZhDateField = function (_Component) {
     }
   }]);
 
-  return ZhDateField;
+  return DateField;
 }(_react.Component);
 
-exports.default = ZhDateField;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ZhDateField.js.map
+exports.default = DateField;
+//# sourceMappingURL=DateField.js.map

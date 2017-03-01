@@ -15,12 +15,12 @@ var _calcDirection2 = _interopRequireDefault(_calcDirection);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SparklinesSpot = function SparklinesSpot(props) {
-    var points = props.points;
-    var size = props.size;
-    var style = props.style;
-    var spotColors = props.spotColors;
-    var pointIndex = props.pointIndex;
-    var pointSpot = _react2.default.createElement('circle', {
+    var points = props.points,
+        size = props.size,
+        style = props.style,
+        spotColors = props.spotColors,
+        pointIndex = props.pointIndex,
+        pointSpot = _react2.default.createElement('circle', {
         cx: points[pointIndex].x,
         cy: points[pointIndex].y,
         r: size,
@@ -50,4 +50,4 @@ SparklinesSpot.defaultProps = {
 };
 
 exports.default = SparklinesSpot;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhnSparklines\SparklinesSpot.js.map
+//# sourceMappingURL=SparklinesSpot.js.map

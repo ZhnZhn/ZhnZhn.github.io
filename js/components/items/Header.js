@@ -16,7 +16,7 @@ var _ValueMovingBadge = require('../zhn/ValueMovingBadge');
 
 var _ValueMovingBadge2 = _interopRequireDefault(_ValueMovingBadge);
 
-var _SvgClose = require('../SvgClose');
+var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
@@ -122,4 +122,4 @@ Header.propTypes = {
 };
 
 exports.default = Header;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\Header.js.map
+//# sourceMappingURL=Header.js.map

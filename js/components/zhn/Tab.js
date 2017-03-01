@@ -59,4 +59,4 @@ var Tab = function Tab(props) {
 };
 
 exports.default = Tab;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\Tab.js.map
+//# sourceMappingURL=Tab.js.map

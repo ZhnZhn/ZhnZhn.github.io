@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ModalDialog from '../zhn/ModalDialog';
 import InputSecret from '../zhn/InputSecret';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 
 import ChartStore from '../../flux/stores/ChartStore';
 
@@ -35,7 +35,7 @@ class SettingsDialog extends Component {
 
   render(){
     const commandButtons =[
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Set"

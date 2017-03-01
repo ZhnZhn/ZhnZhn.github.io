@@ -16,9 +16,9 @@ var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
-var _ZhDialog = require('../ZhDialog');
+var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
-var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
+var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
 
 var _WithValidation = require('../dialogs/WithValidation');
 
@@ -40,17 +40,17 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _DatesFragment = require('../DatesFragment');
+var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -150,11 +150,12 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     });
   },
   _handlerClickAll: function _handlerClickAll() {
-    var _state = this.state;
-    var isShowFilter = _state.isShowFilter;
-    var isShowDate = _state.isShowDate;
-    var isShowChartType = _state.isShowChartType;
-    var _isShow = isShowFilter || isShowDate || isShowChartType ? false : true;
+    var _state = this.state,
+        isShowFilter = _state.isShowFilter,
+        isShowDate = _state.isShowDate,
+        isShowChartType = _state.isShowChartType,
+        _isShow = isShowFilter || isShowDate || isShowChartType ? false : true;
+
     this.setState({
       isShowFilter: _isShow,
       isShowDate: _isShow,
@@ -204,10 +205,9 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
       msg.push(this.props.msgOnNotSelected('Subheading'));
     }
 
-    var _datesFragment$getVal = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal.isValid;
-    var datesMsg = _datesFragment$getVal.datesMsg;
+    var _datesFragment$getVal = this.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal.isValid,
+        datesMsg = _datesFragment$getVal.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -216,13 +216,12 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadMetaOption: function _createLoadMetaOption() {
-    var _datesFragment$getVal2 = this.datesFragment.getValues();
-
-    var fromDate = _datesFragment$getVal2.fromDate;
-    var toDate = _datesFragment$getVal2.toDate;
-    var _props = this.props;
-    var loadId = _props.loadId;
-    var fnValue = _props.fnValue;
+    var _datesFragment$getVal2 = this.datesFragment.getValues(),
+        fromDate = _datesFragment$getVal2.fromDate,
+        toDate = _datesFragment$getVal2.toDate,
+        _props = this.props,
+        loadId = _props.loadId,
+        fnValue = _props.fnValue;
 
     return {
       value: fnValue(this.chapter.value, this.country.value),
@@ -277,17 +276,17 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadDataOption: function _createLoadDataOption() {
-    var _datesFragment$getVal3 = this.datesFragment.getValues();
+    var _datesFragment$getVal3 = this.datesFragment.getValues(),
+        fromDate = _datesFragment$getVal3.fromDate,
+        toDate = _datesFragment$getVal3.toDate,
+        _dataColumn = this.subheading ? this.subheading.value : this.props.dataColumn,
+        _props2 = this.props,
+        loadId = _props2.loadId,
+        fnValue = _props2.fnValue,
+        _chartType = this.chartType ? this.chartType.value : _Type.ChartType.AREA,
+        _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption,
+        _sliceItems = !(!this.chartType || this.chartType.value === _Type.ChartType.AREA) ? this._createSpliceItems() : undefined;
 
-    var fromDate = _datesFragment$getVal3.fromDate;
-    var toDate = _datesFragment$getVal3.toDate;
-    var _dataColumn = this.subheading ? this.subheading.value : this.props.dataColumn;
-    var _props2 = this.props;
-    var loadId = _props2.loadId;
-    var fnValue = _props2.fnValue;
-    var _chartType = this.chartType ? this.chartType.value : _Type.ChartType.AREA;
-    var _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption;
-    var _sliceItems = !(!this.chartType || this.chartType.value === _Type.ChartType.AREA) ? this._createSpliceItems() : undefined;
     return {
       value: fnValue(this.chapter.value, this.country.value),
       fromDate: fromDate,
@@ -303,8 +302,8 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   _createSpliceItems: function _createSpliceItems() {
     var _filterLength = this.tradeFilter.value.length + 2;
     return this.state.optionTrades.map(function (item, index) {
-      var value = item.value;
-      var caption = item.caption;
+      var value = item.value,
+          caption = item.caption;
 
       caption = caption.substring(0, caption.length - _filterLength);
       return { caption: caption, value: value };
@@ -317,42 +316,43 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this2 = this;
 
-    var _props3 = this.props;
-    var isShow = _props3.isShow;
-    var onShow = _props3.onShow;
-    var countryURI = _props3.countryURI;
-    var countryJsonProp = _props3.countryJsonProp;
-    var commodityURI = _props3.commodityURI;
-    var commodityJsonProp = _props3.commodityJsonProp;
-    var initFromDate = _props3.initFromDate;
-    var initToDate = _props3.initToDate;
-    var msgOnNotValidFormat = _props3.msgOnNotValidFormat;
-    var onTestDate = _props3.onTestDate;
-    var _state2 = this.state;
-    var isShowFilter = _state2.isShowFilter;
-    var isShowDate = _state2.isShowDate;
-    var isShowChartType = _state2.isShowChartType;
-    var optionTradeFilter = _state2.optionTradeFilter;
-    var isLoadingTrade = _state2.isLoadingTrade;
-    var isLoadingTradeFailed = _state2.isLoadingTradeFailed;
-    var optionTrades = _state2.optionTrades;
-    var placeholderTrade = _state2.placeholderTrade;
-    var optionChartTypes = _state2.optionChartTypes;
-    var validationMessages = _state2.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props3 = this.props,
+        isShow = _props3.isShow,
+        onShow = _props3.onShow,
+        countryURI = _props3.countryURI,
+        countryJsonProp = _props3.countryJsonProp,
+        commodityURI = _props3.commodityURI,
+        commodityJsonProp = _props3.commodityJsonProp,
+        initFromDate = _props3.initFromDate,
+        initToDate = _props3.initToDate,
+        msgOnNotValidFormat = _props3.msgOnNotValidFormat,
+        onTestDate = _props3.onTestDate,
+        _state2 = this.state,
+        isShowFilter = _state2.isShowFilter,
+        isShowDate = _state2.isShowDate,
+        isShowChartType = _state2.isShowChartType,
+        optionTradeFilter = _state2.optionTradeFilter,
+        isLoadingTrade = _state2.isLoadingTrade,
+        isLoadingTradeFailed = _state2.isLoadingTradeFailed,
+        optionTrades = _state2.optionTrades,
+        placeholderTrade = _state2.placeholderTrade,
+        optionChartTypes = _state2.optionChartTypes,
+        validationMessages = _state2.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load Meta',
       onClick: this._handlerLoadMeta
-    }), _react2.default.createElement(_ToolBarButton2.default, {
+    }), _react2.default.createElement(_ActionButton2.default, {
       key: 'b',
       type: 'TypeC',
       caption: 'Load Data',
       onClick: this._handlerLoadData
     })];
 
+
     return _react2.default.createElement(
-      _ZhDialog2.default,
+      _DraggableDialog2.default,
       {
         caption: 'United Nations Commodity Trade',
         isShow: isShow,
@@ -422,7 +422,7 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
           onSelect: this._handlerSelectChartType
         })
       ),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       })
     );
@@ -430,4 +430,4 @@ var UNCommodityTradeDialog = _react2.default.createClass(_extends({
 }));
 
 exports.default = UNCommodityTradeDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\UNCommodityTradeDialog.js.map
+//# sourceMappingURL=UNCommodityTradeDialog.js.map

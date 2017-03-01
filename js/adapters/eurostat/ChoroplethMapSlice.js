@@ -8,14 +8,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _typeI = {
   createMapValue: function createMapValue(props, item) {
-    var group = props.group;
-    var value = item.value;
+    var group = props.group,
+        value = item.value;
 
     return group + "?indic=" + value;
   },
   createMapSlice: function createMapSlice(props, item) {
-    var mapSlice = props.mapSlice;
-    var value = item.value;
+    var mapSlice = props.mapSlice,
+        value = item.value;
 
     return _extends({}, mapSlice, { indic: value });
   }
@@ -42,8 +42,9 @@ var _rMapSlice = {
 
 var ChoroplethMapSlice = {
   createMapValue: function createMapValue(props, item) {
-    var mapType = props.mapType;
-    var _fnCreate = _rMapValue[mapType];
+    var mapType = props.mapType,
+        _fnCreate = _rMapValue[mapType];
+
 
     if (_fnCreate) {
       return _fnCreate(props, item);
@@ -52,8 +53,9 @@ var ChoroplethMapSlice = {
     }
   },
   createMapSlice: function createMapSlice(props, item) {
-    var mapType = props.mapType;
-    var _fnCreate = _rMapSlice[mapType];
+    var mapType = props.mapType,
+        _fnCreate = _rMapSlice[mapType];
+
 
     if (_fnCreate) {
       return _fnCreate(props, item);
@@ -64,4 +66,4 @@ var ChoroplethMapSlice = {
 };
 
 exports.default = ChoroplethMapSlice;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\ChoroplethMapSlice.js.map
+//# sourceMappingURL=ChoroplethMapSlice.js.map

@@ -197,4 +197,4 @@ var QuandlFn2 = {
 };
 
 exports.default = QuandlFn2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlFn2.js.map
+//# sourceMappingURL=QuandlFn2.js.map

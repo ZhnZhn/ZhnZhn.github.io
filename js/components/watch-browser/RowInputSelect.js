@@ -8,9 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZhSelect = require('../ZhSelect');
+var _InputSelect = require('../zhn/InputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
@@ -34,11 +34,11 @@ var RowInputSelect = _react2.default.createClass({
     onSelect: _react2.default.PropTypes.func
   },
   render: function render() {
-    var _props = this.props;
-    var caption = _props.caption;
-    var options = _props.options;
-    var isUpdateOptions = _props.isUpdateOptions;
-    var onSelect = _props.onSelect;
+    var _props = this.props,
+        caption = _props.caption,
+        options = _props.options,
+        isUpdateOptions = _props.isUpdateOptions,
+        onSelect = _props.onSelect;
 
     return _react2.default.createElement(
       'div',
@@ -48,7 +48,7 @@ var RowInputSelect = _react2.default.createClass({
         { style: Object.assign({}, styles.labelSpan, Styles.CAPTION) },
         caption
       ),
-      _react2.default.createElement(_ZhSelect2.default, {
+      _react2.default.createElement(_InputSelect2.default, {
         width: '250',
         options: options,
         isUpdateOptions: isUpdateOptions,
@@ -60,4 +60,4 @@ var RowInputSelect = _react2.default.createClass({
 });
 
 exports.default = RowInputSelect;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\RowInputSelect.js.map
+//# sourceMappingURL=RowInputSelect.js.map

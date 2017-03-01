@@ -1,7 +1,7 @@
 import React, { Component, PropTypes} from 'react';
 
-import SvgClose from '../SvgClose.js';
-import ToolBarButton from '../ToolBarButton.js';
+import SvgClose from './SvgClose';
+import ActionButton from './ActionButton';
 
 const ClassNames = {
   SHOWING : 'show-popup',
@@ -92,7 +92,7 @@ class ModalDialog extends Component {
     return (
       <div style={Styles.COMMAND_DIV}>
         {commandButtons}
-        <ToolBarButton
+        <ActionButton
            type="TypeC"
            caption="Close"
            onClick={onClose}

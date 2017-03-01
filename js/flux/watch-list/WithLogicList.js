@@ -12,8 +12,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var WithLogicList = {
   createList: function createList(watchList, _ref) {
-    var captionGroup = _ref.captionGroup;
-    var captionList = _ref.captionList;
+    var captionGroup = _ref.captionGroup,
+        captionList = _ref.captionList;
 
     var groupTo = _LogicFn2.default.findGroup(watchList, captionGroup);
 
@@ -29,9 +29,9 @@ var WithLogicList = {
     return { isDone: true };
   },
   renameList: function renameList(watchList, _ref2) {
-    var captionGroup = _ref2.captionGroup;
-    var captionListFrom = _ref2.captionListFrom;
-    var captionListTo = _ref2.captionListTo;
+    var captionGroup = _ref2.captionGroup,
+        captionListFrom = _ref2.captionListFrom,
+        captionListTo = _ref2.captionListTo;
 
     var groupIn = _LogicFn2.default.findGroup(watchList, captionGroup);
 
@@ -51,8 +51,8 @@ var WithLogicList = {
     return { isDone: true };
   },
   deleteList: function deleteList(watchList, _ref3) {
-    var captionGroup = _ref3.captionGroup;
-    var captionList = _ref3.captionList;
+    var captionGroup = _ref3.captionGroup,
+        captionList = _ref3.captionList;
 
     var groupFrom = _LogicFn2.default.findGroup(watchList, captionGroup);
 
@@ -66,4 +66,4 @@ var WithLogicList = {
 };
 
 exports.default = WithLogicList;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WithLogicList.js.map
+//# sourceMappingURL=WithLogicList.js.map

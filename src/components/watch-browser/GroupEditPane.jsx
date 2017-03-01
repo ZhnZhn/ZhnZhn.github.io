@@ -2,8 +2,8 @@ import React from 'react';
 
 import RowInputSelect from './RowInputSelect';
 import RowInputText from './RowInputText';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
-import ToolBarButton from '../ToolBarButton';
+import ValidationMessages from '../zhn/ValidationMessages';
+import ActionButton from '../zhn/ActionButton';
 
 const Styles = {
   COMMAND_DIV : {
@@ -85,35 +85,35 @@ const GroupEditPane = React.createClass({
   },
 
   render(){
-    const {onClose} = this.props
-        , {isUpdateOptions, groupOptions, validationMessages} = this.state;
+    const { onClose } = this.props
+        , { groupOptions, validationMessages} = this.state;
 
     return (
        <div>
           <RowInputSelect
              caption={'Group From:'}
-             options={groupOptions}            
+             options={groupOptions}
              onSelect={this._handlerSelectGroup}
           />
          <RowInputText
            ref={c => this.inputText = c}
            caption={'Group To:'}
          />
-         <ValidationMessagesFragment
+         <ValidationMessages
            validationMessages={validationMessages}
          />
          <div style={Styles.COMMAND_DIV}>
-           <ToolBarButton
+           <ActionButton
              type="TypeC"
              caption="Rename"
              onClick={this._handlerRename}
            />
-           <ToolBarButton
+           <ActionButton
              type="TypeC"
              caption="Clear"
              onClick={this._handlerClear}
            />
-          <ToolBarButton
+          <ActionButton
              type="TypeC"
              caption="Close"
              onClick={onClose}

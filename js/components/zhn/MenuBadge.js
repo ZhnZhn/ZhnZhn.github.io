@@ -71,4 +71,4 @@ var MenuBadge = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuBadge;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuBadge.js.map
+//# sourceMappingURL=MenuBadge.js.map

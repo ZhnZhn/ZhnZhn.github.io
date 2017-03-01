@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ZhSelect from '../ZhSelect';
+import InputSelect from '../zhn/InputSelect';
 import DialogStyles from '../styles/DialogStyles'
 
 const styles = DialogStyles;
@@ -25,7 +25,7 @@ const RowInputSelect = React.createClass({
          <span style={Object.assign({}, styles.labelSpan, Styles.CAPTION)}>
            {caption}
          </span>
-         <ZhSelect
+         <InputSelect
             width="250"
             options={options}
             isUpdateOptions={isUpdateOptions}

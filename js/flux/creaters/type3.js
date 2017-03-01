@@ -40,4 +40,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type3.js.map
+//# sourceMappingURL=type3.js.map

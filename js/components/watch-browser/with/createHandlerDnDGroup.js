@@ -22,10 +22,11 @@ var createHandlerDnDGroup = function createHandlerDnDGroup(DRAG, WatchActions) {
       var caption = _ref2.caption;
 
       this.dropWithDnDStyle(ev);
-      var data = JSON.parse(ev.dataTransfer.getData("text"));
-      var xType = data.xType;
-      var dragId = data.dragId;
-      var dropId = caption + ";";
+      var data = JSON.parse(ev.dataTransfer.getData("text")),
+          xType = data.xType,
+          dragId = data.dragId,
+          dropId = caption + ";";
+
 
       if (xType === DRAG.GROUP) {
         if (dragId !== dropId) {
@@ -60,4 +61,4 @@ var createHandlerDnDGroup = function createHandlerDnDGroup(DRAG, WatchActions) {
 };
 
 exports.default = createHandlerDnDGroup;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\with\createHandlerDnDGroup.js.map
+//# sourceMappingURL=createHandlerDnDGroup.js.map

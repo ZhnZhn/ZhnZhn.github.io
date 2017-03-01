@@ -36,4 +36,4 @@ var QuandlLink = function QuandlLink(_ref) {
 };
 
 exports.default = QuandlLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\QuandlLink.js.map
+//# sourceMappingURL=QuandlLink.js.map

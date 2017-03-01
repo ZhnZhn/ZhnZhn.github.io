@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\Token.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\Token.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,QAAQ,SAAR,KAAQ,CAAC,KAAD,EAAW;OACf,eAAkC,MAAlC,aADe;OACD,QAAoB,MAApB,MADC;AACjB,OAAuB,WAAa,MAAb,QAAvB,CADiB;AAEjB,qBAAc,eAAiB,GAAjB,GAAuB,SAAvB,CAFG;AAGvB,UACG;;QAAM,OAAO,EAAC,OAAO,KAAP,EAAc,YAAY,MAAZ,EAAtB,EAAN;MACI,WADJ;MAEI,QAFJ;IADH,CAHuB;CAAX;;kBAWC"
-}
+{"version":3,"sources":["../../../src/components/about/Token.jsx"],"names":["Token","props","isFirstBlank","color","children","_firstChart","undefined","fontWeight"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ,SAARA,KAAQ,CAACC,KAAD,EAAW;AAAA,OACfC,YADe,GACmBD,KADnB,CACfC,YADe;AAAA,OACDC,KADC,GACmBF,KADnB,CACDE,KADC;AAAA,OACMC,QADN,GACmBH,KADnB,CACMG,QADN;AAAA,OAEjBC,WAFiB,GAEFH,YAAD,GAAiB,GAAjB,GAAuBI,SAFpB;;AAGvB,UACG;AAAA;AAAA,QAAM,OAAO,EAACH,OAAOA,KAAR,EAAeI,YAAY,MAA3B,EAAb;AACIF,iBADJ;AAEID;AAFJ,IADH;AAMD,CATD;;kBAWeJ,K","file":"Token.js","sourcesContent":["import React from 'react';\r\n\r\nconst Token = (props) => {\r\n  const { isFirstBlank, color, children } = props\r\n      , _firstChart = (isFirstBlank) ? ' ' : undefined\r\n  return (\r\n     <span style={{color: color, fontWeight: 'bold'}}>\r\n        {_firstChart}\r\n        {children}\r\n     </span>\r\n  );\r\n};\r\n\r\nexport default Token\r\n"]}

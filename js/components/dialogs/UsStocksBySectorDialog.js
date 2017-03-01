@@ -26,21 +26,21 @@ var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
-var _DatesFragment = require('../DatesFragment');
+var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 var _withValidationLoad = require('./decorators/withValidationLoad');
 
@@ -119,12 +119,12 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           initToDate = _state.initToDate,
           onTestDate = _state.onTestDate,
           validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
         caption: 'Load',
         onClick: this._handleLoad
-      }), _react2.default.createElement(_ToolBarButton2.default, {
+      }), _react2.default.createElement(_ActionButton2.default, {
         key: 'b',
         type: 'TypeC',
         caption: 'Show',
@@ -155,7 +155,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           initToDate: initToDate,
           onTestDate: onTestDate
         }),
-        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+        _react2.default.createElement(_ValidationMessages2.default, {
           validationMessages: validationMessages
         })
       );
@@ -240,4 +240,4 @@ UsStocksBySectorDialog.defaultProps = {
 UsStocksBySectorDialog.displaName = 'UsStocksBySectorDialog';
 
 exports.default = UsStocksBySectorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map
+//# sourceMappingURL=UsStocksBySectorDialog.js.map

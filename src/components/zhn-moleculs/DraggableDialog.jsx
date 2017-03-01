@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import SvgClose from './SvgClose';
-import ToolBarButton from './ToolBarButton';
+import SvgClose from '../zhn/SvgClose';
+import ActionButton from '../zhn/ActionButton';
 
-import Interact from '../utils/Interact';
+import Interact from '../../utils/Interact';
 
 const styles = {
   rootDiv: {
@@ -35,7 +35,7 @@ const styles = {
   }
 };
 
-class ZhDialog extends Component {
+class DraggableDialog extends Component {
   componentDidMount(){
      Interact.makeDragable(this.rootDivEl);
   }
@@ -44,12 +44,12 @@ class ZhDialog extends Component {
     return (
       <div style={styles.commandDiv}>
         {commandButtons}
-        <ToolBarButton
+        <ActionButton
            type="TypeC"
            caption="Show"
            onClick={onShowChart}
         />
-        <ToolBarButton
+        <ActionButton
            type="TypeC"
            caption="Close"
            onClick={onClose}
@@ -86,4 +86,4 @@ class ZhDialog extends Component {
   }
 }
 
-export default ZhDialog
+export default DraggableDialog

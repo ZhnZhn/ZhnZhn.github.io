@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgClose = require('../SvgClose');
+var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
@@ -56,4 +56,4 @@ var BrowserCaption = function BrowserCaption(_ref) {
 };
 
 exports.default = BrowserCaption;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\BrowserCaption.js.map
+//# sourceMappingURL=BrowserCaption.js.map

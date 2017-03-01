@@ -12,11 +12,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZhDateField = require('./ZhDateField');
+var _DateField = require('../zhn/DateField');
 
-var _ZhDateField2 = _interopRequireDefault(_ZhDateField);
+var _DateField2 = _interopRequireDefault(_DateField);
 
-var _DialogStyles = require('./styles/DialogStyles');
+var _DialogStyles = require('../styles/DialogStyles');
 
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
@@ -108,7 +108,7 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
             { style: styles.labelSpan },
             'From Date:'
           ),
-          _react2.default.createElement(_ZhDateField2.default, {
+          _react2.default.createElement(_DateField2.default, {
             ref: function ref(c) {
               return _this2.fromDate = c;
             },
@@ -125,7 +125,7 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
             { style: styles.labelSpan },
             'To Date:'
           ),
-          _react2.default.createElement(_ZhDateField2.default, {
+          _react2.default.createElement(_DateField2.default, {
             ref: function ref(c) {
               return _this2.toDate = c;
             },
@@ -147,4 +147,4 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
   }
 }, _temp2);
 exports.default = DatesFragment;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\DatesFragment.js.map
+//# sourceMappingURL=DatesFragment.js.map

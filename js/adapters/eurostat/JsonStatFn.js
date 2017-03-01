@@ -122,4 +122,4 @@ var JsonStatFn = {
 };
 
 exports.default = JsonStatFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\JsonStatFn.js.map
+//# sourceMappingURL=JsonStatFn.js.map

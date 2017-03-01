@@ -56,7 +56,7 @@ var ComponentSlice = {
     }
   },
   onShowModalDialog: function onShowModalDialog(modalDialogType) {
-    var option = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     option.modalDialogType = modalDialogType;
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
@@ -64,4 +64,4 @@ var ComponentSlice = {
 };
 
 exports.default = ComponentSlice;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ComponentSlice.js.map
+//# sourceMappingURL=ComponentSlice.js.map

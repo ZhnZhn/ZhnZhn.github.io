@@ -43,4 +43,4 @@ var Browser = function Browser(_ref) {
 };
 
 exports.default = Browser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\Browser.js.map
+//# sourceMappingURL=Browser.js.map

@@ -53,4 +53,4 @@ var SparkFactory = {
 };
 
 exports.default = SparkFactory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\factories\SparkFactory.js.map
+//# sourceMappingURL=SparkFactory.js.map

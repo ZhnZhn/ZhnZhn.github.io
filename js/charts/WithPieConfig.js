@@ -30,9 +30,9 @@ var WithPieConfig = {
     };
   },
   fInnerPieSeria: function fInnerPieSeria(_ref) {
-    var center = _ref.center;
-    var year = _ref.year;
-    var bTotal = _ref.bTotal;
+    var center = _ref.center,
+        year = _ref.year,
+        bTotal = _ref.bTotal;
 
     return {
       type: 'pie',
@@ -60,13 +60,13 @@ var WithPieConfig = {
     };
   },
   fOuterPieSeria: function fOuterPieSeria(_ref2) {
-    var zhSeriaId = _ref2.zhSeriaId;
-    var center = _ref2.center;
-    var data = _ref2.data;
-    var _ref2$isDataLabels = _ref2.isDataLabels;
-    var isDataLabels = _ref2$isDataLabels === undefined ? false : _ref2$isDataLabels;
-    var _ref2$isShowInLegend = _ref2.isShowInLegend;
-    var isShowInLegend = _ref2$isShowInLegend === undefined ? false : _ref2$isShowInLegend;
+    var zhSeriaId = _ref2.zhSeriaId,
+        center = _ref2.center,
+        data = _ref2.data,
+        _ref2$isDataLabels = _ref2.isDataLabels,
+        isDataLabels = _ref2$isDataLabels === undefined ? false : _ref2$isDataLabels,
+        _ref2$isShowInLegend = _ref2.isShowInLegend,
+        isShowInLegend = _ref2$isShowInLegend === undefined ? false : _ref2$isShowInLegend;
 
     return {
       zhSeriaId: zhSeriaId,
@@ -96,4 +96,4 @@ var WithPieConfig = {
 };
 
 exports.default = WithPieConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithPieConfig.js.map
+//# sourceMappingURL=WithPieConfig.js.map

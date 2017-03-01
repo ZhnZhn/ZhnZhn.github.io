@@ -32,17 +32,17 @@ var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _DatesFragment = require('../DatesFragment');
+var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
@@ -63,13 +63,13 @@ var LoadItemDialog = _react2.default.createClass(_extends({
   },
 
   getInitialState: function getInitialState() {
-    var _props$data = this.props.data;
-    var fromDate = _props$data.fromDate;
-    var initToDate = _props$data.initToDate;
-    var onTestDate = _props$data.onTestDate;
-    var _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2);
-    var _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate();
-    var _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
+    var _props$data = this.props.data,
+        fromDate = _props$data.fromDate,
+        initToDate = _props$data.initToDate,
+        onTestDate = _props$data.onTestDate,
+        _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
+        _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
+        _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
 
     return {
       initFromDate: _initFromDate,
@@ -87,22 +87,20 @@ var LoadItemDialog = _react2.default.createClass(_extends({
   _handlerLoad: function _handlerLoad() {
     var validationMessages = this._getValidationMessages();
     if (validationMessages.isValid) {
-      var _props = this.props;
-      var data = _props.data;
-      var onClose = _props.onClose;
-      var id = data.id;
-      var title = data.title;
-      var subtitle = data.subtitle;
-      var caption = data.caption;
-      var columnName = data.columnName;
-      var dataColumn = data.dataColumn;
-      var seriaColumnNames = data.seriaColumnNames;
-
-      var _datesFragment$getVal = this.datesFragment.getValues();
-
-      var fromDate = _datesFragment$getVal.fromDate;
-      var toDate = _datesFragment$getVal.toDate;
-      var option = {
+      var _props = this.props,
+          data = _props.data,
+          onClose = _props.onClose,
+          id = data.id,
+          title = data.title,
+          subtitle = data.subtitle,
+          caption = data.caption,
+          columnName = data.columnName,
+          dataColumn = data.dataColumn,
+          seriaColumnNames = data.seriaColumnNames,
+          _datesFragment$getVal = this.datesFragment.getValues(),
+          fromDate = _datesFragment$getVal.fromDate,
+          toDate = _datesFragment$getVal.toDate,
+          option = {
         title: title,
         subtitle: subtitle,
         value: caption,
@@ -115,6 +113,7 @@ var LoadItemDialog = _react2.default.createClass(_extends({
         dataColumn: dataColumn,
         seriaColumnNames: seriaColumnNames
       };
+
       _ChartActions2.default.loadStock(_ChartType2.default.WATCH_LIST, _Type.BrowserType.WATCH_LIST, option);
       onClose();
     }
@@ -123,10 +122,9 @@ var LoadItemDialog = _react2.default.createClass(_extends({
   _getValidationMessages: function _getValidationMessages() {
     var msg = [];
 
-    var _datesFragment$getVal2 = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal2.isValid;
-    var datesMsg = _datesFragment$getVal2.datesMsg;
+    var _datesFragment$getVal2 = this.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal2.isValid,
+        datesMsg = _datesFragment$getVal2.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -137,21 +135,22 @@ var LoadItemDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var data = _props2.data;
-    var caption = data.caption;
-    var _state = this.state;
-    var initFromDate = _state.initFromDate;
-    var initToDate = _state.initToDate;
-    var onTestDate = _state.onTestDate;
-    var validationMessages = _state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props2 = this.props,
+        isShow = _props2.isShow,
+        data = _props2.data,
+        caption = data.caption,
+        _state = this.state,
+        initFromDate = _state.initFromDate,
+        initToDate = _state.initToDate,
+        onTestDate = _state.onTestDate,
+        validationMessages = _state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
+
     return _react2.default.createElement(
       _ModalDialog2.default,
       {
@@ -175,7 +174,6 @@ var LoadItemDialog = _react2.default.createClass(_extends({
         )
       ),
       _react2.default.createElement(_DatesFragment2.default, {
-        key: '2',
         ref: function ref(c) {
           return _this.datesFragment = c;
         },
@@ -183,8 +181,7 @@ var LoadItemDialog = _react2.default.createClass(_extends({
         initToDate: initToDate,
         onTestDate: onTestDate
       }),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
-        key: '3',
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       })
     );
@@ -192,4 +189,4 @@ var LoadItemDialog = _react2.default.createClass(_extends({
 }));
 
 exports.default = LoadItemDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\LoadItemDialog.js.map
+//# sourceMappingURL=LoadItemDialog.js.map

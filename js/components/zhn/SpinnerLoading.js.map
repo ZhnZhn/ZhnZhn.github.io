@@ -1,12 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\SpinnerLoading.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\SpinnerLoading.js",
- "sourceRoot": "",
- "names": [
-  "SpinnerLoading",
-  "style"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,iBAAiB,SAAjBA,cAAiB;AAAA,QAAGC,KAAH,QAAGA,KAAH;AAAA,WACnB,wCAAM,OAAOA,KAAb,EAAoB,eAAY,QAAhC,GADmB;AAAA,CAAvB;;kBAKeD,c"
-}
+{"version":3,"sources":["../../../src/components/zhn/SpinnerLoading.jsx"],"names":["SpinnerLoading","style"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,iBAAiB,SAAjBA,cAAiB;AAAA,QAAGC,KAAH,QAAGA,KAAH;AAAA,WACnB,wCAAM,OAAOA,KAAb,EAAoB,eAAY,QAAhC,GADmB;AAAA,CAAvB;;kBAKeD,c","file":"SpinnerLoading.js","sourcesContent":["import React from 'react';\r\n\r\nconst SpinnerLoading = ({ style }) => (\r\n    <span style={style} data-loader=\"circle\">\r\n    </span>\r\n)\r\n\r\nexport default SpinnerLoading\r\n"]}

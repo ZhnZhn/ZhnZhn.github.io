@@ -23,4 +23,4 @@ var QuandlBrowser = _react2.default.createClass({
 });
 
 exports.default = QuandlBrowser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\QuandlBrowser.js.map
+//# sourceMappingURL=QuandlBrowser.js.map

@@ -25,4 +25,4 @@ var QuandlGoogle = createTypeObject(qgSources, 'QG');
 exports.QuandlYahoo = QuandlYahoo;
 exports.Quandl = Quandl;
 exports.QuandlGoogle = QuandlGoogle;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\DialogType.js.map
+//# sourceMappingURL=DialogType.js.map

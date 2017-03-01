@@ -124,4 +124,4 @@ var AlertDialog = function (_Component) {
 AlertDialog.displayName = 'AlertDialog';
 
 exports.default = AlertDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\AlertDialog.js.map
+//# sourceMappingURL=AlertDialog.js.map

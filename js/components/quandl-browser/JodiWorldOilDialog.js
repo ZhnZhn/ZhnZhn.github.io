@@ -10,9 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZhDialog = require('../ZhDialog');
+var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
-var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
+var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
 
 var _WithToolbar = require('../dialogs/WithToolbar');
 
@@ -38,17 +38,17 @@ var _SelectParentChild = require('../dialogs/SelectParentChild');
 
 var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _DatesFragment = require('../DatesFragment');
+var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -99,10 +99,9 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
       msg.push(msgOnNotSelected('Country'));
     }
 
-    var _productFlow$getValid = this.productFlow.getValidation();
-
-    var isValid1 = _productFlow$getValid.isValid;
-    var msg1 = _productFlow$getValid.msg;
+    var _productFlow$getValid = this.productFlow.getValidation(),
+        isValid1 = _productFlow$getValid.isValid,
+        msg1 = _productFlow$getValid.msg;
 
     if (!isValid1) {
       msg = msg.concat(msg1);
@@ -112,10 +111,9 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
       this.units = unitOptions[0];
     }
 
-    var _datesFragment$getVal = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal.isValid;
-    var datesMsg = _datesFragment$getVal.datesMsg;
+    var _datesFragment$getVal = this.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal.isValid,
+        datesMsg = _datesFragment$getVal.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -125,19 +123,16 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _productFlow$getValue = this.productFlow.getValues();
-
-    var product = _productFlow$getValue.parent;
-    var flow = _productFlow$getValue.child;
-
-    var _datesFragment$getVal2 = this.datesFragment.getValues();
-
-    var fromDate = _datesFragment$getVal2.fromDate;
-    var toDate = _datesFragment$getVal2.toDate;
-    var _props = this.props;
-    var fnValue = _props.fnValue;
-    var dataColumn = _props.dataColumn;
-    var loadId = _props.loadId;
+    var _productFlow$getValue = this.productFlow.getValues(),
+        product = _productFlow$getValue.parent,
+        flow = _productFlow$getValue.child,
+        _datesFragment$getVal2 = this.datesFragment.getValues(),
+        fromDate = _datesFragment$getVal2.fromDate,
+        toDate = _datesFragment$getVal2.toDate,
+        _props = this.props,
+        fnValue = _props.fnValue,
+        dataColumn = _props.dataColumn,
+        loadId = _props.loadId;
 
     return {
       value: fnValue(this.country.value, product.value, flow.value, this.units.value),
@@ -156,34 +151,35 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var caption = _props2.caption;
-    var isShow = _props2.isShow;
-    var onShow = _props2.onShow;
-    var oneCaption = _props2.oneCaption;
-    var oneURI = _props2.oneURI;
-    var oneJsonProp = _props2.oneJsonProp;
-    var parentCaption = _props2.parentCaption;
-    var parentChildURI = _props2.parentChildURI;
-    var parentJsonProp = _props2.parentJsonProp;
-    var childCaption = _props2.childCaption;
-    var msgOnNotSelected = _props2.msgOnNotSelected;
-    var initFromDate = _props2.initFromDate;
-    var initToDate = _props2.initToDate;
-    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
-    var onTestDate = _props2.onTestDate;
-    var _state = this.state;
-    var isShowDate = _state.isShowDate;
-    var validationMessages = _state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props2 = this.props,
+        caption = _props2.caption,
+        isShow = _props2.isShow,
+        onShow = _props2.onShow,
+        oneCaption = _props2.oneCaption,
+        oneURI = _props2.oneURI,
+        oneJsonProp = _props2.oneJsonProp,
+        parentCaption = _props2.parentCaption,
+        parentChildURI = _props2.parentChildURI,
+        parentJsonProp = _props2.parentJsonProp,
+        childCaption = _props2.childCaption,
+        msgOnNotSelected = _props2.msgOnNotSelected,
+        initFromDate = _props2.initFromDate,
+        initToDate = _props2.initToDate,
+        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
+        onTestDate = _props2.onTestDate,
+        _state = this.state,
+        isShowDate = _state.isShowDate,
+        validationMessages = _state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
 
+
     return _react2.default.createElement(
-      _ZhDialog2.default,
+      _DraggableDialog2.default,
       {
         caption: caption,
         isShow: isShow,
@@ -232,7 +228,7 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
           onTestDate: onTestDate
         })
       ),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       })
     );
@@ -240,4 +236,4 @@ var JodiWorldOilDialog = _react2.default.createClass(_extends({
 }));
 
 exports.default = JodiWorldOilDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\JodiWorldOilDialog.js.map
+//# sourceMappingURL=JodiWorldOilDialog.js.map

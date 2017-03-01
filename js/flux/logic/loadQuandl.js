@@ -40,13 +40,12 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
 };
 
 var fnFetchToChartComp = function fnFetchToChartComp(_ref) {
-  var json = _ref.json;
-  var option = _ref.option;
-  var onCompleted = _ref.onCompleted;
+  var json = _ref.json,
+      option = _ref.option,
+      onCompleted = _ref.onCompleted;
 
-  var _QuandlAdapter$toConf = _QuandlAdapter2.default.toConfig(json, option);
-
-  var config = _QuandlAdapter$toConf.config;
+  var _QuandlAdapter$toConf = _QuandlAdapter2.default.toConfig(json, option),
+      config = _QuandlAdapter$toConf.config;
 
   onCompleted(option, config);
 };
@@ -64,9 +63,9 @@ var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
 };
 
 var fnFetchToChart = function fnFetchToChart(_ref2) {
-  var json = _ref2.json;
-  var option = _ref2.option;
-  var onCompleted = _ref2.onCompleted;
+  var json = _ref2.json,
+      option = _ref2.option,
+      onCompleted = _ref2.onCompleted;
 
   var series = _QuandlAdapter2.default.toSeries(json, option),
       chart = _ChartStore2.default.getActiveChart();
@@ -88,4 +87,4 @@ var loadQuandl = function loadQuandl(option, onCompleted, onAdded, onFailed) {
 exports.loadQuandl = loadQuandl;
 exports.fnFetchToChartComp = fnFetchToChartComp;
 exports.fnFetchToChart = fnFetchToChart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\loadQuandl.js.map
+//# sourceMappingURL=loadQuandl.js.map

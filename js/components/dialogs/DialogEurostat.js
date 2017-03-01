@@ -16,9 +16,9 @@ var _eurostat = require('../../flux/creaters/eurostat');
 
 var _eurostat2 = _interopRequireDefault(_eurostat);
 
-var _ZhDialog = require('../ZhDialog');
+var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
-var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
+var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
 
 var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
@@ -28,13 +28,13 @@ var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 var _withToolbar = require('./decorators/withToolbar');
 
@@ -133,7 +133,7 @@ var DialogEurostat = (0, _withToolbar2.default)(_class = (0, _withValidationLoad
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
           validationMessages = this.state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
         caption: 'Load',
@@ -142,7 +142,7 @@ var DialogEurostat = (0, _withToolbar2.default)(_class = (0, _withValidationLoad
 
 
       return _react2.default.createElement(
-        _ZhDialog2.default,
+        _DraggableDialog2.default,
         {
           caption: caption,
           isShow: isShow,
@@ -169,7 +169,7 @@ var DialogEurostat = (0, _withToolbar2.default)(_class = (0, _withValidationLoad
           optionNames: 'Items',
           onSelect: this._handleSelectTwo
         }),
-        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+        _react2.default.createElement(_ValidationMessages2.default, {
           validationMessages: validationMessages
         })
       );
@@ -182,4 +182,4 @@ var DialogEurostat = (0, _withToolbar2.default)(_class = (0, _withValidationLoad
 DialogEurostat.displayName = 'DialogEurostat';
 
 exports.default = DialogEurostat;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat.js.map
+//# sourceMappingURL=DialogEurostat.js.map

@@ -179,4 +179,4 @@ var EuroStatFn = _extends({
 }, _ChoroplethMapSlice2.default);
 
 exports.default = EuroStatFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatFn.js.map
+//# sourceMappingURL=EuroStatFn.js.map

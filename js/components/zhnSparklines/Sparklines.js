@@ -66,23 +66,23 @@ var Sparklines = _react2.default.createClass({
         return (0, _reactAddonsShallowCompare2.default)(this, nextProps);
     },
     render: function render() {
-        var _props = this.props;
-        var _props$data = _props.data;
-        var data = _props$data === undefined ? DEFAULT_DATA : _props$data;
-        var limit = _props.limit;
-        var _props$width = _props.width;
-        var width = _props$width === undefined ? DEFAULT_WIDTH : _props$width;
-        var _props$height = _props.height;
-        var height = _props$height === undefined ? DEFAULT_HEIGHT : _props$height;
-        var svgWidth = _props.svgWidth;
-        var svgHeight = _props.svgHeight;
-        var _props$preserveAspect = _props.preserveAspectRatio;
-        var preserveAspectRatio = _props$preserveAspect === undefined ? DEFAULT_RATIO : _props$preserveAspect;
-        var _props$margin = _props.margin;
-        var margin = _props$margin === undefined ? DEFAULT_MARGIN : _props$margin;
-        var style = _props.style;
-        var max = _props.max;
-        var min = _props.min;
+        var _props = this.props,
+            _props$data = _props.data,
+            data = _props$data === undefined ? DEFAULT_DATA : _props$data,
+            limit = _props.limit,
+            _props$width = _props.width,
+            width = _props$width === undefined ? DEFAULT_WIDTH : _props$width,
+            _props$height = _props.height,
+            height = _props$height === undefined ? DEFAULT_HEIGHT : _props$height,
+            svgWidth = _props.svgWidth,
+            svgHeight = _props.svgHeight,
+            _props$preserveAspect = _props.preserveAspectRatio,
+            preserveAspectRatio = _props$preserveAspect === undefined ? DEFAULT_RATIO : _props$preserveAspect,
+            _props$margin = _props.margin,
+            margin = _props$margin === undefined ? DEFAULT_MARGIN : _props$margin,
+            style = _props.style,
+            max = _props.max,
+            min = _props.min;
 
 
         if (data.length === 0) return null;
@@ -109,4 +109,4 @@ exports.SparklinesSpots = _SparklinesSpots2.default;
 exports.SparklinesSpot = _SparklinesSpot2.default;
 exports.SparklinesBars = _SparklinesBars2.default;
 exports.SparklinesReferenceLine = _SparklinesReferenceLine2.default;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhnSparklines\Sparklines.js.map
+//# sourceMappingURL=Sparklines.js.map

@@ -1,17 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\fnStyle.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\fnStyle.js",
- "sourceRoot": "",
- "names": [
-  "Box",
-  "map",
-  "f",
-  "x",
-  "fold",
-  "getFromNullable",
-  "df"
- ],
- "mappings": ";;;;;AACO,IAAMA,oBAAM,SAANA,GAAM;AAAA,SAAM;AACvBC,SAAM;AAAA,aAAKD,IAAIE,EAAEC,CAAF,CAAJ,CAAL;AAAA,KADiB;AAEvBC,UAAO;AAAA,aAAKF,EAAEC,CAAF,CAAL;AAAA;AAFgB,GAAN;AAAA,CAAZ;;AAKA,IAAME,4CAAkB,SAAlBA,eAAkB,CAACF,CAAD,EAAc;AAAA,MAAVG,EAAU,uEAAP,EAAO;;AAC1C,SAAOH,KAAK,IAAL,GAAYA,CAAZ,GAAgBG,EAAvB;AACF,CAFM"
-}
+{"version":3,"sources":["../../src/utils/fnStyle.js"],"names":["Box","map","f","x","fold","getFromNullable","df"],"mappings":";;;;;AACO,IAAMA,oBAAM,SAANA,GAAM;AAAA,SAAM;AACvBC,SAAM;AAAA,aAAKD,IAAIE,EAAEC,CAAF,CAAJ,CAAL;AAAA,KADiB;AAEvBC,UAAO;AAAA,aAAKF,EAAEC,CAAF,CAAL;AAAA;AAFgB,GAAN;AAAA,CAAZ;;AAKA,IAAME,4CAAkB,SAAlBA,eAAkB,CAACF,CAAD,EAAc;AAAA,MAAVG,EAAU,uEAAP,EAAO;;AAC1C,SAAOH,KAAK,IAAL,GAAYA,CAAZ,GAAgBG,EAAvB;AACF,CAFM","file":"fnStyle.js","sourcesContent":["\r\nexport const Box = x => ({\r\n  map : f => Box(f(x)),\r\n  fold : f => f(x)\r\n});\r\n\r\nexport const getFromNullable = (x, df={}) => {\r\n   return x != null ? x : df;\r\n};\r\n"]}

@@ -64,4 +64,4 @@ var IconLogoErc = function IconLogoErc(_ref) {
 };
 
 exports.default = IconLogoErc;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\IconLogoErc.js.map
+//# sourceMappingURL=IconLogoErc.js.map

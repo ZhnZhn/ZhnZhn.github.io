@@ -43,7 +43,7 @@ const STYLE = {
   }
 };
 
-class ZhDateField extends Component {
+class DateField extends Component {
    constructor(props){
      super();
      this.state = {
@@ -127,4 +127,4 @@ class ZhDateField extends Component {
   }
 }
 
-export default ZhDateField
+export default DateField

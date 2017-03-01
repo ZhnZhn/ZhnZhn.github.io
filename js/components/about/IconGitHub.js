@@ -36,4 +36,4 @@ var IconGitHub = function IconGitHub(props) {
 };
 
 exports.default = IconGitHub;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconGitHub.js.map
+//# sourceMappingURL=IconGitHub.js.map

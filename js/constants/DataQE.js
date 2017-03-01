@@ -546,4 +546,4 @@ var DataQE = {
 };
 
 exports.default = DataQE;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\DataQE.js.map
+//# sourceMappingURL=DataQE.js.map

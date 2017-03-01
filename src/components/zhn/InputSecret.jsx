@@ -20,8 +20,7 @@ const styles = {
   }
 }
 
-const _maskValue = (value='') => {
-  const len = value.length
+const _maskValue = (len=0) => {
   let i=0, str = ''
   for (i; i<len; i++){
     str = str + 'X'
@@ -37,7 +36,7 @@ class InputSecret extends Component {
 
   _handleChangeValue = (event) => {
     this.secret = event.target.value;
-    this.setState({ value: _maskValue(this.secret) });
+    this.setState({ value: _maskValue(this.secret.length) });
   }
 
   render(){

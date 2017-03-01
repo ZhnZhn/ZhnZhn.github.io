@@ -12,13 +12,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgClose = require('../SvgClose.js');
+var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
-var _ToolBarButton = require('../ToolBarButton.js');
+var _ActionButton = require('./ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -92,7 +92,7 @@ var ModalDialog = (_temp = _class = function (_Component) {
         'div',
         { style: Styles.COMMAND_DIV },
         commandButtons,
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Close',
           onClick: onClose
@@ -193,4 +193,4 @@ var ModalDialog = (_temp = _class = function (_Component) {
   timeout: 450
 }, _temp);
 exports.default = ModalDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ModalDialog.js.map
+//# sourceMappingURL=ModalDialog.js.map

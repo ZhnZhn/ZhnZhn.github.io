@@ -19,10 +19,10 @@ var _RowCap2 = _interopRequireDefault(_RowCap);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ItemWithCap = function ItemWithCap(props) {
-  var item = props.item;
-  var cap = item.cap;
-  var salePrice = item.salePrice;
-  var ipo = item.ipo;
+  var item = props.item,
+      cap = item.cap,
+      salePrice = item.salePrice,
+      ipo = item.ipo;
 
   return _react2.default.createElement(
     _Item2.default,
@@ -36,4 +36,4 @@ var ItemWithCap = function ItemWithCap(props) {
 };
 
 exports.default = ItemWithCap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-items\ItemWithCap.js.map
+//# sourceMappingURL=ItemWithCap.js.map

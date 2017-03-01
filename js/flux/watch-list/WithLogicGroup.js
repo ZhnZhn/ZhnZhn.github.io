@@ -26,8 +26,8 @@ var WithLogicGroup = {
     return { isDone: true };
   },
   renameGroup: function renameGroup(watchList, _ref2) {
-    var captionFrom = _ref2.captionFrom;
-    var captionTo = _ref2.captionTo;
+    var captionFrom = _ref2.captionFrom,
+        captionTo = _ref2.captionTo;
 
     var groups = watchList.groups,
         groupIndex = _LogicFn2.default.findIndex(groups, captionFrom);
@@ -51,4 +51,4 @@ var WithLogicGroup = {
 };
 
 exports.default = WithLogicGroup;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WithLogicGroup.js.map
+//# sourceMappingURL=WithLogicGroup.js.map

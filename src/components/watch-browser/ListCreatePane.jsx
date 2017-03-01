@@ -2,8 +2,8 @@ import React from 'react';
 
 import RowInputSelect from './RowInputSelect';
 import RowInputText from './RowInputText';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
-import ToolBarButton from '../ToolBarButton';
+import ValidationMessages from '../zhn/ValidationMessages';
+import ActionButton from '../zhn/ActionButton';
 
 const Styles = {
   COMMAND_DIV : {
@@ -90,8 +90,8 @@ const ListCreatePane = React.createClass({
   },
 
   render(){
-    const {onClose} = this.props
-        , {groupOptions, isUpdateGroup, validationMessages} = this.state;
+    const { onClose } = this.props
+        , { groupOptions, validationMessages } = this.state;
     return (
       <div>
         <RowInputSelect
@@ -104,21 +104,21 @@ const ListCreatePane = React.createClass({
            ref={c => this.inputText = c}
            caption={'List:'}
         />
-        <ValidationMessagesFragment
+        <ValidationMessages
           validationMessages={validationMessages}
         />
         <div style={Styles.COMMAND_DIV}>
-         <ToolBarButton
+         <ActionButton
             type="TypeC"
             caption="Create"
             onClick={this._handlerCreate}
          />
-         <ToolBarButton
+         <ActionButton
             type="TypeC"
             caption="Clear"
             onClick={this._handlerClear}
          />
-         <ToolBarButton
+         <ActionButton
             type="TypeC"
             caption="Close"
             onClick={onClose}

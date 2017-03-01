@@ -5,10 +5,10 @@ import ChartActions from '../../flux/actions/ChartActions';
 import { LoadType } from '../../constants/Type';
 
 import ModalDialog from '../zhn/ModalDialog';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 import RowInputSelect from './RowInputSelect';
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 import withValidationLoad from './decorators/withValidationLoad';
 
@@ -110,13 +110,13 @@ class UsStocksBySectorDialog extends Component {
         , { text } = item
         , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
           onClick={this._handleLoad}
        />,
-       <ToolBarButton
+       <ActionButton
           key="b"
           type="TypeC"
           caption="Show"
@@ -144,7 +144,7 @@ class UsStocksBySectorDialog extends Component {
             initToDate={initToDate}
             onTestDate={onTestDate}
         />
-        <ValidationMessagesFragment
+        <ValidationMessages
             validationMessages={validationMessages}
         />
       </ModalDialog>

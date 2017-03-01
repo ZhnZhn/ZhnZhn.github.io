@@ -13,15 +13,16 @@ var _index = require('./dataProcessing/index');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SparklinesReferenceLine = function SparklinesReferenceLine(props) {
-    var points = props.points;
-    var margin = props.margin;
-    var type = props.type;
-    var style = props.style;
-    var value = props.value;
-    var ypoints = points.map(function (p) {
+    var points = props.points,
+        margin = props.margin,
+        type = props.type,
+        style = props.style,
+        value = props.value,
+        ypoints = points.map(function (p) {
         return p.y;
-    });
-    var y = type === 'custom' ? value : _index.hm[type](ypoints);
+    }),
+        y = type === 'custom' ? value : _index.hm[type](ypoints);
+
 
     return _react2.default.createElement('line', {
         x1: points[0].x, y1: y + margin,
@@ -41,4 +42,4 @@ SparklinesReferenceLine.defaultProps = {
 };
 
 exports.default = SparklinesReferenceLine;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhnSparklines\SparklinesReferenceLine.js.map
+//# sourceMappingURL=SparklinesReferenceLine.js.map

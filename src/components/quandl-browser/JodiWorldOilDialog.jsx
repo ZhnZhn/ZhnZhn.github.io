@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import WithToolbar from '../dialogs/WithToolbar';
 import WithValidation from '../dialogs/WithValidation';
 
@@ -8,10 +8,10 @@ import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import SelectParentChild from '../dialogs/SelectParentChild';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
 
 const unitOptions = [
@@ -109,7 +109,7 @@ const JodiWorldOilDialog = React.createClass({
            } = this.props
          , { isShowDate, validationMessages } = this.state
          , _commandButtons = [
-               <ToolBarButton
+               <ActionButton
                   key="a"
                   type="TypeC"
                   caption="Load"
@@ -118,7 +118,7 @@ const JodiWorldOilDialog = React.createClass({
           ];
 
      return (
-       <ZhDialog
+       <DraggableDialog
          caption={caption}
          isShow={isShow}
          commandButtons={_commandButtons}
@@ -162,10 +162,10 @@ const JodiWorldOilDialog = React.createClass({
               onTestDate={onTestDate}
             />
           </ShowHide>
-          <ValidationMessagesFragment
+          <ValidationMessages
               validationMessages={validationMessages}
           />
-       </ZhDialog>
+       </DraggableDialog>
      );
    }
 });

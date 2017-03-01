@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\AnalyticActions.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\AnalyticActions.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;;;;AAAA;;;;;;;;AAEO,IAAM,oDAAsB;AACjC,cAAa,WAAb;AACA,aAAa,UAAb;AACA,aAAa,UAAb;CAHW;;AAMb,IAAM,kBAAkB,iBAAO,aAAP,qEACrB,oBAAoB,UAApB,EAAkC,4CAClC,oBAAoB,SAApB,EAAiC,4CACjC,oBAAoB,SAApB,EAAiC,2BAHZ,CAAlB;;kBAMS"
-}
+{"version":3,"sources":["../../../src/flux/actions/AnalyticActions.js"],"names":["AnalyticActionTypes","ANSWER_YES","ANSWER_NO","NO_ANSWER","AnalyticActions","createActions"],"mappings":";;;;;;;;;AAAA;;;;;;;;AAEO,IAAMA,oDAAsB;AACjCC,cAAa,WADoB;AAEjCC,aAAa,UAFoB;AAGjCC,aAAa;AAHoB,CAA5B;;AAMP,IAAMC,kBAAkB,iBAAOC,aAAP,qEACrBL,oBAAoBC,UADC,EACa,EADb,0CAErBD,oBAAoBE,SAFC,EAEY,EAFZ,0CAGrBF,oBAAoBG,SAHC,EAGY,EAHZ,0BAAxB;;kBAMeC,e","file":"AnalyticActions.js","sourcesContent":["import Reflux from 'reflux';\r\n\r\nexport const AnalyticActionTypes = {\r\n  ANSWER_YES : 'answerYes',\r\n  ANSWER_NO  : 'answerNo',\r\n  NO_ANSWER  : 'noAnswer'\r\n};\r\n\r\nconst AnalyticActions = Reflux.createActions({\r\n  [AnalyticActionTypes.ANSWER_YES] : {},\r\n  [AnalyticActionTypes.ANSWER_NO] : {},\r\n  [AnalyticActionTypes.NO_ANSWER] : {}\r\n});\r\n\r\nexport default AnalyticActions\r\n"]}

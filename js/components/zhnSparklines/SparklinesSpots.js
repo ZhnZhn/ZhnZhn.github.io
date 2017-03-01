@@ -21,17 +21,17 @@ var calcEndSpotDirection = function calcEndSpotDirection(points) {
 };
 
 var SparklinesSpots = function SparklinesSpots(props) {
-    var points = props.points;
-    var size = props.size;
-    var style = props.style;
-    var spotColors = props.spotColors;
-    var startSpot = _react2.default.createElement('circle', {
+    var points = props.points,
+        size = props.size,
+        style = props.style,
+        spotColors = props.spotColors,
+        startSpot = _react2.default.createElement('circle', {
         cx: points[0].x,
         cy: points[0].y,
         r: size,
         style: style
-    });
-    var endSpot = _react2.default.createElement('circle', {
+    }),
+        endSpot = _react2.default.createElement('circle', {
         cx: points[points.length - 1].x,
         cy: points[points.length - 1].y,
         r: size,
@@ -61,4 +61,4 @@ SparklinesSpots.defaultProps = {
 };
 
 exports.default = SparklinesSpots;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhnSparklines\SparklinesSpots.js.map
+//# sourceMappingURL=SparklinesSpots.js.map

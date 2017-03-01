@@ -16,27 +16,27 @@ var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group'
 
 var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
-var _ChartStore = require('../flux/stores/ChartStore');
+var _ChartStore = require('../../flux/stores/ChartStore');
 
 var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
-var _ChartActions = require('../flux/actions/ChartActions');
+var _ChartActions = require('../../flux/actions/ChartActions');
 
-var _ComponentActions = require('../flux/actions/ComponentActions');
+var _ComponentActions = require('../../flux/actions/ComponentActions');
 
-var _BrowserCaption = require('./zhn/BrowserCaption');
+var _BrowserCaption = require('../zhn/BrowserCaption');
 
 var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
 
-var _SvgHrzResize = require('./zhn/SvgHrzResize');
+var _SvgHrzResize = require('../zhn/SvgHrzResize');
 
 var _SvgHrzResize2 = _interopRequireDefault(_SvgHrzResize);
 
-var _ScrollPane = require('./zhn/ScrollPane');
+var _ScrollPane = require('../zhn/ScrollPane');
 
 var _ScrollPane2 = _interopRequireDefault(_ScrollPane);
 
-var _ItemFactory = require('./factories/ItemFactory');
+var _ItemFactory = require('../factories/ItemFactory');
 
 var _ItemFactory2 = _interopRequireDefault(_ItemFactory);
 
@@ -56,7 +56,7 @@ var SHOW_POPUP = "show-popup",
 var styles = {
   rootDiv: {
     backgroundColor: '#4D4D4D',
-    //padding : '8px 3px 3px 8px',    
+    //padding : '8px 3px 3px 8px',
     padding: '0px 0px 3px 0px',
     position: 'relative',
     borderRadius: '4px',
@@ -110,13 +110,13 @@ var isInArray = function isInArray() {
 
 var compActions = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, _ChartActions.ChartActionTypes.CLOSE_CHART];
 
-var ChartContainer2 = function (_Component) {
-  _inherits(ChartContainer2, _Component);
+var ChartContainer = function (_Component) {
+  _inherits(ChartContainer, _Component);
 
-  function ChartContainer2(props) {
-    _classCallCheck(this, ChartContainer2);
+  function ChartContainer(props) {
+    _classCallCheck(this, ChartContainer);
 
-    var _this = _possibleConstructorReturn(this, (ChartContainer2.__proto__ || Object.getPrototypeOf(ChartContainer2)).call(this));
+    var _this = _possibleConstructorReturn(this, (ChartContainer.__proto__ || Object.getPrototypeOf(ChartContainer)).call(this));
 
     _this._onStore = function (actionType, data) {
       if (isInArray(compActions, actionType)) {
@@ -170,7 +170,7 @@ var ChartContainer2 = function (_Component) {
     return _this;
   }
 
-  _createClass(ChartContainer2, [{
+  _createClass(ChartContainer, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.unsubscribe = _ChartStore2.default.listen(this._onStore);
@@ -223,8 +223,8 @@ var ChartContainer2 = function (_Component) {
     }
   }]);
 
-  return ChartContainer2;
+  return ChartContainer;
 }(_react.Component);
 
-exports.default = ChartContainer2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ChartContainer2.js.map
+exports.default = ChartContainer;
+//# sourceMappingURL=ChartContainer.js.map

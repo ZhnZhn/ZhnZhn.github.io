@@ -14,9 +14,9 @@ var _futures = require('../../flux/creaters/futures3');
 
 var _futures2 = _interopRequireDefault(_futures);
 
-var _ZhDialog = require('../ZhDialog');
+var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
-var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
+var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
 
 var _WithValidation = require('../dialogs/WithValidation');
 
@@ -38,13 +38,13 @@ var _RowDate = require('../dialogs/RowDate');
 
 var _RowDate2 = _interopRequireDefault(_RowDate);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -168,7 +168,7 @@ var Futures3Dialog = _react2.default.createClass(_extends({
         onTestDateOrEmpty = _props3.onTestDateOrEmpty,
         msgTestDateOrEmpty = _props3.msgTestDateOrEmpty,
         validationMessages = this.state.validationMessages,
-        _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
@@ -177,7 +177,7 @@ var Futures3Dialog = _react2.default.createClass(_extends({
 
 
     return _react2.default.createElement(
-      _ZhDialog2.default,
+      _DraggableDialog2.default,
       {
         caption: caption,
         isShow: isShow,
@@ -206,7 +206,7 @@ var Futures3Dialog = _react2.default.createClass(_extends({
         onSelect: this._handlerSelectYear
       }),
       isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       })
     );
@@ -214,4 +214,4 @@ var Futures3Dialog = _react2.default.createClass(_extends({
 }));
 
 exports.default = Futures3Dialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\Futures3Dialog.js.map
+//# sourceMappingURL=Futures3Dialog.js.map

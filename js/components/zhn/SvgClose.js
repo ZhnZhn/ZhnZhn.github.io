@@ -39,4 +39,4 @@ var SvgClose = function SvgClose(_ref) {
 };
 
 exports.default = SvgClose;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\SvgClose.js.map
+//# sourceMappingURL=SvgClose.js.map

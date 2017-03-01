@@ -93,4 +93,4 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
 }), _BrowserConfig);
 
 exports.default = BrowserConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserConfig.js.map
+//# sourceMappingURL=BrowserConfig.js.map

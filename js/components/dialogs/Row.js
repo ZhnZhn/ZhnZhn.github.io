@@ -27,4 +27,4 @@ var Row = function Row(_ref) {
 };
 
 exports.default = Row;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\Row.js.map
+//# sourceMappingURL=Row.js.map

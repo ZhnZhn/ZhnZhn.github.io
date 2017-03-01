@@ -16,9 +16,9 @@ var WithToolbar = {
     return toolbarButtons;
   },
   _clickInfoWithToolbar: function _clickInfoWithToolbar() {
-    var _props = this.props;
-    var descrUrl = _props.descrUrl;
-    var onClickInfo = _props.onClickInfo;
+    var _props = this.props,
+        descrUrl = _props.descrUrl,
+        onClickInfo = _props.onClickInfo;
 
     onClickInfo({ descrUrl: descrUrl });
   },
@@ -28,4 +28,4 @@ var WithToolbar = {
 };
 
 exports.default = WithToolbar;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\WithToolbar.js.map
+//# sourceMappingURL=WithToolbar.js.map

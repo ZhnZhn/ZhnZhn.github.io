@@ -10,9 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZhSelect = require('../ZhSelect');
+var _InputSelect = require('../zhn/InputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
@@ -37,11 +37,11 @@ var RowInputSelect = function RowInputSelect(_ref) {
          { style: styles.labelSpan },
          caption
       ),
-      _react2.default.createElement(_ZhSelect2.default, _extends({
+      _react2.default.createElement(_InputSelect2.default, _extends({
          width: '250'
       }, rest))
    );
 };
 
 exports.default = RowInputSelect;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowInputSelect.js.map
+//# sourceMappingURL=RowInputSelect.js.map

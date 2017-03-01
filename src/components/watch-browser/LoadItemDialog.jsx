@@ -9,9 +9,9 @@ import {BrowserType, LoadType} from '../../constants/Type';
 import ChartType from '../../constants/ChartType';
 
 import ModalDialog from '../zhn/ModalDialog';
-import ToolBarButton from '../ToolBarButton';
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ActionButton from '../zhn/ActionButton';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 import DialogStyles from '../styles/DialogStyles'
 
@@ -85,7 +85,7 @@ const LoadItemDialog = React.createClass({
         , { caption } = data
         , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
@@ -107,19 +107,15 @@ const LoadItemDialog = React.createClass({
              {caption}
           </span>
         </div>
-
         <DatesFragment
-            key="2"
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
             onTestDate={onTestDate}
         />
-        <ValidationMessagesFragment
-            key="3"
+        <ValidationMessages
             validationMessages={validationMessages}
         />
-
       </ModalDialog>
     )
   }

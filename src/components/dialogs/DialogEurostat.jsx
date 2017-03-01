@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat'
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 import withToolbar from './decorators/withToolbar';
 import withValidationLoad from './decorators/withValidationLoad';
@@ -81,7 +81,7 @@ class DialogEurostat extends Component {
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
@@ -90,7 +90,7 @@ class DialogEurostat extends Component {
     ];
 
     return(
-        <ZhDialog
+        <DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={_commandButtons}
@@ -119,10 +119,10 @@ class DialogEurostat extends Component {
                onSelect={this._handleSelectTwo}
              />
 
-             <ValidationMessagesFragment
+             <ValidationMessages
                  validationMessages={validationMessages}
              />
-        </ZhDialog>
+        </DraggableDialog>
     );
   }
 }

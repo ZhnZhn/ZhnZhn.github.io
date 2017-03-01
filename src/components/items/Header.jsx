@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 import SvgCheckBox from '../zhn/SvgCheckBox';
 import ValueMovingBadge from '../zhn/ValueMovingBadge';
-import SvgClose from '../SvgClose';
+import SvgClose from '../zhn/SvgClose';
 
 const STYLE = {
   ROOT : {

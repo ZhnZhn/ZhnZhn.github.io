@@ -112,4 +112,4 @@ var TabPane = (_temp = _class = function (_Component) {
   };
 }, _temp);
 exports.default = TabPane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\TabPane.js.map
+//# sourceMappingURL=TabPane.js.map

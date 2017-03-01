@@ -118,7 +118,7 @@ const styles = {
   }
 }
 
-class ZhSelect extends Component {
+class InputSelect extends Component {
   static defaultProps = {
     options : [],
     optionName : '',
@@ -511,4 +511,4 @@ class ZhSelect extends Component {
   }
 }
 
-export default ZhSelect;
+export default InputSelect;

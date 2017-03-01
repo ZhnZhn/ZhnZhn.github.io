@@ -46,17 +46,17 @@ var _NasdaqLink = require('../native-links/NasdaqLink');
 
 var _NasdaqLink2 = _interopRequireDefault(_NasdaqLink);
 
-var _DatesFragment = require('../DatesFragment');
+var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 var _withValidationLoad = require('./decorators/withValidationLoad');
 
@@ -118,15 +118,6 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
 
   _createClass(StocksBySectorDialog, [{
     key: 'componentWillReceiveProps',
-
-
-    /*
-    getInitialState(){
-     this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }];
-     return this._createInitialState(this.props);
-    },
-    */
-
     value: function componentWillReceiveProps(nextProps) {
       if (this.props.data !== nextProps.data) {
         this.setState(this._createInitialState(nextProps));
@@ -159,12 +150,12 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           initToDate = _state.initToDate,
           onTestDate = _state.onTestDate,
           validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
         caption: 'Load',
         onClick: this._handleLoad
-      }), _react2.default.createElement(_ToolBarButton2.default, {
+      }), _react2.default.createElement(_ActionButton2.default, {
         key: 'b',
         type: 'TypeC',
         caption: 'Show',
@@ -211,7 +202,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           initToDate: initToDate,
           onTestDate: onTestDate
         }),
-        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+        _react2.default.createElement(_ValidationMessages2.default, {
           validationMessages: validationMessages
         })
       );
@@ -333,4 +324,4 @@ StocksBySectorDialog.propTypes = {
 StocksBySectorDialog.displayName = 'StocksBySectorDialog';
 
 exports.default = StocksBySectorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\StocksBySectorDialog.js.map
+//# sourceMappingURL=StocksBySectorDialog.js.map

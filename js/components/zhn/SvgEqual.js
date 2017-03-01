@@ -45,4 +45,4 @@ var SvgEqual = function SvgEqual() {
 };
 
 exports.default = SvgEqual;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgEqual.js.map
+//# sourceMappingURL=SvgEqual.js.map

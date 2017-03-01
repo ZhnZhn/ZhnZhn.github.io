@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header';
 import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
-import ZhHighchart from '../ZhHighchart';
+import HighchartWrapper from '../zhn/HighchartWrapper';
 import Legend from '../zhn/Legend';
 
 import PanelIndicator from '../zhn/PanelIndicator';
@@ -276,7 +276,7 @@ const AreaChartItem = React.createClass({
 
       return (
         <ShowHide isShow={_isShow} key={index}>
-          <ZhHighchart
+          <HighchartWrapper
               ref={_ref}
               isShow={true}
               config={_config}
@@ -298,7 +298,7 @@ const AreaChartItem = React.createClass({
       const {config, id} = objConfig;
       return (
         <ShowHide isShow={true} key={id}>
-          <ZhHighchart
+          <HighchartWrapper
               isShow={true}
               config={config}
               onLoaded={this._handlerLoadedMetricChart}
@@ -342,7 +342,7 @@ const AreaChartItem = React.createClass({
          />
         <ShowHide isShow={isOpen}>
            {isShowChart && this._createChartToolBar(config)}
-           <ZhHighchart
+           <HighchartWrapper
               ref="chart"
               isShow={isShowChart}
               config={config}

@@ -32,4 +32,4 @@ var SvgPlus = function SvgPlus(_ref) {
 };
 
 exports.default = SvgPlus;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgPlus.js.map
+//# sourceMappingURL=SvgPlus.js.map

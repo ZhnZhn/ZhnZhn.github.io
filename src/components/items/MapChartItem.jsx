@@ -2,7 +2,7 @@ import React from 'react';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-import SvgClose from '../SvgClose';
+import SvgClose from '../zhn/SvgClose';
 import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
 import PanelDataInfo from '../zhn/PanelDataInfo';

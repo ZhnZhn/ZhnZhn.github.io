@@ -9,4 +9,4 @@ exports.default = function (data) {
         return a - b;
     })[Math.floor(data.length / 2)];
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhnSparklines\dataProcessing\median.js.map
+//# sourceMappingURL=median.js.map

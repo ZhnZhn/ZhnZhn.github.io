@@ -37,9 +37,9 @@ var STYLE = {
 };
 
 var RowCap = function RowCap(_ref) {
-  var cap = _ref.cap;
-  var salePrice = _ref.salePrice;
-  var ipo = _ref.ipo;
+  var cap = _ref.cap,
+      salePrice = _ref.salePrice,
+      ipo = _ref.ipo;
 
   var _cap = cap === 0 ? NA : _accounting2.default.formatMoney(cap),
       _salePrice = cap !== NA && cap !== 0 ? _accounting2.default.formatMoney(salePrice) : NA;
@@ -65,4 +65,4 @@ var RowCap = function RowCap(_ref) {
 };
 
 exports.default = RowCap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-items\RowCap.js.map
+//# sourceMappingURL=RowCap.js.map

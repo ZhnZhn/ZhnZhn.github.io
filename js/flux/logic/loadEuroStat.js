@@ -91,4 +91,4 @@ var loadEuroStat = function loadEuroStat(option, onCompleted, onAdded, onFailed)
 };
 
 exports.loadEuroStat = loadEuroStat;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\loadEuroStat.js.map
+//# sourceMappingURL=loadEuroStat.js.map

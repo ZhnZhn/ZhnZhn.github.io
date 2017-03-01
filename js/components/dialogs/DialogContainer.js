@@ -132,4 +132,4 @@ var DialogContainer = function (_Component) {
 DialogContainer.displayName = 'DialogContainer';
 
 exports.default = DialogContainer;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogContainer.js.map
+//# sourceMappingURL=DialogContainer.js.map

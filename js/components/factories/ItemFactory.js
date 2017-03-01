@@ -29,10 +29,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _createAreaChartItem = function _createAreaChartItem(config, index, option, props) {
-  var zhConfig = config.zhConfig;
-  var id = zhConfig.id;
-  var key = zhConfig.key;
-  var chartType = option.chartType;
+  var zhConfig = config.zhConfig,
+      id = zhConfig.id,
+      key = zhConfig.key,
+      chartType = option.chartType;
 
   return _react2.default.createElement(_AreaChartItem2.default, _extends({
     ref: 'chart' + index,
@@ -46,10 +46,10 @@ var _createAreaChartItem = function _createAreaChartItem(config, index, option, 
 };
 
 var _createMapChartItem = function _createMapChartItem(config, index, option, props) {
-  var zhConfig = config.zhConfig;
-  var id = zhConfig.id;
-  var key = zhConfig.key;
-  var chartType = option.chartType;
+  var zhConfig = config.zhConfig,
+      id = zhConfig.id,
+      key = zhConfig.key,
+      chartType = option.chartType;
 
 
   return _react2.default.createElement(_MapChartItem2.default, _extends({
@@ -68,12 +68,13 @@ var _rCreateItem = _defineProperty({
 
 var ItemFactory = {
   createItem: function createItem(config, index, option, props) {
-    var zhCompType = config.zhCompType;
-    var _fnCreate = zhCompType && _rCreateItem[zhCompType] ? _rCreateItem[zhCompType] : _rCreateItem.DEFAULT;
+    var zhCompType = config.zhCompType,
+        _fnCreate = zhCompType && _rCreateItem[zhCompType] ? _rCreateItem[zhCompType] : _rCreateItem.DEFAULT;
+
 
     return _fnCreate(config, index, option, props);
   }
 };
 
 exports.default = ItemFactory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\factories\ItemFactory.js.map
+//# sourceMappingURL=ItemFactory.js.map

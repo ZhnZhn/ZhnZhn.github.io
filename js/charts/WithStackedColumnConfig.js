@@ -16,8 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var WithStackedColumnConfig = {
   fBaseStackedColumnConfig: function fBaseStackedColumnConfig(_ref) {
-    var _ref$stacking = _ref.stacking;
-    var stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
+    var _ref$stacking = _ref.stacking,
+        stacking = _ref$stacking === undefined ? 'normal' : _ref$stacking;
 
     return {
       zhSeries: {
@@ -55,12 +55,12 @@ var WithStackedColumnConfig = {
     };
   },
   fStackedColumnSeria: function fStackedColumnSeria(_ref2) {
-    var zhSeriaId = _ref2.zhSeriaId;
-    var name = _ref2.name;
-    var _ref2$data = _ref2.data;
-    var data = _ref2$data === undefined ? [] : _ref2$data;
-    var _ref2$color = _ref2.color;
-    var color = _ref2$color === undefined ? 'gray' : _ref2$color;
+    var zhSeriaId = _ref2.zhSeriaId,
+        name = _ref2.name,
+        _ref2$data = _ref2.data,
+        data = _ref2$data === undefined ? [] : _ref2$data,
+        _ref2$color = _ref2.color,
+        color = _ref2$color === undefined ? 'gray' : _ref2$color;
 
     return {
       zhSeriaId: zhSeriaId,
@@ -95,4 +95,4 @@ var WithStackedColumnConfig = {
 };
 
 exports.default = WithStackedColumnConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedColumnConfig.js.map
+//# sourceMappingURL=WithStackedColumnConfig.js.map

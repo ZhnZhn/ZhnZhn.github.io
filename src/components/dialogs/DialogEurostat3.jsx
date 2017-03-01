@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat3';
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import SelectParentChild from './SelectParentChild';
-import ToolBarButton from '../ToolBarButton';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ActionButton from '../zhn/ActionButton';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 import withToolbar from './decorators/withToolbar';
 import withValidationLoad from './decorators/withValidationLoad';
@@ -82,7 +82,7 @@ class DialogEurostat3 extends Component {
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
@@ -91,7 +91,7 @@ class DialogEurostat3 extends Component {
     ];
 
     return(
-        <ZhDialog
+        <DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={_commandButtons}
@@ -119,10 +119,10 @@ class DialogEurostat3 extends Component {
                  childCaption={threeCaption}
                  msgOnNotSelected={msgOnNotSelected}
              />
-             <ValidationMessagesFragment
+             <ValidationMessages
                  validationMessages={validationMessages}
              />
-        </ZhDialog>
+        </DraggableDialog>
     );
   }
 }

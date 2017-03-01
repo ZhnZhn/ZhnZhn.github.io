@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var WithValidation = {
   _handlerWithValidationLoad: function _handlerWithValidationLoad(validationMessages, fnCreateOption) {
-    var onLoad = arguments.length <= 2 || arguments[2] === undefined ? this.props.onLoad : arguments[2];
+    var onLoad = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.props.onLoad;
 
     if (validationMessages.isValid) {
       onLoad(fnCreateOption());
@@ -36,4 +36,4 @@ var WithValidation = {
 };
 
 exports.default = WithValidation;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\WithValidation.js.map
+//# sourceMappingURL=WithValidation.js.map

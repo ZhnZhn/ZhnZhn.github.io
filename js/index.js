@@ -49,4 +49,4 @@ var _fnLoading = function _fnLoading() {
 
 _ChartConfig2.default.init();
 _fnLoading();
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\index.js.map
+//# sourceMappingURL=index.js.map

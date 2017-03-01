@@ -1,16 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\IconLogoBar.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconLogoBar.js",
- "sourceRoot": "",
- "names": [
-  "S",
-  "ROOT",
-  "textAlign",
-  "paddingTop",
-  "IconLogoBar",
-  "props"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAO;AACLC,eAAY,QADP;AAELC,gBAAY;AAFP;AADC,CAAV;;AAOA,IAAMC,cAAc,SAAdA,WAAc,CAACC,KAAD;AAAA,SAClB;AAAA;AAAA,MAAK,OAAOL,EAAEC,IAAd;AACG,6DADH;AAEG;AACG,iBAAU,cADb;AAEG,aAAM,YAFT;AAGG,WAAI;AAHP,MAFH;AAOG,4DAPH;AAQG,iEARH;AASG;AATH,GADkB;AAAA,CAApB;;kBAceG,W"
-}
+{"version":3,"sources":["../../../src/components/about/IconLogoBar.jsx"],"names":["S","ROOT","textAlign","paddingTop","IconLogoBar","props"],"mappings":";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAO;AACLC,eAAY,QADP;AAELC,gBAAY;AAFP;AADC,CAAV;;AAOA,IAAMC,cAAc,SAAdA,WAAc,CAACC,KAAD;AAAA,SAClB;AAAA;AAAA,MAAK,OAAOL,EAAEC,IAAd;AACG,6DADH;AAEG;AACG,iBAAU,cADb;AAEG,aAAM,YAFT;AAGG,WAAI;AAHP,MAFH;AAOG,4DAPH;AAQG,iEARH;AASG;AATH,GADkB;AAAA,CAApB;;kBAceG,W","file":"IconLogoBar.js","sourcesContent":["import React from 'react';\r\n\r\nimport IconQuandl from './IconQuandl';\r\nimport IconGitHub from './IconGitHub';\r\nimport IconReact from './IconReact';\r\nimport IconHighcharts from './IconHighcharts';\r\nimport IconEurostat from './IconEurostat';\r\n\r\nconst S = {\r\n  ROOT : {\r\n    textAlign : 'center',\r\n    paddingTop: '20px'\r\n  }\r\n}\r\n\r\nconst IconLogoBar = (props) => (\r\n  <div style={S.ROOT}>\r\n     <IconQuandl />\r\n     <IconGitHub\r\n        className=\"icon__github\"\r\n        title=\"GitHub ERC\"\r\n        uri=\"https://github.com/ZhnZhn/ZhnZhn.github.io\"\r\n     />\r\n     <IconReact />\r\n     <IconHighcharts />\r\n     <IconEurostat />\r\n  </div>\r\n);\r\n\r\nexport default IconLogoBar\r\n"]}

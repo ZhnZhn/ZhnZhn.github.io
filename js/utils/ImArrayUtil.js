@@ -16,7 +16,7 @@ var ImArrayUtil = {
     });
   },
   insertItem: function insertItem(item, index) {
-    var arr = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
+    var arr = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
     if (index !== 0) {
       return [].concat(_toConsumableArray(arr.slice(0, index)), [Object.assign({}, item)], _toConsumableArray(arr.slice(index)));
@@ -27,4 +27,4 @@ var ImArrayUtil = {
 };
 
 exports.default = ImArrayUtil;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\ImArrayUtil.js.map
+//# sourceMappingURL=ImArrayUtil.js.map

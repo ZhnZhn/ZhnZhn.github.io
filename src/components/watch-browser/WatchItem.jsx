@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import SvgClose from '../SvgClose';
+import SvgClose from '../zhn/SvgClose';
 
 const STYLE = {
   ITEM_DIV : {

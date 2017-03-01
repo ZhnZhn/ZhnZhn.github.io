@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\ScrollPane.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\ScrollPane.js",
- "sourceRoot": "",
- "names": [
-  "ScrollPane",
-  "style",
-  "className",
-  "children"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,aAAa,SAAbA,UAAa;AAAA,OAAGC,KAAH,QAAGA,KAAH;AAAA,6BAAUC,SAAV;AAAA,OAAUA,SAAV,kCAAoB,EAApB;AAAA,OAAwBC,QAAxB,QAAwBA,QAAxB;AAAA,UAChB;AAAA;AAAA,QAAK,4BAA0BD,SAA/B,EAA4C,OAAOD,KAAnD;AACIE;AADJ,IADgB;AAAA,CAAnB;;kBAMeH,U"
-}
+{"version":3,"sources":["../../../src/components/zhn/ScrollPane.jsx"],"names":["ScrollPane","style","className","children"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,aAAa,SAAbA,UAAa;AAAA,OAAGC,KAAH,QAAGA,KAAH;AAAA,6BAAUC,SAAV;AAAA,OAAUA,SAAV,kCAAoB,EAApB;AAAA,OAAwBC,QAAxB,QAAwBA,QAAxB;AAAA,UAChB;AAAA;AAAA,QAAK,4BAA0BD,SAA/B,EAA4C,OAAOD,KAAnD;AACIE;AADJ,IADgB;AAAA,CAAnB;;kBAMeH,U","file":"ScrollPane.js","sourcesContent":["import React from 'react';\r\n\r\nconst ScrollPane = ({ style, className=\"\", children }) => (\r\n   <div className={`with-scroll ${className}`} style={style}>\r\n      {children}\r\n   </div>\r\n)\r\n\r\nexport default ScrollPane\r\n"]}

@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\RouterBrowser.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\RouterBrowser.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;;;AAAA;;AAEA;;;;AACA;;;;;;;;AAEA,IAAM;AACH;;mCAEA,kBAAY,SAAZ,mEACA,kBAAY,WAAZ,mEACA,kBAAY,aAAZ,mEACA,kBAAY,aAAZ,kDANG;;kBASS"
-}
+{"version":3,"sources":["../../../src/flux/logic/RouterBrowser.js"],"names":["RouterBrowser","DEFAULT","US_STOCKS","NYSE_STOCKS","NASDAQ_STOCKS","LONDON_STOCKS"],"mappings":";;;;;;;;AAAA;;AAEA;;;;AACA;;;;;;;;AAEA,IAAMA;AACHC;;AADG,mCAGH,kBAAYC,SAHT,mEAIH,kBAAYC,WAJT,mEAKH,kBAAYC,aALT,mEAMH,kBAAYC,aANT,kDAAN;;kBASeL,a","file":"RouterBrowser.js","sourcesContent":["import { BrowserType } from '../../constants/Type';\r\n\r\nimport SourceBrowserDynamic from '../../components/browser-container/SourceBrowserDynamic';\r\nimport SourceBrowserDynamic2 from '../../components/browser-container/SourceBrowserDynamic2';\r\n\r\nconst RouterBrowser = {\r\n   DEFAULT : SourceBrowserDynamic,\r\n\r\n  [BrowserType.US_STOCKS] : SourceBrowserDynamic2,\r\n  [BrowserType.NYSE_STOCKS] : SourceBrowserDynamic2,\r\n  [BrowserType.NASDAQ_STOCKS] : SourceBrowserDynamic2,\r\n  [BrowserType.LONDON_STOCKS] : SourceBrowserDynamic2\r\n};\r\n\r\nexport default RouterBrowser\r\n"]}

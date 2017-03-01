@@ -76,4 +76,4 @@ var ButtonTab = (_temp = _class = function (_Component) {
   onClick: _react.PropTypes.func
 }, _temp);
 exports.default = ButtonTab;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ButtonTab.js.map
+//# sourceMappingURL=ButtonTab.js.map

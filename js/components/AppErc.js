@@ -76,4 +76,4 @@ var AppErc = function AppErc() {
 };
 
 exports.default = AppErc;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\AppErc.js.map
+//# sourceMappingURL=AppErc.js.map

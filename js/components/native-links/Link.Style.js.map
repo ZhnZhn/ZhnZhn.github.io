@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\Link.Style.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\Link.Style.js",
- "sourceRoot": "",
- "names": [
-  "STYLE",
-  "LINK",
-  "display",
-  "paddingTop"
- ],
- "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,UAAO;AACHC,iBAAU,cADP;AAEHC,oBAAa;AAFV;AADK,CAAd;;kBAOeH,K"
-}
+{"version":3,"sources":["../../../src/components/native-links/Link.Style.js"],"names":["STYLE","LINK","display","paddingTop"],"mappings":";;;;;;AACA,IAAMA,QAAQ;AACZC,UAAO;AACHC,iBAAU,cADP;AAEHC,oBAAa;AAFV;AADK,CAAd;;kBAOeH,K","file":"Link.Style.js","sourcesContent":["\r\nconst STYLE = {\r\n  LINK : {\r\n      display : 'inline-block',\r\n      paddingTop : '10px'\r\n  }\r\n}\r\n\r\nexport default STYLE\r\n"]}

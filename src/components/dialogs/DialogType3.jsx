@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type3';
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
-import ToolBarButton from '../ToolBarButton';
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ActionButton from '../zhn/ActionButton';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 import withValidationLoad from './decorators/withValidationLoad';
 
@@ -82,7 +82,7 @@ class DialogType3 extends Component {
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
@@ -91,7 +91,7 @@ class DialogType3 extends Component {
     ];
 
     return (
-       <ZhDialog
+       <DraggableDialog
            caption={caption}
            isShow={isShow}
            commandButtons={_commandButtons}
@@ -117,10 +117,10 @@ class DialogType3 extends Component {
             msgOnNotValidFormat={msgOnNotValidFormat}
             onTestDate={onTestDate}
          />
-         <ValidationMessagesFragment
+         <ValidationMessages
             validationMessages={validationMessages}
          />
-      </ZhDialog>
+      </DraggableDialog>
     );
   }
 }

@@ -13,7 +13,7 @@ const STYLE = {
   }
 };
 
-class ZhHighchart extends Component {
+class HighchartWrapper extends Component {
   componentDidMount(){
     const { config, onLoaded } = this.props;
     this.renderChart(config);
@@ -65,4 +65,4 @@ class ZhHighchart extends Component {
   }
 }
 
-export default ZhHighchart
+export default HighchartWrapper

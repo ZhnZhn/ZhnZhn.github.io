@@ -32,11 +32,11 @@ var STYLE = {
 };
 
 var Item = function Item(props) {
-  var caption = props.caption;
-  var className = props.className;
-  var item = props.item;
-  var onClickItem = props.onClickItem;
-  var children = props.children;
+  var caption = props.caption,
+      className = props.className,
+      item = props.item,
+      onClickItem = props.onClickItem,
+      children = props.children;
 
   return _react2.default.createElement(
     'div',
@@ -55,4 +55,4 @@ var Item = function Item(props) {
 };
 
 exports.default = Item;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-items\Item.js.map
+//# sourceMappingURL=Item.js.map

@@ -36,21 +36,21 @@ var STYLE = {
   }
 };
 
-var ZhHighchart = function (_Component) {
-  _inherits(ZhHighchart, _Component);
+var HighchartWrapper = function (_Component) {
+  _inherits(HighchartWrapper, _Component);
 
-  function ZhHighchart() {
+  function HighchartWrapper() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, ZhHighchart);
+    _classCallCheck(this, HighchartWrapper);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ZhHighchart.__proto__ || Object.getPrototypeOf(ZhHighchart)).call.apply(_ref, [this].concat(args))), _this), _this.renderChart = function (config) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.renderChart = function (config) {
       if (!config) {
         throw new Error('Config must be specified for the ZhHighchart');
       }
@@ -68,7 +68,7 @@ var ZhHighchart = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(ZhHighchart, [{
+  _createClass(HighchartWrapper, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _props = this.props,
@@ -108,8 +108,8 @@ var ZhHighchart = function (_Component) {
     }
   }]);
 
-  return ZhHighchart;
+  return HighchartWrapper;
 }(_react.Component);
 
-exports.default = ZhHighchart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ZhHighchart.js.map
+exports.default = HighchartWrapper;
+//# sourceMappingURL=HighchartWrapper.js.map

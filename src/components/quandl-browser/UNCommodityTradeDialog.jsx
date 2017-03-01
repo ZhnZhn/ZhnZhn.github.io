@@ -3,16 +3,16 @@ import React from 'react';
 import {ChartType, ModalDialog} from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import ShowHide from '../zhn/ShowHide';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 const Placeholder = {
   TRADE : {
@@ -298,13 +298,13 @@ const UNCommodityTradeDialog = React.createClass({
            validationMessages
          } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load Meta"
           onClick={this._handlerLoadMeta}
        />,
-       <ToolBarButton
+       <ActionButton
           key="b"
           type="TypeC"
           caption="Load Data"
@@ -313,7 +313,7 @@ const UNCommodityTradeDialog = React.createClass({
     ];
 
     return(
-        <ZhDialog
+        <DraggableDialog
              caption="United Nations Commodity Trade"
              isShow={isShow}
              commandButtons={_commandButtons}
@@ -376,10 +376,10 @@ const UNCommodityTradeDialog = React.createClass({
                  onSelect={this._handlerSelectChartType}
                />
              </ShowHide>
-             <ValidationMessagesFragment
+             <ValidationMessages
                  validationMessages={validationMessages}
              />
-        </ZhDialog>
+        </DraggableDialog>
     );
   }
 });

@@ -437,4 +437,4 @@ var Chart = {
 };
 
 exports.default = Chart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\Chart.js.map
+//# sourceMappingURL=Chart.js.map

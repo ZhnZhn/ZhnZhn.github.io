@@ -10,15 +10,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgClose = require('./SvgClose');
+var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
-var _ToolBarButton = require('./ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _Interact = require('../utils/Interact');
+var _Interact = require('../../utils/Interact');
 
 var _Interact2 = _interopRequireDefault(_Interact);
 
@@ -60,31 +60,31 @@ var styles = {
   }
 };
 
-var ZhDialog = function (_Component) {
-  _inherits(ZhDialog, _Component);
+var DraggableDialog = function (_Component) {
+  _inherits(DraggableDialog, _Component);
 
-  function ZhDialog() {
+  function DraggableDialog() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, ZhDialog);
+    _classCallCheck(this, DraggableDialog);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ZhDialog.__proto__ || Object.getPrototypeOf(ZhDialog)).call.apply(_ref, [this].concat(args))), _this), _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DraggableDialog.__proto__ || Object.getPrototypeOf(DraggableDialog)).call.apply(_ref, [this].concat(args))), _this), _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
       return _react2.default.createElement(
         'div',
         { style: styles.commandDiv },
         commandButtons,
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Show',
           onClick: onShowChart
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Close',
           onClick: onClose
@@ -93,7 +93,7 @@ var ZhDialog = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(ZhDialog, [{
+  _createClass(DraggableDialog, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       _Interact2.default.makeDragable(this.rootDivEl);
@@ -142,8 +142,8 @@ var ZhDialog = function (_Component) {
     }
   }]);
 
-  return ZhDialog;
+  return DraggableDialog;
 }(_react.Component);
 
-exports.default = ZhDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ZhDialog.js.map
+exports.default = DraggableDialog;
+//# sourceMappingURL=DraggableDialog.js.map

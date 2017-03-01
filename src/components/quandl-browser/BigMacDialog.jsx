@@ -1,16 +1,16 @@
 import React from 'react';
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import WithToolbar from '../dialogs/WithToolbar';
 import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 import ShowHide from '../zhn/ShowHide';
 
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 const BigMacDialog = React.createClass({
   ...WithToolbar,
@@ -96,7 +96,7 @@ const BigMacDialog = React.createClass({
           } = this.props
         , { isShowDate, optionMetrics, validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
@@ -105,7 +105,7 @@ const BigMacDialog = React.createClass({
     ];
 
     return (
-      <ZhDialog
+      <DraggableDialog
            caption="Economist Big Mac Index"
            isShow={isShow}
            commandButtons={_commandButtons}
@@ -138,10 +138,10 @@ const BigMacDialog = React.createClass({
                  onTestDate={onTestDate}
              />
            </ShowHide>
-           <ValidationMessagesFragment
+           <ValidationMessages
                validationMessages={validationMessages}
            />
-      </ZhDialog>
+      </DraggableDialog>
     );
   }
 })

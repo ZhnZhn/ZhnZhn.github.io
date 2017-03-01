@@ -1,12 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\SvgPlus.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\SvgPlus.js",
- "sourceRoot": "",
- "names": [
-  "SvgPlus",
-  "onClick"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,UAAU,SAAVA,OAAU;AAAA,SAAGC,OAAH,QAAGA,OAAH;AAAA,YACd;AAAA;AAAA,YAAK,WAAU,eAAf,EAA+B,SAASA,OAAxC;AACG;AAAA;AAAA;AACK,2BAAM,MADX,EACkB,QAAO,MADzB;AAEK,6BAAQ,WAFb;AAGK,yCAAoB,MAHzB,EAGgC,OAAM;AAHtC;AAKC;AACM,uBAAE,+BADR;AAEM,iCAAY,GAFlB;AAGM,mCAAc;AAHpB;AALD;AADH,MADc;AAAA,CAAhB;;kBAkBeD,O"
-}
+{"version":3,"sources":["../../../src/components/zhn/SvgPlus.jsx"],"names":["SvgPlus","onClick"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,UAAU,SAAVA,OAAU;AAAA,SAAGC,OAAH,QAAGA,OAAH;AAAA,YACd;AAAA;AAAA,YAAK,WAAU,eAAf,EAA+B,SAASA,OAAxC;AACG;AAAA;AAAA;AACK,2BAAM,MADX,EACkB,QAAO,MADzB;AAEK,6BAAQ,WAFb;AAGK,yCAAoB,MAHzB,EAGgC,OAAM;AAHtC;AAKC;AACM,uBAAE,+BADR;AAEM,iCAAY,GAFlB;AAGM,mCAAc;AAHpB;AALD;AADH,MADc;AAAA,CAAhB;;kBAkBeD,O","file":"SvgPlus.js","sourcesContent":["import React from 'react';\r\n\r\nconst SvgPlus = ({ onClick }) => (\r\n  <div className=\"button-circle\" onClick={onClick}>\r\n     <svg\r\n          width=\"20px\" height=\"20px\"\r\n          viewBox=\"0 0 20 20\"\r\n          preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\"\r\n      >\r\n      <path\r\n            d=\"M 10,4 L 10,16 M 4,10 L 16,10\"\r\n            strokeWidth=\"2\"\r\n            strokeLinecap=\"round\"\r\n       >\r\n      </path>\r\n     </svg>\r\n  </div>\r\n)\r\n\r\n\r\nexport default SvgPlus\r\n"]}

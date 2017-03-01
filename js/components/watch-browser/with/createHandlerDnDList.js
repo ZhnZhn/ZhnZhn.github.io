@@ -8,8 +8,8 @@ Object.defineProperty(exports, "__esModule", {
 var createHandlerDnDList = function createHandlerDnDList(DRAG, WatchActions) {
   return {
     _handlerDragStartList: function _handlerDragStartList(_ref, ev) {
-      var groupCaption = _ref.groupCaption;
-      var caption = _ref.caption;
+      var groupCaption = _ref.groupCaption,
+          caption = _ref.caption;
 
       this.dragStartWithDnDStyle(ev, [DRAG.GROUP, DRAG.LIST]);
       ev.dataTransfer.effectAllowed = "move";
@@ -21,16 +21,17 @@ var createHandlerDnDList = function createHandlerDnDList(DRAG, WatchActions) {
       ev.dataTransfer.setData("text", JSON.stringify(_data));
     },
     _handlerDropList: function _handlerDropList(_ref2, ev) {
-      var groupCaption = _ref2.groupCaption;
-      var caption = _ref2.caption;
+      var groupCaption = _ref2.groupCaption,
+          caption = _ref2.caption;
 
       this.dropWithDnDStyle(ev);
       //ev.currentTarget.style.borderLeft = "";
 
-      var data = JSON.parse(ev.dataTransfer.getData("text"));
-      var xType = data.xType;
-      var dragId = data.dragId;
-      var dropId = groupCaption + ";" + caption + ";";
+      var data = JSON.parse(ev.dataTransfer.getData("text")),
+          xType = data.xType,
+          dragId = data.dragId,
+          dropId = groupCaption + ";" + caption + ";";
+
 
       if (xType === DRAG.LIST) {
         if (dragId !== dropId) {
@@ -65,4 +66,4 @@ var createHandlerDnDList = function createHandlerDnDList(DRAG, WatchActions) {
 };
 
 exports.default = createHandlerDnDList;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\with\createHandlerDnDList.js.map
+//# sourceMappingURL=createHandlerDnDList.js.map

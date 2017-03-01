@@ -172,4 +172,4 @@ var MenuListType2 = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuListType2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuListType2.js.map
+//# sourceMappingURL=MenuListType2.js.map

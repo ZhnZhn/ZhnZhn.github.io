@@ -48,4 +48,4 @@ var IconHighcharts = function IconHighcharts(props) {
 };
 
 exports.default = IconHighcharts;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconHighcharts.js.map
+//# sourceMappingURL=IconHighcharts.js.map

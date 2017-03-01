@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhnSparklines\\dataProcessing\\median.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhnSparklines\\dataProcessing\\median.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;kBAAe;WACX,KAAK,IAAL,CAAU,UAAC,CAAD,EAAG,CAAH;eAAS,IAAI,CAAJ;KAAT,CAAV,CAA0B,KAAK,KAAL,CAAW,KAAK,MAAL,GAAc,CAAd,CAArC;CADW"
-}
+{"version":3,"sources":["../../../../src/components/zhnSparklines/dataProcessing/median.js"],"names":["data","sort","a","b","Math","floor","length"],"mappings":";;;;;;kBAAe;AAAA,WACXA,KAAKC,IAAL,CAAU,UAACC,CAAD,EAAGC,CAAH;AAAA,eAASD,IAAIC,CAAb;AAAA,KAAV,EAA0BC,KAAKC,KAAL,CAAWL,KAAKM,MAAL,GAAc,CAAzB,CAA1B,CADW;AAAA,C","file":"median.js","sourcesContent":["export default data =>\r\n    data.sort((a,b) => a - b)[Math.floor(data.length / 2)];\r\n"]}

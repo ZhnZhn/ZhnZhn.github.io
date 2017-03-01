@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\LabelNew.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\LabelNew.js",
- "sourceRoot": "",
- "names": [
-  "S",
-  "LABEL",
-  "display",
-  "color",
-  "backgroundColor",
-  "marginLeft",
-  "marginRight",
-  "LabelNew"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,SAAQ;AACNC,aAAS,cADH;AAENC,WAAO,SAFD;AAGNC,qBAAiB,aAHX;AAINC,gBAAY,MAJN;AAKNC,iBAAa;AALP;AADA,CAAV;;AAUA,IAAMC,WAAW,SAAXA,QAAW;AAAA,SACf;AAAA;AAAA,MAAM,OAAOP,EAAEC,KAAf;AAAA;AAAA,GADe;AAAA,CAAjB;;kBAMeM,Q"
-}
+{"version":3,"sources":["../../../src/components/zhn/LabelNew.jsx"],"names":["S","LABEL","display","color","backgroundColor","marginLeft","marginRight","LabelNew"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,SAAQ;AACNC,aAAS,cADH;AAENC,WAAO,SAFD;AAGNC,qBAAiB,aAHX;AAINC,gBAAY,MAJN;AAKNC,iBAAa;AALP;AADA,CAAV;;AAUA,IAAMC,WAAW,SAAXA,QAAW;AAAA,SACf;AAAA;AAAA,MAAM,OAAOP,EAAEC,KAAf;AAAA;AAAA,GADe;AAAA,CAAjB;;kBAMeM,Q","file":"LabelNew.js","sourcesContent":["import React from 'react';\r\n\r\nconst S = {\r\n  LABEL : {\r\n    display: 'inline-block',\r\n    color: '#9E9E9E',\r\n    backgroundColor: 'transparent',\r\n    marginLeft: '16px',\r\n    marginRight: '16px'\r\n  }\r\n}\r\n\r\nconst LabelNew = () => (\r\n  <span style={S.LABEL}>\r\n     New\r\n  </span>\r\n);\r\n\r\nexport default LabelNew\r\n"]}

@@ -22,9 +22,9 @@ var _IconLogoErc = require('./IconLogoErc');
 
 var _IconLogoErc2 = _interopRequireDefault(_IconLogoErc);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 var _LimitRemainingLabel = require('./LimitRemainingLabel');
 
@@ -123,7 +123,7 @@ var HeaderBar = function (_Component) {
           caption: 'ERC v0.12.0'
         }),
         _react2.default.createElement(
-          _ToolBarButton2.default,
+          _ActionButton2.default,
           {
             style: { marginTop: '8px', marginLeft: '10px' },
             type: 'TypeA',
@@ -133,35 +133,35 @@ var HeaderBar = function (_Component) {
           },
           _react2.default.createElement('span', { className: 'arrow-down' })
         ),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           style: { marginTop: '8px' },
           type: 'TypeA',
           caption: 'Quandl',
           title: 'Quandl Economic Browser',
           onClick: this._handleClickQuandl
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           style: { marginTop: '8px' },
           type: 'TypeA',
           caption: 'Eurostat',
           title: 'European Statistics Browser',
           onClick: this._handleClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           style: { marginTop: '8px' },
           type: 'TypeA',
           caption: 'Watch',
           title: 'Watch List Browser',
           onClick: this._handleClickWatch
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeA',
           style: { float: 'right', marginRight: '20px', marginTop: '8px' },
           caption: 'About',
           title: 'Description about application ERC',
           onClick: _ComponentActions2.default.showAbout
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeA',
           style: { float: 'right', marginTop: '8px' },
           caption: 'Settings',
@@ -189,4 +189,4 @@ var HeaderBar = function (_Component) {
 }(_react.Component);
 
 exports.default = HeaderBar;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\HeaderBar.js.map
+//# sourceMappingURL=HeaderBar.js.map

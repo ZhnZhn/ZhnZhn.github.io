@@ -10,9 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZhDialog = require('../ZhDialog');
+var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
-var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
+var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
 
 var _WithToolbar = require('../dialogs/WithToolbar');
 
@@ -34,21 +34,21 @@ var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
-var _DatesFragment = require('../DatesFragment');
+var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -91,10 +91,9 @@ var BigMacDialog = _react2.default.createClass(_extends({
       msg.push(this.props.msgOnNotSelected('Country'));
     }
 
-    var _datesFragment$getVal = this.datesFragment.getValidation();
-
-    var isValid = _datesFragment$getVal.isValid;
-    var datesMsg = _datesFragment$getVal.datesMsg;
+    var _datesFragment$getVal = this.datesFragment.getValidation(),
+        isValid = _datesFragment$getVal.isValid,
+        datesMsg = _datesFragment$getVal.datesMsg;
 
     if (!isValid) {
       msg = msg.concat(datesMsg);
@@ -103,15 +102,14 @@ var BigMacDialog = _react2.default.createClass(_extends({
     return msg;
   },
   _createLoadOption: function _createLoadOption() {
-    var _datesFragment$getVal2 = this.datesFragment.getValues();
-
-    var fromDate = _datesFragment$getVal2.fromDate;
-    var toDate = _datesFragment$getVal2.toDate;
-    var _dataColumn = this.metric ? this.metric.value : 1;
-    var _subtitle = this.metric ? this.metric.caption : this.state.optionMetrics[0].caption;
-    var _props = this.props;
-    var loadId = _props.loadId;
-    var fnValue = _props.fnValue;
+    var _datesFragment$getVal2 = this.datesFragment.getValues(),
+        fromDate = _datesFragment$getVal2.fromDate,
+        toDate = _datesFragment$getVal2.toDate,
+        _dataColumn = this.metric ? this.metric.value : 1,
+        _subtitle = this.metric ? this.metric.caption : this.state.optionMetrics[0].caption,
+        _props = this.props,
+        loadId = _props.loadId,
+        fnValue = _props.fnValue;
 
     return {
       value: fnValue(this.country.value),
@@ -131,28 +129,29 @@ var BigMacDialog = _react2.default.createClass(_extends({
   render: function render() {
     var _this = this;
 
-    var _props2 = this.props;
-    var isShow = _props2.isShow;
-    var onShow = _props2.onShow;
-    var countryURI = _props2.countryURI;
-    var countryJsonProp = _props2.countryJsonProp;
-    var initFromDate = _props2.initFromDate;
-    var initToDate = _props2.initToDate;
-    var msgOnNotValidFormat = _props2.msgOnNotValidFormat;
-    var onTestDate = _props2.onTestDate;
-    var _state = this.state;
-    var isShowDate = _state.isShowDate;
-    var optionMetrics = _state.optionMetrics;
-    var validationMessages = _state.validationMessages;
-    var _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+    var _props2 = this.props,
+        isShow = _props2.isShow,
+        onShow = _props2.onShow,
+        countryURI = _props2.countryURI,
+        countryJsonProp = _props2.countryJsonProp,
+        initFromDate = _props2.initFromDate,
+        initToDate = _props2.initToDate,
+        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
+        onTestDate = _props2.onTestDate,
+        _state = this.state,
+        isShowDate = _state.isShowDate,
+        optionMetrics = _state.optionMetrics,
+        validationMessages = _state.validationMessages,
+        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
       key: 'a',
       type: 'TypeC',
       caption: 'Load',
       onClick: this._handlerLoad
     })];
 
+
     return _react2.default.createElement(
-      _ZhDialog2.default,
+      _DraggableDialog2.default,
       {
         caption: 'Economist Big Mac Index',
         isShow: isShow,
@@ -189,7 +188,7 @@ var BigMacDialog = _react2.default.createClass(_extends({
           onTestDate: onTestDate
         })
       ),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       })
     );
@@ -197,4 +196,4 @@ var BigMacDialog = _react2.default.createClass(_extends({
 }));
 
 exports.default = BigMacDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\BigMacDialog.js.map
+//# sourceMappingURL=BigMacDialog.js.map

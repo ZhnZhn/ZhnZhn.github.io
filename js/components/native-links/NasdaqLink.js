@@ -41,4 +41,4 @@ var NasdaqLink = function NasdaqLink(_ref) {
 };
 
 exports.default = NasdaqLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\NasdaqLink.js.map
+//# sourceMappingURL=NasdaqLink.js.map

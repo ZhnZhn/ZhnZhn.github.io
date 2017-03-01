@@ -39,9 +39,8 @@ var styles = {
 };
 
 var _maskValue = function _maskValue() {
-  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-  var len = value.length;
   var i = 0,
       str = '';
   for (i; i < len; i++) {
@@ -68,7 +67,7 @@ var InputSecret = function (_Component) {
       value: ''
     }, _this._handleChangeValue = function (event) {
       _this.secret = event.target.value;
-      _this.setState({ value: _maskValue(_this.secret) });
+      _this.setState({ value: _maskValue(_this.secret.length) });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 

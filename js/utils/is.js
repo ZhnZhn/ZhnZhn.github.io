@@ -29,4 +29,4 @@ var is = {
 };
 
 exports.default = is;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\is.js.map
+//# sourceMappingURL=is.js.map

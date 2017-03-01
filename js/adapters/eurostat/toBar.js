@@ -40,4 +40,4 @@ var toBar = {
 };
 
 exports.default = toBar;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\toBar.js.map
+//# sourceMappingURL=toBar.js.map

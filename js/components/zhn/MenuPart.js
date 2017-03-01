@@ -88,4 +88,4 @@ var MenuPart = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuPart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuPart.js.map
+//# sourceMappingURL=MenuPart.js.map

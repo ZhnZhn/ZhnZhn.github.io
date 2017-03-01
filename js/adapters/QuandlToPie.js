@@ -165,4 +165,4 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
 
   return { config: config };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToPie.js.map
+//# sourceMappingURL=QuandlToPie.js.map

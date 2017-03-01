@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SvgClose from '../SvgClose';
+import SvgClose from './SvgClose';
 
 const STYLE = {
   ROOT : {

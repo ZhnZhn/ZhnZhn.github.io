@@ -2,8 +2,8 @@ import React from 'react';
 
 import FragmentSelectGroupList from './FragmentSelectGroupList';
 import RowInputText from './RowInputText';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
-import ToolBarButton from '../ToolBarButton';
+import ValidationMessages from '../zhn/ValidationMessages';
+import ActionButton from '../zhn/ActionButton';
 
 const Styles = {
   COMMAND_DIV : {
@@ -80,8 +80,8 @@ const ListEditPane = React.createClass({
   },
 
   render(){
-    const {store, onClose} = this.props
-        , {groupOptions, listOptions, validationMessages} = this.state;
+    const { store, onClose } = this.props
+        , { groupOptions, validationMessages } = this.state;
     return (
       <div>
          <FragmentSelectGroupList
@@ -95,21 +95,21 @@ const ListEditPane = React.createClass({
             ref={c => this.inputText = c}
             caption={'List To:'}
          />
-         <ValidationMessagesFragment
+         <ValidationMessages
            validationMessages={validationMessages}
          />
          <div style={Styles.COMMAND_DIV}>
-            <ToolBarButton
+            <ActionButton
                type="TypeC"
                caption="Rename"
                onClick={this._handlerRename}
             />
-            <ToolBarButton
+            <ActionButton
                type="TypeC"
                caption="Clear"
                onClick={this._handlerClear}
             />
-            <ToolBarButton
+            <ActionButton
                type="TypeC"
                caption="Close"
                onClick={onClose}

@@ -16,9 +16,9 @@ var _eurostat = require('../../flux/creaters/eurostat3');
 
 var _eurostat2 = _interopRequireDefault(_eurostat);
 
-var _ZhDialog = require('../ZhDialog');
+var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
-var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
+var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
 
 var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
@@ -32,13 +32,13 @@ var _SelectParentChild = require('./SelectParentChild');
 
 var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 var _withToolbar = require('./decorators/withToolbar');
 
@@ -143,7 +143,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           threeCaption = _props.threeCaption,
           msgOnNotSelected = _props.msgOnNotSelected,
           validationMessages = this.state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
         caption: 'Load',
@@ -152,7 +152,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
 
 
       return _react2.default.createElement(
-        _ZhDialog2.default,
+        _DraggableDialog2.default,
         {
           caption: caption,
           isShow: isShow,
@@ -183,7 +183,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           childCaption: threeCaption,
           msgOnNotSelected: msgOnNotSelected
         }),
-        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+        _react2.default.createElement(_ValidationMessages2.default, {
           validationMessages: validationMessages
         })
       );
@@ -196,4 +196,4 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
 DialogEurostat3.displayName = 'DialogEurostat3';
 
 exports.default = DialogEurostat3;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat3.js.map
+//# sourceMappingURL=DialogEurostat3.js.map

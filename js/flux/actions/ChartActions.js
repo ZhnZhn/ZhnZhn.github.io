@@ -109,8 +109,8 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserTyp
     this.idLoading = this.idLoading + META;
   }
 
-  var _option$loadId = option.loadId;
-  var loadId = _option$loadId === undefined ? 'Q' : _option$loadId;
+  var _option$loadId = option.loadId,
+      loadId = _option$loadId === undefined ? 'Q' : _option$loadId;
 
   option.chartType = chartType;
   option.browserType = browserType;
@@ -118,4 +118,4 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserTyp
 });
 
 exports.default = ChartActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ChartActions.js.map
+//# sourceMappingURL=ChartActions.js.map

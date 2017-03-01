@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ZhSelect from '../ZhSelect';
+import InputSelect from '../zhn/InputSelect';
 import DialogStyles from '../styles/DialogStyles';
 
 const styles = DialogStyles;
@@ -10,7 +10,7 @@ const RowInputSelect = ({ caption='', ...rest }) => (
       <span style={styles.labelSpan}>
          {caption}
       </span>
-      <ZhSelect
+      <InputSelect
          width="250"
          {...rest}
       />

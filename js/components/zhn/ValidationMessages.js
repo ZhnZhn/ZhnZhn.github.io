@@ -12,7 +12,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DialogStyles = require('./styles/DialogStyles');
+var _DialogStyles = require('../styles/DialogStyles');
 
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
@@ -32,21 +32,21 @@ var STYLE = {
   }
 };
 
-var ValidationMessagesFragment = (_temp2 = _class = function (_Component) {
-  _inherits(ValidationMessagesFragment, _Component);
+var ValidationMessages = (_temp2 = _class = function (_Component) {
+  _inherits(ValidationMessages, _Component);
 
-  function ValidationMessagesFragment() {
+  function ValidationMessages() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, ValidationMessagesFragment);
+    _classCallCheck(this, ValidationMessages);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ValidationMessagesFragment.__proto__ || Object.getPrototypeOf(ValidationMessagesFragment)).call.apply(_ref, [this].concat(args))), _this), _this._renderValidationMessages = function (validationMessages) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ValidationMessages.__proto__ || Object.getPrototypeOf(ValidationMessages)).call.apply(_ref, [this].concat(args))), _this), _this._renderValidationMessages = function (validationMessages) {
       return validationMessages.map(function (msg, index) {
         return _react2.default.createElement(
           'div',
@@ -66,7 +66,7 @@ var ValidationMessagesFragment = (_temp2 = _class = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(ValidationMessagesFragment, [{
+  _createClass(ValidationMessages, [{
     key: 'render',
     value: function render() {
       var validationMessages = this.props.validationMessages;
@@ -79,11 +79,11 @@ var ValidationMessagesFragment = (_temp2 = _class = function (_Component) {
     }
   }]);
 
-  return ValidationMessagesFragment;
+  return ValidationMessages;
 }(_react.Component), _class.propTypes = {
   validationMessages: _react.PropTypes.array
 }, _class.defaultProps = {
   validationMessages: []
 }, _temp2);
-exports.default = ValidationMessagesFragment;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ValidationMessagesFragment.js.map
+exports.default = ValidationMessages;
+//# sourceMappingURL=ValidationMessages.js.map

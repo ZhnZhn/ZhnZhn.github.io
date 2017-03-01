@@ -126,4 +126,4 @@ var PanelBrowsers = function PanelBrowsers(props) {
 };
 
 exports.default = PanelBrowsers;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\PanelBrowsers.js.map
+//# sourceMappingURL=PanelBrowsers.js.map

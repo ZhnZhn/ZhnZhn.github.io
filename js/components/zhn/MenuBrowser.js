@@ -141,4 +141,4 @@ var MenuBrowser = (_temp = _class = function (_Component) {
   };
 }, _temp);
 exports.default = MenuBrowser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuBrowser.js.map
+//# sourceMappingURL=MenuBrowser.js.map

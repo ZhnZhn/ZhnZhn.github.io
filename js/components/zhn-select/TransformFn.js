@@ -6,12 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var TransformFn = {
   fromLevel3: function fromLevel3(data) {
-    var meta = data.meta;
-    var caption = meta.caption;
-    var level1 = meta.level1;
-    var level2 = meta.level2;
-    var level3 = meta.level3;
-    var _options = [];
+    var meta = data.meta,
+        caption = meta.caption,
+        level1 = meta.level1,
+        level2 = meta.level2,
+        level3 = meta.level3,
+        _options = [];
+
 
     for (var i1 = 0, l1 = data[level1].length; i1 < l1; i1++) {
       var industry = data[level1][i1];
@@ -30,4 +31,4 @@ var TransformFn = {
 };
 
 exports.default = TransformFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-select\TransformFn.js.map
+//# sourceMappingURL=TransformFn.js.map

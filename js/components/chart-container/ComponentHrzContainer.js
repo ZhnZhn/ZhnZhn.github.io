@@ -52,4 +52,4 @@ var ComponentHrzContainer = _react2.default.createClass({
 });
 
 exports.default = ComponentHrzContainer;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-container\ComponentHrzContainer.js.map
+//# sourceMappingURL=ComponentHrzContainer.js.map

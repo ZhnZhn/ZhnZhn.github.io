@@ -30,9 +30,9 @@ var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -42,9 +42,9 @@ var _InputText = require('../zhn/InputText');
 
 var _InputText2 = _interopRequireDefault(_InputText);
 
-var _ZhSelect = require('../ZhSelect');
+var _InputSelect = require('../zhn/InputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -177,7 +177,7 @@ var CustomizeExportDialog = function (_Component) {
           isShowDimension = _state.isShowDimension,
           isShowTitle = _state.isShowTitle,
           isShowStyle = _state.isShowStyle,
-          commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+          commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
         caption: 'Export',
@@ -280,7 +280,7 @@ var CustomizeExportDialog = function (_Component) {
               { style: STYLE.LABEL_WIDTH },
               'Style:'
             ),
-            _react2.default.createElement(_ZhSelect2.default, {
+            _react2.default.createElement(_InputSelect2.default, {
               width: '250',
               options: this.optionStyles,
               placeholder: 'Default',
@@ -298,4 +298,4 @@ var CustomizeExportDialog = function (_Component) {
 CustomizeExportDialog.displayName = 'CustomizeExportDialog';
 
 exports.default = CustomizeExportDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\CustomizeExportDialog.js.map
+//# sourceMappingURL=CustomizeExportDialog.js.map

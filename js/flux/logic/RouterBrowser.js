@@ -26,4 +26,4 @@ var RouterBrowser = (_RouterBrowser = {
 }, _defineProperty(_RouterBrowser, _Type.BrowserType.US_STOCKS, _SourceBrowserDynamic4.default), _defineProperty(_RouterBrowser, _Type.BrowserType.NYSE_STOCKS, _SourceBrowserDynamic4.default), _defineProperty(_RouterBrowser, _Type.BrowserType.NASDAQ_STOCKS, _SourceBrowserDynamic4.default), _defineProperty(_RouterBrowser, _Type.BrowserType.LONDON_STOCKS, _SourceBrowserDynamic4.default), _RouterBrowser);
 
 exports.default = RouterBrowser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\RouterBrowser.js.map
+//# sourceMappingURL=RouterBrowser.js.map

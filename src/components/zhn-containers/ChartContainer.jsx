@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import ChartStore from '../flux/stores/ChartStore';
-import { ChartActionTypes } from '../flux/actions/ChartActions';
+import ChartStore from '../../flux/stores/ChartStore';
+import { ChartActionTypes } from '../../flux/actions/ChartActions';
 
-import { ComponentActionTypes } from '../flux/actions/ComponentActions';
+import { ComponentActionTypes } from '../../flux/actions/ComponentActions';
 
-import BrowserCaption from './zhn/BrowserCaption';
-import SvgHrzResize from './zhn/SvgHrzResize';
-import ScrollPane from './zhn/ScrollPane';
+import BrowserCaption from '../zhn/BrowserCaption';
+import SvgHrzResize from '../zhn/SvgHrzResize';
+import ScrollPane from '../zhn/ScrollPane';
 
-import ItemFactory from './factories/ItemFactory';
+import ItemFactory from '../factories/ItemFactory';
 
 const SHOW_POPUP = "show-popup"
     , CHILD_MARGIN = 36
@@ -20,7 +20,7 @@ const SHOW_POPUP = "show-popup"
 const styles = {
   rootDiv : {
     backgroundColor: '#4D4D4D',
-    //padding : '8px 3px 3px 8px',    
+    //padding : '8px 3px 3px 8px',
     padding : '0px 0px 3px 0px',
     position: 'relative',
     borderRadius: '4px',
@@ -75,7 +75,7 @@ const compActions = [
 ];
 
 
-class ChartContainer2 extends Component {
+class ChartContainer extends Component {
 
   constructor(props){
     super();
@@ -171,4 +171,4 @@ class ChartContainer2 extends Component {
    }
 }
 
-export default ChartContainer2
+export default ChartContainer

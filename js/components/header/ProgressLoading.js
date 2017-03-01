@@ -86,4 +86,4 @@ var ProgressLoading = function (_Component) {
 }(_react.Component);
 
 exports.default = ProgressLoading;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\ProgressLoading.js.map
+//# sourceMappingURL=ProgressLoading.js.map

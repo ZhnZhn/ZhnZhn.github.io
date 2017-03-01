@@ -27,4 +27,4 @@ var RouterBrowserItem = {
 };
 
 exports.default = RouterBrowserItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-items\RouterBrowserItem.js.map
+//# sourceMappingURL=RouterBrowserItem.js.map

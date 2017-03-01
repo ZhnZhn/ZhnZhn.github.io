@@ -1,12 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\IconEurostat.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconEurostat.js",
- "sourceRoot": "",
- "names": [
-  "IconEurostat",
-  "props"
- ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,eAAe,SAAfA,YAAe,CAACC,KAAD;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,gBADZ;AAEE,aAAM,UAFR;AAGE,YAAK;AAHP;AAAA;AAAA,GADmB;AAAA,CAArB;;kBAUeD,Y"
-}
+{"version":3,"sources":["../../../src/components/about/IconEurostat.jsx"],"names":["IconEurostat","props"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,eAAe,SAAfA,YAAe,CAACC,KAAD;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,gBADZ;AAEE,aAAM,UAFR;AAGE,YAAK;AAHP;AAAA;AAAA,GADmB;AAAA,CAArB;;kBAUeD,Y","file":"IconEurostat.js","sourcesContent":["import React from 'react';\r\n\r\nconst IconEurostat = (props) => (\r\n  <a\r\n    className=\"icon__eurostat\"\r\n    title=\"Eurostat\"\r\n    href=\"http://ec.europa.eu/eurostat\"\r\n  >\r\n    eurostat\r\n  </a>\r\n);\r\n\r\nexport default IconEurostat\r\n"]}

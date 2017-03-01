@@ -64,4 +64,4 @@ var fnFetchText = exports.fnFetchText = function fnFetchText(_ref4) {
       console.log(error);
    });
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\fn.js.map
+//# sourceMappingURL=fn.js.map

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ProgressLoading from './ProgressLoading';
 import AppLabel from './AppLabel';
 import IconLogoErc from './IconLogoErc';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 import LimitRemainingLabel from './LimitRemainingLabel';
 import PanelBrowsers from './PanelBrowsers';
 import ComponentActions from '../../flux/actions/ComponentActions';
@@ -69,7 +69,7 @@ class HeaderBar extends Component {
             caption="ERC v0.12.0"
          />
 
-         <ToolBarButton
+         <ActionButton
            style={{ marginTop: '8px', marginLeft: '10px' }}
            type="TypeA"
            caption="DS"
@@ -77,10 +77,10 @@ class HeaderBar extends Component {
            onClick={this._handleClickDS}
          >
            <span className={'arrow-down'}></span>
-         </ToolBarButton>
+         </ActionButton>
 
 
-        <ToolBarButton
+        <ActionButton
           style={{ marginTop: '8px' }}
           type="TypeA"
           caption="Quandl"
@@ -88,7 +88,7 @@ class HeaderBar extends Component {
           onClick={this._handleClickQuandl}
         />
 
-        <ToolBarButton
+        <ActionButton
            style={{ marginTop: '8px' }}
            type="TypeA"
            caption="Eurostat"
@@ -96,7 +96,7 @@ class HeaderBar extends Component {
            onClick={this._handleClickDynamic.bind(null, BrowserConfig[BrowserType.EUROSTAT])}
         />
 
-         <ToolBarButton
+         <ActionButton
            style={{ marginTop: '8px' }}
            type="TypeA"
            caption="Watch"
@@ -104,7 +104,7 @@ class HeaderBar extends Component {
            onClick={this._handleClickWatch}
          />
 
-         <ToolBarButton
+         <ActionButton
            type="TypeA"
            style={{ float: 'right', marginRight: '20px', marginTop: '8px'}}
            caption="About"
@@ -112,7 +112,7 @@ class HeaderBar extends Component {
            onClick={ComponentActions.showAbout}
           />
 
-          <ToolBarButton
+          <ActionButton
             type="TypeA"
             style={{ float: 'right', marginTop: '8px'}}
             caption="Settings"

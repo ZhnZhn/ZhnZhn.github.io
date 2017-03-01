@@ -10,9 +10,9 @@ import RowText from './RowText';
 import ShowHide from '../zhn/ShowHide';
 import Row from './Row';
 import NasdaqLink from '../native-links/NasdaqLink';
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
-import ToolBarButton from '../ToolBarButton';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
+import ActionButton from '../zhn/ActionButton';
 
 import withValidationLoad from './decorators/withValidationLoad';
 
@@ -87,13 +87,6 @@ class StocksBySectorDialog extends Component {
       }
    }
 
-   /*
-   getInitialState(){
-    this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }];
-    return this._createInitialState(this.props);
-   },
-   */
-
    componentWillReceiveProps(nextProps){
      if ( this.props.data !== nextProps.data) {
        this.setState(this._createInitialState(nextProps));
@@ -152,7 +145,7 @@ class StocksBySectorDialog extends Component {
     return msg;
   }
 
-  _handleClose = () => {    
+  _handleClose = () => {
     if (this.state.validationMessages.length > 0){
       this.setState({validationMessages : this._getValidationMessages()});
     }
@@ -170,13 +163,13 @@ class StocksBySectorDialog extends Component {
             validationMessages
           } = this.state
         , _commandButtons = [
-             <ToolBarButton
+             <ActionButton
                 key="a"
                 type="TypeC"
                 caption="Load"
                 onClick={this._handleLoad}
              />,
-             <ToolBarButton
+             <ActionButton
                 key="b"
                 type="TypeC"
                 caption="Show"
@@ -216,7 +209,7 @@ class StocksBySectorDialog extends Component {
             initToDate={initToDate}
             onTestDate={onTestDate}
         />
-        <ValidationMessagesFragment
+        <ValidationMessages
             validationMessages={validationMessages}
         />
       </ModalDialog>

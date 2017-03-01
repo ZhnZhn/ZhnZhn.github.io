@@ -138,13 +138,13 @@ var styles = {
   }
 };
 
-var ZhSelect = (_temp = _class = function (_Component) {
-  _inherits(ZhSelect, _Component);
+var InputSelect = (_temp = _class = function (_Component) {
+  _inherits(InputSelect, _Component);
 
-  function ZhSelect(props) {
-    _classCallCheck(this, ZhSelect);
+  function InputSelect(props) {
+    _classCallCheck(this, InputSelect);
 
-    var _this = _possibleConstructorReturn(this, (ZhSelect.__proto__ || Object.getPrototypeOf(ZhSelect)).call(this));
+    var _this = _possibleConstructorReturn(this, (InputSelect.__proto__ || Object.getPrototypeOf(InputSelect)).call(this));
 
     _this._setStateToInit = function (options) {
       _this.indexActiveOption = 0;
@@ -442,7 +442,7 @@ var ZhSelect = (_temp = _class = function (_Component) {
     return _this;
   }
 
-  _createClass(ZhSelect, [{
+  _createClass(InputSelect, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (this.props !== nextProps) {
@@ -552,12 +552,12 @@ var ZhSelect = (_temp = _class = function (_Component) {
     }
   }]);
 
-  return ZhSelect;
+  return InputSelect;
 }(_react.Component), _class.defaultProps = {
   options: [],
   optionName: '',
   optionNames: '',
   isUpdateOptions: false
 }, _temp);
-exports.default = ZhSelect;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ZhSelect.js.map
+exports.default = InputSelect;
+//# sourceMappingURL=InputSelect.js.map

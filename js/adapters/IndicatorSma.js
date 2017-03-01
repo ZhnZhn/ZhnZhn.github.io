@@ -91,11 +91,10 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
     var point = data[i];
     if (i < nPeriod) {
       if (i == 0) {
-        var _fnGetPriceAndFlow2 = _fnGetPriceAndFlow(point);
-
-        var bTp = _fnGetPriceAndFlow2.bTp;
-        var bRmf = _fnGetPriceAndFlow2.bRmf;
-        var isFullData = _fnGetPriceAndFlow2.isFullData;
+        var _fnGetPriceAndFlow2 = _fnGetPriceAndFlow(point),
+            bTp = _fnGetPriceAndFlow2.bTp,
+            bRmf = _fnGetPriceAndFlow2.bRmf,
+            isFullData = _fnGetPriceAndFlow2.isFullData;
 
         if (!isFullData) {
           nNotFullPoint += 1;
@@ -108,11 +107,10 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
           rmf: parseFloat(bRmf.toFixed(4))
         });
       } else {
-        var _fnGetPriceAndFlow3 = _fnGetPriceAndFlow(point);
-
-        var _bTp = _fnGetPriceAndFlow3.bTp;
-        var _bRmf = _fnGetPriceAndFlow3.bRmf;
-        var _isFullData = _fnGetPriceAndFlow3.isFullData;
+        var _fnGetPriceAndFlow3 = _fnGetPriceAndFlow(point),
+            _bTp = _fnGetPriceAndFlow3.bTp,
+            _bRmf = _fnGetPriceAndFlow3.bRmf,
+            _isFullData = _fnGetPriceAndFlow3.isFullData;
 
         if (!_isFullData) {
           nNotFullPoint += 1;
@@ -134,11 +132,10 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
         });
       }
     } else {
-      var _fnGetPriceAndFlow4 = _fnGetPriceAndFlow(point);
-
-      var _bTp2 = _fnGetPriceAndFlow4.bTp;
-      var _bRmf2 = _fnGetPriceAndFlow4.bRmf;
-      var _isFullData2 = _fnGetPriceAndFlow4.isFullData;
+      var _fnGetPriceAndFlow4 = _fnGetPriceAndFlow(point),
+          _bTp2 = _fnGetPriceAndFlow4.bTp,
+          _bRmf2 = _fnGetPriceAndFlow4.bRmf,
+          _isFullData2 = _fnGetPriceAndFlow4.isFullData;
 
       if (!_isFullData2) {
         nNotFullPoint += 1;
@@ -178,4 +175,4 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
 
   return config;
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\IndicatorSma.js.map
+//# sourceMappingURL=IndicatorSma.js.map

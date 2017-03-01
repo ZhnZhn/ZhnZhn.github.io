@@ -63,4 +63,4 @@ Interact.makeDragable = function (domNode) {
 };
 
 exports.default = Interact;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\Interact.js.map
+//# sourceMappingURL=Interact.js.map

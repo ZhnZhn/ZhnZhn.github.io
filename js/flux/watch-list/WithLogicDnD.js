@@ -14,8 +14,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var WithLogicDnD = {
     dragDropItem: function dragDropItem(watchList, _ref) {
-        var dragId = _ref.dragId;
-        var dropId = _ref.dropId;
+        var dragId = _ref.dragId,
+            dropId = _ref.dropId;
 
         var dragArr = dragId.split(';'),
             dragGroup = _LogicFn2.default.findGroup(watchList, dragArr[0]),
@@ -38,25 +38,22 @@ var WithLogicDnD = {
         return { isDone: true };
     },
     dragDropList: function dragDropList(watchList, _ref2) {
-        var dragId = _ref2.dragId;
-        var dropId = _ref2.dropId;
+        var dragId = _ref2.dragId,
+            dropId = _ref2.dropId;
 
-        var _dragId$split = dragId.split(';');
+        var _dragId$split = dragId.split(';'),
+            _dragId$split2 = _slicedToArray(_dragId$split, 2),
+            dragGroupCaption = _dragId$split2[0],
+            dragListCaption = _dragId$split2[1],
+            dragGroup = _LogicFn2.default.findGroup(watchList, dragGroupCaption),
+            dragList = _LogicFn2.default.findList(dragGroup, dragListCaption);
 
-        var _dragId$split2 = _slicedToArray(_dragId$split, 2);
-
-        var dragGroupCaption = _dragId$split2[0];
-        var dragListCaption = _dragId$split2[1];
-        var dragGroup = _LogicFn2.default.findGroup(watchList, dragGroupCaption);
-        var dragList = _LogicFn2.default.findList(dragGroup, dragListCaption);
-        var _dropId$split = dropId.split(';');
-
-        var _dropId$split2 = _slicedToArray(_dropId$split, 2);
-
-        var dropGroupCaption = _dropId$split2[0];
-        var dropListCaption = _dropId$split2[1];
-        var dropGroup = _LogicFn2.default.findGroup(watchList, dropGroupCaption);
-        var dropIndex = dropListCaption ? _LogicFn2.default.findIndex(dropGroup.lists, dropListCaption) : 0;
+        var _dropId$split = dropId.split(';'),
+            _dropId$split2 = _slicedToArray(_dropId$split, 2),
+            dropGroupCaption = _dropId$split2[0],
+            dropListCaption = _dropId$split2[1],
+            dropGroup = _LogicFn2.default.findGroup(watchList, dropGroupCaption),
+            dropIndex = dropListCaption ? _LogicFn2.default.findIndex(dropGroup.lists, dropListCaption) : 0;
 
         if (dragGroup.caption !== dropGroup.caption && _LogicFn2.default.checkIsInArraySameCaption(dropGroup.lists, dragListCaption)) {
             return _LogicFn2.default.fDragDropListExisted(dropGroupCaption, dragListCaption);
@@ -68,22 +65,17 @@ var WithLogicDnD = {
         return { isDone: true };
     },
     dragDropGroup: function dragDropGroup(watchList, _ref3) {
-        var dragId = _ref3.dragId;
-        var dropId = _ref3.dropId;
+        var dragId = _ref3.dragId,
+            dropId = _ref3.dropId;
 
-        var _dragId$split3 = dragId.split(';');
-
-        var _dragId$split4 = _slicedToArray(_dragId$split3, 1);
-
-        var dragGroupCaption = _dragId$split4[0];
-        var dragGroup = _LogicFn2.default.findGroup(watchList, dragGroupCaption);
-
-        var _dropId$split3 = dropId.split(';');
-
-        var _dropId$split4 = _slicedToArray(_dropId$split3, 1);
-
-        var dropGroupCaption = _dropId$split4[0];
-        var dropIndex = dropGroupCaption ? _LogicFn2.default.findIndex(watchList.groups, dropGroupCaption) : 0;
+        var _dragId$split3 = dragId.split(';'),
+            _dragId$split4 = _slicedToArray(_dragId$split3, 1),
+            dragGroupCaption = _dragId$split4[0],
+            dragGroup = _LogicFn2.default.findGroup(watchList, dragGroupCaption),
+            _dropId$split3 = dropId.split(';'),
+            _dropId$split4 = _slicedToArray(_dropId$split3, 1),
+            dropGroupCaption = _dropId$split4[0],
+            dropIndex = dropGroupCaption ? _LogicFn2.default.findIndex(watchList.groups, dropGroupCaption) : 0;
 
         watchList.groups = _LogicFn2.default.filter(watchList.groups, dragGroupCaption);
         watchList.groups = _LogicFn2.default.insertItemInArray(dragGroup, dropIndex, watchList.groups);
@@ -93,4 +85,4 @@ var WithLogicDnD = {
 };
 
 exports.default = WithLogicDnD;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WithLogicDnD.js.map
+//# sourceMappingURL=WithLogicDnD.js.map

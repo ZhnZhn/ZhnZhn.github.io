@@ -7,4 +7,4 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (data) {
     return Math.max.apply(Math, data);
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhnSparklines\dataProcessing\max.js.map
+//# sourceMappingURL=max.js.map

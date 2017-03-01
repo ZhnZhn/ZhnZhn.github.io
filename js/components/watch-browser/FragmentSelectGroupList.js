@@ -61,11 +61,11 @@ var FragmentSelectGroupList = _react2.default.createClass({
     this.listCaption = item && item.caption ? item.caption : null;
   },
   render: function render() {
-    var _props = this.props;
-    var groupCaption = _props.groupCaption;
-    var groupOptions = _props.groupOptions;
-    var listCaption = _props.listCaption;
-    var listOptions = this.state.listOptions;
+    var _props = this.props,
+        groupCaption = _props.groupCaption,
+        groupOptions = _props.groupOptions,
+        listCaption = _props.listCaption,
+        listOptions = this.state.listOptions;
 
     return _react2.default.createElement(
       'div',
@@ -92,4 +92,4 @@ var FragmentSelectGroupList = _react2.default.createClass({
 });
 
 exports.default = FragmentSelectGroupList;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\FragmentSelectGroupList.js.map
+//# sourceMappingURL=FragmentSelectGroupList.js.map

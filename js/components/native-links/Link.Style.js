@@ -12,4 +12,4 @@ var STYLE = {
 };
 
 exports.default = STYLE;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\Link.Style.js.map
+//# sourceMappingURL=Link.Style.js.map

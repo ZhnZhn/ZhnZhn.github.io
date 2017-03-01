@@ -1,8 +1,8 @@
 import React from 'react';
 
 import RowInputSelect from './RowInputSelect';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
-import ToolBarButton from '../ToolBarButton';
+import ValidationMessages from '../zhn/ValidationMessages';
+import ActionButton from '../zhn/ActionButton';
 
 const Styles = {
   COMMAND_DIV : {
@@ -83,16 +83,16 @@ const GroupDeletePane = React.createClass({
              //isUpdateOptions={true}
              onSelect={this._handlerSelectGroup}
            />
-           <ValidationMessagesFragment
+           <ValidationMessages
              validationMessages={validationMessages}
            />
            <div style={Styles.COMMAND_DIV}>
-             <ToolBarButton
+             <ActionButton
                type="TypeC"
                caption="Delete"
                onClick={this._handlerDeleteGroup}
              />
-            <ToolBarButton
+            <ActionButton
                type="TypeC"
                caption="Close"
                onClick={onClose}

@@ -46,14 +46,14 @@ var BrowserContainer = _react2.default.createClass({
     }
   },
   render: function render() {
-    var _props = this.props;
-    var store = _props.store;
-    var showBrowserAction = _props.showBrowserAction;
-    var updateBrowserAction = _props.updateBrowserAction;
-    var updateWatchAction = _props.updateWatchAction;
-    var initDialogAction = _props.initDialogAction;
-    var showDialogAction = _props.showDialogAction;
-    var elBrowsers = this.state.elBrowsers;
+    var _props = this.props,
+        store = _props.store,
+        showBrowserAction = _props.showBrowserAction,
+        updateBrowserAction = _props.updateBrowserAction,
+        updateWatchAction = _props.updateWatchAction,
+        initDialogAction = _props.initDialogAction,
+        showDialogAction = _props.showDialogAction,
+        elBrowsers = this.state.elBrowsers;
 
 
     return _react2.default.createElement(
@@ -86,4 +86,4 @@ var BrowserContainer = _react2.default.createClass({
 });
 
 exports.default = BrowserContainer;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-container\BrowserContainer.js.map
+//# sourceMappingURL=BrowserContainer.js.map

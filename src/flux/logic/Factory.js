@@ -8,7 +8,7 @@ import RouterBrowser from './RouterBrowser';
 import RouterItemOption from '../../components/zhn-select/RouterItemOption';
 import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
 
-import ChartContainer2 from '../../components/ChartContainer2';
+import ChartContainer from '../../components/zhn-containers/ChartContainer';
 
 import Msg from '../../constants/Msg';
 import { ModalDialog, LoadType } from '../../constants/Type';
@@ -99,7 +99,7 @@ const fnCloseChartContainer = function(chartType, browserType){
 const createChartContainerComp = function(conf={}, browserType){
   const Comp = (conf.chartContainerComp)
                  ? conf.chartContainerComp
-                 : ChartContainer2
+                 : ChartContainer
       , _type = (conf.type)
              ? conf.type
              : BrowserConfig[browserType].chartContainerType

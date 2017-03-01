@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\LoadConfig.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\LoadConfig.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;;;AACA;;;;AACA;;AAEA;;AACA;;AACA;;;;;;AAEA,IAAM,6DACH,eAAS,CAAT,wDACA,eAAS,GAAT,oFACA,eAAS,OAAT,4DACA,oBAAU,UAAV,wDACA,eAAS,EAAT,uCALG;;kBAQS"
-}
+{"version":3,"sources":["../../../src/flux/logic/LoadConfig.js"],"names":["LoadConfig","Q","QCT","EU_STAT","WATCH_LIST","WL"],"mappings":";;;;;;;;AACA;;;;AACA;;AAEA;;AACA;;AACA;;;;;;AAEA,IAAMA,6DACH,eAASC,CADN,wDAEH,eAASC,GAFN,oFAGH,eAASC,OAHN,4DAIH,oBAAUC,UAJP,wDAKH,eAASC,EALN,uCAAN;;kBAQeL,U","file":"LoadConfig.js","sourcesContent":["\r\nimport ChartType from '../../constants/ChartType';\r\nimport { LoadType } from '../../constants/Type';\r\n\r\nimport {loadQuandl} from './loadQuandl';\r\nimport {loadQuandlCommodityTrade} from './loadQuandlCommodityTrade';\r\nimport { loadEuroStat } from './loadEuroStat';\r\n\r\nconst LoadConfig = {\r\n  [LoadType.Q] : loadQuandl,\r\n  [LoadType.QCT] : loadQuandlCommodityTrade,\r\n  [LoadType.EU_STAT] : loadEuroStat,\r\n  [ChartType.WATCH_LIST] : loadQuandl,\r\n  [LoadType.WL] : loadQuandl\r\n};\r\n\r\nexport default LoadConfig\r\n"]}

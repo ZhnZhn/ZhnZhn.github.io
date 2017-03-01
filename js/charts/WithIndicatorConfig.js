@@ -48,9 +48,9 @@ var _legendVolume = {
 
 var WithIndicatorConfig = {
     fBaseIndicatorConfig: function fBaseIndicatorConfig() {
-        var config = _Chart2.default.fBaseConfig();
-        var chart = config.chart;
-        var yAxis = config.yAxis;
+        var config = _Chart2.default.fBaseConfig(),
+            chart = config.chart,
+            yAxis = config.yAxis;
 
 
         config.navigation = {
@@ -176,4 +176,4 @@ var WithIndicatorConfig = {
 };
 
 exports.default = WithIndicatorConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithIndicatorConfig.js.map
+//# sourceMappingURL=WithIndicatorConfig.js.map

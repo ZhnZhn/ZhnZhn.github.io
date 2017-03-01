@@ -1,8 +1,8 @@
 import React from 'react';
 
 import RowInputText from './RowInputText';
-import ToolBarButton from '../ToolBarButton';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ActionButton from '../zhn/ActionButton';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 const Styles = {
   COMMAND_DIV : {
@@ -38,7 +38,7 @@ const GroupAddPane = React.createClass({
     this.unsubscribe();
   },
   _onStore(actionType, data){
-    const {actionCompleted, actionFailed, forActionType, store} = this.props;
+    const { actionCompleted, actionFailed, forActionType } = this.props;
     if (actionType === actionCompleted && data.forActionType === forActionType){
        this._handlerClear();
     } else if (actionType === actionFailed && data.forActionType === forActionType){
@@ -72,21 +72,21 @@ const GroupAddPane = React.createClass({
            ref={c => this.inputText = c}
            caption={'Group:'}
         />
-        <ValidationMessagesFragment
+        <ValidationMessages
            validationMessages={validationMessages}
          />
-        <div style={Styles.COMMAND_DIV}>          
-         <ToolBarButton
+        <div style={Styles.COMMAND_DIV}>
+         <ActionButton
             type="TypeC"
             caption="Create"
             onClick={this._handlerCreate}
          />
-         <ToolBarButton
+         <ActionButton
             type="TypeC"
             caption="Clear"
             onClick={this._handlerClear}
          />
-         <ToolBarButton
+         <ActionButton
             type="TypeC"
             caption="Close"
             onClick={onClose}

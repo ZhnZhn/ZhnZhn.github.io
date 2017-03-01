@@ -12,9 +12,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZhSelect = require('../ZhSelect');
+var _InputSelect = require('../zhn/InputSelect');
 
-var _ZhSelect2 = _interopRequireDefault(_ZhSelect);
+var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
@@ -102,7 +102,7 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
           { style: Styles.labelSpan },
           caption
         ),
-        _react2.default.createElement(_ZhSelect2.default, {
+        _react2.default.createElement(_InputSelect2.default, {
           width: '250',
           isLoading: isLoading,
           isLoadingFailed: isLoadingFailed,
@@ -120,4 +120,4 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
 }(_react.Component), _class2.defaultProps = { isShow: true }, _temp2)) || _class;
 
 exports.default = SelectWithLoad;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\SelectWithLoad.js.map
+//# sourceMappingURL=SelectWithLoad.js.map

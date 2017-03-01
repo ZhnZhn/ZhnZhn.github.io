@@ -32,4 +32,4 @@ var SvgMinus = function SvgMinus(_ref) {
 };
 
 exports.default = SvgMinus;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgMinus.js.map
+//# sourceMappingURL=SvgMinus.js.map

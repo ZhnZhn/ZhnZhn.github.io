@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type5';
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import SelectParentChild from './SelectParentChild';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 
-import DatesFragment from '../DatesFragment';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import DatesFragment from '../zhn-moleculs/DatesFragment';
+import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
 
 import withToolbar from './decorators/withToolbar';
@@ -85,7 +85,7 @@ class  DialogType5 extends Component {
           } = this.props
         , { isShowDate, validationMessages } = this.state
         , _commandButtons = [
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Load"
@@ -94,7 +94,7 @@ class  DialogType5 extends Component {
     ];
 
     return(
-        <ZhDialog
+        <DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={_commandButtons}
@@ -134,10 +134,10 @@ class  DialogType5 extends Component {
                  onTestDate={onTestDate}
                />
              </ShowHide>
-             <ValidationMessagesFragment
+             <ValidationMessages
                  validationMessages={validationMessages}
              />
-        </ZhDialog>
+        </DraggableDialog>
     );
   }
 }

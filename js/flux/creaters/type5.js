@@ -91,4 +91,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type5.js.map
+//# sourceMappingURL=type5.js.map

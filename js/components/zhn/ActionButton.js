@@ -10,7 +10,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ToolBarButton = function ToolBarButton(props) {
+var ActionButton = function ActionButton(props) {
   var type = props.type,
       style = props.style,
       title = props.title,
@@ -40,5 +40,5 @@ var ToolBarButton = function ToolBarButton(props) {
   );
 };
 
-exports.default = ToolBarButton;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\ToolBarButton.js.map
+exports.default = ActionButton;
+//# sourceMappingURL=ActionButton.js.map

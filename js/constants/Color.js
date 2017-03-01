@@ -79,4 +79,4 @@ var COLOR = {
 };
 
 exports.default = COLOR;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Color.js.map
+//# sourceMappingURL=Color.js.map

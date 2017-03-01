@@ -24,4 +24,4 @@ var AnalyticActionTypes = exports.AnalyticActionTypes = {
 var AnalyticActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, AnalyticActionTypes.ANSWER_YES, {}), _defineProperty(_Reflux$createActions, AnalyticActionTypes.ANSWER_NO, {}), _defineProperty(_Reflux$createActions, AnalyticActionTypes.NO_ANSWER, {}), _Reflux$createActions));
 
 exports.default = AnalyticActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\AnalyticActions.js.map
+//# sourceMappingURL=AnalyticActions.js.map

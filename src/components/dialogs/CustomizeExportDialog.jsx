@@ -6,11 +6,11 @@ import ChartExportConfig from '../../charts/ChartExportConfig';
 import ModalDialog from '../zhn/ModalDialog';
 import DialogStyles from '../styles/DialogStyles'
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import ToolBarButton from '../ToolBarButton';
+import ActionButton from '../zhn/ActionButton';
 
 import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
-import ZhSelect from '../ZhSelect';
+import InputSelect from '../zhn/InputSelect';
 
 const styles = DialogStyles;
 
@@ -115,7 +115,7 @@ class CustomizeExportDialog extends Component {
         , subtitle = options.subtitle.text
         , { isShowDimension, isShowTitle, isShowStyle } = this.state
         , commandButtons =[
-             <ToolBarButton
+             <ActionButton
                 key="a"
                 type="TypeC"
                 caption="Export"
@@ -171,7 +171,7 @@ class CustomizeExportDialog extends Component {
          <ShowHide isShow={isShowStyle}>
          <div style={Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP)} key="4">
            <span style={STYLE.LABEL_WIDTH}>Style:</span>
-           <ZhSelect
+           <InputSelect
              width="250"
              options={this.optionStyles}
              placeholder="Default"

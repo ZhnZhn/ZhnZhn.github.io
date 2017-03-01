@@ -2,14 +2,14 @@ import React from 'react';
 
 import createLoadOptions from '../../flux/creaters/futures3'
 
-import ZhDialog from '../ZhDialog';
+import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectParentChild from '../dialogs/SelectParentChild';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import RowDate from '../dialogs/RowDate';
-import ToolBarButton from '../ToolBarButton';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ActionButton from '../zhn/ActionButton';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 const yearOptions = [
   { caption: '2017', value: 2017 },
@@ -131,7 +131,7 @@ const Futures3Dialog = React.createClass({
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-             <ToolBarButton
+             <ActionButton
                 key="a"
                 type="TypeC"
                 caption="Load"
@@ -140,7 +140,7 @@ const Futures3Dialog = React.createClass({
          ];
 
     return (
-      <ZhDialog
+      <DraggableDialog
          caption={caption}
          isShow={isShow}
          commandButtons={_commandButtons}
@@ -167,11 +167,11 @@ const Futures3Dialog = React.createClass({
               onSelect={this._handlerSelectYear}
            />
            {isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty)}
-           <ValidationMessagesFragment
+           <ValidationMessages
               validationMessages={validationMessages}
            />
 
-      </ZhDialog>
+      </DraggableDialog>
     );
   }
 });

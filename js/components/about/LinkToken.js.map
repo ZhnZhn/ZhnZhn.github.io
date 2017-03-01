@@ -1,9 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\LinkToken.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\LinkToken.js",
- "sourceRoot": "",
- "names": [],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAM,YAAY,SAAZ,SAAY,CAAC,KAAD,EAAW;MACnB,eAAwC,MAAxC,aADmB;MACL,QAA0B,MAA1B,MADK;MACE,OAAmB,MAAnB,KADF;AACrB,MAA6B,WAAa,MAAb,QAA7B,CADqB;AAErB,oBAAc,eAAiB,GAAjB,GAAuB,SAAvB,CAFO;AAG3B,SACE;;;AACE,iBAAU,oBAAV;AACA,aAAO,EAAC,OAAO,KAAP,EAAR;AACA,cAAO,QAAP;AACA,YAAM,IAAN;KAJF;IAMG,WANH;IAOG,QAPH;GADF,CAH2B;CAAX;;kBAgBH"
-}
+{"version":3,"sources":["../../../src/components/about/LinkToken.jsx"],"names":["LinkToken","props","isFirstBlank","color","href","children","_firstChart","undefined"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,YAAY,SAAZA,SAAY,CAACC,KAAD,EAAW;AAAA,MACnBC,YADmB,GACqBD,KADrB,CACnBC,YADmB;AAAA,MACLC,KADK,GACqBF,KADrB,CACLE,KADK;AAAA,MACEC,IADF,GACqBH,KADrB,CACEG,IADF;AAAA,MACQC,QADR,GACqBJ,KADrB,CACQI,QADR;AAAA,MAErBC,WAFqB,GAENJ,YAAD,GAAiB,GAAjB,GAAuBK,SAFhB;;AAG3B,SACE;AAAA;AAAA;AACE,iBAAU,oBADZ;AAEE,aAAO,EAACJ,OAAOA,KAAR,EAFT;AAGE,cAAO,QAHT;AAIE,YAAMC;AAJR;AAMGE,eANH;AAOGD;AAPH,GADF;AAWD,CAdD;;kBAgBeL,S","file":"LinkToken.js","sourcesContent":["import React from 'react';\r\n\r\nconst LinkToken = (props) => {\r\n  const { isFirstBlank, color, href, children } = props\r\n      , _firstChart = (isFirstBlank) ? ' ' : undefined;\r\n  return (\r\n    <a\r\n      className=\"descr__quandl-link\"\r\n      style={{color: color}}\r\n      target=\"_blank\"\r\n      href={href}\r\n    >\r\n      {_firstChart}\r\n      {children}\r\n    </a>\r\n  );\r\n};\r\n\r\nexport default LinkToken\r\n"]}

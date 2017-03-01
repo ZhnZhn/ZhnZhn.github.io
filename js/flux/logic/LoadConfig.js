@@ -25,4 +25,4 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var LoadConfig = (_LoadConfig = {}, _defineProperty(_LoadConfig, _Type.LoadType.Q, _loadQuandl.loadQuandl), _defineProperty(_LoadConfig, _Type.LoadType.QCT, _loadQuandlCommodityTrade.loadQuandlCommodityTrade), _defineProperty(_LoadConfig, _Type.LoadType.EU_STAT, _loadEuroStat.loadEuroStat), _defineProperty(_LoadConfig, _ChartType2.default.WATCH_LIST, _loadQuandl.loadQuandl), _defineProperty(_LoadConfig, _Type.LoadType.WL, _loadQuandl.loadQuandl), _LoadConfig);
 
 exports.default = LoadConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadConfig.js.map
+//# sourceMappingURL=LoadConfig.js.map

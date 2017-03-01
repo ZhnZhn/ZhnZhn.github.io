@@ -40,11 +40,12 @@ var STYLE = {
 };
 
 var ItemLse = function ItemLse(props) {
-  var item = props.item;
-  var cap = item.cap;
-  var c = item.c;
-  var date = item.date;
-  var _cap = cap === 0 ? NA : _accounting2.default.formatMoney(cap, "£") + ML;
+  var item = props.item,
+      cap = item.cap,
+      c = item.c,
+      date = item.date,
+      _cap = cap === 0 ? NA : _accounting2.default.formatMoney(cap, "£") + ML;
+
   return _react2.default.createElement(
     _Item2.default,
     props,
@@ -71,4 +72,4 @@ var ItemLse = function ItemLse(props) {
 };
 
 exports.default = ItemLse;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-items\ItemLse.js.map
+//# sourceMappingURL=ItemLse.js.map

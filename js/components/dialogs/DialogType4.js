@@ -16,29 +16,29 @@ var _type = require('../../flux/creaters/type4');
 
 var _type2 = _interopRequireDefault(_type);
 
-var _ZhDialog = require('../ZhDialog');
+var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
-var _ZhDialog2 = _interopRequireDefault(_ZhDialog);
+var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
 
 var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
-var _DatesFragment = require('../DatesFragment');
+var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -163,7 +163,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           _state = this.state,
           isShowDate = _state.isShowDate,
           validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ToolBarButton2.default, {
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
         caption: 'Load',
@@ -172,7 +172,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
 
 
       return _react2.default.createElement(
-        _ZhDialog2.default,
+        _DraggableDialog2.default,
         {
           caption: caption,
           isShow: isShow,
@@ -212,7 +212,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
             onTestDate: onTestDate
           })
         ),
-        _react2.default.createElement(_ValidationMessagesFragment2.default, {
+        _react2.default.createElement(_ValidationMessages2.default, {
           validationMessages: validationMessages
         })
       );
@@ -225,4 +225,4 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
 DialogType4.displayName = 'DialogType4';
 
 exports.default = DialogType4;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map
+//# sourceMappingURL=DialogType4.js.map

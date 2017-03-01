@@ -24,23 +24,21 @@ var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var fCreateStackedAreaConfig = exports.fCreateStackedAreaConfig = function fCreateStackedAreaConfig(json, option) {
-  var chartType = option.seriaType;
-  var stacking = chartType === _Type.ChartType.STACKED_AREA_PERCENT ? 'percent' : 'normal';
-  var PERCENT = stacking === 'percent' ? ':PERCENT' : '';
-  var config = _ChartConfig2.default.fBaseStackAreaConfig({ stacking: stacking });
-  var _option$sliceItems = option.sliceItems;
-  var items100 = _option$sliceItems === undefined ? [] : _option$sliceItems;
-  var _option$value = option.value;
-  var value = _option$value === undefined ? '' : _option$value;
-  var zhSeriaId = value + '_' + chartType;
-  var jsonData = json.dataset && json.dataset.data ? json.dataset.data : [];
-
-  var _fnCreateStackedConfi = (0, _StackedFn.fnCreateStackedConfig)({ jsonData: jsonData, items100: items100, zhSeriaId: zhSeriaId, chartType: chartType, stacking: stacking });
-
-  var bNowTotal = _fnCreateStackedConfi.bNowTotal;
-  var bPrevTotal = _fnCreateStackedConfi.bPrevTotal;
-  var series = _fnCreateStackedConfi.series;
-  var categories = _fnCreateStackedConfi.categories;
+  var chartType = option.seriaType,
+      stacking = chartType === _Type.ChartType.STACKED_AREA_PERCENT ? 'percent' : 'normal',
+      PERCENT = stacking === 'percent' ? ':PERCENT' : '',
+      config = _ChartConfig2.default.fBaseStackAreaConfig({ stacking: stacking }),
+      _option$sliceItems = option.sliceItems,
+      items100 = _option$sliceItems === undefined ? [] : _option$sliceItems,
+      _option$value = option.value,
+      value = _option$value === undefined ? '' : _option$value,
+      zhSeriaId = value + '_' + chartType,
+      jsonData = json.dataset && json.dataset.data ? json.dataset.data : [],
+      _fnCreateStackedConfi = (0, _StackedFn.fnCreateStackedConfig)({ jsonData: jsonData, items100: items100, zhSeriaId: zhSeriaId, chartType: chartType, stacking: stacking }),
+      bNowTotal = _fnCreateStackedConfi.bNowTotal,
+      bPrevTotal = _fnCreateStackedConfi.bPrevTotal,
+      series = _fnCreateStackedConfi.series,
+      categories = _fnCreateStackedConfi.categories;
 
 
   config.series = series;
@@ -64,4 +62,4 @@ var fCreateStackedAreaConfig = exports.fCreateStackedAreaConfig = function fCrea
 
   return { config: config };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToStackedArea.js.map
+//# sourceMappingURL=QuandlToStackedArea.js.map

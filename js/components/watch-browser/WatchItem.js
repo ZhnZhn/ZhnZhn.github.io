@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SvgClose = require('../SvgClose');
+var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
@@ -39,22 +39,23 @@ var STYLE = {
 };
 
 var WatchItem = function WatchItem(props) {
-  var item = props.item;
-  var className = props.className;
-  var isModeEdit = props.isModeEdit;
-  var option = props.option;
-  var onClick = props.onClick;
-  var onClose = props.onClose;
-  var onDragStart = props.onDragStart;
-  var onDragEnter = props.onDragEnter;
-  var onDragOver = props.onDragOver;
-  var onDragLeave = props.onDragLeave;
-  var onDrop = props.onDrop;
-  var caption = item.caption;
-  var _btClose = isModeEdit ? _react2.default.createElement(_SvgClose2.default, {
+  var item = props.item,
+      className = props.className,
+      isModeEdit = props.isModeEdit,
+      option = props.option,
+      onClick = props.onClick,
+      onClose = props.onClose,
+      onDragStart = props.onDragStart,
+      onDragEnter = props.onDragEnter,
+      onDragOver = props.onDragOver,
+      onDragLeave = props.onDragLeave,
+      onDrop = props.onDrop,
+      caption = item.caption,
+      _btClose = isModeEdit ? _react2.default.createElement(_SvgClose2.default, {
     style: STYLE.SVG_CLOSE,
     onClose: onClose.bind(null, option)
   }) : undefined;
+
   return _react2.default.createElement(
     'div',
     {
@@ -79,4 +80,4 @@ var WatchItem = function WatchItem(props) {
 };
 
 exports.default = WatchItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\WatchItem.js.map
+//# sourceMappingURL=WatchItem.js.map

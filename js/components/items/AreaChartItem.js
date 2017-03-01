@@ -20,9 +20,9 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
-var _ZhHighchart = require('../ZhHighchart');
+var _HighchartWrapper = require('../zhn/HighchartWrapper');
 
-var _ZhHighchart2 = _interopRequireDefault(_ZhHighchart);
+var _HighchartWrapper2 = _interopRequireDefault(_HighchartWrapper);
 
 var _Legend = require('../zhn/Legend');
 
@@ -293,7 +293,7 @@ var AreaChartItem = _react2.default.createClass({
       return _react2.default.createElement(
         _ShowHide2.default,
         { isShow: _isShow, key: index },
-        _react2.default.createElement(_ZhHighchart2.default, {
+        _react2.default.createElement(_HighchartWrapper2.default, {
           ref: _ref,
           isShow: true,
           config: _config,
@@ -318,7 +318,7 @@ var AreaChartItem = _react2.default.createClass({
       return _react2.default.createElement(
         _ShowHide2.default,
         { isShow: true, key: id },
-        _react2.default.createElement(_ZhHighchart2.default, {
+        _react2.default.createElement(_HighchartWrapper2.default, {
           isShow: true,
           config: config,
           onLoaded: _this2._handlerLoadedMetricChart,
@@ -368,7 +368,7 @@ var AreaChartItem = _react2.default.createClass({
         _ShowHide2.default,
         { isShow: isOpen },
         isShowChart && this._createChartToolBar(config),
-        _react2.default.createElement(_ZhHighchart2.default, {
+        _react2.default.createElement(_HighchartWrapper2.default, {
           ref: 'chart',
           isShow: isShowChart,
           config: config
@@ -410,4 +410,4 @@ var AreaChartItem = _react2.default.createClass({
 });
 
 exports.default = AreaChartItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\AreaChartItem.js.map
+//# sourceMappingURL=AreaChartItem.js.map

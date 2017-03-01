@@ -73,4 +73,4 @@ var EuroStatApi = {
 };
 
 exports.default = EuroStatApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\api\EuroStatApi.js.map
+//# sourceMappingURL=EuroStatApi.js.map

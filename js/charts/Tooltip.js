@@ -32,98 +32,92 @@ var _fnNumberFormat = function _fnNumberFormat(value) {
 };
 
 var _fnTooltipHeader = function _fnTooltipHeader(date, id) {
-  var cssClass = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+  var cssClass = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   return '<div id="' + id + '" class="tp__header not-selected ' + cssClass + '">\n  <span class="tp__header__caption">' + date + '</span>\n  <span class="tp__header__close">X</span>\n  </div>';
 };
 
 var _fnTooltipSparkType4 = function _fnTooltipSparkType4(_ref) {
-  var fullWidth = _ref.fullWidth;
-  var width = _ref.width;
-  var year = _ref.year;
-  var value = _ref.value;
-  var total = _ref.total;
-  var percent = _ref.percent;
-  var id = _ref.id;
+  var fullWidth = _ref.fullWidth,
+      width = _ref.width,
+      year = _ref.year,
+      value = _ref.value,
+      total = _ref.total,
+      percent = _ref.percent,
+      id = _ref.id;
 
   return '<div class="tp__body">\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div style="float:left;padding-right:10px;width:' + width + 'px;">\n      <span class="tp__body__title">Year: </span>\n      <span class="tp__body__year">' + year + '</span></br>\n      <span class="tp__body__title">Value: </span>\n      <span class="tp__body__value">' + value + '</span></br>\n    </div>\n    <div id="' + id + '_' + SPARKLINES_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div style="float:left;padding-right:10px;width:' + width + 'px;">\n      <span class="tp__body__title">Total: </span>\n      <span class="tp__body__value">' + total + '</span></br>\n      <span class="tp__body__title">Percent: </span>\n      <span class="tp__body__value">' + percent + '</span></br>\n    </div>\n    <div id="' + id + '_' + SPARKLINES_BAR_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>';
 };
 
 var _fnBaseTooltip = function _fnBaseTooltip(_ref2) {
-  var date = _ref2.date;
-  var id = _ref2.id;
-  var valueText = _ref2.valueText;
-  var value = _ref2.value;
+  var date = _ref2.date,
+      id = _ref2.id,
+      valueText = _ref2.valueText,
+      value = _ref2.value;
 
   return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">' + valueText + ':&nbsp;</span>\n  <span class="tp__body__value">' + value + '</span>\n  </div>');
 };
 
 var _fnExDividend = function _fnExDividend(_ref3) {
-  var date = _ref3.date;
-  var id = _ref3.id;
-  var valueText = _ref3.valueText;
-  var value = _ref3.value;
-  var point = _ref3.point;
+  var date = _ref3.date,
+      id = _ref3.id,
+      valueText = _ref3.valueText,
+      value = _ref3.value,
+      point = _ref3.point;
 
   return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Ex-Dividend: </span>\n  <span style="color: green;">' + point.exValue + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
 };
 
 var _fnSplitRatio = function _fnSplitRatio(_ref4) {
-  var date = _ref4.date;
-  var id = _ref4.id;
-  var valueText = _ref4.valueText;
-  var value = _ref4.value;
-  var point = _ref4.point;
+  var date = _ref4.date,
+      id = _ref4.id,
+      valueText = _ref4.valueText,
+      value = _ref4.value,
+      point = _ref4.point;
 
   return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Split Ratio: </span>\n  <span style="color: #ED5813;">' + point.splitRatio + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
 };
 
 var _fnVolumeTooltip = function _fnVolumeTooltip(_ref5) {
-  var date = _ref5.date;
-  var id = _ref5.id;
-  var value = _ref5.value;
-  var point = _ref5.point;
-  var _point$_open = point._open;
+  var date = _ref5.date,
+      id = _ref5.id,
+      value = _ref5.value,
+      point = _ref5.point;
 
-  var _open = _point$_open === undefined ? '' : _point$_open;
-
-  var _point$_close = point._close;
-
-  var _close = _point$_close === undefined ? '' : _point$_close;
-
-  var _point$_low = point._low;
-
-  var _low = _point$_low === undefined ? '' : _point$_low;
-
-  var _point$_high = point._high;
-
-  var _high = _point$_high === undefined ? '' : _point$_high;
+  var _point$_open = point._open,
+      _open = _point$_open === undefined ? '' : _point$_open,
+      _point$_close = point._close,
+      _close = _point$_close === undefined ? '' : _point$_close,
+      _point$_low = point._low,
+      _low = _point$_low === undefined ? '' : _point$_low,
+      _point$_high = point._high,
+      _high = _point$_high === undefined ? '' : _point$_high;
 
   return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Volume: </span>\n  <span class="tp__body__value">' + value + '</span><br/>\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + _open + '</span>\n  <span class="tp__body__title"> Close: </span>\n  <span class="tp__body__value">' + _close + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + _low + '</span>\n  <span class="tp__body__title"> High: </span>\n  <span class="tp__body__value">' + _high + '</span>\n  </div>');
 };
 
 var _fnATHTooltip = function _fnATHTooltip(_ref6) {
-  var date = _ref6.date;
-  var id = _ref6.id;
-  var value = _ref6.value;
-  var point = _ref6.point;
+  var date = _ref6.date,
+      id = _ref6.id,
+      value = _ref6.value,
+      point = _ref6.point;
 
   return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n   <span class="tp__body__title">ATH: </span>\n   <span class="tp__body__value" style="color:' + point.color + ';">' + point.y + '%</span><br/>\n   <span class="tp__body__title">Prev Close: </span>\n   <span class="tp__body__value">' + point.close + '</span><br/>\n   <span class="tp__body__title">Next Open: </span>\n   <span class="tp__body__value">' + point.open + '</span><br/>\n   </div>');
 };
 
 var _fnHighLowTooltip = function _fnHighLowTooltip(_ref7) {
-  var date = _ref7.date;
-  var id = _ref7.id;
-  var value = _ref7.value;
-  var point = _ref7.point;
+  var date = _ref7.date,
+      id = _ref7.id,
+      value = _ref7.value,
+      point = _ref7.point;
 
   return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + point.open + '</span><br/>\n  <span class="tp__body__title">High: </span>\n  <span class="tp__body__value">' + point.dayHigh + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + point.dayLow + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.close + '</span>\n  </div>');
 };
 
 var _fnPieTooltip = function _fnPieTooltip(_ref8) {
-  var id = _ref8.id;
-  var value = _ref8.value;
-  var point = _ref8.point;
+  var id = _ref8.id,
+      value = _ref8.value,
+      point = _ref8.point;
 
   return _fnTooltipHeader(point.nameFull, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  </div>');
 };
@@ -137,22 +131,20 @@ var _fnCalcWidthSparkType4 = function _fnCalcWidthSparkType4(value, total) {
 };
 
 var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref9) {
-  var id = _ref9.id;
-  var value = _ref9.value;
-  var point = _ref9.point;
-  var nameFull = point.nameFull;
-  var category = point.category;
-  var _point$percent = point.percent;
-  var percent = _point$percent === undefined ? '0.0' : _point$percent;
-  var _point$total = point.total;
-  var total = _point$total === undefined ? 0 : _point$total;
-  var _total = _fnNumberFormat(total);
+  var id = _ref9.id,
+      value = _ref9.value,
+      point = _ref9.point;
 
-  var _fnCalcWidthSparkType = _fnCalcWidthSparkType4(value, _total);
-
-  var fullWidth = _fnCalcWidthSparkType.fullWidth;
-  var width = _fnCalcWidthSparkType.width;
-
+  var nameFull = point.nameFull,
+      category = point.category,
+      _point$percent = point.percent,
+      percent = _point$percent === undefined ? '0.0' : _point$percent,
+      _point$total = point.total,
+      total = _point$total === undefined ? 0 : _point$total,
+      _total = _fnNumberFormat(total),
+      _fnCalcWidthSparkType = _fnCalcWidthSparkType4(value, _total),
+      fullWidth = _fnCalcWidthSparkType.fullWidth,
+      width = _fnCalcWidthSparkType.width;
 
   return _fnTooltipHeader(nameFull, id) + _fnTooltipSparkType4({
     fullWidth: fullWidth, width: width, year: category, value: value, total: _total, percent: percent, id: id
@@ -160,24 +152,22 @@ var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref9) {
 };
 
 var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref10) {
-  var id = _ref10.id;
-  var point = _ref10.point;
-  var nameFull = point.nameFull;
-  var year = point.year;
-  var _point$value = point.value;
-  var value = _point$value === undefined ? '0.0' : _point$value;
-  var _point$percent2 = point.percent;
-  var percent = _point$percent2 === undefined ? '0.0' : _point$percent2;
-  var _point$total2 = point.total;
-  var total = _point$total2 === undefined ? 0 : _point$total2;
-  var _value = _fnNumberFormat(value);
-  var _total = _fnNumberFormat(total);
+  var id = _ref10.id,
+      point = _ref10.point;
 
-  var _fnCalcWidthSparkType2 = _fnCalcWidthSparkType4(_value, _total);
-
-  var fullWidth = _fnCalcWidthSparkType2.fullWidth;
-  var width = _fnCalcWidthSparkType2.width;
-
+  var nameFull = point.nameFull,
+      year = point.year,
+      _point$value = point.value,
+      value = _point$value === undefined ? '0.0' : _point$value,
+      _point$percent2 = point.percent,
+      percent = _point$percent2 === undefined ? '0.0' : _point$percent2,
+      _point$total2 = point.total,
+      total = _point$total2 === undefined ? 0 : _point$total2,
+      _value = _fnNumberFormat(value),
+      _total = _fnNumberFormat(total),
+      _fnCalcWidthSparkType2 = _fnCalcWidthSparkType4(_value, _total),
+      fullWidth = _fnCalcWidthSparkType2.fullWidth,
+      width = _fnCalcWidthSparkType2.width;
 
   return _fnTooltipHeader(nameFull, id) + _fnTooltipSparkType4({
     fullWidth: fullWidth, width: width, year: year, value: _value, total: _total, percent: percent, id: id
@@ -226,18 +216,18 @@ var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(i
 
 var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
   return function () {
-    var fnTemplate = option.fnTemplate;
-    var _option$onAfterRender = option.onAfterRender;
-    var onAfterRender = _option$onAfterRender === undefined ? _fnAddHandlerClose : _option$onAfterRender;
-    var _option$isWithValueTe = option.isWithValueText;
-    var isWithValueText = _option$isWithValueTe === undefined ? false : _option$isWithValueTe;
-    var _option$isWithValue = option.isWithValue;
-    var isWithValue = _option$isWithValue === undefined ? false : _option$isWithValue;
-    var point = this;
-    var id = point.series.options.zhSeriaId;
-    var date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x);
-    var valueText = isWithValueText ? point.series.userOptions.zhValueText : null;
-    var value = isWithValue ? _fnNumberFormat(point.y) : null;
+    var fnTemplate = option.fnTemplate,
+        _option$onAfterRender = option.onAfterRender,
+        onAfterRender = _option$onAfterRender === undefined ? _fnAddHandlerClose : _option$onAfterRender,
+        _option$isWithValueTe = option.isWithValueText,
+        isWithValueText = _option$isWithValueTe === undefined ? false : _option$isWithValueTe,
+        _option$isWithValue = option.isWithValue,
+        isWithValue = _option$isWithValue === undefined ? false : _option$isWithValue,
+        point = this,
+        id = point.series.options.zhSeriaId,
+        date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x),
+        valueText = isWithValueText ? point.series.userOptions.zhValueText : null,
+        value = isWithValue ? _fnNumberFormat(point.y) : null;
 
     onAfterRender(id, point);
 
@@ -280,4 +270,4 @@ Tooltip.fnTreeMapPointFormatter = _fnBasePointFormatter({
 });
 
 exports.default = Tooltip;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\Tooltip.js.map
+//# sourceMappingURL=Tooltip.js.map

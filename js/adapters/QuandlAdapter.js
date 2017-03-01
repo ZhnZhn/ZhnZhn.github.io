@@ -563,4 +563,4 @@ var QuandlAdapter = {
 };
 
 exports.default = QuandlAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlAdapter.js.map
+//# sourceMappingURL=QuandlAdapter.js.map

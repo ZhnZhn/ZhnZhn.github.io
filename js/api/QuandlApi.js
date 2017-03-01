@@ -69,4 +69,4 @@ QuandlApi.checkResponse = function (json) {
 };
 
 exports.default = QuandlApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\api\QuandlApi.js.map
+//# sourceMappingURL=QuandlApi.js.map

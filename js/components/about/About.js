@@ -380,4 +380,4 @@ var About = function (_Component) {
 }(_react.Component);
 
 exports.default = About;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\About.js.map
+//# sourceMappingURL=About.js.map

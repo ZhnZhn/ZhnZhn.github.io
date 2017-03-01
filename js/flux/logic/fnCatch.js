@@ -12,9 +12,9 @@ var _Msg2 = _interopRequireDefault(_Msg);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var fnCatch = exports.fnCatch = function fnCatch(_ref) {
-   var error = _ref.error;
-   var option = _ref.option;
-   var onFailed = _ref.onFailed;
+   var error = _ref.error,
+       option = _ref.option,
+       onFailed = _ref.onFailed;
 
    if (error instanceof TypeError) {
       if (error.message.indexOf('code 503') !== -1) {
@@ -34,4 +34,4 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
 
    onFailed(option);
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\fnCatch.js.map
+//# sourceMappingURL=fnCatch.js.map

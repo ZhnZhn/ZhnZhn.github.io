@@ -8,9 +8,9 @@ import Msg from '../../constants/Msg';
 
 
 import ModalDialog from '../zhn/ModalDialog';
-import ToolBarButton from '../ToolBarButton';
-import ZhSelect from '../ZhSelect';
-import ValidationMessagesFragment from '../ValidationMessagesFragment';
+import ActionButton from '../zhn/ActionButton';
+import InputSelect from '../zhn/InputSelect';
+import ValidationMessages from '../zhn/ValidationMessages';
 
 import DialogStyles from '../styles/DialogStyles'
 
@@ -84,7 +84,7 @@ const AddToWatchDialog = React.createClass({
 
   _handlerSelectGroup(group){
     if (group && group.caption){
-       const {store} = this.props;
+       //const {store} = this.props;
        this.groupCaption = group.caption;
        if (group.lists){
          this.setState({listOptions : group.lists})
@@ -105,9 +105,9 @@ const AddToWatchDialog = React.createClass({
   _handlerAdd(){
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
-      const {data, onClose} = this.props
-          , {caption, config} = data
-          , {groupCaption, listCaption} = this;
+      const { data } = this.props
+          , { caption, config } = data
+          , { groupCaption, listCaption } = this;
 
       WatchActions.addItem({caption, groupCaption, listCaption, config});
     } else {
@@ -130,11 +130,11 @@ const AddToWatchDialog = React.createClass({
   },
 
   render(){
-    const {isShow, data, onClose} = this.props
-        , {caption} = data
-        , {groupOptions, listOptions, validationMessages} = this.state
+    const { isShow, data } = this.props
+        , { caption } = data
+        , { groupOptions, listOptions, validationMessages } = this.state
         , commandButtons =[
-       <ToolBarButton
+       <ActionButton
           key="a"
           type="TypeC"
           caption="Add"
@@ -152,7 +152,7 @@ const AddToWatchDialog = React.createClass({
           <span style={styles.labelSpan}>
             Group:
           </span>
-          <ZhSelect
+          <InputSelect
              width="250"
              options={groupOptions}
              onSelect={this._handlerSelectGroup}
@@ -162,7 +162,7 @@ const AddToWatchDialog = React.createClass({
           <span style={styles.labelSpan}>
             List:
           </span>
-          <ZhSelect
+          <InputSelect
              width="250"
              onSelect={this._handlerSelectList}
              options={listOptions}
@@ -176,8 +176,7 @@ const AddToWatchDialog = React.createClass({
              {caption}
           </span>
         </div>
-        <ValidationMessagesFragment
-           key="4"
+        <ValidationMessages
            validationMessages={validationMessages}
          />
       </ModalDialog>

@@ -16,13 +16,13 @@ var _RowInputText = require('./RowInputText');
 
 var _RowInputText2 = _interopRequireDefault(_RowInputText);
 
-var _ValidationMessagesFragment = require('../ValidationMessagesFragment');
+var _ValidationMessages = require('../zhn/ValidationMessages');
 
-var _ValidationMessagesFragment2 = _interopRequireDefault(_ValidationMessagesFragment);
+var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _ToolBarButton = require('../ToolBarButton');
+var _ActionButton = require('../zhn/ActionButton');
 
-var _ToolBarButton2 = _interopRequireDefault(_ToolBarButton);
+var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66,11 +66,11 @@ var ListCreatePane = _react2.default.createClass({
     this.unsubscribe();
   },
   _onStore: function _onStore(actionType, data) {
-    var _props = this.props;
-    var actionCompleted = _props.actionCompleted;
-    var actionFailed = _props.actionFailed;
-    var forActionType = _props.forActionType;
-    var store = _props.store;
+    var _props = this.props,
+        actionCompleted = _props.actionCompleted,
+        actionFailed = _props.actionFailed,
+        forActionType = _props.forActionType,
+        store = _props.store;
 
     if (actionType === actionCompleted) {
       var isUpdateGroup = true;
@@ -104,10 +104,11 @@ var ListCreatePane = _react2.default.createClass({
         captionList: captionList
       });
     } else {
-      var _props2 = this.props;
-      var msgOnNotSelect = _props2.msgOnNotSelect;
-      var msgOnIsEmptyName = _props2.msgOnIsEmptyName;
-      var msg = [];
+      var _props2 = this.props,
+          msgOnNotSelect = _props2.msgOnNotSelect,
+          msgOnIsEmptyName = _props2.msgOnIsEmptyName,
+          msg = [];
+
       if (!this.captionGroup) {
         msg.push(msgOnNotSelect('In Group'));
       }
@@ -120,11 +121,10 @@ var ListCreatePane = _react2.default.createClass({
   render: function render() {
     var _this = this;
 
-    var onClose = this.props.onClose;
-    var _state = this.state;
-    var groupOptions = _state.groupOptions;
-    var isUpdateGroup = _state.isUpdateGroup;
-    var validationMessages = _state.validationMessages;
+    var onClose = this.props.onClose,
+        _state = this.state,
+        groupOptions = _state.groupOptions,
+        validationMessages = _state.validationMessages;
 
     return _react2.default.createElement(
       'div',
@@ -141,23 +141,23 @@ var ListCreatePane = _react2.default.createClass({
         },
         caption: 'List:'
       }),
-      _react2.default.createElement(_ValidationMessagesFragment2.default, {
+      _react2.default.createElement(_ValidationMessages2.default, {
         validationMessages: validationMessages
       }),
       _react2.default.createElement(
         'div',
         { style: Styles.COMMAND_DIV },
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Create',
           onClick: this._handlerCreate
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Clear',
           onClick: this._handlerClear
         }),
-        _react2.default.createElement(_ToolBarButton2.default, {
+        _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Close',
           onClick: onClose
@@ -168,4 +168,4 @@ var ListCreatePane = _react2.default.createClass({
 });
 
 exports.default = ListCreatePane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ListCreatePane.js.map
+//# sourceMappingURL=ListCreatePane.js.map

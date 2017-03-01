@@ -126,4 +126,4 @@ DescriptionDialog.defaultProps = { data: {} };
 DescriptionDialog.displayName = 'DescriptionDialog';
 
 exports.default = DescriptionDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DescriptionDialog.js.map
+//# sourceMappingURL=DescriptionDialog.js.map

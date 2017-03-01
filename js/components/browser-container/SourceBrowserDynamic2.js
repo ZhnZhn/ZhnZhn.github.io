@@ -41,4 +41,4 @@ var SourceBrowserDynamic2 = _react2.default.createClass({
 });
 
 exports.default = SourceBrowserDynamic2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-container\SourceBrowserDynamic2.js.map
+//# sourceMappingURL=SourceBrowserDynamic2.js.map
