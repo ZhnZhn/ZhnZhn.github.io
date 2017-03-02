@@ -102,6 +102,15 @@ ChartActions[ChartActionTypes.LOAD_STOCK].shouldEmit = function () {
   return this.isShouldEmit;
 };
 ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserType, option) {
+  /*
+  console.log('LOAD_STOCK:');
+  console.log('chartType:');
+  console.log(chartType);
+  console.log('browserType:');
+  console.log(browserType);
+  console.log('option:');
+  console.log(option);
+  */
 
   this.isLoading = true;
   this.idLoading = option.key;
@@ -118,4 +127,4 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserTyp
 });
 
 exports.default = ChartActions;
-//# sourceMappingURL=ChartActions.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ChartActions.js.map

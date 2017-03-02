@@ -9,8 +9,8 @@ var BORDER = 'border' // dragStart
     BORDER_BOTTOM = 'border-bottom' // backup
 ,
     BORDER_LEFT = 'border-left' // dragEnter
+//, START_BORDER_STYLE = "1px solid yellow"
 ,
-    START_BORDER_STYLE = "1px solid yellow",
     ENTER_BORDER_LEFT_STYLE = "4px solid green",
     ENTER_BORDER_LEFT_STYLE_DENY = "4px solid red";
 
@@ -26,7 +26,7 @@ var WithDnDStyle = {
 
       var style = nodeDragTarget.style;
       borderBottom = style.getPropertyValue(BORDER_BOTTOM);
-      style.setProperty(BORDER, START_BORDER_STYLE);
+      //style.setProperty(BORDER, START_BORDER_STYLE);
 
       sourcePermissions = permissions;
    },
@@ -53,4 +53,4 @@ var WithDnDStyle = {
 };
 
 exports.default = WithDnDStyle;
-//# sourceMappingURL=WithDnDStyle.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\with\WithDnDStyle.js.map

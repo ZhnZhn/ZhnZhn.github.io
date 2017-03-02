@@ -85,7 +85,10 @@ class ChartContainer extends Component {
 
   componentWillMount(){
     this.unsubscribe = ChartStore.listen(this._onStore);
-    this.setState(ChartStore.getConfigs(this.props.chartType));
+    const _initState = ChartStore.getConfigs(this.props.chartType)
+    if (_initState) {
+       this.setState(_initState);
+    }
   }
   componentWillUnmount(){
     this.unsubscribe();
@@ -119,8 +122,9 @@ class ChartContainer extends Component {
    }
 
    _renderCharts = () => {
-     const { chartType, browserType, onCloseItem } = this.props;
-     return this.state.configs.map((config, index) => {
+     const { chartType, browserType, onCloseItem } = this.props
+         , { configs=[] } = this.state;
+     return configs.map((config, index) => {
        const { zhConfig={} } = config
            , { id } = zhConfig;
        return ItemFactory.createItem(

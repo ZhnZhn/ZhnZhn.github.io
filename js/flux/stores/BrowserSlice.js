@@ -47,8 +47,10 @@ var fnSetIsOpen = function fnSetIsOpen(chartType, browserMenu, browserType, valu
 
 var fnAddCounter = function fnAddCounter(chartType, browserType, browserMenu, value) {
   var obj = fnFindObj(browserMenu[browserType], chartType);
-  obj.counter += value;
-  obj.isOpen = true;
+  if (obj) {
+    obj.counter += value;
+    obj.isOpen = true;
+  }
 };
 
 var BrowserSlice = {
@@ -62,7 +64,13 @@ var BrowserSlice = {
     return this.browserMenu[browserType];
   },
   isWithItemCounter: function isWithItemCounter(browserType) {
-    return !_BrowserConfig2.default[browserType].withoutItemCounter;
+    var _config = _BrowserConfig2.default[browserType];
+    if (typeof _config === 'undefined') {
+      return false;
+    } else {
+      return !_config.withoutItemCounter;
+    }
+    //return !BrowserConfig[browserType].withoutItemCounter;
   },
   setMenuItemOpen: function setMenuItemOpen(chartType, browserType) {
     if (this.isWithItemCounter(browserType)) {
@@ -132,4 +140,4 @@ var BrowserSlice = {
 };
 
 exports.default = BrowserSlice;
-//# sourceMappingURL=BrowserSlice.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\BrowserSlice.js.map

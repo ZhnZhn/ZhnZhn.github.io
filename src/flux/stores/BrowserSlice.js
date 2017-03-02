@@ -26,8 +26,10 @@ const fnSetIsOpen = function(chartType, browserMenu, browserType, value){
 
 const fnAddCounter = function(chartType, browserType, browserMenu, value){
   const obj = fnFindObj(browserMenu[browserType], chartType);
-  obj.counter += value;
-  obj.isOpen = true;
+  if (obj){
+    obj.counter += value;
+    obj.isOpen = true;
+  }
 };
 
 const BrowserSlice = {
@@ -41,7 +43,13 @@ const BrowserSlice = {
      return this.browserMenu[browserType];
   },
   isWithItemCounter(browserType){
-    return !BrowserConfig[browserType].withoutItemCounter;
+    const _config = BrowserConfig[browserType]
+    if (typeof _config === 'undefined'){
+      return false;
+    } else {
+      return !_config.withoutItemCounter;
+    }
+    //return !BrowserConfig[browserType].withoutItemCounter;
   },
   setMenuItemOpen(chartType, browserType){
     if (this.isWithItemCounter(browserType)){
@@ -77,7 +85,7 @@ const BrowserSlice = {
   },
 
   onShowBrowserDynamic(option){
-    const { browserType } = option;    
+    const { browserType } = option;
     if (!this.browserMenu[browserType]) {
        const elBrowser = Factory.createBrowserDynamic(option);
        this.browserMenu[browserType] = [];

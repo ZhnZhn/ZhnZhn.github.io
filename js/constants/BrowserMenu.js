@@ -76,7 +76,7 @@ var menuQuandl = [{
   caption: 'Economic',
   items: [{ id: _DialogType.Quandl.CURRENCY_HISTORY }, { id: _DialogType.Quandl.GLOBAL_INDICATOR }, { id: _DialogType.Quandl.WORLDBANK_PRICE }, { id: _DialogType.Quandl.IMF_CROSSCOUNTRY }, { id: _DialogType.Quandl.EU_COMMISSION }]
 }, {
-  caption: 'Inflation & Prices', isInitClose: true,
+  caption: 'Inflation & Prices',
   items: [{ id: _DialogType.Quandl.CPI_INFLATION }, { id: _DialogType.Quandl.BIG_MAC }, { id: _DialogType.Quandl.GDT, isNew: true }, { id: _DialogType.Quandl.BLSI, isNew: true }]
 }, {
   caption: 'Commodity', isInitClose: true,
@@ -88,11 +88,11 @@ var menuQuandl = [{
   caption: 'Futures', isInitClose: true,
   items: [{ id: _DialogType.Quandl.CHINA_FINANCE_FUTURE }, { id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }, { id: _DialogType.Quandl.LIFFE_FUTURE }, { id: _DialogType.Quandl.ICE_FUTURE }, { id: _DialogType.Quandl.WIKI_FUTURE }]
 }, {
-  caption: 'Real Estate', isInitClose: true,
+  caption: 'Real Estate',
   items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }, { id: _DialogType.Quandl.FMAC, isNew: true }]
 }];
 
 var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.ECONOMIC, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.ECONOMIC)), _defineProperty(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);
 
 exports.default = BrowserMenu;
-//# sourceMappingURL=BrowserMenu.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserMenu.js.map

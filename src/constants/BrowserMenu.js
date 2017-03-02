@@ -51,7 +51,7 @@ const menuQuandl = [
        { id : Quandl.EU_COMMISSION}
      ]
   },{
-    caption : 'Inflation & Prices', isInitClose : true,
+    caption : 'Inflation & Prices',
     items : [
       { id : Quandl.CPI_INFLATION },
       { id : Quandl.BIG_MAC },
@@ -89,7 +89,7 @@ const menuQuandl = [
       { id : Quandl.WIKI_FUTURE }
     ]
   },{
-    caption : 'Real Estate', isInitClose : true,
+    caption : 'Real Estate',
     items : [
       { id : Quandl.ZILLOW_REAL_ESTATE },
       { id : Quandl.FMAC, isNew: true }

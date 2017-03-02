@@ -154,9 +154,11 @@ var ChartContainer = function (_Component) {
       var _this$props2 = _this.props,
           chartType = _this$props2.chartType,
           browserType = _this$props2.browserType,
-          onCloseItem = _this$props2.onCloseItem;
+          onCloseItem = _this$props2.onCloseItem,
+          _this$state$configs = _this.state.configs,
+          configs = _this$state$configs === undefined ? [] : _this$state$configs;
 
-      return _this.state.configs.map(function (config, index) {
+      return configs.map(function (config, index) {
         var _config$zhConfig = config.zhConfig,
             zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
             id = zhConfig.id;
@@ -174,7 +176,10 @@ var ChartContainer = function (_Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.unsubscribe = _ChartStore2.default.listen(this._onStore);
-      this.setState(_ChartStore2.default.getConfigs(this.props.chartType));
+      var _initState = _ChartStore2.default.getConfigs(this.props.chartType);
+      if (_initState) {
+        this.setState(_initState);
+      }
     }
   }, {
     key: 'componentWillUnmount',
@@ -227,4 +232,4 @@ var ChartContainer = function (_Component) {
 }(_react.Component);
 
 exports.default = ChartContainer;
-//# sourceMappingURL=ChartContainer.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-containers\ChartContainer.js.map

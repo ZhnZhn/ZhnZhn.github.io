@@ -1,1 +1,36 @@
-{"version":3,"sources":["../../../../src/components/watch-browser/with/WithDnDStyle.js"],"names":["BORDER","BORDER_BOTTOM","BORDER_LEFT","START_BORDER_STYLE","ENTER_BORDER_LEFT_STYLE","ENTER_BORDER_LEFT_STYLE_DENY","sourcePermissions","nodeDragTarget","borderBottom","borderLeftEnter","WithDnDStyle","dragStartWithDnDStyle","ev","permissions","persist","currentTarget","style","getPropertyValue","setProperty","dropWithDnDStyle","styleTarget","styleSource","removeProperty","dragEnterWithDnDStyle","sourceType","indexOf","dragLeaveWithDnDStyle"],"mappings":";;;;;;AACA,IAAMA,SAAS,QAAf,CAAwB;AAAxB;AAAA,IACMC,gBAAgB,eADtB,CACsC;AADtC;AAAA,IAEMC,cAAc,aAFpB,CAEkC;AAFlC;AAAA,IAGMC,qBAAqB,kBAH3B;AAAA,IAIMC,0BAA0B,iBAJhC;AAAA,IAKMC,+BAA+B,eALrC;;AAOA,IAAIC,0BAAJ;AAAA,IACIC,uBADJ;AAAA,IAEIC,qBAFJ;AAAA,IAGIC,wBAHJ;;AAKA,IAAMC,eAAe;AAElBC,wBAFkB,iCAEIC,EAFJ,EAEQC,WAFR,EAEoB;AACnCD,SAAGE,OAAH;AACAP,uBAAiBK,GAAGG,aAApB;;AAEA,UAAMC,QAAQT,eAAeS,KAA7B;AACAR,qBAAeQ,MAAMC,gBAAN,CAAuBhB,aAAvB,CAAf;AACAe,YAAME,WAAN,CAAkBlB,MAAlB,EAA0BG,kBAA1B;;AAEAG,0BAAoBO,WAApB;AACF,IAXiB;AAYlBM,mBAZkB,4BAYDP,EAZC,EAYE;AACjB,UAAMQ,cAAcb,eAAeS,KAAnC;AAAA,UACMK,cAAcT,GAAGG,aAAH,CAAiBC,KADrC;AAEAK,kBAAYC,cAAZ,CAA2BpB,WAA3B;AACAkB,kBAAYE,cAAZ,CAA2BtB,MAA3B;AACAoB,kBAAYF,WAAZ,CAAwBjB,aAAxB,EAAuCO,YAAvC;AACF,IAlBiB;AAoBlBe,wBApBkB,iCAoBIX,EApBJ,EAoBQY,UApBR,EAoBmB;AAClC,UAAMR,QAAQJ,GAAGG,aAAH,CAAiBC,KAA/B;AACAP,wBAAkBO,MAAMC,gBAAN,CAAuBf,WAAvB,CAAlB;;AAEA;AACEI,wBAAkBmB,OAAlB,CAA0BD,UAA1B,MAA0C,CAAC,CAA7C,GACKR,MAAME,WAAN,CAAkBhB,WAAlB,EAA+BE,uBAA/B,CADL,GAEKY,MAAME,WAAN,CAAkBhB,WAAlB,EAA+BG,4BAA/B,CAFL;AAGA;AAEF,IA9BiB;AAgClBqB,wBAhCkB,iCAgCId,EAhCJ,EAgCO;AACtB,UAAMI,QAAQJ,GAAGG,aAAH,CAAiBC,KAA/B;AACAA,YAAMM,cAAN,CAAqBpB,WAArB;AACAc,YAAME,WAAN,CAAkBhB,WAAlB,EAA+BO,eAA/B;AACF;AApCiB,CAArB;;kBAwCeC,Y","file":"WithDnDStyle.js","sourcesContent":["\r\nconst BORDER = 'border' // dragStart\r\n    , BORDER_BOTTOM = 'border-bottom' // backup\r\n    , BORDER_LEFT = 'border-left' // dragEnter\r\n    , START_BORDER_STYLE = \"1px solid yellow\"\r\n    , ENTER_BORDER_LEFT_STYLE = \"4px solid green\"\r\n    , ENTER_BORDER_LEFT_STYLE_DENY = \"4px solid red\";\r\n\r\nlet sourcePermissions\r\n  , nodeDragTarget\r\n  , borderBottom\r\n  , borderLeftEnter;\r\n\r\nconst WithDnDStyle = {\r\n\r\n   dragStartWithDnDStyle(ev, permissions){\r\n      ev.persist();\r\n      nodeDragTarget = ev.currentTarget;\r\n\r\n      const style = nodeDragTarget.style;\r\n      borderBottom = style.getPropertyValue(BORDER_BOTTOM);\r\n      style.setProperty(BORDER, START_BORDER_STYLE);\r\n\r\n      sourcePermissions = permissions;\r\n   },\r\n   dropWithDnDStyle(ev){\r\n      const styleTarget = nodeDragTarget.style\r\n          , styleSource = ev.currentTarget.style;\r\n      styleSource.removeProperty(BORDER_LEFT);\r\n      styleTarget.removeProperty(BORDER);\r\n      styleTarget.setProperty(BORDER_BOTTOM, borderBottom);\r\n   },\r\n\r\n   dragEnterWithDnDStyle(ev, sourceType){\r\n      const style = ev.currentTarget.style\r\n      borderLeftEnter = style.getPropertyValue(BORDER_LEFT);\r\n\r\n      /* eslint-disable no-unused-expressions */\r\n      ( sourcePermissions.indexOf(sourceType) !== -1 )\r\n         ? style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE)\r\n         : style.setProperty(BORDER_LEFT, ENTER_BORDER_LEFT_STYLE_DENY);\r\n      /* eslint-disable no-unused-expressions */\r\n\r\n   },\r\n\r\n   dragLeaveWithDnDStyle(ev){\r\n      const style = ev.currentTarget.style\r\n      style.removeProperty(BORDER_LEFT);\r\n      style.setProperty(BORDER_LEFT, borderLeftEnter);\r\n   }\r\n\r\n};\r\n\r\nexport default WithDnDStyle\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\with\\WithDnDStyle.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\with\\WithDnDStyle.js",
+ "sourceRoot": "",
+ "names": [
+  "BORDER",
+  "BORDER_BOTTOM",
+  "BORDER_LEFT",
+  "ENTER_BORDER_LEFT_STYLE",
+  "ENTER_BORDER_LEFT_STYLE_DENY",
+  "sourcePermissions",
+  "nodeDragTarget",
+  "borderBottom",
+  "borderLeftEnter",
+  "WithDnDStyle",
+  "dragStartWithDnDStyle",
+  "ev",
+  "permissions",
+  "persist",
+  "currentTarget",
+  "style",
+  "getPropertyValue",
+  "dropWithDnDStyle",
+  "styleTarget",
+  "styleSource",
+  "removeProperty",
+  "setProperty",
+  "dragEnterWithDnDStyle",
+  "sourceType",
+  "indexOf",
+  "dragLeaveWithDnDStyle"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,SAAS,QAAf,CAAwB;AAAxB;AAAA,IACMC,gBAAgB,eADtB,CACsC;AADtC;AAAA,IAEMC,cAAc,aAFpB,CAEkC;AAC9B;AAHJ;AAAA,IAIMC,0BAA0B,iBAJhC;AAAA,IAKMC,+BAA+B,eALrC;;AAOA,IAAIC,0BAAJ;AAAA,IACIC,uBADJ;AAAA,IAEIC,qBAFJ;AAAA,IAGIC,wBAHJ;;AAKA,IAAMC,eAAe;AAElBC,wBAFkB,iCAEIC,EAFJ,EAEQC,WAFR,EAEoB;AACnCD,SAAGE,OAAH;AACAP,uBAAiBK,GAAGG,aAApB;;AAEA,UAAMC,QAAQT,eAAeS,KAA7B;AACAR,qBAAeQ,MAAMC,gBAAN,CAAuBf,aAAvB,CAAf;AACA;;AAEAI,0BAAoBO,WAApB;AACF,IAXiB;AAYlBK,mBAZkB,4BAYDN,EAZC,EAYE;AACjB,UAAMO,cAAcZ,eAAeS,KAAnC;AAAA,UACMI,cAAcR,GAAGG,aAAH,CAAiBC,KADrC;AAEAI,kBAAYC,cAAZ,CAA2BlB,WAA3B;AACAgB,kBAAYE,cAAZ,CAA2BpB,MAA3B;AACAkB,kBAAYG,WAAZ,CAAwBpB,aAAxB,EAAuCM,YAAvC;AACF,IAlBiB;AAoBlBe,wBApBkB,iCAoBIX,EApBJ,EAoBQY,UApBR,EAoBmB;AAClC,UAAMR,QAAQJ,GAAGG,aAAH,CAAiBC,KAA/B;AACAP,wBAAkBO,MAAMC,gBAAN,CAAuBd,WAAvB,CAAlB;;AAEA;AACEG,wBAAkBmB,OAAlB,CAA0BD,UAA1B,MAA0C,CAAC,CAA7C,GACKR,MAAMM,WAAN,CAAkBnB,WAAlB,EAA+BC,uBAA/B,CADL,GAEKY,MAAMM,WAAN,CAAkBnB,WAAlB,EAA+BE,4BAA/B,CAFL;AAGA;AAEF,IA9BiB;AAgClBqB,wBAhCkB,iCAgCId,EAhCJ,EAgCO;AACtB,UAAMI,QAAQJ,GAAGG,aAAH,CAAiBC,KAA/B;AACAA,YAAMK,cAAN,CAAqBlB,WAArB;AACAa,YAAMM,WAAN,CAAkBnB,WAAlB,EAA+BM,eAA/B;AACF;AApCiB,CAArB;;kBAwCeC,Y"
+}

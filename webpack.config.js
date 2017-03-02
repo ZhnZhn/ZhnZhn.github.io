@@ -10,7 +10,7 @@ module.exports = {
             "react", "react-dom", "raven-js",
             "react-addons-shallow-compare", "react-addons-css-transition-group",
             "reflux",
-            "big.js", "interact.js", "localforage",
+            "big.js", "interact.js", "localforage", "query-string",
             "lodash.sortby", "lodash.merge", "lodash.flow",
             "purify",
             "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",

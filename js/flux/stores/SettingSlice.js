@@ -15,4 +15,4 @@ var SettingSlice = {
 };
 
 exports.default = SettingSlice;
-//# sourceMappingURL=SettingSlice.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\SettingSlice.js.map
