@@ -2,8 +2,11 @@
 import queryString from 'query-string';
 import DateUtils from '../../utils/DateUtils'
 
+import { ModalDialog } from '../../constants/Type'
+
 const DF_TITLE = 'Item from search, more on Info Tab';
 const DF_SUFFIX_TITLE =', more on Info Tab'
+const BLANK = ''
 const QE = "QE";
 const QE_BLSI = "QE_BLSI"
 const Q = "Q"
@@ -19,6 +22,9 @@ const _trSearchToOptions = () => {
     const _title = (obj.t)
              ? obj.t + DF_SUFFIX_TITLE
              : DF_TITLE
+        , _name = (obj.t)
+            ? obj.t
+            : BLANK
         , _fromDate = (obj.fD)
              ? obj.fD
              : DateUtils.getFromDate(YEAR_MINUS);
@@ -30,7 +36,8 @@ const _trSearchToOptions = () => {
       loadId: obj.lI,
       key: obj.id,
       value: obj.id,
-      title: _title
+      title: _title,
+      name: _name
     };
   } else {
     return undefined;
@@ -38,16 +45,11 @@ const _trSearchToOptions = () => {
 }
 
 const LocationSearch = {
-  load : (browserActions, chartActions) => {
+  load : (componentActions) => {
     const options = _trSearchToOptions();
 
     if (options) {
-       browserActions.showBrowser(options.browserType)
-       chartActions.loadStock(
-         options.chartType,
-         options.browserType,
-         options
-       )
+      componentActions.showModalDialog(ModalDialog.ASK, { options })
     }
   }
 }

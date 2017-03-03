@@ -1,6 +1,7 @@
 
 import { ModalDialog } from '../../constants/Type';
 
+import AskDialog from './AskDialog';
 import InfoDialog from './InfoDialog';
 import AlertDialog from './AlertDialog';
 import DescriptionDialog from './DescriptionDialog';
@@ -14,6 +15,7 @@ import EditGroupDialog from '../watch-browser/EditGroupDialog';
 import EditListDialog from '../watch-browser/EditListDialog';
 
 const RouterModalDialog = {
+  [ModalDialog.ASK] : AskDialog,
   [ModalDialog.INFO] : InfoDialog,
   [ModalDialog.ALERT] : AlertDialog,
   [ModalDialog.DESCRIPTION] : DescriptionDialog,

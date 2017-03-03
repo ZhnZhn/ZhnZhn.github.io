@@ -12,15 +12,15 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import ConsentCookiePopup from './zhn/ConsentCookiePopup';
 
-import { ComponentActionTypes } from '../flux/actions/ComponentActions';
-import BrowserActions, { BrowserActionTypes } from '../flux/actions/BrowserActions';
+import ComponentActions, { ComponentActionTypes } from '../flux/actions/ComponentActions';
+import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
-import ChartActions from '../flux/actions/ChartActions';
+
 
 class AppErc extends Component {
 
   componentDidMount(){
-      LocationSearch.load(BrowserActions, ChartActions);
+      LocationSearch.load(ComponentActions);
   }
 
   render(){

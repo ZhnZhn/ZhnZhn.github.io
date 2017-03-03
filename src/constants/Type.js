@@ -28,6 +28,7 @@ export const Direction = {
 }
 
 export const ModalDialog = {
+  ASK : 'ASK',
   INFO : 'info',
   ALERT : 'alert',
   DESCRIPTION : 'DESCRIPTION',

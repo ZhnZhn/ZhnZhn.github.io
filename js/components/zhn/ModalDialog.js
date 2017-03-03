@@ -86,13 +86,14 @@ var ModalDialog = (_temp = _class = function (_Component) {
     _this._renderCommandButton = function () {
       var _this$props = _this.props,
           commandButtons = _this$props.commandButtons,
+          withoutClose = _this$props.withoutClose,
           onClose = _this$props.onClose;
 
       return _react2.default.createElement(
         'div',
         { style: Styles.COMMAND_DIV },
         commandButtons,
-        _react2.default.createElement(_ActionButton2.default, {
+        !withoutClose && _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Close',
           onClick: onClose
@@ -193,4 +194,4 @@ var ModalDialog = (_temp = _class = function (_Component) {
   timeout: 450
 }, _temp);
 exports.default = ModalDialog;
-//# sourceMappingURL=ModalDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ModalDialog.js.map

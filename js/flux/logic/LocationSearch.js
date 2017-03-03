@@ -12,10 +12,13 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
+var _Type = require('../../constants/Type');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DF_TITLE = 'Item from search, more on Info Tab';
 var DF_SUFFIX_TITLE = ', more on Info Tab';
+var BLANK = '';
 var QE = "QE";
 var QE_BLSI = "QE_BLSI";
 var Q = "Q";
@@ -27,6 +30,7 @@ var _trSearchToOptions = function _trSearchToOptions() {
 
   if (obj && obj.bT === QE && obj.cT === QE_BLSI && obj.lI == Q) {
     var _title = obj.t ? obj.t + DF_SUFFIX_TITLE : DF_TITLE,
+        _name = obj.t ? obj.t : BLANK,
         _fromDate = obj.fD ? obj.fD : _DateUtils2.default.getFromDate(YEAR_MINUS);
     return {
       browserType: obj.bT,
@@ -36,7 +40,8 @@ var _trSearchToOptions = function _trSearchToOptions() {
       loadId: obj.lI,
       key: obj.id,
       value: obj.id,
-      title: _title
+      title: _title,
+      name: _name
     };
   } else {
     return undefined;
@@ -44,12 +49,11 @@ var _trSearchToOptions = function _trSearchToOptions() {
 };
 
 var LocationSearch = {
-  load: function load(browserActions, chartActions) {
+  load: function load(componentActions) {
     var options = _trSearchToOptions();
 
     if (options) {
-      browserActions.showBrowser(options.browserType);
-      chartActions.loadStock(options.chartType, options.browserType, options);
+      componentActions.showModalDialog(_Type.ModalDialog.ASK, { options: options });
     }
   }
 };

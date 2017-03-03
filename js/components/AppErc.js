@@ -44,17 +44,13 @@ var _ConsentCookiePopup2 = _interopRequireDefault(_ConsentCookiePopup);
 
 var _ComponentActions = require('../flux/actions/ComponentActions');
 
-var _BrowserActions = require('../flux/actions/BrowserActions');
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
+var _BrowserActions = require('../flux/actions/BrowserActions');
 
 var _AnalyticActions = require('../flux/actions/AnalyticActions');
 
 var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
-
-var _ChartActions = require('../flux/actions/ChartActions');
-
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76,7 +72,7 @@ var AppErc = function (_Component) {
   _createClass(AppErc, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _LocationSearch2.default.load(_BrowserActions2.default, _ChartActions2.default);
+      _LocationSearch2.default.load(_ComponentActions2.default);
     }
   }, {
     key: 'render',
