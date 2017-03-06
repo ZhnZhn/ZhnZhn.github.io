@@ -18,6 +18,10 @@ var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
+var _MathCaptcha = require('../zhn-moleculs/MathCaptcha');
+
+var _MathCaptcha2 = _interopRequireDefault(_MathCaptcha);
+
 var _DialogStyles = require('../styles/DialogStyles');
 
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
@@ -37,6 +41,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+//import InputSlider from '../zhn/InputSlider';
+
 
 var styles = _DialogStyles2.default;
 
@@ -47,7 +53,7 @@ var S = {
   MODAL: {
     position: 'static',
     width: '400px',
-    height: '120px',
+    height: '205px',
     margin: '70px auto'
   },
   NAME: {
@@ -59,9 +65,14 @@ var S = {
     color: 'gray',
     width: '400px',
     paddingLeft: '10px',
+    paddingTop: '5px',
     fontWeight: 'bold',
     lineHeight: 1.4,
     whiteSpace: 'pre'
+  },
+  CAPTCHA: {
+    padding: '8px',
+    paddingBottom: '0px'
   }
 };
 
@@ -97,9 +108,11 @@ var AskDialog = function (_Component) {
           options = _data$options === undefined ? {} : _data$options;
 
 
-      _BrowserActions2.default.showBrowser(options.browserType);
-      _ChartActions2.default.loadStock(options.chartType, options.browserType, options);
-      onClose();
+      if (this.captchaComp.isOk()) {
+        _BrowserActions2.default.showBrowser(options.browserType);
+        _ChartActions2.default.loadStock(options.chartType, options.browserType, options);
+        onClose();
+      }
     }
   }, {
     key: 'shouldComponentUpdate',
@@ -112,6 +125,8 @@ var AskDialog = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props2 = this.props,
           isShow = _props2.isShow,
           _props2$data = _props2.data,
@@ -146,7 +161,13 @@ var AskDialog = function (_Component) {
               name
             ),
             MSG_SUFFIX
-          )
+          ),
+          _react2.default.createElement(_MathCaptcha2.default, {
+            ref: function ref(c) {
+              return _this2.captchaComp = c;
+            },
+            rootStyle: S.CAPTCHA
+          })
         )
       );
     }

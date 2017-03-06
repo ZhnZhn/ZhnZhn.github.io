@@ -8,6 +8,7 @@ config.js
 dependency-bundle.js
 dependency-bundle.js.map
 erc.html
+erc-hot.html
 index_jspm.html
 lint.txt
 lib-dev

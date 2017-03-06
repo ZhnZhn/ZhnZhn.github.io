@@ -29,7 +29,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 var _fnRenderApp = function _fnRenderApp() {
-  document.body.removeChild(document.getElementById('preloader'));
+  var preloaderEl = document.getElementById('preloader');
+  if (preloaderEl) {
+    document.body.removeChild(document.getElementById('preloader'));
+  }
   (0, _reactDom.render)(_react2.default.createElement(_AppErc2.default, null), document.getElementById('app'));
 };
 
@@ -49,4 +52,4 @@ var _fnLoading = function _fnLoading() {
 
 _ChartConfig2.default.init();
 _fnLoading();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\index.js.map

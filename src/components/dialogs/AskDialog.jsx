@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import ActionButton from '../zhn/ActionButton';
 import ModalDialog from '../zhn/ModalDialog';
+import MathCaptcha from '../zhn-moleculs/MathCaptcha';
+//import InputSlider from '../zhn/InputSlider';
 import DialogStyles from '../styles/DialogStyles'
 
 import BrowserActions from '../../flux/actions/BrowserActions';
@@ -16,7 +18,7 @@ const S = {
   MODAL : {
     position: 'static',
     width: '400px',
-    height: '120px',
+    height: '205px',
     margin: '70px auto'
   },
   NAME : {
@@ -28,9 +30,14 @@ const S = {
     color: 'gray',
     width : '400px',
     paddingLeft : '10px',
+    paddingTop: '5px',
     fontWeight: 'bold',
     lineHeight : 1.4,
     whiteSpace : 'pre'
+  },
+  CAPTCHA : {
+    padding: '8px',
+    paddingBottom : '0px'
   }
 }
 
@@ -58,13 +65,15 @@ class AskDialog extends Component {
     const { data={}, onClose } = this.props
         , { options={} } = data
 
-    BrowserActions.showBrowser(options.browserType)
-    ChartActions.loadStock(
-      options.chartType,
-      options.browserType,
-      options
-    )
-    onClose();
+    if (this.captchaComp.isOk()){
+      BrowserActions.showBrowser(options.browserType)
+      ChartActions.loadStock(
+        options.chartType,
+        options.browserType,
+        options
+      )
+      onClose();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -94,6 +103,14 @@ class AskDialog extends Component {
                <span style={S.NAME}>{name}</span>
                {MSG_SUFFIX}
             </p>
+            <MathCaptcha
+              ref={c => this.captchaComp = c}
+              rootStyle={S.CAPTCHA}
+            />
+            {/*
+            <p>For load, please answer, what is</p>
+            <InputSlider />
+            */}
          </div>
       </ModalDialog>
     )
