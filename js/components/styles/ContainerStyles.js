@@ -16,6 +16,7 @@ var ContainerStyles = {
     minWidth: '270px',
     maxWidth: '400px',
     marginLeft: '10px',
+    boxShadow: '1px 4px 6px 1px rgba(0,0,0,0.6)',
     borderRadius: '4px'
   },
   aboutRootDiv: {
@@ -28,10 +29,11 @@ var ContainerStyles = {
     minHeight: '500px',
     minWidth: '300px',
     maxWidth: '700px',
-    marginLeft: '10px',
+    marginLeft: '16px',
+    boxShadow: '1px 4px 6px 1px rgba(0,0,0,0.6)',
     borderRadius: '4px'
   }
 };
 
 exports.default = ContainerStyles;
-//# sourceMappingURL=ContainerStyles.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\styles\ContainerStyles.js.map

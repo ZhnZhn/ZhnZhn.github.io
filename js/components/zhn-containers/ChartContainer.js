@@ -56,14 +56,14 @@ var SHOW_POPUP = "show-popup",
 var styles = {
   rootDiv: {
     backgroundColor: '#4D4D4D',
-    //padding : '8px 3px 3px 8px',
     padding: '0px 0px 3px 0px',
     position: 'relative',
     borderRadius: '4px',
     width: '635px',
     height: 'calc(100vh - 71px)',
     minHeight: '500px',
-    marginLeft: '10px',
+    marginLeft: '16px',
+    boxShadow: '1px 4px 6px 1px rgba(0,0,0,0.6)',
     overflowY: 'hidden',
     overflowX: 'hidden'
   },

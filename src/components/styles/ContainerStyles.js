@@ -11,6 +11,7 @@ const ContainerStyles = {
     minWidth: '270px',
     maxWidth: '400px',
     marginLeft: '10px',
+    boxShadow: '1px 4px 6px 1px rgba(0,0,0,0.6)',
     borderRadius: '4px'
   },
   aboutRootDiv : {
@@ -22,9 +23,10 @@ const ContainerStyles = {
     height: 'calc(100vh - 71px)',
     minHeight: '500px',
     minWidth: '300px',
-    maxWidth: '700px',
-    marginLeft: '10px',
-    borderRadius: '4px'            
+    maxWidth: '700px',    
+    marginLeft: '16px',
+    boxShadow: '1px 4px 6px 1px rgba(0,0,0,0.6)',
+    borderRadius: '4px'
   }
 }
 

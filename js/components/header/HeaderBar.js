@@ -59,6 +59,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var styles = {
   rootDiv: {
     position: 'relative',
+    boxShadow: '0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.6)',
     zIndex: 1050
   },
   appLabel: {
@@ -189,4 +190,4 @@ var HeaderBar = function (_Component) {
 }(_react.Component);
 
 exports.default = HeaderBar;
-//# sourceMappingURL=HeaderBar.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\HeaderBar.js.map

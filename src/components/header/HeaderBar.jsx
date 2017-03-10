@@ -15,6 +15,7 @@ import { BrowserType, ModalDialog } from '../../constants/Type';
 const styles = {
   rootDiv : {
     position: 'relative',
+    boxShadow: '0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.6)',
     zIndex: 1050
   },
   appLabel : {
