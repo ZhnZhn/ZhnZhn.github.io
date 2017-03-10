@@ -108,7 +108,7 @@ var Header = function Header(props) {
   );
 };
 
-Header.propTypes = {
+process.env.NODE_ENV !== "production" ? Header.propTypes = {
   isOpen: _react.PropTypes.bool.isRequired,
   chartType: _react.PropTypes.string.isRequired,
   onCheck: _react.PropTypes.func.isRequired,
@@ -119,7 +119,7 @@ Header.propTypes = {
   onToggle: _react.PropTypes.func.isRequired,
   valueMoving: _react.PropTypes.object,
   onClose: _react.PropTypes.func.isRequired
-};
+} : void 0;
 
 exports.default = Header;
 //# sourceMappingURL=Header.js.map

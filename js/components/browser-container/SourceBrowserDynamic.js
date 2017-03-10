@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _react = require('react');
 
@@ -27,7 +29,7 @@ var SourceBrowserDynamic = _react2.default.createClass({
   },
   render: function render() {
     var props = this.props;
-    return _react2.default.createElement(_MenuBrowserDynamic2.default, _extends({
+    return _react2.default.createElement(_MenuBrowserDynamic2.default, (0, _extends3.default)({
       caption: 'Source Browser',
       showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
       loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,

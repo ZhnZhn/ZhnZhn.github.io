@@ -140,4 +140,4 @@ var BrowserSlice = {
 };
 
 exports.default = BrowserSlice;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\BrowserSlice.js.map
+//# sourceMappingURL=BrowserSlice.js.map

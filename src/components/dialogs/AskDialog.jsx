@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import ActionButton from '../zhn/ActionButton';
 import ModalDialog from '../zhn/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
-//import InputSlider from '../zhn/InputSlider';
 import DialogStyles from '../styles/DialogStyles'
 
 import BrowserActions from '../../flux/actions/BrowserActions';
@@ -42,6 +41,17 @@ const S = {
 }
 
 class AskDialog extends Component {
+
+   static propTypes = {
+     isShow: PropTypes.bool,
+     data: PropTypes.shape({
+       options: PropTypes.shape({
+         chartType: PropTypes.string,
+         browserType: PropTypes.string
+       })
+     }),
+     onClose: PropTypes.func
+   }
 
   constructor(props){
     super();
@@ -107,16 +117,10 @@ class AskDialog extends Component {
               ref={c => this.captchaComp = c}
               rootStyle={S.CAPTCHA}
             />
-            {/*
-            <p>For load, please answer, what is</p>
-            <InputSlider />
-            */}
          </div>
       </ModalDialog>
     )
   }
 }
-
-AskDialog.displayName = 'AskDialog';
 
 export default AskDialog

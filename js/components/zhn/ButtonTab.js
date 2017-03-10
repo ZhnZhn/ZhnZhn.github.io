@@ -4,9 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
-var _class, _temp;
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _react = require('react');
 
@@ -14,19 +26,13 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ButtonTab = (_temp = _class = function (_Component) {
-  _inherits(ButtonTab, _Component);
+var ButtonTab = function (_Component) {
+  (0, _inherits3.default)(ButtonTab, _Component);
 
   function ButtonTab(props) {
-    _classCallCheck(this, ButtonTab);
+    (0, _classCallCheck3.default)(this, ButtonTab);
 
-    var _this = _possibleConstructorReturn(this, (ButtonTab.__proto__ || Object.getPrototypeOf(ButtonTab)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ButtonTab.__proto__ || Object.getPrototypeOf(ButtonTab)).call(this));
 
     _this._handleClick = function () {
       _this.props.onClick();
@@ -39,7 +45,7 @@ var ButtonTab = (_temp = _class = function (_Component) {
     return _this;
   }
 
-  _createClass(ButtonTab, [{
+  (0, _createClass3.default)(ButtonTab, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (nextProps.isShow !== this.state.isShow) {
@@ -67,13 +73,14 @@ var ButtonTab = (_temp = _class = function (_Component) {
       );
     }
   }]);
-
   return ButtonTab;
-}(_react.Component), _class.propTypes = {
+}(_react.Component);
+
+process.env.NODE_ENV !== "production" ? ButtonTab.propTypes = {
   isShow: _react.PropTypes.bool,
   caption: _react.PropTypes.string,
   style: _react.PropTypes.object,
   onClick: _react.PropTypes.func
-}, _temp);
+} : void 0;
 exports.default = ButtonTab;
 //# sourceMappingURL=ButtonTab.js.map

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type4';
 
@@ -17,17 +17,33 @@ import withValidationLoad from './decorators/withValidationLoad'
 @withToolbar
 @withValidationLoad
 class DialogType4 extends Component {
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
 
-  state = {
-    isShowDate : true,
-    validationMessages: []
+    oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+    twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+
+    initFromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    msgOnNotValidFormat: PropTypes.func,
+    onTestDate: PropTypes.func,
+    onShow: PropTypes.func
   }
 
   constructor(props){
     super();
-    this.one = undefined;
-    this.two = undefined;
+    this.one = null;
+    this.two = null;
     this.toolbarButtons = this._createType2WithToolbar(props);
+    this.state = {
+      isShowDate : true,
+      validationMessages: []
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -141,7 +157,5 @@ class DialogType4 extends Component {
     );
   }
 }
-
-DialogType4.displayName = 'DialogType4';
 
 export default DialogType4

@@ -47,10 +47,10 @@ var SparklinesLine = function SparklinesLine(props) {
     );
 };
 
-SparklinesLine.propTypes = {
+process.env.NODE_ENV !== "production" ? SparklinesLine.propTypes = {
     color: _react2.default.PropTypes.string,
     style: _react2.default.PropTypes.object
-};
+} : void 0;
 SparklinesLine.defaultProps = {
     style: {}
 };

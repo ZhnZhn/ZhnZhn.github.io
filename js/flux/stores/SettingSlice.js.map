@@ -1,16 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\stores\\SettingSlice.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\stores\\SettingSlice.js",
- "sourceRoot": "",
- "names": [
-  "SettingSlice",
-  "setting",
-  "setQuandlKey",
-  "value",
-  "quandlKey",
-  "getQuandlKey"
- ],
- "mappings": ";;;;;;AACA,IAAMA,eAAe;AACnBC,WAAS,EADU;AAEnBC,cAFmB,wBAENC,KAFM,EAEA;AACjB,SAAKF,OAAL,CAAaG,SAAb,GAAyBD,KAAzB;AACD,GAJkB;AAKnBE,cALmB,0BAKL;AACZ,WAAO,KAAKJ,OAAL,CAAaG,SAApB;AACD;AAPkB,CAArB;;kBAUeJ,Y"
-}
+{"version":3,"sources":["../../../src/flux/stores/SettingSlice.js"],"names":["SettingSlice","setting","setQuandlKey","value","quandlKey","getQuandlKey"],"mappings":";;;;;;AACA,IAAMA,eAAe;AACnBC,WAAS,EADU;AAEnBC,cAFmB,wBAENC,KAFM,EAEA;AACjB,SAAKF,OAAL,CAAaG,SAAb,GAAyBD,KAAzB;AACD,GAJkB;AAKnBE,cALmB,0BAKL;AACZ,WAAO,KAAKJ,OAAL,CAAaG,SAApB;AACD;AAPkB,CAArB;;kBAUeJ,Y","file":"SettingSlice.js","sourcesContent":["\r\nconst SettingSlice = {\r\n  setting: {},\r\n  setQuandlKey(value){\r\n    this.setting.quandlKey = value;\r\n  },\r\n  getQuandlKey(){\r\n    return this.setting.quandlKey;\r\n  }\r\n}\r\n\r\nexport default SettingSlice\r\n"]}

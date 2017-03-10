@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import ContainerStyles from '../styles/ContainerStyles';
 
@@ -25,6 +25,9 @@ const Browser = ({ isShow, style, children }) => {
      </div>
   );
 }
-
+Browser.propTypes = {
+  isShow: PropTypes.bool,
+  style: PropTypes.object
+}
 
 export default Browser

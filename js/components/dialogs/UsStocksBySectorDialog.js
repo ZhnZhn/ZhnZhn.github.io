@@ -4,7 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _class2, _temp, _initialiseProps;
 
@@ -48,12 +62,6 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var STYLE = {
   CAPTION_SPAN: {
     display: 'inline-block',
@@ -64,12 +72,12 @@ var STYLE = {
 var sourceOptions = [{ caption: "YAHOO", "value": "YAHOO/" }, { caption: "WIKI", "value": "WIKI/" }, { caption: "GOOG/NYSE", "value": "GOOG/NYSE_" }, { caption: "GOOG/NASDAQ", "value": "GOOG/NASDAQ_" }];
 
 var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
-  _inherits(UsStocksBySectorDialog, _Component);
+  (0, _inherits3.default)(UsStocksBySectorDialog, _Component);
 
   function UsStocksBySectorDialog(props) {
-    _classCallCheck(this, UsStocksBySectorDialog);
+    (0, _classCallCheck3.default)(this, UsStocksBySectorDialog);
 
-    var _this = _possibleConstructorReturn(this, (UsStocksBySectorDialog.__proto__ || Object.getPrototypeOf(UsStocksBySectorDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (UsStocksBySectorDialog.__proto__ || Object.getPrototypeOf(UsStocksBySectorDialog)).call(this));
 
     _initialiseProps.call(_this);
 
@@ -93,7 +101,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
     return _this;
   }
 
-  _createClass(UsStocksBySectorDialog, [{
+  (0, _createClass3.default)(UsStocksBySectorDialog, [{
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
@@ -161,7 +169,6 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
       );
     }
   }]);
-
   return UsStocksBySectorDialog;
 }(_react.Component), _initialiseProps = function _initialiseProps() {
   var _this3 = this;
@@ -228,12 +235,12 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
   };
 }, _temp)) || _class;
 
-UsStocksBySectorDialog.propTypes = {
+process.env.NODE_ENV !== "production" ? UsStocksBySectorDialog.propTypes = {
   isShow: _react.PropTypes.bool.isRequired,
   data: _react.PropTypes.object.isRequired,
   store: _react.PropTypes.object,
   onClose: _react.PropTypes.func.isRequired
-};
+} : void 0;
 UsStocksBySectorDialog.defaultProps = {
   data: {}
 };

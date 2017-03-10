@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _Msg = require('../../constants/Msg');
 
 var _Msg2 = _interopRequireDefault(_Msg);
@@ -21,8 +25,6 @@ var _ArrayUtil = require('../../utils/ArrayUtil');
 var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var LogicFn = {
   fResultNotFound: function fResultNotFound(itemType, name) {
@@ -63,7 +65,7 @@ var LogicFn = {
   getArrayWithObj: _ImArrayUtil2.default.push,
 
   getArrayWithRename: function getArrayWithRename(arr, index, caption) {
-    return [].concat(_toConsumableArray(arr.slice(0, index)), [Object.assign({}, arr[index], { caption: caption })], _toConsumableArray(arr.slice(index + 1)));
+    return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), [Object.assign({}, arr[index], { caption: caption })], (0, _toConsumableArray3.default)(arr.slice(index + 1)));
   },
 
 

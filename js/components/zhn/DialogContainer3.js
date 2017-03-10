@@ -4,21 +4,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var S = {
   ROOT: {
@@ -38,16 +48,16 @@ var getObjToFirst = function getObjToFirst(arr, keyValue) {
       break;
     }
   }
-  return [].concat(_toConsumableArray(arr.slice(0, index)), _toConsumableArray(arr.slice(index + 1)), [arr[index]]);
+  return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), (0, _toConsumableArray3.default)(arr.slice(index + 1)), [arr[index]]);
 };
 
 var DialogContainer3 = function (_Component) {
-  _inherits(DialogContainer3, _Component);
+  (0, _inherits3.default)(DialogContainer3, _Component);
 
   function DialogContainer3(props) {
-    _classCallCheck(this, DialogContainer3);
+    (0, _classCallCheck3.default)(this, DialogContainer3);
 
-    var _this = _possibleConstructorReturn(this, (DialogContainer3.__proto__ || Object.getPrototypeOf(DialogContainer3)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogContainer3.__proto__ || Object.getPrototypeOf(DialogContainer3)).call(this));
 
     _this._checkActiveDialogs = function (dialogType) {
       _this._activeDialogs.push(dialogType);
@@ -117,7 +127,7 @@ var DialogContainer3 = function (_Component) {
     return _this;
   }
 
-  _createClass(DialogContainer3, [{
+  (0, _createClass3.default)(DialogContainer3, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.unsubscribe = this.props.store.listen(this._onStore);
@@ -137,7 +147,6 @@ var DialogContainer3 = function (_Component) {
       );
     }
   }]);
-
   return DialogContainer3;
 }(_react.Component);
 

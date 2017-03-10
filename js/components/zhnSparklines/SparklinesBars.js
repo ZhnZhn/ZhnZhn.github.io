@@ -48,12 +48,12 @@ var SparklinesBars = function SparklinesBars(props) {
     );
 };
 
-SparklinesBars.propTypes = {
+process.env.NODE_ENV !== "production" ? SparklinesBars.propTypes = {
     points: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object),
     height: _react2.default.PropTypes.number,
     style: _react2.default.PropTypes.object,
     barWidth: _react2.default.PropTypes.number
-};
+} : void 0;
 SparklinesBars.defaultProps = {
     style: { fill: 'slategray' },
     barStrokeColors: {

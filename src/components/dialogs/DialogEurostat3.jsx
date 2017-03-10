@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat3';
 
@@ -17,8 +17,22 @@ import withValidationLoad from './decorators/withValidationLoad';
 @withValidationLoad
 class DialogEurostat3 extends Component {
 
-  state = {
-    validationMessages: []
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+
+    oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+
+    twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+
+    threeCaption: PropTypes.string,
+    msgOnNotSelected: PropTypes.func,
+
+    onShow: PropTypes.func
   }
 
   constructor(props){
@@ -27,6 +41,9 @@ class DialogEurostat3 extends Component {
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
+    this.state = {
+      validationMessages: []
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -78,12 +95,12 @@ class DialogEurostat3 extends Component {
     const {
            caption, isShow, onShow,
            oneCaption, oneURI, oneJsonProp,
-           twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected
+           twoCaption, twoURI, twoJsonProp,
+           threeCaption, msgOnNotSelected
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton
-          key="a"
+       <ActionButton          
           type="TypeC"
           caption="Load"
           onClick={this._handleLoad}

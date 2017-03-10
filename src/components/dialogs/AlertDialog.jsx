@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import ModalDialog from '../zhn/ModalDialog';
 import DialogStyles from '../styles/DialogStyles'
@@ -33,9 +33,18 @@ const ELLIPSIS = '...';
 
 class AlertDialog extends Component{
 
-   constructor(props){
-     super();
-   }
+  static propTypes = {
+    isShow: PropTypes.bool,
+    data: PropTypes.shape({
+      alertCaption: PropTypes.string,
+      alertItemId: PropTypes.string,
+      alertDescr: PropTypes.string
+    }),
+    onClose: PropTypes.func
+  }
+  static defaultProps = {
+    data: {}
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
@@ -54,7 +63,7 @@ class AlertDialog extends Component{
         isShow={isShow}
         onClose={onClose}
       >
-         <div style={styles.rowDiv} key="1">
+         <div style={styles.rowDiv}>
             <span style={Styles.CAPTION}>
               {alertCaption + ': '}
               <span style={Styles.ITEM_ID} title={alertItemId}>
@@ -62,7 +71,7 @@ class AlertDialog extends Component{
               </span>
             </span>
          </div>
-         <div style={styles.rowDiv} key="2">
+         <div style={styles.rowDiv}>
             <p style={Styles.DESCR}>{alertDescr}</p>
          </div>
 
@@ -70,7 +79,5 @@ class AlertDialog extends Component{
     )
   }
 }
-
-AlertDialog.displayName = 'AlertDialog';
 
 export default AlertDialog

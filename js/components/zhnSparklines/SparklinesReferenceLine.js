@@ -30,11 +30,11 @@ var SparklinesReferenceLine = function SparklinesReferenceLine(props) {
         style: style });
 };
 
-SparklinesReferenceLine.propTypes = {
+process.env.NODE_ENV !== "production" ? SparklinesReferenceLine.propTypes = {
     type: _react2.default.PropTypes.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
     value: _react2.default.PropTypes.number,
     style: _react2.default.PropTypes.object
-};
+} : void 0;
 
 SparklinesReferenceLine.defaultProps = {
     type: 'mean',

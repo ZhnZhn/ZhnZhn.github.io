@@ -4,7 +4,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _class, _temp;
 
 var _react = require('react');
 
@@ -19,12 +35,6 @@ var _DialogStyles = require('../styles/DialogStyles');
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var styles = _DialogStyles2.default;
 
@@ -54,16 +64,15 @@ var Styles = {
 
 var ELLIPSIS = '...';
 
-var AlertDialog = function (_Component) {
-  _inherits(AlertDialog, _Component);
+var AlertDialog = (_temp = _class = function (_Component) {
+  (0, _inherits3.default)(AlertDialog, _Component);
 
-  function AlertDialog(props) {
-    _classCallCheck(this, AlertDialog);
-
-    return _possibleConstructorReturn(this, (AlertDialog.__proto__ || Object.getPrototypeOf(AlertDialog)).call(this));
+  function AlertDialog() {
+    (0, _classCallCheck3.default)(this, AlertDialog);
+    return (0, _possibleConstructorReturn3.default)(this, (AlertDialog.__proto__ || Object.getPrototypeOf(AlertDialog)).apply(this, arguments));
   }
 
-  _createClass(AlertDialog, [{
+  (0, _createClass3.default)(AlertDialog, [{
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
@@ -93,7 +102,7 @@ var AlertDialog = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv, key: '1' },
+          { style: styles.rowDiv },
           _react2.default.createElement(
             'span',
             { style: Styles.CAPTION },
@@ -107,7 +116,7 @@ var AlertDialog = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv, key: '2' },
+          { style: styles.rowDiv },
           _react2.default.createElement(
             'p',
             { style: Styles.DESCR },
@@ -117,11 +126,18 @@ var AlertDialog = function (_Component) {
       );
     }
   }]);
-
   return AlertDialog;
-}(_react.Component);
-
-AlertDialog.displayName = 'AlertDialog';
-
+}(_react.Component), _class.defaultProps = {
+  data: {}
+}, _temp);
+process.env.NODE_ENV !== "production" ? AlertDialog.propTypes = {
+  isShow: _react.PropTypes.bool,
+  data: _react.PropTypes.shape({
+    alertCaption: _react.PropTypes.string,
+    alertItemId: _react.PropTypes.string,
+    alertDescr: _react.PropTypes.string
+  }),
+  onClose: _react.PropTypes.func
+} : void 0;
 exports.default = AlertDialog;
 //# sourceMappingURL=AlertDialog.js.map

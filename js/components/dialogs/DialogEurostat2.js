@@ -4,7 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
 
@@ -62,12 +76,6 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var DATE_PLACEHOLDER = 'Before Select Indicator',
     MAP_FREQUENCY_DF = 'M',
     AREA = 'AREA',
@@ -84,27 +92,20 @@ var isCategoryType = function isCategoryType(chartType) {
 };
 
 var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
-  _inherits(DialogEurostat2, _Component);
+  (0, _inherits3.default)(DialogEurostat2, _Component);
 
   function DialogEurostat2(props) {
-    _classCallCheck(this, DialogEurostat2);
+    (0, _classCallCheck3.default)(this, DialogEurostat2);
 
-    var _this = _possibleConstructorReturn(this, (DialogEurostat2.__proto__ || Object.getPrototypeOf(DialogEurostat2)).call(this));
-
-    _this.state = {
-      isShowDate: false,
-      dateDefault: DATE_PLACEHOLDER,
-      dateOptions: [],
-      validationMessages: []
-    };
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogEurostat2.__proto__ || Object.getPrototypeOf(DialogEurostat2)).call(this));
 
     _this._handleSelectOne = function (one) {
       _this.one = one;
     };
 
     _this._updateForDate = function () {
-      _this.date = undefined;
-      var frequency = _this.two ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : undefined,
+      _this.date = null;
+      var frequency = _this.two ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
           mapDateDf = _this.props.mapDateDf,
           config = frequency ? _DateUtils2.default.createEurostatSelect(frequency, mapDateDf) : { dateDefault: DATE_PLACEHOLDER, options: [] };
 
@@ -175,16 +176,23 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
       _this.props.onClose();
     };
 
-    _this.one = undefined;
-    _this.two = undefined;
-    _this.date = undefined;
-    _this.chartType = undefined;
+    _this.one = null;
+    _this.two = null;
+    _this.date = null;
+    _this.chartType = null;
 
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
+
+    _this.state = {
+      isShowDate: false,
+      dateDefault: DATE_PLACEHOLDER,
+      dateOptions: [],
+      validationMessages: []
+    };
     return _this;
   }
 
-  _createClass(DialogEurostat2, [{
+  (0, _createClass3.default)(DialogEurostat2, [{
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (this.props !== nextProps) {
@@ -213,7 +221,6 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           dateOptions = _state.dateOptions,
           validationMessages = _state.validationMessages,
           _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
         type: 'TypeC',
         caption: 'Load',
         onClick: this._handleLoad
@@ -270,11 +277,26 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
       );
     }
   }]);
-
   return DialogEurostat2;
 }(_react.Component)) || _class) || _class;
 
-DialogEurostat2.displayName = 'DialogEurostat2';
+process.env.NODE_ENV !== "production" ? DialogEurostat2.propTypes = {
+  isShow: _react.PropTypes.bool,
+  caption: _react.PropTypes.string,
 
+  oneCaption: _react.PropTypes.string,
+  oneURI: _react.PropTypes.string,
+  oneJsonProp: _react.PropTypes.string,
+
+  twoCaption: _react.PropTypes.string,
+  twoURI: _react.PropTypes.string,
+  twoJsonProp: _react.PropTypes.string,
+
+  mapFrequency: _react.PropTypes.oneOf(['M', 'Q', 'Y']),
+  mapDateDf: _react.PropTypes.number,
+
+  msgOnNotSelected: _react.PropTypes.func,
+  onShow: _react.PropTypes.func
+} : void 0;
 exports.default = DialogEurostat2;
 //# sourceMappingURL=DialogEurostat2.js.map

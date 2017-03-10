@@ -4,7 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _react = require('react');
 
@@ -26,15 +32,13 @@ var _MapChartItem2 = _interopRequireDefault(_MapChartItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var _createAreaChartItem = function _createAreaChartItem(config, index, option, props) {
   var zhConfig = config.zhConfig,
       id = zhConfig.id,
       key = zhConfig.key,
       chartType = option.chartType;
 
-  return _react2.default.createElement(_AreaChartItem2.default, _extends({
+  return _react2.default.createElement(_AreaChartItem2.default, (0, _extends3.default)({
     ref: 'chart' + index,
     key: key,
     chartType: chartType,
@@ -52,7 +56,7 @@ var _createMapChartItem = function _createMapChartItem(config, index, option, pr
       chartType = option.chartType;
 
 
-  return _react2.default.createElement(_MapChartItem2.default, _extends({
+  return _react2.default.createElement(_MapChartItem2.default, (0, _extends3.default)({
     ref: 'chart' + index,
     key: key,
     chartType: chartType,
@@ -61,7 +65,7 @@ var _createMapChartItem = function _createMapChartItem(config, index, option, pr
   }, props));
 };
 
-var _rCreateItem = _defineProperty({
+var _rCreateItem = (0, _defineProperty3.default)({
   DEFAULT: _createAreaChartItem
 
 }, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem);

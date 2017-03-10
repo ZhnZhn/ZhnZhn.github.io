@@ -4,41 +4,45 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _BrowserConfig;
 
 var _Type = require('./Type');
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
+var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
   browserType: _Type.BrowserType.EUROSTAT,
   isDynamic: true,
   caption: 'European Statistics',
   sourceMenuUrl: './data/eurostat/source-menu.json'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
   browserType: _Type.BrowserType.ECONOMIC,
   isDynamic: false
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.GOOGLE, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.GOOGLE, {
   browserType: _Type.BrowserType.GOOGLE,
   isDynamic: true,
   caption: 'Quandl : Google Stocks',
   sourceMenuUrl: './data/google/source-menu.json'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.YAHOO, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.YAHOO, {
   browserType: _Type.BrowserType.YAHOO,
   isDynamic: true,
   caption: 'Quandl : Yahoo Stocks',
   sourceMenuUrl: './data/yahoo/source-menu.json'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.PREMIUM_SAMPLE, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.PREMIUM_SAMPLE, {
   browserType: _Type.BrowserType.PREMIUM_SAMPLE,
   isDynamic: true,
   caption: 'Quandl Premium Sample',
   sourceMenuUrl: './data/quandl-sample/source-menu.json'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.FRANCE_STATISTICS, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.FRANCE_STATISTICS, {
   browserType: _Type.BrowserType.FRANCE_STATISTICS,
   isDynamic: true,
   caption: 'Quandl : France Statistics',
   sourceMenuUrl: './data/france-statistics/source-menu.json'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,
   caption: 'Stocks by Sectors',
@@ -50,7 +54,7 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   itemOptionType: 'ItemTopicOption',
   itemType: 'Item',
   descrUrl: './data/us-stocks/description.html'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.NYSE_STOCKS, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NYSE_STOCKS, {
   browserType: _Type.BrowserType.NYSE_STOCKS,
   isDynamic: true,
   caption: 'US NYSE by Sectors',
@@ -62,7 +66,7 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.NASDAQ_STOCKS, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NASDAQ_STOCKS, {
   browserType: _Type.BrowserType.NASDAQ_STOCKS,
   isDynamic: true,
   caption: 'US NASDAQ by Sectors',
@@ -74,7 +78,7 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.LONDON_STOCKS, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.LONDON_STOCKS, {
   browserType: _Type.BrowserType.LONDON_STOCKS,
   isDynamic: true,
   caption: 'London Stocks by Sectors',
@@ -86,7 +90,7 @@ var BrowserConfig = (_BrowserConfig = {}, _defineProperty(_BrowserConfig, _Type.
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemLse',
   descrUrl: './data/london-stocks/lse-stocks.html'
-}), _defineProperty(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {
   browserType: _Type.BrowserType.WATCH_LIST,
   isDynamic: false,
   withoutItemCounter: true

@@ -4,7 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp;
 
@@ -21,12 +35,6 @@ var _ActionButton = require('./ActionButton');
 var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var ClassNames = {
   SHOWING: 'show-popup',
@@ -72,12 +80,12 @@ var Styles = {
 };
 
 var ModalDialog = (_temp = _class = function (_Component) {
-  _inherits(ModalDialog, _Component);
+  (0, _inherits3.default)(ModalDialog, _Component);
 
   function ModalDialog(props) {
-    _classCallCheck(this, ModalDialog);
+    (0, _classCallCheck3.default)(this, ModalDialog);
 
-    var _this = _possibleConstructorReturn(this, (ModalDialog.__proto__ || Object.getPrototypeOf(ModalDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalDialog.__proto__ || Object.getPrototypeOf(ModalDialog)).call(this));
 
     _this._handleClickDialog = function (event) {
       event.stopPropagation();
@@ -105,7 +113,7 @@ var ModalDialog = (_temp = _class = function (_Component) {
     return _this;
   }
 
-  _createClass(ModalDialog, [{
+  (0, _createClass3.default)(ModalDialog, [{
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props) {
@@ -179,19 +187,19 @@ var ModalDialog = (_temp = _class = function (_Component) {
       );
     }
   }]);
-
   return ModalDialog;
-}(_react.Component), _class.propTypes = {
+}(_react.Component), _class.defaultProps = {
+  isWithButton: true,
+  isNotUpdate: false,
+  timeout: 450
+}, _temp);
+process.env.NODE_ENV !== "production" ? ModalDialog.propTypes = {
   isShow: _react.PropTypes.bool,
   isWithButton: _react.PropTypes.bool,
   timeout: _react.PropTypes.number,
   caption: _react.PropTypes.string,
   style: _react.PropTypes.object,
   onClose: _react.PropTypes.func
-}, _class.defaultProps = {
-  isWithButton: true,
-  isNotUpdate: false,
-  timeout: 450
-}, _temp);
+} : void 0;
 exports.default = ModalDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ModalDialog.js.map
+//# sourceMappingURL=ModalDialog.js.map

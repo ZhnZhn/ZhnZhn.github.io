@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _BrowserMenu;
 
 var _Type = require('./Type');
@@ -23,8 +27,6 @@ var _ChartActions = require('../flux/actions/ChartActions');
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var fnClick = function fnClick(dialogType, browserType) {
   return _ComponentActions2.default.showDialog.bind(null, dialogType, browserType);
@@ -92,7 +94,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }, { id: _DialogType.Quandl.FMAC, isNew: true }]
 }];
 
-var BrowserMenu = (_BrowserMenu = {}, _defineProperty(_BrowserMenu, _Type.BrowserType.ECONOMIC, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.ECONOMIC)), _defineProperty(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);
+var BrowserMenu = (_BrowserMenu = {}, (0, _defineProperty3.default)(_BrowserMenu, _Type.BrowserType.ECONOMIC, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.ECONOMIC)), (0, _defineProperty3.default)(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);
 
 exports.default = BrowserMenu;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserMenu.js.map
+//# sourceMappingURL=BrowserMenu.js.map

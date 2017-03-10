@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal = undefined;
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _rFactorySeria2;
 
 var _lodash = require('lodash.sortby');
@@ -31,9 +35,7 @@ var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var _rFactorySeria = (_rFactorySeria2 = {}, _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_AREA_PERCENT, _ChartConfig2.default.fStackAreaSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN, _ChartConfig2.default.fStackedColumnSeria), _defineProperty(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN_PERCENT, _ChartConfig2.default.fStackedColumnSeria), _rFactorySeria2);
+var _rFactorySeria = (_rFactorySeria2 = {}, (0, _defineProperty3.default)(_rFactorySeria2, _Type.ChartType.STACKED_AREA, _ChartConfig2.default.fStackAreaSeria), (0, _defineProperty3.default)(_rFactorySeria2, _Type.ChartType.STACKED_AREA_PERCENT, _ChartConfig2.default.fStackAreaSeria), (0, _defineProperty3.default)(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN, _ChartConfig2.default.fStackedColumnSeria), (0, _defineProperty3.default)(_rFactorySeria2, _Type.ChartType.STACKED_COLUMN_PERCENT, _ChartConfig2.default.fStackedColumnSeria), _rFactorySeria2);
 
 var fnCalcTotal = exports.fnCalcTotal = function fnCalcTotal() {
   var jsonData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];

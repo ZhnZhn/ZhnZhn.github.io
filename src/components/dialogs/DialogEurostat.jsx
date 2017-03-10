@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat'
 
@@ -15,18 +15,33 @@ import withValidationLoad from './decorators/withValidationLoad';
 @withToolbar
 @withValidationLoad
 class DialogEurostat extends Component {
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
 
-  state = {
-    validationMessages: []
+    oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+
+    twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+
+    msgOnNotSelected: PropTypes.func,
+    onShow: PropTypes.func
   }
 
   constructor(props){
     super();
-    this.one = undefined;
-    this.two = undefined;
+    this.one = null;
+    this.two = null;
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
+
+    this.state = {
+      validationMessages: []
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -81,8 +96,7 @@ class DialogEurostat extends Component {
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton
-          key="a"
+       <ActionButton          
           type="TypeC"
           caption="Load"
           onClick={this._handleLoad}
@@ -127,6 +141,4 @@ class DialogEurostat extends Component {
   }
 }
 
-DialogEurostat.displayName = 'DialogEurostat';
-
-export default DialogEurostat;
+export default DialogEurostat

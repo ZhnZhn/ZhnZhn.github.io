@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import SvgClose from './SvgClose';
 
@@ -35,5 +35,9 @@ const BrowserCaption = ({ caption, children, onClose }) => (
     />
   </div>
 )
+BrowserCaption.propTypes = {
+  caption: PropTypes.string,
+  onClose: PropTypes.func
+}
 
-export default BrowserCaption;
+export default BrowserCaption

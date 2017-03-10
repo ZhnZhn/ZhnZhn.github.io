@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
 var _LogicFn = require('./LogicFn');
 
@@ -42,14 +44,14 @@ var WithLogicDnD = {
             dropId = _ref2.dropId;
 
         var _dragId$split = dragId.split(';'),
-            _dragId$split2 = _slicedToArray(_dragId$split, 2),
+            _dragId$split2 = (0, _slicedToArray3.default)(_dragId$split, 2),
             dragGroupCaption = _dragId$split2[0],
             dragListCaption = _dragId$split2[1],
             dragGroup = _LogicFn2.default.findGroup(watchList, dragGroupCaption),
             dragList = _LogicFn2.default.findList(dragGroup, dragListCaption);
 
         var _dropId$split = dropId.split(';'),
-            _dropId$split2 = _slicedToArray(_dropId$split, 2),
+            _dropId$split2 = (0, _slicedToArray3.default)(_dropId$split, 2),
             dropGroupCaption = _dropId$split2[0],
             dropListCaption = _dropId$split2[1],
             dropGroup = _LogicFn2.default.findGroup(watchList, dropGroupCaption),
@@ -69,11 +71,11 @@ var WithLogicDnD = {
             dropId = _ref3.dropId;
 
         var _dragId$split3 = dragId.split(';'),
-            _dragId$split4 = _slicedToArray(_dragId$split3, 1),
+            _dragId$split4 = (0, _slicedToArray3.default)(_dragId$split3, 1),
             dragGroupCaption = _dragId$split4[0],
             dragGroup = _LogicFn2.default.findGroup(watchList, dragGroupCaption),
             _dropId$split3 = dropId.split(';'),
-            _dropId$split4 = _slicedToArray(_dropId$split3, 1),
+            _dropId$split4 = (0, _slicedToArray3.default)(_dropId$split3, 1),
             dropGroupCaption = _dropId$split4[0],
             dropIndex = dropGroupCaption ? _LogicFn2.default.findIndex(watchList.groups, dropGroupCaption) : 0;
 

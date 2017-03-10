@@ -16,7 +16,13 @@ module.exports = {
             "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
             "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",
             "accounting",
-            "jsonstat"            
+            "jsonstat",
+            "babel-runtime/helpers/classCallCheck",
+            "babel-runtime/helpers/createClass",
+            "babel-runtime/helpers/possibleConstructorReturn",
+            "babel-runtime/helpers/inherits",
+            "babel-runtime/helpers/toConsumableArray",
+            "babel-runtime/helpers/slicedToArray"                                      
           ],
     erc: path.resolve('js', 'index.js')
   },

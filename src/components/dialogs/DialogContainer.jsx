@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import ModalDialogContainer from '../zhn/ModalDialogContainer';
 import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
@@ -7,6 +7,12 @@ import RouterModalDialog from './RouterModalDialog';
 const _hmDialogs = RouterModalDialog;
 
 class DialogContainer extends Component {
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func
+    })
+  }
+
   state = {
     isShow : false,
     inits : {},
@@ -14,10 +20,6 @@ class DialogContainer extends Component {
     data : {},
     dialogs : [],
     currentDialog : null
-  }
-
-  constructor(props){
-    super();
   }
 
   componentDidMount(){
@@ -76,7 +78,5 @@ class DialogContainer extends Component {
     )
   }
 }
-
-DialogContainer.displayName = 'DialogContainer';
 
 export default DialogContainer

@@ -41,6 +41,10 @@ var Browser = function Browser(_ref) {
     children
   );
 };
+process.env.NODE_ENV !== "production" ? Browser.propTypes = {
+  isShow: _react.PropTypes.bool,
+  style: _react.PropTypes.object
+} : void 0;
 
 exports.default = Browser;
 //# sourceMappingURL=Browser.js.map

@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _ChartConfig = require('../../charts/ChartConfig');
 
@@ -42,7 +44,7 @@ var _crSubTitle = function _crSubTitle(subTitle) {
   return '<span style="color:black;font-weight:bold;">' + subTitle + '</span>';
 };
 
-var EuroStatFn = _extends({
+var EuroStatFn = (0, _extends3.default)({
   createData: function createData(timeIndex, value) {
     var _this = this;
 

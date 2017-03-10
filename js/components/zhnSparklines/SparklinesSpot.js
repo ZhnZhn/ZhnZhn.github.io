@@ -34,12 +34,12 @@ var SparklinesSpot = function SparklinesSpot(props) {
     );
 };
 
-SparklinesSpot.propTypes = {
+process.env.NODE_ENV !== "production" ? SparklinesSpot.propTypes = {
     size: _react2.default.PropTypes.number,
     style: _react2.default.PropTypes.object,
     spotColors: _react2.default.PropTypes.object,
     pointIndex: _react2.default.PropTypes.number
-};
+} : void 0;
 SparklinesSpot.defaultProps = {
     size: 2,
     spotColors: {

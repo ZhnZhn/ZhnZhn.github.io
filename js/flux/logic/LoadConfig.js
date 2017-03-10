@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _LoadConfig;
 
 var _ChartType = require('../../constants/ChartType');
@@ -20,9 +24,7 @@ var _loadEuroStat = require('./loadEuroStat');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var LoadConfig = (_LoadConfig = {}, _defineProperty(_LoadConfig, _Type.LoadType.Q, _loadQuandl.loadQuandl), _defineProperty(_LoadConfig, _Type.LoadType.QCT, _loadQuandlCommodityTrade.loadQuandlCommodityTrade), _defineProperty(_LoadConfig, _Type.LoadType.EU_STAT, _loadEuroStat.loadEuroStat), _defineProperty(_LoadConfig, _ChartType2.default.WATCH_LIST, _loadQuandl.loadQuandl), _defineProperty(_LoadConfig, _Type.LoadType.WL, _loadQuandl.loadQuandl), _LoadConfig);
+var LoadConfig = (_LoadConfig = {}, (0, _defineProperty3.default)(_LoadConfig, _Type.LoadType.Q, _loadQuandl.loadQuandl), (0, _defineProperty3.default)(_LoadConfig, _Type.LoadType.QCT, _loadQuandlCommodityTrade.loadQuandlCommodityTrade), (0, _defineProperty3.default)(_LoadConfig, _Type.LoadType.EU_STAT, _loadEuroStat.loadEuroStat), (0, _defineProperty3.default)(_LoadConfig, _ChartType2.default.WATCH_LIST, _loadQuandl.loadQuandl), (0, _defineProperty3.default)(_LoadConfig, _Type.LoadType.WL, _loadQuandl.loadQuandl), _LoadConfig);
 
 exports.default = LoadConfig;
 //# sourceMappingURL=LoadConfig.js.map

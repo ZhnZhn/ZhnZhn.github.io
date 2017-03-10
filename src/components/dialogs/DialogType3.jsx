@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import createLoadOptions from '../../flux/creaters/type3';
 
@@ -13,18 +13,33 @@ import withValidationLoad from './decorators/withValidationLoad';
 
 @withValidationLoad
 class DialogType3 extends Component {
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+    itemCaption: PropTypes.string,
+    optionURI: PropTypes.string,
+    optionsJsonProp: PropTypes.string,
+    optionNames: PropTypes.string,
+    initFromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    msgOnNotValidFormat: PropTypes.func,
+    onTestDate: PropTypes.func,
+    onShow: PropTypes.func,
 
-  state = {
-    validationMessages: []
+    descrUrl: PropTypes.string,
+    onClickInfo: PropTypes.func
   }
 
   constructor(props){
     super(props);
 
-    this.stock = undefined;
+    this.stock = null;
     this.toolbarButtons = (props.descrUrl)
          ?  [{ caption: 'I', onClick: this._handleClickInfo }]
          : [];
+    this.state = {
+           validationMessages: []
+         }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -125,6 +140,4 @@ class DialogType3 extends Component {
   }
 }
 
-DialogType3.displayName = 'DialogType3';
-
-export default DialogType3;
+export default DialogType3

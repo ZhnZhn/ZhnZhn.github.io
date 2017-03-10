@@ -54,6 +54,10 @@ var BrowserCaption = function BrowserCaption(_ref) {
     })
   );
 };
+process.env.NODE_ENV !== "production" ? BrowserCaption.propTypes = {
+  caption: _react.PropTypes.string,
+  onClose: _react.PropTypes.func
+} : void 0;
 
 exports.default = BrowserCaption;
 //# sourceMappingURL=BrowserCaption.js.map

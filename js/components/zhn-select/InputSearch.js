@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -13,8 +17,6 @@ var _ArrowCell = require('./ArrowCell');
 var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var MAX_WITHOUT_ANIMATION = 800;
 
@@ -246,7 +248,7 @@ var InputSearch = _react2.default.createClass({
       if (arr.length === 0) {
         var _arr$push;
 
-        arr.push((_arr$push = {}, _defineProperty(_arr$push, this.propCaption, 'No results found'), _defineProperty(_arr$push, 'value', 'noresult'), _arr$push));
+        arr.push((_arr$push = {}, (0, _defineProperty3.default)(_arr$push, this.propCaption, 'No results found'), (0, _defineProperty3.default)(_arr$push, 'value', 'noresult'), _arr$push));
       }
       this._undecorateActiveOption();
       this.indexActiveOption = 0;

@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _big = require('big.js');
 
@@ -131,7 +133,7 @@ var QuandlFn2 = {
         bPrevValue = len > 1 ? seria[len - 2][1] ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0) : (0, _big2.default)(0.0),
         date = len > 0 ? _DateUtils2.default.formatTo(seria[len - 1][0]) : '';
 
-    return _extends({}, this.createValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), { date: date });
+    return (0, _extends3.default)({}, this.createValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), { date: date });
   },
   getRecentDate: function getRecentDate() {
     var seria = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];

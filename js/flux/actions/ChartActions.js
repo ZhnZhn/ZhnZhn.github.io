@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ChartActionTypes = undefined;
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _Reflux$createActions;
 
 var _reflux = require('reflux');
@@ -28,8 +32,6 @@ var _LogicUtils = require('../logic/LogicUtils');
 var _LogicUtils2 = _interopRequireDefault(_LogicUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var META = '_Meta';
 
@@ -61,13 +63,13 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
   }
 };
 
-var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, _defineProperty(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, {
+var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, {
   children: ['completed', 'added', 'failed'],
   isLoading: false,
   idLoading: undefined,
   isShouldEmit: true,
   cancelLoad: _fnCancelLoad
-}), _defineProperty(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), _defineProperty(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
+}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 
@@ -127,4 +129,4 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserTyp
 });
 
 exports.default = ChartActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ChartActions.js.map
+//# sourceMappingURL=ChartActions.js.map

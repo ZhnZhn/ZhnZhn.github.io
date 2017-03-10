@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _reflux = require('reflux');
 
@@ -77,7 +79,7 @@ var _fnLogLoadError = function _fnLogLoadError(_ref) {
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 };
 
-var ChartStore = _reflux2.default.createStore(_extends({
+var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   listenables: [_ChartActions2.default, _ComponentActions2.default, _BrowserActions2.default, _AnalyticActions2.default, _WatchActions2.default],
   charts: {},
   init: function init() {
@@ -203,4 +205,4 @@ var ChartStore = _reflux2.default.createStore(_extends({
 }, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default));
 
 exports.default = ChartStore;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ChartStore.js.map
+//# sourceMappingURL=ChartStore.js.map

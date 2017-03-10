@@ -4,9 +4,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp;
 
@@ -15,12 +31,6 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /*
  Mostly from
@@ -129,12 +139,12 @@ var _fnLeftPercent = function _fnLeftPercent(percent) {
 };
 
 var InputSlider = (_temp = _class = function (_Component) {
-  _inherits(InputSlider, _Component);
+  (0, _inherits3.default)(InputSlider, _Component);
 
   function InputSlider(props) {
-    _classCallCheck(this, InputSlider);
+    (0, _classCallCheck3.default)(this, InputSlider);
 
-    var _this = _possibleConstructorReturn(this, (InputSlider.__proto__ || Object.getPrototypeOf(InputSlider)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (InputSlider.__proto__ || Object.getPrototypeOf(InputSlider)).call(this));
 
     _this._handleMouseEnter = function () {
       _this.setState({ hovered: true });
@@ -226,7 +236,7 @@ var InputSlider = (_temp = _class = function (_Component) {
     return _this;
   }
 
-  _createClass(InputSlider, [{
+  (0, _createClass3.default)(InputSlider, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -239,10 +249,10 @@ var InputSlider = (_temp = _class = function (_Component) {
           hovered = _state.hovered,
           dragged = _state.dragged,
           value = _state.value,
-          _lineAfterStyle = hovered ? _extends({}, S.LINE_AFTER, S.LINE_HOVERED) : S.LINE_AFTER,
+          _lineAfterStyle = hovered ? (0, _extends3.default)({}, S.LINE_AFTER, S.LINE_HOVERED) : S.LINE_AFTER,
           _circleStyle = dragged ? S.CIRCLE_DRAGGED : null,
           _emberStyle = dragged ? S.EMBER : null,
-          _circleInnerEl = hovered || dragged ? _react2.default.createElement('div', { style: _extends({}, S.CIRCLE_INNER_EL, _emberStyle) }) : null,
+          _circleInnerEl = hovered || dragged ? _react2.default.createElement('div', { style: (0, _extends3.default)({}, S.CIRCLE_INNER_EL, _emberStyle) }) : null,
           _percent = _fnToPercent(value, min, max),
           _widthBeforeStyle = _fnWidthCalc(_percent),
           _widthAfterStyle = _fnWidthCalc(100 - _percent),
@@ -263,17 +273,17 @@ var InputSlider = (_temp = _class = function (_Component) {
             },
             style: S.ROOT_LINE
           },
-          _react2.default.createElement('div', { style: _extends({}, S.LINE_BEFORE, _widthBeforeStyle) }),
-          _react2.default.createElement('div', { style: _extends({}, _lineAfterStyle, _widthAfterStyle) }),
+          _react2.default.createElement('div', { style: (0, _extends3.default)({}, S.LINE_BEFORE, _widthBeforeStyle) }),
+          _react2.default.createElement('div', { style: (0, _extends3.default)({}, _lineAfterStyle, _widthAfterStyle) }),
           _react2.default.createElement(
             'div',
             {
               tabIndex: 0,
-              style: _extends({}, S.ROOT_CIRCLE, _circleStyle, _leftStyle)
+              style: (0, _extends3.default)({}, S.ROOT_CIRCLE, _circleStyle, _leftStyle)
             },
             _react2.default.createElement(
               'div',
-              { style: _extends({}, S.CIRCLE_INNER, _circleStyle) },
+              { style: (0, _extends3.default)({}, S.CIRCLE_INNER, _circleStyle) },
               _circleInnerEl
             )
           ),
@@ -289,17 +299,17 @@ var InputSlider = (_temp = _class = function (_Component) {
       );
     }
   }]);
-
   return InputSlider;
-}(_react.Component), _class.propTypes = {
-  step: _react.PropTypes.number,
-  min: _react.PropTypes.number,
-  max: _react.PropTypes.number,
-  onChange: _react.PropTypes.func
-}, _class.defaultProps = {
+}(_react.Component), _class.defaultProps = {
   min: 0,
   max: 20,
   step: 1
 }, _temp);
+process.env.NODE_ENV !== "production" ? InputSlider.propTypes = {
+  step: _react.PropTypes.number,
+  min: _react.PropTypes.number,
+  max: _react.PropTypes.number,
+  onChange: _react.PropTypes.func
+} : void 0;
 exports.default = InputSlider;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputSlider.js.map
+//# sourceMappingURL=InputSlider.js.map

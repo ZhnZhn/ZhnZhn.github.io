@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import createLoadOptions from '../../flux/creaters/eurostat2'
 
@@ -44,23 +44,42 @@ const isCategoryType = (chartType) => {
 @withValidationLoad
 class DialogEurostat2 extends Component {
 
-  state = {
-    isShowDate : false,
-    dateDefault : DATE_PLACEHOLDER,
-    dateOptions : [],
-    validationMessages: []
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+
+    oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+
+    twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+
+    mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
+    mapDateDf: PropTypes.number,
+
+    msgOnNotSelected: PropTypes.func,
+    onShow: PropTypes.func
   }
 
   constructor(props){
     super();
-    this.one = undefined;
-    this.two = undefined;
-    this.date = undefined;
-    this.chartType = undefined;
+    this.one = null;
+    this.two = null;
+    this.date = null;
+    this.chartType = null;
 
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
+
+    this.state = {
+      isShowDate : false,
+      dateDefault : DATE_PLACEHOLDER,
+      dateOptions : [],
+      validationMessages: []
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -77,14 +96,14 @@ class DialogEurostat2 extends Component {
   }
 
   _updateForDate = () => {
-    this.date = undefined;
+    this.date = null;
     const frequency = (this.two)
              ? (this.props.mapFrequency)
                   ? this.props.mapFrequency
                   : (this.two.mapFrequency)
                        ? this.two.mapFrequency
                        : MAP_FREQUENCY_DF
-             : undefined
+             : null
          , { mapDateDf } = this.props
          , config = (frequency)
              ? DateUtils.createEurostatSelect(frequency, mapDateDf)
@@ -157,8 +176,7 @@ class DialogEurostat2 extends Component {
           } = this.props
         , { isShowDate, dateDefault, dateOptions, validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton
-          key="a"
+       <ActionButton          
           type="TypeC"
           caption="Load"
           onClick={this._handleLoad}
@@ -213,7 +231,5 @@ class DialogEurostat2 extends Component {
     );
   }
 }
-
-DialogEurostat2.displayName = 'DialogEurostat2';
 
 export default DialogEurostat2

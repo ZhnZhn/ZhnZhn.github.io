@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _Msg = require('../../constants/Msg');
 
 var _Msg2 = _interopRequireDefault(_Msg);
@@ -15,8 +19,6 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _fnShowAlertDialog = function _fnShowAlertDialog(alertCaption, alertDescr) {
   var modalDialogType = _Type.ModalDialog.ALERT;
@@ -81,13 +83,13 @@ var WithLoadOptions = {
     if (toStateProp && optionJsonProp) {
       var _setState;
 
-      this.setState((_setState = {}, _defineProperty(_setState, isLoadingProp, false), _defineProperty(_setState, toStateProp, json[optionJsonProp]), _setState));
+      this.setState((_setState = {}, (0, _defineProperty3.default)(_setState, isLoadingProp, false), (0, _defineProperty3.default)(_setState, toStateProp, json[optionJsonProp]), _setState));
     }
   },
   _onLoadOptionsFailed: function _onLoadOptionsFailed(error, isLoadingProp, isLoadingFailedProp) {
     var _setState2;
 
-    this.setState((_setState2 = {}, _defineProperty(_setState2, isLoadingProp, false), _defineProperty(_setState2, isLoadingFailedProp, true), _setState2));
+    this.setState((_setState2 = {}, (0, _defineProperty3.default)(_setState2, isLoadingProp, false), (0, _defineProperty3.default)(_setState2, isLoadingFailedProp, true), _setState2));
     if (error instanceof TypeError) {
       _fnShowAlertDialog(_Msg2.default.Alert.NETWORK_ERROR.caption, _Msg2.default.Alert.NETWORK_ERROR.descr);
     }
@@ -103,7 +105,7 @@ var WithLoadOptions = {
 
       var _uri = optionURI ? optionURI : this.props.optionURI,
           _jsonProp = optionJsonProp ? optionJsonProp : this.props.optionsJsonProp;
-      this.setState((_setState3 = {}, _defineProperty(_setState3, isLoadingProp, true), _defineProperty(_setState3, isLoadingFailedProp, false), _setState3), this._loadOptions({
+      this.setState((_setState3 = {}, (0, _defineProperty3.default)(_setState3, isLoadingProp, true), (0, _defineProperty3.default)(_setState3, isLoadingFailedProp, false), _setState3), this._loadOptions({
         toStateProp: toStateProp, isLoadingProp: isLoadingProp, isLoadingFailedProp: isLoadingFailedProp,
         uri: _uri,
         optionJsonProp: _jsonProp,
