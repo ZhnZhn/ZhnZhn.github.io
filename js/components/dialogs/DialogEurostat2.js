@@ -176,10 +176,10 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
       _this.props.onClose();
     };
 
-    _this.one = null;
-    _this.two = null;
-    _this.date = null;
-    _this.chartType = null;
+    _this.one = undefined;
+    _this.two = undefined;
+    _this.date = undefined;
+    _this.chartType = undefined;
 
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
 
@@ -299,4 +299,4 @@ process.env.NODE_ENV !== "production" ? DialogEurostat2.propTypes = {
   onShow: _react.PropTypes.func
 } : void 0;
 exports.default = DialogEurostat2;
-//# sourceMappingURL=DialogEurostat2.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat2.js.map

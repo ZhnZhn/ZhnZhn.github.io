@@ -37,8 +37,8 @@ class DialogType4 extends Component {
 
   constructor(props){
     super();
-    this.one = null;
-    this.two = null;
+    this.one = undefined;
+    this.two = undefined;
     this.toolbarButtons = this._createType2WithToolbar(props);
     this.state = {
       isShowDate : true,

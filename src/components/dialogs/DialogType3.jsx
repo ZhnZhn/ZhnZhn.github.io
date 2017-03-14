@@ -33,7 +33,7 @@ class DialogType3 extends Component {
   constructor(props){
     super(props);
 
-    this.stock = null;
+    this.stock = undefined;
     this.toolbarButtons = (props.descrUrl)
          ?  [{ caption: 'I', onClick: this._handleClickInfo }]
          : [];

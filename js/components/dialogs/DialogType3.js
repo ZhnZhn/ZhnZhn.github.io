@@ -118,7 +118,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
       _this.props.onClose();
     };
 
-    _this.stock = null;
+    _this.stock = undefined;
     _this.toolbarButtons = props.descrUrl ? [{ caption: 'I', onClick: _this._handleClickInfo }] : [];
     _this.state = {
       validationMessages: []
@@ -219,4 +219,4 @@ process.env.NODE_ENV !== "production" ? DialogType3.propTypes = {
   onClickInfo: _react.PropTypes.func
 } : void 0;
 exports.default = DialogType3;
-//# sourceMappingURL=DialogType3.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType3.js.map

@@ -33,8 +33,8 @@ class DialogEurostat extends Component {
 
   constructor(props){
     super();
-    this.one = null;
-    this.two = null;
+    this.one = undefined;
+    this.two = undefined;
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
@@ -96,7 +96,7 @@ class DialogEurostat extends Component {
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton          
+       <ActionButton
           type="TypeC"
           caption="Load"
           onClick={this._handleLoad}

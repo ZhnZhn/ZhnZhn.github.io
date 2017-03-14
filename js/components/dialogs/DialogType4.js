@@ -128,8 +128,8 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
       _this.props.onClose();
     };
 
-    _this.one = null;
-    _this.two = null;
+    _this.one = undefined;
+    _this.two = undefined;
     _this.toolbarButtons = _this._createType2WithToolbar(props);
     _this.state = {
       isShowDate: true,
@@ -246,4 +246,4 @@ process.env.NODE_ENV !== "production" ? DialogType4.propTypes = {
   onShow: _react.PropTypes.func
 } : void 0;
 exports.default = DialogType4;
-//# sourceMappingURL=DialogType4.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map

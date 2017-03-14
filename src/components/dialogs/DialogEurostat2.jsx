@@ -65,10 +65,10 @@ class DialogEurostat2 extends Component {
 
   constructor(props){
     super();
-    this.one = null;
-    this.two = null;
-    this.date = null;
-    this.chartType = null;
+    this.one = undefined;
+    this.two = undefined;
+    this.date = undefined;
+    this.chartType = undefined;
 
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
@@ -176,7 +176,7 @@ class DialogEurostat2 extends Component {
           } = this.props
         , { isShowDate, dateDefault, dateOptions, validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton          
+       <ActionButton
           type="TypeC"
           caption="Load"
           onClick={this._handleLoad}
