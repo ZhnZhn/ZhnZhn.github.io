@@ -17,6 +17,7 @@ var createLoadOptions = function createLoadOptions() {
       fnValue = props.fnValue,
       fnItemCaption = props.fnItemCaption,
       linkFn = props.linkFn,
+      dataSource = props.dataSource,
       fromDate = options.fromDate,
       toDate = options.toDate,
       stock = options.stock,
@@ -35,9 +36,9 @@ var createLoadOptions = function createLoadOptions() {
     itemCaption: _itemCaption,
     loadId: loadId,
     linkFn: linkFn,
-    seriaColumnNames: seriaColumnNames
+    seriaColumnNames: seriaColumnNames, dataSource: dataSource
   };
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=type3.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type3.js.map

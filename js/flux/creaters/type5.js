@@ -9,6 +9,7 @@ var _is = require('../../utils/is');
 var _crDefault = function _crDefault(props, options) {
   var fnValue = props.fnValue,
       loadId = props.loadId,
+      dataSource = props.dataSource,
       one = options.one,
       two = options.two,
       three = options.three,
@@ -23,7 +24,8 @@ var _crDefault = function _crDefault(props, options) {
     dataColumn: three ? three.value : 1,
     loadId: loadId,
     title: one.caption + ':' + two.caption,
-    subtitle: three.caption
+    subtitle: three.caption,
+    dataSource: dataSource
   };
 };
 
@@ -31,6 +33,7 @@ var _crTreeItem = function _crTreeItem(props, options) {
   var fnValue = props.fnValue,
       dataColumn = props.dataColumn,
       loadId = props.loadId,
+      dataSource = props.dataSource,
       one = options.one,
       two = options.two,
       three = options.three,
@@ -45,7 +48,8 @@ var _crTreeItem = function _crTreeItem(props, options) {
     dataColumn: dataColumn,
     loadId: loadId,
     title: one.caption + ':' + two.caption,
-    subtitle: three.caption
+    subtitle: three.caption,
+    dataSource: dataSource
   };
 };
 
@@ -53,6 +57,7 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
   var fnValue = props.fnValue,
       dataColumn = props.dataColumn,
       loadId = props.loadId,
+      dataSource = props.dataSource,
       one = options.one,
       two = options.two,
       three = options.three,
@@ -67,7 +72,8 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
     dataColumn: dataColumn,
     loadId: loadId,
     title: two.caption + ' : ' + three.caption,
-    subtitle: one.caption
+    subtitle: one.caption,
+    dataSource: dataSource
   };
 };
 
@@ -91,4 +97,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=type5.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type5.js.map

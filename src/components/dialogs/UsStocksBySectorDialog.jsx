@@ -80,7 +80,8 @@ class UsStocksBySectorDialog extends Component {
              loadId : LoadType.WL,
              id : _value,
              columnName : 'Close',
-             seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ]
+             seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ],
+             dataSource : `(Code: ${_dataSource})`
           }
 
       ChartActions.loadStock(chartContainerType, browserType, option);

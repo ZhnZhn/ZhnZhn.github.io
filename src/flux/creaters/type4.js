@@ -1,7 +1,10 @@
 import { isFn } from '../../utils/is'
 
 const createLoadOptions = (props={}, options={}) => {
-  const { fnValue, dataColumn, loadId, isPremium } = props
+  const {
+          fnValue, dataColumn, loadId, dataSource,
+          isPremium
+        } = props
       , { one, two, fromDate, toDate } = options
       , _value = isFn(fnValue)
            ? fnValue(one.value, two.value)
@@ -14,7 +17,8 @@ const createLoadOptions = (props={}, options={}) => {
        loadId : loadId,
        title : one.caption,
        subtitle : two.caption,
-       isPremium : isPremium
+       isPremium : isPremium,
+       dataSource: dataSource
     }
 }
 

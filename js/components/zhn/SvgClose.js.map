@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../../src/components/zhn/SvgClose.jsx"],"names":["STYLE","SVG","padding","SvgClose","style","onClose"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,OAAM;AACJC,aAAS;AADL;AADM,CAAd;;AAMA,IAAMC,WAAW,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,OAAV,QAAUA,OAAV;AAAA,SACd;AAAA;AAAA;AACG,iBAAU,WADb;AAEG,aAAOD,KAFV;AAGG,eAASC;AAHZ;AAKE;AAAA;AAAA,QAAK,SAAQ,WAAb,EAAyB,OAAM,MAA/B,EAAsC,QAAO,MAA7C;AACK,eAAOL,MAAMC,GADlB,EACuB,qBAAoB,MAD3C,EACkD,OAAM,4BADxD;AAEK,qBAAY,GAFjB,EAEqB,QAAO,SAF5B,EAEsC,eAAc;AAFpD;AAIG,8CAAM,GAAE,eAAR,GAJH;AAKG,8CAAM,GAAE,eAAR;AALH;AALF,GADc;AAAA,CAAjB;;kBAgBeE,Q","file":"SvgClose.js","sourcesContent":["import React from 'react';\r\n\r\nconst STYLE = {\r\n  SVG : {\r\n    padding: '3px'\r\n  }\r\n};\r\n\r\nconst SvgClose = ({ style, onClose }) => (\r\n   <div\r\n      className=\"svg-close\"\r\n      style={style}\r\n      onClick={onClose}\r\n   >\r\n     <svg viewBox=\"0 0 12 12\" width=\"100%\" height=\"100%\"\r\n          style={STYLE.SVG} preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\"\r\n          strokeWidth=\"2\" stroke=\"#ED5813\" strokeLinecap=\"round\"\r\n      >\r\n        <path d=\"M 0,0 L 12,12\"></path>\r\n        <path d=\"M 12,0 L 0,12\"></path>\r\n     </svg>\r\n   </div>\r\n)\r\n\r\nexport default SvgClose\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\SvgClose.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\SvgClose.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "COLOR",
+  "SVG",
+  "padding",
+  "SvgClose",
+  "style",
+  "onClose",
+  "propTypes",
+  "object",
+  "func",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZ;AACAC,SAAQ,SAFI;AAGZC,OAAM;AACJC,aAAS;AADL;AAHM,CAAd;;AAQA,IAAMC,WAAW,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,OAAV,QAAUA,OAAV;AAAA,SACd;AAAA;AAAA;AACG,iBAAU,WADb;AAEG,aAAOD,KAFV;AAGG,eAASC;AAHZ;AAKE;AAAA;AAAA,QAAK,SAAQ,WAAb,EAAyB,OAAM,MAA/B,EAAsC,QAAO,MAA7C;AACK,eAAON,MAAME,GADlB,EACuB,qBAAoB,MAD3C,EACkD,OAAM,4BADxD;AAEK,qBAAY,GAFjB;AAGK,gBAAQF,MAAMC,KAHnB;AAIK,uBAAc;AAJnB;AAMG,8CAAM,GAAE,eAAR,GANH;AAOG,8CAAM,GAAE,eAAR;AAPH;AALF,GADc;AAAA,CAAjB;;AAkBA,iDAASM,SAAT,GAAqB;AACnBF,SAAO,iBAAUG,MADE;AAEnBF,WAAS,iBAAUG;AAFA,CAArB;AAIAL,SAASM,YAAT,GAAwB;AACtBJ,WAAS,mBAAM,CAAE;AADK,CAAxB;;kBAKeF,Q"
+}

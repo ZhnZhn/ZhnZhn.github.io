@@ -67,6 +67,12 @@ ChartConfig.theme = {
           verticalAlign: 'bottom',
           y: -5
       },
+      style : {
+        fontSize: '11px',
+        //color: '#0b8fff',
+        //fill: '#0b8fff',
+        textDecoration: 'underline'
+      },
       target : '_blank',
       href : 'http://www.highcharts.com'
     },
@@ -246,7 +252,8 @@ ChartConfig.theme = {
       tickWidth: 3,
       tickLenght: 5,
       gridLineColor: COLOR.X_GRID_LINE,
-      gridLineDashStyle: "ShortDashDotDot",
+      gridLineDashStyle: "Solid",
+      //gridLineDashStyle: "ShortDashDotDot",
       gridLineWidth: 1,
       labels:{
         style: {
@@ -263,7 +270,8 @@ ChartConfig.theme = {
         tickWidth: 3,
         tickLenght: 5,
         gridLineColor: COLOR.Y_GRID_LINE,
-        gridLineDashStyle: "ShortDashDotDot",
+        gridLineDashStyle: "Solid",
+        //gridLineDashStyle: "ShortDashDotDot",
         labels: {
           style: {
             color : COLOR.Y_LABEL,

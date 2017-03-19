@@ -134,7 +134,8 @@ var JodiWorldOilDialog = _react2.default.createClass((0, _extends3.default)({
         _props = this.props,
         fnValue = _props.fnValue,
         dataColumn = _props.dataColumn,
-        loadId = _props.loadId;
+        loadId = _props.loadId,
+        dataSource = _props.dataSource;
 
     return {
       value: fnValue(this.country.value, product.value, flow.value, this.units.value),
@@ -143,7 +144,8 @@ var JodiWorldOilDialog = _react2.default.createClass((0, _extends3.default)({
       dataColumn: dataColumn,
       loadId: loadId,
       title: this.country.caption + ':' + product.caption,
-      subtitle: flow.caption + ':' + this.units.caption
+      subtitle: flow.caption + ':' + this.units.caption,
+      dataSource: dataSource
     };
   },
   _handlerClose: function _handlerClose() {
@@ -238,4 +240,4 @@ var JodiWorldOilDialog = _react2.default.createClass((0, _extends3.default)({
 }));
 
 exports.default = JodiWorldOilDialog;
-//# sourceMappingURL=JodiWorldOilDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\JodiWorldOilDialog.js.map

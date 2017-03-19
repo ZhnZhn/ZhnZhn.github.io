@@ -42,7 +42,8 @@
            "valueFn" : "RPrefixDashOne",
            "valueFnPrefix" : "GOOG/NASDAQ",
            "columnName" : "Close",
-           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+           "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+           "dataSource" : "Google Finance (Code: GOOG)"
          }
       },
      "QD_NYSE" : {
@@ -57,7 +58,8 @@
          "valueFn" : "RPrefixDashOne",
          "valueFnPrefix" : "GOOG/NYSE",
          "columnName" : "Close",
-         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+         "dataSource" : "Google Finance (Code: GOOG)"
        }
      },
      "QD_AMEX" : {
@@ -72,7 +74,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/AMEX",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
         }
      },
      "QD_ARCA" : {
@@ -87,7 +90,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/NYSEARCA",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
         }
      },
      "QD_BRUSSELS" : {
@@ -102,7 +106,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/EBR",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
         }
      },
      "QD_LISBON" : {
@@ -117,7 +122,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/ELI",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
         }
      },
      "QD_TALLIN" : {
@@ -132,7 +138,8 @@
          "valueFn" : "RPrefixDashOne",
          "valueFnPrefix" : "GOOG/TAL",
          "columnName" : "Close",
-         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+         "dataSource" : "Google Finance (Code: GOOG)"
        }
      },
      "QD_RIGA" : {
@@ -147,7 +154,8 @@
          "valueFn" : "RPrefixDashOne",
          "valueFnPrefix" : "GOOG/RSE",
          "columnName" : "Close",
-         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+         "dataSource" : "Google Finance (Code: GOOG)"
        }
      },
      "QD_VILNIUS" : {
@@ -162,7 +170,8 @@
          "valueFn" : "RPrefixDashOne",
          "valueFnPrefix" : "GOOG/VSE",
          "columnName" : "Close",
-         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+         "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+         "dataSource" : "Google Finance (Code: GOOG)"
        }
      },
      "QD_SHENZHEN" : {
@@ -177,7 +186,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/SHE",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
        }
      },
      "QD_SINGAPURE" : {
@@ -192,7 +202,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/SGX",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
        }
      },
      "QD_KOREA" : {
@@ -207,7 +218,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/KRX",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
         }
      },
      "QD_TAILAND" : {
@@ -222,7 +234,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/BKK",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
         }
      },
      "QD_NEWZEALAND" : {
@@ -237,7 +250,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/NZE",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
         }
      },
      "QD_SAO_PAOLO" : {
@@ -252,7 +266,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "GOOG/BVMF",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "Google Finance (Code: GOOG)"
        }
      }
    }

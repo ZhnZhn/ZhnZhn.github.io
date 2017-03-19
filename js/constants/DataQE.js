@@ -21,7 +21,8 @@ var DataQE = {
       oneJsonProp: 'commodities',
       twoCaption: 'Commodity',
       valueFn: 'RTwo',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'Combined collection (Codes: ODA, JOHMATT, SHFE, EIA)'
     },
     dataColumn: 1
   },
@@ -40,7 +41,8 @@ var DataQE = {
       commodityJsonProp: 'items',
       valueFn: 'RPrefixOneTwo',
       valueFnPrefix: 'UCOM',
-      loadId: 'QCT'
+      loadId: 'QCT',
+      dataSource: 'UN Commodity Trade Statistics (Code: UCOM)'
     },
     dataColumn: 1
   },
@@ -62,7 +64,8 @@ var DataQE = {
       threeCaption: 'Flow',
       fnValueType: 'PlusTreeItem',
       valueFn: 'RJodiGas',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'JODI World Database (Code: JODI)'
     },
     dataColumn: 1
   },
@@ -83,7 +86,8 @@ var DataQE = {
       parentJsonProp: 'products',
       childCaption: 'Flow',
       valueFn: 'RJodiOil',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'JODI World Database (Code: JODI)'
     },
     dataColumn: 1
   },
@@ -105,7 +109,8 @@ var DataQE = {
       threeCaption: 'Frequency',
       valueFn: 'REiaCoal',
       fnValueType: 'PlusTreeItem',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'U.S. Energy Information Administration (Code: EIA)'
     }
   },
   QE_ROGERS_INDICES: {
@@ -119,7 +124,8 @@ var DataQE = {
       optionsJsonProp: 'indices',
       nInitFromDate: 12,
       loadId: 'Q',
-      columnName: 'Value'
+      columnName: 'Value',
+      dataSource: 'Rogers International Commodity Indices (Code: RICI)'
     }
   },
   QE_GLOBAL_INDICATOR: {
@@ -140,7 +146,8 @@ var DataQE = {
       threeCaption: 'Metric',
       valueFn: 'RPrefixTwoOne',
       valueFnPrefix: 'UGID',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'UN Global Indicators (Code: UGID)'
     },
     dataColumn: 1
   },
@@ -158,7 +165,8 @@ var DataQE = {
       twoCaption: 'Currency',
       valueFn: 'ROneTwo',
       loadId: 'Q',
-      columnName: 'Value'
+      columnName: 'Value',
+      dataSource: 'Combined collection (Codes: BOE, ECB, FRED)'
     }
   },
   QE_WORLDBANK_PRICE: {
@@ -180,7 +188,8 @@ var DataQE = {
       fnValueType: 'TreeItem',
       valueFn: 'RPrefixOneTwo',
       valueFnPrefix: 'WWDI',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'WB World Development Indicators (Code: WWDI)'
     },
     dataColumn: 1
   },
@@ -204,7 +213,8 @@ var DataQE = {
       fnValueType: 'TreeItem',
       valueFn: 'RPrefixOneTwo',
       valueFnPrefix: 'ODA',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'IMF Cross Country Macro-Economic Statistics (Code: ODA)'
     },
     dataColumn: 1
   },
@@ -227,7 +237,8 @@ var DataQE = {
       fnValueType: 'TreeItem',
       valueFn: 'RPrefixOneTwo',
       valueFnPrefix: 'AMECO',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'EU Commission Annual Macro-Economic (Code: AMECO)'
     },
     dataColumn: 1
   },
@@ -247,7 +258,8 @@ var DataQE = {
         return value.split('/')[1];
       },
       loadId: 'Q',
-      columnName: 'Value'
+      columnName: 'Value',
+      dataSource: 'Rate Inflation (Code: RATEINF)'
     }
   },
   QE_BIG_MAC: {
@@ -263,7 +275,8 @@ var DataQE = {
       countryJsonProp: 'countries',
       valueFn: 'RPrefixDashOne',
       valueFnPrefix: 'ECONOMIST/BIGMAC',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'The Economist - Big Mac Index (Code: ECONOMIST)'
     },
     dataColumn: 1
   },
@@ -282,7 +295,8 @@ var DataQE = {
       valueFn: "RPrefixOne",
       valueFnPrefix: "GDT",
       loadId: 'Q',
-      columnName: 'Value'
+      columnName: 'Value',
+      dataSource: 'Global Dairy Trade (Code: GDT)'
     }
   },
   QE_BLSI: {
@@ -300,7 +314,8 @@ var DataQE = {
       valueFn: "RPrefixOne",
       valueFnPrefix: "BLSI",
       loadId: 'Q',
-      columnName: 'Value'
+      columnName: 'Value',
+      dataSource: 'U.S. BLS Inflation & Prices (Code: BLSI)'
     }
   },
 
@@ -318,7 +333,8 @@ var DataQE = {
       linkFn: "EURONEXT",
       loadId: 'Q',
       columnName: 'Last',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Last', 'Volume']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Last', 'Volume'],
+      dataSource: 'Euronext Stock Price (Code: EURONEXT)'
     }
   },
   QE_WIKI_STOCK: {
@@ -335,7 +351,8 @@ var DataQE = {
       linkFn: "NASDAQ",
       loadId: 'Q',
       columnName: 'Close',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adj. Close']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adj. Close'],
+      dataSource: 'Wiki EOD Stock Prices (Code: WIKI)'
     }
   },
   QE_TOKIO_STOCK: {
@@ -351,7 +368,8 @@ var DataQE = {
       valueFnPrefix: "TSE",
       loadId: 'Q',
       columnName: 'Close',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Volume']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume'],
+      dataSource: 'Tokyo Stock Exchange (Code: TSE)'
     }
   },
   QE_STOCK_INDEXES: {
@@ -365,7 +383,8 @@ var DataQE = {
       optionsJsonProp: 'indexes',
       loadId: 'Q',
       columnName: 'Close',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Volume']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume'],
+      dataSource: 'YFinance (Code: YAHOO)'
     }
   },
   QE_UNICORN_RESEARCH: {
@@ -381,7 +400,8 @@ var DataQE = {
       oneJsonProp: 'exchanges',
       twoCaption: 'Metric',
       valueFn: 'ROneDashTwo',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'Unicorn Research Corporation (Code: URC)'
     },
     dataColumn: 1
   },
@@ -399,7 +419,8 @@ var DataQE = {
       valueFnPrefix: 'CFFEX',
       loadId: 'Q',
       columnName: 'Settle',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover'],
+      dataSource: 'Chine Financial Futures Exchange (Code: CFFEX)'
     }
   },
   QE_DCE_FUTURE: {
@@ -415,7 +436,8 @@ var DataQE = {
       valueFnPrefix: 'DCE',
       loadId: 'Q',
       columnName: 'Settle',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover'],
+      dataSource: 'Dalian Commodities Exchange (Code: DCE)'
     }
   },
   QE_ZCE_FUTURE: {
@@ -431,7 +453,8 @@ var DataQE = {
       valueFnPrefix: 'ZCE',
       loadId: 'Q',
       columnName: 'Settle',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'Open Interest', 'Turnover'],
+      dataSource: 'Zhengzhou Commodities Exchange (Code: ZCE)'
     }
   },
   QE_SHANGHAI_FUTURE: {
@@ -447,7 +470,8 @@ var DataQE = {
       valueFnPrefix: 'SHFE',
       loadId: 'Q',
       columnName: 'Settle',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'O.I.']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Close', 'Pre Settle', 'Volume', 'O.I.'],
+      dataSource: 'Shanghai Futures Exchange (Code: SHFE)'
     }
   },
   QE_LIFFE_FUTURE: {
@@ -463,7 +487,8 @@ var DataQE = {
       valueFnPrefix: 'LIFFE',
       loadId: 'Q',
       columnName: 'Settle',
-      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Prev. Day Open Interest']
+      seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Prev. Day Open Interest'],
+      dataSource: 'LIFFE Futures Data (Code: LIFFE)'
     }
   },
   QE_ICE_FUTURE: {
@@ -481,7 +506,8 @@ var DataQE = {
       columnName: 'Settle',
       seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Prev. Day Open Interest'],
       isContinious: true,
-      nInitFromDate: 2
+      nInitFromDate: 2,
+      dataSource: 'Intercontinental Exchange Futures (Code: ICE)'
     }
   },
   QE_WIKI_FUTURE: {
@@ -498,7 +524,8 @@ var DataQE = {
       columnName: 'Settle',
       seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Prev. Day Open Interest'],
       isContinious: true,
-      nInitFromDate: 2
+      nInitFromDate: 2,
+      dataSource: 'Wiki Continuous Futures (Code: CHRIS)'
     }
   },
 
@@ -520,7 +547,8 @@ var DataQE = {
       threeCaption: 'Area Code',
       fnValueType: 'PlusTreeItem',
       valueFn: 'RZill',
-      loadId: 'Q'
+      loadId: 'Q',
+      dataSource: 'Zillow Real Estate Research (Code: ZILL)'
     },
     dataColumn: 1
   },
@@ -539,11 +567,12 @@ var DataQE = {
       valueFn: "RPrefixOne",
       valueFnPrefix: "FMAC",
       loadId: 'Q',
-      columnName: 'Value'
+      columnName: 'Value',
+      dataSource: 'Freddie Mac (Code: FMAC)'
     }
   }
 
 };
 
 exports.default = DataQE;
-//# sourceMappingURL=DataQE.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\DataQE.js.map

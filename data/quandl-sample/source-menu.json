@@ -32,7 +32,8 @@
         "valueFnPrefix" : "SF1",
         "loadId" : "Q",
         "dataColumn" : 1,
-        "isPremium" : true
+        "isPremium" : true,
+        "dataSource" : "Sharadar: US Core Fundamentals (Code: SF1)"
       }
     },
     "QPS_CLSM" : {
@@ -47,7 +48,8 @@
         "loadId" : "Q",
         "columnName" : "Volume",
         "seriaColumnNames" : [ "Trades"],
-        "isPremium" : true
+        "isPremium" : true,
+        "dataSource" : "CLS FX Volume (Monthly) (Code: CLSM)"
       }
 
     }

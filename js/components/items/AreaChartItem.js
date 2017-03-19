@@ -43,7 +43,7 @@ var styles = {
     lineHeight: 1.5,
     marginBottom: '10px',
     marginRight: '25px',
-    marginLeft: '8px',
+    //marginLeft: '8px',
     position: 'relative'
   },
   tabDiv: {
@@ -51,6 +51,16 @@ var styles = {
     height: '30px',
     backgroundColor: 'transparent',
     zIndex: 2
+  },
+  showHide: {
+    marginLeft: '8px'
+  },
+  dataSource: {
+    position: 'absolute',
+    left: '5px',
+    bottom: '0px',
+    color: '#909090',
+    fontSize: '11px'
   }
 };
 
@@ -60,6 +70,19 @@ var AreaChartItem = _react2.default.createClass({
     this.is2H = false;
     this._fnOnCheck = this._handlerCheckBox.bind(this, true);
     this._fnOnUnCheck = this._handlerCheckBox.bind(this, false);
+
+    var _props$config = this.props.config,
+        config = _props$config === undefined ? {} : _props$config,
+        zhConfig = config.zhConfig,
+        _zhConfig$dataSource = zhConfig.dataSource,
+        dataSource = _zhConfig$dataSource === undefined ? '' : _zhConfig$dataSource;
+
+    this._dataSourceEl = _react2.default.createElement(
+      'div',
+      { style: styles.dataSource },
+      dataSource
+    );
+
     return {
       isOpen: true,
       isShowChart: true,
@@ -349,6 +372,16 @@ var AreaChartItem = _react2.default.createClass({
         isShowIndicator = _state4.isShowIndicator,
         mfiConfigs = _state4.mfiConfigs;
 
+    //console.log(this.props);
+
+    /*
+    const absComp = (
+                      <div style={ {position: 'absolute', left: '5px', bottom: '-5px', color: '#909090', fontSize: '9px'} }>
+                        Quandl
+                      </div>
+                    );
+    */
+
     return _react2.default.createElement(
       'div',
       { style: styles.rootDiv },
@@ -366,12 +399,13 @@ var AreaChartItem = _react2.default.createClass({
       }),
       _react2.default.createElement(
         _ShowHide2.default,
-        { isShow: isOpen },
+        { isShow: isOpen, style: styles.showHide },
         isShowChart && this._createChartToolBar(config),
         _react2.default.createElement(_HighchartWrapper2.default, {
           ref: 'chart',
           isShow: isShowChart,
-          config: config
+          config: config,
+          absComp: this._dataSourceEl
         }),
         _react2.default.createElement(_PanelIndicator2.default, {
           isShow: isShowIndicator,
@@ -410,4 +444,4 @@ var AreaChartItem = _react2.default.createClass({
 });
 
 exports.default = AreaChartItem;
-//# sourceMappingURL=AreaChartItem.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\AreaChartItem.js.map

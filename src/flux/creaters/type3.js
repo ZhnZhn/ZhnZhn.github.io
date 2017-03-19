@@ -5,7 +5,7 @@ const createLoadOptions = (props={}, options={}) => {
   const {
           columnName, dataColumn, seriaColumnNames, loadId,
           fnValue, fnItemCaption,
-          linkFn
+          linkFn, dataSource
         } = props
       , { fromDate, toDate, stock } = options
       , _value = isFn(fnValue)
@@ -24,7 +24,7 @@ const createLoadOptions = (props={}, options={}) => {
     itemCaption : _itemCaption,
     loadId : loadId,
     linkFn : linkFn,
-    seriaColumnNames
+    seriaColumnNames, dataSource
   }
 }
 

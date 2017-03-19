@@ -275,6 +275,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           _datesFragment$getVal = _this3.datesFragment.getValues(),
           fromDate = _datesFragment$getVal.fromDate,
           toDate = _datesFragment$getVal.toDate,
+          _source = _this3._getItemSource(_this3.props),
           option = {
         title: text,
         //subtitle : subtitle,
@@ -287,7 +288,8 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
         id: id,
         linkFn: 'NASDAQ',
         columnName: 'Close',
-        seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close']
+        seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close'],
+        dataSource: '(Code: ' + _source + ')'
       };
 
       _ChartActions2.default.loadStock(chartContainerType, browserType, option);
@@ -331,4 +333,4 @@ process.env.NODE_ENV !== "production" ? StocksBySectorDialog.propTypes = {
 StocksBySectorDialog.displayName = 'StocksBySectorDialog';
 
 exports.default = StocksBySectorDialog;
-//# sourceMappingURL=StocksBySectorDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\StocksBySectorDialog.js.map

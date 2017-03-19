@@ -4,6 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var PALETTE = {
+  HIGH: '#4CAF50',
+  LOW: '#F44336'
+};
+
 var COLOR = {
   CHART_PRINT: 'white',
   PLOT_PRINT: 'white',
@@ -39,10 +44,14 @@ var COLOR = {
 
   TOOLTIP: 'rgba(0,0,0, 0.5)',
 
-  HIGH: 'green',
-  LOW: '#ed5813',
+  //HIGH : '#4caf50',
+  HIGH: PALETTE.HIGH,
+  //LOW  : '#ed5813',
+  //LOW : '#f44336',
+  LOW: PALETTE.LOW,
 
-  EX_DIVIDEND: 'green',
+  //EX_DIVIDEND : '#4caf50',
+  EX_DIVIDEND: PALETTE.HIGH,
   SPLIT_RATIO: '#f7a35c',
 
   MONO_BASE1: '#7cb5ec',
@@ -65,8 +74,11 @@ var COLOR = {
   MARKER_HOVER_LINE: 'yellow',
 
   S_OPEN: '#90ed7d',
-  S_HIGH: 'green',
-  S_LOW: '#ed5813',
+  //S_HIGH : '#4caf50',
+  S_HIGH: PALETTE.HIGH,
+  //S_LOW  : '#ed5813',
+  //S_LOW : '#f44336',
+  S_LOW: PALETTE.LOW,
   S_VOLUME: '#f7a35c',
   S_ADJ_CLOSE: '#f15c80',
   S_OPEN_INTEREST: '#8085e9',
@@ -74,9 +86,8 @@ var COLOR = {
   S_PRE_SETTLE: '#e77f32',
   S_CLOSE: 'black',
   S_TRADES: 'black'
-  //S_CLOSE : '#8d3960'
 
 };
 
 exports.default = COLOR;
-//# sourceMappingURL=Color.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Color.js.map

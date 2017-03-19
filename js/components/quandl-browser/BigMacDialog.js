@@ -111,7 +111,8 @@ var BigMacDialog = _react2.default.createClass((0, _extends3.default)({
         _subtitle = this.metric ? this.metric.caption : this.state.optionMetrics[0].caption,
         _props = this.props,
         loadId = _props.loadId,
-        fnValue = _props.fnValue;
+        fnValue = _props.fnValue,
+        dataSource = _props.dataSource;
 
     return {
       value: fnValue(this.country.value),
@@ -121,7 +122,8 @@ var BigMacDialog = _react2.default.createClass((0, _extends3.default)({
       itemCaption: this.country.caption,
       loadId: loadId,
       title: this.country.caption,
-      subtitle: _subtitle
+      subtitle: _subtitle,
+      dataSource: dataSource
     };
   },
   _handlerClose: function _handlerClose() {
@@ -198,4 +200,4 @@ var BigMacDialog = _react2.default.createClass((0, _extends3.default)({
 }));
 
 exports.default = BigMacDialog;
-//# sourceMappingURL=BigMacDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\BigMacDialog.js.map

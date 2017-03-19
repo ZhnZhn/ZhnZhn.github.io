@@ -285,6 +285,7 @@ var UNCommodityTradeDialog = _react2.default.createClass((0, _extends3.default)(
         _props2 = this.props,
         loadId = _props2.loadId,
         fnValue = _props2.fnValue,
+        dataSource = _props2.dataSource,
         _chartType = this.chartType ? this.chartType.value : _Type.ChartType.AREA,
         _title = this.tradeFilter ? this.country.caption + ':' + this.tradeFilter.caption : '' + this.country.caption,
         _sliceItems = !(!this.chartType || this.chartType.value === _Type.ChartType.AREA) ? this._createSpliceItems() : undefined;
@@ -298,7 +299,8 @@ var UNCommodityTradeDialog = _react2.default.createClass((0, _extends3.default)(
       sliceItems: _sliceItems,
       title: _title,
       subtitle: this.chapter.caption,
-      loadId: loadId
+      loadId: loadId,
+      dataSource: dataSource
     };
   },
   _createSpliceItems: function _createSpliceItems() {
@@ -432,4 +434,4 @@ var UNCommodityTradeDialog = _react2.default.createClass((0, _extends3.default)(
 }));
 
 exports.default = UNCommodityTradeDialog;
-//# sourceMappingURL=UNCommodityTradeDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\UNCommodityTradeDialog.js.map

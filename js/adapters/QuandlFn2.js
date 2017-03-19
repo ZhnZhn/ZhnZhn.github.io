@@ -70,6 +70,7 @@ var QuandlFn2 = {
     };
   },
   createZhConfig: function createZhConfig(option) {
+    var _dataSource = option.dataSource ? 'Quandl: ' + option.dataSource : 'Quandl';
     return {
       item: option.stock,
       title: option.title,
@@ -82,7 +83,8 @@ var QuandlFn2 = {
       fromDate: option.fromDate,
       seriaColumnNames: option.seriaColumnNames,
       linkFn: option.linkFn,
-      limitRemaining: option.limitRemaining
+      limitRemaining: option.limitRemaining,
+      dataSource: _dataSource
     };
   },
   createPercent: function createPercent(_ref) {
@@ -199,4 +201,4 @@ var QuandlFn2 = {
 };
 
 exports.default = QuandlFn2;
-//# sourceMappingURL=QuandlFn2.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlFn2.js.map

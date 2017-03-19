@@ -110,7 +110,8 @@ const EuroStatFn = {
       key : key,
       itemCaption : itemCaption,
       isWithoutIndicator : true,
-      isWithoutAdd : true
+      isWithoutAdd : true,
+      dataSource: 'EuroStat'
     }
   },
 

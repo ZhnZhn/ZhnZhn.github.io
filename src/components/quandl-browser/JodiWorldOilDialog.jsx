@@ -84,7 +84,7 @@ const JodiWorldOilDialog = React.createClass({
    _createLoadOption(){
       const { parent:product, child:flow } = this.productFlow.getValues()
           , { fromDate, toDate } = this.datesFragment.getValues()
-          , { fnValue, dataColumn, loadId } = this.props;
+          , { fnValue, dataColumn, loadId, dataSource } = this.props;
       return {
         value : fnValue(this.country.value, product.value, flow.value, this.units.value),
         fromDate: fromDate,
@@ -92,7 +92,8 @@ const JodiWorldOilDialog = React.createClass({
         dataColumn : dataColumn,
         loadId : loadId,
         title : `${this.country.caption}:${product.caption}`,
-        subtitle : `${flow.caption}:${this.units.caption}`
+        subtitle : `${flow.caption}:${this.units.caption}`,
+        dataSource : dataSource
       }
    },
    _handlerClose(){

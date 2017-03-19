@@ -247,9 +247,9 @@ const UNCommodityTradeDialog = React.createClass({
      return msg;
   },
   _createLoadDataOption(){
-    const {fromDate, toDate} = this.datesFragment.getValues()
+    const { fromDate, toDate } = this.datesFragment.getValues()
         , _dataColumn = (this.subheading) ? this.subheading.value : this.props.dataColumn
-        , {loadId, fnValue} = this.props
+        , { loadId, fnValue, dataSource } = this.props
         , _chartType = (this.chartType) ? this.chartType.value : ChartType.AREA
         , _title = (this.tradeFilter) ?
                    `${this.country.caption}:${this.tradeFilter.caption}` :
@@ -266,7 +266,8 @@ const UNCommodityTradeDialog = React.createClass({
        sliceItems : _sliceItems,
        title : _title,
        subtitle: this.chapter.caption,
-       loadId : loadId
+       loadId : loadId,
+       dataSource : dataSource
     }
   },
   _createSpliceItems(){

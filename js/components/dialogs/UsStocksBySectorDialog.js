@@ -204,7 +204,8 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
         loadId: _Type.LoadType.WL,
         id: _value,
         columnName: 'Close',
-        seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close']
+        seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close'],
+        dataSource: '(Code: ' + _dataSource + ')'
       };
 
       _ChartActions2.default.loadStock(chartContainerType, browserType, option);
@@ -247,4 +248,4 @@ UsStocksBySectorDialog.defaultProps = {
 UsStocksBySectorDialog.displaName = 'UsStocksBySectorDialog';
 
 exports.default = UsStocksBySectorDialog;
-//# sourceMappingURL=UsStocksBySectorDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map

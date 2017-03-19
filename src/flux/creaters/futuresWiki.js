@@ -4,7 +4,7 @@ import { isFn } from '../../utils/is';
 const createLoadOptions = (props={}, options={}) => {
   const {
          fnValue, columnName, dataColumn,
-         seriaColumnNames, loadId
+         seriaColumnNames, loadId, dataSource
         } = props
       , { exchange, item, type, fromDate } = options
       , _value = isFn(fnValue)
@@ -21,7 +21,8 @@ const createLoadOptions = (props={}, options={}) => {
      seriaColumnNames: seriaColumnNames,
      dataColumn : dataColumn,
      loadId : loadId,
-     fromDate : fromDate
+     fromDate : fromDate,
+     dataSource : dataSource
   };
 };
 

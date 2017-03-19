@@ -14,7 +14,7 @@ const styles = {
     lineHeight : 1.5,
     marginBottom: '10px',
     marginRight: '25px',
-    marginLeft: '8px',
+    //marginLeft: '8px',
     position : 'relative'
   },
   tabDiv : {
@@ -22,6 +22,16 @@ const styles = {
     height: '30px',
     backgroundColor: 'transparent',
     zIndex: 2
+  },
+  showHide : {
+    marginLeft: '8px'
+  },
+  dataSource: {
+    position: 'absolute',
+    left: '5px',
+    bottom: '0px',
+    color: '#909090',
+    fontSize: '11px'
   }
 }
 
@@ -30,6 +40,16 @@ const AreaChartItem = React.createClass({
     this.is2H = false;
     this._fnOnCheck = this._handlerCheckBox.bind(this, true);
     this._fnOnUnCheck = this._handlerCheckBox.bind(this, false);
+
+    const { config={} } = this.props
+        , { zhConfig } = config
+        , { dataSource='' } = zhConfig
+    this._dataSourceEl = (
+                           <div style={styles.dataSource}>
+                             {dataSource}
+                           </div>
+                         )
+
     return {
       isOpen: true,
       isShowChart : true,
@@ -326,6 +346,16 @@ const AreaChartItem = React.createClass({
             mfiConfigs
         } = this.state;
 
+    //console.log(this.props);
+
+    /*
+    const absComp = (
+                      <div style={ {position: 'absolute', left: '5px', bottom: '-5px', color: '#909090', fontSize: '9px'} }>
+                        Quandl
+                      </div>
+                    );
+    */
+
     return (
       <div style={styles.rootDiv}>
          <Header
@@ -340,12 +370,13 @@ const AreaChartItem = React.createClass({
             valueMoving={config.valueMoving}
             onClose={onCloseItem}
          />
-        <ShowHide isShow={isOpen}>
+        <ShowHide isShow={isOpen} style={styles.showHide}>
            {isShowChart && this._createChartToolBar(config)}
            <HighchartWrapper
               ref="chart"
               isShow={isShowChart}
               config={config}
+              absComp={this._dataSourceEl}
            />
            <PanelIndicator
              isShow={isShowIndicator}

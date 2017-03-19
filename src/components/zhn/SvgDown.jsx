@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const S = {
+  COLOR : '#f44336',
   ROOT : {
     display : 'inline-block',
     width: '14px',
@@ -22,9 +23,11 @@ const SvgDown = () => (
           <path
               d="M 0,0 L 11,0 6,12, 0,0"
               strokeWidth="1"
-              stroke="#ED5813"
+              //stroke="#ED5813"
               strokeLinejoin="miter"
-              fill="#ED5813"
+              stroke={S.COLOR}
+              fill={S.COLOR}
+              //fill="#ED5813"
           >
           </path>
      </svg>

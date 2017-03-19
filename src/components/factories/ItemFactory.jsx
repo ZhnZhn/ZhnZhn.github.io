@@ -53,7 +53,7 @@ const ItemFactory = {
         , _fnCreate = (zhCompType && _rCreateItem[zhCompType])
                ? _rCreateItem[zhCompType]
                : _rCreateItem.DEFAULT;
-               
+
     return _fnCreate(config, index, option, props);
   }
 };

@@ -71,7 +71,7 @@ const BigMacDialog = React.createClass({
         , _subtitle = (this.metric)
               ? this.metric.caption
               : this.state.optionMetrics[0].caption
-        , {loadId, fnValue} = this.props;
+        , { loadId, fnValue, dataSource } = this.props;
     return {
        value : fnValue(this.country.value),
        fromDate: fromDate,
@@ -80,7 +80,8 @@ const BigMacDialog = React.createClass({
        itemCaption : this.country.caption,
        loadId : loadId,
        title : this.country.caption,
-       subtitle : _subtitle
+       subtitle : _subtitle,
+       dataSource : dataSource
     }
   },
   _handlerClose(){

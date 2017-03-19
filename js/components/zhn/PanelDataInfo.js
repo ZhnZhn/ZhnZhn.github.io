@@ -195,4 +195,4 @@ var PanelDataInfo = function (_Component) {
 }(_react.Component);
 
 exports.default = PanelDataInfo;
-//# sourceMappingURL=PanelDataInfo.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\PanelDataInfo.js.map

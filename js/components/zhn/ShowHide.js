@@ -39,5 +39,12 @@ var ShowHide = function ShowHide(props) {
   );
 };
 
+process.env.NODE_ENV !== "production" ? ShowHide.propTypes = {
+  isShow: _react.PropTypes.bool,
+  className: _react.PropTypes.string,
+  style: _react.PropTypes.object,
+  children: _react.PropTypes.oneOfType[(_react.PropTypes.arrayOf(_react.PropTypes.node), _react.PropTypes.node)]
+} : void 0;
+
 exports.default = ShowHide;
-//# sourceMappingURL=ShowHide.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ShowHide.js.map

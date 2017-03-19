@@ -68,7 +68,7 @@ class DialogEurostat2 extends Component {
     this.one = undefined;
     this.two = undefined;
     this.date = undefined;
-    this.chartType = undefined;
+    this.chartType = undefined;    
 
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }

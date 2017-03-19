@@ -10,26 +10,24 @@ import SpinnerLoading from '../zhn/SpinnerLoading';
 
 const styles = {
   rootDiv : {
+    position : 'relative',
     lineHeight : 1.5,
     marginBottom: '10px',
     marginRight: '25px',
-    marginLeft: '8px',
-    position : 'relative'
   },
   headerDiv: {
     backgroundColor: '#232F3B',
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px',
     paddingTop: '4px',
-    paddingLeft: '10px',
-    lineHeight: 1.5,
-    height: '32px',
-    //width: '600px'
-    width : '100%'
+    //paddingLeft: '10px',
+    lineHeight: 1.8,        
+    width : '100%',
+    borderTopRightRadius: '2px',
+    borderBottomRightRadius: '2px'
   },
   checkBoxStyle : {
     float: 'left',
-    marginRight: '10px'
+    marginRight: '10px',
+    marginLeft: '10px'
   },
   captionSpanOpen : {
     display : 'inline-block',

@@ -25,17 +25,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var STYLE = {
   ROOT: {
     backgroundColor: '#232F3B',
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px',
     paddingTop: '4px',
-    paddingLeft: '10px',
-    lineHeight: 1.5,
-    height: '28px',
-    width: '100%'
+    //paddingLeft: '10px',
+    lineHeight: 1.8,
+    //height: '28px',
+    width: '100%',
+    borderTopRightRadius: '2px',
+    borderBottomRightRadius: '2px'
   },
   CHECK_BOX: {
     float: 'left',
-    marginRight: '10px'
+    marginRight: '10px',
+    marginLeft: '10px'
   },
   CAPTION_OPEN: {
     display: 'inline-block',
@@ -122,4 +123,4 @@ process.env.NODE_ENV !== "production" ? Header.propTypes = {
 } : void 0;
 
 exports.default = Header;
-//# sourceMappingURL=Header.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\Header.js.map

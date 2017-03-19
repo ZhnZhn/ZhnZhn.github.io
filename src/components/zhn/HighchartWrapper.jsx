@@ -45,7 +45,7 @@ class HighchartWrapper extends Component {
   }
 
   render() {
-    const { isShow } = this.props
+    const { isShow, absComp } = this.props
         , _rootDivStyle = isShow
              ? STYLE.ROOT_DIV_SHOW
              : STYLE.ROOT_DIV_HIDE;
@@ -53,6 +53,7 @@ class HighchartWrapper extends Component {
        <div style={_rootDivStyle}>
           <div ref={ c => this.chartEl = c }>
           </div>
+          {absComp}
         </div>
      );
   }

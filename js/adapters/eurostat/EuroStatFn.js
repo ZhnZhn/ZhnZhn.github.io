@@ -145,7 +145,8 @@ var EuroStatFn = (0, _extends3.default)({
       key: key,
       itemCaption: itemCaption,
       isWithoutIndicator: true,
-      isWithoutAdd: true
+      isWithoutAdd: true,
+      dataSource: 'EuroStat'
     };
   },
   createDatasetInfo: function createDatasetInfo(json, option) {
@@ -181,4 +182,4 @@ var EuroStatFn = (0, _extends3.default)({
 }, _ChoroplethMapSlice2.default);
 
 exports.default = EuroStatFn;
-//# sourceMappingURL=EuroStatFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatFn.js.map

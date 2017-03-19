@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/flux/creaters/type4.js"],"names":["createLoadOptions","props","options","fnValue","dataColumn","loadId","isPremium","one","two","fromDate","toDate","_value","value","undefined","title","caption","subtitle"],"mappings":";;;;;;AAAA;;AAEA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,SAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,SAAfC,OAAe,uEAAP,EAAO;;AAAA,SAC1CC,OAD0C,GACCF,KADD,CAC1CE,OAD0C;AAAA,SACjCC,UADiC,GACCH,KADD,CACjCG,UADiC;AAAA,SACrBC,MADqB,GACCJ,KADD,CACrBI,MADqB;AAAA,SACbC,SADa,GACCL,KADD,CACbK,SADa;AAAA,SAE1CC,GAF0C,GAEXL,OAFW,CAE1CK,GAF0C;AAAA,SAErCC,GAFqC,GAEXN,OAFW,CAErCM,GAFqC;AAAA,SAEhCC,QAFgC,GAEXP,OAFW,CAEhCO,QAFgC;AAAA,SAEtBC,MAFsB,GAEXR,OAFW,CAEtBQ,MAFsB;AAAA,SAG5CC,MAH4C,GAGnC,cAAKR,OAAL,IACJA,QAAQI,IAAIK,KAAZ,EAAmBJ,IAAII,KAAvB,CADI,GAEJC,SALuC;;AAMlD,YAAO;AACFD,iBAAQD,MADN;AAEFF,oBAAUA,QAFR;AAGFC,kBAAQA,MAHN;AAIFN,sBAAaA,UAJX;AAKFC,kBAASA,MALP;AAMFS,iBAAQP,IAAIQ,OANV;AAOFC,oBAAWR,IAAIO,OAPb;AAQFT,qBAAYA;AARV,MAAP;AAUD,CAhBD;;kBAkBeN,iB","file":"type4.js","sourcesContent":["import { isFn } from '../../utils/is'\r\n\r\nconst createLoadOptions = (props={}, options={}) => {\r\n  const { fnValue, dataColumn, loadId, isPremium } = props\r\n      , { one, two, fromDate, toDate } = options\r\n      , _value = isFn(fnValue)\r\n           ? fnValue(one.value, two.value)\r\n           : undefined\r\n  return {\r\n       value : _value,\r\n       fromDate: fromDate,\r\n       toDate: toDate,\r\n       dataColumn : dataColumn,\r\n       loadId : loadId,\r\n       title : one.caption,\r\n       subtitle : two.caption,\r\n       isPremium : isPremium\r\n    }\r\n}\r\n\r\nexport default createLoadOptions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\creaters\\type4.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\creaters\\type4.js",
+ "sourceRoot": "",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "fnValue",
+  "dataColumn",
+  "loadId",
+  "dataSource",
+  "isPremium",
+  "one",
+  "two",
+  "fromDate",
+  "toDate",
+  "_value",
+  "value",
+  "undefined",
+  "title",
+  "caption",
+  "subtitle"
+ ],
+ "mappings": ";;;;;;AAAA;;AAEA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;;AAAA,MAE1CC,OAF0C,GAIxCF,KAJwC,CAE1CE,OAF0C;AAAA,MAEjCC,UAFiC,GAIxCH,KAJwC,CAEjCG,UAFiC;AAAA,MAErBC,MAFqB,GAIxCJ,KAJwC,CAErBI,MAFqB;AAAA,MAEbC,UAFa,GAIxCL,KAJwC,CAEbK,UAFa;AAAA,MAG1CC,SAH0C,GAIxCN,KAJwC,CAG1CM,SAH0C;AAAA,MAK1CC,GAL0C,GAKXN,OALW,CAK1CM,GAL0C;AAAA,MAKrCC,GALqC,GAKXP,OALW,CAKrCO,GALqC;AAAA,MAKhCC,QALgC,GAKXR,OALW,CAKhCQ,QALgC;AAAA,MAKtBC,MALsB,GAKXT,OALW,CAKtBS,MALsB;AAAA,MAM5CC,MAN4C,GAMnC,cAAKT,OAAL,IACJA,QAAQK,IAAIK,KAAZ,EAAmBJ,IAAII,KAAvB,CADI,GAEJC,SARuC;;AASlD,SAAO;AACFD,WAAQD,MADN;AAEFF,cAAUA,QAFR;AAGFC,YAAQA,MAHN;AAIFP,gBAAaA,UAJX;AAKFC,YAASA,MALP;AAMFU,WAAQP,IAAIQ,OANV;AAOFC,cAAWR,IAAIO,OAPb;AAQFT,eAAYA,SARV;AASFD,gBAAYA;AATV,GAAP;AAWD,CApBD;;kBAsBeN,iB"
+}

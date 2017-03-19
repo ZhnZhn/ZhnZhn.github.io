@@ -1,7 +1,7 @@
 import { isFn } from '../../utils/is'
 
 const _crDefault = (props, options) => {
-  const { fnValue, loadId } = props
+  const { fnValue, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
       , _value = isFn(fnValue)
            ? fnValue(one.value, two.value)
@@ -13,12 +13,13 @@ const _crDefault = (props, options) => {
     dataColumn : (three) ? three.value : 1,
     loadId : loadId,
     title : `${one.caption}:${two.caption}`,
-    subtitle : three.caption
+    subtitle : three.caption,
+    dataSource : dataSource
   }
 }
 
 const _crTreeItem = (props, options) => {
-  const { fnValue, dataColumn, loadId } = props
+  const { fnValue, dataColumn, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
       , _value = isFn(fnValue)
            ? fnValue(one.value, three.value)
@@ -30,12 +31,13 @@ const _crTreeItem = (props, options) => {
     dataColumn : dataColumn,
     loadId : loadId,
     title : `${one.caption}:${two.caption}`,
-    subtitle : three.caption
+    subtitle : three.caption,
+    dataSource : dataSource
   };
 };
 
 const _crPlusTreeItem = (props, options) => {
-  const { fnValue, dataColumn, loadId } = props
+  const { fnValue, dataColumn, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
       , _value = isFn(fnValue)
            ? fnValue(one.value, two.value, three.value)
@@ -47,7 +49,8 @@ const _crPlusTreeItem = (props, options) => {
     dataColumn : dataColumn,
     loadId : loadId,
     title : `${two.caption} : ${three.caption}`,
-    subtitle : one.caption
+    subtitle : one.caption,
+    dataSource : dataSource
   }
 };
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const S = {
+  COLOR : '#4caf50',
   ROOT : {
     display : 'inline-block',
     width: '14px',
@@ -14,6 +15,7 @@ const S = {
   }
 };
 
+
 const SvgUp = () => (
    <span style={S.ROOT}>
      <svg viewBox="0 0 12 12" width="100%" height="100%"
@@ -21,8 +23,8 @@ const SvgUp = () => (
       >
         <path d="M 0,12 L 11,12 6,0 0,12"
             strokeWidth="1"
-            stroke="green"
-            fill="green"
+            stroke={S.COLOR}
+            fill={S.COLOR}
             strokeLinejoin="miter"
          >
         </path>

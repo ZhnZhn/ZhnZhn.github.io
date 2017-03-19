@@ -11,6 +11,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
+  COLOR: '#f44336',
   ROOT: {
     display: 'inline-block',
     width: '14px',
@@ -35,14 +36,16 @@ var SvgDown = function SvgDown() {
       },
       _react2.default.createElement('path', {
         d: 'M 0,0 L 11,0 6,12, 0,0',
-        strokeWidth: '1',
-        stroke: '#ED5813',
-        strokeLinejoin: 'miter',
-        fill: '#ED5813'
+        strokeWidth: '1'
+        //stroke="#ED5813"
+        , strokeLinejoin: 'miter',
+        stroke: S.COLOR,
+        fill: S.COLOR
+        //fill="#ED5813"
       })
     )
   );
 };
 
 exports.default = SvgDown;
-//# sourceMappingURL=SvgDown.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgDown.js.map

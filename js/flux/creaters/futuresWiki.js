@@ -15,6 +15,7 @@ var createLoadOptions = function createLoadOptions() {
       dataColumn = props.dataColumn,
       seriaColumnNames = props.seriaColumnNames,
       loadId = props.loadId,
+      dataSource = props.dataSource,
       exchange = options.exchange,
       item = options.item,
       type = options.type,
@@ -30,9 +31,10 @@ var createLoadOptions = function createLoadOptions() {
     seriaColumnNames: seriaColumnNames,
     dataColumn: dataColumn,
     loadId: loadId,
-    fromDate: fromDate
+    fromDate: fromDate,
+    dataSource: dataSource
   };
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=futuresWiki.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\futuresWiki.js.map

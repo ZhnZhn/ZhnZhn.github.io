@@ -47,7 +47,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/TSX",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
        }
     },
     "QY_TORONTO_VENTURE" : {
@@ -62,7 +63,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/TSXV",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" , "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume" , "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
        }
     },
     "QY_MONTREAL" : {
@@ -77,7 +79,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/MX",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
       }
     },
     "QY_INDICE" : {
@@ -92,7 +95,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/MX",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
 
@@ -108,7 +112,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/L",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
     "QY_PARIS" : {
@@ -123,7 +128,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/PA",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
     "QY_AMSTERDAM" : {
@@ -138,7 +144,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/AS",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
       }
     },
     "QY_COPPENHAGEN" : {
@@ -153,7 +160,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/CO",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
     "QY_OSLO" : {
@@ -168,7 +176,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/OL",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
     "QY_STOCKHOLM" : {
@@ -183,7 +192,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/ST",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
     "QY_SWISS" : {
@@ -198,7 +208,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/SW",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
     "QY_MILAN" : {
@@ -213,7 +224,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/MI",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
       }
     },
     "QY_MADRID" : {
@@ -228,7 +240,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/MC",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
     },
 
@@ -244,7 +257,8 @@
            "valueFn" : "RPrefixDashOne",
            "valueFnPrefix" : "YAHOO/AX",
            "columnName" : "Close",
-           "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+           "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+           "dataSource" : "YFinance (Code: YAHOO)"
          }
      },
      "QY_SHANGHAI" : {
@@ -259,7 +273,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/SS",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
      },
      "QY_SHENZHEN" : {
@@ -274,7 +289,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/SZ",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
      },
      "QY_TAIWAN" : {
@@ -289,7 +305,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/TW",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
      },
      "QY_HONG_KONG" : {
@@ -304,7 +321,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/HK",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
      },
      "QY_SINGAPURE" : {
@@ -319,7 +337,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/SI",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
      },
      "QY_BOMBEY" : {
@@ -334,7 +353,8 @@
           "valueFn" : "RPrefixDashOne",
           "valueFnPrefix" : "YAHOO/BO",
           "columnName" : "Close",
-          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ]
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adjusted Close" ],
+          "dataSource" : "YFinance (Code: YAHOO)"
         }
      }
   }

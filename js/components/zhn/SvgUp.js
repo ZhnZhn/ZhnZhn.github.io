@@ -11,6 +11,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
+  COLOR: '#4caf50',
   ROOT: {
     display: 'inline-block',
     width: '14px',
@@ -35,8 +36,8 @@ var SvgUp = function SvgUp() {
       },
       _react2.default.createElement('path', { d: 'M 0,12 L 11,12 6,0 0,12',
         strokeWidth: '1',
-        stroke: 'green',
-        fill: 'green',
+        stroke: S.COLOR,
+        fill: S.COLOR,
         strokeLinejoin: 'miter'
       })
     )
@@ -44,4 +45,4 @@ var SvgUp = function SvgUp() {
 };
 
 exports.default = SvgUp;
-//# sourceMappingURL=SvgUp.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgUp.js.map

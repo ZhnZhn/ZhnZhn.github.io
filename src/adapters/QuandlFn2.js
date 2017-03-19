@@ -41,6 +41,9 @@ const QuandlFn2 = {
   },
 
   createZhConfig(option){
+    const _dataSource = (option.dataSource)
+             ? `Quandl: ${option.dataSource}`
+             : 'Quandl'
     return {
       item : option.stock,
       title : option.title,
@@ -53,7 +56,8 @@ const QuandlFn2 = {
       fromDate : option.fromDate,
       seriaColumnNames : option.seriaColumnNames,
       linkFn : option.linkFn,
-      limitRemaining : option.limitRemaining
+      limitRemaining : option.limitRemaining,
+      dataSource: _dataSource
     }
   },
 

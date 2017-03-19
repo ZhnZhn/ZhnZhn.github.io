@@ -111,6 +111,7 @@ class StocksBySectorDialog extends Component {
           , { item={}, browserType, chartContainerType } = data
           , { id, text } = item
           , { fromDate, toDate } = this.datesFragment.getValues()
+          , _source = this._getItemSource(this.props)
           , option = {
              title : text,
              //subtitle : subtitle,
@@ -123,7 +124,8 @@ class StocksBySectorDialog extends Component {
              id : id,
              linkFn : 'NASDAQ',
              columnName : 'Close',
-             seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ]
+             seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ],
+             dataSource : `(Code: ${_source})`
           }
 
       ChartActions.loadStock(chartContainerType, browserType, option);

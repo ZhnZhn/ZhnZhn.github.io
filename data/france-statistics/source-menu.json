@@ -43,7 +43,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoA",
         "valueFnPrefix" : "1560",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
 
@@ -62,7 +63,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1059",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_TRADE_PRODUCT_A38" : {
@@ -80,7 +82,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1060",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_TRADE_AREA" : {
@@ -98,7 +101,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1061",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_TRADE_EUROPE" : {
@@ -116,7 +120,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1062",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_TRADE_AFRICA" : {
@@ -134,7 +139,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1063",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_TRADE_AMERICA" : {
@@ -152,7 +158,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1064",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_TRADE_MIDDLE_EAST" : {
@@ -170,7 +177,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1065",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_TRADE_ASIA_OCEANIA" : {
@@ -188,7 +196,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1066",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
 
@@ -207,7 +216,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1465",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_PRICE_FOOD" : {
@@ -225,7 +235,8 @@
         "loadId" : "Q",
         "valueFn" : "RPrefixInseeTwoM",
         "valueFnPrefix" : "1328",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     },
     "QFS_PRICE_RETAIL" : {
@@ -242,7 +253,8 @@
         "twoCaption" : "Item:",
         "loadId" : "Q",
         "valueFn" : "RInseeTwoM",
-        "columnName" : "Value"
+        "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     }
   }

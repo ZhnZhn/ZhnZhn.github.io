@@ -39,15 +39,15 @@ var styles = {
   },
   dateSpan: {
     marginLeft: '10px',
-    //color : '#2F7ED8',
     color: '#FDB316',
     fontWeight: 'bold'
   },
   up: {
-    color: 'green'
+    color: '#4CAF50'
   },
   down: {
-    color: '#ED5813'
+    //color: '#ED5813'
+    color: '#F44336'
   },
   equal: {
     color: '#2F7ED8'
@@ -103,6 +103,16 @@ var ValueMovingBadge = function ValueMovingBadge(props) {
   );
 };
 
+process.env.NODE_ENV !== "production" ? ValueMovingBadge.propTypes = {
+  valueMoving: _react.PropTypes.shape({
+    value: _react.PropTypes.number,
+    delta: _react.PropTypes.number,
+    percent: _react.PropTypes.number,
+    direction: _react.PropTypes.oneOf('up', 'down', 'equal'),
+    date: _react.PropTypes.string
+  })
+} : void 0;
+
 ValueMovingBadge.defaultProps = {
   valueMoving: {
     value: 0,
@@ -114,4 +124,4 @@ ValueMovingBadge.defaultProps = {
 };
 
 exports.default = ValueMovingBadge;
-//# sourceMappingURL=ValueMovingBadge.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ValueMovingBadge.js.map

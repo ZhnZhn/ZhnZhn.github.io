@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/flux/creaters/futures3.js"],"names":["createLoadOptions","props","options","fnValue","columnName","dataColumn","seriaColumnNames","loadId","item","month","year","fromDate","_value","value","undefined","_subtitle","caption","title","subtitle"],"mappings":";;;;;;AACA;;AAEA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,UAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,UAAfC,OAAe,uEAAP,EAAO;;AAAA,UAE1CC,OAF0C,GAIxCF,KAJwC,CAE1CE,OAF0C;AAAA,UAEjCC,UAFiC,GAIxCH,KAJwC,CAEjCG,UAFiC;AAAA,UAErBC,UAFqB,GAIxCJ,KAJwC,CAErBI,UAFqB;AAAA,UAG1CC,gBAH0C,GAIxCL,KAJwC,CAG1CK,gBAH0C;AAAA,UAGxBC,MAHwB,GAIxCN,KAJwC,CAGxBM,MAHwB;AAAA,UAK1CC,IAL0C,GAKVN,OALU,CAK1CM,IAL0C;AAAA,UAKpCC,KALoC,GAKVP,OALU,CAKpCO,KALoC;AAAA,UAK7BC,IAL6B,GAKVR,OALU,CAK7BQ,IAL6B;AAAA,UAKvBC,QALuB,GAKVT,OALU,CAKvBS,QALuB;AAAA,UAM5CC,MAN4C,GAMnC,cAAKT,OAAL,IACHA,QAAQK,KAAKK,KAAb,EAAoBJ,MAAMI,KAA1B,EAAiCH,KAAKG,KAAtC,CADG,GAEHC,SARsC;AAAA,UAS5CC,SAT4C,GAS/BX,UAAD,GACHK,MAAMO,OADH,SACcN,KAAKM,OADnB,SAC8BZ,UAD9B,GAEHK,MAAMO,OAFH,SAEcN,KAAKM,OAXa;;AAalD,aAAO;AACJH,mBAAQD,MADJ;AAEJK,mBAAQT,KAAKQ,OAFT;AAGJE,sBAAWH,SAHP;AAIJX,wBAAaA,UAJT;AAKJC,wBAAaA,UALT;AAMJE,oBAASA,MANL;AAOJI,sBAAWA,QAPP;AAQJL,8BAAmBA;AARf,OAAP;AAUD,CAvBD;;kBAyBeN,iB","file":"futures3.js","sourcesContent":["\r\nimport { isFn } from '../../utils/is'\r\n\r\nconst createLoadOptions = (props={}, options={}) => {\r\n  const {\r\n          fnValue, columnName, dataColumn,\r\n          seriaColumnNames, loadId\r\n        } = props\r\n      , { item, month, year, fromDate } = options\r\n      , _value = isFn(fnValue)\r\n            ? fnValue(item.value, month.value, year.value )\r\n            : undefined\r\n      , _subtitle = (columnName)\r\n            ? `${month.caption}:${year.caption}:${columnName}`\r\n            : `${month.caption}:${year.caption}`\r\n      \r\n  return {\r\n     value : _value,\r\n     title : item.caption,\r\n     subtitle : _subtitle,\r\n     columnName : columnName,\r\n     dataColumn : dataColumn,\r\n     loadId : loadId,\r\n     fromDate : fromDate,\r\n     seriaColumnNames : seriaColumnNames\r\n  };\r\n};\r\n\r\nexport default createLoadOptions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\creaters\\futures3.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\creaters\\futures3.js",
+ "sourceRoot": "",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "fnValue",
+  "columnName",
+  "dataColumn",
+  "seriaColumnNames",
+  "loadId",
+  "dataSource",
+  "item",
+  "month",
+  "year",
+  "fromDate",
+  "_value",
+  "value",
+  "undefined",
+  "_subtitle",
+  "caption",
+  "title",
+  "subtitle"
+ ],
+ "mappings": ";;;;;;AACA;;AAEA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;;AAAA,MAE1CC,OAF0C,GAIxCF,KAJwC,CAE1CE,OAF0C;AAAA,MAEjCC,UAFiC,GAIxCH,KAJwC,CAEjCG,UAFiC;AAAA,MAErBC,UAFqB,GAIxCJ,KAJwC,CAErBI,UAFqB;AAAA,MAG1CC,gBAH0C,GAIxCL,KAJwC,CAG1CK,gBAH0C;AAAA,MAGxBC,MAHwB,GAIxCN,KAJwC,CAGxBM,MAHwB;AAAA,MAGhBC,UAHgB,GAIxCP,KAJwC,CAGhBO,UAHgB;AAAA,MAK1CC,IAL0C,GAKVP,OALU,CAK1CO,IAL0C;AAAA,MAKpCC,KALoC,GAKVR,OALU,CAKpCQ,KALoC;AAAA,MAK7BC,IAL6B,GAKVT,OALU,CAK7BS,IAL6B;AAAA,MAKvBC,QALuB,GAKVV,OALU,CAKvBU,QALuB;AAAA,MAM5CC,MAN4C,GAMnC,cAAKV,OAAL,IACHA,QAAQM,KAAKK,KAAb,EAAoBJ,MAAMI,KAA1B,EAAiCH,KAAKG,KAAtC,CADG,GAEHC,SARsC;AAAA,MAS5CC,SAT4C,GAS/BZ,UAAD,GACHM,MAAMO,OADH,SACcN,KAAKM,OADnB,SAC8Bb,UAD9B,GAEHM,MAAMO,OAFH,SAEcN,KAAKM,OAXa;;AAalD,SAAO;AACJH,WAAQD,MADJ;AAEJK,WAAQT,KAAKQ,OAFT;AAGJE,cAAWH,SAHP;AAIJZ,gBAAaA,UAJT;AAKJC,gBAAaA,UALT;AAMJE,YAASA,MANL;AAOJK,cAAWA,QAPP;AAQJN,sBAAmBA,gBARf;AASJE,gBAAYA;AATR,GAAP;AAWD,CAxBD;;kBA0BeR,iB"
+}

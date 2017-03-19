@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react'
 
-import {Direction} from '../../constants/Type';
+import {Direction} from '../../constants/Type'
 
-import SvgDown from './SvgDown';
-import SvgUp from './SvgUp';
-import SvgEqual from './SvgEqual';
+import SvgDown from './SvgDown'
+import SvgUp from './SvgUp'
+import SvgEqual from './SvgEqual'
 
 const styles = {
   rootSpan : {
@@ -21,15 +21,15 @@ const styles = {
   },
   dateSpan : {
     marginLeft: '10px',
-    //color : '#2F7ED8',
     color: '#FDB316',
     fontWeight : 'bold'
   },
   up : {
-    color: 'green'
+    color: '#4CAF50'
   },
   down : {
-    color: '#ED5813'
+    //color: '#ED5813'
+    color : '#F44336'
   },
   equal : {
     color : '#2F7ED8'
@@ -69,6 +69,16 @@ const ValueMovingBadge = (props) => {
          </span>
       </span>
     )
+}
+
+ValueMovingBadge.propTypes = {
+  valueMoving: PropTypes.shape({
+    value: PropTypes.number,
+    delta: PropTypes.number,
+    percent: PropTypes.number,
+    direction: PropTypes.oneOf('up', 'down', 'equal'),
+    date: PropTypes.string
+  })
 }
 
 ValueMovingBadge.defaultProps = {

@@ -4,7 +4,7 @@ import { isFn } from '../../utils/is'
 const createLoadOptions = (props={}, options={}) => {
   const {
           fnValue, columnName, dataColumn,
-          seriaColumnNames, loadId
+          seriaColumnNames, loadId, dataSource
         } = props
       , { item, month, year, fromDate } = options
       , _value = isFn(fnValue)
@@ -13,7 +13,7 @@ const createLoadOptions = (props={}, options={}) => {
       , _subtitle = (columnName)
             ? `${month.caption}:${year.caption}:${columnName}`
             : `${month.caption}:${year.caption}`
-      
+
   return {
      value : _value,
      title : item.caption,
@@ -22,7 +22,8 @@ const createLoadOptions = (props={}, options={}) => {
      dataColumn : dataColumn,
      loadId : loadId,
      fromDate : fromDate,
-     seriaColumnNames : seriaColumnNames
+     seriaColumnNames : seriaColumnNames,
+     dataSource: dataSource
   };
 };
 

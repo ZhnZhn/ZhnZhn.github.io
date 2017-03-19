@@ -65,7 +65,7 @@ class  DialogType5 extends Component {
   }
   _createLoadOption = () => {
     const { parent:two, child:three } = this.parentChild.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues();
+        , { fromDate, toDate } = this.datesFragment.getValues();    
     return createLoadOptions(
       this.props,
       { one : this.one, two, three, fromDate, toDate }

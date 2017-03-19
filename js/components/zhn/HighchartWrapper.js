@@ -105,7 +105,9 @@ var HighchartWrapper = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var isShow = this.props.isShow,
+      var _props2 = this.props,
+          isShow = _props2.isShow,
+          absComp = _props2.absComp,
           _rootDivStyle = isShow ? STYLE.ROOT_DIV_SHOW : STYLE.ROOT_DIV_HIDE;
 
       return _react2.default.createElement(
@@ -113,7 +115,8 @@ var HighchartWrapper = function (_Component) {
         { style: _rootDivStyle },
         _react2.default.createElement('div', { ref: function ref(c) {
             return _this2.chartEl = c;
-          } })
+          } }),
+        absComp
       );
     }
   }]);
@@ -121,4 +124,4 @@ var HighchartWrapper = function (_Component) {
 }(_react.Component);
 
 exports.default = HighchartWrapper;
-//# sourceMappingURL=HighchartWrapper.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\HighchartWrapper.js.map

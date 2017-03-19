@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react'
 
 const SHOW_POPUP = 'show-popup'
 const S = {
@@ -29,5 +29,14 @@ const ShowHide = (props) => {
     );
  }
 
+ShowHide.propTypes = {
+  isShow: PropTypes.bool,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  children: PropTypes.oneOfType[
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]
+}
 
 export default ShowHide
