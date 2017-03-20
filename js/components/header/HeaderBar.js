@@ -64,6 +64,9 @@ var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var LOGO_TITLE = "ERC : Economic RESTful Client v0.13.0",
+    CAPTION = "ERC v0.13.0";
+
 var styles = {
   rootDiv: {
     position: 'relative',
@@ -125,11 +128,11 @@ var HeaderBar = function (_Component) {
         _react2.default.createElement(_ProgressLoading2.default, { store: store }),
         _react2.default.createElement(_IconLogoErc2.default, {
           className: 'header__icon-erc',
-          title: 'ERC : Economic RESTful Client v0.12.0'
+          title: LOGO_TITLE
         }),
         _react2.default.createElement(_AppLabel2.default, {
           className: 'header__app-label',
-          caption: 'ERC v0.12.0'
+          caption: CAPTION
         }),
         _react2.default.createElement(
           _ActionButton2.default,
@@ -197,4 +200,4 @@ var HeaderBar = function (_Component) {
 }(_react.Component);
 
 exports.default = HeaderBar;
-//# sourceMappingURL=HeaderBar.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\HeaderBar.js.map

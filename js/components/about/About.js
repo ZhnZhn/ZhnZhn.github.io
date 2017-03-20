@@ -36,6 +36,10 @@ var _BrowserCaption = require('../zhn/BrowserCaption');
 
 var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
 
+var _TwitterLink = require('./TwitterLink');
+
+var _TwitterLink2 = _interopRequireDefault(_TwitterLink);
+
 var _Step = require('./Step');
 
 var _Step2 = _interopRequireDefault(_Step);
@@ -78,6 +82,9 @@ var Styles = {
   },
   MARGIN_TOP: {
     marginTop: '3px'
+  },
+  BT_TWITTER: {
+    marginLeft: '12px'
   }
 };
 
@@ -132,10 +139,18 @@ var About = function (_Component) {
           className: _classOpen,
           style: Object.assign({}, styles.aboutRootDiv, _styleOpen)
         },
-        _react2.default.createElement(_BrowserCaption2.default, {
-          caption: 'About',
-          onClose: this._handleClose
-        }),
+        _react2.default.createElement(
+          _BrowserCaption2.default,
+          {
+            caption: 'About',
+            onClose: this._handleClose
+          },
+          _react2.default.createElement(_TwitterLink2.default, {
+            rootStyle: Styles.BT_TWITTER,
+            account: 'webapperc',
+            title: 'Follow ERC (@wepapperc) on Twitter'
+          })
+        ),
         _react2.default.createElement(
           _ScrollPane2.default,
           { style: Styles.scrollDiv },
@@ -387,4 +402,4 @@ var About = function (_Component) {
 }(_react.Component);
 
 exports.default = About;
-//# sourceMappingURL=About.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\About.js.map

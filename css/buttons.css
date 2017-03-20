@@ -168,3 +168,16 @@ button::-moz-focus-inner {
   border : 0;
   outline: 0;
 }
+
+.bt-twitter {
+  background-color: #1b95e0;
+}
+.bt-twitter:hover {
+  background-color: #0c7abf;
+}
+.bt-twitter span {
+  border-bottom: thin solid;
+}
+.bt-twitter:hover span {
+  border-bottom-width: medium;
+}

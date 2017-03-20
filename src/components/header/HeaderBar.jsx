@@ -12,6 +12,9 @@ import BrowserConfig from '../../constants/BrowserConfig';
 import { BrowserType, ModalDialog } from '../../constants/Type';
 
 
+const LOGO_TITLE = "ERC : Economic RESTful Client v0.13.0"
+    , CAPTION = "ERC v0.13.0";
+
 const styles = {
   rootDiv : {
     position: 'relative',
@@ -63,11 +66,11 @@ class HeaderBar extends Component {
          <ProgressLoading store={store} />
          <IconLogoErc
             className="header__icon-erc"
-            title="ERC : Economic RESTful Client v0.12.0"
+            title={LOGO_TITLE}
          />
          <AppLabel
             className="header__app-label"
-            caption="ERC v0.12.0"
+            caption={CAPTION}
          />
 
          <ActionButton

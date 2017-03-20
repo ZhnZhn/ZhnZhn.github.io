@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { ComponentActionTypes } from '../../flux/actions/ComponentActions';
 import { ChartActionTypes } from '../../flux/actions/ChartActions';
 
-import ScrollPane from '../zhn/ScrollPane';
-import BrowserCaption from '../zhn/BrowserCaption';
+import ScrollPane from '../zhn/ScrollPane'
+import BrowserCaption from '../zhn/BrowserCaption'
+import TwitterLink from './TwitterLink'
 import Step from './Step';
 import Token from './Token';
 import LinkToken from './LinkToken';
@@ -31,6 +32,9 @@ const Styles = {
   },
   MARGIN_TOP : {
     marginTop: '3px'
+  },
+  BT_TWITTER : {
+    marginLeft: '12px'
   }
 };
 
@@ -79,7 +83,13 @@ class About extends Component {
          <BrowserCaption
             caption="About"
             onClose={this._handleClose}
-         />
+         >
+           <TwitterLink
+              rootStyle={Styles.BT_TWITTER}
+              account="webapperc"
+              title="Follow ERC (@wepapperc) on Twitter"
+           />
+         </BrowserCaption>
 
          <ScrollPane style={Styles.scrollDiv}>
 
