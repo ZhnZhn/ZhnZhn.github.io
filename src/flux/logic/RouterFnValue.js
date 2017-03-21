@@ -20,7 +20,8 @@ const RouterFnValue = {
 
   RPrefixInseeTwoM : (prefix, group, item) => `INSEE/${prefix}_${item}_M`,
   RInseeTwoM : (group, item) => `INSEE/${group}_${item}_M`,
-  RPrefixInseeTwoA : (prefix, group, item) => `INSEE/${prefix}_${item}_A`
+  RPrefixInseeTwoA : (prefix, group, item) => `INSEE/${prefix}_${item}_A`,
+  RInsee : (value) => `INSEE/${value}`
 
 };
 

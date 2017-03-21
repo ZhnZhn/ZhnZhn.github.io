@@ -6,7 +6,7 @@
         { "id" : "QFS_GDP_BALANCE" }
       ]
     },{
-      "caption" : "Foreign Trade Of",
+      "caption" : "Foreign Trade Of", "isInitClose" : true,
       "items" : [
         { "id" : "QFS_TRADE_PRODUCT_A17" },
         { "id" : "QFS_TRADE_PRODUCT_A38" },
@@ -23,6 +23,11 @@
         { "id" : "QFS_PRICE_AGRI" },
         { "id" : "QFS_PRICE_FOOD" },
         { "id" : "QFS_PRICE_RETAIL" }
+      ]
+    },{
+      "caption" : "Society",
+      "items" : [
+        { "id" : "QFS_CULTURE", "isNew" : true }
       ]
     }
   ],
@@ -254,6 +259,27 @@
         "loadId" : "Q",
         "valueFn" : "RInseeTwoM",
         "columnName" : "Value",
+        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+      }
+    },
+    "QFS_CULTURE" : {
+      "type" : "QFS_CULTURE",
+      "menuTitle" : "Culture",
+      "dialogCaption" : "Society - Culture",
+      "chartContainerCaption" : "Quandl France Statistics Culture",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+
+        "optionURI" : "./data/france-statistics/society-culture.json",
+        "optionsJsonProp" : "items",
+        "optionNames" : "Items",
+
+        "itemCaption" : "Item:",
+        "nInitFromDate" : 12,
+        "loadId" : "Q",
+        "valueFn" : "RInsee",
+        "columnName" : "Value",
+
         "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
       }
     }

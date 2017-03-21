@@ -1,0 +1,27 @@
+{
+  "items" : [
+    { "value" : "1483_001665256_A", "caption" : "Number of monuments protected as historic monuments" },
+    { "value" : "1483_001665257_A", "caption" : "Number of monuments classified and protected as historic monuments" },
+    { "value" : "1483_001665258_A", "caption" : "Number of monuments listed and protected as historic monuments" },
+
+    { "value" : "1483_001665259_A", "caption" : "Number of museums" },
+    { "value" : "1483_001665260_A", "caption" : "Number of entries in museums" },
+    { "value" : "1802_001777254_M", "caption" : "Turnover value index, base 2010 - Museums activities" },
+    { "value" : "1802_001777255_M", "caption" : "Turnover volume index, base 2010 - Museums activities"},
+    { "value" : "143_000640095_A", "caption" : "CPI, base 1998 - Visit of historic monuments and museums" },
+    { "value" : "143_000638080_M" , "caption" : "CPI, base 1998 - Other cultural services and museums" },
+
+    { "value" : "1744_001763750_M", "caption" : "CPI, base 2015, France - Museums, libraries, zoological gardens" },
+    { "value" : "1744_001764199_M", "caption" : "CPI, base 2015, Metropolitan France - Museums, libraries, zoological gardens" },
+    { "value" : "1744_001766310_A", "caption" : "Weighting of CPI, base 2015, All household, France - Museums, libraries, zoological gardens" },
+    { "value" : "1744_001766818_A", "caption" : "Weighting of CPI, base 2015, All household, France - Museums, libraries, zoological gardens" },
+
+    { "value" : "1575_001701023_A", "caption" : "Production at base price, base 2010 - Libraries, archives, museums and other cultural activities" },
+    { "value" : "1575_001698565_A", "caption" : "Import of services, base 2010, Current price - Libraries, archives, museums and other cultural activities"},
+    { "value" : "1575_001699659_A", "caption" : "Export of services, base 2010, Current price - Libraries, archives, museums and other cultural activities"},
+    { "value" : "1575_001694418_A", "caption" : "Taxes on products, base 2010, Current price - Libraries, archives, museums and other cultural activities" },
+    { "value" : "1575_001698187_A", "caption" : "Total output transfers, base 2010, Current price - Libraries, archives, museums and other cultural activities" },
+    { "value" : "1575_001694510_A", "caption" : "VAT-types taxes, base 2010, Current price - Libraries, archives, museums and other cultural activities" }
+
+  ]
+}

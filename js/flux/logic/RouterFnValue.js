@@ -59,9 +59,12 @@ var RouterFnValue = {
   },
   RPrefixInseeTwoA: function RPrefixInseeTwoA(prefix, group, item) {
     return "INSEE/" + prefix + "_" + item + "_A";
+  },
+  RInsee: function RInsee(value) {
+    return "INSEE/" + value;
   }
 
 };
 
 exports.default = RouterFnValue;
-//# sourceMappingURL=RouterFnValue.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\RouterFnValue.js.map
