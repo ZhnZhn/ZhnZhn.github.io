@@ -19,6 +19,11 @@ const ComponentSlice = {
       );
     }
   },
+  onShowOptionDialog(dialogType, option){    
+    option.dialogType = dialogType
+    option.dialogComp = Factory.createOptionDialog(option)
+    this.trigger(ComponentActionTypes.SHOW_OPTION_DIALOG, option)
+  },
 
 
   isLoadToChart(){
@@ -54,7 +59,7 @@ const ComponentSlice = {
   },
 
   onShowModalDialog(modalDialogType, option={}){
-    option.modalDialogType = modalDialogType;    
+    option.modalDialogType = modalDialogType;
     this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, option);
   }
 }

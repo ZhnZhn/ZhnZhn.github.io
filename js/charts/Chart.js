@@ -269,6 +269,7 @@ var Chart = {
   },
   fPlotLine: function fPlotLine(color, text) {
     return {
+      id: text,
       value: undefined,
       color: color,
       dashStyle: 'solid',
@@ -437,4 +438,4 @@ var Chart = {
 };
 
 exports.default = Chart;
-//# sourceMappingURL=Chart.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\Chart.js.map

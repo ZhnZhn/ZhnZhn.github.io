@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const styles = {
   ulStyle : {
@@ -11,15 +11,34 @@ const styles = {
 };
 
 class TabPane extends Component {
+  static propTypes = {
+    isUpdateInit: PropTypes.bool,
+    width: PropTypes.string,
+    height: PropTypes.string,
+    children: PropTypes.arrayOf(PropTypes.node)
+  }
+
 
   constructor(props){
     super();
+
+    this.isUpdateInit = props.isUpdateInit
+
     const components = props.children.map((tab, index) => {
        return  React.cloneElement(tab.props.children, { key : 'comp' + index });
     })
     this.state = {
       selectedTabIndex : 0,
       components
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (this.isUpdateInit && this.props !== nextProps){
+      const components = nextProps.children.map((tab, index) => {
+         return  React.cloneElement(tab.props.children, { key : 'comp' + index });
+      })
+      this.setState({ components })
     }
   }
 
@@ -51,8 +70,9 @@ class TabPane extends Component {
 
   render(){
     const { children, width, height } = this.props;
+
     return (
-      <div style={{width, height}}>
+      <div style={{ width, height }}>
         <ul className="tabpane__tabs" style={styles.ulStyle}>
            {this._renderTabs(children)}
         </ul>

@@ -1,1 +1,36 @@
-{"version":3,"sources":["../../../src/components/browser-container/BrowserContainer.jsx"],"names":["BrowserContainer","createClass","getInitialState","elBrowsers","componentWillMount","store","props","unsubscribe","listen","_onStore","componentWillUnmount","actionType","data","initBrowserAction","state","unshift","setState","render","showBrowserAction","updateBrowserAction","updateWatchAction","initDialogAction","showDialogAction","ECONOMIC","WATCH_LIST"],"mappings":";;;;;;AACA;;;;AAEA;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB,gBAAMC,WAAN,CAAkB;AAAA;AACzCC,iBADyC,6BACxB;AACf,WAAO;AACLC,kBAAa;AADR,KAAP;AAGD,GALwC;AAOzCC,oBAPyC,gCAOrB;AAAA,QACVC,KADU,GACA,KAAKC,KADL,CACVD,KADU;;AAElB,SAAKE,WAAL,GAAmBF,MAAMG,MAAN,CAAa,KAAKC,QAAlB,CAAnB;AACD,GAVwC;AAWzCC,sBAXyC,kCAWnB;AACpB,SAAKH,WAAL;AACD,GAbwC;AAczCE,UAdyC,oBAchCE,UAdgC,EAcpBC,IAdoB,EAcf;AACvB,QAAID,eAAe,KAAKL,KAAL,CAAWO,iBAA9B,EAAgD;AAC9C,WAAKC,KAAL,CAAWX,UAAX,CAAsBY,OAAtB,CAA8BH,IAA9B;AACA,WAAKI,QAAL,CAAc,KAAKF,KAAnB;AACD;AACH,GAnBwC;AAqBzCG,QArByC,oBAqBjC;AAAA,iBAKI,KAAKX,KALT;AAAA,QAEED,KAFF,UAEEA,KAFF;AAAA,QAESa,iBAFT,UAESA,iBAFT;AAAA,QAE4BC,mBAF5B,UAE4BA,mBAF5B;AAAA,QAGEC,iBAHF,UAGEA,iBAHF;AAAA,QAIEC,gBAJF,UAIEA,gBAJF;AAAA,QAIoBC,gBAJpB,UAIoBA,gBAJpB;AAAA,QAMEnB,UANF,GAMiB,KAAKW,KANtB,CAMEX,UANF;;;AAQN,WACE;AAAA;AAAA,QAAK,WAAU,eAAf;AACK;AACG;AADH,UAEG,aAAa,kBAAYoB,QAF5B;AAGG,iBAAQ,iBAHX;AAIG,eAAOlB,KAJV;AAKG,oBAAYa,iBALf;AAMG,sBAAcC;AANjB,QADL;AASK;AACG,qBAAa,kBAAYK,UAD5B;AAEG,iBAAQ,YAFX;AAGG,eAAOnB,KAHV;AAIG,oBAAYa,iBAJf;AAKG,sBAAcE;AALjB,QATL;AAgBMjB,gBAhBN;AAiBK;AACG,mBAAW,CADd;AAEG,eAAOE,KAFV;AAGG,oBAAYgB,gBAHf;AAIG,oBAAYC;AAJf;AAjBL,KADF;AA0BD;AAvDwC,CAAlB,CAAzB;;kBA0DetB,gB","file":"BrowserContainer.js","sourcesContent":["\r\nimport React from 'react';\r\n\r\nimport {BrowserType} from '../../constants/Type';\r\n\r\nimport QuandlBrowser from '../quandl-browser/QuandlBrowser';\r\nimport WatchBrowser from '../watch-browser/WatchBrowser';\r\nimport DialogContainer3 from '../zhn/DialogContainer3';\r\n\r\nconst BrowserContainer = React.createClass({\r\n  getInitialState(){\r\n    return {\r\n      elBrowsers : []\r\n    }\r\n  },\r\n\r\n  componentWillMount(){\r\n    const { store } = this.props;\r\n    this.unsubscribe = store.listen(this._onStore);\r\n  },\r\n  componentWillUnmount(){\r\n    this.unsubscribe();\r\n  },\r\n  _onStore(actionType, data){\r\n     if (actionType === this.props.initBrowserAction){\r\n       this.state.elBrowsers.unshift(data);\r\n       this.setState(this.state);\r\n     }\r\n  },\r\n\r\n  render(){\r\n    const {\r\n            store, showBrowserAction, updateBrowserAction,\r\n            updateWatchAction,\r\n            initDialogAction, showDialogAction\r\n          } = this.props\r\n        , { elBrowsers } = this.state;\r\n\r\n    return (\r\n      <div className=\"hrz-container\">\r\n           <QuandlBrowser\r\n              //browserType={BrowserType.QUANDL}\r\n              browserType={BrowserType.ECONOMIC}\r\n              caption=\"Quandl Economic\"\r\n              store={store}\r\n              showAction={showBrowserAction}\r\n              updateAction={updateBrowserAction}\r\n           />\r\n           <WatchBrowser\r\n              browserType={BrowserType.WATCH_LIST}\r\n              caption=\"Watch List\"\r\n              store={store}\r\n              showAction={showBrowserAction}\r\n              updateAction={updateWatchAction}\r\n            />\r\n           {elBrowsers}\r\n           <DialogContainer3\r\n              maxDialog={3}\r\n              store={store}\r\n              initAction={initDialogAction}\r\n              showAction={showDialogAction}\r\n           />\r\n      </div>\r\n    );\r\n  }\r\n});\r\n\r\nexport default BrowserContainer\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-container\\BrowserContainer.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-container\\BrowserContainer.js",
+ "sourceRoot": "",
+ "names": [
+  "BrowserContainer",
+  "createClass",
+  "getInitialState",
+  "elBrowsers",
+  "componentWillMount",
+  "store",
+  "props",
+  "unsubscribe",
+  "listen",
+  "_onStore",
+  "componentWillUnmount",
+  "actionType",
+  "data",
+  "initBrowserAction",
+  "state",
+  "unshift",
+  "setState",
+  "render",
+  "showBrowserAction",
+  "updateBrowserAction",
+  "updateWatchAction",
+  "initDialogAction",
+  "showDialogAction",
+  "showOptionDialogAction",
+  "ECONOMIC",
+  "WATCH_LIST"
+ ],
+ "mappings": ";;;;;;AACA;;;;AAEA;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB,gBAAMC,WAAN,CAAkB;AAAA;AACzCC,iBADyC,6BACxB;AACf,WAAO;AACLC,kBAAa;AADR,KAAP;AAGD,GALwC;AAOzCC,oBAPyC,gCAOrB;AAAA,QACVC,KADU,GACA,KAAKC,KADL,CACVD,KADU;;AAElB,SAAKE,WAAL,GAAmBF,MAAMG,MAAN,CAAa,KAAKC,QAAlB,CAAnB;AACD,GAVwC;AAWzCC,sBAXyC,kCAWnB;AACpB,SAAKH,WAAL;AACD,GAbwC;AAczCE,UAdyC,oBAchCE,UAdgC,EAcpBC,IAdoB,EAcf;AACvB,QAAID,eAAe,KAAKL,KAAL,CAAWO,iBAA9B,EAAgD;AAC9C,WAAKC,KAAL,CAAWX,UAAX,CAAsBY,OAAtB,CAA8BH,IAA9B;AACA,WAAKI,QAAL,CAAc,KAAKF,KAAnB;AACD;AACH,GAnBwC;AAqBzCG,QArByC,oBAqBjC;AAAA,iBAKI,KAAKX,KALT;AAAA,QAEED,KAFF,UAEEA,KAFF;AAAA,QAESa,iBAFT,UAESA,iBAFT;AAAA,QAE4BC,mBAF5B,UAE4BA,mBAF5B;AAAA,QAGEC,iBAHF,UAGEA,iBAHF;AAAA,QAIEC,gBAJF,UAIEA,gBAJF;AAAA,QAIoBC,gBAJpB,UAIoBA,gBAJpB;AAAA,QAIsCC,sBAJtC,UAIsCA,sBAJtC;AAAA,QAMEpB,UANF,GAMiB,KAAKW,KANtB,CAMEX,UANF;;;AAQN,WACE;AAAA;AAAA,QAAK,WAAU,eAAf;AACK;AACG;AADH,UAEG,aAAa,kBAAYqB,QAF5B;AAGG,iBAAQ,iBAHX;AAIG,eAAOnB,KAJV;AAKG,oBAAYa,iBALf;AAMG,sBAAcC;AANjB,QADL;AASK;AACG,qBAAa,kBAAYM,UAD5B;AAEG,iBAAQ,YAFX;AAGG,eAAOpB,KAHV;AAIG,oBAAYa,iBAJf;AAKG,sBAAcE;AALjB,QATL;AAgBMjB,gBAhBN;AAiBK;AACG,mBAAW,CADd;AAEG,eAAOE,KAFV;AAGG,oBAAYgB,gBAHf;AAIG,oBAAYC,gBAJf;AAKG,0BAAkBC;AALrB;AAjBL,KADF;AA2BD;AAxDwC,CAAlB,CAAzB;;kBA2DevB,gB"
+}

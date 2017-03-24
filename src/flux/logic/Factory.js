@@ -92,6 +92,14 @@ const createDialogComp = function (conf, browserType){
   });
 }
 
+const _createOptionDialog = function(option) {
+  const { dialogType } = option
+      , Comp = RouterDialog[dialogType];
+  return React.createElement(Comp, {
+      key: dialogType
+  })
+}
+
 const onCloseItem = ChartActions.closeChart;
 const fnCloseChartContainer = function(chartType, browserType){
   return ComponentActions.closeChartContainer.bind(null, chartType, browserType);
@@ -126,6 +134,9 @@ const _getDialogConf = function(dialogType){
 const Factory = {
   createDialog(dialogType, browserType){
    return createDialogComp(_getDialogConf(dialogType), browserType);
+ },
+ createOptionDialog(option){
+   return _createOptionDialog(option)
  },
 
  createChartContainer(dialogType, browserType){

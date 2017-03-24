@@ -1,1 +1,23 @@
-{"version":3,"sources":["../../../src/components/dialogs/RouterModalDialog.js"],"names":["RouterModalDialog","ASK","INFO","ALERT","DESCRIPTION","CUSTOMIZE_EXPORT","SETTINGS","ADD_TO_WATCH","LOAD_ITEM","US_STOCK_BY_SECTOR","STOCKS_BY_SECTOR","EDIT_WATCH_GROUP","EDIT_WATCH_LIST"],"mappings":";;;;;;;;;;;;AACA;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gGACH,kBAAYC,GADT,0EAEH,kBAAYC,IAFT,2EAGH,kBAAYC,KAHT,4EAIH,kBAAYC,WAJT,kFAKH,kBAAYC,gBALT,sFAMH,kBAAYC,QANT,+EAOH,kBAAYC,YAPT,iFAQH,kBAAYC,SART,+EASH,kBAAYC,kBATT,uFAUH,kBAAYC,gBAVT,qFAWH,kBAAYC,gBAXT,gFAYH,kBAAYC,eAZT,gDAAN;;kBAeeZ,iB","file":"RouterModalDialog.js","sourcesContent":["\r\nimport { ModalDialog } from '../../constants/Type';\r\n\r\nimport AskDialog from './AskDialog';\r\nimport InfoDialog from './InfoDialog';\r\nimport AlertDialog from './AlertDialog';\r\nimport DescriptionDialog from './DescriptionDialog';\r\nimport CustomizeExportDialog from './CustomizeExportDialog';\r\nimport SettingsDialog from '../header/SettingsDialog';\r\nimport AddToWatchDialog from '../watch-browser/AddToWatchDialog';\r\nimport LoadItemDialog from '../watch-browser/LoadItemDialog';\r\nimport UsStocksBySectorDialog from './UsStocksBySectorDialog';\r\nimport StocksBySectorDialog from './StocksBySectorDialog';\r\nimport EditGroupDialog from '../watch-browser/EditGroupDialog';\r\nimport EditListDialog from '../watch-browser/EditListDialog';\r\n\r\nconst RouterModalDialog = {\r\n  [ModalDialog.ASK] : AskDialog,\r\n  [ModalDialog.INFO] : InfoDialog,\r\n  [ModalDialog.ALERT] : AlertDialog,\r\n  [ModalDialog.DESCRIPTION] : DescriptionDialog,\r\n  [ModalDialog.CUSTOMIZE_EXPORT] : CustomizeExportDialog,\r\n  [ModalDialog.SETTINGS] : SettingsDialog,\r\n  [ModalDialog.ADD_TO_WATCH] : AddToWatchDialog,\r\n  [ModalDialog.LOAD_ITEM] : LoadItemDialog,\r\n  [ModalDialog.US_STOCK_BY_SECTOR] : UsStocksBySectorDialog,\r\n  [ModalDialog.STOCKS_BY_SECTOR] : StocksBySectorDialog,\r\n  [ModalDialog.EDIT_WATCH_GROUP] : EditGroupDialog,\r\n  [ModalDialog.EDIT_WATCH_LIST] : EditListDialog\r\n}\r\n\r\nexport default RouterModalDialog\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\RouterModalDialog.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\RouterModalDialog.js",
+ "sourceRoot": "",
+ "names": [
+  "RouterModalDialog",
+  "ASK",
+  "INFO",
+  "ALERT",
+  "DESCRIPTION",
+  "CUSTOMIZE_EXPORT",
+  "SETTINGS",
+  "ADD_TO_WATCH",
+  "LOAD_ITEM",
+  "US_STOCK_BY_SECTOR",
+  "STOCKS_BY_SECTOR",
+  "EDIT_WATCH_GROUP",
+  "EDIT_WATCH_LIST"
+ ],
+ "mappings": ";;;;;;;;;;;;AACA;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gGACH,kBAAYC,GADT,0EAEH,kBAAYC,IAFT,2EAGH,kBAAYC,KAHT,4EAIH,kBAAYC,WAJT,kFAKH,kBAAYC,gBALT,sFAMH,kBAAYC,QANT,+EAOH,kBAAYC,YAPT,iFAQH,kBAAYC,SART,+EASH,kBAAYC,kBATT,uFAUH,kBAAYC,gBAVT,qFAWH,kBAAYC,gBAXT,gFAYH,kBAAYC,eAZT,gDAAN;;kBAeeZ,iB"
+}

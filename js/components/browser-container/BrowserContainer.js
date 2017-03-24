@@ -53,6 +53,7 @@ var BrowserContainer = _react2.default.createClass({
         updateWatchAction = _props.updateWatchAction,
         initDialogAction = _props.initDialogAction,
         showDialogAction = _props.showDialogAction,
+        showOptionDialogAction = _props.showOptionDialogAction,
         elBrowsers = this.state.elBrowsers;
 
 
@@ -79,11 +80,12 @@ var BrowserContainer = _react2.default.createClass({
         maxDialog: 3,
         store: store,
         initAction: initDialogAction,
-        showAction: showDialogAction
+        showAction: showDialogAction,
+        showOptionAction: showOptionDialogAction
       })
     );
   }
 });
 
 exports.default = BrowserContainer;
-//# sourceMappingURL=BrowserContainer.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-container\BrowserContainer.js.map

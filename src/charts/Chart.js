@@ -248,6 +248,7 @@ fCrosshair(){
 
   fPlotLine(color, text){
     return {
+      id: text,
       value: undefined ,
       color: color,
       dashStyle: 'solid',

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 const S = {
   INPUT_TEXT : {
+    display : 'inline',
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -14,7 +15,6 @@ const S = {
     backgroundColor : '#E1E1CB',
     marginLeft : '5px',
     marginRight : '5px',
-    display : 'inline'
   }
 }
 
@@ -22,7 +22,8 @@ const S = {
 class InputText extends Component {
   static propTypes = {
     initValue : PropTypes.string,
-    style : PropTypes.object
+    style : PropTypes.object,
+    onEnter : PropTypes.func
   }
   static defaultProps = {
     initValue : ''
@@ -30,6 +31,7 @@ class InputText extends Component {
 
   constructor(props){
     super();
+    this.isOnEnter = (typeof props.onEnter === "function" ) ? true : false
     this.state = {
       value : props.initValue
     }
@@ -44,10 +46,18 @@ class InputText extends Component {
   _handleInputChange = (event) => {
     this.setState({ value : event.target.value })
   }
+ _handleKeyDown = (event) => {
+   if (this.isOnEnter){
+      if (event.keyCode === 13){
+        this.props.onEnter(event.target.value)
+      }
+    }
+ }
+
 
   render(){
-    const {style} = this.props
-        , {value} = this.state;
+    const { style } = this.props
+        , { value } = this.state;
     return (
       <input
         name="text"
@@ -60,6 +70,7 @@ class InputText extends Component {
         value={value}
         translate={false}
         onChange={this._handleInputChange}
+        onKeyDown={this._handleKeyDown}
       />
     )
   }

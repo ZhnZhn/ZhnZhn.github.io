@@ -18,6 +18,7 @@ const _createAreaChartItem = function(config, index, option, props){
            caption={id}
            config={config}
            onSetActive={ComponentActions.setActiveCheckbox}
+           onShowConfigDialog={ComponentActions.showOptionDialog.bind(null, 'ChartConfigDialog')}
            onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
            {...props}
        />

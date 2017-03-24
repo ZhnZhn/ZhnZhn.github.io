@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const styles = {
   rootDiv : {
+    display: 'inline-block',
     width: '16px',
     height: '16px',
-    display: 'inline-block',
     cursor: 'pointer'
   },
   rootSvg : {
@@ -13,14 +13,20 @@ const styles = {
 }
 
 class SvgCheckBox extends Component {
+  static propTypes = {
+    chartType: PropTypes.string,
+    onCheck: PropTypes.func,
+    onUnCheck: PropTypes.func
+  }
+
   constructor(props){
     super();
 
-    const { onCheck, onUnCheck, chartType } = props
+    const { chartType, onCheck, onUnCheck } = props
         , isOnCheck = (typeof onCheck === 'function') ? true : false
         , isOnUnCheck = (typeof onUnCheck === 'function') ? true : false;
 
-    this.chartType = (chartType) ? chartType : 'Uknown';
+    this.chartType = (chartType) ? chartType : 'Unknown';
 
     this.state = {
         isChecked: false,
@@ -36,12 +42,23 @@ class SvgCheckBox extends Component {
     } else if (isOnUnCheck){
       this.props.onUnCheck(this);
     }
-    this.setState({isChecked: !isChecked});
+    this.setState({ isChecked: !isChecked });
   }
 
   render(){
-    const {rootStyle} = this.props;
-
+    const { rootStyle } = this.props
+    , pathCheckedEl = (this.state.isChecked)
+        ? (
+            <path
+                d="M 2,3 L 8,14 14,3"
+                strokeWidth="2"
+                stroke="yellow"
+                fill="#4D4D4D"
+            >
+            </path>
+          )
+        : null;
+    /*
     let pathChecked;
     if (this.state.isChecked){
       pathChecked = (
@@ -54,6 +71,7 @@ class SvgCheckBox extends Component {
           </path>
       );
     }
+    */
     return (
       <div
            style={Object.assign({}, styles.rootDiv, rootStyle)}
@@ -70,7 +88,7 @@ class SvgCheckBox extends Component {
                 fill="#4D4D4D" rx="3"
           >
           </rect>
-          {pathChecked}
+          {pathCheckedEl}
         </svg>
 
       </div>

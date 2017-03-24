@@ -76,7 +76,8 @@ var DialogContainer3 = function (_Component) {
     _this._onStore = function (actionType, data) {
       var _this$props = _this.props,
           initAction = _this$props.initAction,
-          showAction = _this$props.showAction;
+          showAction = _this$props.showAction,
+          showOptionAction = _this$props.showOptionAction;
 
       if (actionType === showAction) {
         if (!_this.state.dialog[data]) {
@@ -89,6 +90,11 @@ var DialogContainer3 = function (_Component) {
         _this.state.dialog[data.dialogType] = true;
         _this.state.compDialogs.push(data.dialogComp);
         _this._checkActiveDialogs(data.dialogType);
+        _this.setState(_this.state);
+      } else if (actionType === showOptionAction) {
+        _this.state.dialog[data.dialogType] = true;
+        _this.state.compDialogs.push(data.dialogComp);
+        _this.state.optionData[data.dialogType] = data;
         _this.setState(_this.state);
       }
     };
@@ -108,13 +114,16 @@ var DialogContainer3 = function (_Component) {
     _this._renderDialogs = function () {
       var _this$state = _this.state,
           dialog = _this$state.dialog,
-          compDialogs = _this$state.compDialogs;
+          compDialogs = _this$state.compDialogs,
+          optionData = _this$state.optionData;
 
       return compDialogs.map(function (compDialog, index) {
+        var _options = optionData[compDialog.key];
         return _react2.default.cloneElement(compDialog, {
           key: compDialog.key,
           isShow: dialog[compDialog.key],
-          onClose: _this._handlerToggleDialog.bind(_this, compDialog.key)
+          onClose: _this._handlerToggleDialog.bind(_this, compDialog.key),
+          optionData: _options
         });
       });
     };
@@ -122,7 +131,8 @@ var DialogContainer3 = function (_Component) {
     _this._activeDialogs = [];
     _this.state = {
       dialog: {},
-      compDialogs: []
+      compDialogs: [],
+      optionData: {}
     };
     return _this;
   }
@@ -151,4 +161,4 @@ var DialogContainer3 = function (_Component) {
 }(_react.Component);
 
 exports.default = DialogContainer3;
-//# sourceMappingURL=DialogContainer3.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\DialogContainer3.js.map

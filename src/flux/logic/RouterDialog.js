@@ -13,6 +13,7 @@ import Futures3Dialog from '../../components/quandl-browser/Futures3Dialog';
 import FuturesWikiDialog from '../../components/quandl-browser/FuturesWikiDialog';
 import JodiWorldOilDialog from '../../components/quandl-browser/JodiWorldOilDialog';
 
+import ChartConfigDialog from '../../components/chart-config/ChartConfigDialog'
 
 const RouterDialog = {
   DEFAULT : DialogType3,
@@ -29,6 +30,8 @@ const RouterDialog = {
   Futures3Dialog : Futures3Dialog,
   FuturesWikiDialog : FuturesWikiDialog,
   JodiWorldOilDialog : JodiWorldOilDialog,
+
+  ChartConfigDialog : ChartConfigDialog
 }
 
 export default RouterDialog

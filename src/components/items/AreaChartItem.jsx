@@ -67,7 +67,7 @@ const AreaChartItem = React.createClass({
   },
 
   componentDidMount(){
-    this.mainChart = this.refs.chart.getChart();
+    this.mainChart = this.chartComp.getChart()
   },
 
   _handlerLoadedMetricChart(metricChart){
@@ -162,7 +162,8 @@ const AreaChartItem = React.createClass({
   },
 
   _handlerCheckBox(isCheck, checkBox){
-    this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
+    //this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
+    this.props.onSetActive(isCheck, checkBox, this.mainChart);
   },
 
   _handlerAddSma(period){
@@ -181,6 +182,11 @@ const AreaChartItem = React.createClass({
       return objConfig.id !== id;
     })
     this.setState({mfiConfigs: this.state.mfiConfigs});
+  },
+
+  _handleClickConfig(){
+    const { caption, onShowConfigDialog } = this.props
+    onShowConfigDialog({ caption, chart: this.mainChart })
   },
 
   _createChartToolBar(config){
@@ -257,6 +263,19 @@ const AreaChartItem = React.createClass({
       />
     ) : undefined;
 
+
+   /*
+   const _btConf = (
+     <ButtonTab
+       style={{left: '520px'}}
+       caption={'Conf'}
+       //isShow={this.state.isShowHighLow}
+       onClick={this._handleClickConfig}
+     />
+   )
+   */
+
+
     return (
       <div style={styles.tabDiv}>
          {_btIndicator}
@@ -267,6 +286,7 @@ const AreaChartItem = React.createClass({
          {_btVolume}
          {_btATH}
          {_btHL}
+         {/*_btConf*/}
       </div>
     );
   },
@@ -346,16 +366,6 @@ const AreaChartItem = React.createClass({
             mfiConfigs
         } = this.state;
 
-    //console.log(this.props);
-
-    /*
-    const absComp = (
-                      <div style={ {position: 'absolute', left: '5px', bottom: '-5px', color: '#909090', fontSize: '9px'} }>
-                        Quandl
-                      </div>
-                    );
-    */
-
     return (
       <div style={styles.rootDiv}>
          <Header
@@ -373,7 +383,7 @@ const AreaChartItem = React.createClass({
         <ShowHide isShow={isOpen} style={styles.showHide}>
            {isShowChart && this._createChartToolBar(config)}
            <HighchartWrapper
-              ref="chart"
+              ref={comp => this.chartComp = comp}
               isShow={isShowChart}
               config={config}
               absComp={this._dataSourceEl}

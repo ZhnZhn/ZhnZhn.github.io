@@ -20,13 +20,15 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* eslint-disable no-undef */
-if (process.env.NODE_ENV === 'production') {
-  /* eslint-enable no-undef */
-  if (window && window.location && window.location.href.indexOf("https://zhnzhn.github.io") > -1) {
-    _ravenJs2.default.config('https://f3e7d09d8d0748af80791d51e5bc83e3@sentry.io/138634').install();
+var _fnInitRaven = function _fnInitRaven() {
+  /* eslint-disable no-undef */
+  if (process.env.NODE_ENV === 'production') {
+    /* eslint-enable no-undef */
+    if (window && window.location && window.location.href.indexOf("https://zhnzhn.github.io") > -1) {
+      _ravenJs2.default.config('https://f3e7d09d8d0748af80791d51e5bc83e3@sentry.io/138634').install();
+    }
   }
-}
+};
 
 var _fnRenderApp = function _fnRenderApp() {
   var preloaderEl = document.getElementById('preloader');
@@ -50,6 +52,7 @@ var _fnLoading = function _fnLoading() {
   }
 };
 
+_fnInitRaven();
 _ChartConfig2.default.init();
 _fnLoading();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\index.js.map

@@ -99,7 +99,7 @@ var AreaChartItem = _react2.default.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    this.mainChart = this.refs.chart.getChart();
+    this.mainChart = this.chartComp.getChart();
   },
   _handlerLoadedMetricChart: function _handlerLoadedMetricChart(metricChart) {
     this.mainChart.options.zhDetailCharts.push(metricChart);
@@ -194,7 +194,8 @@ var AreaChartItem = _react2.default.createClass({
     this.setState({ isShowChart: true, isShowInfo: false });
   },
   _handlerCheckBox: function _handlerCheckBox(isCheck, checkBox) {
-    this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
+    //this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
+    this.props.onSetActive(isCheck, checkBox, this.mainChart);
   },
   _handlerAddSma: function _handlerAddSma(period) {
     return this.mainChart.options.zhFnAddSeriesSma(this.mainChart, period);
@@ -212,6 +213,13 @@ var AreaChartItem = _react2.default.createClass({
       return objConfig.id !== id;
     });
     this.setState({ mfiConfigs: this.state.mfiConfigs });
+  },
+  _handleClickConfig: function _handleClickConfig() {
+    var _props2 = this.props,
+        caption = _props2.caption,
+        onShowConfigDialog = _props2.onShowConfigDialog;
+
+    onShowConfigDialog({ caption: caption, chart: this.mainChart });
   },
   _createChartToolBar: function _createChartToolBar(config) {
     var _btIndicator = !config.zhConfig.isWithoutIndicator ? _react2.default.createElement(
@@ -272,6 +280,17 @@ var AreaChartItem = _react2.default.createClass({
       isShow: this.state.isShowHighLow,
       onClick: this._handlerClickHighLow
     }) : undefined;
+
+    /*
+    const _btConf = (
+      <ButtonTab
+        style={{left: '520px'}}
+        caption={'Conf'}
+        //isShow={this.state.isShowHighLow}
+        onClick={this._handleClickConfig}
+      />
+    )
+    */
 
     return _react2.default.createElement(
       'div',
@@ -356,11 +375,13 @@ var AreaChartItem = _react2.default.createClass({
     );
   },
   render: function render() {
-    var _props2 = this.props,
-        chartType = _props2.chartType,
-        caption = _props2.caption,
-        config = _props2.config,
-        onCloseItem = _props2.onCloseItem,
+    var _this3 = this;
+
+    var _props3 = this.props,
+        chartType = _props3.chartType,
+        caption = _props3.caption,
+        config = _props3.config,
+        onCloseItem = _props3.onCloseItem,
         _config$zhConfig = config.zhConfig,
         itemCaption = _config$zhConfig.itemCaption,
         itemTime = _config$zhConfig.itemTime,
@@ -371,16 +392,6 @@ var AreaChartItem = _react2.default.createClass({
         isShowInfo = _state4.isShowInfo,
         isShowIndicator = _state4.isShowIndicator,
         mfiConfigs = _state4.mfiConfigs;
-
-    //console.log(this.props);
-
-    /*
-    const absComp = (
-                      <div style={ {position: 'absolute', left: '5px', bottom: '-5px', color: '#909090', fontSize: '9px'} }>
-                        Quandl
-                      </div>
-                    );
-    */
 
     return _react2.default.createElement(
       'div',
@@ -402,7 +413,9 @@ var AreaChartItem = _react2.default.createClass({
         { isShow: isOpen, style: styles.showHide },
         isShowChart && this._createChartToolBar(config),
         _react2.default.createElement(_HighchartWrapper2.default, {
-          ref: 'chart',
+          ref: function ref(comp) {
+            return _this3.chartComp = comp;
+          },
           isShow: isShowChart,
           config: config,
           absComp: this._dataSourceEl

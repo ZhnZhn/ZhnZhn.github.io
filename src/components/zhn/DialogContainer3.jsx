@@ -28,7 +28,8 @@ class DialogContainer3 extends Component {
     this._activeDialogs = [];
     this.state = {
       dialog: {},
-      compDialogs : []
+      compDialogs : [],
+      optionData: {}
     }
   }
 
@@ -53,7 +54,7 @@ class DialogContainer3 extends Component {
    }
 
    _onStore = (actionType, data) => {
-      const {initAction, showAction} = this.props;
+      const { initAction, showAction, showOptionAction } = this.props;
       if (actionType === showAction){
          if (!this.state.dialog[data]){
             this.state.dialog[data] = true;
@@ -67,6 +68,11 @@ class DialogContainer3 extends Component {
          this.state.compDialogs.push(data.dialogComp);
          this._checkActiveDialogs(data.dialogType);
          this.setState(this.state);
+      } else if (actionType === showOptionAction ){
+         this.state.dialog[data.dialogType] = true
+         this.state.compDialogs.push(data.dialogComp)
+         this.state.optionData[data.dialogType] = data
+         this.setState(this.state)
       }
    }
 
@@ -82,13 +88,15 @@ class DialogContainer3 extends Component {
   }
 
   _renderDialogs = () => {
-    const {dialog, compDialogs} = this.state;
+    const {dialog, compDialogs, optionData } = this.state;
     return compDialogs.map((compDialog, index) => {
+       const _options = optionData[compDialog.key]
        return React.cloneElement(compDialog,
           {
              key : compDialog.key,
              isShow  : dialog[compDialog.key],
-             onClose : this._handlerToggleDialog.bind(this, compDialog.key)
+             onClose : this._handlerToggleDialog.bind(this, compDialog.key),
+             optionData : _options
           });
     })
   }

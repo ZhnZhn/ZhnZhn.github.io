@@ -122,6 +122,15 @@ var createDialogComp = function createDialogComp(conf, browserType) {
   }, props));
 };
 
+var _createOptionDialog = function _createOptionDialog(option) {
+  var dialogType = option.dialogType,
+      Comp = _RouterDialog2.default[dialogType];
+
+  return _react2.default.createElement(Comp, {
+    key: dialogType
+  });
+};
+
 var onCloseItem = _ChartActions2.default.closeChart;
 var fnCloseChartContainer = function fnCloseChartContainer(chartType, browserType) {
   return _ComponentActions2.default.closeChartContainer.bind(null, chartType, browserType);
@@ -152,6 +161,9 @@ var _getDialogConf = function _getDialogConf(dialogType) {
 var Factory = {
   createDialog: function createDialog(dialogType, browserType) {
     return createDialogComp(_getDialogConf(dialogType), browserType);
+  },
+  createOptionDialog: function createOptionDialog(option) {
+    return _createOptionDialog(option);
   },
   createChartContainer: function createChartContainer(dialogType, browserType) {
     return createChartContainerComp(_getDialogConf(dialogType), browserType);
@@ -191,4 +203,4 @@ var Factory = {
 };
 
 exports.default = Factory;
-//# sourceMappingURL=Factory.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\Factory.js.map

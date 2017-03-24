@@ -10,7 +10,7 @@ const STYLE = {
     paddingTop: '4px',
     //paddingLeft: '10px',
     lineHeight: 1.8,
-    //height: '28px',
+    height: '32px',
     width : '100%',
     borderTopRightRadius: '2px',
     borderBottomRightRadius: '2px'
@@ -71,7 +71,7 @@ const Header = (props) => {
                </span>
              )
            : undefined;
-
+      
   return (
     <div style={STYLE.ROOT}>
       <SvgCheckBox

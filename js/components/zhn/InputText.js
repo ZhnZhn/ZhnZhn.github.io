@@ -30,6 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var S = {
   INPUT_TEXT: {
+    display: 'inline',
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -41,8 +42,7 @@ var S = {
     fontWeight: 'bold',
     backgroundColor: '#E1E1CB',
     marginLeft: '5px',
-    marginRight: '5px',
-    display: 'inline'
+    marginRight: '5px'
   }
 };
 
@@ -58,6 +58,14 @@ var InputText = (_temp = _class = function (_Component) {
       _this.setState({ value: event.target.value });
     };
 
+    _this._handleKeyDown = function (event) {
+      if (_this.isOnEnter) {
+        if (event.keyCode === 13) {
+          _this.props.onEnter(event.target.value);
+        }
+      }
+    };
+
     _this.getValue = function () {
       return _this.state.value;
     };
@@ -66,6 +74,7 @@ var InputText = (_temp = _class = function (_Component) {
       _this.setState({ value: value });
     };
 
+    _this.isOnEnter = typeof props.onEnter === "function" ? true : false;
     _this.state = {
       value: props.initValue
     };
@@ -95,7 +104,8 @@ var InputText = (_temp = _class = function (_Component) {
         style: Object.assign({}, S.INPUT_TEXT, style),
         value: value,
         translate: false,
-        onChange: this._handleInputChange
+        onChange: this._handleInputChange,
+        onKeyDown: this._handleKeyDown
       });
     }
   }]);
@@ -105,7 +115,8 @@ var InputText = (_temp = _class = function (_Component) {
 }, _temp);
 process.env.NODE_ENV !== "production" ? InputText.propTypes = {
   initValue: _react.PropTypes.string,
-  style: _react.PropTypes.object
+  style: _react.PropTypes.object,
+  onEnter: _react.PropTypes.func
 } : void 0;
 exports.default = InputText;
-//# sourceMappingURL=InputText.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputText.js.map

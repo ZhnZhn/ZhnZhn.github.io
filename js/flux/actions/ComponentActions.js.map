@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../../src/flux/actions/ComponentActions.js"],"names":["ComponentActionTypes","SHOW_ABOUT","INIT_AND_SHOW_DIALOG","SHOW_DIALOG","CLOSE_CHART_CONTAINER","CLOSE_CHART_CONTAINER_2","SET_ACTIVE_CHECKBOX","SHOW_MODAL_DIALOG","ComponentActions","createActions"],"mappings":";;;;;;;;;;;;;AAAA;;;;;;AAEO,IAAMA,sDAAuB;AAClCC,cAAa,WADqB;;AAGlCC,wBAAuB,mBAHW;AAIlCC,eAAc,YAJoB;AAKlCC,yBAAwB,qBALU;AAMlCC,2BAA0B,sBANQ;AAOlCC,uBAAsB,mBAPY;;AASlCC,qBAAoB;AATc,CAA7B;;AAYP,IAAMC,mBAAmB,iBAAOC,aAAP,mFACtBT,qBAAqBC,UADC,EACa,EADb,wDAGtBD,qBAAqBE,oBAHC,EAGuB,EAHvB,wDAItBF,qBAAqBG,WAJC,EAIc,EAJd,wDAKtBH,qBAAqBI,qBALC,EAKwB,EALxB,wDAMtBJ,qBAAqBK,uBANC,EAM0B,EAN1B,wDAOtBL,qBAAqBM,mBAPC,EAOsB,EAPtB,wDAStBN,qBAAqBO,iBATC,EASoB,EATpB,0BAAzB;;kBAaeC,gB","file":"ComponentActions.js","sourcesContent":["import Reflux from 'reflux';\r\n\r\nexport const ComponentActionTypes = {\r\n  SHOW_ABOUT : 'showAbout',\r\n\r\n  INIT_AND_SHOW_DIALOG : 'initAndShowDialog',\r\n  SHOW_DIALOG : 'showDialog',\r\n  CLOSE_CHART_CONTAINER : 'closeChartContainer',\r\n  CLOSE_CHART_CONTAINER_2 : 'closeChartContainer2',\r\n  SET_ACTIVE_CHECKBOX : 'setActiveCheckbox',\r\n\r\n  SHOW_MODAL_DIALOG : 'showModalDialog'\r\n}\r\n\r\nconst ComponentActions = Reflux.createActions({\r\n  [ComponentActionTypes.SHOW_ABOUT] : {},\r\n\r\n  [ComponentActionTypes.INIT_AND_SHOW_DIALOG] : {},\r\n  [ComponentActionTypes.SHOW_DIALOG] : {},\r\n  [ComponentActionTypes.CLOSE_CHART_CONTAINER] : {},\r\n  [ComponentActionTypes.CLOSE_CHART_CONTAINER_2] : {},\r\n  [ComponentActionTypes.SET_ACTIVE_CHECKBOX] : {},\r\n\r\n  [ComponentActionTypes.SHOW_MODAL_DIALOG] : {}\r\n});\r\n\r\n\r\nexport default ComponentActions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\ComponentActions.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\ComponentActions.js",
+ "sourceRoot": "",
+ "names": [
+  "ComponentActionTypes",
+  "SHOW_ABOUT",
+  "INIT_AND_SHOW_DIALOG",
+  "SHOW_DIALOG",
+  "SHOW_OPTION_DIALOG",
+  "CLOSE_CHART_CONTAINER",
+  "CLOSE_CHART_CONTAINER_2",
+  "SET_ACTIVE_CHECKBOX",
+  "SHOW_MODAL_DIALOG",
+  "ComponentActions",
+  "createActions"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;;;;;AAEO,IAAMA,sDAAuB;AAClCC,cAAa,WADqB;;AAGlCC,wBAAuB,mBAHW;AAIlCC,eAAc,YAJoB;AAKlCC,sBAAqB,kBALa;AAMlCC,yBAAwB,qBANU;AAOlCC,2BAA0B,sBAPQ;AAQlCC,uBAAsB,mBARY;;AAUlCC,qBAAoB;AAVc,CAA7B;;AAaP,IAAMC,mBAAmB,iBAAOC,aAAP,mFACtBV,qBAAqBC,UADC,EACa,EADb,wDAGtBD,qBAAqBE,oBAHC,EAGuB,EAHvB,wDAItBF,qBAAqBG,WAJC,EAIc,EAJd,wDAKtBH,qBAAqBI,kBALC,EAKqB,EALrB,wDAMtBJ,qBAAqBK,qBANC,EAMwB,EANxB,wDAOtBL,qBAAqBM,uBAPC,EAO0B,EAP1B,wDAQtBN,qBAAqBO,mBARC,EAQsB,EARtB,wDAUtBP,qBAAqBQ,iBAVC,EAUoB,EAVpB,0BAAzB;;kBAceC,gB"
+}

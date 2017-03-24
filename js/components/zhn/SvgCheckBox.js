@@ -30,9 +30,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = {
   rootDiv: {
+    display: 'inline-block',
     width: '16px',
     height: '16px',
-    display: 'inline-block',
     cursor: 'pointer'
   },
   rootSvg: {
@@ -50,14 +50,14 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
 
     _initialiseProps.call(_this);
 
-    var onCheck = props.onCheck,
+    var chartType = props.chartType,
+        onCheck = props.onCheck,
         onUnCheck = props.onUnCheck,
-        chartType = props.chartType,
         isOnCheck = typeof onCheck === 'function' ? true : false,
         isOnUnCheck = typeof onUnCheck === 'function' ? true : false;
 
 
-    _this.chartType = chartType ? chartType : 'Uknown';
+    _this.chartType = chartType ? chartType : 'Unknown';
 
     _this.state = {
       isChecked: false,
@@ -70,18 +70,27 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
   (0, _createClass3.default)(SvgCheckBox, [{
     key: 'render',
     value: function render() {
-      var rootStyle = this.props.rootStyle;
-
-
-      var pathChecked = void 0;
-      if (this.state.isChecked) {
-        pathChecked = _react2.default.createElement('path', {
-          d: 'M 2,3 L 8,14 14,3',
-          strokeWidth: '2',
-          stroke: 'yellow',
-          fill: '#4D4D4D'
-        });
+      var rootStyle = this.props.rootStyle,
+          pathCheckedEl = this.state.isChecked ? _react2.default.createElement('path', {
+        d: 'M 2,3 L 8,14 14,3',
+        strokeWidth: '2',
+        stroke: 'yellow',
+        fill: '#4D4D4D'
+      }) : null;
+      /*
+      let pathChecked;
+      if (this.state.isChecked){
+        pathChecked = (
+            <path
+                d="M 2,3 L 8,14 14,3"
+                strokeWidth="2"
+                stroke="yellow"
+                fill="#4D4D4D"
+            >
+            </path>
+        );
       }
+      */
       return _react2.default.createElement(
         'div',
         {
@@ -100,7 +109,7 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
             strokeWidth: '2', stroke: '#777777',
             fill: '#4D4D4D', rx: '3'
           }),
-          pathChecked
+          pathCheckedEl
         )
       );
     }
@@ -127,5 +136,10 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
     _this2.setState({ isChecked: false });
   };
 }, _temp);
+process.env.NODE_ENV !== "production" ? SvgCheckBox.propTypes = {
+  chartType: _react.PropTypes.string,
+  onCheck: _react.PropTypes.func,
+  onUnCheck: _react.PropTypes.func
+} : void 0;
 exports.default = SvgCheckBox;
-//# sourceMappingURL=SvgCheckBox.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgCheckBox.js.map

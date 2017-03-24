@@ -26,6 +26,11 @@ var ComponentSlice = {
       this.trigger(_ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG, { dialogType: dialogType, dialogComp: dialogComp });
     }
   },
+  onShowOptionDialog: function onShowOptionDialog(dialogType, option) {
+    option.dialogType = dialogType;
+    option.dialogComp = _Factory2.default.createOptionDialog(option);
+    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_OPTION_DIALOG, option);
+  },
   isLoadToChart: function isLoadToChart() {
     if (this.activeChart) {
       return this.activeChart.options.zhConfig.id;
@@ -64,4 +69,4 @@ var ComponentSlice = {
 };
 
 exports.default = ComponentSlice;
-//# sourceMappingURL=ComponentSlice.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ComponentSlice.js.map

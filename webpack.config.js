@@ -11,7 +11,7 @@ module.exports = {
             "react-addons-shallow-compare", "react-addons-css-transition-group",
             "reflux",
             "big.js", "interact.js", "localforage", "query-string",
-            "lodash.sortby", "lodash.merge", "lodash.flow",
+            "lodash.sortby", "lodash.merge", "lodash.flow", "lodash.get",
             "purify",
             "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
             "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",

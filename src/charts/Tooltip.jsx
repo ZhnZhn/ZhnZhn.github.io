@@ -164,7 +164,7 @@ const _fnTreeMapTooltip = function({id, point}){
 const _fnAddHandlerClose = function(id, point){
   setTimeout( function(){
           document.getElementById(id)
-             .addEventListener('click', function _fnHide(){
+             .addEventListener('click', function _fnHide(){                    
                     document.getElementById(id).removeEventListener('click', _fnHide);
                     point.series.chart.zhTooltip.hide();
          })

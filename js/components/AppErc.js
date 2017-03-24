@@ -98,7 +98,8 @@ var AppErc = function (_Component) {
             updateBrowserAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
             updateWatchAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER,
             initDialogAction: _ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG,
-            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG
+            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+            showOptionDialogAction: _ComponentActions.ComponentActionTypes.SHOW_OPTION_DIALOG
           }),
           _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
           _react2.default.createElement(_ComponentHrzContainer2.default, null)
@@ -116,4 +117,4 @@ var AppErc = function (_Component) {
 }(_react.Component);
 
 exports.default = AppErc;
-//# sourceMappingURL=AppErc.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\AppErc.js.map

@@ -48,6 +48,8 @@ var TabPane = (_temp = _class = function (_Component) {
 
     _initialiseProps.call(_this);
 
+    _this.isUpdateInit = props.isUpdateInit;
+
     var components = props.children.map(function (tab, index) {
       return _react2.default.cloneElement(tab.props.children, { key: 'comp' + index });
     });
@@ -59,12 +61,23 @@ var TabPane = (_temp = _class = function (_Component) {
   }
 
   (0, _createClass3.default)(TabPane, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.isUpdateInit && this.props !== nextProps) {
+        var components = nextProps.children.map(function (tab, index) {
+          return _react2.default.cloneElement(tab.props.children, { key: 'comp' + index });
+        });
+        this.setState({ components: components });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
           children = _props.children,
           width = _props.width,
           height = _props.height;
+
 
       return _react2.default.createElement(
         'div',
@@ -118,5 +131,11 @@ var TabPane = (_temp = _class = function (_Component) {
     return _this2.state.selectedTabIndex;
   };
 }, _temp);
+process.env.NODE_ENV !== "production" ? TabPane.propTypes = {
+  isUpdateInit: _react.PropTypes.bool,
+  width: _react.PropTypes.string,
+  height: _react.PropTypes.string,
+  children: _react.PropTypes.arrayOf(_react.PropTypes.node)
+} : void 0;
 exports.default = TabPane;
-//# sourceMappingURL=TabPane.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\TabPane.js.map

@@ -23,10 +23,16 @@ const ChartFn = {
   addSeriaWithRenderLabel(chart, series, label){
     const options = chart.options;
     if (!options.zhSeries){
-      options.zhSeries = {}
-    }                       
+      options.zhSeries = {
+        count: 0,
+        titleEls: []
+      }
+    } else if (!options.zhSeries.titleEls){
+      options.zhSeries.titleEls = []
+    }
+
     const seriesText = (label.length>C.SERIA_LABEL_CHARS)
-              ? label.substring(0,C.SERIA_LABEL_CHARS)
+              ? label.substring(0, C.SERIA_LABEL_CHARS)
               : label
         , seriesCount = options.zhSeries.count
         , row = Math.floor(seriesCount/C.SERIA_LABELS_IN_ROW)
@@ -36,11 +42,15 @@ const ChartFn = {
         , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
 
     chart.addSeries(series, true, true);
-    chart.renderer.text(seriesText, x, y)
-          .css({ color: options.colors[series._colorIndex], 'font-size': '16px' })
-          .add();
+    const textEl = chart.renderer.text(seriesText, x, y)
+                    .css({
+                          color: options.colors[series._colorIndex],
+                          'font-size': '16px'
+                        })
+                    .add();
 
-    options.zhSeries.count +=1;
+    options.zhSeries.count +=1
+    options.zhSeries.titleEls.push(textEl)
 
     if ( (series.minY !== undefined) && options.yAxis[0].min>series.minY ){
         chart.yAxis[0].update({ min: series.minY, startOnTick: true });

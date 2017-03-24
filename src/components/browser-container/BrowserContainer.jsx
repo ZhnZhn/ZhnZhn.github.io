@@ -32,7 +32,7 @@ const BrowserContainer = React.createClass({
     const {
             store, showBrowserAction, updateBrowserAction,
             updateWatchAction,
-            initDialogAction, showDialogAction
+            initDialogAction, showDialogAction, showOptionDialogAction
           } = this.props
         , { elBrowsers } = this.state;
 
@@ -59,6 +59,7 @@ const BrowserContainer = React.createClass({
               store={store}
               initAction={initDialogAction}
               showAction={showDialogAction}
+              showOptionAction={showOptionDialogAction}
            />
       </div>
     );

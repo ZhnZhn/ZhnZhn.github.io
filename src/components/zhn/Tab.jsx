@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const S = {
   LI : {
@@ -29,8 +29,8 @@ const S = {
   }
 }
 
-const Tab = (props) => {
-    const {title, isSelected, onClick} = props;
+
+const Tab = ({ title, isSelected, onClick }) => {
     const _selectedStyle = (isSelected) ? S.SELECTED : null;
     return (
        <li
@@ -41,5 +41,12 @@ const Tab = (props) => {
        </li>
     )
 }
+
+Tab.propTypes = {
+  title: PropTypes.string,
+  isSelected: PropTypes.bool,
+  onClick: PropTypes.func
+}
+
 
 export default Tab

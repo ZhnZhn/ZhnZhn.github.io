@@ -5,6 +5,7 @@
    padding-right: 20px;
    font-size: 16px;
    font-weight: bold;
+   pointer-events: visible;
    cursor: pointer;
  }
  .tp__header__caption{

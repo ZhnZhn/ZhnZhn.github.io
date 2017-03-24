@@ -1,0 +1,24 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\chart-config\\SeriaPane.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\chart-config\\SeriaPane.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "ROOT",
+  "paddingTop",
+  "minWidth",
+  "SeriaPane",
+  "_renderSeries",
+  "chart",
+  "series",
+  "map",
+  "seriaOptions",
+  "index",
+  "props",
+  "propTypes",
+  "object"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AAGA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAM;AACHC,gBAAY,KADT;AAEHC,cAAU;AAFP;AADM,CAAd;;IAOMC,S;;;;;;;;;;;;;;0MAKJC,a,GAAgB,UAACC,KAAD,EAAW;AACvB,UAAMC,SAAS,sBAAQD,KAAR,EAAe,QAAf,EAAyB,EAAzB,CAAf;AACA,aAAOC,OAAOC,GAAP,CAAW,UAACC,YAAD,EAAeC,KAAf,EAAyB;AACxC,eACE;AACG,eAAKA,KADR;AAEG,iBAAOJ,KAFV;AAGG,mBAASG,YAHZ;AAIG,sBAAYC;AAJf,UADF;AAQF,OATM,CAAP;AAUH,K;;;;;6BAEO;AAAA,UACEJ,KADF,GACY,KAAKK,KADjB,CACEL,KADF;;AAEN,aACE;AAAA;AAAA,UAAK,OAAON,MAAMC,IAAlB;AACG,aAAKI,aAAL,CAAmBC,KAAnB;AADH,OADF;AAKD;;;;;wCA1BGF,S,CACGQ,S,GAAY;AACjBN,SAAO,iBAAUO;AADA,C;kBA4BNT,S"
+}

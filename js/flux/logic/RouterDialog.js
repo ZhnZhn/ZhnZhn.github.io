@@ -52,6 +52,10 @@ var _JodiWorldOilDialog = require('../../components/quandl-browser/JodiWorldOilD
 
 var _JodiWorldOilDialog2 = _interopRequireDefault(_JodiWorldOilDialog);
 
+var _ChartConfigDialog = require('../../components/chart-config/ChartConfigDialog');
+
+var _ChartConfigDialog2 = _interopRequireDefault(_ChartConfigDialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterDialog = {
@@ -68,8 +72,10 @@ var RouterDialog = {
   BigMacDialog: _BigMacDialog2.default,
   Futures3Dialog: _Futures3Dialog2.default,
   FuturesWikiDialog: _FuturesWikiDialog2.default,
-  JodiWorldOilDialog: _JodiWorldOilDialog2.default
+  JodiWorldOilDialog: _JodiWorldOilDialog2.default,
+
+  ChartConfigDialog: _ChartConfigDialog2.default
 };
 
 exports.default = RouterDialog;
-//# sourceMappingURL=RouterDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\RouterDialog.js.map

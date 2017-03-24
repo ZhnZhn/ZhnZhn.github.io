@@ -36,6 +36,7 @@ class AppErc extends Component {
               updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
               initDialogAction={ComponentActionTypes.INIT_AND_SHOW_DIALOG}
               showDialogAction={ComponentActionTypes.SHOW_DIALOG}
+              showOptionDialogAction={ComponentActionTypes.SHOW_OPTION_DIALOG}
            />
            <About store={ChartStore} isShow={true} />
            <ComponentHrzContainer />
