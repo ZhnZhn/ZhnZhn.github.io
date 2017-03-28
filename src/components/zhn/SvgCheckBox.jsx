@@ -14,6 +14,7 @@ const styles = {
 
 class SvgCheckBox extends Component {
   static propTypes = {
+    value: PropTypes.bool,
     chartType: PropTypes.string,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func
@@ -22,16 +23,25 @@ class SvgCheckBox extends Component {
   constructor(props){
     super();
 
-    const { chartType, onCheck, onUnCheck } = props
+    const { chartType, value, onCheck, onUnCheck } = props
         , isOnCheck = (typeof onCheck === 'function') ? true : false
         , isOnUnCheck = (typeof onUnCheck === 'function') ? true : false;
 
     this.chartType = (chartType) ? chartType : 'Unknown';
 
     this.state = {
-        isChecked: false,
+        //isChecked: false,
+        isChecked: !!value,
         isOnCheck,
         isOnUnCheck
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (this.props !== nextProps
+        && typeof nextProps.value !== 'undefined')
+    {
+      this.setState({ isChecked: !!nextProps.value })
     }
   }
 
@@ -58,20 +68,7 @@ class SvgCheckBox extends Component {
             </path>
           )
         : null;
-    /*
-    let pathChecked;
-    if (this.state.isChecked){
-      pathChecked = (
-          <path
-              d="M 2,3 L 8,14 14,3"
-              strokeWidth="2"
-              stroke="yellow"
-              fill="#4D4D4D"
-          >
-          </path>
-      );
-    }
-    */
+
     return (
       <div
            style={Object.assign({}, styles.rootDiv, rootStyle)}

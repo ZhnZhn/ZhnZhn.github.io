@@ -153,5 +153,12 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
     return item + ' is not in valid format';
   }
 }, _temp2);
+process.env.NODE_ENV !== "production" ? DatesFragment.propTypes = {
+  initFromDate: _react.PropTypes.string,
+  initToDate: _react.PropTypes.string,
+  nForecastDate: _react.PropTypes.number,
+  onTestDate: _react.PropTypes.func,
+  msgOnNotValidFormat: _react.PropTypes.func
+} : void 0;
 exports.default = DatesFragment;
-//# sourceMappingURL=DatesFragment.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\DatesFragment.js.map

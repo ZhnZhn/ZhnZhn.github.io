@@ -276,6 +276,7 @@ const AreaChartItem = React.createClass({
    */
 
 
+
     return (
       <div style={styles.tabDiv}>
          {_btIndicator}

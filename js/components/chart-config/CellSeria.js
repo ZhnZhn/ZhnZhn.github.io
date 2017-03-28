@@ -79,21 +79,13 @@ var CellSeria = function (_Component) {
           chart = _this$props$chart === undefined ? {} : _this$props$chart,
           _this$props$seriaInde = _this$props.seriaIndex,
           seriaIndex = _this$props$seriaInde === undefined ? 0 : _this$props$seriaInde,
-          _this$props$options = _this$props.options,
-          options = _this$props$options === undefined ? {} : _this$props$options,
-          color = options.color,
-          _color = color ? color : '#7cb5ec',
           seria = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
           seriaOptions = seria.options;
 
+
       if (seriaOptions && chart.addSeries && _fnIsInArray(arrType, value)) {
+
         seriaOptions.type = value;
-        seriaOptions.color = _color;
-        if (seriaOptions.marker) {
-          seriaOptions.marker.symbol = 'circle';
-        } else {
-          seriaOptions.marker = { symbol: 'circle' };
-        }
         seria.update(seriaOptions);
 
         /*
@@ -107,13 +99,13 @@ var CellSeria = function (_Component) {
           chart = _this$props2$chart === undefined ? {} : _this$props2$chart,
           _this$props2$seriaInd = _this$props2.seriaIndex,
           seriaIndex = _this$props2$seriaInd === undefined ? 0 : _this$props2$seriaInd,
-          seria = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
-          seriaOptions = seria.options;
+          seriaIns = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
+          seriaOptions = seriaIns.options;
 
 
       if (seriaOptions && chart.addSeries && _fnIsValidColor(value)) {
         seriaOptions.color = value;
-        seria.update(seriaOptions);
+        seriaIns.update(seriaOptions);
       }
     }, _this._handleEnterSymbol = function (value) {
       var _this$props3 = _this.props,
@@ -121,8 +113,8 @@ var CellSeria = function (_Component) {
           chart = _this$props3$chart === undefined ? {} : _this$props3$chart,
           _this$props3$seriaInd = _this$props3.seriaIndex,
           seriaIndex = _this$props3$seriaInd === undefined ? 0 : _this$props3$seriaInd,
-          seria = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
-          seriaOptions = seria.options;
+          seriaIns = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
+          seriaOptions = seriaIns.options;
 
 
       if (seriaOptions && chart.addSeries && _fnIsInArray(arrSymbol, value)) {
@@ -131,7 +123,7 @@ var CellSeria = function (_Component) {
         } else {
           seriaOptions.marker = { symbol: value };
         }
-        seria.update(seriaOptions);
+        seriaIns.update(seriaOptions);
       }
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
@@ -175,7 +167,11 @@ var CellSeria = function (_Component) {
 process.env.NODE_ENV !== "production" ? CellSeria.propTypes = {
   chart: _react.PropTypes.object,
   options: _react.PropTypes.shape({
-    type: _react.PropTypes.string
+    type: _react.PropTypes.string,
+    color: _react.PropTypes.string,
+    marker: _react.PropTypes.shape({
+      symbol: _react.PropTypes.string
+    })
   }),
   seriaIndex: _react.PropTypes.number
 } : void 0;

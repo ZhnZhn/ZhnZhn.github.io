@@ -44,6 +44,10 @@ var _SeriaPane = require('./SeriaPane');
 
 var _SeriaPane2 = _interopRequireDefault(_SeriaPane);
 
+var _YAxisPane = require('./YAxisPane');
+
+var _YAxisPane2 = _interopRequireDefault(_YAxisPane);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var STYLE = {
@@ -121,6 +125,11 @@ var ChartConfigDialog = function (_Component) {
             _Tab2.default,
             { title: 'Seria' },
             _react2.default.createElement(_SeriaPane2.default, { chart: chart })
+          ),
+          _react2.default.createElement(
+            _Tab2.default,
+            { title: 'YAxis' },
+            _react2.default.createElement(_YAxisPane2.default, { chart: chart })
           )
         )
       );

@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _lodash = require('lodash.get');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _JsonStatFn = require('./JsonStatFn');
 
 var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
@@ -26,7 +30,7 @@ var URL_LEAFLET = 'lib/leaflet.js',
     URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
     NUMBER_OF_CLUSTERS = 6,
     NUMBER_OF_ITERATION = 100,
-    _clusterColors = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
+    COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
 var _findFeature = function _findFeature() {
   var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -126,61 +130,92 @@ var _fnMergeGeoJsonAndClusters = function _fnMergeGeoJsonAndClusters(geoJson, hm
 var _fnStyle = function _fnStyle(feature) {
   return {
     "color": 'green',
-    "fillColor": _clusterColors[feature.properties.cluster],
+    "fillColor": COLORS[feature.properties.cluster],
     "weight": 1,
     "fillOpacity": 0.7,
     "opacity": 0.65
   };
 };
 
+var _fnCreateEl = function _fnCreateEl(tag) {
+  var className = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var cssText = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+  var el = document.createElement(tag);
+  el.className = className;
+  el.style.cssText = cssText;
+  return el;
+};
+
 var _fnCreateInfoControl = function _fnCreateInfoControl(L) {
   var wgInfo = L.control();
   wgInfo.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'control-info');
-    this.update();
-    return this._div;
+    this.divEl = _fnCreateEl('div', 'control-info');
+    return this.divEl;
   };
   wgInfo.update = function (props) {
     if (props) {
       var label = props.label,
           value = props.value;
 
-
-      this._div.innerHTML = '<b>' + label + '</b><br><b>' + (value ? value : 'uknown') + '</b>';
+      this.divEl.innerHTML = '<p><span>' + label + ':&nbsp;</span><span>' + (value ? value : 'unknown') + '</span></p>';
+    }
+  };
+  wgInfo.updateCluster = function (cluster, color, from, to) {
+    if (cluster) {
+      var str = '<p style="background: ' + color + '; opacity: 0.7; padding: 3px">' + from + '-' + to + '</p>';
+      var points = (0, _lodash2.default)(cluster, 'points', []);
+      points.forEach(function (point) {
+        str += '<p style="padding: 3px;"><span style="display: inline-block; width: 30px;">' + point.id + '</span><span>' + point[0] + '</span></p>';
+      });
+      this.divEl.innerHTML = str;
     }
   };
   return wgInfo;
 };
 
-var _fnCalcUpper = function _fnCalcUpper(_clusters, index) {
-  var _arrL = _clusters[index].points,
-      _arrH = _clusters[index + 1].points,
-      _upLow = _arrL[_arrL.length - 1][0],
-      _upUp = _arrH[0] ? _arrH[0][0] : _upLow;
+var _fnCalcUpper = function _fnCalcUpper(clusters, index) {
+  var arrL = (0, _lodash2.default)(clusters, '[' + index + '].points', [[0]]),
+      arrH = (0, _lodash2.default)(clusters, '[' + (index + 1) + '].points', [[0]]),
+      upLow = arrL[arrL.length - 1][0],
+      upUp = arrH[0] ? arrH[0][0] : upLow;
 
-  return _upLow + (_upUp - _upLow) / 2;
+  return upLow + (upUp - upLow) / 2;
 };
 
-var _fnCreateItemInnerHtml = function _fnCreateItemInnerHtml(color, from, to) {
-  return '<i style="opacity:0.7;background:' + color + ';">' + from + '&ndash;' + to + '</i><br/>';
+var _fnCreateRowEl = function _fnCreateRowEl(color, from, to, cluster, wg) {
+  var _n = (0, _lodash2.default)(cluster, 'points.length', 0);
+  var el = _fnCreateEl('p', '', 'opacity: 0.7; background: ' + color + '; padding: 5px 6px; cursor: pointer;');
+  el.addEventListener('click', function (event) {
+    //console.log(cluster)
+    wg.updateCluster(cluster, color, from, to);
+  });
+  el.innerHTML = '<span>' + from + '&ndash;' + to + '<span>\n                  <span style="float: right; color: black;">' + _n + '</span>';
+  return el;
+};
+var _fnCreateFooterEl = function _fnCreateFooterEl() {
+  var el = _fnCreateEl('div');
+  el.innerHTML = '<p style="opacity:0.65;background:green;padding: 3px 6px">No Data</p>\n                  <p style="color:black;padding-top: 5px;">Source: EuroStat</p>';
+  return el;
 };
 
-var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, _clusters, L) {
+var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, clusters, L, wg) {
   var gradeContorl = L.control({ position: 'bottomleft' });
   gradeContorl.onAdd = function (map) {
-    var _div = L.DomUtil.create('div', 'control-grade');
+    var _div = _fnCreateEl('div', 'control-grade');
 
-    var _upperPrev = Math.round(_fnCalcUpper(_clusters, 0));
-    _div.innerHTML = _fnCreateItemInnerHtml(_clusterColors[0], Math.floor(minValue), _upperPrev);
+    var _upperPrev = Math.round(_fnCalcUpper(clusters, 0));
+    _div.appendChild(_fnCreateRowEl(COLORS[0], Math.floor(minValue), _upperPrev, clusters[0], wg));
 
     var i = void 0,
         _upperNext = void 0;
     for (i = 1; i < NUMBER_OF_CLUSTERS - 1; i++) {
-      _upperNext = Math.round(_fnCalcUpper(_clusters, i));
-      _div.innerHTML += _fnCreateItemInnerHtml(_clusterColors[i], _upperPrev, _upperNext);
+      _upperNext = Math.round(_fnCalcUpper(clusters, i));
+      _div.appendChild(_fnCreateRowEl(COLORS[i], _upperPrev, _upperNext, clusters[i], wg));
       _upperPrev = _upperNext;
     }
-    _div.innerHTML += _fnCreateItemInnerHtml(_clusterColors[NUMBER_OF_CLUSTERS - 1], _upperPrev, Math.round(maxValue));
+    _div.appendChild(_fnCreateRowEl(COLORS[NUMBER_OF_CLUSTERS - 1], _upperPrev, Math.round(maxValue), clusters[i], wg));
+    _div.appendChild(_fnCreateFooterEl());
 
     return _div;
   };
@@ -229,7 +264,7 @@ var _createChoroplethMap = function _createChoroplethMap(option) {
   }).addTo(map);
 
   if (points.length > 1) {
-    var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters, L);
+    var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters, L, infoControl);
     gradeControl.addTo(map);
   }
 
@@ -288,4 +323,4 @@ var ChoroplethMap = {
 };
 
 exports.default = ChoroplethMap;
-//# sourceMappingURL=ChoroplethMap.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\ChoroplethMap.js.map

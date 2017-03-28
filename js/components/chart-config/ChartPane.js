@@ -36,6 +36,10 @@ var _RowCheckBox = require('./RowCheckBox');
 
 var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
 
+var _Pane = require('./Pane.Style');
+
+var _Pane2 = _interopRequireDefault(_Pane);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _findPlotLine = function _findPlotLine(chart, id) {
@@ -83,6 +87,18 @@ var ChartPane = function (_Component) {
       }
     };
 
+    _this._handleEnterHeight = function (value) {
+      var _this$props$chart = _this.props.chart,
+          chart = _this$props$chart === undefined ? {} : _this$props$chart,
+          _nValue = parseFloat(value);
+
+      if (!isNaN(_nValue) && isFinite(_nValue)) {
+        chart.options.chart.height = _nValue;
+        chart.reflow();
+        //chart.setSize(undefined, nValue, false)
+      }
+    };
+
     _this._handleRemovePlotLine = function (id) {
       var chart = (0, _lodash2.default)(_this.props, 'chart'),
           lineOptions = _findPlotLine(chart, id),
@@ -120,18 +136,27 @@ var ChartPane = function (_Component) {
     _this.hmLines = {};
     return _this;
   }
+  /*
+  _handleEnterSpacingTop = (value) => {
+     const { chart={} } = this.props
+     , nValue = parseFloat(value);
+     chart.options.chart.spacingTop = nValue;
+     chart.redraw();
+  }
+  **/
 
   (0, _createClass3.default)(ChartPane, [{
     key: 'render',
     value: function render() {
       var chart = this.props.chart,
           _title = (0, _lodash2.default)(chart, 'options.title.text', ''),
-          _subtitle = (0, _lodash2.default)(chart, 'options.subtitle.text', '');
+          _subtitle = (0, _lodash2.default)(chart, 'options.subtitle.text', ''),
+          _height = (0, _lodash2.default)(chart, 'options.chart.height', '');
 
 
       return _react2.default.createElement(
         'div',
-        null,
+        { style: _Pane2.default.ROOT },
         _react2.default.createElement(_RowInputText2.default, {
           caption: 'Title:',
           initValue: _title,
@@ -141,6 +166,11 @@ var ChartPane = function (_Component) {
           caption: 'Subtitle:',
           initValue: _subtitle,
           onEnter: this._handleEnterSubtitle
+        }),
+        _react2.default.createElement(_RowInputText2.default, {
+          caption: 'Height:',
+          initValue: _height,
+          onEnter: this._handleEnterHeight
         }),
         _react2.default.createElement(_RowCheckBox2.default, {
           caption: 'Hide YAxis Max Plot Line',
@@ -156,7 +186,12 @@ var ChartPane = function (_Component) {
           caption: 'Hide Series Titles',
           onCheck: this._handleHideSeriesTitles,
           onUnCheck: this._handleShowSeriesTitles
-        })
+        }),
+        _react2.default.createElement(
+          'div',
+          { style: _Pane2.default.MSG },
+          '*CheckBoxes don\'t auto update'
+        )
       );
     }
   }]);

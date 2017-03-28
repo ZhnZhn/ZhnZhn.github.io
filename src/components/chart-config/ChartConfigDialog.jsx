@@ -5,6 +5,7 @@ import TabPane from '../zhn/TabPane'
 import Tab from '../zhn/Tab'
 import ChartPane from './ChartPane'
 import SeriaPane from './SeriaPane'
+import YAxisPane from './YAxisPane'
 
 const STYLE = {
   TITLE : {
@@ -63,6 +64,9 @@ class ChartConfigDialog extends Component {
           </Tab>
           <Tab title="Seria">
             <SeriaPane chart={chart} />
+          </Tab>
+          <Tab title="YAxis">
+            <YAxisPane chart={chart} />
           </Tab>
         </TabPane>
 

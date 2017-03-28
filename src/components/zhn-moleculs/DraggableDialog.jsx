@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import SvgClose from '../zhn/SvgClose';
 import ActionButton from '../zhn/ActionButton';
@@ -36,6 +36,18 @@ const styles = {
 };
 
 class DraggableDialog extends Component {
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ]),
+    commandButtons: PropTypes.arrayOf(PropTypes.element),
+    onShowChart: PropTypes.func,
+    onClose: PropTypes.func
+  }
+
   componentDidMount(){
      Interact.makeDragable(this.rootDivEl);
   }
@@ -44,11 +56,13 @@ class DraggableDialog extends Component {
     return (
       <div style={styles.commandDiv}>
         {commandButtons}
-        <ActionButton
-           type="TypeC"
-           caption="Show"
-           onClick={onShowChart}
-        />
+        {typeof onShowChart === 'function' &&
+          <ActionButton
+             type="TypeC"
+             caption="Show"
+             onClick={onShowChart}
+          />
+        }
         <ActionButton
            type="TypeC"
            caption="Close"

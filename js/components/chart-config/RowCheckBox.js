@@ -31,12 +31,14 @@ var STYLE = {
 
 var RowCheckBox = function RowCheckBox(_ref) {
   var caption = _ref.caption,
+      isChecked = _ref.isChecked,
       onCheck = _ref.onCheck,
       onUnCheck = _ref.onUnCheck;
   return _react2.default.createElement(
     'div',
     { style: STYLE.ROOT },
     _react2.default.createElement(_SvgCheckBox2.default, {
+      value: isChecked,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }),
@@ -50,6 +52,7 @@ var RowCheckBox = function RowCheckBox(_ref) {
 
 process.env.NODE_ENV !== "production" ? RowCheckBox.propTypes = {
   caption: _react.PropTypes.string,
+  initValue: _react.PropTypes.bool,
   onCheck: _react.PropTypes.func,
   onUnCheck: _react.PropTypes.func
 } : void 0;

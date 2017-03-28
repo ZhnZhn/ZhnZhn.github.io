@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import DateField from '../zhn/DateField';
 import DialogStyles from '../styles/DialogStyles';
@@ -9,6 +9,14 @@ const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 const NEAR_ERR_MSG = "From Date is near that To Date";
 
 class DatesFragment extends Component {
+  static propTypes = {
+    initFromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    nForecastDate: PropTypes.number,
+    onTestDate: PropTypes.func,
+    msgOnNotValidFormat: PropTypes.func
+  }
+
   static defaultProps = {
     msgOnNotValidFormat : (item='Date') => `${item} is not in valid format`
   }

@@ -87,7 +87,7 @@ var DraggableDialog = function (_Component) {
         'div',
         { style: styles.commandDiv },
         commandButtons,
-        _react2.default.createElement(_ActionButton2.default, {
+        typeof onShowChart === 'function' && _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeC',
           caption: 'Show',
           onClick: onShowChart
@@ -152,5 +152,13 @@ var DraggableDialog = function (_Component) {
   return DraggableDialog;
 }(_react.Component);
 
+process.env.NODE_ENV !== "production" ? DraggableDialog.propTypes = {
+  isShow: _react.PropTypes.bool,
+  caption: _react.PropTypes.string,
+  children: _react.PropTypes.oneOfType([_react.PropTypes.arrayOf(_react.PropTypes.node), _react.PropTypes.node]),
+  commandButtons: _react.PropTypes.arrayOf(_react.PropTypes.element),
+  onShowChart: _react.PropTypes.func,
+  onClose: _react.PropTypes.func
+} : void 0;
 exports.default = DraggableDialog;
-//# sourceMappingURL=DraggableDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\DraggableDialog.js.map

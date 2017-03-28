@@ -41,6 +41,8 @@ var STYLE = {
 
 var RowInputText = function RowInputText(_ref) {
   var styleRoot = _ref.styleRoot,
+      styleCaption = _ref.styleCaption,
+      styleInput = _ref.styleInput,
       caption = _ref.caption,
       initValue = _ref.initValue,
       onEnter = _ref.onEnter;
@@ -52,11 +54,11 @@ var RowInputText = function RowInputText(_ref) {
       null,
       _react2.default.createElement(
         'span',
-        { style: STYLE.CAPTION },
+        { style: (0, _extends3.default)({}, STYLE.CAPTION, styleCaption) },
         caption
       ),
       _react2.default.createElement(_InputText2.default, {
-        style: STYLE.INPUT_TEXT,
+        style: (0, _extends3.default)({}, STYLE.INPUT_TEXT, styleInput),
         initValue: initValue,
         onEnter: onEnter
       })
@@ -66,6 +68,8 @@ var RowInputText = function RowInputText(_ref) {
 
 process.env.NODE_ENV !== "production" ? RowInputText.propTypes = {
   styleRoot: _react.PropTypes.object,
+  styleCaption: _react.PropTypes.object,
+  styleInput: _react.PropTypes.object,
   caption: _react.PropTypes.string,
   initValue: _react.PropTypes.string,
   onEnter: _react.PropTypes.func

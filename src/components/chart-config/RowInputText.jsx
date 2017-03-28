@@ -23,14 +23,17 @@ const STYLE = {
   }
 }
 
-const RowInputText = ({ styleRoot, caption, initValue, onEnter }) => (
+const RowInputText = ({
+     styleRoot, styleCaption, styleInput,
+     caption, initValue, onEnter
+}) => (
   <div style={{...STYLE.ROOT, ...styleRoot}}>
     <label>
-      <span style={STYLE.CAPTION}>
+      <span style={{...STYLE.CAPTION, ...styleCaption}}>
         {caption}
       </span>
       <InputText
-         style={STYLE.INPUT_TEXT}
+         style={{...STYLE.INPUT_TEXT, ...styleInput}}
          initValue={initValue}
          onEnter={onEnter}
       />
@@ -40,6 +43,8 @@ const RowInputText = ({ styleRoot, caption, initValue, onEnter }) => (
 
 RowInputText.propTypes = {
   styleRoot: PropTypes.object,
+  styleCaption: PropTypes.object,
+  styleInput: PropTypes.object,
   caption: PropTypes.string,
   initValue: PropTypes.string,
   onEnter: PropTypes.func

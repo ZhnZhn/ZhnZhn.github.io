@@ -14,6 +14,7 @@ const STYLE = {
 const arrType = ['area', 'areaspline', 'line', 'spline', 'bar']
 const arrSymbol = ['circle', 'square', 'diamond', 'triangle', 'triangle-down']
 
+
 const _fnIsInArray = (arr, value) => {
   return ( arr.indexOf(value) !== -1 ) ? true : false ;
 }
@@ -30,29 +31,26 @@ class CellSeria extends Component {
   static propTypes = {
     chart: PropTypes.object,
     options: PropTypes.shape({
-      type: PropTypes.string
+      type: PropTypes.string,
+      color: PropTypes.string,
+      marker: PropTypes.shape({
+         symbol: PropTypes.string
+      })
     }),
     seriaIndex: PropTypes.number
   }
 
   _handleEnterType = (value) => {
-      const { chart={}, seriaIndex=0, options={} } = this.props
-          , { color } = options
-          , _color = (color) ? color : '#7cb5ec'
+      const { chart={}, seriaIndex=0 } = this.props
           , seria = safeGet(chart, `series[${seriaIndex}]`, {})
           , seriaOptions = seria.options;
 
-      if (seriaOptions && chart.addSeries &&
-          _fnIsInArray(arrType, value) ) {
+      if (seriaOptions && chart.addSeries
+          && _fnIsInArray(arrType, value) ) {
+
         seriaOptions.type = value
-        seriaOptions.color = _color
-        if (seriaOptions.marker) {
-          seriaOptions.marker.symbol = 'circle'
-        } else {
-          seriaOptions.marker = { symbol : 'circle'}
-        }
-       seria.update(seriaOptions)
-               
+        seria.update(seriaOptions)
+
         /*
         seria.remove(false);
         chart.addSeries(seriaOptions);
@@ -61,19 +59,19 @@ class CellSeria extends Component {
   }
   _handleEnterColor = (value) => {
     const { chart={}, seriaIndex=0 } = this.props
-        , seria = safeGet(chart, `series[${seriaIndex}]`, {})
-        , seriaOptions = seria.options;
+        , seriaIns = safeGet(chart, `series[${seriaIndex}]`, {})
+        , seriaOptions = seriaIns.options;
 
     if (seriaOptions && chart.addSeries
         && _fnIsValidColor(value) ) {
       seriaOptions.color = value
-      seria.update(seriaOptions)
+      seriaIns.update(seriaOptions)
     }
   }
   _handleEnterSymbol = (value) => {
     const { chart={}, seriaIndex=0 } = this.props
-        , seria = safeGet(chart, `series[${seriaIndex}]`, {})
-        , seriaOptions = seria.options;
+        , seriaIns = safeGet(chart, `series[${seriaIndex}]`, {})
+        , seriaOptions = seriaIns.options;
 
     if (seriaOptions && chart.addSeries
         && _fnIsInArray(arrSymbol, value)) {
@@ -82,7 +80,7 @@ class CellSeria extends Component {
       } else {
         seriaOptions.marker = { symbol : value }
       }
-      seria.update(seriaOptions)
+      seriaIns.update(seriaOptions)
     }
 
   }

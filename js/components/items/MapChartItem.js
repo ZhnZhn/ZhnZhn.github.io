@@ -44,7 +44,7 @@ var styles = {
   headerDiv: {
     backgroundColor: '#232F3B',
     paddingTop: '4px',
-    //paddingLeft: '10px',
+    paddingLeft: '10px',
     lineHeight: 1.8,
     height: '32px',
     width: '100%',

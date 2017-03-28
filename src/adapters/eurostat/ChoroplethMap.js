@@ -1,5 +1,7 @@
+import safeGet from 'lodash.get';
 import JsonStatFn from './JsonStatFn';
 import clusterMaker from '../../math/k-means';
+
 
 /*eslint-disable no-undef */
 if ( process.env.NODE_ENV !== 'development'){
@@ -13,7 +15,7 @@ const URL_LEAFLET = 'lib/leaflet.js'
     , URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
     , NUMBER_OF_CLUSTERS = 6
     , NUMBER_OF_ITERATION = 100
-    , _clusterColors = [
+    , COLORS = [
           '#9ecae1', '#6baed6',
           '#4292c6', '#2171b5',
           '#08519c', '#08306b',
@@ -93,61 +95,101 @@ const _fnMergeGeoJsonAndClusters = function(geoJson, hmIdCluster, maxCluster){
 const _fnStyle = function(feature){
   return {
     "color" : 'green',
-    "fillColor" : _clusterColors[feature.properties.cluster],
+    "fillColor" : COLORS[feature.properties.cluster],
     "weight": 1,
     "fillOpacity": 0.7,
     "opacity": 0.65
   }
 }
 
+const _fnCreateEl = function(tag, className='', cssText=''){
+  const el = document.createElement(tag)
+  el.className = className
+  el.style.cssText = cssText
+  return el;
+}
+
 
 const _fnCreateInfoControl = function(L){
   const wgInfo = L.control();
   wgInfo.onAdd = function(map){
-    this._div = L.DomUtil.create('div', 'control-info');
-    this.update();
-    return this._div;
+    this.divEl = _fnCreateEl('div', 'control-info')
+    return this.divEl;
   }
   wgInfo.update = function(props){
     if (props){
-      const { label, value } = props
-
-      this._div.innerHTML = `<b>${label}</b><br><b>${value ? value : 'uknown'}</b>`
+      const { label, value } = props;
+      this.divEl.innerHTML = `<p><span>${label}:&nbsp;</span><span>${value ? value : 'unknown'}</span></p>`
+    }
+  }
+  wgInfo.updateCluster = function(cluster, color, from, to){
+    if (cluster){
+      let str = `<p style="background: ${color}; opacity: 0.7; padding: 3px">${from}-${to}</p>`;
+      const points = safeGet(cluster, 'points', [])
+      points.forEach((point) => {
+        str += `<p style="padding: 3px;"><span style="display: inline-block; width: 30px;">${point.id}</span><span>${point[0]}</span></p>`
+      })
+      this.divEl.innerHTML = str
     }
   }
   return wgInfo;
 }
 
-const _fnCalcUpper = function(_clusters, index){
-  const _arrL = _clusters[index].points
-      , _arrH = _clusters[index+1].points
-      , _upLow = _arrL[_arrL.length-1][0]
-      , _upUp = ( _arrH[0] )
-           ? _arrH[0][0]
-           : _upLow;
+const _fnCalcUpper = function(clusters, index){
+  const arrL = safeGet(clusters, `[${index}].points`, [[0]])
+      , arrH = safeGet(clusters, `[${index+1}].points`, [[0]])
+      , upLow = arrL[arrL.length-1][0]
+      , upUp = ( arrH[0] ) ? arrH[0][0] : upLow;
 
-  return (_upLow + (_upUp - _upLow)/2);
+  return (upLow + (upUp - upLow)/2);
 }
 
-const _fnCreateItemInnerHtml = function(color, from, to){
-  return `<i style="opacity:0.7;background:${color};">${from}&ndash;${to}</i><br/>`;
+const _fnCreateRowEl = function(color, from, to, cluster, wg){
+  const _n = safeGet(cluster, `points.length`, 0)
+  const el = _fnCreateEl(
+     'p', '',
+     `opacity: 0.7; background: ${color}; padding: 5px 6px; cursor: pointer;`
+   )
+  el.addEventListener('click', function(event){
+    //console.log(cluster)
+    wg.updateCluster(cluster, color, from, to)
+  })
+  el.innerHTML = `<span>${from}&ndash;${to}<span>
+                  <span style="float: right; color: black;">${_n}</span>`
+  return el;
+}
+const _fnCreateFooterEl = function(){
+  const el = _fnCreateEl('div');
+  el.innerHTML = `<p style="opacity:0.65;background:green;padding: 3px 6px">No Data</p>
+                  <p style="color:black;padding-top: 5px;">Source: EuroStat</p>`
+  return el;
 }
 
-const _fnCreateGradeControl = function(minValue, maxValue, _clusters, L){
+const _fnCreateGradeControl = function(minValue, maxValue, clusters, L, wg){
   const gradeContorl = L.control({ position: 'bottomleft' })
   gradeContorl.onAdd = function(map){
-      const _div = L.DomUtil.create('div', 'control-grade');
+      const _div = _fnCreateEl('div', 'control-grade');
 
-      let _upperPrev = Math.round(_fnCalcUpper(_clusters, 0));
-      _div.innerHTML = _fnCreateItemInnerHtml(_clusterColors[0], Math.floor(minValue), _upperPrev);
+      let _upperPrev = Math.round(_fnCalcUpper(clusters, 0));
+      _div.appendChild( _fnCreateRowEl(
+          COLORS[0], Math.floor(minValue), _upperPrev,
+          clusters[0], wg
+      ))
 
       let i, _upperNext;
       for(i=1; i<NUMBER_OF_CLUSTERS-1; i++){
-        _upperNext = Math.round(_fnCalcUpper(_clusters, i));
-        _div.innerHTML += _fnCreateItemInnerHtml(_clusterColors[i], _upperPrev, _upperNext);
+        _upperNext = Math.round(_fnCalcUpper(clusters, i));
+        _div.appendChild(_fnCreateRowEl(
+            COLORS[i], _upperPrev, _upperNext,
+            clusters[i], wg
+        ));
         _upperPrev = _upperNext;
       }
-      _div.innerHTML += _fnCreateItemInnerHtml(_clusterColors[NUMBER_OF_CLUSTERS-1], _upperPrev, Math.round(maxValue));
+      _div.appendChild(_fnCreateRowEl(
+          COLORS[NUMBER_OF_CLUSTERS-1], _upperPrev, Math.round(maxValue),
+          clusters[i], wg
+        ))
+      _div.appendChild(_fnCreateFooterEl())
 
       return _div;
     }
@@ -188,7 +230,9 @@ const _createChoroplethMap = function(option){
 
 
   if ( points.length > 1) {
-    const gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters, L)
+    const gradeControl = _fnCreateGradeControl(
+      minValue, maxValue, _clusters, L, infoControl
+    )
     gradeControl.addTo(map);
   }
 

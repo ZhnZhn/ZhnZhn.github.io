@@ -1,15 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import safeGet from 'lodash.get'
 
-
 import CellSeria from './CellSeria'
-
-const STYLE = {
-  ROOT: {
-     paddingTop: '8px',
-     minWidth: '300px'
-  }
-}
+import STYLE from './Pane.Style'
 
 class SeriaPane extends Component {
   static propTypes = {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import InputSlider from '../zhn/InputSlider'
 
@@ -27,6 +27,10 @@ const _fnRandomNumber = (m=0, n=10) => {
 }
 
 class MatchCaptcha extends Component {
+  static propTypes = {
+    rootStyle: PropTypes.object
+  }
+
   constructor(props){
     super()
     this.firstNumber = _fnRandomNumber(0, 10)
@@ -49,10 +53,10 @@ class MatchCaptcha extends Component {
 
   render(){
     const { rootStyle } = this.props
-    , { isOk, resultSum } = this.state
-    , _sumStyle = (isOk)
-        ? S.SUM_OK
-        : S.SUM_NOT_OK
+        , { isOk, resultSum } = this.state
+        , _sumStyle = (isOk)
+             ? S.SUM_OK
+             : S.SUM_NOT_OK;
     return(
       <div style={rootStyle} >
         <p style={S.MSG}>

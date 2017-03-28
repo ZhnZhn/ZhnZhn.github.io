@@ -17,9 +17,10 @@ const STYLE = {
   }
 }
 
-const RowCheckBox = ({ caption, onCheck, onUnCheck }) => (
+const RowCheckBox = ({ caption, isChecked, onCheck, onUnCheck }) => (
   <div style={STYLE.ROOT}>
     <SvgCheckBox
+      value={isChecked}
       onCheck={onCheck}
       onUnCheck={onUnCheck}
     />
@@ -31,6 +32,7 @@ const RowCheckBox = ({ caption, onCheck, onUnCheck }) => (
 
 RowCheckBox.propTypes = {
   caption: PropTypes.string,
+  initValue: PropTypes.bool,
   onCheck: PropTypes.func,
   onUnCheck: PropTypes.func
 }

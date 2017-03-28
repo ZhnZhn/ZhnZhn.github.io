@@ -3,6 +3,7 @@ import safeGet from 'lodash.get'
 
 import RowInputText from './RowInputText'
 import RowCheckBox from './RowCheckBox'
+import STYLE from './Pane.Style'
 
 
 const _findPlotLine = function(chart, id){
@@ -42,7 +43,26 @@ class ChartPane extends Component {
       chart.setTitle(title, subtitle)
     }
   }
-  
+  _handleEnterHeight = (value) => {
+     const { chart={} } = this.props
+         , _nValue = parseFloat(value);
+
+     if (!isNaN(_nValue) && isFinite(_nValue)) {
+       chart.options.chart.height = _nValue;
+       chart.reflow();
+       //chart.setSize(undefined, nValue, false)
+     }
+  }
+  /*
+  _handleEnterSpacingTop = (value) => {
+     const { chart={} } = this.props
+     , nValue = parseFloat(value);
+     chart.options.chart.spacingTop = nValue;
+     chart.redraw();
+  }
+ **/
+
+
   _handleRemovePlotLine = (id) => {
     const chart = safeGet(this.props, 'chart')
         , lineOptions = _findPlotLine(chart, id)
@@ -78,12 +98,12 @@ class ChartPane extends Component {
 
   render(){
     const { chart } = this.props
-    , _title = safeGet(chart, 'options.title.text', '')
-    , _subtitle = safeGet(chart, 'options.subtitle.text', '')
-
+        , _title = safeGet(chart, 'options.title.text', '')
+        , _subtitle = safeGet(chart, 'options.subtitle.text', '')
+        , _height = safeGet(chart, 'options.chart.height', '');
 
     return (
-      <div>
+      <div style={STYLE.ROOT}>
         <RowInputText
           caption="Title:"
           initValue={_title}
@@ -94,6 +114,19 @@ class ChartPane extends Component {
            initValue={_subtitle}
            onEnter={this._handleEnterSubtitle}
         />
+        {/*
+        <RowInputText
+           caption="spaceTop:"
+           initValue={''}
+           onEnter={this._handleEnterSpacingTop}
+        />
+        */}
+        <RowInputText
+           caption="Height:"
+           initValue={_height}
+           onEnter={this._handleEnterHeight}
+        />
+
         <RowCheckBox
           caption="Hide YAxis Max Plot Line"
           onCheck={this._handleRemovePlotLine.bind(null, 'max')}
@@ -109,6 +142,9 @@ class ChartPane extends Component {
           onCheck={this._handleHideSeriesTitles}
           onUnCheck={this._handleShowSeriesTitles}
         />
+        <div style={STYLE.MSG}>
+          *CheckBoxes don't auto update
+        </div>
       </div>
     )
   }

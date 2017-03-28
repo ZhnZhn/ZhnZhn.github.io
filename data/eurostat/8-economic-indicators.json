@@ -7,7 +7,7 @@
       "mapValue" : "ei_lmhr_m?s_adj=SA",
       "mapSlice" : { "s_adj" : "SA", "indic" : "LM-UN-T-TOT" }
     },{
-      "caption" : "Inflation, 2015=100, % change",
+      "caption" : "HCPI, 2015=100%",
       "value" : "teicp000?unit=I2015",
       "mapFrequency" : "M",
       "mapValue" : "teicp000?precision=1&unit=I15",
