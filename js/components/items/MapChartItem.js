@@ -114,6 +114,7 @@ var MapChartItem = _react2.default.createClass({
   getInitialState: function getInitialState() {
     this.map = undefined;
     return {
+      isLoading: true,
       isOpen: true,
       isShowInfo: false
     };
@@ -133,7 +134,10 @@ var MapChartItem = _react2.default.createClass({
 
     _ChoroplethMap2.default.draw('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
       _this.map = option.map;
+      _this.setState({ isLoading: false });
       return undefined;
+    }).catch(function (err) {
+      _this.setState({ isLoading: false });
     });
   },
   _handlerClickInfo: function _handlerClickInfo() {
@@ -167,6 +171,7 @@ var MapChartItem = _react2.default.createClass({
         _zhDialog$time = zhDialog.time,
         time = _zhDialog$time === undefined ? '' : _zhDialog$time,
         _state = this.state,
+        isLoading = _state.isLoading,
         isOpen = _state.isOpen,
         isShowInfo = _state.isShowInfo,
         _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose,
@@ -205,7 +210,7 @@ var MapChartItem = _react2.default.createClass({
             id: 'map_' + caption,
             style: Object.assign({}, styles.mapDiv, _styleMap)
           },
-          _react2.default.createElement(_SpinnerLoading2.default, { style: styles.spinnerLoading })
+          isLoading && _react2.default.createElement(_SpinnerLoading2.default, { style: styles.spinnerLoading })
         ),
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,

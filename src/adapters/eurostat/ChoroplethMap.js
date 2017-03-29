@@ -159,7 +159,7 @@ const _fnCreateRowEl = function(color, from, to, cluster, wg){
     wg.updateCluster(cluster, color, from, to)
   })
   el.innerHTML = `<span>${from}&ndash;${to}<span>
-                  <span style="float: right; color: black;">${_n}</span>`
+                  <span style="float: right; color: black; padding-left: 16px">${_n}</span>`
   return el;
 }
 const _fnCreateFooterEl = function(){
@@ -262,10 +262,18 @@ const ChoroplethMap = {
              .then( (L) => {
                 const map = L.map(id).setView([58.00, 10.00], 3);
 
+                /*
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                      id: 'addis',
                      attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                     errorTileUrl: ''
                 }).addTo(map);
+                */
+
+                L.tileLayer('', {
+                     id: 'addis',
+                }).addTo(map);
+
                 return { jsonCube, zhMapSlice, L, map };
              })
              .then ( (option) => {

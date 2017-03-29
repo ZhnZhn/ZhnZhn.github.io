@@ -195,7 +195,7 @@ var _fnCreateRowEl = function _fnCreateRowEl(color, from, to, cluster, wg) {
     //console.log(cluster)
     wg.updateCluster(cluster, color, from, to);
   });
-  el.innerHTML = '<span>' + from + '&ndash;' + to + '<span>\n                  <span style="float: right; color: black;">' + _n + '</span>';
+  el.innerHTML = '<span>' + from + '&ndash;' + to + '<span>\n                  <span style="float: right; color: black; padding-left: 16px">' + _n + '</span>';
   return el;
 };
 var _fnCreateFooterEl = function _fnCreateFooterEl() {
@@ -308,10 +308,18 @@ var ChoroplethMap = {
     return this.getLeaflet().then(function (L) {
       var map = L.map(id).setView([58.00, 10.00], 3);
 
+      /*
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        id: 'addis',
-        attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+           id: 'addis',
+           attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+           errorTileUrl: ''
       }).addTo(map);
+      */
+
+      L.tileLayer('', {
+        id: 'addis'
+      }).addTo(map);
+
       return { jsonCube: jsonCube, zhMapSlice: zhMapSlice, L: L, map: map };
     }).then(function (option) {
       return _this3.getGeoJson(URL_EU_GEOJSON).then(function (geoJson) {

@@ -88,6 +88,7 @@ const MapChartItem = React.createClass({
   getInitialState(){
     this.map = undefined;
     return {
+      isLoading: true,
       isOpen : true,
       isShowInfo : false
     }
@@ -104,7 +105,11 @@ const MapChartItem = React.createClass({
     ChoroplethMap.draw(`map_${caption}`, jsonCube, zhMapSlice)
                  .then( (option) => {
                      this.map = option.map;
+                     this.setState({ isLoading: false })
                      return undefined;
+                 })
+                 .catch(err => {
+                   this.setState({ isLoading: false })
                  });
   },
 
@@ -131,7 +136,7 @@ const MapChartItem = React.createClass({
     const { caption, config, onCloseItem } = this.props
         , { json={}, zhDialog={} } = config
         , { subtitle='', time='' } = zhDialog
-        , { isOpen, isShowInfo } = this.state
+        , { isLoading, isOpen, isShowInfo } = this.state
         , _styleCaption = isOpen
               ? styles.captionSpanOpen
               : styles.captionSpanClose
@@ -161,7 +166,7 @@ const MapChartItem = React.createClass({
               id={`map_${caption}`}
               style={Object.assign({}, styles.mapDiv, _styleMap)}
            >
-             <SpinnerLoading style={styles.spinnerLoading} />
+             { isLoading && <SpinnerLoading style={styles.spinnerLoading} /> }
            </div>
            <PanelDataInfo
               isShow={isShowInfo}
