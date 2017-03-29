@@ -1,7 +1,7 @@
-import safeGet from 'lodash.get';
-import JsonStatFn from './JsonStatFn';
-import clusterMaker from '../../math/k-means';
-
+//import safeGet from 'lodash.get';
+import JsonStatFn from './JsonStatFn'
+import clusterMaker from '../../math/k-means'
+import safeGet from '../../utils/safeGet'
 
 /*eslint-disable no-undef */
 if ( process.env.NODE_ENV !== 'development'){
@@ -39,16 +39,17 @@ const _fnMergeGeoAndValue = function(sGeo, dGeo, json){
   let minValue = Number.POSITIVE_INFINITY
     , maxValue = Number.NEGATIVE_INFINITY;
   sGeo.forEach((cell, index) => {
-    const feature = _findFeature(json.features, dGeo.id[index]);
-    if (feature && cell.value){
-      feature.properties.value = cell.value;
+    const feature = _findFeature(json.features, dGeo.id[index])
+        , value = cell.value;
+    if (feature && value){
+      feature.properties.value = value;
 
-      const point = [ cell.value, 0];
+      const point = [ value, 0 ];
       point.id = feature.properties.id;
       points.push(point);
 
-      if (minValue>cell.value) { minValue = cell.value; }
-      if (maxValue<cell.value) { maxValue = cell.value; }
+      if (minValue>value) { minValue = value; }
+      if (maxValue<value) { maxValue = value; }
     }
   })
   if (points.length === 0){
@@ -135,7 +136,10 @@ const _fnCreateInfoControl = function(L){
   return wgInfo;
 }
 
-const _fnCalcUpper = function(clusters, index){
+const _fnCalcUpper = function(clusters, index, maxValue){
+  if (clusters.length - 1 === index) {
+    return maxValue;
+  }
   const arrL = safeGet(clusters, `[${index}].points`, [[0]])
       , arrH = safeGet(clusters, `[${index+1}].points`, [[0]])
       , upLow = arrL[arrL.length-1][0]
@@ -170,25 +174,15 @@ const _fnCreateGradeControl = function(minValue, maxValue, clusters, L, wg){
   gradeContorl.onAdd = function(map){
       const _div = _fnCreateEl('div', 'control-grade');
 
-      let _upperPrev = Math.round(_fnCalcUpper(clusters, 0));
-      _div.appendChild( _fnCreateRowEl(
-          COLORS[0], Math.floor(minValue), _upperPrev,
-          clusters[0], wg
-      ))
-
-      let i, _upperNext;
-      for(i=1; i<NUMBER_OF_CLUSTERS-1; i++){
-        _upperNext = Math.round(_fnCalcUpper(clusters, i));
-        _div.appendChild(_fnCreateRowEl(
-            COLORS[i], _upperPrev, _upperNext,
-            clusters[i], wg
-        ));
-        _upperPrev = _upperNext;
-      }
-      _div.appendChild(_fnCreateRowEl(
-          COLORS[NUMBER_OF_CLUSTERS-1], _upperPrev, Math.round(maxValue),
-          clusters[i], wg
+      let _upperPrev, _upperNext;
+      _upperPrev = Math.floor(minValue)
+      clusters.forEach((cluster, index) => {
+        _upperNext = Math.round(_fnCalcUpper(clusters, index, maxValue))
+        _div.appendChild( _fnCreateRowEl(
+            COLORS[index], _upperPrev, _upperNext, cluster, wg
         ))
+        _upperPrev = _upperNext;
+      })
       _div.appendChild(_fnCreateFooterEl())
 
       return _div;

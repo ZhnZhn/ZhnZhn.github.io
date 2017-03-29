@@ -1,0 +1,33 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\items\\SubPanel.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\items\\SubPanel.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "ROOT",
+  "position",
+  "zIndex",
+  "top",
+  "left",
+  "width",
+  "backgroundColor",
+  "border",
+  "borderRadius",
+  "boxShadow",
+  "padding",
+  "paddingTop",
+  "paddingBottom",
+  "cursor",
+  "SubPanel",
+  "style",
+  "children",
+  "propTypes",
+  "object",
+  "oneOfType",
+  "arrayOf",
+  "node"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,cAAW,UADN;AAELC,YAAS,EAFJ;AAGLC,SAAK,MAHA;AAILC,UAAM,KAJD;;AAMLC,WAAO,OANF;;AAQLC,qBAAiB,iBARZ;AASLC,YAAS,2BATJ;AAULC,kBAAe,KAVV;AAWLC,eAAW,oCAXN;AAYLC,aAAU,MAZL;AAaLC,gBAAa,KAbR;AAcLC,mBAAgB,MAdX;AAeLC,YAAQ;AAfH;AADK,CAAd;;AAoBA,IAAMC,WAAW,SAAXA,QAAW;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,SACf;AAAA;AAAA,MAAK,kCAAWjB,MAAMC,IAAjB,EAA0Be,KAA1B,CAAL;AACGC;AADH,GADe;AAAA,CAAjB;;AAMA,iDAASC,SAAT,GAAqB;AACnBF,SAAO,iBAAUG,MADE;AAEnBF,YAAU,iBAAUG,SAAV,CAAoB,CAC5B,iBAAUC,OAAV,CAAkB,iBAAUC,IAA5B,CAD4B,EAE5B,iBAAUA,IAFkB,CAApB;AAFS,CAArB;;kBAQeP,Q"
+}

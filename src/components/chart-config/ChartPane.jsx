@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import safeGet from 'lodash.get'
+
+import safeGet from '../../utils/safeGet'
 
 import RowInputText from './RowInputText'
 import RowCheckBox from './RowCheckBox'
 import STYLE from './Pane.Style'
-
 
 const _findPlotLine = function(chart, id){
   const _lines = safeGet(chart, 'options.yAxis[0].plotLines', [])
@@ -14,7 +14,26 @@ const _findPlotLine = function(chart, id){
 
 class ChartPane extends Component {
   static propTypes = {
-    chart : PropTypes.object
+    chart : PropTypes.shape({
+      yAxis: PropTypes.arrayOf(PropTypes.object),
+      options: PropTypes.shape({
+         chart: PropTypes.shape({
+            height: PropTypes.number
+         }),
+         title: PropTypes.shape({
+           text: PropTypes.string
+         }),
+         subtitle: PropTypes.shape({
+           text: PropTypes.string
+         }),
+         yAxis: PropTypes.arrayOf(PropTypes.shape({
+            plotLines: PropTypes.arrayOf(PropTypes.object)
+         })),
+         zhSeries: PropTypes.shape({
+           titleEls: PropTypes.arrayOf(PropTypes.object)
+         })
+      })
+    })
   }
 
   constructor(props){
@@ -53,15 +72,6 @@ class ChartPane extends Component {
        //chart.setSize(undefined, nValue, false)
      }
   }
-  /*
-  _handleEnterSpacingTop = (value) => {
-     const { chart={} } = this.props
-     , nValue = parseFloat(value);
-     chart.options.chart.spacingTop = nValue;
-     chart.redraw();
-  }
- **/
-
 
   _handleRemovePlotLine = (id) => {
     const chart = safeGet(this.props, 'chart')
@@ -114,13 +124,7 @@ class ChartPane extends Component {
            initValue={_subtitle}
            onEnter={this._handleEnterSubtitle}
         />
-        {/*
-        <RowInputText
-           caption="spaceTop:"
-           initValue={''}
-           onEnter={this._handleEnterSpacingTop}
-        />
-        */}
+
         <RowInputText
            caption="Height:"
            initValue={_height}

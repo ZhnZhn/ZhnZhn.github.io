@@ -24,9 +24,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash.get');
+var _safeGet = require('../../utils/safeGet');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _safeGet2 = _interopRequireDefault(_safeGet);
 
 var _OpenClose = require('../zhn/OpenClose');
 
@@ -79,7 +79,7 @@ var CellSeria = function (_Component) {
           chart = _this$props$chart === undefined ? {} : _this$props$chart,
           _this$props$seriaInde = _this$props.seriaIndex,
           seriaIndex = _this$props$seriaInde === undefined ? 0 : _this$props$seriaInde,
-          seria = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
+          seria = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + ']', {}),
           seriaOptions = seria.options;
 
 
@@ -99,7 +99,7 @@ var CellSeria = function (_Component) {
           chart = _this$props2$chart === undefined ? {} : _this$props2$chart,
           _this$props2$seriaInd = _this$props2.seriaIndex,
           seriaIndex = _this$props2$seriaInd === undefined ? 0 : _this$props2$seriaInd,
-          seriaIns = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
+          seriaIns = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + ']', {}),
           seriaOptions = seriaIns.options;
 
 
@@ -113,7 +113,7 @@ var CellSeria = function (_Component) {
           chart = _this$props3$chart === undefined ? {} : _this$props3$chart,
           _this$props3$seriaInd = _this$props3.seriaIndex,
           seriaIndex = _this$props3$seriaInd === undefined ? 0 : _this$props3$seriaInd,
-          seriaIns = (0, _lodash2.default)(chart, 'series[' + seriaIndex + ']', {}),
+          seriaIns = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + ']', {}),
           seriaOptions = seriaIns.options;
 
 

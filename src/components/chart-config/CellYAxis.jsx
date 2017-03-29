@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import safeGet from 'lodash.get'
+
+import safeGet from '../../utils/safeGet'
 
 import OpenClose from '../zhn/OpenClose'
 import RowInputText from './RowInputText'
@@ -26,7 +27,7 @@ class CellYAxis extends Component {
       min: PropTypes.number,
       minPadding: PropTypes.number,
       tickPixelInterval: PropTypes.number,
-      startOnTick: PropTypes.bool      
+      startOnTick: PropTypes.bool
     }),
     axisIndex: PropTypes.number
   }

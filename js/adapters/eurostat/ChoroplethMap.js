@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _lodash = require('lodash.get');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _JsonStatFn = require('./JsonStatFn');
 
 var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
@@ -15,6 +11,10 @@ var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
 var _kMeans = require('../../math/k-means');
 
 var _kMeans2 = _interopRequireDefault(_kMeans);
+
+var _safeGet = require('../../utils/safeGet');
+
+var _safeGet2 = _interopRequireDefault(_safeGet);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26,6 +26,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 /*eslint-enable no-undef */
 
+//import safeGet from 'lodash.get';
 var URL_LEAFLET = 'lib/leaflet.js',
     URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
     NUMBER_OF_CLUSTERS = 6,
@@ -52,19 +53,20 @@ var _fnMergeGeoAndValue = function _fnMergeGeoAndValue(sGeo, dGeo, json) {
   var minValue = Number.POSITIVE_INFINITY,
       maxValue = Number.NEGATIVE_INFINITY;
   sGeo.forEach(function (cell, index) {
-    var feature = _findFeature(json.features, dGeo.id[index]);
-    if (feature && cell.value) {
-      feature.properties.value = cell.value;
+    var feature = _findFeature(json.features, dGeo.id[index]),
+        value = cell.value;
+    if (feature && value) {
+      feature.properties.value = value;
 
-      var point = [cell.value, 0];
+      var point = [value, 0];
       point.id = feature.properties.id;
       points.push(point);
 
-      if (minValue > cell.value) {
-        minValue = cell.value;
+      if (minValue > value) {
+        minValue = value;
       }
-      if (maxValue < cell.value) {
-        maxValue = cell.value;
+      if (maxValue < value) {
+        maxValue = value;
       }
     }
   });
@@ -164,7 +166,7 @@ var _fnCreateInfoControl = function _fnCreateInfoControl(L) {
   wgInfo.updateCluster = function (cluster, color, from, to) {
     if (cluster) {
       var str = '<p style="background: ' + color + '; opacity: 0.7; padding: 3px">' + from + '-' + to + '</p>';
-      var points = (0, _lodash2.default)(cluster, 'points', []);
+      var points = (0, _safeGet2.default)(cluster, 'points', []);
       points.forEach(function (point) {
         str += '<p style="padding: 3px;"><span style="display: inline-block; width: 30px;">' + point.id + '</span><span>' + point[0] + '</span></p>';
       });
@@ -174,9 +176,12 @@ var _fnCreateInfoControl = function _fnCreateInfoControl(L) {
   return wgInfo;
 };
 
-var _fnCalcUpper = function _fnCalcUpper(clusters, index) {
-  var arrL = (0, _lodash2.default)(clusters, '[' + index + '].points', [[0]]),
-      arrH = (0, _lodash2.default)(clusters, '[' + (index + 1) + '].points', [[0]]),
+var _fnCalcUpper = function _fnCalcUpper(clusters, index, maxValue) {
+  if (clusters.length - 1 === index) {
+    return maxValue;
+  }
+  var arrL = (0, _safeGet2.default)(clusters, '[' + index + '].points', [[0]]),
+      arrH = (0, _safeGet2.default)(clusters, '[' + (index + 1) + '].points', [[0]]),
       upLow = arrL[arrL.length - 1][0],
       upUp = arrH[0] ? arrH[0][0] : upLow;
 
@@ -184,7 +189,7 @@ var _fnCalcUpper = function _fnCalcUpper(clusters, index) {
 };
 
 var _fnCreateRowEl = function _fnCreateRowEl(color, from, to, cluster, wg) {
-  var _n = (0, _lodash2.default)(cluster, 'points.length', 0);
+  var _n = (0, _safeGet2.default)(cluster, 'points.length', 0);
   var el = _fnCreateEl('p', '', 'opacity: 0.7; background: ' + color + '; padding: 5px 6px; cursor: pointer;');
   el.addEventListener('click', function (event) {
     //console.log(cluster)
@@ -204,17 +209,14 @@ var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, c
   gradeContorl.onAdd = function (map) {
     var _div = _fnCreateEl('div', 'control-grade');
 
-    var _upperPrev = Math.round(_fnCalcUpper(clusters, 0));
-    _div.appendChild(_fnCreateRowEl(COLORS[0], Math.floor(minValue), _upperPrev, clusters[0], wg));
-
-    var i = void 0,
+    var _upperPrev = void 0,
         _upperNext = void 0;
-    for (i = 1; i < NUMBER_OF_CLUSTERS - 1; i++) {
-      _upperNext = Math.round(_fnCalcUpper(clusters, i));
-      _div.appendChild(_fnCreateRowEl(COLORS[i], _upperPrev, _upperNext, clusters[i], wg));
+    _upperPrev = Math.floor(minValue);
+    clusters.forEach(function (cluster, index) {
+      _upperNext = Math.round(_fnCalcUpper(clusters, index, maxValue));
+      _div.appendChild(_fnCreateRowEl(COLORS[index], _upperPrev, _upperNext, cluster, wg));
       _upperPrev = _upperNext;
-    }
-    _div.appendChild(_fnCreateRowEl(COLORS[NUMBER_OF_CLUSTERS - 1], _upperPrev, Math.round(maxValue), clusters[i], wg));
+    });
     _div.appendChild(_fnCreateFooterEl());
 
     return _div;

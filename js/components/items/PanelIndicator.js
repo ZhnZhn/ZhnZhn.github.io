@@ -24,45 +24,39 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ShowHide = require('./ShowHide');
+var _SubPanel = require('./SubPanel');
 
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
+var _SubPanel2 = _interopRequireDefault(_SubPanel);
 
-var _InputText = require('./InputText');
+var _InputText = require('../zhn/InputText');
 
 var _InputText2 = _interopRequireDefault(_InputText);
 
-var _SvgPlus = require('./SvgPlus');
+var _SvgPlus = require('../zhn/SvgPlus');
 
 var _SvgPlus2 = _interopRequireDefault(_SvgPlus);
 
-var _SvgMinus = require('./SvgMinus');
+var _SvgMinus = require('../zhn/SvgMinus');
 
 var _SvgMinus2 = _interopRequireDefault(_SvgMinus);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
-    position: 'absolute',
-    zIndex: 10,
-    top: '55px',
-    left: '8px',
+var INIT_SMA = "50",
+    INIT_MFI = "14";
 
-    backgroundColor: 'rgb(77, 77, 77)',
-    border: '2px solid rgb(35, 47, 59)',
-    borderRadius: '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-
-    padding: '10px',
-    paddingTop: '5px',
-    paddingBottom: '5px'
-  },
-  captionSpan: {
+var STYLE = {
+  CAPTION: {
     display: 'inline-block',
     color: 'black',
     fontWeight: 'bold',
     width: '48px'
+  },
+  ROW: {
+    paddingTop: '5px'
+  },
+  fnSpan: function fnSpan(color) {
+    return { color: color, paddingLeft: '8px' };
   }
 };
 
@@ -93,7 +87,7 @@ var PanelIndicator = function (_Component) {
         return true;
       }
     }, _this._handleAddSma = function () {
-      var value = _this.refs.inputSMA.getValue(),
+      var value = _this.inputSmaComp.getValue(),
           descr = _this.state.descr,
           _id = 'SMA(' + value + ')';
 
@@ -101,15 +95,12 @@ var PanelIndicator = function (_Component) {
       if (!_this._checkIfAlreadyAdded(descr, _id)) {
         var color = _this.props.onAddSma(value);
         if (color) {
-          descr.push({
-            id: _id,
-            color: color
-          });
+          descr.push({ id: _id, color: color });
           _this.setState({ descr: descr });
         }
       }
-    }, _this._handleRemoveSerias = function (id) {
-      if (_this.props.onRemoveSeries(id)) {
+    }, _this._handleRemoveSma = function (id) {
+      if (_this.props.onRemoveSma(id)) {
         _this.state.descr = _this.state.descr.filter(function (descr) {
           return descr.id !== id;
         });
@@ -123,7 +114,7 @@ var PanelIndicator = function (_Component) {
       _this.setState({ mfiDescrs: _this.state.mfiDescrs });
     }, _this._handleAddMfi = function () {
       var mfiDescrs = _this.state.mfiDescrs,
-          _value = _this.refs.inputMfi.getValue(),
+          _value = _this.inputMfiComp.getValue(),
           _id = 'MFI(' + _value + ')';
 
 
@@ -142,13 +133,13 @@ var PanelIndicator = function (_Component) {
 
         return _react2.default.createElement(
           'div',
-          { key: id, style: { paddingTop: '5px' } },
+          { key: id, style: STYLE.ROW },
           _react2.default.createElement(_SvgMinus2.default, {
-            onClick: _this._handleRemoveSerias.bind(null, id)
+            onClick: _this._handleRemoveSma.bind(null, id)
           }),
           _react2.default.createElement(
             'span',
-            { style: { color: color, paddingLeft: '8px' } },
+            { style: STYLE.fnSpan(color) },
             id
           )
         );
@@ -165,13 +156,13 @@ var PanelIndicator = function (_Component) {
 
         return _react2.default.createElement(
           'div',
-          { key: id, style: { paddingTop: '5px' } },
+          { key: id, style: STYLE.ROW },
           _react2.default.createElement(_SvgMinus2.default, {
             onClick: _this._handleRemoveMfi.bind(null, id)
           }),
           _react2.default.createElement(
             'span',
-            { style: { color: color, paddingLeft: '8px' } },
+            { style: STYLE.fnSpan(color) },
             id
           )
         );
@@ -187,8 +178,10 @@ var PanelIndicator = function (_Component) {
   (0, _createClass3.default)(PanelIndicator, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
-          isShow = _props.isShow,
+          rootStyle = _props.rootStyle,
           isMfi = _props.isMfi;
 
 
@@ -197,15 +190,17 @@ var PanelIndicator = function (_Component) {
         null,
         _react2.default.createElement(
           'div',
-          { style: { paddingTop: '5px' } },
+          { style: STYLE.ROW },
           _react2.default.createElement(
             'span',
-            { style: styles.captionSpan },
+            { style: STYLE.CAPTION },
             'MFI'
           ),
           _react2.default.createElement(_InputText2.default, {
-            ref: 'inputMfi',
-            initValue: '14'
+            ref: function ref(c) {
+              return _this2.inputMfiComp = c;
+            },
+            initValue: INIT_MFI
           }),
           _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddMfi })
         ),
@@ -213,19 +208,21 @@ var PanelIndicator = function (_Component) {
       ) : null;
 
       return _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShow, style: styles.rootDiv },
+        _SubPanel2.default,
+        { style: rootStyle },
         _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
             'span',
-            { style: styles.captionSpan },
+            { style: STYLE.CAPTION },
             'SMA'
           ),
           _react2.default.createElement(_InputText2.default, {
-            ref: 'inputSMA',
-            initValue: '50'
+            ref: function ref(c) {
+              return _this2.inputSmaComp = c;
+            },
+            initValue: INIT_SMA
           }),
           _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma })
         ),
@@ -237,5 +234,13 @@ var PanelIndicator = function (_Component) {
   return PanelIndicator;
 }(_react.Component);
 
+process.env.NODE_ENV !== "production" ? PanelIndicator.propTypes = {
+  rootStyle: _react.PropTypes.object,
+  isMfi: _react.PropTypes.bool,
+  onAddSma: _react.PropTypes.func,
+  onRemoveSma: _react.PropTypes.func,
+  onAddMfi: _react.PropTypes.func,
+  onRemoveMfi: _react.PropTypes.func
+} : void 0;
 exports.default = PanelIndicator;
-//# sourceMappingURL=PanelIndicator.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelIndicator.js.map

@@ -13,6 +13,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var LIMIT_REMAINING = 'X-RateLimit-Remaining';
 
+var _fnMsg400 = function _fnMsg400(option) {
+   if (option.loadId === "EU_STAT") {
+      return '400 : Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try request with older date.';
+   } else {
+      return '400 : Bad request';
+   }
+};
+
 var fnFetch = exports.fnFetch = function fnFetch(_ref) {
    var uri = _ref.uri,
        option = _ref.option,
@@ -27,8 +35,10 @@ var fnFetch = exports.fnFetch = function fnFetch(_ref) {
           statusText = response.statusText,
           headers = response.headers;
 
-      if (status >= 200 && status <= 400) {
+      if (status >= 200 && status < 400) {
          return Promise.all([Promise.resolve(headers.get(LIMIT_REMAINING)), response.json()]);
+      } else if (status === 400) {
+         throw { errCaption: 'Request Error', message: _fnMsg400(option) };
       } else if (status > 400 && status < 500) {
          throw { errCaption: 'Request Error', message: status + ' : ' + statusText };
       } else if (status >= 500 && status < 600) {
@@ -69,4 +79,4 @@ var fnFetchText = exports.fnFetchText = function fnFetchText(_ref4) {
       console.log(error);
    });
 };
-//# sourceMappingURL=fn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\fn.js.map

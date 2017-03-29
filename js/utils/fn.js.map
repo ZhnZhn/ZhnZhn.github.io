@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../src/utils/fn.js"],"names":["LIMIT_REMAINING","fnFetch","uri","option","onCheckResponse","onFetch","onCompleted","onFailed","onCatch","fetch","then","response","status","statusText","headers","Promise","all","resolve","get","json","errCaption","message","limitRemaining","catch","error","fnFetchText","text","console","log"],"mappings":";;;;;;;;;;;;;AACA,IAAMA,kBAAkB,uBAAxB;;AAEO,IAAMC,4BAAU,SAAVA,OAAU,OAEpB;AAAA,OADAC,GACA,QADAA,GACA;AAAA,OADKC,MACL,QADKA,MACL;AAAA,OADaC,eACb,QADaA,eACb;AAAA,OAD8BC,OAC9B,QAD8BA,OAC9B;AAAA,OADuCC,WACvC,QADuCA,WACvC;AAAA,OADoDC,QACpD,QADoDA,QACpD;AAAA,OAD8DC,OAC9D,QAD8DA,OAC9D;;AACDC,SAAMP,GAAN,EACGQ,IADH,CACQ,UAACC,QAAD,EAAc;AAAA,UACVC,MADU,GACsBD,QADtB,CACVC,MADU;AAAA,UACFC,UADE,GACsBF,QADtB,CACFE,UADE;AAAA,UACUC,OADV,GACsBH,QADtB,CACUG,OADV;;AAElB,UAAIF,UAAQ,GAAR,IAAeA,UAAQ,GAA3B,EAA+B;AAC7B,gBAAOG,QAAQC,GAAR,CAAY,CAChBD,QAAQE,OAAR,CAAgBH,QAAQI,GAAR,CAAYlB,eAAZ,CAAhB,CADgB,EAEhBW,SAASQ,IAAT,EAFgB,CAAZ,CAAP;AAID,OALD,MAKO,IAAIP,SAAO,GAAP,IAAcA,SAAO,GAAzB,EAA6B;AACjC,eAAM,EAAEQ,YAAa,eAAf,EAAgCC,SAAaT,MAAb,WAAyBC,UAAzD,EAAN;AACF,OAFM,MAEA,IAAID,UAAQ,GAAR,IAAeA,SAAO,GAA1B,EAA8B;AAClC,eAAM,EAAEQ,YAAa,gBAAf,EAAiCC,SAAaT,MAAb,WAAyBC,UAA1D,EAAN;AACF;AACF,IAbH,EAcGH,IAdH,CAcQ,iBAA6B;AAAA;AAAA,UAA3BY,cAA2B;AAAA,UAAXH,IAAW;;AAChC,UAAIf,gBAAgBe,IAAhB,EAAsBhB,MAAtB,CAAJ,EAAkC;AAChCA,gBAAOmB,cAAP,GAAwBA,cAAxB;AACAjB,iBAAQ,EAAEc,UAAF,EAAQhB,cAAR,EAAgBG,wBAAhB,EAAR;AACD;AACH,IAnBH,EAoBGiB,KApBH,CAoBS,UAACC,KAAD,EAAW;AACfhB,cAAQ,EAAEgB,YAAF,EAASrB,cAAT,EAAiBI,kBAAjB,EAAR;AACF,IAtBH;AAuBD,CA1BM;;AA4BA,IAAMkB,oCAAc,SAAdA,WAAc,QAExB;AAAA,OADAvB,GACA,SADAA,GACA;AAAA,OADKG,OACL,SADKA,OACL;;AACDI,SAAMP,GAAN,EACGQ,IADH,CACQ,UAACC,QAAD,EAAc;AAAA,UACXC,MADW,GACWD,QADX,CACXC,MADW;AAAA,UACHC,UADG,GACWF,QADX,CACHE,UADG;;AAElB,UAAID,UAAQ,GAAR,IAAeA,SAAO,GAA1B,EAA8B;AAC5B,gBAAOD,SAASe,IAAT,EAAP;AACD,OAFD,MAEO,IAAId,UAAQ,GAAR,IAAeA,SAAO,GAA1B,EAA8B;AAClC,eAAM,EAACQ,YAAa,eAAd,EAA+BC,SAAaT,MAAb,WAAyBC,UAAxD,EAAN;AACF,OAFM,MAEA,IAAID,UAAQ,GAAR,IAAeA,SAAO,GAA1B,EAA8B;AAClC,eAAM,EAACQ,YAAa,gBAAd,EAAgCC,SAAaT,MAAb,WAAyBC,UAAzD,EAAN;AACF;AACF,IAVH,EAWGH,IAXH,CAWQ,UAACgB,IAAD,EAAU;AACbrB,cAAQ,EAAEqB,UAAF,EAAR;AACF,IAbH,EAcGH,KAdH,CAcS,UAACC,KAAD,EAAW;AACfG,cAAQC,GAAR,CAAYJ,KAAZ;AACF,IAhBH;AAiBD,CApBM","file":"fn.js","sourcesContent":["\r\nconst LIMIT_REMAINING = 'X-RateLimit-Remaining';\r\n\r\nexport const fnFetch = function({\r\n   uri, option, onCheckResponse, onFetch, onCompleted, onFailed, onCatch\r\n }){\r\n  fetch(uri)\r\n    .then((response) => {\r\n      const { status, statusText, headers } = response;\r\n      if (status>=200 && status<=400){\r\n        return Promise.all([\r\n           Promise.resolve(headers.get(LIMIT_REMAINING)),\r\n           response.json()\r\n        ]);\r\n      } else if (status>400 && status<500){\r\n         throw { errCaption : 'Request Error', message : `${status} : ${statusText}` }\r\n      } else if (status>=500 && status<600){\r\n         throw { errCaption : 'Response Error', message : `${status} : ${statusText}` }\r\n      }\r\n    })\r\n    .then(([limitRemaining, json ]) => {\r\n       if (onCheckResponse(json, option)){\r\n         option.limitRemaining = limitRemaining;\r\n         onFetch({ json, option, onCompleted });\r\n       }\r\n    })\r\n    .catch((error) => {\r\n       onCatch({ error, option, onFailed })\r\n    })\r\n}\r\n\r\nexport const fnFetchText = function({\r\n   uri, onFetch\r\n }){\r\n  fetch(uri)\r\n    .then((response) => {\r\n      const {status, statusText} = response;\r\n      if (status>=200 && status<400){\r\n        return response.text();\r\n      } else if (status>=400 && status<500){\r\n         throw {errCaption : 'Request Error', message : `${status} : ${statusText}` }\r\n      } else if (status>=500 && status<600){\r\n         throw {errCaption : 'Response Error', message : `${status} : ${statusText}` }\r\n      }\r\n    })\r\n    .then((text) => {\r\n       onFetch({ text });\r\n    })\r\n    .catch((error) => {\r\n       console.log(error);\r\n    })\r\n}\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\fn.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\fn.js",
+ "sourceRoot": "",
+ "names": [
+  "LIMIT_REMAINING",
+  "_fnMsg400",
+  "option",
+  "loadId",
+  "fnFetch",
+  "uri",
+  "onCheckResponse",
+  "onFetch",
+  "onCompleted",
+  "onFailed",
+  "onCatch",
+  "fetch",
+  "then",
+  "response",
+  "status",
+  "statusText",
+  "headers",
+  "Promise",
+  "all",
+  "resolve",
+  "get",
+  "json",
+  "errCaption",
+  "message",
+  "limitRemaining",
+  "catch",
+  "error",
+  "fnFetchText",
+  "text",
+  "console",
+  "log"
+ ],
+ "mappings": "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"
+}

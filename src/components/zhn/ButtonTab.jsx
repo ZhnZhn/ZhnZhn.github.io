@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 
 class ButtonTab extends Component {
   static propTypes = {
+    style : PropTypes.object,
     isShow : PropTypes.bool,
     caption : PropTypes.string,
-    style : PropTypes.object,
     onClick : PropTypes.func
   }
 
@@ -16,7 +16,9 @@ class ButtonTab extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if ( (nextProps.isShow !== this.state.isShow) ){
+    if ( this.props !== nextProps &&
+         nextProps.isShow !== this.state.isShow )
+    {
       this.setState({isShow : nextProps.isShow})
     }
   }

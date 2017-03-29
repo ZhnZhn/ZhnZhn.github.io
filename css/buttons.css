@@ -76,7 +76,19 @@
   color : rgba(164, 135, 212, 1);
 }
 .button-tab--show:hover{
-  color : gray;
+  color: #a487d4;
+  font-weight: bold;
+}
+
+.bt-sub-item {
+  color: grey;
+  line-height: 1.8;
+  font-weight: normal;
+  border-bottom: 1px solid;
+  cursor: pointer
+}
+.bt-sub-item:hover{
+  color: #a487d4;
   font-weight: bold;
 }
 

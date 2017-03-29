@@ -1,35 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import ShowHide from './ShowHide';
-import InputText from './InputText';
-import SvgPlus from './SvgPlus';
-import SvgMinus from './SvgMinus';
+import SubPanel from './SubPanel';
+import InputText from '../zhn/InputText';
+import SvgPlus from '../zhn/SvgPlus';
+import SvgMinus from '../zhn/SvgMinus';
 
-const styles = {
-  rootDiv : {
-    position : 'absolute',
-    zIndex : 10,
-    top : '55px',
-    left : '8px',
+const INIT_SMA = "50"
+    , INIT_MFI = "14";
 
-    backgroundColor: 'rgb(77, 77, 77)',
-    border : '2px solid rgb(35, 47, 59)',
-    borderRadius : '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
-
-    padding : '10px',
-    paddingTop : '5px',
-    paddingBottom : '5px'
-  },
-  captionSpan : {
+const STYLE = {
+  CAPTION : {
     display : 'inline-block',
     color : 'black',
     fontWeight : 'bold',
     width : '48px'
+  },
+  ROW : {
+    paddingTop: '5px'
+  },
+  fnSpan : (color) => {
+    return { color: color, paddingLeft: '8px' };
   }
 }
 
 class PanelIndicator extends Component {
+  static propTypes = {
+    rootStyle: PropTypes.object,
+    isMfi: PropTypes.bool,
+    onAddSma: PropTypes.func,
+    onRemoveSma: PropTypes.func,
+    onAddMfi: PropTypes.func,
+    onRemoveMfi: PropTypes.func
+  }
+
   state = {
     descr : [],
     mfiDescrs : []
@@ -45,23 +48,20 @@ class PanelIndicator extends Component {
   }
 
   _handleAddSma = () => {
-    const value = this.refs.inputSMA.getValue()
+    const value = this.inputSmaComp.getValue()
         , {descr} = this.state
         , _id = 'SMA(' + value + ')';
 
     if ( !this._checkIfAlreadyAdded(descr, _id)  ){
        const color = this.props.onAddSma(value);
        if (color){
-          descr.push({
-            id : _id,
-            color : color
-          });
+          descr.push({ id : _id, color : color });
         this.setState({descr : descr});
        }
     }
   }
-  _handleRemoveSerias = (id) => {
-    if (this.props.onRemoveSeries(id)){
+  _handleRemoveSma = (id) => {
+    if (this.props.onRemoveSma(id)){
        this.state.descr = this.state.descr.filter((descr) =>{
          return descr.id !== id
        });
@@ -78,7 +78,7 @@ class PanelIndicator extends Component {
 
   _handleAddMfi = () => {
     const {mfiDescrs} = this.state
-        , _value = this.refs.inputMfi.getValue()
+        , _value = this.inputMfiComp.getValue()
         , _id = 'MFI(' + _value + ')';
 
     if ( !this._checkIfAlreadyAdded(mfiDescrs, _id)  ){
@@ -95,11 +95,11 @@ class PanelIndicator extends Component {
     const _descr = this.state.descr.map((descr, index) => {
       const {id, color} = descr;
       return (
-        <div key={id} style={{paddingTop: '5px'}}>
+        <div key={id} style={STYLE.ROW}>
           <SvgMinus
-             onClick={this._handleRemoveSerias.bind(null, id)}
+             onClick={this._handleRemoveSma.bind(null, id)}
           />
-          <span style={{color: color, paddingLeft: '8px'}}>{id}</span>
+          <span style={STYLE.fnSpan(color)}>{id}</span>
         </div>
       )
     });
@@ -114,11 +114,11 @@ class PanelIndicator extends Component {
     const _descr = this.state.mfiDescrs.map((descr, index) => {
       const {id, color} = descr;
       return (
-        <div key={id} style={{paddingTop: '5px'}}>
+        <div key={id} style={STYLE.ROW}>
           <SvgMinus
              onClick={this._handleRemoveMfi.bind(null, id)}
           />
-          <span style={{color: color, paddingLeft: '8px'}}>{id}</span>
+          <span style={STYLE.fnSpan(color)}>{id}</span>
         </div>
       )
     });
@@ -130,15 +130,15 @@ class PanelIndicator extends Component {
   }
 
   render(){
-    const {isShow, isMfi} = this.props
+    const { rootStyle, isMfi } = this.props
 
     const _mfiDom = (isMfi) ? (
       <div>
-        <div style={{paddingTop: '5px'}}>
-          <span style={styles.captionSpan}>MFI</span>
+        <div style={STYLE.ROW}>
+          <span style={STYLE.CAPTION}>MFI</span>
             <InputText
-              ref="inputMfi"
-              initValue="14"
+              ref={c => this.inputMfiComp = c}
+              initValue={INIT_MFI}
             />
             <SvgPlus onClick={this._handleAddMfi} />
         </div>
@@ -147,21 +147,19 @@ class PanelIndicator extends Component {
     ) : null;
 
     return (
-      <ShowHide isShow={isShow} style={styles.rootDiv}>
+      <SubPanel style={rootStyle}>
         <div>
-          <span style={styles.captionSpan}>SMA</span>
+          <span style={STYLE.CAPTION}>SMA</span>
           <InputText
-             ref="inputSMA"
-             initValue="50"
+             ref={c => this.inputSmaComp = c}
+             initValue={INIT_SMA}
           />
           <SvgPlus onClick={this._handleAddSma} />
         </div>
         {this._renderIndicators()}
-
         {_mfiDom}
-
-      </ShowHide>
-    )
+      </SubPanel>
+    );
   }
 }
 

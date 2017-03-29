@@ -1,12 +1,11 @@
 import React from 'react';
 
 import Header from './Header';
-import ButtonTab from '../zhn/ButtonTab';
+import ChartToolbar from './ChartToolbar';
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
 import Legend from '../zhn/Legend';
 
-import PanelIndicator from '../zhn/PanelIndicator';
 import PanelDataInfo from '../zhn/PanelDataInfo';
 
 const styles = {
@@ -53,7 +52,6 @@ const AreaChartItem = React.createClass({
     return {
       isOpen: true,
       isShowChart : true,
-      isShowIndicator : false,
       isShowLegend : false,
       isShowInfo : false,
 
@@ -82,16 +80,12 @@ const AreaChartItem = React.createClass({
 
   _handlerToggleOpen(){
     if (this.state.isOpen){
-      this.setState({isOpen : false, isShowIndicator : false})
+      this.setState({ isOpen : false })
     } else {
-      this.setState({isOpen : true})
+      this.setState({ isOpen : true })
     }
   },
-
-  _handlerClickIndicator(){
-    this.setState({ isShowIndicator : !this.state.isShowIndicator });
-  },
-
+  
   _handlerClickLegend(){
     this.setState({ isShowLegend : !this.state.isShowLegend });
   },
@@ -114,8 +108,7 @@ const AreaChartItem = React.createClass({
 
   _handlerClickInfo(){
     this.setState({
-      isShowInfo: true, isShowChart: false,
-      isShowLegend: false, isShowIndicator: false
+      isShowInfo: true, isShowChart: false, isShowLegend: false
     });
   },
 
@@ -189,108 +182,27 @@ const AreaChartItem = React.createClass({
     onShowConfigDialog({ caption, chart: this.mainChart })
   },
 
-  _createChartToolBar(config){
-     const _btIndicator = (!config.zhConfig.isWithoutIndicator) ? (
-       <ButtonTab
-         caption={'Indicator'}
-         isShow={this.state.isShowIndicator}
-         style= {{left: '10px'}}
-         onClick={this._handlerClickIndicator}
-       >
-         <span className={'arrow-down'}></span>
-       </ButtonTab>
-     ) : undefined;
 
-    const _btLegend = (config.zhConfig.isWithLegend) ? (
-      <ButtonTab
-        style={{left: '115px'}}
-        caption={'Legend'}
-        isShow={this.state.isShowLegend}
-        onClick={this._handlerClickLegend}
-      />
-    ) : undefined ;
-
-    const _bt2HChart = (
-      <ButtonTab
-        style={{left: '190px'}}
-        caption={'x2H'}
-        isShow={this.is2H}
-        onClick={this._handlerClick2H}
-      />
-    );
-
-    const _btAdd = (!config.zhConfig.isWithoutAdd) ? (
-      <ButtonTab
-        style={{left: '240px'}}
-        caption={'Add'}
-        isShow={false}
-        onClick={this._handlerAddToWatch}
-      />
-    ) : undefined;
-
-    const _btInfo = (config.info) ? (
-      <ButtonTab
-        caption={'Info'}
-        isShow={this.state.isShowInfo}
-        onClick={this._handlerClickInfo}
-      />
-    ) : undefined;
-
-    const _btVolume = (config.zhVolumeConfig) ? (
-      <ButtonTab
-        style={{left: '350px'}}
-        caption={'Volume'}
-        isShow={this.state.isShowVolume}
-        onClick={this._handlerClickVolume}
-      />
-    ) : undefined;
-
-    const _btATH = (config.zhATHConfig) ? (
-      <ButtonTab
-        style={{left: '425px'}}
-        caption={'ATH'}
-        isShow={this.state.isShowATH}
-        onClick={this._handlerClickATH}
-      />
-    ) : undefined;
-
-    const _btHL = (config.zhHighLowConfig) ? (
-      <ButtonTab
-        style={{left: '480px'}}
-        caption={'HL'}
-        isShow={this.state.isShowHighLow}
-        onClick={this._handlerClickHighLow}
-      />
-    ) : undefined;
-
-
-   /*
-   const _btConf = (
-     <ButtonTab
-       style={{left: '520px'}}
-       caption={'Conf'}
-       //isShow={this.state.isShowHighLow}
-       onClick={this._handleClickConfig}
-     />
-   )
-   */
-
-
-
-    return (
-      <div style={styles.tabDiv}>
-         {_btIndicator}
-         {_btLegend}
-         {_bt2HChart}
-         {_btAdd}
-         {_btInfo}
-         {_btVolume}
-         {_btATH}
-         {_btHL}
-         {/*_btConf*/}
-      </div>
-    );
-  },
+ _createChartToolBar(config){
+   return (
+         <ChartToolbar
+           style={styles.tabDiv}
+           config={config}
+           onAddSma={this._handlerAddSma}
+           onRemoveSeries={this._handleRemoveSeries}
+           onAddMfi={this._handlerAddMfi}
+           onRemoveMfi={this._handlerRemoveMfi}
+           onClickLegend={this._handlerClickLegend}
+           onClick2H={this._handlerClick2H}
+           onAddToWatch={this._handlerAddToWatch}
+           onClickInfo={this._handlerClickInfo}
+           onClickVolume={this._handlerClickVolume}
+           onClickATH={this._handlerClickATH}
+           onClickHighLow={this._handlerClickHighLow}
+           onClickConfig={this._handleClickConfig}
+          />
+      );
+ },
 
   _renderLegend(config){
     const { isShowLegend } = this.state;
@@ -363,7 +275,7 @@ const AreaChartItem = React.createClass({
         , {itemCaption, itemTime} = config.zhConfig
         , _itemCaption = (itemCaption) ? itemCaption : caption
         , {
-            isOpen, isShowChart, isShowInfo, isShowIndicator,
+            isOpen, isShowChart, isShowInfo,
             mfiConfigs
         } = this.state;
 
@@ -388,14 +300,6 @@ const AreaChartItem = React.createClass({
               isShow={isShowChart}
               config={config}
               absComp={this._dataSourceEl}
-           />
-           <PanelIndicator
-             isShow={isShowIndicator}
-             onAddSma={this._handlerAddSma}
-             onRemoveSeries={this._handleRemoveSeries}
-             isMfi={config.zhIsMfi}
-             onAddMfi={this._handlerAddMfi}
-             onRemoveMfi={this._handlerRemoveMfi}
            />
            <PanelDataInfo
               isShow={isShowInfo}

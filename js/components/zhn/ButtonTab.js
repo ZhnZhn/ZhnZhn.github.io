@@ -48,7 +48,7 @@ var ButtonTab = function (_Component) {
   (0, _createClass3.default)(ButtonTab, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      if (nextProps.isShow !== this.state.isShow) {
+      if (this.props !== nextProps && nextProps.isShow !== this.state.isShow) {
         this.setState({ isShow: nextProps.isShow });
       }
     }
@@ -77,10 +77,10 @@ var ButtonTab = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ButtonTab.propTypes = {
+  style: _react.PropTypes.object,
   isShow: _react.PropTypes.bool,
   caption: _react.PropTypes.string,
-  style: _react.PropTypes.object,
   onClick: _react.PropTypes.func
 } : void 0;
 exports.default = ButtonTab;
-//# sourceMappingURL=ButtonTab.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ButtonTab.js.map

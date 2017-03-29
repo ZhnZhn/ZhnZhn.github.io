@@ -24,9 +24,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash.get');
+var _safeGet = require('../../utils/safeGet');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _safeGet2 = _interopRequireDefault(_safeGet);
 
 var _RowInputText = require('./RowInputText');
 
@@ -43,7 +43,7 @@ var _Pane2 = _interopRequireDefault(_Pane);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _findPlotLine = function _findPlotLine(chart, id) {
-  var _lines = (0, _lodash2.default)(chart, 'options.yAxis[0].plotLines', []);
+  var _lines = (0, _safeGet2.default)(chart, 'options.yAxis[0].plotLines', []);
   return _lines.find(function (item) {
     return item.id === id;
   });
@@ -58,7 +58,7 @@ var ChartPane = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (ChartPane.__proto__ || Object.getPrototypeOf(ChartPane)).call(this));
 
     _this._handleEnterTitle = function (value) {
-      var chart = (0, _lodash2.default)(_this.props, 'chart', {}),
+      var chart = (0, _safeGet2.default)(_this.props, 'chart', {}),
           options = chart.options;
 
       if (options && chart.setTitle) {
@@ -73,7 +73,7 @@ var ChartPane = function (_Component) {
     };
 
     _this._handleEnterSubtitle = function (value) {
-      var chart = (0, _lodash2.default)(_this.props, 'chart', {}),
+      var chart = (0, _safeGet2.default)(_this.props, 'chart', {}),
           options = chart.options;
 
       if (options && chart.setTitle) {
@@ -100,9 +100,9 @@ var ChartPane = function (_Component) {
     };
 
     _this._handleRemovePlotLine = function (id) {
-      var chart = (0, _lodash2.default)(_this.props, 'chart'),
+      var chart = (0, _safeGet2.default)(_this.props, 'chart'),
           lineOptions = _findPlotLine(chart, id),
-          yAxis = (0, _lodash2.default)(chart, 'yAxis[0]');
+          yAxis = (0, _safeGet2.default)(chart, 'yAxis[0]');
 
       if (lineOptions && yAxis.removePlotLine) {
         _this.hmLines[id] = lineOptions;
@@ -111,8 +111,8 @@ var ChartPane = function (_Component) {
     };
 
     _this._handleAddPlotLine = function (id) {
-      var chart = (0, _lodash2.default)(_this.props, 'chart'),
-          yAxis = (0, _lodash2.default)(chart, 'yAxis[0]');
+      var chart = (0, _safeGet2.default)(_this.props, 'chart'),
+          yAxis = (0, _safeGet2.default)(chart, 'yAxis[0]');
 
       if (yAxis && yAxis.addPlotLine) {
         yAxis.addPlotLine(_this.hmLines[id]);
@@ -120,14 +120,14 @@ var ChartPane = function (_Component) {
     };
 
     _this._handleHideSeriesTitles = function () {
-      var _els = (0, _lodash2.default)(_this.props, 'chart.options.zhSeries.titleEls', []);
+      var _els = (0, _safeGet2.default)(_this.props, 'chart.options.zhSeries.titleEls', []);
       _els.forEach(function (el) {
         el.css({ display: 'none' });
       });
     };
 
     _this._handleShowSeriesTitles = function () {
-      var _els = (0, _lodash2.default)(_this.props, 'chart.options.zhSeries.titleEls', []);
+      var _els = (0, _safeGet2.default)(_this.props, 'chart.options.zhSeries.titleEls', []);
       _els.forEach(function (el) {
         el.css({ display: 'inline' });
       });
@@ -136,22 +136,14 @@ var ChartPane = function (_Component) {
     _this.hmLines = {};
     return _this;
   }
-  /*
-  _handleEnterSpacingTop = (value) => {
-     const { chart={} } = this.props
-     , nValue = parseFloat(value);
-     chart.options.chart.spacingTop = nValue;
-     chart.redraw();
-  }
-  **/
 
   (0, _createClass3.default)(ChartPane, [{
     key: 'render',
     value: function render() {
       var chart = this.props.chart,
-          _title = (0, _lodash2.default)(chart, 'options.title.text', ''),
-          _subtitle = (0, _lodash2.default)(chart, 'options.subtitle.text', ''),
-          _height = (0, _lodash2.default)(chart, 'options.chart.height', '');
+          _title = (0, _safeGet2.default)(chart, 'options.title.text', ''),
+          _subtitle = (0, _safeGet2.default)(chart, 'options.subtitle.text', ''),
+          _height = (0, _safeGet2.default)(chart, 'options.chart.height', '');
 
 
       return _react2.default.createElement(
@@ -199,7 +191,26 @@ var ChartPane = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ChartPane.propTypes = {
-  chart: _react.PropTypes.object
+  chart: _react.PropTypes.shape({
+    yAxis: _react.PropTypes.arrayOf(_react.PropTypes.object),
+    options: _react.PropTypes.shape({
+      chart: _react.PropTypes.shape({
+        height: _react.PropTypes.number
+      }),
+      title: _react.PropTypes.shape({
+        text: _react.PropTypes.string
+      }),
+      subtitle: _react.PropTypes.shape({
+        text: _react.PropTypes.string
+      }),
+      yAxis: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+        plotLines: _react.PropTypes.arrayOf(_react.PropTypes.object)
+      })),
+      zhSeries: _react.PropTypes.shape({
+        titleEls: _react.PropTypes.arrayOf(_react.PropTypes.object)
+      })
+    })
+  })
 } : void 0;
 exports.default = ChartPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-config\ChartPane.js.map

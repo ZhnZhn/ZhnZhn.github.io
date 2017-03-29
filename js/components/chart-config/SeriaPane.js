@@ -24,9 +24,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash.get');
+var _safeGet = require('../../utils/safeGet');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _safeGet2 = _interopRequireDefault(_safeGet);
 
 var _CellSeria = require('./CellSeria');
 
@@ -53,7 +53,7 @@ var SeriaPane = function (_Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = SeriaPane.__proto__ || Object.getPrototypeOf(SeriaPane)).call.apply(_ref, [this].concat(args))), _this), _this._renderSeries = function (chart) {
-      var series = (0, _lodash2.default)(chart, 'series', []);
+      var series = (0, _safeGet2.default)(chart, 'series', []);
       return series.map(function (seriaOptions, index) {
         return _react2.default.createElement(_CellSeria2.default, {
           key: index,
@@ -81,7 +81,9 @@ var SeriaPane = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? SeriaPane.propTypes = {
-  chart: _react.PropTypes.object
+  chart: _react.PropTypes.shape({
+    series: _react.PropTypes.arrayOf(_react.PropTypes.object)
+  })
 } : void 0;
 exports.default = SeriaPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-config\SeriaPane.js.map

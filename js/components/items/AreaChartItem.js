@@ -12,9 +12,9 @@ var _Header = require('./Header');
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _ButtonTab = require('../zhn/ButtonTab');
+var _ChartToolbar = require('./ChartToolbar');
 
-var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
+var _ChartToolbar2 = _interopRequireDefault(_ChartToolbar);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -27,10 +27,6 @@ var _HighchartWrapper2 = _interopRequireDefault(_HighchartWrapper);
 var _Legend = require('../zhn/Legend');
 
 var _Legend2 = _interopRequireDefault(_Legend);
-
-var _PanelIndicator = require('../zhn/PanelIndicator');
-
-var _PanelIndicator2 = _interopRequireDefault(_PanelIndicator);
 
 var _PanelDataInfo = require('../zhn/PanelDataInfo');
 
@@ -86,7 +82,6 @@ var AreaChartItem = _react2.default.createClass({
     return {
       isOpen: true,
       isShowChart: true,
-      isShowIndicator: false,
       isShowLegend: false,
       isShowInfo: false,
 
@@ -112,13 +107,10 @@ var AreaChartItem = _react2.default.createClass({
   },
   _handlerToggleOpen: function _handlerToggleOpen() {
     if (this.state.isOpen) {
-      this.setState({ isOpen: false, isShowIndicator: false });
+      this.setState({ isOpen: false });
     } else {
       this.setState({ isOpen: true });
     }
-  },
-  _handlerClickIndicator: function _handlerClickIndicator() {
-    this.setState({ isShowIndicator: !this.state.isShowIndicator });
   },
   _handlerClickLegend: function _handlerClickLegend() {
     this.setState({ isShowLegend: !this.state.isShowLegend });
@@ -141,8 +133,7 @@ var AreaChartItem = _react2.default.createClass({
   },
   _handlerClickInfo: function _handlerClickInfo() {
     this.setState({
-      isShowInfo: true, isShowChart: false,
-      isShowLegend: false, isShowIndicator: false
+      isShowInfo: true, isShowChart: false, isShowLegend: false
     });
   },
   _handlerClickVolume: function _handlerClickVolume() {
@@ -222,88 +213,22 @@ var AreaChartItem = _react2.default.createClass({
     onShowConfigDialog({ caption: caption, chart: this.mainChart });
   },
   _createChartToolBar: function _createChartToolBar(config) {
-    var _btIndicator = !config.zhConfig.isWithoutIndicator ? _react2.default.createElement(
-      _ButtonTab2.default,
-      {
-        caption: 'Indicator',
-        isShow: this.state.isShowIndicator,
-        style: { left: '10px' },
-        onClick: this._handlerClickIndicator
-      },
-      _react2.default.createElement('span', { className: 'arrow-down' })
-    ) : undefined;
-
-    var _btLegend = config.zhConfig.isWithLegend ? _react2.default.createElement(_ButtonTab2.default, {
-      style: { left: '115px' },
-      caption: 'Legend',
-      isShow: this.state.isShowLegend,
-      onClick: this._handlerClickLegend
-    }) : undefined;
-
-    var _bt2HChart = _react2.default.createElement(_ButtonTab2.default, {
-      style: { left: '190px' },
-      caption: 'x2H',
-      isShow: this.is2H,
-      onClick: this._handlerClick2H
+    return _react2.default.createElement(_ChartToolbar2.default, {
+      style: styles.tabDiv,
+      config: config,
+      onAddSma: this._handlerAddSma,
+      onRemoveSeries: this._handleRemoveSeries,
+      onAddMfi: this._handlerAddMfi,
+      onRemoveMfi: this._handlerRemoveMfi,
+      onClickLegend: this._handlerClickLegend,
+      onClick2H: this._handlerClick2H,
+      onAddToWatch: this._handlerAddToWatch,
+      onClickInfo: this._handlerClickInfo,
+      onClickVolume: this._handlerClickVolume,
+      onClickATH: this._handlerClickATH,
+      onClickHighLow: this._handlerClickHighLow,
+      onClickConfig: this._handleClickConfig
     });
-
-    var _btAdd = !config.zhConfig.isWithoutAdd ? _react2.default.createElement(_ButtonTab2.default, {
-      style: { left: '240px' },
-      caption: 'Add',
-      isShow: false,
-      onClick: this._handlerAddToWatch
-    }) : undefined;
-
-    var _btInfo = config.info ? _react2.default.createElement(_ButtonTab2.default, {
-      caption: 'Info',
-      isShow: this.state.isShowInfo,
-      onClick: this._handlerClickInfo
-    }) : undefined;
-
-    var _btVolume = config.zhVolumeConfig ? _react2.default.createElement(_ButtonTab2.default, {
-      style: { left: '350px' },
-      caption: 'Volume',
-      isShow: this.state.isShowVolume,
-      onClick: this._handlerClickVolume
-    }) : undefined;
-
-    var _btATH = config.zhATHConfig ? _react2.default.createElement(_ButtonTab2.default, {
-      style: { left: '425px' },
-      caption: 'ATH',
-      isShow: this.state.isShowATH,
-      onClick: this._handlerClickATH
-    }) : undefined;
-
-    var _btHL = config.zhHighLowConfig ? _react2.default.createElement(_ButtonTab2.default, {
-      style: { left: '480px' },
-      caption: 'HL',
-      isShow: this.state.isShowHighLow,
-      onClick: this._handlerClickHighLow
-    }) : undefined;
-
-    /*
-    const _btConf = (
-      <ButtonTab
-        style={{left: '520px'}}
-        caption={'Conf'}
-        //isShow={this.state.isShowHighLow}
-        onClick={this._handleClickConfig}
-      />
-    )
-    */
-
-    return _react2.default.createElement(
-      'div',
-      { style: styles.tabDiv },
-      _btIndicator,
-      _btLegend,
-      _bt2HChart,
-      _btAdd,
-      _btInfo,
-      _btVolume,
-      _btATH,
-      _btHL
-    );
   },
   _renderLegend: function _renderLegend(config) {
     var isShowLegend = this.state.isShowLegend;
@@ -390,7 +315,6 @@ var AreaChartItem = _react2.default.createClass({
         isOpen = _state4.isOpen,
         isShowChart = _state4.isShowChart,
         isShowInfo = _state4.isShowInfo,
-        isShowIndicator = _state4.isShowIndicator,
         mfiConfigs = _state4.mfiConfigs;
 
     return _react2.default.createElement(
@@ -419,14 +343,6 @@ var AreaChartItem = _react2.default.createClass({
           isShow: isShowChart,
           config: config,
           absComp: this._dataSourceEl
-        }),
-        _react2.default.createElement(_PanelIndicator2.default, {
-          isShow: isShowIndicator,
-          onAddSma: this._handlerAddSma,
-          onRemoveSeries: this._handleRemoveSeries,
-          isMfi: config.zhIsMfi,
-          onAddMfi: this._handlerAddMfi,
-          onRemoveMfi: this._handlerRemoveMfi
         }),
         _react2.default.createElement(_PanelDataInfo2.default, {
           isShow: isShowInfo,

@@ -28,9 +28,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash.get');
+var _safeGet = require('../../utils/safeGet');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _safeGet2 = _interopRequireDefault(_safeGet);
 
 var _OpenClose = require('../zhn/OpenClose');
 
@@ -80,7 +80,7 @@ var CellYAxis = function (_Component) {
           _this$props$axisIndex = _this$props.axisIndex,
           axisIndex = _this$props$axisIndex === undefined ? 0 : _this$props$axisIndex;
 
-      return _this.yAxisIns = (0, _lodash2.default)(chart, 'yAxis[' + axisIndex + ']', { update: function update() {} });
+      return _this.yAxisIns = (0, _safeGet2.default)(chart, 'yAxis[' + axisIndex + ']', { update: function update() {} });
     }, _this._handleEnterNumber = function (propName, value) {
       var _nValue = parseFloat(value);
       if (!isNaN(_nValue) && isFinite(_nValue)) {

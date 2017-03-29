@@ -1,19 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import safeGet from 'lodash.get'
+
+import safeGet from '../../utils/safeGet'
 
 import CellYAxis from './CellYAxis'
 import STYLE from './Pane.Style'
 
-/*
-ROOT: {
-   paddingTop: '8px',
-   minWidth: '300px'
-}
-*/
-
 class YAxisPane extends Component{
   static propTypes = {
-    chart: PropTypes.object
+    chart: PropTypes.shape({
+      options: PropTypes.shape({
+        yAxis: PropTypes.arrayOf(PropTypes.object)
+      })
+    })
   }
 
   _renderCells = (chart) => {

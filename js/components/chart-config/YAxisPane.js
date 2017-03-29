@@ -24,9 +24,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash.get');
+var _safeGet = require('../../utils/safeGet');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _safeGet2 = _interopRequireDefault(_safeGet);
 
 var _CellYAxis = require('./CellYAxis');
 
@@ -37,13 +37,6 @@ var _Pane = require('./Pane.Style');
 var _Pane2 = _interopRequireDefault(_Pane);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/*
-ROOT: {
-   paddingTop: '8px',
-   minWidth: '300px'
-}
-*/
 
 var YAxisPane = function (_Component) {
   (0, _inherits3.default)(YAxisPane, _Component);
@@ -60,7 +53,7 @@ var YAxisPane = function (_Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = YAxisPane.__proto__ || Object.getPrototypeOf(YAxisPane)).call.apply(_ref, [this].concat(args))), _this), _this._renderCells = function (chart) {
-      var arrAxis = (0, _lodash2.default)(chart, 'options.yAxis', []);
+      var arrAxis = (0, _safeGet2.default)(chart, 'options.yAxis', []);
       return arrAxis.map(function (options, index) {
         return _react2.default.createElement(_CellYAxis2.default, {
           key: index,
@@ -88,7 +81,11 @@ var YAxisPane = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? YAxisPane.propTypes = {
-  chart: _react.PropTypes.object
+  chart: _react.PropTypes.shape({
+    options: _react.PropTypes.shape({
+      yAxis: _react.PropTypes.arrayOf(_react.PropTypes.object)
+    })
+  })
 } : void 0;
 exports.default = YAxisPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-config\YAxisPane.js.map
