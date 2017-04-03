@@ -37,7 +37,7 @@ const TwitterLink = ({ rootStyle, iconStyle, account='', title }) => (
      title={title}
   >
     <i style={{ ...STYLE.ICON, ...iconStyle}}></i>
-    <span>&nbsp;Follow</span>
+    <span>@{account}</span>
   </a>
 )
 

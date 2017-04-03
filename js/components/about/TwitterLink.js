@@ -61,7 +61,8 @@ var TwitterLink = function TwitterLink(_ref) {
     _react2.default.createElement(
       'span',
       null,
-      '\xA0Follow'
+      '@',
+      account
     )
   );
 };

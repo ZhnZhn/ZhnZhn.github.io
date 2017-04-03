@@ -56,7 +56,7 @@ var _IconLogoBar = require('./IconLogoBar');
 
 var _IconLogoBar2 = _interopRequireDefault(_IconLogoBar);
 
-var _ContainerStyles = require('../styles/ContainerStyles.js');
+var _ContainerStyles = require('../styles/ContainerStyles');
 
 var _ContainerStyles2 = _interopRequireDefault(_ContainerStyles);
 
@@ -148,7 +148,7 @@ var About = function (_Component) {
           _react2.default.createElement(_TwitterLink2.default, {
             rootStyle: Styles.BT_TWITTER,
             account: 'webapperc',
-            title: 'Follow ERC (@wepapperc) on Twitter'
+            title: 'Twitter page @wepapperc with examples'
           })
         ),
         _react2.default.createElement(

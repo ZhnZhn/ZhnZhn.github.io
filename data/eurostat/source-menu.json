@@ -391,7 +391,7 @@
       "menuTitle" : "House Price Indicators",
       "dialogCaption" : "House Price Indicators",
       "chartContainerCaption" : "Eurostat House Indicators",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "dialogProps" : {
         "descrUrl": "./data/eurostat/eurostat.html",
         "oneCaption" : "Country",

@@ -11,7 +11,7 @@ import Token from './Token';
 import LinkToken from './LinkToken';
 import IconLogoBar from './IconLogoBar';
 
-import ContainerStyles from '../styles/ContainerStyles.js';
+import ContainerStyles from '../styles/ContainerStyles';
 const styles = ContainerStyles;
 
 const Styles = {
@@ -87,7 +87,7 @@ class About extends Component {
            <TwitterLink
               rootStyle={Styles.BT_TWITTER}
               account="webapperc"
-              title="Follow ERC (@wepapperc) on Twitter"
+              title="Twitter page @wepapperc with examples"
            />
          </BrowserCaption>
 
