@@ -62,12 +62,13 @@ var STYLE = {
     width: 'auto'
   },
   ROW: {
-    //display: 'inline-flex'
-    width: '230px'
+    //width: '230px'
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   DATE: {
     display: 'inline-block',
-    float: 'right',
+    //float: 'right',
     paddingLeft: '16px',
     whiteSpace: 'nowrap'
   },

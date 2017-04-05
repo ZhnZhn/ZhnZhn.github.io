@@ -19,13 +19,14 @@ const STYLE = {
     left: '0px',
     width: 'auto'
   },
-  ROW : {
-    //display: 'inline-flex'
-    width: '230px'
+  ROW : {    
+    //width: '230px'
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   DATE: {
     display: 'inline-block',
-    float: 'right',
+    //float: 'right',
     paddingLeft: '16px',
     whiteSpace: 'nowrap'
   },
@@ -88,7 +89,7 @@ class PanelValueMoving extends Component {
         <div style={STYLE.ROW}>
            <SpanValue value={valueTo} />
            <SpanDate date={dateTo} style={STYLE.DATE} />
-        </div>        
+        </div>
         {/*
         <label style={STYLE.ROW_INPUT}>
           <SpanLabel label="CompareTo:" />
