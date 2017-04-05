@@ -15,3 +15,4 @@ lib-dev
 stats.json
 report.html
 out.txt
+coverage

@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+
 var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
@@ -196,8 +200,25 @@ var DateUtils = {
 		} else if (frequency === 'Y') {
 			return _fnForYearSelect(mapDateDf);
 		}
+	},
+	dmyToUTC: function dmyToUTC(str) {
+		var _str = str || '',
+		    _str$split = _str.split('-'),
+		    _str$split2 = (0, _slicedToArray3.default)(_str$split, 3),
+		    _str$split2$ = _str$split2[0],
+		    d = _str$split2$ === undefined ? 10 : _str$split2$,
+		    _str$split2$2 = _str$split2[1],
+		    m = _str$split2$2 === undefined ? 10 : _str$split2$2,
+		    _str$split2$3 = _str$split2[2],
+		    y = _str$split2$3 === undefined ? 1000 : _str$split2$3;
+
+		if (DateUtils.isValidDate(y + '-' + m + '-' + d)) {
+			return Date.UTC(y, parseInt(m, 10) - 1, d);
+		} else {
+			return 0;
+		}
 	}
 };
 
 exports.default = DateUtils;
-//# sourceMappingURL=DateUtils.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\DateUtils.js.map

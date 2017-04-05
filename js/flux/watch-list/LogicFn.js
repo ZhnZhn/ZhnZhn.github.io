@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
 var _Msg = require('../../constants/Msg');
 
 var _Msg2 = _interopRequireDefault(_Msg);
@@ -25,6 +21,10 @@ var _ArrayUtil = require('../../utils/ArrayUtil');
 var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CAPTION = 'caption',
+    GROUPS = 'groups',
+    LISTS = 'lists';
 
 var LogicFn = {
   fResultNotFound: function fResultNotFound(itemType, name) {
@@ -61,25 +61,22 @@ var LogicFn = {
 
   /* for DragDrop */
 
-  filter: _ImArrayUtil2.default.filterByProp.bind(null, 'caption'),
+  filter: _ImArrayUtil2.default.filterByPropFn(CAPTION),
   getArrayWithObj: _ImArrayUtil2.default.push,
 
-  getArrayWithRename: function getArrayWithRename(arr, index, caption) {
-    return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), [Object.assign({}, arr[index], { caption: caption })], (0, _toConsumableArray3.default)(arr.slice(index + 1)));
-  },
-
+  getArrayWithRename: _ImArrayUtil2.default.editByPropFn(CAPTION),
 
   /* for DragDrop */
   insertItemInArray: _ImArrayUtil2.default.insertItem,
   /* for DragDrop */
 
-  findGroup: _ObjUtil2.default.findInPropArrayByPropItem.bind(null, 'groups', 'caption'),
-  findList: _ObjUtil2.default.findInPropArrayByPropItem.bind(null, 'lists', 'caption'),
+  findGroup: _ObjUtil2.default.findInPropArrayByProp(GROUPS, CAPTION),
+  findList: _ObjUtil2.default.findInPropArrayByProp(LISTS, CAPTION),
 
-  findIndex: _ArrayUtil2.default.findIndexByProp.bind(null, 'caption'),
-  checkIsInArraySameCaption: _ArrayUtil2.default.checkSameByProp.bind(null, 'caption')
+  findIndex: _ArrayUtil2.default.findIndexByProp('caption'),
+  checkIsInArraySameCaption: _ArrayUtil2.default.isSameByProp(CAPTION)
 
 };
 
 exports.default = LogicFn;
-//# sourceMappingURL=LogicFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\LogicFn.js.map

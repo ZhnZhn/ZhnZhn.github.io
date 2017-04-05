@@ -5,6 +5,7 @@ const createLoadOptions = (props={}, options={}) => {
       , { value:oneValue, caption:oneCaption='' } = one
       , { value:twoValue, caption:twoCaption='' } = two
   return {
+    seriaType: 'AREA',
     geo : oneValue,
     group : group,
     metric : twoValue,

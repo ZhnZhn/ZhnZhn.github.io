@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../src/utils/ImArrayUtil.js"],"names":["ImArrayUtil","push","arr","obj","filterByProp","prop","value","filter","index","insertItem","item","slice","Object","assign"],"mappings":";;;;;;;;;;;;AACA,IAAMA,cAAc;AAElBC,MAFkB,gBAEbC,GAFa,EAERC,GAFQ,EAEJ;AACX,WAAQD,GAAD,8CAAYA,GAAZ,IAAiBC,GAAjB,KAAwB,CAACA,GAAD,CAA/B;AACF,GAJiB;AAMlBC,cANkB,wBAMLC,IANK,EAMCH,GAND,EAMMI,KANN,EAMY;AAC5B,WAAOJ,IAAIK,MAAJ,CAAW,UAACJ,GAAD,EAAMK,KAAN,EAAe;AAC7B,aAAOL,IAAIE,IAAJ,MAAcC,KAArB;AACH,KAFM,CAAP;AAGD,GAViB;AAYlBG,YAZkB,sBAYPC,IAZO,EAYDF,KAZC,EAYa;AAAA,QAAPN,GAAO,uEAAH,EAAG;;AAC7B,QAAIM,UAAU,CAAd,EAAgB;AACd,wDACON,IAAIS,KAAJ,CAAU,CAAV,EAAaH,KAAb,CADP,IAEII,OAAOC,MAAP,CAAc,EAAd,EAAkBH,IAAlB,CAFJ,oCAGOR,IAAIS,KAAJ,CAAUH,KAAV,CAHP;AAKD,KAND,MAMO;AACJ,cACGI,OAAOC,MAAP,CAAc,EAAd,EAAkBH,IAAlB,CADH,0CAEMR,GAFN;AAIF;AACF;AAzBiB,CAApB;;kBA6BeF,W","file":"ImArrayUtil.js","sourcesContent":["\r\nconst ImArrayUtil = {\r\n\r\n  push(arr, obj){\r\n     return (arr) ? [...arr, obj] : [obj];\r\n  },\r\n\r\n  filterByProp(prop, arr, value){\r\n    return arr.filter((obj, index) =>{\r\n        return obj[prop] !== value;\r\n    });\r\n  },\r\n\r\n  insertItem(item, index, arr=[]){\r\n    if (index !== 0){\r\n      return [\r\n          ...arr.slice(0, index),\r\n          Object.assign({}, item),\r\n          ...arr.slice(index)\r\n      ]\r\n    } else {\r\n       return [\r\n          Object.assign({}, item),\r\n          ...arr\r\n      ]\r\n    }\r\n  }\r\n\r\n};\r\n\r\nexport default ImArrayUtil\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\ImArrayUtil.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\ImArrayUtil.js",
+ "sourceRoot": "",
+ "names": [
+  "ImArrayUtil",
+  "push",
+  "arr",
+  "obj",
+  "Object",
+  "assign",
+  "filterByPropFn",
+  "propName",
+  "propValue",
+  "filter",
+  "index",
+  "insertItem",
+  "item",
+  "slice",
+  "editByPropFn"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;AACA,IAAMA,cAAc;AAElBC,MAFkB,gBAEbC,GAFa,EAERC,GAFQ,EAEJ;AACX,WAAQD,GAAD,8CACEA,GADF,IACOE,OAAOC,MAAP,CAAc,EAAd,EAAkBF,GAAlB,CADP,KAEF,CAAEC,OAAOC,MAAP,CAAc,EAAd,EAAkBF,GAAlB,CAAF,CAFL;AAGF,GANiB;;;AAQlBG,kBAAiB,wBAACC,QAAD;AAAA,WAAc,UAACL,GAAD,EAAMM,SAAN,EAAoB;AACjD,aAAON,IAAIO,MAAJ,CAAW,UAACN,GAAD,EAAMO,KAAN,EAAe;AAC7B,eAAOP,IAAII,QAAJ,MAAkBC,SAAzB;AACH,OAFM,CAAP;AAGD,KAJgB;AAAA,GARC;;AAclBG,YAdkB,sBAcPC,IAdO,EAcDF,KAdC,EAca;AAAA,QAAPR,GAAO,uEAAH,EAAG;;AAC7B,sDACOA,IAAIW,KAAJ,CAAU,CAAV,EAAaH,KAAb,CADP,IAEIN,OAAOC,MAAP,CAAc,EAAd,EAAkBO,IAAlB,CAFJ,oCAGOV,IAAIW,KAAJ,CAAUH,KAAV,CAHP;AAKA;;;;;;;;;;;;;;AAcD,GAlCiB;;;AAoClBI,gBAAe,sBAACP,QAAD;AAAA,WAAc,UAACL,GAAD,EAAMQ,KAAN,EAAaF,SAAb,EAA2B;AACtD,wDACKN,IAAIW,KAAJ,CAAU,CAAV,EAAaH,KAAb,CADL,IAEEN,OAAOC,MAAP,CAAc,EAAd,EAAkBH,IAAIQ,KAAJ,CAAlB,oCAAiCH,QAAjC,EAA4CC,SAA5C,EAFF,oCAGKN,IAAIW,KAAJ,CAAUH,QAAM,CAAhB,CAHL;AAKD,KANc;AAAA;;AApCG,CAApB;;kBA8CeV,W"
+}

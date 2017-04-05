@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 
 import SvgCheckBox from '../zhn/SvgCheckBox';
-import ValueMovingBadge from '../zhn/ValueMovingBadge';
+//import ValueMovingBadge from '../zhn/ValueMovingBadge';
 import SvgClose from '../zhn/SvgClose';
+import ValueMovingBadge from './ValueMovingBadge';
 
 const STYLE = {
   ROOT : {
@@ -49,7 +50,8 @@ const Header = (props) => {
           isOpen,
           chartType, onCheck, onUnCheck,
           itemCaption, itemTitle, itemTime, onToggle,
-          valueMoving, onClose
+          valueMoving, onClose,
+          fnGetChart
         } = props
       , _styleIsOpen = isOpen
              ? STYLE.CAPTION_OPEN
@@ -60,7 +62,8 @@ const Header = (props) => {
       , _movingBadgeEl = (valueMoving)
            ? (
               <ValueMovingBadge
-                valueMoving={valueMoving}
+                 valueMoving={valueMoving}
+                 fnGetChart={fnGetChart}
                />
              )
           : undefined
@@ -71,7 +74,7 @@ const Header = (props) => {
                </span>
              )
            : undefined;
-      
+
   return (
     <div style={STYLE.ROOT}>
       <SvgCheckBox
@@ -106,7 +109,8 @@ Header.propTypes = {
   itemTime : PropTypes.string,
   onToggle : PropTypes.func.isRequired,
   valueMoving : PropTypes.object,
-  onClose : PropTypes.func.isRequired
+  onClose : PropTypes.func.isRequired,
+  fnGetChart : PropTypes.func.isRequired
 }
 
 

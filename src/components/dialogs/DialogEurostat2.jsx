@@ -4,7 +4,7 @@ import createLoadOptions from '../../flux/creaters/eurostat2'
 
 import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
-import { isStrInArr } from '../../utils/is';
+import ArrayUtil from '../../utils/ArrayUtil';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 
@@ -35,8 +35,8 @@ const chartTypeOptions = [
 const isCategoryType = (chartType) => {
   if (!chartType){
     return false;
-  }
-  return isStrInArr(chartType.value)(categoryTypes);
+  }  
+  return ArrayUtil.isStrInArr(chartType.value)(categoryTypes);
 }
 
 
@@ -68,7 +68,7 @@ class DialogEurostat2 extends Component {
     this.one = undefined;
     this.two = undefined;
     this.date = undefined;
-    this.chartType = undefined;    
+    this.chartType = undefined;
 
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }

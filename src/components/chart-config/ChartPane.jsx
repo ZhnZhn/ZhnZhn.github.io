@@ -33,7 +33,9 @@ class ChartPane extends Component {
            titleEls: PropTypes.arrayOf(PropTypes.object)
          })
       })
-    })
+    }),
+    caption: PropTypes.string,
+    setItemCaption: PropTypes.func
   }
 
   constructor(props){
@@ -105,15 +107,25 @@ class ChartPane extends Component {
     })
   }
 
+  /*
+  _handleEnterItemCaption = (value) => {
+    this.props.setItemCaption(value);
+  }
+  */
 
   render(){
-    const { chart } = this.props
+    const { chart, caption, setItemCaption } = this.props
         , _title = safeGet(chart, 'options.title.text', '')
         , _subtitle = safeGet(chart, 'options.subtitle.text', '')
         , _height = safeGet(chart, 'options.chart.height', '');
 
     return (
       <div style={STYLE.ROOT}>
+        <RowInputText
+           caption="Item:"
+           initValue={caption}
+           onEnter={setItemCaption}
+        />
         <RowInputText
           caption="Title:"
           initValue={_title}
@@ -124,7 +136,6 @@ class ChartPane extends Component {
            initValue={_subtitle}
            onEnter={this._handleEnterSubtitle}
         />
-
         <RowInputText
            caption="Height:"
            initValue={_height}

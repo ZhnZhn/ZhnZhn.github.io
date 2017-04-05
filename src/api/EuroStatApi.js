@@ -1,5 +1,5 @@
 
-import { isStrInArr } from '../utils/is';
+import ArrayUtil from '../utils/ArrayUtil';
 
 const rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
     , queryTail = "&precision=1&sinceTimePeriod=1996M01";
@@ -24,7 +24,7 @@ const EuroStatApi = {
             seriaType
           } = option;
 
-    if (!isStrInArr(seriaType)(_categoryTypes)){
+    if (!ArrayUtil.isStrInArr(seriaType)(_categoryTypes)){
       let _param = `geo=${geo}`
         , _group;
       if (group){

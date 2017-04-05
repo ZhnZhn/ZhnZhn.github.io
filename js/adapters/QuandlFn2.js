@@ -133,9 +133,13 @@ var QuandlFn2 = {
     var len = seria.length,
         bNowValue = len > 0 ? seria[len - 1][1] ? seria[len - 1][1] : '0.0' : '0.0',
         bPrevValue = len > 1 ? seria[len - 2][1] ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0) : (0, _big2.default)(0.0),
-        date = len > 0 ? _DateUtils2.default.formatTo(seria[len - 1][0]) : '';
+        date = len > 0 ? _DateUtils2.default.formatTo(seria[len - 1][0]) : '',
+        dateTo = len > 1 ? seria[len - 2][0] ? _DateUtils2.default.formatTo(seria[len - 2][0]) : '' : '';
 
-    return (0, _extends3.default)({}, this.createValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), { date: date });
+    return (0, _extends3.default)({}, this.createValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
+      valueTo: _ChartConfig2.default.fnNumberFormat(bPrevValue),
+      date: date, dateTo: dateTo
+    });
   },
   getRecentDate: function getRecentDate() {
     var seria = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];

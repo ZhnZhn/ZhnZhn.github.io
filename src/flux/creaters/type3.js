@@ -1,6 +1,4 @@
 
-import { isFn } from '../../utils/is'
-
 const createLoadOptions = (props={}, options={}) => {
   const {
           columnName, dataColumn, seriaColumnNames, loadId,
@@ -8,10 +6,12 @@ const createLoadOptions = (props={}, options={}) => {
           linkFn, dataSource
         } = props
       , { fromDate, toDate, stock } = options
-      , _value = isFn(fnValue)
-            ? fnValue(stock.value) : stock.value
-      , _itemCaption = isFn(fnItemCaption)
-            ? fnItemCaption(stock.value) : undefined;
+      , _value = (typeof fnValue === 'function')
+            ? fnValue(stock.value)
+            : stock.value
+      , _itemCaption = (typeof fnItemCaption === 'function')
+            ? fnItemCaption(stock.value)
+            : undefined;
   return {
     //value : this.stock.value,
     value : _value,

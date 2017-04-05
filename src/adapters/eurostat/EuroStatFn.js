@@ -53,10 +53,11 @@ const EuroStatFn = {
 
     config.zhConfig = this.createZhConfig(option);
     config.info = this.createDatasetInfo(json, option);
-
+    
     if (seriaType === 'AREA'){
       config.valueMoving = QuandlFn2.createValueMovingFromSeria(data);
     }
+
     config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
   },

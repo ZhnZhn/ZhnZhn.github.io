@@ -71,12 +71,6 @@ var onLoadChart = _ChartActions2.default.loadStock,
     onTestDate = _DateUtils2.default.isValidDate,
     onTestDateOrEmpty = _DateUtils2.default.isValidDateOrEmpty;
 
-/*
-const noopArr = function(){
-  return [];
-}
-*/
-
 var _showModalDialogDescription = function _showModalDialogDescription(option) {
   _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, option);
 };

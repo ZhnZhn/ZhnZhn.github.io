@@ -29,12 +29,6 @@ const onLoadChart = ChartActions.loadStock
     , onTestDateOrEmpty = DateUtils.isValidDateOrEmpty;
 
 
-/*
-const noopArr = function(){
-  return [];
-}
-*/
-
 const _showModalDialogDescription = function(option){
   ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, option);
 }

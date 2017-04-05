@@ -19,6 +19,7 @@ var createLoadOptions = function createLoadOptions() {
       twoCaption = _two$caption === undefined ? '' : _two$caption;
 
   return {
+    seriaType: 'AREA',
     geo: oneValue,
     group: group,
     metric: twoValue,
@@ -33,4 +34,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=eurostat.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\eurostat.js.map

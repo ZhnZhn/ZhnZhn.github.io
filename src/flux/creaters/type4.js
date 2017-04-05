@@ -1,4 +1,3 @@
-import { isFn } from '../../utils/is'
 
 const createLoadOptions = (props={}, options={}) => {
   const {
@@ -6,7 +5,7 @@ const createLoadOptions = (props={}, options={}) => {
           isPremium
         } = props
       , { one, two, fromDate, toDate } = options
-      , _value = isFn(fnValue)
+      , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
            : undefined
   return {

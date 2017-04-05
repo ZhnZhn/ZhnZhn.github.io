@@ -173,7 +173,17 @@ const DateUtils = {
 		 } else if ( frequency === 'Y'){
 			 return _fnForYearSelect(mapDateDf);
 		 }
-	}
+	},
+
+ dmyToUTC(str){
+	  const _str = str || ''
+		    , [ d=10, m=10, y=1000 ] = _str.split('-')		    
+		if (DateUtils.isValidDate(`${y}-${m}-${d}`)){
+			return Date.UTC(y, (parseInt(m, 10)-1), d)
+		} else {
+			return 0;
+		}
+ }
 
 };
 

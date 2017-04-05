@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from './Header';
-import ChartToolbar from './ChartToolbar';
+import ChartToolBar from './ChartToolBar';
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
 import Legend from '../zhn/Legend';
@@ -40,15 +40,15 @@ const AreaChartItem = React.createClass({
     this._fnOnCheck = this._handlerCheckBox.bind(this, true);
     this._fnOnUnCheck = this._handlerCheckBox.bind(this, false);
 
-    const { config={} } = this.props
+    const { config={}, caption='' } = this.props
         , { zhConfig } = config
-        , { dataSource='' } = zhConfig
+        , { dataSource='', itemCaption } = zhConfig
+        , _itemCaption = (itemCaption) ? itemCaption : caption;
     this._dataSourceEl = (
                            <div style={styles.dataSource}>
                              {dataSource}
                            </div>
                          )
-
     return {
       isOpen: true,
       isShowChart : true,
@@ -59,13 +59,22 @@ const AreaChartItem = React.createClass({
       isATHVolume : false, isShowATH : false,
       isInitHighLow : false, isShowHighLow : false,
 
+      itemCaption: _itemCaption,
       chartsDescription : [],
       mfiConfigs : []
     }
   },
 
+  setItemCaption(str){
+    this.setState({ itemCaption: str })
+  },
+
   componentDidMount(){
     this.mainChart = this.chartComp.getChart()
+  },
+
+  getMainChart(){
+    return this.mainChart;
   },
 
   _handlerLoadedMetricChart(metricChart){
@@ -85,7 +94,7 @@ const AreaChartItem = React.createClass({
       this.setState({ isOpen : true })
     }
   },
-  
+
   _handlerClickLegend(){
     this.setState({ isShowLegend : !this.state.isShowLegend });
   },
@@ -179,13 +188,17 @@ const AreaChartItem = React.createClass({
 
   _handleClickConfig(){
     const { caption, onShowConfigDialog } = this.props
-    onShowConfigDialog({ caption, chart: this.mainChart })
+    onShowConfigDialog({
+      caption,
+      chart: this.mainChart,
+      setItemCaption: this.setItemCaption
+    })
   },
 
 
  _createChartToolBar(config){
    return (
-         <ChartToolbar
+         <ChartToolBar
            style={styles.tabDiv}
            config={config}
            onAddSma={this._handlerAddSma}
@@ -199,7 +212,7 @@ const AreaChartItem = React.createClass({
            onClickVolume={this._handlerClickVolume}
            onClickATH={this._handlerClickATH}
            onClickHighLow={this._handlerClickHighLow}
-           onClickConfig={this._handleClickConfig}
+           onClickConfig={this._handleClickConfig}           
           />
       );
  },
@@ -272,10 +285,11 @@ const AreaChartItem = React.createClass({
             chartType, caption, config,
             onCloseItem,
           } = this.props
-        , {itemCaption, itemTime} = config.zhConfig
-        , _itemCaption = (itemCaption) ? itemCaption : caption
+        , { itemTime } = config.zhConfig
+        //, _itemCaption = (itemCaption) ? itemCaption : caption
         , {
             isOpen, isShowChart, isShowInfo,
+            itemCaption,
             mfiConfigs
         } = this.state;
 
@@ -286,12 +300,14 @@ const AreaChartItem = React.createClass({
             chartType={chartType}
             onCheck={this._fnOnCheck}
             onUnCheck={this._fnOnUnCheck}
-            itemCaption={_itemCaption}
+            //itemCaption={_itemCaption}
+            itemCaption={itemCaption}
             itemTitle={caption}
             itemTime={itemTime}
             onToggle={this._handlerToggleOpen}
             valueMoving={config.valueMoving}
             onClose={onCloseItem}
+            fnGetChart={this.getMainChart}
          />
         <ShowHide isShow={isOpen} style={styles.showHide}>
            {isShowChart && this._createChartToolBar(config)}

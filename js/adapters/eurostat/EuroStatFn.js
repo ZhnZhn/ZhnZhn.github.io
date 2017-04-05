@@ -85,6 +85,7 @@ var EuroStatFn = (0, _extends3.default)({
     if (seriaType === 'AREA') {
       config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(data);
     }
+
     config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
   },

@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _toConsumableArray2 = require("babel-runtime/helpers/toConsumableArray");
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
@@ -12,23 +16,46 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ImArrayUtil = {
   push: function push(arr, obj) {
-    return arr ? [].concat((0, _toConsumableArray3.default)(arr), [obj]) : [obj];
+    return arr ? [].concat((0, _toConsumableArray3.default)(arr), [Object.assign({}, obj)]) : [Object.assign({}, obj)];
   },
-  filterByProp: function filterByProp(prop, arr, value) {
-    return arr.filter(function (obj, index) {
-      return obj[prop] !== value;
-    });
+
+
+  filterByPropFn: function filterByPropFn(propName) {
+    return function (arr, propValue) {
+      return arr.filter(function (obj, index) {
+        return obj[propName] !== propValue;
+      });
+    };
   },
+
   insertItem: function insertItem(item, index) {
     var arr = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
-    if (index !== 0) {
-      return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), [Object.assign({}, item)], (0, _toConsumableArray3.default)(arr.slice(index)));
+    return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), [Object.assign({}, item)], (0, _toConsumableArray3.default)(arr.slice(index)));
+    /*
+    if (index !== 0){
+      return [
+          ...arr.slice(0, index),
+          Object.assign({}, item),
+          ...arr.slice(index)
+      ]
     } else {
-      return [Object.assign({}, item)].concat((0, _toConsumableArray3.default)(arr));
+       return [
+          Object.assign({}, item),
+          ...arr
+      ]
     }
+    */
+  },
+
+
+  editByPropFn: function editByPropFn(propName) {
+    return function (arr, index, propValue) {
+      return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), [Object.assign({}, arr[index], (0, _defineProperty3.default)({}, propName, propValue))], (0, _toConsumableArray3.default)(arr.slice(index + 1)));
+    };
   }
+
 };
 
 exports.default = ImArrayUtil;
-//# sourceMappingURL=ImArrayUtil.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\ImArrayUtil.js.map

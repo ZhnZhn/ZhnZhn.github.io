@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../src/utils/ArrayUtil.js"],"names":["ArrayUtil","findIndexByProp","propItem","arr","value","findIndex","item","index","checkSameByProp","i"],"mappings":";;;;;;AACA,IAAMA,YAAY;AAEhBC,iBAFgB,2BAECC,QAFD,EAEWC,GAFX,EAEgBC,KAFhB,EAEsB;AACnC,WAAOD,IAAIE,SAAJ,CAAc,UAACC,IAAD,EAAOC,KAAP,EAAiB;AACnC,aAAOD,KAAKJ,QAAL,MAAmBE,KAA1B;AACH,KAFO,CAAP;AAGF,GANe;AAShBI,iBATgB,2BASAN,QATA,EASUC,GATV,EASeC,KATf,EASqB;AACjC,QAAMG,QAASJ,GAAD,GACLA,IAAIE,SAAJ,CAAc,UAACC,IAAD,EAAOG,CAAP,EAAa;AACxB,aAAOH,KAAKJ,QAAL,MAAmBE,KAA1B;AACF,KAFD,CADK,GAIL,CAAC,CAJV;AAKA,QAAIG,UAAU,CAAC,CAAf,EAAkB;AAAE,aAAO,KAAP;AAAc,KAAlC,MACK;AAAC,aAAO,IAAP;AAAa;AACtB;AAjBe,CAAlB;;kBAqBeP,S","file":"ArrayUtil.js","sourcesContent":["\r\nconst ArrayUtil = {\r\n\r\n  findIndexByProp (propItem, arr, value){\r\n     return arr.findIndex((item, index) => {\r\n        return item[propItem] === value;\r\n    })\r\n  },\r\n\r\n\r\n  checkSameByProp(propItem, arr, value){\r\n      const index = (arr)\r\n             ? arr.findIndex((item, i) => {\r\n                  return item[propItem] === value;\r\n               })\r\n             : -1 ;\r\n      if (index === -1) { return false;}\r\n      else {return true;}\r\n  }\r\n\r\n};\r\n\r\nexport default ArrayUtil\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\ArrayUtil.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\ArrayUtil.js",
+ "sourceRoot": "",
+ "names": [
+  "ArrayUtil",
+  "findIndexByProp",
+  "propName",
+  "arr",
+  "propValue",
+  "Array",
+  "isArray",
+  "findIndex",
+  "item",
+  "index",
+  "isSameByProp",
+  "i",
+  "isStrInArr",
+  "str",
+  "len",
+  "length"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,YAAY;;AAEhBC,mBAAiB,yBAACC,QAAD;AAAA,WAAc,UAACC,GAAD,EAAMC,SAAN,EAAoB;AAChD,UAAI,CAACC,MAAMC,OAAN,CAAcH,GAAd,CAAL,EAAwB;AACtB,eAAO,CAAC,CAAR;AACD;;AAED,aAAOA,IAAII,SAAJ,CAAc,UAACC,IAAD,EAAOC,KAAP,EAAiB;AACnC,eAAOD,KAAKN,QAAL,MAAmBE,SAA1B;AACH,OAFO,CAAP;AAGF,KARgB;AAAA,GAFD;;AAahBM,gBAAc,sBAACR,QAAD;AAAA,WAAc,UAACC,GAAD,EAAMC,SAAN,EAAoB;AAC5C,UAAI,CAACC,MAAMC,OAAN,CAAcH,GAAd,CAAL,EAAwB;AACtB,eAAO,KAAP;AACD;;AAED,UAAMM,QAAQN,IAAII,SAAJ,CAAc,UAACC,IAAD,EAAOG,CAAP,EAAa;AACzB,eAAOH,KAAKN,QAAL,MAAmBE,SAA1B;AACD,OAFD,CAAd;;AAIA,aAAQK,UAAU,CAAC,CAAZ,GAAiB,KAAjB,GAAyB,IAAhC;AACH,KAVa;AAAA,GAbE;;AAyBhBG,cAAa,oBAACC,GAAD;AAAA,WAAS,UAACV,GAAD,EAAS;AAC5B,UAAI,CAACE,MAAMC,OAAN,CAAcH,GAAd,CAAL,EAAwB;AACtB,eAAO,KAAP;AACD;AACD,UAAIQ,UAAJ;AAAA,UAAOG,MAAIX,IAAIY,MAAf;AACA,WAAIJ,IAAE,CAAN,EAAQA,IAAEG,GAAV,EAAcH,GAAd,EAAkB;AAChB,YAAIE,QAAQV,IAAIQ,CAAJ,CAAZ,EAAmB;AACjB,iBAAO,IAAP;AACD;AACF;AACD,aAAO,KAAP;AACF,KAXY;AAAA;AAzBG,CAAlB;;kBAuCeX,S"
+}

@@ -1,5 +1,4 @@
 
-import { isFn } from '../../utils/is'
 
 const createLoadOptions = (props={}, options={}) => {
   const {
@@ -7,7 +6,7 @@ const createLoadOptions = (props={}, options={}) => {
           seriaColumnNames, loadId, dataSource
         } = props
       , { item, month, year, fromDate } = options
-      , _value = isFn(fnValue)
+      , _value = (typeof fnValue === 'function')
             ? fnValue(item.value, month.value, year.value )
             : undefined
       , _subtitle = (columnName)

@@ -1,0 +1,17 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-span\\SpanDate.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-span\\SpanDate.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "ROOT",
+  "color",
+  "fontWeight",
+  "SpanDate",
+  "date",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,WAAO,SADF;AAELC,gBAAa;AAFR;AADK,CAAd;;AAOA,IAAMC,WAAW,SAAXA,QAAW;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SACf;AAAA;AAAA,MAAM,kCAAWN,MAAMC,IAAjB,EAA0BK,KAA1B,CAAN;AACGD;AADH,GADe;AAAA,CAAjB;;kBAMeD,Q"
+}

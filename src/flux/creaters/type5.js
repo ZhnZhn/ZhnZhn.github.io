@@ -1,9 +1,8 @@
-import { isFn } from '../../utils/is'
 
 const _crDefault = (props, options) => {
   const { fnValue, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
-      , _value = isFn(fnValue)
+      , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
            : undefined
   return {
@@ -21,7 +20,7 @@ const _crDefault = (props, options) => {
 const _crTreeItem = (props, options) => {
   const { fnValue, dataColumn, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
-      , _value = isFn(fnValue)
+      , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, three.value)
            : undefined
   return {
@@ -39,7 +38,7 @@ const _crTreeItem = (props, options) => {
 const _crPlusTreeItem = (props, options) => {
   const { fnValue, dataColumn, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
-      , _value = isFn(fnValue)
+      , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value, three.value)
            : undefined
   return {
@@ -63,7 +62,7 @@ const _rFn = {
 const createLoadOptions = (props={}, options={}) => {
   const { fnValueType } = props
       , _createLoadOption = _rFn[fnValueType]
-  if (isFn(_createLoadOption)){
+  if (typeof _createLoadOption === 'function'){
     return _createLoadOption(props, options);
   } else {
     return _rFn.DEFAULT(props, options);

@@ -4,6 +4,10 @@ import ImArrayUtil from '../../utils/ImArrayUtil';
 import ObjUtil from '../../utils/ObjUtil';
 import ArrayUtil from '../../utils/ArrayUtil';
 
+const CAPTION = 'caption'
+    , GROUPS = 'groups'
+    , LISTS = 'lists' ;
+
 const LogicFn = {
 
   fResultNotFound(itemType, name){
@@ -38,26 +42,20 @@ const LogicFn = {
  },
  /* for DragDrop */
 
-  filter : ImArrayUtil.filterByProp.bind(null, 'caption'),
+  filter : ImArrayUtil.filterByPropFn(CAPTION),
   getArrayWithObj : ImArrayUtil.push,
 
-  getArrayWithRename(arr, index, caption){
-    return [
-      ...arr.slice(0, index),
-      Object.assign({}, arr[index], {caption}),
-      ...arr.slice(index+1)
-    ]
-  },
+  getArrayWithRename: ImArrayUtil.editByPropFn(CAPTION),
 
   /* for DragDrop */
   insertItemInArray : ImArrayUtil.insertItem,
   /* for DragDrop */
 
-  findGroup : ObjUtil.findInPropArrayByPropItem.bind(null, 'groups', 'caption'),
-  findList : ObjUtil.findInPropArrayByPropItem.bind(null, 'lists', 'caption'),
+  findGroup : ObjUtil.findInPropArrayByProp(GROUPS, CAPTION),
+  findList : ObjUtil.findInPropArrayByProp(LISTS, CAPTION),
 
-  findIndex : ArrayUtil.findIndexByProp.bind(null, 'caption'),
-  checkIsInArraySameCaption : ArrayUtil.checkSameByProp.bind(null, 'caption')
+  findIndex : ArrayUtil.findIndexByProp('caption'),
+  checkIsInArraySameCaption : ArrayUtil.isSameByProp(CAPTION)
 
 };
 

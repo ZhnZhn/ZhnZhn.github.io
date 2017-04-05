@@ -12,9 +12,9 @@ var _Header = require('./Header');
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _ChartToolbar = require('./ChartToolbar');
+var _ChartToolBar = require('./ChartToolBar');
 
-var _ChartToolbar2 = _interopRequireDefault(_ChartToolbar);
+var _ChartToolBar2 = _interopRequireDefault(_ChartToolBar);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -67,18 +67,22 @@ var AreaChartItem = _react2.default.createClass({
     this._fnOnCheck = this._handlerCheckBox.bind(this, true);
     this._fnOnUnCheck = this._handlerCheckBox.bind(this, false);
 
-    var _props$config = this.props.config,
+    var _props = this.props,
+        _props$config = _props.config,
         config = _props$config === undefined ? {} : _props$config,
+        _props$caption = _props.caption,
+        caption = _props$caption === undefined ? '' : _props$caption,
         zhConfig = config.zhConfig,
         _zhConfig$dataSource = zhConfig.dataSource,
-        dataSource = _zhConfig$dataSource === undefined ? '' : _zhConfig$dataSource;
+        dataSource = _zhConfig$dataSource === undefined ? '' : _zhConfig$dataSource,
+        itemCaption = zhConfig.itemCaption,
+        _itemCaption = itemCaption ? itemCaption : caption;
 
     this._dataSourceEl = _react2.default.createElement(
       'div',
       { style: styles.dataSource },
       dataSource
     );
-
     return {
       isOpen: true,
       isShowChart: true,
@@ -89,12 +93,19 @@ var AreaChartItem = _react2.default.createClass({
       isATHVolume: false, isShowATH: false,
       isInitHighLow: false, isShowHighLow: false,
 
+      itemCaption: _itemCaption,
       chartsDescription: [],
       mfiConfigs: []
     };
   },
+  setItemCaption: function setItemCaption(str) {
+    this.setState({ itemCaption: str });
+  },
   componentDidMount: function componentDidMount() {
     this.mainChart = this.chartComp.getChart();
+  },
+  getMainChart: function getMainChart() {
+    return this.mainChart;
   },
   _handlerLoadedMetricChart: function _handlerLoadedMetricChart(metricChart) {
     this.mainChart.options.zhDetailCharts.push(metricChart);
@@ -124,10 +135,10 @@ var AreaChartItem = _react2.default.createClass({
     this.is2H = !this.is2H;
   },
   _handlerAddToWatch: function _handlerAddToWatch() {
-    var _props = this.props,
-        caption = _props.caption,
-        config = _props.config,
-        onAddToWatch = _props.onAddToWatch;
+    var _props2 = this.props,
+        caption = _props2.caption,
+        config = _props2.config,
+        onAddToWatch = _props2.onAddToWatch;
 
     onAddToWatch({ caption: caption, config: config });
   },
@@ -206,14 +217,18 @@ var AreaChartItem = _react2.default.createClass({
     this.setState({ mfiConfigs: this.state.mfiConfigs });
   },
   _handleClickConfig: function _handleClickConfig() {
-    var _props2 = this.props,
-        caption = _props2.caption,
-        onShowConfigDialog = _props2.onShowConfigDialog;
+    var _props3 = this.props,
+        caption = _props3.caption,
+        onShowConfigDialog = _props3.onShowConfigDialog;
 
-    onShowConfigDialog({ caption: caption, chart: this.mainChart });
+    onShowConfigDialog({
+      caption: caption,
+      chart: this.mainChart,
+      setItemCaption: this.setItemCaption
+    });
   },
   _createChartToolBar: function _createChartToolBar(config) {
-    return _react2.default.createElement(_ChartToolbar2.default, {
+    return _react2.default.createElement(_ChartToolBar2.default, {
       style: styles.tabDiv,
       config: config,
       onAddSma: this._handlerAddSma,
@@ -302,20 +317,19 @@ var AreaChartItem = _react2.default.createClass({
   render: function render() {
     var _this3 = this;
 
-    var _props3 = this.props,
-        chartType = _props3.chartType,
-        caption = _props3.caption,
-        config = _props3.config,
-        onCloseItem = _props3.onCloseItem,
-        _config$zhConfig = config.zhConfig,
-        itemCaption = _config$zhConfig.itemCaption,
-        itemTime = _config$zhConfig.itemTime,
-        _itemCaption = itemCaption ? itemCaption : caption,
+    var _props4 = this.props,
+        chartType = _props4.chartType,
+        caption = _props4.caption,
+        config = _props4.config,
+        onCloseItem = _props4.onCloseItem,
+        itemTime = config.zhConfig.itemTime,
         _state4 = this.state,
         isOpen = _state4.isOpen,
         isShowChart = _state4.isShowChart,
         isShowInfo = _state4.isShowInfo,
+        itemCaption = _state4.itemCaption,
         mfiConfigs = _state4.mfiConfigs;
+
 
     return _react2.default.createElement(
       'div',
@@ -324,13 +338,15 @@ var AreaChartItem = _react2.default.createClass({
         isOpen: isOpen,
         chartType: chartType,
         onCheck: this._fnOnCheck,
-        onUnCheck: this._fnOnUnCheck,
-        itemCaption: _itemCaption,
+        onUnCheck: this._fnOnUnCheck
+        //itemCaption={_itemCaption}
+        , itemCaption: itemCaption,
         itemTitle: caption,
         itemTime: itemTime,
         onToggle: this._handlerToggleOpen,
         valueMoving: config.valueMoving,
-        onClose: onCloseItem
+        onClose: onCloseItem,
+        fnGetChart: this.getMainChart
       }),
       _react2.default.createElement(
         _ShowHide2.default,

@@ -59,8 +59,9 @@ Interact.makeDragable = function (domNode) {
         },
         */
         onmove: Interact.dragMoveListener,
-        onend: Interact.dragEndListener }).preventDefault(false);
+        onend: Interact.dragEndListener
+    }).preventDefault(false);
 };
 
 exports.default = Interact;
-//# sourceMappingURL=Interact.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\Interact.js.map

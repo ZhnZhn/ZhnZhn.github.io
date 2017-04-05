@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _is = require('../../utils/is');
 
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -20,7 +19,7 @@ var createLoadOptions = function createLoadOptions() {
       month = options.month,
       year = options.year,
       fromDate = options.fromDate,
-      _value = (0, _is.isFn)(fnValue) ? fnValue(item.value, month.value, year.value) : undefined,
+      _value = typeof fnValue === 'function' ? fnValue(item.value, month.value, year.value) : undefined,
       _subtitle = columnName ? month.caption + ':' + year.caption + ':' + columnName : month.caption + ':' + year.caption;
 
   return {

@@ -139,16 +139,31 @@ var ChartPane = function (_Component) {
 
   (0, _createClass3.default)(ChartPane, [{
     key: 'render',
+
+
+    /*
+    _handleEnterItemCaption = (value) => {
+      this.props.setItemCaption(value);
+    }
+    */
+
     value: function render() {
-      var chart = this.props.chart,
+      var _props = this.props,
+          chart = _props.chart,
+          caption = _props.caption,
+          setItemCaption = _props.setItemCaption,
           _title = (0, _safeGet2.default)(chart, 'options.title.text', ''),
           _subtitle = (0, _safeGet2.default)(chart, 'options.subtitle.text', ''),
           _height = (0, _safeGet2.default)(chart, 'options.chart.height', '');
 
-
       return _react2.default.createElement(
         'div',
         { style: _Pane2.default.ROOT },
+        _react2.default.createElement(_RowInputText2.default, {
+          caption: 'Item:',
+          initValue: caption,
+          onEnter: setItemCaption
+        }),
         _react2.default.createElement(_RowInputText2.default, {
           caption: 'Title:',
           initValue: _title,
@@ -210,7 +225,9 @@ process.env.NODE_ENV !== "production" ? ChartPane.propTypes = {
         titleEls: _react.PropTypes.arrayOf(_react.PropTypes.object)
       })
     })
-  })
+  }),
+  caption: _react.PropTypes.string,
+  setItemCaption: _react.PropTypes.func
 } : void 0;
 exports.default = ChartPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-config\ChartPane.js.map

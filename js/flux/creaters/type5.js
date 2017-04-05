@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _is = require('../../utils/is');
-
 var _crDefault = function _crDefault(props, options) {
   var fnValue = props.fnValue,
       loadId = props.loadId,
@@ -15,7 +13,7 @@ var _crDefault = function _crDefault(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
-      _value = (0, _is.isFn)(fnValue) ? fnValue(one.value, two.value) : undefined;
+      _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : undefined;
 
   return {
     value: _value,
@@ -39,7 +37,7 @@ var _crTreeItem = function _crTreeItem(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
-      _value = (0, _is.isFn)(fnValue) ? fnValue(one.value, three.value) : undefined;
+      _value = typeof fnValue === 'function' ? fnValue(one.value, three.value) : undefined;
 
   return {
     value: _value,
@@ -63,7 +61,7 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
-      _value = (0, _is.isFn)(fnValue) ? fnValue(one.value, two.value, three.value) : undefined;
+      _value = typeof fnValue === 'function' ? fnValue(one.value, two.value, three.value) : undefined;
 
   return {
     value: _value,
@@ -89,7 +87,7 @@ var createLoadOptions = function createLoadOptions() {
   var fnValueType = props.fnValueType,
       _createLoadOption = _rFn[fnValueType];
 
-  if ((0, _is.isFn)(_createLoadOption)) {
+  if (typeof _createLoadOption === 'function') {
     return _createLoadOption(props, options);
   } else {
     return _rFn.DEFAULT(props, options);

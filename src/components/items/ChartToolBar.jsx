@@ -91,6 +91,7 @@ class ChartToolbar extends Component {
         </ButtonParentTab>
      ) : null;
 
+
    /*
    const _btConf = (
      <ButtonTab
@@ -100,6 +101,7 @@ class ChartToolbar extends Component {
      />
    )
    */
+
 
     return (
       <div style={style}>

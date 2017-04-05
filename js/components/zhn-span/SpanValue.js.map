@@ -1,0 +1,18 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-span\\SpanValue.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-span\\SpanValue.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "ROOT",
+  "color",
+  "fontWeight",
+  "whiteSpace",
+  "SpanValue",
+  "value",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,WAAQ,SADH;AAELC,gBAAa,MAFR;AAGLC,gBAAY;AAHP;AADK,CAAd;;AAQA,IAAMC,YAAY,SAAZA,SAAY;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,KAAV,QAAUA,KAAV;AAAA,SAChB;AAAA;AAAA,MAAM,kCAAWP,MAAMC,IAAjB,EAA0BM,KAA1B,CAAN;AACGD;AADH,GADgB;AAAA,CAAlB;;kBAMeD,S"
+}

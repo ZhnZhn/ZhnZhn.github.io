@@ -90,7 +90,7 @@ const QuandlFn2 = {
     }
 
     return {
-      value : ChartConfig.fnNumberFormat(_bNowValue),
+      value : ChartConfig.fnNumberFormat(_bNowValue),      
       delta : ChartConfig.fnNumberFormat(_bDelta),
       percent : _bPercent.toString() + '%',
       direction : _direction
@@ -108,8 +108,16 @@ const QuandlFn2 = {
         , date = (len>0)
              ? DateUtils.formatTo(seria[len-1][0])
              : ''
+        , dateTo = (len>1)
+             ? (seria[len-2][0])
+                   ? DateUtils.formatTo(seria[len-2][0]) : ''
+             : '';
 
-    return  { ...this.createValueMoving({ bNowValue, bPrevValue }), date }
+    return  {
+      ...this.createValueMoving({ bNowValue, bPrevValue }),
+      valueTo: ChartConfig.fnNumberFormat(bPrevValue),
+      date, dateTo
+    };
   },
 
   getRecentDate(seria=[], json){

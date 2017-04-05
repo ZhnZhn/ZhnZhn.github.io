@@ -1,9 +1,9 @@
 
 const ObjUtil = {
 
-  findInPropArrayByPropItem(propArr, propItem, obj, value){
-    return obj[propArr].find((item, index) => {
-       return item[propItem] === value;
+  findInPropArrayByProp : (propArrName, propName) => (obj, propValue) => {
+    return obj[propArrName].find((item, index) => {
+       return item[propName] === propValue;
     })
   }
 

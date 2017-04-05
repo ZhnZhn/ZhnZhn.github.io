@@ -36,7 +36,9 @@ var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
-var _is = require('../../utils/is');
+var _ArrayUtil = require('../../utils/ArrayUtil');
+
+var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
 
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
@@ -88,7 +90,7 @@ var isCategoryType = function isCategoryType(chartType) {
   if (!chartType) {
     return false;
   }
-  return (0, _is.isStrInArr)(chartType.value)(categoryTypes);
+  return _ArrayUtil2.default.isStrInArr(chartType.value)(categoryTypes);
 };
 
 var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
