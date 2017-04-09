@@ -32,7 +32,7 @@ class DialogContainer extends Component {
      if (actionType === ComponentActionTypes.SHOW_MODAL_DIALOG){
        const type = option.modalDialogType
            , { inits, shows, data, dialogs } = this.state;
-
+       
        data[type] = option;
        shows[type] = true;
        if (inits[type]){

@@ -322,6 +322,7 @@ var AreaChartItem = _react2.default.createClass({
         caption = _props4.caption,
         config = _props4.config,
         onCloseItem = _props4.onCloseItem,
+        isAdminMode = _props4.isAdminMode,
         itemTime = config.zhConfig.itemTime,
         _state4 = this.state,
         isOpen = _state4.isOpen,
@@ -346,7 +347,8 @@ var AreaChartItem = _react2.default.createClass({
         onToggle: this._handlerToggleOpen,
         valueMoving: config.valueMoving,
         onClose: onCloseItem,
-        fnGetChart: this.getMainChart
+        fnGetChart: this.getMainChart,
+        isAdminMode: isAdminMode
       }),
       _react2.default.createElement(
         _ShowHide2.default,

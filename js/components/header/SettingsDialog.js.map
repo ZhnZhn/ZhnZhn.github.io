@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../src/components/header/SettingsDialog.jsx"],"names":["styles","S","MODAL","position","width","height","margin","SettingsDialog","_handleSet","setQuandlKey","inputEl","getValue","props","onClose","nextProps","nextState","isShow","commandButtons","rowDiv","labelSpan","c"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AAEA;;;;AAEA;;;;;;AAEA,IAAMA,+BAAN;;AAEA,IAAMC,IAAI;AACRC,SAAQ;AACNC,cAAW,QADL;AAENC,WAAO,OAFD;AAGNC,YAAQ,OAHF;AAINC,YAAQ;AAJF;AADA,CAAV;;IASMC,c;;;;;;;;;;;;;;oNASJC,U,GAAa,YAAM;AACjB,2BAAWC,YAAX,CAAwB,MAAKC,OAAL,CAAaC,QAAb,EAAxB;AACA,YAAKC,KAAL,CAAWC,OAAX;AACD,K;;;;;0CAVqBC,S,EAAWC,S,EAAU;AACzC,UAAID,cAAc,KAAKF,KAAnB,IAA4BE,UAAUE,MAAV,KAAqB,KAAKJ,KAAL,CAAWI,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;6BAOO;AAAA;;AACN,UAAMC,iBAAgB,CACnB;AACG,aAAI,GADP;AAEG,cAAK,OAFR;AAGG,iBAAQ,KAHX;AAIG,iBAAS,KAAKT;AAJjB,QADmB,CAAtB;AADM,mBASoB,KAAKI,KATzB;AAAA,UASCI,MATD,UASCA,MATD;AAAA,UASSH,OATT,UASSA,OATT;;AAUN,aACK;AAAA;AAAA;AACG,iBAAOZ,EAAEC,KADZ;AAEG,mBAAQ,eAFX;AAGG,kBAAQc,MAHX;AAIG,0BAAgBC,cAJnB;AAKG,mBAASJ;AALZ;AAOE;AAAA;AAAA,YAAK,OAAOb,OAAOkB,MAAnB;AACG;AAAA;AAAA,cAAM,OAAOlB,OAAOmB,SAApB;AAAA;AAAA,WADH;AAIG;AACG,iBAAM;AAAA,qBAAK,OAAKT,OAAL,GAAeU,CAApB;AAAA,aADT;AAEG,yBAAY;AAFf;AAJH;AAPF,OADL;AAmBD;;;;;kBAGYb,c","file":"SettingsDialog.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\nimport ModalDialog from '../zhn/ModalDialog';\r\nimport InputSecret from '../zhn/InputSecret';\r\nimport ActionButton from '../zhn/ActionButton';\r\n\r\nimport ChartStore from '../../flux/stores/ChartStore';\r\n\r\nimport DialogStyles from '../styles/DialogStyles'\r\n\r\nconst styles = DialogStyles;\r\n\r\nconst S = {\r\n  MODAL : {\r\n    position : 'static',\r\n    width: '400px',\r\n    height: '120px',\r\n    margin: '70px auto 0px'\r\n  }\r\n}\r\n\r\nclass SettingsDialog extends Component {\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {\r\n      return false;\r\n    }\r\n    return true;\r\n  }\r\n\r\n  _handleSet = () => {\r\n    ChartStore.setQuandlKey(this.inputEl.getValue());\r\n    this.props.onClose();\r\n  }\r\n\r\n  render(){\r\n    const commandButtons =[\r\n       <ActionButton\r\n          key=\"a\"\r\n          type=\"TypeC\"\r\n          caption=\"Set\"\r\n          onClick={this._handleSet}\r\n       />\r\n    ];\r\n    const {isShow, onClose} = this.props;\r\n    return (\r\n         <ModalDialog\r\n            style={S.MODAL}\r\n            caption=\"User Settings\"\r\n            isShow={isShow}\r\n            commandButtons={commandButtons}\r\n            onClose={onClose}\r\n         >\r\n           <div style={styles.rowDiv}>\r\n              <span style={styles.labelSpan}>\r\n                Quandl:\r\n              </span>\r\n              <InputSecret\r\n                 ref={ c => this.inputEl = c}\r\n                 placeholder=\"Quandl API Key\"\r\n              />\r\n           </div>\r\n         </ModalDialog>\r\n    )\r\n  }\r\n}\r\n\r\nexport default SettingsDialog\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\header\\SettingsDialog.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\header\\SettingsDialog.js",
+ "sourceRoot": "",
+ "names": [
+  "styles",
+  "S",
+  "MODAL",
+  "position",
+  "width",
+  "height",
+  "margin",
+  "SettingsDialog",
+  "props",
+  "_handleSet",
+  "data",
+  "onClose",
+  "setQuandlKey",
+  "inputComp",
+  "getValue",
+  "_handleAdminMode",
+  "mode",
+  "isAdminMode",
+  "commandButtons",
+  "nextProps",
+  "nextState",
+  "isShow",
+  "_isAdminMode",
+  "rowDiv",
+  "labelSpan",
+  "c",
+  "bind",
+  "propTypes",
+  "bool",
+  "shape",
+  "func"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,+BAAN;;AAEA,IAAMC,IAAI;AACRC,SAAQ;AACNC,cAAW,QADL;AAENC,WAAO,OAFD;AAGNC,YAAQ,OAHF;AAINC,YAAQ;AAJF;AADA,CAAV;;IAUMC,c;;;AAUJ,0BAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAmBlBC,UAnBkB,GAmBL,YAAM;AAAA,wBACS,MAAKD,KADd;AAAA,UACTE,IADS,eACTA,IADS;AAAA,UACHC,OADG,eACHA,OADG;AAAA,UAEXC,YAFW,GAEI,sBAAOF,IAAP,EAAa,cAAb,CAFJ;;AAGjBE,mBAAa,MAAKC,SAAL,CAAeC,QAAf,EAAb;AACAH;AACD,KAxBiB;;AAAA,UAyBlBI,gBAzBkB,GAyBC,UAACC,IAAD,EAAU;AACrB,UAAEN,IAAF,GAAW,MAAKF,KAAhB,CAAEE,IAAF;AAAA,UACAO,WADA,GACc,sBAAOP,IAAP,EAAa,aAAb,CADd;;AAENO,kBAAYD,IAAZ;AACD,KA7BiB;;AAEhB,UAAKE,cAAL,GAAqB,CAClB;AACG,WAAI,GADP;AAEG,YAAK,OAFR;AAGG,eAAQ,KAHX;AAIG,eAAS,MAAKT;AAJjB,MADkB,CAArB;AAFgB;AAUjB;;;;0CAEqBU,S,EAAWC,S,EAAU;AACzC,UAAID,cAAc,KAAKX,KAAnB,IAA4BW,UAAUE,MAAV,KAAqB,KAAKb,KAAL,CAAWa,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;6BAcO;AAAA;;AAAA,mBAC4B,KAAKb,KADjC;AAAA,UACEa,MADF,UACEA,MADF;AAAA,UACUX,IADV,UACUA,IADV;AAAA,UACgBC,OADhB,UACgBA,OADhB;AAAA,UAEAW,YAFA,GAEe,sBAAOZ,IAAP,EAAa,aAAb,EAA4B,KAA5B,GAFf;;AAIN,aACK;AAAA;AAAA;AACG,iBAAOT,EAAEC,KADZ;AAEG,mBAAQ,eAFX;AAGG,kBAAQmB,MAHX;AAIG,0BAAgB,KAAKH,cAJxB;AAKG,mBAASP;AALZ;AAQE;AAAA;AAAA,YAAO,OAAOX,OAAOuB,MAArB;AACG;AAAA;AAAA,cAAM,OAAOvB,OAAOwB,SAApB;AAAA;AAAA,WADH;AAIG;AACG,iBAAM;AAAA,qBAAK,OAAKX,SAAL,GAAiBY,CAAtB;AAAA,aADT;AAEG,yBAAY;AAFf;AAJH,SARF;AAkBE;AACG,qBAAWH,YADd;AAEG,mBAAQ,oBAFX;AAGG,mBAAS,KAAKP,gBAAL,CAAsBW,IAAtB,CAA2B,IAA3B,EAAiC,IAAjC,CAHZ;AAIG,qBAAW,KAAKX,gBAAL,CAAsBW,IAAtB,CAA2B,IAA3B,EAAiC,KAAjC;AAJd;AAlBF,OADL;AA2BD;;;;;wCAxEGnB,c,CACGoB,S,GAAY;AACjBN,UAAQ,iBAAUO,IADD;AAEjBlB,QAAM,iBAAUmB,KAAV,CAAgB;AACpBjB,kBAAc,iBAAUkB,IADJ;AAEpBb,iBAAa,iBAAUa;AAFH,GAAhB,CAFW;AAMjBnB,WAAS,iBAAUmB;AANF,C;kBA0ENvB,c"
+}

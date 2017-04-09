@@ -48,6 +48,14 @@ var _SpanDate = require('../zhn-span/SpanDate');
 
 var _SpanDate2 = _interopRequireDefault(_SpanDate);
 
+var _SpanLabel = require('../zhn-span/SpanLabel');
+
+var _SpanLabel2 = _interopRequireDefault(_SpanLabel);
+
+var _InputText = require('../zhn/InputText');
+
+var _InputText2 = _interopRequireDefault(_InputText);
+
 var _SubPanel = require('./SubPanel');
 
 var _SubPanel2 = _interopRequireDefault(_SubPanel);
@@ -81,9 +89,6 @@ var STYLE = {
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
 };
-//import SpanLabel from '../zhn-span/SpanLabel'
-//import InputText from '../zhn/InputText'
-
 
 var _fnFindIndex = _ArrayUtil2.default.findIndexByProp('x');
 
@@ -123,17 +128,35 @@ var PanelValueMoving = function (_Component) {
         }), { valueTo: valueTo, dateTo: dateTo });
         _this.props.onChangeDateTo(valueMoving);
       }
+    }, _this._renderAdmin = function (isAdminMode, date) {
+      if (!isAdminMode) {
+        return null;
+      } else {
+        return _react2.default.createElement(
+          'label',
+          { style: STYLE.ROW_INPUT },
+          _react2.default.createElement(_SpanLabel2.default, { label: 'CompareTo:' }),
+          _react2.default.createElement(_InputText2.default, {
+            style: STYLE.INPUT_TEXT,
+            initValue: date,
+            onEnter: _this._handleEnterDate
+          })
+        );
+      }
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(PanelValueMoving, [{
     key: 'render',
     value: function render() {
-      var valueMoving = this.props.valueMoving,
+      var _props = this.props,
+          valueMoving = _props.valueMoving,
+          isAdminMode = _props.isAdminMode,
           value = valueMoving.value,
           date = valueMoving.date,
           valueTo = valueMoving.valueTo,
-          dateTo = valueMoving.dateTo;
+          dateTo = valueMoving.dateTo,
+          _isAdminMode = typeof isAdminMode == 'function' ? isAdminMode() : typeof isAdminMode == 'boolean' ? isAdminMode : false;
 
       return _react2.default.createElement(
         _SubPanel2.default,
@@ -149,7 +172,8 @@ var PanelValueMoving = function (_Component) {
           { style: STYLE.ROW },
           _react2.default.createElement(_SpanValue2.default, { value: valueTo }),
           _react2.default.createElement(_SpanDate2.default, { date: dateTo, style: STYLE.DATE })
-        )
+        ),
+        this._renderAdmin(_isAdminMode, date)
       );
     }
   }]);
@@ -159,7 +183,8 @@ var PanelValueMoving = function (_Component) {
 process.env.NODE_ENV !== "production" ? PanelValueMoving.propTypes = {
   valueMoving: _react.PropTypes.object,
   fnGetChart: _react.PropTypes.func,
-  onChangeDateTo: _react.PropTypes.func
+  onChangeDateTo: _react.PropTypes.func,
+  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool])
 } : void 0;
 exports.default = PanelValueMoving;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelValueMoving.js.map

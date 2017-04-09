@@ -16,7 +16,7 @@ const styles = {
     color: 'green',
     width: '100%',
     fontSize: '16px',
-    fontWeight: 'bold'
+    fontWeight: 'bold'    
   }
 }
 

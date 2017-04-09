@@ -140,4 +140,4 @@ process.env.NODE_ENV !== "production" ? DialogContainer.propTypes = {
   })
 } : void 0;
 exports.default = DialogContainer;
-//# sourceMappingURL=DialogContainer.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogContainer.js.map

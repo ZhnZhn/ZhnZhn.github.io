@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../src/constants/DialogType.js"],"names":["createTypeObject","arr","id","obj","Object","create","i","max","length","qySources","QuandlYahoo","qeSources","Quandl","qgSources","QuandlGoogle"],"mappings":";;;;;;;AAEA,IAAMA,mBAAmB,SAAnBA,gBAAmB,CAASC,GAAT,EAAcC,EAAd,EAAiB;AACxC,MAAMC,MAAMC,OAAOC,MAAP,CAAc,IAAd,CAAZ;AACA,OAAK,IAAIC,IAAE,CAAN,EAASC,MAAIN,IAAIO,MAAtB,EAA8BF,IAAEC,GAAhC,EAAqCD,GAArC,EAAyC;AACvCH,QAAIF,IAAIK,CAAJ,CAAJ,IAAcJ,KAAK,GAAL,GAAWD,IAAIK,CAAJ,CAAzB;AACD;AACD,SAAOH,GAAP;AACD,CAND;;AASA,IAAMM,YAAY,CAChB,KADgB,EACR,QADQ,EACE,cADF,EAEhB,SAFgB,EAEJ,iBAFI,EAEe,UAFf,EAIhB,QAJgB,EAIN,OAJM,EAKhB,WALgB,EAKH,aALG,EAKY,MALZ,EAKoB,WALpB,EAMhB,OANgB,EAOhB,OAPgB,EAOP,QAPO,EAShB,YATgB,EAUhB,UAVgB,EAUJ,UAVI,EAWhB,QAXgB,EAWN,WAXM,EAWO,WAXP,EAYhB,QAZgB,CAAlB;AAcA,IAAMC,cAAcV,iBAAiBS,SAAjB,EAA4B,IAA5B,CAApB;;AAGA,IAAME,YAAY,CAChB,kBADgB,EAEhB,iBAFgB,EAGhB,iBAHgB,EAIhB,gBAJgB,EAKhB,gBALgB,EAMhB,UANgB,EAOhB,kBAPgB,EAQhB,iBARgB,EAShB,kBATgB,EAUhB,eAVgB,EAWhB,eAXgB,EAYhB,SAZgB,EAahB,KAbgB,EAchB,MAdgB,EAehB,gBAfgB,EAiBhB,gBAjBgB,EAkBhB,YAlBgB,EAmBhB,aAnBgB,EAoBhB,eApBgB,EAqBhB,kBArBgB,EAuBhB,sBAvBgB,EAwBhB,YAxBgB,EAyBhB,YAzBgB,EA0BhB,iBA1BgB,EA2BhB,cA3BgB,EA4BhB,YA5BgB,EA6BhB,aA7BgB,EA+BhB,oBA/BgB,EAgChB,MAhCgB,CAAlB;AAkCA,IAAMC,SAASZ,iBAAiBW,SAAjB,EAA4B,IAA5B,CAAf;;AAGA,IAAME,YAAY,CAChB,QADgB,EAEhB,MAFgB,EAER,MAFQ,EAED,MAFC,EAIhB,UAJgB,EAIJ,QAJI,EAKhB,QALgB,EAKN,MALM,EAKE,SALF,EAOhB,UAPgB,EAOJ,WAPI,EAOS,OAPT,EAOkB,SAPlB,EAQhB,YARgB,EAShB,WATgB,CAAlB;AAWA,IAAMC,eAAed,iBAAiBa,SAAjB,EAA4B,IAA5B,CAArB;;QAGQH,W,GAAAA,W;QAAaE,M,GAAAA,M;QAAQE,Y,GAAAA,Y","file":"DialogType.js","sourcesContent":["\r\n\r\nconst createTypeObject = function(arr, id){\r\n  const obj = Object.create(null);\r\n  for (let i=0, max=arr.length; i<max; i++){\r\n    obj[arr[i]] = id + '_' + arr[i];\r\n  }\r\n  return obj;\r\n}\r\n\r\n\r\nconst qySources = [\r\n  'ETF' , 'INDICE', 'MUTUAL_FUNDS',\r\n  'TORONTO' , 'TORONTO_VENTURE', 'MONTREAL',\r\n\r\n  'LONDON', 'PARIS',\r\n  'AMSTERDAM', 'COPPENHAGEN', 'OSLO', 'STOCKHOLM',\r\n  'SWISS',\r\n  'MILAN', 'MADRID',\r\n\r\n  'AUSTRALIAN',\r\n  'SHANGHAI', 'SHENZHEN',\r\n  'TAIWAN', 'HONG_KONG', 'SINGAPURE',\r\n  'BOMBEY'\r\n];\r\nconst QuandlYahoo = createTypeObject(qySources, 'QY');\r\n\r\n\r\nconst qeSources = [\r\n  'CURRENCY_HISTORY',\r\n  'COMMODITY_PRICE',\r\n  'COMMODITY_TRADE',\r\n  'JODI_WORLD_GAS',\r\n  'JODI_WORLD_OIL',\r\n  'EIA_COAL',\r\n  'GLOBAL_INDICATOR',\r\n  'WORLDBANK_PRICE',\r\n  'IMF_CROSSCOUNTRY',\r\n  'EU_COMMISSION',\r\n  'CPI_INFLATION',\r\n  'BIG_MAC',\r\n  'GDT',\r\n  'BLSI',\r\n  'ROGERS_INDICES',\r\n\r\n  'EURONEXT_STOCK',\r\n  'WIKI_STOCK',\r\n  'TOKIO_STOCK',\r\n  'STOCK_INDEXES',\r\n  'UNICORN_RESEARCH',\r\n\r\n  'CHINA_FINANCE_FUTURE',\r\n  'DCE_FUTURE',\r\n  'ZCE_FUTURE',\r\n  'SHANGHAI_FUTURE',\r\n  'LIFFE_FUTURE',\r\n  'ICE_FUTURE',\r\n  'WIKI_FUTURE',\r\n\r\n  'ZILLOW_REAL_ESTATE',\r\n  'FMAC'\r\n];\r\nconst Quandl = createTypeObject(qeSources, 'QE');\r\n\r\n\r\nconst qgSources = [\r\n  'NASDAQ',\r\n  'NYSE', 'AMEX','ARCA',\r\n\r\n  'BRUSSELS', 'LISBON',\r\n  'TALLIN', 'RIGA', 'VILNIUS',\r\n\r\n  'SHENZHEN', 'SINGAPURE', 'KOREA', 'TAILAND',\r\n  'NEWZEALAND',\r\n  'SAO_PAOLO'\r\n];\r\nconst QuandlGoogle = createTypeObject(qgSources, 'QG');\r\n\r\n\r\nexport {QuandlYahoo, Quandl, QuandlGoogle}\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\constants\\DialogType.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\constants\\DialogType.js",
+ "sourceRoot": "",
+ "names": [
+  "createTypeObject",
+  "arr",
+  "id",
+  "obj",
+  "Object",
+  "create",
+  "i",
+  "max",
+  "length",
+  "qySources",
+  "QuandlYahoo",
+  "qeSources",
+  "Quandl",
+  "qgSources",
+  "QuandlGoogle"
+ ],
+ "mappings": ";;;;;;;AAEA,IAAMA,mBAAmB,SAAnBA,gBAAmB,CAASC,GAAT,EAAcC,EAAd,EAAiB;AACxC,MAAMC,MAAMC,OAAOC,MAAP,CAAc,IAAd,CAAZ;AACA,OAAK,IAAIC,IAAE,CAAN,EAASC,MAAIN,IAAIO,MAAtB,EAA8BF,IAAEC,GAAhC,EAAqCD,GAArC,EAAyC;AACvCH,QAAIF,IAAIK,CAAJ,CAAJ,IAAcJ,KAAK,GAAL,GAAWD,IAAIK,CAAJ,CAAzB;AACD;AACD,SAAOH,GAAP;AACD,CAND;;AASA,IAAMM,YAAY,CAChB,KADgB,EACR,QADQ,EACE,cADF,EAEhB,SAFgB,EAEJ,iBAFI,EAEe,UAFf,EAIhB,QAJgB,EAIN,OAJM,EAKhB,WALgB,EAKH,aALG,EAKY,MALZ,EAKoB,WALpB,EAMhB,OANgB,EAOhB,OAPgB,EAOP,QAPO,EAShB,YATgB,EAUhB,UAVgB,EAUJ,UAVI,EAWhB,QAXgB,EAWN,WAXM,EAWO,WAXP,EAYhB,QAZgB,CAAlB;AAcA,IAAMC,cAAcV,iBAAiBS,SAAjB,EAA4B,IAA5B,CAApB;;AAGA,IAAME,YAAY,CAChB,kBADgB,EAEhB,iBAFgB,EAGhB,iBAHgB,EAIhB,gBAJgB,EAKhB,gBALgB,EAMhB,kBANgB,EAOhB,UAPgB,EAQhB,kBARgB,EAShB,iBATgB,EAUhB,kBAVgB,EAWhB,eAXgB,EAYhB,eAZgB,EAahB,SAbgB,EAchB,KAdgB,EAehB,MAfgB,EAgBhB,gBAhBgB,EAkBhB,gBAlBgB,EAmBhB,YAnBgB,EAoBhB,aApBgB,EAqBhB,eArBgB,EAsBhB,kBAtBgB,EAwBhB,sBAxBgB,EAyBhB,YAzBgB,EA0BhB,YA1BgB,EA2BhB,iBA3BgB,EA4BhB,cA5BgB,EA6BhB,YA7BgB,EA8BhB,aA9BgB,EAgChB,oBAhCgB,EAiChB,MAjCgB,CAAlB;AAmCA,IAAMC,SAASZ,iBAAiBW,SAAjB,EAA4B,IAA5B,CAAf;;AAGA,IAAME,YAAY,CAChB,QADgB,EAEhB,MAFgB,EAER,MAFQ,EAED,MAFC,EAIhB,UAJgB,EAIJ,QAJI,EAKhB,QALgB,EAKN,MALM,EAKE,SALF,EAOhB,UAPgB,EAOJ,WAPI,EAOS,OAPT,EAOkB,SAPlB,EAQhB,YARgB,EAShB,WATgB,CAAlB;AAWA,IAAMC,eAAed,iBAAiBa,SAAjB,EAA4B,IAA5B,CAArB;;QAGQH,W,GAAAA,W;QAAaE,M,GAAAA,M;QAAQE,Y,GAAAA,Y"
+}

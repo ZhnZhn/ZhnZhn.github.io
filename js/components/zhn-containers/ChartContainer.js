@@ -166,14 +166,18 @@ var ChartContainer = function (_Component) {
           browserType = _this$props2.browserType,
           onCloseItem = _this$props2.onCloseItem,
           _this$state$configs = _this.state.configs,
-          configs = _this$state$configs === undefined ? [] : _this$state$configs;
+          configs = _this$state$configs === undefined ? [] : _this$state$configs,
+          _isAdminMode = typeof _ChartStore2.default.isAdminMode == 'function' ? _ChartStore2.default.isAdminMode.bind(_ChartStore2.default) : false;
 
       return configs.map(function (config, index) {
         var _config$zhConfig = config.zhConfig,
             zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
             id = zhConfig.id;
 
-        return _ItemFactory2.default.createItem(config, index, { chartType: chartType }, { onCloseItem: onCloseItem.bind(null, chartType, browserType, id) });
+        return _ItemFactory2.default.createItem(config, index, { chartType: chartType }, {
+          onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
+          isAdminMode: _isAdminMode
+        });
       });
     };
 
@@ -241,4 +245,4 @@ var ChartContainer = function (_Component) {
 }(_react.Component);
 
 exports.default = ChartContainer;
-//# sourceMappingURL=ChartContainer.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-containers\ChartContainer.js.map

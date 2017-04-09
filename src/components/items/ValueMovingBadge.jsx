@@ -54,7 +54,11 @@ class ValueMovingBadge extends Component {
       percent: PropTypes.number,
       direction: PropTypes.oneOf('up', 'down', 'equal'),
       date: PropTypes.string
-    })
+    }),
+    isAdminMode: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool
+    ])
   }
   static defaultProps = {
     valueMoving : {
@@ -87,7 +91,7 @@ class ValueMovingBadge extends Component {
   }
 
   render(){
-    const { fnGetChart } = this.props
+    const { fnGetChart, isAdminMode } = this.props
         , { isShowPanel, valueMoving } = this.state
         , { value, delta, percent, direction, date } = valueMoving;
 
@@ -129,6 +133,7 @@ class ValueMovingBadge extends Component {
               valueMoving={valueMoving}
               fnGetChart={fnGetChart}
               onChangeDateTo={this._handleChangeDateTo}
+              isAdminMode={isAdminMode}
            />
          </ShowHide>
       </span>

@@ -2,8 +2,9 @@ import React, { Component, PropTypes } from 'react'
 
 import safeGet from '../../utils/safeGet'
 
+import RowCheckBox from '../dialogs/RowCheckBox'
 import RowInputText from './RowInputText'
-import RowCheckBox from './RowCheckBox'
+
 import STYLE from './Pane.Style'
 
 const _findPlotLine = function(chart, id){

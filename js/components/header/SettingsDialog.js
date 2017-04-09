@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _safeFn = require('../../utils/safeFn');
+
+var _safeFn2 = _interopRequireDefault(_safeFn);
+
 var _ModalDialog = require('../zhn/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
@@ -36,9 +40,9 @@ var _ActionButton = require('../zhn/ActionButton');
 
 var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _ChartStore = require('../../flux/stores/ChartStore');
+var _RowCheckBox = require('../dialogs/RowCheckBox');
 
-var _ChartStore2 = _interopRequireDefault(_ChartStore);
+var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
@@ -52,7 +56,7 @@ var S = {
   MODAL: {
     position: 'static',
     width: '400px',
-    height: '120px',
+    height: '150px',
     margin: '70px auto 0px'
   }
 };
@@ -60,21 +64,35 @@ var S = {
 var SettingsDialog = function (_Component) {
   (0, _inherits3.default)(SettingsDialog, _Component);
 
-  function SettingsDialog() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function SettingsDialog(props) {
     (0, _classCallCheck3.default)(this, SettingsDialog);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = (0, _possibleConstructorReturn3.default)(this, (SettingsDialog.__proto__ || Object.getPrototypeOf(SettingsDialog)).call(this));
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = SettingsDialog.__proto__ || Object.getPrototypeOf(SettingsDialog)).call.apply(_ref, [this].concat(args))), _this), _this._handleSet = function () {
-      _ChartStore2.default.setQuandlKey(_this.inputEl.getValue());
-      _this.props.onClose();
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    _this._handleSet = function () {
+      var _this$props = _this.props,
+          data = _this$props.data,
+          onClose = _this$props.onClose,
+          setQuandlKey = (0, _safeFn2.default)(data, 'setQuandlKey');
+
+      setQuandlKey(_this.inputComp.getValue());
+      onClose();
+    };
+
+    _this._handleAdminMode = function (mode) {
+      var data = _this.props.data,
+          isAdminMode = (0, _safeFn2.default)(data, 'isAdminMode');
+
+      isAdminMode(mode);
+    };
+
+    _this.commandButtons = [_react2.default.createElement(_ActionButton2.default, {
+      key: 'a',
+      type: 'TypeC',
+      caption: 'Set',
+      onClick: _this._handleSet
+    })];
+    return _this;
   }
 
   (0, _createClass3.default)(SettingsDialog, [{
@@ -90,15 +108,11 @@ var SettingsDialog = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Set',
-        onClick: this._handleSet
-      })];
       var _props = this.props,
           isShow = _props.isShow,
-          onClose = _props.onClose;
+          data = _props.data,
+          onClose = _props.onClose,
+          _isAdminMode = (0, _safeFn2.default)(data, 'isAdminMode', false)();
 
       return _react2.default.createElement(
         _ModalDialog2.default,
@@ -106,11 +120,11 @@ var SettingsDialog = function (_Component) {
           style: S.MODAL,
           caption: 'User Settings',
           isShow: isShow,
-          commandButtons: commandButtons,
+          commandButtons: this.commandButtons,
           onClose: onClose
         },
         _react2.default.createElement(
-          'div',
+          'label',
           { style: styles.rowDiv },
           _react2.default.createElement(
             'span',
@@ -119,16 +133,30 @@ var SettingsDialog = function (_Component) {
           ),
           _react2.default.createElement(_InputSecret2.default, {
             ref: function ref(c) {
-              return _this2.inputEl = c;
+              return _this2.inputComp = c;
             },
             placeholder: 'Quandl API Key'
           })
-        )
+        ),
+        _react2.default.createElement(_RowCheckBox2.default, {
+          initValue: _isAdminMode,
+          caption: 'View in Admin Mode',
+          onCheck: this._handleAdminMode.bind(null, true),
+          onUnCheck: this._handleAdminMode.bind(null, false)
+        })
       );
     }
   }]);
   return SettingsDialog;
 }(_react.Component);
 
+process.env.NODE_ENV !== "production" ? SettingsDialog.propTypes = {
+  isShow: _react.PropTypes.bool,
+  data: _react.PropTypes.shape({
+    setQuandlKey: _react.PropTypes.func,
+    isAdminMode: _react.PropTypes.func
+  }),
+  onClose: _react.PropTypes.func
+} : void 0;
 exports.default = SettingsDialog;
-//# sourceMappingURL=SettingsDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\SettingsDialog.js.map

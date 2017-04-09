@@ -123,7 +123,9 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
   (0, _createClass3.default)(ValueMovingBadge, [{
     key: 'render',
     value: function render() {
-      var fnGetChart = this.props.fnGetChart,
+      var _props = this.props,
+          fnGetChart = _props.fnGetChart,
+          isAdminMode = _props.isAdminMode,
           _state = this.state,
           isShowPanel = _state.isShowPanel,
           valueMoving = _state.valueMoving,
@@ -181,7 +183,8 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
           _react2.default.createElement(_PanelValueMoving2.default, {
             valueMoving: valueMoving,
             fnGetChart: fnGetChart,
-            onChangeDateTo: this._handleChangeDateTo
+            onChangeDateTo: this._handleChangeDateTo,
+            isAdminMode: isAdminMode
           })
         )
       );
@@ -204,7 +207,8 @@ process.env.NODE_ENV !== "production" ? ValueMovingBadge.propTypes = {
     percent: _react.PropTypes.number,
     direction: _react.PropTypes.oneOf('up', 'down', 'equal'),
     date: _react.PropTypes.string
-  })
+  }),
+  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool])
 } : void 0;
 exports.default = ValueMovingBadge;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ValueMovingBadge.js.map

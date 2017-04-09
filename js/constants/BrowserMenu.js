@@ -79,10 +79,10 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.CURRENCY_HISTORY }, { id: _DialogType.Quandl.GLOBAL_INDICATOR }, { id: _DialogType.Quandl.WORLDBANK_PRICE }, { id: _DialogType.Quandl.IMF_CROSSCOUNTRY }, { id: _DialogType.Quandl.EU_COMMISSION }]
 }, {
   caption: 'Inflation & Prices',
-  items: [{ id: _DialogType.Quandl.CPI_INFLATION }, { id: _DialogType.Quandl.BIG_MAC }, { id: _DialogType.Quandl.GDT, isNew: true }, { id: _DialogType.Quandl.BLSI, isNew: true }]
+  items: [{ id: _DialogType.Quandl.CPI_INFLATION }, { id: _DialogType.Quandl.BIG_MAC }, { id: _DialogType.Quandl.GDT }, { id: _DialogType.Quandl.BLSI }]
 }, {
   caption: 'Commodity', isInitClose: true,
-  items: [{ id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }]
+  items: [{ id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.PETROLEUM_PRICES, isNew: true }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }]
 }, {
   caption: 'World Stocks',
   items: [{ id: _DialogType.Quandl.EURONEXT_STOCK }, { id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.STOCK_INDEXES }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]
@@ -91,10 +91,10 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.CHINA_FINANCE_FUTURE }, { id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }, { id: _DialogType.Quandl.LIFFE_FUTURE }, { id: _DialogType.Quandl.ICE_FUTURE }, { id: _DialogType.Quandl.WIKI_FUTURE }]
 }, {
   caption: 'Real Estate',
-  items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }, { id: _DialogType.Quandl.FMAC, isNew: true }]
+  items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }, { id: _DialogType.Quandl.FMAC }]
 }];
 
 var BrowserMenu = (_BrowserMenu = {}, (0, _defineProperty3.default)(_BrowserMenu, _Type.BrowserType.ECONOMIC, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.ECONOMIC)), (0, _defineProperty3.default)(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);
 
 exports.default = BrowserMenu;
-//# sourceMappingURL=BrowserMenu.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserMenu.js.map

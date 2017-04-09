@@ -9,7 +9,7 @@ import MapChartItem from '../items/MapChartItem';
 const _createAreaChartItem = function(config, index, option, props){
   const { zhConfig } = config
      ,  { id, key } = zhConfig
-     ,  { chartType } = option
+     ,  { chartType } = option;       
   return (
        <AreaChartItem
            ref={'chart' + index}

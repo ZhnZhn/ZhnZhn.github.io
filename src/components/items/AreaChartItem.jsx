@@ -212,7 +212,7 @@ const AreaChartItem = React.createClass({
            onClickVolume={this._handlerClickVolume}
            onClickATH={this._handlerClickATH}
            onClickHighLow={this._handlerClickHighLow}
-           onClickConfig={this._handleClickConfig}           
+           onClickConfig={this._handleClickConfig}
           />
       );
  },
@@ -283,7 +283,7 @@ const AreaChartItem = React.createClass({
   render(){
     const {
             chartType, caption, config,
-            onCloseItem,
+            onCloseItem, isAdminMode
           } = this.props
         , { itemTime } = config.zhConfig
         //, _itemCaption = (itemCaption) ? itemCaption : caption
@@ -308,6 +308,7 @@ const AreaChartItem = React.createClass({
             valueMoving={config.valueMoving}
             onClose={onCloseItem}
             fnGetChart={this.getMainChart}
+            isAdminMode={isAdminMode}
          />
         <ShowHide isShow={isOpen} style={styles.showHide}>
            {isShowChart && this._createChartToolBar(config)}

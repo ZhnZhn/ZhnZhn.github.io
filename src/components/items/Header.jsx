@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 import SvgCheckBox from '../zhn/SvgCheckBox';
-//import ValueMovingBadge from '../zhn/ValueMovingBadge';
 import SvgClose from '../zhn/SvgClose';
 import ValueMovingBadge from './ValueMovingBadge';
 
@@ -51,7 +50,7 @@ const Header = (props) => {
           chartType, onCheck, onUnCheck,
           itemCaption, itemTitle, itemTime, onToggle,
           valueMoving, onClose,
-          fnGetChart
+          fnGetChart, isAdminMode
         } = props
       , _styleIsOpen = isOpen
              ? STYLE.CAPTION_OPEN
@@ -64,6 +63,7 @@ const Header = (props) => {
               <ValueMovingBadge
                  valueMoving={valueMoving}
                  fnGetChart={fnGetChart}
+                 isAdminMode={isAdminMode}
                />
              )
           : undefined
@@ -110,7 +110,11 @@ Header.propTypes = {
   onToggle : PropTypes.func.isRequired,
   valueMoving : PropTypes.object,
   onClose : PropTypes.func.isRequired,
-  fnGetChart : PropTypes.func.isRequired
+  fnGetChart : PropTypes.func.isRequired,
+  isAdminMode: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool
+  ])
 }
 
 

@@ -7,8 +7,8 @@ import ArrayUtil from '../../utils/ArrayUtil'
 
 import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
-//import SpanLabel from '../zhn-span/SpanLabel'
-//import InputText from '../zhn/InputText'
+import SpanLabel from '../zhn-span/SpanLabel'
+import InputText from '../zhn/InputText'
 import SubPanel from './SubPanel'
 
 
@@ -19,7 +19,7 @@ const STYLE = {
     left: '0px',
     width: 'auto'
   },
-  ROW : {    
+  ROW : {
     //width: '230px'
     display: 'flex',
     justifyContent: 'space-between'
@@ -46,7 +46,11 @@ class PanelValueMoving extends Component {
   static propTypes = {
     valueMoving: PropTypes.object,
     fnGetChart: PropTypes.func,
-    onChangeDateTo: PropTypes.func
+    onChangeDateTo: PropTypes.func,
+    isAdminMode: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool
+    ])
   }
 
   _handleEnterDate = (dateTo) => {
@@ -77,9 +81,31 @@ class PanelValueMoving extends Component {
     }
   }
 
+  _renderAdmin = (isAdminMode, date)  => {
+    if (!isAdminMode) {
+      return null;
+    } else {
+      return (
+        <label style={STYLE.ROW_INPUT}>
+          <SpanLabel label="CompareTo:" />
+          <InputText
+            style={STYLE.INPUT_TEXT}
+            initValue={date}
+            onEnter={this._handleEnterDate}
+          />
+        </label>
+      );
+    }
+  }
+
   render(){
-    const { valueMoving } = this.props
+    const { valueMoving, isAdminMode } = this.props
         , { value, date, valueTo, dateTo } = valueMoving
+        , _isAdminMode = (typeof isAdminMode == 'function')
+              ? isAdminMode()
+              : ( typeof isAdminMode == 'boolean')
+                   ? isAdminMode
+                   : false;
     return (
       <SubPanel style={STYLE.SUB_PANEL}>
          <div style={STYLE.ROW}>
@@ -90,16 +116,7 @@ class PanelValueMoving extends Component {
            <SpanValue value={valueTo} />
            <SpanDate date={dateTo} style={STYLE.DATE} />
         </div>
-        {/*
-        <label style={STYLE.ROW_INPUT}>
-          <SpanLabel label="CompareTo:" />
-          <InputText
-            style={STYLE.INPUT_TEXT}
-            initValue={date}
-            onEnter={this._handleEnterDate}
-          />
-        </label>
-        */}
+        { this._renderAdmin(_isAdminMode, date)}
       </SubPanel>
     );
   }

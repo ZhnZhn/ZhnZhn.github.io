@@ -30,6 +30,26 @@ const styles = {
     paddingRight: '10px',
     fontSize: '16px',
     fontWeight: 'bold'
+  },
+  btDS : {
+    marginTop: '8px',
+    marginLeft: '10px'
+  },
+  bt: {
+    marginTop: '8px'
+  },
+  btAbout: {
+    float: 'right',
+    marginRight: '20px',
+    marginTop: '8px'
+  },
+  btSettings: {
+    float: 'right',
+    marginTop: '8px'
+  },
+  lbLimit: {
+    float: 'right',
+    paddingTop: '14px'
   }
 }
 
@@ -57,6 +77,15 @@ class HeaderBar extends Component {
   _handleClickDS = () => {
     this.setState({ isDS: !this.state.isDS });
   }
+  _handleDialogSettings = () => {
+    const { store } = this.props
+    ComponentActions.showModalDialog(
+      ModalDialog.SETTINGS, {
+         setQuandlKey: store.setQuandlKey.bind(store),
+         isAdminMode: store.isAdminMode.bind(store)
+      }
+    )
+  }
 
   render(){
     const { store } = this.props
@@ -74,7 +103,7 @@ class HeaderBar extends Component {
          />
 
          <ActionButton
-           style={{ marginTop: '8px', marginLeft: '10px' }}
+           style={styles.btDS}
            type="TypeA"
            caption="DS"
            title="Data Source Browsers"
@@ -85,7 +114,7 @@ class HeaderBar extends Component {
 
 
         <ActionButton
-          style={{ marginTop: '8px' }}
+          style={styles.bt}
           type="TypeA"
           caption="Quandl"
           title="Quandl Economic Browser"
@@ -93,7 +122,7 @@ class HeaderBar extends Component {
         />
 
         <ActionButton
-           style={{ marginTop: '8px' }}
+           style={styles.bt}
            type="TypeA"
            caption="Eurostat"
            title="European Statistics Browser"
@@ -101,7 +130,7 @@ class HeaderBar extends Component {
         />
 
          <ActionButton
-           style={{ marginTop: '8px' }}
+           style={styles.bt}
            type="TypeA"
            caption="Watch"
            title="Watch List Browser"
@@ -110,7 +139,7 @@ class HeaderBar extends Component {
 
          <ActionButton
            type="TypeA"
-           style={{ float: 'right', marginRight: '20px', marginTop: '8px'}}
+           style={styles.btAbout}
            caption="About"
            title="Description about application ERC"
            onClick={ComponentActions.showAbout}
@@ -118,15 +147,15 @@ class HeaderBar extends Component {
 
           <ActionButton
             type="TypeA"
-            style={{ float: 'right', marginTop: '8px'}}
+            style={styles.btSettings}
             caption="Settings"
             title="Application settings"
-            onClick={ComponentActions.showModalDialog.bind(null, ModalDialog.SETTINGS)}
+            onClick={this._handleDialogSettings}
            />
 
            <LimitRemainingLabel
               store={store}
-              style={{ float: 'right', paddingTop: '14px' }}
+              style={styles.lbLimit}
            />
 
            <PanelBrowsers

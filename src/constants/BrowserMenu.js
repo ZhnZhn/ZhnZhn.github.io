@@ -55,14 +55,15 @@ const menuQuandl = [
     items : [
       { id : Quandl.CPI_INFLATION },
       { id : Quandl.BIG_MAC },
-      { id : Quandl.GDT, isNew: true },
-      { id : Quandl.BLSI, isNew: true }
+      { id : Quandl.GDT },
+      { id : Quandl.BLSI }
     ]
   },{
      caption : 'Commodity', isInitClose : true,
      items : [
-       { id : Quandl.COMMODITY_PRICE },
        { id : Quandl.COMMODITY_TRADE },
+       { id : Quandl.COMMODITY_PRICE },
+       { id : Quandl.PETROLEUM_PRICES, isNew: true },
        { id : Quandl.JODI_WORLD_GAS },
        { id : Quandl.JODI_WORLD_OIL },
        { id : Quandl.EIA_COAL },
@@ -92,7 +93,7 @@ const menuQuandl = [
     caption : 'Real Estate',
     items : [
       { id : Quandl.ZILLOW_REAL_ESTATE },
-      { id : Quandl.FMAC, isNew: true }
+      { id : Quandl.FMAC }
     ]
   }
 ];

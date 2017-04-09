@@ -22,7 +22,6 @@ var _ValueMovingBadge2 = _interopRequireDefault(_ValueMovingBadge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import ValueMovingBadge from '../zhn/ValueMovingBadge';
 var STYLE = {
   ROOT: {
     backgroundColor: '#232F3B',
@@ -75,11 +74,13 @@ var Header = function Header(props) {
       valueMoving = props.valueMoving,
       onClose = props.onClose,
       fnGetChart = props.fnGetChart,
+      isAdminMode = props.isAdminMode,
       _styleIsOpen = isOpen ? STYLE.CAPTION_OPEN : Object.assign({}, STYLE.CAPTION_OPEN, STYLE.CAPTION_CLOSE),
       _styleCaption = valueMoving ? _styleIsOpen : Object.assign({}, _styleIsOpen, STYLE.CAPTION_WIDTH),
       _movingBadgeEl = valueMoving ? _react2.default.createElement(_ValueMovingBadge2.default, {
     valueMoving: valueMoving,
-    fnGetChart: fnGetChart
+    fnGetChart: fnGetChart,
+    isAdminMode: isAdminMode
   }) : undefined,
       _timeEl = !valueMoving && itemTime ? _react2.default.createElement(
     'span',
@@ -123,7 +124,8 @@ process.env.NODE_ENV !== "production" ? Header.propTypes = {
   onToggle: _react.PropTypes.func.isRequired,
   valueMoving: _react.PropTypes.object,
   onClose: _react.PropTypes.func.isRequired,
-  fnGetChart: _react.PropTypes.func.isRequired
+  fnGetChart: _react.PropTypes.func.isRequired,
+  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool])
 } : void 0;
 
 exports.default = Header;

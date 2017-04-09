@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
@@ -84,7 +84,33 @@ const styles = {
 }
 
 
-const MapChartItem = React.createClass({
+
+
+//const MapChartItem = React.createClass({
+class MapChartItem extends Component {
+  static propTypes = {
+    caption: PropTypes.string,
+    config: PropTypes.shape({
+      json: PropTypes.object,
+      zhMapSlice: PropTypes.object,
+      zhDialog: PropTypes.shape({        
+        subtitle: PropTypes.string,
+        time: PropTypes.string
+      })
+    }),
+    onCloseItem: PropTypes.func
+  }
+
+  constructor(props){
+    super()
+    this.map = undefined
+    this.state = {
+      isLoading: true,
+      isOpen : true,
+      isShowInfo : false
+    }
+  }
+  /*
   getInitialState(){
     this.map = undefined;
     return {
@@ -93,10 +119,7 @@ const MapChartItem = React.createClass({
       isShowInfo : false
     }
   },
-
-  _handlerToggleOpen(){
-     this.setState({ isOpen : !this.state.isOpen })
-  },
+  */
 
   componentDidMount(){
     const { caption, config } = this.props
@@ -111,26 +134,30 @@ const MapChartItem = React.createClass({
                  .catch(err => {
                    this.setState({ isLoading: false })
                  });
-  },
+  }
 
-  _handlerClickInfo(){
+  _handleToggle = () => {
+     this.setState({ isOpen : !this.state.isOpen })
+  }
+
+  _handleClickInfo = () => {
     this.setState({ isShowInfo : true });
-  },
-  _handlerClickChart(){
+  }
+  _handleClickChart = () => {
     this.setState({ isShowInfo : false });
-  },
+  }
 
-  _renderTabToolbar(){
-    return (
+  _renderTabToolbar = () => {
+     return (
       <div style={styles.tabDiv}>
          <ButtonTab
             caption={'Info'}
-            isShow={this.state.isShowInfo}
-            onClick={this._handlerClickInfo}
+            isShow={false}
+            onClick={this._handleClickInfo}
          />
       </div>
     );
-  },
+  }
 
   render(){
     const { caption, config, onCloseItem } = this.props
@@ -151,7 +178,7 @@ const MapChartItem = React.createClass({
              className="not-selected"
              title={json.label}
              style={_styleCaption}
-             onClick={this._handlerToggleOpen}
+             onClick={this._handleToggle}
           >
              {subtitle}
           </span>
@@ -171,12 +198,13 @@ const MapChartItem = React.createClass({
            <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
-              onClickChart={this._handlerClickChart}
+              onClickChart={this._handleClickChart}
            />
         </ShowHide>
       </div>
     )
   }
-});
+}
+//});
 
 export default MapChartItem

@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var DialogStyles = {
   //Dialogs, DatesFragments
   rowDiv: {
+    display: 'block',
     margin: '5px'
   },
   labelSpan: {
@@ -17,7 +18,8 @@ var DialogStyles = {
     width: '100px',
     paddingRight: '5px',
     fontSize: '16px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    userSelect: 'none'
   },
 
   //ValidationMessagesFragment
@@ -39,4 +41,4 @@ var DialogStyles = {
 };
 
 exports.default = DialogStyles;
-//# sourceMappingURL=DialogStyles.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\styles\DialogStyles.js.map

@@ -25,7 +25,7 @@ const styles = {
     borderRadius: '4px',
     width: '635px',
     height: 'calc(100vh - 71px)',
-    minHeight: '500px',    
+    minHeight: '500px',
     marginLeft: '16px',
     boxShadow: '1px 4px 6px 1px rgba(0,0,0,0.6)',
     overflowY: 'hidden',
@@ -123,14 +123,19 @@ class ChartContainer extends Component {
 
    _renderCharts = () => {
      const { chartType, browserType, onCloseItem } = this.props
-         , { configs=[] } = this.state;
+         , { configs=[] } = this.state
+         , _isAdminMode = (typeof ChartStore.isAdminMode == 'function')
+              ? ChartStore.isAdminMode.bind(ChartStore)
+              : false ;
      return configs.map((config, index) => {
        const { zhConfig={} } = config
            , { id } = zhConfig;
        return ItemFactory.createItem(
-             config, index,
-             { chartType },
-             { onCloseItem : onCloseItem.bind(null, chartType, browserType, id) }
+             config, index, { chartType },
+             {
+               onCloseItem : onCloseItem.bind(null, chartType, browserType, id),
+               isAdminMode : _isAdminMode
+             }
        );
      });
    }

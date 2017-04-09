@@ -4,6 +4,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -109,118 +125,160 @@ var styles = {
   }
 };
 
-var MapChartItem = _react2.default.createClass({
-  displayName: 'MapChartItem',
-  getInitialState: function getInitialState() {
-    this.map = undefined;
-    return {
+//const MapChartItem = React.createClass({
+
+var MapChartItem = function (_Component) {
+  (0, _inherits3.default)(MapChartItem, _Component);
+
+  function MapChartItem(props) {
+    (0, _classCallCheck3.default)(this, MapChartItem);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (MapChartItem.__proto__ || Object.getPrototypeOf(MapChartItem)).call(this));
+
+    _this._handleToggle = function () {
+      _this.setState({ isOpen: !_this.state.isOpen });
+    };
+
+    _this._handleClickInfo = function () {
+      _this.setState({ isShowInfo: true });
+    };
+
+    _this._handleClickChart = function () {
+      _this.setState({ isShowInfo: false });
+    };
+
+    _this._renderTabToolbar = function () {
+      return _react2.default.createElement(
+        'div',
+        { style: styles.tabDiv },
+        _react2.default.createElement(_ButtonTab2.default, {
+          caption: 'Info',
+          isShow: false,
+          onClick: _this._handleClickInfo
+        })
+      );
+    };
+
+    _this.map = undefined;
+    _this.state = {
       isLoading: true,
       isOpen: true,
       isShowInfo: false
     };
+    return _this;
+  }
+  /*
+  getInitialState(){
+    this.map = undefined;
+    return {
+      isLoading: true,
+      isOpen : true,
+      isShowInfo : false
+    }
   },
-  _handlerToggleOpen: function _handlerToggleOpen() {
-    this.setState({ isOpen: !this.state.isOpen });
-  },
-  componentDidMount: function componentDidMount() {
-    var _this = this;
+  */
 
-    var _props = this.props,
-        caption = _props.caption,
-        config = _props.config,
-        jsonCube = config.json,
-        zhMapSlice = config.zhMapSlice;
+  (0, _createClass3.default)(MapChartItem, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var _props = this.props,
+          caption = _props.caption,
+          config = _props.config,
+          jsonCube = config.json,
+          zhMapSlice = config.zhMapSlice;
 
 
-    _ChoroplethMap2.default.draw('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
-      _this.map = option.map;
-      _this.setState({ isLoading: false });
-      return undefined;
-    }).catch(function (err) {
-      _this.setState({ isLoading: false });
-    });
-  },
-  _handlerClickInfo: function _handlerClickInfo() {
-    this.setState({ isShowInfo: true });
-  },
-  _handlerClickChart: function _handlerClickChart() {
-    this.setState({ isShowInfo: false });
-  },
-  _renderTabToolbar: function _renderTabToolbar() {
-    return _react2.default.createElement(
-      'div',
-      { style: styles.tabDiv },
-      _react2.default.createElement(_ButtonTab2.default, {
-        caption: 'Info',
-        isShow: this.state.isShowInfo,
-        onClick: this._handlerClickInfo
-      })
-    );
-  },
-  render: function render() {
-    var _props2 = this.props,
-        caption = _props2.caption,
-        config = _props2.config,
-        onCloseItem = _props2.onCloseItem,
-        _config$json = config.json,
-        json = _config$json === undefined ? {} : _config$json,
-        _config$zhDialog = config.zhDialog,
-        zhDialog = _config$zhDialog === undefined ? {} : _config$zhDialog,
-        _zhDialog$subtitle = zhDialog.subtitle,
-        subtitle = _zhDialog$subtitle === undefined ? '' : _zhDialog$subtitle,
-        _zhDialog$time = zhDialog.time,
-        time = _zhDialog$time === undefined ? '' : _zhDialog$time,
-        _state = this.state,
-        isLoading = _state.isLoading,
-        isOpen = _state.isOpen,
-        isShowInfo = _state.isShowInfo,
-        _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose,
-        _styleMap = isShowInfo ? styles.displayNone : styles.displayBlock;
+      _ChoroplethMap2.default.draw('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
+        _this2.map = option.map;
+        _this2.setState({ isLoading: false });
+        return undefined;
+      }).catch(function (err) {
+        _this2.setState({ isLoading: false });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          caption = _props2.caption,
+          config = _props2.config,
+          onCloseItem = _props2.onCloseItem,
+          _config$json = config.json,
+          json = _config$json === undefined ? {} : _config$json,
+          _config$zhDialog = config.zhDialog,
+          zhDialog = _config$zhDialog === undefined ? {} : _config$zhDialog,
+          _zhDialog$subtitle = zhDialog.subtitle,
+          subtitle = _zhDialog$subtitle === undefined ? '' : _zhDialog$subtitle,
+          _zhDialog$time = zhDialog.time,
+          time = _zhDialog$time === undefined ? '' : _zhDialog$time,
+          _state = this.state,
+          isLoading = _state.isLoading,
+          isOpen = _state.isOpen,
+          isShowInfo = _state.isShowInfo,
+          _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose,
+          _styleMap = isShowInfo ? styles.displayNone : styles.displayBlock;
 
-    return _react2.default.createElement(
-      'div',
-      { style: styles.rootDiv },
-      _react2.default.createElement(
+      return _react2.default.createElement(
         'div',
-        { style: styles.headerDiv },
-        _react2.default.createElement(
-          'span',
-          {
-            className: 'not-selected',
-            title: json.label,
-            style: _styleCaption,
-            onClick: this._handlerToggleOpen
-          },
-          subtitle
-        ),
-        _react2.default.createElement(
-          'span',
-          { style: styles.timeSpan },
-          time
-        ),
-        _react2.default.createElement(_SvgClose2.default, { onClose: onCloseItem })
-      ),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isOpen },
-        !isShowInfo && this._renderTabToolbar(),
+        { style: styles.rootDiv },
         _react2.default.createElement(
           'div',
-          {
-            id: 'map_' + caption,
-            style: Object.assign({}, styles.mapDiv, _styleMap)
-          },
-          isLoading && _react2.default.createElement(_SpinnerLoading2.default, { style: styles.spinnerLoading })
+          { style: styles.headerDiv },
+          _react2.default.createElement(
+            'span',
+            {
+              className: 'not-selected',
+              title: json.label,
+              style: _styleCaption,
+              onClick: this._handleToggle
+            },
+            subtitle
+          ),
+          _react2.default.createElement(
+            'span',
+            { style: styles.timeSpan },
+            time
+          ),
+          _react2.default.createElement(_SvgClose2.default, { onClose: onCloseItem })
         ),
-        _react2.default.createElement(_PanelDataInfo2.default, {
-          isShow: isShowInfo,
-          info: config.info,
-          onClickChart: this._handlerClickChart
-        })
-      )
-    );
-  }
-});
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isOpen },
+          !isShowInfo && this._renderTabToolbar(),
+          _react2.default.createElement(
+            'div',
+            {
+              id: 'map_' + caption,
+              style: Object.assign({}, styles.mapDiv, _styleMap)
+            },
+            isLoading && _react2.default.createElement(_SpinnerLoading2.default, { style: styles.spinnerLoading })
+          ),
+          _react2.default.createElement(_PanelDataInfo2.default, {
+            isShow: isShowInfo,
+            info: config.info,
+            onClickChart: this._handleClickChart
+          })
+        )
+      );
+    }
+  }]);
+  return MapChartItem;
+}(_react.Component);
+//});
 
+process.env.NODE_ENV !== "production" ? MapChartItem.propTypes = {
+  caption: _react.PropTypes.string,
+  config: _react.PropTypes.shape({
+    json: _react.PropTypes.object,
+    zhMapSlice: _react.PropTypes.object,
+    zhDialog: _react.PropTypes.shape({
+      subtitle: _react.PropTypes.string,
+      time: _react.PropTypes.string
+    })
+  }),
+  onCloseItem: _react.PropTypes.func
+} : void 0;
 exports.default = MapChartItem;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\MapChartItem.js.map

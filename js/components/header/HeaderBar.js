@@ -82,6 +82,26 @@ var styles = {
     paddingRight: '10px',
     fontSize: '16px',
     fontWeight: 'bold'
+  },
+  btDS: {
+    marginTop: '8px',
+    marginLeft: '10px'
+  },
+  bt: {
+    marginTop: '8px'
+  },
+  btAbout: {
+    float: 'right',
+    marginRight: '20px',
+    marginTop: '8px'
+  },
+  btSettings: {
+    float: 'right',
+    marginTop: '8px'
+  },
+  lbLimit: {
+    float: 'right',
+    paddingTop: '14px'
   }
 };
 
@@ -113,6 +133,13 @@ var HeaderBar = function (_Component) {
       _this.setState({ isDS: false });
     }, _this._handleClickDS = function () {
       _this.setState({ isDS: !_this.state.isDS });
+    }, _this._handleDialogSettings = function () {
+      var store = _this.props.store;
+
+      _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, {
+        setQuandlKey: store.setQuandlKey.bind(store),
+        isAdminMode: store.isAdminMode.bind(store)
+      });
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
@@ -137,7 +164,7 @@ var HeaderBar = function (_Component) {
         _react2.default.createElement(
           _ActionButton2.default,
           {
-            style: { marginTop: '8px', marginLeft: '10px' },
+            style: styles.btDS,
             type: 'TypeA',
             caption: 'DS',
             title: 'Data Source Browsers',
@@ -146,21 +173,21 @@ var HeaderBar = function (_Component) {
           _react2.default.createElement('span', { className: 'arrow-down' })
         ),
         _react2.default.createElement(_ActionButton2.default, {
-          style: { marginTop: '8px' },
+          style: styles.bt,
           type: 'TypeA',
           caption: 'Quandl',
           title: 'Quandl Economic Browser',
           onClick: this._handleClickQuandl
         }),
         _react2.default.createElement(_ActionButton2.default, {
-          style: { marginTop: '8px' },
+          style: styles.bt,
           type: 'TypeA',
           caption: 'Eurostat',
           title: 'European Statistics Browser',
           onClick: this._handleClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
         }),
         _react2.default.createElement(_ActionButton2.default, {
-          style: { marginTop: '8px' },
+          style: styles.bt,
           type: 'TypeA',
           caption: 'Watch',
           title: 'Watch List Browser',
@@ -168,21 +195,21 @@ var HeaderBar = function (_Component) {
         }),
         _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeA',
-          style: { float: 'right', marginRight: '20px', marginTop: '8px' },
+          style: styles.btAbout,
           caption: 'About',
           title: 'Description about application ERC',
           onClick: _ComponentActions2.default.showAbout
         }),
         _react2.default.createElement(_ActionButton2.default, {
           type: 'TypeA',
-          style: { float: 'right', marginTop: '8px' },
+          style: styles.btSettings,
           caption: 'Settings',
           title: 'Application settings',
-          onClick: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.SETTINGS)
+          onClick: this._handleDialogSettings
         }),
         _react2.default.createElement(_LimitRemainingLabel2.default, {
           store: store,
-          style: { float: 'right', paddingTop: '14px' }
+          style: styles.lbLimit
         }),
         _react2.default.createElement(_PanelBrowsers2.default, {
           className: 'header__panel-browser',

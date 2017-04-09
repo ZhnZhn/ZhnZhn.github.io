@@ -2,6 +2,7 @@
 const DialogStyles = {
   //Dialogs, DatesFragments
   rowDiv: {
+    display: 'block',
     margin: '5px'
   },
   labelSpan : {
@@ -12,7 +13,8 @@ const DialogStyles = {
     width: '100px',
     paddingRight: '5px',
     fontSize: '16px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    userSelect: 'none'
   },
 
   //ValidationMessagesFragment

@@ -4,7 +4,7 @@ import safeGet from '../../utils/safeGet'
 
 import OpenClose from '../zhn/OpenClose'
 import RowInputText from './RowInputText'
-import RowCheckBox from './RowCheckBox'
+import RowCheckBox from '../dialogs/RowCheckBox'
 
 const STYLE = {
   ROW_INPUT: {

@@ -91,6 +91,28 @@ var DataQE = {
     },
     dataColumn: 1
   },
+  QE_PETROLEUM_PRICES: {
+    type: 'QE_PETROLEUM_PRICES',
+    menuTitle: 'Petroleum Prices',
+    dialogCaption: 'Petroleum Prices',
+    chartContainerCaption: 'Global Petroleum Prices',
+    dialogProps: {
+      descrUrl: './data/quandl/gpp.html',
+      optionURI: './data/quandl/gpp.json',
+      optionsJsonProp: 'countries',
+      optionNames: 'Countries',
+      nInitFromDate: 1,
+      itemCaption: 'Country:',
+      //fnItemCaption : (value) => value.split('/')[1],
+      valueFn: 'RPrefixDashOne',
+      valueFnPrefix: 'GPP/CFP',
+      loadId: 'Q',
+      columnName: 'Gasoline Price',
+      seriaColumnNames: ['Diesel Price'],
+      //columnName : 'Value',
+      dataSource: 'Global Petroleum Prices (Code: GPP)'
+    }
+  },
   QE_EIA_COAL: {
     type: 'QE_EIA_COAL',
     menuTitle: 'U.S. EIA Coal Mining',

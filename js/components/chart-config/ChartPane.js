@@ -28,13 +28,13 @@ var _safeGet = require('../../utils/safeGet');
 
 var _safeGet2 = _interopRequireDefault(_safeGet);
 
+var _RowCheckBox = require('../dialogs/RowCheckBox');
+
+var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
+
 var _RowInputText = require('./RowInputText');
 
 var _RowInputText2 = _interopRequireDefault(_RowInputText);
-
-var _RowCheckBox = require('./RowCheckBox');
-
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
 
 var _Pane = require('./Pane.Style');
 

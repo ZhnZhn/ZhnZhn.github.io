@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/components/styles/DialogStyles.js"],"names":["DialogStyles","rowDiv","margin","labelSpan","color","display","textAlign","width","paddingRight","fontSize","fontWeight","validationContainer","paddingLeft","paddingTop","validationMessageNumber","height","border","borderRadius","marginRight"],"mappings":";;;;;;AACA,IAAMA,eAAe;AACnB;AACAC,UAAQ;AACNC,YAAQ;AADF,GAFW;AAKnBC,aAAY;AACVC,WAAO,SADG;AAEVC,aAAS,cAFC;AAGV;AACAC,eAAW,OAJD;AAKVC,WAAO,OALG;AAMVC,kBAAc,KANJ;AAOVC,cAAU,MAPA;AAQVC,gBAAY;AARF,GALO;;AAgBnB;AACAC,uBAAqB;AACnBC,iBAAa,MADM;AAEnBC,gBAAY,KAFO;AAGnBT,WAAO;AAHY,GAjBF;AAsBnBU,2BAA0B;AACxBT,aAAS,cADe;AAExBE,WAAO,MAFiB;AAGxBQ,YAAQ,MAHgB;AAIxBC,YAAQ,mBAJgB;AAKxBC,kBAAc,KALU;AAMxBX,eAAW,QANa;AAOxBY,iBAAa;AAPW;;AAtBP,CAArB;;kBAkCelB,Y","file":"DialogStyles.js","sourcesContent":["\r\nconst DialogStyles = {\r\n  //Dialogs, DatesFragments\r\n  rowDiv: {\r\n    margin: '5px'\r\n  },\r\n  labelSpan : {\r\n    color: '#1B75BB',\r\n    display: 'inline-block',\r\n    //verticalAlign: 'top',\r\n    textAlign: 'right',\r\n    width: '100px',\r\n    paddingRight: '5px',\r\n    fontSize: '16px',\r\n    fontWeight: 'bold'\r\n  },\r\n\r\n  //ValidationMessagesFragment\r\n  validationContainer: {\r\n    paddingLeft: '10px',\r\n    paddingTop: '5px',\r\n    color: '#F44336'\r\n  },\r\n  validationMessageNumber : {\r\n    display: 'inline-block',\r\n    width: '22px',\r\n    height: '22px',\r\n    border: 'solid 2px #F44336',\r\n    borderRadius: '50%',\r\n    textAlign: 'center',\r\n    marginRight: '5px'\r\n  }\r\n\r\n}\r\n\r\nexport default DialogStyles;\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\styles\\DialogStyles.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\styles\\DialogStyles.js",
+ "sourceRoot": "",
+ "names": [
+  "DialogStyles",
+  "rowDiv",
+  "display",
+  "margin",
+  "labelSpan",
+  "color",
+  "textAlign",
+  "width",
+  "paddingRight",
+  "fontSize",
+  "fontWeight",
+  "userSelect",
+  "validationContainer",
+  "paddingLeft",
+  "paddingTop",
+  "validationMessageNumber",
+  "height",
+  "border",
+  "borderRadius",
+  "marginRight"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,eAAe;AACnB;AACAC,UAAQ;AACNC,aAAS,OADH;AAENC,YAAQ;AAFF,GAFW;AAMnBC,aAAY;AACVC,WAAO,SADG;AAEVH,aAAS,cAFC;AAGV;AACAI,eAAW,OAJD;AAKVC,WAAO,OALG;AAMVC,kBAAc,KANJ;AAOVC,cAAU,MAPA;AAQVC,gBAAY,MARF;AASVC,gBAAY;AATF,GANO;;AAkBnB;AACAC,uBAAqB;AACnBC,iBAAa,MADM;AAEnBC,gBAAY,KAFO;AAGnBT,WAAO;AAHY,GAnBF;AAwBnBU,2BAA0B;AACxBb,aAAS,cADe;AAExBK,WAAO,MAFiB;AAGxBS,YAAQ,MAHgB;AAIxBC,YAAQ,mBAJgB;AAKxBC,kBAAc,KALU;AAMxBZ,eAAW,QANa;AAOxBa,iBAAa;AAPW;;AAxBP,CAArB;;kBAoCenB,Y"
+}

@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\safeFn.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\safeFn.js",
+ "sourceRoot": "",
+ "names": [
+  "safeFn",
+  "obj",
+  "propName",
+  "dfValue"
+ ],
+ "mappings": ";;;;;kBACwBA,M;AAAT,SAASA,MAAT,CAAgBC,GAAhB,EAAqBC,QAArB,EAA+BC,OAA/B,EAAwC;AACrD,MAAI,CAACF,GAAL,EAAU;AACR,WAAO,YAAM;AAAE,aAAOE,OAAP;AAAiB,KAAhC;AACD;;AAED,MAAI,OAAOF,IAAIC,QAAJ,CAAP,IAAwB,UAA5B,EAAuC;AACrC,WAAOD,IAAIC,QAAJ,CAAP;AACD,GAFD,MAEQ;AACN,WAAO,YAAM;AAAE,aAAOC,OAAP;AAAiB,KAAhC;AACD;AACF"
+}
