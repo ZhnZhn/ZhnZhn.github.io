@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var SettingSlice = {
   setting: {
+    quandlKey: undefined,
     isAdminMode: false
   },
   setQuandlKey: function setQuandlKey(value) {

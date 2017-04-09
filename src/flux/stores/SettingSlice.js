@@ -1,6 +1,7 @@
 
 const SettingSlice = {
-  setting: {    
+  setting: {
+    quandlKey: undefined,
     isAdminMode: false
   },
   setQuandlKey(value){
