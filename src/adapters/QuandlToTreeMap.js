@@ -9,7 +9,7 @@ import ChartConfig from '../charts/ChartConfig';
 import QuandlFn2 from './QuandlFn2';
 
 
-import { fnCalcTotal, fnCreateSparkData } from './StackedFn';
+import { fnCalcTotal, fnCreateSparkData, crValueMoving, crZhConfig } from './StackedFn';
 
 const _fnCreateYearTotals = function(jsonData, items){
    const bYearTotals = [];
@@ -104,7 +104,8 @@ export const fCreateTreeMapConfig = function(json, option){
      ,  bYearTotals = _fnCreateYearTotals(jsonData, items100)
      , {data, bTotal } = _fnCreateDataAndTotal(jsonData, items100, bYearTotals)
      , {level60, level90} = _fnCalcLevelAndSetPercent(data, bTotal)
-     , bPrevTotal = fnCalcTotal(jsonData[1], items100);
+     , bPrevTotal = fnCalcTotal(jsonData[1], items100)
+     , dateTo = (jsonData[1][0]) ? jsonData[1][0] : '';
 
    _fnSetColorToPoint(data, level60, level90);
 
@@ -115,18 +116,10 @@ export const fCreateTreeMapConfig = function(json, option){
   option.title = `${yearTitle}:${option.title}`;
   QuandlFn2.setTitleToConfig(config, option);
 
-  config.valueMoving = QuandlFn2.createValueMoving({
-    bNowValue  : bTotal,
-    bPrevValue : bPrevTotal
-  });
-  config.valueMoving.date = yearTitle;
+  config.valueMoving = crValueMoving(bTotal, yearTitle, bPrevTotal, dateTo)
+  config.zhConfig = crZhConfig(option, zhSeriaId)
 
-  config.zhConfig = QuandlFn2.createZhConfig(option);
-  config.zhConfig.id = zhSeriaId;
-  config.zhConfig.isWithoutAdd = true;
-  config.zhConfig.isWithoutIndicator = true;
   config.info = QuandlFn2.createDatasetInfo(json);
 
-
-  return {config}
+  return {config};
 }

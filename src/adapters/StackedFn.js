@@ -147,11 +147,15 @@ export const fnCreateStackedConfig = function({
   const {referenceData , bTotal} = _fnCreateReferenceDataAndTotal(jsonData[0], items100)
       , items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9)
       , bPrevTotal = fnCalcTotal(jsonData[1], items100)
+      , dateTo = (jsonData[1][0]) ? jsonData[1][0] : ''
       , { series, categories } = _fnCreateStackedSeries({
           jsonData, items100, items90, zhSeriaId, chartType, stacking
-        });
+        })
+      , date = ( categories && categories.length>1 )
+           ? categories[categories.length-1]
+           : '';
 
-  return {bNowTotal : bTotal, bPrevTotal, series, categories}
+  return {bNowTotal : bTotal, date, bPrevTotal, dateTo, series, categories};
 }
 
 export const fnCreateSparkData = function(jsonData, itemIndex, bYearTotals){
@@ -171,4 +175,30 @@ export const fnCreateSparkData = function(jsonData, itemIndex, bYearTotals){
   })
 
   return { sparkvalues, sparkpercent }
+}
+
+export const crValueMoving = function(bNowTotal, date, bPrevTotal, dateTo){
+  return Object.assign(
+      QuandlFn2.createValueMoving({
+        bNowValue  : bNowTotal,
+        bPrevValue : bPrevTotal
+      }),
+      {
+        date: date,
+        dateTo: dateTo.split('-')[0],
+        valueTo: ChartConfig.fnNumberFormat(bPrevTotal),
+        isDenyToChange: true
+      }
+   );
+}
+
+export const crZhConfig = function(option, zhSeriaId){
+  return Object.assign(
+       QuandlFn2.createZhConfig(option),
+      {
+        id:zhSeriaId,
+        isWithoutAdd:true,
+        isWithoutIndicator:true
+      }
+  );
 }

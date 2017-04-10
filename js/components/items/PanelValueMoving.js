@@ -103,8 +103,8 @@ var PanelValueMoving = function (_Component) {
       }
     };
 
-    _this._renderAdmin = function (isAdminMode, date, msgDateTo) {
-      if (!isAdminMode) {
+    _this._renderAdmin = function (isAdminMode, date, msgDateTo, isDenyToChange) {
+      if (!isAdminMode || isDenyToChange) {
         return null;
       } else {
         return _react2.default.createElement(
@@ -162,6 +162,7 @@ var PanelValueMoving = function (_Component) {
           date = valueMoving.date,
           valueTo = valueMoving.valueTo,
           dateTo = valueMoving.dateTo,
+          isDenyToChange = valueMoving.isDenyToChange,
           _isAdminMode = typeof isAdminMode == 'function' ? isAdminMode() : typeof isAdminMode == 'boolean' ? isAdminMode : false,
           msgDateTo = this.state.msgDateTo;
 
@@ -180,7 +181,7 @@ var PanelValueMoving = function (_Component) {
           _react2.default.createElement(_SpanValue2.default, { value: valueTo }),
           _react2.default.createElement(_SpanDate2.default, { date: dateTo, style: STYLE.DATE })
         ),
-        this._renderAdmin(_isAdminMode, date, msgDateTo)
+        this._renderAdmin(_isAdminMode, date, msgDateTo, isDenyToChange)
       );
     }
   }]);
@@ -188,7 +189,13 @@ var PanelValueMoving = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? PanelValueMoving.propTypes = {
-  valueMoving: _react.PropTypes.object,
+  valueMoving: _react.PropTypes.shape({
+    value: _react.PropTypes.string,
+    date: _react.PropTypes.string,
+    valueTo: _react.PropTypes.string,
+    dateTo: _react.PropTypes.string,
+    isDenyToChange: _react.PropTypes.bool
+  }),
   isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
   msgDateTo: _react.PropTypes.string,
   updateDateTo: _react.PropTypes.func

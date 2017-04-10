@@ -36,7 +36,9 @@ var fCreateStackedAreaConfig = exports.fCreateStackedAreaConfig = function fCrea
       jsonData = json.dataset && json.dataset.data ? json.dataset.data : [],
       _fnCreateStackedConfi = (0, _StackedFn.fnCreateStackedConfig)({ jsonData: jsonData, items100: items100, zhSeriaId: zhSeriaId, chartType: chartType, stacking: stacking }),
       bNowTotal = _fnCreateStackedConfi.bNowTotal,
+      date = _fnCreateStackedConfi.date,
       bPrevTotal = _fnCreateStackedConfi.bPrevTotal,
+      dateTo = _fnCreateStackedConfi.dateTo,
       series = _fnCreateStackedConfi.series,
       categories = _fnCreateStackedConfi.categories;
 
@@ -48,18 +50,11 @@ var fCreateStackedAreaConfig = exports.fCreateStackedAreaConfig = function fCrea
   option.title = '' + option.title + PERCENT;
   _QuandlFn2.default.setTitleToConfig(config, option);
 
-  config.valueMoving = _QuandlFn2.default.createValueMoving({
-    bNowValue: bNowTotal,
-    bPrevValue: bPrevTotal
-  });
-  config.valueMoving.date = categories && categories.length > 1 ? categories[categories.length - 1] : '';
+  config.valueMoving = (0, _StackedFn.crValueMoving)(bNowTotal, date, bPrevTotal, dateTo);
+  config.zhConfig = (0, _StackedFn.crZhConfig)(option, zhSeriaId);
 
-  config.zhConfig = _QuandlFn2.default.createZhConfig(option);
-  config.zhConfig.id = zhSeriaId;
-  config.zhConfig.isWithoutAdd = true;
-  config.zhConfig.isWithoutIndicator = true;
   config.info = _QuandlFn2.default.createDatasetInfo(json);
 
   return { config: config };
 };
-//# sourceMappingURL=QuandlToStackedArea.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToStackedArea.js.map

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal = undefined;
+exports.crZhConfig = exports.crValueMoving = exports.fnCreateSparkData = exports.fnCreateStackedConfig = exports.fnCalcTotal = undefined;
 
 var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
@@ -187,13 +187,15 @@ var fnCreateStackedConfig = exports.fnCreateStackedConfig = function fnCreateSta
       bTotal = _fnCreateReferenceDat.bTotal,
       items90 = _fnCreateDataTopPercent(referenceData, bTotal, 0.9),
       bPrevTotal = fnCalcTotal(jsonData[1], items100),
+      dateTo = jsonData[1][0] ? jsonData[1][0] : '',
       _fnCreateStackedSerie = _fnCreateStackedSeries({
     jsonData: jsonData, items100: items100, items90: items90, zhSeriaId: zhSeriaId, chartType: chartType, stacking: stacking
   }),
       series = _fnCreateStackedSerie.series,
-      categories = _fnCreateStackedSerie.categories;
+      categories = _fnCreateStackedSerie.categories,
+      date = categories && categories.length > 1 ? categories[categories.length - 1] : '';
 
-  return { bNowTotal: bTotal, bPrevTotal: bPrevTotal, series: series, categories: categories };
+  return { bNowTotal: bTotal, date: date, bPrevTotal: bPrevTotal, dateTo: dateTo, series: series, categories: categories };
 };
 
 var fnCreateSparkData = exports.fnCreateSparkData = function fnCreateSparkData(jsonData, itemIndex, bYearTotals) {
@@ -214,4 +216,24 @@ var fnCreateSparkData = exports.fnCreateSparkData = function fnCreateSparkData(j
 
   return { sparkvalues: sparkvalues, sparkpercent: sparkpercent };
 };
-//# sourceMappingURL=StackedFn.js.map
+
+var crValueMoving = exports.crValueMoving = function crValueMoving(bNowTotal, date, bPrevTotal, dateTo) {
+  return Object.assign(_QuandlFn2.default.createValueMoving({
+    bNowValue: bNowTotal,
+    bPrevValue: bPrevTotal
+  }), {
+    date: date,
+    dateTo: dateTo.split('-')[0],
+    valueTo: _ChartConfig2.default.fnNumberFormat(bPrevTotal),
+    isDenyToChange: true
+  });
+};
+
+var crZhConfig = exports.crZhConfig = function crZhConfig(option, zhSeriaId) {
+  return Object.assign(_QuandlFn2.default.createZhConfig(option), {
+    id: zhSeriaId,
+    isWithoutAdd: true,
+    isWithoutIndicator: true
+  });
+};
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\StackedFn.js.map

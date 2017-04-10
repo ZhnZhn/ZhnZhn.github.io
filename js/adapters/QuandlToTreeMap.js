@@ -142,7 +142,8 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
       _fnCalcLevelAndSetPer = _fnCalcLevelAndSetPercent(data, bTotal),
       level60 = _fnCalcLevelAndSetPer.level60,
       level90 = _fnCalcLevelAndSetPer.level90,
-      bPrevTotal = (0, _StackedFn.fnCalcTotal)(jsonData[1], items100);
+      bPrevTotal = (0, _StackedFn.fnCalcTotal)(jsonData[1], items100),
+      dateTo = jsonData[1][0] ? jsonData[1][0] : '';
 
 
   _fnSetColorToPoint(data, level60, level90);
@@ -154,18 +155,11 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
   option.title = yearTitle + ':' + option.title;
   _QuandlFn2.default.setTitleToConfig(config, option);
 
-  config.valueMoving = _QuandlFn2.default.createValueMoving({
-    bNowValue: bTotal,
-    bPrevValue: bPrevTotal
-  });
-  config.valueMoving.date = yearTitle;
+  config.valueMoving = (0, _StackedFn.crValueMoving)(bTotal, yearTitle, bPrevTotal, dateTo);
+  config.zhConfig = (0, _StackedFn.crZhConfig)(option, zhSeriaId);
 
-  config.zhConfig = _QuandlFn2.default.createZhConfig(option);
-  config.zhConfig.id = zhSeriaId;
-  config.zhConfig.isWithoutAdd = true;
-  config.zhConfig.isWithoutIndicator = true;
   config.info = _QuandlFn2.default.createDatasetInfo(json);
 
   return { config: config };
 };
-//# sourceMappingURL=QuandlToTreeMap.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToTreeMap.js.map

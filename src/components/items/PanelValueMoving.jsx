@@ -45,7 +45,13 @@ const STYLE = {
 
 class PanelValueMoving extends Component {
   static propTypes = {
-    valueMoving: PropTypes.object,
+    valueMoving: PropTypes.shape({
+      value: PropTypes.string,
+      date: PropTypes.string,
+      valueTo: PropTypes.string,
+      dateTo: PropTypes.string,
+      isDenyToChange: PropTypes.bool
+    }),
     isAdminMode: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.bool
@@ -78,8 +84,8 @@ class PanelValueMoving extends Component {
     }
   }
 
-  _renderAdmin = (isAdminMode, date, msgDateTo)  => {
-    if (!isAdminMode) {
+  _renderAdmin = (isAdminMode, date, msgDateTo, isDenyToChange)  => {
+    if (!isAdminMode || isDenyToChange) {
       return null;
     } else {
       return (
@@ -108,7 +114,7 @@ class PanelValueMoving extends Component {
 
   render(){
     const { valueMoving, isAdminMode } = this.props
-        , { value, date, valueTo, dateTo } = valueMoving
+        , { value, date, valueTo, dateTo, isDenyToChange } = valueMoving
         , _isAdminMode = (typeof isAdminMode == 'function')
               ? isAdminMode()
               : ( typeof isAdminMode == 'boolean')
@@ -125,7 +131,7 @@ class PanelValueMoving extends Component {
            <SpanValue value={valueTo} />
            <SpanDate date={dateTo} style={STYLE.DATE} />
         </div>
-        { this._renderAdmin(_isAdminMode, date, msgDateTo)}
+        { this._renderAdmin(_isAdminMode, date, msgDateTo, isDenyToChange)}
       </SubPanel>
     );
   }

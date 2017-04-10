@@ -6,7 +6,7 @@ import Chart from '../charts/Chart';
 import ChartConfig from '../charts/ChartConfig';
 
 import QuandlFn2 from './QuandlFn2';
-
+import { crValueMoving, crZhConfig } from './StackedFn';
 
 const _fnCalcPieLegendHeight = function(length){
   if (length !== 0){
@@ -127,18 +127,9 @@ export const fCreatePieConfig = function(json, option){
    config.chart = {
      height : _fnCalcPieLegendHeight(_dataTop1.length)
    }
+   config.valueMoving = crValueMoving(_bTotal1, _year1, _bTotal2, _year2)
+   config.zhConfig = crZhConfig(option, zhSeriaId)
+   config.info = QuandlFn2.createDatasetInfo(json)
 
-   config.valueMoving = QuandlFn2.createValueMoving({
-     bNowValue : _bTotal1,
-     bPrevValue: _bTotal2
-   });
-   config.valueMoving.date = _year1;
-
-   config.zhConfig = QuandlFn2.createZhConfig(option);
-   config.zhConfig.id = zhSeriaId;
-   config.zhConfig.isWithoutAdd = true;
-   config.zhConfig.isWithoutIndicator = true;
-   config.info = QuandlFn2.createDatasetInfo(json);
-
-   return {config}
+   return {config};
 }

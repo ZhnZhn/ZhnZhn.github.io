@@ -27,6 +27,8 @@ var _QuandlFn = require('./QuandlFn2');
 
 var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
+var _StackedFn = require('./StackedFn');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _fnCalcPieLegendHeight = function _fnCalcPieLegendHeight(length) {
@@ -150,19 +152,10 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
   config.chart = {
     height: _fnCalcPieLegendHeight(_dataTop1.length)
   };
-
-  config.valueMoving = _QuandlFn2.default.createValueMoving({
-    bNowValue: _bTotal1,
-    bPrevValue: _bTotal2
-  });
-  config.valueMoving.date = _year1;
-
-  config.zhConfig = _QuandlFn2.default.createZhConfig(option);
-  config.zhConfig.id = zhSeriaId;
-  config.zhConfig.isWithoutAdd = true;
-  config.zhConfig.isWithoutIndicator = true;
+  config.valueMoving = (0, _StackedFn.crValueMoving)(_bTotal1, _year1, _bTotal2, _year2);
+  config.zhConfig = (0, _StackedFn.crZhConfig)(option, zhSeriaId);
   config.info = _QuandlFn2.default.createDatasetInfo(json);
 
   return { config: config };
 };
-//# sourceMappingURL=QuandlToPie.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToPie.js.map

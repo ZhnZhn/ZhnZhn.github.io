@@ -3,7 +3,7 @@ import {ChartType} from '../constants/Type';
 import Chart from '../charts/Chart';
 import ChartConfig from '../charts/ChartConfig';
 
-import { fnCreateStackedConfig  } from './StackedFn';
+import { fnCreateStackedConfig, crValueMoving, crZhConfig } from './StackedFn';
 
 import QuandlFn2 from './QuandlFn2';
 
@@ -15,8 +15,8 @@ export const fCreateStackedAreaConfig = function(json, option){
       , {sliceItems:items100=[], value=''} = option
       , zhSeriaId = `${value}_${chartType}`
       , jsonData = (json.dataset && json.dataset.data) ? json.dataset.data : []
-      , { bNowTotal, bPrevTotal, series, categories }
-             = fnCreateStackedConfig({ jsonData, items100, zhSeriaId, chartType, stacking })
+      , { bNowTotal, date, bPrevTotal, dateTo, series, categories }
+             = fnCreateStackedConfig({ jsonData, items100, zhSeriaId, chartType, stacking });
 
   config.series = series;
   config.xAxis.categories = categories;
@@ -25,19 +25,10 @@ export const fCreateStackedAreaConfig = function(json, option){
   option.title = `${option.title}${PERCENT}`
   QuandlFn2.setTitleToConfig(config, option);
 
-  config.valueMoving = QuandlFn2.createValueMoving({
-    bNowValue  : bNowTotal,
-    bPrevValue : bPrevTotal
-  });
-  config.valueMoving.date = ( categories && categories.length>1 )
-     ? categories[categories.length-1]
-     : '' ;
+  config.valueMoving = crValueMoving(bNowTotal, date, bPrevTotal, dateTo)
+  config.zhConfig = crZhConfig(option, zhSeriaId)
 
-  config.zhConfig = QuandlFn2.createZhConfig(option);
-  config.zhConfig.id = zhSeriaId;
-  config.zhConfig.isWithoutAdd = true;
-  config.zhConfig.isWithoutIndicator = true;
   config.info = QuandlFn2.createDatasetInfo(json);
 
-  return {config}
+  return {config};
 }
