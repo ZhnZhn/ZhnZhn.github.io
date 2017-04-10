@@ -8,11 +8,31 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
+var _mathFn = require('../math/mathFn');
+
+var _mathFn2 = _interopRequireDefault(_mathFn);
+
+var _ArrayUtil = require('../utils/ArrayUtil');
+
+var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
+
+var _DateUtils = require('../utils/DateUtils');
+
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
+
 var _Chart = require('./Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
+var _ChartConfig = require('./ChartConfig');
+
+var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+
+var _Type = require('../constants/Type');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _fnFindIndex = _ArrayUtil2.default.findIndexByProp('x');
 
 var C = {
   SERIA_LABEL_CHARS: 12,
@@ -124,6 +144,30 @@ var ChartFn = {
       zhDetailCharts.forEach(function (chart) {
         chart.xAxis[0].setExtremes(event.min, event.max, true, true);
       });
+    }
+  },
+  calcValueMoving: function calcValueMoving(chart, prev, dateTo) {
+    var points = chart.series[0].data,
+        millisUTC = _DateUtils2.default.dmyToUTC(dateTo),
+        index = _fnFindIndex(points, millisUTC);
+
+    var valueTo = void 0;
+    if (index !== -1) {
+
+      valueTo = points[index].y;
+
+      //console.log(index);
+      //console.log(valueTo);
+
+      var valueMoving = Object.assign({}, prev, _mathFn2.default.crValueMoving({
+        nowValue: prev.value,
+        prevValue: valueTo,
+        Direction: _Type.Direction,
+        fnFormat: _ChartConfig2.default.fnNumberFormat
+      }), { valueTo: valueTo, dateTo: dateTo });
+      return valueMoving;
+    } else {
+      return undefined;
     }
   }
 };

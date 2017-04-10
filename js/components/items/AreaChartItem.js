@@ -227,6 +227,9 @@ var AreaChartItem = _react2.default.createClass({
       setItemCaption: this.setItemCaption
     });
   },
+  _calcValueMoving: function _calcValueMoving(prev, dateTo) {
+    return this.props.calcValueMoving(this.mainChart, prev, dateTo);
+  },
   _createChartToolBar: function _createChartToolBar(config) {
     return _react2.default.createElement(_ChartToolBar2.default, {
       style: styles.tabDiv,
@@ -347,8 +350,8 @@ var AreaChartItem = _react2.default.createClass({
         onToggle: this._handlerToggleOpen,
         valueMoving: config.valueMoving,
         onClose: onCloseItem,
-        fnGetChart: this.getMainChart,
-        isAdminMode: isAdminMode
+        isAdminMode: isAdminMode,
+        calcValueMoving: this._calcValueMoving
       }),
       _react2.default.createElement(
         _ShowHide2.default,

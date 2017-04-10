@@ -16,6 +16,10 @@ var _purify = require('purify');
 
 var _purify2 = _interopRequireDefault(_purify);
 
+var _mathFn = require('../math/mathFn');
+
+var _mathFn2 = _interopRequireDefault(_mathFn);
+
 var _DateUtils = require('../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -93,7 +97,7 @@ var QuandlFn2 = {
         _ref$bTotal = _ref.bTotal,
         bTotal = _ref$bTotal === undefined ? (0, _big2.default)('0.0') : _ref$bTotal;
 
-    return !bTotal.eq((0, _big2.default)(0.0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) : (0, _big2.default)(0.0);
+    return _mathFn2.default.calcPercent({ bValue: bValue, bTotal: bTotal });
   },
   createValueMoving: function createValueMoving(_ref2) {
     var _ref2$bNowValue = _ref2.bNowValue,
@@ -101,33 +105,12 @@ var QuandlFn2 = {
         _ref2$bPrevValue = _ref2.bPrevValue,
         bPrevValue = _ref2$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref2$bPrevValue;
 
-
-    var _bDelta = bPrevValue.minus(bNowValue),
-        _direction = void 0;
-    if (_bDelta.gt(0.0)) {
-      _direction = _Type.Direction.DOWN;
-    } else if (!_bDelta.gte(0.0)) {
-      _direction = _Type.Direction.UP;
-    } else {
-      _direction = _Type.Direction.EQUAL;
-    }
-
-    _bDelta = _bDelta.abs().round(4);
-
-    var _bPercent = this.createPercent({ bValue: _bDelta, bTotal: bPrevValue });
-
-    var _bNowValue = (0, _big2.default)(bNowValue).round(4);
-    if (_bNowValue.gt('1000000')) {
-      _bNowValue = bNowValue.toFixed(0);
-      _bDelta = _bDelta.toFixed(0);
-    }
-
-    return {
-      value: _ChartConfig2.default.fnNumberFormat(_bNowValue),
-      delta: _ChartConfig2.default.fnNumberFormat(_bDelta),
-      percent: _bPercent.toString() + '%',
-      direction: _direction
-    };
+    return _mathFn2.default.crValueMoving({
+      nowValue: bNowValue,
+      prevValue: bPrevValue,
+      Direction: _Type.Direction,
+      fnFormat: _ChartConfig2.default.fnNumberFormat
+    });
   },
   createValueMovingFromSeria: function createValueMovingFromSeria(seria) {
     var len = seria.length,

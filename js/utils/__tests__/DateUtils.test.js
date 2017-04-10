@@ -71,4 +71,27 @@ describe('dmyToUTC', function () {
     expect(fn(undefined)).toBe(0);
   });
 });
+
+describe('isFormatDmy', function () {
+  var fn = _DateUtils2.default.isFormatDmy;
+  test('should return true for str in format DD-MM-YYY', function () {
+    expect(fn('10-10-2000')).toBe(true);
+    expect(fn('20-01-2000')).toBe(true);
+    expect(fn('01-12-2000')).toBe(true);
+  });
+  test('should return false for str not in format DD-MM-YYYY', function () {
+    expect(fn('10-14-2000')).toBe(false);
+    expect(fn('20-1-2000')).toBe(false);
+    expect(fn('2000-12-01')).toBe(false);
+  });
+  test('should return false in edge cases', function () {
+    expect(fn(null)).toBe(false);
+    expect(fn()).toBe(false);
+    expect(fn('')).toBe(false);
+    expect(fn(1)).toBe(false);
+    expect(fn({})).toBe(false);
+    expect(fn(function () {})).toBe(false);
+    expect(fn(fn)).toBe(false);
+  });
+});
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\__tests__\DateUtils.test.js.map

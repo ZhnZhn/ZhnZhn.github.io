@@ -195,6 +195,9 @@ const AreaChartItem = React.createClass({
     })
   },
 
+  _calcValueMoving(prev, dateTo) {
+     return this.props.calcValueMoving(this.mainChart, prev, dateTo);
+  },
 
  _createChartToolBar(config){
    return (
@@ -306,9 +309,9 @@ const AreaChartItem = React.createClass({
             itemTime={itemTime}
             onToggle={this._handlerToggleOpen}
             valueMoving={config.valueMoving}
-            onClose={onCloseItem}
-            fnGetChart={this.getMainChart}
+            onClose={onCloseItem}            
             isAdminMode={isAdminMode}
+            calcValueMoving={this._calcValueMoving}
          />
         <ShowHide isShow={isOpen} style={styles.showHide}>
            {isShowChart && this._createChartToolBar(config)}

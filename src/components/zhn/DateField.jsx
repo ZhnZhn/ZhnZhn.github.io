@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const STYLE = {
   ROOT : {
@@ -25,8 +25,11 @@ const STYLE = {
     borderImage: 'none',
     margin: 0,
     marginLeft: '10px',
+    marginRight: '10px',
     marginBottom: '5px',
-    width: '230px'
+    width: 'auto'
+    //width: '90%'
+    //width: '230px'
   },
   HR_VALID : {
      borderColor: '#1B75BB'
@@ -44,13 +47,28 @@ const STYLE = {
 };
 
 class DateField extends Component {
+   static propTypes = {
+     rootStyle: PropTypes.object,
+     inputStyle: PropTypes.object,
+     initValue: PropTypes.string,
+     placeholder: PropTypes.string,
+     errorMsg: PropTypes.string,
+     nForecastDate: PropTypes.number,
+     onTest: PropTypes.func,
+     onEnter: PropTypes.func
+   }
+   static defaultProps = {
+      onTest: () => { return true; }
+   }
+
    constructor(props){
      super();
+     this.isOnEnter = (typeof props.onEnter == 'function') ? true : false ;
      this.state = {
        value: props.initValue ? props.initValue : '',
        errorInput: undefined,
        isValid: true
-     }
+     };
    }
 
   _handleChangeValue = (event) => {
@@ -86,14 +104,28 @@ class DateField extends Component {
     }
   }
 
+  _handleKeyDown = (event) => {
+    if (this.isOnEnter){
+       if (event.keyCode === 13){
+         this.props.onEnter(event.target.value)
+       }
+     }
+  }
+
+
   render(){
-    const  { value, errorInput, isValid } = this.state
+    const {
+            rootStyle, inputStyle,
+            placeholder='YYYY-MM-DD'
+          } = this.props
+        , { value, errorInput, isValid } = this.state
         , _styleHr = isValid
             ? STYLE.HR_VALID
             : STYLE.HR_NOT_VALID;
     return (
-      <div style={STYLE.ROOT}>
+      <div style={{...STYLE.ROOT, ...rootStyle}}>
         <input
+           style={{...STYLE.INPUT, ...inputStyle}}
            name="text-date"
            autoComplete="new-text-date"
            autoCorrect="off"
@@ -101,11 +133,11 @@ class DateField extends Component {
            spellCheck={false}
            ref={input => this.inputDate = input }
            type="text"
-           style={STYLE.INPUT}
-           placeholder="YYYY-MM-DD"
+           placeholder={placeholder}
            value={value}
            onChange={this._handleChangeValue}
            onBlur={this._handleBlurValue}
+           onKeyDown={this._handleKeyDown}
         >
         </input>
         <hr style={Object.assign({}, STYLE.HR, _styleHr)}></hr>

@@ -58,7 +58,8 @@ class ValueMovingBadge extends Component {
     isAdminMode: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.bool
-    ])
+    ]),
+    calcValueMoving: PropTypes.func
   }
   static defaultProps = {
     valueMoving : {
@@ -86,13 +87,20 @@ class ValueMovingBadge extends Component {
       };
     })
   }
-  _handleChangeDateTo = (valueMoving) => {
-    this.setState({ valueMoving })
+
+  _updateDateTo = (dateTo) => {
+    const valueMoving = this.props.calcValueMoving(this.state.valueMoving, dateTo)
+    if (valueMoving) {
+      this.setState({ valueMoving })
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render(){
-    const { fnGetChart, isAdminMode } = this.props
-        , { isShowPanel, valueMoving } = this.state
+    const { isAdminMode } = this.props
+        , { isShowPanel, valueMoving, msgDateTo } = this.state
         , { value, delta, percent, direction, date } = valueMoving;
 
     let _svgDirection, _dStyle;
@@ -131,9 +139,9 @@ class ValueMovingBadge extends Component {
          >
            <PanelValueMoving
               valueMoving={valueMoving}
-              fnGetChart={fnGetChart}
-              onChangeDateTo={this._handleChangeDateTo}
               isAdminMode={isAdminMode}
+              msgDateTo={msgDateTo}
+              updateDateTo={this._updateDateTo}
            />
          </ShowHide>
       </span>

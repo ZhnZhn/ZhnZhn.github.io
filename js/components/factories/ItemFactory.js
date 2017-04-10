@@ -16,6 +16,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ChartFn = require('../../charts/ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -47,7 +51,9 @@ var _createAreaChartItem = function _createAreaChartItem(config, index, option, 
     onSetActive: _ComponentActions2.default.setActiveCheckbox,
     onShowConfigDialog: _ComponentActions2.default.showOptionDialog.bind(null, 'ChartConfigDialog'),
     onAddToWatch: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH)
-  }, props));
+  }, props, {
+    calcValueMoving: _ChartFn2.default.calcValueMoving
+  }));
 };
 
 var _createMapChartItem = function _createMapChartItem(config, index, option, props) {

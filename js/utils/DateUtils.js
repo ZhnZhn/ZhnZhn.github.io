@@ -203,20 +203,33 @@ var DateUtils = {
 	},
 	dmyToUTC: function dmyToUTC(str) {
 		var _str = str || '',
-		    _str$split = _str.split('-'),
-		    _str$split2 = (0, _slicedToArray3.default)(_str$split, 3),
-		    _str$split2$ = _str$split2[0],
-		    d = _str$split2$ === undefined ? 10 : _str$split2$,
-		    _str$split2$2 = _str$split2[1],
-		    m = _str$split2$2 === undefined ? 10 : _str$split2$2,
-		    _str$split2$3 = _str$split2[2],
-		    y = _str$split2$3 === undefined ? 1000 : _str$split2$3;
+		    _str$toString$split = _str.toString().split('-'),
+		    _str$toString$split2 = (0, _slicedToArray3.default)(_str$toString$split, 3),
+		    _str$toString$split2$ = _str$toString$split2[0],
+		    d = _str$toString$split2$ === undefined ? 10 : _str$toString$split2$,
+		    _str$toString$split2$2 = _str$toString$split2[1],
+		    m = _str$toString$split2$2 === undefined ? 10 : _str$toString$split2$2,
+		    _str$toString$split2$3 = _str$toString$split2[2],
+		    y = _str$toString$split2$3 === undefined ? 1000 : _str$toString$split2$3;
 
 		if (DateUtils.isValidDate(y + '-' + m + '-' + d)) {
 			return Date.UTC(y, parseInt(m, 10) - 1, d);
 		} else {
 			return 0;
 		}
+	},
+	isFormatDmy: function isFormatDmy(str) {
+		var _str = str || '',
+		    _str$toString$split3 = _str.toString().split('-'),
+		    _str$toString$split4 = (0, _slicedToArray3.default)(_str$toString$split3, 3),
+		    _str$toString$split4$ = _str$toString$split4[0],
+		    d = _str$toString$split4$ === undefined ? 10 : _str$toString$split4$,
+		    _str$toString$split4$2 = _str$toString$split4[1],
+		    m = _str$toString$split4$2 === undefined ? 10 : _str$toString$split4$2,
+		    _str$toString$split4$3 = _str$toString$split4[2],
+		    y = _str$toString$split4$3 === undefined ? 1000 : _str$toString$split4$3;
+
+		return DateUtils.isValidDate(y + '-' + m + '-' + d);
 	}
 };
 

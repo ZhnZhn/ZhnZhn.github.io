@@ -1,6 +1,8 @@
 import Big from 'big.js';
 import DOMPurify from 'purify';
 
+import mathFn from '../math/mathFn';
+
 import DateUtils from '../utils/DateUtils';
 import { Direction } from '../constants/Type';
 import ChartConfig from '../charts/ChartConfig';
@@ -62,39 +64,16 @@ const QuandlFn2 = {
   },
 
   createPercent({ bValue=Big('0.0'), bTotal=Big('0.0') }){
-    return (!bTotal.eq(Big(0.0)) )
-              ? bValue.times(100).div(bTotal).abs().toFixed(2)
-              : Big(0.0);
+    return mathFn.calcPercent({ bValue, bTotal });    
   },
 
   createValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){
-
-    let _bDelta = bPrevValue.minus(bNowValue)
-      , _direction;
-    if (_bDelta.gt(0.0)){
-      _direction = Direction.DOWN;
-    } else if (!_bDelta.gte(0.0)){
-      _direction = Direction.UP;
-    } else {
-      _direction = Direction.EQUAL;
-    }
-
-    _bDelta = _bDelta.abs().round(4);
-
-    const _bPercent = this.createPercent({ bValue:_bDelta, bTotal: bPrevValue });
-
-    let _bNowValue = Big(bNowValue).round(4);
-    if ( _bNowValue.gt('1000000') ){
-      _bNowValue = bNowValue.toFixed(0);
-      _bDelta = _bDelta.toFixed(0);
-    }
-
-    return {
-      value : ChartConfig.fnNumberFormat(_bNowValue),      
-      delta : ChartConfig.fnNumberFormat(_bDelta),
-      percent : _bPercent.toString() + '%',
-      direction : _direction
-    };
+    return mathFn.crValueMoving({
+      nowValue: bNowValue,
+      prevValue: bPrevValue,
+      Direction: Direction,
+      fnFormat: ChartConfig.fnNumberFormat
+    });
   },
 
   createValueMovingFromSeria(seria){

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ChartFn from '../../charts/ChartFn';
+
 import ComponentActions from '../../flux/actions/ComponentActions';
 import { ModalDialog, CompItemType } from '../../constants/Type';
 
@@ -9,7 +11,7 @@ import MapChartItem from '../items/MapChartItem';
 const _createAreaChartItem = function(config, index, option, props){
   const { zhConfig } = config
      ,  { id, key } = zhConfig
-     ,  { chartType } = option;       
+     ,  { chartType } = option;
   return (
        <AreaChartItem
            ref={'chart' + index}
@@ -21,6 +23,7 @@ const _createAreaChartItem = function(config, index, option, props){
            onShowConfigDialog={ComponentActions.showOptionDialog.bind(null, 'ChartConfigDialog')}
            onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
            {...props}
+           calcValueMoving={ChartFn.calcValueMoving}
        />
      );
 };

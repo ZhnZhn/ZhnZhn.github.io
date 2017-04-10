@@ -109,8 +109,14 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
       });
     };
 
-    _this._handleChangeDateTo = function (valueMoving) {
-      _this.setState({ valueMoving: valueMoving });
+    _this._updateDateTo = function (dateTo) {
+      var valueMoving = _this.props.calcValueMoving(_this.state.valueMoving, dateTo);
+      if (valueMoving) {
+        _this.setState({ valueMoving: valueMoving });
+        return true;
+      } else {
+        return false;
+      }
     };
 
     _this.state = {
@@ -123,12 +129,11 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
   (0, _createClass3.default)(ValueMovingBadge, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          fnGetChart = _props.fnGetChart,
-          isAdminMode = _props.isAdminMode,
+      var isAdminMode = this.props.isAdminMode,
           _state = this.state,
           isShowPanel = _state.isShowPanel,
           valueMoving = _state.valueMoving,
+          msgDateTo = _state.msgDateTo,
           value = valueMoving.value,
           delta = valueMoving.delta,
           percent = valueMoving.percent,
@@ -182,9 +187,9 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
           },
           _react2.default.createElement(_PanelValueMoving2.default, {
             valueMoving: valueMoving,
-            fnGetChart: fnGetChart,
-            onChangeDateTo: this._handleChangeDateTo,
-            isAdminMode: isAdminMode
+            isAdminMode: isAdminMode,
+            msgDateTo: msgDateTo,
+            updateDateTo: this._updateDateTo
           })
         )
       );
@@ -208,7 +213,8 @@ process.env.NODE_ENV !== "production" ? ValueMovingBadge.propTypes = {
     direction: _react.PropTypes.oneOf('up', 'down', 'equal'),
     date: _react.PropTypes.string
   }),
-  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool])
+  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
+  calcValueMoving: _react.PropTypes.func
 } : void 0;
 exports.default = ValueMovingBadge;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ValueMovingBadge.js.map

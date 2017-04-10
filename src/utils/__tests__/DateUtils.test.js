@@ -64,3 +64,26 @@ describe('dmyToUTC', ()=>{
     expect(fn(undefined)).toBe(0)
   })
 })
+
+describe('isFormatDmy', () => {
+  const fn = DateUtils.isFormatDmy
+  test('should return true for str in format DD-MM-YYY', () => {
+     expect(fn('10-10-2000')).toBe(true)
+     expect(fn('20-01-2000')).toBe(true)
+     expect(fn('01-12-2000')).toBe(true)
+  })
+  test('should return false for str not in format DD-MM-YYYY', () => {
+    expect(fn('10-14-2000')).toBe(false)
+    expect(fn('20-1-2000')).toBe(false)
+    expect(fn('2000-12-01')).toBe(false)
+  })
+  test('should return false in edge cases', () => {
+    expect(fn(null)).toBe(false)
+    expect(fn()).toBe(false)
+    expect(fn('')).toBe(false)
+    expect(fn(1)).toBe(false)
+    expect(fn({})).toBe(false)
+    expect(fn(()=>{})).toBe(false)
+    expect(fn(fn)).toBe(false)
+  })
+})

@@ -1,16 +1,13 @@
 import React, { PropTypes, Component } from 'react'
-import Big from 'big.js'
 
-import QuandlFn2 from '../../adapters/QuandlFn2'
 import DateUtils from '../../utils/DateUtils'
-import ArrayUtil from '../../utils/ArrayUtil'
 
 import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
 import SpanLabel from '../zhn-span/SpanLabel'
-import InputText from '../zhn/InputText'
-import SubPanel from './SubPanel'
 
+import DateField from '../zhn/DateField'
+import SubPanel from './SubPanel'
 
 const STYLE = {
   SUB_PANEL: {
@@ -34,66 +31,77 @@ const STYLE = {
      display: 'block',
      paddingTop: '8px'
   },
-  INPUT_TEXT: {
-      width: '100px',
-      boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+  DATE_FIELD: {
+    width: '120px',
+    marginLeft: '8px',
+    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
+  },
+  MSG: {
+    color: '#f44336',
+    fontWeight: 'bold'
   }
-}
 
-const _fnFindIndex = ArrayUtil.findIndexByProp('x')
+}
 
 class PanelValueMoving extends Component {
   static propTypes = {
     valueMoving: PropTypes.object,
-    fnGetChart: PropTypes.func,
-    onChangeDateTo: PropTypes.func,
     isAdminMode: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.bool
-    ])
+    ]),
+    msgDateTo: PropTypes.string,
+    updateDateTo: PropTypes.func
   }
 
-  _handleEnterDate = (dateTo) => {
-    //console.log('handleEnterDate')
-    //console.log(dateTo)
-    const chart = this.props.fnGetChart()
-    , points = chart.series[0].data
-    , millisUTC = DateUtils.dmyToUTC(dateTo)
-    , index = _fnFindIndex(points, millisUTC);
-
-    let valueTo
-    if (index !== -1) {
-
-      valueTo = points[index].y
-
-      //console.log(index);
-      //console.log(valueTo);
-
-      const valueMoving = Object.assign(
-        {}, this.props.valueMoving,
-        QuandlFn2.createValueMoving({
-          bNowValue : Big(this.props.valueMoving.value.replace(' ','')),
-          bPrevValue: Big(valueTo)
-        }),
-        { valueTo, dateTo }
-      )
-      this.props.onChangeDateTo(valueMoving)
+  constructor(props){
+    super()
+    this.state = {
+      msgDateTo: ''
     }
   }
 
-  _renderAdmin = (isAdminMode, date)  => {
+  componentWillReceiveProps(nextProps){
+    if (this.props !== nextProps){
+      this.setState({ msgDateTo: '' })
+    }
+  }
+
+  _handleEnterDate = (dateTo) => {
+    if (this.dateToComp.isValid()){
+      const isUpdated = this.props.updateDateTo(dateTo)
+      if (isUpdated){
+        this.setState({ msgDateTo: ''})
+      } else {
+        this.setState({ msgDateTo: `No data for ${dateTo}`})
+      }
+    }
+  }
+
+  _renderAdmin = (isAdminMode, date, msgDateTo)  => {
     if (!isAdminMode) {
       return null;
     } else {
       return (
-        <label style={STYLE.ROW_INPUT}>
-          <SpanLabel label="CompareTo:" />
-          <InputText
-            style={STYLE.INPUT_TEXT}
-            initValue={date}
-            onEnter={this._handleEnterDate}
-          />
-        </label>
+        <div>
+          <label style={STYLE.ROW_INPUT}>
+            <SpanLabel label="CompareTo:" />
+            <DateField
+              ref={comp => this.dateToComp = comp }
+              rootStyle={STYLE.DATE_FIELD}
+              initValue={date}
+              placeholder="DD-MM-YYYY"
+              errorMsg="DD-MM-YYYY"
+              onTest={DateUtils.isFormatDmy}
+              onEnter={this._handleEnterDate}
+            />
+          </label>
+          <div>
+            <span style={STYLE.MSG}>
+              {msgDateTo}
+            </span>
+          </div>
+        </div>
       );
     }
   }
@@ -105,7 +113,8 @@ class PanelValueMoving extends Component {
               ? isAdminMode()
               : ( typeof isAdminMode == 'boolean')
                    ? isAdminMode
-                   : false;
+                   : false
+       , { msgDateTo } = this.state;
     return (
       <SubPanel style={STYLE.SUB_PANEL}>
          <div style={STYLE.ROW}>
@@ -116,7 +125,7 @@ class PanelValueMoving extends Component {
            <SpanValue value={valueTo} />
            <SpanDate date={dateTo} style={STYLE.DATE} />
         </div>
-        { this._renderAdmin(_isAdminMode, date)}
+        { this._renderAdmin(_isAdminMode, date, msgDateTo)}
       </SubPanel>
     );
   }

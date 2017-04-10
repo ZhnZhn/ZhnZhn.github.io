@@ -49,8 +49,8 @@ const Header = (props) => {
           isOpen,
           chartType, onCheck, onUnCheck,
           itemCaption, itemTitle, itemTime, onToggle,
-          valueMoving, onClose,
-          fnGetChart, isAdminMode
+          valueMoving, isAdminMode, calcValueMoving,
+          onClose
         } = props
       , _styleIsOpen = isOpen
              ? STYLE.CAPTION_OPEN
@@ -62,8 +62,8 @@ const Header = (props) => {
            ? (
               <ValueMovingBadge
                  valueMoving={valueMoving}
-                 fnGetChart={fnGetChart}
                  isAdminMode={isAdminMode}
+                 calcValueMoving={calcValueMoving}
                />
              )
           : undefined
@@ -107,14 +107,14 @@ Header.propTypes = {
   itemCaption : PropTypes.string.isRequired,
   itemTitle : PropTypes.string.isRequired,
   itemTime : PropTypes.string,
-  onToggle : PropTypes.func.isRequired,
+  onToggle : PropTypes.func.isRequired,  
   valueMoving : PropTypes.object,
-  onClose : PropTypes.func.isRequired,
-  fnGetChart : PropTypes.func.isRequired,
   isAdminMode: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.bool
-  ])
+  ]),
+  calcValueMoving: PropTypes.func,
+  onClose : PropTypes.func.isRequired
 }
 
 

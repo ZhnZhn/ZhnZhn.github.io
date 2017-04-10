@@ -1,6 +1,15 @@
 import Highcharts from 'highcharts';
 
+import mathFn from '../math/mathFn'
+
+import ArrayUtil from '../utils/ArrayUtil';
+import DateUtils from '../utils/DateUtils';
+
 import Chart from './Chart';
+import ChartConfig from './ChartConfig';
+import { Direction } from '../constants/Type';
+
+const _fnFindIndex = ArrayUtil.findIndexByProp('x')
 
 const C = {
   SERIA_LABEL_CHARS : 12,
@@ -131,8 +140,36 @@ const ChartFn = {
         );
       })
     }
-  }
+  },
 
+  calcValueMoving(chart, prev, dateTo){
+    const points = chart.series[0].data
+        , millisUTC = DateUtils.dmyToUTC(dateTo)
+        , index = _fnFindIndex(points, millisUTC);
+
+    let valueTo;
+    if (index !== -1) {
+
+      valueTo = points[index].y
+
+      //console.log(index);
+      //console.log(valueTo);
+
+      const valueMoving = Object.assign(
+        {}, prev,
+        mathFn.crValueMoving({
+          nowValue: prev.value,
+          prevValue: valueTo,
+          Direction: Direction,
+          fnFormat: ChartConfig.fnNumberFormat
+        }),
+        { valueTo, dateTo }
+      )
+      return valueMoving;
+    } else {
+      return undefined;
+    }
+  }
 }
 
 export default ChartFn
