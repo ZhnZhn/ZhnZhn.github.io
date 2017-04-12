@@ -23,7 +23,7 @@ const _createAreaChartItem = function(config, index, option, props){
            onShowConfigDialog={ComponentActions.showOptionDialog.bind(null, 'ChartConfigDialog')}
            onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
            {...props}
-           calcValueMoving={ChartFn.calcValueMoving}
+           crValueMoving={ChartFn.crValueMoving}
        />
      );
 };

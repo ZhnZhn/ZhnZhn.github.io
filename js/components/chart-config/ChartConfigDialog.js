@@ -44,6 +44,10 @@ var _SeriaPane = require('./SeriaPane');
 
 var _SeriaPane2 = _interopRequireDefault(_SeriaPane);
 
+var _XAxisPane = require('./XAxisPane');
+
+var _XAxisPane2 = _interopRequireDefault(_XAxisPane);
+
 var _YAxisPane = require('./YAxisPane');
 
 var _YAxisPane2 = _interopRequireDefault(_YAxisPane);
@@ -130,6 +134,11 @@ var ChartConfigDialog = function (_Component) {
             _Tab2.default,
             { title: 'Seria' },
             _react2.default.createElement(_SeriaPane2.default, { chart: chart })
+          ),
+          _react2.default.createElement(
+            _Tab2.default,
+            { title: 'XAxis' },
+            _react2.default.createElement(_XAxisPane2.default, { chart: chart })
           ),
           _react2.default.createElement(
             _Tab2.default,

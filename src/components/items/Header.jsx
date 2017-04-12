@@ -49,7 +49,7 @@ const Header = (props) => {
           isOpen,
           chartType, onCheck, onUnCheck,
           itemCaption, itemTitle, itemTime, onToggle,
-          valueMoving, isAdminMode, calcValueMoving,
+          valueMoving, isAdminMode, crValueMoving,
           onClose
         } = props
       , _styleIsOpen = isOpen
@@ -63,7 +63,7 @@ const Header = (props) => {
               <ValueMovingBadge
                  valueMoving={valueMoving}
                  isAdminMode={isAdminMode}
-                 calcValueMoving={calcValueMoving}
+                 crValueMoving={crValueMoving}
                />
              )
           : undefined
@@ -107,13 +107,13 @@ Header.propTypes = {
   itemCaption : PropTypes.string.isRequired,
   itemTitle : PropTypes.string.isRequired,
   itemTime : PropTypes.string,
-  onToggle : PropTypes.func.isRequired,  
+  onToggle : PropTypes.func.isRequired,
   valueMoving : PropTypes.object,
   isAdminMode: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.bool
   ]),
-  calcValueMoving: PropTypes.func,
+  crValueMoving: PropTypes.func,
   onClose : PropTypes.func.isRequired
 }
 

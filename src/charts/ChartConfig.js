@@ -197,6 +197,12 @@ ChartConfig.theme = {
             ]
         }
       },
+      column: {
+        borderWidth: 0,
+        //pointWidth: 4,
+        groupPadding: 0.1,
+        pointPlacement: 'between'
+      },
       series : {
         marker: {
           states: {

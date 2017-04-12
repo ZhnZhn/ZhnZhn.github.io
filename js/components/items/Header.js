@@ -73,14 +73,14 @@ var Header = function Header(props) {
       onToggle = props.onToggle,
       valueMoving = props.valueMoving,
       isAdminMode = props.isAdminMode,
-      calcValueMoving = props.calcValueMoving,
+      crValueMoving = props.crValueMoving,
       onClose = props.onClose,
       _styleIsOpen = isOpen ? STYLE.CAPTION_OPEN : Object.assign({}, STYLE.CAPTION_OPEN, STYLE.CAPTION_CLOSE),
       _styleCaption = valueMoving ? _styleIsOpen : Object.assign({}, _styleIsOpen, STYLE.CAPTION_WIDTH),
       _movingBadgeEl = valueMoving ? _react2.default.createElement(_ValueMovingBadge2.default, {
     valueMoving: valueMoving,
     isAdminMode: isAdminMode,
-    calcValueMoving: calcValueMoving
+    crValueMoving: crValueMoving
   }) : undefined,
       _timeEl = !valueMoving && itemTime ? _react2.default.createElement(
     'span',
@@ -124,7 +124,7 @@ process.env.NODE_ENV !== "production" ? Header.propTypes = {
   onToggle: _react.PropTypes.func.isRequired,
   valueMoving: _react.PropTypes.object,
   isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
-  calcValueMoving: _react.PropTypes.func,
+  crValueMoving: _react.PropTypes.func,
   onClose: _react.PropTypes.func.isRequired
 } : void 0;
 

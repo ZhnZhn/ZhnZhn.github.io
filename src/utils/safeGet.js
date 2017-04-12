@@ -4,11 +4,11 @@ export default function safeGet(obj, path, df) {
 	}
 
   if (!obj) { return df;}
-	const steps = path
+	const steps = (''+path)
 		      .replace(/\[/g, '.')
 		      .replace(/]/g, '')
 		      .split('.')
 		      .filter(Boolean);
-    
+
   return steps.every(everyFn) ? obj : df;
 }

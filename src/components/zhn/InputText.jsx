@@ -47,13 +47,12 @@ class InputText extends Component {
     this.setState({ value : event.target.value })
   }
  _handleKeyDown = (event) => {
-   if (this.isOnEnter){
-      if (event.keyCode === 13){
-        this.props.onEnter(event.target.value)
-      }
-    }
+   if (event.keyCode === 27){
+     this.setState({ value: '' })
+   } else if (event.keyCode === 13 && this.isOnEnter) {
+     this.props.onEnter(event.target.value)
+   }
  }
-
 
   render(){
     const { style } = this.props

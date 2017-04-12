@@ -59,10 +59,10 @@ var InputText = (_temp = _class = function (_Component) {
     };
 
     _this._handleKeyDown = function (event) {
-      if (_this.isOnEnter) {
-        if (event.keyCode === 13) {
-          _this.props.onEnter(event.target.value);
-        }
+      if (event.keyCode === 27) {
+        _this.setState({ value: '' });
+      } else if (event.keyCode === 13 && _this.isOnEnter) {
+        _this.props.onEnter(event.target.value);
       }
     };
 

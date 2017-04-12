@@ -142,7 +142,7 @@ const ChartFn = {
     }
   },
 
-  calcValueMoving(chart, prev, dateTo){
+  crValueMoving(chart, prev, dateTo){
     const points = chart.series[0].data
         , millisUTC = DateUtils.dmyToUTC(dateTo)
         , index = _fnFindIndex(points, millisUTC);

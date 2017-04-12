@@ -244,6 +244,12 @@ ChartConfig.theme = {
         stops: [[0, _Color2.default.PLOT_G1], [1, _Color2.default.PLOT_G2]]
       }
     },
+    column: {
+      borderWidth: 0,
+      //pointWidth: 4,
+      groupPadding: 0.1,
+      pointPlacement: 'between'
+    },
     series: {
       marker: {
         states: {

@@ -52,7 +52,7 @@ var _createAreaChartItem = function _createAreaChartItem(config, index, option, 
     onShowConfigDialog: _ComponentActions2.default.showOptionDialog.bind(null, 'ChartConfigDialog'),
     onAddToWatch: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH)
   }, props, {
-    calcValueMoving: _ChartFn2.default.calcValueMoving
+    crValueMoving: _ChartFn2.default.crValueMoving
   }));
 };
 

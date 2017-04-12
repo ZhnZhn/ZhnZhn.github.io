@@ -110,7 +110,7 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
     };
 
     _this._updateDateTo = function (dateTo) {
-      var valueMoving = _this.props.calcValueMoving(_this.state.valueMoving, dateTo);
+      var valueMoving = _this.props.crValueMoving(_this.state.valueMoving, dateTo);
       if (valueMoving) {
         _this.setState({ valueMoving: valueMoving });
         return true;
@@ -214,7 +214,7 @@ process.env.NODE_ENV !== "production" ? ValueMovingBadge.propTypes = {
     date: _react.PropTypes.string
   }),
   isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
-  calcValueMoving: _react.PropTypes.func
+  crValueMoving: _react.PropTypes.func
 } : void 0;
 exports.default = ValueMovingBadge;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ValueMovingBadge.js.map

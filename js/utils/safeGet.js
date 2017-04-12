@@ -12,7 +12,7 @@ function safeGet(obj, path, df) {
 		if (!obj) {
 				return df;
 		}
-		var steps = path.replace(/\[/g, '.').replace(/]/g, '').split('.').filter(Boolean);
+		var steps = ('' + path).replace(/\[/g, '.').replace(/]/g, '').split('.').filter(Boolean);
 
 		return steps.every(everyFn) ? obj : df;
 }

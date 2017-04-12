@@ -12,7 +12,7 @@ const STYLE = {
   }
 }
 
-const arrType = ['area', 'areaspline', 'line', 'spline', 'bar']
+const arrType = ['area', 'areaspline', 'line', 'spline', 'bar', 'column']
 const arrSymbol = ['circle', 'square', 'diamond', 'triangle', 'triangle-down']
 
 

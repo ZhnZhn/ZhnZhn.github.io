@@ -59,7 +59,7 @@ class ValueMovingBadge extends Component {
       PropTypes.func,
       PropTypes.bool
     ]),
-    calcValueMoving: PropTypes.func
+    crValueMoving: PropTypes.func
   }
   static defaultProps = {
     valueMoving : {
@@ -89,7 +89,7 @@ class ValueMovingBadge extends Component {
   }
 
   _updateDateTo = (dateTo) => {
-    const valueMoving = this.props.calcValueMoving(this.state.valueMoving, dateTo)
+    const valueMoving = this.props.crValueMoving(this.state.valueMoving, dateTo)
     if (valueMoving) {
       this.setState({ valueMoving })
       return true;

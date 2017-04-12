@@ -102,7 +102,6 @@ class ChartToolbar extends Component {
    )
    */
 
-
     return (
       <div style={style}>
          {_btIndicator}

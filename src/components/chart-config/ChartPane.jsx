@@ -158,6 +158,7 @@ class ChartPane extends Component {
           onCheck={this._handleHideSeriesTitles}
           onUnCheck={this._handleShowSeriesTitles}
         />
+
         <div style={STYLE.MSG}>
           *CheckBoxes don't auto update
         </div>

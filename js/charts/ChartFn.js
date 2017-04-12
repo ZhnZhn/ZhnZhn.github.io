@@ -146,7 +146,7 @@ var ChartFn = {
       });
     }
   },
-  calcValueMoving: function calcValueMoving(chart, prev, dateTo) {
+  crValueMoving: function crValueMoving(chart, prev, dateTo) {
     var points = chart.series[0].data,
         millisUTC = _DateUtils2.default.dmyToUTC(dateTo),
         index = _fnFindIndex(points, millisUTC);

@@ -45,7 +45,7 @@ var STYLE = {
   }
 };
 
-var arrType = ['area', 'areaspline', 'line', 'spline', 'bar'];
+var arrType = ['area', 'areaspline', 'line', 'spline', 'bar', 'column'];
 var arrSymbol = ['circle', 'square', 'diamond', 'triangle', 'triangle-down'];
 
 var _fnIsInArray = function _fnIsInArray(arr, value) {

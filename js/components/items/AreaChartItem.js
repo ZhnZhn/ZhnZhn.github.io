@@ -4,6 +4,24 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _class, _temp, _initialiseProps;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -60,17 +78,24 @@ var styles = {
   }
 };
 
-var AreaChartItem = _react2.default.createClass({
-  displayName: 'AreaChartItem',
-  getInitialState: function getInitialState() {
-    this.is2H = false;
-    this._fnOnCheck = this._handlerCheckBox.bind(this, true);
-    this._fnOnUnCheck = this._handlerCheckBox.bind(this, false);
+//const AreaChartItem = React.createClass({
+var AreaChartItem = (_temp = _class = function (_Component) {
+  (0, _inherits3.default)(AreaChartItem, _Component);
 
-    var _props = this.props,
-        _props$config = _props.config,
+  function AreaChartItem(props) {
+    (0, _classCallCheck3.default)(this, AreaChartItem);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AreaChartItem.__proto__ || Object.getPrototypeOf(AreaChartItem)).call(this));
+
+    _initialiseProps.call(_this);
+
+    _this.is2H = false;
+    _this._fnOnCheck = _this._handlerCheckBox.bind(_this, true);
+    _this._fnOnUnCheck = _this._handlerCheckBox.bind(_this, false);
+
+    var _props$config = props.config,
         config = _props$config === undefined ? {} : _props$config,
-        _props$caption = _props.caption,
+        _props$caption = props.caption,
         caption = _props$caption === undefined ? '' : _props$caption,
         zhConfig = config.zhConfig,
         _zhConfig$dataSource = zhConfig.dataSource,
@@ -78,12 +103,12 @@ var AreaChartItem = _react2.default.createClass({
         itemCaption = zhConfig.itemCaption,
         _itemCaption = itemCaption ? itemCaption : caption;
 
-    this._dataSourceEl = _react2.default.createElement(
+    _this._dataSourceEl = _react2.default.createElement(
       'div',
       { style: styles.dataSource },
       dataSource
     );
-    return {
+    _this.state = {
       isOpen: true,
       isShowChart: true,
       isShowLegend: false,
@@ -97,182 +122,284 @@ var AreaChartItem = _react2.default.createClass({
       chartsDescription: [],
       mfiConfigs: []
     };
-  },
-  setItemCaption: function setItemCaption(str) {
-    this.setState({ itemCaption: str });
-  },
-  componentDidMount: function componentDidMount() {
-    this.mainChart = this.chartComp.getChart();
-  },
-  getMainChart: function getMainChart() {
-    return this.mainChart;
-  },
-  _handlerLoadedMetricChart: function _handlerLoadedMetricChart(metricChart) {
-    this.mainChart.options.zhDetailCharts.push(metricChart);
-  },
-  _handlerWillUnLoadedChart: function _handlerWillUnLoadedChart(objChart) {
-    var charts = this.mainChart.options.zhDetailCharts;
-    this.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
+    return _this;
+  }
+
+  (0, _createClass3.default)(AreaChartItem, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.mainChart = this.chartComp.getChart();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          chartType = _props.chartType,
+          caption = _props.caption,
+          config = _props.config,
+          onCloseItem = _props.onCloseItem,
+          isAdminMode = _props.isAdminMode,
+          itemTime = config.zhConfig.itemTime,
+          _state = this.state,
+          isOpen = _state.isOpen,
+          isShowChart = _state.isShowChart,
+          isShowInfo = _state.isShowInfo,
+          itemCaption = _state.itemCaption,
+          mfiConfigs = _state.mfiConfigs;
+
+
+      return _react2.default.createElement(
+        'div',
+        { style: styles.rootDiv },
+        _react2.default.createElement(_Header2.default, {
+          isOpen: isOpen,
+          chartType: chartType,
+          onCheck: this._fnOnCheck,
+          onUnCheck: this._fnOnUnCheck,
+          itemCaption: itemCaption,
+          itemTitle: caption,
+          itemTime: itemTime,
+          onToggle: this._handlerToggleOpen,
+          valueMoving: config.valueMoving,
+          onClose: onCloseItem,
+          isAdminMode: isAdminMode,
+          crValueMoving: this._crValueMoving
+        }),
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isOpen, style: styles.showHide },
+          isShowChart && this._createChartToolBar(config),
+          _react2.default.createElement(_HighchartWrapper2.default, {
+            ref: function ref(comp) {
+              return _this2.chartComp = comp;
+            },
+            isShow: isShowChart,
+            config: config,
+            absComp: this._dataSourceEl
+          }),
+          _react2.default.createElement(_PanelDataInfo2.default, {
+            isShow: isShowInfo,
+            info: config.info,
+            zhInfo: config.zhConfig,
+            onClickChart: this._handlerClickChart
+          }),
+          this._renderLegend(config),
+          this._renderIndicatorCharts(mfiConfigs),
+          this._renderMetricCharts()
+        )
+      );
+    }
+  }, {
+    key: 'reflowChart',
+    value: function reflowChart(width) {
+      this.mainChart.options.chart.width = width;
+      this.mainChart.reflow();
+      if (Array.isArray(this.mainChart.options.zhDetailCharts)) {
+        this.mainChart.options.zhDetailCharts.forEach(function (chart) {
+          //chart.reflow();
+          chart.setSize(width, chart.options.chart.height, true);
+        });
+      }
+    }
+  }]);
+  return AreaChartItem;
+}(_react.Component), _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
+
+  this.setItemCaption = function (str) {
+    _this3.setState({ itemCaption: str });
+  };
+
+  this.getMainChart = function () {
+    return _this3.mainChart;
+  };
+
+  this._handlerLoadedMetricChart = function (metricChart) {
+    _this3.mainChart.options.zhDetailCharts.push(metricChart);
+  };
+
+  this._handlerWillUnLoadedChart = function (objChart) {
+    var charts = _this3.mainChart.options.zhDetailCharts;
+    _this3.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
       return chart !== objChart;
     });
-  },
-  _handlerToggleOpen: function _handlerToggleOpen() {
-    if (this.state.isOpen) {
-      this.setState({ isOpen: false });
+  };
+
+  this._handlerToggleOpen = function () {
+    if (_this3.state.isOpen) {
+      _this3.setState({ isOpen: false });
     } else {
-      this.setState({ isOpen: true });
+      _this3.setState({ isOpen: true });
     }
-  },
-  _handlerClickLegend: function _handlerClickLegend() {
-    this.setState({ isShowLegend: !this.state.isShowLegend });
-  },
-  _handlerToggleSeria: function _handlerToggleSeria(item) {
-    this.mainChart.options.zhToggleSeria(this.mainChart, item);
-  },
-  _handlerClick2H: function _handlerClick2H() {
-    var height = this.is2H ? this.mainChart.options.chart.height / 2 : this.mainChart.options.chart.height * 2;
-    this.setChartHeight(height);
-    this.is2H = !this.is2H;
-  },
-  _handlerAddToWatch: function _handlerAddToWatch() {
-    var _props2 = this.props,
+  };
+
+  this._handlerClickLegend = function () {
+    _this3.setState({ isShowLegend: !_this3.state.isShowLegend });
+  };
+
+  this._handlerToggleSeria = function (item) {
+    _this3.mainChart.options.zhToggleSeria(_this3.mainChart, item);
+  };
+
+  this._handlerClick2H = function () {
+    var height = _this3.is2H ? _this3.mainChart.options.chart.height / 2 : _this3.mainChart.options.chart.height * 2;
+    _this3.setChartHeight(height);
+    _this3.is2H = !_this3.is2H;
+  };
+
+  this._handlerAddToWatch = function () {
+    var _props2 = _this3.props,
         caption = _props2.caption,
         config = _props2.config,
         onAddToWatch = _props2.onAddToWatch;
 
     onAddToWatch({ caption: caption, config: config });
-  },
-  _handlerClickInfo: function _handlerClickInfo() {
-    this.setState({
+  };
+
+  this._handlerClickInfo = function () {
+    _this3.setState({
       isShowInfo: true, isShowChart: false, isShowLegend: false
     });
-  },
-  _handlerClickVolume: function _handlerClickVolume() {
-    var _state = this.state,
-        isInitVolume = _state.isInitVolume,
-        isShowVolume = _state.isShowVolume;
+  };
+
+  this._handlerClickVolume = function () {
+    var _state2 = _this3.state,
+        isInitVolume = _state2.isInitVolume,
+        isShowVolume = _state2.isShowVolume;
 
     if (isInitVolume) {
-      this.setState({ isShowVolume: !isShowVolume });
+      _this3.setState({ isShowVolume: !isShowVolume });
     } else {
-      this.state.chartsDescription.push({ type: 'Volume' });
-      this.setState({
-        chartsDescription: this.state.chartsDescription,
+      _this3.state.chartsDescription.push({ type: 'Volume' });
+      _this3.setState({
+        chartsDescription: _this3.state.chartsDescription,
         isShowVolume: true, isInitVolume: true
       });
     }
-  },
-  _handlerClickATH: function _handlerClickATH() {
-    var _state2 = this.state,
-        isInitATH = _state2.isInitATH,
-        isShowATH = _state2.isShowATH;
+  };
+
+  this._handlerClickATH = function () {
+    var _state3 = _this3.state,
+        isInitATH = _state3.isInitATH,
+        isShowATH = _state3.isShowATH;
 
     if (isInitATH) {
-      this.setState({ isShowATH: !isShowATH });
+      _this3.setState({ isShowATH: !isShowATH });
     } else {
-      this.state.chartsDescription.push({ type: 'ATH' });
-      this.setState({
-        chartsDescription: this.state.chartsDescription,
+      _this3.state.chartsDescription.push({ type: 'ATH' });
+      _this3.setState({
+        chartsDescription: _this3.state.chartsDescription,
         isShowATH: true, isInitATH: true
       });
     }
-  },
-  _handlerClickHighLow: function _handlerClickHighLow() {
-    var _state3 = this.state,
-        isInitHighLow = _state3.isInitHighLow,
-        isShowHighLow = _state3.isShowHighLow;
+  };
+
+  this._handlerClickHighLow = function () {
+    var _state4 = _this3.state,
+        isInitHighLow = _state4.isInitHighLow,
+        isShowHighLow = _state4.isShowHighLow;
 
     if (isInitHighLow) {
-      this.setState({ isShowHighLow: !isShowHighLow });
+      _this3.setState({ isShowHighLow: !isShowHighLow });
     } else {
-      this.state.chartsDescription.push({ type: 'HighLow' });
-      this.setState({
-        chartsDescription: this.state.chartsDescription,
+      _this3.state.chartsDescription.push({ type: 'HighLow' });
+      _this3.setState({
+        chartsDescription: _this3.state.chartsDescription,
         isShowHighLow: true, isInitHighLow: true
       });
     }
-  },
-  _handlerClickChart: function _handlerClickChart() {
-    this.setState({ isShowChart: true, isShowInfo: false });
-  },
-  _handlerCheckBox: function _handlerCheckBox(isCheck, checkBox) {
-    //this.props.onSetActive(isCheck, checkBox, this.refs.chart.getChart());
-    this.props.onSetActive(isCheck, checkBox, this.mainChart);
-  },
-  _handlerAddSma: function _handlerAddSma(period) {
-    return this.mainChart.options.zhFnAddSeriesSma(this.mainChart, period);
-  },
-  _handleRemoveSeries: function _handleRemoveSeries(id) {
-    return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);
-  },
-  _handlerAddMfi: function _handlerAddMfi(period, id) {
-    var config = this.mainChart.options.zhFnGetMfiConfig(this.mainChart, period, id);
-    this.state.mfiConfigs.push({ config: config, id: id });
-    this.setState({ mfiConfigs: this.state.mfiConfigs });
-  },
-  _handlerRemoveMfi: function _handlerRemoveMfi(id) {
-    this.state.mfiConfigs = this.state.mfiConfigs.filter(function (objConfig) {
+  };
+
+  this._handlerClickChart = function () {
+    _this3.setState({ isShowChart: true, isShowInfo: false });
+  };
+
+  this._handlerCheckBox = function (isCheck, checkBox) {
+    _this3.props.onSetActive(isCheck, checkBox, _this3.mainChart);
+  };
+
+  this._handlerAddSma = function (period) {
+    return _this3.mainChart.options.zhFnAddSeriesSma(_this3.mainChart, period);
+  };
+
+  this._handleRemoveSeries = function (id) {
+    return _this3.mainChart.options.zhFnRemoveSeries(_this3.mainChart, id);
+  };
+
+  this._handlerAddMfi = function (period, id) {
+    var config = _this3.mainChart.options.zhFnGetMfiConfig(_this3.mainChart, period, id);
+    _this3.state.mfiConfigs.push({ config: config, id: id });
+    _this3.setState({ mfiConfigs: _this3.state.mfiConfigs });
+  };
+
+  this._handlerRemoveMfi = function (id) {
+    _this3.state.mfiConfigs = _this3.state.mfiConfigs.filter(function (objConfig) {
       return objConfig.id !== id;
     });
-    this.setState({ mfiConfigs: this.state.mfiConfigs });
-  },
-  _handleClickConfig: function _handleClickConfig() {
-    var _props3 = this.props,
+    _this3.setState({ mfiConfigs: _this3.state.mfiConfigs });
+  };
+
+  this._handleClickConfig = function () {
+    var _props3 = _this3.props,
         caption = _props3.caption,
         onShowConfigDialog = _props3.onShowConfigDialog;
 
     onShowConfigDialog({
       caption: caption,
-      chart: this.mainChart,
-      setItemCaption: this.setItemCaption
+      chart: _this3.mainChart,
+      setItemCaption: _this3.setItemCaption
     });
-  },
-  _calcValueMoving: function _calcValueMoving(prev, dateTo) {
-    return this.props.calcValueMoving(this.mainChart, prev, dateTo);
-  },
-  _createChartToolBar: function _createChartToolBar(config) {
+  };
+
+  this._crValueMoving = function (prev, dateTo) {
+    return _this3.props.crValueMoving(_this3.mainChart, prev, dateTo);
+  };
+
+  this._createChartToolBar = function (config) {
     return _react2.default.createElement(_ChartToolBar2.default, {
       style: styles.tabDiv,
       config: config,
-      onAddSma: this._handlerAddSma,
-      onRemoveSeries: this._handleRemoveSeries,
-      onAddMfi: this._handlerAddMfi,
-      onRemoveMfi: this._handlerRemoveMfi,
-      onClickLegend: this._handlerClickLegend,
-      onClick2H: this._handlerClick2H,
-      onAddToWatch: this._handlerAddToWatch,
-      onClickInfo: this._handlerClickInfo,
-      onClickVolume: this._handlerClickVolume,
-      onClickATH: this._handlerClickATH,
-      onClickHighLow: this._handlerClickHighLow,
-      onClickConfig: this._handleClickConfig
+      onAddSma: _this3._handlerAddSma,
+      onRemoveSeries: _this3._handleRemoveSeries,
+      onAddMfi: _this3._handlerAddMfi,
+      onRemoveMfi: _this3._handlerRemoveMfi,
+      onClickLegend: _this3._handlerClickLegend,
+      onClick2H: _this3._handlerClick2H,
+      onAddToWatch: _this3._handlerAddToWatch,
+      onClickInfo: _this3._handlerClickInfo,
+      onClickVolume: _this3._handlerClickVolume,
+      onClickATH: _this3._handlerClickATH,
+      onClickHighLow: _this3._handlerClickHighLow,
+      onClickConfig: _this3._handleClickConfig
     });
-  },
-  _renderLegend: function _renderLegend(config) {
-    var isShowLegend = this.state.isShowLegend;
+  };
+
+  this._renderLegend = function (config) {
+    var isShowLegend = _this3.state.isShowLegend;
 
     var _compLegend = config.zhConfig.isWithLegend ? _react2.default.createElement(
       _ShowHide2.default,
       { isShow: isShowLegend },
       _react2.default.createElement(_Legend2.default, {
         legend: config.zhConfig.legend,
-        onClickItem: this._handlerToggleSeria
+        onClickItem: _this3._handlerToggleSeria
       })
     ) : undefined;
 
     return _compLegend;
-  },
-  _renderMetricCharts: function _renderMetricCharts() {
-    var _this = this;
+  };
 
-    var chartsDescription = this.state.chartsDescription;
+  this._renderMetricCharts = function () {
+    var chartsDescription = _this3.state.chartsDescription;
 
 
     var _metricCharts = chartsDescription.map(function (descr, index) {
       var type = descr.type,
-          _isShow = _this.state['isShow' + type],
+          _isShow = _this3.state['isShow' + type],
           _ref = 'chart' + type,
-          _config = _this.props.config['zh' + type + 'Config'];
+          _config = _this3.props.config['zh' + type + 'Config'];
 
 
       return _react2.default.createElement(
@@ -282,7 +409,7 @@ var AreaChartItem = _react2.default.createClass({
           ref: _ref,
           isShow: true,
           config: _config,
-          onLoaded: _this._handlerLoadedMetricChart
+          onLoaded: _this3._handlerLoadedMetricChart
         })
       );
     });
@@ -292,10 +419,9 @@ var AreaChartItem = _react2.default.createClass({
       null,
       _metricCharts
     );
-  },
-  _renderIndicatorCharts: function _renderIndicatorCharts(arrConfigs) {
-    var _this2 = this;
+  };
 
+  this._renderIndicatorCharts = function (arrConfigs) {
     var _indicatorCharts = arrConfigs.map(function (objConfig, index) {
       var config = objConfig.config,
           id = objConfig.id;
@@ -306,8 +432,8 @@ var AreaChartItem = _react2.default.createClass({
         _react2.default.createElement(_HighchartWrapper2.default, {
           isShow: true,
           config: config,
-          onLoaded: _this2._handlerLoadedMetricChart,
-          onWillUnLoaded: _this2._handlerWillUnLoadedChart
+          onLoaded: _this3._handlerLoadedMetricChart,
+          onWillUnLoaded: _this3._handlerWillUnLoadedChart
         })
       );
     });
@@ -316,82 +442,31 @@ var AreaChartItem = _react2.default.createClass({
       null,
       _indicatorCharts
     );
-  },
-  render: function render() {
-    var _this3 = this;
+  };
 
-    var _props4 = this.props,
-        chartType = _props4.chartType,
-        caption = _props4.caption,
-        config = _props4.config,
-        onCloseItem = _props4.onCloseItem,
-        isAdminMode = _props4.isAdminMode,
-        itemTime = config.zhConfig.itemTime,
-        _state4 = this.state,
-        isOpen = _state4.isOpen,
-        isShowChart = _state4.isShowChart,
-        isShowInfo = _state4.isShowInfo,
-        itemCaption = _state4.itemCaption,
-        mfiConfigs = _state4.mfiConfigs;
+  this.setChartHeight = function (height) {
+    _this3.mainChart.options.chart.height = height;
+    _this3.mainChart.reflow();
+  };
+}, _temp);
 
+//});
 
-    return _react2.default.createElement(
-      'div',
-      { style: styles.rootDiv },
-      _react2.default.createElement(_Header2.default, {
-        isOpen: isOpen,
-        chartType: chartType,
-        onCheck: this._fnOnCheck,
-        onUnCheck: this._fnOnUnCheck
-        //itemCaption={_itemCaption}
-        , itemCaption: itemCaption,
-        itemTitle: caption,
-        itemTime: itemTime,
-        onToggle: this._handlerToggleOpen,
-        valueMoving: config.valueMoving,
-        onClose: onCloseItem,
-        isAdminMode: isAdminMode,
-        calcValueMoving: this._calcValueMoving
-      }),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isOpen, style: styles.showHide },
-        isShowChart && this._createChartToolBar(config),
-        _react2.default.createElement(_HighchartWrapper2.default, {
-          ref: function ref(comp) {
-            return _this3.chartComp = comp;
-          },
-          isShow: isShowChart,
-          config: config,
-          absComp: this._dataSourceEl
-        }),
-        _react2.default.createElement(_PanelDataInfo2.default, {
-          isShow: isShowInfo,
-          info: config.info,
-          zhInfo: config.zhConfig,
-          onClickChart: this._handlerClickChart
-        }),
-        this._renderLegend(config),
-        this._renderIndicatorCharts(mfiConfigs),
-        this._renderMetricCharts()
-      )
-    );
-  },
-  reflowChart: function reflowChart(width) {
-    this.mainChart.options.chart.width = width;
-    this.mainChart.reflow();
-    if (Array.isArray(this.mainChart.options.zhDetailCharts)) {
-      this.mainChart.options.zhDetailCharts.forEach(function (chart) {
-        //chart.reflow();
-        chart.setSize(width, chart.options.chart.height, true);
-      });
-    }
-  },
-  setChartHeight: function setChartHeight(height) {
-    this.mainChart.options.chart.height = height;
-    this.mainChart.reflow();
-  }
-});
-
+process.env.NODE_ENV !== "production" ? AreaChartItem.propTypes = {
+  caption: _react.PropTypes.string,
+  chartType: _react.PropTypes.string,
+  config: _react.PropTypes.shape({
+    zhConfig: _react.PropTypes.shape({
+      dataSource: _react.PropTypes.string,
+      itemCaption: _react.PropTypes.string
+    })
+  }),
+  onAddToWatch: _react.PropTypes.func,
+  onSetActive: _react.PropTypes.func,
+  onShowConfigDialog: _react.PropTypes.func,
+  onCloseItem: _react.PropTypes.func,
+  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
+  crValueMoving: _react.PropTypes.func
+} : void 0;
 exports.default = AreaChartItem;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\AreaChartItem.js.map
