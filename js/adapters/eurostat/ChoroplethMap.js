@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _lodash = require('lodash.merge');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _JsonStatFn = require('./JsonStatFn');
 
 var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
@@ -11,6 +15,10 @@ var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
 var _kMeans = require('../../math/k-means');
 
 var _kMeans2 = _interopRequireDefault(_kMeans);
+
+var _mathFn = require('../../math/mathFn');
+
+var _mathFn2 = _interopRequireDefault(_mathFn);
 
 var _safeGet = require('../../utils/safeGet');
 
@@ -26,7 +34,6 @@ if (process.env.NODE_ENV !== 'development') {
 }
 /*eslint-enable no-undef */
 
-//import safeGet from 'lodash.get';
 var URL_LEAFLET = 'lib/leaflet.js',
     URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
     NUMBER_OF_CLUSTERS = 6,
@@ -211,9 +218,9 @@ var _fnCreateGradeControl = function _fnCreateGradeControl(minValue, maxValue, c
 
     var _upperPrev = void 0,
         _upperNext = void 0;
-    _upperPrev = Math.floor(minValue);
+    _upperPrev = _mathFn2.default.toFixed(minValue);
     clusters.forEach(function (cluster, index) {
-      _upperNext = Math.round(_fnCalcUpper(clusters, index, maxValue));
+      _upperNext = _mathFn2.default.toFixed(_fnCalcUpper(clusters, index, maxValue));
       _div.appendChild(_fnCreateRowEl(COLORS[index], _upperPrev, _upperNext, cluster, wg));
       _upperPrev = _upperNext;
     });
@@ -293,7 +300,7 @@ var ChoroplethMap = {
 
     var geoJson = this.hmUrlGeoJson[url];
     if (geoJson) {
-      return Promise.resolve(geoJson);
+      return Promise.resolve((0, _lodash2.default)({}, geoJson));
     } else {
       return fetch(url).then(function (response) {
         return response.json();

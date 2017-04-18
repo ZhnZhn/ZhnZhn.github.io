@@ -1,0 +1,84 @@
+{
+  "indicators" : [
+    {
+      "value" : "MEI_BTS_COS_BCCI" , "caption" : "Confidence Indicator",
+      "columns" :[
+        { "caption" : "Monthly", "value" : "BLSA_M" }
+      ]
+    }, {
+      "value" : "MEI_CLI_LOLITONO" , "caption" : "Composite Leading Indicator",
+      "columns" :[
+        { "caption" : "Monthly", "value" : "M" }
+      ]
+    },{
+      "value" : "MEI_REAL_PRINTO01", "caption" : "Industrial Production, 2010=100%",
+      "columns" : [
+        { "caption" : "Monthly", "value" : "M" },
+        { "caption" : "Quarterly", "value" : "Q" },
+        { "caption" : "Annual", "value" : "A" }
+      ]
+    },{
+      "value" : "MEI_REAL_PRMNTO01", "caption" : "Manufactoring Production, 2010=100%",
+      "columns" : [
+        { "caption" : "Quarterly", "value" : "Q" },
+        { "caption" : "Annual", "value" : "A" }
+      ]
+    },{
+      "value" : "MEI_REAL_PRCNTO01", "caption" : "Construction Production, 2010=100%",
+      "columns" : [
+        { "caption" : "Monthly", "value" : "M" },
+        { "caption" : "Quarterly", "value" : "Q" },
+        { "caption" : "Annual", "value" : "A" }
+      ]
+    },{
+      "value" : "MEI_REAL_SLRTCR03", "caption" : "Passenger Car Registration, 2010=100%",
+      "columns" : [
+        { "caption" : "Monthly", "value" : "M" },
+        { "caption" : "Quarterly", "value" : "Q" },
+        { "caption" : "Annual", "value" : "A" }
+      ]
+    },{
+      "value" : "MEI_REAL_SLRTTO01", "caption" : "Retail Trade Volume, 2010=100%",
+      "columns" : [
+        { "caption" : "Monthly", "value" : "M" },
+        { "caption" : "Quarterly", "value" : "Q" },
+        { "caption" : "Annual", "value" : "A" }
+      ]
+    },{
+       "value" : "MEI_REAL_ODCNPI03", "caption" : "Permits Issued for Dwellings, 2010=100%",
+       "columns" : [
+         { "caption" : "Monthly", "value" : "M" },
+         { "caption" : "Quarterly", "value" : "Q" },
+         { "caption" : "Annual", "value" : "A" }
+       ]
+     },{
+       "value" : "MEI_FIN_SP", "caption" : "Share prices, 2010=100%",
+       "columns" : [
+         { "caption" : "Monthly", "value" : "M" },
+         { "caption" : "Quarterly", "value" : "Q" },
+         { "caption" : "Annual", "value" : "A" }
+       ]
+     },{
+       "value" : "MEI_FIN_IRLT", "caption" : "Long Term Interest Rates",
+       "columns" : [
+         { "caption" : "Monthly", "value" : "M" },
+         { "caption" : "Quarterly", "value" : "Q" },
+         { "caption" : "Annual", "value" : "A" }
+       ]
+     },{
+       "value" : "MEI_FIN_IR3TIB", "caption" : "Short Term Interest Rates",
+       "columns" : [
+         { "caption" : "Monthly", "value" : "M" },
+         { "caption" : "Quarterly", "value" : "Q" },
+         { "caption" : "Annual", "value" : "A" }
+       ]
+     },{
+       "value" : "MEI_FIN_IRSTCI", "caption" : "Immediate Interest Rates",
+       "columns" : [
+         { "caption" : "Monthly", "value" : "M" },
+         { "caption" : "Quarterly", "value" : "Q" },
+         { "caption" : "Annual", "value" : "A" }
+       ]
+     }
+  ]
+}

@@ -264,6 +264,32 @@ var DataQE = {
     },
     dataColumn: 1
   },
+  QE_OECD: {
+    type: 'QE_OECD',
+    menuTitle: 'OECD Index & Indicators',
+    dialogCaption: 'OECD Index & Indicators',
+    chartContainerCaption: 'Quandl OECD Index & Indicators',
+    //dialogType : 'DialogType4',
+    dialogType: 'DialogType5',
+    dialogProps: {
+      descrUrl: './data/quandl/oecd.html',
+      nInitFromDate: 10,
+      oneCaption: 'Country',
+      oneURI: './data/quandl/oecd-countries.json',
+      oneJsonProp: 'countries',
+      twoCaption: 'Index',
+      twoURI: './data/quandl/oecd-indicators.json',
+      twoJsonProp: 'indicators',
+      threeCaption: 'Frequency',
+      valueFn: 'ROecd',
+      fnValueType: 'PlusTreeItem',
+      //valueFnPrefix : 'OECD',
+      loadId: 'Q',
+      dataSource: 'Organisation for Economic Co-Operation and Development and  (Code: OECD)',
+      dataColumn: 1
+    }
+    //dataColumn : 1
+  },
   QE_CPI_INFLATION: {
     type: 'QE_CPI_INFLATION',
     menuTitle: 'CPI & Inflation',

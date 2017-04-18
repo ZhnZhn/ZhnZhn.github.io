@@ -42,6 +42,15 @@ const mathFn = {
       percent : _bPercent.toString() + '%',
       direction : _direction
     };
+  },
+
+  toFixed : (value) => {
+    const bValue = Big(value);
+    if (bValue.gt('10')) {
+      return parseInt(bValue.toFixed(0), 10);
+    } else {
+      return parseFloat(bValue.toFixed(2));
+    }
   }
 }
 

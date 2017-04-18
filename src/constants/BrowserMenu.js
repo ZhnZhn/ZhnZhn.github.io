@@ -48,15 +48,16 @@ const menuQuandl = [
        { id : Quandl.GLOBAL_INDICATOR },
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
-       { id : Quandl.EU_COMMISSION}
+       { id : Quandl.EU_COMMISSION },
+       { id:  Quandl.OECD, isNew: true }
      ]
   },{
     caption : 'Inflation & Prices',
     items : [
       { id : Quandl.CPI_INFLATION },
-      { id : Quandl.BIG_MAC },
+      { id : Quandl.BLSI },
       { id : Quandl.GDT },
-      { id : Quandl.BLSI }
+      { id : Quandl.BIG_MAC }
     ]
   },{
      caption : 'Commodity', isInitClose : true,

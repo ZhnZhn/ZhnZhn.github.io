@@ -9,6 +9,14 @@ const RouterFnValue = {
   RPrefixOneTwoWithoutDash : (prefix, one, two) => `${prefix}/${one}${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
 
+  ROecd: (one, two, three) => {
+    if (three) {
+      return `OECD/${two}_${one}_${three}`;
+    } else {
+      return `OECD/${two}_${one}`;
+    }
+  },
+
   RZill : (one, two, three) => `ZILL/${two}${three}_${one}`,
 
   RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`,

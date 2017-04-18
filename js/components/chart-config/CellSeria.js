@@ -36,6 +36,10 @@ var _RowInputText = require('./RowInputText');
 
 var _RowInputText2 = _interopRequireDefault(_RowInputText);
 
+var _RowInputColor = require('./RowInputColor');
+
+var _RowInputColor2 = _interopRequireDefault(_RowInputColor);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var STYLE = {
@@ -146,7 +150,7 @@ var CellSeria = function (_Component) {
           initValue: type,
           onEnter: this._handleEnterType
         }),
-        _react2.default.createElement(_RowInputText2.default, {
+        _react2.default.createElement(_RowInputColor2.default, {
           styleRoot: STYLE.ROW_INPUT,
           caption: 'Color:',
           initValue: color,

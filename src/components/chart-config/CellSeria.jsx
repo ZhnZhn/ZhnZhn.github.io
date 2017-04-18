@@ -4,6 +4,7 @@ import safeGet from '../../utils/safeGet'
 
 import OpenClose from '../zhn/OpenClose'
 import RowInputText from './RowInputText'
+import RowInputColor from './RowInputColor'
 
 const STYLE = {
   ROW_INPUT: {
@@ -97,12 +98,20 @@ class CellSeria extends Component {
           initValue={type}
           onEnter={this._handleEnterType}
         />
+        <RowInputColor
+          styleRoot={STYLE.ROW_INPUT}
+          caption="Color:"
+          initValue={color}
+          onEnter={this._handleEnterColor}
+        />
+        {/*
         <RowInputText
           styleRoot={STYLE.ROW_INPUT}
           caption="Color:"
           initValue={color}
           onEnter={this._handleEnterColor}
         />
+        */}
         <RowInputText
           styleRoot={STYLE.ROW_INPUT}
           caption="Symbol:"

@@ -30,6 +30,14 @@ var RouterFnValue = {
     return prefix + "/" + two + "_" + one;
   },
 
+  ROecd: function ROecd(one, two, three) {
+    if (three) {
+      return "OECD/" + two + "_" + one + "_" + three;
+    } else {
+      return "OECD/" + two + "_" + one;
+    }
+  },
+
   RZill: function RZill(one, two, three) {
     return "ZILL/" + two + three + "_" + one;
   },

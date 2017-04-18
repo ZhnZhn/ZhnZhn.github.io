@@ -1,6 +1,8 @@
-//import safeGet from 'lodash.get';
+import merge from 'lodash.merge'
+
 import JsonStatFn from './JsonStatFn'
 import clusterMaker from '../../math/k-means'
+import mathFn from '../../math/mathFn'
 import safeGet from '../../utils/safeGet'
 
 /*eslint-disable no-undef */
@@ -175,9 +177,9 @@ const _fnCreateGradeControl = function(minValue, maxValue, clusters, L, wg){
       const _div = _fnCreateEl('div', 'control-grade');
 
       let _upperPrev, _upperNext;
-      _upperPrev = Math.floor(minValue)
-      clusters.forEach((cluster, index) => {
-        _upperNext = Math.round(_fnCalcUpper(clusters, index, maxValue))
+      _upperPrev = mathFn.toFixed(minValue)
+      clusters.forEach((cluster, index) => {        
+        _upperNext = mathFn.toFixed(_fnCalcUpper(clusters, index, maxValue))
         _div.appendChild( _fnCreateRowEl(
             COLORS[index], _upperPrev, _upperNext, cluster, wg
         ))
@@ -247,9 +249,9 @@ const ChoroplethMap = {
   },
 
   getGeoJson(url){
-     const geoJson = this.hmUrlGeoJson[url]
+     const geoJson = this.hmUrlGeoJson[url];
      if (geoJson){
-       return Promise.resolve(geoJson);
+       return Promise.resolve(merge({}, geoJson));
      } else {
        return fetch(url)
                .then( (response) => { return response.json(); })

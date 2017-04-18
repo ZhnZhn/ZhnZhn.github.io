@@ -63,6 +63,15 @@ var mathFn = {
       percent: _bPercent.toString() + '%',
       direction: _direction
     };
+  },
+
+  toFixed: function toFixed(value) {
+    var bValue = (0, _big2.default)(value);
+    if (bValue.gt('10')) {
+      return parseInt(bValue.toFixed(0), 10);
+    } else {
+      return parseFloat(bValue.toFixed(2));
+    }
   }
 };
 
