@@ -1,0 +1,17 @@
+{
+  "countries" : [
+    { "value":"ARG" , "caption":"Argentina" },
+    { "value":"AUS" , "caption":"Australia" },
+    { "value":"CAN" , "caption":"Canada" },
+    { "value":"EUR" , "caption":"Euro Area" },
+    { "value":"FRA" , "caption":"France" },
+    { "value":"DEU" , "caption":"Germany" },
+    { "value":"ITA" , "caption":"Italy" },
+    { "value":"JPN" , "caption":"Japan" },
+    { "value":"NZL" , "caption":"New Zealand" },
+    { "value":"RUS" , "caption":"Russia" },
+    { "value":"CHE" , "caption":"Switzerland" },
+    { "value":"GBR" , "caption":"UK" },
+    { "value":"USA" , "caption":"USA" }
+  ]
+}

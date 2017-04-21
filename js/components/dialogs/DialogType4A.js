@@ -26,10 +26,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _type = require('../../flux/creaters/type4');
-
-var _type2 = _interopRequireDefault(_type);
-
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
 var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
@@ -116,7 +112,7 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate;
 
-      return (0, _type2.default)(_this.props, { one: one, two: two, fromDate: fromDate, toDate: toDate });
+      return _this.props.loadFn(_this.props, { one: one, two: two, fromDate: fromDate, toDate: toDate });
     };
 
     _this._handleClose = function () {
@@ -213,7 +209,5 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
   return DialogType4A;
 }(_react.Component)) || _class) || _class;
 
-DialogType4A.displayName = 'DialogType4A';
-
 exports.default = DialogType4A;
-//# sourceMappingURL=DialogType4A.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4A.js.map

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import SparklinesLine from './SparklinesLine';
 
 import SparklinesSpots from './SparklinesSpots';
@@ -14,27 +14,26 @@ const DEFAULT_DATA = []
     , DEFAULT_WIDTH=240
     , DEFAULT_HEIGHT=60
     , DEFAULT_RATIO='none'
-    , DEFAULT_MARGIN = 2
+    , DEFAULT_MARGIN = 2;
 
-
-const Sparklines = React.createClass({
-     propTypes : {
-        data: React.PropTypes.array,
-        limit: React.PropTypes.number,
-        width: React.PropTypes.number,
-        height: React.PropTypes.number,
-        svgWidth: React.PropTypes.number,
-        svgHeight: React.PropTypes.number,
-        preserveAspectRatio: React.PropTypes.string,
-        margin: React.PropTypes.number,
-        style: React.PropTypes.object,
-        min: React.PropTypes.number,
-        max: React.PropTypes.number
-     },
+class Sparklines extends Component {
+     static propTypes = {
+        data: PropTypes.array,
+        limit: PropTypes.number,
+        width: PropTypes.number,
+        height: PropTypes.number,
+        svgWidth: PropTypes.number,
+        svgHeight: PropTypes.number,
+        preserveAspectRatio: PropTypes.string,
+        margin: PropTypes.number,
+        style: PropTypes.object,
+        min: PropTypes.number,
+        max: PropTypes.number
+     }
 
     shouldComponentUpdate(nextProps) {
         return shallowCompare(this, nextProps);
-    },
+    }
 
     render() {
         const {
@@ -61,6 +60,6 @@ const Sparklines = React.createClass({
             </svg>
         );
     }
-})
+}
 
 export { Sparklines, SparklinesLine, SparklinesSpots, SparklinesSpot, SparklinesBars, SparklinesReferenceLine }

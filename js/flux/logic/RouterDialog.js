@@ -36,10 +36,6 @@ var _UNCommodityTradeDialog = require('../../components/quandl-browser/UNCommodi
 
 var _UNCommodityTradeDialog2 = _interopRequireDefault(_UNCommodityTradeDialog);
 
-var _BigMacDialog = require('../../components/quandl-browser/BigMacDialog');
-
-var _BigMacDialog2 = _interopRequireDefault(_BigMacDialog);
-
 var _Futures3Dialog = require('../../components/quandl-browser/Futures3Dialog');
 
 var _Futures3Dialog2 = _interopRequireDefault(_Futures3Dialog);
@@ -69,7 +65,6 @@ var RouterDialog = {
   DialogEurostat2: _DialogEurostat4.default,
   DialogEurostat3: _DialogEurostat6.default,
   UNCommodityTradeDialog: _UNCommodityTradeDialog2.default,
-  BigMacDialog: _BigMacDialog2.default,
   Futures3Dialog: _Futures3Dialog2.default,
   FuturesWikiDialog: _FuturesWikiDialog2.default,
   JodiWorldOilDialog: _JodiWorldOilDialog2.default,

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import {ChartType, ModalDialog} from '../../constants/Type';
+import { ChartType, ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
@@ -13,6 +12,8 @@ import ActionButton from '../zhn/ActionButton';
 
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
+
+import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
 const Placeholder = {
   TRADE : {
@@ -28,16 +29,37 @@ const Filter = {
   REEXPORT : 'Re-Export - Trade (USD)'
 };
 
-const UNCommodityTradeDialog = React.createClass({
-  ...WithValidation,
+const TRADE_FILTER_OPTIONS = [
+  { caption: 'Default : Empty Filter', value: Filter.DEFAULT },
+  { caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)' },
+  { caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)' },
+  { caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)' },
+  { caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)' },
+  { caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)' },
+  { caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)' }
+]
 
-  getInitialState(){
-    this.country = null;
-    this.chapter = null;
-    this.tradeFilter = null;
-    this.subheading = null;
-    this.optionTrades = null;
-    this.chartType = null;
+const CHART_TYPE_OPTIONS = [
+  { caption : 'Default : Area', value: ChartType.AREA },
+  { caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: ChartType.SEMI_DONUT },
+  { caption : 'Stacked Area : Total Top90, On Recent Year', value: ChartType.STACKED_AREA },
+  { caption : 'Stacked Area Percent : Total Top90, On Recent Year', value: ChartType.STACKED_AREA_PERCENT },
+  { caption : 'Stacked Column : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN },
+  { caption : 'Stacked Column Percent : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN_PERCENT },
+  { caption : 'Tree Map : On Recent Year', value: ChartType.TREE_MAP }
+]
+
+@withValidationLoad
+class UNCommodityTradeDialog extends Component {
+
+  constructor(props){
+    super()
+    this.country = null
+    this.chapter = null
+    this.tradeFilter = null
+    this.subheading = null
+    this.optionTrades = null
+    this.chartType = null
 
     this.toolbarButtons = [
       { caption:'I', onClick: this._handlerClickInfo },
@@ -45,40 +67,18 @@ const UNCommodityTradeDialog = React.createClass({
       { caption:'F', onClick: this._handlerClickFilter },
       { caption:'D', onClick: this._handlerClickDate },
       { caption:'C', onClick: this._handlerClickChartType }
-    ];
-
-    return {
+    ]
+    this.state = {
       isShowFilter : false,
       isShowDate : true,
       isShowChartType : false,
-
-      optionTradeFilter : [
-        {caption: 'Default : Empty Filter', value: Filter.DEFAULT},
-        {caption: 'Import - Trade (USD)', value: 'Import - Trade (USD)'},
-        {caption: 'Import - Weight (Kg)', value: 'Import - Weight (Kg)'},
-        {caption: 'Export - Trade (USD)', value: 'Export - Trade (USD)'},
-        {caption: 'Export - Weight (Kg)', value: 'Export - Weight (Kg)'},
-        {caption: 'Re-Import - Trade (USD)', value: 'Re-Import - Trade (USD)'},
-        {caption: 'Re-Export - Trade (USD)', value: 'Re-Export - Trade (USD)'}
-      ],
       isLoadingTrade : false,
       isLoadingTradeFailed : false,
       optionTrades : [],
       placeholderTrade : Placeholder.TRADE.INIT,
-
-      optionChartTypes : [
-        {caption : 'Default : Area', value: ChartType.AREA},
-        {caption : 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: ChartType.SEMI_DONUT},
-        {caption : 'Stacked Area : Total Top90, On Recent Year', value: ChartType.STACKED_AREA},
-        {caption : 'Stacked Area Percent : Total Top90, On Recent Year', value: ChartType.STACKED_AREA_PERCENT},
-        {caption : 'Stacked Column : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN},
-        {caption : 'Stacked Column Percent : Total Top90, On Recent Year', value: ChartType.STACKED_COLUMN_PERCENT},
-        {caption : 'Tree Map : On Recent Year', value: ChartType.TREE_MAP}
-      ],
-
       validationMessages: []
     }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -87,19 +87,19 @@ const UNCommodityTradeDialog = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _initTrade(){
-    this.subheading = null;
-    this.optionTrades = null;
+  _initTrade = () => {
+    this.subheading = null
+    this.optionTrades = null
     this.setState({
       optionTrades: [],
       placeholderTrade: Placeholder.TRADE.INIT,
       isLoadingTradeFailed : false
-    });
-  },
+    })
+  }
 
-  _filterTrade(){
+  _filterTrade = () => {
     let options;
     if (this.tradeFilter && this.optionTrades){
       const filterValue = this.tradeFilter.value;
@@ -118,69 +118,69 @@ const UNCommodityTradeDialog = React.createClass({
            })
         }
       } else {
-        options = this.optionTrades;
+        options = this.optionTrades
       }
     } else {
-      options = this.optionTrades;
+      options = this.optionTrades
     }
     return options;
-  },
+  }
 
-  _handlerClickInfo(){
+  _handlerClickInfo = () => {
     ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, {
       descrUrl: this.props.descrUrl
     });
-  },
+  }
 
-  _handlerClickAll(){
-    const {isShowFilter, isShowDate, isShowChartType} = this.state
+  _handlerClickAll = () => {
+    const { isShowFilter, isShowDate, isShowChartType } = this.state
         , _isShow = (isShowFilter || isShowDate || isShowChartType) ? false : true;
     this.setState({
         isShowFilter : _isShow,
         isShowDate : _isShow,
         isShowChartType : _isShow
       })
-  },
-  _handlerClickFilter(){
-    this.setState({isShowFilter: !this.state.isShowFilter});
-  },
-  _handlerClickDate(){
-    this.setState({isShowDate: !this.state.isShowDate});
-  },
-  _handlerClickChartType(){
-    this.setState({isShowChartType: !this.state.isShowChartType});
-  },
+  }
+  _handlerClickFilter = () => {
+    this.setState({ isShowFilter: !this.state.isShowFilter })
+  }
+  _handlerClickDate = () => {
+    this.setState({ isShowDate: !this.state.isShowDate })
+  }
+  _handlerClickChartType = () => {
+    this.setState({ isShowChartType: !this.state.isShowChartType })
+  }
 
-  _handlerSelectCountry(country){
-    this.country = country;
-    this._initTrade();
-  },
-  _handlerSelectChapter(chapter){
-    this.chapter = chapter;
-    this._initTrade();
-  },
-  _handlerSelectTradeFilter(filter){
-     this.tradeFilter = filter;
-     this.setState({ optionTrades: this._filterTrade() });
-  },
-  _handlerSelectTrade(trade){
-    this.subheading = trade;
-  },
-  _handlerSelectChartType(chartType){
-    this.chartType = chartType;
-  },
-  _handlerLoadMeta(){
-    this._handlerWithValidationLoad(
+  _handlerSelectCountry = (country) => {
+    this.country = country
+    this._initTrade()
+  }
+  _handlerSelectChapter = (chapter) => {
+    this.chapter = chapter
+    this._initTrade()
+  }
+  _handlerSelectTradeFilter = (filter) => {
+     this.tradeFilter = filter
+     this.setState({ optionTrades: this._filterTrade() })
+  }
+  _handlerSelectTrade = (trade) => {
+    this.subheading = trade
+  }
+  _handlerSelectChartType = (chartType) => {
+    this.chartType = chartType
+  }
+  _handlerLoadMeta = () => {
+    this._handleWithValidationLoad(
       this._createMetaValidationMessages(),
       this._createLoadMetaOption,
       this._loadMeta
     );
-  },
-  _loadMeta(option){
-    this.props.onLoad(option);
-    this.setState({ isLoadingTrade: true });
-  },
-  _createMetaValidationMessages(){
+  }
+  _loadMeta = (option) => {
+    this.props.onLoad(option)
+    this.setState({ isLoadingTrade: true })
+  }
+  _createMetaValidationMessages = () => {
      let msg = [];
      if (!this.country)  { msg.push(this.props.msgOnNotSelected('Country'));}
      if (!this.chapter)  { msg.push(this.props.msgOnNotSelected('Subheading'));}
@@ -188,8 +188,8 @@ const UNCommodityTradeDialog = React.createClass({
      if (!isValid) { msg = msg.concat(datesMsg); }
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadMetaOption(){
+  }
+  _createLoadMetaOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues()
         , { loadId, fnValue } = this.props;
     return {
@@ -202,33 +202,33 @@ const UNCommodityTradeDialog = React.createClass({
        onFailed : this._loadMetaOptionFailed,
        loadId : loadId
     }
-  },
-  _setOptionTrades(optionTrades){
-    this.optionTrades = optionTrades;
+  }
+  _setOptionTrades = (optionTrades) => {
+    this.optionTrades = optionTrades
     this.setState({
       optionTrades: this._filterTrade(),
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
       placeholderTrade: Placeholder.TRADE.SELECT
-    });
-  },
-  _loadMetaOptionCancel(){
+    })
+  }
+  _loadMetaOptionCancel = () => {
     this.setState({
       isLoadingTrade: false,
       isLoadingTradeFailed: false,
       placeholderTrade: Placeholder.TRADE.SELECT
     })
-  },
-  _loadMetaOptionFailed(){
+  }
+  _loadMetaOptionFailed = () => {
     this.setState({ isLoadingTrade:false, isLoadingTradeFailed:true })
-  },
-  _handlerLoadData(){
-    this._handlerWithValidationLoad(
+  }
+  _handlerLoadData = () => {
+    this._handleWithValidationLoad(
       this._createDataValidationMessages(),
       this._createLoadDataOption
     );
-  },
-  _createDataValidationMessages(){
+  }
+  _createDataValidationMessages = () => {
      let msg = [];
      if ( !this.chartType || this.chartType.value === ChartType.AREA){
        if (!this.subheading)  {
@@ -245,8 +245,8 @@ const UNCommodityTradeDialog = React.createClass({
      }
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-  },
-  _createLoadDataOption(){
+  }
+  _createLoadDataOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues()
         , _dataColumn = (this.subheading) ? this.subheading.value : this.props.dataColumn
         , { loadId, fnValue, dataSource } = this.props
@@ -256,7 +256,7 @@ const UNCommodityTradeDialog = React.createClass({
                    `${this.country.caption}`
         , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )
               ? this._createSpliceItems()
-              : undefined
+              : undefined;
     return {
        value : fnValue(this.chapter.value, this.country.value),
        fromDate: fromDate,
@@ -268,21 +268,20 @@ const UNCommodityTradeDialog = React.createClass({
        subtitle: this.chapter.caption,
        loadId : loadId,
        dataSource : dataSource
-    }
-  },
-  _createSpliceItems(){
+    };
+  }
+  _createSpliceItems = () => {
      const _filterLength = this.tradeFilter.value.length + 2;
      return this.state.optionTrades.map((item, index) => {
         let {value, caption} = item;
         caption = caption.substring( 0, (caption.length - _filterLength) );
-        return { caption, value }
-    })
-  },
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createMetaValidationMessages);
-    this.props.onClose();
-  },
-
+        return { caption, value };
+    });
+  }
+  _handlerClose = () => {
+    this._handleWithValidationClose(this._createMetaValidationMessages)
+    this.props.onClose()
+  }
 
   render(){
     const {
@@ -293,9 +292,7 @@ const UNCommodityTradeDialog = React.createClass({
           } = this.props
         , {
            isShowFilter, isShowDate, isShowChartType,
-           optionTradeFilter,
            isLoadingTrade, isLoadingTradeFailed, optionTrades, placeholderTrade,
-           optionChartTypes,
            validationMessages
          } = this.state
         , _commandButtons = [
@@ -345,7 +342,7 @@ const UNCommodityTradeDialog = React.createClass({
              <ShowHide isShow={isShowFilter}>
                <RowInputSelect
                  caption={'Filter Trade:'}
-                 options={optionTradeFilter}
+                 options={TRADE_FILTER_OPTIONS}
                  placeholder={'Filter...'}
                  onSelect={this._handlerSelectTradeFilter}
                />
@@ -373,7 +370,7 @@ const UNCommodityTradeDialog = React.createClass({
              <ShowHide isShow={isShowChartType}>
                <RowInputSelect
                  caption={'Chart Type:'}
-                 options={optionChartTypes}
+                 options={CHART_TYPE_OPTIONS}
                  onSelect={this._handlerSelectChartType}
                />
              </ShowHide>
@@ -383,6 +380,6 @@ const UNCommodityTradeDialog = React.createClass({
         </DraggableDialog>
     );
   }
-});
+}
 
 export default UNCommodityTradeDialog

@@ -1,0 +1,17 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\Pane.Style.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\Pane.Style.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "COMMAND_DIV",
+  "cursor",
+  "float",
+  "marginTop",
+  "marginBottom",
+  "marginRight"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,gBAAc;AACXC,cAAQ,SADG;AAEXC,aAAO,OAFI;AAGXC,iBAAW,KAHA;AAIXC,oBAAc,MAJH;AAKXC,mBAAa;AALF;AADF,CAAd;;kBAUeN,K"
+}

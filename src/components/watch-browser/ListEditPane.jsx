@@ -1,83 +1,76 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import FragmentSelectGroupList from './FragmentSelectGroupList';
 import RowInputText from './RowInputText';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ActionButton from '../zhn/ActionButton';
 
-const Styles = {
-  COMMAND_DIV : {
-     cursor: 'default',
-     float: 'right',
-     marginTop: '8px',
-     marginBottom: '10px',
-     marginRight: '4px'
+import STYLE from './Pane.Style'
+
+class ListEditPane extends Component {
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchGroups: PropTypes.func
+    }),
+    actionCompleted: PropTypes.string,
+    forActionType: PropTypes.string,
+    onRename: PropTypes.func,
+    onClose: PropTypes.func
   }
-}
 
-const ListEditPane = React.createClass({
-  displayName : 'ListEditPane',
-  propTypes : {
-    store : React.PropTypes.object,
-    actionCompleted : React.PropTypes.string,
-    forActionType : React.PropTypes.string,
-    onRename : React.PropTypes.func,
-    onClose : React.PropTypes.func
-  },
-
-  getInitialState(){
-    const {store} = this.props;
-    return {
-      groupOptions : store.getWatchGroups(),
+  constructor(props){
+    super()
+    this.state = {
+      groupOptions : props.store.getWatchGroups(),
       listOptions : [],
       validationMessages : []
     }
-  },
+  }
 
   componentDidMount(){
     this.unsubscribe = this.props.store.listen(this._onStore)
-  },
+  }
   componentWillUnmount(){
     this.unsubscribe()
-  },
-  _onStore(actionType, data){
-    const {actionCompleted, actionFailed, forActionType, store} = this.props;
+  }
+  _onStore = (actionType, data) => {
+    const { actionCompleted, actionFailed, forActionType, store } = this.props;
     if (actionType === actionCompleted){
         if (data.forActionType === forActionType){
-          this._handlerClear();
+          this._handleClear()
         }
-        this.setState({groupOptions : store.getWatchGroups()});
+        this.setState({ groupOptions : store.getWatchGroups() })
     } else if (actionType === actionFailed && data.forActionType === forActionType){
-      this.setState({validationMessages:data.messages});
+      this.setState({ validationMessages:data.messages })
     }
-  },
+  }
 
-  _handlerClear(isFullClear){
+  _handleClear = () => {
      this.inputText.setValue('');
      if (this.state.validationMessages.length>0){
-       this.setState({validationMessages:[]})
+       this.setState({ validationMessages:[] })
      }
-  },
+  }
 
-
-  _handlerRename(){
-    const {captionGroup, captionList} = this.selectGroupList.getValue()
+  _handleRename = () => {
+    const { onRename, msgOnIsEmptyName, msgOnNotSelect } = this.props
+        , { captionGroup, captionList } = this.selectGroupList.getValue()
         , captionListTo = this.inputText.getValue();
     if (captionGroup && captionList && captionListTo){
-      this.props.onRename({
+      onRename({
         captionGroup : captionGroup,
         captionListFrom : captionList,
         captionListTo : captionListTo
       })
     } else {
-      const {msgOnIsEmptyName, msgOnNotSelect} = this.props
-          , msg = [];
-      if (!captionGroup) { msg.push(msgOnNotSelect('Group')); }
-      if (!captionList)  { msg.push(msgOnNotSelect('List From')); }
-      if (!captionListTo){ msg.push(msgOnIsEmptyName('List To')); }
-      this.setState({validationMessages:msg})
+      const msg = [];
+      if (!captionGroup) { msg.push(msgOnNotSelect('Group')) }
+      if (!captionList)  { msg.push(msgOnNotSelect('List From')) }
+      if (!captionListTo){ msg.push(msgOnIsEmptyName('List To')) }
+      this.setState({ validationMessages:msg })
     }
-  },
+  }
 
   render(){
     const { store, onClose } = this.props
@@ -98,16 +91,16 @@ const ListEditPane = React.createClass({
          <ValidationMessages
            validationMessages={validationMessages}
          />
-         <div style={Styles.COMMAND_DIV}>
+         <div style={STYLE.COMMAND_DIV}>
             <ActionButton
                type="TypeC"
                caption="Rename"
-               onClick={this._handlerRename}
+               onClick={this._handleRename}
             />
             <ActionButton
                type="TypeC"
                caption="Clear"
-               onClick={this._handlerClear}
+               onClick={this._handleClear}
             />
             <ActionButton
                type="TypeC"
@@ -118,6 +111,6 @@ const ListEditPane = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default ListEditPane

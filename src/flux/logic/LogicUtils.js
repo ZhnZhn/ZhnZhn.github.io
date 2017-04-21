@@ -6,7 +6,9 @@ const _fnCreateQuandlKey = function(option){
           ? (option.seriaType === ChartType.AREA)
                 ? `${option.value}_${ChartType.AREA}_${option.dataColumn}`
                 : `${option.value}_${option.seriaType}`
-          : option.value
+          : (option.viewKey)
+              ? option.viewKey
+              : option.value;
 }
 
 const _fnCreateEuroStatKey = function(option){

@@ -13,7 +13,7 @@ const STYLE = {
   }
 }
 
-//const ToolbarButtonCircle = React.createClass({
+
 class ToolbarButtonCircle extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
@@ -25,7 +25,7 @@ class ToolbarButtonCircle extends Component {
 
   _renderButtons = (buttons=[]) => {
     return buttons.map((button, index) => {
-      const {caption, onClick} = button
+      const { caption, onClick } = button;
       return (
         <ButtonCircle
           key={caption + index}
@@ -47,6 +47,5 @@ class ToolbarButtonCircle extends Component {
   }
 
 }
-//});
 
 export default ToolbarButtonCircle

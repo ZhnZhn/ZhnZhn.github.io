@@ -4,6 +4,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -20,127 +36,140 @@ var _ActionButton = require('../zhn/ActionButton');
 
 var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
+var _Pane = require('./Pane.Style');
+
+var _Pane2 = _interopRequireDefault(_Pane);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Styles = {
-  COMMAND_DIV: {
-    cursor: 'default',
-    float: 'right',
-    marginTop: '8px',
-    marginBottom: '10px',
-    marginRight: '4px'
-  }
-};
+var ListDeletePane = function (_Component) {
+  (0, _inherits3.default)(ListDeletePane, _Component);
 
-var ListDeletePane = _react2.default.createClass({
-  displayName: 'ListDeletePane',
-  propTypes: {
-    store: _react2.default.PropTypes.object,
-    actionCompleted: _react2.default.PropTypes.string,
-    forActionType: _react2.default.PropTypes.string,
-    onRename: _react2.default.PropTypes.func,
-    onClose: _react2.default.PropTypes.func
-  },
+  function ListDeletePane(props) {
+    (0, _classCallCheck3.default)(this, ListDeletePane);
 
-  getInitialState: function getInitialState() {
-    var store = this.props.store;
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ListDeletePane.__proto__ || Object.getPrototypeOf(ListDeletePane)).call(this));
 
-    return {
-      groupOptions: store.getWatchGroups(),
+    _this._onStore = function (actionType, data) {
+      var _this$props = _this.props,
+          actionCompleted = _this$props.actionCompleted,
+          forActionType = _this$props.forActionType,
+          store = _this$props.store;
+
+      if (actionType === actionCompleted) {
+        if (data.forActionType === forActionType) {
+          _this._handleClear();
+        }
+        _this.setState({ groupOptions: store.getWatchGroups() });
+      }
+    };
+
+    _this._handleClear = function () {
+      if (_this.state.validationMessages.length > 0) {
+        _this.setState({ validationMessages: [] });
+      }
+    };
+
+    _this._handleDelete = function () {
+      var _this$props2 = _this.props,
+          onDelete = _this$props2.onDelete,
+          msgOnNotSelect = _this$props2.msgOnNotSelect,
+          _this$selectGroupList = _this.selectGroupList.getValue(),
+          captionGroup = _this$selectGroupList.captionGroup,
+          captionList = _this$selectGroupList.captionList;
+
+      if (captionGroup && captionList) {
+        onDelete({ captionGroup: captionGroup, captionList: captionList });
+      } else {
+        var msg = [];
+        if (!captionGroup) {
+          msg.push(msgOnNotSelect('Group'));
+        }
+        if (!captionList) {
+          msg.push(msgOnNotSelect('List'));
+        }
+        _this.setState({ validationMessages: msg });
+      }
+    };
+
+    _this.state = {
+      groupOptions: props.store.getWatchGroups(),
       validationMessages: []
     };
-  },
-  componentDidMount: function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    this.unsubscribe();
-  },
-  _onStore: function _onStore(actionType, data) {
-    var _props = this.props,
-        actionCompleted = _props.actionCompleted,
-        forActionType = _props.forActionType,
-        store = _props.store;
-
-    if (actionType === actionCompleted) {
-      if (data.forActionType === forActionType) {
-        this._handlerClear();
-      }
-      this.setState({ groupOptions: store.getWatchGroups() });
-    }
-  },
-  _handlerClear: function _handlerClear() {
-    if (this.state.validationMessages.length > 0) {
-      this.setState({ validationMessages: [] });
-    }
-  },
-  _handlerDelete: function _handlerDelete() {
-    var _selectGroupList$getV = this.selectGroupList.getValue(),
-        captionGroup = _selectGroupList$getV.captionGroup,
-        captionList = _selectGroupList$getV.captionList;
-
-    if (captionGroup && captionList) {
-      this.props.onDelete({ captionGroup: captionGroup, captionList: captionList });
-    } else {
-      var msgOnNotSelect = this.props.msgOnNotSelect,
-          msg = [];
-
-      if (!captionGroup) {
-        msg.push(msgOnNotSelect('Group'));
-      }
-      if (!captionList) {
-        msg.push(msgOnNotSelect('List'));
-      }
-      this.setState({ validationMessages: msg });
-    }
-  },
-  render: function render() {
-    var _this = this;
-
-    var _props2 = this.props,
-        store = _props2.store,
-        onClose = _props2.onClose,
-        _state = this.state,
-        groupOptions = _state.groupOptions,
-        validationMessages = _state.validationMessages;
-
-    return _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_FragmentSelectGroupList2.default, {
-        ref: function ref(c) {
-          return _this.selectGroupList = c;
-        },
-        store: store,
-        groupCaption: 'In Group:',
-        groupOptions: groupOptions,
-        listCaption: 'List:'
-      }),
-      _react2.default.createElement(_ValidationMessages2.default, {
-        validationMessages: validationMessages
-      }),
-      _react2.default.createElement(
-        'div',
-        { style: Styles.COMMAND_DIV },
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
-          caption: 'Delete',
-          onClick: this._handlerDelete
-        }),
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
-          caption: 'Clear',
-          onClick: this._handlerClear
-        }),
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
-          caption: 'Close',
-          onClick: onClose
-        })
-      )
-    );
+    return _this;
   }
-});
 
+  (0, _createClass3.default)(ListDeletePane, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.unsubscribe = this.props.store.listen(this._onStore);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unsubscribe();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          store = _props.store,
+          onClose = _props.onClose,
+          _state = this.state,
+          groupOptions = _state.groupOptions,
+          validationMessages = _state.validationMessages;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_FragmentSelectGroupList2.default, {
+          ref: function ref(c) {
+            return _this2.selectGroupList = c;
+          },
+          store: store,
+          groupCaption: 'In Group:',
+          groupOptions: groupOptions,
+          listCaption: 'List:'
+        }),
+        _react2.default.createElement(_ValidationMessages2.default, {
+          validationMessages: validationMessages
+        }),
+        _react2.default.createElement(
+          'div',
+          { style: _Pane2.default.COMMAND_DIV },
+          _react2.default.createElement(_ActionButton2.default, {
+            type: 'TypeC',
+            caption: 'Delete',
+            onClick: this._handleDelete
+          }),
+          _react2.default.createElement(_ActionButton2.default, {
+            type: 'TypeC',
+            caption: 'Clear',
+            onClick: this._handleClear
+          }),
+          _react2.default.createElement(_ActionButton2.default, {
+            type: 'TypeC',
+            caption: 'Close',
+            onClick: onClose
+          })
+        )
+      );
+    }
+  }]);
+  return ListDeletePane;
+}(_react.Component);
+
+process.env.NODE_ENV !== "production" ? ListDeletePane.propTypes = {
+  store: _react.PropTypes.shape({
+    listen: _react.PropTypes.func,
+    getWatchGroups: _react.PropTypes.func
+  }),
+  actionCompleted: _react.PropTypes.string,
+  forActionType: _react.PropTypes.string,
+  onRename: _react.PropTypes.func,
+  onClose: _react.PropTypes.func
+} : void 0;
 exports.default = ListDeletePane;
-//# sourceMappingURL=ListDeletePane.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ListDeletePane.js.map

@@ -1,71 +1,67 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import RowInputText from './RowInputText';
 import ActionButton from '../zhn/ActionButton';
 import ValidationMessages from '../zhn/ValidationMessages';
 
-const Styles = {
-  COMMAND_DIV : {
-     cursor: 'default',
-     float: 'right',
-     marginTop: '8px',
-     marginBottom: '10px',
-     marginRight: '4px'
-  }
-}
+import STYLE from './Pane.Style';
 
-const GroupAddPane = React.createClass({
-  displayName : 'GroupAddPane',
-  propTypes : {
-    store : React.PropTypes.object,
-    actionCompleted : React.PropTypes.string,
-    actionFailed : React.PropTypes.string,
-    forActionType : React.PropTypes.string,
-    msgOnIsEmptyName : React.PropTypes.func,
-    onCreate : React.PropTypes.func,
-    onClose : React.PropTypes.func
-  },
-  getInitialState(){
-    return {
+class GroupAddPane extends Component {
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func
+    }),
+    actionCompleted: PropTypes.string,
+    actionFailed: PropTypes.string,
+    forActionType: PropTypes.string,
+    msgOnIsEmptyName: PropTypes.func,
+    onCreate: PropTypes.func,
+    onClose: PropTypes.func
+  }
+
+  constructor(props){
+    super()
+    this.state = {
       validationMessages : []
     }
-  },
+  }
 
   componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  },
+    this.unsubscribe = this.props.store.listen(this._onStore)
+  }
   componentWillUnmount(){
-    this.unsubscribe();
-  },
-  _onStore(actionType, data){
+    this.unsubscribe()
+  }
+  _onStore = (actionType, data) => {
     const { actionCompleted, actionFailed, forActionType } = this.props;
     if (actionType === actionCompleted && data.forActionType === forActionType){
-       this._handlerClear();
+       this._handleClear()
     } else if (actionType === actionFailed && data.forActionType === forActionType){
-       this.setState({validationMessages: data.messages});
+       this.setState({ validationMessages: data.messages })
     }
-  },
+  }
 
-  _handlerClear(){
-    this.inputText.setValue('');
+  _handleClear = () => {
+    this.inputText.setValue('')
     if (this.state.validationMessages.length>0){
-       this.setState({validationMessages: []});
+       this.setState({ validationMessages: [] })
     }
-  },
+  }
 
-  _handlerCreate(){
-     const caption = this.inputText.getValue();
+  _handleCreate = () => {
+     const { onCreate, msgOnIsEmptyName } = this.props
+          , caption = this.inputText.getValue();
      if (caption){
-       this.props.onCreate({caption});
+       onCreate({ caption })
      } else {
-       this.inputText.setValue('');
-       this.setState({validationMessages:[this.props.msgOnIsEmptyName('Group')]});
+       this.inputText.setValue('')
+       this.setState({ validationMessages:[msgOnIsEmptyName('Group')] })
      }
-  },
+  }
 
   render(){
-    const {onClose} = this.props
-        , {validationMessages} = this.state;
+    const { onClose } = this.props
+        , { validationMessages } = this.state;
     return (
       <div>
         <RowInputText
@@ -75,16 +71,16 @@ const GroupAddPane = React.createClass({
         <ValidationMessages
            validationMessages={validationMessages}
          />
-        <div style={Styles.COMMAND_DIV}>
+        <div style={STYLE.COMMAND_DIV}>
          <ActionButton
             type="TypeC"
             caption="Create"
-            onClick={this._handlerCreate}
+            onClick={this._handleCreate}
          />
          <ActionButton
             type="TypeC"
             caption="Clear"
-            onClick={this._handlerClear}
+            onClick={this._handleClear}
          />
          <ActionButton
             type="TypeC"
@@ -95,6 +91,6 @@ const GroupAddPane = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default GroupAddPane

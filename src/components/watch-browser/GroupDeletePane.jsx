@@ -1,79 +1,76 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import RowInputSelect from './RowInputSelect';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ActionButton from '../zhn/ActionButton';
 
-const Styles = {
-  COMMAND_DIV : {
-     cursor: 'default',
-     float: 'right',
-     marginTop: '8px',
-     marginBottom: '10px',
-     marginRight: '4px'
-  }
-}
+import STYLE from './Pane.Style';
 
-const GroupDeletePane = React.createClass({
-  displayName : 'GroupDeletePane',
-  propTypes : {
-    store : React.PropTypes.object,
-    actionCompleted : React.PropTypes.string,
-    forActionType : React.PropTypes.string,
-    msgOnNotSelect : React.PropTypes.func,
-    onDelete : React.PropTypes.func,
-    onClose : React.PropTypes.func
-  },
-  getInitialState(){
-    const {store} = this.props;
-    this.caption = null;
-    return {
-      groupOptions : store.getWatchGroups(),
+class GroupDeletePane extends Component {
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchGroups: PropTypes.func
+    }),
+    actionCompleted: PropTypes.string,
+    forActionType: PropTypes.string,
+    msgOnNotSelect: PropTypes.func,
+    onDelete: PropTypes.func,
+    onClose: PropTypes.func
+  }
+
+  constructor(props){
+    super()
+    this.caption = null
+
+    this.state = {
+      groupOptions : props.store.getWatchGroups(),
       validationMessages : []
     }
-  },
+  }
 
   componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  },
+    this.unsubscribe = this.props.store.listen(this._onStore)
+  }
   componentWillUnmount(){
-    this.unsubscribe();
-  },
-  _onStore(actionType, data){
-    const {actionCompleted, forActionType, store} = this.props;
+    this.unsubscribe()
+  }
+  _onStore = (actionType, data) => {
+    const { actionCompleted, forActionType, store } = this.props;
     if (actionType === actionCompleted) {
       if (data.forActionType === forActionType){
-        this._handlerClear();
+        this._handleClear()
       }
-      this.setState({groupOptions : store.getWatchGroups()})
+      this.setState({ groupOptions : store.getWatchGroups() })
     }
-  },
+  }
 
-  _handlerSelectGroup(item){
+  _handleSelectGroup = (item) => {
      if (item && item.caption){
-       this.caption = item.caption;
+       this.caption = item.caption
      } else {
-       this.caption = null;
+       this.caption = null
      }
-  },
+  }
 
-  _handlerClear(){
+  _handleClear = () => {
     if (this.state.validationMessages.length>0){
-      this.setState({validationMessages:[]})
+      this.setState({ validationMessages:[] })
     }
-  },
+  }
 
-  _handlerDeleteGroup(){
+  _handleDeleteGroup = () => {
+     const { onDelete, msgOnNotSelect } = this.props;
      if (this.caption){
-       this.props.onDelete({caption: this.caption})
+       onDelete({ caption:this.caption })
      } else {
-       this.setState({validationMessages:[this.props.msgOnNotSelect('Group')]});
+       this.setState({ validationMessages:[msgOnNotSelect('Group')] })
      }
-  },
+  }
 
   render(){
-      const {onClose} = this.props
-          , {groupOptions, validationMessages} = this.state;
+      const { onClose } = this.props
+          , { groupOptions, validationMessages } = this.state;
 
       return (
          <div>
@@ -81,16 +78,16 @@ const GroupDeletePane = React.createClass({
              caption={'Group:'}
              options={groupOptions}
              //isUpdateOptions={true}
-             onSelect={this._handlerSelectGroup}
+             onSelect={this._handleSelectGroup}
            />
            <ValidationMessages
              validationMessages={validationMessages}
            />
-           <div style={Styles.COMMAND_DIV}>
+           <div style={STYLE.COMMAND_DIV}>
              <ActionButton
                type="TypeC"
                caption="Delete"
-               onClick={this._handlerDeleteGroup}
+               onClick={this._handleDeleteGroup}
              />
             <ActionButton
                type="TypeC"
@@ -101,6 +98,6 @@ const GroupDeletePane = React.createClass({
         </div>
     );
   }
-});
+}
 
 export default GroupDeletePane

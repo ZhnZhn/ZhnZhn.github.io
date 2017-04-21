@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import WatchActions from '../../flux/actions/WatchActions';
-import {WatchActionTypes} from '../../flux/actions/WatchActions';
+import WatchActions, { WatchActionTypes } from '../../flux/actions/WatchActions';
 
 import Msg from '../../constants/Msg';
 
@@ -12,24 +11,22 @@ import ListCreatePane from './ListCreatePane';
 import ListEditPane from './ListEditPane';
 import ListDeletePane from './ListDeletePane';
 
-
-const EditListDialog = React.createClass({
-  displayName : 'EditListDialog',
-  propTypes : {
-    isShow : React.PropTypes.bool,
-    store : React.PropTypes.object,
-    onClose : React.PropTypes.func
-  },
+class EditListDialog extends Component {
+  static propTypes = {
+    isShow : PropTypes.bool,
+    store : PropTypes.object,
+    onClose : PropTypes.func
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
-  },
+  }
 
   render(){
-    const {isShow, store, onClose} = this.props;
+    const { isShow, store, onClose } = this.props;
     return (
       <ModalDialog
          caption="Watch Lists Edit"
@@ -37,7 +34,7 @@ const EditListDialog = React.createClass({
          isWithButton={false}
          onClose={onClose}
       >
-        <TabPane key="1" width="380px" >
+        <TabPane width="380px" >
            <Tab title="Create">
              <ListCreatePane
                 store={store}
@@ -76,6 +73,6 @@ const EditListDialog = React.createClass({
       </ModalDialog>
     )
   }
-});
+}
 
 export default EditListDialog

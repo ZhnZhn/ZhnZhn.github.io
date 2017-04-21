@@ -288,25 +288,48 @@ var DataQE = {
       dataSource: 'Organisation for Economic Co-Operation and Development and  (Code: OECD)',
       dataColumn: 1
     }
-    //dataColumn : 1
   },
-  QE_CPI_INFLATION: {
-    type: 'QE_CPI_INFLATION',
-    menuTitle: 'CPI & Inflation',
-    dialogCaption: 'CPI & Inflation',
-    chartContainerCaption: 'Consumer Price Index and Inflation',
+  QE_OECD_CPI: {
+    type: 'QE_OECD_CPI',
+    menuTitle: 'OECD CPI & HCPI',
+    dialogCaption: 'OECD Consumer Price Index',
+    chartContainerCaption: 'Quandl OECD Consumer Price Index',
+    dialogType: 'DialogType5',
+    dialogProps: {
+      descrUrl: './data/quandl/oecd.html',
+      nInitFromDate: 10,
+      oneCaption: 'Country',
+      oneURI: './data/quandl/oecd-countries.json',
+      oneJsonProp: 'countries',
+      twoCaption: 'Index',
+      twoURI: './data/quandl/oecd-cpi.json',
+      twoJsonProp: 'index',
+      threeCaption: 'Frequency',
+      valueFn: 'ROecd',
+      fnValueType: 'PlusTreeItem',
+      loadId: 'Q',
+      dataSource: 'Organisation for Economic Co-Operation and Development and  (Code: OECD)',
+      dataColumn: 1
+    }
+  },
+  QE_RATE_INFLATION: {
+    type: 'QE_RATE_INFLATION',
+    menuTitle: 'Rate Inflation',
+    dialogCaption: 'Rate Inflation',
+    chartContainerCaption: 'Quandl Rate Inflation',
+    dialogType: 'DialogType4',
     dialogProps: {
       descrUrl: './data/quandl/rate-cpi-inflation.html',
-      optionURI: './data/quandl/rate-cpi-inflation.json',
-      optionsJsonProp: 'codes',
-      optionNames: 'Codes',
-      nInitFromDate: 7,
-      itemCaption: 'Metric:',
-      fnItemCaption: function fnItemCaption(value) {
-        return value.split('/')[1];
-      },
+      nInitFromDate: 10,
+      oneCaption: 'Country:',
+      oneURI: './data/quandl/rate-countries.json',
+      oneJsonProp: 'countries',
+      twoCaption: 'Metric:',
+      twoURI: './data/quandl/rate-metrics.json',
+      twoJsonProp: 'metrics',
+      valueFn: 'RPrefixTwoOne',
+      valueFnPrefix: 'RATEINF',
       loadId: 'Q',
-      columnName: 'Value',
       dataSource: 'Rate Inflation (Code: RATEINF)'
     }
   },
@@ -315,18 +338,23 @@ var DataQE = {
     menuTitle: 'Big Mac Index',
     dialogCaption: 'Economist Big Mac Index',
     chartContainerCaption: 'Quandl Economist Big Mac Index',
-    dialogType: 'BigMacDialog',
+    dialogType: 'DialogType4',
     dialogProps: {
       descrUrl: './data/quandl/big-mac-index.html',
       nInitFromDate: 12,
-      countryURI: './data/quandl/big-mac-countries.json',
-      countryJsonProp: 'countries',
+      oneCaption: 'Country:',
+      oneURI: './data/quandl/big-mac-countries.json',
+      oneJsonProp: 'countries',
+      twoCaption: 'Metric:',
+      twoURI: './data/quandl/big-mac-metrics.json',
+      twoJsonProp: 'metrics',
       valueFn: 'RPrefixDashOne',
       valueFnPrefix: 'ECONOMIST/BIGMAC',
+      loadFnType: 'BigMac',
       loadId: 'Q',
+      dataColumn: 1,
       dataSource: 'The Economist - Big Mac Index (Code: ECONOMIST)'
-    },
-    dataColumn: 1
+    }
   },
   QE_GDT: {
     type: 'QE_GDT',

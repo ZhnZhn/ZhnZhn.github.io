@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import WatchActions from '../../flux/actions/WatchActions';
-import {WatchActionTypes} from '../../flux/actions/WatchActions';
+import WatchActions, { WatchActionTypes } from '../../flux/actions/WatchActions';
 
 import Msg from '../../constants/Msg';
 
@@ -12,23 +11,22 @@ import GroupAddPane from './GroupAddPane';
 import GroupEditPane from './GroupEditPane';
 import GroupDeletePane from './GroupDeletePane';
 
-const EditGroupDialog = React.createClass({
-  displayName : 'EditGroupDialog',
-  propTypes : {
-    isShow : React.PropTypes.bool,
-    store : React.PropTypes.object,
-    onClose : React.PropTypes.func
-  },
+class EditGroupDialog extends Component {
+  static propTypes = {
+    isShow: PropTypes.bool,
+    store: PropTypes.object,
+    onClose: PropTypes.func
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
-  },
+  }
 
   render(){
-    const {isShow, store, onClose} = this.props;
+    const { isShow, store, onClose } = this.props;
     return (
       <ModalDialog
          caption="Watch Groups Edit"
@@ -36,7 +34,7 @@ const EditGroupDialog = React.createClass({
          isWithButton={false}
          onClose={onClose}
       >
-        <TabPane key="1" width="380px" >
+        <TabPane width="380px" >
            <Tab title="Create">
              <GroupAddPane
                 store={store}
@@ -74,6 +72,6 @@ const EditGroupDialog = React.createClass({
       </ModalDialog>
     )
   }
-});
+}
 
 export default EditGroupDialog

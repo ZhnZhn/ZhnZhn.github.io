@@ -1,0 +1,34 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\creaters\\bigMac.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\creaters\\bigMac.js",
+ "sourceRoot": "",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "fnValue",
+  "loadId",
+  "dataSource",
+  "isPremium",
+  "country",
+  "one",
+  "metric",
+  "two",
+  "fromDate",
+  "toDate",
+  "_value",
+  "value",
+  "undefined",
+  "_dataColumn",
+  "_subtitle",
+  "caption",
+  "viewKey",
+  "dataColumn",
+  "itemCaption",
+  "title",
+  "subtitle"
+ ],
+ "mappings": ";;;;;AAAA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,SAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,SAAfC,OAAe,uEAAP,EAAO;;AAAA,SAE1CC,OAF0C,GAGxCF,KAHwC,CAE1CE,OAF0C;AAAA,SAEjCC,MAFiC,GAGxCH,KAHwC,CAEjCG,MAFiC;AAAA,SAEzBC,UAFyB,GAGxCJ,KAHwC,CAEzBI,UAFyB;AAAA,SAEbC,SAFa,GAGxCL,KAHwC,CAEbK,SAFa;AAAA,SAItCC,OAJsC,GAIIL,OAJJ,CAI1CM,GAJ0C;AAAA,SAIzBC,MAJyB,GAIIP,OAJJ,CAI7BQ,GAJ6B;AAAA,SAIjBC,QAJiB,GAIIT,OAJJ,CAIjBS,QAJiB;AAAA,SAIPC,MAJO,GAIIV,OAJJ,CAIPU,MAJO;AAAA,SAK5CC,MAL4C,GAKlC,OAAOV,OAAP,KAAmB,UAApB,GACJA,QAAQI,QAAQO,KAAhB,CADI,GAEJC,SAPuC;AAAA,SAQ3CC,WAR2C,GAQ5BP,MAAD,GAAWA,OAAOK,KAAlB,GAA0B,CARG;AAAA,SAS3CG,SAT2C,GAS9BR,MAAD,GAAWA,OAAOS,OAAlB,GAA4B,aATG;;AAW/C,YAAO;AACJC,mBAASN,SAAS,GAAT,GAAeG,WADpB;AAEJF,iBAAQD,MAFJ;AAGJF,oBAAUA,QAHN;AAIJC,kBAAQA,MAJJ;AAKJQ,sBAAaJ,WALT;AAMJK,uBAAcd,QAAQW,OANlB;AAOJd,kBAASA,MAPL;AAQJkB,iBAAQf,QAAQW,OARZ;AASJK,oBAAWN,SATP;AAUJZ,sBAAaA,UAVT;AAWJC,qBAAYA;AAXR,MAAP;AAaJ,CAxBD;;kBA0BeN,iB"
+}

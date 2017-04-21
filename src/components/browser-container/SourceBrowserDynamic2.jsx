@@ -1,26 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import MenuBrowserDynamic2 from '../zhn/MenuBrowserDynamic2';
-import BrowserActions, {BrowserActionTypes} from '../../flux/actions/BrowserActions';
-import ComponentActions from '../../flux/actions/ComponentActions';
 
-const SourceBrowserDynamic2 = React.createClass({
+class SourceBrowserDynamic2 extends Component {
   shouldComponentUpdate(){
     return false;
-  },
+  }
 
   render(){
-    return (
-       <MenuBrowserDynamic2
-          caption="Source Browser"
-          showAction={BrowserActionTypes.SHOW_BROWSER_DYNAMIC}
-          loadCompletedAction={BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED}
-          onLoadMenu={BrowserActions.loadBrowserDynamic}
-          onShowLoadDialog={ComponentActions.showModalDialog}
-          {...this.props}
-       />
-    )
+    return ( <MenuBrowserDynamic2 {...this.props} />);
   }
-});
+}
 
-export default SourceBrowserDynamic2;
+export default SourceBrowserDynamic2

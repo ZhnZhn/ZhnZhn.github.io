@@ -4,17 +4,27 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _class, _class2, _temp, _initialiseProps;
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _WithValidation = require('../dialogs/WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _DateUtils = require('../../utils/DateUtils');
 
@@ -46,26 +56,27 @@ var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _DialogStyles = require('../styles/DialogStyles');
+var _RowText = require('../dialogs/RowText');
 
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
+var _RowText2 = _interopRequireDefault(_RowText);
+
+var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
+
+var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = _DialogStyles2.default;
+var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
+  (0, _inherits3.default)(LoadItemDialog, _Component);
 
-var LoadItemDialog = _react2.default.createClass((0, _extends3.default)({
-  displayName: 'LoadItemDialog'
-}, _WithValidation2.default, {
-  propTypes: {
-    isShow: _react2.default.PropTypes.bool.isRequired,
-    data: _react2.default.PropTypes.object.isRequired,
-    store: _react2.default.PropTypes.object,
-    onClose: _react2.default.PropTypes.func.isRequired
-  },
+  function LoadItemDialog(props) {
+    (0, _classCallCheck3.default)(this, LoadItemDialog);
 
-  getInitialState: function getInitialState() {
-    var _props$data = this.props.data,
+    var _this = (0, _possibleConstructorReturn3.default)(this, (LoadItemDialog.__proto__ || Object.getPrototypeOf(LoadItemDialog)).call(this));
+
+    _initialiseProps.call(_this);
+
+    var _props$data = props.data,
         fromDate = _props$data.fromDate,
         initToDate = _props$data.initToDate,
         onTestDate = _props$data.onTestDate,
@@ -73,25 +84,79 @@ var LoadItemDialog = _react2.default.createClass((0, _extends3.default)({
         _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
         _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
 
-    return {
+    _this.state = {
       initFromDate: _initFromDate,
       initToDate: _initToDate,
       onTestDate: _onTestDate,
       validationMessages: []
     };
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
-      return false;
+    return _this;
+  }
+
+  (0, _createClass3.default)(LoadItemDialog, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+        return false;
+      }
+      return true;
     }
-    return true;
-  },
-  _handlerLoad: function _handlerLoad() {
-    var validationMessages = this._getValidationMessages();
-    if (validationMessages.isValid) {
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
+          isShow = _props.isShow,
           data = _props.data,
-          onClose = _props.onClose,
+          caption = data.caption,
+          _state = this.state,
+          initFromDate = _state.initFromDate,
+          initToDate = _state.initToDate,
+          onTestDate = _state.onTestDate,
+          validationMessages = _state.validationMessages,
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
+        type: 'TypeC',
+        caption: 'Load',
+        onClick: this._handleLoad
+      })];
+
+      return _react2.default.createElement(
+        _ModalDialog2.default,
+        {
+          caption: 'Load Item',
+          isShow: isShow,
+          commandButtons: _commandButtons,
+          onClose: this._handleClose
+        },
+        _react2.default.createElement(_RowText2.default, {
+          caption: 'Item:',
+          text: caption
+        }),
+        _react2.default.createElement(_DatesFragment2.default, {
+          ref: function ref(c) {
+            return _this2.datesFragment = c;
+          },
+          initFromDate: initFromDate,
+          initToDate: initToDate,
+          onTestDate: onTestDate
+        }),
+        _react2.default.createElement(_ValidationMessages2.default, {
+          validationMessages: validationMessages
+        })
+      );
+    }
+  }]);
+  return LoadItemDialog;
+}(_react.Component), _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
+
+  this._handleLoad = function () {
+    var validationMessages = _this3._createValidationMessages();
+    if (validationMessages.isValid) {
+      var _props2 = _this3.props,
+          data = _props2.data,
+          onClose = _props2.onClose,
           id = data.id,
           title = data.title,
           subtitle = data.subtitle,
@@ -99,7 +164,7 @@ var LoadItemDialog = _react2.default.createClass((0, _extends3.default)({
           columnName = data.columnName,
           dataColumn = data.dataColumn,
           seriaColumnNames = data.seriaColumnNames,
-          _datesFragment$getVal = this.datesFragment.getValues(),
+          _datesFragment$getVal = _this3.datesFragment.getValues(),
           fromDate = _datesFragment$getVal.fromDate,
           toDate = _datesFragment$getVal.toDate,
           option = {
@@ -119,12 +184,13 @@ var LoadItemDialog = _react2.default.createClass((0, _extends3.default)({
       _ChartActions2.default.loadStock(_ChartType2.default.WATCH_LIST, _Type.BrowserType.WATCH_LIST, option);
       onClose();
     }
-    this._updateValidationMessages(validationMessages);
-  },
-  _getValidationMessages: function _getValidationMessages() {
+    _this3._updateValidationMessages(validationMessages);
+  };
+
+  this._createValidationMessages = function () {
     var msg = [];
 
-    var _datesFragment$getVal2 = this.datesFragment.getValidation(),
+    var _datesFragment$getVal2 = _this3.datesFragment.getValidation(),
         isValid = _datesFragment$getVal2.isValid,
         datesMsg = _datesFragment$getVal2.datesMsg;
 
@@ -133,62 +199,23 @@ var LoadItemDialog = _react2.default.createClass((0, _extends3.default)({
     }
     msg.isValid = msg.length === 0 ? true : false;
     return msg;
-  },
-  render: function render() {
-    var _this = this;
+  };
 
-    var _props2 = this.props,
-        isShow = _props2.isShow,
-        data = _props2.data,
-        caption = data.caption,
-        _state = this.state,
-        initFromDate = _state.initFromDate,
-        initToDate = _state.initToDate,
-        onTestDate = _state.onTestDate,
-        validationMessages = _state.validationMessages,
-        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Load',
-      onClick: this._handlerLoad
-    })];
+  this._handleClose = function () {
+    _this3._handleWithValidationClose(_this3._createValidationMessages);
+    _this3.props.onClose();
+  };
+}, _temp)) || _class;
 
-    return _react2.default.createElement(
-      _ModalDialog2.default,
-      {
-        caption: 'Load Item',
-        isShow: isShow,
-        commandButtons: _commandButtons,
-        onClose: this._handlerClose
-      },
-      _react2.default.createElement(
-        'div',
-        { style: Object.assign({}, styles.rowDiv, { lineHeight: 2 }), key: '1' },
-        _react2.default.createElement(
-          'span',
-          { style: styles.labelSpan },
-          'Item:'
-        ),
-        _react2.default.createElement(
-          'span',
-          { style: { fontWeight: 'bold' } },
-          caption
-        )
-      ),
-      _react2.default.createElement(_DatesFragment2.default, {
-        ref: function ref(c) {
-          return _this.datesFragment = c;
-        },
-        initFromDate: initFromDate,
-        initToDate: initToDate,
-        onTestDate: onTestDate
-      }),
-      _react2.default.createElement(_ValidationMessages2.default, {
-        validationMessages: validationMessages
-      })
-    );
-  }
-}));
-
+process.env.NODE_ENV !== "production" ? LoadItemDialog.propTypes = {
+  isShow: _react.PropTypes.bool,
+  data: _react.PropTypes.shape({
+    fromDate: _react.PropTypes.string,
+    initToDate: _react.PropTypes.string,
+    onTestDate: _react.PropTypes.func
+  }),
+  store: _react.PropTypes.object,
+  onClose: _react.PropTypes.func
+} : void 0;
 exports.default = LoadItemDialog;
-//# sourceMappingURL=LoadItemDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\LoadItemDialog.js.map

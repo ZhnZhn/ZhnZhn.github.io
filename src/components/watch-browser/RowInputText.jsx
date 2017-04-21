@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import InputText from '../zhn/InputText';
-import DialogStyles from '../styles/DialogStyles'
+import STYLE from '../styles/DialogStyles';
 
-const styles = DialogStyles;
-const Styles = {
+const S = {
   ROOT : {
     lineHeight: 2
   },
@@ -20,32 +19,32 @@ const Styles = {
   }
 }
 
-const RowInputText = React.createClass({
-  displayName : 'RowInputText',
-  propTypes : {
-    caption : React.PropTypes.string
-  },
+class RowInputText extends Component {
+  static propTypes = {
+    caption: PropTypes.string
+  }
+
   render(){
-    const {caption} = this.props;
+    const { caption } = this.props;
     return (
-      <div style={Object.assign({}, styles.rowDiv, Styles.ROOT)}>
-         <span style={Object.assign({}, styles.labelSpan, Styles.CAPTION)}>
+      <div style={{...STYLE.rowDiv, ...S.ROOT}}>
+         <span style={{...STYLE.labelSpan, ...S.CAPTION}}>
            {caption}
          </span>
          <InputText
             ref={c => this.inputText = c}
-            style={Styles.INPUT_TEXT}
+            style={S.INPUT_TEXT}
          />
       </div>
     )
-  },
+  }
 
   getValue(){
     return this.inputText.getValue().trim();
-  },
-  setValue(value){
-    this.inputText.setValue(value);
   }
-});
+  setValue(value){
+    this.inputText.setValue(value)
+  }
+}
 
 export default RowInputText

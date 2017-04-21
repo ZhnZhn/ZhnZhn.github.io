@@ -26,18 +26,16 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = _DialogStyles2.default;
-
 var RowInputSelect = function RowInputSelect(_ref) {
    var _ref$caption = _ref.caption,
        caption = _ref$caption === undefined ? '' : _ref$caption,
        rest = (0, _objectWithoutProperties3.default)(_ref, ['caption']);
    return _react2.default.createElement(
       'div',
-      { style: styles.rowDiv },
+      { style: _DialogStyles2.default.rowDiv },
       _react2.default.createElement(
          'span',
-         { style: styles.labelSpan },
+         { style: _DialogStyles2.default.labelSpan },
          caption
       ),
       _react2.default.createElement(_InputSelect2.default, (0, _extends3.default)({
@@ -47,4 +45,4 @@ var RowInputSelect = function RowInputSelect(_ref) {
 };
 
 exports.default = RowInputSelect;
-//# sourceMappingURL=RowInputSelect.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowInputSelect.js.map

@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import WithToolbar from '../dialogs/WithToolbar';
-import WithValidation from '../dialogs/WithValidation';
-
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
@@ -14,6 +11,9 @@ import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
 
+import withToolbar from '../dialogs/decorators/withToolbar'
+import withValidationLoad from '../dialogs/decorators/withValidationLoad'
+
 const unitOptions = [
   { "caption" : "Thousand Barrels per day (kb/d)", "value" : "KD" },
   { "caption" : "Thousand Barrels (kbbl)", "value" : "KB" },
@@ -22,23 +22,23 @@ const unitOptions = [
   { "caption" : "Conversion factor barrels/ktons", "value" : "BK" }
 ]
 
+@withToolbar
+@withValidationLoad
+class JodiWorldOilDialog extends Component {
 
-const JodiWorldOilDialog = React.createClass({
-   ...WithToolbar,
-   ...WithValidation,
+   constructor(props){
+     super()
+     this.country = null
+     this.product = null
+     this.flow = null
+     this.units = null
 
-   getInitialState(){
-      this.country = null;
-      this.product = null;
-      this.flow = null;
-      this.units = null;
-
-      this.toolbarButtons = this._createType2WithToolbar();
-      return {
-        isShowDate : true,
-        validationMessages : []
-      }
-   },
+     this.toolbarButtons = this._createType2WithToolbar(props)
+     this.state = {
+       isShowDate : true,
+       validationMessages : []
+     }
+   }
 
    shouldComponentUpdate(nextProps, nextState){
      if (this.props !== nextProps){
@@ -47,22 +47,22 @@ const JodiWorldOilDialog = React.createClass({
         }
      }
      return true;
-   },
+   }
 
-   _handlerSelectCountry(country){
-     this.country = country;
-   },
-   _handlerSelectUnits(units){
-     this.units = units;
-   },
+   _handleSelectCountry = (country) => {
+     this.country = country
+   }
+   _handleSelectUnits = (units) => {
+     this.units = units
+   }
 
-   _handlerLoad(){
-     this._handlerWithValidationLoad(
+   _handleLoad = () => {
+     this._handleWithValidationLoad(
        this._createValidationMessages(),
        this._createLoadOption
      );
-   },
-   _createValidationMessages(){
+   }
+   _createValidationMessages = () => {
      const { msgOnNotSelected } = this.props;
      let msg = [];
 
@@ -80,8 +80,8 @@ const JodiWorldOilDialog = React.createClass({
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
-   },
-   _createLoadOption(){
+   }
+   _createLoadOption = () => {
       const { parent:product, child:flow } = this.productFlow.getValues()
           , { fromDate, toDate } = this.datesFragment.getValues()
           , { fnValue, dataColumn, loadId, dataSource } = this.props;
@@ -94,12 +94,12 @@ const JodiWorldOilDialog = React.createClass({
         title : `${this.country.caption}:${product.caption}`,
         subtitle : `${flow.caption}:${this.units.caption}`,
         dataSource : dataSource
-      }
-   },
-   _handlerClose(){
-     this._handlerWithValidationClose(this._createValidationMessages);
-     this.props.onClose();
-   },
+      };
+   }
+   _handleClose = () => {
+     this._handleWithValidationClose(this._createValidationMessages)
+     this.props.onClose()
+   }
 
    render(){
      const {
@@ -114,7 +114,7 @@ const JodiWorldOilDialog = React.createClass({
                   key="a"
                   type="TypeC"
                   caption="Load"
-                  onClick={this._handlerLoad}
+                  onClick={this._handleLoad}
                />
           ];
 
@@ -124,7 +124,7 @@ const JodiWorldOilDialog = React.createClass({
          isShow={isShow}
          commandButtons={_commandButtons}
          onShowChart={onShow}
-         onClose={this._handlerClose}
+         onClose={this._handleClose}
        >
           <ToolbarButtonCircle
             buttons={this.toolbarButtons}
@@ -136,7 +136,7 @@ const JodiWorldOilDialog = React.createClass({
              jsonProp={oneJsonProp}
              caption={oneCaption}
              optionNames={'Items'}
-             onSelect={this._handlerSelectCountry}
+             onSelect={this._handleSelectCountry}
           />
           <SelectParentChild
              ref={c => this.productFlow = c}
@@ -151,7 +151,7 @@ const JodiWorldOilDialog = React.createClass({
           <RowInputSelect
             caption="Units"
             options={unitOptions}
-            onSelect={this._handlerSelectUnits}
+            onSelect={this._handleSelectUnits}
           />
 
           <ShowHide isShow={isShowDate}>
@@ -169,6 +169,6 @@ const JodiWorldOilDialog = React.createClass({
        </DraggableDialog>
      );
    }
-});
+}
 
 export default JodiWorldOilDialog

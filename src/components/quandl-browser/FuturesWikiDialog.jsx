@@ -1,15 +1,14 @@
-import React from 'react';
-
-import createLoadOptions from '../../flux/creaters/futuresWiki';
+import React, { Component } from 'react';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectParentChild from '../dialogs/SelectParentChild';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import RowDate from '../dialogs/RowDate';
 import ActionButton from '../zhn/ActionButton';
 import ValidationMessages from '../zhn/ValidationMessages';
+
+import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
 const typeOptions = [
   { caption: 'Continuous Contract #1', value: 1 },
@@ -19,19 +18,18 @@ const typeOptions = [
   { caption: 'Continuous Contract #5', value: 5 }
 ]
 
-const Futures3Dialog = React.createClass({
-  ...WithValidation,
-
-  getInitialState(){
-    this.type = undefined;
+@withValidationLoad
+class FuturesWikiDialog extends Component {
+  constructor(props){
+    super()
+    this.type = undefined
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handlerClickInfo }
-    ];
-
-    return {
+      { caption: 'I', onClick: this._handleClickInfo }
+    ]
+    this.state = {
       validationMessages : []
     }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -40,24 +38,24 @@ const Futures3Dialog = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerClickInfo(){
+  _handleClickInfo = () => {
     const { descrUrl, onClickInfo } = this.props;
-    onClickInfo({ descrUrl });
-  },
+    onClickInfo({ descrUrl })
+  }
 
-  _handlerSelectType(type){
-    this.type = type;
-  },
+  _handleSelectType = (type) => {
+    this.type = type
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
-    );
-  },
-  _createValidationMessages(){
+    )
+  }
+  _createValidationMessages = () => {
     const { msgOnNotSelected, msgOnNotValidFormat, isContinious } = this.props
     let   msg = [];
 
@@ -72,43 +70,25 @@ const Futures3Dialog = React.createClass({
 
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
-  },
-  _createLoadOption(){
+  }
+  _createLoadOption = () => {
     const { parent:exchange, child:item } = this.exchangeItem.getValues()
-        //, { fnValue, columnName, dataColumn, seriaColumnNames, loadId, isContinious } = this.props
         , { isContinious } = this.props
-        /*
-        , _subtitle = (columnName)
-              ? `${this.type.caption}:${columnName}`
-              : `${this.type.caption}`
-        */
         , fromDate = (isContinious)
               ? this.fromDate.getValue()
               : undefined ;
-    return createLoadOptions(
+    return this.props.loadFn(
       this.props,
       { exchange, item , type : this.type, fromDate }
     );
-    /*
-    return {
-       value : fnValue(exchange.value, item.value, this.type.value ),
-       title : `${exchange.caption}:${item.caption}`,
-       subtitle : _subtitle,
-       columnName : columnName,
-       seriaColumnNames: seriaColumnNames,
-       dataColumn : dataColumn,
-       loadId : loadId,
-       fromDate : _fromDate
-    };
-    */
-  },
+  }
 
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
+  }
 
-  _renderFromDate(initFromDate, onTestDate, msgTestDate){
+  _renderFromDate = (initFromDate, onTestDate, msgTestDate) => {
     return (
        <RowDate
           ref={ c => this.fromDate = c}
@@ -118,7 +98,7 @@ const Futures3Dialog = React.createClass({
           onTestDate={onTestDate}
        />
     );
-  },
+  }
 
   render(){
     const {
@@ -132,7 +112,7 @@ const Futures3Dialog = React.createClass({
                 key="a"
                 type="TypeC"
                 caption="Load"
-                onClick={this._handlerLoad}
+                onClick={this._handleLoad}
              />
          ];
 
@@ -142,7 +122,7 @@ const Futures3Dialog = React.createClass({
          isShow={isShow}
          commandButtons={_commandButtons}
          onShowChart={onShow}
-         onClose={this._handlerClose}
+         onClose={this._handleClose}
        >
            <ToolbarButtonCircle
               buttons={this.toolbarButtons}
@@ -161,16 +141,15 @@ const Futures3Dialog = React.createClass({
            <RowInputSelect
               caption="Type"
               options={typeOptions}
-              onSelect={this._handlerSelectType}
+              onSelect={this._handleSelectType}
            />
            {isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty)}
            <ValidationMessages
               validationMessages={validationMessages}
            />
-
       </DraggableDialog>
     );
   }
-});
+}
 
-export default Futures3Dialog;
+export default FuturesWikiDialog

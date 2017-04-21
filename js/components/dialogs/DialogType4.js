@@ -26,10 +26,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _type = require('../../flux/creaters/type4');
-
-var _type2 = _interopRequireDefault(_type);
-
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
 var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
@@ -120,7 +116,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate;
 
-      return (0, _type2.default)(_this.props, { one: _this.one, two: _this.two, fromDate: fromDate, toDate: toDate });
+      return _this.props.loadFn(_this.props, { one: _this.one, two: _this.two, fromDate: fromDate, toDate: toDate });
     };
 
     _this._handleClose = function () {
@@ -243,7 +239,9 @@ process.env.NODE_ENV !== "production" ? DialogType4.propTypes = {
   initToDate: _react.PropTypes.string,
   msgOnNotValidFormat: _react.PropTypes.func,
   onTestDate: _react.PropTypes.func,
-  onShow: _react.PropTypes.func
+  onShow: _react.PropTypes.func,
+
+  loadFn: _react.PropTypes.func
 } : void 0;
 exports.default = DialogType4;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map

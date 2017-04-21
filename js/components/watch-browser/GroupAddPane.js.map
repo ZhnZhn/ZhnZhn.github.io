@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../src/components/watch-browser/GroupAddPane.jsx"],"names":["Styles","COMMAND_DIV","cursor","float","marginTop","marginBottom","marginRight","GroupAddPane","createClass","displayName","propTypes","store","PropTypes","object","actionCompleted","string","actionFailed","forActionType","msgOnIsEmptyName","func","onCreate","onClose","getInitialState","validationMessages","componentDidMount","unsubscribe","props","listen","_onStore","componentWillUnmount","actionType","data","_handlerClear","setState","messages","inputText","setValue","state","length","_handlerCreate","caption","getValue","render","c"],"mappings":"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","file":"GroupAddPane.js","sourcesContent":["import React from 'react';\r\n\r\nimport RowInputText from './RowInputText';\r\nimport ActionButton from '../zhn/ActionButton';\r\nimport ValidationMessages from '../zhn/ValidationMessages';\r\n\r\nconst Styles = {\r\n  COMMAND_DIV : {\r\n     cursor: 'default',\r\n     float: 'right',\r\n     marginTop: '8px',\r\n     marginBottom: '10px',\r\n     marginRight: '4px'\r\n  }\r\n}\r\n\r\nconst GroupAddPane = React.createClass({\r\n  displayName : 'GroupAddPane',\r\n  propTypes : {\r\n    store : React.PropTypes.object,\r\n    actionCompleted : React.PropTypes.string,\r\n    actionFailed : React.PropTypes.string,\r\n    forActionType : React.PropTypes.string,\r\n    msgOnIsEmptyName : React.PropTypes.func,\r\n    onCreate : React.PropTypes.func,\r\n    onClose : React.PropTypes.func\r\n  },\r\n  getInitialState(){\r\n    return {\r\n      validationMessages : []\r\n    }\r\n  },\r\n\r\n  componentDidMount(){\r\n    this.unsubscribe = this.props.store.listen(this._onStore);\r\n  },\r\n  componentWillUnmount(){\r\n    this.unsubscribe();\r\n  },\r\n  _onStore(actionType, data){\r\n    const { actionCompleted, actionFailed, forActionType } = this.props;\r\n    if (actionType === actionCompleted && data.forActionType === forActionType){\r\n       this._handlerClear();\r\n    } else if (actionType === actionFailed && data.forActionType === forActionType){\r\n       this.setState({validationMessages: data.messages});\r\n    }\r\n  },\r\n\r\n  _handlerClear(){\r\n    this.inputText.setValue('');\r\n    if (this.state.validationMessages.length>0){\r\n       this.setState({validationMessages: []});\r\n    }\r\n  },\r\n\r\n  _handlerCreate(){\r\n     const caption = this.inputText.getValue();\r\n     if (caption){\r\n       this.props.onCreate({caption});\r\n     } else {\r\n       this.inputText.setValue('');\r\n       this.setState({validationMessages:[this.props.msgOnIsEmptyName('Group')]});\r\n     }\r\n  },\r\n\r\n  render(){\r\n    const {onClose} = this.props\r\n        , {validationMessages} = this.state;\r\n    return (\r\n      <div>\r\n        <RowInputText\r\n           ref={c => this.inputText = c}\r\n           caption={'Group:'}\r\n        />\r\n        <ValidationMessages\r\n           validationMessages={validationMessages}\r\n         />\r\n        <div style={Styles.COMMAND_DIV}>\r\n         <ActionButton\r\n            type=\"TypeC\"\r\n            caption=\"Create\"\r\n            onClick={this._handlerCreate}\r\n         />\r\n         <ActionButton\r\n            type=\"TypeC\"\r\n            caption=\"Clear\"\r\n            onClick={this._handlerClear}\r\n         />\r\n         <ActionButton\r\n            type=\"TypeC\"\r\n            caption=\"Close\"\r\n            onClick={onClose}\r\n         />\r\n       </div>\r\n      </div>\r\n    )\r\n  }\r\n})\r\n\r\nexport default GroupAddPane\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\GroupAddPane.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\GroupAddPane.js",
+ "sourceRoot": "",
+ "names": [
+  "GroupAddPane",
+  "props",
+  "_onStore",
+  "actionType",
+  "data",
+  "actionCompleted",
+  "actionFailed",
+  "forActionType",
+  "_handleClear",
+  "setState",
+  "validationMessages",
+  "messages",
+  "inputText",
+  "setValue",
+  "state",
+  "length",
+  "_handleCreate",
+  "onCreate",
+  "msgOnIsEmptyName",
+  "caption",
+  "getValue",
+  "unsubscribe",
+  "store",
+  "listen",
+  "onClose",
+  "c",
+  "COMMAND_DIV",
+  "propTypes",
+  "shape",
+  "func",
+  "string"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AAEA;;;;;;IAEMA,Y;;;AAaJ,wBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAalBC,QAbkB,GAaP,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAAA,wBAC0B,MAAKH,KAD/B;AAAA,UACvBI,eADuB,eACvBA,eADuB;AAAA,UACNC,YADM,eACNA,YADM;AAAA,UACQC,aADR,eACQA,aADR;;AAE/B,UAAIJ,eAAeE,eAAf,IAAkCD,KAAKG,aAAL,KAAuBA,aAA7D,EAA2E;AACxE,cAAKC,YAAL;AACF,OAFD,MAEO,IAAIL,eAAeG,YAAf,IAA+BF,KAAKG,aAAL,KAAuBA,aAA1D,EAAwE;AAC5E,cAAKE,QAAL,CAAc,EAAEC,oBAAoBN,KAAKO,QAA3B,EAAd;AACF;AACF,KApBiB;;AAAA,UAsBlBH,YAtBkB,GAsBH,YAAM;AACnB,YAAKI,SAAL,CAAeC,QAAf,CAAwB,EAAxB;AACA,UAAI,MAAKC,KAAL,CAAWJ,kBAAX,CAA8BK,MAA9B,GAAqC,CAAzC,EAA2C;AACxC,cAAKN,QAAL,CAAc,EAAEC,oBAAoB,EAAtB,EAAd;AACF;AACF,KA3BiB;;AAAA,UA6BlBM,aA7BkB,GA6BF,YAAM;AAAA,yBACoB,MAAKf,KADzB;AAAA,UACXgB,QADW,gBACXA,QADW;AAAA,UACDC,gBADC,gBACDA,gBADC;AAAA,UAEZC,OAFY,GAEF,MAAKP,SAAL,CAAeQ,QAAf,EAFE;;AAGnB,UAAID,OAAJ,EAAY;AACVF,iBAAS,EAAEE,gBAAF,EAAT;AACD,OAFD,MAEO;AACL,cAAKP,SAAL,CAAeC,QAAf,CAAwB,EAAxB;AACA,cAAKJ,QAAL,CAAc,EAAEC,oBAAmB,CAACQ,iBAAiB,OAAjB,CAAD,CAArB,EAAd;AACD;AACH,KAtCiB;;AAEhB,UAAKJ,KAAL,GAAa;AACXJ,0BAAqB;AADV,KAAb;AAFgB;AAKjB;;;;wCAEkB;AACjB,WAAKW,WAAL,GAAmB,KAAKpB,KAAL,CAAWqB,KAAX,CAAiBC,MAAjB,CAAwB,KAAKrB,QAA7B,CAAnB;AACD;;;2CACqB;AACpB,WAAKmB,WAAL;AACD;;;6BA4BO;AAAA;;AACA,UAAEG,OAAF,GAAc,KAAKvB,KAAnB,CAAEuB,OAAF;AAAA,UACEd,kBADF,GACyB,KAAKI,KAD9B,CACEJ,kBADF;;AAEN,aACE;AAAA;AAAA;AACE;AACG,eAAK;AAAA,mBAAK,OAAKE,SAAL,GAAiBa,CAAtB;AAAA,WADR;AAEG,mBAAS;AAFZ,UADF;AAKE;AACG,8BAAoBf;AADvB,UALF;AAQE;AAAA;AAAA,YAAK,OAAO,eAAMgB,WAAlB;AACC;AACG,kBAAK,OADR;AAEG,qBAAQ,QAFX;AAGG,qBAAS,KAAKV;AAHjB,YADD;AAMC;AACG,kBAAK,OADR;AAEG,qBAAQ,OAFX;AAGG,qBAAS,KAAKR;AAHjB,YAND;AAWC;AACG,kBAAK,OADR;AAEG,qBAAQ,OAFX;AAGG,qBAASgB;AAHZ;AAXD;AARF,OADF;AA4BD;;;;;wCApFGxB,Y,CACG2B,S,GAAY;AACjBL,SAAO,iBAAUM,KAAV,CAAgB;AACrBL,YAAQ,iBAAUM;AADG,GAAhB,CADU;AAIjBxB,mBAAiB,iBAAUyB,MAJV;AAKjBxB,gBAAc,iBAAUwB,MALP;AAMjBvB,iBAAe,iBAAUuB,MANR;AAOjBZ,oBAAkB,iBAAUW,IAPX;AAQjBZ,YAAU,iBAAUY,IARH;AASjBL,WAAS,iBAAUK;AATF,C;kBAsFN7B,Y"
+}

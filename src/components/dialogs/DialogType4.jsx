@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-import createLoadOptions from '../../flux/creaters/type4';
-
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import ActionButton from '../zhn/ActionButton';
@@ -32,7 +30,9 @@ class DialogType4 extends Component {
     initToDate: PropTypes.string,
     msgOnNotValidFormat: PropTypes.func,
     onTestDate: PropTypes.func,
-    onShow: PropTypes.func
+    onShow: PropTypes.func,
+
+    loadFn: PropTypes.func
   }
 
   constructor(props){
@@ -83,10 +83,10 @@ class DialogType4 extends Component {
   }
   _createLoadOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues();
-    return createLoadOptions(
+    return this.props.loadFn(
       this.props,
       { one : this.one, two : this.two, fromDate, toDate }
-    );
+    );    
   }
 
   _handleClose = () => {

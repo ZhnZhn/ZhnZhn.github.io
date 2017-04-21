@@ -4,25 +4,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _class;
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _futuresWiki = require('../../flux/creaters/futuresWiki');
-
-var _futuresWiki2 = _interopRequireDefault(_futuresWiki);
-
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
 var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _WithValidation = require('../dialogs/WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
@@ -48,165 +54,173 @@ var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
+var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
+
+var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var typeOptions = [{ caption: 'Continuous Contract #1', value: 1 }, { caption: 'Continuous Contract #2', value: 2 }, { caption: 'Continuous Contract #3', value: 3 }, { caption: 'Continuous Contract #4', value: 4 }, { caption: 'Continuous Contract #5', value: 5 }];
 
-var Futures3Dialog = _react2.default.createClass((0, _extends3.default)({
-  displayName: 'Futures3Dialog'
-}, _WithValidation2.default, {
-  getInitialState: function getInitialState() {
-    this.type = undefined;
-    this.toolbarButtons = [{ caption: 'I', onClick: this._handlerClickInfo }];
+var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Component) {
+  (0, _inherits3.default)(FuturesWikiDialog, _Component);
 
-    return {
+  function FuturesWikiDialog(props) {
+    (0, _classCallCheck3.default)(this, FuturesWikiDialog);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (FuturesWikiDialog.__proto__ || Object.getPrototypeOf(FuturesWikiDialog)).call(this));
+
+    _this._handleClickInfo = function () {
+      var _this$props = _this.props,
+          descrUrl = _this$props.descrUrl,
+          onClickInfo = _this$props.onClickInfo;
+
+      onClickInfo({ descrUrl: descrUrl });
+    };
+
+    _this._handleSelectType = function (type) {
+      _this.type = type;
+    };
+
+    _this._handleLoad = function () {
+      _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
+    };
+
+    _this._createValidationMessages = function () {
+      var _this$props2 = _this.props,
+          msgOnNotSelected = _this$props2.msgOnNotSelected,
+          msgOnNotValidFormat = _this$props2.msgOnNotValidFormat,
+          isContinious = _this$props2.isContinious;
+
+      var msg = [];
+
+      var _this$exchangeItem$ge = _this.exchangeItem.getValidation(),
+          isValid1 = _this$exchangeItem$ge.isValid,
+          msg1 = _this$exchangeItem$ge.msg;
+
+      if (!isValid1) {
+        msg = msg.concat(msg1);
+      }
+
+      if (!_this.type) {
+        msg.push(msgOnNotSelected('Type'));
+      }
+
+      if (isContinious && !_this.fromDate.isValid()) {
+        msg.push(msgOnNotValidFormat('From Date'));
+      }
+
+      msg.isValid = msg.length === 0 ? true : false;
+      return msg;
+    };
+
+    _this._createLoadOption = function () {
+      var _this$exchangeItem$ge2 = _this.exchangeItem.getValues(),
+          exchange = _this$exchangeItem$ge2.parent,
+          item = _this$exchangeItem$ge2.child,
+          isContinious = _this.props.isContinious,
+          fromDate = isContinious ? _this.fromDate.getValue() : undefined;
+
+      return _this.props.loadFn(_this.props, { exchange: exchange, item: item, type: _this.type, fromDate: fromDate });
+    };
+
+    _this._handleClose = function () {
+      _this._handleWithValidationClose(_this._createValidationMessages);
+      _this.props.onClose();
+    };
+
+    _this._renderFromDate = function (initFromDate, onTestDate, msgTestDate) {
+      return _react2.default.createElement(_RowDate2.default, {
+        ref: function ref(c) {
+          return _this.fromDate = c;
+        },
+        labelTitle: 'From Date:',
+        initValue: initFromDate,
+        errorMsg: msgTestDate,
+        onTestDate: onTestDate
+      });
+    };
+
+    _this.type = undefined;
+    _this.toolbarButtons = [{ caption: 'I', onClick: _this._handleClickInfo }];
+    _this.state = {
       validationMessages: []
     };
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      if (this.props.isShow === nextProps.isShow) {
-        return false;
-      }
-    }
-    return true;
-  },
-  _handlerClickInfo: function _handlerClickInfo() {
-    var _props = this.props,
-        descrUrl = _props.descrUrl,
-        onClickInfo = _props.onClickInfo;
-
-    onClickInfo({ descrUrl: descrUrl });
-  },
-  _handlerSelectType: function _handlerSelectType(type) {
-    this.type = type;
-  },
-  _handlerLoad: function _handlerLoad() {
-    this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
-  },
-  _createValidationMessages: function _createValidationMessages() {
-    var _props2 = this.props,
-        msgOnNotSelected = _props2.msgOnNotSelected,
-        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
-        isContinious = _props2.isContinious;
-
-    var msg = [];
-
-    var _exchangeItem$getVali = this.exchangeItem.getValidation(),
-        isValid1 = _exchangeItem$getVali.isValid,
-        msg1 = _exchangeItem$getVali.msg;
-
-    if (!isValid1) {
-      msg = msg.concat(msg1);
-    }
-
-    if (!this.type) {
-      msg.push(msgOnNotSelected('Type'));
-    }
-
-    if (isContinious && !this.fromDate.isValid()) {
-      msg.push(msgOnNotValidFormat('From Date'));
-    }
-
-    msg.isValid = msg.length === 0 ? true : false;
-    return msg;
-  },
-  _createLoadOption: function _createLoadOption() {
-    var _exchangeItem$getValu = this.exchangeItem.getValues(),
-        exchange = _exchangeItem$getValu.parent,
-        item = _exchangeItem$getValu.child,
-        isContinious = this.props.isContinious,
-        fromDate = isContinious ? this.fromDate.getValue() : undefined;
-
-    return (0, _futuresWiki2.default)(this.props, { exchange: exchange, item: item, type: this.type, fromDate: fromDate });
-    /*
-    return {
-       value : fnValue(exchange.value, item.value, this.type.value ),
-       title : `${exchange.caption}:${item.caption}`,
-       subtitle : _subtitle,
-       columnName : columnName,
-       seriaColumnNames: seriaColumnNames,
-       dataColumn : dataColumn,
-       loadId : loadId,
-       fromDate : _fromDate
-    };
-    */
-  },
-  _handlerClose: function _handlerClose() {
-    this._handlerWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
-  },
-  _renderFromDate: function _renderFromDate(initFromDate, onTestDate, msgTestDate) {
-    var _this = this;
-
-    return _react2.default.createElement(_RowDate2.default, {
-      ref: function ref(c) {
-        return _this.fromDate = c;
-      },
-      labelTitle: 'From Date:',
-      initValue: initFromDate,
-      errorMsg: msgTestDate,
-      onTestDate: onTestDate
-    });
-  },
-  render: function render() {
-    var _this2 = this;
-
-    var _props3 = this.props,
-        isShow = _props3.isShow,
-        caption = _props3.caption,
-        onShow = _props3.onShow,
-        futuresURI = _props3.futuresURI,
-        msgOnNotSelected = _props3.msgOnNotSelected,
-        isContinious = _props3.isContinious,
-        initFromDate = _props3.initFromDate,
-        onTestDateOrEmpty = _props3.onTestDateOrEmpty,
-        msgTestDateOrEmpty = _props3.msgTestDateOrEmpty,
-        validationMessages = this.state.validationMessages,
-        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Load',
-      onClick: this._handlerLoad
-    })];
-
-
-    return _react2.default.createElement(
-      _DraggableDialog2.default,
-      {
-        caption: caption,
-        isShow: isShow,
-        commandButtons: _commandButtons,
-        onShowChart: onShow,
-        onClose: this._handlerClose
-      },
-      _react2.default.createElement(_ToolbarButtonCircle2.default, {
-        buttons: this.toolbarButtons
-      }),
-      _react2.default.createElement(_SelectParentChild2.default, {
-        ref: function ref(c) {
-          return _this2.exchangeItem = c;
-        },
-        isShow: isShow,
-        uri: futuresURI,
-        parentCaption: 'Exchange',
-        parentOptionNames: 'Exchanges',
-        parentJsonProp: 'futures',
-        childCaption: 'Asset',
-        msgOnNotSelected: msgOnNotSelected
-      }),
-      _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Type',
-        options: typeOptions,
-        onSelect: this._handlerSelectType
-      }),
-      isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty),
-      _react2.default.createElement(_ValidationMessages2.default, {
-        validationMessages: validationMessages
-      })
-    );
+    return _this;
   }
-}));
 
-exports.default = Futures3Dialog;
-//# sourceMappingURL=FuturesWikiDialog.js.map
+  (0, _createClass3.default)(FuturesWikiDialog, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props !== nextProps) {
+        if (this.props.isShow === nextProps.isShow) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          isShow = _props.isShow,
+          caption = _props.caption,
+          onShow = _props.onShow,
+          futuresURI = _props.futuresURI,
+          msgOnNotSelected = _props.msgOnNotSelected,
+          isContinious = _props.isContinious,
+          initFromDate = _props.initFromDate,
+          onTestDateOrEmpty = _props.onTestDateOrEmpty,
+          msgTestDateOrEmpty = _props.msgTestDateOrEmpty,
+          validationMessages = this.state.validationMessages,
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
+        key: 'a',
+        type: 'TypeC',
+        caption: 'Load',
+        onClick: this._handleLoad
+      })];
+
+
+      return _react2.default.createElement(
+        _DraggableDialog2.default,
+        {
+          caption: caption,
+          isShow: isShow,
+          commandButtons: _commandButtons,
+          onShowChart: onShow,
+          onClose: this._handleClose
+        },
+        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+          buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_SelectParentChild2.default, {
+          ref: function ref(c) {
+            return _this2.exchangeItem = c;
+          },
+          isShow: isShow,
+          uri: futuresURI,
+          parentCaption: 'Exchange',
+          parentOptionNames: 'Exchanges',
+          parentJsonProp: 'futures',
+          childCaption: 'Asset',
+          msgOnNotSelected: msgOnNotSelected
+        }),
+        _react2.default.createElement(_RowInputSelect2.default, {
+          caption: 'Type',
+          options: typeOptions,
+          onSelect: this._handleSelectType
+        }),
+        isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty),
+        _react2.default.createElement(_ValidationMessages2.default, {
+          validationMessages: validationMessages
+        })
+      );
+    }
+  }]);
+  return FuturesWikiDialog;
+}(_react.Component)) || _class;
+
+exports.default = FuturesWikiDialog;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\FuturesWikiDialog.js.map

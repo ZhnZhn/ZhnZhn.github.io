@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-import createLoadOptions from '../../flux/creaters/type3';
-
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
@@ -27,7 +25,8 @@ class DialogType3 extends Component {
     onShow: PropTypes.func,
 
     descrUrl: PropTypes.string,
-    onClickInfo: PropTypes.func
+    onClickInfo: PropTypes.func,
+    loadFn: PropTypes.func
   }
 
   constructor(props){
@@ -76,13 +75,15 @@ class DialogType3 extends Component {
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
   }
+  
   _createLoadOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues()
-    return createLoadOptions(
-        this.props,
-        { stock : this.stock, fromDate, toDate }
+    return this.props.loadFn(
+      this.props,
+      { stock : this.stock, fromDate, toDate }
     );
   }
+
   _handleClose = () => {
     this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();

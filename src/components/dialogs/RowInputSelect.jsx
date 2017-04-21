@@ -1,13 +1,11 @@
 import React from 'react';
 
 import InputSelect from '../zhn/InputSelect';
-import DialogStyles from '../styles/DialogStyles';
-
-const styles = DialogStyles;
+import STYLE from '../styles/DialogStyles';
 
 const RowInputSelect = ({ caption='', ...rest }) => (
-   <div style={styles.rowDiv}>
-      <span style={styles.labelSpan}>
+   <div style={STYLE.rowDiv}>
+      <span style={STYLE.labelSpan}>
          {caption}
       </span>
       <InputSelect

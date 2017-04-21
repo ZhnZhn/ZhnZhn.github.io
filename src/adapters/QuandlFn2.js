@@ -45,7 +45,7 @@ const QuandlFn2 = {
   createZhConfig(option){
     const _dataSource = (option.dataSource)
              ? `Quandl: ${option.dataSource}`
-             : 'Quandl'
+             : 'Quandl';
     return {
       item : option.stock,
       title : option.title,
@@ -64,7 +64,7 @@ const QuandlFn2 = {
   },
 
   createPercent({ bValue=Big('0.0'), bTotal=Big('0.0') }){
-    return mathFn.calcPercent({ bValue, bTotal });    
+    return mathFn.calcPercent({ bValue, bTotal });
   },
 
   createValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){

@@ -1,32 +1,38 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 
-import {BrowserType} from '../../constants/Type';
+import { BrowserType } from '../../constants/Type';
 
 import QuandlBrowser from '../quandl-browser/QuandlBrowser';
 import WatchBrowser from '../watch-browser/WatchBrowser';
 import DialogContainer3 from '../zhn/DialogContainer3';
 
-const BrowserContainer = React.createClass({
-  getInitialState(){
-    return {
+
+class BrowserContainer extends Component {
+  constructor(props){
+    super()
+    this.state = {
       elBrowsers : []
     }
-  },
+  }
 
-  componentWillMount(){
+  componentDidMount(){
     const { store } = this.props;
-    this.unsubscribe = store.listen(this._onStore);
-  },
+    this.unsubscribe = store.listen(this._onStore)
+  }
+
   componentWillUnmount(){
-    this.unsubscribe();
-  },
-  _onStore(actionType, data){
+    this.unsubscribe()
+  }
+
+  _onStore = (actionType, data) => {
      if (actionType === this.props.initBrowserAction){
-       this.state.elBrowsers.unshift(data);
-       this.setState(this.state);
+       this.setState(prevState => {
+         prevState.elBrowsers.unshift(data)
+         return prevState;
+       })
      }
-  },
+  }
 
   render(){
     const {
@@ -39,7 +45,6 @@ const BrowserContainer = React.createClass({
     return (
       <div className="hrz-container">
            <QuandlBrowser
-              //browserType={BrowserType.QUANDL}
               browserType={BrowserType.ECONOMIC}
               caption="Quandl Economic"
               store={store}
@@ -64,6 +69,6 @@ const BrowserContainer = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default BrowserContainer

@@ -16,6 +16,10 @@ var _RouterDialog = require('./RouterDialog');
 
 var _RouterDialog2 = _interopRequireDefault(_RouterDialog);
 
+var _RouterLoadFn = require('./RouterLoadFn');
+
+var _RouterLoadFn2 = _interopRequireDefault(_RouterLoadFn);
+
 var _RouterFnValue = require('./RouterFnValue');
 
 var _RouterFnValue2 = _interopRequireDefault(_RouterFnValue);
@@ -49,6 +53,10 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 var _ChartActions = require('../actions/ChartActions');
 
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
+
+var _BrowserActions = require('../actions/BrowserActions');
+
+var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 
 var _DateUtils = require('../../utils/DateUtils');
 
@@ -87,7 +95,8 @@ var createDialogComp = function createDialogComp(conf, browserType) {
         : undefined
   */
   ,
-      onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined;
+      onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined,
+      loadFn = _RouterLoadFn2.default.getFn(props.loadFnType, conf.dialogType);
 
   if (props.isContinious) {
     props.msgTestDateOrEmpty = _Msg2.default.TEST_DATE_OR_EMPTY;
@@ -112,7 +121,8 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     //fnLink : _fnLink,
     initFromDate: _initFromDate,
     initToDate: initToDate, onTestDate: onTestDate,
-    onClickInfo: onClickInfo
+    onClickInfo: onClickInfo,
+    loadFn: loadFn
   }, props));
 };
 
@@ -165,7 +175,7 @@ var Factory = {
   createBrowserDynamic: function createBrowserDynamic(option) {
     var browserType = option.browserType,
         _option$caption = option.caption,
-        caption = _option$caption === undefined ? '' : _option$caption,
+        caption = _option$caption === undefined ? 'Source Browser' : _option$caption,
         sourceMenuUrl = option.sourceMenuUrl,
         chartContainerType = option.chartContainerType,
         modalDialogType = option.modalDialogType,
@@ -191,7 +201,14 @@ var Factory = {
       ItemComp: ItemComp,
       descrUrl: descrUrl,
       onClickInfo: onClickInfo,
-      onShowContainer: onShowContainer
+      onShowContainer: onShowContainer,
+
+      showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
+      loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
+      updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, //for Type
+      onLoadMenu: _BrowserActions2.default.loadBrowserDynamic,
+      onShowLoadDialog: _ComponentActions2.default.showModalDialog //for Type2
+
     });
   }
 };

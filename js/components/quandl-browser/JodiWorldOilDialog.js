@@ -4,9 +4,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _class;
 
 var _react = require('react');
 
@@ -15,14 +29,6 @@ var _react2 = _interopRequireDefault(_react);
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
 var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _WithToolbar = require('../dialogs/WithToolbar');
-
-var _WithToolbar2 = _interopRequireDefault(_WithToolbar);
-
-var _WithValidation = require('../dialogs/WithValidation');
-
-var _WithValidation2 = _interopRequireDefault(_WithValidation);
 
 var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
@@ -56,188 +62,214 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
+var _withToolbar = require('../dialogs/decorators/withToolbar');
+
+var _withToolbar2 = _interopRequireDefault(_withToolbar);
+
+var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
+
+var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var unitOptions = [{ "caption": "Thousand Barrels per day (kb/d)", "value": "KD" }, { "caption": "Thousand Barrels (kbbl)", "value": "KB" }, { "caption": "Thousand Kilolitres (kl)", "value": "KL" }, { "caption": "Thousand Metric Tons (kmt)", "value": "KT" }, { "caption": "Conversion factor barrels/ktons", "value": "BK" }];
 
-var JodiWorldOilDialog = _react2.default.createClass((0, _extends3.default)({
-  displayName: 'JodiWorldOilDialog'
-}, _WithToolbar2.default, _WithValidation2.default, {
-  getInitialState: function getInitialState() {
-    this.country = null;
-    this.product = null;
-    this.flow = null;
-    this.units = null;
+var JodiWorldOilDialog = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
+  (0, _inherits3.default)(JodiWorldOilDialog, _Component);
 
-    this.toolbarButtons = this._createType2WithToolbar();
-    return {
+  function JodiWorldOilDialog(props) {
+    (0, _classCallCheck3.default)(this, JodiWorldOilDialog);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (JodiWorldOilDialog.__proto__ || Object.getPrototypeOf(JodiWorldOilDialog)).call(this));
+
+    _this._handleSelectCountry = function (country) {
+      _this.country = country;
+    };
+
+    _this._handleSelectUnits = function (units) {
+      _this.units = units;
+    };
+
+    _this._handleLoad = function () {
+      _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
+    };
+
+    _this._createValidationMessages = function () {
+      var msgOnNotSelected = _this.props.msgOnNotSelected;
+
+      var msg = [];
+
+      if (!_this.country) {
+        msg.push(msgOnNotSelected('Country'));
+      }
+
+      var _this$productFlow$get = _this.productFlow.getValidation(),
+          isValid1 = _this$productFlow$get.isValid,
+          msg1 = _this$productFlow$get.msg;
+
+      if (!isValid1) {
+        msg = msg.concat(msg1);
+      }
+
+      if (!_this.units) {
+        _this.units = unitOptions[0];
+      }
+
+      var _this$datesFragment$g = _this.datesFragment.getValidation(),
+          isValid = _this$datesFragment$g.isValid,
+          datesMsg = _this$datesFragment$g.datesMsg;
+
+      if (!isValid) {
+        msg = msg.concat(datesMsg);
+      }
+
+      msg.isValid = msg.length === 0 ? true : false;
+      return msg;
+    };
+
+    _this._createLoadOption = function () {
+      var _this$productFlow$get2 = _this.productFlow.getValues(),
+          product = _this$productFlow$get2.parent,
+          flow = _this$productFlow$get2.child,
+          _this$datesFragment$g2 = _this.datesFragment.getValues(),
+          fromDate = _this$datesFragment$g2.fromDate,
+          toDate = _this$datesFragment$g2.toDate,
+          _this$props = _this.props,
+          fnValue = _this$props.fnValue,
+          dataColumn = _this$props.dataColumn,
+          loadId = _this$props.loadId,
+          dataSource = _this$props.dataSource;
+
+      return {
+        value: fnValue(_this.country.value, product.value, flow.value, _this.units.value),
+        fromDate: fromDate,
+        toDate: toDate,
+        dataColumn: dataColumn,
+        loadId: loadId,
+        title: _this.country.caption + ':' + product.caption,
+        subtitle: flow.caption + ':' + _this.units.caption,
+        dataSource: dataSource
+      };
+    };
+
+    _this._handleClose = function () {
+      _this._handleWithValidationClose(_this._createValidationMessages);
+      _this.props.onClose();
+    };
+
+    _this.country = null;
+    _this.product = null;
+    _this.flow = null;
+    _this.units = null;
+
+    _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this.state = {
       isShowDate: true,
       validationMessages: []
     };
-  },
-  shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-    if (this.props !== nextProps) {
-      if (this.props.isShow === nextProps.isShow) {
-        return false;
-      }
-    }
-    return true;
-  },
-  _handlerSelectCountry: function _handlerSelectCountry(country) {
-    this.country = country;
-  },
-  _handlerSelectUnits: function _handlerSelectUnits(units) {
-    this.units = units;
-  },
-  _handlerLoad: function _handlerLoad() {
-    this._handlerWithValidationLoad(this._createValidationMessages(), this._createLoadOption);
-  },
-  _createValidationMessages: function _createValidationMessages() {
-    var msgOnNotSelected = this.props.msgOnNotSelected;
-
-    var msg = [];
-
-    if (!this.country) {
-      msg.push(msgOnNotSelected('Country'));
-    }
-
-    var _productFlow$getValid = this.productFlow.getValidation(),
-        isValid1 = _productFlow$getValid.isValid,
-        msg1 = _productFlow$getValid.msg;
-
-    if (!isValid1) {
-      msg = msg.concat(msg1);
-    }
-
-    if (!this.units) {
-      this.units = unitOptions[0];
-    }
-
-    var _datesFragment$getVal = this.datesFragment.getValidation(),
-        isValid = _datesFragment$getVal.isValid,
-        datesMsg = _datesFragment$getVal.datesMsg;
-
-    if (!isValid) {
-      msg = msg.concat(datesMsg);
-    }
-
-    msg.isValid = msg.length === 0 ? true : false;
-    return msg;
-  },
-  _createLoadOption: function _createLoadOption() {
-    var _productFlow$getValue = this.productFlow.getValues(),
-        product = _productFlow$getValue.parent,
-        flow = _productFlow$getValue.child,
-        _datesFragment$getVal2 = this.datesFragment.getValues(),
-        fromDate = _datesFragment$getVal2.fromDate,
-        toDate = _datesFragment$getVal2.toDate,
-        _props = this.props,
-        fnValue = _props.fnValue,
-        dataColumn = _props.dataColumn,
-        loadId = _props.loadId,
-        dataSource = _props.dataSource;
-
-    return {
-      value: fnValue(this.country.value, product.value, flow.value, this.units.value),
-      fromDate: fromDate,
-      toDate: toDate,
-      dataColumn: dataColumn,
-      loadId: loadId,
-      title: this.country.caption + ':' + product.caption,
-      subtitle: flow.caption + ':' + this.units.caption,
-      dataSource: dataSource
-    };
-  },
-  _handlerClose: function _handlerClose() {
-    this._handlerWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
-  },
-  render: function render() {
-    var _this = this;
-
-    var _props2 = this.props,
-        caption = _props2.caption,
-        isShow = _props2.isShow,
-        onShow = _props2.onShow,
-        oneCaption = _props2.oneCaption,
-        oneURI = _props2.oneURI,
-        oneJsonProp = _props2.oneJsonProp,
-        parentCaption = _props2.parentCaption,
-        parentChildURI = _props2.parentChildURI,
-        parentJsonProp = _props2.parentJsonProp,
-        childCaption = _props2.childCaption,
-        msgOnNotSelected = _props2.msgOnNotSelected,
-        initFromDate = _props2.initFromDate,
-        initToDate = _props2.initToDate,
-        msgOnNotValidFormat = _props2.msgOnNotValidFormat,
-        onTestDate = _props2.onTestDate,
-        _state = this.state,
-        isShowDate = _state.isShowDate,
-        validationMessages = _state.validationMessages,
-        _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-      key: 'a',
-      type: 'TypeC',
-      caption: 'Load',
-      onClick: this._handlerLoad
-    })];
-
-
-    return _react2.default.createElement(
-      _DraggableDialog2.default,
-      {
-        caption: caption,
-        isShow: isShow,
-        commandButtons: _commandButtons,
-        onShowChart: onShow,
-        onClose: this._handlerClose
-      },
-      _react2.default.createElement(_ToolbarButtonCircle2.default, {
-        buttons: this.toolbarButtons
-      }),
-      _react2.default.createElement(_SelectWithLoad2.default, {
-        isShow: isShow,
-        uri: oneURI,
-        jsonProp: oneJsonProp,
-        caption: oneCaption,
-        optionNames: 'Items',
-        onSelect: this._handlerSelectCountry
-      }),
-      _react2.default.createElement(_SelectParentChild2.default, {
-        ref: function ref(c) {
-          return _this.productFlow = c;
-        },
-        isShow: isShow,
-        uri: parentChildURI,
-        parentCaption: parentCaption,
-        parentOptionNames: 'Items',
-        parentJsonProp: parentJsonProp,
-        childCaption: childCaption,
-        msgOnNotSelected: msgOnNotSelected
-      }),
-      _react2.default.createElement(_RowInputSelect2.default, {
-        caption: 'Units',
-        options: unitOptions,
-        onSelect: this._handlerSelectUnits
-      }),
-      _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: isShowDate },
-        _react2.default.createElement(_DatesFragment2.default, {
-          ref: function ref(c) {
-            return _this.datesFragment = c;
-          },
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          msgOnNotValidFormat: msgOnNotValidFormat,
-          onTestDate: onTestDate
-        })
-      ),
-      _react2.default.createElement(_ValidationMessages2.default, {
-        validationMessages: validationMessages
-      })
-    );
+    return _this;
   }
-}));
+
+  (0, _createClass3.default)(JodiWorldOilDialog, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props !== nextProps) {
+        if (this.props.isShow === nextProps.isShow) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          caption = _props.caption,
+          isShow = _props.isShow,
+          onShow = _props.onShow,
+          oneCaption = _props.oneCaption,
+          oneURI = _props.oneURI,
+          oneJsonProp = _props.oneJsonProp,
+          parentCaption = _props.parentCaption,
+          parentChildURI = _props.parentChildURI,
+          parentJsonProp = _props.parentJsonProp,
+          childCaption = _props.childCaption,
+          msgOnNotSelected = _props.msgOnNotSelected,
+          initFromDate = _props.initFromDate,
+          initToDate = _props.initToDate,
+          msgOnNotValidFormat = _props.msgOnNotValidFormat,
+          onTestDate = _props.onTestDate,
+          _state = this.state,
+          isShowDate = _state.isShowDate,
+          validationMessages = _state.validationMessages,
+          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
+        key: 'a',
+        type: 'TypeC',
+        caption: 'Load',
+        onClick: this._handleLoad
+      })];
+
+
+      return _react2.default.createElement(
+        _DraggableDialog2.default,
+        {
+          caption: caption,
+          isShow: isShow,
+          commandButtons: _commandButtons,
+          onShowChart: onShow,
+          onClose: this._handleClose
+        },
+        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+          buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_SelectWithLoad2.default, {
+          isShow: isShow,
+          uri: oneURI,
+          jsonProp: oneJsonProp,
+          caption: oneCaption,
+          optionNames: 'Items',
+          onSelect: this._handleSelectCountry
+        }),
+        _react2.default.createElement(_SelectParentChild2.default, {
+          ref: function ref(c) {
+            return _this2.productFlow = c;
+          },
+          isShow: isShow,
+          uri: parentChildURI,
+          parentCaption: parentCaption,
+          parentOptionNames: 'Items',
+          parentJsonProp: parentJsonProp,
+          childCaption: childCaption,
+          msgOnNotSelected: msgOnNotSelected
+        }),
+        _react2.default.createElement(_RowInputSelect2.default, {
+          caption: 'Units',
+          options: unitOptions,
+          onSelect: this._handleSelectUnits
+        }),
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isShowDate },
+          _react2.default.createElement(_DatesFragment2.default, {
+            ref: function ref(c) {
+              return _this2.datesFragment = c;
+            },
+            initFromDate: initFromDate,
+            initToDate: initToDate,
+            msgOnNotValidFormat: msgOnNotValidFormat,
+            onTestDate: onTestDate
+          })
+        ),
+        _react2.default.createElement(_ValidationMessages2.default, {
+          validationMessages: validationMessages
+        })
+      );
+    }
+  }]);
+  return JodiWorldOilDialog;
+}(_react.Component)) || _class) || _class;
 
 exports.default = JodiWorldOilDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\JodiWorldOilDialog.js.map

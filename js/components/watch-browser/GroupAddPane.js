@@ -4,6 +4,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -20,107 +36,125 @@ var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
+var _Pane = require('./Pane.Style');
+
+var _Pane2 = _interopRequireDefault(_Pane);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Styles = {
-  COMMAND_DIV: {
-    cursor: 'default',
-    float: 'right',
-    marginTop: '8px',
-    marginBottom: '10px',
-    marginRight: '4px'
-  }
-};
+var GroupAddPane = function (_Component) {
+  (0, _inherits3.default)(GroupAddPane, _Component);
 
-var GroupAddPane = _react2.default.createClass({
-  displayName: 'GroupAddPane',
-  propTypes: {
-    store: _react2.default.PropTypes.object,
-    actionCompleted: _react2.default.PropTypes.string,
-    actionFailed: _react2.default.PropTypes.string,
-    forActionType: _react2.default.PropTypes.string,
-    msgOnIsEmptyName: _react2.default.PropTypes.func,
-    onCreate: _react2.default.PropTypes.func,
-    onClose: _react2.default.PropTypes.func
-  },
-  getInitialState: function getInitialState() {
-    return {
+  function GroupAddPane(props) {
+    (0, _classCallCheck3.default)(this, GroupAddPane);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (GroupAddPane.__proto__ || Object.getPrototypeOf(GroupAddPane)).call(this));
+
+    _this._onStore = function (actionType, data) {
+      var _this$props = _this.props,
+          actionCompleted = _this$props.actionCompleted,
+          actionFailed = _this$props.actionFailed,
+          forActionType = _this$props.forActionType;
+
+      if (actionType === actionCompleted && data.forActionType === forActionType) {
+        _this._handleClear();
+      } else if (actionType === actionFailed && data.forActionType === forActionType) {
+        _this.setState({ validationMessages: data.messages });
+      }
+    };
+
+    _this._handleClear = function () {
+      _this.inputText.setValue('');
+      if (_this.state.validationMessages.length > 0) {
+        _this.setState({ validationMessages: [] });
+      }
+    };
+
+    _this._handleCreate = function () {
+      var _this$props2 = _this.props,
+          onCreate = _this$props2.onCreate,
+          msgOnIsEmptyName = _this$props2.msgOnIsEmptyName,
+          caption = _this.inputText.getValue();
+
+      if (caption) {
+        onCreate({ caption: caption });
+      } else {
+        _this.inputText.setValue('');
+        _this.setState({ validationMessages: [msgOnIsEmptyName('Group')] });
+      }
+    };
+
+    _this.state = {
       validationMessages: []
     };
-  },
-  componentDidMount: function componentDidMount() {
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    this.unsubscribe();
-  },
-  _onStore: function _onStore(actionType, data) {
-    var _props = this.props,
-        actionCompleted = _props.actionCompleted,
-        actionFailed = _props.actionFailed,
-        forActionType = _props.forActionType;
-
-    if (actionType === actionCompleted && data.forActionType === forActionType) {
-      this._handlerClear();
-    } else if (actionType === actionFailed && data.forActionType === forActionType) {
-      this.setState({ validationMessages: data.messages });
-    }
-  },
-  _handlerClear: function _handlerClear() {
-    this.inputText.setValue('');
-    if (this.state.validationMessages.length > 0) {
-      this.setState({ validationMessages: [] });
-    }
-  },
-  _handlerCreate: function _handlerCreate() {
-    var caption = this.inputText.getValue();
-    if (caption) {
-      this.props.onCreate({ caption: caption });
-    } else {
-      this.inputText.setValue('');
-      this.setState({ validationMessages: [this.props.msgOnIsEmptyName('Group')] });
-    }
-  },
-  render: function render() {
-    var _this = this;
-
-    var onClose = this.props.onClose,
-        validationMessages = this.state.validationMessages;
-
-    return _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_RowInputText2.default, {
-        ref: function ref(c) {
-          return _this.inputText = c;
-        },
-        caption: 'Group:'
-      }),
-      _react2.default.createElement(_ValidationMessages2.default, {
-        validationMessages: validationMessages
-      }),
-      _react2.default.createElement(
-        'div',
-        { style: Styles.COMMAND_DIV },
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
-          caption: 'Create',
-          onClick: this._handlerCreate
-        }),
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
-          caption: 'Clear',
-          onClick: this._handlerClear
-        }),
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
-          caption: 'Close',
-          onClick: onClose
-        })
-      )
-    );
+    return _this;
   }
-});
 
+  (0, _createClass3.default)(GroupAddPane, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.unsubscribe = this.props.store.listen(this._onStore);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unsubscribe();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var onClose = this.props.onClose,
+          validationMessages = this.state.validationMessages;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_RowInputText2.default, {
+          ref: function ref(c) {
+            return _this2.inputText = c;
+          },
+          caption: 'Group:'
+        }),
+        _react2.default.createElement(_ValidationMessages2.default, {
+          validationMessages: validationMessages
+        }),
+        _react2.default.createElement(
+          'div',
+          { style: _Pane2.default.COMMAND_DIV },
+          _react2.default.createElement(_ActionButton2.default, {
+            type: 'TypeC',
+            caption: 'Create',
+            onClick: this._handleCreate
+          }),
+          _react2.default.createElement(_ActionButton2.default, {
+            type: 'TypeC',
+            caption: 'Clear',
+            onClick: this._handleClear
+          }),
+          _react2.default.createElement(_ActionButton2.default, {
+            type: 'TypeC',
+            caption: 'Close',
+            onClick: onClose
+          })
+        )
+      );
+    }
+  }]);
+  return GroupAddPane;
+}(_react.Component);
+
+process.env.NODE_ENV !== "production" ? GroupAddPane.propTypes = {
+  store: _react.PropTypes.shape({
+    listen: _react.PropTypes.func
+  }),
+  actionCompleted: _react.PropTypes.string,
+  actionFailed: _react.PropTypes.string,
+  forActionType: _react.PropTypes.string,
+  msgOnIsEmptyName: _react.PropTypes.func,
+  onCreate: _react.PropTypes.func,
+  onClose: _react.PropTypes.func
+} : void 0;
 exports.default = GroupAddPane;
-//# sourceMappingURL=GroupAddPane.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\GroupAddPane.js.map

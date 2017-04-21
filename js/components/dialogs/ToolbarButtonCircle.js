@@ -44,8 +44,6 @@ var STYLE = {
   }
 };
 
-//const ToolbarButtonCircle = React.createClass({
-
 var ToolbarButtonCircle = function (_Component) {
   (0, _inherits3.default)(ToolbarButtonCircle, _Component);
 
@@ -99,7 +97,6 @@ var ToolbarButtonCircle = function (_Component) {
   }]);
   return ToolbarButtonCircle;
 }(_react.Component);
-//});
 
 exports.default = ToolbarButtonCircle;
-//# sourceMappingURL=ToolbarButtonCircle.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\ToolbarButtonCircle.js.map

@@ -78,7 +78,6 @@ var styles = {
   }
 };
 
-//const AreaChartItem = React.createClass({
 var AreaChartItem = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(AreaChartItem, _Component);
 
@@ -449,9 +448,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     _this3.mainChart.reflow();
   };
 }, _temp);
-
-//});
-
 process.env.NODE_ENV !== "production" ? AreaChartItem.propTypes = {
   caption: _react.PropTypes.string,
   chartType: _react.PropTypes.string,

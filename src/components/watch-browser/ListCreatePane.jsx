@@ -1,93 +1,94 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import RowInputSelect from './RowInputSelect';
 import RowInputText from './RowInputText';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ActionButton from '../zhn/ActionButton';
 
-const Styles = {
-  COMMAND_DIV : {
-     cursor: 'default',
-     float: 'right',
-     marginTop: '8px',
-     marginBottom: '10px',
-     marginRight: '4px'
+import STYLE from './Pane.Style';
+
+class ListCreatePane extends Component {
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchGroups: PropTypes.func
+    }),
+    actionCompleted: PropTypes.string,
+    actionFailed: PropTypes.string,
+    forActionType: PropTypes.string,
+    msgOnNotSelect: PropTypes.func,
+    msgOnIsEmptyName: PropTypes.func,
+    onCreate: PropTypes.func,
+    onClose: PropTypes.func
   }
-}
 
-const ListCreatePane = React.createClass({
-  displayName : 'ListCreatePane',
-  propTypes : {
-    store : React.PropTypes.object,
-    actionCompleted : React.PropTypes.string,
-    actionFailed : React.PropTypes.string,
-    forActionType : React.PropTypes.string,
-    msgOnNotSelect : React.PropTypes.func,
-    msgOnIsEmptyName : React.PropTypes.func,
-    onCreate : React.PropTypes.func,
-    onClose : React.PropTypes.func
-  },
+  constructor(props){
+    super()
+    this.captionGroup = null
 
-  getInitialState(){
-    const {store} = this.props;
-    this.captionGroup = null;
-    return {
-      groupOptions : store.getWatchGroups(),
+    this.state = {
+      groupOptions : props.store.getWatchGroups(),
       isUpdateGroup : false,
       validationMessages : []
     }
-  },
+  }
 
   componentDidMount(){
     this.unsubscribe = this.props.store.listen(this._onStore)
-  },
+  }
   componentWillUnmount(){
     this.unsubscribe()
-  },
-  _onStore(actionType, data){
-    const {actionCompleted, actionFailed, forActionType, store} = this.props;
+  }
+  _onStore = (actionType, data) => {
+    const { actionCompleted, actionFailed, forActionType, store } = this.props;
     if (actionType === actionCompleted){
         let isUpdateGroup = true;
         if (data.forActionType === forActionType){
-          this._handlerClear();
-          isUpdateGroup = false;
+          this._handleClear()
+          isUpdateGroup = false
         }
-        this.setState({groupOptions : store.getWatchGroups(), isUpdateGroup});
+        this.setState({
+           groupOptions: store.getWatchGroups(),
+           isUpdateGroup
+        });
     } else if (actionType === actionFailed && data.forActionType === forActionType){
-      this.setState({validationMessages: data.messages, isUpdateGroup:false})
+      this.setState({
+        validationMessages: data.messages,
+        isUpdateGroup:false
+      })
     }
-  },
+  }
 
-  _handlerSelectGroup(item){
+  _handleSelectGroup = (item) => {
     if (item && item.caption){
-      this.captionGroup = item.caption;
+      this.captionGroup = item.caption
     } else {
-      this.captionGroup = null;
+      this.captionGroup = null
     }
-  },
+  }
 
-  _handlerClear(){
-     this.inputText.setValue('');
+  _handleClear = () => {
+     this.inputText.setValue('')
      if (this.state.validationMessages.length>0){
-       this.setState({validationMessages: [], isUpdateGroup:false});
+       this.setState({ validationMessages: [], isUpdateGroup:false })
      }
-  },
+  }
 
-  _handlerCreate(){
-     const captionList = this.inputText.getValue();
+  _handleCreate = () => {
+     const { onCreate, msgOnNotSelect, msgOnIsEmptyName } = this.props
+         , captionList = this.inputText.getValue();
      if (this.captionGroup && captionList){
-       this.props.onCreate({
+       onCreate({
           captionGroup : this.captionGroup,
           captionList : captionList
        });
      } else {
-       const {msgOnNotSelect, msgOnIsEmptyName} = this.props
-           , msg = [];
+       const msg = [];
        if (!this.captionGroup) { msg.push(msgOnNotSelect('In Group')); }
        if (!captionList)       { msg.push(msgOnIsEmptyName('List')); }
-       this.setState({validationMessages:msg, isUpdateGroup:false});
+       this.setState({ validationMessages:msg, isUpdateGroup:false });
      }
-  },
+  }
 
   render(){
     const { onClose } = this.props
@@ -98,7 +99,7 @@ const ListCreatePane = React.createClass({
            caption={'In Group:'}
            options={groupOptions}
            //isUpdateOptions={isUpdateGroup}
-           onSelect={this._handlerSelectGroup}
+           onSelect={this._handleSelectGroup}
         />
         <RowInputText
            ref={c => this.inputText = c}
@@ -107,16 +108,16 @@ const ListCreatePane = React.createClass({
         <ValidationMessages
           validationMessages={validationMessages}
         />
-        <div style={Styles.COMMAND_DIV}>
+        <div style={STYLE.COMMAND_DIV}>
          <ActionButton
             type="TypeC"
             caption="Create"
-            onClick={this._handlerCreate}
+            onClick={this._handleCreate}
          />
          <ActionButton
             type="TypeC"
             caption="Clear"
-            onClick={this._handlerClear}
+            onClick={this._handleClear}
          />
          <ActionButton
             type="TypeC"
@@ -127,7 +128,6 @@ const ListCreatePane = React.createClass({
       </div>
     )
   }
-
-});
+}
 
 export default ListCreatePane

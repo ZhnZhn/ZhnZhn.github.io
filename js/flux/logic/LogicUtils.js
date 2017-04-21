@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var _Type = require('../../constants/Type');
 
 var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
-  return option.loadId === _Type.LoadType.QCT && !option.isLoadMeta ? option.seriaType === _Type.ChartType.AREA ? option.value + '_' + _Type.ChartType.AREA + '_' + option.dataColumn : option.value + '_' + option.seriaType : option.value;
+  return option.loadId === _Type.LoadType.QCT && !option.isLoadMeta ? option.seriaType === _Type.ChartType.AREA ? option.value + '_' + _Type.ChartType.AREA + '_' + option.dataColumn : option.value + '_' + option.seriaType : option.viewKey ? option.viewKey : option.value;
 };
 
 var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
@@ -44,4 +44,4 @@ var LogicUtils = {
 };
 
 exports.default = LogicUtils;
-//# sourceMappingURL=LogicUtils.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LogicUtils.js.map

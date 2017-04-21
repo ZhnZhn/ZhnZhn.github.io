@@ -15,11 +15,10 @@
   "DialogEurostat2",
   "DialogEurostat3",
   "UNCommodityTradeDialog",
-  "BigMacDialog",
   "Futures3Dialog",
   "FuturesWikiDialog",
   "JodiWorldOilDialog",
   "ChartConfigDialog"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,eAAe;AACnBC,+BADmB;;AAGnBC,mCAHmB;AAInBC,mCAJmB;AAKnBC,sCALmB;AAMnBC,mCANmB;AAOnBC,0CAPmB;AAQnBC,2CARmB;AASnBC,2CATmB;AAUnBC,0DAVmB;AAWnBC,sCAXmB;AAYnBC,0CAZmB;AAanBC,gDAbmB;AAcnBC,kDAdmB;;AAgBnBC;AAhBmB,CAArB;;kBAmBed,Y"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,eAAe;AACnBC,+BADmB;;AAGnBC,mCAHmB;AAInBC,mCAJmB;AAKnBC,sCALmB;AAMnBC,mCANmB;AAOnBC,0CAPmB;AAQnBC,2CARmB;AASnBC,2CATmB;AAUnBC,0DAVmB;AAWnBC,0CAXmB;AAYnBC,gDAZmB;AAanBC,kDAbmB;;AAenBC;AAfmB,CAArB;;kBAkBeb,Y"
 }

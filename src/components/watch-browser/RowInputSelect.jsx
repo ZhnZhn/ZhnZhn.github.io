@@ -1,40 +1,34 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import InputSelect from '../zhn/InputSelect';
-import DialogStyles from '../styles/DialogStyles'
+import STYLE from '../styles/DialogStyles';
 
-const styles = DialogStyles;
-const Styles = {
+const S = {
   CAPTION : {
     width: '120px'
   }
+};
+
+const RowInputSelect = ({ caption, options, isUpdateOptions, onSelect }) => (
+  <div style={STYLE.rowDiv}>
+     <span style={{...STYLE.labelSpan, ...S.CAPTION}}>
+       {caption}
+     </span>
+     <InputSelect
+        width="250"
+        options={options}
+        isUpdateOptions={isUpdateOptions}
+        onSelect={onSelect}
+
+     />
+  </div>
+);
+
+RowInputSelect.propTypes = {
+  caption : PropTypes.string,
+  options : PropTypes.array,
+  isUpdateOptions : PropTypes.bool,
+  onSelect : PropTypes.func
 }
-
-const RowInputSelect = React.createClass({
-  displayName : 'RowInputSelect',
-  propTypes : {
-    caption : React.PropTypes.string,
-    options : React.PropTypes.array,
-    isUpdateOptions : React.PropTypes.bool,
-    onSelect : React.PropTypes.func
-  },
-  render(){
-    const {caption, options, isUpdateOptions, onSelect} = this.props;
-    return (
-      <div style={Object.assign({}, styles.rowDiv)}>
-         <span style={Object.assign({}, styles.labelSpan, Styles.CAPTION)}>
-           {caption}
-         </span>
-         <InputSelect
-            width="250"
-            options={options}
-            isUpdateOptions={isUpdateOptions}
-            onSelect={onSelect}
-
-         />
-      </div>
-    );
-  }
-});
 
 export default RowInputSelect

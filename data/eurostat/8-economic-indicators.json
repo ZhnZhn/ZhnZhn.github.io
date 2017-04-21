@@ -8,10 +8,10 @@
       "mapSlice" : { "s_adj" : "SA", "indic" : "LM-UN-T-TOT" }
     },{
       "caption" : "HCPI, 2015=100%",
-      "value" : "teicp000?unit=I2015",
+      "value" : "ei_cphi_m?indic=CP-HI00",
       "mapFrequency" : "M",
-      "mapValue" : "teicp000?precision=1&unit=I15",
-      "mapSlice" : { "unit" : "I15" }
+      "mapValue" : "ei_cphi_m?precision=1&indic=CP-HI00",
+      "mapSlice" : { "s_adj": "NSA", "unit": "HICP2015", "indic" : "CP-HI00" }
     },{
       "caption" : "Industrial production excluding construction, 2010=100, % change",
       "value" : "teiis080?nace_r2=B-D&unit=I2010_SCA",

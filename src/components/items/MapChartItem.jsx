@@ -83,17 +83,13 @@ const styles = {
   }
 }
 
-
-
-
-//const MapChartItem = React.createClass({
 class MapChartItem extends Component {
   static propTypes = {
     caption: PropTypes.string,
     config: PropTypes.shape({
       json: PropTypes.object,
       zhMapSlice: PropTypes.object,
-      zhDialog: PropTypes.shape({        
+      zhDialog: PropTypes.shape({
         subtitle: PropTypes.string,
         time: PropTypes.string
       })
@@ -110,16 +106,6 @@ class MapChartItem extends Component {
       isShowInfo : false
     }
   }
-  /*
-  getInitialState(){
-    this.map = undefined;
-    return {
-      isLoading: true,
-      isOpen : true,
-      isShowInfo : false
-    }
-  },
-  */
 
   componentDidMount(){
     const { caption, config } = this.props
@@ -205,6 +191,5 @@ class MapChartItem extends Component {
     )
   }
 }
-//});
 
 export default MapChartItem

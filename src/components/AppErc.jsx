@@ -14,6 +14,7 @@ import ConsentCookiePopup from './zhn/ConsentCookiePopup';
 
 import ComponentActions, { ComponentActionTypes } from '../flux/actions/ComponentActions';
 import { BrowserActionTypes } from '../flux/actions/BrowserActions';
+import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
 
@@ -39,7 +40,10 @@ class AppErc extends Component {
               showOptionDialogAction={ComponentActionTypes.SHOW_OPTION_DIALOG}
            />
            <About store={ChartStore} isShow={true} />
-           <ComponentHrzContainer />
+           <ComponentHrzContainer
+              store={ChartStore}
+              addAction={ChartActionTypes.INIT_AND_SHOW_CHART}
+           />
        </div>
        <DialogContainer store={ChartStore} />
        <ConsentCookiePopup

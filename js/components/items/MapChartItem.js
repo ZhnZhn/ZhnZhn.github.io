@@ -125,8 +125,6 @@ var styles = {
   }
 };
 
-//const MapChartItem = React.createClass({
-
 var MapChartItem = function (_Component) {
   (0, _inherits3.default)(MapChartItem, _Component);
 
@@ -167,16 +165,6 @@ var MapChartItem = function (_Component) {
     };
     return _this;
   }
-  /*
-  getInitialState(){
-    this.map = undefined;
-    return {
-      isLoading: true,
-      isOpen : true,
-      isShowInfo : false
-    }
-  },
-  */
 
   (0, _createClass3.default)(MapChartItem, [{
     key: 'componentDidMount',
@@ -266,7 +254,6 @@ var MapChartItem = function (_Component) {
   }]);
   return MapChartItem;
 }(_react.Component);
-//});
 
 process.env.NODE_ENV !== "production" ? MapChartItem.propTypes = {
   caption: _react.PropTypes.string,

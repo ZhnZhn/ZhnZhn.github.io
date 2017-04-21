@@ -26,10 +26,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _type = require('../../flux/creaters/type3');
-
-var _type2 = _interopRequireDefault(_type);
-
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
 var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
@@ -110,7 +106,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate;
 
-      return (0, _type2.default)(_this.props, { stock: _this.stock, fromDate: fromDate, toDate: toDate });
+      return _this.props.loadFn(_this.props, { stock: _this.stock, fromDate: fromDate, toDate: toDate });
     };
 
     _this._handleClose = function () {
@@ -216,7 +212,8 @@ process.env.NODE_ENV !== "production" ? DialogType3.propTypes = {
   onShow: _react.PropTypes.func,
 
   descrUrl: _react.PropTypes.string,
-  onClickInfo: _react.PropTypes.func
+  onClickInfo: _react.PropTypes.func,
+  loadFn: _react.PropTypes.func
 } : void 0;
 exports.default = DialogType3;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType3.js.map

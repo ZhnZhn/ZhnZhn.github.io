@@ -54,7 +54,8 @@ const menuQuandl = [
   },{
     caption : 'Inflation & Prices',
     items : [
-      { id : Quandl.CPI_INFLATION },
+      { id : Quandl.OECD_CPI, isNew : true },
+      { id : Quandl.RATE_INFLATION },
       { id : Quandl.BLSI },
       { id : Quandl.GDT },
       { id : Quandl.BIG_MAC }

@@ -2,6 +2,7 @@
 import React from 'react';
 
 import RouterDialog from './RouterDialog';
+import RouterLoadFn from './RouterLoadFn';
 import RouterFnValue from './RouterFnValue';
 import RouterBrowser from './RouterBrowser';
 
@@ -15,6 +16,7 @@ import { ModalDialog, LoadType } from '../../constants/Type';
 
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
+import BrowserActions, { BrowserActionTypes } from '../actions/BrowserActions';
 import DateUtils from '../../utils/DateUtils';
 
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -56,8 +58,9 @@ const createDialogComp = function (conf, browserType){
       */
        , onClickInfo = (props.descrUrl)
             ? _showModalDialogDescription
-            : undefined;
-
+            : undefined
+       , loadFn = RouterLoadFn.getFn(props.loadFnType, conf.dialogType);
+       
        if (props.isContinious) {
          props.msgTestDateOrEmpty = Msg.TEST_DATE_OR_EMPTY;
          props.onTestDateOrEmpty = onTestDateOrEmpty;
@@ -82,6 +85,7 @@ const createDialogComp = function (conf, browserType){
                initFromDate : _initFromDate,
                initToDate, onTestDate,
                onClickInfo,
+               loadFn,
                ...props
   });
 }
@@ -140,7 +144,7 @@ const Factory = {
  createBrowserDynamic(option)
  {
     const {
-             browserType, caption='' , sourceMenuUrl,
+             browserType, caption='Source Browser' , sourceMenuUrl,
              chartContainerType,
              modalDialogType, itemOptionType, itemType, descrUrl
            } = option
@@ -154,7 +158,7 @@ const Factory = {
         , onClickInfo = (typeof ItemComp !== "undefined")
              ? _showModalDialogDescription
              : undefined
-        , onShowContainer = ChartActions.showChart.bind(null, chartContainerType, browserType)
+        , onShowContainer = ChartActions.showChart.bind(null, chartContainerType, browserType);
 
     return React.createElement(comp , {
       key : browserType,
@@ -169,7 +173,14 @@ const Factory = {
       ItemComp : ItemComp,
       descrUrl : descrUrl,
       onClickInfo : onClickInfo,
-      onShowContainer : onShowContainer
+      onShowContainer : onShowContainer,
+
+      showAction : BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
+      loadCompletedAction : BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
+      updateAction : BrowserActionTypes.UPDATE_BROWSER_MENU,  //for Type
+      onLoadMenu : BrowserActions.loadBrowserDynamic,
+      onShowLoadDialog : ComponentActions.showModalDialog  //for Type2
+
     });
   }
 }

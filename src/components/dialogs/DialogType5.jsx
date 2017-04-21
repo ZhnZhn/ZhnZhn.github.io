@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import createLoadOptions from '../../flux/creaters/type5';
-
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
@@ -63,14 +61,16 @@ class  DialogType5 extends Component {
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   }
+
   _createLoadOption = () => {
     const { parent:two, child:three } = this.parentChild.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues();    
-    return createLoadOptions(
+        , { fromDate, toDate } = this.datesFragment.getValues();
+    return this.props.loadFn(
       this.props,
       { one : this.one, two, three, fromDate, toDate }
     );
   }
+
   _handleClose = () => {
     this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
@@ -141,7 +141,5 @@ class  DialogType5 extends Component {
     );
   }
 }
-
-DialogType5.displayName = 'DialogType5';
 
 export default DialogType5

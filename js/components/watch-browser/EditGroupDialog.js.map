@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../../src/components/watch-browser/EditGroupDialog.jsx"],"names":["EditGroupDialog","createClass","displayName","propTypes","isShow","PropTypes","bool","store","object","onClose","func","shouldComponentUpdate","nextProps","nextState","props","render","EDIT_WATCH_COMPLETED","EDIT_WATCH_FAILED","ADD_GROUP","IS_EMPTY_NAME","addGroup","RENAME_GROUP","NOT_SELECTED","renameGroup","DELETE_GROUP","deleteGroup"],"mappings":";;;;;;AAAA;;;;AAEA;;;;AAGA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB,gBAAMC,WAAN,CAAkB;AACxCC,eAAc,iBAD0B;AAExCC,aAAY;AACVC,YAAS,gBAAMC,SAAN,CAAgBC,IADf;AAEVC,WAAQ,gBAAMF,SAAN,CAAgBG,MAFd;AAGVC,aAAU,gBAAMJ,SAAN,CAAgBK;AAHhB,GAF4B;;AAQxCC,uBARwC,iCAQlBC,SARkB,EAQPC,SARO,EAQG;AACzC,QAAID,cAAc,KAAKE,KAAnB,IAA4BF,UAAUR,MAAV,KAAqB,KAAKU,KAAL,CAAWV,MAAhE,EAAwE;AACtE,aAAO,KAAP;AACD;AACD,WAAO,IAAP;AACD,GAbuC;AAexCW,QAfwC,oBAehC;AAAA,iBAC2B,KAAKD,KADhC;AAAA,QACCV,MADD,UACCA,MADD;AAAA,QACSG,KADT,UACSA,KADT;AAAA,QACgBE,OADhB,UACgBA,OADhB;;AAEN,WACE;AAAA;AAAA;AACG,iBAAQ,mBADX;AAEG,gBAAQL,MAFX;AAGG,sBAAc,KAHjB;AAIG,iBAASK;AAJZ;AAME;AAAA;AAAA,UAAS,KAAI,GAAb,EAAiB,OAAM,OAAvB;AACG;AAAA;AAAA,YAAK,OAAM,QAAX;AACE;AACG,mBAAOF,KADV;AAEG,6BAAiB,+BAAiBS,oBAFrC;AAGG,0BAAc,+BAAiBC,iBAHlC;AAIG,2BAAe,+BAAiBC,SAJnC;AAKG,8BAAkB,cAAIC,aALzB;AAMG,sBAAU,uBAAaC,QAN1B;AAOG,qBAASX;AAPZ;AADF,SADH;AAYG;AAAA;AAAA,YAAK,OAAM,QAAX;AACE;AACG,mBAAOF,KADV;AAEG,6BAAiB,+BAAiBS,oBAFrC;AAGG,0BAAc,+BAAiBC,iBAHlC;AAIG,2BAAe,+BAAiBI,YAJnC;AAKG,4BAAgB,cAAIC,YALvB;AAMG,8BAAkB,cAAIH,aANzB;AAOG,sBAAU,uBAAaI,WAP1B;AAQG,qBAASd;AARZ;AADF,SAZH;AAwBG;AAAA;AAAA,YAAK,OAAM,QAAX;AACE;AACG,mBAAOF,KADV;AAEG,6BAAiB,+BAAiBS,oBAFrC;AAGG,2BAAe,+BAAiBQ,YAHnC;AAIG,4BAAgB,cAAIF,YAJvB;AAKG,sBAAU,uBAAaG,WAL1B;AAMG,qBAAShB;AANZ;AADF;AAxBH;AANF,KADF;AA4CD;AA7DuC,CAAlB,CAAxB;;kBAgEeT,e","file":"EditGroupDialog.js","sourcesContent":["import React from 'react';\r\n\r\nimport WatchActions from '../../flux/actions/WatchActions';\r\nimport {WatchActionTypes} from '../../flux/actions/WatchActions';\r\n\r\nimport Msg from '../../constants/Msg';\r\n\r\nimport ModalDialog from '../zhn/ModalDialog';\r\nimport TabPane from '../zhn/TabPane';\r\nimport Tab from '../zhn/Tab';\r\nimport GroupAddPane from './GroupAddPane';\r\nimport GroupEditPane from './GroupEditPane';\r\nimport GroupDeletePane from './GroupDeletePane';\r\n\r\nconst EditGroupDialog = React.createClass({\r\n  displayName : 'EditGroupDialog',\r\n  propTypes : {\r\n    isShow : React.PropTypes.bool,\r\n    store : React.PropTypes.object,\r\n    onClose : React.PropTypes.func\r\n  },\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {\r\n      return false;\r\n    }\r\n    return true;\r\n  },\r\n\r\n  render(){\r\n    const {isShow, store, onClose} = this.props;\r\n    return (\r\n      <ModalDialog\r\n         caption=\"Watch Groups Edit\"\r\n         isShow={isShow}\r\n         isWithButton={false}\r\n         onClose={onClose}\r\n      >\r\n        <TabPane key=\"1\" width=\"380px\" >\r\n           <Tab title=\"Create\">\r\n             <GroupAddPane\r\n                store={store}\r\n                actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}\r\n                actionFailed={WatchActionTypes.EDIT_WATCH_FAILED}\r\n                forActionType={WatchActionTypes.ADD_GROUP}\r\n                msgOnIsEmptyName={Msg.IS_EMPTY_NAME}\r\n                onCreate={WatchActions.addGroup}\r\n                onClose={onClose}\r\n              />\r\n           </Tab>\r\n           <Tab title=\"Rename\">\r\n             <GroupEditPane\r\n                store={store}\r\n                actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}\r\n                actionFailed={WatchActionTypes.EDIT_WATCH_FAILED}\r\n                forActionType={WatchActionTypes.RENAME_GROUP}\r\n                msgOnNotSelect={Msg.NOT_SELECTED}\r\n                msgOnIsEmptyName={Msg.IS_EMPTY_NAME}\r\n                onRename={WatchActions.renameGroup}\r\n                onClose={onClose}\r\n             />\r\n           </Tab>\r\n           <Tab title=\"Delete\">\r\n             <GroupDeletePane\r\n                store={store}\r\n                actionCompleted={WatchActionTypes.EDIT_WATCH_COMPLETED}\r\n                forActionType={WatchActionTypes.DELETE_GROUP}\r\n                msgOnNotSelect={Msg.NOT_SELECTED}\r\n                onDelete={WatchActions.deleteGroup}\r\n                onClose={onClose}\r\n             />\r\n           </Tab>\r\n        </TabPane>\r\n      </ModalDialog>\r\n    )\r\n  }\r\n});\r\n\r\nexport default EditGroupDialog\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\EditGroupDialog.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\EditGroupDialog.js",
+ "sourceRoot": "",
+ "names": [
+  "EditGroupDialog",
+  "nextProps",
+  "nextState",
+  "props",
+  "isShow",
+  "store",
+  "onClose",
+  "EDIT_WATCH_COMPLETED",
+  "EDIT_WATCH_FAILED",
+  "ADD_GROUP",
+  "IS_EMPTY_NAME",
+  "addGroup",
+  "RENAME_GROUP",
+  "NOT_SELECTED",
+  "renameGroup",
+  "DELETE_GROUP",
+  "deleteGroup",
+  "propTypes",
+  "bool",
+  "object",
+  "func"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AAEA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;IAEMA,e;;;;;;;;;;0CAOkBC,S,EAAWC,S,EAAU;AACzC,UAAID,cAAc,KAAKE,KAAnB,IAA4BF,UAAUG,MAAV,KAAqB,KAAKD,KAAL,CAAWC,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;6BAEO;AAAA,mBAC6B,KAAKD,KADlC;AAAA,UACEC,MADF,UACEA,MADF;AAAA,UACUC,KADV,UACUA,KADV;AAAA,UACiBC,OADjB,UACiBA,OADjB;;AAEN,aACE;AAAA;AAAA;AACG,mBAAQ,mBADX;AAEG,kBAAQF,MAFX;AAGG,wBAAc,KAHjB;AAIG,mBAASE;AAJZ;AAME;AAAA;AAAA,YAAS,OAAM,OAAf;AACG;AAAA;AAAA,cAAK,OAAM,QAAX;AACE;AACG,qBAAOD,KADV;AAEG,+BAAiB,+BAAiBE,oBAFrC;AAGG,4BAAc,+BAAiBC,iBAHlC;AAIG,6BAAe,+BAAiBC,SAJnC;AAKG,gCAAkB,cAAIC,aALzB;AAMG,wBAAU,uBAAaC,QAN1B;AAOG,uBAASL;AAPZ;AADF,WADH;AAYG;AAAA;AAAA,cAAK,OAAM,QAAX;AACE;AACG,qBAAOD,KADV;AAEG,+BAAiB,+BAAiBE,oBAFrC;AAGG,4BAAc,+BAAiBC,iBAHlC;AAIG,6BAAe,+BAAiBI,YAJnC;AAKG,8BAAgB,cAAIC,YALvB;AAMG,gCAAkB,cAAIH,aANzB;AAOG,wBAAU,uBAAaI,WAP1B;AAQG,uBAASR;AARZ;AADF,WAZH;AAwBG;AAAA;AAAA,cAAK,OAAM,QAAX;AACE;AACG,qBAAOD,KADV;AAEG,+BAAiB,+BAAiBE,oBAFrC;AAGG,6BAAe,+BAAiBQ,YAHnC;AAIG,8BAAgB,cAAIF,YAJvB;AAKG,wBAAU,uBAAaG,WAL1B;AAMG,uBAASV;AANZ;AADF;AAxBH;AANF,OADF;AA4CD;;;;;wCA5DGN,e,CACGiB,S,GAAY;AACjBb,UAAQ,iBAAUc,IADD;AAEjBb,SAAO,iBAAUc,MAFA;AAGjBb,WAAS,iBAAUc;AAHF,C;kBA8DNpB,e"
+}

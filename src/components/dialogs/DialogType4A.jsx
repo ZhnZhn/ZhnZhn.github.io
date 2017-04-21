@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import createLoadOptions from '../../flux/creaters/type4';
-
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectParentChild from './SelectParentChild';
@@ -54,15 +52,16 @@ class DialogType4A extends Component {
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   }
+  
   _createLoadOption = () => {
     const { parent:one, child:two } = this.parentChild.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues();
-
-    return createLoadOptions(
+    return this.props.loadFn(
        this.props,
        { one, two, fromDate, toDate }
      );
   }
+
   _handleClose = () => {
     this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
@@ -123,7 +122,5 @@ class DialogType4A extends Component {
     );
   }
 }
-
-DialogType4A.displayName = 'DialogType4A';
 
 export default DialogType4A

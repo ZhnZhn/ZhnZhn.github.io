@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../../src/components/dialogs/RowInputSelect.jsx"],"names":["styles","RowInputSelect","caption","rest","rowDiv","labelSpan"],"mappings":";;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,+BAAN;;AAEA,IAAMC,iBAAiB,SAAjBA,cAAiB;AAAA,2BAAGC,OAAH;AAAA,OAAGA,OAAH,gCAAW,EAAX;AAAA,OAAkBC,IAAlB;AAAA,UACpB;AAAA;AAAA,QAAK,OAAOH,OAAOI,MAAnB;AACG;AAAA;AAAA,WAAM,OAAOJ,OAAOK,SAApB;AACIH;AADJ,OADH;AAIG;AACG,gBAAM;AADT,SAEOC,IAFP;AAJH,IADoB;AAAA,CAAvB;;kBAaeF,c","file":"RowInputSelect.js","sourcesContent":["import React from 'react';\r\n\r\nimport InputSelect from '../zhn/InputSelect';\r\nimport DialogStyles from '../styles/DialogStyles';\r\n\r\nconst styles = DialogStyles;\r\n\r\nconst RowInputSelect = ({ caption='', ...rest }) => (\r\n   <div style={styles.rowDiv}>\r\n      <span style={styles.labelSpan}>\r\n         {caption}\r\n      </span>\r\n      <InputSelect\r\n         width=\"250\"\r\n         {...rest}\r\n      />\r\n  </div>\r\n);\r\n\r\n\r\nexport default RowInputSelect\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\RowInputSelect.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\RowInputSelect.js",
+ "sourceRoot": "",
+ "names": [
+  "RowInputSelect",
+  "caption",
+  "rest",
+  "rowDiv",
+  "labelSpan"
+ ],
+ "mappings": ";;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,iBAAiB,SAAjBA,cAAiB;AAAA,2BAAGC,OAAH;AAAA,OAAGA,OAAH,gCAAW,EAAX;AAAA,OAAkBC,IAAlB;AAAA,UACpB;AAAA;AAAA,QAAK,OAAO,uBAAMC,MAAlB;AACG;AAAA;AAAA,WAAM,OAAO,uBAAMC,SAAnB;AACIH;AADJ,OADH;AAIG;AACG,gBAAM;AADT,SAEOC,IAFP;AAJH,IADoB;AAAA,CAAvB;;kBAaeF,c"
+}

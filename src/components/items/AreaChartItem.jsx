@@ -34,7 +34,6 @@ const styles = {
   }
 }
 
-//const AreaChartItem = React.createClass({
 class AreaChartItem extends Component {
   static propTypes = {
     caption: PropTypes.string,
@@ -53,7 +52,7 @@ class AreaChartItem extends Component {
       PropTypes.func,
       PropTypes.bool
     ]),
-    crValueMoving: PropTypes.func    
+    crValueMoving: PropTypes.func
   }
 
   constructor(props){
@@ -371,7 +370,5 @@ class AreaChartItem extends Component {
     this.mainChart.reflow()
   }
 }
-
-//});
 
 export default AreaChartItem

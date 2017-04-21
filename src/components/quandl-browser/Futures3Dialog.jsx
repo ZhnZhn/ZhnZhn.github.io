@@ -1,15 +1,14 @@
-import React from 'react';
-
-import createLoadOptions from '../../flux/creaters/futures3'
+import React, { Component } from 'react';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import WithValidation from '../dialogs/WithValidation';
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectParentChild from '../dialogs/SelectParentChild';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import RowDate from '../dialogs/RowDate';
 import ActionButton from '../zhn/ActionButton';
 import ValidationMessages from '../zhn/ValidationMessages';
+
+import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
 const yearOptions = [
   { caption: '2017', value: 2017 },
@@ -20,18 +19,19 @@ const yearOptions = [
   { caption: '2012', value: 2012 }
 ]
 
-const Futures3Dialog = React.createClass({
-  ...WithValidation,
+@withValidationLoad
+class Futures3Dialog extends Component {
 
-  getInitialState(){
-    this.year = undefined;
+  constructor(props){
+    super()
+    this.year = undefined
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handlerClickInfo }
-    ];
-    return {
+      { caption: 'I', onClick: this._handleClickInfo }
+    ]
+    this.state = {
       validationMessages : []
     }
-  },
+  }
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -40,24 +40,25 @@ const Futures3Dialog = React.createClass({
        }
     }
     return true;
-  },
+  }
 
-  _handlerClickInfo(){
-    const {descrUrl, onClickInfo} = this.props;
-    onClickInfo({ descrUrl });
-  },
+  _handleClickInfo = () => {
+    const { descrUrl, onClickInfo } = this.props;
+    onClickInfo({ descrUrl })
+  }
 
-  _handlerSelectYear(year){
-    this.year = year;
-  },
+  _handleSelectYear = (year) => {
+    this.year = year
+  }
 
-  _handlerLoad(){
-    this._handlerWithValidationLoad(
+  _handleLoad = () => {
+    this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
-    );
-  },
-  _createValidationMessages(){
+    )
+  }
+
+  _createValidationMessages = () => {
     const { msgOnNotSelected, msgOnNotValidFormat, isContinious } = this.props
     let   msg = [];
 
@@ -72,46 +73,26 @@ const Futures3Dialog = React.createClass({
 
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
-  },
-  _createLoadOption(){
+  }
+
+  _createLoadOption = () => {
     const { parent:item, child:month } = this.itemMonth.getValues()
         , { isContinious } = this.props
         , fromDate = (isContinious)
               ? this.fromDate.getValue()
               : undefined ;
-        /*
-        , { fnValue, columnName, dataColumn, seriaColumnNames, loadId, isContinious } = this.props
-        , _subtitle = (columnName)
-              ? `${month.caption}:${this.year.caption}:${columnName}`
-              : `${month.caption}:${this.year.caption}`
-        , _fromDate = (isContinious)
-              ? this.fromDate.getValue()
-              : undefined  ;
-        */
-
-    return createLoadOptions(
+    return this.props.loadFn(
       this.props,
       { item, month, year : this.year, fromDate }
-    )
-    /*
-    return {
-       value : fnValue(item.value, month.value, this.year.value ),
-       title : item.caption,
-       subtitle : _subtitle,
-       columnName : columnName,
-       dataColumn : dataColumn,
-       loadId : loadId,
-       fromDate : _fromDate,
-       seriaColumnNames : seriaColumnNames
-    };*/
-  },
+    );
+  }
 
-  _handlerClose(){
-    this._handlerWithValidationClose(this._createValidationMessages);
+  _handleClose = () => {
+    this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
-  },
+  }
 
-  _renderFromDate(initFromDate, onTestDate, msgTestDate){
+  _renderFromDate = (initFromDate, onTestDate, msgTestDate) => {
     return (
        <RowDate
           ref={ c => this.fromDate = c}
@@ -121,7 +102,7 @@ const Futures3Dialog = React.createClass({
           onTestDate={onTestDate}
        />
     );
-  },
+  }
 
   render(){
     const {
@@ -135,7 +116,7 @@ const Futures3Dialog = React.createClass({
                 key="a"
                 type="TypeC"
                 caption="Load"
-                onClick={this._handlerLoad}
+                onClick={this._handleLoad}
              />
          ];
 
@@ -145,7 +126,7 @@ const Futures3Dialog = React.createClass({
          isShow={isShow}
          commandButtons={_commandButtons}
          onShowChart={onShow}
-         onClose={this._handlerClose}
+         onClose={this._handleClose}
        >
            <ToolbarButtonCircle
               buttons={this.toolbarButtons}
@@ -164,16 +145,15 @@ const Futures3Dialog = React.createClass({
            <RowInputSelect
               caption="Year"
               options={yearOptions}
-              onSelect={this._handlerSelectYear}
+              onSelect={this._handleSelectYear}
            />
            {isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty)}
            <ValidationMessages
               validationMessages={validationMessages}
            />
-
       </DraggableDialog>
     );
   }
-});
+}
 
-export default Futures3Dialog;
+export default Futures3Dialog

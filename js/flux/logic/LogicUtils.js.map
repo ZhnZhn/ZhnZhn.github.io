@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/flux/logic/LogicUtils.js"],"names":["_fnCreateQuandlKey","option","loadId","QCT","isLoadMeta","seriaType","AREA","value","dataColumn","_fnCreateEuroStatKey","geo","group","metric","time","_metric","replace","LogicUtils","createKeyForConfig","Q","EU_STAT","WL","id"],"mappings":";;;;;;AACA;;AAEA,IAAMA,qBAAqB,SAArBA,kBAAqB,CAASC,MAAT,EAAgB;AACzC,SAAQA,OAAOC,MAAP,KAAkB,eAASC,GAA3B,IAAkC,CAACF,OAAOG,UAA3C,GACIH,OAAOI,SAAP,KAAqB,gBAAUC,IAAhC,GACSL,OAAOM,KADhB,SACyB,gBAAUD,IADnC,SAC2CL,OAAOO,UADlD,GAESP,OAAOM,KAFhB,SAEyBN,OAAOI,SAHnC,GAIGJ,OAAOM,KAJjB;AAKD,CAND;;AAQA,IAAME,uBAAuB,SAAvBA,oBAAuB,CAASR,MAAT,EAAgB;AAAA,oBAIhCA,MAJgC,CAEnCS,GAFmC;AAAA,MAEnCA,GAFmC,+BAE/B,EAF+B;AAAA,sBAIhCT,MAJgC,CAE3BU,KAF2B;AAAA,MAE3BA,KAF2B,iCAErB,EAFqB;AAAA,uBAIhCV,MAJgC,CAEjBW,MAFiB;AAAA,MAEjBA,MAFiB,kCAEV,EAFU;AAAA,0BAIhCX,MAJgC,CAGnCI,SAHmC;AAAA,MAGnCA,SAHmC,qCAGzB,MAHyB;AAAA,qBAIhCJ,MAJgC,CAGjBY,IAHiB;AAAA,MAGjBA,IAHiB,gCAGZ,EAHY;AAAA,MAKrCC,OALqC,GAK3BF,OAAOG,OAAP,CAAe,GAAf,EAAoB,GAApB,CAL2B;;AAM3C,SAAUL,GAAV,SAAiBC,KAAjB,SAA0BG,OAA1B,SAAqCT,SAArC,SAAkDQ,IAAlD;AACD,CAPD;;AASA,IAAMG,aAAa;AAEjBC,oBAFiB,8BAEEhB,MAFF,EAES;AAAA,QAChBC,MADgB,GACLD,MADK,CAChBC,MADgB;;AAExB,YAAQA,MAAR;AACE,WAAK,eAASgB,CAAd,CAAiB,KAAK,eAASf,GAAd;AACf,eAAOH,mBAAmBC,MAAnB,CAAP;AACF,WAAK,eAASkB,OAAd;AACG,eAAOV,qBAAqBR,MAArB,CAAP;AACH,WAAK,eAASmB,EAAd;AACG,eAAOnB,OAAOoB,EAAd;AACH;AACE,eAAO,KAAP;AARJ;AAUD;AAdgB,CAAnB;;kBAkBeL,U","file":"LogicUtils.js","sourcesContent":["\r\nimport { ChartType, LoadType } from '../../constants/Type';\r\n\r\nconst _fnCreateQuandlKey = function(option){\r\n  return (option.loadId === LoadType.QCT && !option.isLoadMeta)\r\n          ? (option.seriaType === ChartType.AREA)\r\n                ? `${option.value}_${ChartType.AREA}_${option.dataColumn}`\r\n                : `${option.value}_${option.seriaType}`\r\n          : option.value\r\n}\r\n\r\nconst _fnCreateEuroStatKey = function(option){\r\n  const {\r\n          geo='', group='', metric='',\r\n          seriaType='AREA', time=''\r\n         } = option\r\n      , _metric = metric.replace('?', '_');\r\n  return `${geo}_${group}_${_metric}_${seriaType}_${time}`;\r\n}\r\n\r\nconst LogicUtils = {\r\n\r\n  createKeyForConfig(option){\r\n    const { loadId } = option;\r\n    switch (loadId) {\r\n      case LoadType.Q: case LoadType.QCT:\r\n        return _fnCreateQuandlKey(option);\r\n      case LoadType.EU_STAT:\r\n         return _fnCreateEuroStatKey(option);\r\n      case LoadType.WL:\r\n         return option.id;\r\n      default :\r\n        return 'key'\r\n    }\r\n  }\r\n\r\n}\r\n\r\nexport default LogicUtils\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\LogicUtils.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\LogicUtils.js",
+ "sourceRoot": "",
+ "names": [
+  "_fnCreateQuandlKey",
+  "option",
+  "loadId",
+  "QCT",
+  "isLoadMeta",
+  "seriaType",
+  "AREA",
+  "value",
+  "dataColumn",
+  "viewKey",
+  "_fnCreateEuroStatKey",
+  "geo",
+  "group",
+  "metric",
+  "time",
+  "_metric",
+  "replace",
+  "LogicUtils",
+  "createKeyForConfig",
+  "Q",
+  "EU_STAT",
+  "WL",
+  "id"
+ ],
+ "mappings": ";;;;;;AACA;;AAEA,IAAMA,qBAAqB,SAArBA,kBAAqB,CAASC,MAAT,EAAgB;AACzC,SAAQA,OAAOC,MAAP,KAAkB,eAASC,GAA3B,IAAkC,CAACF,OAAOG,UAA3C,GACIH,OAAOI,SAAP,KAAqB,gBAAUC,IAAhC,GACSL,OAAOM,KADhB,SACyB,gBAAUD,IADnC,SAC2CL,OAAOO,UADlD,GAESP,OAAOM,KAFhB,SAEyBN,OAAOI,SAHnC,GAIIJ,OAAOQ,OAAR,GACIR,OAAOQ,OADX,GAEIR,OAAOM,KANrB;AAOD,CARD;;AAUA,IAAMG,uBAAuB,SAAvBA,oBAAuB,CAAST,MAAT,EAAgB;AAAA,oBAIhCA,MAJgC,CAEnCU,GAFmC;AAAA,MAEnCA,GAFmC,+BAE/B,EAF+B;AAAA,sBAIhCV,MAJgC,CAE3BW,KAF2B;AAAA,MAE3BA,KAF2B,iCAErB,EAFqB;AAAA,uBAIhCX,MAJgC,CAEjBY,MAFiB;AAAA,MAEjBA,MAFiB,kCAEV,EAFU;AAAA,0BAIhCZ,MAJgC,CAGnCI,SAHmC;AAAA,MAGnCA,SAHmC,qCAGzB,MAHyB;AAAA,qBAIhCJ,MAJgC,CAGjBa,IAHiB;AAAA,MAGjBA,IAHiB,gCAGZ,EAHY;AAAA,MAKrCC,OALqC,GAK3BF,OAAOG,OAAP,CAAe,GAAf,EAAoB,GAApB,CAL2B;;AAM3C,SAAUL,GAAV,SAAiBC,KAAjB,SAA0BG,OAA1B,SAAqCV,SAArC,SAAkDS,IAAlD;AACD,CAPD;;AASA,IAAMG,aAAa;AAEjBC,oBAFiB,8BAEEjB,MAFF,EAES;AAAA,QAChBC,MADgB,GACLD,MADK,CAChBC,MADgB;;AAExB,YAAQA,MAAR;AACE,WAAK,eAASiB,CAAd,CAAiB,KAAK,eAAShB,GAAd;AACf,eAAOH,mBAAmBC,MAAnB,CAAP;AACF,WAAK,eAASmB,OAAd;AACG,eAAOV,qBAAqBT,MAArB,CAAP;AACH,WAAK,eAASoB,EAAd;AACG,eAAOpB,OAAOqB,EAAd;AACH;AACE,eAAO,KAAP;AARJ;AAUD;AAdgB,CAAnB;;kBAkBeL,U"
+}
