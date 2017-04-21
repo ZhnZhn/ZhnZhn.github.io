@@ -26,7 +26,7 @@ class ChartToolbar extends Component {
             onClickVolume,
             onClickATH,
             onClickHighLow,
-            onClickConfig
+            //onClickConfig
           } = this.props
     const _btIndicator = (!config.zhConfig.isWithoutIndicator) ? (
       <ButtonParentTab
@@ -92,7 +92,7 @@ class ChartToolbar extends Component {
      ) : null;
 
 
-
+  /*
    const _btConf = (
      <ButtonTab
        style={{left: '450px'}}
@@ -100,7 +100,7 @@ class ChartToolbar extends Component {
        onClick={onClickConfig}
      />
    )
-
+ */
 
     return (
       <div style={style}>
@@ -110,7 +110,7 @@ class ChartToolbar extends Component {
          {_btAdd}
          {_btInfo}
          {_btMini}
-         {_btConf}
+         {/*_btConf*/}
       </div>
     );
   }

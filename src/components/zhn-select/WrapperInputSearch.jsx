@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import TransformFn from './TransformFn';
 import InputSearch from './InputSearch';
+//import InputSelect from './InputSelect';
 
 class WrapperInputSearch extends Component {
 
@@ -11,7 +12,7 @@ class WrapperInputSearch extends Component {
 
   _handleSelectItem = (item) => {
      if (item){
-      this.props.onSelect(item);
+       this.props.onSelect(item)
      }
   }
 

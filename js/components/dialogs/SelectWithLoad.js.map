@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../../src/components/dialogs/SelectWithLoad.jsx"],"names":["Styles","SelectWithLoad","state","options","isLoading","isLoadingFailed","_handlerLoadOptions","props","uri","jsonProp","_handlerWithLoadOptions","prevProps","prevState","isShow","_unmountWithLoadOptions","caption","optionNames","placeholder","onSelect","rowDiv","labelSpan","defaultProps"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAGA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,+BAAN;;IAGMC,c;;;;;;;;;;;;;;oNAGFC,K,GAAQ;AACNC,eAAU,EADJ;AAENC,iBAAY,KAFN;AAGNC,uBAAkB;AAHZ,K,QAoBRC,mB,GAAsB,YAAM;AAAA,wBACA,MAAKC,KADL;AAAA,UAClBC,GADkB,eAClBA,GADkB;AAAA,UACbC,QADa,eACbA,QADa;;AAE1B,YAAKC,uBAAL,CACM,SADN,EACiB,WADjB,EAC8B,iBAD9B,EAEMF,GAFN,EAEWC,QAFX;AAID,K;;;;;wCApBkB;AACjB,WAAKH,mBAAL;AACD;;;uCACkBK,S,EAAWC,S,EAAU;AACtC,UAAID,cAAc,KAAKJ,KAAvB,EAA6B;AAC1B,YAAI,KAAKL,KAAL,CAAWG,eAAX,IAA8B,KAAKE,KAAL,CAAWM,MAA7C,EAAoD;AAClD,eAAKP,mBAAL;AACD;AACH;AACF;;;0CACoB;AACnB,WAAKQ,uBAAL;AACD;;;6BAUO;AAAA,mBACkD,KAAKP,KADvD;AAAA,UACEQ,OADF,UACEA,OADF;AAAA,UACWC,WADX,UACWA,WADX;AAAA,UACwBC,WADxB,UACwBA,WADxB;AAAA,UACqCC,QADrC,UACqCA,QADrC;AAAA,mBAE0C,KAAKhB,KAF/C;AAAA,UAEEE,SAFF,UAEEA,SAFF;AAAA,UAEaC,eAFb,UAEaA,eAFb;AAAA,UAE8BF,OAF9B,UAE8BA,OAF9B;;;AAIN,aACE;AAAA;AAAA,UAAK,OAAOH,OAAOmB,MAAnB;AACG;AAAA;AAAA,YAAM,OAAOnB,OAAOoB,SAApB;AACIL;AADJ,SADH;AAIG;AACE,iBAAM,KADR;AAEE,qBAAWX,SAFb;AAGE,2BAAiBC,eAHnB;AAIE,mBAASF,OAJX;AAKE,uBAAaa,WALf;AAME,uBAAaC,WANf;AAOE,wBAAc,KAAKX,mBAPrB;AAQE,oBAAUY;AARZ;AAJH,OADF;AAiBD;;;6BAnDMG,Y,GAAe,EAAER,QAAS,IAAX,E;;kBAuDXZ,c","file":"SelectWithLoad.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\n\r\nimport InputSelect from '../zhn/InputSelect';\r\nimport DialogStyles from '../styles/DialogStyles';\r\nimport withLoadOptions from './decorators/withLoadOptions';\r\n\r\nconst Styles = DialogStyles;\r\n\r\n@withLoadOptions\r\nclass SelectWithLoad extends Component {\r\n    static defaultProps = { isShow : true }\r\n\r\n    state = {\r\n      options : [],\r\n      isLoading : false,\r\n      isLoadingFailed : false\r\n    }\r\n\r\n    componentDidMount(){\r\n      this._handlerLoadOptions();\r\n    }\r\n    componentDidUpdate(prevProps, prevState){\r\n      if (prevProps !== this.props){\r\n         if (this.state.isLoadingFailed && this.props.isShow){\r\n           this._handlerLoadOptions();\r\n         }\r\n      }\r\n    }\r\n    componetWillUnmount(){\r\n      this._unmountWithLoadOptions();\r\n    }\r\n\r\n    _handlerLoadOptions = () => {\r\n      const { uri, jsonProp } = this.props;\r\n      this._handlerWithLoadOptions(\r\n            'options', 'isLoading', 'isLoadingFailed',\r\n            uri, jsonProp\r\n      );\r\n    }\r\n\r\n    render(){\r\n      const { caption, optionNames, placeholder, onSelect } = this.props\r\n          , { isLoading, isLoadingFailed, options } = this.state;\r\n\r\n      return (\r\n        <div style={Styles.rowDiv}>\r\n           <span style={Styles.labelSpan}>\r\n              {caption}\r\n           </span>\r\n           <InputSelect\r\n             width=\"250\"\r\n             isLoading={isLoading}\r\n             isLoadingFailed={isLoadingFailed}\r\n             options={options}\r\n             optionNames={optionNames}\r\n             placeholder={placeholder}\r\n             onLoadOption={this._handlerLoadOptions}\r\n             onSelect={onSelect}\r\n           />\r\n       </div>\r\n      );\r\n    }\r\n}\r\n\r\n\r\nexport default SelectWithLoad\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\SelectWithLoad.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\SelectWithLoad.js",
+ "sourceRoot": "",
+ "names": [
+  "SelectWithLoad",
+  "state",
+  "options",
+  "isLoading",
+  "isLoadingFailed",
+  "_handlerLoadOptions",
+  "props",
+  "uri",
+  "jsonProp",
+  "_handlerWithLoadOptions",
+  "prevProps",
+  "prevState",
+  "isShow",
+  "_unmountWithLoadOptions",
+  "caption",
+  "optionNames",
+  "placeholder",
+  "onSelect",
+  "rowDiv",
+  "labelSpan",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;IAGMA,c;;;;;;;;;;;;;;oNAGFC,K,GAAQ;AACNC,eAAU,EADJ;AAENC,iBAAY,KAFN;AAGNC,uBAAkB;AAHZ,K,QAoBRC,mB,GAAsB,YAAM;AAAA,wBACA,MAAKC,KADL;AAAA,UAClBC,GADkB,eAClBA,GADkB;AAAA,UACbC,QADa,eACbA,QADa;;AAE1B,YAAKC,uBAAL,CACM,SADN,EACiB,WADjB,EAC8B,iBAD9B,EAEMF,GAFN,EAEWC,QAFX;AAID,K;;;;;wCApBkB;AACjB,WAAKH,mBAAL;AACD;;;uCACkBK,S,EAAWC,S,EAAU;AACtC,UAAID,cAAc,KAAKJ,KAAvB,EAA6B;AAC1B,YAAI,KAAKL,KAAL,CAAWG,eAAX,IAA8B,KAAKE,KAAL,CAAWM,MAA7C,EAAoD;AAClD,eAAKP,mBAAL;AACD;AACH;AACF;;;0CACoB;AACnB,WAAKQ,uBAAL;AACD;;;6BAUO;AAAA,mBACkD,KAAKP,KADvD;AAAA,UACEQ,OADF,UACEA,OADF;AAAA,UACWC,WADX,UACWA,WADX;AAAA,UACwBC,WADxB,UACwBA,WADxB;AAAA,UACqCC,QADrC,UACqCA,QADrC;AAAA,mBAE0C,KAAKhB,KAF/C;AAAA,UAEEE,SAFF,UAEEA,SAFF;AAAA,UAEaC,eAFb,UAEaA,eAFb;AAAA,UAE8BF,OAF9B,UAE8BA,OAF9B;;;AAIN,aACE;AAAA;AAAA,UAAK,OAAO,uBAAMgB,MAAlB;AACG;AAAA;AAAA,YAAM,OAAO,uBAAMC,SAAnB;AACIL;AADJ,SADH;AAIG;AACE,iBAAM,KADR;AAEE,qBAAWX,SAFb;AAGE,2BAAiBC,eAHnB;AAIE,mBAASF,OAJX;AAKE,uBAAaa,WALf;AAME,uBAAaC,WANf;AAOE,wBAAc,KAAKX,mBAPrB;AAQE,oBAAUY;AARZ;AAJH,OADF;AAiBD;;;6BAnDMG,Y,GAAe,EAAER,QAAS,IAAX,E;;kBAuDXZ,c"
+}

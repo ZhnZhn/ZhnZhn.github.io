@@ -56,7 +56,7 @@ var _InputText = require('../zhn/InputText');
 
 var _InputText2 = _interopRequireDefault(_InputText);
 
-var _InputSelect = require('../zhn/InputSelect');
+var _InputSelect = require('../zhn-select/InputSelect');
 
 var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
@@ -104,12 +104,6 @@ var CustomizeExportDialog = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (CustomizeExportDialog.__proto__ || Object.getPrototypeOf(CustomizeExportDialog)).call(this));
 
-    _this.state = {
-      isShowDimension: true,
-      isShowTitle: true,
-      isShowStyle: true
-    };
-
     _this._handleClickDimension = function () {
       _this.setState({ isShowDimension: !_this.state.isShowDimension });
     };
@@ -155,6 +149,12 @@ var CustomizeExportDialog = function (_Component) {
     _this.exportStyle = {};
     _this.toolbarButtons = [{ caption: 'D', onClick: _this._handleClickDimension }, { caption: 'T', onClick: _this._handleClickTitle }, { caption: 'S', onClick: _this._handleClickStyle }];
     _this.optionStyles = _ChartExportConfig2.default.createOptionStyles();
+
+    _this.state = {
+      isShowDimension: true,
+      isShowTitle: true,
+      isShowStyle: true
+    };
     return _this;
   }
 
@@ -302,7 +302,5 @@ var CustomizeExportDialog = function (_Component) {
   return CustomizeExportDialog;
 }(_react.Component);
 
-CustomizeExportDialog.displayName = 'CustomizeExportDialog';
-
 exports.default = CustomizeExportDialog;
-//# sourceMappingURL=CustomizeExportDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\CustomizeExportDialog.js.map

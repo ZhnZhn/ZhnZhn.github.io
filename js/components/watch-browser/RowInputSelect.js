@@ -12,7 +12,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _InputSelect = require('../zhn/InputSelect');
+var _InputSelect = require('../zhn-select/InputSelect');
 
 var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
@@ -22,6 +22,7 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import InputSelect from '../zhn/InputSelect';
 var S = {
   CAPTION: {
     width: '120px'

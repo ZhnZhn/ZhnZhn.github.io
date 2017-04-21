@@ -26,7 +26,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _InputSelect = require('../zhn/InputSelect');
+var _InputSelect = require('../zhn-select/InputSelect');
 
 var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
@@ -39,8 +39,6 @@ var _withLoadOptions = require('./decorators/withLoadOptions');
 var _withLoadOptions2 = _interopRequireDefault(_withLoadOptions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Styles = _DialogStyles2.default;
 
 var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 = function (_Component) {
   (0, _inherits3.default)(SelectWithLoad, _Component);
@@ -104,10 +102,10 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
 
       return _react2.default.createElement(
         'div',
-        { style: Styles.rowDiv },
+        { style: _DialogStyles2.default.rowDiv },
         _react2.default.createElement(
           'span',
-          { style: Styles.labelSpan },
+          { style: _DialogStyles2.default.labelSpan },
           caption
         ),
         _react2.default.createElement(_InputSelect2.default, {
@@ -127,4 +125,4 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
 }(_react.Component), _class2.defaultProps = { isShow: true }, _temp2)) || _class;
 
 exports.default = SelectWithLoad;
-//# sourceMappingURL=SelectWithLoad.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\SelectWithLoad.js.map

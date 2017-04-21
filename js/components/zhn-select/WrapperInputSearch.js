@@ -34,6 +34,8 @@ var _InputSearch2 = _interopRequireDefault(_InputSearch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import InputSelect from './InputSelect';
+
 var WrapperInputSearch = function (_Component) {
   (0, _inherits3.default)(WrapperInputSearch, _Component);
 
@@ -92,4 +94,4 @@ var WrapperInputSearch = function (_Component) {
 }(_react.Component);
 
 exports.default = WrapperInputSearch;
-//# sourceMappingURL=WrapperInputSearch.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-select\WrapperInputSearch.js.map

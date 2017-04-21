@@ -71,8 +71,7 @@ var ChartToolbar = function (_Component) {
           onClickInfo = _props.onClickInfo,
           onClickVolume = _props.onClickVolume,
           onClickATH = _props.onClickATH,
-          onClickHighLow = _props.onClickHighLow,
-          onClickConfig = _props.onClickConfig;
+          onClickHighLow = _props.onClickHighLow;
 
       var _btIndicator = !config.zhConfig.isWithoutIndicator ? _react2.default.createElement(
         _ButtonParentTab2.default,
@@ -131,11 +130,15 @@ var ChartToolbar = function (_Component) {
         })
       ) : null;
 
-      var _btConf = _react2.default.createElement(_ButtonTab2.default, {
-        style: { left: '450px' },
-        caption: 'Conf',
-        onClick: onClickConfig
-      });
+      /*
+       const _btConf = (
+         <ButtonTab
+           style={{left: '450px'}}
+           caption={'Conf'}
+           onClick={onClickConfig}
+         />
+       )
+      */
 
       return _react2.default.createElement(
         'div',
@@ -145,8 +148,7 @@ var ChartToolbar = function (_Component) {
         _bt2HChart,
         _btAdd,
         _btInfo,
-        _btMini,
-        _btConf
+        _btMini
       );
     }
   }]);

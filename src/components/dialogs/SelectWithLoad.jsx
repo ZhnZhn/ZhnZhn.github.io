@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
+import InputSelect from '../zhn-select/InputSelect';
+import STYLE from '../styles/DialogStyles';
 
-import InputSelect from '../zhn/InputSelect';
-import DialogStyles from '../styles/DialogStyles';
 import withLoadOptions from './decorators/withLoadOptions';
-
-const Styles = DialogStyles;
 
 @withLoadOptions
 class SelectWithLoad extends Component {
@@ -44,8 +42,8 @@ class SelectWithLoad extends Component {
           , { isLoading, isLoadingFailed, options } = this.state;
 
       return (
-        <div style={Styles.rowDiv}>
-           <span style={Styles.labelSpan}>
+        <div style={STYLE.rowDiv}>
+           <span style={STYLE.labelSpan}>
               {caption}
            </span>
            <InputSelect

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import InputSelect from '../zhn/InputSelect';
+import InputSelect from '../zhn-select/InputSelect';
 import STYLE from '../styles/DialogStyles';
 
 const RowInputSelect = ({ caption='', ...rest }) => (

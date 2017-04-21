@@ -9,7 +9,6 @@ const defaultChildOptions = [];
 @withLoadOptions
 class SelectParentChild extends Component {
 
-
   static defaultProps = {
     isShow : true,
     msgOnNotSelected : (item) => `${item} is not selected`

@@ -4,13 +4,13 @@ import merge from 'lodash.merge';
 import ChartExportConfig from '../../charts/ChartExportConfig';
 
 import ModalDialog from '../zhn/ModalDialog';
-import DialogStyles from '../styles/DialogStyles'
+import DialogStyles from '../styles/DialogStyles';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import ActionButton from '../zhn/ActionButton';
 
 import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
-import InputSelect from '../zhn/InputSelect';
+import InputSelect from '../zhn-select/InputSelect';
 
 const styles = DialogStyles;
 
@@ -47,21 +47,22 @@ const STYLE = {
 }
 
 class CustomizeExportDialog extends Component {
-  state = {
-    isShowDimension : true,
-    isShowTitle : true,
-    isShowStyle : true
-  }
 
   constructor(props){
-    super();
-    this.exportStyle = {};
+    super()
+    this.exportStyle = {}
     this.toolbarButtons = [
       { caption: 'D', onClick: this._handleClickDimension },
       { caption: 'T', onClick: this._handleClickTitle },
       { caption: 'S', onClick: this._handleClickStyle }
-    ];
-    this.optionStyles = ChartExportConfig.createOptionStyles();
+    ]
+    this.optionStyles = ChartExportConfig.createOptionStyles()
+
+    this.state = {
+      isShowDimension : true,
+      isShowTitle : true,
+      isShowStyle : true
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -183,7 +184,5 @@ class CustomizeExportDialog extends Component {
     )
   }
 }
-
-CustomizeExportDialog.displayName = 'CustomizeExportDialog';
 
 export default CustomizeExportDialog
