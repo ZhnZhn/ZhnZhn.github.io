@@ -92,7 +92,7 @@ class ChartToolbar extends Component {
      ) : null;
 
 
-  /*
+/*
    const _btConf = (
      <ButtonTab
        style={{left: '450px'}}
@@ -100,7 +100,7 @@ class ChartToolbar extends Component {
        onClick={onClickConfig}
      />
    )
- */
+*/
 
     return (
       <div style={style}>

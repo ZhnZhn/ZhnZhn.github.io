@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import createLoadOptions from '../../flux/creaters/eurostat3';
+//import createLoadOptions from '../../flux/creaters/eurostat3';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
@@ -32,7 +32,8 @@ class DialogEurostat3 extends Component {
     threeCaption: PropTypes.string,
     msgOnNotSelected: PropTypes.func,
 
-    onShow: PropTypes.func
+    onShow: PropTypes.func,
+    loadFn: PropTypes.func
   }
 
   constructor(props){
@@ -78,9 +79,9 @@ class DialogEurostat3 extends Component {
      return msg;
   }
   _createLoadOption = () => {
-    const { parent:group, child:metric } = this.parentChild.getValues()
+    const { parent:group, child:metric } = this.parentChild.getValues();
 
-    return createLoadOptions(
+    return this.props.loadFn(
       this.props,
       { one : this.one, group, metric }
     );
@@ -100,7 +101,7 @@ class DialogEurostat3 extends Component {
           } = this.props
         , { validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton          
+       <ActionButton
           type="TypeC"
           caption="Load"
           onClick={this._handleLoad}

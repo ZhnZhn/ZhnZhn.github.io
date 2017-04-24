@@ -4,7 +4,7 @@ import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
 import { LoadType } from '../../constants/Type';
 
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import RowText from './RowText';
 import ShowHide from '../zhn/ShowHide';
@@ -17,7 +17,7 @@ import ActionButton from '../zhn/ActionButton';
 import withValidationLoad from './decorators/withValidationLoad';
 
 const ABSENT = "Absent"
-    , ABSENT_VALIDATION_MSG = "Data Source for this item Absent"
+    , ABSENT_VALIDATION_MSG = "Data Source for this item Absent";
 
 const STYLE = {
   CAPTION_SPAN : {
@@ -49,11 +49,17 @@ const STYLE = {
 
 @withValidationLoad
 class StocksBySectorDialog extends Component {
+   static propTypes = {
+     isShow  : PropTypes.bool.isRequired,
+     data    : PropTypes.object.isRequired,
+     store   : PropTypes.object,
+     onClose : PropTypes.func.isRequired
+   }
 
    constructor(props){
-     super();
-     this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }];
-     this.state = this._createInitialState(props);
+     super()
+     this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }]
+     this.state = this._createInitialState(props)
    }
 
    _getItemSource = (props) => {
@@ -76,7 +82,7 @@ class StocksBySectorDialog extends Component {
               : true
          , _initFromDate = (fromDate) ? fromDate : DateUtils.getFromDate(2)
          , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
-         , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate
+         , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
 
       return {
         isShowLink : _isShowLink,
@@ -84,12 +90,12 @@ class StocksBySectorDialog extends Component {
         initToDate : _initToDate,
         onTestDate : _onTestDate,
         validationMessages : []
-      }
+      };
    }
 
    componentWillReceiveProps(nextProps){
      if ( this.props.data !== nextProps.data) {
-       this.setState(this._createInitialState(nextProps));
+       this.setState(this._createInitialState(nextProps))
      }
    }
 
@@ -126,34 +132,33 @@ class StocksBySectorDialog extends Component {
              columnName : 'Close',
              seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ],
              dataSource : `(Code: ${_source})`
-          }
+           };
 
-      ChartActions.loadStock(chartContainerType, browserType, option);
-      onClose();
+      ChartActions.loadStock(chartContainerType, browserType, option)
+      onClose()
     }
-    this._updateValidationMessages(validationMessages);
+    this._updateValidationMessages(validationMessages)
   }
 
   _getValidationMessages = () => {
     let  msg = [];
 
     if (this._getItemSource(this.props) === ABSENT) {
-      msg.push(ABSENT_VALIDATION_MSG);
+      msg.push(ABSENT_VALIDATION_MSG)
     }
 
     const { isValid, datesMsg } = this.datesFragment.getValidation();
-    if (!isValid) { msg = msg.concat(datesMsg); }
-    msg.isValid = (msg.length === 0) ? true : false;
+    if (!isValid) { msg = msg.concat(datesMsg) }
+    msg.isValid = (msg.length === 0) ? true : false
     return msg;
   }
 
   _handleClose = () => {
     if (this.state.validationMessages.length > 0){
-      this.setState({validationMessages : this._getValidationMessages()});
+      this.setState({ validationMessages : this._getValidationMessages() })
     }
-    this.props.onClose();
+    this.props.onClose()
   }
-
 
   render(){
     const { isShow, data={} } = this.props
@@ -166,19 +171,17 @@ class StocksBySectorDialog extends Component {
           } = this.state
         , _commandButtons = [
              <ActionButton
-                key="a"
                 type="TypeC"
                 caption="Load"
                 onClick={this._handleLoad}
              />,
              <ActionButton
-                key="b"
                 type="TypeC"
                 caption="Show"
                 onClick={onShow}
              />
           ]
-        , _source = this._getItemSource(this.props)
+        , _source = this._getItemSource(this.props);
 
 
     return (
@@ -215,16 +218,8 @@ class StocksBySectorDialog extends Component {
             validationMessages={validationMessages}
         />
       </ModalDialog>
-    )
+    );
   }
 }
-
-StocksBySectorDialog.propTypes = {
-  isShow  : PropTypes.bool.isRequired,
-  data    : PropTypes.object.isRequired,
-  store   : PropTypes.object,
-  onClose : PropTypes.func.isRequired
-};
-StocksBySectorDialog.displayName = 'StocksBySectorDialog';
 
 export default StocksBySectorDialog

@@ -36,7 +36,7 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 var _Type = require('../../constants/Type');
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
@@ -128,17 +128,14 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           onTestDate = _state.onTestDate,
           validationMessages = _state.validationMessages,
           _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
         type: 'TypeC',
         caption: 'Load',
         onClick: this._handleLoad
       }), _react2.default.createElement(_ActionButton2.default, {
-        key: 'b',
         type: 'TypeC',
         caption: 'Show',
         onClick: onShow
       })];
-
 
       return _react2.default.createElement(
         _ModalDialog2.default,
@@ -170,7 +167,9 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
     }
   }]);
   return UsStocksBySectorDialog;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
+}(_react.Component), _class2.defaultProps = {
+  data: {}
+}, _initialiseProps = function _initialiseProps() {
   var _this3 = this;
 
   this._handleSelectDataSource = function (dataSource) {
@@ -242,10 +241,5 @@ process.env.NODE_ENV !== "production" ? UsStocksBySectorDialog.propTypes = {
   store: _react.PropTypes.object,
   onClose: _react.PropTypes.func.isRequired
 } : void 0;
-UsStocksBySectorDialog.defaultProps = {
-  data: {}
-};
-UsStocksBySectorDialog.displaName = 'UsStocksBySectorDialog';
-
 exports.default = UsStocksBySectorDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map

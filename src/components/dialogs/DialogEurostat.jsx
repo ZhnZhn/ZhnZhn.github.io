@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-import createLoadOptions from '../../flux/creaters/eurostat'
-
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
@@ -28,7 +26,8 @@ class DialogEurostat extends Component {
     twoJsonProp: PropTypes.string,
 
     msgOnNotSelected: PropTypes.func,
-    onShow: PropTypes.func
+    onShow: PropTypes.func,
+    loadFn: PropTypes.func
   }
 
   constructor(props){
@@ -77,10 +76,10 @@ class DialogEurostat extends Component {
      return msg;
   }
   _createLoadOption = () => {
-    return createLoadOptions(
+    return this.props.loadFn(
       this.props,
       { one : this.one, two : this.two }
-    )
+    );
   }
 
   _handleClose = () => {

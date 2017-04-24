@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import WatchActions, { WatchActionTypes } from '../../flux/actions/WatchActions';
 import Msg from '../../constants/Msg';
 
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 import ActionButton from '../zhn/ActionButton';
 import ValidationMessages from '../zhn/ValidationMessages';
 import RowInputSelect from '../dialogs/RowInputSelect';

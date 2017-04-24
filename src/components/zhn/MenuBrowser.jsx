@@ -19,40 +19,40 @@ const S = {
 
 class MenuBrowser extends Component {
   constructor(props){
-    super();
-    const {store, browserType, isShow} = props;
+    super()
+    const { store, browserType, isShow } = props;
     this.state = {
       isShow: isShow ? true : false,
       menuItems: store.getBrowserMenu(browserType)
     }
   }
 
-  componentWillMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore);
+  componentDidMount(){
+    this.unsubscribe = this.props.store.listen(this._onStore)
   }
   componentWillUnmount(){
-    this.unsubscribe();
+    this.unsubscribe()
   }
 
   _onStore = (actionType, data) => {
-     const {browserType, store, showAction, updateAction} = this.props;
+     const { browserType, store, showAction, updateAction } = this.props;
      if (actionType === showAction && data === browserType ){
-      this._handleShow();
+      this._handleShow()
      } else if (actionType === updateAction && data === browserType){
-      this.setState({menuItems: store.getBrowserMenu(browserType)})
+      this.setState({ menuItems: store.getBrowserMenu(browserType) })
      }
   }
 
   _handleHide = () => {
-    this.setState({isShow : false});
+    this.setState({ isShow : false })
   }
   _handleShow = () => {
-    this.setState({isShow : true});
+    this.setState({ isShow : true })
   }
 
   _renderMenuParts = (menuItems) => {
     return menuItems.map((menuPart, index) => {
-      return (<MenuPart key={index} {...menuPart} />)
+      return (<MenuPart key={index} {...menuPart} />);
     });
   }
 
@@ -70,7 +70,7 @@ class MenuBrowser extends Component {
             {children}
           </ScrollPane>
        </Browser>
-    )
+    );
   }
 }
 

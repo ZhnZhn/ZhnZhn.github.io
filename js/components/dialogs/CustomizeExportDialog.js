@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -32,7 +36,7 @@ var _ChartExportConfig = require('../../charts/ChartExportConfig');
 
 var _ChartExportConfig2 = _interopRequireDefault(_ChartExportConfig);
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
@@ -62,9 +66,7 @@ var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = _DialogStyles2.default;
-
-var STYLE = {
+var S = {
   GAP_BETWEEN_GROUP: {
     marginTop: '10px'
   },
@@ -209,15 +211,15 @@ var CustomizeExportDialog = function (_Component) {
           { isShow: isShowDimension },
           _react2.default.createElement(
             'div',
-            { style: styles.rowDiv, key: '1' },
+            { style: _DialogStyles2.default.rowDiv },
             _react2.default.createElement(
               'span',
-              { style: STYLE.LABEL_WIDTH },
+              { style: S.LABEL_WIDTH },
               'Dimension:'
             ),
             _react2.default.createElement(
               'span',
-              { style: STYLE.LABEL_HEIGHT },
+              { style: S.LABEL_HEIGHT },
               'Width:'
             ),
             _react2.default.createElement(_InputText2.default, {
@@ -225,11 +227,11 @@ var CustomizeExportDialog = function (_Component) {
                 return _this2.inputWidth = c;
               },
               initValue: chartWidth,
-              style: STYLE.INPUT_NUMBER
+              style: S.INPUT_NUMBER
             }),
             _react2.default.createElement(
               'span',
-              { style: STYLE.LABEL_HEIGHT },
+              { style: S.LABEL_HEIGHT },
               'Height:'
             ),
             _react2.default.createElement(_InputText2.default, {
@@ -237,7 +239,7 @@ var CustomizeExportDialog = function (_Component) {
                 return _this2.inputHeight = c;
               },
               initValue: chartHeight,
-              style: STYLE.INPUT_NUMBER
+              style: S.INPUT_NUMBER
             })
           )
         ),
@@ -246,10 +248,10 @@ var CustomizeExportDialog = function (_Component) {
           { isShow: isShowTitle },
           _react2.default.createElement(
             'div',
-            { style: Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP), key: '2' },
+            { style: (0, _extends3.default)({}, _DialogStyles2.default.rowDiv, S.GAP_BETWEEN_GROUP) },
             _react2.default.createElement(
               'span',
-              { style: STYLE.LABEL_WIDTH },
+              { style: S.LABEL_WIDTH },
               'Title:'
             ),
             _react2.default.createElement(_InputText2.default, {
@@ -257,15 +259,15 @@ var CustomizeExportDialog = function (_Component) {
                 return _this2.inputTitle = c;
               },
               initValue: title,
-              style: STYLE.INPUT_TEXT
+              style: S.INPUT_TEXT
             })
           ),
           _react2.default.createElement(
             'div',
-            { style: styles.rowDiv, key: '3' },
+            { style: _DialogStyles2.default.rowDiv },
             _react2.default.createElement(
               'span',
-              { style: STYLE.LABEL_WIDTH },
+              { style: S.LABEL_WIDTH },
               'Subtitle:'
             ),
             _react2.default.createElement(_InputText2.default, {
@@ -273,7 +275,7 @@ var CustomizeExportDialog = function (_Component) {
                 return _this2.inputSubtitle = c;
               },
               initValue: subtitle,
-              style: STYLE.INPUT_TEXT
+              style: S.INPUT_TEXT
             })
           )
         ),
@@ -282,10 +284,10 @@ var CustomizeExportDialog = function (_Component) {
           { isShow: isShowStyle },
           _react2.default.createElement(
             'div',
-            { style: Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP), key: '4' },
+            { style: (0, _extends3.default)({}, _DialogStyles2.default.rowDiv, S.GAP_BETWEEN_GROUP) },
             _react2.default.createElement(
               'span',
-              { style: STYLE.LABEL_WIDTH },
+              { style: S.LABEL_WIDTH },
               'Style:'
             ),
             _react2.default.createElement(_InputSelect2.default, {

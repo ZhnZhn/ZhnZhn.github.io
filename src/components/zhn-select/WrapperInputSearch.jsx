@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import TransformFn from './TransformFn';
-import InputSearch from './InputSearch';
-//import InputSelect from './InputSelect';
+import InputSelect from './InputSelect';
 
 class WrapperInputSearch extends Component {
 
@@ -24,7 +23,9 @@ class WrapperInputSearch extends Component {
 
     return (
       <div style={style}>
-        <InputSearch
+        <InputSelect
+           width="100%"
+           isShowOptionAnim={true}
            placeholder={placeholder}
            propCaption={caption}
            options={_options}

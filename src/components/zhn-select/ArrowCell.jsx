@@ -12,9 +12,12 @@ const STYLE = {
     paddingRight: '5px'
   },
   ARROW : {
+    position: 'relative',
+    top: '2px',
     borderColor: '#999 transparent transparent',
     borderStyle: 'solid',
-    borderWidth: '5px 5px 2.5px',
+    //borderWidth: '5px 5px 2.5px',
+    borderWidth: '10px 8px 4px',
     display: 'inline-block',
     height: '0px',
     width: '0px'

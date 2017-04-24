@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import ModalDialogContainer from '../zhn/ModalDialogContainer';
+import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
 import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
 
 import RouterModalDialog from './RouterModalDialog';
@@ -32,7 +32,7 @@ class DialogContainer extends Component {
      if (actionType === ComponentActionTypes.SHOW_MODAL_DIALOG){
        const type = option.modalDialogType
            , { inits, shows, data, dialogs } = this.state;
-       
+
        data[type] = option;
        shows[type] = true;
        if (inits[type]){

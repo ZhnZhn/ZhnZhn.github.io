@@ -30,10 +30,11 @@ var _updateValidationMessages = function _updateValidationMessages(validationMes
 };
 
 var withValidationLoad = function withValidationLoad(target) {
-  target.prototype._handleWithValidationLoad = _handleWithValidationLoad;
-  target.prototype._handleWithValidationClose = _handleWithValidationClose;
-  target.prototype._updateValidationMessages = _updateValidationMessages;
+  var _proto = target.prototype;
+  _proto._handleWithValidationLoad = _handleWithValidationLoad;
+  _proto._handleWithValidationClose = _handleWithValidationClose;
+  _proto._updateValidationMessages = _updateValidationMessages;
 };
 
 exports.default = withValidationLoad;
-//# sourceMappingURL=withValidationLoad.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\decorators\withValidationLoad.js.map

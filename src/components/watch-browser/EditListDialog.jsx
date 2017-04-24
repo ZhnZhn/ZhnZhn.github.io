@@ -4,7 +4,7 @@ import WatchActions, { WatchActionTypes } from '../../flux/actions/WatchActions'
 
 import Msg from '../../constants/Msg';
 
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 import TabPane from '../zhn/TabPane';
 import Tab from '../zhn/Tab';
 import ListCreatePane from './ListCreatePane';

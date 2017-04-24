@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-import ModalDialog from '../zhn/ModalDialog';
-import DialogStyles from '../styles/DialogStyles'
-
-const styles = DialogStyles;
+import ModalDialog from '../zhn-moleculs/ModalDialog';
+import STYLE from '../styles/DialogStyles'
 
 const Styles = {
   CAPTION : {
@@ -54,16 +52,16 @@ class AlertDialog extends Component{
   }
 
   render(){
-    const {isShow, data, onClose} = this.props
-        , {alertCaption, alertItemId='', alertDescr} = data
-        , _alertItemId = alertItemId.substring(0,20) + ELLIPSIS
+    const { isShow, data, onClose } = this.props
+        , { alertCaption, alertItemId='', alertDescr } = data
+        , _alertItemId = alertItemId.substring(0,20) + ELLIPSIS;
     return (
       <ModalDialog
         caption="Alert"
         isShow={isShow}
         onClose={onClose}
       >
-         <div style={styles.rowDiv}>
+         <div style={STYLE.rowDiv}>
             <span style={Styles.CAPTION}>
               {alertCaption + ': '}
               <span style={Styles.ITEM_ID} title={alertItemId}>
@@ -71,12 +69,11 @@ class AlertDialog extends Component{
               </span>
             </span>
          </div>
-         <div style={styles.rowDiv}>
+         <div style={STYLE.rowDiv}>
             <p style={Styles.DESCR}>{alertDescr}</p>
          </div>
-
       </ModalDialog>
-    )
+    );
   }
 }
 

@@ -22,13 +22,11 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
 
+//import createLoadOptions from '../../flux/creaters/eurostat2'
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _eurostat = require('../../flux/creaters/eurostat2');
-
-var _eurostat2 = _interopRequireDefault(_eurostat);
 
 var _Type = require('../../constants/Type');
 
@@ -170,7 +168,7 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           date = _this.date,
           dateDefault = _this.state.dateDefault;
 
-      return (0, _eurostat2.default)(_this.props, { one: one, two: two, chartType: chartType, date: date, dateDefault: dateDefault });
+      return _this.props.loadFn(_this.props, { one: one, two: two, chartType: chartType, date: date, dateDefault: dateDefault });
     };
 
     _this._handleClose = function () {
@@ -298,7 +296,8 @@ process.env.NODE_ENV !== "production" ? DialogEurostat2.propTypes = {
   mapDateDf: _react.PropTypes.number,
 
   msgOnNotSelected: _react.PropTypes.func,
-  onShow: _react.PropTypes.func
+  onShow: _react.PropTypes.func,
+  loadFn: _react.PropTypes.func
 } : void 0;
 exports.default = DialogEurostat2;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat2.js.map

@@ -1,1 +1,25 @@
-{"version":3,"sources":["../../../src/components/zhn/Browser.jsx"],"names":["styles","SHOW_POPUP","S","BLOCK","display","NONE","Browser","isShow","style","children","_styleOpen","_classOpen","Object","assign","browserRootDiv","propTypes","bool","object"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,kCAAN;AACA,IAAMC,aAAa,YAAnB;AACA,IAAMC,IAAI;AACRC,SAAQ;AACNC,aAAU;AADJ,GADA;AAIRC,QAAO;AACLD,aAAU;AADL;AAJC,CAAV;;AASA,IAAME,UAAU,SAAVA,OAAU,OAAiC;AAAA,MAA9BC,MAA8B,QAA9BA,MAA8B;AAAA,MAAtBC,KAAsB,QAAtBA,KAAsB;AAAA,MAAfC,QAAe,QAAfA,QAAe;;AAC/C,MAAMC,aAAaH,SAASL,EAAEC,KAAX,GAAmBD,EAAEG,IAAxC;AAAA,MACMM,aAAaJ,SAASN,UAAT,GAAsB,IADzC;AAEA,SACG;AAAA;AAAA;AACG,iBAAWU,UADd;AAEG,aAAOC,OAAOC,MAAP,CAAc,EAAd,EAAkBb,OAAOc,cAAzB,EAAyCN,KAAzC,EAAgDE,UAAhD;AAFV;AAIID;AAJJ,GADH;AAQD,CAXD;AAYA,gDAAQM,SAAR,GAAoB;AAClBR,UAAQ,iBAAUS,IADA;AAElBR,SAAO,iBAAUS;AAFC,CAApB;;kBAKeX,O","file":"Browser.js","sourcesContent":["import React, { PropTypes } from 'react';\r\n\r\nimport ContainerStyles from '../styles/ContainerStyles';\r\n\r\nconst styles = ContainerStyles;\r\nconst SHOW_POPUP = 'show-popup';\r\nconst S = {\r\n  BLOCK : {\r\n    display : 'block'\r\n  },\r\n  NONE : {\r\n    display : 'none'\r\n  }\r\n}\r\n\r\nconst Browser = ({ isShow, style, children }) => {\r\n  const _styleOpen = isShow ? S.BLOCK : S.NONE\r\n      , _classOpen = isShow ? SHOW_POPUP : null;\r\n  return (\r\n     <div\r\n        className={_classOpen}\r\n        style={Object.assign({}, styles.browserRootDiv, style, _styleOpen)}\r\n      >\r\n        {children}\r\n     </div>\r\n  );\r\n}\r\nBrowser.propTypes = {\r\n  isShow: PropTypes.bool,\r\n  style: PropTypes.object\r\n}\r\n\r\nexport default Browser\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\Browser.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\Browser.js",
+ "sourceRoot": "",
+ "names": [
+  "SHOW_POPUP",
+  "S",
+  "BLOCK",
+  "display",
+  "NONE",
+  "Browser",
+  "isShow",
+  "style",
+  "children",
+  "_styleOpen",
+  "_classOpen",
+  "browserRootDiv",
+  "propTypes",
+  "bool",
+  "object"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,aAAa,YAAnB;AACA,IAAMC,IAAI;AACRC,SAAQ;AACNC,aAAU;AADJ,GADA;AAIRC,QAAO;AACLD,aAAU;AADL;AAJC,CAAV;;AASA,IAAME,UAAU,SAAVA,OAAU,OAAiC;AAAA,MAA9BC,MAA8B,QAA9BA,MAA8B;AAAA,MAAtBC,KAAsB,QAAtBA,KAAsB;AAAA,MAAfC,QAAe,QAAfA,QAAe;;AAC/C,MAAMC,aAAaH,SAASL,EAAEC,KAAX,GAAmBD,EAAEG,IAAxC;AAAA,MACMM,aAAaJ,SAASN,UAAT,GAAsB,IADzC;AAEA,SACG;AAAA;AAAA;AACG,iBAAWU,UADd;AAEG,wCAAW,0BAAMC,cAAjB,EAAoCJ,KAApC,EAA8CE,UAA9C;AAFH;AAIID;AAJJ,GADH;AAQD,CAXD;;AAaA,gDAAQI,SAAR,GAAoB;AAClBN,UAAQ,iBAAUO,IADA;AAElBN,SAAO,iBAAUO;AAFC,CAApB;;kBAKeT,O"
+}

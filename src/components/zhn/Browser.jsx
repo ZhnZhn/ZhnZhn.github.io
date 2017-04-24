@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 
-import ContainerStyles from '../styles/ContainerStyles';
+import STYLE from '../styles/ContainerStyles';
 
-const styles = ContainerStyles;
 const SHOW_POPUP = 'show-popup';
 const S = {
   BLOCK : {
@@ -19,12 +18,13 @@ const Browser = ({ isShow, style, children }) => {
   return (
      <div
         className={_classOpen}
-        style={Object.assign({}, styles.browserRootDiv, style, _styleOpen)}
+        style={{...STYLE.browserRootDiv, ...style, ..._styleOpen}}
       >
         {children}
      </div>
   );
-}
+};
+
 Browser.propTypes = {
   isShow: PropTypes.bool,
   style: PropTypes.object

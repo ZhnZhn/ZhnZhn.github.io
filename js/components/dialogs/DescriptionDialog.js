@@ -20,6 +20,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -30,14 +32,14 @@ var _purify2 = _interopRequireDefault(_purify);
 
 var _fn = require('../../utils/fn');
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
-var Style = {
+var STYLE = {
   DIALOG: {
     top: '10%',
     left: '10%',
@@ -49,17 +51,13 @@ var Style = {
   }
 };
 
-var DescriptionDialog = function (_Component) {
+var DescriptionDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(DescriptionDialog, _Component);
 
   function DescriptionDialog(props) {
     (0, _classCallCheck3.default)(this, DescriptionDialog);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (DescriptionDialog.__proto__ || Object.getPrototypeOf(DescriptionDialog)).call(this));
-
-    _this.state = {
-      descrHtml: ''
-    };
 
     _this._loadDescr = function () {
       var descrUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -79,6 +77,9 @@ var DescriptionDialog = function (_Component) {
       _this.setState({ descrHtml: text });
     };
 
+    _this.state = {
+      descrHtml: ''
+    };
     return _this;
   }
 
@@ -116,21 +117,19 @@ var DescriptionDialog = function (_Component) {
         {
           caption: 'Description for Datasource',
           isShow: isShow,
-          style: Style.DIALOG,
+          style: STYLE.DIALOG,
           onClose: onClose
         },
         _react2.default.createElement('div', {
-          style: Style.DIV,
+          style: STYLE.DIV,
           dangerouslySetInnerHTML: { __html: _html }
         })
       );
     }
   }]);
   return DescriptionDialog;
-}(_react.Component);
-
-DescriptionDialog.defaultProps = { data: {} };
-DescriptionDialog.displayName = 'DescriptionDialog';
-
+}(_react.Component), _class.defaultProps = {
+  data: {}
+}, _temp);
 exports.default = DescriptionDialog;
-//# sourceMappingURL=DescriptionDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DescriptionDialog.js.map

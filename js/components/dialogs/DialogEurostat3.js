@@ -22,13 +22,11 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
 
+//import createLoadOptions from '../../flux/creaters/eurostat3';
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _eurostat = require('../../flux/creaters/eurostat3');
-
-var _eurostat2 = _interopRequireDefault(_eurostat);
 
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
@@ -106,7 +104,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           group = _this$parentChild$get2.parent,
           metric = _this$parentChild$get2.child;
 
-      return (0, _eurostat2.default)(_this.props, { one: _this.one, group: group, metric: metric });
+      return _this.props.loadFn(_this.props, { one: _this.one, group: group, metric: metric });
     };
 
     _this._handleClose = function () {
@@ -213,11 +211,12 @@ process.env.NODE_ENV !== "production" ? DialogEurostat3.propTypes = {
   threeCaption: _react.PropTypes.string,
   msgOnNotSelected: _react.PropTypes.func,
 
-  onShow: _react.PropTypes.func
+  onShow: _react.PropTypes.func,
+  loadFn: _react.PropTypes.func
 } : void 0;
 
 
 DialogEurostat3.displayName = 'DialogEurostat3';
 
 exports.default = DialogEurostat3;
-//# sourceMappingURL=DialogEurostat3.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat3.js.map

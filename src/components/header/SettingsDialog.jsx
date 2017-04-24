@@ -2,14 +2,12 @@ import React, { Component, PropTypes } from 'react';
 
 import safeFn from '../../utils/safeFn';
 
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 import InputSecret from '../zhn/InputSecret';
 import ActionButton from '../zhn/ActionButton';
 import RowCheckBox from '../dialogs/RowCheckBox';
 
-import DialogStyles from '../styles/DialogStyles';
-
-const styles = DialogStyles;
+import STYLE from '../styles/DialogStyles';
 
 const S = {
   MODAL : {
@@ -18,8 +16,7 @@ const S = {
     height: '150px',
     margin: '70px auto 0px'
   }
-}
-
+};
 
 class SettingsDialog extends Component {
   static propTypes = {
@@ -33,14 +30,13 @@ class SettingsDialog extends Component {
 
   constructor(props){
     super()
-    this.commandButtons =[
+    this.commandButtons = [
        <ActionButton
-          key="a"
           type="TypeC"
           caption="Set"
           onClick={this._handleSet}
        />
-    ];
+    ]
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -75,8 +71,8 @@ class SettingsDialog extends Component {
             onClose={onClose}
          >
 
-           <label style={styles.rowDiv}>
-              <span style={styles.labelSpan}>
+           <label style={STYLE.rowDiv}>
+              <span style={STYLE.labelSpan}>
                 Quandl:
               </span>
               <InputSecret
@@ -92,7 +88,7 @@ class SettingsDialog extends Component {
               onUnCheck={this._handleAdminMode.bind(null, false)}
            />
          </ModalDialog>
-    )
+    );
   }
 }
 

@@ -127,9 +127,10 @@ var _unmountWithLoadOptions = function _unmountWithLoadOptions() {
 };
 
 var withLoadOptions = function withLoadOptions(target) {
-  target.prototype._handlerWithLoadOptions = _handlerWithLoadOptions;
-  target.prototype._unmountWithLoadOptions = _unmountWithLoadOptions;
+  var _proto = target.prototype;
+  _proto._handlerWithLoadOptions = _handlerWithLoadOptions;
+  _proto._unmountWithLoadOptions = _unmountWithLoadOptions;
 };
 
 exports.default = withLoadOptions;
-//# sourceMappingURL=withLoadOptions.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\decorators\withLoadOptions.js.map

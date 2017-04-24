@@ -26,7 +26,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
@@ -35,8 +35,6 @@ var _DialogStyles = require('../styles/DialogStyles');
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
 
 var Styles = {
   CAPTION: {
@@ -102,7 +100,7 @@ var AlertDialog = (_temp = _class = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv },
+          { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'span',
             { style: Styles.CAPTION },
@@ -116,7 +114,7 @@ var AlertDialog = (_temp = _class = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv },
+          { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'p',
             { style: Styles.DESCR },
@@ -140,4 +138,4 @@ process.env.NODE_ENV !== "production" ? AlertDialog.propTypes = {
   onClose: _react.PropTypes.func
 } : void 0;
 exports.default = AlertDialog;
-//# sourceMappingURL=AlertDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\AlertDialog.js.map

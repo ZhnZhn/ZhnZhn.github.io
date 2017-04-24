@@ -1,16 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
 import ActionButton from '../zhn/ActionButton';
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
-import DialogStyles from '../styles/DialogStyles'
+import STYLE from '../styles/DialogStyles';
 
 import BrowserActions from '../../flux/actions/BrowserActions';
 import ChartActions from '../../flux/actions/ChartActions';
 
-const styles = DialogStyles;
-
-const MSG_PREFIX = "Would you like load item"
+const MSG_PREFIX = "Would you like load item";
 const MSG_SUFFIX = "from url?";
 
 const S = {
@@ -107,7 +105,7 @@ class AskDialog extends Component {
         withoutClose={true}
         onClose={onClose}
       >
-         <div style={styles.rowDiv}>
+         <div style={STYLE.rowDiv}>
             <p style={S.DESCR}>
                {MSG_PREFIX}
                <span style={S.NAME}>{name}</span>

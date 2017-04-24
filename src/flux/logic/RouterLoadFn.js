@@ -1,4 +1,8 @@
 
+import fnEuroStat from '../creaters/eurostat'
+import fnEuroStat2 from '../creaters/eurostat2'
+import fnEuroStat3 from '../creaters/eurostat3'
+
 import fnType3 from '../creaters/type3'
 import fnType4 from '../creaters/type4'
 import fnType5 from '../creaters/type5'
@@ -8,7 +12,7 @@ import fnFuturesWiki from '../creaters/futuresWiki'
 
 import fnBigMac from '../creaters/bigMac'
 
-const noopFn = () => {}
+const noopFn = () => {};
 
 const _r = {
   BigMac: fnBigMac,
@@ -20,8 +24,12 @@ const _r = {
   DialogType5: fnType5,
 
   Futures3Dialog: fnFutures3,
-  FuturesWikiDialog: fnFuturesWiki
-}
+  FuturesWikiDialog: fnFuturesWiki,
+
+  DialogEurostat: fnEuroStat,
+  DialogEurostat2: fnEuroStat2,
+  DialogEurostat3: fnEuroStat3,
+};
 
 const RouterLoadFn = {
    getFn : (loadFnType, dialogType) => {

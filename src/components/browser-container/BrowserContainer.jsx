@@ -5,7 +5,7 @@ import { BrowserType } from '../../constants/Type';
 
 import QuandlBrowser from '../quandl-browser/QuandlBrowser';
 import WatchBrowser from '../watch-browser/WatchBrowser';
-import DialogContainer3 from '../zhn/DialogContainer3';
+import DialogContainer3 from '../zhn-containers/DialogContainer3';
 
 
 class BrowserContainer extends Component {

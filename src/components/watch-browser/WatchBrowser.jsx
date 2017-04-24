@@ -1,9 +1,4 @@
-import React from 'react';
-
-import WithDnDStyle from './with/WithDnDStyle';
-import createHandlerDnDGroup from './with/createHandlerDnDGroup';
-import createHandlerDnDList from './with/createHandlerDnDList';
-import createHandlerDnDItem from './with/createHandlerDnDItem';
+import React, { Component } from 'react';
 
 import { ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
@@ -14,8 +9,13 @@ import BrowserCaption from '../zhn/BrowserCaption';
 import ButtonCircle from '../zhn/ButtonCircle';
 import ScrollPane from '../zhn/ScrollPane';
 import OpenClose2 from '../zhn/OpenClose2';
+import EditBar from './EditBar';
 import WatchItem from './WatchItem';
 
+import withDnDStyle from './decorators/withDnDStyle';
+import withDnDGroup from './decorators/withDnDGroup';
+import withDnDList from './decorators/withDnDList';
+import withDnDItem from './decorators/withDnDItem';
 
 const DRAG = {
   GROUP : 'GROUP',
@@ -53,58 +53,74 @@ const styles = {
   }
 };
 
-const WatchBrowser = React.createClass({
-  ...WithDnDStyle,
-  ...createHandlerDnDGroup(DRAG, WatchActions),
-  ...createHandlerDnDList(DRAG, WatchActions),
-  ...createHandlerDnDItem(DRAG, WatchActions),
+@withDnDStyle
+@withDnDGroup(DRAG, WatchActions)
+@withDnDList(DRAG, WatchActions)
+@withDnDItem(DRAG, WatchActions)
+class WatchBrowser extends Component {
 
-  getInitialState(){
-    const {store} = this.props;
-    return {
+  constructor(props){
+    super()
+
+    this._handlerDragStartGroup =this._handlerDragStartGroup.bind(this)
+    this._handlerDropGroup = this._handlerDropGroup.bind(this)
+    this._handlerDragEnterGroup = this._handlerDragEnterGroup.bind(this)
+    this._handlerDragLeaveGroup = this._handlerDragLeaveGroup.bind(this)
+
+    this._handlerDragStartList = this._handlerDragStartList.bind(this)
+    this._handlerDropList = this._handlerDropList.bind(this)
+    this._handlerDragEnterList = this._handlerDragEnterList.bind(this)
+    this._handlerDragLeaveList = this._handlerDragLeaveList.bind(this)
+
+    this._handlerDragStartItem = this._handlerDragStartItem.bind(this)
+    this._handlerDropItem = this._handlerDropItem.bind(this)
+    this._handlerDragEnterItem = this._handlerDragEnterItem.bind(this)
+    this._handlerDragLeaveItem = this._handlerDragLeaveItem.bind(this)
+
+    this.state = {
       isShow : false,
       isModeEdit : false,
-      watchList : store.getWatchList()
+      watchList : props.store.getWatchList()
     }
-  },
+  }
 
-  componentWillMount: function(){
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  },
-  componentWillUnmount: function(){
-    this.unsubscribe();
-  },
-  _onStore: function(actionType, data){
+  componentDidMount(){
+    this.unsubscribe = this.props.store.listen(this._onStore)
+  }
+  componentWillUnmount(){
+    this.unsubscribe()
+  }
+  _onStore = (actionType, data) => {
      const { browserType, showAction, updateAction } = this.props;
      if (actionType === showAction && data === browserType ){
-      this._handlerShow();
+      this._handlerShow()
     } else if (actionType === updateAction) {
       this.setState({ watchList: data })
     }
-  },
+  }
 
-  _handlerHide(){
+  _handlerHide = () => {
      this.setState({ isShow : false })
-  },
-  _handlerShow(){
+  }
+  _handlerShow = () => {
      this.setState({ isShow : true })
-  },
+  }
 
-  _handlerSaveWatch(){
-    WatchActions.saveWatch();
-  },
-  _handlerToggleEditMode(){
-    this.setState({ isModeEdit : !this.state.isModeEdit });
-  },
+  _handlerSaveWatch() {
+    WatchActions.saveWatch()
+  }
+  _handlerToggleEditMode = () => {
+    this.setState({ isModeEdit : !this.state.isModeEdit })
+  }
 
-  _handlerEditGroup(){
-    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_GROUP);
-  },
-  _handlerEditList(){
-    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_LIST);
-  },
+  _handlerEditGroup() {
+    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_GROUP)
+  }
+  _handlerEditList() {
+    ComponentActions.showModalDialog(ModalDialog.EDIT_WATCH_LIST)
+  }
 
-  _renderWatchList(watchList){
+  _renderWatchList = (watchList) => {
      const { isModeEdit } = this.state;
      return watchList.groups.map((group, index) => {
        const {caption, lists} = group;
@@ -124,11 +140,11 @@ const WatchBrowser = React.createClass({
                 >
                 {lists && this._renderLists(lists, caption)}
                 </OpenClose2>
-              )
-     })
-  },
+              );
+     });
+  }
 
-  _renderLists(lists, groupCaption){
+  _renderLists = (lists, groupCaption) => {
     const { isModeEdit } = this.state;
     return lists.map((list, index) => {
       const {caption, items} = list;
@@ -150,25 +166,25 @@ const WatchBrowser = React.createClass({
         >
          {items && this._renderItems(items, groupCaption, caption)}
         </OpenClose2>
-      )
-    })
-  },
+      );
+    });
+  }
 
-  _handlerClickItem(item){
-    ComponentActions.showModalDialog(ModalDialog.LOAD_ITEM, item);
-  },
-  _handlerRemoveItem(option, event){
-    event.stopPropagation();
-    WatchActions.removeItem(option);
-  },
+  _handlerClickItem(item) {
+    ComponentActions.showModalDialog(ModalDialog.LOAD_ITEM, item)
+  }
+  _handlerRemoveItem(option, event) {
+    event.stopPropagation()
+    WatchActions.removeItem(option)
+  }
 
-  _renderItems(items, groupCaption, listCaption) {
+  _renderItems = (items, groupCaption, listCaption) => {
       const {isModeEdit} = this.state;
       return items.map((item, index) => {
         const { id, caption } = item
             , _className = (index % 2)
                  ? 'row__topic__even not-selected'
-                 : 'row__topic__odd not-selected'
+                 : 'row__topic__odd not-selected';
         return (
             <WatchItem
                key={id}
@@ -185,32 +201,8 @@ const WatchBrowser = React.createClass({
                onDrop={this._handlerDropItem}
             />
         );
-      })
-    },
-
-  _renderEditBar(isModeEdit){
-    if (isModeEdit){
-      return (
-        <div style={{marginBottom: '10px'}}>
-           <ButtonCircle
-             caption={'GROUP'}
-             className={'bt__watch__bar'}
-             isWithoutDefault={true}
-             onClick={this._handlerEditGroup}
-          />
-          <ButtonCircle
-             caption={'LIST'}
-             className={'bt__watch__bar'}
-             isWithoutDefault={true}
-             style={{marginLeft: '20px'}}
-             onClick={this._handlerEditList}
-          />
-        </div>
-      )
-    } else {
-      return null;
+      });
     }
-  },
 
   render(){
     const { caption } = this.props
@@ -221,7 +213,7 @@ const WatchBrowser = React.createClass({
           <BrowserCaption
             caption={caption}
             onClose={this._handlerHide}
-          >         
+          >
            <ButtonCircle
              caption={'S'}
              style={styles.btCircle}
@@ -233,13 +225,17 @@ const WatchBrowser = React.createClass({
               onClick={this._handlerToggleEditMode}
            />
          </BrowserCaption>
-         {this._renderEditBar(isModeEdit)}
+         <EditBar
+            isShow={isModeEdit}
+            onClickGroup={this._handlerEditGroup}
+            onClickList={this._handlerEditList}
+         />
          <ScrollPane style={styles.scrollDiv}>
            {watchList && this._renderWatchList(watchList)}
          </ScrollPane>
       </Browser>
     )
   }
-});
+}
 
 export default WatchBrowser

@@ -36,7 +36,7 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 var _Type = require('../../constants/Type');
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
@@ -159,12 +159,10 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           onTestDate = _state.onTestDate,
           validationMessages = _state.validationMessages,
           _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
         type: 'TypeC',
         caption: 'Load',
         onClick: this._handleLoad
       }), _react2.default.createElement(_ActionButton2.default, {
-        key: 'b',
         type: 'TypeC',
         caption: 'Show',
         onClick: onShow
@@ -330,7 +328,5 @@ process.env.NODE_ENV !== "production" ? StocksBySectorDialog.propTypes = {
   store: _react.PropTypes.object,
   onClose: _react.PropTypes.func.isRequired
 } : void 0;
-StocksBySectorDialog.displayName = 'StocksBySectorDialog';
-
 exports.default = StocksBySectorDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\StocksBySectorDialog.js.map

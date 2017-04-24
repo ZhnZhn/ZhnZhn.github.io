@@ -28,13 +28,11 @@ var _TransformFn = require('./TransformFn');
 
 var _TransformFn2 = _interopRequireDefault(_TransformFn);
 
-var _InputSearch = require('./InputSearch');
+var _InputSelect = require('./InputSelect');
 
-var _InputSearch2 = _interopRequireDefault(_InputSearch);
+var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//import InputSelect from './InputSelect';
 
 var WrapperInputSearch = function (_Component) {
   (0, _inherits3.default)(WrapperInputSearch, _Component);
@@ -80,7 +78,9 @@ var WrapperInputSearch = function (_Component) {
       return _react2.default.createElement(
         'div',
         { style: style },
-        _react2.default.createElement(_InputSearch2.default, {
+        _react2.default.createElement(_InputSelect2.default, {
+          width: '100%',
+          isShowOptionAnim: true,
           placeholder: placeholder,
           propCaption: caption,
           options: _options,

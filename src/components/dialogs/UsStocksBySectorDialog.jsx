@@ -4,7 +4,7 @@ import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
 import { LoadType } from '../../constants/Type';
 
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 import ActionButton from '../zhn/ActionButton';
 import RowInputSelect from './RowInputSelect';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
@@ -29,6 +29,15 @@ const sourceOptions = [
 
 @withValidationLoad
 class UsStocksBySectorDialog extends Component {
+   static propTypes = {
+     isShow: PropTypes.bool.isRequired,
+     data: PropTypes.object.isRequired,
+     store: PropTypes.object,
+     onClose: PropTypes.func.isRequired
+   }
+   static defaultProps = {
+     data: {}
+   }
 
    constructor(props){
      super();
@@ -82,27 +91,27 @@ class UsStocksBySectorDialog extends Component {
              columnName : 'Close',
              seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ],
              dataSource : `(Code: ${_dataSource})`
-          }
+           };
 
-      ChartActions.loadStock(chartContainerType, browserType, option);
-      onClose();
+      ChartActions.loadStock(chartContainerType, browserType, option)
+      onClose()
     }
-    this._updateValidationMessages(validationMessages);
+    this._updateValidationMessages(validationMessages)
   }
 
   _getValidationMessages = () => {
     let   msg = [];
     const { isValid, datesMsg } = this.datesFragment.getValidation();
-    if (!isValid) { msg = msg.concat(datesMsg); }
-    msg.isValid = (msg.length === 0) ? true : false;
+    if (!isValid) { msg = msg.concat(datesMsg) }
+    msg.isValid = (msg.length === 0) ? true : false
     return msg;
   }
 
   _handleClose = () => {
     if (this.state.validationMessages.length > 0){
-      this.setState({validationMessages : this._getValidationMessages()});
+      this.setState({ validationMessages : this._getValidationMessages() })
     }
-    this.props.onClose();
+    this.props.onClose()
   }
 
   render(){
@@ -111,20 +120,17 @@ class UsStocksBySectorDialog extends Component {
         , { text } = item
         , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton
-          key="a"
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />,
-       <ActionButton
-          key="b"
-          type="TypeC"
-          caption="Show"
-          onClick={onShow}
-       />
-    ];
-
+             <ActionButton
+                type="TypeC"
+                caption="Load"
+                onClick={this._handleLoad}
+             />,
+             <ActionButton
+                type="TypeC"
+                caption="Show"
+                onClick={onShow}
+             />
+          ];
     return (
       <ModalDialog
          caption={text}
@@ -149,19 +155,8 @@ class UsStocksBySectorDialog extends Component {
             validationMessages={validationMessages}
         />
       </ModalDialog>
-    )
+    );
   }
 }
-
-UsStocksBySectorDialog.propTypes = {
-  isShow  : PropTypes.bool.isRequired,
-  data    : PropTypes.object.isRequired,
-  store   : PropTypes.object,
-  onClose : PropTypes.func.isRequired
-};
-UsStocksBySectorDialog.defaultProps = {
-  data : {}
-};
-UsStocksBySectorDialog.displaName = 'UsStocksBySectorDialog';
 
 export default UsStocksBySectorDialog

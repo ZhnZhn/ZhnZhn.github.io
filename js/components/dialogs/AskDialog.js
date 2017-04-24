@@ -28,7 +28,7 @@ var _ActionButton = require('../zhn/ActionButton');
 
 var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
@@ -49,8 +49,6 @@ var _ChartActions = require('../../flux/actions/ChartActions');
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
 
 var MSG_PREFIX = "Would you like load item";
 var MSG_SUFFIX = "from url?";
@@ -156,7 +154,7 @@ var AskDialog = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv },
+          { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'p',
             { style: S.DESCR },
@@ -192,4 +190,4 @@ process.env.NODE_ENV !== "production" ? AskDialog.propTypes = {
   onClose: _react.PropTypes.func
 } : void 0;
 exports.default = AskDialog;
-//# sourceMappingURL=AskDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\AskDialog.js.map

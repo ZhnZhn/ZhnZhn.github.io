@@ -27,10 +27,11 @@ var _clickDateWithToolbar = function _clickDateWithToolbar() {
 };
 
 var withToolbar = function withToolbar(target) {
-  target.prototype._createType2WithToolbar = _createType2WithToolbar;
-  target.prototype._clickInfoWithToolbar = _clickInfoWithToolbar;
-  target.prototype._clickDateWithToolbar = _clickDateWithToolbar;
+  var _proto = target.prototype;
+  _proto._createType2WithToolbar = _createType2WithToolbar;
+  _proto._clickInfoWithToolbar = _clickInfoWithToolbar;
+  _proto._clickDateWithToolbar = _clickDateWithToolbar;
 };
 
 exports.default = withToolbar;
-//# sourceMappingURL=withToolbar.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\decorators\withToolbar.js.map

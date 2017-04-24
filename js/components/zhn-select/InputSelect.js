@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -30,14 +34,23 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ArrowCell = require('./ArrowCell');
+
+var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CLASS_ROW_ACTIVE = "option-row__active";
+var MAX_WITHOUT_ANIMATION = 800,
+    CLASS_ROW_ACTIVE = "option-row__active";
 
 var _fnNoItem = function _fnNoItem(propCaption) {
   var _ref;
 
   return _ref = {}, (0, _defineProperty3.default)(_ref, propCaption, 'No results found'), (0, _defineProperty3.default)(_ref, 'value', 'noresult'), _ref;
+};
+
+var _crWidth = function _crWidth(width) {
+  return width ? ('' + width).indexOf('%') !== -1 ? { width: width } : { width: width + 'px' } : null;
 };
 
 var styles = {
@@ -55,7 +68,9 @@ var styles = {
     height: '30px',
     paddingLeft: '10px',
     color: 'green',
-    width: '140px',
+    //width: '140px',
+    width: '100%',
+    paddingRight: '40px',
     fontSize: '16px',
     fontWeight: 'bold'
   },
@@ -78,43 +93,22 @@ var styles = {
     overflow: 'auto'
   },
   spinnerCell: {
-    position: 'relative',
-    left: '8px',
-    top: '4px',
+    position: 'absolute',
+    top: '6px',
+    right: '10px',
     display: 'inline-block',
-    width: '16px',
-    height: '16px'
+    width: '20px',
+    height: '20px'
   },
   spinnerFailedCell: {
-    position: 'relative',
-    left: '8px',
-    top: '4px',
+    position: 'absolute',
+    top: '6px',
+    right: '10px',
     display: 'inline-block',
-    width: '16px',
-    height: '16px',
+    width: '20px',
+    height: '20px',
     borderColor: '#F44336',
     cursor: 'pointer'
-  },
-  arrowCell: {
-    cursor: 'pointer',
-    //display: table-cell
-    position: 'relative',
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    //width: '25px',
-    width: '35px',
-    paddingRight: '5px',
-    marginLeft: '10px'
-
-  },
-  arrow: {
-    borderColor: '#999 transparent transparent',
-    borderStyle: 'solid',
-    borderWidth: '5px 5px 2.5px',
-    //borderWidth: '10px 10px 5px',
-    display: 'inline-block',
-    height: '0px',
-    width: '0px'
   },
   arrowShow: {
     borderColor: '#1B75BB transparent transparent'
@@ -127,14 +121,15 @@ var styles = {
     margin: 0,
     marginLeft: '10px',
     marginBottom: '5px',
-    width: '150px'
+    marginRight: '40px'
+    //width: '150px'
 
   },
   itemDiv: {
     cursor: 'pointer',
-    paddingTop: '4px',
+    paddingTop: '6px',
     paddingLeft: '5px',
-    paddingBottom: '4px'
+    paddingBottom: '6px'
     //lineHeight: '14px'
   },
   itemOdd: {
@@ -239,31 +234,17 @@ var InputSelect = (_temp = _class = function (_Component) {
           _state = this.state,
           value = _state.value,
           isLocalMode = _state.isLocalMode,
-          isShowOption = _state.isShowOption;
-
-
-      var _styleDivWidth = null;
-      var _styleInputWidth = null;
-      var _styleHr = null;
-      if (width) {
-        _styleDivWidth = { width: width + 'px' };
-        _styleInputWidth = { width: width - 30 + 'px' };
-        _styleHr = { width: width - 40 + 'px' };
-      } /*else {
-        _styleDivWidth = { width: '100%' };
-        _styleInputWidth = { width: '100%'};
-        _styleHr = { width: 'auto' };
-        } */
-
-      var _crAfterInputEl = this._crAfterInputEl(),
+          isShowOption = _state.isShowOption,
+          _rootWidthStyle = _crWidth(width),
+          _crAfterInputEl = this._crAfterInputEl(),
           afterInputEl = _crAfterInputEl.afterInputEl,
-          placeholder = _crAfterInputEl.placeholder;
+          placeholder = _crAfterInputEl.placeholder,
+          _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
-      var _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
       return _react2.default.createElement(
         'div',
-        { style: Object.assign({}, styles.rootDiv, _styleDivWidth) },
+        { style: (0, _extends3.default)({}, styles.rootDiv, _rootWidthStyle) },
         _react2.default.createElement('input', {
           ref: function ref(c) {
             return _this2.domInputText = c;
@@ -275,12 +256,12 @@ var InputSelect = (_temp = _class = function (_Component) {
           autoCapitalize: 'off',
           spellCheck: false,
           value: value,
-          style: Object.assign({}, styles.inputText, _styleInputWidth),
+          style: styles.inputText,
           placeholder: placeholder,
           onChange: this._handleInputChange,
           onKeyDown: this._handleInputKeyDown }),
         afterInputEl,
-        _react2.default.createElement('hr', { style: Object.assign({}, styles.inputHr, _styleHr) }),
+        _react2.default.createElement('hr', { style: styles.inputHr }),
         _domOptions
       );
     }
@@ -386,6 +367,29 @@ var InputSelect = (_temp = _class = function (_Component) {
     }
   };
 
+  this._startAfterInputAnimation = function () {
+    if (_this3.state.options.length > MAX_WITHOUT_ANIMATION) {
+      _this3.arrowCell.startAnimation();
+    }
+  };
+
+  this._stopAfterInputAnimation = function () {
+    _this3.arrowCell.stopAnimation();
+  };
+
+  this._setShowOptions = function () {
+    _this3.setState({ isShowOption: true }, _this3._stopAfterInputAnimation);
+  };
+
+  this._showOptions = function (ms) {
+    if (_this3.props.isShowOptionAnim) {
+      _this3._startAfterInputAnimation();
+      setTimeout(_this3._setShowOptions, ms);
+    } else {
+      _this3.setState({ isShowOption: true });
+    }
+  };
+
   this._handleInputKeyDown = function (event) {
     switch (event.keyCode) {
       // enter
@@ -424,7 +428,8 @@ var InputSelect = (_temp = _class = function (_Component) {
       case 40:
         {
           if (!_this3.state.isShowOption) {
-            _this3.setState({ isShowOption: true });
+            _this3._showOptions(0);
+            //this.setState({ isShowOption : true });
           } else {
             event.preventDefault();
 
@@ -484,7 +489,12 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 
   this._handleToggleOptions = function () {
-    _this3.setState({ isShowOption: !_this3.state.isShowOption });
+    //this.setState({ isShowOption: !this.state.isShowOption });
+    if (_this3.state.isShowOption) {
+      _this3.setState({ isShowOption: false });
+    } else {
+      _this3._showOptions(1);
+    }
   };
 
   this._handleClickItem = function (item, index, event) {
@@ -515,9 +525,8 @@ var InputSelect = (_temp = _class = function (_Component) {
             {
               key: index,
               className: 'option-row',
-              style: Object.assign({}, styles.itemDiv, _styleDiv)
-              //ref={"v"+index}
-              , ref: function ref(c) {
+              style: Object.assign({}, styles.itemDiv, _styleDiv),
+              ref: function ref(c) {
                 return _this3['v' + index] = c;
               },
               onClick: _this3._handleClickItem.bind(_this3, item, index)
@@ -536,24 +545,21 @@ var InputSelect = (_temp = _class = function (_Component) {
 
     var width = _this3.props.width,
         _styleOptions = isShowOption ? { display: 'block' } : { display: 'none' },
-        _styleDivWidth = width ? { width: width + 'px' }
-    //: { width: '100%' }
-    : null,
+        _rootWidthStyle = _crWidth(width),
         _numberFilteredItems = options[0] && options[0].value !== 'noresult' ? options.length : 0,
         _numberAllItems = _this3.props.options ? _this3.props.options.length : 0;
 
 
     return _react2.default.createElement(
       'div',
-      { style: Object.assign({}, styles.rootOptionDiv, _styleOptions, _styleDivWidth) },
+      { style: (0, _extends3.default)({}, styles.rootOptionDiv, _styleOptions, _rootWidthStyle) },
       _react2.default.createElement(
         'div',
         {
-          //ref={c => this.domOptions = c}
           ref: function ref(c) {
             return _this3.optionsComp = c;
           },
-          style: Object.assign({}, styles.optionDiv, _styleOptions, _styleDivWidth)
+          style: (0, _extends3.default)({}, styles.optionDiv, _styleOptions, _rootWidthStyle)
         },
         _domOptions
       ),
@@ -588,13 +594,13 @@ var InputSelect = (_temp = _class = function (_Component) {
     if (!isLoading && !isLoadingFailed) {
       var _styleArrow = isShowOption ? styles.arrowShow : null;
       _placeholder = placeholder ? placeholder : 'Select ' + optionName + '...';
-      _afterInputEl = _react2.default.createElement(
-        'span',
-        {
-          style: styles.arrowCell,
-          onClick: _this3._handleToggleOptions },
-        _react2.default.createElement('span', { style: Object.assign({}, styles.arrow, _styleArrow) })
-      );
+      _afterInputEl = _react2.default.createElement(_ArrowCell2.default, {
+        ref: function ref(c) {
+          return _this3.arrowCell = c;
+        },
+        styleArrow: _styleArrow,
+        onClick: _this3._handleToggleOptions
+      });
     } else if (isLoading) {
       _placeholder = 'Loading ' + optionNames + '...';
       _afterInputEl = _react2.default.createElement('span', {
@@ -619,6 +625,7 @@ process.env.NODE_ENV !== "production" ? InputSelect.propTypes = {
   propCaption: _react.PropTypes.string,
   ItemOptionComp: _react.PropTypes.element,
   width: _react.PropTypes.string,
+  isShowOptionAnim: _react.PropTypes.bool,
   options: _react.PropTypes.arrayOf(_react.PropTypes.shape({
     caption: _react.PropTypes.string,
     value: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number])

@@ -4,6 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _eurostat = require('../creaters/eurostat');
+
+var _eurostat2 = _interopRequireDefault(_eurostat);
+
+var _eurostat3 = require('../creaters/eurostat2');
+
+var _eurostat4 = _interopRequireDefault(_eurostat3);
+
+var _eurostat5 = require('../creaters/eurostat3');
+
+var _eurostat6 = _interopRequireDefault(_eurostat5);
+
 var _type = require('../creaters/type3');
 
 var _type2 = _interopRequireDefault(_type);
@@ -42,7 +54,11 @@ var _r = {
   DialogType5: _type6.default,
 
   Futures3Dialog: _futures2.default,
-  FuturesWikiDialog: _futuresWiki2.default
+  FuturesWikiDialog: _futuresWiki2.default,
+
+  DialogEurostat: _eurostat2.default,
+  DialogEurostat2: _eurostat4.default,
+  DialogEurostat3: _eurostat6.default
 };
 
 var RouterLoadFn = {

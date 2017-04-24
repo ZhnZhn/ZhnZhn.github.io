@@ -131,13 +131,13 @@ var ChartToolbar = function (_Component) {
       ) : null;
 
       /*
-       const _btConf = (
-         <ButtonTab
-           style={{left: '450px'}}
-           caption={'Conf'}
-           onClick={onClickConfig}
-         />
-       )
+         const _btConf = (
+           <ButtonTab
+             style={{left: '450px'}}
+             caption={'Conf'}
+             onClick={onClickConfig}
+           />
+         )
       */
 
       return _react2.default.createElement(

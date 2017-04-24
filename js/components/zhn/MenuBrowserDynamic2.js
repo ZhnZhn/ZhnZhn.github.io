@@ -177,13 +177,9 @@ var MenuBrowserDynamic2 = function (_Component) {
   }
 
   (0, _createClass3.default)(MenuBrowserDynamic2, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.unsubscribe = this.props.store.listen(this._onStore);
       this._loadMenu();
     }
   }, {
@@ -253,4 +249,4 @@ var MenuBrowserDynamic2 = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuBrowserDynamic2;
-//# sourceMappingURL=MenuBrowserDynamic2.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuBrowserDynamic2.js.map

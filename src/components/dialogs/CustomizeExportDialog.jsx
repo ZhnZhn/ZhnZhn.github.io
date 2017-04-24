@@ -3,8 +3,8 @@ import merge from 'lodash.merge';
 
 import ChartExportConfig from '../../charts/ChartExportConfig';
 
-import ModalDialog from '../zhn/ModalDialog';
-import DialogStyles from '../styles/DialogStyles';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
+import STYLE from '../styles/DialogStyles';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import ActionButton from '../zhn/ActionButton';
 
@@ -12,9 +12,7 @@ import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
 import InputSelect from '../zhn-select/InputSelect';
 
-const styles = DialogStyles;
-
-const STYLE = {
+const S = {
   GAP_BETWEEN_GROUP : {
     marginTop: '10px'
   },
@@ -135,50 +133,50 @@ class CustomizeExportDialog extends Component {
            buttons={this.toolbarButtons}
          />
          <ShowHide isShow={isShowDimension}>
-         <div style={styles.rowDiv} key="1">
-            <span style={STYLE.LABEL_WIDTH}>Dimension:</span>
-            <span style={STYLE.LABEL_HEIGHT}>Width:</span>
-            <InputText
-              ref={ c => this.inputWidth = c }
-              initValue={chartWidth}
-              style = {STYLE.INPUT_NUMBER}
-            />
-            <span style={STYLE.LABEL_HEIGHT}>Height:</span>
-            <InputText
-              ref={ c => this.inputHeight = c }
-              initValue={chartHeight}
-              style = {STYLE.INPUT_NUMBER}
-            />
-         </div>
+           <div style={STYLE.rowDiv}>
+              <span style={S.LABEL_WIDTH}>Dimension:</span>
+              <span style={S.LABEL_HEIGHT}>Width:</span>
+              <InputText
+                ref={ c => this.inputWidth = c }
+                initValue={chartWidth}
+                style={S.INPUT_NUMBER}
+              />
+              <span style={S.LABEL_HEIGHT}>Height:</span>
+              <InputText
+                ref={ c => this.inputHeight = c }
+                initValue={chartHeight}
+                style={S.INPUT_NUMBER}
+              />
+           </div>
          </ShowHide>
          <ShowHide isShow={isShowTitle}>
-         <div style={Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP)} key="2">
-           <span style={STYLE.LABEL_WIDTH}>Title:</span>
-           <InputText
-             ref={ c => this.inputTitle = c }
-             initValue={title}
-             style={STYLE.INPUT_TEXT}
-           />
-         </div>
-         <div style={styles.rowDiv} key="3">
-           <span style={STYLE.LABEL_WIDTH}>Subtitle:</span>
-           <InputText
-             ref={ c => this.inputSubtitle = c }
-             initValue={subtitle}
-             style={STYLE.INPUT_TEXT}
-           />
-         </div>
+           <div style={{ ...STYLE.rowDiv, ...S.GAP_BETWEEN_GROUP }}>
+             <span style={S.LABEL_WIDTH}>Title:</span>
+             <InputText
+               ref={ c => this.inputTitle = c }
+               initValue={title}
+               style={S.INPUT_TEXT}
+             />
+           </div>
+           <div style={STYLE.rowDiv}>
+             <span style={S.LABEL_WIDTH}>Subtitle:</span>
+             <InputText
+               ref={ c => this.inputSubtitle = c }
+               initValue={subtitle}
+               style={S.INPUT_TEXT}
+             />
+           </div>
          </ShowHide>
          <ShowHide isShow={isShowStyle}>
-         <div style={Object.assign({}, styles.rowDiv, STYLE.GAP_BETWEEN_GROUP)} key="4">
-           <span style={STYLE.LABEL_WIDTH}>Style:</span>
-           <InputSelect
-             width="250"
-             options={this.optionStyles}
-             placeholder="Default"
-             onSelect={this._handleSelectStyle}
-           />
-         </div>
+           <div style={{ ...STYLE.rowDiv, ...S.GAP_BETWEEN_GROUP}}>
+             <span style={S.LABEL_WIDTH}>Style:</span>
+             <InputSelect
+               width="250"
+               options={this.optionStyles}
+               placeholder="Default"
+               onSelect={this._handleSelectStyle}
+             />
+           </div>
          </ShowHide>
       </ModalDialog>
     )

@@ -26,10 +26,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _eurostat = require('../../flux/creaters/eurostat');
-
-var _eurostat2 = _interopRequireDefault(_eurostat);
-
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
 var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
@@ -99,7 +95,7 @@ var DialogEurostat = (0, _withToolbar2.default)(_class = (0, _withValidationLoad
     };
 
     _this._createLoadOption = function () {
-      return (0, _eurostat2.default)(_this.props, { one: _this.one, two: _this.two });
+      return _this.props.loadFn(_this.props, { one: _this.one, two: _this.two });
     };
 
     _this._handleClose = function () {
@@ -198,7 +194,8 @@ process.env.NODE_ENV !== "production" ? DialogEurostat.propTypes = {
   twoJsonProp: _react.PropTypes.string,
 
   msgOnNotSelected: _react.PropTypes.func,
-  onShow: _react.PropTypes.func
+  onShow: _react.PropTypes.func,
+  loadFn: _react.PropTypes.func
 } : void 0;
 exports.default = DialogEurostat;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat.js.map

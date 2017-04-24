@@ -82,8 +82,8 @@ var MenuBrowser = (_temp = _class = function (_Component) {
   }
 
   (0, _createClass3.default)(MenuBrowser, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       this.unsubscribe = this.props.store.listen(this._onStore);
     }
   }, {
@@ -150,4 +150,4 @@ var MenuBrowser = (_temp = _class = function (_Component) {
   };
 }, _temp);
 exports.default = MenuBrowser;
-//# sourceMappingURL=MenuBrowser.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuBrowser.js.map

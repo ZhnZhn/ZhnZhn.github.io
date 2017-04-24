@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -14,7 +18,6 @@ var _ContainerStyles2 = _interopRequireDefault(_ContainerStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = _ContainerStyles2.default;
 var SHOW_POPUP = 'show-popup';
 var S = {
   BLOCK: {
@@ -36,15 +39,16 @@ var Browser = function Browser(_ref) {
     'div',
     {
       className: _classOpen,
-      style: Object.assign({}, styles.browserRootDiv, style, _styleOpen)
+      style: (0, _extends3.default)({}, _ContainerStyles2.default.browserRootDiv, style, _styleOpen)
     },
     children
   );
 };
+
 process.env.NODE_ENV !== "production" ? Browser.propTypes = {
   isShow: _react.PropTypes.bool,
   style: _react.PropTypes.object
 } : void 0;
 
 exports.default = Browser;
-//# sourceMappingURL=Browser.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\Browser.js.map

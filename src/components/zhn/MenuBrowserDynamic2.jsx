@@ -57,11 +57,9 @@ class MenuBrowserDynamic2 extends Component {
     }
   }
 
-  componentWillMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore);
-  }
   componentDidMount(){
-    this._loadMenu();
+    this.unsubscribe = this.props.store.listen(this._onStore)
+    this._loadMenu()
   }
   componentWillUpdate(nextProps, nextState){
      if (!nextState.isLoaded && nextState.isShow){

@@ -1,1 +1,39 @@
-{"version":3,"sources":["../../../src/components/dialogs/DescriptionDialog.jsx"],"names":["DESCR_EMPTY","Style","DIALOG","top","left","width","maxWidth","DIV","padding","DescriptionDialog","props","state","descrHtml","_loadDescr","descrUrl","uri","onFetch","_setDescrHtml","text","setState","nextProps","isShow","data","nextState","onClose","_html","sanitize","__html","defaultProps","displayName"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AAEA;;AACA;;;;;;AAEA,IAAMA,cAAc,kEAApB;AACA,IAAMC,QAAQ;AACZC,UAAS;AACPC,SAAK,KADE;AAEPC,UAAM,KAFC;AAGPC,WAAM,MAHC;AAIPC,cAAS;AAJF,GADG;AAOZC,OAAM;AACJC,aAAQ;AADJ;AAPM,CAAd;;IAYMC,iB;;;AAKJ,6BAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAJlBC,KAIkB,GAJV;AACNC,iBAAW;AADL,KAIU;;AAAA,UAyBlBC,UAzBkB,GAyBL,YAAmB;AAAA,UAAjBC,QAAiB,uEAAR,EAAQ;;AAC7B,UAAKA,QAAL,EAAgB;AACd,6BAAY,EAAEC,KAAKD,QAAP,EAAiBE,SAAS,MAAKC,aAA/B,EAAZ;AACD,OAFD,MAEO;AACL,cAAKA,aAAL;AACD;AACH,KA/BiB;;AAAA,UAgClBA,aAhCkB,GAgCF,YAA6B;AAAA,qFAAP,EAAO;AAAA,2BAA1BC,IAA0B;AAAA,UAA1BA,IAA0B,6BAArBlB,WAAqB;;AAC3C,YAAKmB,QAAL,CAAc,EAAEP,WAAWM,IAAb,EAAd;AACD,KAlCiB;;AAAA;AAEjB;;;;8CAEyBE,S,EAAU;AAClC,UACIA,cAAc,KAAKV,KAAnB,IACGU,UAAUC,MAAV,KAAqB,KAAKX,KAAL,CAAWW,MADnC,IAEGD,UAAUE,IAAV,CAAeR,QAAf,KAA4B,KAAKJ,KAAL,CAAWY,IAAX,CAAgBR,QAHnD,EAIE;AACA,aAAKD,UAAL,CAAgBO,UAAUE,IAAV,CAAeR,QAA/B;AACD;AACF;;;0CAEqBM,S,EAAWG,S,EAAU;AACzC,UAAIH,cAAc,KAAKV,KAAnB,IAA4BU,UAAUC,MAAV,KAAqB,KAAKX,KAAL,CAAWW,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;wCAEkB;AACjB,WAAKR,UAAL,CAAgB,KAAKH,KAAL,CAAWY,IAAX,CAAgBR,QAAhC;AACD;;;6BAaO;AAAA,mBACsB,KAAKJ,KAD3B;AAAA,UACEW,MADF,UACEA,MADF;AAAA,UACUG,OADV,UACUA,OADV;AAAA,UAEEZ,SAFF,GAEgB,KAAKD,KAFrB,CAEEC,SAFF;AAAA,UAGAa,KAHA,GAGQ,iBAAUC,QAAV,CAAmBd,SAAnB,CAHR;;AAKN,aACG;AAAA;AAAA;AACE,mBAAQ,4BADV;AAEE,kBAAQS,MAFV;AAGE,iBAAQpB,MAAMC,MAHhB;AAIE,mBAASsB;AAJX;AAME;AACG,iBAAQvB,MAAMM,GADjB;AAEG,mCAAyB,EAAEoB,QAAQF,KAAV;AAF5B;AANF,OADH;AAcD;;;;;AAGHhB,kBAAkBmB,YAAlB,GAAiC,EAAEN,MAAM,EAAR,EAAjC;AACAb,kBAAkBoB,WAAlB,GAAgC,mBAAhC;;kBAEepB,iB","file":"DescriptionDialog.js","sourcesContent":["import React, { Component } from 'react';\r\nimport DOMPurify from 'purify';\r\n\r\nimport { fnFetchText } from '../../utils/fn';\r\nimport ModalDialog from '../zhn/ModalDialog';\r\n\r\nconst DESCR_EMPTY = '<p class=\"descr__part\">Description Empty for this Datasource</p>';\r\nconst Style = {\r\n  DIALOG : {\r\n    top: '10%',\r\n    left: '10%',\r\n    width:'auto',\r\n    maxWidth:'80%'\r\n  },\r\n  DIV : {\r\n    padding:16\r\n  }\r\n}\r\n\r\nclass DescriptionDialog extends Component {\r\n  state = {\r\n    descrHtml: ''\r\n  }\r\n\r\n  constructor(props){\r\n    super();\r\n  }\r\n\r\n  componentWillReceiveProps(nextProps){\r\n    if (\r\n        nextProps !== this.props\r\n        && nextProps.isShow !== this.props.isShow\r\n        && nextProps.data.descrUrl !== this.props.data.descrUrl\r\n    ) {\r\n      this._loadDescr(nextProps.data.descrUrl);\r\n    }\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {\r\n      return false;\r\n    }\r\n    return true;\r\n  }\r\n\r\n  componentDidMount(){\r\n    this._loadDescr(this.props.data.descrUrl);\r\n  }\r\n\r\n  _loadDescr = ( descrUrl='' ) => {\r\n     if ( descrUrl ) {\r\n       fnFetchText({ uri: descrUrl, onFetch: this._setDescrHtml})\r\n     } else {\r\n       this._setDescrHtml();\r\n     }\r\n  }\r\n  _setDescrHtml = ({ text=DESCR_EMPTY }={}) => {\r\n    this.setState({ descrHtml: text })\r\n  }\r\n\r\n  render(){\r\n    const { isShow, onClose } = this.props\r\n        , { descrHtml } = this.state\r\n        , _html = DOMPurify.sanitize(descrHtml);\r\n\r\n    return (\r\n       <ModalDialog\r\n         caption=\"Description for Datasource\"\r\n         isShow={isShow}\r\n         style={ Style.DIALOG }\r\n         onClose={onClose}\r\n       >\r\n         <div\r\n            style={ Style.DIV }\r\n            dangerouslySetInnerHTML={{ __html: _html }}\r\n         >\r\n         </div>\r\n       </ModalDialog>\r\n    )\r\n  }\r\n}\r\n\r\nDescriptionDialog.defaultProps = { data: {} };\r\nDescriptionDialog.displayName = 'DescriptionDialog';\r\n\r\nexport default DescriptionDialog\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\DescriptionDialog.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\DescriptionDialog.js",
+ "sourceRoot": "",
+ "names": [
+  "DESCR_EMPTY",
+  "STYLE",
+  "DIALOG",
+  "top",
+  "left",
+  "width",
+  "maxWidth",
+  "DIV",
+  "padding",
+  "DescriptionDialog",
+  "props",
+  "_loadDescr",
+  "descrUrl",
+  "uri",
+  "onFetch",
+  "_setDescrHtml",
+  "text",
+  "setState",
+  "descrHtml",
+  "state",
+  "nextProps",
+  "isShow",
+  "data",
+  "nextState",
+  "onClose",
+  "_html",
+  "sanitize",
+  "__html",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AAEA;;AACA;;;;;;AAEA,IAAMA,cAAc,kEAApB;AACA,IAAMC,QAAQ;AACZC,UAAS;AACPC,SAAK,KADE;AAEPC,UAAM,KAFC;AAGPC,WAAM,MAHC;AAIPC,cAAS;AAJF,GADG;AAOZC,OAAM;AACJC,aAAQ;AADJ;AAPM,CAAd;;IAYMC,iB;;;AAKJ,6BAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UA4BlBC,UA5BkB,GA4BL,YAAmB;AAAA,UAAjBC,QAAiB,uEAAR,EAAQ;;AAC7B,UAAKA,QAAL,EAAgB;AACd,6BAAY,EAAEC,KAAKD,QAAP,EAAiBE,SAAS,MAAKC,aAA/B,EAAZ;AACD,OAFD,MAEO;AACL,cAAKA,aAAL;AACD;AACH,KAlCiB;;AAAA,UAmClBA,aAnCkB,GAmCF,YAA6B;AAAA,qFAAP,EAAO;AAAA,2BAA1BC,IAA0B;AAAA,UAA1BA,IAA0B,6BAArBhB,WAAqB;;AAC3C,YAAKiB,QAAL,CAAc,EAAEC,WAAWF,IAAb,EAAd;AACD,KArCiB;;AAEhB,UAAKG,KAAL,GAAa;AACXD,iBAAW;AADA,KAAb;AAFgB;AAKjB;;;;8CAEyBE,S,EAAU;AAClC,UACIA,cAAc,KAAKV,KAAnB,IACGU,UAAUC,MAAV,KAAqB,KAAKX,KAAL,CAAWW,MADnC,IAEGD,UAAUE,IAAV,CAAeV,QAAf,KAA4B,KAAKF,KAAL,CAAWY,IAAX,CAAgBV,QAHnD,EAIE;AACA,aAAKD,UAAL,CAAgBS,UAAUE,IAAV,CAAeV,QAA/B;AACD;AACF;;;0CAEqBQ,S,EAAWG,S,EAAU;AACzC,UAAIH,cAAc,KAAKV,KAAnB,IAA4BU,UAAUC,MAAV,KAAqB,KAAKX,KAAL,CAAWW,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;wCAEkB;AACjB,WAAKV,UAAL,CAAgB,KAAKD,KAAL,CAAWY,IAAX,CAAgBV,QAAhC;AACD;;;6BAaO;AAAA,mBACsB,KAAKF,KAD3B;AAAA,UACEW,MADF,UACEA,MADF;AAAA,UACUG,OADV,UACUA,OADV;AAAA,UAEEN,SAFF,GAEgB,KAAKC,KAFrB,CAEED,SAFF;AAAA,UAGAO,KAHA,GAGQ,iBAAUC,QAAV,CAAmBR,SAAnB,CAHR;;AAIN,aACG;AAAA;AAAA;AACE,mBAAQ,4BADV;AAEE,kBAAQG,MAFV;AAGE,iBAAOpB,MAAMC,MAHf;AAIE,mBAASsB;AAJX;AAME;AACG,iBAAOvB,MAAMM,GADhB;AAEG,mCAAyB,EAAEoB,QAAQF,KAAV;AAF5B;AANF,OADH;AAcD;;;4BA7DMG,Y,GAAe;AACpBN,QAAM;AADc,C;kBAgETb,iB"
+}

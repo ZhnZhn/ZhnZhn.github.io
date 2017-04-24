@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-import ModalDialog from '../zhn/ModalDialog';
-import DialogStyles from '../styles/DialogStyles'
+import ModalDialog from '../zhn-moleculs/ModalDialog';
+import STYLE from '../styles/DialogStyles'
 
-const styles = DialogStyles;
-
-const Styles = {
+const S = {
   CAPTION : {
     width : '400px',
     paddingLeft : '10px',
@@ -26,10 +24,6 @@ const Styles = {
 
 class InfoDialog extends Component {
 
-  constructor(props){
-    super();
-  }
-
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
       return false;
@@ -38,28 +32,25 @@ class InfoDialog extends Component {
   }
 
   render(){
-    const {isShow, data, onClose} = this.props
-        , {caption, descr} = data
+    const { isShow, data, onClose } = this.props
+        , { caption, descr } = data;
     return (
       <ModalDialog
         caption="Information"
         isShow={isShow}
         onClose={onClose}
       >
-         <div style={styles.rowDiv} key="1">
-            <p style={Styles.CAPTION}>
+         <div style={STYLE.rowDiv}>
+            <p style={S.CAPTION}>
               {caption}
             </p>
          </div>
-         <div style={styles.rowDiv} key="2">
-            <p style={Styles.DESCR}>{descr}</p>
+         <div style={STYLE.rowDiv}>
+            <p style={S.DESCR}>{descr}</p>
          </div>
-
       </ModalDialog>
-    )
+    );
   }
 }
-
-InfoDialog.displayName = 'InfoDialog';
 
 export default InfoDialog

@@ -32,7 +32,7 @@ var _Msg = require('../../constants/Msg');
 
 var _Msg2 = _interopRequireDefault(_Msg);
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 

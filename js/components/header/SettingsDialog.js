@@ -28,7 +28,7 @@ var _safeFn = require('../../utils/safeFn');
 
 var _safeFn2 = _interopRequireDefault(_safeFn);
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
@@ -49,8 +49,6 @@ var _DialogStyles = require('../styles/DialogStyles');
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
 
 var S = {
   MODAL: {
@@ -87,7 +85,6 @@ var SettingsDialog = function (_Component) {
     };
 
     _this.commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-      key: 'a',
       type: 'TypeC',
       caption: 'Set',
       onClick: _this._handleSet
@@ -125,10 +122,10 @@ var SettingsDialog = function (_Component) {
         },
         _react2.default.createElement(
           'label',
-          { style: styles.rowDiv },
+          { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'span',
-            { style: styles.labelSpan },
+            { style: _DialogStyles2.default.labelSpan },
             'Quandl:'
           ),
           _react2.default.createElement(_InputSecret2.default, {

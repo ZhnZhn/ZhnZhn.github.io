@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import createLoadOptions from '../../flux/creaters/eurostat2'
+//import createLoadOptions from '../../flux/creaters/eurostat2'
 
 import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
@@ -35,7 +35,7 @@ const chartTypeOptions = [
 const isCategoryType = (chartType) => {
   if (!chartType){
     return false;
-  }  
+  }
   return ArrayUtil.isStrInArr(chartType.value)(categoryTypes);
 }
 
@@ -60,7 +60,8 @@ class DialogEurostat2 extends Component {
     mapDateDf: PropTypes.number,
 
     msgOnNotSelected: PropTypes.func,
-    onShow: PropTypes.func
+    onShow: PropTypes.func,
+    loadFn: PropTypes.func
   }
 
   constructor(props){
@@ -157,7 +158,7 @@ class DialogEurostat2 extends Component {
   _createLoadOption = () => {
     const { one, two, chartType, date } = this
         , { dateDefault } = this.state;
-    return createLoadOptions(
+    return this.props.loadFn(
       this.props,
       { one, two, chartType, date, dateDefault }
     );

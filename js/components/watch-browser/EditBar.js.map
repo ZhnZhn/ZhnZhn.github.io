@@ -1,0 +1,20 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\EditBar.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\EditBar.js",
+ "sourceRoot": "",
+ "names": [
+  "CLASS_FOR_BT",
+  "S",
+  "ROOT",
+  "marginBottom",
+  "BT_LIST",
+  "marginLeft",
+  "EditBar",
+  "isShow",
+  "onClickGroup",
+  "onClickList"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,eAAe,gBAArB;;AAEA,IAAMC,IAAI;AACRC,QAAM;AACJC,kBAAc;AADV,GADE;AAIRC,WAAU;AACRC,gBAAY;AADJ;AAJF,CAAV;;AASA,IAAMC,UAAU,SAAVA,OAAU,OAA2C;AAAA,MAAxCC,MAAwC,QAAxCA,MAAwC;AAAA,MAAhCC,YAAgC,QAAhCA,YAAgC;AAAA,MAAlBC,WAAkB,QAAlBA,WAAkB;;AACzD,MAAIF,MAAJ,EAAY;AACV,WACE;AAAA;AAAA,QAAK,OAAON,EAAEC,IAAd;AACG;AACE,iBAAQ,OADV;AAEE,mBAAWF,YAFb;AAGE,0BAAkB,IAHpB;AAIE,iBAASQ;AAJX,QADH;AAOE;AACG,iBAAQ,MADX;AAEG,mBAAWR,YAFd;AAGG,0BAAkB,IAHrB;AAIG,eAAOC,EAAEG,OAJZ;AAKG,iBAASK;AALZ;AAPF,KADF;AAiBD,GAlBD,MAkBO;AACL,WAAO,IAAP;AACD;AACF,CAtBD;;kBAwBeH,O"
+}

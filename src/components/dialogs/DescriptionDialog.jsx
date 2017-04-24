@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import DOMPurify from 'purify';
 
 import { fnFetchText } from '../../utils/fn';
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 
 const DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
-const Style = {
+const STYLE = {
   DIALOG : {
     top: '10%',
     left: '10%',
@@ -18,12 +18,15 @@ const Style = {
 }
 
 class DescriptionDialog extends Component {
-  state = {
-    descrHtml: ''
+  static defaultProps = {
+    data: {}
   }
 
   constructor(props){
-    super();
+    super()
+    this.state = {
+      descrHtml: ''
+    }
   }
 
   componentWillReceiveProps(nextProps){
@@ -32,7 +35,7 @@ class DescriptionDialog extends Component {
         && nextProps.isShow !== this.props.isShow
         && nextProps.data.descrUrl !== this.props.data.descrUrl
     ) {
-      this._loadDescr(nextProps.data.descrUrl);
+      this._loadDescr(nextProps.data.descrUrl)
     }
   }
 
@@ -44,7 +47,7 @@ class DescriptionDialog extends Component {
   }
 
   componentDidMount(){
-    this._loadDescr(this.props.data.descrUrl);
+    this._loadDescr(this.props.data.descrUrl)
   }
 
   _loadDescr = ( descrUrl='' ) => {
@@ -62,25 +65,21 @@ class DescriptionDialog extends Component {
     const { isShow, onClose } = this.props
         , { descrHtml } = this.state
         , _html = DOMPurify.sanitize(descrHtml);
-
     return (
        <ModalDialog
          caption="Description for Datasource"
          isShow={isShow}
-         style={ Style.DIALOG }
+         style={STYLE.DIALOG}
          onClose={onClose}
        >
          <div
-            style={ Style.DIV }
+            style={STYLE.DIV}
             dangerouslySetInnerHTML={{ __html: _html }}
          >
          </div>
        </ModalDialog>
-    )
+    );
   }
 }
-
-DescriptionDialog.defaultProps = { data: {} };
-DescriptionDialog.displayName = 'DescriptionDialog';
 
 export default DescriptionDialog

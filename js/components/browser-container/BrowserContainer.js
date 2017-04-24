@@ -34,7 +34,7 @@ var _WatchBrowser = require('../watch-browser/WatchBrowser');
 
 var _WatchBrowser2 = _interopRequireDefault(_WatchBrowser);
 
-var _DialogContainer = require('../zhn/DialogContainer3');
+var _DialogContainer = require('../zhn-containers/DialogContainer3');
 
 var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
 

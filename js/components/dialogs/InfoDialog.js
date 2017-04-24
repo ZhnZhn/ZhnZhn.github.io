@@ -24,7 +24,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ModalDialog = require('../zhn/ModalDialog');
+var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
@@ -34,9 +34,7 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = _DialogStyles2.default;
-
-var Styles = {
+var S = {
   CAPTION: {
     width: '400px',
     paddingLeft: '10px',
@@ -58,9 +56,9 @@ var Styles = {
 var InfoDialog = function (_Component) {
   (0, _inherits3.default)(InfoDialog, _Component);
 
-  function InfoDialog(props) {
+  function InfoDialog() {
     (0, _classCallCheck3.default)(this, InfoDialog);
-    return (0, _possibleConstructorReturn3.default)(this, (InfoDialog.__proto__ || Object.getPrototypeOf(InfoDialog)).call(this));
+    return (0, _possibleConstructorReturn3.default)(this, (InfoDialog.__proto__ || Object.getPrototypeOf(InfoDialog)).apply(this, arguments));
   }
 
   (0, _createClass3.default)(InfoDialog, [{
@@ -90,19 +88,19 @@ var InfoDialog = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv, key: '1' },
+          { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'p',
-            { style: Styles.CAPTION },
+            { style: S.CAPTION },
             caption
           )
         ),
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv, key: '2' },
+          { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'p',
-            { style: Styles.DESCR },
+            { style: S.DESCR },
             descr
           )
         )
@@ -112,7 +110,5 @@ var InfoDialog = function (_Component) {
   return InfoDialog;
 }(_react.Component);
 
-InfoDialog.displayName = 'InfoDialog';
-
 exports.default = InfoDialog;
-//# sourceMappingURL=InfoDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\InfoDialog.js.map

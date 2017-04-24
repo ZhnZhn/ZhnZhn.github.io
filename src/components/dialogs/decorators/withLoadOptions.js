@@ -7,8 +7,8 @@ const _fnShowAlertDialog = function(alertCaption, alertDescr){
   const modalDialogType = ModalDialog.ALERT;
   ComponentActions.showModalDialog(
     ModalDialog.ALERT, { alertCaption, alertDescr, modalDialogType }
-  );
-}
+  )
+};
 
 const _loadOptions = function(option){
   const {
@@ -23,23 +23,23 @@ const _loadOptions = function(option){
        if (status>=200 && status<400){
           return response.json();
        } else if (status>=400 && status<500){
-          _fnShowAlertDialog('Client Error:', status + ' ' + statusText);
-          fnOnFailed(target, {isLoadingProp, isLoadingFailedProp});
+          _fnShowAlertDialog('Client Error:', status + ' ' + statusText)
+          fnOnFailed(target, {isLoadingProp, isLoadingFailedProp})
           return null;
        } else if (status>=500 && status<600) {
          if (retryServer !== 0) {
-           option.retryServer = retryServer - 1;
-           target._loadOptionsID = setTimeout( _loadOptions(option), 3E3);
+           option.retryServer = retryServer - 1
+           target._loadOptionsID = setTimeout( _loadOptions(option), 3E3)
          } else {
-            _fnShowAlertDialog('Server Error:', status + ' ' + statusText);
-            fnOnFailed(target, {isLoadingProp, isLoadingFailedProp});
+            _fnShowAlertDialog('Server Error:', status + ' ' + statusText)
+            fnOnFailed(target, { isLoadingProp, isLoadingFailedProp })
          }
          return null;
        }
     })
     .then((json) => {
       if (json) {
-        fnOnCompleted(target, { toStateProp, isLoadingProp, json, optionJsonProp });
+        fnOnCompleted(target, { toStateProp, isLoadingProp, json, optionJsonProp })
       }
     })
     .catch((error) => {
@@ -109,8 +109,9 @@ const _unmountWithLoadOptions = function(){
 }
 
 const withLoadOptions = (target) => {
-  target.prototype._handlerWithLoadOptions = _handlerWithLoadOptions
-  target.prototype._unmountWithLoadOptions = _unmountWithLoadOptions
+  const _proto = target.prototype;
+  _proto._handlerWithLoadOptions = _handlerWithLoadOptions
+  _proto._unmountWithLoadOptions = _unmountWithLoadOptions
 }
 
 export default withLoadOptions

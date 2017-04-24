@@ -6,7 +6,7 @@ import ChartActions from '../../flux/actions/ChartActions';
 import { BrowserType, LoadType } from '../../constants/Type';
 import ChartType from '../../constants/ChartType';
 
-import ModalDialog from '../zhn/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog';
 import ActionButton from '../zhn/ActionButton';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
