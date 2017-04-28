@@ -15,7 +15,11 @@ const _fnInitRaven = function(){
          window && window.location &&
          window.location.href.indexOf("https://zhnzhn.github.io") > -1
     ){
-      Raven.config('https://f3e7d09d8d0748af80791d51e5bc83e3@sentry.io/138634').install()
+      Raven.config('https://f3e7d09d8d0748af80791d51e5bc83e3@sentry.io/138634', {
+        whitelistUrls: [
+          'zhnzhn.github.io'
+        ]
+      }).install()
     }
   }
 }

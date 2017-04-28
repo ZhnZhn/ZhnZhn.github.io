@@ -100,8 +100,7 @@ var ChartConfigDialog = function (_Component) {
           _props$optionData = _props.optionData,
           optionData = _props$optionData === undefined ? {} : _props$optionData,
           caption = optionData.caption,
-          chart = optionData.chart,
-          setItemCaption = optionData.setItemCaption;
+          chart = optionData.chart;
 
 
       return _react2.default.createElement(
@@ -124,11 +123,7 @@ var ChartConfigDialog = function (_Component) {
           _react2.default.createElement(
             _Tab2.default,
             { title: 'Chart' },
-            _react2.default.createElement(_ChartPane2.default, {
-              chart: chart,
-              caption: caption,
-              setItemCaption: setItemCaption
-            })
+            _react2.default.createElement(_ChartPane2.default, optionData)
           ),
           _react2.default.createElement(
             _Tab2.default,
@@ -157,7 +152,8 @@ process.env.NODE_ENV !== "production" ? ChartConfigDialog.propTypes = {
   optionData: _react.PropTypes.shape({
     caption: _react.PropTypes.string,
     chart: _react.PropTypes.object,
-    setItemCaption: _react.PropTypes.func
+    setItemCaption: _react.PropTypes.func,
+    onToggleToolbar: _react.PropTypes.func
   }),
   onClose: _react.PropTypes.func
 } : void 0;

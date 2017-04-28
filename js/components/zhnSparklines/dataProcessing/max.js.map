@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../src/components/zhnSparklines/dataProcessing/max.js"],"names":["Math","max","apply","data"],"mappings":";;;;;;kBAAe;AAAA,WACXA,KAAKC,GAAL,CAASC,KAAT,CAAeF,IAAf,EAAqBG,IAArB,CADW;AAAA,C","file":"max.js","sourcesContent":["export default data =>\r\n    Math.max.apply(Math, data);\r\n"]}

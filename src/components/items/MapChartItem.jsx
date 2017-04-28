@@ -103,19 +103,25 @@ class MapChartItem extends Component {
     this.state = {
       isLoading: true,
       isOpen : true,
-      isShowInfo : false
+      isShowInfo : false,
+      time: ''
     }
   }
 
   componentDidMount(){
     const { caption, config } = this.props
-        , { json:jsonCube, zhMapSlice } = config
+        , { json:jsonCube, zhMapSlice } = config;
+
+    //console.log(this.props);
 
     ChoroplethMap.draw(`map_${caption}`, jsonCube, zhMapSlice)
                  .then( (option) => {
-                     this.map = option.map;
-                     this.setState({ isLoading: false })
-                     return undefined;
+                    this.map = option.map
+                    this.setState({
+                      isLoading: false,
+                      time: option.time
+                    })
+                    return undefined;
                  })
                  .catch(err => {
                    this.setState({ isLoading: false })
@@ -148,8 +154,8 @@ class MapChartItem extends Component {
   render(){
     const { caption, config, onCloseItem } = this.props
         , { json={}, zhDialog={} } = config
-        , { subtitle='', time='' } = zhDialog
-        , { isLoading, isOpen, isShowInfo } = this.state
+        , { subtitle='' } = zhDialog
+        , { isLoading, isOpen, isShowInfo, time } = this.state
         , _styleCaption = isOpen
               ? styles.captionSpanOpen
               : styles.captionSpanClose

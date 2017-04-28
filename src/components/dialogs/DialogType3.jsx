@@ -4,10 +4,20 @@ import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import ActionButton from '../zhn/ActionButton';
+import ShowHide from '../zhn/ShowHide';
+import RowInputSelect from './RowInputSelect';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
 
 import withValidationLoad from './decorators/withValidationLoad';
+
+const transformOptions = [
+  { caption: "NO EFFECT: z[t]=y[t]", value: "none" },
+  { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" },
+  { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" },
+  { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" },
+  { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }
+]
 
 @withValidationLoad
 class DialogType3 extends Component {
@@ -25,6 +35,7 @@ class DialogType3 extends Component {
     onShow: PropTypes.func,
 
     descrUrl: PropTypes.string,
+    isTransform: PropTypes.bool,
     onClickInfo: PropTypes.func,
     loadFn: PropTypes.func
   }
@@ -32,13 +43,24 @@ class DialogType3 extends Component {
   constructor(props){
     super(props);
 
-    this.stock = undefined;
-    this.toolbarButtons = (props.descrUrl)
-         ?  [{ caption: 'I', onClick: this._handleClickInfo }]
-         : [];
+    this.stock = undefined
+    this.transform = undefined
+    this.toolbarButtons = []
+    if (props.descrUrl) {
+      this.toolbarButtons.push({
+        caption: 'I', onClick: this._handleClickInfo
+      })
+    }
+    if (props.isTransform){
+      this.toolbarButtons.push({
+        caption: 'T', onClick: this._handleClickTransform
+      })
+    }
+
     this.state = {
+           isShowTransform: false,
            validationMessages: []
-         }
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -54,9 +76,17 @@ class DialogType3 extends Component {
     const {descrUrl, onClickInfo} = this.props;
     onClickInfo({ descrUrl });
   }
+  _handleClickTransform = () => {
+    this.setState(prevState => {
+      return { isShowTransform: !prevState.isShowTransform };
+    })
+  }
+  _handleSelectTransform = (option) => {
+    this.transform = option
+  }
 
   _handleSelectStock = (stock) => {
-    this.stock = stock;
+    this.stock = stock
   }
 
   _handleLoad = (event) => {
@@ -75,12 +105,12 @@ class DialogType3 extends Component {
     msg.isValid = (msg.length === 0) ? true : false;
     return msg;
   }
-  
+
   _createLoadOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues()
     return this.props.loadFn(
       this.props,
-      { stock : this.stock, fromDate, toDate }
+      { stock : this.stock, fromDate, toDate, transform: this.transform }
     );
   }
 
@@ -96,7 +126,7 @@ class DialogType3 extends Component {
             itemCaption='Stock:', optionNames='Stocks',
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { validationMessages } = this.state
+        , { isShowTransform, validationMessages } = this.state
         , _commandButtons = [
        <ActionButton
           key="a"
@@ -125,7 +155,13 @@ class DialogType3 extends Component {
            optionNames={optionNames}
            onSelect={this._handleSelectStock}
          />
-
+         <ShowHide isShow={isShowTransform}>
+           <RowInputSelect
+             caption="Transform:"
+             options={transformOptions}
+             onSelect={this._handleSelectTransform}
+           />
+         </ShowHide>
          <DatesFragment
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}

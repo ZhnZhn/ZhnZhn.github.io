@@ -5,17 +5,24 @@ const createLoadOptions = (props={}, options={}) => {
           fnValue, fnItemCaption,
           linkFn, dataSource
         } = props
-      , { fromDate, toDate, stock } = options
+      , { fromDate, toDate, stock, transform } = options
       , _value = (typeof fnValue === 'function')
             ? fnValue(stock.value)
             : stock.value
       , _itemCaption = (typeof fnItemCaption === 'function')
             ? fnItemCaption(stock.value)
+            : undefined
+      , _transform = (transform)
+            ? transform.value
+            : undefined
+      , _subtitle = (transform)
+            ? transform.caption
             : undefined;
   return {
-    //value : this.stock.value,
     value : _value,
+    transform: _transform,
     title: stock.caption,
+    subtitle: _subtitle,
     stock: stock,
     fromDate: fromDate,
     toDate: toDate,

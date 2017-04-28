@@ -25,6 +25,9 @@ const styles = {
   showHide : {
     marginLeft: '8px'
   },
+  wrapper: {
+    marginTop: '6px'
+  },
   dataSource: {
     position: 'absolute',
     left: '5px',
@@ -73,6 +76,7 @@ class AreaChartItem extends Component {
     )
     this.state = {
       isOpen: true,
+      isShowToolbar: true,
       isShowChart : true,
       isShowLegend : false,
       isShowInfo : false,
@@ -212,7 +216,8 @@ class AreaChartItem extends Component {
     onShowConfigDialog({
       caption,
       chart: this.mainChart,
-      setItemCaption: this.setItemCaption
+      setItemCaption: this.setItemCaption,
+      onToggleToolbar: this._handleToggleToolbar
     })
   }
 
@@ -220,26 +225,35 @@ class AreaChartItem extends Component {
      return this.props.crValueMoving(this.mainChart, prev, dateTo);
   }
 
+  _handleToggleToolbar = (value) => {
+    this.setState(prevState => {
+      return { isShowToolbar: !prevState.isShowToolbar};
+    })
+  }
+
  _createChartToolBar = (config) => {
+   const { isShowToolbar } = this.state;
    return (
-         <ChartToolBar
-           style={styles.tabDiv}
-           config={config}
-           onAddSma={this._handlerAddSma}
-           onRemoveSeries={this._handleRemoveSeries}
-           onAddMfi={this._handlerAddMfi}
-           onRemoveMfi={this._handlerRemoveMfi}
-           onClickLegend={this._handlerClickLegend}
-           onClick2H={this._handlerClick2H}
-           onAddToWatch={this._handlerAddToWatch}
-           onClickInfo={this._handlerClickInfo}
-           onClickVolume={this._handlerClickVolume}
-           onClickATH={this._handlerClickATH}
-           onClickHighLow={this._handlerClickHighLow}
-           onClickConfig={this._handleClickConfig}
-          />
+         <ShowHide isShow={isShowToolbar}>
+           <ChartToolBar
+             style={styles.tabDiv}
+             config={config}
+             onAddSma={this._handlerAddSma}
+             onRemoveSeries={this._handleRemoveSeries}
+             onAddMfi={this._handlerAddMfi}
+             onRemoveMfi={this._handlerRemoveMfi}
+             onClickLegend={this._handlerClickLegend}
+             onClick2H={this._handlerClick2H}
+             onAddToWatch={this._handlerAddToWatch}
+             onClickInfo={this._handlerClickInfo}
+             onClickVolume={this._handlerClickVolume}
+             onClickATH={this._handlerClickATH}
+             onClickHighLow={this._handlerClickHighLow}
+             onClickConfig={this._handleClickConfig}
+            />
+         </ShowHide>
       );
- }
+   }
 
   _renderLegend = (config) => {
     const { isShowLegend } = this.state;
@@ -337,6 +351,7 @@ class AreaChartItem extends Component {
            <HighchartWrapper
               ref={comp => this.chartComp = comp}
               isShow={isShowChart}
+              rootStyle={styles.wrapper}
               config={config}
               absComp={this._dataSourceEl}
            />

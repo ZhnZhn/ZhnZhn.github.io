@@ -5,18 +5,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var QuandlApi = {
-  rootUrl: "https://www.quandl.com/api/v3/datasets/",
-  BLANK: ''
+  rootUrl: "https://www.quandl.com/api/v3/datasets/"
 };
 
 QuandlApi.getRequestUrl = function (option) {
   var value = option.value,
       fromDate = option.fromDate,
       toDate = option.toDate,
-      apiKey = option.apiKey;
+      apiKey = option.apiKey,
+      transform = option.transform;
 
 
-  var _queryDate = void 0;
+  var _queryDate = '';
   if (fromDate || toDate) {
     _queryDate = 'sort_order=asc';
     if (fromDate) {
@@ -25,24 +25,25 @@ QuandlApi.getRequestUrl = function (option) {
     if (toDate) {
       _queryDate = _queryDate + ('&trim_end=' + toDate);
     }
-  } else {
-    _queryDate = QuandlApi.BLANK;
   }
 
-  var _apiKey = void 0;
+  if (transform) {
+    _queryDate = _queryDate + ('&transform=' + transform);
+  }
+
+  var _apiKey = '';
   if (apiKey) {
     _apiKey = _queryDate ? '&api_key=' + apiKey : 'api_key=' + apiKey;
-  } else {
-    _apiKey = QuandlApi.BLANK;
   }
 
-  var _uri = '' + QuandlApi.rootUrl + value + '.json?' + _queryDate + _apiKey;
+  //const _uri = `${QuandlApi.rootUrl}${value}.json?${_queryDate}${_apiKey}`;
 
-  return _uri;
+  return '' + QuandlApi.rootUrl + value + '.json?' + _queryDate + _apiKey;
 };
 
 var REQUEST_ERROR = 'Request Error',
     DATASET_EMPTY = 'Dataset Empty';
+
 QuandlApi.checkResponse = function (json) {
   var quandl_error = json.quandl_error,
       _json$dataset = json.dataset,
@@ -69,4 +70,4 @@ QuandlApi.checkResponse = function (json) {
 };
 
 exports.default = QuandlApi;
-//# sourceMappingURL=QuandlApi.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\api\QuandlApi.js.map

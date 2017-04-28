@@ -1,9 +1,12 @@
+import { render } from 'react-dom'
 import merge from 'lodash.merge'
 
 import JsonStatFn from './JsonStatFn'
 import clusterMaker from '../../math/k-means'
 import mathFn from '../../math/mathFn'
 import safeGet from '../../utils/safeGet'
+
+import MapFactory from '../../components/factories/MapFactory'
 
 /*eslint-disable no-undef */
 if ( process.env.NODE_ENV !== 'development'){
@@ -105,18 +108,22 @@ const _fnStyle = function(feature){
   }
 }
 
-const _fnCreateEl = function(tag, className='', cssText=''){
+const _fnCreateEl = function(tag, className='', cssText='', id){
   const el = document.createElement(tag)
   el.className = className
   el.style.cssText = cssText
+  if (id) {
+    el.id = id;
+  }
   return el;
 }
 
 
-const _fnCreateInfoControl = function(L){
+const _fnCreateInfoControl = function(L, mapId){
   const wgInfo = L.control();
   wgInfo.onAdd = function(map){
-    this.divEl = _fnCreateEl('div', 'control-info')
+    this.idEl = mapId + '_info-control'
+    this.divEl = _fnCreateEl('div', 'control-info', '', this.idEl)
     return this.divEl;
   }
   wgInfo.update = function(props){
@@ -127,12 +134,8 @@ const _fnCreateInfoControl = function(L){
   }
   wgInfo.updateCluster = function(cluster, color, from, to){
     if (cluster){
-      let str = `<p style="background: ${color}; opacity: 0.7; padding: 3px">${from}-${to}</p>`;
-      const points = safeGet(cluster, 'points', [])
-      points.forEach((point) => {
-        str += `<p style="padding: 3px;"><span style="display: inline-block; width: 30px;">${point.id}</span><span>${point[0]}</span></p>`
-      })
-      this.divEl.innerHTML = str
+      const elClusterInfo = MapFactory.crClusterInfo({ cluster, color, from, to });
+      render(elClusterInfo, document.getElementById(this.idEl))
     }
   }
   return wgInfo;
@@ -178,7 +181,7 @@ const _fnCreateGradeControl = function(minValue, maxValue, clusters, L, wg){
 
       let _upperPrev, _upperNext;
       _upperPrev = mathFn.toFixed(minValue)
-      clusters.forEach((cluster, index) => {        
+      clusters.forEach((cluster, index) => {
         _upperNext = mathFn.toFixed(_fnCalcUpper(clusters, index, maxValue))
         _div.appendChild( _fnCreateRowEl(
             COLORS[index], _upperPrev, _upperNext, cluster, wg
@@ -207,16 +210,27 @@ const _fnOnEachFeature = function(infoControl, feature, layer){
    })
 }
 
+const _fnAddGeoSeria = (points, statJson, configSlice) => {
+  /* eslint-disable no-unused-vars */
+  const { time, ...seriaSlice } = configSlice;
+  /* eslint-enable no-unused-vars */
+  return points.map(point => {
+    seriaSlice.geo = point.id
+    point.seria = JsonStatFn.crGeoSeria(statJson, seriaSlice)
+    return point;
+  });
+}
+
 const _createChoroplethMap = function(option){
-  const { jsonCube:statJson, geoJson, zhMapSlice:configSlice, map, L } = option
-       , { dGeo, sGeo } = JsonStatFn.createGeoSlice(statJson, configSlice)
+  const { jsonCube:statJson, geoJson, zhMapSlice:configSlice, map, L, mapId } = option
+       , { dGeo, sGeo, time } = JsonStatFn.createGeoSlice(statJson, configSlice)
        , { minValue, maxValue, points } = _fnMergeGeoAndValue(sGeo, dGeo, geoJson)
-       , _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
+       , _points = _fnAddGeoSeria(points, statJson, configSlice)
+       , _clusters = _fnCreateClusters(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
        , _hmIdCluster = _fnCreateHmIdCluster(_clusters);
 
   _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
-
-  const infoControl = _fnCreateInfoControl(L);
+  const infoControl = _fnCreateInfoControl(L, mapId);
   infoControl.addTo(map);
 
   L.geoJSON(geoJson, {
@@ -225,19 +239,31 @@ const _createChoroplethMap = function(option){
   }).addTo(map);
 
 
-  if ( points.length > 1) {
+  if ( _points.length > 1) {
     const gradeControl = _fnCreateGradeControl(
       minValue, maxValue, _clusters, L, infoControl
     )
     gradeControl.addTo(map);
   }
 
+  option.time = time
   return option;
+}
+
+const _crGeoJson = (geoJson) => {
+  const _geoJson = merge({}, geoJson)
+  _geoJson.features.forEach(feature => {
+     feature.properties.value = null
+  });     
+  return _geoJson;
 }
 
 const ChoroplethMap = {
   hmUrlGeoJson : {},
   L : undefined,
+  mapOption: {
+    doubleClickZoom: false
+  },
 
   getLeaflet(){
     if (this.L){
@@ -251,7 +277,7 @@ const ChoroplethMap = {
   getGeoJson(url){
      const geoJson = this.hmUrlGeoJson[url];
      if (geoJson){
-       return Promise.resolve(merge({}, geoJson));
+       return Promise.resolve(_crGeoJson(geoJson));
      } else {
        return fetch(url)
                .then( (response) => { return response.json(); })
@@ -262,7 +288,8 @@ const ChoroplethMap = {
   draw(id, jsonCube, zhMapSlice){
     return this.getLeaflet()
              .then( (L) => {
-                const map = L.map(id).setView([58.00, 10.00], 3);
+                const map = L.map(id, this.mapOption)
+                             .setView([58.00, 10.00], 3);
 
                 /*
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -273,10 +300,11 @@ const ChoroplethMap = {
                 */
 
                 L.tileLayer('', {
-                     id: 'addis',
+                     //id: 'addis',
+                     id: id + '_tile'
                 }).addTo(map);
 
-                return { jsonCube, zhMapSlice, L, map };
+                return { jsonCube, zhMapSlice, L, map, mapId: id };
              })
              .then ( (option) => {
                  return this.getGeoJson(URL_EU_GEOJSON)

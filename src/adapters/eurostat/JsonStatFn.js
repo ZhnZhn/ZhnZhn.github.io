@@ -77,10 +77,36 @@ const _trHmToData = (hm, categories) => {
 
 const JsonStatFn = {
   createGeoSlice : (json, configSlice) => {
-    const  ds = JSONstat(json).Dataset(0)
+    const  ds = JSONstat(json).Dataset(0);
+    let _sGeo = ds.Data(configSlice)
+       , time ;
+
+    if (!_sGeo || _sGeo.length === 0){
+      const maxIndex = getFromNullable(ds.Dimension("time").id, []).length;
+      if (maxIndex>0) {
+        time = ds.Dimension("time").id[maxIndex-1];
+        _sGeo = ds.Data({...configSlice, ...{ time } })
+      }
+    } else {
+      time = configSlice.time
+    }
+
     return {
       dGeo : getFromNullable(ds.Dimension("geo"), { id : []}),
-      sGeo : getFromNullable(ds.Data(configSlice), [])
+      //sGeo : getFromNullable(ds.Data(configSlice), [])
+      sGeo : getFromNullable(_sGeo, []),
+      time
+    };
+  },
+
+  crGeoSeria: (json, configSlice) => {
+    const ds = JSONstat(json).Dataset(0)
+        , data = getFromNullable(ds.Data(configSlice), [])
+                     .map( obj => obj.value )
+                     .filter(value => value !== null);
+    return {
+      date: getFromNullable(ds.Dimension("time")),
+      data: data
     };
   },
 

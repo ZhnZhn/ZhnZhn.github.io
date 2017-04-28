@@ -69,6 +69,9 @@ var styles = {
   showHide: {
     marginLeft: '8px'
   },
+  wrapper: {
+    marginTop: '6px'
+  },
   dataSource: {
     position: 'absolute',
     left: '5px',
@@ -109,6 +112,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     );
     _this.state = {
       isOpen: true,
+      isShowToolbar: true,
       isShowChart: true,
       isShowLegend: false,
       isShowInfo: false,
@@ -175,6 +179,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
               return _this2.chartComp = comp;
             },
             isShow: isShowChart,
+            rootStyle: styles.wrapper,
             config: config,
             absComp: this._dataSourceEl
           }),
@@ -348,7 +353,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     onShowConfigDialog({
       caption: caption,
       chart: _this3.mainChart,
-      setItemCaption: _this3.setItemCaption
+      setItemCaption: _this3.setItemCaption,
+      onToggleToolbar: _this3._handleToggleToolbar
     });
   };
 
@@ -356,23 +362,35 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     return _this3.props.crValueMoving(_this3.mainChart, prev, dateTo);
   };
 
-  this._createChartToolBar = function (config) {
-    return _react2.default.createElement(_ChartToolBar2.default, {
-      style: styles.tabDiv,
-      config: config,
-      onAddSma: _this3._handlerAddSma,
-      onRemoveSeries: _this3._handleRemoveSeries,
-      onAddMfi: _this3._handlerAddMfi,
-      onRemoveMfi: _this3._handlerRemoveMfi,
-      onClickLegend: _this3._handlerClickLegend,
-      onClick2H: _this3._handlerClick2H,
-      onAddToWatch: _this3._handlerAddToWatch,
-      onClickInfo: _this3._handlerClickInfo,
-      onClickVolume: _this3._handlerClickVolume,
-      onClickATH: _this3._handlerClickATH,
-      onClickHighLow: _this3._handlerClickHighLow,
-      onClickConfig: _this3._handleClickConfig
+  this._handleToggleToolbar = function (value) {
+    _this3.setState(function (prevState) {
+      return { isShowToolbar: !prevState.isShowToolbar };
     });
+  };
+
+  this._createChartToolBar = function (config) {
+    var isShowToolbar = _this3.state.isShowToolbar;
+
+    return _react2.default.createElement(
+      _ShowHide2.default,
+      { isShow: isShowToolbar },
+      _react2.default.createElement(_ChartToolBar2.default, {
+        style: styles.tabDiv,
+        config: config,
+        onAddSma: _this3._handlerAddSma,
+        onRemoveSeries: _this3._handleRemoveSeries,
+        onAddMfi: _this3._handlerAddMfi,
+        onRemoveMfi: _this3._handlerRemoveMfi,
+        onClickLegend: _this3._handlerClickLegend,
+        onClick2H: _this3._handlerClick2H,
+        onAddToWatch: _this3._handlerAddToWatch,
+        onClickInfo: _this3._handlerClickInfo,
+        onClickVolume: _this3._handlerClickVolume,
+        onClickATH: _this3._handlerClickATH,
+        onClickHighLow: _this3._handlerClickHighLow,
+        onClickConfig: _this3._handleClickConfig
+      })
+    );
   };
 
   this._renderLegend = function (config) {

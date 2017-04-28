@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../src/components/zhnSparklines/dataProcessing/mean.js"],"names":["data","reduce","a","b","length"],"mappings":";;;;;;kBAAe;AAAA,WACXA,KAAKC,MAAL,CAAY,UAACC,CAAD,EAAIC,CAAJ;AAAA,eAAUD,IAAIC,CAAd;AAAA,KAAZ,IAA+BH,KAAKI,MADzB;AAAA,C","file":"mean.js","sourcesContent":["export default data =>\r\n    data.reduce((a, b) => a + b) / data.length;\r\n"]}

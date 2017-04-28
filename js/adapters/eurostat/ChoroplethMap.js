@@ -4,6 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _reactDom = require('react-dom');
+
 var _lodash = require('lodash.merge');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -23,6 +29,10 @@ var _mathFn2 = _interopRequireDefault(_mathFn);
 var _safeGet = require('../../utils/safeGet');
 
 var _safeGet2 = _interopRequireDefault(_safeGet);
+
+var _MapFactory = require('../../components/factories/MapFactory');
+
+var _MapFactory2 = _interopRequireDefault(_MapFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -149,17 +159,22 @@ var _fnStyle = function _fnStyle(feature) {
 var _fnCreateEl = function _fnCreateEl(tag) {
   var className = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var cssText = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var id = arguments[3];
 
   var el = document.createElement(tag);
   el.className = className;
   el.style.cssText = cssText;
+  if (id) {
+    el.id = id;
+  }
   return el;
 };
 
-var _fnCreateInfoControl = function _fnCreateInfoControl(L) {
+var _fnCreateInfoControl = function _fnCreateInfoControl(L, mapId) {
   var wgInfo = L.control();
   wgInfo.onAdd = function (map) {
-    this.divEl = _fnCreateEl('div', 'control-info');
+    this.idEl = mapId + '_info-control';
+    this.divEl = _fnCreateEl('div', 'control-info', '', this.idEl);
     return this.divEl;
   };
   wgInfo.update = function (props) {
@@ -172,12 +187,8 @@ var _fnCreateInfoControl = function _fnCreateInfoControl(L) {
   };
   wgInfo.updateCluster = function (cluster, color, from, to) {
     if (cluster) {
-      var str = '<p style="background: ' + color + '; opacity: 0.7; padding: 3px">' + from + '-' + to + '</p>';
-      var points = (0, _safeGet2.default)(cluster, 'points', []);
-      points.forEach(function (point) {
-        str += '<p style="padding: 3px;"><span style="display: inline-block; width: 30px;">' + point.id + '</span><span>' + point[0] + '</span></p>';
-      });
-      this.divEl.innerHTML = str;
+      var elClusterInfo = _MapFactory2.default.crClusterInfo({ cluster: cluster, color: color, from: from, to: to });
+      (0, _reactDom.render)(elClusterInfo, document.getElementById(this.idEl));
     }
   };
   return wgInfo;
@@ -246,25 +257,40 @@ var _fnOnEachFeature = function _fnOnEachFeature(infoControl, feature, layer) {
   });
 };
 
+var _fnAddGeoSeria = function _fnAddGeoSeria(points, statJson, configSlice) {
+  /* eslint-disable no-unused-vars */
+  var time = configSlice.time,
+      seriaSlice = (0, _objectWithoutProperties3.default)(configSlice, ['time']);
+  /* eslint-enable no-unused-vars */
+
+  return points.map(function (point) {
+    seriaSlice.geo = point.id;
+    point.seria = _JsonStatFn2.default.crGeoSeria(statJson, seriaSlice);
+    return point;
+  });
+};
+
 var _createChoroplethMap = function _createChoroplethMap(option) {
   var statJson = option.jsonCube,
       geoJson = option.geoJson,
       configSlice = option.zhMapSlice,
       map = option.map,
       L = option.L,
+      mapId = option.mapId,
       _JsonStatFn$createGeo = _JsonStatFn2.default.createGeoSlice(statJson, configSlice),
       dGeo = _JsonStatFn$createGeo.dGeo,
       sGeo = _JsonStatFn$createGeo.sGeo,
+      time = _JsonStatFn$createGeo.time,
       _fnMergeGeoAndValue2 = _fnMergeGeoAndValue(sGeo, dGeo, geoJson),
       minValue = _fnMergeGeoAndValue2.minValue,
       maxValue = _fnMergeGeoAndValue2.maxValue,
       points = _fnMergeGeoAndValue2.points,
-      _clusters = _fnCreateClusters(points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
+      _points = _fnAddGeoSeria(points, statJson, configSlice),
+      _clusters = _fnCreateClusters(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
       _hmIdCluster = _fnCreateHmIdCluster(_clusters);
 
   _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);
-
-  var infoControl = _fnCreateInfoControl(L);
+  var infoControl = _fnCreateInfoControl(L, mapId);
   infoControl.addTo(map);
 
   L.geoJSON(geoJson, {
@@ -272,17 +298,29 @@ var _createChoroplethMap = function _createChoroplethMap(option) {
     onEachFeature: _fnOnEachFeature.bind(null, infoControl)
   }).addTo(map);
 
-  if (points.length > 1) {
+  if (_points.length > 1) {
     var gradeControl = _fnCreateGradeControl(minValue, maxValue, _clusters, L, infoControl);
     gradeControl.addTo(map);
   }
 
+  option.time = time;
   return option;
+};
+
+var _crGeoJson = function _crGeoJson(geoJson) {
+  var _geoJson = (0, _lodash2.default)({}, geoJson);
+  _geoJson.features.forEach(function (feature) {
+    feature.properties.value = null;
+  });
+  return _geoJson;
 };
 
 var ChoroplethMap = {
   hmUrlGeoJson: {},
   L: undefined,
+  mapOption: {
+    doubleClickZoom: false
+  },
 
   getLeaflet: function getLeaflet() {
     var _this = this;
@@ -300,7 +338,7 @@ var ChoroplethMap = {
 
     var geoJson = this.hmUrlGeoJson[url];
     if (geoJson) {
-      return Promise.resolve((0, _lodash2.default)({}, geoJson));
+      return Promise.resolve(_crGeoJson(geoJson));
     } else {
       return fetch(url).then(function (response) {
         return response.json();
@@ -313,7 +351,7 @@ var ChoroplethMap = {
     var _this3 = this;
 
     return this.getLeaflet().then(function (L) {
-      var map = L.map(id).setView([58.00, 10.00], 3);
+      var map = L.map(id, _this3.mapOption).setView([58.00, 10.00], 3);
 
       /*
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -324,10 +362,11 @@ var ChoroplethMap = {
       */
 
       L.tileLayer('', {
-        id: 'addis'
+        //id: 'addis',
+        id: id + '_tile'
       }).addTo(map);
 
-      return { jsonCube: jsonCube, zhMapSlice: zhMapSlice, L: L, map: map };
+      return { jsonCube: jsonCube, zhMapSlice: zhMapSlice, L: L, map: map, mapId: id };
     }).then(function (option) {
       return _this3.getGeoJson(URL_EU_GEOJSON).then(function (geoJson) {
         option.geoJson = geoJson;

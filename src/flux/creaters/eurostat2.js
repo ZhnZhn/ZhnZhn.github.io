@@ -8,19 +8,18 @@ const createLoadOptions = (props={}, options={}) => {
   const { loadId, group } = props
       , { one, two={}, chartType={}, date, dateDefault } = options
       , { value:chartTypeValue='AREA' } = chartType
-
       , _countryValue = (one)
           ? one.value
           : COUNTRY_CAPTION_DF
       , _countryCaption = (one)
           ? one.caption
-          : COUNTRY_CAPTION_DF
+          : COUNTRY_CAPTION_DF;
 
   let _zhCompType = undefined
-  , _time = undefined
-  , _mapValue = two.mapValue
-  , _mapSlice = two.mapSlice;
-  
+     , _time = undefined
+     , _mapValue = two.mapValue
+     , _mapSlice = two.mapSlice;
+
   if (chartType && chartType.value !== AREA){
     _zhCompType = chartType.compType;
     _time = (date) ? date.value : dateDefault;

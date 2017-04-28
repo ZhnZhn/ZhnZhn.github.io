@@ -210,7 +210,8 @@ const _fLegendConfig = function(seriaColumnNames, column_names){
 const _fnCreatePointFlow = function(json, yPointIndex, option){
 
   const fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
-      , column_names = json.dataset.column_names
+      , { dataset={} } = json
+      , column_names = dataset.column_names
       , result = {
          yPointIndex : yPointIndex,
          minPoint : Number.POSITIVE_INFINITY,
@@ -235,11 +236,12 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
     }));
   }
 
-  if (exDividend) {
+  const _isTransform = dataset.transform && dataset.transform !== 'none';
+  if (exDividend && !_isTransform) {
     fnStep.push(_fnAddExDividend.bind(null, exDividend));
   }
 
-  if (splitRatio){
+  if (splitRatio && !_isTransform){
     fnStep.push(_fnAddSplitRatio.bind(null, splitRatio));
   }
 

@@ -7,7 +7,7 @@ import {
   SparklinesSpot,
   SparklinesReferenceLine,
   SparklinesBars
-} from '../zhnSparklines/Sparklines';
+} from '../zhn-sparklines/Sparklines';
 
 
 const SparkFactory = {

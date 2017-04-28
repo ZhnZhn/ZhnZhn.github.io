@@ -1,0 +1,15 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\dataProcessing\\mean.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\dataProcessing\\mean.js",
+ "sourceRoot": "",
+ "names": [
+  "data",
+  "reduce",
+  "a",
+  "b",
+  "length"
+ ],
+ "mappings": ";;;;;;kBAAe;AAAA,WACXA,KAAKC,MAAL,CAAY,UAACC,CAAD,EAAIC,CAAJ;AAAA,eAAUD,IAAIC,CAAd;AAAA,KAAZ,IAA+BH,KAAKI,MADzB;AAAA,C"
+}

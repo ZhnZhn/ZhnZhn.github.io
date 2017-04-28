@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _jsonstat = require('jsonstat');
 
 var _jsonstat2 = _interopRequireDefault(_jsonstat);
@@ -93,9 +97,37 @@ var _trHmToData = function _trHmToData(hm, categories) {
 var JsonStatFn = {
   createGeoSlice: function createGeoSlice(json, configSlice) {
     var ds = (0, _jsonstat2.default)(json).Dataset(0);
+    var _sGeo = ds.Data(configSlice),
+        time = void 0;
+
+    if (!_sGeo || _sGeo.length === 0) {
+      var maxIndex = (0, _fnStyle.getFromNullable)(ds.Dimension("time").id, []).length;
+      if (maxIndex > 0) {
+        time = ds.Dimension("time").id[maxIndex - 1];
+        _sGeo = ds.Data((0, _extends3.default)({}, configSlice, { time: time }));
+      }
+    } else {
+      time = configSlice.time;
+    }
+
     return {
       dGeo: (0, _fnStyle.getFromNullable)(ds.Dimension("geo"), { id: [] }),
-      sGeo: (0, _fnStyle.getFromNullable)(ds.Data(configSlice), [])
+      //sGeo : getFromNullable(ds.Data(configSlice), [])
+      sGeo: (0, _fnStyle.getFromNullable)(_sGeo, []),
+      time: time
+    };
+  },
+
+  crGeoSeria: function crGeoSeria(json, configSlice) {
+    var ds = (0, _jsonstat2.default)(json).Dataset(0),
+        data = (0, _fnStyle.getFromNullable)(ds.Data(configSlice), []).map(function (obj) {
+      return obj.value;
+    }).filter(function (value) {
+      return value !== null;
+    });
+    return {
+      date: (0, _fnStyle.getFromNullable)(ds.Dimension("time")),
+      data: data
     };
   },
 
@@ -122,4 +154,4 @@ var JsonStatFn = {
 };
 
 exports.default = JsonStatFn;
-//# sourceMappingURL=JsonStatFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\JsonStatFn.js.map

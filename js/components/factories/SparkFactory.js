@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Sparklines = require('../zhnSparklines/Sparklines');
+var _Sparklines = require('../zhn-sparklines/Sparklines');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,4 +53,4 @@ var SparkFactory = {
 };
 
 exports.default = SparkFactory;
-//# sourceMappingURL=SparkFactory.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\factories\SparkFactory.js.map

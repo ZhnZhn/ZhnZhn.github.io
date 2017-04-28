@@ -420,6 +420,7 @@ var DataQE = {
     chartContainerCaption: 'Quandl Wiki Stock Prices',
     dialogProps: {
       descrUrl: './data/quandl/wiki.html',
+      isTransform: true,
       optionURI: './data/quandl/wiki.json',
       optionsJsonProp: 'tickets',
       valueFn: "RPrefixOne",

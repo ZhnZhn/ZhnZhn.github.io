@@ -25,7 +25,8 @@ class ChartConfigDialog extends Component {
     optionData: PropTypes.shape({
       caption: PropTypes.string,
       chart: PropTypes.object,
-      setItemCaption: PropTypes.func
+      setItemCaption: PropTypes.func,
+      onToggleToolbar: PropTypes.func
     }),
     onClose: PropTypes.func
   }
@@ -46,7 +47,7 @@ class ChartConfigDialog extends Component {
 
   render(){
     const { isShow, optionData={} } = this.props
-        , { caption, chart, setItemCaption } = optionData;
+        , { caption, chart } = optionData;
 
     return (
       <DraggableDialog
@@ -63,9 +64,11 @@ class ChartConfigDialog extends Component {
         <TabPane isUpdateInit={true}>
           <Tab title="Chart">
             <ChartPane
-                chart={chart}
-                caption={caption}
-                setItemCaption={setItemCaption}
+                {...optionData}
+                //chart={chart}
+                //caption={caption}
+                //setItemCaption={setItemCaption}
+                //onToggleToolbar={onToggleToolbar}
             />
           </Tab>
           <Tab title="Seria">

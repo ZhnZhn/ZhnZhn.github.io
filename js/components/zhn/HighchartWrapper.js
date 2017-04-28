@@ -107,12 +107,13 @@ var HighchartWrapper = function (_Component) {
 
       var _props2 = this.props,
           isShow = _props2.isShow,
+          rootStyle = _props2.rootStyle,
           absComp = _props2.absComp,
           _rootDivStyle = isShow ? STYLE.ROOT_DIV_SHOW : STYLE.ROOT_DIV_HIDE;
 
       return _react2.default.createElement(
         'div',
-        { style: _rootDivStyle },
+        { style: (0, _extends3.default)({}, rootStyle, _rootDivStyle) },
         _react2.default.createElement('div', { ref: function ref(c) {
             return _this2.chartEl = c;
           } }),

@@ -342,7 +342,7 @@ const DataQE = {
         oneJsonProp : 'countries',
         twoCaption : 'Metric:',
         twoURI : './data/quandl/big-mac-metrics.json',
-        twoJsonProp : 'metrics',        
+        twoJsonProp : 'metrics',
         valueFn : 'RPrefixDashOne',
         valueFnPrefix : 'ECONOMIST/BIGMAC',
         loadFnType : 'BigMac',
@@ -415,6 +415,7 @@ const DataQE = {
       chartContainerCaption : 'Quandl Wiki Stock Prices',
       dialogProps : {
         descrUrl : './data/quandl/wiki.html',
+        isTransform: true,
         optionURI : './data/quandl/wiki.json',
         optionsJsonProp : 'tickets',
         valueFn : "RPrefixOne",

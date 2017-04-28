@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 
 import safeGet from '../../utils/safeGet'
+import DateUtils from '../../utils/DateUtils'
 
 import OpenClose from '../zhn/OpenClose'
 import RowInputText from './RowInputText'
 import RowInputColor from './RowInputColor'
+import RowCheckBox from '../dialogs/RowCheckBox'
 
 const STYLE = {
   ROW_INPUT: {
@@ -28,6 +30,12 @@ const _fnIsValidColor = (color) => {
   return (el.style.color) ? true : false;
 }
 
+const _fnFindPoint = (points, dmy) => {
+  const mls = DateUtils.dmyToUTC(dmy);
+  return points.find(point => {
+    return point.x === mls;
+  });
+}
 
 class CellSeria extends Component {
   static propTypes = {
@@ -42,17 +50,33 @@ class CellSeria extends Component {
     seriaIndex: PropTypes.number
   }
 
+  constructor(props){
+    super()
+    this._initProps(props)
+  }
+
+  _initProps = (props) => {
+    const { chart={}, seriaIndex=0 } = props;
+
+    this.seriaIns = safeGet(chart, `series[${seriaIndex}]`, {})
+    this.data = safeGet(chart, `series[${seriaIndex}].data`, [])
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (this.props !== nextProps){
+      this._initProps(nextProps)
+    }
+  }
+
   _handleEnterType = (value) => {
-      const { chart={}, seriaIndex=0 } = this.props
-          , seria = safeGet(chart, `series[${seriaIndex}]`, {})
-          , seriaOptions = seria.options;
+      const { chart } = this.props
+          , seriaOptions = this.seriaIns.options;
 
       if (seriaOptions && chart.addSeries
           && _fnIsInArray(arrType, value) ) {
 
         seriaOptions.type = value
-        seria.update(seriaOptions)
-
+        this.seriaIns.update(seriaOptions)
         /*
         seria.remove(false);
         chart.addSeries(seriaOptions);
@@ -60,20 +84,18 @@ class CellSeria extends Component {
     }
   }
   _handleEnterColor = (value) => {
-    const { chart={}, seriaIndex=0 } = this.props
-        , seriaIns = safeGet(chart, `series[${seriaIndex}]`, {})
-        , seriaOptions = seriaIns.options;
+    const { chart } = this.props
+        , seriaOptions = this.seriaIns.options;
 
     if (seriaOptions && chart.addSeries
         && _fnIsValidColor(value) ) {
       seriaOptions.color = value
-      seriaIns.update(seriaOptions)
+      this.seriaIns.update(seriaOptions)
     }
   }
   _handleEnterSymbol = (value) => {
-    const { chart={}, seriaIndex=0 } = this.props
-        , seriaIns = safeGet(chart, `series[${seriaIndex}]`, {})
-        , seriaOptions = seriaIns.options;
+    const { chart } = this.props
+        , seriaOptions = this.seriaIns.options;
 
     if (seriaOptions && chart.addSeries
         && _fnIsInArray(arrSymbol, value)) {
@@ -82,14 +104,40 @@ class CellSeria extends Component {
       } else {
         seriaOptions.marker = { symbol : value }
       }
-      seriaIns.update(seriaOptions)
+      this.seriaIns.update(seriaOptions)
     }
-
   }
+  _handleEnterHover = (value) => {
+    //const { chart } = this.props
+    const  point = _fnFindPoint(this.data, value);
+    if (point) {
+      //point.onMouseOver()
+      point.setState('hover')
+      //chart.xAxis[0].drawCrosshair(null, point)
+    }
+  }
+  _handleEnterTooltip = (value) => {
+    const { chart } = this.props
+        , point = _fnFindPoint(this.data, value);
+    if (point) {
+      chart.zhTooltip.refresh(point)
+    }
+  }
+  _handleEnterCrossX = (value) => {
+    const { chart } = this.props
+        , point = _fnFindPoint(this.data, value);
+    if (point) {
+      chart.xAxis[0].drawCrosshair(null, point)
+    }
+  }
+  _handleToggleSeria = (isShow) => {
+    this.seriaIns.setVisible(isShow)
+  }
+
 
   render(){
     const { options } = this.props
-    , { name, type, color, symbol } = options;
+        , { name, type, color, symbol } = options;
     return (
       <OpenClose caption={name} isClose={true}>
         <RowInputText
@@ -104,19 +152,34 @@ class CellSeria extends Component {
           initValue={color}
           onEnter={this._handleEnterColor}
         />
-        {/*
-        <RowInputText
-          styleRoot={STYLE.ROW_INPUT}
-          caption="Color:"
-          initValue={color}
-          onEnter={this._handleEnterColor}
-        />
-        */}
         <RowInputText
           styleRoot={STYLE.ROW_INPUT}
           caption="Symbol:"
           initValue={symbol}
           onEnter={this._handleEnterSymbol}
+        />
+        <RowInputText
+          styleRoot={STYLE.ROW_INPUT}
+          caption="HoverPt:"
+          initValue=""
+          onEnter={this._handleEnterHover}
+        />
+        <RowInputText
+          styleRoot={STYLE.ROW_INPUT}
+          caption="TooltipPt:"
+          initValue=""
+          onEnter={this._handleEnterTooltip}
+        />
+        <RowInputText
+          styleRoot={STYLE.ROW_INPUT}
+          caption="CrossXPt:"
+          initValue=""
+          onEnter={this._handleEnterCrossX}
+        />
+        <RowCheckBox
+          caption="Toggle Seria"
+          onCheck={this._handleToggleSeria.bind(null, false)}
+          onUnCheck={this._handleToggleSeria.bind(null, true)}
         />
       </OpenClose>
     )

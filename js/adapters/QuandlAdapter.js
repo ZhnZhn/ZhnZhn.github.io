@@ -281,9 +281,10 @@ var _fLegendConfig = function _fLegendConfig(seriaColumnNames, column_names) {
 };
 
 var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) {
-
   var fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
-      column_names = json.dataset.column_names,
+      _json$dataset = json.dataset,
+      dataset = _json$dataset === undefined ? {} : _json$dataset,
+      column_names = dataset.column_names,
       result = {
     yPointIndex: yPointIndex,
     minPoint: Number.POSITIVE_INFINITY,
@@ -293,6 +294,7 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) 
     dataExDividend: [], dataSplitRatio: [],
     dataATH: [], dataHighLow: []
   };
+
 
   var open = _QuandlFn2.default.findColumnIndex(column_names, C.OPEN),
       close = _QuandlFn2.default.findColumnIndex(column_names, C.CLOSE),
@@ -308,11 +310,12 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) 
     }));
   }
 
-  if (exDividend) {
+  var _isTransform = dataset.transform && dataset.transform !== 'none';
+  if (exDividend && !_isTransform) {
     fnStep.push(_fnAddExDividend.bind(null, exDividend));
   }
 
-  if (splitRatio) {
+  if (splitRatio && !_isTransform) {
     fnStep.push(_fnAddSplitRatio.bind(null, splitRatio));
   }
 
@@ -565,4 +568,4 @@ var QuandlAdapter = {
 };
 
 exports.default = QuandlAdapter;
-//# sourceMappingURL=QuandlAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlAdapter.js.map

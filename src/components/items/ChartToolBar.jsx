@@ -26,7 +26,7 @@ class ChartToolbar extends Component {
             onClickVolume,
             onClickATH,
             onClickHighLow,
-            //onClickConfig
+            //onClickConfig,
           } = this.props
     const _btIndicator = (!config.zhConfig.isWithoutIndicator) ? (
       <ButtonParentTab

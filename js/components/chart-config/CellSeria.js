@@ -20,6 +20,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp, _initialiseProps;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -27,6 +29,10 @@ var _react2 = _interopRequireDefault(_react);
 var _safeGet = require('../../utils/safeGet');
 
 var _safeGet2 = _interopRequireDefault(_safeGet);
+
+var _DateUtils = require('../../utils/DateUtils');
+
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
 var _OpenClose = require('../zhn/OpenClose');
 
@@ -39,6 +45,10 @@ var _RowInputText2 = _interopRequireDefault(_RowInputText);
 var _RowInputColor = require('./RowInputColor');
 
 var _RowInputColor2 = _interopRequireDefault(_RowInputColor);
+
+var _RowCheckBox = require('../dialogs/RowCheckBox');
+
+var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,76 +73,35 @@ var _fnIsValidColor = function _fnIsValidColor(color) {
   return el.style.color ? true : false;
 };
 
-var CellSeria = function (_Component) {
+var _fnFindPoint = function _fnFindPoint(points, dmy) {
+  var mls = _DateUtils2.default.dmyToUTC(dmy);
+  return points.find(function (point) {
+    return point.x === mls;
+  });
+};
+
+var CellSeria = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(CellSeria, _Component);
 
-  function CellSeria() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function CellSeria(props) {
     (0, _classCallCheck3.default)(this, CellSeria);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = (0, _possibleConstructorReturn3.default)(this, (CellSeria.__proto__ || Object.getPrototypeOf(CellSeria)).call(this));
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = CellSeria.__proto__ || Object.getPrototypeOf(CellSeria)).call.apply(_ref, [this].concat(args))), _this), _this._handleEnterType = function (value) {
-      var _this$props = _this.props,
-          _this$props$chart = _this$props.chart,
-          chart = _this$props$chart === undefined ? {} : _this$props$chart,
-          _this$props$seriaInde = _this$props.seriaIndex,
-          seriaIndex = _this$props$seriaInde === undefined ? 0 : _this$props$seriaInde,
-          seria = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + ']', {}),
-          seriaOptions = seria.options;
+    _initialiseProps.call(_this);
 
-
-      if (seriaOptions && chart.addSeries && _fnIsInArray(arrType, value)) {
-
-        seriaOptions.type = value;
-        seria.update(seriaOptions);
-
-        /*
-        seria.remove(false);
-        chart.addSeries(seriaOptions);
-        */
-      }
-    }, _this._handleEnterColor = function (value) {
-      var _this$props2 = _this.props,
-          _this$props2$chart = _this$props2.chart,
-          chart = _this$props2$chart === undefined ? {} : _this$props2$chart,
-          _this$props2$seriaInd = _this$props2.seriaIndex,
-          seriaIndex = _this$props2$seriaInd === undefined ? 0 : _this$props2$seriaInd,
-          seriaIns = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + ']', {}),
-          seriaOptions = seriaIns.options;
-
-
-      if (seriaOptions && chart.addSeries && _fnIsValidColor(value)) {
-        seriaOptions.color = value;
-        seriaIns.update(seriaOptions);
-      }
-    }, _this._handleEnterSymbol = function (value) {
-      var _this$props3 = _this.props,
-          _this$props3$chart = _this$props3.chart,
-          chart = _this$props3$chart === undefined ? {} : _this$props3$chart,
-          _this$props3$seriaInd = _this$props3.seriaIndex,
-          seriaIndex = _this$props3$seriaInd === undefined ? 0 : _this$props3$seriaInd,
-          seriaIns = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + ']', {}),
-          seriaOptions = seriaIns.options;
-
-
-      if (seriaOptions && chart.addSeries && _fnIsInArray(arrSymbol, value)) {
-        if (seriaOptions.marker) {
-          seriaOptions.marker.symbol = value;
-        } else {
-          seriaOptions.marker = { symbol: value };
-        }
-        seriaIns.update(seriaOptions);
-      }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    _this._initProps(props);
+    return _this;
   }
 
   (0, _createClass3.default)(CellSeria, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props !== nextProps) {
+        this._initProps(nextProps);
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var options = this.props.options,
@@ -161,13 +130,122 @@ var CellSeria = function (_Component) {
           caption: 'Symbol:',
           initValue: symbol,
           onEnter: this._handleEnterSymbol
+        }),
+        _react2.default.createElement(_RowInputText2.default, {
+          styleRoot: STYLE.ROW_INPUT,
+          caption: 'HoverPt:',
+          initValue: '',
+          onEnter: this._handleEnterHover
+        }),
+        _react2.default.createElement(_RowInputText2.default, {
+          styleRoot: STYLE.ROW_INPUT,
+          caption: 'TooltipPt:',
+          initValue: '',
+          onEnter: this._handleEnterTooltip
+        }),
+        _react2.default.createElement(_RowInputText2.default, {
+          styleRoot: STYLE.ROW_INPUT,
+          caption: 'CrossXPt:',
+          initValue: '',
+          onEnter: this._handleEnterCrossX
+        }),
+        _react2.default.createElement(_RowCheckBox2.default, {
+          caption: 'Toggle Seria',
+          onCheck: this._handleToggleSeria.bind(null, false),
+          onUnCheck: this._handleToggleSeria.bind(null, true)
         })
       );
     }
   }]);
   return CellSeria;
-}(_react.Component);
+}(_react.Component), _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
 
+  this._initProps = function (props) {
+    var _props$chart = props.chart,
+        chart = _props$chart === undefined ? {} : _props$chart,
+        _props$seriaIndex = props.seriaIndex,
+        seriaIndex = _props$seriaIndex === undefined ? 0 : _props$seriaIndex;
+
+
+    _this2.seriaIns = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + ']', {});
+    _this2.data = (0, _safeGet2.default)(chart, 'series[' + seriaIndex + '].data', []);
+  };
+
+  this._handleEnterType = function (value) {
+    var chart = _this2.props.chart,
+        seriaOptions = _this2.seriaIns.options;
+
+
+    if (seriaOptions && chart.addSeries && _fnIsInArray(arrType, value)) {
+
+      seriaOptions.type = value;
+      _this2.seriaIns.update(seriaOptions);
+      /*
+      seria.remove(false);
+      chart.addSeries(seriaOptions);
+      */
+    }
+  };
+
+  this._handleEnterColor = function (value) {
+    var chart = _this2.props.chart,
+        seriaOptions = _this2.seriaIns.options;
+
+
+    if (seriaOptions && chart.addSeries && _fnIsValidColor(value)) {
+      seriaOptions.color = value;
+      _this2.seriaIns.update(seriaOptions);
+    }
+  };
+
+  this._handleEnterSymbol = function (value) {
+    var chart = _this2.props.chart,
+        seriaOptions = _this2.seriaIns.options;
+
+
+    if (seriaOptions && chart.addSeries && _fnIsInArray(arrSymbol, value)) {
+      if (seriaOptions.marker) {
+        seriaOptions.marker.symbol = value;
+      } else {
+        seriaOptions.marker = { symbol: value };
+      }
+      _this2.seriaIns.update(seriaOptions);
+    }
+  };
+
+  this._handleEnterHover = function (value) {
+    //const { chart } = this.props
+    var point = _fnFindPoint(_this2.data, value);
+    if (point) {
+      //point.onMouseOver()
+      point.setState('hover');
+      //chart.xAxis[0].drawCrosshair(null, point)
+    }
+  };
+
+  this._handleEnterTooltip = function (value) {
+    var chart = _this2.props.chart,
+        point = _fnFindPoint(_this2.data, value);
+
+    if (point) {
+      chart.zhTooltip.refresh(point);
+    }
+  };
+
+  this._handleEnterCrossX = function (value) {
+    var chart = _this2.props.chart,
+        point = _fnFindPoint(_this2.data, value);
+
+    if (point) {
+      chart.xAxis[0].drawCrosshair(null, point);
+    }
+  };
+
+  this._handleToggleSeria = function (isShow) {
+    _this2.seriaIns.setVisible(isShow);
+  };
+}, _temp);
 process.env.NODE_ENV !== "production" ? CellSeria.propTypes = {
   chart: _react.PropTypes.object,
   options: _react.PropTypes.shape({

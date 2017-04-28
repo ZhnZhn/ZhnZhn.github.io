@@ -152,6 +152,7 @@ var ChartPane = function (_Component) {
           chart = _props.chart,
           caption = _props.caption,
           setItemCaption = _props.setItemCaption,
+          onToggleToolbar = _props.onToggleToolbar,
           _title = (0, _safeGet2.default)(chart, 'options.title.text', ''),
           _subtitle = (0, _safeGet2.default)(chart, 'options.subtitle.text', ''),
           _height = (0, _safeGet2.default)(chart, 'options.chart.height', '');
@@ -194,6 +195,11 @@ var ChartPane = function (_Component) {
           onCheck: this._handleHideSeriesTitles,
           onUnCheck: this._handleShowSeriesTitles
         }),
+        _react2.default.createElement(_RowCheckBox2.default, {
+          caption: 'Hide Toolbar',
+          onCheck: onToggleToolbar.bind(null, false),
+          onUnCheck: onToggleToolbar.bind(null, true)
+        }),
         _react2.default.createElement(
           'div',
           { style: _Pane2.default.MSG },
@@ -227,7 +233,8 @@ process.env.NODE_ENV !== "production" ? ChartPane.propTypes = {
     })
   }),
   caption: _react.PropTypes.string,
-  setItemCaption: _react.PropTypes.func
+  setItemCaption: _react.PropTypes.func,
+  onToggleToolbar: _react.PropTypes.func
 } : void 0;
 exports.default = ChartPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-config\ChartPane.js.map

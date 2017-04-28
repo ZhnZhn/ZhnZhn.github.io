@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../src/api/QuandlApi.js"],"names":["QuandlApi","rootUrl","BLANK","getRequestUrl","option","value","fromDate","toDate","apiKey","_queryDate","_apiKey","_uri","REQUEST_ERROR","DATASET_EMPTY","checkResponse","json","quandl_error","dataset","message","errCaption","data","length","newest_available_date","oldest_available_date"],"mappings":";;;;;;AACA,IAAMA,YAAY;AAChBC,WAAU,yCADM;AAEhBC,SAAQ;AAFQ,CAAlB;;AAKAF,UAAUG,aAAV,GAA0B,UAASC,MAAT,EAAgB;AAAA,MAChCC,KADgC,GACID,MADJ,CAChCC,KADgC;AAAA,MACzBC,QADyB,GACIF,MADJ,CACzBE,QADyB;AAAA,MACfC,MADe,GACIH,MADJ,CACfG,MADe;AAAA,MACPC,MADO,GACIJ,MADJ,CACPI,MADO;;;AAGxC,MAAIC,mBAAJ;AACA,MAAKH,YAAYC,MAAjB,EAAyB;AACvBE,iBAAa,gBAAb;AACA,QAAIH,QAAJ,EAAc;AACZG,mBAAaA,+BAA4BH,QAA5B,CAAb;AACD;AACD,QAAIC,MAAJ,EAAW;AACTE,mBAAaA,6BAA0BF,MAA1B,CAAb;AACD;AACF,GARD,MAQO;AACLE,iBAAaT,UAAUE,KAAvB;AACD;;AAED,MAAIQ,gBAAJ;AACA,MAAIF,MAAJ,EAAW;AACTE,cAAWD,UAAD,iBACOD,MADP,gBAEMA,MAFhB;AAGD,GAJD,MAIO;AACLE,cAAUV,UAAUE,KAApB;AACD;;AAED,MAAMS,YAAUX,UAAUC,OAApB,GAA8BI,KAA9B,cAA4CI,UAA5C,GAAyDC,OAA/D;;AAGA,SAAOC,IAAP;AACD,CA7BD;;AA+BA,IAAMC,gBAAgB,eAAtB;AAAA,IACMC,gBAAgB,eADtB;AAEAb,UAAUc,aAAV,GAA0B,UAASC,IAAT,EAAc;AAAA,MAC9BC,YAD8B,GACDD,IADC,CAC9BC,YAD8B;AAAA,sBACDD,IADC,CAChBE,OADgB;AAAA,MAChBA,OADgB,iCACR,EADQ;;AAEtC,MAAKD,YAAL,EAAmB;AAChB,QAAKA,aAAaE,OAAlB,EAA4B;AACzB,YAAM,EAAEC,YAAaP,aAAf,EAA8BM,SAAUH,KAAKC,YAAL,CAAkBE,OAA1D,EAAN;AACF,KAFD,MAEO;AACJ,YAAM,EAAEC,YAAaP,aAAf,EAA8BM,SAAU,EAAxC,EAAN;AACF;AACH,GAND,MAMO,IAAK,CAACD,QAAQG,IAAT,IAAiBH,QAAQG,IAAR,CAAaC,MAAb,KAAwB,CAA9C,EAAiD;AAAA,gCACWJ,OADX,CAC5CK,qBAD4C;AAAA,QAC5CA,qBAD4C,yCACtB,EADsB;AAAA,gCACWL,OADX,CAClBM,qBADkB;AAAA,QAClBA,qBADkB,yCACI,EADJ;;AAEpD,UAAM;AACHJ,kBAAaN,aADV;AAEHK,2FAC0BI,qBAD1B,2CAE0BC;AAJvB,KAAN;AAOH;AACD,SAAO,IAAP;AACD,CAnBD;;kBAsBevB,S","file":"QuandlApi.js","sourcesContent":["\r\nconst QuandlApi = {\r\n  rootUrl : \"https://www.quandl.com/api/v3/datasets/\",\r\n  BLANK : ''\r\n};\r\n\r\nQuandlApi.getRequestUrl = function(option){\r\n  const { value, fromDate, toDate, apiKey } = option;\r\n\r\n  let _queryDate;\r\n  if ( fromDate || toDate ){\r\n    _queryDate = 'sort_order=asc';\r\n    if (fromDate) {\r\n      _queryDate = _queryDate + `&trim_start=${fromDate}`;\r\n    }\r\n    if (toDate){\r\n      _queryDate = _queryDate + `&trim_end=${toDate}`;\r\n    }\r\n  } else {\r\n    _queryDate = QuandlApi.BLANK;\r\n  }\r\n\r\n  let _apiKey;\r\n  if (apiKey){\r\n    _apiKey = (_queryDate)\r\n       ? `&api_key=${apiKey}`\r\n       : `api_key=${apiKey}`;\r\n  } else {\r\n    _apiKey = QuandlApi.BLANK;\r\n  }\r\n\r\n  const _uri = `${QuandlApi.rootUrl}${value}.json?${_queryDate}${_apiKey}`;\r\n\r\n\r\n  return _uri;\r\n}\r\n\r\nconst REQUEST_ERROR = 'Request Error'\r\n    , DATASET_EMPTY = 'Dataset Empty';\r\nQuandlApi.checkResponse = function(json){\r\n  const { quandl_error, dataset={} } = json;\r\n  if ( quandl_error ){\r\n     if ( quandl_error.message ) {\r\n        throw { errCaption : REQUEST_ERROR, message : json.quandl_error.message }\r\n     } else {\r\n        throw { errCaption : REQUEST_ERROR, message : '' }\r\n     }\r\n  } else if ( !dataset.data || dataset.data.length === 0 ){\r\n      const { newest_available_date='', oldest_available_date='' } = dataset;\r\n      throw {\r\n         errCaption : DATASET_EMPTY,\r\n         message : `Result dataset for request is empty:\r\n                    Newest Date: ${newest_available_date}\r\n                    Oldest Date: ${oldest_available_date}`\r\n      }\r\n\r\n  }\r\n  return true;\r\n}\r\n\r\n\r\nexport default QuandlApi;\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\api\\QuandlApi.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\api\\QuandlApi.js",
+ "sourceRoot": "",
+ "names": [
+  "QuandlApi",
+  "rootUrl",
+  "getRequestUrl",
+  "option",
+  "value",
+  "fromDate",
+  "toDate",
+  "apiKey",
+  "transform",
+  "_queryDate",
+  "_apiKey",
+  "REQUEST_ERROR",
+  "DATASET_EMPTY",
+  "checkResponse",
+  "json",
+  "quandl_error",
+  "dataset",
+  "message",
+  "errCaption",
+  "data",
+  "length",
+  "newest_available_date",
+  "oldest_available_date"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,YAAY;AAChBC,WAAU;AADM,CAAlB;;AAIAD,UAAUE,aAAV,GAA0B,UAASC,MAAT,EAAgB;AAAA,MAChCC,KADgC,GACeD,MADf,CAChCC,KADgC;AAAA,MACzBC,QADyB,GACeF,MADf,CACzBE,QADyB;AAAA,MACfC,MADe,GACeH,MADf,CACfG,MADe;AAAA,MACPC,MADO,GACeJ,MADf,CACPI,MADO;AAAA,MACCC,SADD,GACeL,MADf,CACCK,SADD;;;AAGxC,MAAIC,aAAa,EAAjB;AACA,MAAKJ,YAAYC,MAAjB,EAAyB;AACvBG,iBAAa,gBAAb;AACA,QAAIJ,QAAJ,EAAc;AACZI,mBAAaA,+BAA4BJ,QAA5B,CAAb;AACD;AACD,QAAIC,MAAJ,EAAW;AACTG,mBAAaA,6BAA0BH,MAA1B,CAAb;AACD;AACF;;AAED,MAAIE,SAAJ,EAAe;AACbC,iBAAaA,8BAA2BD,SAA3B,CAAb;AACD;;AAED,MAAIE,UAAU,EAAd;AACA,MAAIH,MAAJ,EAAW;AACTG,cAAWD,UAAD,iBACOF,MADP,gBAEMA,MAFhB;AAGD;;AAED;;AAEA,cAAUP,UAAUC,OAApB,GAA8BG,KAA9B,cAA4CK,UAA5C,GAAyDC,OAAzD;AACD,CA5BD;;AA8BA,IAAMC,gBAAgB,eAAtB;AAAA,IACMC,gBAAgB,eADtB;;AAGAZ,UAAUa,aAAV,GAA0B,UAASC,IAAT,EAAc;AAAA,MAC9BC,YAD8B,GACDD,IADC,CAC9BC,YAD8B;AAAA,sBACDD,IADC,CAChBE,OADgB;AAAA,MAChBA,OADgB,iCACR,EADQ;;AAEtC,MAAKD,YAAL,EAAmB;AAChB,QAAKA,aAAaE,OAAlB,EAA4B;AACzB,YAAM,EAAEC,YAAaP,aAAf,EAA8BM,SAAUH,KAAKC,YAAL,CAAkBE,OAA1D,EAAN;AACF,KAFD,MAEO;AACJ,YAAM,EAAEC,YAAaP,aAAf,EAA8BM,SAAU,EAAxC,EAAN;AACF;AACH,GAND,MAMO,IAAK,CAACD,QAAQG,IAAT,IAAiBH,QAAQG,IAAR,CAAaC,MAAb,KAAwB,CAA9C,EAAiD;AAAA,gCACWJ,OADX,CAC5CK,qBAD4C;AAAA,QAC5CA,qBAD4C,yCACtB,EADsB;AAAA,gCACWL,OADX,CAClBM,qBADkB;AAAA,QAClBA,qBADkB,yCACI,EADJ;;AAEpD,UAAM;AACHJ,kBAAaN,aADV;AAEHK,2FAC0BI,qBAD1B,2CAE0BC;AAJvB,KAAN;AAMH;AACD,SAAO,IAAP;AACD,CAlBD;;kBAoBetB,S"
+}

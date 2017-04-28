@@ -161,7 +161,8 @@ var MapChartItem = function (_Component) {
     _this.state = {
       isLoading: true,
       isOpen: true,
-      isShowInfo: false
+      isShowInfo: false,
+      time: ''
     };
     return _this;
   }
@@ -177,10 +178,14 @@ var MapChartItem = function (_Component) {
           jsonCube = config.json,
           zhMapSlice = config.zhMapSlice;
 
+      //console.log(this.props);
 
       _ChoroplethMap2.default.draw('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
         _this2.map = option.map;
-        _this2.setState({ isLoading: false });
+        _this2.setState({
+          isLoading: false,
+          time: option.time
+        });
         return undefined;
       }).catch(function (err) {
         _this2.setState({ isLoading: false });
@@ -199,12 +204,11 @@ var MapChartItem = function (_Component) {
           zhDialog = _config$zhDialog === undefined ? {} : _config$zhDialog,
           _zhDialog$subtitle = zhDialog.subtitle,
           subtitle = _zhDialog$subtitle === undefined ? '' : _zhDialog$subtitle,
-          _zhDialog$time = zhDialog.time,
-          time = _zhDialog$time === undefined ? '' : _zhDialog$time,
           _state = this.state,
           isLoading = _state.isLoading,
           isOpen = _state.isOpen,
           isShowInfo = _state.isShowInfo,
+          time = _state.time,
           _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose,
           _styleMap = isShowInfo ? styles.displayNone : styles.displayBlock;
 

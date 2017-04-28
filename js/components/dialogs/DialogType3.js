@@ -42,6 +42,14 @@ var _ActionButton = require('../zhn/ActionButton');
 
 var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
+var _ShowHide = require('../zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
+var _RowInputSelect = require('./RowInputSelect');
+
+var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
+
 var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
@@ -55,6 +63,8 @@ var _withValidationLoad = require('./decorators/withValidationLoad');
 var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var transformOptions = [{ caption: "NO EFFECT: z[t]=y[t]", value: "none" }, { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" }, { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" }, { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" }, { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }];
 
 var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Component) {
   (0, _inherits3.default)(DialogType3, _Component);
@@ -70,6 +80,16 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           onClickInfo = _this$props.onClickInfo;
 
       onClickInfo({ descrUrl: descrUrl });
+    };
+
+    _this._handleClickTransform = function () {
+      _this.setState(function (prevState) {
+        return { isShowTransform: !prevState.isShowTransform };
+      });
+    };
+
+    _this._handleSelectTransform = function (option) {
+      _this.transform = option;
     };
 
     _this._handleSelectStock = function (stock) {
@@ -106,7 +126,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate;
 
-      return _this.props.loadFn(_this.props, { stock: _this.stock, fromDate: fromDate, toDate: toDate });
+      return _this.props.loadFn(_this.props, { stock: _this.stock, fromDate: fromDate, toDate: toDate, transform: _this.transform });
     };
 
     _this._handleClose = function () {
@@ -115,8 +135,21 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
     };
 
     _this.stock = undefined;
-    _this.toolbarButtons = props.descrUrl ? [{ caption: 'I', onClick: _this._handleClickInfo }] : [];
+    _this.transform = undefined;
+    _this.toolbarButtons = [];
+    if (props.descrUrl) {
+      _this.toolbarButtons.push({
+        caption: 'I', onClick: _this._handleClickInfo
+      });
+    }
+    if (props.isTransform) {
+      _this.toolbarButtons.push({
+        caption: 'T', onClick: _this._handleClickTransform
+      });
+    }
+
     _this.state = {
+      isShowTransform: false,
       validationMessages: []
     };
     return _this;
@@ -151,7 +184,9 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
-          validationMessages = this.state.validationMessages,
+          _state = this.state,
+          isShowTransform = _state.isShowTransform,
+          validationMessages = _state.validationMessages,
           _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
         type: 'TypeC',
@@ -180,6 +215,15 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           optionNames: optionNames,
           onSelect: this._handleSelectStock
         }),
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isShowTransform },
+          _react2.default.createElement(_RowInputSelect2.default, {
+            caption: 'Transform:',
+            options: transformOptions,
+            onSelect: this._handleSelectTransform
+          })
+        ),
         _react2.default.createElement(_DatesFragment2.default, {
           ref: function ref(c) {
             return _this2.datesFragment = c;
@@ -212,6 +256,7 @@ process.env.NODE_ENV !== "production" ? DialogType3.propTypes = {
   onShow: _react.PropTypes.func,
 
   descrUrl: _react.PropTypes.string,
+  isTransform: _react.PropTypes.bool,
   onClickInfo: _react.PropTypes.func,
   loadFn: _react.PropTypes.func
 } : void 0;

@@ -36,7 +36,8 @@ class ChartPane extends Component {
       })
     }),
     caption: PropTypes.string,
-    setItemCaption: PropTypes.func
+    setItemCaption: PropTypes.func,
+    onToggleToolbar: PropTypes.func
   }
 
   constructor(props){
@@ -115,7 +116,7 @@ class ChartPane extends Component {
   */
 
   render(){
-    const { chart, caption, setItemCaption } = this.props
+    const { chart, caption, setItemCaption, onToggleToolbar } = this.props
         , _title = safeGet(chart, 'options.title.text', '')
         , _subtitle = safeGet(chart, 'options.subtitle.text', '')
         , _height = safeGet(chart, 'options.chart.height', '');
@@ -157,6 +158,11 @@ class ChartPane extends Component {
           caption="Hide Series Titles"
           onCheck={this._handleHideSeriesTitles}
           onUnCheck={this._handleShowSeriesTitles}
+        />
+        <RowCheckBox
+          caption="Hide Toolbar"
+          onCheck={onToggleToolbar.bind(null, false)}
+          onUnCheck={onToggleToolbar.bind(null, true)}
         />
 
         <div style={STYLE.MSG}>

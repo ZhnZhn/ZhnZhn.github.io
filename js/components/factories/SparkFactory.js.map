@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../../src/components/factories/SparkFactory.jsx"],"names":["SparkFactory","createSparklines","data","pointIndex","stroke","strokeOpacity","strokeDasharray","createSparkbars","strokeWidth","fill","fillOpacity"],"mappings":";;;;;;AAAA;;;;AAEA;;;;AAUA,IAAMA,eAAe;AACnBC,mBADmB,4BACFC,IADE,EACIC,UADJ,EACe;AAC/B,aACE;AAAA;AAAA;AACG,oBAAQ,EADX;AAEG,mBAAO,GAFV;AAGG,uBAAW,EAHd;AAIG,sBAAU,GAJb;AAKG,kBAAMD;AALT;AAOG,qEAAgB,OAAM,QAAtB,GAPH;AAQG;AACK,mBAAQ,EAACE,QAAQ,KAAT,EAAgBC,eAAe,GAA/B,EAAoCC,iBAAiB,MAArD,EADb;AAEK,kBAAK;AAFV,WARH;AAYG,yEAZH;AAaG,qEAAgB,YAAYH,UAA5B;AAbH,OADF;AAiBF,IAnBkB;AAoBnBI,kBApBmB,2BAoBHL,IApBG,EAoBGC,UApBH,EAoBc;AAC/B,aACE;AAAA;AAAA;AACG,oBAAQ,EADX;AAEG,mBAAO,GAFV;AAGG,uBAAW,EAHd;AAIG,sBAAU,GAJb;AAKG,kBAAMD,IALT;AAMG,iBAAK,CANR;AAOG,iBAAK;AAPR;AASG;AACG,mBAAO,EAAEE,QAAQ,OAAV,EAAmBI,aAAa,GAAhC,EAAqCC,MAAM,QAA3C,EAAqDC,aAAa,KAAlE,EADV;AAEG,wBAAYP;AAFf;AATH,OADF;AAgBD;AArCkB,CAArB;;kBAwCeH,Y","file":"SparkFactory.js","sourcesContent":["import React from 'react';\r\n\r\nimport {\r\n  Sparklines,\r\n  SparklinesLine,\r\n  SparklinesSpots,\r\n  SparklinesSpot,\r\n  SparklinesReferenceLine,\r\n  SparklinesBars\r\n} from '../zhnSparklines/Sparklines';\r\n\r\n\r\nconst SparkFactory = {\r\n  createSparklines(data, pointIndex){\r\n     return (\r\n       <Sparklines\r\n          height={45}\r\n          width={100}\r\n          svgHeight={45}\r\n          svgWidth={100}\r\n          data={data}\r\n       >\r\n          <SparklinesLine color=\"yellow\" />\r\n          <SparklinesReferenceLine\r\n               style={ {stroke: 'red', strokeOpacity: .75, strokeDasharray: '5, 3'} }\r\n               type=\"avg\"\r\n          />\r\n          <SparklinesSpots />\r\n          <SparklinesSpot pointIndex={pointIndex} />\r\n       </Sparklines>\r\n     )\r\n  },\r\n  createSparkbars(data, pointIndex){\r\n    return (\r\n      <Sparklines\r\n         height={45}\r\n         width={100}\r\n         svgHeight={45}\r\n         svgWidth={100}\r\n         data={data}\r\n         min={0}\r\n         max={100}\r\n      >\r\n         <SparklinesBars\r\n            style={{ stroke: \"black\", strokeWidth: \"1\", fill: \"yellow\", fillOpacity: \"0.9\" }}\r\n            pointIndex={pointIndex}\r\n         />\r\n      </Sparklines>\r\n    )\r\n  }\r\n}\r\n\r\nexport default SparkFactory\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\factories\\SparkFactory.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\factories\\SparkFactory.js",
+ "sourceRoot": "",
+ "names": [
+  "SparkFactory",
+  "createSparklines",
+  "data",
+  "pointIndex",
+  "stroke",
+  "strokeOpacity",
+  "strokeDasharray",
+  "createSparkbars",
+  "strokeWidth",
+  "fill",
+  "fillOpacity"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;AAUA,IAAMA,eAAe;AACnBC,mBADmB,4BACFC,IADE,EACIC,UADJ,EACe;AAC/B,aACE;AAAA;AAAA;AACG,oBAAQ,EADX;AAEG,mBAAO,GAFV;AAGG,uBAAW,EAHd;AAIG,sBAAU,GAJb;AAKG,kBAAMD;AALT;AAOG,qEAAgB,OAAM,QAAtB,GAPH;AAQG;AACK,mBAAQ,EAACE,QAAQ,KAAT,EAAgBC,eAAe,GAA/B,EAAoCC,iBAAiB,MAArD,EADb;AAEK,kBAAK;AAFV,WARH;AAYG,yEAZH;AAaG,qEAAgB,YAAYH,UAA5B;AAbH,OADF;AAiBF,IAnBkB;AAoBnBI,kBApBmB,2BAoBHL,IApBG,EAoBGC,UApBH,EAoBc;AAC/B,aACE;AAAA;AAAA;AACG,oBAAQ,EADX;AAEG,mBAAO,GAFV;AAGG,uBAAW,EAHd;AAIG,sBAAU,GAJb;AAKG,kBAAMD,IALT;AAMG,iBAAK,CANR;AAOG,iBAAK;AAPR;AASG;AACG,mBAAO,EAAEE,QAAQ,OAAV,EAAmBI,aAAa,GAAhC,EAAqCC,MAAM,QAA3C,EAAqDC,aAAa,KAAlE,EADV;AAEG,wBAAYP;AAFf;AATH,OADF;AAgBD;AArCkB,CAArB;;kBAwCeH,Y"
+}

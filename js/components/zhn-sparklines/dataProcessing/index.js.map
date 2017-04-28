@@ -1,0 +1,16 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\dataProcessing\\index.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\dataProcessing\\index.js",
+ "sourceRoot": "",
+ "names": [
+  "hm",
+  "max",
+  "min",
+  "mean",
+  "avg",
+  "median"
+ ],
+ "mappings": ";;;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEO,IAAMA,kBAAK;AAChBC,oBADgB;AAEhBC,oBAFgB;AAGhBC,sBAHgB;AAIhBC,qBAJgB;AAKhBC;AALgB,CAAX"
+}

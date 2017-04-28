@@ -42,6 +42,8 @@ const EuroStatApi = {
       return `${rootUrl}${_group}${_param}${queryTail}`;
   } else if (seriaType === 'COLUMN') {
     return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
+  } else if (seriaType === 'MAP') {
+     return `${rootUrl}${mapValue}`;      
   } else {
     //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
     return `${rootUrl}${mapValue}&time=${time}`;
