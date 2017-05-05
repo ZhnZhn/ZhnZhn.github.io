@@ -46,6 +46,7 @@ const qeSources = [
   'GDT',
   'BLSI',
   'ROGERS_INDICES',
+  'BALTIC_INDICES',
 
   'EURONEXT_STOCK',
   'WIKI_STOCK',

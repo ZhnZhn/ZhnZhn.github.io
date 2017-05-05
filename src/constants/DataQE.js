@@ -98,13 +98,11 @@ const DataQE = {
       optionNames : 'Countries',
       nInitFromDate : 1,
       itemCaption : 'Country:',
-      //fnItemCaption : (value) => value.split('/')[1],
       valueFn: 'RPrefixDashOne',
       valueFnPrefix : 'GPP/CFP',
       loadId : 'Q',
       columnName : 'Gasoline Price',
       seriaColumnNames : [ 'Diesel Price' ],
-      //columnName : 'Value',
       dataSource : 'Global Petroleum Prices (Code: GPP)'
     }
   },
@@ -143,6 +141,25 @@ const DataQE = {
       loadId : 'Q',
       columnName : 'Value',
       dataSource : 'Rogers International Commodity Indices (Code: RICI)'
+    }
+  },
+  QE_BALTIC_INDICES : {
+    type : 'QE_BALTIC_INDICES',
+    menuTitle: 'Baltic Indices',
+    dialogCaption : 'Baltic Indices',
+    chartContainerCaption : 'Quandl Baltic Indices',
+    dialogProps : {
+      descrUrl : './data/quandl/lloyds.html',
+      optionURI : './data/quandl/lloyds-indices.json',
+      optionsJsonProp : 'indices',
+      itemCaption: 'Index:',
+      optionNames: 'indices',
+      nInitFromDate : 5,
+      valueFn : "RPrefixOne",
+      valueFnPrefix : "LLOYDS",
+      loadId : 'Q',
+      columnName : 'Index',
+      dataSource : "Lloyd's List (Code: LLOYDS)"
     }
   },
   QE_GLOBAL_INDICATOR : {

@@ -49,12 +49,12 @@ const menuQuandl = [
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
        { id : Quandl.EU_COMMISSION },
-       { id:  Quandl.OECD, isNew: true }
+       { id:  Quandl.OECD }
      ]
   },{
     caption : 'Inflation & Prices',
     items : [
-      { id : Quandl.OECD_CPI, isNew : true },
+      { id : Quandl.OECD_CPI },
       { id : Quandl.RATE_INFLATION },
       { id : Quandl.BLSI },
       { id : Quandl.GDT },
@@ -65,11 +65,12 @@ const menuQuandl = [
      items : [
        { id : Quandl.COMMODITY_TRADE },
        { id : Quandl.COMMODITY_PRICE },
-       { id : Quandl.PETROLEUM_PRICES, isNew: true },
+       { id : Quandl.PETROLEUM_PRICES },
        { id : Quandl.JODI_WORLD_GAS },
        { id : Quandl.JODI_WORLD_OIL },
        { id : Quandl.EIA_COAL },
-       { id : Quandl.ROGERS_INDICES }
+       { id : Quandl.ROGERS_INDICES },
+       { id : Quandl.BALTIC_INDICES, isNew: true }
      ]
   },{
      caption : 'World Stocks',
