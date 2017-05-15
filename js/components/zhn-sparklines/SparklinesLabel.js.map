@@ -1,0 +1,13 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\SparklinesLabel.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\SparklinesLabel.js",
+ "sourceRoot": "",
+ "names": [
+  "SparklinesLabel",
+  "title",
+  "rest"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,kBAAkB,SAAlBA,eAAkB;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAaC,IAAb;AAAA,SACtB;AAAA;AAAUA,QAAV;AACGD;AADH,GADsB;AAAA,CAAxB;;kBAKeD,e"
+}

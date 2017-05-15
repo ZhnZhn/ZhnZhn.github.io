@@ -13,17 +13,23 @@ const S = {
   MODAL : {
     position : 'static',
     width: '400px',
-    height: '150px',
+    height: '200px',
     margin: '70px auto 0px'
   }
 };
+
+const SET_QUANDL_KEY = 'setQuandlKey';
+const MODE_ADMIN = 'isAdminMode';
+const MODE_DELTA = 'isDrawDeltaExtrems';
+const MODE_ZOOM = 'isNotZoomToMinMax';
 
 class SettingsDialog extends Component {
   static propTypes = {
     isShow: PropTypes.bool,
     data: PropTypes.shape({
       setQuandlKey: PropTypes.func,
-      isAdminMode: PropTypes.func
+      isAdminMode: PropTypes.func,
+      isDrawDeltaExtrems: PropTypes.func
     }),
     onClose: PropTypes.func
   }
@@ -48,19 +54,21 @@ class SettingsDialog extends Component {
 
   _handleSet = () => {
     const { data, onClose } = this.props
-        , setQuandlKey = safeFn(data, 'setQuandlKey');
+        , setQuandlKey = safeFn(data, SET_QUANDL_KEY);
     setQuandlKey(this.inputComp.getValue())
     onClose()
   }
-  _handleAdminMode = (mode) => {
+  _handleMode = (fnName, mode) => {
     const { data } = this.props
-        , isAdminMode = safeFn(data, 'isAdminMode');
-    isAdminMode(mode)
+        , fnMode = safeFn(data, fnName);
+    fnMode(mode)
   }
 
   render(){
     const { isShow, data, onClose } = this.props
-        , _isAdminMode = safeFn(data, 'isAdminMode', false)();
+        , _isAdminMode = safeFn(data, MODE_ADMIN, false)()
+        , _isDrawDeltaExtrems = safeFn(data, MODE_DELTA, false)()
+        , _isNotZoomToMinMax = safeFn(data, MODE_ZOOM, false)();
 
     return (
          <ModalDialog
@@ -84,8 +92,20 @@ class SettingsDialog extends Component {
            <RowCheckBox
               initValue={_isAdminMode}
               caption="View in Admin Mode"
-              onCheck={this._handleAdminMode.bind(null, true)}
-              onUnCheck={this._handleAdminMode.bind(null, false)}
+              onCheck={this._handleMode.bind(null, MODE_ADMIN, true)}
+              onUnCheck={this._handleMode.bind(null, MODE_ADMIN, false)}
+           />
+           <RowCheckBox
+              initValue={_isDrawDeltaExtrems}
+              caption="Draw Delta Extrems"
+              onCheck={this._handleMode.bind(null, MODE_DELTA, true)}
+              onUnCheck={this._handleMode.bind(null, MODE_DELTA, false)}
+           />
+           <RowCheckBox
+              initValue={_isNotZoomToMinMax}
+              caption="Not Zoom to Min-Max"
+              onCheck={this._handleMode.bind(null, MODE_ZOOM, true)}
+              onUnCheck={this._handleMode.bind(null, MODE_ZOOM, false)}
            />
          </ModalDialog>
     );

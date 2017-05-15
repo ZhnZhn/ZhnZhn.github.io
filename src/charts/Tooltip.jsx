@@ -81,7 +81,7 @@ const _fnSplitRatio = function({date, id, valueText, value, point}){
 }
 
 const _fnVolumeTooltip = function({ date, id, value, point }){
-  const { _open='', _close='', _low='', _high='' } = point;
+  const { _open='NoData', _close='', _low='', _high='' } = point;  
   return _fnTooltipHeader(date, id) +
   `<div class="tp__body">
   <span class="tp__body__title">Volume: </span>
@@ -164,7 +164,7 @@ const _fnTreeMapTooltip = function({id, point}){
 const _fnAddHandlerClose = function(id, point){
   setTimeout( function(){
           document.getElementById(id)
-             .addEventListener('click', function _fnHide(){                    
+             .addEventListener('click', function _fnHide(){
                     document.getElementById(id).removeEventListener('click', _fnHide);
                     point.series.chart.zhTooltip.hide();
          })

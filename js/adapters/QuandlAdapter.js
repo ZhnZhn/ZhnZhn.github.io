@@ -55,6 +55,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var C = {
   OPEN: "Open",
   CLOSE: "Close",
+  PRICE: 'Price',
   LOW: "Low",
   HIGH: "High",
   VOLUME: "Volume",
@@ -66,7 +67,8 @@ var C = {
   COLOR_GREEN: "#80c040",
   COLOR_RED: "#F44336",
   COLOR_WHITE: "white",
-  COLOR_GRAY: "gray"
+  //COLOR_GRAY : "gray"
+  COLOR_GRAY: '#607d8b'
 };
 
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
@@ -145,8 +147,7 @@ var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
 
 var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
   var volume = optionIndex.volume,
-      _optionIndex$open = optionIndex.open,
-      open = _optionIndex$open === undefined ? 1 : _optionIndex$open,
+      open = optionIndex.open,
       _optionIndex$close = optionIndex.close,
       close = _optionIndex$close === undefined ? 4 : _optionIndex$close,
       _optionIndex$low = optionIndex.low,
@@ -156,27 +157,28 @@ var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
       point = result.point,
       dateUTC = result.dateUTC,
       dataVolume = result.dataVolume,
-      dataVolumeColumn = result.dataVolumeColumn;
+      dataVolumeColumn = result.dataVolumeColumn,
+      _open = open ? point[open] : undefined;
 
   dataVolume.push([dateUTC, point[volume]]);
-  if (point[close] > point[open]) {
+  if (_open && point[close] > _open) {
     dataVolumeColumn.push({
       x: dateUTC, y: point[volume],
-      _open: point[open], _close: point[close],
+      _open: _open, _close: point[close],
       _low: point[low], _high: point[high],
       color: C.COLOR_GREEN
     });
-  } else if (point[close] < point[open]) {
+  } else if (_open && point[close] < _open) {
     dataVolumeColumn.push({
       x: dateUTC, y: point[volume],
-      _open: point[open], _close: point[close],
+      _open: _open, _close: point[close],
       _low: point[low], _high: point[high],
       color: C.COLOR_RED
     });
   } else {
     dataVolumeColumn.push({
       x: dateUTC, y: point[volume],
-      _open: point[open], _close: point[close],
+      _open: _open, _close: point[close],
       _low: point[low], _high: point[high],
       color: C.COLOR_GRAY
     });
@@ -185,8 +187,8 @@ var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
 };
 
 var _fnAddATH = function _fnAddATH(optionIndex, result) {
-  var _optionIndex$open2 = optionIndex.open,
-      open = _optionIndex$open2 === undefined ? 1 : _optionIndex$open2,
+  var _optionIndex$open = optionIndex.open,
+      open = _optionIndex$open === undefined ? 1 : _optionIndex$open,
       dateUTC = result.dateUTC,
       point = result.point,
       seria = result.seria,
@@ -222,8 +224,8 @@ var _fnAddATH = function _fnAddATH(optionIndex, result) {
 };
 
 var _fnAddHighLow = function _fnAddHighLow(optionIndex, result) {
-  var _optionIndex$open3 = optionIndex.open,
-      open = _optionIndex$open3 === undefined ? 1 : _optionIndex$open3,
+  var _optionIndex$open2 = optionIndex.open,
+      open = _optionIndex$open2 === undefined ? 1 : _optionIndex$open2,
       _optionIndex$high2 = optionIndex.high,
       high = _optionIndex$high2 === undefined ? 2 : _optionIndex$high2,
       _optionIndex$low2 = optionIndex.low,
@@ -297,7 +299,8 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) 
 
 
   var open = _QuandlFn2.default.findColumnIndex(column_names, C.OPEN),
-      close = _QuandlFn2.default.findColumnIndex(column_names, C.CLOSE),
+      _closeIndex = _QuandlFn2.default.findColumnIndex(column_names, C.CLOSE),
+      close = typeof _closeIndex !== 'undefined' ? _closeIndex : _QuandlFn2.default.findColumnIndex(column_names, C.PRICE),
       low = _QuandlFn2.default.findColumnIndex(column_names, C.LOW),
       high = _QuandlFn2.default.findColumnIndex(column_names, C.HIGH),
       volume = _QuandlFn2.default.findColumnIndex(column_names, C.VOLUME),
@@ -455,7 +458,9 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
 
 var fnGetSeries = function fnGetSeries(config, json, option) {
   var yPointIndex = option.dataColumn,
-      chartId = option.value;
+      chartId = option.value,
+      isDrawDeltaExtrems = option.isDrawDeltaExtrems,
+      isNotZoomToMinMax = option.isNotZoomToMinMax;
 
 
   _fnSetChartTitle(config, option);
@@ -497,7 +502,32 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
     config.zhConfig.isWithLegend = true;
   }
 
-  return { config: config, minPoint: minPoint, maxPoint: maxPoint, minY: minY };
+  return {
+    config: config, minPoint: minPoint, maxPoint: maxPoint, minY: minY,
+    isDrawDeltaExtrems: isDrawDeltaExtrems, isNotZoomToMinMax: isNotZoomToMinMax
+  };
+};
+
+var _setPlotLinesExtremValues = function _setPlotLinesExtremValues(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems) {
+  var _bMax = (0, _big2.default)(maxPoint),
+      _bMin = (0, _big2.default)(minPoint),
+      _bValue = (0, _big2.default)(value),
+      _maxPoint = parseFloat(_bMax.round(4).toString(), 10),
+      _minPoint = parseFloat(_bMin.round(4).toString(), 10);
+
+  var _deltaMax = '',
+      _deltaMin = '';
+  if (isDrawDeltaExtrems) {
+    var perToMax = _QuandlFn2.default.createPercent({ bValue: _bMax.minus(_bValue), bTotal: _bValue });
+    var perToMin = _QuandlFn2.default.createPercent({ bValue: _bValue.minus(_bMin), bTotal: _bValue });
+    _deltaMax = '\xA0\xA0\u0394 ' + perToMax + '%';
+    _deltaMin = '\xA0\xA0\u0394 ' + perToMin + '%';
+  }
+
+  plotLines[0].value = _maxPoint;
+  plotLines[0].label.text = '' + _ChartConfig2.default.fnNumberFormat(_maxPoint) + _deltaMax;
+  plotLines[1].value = _minPoint;
+  plotLines[1].label.text = '' + _ChartConfig2.default.fnNumberFormat(_minPoint) + _deltaMin;
 };
 
 var fnConfigAxes = function fnConfigAxes(result) {
@@ -505,16 +535,18 @@ var fnConfigAxes = function fnConfigAxes(result) {
       minPoint = result.minPoint,
       maxPoint = result.maxPoint,
       minY = result.minY,
-      _maxPoint = parseFloat((0, _big2.default)(maxPoint).round(4).toString(), 10),
-      _minPoint = parseFloat((0, _big2.default)(minPoint).round(4).toString(), 10),
-      plotLines = config.yAxis.plotLines;
+      isDrawDeltaExtrems = result.isDrawDeltaExtrems,
+      isNotZoomToMinMax = result.isNotZoomToMinMax,
+      plotLines = config.yAxis.plotLines,
+      _data = config.series[0].data,
+      _maxIndex = _data.length - 1,
+      _recentValue = _data[_maxIndex][1];
 
-  plotLines[0].value = _maxPoint;
-  plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(_maxPoint);
-  plotLines[1].value = _minPoint;
-  plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(_minPoint);
+  _setPlotLinesExtremValues(plotLines, minPoint, maxPoint, _recentValue, isDrawDeltaExtrems);
 
-  config.yAxis.min = minY;
+  if (!isNotZoomToMinMax) {
+    config.yAxis.min = minY;
+  }
 
   return result;
 };

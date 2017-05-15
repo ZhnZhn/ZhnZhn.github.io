@@ -63,6 +63,13 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
   }
 };
 
+var _addSettings = function _addSettings(option) {
+  option.apiKey = _ChartStore2.default.getQuandlKey();
+
+  option.isDrawDeltaExtrems = _ChartStore2.default.isSetting('isDrawDeltaExtrems');
+  option.isNotZoomToMinMax = _ChartStore2.default.isSetting('isNotZoomToMinMax');
+};
+
 var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, {
   children: ['completed', 'added', 'failed'],
   isLoading: false,
@@ -83,7 +90,12 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function () {
 
   option.key = key;
   this.isShouldEmit = true;
-  option.apiKey = _ChartStore2.default.getQuandlKey();
+  _addSettings(option);
+  /*
+  option.apiKey = ChartStore.getQuandlKey()
+  option.isDrawDeltaExtrems = ChartStore.isDrawDeltaExtrems()
+  option.isZoomToMinMax = ChartStore.isZoomToMinMax()
+  */
 
   if (option.isPremium && !option.apiKey) {
     this.cancelLoad(option, _Msg2.default.Alert.PREMIUM_WITHOUT_KEY, false);
@@ -129,4 +141,4 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserTyp
 });
 
 exports.default = ChartActions;
-//# sourceMappingURL=ChartActions.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ChartActions.js.map

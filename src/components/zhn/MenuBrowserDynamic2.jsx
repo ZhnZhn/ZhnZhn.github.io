@@ -79,7 +79,7 @@ class MenuBrowserDynamic2 extends Component {
     const { browserType, showAction, loadCompletedAction } = this.props;
     if (actionType === showAction && data === browserType){
       this._handleShow();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType){
+    } else if (actionType === loadCompletedAction && data.browserType === browserType){      
       this.setState({ menuItems: data.json, isLoaded : true });
     }
   }

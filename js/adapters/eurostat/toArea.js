@@ -18,6 +18,7 @@ var toArea = {
      createConfig: function createConfig(json, option) {
           var timeIndex = json.dimension.time.category.index,
               value = json.value,
+              isNotZoomToMinMax = option.isNotZoomToMinMax,
               _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
               data = _EuroStatFn$createDat.data,
               max = _EuroStatFn$createDat.max,
@@ -26,7 +27,7 @@ var toArea = {
 
 
           _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
-          _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min });
+          _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min, isNotZoomToMinMax: isNotZoomToMinMax });
 
           return config;
      },
@@ -50,4 +51,4 @@ var toArea = {
 };
 
 exports.default = toArea;
-//# sourceMappingURL=toArea.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\toArea.js.map

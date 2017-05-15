@@ -13,7 +13,8 @@ const STYLE = {
     paddingLeft: '12px',
     fontSize: '16px',
     fontWeight: 'bold',
-    userSelect: 'none'
+    userSelect: 'none',
+    cursor: 'pointer'
   },
   CHECKED : {
     color: 'black'
@@ -37,18 +38,26 @@ class RowCheckBox extends Component {
   }
 
   _handleCheck = () => {
-    const { onCheck } = this.props
+    const { onCheck } = this.props;
     if (typeof onCheck == 'function'){
       onCheck()
     }
     this.setState({ isChecked: true })
   }
   _handleUnCheck = () => {
-    const { onUnCheck } = this.props
+    const { onUnCheck } = this.props;
     if (typeof onUnCheck == 'function'){
       onUnCheck()
     }
     this.setState({ isChecked: false })
+  }
+  _handleToggle = () => {
+    const { isChecked } = this.state;
+    if (isChecked) {
+      this._handleUnCheck()
+    } else {
+      this._handleCheck()
+    }
   }
 
   render(){
@@ -62,7 +71,10 @@ class RowCheckBox extends Component {
           onCheck={this._handleCheck}
           onUnCheck={this._handleUnCheck}
         />
-        <span style={{...STYLE.CAPTION, ..._style }}>
+        <span
+          style={{...STYLE.CAPTION, ..._style }}
+          onClick={this._handleToggle}
+        >
           {caption}
         </span>
       </div>

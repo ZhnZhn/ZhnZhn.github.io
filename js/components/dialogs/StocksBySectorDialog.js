@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -268,13 +272,14 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           item = _data$item3 === undefined ? {} : _data$item3,
           browserType = data.browserType,
           chartContainerType = data.chartContainerType,
+          dialogProps = data.dialogProps,
           id = item.id,
           text = item.text,
           _datesFragment$getVal = _this3.datesFragment.getValues(),
           fromDate = _datesFragment$getVal.fromDate,
           toDate = _datesFragment$getVal.toDate,
           _source = _this3._getItemSource(_this3.props),
-          option = {
+          option = (0, _extends3.default)({
         title: text,
         //subtitle : subtitle,
         value: id,
@@ -288,7 +293,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
         columnName: 'Close',
         seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close'],
         dataSource: '(Code: ' + _source + ')'
-      };
+      }, dialogProps);
 
       _ChartActions2.default.loadStock(chartContainerType, browserType, option);
       onClose();

@@ -85,7 +85,7 @@ var _fnVolumeTooltip = function _fnVolumeTooltip(_ref5) {
       point = _ref5.point;
 
   var _point$_open = point._open,
-      _open = _point$_open === undefined ? '' : _point$_open,
+      _open = _point$_open === undefined ? 'NoData' : _point$_open,
       _point$_close = point._close,
       _close = _point$_close === undefined ? '' : _point$_close,
       _point$_low = point._low,

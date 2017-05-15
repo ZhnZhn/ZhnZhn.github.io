@@ -5,14 +5,31 @@ import {
   Sparklines,
   SparklinesLine,
   //SparklinesSpots,
-  SparklinesSpot
+  SparklinesSpot,
+  SparklinesMaxLabel,
+  SparklinesMinLabel
 } from '../zhn-sparklines/Sparklines'
+
+const COLOR_MAX = "#8bc34a";
+const COLOR_MIN = "#f44336";
+const COLOR_EQUAL = 'black';
+const SPOT_COLORS = {'-1': COLOR_MIN, '0': COLOR_EQUAL, '1': COLOR_MAX };
 
 const S = {
   CAPTION: {
+    position: 'relative',
     opacity: 0.7,
+    lineHeight: 1.8,
     padding: '3px',
     marginBottom: '5px'
+  },
+  CAPTION_BT: {
+    position: 'absolute',
+    top: '4px',
+    right: '8px',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    cursor: 'pointer'
   },
   ITEM_ROOT: {
     padding: '3px',
@@ -29,9 +46,10 @@ const S = {
 }
 
 
-const Caption = ({ color, from, to }) => (
-  <p style={{ ...S.CAPTION, ...{ background: color} }}>
-    {from}-{to}
+const Caption = ({ color, from, to, onClick }) => (
+  <p style={{ ...S.CAPTION, ...{ background: color } }}>
+    <span>{from}-{to}</span>
+    <span style={S.CAPTION_BT} onClick={onClick}>*</span>
   </p>
 );
 
@@ -60,7 +78,8 @@ class ClusterItem extends Component {
       })
     }),
     color: PropTypes.string,
-    index: PropTypes.number
+    index: PropTypes.number,
+    isShowRange: PropTypes.bool
   }
 
   constructor(props){
@@ -81,8 +100,15 @@ class ClusterItem extends Component {
   }
 
   render(){
-      const { point, color } = this.props
-          , { isShowChart } = this.state;      
+      const { point, color, isShowRange } = this.props
+          , { isShowChart } = this.state
+          , _maxLabel = (isShowRange)
+              ? <SparklinesMaxLabel color={COLOR_MAX} fontSize={14} />
+              : <span/>
+          , _minLabel = (isShowRange)
+              ? <SparklinesMinLabel color={COLOR_MIN} fontSize={14} />
+              : <span/>;
+
       return (
         <div>
           <Item
@@ -93,14 +119,22 @@ class ClusterItem extends Component {
           <ShowHide isShow={isShowChart}>
             <Sparklines
               height={32}
-              width={120}
+              width={140}
               svgHeight={32}
-              svgWidth={120}
+              svgWidth={140}
               data={this.data}
+              margin={3}
+              //marginLeft={20}
             >
+               {_maxLabel}
+               {_minLabel}
                <SparklinesLine color={color} />
                {/*<SparklinesSpots />*/}
-               <SparklinesSpot pointIndex={this.pointIndex} />
+               <SparklinesSpot
+                   pointIndex={this.pointIndex}
+                   size={3}
+                   spotColors={SPOT_COLORS}
+                 />
             </Sparklines>
         </ShowHide>
        </div>
@@ -108,7 +142,7 @@ class ClusterItem extends Component {
    }
 }
 
-const Cluster = ({ cluster,color }) => {
+const Cluster = ({ cluster,color, isShowRange }) => {
   const points = cluster.points || [];
   return (
     <div>
@@ -117,7 +151,7 @@ const Cluster = ({ cluster,color }) => {
           return (
             <ClusterItem
                key={point.id}
-               {...{ point, color, index }}
+               {...{ point, color, index, isShowRange }}
             />
           );
         })
@@ -135,14 +169,28 @@ Cluster.propTypes = {
   color: PropTypes.string
 }
 
-const ClusterInfo = ({ cluster, color, from, to }) => {
-  return (
-    <div>
-      <Caption {...{ color, from, to }} />
-      <Cluster {...{ cluster, color}} />
-    </div>
-  );
-};
+class ClusterInfo extends Component {
+  constructor(props){
+    super()
+    this.state = {
+      isShowRange: false
+    }
+  }
+  _handleToggleRange = () => {
+    this.setState(prevState => ({isShowRange: !prevState.isShowRange }))
+  }
+
+  render(){
+    const  { cluster, color, from, to } = this.props
+        ,  { isShowRange } = this.state;
+    return  (
+      <div>
+        <Caption {...{ color, from, to, onClick:this._handleToggleRange } } />
+        <Cluster {...{ cluster, color, isShowRange } } />
+      </div>
+    );
+  }
+}
 
 ClusterInfo.propTypes = {
   cluster: PropTypes.object,

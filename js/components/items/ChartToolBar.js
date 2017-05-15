@@ -42,6 +42,27 @@ var _PanelMini2 = _interopRequireDefault(_PanelMini);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var S = {
+  TAB_INDICATOR: {
+    left: '10px'
+  },
+  BT_LEGEND: {
+    left: '115px'
+  },
+  BT_X2H: {
+    left: '190px'
+  },
+  BT_ADD: {
+    left: '240px'
+  },
+  TAB_MINI: {
+    left: '350px'
+  },
+  BT_CONF: {
+    left: '450px'
+  }
+};
+
 var ChartToolbar = function (_Component) {
   (0, _inherits3.default)(ChartToolbar, _Component);
 
@@ -60,7 +81,8 @@ var ChartToolbar = function (_Component) {
     value: function render() {
       var _props = this.props,
           style = _props.style,
-          config = _props.config,
+          _props$config = _props.config,
+          config = _props$config === undefined ? {} : _props$config,
           onAddSma = _props.onAddSma,
           onRemoveSeries = _props.onRemoveSeries,
           onAddMfi = _props.onAddMfi,
@@ -71,13 +93,19 @@ var ChartToolbar = function (_Component) {
           onClickInfo = _props.onClickInfo,
           onClickVolume = _props.onClickVolume,
           onClickATH = _props.onClickATH,
-          onClickHighLow = _props.onClickHighLow;
+          onClickHighLow = _props.onClickHighLow,
+          _config$zhConfig = config.zhConfig,
+          zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
+          info = config.info,
+          isWithoutIndicator = zhConfig.isWithoutIndicator,
+          isWithLegend = zhConfig.isWithLegend,
+          isWithoutAdd = zhConfig.isWithoutAdd;
 
-      var _btIndicator = !config.zhConfig.isWithoutIndicator ? _react2.default.createElement(
+      var _btIndicator = !isWithoutIndicator ? _react2.default.createElement(
         _ButtonParentTab2.default,
         {
-          caption: 'Indicator',
-          style: { left: '10px' }
+          style: S.TAB_INDICATOR,
+          caption: 'Indicator'
         },
         _react2.default.createElement(_PanelIndicator2.default, {
           onAddSma: onAddSma,
@@ -88,26 +116,26 @@ var ChartToolbar = function (_Component) {
         })
       ) : undefined;
 
-      var _btLegend = config.zhConfig.isWithLegend ? _react2.default.createElement(_ButtonTab2.default, {
-        style: { left: '115px' },
+      var _btLegend = isWithLegend ? _react2.default.createElement(_ButtonTab2.default, {
+        style: S.BT_LEGEND,
         caption: 'Legend',
         onClick: onClickLegend
       }) : undefined;
 
       var _bt2HChart = _react2.default.createElement(_ButtonTab2.default, {
-        style: { left: '190px' },
+        style: S.BT_X2H,
         caption: 'x2H',
         onClick: onClick2H
       });
 
-      var _btAdd = !config.zhConfig.isWithoutAdd ? _react2.default.createElement(_ButtonTab2.default, {
-        style: { left: '240px' },
+      var _btAdd = !isWithoutAdd ? _react2.default.createElement(_ButtonTab2.default, {
+        style: S.BT_ADD,
         caption: 'Add',
         isShow: false,
         onClick: onAddToWatch
       }) : null;
 
-      var _btInfo = config.info ? _react2.default.createElement(_ButtonTab2.default, {
+      var _btInfo = info ? _react2.default.createElement(_ButtonTab2.default, {
         caption: 'Info',
         onClick: onClickInfo
       }) : null;
@@ -119,7 +147,7 @@ var ChartToolbar = function (_Component) {
       var _btMini = zhVolumeConfig || zhATHConfig || zhHighLowConfig ? _react2.default.createElement(
         _ButtonParentTab2.default,
         {
-          style: { left: '350px' },
+          style: S.TAB_MINI,
           caption: 'Mini'
         },
         _react2.default.createElement(_PanelMini2.default, {
@@ -133,8 +161,8 @@ var ChartToolbar = function (_Component) {
       /*
          const _btConf = (
            <ButtonTab
-             style={{left: '450px'}}
-             caption={'Conf'}
+             style={S.BT_CONF}
+             caption="Conf"
              onClick={onClickConfig}
            />
          )

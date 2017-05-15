@@ -122,7 +122,8 @@ var EuroStatFn = (0, _extends3.default)({
   setLineExtrems: function setLineExtrems(_ref3) {
     var config = _ref3.config,
         max = _ref3.max,
-        min = _ref3.min;
+        min = _ref3.min,
+        isNotZoomToMinMax = _ref3.isNotZoomToMinMax;
 
     var plotLines = config.yAxis.plotLines;
 
@@ -135,7 +136,9 @@ var EuroStatFn = (0, _extends3.default)({
       plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(min);
     }
 
-    config.yAxis.min = _Chart2.default.calcMinY({ maxPoint: max, minPoint: min });
+    if (!isNotZoomToMinMax) {
+      config.yAxis.min = _Chart2.default.calcMinY({ maxPoint: max, minPoint: min });
+    }
   },
   createZhConfig: function createZhConfig(option) {
     var key = option.key,

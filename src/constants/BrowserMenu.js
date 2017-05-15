@@ -70,7 +70,7 @@ const menuQuandl = [
        { id : Quandl.JODI_WORLD_OIL },
        { id : Quandl.EIA_COAL },
        { id : Quandl.ROGERS_INDICES },
-       { id : Quandl.BALTIC_INDICES, isNew: true }
+       { id : Quandl.BALTIC_INDICES }
      ]
   },{
      caption : 'World Stocks',

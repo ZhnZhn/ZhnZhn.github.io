@@ -38,6 +38,13 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
   }
 }
 
+const _addSettings = (option) => {
+  option.apiKey = ChartStore.getQuandlKey()
+
+  option.isDrawDeltaExtrems = ChartStore.isSetting('isDrawDeltaExtrems')
+  option.isNotZoomToMinMax = ChartStore.isSetting('isNotZoomToMinMax')
+}
+
 const ChartActions =  Reflux.createActions({
       [ChartActionTypes.LOAD_STOCK] : {
          children : ['completed', 'added', 'failed'],
@@ -64,7 +71,12 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function(){
 
   option.key = key;
   this.isShouldEmit = true;
-  option.apiKey = ChartStore.getQuandlKey();
+  _addSettings(option)
+  /*
+  option.apiKey = ChartStore.getQuandlKey()
+  option.isDrawDeltaExtrems = ChartStore.isDrawDeltaExtrems()
+  option.isZoomToMinMax = ChartStore.isZoomToMinMax()
+  */
 
   if (option.isPremium && !option.apiKey){
     this.cancelLoad(option, Msg.Alert.PREMIUM_WITHOUT_KEY, false);

@@ -114,7 +114,7 @@ class StocksBySectorDialog extends Component {
     const validationMessages = this._getValidationMessages();
     if (validationMessages.isValid){
       const { data, onClose } = this.props
-          , { item={}, browserType, chartContainerType } = data
+          , { item={}, browserType, chartContainerType, dialogProps } = data
           , { id, text } = item
           , { fromDate, toDate } = this.datesFragment.getValues()
           , _source = this._getItemSource(this.props)
@@ -131,7 +131,8 @@ class StocksBySectorDialog extends Component {
              linkFn : 'NASDAQ',
              columnName : 'Close',
              seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ],
-             dataSource : `(Code: ${_source})`
+             dataSource : `(Code: ${_source})`,
+             ...dialogProps
            };
 
       ChartActions.loadStock(chartContainerType, browserType, option)

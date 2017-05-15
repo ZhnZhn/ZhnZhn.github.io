@@ -1,0 +1,21 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\SparklinesMaxLabel.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\SparklinesMaxLabel.js",
+ "sourceRoot": "",
+ "names": [
+  "DF_COLOR",
+  "DF_FONT_SIZE",
+  "DF_DY",
+  "SparklinesMaxLabel",
+  "props",
+  "data",
+  "dy",
+  "color",
+  "fontSize",
+  "_max",
+  "_y"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,WAAW,SAAjB;AACA,IAAMC,eAAe,EAArB;AACA,IAAMC,QAAQ,CAAd;AACA;;AAEA,IAAMC,qBAAqB,SAArBA,kBAAqB,CAACC,KAAD,EAAW;AAAA,MAC5BC,IAD4B,GAC8BD,KAD9B,CAC5BC,IAD4B;AAAA,kBAC8BD,KAD9B,CACtBE,EADsB;AAAA,MACtBA,EADsB,6BACnBJ,KADmB;AAAA,qBAC8BE,KAD9B,CACZG,KADY;AAAA,MACZA,KADY,gCACNP,QADM;AAAA,wBAC8BI,KAD9B,CACII,QADJ;AAAA,MACIA,QADJ,mCACaP,YADb;;AAEpC,MAAMQ,OAAO,mBAAIJ,IAAJ,CAAb;AAAA,MACMK,KAAKF,WAAWF,EADtB;AAEA,SACE;AACG,WAAOG,IADV;AAEG,OAAG,CAFN,EAES,GAAGC,EAFZ;AAGG,YAAO,MAHV,EAGiB,MAAMH,KAHvB,EAG8B,UAAUC;AAHxC,IADF;AAOD,CAXD;;kBAaeL,kB"
+}

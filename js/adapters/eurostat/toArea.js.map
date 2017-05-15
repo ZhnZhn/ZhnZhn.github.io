@@ -1,1 +1,39 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/toArea.js"],"names":["toArea","createConfig","json","option","dimension","time","category","index","value","createData","timeIndex","data","max","min","config","fBaseAreaConfig","setDataAndInfo","setLineExtrems","createSeria","valueText","itemCaption","seria","fSeries","zhSeriaId","key","zhValueText","minY","findMinY"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAGA,IAAMA,SAAS;AACZC,mBAAe,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AACzB,0BAAYD,KAAKE,SAAL,CAAeC,IAAf,CAAoBC,QAApB,CAA6BC,KAAzC;AAAA,cACAC,KADA,GACQN,KAAKM,KADb;AAAA,sCAGqB,qBAAWC,UAAX,CAAsBC,SAAtB,EAAiCF,KAAjC,CAHrB;AAAA,cAGEG,IAHF,yBAGEA,IAHF;AAAA,cAGQC,GAHR,yBAGQA,GAHR;AAAA,cAGaC,GAHb,yBAGaA,GAHb;AAAA,cAIAC,MAJA,GAIS,sBAAYC,eAAZ,EAJT;;;AAML,+BAAWC,cAAX,CAA0B,EAAEF,cAAF,EAAUH,UAAV,EAAgBT,UAAhB,EAAsBC,cAAtB,EAA1B;AACA,+BAAWc,cAAX,CAA0B,EAAEH,cAAF,EAAUF,QAAV,EAAeC,QAAf,EAA1B;;AAEA,iBAAOC,MAAP;AACF,MAZW;AAaZI,kBAAc,qBAAChB,IAAD,EAAOC,MAAP,EAAkB;AACxB,0BAAYD,KAAKE,SAAL,CAAeC,IAAf,CAAoBC,QAApB,CAA6BC,KAAzC;AAAA,cACAC,KADA,GACQN,KAAKM,KADb;AAAA,cAEAW,SAFA,GAEYhB,OAAOiB,WAFnB;AAAA,cAGAC,KAHA,GAGQ,sBAAYC,OAAZ,EAHR;AAAA,uCAIW,qBAAWb,UAAX,CAAsBC,SAAtB,EAAiCF,KAAjC,CAJX;AAAA,cAIEG,IAJF,0BAIEA,IAJF;AAKF;;AAEJU,gBAAME,SAAN,GAAkBpB,OAAOqB,GAAzB;AACAH,gBAAMI,WAAN,GAAoBN,SAApB;AACAE,gBAAMV,IAAN,GAAaA,IAAb;;AAEAU,gBAAMK,IAAN,GAAa,qBAAWC,QAAX,CAAoBhB,IAApB,CAAb;;AAEA,iBAAOU,KAAP;AACD;AA5BW,CAAf;;kBA+BerB,M","file":"toArea.js","sourcesContent":["import ChartConfig from '../../charts/ChartConfig';\r\n\r\nimport EuroStatFn from './EuroStatFn';\r\n\r\n\r\nconst toArea = {\r\n   createConfig : (json, option) => {\r\n     const timeIndex = json.dimension.time.category.index\r\n         , value = json.value\r\n         //, { data, max, min } = _fnCreateData(timeIndex, value)\r\n         , { data, max, min } = EuroStatFn.createData(timeIndex, value)\r\n         , config = ChartConfig.fBaseAreaConfig();\r\n\r\n      EuroStatFn.setDataAndInfo({ config, data, json, option });\r\n      EuroStatFn.setLineExtrems({ config, max, min });\r\n\r\n      return config;\r\n   },\r\n   createSeria : (json, option) => {\r\n     const timeIndex = json.dimension.time.category.index\r\n         , value = json.value\r\n         , valueText = option.itemCaption\r\n         , seria = ChartConfig.fSeries()\r\n         , { data } = EuroStatFn.createData(timeIndex, value)\r\n         //, { data } = _fnCreateData(timeIndex, value);\r\n\r\n     seria.zhSeriaId = option.key;\r\n     seria.zhValueText = valueText;\r\n     seria.data = data\r\n\r\n     seria.minY = EuroStatFn.findMinY(data);\r\n\r\n     return seria;\r\n   }\r\n};\r\n\r\nexport default toArea\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\eurostat\\toArea.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\eurostat\\toArea.js",
+ "sourceRoot": "",
+ "names": [
+  "toArea",
+  "createConfig",
+  "json",
+  "option",
+  "dimension",
+  "time",
+  "category",
+  "index",
+  "value",
+  "isNotZoomToMinMax",
+  "createData",
+  "timeIndex",
+  "data",
+  "max",
+  "min",
+  "config",
+  "fBaseAreaConfig",
+  "setDataAndInfo",
+  "setLineExtrems",
+  "createSeria",
+  "valueText",
+  "itemCaption",
+  "seria",
+  "fSeries",
+  "zhSeriaId",
+  "key",
+  "zhValueText",
+  "minY",
+  "findMinY"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAGA,IAAMA,SAAS;AACZC,mBAAe,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AACzB,0BAAYD,KAAKE,SAAL,CAAeC,IAAf,CAAoBC,QAApB,CAA6BC,KAAzC;AAAA,cACAC,KADA,GACQN,KAAKM,KADb;AAAA,cAEEC,iBAFF,GAEwBN,MAFxB,CAEEM,iBAFF;AAAA,sCAIqB,qBAAWC,UAAX,CAAsBC,SAAtB,EAAiCH,KAAjC,CAJrB;AAAA,cAIEI,IAJF,yBAIEA,IAJF;AAAA,cAIQC,GAJR,yBAIQA,GAJR;AAAA,cAIaC,GAJb,yBAIaA,GAJb;AAAA,cAKAC,MALA,GAKS,sBAAYC,eAAZ,EALT;;;AAOL,+BAAWC,cAAX,CAA0B,EAAEF,cAAF,EAAUH,UAAV,EAAgBV,UAAhB,EAAsBC,cAAtB,EAA1B;AACA,+BAAWe,cAAX,CAA0B,EAAEH,cAAF,EAAUF,QAAV,EAAeC,QAAf,EAAoBL,oCAApB,EAA1B;;AAEA,iBAAOM,MAAP;AACF,MAbW;AAcZI,kBAAc,qBAACjB,IAAD,EAAOC,MAAP,EAAkB;AACxB,0BAAYD,KAAKE,SAAL,CAAeC,IAAf,CAAoBC,QAApB,CAA6BC,KAAzC;AAAA,cACAC,KADA,GACQN,KAAKM,KADb;AAAA,cAEAY,SAFA,GAEYjB,OAAOkB,WAFnB;AAAA,cAGAC,KAHA,GAGQ,sBAAYC,OAAZ,EAHR;AAAA,uCAIW,qBAAWb,UAAX,CAAsBC,SAAtB,EAAiCH,KAAjC,CAJX;AAAA,cAIEI,IAJF,0BAIEA,IAJF;AAKF;;AAEJU,gBAAME,SAAN,GAAkBrB,OAAOsB,GAAzB;AACAH,gBAAMI,WAAN,GAAoBN,SAApB;AACAE,gBAAMV,IAAN,GAAaA,IAAb;;AAEAU,gBAAMK,IAAN,GAAa,qBAAWC,QAAX,CAAoBhB,IAApB,CAAb;;AAEA,iBAAOU,KAAP;AACD;AA7BW,CAAf;;kBAgCetB,M"
+}

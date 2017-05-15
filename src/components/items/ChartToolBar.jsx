@@ -5,6 +5,27 @@ import ButtonTab from '../zhn/ButtonTab'
 import PanelIndicator from './PanelIndicator'
 import PanelMini from './PanelMini'
 
+const S = {
+  TAB_INDICATOR: {
+    left: '10px'
+  },
+  BT_LEGEND: {
+    left: '115px'
+  },
+  BT_X2H: {
+    left: '190px'
+  },
+  BT_ADD: {
+    left: '240px'
+  },
+  TAB_MINI: {
+    left: '350px'
+  },
+  BT_CONF: {
+    left: '450px'
+  }
+}
+
 class ChartToolbar extends Component {
   static propTypes = {
     style: PropTypes.object,
@@ -17,7 +38,7 @@ class ChartToolbar extends Component {
 
   render(){
     const {
-            style, config,
+            style, config={},
             onAddSma, onRemoveSeries, onAddMfi, onRemoveMfi,
             onClickLegend,
             onClick2H,
@@ -28,10 +49,12 @@ class ChartToolbar extends Component {
             onClickHighLow,
             //onClickConfig,
           } = this.props
-    const _btIndicator = (!config.zhConfig.isWithoutIndicator) ? (
+        , { zhConfig={}, info } = config
+        , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
+    const _btIndicator = (!isWithoutIndicator) ? (
       <ButtonParentTab
-        caption={'Indicator'}
-        style= {{left: '10px'}}
+        style= {S.TAB_INDICATOR}
+        caption="Indicator"
       >
         <PanelIndicator
           onAddSma={onAddSma}
@@ -43,34 +66,34 @@ class ChartToolbar extends Component {
       </ButtonParentTab>
     ) : undefined;
 
-    const _btLegend = (config.zhConfig.isWithLegend) ? (
+    const _btLegend = (isWithLegend) ? (
       <ButtonTab
-        style={{left: '115px'}}
-        caption={'Legend'}
+        style={S.BT_LEGEND}
+        caption="Legend"
         onClick={onClickLegend}
       />
     ) : undefined ;
 
     const _bt2HChart = (
       <ButtonTab
-        style={{left: '190px'}}
-        caption={'x2H'}
+        style={S.BT_X2H}
+        caption="x2H"
         onClick={onClick2H}
       />
     );
 
-    const _btAdd = (!config.zhConfig.isWithoutAdd) ? (
+    const _btAdd = (!isWithoutAdd) ? (
       <ButtonTab
-        style={{left: '240px'}}
-        caption={'Add'}
+        style={S.BT_ADD}
+        caption="Add"
         isShow={false}
         onClick={onAddToWatch}
       />
     ) : null;
 
-    const _btInfo = (config.info) ? (
+    const _btInfo = (info) ? (
       <ButtonTab
-        caption={'Info'}
+        caption="Info"
         onClick={onClickInfo}
       />
     ) : null;
@@ -79,8 +102,8 @@ class ChartToolbar extends Component {
    const _btMini = ( zhVolumeConfig || zhATHConfig || zhHighLowConfig)
      ? (
          <ButtonParentTab
-           style= {{left: '350px'}}
-           caption={'Mini'}
+           style= {S.TAB_MINI}
+           caption="Mini"
          >
            <PanelMini
              config={config}
@@ -95,8 +118,8 @@ class ChartToolbar extends Component {
 /*
    const _btConf = (
      <ButtonTab
-       style={{left: '450px'}}
-       caption={'Conf'}
+       style={S.BT_CONF}
+       caption="Conf"
        onClick={onClickConfig}
      />
    )

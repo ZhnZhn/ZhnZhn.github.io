@@ -53,7 +53,7 @@ const EuroStatFn = {
 
     config.zhConfig = this.createZhConfig(option);
     config.info = this.createDatasetInfo(json, option);
-    
+
     if (seriaType === 'AREA'){
       config.valueMoving = QuandlFn2.createValueMovingFromSeria(data);
     }
@@ -88,19 +88,21 @@ const EuroStatFn = {
     }
   },
 
-  setLineExtrems({ config, max, min }){
+  setLineExtrems({ config, max, min, isNotZoomToMinMax }){
     const plotLines = config.yAxis.plotLines;
 
     if ( max>Number.NEGATIVE_INFINITY ){
       plotLines[0].value = max;
       plotLines[0].label.text = ChartConfig.fnNumberFormat(max);
     }
-    if ( min<Number.POSITIVE_INFINITY){
+    if ( min<Number.POSITIVE_INFINITY ){
       plotLines[1].value = min;
       plotLines[1].label.text = ChartConfig.fnNumberFormat(min);
     }
 
-    config.yAxis.min = Chart.calcMinY({ maxPoint: max, minPoint: min });
+    if (!isNotZoomToMinMax){
+      config.yAxis.min = Chart.calcMinY({ maxPoint: max, minPoint: min });
+    }
 
   },
 

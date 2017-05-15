@@ -7,6 +7,9 @@ import SparklinesBars from './SparklinesBars';
 
 import SparklinesReferenceLine from './SparklinesReferenceLine';
 
+import SparklinesMinLabel from './SparklinesMinLabel';
+import SparklinesMaxLabel from './SparklinesMaxLabel';
+
 import dataToPoints from './dataProcessing/dataToPoints';
 import shallowCompare from 'react-addons-shallow-compare';
 
@@ -43,7 +46,9 @@ class Sparklines extends Component {
                width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
                svgWidth, svgHeight,
                preserveAspectRatio=DEFAULT_RATIO,
-               margin=DEFAULT_MARGIN, style, max, min
+               margin=DEFAULT_MARGIN,
+               //marginLeft, marginRight,
+               style, max, min
              } = this.props;
 
         if (data.length === 0) return null;
@@ -57,11 +62,16 @@ class Sparklines extends Component {
         return (
             <svg {...svgOpts} >
                 {React.Children.map(this.props.children, child =>
-                    React.cloneElement(child, { points, width, height, margin })
+                    React.cloneElement(child, { data, points, width, height, margin })
                 )}
             </svg>
         );
     }
 }
 
-export { Sparklines, SparklinesLine, SparklinesSpots, SparklinesSpot, SparklinesBars, SparklinesReferenceLine }
+export {
+  Sparklines, SparklinesLine,
+  SparklinesSpots, SparklinesSpot, SparklinesBars,
+  SparklinesReferenceLine,
+  SparklinesMinLabel, SparklinesMaxLabel
+}

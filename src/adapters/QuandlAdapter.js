@@ -21,6 +21,7 @@ import {fCreateTreeMapConfig} from './QuandlToTreeMap';
 const C = {
   OPEN : "Open",
   CLOSE : "Close",
+  PRICE: 'Price',
   LOW : "Low",
   HIGH : "High",
   VOLUME : "Volume",
@@ -32,7 +33,8 @@ const C = {
   COLOR_GREEN : "#80c040",
   COLOR_RED : "#F44336",
   COLOR_WHITE : "white",
-  COLOR_GRAY : "gray"
+  //COLOR_GRAY : "gray"
+  COLOR_GRAY : '#607d8b'
 }
 
 
@@ -95,27 +97,28 @@ const _fnAddExDividend = function(exDividendIndex, result){
 }
 
 const _fnAddVolume = function(optionIndex, result){
-  const { volume, open=1, close=4, low=3, high=2 } = optionIndex
-      , { point, dateUTC, dataVolume, dataVolumeColumn } = result;
+  const { volume, open, close=4, low=3, high=2 } = optionIndex
+      , { point, dateUTC, dataVolume, dataVolumeColumn } = result
+      , _open = (open) ? point[open] : undefined;
   dataVolume.push([dateUTC, point[volume]]);
-  if (point[close]>point[open]){
+  if (_open && point[close]>_open){
     dataVolumeColumn.push({
       x : dateUTC, y : point[volume],
-      _open : point[open], _close : point[close],
+      _open : _open, _close : point[close],
       _low: point[low], _high: point[high],
       color: C.COLOR_GREEN
     });
-  } else if (point[close]<point[open]){
+  } else if (_open && point[close]<_open){
     dataVolumeColumn.push({
       x : dateUTC, y : point[volume],
-      _open : point[open], _close : point[close],
+      _open : _open, _close : point[close],
       _low: point[low], _high: point[high],
       color: C.COLOR_RED
     });
   } else {
     dataVolumeColumn.push({
       x : dateUTC, y : point[volume],
-      _open : point[open], _close : point[close],
+      _open : _open, _close : point[close],
       _low: point[low], _high: point[high],
       color: C.COLOR_GRAY
     });
@@ -223,12 +226,16 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
       };
 
   const open = QuandlFn2.findColumnIndex(column_names, C.OPEN)
-      , close = QuandlFn2.findColumnIndex(column_names, C.CLOSE)
+      , _closeIndex = QuandlFn2.findColumnIndex(column_names, C.CLOSE)
+      , close = ( typeof _closeIndex !== 'undefined')
+          ? _closeIndex
+          : QuandlFn2.findColumnIndex(column_names, C.PRICE)
       , low = QuandlFn2.findColumnIndex(column_names, C.LOW)
       , high = QuandlFn2.findColumnIndex(column_names, C.HIGH)
       , volume = QuandlFn2.findColumnIndex(column_names, C.VOLUME)
       , exDividend = QuandlFn2.findColumnIndex(column_names, C.EX_DIVIDEND)
       , splitRatio = QuandlFn2.findColumnIndex(column_names, C.SPLIT_RATIO);
+
 
   if (volume){
     fnStep.push(_fnAddVolume.bind(null, {
@@ -369,7 +376,11 @@ const _fnSetLegendSeriesToConfig = function(legendSeries, config, chartId){
 };
 
 const fnGetSeries = function(config, json, option){
-   const { dataColumn:yPointIndex, value:chartId } = option;
+   const {
+           dataColumn:yPointIndex,
+           value:chartId,
+           isDrawDeltaExtrems, isNotZoomToMinMax
+         } = option;
 
    _fnSetChartTitle(config, option);
    config.zhConfig = QuandlFn2.createZhConfig(option);
@@ -410,23 +421,53 @@ const fnGetSeries = function(config, json, option){
       config.zhConfig.isWithLegend = true;
     }
 
-   return { config, minPoint, maxPoint, minY }
+   return {
+     config, minPoint, maxPoint, minY,
+     isDrawDeltaExtrems, isNotZoomToMinMax
+   };
+}
+
+const _setPlotLinesExtremValues = function(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems){
+  const _bMax = Big(maxPoint)
+      , _bMin = Big(minPoint)
+      , _bValue = Big(value)
+      , _maxPoint = parseFloat(_bMax.round(4).toString(), 10)
+      , _minPoint = parseFloat(_bMin.round(4).toString(), 10);
+
+  let _deltaMax='', _deltaMin='';
+  if (isDrawDeltaExtrems){
+    const perToMax = QuandlFn2.createPercent({ bValue: _bMax.minus(_bValue), bTotal: _bValue })
+    const perToMin = QuandlFn2.createPercent({ bValue: _bValue.minus(_bMin), bTotal: _bValue })
+    _deltaMax = `\u00A0\u00A0Δ ${perToMax}%`
+    _deltaMin = `\u00A0\u00A0Δ ${perToMin}%`
+  }
+
+  plotLines[0].value = _maxPoint;
+  plotLines[0].label.text = `${ChartConfig.fnNumberFormat(_maxPoint)}${_deltaMax}`;
+  plotLines[1].value = _minPoint;
+  plotLines[1].label.text = `${ChartConfig.fnNumberFormat(_minPoint)}${_deltaMin}`;
 }
 
 const fnConfigAxes = function(result){
-  const { config, minPoint, maxPoint, minY } = result
-      , _maxPoint = parseFloat(Big(maxPoint).round(4).toString(), 10)
-      , _minPoint = parseFloat(Big(minPoint).round(4).toString(), 10)
-      , plotLines = config.yAxis.plotLines;
+  const {
+          config, minPoint, maxPoint, minY,
+          isDrawDeltaExtrems, isNotZoomToMinMax
+        } = result
+      , plotLines = config.yAxis.plotLines
+      , _data = config.series[0].data
+      , _maxIndex = _data.length - 1
+      , _recentValue = _data[_maxIndex][1];
 
-  plotLines[0].value = _maxPoint;
-  plotLines[0].label.text = ChartConfig.fnNumberFormat(_maxPoint);
-  plotLines[1].value = _minPoint;
-  plotLines[1].label.text = ChartConfig.fnNumberFormat(_minPoint);
+  _setPlotLinesExtremValues(
+    plotLines, minPoint, maxPoint,
+    _recentValue, isDrawDeltaExtrems
+  )
 
-  config.yAxis.min = minY;
+  if (!isNotZoomToMinMax){
+    config.yAxis.min = minY
+  }
 
-  return result
+  return result;
 }
 
 const fnQuandlFlow = flow(fnGetSeries, fnConfigAxes);
@@ -455,7 +496,7 @@ const _rToConfig = {
 
 const QuandlAdapter = {
   toConfig(json, option){
-     const {seriaType=ChartType.AREA} = option;
+     const { seriaType=ChartType.AREA } = option;
 
      return _rToConfig[seriaType](json, option);
   },

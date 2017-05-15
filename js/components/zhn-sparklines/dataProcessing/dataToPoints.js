@@ -37,10 +37,12 @@ exports.default = function (_ref) {
 
     var vfactor = (height - margin * 2) / (max - min || 2);
     var hfactor = (width - margin * 2) / ((limit || len) - (len > 1 ? 1 : 0));
+    //const hfactor = (width - marginLeft - marginRight) / ((limit || len) - (len > 1 ? 1 : 0));
 
     return data.map(function (d, i) {
         return {
             x: i * hfactor + margin,
+            //x: i * hfactor + marginLeft + marginRight,
             y: (max === min ? 1 : max - d) * vfactor + margin
         };
     });

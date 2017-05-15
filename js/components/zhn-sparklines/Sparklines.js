@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.SparklinesReferenceLine = exports.SparklinesBars = exports.SparklinesSpot = exports.SparklinesSpots = exports.SparklinesLine = exports.Sparklines = undefined;
+exports.SparklinesMaxLabel = exports.SparklinesMinLabel = exports.SparklinesReferenceLine = exports.SparklinesBars = exports.SparklinesSpot = exports.SparklinesSpots = exports.SparklinesLine = exports.Sparklines = undefined;
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
@@ -44,6 +44,14 @@ var _SparklinesBars2 = _interopRequireDefault(_SparklinesBars);
 var _SparklinesReferenceLine = require('./SparklinesReferenceLine');
 
 var _SparklinesReferenceLine2 = _interopRequireDefault(_SparklinesReferenceLine);
+
+var _SparklinesMinLabel = require('./SparklinesMinLabel');
+
+var _SparklinesMinLabel2 = _interopRequireDefault(_SparklinesMinLabel);
+
+var _SparklinesMaxLabel = require('./SparklinesMaxLabel');
+
+var _SparklinesMaxLabel2 = _interopRequireDefault(_SparklinesMaxLabel);
 
 var _dataToPoints = require('./dataProcessing/dataToPoints');
 
@@ -110,7 +118,7 @@ var Sparklines = function (_Component) {
                 'svg',
                 svgOpts,
                 _react2.default.Children.map(this.props.children, function (child) {
-                    return _react2.default.cloneElement(child, { points: points, width: width, height: height, margin: margin });
+                    return _react2.default.cloneElement(child, { data: data, points: points, width: width, height: height, margin: margin });
                 })
             );
         }
@@ -137,4 +145,6 @@ exports.SparklinesSpots = _SparklinesSpots2.default;
 exports.SparklinesSpot = _SparklinesSpot2.default;
 exports.SparklinesBars = _SparklinesBars2.default;
 exports.SparklinesReferenceLine = _SparklinesReferenceLine2.default;
+exports.SparklinesMinLabel = _SparklinesMinLabel2.default;
+exports.SparklinesMaxLabel = _SparklinesMaxLabel2.default;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\Sparklines.js.map

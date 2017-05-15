@@ -82,7 +82,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.OECD_CPI }, { id: _DialogType.Quandl.RATE_INFLATION }, { id: _DialogType.Quandl.BLSI }, { id: _DialogType.Quandl.GDT }, { id: _DialogType.Quandl.BIG_MAC }]
 }, {
   caption: 'Commodity', isInitClose: true,
-  items: [{ id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.PETROLEUM_PRICES }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }, { id: _DialogType.Quandl.BALTIC_INDICES, isNew: true }]
+  items: [{ id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.PETROLEUM_PRICES }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }, { id: _DialogType.Quandl.BALTIC_INDICES }]
 }, {
   caption: 'World Stocks',
   items: [{ id: _DialogType.Quandl.EURONEXT_STOCK }, { id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.STOCK_INDEXES }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]

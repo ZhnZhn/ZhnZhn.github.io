@@ -54,9 +54,16 @@ const styles = {
 }
 
 class HeaderBar extends Component {
-  state = {
-    isDS : false
+
+  constructor(props){
+    super()
+
+    this._settingFn = props.store.exportSettingFn()
+    this.state = {
+      isDS: false
+    }
   }
+
 
   _handleClickQuandl = () => {
     //BrowserActions.showBrowser(BrowserType.QUANDL);
@@ -78,12 +85,17 @@ class HeaderBar extends Component {
     this.setState({ isDS: !this.state.isDS });
   }
   _handleDialogSettings = () => {
-    const { store } = this.props
+    //const { store } = this.props;
     ComponentActions.showModalDialog(
-      ModalDialog.SETTINGS, {
+      ModalDialog.SETTINGS, this._settingFn
+      /*
+      {
          setQuandlKey: store.setQuandlKey.bind(store),
-         isAdminMode: store.isAdminMode.bind(store)
+         isAdminMode: store.isAdminMode.bind(store),
+         isDrawDeltaExtrems: store.isDrawDeltaExtrems.bind(store),
+         isZoomToMinMax: store.isZoomToMinMax.bind(store)
       }
+      */
     )
   }
 

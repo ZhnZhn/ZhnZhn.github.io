@@ -36,11 +36,26 @@ var _Sparklines = require('../zhn-sparklines/Sparklines');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var COLOR_MAX = "#8bc34a";
+var COLOR_MIN = "#f44336";
+var COLOR_EQUAL = 'black';
+var SPOT_COLORS = { '-1': COLOR_MIN, '0': COLOR_EQUAL, '1': COLOR_MAX };
+
 var S = {
   CAPTION: {
+    position: 'relative',
     opacity: 0.7,
+    lineHeight: 1.8,
     padding: '3px',
     marginBottom: '5px'
+  },
+  CAPTION_BT: {
+    position: 'absolute',
+    top: '4px',
+    right: '8px',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    cursor: 'pointer'
   },
   ITEM_ROOT: {
     padding: '3px',
@@ -59,13 +74,23 @@ var S = {
 var Caption = function Caption(_ref) {
   var color = _ref.color,
       from = _ref.from,
-      to = _ref.to;
+      to = _ref.to,
+      onClick = _ref.onClick;
   return _react2.default.createElement(
     'p',
     { style: (0, _extends3.default)({}, S.CAPTION, { background: color }) },
-    from,
-    '-',
-    to
+    _react2.default.createElement(
+      'span',
+      null,
+      from,
+      '-',
+      to
+    ),
+    _react2.default.createElement(
+      'span',
+      { style: S.CAPTION_BT, onClick: onClick },
+      '*'
+    )
   );
 };
 
@@ -122,7 +147,10 @@ var ClusterItem = function (_Component) {
       var _props = this.props,
           point = _props.point,
           color = _props.color,
-          isShowChart = this.state.isShowChart;
+          isShowRange = _props.isShowRange,
+          isShowChart = this.state.isShowChart,
+          _maxLabel = isShowRange ? _react2.default.createElement(_Sparklines.SparklinesMaxLabel, { color: COLOR_MAX, fontSize: 14 }) : _react2.default.createElement('span', null),
+          _minLabel = isShowRange ? _react2.default.createElement(_Sparklines.SparklinesMinLabel, { color: COLOR_MIN, fontSize: 14 }) : _react2.default.createElement('span', null);
 
       return _react2.default.createElement(
         'div',
@@ -139,13 +167,21 @@ var ClusterItem = function (_Component) {
             _Sparklines.Sparklines,
             {
               height: 32,
-              width: 120,
+              width: 140,
               svgHeight: 32,
-              svgWidth: 120,
-              data: this.data
+              svgWidth: 140,
+              data: this.data,
+              margin: 3
+              //marginLeft={20}
             },
+            _maxLabel,
+            _minLabel,
             _react2.default.createElement(_Sparklines.SparklinesLine, { color: color }),
-            _react2.default.createElement(_Sparklines.SparklinesSpot, { pointIndex: this.pointIndex })
+            _react2.default.createElement(_Sparklines.SparklinesSpot, {
+              pointIndex: this.pointIndex,
+              size: 3,
+              spotColors: SPOT_COLORS
+            })
           )
         )
       );
@@ -163,13 +199,15 @@ process.env.NODE_ENV !== "production" ? ClusterItem.propTypes = {
     })
   }),
   color: _react.PropTypes.string,
-  index: _react.PropTypes.number
+  index: _react.PropTypes.number,
+  isShowRange: _react.PropTypes.bool
 } : void 0;
 
 
 var Cluster = function Cluster(_ref3) {
   var cluster = _ref3.cluster,
-      color = _ref3.color;
+      color = _ref3.color,
+      isShowRange = _ref3.isShowRange;
 
   var points = cluster.points || [];
   return _react2.default.createElement(
@@ -178,7 +216,7 @@ var Cluster = function Cluster(_ref3) {
     points.map(function (point, index) {
       return _react2.default.createElement(ClusterItem, (0, _extends3.default)({
         key: point.id
-      }, { point: point, color: color, index: index }));
+      }, { point: point, color: color, index: index, isShowRange: isShowRange }));
     })
   );
 };
@@ -191,19 +229,46 @@ process.env.NODE_ENV !== "production" ? Cluster.propTypes = {
   color: _react.PropTypes.string
 } : void 0;
 
-var ClusterInfo = function ClusterInfo(_ref4) {
-  var cluster = _ref4.cluster,
-      color = _ref4.color,
-      from = _ref4.from,
-      to = _ref4.to;
+var ClusterInfo = function (_Component2) {
+  (0, _inherits3.default)(ClusterInfo, _Component2);
 
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(Caption, { color: color, from: from, to: to }),
-    _react2.default.createElement(Cluster, { cluster: cluster, color: color })
-  );
-};
+  function ClusterInfo(props) {
+    (0, _classCallCheck3.default)(this, ClusterInfo);
+
+    var _this2 = (0, _possibleConstructorReturn3.default)(this, (ClusterInfo.__proto__ || Object.getPrototypeOf(ClusterInfo)).call(this));
+
+    _this2._handleToggleRange = function () {
+      _this2.setState(function (prevState) {
+        return { isShowRange: !prevState.isShowRange };
+      });
+    };
+
+    _this2.state = {
+      isShowRange: false
+    };
+    return _this2;
+  }
+
+  (0, _createClass3.default)(ClusterInfo, [{
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          cluster = _props2.cluster,
+          color = _props2.color,
+          from = _props2.from,
+          to = _props2.to,
+          isShowRange = this.state.isShowRange;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(Caption, { color: color, from: from, to: to, onClick: this._handleToggleRange }),
+        _react2.default.createElement(Cluster, { cluster: cluster, color: color, isShowRange: isShowRange })
+      );
+    }
+  }]);
+  return ClusterInfo;
+}(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ClusterInfo.propTypes = {
   cluster: _react.PropTypes.object,

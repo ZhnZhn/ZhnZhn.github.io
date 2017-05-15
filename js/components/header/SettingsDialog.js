@@ -54,10 +54,15 @@ var S = {
   MODAL: {
     position: 'static',
     width: '400px',
-    height: '150px',
+    height: '200px',
     margin: '70px auto 0px'
   }
 };
+
+var SET_QUANDL_KEY = 'setQuandlKey';
+var MODE_ADMIN = 'isAdminMode';
+var MODE_DELTA = 'isDrawDeltaExtrems';
+var MODE_ZOOM = 'isNotZoomToMinMax';
 
 var SettingsDialog = function (_Component) {
   (0, _inherits3.default)(SettingsDialog, _Component);
@@ -71,17 +76,17 @@ var SettingsDialog = function (_Component) {
       var _this$props = _this.props,
           data = _this$props.data,
           onClose = _this$props.onClose,
-          setQuandlKey = (0, _safeFn2.default)(data, 'setQuandlKey');
+          setQuandlKey = (0, _safeFn2.default)(data, SET_QUANDL_KEY);
 
       setQuandlKey(_this.inputComp.getValue());
       onClose();
     };
 
-    _this._handleAdminMode = function (mode) {
+    _this._handleMode = function (fnName, mode) {
       var data = _this.props.data,
-          isAdminMode = (0, _safeFn2.default)(data, 'isAdminMode');
+          fnMode = (0, _safeFn2.default)(data, fnName);
 
-      isAdminMode(mode);
+      fnMode(mode);
     };
 
     _this.commandButtons = [_react2.default.createElement(_ActionButton2.default, {
@@ -109,7 +114,9 @@ var SettingsDialog = function (_Component) {
           isShow = _props.isShow,
           data = _props.data,
           onClose = _props.onClose,
-          _isAdminMode = (0, _safeFn2.default)(data, 'isAdminMode', false)();
+          _isAdminMode = (0, _safeFn2.default)(data, MODE_ADMIN, false)(),
+          _isDrawDeltaExtrems = (0, _safeFn2.default)(data, MODE_DELTA, false)(),
+          _isNotZoomToMinMax = (0, _safeFn2.default)(data, MODE_ZOOM, false)();
 
       return _react2.default.createElement(
         _ModalDialog2.default,
@@ -138,8 +145,20 @@ var SettingsDialog = function (_Component) {
         _react2.default.createElement(_RowCheckBox2.default, {
           initValue: _isAdminMode,
           caption: 'View in Admin Mode',
-          onCheck: this._handleAdminMode.bind(null, true),
-          onUnCheck: this._handleAdminMode.bind(null, false)
+          onCheck: this._handleMode.bind(null, MODE_ADMIN, true),
+          onUnCheck: this._handleMode.bind(null, MODE_ADMIN, false)
+        }),
+        _react2.default.createElement(_RowCheckBox2.default, {
+          initValue: _isDrawDeltaExtrems,
+          caption: 'Draw Delta Extrems',
+          onCheck: this._handleMode.bind(null, MODE_DELTA, true),
+          onUnCheck: this._handleMode.bind(null, MODE_DELTA, false)
+        }),
+        _react2.default.createElement(_RowCheckBox2.default, {
+          initValue: _isNotZoomToMinMax,
+          caption: 'Not Zoom to Min-Max',
+          onCheck: this._handleMode.bind(null, MODE_ZOOM, true),
+          onUnCheck: this._handleMode.bind(null, MODE_ZOOM, false)
         })
       );
     }
@@ -151,7 +170,8 @@ process.env.NODE_ENV !== "production" ? SettingsDialog.propTypes = {
   isShow: _react.PropTypes.bool,
   data: _react.PropTypes.shape({
     setQuandlKey: _react.PropTypes.func,
-    isAdminMode: _react.PropTypes.func
+    isAdminMode: _react.PropTypes.func,
+    isDrawDeltaExtrems: _react.PropTypes.func
   }),
   onClose: _react.PropTypes.func
 } : void 0;

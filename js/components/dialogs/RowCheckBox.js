@@ -45,7 +45,8 @@ var STYLE = {
     paddingLeft: '12px',
     fontSize: '16px',
     fontWeight: 'bold',
-    userSelect: 'none'
+    userSelect: 'none',
+    cursor: 'pointer'
   },
   CHECKED: {
     color: 'black'
@@ -78,6 +79,16 @@ var RowCheckBox = function (_Component) {
       _this.setState({ isChecked: false });
     };
 
+    _this._handleToggle = function () {
+      var isChecked = _this.state.isChecked;
+
+      if (isChecked) {
+        _this._handleUnCheck();
+      } else {
+        _this._handleCheck();
+      }
+    };
+
     _this.state = {
       isChecked: !!props.initValue
     };
@@ -103,7 +114,10 @@ var RowCheckBox = function (_Component) {
         }),
         _react2.default.createElement(
           'span',
-          { style: (0, _extends3.default)({}, STYLE.CAPTION, _style) },
+          {
+            style: (0, _extends3.default)({}, STYLE.CAPTION, _style),
+            onClick: this._handleToggle
+          },
           caption
         )
       );

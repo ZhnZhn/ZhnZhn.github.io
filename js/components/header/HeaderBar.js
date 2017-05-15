@@ -108,39 +108,50 @@ var styles = {
 var HeaderBar = function (_Component) {
   (0, _inherits3.default)(HeaderBar, _Component);
 
-  function HeaderBar() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function HeaderBar(props) {
     (0, _classCallCheck3.default)(this, HeaderBar);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = (0, _possibleConstructorReturn3.default)(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this));
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      isDS: false
-    }, _this._handleClickQuandl = function () {
+    _this._handleClickQuandl = function () {
       //BrowserActions.showBrowser(BrowserType.QUANDL);
       _BrowserActions2.default.showBrowser(_Type.BrowserType.ECONOMIC);
       _this.setState({ isDS: false });
-    }, _this._handleClickDynamic = function (browserConfig) {
+    };
+
+    _this._handleClickDynamic = function (browserConfig) {
       _BrowserActions2.default.showBrowserDynamic(browserConfig);
       _this.setState({ isDS: false });
-    }, _this._handleClickWatch = function () {
+    };
+
+    _this._handleClickWatch = function () {
       _BrowserActions2.default.showBrowser(_Type.BrowserType.WATCH_LIST);
       _this.setState({ isDS: false });
-    }, _this._handleClickDS = function () {
-      _this.setState({ isDS: !_this.state.isDS });
-    }, _this._handleDialogSettings = function () {
-      var store = _this.props.store;
+    };
 
-      _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, {
-        setQuandlKey: store.setQuandlKey.bind(store),
-        isAdminMode: store.isAdminMode.bind(store)
-      });
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    _this._handleClickDS = function () {
+      _this.setState({ isDS: !_this.state.isDS });
+    };
+
+    _this._handleDialogSettings = function () {
+      //const { store } = this.props;
+      _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, _this._settingFn
+      /*
+      {
+         setQuandlKey: store.setQuandlKey.bind(store),
+         isAdminMode: store.isAdminMode.bind(store),
+         isDrawDeltaExtrems: store.isDrawDeltaExtrems.bind(store),
+         isZoomToMinMax: store.isZoomToMinMax.bind(store)
+      }
+      */
+      );
+    };
+
+    _this._settingFn = props.store.exportSettingFn();
+    _this.state = {
+      isDS: false
+    };
+    return _this;
   }
 
   (0, _createClass3.default)(HeaderBar, [{

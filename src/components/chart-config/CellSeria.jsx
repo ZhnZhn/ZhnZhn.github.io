@@ -108,12 +108,9 @@ class CellSeria extends Component {
     }
   }
   _handleEnterHover = (value) => {
-    //const { chart } = this.props
-    const  point = _fnFindPoint(this.data, value);
+    const point = _fnFindPoint(this.data, value);
     if (point) {
-      //point.onMouseOver()
       point.setState('hover')
-      //chart.xAxis[0].drawCrosshair(null, point)
     }
   }
   _handleEnterTooltip = (value) => {
@@ -128,6 +125,13 @@ class CellSeria extends Component {
         , point = _fnFindPoint(this.data, value);
     if (point) {
       chart.xAxis[0].drawCrosshair(null, point)
+    }
+  }
+  _handleEnterAxisPt = (value) => {
+    const point = _fnFindPoint(this.data, value);
+    if (point) {
+      point.onMouseOver()
+      point.setState('')
     }
   }
   _handleToggleSeria = (isShow) => {
@@ -157,6 +161,12 @@ class CellSeria extends Component {
           caption="Symbol:"
           initValue={symbol}
           onEnter={this._handleEnterSymbol}
+        />
+        <RowInputText
+          styleRoot={STYLE.ROW_INPUT}
+          caption="AxisPt:"
+          initValue=""
+          onEnter={this._handleEnterAxisPt}
         />
         <RowInputText
           styleRoot={STYLE.ROW_INPUT}

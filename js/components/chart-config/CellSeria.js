@@ -133,6 +133,12 @@ var CellSeria = (_temp = _class = function (_Component) {
         }),
         _react2.default.createElement(_RowInputText2.default, {
           styleRoot: STYLE.ROW_INPUT,
+          caption: 'AxisPt:',
+          initValue: '',
+          onEnter: this._handleEnterAxisPt
+        }),
+        _react2.default.createElement(_RowInputText2.default, {
+          styleRoot: STYLE.ROW_INPUT,
           caption: 'HoverPt:',
           initValue: '',
           onEnter: this._handleEnterHover
@@ -215,12 +221,9 @@ var CellSeria = (_temp = _class = function (_Component) {
   };
 
   this._handleEnterHover = function (value) {
-    //const { chart } = this.props
     var point = _fnFindPoint(_this2.data, value);
     if (point) {
-      //point.onMouseOver()
       point.setState('hover');
-      //chart.xAxis[0].drawCrosshair(null, point)
     }
   };
 
@@ -239,6 +242,14 @@ var CellSeria = (_temp = _class = function (_Component) {
 
     if (point) {
       chart.xAxis[0].drawCrosshair(null, point);
+    }
+  };
+
+  this._handleEnterAxisPt = function (value) {
+    var point = _fnFindPoint(_this2.data, value);
+    if (point) {
+      point.onMouseOver();
+      point.setState('');
     }
   };
 

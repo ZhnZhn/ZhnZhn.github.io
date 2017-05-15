@@ -7,12 +7,13 @@ const toArea = {
    createConfig : (json, option) => {
      const timeIndex = json.dimension.time.category.index
          , value = json.value
+         , { isNotZoomToMinMax } = option
          //, { data, max, min } = _fnCreateData(timeIndex, value)
          , { data, max, min } = EuroStatFn.createData(timeIndex, value)
          , config = ChartConfig.fBaseAreaConfig();
 
       EuroStatFn.setDataAndInfo({ config, data, json, option });
-      EuroStatFn.setLineExtrems({ config, max, min });
+      EuroStatFn.setLineExtrems({ config, max, min, isNotZoomToMinMax });
 
       return config;
    },
