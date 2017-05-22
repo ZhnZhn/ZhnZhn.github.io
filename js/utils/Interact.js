@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _interact = require('interact.js');
@@ -10,34 +10,46 @@ var _interact2 = _interopRequireDefault(_interact);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Interact = {};
-
-Interact.dragMoveListener = function (event) {
+var Interact = {
+  dragMoveListener: function dragMoveListener(event) {
     var target = event.target,
-
-    // keep the dragged position in the data-x/data-y attributes
-    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        dx = event.dx,
+        dy = event.dy,
+        style = target.style,
+        _x = (parseFloat(target.getAttribute('data-x')) || 0) + dx,
+        _y = (parseFloat(target.getAttribute('data-y')) || 0) + dy,
+        _transform = 'translate(' + _x + 'px, ' + _y + 'px)';
 
     // translate the element
-    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+
+    Object.assign(style, {
+      webkitTransform: _transform,
+      transform: _transform
+    });
 
     // update the posiion attributes
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-};
+    target.setAttribute('data-x', _x);
+    target.setAttribute('data-y', _y);
+  },
 
-Interact.dragEndListener = function (event) {
+  dragEndListener: function dragEndListener(event) {
     var target = event.target,
+        style = target.style,
+        left = style.left,
+        top = style.top,
         x = parseFloat(target.getAttribute('data-x')) || 0,
         y = parseFloat(target.getAttribute('data-y')) || 0,
-        left = Number(target.style.left.replace('px', '')),
-        top = Number(target.style.top.replace('px', ''));
+        _left = Number(left.replace('px', '')),
+        _top = Number(top.replace('px', ''));
 
-    target.style.left = left + x + 'px';
-    target.style.top = top + y + 'px';
 
-    target.style.webkitTransform = target.style.transform = '';
+    Object.assign(style, {
+      left: _left + x + 'px',
+      top: _top + y + 'px',
+      webkitTransform: '',
+      transform: ''
+    });
 
     target.setAttribute('data-x', 0);
     target.setAttribute('data-y', 0);
@@ -46,21 +58,23 @@ Interact.dragEndListener = function (event) {
     let domHtml = document.getElementByTag('html');
     domHtml[0].style.cursor = 'default';
     */
-};
+  },
 
-Interact.makeDragable = function (domNode) {
+  makeDragable: function makeDragable(domNode) {
     (0, _interact2.default)(domNode).draggable({
-        inertia: true,
-        /*
-        restrict: {
-          restriction: "parent",
-          endOnly: true,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-        },
-        */
-        onmove: Interact.dragMoveListener,
-        onend: Interact.dragEndListener
+      inertia: true,
+
+      restrict: {
+        restriction: document.getElementById('app'),
+        endOnly: true,
+        elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+      },
+
+      onmove: Interact.dragMoveListener,
+      onend: Interact.dragEndListener
     }).preventDefault(false);
+  }
+
 };
 
 exports.default = Interact;

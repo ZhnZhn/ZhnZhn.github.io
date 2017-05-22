@@ -62,6 +62,8 @@ var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2
     };
 
     _this._handlerSelectParent = function (parent) {
+      var onSelectParent = _this.props.onSelectParent;
+
       _this.parent = parent;
       if (parent) {
         if (parent.columns) {
@@ -74,6 +76,9 @@ var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2
       } else {
         _this.child = null;
         _this.setState({ childOptions: [] });
+      }
+      if (typeof onSelectParent === 'function') {
+        onSelectParent(parent);
       }
     };
 

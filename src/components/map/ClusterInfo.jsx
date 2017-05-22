@@ -48,7 +48,7 @@ const S = {
 
 const Caption = ({ color, from, to, onClick }) => (
   <p style={{ ...S.CAPTION, ...{ background: color } }}>
-    <span>{from}-{to}</span>
+    <span>{from}&nbsp;&ndash;&nbsp;{to}</span>
     <span style={S.CAPTION_BT} onClick={onClick}>*</span>
   </p>
 );

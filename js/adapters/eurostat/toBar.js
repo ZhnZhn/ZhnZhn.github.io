@@ -34,10 +34,11 @@ var toBar = {
       var config = _FactoryChart2.default.createBarConfig();
       _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
       _EuroStatFn2.default.setCategories({ config: config, categories: categories, min: min, time: time, subtitle: subtitle });
+      _EuroStatFn2.default.colorEU({ config: config, categories: categories });
       return config;
     });
   }
 };
 
 exports.default = toBar;
-//# sourceMappingURL=toBar.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\toBar.js.map

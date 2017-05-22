@@ -1,61 +1,68 @@
 
-import interact from 'interact.js';
+import interact from 'interact.js'
 
-const Interact = {};
+const Interact = {
+  dragMoveListener: function(event){
+    const { target, dx, dy } = event
+        , style = target.style
+        // keep the dragged position in the data-x/data-y attributes
+        , _x = (parseFloat(target.getAttribute('data-x')) || 0) + dx
+        , _y = (parseFloat(target.getAttribute('data-y')) || 0) + dy
+        , _transform = 'translate(' + _x + 'px, ' + _y + 'px)';
 
-Interact.dragMoveListener = function(event){
-  let target = event.target,
-  // keep the dragged position in the data-x/data-y attributes
-     x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-     y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+    // translate the element
+      Object.assign(style, {
+        webkitTransform: _transform,
+        transform: _transform
+      })
 
-  // translate the element
-  target.style.webkitTransform =
-  target.style.transform =
-     'translate(' + x + 'px, ' + y + 'px)';
+      // update the posiion attributes
+      target.setAttribute('data-x', _x)
+      target.setAttribute('data-y', _y)
+  },
 
-  // update the posiion attributes
-  target.setAttribute('data-x', x);
-  target.setAttribute('data-y', y);
-}
+  dragEndListener: function(event){
+      const target = event.target
+          , style = target.style
+          , { left, top } = style
+          , x = (parseFloat(target.getAttribute('data-x')) || 0)
+          , y = (parseFloat(target.getAttribute('data-y')) || 0)
+          , _left = Number(left.replace('px',''))
+          , _top = Number(top.replace('px', ''));
 
-Interact.dragEndListener = function(event){
-    let target = event.target,
-        x = (parseFloat(target.getAttribute('data-x')) || 0),
-        y = (parseFloat(target.getAttribute('data-y')) || 0),
-        left = Number(target.style.left.replace('px','')),
-        top = Number(target.style.top.replace('px', ''));
+      Object.assign(style, {
+        left: (_left + x) + 'px',
+        top: (_top + y) + 'px',
+        webkitTransform: '',
+        transform: ''
+      })
 
-    target.style.left = (left + x) + 'px';
-    target.style.top = (top + y) + 'px';
+      target.setAttribute('data-x', 0)
+      target.setAttribute('data-y', 0)
 
-    target.style.webkitTransform =
-    target.style.transform = '';
-
-    target.setAttribute('data-x', 0);
-    target.setAttribute('data-y', 0);
-
-    /*
-    let domHtml = document.getElementByTag('html');
-    domHtml[0].style.cursor = 'default';
-    */
-}
-
-Interact.makeDragable = function(domNode){
-  interact(domNode)
-   .draggable({
-      inertia: true,
       /*
-      restrict: {
-        restriction: "parent",
-        endOnly: true,
-        elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-      },
+      let domHtml = document.getElementByTag('html');
+      domHtml[0].style.cursor = 'default';
       */
-     onmove: Interact.dragMoveListener,
-     onend: Interact.dragEndListener
-    })
-    .preventDefault(false);
-}
+  },
 
-export default Interact;
+  makeDragable: function(domNode){
+    interact(domNode)
+     .draggable({
+        inertia: true,
+
+        restrict: {
+          restriction: document.getElementById('app'),
+          endOnly: true,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+        },
+
+        onmove: Interact.dragMoveListener,
+        onend: Interact.dragEndListener
+      })
+      .preventDefault(false)
+  }
+
+};
+
+export default Interact

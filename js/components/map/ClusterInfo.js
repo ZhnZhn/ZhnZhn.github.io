@@ -83,7 +83,7 @@ var Caption = function Caption(_ref) {
       'span',
       null,
       from,
-      '-',
+      '\xA0\u2013\xA0',
       to
     ),
     _react2.default.createElement(

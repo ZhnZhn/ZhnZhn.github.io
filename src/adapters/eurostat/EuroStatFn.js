@@ -5,6 +5,12 @@ import QuandlFn2 from '../QuandlFn2';
 
 import ChoroplethMapSlice from './ChoroplethMapSlice';
 
+const COLOR_EU = "#0088FF";
+const COLOR_EA = "#FF5800";
+//const COLOR_BAR = "#92D050";
+const EU_CODES = ["EU27", "EU28", "EU" ];
+const EA_CODES = ["EA"]
+
 const SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 
 const _rFrequency = {
@@ -22,6 +28,18 @@ const _crDataSourceLink = function(json){
 
 const _crSubTitle = function(subTitle){
   return `<span style="color:black;font-weight:bold;">${subTitle}</span>`;
+}
+
+const _is = (value) => (element) => element === value;
+
+const _colorSeria = (config, categories, codes, color) => {
+  codes.forEach(code => {
+    const _index = categories.findIndex(_is(code))
+    if (_index !== -1) {
+      const value = config.series[0].data[_index]
+      config.series[0].data[_index] = { y:value, color }
+    }
+  })
 }
 
 const EuroStatFn = {
@@ -64,11 +82,17 @@ const EuroStatFn = {
 
   setCategories({ config, categories, min, time, subtitle}){
     config.xAxis.categories = categories
-    config.yAxis.min = min;
-    config.series[0].name = time;
+    config.yAxis.min = min
+    config.series[0].name = time
+    //config.series[0].color = COLOR_BAR
 
-    config.zhConfig.itemCaption = `EU:${subtitle}`;
-    config.zhConfig.itemTime = time;
+    config.zhConfig.itemCaption = `EU:${subtitle}`
+    config.zhConfig.itemTime = time
+  },
+
+  colorEU({ config, categories }){
+    _colorSeria(config, categories, EU_CODES, COLOR_EU)
+    _colorSeria(config, categories, EA_CODES, COLOR_EA)
   },
 
   convertToUTC(str){

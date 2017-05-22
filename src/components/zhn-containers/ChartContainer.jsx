@@ -14,7 +14,7 @@ import ItemFactory from '../factories/ItemFactory';
 
 const SHOW_POPUP = "show-popup"
     , CHILD_MARGIN = 36
-    , RESIZE_MIN_WIDTH = 600
+    , RESIZE_MIN_WIDTH = 540
     , RESIZE_MAX_WIDTH = 1200;
 
 const styles = {

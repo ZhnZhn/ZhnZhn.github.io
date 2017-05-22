@@ -628,7 +628,8 @@ var DataQE = {
     menuTitle: 'Zillow Research',
     dialogCaption: 'Zillow Real Estate Research',
     chartContainerCaption: 'Quandl Zillow Real Estate Research',
-    dialogType: 'DialogType5',
+    //dialogType : 'DialogType5',
+    dialogType: 'ZillowDialog',
     dialogProps: {
       descrUrl: './data/quandl/zillow.html',
       nInitFromDate: 10,
@@ -639,7 +640,7 @@ var DataQE = {
       twoURI: './data/quandl/zillow-area.json',
       twoJsonProp: 'places',
       threeCaption: 'Area Code',
-      fnValueType: 'PlusTreeItem',
+      //fnValueType : 'PlusTreeItem',
       valueFn: 'RZill',
       loadId: 'Q',
       dataSource: 'Zillow Real Estate Research (Code: ZILL)'

@@ -59,7 +59,7 @@ var S = {
     left: '350px'
   },
   BT_CONF: {
-    left: '450px'
+    left: '430px'
   }
 };
 

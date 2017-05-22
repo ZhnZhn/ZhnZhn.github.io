@@ -16,4 +16,4 @@ var SpinnerLoading = function SpinnerLoading(_ref) {
 };
 
 exports.default = SpinnerLoading;
-//# sourceMappingURL=SpinnerLoading.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SpinnerLoading.js.map

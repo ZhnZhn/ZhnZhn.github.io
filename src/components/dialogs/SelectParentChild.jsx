@@ -49,6 +49,7 @@ class SelectParentChild extends Component {
     );
   }
   _handlerSelectParent = (parent) => {
+    const { onSelectParent } = this.props;
     this.parent = parent;
     if (parent) {
       if (parent.columns) {
@@ -61,6 +62,9 @@ class SelectParentChild extends Component {
     } else {
       this.child = null;
       this.setState({ childOptions: [] });
+    }
+    if (typeof onSelectParent === 'function') {
+      onSelectParent(parent)
     }
   }
   _handlerSelectChild = (child) => {

@@ -48,6 +48,10 @@ var _JodiWorldOilDialog = require('../../components/quandl-browser/JodiWorldOilD
 
 var _JodiWorldOilDialog2 = _interopRequireDefault(_JodiWorldOilDialog);
 
+var _ZillowDialog = require('../../components/quandl-browser/ZillowDialog');
+
+var _ZillowDialog2 = _interopRequireDefault(_ZillowDialog);
+
 var _ChartConfigDialog = require('../../components/chart-config/ChartConfigDialog');
 
 var _ChartConfigDialog2 = _interopRequireDefault(_ChartConfigDialog);
@@ -68,6 +72,7 @@ var RouterDialog = {
   Futures3Dialog: _Futures3Dialog2.default,
   FuturesWikiDialog: _FuturesWikiDialog2.default,
   JodiWorldOilDialog: _JodiWorldOilDialog2.default,
+  ZillowDialog: _ZillowDialog2.default,
 
   ChartConfigDialog: _ChartConfigDialog2.default
 };

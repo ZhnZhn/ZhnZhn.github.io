@@ -11,6 +11,7 @@ import UNCommodityTradeDialog from '../../components/quandl-browser/UNCommodityT
 import Futures3Dialog from '../../components/quandl-browser/Futures3Dialog';
 import FuturesWikiDialog from '../../components/quandl-browser/FuturesWikiDialog';
 import JodiWorldOilDialog from '../../components/quandl-browser/JodiWorldOilDialog';
+import ZillowDialog from '../../components/quandl-browser/ZillowDialog';
 
 import ChartConfigDialog from '../../components/chart-config/ChartConfigDialog'
 
@@ -24,10 +25,11 @@ const RouterDialog = {
   DialogEurostat : DialogEurostat,
   DialogEurostat2 : DialogEurostat2,
   DialogEurostat3 : DialogEurostat3,
-  UNCommodityTradeDialog : UNCommodityTradeDialog,  
+  UNCommodityTradeDialog : UNCommodityTradeDialog,
   Futures3Dialog : Futures3Dialog,
   FuturesWikiDialog : FuturesWikiDialog,
   JodiWorldOilDialog : JodiWorldOilDialog,
+  ZillowDialog : ZillowDialog,
 
   ChartConfigDialog : ChartConfigDialog
 }

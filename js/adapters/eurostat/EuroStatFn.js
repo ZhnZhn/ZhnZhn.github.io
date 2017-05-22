@@ -26,6 +26,12 @@ var _ChoroplethMapSlice2 = _interopRequireDefault(_ChoroplethMapSlice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var COLOR_EU = "#0088FF";
+var COLOR_EA = "#FF5800";
+//const COLOR_BAR = "#92D050";
+var EU_CODES = ["EU27", "EU28", "EU"];
+var EA_CODES = ["EA"];
+
 var SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 
 var _rFrequency = {
@@ -42,6 +48,22 @@ var _crDataSourceLink = function _crDataSourceLink(json) {
 
 var _crSubTitle = function _crSubTitle(subTitle) {
   return '<span style="color:black;font-weight:bold;">' + subTitle + '</span>';
+};
+
+var _is = function _is(value) {
+  return function (element) {
+    return element === value;
+  };
+};
+
+var _colorSeria = function _colorSeria(config, categories, codes, color) {
+  codes.forEach(function (code) {
+    var _index = categories.findIndex(_is(code));
+    if (_index !== -1) {
+      var value = config.series[0].data[_index];
+      config.series[0].data[_index] = { y: value, color: color };
+    }
+  });
 };
 
 var EuroStatFn = (0, _extends3.default)({
@@ -99,9 +121,17 @@ var EuroStatFn = (0, _extends3.default)({
     config.xAxis.categories = categories;
     config.yAxis.min = min;
     config.series[0].name = time;
+    //config.series[0].color = COLOR_BAR
 
     config.zhConfig.itemCaption = 'EU:' + subtitle;
     config.zhConfig.itemTime = time;
+  },
+  colorEU: function colorEU(_ref3) {
+    var config = _ref3.config,
+        categories = _ref3.categories;
+
+    _colorSeria(config, categories, EU_CODES, COLOR_EU);
+    _colorSeria(config, categories, EA_CODES, COLOR_EA);
   },
   convertToUTC: function convertToUTC(str) {
     if (str.indexOf('M') !== -1) {
@@ -119,11 +149,11 @@ var EuroStatFn = (0, _extends3.default)({
       return Date.UTC(str, 11, 31);
     }
   },
-  setLineExtrems: function setLineExtrems(_ref3) {
-    var config = _ref3.config,
-        max = _ref3.max,
-        min = _ref3.min,
-        isNotZoomToMinMax = _ref3.isNotZoomToMinMax;
+  setLineExtrems: function setLineExtrems(_ref4) {
+    var config = _ref4.config,
+        max = _ref4.max,
+        min = _ref4.min,
+        isNotZoomToMinMax = _ref4.isNotZoomToMinMax;
 
     var plotLines = config.yAxis.plotLines;
 

@@ -91,13 +91,10 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function () {
   option.key = key;
   this.isShouldEmit = true;
   _addSettings(option);
-  /*
-  option.apiKey = ChartStore.getQuandlKey()
-  option.isDrawDeltaExtrems = ChartStore.isDrawDeltaExtrems()
-  option.isZoomToMinMax = ChartStore.isZoomToMinMax()
-  */
 
-  if (option.isPremium && !option.apiKey) {
+  if (option.isKeyFeature && !option.apiKey) {
+    this.cancelLoad(option, _Msg2.default.Alert.FEATURE_WITHOUT_KEY, false);
+  } else if (option.isPremium && !option.apiKey) {
     this.cancelLoad(option, _Msg2.default.Alert.PREMIUM_WITHOUT_KEY, false);
   } else if (isDoublingLoad) {
     this.cancelLoad(option, _Msg2.default.Alert.LOADING_IN_PROGRESS, false);

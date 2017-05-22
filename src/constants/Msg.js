@@ -45,6 +45,10 @@ const Msg = {
        caption : 'Without Key',
        descr : '403 : Forbidden\n\nYou have attempted to view a premium database in anonymous mode, i.e., without providing a Quandl key. Please register for a free Quandl account, and then include your API key with your requests.'
      },
+     FEATURE_WITHOUT_KEY : {
+       caption : 'Without Key',
+       descr : 'For this type of request required a Quandl key. Please register for a free Quandl account, and then include your API key with your requests.'
+     },
      RUNTIME_ERROR : {
         caption : 'Runtime Error'
      },

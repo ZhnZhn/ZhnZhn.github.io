@@ -60,7 +60,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SHOW_POPUP = "show-popup",
     CHILD_MARGIN = 36,
-    RESIZE_MIN_WIDTH = 600,
+    RESIZE_MIN_WIDTH = 540,
     RESIZE_MAX_WIDTH = 1200;
 
 var styles = {
