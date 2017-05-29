@@ -301,6 +301,26 @@ const DataQE = {
         dataColumn : 1
       }
   },
+  QE_USCENSUS_TRADE : {
+      type : 'QE_USCENSUS_TRADE',
+      menuTitle : 'U.S. Census : Trade',
+      dialogCaption : 'U.S. Census : Trade',
+      chartContainerCaption : 'Quandl U.S. Census Bureau : Trade',
+      dialogProps : {
+        descrUrl : './data/quandl/uscensus.html',
+        itemCaption : 'Country:',
+        nInitFromDate : 10,
+        optionURI : './data/quandl/uscensus-trade.json',
+        optionsJsonProp : 'countries',
+        valueFn : "RPrefixOne",
+        valueFnPrefix : "USCENSUS",
+        loadId : 'Q',
+        columnName : 'BALANCE',
+        seriaColumnNames : [ 'Exports', 'Imports' ],
+        dataSource : 'U.S. Census Bureau (Code: USCENSUS)'
+      }
+  },
+
   QE_OECD_CPI : {
       type : 'QE_OECD_CPI',
       menuTitle : 'OECD CPI & HCPI',

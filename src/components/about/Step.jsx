@@ -1,14 +1,16 @@
-import React from 'react';
+import React from 'react'
 
 const S = {
-  STEP : {
-    display : 'inline-block',
+  STEP: {
+    display: 'inline-block',
     color: '#80c040',
-    border : '2px solid #80c040',
-    borderRadius : '50%',
-    width : '22px',
-    height : '22px',
-    textAlign: 'center'
+    border: '2px solid #80c040',
+    borderRadius: '50%',
+    lineHeight: '24px',
+    width: '26px',
+    height: '26px',
+    textAlign: 'center',
+    textTransform: 'uppercase'
   }
 }
 

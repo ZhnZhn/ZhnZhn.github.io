@@ -16,9 +16,11 @@ var S = {
     color: '#80c040',
     border: '2px solid #80c040',
     borderRadius: '50%',
-    width: '22px',
-    height: '22px',
-    textAlign: 'center'
+    lineHeight: '24px',
+    width: '26px',
+    height: '26px',
+    textAlign: 'center',
+    textTransform: 'uppercase'
   }
 };
 
@@ -33,4 +35,4 @@ var Step = function Step(_ref) {
 };
 
 exports.default = Step;
-//# sourceMappingURL=Step.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\Step.js.map

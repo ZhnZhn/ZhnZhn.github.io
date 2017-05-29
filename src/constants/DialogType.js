@@ -39,6 +39,7 @@ const qeSources = [
   'IMF_CROSSCOUNTRY',
   'EU_COMMISSION',
   'OECD',
+  'USCENSUS_TRADE',
 
   'OECD_CPI',
   'RATE_INFLATION',

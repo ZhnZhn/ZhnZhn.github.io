@@ -49,7 +49,8 @@ const menuQuandl = [
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
        { id : Quandl.EU_COMMISSION },
-       { id:  Quandl.OECD }
+       { id:  Quandl.OECD },
+       { id:  Quandl.USCENSUS_TRADE, isNew : true }
      ]
   },{
     caption : 'Inflation & Prices',

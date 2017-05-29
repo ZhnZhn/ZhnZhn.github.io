@@ -24,7 +24,10 @@ var C = {
   CLOSE: 'close',
   LAST: 'last',
   TURNOVER: 'turnover',
-  TRADES: 'trades'
+  TRADES: 'trades',
+  BALANCE: 'balance',
+  IMPORTS: 'imports',
+  EXPORTS: 'exports'
 };
 
 var ChartLegend = {
@@ -54,6 +57,12 @@ var ChartLegend = {
         return Object.assign({}, baseConfig, { color: _Color2.default.S_TURNOVER, symbol: 'diamond', isSecondAxes: true });
       case C.TRADES:
         return Object.assign({}, baseConfig, { color: _Color2.default.S_TRADES, symbol: 'diamond', isSecondAxes: true });
+      case C.BALANCE:
+        return Object.assign({}, baseConfig, { color: _Color2.default.S_BALANCE, symbol: 'circle' });
+      case C.IMPORTS:
+        return Object.assign({}, baseConfig, { color: _Color2.default.S_IMPORTS, symbol: 'circle' });
+      case C.EXPORTS:
+        return Object.assign({}, baseConfig, { color: _Color2.default.S_EXPORTS, symbol: 'circle' });
       default:
         return Object.assign({}, baseConfig, { color: undefined, symbol: undefined, isSecondAxes: undefined });
     }
@@ -61,4 +70,4 @@ var ChartLegend = {
 };
 
 exports.default = ChartLegend;
-//# sourceMappingURL=ChartLegend.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartLegend.js.map

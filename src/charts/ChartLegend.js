@@ -14,7 +14,10 @@ const C = {
   CLOSE : 'close',
   LAST : 'last',
   TURNOVER : 'turnover',
-  TRADES : 'trades'
+  TRADES : 'trades',
+  BALANCE: 'balance',
+  IMPORTS: 'imports',
+  EXPORTS: 'exports'
 }
 
 const ChartLegend = {
@@ -64,6 +67,18 @@ const ChartLegend = {
       case C.TRADES:
         return Object.assign({}, baseConfig,
           { color : COLOR.S_TRADES, symbol: 'diamond', isSecondAxes: true }
+        );
+      case C.BALANCE:
+        return Object.assign({}, baseConfig,
+          { color : COLOR.S_BALANCE, symbol: 'circle' }
+        );
+      case C.IMPORTS:
+        return Object.assign({}, baseConfig,
+          { color : COLOR.S_IMPORTS, symbol: 'circle' }
+        );
+      case C.EXPORTS:
+        return Object.assign({}, baseConfig,
+          { color : COLOR.S_EXPORTS, symbol: 'circle' }
         );
       default:
        return Object.assign({}, baseConfig,

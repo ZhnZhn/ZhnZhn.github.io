@@ -27,7 +27,7 @@
     },{
       "caption" : "Society",
       "items" : [
-        { "id" : "QFS_CULTURE", "isNew" : true }
+        { "id" : "QFS_CULTURE" }
       ]
     }
   ],

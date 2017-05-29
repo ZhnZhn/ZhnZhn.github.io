@@ -76,7 +76,7 @@ var fnCreateMenu = function fnCreateMenu() {
 
 var menuQuandl = [{
   caption: 'Economic',
-  items: [{ id: _DialogType.Quandl.CURRENCY_HISTORY }, { id: _DialogType.Quandl.GLOBAL_INDICATOR }, { id: _DialogType.Quandl.WORLDBANK_PRICE }, { id: _DialogType.Quandl.IMF_CROSSCOUNTRY }, { id: _DialogType.Quandl.EU_COMMISSION }, { id: _DialogType.Quandl.OECD }]
+  items: [{ id: _DialogType.Quandl.CURRENCY_HISTORY }, { id: _DialogType.Quandl.GLOBAL_INDICATOR }, { id: _DialogType.Quandl.WORLDBANK_PRICE }, { id: _DialogType.Quandl.IMF_CROSSCOUNTRY }, { id: _DialogType.Quandl.EU_COMMISSION }, { id: _DialogType.Quandl.OECD }, { id: _DialogType.Quandl.USCENSUS_TRADE, isNew: true }]
 }, {
   caption: 'Inflation & Prices',
   items: [{ id: _DialogType.Quandl.OECD_CPI }, { id: _DialogType.Quandl.RATE_INFLATION }, { id: _DialogType.Quandl.BLSI }, { id: _DialogType.Quandl.GDT }, { id: _DialogType.Quandl.BIG_MAC }]

@@ -6,7 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var PALETTE = {
   HIGH: '#4CAF50',
-  LOW: '#F44336'
+  LOW: '#F44336',
+  GREE: '#4da54c',
+  ORANGE: '#e77f32',
+  PURPLE: '#9f588e'
 };
 
 var COLOR = {
@@ -85,7 +88,10 @@ var COLOR = {
   S_TURNOVER: '#6b8f4b',
   S_PRE_SETTLE: '#e77f32',
   S_CLOSE: 'black',
-  S_TRADES: 'black'
+  S_TRADES: 'black',
+  S_BALANCE: PALETTE.PURPLE,
+  S_IMPORTS: PALETTE.GREEN,
+  S_EXPORTS: PALETTE.ORANGE
 
 };
 

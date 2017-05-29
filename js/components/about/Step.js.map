@@ -1,1 +1,23 @@
-{"version":3,"sources":["../../../src/components/about/Step.jsx"],"names":["S","STEP","display","color","border","borderRadius","width","height","textAlign","Step","step"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAO;AACLC,aAAU,cADL;AAELC,WAAO,SAFF;AAGLC,YAAS,mBAHJ;AAILC,kBAAe,KAJV;AAKLC,WAAQ,MALH;AAMLC,YAAS,MANJ;AAOLC,eAAW;AAPN;AADC,CAAV;;AAYA,IAAMC,OAAO,SAAPA,IAAO;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,GAAR;AAAA,SACX;AAAA;AAAA,MAAM,OAAOV,EAAEC,IAAf;AACKS;AADL,GADW;AAAA,CAAb;;kBAMeD,I","file":"Step.js","sourcesContent":["import React from 'react';\r\n\r\nconst S = {\r\n  STEP : {\r\n    display : 'inline-block',\r\n    color: '#80c040',\r\n    border : '2px solid #80c040',\r\n    borderRadius : '50%',\r\n    width : '22px',\r\n    height : '22px',\r\n    textAlign: 'center'\r\n  }\r\n}\r\n\r\nconst Step = ({ step='0' }) => (\r\n  <span style={S.STEP}>\r\n      {step}\r\n  </span>\r\n);\r\n\r\nexport default Step\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\Step.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\Step.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "STEP",
+  "display",
+  "color",
+  "border",
+  "borderRadius",
+  "lineHeight",
+  "width",
+  "height",
+  "textAlign",
+  "textTransform",
+  "Step",
+  "step"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAM;AACJC,aAAS,cADL;AAEJC,WAAO,SAFH;AAGJC,YAAQ,mBAHJ;AAIJC,kBAAc,KAJV;AAKJC,gBAAY,MALR;AAMJC,WAAO,MANH;AAOJC,YAAQ,MAPJ;AAQJC,eAAW,QARP;AASJC,mBAAe;AATX;AADE,CAAV;;AAcA,IAAMC,OAAO,SAAPA,IAAO;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,GAAR;AAAA,SACX;AAAA;AAAA,MAAM,OAAOZ,EAAEC,IAAf;AACKW;AADL,GADW;AAAA,CAAb;;kBAMeD,I"
+}
