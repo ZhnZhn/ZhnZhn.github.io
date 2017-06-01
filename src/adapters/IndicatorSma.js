@@ -3,17 +3,20 @@ import Big from 'big.js';
 
 import ChartConfig from '../charts/ChartConfig';
 
-export const fnAddSeriesSma = function(chart, period){
-
-  const _id = 'SMA(' + period + ')'
+export const fnAddSeriesSma = function(option){
+  const { chart, id, period, isPlus, plus } = option
       , parentId = chart.options.zhConfig.id
       , dataSma = []
       , data = chart.series[0].data;
 
   let bSum = Big('0.0');
-  for (var i=0, max=data.length; i<max; i++){
-    const point = data[i];
-    if (i>period){
+  let i=0, max=data.length, point;
+  const _period = (isPlus)
+           ? parseFloat(Big(period).plus(plus).minus(1).toFixed(0))
+           : parseFloat(Big(period).minus(1).toFixed(0));
+  for (; i<max; i++){
+    point = data[i];
+    if (i>_period){
        bSum = bSum.plus(point.y).minus(data[i-period].y);
        dataSma.push([point.x, parseFloat(bSum.div(period).toFixed(2))])
     } else {
@@ -22,19 +25,18 @@ export const fnAddSeriesSma = function(chart, period){
   }
 
   if (dataSma.length>0){
-    const seria = ChartConfig.fSeries();
-
-    seria.zhSeriaId = parentId + '_' + _id;
-    seria.zhValueText = _id;
-    seria.lineWidth = 2;
-    seria.data = dataSma;
-
+    const seria = Object.assign(
+      ChartConfig.fSeries(), {
+        zhSeriaId: parentId + '_' + id,
+        zhValueText: id,
+        lineWidth: 2,
+        data: dataSma
+      }
+    );
     chart.addSeries(seria, true, true)
-
     return chart.options.colors[seria['_colorIndex']];
-
   } else {
-    console.log('It seems, there are not enough data for SMA(' + period + ')');
+    console.log('It seems, there are not enough data for SMA(' + period + ')')
     return undefined;
   }
 }

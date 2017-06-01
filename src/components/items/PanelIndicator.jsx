@@ -20,6 +20,10 @@ const STYLE = {
   },
   fnSpan : (color) => {
     return { color: color, paddingLeft: '8px' };
+  },
+  SMA_PLUS: {
+    marginLeft: '16px',
+    color: 'black'
   }
 }
 
@@ -34,6 +38,7 @@ class PanelIndicator extends Component {
   }
 
   state = {
+    plusSma: 5,
     descr : [],
     mfiDescrs : []
   }
@@ -47,19 +52,32 @@ class PanelIndicator extends Component {
     }
   }
 
-  _handleAddSma = () => {
-    const value = this.inputSmaComp.getValue()
+  _handleAddSma = (ev, isPlus) => {
+    const period = (isPlus)
+            ? this.inputSmaPlus.getValue()
+            : this.inputSmaComp.getValue()
+        , plus = (isPlus)
+             ? this.inputPlusSma.getValue()
+             : undefined
         , {descr} = this.state
-        , _id = 'SMA(' + value + ')';
+        , id = (isPlus)
+             ? `SMA+(${period}) +(${plus})`
+             : `SMA(${period})`;
 
-    if ( !this._checkIfAlreadyAdded(descr, _id)  ){
-       const color = this.props.onAddSma(value);
+    if ( !this._checkIfAlreadyAdded(descr, id)  ){
+       const color = this.props.onAddSma({ id, period, isPlus, plus });
        if (color){
-          descr.push({ id : _id, color : color });
-        this.setState({descr : descr});
+         this.setState(prevState => {
+            prevState.descr.push({ id, color })
+            if (isPlus) {
+              prevState.plusSma = plus
+            }
+            return prevState;
+         })
        }
     }
   }
+
   _handleRemoveSma = (id) => {
     if (this.props.onRemoveSma(id)){
        this.state.descr = this.state.descr.filter((descr) =>{
@@ -131,6 +149,7 @@ class PanelIndicator extends Component {
 
   render(){
     const { rootStyle, isMfi } = this.props
+        , { plusSma } = this.state;
 
     const _mfiDom = (isMfi) ? (
       <div>
@@ -148,6 +167,21 @@ class PanelIndicator extends Component {
 
     return (
       <SubPanel style={rootStyle}>
+        <div>
+          <span style={STYLE.CAPTION}>SMA+</span>
+          <InputText
+             ref={c => this.inputSmaPlus = c}
+             initValue={INIT_SMA}
+          />
+          <SvgPlus onClick={this._handleAddSma.bind(null, true)} />
+          <span style={STYLE.SMA_PLUS}>
+            +
+          </span>
+          <InputText
+             ref={c => this.inputPlusSma = c}
+             initValue={plusSma}
+          />
+        </div>
         <div>
           <span style={STYLE.CAPTION}>SMA</span>
           <InputText

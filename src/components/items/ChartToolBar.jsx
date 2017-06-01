@@ -9,6 +9,9 @@ const S = {
   TAB_INDICATOR: {
     left: '10px'
   },
+  PANE_INDICATOR: {
+     width: '240px'
+  },
   BT_LEGEND: {
     left: '115px'
   },
@@ -57,6 +60,7 @@ class ChartToolbar extends Component {
         caption="Indicator"
       >
         <PanelIndicator
+          rootStyle={S.PANE_INDICATOR}
           onAddSma={onAddSma}
           onRemoveSma={onRemoveSeries}
           isMfi={config.zhIsMfi}

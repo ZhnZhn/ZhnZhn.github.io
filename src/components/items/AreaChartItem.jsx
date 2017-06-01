@@ -193,8 +193,9 @@ class AreaChartItem extends Component {
     this.props.onSetActive(isCheck, checkBox, this.mainChart)
   }
 
-  _handlerAddSma = (period) => {
-    return this.mainChart.options.zhFnAddSeriesSma(this.mainChart, period);
+  _handlerAddSma = (option) => {
+    option.chart = this.mainChart
+    return this.mainChart.options.zhFnAddSeriesSma(option);
   }
   _handleRemoveSeries = (id) => {
     return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);

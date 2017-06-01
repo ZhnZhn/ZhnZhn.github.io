@@ -324,8 +324,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     _this3.props.onSetActive(isCheck, checkBox, _this3.mainChart);
   };
 
-  this._handlerAddSma = function (period) {
-    return _this3.mainChart.options.zhFnAddSeriesSma(_this3.mainChart, period);
+  this._handlerAddSma = function (option) {
+    option.chart = _this3.mainChart;
+    return _this3.mainChart.options.zhFnAddSeriesSma(option);
   };
 
   this._handleRemoveSeries = function (id) {

@@ -15,17 +15,25 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(chart, period) {
-
-  var _id = 'SMA(' + period + ')',
+var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(option) {
+  var chart = option.chart,
+      id = option.id,
+      period = option.period,
+      isPlus = option.isPlus,
+      plus = option.plus,
       parentId = chart.options.zhConfig.id,
       dataSma = [],
       data = chart.series[0].data;
 
+
   var bSum = (0, _big2.default)('0.0');
-  for (var i = 0, max = data.length; i < max; i++) {
-    var point = data[i];
-    if (i > period) {
+  var i = 0,
+      max = data.length,
+      point = void 0;
+  var _period = isPlus ? parseFloat((0, _big2.default)(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big2.default)(period).minus(1).toFixed(0));
+  for (; i < max; i++) {
+    point = data[i];
+    if (i > _period) {
       bSum = bSum.plus(point.y).minus(data[i - period].y);
       dataSma.push([point.x, parseFloat(bSum.div(period).toFixed(2))]);
     } else {
@@ -34,15 +42,13 @@ var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(chart, per
   }
 
   if (dataSma.length > 0) {
-    var seria = _ChartConfig2.default.fSeries();
-
-    seria.zhSeriaId = parentId + '_' + _id;
-    seria.zhValueText = _id;
-    seria.lineWidth = 2;
-    seria.data = dataSma;
-
+    var seria = Object.assign(_ChartConfig2.default.fSeries(), {
+      zhSeriaId: parentId + '_' + id,
+      zhValueText: id,
+      lineWidth: 2,
+      data: dataSma
+    });
     chart.addSeries(seria, true, true);
-
     return chart.options.colors[seria['_colorIndex']];
   } else {
     console.log('It seems, there are not enough data for SMA(' + period + ')');
@@ -175,4 +181,4 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
 
   return config;
 };
-//# sourceMappingURL=IndicatorSma.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\IndicatorSma.js.map

@@ -57,6 +57,10 @@ var STYLE = {
   },
   fnSpan: function fnSpan(color) {
     return { color: color, paddingLeft: '8px' };
+  },
+  SMA_PLUS: {
+    marginLeft: '16px',
+    color: 'black'
   }
 };
 
@@ -75,6 +79,7 @@ var PanelIndicator = function (_Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = PanelIndicator.__proto__ || Object.getPrototypeOf(PanelIndicator)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      plusSma: 5,
       descr: [],
       mfiDescrs: []
     }, _this._checkIfAlreadyAdded = function (arrObj, id) {
@@ -86,18 +91,26 @@ var PanelIndicator = function (_Component) {
       } else {
         return true;
       }
-    }, _this._handleAddSma = function () {
-      var value = _this.inputSmaComp.getValue(),
+    }, _this._handleAddSma = function (ev, isPlus) {
+      var period = isPlus ? _this.inputSmaPlus.getValue() : _this.inputSmaComp.getValue(),
+          plus = isPlus ? _this.inputPlusSma.getValue() : undefined,
           descr = _this.state.descr,
-          _id = 'SMA(' + value + ')';
+          id = isPlus ? 'SMA+(' + period + ') +(' + plus + ')' : 'SMA(' + period + ')';
 
 
-      if (!_this._checkIfAlreadyAdded(descr, _id)) {
-        var color = _this.props.onAddSma(value);
-        if (color) {
-          descr.push({ id: _id, color: color });
-          _this.setState({ descr: descr });
-        }
+      if (!_this._checkIfAlreadyAdded(descr, id)) {
+        (function () {
+          var color = _this.props.onAddSma({ id: id, period: period, isPlus: isPlus, plus: plus });
+          if (color) {
+            _this.setState(function (prevState) {
+              prevState.descr.push({ id: id, color: color });
+              if (isPlus) {
+                prevState.plusSma = plus;
+              }
+              return prevState;
+            });
+          }
+        })();
       }
     }, _this._handleRemoveSma = function (id) {
       if (_this.props.onRemoveSma(id)) {
@@ -182,7 +195,8 @@ var PanelIndicator = function (_Component) {
 
       var _props = this.props,
           rootStyle = _props.rootStyle,
-          isMfi = _props.isMfi;
+          isMfi = _props.isMfi,
+          plusSma = this.state.plusSma;
 
 
       var _mfiDom = isMfi ? _react2.default.createElement(
@@ -210,6 +224,33 @@ var PanelIndicator = function (_Component) {
       return _react2.default.createElement(
         _SubPanel2.default,
         { style: rootStyle },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'span',
+            { style: STYLE.CAPTION },
+            'SMA+'
+          ),
+          _react2.default.createElement(_InputText2.default, {
+            ref: function ref(c) {
+              return _this2.inputSmaPlus = c;
+            },
+            initValue: INIT_SMA
+          }),
+          _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma.bind(null, true) }),
+          _react2.default.createElement(
+            'span',
+            { style: STYLE.SMA_PLUS },
+            '+'
+          ),
+          _react2.default.createElement(_InputText2.default, {
+            ref: function ref(c) {
+              return _this2.inputPlusSma = c;
+            },
+            initValue: plusSma
+          })
+        ),
         _react2.default.createElement(
           'div',
           null,
