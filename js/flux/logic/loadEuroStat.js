@@ -75,7 +75,10 @@ var fnFetchToChart = function fnFetchToChart(_ref2) {
   var chart = _ChartStore2.default.getActiveChart(),
       series = _EuroStatAdapter2.default.toSeries(json, option, chart);
 
-  _ChartFn2.default.addSeriaWithRenderLabel(chart, series, option.itemCaption);
+  _ChartFn2.default.addSeriaWithRenderLabel({
+    chart: chart, series: series,
+    label: option.itemCaption
+  });
   onCompleted(option);
 };
 
@@ -91,4 +94,4 @@ var loadEuroStat = function loadEuroStat(option, onCompleted, onAdded, onFailed)
 };
 
 exports.loadEuroStat = loadEuroStat;
-//# sourceMappingURL=loadEuroStat.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\loadEuroStat.js.map

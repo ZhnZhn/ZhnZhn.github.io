@@ -24,7 +24,10 @@ class FuturesWikiDialog extends Component {
     super()
     this.type = undefined
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handleClickInfo }
+      {
+        caption: 'I', title: 'Information About Dataset',
+        onClick: this._handleClickInfo
+      }
     ]
     this.state = {
       validationMessages : []

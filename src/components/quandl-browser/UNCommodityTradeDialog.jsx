@@ -62,11 +62,22 @@ class UNCommodityTradeDialog extends Component {
     this.chartType = null
 
     this.toolbarButtons = [
-      { caption:'I', onClick: this._handlerClickInfo },
-      { caption:'A', onClick: this._handlerClickAll },
-      { caption:'F', onClick: this._handlerClickFilter },
-      { caption:'D', onClick: this._handlerClickDate },
-      { caption:'C', onClick: this._handlerClickChartType }
+      {
+        caption:'I', title: 'Information About Dataset',
+        onClick: this._handlerClickInfo
+      },{
+        caption:'A', title: 'Toggle All Input',
+        onClick: this._handlerClickAll
+      },{
+        caption:'F', title: 'Toggle Filter Input',
+        onClick: this._handlerClickFilter
+      },{
+        caption:'D', title: 'Toggle Date Input',
+        onClick: this._handlerClickDate
+      },{
+        caption:'C', title: 'Toggle ChartType Input',
+        onClick: this._handlerClickChartType
+      }
     ]
     this.state = {
       isShowFilter : false,

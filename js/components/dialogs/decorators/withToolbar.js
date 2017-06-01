@@ -7,9 +7,14 @@ var _createType2WithToolbar = function _createType2WithToolbar(props) {
   var toolbarButtons = [];
 
   if (typeof props.onClickInfo === 'function') {
-    toolbarButtons.push({ caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) });
+    toolbarButtons.push({
+      caption: 'I', title: 'Information About Dataset',
+      onClick: this._clickInfoWithToolbar.bind(this) });
   }
-  toolbarButtons.push({ caption: 'D', onClick: this._clickDateWithToolbar.bind(this) });
+  toolbarButtons.push({
+    caption: 'D', title: 'Toggle Date Input',
+    onClick: this._clickDateWithToolbar.bind(this)
+  });
 
   return toolbarButtons;
 };

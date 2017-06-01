@@ -26,7 +26,10 @@ class Futures3Dialog extends Component {
     super()
     this.year = undefined
     this.toolbarButtons = [
-      { caption: 'I', onClick: this._handleClickInfo }
+      {
+        caption: 'I', title: 'Information About Dataset',
+        onClick: this._handleClickInfo
+      }
     ]
     this.state = {
       validationMessages : []

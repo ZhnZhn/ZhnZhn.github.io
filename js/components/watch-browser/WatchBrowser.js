@@ -94,7 +94,6 @@ var styles = {
   },
   btCircle: {
     marginLeft: '20px',
-    lineHeight: 'initial',
     position: 'relative',
     top: '-2px'
   },
@@ -312,11 +311,13 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
           },
           _react2.default.createElement(_ButtonCircle2.default, {
             caption: 'S',
+            title: 'Save to LocalStorage',
             style: styles.btCircle,
             onClick: this._handlerSaveWatch
           }),
           _react2.default.createElement(_ButtonCircle2.default, {
             caption: _captionEV,
+            title: 'Toggle Edit Mode: E/V',
             style: styles.btCircle,
             onClick: this._handlerToggleEditMode
           })

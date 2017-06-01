@@ -17,6 +17,7 @@ var createLoadOptions = function createLoadOptions() {
       two = options.two,
       fromDate = options.fromDate,
       toDate = options.toDate,
+      hasSecondYAxis = options.hasSecondYAxis,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : undefined;
 
   return {
@@ -28,7 +29,8 @@ var createLoadOptions = function createLoadOptions() {
     title: one.caption,
     subtitle: two.caption,
     isPremium: isPremium,
-    dataSource: dataSource
+    dataSource: dataSource,
+    hasSecondYAxis: hasSecondYAxis
   };
 };
 

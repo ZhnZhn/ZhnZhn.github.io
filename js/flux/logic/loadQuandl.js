@@ -70,7 +70,11 @@ var fnFetchToChart = function fnFetchToChart(_ref2) {
   var series = _QuandlAdapter2.default.toSeries(json, option),
       chart = _ChartStore2.default.getActiveChart();
 
-  _ChartFn2.default.addSeriaWithRenderLabel(chart, series, option.value);
+  _ChartFn2.default.addSeriaWithRenderLabel({
+    chart: chart, series: series,
+    label: option.value,
+    hasSecondYAxis: option.hasSecondYAxis
+  });
   onCompleted(option);
 };
 
@@ -87,4 +91,4 @@ var loadQuandl = function loadQuandl(option, onCompleted, onAdded, onFailed) {
 exports.loadQuandl = loadQuandl;
 exports.fnFetchToChartComp = fnFetchToChartComp;
 exports.fnFetchToChart = fnFetchToChart;
-//# sourceMappingURL=loadQuandl.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\loadQuandl.js.map

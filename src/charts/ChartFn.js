@@ -12,6 +12,8 @@ import { Direction } from '../constants/Type';
 const _fnFindIndex = ArrayUtil.findIndexByProp('x')
 
 const C = {
+  C1_SECOND_Y_AXIS: '#f45b5b',
+  C2_SECOND_Y_AXIS: '#f7a35c',
   SERIA_LABEL_CHARS : 12,
   SERIA_LABELS_IN_ROW : 3,
   SERIA_LABEL_X_DELTA : 145,
@@ -28,8 +30,20 @@ const C = {
   }
 }
 
+const _crYAxisColor = (chart) => {
+  const _ = chart.yAxis.length;
+  if (_ === 1) {
+    return C.C1_SECOND_Y_AXIS;
+  } else if (_ === 2) {
+    return C.C2_SECOND_Y_AXIS;
+  } else {
+    return C.C1_SECOND_Y_AXIS;
+  }
+}
+
 const ChartFn = {
-  addSeriaWithRenderLabel(chart, series, label){
+  addSeriaWithRenderLabel(props){
+    const { chart, series, label, hasSecondYAxis } = props;
     const options = chart.options;
     if (!options.zhSeries){
       options.zhSeries = {
@@ -50,12 +64,22 @@ const ChartFn = {
               - row*(C.SERIA_LABEL_WIDTH*C.SERIA_LABELS_IN_ROW)
         , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
 
-    chart.addSeries(series, true, true);
+    let color;
+    if (hasSecondYAxis){
+      color = _crYAxisColor(chart)
+      chart.addAxis(
+        Chart.fSecondYAxis(label, color)
+      )
+      series.yAxis = label
+      series.color = color
+    }
+    chart.addSeries(series, true, true)
+
     const textEl = chart.renderer.text(seriesText, x, y)
                     .css({
-                          color: options.colors[series._colorIndex],
-                          'font-size': '16px'
-                        })
+                      color: (color) ? color : options.colors[series._colorIndex],
+                      'font-size': '16px'
+                    })
                     .add();
 
     options.zhSeries.count +=1
@@ -149,12 +173,7 @@ const ChartFn = {
 
     let valueTo;
     if (index !== -1) {
-
       valueTo = points[index].y
-
-      //console.log(index);
-      //console.log(valueTo);
-
       const valueMoving = Object.assign(
         {}, prev,
         mathFn.crValueMoving({

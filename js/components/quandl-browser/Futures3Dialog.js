@@ -142,7 +142,10 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
     };
 
     _this.year = undefined;
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._handleClickInfo }];
+    _this.toolbarButtons = [{
+      caption: 'I', title: 'Information About Dataset',
+      onClick: _this._handleClickInfo
+    }];
     _this.state = {
       validationMessages: []
     };

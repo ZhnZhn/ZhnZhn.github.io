@@ -25,11 +25,12 @@ class ToolbarButtonCircle extends Component {
 
   _renderButtons = (buttons=[]) => {
     return buttons.map((button, index) => {
-      const { caption, onClick } = button;
+      const { caption, title, onClick } = button;
       return (
         <ButtonCircle
           key={caption + index}
           caption={caption}
+          title={title}
           style={STYLE.BUTTON_CIRCLE}
           onClick={onClick}
         />

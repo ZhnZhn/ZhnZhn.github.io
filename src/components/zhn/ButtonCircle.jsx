@@ -7,8 +7,9 @@ const S = {
     color: '#80c040',
     border : '2px solid #80c040',
     borderRadius : '50%',
-    width : '22px',
-    height : '22px',
+    lineHeight: '24px',
+    width : '26px',
+    height : '26px',
     textAlign: 'center',
     cursor: 'pointer'
   }
@@ -16,7 +17,8 @@ const S = {
 
 const ButtonCircle = (props) => {
     const {
-           caption='', className, style,
+           className, style,
+           caption='', title,
            isWithoutDefault, onClick
          } = props
         , _className = (className)
@@ -29,6 +31,7 @@ const ButtonCircle = (props) => {
       <span
          className={_className}
          style={_style}
+         title={title}
          onClick={onClick}
       >
          {caption}

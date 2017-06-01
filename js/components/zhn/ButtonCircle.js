@@ -17,18 +17,20 @@ var S = {
     color: '#80c040',
     border: '2px solid #80c040',
     borderRadius: '50%',
-    width: '22px',
-    height: '22px',
+    lineHeight: '24px',
+    width: '26px',
+    height: '26px',
     textAlign: 'center',
     cursor: 'pointer'
   }
 };
 
 var ButtonCircle = function ButtonCircle(props) {
-  var _props$caption = props.caption,
-      caption = _props$caption === undefined ? '' : _props$caption,
-      className = props.className,
+  var className = props.className,
       style = props.style,
+      _props$caption = props.caption,
+      caption = _props$caption === undefined ? '' : _props$caption,
+      title = props.title,
       isWithoutDefault = props.isWithoutDefault,
       onClick = props.onClick,
       _className = className ? className + ' ' + NOT_SELECTED : NOT_SELECTED,
@@ -39,6 +41,7 @@ var ButtonCircle = function ButtonCircle(props) {
     {
       className: _className,
       style: _style,
+      title: title,
       onClick: onClick
     },
     caption
@@ -46,4 +49,4 @@ var ButtonCircle = function ButtonCircle(props) {
 };
 
 exports.default = ButtonCircle;
-//# sourceMappingURL=ButtonCircle.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ButtonCircle.js.map

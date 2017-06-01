@@ -46,6 +46,10 @@ var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
 var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
+var _RowCheckBox = require('./RowCheckBox');
+
+var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
+
 var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
@@ -64,6 +68,8 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+
 var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
   (0, _inherits3.default)(DialogType4A, _Component);
 
@@ -72,9 +78,8 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType4A.__proto__ || Object.getPrototypeOf(DialogType4A)).call(this));
 
-    _this.state = {
-      isShowDate: true,
-      validationMessages: []
+    _this._handleClickOptions = function () {
+      _this.setState({ isShowOptions: !_this.state.isShowOptions });
     };
 
     _this._handleLoad = function () {
@@ -112,7 +117,10 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate;
 
-      return _this.props.loadFn(_this.props, { one: one, two: two, fromDate: fromDate, toDate: toDate });
+      return _this.props.loadFn(_this.props, {
+        one: one, two: two, fromDate: fromDate, toDate: toDate,
+        hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
+      });
     };
 
     _this._handleClose = function () {
@@ -120,7 +128,21 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
       _this.props.onClose();
     };
 
+    _this._handleMode = function (propName, value) {
+      _this[propName] = value;
+    };
+
     _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this.toolbarButtons.push({
+      caption: 'O', title: 'Toggle Options Input',
+      onClick: _this._handleClickOptions
+    });
+    _this[HAS_SECOND_Y_AXIS] = false;
+    _this.state = {
+      isShowDate: true,
+      isShowOptions: false,
+      validationMessages: []
+    };
     return _this;
   }
 
@@ -154,6 +176,7 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
           onTestDate = _props.onTestDate,
           _state = this.state,
           isShowDate = _state.isShowDate,
+          isShowOptions = _state.isShowOptions,
           validationMessages = _state.validationMessages,
           _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
         key: 'a',
@@ -198,6 +221,16 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
             initToDate: initToDate,
             msgOnNotValidFormat: msgOnNotValidFormat,
             onTestDate: onTestDate
+          })
+        ),
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isShowOptions },
+          _react2.default.createElement(_RowCheckBox2.default, {
+            initValue: false,
+            caption: 'Add Seria with Second YAxis',
+            onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
+            onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
           })
         ),
         _react2.default.createElement(_ValidationMessages2.default, {

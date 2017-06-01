@@ -142,7 +142,10 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
     };
 
     _this.type = undefined;
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._handleClickInfo }];
+    _this.toolbarButtons = [{
+      caption: 'I', title: 'Information About Dataset',
+      onClick: _this._handleClickInfo
+    }];
     _this.state = {
       validationMessages: []
     };

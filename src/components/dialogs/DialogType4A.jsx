@@ -6,23 +6,32 @@ import SelectParentChild from './SelectParentChild';
 import ActionButton from '../zhn/ActionButton';
 
 import DatesFragment from '../zhn-moleculs/DatesFragment';
+import RowCheckBox from './RowCheckBox';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
 
 import withToolbar from './decorators/withToolbar';
 import withValidationLoad from './decorators/withValidationLoad';
 
+const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+
 @withToolbar
 @withValidationLoad
 class DialogType4A extends Component {
-  state = {
-    isShowDate : true,
-    validationMessages: []
-  }
 
   constructor(props){
-    super();
-    this.toolbarButtons = this._createType2WithToolbar(props);
+    super()
+    this.toolbarButtons = this._createType2WithToolbar(props)
+    this.toolbarButtons.push({
+      caption: 'O', title: 'Toggle Options Input',
+      onClick: this._handleClickOptions
+    })
+    this[HAS_SECOND_Y_AXIS] = false
+    this.state = {
+      isShowDate: true,
+      isShowOptions: false,
+      validationMessages: []
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -32,6 +41,10 @@ class DialogType4A extends Component {
        }
     }
     return true;
+  }
+
+  _handleClickOptions = () => {
+    this.setState({ isShowOptions: !this.state.isShowOptions })
   }
 
   _handleLoad = () => {
@@ -52,13 +65,15 @@ class DialogType4A extends Component {
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   }
-  
+
   _createLoadOption = () => {
     const { parent:one, child:two } = this.parentChild.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues();
     return this.props.loadFn(
-       this.props,
-       { one, two, fromDate, toDate }
+       this.props, {
+         one, two, fromDate, toDate,
+         hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
+       }
      );
   }
 
@@ -67,21 +82,25 @@ class DialogType4A extends Component {
     this.props.onClose();
   }
 
+  _handleMode = (propName, value) => {
+     this[propName] = value
+  }
+
   render(){
     const {
            caption, oneCaption, oneURI, oneJsonProp, twoCaption, msgOnNotSelected,
            isShow, onShow,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, validationMessages } = this.state
+        , { isShowDate, isShowOptions, validationMessages } = this.state
         , _commandButtons = [
-       <ActionButton
-          key="a"
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />
-    ];
+             <ActionButton
+                key="a"
+                type="TypeC"
+                caption="Load"
+                onClick={this._handleLoad}
+             />
+          ];
 
     return(
         <DraggableDialog
@@ -113,6 +132,14 @@ class DialogType4A extends Component {
                  initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
+               />
+             </ShowHide>
+             <ShowHide isShow={isShowOptions}>
+               <RowCheckBox
+                 initValue={false}
+                 caption="Add Seria with Second YAxis"
+                 onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
+                 onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
                />
              </ShowHide>
              <ValidationMessages

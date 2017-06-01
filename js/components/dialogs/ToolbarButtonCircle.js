@@ -63,11 +63,13 @@ var ToolbarButtonCircle = function (_Component) {
 
       return buttons.map(function (button, index) {
         var caption = button.caption,
+            title = button.title,
             onClick = button.onClick;
 
         return _react2.default.createElement(_ButtonCircle2.default, {
           key: caption + index,
           caption: caption,
+          title: title,
           style: STYLE.BUTTON_CIRCLE,
           onClick: onClick
         });

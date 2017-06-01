@@ -35,6 +35,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _fnFindIndex = _ArrayUtil2.default.findIndexByProp('x');
 
 var C = {
+  C1_SECOND_Y_AXIS: '#f45b5b',
+  C2_SECOND_Y_AXIS: '#f7a35c',
   SERIA_LABEL_CHARS: 12,
   SERIA_LABELS_IN_ROW: 3,
   SERIA_LABEL_X_DELTA: 145,
@@ -51,8 +53,24 @@ var C = {
   }
 };
 
+var _crYAxisColor = function _crYAxisColor(chart) {
+  var _ = chart.yAxis.length;
+  if (_ === 1) {
+    return C.C1_SECOND_Y_AXIS;
+  } else if (_ === 2) {
+    return C.C2_SECOND_Y_AXIS;
+  } else {
+    return C.C1_SECOND_Y_AXIS;
+  }
+};
+
 var ChartFn = {
-  addSeriaWithRenderLabel: function addSeriaWithRenderLabel(chart, series, label) {
+  addSeriaWithRenderLabel: function addSeriaWithRenderLabel(props) {
+    var chart = props.chart,
+        series = props.series,
+        label = props.label,
+        hasSecondYAxis = props.hasSecondYAxis;
+
     var options = chart.options;
     if (!options.zhSeries) {
       options.zhSeries = {
@@ -69,9 +87,17 @@ var ChartFn = {
         x = C.SERIA_LABEL_X_DELTA + C.SERIA_LABEL_WIDTH * seriesCount - row * (C.SERIA_LABEL_WIDTH * C.SERIA_LABELS_IN_ROW),
         y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT * row;
 
+    var color = void 0;
+    if (hasSecondYAxis) {
+      color = _crYAxisColor(chart);
+      chart.addAxis(_Chart2.default.fSecondYAxis(label, color));
+      series.yAxis = label;
+      series.color = color;
+    }
     chart.addSeries(series, true, true);
+
     var textEl = chart.renderer.text(seriesText, x, y).css({
-      color: options.colors[series._colorIndex],
+      color: color ? color : options.colors[series._colorIndex],
       'font-size': '16px'
     }).add();
 
@@ -153,12 +179,7 @@ var ChartFn = {
 
     var valueTo = void 0;
     if (index !== -1) {
-
       valueTo = points[index].y;
-
-      //console.log(index);
-      //console.log(valueTo);
-
       var valueMoving = Object.assign({}, prev, _mathFn2.default.crValueMoving({
         nowValue: prev.value,
         prevValue: valueTo,

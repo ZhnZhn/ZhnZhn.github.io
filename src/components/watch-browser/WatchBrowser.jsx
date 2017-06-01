@@ -29,7 +29,6 @@ const styles = {
   },
   btCircle : {
     marginLeft: '20px',
-    lineHeight: 'initial',
     position: 'relative',
     top: '-2px'
   },
@@ -215,12 +214,14 @@ class WatchBrowser extends Component {
             onClose={this._handlerHide}
           >
            <ButtonCircle
-             caption={'S'}
+             caption="S"
+             title="Save to LocalStorage"
              style={styles.btCircle}
              onClick={this._handlerSaveWatch}
            />
            <ButtonCircle
               caption={_captionEV}
+              title="Toggle Edit Mode: E/V"
               style={styles.btCircle}
               onClick={this._handlerToggleEditMode}
            />

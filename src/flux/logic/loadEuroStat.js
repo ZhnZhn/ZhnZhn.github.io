@@ -24,7 +24,7 @@ const fnFetchToChartComp = function({json, option, onCompleted}){
   if (typeof config.then !== 'function'){
      onCompleted(option, config);
   } else {
-    config.then((config) => {      
+    config.then((config) => {
       onCompleted(option, config);
       return undefined;
     })
@@ -47,8 +47,11 @@ const fnFetchToChart = function({ json, option, onCompleted }){
   const chart = ChartStore.getActiveChart()
   , series = EuroStatAdapter.toSeries(json, option, chart);
 
-  ChartFn.addSeriaWithRenderLabel(chart, series, option.itemCaption);
-  onCompleted(option);
+  ChartFn.addSeriaWithRenderLabel({
+    chart, series,
+    label: option.itemCaption
+  })
+  onCompleted(option)
 }
 
 const loadEuroStat = function(option, onCompleted, onAdded, onFailed){

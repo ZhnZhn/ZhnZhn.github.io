@@ -40,8 +40,12 @@ const fnFetchToChart = function({ json, option, onCompleted }){
   const series = QuandlAdapter.toSeries(json, option)
       , chart = ChartStore.getActiveChart();
 
-  ChartFn.addSeriaWithRenderLabel(chart, series, option.value);
-  onCompleted(option);
+  ChartFn.addSeriaWithRenderLabel({
+    chart, series,
+    label: option.value,
+    hasSecondYAxis: option.hasSecondYAxis
+  })
+  onCompleted(option)
 }
 
 const loadQuandl = function(option, onCompleted, onAdded, onFailed){

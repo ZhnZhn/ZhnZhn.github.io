@@ -1,1 +1,39 @@
-{"version":3,"sources":["../../../src/flux/logic/loadEuroStat.js"],"names":["_loadToChartComp","option","onCompleted","onFailed","uri","getRequestUrl","onCheckResponse","checkResponse","onFetch","fnFetchToChartComp","onCatch","json","config","toConfig","then","undefined","_loadToChart","onAdded","fnFetchToChart","chart","getActiveChart","series","toSeries","addSeriaWithRenderLabel","itemCaption","loadEuroStat","parentId","isLoadToChart"],"mappings":";;;;;;;AACA;;AACA;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB,SAAnBA,gBAAmB,CAASC,MAAT,EAAiBC,WAAjB,EAA8BC,QAA9B,EAAuC;AAC9D,mBAAQ;AACNC,SAAM,sBAAYC,aAAZ,CAA0BJ,MAA1B,CADA;AAENA,YAASA,MAFH;AAGNK,qBAAkB,sBAAYC,aAHxB;AAINC,aAAUC,kBAJJ;AAKNP,iBAAcA,WALR;AAMNQ,6BANM;AAONP,cAAWA;AAPL,GAAR;AASD,CAVD;;AAYA,IAAMM,qBAAqB,SAArBA,kBAAqB,OAAqC;AAAA,MAA3BE,IAA2B,QAA3BA,IAA2B;AAAA,MAArBV,MAAqB,QAArBA,MAAqB;AAAA,MAAbC,WAAa,QAAbA,WAAa;;AAC9D,MAAMU,SAAS,0BAAgBC,QAAhB,CAAyBF,IAAzB,EAA+BV,MAA/B,CAAf;AACA,MAAI,OAAOW,OAAOE,IAAd,KAAuB,UAA3B,EAAsC;AACnCZ,gBAAYD,MAAZ,EAAoBW,MAApB;AACF,GAFD,MAEO;AACLA,WAAOE,IAAP,CAAY,UAACF,MAAD,EAAY;AACtBV,kBAAYD,MAAZ,EAAoBW,MAApB;AACA,aAAOG,SAAP;AACD,KAHD;AAID;AACF,CAVD;;AAYA,IAAMC,eAAe,SAAfA,YAAe,CAASf,MAAT,EAAiBgB,OAAjB,EAA0Bd,QAA1B,EAAmC;AACtD,mBAAQ;AACNC,SAAM,sBAAYC,aAAZ,CAA0BJ,MAA1B,CADA;AAENA,YAASA,MAFH;AAGNK,qBAAkB,sBAAYC,aAHxB;AAINC,aAAUU,cAJJ;AAKNhB,iBAAce,OALR;AAMNP,6BANM;AAONP,cAAWA;AAPL,GAAR;AASD,CAVD;;AAYA,IAAMe,iBAAiB,SAAjBA,cAAiB,QAAuC;AAAA,MAA5BP,IAA4B,SAA5BA,IAA4B;AAAA,MAAtBV,MAAsB,SAAtBA,MAAsB;AAAA,MAAdC,WAAc,SAAdA,WAAc;;AAC5D,MAAMiB,QAAQ,qBAAWC,cAAX,EAAd;AAAA,MACEC,SAAS,0BAAgBC,QAAhB,CAAyBX,IAAzB,EAA+BV,MAA/B,EAAuCkB,KAAvC,CADX;;AAGA,oBAAQI,uBAAR,CAAgCJ,KAAhC,EAAuCE,MAAvC,EAA+CpB,OAAOuB,WAAtD;AACAtB,cAAYD,MAAZ;AACD,CAND;;AAQA,IAAMwB,eAAe,SAAfA,YAAe,CAASxB,MAAT,EAAiBC,WAAjB,EAA8Be,OAA9B,EAAuCd,QAAvC,EAAgD;AACnE,MAAMuB,WAAW,qBAAWC,aAAX,EAAjB;;AAEA,MAAI,CAACD,QAAL,EAAc;AACZ1B,qBAAiBC,MAAjB,EAAyBC,WAAzB,EAAsCC,QAAtC;AACD,GAFD,MAEO;AACLF,WAAOyB,QAAP,GAAkBA,QAAlB;AACAV,iBAAaf,MAAb,EAAqBgB,OAArB,EAA8Bd,QAA9B;AACD;AACF,CATD;;QAWSsB,Y,GAAAA,Y","file":"loadEuroStat.js","sourcesContent":["\r\nimport {fnFetch} from '../../utils/fn';\r\nimport {fnCatch} from './fnCatch';\r\nimport ChartStore from '../stores/ChartStore';\r\n\r\nimport ChartFn from '../../charts/ChartFn';\r\nimport EuroStatApi from '../../api/EuroStatApi';\r\nimport EuroStatAdapter from '../../adapters/eurostat/EuroStatAdapter';\r\n\r\nconst _loadToChartComp = function(option, onCompleted, onFailed){\r\n  fnFetch({\r\n    uri : EuroStatApi.getRequestUrl(option),\r\n    option : option,\r\n    onCheckResponse : EuroStatApi.checkResponse,\r\n    onFetch : fnFetchToChartComp,\r\n    onCompleted : onCompleted,\r\n    onCatch : fnCatch,\r\n    onFailed : onFailed\r\n  })\r\n}\r\n\r\nconst fnFetchToChartComp = function({json, option, onCompleted}){\r\n  const config = EuroStatAdapter.toConfig(json, option);\r\n  if (typeof config.then !== 'function'){\r\n     onCompleted(option, config);\r\n  } else {\r\n    config.then((config) => {      \r\n      onCompleted(option, config);\r\n      return undefined;\r\n    })\r\n  }\r\n}\r\n\r\nconst _loadToChart = function(option, onAdded, onFailed){\r\n  fnFetch({\r\n    uri : EuroStatApi.getRequestUrl(option),\r\n    option : option,\r\n    onCheckResponse : EuroStatApi.checkResponse,\r\n    onFetch : fnFetchToChart,\r\n    onCompleted : onAdded,\r\n    onCatch : fnCatch,\r\n    onFailed : onFailed\r\n  })\r\n}\r\n\r\nconst fnFetchToChart = function({ json, option, onCompleted }){\r\n  const chart = ChartStore.getActiveChart()\r\n  , series = EuroStatAdapter.toSeries(json, option, chart);\r\n\r\n  ChartFn.addSeriaWithRenderLabel(chart, series, option.itemCaption);\r\n  onCompleted(option);\r\n}\r\n\r\nconst loadEuroStat = function(option, onCompleted, onAdded, onFailed){\r\n  const parentId = ChartStore.isLoadToChart();\r\n\r\n  if (!parentId){\r\n    _loadToChartComp(option, onCompleted, onFailed);\r\n  } else {\r\n    option.parentId = parentId;\r\n    _loadToChart(option, onAdded, onFailed);\r\n  }\r\n}\r\n\r\nexport { loadEuroStat }\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\loadEuroStat.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\loadEuroStat.js",
+ "sourceRoot": "",
+ "names": [
+  "_loadToChartComp",
+  "option",
+  "onCompleted",
+  "onFailed",
+  "uri",
+  "getRequestUrl",
+  "onCheckResponse",
+  "checkResponse",
+  "onFetch",
+  "fnFetchToChartComp",
+  "onCatch",
+  "json",
+  "config",
+  "toConfig",
+  "then",
+  "undefined",
+  "_loadToChart",
+  "onAdded",
+  "fnFetchToChart",
+  "chart",
+  "getActiveChart",
+  "series",
+  "toSeries",
+  "addSeriaWithRenderLabel",
+  "label",
+  "itemCaption",
+  "loadEuroStat",
+  "parentId",
+  "isLoadToChart"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB,SAAnBA,gBAAmB,CAASC,MAAT,EAAiBC,WAAjB,EAA8BC,QAA9B,EAAuC;AAC9D,mBAAQ;AACNC,SAAM,sBAAYC,aAAZ,CAA0BJ,MAA1B,CADA;AAENA,YAASA,MAFH;AAGNK,qBAAkB,sBAAYC,aAHxB;AAINC,aAAUC,kBAJJ;AAKNP,iBAAcA,WALR;AAMNQ,6BANM;AAONP,cAAWA;AAPL,GAAR;AASD,CAVD;;AAYA,IAAMM,qBAAqB,SAArBA,kBAAqB,OAAqC;AAAA,MAA3BE,IAA2B,QAA3BA,IAA2B;AAAA,MAArBV,MAAqB,QAArBA,MAAqB;AAAA,MAAbC,WAAa,QAAbA,WAAa;;AAC9D,MAAMU,SAAS,0BAAgBC,QAAhB,CAAyBF,IAAzB,EAA+BV,MAA/B,CAAf;AACA,MAAI,OAAOW,OAAOE,IAAd,KAAuB,UAA3B,EAAsC;AACnCZ,gBAAYD,MAAZ,EAAoBW,MAApB;AACF,GAFD,MAEO;AACLA,WAAOE,IAAP,CAAY,UAACF,MAAD,EAAY;AACtBV,kBAAYD,MAAZ,EAAoBW,MAApB;AACA,aAAOG,SAAP;AACD,KAHD;AAID;AACF,CAVD;;AAYA,IAAMC,eAAe,SAAfA,YAAe,CAASf,MAAT,EAAiBgB,OAAjB,EAA0Bd,QAA1B,EAAmC;AACtD,mBAAQ;AACNC,SAAM,sBAAYC,aAAZ,CAA0BJ,MAA1B,CADA;AAENA,YAASA,MAFH;AAGNK,qBAAkB,sBAAYC,aAHxB;AAINC,aAAUU,cAJJ;AAKNhB,iBAAce,OALR;AAMNP,6BANM;AAONP,cAAWA;AAPL,GAAR;AASD,CAVD;;AAYA,IAAMe,iBAAiB,SAAjBA,cAAiB,QAAuC;AAAA,MAA5BP,IAA4B,SAA5BA,IAA4B;AAAA,MAAtBV,MAAsB,SAAtBA,MAAsB;AAAA,MAAdC,WAAc,SAAdA,WAAc;;AAC5D,MAAMiB,QAAQ,qBAAWC,cAAX,EAAd;AAAA,MACEC,SAAS,0BAAgBC,QAAhB,CAAyBX,IAAzB,EAA+BV,MAA/B,EAAuCkB,KAAvC,CADX;;AAGA,oBAAQI,uBAAR,CAAgC;AAC9BJ,gBAD8B,EACvBE,cADuB;AAE9BG,WAAOvB,OAAOwB;AAFgB,GAAhC;AAIAvB,cAAYD,MAAZ;AACD,CATD;;AAWA,IAAMyB,eAAe,SAAfA,YAAe,CAASzB,MAAT,EAAiBC,WAAjB,EAA8Be,OAA9B,EAAuCd,QAAvC,EAAgD;AACnE,MAAMwB,WAAW,qBAAWC,aAAX,EAAjB;;AAEA,MAAI,CAACD,QAAL,EAAc;AACZ3B,qBAAiBC,MAAjB,EAAyBC,WAAzB,EAAsCC,QAAtC;AACD,GAFD,MAEO;AACLF,WAAO0B,QAAP,GAAkBA,QAAlB;AACAX,iBAAaf,MAAb,EAAqBgB,OAArB,EAA8Bd,QAA9B;AACD;AACF,CATD;;QAWSuB,Y,GAAAA,Y"
+}

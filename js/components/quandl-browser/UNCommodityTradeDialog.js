@@ -335,7 +335,22 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
     _this.optionTrades = null;
     _this.chartType = null;
 
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._handlerClickInfo }, { caption: 'A', onClick: _this._handlerClickAll }, { caption: 'F', onClick: _this._handlerClickFilter }, { caption: 'D', onClick: _this._handlerClickDate }, { caption: 'C', onClick: _this._handlerClickChartType }];
+    _this.toolbarButtons = [{
+      caption: 'I', title: 'Information About Dataset',
+      onClick: _this._handlerClickInfo
+    }, {
+      caption: 'A', title: 'Toggle All Input',
+      onClick: _this._handlerClickAll
+    }, {
+      caption: 'F', title: 'Toggle Filter Input',
+      onClick: _this._handlerClickFilter
+    }, {
+      caption: 'D', title: 'Toggle Date Input',
+      onClick: _this._handlerClickDate
+    }, {
+      caption: 'C', title: 'Toggle ChartType Input',
+      onClick: _this._handlerClickChartType
+    }];
     _this.state = {
       isShowFilter: false,
       isShowDate: true,
