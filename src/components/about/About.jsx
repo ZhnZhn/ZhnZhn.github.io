@@ -96,6 +96,24 @@ class About extends Component {
          <div style={Styles.DIV_WRAPPER}>
          <p>
            <Token color="#80c040">
+             ANNOUNCEMENT:
+           </Token>
+         </p>
+         <p style={{ marginBottom: '16px' }}>
+           Database <Token color="black">GOOG, YAHOO</Token> will not be hosted by
+           <LinkToken
+              href="https://www.quandl.com/"
+              color="#E05927"
+              isFirstBlank={true}
+           >
+              Quandl
+           </LinkToken>
+           <Token color="#fdb316" isFirstBlank={true}>
+              from 1, Jule 2017
+           </Token>  
+         </p>
+         <p>
+           <Token color="#80c040">
              ERC
            </Token>
            <Token color="gray" isFirstBlank={true}>

@@ -86,6 +86,27 @@ const DataQE = {
     },
     dataColumn : 1
   },
+  QE_BP : {
+    type : 'QE_BP',
+    menuTitle : 'British Petroleum',
+    dialogCaption : 'British Petroleum',
+    chartContainerCaption : 'Quandl British Petroleum',
+    dialogType: 'DialogType4',
+    dialogProps : {
+      descrUrl: './data/quandl/bp.html',
+      nInitFromDate : 10,
+      oneCaption : 'Country:',
+      oneURI : './data/quandl/bp-countries.json',
+      oneJsonProp : 'countries',
+      twoCaption : 'Metric:',
+      twoURI : './data/quandl/bp-metrics.json',
+      twoJsonProp : 'metrics',
+      valueFn : 'RPrefixTwoOne',
+      valueFnPrefix: 'BP',
+      loadId : 'Q',
+      dataSource : 'British Petroleum (Code: BP)'
+    }
+  },
   QE_PETROLEUM_PRICES : {
     type : 'QE_PETROLEUM_PRICES',
     menuTitle : 'Petroleum Prices',
@@ -479,6 +500,21 @@ const DataQE = {
         columnName : 'Close',
         seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume'],
         dataSource : 'Tokyo Stock Exchange (Code: TSE)'
+      }
+  },
+  QE_NIKKEI : {
+      type : 'QE_NIKKEI',
+      menuTitle : 'Nikkei',
+      dialogCaption : 'Nikkei',
+      chartContainerCaption : 'Quandl Nikkei',
+      dialogProps : {
+        descrUrl : './data/quandl/nikkei.html',
+        optionURI : './data/quandl/nikkei.json',
+        optionsJsonProp : 'indexes',
+        valueFn : "RPrefixOne",
+        valueFnPrefix : "NIKKEI",
+        loadId : 'Q',
+        dataSource : 'Nikkei (Code: NIKKEI)'
       }
   },
   QE_STOCK_INDEXES : {

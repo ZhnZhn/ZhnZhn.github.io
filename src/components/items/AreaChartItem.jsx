@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import safeGet from '../../utils/safeGet'
+
 import Header from './Header';
 import ChartToolBar from './ChartToolBar';
 import ShowHide from '../zhn/ShowHide';
@@ -107,10 +109,12 @@ class AreaChartItem extends Component {
      this.mainChart.options.zhDetailCharts.push(metricChart);
   }
   _handlerWillUnLoadedChart = (objChart) => {
-    const charts = this.mainChart.options.zhDetailCharts;
-    this.mainChart.options.zhDetailCharts = charts.filter((chart) => {
-      return chart !== objChart;
-    })
+    const charts = safeGet(this.mainChart, 'options.zhDetailCharts')
+    if (Array.isArray(charts)){
+      this.mainChart.options.zhDetailCharts = charts.filter((chart) => {
+        return chart !== objChart;
+      })
+    }
   }
 
   _handlerToggleOpen = () => {

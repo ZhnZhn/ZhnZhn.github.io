@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _safeGet = require('../../utils/safeGet');
+
+var _safeGet2 = _interopRequireDefault(_safeGet);
+
 var _Header = require('./Header');
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -225,10 +229,12 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handlerWillUnLoadedChart = function (objChart) {
-    var charts = _this3.mainChart.options.zhDetailCharts;
-    _this3.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
-      return chart !== objChart;
-    });
+    var charts = (0, _safeGet2.default)(_this3.mainChart, 'options.zhDetailCharts');
+    if (Array.isArray(charts)) {
+      _this3.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
+        return chart !== objChart;
+      });
+    }
   };
 
   this._handlerToggleOpen = function () {

@@ -50,7 +50,7 @@ const menuQuandl = [
        { id : Quandl.IMF_CROSSCOUNTRY },
        { id : Quandl.EU_COMMISSION },
        { id:  Quandl.OECD },
-       { id:  Quandl.USCENSUS_TRADE, isNew : true }
+       { id:  Quandl.USCENSUS_TRADE }
      ]
   },{
     caption : 'Inflation & Prices',
@@ -69,6 +69,7 @@ const menuQuandl = [
        { id : Quandl.PETROLEUM_PRICES },
        { id : Quandl.JODI_WORLD_GAS },
        { id : Quandl.JODI_WORLD_OIL },
+       { id:  Quandl.BP , isNew : true },
        { id : Quandl.EIA_COAL },
        { id : Quandl.ROGERS_INDICES },
        { id : Quandl.BALTIC_INDICES }
@@ -79,6 +80,7 @@ const menuQuandl = [
        { id : Quandl.EURONEXT_STOCK },
        { id : Quandl.TOKIO_STOCK },
        { id : Quandl.WIKI_STOCK },
+       { id: Quandl.NIKKEI, isNew: true },
        { id : Quandl.STOCK_INDEXES},
        { id : Quandl.UNICORN_RESEARCH }
      ]

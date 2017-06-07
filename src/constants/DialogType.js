@@ -32,6 +32,7 @@ const qeSources = [
   'COMMODITY_TRADE',
   'JODI_WORLD_GAS',
   'JODI_WORLD_OIL',
+  'BP',
   'PETROLEUM_PRICES',
   'EIA_COAL',
   'GLOBAL_INDICATOR',
@@ -52,6 +53,7 @@ const qeSources = [
   'EURONEXT_STOCK',
   'WIKI_STOCK',
   'TOKIO_STOCK',
+  'NIKKEI',
   'STOCK_INDEXES',
   'UNICORN_RESEARCH',
 

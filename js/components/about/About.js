@@ -163,6 +163,40 @@ var About = function (_Component) {
               _react2.default.createElement(
                 _Token2.default,
                 { color: '#80c040' },
+                'ANNOUNCEMENT:'
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              { style: { marginBottom: '16px' } },
+              'Database ',
+              _react2.default.createElement(
+                _Token2.default,
+                { color: 'black' },
+                'GOOG, YAHOO'
+              ),
+              ' will not be hosted by',
+              _react2.default.createElement(
+                _LinkToken2.default,
+                {
+                  href: 'https://www.quandl.com/',
+                  color: '#E05927',
+                  isFirstBlank: true
+                },
+                'Quandl'
+              ),
+              _react2.default.createElement(
+                _Token2.default,
+                { color: '#fdb316', isFirstBlank: true },
+                'from 1, Jule 2017'
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                _Token2.default,
+                { color: '#80c040' },
                 'ERC'
               ),
               _react2.default.createElement(
