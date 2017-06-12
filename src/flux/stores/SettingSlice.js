@@ -17,7 +17,7 @@ const SettingSlice = {
   },
 
   setQuandlKey(value){
-    this.setting.quandlKey = value;
+    this.setting.quandlKey = value
   },
   getQuandlKey(){
     return this.setting.quandlKey;

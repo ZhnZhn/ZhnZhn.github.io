@@ -20,6 +20,10 @@ var _DateUtils = require('../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
+var _safeGet = require('../utils/safeGet');
+
+var _safeGet2 = _interopRequireDefault(_safeGet);
+
 var _Chart = require('./Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
@@ -53,6 +57,22 @@ var C = {
   }
 };
 
+var _fnNoop = function _fnNoop() {};
+
+var _initOptionsZhSeries = function _initOptionsZhSeries(chart) {
+  var options = chart.options,
+      zhSeries = options.zhSeries;
+  if (!zhSeries) {
+    options.zhSeries = {
+      count: 0,
+      titleEls: []
+    };
+  } else if (!zhSeries.titleEls) {
+    zhSeries.titleEls = [];
+  }
+  return options;
+};
+
 var _crYAxisColor = function _crYAxisColor(chart) {
   var _ = chart.yAxis.length;
   if (_ === 1) {
@@ -63,6 +83,58 @@ var _crYAxisColor = function _crYAxisColor(chart) {
     return C.C1_SECOND_Y_AXIS;
   }
 };
+var _addSeries = function _addSeries(_ref) {
+  var chart = _ref.chart,
+      series = _ref.series,
+      label = _ref.label,
+      hasSecondYAxis = _ref.hasSecondYAxis;
+
+  var _color = void 0;
+  if (hasSecondYAxis) {
+    _color = _crYAxisColor(chart);
+    chart.addAxis(_Chart2.default.fSecondYAxis(label, _color));
+    series.yAxis = label;
+    series.color = _color;
+  }
+  chart.addSeries(series, true, true);
+  return _color;
+};
+
+var _renderSeriesLabel = function _renderSeriesLabel(_ref2) {
+  var chart = _ref2.chart,
+      options = _ref2.options,
+      series = _ref2.series,
+      label = _ref2.label,
+      color = _ref2.color;
+
+  var seriesText = label.length > C.SERIA_LABEL_CHARS ? label.substring(0, C.SERIA_LABEL_CHARS) : label,
+      seriesCount = options.zhSeries.count,
+      row = Math.floor(seriesCount / C.SERIA_LABELS_IN_ROW),
+      x = C.SERIA_LABEL_X_DELTA + C.SERIA_LABEL_WIDTH * seriesCount - row * (C.SERIA_LABEL_WIDTH * C.SERIA_LABELS_IN_ROW),
+      y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT * row;
+
+  var textEl = chart.renderer.text(seriesText, x, y).css({
+    color: color ? color : options.colors[series._colorIndex],
+    'font-size': '16px'
+  }).add();
+  return textEl;
+};
+
+var _updateYAxisMin = function _updateYAxisMin(_ref3) {
+  var hasSecondYAxis = _ref3.hasSecondYAxis,
+      series = _ref3.series,
+      _ref3$options = _ref3.options,
+      options = _ref3$options === undefined ? {} : _ref3$options,
+      chart = _ref3.chart;
+
+  var minY = series.minY,
+      min = (0, _safeGet2.default)(options, 'yAxis[0].min'),
+      _yAxis = (0, _safeGet2.default)(chart, 'yAxis[0]'),
+      update = (0, _safeGet2.default)(chart, 'yAxis[0].update', _fnNoop).bind(_yAxis);
+  if (!hasSecondYAxis && minY !== undefined && min > minY) {
+    update({ min: minY, startOnTick: true });
+  }
+};
 
 var ChartFn = {
   addSeriaWithRenderLabel: function addSeriaWithRenderLabel(props) {
@@ -71,42 +143,15 @@ var ChartFn = {
         label = props.label,
         hasSecondYAxis = props.hasSecondYAxis;
 
-    var options = chart.options;
-    if (!options.zhSeries) {
-      options.zhSeries = {
-        count: 0,
-        titleEls: []
-      };
-    } else if (!options.zhSeries.titleEls) {
-      options.zhSeries.titleEls = [];
-    }
 
-    var seriesText = label.length > C.SERIA_LABEL_CHARS ? label.substring(0, C.SERIA_LABEL_CHARS) : label,
-        seriesCount = options.zhSeries.count,
-        row = Math.floor(seriesCount / C.SERIA_LABELS_IN_ROW),
-        x = C.SERIA_LABEL_X_DELTA + C.SERIA_LABEL_WIDTH * seriesCount - row * (C.SERIA_LABEL_WIDTH * C.SERIA_LABELS_IN_ROW),
-        y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT * row;
-
-    var color = void 0;
-    if (hasSecondYAxis) {
-      color = _crYAxisColor(chart);
-      chart.addAxis(_Chart2.default.fSecondYAxis(label, color));
-      series.yAxis = label;
-      series.color = color;
-    }
-    chart.addSeries(series, true, true);
-
-    var textEl = chart.renderer.text(seriesText, x, y).css({
-      color: color ? color : options.colors[series._colorIndex],
-      'font-size': '16px'
-    }).add();
+    var options = _initOptionsZhSeries(chart);
+    var color = _addSeries({ chart: chart, series: series, label: label, hasSecondYAxis: hasSecondYAxis });
+    var textEl = _renderSeriesLabel({ chart: chart, options: options, series: series, label: label, color: color });
 
     options.zhSeries.count += 1;
     options.zhSeries.titleEls.push(textEl);
 
-    if (series.minY !== undefined && options.yAxis[0].min > series.minY) {
-      chart.yAxis[0].update({ min: series.minY, startOnTick: true });
-    }
+    _updateYAxisMin({ hasSecondYAxis: hasSecondYAxis, series: series, options: options, chart: chart });
   },
   handlerMouserOverPoint: function handlerMouserOverPoint(event) {
     var chart = this.series.chart,

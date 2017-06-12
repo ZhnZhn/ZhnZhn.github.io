@@ -4,6 +4,7 @@ import mathFn from '../math/mathFn'
 
 import ArrayUtil from '../utils/ArrayUtil';
 import DateUtils from '../utils/DateUtils';
+import safeGet from '../utils/safeGet';
 
 import Chart from './Chart';
 import ChartConfig from './ChartConfig';
@@ -30,6 +31,22 @@ const C = {
   }
 }
 
+const _fnNoop = () => {};
+
+const _initOptionsZhSeries = (chart) => {
+  const options = chart.options
+      , zhSeries = options.zhSeries;
+  if (!zhSeries){
+    options.zhSeries = {
+      count: 0,
+      titleEls: []
+    }
+  } else if (!zhSeries.titleEls){
+    zhSeries.titleEls = []
+  }
+  return options;
+}
+
 const _crYAxisColor = (chart) => {
   const _ = chart.yAxis.length;
   if (_ === 1) {
@@ -40,55 +57,60 @@ const _crYAxisColor = (chart) => {
     return C.C1_SECOND_Y_AXIS;
   }
 }
+const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
+  let _color;
+  if (hasSecondYAxis){
+    _color = _crYAxisColor(chart)
+    chart.addAxis( Chart.fSecondYAxis(label, _color) )
+    series.yAxis = label
+    series.color = _color
+  }
+  chart.addSeries(series, true, true)
+  return _color;
+}
+
+const _renderSeriesLabel = ({chart, options, series, label, color }) => {
+  const seriesText = (label.length>C.SERIA_LABEL_CHARS)
+            ? label.substring(0, C.SERIA_LABEL_CHARS)
+            : label
+      , seriesCount = options.zhSeries.count
+      , row = Math.floor(seriesCount/C.SERIA_LABELS_IN_ROW)
+      , x = C.SERIA_LABEL_X_DELTA
+            + C.SERIA_LABEL_WIDTH*seriesCount
+            - row*(C.SERIA_LABEL_WIDTH*C.SERIA_LABELS_IN_ROW)
+      , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
+
+  const textEl = chart.renderer.text(seriesText, x, y)
+                  .css({
+                    color: (color) ? color : options.colors[series._colorIndex],
+                    'font-size': '16px'
+                  })
+                  .add();
+  return textEl;
+}
+
+const _updateYAxisMin = ({ hasSecondYAxis, series, options={}, chart }) => {
+  const minY = series.minY
+      , min = safeGet(options, 'yAxis[0].min')
+      , _yAxis = safeGet(chart, 'yAxis[0]')
+      , update = safeGet(chart, 'yAxis[0].update', _fnNoop).bind(_yAxis);
+  if ( !hasSecondYAxis && (minY !== undefined) && min>minY ){
+      update({ min: minY, startOnTick: true });
+  }
+};
 
 const ChartFn = {
   addSeriaWithRenderLabel(props){
     const { chart, series, label, hasSecondYAxis } = props;
-    const options = chart.options;
-    if (!options.zhSeries){
-      options.zhSeries = {
-        count: 0,
-        titleEls: []
-      }
-    } else if (!options.zhSeries.titleEls){
-      options.zhSeries.titleEls = []
-    }
 
-    const seriesText = (label.length>C.SERIA_LABEL_CHARS)
-              ? label.substring(0, C.SERIA_LABEL_CHARS)
-              : label
-        , seriesCount = options.zhSeries.count
-        , row = Math.floor(seriesCount/C.SERIA_LABELS_IN_ROW)
-        , x = C.SERIA_LABEL_X_DELTA
-              + C.SERIA_LABEL_WIDTH*seriesCount
-              - row*(C.SERIA_LABEL_WIDTH*C.SERIA_LABELS_IN_ROW)
-        , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
-
-    let color;
-    if (hasSecondYAxis){
-      color = _crYAxisColor(chart)
-      chart.addAxis(
-        Chart.fSecondYAxis(label, color)
-      )
-      series.yAxis = label
-      series.color = color
-    }
-    chart.addSeries(series, true, true)
-
-    const textEl = chart.renderer.text(seriesText, x, y)
-                    .css({
-                      color: (color) ? color : options.colors[series._colorIndex],
-                      'font-size': '16px'
-                    })
-                    .add();
+    const options = _initOptionsZhSeries(chart);
+    const color = _addSeries({ chart, series, label, hasSecondYAxis })
+    const textEl = _renderSeriesLabel({ chart, options, series, label, color })
 
     options.zhSeries.count +=1
     options.zhSeries.titleEls.push(textEl)
 
-    if ( (series.minY !== undefined) && options.yAxis[0].min>series.minY ){
-        chart.yAxis[0].update({ min: series.minY, startOnTick: true });
-    }
-
+    _updateYAxisMin({ hasSecondYAxis, series, options, chart })
   },
 
   handlerMouserOverPoint(event){

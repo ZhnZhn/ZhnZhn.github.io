@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import ProgressLoading from './ProgressLoading';
-import AppLabel from './AppLabel';
-import IconLogoErc from './IconLogoErc';
-import ActionButton from '../zhn/ActionButton';
-import LimitRemainingLabel from './LimitRemainingLabel';
-import PanelBrowsers from './PanelBrowsers';
-import ComponentActions from '../../flux/actions/ComponentActions';
-import BrowserActions from '../../flux/actions/BrowserActions';
-import BrowserConfig from '../../constants/BrowserConfig';
-import { BrowserType, ModalDialog } from '../../constants/Type';
+import ProgressLoading from './ProgressLoading'
+import AppLabel from './AppLabel'
+import IconLogoErc from './IconLogoErc'
+import ActionButton from '../zhn/ActionButton'
+import LimitRemainingLabel from './LimitRemainingLabel'
+import PanelBrowsers from './PanelBrowsers'
+import ComponentActions from '../../flux/actions/ComponentActions'
+import BrowserActions from '../../flux/actions/BrowserActions'
+import BrowserConfig from '../../constants/BrowserConfig'
+import { BrowserType, ModalDialog } from '../../constants/Type'
 
 
-const LOGO_TITLE = "ERC : Economic RESTful Client v0.13.0"
-    , CAPTION = "ERC v0.13.0";
+const LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0"
+    , CAPTION = "ERC v0.14.0";
 
 const styles = {
   rootDiv : {
@@ -64,38 +64,27 @@ class HeaderBar extends Component {
     }
   }
 
-
   _handleClickQuandl = () => {
-    //BrowserActions.showBrowser(BrowserType.QUANDL);
-    BrowserActions.showBrowser(BrowserType.ECONOMIC);
-    this.setState({ isDS: false });
+    BrowserActions.showBrowser(BrowserType.ECONOMIC)
+    this.setState({ isDS: false })
   }
 
   _handleClickDynamic = (browserConfig) => {
-    BrowserActions.showBrowserDynamic(browserConfig);
-    this.setState({ isDS: false });
+    BrowserActions.showBrowserDynamic(browserConfig)
+    this.setState({ isDS: false })
   }
 
   _handleClickWatch = () => {
-    BrowserActions.showBrowser(BrowserType.WATCH_LIST);
-    this.setState({ isDS: false });
+    BrowserActions.showBrowser(BrowserType.WATCH_LIST)
+    this.setState({ isDS: false })
   }
 
   _handleClickDS = () => {
-    this.setState({ isDS: !this.state.isDS });
+    this.setState({ isDS: !this.state.isDS })
   }
   _handleDialogSettings = () => {
-    //const { store } = this.props;
     ComponentActions.showModalDialog(
       ModalDialog.SETTINGS, this._settingFn
-      /*
-      {
-         setQuandlKey: store.setQuandlKey.bind(store),
-         isAdminMode: store.isAdminMode.bind(store),
-         isDrawDeltaExtrems: store.isDrawDeltaExtrems.bind(store),
-         isZoomToMinMax: store.isZoomToMinMax.bind(store)
-      }
-      */
     )
   }
 

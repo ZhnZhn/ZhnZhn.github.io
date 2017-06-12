@@ -52,11 +52,14 @@ const _fnTooltipSparkType4 = function({
   </div>`
 }
 
-const _fnBaseTooltip = function({date, id, valueText, value}){
+const _fnBaseTooltip = function({date, id, color, valueText, value}){
+  const _style = (color)
+           ? `style="color:${color};"`
+           : '';
   return _fnTooltipHeader(date, id) +
   `<div class="tp__body">
   <span class="tp__body__title">${valueText}:&nbsp;</span>
-  <span class="tp__body__value">${value}</span>
+  <span class="tp__body__value" ${_style}>${value}</span>
   </div>`
 }
 
@@ -81,7 +84,7 @@ const _fnSplitRatio = function({date, id, valueText, value, point}){
 }
 
 const _fnVolumeTooltip = function({ date, id, value, point }){
-  const { _open='NoData', _close='', _low='', _high='' } = point;  
+  const { _open='NoData', _close='', _low='', _high='' } = point;
   return _fnTooltipHeader(date, id) +
   `<div class="tp__body">
   <span class="tp__body__title">Volume: </span>
@@ -206,24 +209,29 @@ const _fnAddHandlerCloseAndSparklines = function(id, point){
 
 const _fnBasePointFormatter = function( option ){
   return function(){
-    var {
+   const {
           fnTemplate, onAfterRender=_fnAddHandlerClose,
-          isWithValueText=false, isWithValue=false
-        } = option
-      , point = this
-      , id = point.series.options.zhSeriaId
-      , date = Highcharts.dateFormat('%A, %b %d, %Y', point.x)
-      , valueText = (isWithValueText) ? point.series.userOptions.zhValueText : null
-      , value = (isWithValue) ? _fnNumberFormat(point.y) : null;
+          isWithColor, isWithValueText, isWithValue
+         } = option
+       , point = this
+       , series = point.series
+       , id = series.options.zhSeriaId
+       , date = Highcharts.dateFormat('%A, %b %d, %Y', point.x)
+       , color = (isWithColor && series.index !==0 )
+            ? series.color
+            : undefined
+       , valueText = (isWithValueText) ? series.userOptions.zhValueText : null
+       , value = (isWithValue) ? _fnNumberFormat(point.y) : null;
 
-      onAfterRender(id, point);
+       onAfterRender(id, point)
 
-      return fnTemplate({date, id, valueText, value, point});
+       return fnTemplate({ date, id, color, valueText, value, point });
   }
 }
 
 Tooltip.fnBasePointFormatter = _fnBasePointFormatter({
-  fnTemplate : _fnBaseTooltip, isWithValueText: true, isWithValue: true
+  fnTemplate : _fnBaseTooltip,
+  isWithColor: true, isWithValueText: true, isWithValue: true
 });
 Tooltip.fnExDividendPointFormatter = _fnBasePointFormatter({
   fnTemplate: _fnExDividend

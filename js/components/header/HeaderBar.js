@@ -64,8 +64,8 @@ var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var LOGO_TITLE = "ERC : Economic RESTful Client v0.13.0",
-    CAPTION = "ERC v0.13.0";
+var LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0",
+    CAPTION = "ERC v0.14.0";
 
 var styles = {
   rootDiv: {
@@ -114,7 +114,6 @@ var HeaderBar = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this));
 
     _this._handleClickQuandl = function () {
-      //BrowserActions.showBrowser(BrowserType.QUANDL);
       _BrowserActions2.default.showBrowser(_Type.BrowserType.ECONOMIC);
       _this.setState({ isDS: false });
     };
@@ -134,17 +133,7 @@ var HeaderBar = function (_Component) {
     };
 
     _this._handleDialogSettings = function () {
-      //const { store } = this.props;
-      _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, _this._settingFn
-      /*
-      {
-         setQuandlKey: store.setQuandlKey.bind(store),
-         isAdminMode: store.isAdminMode.bind(store),
-         isDrawDeltaExtrems: store.isDrawDeltaExtrems.bind(store),
-         isZoomToMinMax: store.isZoomToMinMax.bind(store)
-      }
-      */
-      );
+      _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, _this._settingFn);
     };
 
     _this._settingFn = props.store.exportSettingFn();

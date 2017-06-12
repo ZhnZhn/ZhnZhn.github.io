@@ -52,10 +52,12 @@ var _fnTooltipSparkType4 = function _fnTooltipSparkType4(_ref) {
 var _fnBaseTooltip = function _fnBaseTooltip(_ref2) {
   var date = _ref2.date,
       id = _ref2.id,
+      color = _ref2.color,
       valueText = _ref2.valueText,
       value = _ref2.value;
 
-  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">' + valueText + ':&nbsp;</span>\n  <span class="tp__body__value">' + value + '</span>\n  </div>');
+  var _style = color ? 'style="color:' + color + ';"' : '';
+  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">' + valueText + ':&nbsp;</span>\n  <span class="tp__body__value" ' + _style + '>' + value + '</span>\n  </div>');
 };
 
 var _fnExDividend = function _fnExDividend(_ref3) {
@@ -219,24 +221,26 @@ var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
     var fnTemplate = option.fnTemplate,
         _option$onAfterRender = option.onAfterRender,
         onAfterRender = _option$onAfterRender === undefined ? _fnAddHandlerClose : _option$onAfterRender,
-        _option$isWithValueTe = option.isWithValueText,
-        isWithValueText = _option$isWithValueTe === undefined ? false : _option$isWithValueTe,
-        _option$isWithValue = option.isWithValue,
-        isWithValue = _option$isWithValue === undefined ? false : _option$isWithValue,
+        isWithColor = option.isWithColor,
+        isWithValueText = option.isWithValueText,
+        isWithValue = option.isWithValue,
         point = this,
-        id = point.series.options.zhSeriaId,
+        series = point.series,
+        id = series.options.zhSeriaId,
         date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x),
-        valueText = isWithValueText ? point.series.userOptions.zhValueText : null,
+        color = isWithColor && series.index !== 0 ? series.color : undefined,
+        valueText = isWithValueText ? series.userOptions.zhValueText : null,
         value = isWithValue ? _fnNumberFormat(point.y) : null;
 
     onAfterRender(id, point);
 
-    return fnTemplate({ date: date, id: id, valueText: valueText, value: value, point: point });
+    return fnTemplate({ date: date, id: id, color: color, valueText: valueText, value: value, point: point });
   };
 };
 
 Tooltip.fnBasePointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnBaseTooltip, isWithValueText: true, isWithValue: true
+  fnTemplate: _fnBaseTooltip,
+  isWithColor: true, isWithValueText: true, isWithValue: true
 });
 Tooltip.fnExDividendPointFormatter = _fnBasePointFormatter({
   fnTemplate: _fnExDividend
