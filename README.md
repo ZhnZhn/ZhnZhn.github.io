@@ -1,4 +1,4 @@
-# [ERC] (https://zhnzhn.github.io)
+# [ERC](https://zhnzhn.github.io)
 ERC is an economic RESTful client.
 With it, you can view economic free open data from WEB.  
 Data providers: [Quandl](https://www.quandl.com), [Eurostat](http://ec.europa.eu/eurostat/web/main/home)   
