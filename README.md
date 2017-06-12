@@ -3,7 +3,7 @@ ERC is an economic RESTful client.
 With it, you can view economic free open data from WEB.  
 Data providers: [Quandl](https://www.quandl.com), [Eurostat](http://ec.europa.eu/eurostat/web/main/home)   
 
-![alt text](screenshots/currency.png?raw=true "Currency History")
+![alt text](screencast/erc-currency-example.png?raw=true "Currency History")
 
 **1.** **Choose a data source Browser from the header bar.**  
 **2.** **Choose a dataset menu item in a Browser.**   
