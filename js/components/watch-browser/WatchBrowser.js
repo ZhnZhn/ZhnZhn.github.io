@@ -82,6 +82,9 @@ var _withDnDItem2 = _interopRequireDefault(_withDnDItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C_FILL_OPEN = '#80c040';
+var CL_WATCH_ITEM = 'row__type2-topic not-selected';
+
 var DRAG = {
   GROUP: 'GROUP',
   LIST: 'LIST',
@@ -188,7 +191,7 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
           _OpenClose2.default,
           {
             key: index,
-            fillOpen: '#80c040',
+            fillOpen: C_FILL_OPEN,
             style: styles.listDiv,
             styleNotSelected: styles.itemNotSelected,
             caption: caption,
@@ -211,12 +214,11 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
 
       return items.map(function (item, index) {
         var id = item.id,
-            caption = item.caption,
-            _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
+            caption = item.caption;
 
         return _react2.default.createElement(_WatchItem2.default, {
           key: id,
-          className: _className,
+          className: CL_WATCH_ITEM,
           isModeEdit: isModeEdit,
           item: item,
           option: { groupCaption: groupCaption, listCaption: listCaption, caption: caption },

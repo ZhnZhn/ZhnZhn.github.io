@@ -6,11 +6,14 @@ import ActionButton from '../zhn/ActionButton';
 
 import SelectWithLoad from './SelectWithLoad';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
+import RowCheckBox from './RowCheckBox';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
 
 import withToolbar from './decorators/withToolbar';
 import withValidationLoad from './decorators/withValidationLoad'
+
+const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 @withToolbar
 @withValidationLoad
@@ -40,8 +43,13 @@ class DialogType4 extends Component {
     this.one = undefined;
     this.two = undefined;
     this.toolbarButtons = this._createType2WithToolbar(props);
+    this.toolbarButtons.push({
+      caption: 'O', title: 'Toggle Options Input',
+      onClick: this._handleClickOptions
+    })
     this.state = {
       isShowDate : true,
+      isShowOptions: false,
       validationMessages: []
     }
   }
@@ -53,6 +61,10 @@ class DialogType4 extends Component {
        }
     }
     return true;
+  }
+
+  _handleClickOptions = () => {
+    this.setState({ isShowOptions: !this.state.isShowOptions })
   }
 
   _handleSelectOne = (one) => {
@@ -84,14 +96,20 @@ class DialogType4 extends Component {
   _createLoadOption = () => {
     const { fromDate, toDate } = this.datesFragment.getValues();
     return this.props.loadFn(
-      this.props,
-      { one : this.one, two : this.two, fromDate, toDate }
-    );    
+      this.props, {
+        one : this.one, two : this.two, fromDate, toDate,
+        hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
+      }
+    );
   }
 
   _handleClose = () => {
     this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
+  }
+
+  _handleMode = (propName, value) => {
+     this[propName] = value
   }
 
   render(){
@@ -101,7 +119,10 @@ class DialogType4 extends Component {
            twoCaption, twoURI, twoJsonProp,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, validationMessages } = this.state
+        , {
+            isShowDate, isShowOptions,
+            validationMessages
+          } = this.state
         , _commandButtons = [
        <ActionButton
           key="a"
@@ -148,6 +169,14 @@ class DialogType4 extends Component {
                  initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
+               />
+             </ShowHide>
+             <ShowHide isShow={isShowOptions}>
+               <RowCheckBox
+                 initValue={false}
+                 caption="Add Seria with Second YAxis"
+                 onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
+                 onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
                />
              </ShowHide>
              <ValidationMessages

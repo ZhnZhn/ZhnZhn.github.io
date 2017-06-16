@@ -4,6 +4,7 @@ import ProgressLoading from './ProgressLoading'
 import AppLabel from './AppLabel'
 import IconLogoErc from './IconLogoErc'
 import ActionButton from '../zhn/ActionButton'
+import ModalButton from '../zhn/ModalButton'
 import LimitRemainingLabel from './LimitRemainingLabel'
 import PanelBrowsers from './PanelBrowsers'
 import ComponentActions from '../../flux/actions/ComponentActions'
@@ -79,9 +80,18 @@ class HeaderBar extends Component {
     this.setState({ isDS: false })
   }
 
+  _onRegDS = (dsNode) => {
+    this.dsNode = dsNode
+  }
   _handleClickDS = () => {
     this.setState({ isDS: !this.state.isDS })
   }
+  _handleCloseDS = (event) => {
+    if (!this.dsNode.contains(event.target)){
+      this.setState({ isDS: false })
+    }
+  }
+
   _handleDialogSettings = () => {
     ComponentActions.showModalDialog(
       ModalDialog.SETTINGS, this._settingFn
@@ -103,15 +113,16 @@ class HeaderBar extends Component {
             caption={CAPTION}
          />
 
-         <ActionButton
+         <ModalButton
            style={styles.btDS}
            type="TypeA"
            caption="DS"
            title="Data Source Browsers"
            onClick={this._handleClickDS}
+           onReg={this._onRegDS}
          >
            <span className={'arrow-down'}></span>
-         </ActionButton>
+         </ModalButton>
 
 
         <ActionButton
@@ -164,6 +175,7 @@ class HeaderBar extends Component {
               isShow={isDS}
               BROWSER={BrowserType}
               browserConfig={BrowserConfig}
+              onClose={this._handleCloseDS}
               onClickQuandl={this._handleClickQuandl}
               onClickDynamic={this._handleClickDynamic}
               onClickWatch={this._handleClickWatch}

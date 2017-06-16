@@ -40,6 +40,10 @@ var _ActionButton = require('../zhn/ActionButton');
 
 var _ActionButton2 = _interopRequireDefault(_ActionButton);
 
+var _ModalButton = require('../zhn/ModalButton');
+
+var _ModalButton2 = _interopRequireDefault(_ModalButton);
+
 var _LimitRemainingLabel = require('./LimitRemainingLabel');
 
 var _LimitRemainingLabel2 = _interopRequireDefault(_LimitRemainingLabel);
@@ -128,8 +132,18 @@ var HeaderBar = function (_Component) {
       _this.setState({ isDS: false });
     };
 
+    _this._onRegDS = function (dsNode) {
+      _this.dsNode = dsNode;
+    };
+
     _this._handleClickDS = function () {
       _this.setState({ isDS: !_this.state.isDS });
+    };
+
+    _this._handleCloseDS = function (event) {
+      if (!_this.dsNode.contains(event.target)) {
+        _this.setState({ isDS: false });
+      }
     };
 
     _this._handleDialogSettings = function () {
@@ -162,13 +176,14 @@ var HeaderBar = function (_Component) {
           caption: CAPTION
         }),
         _react2.default.createElement(
-          _ActionButton2.default,
+          _ModalButton2.default,
           {
             style: styles.btDS,
             type: 'TypeA',
             caption: 'DS',
             title: 'Data Source Browsers',
-            onClick: this._handleClickDS
+            onClick: this._handleClickDS,
+            onReg: this._onRegDS
           },
           _react2.default.createElement('span', { className: 'arrow-down' })
         ),
@@ -216,6 +231,7 @@ var HeaderBar = function (_Component) {
           isShow: isDS,
           BROWSER: _Type.BrowserType,
           browserConfig: _BrowserConfig2.default,
+          onClose: this._handleCloseDS,
           onClickQuandl: this._handleClickQuandl,
           onClickDynamic: this._handleClickDynamic,
           onClickWatch: this._handleClickWatch

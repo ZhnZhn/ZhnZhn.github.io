@@ -13,9 +13,10 @@ import MenuListType2 from './MenuListType2';
 
 const SEARCH_PLACEHOLDER = "Search By Symbol Or Name"
 
-const CLASS = {
+const CL = {
   BROWSER : "scroll-browser-by",
-  BROWSER_WITH_SEARCH : "scroll-browser-by--search"
+  BROWSER_WITH_SEARCH : "scroll-browser-by--search",
+  ROW_ITEM: 'row__type2-topic not-selected'
 }
 
 const STYLE = {
@@ -51,7 +52,7 @@ class MenuBrowserDynamic2 extends Component {
     this.state = {
       isShow: isInitShow ? true : false,
       isShowSearch : false,
-      scrollClass : CLASS.BROWSER,
+      scrollClass : CL.BROWSER,
       isLoaded : false,
       menuItems: []
     }
@@ -79,7 +80,7 @@ class MenuBrowserDynamic2 extends Component {
     const { browserType, showAction, loadCompletedAction } = this.props;
     if (actionType === showAction && data === browserType){
       this._handleShow();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType){      
+    } else if (actionType === loadCompletedAction && data.browserType === browserType){
       this.setState({ menuItems: data.json, isLoaded : true });
     }
   }
@@ -99,12 +100,12 @@ class MenuBrowserDynamic2 extends Component {
     if (this.state.isShowSearch){
       this.setState({
          isShowSearch: false,
-         scrollClass: CLASS.BROWSER
+         scrollClass: CL.BROWSER
        });
     } else {
       this.setState({
          isShowSearch: true,
-         scrollClass: CLASS.BROWSER_WITH_SEARCH
+         scrollClass: CL.BROWSER_WITH_SEARCH
        });
     }
   }
@@ -160,6 +161,7 @@ class MenuBrowserDynamic2 extends Component {
             <MenuListType2
                model={menuItems}
                ItemComp={ItemComp}
+               itemClassName={CL.ROW_ITEM}
                onClickItem={this._handleClickItem}
             />
             {children}

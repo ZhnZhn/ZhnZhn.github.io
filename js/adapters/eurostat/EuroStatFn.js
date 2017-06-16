@@ -29,8 +29,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var COLOR_EU = "#0088FF";
 var COLOR_EA = "#FF5800";
 //const COLOR_BAR = "#92D050";
-var EU_CODES = ["EU27", "EU28", "EU"];
-var EA_CODES = ["EA"];
+var EU_CODES = ["EU", "EU27", "EU28"];
+var EA_CODES = ["EA", "EA18", "EA19"];
 
 var SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 

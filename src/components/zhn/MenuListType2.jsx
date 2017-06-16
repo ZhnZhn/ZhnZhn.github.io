@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import OpenClose2 from './OpenClose2'
 
+const C_FILL_OPEN = "#80c040";
+
 const MODEL_PROP = {
   CAPTION : 'caption',
   GROUPS : 'groups',
@@ -54,16 +56,13 @@ class MenuListType2 extends Component{
   }
 
  _renderLevel3 = (items=[], captionProp) => {
-   const { ItemComp, onClickItem } = this.props;
+   const { itemClassName, ItemComp, onClickItem } = this.props;
    return items.map((item, index) => {
-     const caption  = item[captionProp]
-         , _className = (index % 2)
-              ? 'row__topic__even not-selected'
-              : 'row__topic__odd not-selected'
+     const caption  = item[captionProp];
      return (
        <ItemComp
           key={index}
-          className={_className}
+          className={itemClassName}
           caption={caption}
           item={item}
           onClickItem={onClickItem}
@@ -74,12 +73,12 @@ class MenuListType2 extends Component{
 
   _renderLevel2 = (lists=[], captionProp, itemsProp) => {
     return lists.map((list, index) => {
-      const  caption  = list[captionProp]
-      , items = list[itemsProp]
+      const caption  = list[captionProp]
+          , items = list[itemsProp];
       return (
         <OpenClose2
            key={index}
-           fillOpen={'#80c040'}
+           fillOpen={C_FILL_OPEN}
            style={STYLE.LIST_DIV}
            styleNotSelected={STYLE.LIST_DIV_NOT_SELECTED}
            isClose={true}
@@ -98,7 +97,7 @@ class MenuListType2 extends Component{
      , _groupsProp = level1 || MODEL_PROP.GROUPS
      , _listsProp = level2 || MODEL_PROP.LISTS
      , _itemsProp = level3 || MODEL_PROP.ITEMS
-     , groups = model[_groupsProp] || []
+     , groups = model[_groupsProp] || [];
 
      return groups.map((group, index) => {
         const caption  = group[_captionProp]

@@ -1,0 +1,22 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\ModalButton.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\ModalButton.js",
+ "sourceRoot": "",
+ "names": [
+  "ModalButton",
+  "onReg",
+  "props",
+  "rootNode",
+  "type",
+  "style",
+  "title",
+  "caption",
+  "children",
+  "onClick",
+  "_className",
+  "n"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;IAEMA,W;;;;;;;;;;wCAEe;AAAA,UACTC,KADS,GACC,KAAKC,KADN,CACTD,KADS;;AAEjB,UAAI,OAAOA,KAAP,KAAiB,UAArB,EAAgC;AAC9BA,cAAM,KAAKE,QAAX;AACD;AACF;;;6BAEO;AAAA;;AAAA,mBAII,KAAKD,KAJT;AAAA,UAEEE,IAFF,UAEEA,IAFF;AAAA,UAEQC,KAFR,UAEQA,KAFR;AAAA,UAEeC,KAFf,UAEeA,KAFf;AAAA,UAEsBC,OAFtB,UAEsBA,OAFtB;AAAA,UAGEC,QAHF,UAGEA,QAHF;AAAA,UAGYC,OAHZ,UAGYA,OAHZ;;AAKN,UAAIC,mBAAJ;AACA,cAAQN,IAAR;AACE,aAAK,OAAL;AAAcM,uBAAa,eAAb,CAA8B;AAC5C,aAAK,OAAL;AAAcA,uBAAa,eAAb,CAA8B;AAC5C;AAAcA,uBAAa,eAAb;AAHhB;;AAMA,aACE;AAAA;AAAA;AACK,eAAK;AAAA,mBAAK,OAAKP,QAAL,GAAgBQ,CAArB;AAAA,WADV;AAEK,qBAAWD,UAFhB;AAGK,iBAAOL,KAHZ;AAIK,iBAAOC,KAJZ;AAKK,mBAASG;AALd;AAOIF,eAPJ;AAQIC;AARJ,OADF;AAYD;;;;;kBAGYR,W"
+}

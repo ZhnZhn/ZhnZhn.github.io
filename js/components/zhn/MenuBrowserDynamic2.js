@@ -60,9 +60,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SEARCH_PLACEHOLDER = "Search By Symbol Or Name";
 
-var CLASS = {
+var CL = {
   BROWSER: "scroll-browser-by",
-  BROWSER_WITH_SEARCH: "scroll-browser-by--search"
+  BROWSER_WITH_SEARCH: "scroll-browser-by--search",
+  ROW_ITEM: 'row__type2-topic not-selected'
 };
 
 var STYLE = {
@@ -138,12 +139,12 @@ var MenuBrowserDynamic2 = function (_Component) {
       if (_this.state.isShowSearch) {
         _this.setState({
           isShowSearch: false,
-          scrollClass: CLASS.BROWSER
+          scrollClass: CL.BROWSER
         });
       } else {
         _this.setState({
           isShowSearch: true,
-          scrollClass: CLASS.BROWSER_WITH_SEARCH
+          scrollClass: CL.BROWSER_WITH_SEARCH
         });
       }
     };
@@ -169,7 +170,7 @@ var MenuBrowserDynamic2 = function (_Component) {
     _this.state = {
       isShow: isInitShow ? true : false,
       isShowSearch: false,
-      scrollClass: CLASS.BROWSER,
+      scrollClass: CL.BROWSER,
       isLoaded: false,
       menuItems: []
     };
@@ -238,6 +239,7 @@ var MenuBrowserDynamic2 = function (_Component) {
           _react2.default.createElement(_MenuListType2.default, {
             model: menuItems,
             ItemComp: ItemComp,
+            itemClassName: CL.ROW_ITEM,
             onClickItem: this._handleClickItem
           }),
           children

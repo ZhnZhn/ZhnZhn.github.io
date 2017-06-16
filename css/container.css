@@ -28,9 +28,8 @@
   outline: 0px none;
 }
 
-.row__topic:nth-child(odd) {
+.row__topic {
   line-height: 2;
-  background-color: #404040;
   color: black;
   font-size: 16px;
   font-weight: bold;
@@ -39,32 +38,32 @@
   padding-left: 12px;
   cursor: pointer;
 }
-.row__topic:nth-child(even) {
-  line-height: 2;
-  color: black;
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 12px;
-  cursor: pointer;
+.row__topic:nth-child(odd) {
+  background-color: #404040;
 }
 .row__topic:hover {
   border-bottom: 1px solid #1B75BB;
 }
 
-.row__topic__odd {
-  line-height: 2;
+.row__pane-topic {
+  line-height: 2.2;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 16px;
+  padding-right: 16px;
+  cursor: pointer;
+}
+.row__pane-topic:nth-child(odd){
   background-color: #404040;
-  color: black;
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 4px;
-  cursor: pointer;
 }
-.row__topic__even {
+.row__pane-topic:hover{
+   border-bottom: 1px solid #1B75BB;
+}
+
+.row__type2-topic {
   line-height: 2;
   color: black;
   font-size: 16px;
@@ -74,21 +73,21 @@
   padding-left: 4px;
   cursor: pointer;
 }
-.row__topic__odd:hover, .row__topic__even:hover {
+.row__type2-topic:nth-child(odd) {
+  background-color: #404040;
+}
+.row__type2-topic:hover {
   border-bottom: 1px solid #1B75BB;
 }
 
 .item__quandl{
   color: #e05927;
-  line-height: 2;
 }
 .item__eurostat{
   color: #009ae5;
-  line-height: 2;
 }
 .item__watch{
   color: #80c040;
-  line-height: 2;
 }
 
 .menu__badge {

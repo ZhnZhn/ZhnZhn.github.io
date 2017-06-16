@@ -43,7 +43,6 @@
   left : 80px;
 
   background-color: rgba(77, 77, 77, 1);
-  border : 2px solid rgba(35, 47, 59, 1);
   border-bottom: 4px solid green;
   border-radius : 5px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 5px;
@@ -51,8 +50,6 @@
   padding : 10px;
   padding-top : 5px;
   padding-bottom : 5px;
-
-  width: 280px;
 }
 @media screen and (max-width:712px){
   .header__app-label {

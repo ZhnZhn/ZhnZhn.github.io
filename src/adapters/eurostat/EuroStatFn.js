@@ -8,8 +8,8 @@ import ChoroplethMapSlice from './ChoroplethMapSlice';
 const COLOR_EU = "#0088FF";
 const COLOR_EA = "#FF5800";
 //const COLOR_BAR = "#92D050";
-const EU_CODES = ["EU27", "EU28", "EU" ];
-const EA_CODES = ["EA"]
+const EU_CODES = ["EU", "EU27", "EU28"];
+const EA_CODES = ["EA", "EA18", "EA19"];
 
 const SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 

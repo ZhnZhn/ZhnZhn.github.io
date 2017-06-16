@@ -17,6 +17,9 @@ import withDnDGroup from './decorators/withDnDGroup';
 import withDnDList from './decorators/withDnDList';
 import withDnDItem from './decorators/withDnDItem';
 
+const C_FILL_OPEN = '#80c040';
+const CL_WATCH_ITEM = 'row__type2-topic not-selected';
+
 const DRAG = {
   GROUP : 'GROUP',
   LIST : 'LIST',
@@ -150,7 +153,7 @@ class WatchBrowser extends Component {
       return (
         <OpenClose2
            key={index}
-           fillOpen={'#80c040'}
+           fillOpen={C_FILL_OPEN}
            style={styles.listDiv}
            styleNotSelected={styles.itemNotSelected}
            caption={caption}
@@ -180,14 +183,11 @@ class WatchBrowser extends Component {
   _renderItems = (items, groupCaption, listCaption) => {
       const {isModeEdit} = this.state;
       return items.map((item, index) => {
-        const { id, caption } = item
-            , _className = (index % 2)
-                 ? 'row__topic__even not-selected'
-                 : 'row__topic__odd not-selected';
+        const { id, caption } = item;
         return (
             <WatchItem
                key={id}
-               className={_className}
+               className={CL_WATCH_ITEM}
                isModeEdit={isModeEdit}
                item={item}
                option={{ groupCaption, listCaption, caption }}

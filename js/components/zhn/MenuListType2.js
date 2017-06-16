@@ -30,6 +30,8 @@ var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C_FILL_OPEN = "#80c040";
+
 var MODEL_PROP = {
   CAPTION: 'caption',
   GROUPS: 'groups',
@@ -88,15 +90,15 @@ var MenuListType2 = function (_Component) {
       var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       var captionProp = arguments[1];
       var _this$props = _this.props,
+          itemClassName = _this$props.itemClassName,
           ItemComp = _this$props.ItemComp,
           onClickItem = _this$props.onClickItem;
 
       return items.map(function (item, index) {
-        var caption = item[captionProp],
-            _className = index % 2 ? 'row__topic__even not-selected' : 'row__topic__odd not-selected';
+        var caption = item[captionProp];
         return _react2.default.createElement(ItemComp, {
           key: index,
-          className: _className,
+          className: itemClassName,
           caption: caption,
           item: item,
           onClickItem: onClickItem
@@ -114,7 +116,7 @@ var MenuListType2 = function (_Component) {
           _OpenClose2.default,
           {
             key: index,
-            fillOpen: '#80c040',
+            fillOpen: C_FILL_OPEN,
             style: STYLE.LIST_DIV,
             styleNotSelected: STYLE.LIST_DIV_NOT_SELECTED,
             isClose: true,
@@ -179,4 +181,4 @@ var MenuListType2 = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuListType2;
-//# sourceMappingURL=MenuListType2.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuListType2.js.map
