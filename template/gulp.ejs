@@ -32,8 +32,10 @@
       };
       if (!Object.assign){
         polyfill.add('lib/es6-shim.min.js')
-                .add('lib/es6-promise.min.js')
-                .add('lib/fetch.min.js');
+                .add('lib/es6-promise.min.js');
+      }
+      if (!fetch){
+        polyfill.add('lib/fetch.min.js')
       }
       if (!Array.isArray) {
         Array.isArray = function(arg) {
