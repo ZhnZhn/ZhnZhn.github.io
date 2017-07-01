@@ -8,6 +8,10 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _rToConfig2;
 
 var _lodash = require('lodash.flow');
@@ -42,6 +46,10 @@ var _QuandlFn = require('./QuandlFn2');
 
 var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
+var _AdapterFn = require('./AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+
 var _QuandlToPie = require('./QuandlToPie');
 
 var _QuandlToStackedArea = require('./QuandlToStackedArea');
@@ -50,9 +58,13 @@ var _QuandlToStackedColumn = require('./QuandlToStackedColumn');
 
 var _QuandlToTreeMap = require('./QuandlToTreeMap');
 
+var _Colors = require('./Colors');
+
+var _Colors2 = _interopRequireDefault(_Colors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var C = {
+var C = (0, _extends3.default)({
   OPEN: "Open",
   CLOSE: "Close",
   PRICE: 'Price',
@@ -61,15 +73,8 @@ var C = {
   VOLUME: "Volume",
   EX_DIVIDEND: "Ex-Dividend",
   SPLIT_RATIO: "Split Ratio",
-  UNKNOWN: "Unknown",
-
-  COLOR_BLUE: "#2f7ed8", // #7cb5ec
-  COLOR_GREEN: "#80c040",
-  COLOR_RED: "#F44336",
-  COLOR_WHITE: "white",
-  //COLOR_GRAY : "gray"
-  COLOR_GRAY: '#607d8b'
-};
+  UNKNOWN: "Unknown"
+}, _Colors2.default);
 
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
   var arrDate = point[0].split('-');
@@ -161,28 +166,11 @@ var _fnAddVolume = function _fnAddVolume(optionIndex, result) {
       _open = open ? point[open] : undefined;
 
   dataVolume.push([dateUTC, point[volume]]);
-  if (_open && point[close] > _open) {
-    dataVolumeColumn.push({
-      x: dateUTC, y: point[volume],
-      _open: _open, _close: point[close],
-      _low: point[low], _high: point[high],
-      color: C.COLOR_GREEN
-    });
-  } else if (_open && point[close] < _open) {
-    dataVolumeColumn.push({
-      x: dateUTC, y: point[volume],
-      _open: _open, _close: point[close],
-      _low: point[low], _high: point[high],
-      color: C.COLOR_RED
-    });
-  } else {
-    dataVolumeColumn.push({
-      x: dateUTC, y: point[volume],
-      _open: _open, _close: point[close],
-      _low: point[low], _high: point[high],
-      color: C.COLOR_GRAY
-    });
-  }
+  dataVolumeColumn.push(_AdapterFn2.default.volumeColumnPoint({
+    open: _open, close: point[close], date: dateUTC, volume: point[volume],
+    option: { _low: point[low], _high: point[high] }
+  }));
+
   return result;
 };
 
@@ -197,27 +185,10 @@ var _fnAddATH = function _fnAddATH(optionIndex, result) {
 
 
   if (len > 1) {
-    var prevPoint = seria[len - 2],
-        _closePrev = prevPoint[1],
-        _bDelta = point[open] && _closePrev ? (0, _big2.default)(_closePrev).minus(point[open]) : (0, _big2.default)('0.0'),
-        _bPercent = _closePrev ? _bDelta.times(100).div(_closePrev).abs().toFixed(2) : (0, _big2.default)('0.0');
-
-    var _color = void 0;
-    if (_bDelta.gt(0.0)) {
-      _color = C.COLOR_RED;
-    } else if (!_bDelta.gte(0.0)) {
-      _color = C.COLOR_GREEN;
-    } else {
-      _color = point[open] ? C.COLOR_GRAY : C.COLOR_WHITE;
-    }
-
-    dataATH.push({
-      x: dateUTC,
-      y: parseFloat(_bPercent),
-      close: _closePrev,
-      open: point[open] ? point[open] : C.UNKNOWN,
-      color: _color
-    });
+    var _prevPoint = seria[len - 2];
+    dataATH.push(_AdapterFn2.default.athPoint({
+      date: dateUTC, prevClose: _prevPoint[1], open: point[open]
+    }));
   }
 
   return result;
@@ -494,6 +465,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
   config.zhVolumeConfig = dataVolume.length > 0 ? _ChartConfig2.default.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume) : undefined;
+
   config.zhATHConfig = dataATH.length > 0 ? _ChartConfig2.default.fIndicatorATHConfig(chartId, dataATH) : undefined;
   config.zhHighLowConfig = dataHighLow.length > 0 ? _ChartConfig2.default.fIndicatorHighLowConfig(chartId, dataHighLow) : undefined;
 
@@ -571,10 +543,10 @@ var _rToConfig = (_rToConfig2 = {}, (0, _defineProperty3.default)(_rToConfig2, _
 var QuandlAdapter = {
   toConfig: function toConfig(json, option) {
     var _option$seriaType = option.seriaType,
-        seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType;
+        seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType,
+        _config = _rToConfig[seriaType](json, option);
 
-
-    return _rToConfig[seriaType](json, option);
+    return _config;
   },
   toSeries: function toSeries(json, option) {
     var chartId = option.value,

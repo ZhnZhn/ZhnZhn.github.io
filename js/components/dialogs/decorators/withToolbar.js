@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _createType2WithToolbar = function _createType2WithToolbar(props) {
+var _createType2WithToolbar = function _createType2WithToolbar(props, withoutDate) {
   var toolbarButtons = [];
 
   if (typeof props.onClickInfo === 'function') {
@@ -11,10 +11,12 @@ var _createType2WithToolbar = function _createType2WithToolbar(props) {
       caption: 'I', title: 'Information About Dataset',
       onClick: this._clickInfoWithToolbar.bind(this) });
   }
-  toolbarButtons.push({
-    caption: 'D', title: 'Toggle Date Input',
-    onClick: this._clickDateWithToolbar.bind(this)
-  });
+  if (!withoutDate) {
+    toolbarButtons.push({
+      caption: 'D', title: 'Toggle Date Input',
+      onClick: this._clickDateWithToolbar.bind(this)
+    });
+  }
 
   return toolbarButtons;
 };

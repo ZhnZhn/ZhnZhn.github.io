@@ -74,22 +74,6 @@ var PanelBrowsers = function PanelBrowsers(_ref) {
         'div',
         {
           className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.YAHOO])
-        },
-        'Yahoo Finance Stocks'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.GOOGLE])
-        },
-        'Google Finance Stocks'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
           onClick: onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])
         },
         'Stocks By Sectors'

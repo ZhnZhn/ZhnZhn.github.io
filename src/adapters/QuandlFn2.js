@@ -7,6 +7,8 @@ import DateUtils from '../utils/DateUtils';
 import { Direction } from '../constants/Type';
 import ChartConfig from '../charts/ChartConfig';
 
+const BLANK = '';
+
 const QuandlFn2 = {
 
   isPrevDateAfter(arr, checkedDate, predicate){
@@ -78,19 +80,24 @@ const QuandlFn2 = {
 
   createValueMovingFromSeria(seria){
     const len = seria.length
-        , bNowValue = (len>0)
-             ? ( (seria[len-1][1]) ? seria[len-1][1] : '0.0' )
-             : '0.0'
-        , bPrevValue = (len>1)
-             ? ( (seria[len-2][1] ) ? Big(seria[len-2][1]) : Big(0.0) )
+        , bNowValue = len>0
+             ? seria[len-1][1]
+                 ? Big(seria[len-1][1])
+                 : Big(0.0)
              : Big(0.0)
-        , date = (len>0)
+        , bPrevValue = len>1
+             ? seria[len-2][1]
+                 ? Big(seria[len-2][1])
+                 : Big(0.0)
+             : Big(0.0)
+        , date = len>0
              ? DateUtils.formatTo(seria[len-1][0])
-             : ''
+             : BLANK
         , dateTo = (len>1)
-             ? (seria[len-2][0])
-                   ? DateUtils.formatTo(seria[len-2][0]) : ''
-             : '';
+             ? seria[len-2][0]
+                   ? DateUtils.formatTo(seria[len-2][0])
+                   : BLANK
+             : BLANK;
 
     return  {
       ...this.createValueMoving({ bNowValue, bPrevValue }),

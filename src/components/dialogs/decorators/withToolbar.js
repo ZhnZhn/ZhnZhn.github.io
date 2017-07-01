@@ -1,4 +1,4 @@
-const _createType2WithToolbar = function(props){
+const _createType2WithToolbar = function(props, withoutDate){
   const toolbarButtons = [];
 
   if (typeof props.onClickInfo === 'function') {
@@ -6,10 +6,12 @@ const _createType2WithToolbar = function(props){
        caption: 'I', title: 'Information About Dataset',
        onClick: this._clickInfoWithToolbar.bind(this) })
   }
-  toolbarButtons.push({
-    caption: 'D', title: 'Toggle Date Input',
-    onClick: this._clickDateWithToolbar.bind(this)
-  })
+  if (!withoutDate) {
+    toolbarButtons.push({
+      caption: 'D', title: 'Toggle Date Input',
+      onClick: this._clickDateWithToolbar.bind(this)
+    })
+  }
 
   return toolbarButtons;
 }

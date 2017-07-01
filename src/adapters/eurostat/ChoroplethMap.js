@@ -159,8 +159,7 @@ const _fnCreateRowEl = function(color, from, to, cluster, wg){
      'p', '',
      `opacity: 0.7; background: ${color}; padding: 5px 6px; cursor: pointer;`
    )
-  el.addEventListener('click', function(event){
-    //console.log(cluster)
+  el.addEventListener('click', function(event){    
     wg.updateCluster(cluster, color, from, to)
   })
   el.innerHTML = `<span>${from}&ndash;${to}<span>
@@ -254,7 +253,7 @@ const _crGeoJson = (geoJson) => {
   const _geoJson = merge({}, geoJson)
   _geoJson.features.forEach(feature => {
      feature.properties.value = null
-  });     
+  });
   return _geoJson;
 }
 

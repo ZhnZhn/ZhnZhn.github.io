@@ -22,16 +22,6 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
   browserType: _Type.BrowserType.ECONOMIC,
   isDynamic: false
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.GOOGLE, {
-  browserType: _Type.BrowserType.GOOGLE,
-  isDynamic: true,
-  caption: 'Quandl : Google Stocks',
-  sourceMenuUrl: './data/google/source-menu.json'
-}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.YAHOO, {
-  browserType: _Type.BrowserType.YAHOO,
-  isDynamic: true,
-  caption: 'Quandl : Yahoo Stocks',
-  sourceMenuUrl: './data/yahoo/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.PREMIUM_SAMPLE, {
   browserType: _Type.BrowserType.PREMIUM_SAMPLE,
   isDynamic: true,
@@ -97,4 +87,4 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
 }), _BrowserConfig);
 
 exports.default = BrowserConfig;
-//# sourceMappingURL=BrowserConfig.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserConfig.js.map

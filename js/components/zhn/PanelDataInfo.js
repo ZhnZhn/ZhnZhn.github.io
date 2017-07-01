@@ -120,7 +120,8 @@ var PanelDataInfo = function (_Component) {
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,
-          info = _props.info,
+          _props$info = _props.info,
+          info = _props$info === undefined ? {} : _props$info,
           _props$zhInfo = _props.zhInfo,
           zhInfo = _props$zhInfo === undefined ? {} : _props$zhInfo,
           onClickChart = _props.onClickChart,

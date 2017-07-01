@@ -124,6 +124,7 @@ class DialogType3 extends Component {
             caption, isShow, onShow,
             optionURI, optionsJsonProp,
             itemCaption='Stock:', optionNames='Stocks',
+            isWithInputStock,
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , { isShowTransform, validationMessages } = this.state
@@ -153,6 +154,7 @@ class DialogType3 extends Component {
            jsonProp={optionsJsonProp}
            caption={itemCaption}
            optionNames={optionNames}
+           isWithInput={isWithInputStock}
            onSelect={this._handleSelectStock}
          />
          <ShowHide isShow={isShowTransform}>

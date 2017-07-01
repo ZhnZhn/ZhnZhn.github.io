@@ -1,0 +1,24 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\fnJsonp.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\fnJsonp.js",
+ "sourceRoot": "",
+ "names": [
+  "fnFetch",
+  "uri",
+  "option",
+  "onCheckResponse",
+  "onFetch",
+  "onCompleted",
+  "onFailed",
+  "onCatch",
+  "jsonpCallbackFunction",
+  "then",
+  "response",
+  "json",
+  "catch",
+  "error"
+ ],
+ "mappings": ";;;;;;;AAAA;;;;;;AAEO,IAAMA,4BAAU,SAAVA,OAAU,OAEpB;AAAA,OADAC,GACA,QADAA,GACA;AAAA,OADKC,MACL,QADKA,MACL;AAAA,OADaC,eACb,QADaA,eACb;AAAA,OAD8BC,OAC9B,QAD8BA,OAC9B;AAAA,OADuCC,WACvC,QADuCA,WACvC;AAAA,OADoDC,QACpD,QADoDA,QACpD;AAAA,OAD8DC,OAC9D,QAD8DA,OAC9D;;AACD,6BAAWN,GAAX,EAAgB;AACZO,6BAAuB;AADX,IAAhB,EAGGC,IAHH,CAGQ,UAACC,QAAD,EAAc;AAClB,aAAOA,SAASC,IAAT,EAAP;AACD,IALH,EAMGF,IANH,CAMQ,gBAAQ;AACX,UAAKN,gBAAgBQ,IAAhB,EAAsBT,MAAtB,CAAL,EAAqC;AACnCE,iBAAQ,EAAEO,UAAF,EAAQT,cAAR,EAAgBG,wBAAhB,EAAR;AACD;AACH,IAVH,EAWGO,KAXH,CAWS,UAACC,KAAD,EAAW;AACfN,cAAQ,EAAEM,YAAF,EAASX,cAAT,EAAiBI,kBAAjB,EAAR;AACF,IAbH;AAcD,CAjBM"
+}

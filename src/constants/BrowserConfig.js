@@ -11,6 +11,7 @@ const BrowserConfig = {
     browserType: BrowserType.ECONOMIC,
     isDynamic: false
   },
+  /*
   [BrowserType.GOOGLE] : {
     browserType: BrowserType.GOOGLE,
     isDynamic : true,
@@ -23,6 +24,7 @@ const BrowserConfig = {
     caption: 'Quandl : Yahoo Stocks',
     sourceMenuUrl : './data/yahoo/source-menu.json'
   },
+  */
   [BrowserType.PREMIUM_SAMPLE] : {
     browserType: BrowserType.PREMIUM_SAMPLE,
     isDynamic : true,

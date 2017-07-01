@@ -95,7 +95,6 @@ var WatchListSlice = {
           caption: DIALOG_CAPTION,
           descr: _Msg2.default.WATCH_SAVED
         });
-        console.log(_Msg2.default.WATCH_SAVED);
       }).catch(function (error) {
         console.log(error);
       });
@@ -139,4 +138,4 @@ var WatchListSlice = {
 };
 
 exports.default = WatchListSlice;
-//# sourceMappingURL=WatchListSlice.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WatchListSlice.js.map

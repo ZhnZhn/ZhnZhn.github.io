@@ -9,8 +9,7 @@ const toMap = {
         , value = json.value
         , { data } = EuroStatFn.createData(timeIndex, value)
         , config = ChartConfig.fBaseAreaConfig();
-     //console.log('toMap');
-     //console.log(option);
+     
      EuroStatFn.setDataAndInfo({ config, data, json, option });
 
      config.zhDialog = option

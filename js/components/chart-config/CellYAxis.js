@@ -106,7 +106,6 @@ var CellYAxis = function (_Component) {
           tickPixelInterval = options.tickPixelInterval,
           startOnTick = options.startOnTick;
 
-      //console.log(options);
 
       return _react2.default.createElement(
         _OpenClose2.default,

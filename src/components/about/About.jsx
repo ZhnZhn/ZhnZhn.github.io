@@ -110,7 +110,7 @@ class About extends Component {
            </LinkToken>
            <Token color="#fdb316" isFirstBlank={true}>
               from 1, Jule 2017
-           </Token>  
+           </Token>
          </p>
          <p>
            <Token color="#80c040">
@@ -120,13 +120,15 @@ class About extends Component {
              is an economic RESTful client.
            </Token>
          </p>
-         <p>
+         <p style={Styles.P_BOTTOM}>
            With it, you can view economic free open data from WEB.
          </p>
-         <p style={Styles.P_BOTTOM}>
+         <p>
           <Token color="gray">
-            Data providers :
+            Data providers:
           </Token>
+        </p>
+        <p style={Styles.P_BOTTOM}>
           <LinkToken
              href="https://www.quandl.com/"
              color="#E05927"
@@ -134,8 +136,8 @@ class About extends Component {
           >
              Quandl
           </LinkToken>
-          <Token color="gray">
-            ,
+          <Token color="black">
+            &nbsp;(Key),
           </Token>
           <LinkToken
              href="http://ec.europa.eu/eurostat"
@@ -144,8 +146,28 @@ class About extends Component {
           >
              Eurostat
           </LinkToken>
-          <Token color="gray">
-            .
+          <Token color="#009ae5">
+            ,
+          </Token>
+          <LinkToken
+             href="https://www.barchartmarketdata.com"
+             color="#bd1010"
+             isFirstBlank={true}
+          >
+             Barchart Market Data
+          </LinkToken>
+          <Token color="black">
+            &nbsp;(Key),
+          </Token>
+          <LinkToken
+             href="https://www.alphavantage.co"
+             color="#009ae5"
+             isFirstBlank={true}
+          >
+             Alpha Vantage
+          </LinkToken>
+          <Token color="black">
+            &nbsp;(Key).
           </Token>
          </p>
           <p>

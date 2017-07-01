@@ -104,7 +104,8 @@ var _renderSeriesLabel = function _renderSeriesLabel(_ref2) {
   var chart = _ref2.chart,
       options = _ref2.options,
       series = _ref2.series,
-      label = _ref2.label,
+      _ref2$label = _ref2.label,
+      label = _ref2$label === undefined ? '' : _ref2$label,
       color = _ref2.color;
 
   var seriesText = label.length > C.SERIA_LABEL_CHARS ? label.substring(0, C.SERIA_LABEL_CHARS) : label,

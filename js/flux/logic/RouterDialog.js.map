@@ -19,7 +19,8 @@
   "FuturesWikiDialog",
   "JodiWorldOilDialog",
   "ZillowDialog",
+  "AlphaIndicatorDialog",
   "ChartConfigDialog"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,eAAe;AACnBC,+BADmB;;AAGnBC,mCAHmB;AAInBC,mCAJmB;AAKnBC,sCALmB;AAMnBC,mCANmB;AAOnBC,0CAPmB;AAQnBC,2CARmB;AASnBC,2CATmB;AAUnBC,0DAVmB;AAWnBC,0CAXmB;AAYnBC,gDAZmB;AAanBC,kDAbmB;AAcnBC,sCAdmB;;AAgBnBC;AAhBmB,CAArB;;kBAmBed,Y"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,eAAe;AACnBC,+BADmB;;AAGnBC,mCAHmB;AAInBC,mCAJmB;AAKnBC,sCALmB;AAMnBC,mCANmB;AAOnBC,0CAPmB;AAQnBC,2CARmB;AASnBC,2CATmB;AAUnBC,0DAVmB;AAWnBC,0CAXmB;AAYnBC,gDAZmB;AAanBC,kDAbmB;AAcnBC,sCAdmB;AAenBC,sDAfmB;;AAiBnBC;AAjBmB,CAArB;;kBAoBef,Y"
 }

@@ -339,7 +339,7 @@ var Chart = {
         maxPoint = _ref3.maxPoint;
 
     if (maxPoint > Number.NEGATIVE_INFINITY && minPoint < Number.POSITIVE_INFINITY) {
-      return minPoint - (maxPoint - minPoint) * 30 / 180;
+      return minPoint - (maxPoint - minPoint) * 1 / 6;
     } else {
       return undefined;
     }

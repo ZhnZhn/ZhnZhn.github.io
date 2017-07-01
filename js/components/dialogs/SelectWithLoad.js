@@ -93,6 +93,7 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
           caption = _props.caption,
           optionNames = _props.optionNames,
           placeholder = _props.placeholder,
+          isWithInput = _props.isWithInput,
           onSelect = _props.onSelect,
           _state = this.state,
           isLoading = _state.isLoading,
@@ -115,6 +116,7 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
           options: options,
           optionNames: optionNames,
           placeholder: placeholder,
+          isWithInput: isWithInput,
           onLoadOption: this._handlerLoadOptions,
           onSelect: onSelect
         })

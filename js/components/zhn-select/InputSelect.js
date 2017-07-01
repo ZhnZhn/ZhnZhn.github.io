@@ -43,10 +43,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MAX_WITHOUT_ANIMATION = 800,
     CLASS_ROW_ACTIVE = "option-row__active";
 
-var _fnNoItem = function _fnNoItem(propCaption) {
+var _fnNoItem = function _fnNoItem(propCaption, inputValue, isWithInput) {
   var _ref;
 
-  return _ref = {}, (0, _defineProperty3.default)(_ref, propCaption, 'No results found'), (0, _defineProperty3.default)(_ref, 'value', 'noresult'), _ref;
+  var _inputValue = String(inputValue).trim(),
+      _caption = isWithInput ? 'From input: ' + _inputValue : 'No results found';
+  return _ref = {}, (0, _defineProperty3.default)(_ref, propCaption, _caption), (0, _defineProperty3.default)(_ref, 'value', 'noresult'), (0, _defineProperty3.default)(_ref, 'inputValue', _inputValue), _ref;
+};
+
+var _toItem = function _toItem(item, propCaption) {
+  var _ref2;
+
+  return _ref2 = {}, (0, _defineProperty3.default)(_ref2, propCaption, 'From Input'), (0, _defineProperty3.default)(_ref2, 'value', item.inputValue), _ref2;
 };
 
 var _crWidth = function _crWidth(width) {
@@ -154,9 +162,9 @@ var styles = {
   }
 };
 
-var ItemOptionDf = function ItemOptionDf(_ref2) {
-  var item = _ref2.item,
-      propCaption = _ref2.propCaption;
+var ItemOptionDf = function ItemOptionDf(_ref3) {
+  var item = _ref3.item,
+      propCaption = _ref3.propCaption;
   return _react2.default.createElement(
     'span',
     null,
@@ -284,6 +292,7 @@ var InputSelect = (_temp = _class = function (_Component) {
   optionName: '',
   optionNames: '',
   isUpdateOptions: false,
+  isWithInput: false,
   onSelect: function onSelect() {},
   onLoadOption: function onLoadOption() {}
 }, _initialiseProps = function _initialiseProps() {
@@ -353,8 +362,7 @@ var InputSelect = (_temp = _class = function (_Component) {
         arr = _this3._filterOptions(_this3.props.options, token);
       }
       if (arr.length === 0) {
-        arr.push(_fnNoItem(_this3.propCaption));
-        //arr.push(_fnNoItem(this.propCaption)NO_ITEM);
+        arr.push(_fnNoItem(_this3.propCaption, token, _this3.props.isWithInput));
       }
       _this3._undecorateActiveRowComp();
       _this3.indexActiveOption = 0;
@@ -407,7 +415,11 @@ var InputSelect = (_temp = _class = function (_Component) {
             if (item.value !== 'noresult') {
               _this3.props.onSelect(item);
             } else {
-              _this3.props.onSelect(null);
+              if (!_this3.props.isWithInput) {
+                _this3.props.onSelect(null);
+              } else {
+                _this3.props.onSelect(_toItem(item, _this3.propCaption));
+              }
             }
           }
           break;
@@ -484,7 +496,7 @@ var InputSelect = (_temp = _class = function (_Component) {
         }
         break;
       default:
-        /*console.log(event.keyCode);*/return;
+        return undefined;
     }
   };
 

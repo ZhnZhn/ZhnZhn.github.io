@@ -20,7 +20,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
 }
 
 const fnFetchToChartComp = function({json, option, onCompleted}){
-  const {config} = QuandlAdapter.toConfig(json, option);
+  const {config} = QuandlAdapter.toConfig(json, option);  
   onCompleted(option, config);
 }
 

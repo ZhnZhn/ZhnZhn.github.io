@@ -485,6 +485,43 @@ const DataQE = {
         dataSource : 'Wiki EOD Stock Prices (Code: WIKI)'
       }
   },
+  QE_BARCHART_STOCK : {
+      type : 'QE_BARCHART_STOCK',
+      menuTitle : 'Barchart',
+      dialogCaption : 'Barchart Stock Prices',
+      chartContainerCaption : 'Barchart Stock Prices',
+      dialogProps : {
+        descrUrl : './data/quandl/barchart.html',
+        optionURI : './data/quandl/wiki.json',
+        optionsJsonProp : 'tickets',
+        isWithInputStock: true,
+        valueFn : "ROne",
+        linkFn : "NASDAQ",
+        loadId : 'B',
+        columnName : 'Close',
+        seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adj. Close' ],
+        dataSource : 'Barchart Market Data Solutions'
+      }
+  },
+  QE_ALPHA_INDICATOR : {
+      type : 'QE_ALPHA_INDICATOR',
+      menuTitle : 'Alpha Indicators',
+      dialogCaption : 'Alpha Indicators',
+      chartContainerCaption : 'Alpha Indicators',
+      dialogType: 'AlphaIndicatorDialog',
+      dialogProps : {
+        descrUrl : './data/quandl/alpha-vantage.html',
+        oneURI : './data/quandl/alpha-indicators.json',
+        oneJsonProp : 'indicators',
+        oneCaption: 'Indicators',
+        valueFn : "ROne",
+        //linkFn : "NASDAQ",
+        loadId : 'AL',
+        columnName : 'Close',
+        //seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adj. Close' ],
+        dataSource : 'Alpha Vantage'
+      }
+  },
   QE_TOKIO_STOCK : {
       type : 'QE_TOKIO_STOCK',
       menuTitle: 'Tokio',
@@ -516,22 +553,7 @@ const DataQE = {
         loadId : 'Q',
         dataSource : 'Nikkei (Code: NIKKEI)'
       }
-  },
-  QE_STOCK_INDEXES : {
-      type : 'QE_STOCK_INDEXES',
-      menuTitle: 'Indices',
-      dialogCaption : 'Stock Indices',
-      chartContainerCaption : 'Quandl Stock Indices',
-      dialogProps : {
-        descrUrl : './data/yahoo/yahoo.html',
-        optionURI : './data/quandl/stock-index.json',
-        optionsJsonProp : 'indexes',
-        loadId : 'Q',
-        columnName : 'Close',
-        seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume'],
-        dataSource : 'YFinance (Code: YAHOO)'
-      }
-  },
+  },  
   QE_UNICORN_RESEARCH : {
     type : 'QE_UNICORN_RESEARCH',
     menuTitle : 'Unicorn Research',

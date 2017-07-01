@@ -40,6 +40,7 @@ const PanelBrowsers = ({
           >
             France Statistics
           </div>
+          {/*
           <div
             className="row__pane-topic item__quandl"
             onClick={onClickDynamic.bind(null, browserConfig[BROWSER.YAHOO])}
@@ -52,6 +53,7 @@ const PanelBrowsers = ({
           >
             Google Finance Stocks
           </div>
+         */}
           <div
             className="row__pane-topic item__quandl"
             onClick={onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])}

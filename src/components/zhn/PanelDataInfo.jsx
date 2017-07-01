@@ -70,7 +70,7 @@ class PanelDataInfo extends Component {
   }
 
   render(){
-    const {isShow, info, zhInfo={}, onClickChart } = this.props
+    const {isShow, info={}, zhInfo={}, onClickChart } = this.props
         , {
              name,
              newest_available_date,

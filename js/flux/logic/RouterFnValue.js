@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var RouterFnValue = {
+  ROne: function ROne(one) {
+    return one;
+  },
+
   RTwo: function RTwo(one, two) {
     return "" + two;
   },

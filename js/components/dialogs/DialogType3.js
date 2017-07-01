@@ -180,6 +180,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           itemCaption = _props$itemCaption === undefined ? 'Stock:' : _props$itemCaption,
           _props$optionNames = _props.optionNames,
           optionNames = _props$optionNames === undefined ? 'Stocks' : _props$optionNames,
+          isWithInputStock = _props.isWithInputStock,
           initFromDate = _props.initFromDate,
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
@@ -213,6 +214,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           jsonProp: optionsJsonProp,
           caption: itemCaption,
           optionNames: optionNames,
+          isWithInput: isWithInputStock,
           onSelect: this._handleSelectStock
         }),
         _react2.default.createElement(

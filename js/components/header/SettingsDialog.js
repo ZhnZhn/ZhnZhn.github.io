@@ -32,9 +32,9 @@ var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _InputSecret = require('../zhn/InputSecret');
+var _RowSecret = require('../dialogs/RowSecret');
 
-var _InputSecret2 = _interopRequireDefault(_InputSecret);
+var _RowSecret2 = _interopRequireDefault(_RowSecret);
 
 var _ActionButton = require('../zhn/ActionButton');
 
@@ -44,22 +44,23 @@ var _RowCheckBox = require('../dialogs/RowCheckBox');
 
 var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
 
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
   MODAL: {
     position: 'static',
-    width: '400px',
-    height: '200px',
+    width: '380px',
+    height: '280px',
     margin: '70px auto 0px'
   }
 };
 
-var SET_QUANDL_KEY = 'setQuandlKey';
+var SET = {
+  QUANDL_KEY: 'setQuandlKey',
+  ALPHA_KEY: 'setAlphaKey',
+  BARCHAR_KEY: 'setBarcharKey'
+};
+
 var MODE_ADMIN = 'isAdminMode';
 var MODE_DELTA = 'isDrawDeltaExtrems';
 var MODE_ZOOM = 'isNotZoomToMinMax';
@@ -76,9 +77,13 @@ var SettingsDialog = function (_Component) {
       var _this$props = _this.props,
           data = _this$props.data,
           onClose = _this$props.onClose,
-          setQuandlKey = (0, _safeFn2.default)(data, SET_QUANDL_KEY);
+          setQuandlKey = (0, _safeFn2.default)(data, SET.QUANDL_KEY),
+          setAlpheKey = (0, _safeFn2.default)(data, SET.ALPHA_KEY),
+          setBarcharKey = (0, _safeFn2.default)(data, SET.BARCHAR_KEY);
 
       setQuandlKey(_this.inputComp.getValue());
+      setAlpheKey(_this.alphaComp.getValue());
+      setBarcharKey(_this.barcharComp.getValue());
       onClose();
     };
 
@@ -127,21 +132,27 @@ var SettingsDialog = function (_Component) {
           commandButtons: this.commandButtons,
           onClose: onClose
         },
-        _react2.default.createElement(
-          'label',
-          { style: _DialogStyles2.default.rowDiv },
-          _react2.default.createElement(
-            'span',
-            { style: _DialogStyles2.default.labelSpan },
-            'Quandl:'
-          ),
-          _react2.default.createElement(_InputSecret2.default, {
-            ref: function ref(c) {
-              return _this2.inputComp = c;
-            },
-            placeholder: 'Quandl API Key'
-          })
-        ),
+        _react2.default.createElement(_RowSecret2.default, {
+          ref: function ref(c) {
+            return _this2.alphaComp = c;
+          },
+          title: 'Alpha:',
+          placeholder: 'Alpha API Key'
+        }),
+        _react2.default.createElement(_RowSecret2.default, {
+          ref: function ref(c) {
+            return _this2.barcharComp = c;
+          },
+          title: 'Barchar:',
+          placeholder: 'Barchar API Key'
+        }),
+        _react2.default.createElement(_RowSecret2.default, {
+          ref: function ref(c) {
+            return _this2.inputComp = c;
+          },
+          title: 'Quandl:',
+          placeholder: 'Quandl API Key'
+        }),
         _react2.default.createElement(_RowCheckBox2.default, {
           initValue: _isAdminMode,
           caption: 'View in Admin Mode',

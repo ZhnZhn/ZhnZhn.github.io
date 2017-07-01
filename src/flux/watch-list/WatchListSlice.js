@@ -64,7 +64,7 @@ const WatchListSlice = {
 
   onDragDropItem(option){
     this._onDragDrop(Logic.dragDropItem(this.watchList, option) );
-  },  
+  },
   onDragDropList(option){
     this._onDragDrop(Logic.dragDropList(this.watchList, option) );
   },
@@ -81,8 +81,7 @@ const WatchListSlice = {
              this.onShowModalDialog(ModalDialog.INFO, {
                 caption : DIALOG_CAPTION,
                 descr : Msg.WATCH_SAVED
-             })
-             console.log(Msg.WATCH_SAVED);
+             })             
           })
           .catch((error) => {
              console.log(error);

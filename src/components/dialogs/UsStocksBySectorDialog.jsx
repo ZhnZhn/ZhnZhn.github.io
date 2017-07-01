@@ -20,10 +20,7 @@ const STYLE = {
 };
 
 const sourceOptions = [
-  { caption: "YAHOO" , "value" : "YAHOO/" },
-  { caption: "WIKI" , "value" : "WIKI/" },
-  { caption: "GOOG/NYSE" , "value" : "GOOG/NYSE_" },
-  { caption: "GOOG/NASDAQ" , "value" : "GOOG/NASDAQ_" }
+  { caption: "WIKI" , "value" : "WIKI/" }
 ]
 
 
@@ -76,8 +73,8 @@ class UsStocksBySectorDialog extends Component {
           , { id, text } = item
           , { fromDate, toDate } = this.datesFragment.getValues()
           , _dataSource = (this.dataSource)
-                  ? this.dataSource.value
-                  : 'YAHOO/'
+                  ? this.dataSource.value                  
+                  : 'WIKI/'
           , _value = `${_dataSource}${id}`
           , option = {
              title : text,
@@ -141,7 +138,7 @@ class UsStocksBySectorDialog extends Component {
       >
         <RowInputSelect
            caption="Data Source"
-           placeholder="Default: YAHOO"
+           placeholder="Default: WIKI"
            options={sourceOptions}
            onSelect={this._handleSelectDataSource}
         />

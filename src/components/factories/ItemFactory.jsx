@@ -8,7 +8,7 @@ import { ModalDialog, CompItemType } from '../../constants/Type';
 import AreaChartItem from '../items/AreaChartItem';
 import MapChartItem from '../items/MapChartItem';
 
-const _createAreaChartItem = function(config, index, option, props){
+const _createAreaChartItem = function(config, index, option, props){  
   const { zhConfig } = config
      ,  { id, key } = zhConfig
      ,  { chartType } = option;

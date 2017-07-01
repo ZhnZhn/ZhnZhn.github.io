@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 var SettingSlice = {
   setting: {
     quandlKey: undefined,
+    barchartKey: undefined,
+    alphaKey: undefined,
     isAdminMode: false,
     isDrawDeltaExtrems: false,
     isNotZoomToMinMax: false
@@ -14,17 +16,29 @@ var SettingSlice = {
 
   exportSettingFn: function exportSettingFn() {
     return {
-      setQuandlKey: this.setQuandlKey.bind(this),
+      setQuandlKey: this.setSetting('quandlKey').bind(this),
+      setAlphaKey: this.setSetting('alphaKey').bind(this),
+      setBarcharKey: this.setSetting('barchartKey').bind(this),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),
       isNotZoomToMinMax: this.isSetting.bind(this, 'isNotZoomToMinMax')
     };
   },
-  setQuandlKey: function setQuandlKey(value) {
-    this.setting.quandlKey = value;
+
+
+  setSetting: function setSetting(propName) {
+    return function (value) {
+      this.setting[propName] = value;
+    };
   },
   getQuandlKey: function getQuandlKey() {
     return this.setting.quandlKey;
+  },
+  getBarchartKey: function getBarchartKey() {
+    return this.setting.barchartKey;
+  },
+  getAlphaKey: function getAlphaKey() {
+    return this.setting.alphaKey;
   },
   isSetting: function isSetting(propName, value) {
     if (typeof value == 'undefined') {

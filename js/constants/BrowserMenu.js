@@ -82,10 +82,10 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.OECD_CPI }, { id: _DialogType.Quandl.RATE_INFLATION }, { id: _DialogType.Quandl.BLSI }, { id: _DialogType.Quandl.GDT }, { id: _DialogType.Quandl.BIG_MAC }]
 }, {
   caption: 'Commodity', isInitClose: true,
-  items: [{ id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.PETROLEUM_PRICES }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.BP, isNew: true }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }, { id: _DialogType.Quandl.BALTIC_INDICES }]
+  items: [{ id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.PETROLEUM_PRICES }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.BP }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }, { id: _DialogType.Quandl.BALTIC_INDICES }]
 }, {
   caption: 'World Stocks',
-  items: [{ id: _DialogType.Quandl.EURONEXT_STOCK }, { id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.NIKKEI, isNew: true }, { id: _DialogType.Quandl.STOCK_INDEXES }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]
+  items: [{ id: _DialogType.Quandl.EURONEXT_STOCK }, { id: _DialogType.Quandl.TOKIO_STOCK }, { id: _DialogType.Quandl.WIKI_STOCK }, { id: _DialogType.Quandl.BARCHART_STOCK, isNew: true }, { id: _DialogType.Quandl.ALPHA_INDICATOR, isNew: true }, { id: _DialogType.Quandl.NIKKEI }, { id: _DialogType.Quandl.UNICORN_RESEARCH }]
 }, {
   caption: 'Futures', isInitClose: true,
   items: [{ id: _DialogType.Quandl.CHINA_FINANCE_FUTURE }, { id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }, { id: _DialogType.Quandl.LIFFE_FUTURE }, { id: _DialogType.Quandl.ICE_FUTURE }, { id: _DialogType.Quandl.WIKI_FUTURE }]

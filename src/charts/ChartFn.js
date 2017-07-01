@@ -69,7 +69,7 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
   return _color;
 }
 
-const _renderSeriesLabel = ({chart, options, series, label, color }) => {
+const _renderSeriesLabel = ({chart, options, series, label='', color }) => {
   const seriesText = (label.length>C.SERIA_LABEL_CHARS)
             ? label.substring(0, C.SERIA_LABEL_CHARS)
             : label

@@ -69,7 +69,7 @@ const menuQuandl = [
        { id : Quandl.PETROLEUM_PRICES },
        { id : Quandl.JODI_WORLD_GAS },
        { id : Quandl.JODI_WORLD_OIL },
-       { id:  Quandl.BP , isNew : true },
+       { id:  Quandl.BP },
        { id : Quandl.EIA_COAL },
        { id : Quandl.ROGERS_INDICES },
        { id : Quandl.BALTIC_INDICES }
@@ -80,8 +80,9 @@ const menuQuandl = [
        { id : Quandl.EURONEXT_STOCK },
        { id : Quandl.TOKIO_STOCK },
        { id : Quandl.WIKI_STOCK },
-       { id: Quandl.NIKKEI, isNew: true },
-       { id : Quandl.STOCK_INDEXES},
+       { id : Quandl.BARCHART_STOCK, isNew: true },
+       { id : Quandl.ALPHA_INDICATOR, isNew: true },
+       { id : Quandl.NIKKEI },       
        { id : Quandl.UNICORN_RESEARCH }
      ]
   },{

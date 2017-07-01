@@ -38,7 +38,11 @@ class SelectWithLoad extends Component {
     }
 
     render(){
-      const { caption, optionNames, placeholder, onSelect } = this.props
+      const {
+              caption, optionNames, placeholder,
+              isWithInput,
+              onSelect
+            } = this.props
           , { isLoading, isLoadingFailed, options } = this.state;
 
       return (
@@ -53,6 +57,7 @@ class SelectWithLoad extends Component {
              options={options}
              optionNames={optionNames}
              placeholder={placeholder}
+             isWithInput={isWithInput}
              onLoadOption={this._handlerLoadOptions}
              onSelect={onSelect}
            />

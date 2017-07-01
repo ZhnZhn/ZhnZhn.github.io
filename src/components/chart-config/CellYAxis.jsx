@@ -55,9 +55,7 @@ class CellYAxis extends Component {
          , {
              maxPadding='', min='', minPadding='',
              tickPixelInterval, startOnTick
-           } = options;
-
-    //console.log(options);
+           } = options;    
 
     return (
       <OpenClose caption={`YAxis ${axisIndex}`}>

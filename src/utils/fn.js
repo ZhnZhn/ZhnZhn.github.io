@@ -9,27 +9,45 @@ const _fnMsg400 = (option) => {
   }
 }
 
+const _fnMsg404 = () => {
+  return '404: Resource is not existed';
+}
+
 export const fnFetch = function({
    uri, option, onCheckResponse, onFetch, onCompleted, onFailed, onCatch
  }){
   fetch(uri)
     .then((response) => {
       const { status, statusText, headers } = response;
-      if (status>=200 && status<400){
-        return Promise.all([
-           Promise.resolve(headers.get(LIMIT_REMAINING)),
-           response.json()
-        ]);
+      if (status>=200 && status<400) {
+          return Promise.all([
+             Promise.resolve(headers.get(LIMIT_REMAINING)),
+             response.json()
+          ]);
       } else if (status === 400) {
-         throw { errCaption : 'Request Error', message : _fnMsg400(option) }
+         throw {
+           errCaption : 'Request Error',
+           message : _fnMsg400(option)
+         };
+      } else if (status === 404) {
+        throw {
+          errCaption : 'Request Error',
+          message : _fnMsg404(option)
+        };
       } else if (status>400 && status<500){
-         throw { errCaption : 'Request Error', message : `${status} : ${statusText}` }
+         throw {
+           errCaption : 'Request Error',
+           message : `${status} : ${statusText}`
+         };
       } else if (status>=500 && status<600){
-         throw { errCaption : 'Response Error', message : `${status} : ${statusText}` }
+         throw {
+           errCaption : 'Response Error',
+           message : `${status} : ${statusText}`
+         };
       }
     })
     .then(([limitRemaining, json ]) => {
-       if (onCheckResponse(json, option)){
+       if (onCheckResponse(json, option)) {
          option.limitRemaining = limitRemaining;
          onFetch({ json, option, onCompleted });
        }

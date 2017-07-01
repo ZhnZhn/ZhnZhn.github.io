@@ -1,5 +1,7 @@
 
 const RouterFnValue = {
+  ROne : (one) => one,
+  
   RTwo : (one, two) => `${two}`,
   ROneTwo : (one, two) => `${one}/${two}`,
   ROneDashTwo : (one, two) => `${one}_${two}`,

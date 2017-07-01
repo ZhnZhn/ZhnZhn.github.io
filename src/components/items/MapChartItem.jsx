@@ -112,8 +112,6 @@ class MapChartItem extends Component {
     const { caption, config } = this.props
         , { json:jsonCube, zhMapSlice } = config;
 
-    //console.log(this.props);
-
     ChoroplethMap.draw(`map_${caption}`, jsonCube, zhMapSlice)
                  .then( (option) => {
                     this.map = option.map

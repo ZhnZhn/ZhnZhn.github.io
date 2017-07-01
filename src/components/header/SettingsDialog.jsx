@@ -1,24 +1,27 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import safeFn from '../../utils/safeFn';
+import safeFn from '../../utils/safeFn'
 
-import ModalDialog from '../zhn-moleculs/ModalDialog';
-import InputSecret from '../zhn/InputSecret';
-import ActionButton from '../zhn/ActionButton';
-import RowCheckBox from '../dialogs/RowCheckBox';
-
-import STYLE from '../styles/DialogStyles';
+import ModalDialog from '../zhn-moleculs/ModalDialog'
+import RowSecret from '../dialogs/RowSecret'
+import ActionButton from '../zhn/ActionButton'
+import RowCheckBox from '../dialogs/RowCheckBox'
 
 const S = {
   MODAL : {
     position : 'static',
-    width: '400px',
-    height: '200px',
+    width: '380px',
+    height: '280px',
     margin: '70px auto 0px'
   }
 };
 
-const SET_QUANDL_KEY = 'setQuandlKey';
+const SET = {
+  QUANDL_KEY: 'setQuandlKey',
+  ALPHA_KEY: 'setAlphaKey',
+  BARCHAR_KEY: 'setBarcharKey'
+};
+
 const MODE_ADMIN = 'isAdminMode';
 const MODE_DELTA = 'isDrawDeltaExtrems';
 const MODE_ZOOM = 'isNotZoomToMinMax';
@@ -54,8 +57,12 @@ class SettingsDialog extends Component {
 
   _handleSet = () => {
     const { data, onClose } = this.props
-        , setQuandlKey = safeFn(data, SET_QUANDL_KEY);
+        , setQuandlKey = safeFn(data, SET.QUANDL_KEY)
+        , setAlpheKey = safeFn(data, SET.ALPHA_KEY)
+        , setBarcharKey = safeFn(data, SET.BARCHAR_KEY);
     setQuandlKey(this.inputComp.getValue())
+    setAlpheKey(this.alphaComp.getValue())
+    setBarcharKey(this.barcharComp.getValue())
     onClose()
   }
   _handleMode = (fnName, mode) => {
@@ -79,15 +86,21 @@ class SettingsDialog extends Component {
             onClose={onClose}
          >
 
-           <label style={STYLE.rowDiv}>
-              <span style={STYLE.labelSpan}>
-                Quandl:
-              </span>
-              <InputSecret
-                 ref={ c => this.inputComp = c}
-                 placeholder="Quandl API Key"
-              />
-           </label>
+            <RowSecret
+               ref={ c => this.alphaComp = c}
+               title="Alpha:"
+               placeholder="Alpha API Key"
+            />
+            <RowSecret
+               ref={ c => this.barcharComp = c}
+               title="Barchar:"
+               placeholder="Barchar API Key"
+            />
+            <RowSecret
+               ref={ c => this.inputComp = c}
+               title="Quandl:"
+               placeholder="Quandl API Key"
+            />
 
            <RowCheckBox
               initValue={_isAdminMode}

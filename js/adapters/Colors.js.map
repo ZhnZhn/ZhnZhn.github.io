@@ -1,0 +1,16 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\Colors.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\Colors.js",
+ "sourceRoot": "",
+ "names": [
+  "COLOR",
+  "COLOR_BLUE",
+  "COLOR_GREEN",
+  "COLOR_RED",
+  "COLOR_WHITE",
+  "COLOR_GRAY"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,cAAa,SADD,EACY;AACxBC,eAAc,SAFF;AAGZC,aAAY,SAHA;AAIZC,eAAc,OAJF;AAKZC,cAAa;AALD,CAAd;;kBAQeL,K"
+}

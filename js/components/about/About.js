@@ -207,17 +207,21 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              null,
+              { style: Styles.P_BOTTOM },
               'With it, you can view economic free open data from WEB.'
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
+              null,
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'gray' },
-                'Data providers :'
-              ),
+                'Data providers:'
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              { style: Styles.P_BOTTOM },
               _react2.default.createElement(
                 _LinkToken2.default,
                 {
@@ -229,8 +233,8 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 _Token2.default,
-                { color: 'gray' },
-                ','
+                { color: 'black' },
+                '\xA0(Key),'
               ),
               _react2.default.createElement(
                 _LinkToken2.default,
@@ -243,8 +247,36 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 _Token2.default,
-                { color: 'gray' },
-                '.'
+                { color: '#009ae5' },
+                ','
+              ),
+              _react2.default.createElement(
+                _LinkToken2.default,
+                {
+                  href: 'https://www.barchartmarketdata.com',
+                  color: '#bd1010',
+                  isFirstBlank: true
+                },
+                'Barchart Market Data'
+              ),
+              _react2.default.createElement(
+                _Token2.default,
+                { color: 'black' },
+                '\xA0(Key),'
+              ),
+              _react2.default.createElement(
+                _LinkToken2.default,
+                {
+                  href: 'https://www.alphavantage.co',
+                  color: '#009ae5',
+                  isFirstBlank: true
+                },
+                'Alpha Vantage'
+              ),
+              _react2.default.createElement(
+                _Token2.default,
+                { color: 'black' },
+                '\xA0(Key).'
               )
             ),
             _react2.default.createElement(

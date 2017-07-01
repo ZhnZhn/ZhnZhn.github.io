@@ -69,7 +69,7 @@ var STYLE = {
   }
 };
 
-var sourceOptions = [{ caption: "YAHOO", "value": "YAHOO/" }, { caption: "WIKI", "value": "WIKI/" }, { caption: "GOOG/NYSE", "value": "GOOG/NYSE_" }, { caption: "GOOG/NASDAQ", "value": "GOOG/NASDAQ_" }];
+var sourceOptions = [{ caption: "WIKI", "value": "WIKI/" }];
 
 var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(UsStocksBySectorDialog, _Component);
@@ -148,7 +148,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
         },
         _react2.default.createElement(_RowInputSelect2.default, {
           caption: 'Data Source',
-          placeholder: 'Default: YAHOO',
+          placeholder: 'Default: WIKI',
           options: sourceOptions,
           onSelect: this._handleSelectDataSource
         }),
@@ -191,7 +191,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           _datesFragment$getVal = _this3.datesFragment.getValues(),
           fromDate = _datesFragment$getVal.fromDate,
           toDate = _datesFragment$getVal.toDate,
-          _dataSource = _this3.dataSource ? _this3.dataSource.value : 'YAHOO/',
+          _dataSource = _this3.dataSource ? _this3.dataSource.value : 'WIKI/',
           _value = '' + _dataSource + id,
           option = {
         title: text,

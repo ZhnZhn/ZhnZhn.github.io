@@ -21,8 +21,8 @@ var toMap = {
               _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
               data = _EuroStatFn$createDat.data,
               config = _ChartConfig2.default.fBaseAreaConfig();
-          //console.log('toMap');
-          //console.log(option);
+
+
           _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
 
           config.zhDialog = option;

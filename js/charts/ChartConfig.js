@@ -342,20 +342,23 @@ ChartConfig.fnNumberFormat = function (value) {
 };
 
 ChartConfig.fBaseAreaConfig = function () {
-  var config = _Chart2.default.fBaseConfig();
-  config.zhDetailCharts = [];
-  config.zhToggleSeria = _ChartFn2.default.toggleSeria;
+  var config = Object.assign(_Chart2.default.fBaseConfig(), {
+    zhDetailCharts: [],
+    zhToggleSeria: _ChartFn2.default.toggleSeria
+  });
 
-  var chart = config.chart;
-  chart.zoomType = 'xy';
-  chart.resetZoomButton = _Chart2.default.fResetZoomButton({ position: { x: -10 } });
-  chart.xDeltaCrossLabel = 4;
-  chart.yDeltaCrossLabel = 20;
+  config.chart = Object.assign(config.chart, {
+    zoomType: 'xy',
+    resetZoomButton: _Chart2.default.fResetZoomButton({ position: { x: -10 } }),
+    xDeltaCrossLabel: 4,
+    yDeltaCrossLabel: 20
+  });
 
-  config.xAxis = _Chart2.default.fXAxisOpposite(config.xAxis);
-  config.xAxis.events = {
-    afterSetExtremes: _ChartFn2.default.zoomIndicatorCharts
-  };
+  config.xAxis = Object.assign(_Chart2.default.fXAxisOpposite(config.xAxis), {
+    events: {
+      afterSetExtremes: _ChartFn2.default.zoomIndicatorCharts
+    }
+  });
 
   config.yAxis.plotLines = [_Chart2.default.fPlotLine(_Color2.default.HIGH, 'max'), _Chart2.default.fPlotLine(_Color2.default.LOW, 'min')];
 

@@ -296,21 +296,24 @@ ChartConfig.fnNumberFormat = function(value){
   return Highcharts.numberFormat(value, decimal, '.', ' ');
 }
 
-ChartConfig.fBaseAreaConfig = function(){
-  const config = Chart.fBaseConfig();
-  config.zhDetailCharts = [];
-  config.zhToggleSeria = ChartFn.toggleSeria;
+ChartConfig.fBaseAreaConfig = function() {
+  const config = Object.assign( Chart.fBaseConfig(), {
+    zhDetailCharts: [],
+    zhToggleSeria: ChartFn.toggleSeria
+  });
 
-  const chart = config.chart;
-  chart.zoomType = 'xy';
-  chart.resetZoomButton = Chart.fResetZoomButton({ position: { x : -10 } });
-  chart.xDeltaCrossLabel = 4;
-  chart.yDeltaCrossLabel = 20;
+  config.chart = Object.assign( config.chart, {
+    zoomType: 'xy',
+    resetZoomButton: Chart.fResetZoomButton({ position: { x : -10 } }),
+    xDeltaCrossLabel: 4,
+    yDeltaCrossLabel: 20
+  })
 
-  config.xAxis = Chart.fXAxisOpposite(config.xAxis)
-  config.xAxis.events = {
-    afterSetExtremes : ChartFn.zoomIndicatorCharts
-  }
+  config.xAxis = Object.assign( Chart.fXAxisOpposite(config.xAxis), {
+    events: {
+      afterSetExtremes : ChartFn.zoomIndicatorCharts
+    }
+  })
 
   config.yAxis.plotLines = [
     Chart.fPlotLine(COLOR.HIGH, 'max'),

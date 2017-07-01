@@ -39,7 +39,13 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
 }
 
 const _addSettings = (option) => {
-  option.apiKey = ChartStore.getQuandlKey()
+  if (option.loadId === 'B') {
+    option.apiKey = ChartStore.getBarchartKey()
+  } else if (option.loadId === 'AL') {
+    option.apiKey = ChartStore.getAlphaKey()
+  } else {
+    option.apiKey = ChartStore.getQuandlKey()
+  }
 
   option.isDrawDeltaExtrems = ChartStore.isSetting('isDrawDeltaExtrems')
   option.isNotZoomToMinMax = ChartStore.isSetting('isNotZoomToMinMax')
@@ -72,8 +78,12 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function(){
   option.key = key;
   this.isShouldEmit = true;
   _addSettings(option)
-    
-  if (option.isKeyFeature && !option.apiKey){
+
+  if (option.loadId === 'B' && !option.apiKey){
+    this.cancelLoad(option, Msg.Alert.withoutApiKey('Barchart Market Data'), false);
+  } else if (option.loadId === 'AL' && !option.apiKey) {
+    this.cancelLoad(option, Msg.Alert.withoutApiKey('Alpha Vantage'), false);
+  } else if (option.isKeyFeature && !option.apiKey){
     this.cancelLoad(option, Msg.Alert.FEATURE_WITHOUT_KEY, false);
   } else if (option.isPremium && !option.apiKey){
     this.cancelLoad(option, Msg.Alert.PREMIUM_WITHOUT_KEY, false);
@@ -94,15 +104,6 @@ ChartActions[ChartActionTypes.LOAD_STOCK].shouldEmit = function(){
   return this.isShouldEmit;
 }
 ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, browserType, option){
-  /*
-  console.log('LOAD_STOCK:');
-  console.log('chartType:');
-  console.log(chartType);
-  console.log('browserType:');
-  console.log(browserType);
-  console.log('option:');
-  console.log(option);
-  */
 
   this.isLoading = true;
   this.idLoading = option.key;

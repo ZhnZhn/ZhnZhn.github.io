@@ -11,12 +11,14 @@ import ChartLegend from '../charts/ChartLegend';
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from './IndicatorSma';
 
 import QuandlFn2 from './QuandlFn2';
+import AdapterFn from './AdapterFn';
 
 import {fCreatePieConfig} from './QuandlToPie';
 import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
 import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
 import {fCreateTreeMapConfig} from './QuandlToTreeMap';
 
+import COLOR from './Colors'
 
 const C = {
   OPEN : "Open",
@@ -28,13 +30,7 @@ const C = {
   EX_DIVIDEND : "Ex-Dividend",
   SPLIT_RATIO : "Split Ratio",
   UNKNOWN : "Unknown",
-
-  COLOR_BLUE : "#2f7ed8", // #7cb5ec
-  COLOR_GREEN : "#80c040",
-  COLOR_RED : "#F44336",
-  COLOR_WHITE : "white",
-  //COLOR_GRAY : "gray"
-  COLOR_GRAY : '#607d8b'
+  ...COLOR
 }
 
 
@@ -100,29 +96,13 @@ const _fnAddVolume = function(optionIndex, result){
   const { volume, open, close=4, low=3, high=2 } = optionIndex
       , { point, dateUTC, dataVolume, dataVolumeColumn } = result
       , _open = (open) ? point[open] : undefined;
+
   dataVolume.push([dateUTC, point[volume]]);
-  if (_open && point[close]>_open){
-    dataVolumeColumn.push({
-      x : dateUTC, y : point[volume],
-      _open : _open, _close : point[close],
-      _low: point[low], _high: point[high],
-      color: C.COLOR_GREEN
-    });
-  } else if (_open && point[close]<_open){
-    dataVolumeColumn.push({
-      x : dateUTC, y : point[volume],
-      _open : _open, _close : point[close],
-      _low: point[low], _high: point[high],
-      color: C.COLOR_RED
-    });
-  } else {
-    dataVolumeColumn.push({
-      x : dateUTC, y : point[volume],
-      _open : _open, _close : point[close],
-      _low: point[low], _high: point[high],
-      color: C.COLOR_GRAY
-    });
-  }
+  dataVolumeColumn.push( AdapterFn.volumeColumnPoint({
+    open: _open, close: point[close], date: dateUTC, volume: point[volume],
+    option: {_low: point[low], _high: point[high]},
+  }))
+
   return result;
 }
 
@@ -131,33 +111,11 @@ const _fnAddATH = function(optionIndex, result){
       , { dateUTC, point, seria, dataATH } = result
       , len = seria.length;
 
-  if (len>1){
-    const prevPoint = seria[len-2]
-        , _closePrev = prevPoint[1]
-        , _bDelta = (point[open] && _closePrev)
-            ? Big(_closePrev).minus(point[open])
-            : Big('0.0')
-        , _bPercent = ( _closePrev )
-            ? _bDelta.times(100).div(_closePrev).abs().toFixed(2)
-            : Big('0.0');
-
-    let _color;
-    if (_bDelta.gt(0.0)){
-      _color = C.COLOR_RED;
-    }
-    else if (!_bDelta.gte(0.0)){
-      _color = C.COLOR_GREEN;
-    } else {
-      _color = (point[open]) ? C.COLOR_GRAY : C.COLOR_WHITE;
-    }
-
-    dataATH.push({
-      x : dateUTC,
-      y : parseFloat(_bPercent),
-      close : _closePrev,
-      open : (point[open]) ? point[open] : C.UNKNOWN,
-      color : _color
-    })
+  if (len>1) {
+    const _prevPoint = seria[len-2];
+    dataATH.push(AdapterFn.athPoint({
+      date: dateUTC, prevClose: _prevPoint[1], open: point[open]
+    }))
   }
 
   return result;
@@ -409,6 +367,7 @@ const fnGetSeries = function(config, json, option){
    config.zhVolumeConfig = (dataVolume.length>0)
             ? ChartConfig.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume)
             : undefined;
+
    config.zhATHConfig = (dataATH.length>0)
             ? ChartConfig.fIndicatorATHConfig(chartId, dataATH)
             : undefined;
@@ -496,9 +455,9 @@ const _rToConfig = {
 
 const QuandlAdapter = {
   toConfig(json, option){
-     const { seriaType=ChartType.AREA } = option;
-
-     return _rToConfig[seriaType](json, option);
+     const { seriaType=ChartType.AREA } = option
+         , _config = _rToConfig[seriaType](json, option);     
+     return _config;
   },
 
   toSeries(json, option){

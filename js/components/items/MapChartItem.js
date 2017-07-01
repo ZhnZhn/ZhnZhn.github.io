@@ -178,7 +178,6 @@ var MapChartItem = function (_Component) {
           jsonCube = config.json,
           zhMapSlice = config.zhMapSlice;
 
-      //console.log(this.props);
 
       _ChoroplethMap2.default.draw('map_' + caption, jsonCube, zhMapSlice).then(function (option) {
         _this2.map = option.map;

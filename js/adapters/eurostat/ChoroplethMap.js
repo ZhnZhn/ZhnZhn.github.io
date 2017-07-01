@@ -210,7 +210,6 @@ var _fnCreateRowEl = function _fnCreateRowEl(color, from, to, cluster, wg) {
   var _n = (0, _safeGet2.default)(cluster, 'points.length', 0);
   var el = _fnCreateEl('p', '', 'opacity: 0.7; background: ' + color + '; padding: 5px 6px; cursor: pointer;');
   el.addEventListener('click', function (event) {
-    //console.log(cluster)
     wg.updateCluster(cluster, color, from, to);
   });
   el.innerHTML = '<span>' + from + '&ndash;' + to + '<span>\n                  <span style="float: right; color: black; padding-left: 16px">' + _n + '</span>';

@@ -58,6 +58,8 @@ var ChartType = exports.ChartType = {
 
 var LoadType = exports.LoadType = {
    Q: 'Q',
+   B: 'B',
+   AL: 'AL',
    QCT: 'QCT',
    EU_STAT: 'EU_STAT',
    WL: 'WL'

@@ -5,11 +5,23 @@ import ArrowCell from './ArrowCell';
 const MAX_WITHOUT_ANIMATION = 800
     , CLASS_ROW_ACTIVE = "option-row__active";
 
-const _fnNoItem = (propCaption) => {
+const _fnNoItem = (propCaption, inputValue, isWithInput) => {
+  const _inputValue = String(inputValue).trim()
+      , _caption = (isWithInput)
+           ? `From input: ${_inputValue}`
+           : 'No results found';
   return {
-    [propCaption]: 'No results found',
-    value: 'noresult'
+    [propCaption]: _caption,
+    value: 'noresult',
+    inputValue: _inputValue
   };
+}
+
+const _toItem = (item, propCaption) => {
+  return {
+    [propCaption]: 'From Input',
+    value: item.inputValue
+  }
 }
 
 const _crWidth = (width) => {
@@ -155,10 +167,11 @@ class InputSelect extends Component {
   static defaultProps = {
     propCaption: 'caption',
     ItemOptionComp: ItemOptionDf,
-    options : [],
-    optionName : '',
-    optionNames : '',
-    isUpdateOptions : false,
+    options: [],
+    optionName: '',
+    optionNames: '',
+    isUpdateOptions: false,
+    isWithInput: false,
     onSelect: () => {},
     onLoadOption: () => {}
   }
@@ -277,8 +290,9 @@ class InputSelect extends Component {
         arr = this._filterOptions(this.props.options, token);
       }
       if (arr.length === 0){
-        arr.push(_fnNoItem(this.propCaption))
-        //arr.push(_fnNoItem(this.propCaption)NO_ITEM);
+        arr.push(_fnNoItem(
+          this.propCaption, token, this.props.isWithInput
+        ))
       }
       this._undecorateActiveRowComp()
       this.indexActiveOption = 0;
@@ -330,7 +344,11 @@ class InputSelect extends Component {
            if (item.value !== 'noresult'){
              this.props.onSelect(item);
            } else {
-             this.props.onSelect(null);
+             if (!this.props.isWithInput) {
+                this.props.onSelect(null);
+             } else {
+               this.props.onSelect(_toItem(item, this.propCaption))
+             }
            }
          }
       break; }
@@ -401,7 +419,7 @@ class InputSelect extends Component {
           }
         }
       break;
-      default: /*console.log(event.keyCode);*/ return;
+      default: return undefined;
     }
   }
 
