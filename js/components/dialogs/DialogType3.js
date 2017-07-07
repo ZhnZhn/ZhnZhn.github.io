@@ -38,9 +38,9 @@ var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -147,7 +147,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
         caption: 'T', onClick: _this._handleClickTransform
       });
     }
-
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowTransform: false,
       validationMessages: []
@@ -187,13 +187,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           onTestDate = _props.onTestDate,
           _state = this.state,
           isShowTransform = _state.isShowTransform,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -201,7 +195,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

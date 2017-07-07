@@ -24,9 +24,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
@@ -89,14 +89,15 @@ var AskDialog = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (AskDialog.__proto__ || Object.getPrototypeOf(AskDialog)).call(this));
 
     _this._handleLoad = _this._handleLoad.bind(_this);
-    _this.commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-      type: 'TypeC',
-      caption: 'Yes, Load',
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+      caption: 'Yes, Load'
+      //accessKey="s"
+      , isPrimary: true,
       onClick: _this._handleLoad
-    }), _react2.default.createElement(_ActionButton2.default, {
-      type: 'TypeC',
-      caption: 'No, Close',
-      onClick: props.onClose
+    }), _react2.default.createElement(_Button2.default.Flat, {
+      caption: 'No, Close'
+      //accessKey="c"
+      , onClick: props.onClose
     })];
     return _this;
   }
@@ -148,7 +149,7 @@ var AskDialog = function (_Component) {
           style: S.MODAL,
           caption: 'Confirm Load',
           isShow: isShow,
-          commandButtons: this.commandButtons,
+          commandButtons: this._commandButtons,
           withoutClose: true,
           onClose: onClose
         },

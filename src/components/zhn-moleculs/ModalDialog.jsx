@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import SvgClose from '../zhn/SvgClose';
-import ActionButton from '../zhn/ActionButton';
+import SvgClose from '../zhn/SvgClose'
+import FlatButton from '../zhn-m/FlatButton'
 
 const CL = {
   SHOWING : 'show-popup',
@@ -43,6 +43,9 @@ const STYLE = {
      marginTop: '8px',
      marginBottom: '10px',
      marginRight: '4px'
+  },
+  BT_ROOT: {
+    color: 'rgb(35, 47, 59)'
   }
 };
 
@@ -81,7 +84,7 @@ class ModalDialog extends Component {
    componentDidUpdate(prevProps, prevState){
      if (this.wasClosing){
        setTimeout(
-         () => { this.setState({}) }, 
+         () => { this.setState({}) },
          this.props.timeout
        )
      }
@@ -97,10 +100,11 @@ class ModalDialog extends Component {
       <div style={STYLE.COMMAND_DIV}>
         {commandButtons}
         { !withoutClose &&
-            <ActionButton
-               type="TypeC"
-               caption="Close"
-               onClick={onClose}
+            <FlatButton
+              rootStyle={STYLE.BT_ROOT}
+              caption="Close"
+              title="Close Modal Dialog"              
+              onClick={onClose}
             />
         }
       </div>

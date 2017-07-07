@@ -34,9 +34,9 @@ var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _SelectWithLoad = require('./SelectWithLoad');
 
@@ -148,6 +148,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowDate: true,
       isShowOptions: false,
@@ -188,13 +189,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           _state = this.state,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -202,7 +197,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

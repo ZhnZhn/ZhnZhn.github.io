@@ -1,0 +1,14 @@
+{
+  "metals": [
+    { "caption": "Aluminium", "value": "PR_AL" },
+    { "caption": "Aluminium Alloy", "value": "PR_AA" },
+    { "caption": "NASAAC", "value": "PR_NA" },
+    { "caption": "Copper", "value": "PR_CU" },
+    { "caption": "Lead", "value": "PR_PB" },
+    { "caption": "Nickel", "value": "PR_NI" },
+    { "caption": "Tin", "value": "PR_TN" },
+    { "caption": "Zinc", "value": "PR_ZI" },
+    { "caption": "Cobalt", "value": "PR_CO" },
+    { "caption": "Molybdenum", "value": "PR_MO" }    
+  ]
+}

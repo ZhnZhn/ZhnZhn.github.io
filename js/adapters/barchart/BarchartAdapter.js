@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _DateUtils = require('../../utils/DateUtils');
+
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
+
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
@@ -20,6 +24,14 @@ var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
+var _ChartFn = require('../../charts/ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
+var _Tooltip = require('../../charts/Tooltip');
+
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
+
 var _IndicatorSma = require('../IndicatorSma');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35,17 +47,17 @@ var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
       _dataVolumeColumn = [],
       _dataATH = [],
       _dataMfi = [];
-  var _prevClose = void 0;
-  var _minClose = Number.POSITIVE_INFINITY;
-  var _maxClose = Number.NEGATIVE_INFINITY;
+  var _prevClose = void 0,
+      _minClose = Number.POSITIVE_INFINITY,
+      _maxClose = Number.NEGATIVE_INFINITY;
   results.forEach(function (item) {
     var _item$tradingDay = item.tradingDay,
         tradingDay = _item$tradingDay === undefined ? '' : _item$tradingDay,
-        close = item.close,
-        volume = item.volume,
         open = item.open,
         high = item.high,
         low = item.low,
+        close = item.close,
+        volume = item.volume,
         _date = _AdapterFn2.default.ymdToUTC(tradingDay);
 
     if (_minClose > close) {
@@ -75,6 +87,7 @@ var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
     type: 'area',
     lineWidth: 1
   };
+  config.series[0].point = _Chart2.default.fEventsMouseOver(_ChartFn2.default.handlerMouserOverPoint);
 
   Object.assign(config, {
     valueMoving: _QuandlFn2.default.createValueMovingFromSeria(_data),
@@ -95,15 +108,16 @@ var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
   plotLines[1].value = _minClose;
   plotLines[1].label.text = '' + _ChartConfig2.default.fnNumberFormat(_minClose);
 
-  var _min = _Chart2.default.calcMinY({
-    minPoint: _minClose, maxPoint: _maxClose
-  });
   Object.assign(config.yAxis, {
-    min: _min,
+    min: _Chart2.default.calcMinY({ minPoint: _minClose, maxPoint: _maxClose }),
     maxPadding: 0.15,
     minPadding: 0.15,
     endOnTick: false,
     startOnTick: false
+  });
+
+  Object.assign(config.xAxis, {
+    crosshair: _Chart2.default.fCrosshair()
   });
 };
 
@@ -118,25 +132,29 @@ var _createAreaConfig = function _createAreaConfig(json, option) {
       _chartId = 'B/' + value;
 
 
-  config.title = _Chart2.default.fTitle({ text: caption, y: -10 });
-  _createCloseSeries(config, json, _chartId);
+  Object.assign(config, {
+    title: _Chart2.default.fTitle({ text: caption, y: _Chart2.default.STACKED_TITLE_Y }),
+    subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.STACKED_SUBTITLE_Y }),
+    tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatter),
+    info: {
+      description: DESCR,
+      frequency: "daily",
+      name: caption,
+      newest_available_date: _DateUtils2.default.getFromDate(0),
+      oldest_available_date: _DateUtils2.default.getFromDate(2)
+    },
+    zhConfig: {
+      columnName: "Close",
+      dataColumn: 4,
+      dataSource: "Barchart Market Data Solutions",
+      id: _chartId,
+      isWithLegend: false,
+      key: '' + value,
+      linkFn: "NASDAQ"
+    }
+  });
 
-  config.info = {
-    description: DESCR,
-    frequency: "daily",
-    name: caption,
-    newest_available_date: "",
-    oldest_available_date: ""
-  };
-  config.zhConfig = {
-    columnName: "Close",
-    dataColumn: 4,
-    dataSource: "Barchart Market Data Solutions",
-    id: _chartId,
-    isWithLegend: false,
-    key: '' + value,
-    linkFn: "NASDAQ"
-  };
+  _createCloseSeries(config, json, _chartId);
 
   return {
     config: config,
@@ -152,8 +170,10 @@ var BarchartAdapter = {
   },
   toSeries: function toSeries(json, option) {
     var seria = _ChartConfig2.default.fSeries();
-    seria.zhSeriaId = 'Empty_Seria';
-    seria.zhValueText = 'Empty Seria';
+    Object.assign(seria, {
+      zhSeriaId: 'Empty_Seria',
+      zhValueText: 'Empty Seria'
+    });
     return seria;
   }
 };

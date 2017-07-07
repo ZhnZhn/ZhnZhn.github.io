@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import RowInputSelect from './RowInputSelect';
-import RowInputText from './RowInputText';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ActionButton from '../zhn/ActionButton';
-
-import STYLE from './Pane.Style';
+import RowInputSelect from './RowInputSelect'
+import RowInputText from './RowInputText'
+import ValidationMessages from '../zhn/ValidationMessages'
+import Button from './Button'
+import RowButtons from './RowButtons'
 
 class ListCreatePane extends Component {
   static propTypes = {
@@ -25,7 +24,11 @@ class ListCreatePane extends Component {
   constructor(props){
     super()
     this.captionGroup = null
-
+    this._primaryBt = <Button.Primary
+                         caption="Create"
+                         title="Create New List"
+                         onClick={this._handleCreate}
+                      />
     this.state = {
       groupOptions : props.store.getWatchGroups(),
       isUpdateGroup : false,
@@ -96,35 +99,23 @@ class ListCreatePane extends Component {
     return (
       <div>
         <RowInputSelect
-           caption={'In Group:'}
+           caption="In Group:"
            options={groupOptions}
            //isUpdateOptions={isUpdateGroup}
            onSelect={this._handleSelectGroup}
         />
         <RowInputText
            ref={c => this.inputText = c}
-           caption={'List:'}
+           caption="List:"
         />
         <ValidationMessages
           validationMessages={validationMessages}
         />
-        <div style={STYLE.COMMAND_DIV}>
-         <ActionButton
-            type="TypeC"
-            caption="Create"
-            onClick={this._handleCreate}
-         />
-         <ActionButton
-            type="TypeC"
-            caption="Clear"
-            onClick={this._handleClear}
-         />
-         <ActionButton
-            type="TypeC"
-            caption="Close"
-            onClick={onClose}
-         />
-       </div>
+        <RowButtons
+           Primary={this._primaryBt}
+           onClear={this._handleClear}
+           onClose={onClose}
+        />        
       </div>
     )
   }

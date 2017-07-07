@@ -50,9 +50,9 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('../dialogs/Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _withToolbar = require('../dialogs/decorators/withToolbar');
 
@@ -152,6 +152,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowOptions: false
     };
@@ -178,20 +179,15 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           oneJsonProp = _props.oneJsonProp,
           oneCaption = _props.oneCaption,
           onShow = _props.onShow,
-          isShowOptions = this.state.isShowOptions,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          isShowOptions = this.state.isShowOptions;
+
 
       return _react2.default.createElement(
         _DraggableDialog2.default,
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

@@ -52,7 +52,7 @@ const _fnTooltipSparkType4 = function({
   </div>`
 }
 
-const _fnBaseTooltip = function({date, id, color, valueText, value}){
+const _fnBaseTooltip = function({date, id, color, valueText='Value', value}){
   const _style = (color)
            ? `style="color:${color};"`
            : '';
@@ -67,7 +67,7 @@ const _fnExDividend = function({date, id, valueText, value, point}){
   return _fnTooltipHeader(date, id) +
   `<div class="tp__body">
   <span class="tp__body__title">Ex-Dividend: </span>
-  <span style="color: green;">${point.exValue}</span><br/>
+  <span style="color: #90ed7d;">${point.exValue}</span><br/>
   <span class="tp__body__title">Close: </span>
   <span class="tp__body__value">${point.price}</span>
   </div>`

@@ -152,10 +152,12 @@ var ChartContainer = function (_Component) {
 
     _this._handleResizeAfter = function (parentWidth) {
       var i = 0,
-          max = _this.state.configs.length;
+          max = _this.state.configs.length,
+          _propName = void 0;
       for (; i < max; i++) {
-        if (typeof _this.refs['chart' + i].reflowChart === 'function') {
-          _this.refs['chart' + i].reflowChart(parentWidth - _this.childMargin);
+        _propName = 'chart' + i;
+        if (_this.refs[_propName] && typeof _this.refs[_propName].reflowChart === 'function') {
+          _this.refs[_propName].reflowChart(parentWidth - _this.childMargin);
         }
       }
     };

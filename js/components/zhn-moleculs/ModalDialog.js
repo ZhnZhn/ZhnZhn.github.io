@@ -34,9 +34,9 @@ var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _FlatButton = require('../zhn-m/FlatButton');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80,6 +80,9 @@ var STYLE = {
     marginTop: '8px',
     marginBottom: '10px',
     marginRight: '4px'
+  },
+  BT_ROOT: {
+    color: 'rgb(35, 47, 59)'
   }
 };
 
@@ -101,9 +104,10 @@ var ModalDialog = (_temp = _class = function (_Component) {
         'div',
         { style: STYLE.COMMAND_DIV },
         commandButtons,
-        !withoutClose && _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
+        !withoutClose && _react2.default.createElement(_FlatButton2.default, {
+          rootStyle: STYLE.BT_ROOT,
           caption: 'Close',
+          title: 'Close Modal Dialog',
           onClick: onClose
         })
       );

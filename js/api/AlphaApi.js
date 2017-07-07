@@ -19,6 +19,9 @@ var AlphaApi = {
         _option$apiKey = option.apiKey,
         apiKey = _option$apiKey === undefined ? 'demo' : _option$apiKey;
 
+    if (indicator === 'SECTOR') {
+      return C.ROOT + '?function=' + indicator + '&apikey=' + apiKey;
+    }
     return C.ROOT + '?function=' + indicator + '&symbol=' + ticket + '&interval=daily&time_period=' + period + '&series_type=close&apikey=' + apiKey;
   },
   checkResponse: function checkResponse(json) {

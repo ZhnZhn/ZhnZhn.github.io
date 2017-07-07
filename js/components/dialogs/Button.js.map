@@ -1,0 +1,18 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\Button.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\Button.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "LOAD",
+  "color",
+  "SHOW",
+  "Load",
+  "onClick",
+  "Show",
+  "Flat"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAM;AACJC,WAAO;AADH,GADE;AAIRC,QAAM;AACJD,WAAO;AADH;AAJE,CAAV;;AASA,IAAME,OAAO,SAAPA,IAAO;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,SACX;AACE,eAAWL,EAAEC,IADf;AAEE,aAAQ,MAFV;AAGE,WAAM;AACN;AAJF,MAKE,SAASI;AALX,IADW;AAAA,CAAb;;AASE,IAAMC,OAAO,SAAPA,IAAO;AAAA,MAAGD,OAAH,SAAGA,OAAH;AAAA,SACX;AACE,eAAWL,EAAEG,IADf;AAEE,aAAQ,MAFV;AAGE,WAAM;AACN;AAJF,MAKE,SAASE;AALX,IADW;AAAA,CAAb;;kBAUa,EAAED,UAAF,EAAQE,UAAR,EAAcC,0BAAd,E"
+}

@@ -36,9 +36,9 @@ var _RowSecret = require('../dialogs/RowSecret');
 
 var _RowSecret2 = _interopRequireDefault(_RowSecret);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _FlatButton = require('../zhn-m/FlatButton');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
 var _RowCheckBox = require('../dialogs/RowCheckBox');
 
@@ -94,9 +94,9 @@ var SettingsDialog = function (_Component) {
       fnMode(mode);
     };
 
-    _this.commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-      type: 'TypeC',
-      caption: 'Set',
+    _this._commandButtons = [_react2.default.createElement(_FlatButton2.default, {
+      caption: 'Set & Close',
+      isPrimary: true,
       onClick: _this._handleSet
     })];
     return _this;
@@ -129,7 +129,7 @@ var SettingsDialog = function (_Component) {
           style: S.MODAL,
           caption: 'User Settings',
           isShow: isShow,
-          commandButtons: this.commandButtons,
+          commandButtons: this._commandButtons,
           onClose: onClose
         },
         _react2.default.createElement(_RowSecret2.default, {

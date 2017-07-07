@@ -32,8 +32,8 @@ module.exports = {
       filename: "[name]_[chunkhash].js",
       chunkFilename: "[chunkhash].js"
   },
-  resolve: {
-    modulesDirectories: ['local_modules', 'node_modules']
+  resolve: {    
+    modules: ['local_modules', 'node_modules']
   },
   plugins : [
     new webpack.DefinePlugin({
@@ -44,7 +44,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['lib', 'manifest']
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({        
         compress: {
            warnings: false
         },

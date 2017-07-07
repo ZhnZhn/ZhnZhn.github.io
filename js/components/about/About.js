@@ -226,50 +226,46 @@ var About = function (_Component) {
                 _LinkToken2.default,
                 {
                   href: 'https://www.quandl.com/',
-                  color: '#E05927',
-                  isFirstBlank: true
+                  color: '#E05927'
                 },
                 'Quandl'
               ),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black' },
-                '\xA0(Key),'
+                '\xA0(Key),\xA0'
               ),
               _react2.default.createElement(
                 _LinkToken2.default,
                 {
                   href: 'http://ec.europa.eu/eurostat',
-                  color: '#009ae5',
-                  isFirstBlank: true
+                  color: '#009ae5'
                 },
                 'Eurostat'
               ),
               _react2.default.createElement(
                 _Token2.default,
                 { color: '#009ae5' },
-                ','
+                ',\xA0'
               ),
               _react2.default.createElement(
                 _LinkToken2.default,
                 {
                   href: 'https://www.barchartmarketdata.com',
-                  color: '#bd1010',
-                  isFirstBlank: true
+                  color: '#bd1010'
                 },
                 'Barchart Market Data'
               ),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black' },
-                '\xA0(Key),'
+                '\xA0(Key),\xA0'
               ),
               _react2.default.createElement(
                 _LinkToken2.default,
                 {
                   href: 'https://www.alphavantage.co',
-                  color: '#009ae5',
-                  isFirstBlank: true
+                  color: '#009ae5'
                 },
                 'Alpha Vantage'
               ),

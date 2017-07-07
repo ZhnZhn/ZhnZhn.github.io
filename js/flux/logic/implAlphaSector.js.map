@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\implAlphaSector.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\implAlphaSector.js",
+ "sourceRoot": "",
+ "names": [
+  "loadAlphaSector",
+  "fnFetch",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,kBAAkB,wBAAS;AAC/BC,sBAD+B,EACtBC,uBADsB,EACjBC;AADiB,CAAT,CAAxB;;kBAIeH,e"
+}

@@ -46,9 +46,9 @@ var _RowPattern = require('../dialogs/RowPattern');
 
 var _RowPattern2 = _interopRequireDefault(_RowPattern);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('../dialogs/Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
@@ -185,12 +185,6 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           zipCode = _this.inputZipCode.getValue();
 
       return _loadFn(_this.props, { one: _this.one, two: two, three: three, fromDate: fromDate, toDate: toDate, zipCode: zipCode });
-      /*
-      return this.props.loadFn(
-        this.props,
-        { one : this.one, two, three, fromDate, toDate }
-      );
-      */
     };
 
     _this._handleClose = function () {
@@ -199,6 +193,7 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
     };
 
     _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowDate: true,
       isShowPattern: false,
@@ -242,13 +237,7 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           _state = this.state,
           isShowDate = _state.isShowDate,
           isShowPattern = _state.isShowPattern,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -256,7 +245,7 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -36,11 +40,11 @@ var _IconLogoErc = require('./IconLogoErc');
 
 var _IconLogoErc2 = _interopRequireDefault(_IconLogoErc);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _FlatButton = require('../zhn-m/FlatButton');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
-var _ModalButton = require('../zhn/ModalButton');
+var _ModalButton = require('../zhn-m/ModalButton');
 
 var _ModalButton2 = _interopRequireDefault(_ModalButton);
 
@@ -87,25 +91,22 @@ var styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  btDS: {
-    marginTop: '8px',
-    marginLeft: '10px'
+  btTopics: {
+    marginLeft: '8px'
   },
-  bt: {
-    marginTop: '8px'
+  btRoot: {
+    color: 'rgb(35, 47, 59)'
   },
   btAbout: {
-    float: 'right',
-    marginRight: '20px',
-    marginTop: '8px'
+    float: 'right'
   },
   btSettings: {
     float: 'right',
-    marginTop: '8px'
+    marginRight: '20px'
   },
   lbLimit: {
     float: 'right',
-    paddingTop: '14px'
+    paddingTop: '9px'
   }
 };
 
@@ -178,49 +179,53 @@ var HeaderBar = function (_Component) {
         _react2.default.createElement(
           _ModalButton2.default,
           {
-            style: styles.btDS,
-            type: 'TypeA',
-            caption: 'DS',
-            title: 'Data Source Browsers',
+            rootStyle: (0, _extends3.default)({}, styles.btRoot, styles.btTopics),
+            caption: 'Topics',
+            title: 'Topic Data Source Browsers',
+            accessKey: 't',
             onClick: this._handleClickDS,
             onReg: this._onRegDS
           },
           _react2.default.createElement('span', { className: 'arrow-down' })
         ),
-        _react2.default.createElement(_ActionButton2.default, {
-          style: styles.bt,
-          type: 'TypeA',
+        _react2.default.createElement(_FlatButton2.default, {
+          className: 'header__bt-quandl',
+          rootStyle: styles.btRoot,
           caption: 'Quandl',
           title: 'Quandl Economic Browser',
+          accessKey: 'q',
           onClick: this._handleClickQuandl
         }),
-        _react2.default.createElement(_ActionButton2.default, {
-          style: styles.bt,
-          type: 'TypeA',
+        _react2.default.createElement(_FlatButton2.default, {
+          className: 'header_bt-eurostat',
+          rootStyle: styles.btRoot,
           caption: 'Eurostat',
           title: 'European Statistics Browser',
+          accessKey: 'u',
           onClick: this._handleClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
         }),
-        _react2.default.createElement(_ActionButton2.default, {
-          style: styles.bt,
-          type: 'TypeA',
+        _react2.default.createElement(_FlatButton2.default, {
+          className: 'header__bt-watch',
+          rootStyle: styles.btRoot,
           caption: 'Watch',
           title: 'Watch List Browser',
+          accessKey: 'w',
           onClick: this._handleClickWatch
         }),
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeA',
-          style: styles.btAbout,
-          caption: 'About',
-          title: 'Description about application ERC',
-          onClick: _ComponentActions2.default.showAbout
-        }),
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeA',
-          style: styles.btSettings,
+        _react2.default.createElement(_FlatButton2.default, {
+          rootStyle: (0, _extends3.default)({}, styles.btRoot, styles.btSettings),
           caption: 'Settings',
           title: 'Application settings',
+          accessKey: 's',
+          isPrimary: true,
           onClick: this._handleDialogSettings
+        }),
+        _react2.default.createElement(_FlatButton2.default, {
+          rootStyle: (0, _extends3.default)({}, styles.btRoot, styles.btAbout),
+          caption: 'About',
+          title: 'Description about application ERC',
+          accessKey: 'a',
+          onClick: _ComponentActions2.default.showAbout
         }),
         _react2.default.createElement(_LimitRemainingLabel2.default, {
           store: store,

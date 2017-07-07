@@ -40,10 +40,6 @@ var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _ActionButton = require('../zhn/ActionButton');
-
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
-
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -55,6 +51,10 @@ var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+
+var _Button = require('./Button');
+
+var _Button2 = _interopRequireDefault(_Button);
 
 var _withValidationLoad = require('./decorators/withValidationLoad');
 
@@ -91,6 +91,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
         _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
         _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
 
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_Button2.default.Show, { onClick: props.data.onShow })];
     _this.state = {
       initFromDate: _initFromDate,
       initToDate: _initToDate,
@@ -120,22 +121,13 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           data = _props$data2 === undefined ? {} : _props$data2,
           _data$item = data.item,
           item = _data$item === undefined ? {} : _data$item,
-          onShow = data.onShow,
           text = item.text,
           _state = this.state,
           initFromDate = _state.initFromDate,
           initToDate = _state.initToDate,
           onTestDate = _state.onTestDate,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      }), _react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Show',
-        onClick: onShow
-      })];
+          validationMessages = _state.validationMessages;
+
 
       return _react2.default.createElement(
         _ModalDialog2.default,
@@ -143,7 +135,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           caption: text,
           styleCaption: STYLE.CAPTION_SPAN,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
         _react2.default.createElement(_RowInputSelect2.default, {

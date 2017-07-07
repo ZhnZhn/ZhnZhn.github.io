@@ -32,13 +32,13 @@ var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
-var _Pane = require('./Pane.Style');
+var _RowButtons = require('./RowButtons');
 
-var _Pane2 = _interopRequireDefault(_Pane);
+var _RowButtons2 = _interopRequireDefault(_RowButtons);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -91,7 +91,11 @@ var GroupDeletePane = function (_Component) {
     };
 
     _this.caption = null;
-
+    _this._primaryBt = _react2.default.createElement(_Button2.default.Primary, {
+      caption: 'Delete',
+      title: 'Delete Group',
+      onClick: _this._handleDeleteGroup
+    });
     _this.state = {
       groupOptions: props.store.getWatchGroups(),
       validationMessages: []
@@ -130,20 +134,11 @@ var GroupDeletePane = function (_Component) {
         _react2.default.createElement(_ValidationMessages2.default, {
           validationMessages: validationMessages
         }),
-        _react2.default.createElement(
-          'div',
-          { style: _Pane2.default.COMMAND_DIV },
-          _react2.default.createElement(_ActionButton2.default, {
-            type: 'TypeC',
-            caption: 'Delete',
-            onClick: this._handleDeleteGroup
-          }),
-          _react2.default.createElement(_ActionButton2.default, {
-            type: 'TypeC',
-            caption: 'Close',
-            onClick: onClose
-          })
-        )
+        _react2.default.createElement(_RowButtons2.default, {
+          Primary: this._primaryBt,
+          withoutClear: true,
+          onClose: onClose
+        })
       );
     }
   }]);

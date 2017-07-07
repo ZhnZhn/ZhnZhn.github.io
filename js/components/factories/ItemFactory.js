@@ -12,6 +12,8 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _rCreateItem2;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -33,6 +35,10 @@ var _AreaChartItem2 = _interopRequireDefault(_AreaChartItem);
 var _MapChartItem = require('../items/MapChartItem');
 
 var _MapChartItem2 = _interopRequireDefault(_MapChartItem);
+
+var _SectorItem = require('../items/SectorItem');
+
+var _SectorItem2 = _interopRequireDefault(_SectorItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72,10 +78,17 @@ var _createMapChartItem = function _createMapChartItem(config, index, option, pr
   }, props));
 };
 
-var _rCreateItem = (0, _defineProperty3.default)({
+var _crSectorItem = function _crSectorItem(config, index, option, props) {
+  return _react2.default.createElement(_SectorItem2.default, {
+    key: 'key',
+    config: config
+  });
+};
+
+var _rCreateItem = (_rCreateItem2 = {
   DEFAULT: _createAreaChartItem
 
-}, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem);
+}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, 'SECTOR', _crSectorItem), _rCreateItem2);
 
 var ItemFactory = {
   createItem: function createItem(config, index, option, props) {

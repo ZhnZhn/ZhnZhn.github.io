@@ -38,9 +38,9 @@ var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ValidationMessages = require('../zhn/ValidationMessages');
 
@@ -141,7 +141,12 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
 
     _this.groupCaption = null;
     _this.listCaption = null;
-
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+      caption: 'Add',
+      title: 'Add Item To Watch List',
+      isPrimary: true,
+      onClick: _this._handleAdd
+    })];
     _this.state = {
       groupOptions: props.store.getWatchGroups(),
       listOptions: [],
@@ -196,19 +201,15 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
           _state = this.state,
           groupOptions = _state.groupOptions,
           listOptions = _state.listOptions,
-          validationMessages = _state.validationMessages,
-          commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Add',
-        onClick: this._handleAdd
-      })];
+          validationMessages = _state.validationMessages;
+
 
       return _react2.default.createElement(
         _ModalDialog2.default,
         {
           caption: 'Add To Watch List',
           isShow: isShow,
-          commandButtons: commandButtons,
+          commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
         _react2.default.createElement(_RowInputSelect2.default, {

@@ -8,12 +8,17 @@ import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import ShowHide from '../zhn/ShowHide';
-import ActionButton from '../zhn/ActionButton';
-
+import Button from '../dialogs/Button';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad'
+
+const S = {
+  BT_ROOT: {
+     color: 'rgb(35, 47, 59)'
+  }
+};
 
 const Placeholder = {
   TRADE : {
@@ -78,6 +83,15 @@ class UNCommodityTradeDialog extends Component {
         caption:'C', title: 'Toggle ChartType Input',
         onClick: this._handlerClickChartType
       }
+    ]
+    this._commandButtons = [
+      <Button.Flat
+        rootStyle={S.BT_ROOT}
+        caption="Load Meta"
+        title="First Load Meta, then Load Item"
+        onClick={this._handlerLoadMeta}
+      />,
+      <Button.Load onClick={this._handlerLoadData} />
     ]
     this.state = {
       isShowFilter : false,
@@ -305,27 +319,13 @@ class UNCommodityTradeDialog extends Component {
            isShowFilter, isShowDate, isShowChartType,
            isLoadingTrade, isLoadingTradeFailed, optionTrades, placeholderTrade,
            validationMessages
-         } = this.state
-        , _commandButtons = [
-       <ActionButton
-          key="a"
-          type="TypeC"
-          caption="Load Meta"
-          onClick={this._handlerLoadMeta}
-       />,
-       <ActionButton
-          key="b"
-          type="TypeC"
-          caption="Load Data"
-          onClick={this._handlerLoadData}
-       />
-    ];
+         } = this.state;
 
     return(
         <DraggableDialog
              caption="United Nations Commodity Trade"
              isShow={isShow}
-             commandButtons={_commandButtons}
+             commandButtons={this._commandButtons}
              onShowChart={onShow}
              onClose={this._handlerClose}
          >

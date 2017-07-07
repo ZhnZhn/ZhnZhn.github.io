@@ -46,9 +46,9 @@ var _RowDate = require('../dialogs/RowDate');
 
 var _RowDate2 = _interopRequireDefault(_RowDate);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('../dialogs/Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ValidationMessages = require('../zhn/ValidationMessages');
 
@@ -146,6 +146,7 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
       caption: 'I', title: 'Information About Dataset',
       onClick: _this._handleClickInfo
     }];
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       validationMessages: []
     };
@@ -177,13 +178,7 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
           initFromDate = _props.initFromDate,
           onTestDateOrEmpty = _props.onTestDateOrEmpty,
           msgTestDateOrEmpty = _props.msgTestDateOrEmpty,
-          validationMessages = this.state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = this.state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -191,7 +186,7 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

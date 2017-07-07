@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectParentChild from './SelectParentChild';
-import ActionButton from '../zhn/ActionButton';
-
+import Button from './Button'
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import RowCheckBox from './RowCheckBox';
 import ValidationMessages from '../zhn/ValidationMessages';
@@ -27,6 +26,9 @@ class DialogType4A extends Component {
       onClick: this._handleClickOptions
     })
     this[HAS_SECOND_Y_AXIS] = false
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ];
     this.state = {
       isShowDate: true,
       isShowOptions: false,
@@ -92,21 +94,15 @@ class DialogType4A extends Component {
            isShow, onShow,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, isShowOptions, validationMessages } = this.state
-        , _commandButtons = [
-             <ActionButton
-                key="a"
-                type="TypeC"
-                caption="Load"
-                onClick={this._handleLoad}
-             />
-          ];
+        , {
+            isShowDate, isShowOptions, validationMessages
+          } = this.state;
 
     return(
         <DraggableDialog
            caption={caption}
            isShow={isShow}
-           commandButtons={_commandButtons}
+           commandButtons={this._commandButtons}
            onShowChart={onShow}
            onClose={this._handleClose}
          >

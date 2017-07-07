@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
 import STYLE from '../styles/DialogStyles';
@@ -55,15 +55,16 @@ class AskDialog extends Component {
     super();
 
     this._handleLoad = this._handleLoad.bind(this)
-    this.commandButtons = [
-        <ActionButton
-          type="TypeC"
+    this._commandButtons = [
+        <Button.Flat
           caption="Yes, Load"
+          //accessKey="s"
+          isPrimary={true}
           onClick={this._handleLoad}
         />,
-        <ActionButton
-          type="TypeC"
+        <Button.Flat
           caption="No, Close"
+          //accessKey="c"
           onClick={props.onClose}
         />
     ]
@@ -71,7 +72,7 @@ class AskDialog extends Component {
 
   _handleLoad(){
     const { data={}, onClose } = this.props
-        , { options={} } = data
+        , { options={} } = data;
 
     if (this.captchaComp.isOk()){
       BrowserActions.showBrowser(options.browserType)
@@ -80,7 +81,7 @@ class AskDialog extends Component {
         options.browserType,
         options
       )
-      onClose();
+      onClose()
     }
   }
 
@@ -101,7 +102,7 @@ class AskDialog extends Component {
         style={S.MODAL}
         caption="Confirm Load"
         isShow={isShow}
-        commandButtons={this.commandButtons}
+        commandButtons={this._commandButtons}
         withoutClose={true}
         onClose={onClose}
       >

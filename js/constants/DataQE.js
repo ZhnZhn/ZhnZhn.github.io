@@ -26,6 +26,45 @@ var DataQE = {
     },
     dataColumn: 1
   },
+  QE_WIKI_COMMODITY_PRICE: {
+    type: 'QE_WIKI_COMMODITY_PRICE',
+    menuTitle: 'Wiki Commodity Prices',
+    dialogCaption: 'Wiki Commodity Price',
+    chartContainerCaption: 'Quandl Wiki Commodity Prices',
+    dialogType: 'DialogType4A',
+    dialogProps: {
+      descrUrl: './data/quandl/wiki-commodity-price.html',
+      nInitFromDate: 4,
+      oneCaption: 'Type',
+      oneURI: './data/quandl/wiki-commodity-price.json',
+      oneJsonProp: 'commodities',
+      twoCaption: 'Commodity',
+      valueFn: 'RPrefixOneEmptyTwo',
+      valueFnPrefix: 'COM',
+      loadId: 'Q',
+      dataSource: 'Wiki Commodity Prices (Code: COM)'
+    },
+    dataColumn: 1
+  },
+  QE_LME: {
+    type: 'QE_LME',
+    menuTitle: 'London Metal Exchange',
+    dialogCaption: 'London Metal Exchange',
+    chartContainerCaption: 'Quandl London Metal Exchange',
+    dialogProps: {
+      descrUrl: './data/quandl/lme.html',
+      isTransform: true,
+      optionURI: './data/quandl/lme.json',
+      optionsJsonProp: 'metals',
+      valueFn: "RPrefixOne",
+      valueFnPrefix: "LME",
+      linkFn: "LME",
+      loadId: 'Q',
+      columnName: 'CASH BUYER',
+      seriaColumnNames: ['CASH SELLER & SETTLEMENT', '3-MONTHS BUYER', '3-MONTHS SELLER', 'DEC 1 BUYER', 'DEC 1 SELLER', ' DEC 2 BUYER', 'DEC 2 SELLER', 'DEC 3 BUYER', 'DEC 3 SELLER'],
+      dataSource: 'London Metal Exchange (Code: LME)'
+    }
+  },
   QE_COMMODITY_TRADE: {
     type: 'QE_COMMODITY_TRADE',
     menuTitle: 'UN Commodity Trade',
@@ -490,6 +529,31 @@ var DataQE = {
       dataSource: 'Wiki EOD Stock Prices (Code: WIKI)'
     }
   },
+  QE_FREE_US_FUNDAMENTAL: {
+    type: 'QE_FREE_US_FUNDAMENTAL',
+    menuTitle: 'Free US Fundamentals',
+    dialogCaption: 'Free US Fundamentals',
+    chartContainerCaption: 'Quandl Free US Fundamentals',
+    dialogType: 'DialogType5',
+    dialogProps: {
+      descrUrl: './data/quandl/us-fundamentals.html',
+      nInitFromDate: 7,
+      oneCaption: 'Stock',
+      //oneURI : './data/quandl/us-fundamental-stocks.json',
+      oneURI: './data/quandl/wiki.json',
+      oneJsonProp: 'tickets',
+      twoCaption: 'Group',
+      twoURI: './data/quandl/us-fundamental-indicators.json',
+      twoJsonProp: 'groups',
+      threeCaption: 'Indicator',
+      fnValueType: 'TreeItem',
+      valueFn: 'RPrefixOneTwoA',
+      valueFnPrefix: 'SF0',
+      loadId: 'Q',
+      isPremium: true,
+      dataSource: 'Free US Fundamentals (Code: SF0)'
+    }
+  },
   QE_BARCHART_STOCK: {
     type: 'QE_BARCHART_STOCK',
     menuTitle: 'Barchart',
@@ -520,10 +584,20 @@ var DataQE = {
       oneJsonProp: 'indicators',
       oneCaption: 'Indicators',
       valueFn: "ROne",
-      //linkFn : "NASDAQ",
       loadId: 'AL',
       columnName: 'Close',
-      //seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adj. Close' ],
+      dataSource: 'Alpha Vantage'
+    }
+  },
+  QE_ALPHA_SECTOR: {
+    type: 'QE_ALPHA_SECTOR',
+    menuTitle: 'Alpha Sector',
+    dialogCaption: 'Alpha Sector',
+    chartContainerCaption: 'Alpha Sector: S&P 500',
+    dialogType: 'AlphaSectorDialog',
+    dialogProps: {
+      descrUrl: './data/quandl/alpha-vantage.html',
+      loadId: 'AL_S',
       dataSource: 'Alpha Vantage'
     }
   },

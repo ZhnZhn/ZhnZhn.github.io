@@ -24,13 +24,13 @@ var _createSeriaData = function _createSeriaData(json, option) {
       _value = json[_propName],
       _dateKeys = _value ? Object.keys(_value).sort().reverse() : [],
       _len = _dateKeys.length,
-      _max = _len < forDays ? _len : forDays,
+      _max = _len < forDays ? _len - 1 : forDays,
       _data = [];
 
-  var i = 1,
+  var i = void 0,
       _date = void 0,
       _v = void 0;
-  for (i = _max; i > 1; i--) {
+  for (i = _max; i > -1; i--) {
     _date = _dateKeys[i];
     _v = parseFloat(_value[_date][indicator]);
     _data.push([_AdapterFn2.default.ymdToUTC(_date), _v]);
@@ -55,13 +55,10 @@ var AlphaAdapter = {
     };
     config.chart.spacingTop = 25;
     config.zhConfig = {
-      columnName: "Close",
-      dataColumn: 4,
       dataSource: "Alpha",
       id: _chartId,
       isWithLegend: false,
-      key: _chartId,
-      linkFn: "NASDAQ"
+      key: _chartId
     };
 
     return {
@@ -76,9 +73,11 @@ var AlphaAdapter = {
         ticket = option.ticket;
 
 
-    seria.data = _createSeriaData(json, option);
-    seria.zhSeriaId = ticket + '_' + indicator;
-    seria.zhValueText = indicator;
+    Object.assign(seria, {
+      data: _createSeriaData(json, option),
+      zhSeriaId: ticket + '_' + indicator,
+      zhValueText: indicator
+    });
 
     return seria;
   }

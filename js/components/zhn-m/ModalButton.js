@@ -24,7 +24,17 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _CaptionInput = require('./CaptionInput');
+
+var _CaptionInput2 = _interopRequireDefault(_CaptionInput);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CL = {
+  BT: 'bt-flat',
+  BT_DIV: 'bt-flat__div',
+  BT_SPAN: 'bt-flat__span'
+};
 
 var ModalButton = function (_Component) {
   (0, _inherits3.default)(ModalButton, _Component);
@@ -49,22 +59,14 @@ var ModalButton = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          type = _props.type,
-          style = _props.style,
+          rootStyle = _props.rootStyle,
+          _props$clDiv = _props.clDiv,
+          clDiv = _props$clDiv === undefined ? CL.BT_DIV : _props$clDiv,
           title = _props.title,
           caption = _props.caption,
+          accessKey = _props.accessKey,
           children = _props.children,
           onClick = _props.onClick;
-
-      var _className = void 0;
-      switch (type) {
-        case 'TypeA':
-          _className = 'button-type-a';break;
-        case 'TypeC':
-          _className = 'button-type-c';break;
-        default:
-          _className = 'button-type-b';
-      }
 
       return _react2.default.createElement(
         'button',
@@ -72,13 +74,27 @@ var ModalButton = function (_Component) {
           ref: function ref(n) {
             return _this2.rootNode = n;
           },
-          className: _className,
-          style: style,
+          className: CL.BT,
+          style: rootStyle,
+          type: 'button',
+          tabIndex: 0,
           title: title,
+          accessKey: accessKey,
           onClick: onClick
         },
-        caption,
-        children
+        _react2.default.createElement(
+          'div',
+          { className: clDiv },
+          _react2.default.createElement(
+            _CaptionInput2.default,
+            {
+              className: CL.BT_SPAN,
+              caption: caption,
+              accessKey: accessKey
+            },
+            children
+          )
+        )
       );
     }
   }]);
@@ -86,4 +102,4 @@ var ModalButton = function (_Component) {
 }(_react.Component);
 
 exports.default = ModalButton;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ModalButton.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-m\ModalButton.js.map

@@ -5,7 +5,7 @@ import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectParentChild from '../dialogs/SelectParentChild';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import RowDate from '../dialogs/RowDate';
-import ActionButton from '../zhn/ActionButton';
+import Button from '../dialogs/Button';
 import ValidationMessages from '../zhn/ValidationMessages';
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad';
@@ -31,6 +31,9 @@ class Futures3Dialog extends Component {
         onClick: this._handleClickInfo
       }
     ]
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ];
     this.state = {
       validationMessages : []
     }
@@ -113,21 +116,13 @@ class Futures3Dialog extends Component {
             futuresURI, msgOnNotSelected,
             isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
           } = this.props
-        , { validationMessages } = this.state
-        , _commandButtons = [
-             <ActionButton
-                key="a"
-                type="TypeC"
-                caption="Load"
-                onClick={this._handleLoad}
-             />
-         ];
+        , { validationMessages } = this.state;
 
     return (
       <DraggableDialog
          caption={caption}
          isShow={isShow}
-         commandButtons={_commandButtons}
+         commandButtons={this._commandButtons}
          onShowChart={onShow}
          onClose={this._handleClose}
        >

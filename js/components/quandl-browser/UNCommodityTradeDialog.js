@@ -52,9 +52,9 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('../dialogs/Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
@@ -69,6 +69,12 @@ var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
 var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var S = {
+  BT_ROOT: {
+    color: 'rgb(35, 47, 59)'
+  }
+};
 
 var Placeholder = {
   TRADE: {
@@ -351,6 +357,12 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
       caption: 'C', title: 'Toggle ChartType Input',
       onClick: _this._handlerClickChartType
     }];
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+      rootStyle: S.BT_ROOT,
+      caption: 'Load Meta',
+      title: 'First Load Meta, then Load Item',
+      onClick: _this._handlerLoadMeta
+    }), _react2.default.createElement(_Button2.default.Load, { onClick: _this._handlerLoadData })];
     _this.state = {
       isShowFilter: false,
       isShowDate: true,
@@ -398,18 +410,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           isLoadingTradeFailed = _state.isLoadingTradeFailed,
           optionTrades = _state.optionTrades,
           placeholderTrade = _state.placeholderTrade,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load Meta',
-        onClick: this._handlerLoadMeta
-      }), _react2.default.createElement(_ActionButton2.default, {
-        key: 'b',
-        type: 'TypeC',
-        caption: 'Load Data',
-        onClick: this._handlerLoadData
-      })];
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -417,7 +418,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
         {
           caption: 'United Nations Commodity Trade',
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handlerClose
         },

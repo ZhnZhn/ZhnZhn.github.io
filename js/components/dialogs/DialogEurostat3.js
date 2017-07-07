@@ -22,8 +22,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
 
-//import createLoadOptions from '../../flux/creaters/eurostat3';
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -44,9 +42,9 @@ var _SelectParentChild = require('./SelectParentChild');
 
 var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ValidationMessages = require('../zhn/ValidationMessages');
 
@@ -114,6 +112,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
 
     _this.one = undefined;
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       validationMessages: []
     };
@@ -147,12 +146,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           twoJsonProp = _props.twoJsonProp,
           threeCaption = _props.threeCaption,
           msgOnNotSelected = _props.msgOnNotSelected,
-          validationMessages = this.state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = this.state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -160,7 +154,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

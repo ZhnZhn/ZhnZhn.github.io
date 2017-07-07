@@ -1,11 +1,18 @@
-import Tooltip from './Tooltip';
-import ChartFn from './ChartFn';
-import Chart from './Chart';
+import Tooltip from './Tooltip'
+import ChartFn from './ChartFn'
+import Chart from './Chart'
 
-import COLOR from '../constants/Color';
+import COLOR from '../constants/Color'
+
+const _configCrossLabel = (chart, option) => {
+  Object.assign(chart, {
+    xDeltaCrossLabel: 4,
+    yDeltaCrossLabel: -10
+  }, option)
+}
 
 const _legendVolume = {
-   enabled : true,
+   enabled: true,
    align: 'left',
    verticalAlign: 'top',
    x: 124,
@@ -16,15 +23,15 @@ const _legendVolume = {
    symbolWidth: 12,
    symbolRadius: 6,
 
-   itemStyle : {
-     color : COLOR.CHART_TITLE,
-     fontSize : '16px'
+   itemStyle: {
+     color: COLOR.CHART_TITLE,
+     fontSize: '16px'
    },
-   itemHoverStyle : {
-     color : COLOR.LEGEND_ITEM_HOVER
+   itemHoverStyle: {
+     color: COLOR.LEGEND_ITEM_HOVER
    },
-   itemHiddenStyle : {
-     color : COLOR.LEGEND_ITEM_HIDDEN
+   itemHiddenStyle: {
+     color: COLOR.LEGEND_ITEM_HIDDEN
    }
 }
 
@@ -35,86 +42,81 @@ const WithIndicatorConfig = {
        , { chart, yAxis } = config;
 
     config.navigation = {
-       buttonOptions : {
-          y : 20
+       buttonOptions: {
+          y: 20
        },
-       menuStyle : {
-         position : 'relative',
-         top : '-24px',
-         left : '28px'
+       menuStyle: {
+         position: 'relative',
+         top: '-24px',
+         left: '28px'
        }
     }
-
-    chart.height = 160;
-    chart.spacingTop = 8;
-    chart.spacingBottom = 10;
-
-    yAxis.startOnTick = true;
-    yAxis.endOnTick = true;
-    yAxis.tickPixelInterval = 60;
-
+    Object.assign(chart, {
+      height: 160,
+      spacingTop: 8,
+      spacingBottom: 10
+    })
+    Object.assign(yAxis, {
+      startOnTick: true,
+      endOnTick: true,
+      tickPixelInterval: 60
+    })
     return config;
   },
 
   fIndicatorMfiConfig(id, parentId, title, data){
     const config = this.fBaseIndicatorConfig();
-    config.title = Chart.fTitleIndicator(title);
-
-    const chart = config.chart;
-    chart.xDeltaCrossLabel = 4;
-    chart.yDeltaCrossLabel = -10;
-
-    const seria = config.series[0];
-
-    seria.zhSeriaId = parentId + '_' + id;
-    seria.zhValueText = id;
-    seria.data = data;
-    seria.name = "Spline";
-    seria.type = "spline";
-    seria.color = "green";
-    seria.point = Chart.fEventsMouseOver(ChartFn.handlerMouserOverPoint);
-
+    config.title = Chart.fTitleIndicator(title)
+    _configCrossLabel(config.chart)
+    Object.assign(config.series[0], {
+      zhSeriaId: parentId + '_' + id,
+      zhValueText: id,
+      data: data,
+      name: "Spline",
+      type: "spline",
+      color: "#90ed7d",
+      point: Chart.fEventsMouseOver(ChartFn.handlerMouserOverPoint)
+    })
     return config;
   },
 
   fIndicatorVolumeConfig(chartId, dataColumn, data){
     const config = this.fBaseIndicatorConfig();
-    config.title = Chart.fTitleIndicator('Volume Chart:');
-    config.legend = _legendVolume;
-
-    const chart = config.chart;
-    chart.xDeltaCrossLabel = 4;
-    chart.yDeltaCrossLabel = -10;
-
-    config.yAxis.endOnTick = false;
-    config.yAxis.tickPixelInterval = 40;
-
-    const seria = config.series[0];
-    seria.zhSeriaId = chartId + '_VolumeArea';
-    seria.zhValueText = "Volume";
-    seria.data = data;
-    seria.name = "Spline";
-    seria.point = Chart.fEventsMouseOver(ChartFn.handlerMouserOverPoint);
-
+    Object.assign(config, {
+      title: Chart.fTitleIndicator('Volume Chart:'),
+      legend: _legendVolume
+    })
+    _configCrossLabel(config.chart)
+    Object.assign(config.yAxis, {
+      endOnTick: false,
+      tickPixelInterval: 40
+    })
+    Object.assign(config.series[0], {
+      zhSeriaId: chartId + '_VolumeArea',
+      zhValueText: "Volume",
+      data: data,
+      name: "Spline",
+      point: Chart.fEventsMouseOver(ChartFn.handlerMouserOverPoint)
+    })
     config.series.push({
-      zhSeriaId : chartId + '_VolumeColumn',
-      zhValueText : "Volume",
-      turboThreshold : 20000,
-      type : "column",
-      name : "Column",
-      data : dataColumn,
+      zhSeriaId: chartId + '_VolumeColumn',
+      zhValueText: "Volume",
+      turboThreshold: 20000,
+      type: "column",
+      name: "Column",
+      data: dataColumn,
 
-      visible : false,
-      borderWidth : 0,
-      pointPlacement : 'on',
-      groupPadding : 0.1,
-      states : {
-        hover : {
-          enabled : true,
+      visible: false,
+      borderWidth: 0,
+      pointPlacement: 'on',
+      groupPadding: 0.1,
+      states: {
+        hover: {
+          enabled: true,
           brightness: 0.07
         }
       },
-      tooltip : Chart.fTooltip(Tooltip.fnVolumePointFormatter)
+      tooltip: Chart.fTooltip(Tooltip.fnVolumePointFormatter)
     });
 
     return config;
@@ -124,41 +126,40 @@ const WithIndicatorConfig = {
     const config = this.fBaseIndicatorConfig();
     config.title = Chart.fTitleIndicator('ATH Chart');
 
-    const seria = config.series[0];
-    seria.zhSeriaId = chartId + "_ATH";
-    seria.zhValueText = "ATH";
-    seria.name = "ATH";
-    seria.visible = true;
-    seria.type = "column";
-    seria.borderWidth = 0;
-    seria.pointPlacement = 'on';
-    seria.minPointLength = 4;
-    seria.groupPadding = 0.1;
-    seria.data = data;
-
-    seria.tooltip = Chart.fTooltip(Tooltip.fnATHPointFormatter);
+    Object.assign(config.series[0], {
+      zhSeriaId: chartId + "_ATH",
+      zhValueText: "ATH",
+      name: "ATH",
+      visible: true,
+      type: "column",
+      borderWidth: 0,
+      pointPlacement: 'on',
+      minPointLength: 4,
+      groupPadding: 0.1,
+      data: data,
+      tooltip: Chart.fTooltip(Tooltip.fnATHPointFormatter)
+    })
 
     return config;
   },
 
   fIndicatorHighLowConfig(chartId, data){
     const config = this.fBaseIndicatorConfig();
-    config.title = Chart.fTitleIndicator('HighLow Chart');
+    config.title = Chart.fTitleIndicator('HighLow Chart')
 
-    const seria = config.series[0];
-    seria.zhSeriaId = chartId + '_HL';
-    seria.zhValueText = "HL";
-    seria.name = "HL";
-    seria.visible = true;
-    seria.type = "arearange";
-    seria.color = '#2D7474';
-    seria.data = data;
-
-    seria.tooltip = Chart.fTooltip(Tooltip.fnHighLowPointFormatter);
+    Object.assign(config.series[0], {
+      zhSeriaId: chartId + '_HL',
+      zhValueText: "HL",
+      name: "HL",
+      visible: true,
+      type: "arearange",
+      color: '#2D7474',
+      data: data,
+      tooltip: Chart.fTooltip(Tooltip.fnHighLowPointFormatter)
+    })
 
     return config;
   }
-
 
 };
 

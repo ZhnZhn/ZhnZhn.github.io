@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import FragmentSelectGroupList from './FragmentSelectGroupList';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ActionButton from '../zhn/ActionButton';
-
-import STYLE from './Pane.Style';
+import FragmentSelectGroupList from './FragmentSelectGroupList'
+import ValidationMessages from '../zhn/ValidationMessages'
+import Button from './Button'
+import RowButtons from './RowButtons'
 
 class ListDeletePane extends Component {
   static propTypes = {
@@ -20,6 +19,11 @@ class ListDeletePane extends Component {
 
   constructor(props){
     super()
+    this._primaryBt = <Button.Primary
+                         caption="Delete"
+                         title="Delete List"
+                         onClick={this._handleDelete}
+                      />
     this.state = {
       groupOptions : props.store.getWatchGroups(),
       validationMessages : []
@@ -69,30 +73,18 @@ class ListDeletePane extends Component {
          <FragmentSelectGroupList
            ref={c => this.selectGroupList = c}
            store={store}
-           groupCaption={'In Group:'}
+           groupCaption="In Group:"
            groupOptions={groupOptions}
-           listCaption={'List:'}
+           listCaption="List:"
          />
          <ValidationMessages
             validationMessages={validationMessages}
          />
-         <div style={STYLE.COMMAND_DIV}>
-            <ActionButton
-               type="TypeC"
-               caption="Delete"
-               onClick={this._handleDelete}
-            />
-            <ActionButton
-               type="TypeC"
-               caption="Clear"
-               onClick={this._handleClear}
-            />
-            <ActionButton
-               type="TypeC"
-               caption="Close"
-               onClick={onClose}
-            />
-        </div>
+         <RowButtons
+           Primary={this._primaryBt}
+           onClear={this._handleClear}
+           onClose={onClose}
+         />
       </div>
     );
   }

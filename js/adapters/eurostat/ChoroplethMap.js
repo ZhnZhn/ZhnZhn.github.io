@@ -38,7 +38,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /*eslint-disable no-undef */
 if (process.env.NODE_ENV !== 'development') {
-  System.config({
+  window.System.config({
     baseURL: "/"
   });
 }
@@ -327,7 +327,7 @@ var ChoroplethMap = {
     if (this.L) {
       return Promise.resolve(this.L);
     } else {
-      return System.import(URL_LEAFLET).then(function (L) {
+      return window.System.import(URL_LEAFLET).then(function (L) {
         return _this.L = L;
       });
     }

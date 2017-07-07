@@ -53,7 +53,8 @@ var _fnBaseTooltip = function _fnBaseTooltip(_ref2) {
   var date = _ref2.date,
       id = _ref2.id,
       color = _ref2.color,
-      valueText = _ref2.valueText,
+      _ref2$valueText = _ref2.valueText,
+      valueText = _ref2$valueText === undefined ? 'Value' : _ref2$valueText,
       value = _ref2.value;
 
   var _style = color ? 'style="color:' + color + ';"' : '';
@@ -67,7 +68,7 @@ var _fnExDividend = function _fnExDividend(_ref3) {
       value = _ref3.value,
       point = _ref3.point;
 
-  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Ex-Dividend: </span>\n  <span style="color: green;">' + point.exValue + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
+  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Ex-Dividend: </span>\n  <span style="color: #90ed7d;">' + point.exValue + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.price + '</span>\n  </div>');
 };
 
 var _fnSplitRatio = function _fnSplitRatio(_ref4) {

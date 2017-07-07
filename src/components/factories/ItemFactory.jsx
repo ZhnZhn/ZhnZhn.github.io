@@ -7,8 +7,9 @@ import { ModalDialog, CompItemType } from '../../constants/Type';
 
 import AreaChartItem from '../items/AreaChartItem';
 import MapChartItem from '../items/MapChartItem';
+import SectorItem from '../items/SectorItem';
 
-const _createAreaChartItem = function(config, index, option, props){  
+const _createAreaChartItem = function(config, index, option, props){
   const { zhConfig } = config
      ,  { id, key } = zhConfig
      ,  { chartType } = option;
@@ -45,10 +46,20 @@ const _createMapChartItem = function(config, index, option, props){
   )
 };
 
+const _crSectorItem = (config, index, option, props) => {
+  return (
+    <SectorItem
+       key="key"
+       config={config} 
+     />
+  );
+}
+
 const _rCreateItem = {
   DEFAULT : _createAreaChartItem,
 
-  [CompItemType.EUROSTAT_MAP] : _createMapChartItem
+  [CompItemType.EUROSTAT_MAP] : _createMapChartItem,
+  SECTOR : _crSectorItem
 }
 
 const ItemFactory = {

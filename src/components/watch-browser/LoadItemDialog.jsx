@@ -1,18 +1,18 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import DateUtils from '../../utils/DateUtils';
+import DateUtils from '../../utils/DateUtils'
 
-import ChartActions from '../../flux/actions/ChartActions';
-import { BrowserType, LoadType } from '../../constants/Type';
-import ChartType from '../../constants/ChartType';
+import ChartActions from '../../flux/actions/ChartActions'
+import { BrowserType, LoadType } from '../../constants/Type'
+import ChartType from '../../constants/ChartType'
 
-import ModalDialog from '../zhn-moleculs/ModalDialog';
-import ActionButton from '../zhn/ActionButton';
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-import RowText from '../dialogs/RowText';
+import ModalDialog from '../zhn-moleculs/ModalDialog'
+import Button from '../dialogs/Button'
+import DatesFragment from '../zhn-moleculs/DatesFragment'
+import ValidationMessages from '../zhn/ValidationMessages'
+import RowText from '../dialogs/RowText'
 
-import withValidationLoad from '../dialogs/decorators/withValidationLoad';
+import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
 @withValidationLoad
 class LoadItemDialog extends Component {
@@ -34,12 +34,16 @@ class LoadItemDialog extends Component {
          , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
          , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
 
+    this._commandButtons = [
+       <Button.Load onClick={this._handleLoad} />
+    ]
+
     this.state = {
-        initFromDate : _initFromDate,
-        initToDate : _initToDate,
-        onTestDate : _onTestDate,
-        validationMessages : []
-      }
+       initFromDate : _initFromDate,
+       initToDate : _initToDate,
+       onTestDate : _onTestDate,
+       validationMessages : []
+    }
    }
 
    shouldComponentUpdate(nextProps, nextState){
@@ -90,19 +94,16 @@ class LoadItemDialog extends Component {
   render(){
     const { isShow, data } = this.props
         , { caption } = data
-        , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
-        , _commandButtons = [
-             <ActionButton
-                type="TypeC"
-                caption="Load"
-                onClick={this._handleLoad}
-             />
-          ];
+        , {
+            initFromDate, initToDate,
+            onTestDate, validationMessages
+          } = this.state;
+
     return (
       <ModalDialog
          caption="Load Item"
          isShow={isShow}
-         commandButtons={_commandButtons}
+         commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
         <RowText

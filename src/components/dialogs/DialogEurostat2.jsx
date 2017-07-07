@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-//import createLoadOptions from '../../flux/creaters/eurostat2'
-
 import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
 import ArrayUtil from '../../utils/ArrayUtil';
@@ -10,7 +8,7 @@ import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button'
 import ShowHide from '../zhn/ShowHide';
 import RowInputSelect from './RowInputSelect';
 
@@ -74,7 +72,9 @@ class DialogEurostat2 extends Component {
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
-
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ];
     this.state = {
       isShowDate : false,
       dateDefault : DATE_PLACEHOLDER,
@@ -175,20 +175,17 @@ class DialogEurostat2 extends Component {
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp
           } = this.props
-        , { isShowDate, dateDefault, dateOptions, validationMessages } = this.state
-        , _commandButtons = [
-       <ActionButton
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />
-    ];
+        , {
+            isShowDate,
+            dateDefault, dateOptions,
+            validationMessages
+          } = this.state;
 
     return(
         <DraggableDialog
              caption={caption}
              isShow={isShow}
-             commandButtons={_commandButtons}
+             commandButtons={this._commandButtons}
              onShowChart={onShow}
              onClose={this._handleClose}
          >

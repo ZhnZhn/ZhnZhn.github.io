@@ -48,9 +48,9 @@ var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -151,7 +151,12 @@ var CustomizeExportDialog = function (_Component) {
     _this.exportStyle = {};
     _this.toolbarButtons = [{ caption: 'D', onClick: _this._handleClickDimension }, { caption: 'T', onClick: _this._handleClickTitle }, { caption: 'S', onClick: _this._handleClickStyle }];
     _this.optionStyles = _ChartExportConfig2.default.createOptionStyles();
-
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+      caption: 'Export'
+      //accessKey="x"
+      , isPrimary: true,
+      onClick: _this._handleExport
+    })];
     _this.state = {
       isShowDimension: true,
       isShowTitle: true,
@@ -186,13 +191,7 @@ var CustomizeExportDialog = function (_Component) {
           _state = this.state,
           isShowDimension = _state.isShowDimension,
           isShowTitle = _state.isShowTitle,
-          isShowStyle = _state.isShowStyle,
-          commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Export',
-        onClick: this._handleExport
-      })];
+          isShowStyle = _state.isShowStyle;
 
 
       return _react2.default.createElement(
@@ -200,7 +199,7 @@ var CustomizeExportDialog = function (_Component) {
         {
           caption: 'Customize Export Chart',
           isShow: isShow,
-          commandButtons: commandButtons,
+          commandButtons: this._commandButtons,
           onClose: onClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

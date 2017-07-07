@@ -44,9 +44,9 @@ var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('../dialogs/Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
@@ -84,6 +84,8 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
         _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
         _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
 
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+
     _this.state = {
       initFromDate: _initFromDate,
       initToDate: _initToDate,
@@ -114,19 +116,15 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
           initFromDate = _state.initFromDate,
           initToDate = _state.initToDate,
           onTestDate = _state.onTestDate,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = _state.validationMessages;
+
 
       return _react2.default.createElement(
         _ModalDialog2.default,
         {
           caption: 'Load Item',
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
         _react2.default.createElement(_RowText2.default, {

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import STYLE from './Link.Style';
+import Link from './Link'
 
 const NASDAQ_BASE = 'https://www.nasdaq.com/symbol/'
     , CAPTION = 'NASDAQ Link';
@@ -9,15 +9,14 @@ const NasdaqLink = ({ item={}, caption=CAPTION, style }) => {
   const { text='', value } = item
       , _ticket = (value)
             ? value.trim()
-            : text.split('-')[0].trim()
+            : text.split('-')[0].trim();
   return (
-    <a
+    <Link
       className="native-link"
-      style={Object.assign({}, STYLE.LINK, style)}
+      style={style}
       href={`${NASDAQ_BASE}${_ticket}`}
-    >
-      {`${caption} ${_ticket}`}
-    </a>
+      caption={`${caption} ${_ticket}`}
+    />
   );
 }
 

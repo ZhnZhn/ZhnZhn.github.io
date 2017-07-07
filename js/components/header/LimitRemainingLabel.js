@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -30,7 +34,7 @@ var STYLE = {
   LABEL: {
     display: 'inline-block',
     color: '#2f7ed8',
-    paddingLeft: '10px',
+    //paddingLeft: '10px',
     paddingRight: '10px',
     fontSize: '16px',
     fontWeight: 'bold'
@@ -81,7 +85,7 @@ var LimitRemainingLabel = function (_Component) {
 
       return _react2.default.createElement(
         'span',
-        { style: Object.assign({}, STYLE.LABEL, style) },
+        { style: (0, _extends3.default)({}, STYLE.LABEL, style) },
         value
       );
     }
@@ -90,4 +94,4 @@ var LimitRemainingLabel = function (_Component) {
 }(_react.Component);
 
 exports.default = LimitRemainingLabel;
-//# sourceMappingURL=LimitRemainingLabel.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\LimitRemainingLabel.js.map

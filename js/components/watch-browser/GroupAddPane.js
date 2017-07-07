@@ -28,17 +28,17 @@ var _RowInputText = require('./RowInputText');
 
 var _RowInputText2 = _interopRequireDefault(_RowInputText);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
+
+var _RowButtons = require('./RowButtons');
+
+var _RowButtons2 = _interopRequireDefault(_RowButtons);
 
 var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _Pane = require('./Pane.Style');
-
-var _Pane2 = _interopRequireDefault(_Pane);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -84,6 +84,11 @@ var GroupAddPane = function (_Component) {
       }
     };
 
+    _this._primaryBt = _react2.default.createElement(_Button2.default.Primary, {
+      caption: 'Create',
+      title: 'Create New Group',
+      onClick: _this._handleCreate
+    });
     _this.state = {
       validationMessages: []
     };
@@ -120,25 +125,11 @@ var GroupAddPane = function (_Component) {
         _react2.default.createElement(_ValidationMessages2.default, {
           validationMessages: validationMessages
         }),
-        _react2.default.createElement(
-          'div',
-          { style: _Pane2.default.COMMAND_DIV },
-          _react2.default.createElement(_ActionButton2.default, {
-            type: 'TypeC',
-            caption: 'Create',
-            onClick: this._handleCreate
-          }),
-          _react2.default.createElement(_ActionButton2.default, {
-            type: 'TypeC',
-            caption: 'Clear',
-            onClick: this._handleClear
-          }),
-          _react2.default.createElement(_ActionButton2.default, {
-            type: 'TypeC',
-            caption: 'Close',
-            onClick: onClose
-          })
-        )
+        _react2.default.createElement(_RowButtons2.default, {
+          Primary: this._primaryBt,
+          onClear: this._handleClear,
+          onClose: onClose
+        })
       );
     }
   }]);

@@ -1,0 +1,20 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\Button.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\Button.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "BT_ROOT",
+  "color",
+  "Clear",
+  "onClick",
+  "Close",
+  "Primary",
+  "caption",
+  "title",
+  "Flat"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAS;AACPC,WAAO;AADA;AADD,CAAV;;AAMA,IAAMC,QAAQ,SAARA,KAAQ;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,SACZ;AACE,eAAWJ,EAAEC,OADf;AAEE,aAAQ,OAFV;AAGE,WAAM,aAHR;AAIE,aAASG;AAJX,IADY;AAAA,CAAd;;AAQA,IAAMC,QAAQ,SAARA,KAAQ;AAAA,MAAGD,OAAH,SAAGA,OAAH;AAAA,SACZ;AACE,eAAWJ,EAAEC,OADf;AAEE,aAAQ,OAFV;AAGE,WAAM,cAHR;AAIE,aAASG;AAJX,IADY;AAAA,CAAd;;AAQA,IAAME,UAAU,SAAVA,OAAU;AAAA,MAAGC,OAAH,SAAGA,OAAH;AAAA,MAAYC,KAAZ,SAAYA,KAAZ;AAAA,MAAmBJ,OAAnB,SAAmBA,OAAnB;AAAA,SACZ;AACE,aAASG,OADX;AAEE,WAAOC,KAFT;AAGE,eAAW,IAHb;AAIE,aAASJ;AAJX,IADY;AAAA,CAAhB;;kBASe,EAAEE,gBAAF,EAAWH,YAAX,EAAkBE,YAAlB,EAAyBI,0BAAzB,E"
+}

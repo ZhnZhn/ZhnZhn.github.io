@@ -41,7 +41,7 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
 const _addSettings = (option) => {
   if (option.loadId === 'B') {
     option.apiKey = ChartStore.getBarchartKey()
-  } else if (option.loadId === 'AL') {
+  } else if (option.loadId === 'AL' || option.loadId === 'AL_S') {
     option.apiKey = ChartStore.getAlphaKey()
   } else {
     option.apiKey = ChartStore.getQuandlKey()
@@ -81,7 +81,7 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function(){
 
   if (option.loadId === 'B' && !option.apiKey){
     this.cancelLoad(option, Msg.Alert.withoutApiKey('Barchart Market Data'), false);
-  } else if (option.loadId === 'AL' && !option.apiKey) {
+  } else if ( (option.loadId === 'AL' || option.loadId === 'AL_S') && !option.apiKey) {
     this.cancelLoad(option, Msg.Alert.withoutApiKey('Alpha Vantage'), false);
   } else if (option.isKeyFeature && !option.apiKey){
     this.cancelLoad(option, Msg.Alert.FEATURE_WITHOUT_KEY, false);

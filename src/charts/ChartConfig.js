@@ -291,7 +291,9 @@ ChartConfig.theme = {
 
 ChartConfig.fnNumberFormat = function(value){
   const arrSplit = (value+'').split('.')
-      , decimal =  ( arrSplit[1] ) ? arrSplit[1].length : 0;
+      , decimal = ( arrSplit[1] )
+          ? arrSplit[1].length
+          : 0;
 
   return Highcharts.numberFormat(value, decimal, '.', ' ');
 }

@@ -1,0 +1,15 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\ClearButton.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\ClearButton.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "BT_ROOT",
+  "color",
+  "ClearButton",
+  "onClick"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAS;AACPC,WAAO;AADA;AADD,CAAV;;AAMA,IAAMC,cAAc,SAAdA,WAAc;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,SAClB;AACE,eAAWJ,EAAEC,OADf;AAEE,aAAQ,OAFV;AAGE,WAAM,aAHR;AAIE,aAASG;AAJX,IADkB;AAAA,CAApB;;kBAQiBD,W"
+}

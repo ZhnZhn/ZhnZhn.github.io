@@ -1,6 +1,4 @@
 
-
-
 const createTypeObject = function(arr, id){
   const obj = Object.create(null);
   for (let i=0, max=arr.length; i<max; i++){
@@ -9,10 +7,11 @@ const createTypeObject = function(arr, id){
   return obj;
 }
 
-
 const qeSources = [
   'CURRENCY_HISTORY',
   'COMMODITY_PRICE',
+  'WIKI_COMMODITY_PRICE',
+  'LME',
   'COMMODITY_TRADE',
   'JODI_WORLD_GAS',
   'JODI_WORLD_OIL',
@@ -36,8 +35,10 @@ const qeSources = [
 
   'EURONEXT_STOCK',
   'WIKI_STOCK',
+  'FREE_US_FUNDAMENTAL',
   'BARCHART_STOCK',
   'ALPHA_INDICATOR',
+  'ALPHA_SECTOR',
   'TOKIO_STOCK',
   'NIKKEI',
   'UNICORN_RESEARCH',

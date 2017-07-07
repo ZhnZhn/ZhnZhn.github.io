@@ -1,6 +1,6 @@
 
 const _crDefault = (props, options) => {
-  const { fnValue, loadId, dataSource } = props
+  const { isPremium, fnValue, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
@@ -13,12 +13,13 @@ const _crDefault = (props, options) => {
     loadId : loadId,
     title : `${one.caption}:${two.caption}`,
     subtitle : three.caption,
-    dataSource : dataSource
+    dataSource : dataSource,
+    isPremium: isPremium
   }
 }
 
 const _crTreeItem = (props, options) => {
-  const { fnValue, dataColumn, loadId, dataSource } = props
+  const { isPremium, fnValue, dataColumn, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, three.value)
@@ -31,12 +32,13 @@ const _crTreeItem = (props, options) => {
     loadId : loadId,
     title : `${one.caption}:${two.caption}`,
     subtitle : three.caption,
-    dataSource : dataSource
+    dataSource : dataSource,
+    isPremium: isPremium
   };
 };
 
 const _crPlusTreeItem = (props, options) => {
-  const { fnValue, dataColumn, loadId, dataSource } = props
+  const { isPremium, fnValue, dataColumn, loadId, dataSource } = props
       , { one, two, three, fromDate, toDate } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value, three.value)
@@ -49,7 +51,8 @@ const _crPlusTreeItem = (props, options) => {
     loadId : loadId,
     title : `${two.caption} : ${three.caption}`,
     subtitle : one.caption,
-    dataSource : dataSource
+    dataSource : dataSource,
+    isPremium : isPremium
   }
 };
 

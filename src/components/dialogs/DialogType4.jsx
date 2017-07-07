@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button';
 
 import SelectWithLoad from './SelectWithLoad';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
@@ -47,6 +47,9 @@ class DialogType4 extends Component {
       caption: 'O', title: 'Toggle Options Input',
       onClick: this._handleClickOptions
     })
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ];
     this.state = {
       isShowDate : true,
       isShowOptions: false,
@@ -122,21 +125,13 @@ class DialogType4 extends Component {
         , {
             isShowDate, isShowOptions,
             validationMessages
-          } = this.state
-        , _commandButtons = [
-       <ActionButton
-          key="a"
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />
-    ];
+          } = this.state;
 
     return(
         <DraggableDialog
            caption={caption}
            isShow={isShow}
-           commandButtons={_commandButtons}
+           commandButtons={this._commandButtons}
            onShowChart={onShow}
            onClose={this._handleClose}
          >

@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import RowInputSelect from './RowInputSelect';
-import RowInputText from './RowInputText';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ActionButton from '../zhn/ActionButton';
-
-import STYLE from './Pane.Style';
+import RowInputSelect from './RowInputSelect'
+import RowInputText from './RowInputText'
+import ValidationMessages from '../zhn/ValidationMessages'
+import Button from './Button'
+import RowButtons from './RowButtons'
 
 class GroupEditPane extends Component {
   static propTypes = {
@@ -25,7 +24,11 @@ class GroupEditPane extends Component {
   constructor(props){
     super()
     this.captionFrom = null
-
+    this._primaryBt = <Button.Primary
+                         caption="Edit"
+                         title="Edit Group Name"
+                         onClick={this._handleRename}
+                      />
     this.state = {
       groupOptions : props.store.getWatchGroups(),
       validationMessages : []
@@ -83,39 +86,29 @@ class GroupEditPane extends Component {
 
   render(){
     const { onClose } = this.props
-        , { groupOptions, validationMessages } = this.state;
+        , {
+            groupOptions, validationMessages
+          } = this.state;
 
     return (
        <div>
           <RowInputSelect
-             caption={'Group From:'}
+             caption="Group From:"
              options={groupOptions}
              onSelect={this._handleSelectGroup}
           />
          <RowInputText
            ref={c => this.inputText = c}
-           caption={'Group To:'}
+           caption="Group To:"
          />
          <ValidationMessages
            validationMessages={validationMessages}
          />
-         <div style={STYLE.COMMAND_DIV}>
-           <ActionButton
-             type="TypeC"
-             caption="Rename"
-             onClick={this._handleRename}
-           />
-           <ActionButton
-             type="TypeC"
-             caption="Clear"
-             onClick={this._handleClear}
-           />
-          <ActionButton
-             type="TypeC"
-             caption="Close"
-             onClick={onClose}
-          />
-         </div>
+         <RowButtons
+            Primary={this._primaryBt}
+            onClear={this._handleClear}
+            onClose={onClose}
+         />
        </div>
     );
   }

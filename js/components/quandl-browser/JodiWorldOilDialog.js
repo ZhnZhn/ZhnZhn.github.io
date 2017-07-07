@@ -46,9 +46,9 @@ var _SelectParentChild = require('../dialogs/SelectParentChild');
 
 var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('../dialogs/Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
@@ -163,6 +163,7 @@ var JodiWorldOilDialog = (0, _withToolbar2.default)(_class = (0, _withValidation
     _this.units = null;
 
     _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowDate: true,
       validationMessages: []
@@ -203,13 +204,7 @@ var JodiWorldOilDialog = (0, _withToolbar2.default)(_class = (0, _withValidation
           onTestDate = _props.onTestDate,
           _state = this.state,
           isShowDate = _state.isShowDate,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -217,7 +212,7 @@ var JodiWorldOilDialog = (0, _withToolbar2.default)(_class = (0, _withValidation
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

@@ -5,7 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _crDefault = function _crDefault(props, options) {
-  var fnValue = props.fnValue,
+  var isPremium = props.isPremium,
+      fnValue = props.fnValue,
       loadId = props.loadId,
       dataSource = props.dataSource,
       one = options.one,
@@ -23,12 +24,14 @@ var _crDefault = function _crDefault(props, options) {
     loadId: loadId,
     title: one.caption + ':' + two.caption,
     subtitle: three.caption,
-    dataSource: dataSource
+    dataSource: dataSource,
+    isPremium: isPremium
   };
 };
 
 var _crTreeItem = function _crTreeItem(props, options) {
-  var fnValue = props.fnValue,
+  var isPremium = props.isPremium,
+      fnValue = props.fnValue,
       dataColumn = props.dataColumn,
       loadId = props.loadId,
       dataSource = props.dataSource,
@@ -47,12 +50,14 @@ var _crTreeItem = function _crTreeItem(props, options) {
     loadId: loadId,
     title: one.caption + ':' + two.caption,
     subtitle: three.caption,
-    dataSource: dataSource
+    dataSource: dataSource,
+    isPremium: isPremium
   };
 };
 
 var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
-  var fnValue = props.fnValue,
+  var isPremium = props.isPremium,
+      fnValue = props.fnValue,
       dataColumn = props.dataColumn,
       loadId = props.loadId,
       dataSource = props.dataSource,
@@ -71,7 +76,8 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
     loadId: loadId,
     title: two.caption + ' : ' + three.caption,
     subtitle: one.caption,
-    dataSource: dataSource
+    dataSource: dataSource,
+    isPremium: isPremium
   };
 };
 

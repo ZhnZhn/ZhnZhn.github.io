@@ -5,8 +5,7 @@ import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle'
 import SelectWithLoad from '../dialogs/SelectWithLoad'
 import SelectParentChild from '../dialogs/SelectParentChild'
 import RowPattern from '../dialogs/RowPattern'
-import ActionButton from '../zhn/ActionButton'
-
+import Button from '../dialogs/Button'
 import DatesFragment from '../zhn-moleculs/DatesFragment'
 import ValidationMessages from '../zhn/ValidationMessages'
 import ShowHide from '../zhn/ShowHide'
@@ -21,7 +20,7 @@ const S = {
     marginTop: '16px',
     fontWeight: 'bold'
   }
-}
+};
 
 const _loadFn = (props, options) => {
   const { fnValue, dataColumn, loadId, dataSource } = props
@@ -60,6 +59,9 @@ class  DialogType5 extends Component {
   constructor(props){
     super()
     this.toolbarButtons = this._createType2WithToolbar(props)
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ]
     this.state = {
       isShowDate : true,
       isShowPattern : false,
@@ -125,12 +127,6 @@ class  DialogType5 extends Component {
       this.props,
       { one : this.one, two, three, fromDate, toDate, zipCode }
     );
-    /*
-    return this.props.loadFn(
-      this.props,
-      { one : this.one, two, three, fromDate, toDate }
-    );
-    */
   }
 
   _handleClose = () => {
@@ -145,21 +141,13 @@ class  DialogType5 extends Component {
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
            initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, isShowPattern, validationMessages } = this.state
-        , _commandButtons = [
-             <ActionButton
-                key="a"
-                type="TypeC"
-                caption="Load"
-                onClick={this._handleLoad}
-             />
-          ];
+        , { isShowDate, isShowPattern, validationMessages } = this.state;
 
     return(
         <DraggableDialog
              caption={caption}
              isShow={isShow}
-             commandButtons={_commandButtons}
+             commandButtons={this._commandButtons}
              onShowChart={onShow}
              onClose={this._handleClose}
          >

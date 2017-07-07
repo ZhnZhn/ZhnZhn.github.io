@@ -102,7 +102,7 @@ class InputPattern extends Component {
     }
   }
 
-  _handleKeyDown = (event) => {    
+  _handleKeyDown = (event) => {
     if (event.keyCode === 13 && typeof this.props.onEnter === 'function'){
       this.props.onEnter(event.target.value)
     } else if (event.keyCode === 27){
@@ -151,7 +151,7 @@ class InputPattern extends Component {
   }
 
   getValue(){
-    return this.state.value;
+    return String(this.state.value).trim();
   }
   isValid(){
     return this.props.onTest(this.state.value);

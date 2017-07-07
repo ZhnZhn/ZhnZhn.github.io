@@ -10,7 +10,7 @@ import MapFactory from '../../components/factories/MapFactory'
 
 /*eslint-disable no-undef */
 if ( process.env.NODE_ENV !== 'development'){
-  System.config({
+  window.System.config({
     baseURL: "/"
   });
 }
@@ -159,7 +159,7 @@ const _fnCreateRowEl = function(color, from, to, cluster, wg){
      'p', '',
      `opacity: 0.7; background: ${color}; padding: 5px 6px; cursor: pointer;`
    )
-  el.addEventListener('click', function(event){    
+  el.addEventListener('click', function(event){
     wg.updateCluster(cluster, color, from, to)
   })
   el.innerHTML = `<span>${from}&ndash;${to}<span>
@@ -268,7 +268,7 @@ const ChoroplethMap = {
     if (this.L){
       return Promise.resolve(this.L);
     } else {
-      return System.import(URL_LEAFLET)
+      return window.System.import(URL_LEAFLET)
                 .then( L => { return this.L = L; })
     }
   },

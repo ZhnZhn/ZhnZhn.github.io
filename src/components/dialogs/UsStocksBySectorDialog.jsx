@@ -5,10 +5,10 @@ import ChartActions from '../../flux/actions/ChartActions';
 import { LoadType } from '../../constants/Type';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import ActionButton from '../zhn/ActionButton';
 import RowInputSelect from './RowInputSelect';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
+import Button from './Button';
 
 import withValidationLoad from './decorators/withValidationLoad';
 
@@ -22,7 +22,6 @@ const STYLE = {
 const sourceOptions = [
   { caption: "WIKI" , "value" : "WIKI/" }
 ]
-
 
 @withValidationLoad
 class UsStocksBySectorDialog extends Component {
@@ -45,6 +44,10 @@ class UsStocksBySectorDialog extends Component {
          , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
          , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
 
+     this._commandButtons = [
+       <Button.Load onClick={this._handleLoad} />,
+       <Button.Show onClick={props.data.onShow} />
+     ]
      this.state = {
        initFromDate : _initFromDate,
        initToDate : _initToDate,
@@ -73,7 +76,7 @@ class UsStocksBySectorDialog extends Component {
           , { id, text } = item
           , { fromDate, toDate } = this.datesFragment.getValues()
           , _dataSource = (this.dataSource)
-                  ? this.dataSource.value                  
+                  ? this.dataSource.value
                   : 'WIKI/'
           , _value = `${_dataSource}${id}`
           , option = {
@@ -113,27 +116,19 @@ class UsStocksBySectorDialog extends Component {
 
   render(){
     const { isShow, data={} } = this.props
-        , { item={}, onShow } = data
+        , { item={} } = data
         , { text } = item
-        , { initFromDate, initToDate, onTestDate, validationMessages } = this.state
-        , _commandButtons = [
-             <ActionButton
-                type="TypeC"
-                caption="Load"
-                onClick={this._handleLoad}
-             />,
-             <ActionButton
-                type="TypeC"
-                caption="Show"
-                onClick={onShow}
-             />
-          ];
+        , {
+            initFromDate, initToDate,
+            onTestDate, validationMessages
+          } = this.state;
+
     return (
       <ModalDialog
          caption={text}
          styleCaption={STYLE.CAPTION_SPAN}
          isShow={isShow}
-         commandButtons={_commandButtons}
+         commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
         <RowInputSelect

@@ -113,10 +113,13 @@ class ChartContainer extends Component {
    }
 
    _handleResizeAfter = (parentWidth) => {
-     let i=0, max = this.state.configs.length;
-     for (; i<max; i++){
-        if (typeof this.refs['chart' + i].reflowChart === 'function'){
-          this.refs['chart' + i].reflowChart(parentWidth - this.childMargin);
+     let i=0
+       , max = this.state.configs.length
+       , _propName;
+     for (; i<max; i++) {
+        _propName = 'chart' + i
+        if (this.refs[_propName] && typeof this.refs[_propName].reflowChart === 'function'){
+          this.refs[_propName].reflowChart(parentWidth - this.childMargin)
         }
      }
    }

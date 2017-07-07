@@ -135,7 +135,7 @@ var PanelIndicator = function (_Component) {
         _this.props.onAddMfi(_value, _id);
         mfiDescrs.push({
           id: _id,
-          color: 'green'
+          color: '#90ed7d'
         });
         _this.setState({ mfiDescrs: mfiDescrs });
       }

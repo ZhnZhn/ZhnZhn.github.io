@@ -12,7 +12,7 @@ import Row from './Row';
 import NasdaqLink from '../native-links/NasdaqLink';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button';
 
 import withValidationLoad from './decorators/withValidationLoad';
 
@@ -58,7 +58,13 @@ class StocksBySectorDialog extends Component {
 
    constructor(props){
      super()
-     this.toolbarButtons =  [{ caption: 'L', onClick: this._handleClickLink }]
+     this.toolbarButtons =  [
+       { caption: 'L', onClick: this._handleClickLink }
+     ]
+     this._commandButtons = [
+       <Button.Load onClick={this._handleLoad} />,
+       <Button.Show onClick={props.data.onShow} />
+     ]
      this.state = this._createInitialState(props)
    }
 
@@ -163,34 +169,21 @@ class StocksBySectorDialog extends Component {
 
   render(){
     const { isShow, data={} } = this.props
-        , { item={}, onShow } = data
+        , { item={} } = data
         , { text } = item
         , {
             isShowLink,
             initFromDate, initToDate, onTestDate,
             validationMessages
           } = this.state
-        , _commandButtons = [
-             <ActionButton
-                type="TypeC"
-                caption="Load"
-                onClick={this._handleLoad}
-             />,
-             <ActionButton
-                type="TypeC"
-                caption="Show"
-                onClick={onShow}
-             />
-          ]
         , _source = this._getItemSource(this.props);
-
 
     return (
       <ModalDialog
          caption={text}
          styleCaption={STYLE.CAPTION_SPAN}
          isShow={isShow}
-         commandButtons={_commandButtons}
+         commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
         <ToolbarButtonCircle

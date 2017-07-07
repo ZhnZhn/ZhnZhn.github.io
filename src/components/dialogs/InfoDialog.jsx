@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import ModalDialog from '../zhn-moleculs/ModalDialog';
+import ModalDialog from '../zhn-moleculs/ModalDialog'
 import STYLE from '../styles/DialogStyles'
 
 const S = {

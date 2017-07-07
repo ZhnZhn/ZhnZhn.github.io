@@ -66,7 +66,7 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
 var _addSettings = function _addSettings(option) {
   if (option.loadId === 'B') {
     option.apiKey = _ChartStore2.default.getBarchartKey();
-  } else if (option.loadId === 'AL') {
+  } else if (option.loadId === 'AL' || option.loadId === 'AL_S') {
     option.apiKey = _ChartStore2.default.getAlphaKey();
   } else {
     option.apiKey = _ChartStore2.default.getQuandlKey();
@@ -100,7 +100,7 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function () {
 
   if (option.loadId === 'B' && !option.apiKey) {
     this.cancelLoad(option, _Msg2.default.Alert.withoutApiKey('Barchart Market Data'), false);
-  } else if (option.loadId === 'AL' && !option.apiKey) {
+  } else if ((option.loadId === 'AL' || option.loadId === 'AL_S') && !option.apiKey) {
     this.cancelLoad(option, _Msg2.default.Alert.withoutApiKey('Alpha Vantage'), false);
   } else if (option.isKeyFeature && !option.apiKey) {
     this.cancelLoad(option, _Msg2.default.Alert.FEATURE_WITHOUT_KEY, false);

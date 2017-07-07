@@ -1,7 +1,7 @@
 {
   "name": "erc",
-  "version": "0.13.0",
-  "description": "ERC : Economic RESTFul Client",
+  "version": "0.14.0",
+  "description": "ERC: Economic RESTFul Client",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -109,10 +109,10 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-rev": "^7.1.2",
-    "html-webpack-plugin": "^2.22.0",
+    "html-webpack-plugin": "^2.29.0",
     "jest": "^19.0.2",
     "jspm": "^0.16.39",
-    "webpack": "^1.14.0",
+    "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^2.2.1"
   },
   "jest": {

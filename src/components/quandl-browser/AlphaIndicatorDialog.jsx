@@ -6,7 +6,7 @@ import SelectWithLoad from '../dialogs/SelectWithLoad'
 import RowPattern from '../dialogs/RowPattern'
 import RowCheckBox from '../dialogs/RowCheckBox'
 import ShowHide from '../zhn/ShowHide'
-import ActionButton from '../zhn/ActionButton'
+import Button from '../dialogs/Button'
 
 import withToolbar from '../dialogs/decorators/withToolbar'
 
@@ -50,6 +50,9 @@ class AlphaIndicatorDialog extends Component {
       caption: 'O', title: 'Toggle Options Input',
       onClick: this._handleClickOptions
     })
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ];
     this.state = {
       isShowOptions: false
     }
@@ -126,20 +129,13 @@ class AlphaIndicatorDialog extends Component {
             oneURI, oneJsonProp, oneCaption,
             onShow
           } = this.props
-        , { isShowOptions } = this.state
-        , _commandButtons = [
-             <ActionButton
-                key="a"
-                type="TypeC"
-                caption="Load"
-                onClick={this._handleLoad}
-             />
-          ];
+        , { isShowOptions } = this.state;
+
     return (
       <DraggableDialog
            caption={caption}
            isShow={isShow}
-           commandButtons={_commandButtons}
+           commandButtons={this._commandButtons}
            onShowChart={onShow}
            onClose={this._handleClose}
        >

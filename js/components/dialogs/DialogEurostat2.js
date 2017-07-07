@@ -22,8 +22,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
 
-//import createLoadOptions from '../../flux/creaters/eurostat2'
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -50,9 +48,9 @@ var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -182,7 +180,7 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
     _this.chartType = undefined;
 
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
-
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowDate: false,
       dateDefault: DATE_PLACEHOLDER,
@@ -219,12 +217,7 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           isShowDate = _state.isShowDate,
           dateDefault = _state.dateDefault,
           dateOptions = _state.dateOptions,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -232,7 +225,7 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },

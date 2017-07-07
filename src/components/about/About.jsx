@@ -132,37 +132,33 @@ class About extends Component {
           <LinkToken
              href="https://www.quandl.com/"
              color="#E05927"
-             isFirstBlank={true}
           >
              Quandl
           </LinkToken>
           <Token color="black">
-            &nbsp;(Key),
+            &nbsp;(Key),&nbsp;
           </Token>
           <LinkToken
              href="http://ec.europa.eu/eurostat"
              color="#009ae5"
-             isFirstBlank={true}
           >
              Eurostat
           </LinkToken>
           <Token color="#009ae5">
-            ,
+            ,&nbsp;
           </Token>
           <LinkToken
              href="https://www.barchartmarketdata.com"
              color="#bd1010"
-             isFirstBlank={true}
           >
              Barchart Market Data
           </LinkToken>
           <Token color="black">
-            &nbsp;(Key),
+            &nbsp;(Key),&nbsp;
           </Token>
           <LinkToken
              href="https://www.alphavantage.co"
              color="#009ae5"
-             isFirstBlank={true}
           >
              Alpha Vantage
           </LinkToken>

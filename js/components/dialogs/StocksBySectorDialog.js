@@ -72,9 +72,9 @@ var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _withValidationLoad = require('./decorators/withValidationLoad');
 
@@ -124,6 +124,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
     _initialiseProps.call(_this);
 
     _this.toolbarButtons = [{ caption: 'L', onClick: _this._handleClickLink }];
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_Button2.default.Show, { onClick: props.data.onShow })];
     _this.state = _this._createInitialState(props);
     return _this;
   }
@@ -154,7 +155,6 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           data = _props$data === undefined ? {} : _props$data,
           _data$item = data.item,
           item = _data$item === undefined ? {} : _data$item,
-          onShow = data.onShow,
           text = item.text,
           _state = this.state,
           isShowLink = _state.isShowLink,
@@ -162,15 +162,6 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           initToDate = _state.initToDate,
           onTestDate = _state.onTestDate,
           validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      }), _react2.default.createElement(_ActionButton2.default, {
-        type: 'TypeC',
-        caption: 'Show',
-        onClick: onShow
-      })],
           _source = this._getItemSource(this.props);
 
       return _react2.default.createElement(
@@ -179,7 +170,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           caption: text,
           styleCaption: STYLE.CAPTION_SPAN,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

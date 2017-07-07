@@ -190,7 +190,7 @@ var InputPattern = (_temp = _class = function (_Component) {
   }, {
     key: 'getValue',
     value: function getValue() {
-      return this.state.value;
+      return String(this.state.value).trim();
     }
   }, {
     key: 'isValid',

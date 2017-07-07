@@ -3,8 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
-import ActionButton from '../zhn/ActionButton';
-
+import Button from './Button'
 import ValidationMessages from '../zhn/ValidationMessages';
 
 import withToolbar from './decorators/withToolbar';
@@ -37,7 +36,9 @@ class DialogEurostat extends Component {
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
-
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ];
     this.state = {
       validationMessages: []
     }
@@ -93,20 +94,13 @@ class DialogEurostat extends Component {
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp
           } = this.props
-        , { validationMessages } = this.state
-        , _commandButtons = [
-       <ActionButton
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />
-    ];
+        , { validationMessages } = this.state;
 
     return(
         <DraggableDialog
              caption={caption}
              isShow={isShow}
-             commandButtons={_commandButtons}
+             commandButtons={this._commandButtons}
              onShowChart={onShow}
              onClose={this._handleClose}
          >

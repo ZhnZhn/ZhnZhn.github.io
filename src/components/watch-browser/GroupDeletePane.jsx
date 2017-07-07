@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import RowInputSelect from './RowInputSelect';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ActionButton from '../zhn/ActionButton';
-
-import STYLE from './Pane.Style';
+import RowInputSelect from './RowInputSelect'
+import ValidationMessages from '../zhn/ValidationMessages'
+import Button from './Button'
+import RowButtons from './RowButtons'
 
 class GroupDeletePane extends Component {
   static propTypes = {
@@ -22,7 +21,11 @@ class GroupDeletePane extends Component {
   constructor(props){
     super()
     this.caption = null
-
+    this._primaryBt = <Button.Primary
+                         caption="Delete"
+                         title="Delete Group"
+                         onClick={this._handleDeleteGroup}
+                      />
     this.state = {
       groupOptions : props.store.getWatchGroups(),
       validationMessages : []
@@ -70,12 +73,14 @@ class GroupDeletePane extends Component {
 
   render(){
       const { onClose } = this.props
-          , { groupOptions, validationMessages } = this.state;
+          , {
+              groupOptions, validationMessages
+            } = this.state;
 
       return (
          <div>
            <RowInputSelect
-             caption={'Group:'}
+             caption="Group:"
              options={groupOptions}
              //isUpdateOptions={true}
              onSelect={this._handleSelectGroup}
@@ -83,18 +88,11 @@ class GroupDeletePane extends Component {
            <ValidationMessages
              validationMessages={validationMessages}
            />
-           <div style={STYLE.COMMAND_DIV}>
-             <ActionButton
-               type="TypeC"
-               caption="Delete"
-               onClick={this._handleDeleteGroup}
-             />
-            <ActionButton
-               type="TypeC"
-               caption="Close"
-               onClick={onClose}
-             />
-           </div>
+           <RowButtons
+             Primary={this._primaryBt}
+             withoutClear={true}
+             onClose={onClose}
+           />
         </div>
     );
   }

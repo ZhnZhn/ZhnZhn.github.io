@@ -28,9 +28,9 @@ var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _FlatButton = require('../zhn-m/FlatButton');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
 var _Interact = require('../../utils/Interact');
 
@@ -65,6 +65,9 @@ var styles = {
     marginTop: '8px',
     marginBottom: '10px',
     marginRight: '4px'
+  },
+  btRoot: {
+    color: 'rgb(35, 47, 59)'
   }
 };
 
@@ -87,15 +90,19 @@ var DraggableDialog = function (_Component) {
         'div',
         { style: styles.commandDiv },
         commandButtons,
-        typeof onShowChart === 'function' && _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
+        typeof onShowChart === 'function' && _react2.default.createElement(_FlatButton2.default, {
+          rootStyle: styles.btRoot,
           caption: 'Show',
-          onClick: onShowChart
+          title: 'Show Pane Container'
+          //accessKey="s"
+          , onClick: onShowChart
         }),
-        _react2.default.createElement(_ActionButton2.default, {
-          type: 'TypeC',
+        _react2.default.createElement(_FlatButton2.default, {
+          rootStyle: styles.btRoot,
           caption: 'Close',
-          onClick: onClose
+          title: 'Close Draggable Dialog'
+          //accessKey="c"
+          , onClick: onClose
         })
       );
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);

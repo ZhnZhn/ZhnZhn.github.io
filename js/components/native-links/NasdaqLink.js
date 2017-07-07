@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Link = require('./Link.Style');
+var _Link = require('./Link');
 
 var _Link2 = _interopRequireDefault(_Link);
 
@@ -29,16 +29,13 @@ var NasdaqLink = function NasdaqLink(_ref) {
       value = item.value,
       _ticket = value ? value.trim() : text.split('-')[0].trim();
 
-  return _react2.default.createElement(
-    'a',
-    {
-      className: 'native-link',
-      style: Object.assign({}, _Link2.default.LINK, style),
-      href: '' + NASDAQ_BASE + _ticket
-    },
-    caption + ' ' + _ticket
-  );
+  return _react2.default.createElement(_Link2.default, {
+    className: 'native-link',
+    style: style,
+    href: '' + NASDAQ_BASE + _ticket,
+    caption: caption + ' ' + _ticket
+  });
 };
 
 exports.default = NasdaqLink;
-//# sourceMappingURL=NasdaqLink.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\NasdaqLink.js.map

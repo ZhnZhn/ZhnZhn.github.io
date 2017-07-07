@@ -4,7 +4,7 @@ import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import SelectParentChild from './SelectParentChild';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button';
 
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
@@ -17,14 +17,16 @@ import withValidationLoad from './decorators/withValidationLoad'
 @withValidationLoad
 class  DialogType5 extends Component {
 
-  state = {
-    isShowDate : true,
-    validationMessages: []
-  }
-
   constructor(props){
-    super();
-    this.toolbarButtons = this._createType2WithToolbar(props);
+    super()
+    this.toolbarButtons = this._createType2WithToolbar(props)
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ]
+    this.state = {
+      isShowDate : true,
+      validationMessages: []
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -83,21 +85,13 @@ class  DialogType5 extends Component {
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
            initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, validationMessages } = this.state
-        , _commandButtons = [
-       <ActionButton
-          key="a"
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />
-    ];
+        , { isShowDate, validationMessages } = this.state;
 
     return(
         <DraggableDialog
              caption={caption}
              isShow={isShow}
-             commandButtons={_commandButtons}
+             commandButtons={this._commandButtons}
              onShowChart={onShow}
              onClose={this._handleClose}
          >

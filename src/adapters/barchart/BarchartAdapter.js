@@ -1,9 +1,13 @@
 
+import DateUtils from '../../utils/DateUtils'
+
 import AdapterFn from '../AdapterFn'
 import QuandlFn2 from '../QuandlFn2'
 
 import ChartConfig from '../../charts/ChartConfig'
 import Chart from '../../charts/Chart'
+import ChartFn from '../../charts/ChartFn'
+import Tooltip from '../../charts/Tooltip'
 
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from '../IndicatorSma';
 
@@ -14,13 +18,14 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
   const _data = []
       , _dataVolume = [], _dataVolumeColumn = []
       , _dataATH = [], _dataMfi = [];
-  let _prevClose;
-  let _minClose = Number.POSITIVE_INFINITY
-  let _maxClose = Number.NEGATIVE_INFINITY
+  let _prevClose
+    , _minClose = Number.POSITIVE_INFINITY
+    , _maxClose = Number.NEGATIVE_INFINITY;
   results.forEach(item => {
-    const { tradingDay='', close, volume, open, high, low } = item
-        //, _arrDate = tradingDay.split('-')
-        //, _date = Date.UTC(_arrDate[0], (parseInt(_arrDate[1], 10)-1), _arrDate[2])
+    const {
+           tradingDay='',
+           open, high, low, close, volume
+          } = item
         , _date = AdapterFn.ymdToUTC(tradingDay);
 
     if (_minClose > close) {
@@ -32,15 +37,19 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
 
     _data.push([_date, close])
     _dataVolume.push([_date, volume])
-    _dataVolumeColumn.push(AdapterFn.volumeColumnPoint({
-      open, close, volume, date: _date,
-      option: { _high: high, _low: low }
-    }))
+    _dataVolumeColumn.push(
+        AdapterFn.volumeColumnPoint({
+           open, close, volume, date: _date,
+           option: { _high: high, _low: low }
+        })
+    )
     _dataMfi.push([tradingDay, close, high, low, close, volume])
     if (typeof _prevClose !== 'undefined'){
-      _dataATH.push(AdapterFn.athPoint({
-        date: _date, prevClose: _prevClose, open
-      }))
+      _dataATH.push(
+         AdapterFn.athPoint({
+           date: _date, prevClose: _prevClose, open
+         })
+      )
     }
     _prevClose = close
   })
@@ -50,6 +59,9 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
     type: 'area',
     lineWidth: 1
   }
+  config.series[0].point = Chart.fEventsMouseOver(
+    ChartFn.handlerMouserOverPoint
+  )
 
   Object.assign(config, {
     valueMoving: QuandlFn2.createValueMovingFromSeria(_data),
@@ -72,15 +84,16 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
   plotLines[1].value = _minClose;
   plotLines[1].label.text = `${ChartConfig.fnNumberFormat(_minClose)}`;
 
-  const _min = Chart.calcMinY({
-    minPoint: _minClose, maxPoint: _maxClose
-  })
   Object.assign(config.yAxis, {
-    min: _min,
+    min: Chart.calcMinY({ minPoint: _minClose, maxPoint: _maxClose}),
     maxPadding: 0.15,
     minPadding: 0.15,
     endOnTick: false,
     startOnTick: false
+  })
+
+  Object.assign(config.xAxis, {
+    crosshair : Chart.fCrosshair()
   })
 }
 
@@ -90,25 +103,29 @@ const _createAreaConfig = (json, option) => {
       , { caption='', value='' } = stock
       , _chartId = `B/${value}`;
 
-  config.title = Chart.fTitle({ text: caption, y: -10 })
-  _createCloseSeries(config, json, _chartId)
+  Object.assign(config, {
+    title: Chart.fTitle({ text: caption, y: Chart.STACKED_TITLE_Y }),
+    subtitle: Chart.fSubtitle({ y:Chart.STACKED_SUBTITLE_Y }),
+    tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
+    info: {
+      description: DESCR,
+      frequency:"daily",
+      name: caption,
+      newest_available_date: DateUtils.getFromDate(0),
+      oldest_available_date: DateUtils.getFromDate(2)
+    },
+    zhConfig: {
+      columnName: "Close",
+      dataColumn: 4,
+      dataSource: "Barchart Market Data Solutions",
+      id: _chartId,
+      isWithLegend: false,
+      key: `${value}`,
+      linkFn:"NASDAQ"
+    }
+  })
 
-  config.info = {
-    description: DESCR,
-    frequency:"daily",
-    name: caption,
-    newest_available_date: "",
-    oldest_available_date: ""
-  }
-  config.zhConfig = {
-    columnName: "Close",
-    dataColumn: 4,
-    dataSource: "Barchart Market Data Solutions",
-    id: _chartId,
-    isWithLegend:false,
-    key: `${value}`,
-    linkFn:"NASDAQ"
-  }
+  _createCloseSeries(config, json, _chartId)
 
   return {
     config,
@@ -124,8 +141,10 @@ const BarchartAdapter = {
   },
   toSeries(json, option) {
     const seria = ChartConfig.fSeries()
-    seria.zhSeriaId = 'Empty_Seria'
-    seria.zhValueText = 'Empty Seria'
+    Object.assign(seria, {
+      zhSeriaId: 'Empty_Seria',
+      zhValueText: 'Empty Seria'
+    })
     return seria;
   }
 }

@@ -1,17 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
-//import createLoadOptions from '../../flux/creaters/eurostat3';
-
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
 import SelectParentChild from './SelectParentChild';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button';
 import ValidationMessages from '../zhn/ValidationMessages';
 
 import withToolbar from './decorators/withToolbar';
 import withValidationLoad from './decorators/withValidationLoad';
-
 
 @withToolbar
 @withValidationLoad
@@ -37,11 +34,14 @@ class DialogEurostat3 extends Component {
   }
 
   constructor(props){
-    super();
-    this.one = undefined;
+    super()
+    this.one = undefined
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
-    ];
+    ]
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ]
     this.state = {
       validationMessages: []
     }
@@ -99,20 +99,13 @@ class DialogEurostat3 extends Component {
            twoCaption, twoURI, twoJsonProp,
            threeCaption, msgOnNotSelected
           } = this.props
-        , { validationMessages } = this.state
-        , _commandButtons = [
-       <ActionButton
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />
-    ];
+        , { validationMessages } = this.state;
 
     return(
         <DraggableDialog
              caption={caption}
              isShow={isShow}
-             commandButtons={_commandButtons}
+             commandButtons={this._commandButtons}
              onShowChart={onShow}
              onClose={this._handleClose}
          >

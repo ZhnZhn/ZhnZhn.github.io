@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import RowInputText from './RowInputText';
-import ActionButton from '../zhn/ActionButton';
-import ValidationMessages from '../zhn/ValidationMessages';
-
-import STYLE from './Pane.Style';
+import RowInputText from './RowInputText'
+import Button from './Button'
+import RowButtons from './RowButtons'
+import ValidationMessages from '../zhn/ValidationMessages'
 
 class GroupAddPane extends Component {
   static propTypes = {
@@ -21,6 +20,11 @@ class GroupAddPane extends Component {
 
   constructor(props){
     super()
+    this._primaryBt = <Button.Primary
+                         caption="Create"
+                         title="Create New Group"
+                         onClick={this._handleCreate}
+                      />
     this.state = {
       validationMessages : []
     }
@@ -66,28 +70,16 @@ class GroupAddPane extends Component {
       <div>
         <RowInputText
            ref={c => this.inputText = c}
-           caption={'Group:'}
+           caption="Group:"
         />
         <ValidationMessages
            validationMessages={validationMessages}
          />
-        <div style={STYLE.COMMAND_DIV}>
-         <ActionButton
-            type="TypeC"
-            caption="Create"
-            onClick={this._handleCreate}
+         <RowButtons
+            Primary={this._primaryBt}
+            onClear={this._handleClear}
+            onClose={onClose}
          />
-         <ActionButton
-            type="TypeC"
-            caption="Clear"
-            onClick={this._handleClear}
-         />
-         <ActionButton
-            type="TypeC"
-            caption="Close"
-            onClick={onClose}
-         />
-       </div>
       </div>
     )
   }

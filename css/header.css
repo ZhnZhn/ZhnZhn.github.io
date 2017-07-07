@@ -1,24 +1,16 @@
 
-.header{
+.header {
   position : relative;
   width: 100%;
   min-width: 550px;
   margin-right: 26px;
   background-color: rgba(77, 77, 77, 1);
-  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-bottom: 4px;
   padding-left: 12px;
 }
 
-/*
-@media screen and (max-width:580px){
-  .header {
-    min-height: 82px;
-    max-height: 82px;
-  }
-}
-*/
-
-.header__icon-erc{
+.header__icon-erc {
   display: inline-block;
   width : 32px;
   height : 32px;
@@ -37,10 +29,10 @@
   font-weight: bold;
 }
 .header__panel-browser {
-  position : absolute;
   z-index: : 1010;
+  position : absolute;
   top : 45px;
-  left : 80px;
+  left : 156px;
 
   background-color: rgba(77, 77, 77, 1);
   border-bottom: 4px solid green;
@@ -51,7 +43,7 @@
   padding-top : 5px;
   padding-bottom : 5px;
 }
-@media screen and (max-width:712px){
+@media screen and (max-width:790px) {
   .header__app-label {
     display: none;
   }
@@ -59,6 +51,19 @@
     display: none;
   }
   .header__panel-browser {
-    left: 5px;
+    left: 21px;
+  }
+}
+@media screen and (max-width:645px) {
+  .header__bt-watch {
+    display: none;
+  }
+}
+@media screen and (max-width:580px) {
+  .header_bt-eurostat {
+    display: none;
+  }
+  .header__bt-quandl {
+    display: none;
   }
 }

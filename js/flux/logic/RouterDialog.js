@@ -56,6 +56,10 @@ var _AlphaIndicatorDialog = require('../../components/quandl-browser/AlphaIndica
 
 var _AlphaIndicatorDialog2 = _interopRequireDefault(_AlphaIndicatorDialog);
 
+var _AlphaSectorDialog = require('../../components/quandl-browser/AlphaSectorDialog');
+
+var _AlphaSectorDialog2 = _interopRequireDefault(_AlphaSectorDialog);
+
 var _ChartConfigDialog = require('../../components/chart-config/ChartConfigDialog');
 
 var _ChartConfigDialog2 = _interopRequireDefault(_ChartConfigDialog);
@@ -78,6 +82,7 @@ var RouterDialog = {
   JodiWorldOilDialog: _JodiWorldOilDialog2.default,
   ZillowDialog: _ZillowDialog2.default,
   AlphaIndicatorDialog: _AlphaIndicatorDialog2.default,
+  AlphaSectorDialog: _AlphaSectorDialog2.default,
 
   ChartConfigDialog: _ChartConfigDialog2.default
 };

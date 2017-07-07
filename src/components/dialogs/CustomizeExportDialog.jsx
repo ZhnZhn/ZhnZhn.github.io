@@ -6,7 +6,7 @@ import ChartExportConfig from '../../charts/ChartExportConfig';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import STYLE from '../styles/DialogStyles';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button'
 
 import ShowHide from '../zhn/ShowHide';
 import InputText from '../zhn/InputText';
@@ -55,7 +55,14 @@ class CustomizeExportDialog extends Component {
       { caption: 'S', onClick: this._handleClickStyle }
     ]
     this.optionStyles = ChartExportConfig.createOptionStyles()
-
+    this._commandButtons = [
+         <Button.Flat
+            caption="Export"
+            //accessKey="x"
+            isPrimary={true}
+            onClick={this._handleExport}
+         />
+    ];
     this.state = {
       isShowDimension : true,
       isShowTitle : true,
@@ -112,21 +119,15 @@ class CustomizeExportDialog extends Component {
         , { chartWidth, chartHeight, options } = chart
         , title = options.title.text
         , subtitle = options.subtitle.text
-        , { isShowDimension, isShowTitle, isShowStyle } = this.state
-        , commandButtons =[
-             <ActionButton
-                key="a"
-                type="TypeC"
-                caption="Export"
-                onClick={this._handleExport}
-             />
-          ];
+        , {
+            isShowDimension, isShowTitle, isShowStyle
+          } = this.state;
 
     return (
       <ModalDialog
         caption="Customize Export Chart"
         isShow={isShow}
-        commandButtons={commandButtons}
+        commandButtons={this._commandButtons}
         onClose={onClose}
       >
          <ToolbarButtonCircle

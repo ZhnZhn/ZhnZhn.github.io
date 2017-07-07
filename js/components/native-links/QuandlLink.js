@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Link = require('./Link.Style');
+var _Link = require('./Link');
 
 var _Link2 = _interopRequireDefault(_Link);
 
@@ -24,16 +24,12 @@ var QuandlLink = function QuandlLink(_ref) {
       dsCode = _ref$dsCode === undefined ? '' : _ref$dsCode,
       _ref$caption = _ref.caption,
       caption = _ref$caption === undefined ? CAPTION : _ref$caption;
-  return _react2.default.createElement(
-    'a',
-    {
-      className: 'descr__quandl-link',
-      style: _Link2.default.LINK,
-      href: '' + QUANDL_DATA_BASE + dbCode + '/' + dsCode
-    },
-    caption + ' ' + dbCode + '/' + dsCode
-  );
+  return _react2.default.createElement(_Link2.default, {
+    className: 'descr__quandl-link',
+    href: '' + QUANDL_DATA_BASE + dbCode + '/' + dsCode,
+    caption: caption + ' ' + dbCode + '/' + dsCode
+  });
 };
 
 exports.default = QuandlLink;
-//# sourceMappingURL=QuandlLink.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\QuandlLink.js.map

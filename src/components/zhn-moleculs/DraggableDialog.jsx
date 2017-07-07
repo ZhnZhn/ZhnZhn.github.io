@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import SvgClose from '../zhn/SvgClose';
-import ActionButton from '../zhn/ActionButton';
+import SvgClose from '../zhn/SvgClose'
+import FlatButton from '../zhn-m/FlatButton'
 
-import Interact from '../../utils/Interact';
+import Interact from '../../utils/Interact'
 
 const styles = {
   rootDiv: {
@@ -32,6 +32,9 @@ const styles = {
      marginTop: '8px',
      marginBottom: '10px',
      marginRight: '4px'
+  },
+  btRoot: {
+    color: 'rgb(35, 47, 59)'
   }
 };
 
@@ -57,16 +60,20 @@ class DraggableDialog extends Component {
       <div style={styles.commandDiv}>
         {commandButtons}
         {typeof onShowChart === 'function' &&
-          <ActionButton
-             type="TypeC"
-             caption="Show"
-             onClick={onShowChart}
+          <FlatButton
+            rootStyle={styles.btRoot}
+            caption="Show"
+            title="Show Pane Container"
+            //accessKey="s"
+            onClick={onShowChart}
           />
         }
-        <ActionButton
-           type="TypeC"
-           caption="Close"
-           onClick={onClose}
+        <FlatButton
+          rootStyle={styles.btRoot}
+          caption="Close"
+          title="Close Draggable Dialog"
+          //accessKey="c"
+          onClick={onClose}
         />
       </div>
     );

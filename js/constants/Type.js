@@ -8,8 +8,8 @@ var BrowserType = exports.BrowserType = {
    //QUANDL : 'QE',
 
    EUROSTAT: 'ES',
-   GOOGLE: 'QD',
-   YAHOO: 'QY',
+   //GOOGLE : 'QD',
+   //YAHOO : 'QY',
    PREMIUM_SAMPLE: 'QPS',
    FRANCE_STATISTICS: 'QFS',
 
@@ -60,6 +60,7 @@ var LoadType = exports.LoadType = {
    Q: 'Q',
    B: 'B',
    AL: 'AL',
+   AL_S: 'AL_S',
    QCT: 'QCT',
    EU_STAT: 'EU_STAT',
    WL: 'WL'

@@ -1,1 +1,27 @@
-{"version":3,"sources":["../../../src/components/header/LimitRemainingLabel.jsx"],"names":["STYLE","LABEL","display","color","paddingLeft","paddingRight","fontSize","fontWeight","LimitRemainingLabel","state","value","_onStore","setState","store","props","unsubscribe","listenWithLimitRemaining","style","Object","assign"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,SAAQ;AACNC,aAAS,cADH;AAENC,WAAM,SAFA;AAGNC,iBAAa,MAHP;AAINC,kBAAc,MAJR;AAKNC,cAAU,MALJ;AAMNC,gBAAY;AANN;AADI,CAAd;;IAWMC,mB;;;;;;;;;;;;;;8NACJC,K,GAAQ;AACNC,aAAQ;AADF,K,QAYRC,Q,GAAW,UAACD,KAAD,EAAW;AACpB,UAAK,EAAEA,SAAS,IAAX,CAAL,EAAwB;AACtB,cAAKE,QAAL,CAAc,EAAEF,OAAOA,KAAT,EAAd;AACD;AACF,K;;;;;yCAZmB;AAAA,UACVG,KADU,GACA,KAAKC,KADL,CACVD,KADU;;AAElB,WAAKE,WAAL,GAAmBF,MAAMG,wBAAN,CAA+B,KAAKL,QAApC,CAAnB;AACD;;;2CACqB;AACpB,WAAKI,WAAL;AACD;;;6BAQO;AACA,UAAEE,KAAF,GAAY,KAAKH,KAAjB,CAAEG,KAAF;AAAA,UACEP,KADF,GACY,KAAKD,KADjB,CACEC,KADF;;;AAGN,aACG;AAAA;AAAA,UAAM,OAAOQ,OAAOC,MAAP,CAAc,EAAd,EAAkBnB,MAAMC,KAAxB,EAA+BgB,KAA/B,CAAb;AACGP;AADH,OADH;AAKD;;;;;kBAGYF,mB","file":"LimitRemainingLabel.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\nconst STYLE = {\r\n  LABEL : {\r\n    display: 'inline-block',\r\n    color:'#2f7ed8',\r\n    paddingLeft: '10px',\r\n    paddingRight: '10px',\r\n    fontSize: '16px',\r\n    fontWeight: 'bold'\r\n  }\r\n}\r\n\r\nclass LimitRemainingLabel extends Component {\r\n  state = {\r\n    value : ''\r\n  }\r\n\r\n  componentWillMount(){\r\n    const { store } = this.props;\r\n    this.unsubscribe = store.listenWithLimitRemaining(this._onStore);\r\n  }\r\n  componentWillUnmount(){\r\n    this.unsubscribe();\r\n  }\r\n\r\n  _onStore = (value) => {\r\n    if ( !(value == null) ) {\r\n      this.setState({ value: value });\r\n    }\r\n  }\r\n\r\n  render(){\r\n    const { style } = this.props\r\n        , { value } = this.state\r\n\r\n    return (\r\n       <span style={Object.assign({}, STYLE.LABEL, style)}>\r\n         {value}\r\n       </span>\r\n    );\r\n  }\r\n}\r\n\r\nexport default LimitRemainingLabel\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\header\\LimitRemainingLabel.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\header\\LimitRemainingLabel.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "LABEL",
+  "display",
+  "color",
+  "paddingRight",
+  "fontSize",
+  "fontWeight",
+  "LimitRemainingLabel",
+  "state",
+  "value",
+  "_onStore",
+  "setState",
+  "store",
+  "props",
+  "unsubscribe",
+  "listenWithLimitRemaining",
+  "style"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,SAAQ;AACNC,aAAS,cADH;AAENC,WAAM,SAFA;AAGN;AACAC,kBAAc,MAJR;AAKNC,cAAU,MALJ;AAMNC,gBAAY;AANN;AADI,CAAd;;IAWMC,mB;;;;;;;;;;;;;;8NACJC,K,GAAQ;AACNC,aAAQ;AADF,K,QAYRC,Q,GAAW,UAACD,KAAD,EAAW;AACpB,UAAK,EAAEA,SAAS,IAAX,CAAL,EAAwB;AACtB,cAAKE,QAAL,CAAc,EAAEF,OAAOA,KAAT,EAAd;AACD;AACF,K;;;;;yCAZoB;AAAA,UACXG,KADW,GACD,KAAKC,KADJ,CACXD,KADW;;AAEnB,WAAKE,WAAL,GAAmBF,MAAMG,wBAAN,CAA+B,KAAKL,QAApC,CAAnB;AACD;;;2CACsB;AACrB,WAAKI,WAAL;AACD;;;6BAQQ;AACD,UAAEE,KAAF,GAAY,KAAKH,KAAjB,CAAEG,KAAF;AAAA,UACEP,KADF,GACY,KAAKD,KADjB,CACEC,KADF;;;AAGN,aACG;AAAA;AAAA,UAAM,kCAAYT,MAAMC,KAAlB,EAA4Be,KAA5B,CAAN;AACGP;AADH,OADH;AAKD;;;;;kBAGYF,mB"
+}

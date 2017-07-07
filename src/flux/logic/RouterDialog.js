@@ -12,7 +12,9 @@ import Futures3Dialog from '../../components/quandl-browser/Futures3Dialog';
 import FuturesWikiDialog from '../../components/quandl-browser/FuturesWikiDialog';
 import JodiWorldOilDialog from '../../components/quandl-browser/JodiWorldOilDialog';
 import ZillowDialog from '../../components/quandl-browser/ZillowDialog';
+
 import AlphaIndicatorDialog from '../../components/quandl-browser/AlphaIndicatorDialog';
+import AlphaSectorDialog from '../../components/quandl-browser/AlphaSectorDialog';
 
 import ChartConfigDialog from '../../components/chart-config/ChartConfigDialog'
 
@@ -32,6 +34,7 @@ const RouterDialog = {
   JodiWorldOilDialog : JodiWorldOilDialog,
   ZillowDialog : ZillowDialog,
   AlphaIndicatorDialog: AlphaIndicatorDialog,
+  AlphaSectorDialog: AlphaSectorDialog,
 
   ChartConfigDialog : ChartConfigDialog
 }

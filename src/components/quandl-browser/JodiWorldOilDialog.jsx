@@ -5,8 +5,7 @@ import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
 import SelectWithLoad from '../dialogs/SelectWithLoad';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import SelectParentChild from '../dialogs/SelectParentChild';
-import ActionButton from '../zhn/ActionButton';
-
+import Button from '../dialogs/Button';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
@@ -34,6 +33,9 @@ class JodiWorldOilDialog extends Component {
      this.units = null
 
      this.toolbarButtons = this._createType2WithToolbar(props)
+     this._commandButtons = [
+       <Button.Load onClick={this._handleLoad} />
+     ]
      this.state = {
        isShowDate : true,
        validationMessages : []
@@ -108,21 +110,13 @@ class JodiWorldOilDialog extends Component {
              parentCaption, parentChildURI, parentJsonProp, childCaption, msgOnNotSelected,
              initFromDate, initToDate, msgOnNotValidFormat, onTestDate
            } = this.props
-         , { isShowDate, validationMessages } = this.state
-         , _commandButtons = [
-               <ActionButton
-                  key="a"
-                  type="TypeC"
-                  caption="Load"
-                  onClick={this._handleLoad}
-               />
-          ];
+         , { isShowDate, validationMessages } = this.state;
 
      return (
        <DraggableDialog
          caption={caption}
          isShow={isShow}
-         commandButtons={_commandButtons}
+         commandButtons={this._commandButtons}
          onShowChart={onShow}
          onClose={this._handleClose}
        >

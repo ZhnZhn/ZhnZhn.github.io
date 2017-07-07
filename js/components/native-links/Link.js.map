@@ -1,0 +1,16 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\Link.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\Link.js",
+ "sourceRoot": "",
+ "names": [
+  "Link",
+  "className",
+  "style",
+  "href",
+  "caption",
+  "LINK"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,KAAd,QAAcA,KAAd;AAAA,MAAqBC,IAArB,QAAqBA,IAArB;AAAA,MAA2BC,OAA3B,QAA2BA,OAA3B;AAAA,SACX;AAAA;AAAA;AACE,iBAAWH,SADb;AAEE,wCAAY,eAAMI,IAAlB,EAA2BH,KAA3B,CAFF;AAGE,YAAMC;AAHR;AAKGC;AALH,GADW;AAAA,CAAb;;kBASeJ,I"
+}

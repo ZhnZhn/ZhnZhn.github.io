@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import DraggableDialog from '../zhn-moleculs/DraggableDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
 import SelectWithLoad from './SelectWithLoad';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button';
 import ShowHide from '../zhn/ShowHide';
 import RowInputSelect from './RowInputSelect';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
@@ -56,7 +56,9 @@ class DialogType3 extends Component {
         caption: 'T', onClick: this._handleClickTransform
       })
     }
-
+    this._commandButtons = [
+      <Button.Load onClick={this._handleLoad} />
+    ]
     this.state = {
            isShowTransform: false,
            validationMessages: []
@@ -127,21 +129,13 @@ class DialogType3 extends Component {
             isWithInputStock,
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowTransform, validationMessages } = this.state
-        , _commandButtons = [
-       <ActionButton
-          key="a"
-          type="TypeC"
-          caption="Load"
-          onClick={this._handleLoad}
-       />
-    ];
+        , { isShowTransform, validationMessages } = this.state;
 
     return (
        <DraggableDialog
            caption={caption}
            isShow={isShow}
-           commandButtons={_commandButtons}
+           commandButtons={this._commandButtons}
            onShowChart={onShow}
            onClose={this._handleClose}
        >

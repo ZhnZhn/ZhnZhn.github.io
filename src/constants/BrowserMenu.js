@@ -66,6 +66,8 @@ const menuQuandl = [
      items : [
        { id : Quandl.COMMODITY_TRADE },
        { id : Quandl.COMMODITY_PRICE },
+       { id : Quandl.WIKI_COMMODITY_PRICE, isNew : true },
+       { id : Quandl.LME, isNew : true },
        { id : Quandl.PETROLEUM_PRICES },
        { id : Quandl.JODI_WORLD_GAS },
        { id : Quandl.JODI_WORLD_OIL },
@@ -80,9 +82,11 @@ const menuQuandl = [
        { id : Quandl.EURONEXT_STOCK },
        { id : Quandl.TOKIO_STOCK },
        { id : Quandl.WIKI_STOCK },
+       { id : Quandl.FREE_US_FUNDAMENTAL, isNew: true },
        { id : Quandl.BARCHART_STOCK, isNew: true },
        { id : Quandl.ALPHA_INDICATOR, isNew: true },
-       { id : Quandl.NIKKEI },       
+       { id : Quandl.ALPHA_SECTOR, isNew: true },
+       { id : Quandl.NIKKEI },
        { id : Quandl.UNICORN_RESEARCH }
      ]
   },{

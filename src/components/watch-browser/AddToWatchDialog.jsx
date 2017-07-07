@@ -4,7 +4,7 @@ import WatchActions, { WatchActionTypes } from '../../flux/actions/WatchActions'
 import Msg from '../../constants/Msg';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import ActionButton from '../zhn/ActionButton';
+import Button from './Button';
 import ValidationMessages from '../zhn/ValidationMessages';
 import RowInputSelect from '../dialogs/RowInputSelect';
 import RowText from '../dialogs/RowText';
@@ -32,7 +32,14 @@ class AddToWatchDialog extends Component {
     super()
     this.groupCaption = null
     this.listCaption = null
-
+    this._commandButtons =[
+         <Button.Flat
+           caption="Add"
+           title="Add Item To Watch List"
+           isPrimary={true}
+           onClick={this._handleAdd}
+          />
+    ];
     this.state = {
       groupOptions : props.store.getWatchGroups(),
       listOptions : [],
@@ -130,19 +137,16 @@ class AddToWatchDialog extends Component {
   render(){
     const { isShow, data } = this.props
         , { caption } = data
-        , { groupOptions, listOptions, validationMessages } = this.state
-        , commandButtons =[
-             <ActionButton
-               type="TypeC"
-               caption="Add"
-               onClick={this._handleAdd}
-              />
-          ];
+        , {
+            groupOptions, listOptions,
+            validationMessages
+          } = this.state;
+
     return (
       <ModalDialog
          caption="Add To Watch List"
          isShow={isShow}
-         commandButtons={commandButtons}
+         commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
         <RowInputSelect

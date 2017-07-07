@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import ProgressLoading from './ProgressLoading'
 import AppLabel from './AppLabel'
 import IconLogoErc from './IconLogoErc'
-import ActionButton from '../zhn/ActionButton'
-import ModalButton from '../zhn/ModalButton'
+import FlatButton from '../zhn-m/FlatButton'
+import ModalButton from '../zhn-m/ModalButton'
 import LimitRemainingLabel from './LimitRemainingLabel'
 import PanelBrowsers from './PanelBrowsers'
 import ComponentActions from '../../flux/actions/ComponentActions'
@@ -32,25 +32,22 @@ const styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  btDS : {
-    marginTop: '8px',
-    marginLeft: '10px'
+  btTopics: {
+    marginLeft: '8px'
   },
-  bt: {
-    marginTop: '8px'
+  btRoot: {
+    color: 'rgb(35, 47, 59)'
   },
   btAbout: {
-    float: 'right',
-    marginRight: '20px',
-    marginTop: '8px'
+    float: 'right'
   },
   btSettings: {
     float: 'right',
-    marginTop: '8px'
+    marginRight: '20px'
   },
   lbLimit: {
     float: 'right',
-    paddingTop: '14px'
+    paddingTop: '9px'
   }
 }
 
@@ -114,57 +111,55 @@ class HeaderBar extends Component {
          />
 
          <ModalButton
-           style={styles.btDS}
-           type="TypeA"
-           caption="DS"
-           title="Data Source Browsers"
-           onClick={this._handleClickDS}
-           onReg={this._onRegDS}
-         >
-           <span className={'arrow-down'}></span>
-         </ModalButton>
-
-
-        <ActionButton
-          style={styles.bt}
-          type="TypeA"
-          caption="Quandl"
-          title="Quandl Economic Browser"
-          onClick={this._handleClickQuandl}
-        />
-
-        <ActionButton
-           style={styles.bt}
-           type="TypeA"
-           caption="Eurostat"
-           title="European Statistics Browser"
-           onClick={this._handleClickDynamic.bind(null, BrowserConfig[BrowserType.EUROSTAT])}
-        />
-
-         <ActionButton
-           style={styles.bt}
-           type="TypeA"
-           caption="Watch"
-           title="Watch List Browser"
-           onClick={this._handleClickWatch}
-         />
-
-         <ActionButton
-           type="TypeA"
-           style={styles.btAbout}
-           caption="About"
-           title="Description about application ERC"
-           onClick={ComponentActions.showAbout}
+             rootStyle={{ ...styles.btRoot, ...styles.btTopics }}
+             caption="Topics"
+             title="Topic Data Source Browsers"
+             accessKey="t"
+             onClick={this._handleClickDS}
+             onReg={this._onRegDS}
+          >
+            <span className="arrow-down"></span>
+          </ModalButton>
+          <FlatButton
+            className="header__bt-quandl"
+            rootStyle={styles.btRoot}
+            caption="Quandl"
+            title="Quandl Economic Browser"
+            accessKey="q"
+            onClick={this._handleClickQuandl}
+          />
+          <FlatButton
+            className="header_bt-eurostat"
+            rootStyle={styles.btRoot}
+            caption="Eurostat"
+            title="European Statistics Browser"
+            accessKey="u"
+            onClick={this._handleClickDynamic.bind(null, BrowserConfig[BrowserType.EUROSTAT])}
+          />
+          <FlatButton
+             className="header__bt-watch"
+             rootStyle={styles.btRoot}
+             caption="Watch"
+             title="Watch List Browser"
+             accessKey="w"
+             onClick={this._handleClickWatch}
           />
 
-          <ActionButton
-            type="TypeA"
-            style={styles.btSettings}
-            caption="Settings"
-            title="Application settings"
-            onClick={this._handleDialogSettings}
+           <FlatButton
+             rootStyle={{ ...styles.btRoot, ...styles.btSettings }}
+             caption="Settings"
+             title="Application settings"
+             accessKey="s"
+             isPrimary={true}
+             onClick={this._handleDialogSettings}
            />
-
+           <FlatButton
+             rootStyle={{ ...styles.btRoot, ...styles.btAbout }}
+             caption="About"
+             title="Description about application ERC"
+             accessKey="a"
+             onClick={ComponentActions.showAbout}
+           />
            <LimitRemainingLabel
               store={store}
               style={styles.lbLimit}

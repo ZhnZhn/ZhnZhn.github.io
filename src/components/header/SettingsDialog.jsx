@@ -4,7 +4,7 @@ import safeFn from '../../utils/safeFn'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import RowSecret from '../dialogs/RowSecret'
-import ActionButton from '../zhn/ActionButton'
+import FlatButton from '../zhn-m/FlatButton'
 import RowCheckBox from '../dialogs/RowCheckBox'
 
 const S = {
@@ -39,12 +39,12 @@ class SettingsDialog extends Component {
 
   constructor(props){
     super()
-    this.commandButtons = [
-       <ActionButton
-          type="TypeC"
-          caption="Set"
-          onClick={this._handleSet}
-       />
+    this._commandButtons = [
+      <FlatButton
+        caption="Set & Close"        
+        isPrimary={true}
+        onClick={this._handleSet}
+      />
     ]
   }
 
@@ -82,7 +82,7 @@ class SettingsDialog extends Component {
             style={S.MODAL}
             caption="User Settings"
             isShow={isShow}
-            commandButtons={this.commandButtons}
+            commandButtons={this._commandButtons}
             onClose={onClose}
          >
 

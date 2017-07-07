@@ -38,9 +38,9 @@ var _SelectParentChild = require('./SelectParentChild');
 
 var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
-var _ActionButton = require('../zhn/ActionButton');
+var _Button = require('./Button');
 
-var _ActionButton2 = _interopRequireDefault(_ActionButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _DatesFragment = require('../zhn-moleculs/DatesFragment');
 
@@ -138,6 +138,7 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
       onClick: _this._handleClickOptions
     });
     _this[HAS_SECOND_Y_AXIS] = false;
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowDate: true,
       isShowOptions: false,
@@ -177,13 +178,7 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
           _state = this.state,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
-          validationMessages = _state.validationMessages,
-          _commandButtons = [_react2.default.createElement(_ActionButton2.default, {
-        key: 'a',
-        type: 'TypeC',
-        caption: 'Load',
-        onClick: this._handleLoad
-      })];
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -191,7 +186,7 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
         {
           caption: caption,
           isShow: isShow,
-          commandButtons: _commandButtons,
+          commandButtons: this._commandButtons,
           onShowChart: onShow,
           onClose: this._handleClose
         },
