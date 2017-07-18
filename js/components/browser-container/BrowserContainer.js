@@ -34,7 +34,7 @@ var _WatchBrowser = require('../watch-browser/WatchBrowser');
 
 var _WatchBrowser2 = _interopRequireDefault(_WatchBrowser);
 
-var _DialogContainer = require('../zhn-containers/DialogContainer3');
+var _DialogContainer = require('../zhn-containers/DialogContainer');
 
 var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
 
@@ -83,9 +83,7 @@ var BrowserContainer = function (_Component) {
           showBrowserAction = _props.showBrowserAction,
           updateBrowserAction = _props.updateBrowserAction,
           updateWatchAction = _props.updateWatchAction,
-          initDialogAction = _props.initDialogAction,
           showDialogAction = _props.showDialogAction,
-          showOptionDialogAction = _props.showOptionDialogAction,
           elBrowsers = this.state.elBrowsers;
 
 
@@ -110,9 +108,7 @@ var BrowserContainer = function (_Component) {
         _react2.default.createElement(_DialogContainer2.default, {
           maxDialog: 3,
           store: store,
-          initAction: initDialogAction,
-          showAction: showDialogAction,
-          showOptionAction: showOptionDialogAction
+          showAction: showDialogAction
         })
       );
     }

@@ -15,11 +15,11 @@
   border-bottom: thin solid;
   text-decoration: none;
 }
-.native-link:hover{
+.native-link:hover {
   border-bottom-width: medium;
 }
 
-.descr-datasource  h1 {
+.descr-datasource h1 {
   color: rgba(164, 135, 212, 1);
   font-size: 18px;
   font-weight: normal;
@@ -33,12 +33,12 @@
 }
 .descr-datasource a,
 .descr__quandl-link {
-  color: #E05927;
+  color: #e05927;
   font-weight: bold;
   border-bottom: thin solid;
   text-decoration: none;
 }
-.descr-datasource  a:hover,
+.descr-datasource a:hover,
 .descr__quandl-link:hover {
   border-bottom-width: medium;
 }

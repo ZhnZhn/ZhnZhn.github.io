@@ -15,6 +15,7 @@ import ZillowDialog from '../../components/quandl-browser/ZillowDialog';
 
 import AlphaIndicatorDialog from '../../components/quandl-browser/AlphaIndicatorDialog';
 import AlphaSectorDialog from '../../components/quandl-browser/AlphaSectorDialog';
+import AlphaIntradayDialog from '../../components/quandl-browser/AlphaIntradayDialog';
 
 import ChartConfigDialog from '../../components/chart-config/ChartConfigDialog'
 
@@ -35,6 +36,7 @@ const RouterDialog = {
   ZillowDialog : ZillowDialog,
   AlphaIndicatorDialog: AlphaIndicatorDialog,
   AlphaSectorDialog: AlphaSectorDialog,
+  AlphaIntradayDialog: AlphaIntradayDialog,
 
   ChartConfigDialog : ChartConfigDialog
 }

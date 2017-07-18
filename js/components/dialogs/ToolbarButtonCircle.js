@@ -91,7 +91,7 @@ var ToolbarButtonCircle = function (_Component) {
       var buttons = this.props.buttons;
 
       return _react2.default.createElement(
-        _Row2.default,
+        _Row2.default.Plain,
         { style: STYLE.ROW },
         this._renderButtons(buttons)
       );

@@ -16,6 +16,8 @@ var _ChartFn2 = _interopRequireDefault(_ChartFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//let _fnToChart, _fnToChartComp;
+
 var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, onFailed) {
   var fnFetch = objImpl.fnFetch,
       api = objImpl.api;
@@ -24,22 +26,31 @@ var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, o
     uri: api.getRequestUrl(option),
     option: option,
     onCheckResponse: api.checkResponse,
-    onFetch: _fnFetchToChartComp,
+    onFetch: _fnFetchToChartComp.bind(null, objImpl),
+    //onFetch : _fnToChartComp,
     onCompleted: onCompleted,
     onCatch: _fnCatch.fnCatch,
     onFailed: onFailed
   });
 };
 
-var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
+var _fnFetchToChartComp = function _fnFetchToChartComp(objImpl, _ref) {
   var json = _ref.json,
       option = _ref.option,
       onCompleted = _ref.onCompleted;
-  var adapter = option.adapter,
+  var adapter = objImpl.adapter,
       _adapter$toConfig = adapter.toConfig(json, option),
       config = _adapter$toConfig.config;
 
-  onCompleted(option, config);
+
+  if (typeof config.then !== 'function') {
+    onCompleted(option, config);
+  } else {
+    config.then(function (config) {
+      onCompleted(option, config);
+      return undefined;
+    });
+  }
 };
 
 var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
@@ -50,40 +61,54 @@ var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
     uri: api.getRequestUrl(option),
     option: option,
     onCheckResponse: api.checkResponse,
-    onFetch: _fnFetchToChart,
+    onFetch: _fnFetchToChart.bind(null, objImpl),
+    //onFetch : _fnToChart,
     onCompleted: onAdded,
     onCatch: _fnCatch.fnCatch,
     onFailed: onFailed
   });
 };
 
-var _fnFetchToChart = function _fnFetchToChart(_ref2) {
+var _fnFetchToChart = function _fnFetchToChart(objImpl, _ref2) {
   var json = _ref2.json,
       option = _ref2.option,
       onCompleted = _ref2.onCompleted;
-  var adapter = option.adapter,
+  var adapter = objImpl.adapter,
+      itemCaption = option.itemCaption,
+      value = option.value,
+      hasSecondYAxis = option.hasSecondYAxis,
       series = adapter.toSeries(json, option),
       chart = _ChartStore2.default.getActiveChart();
 
 
   _ChartFn2.default.addSeriaWithRenderLabel({
     chart: chart, series: series,
-    label: option.value,
-    hasSecondYAxis: option.hasSecondYAxis
+    label: itemCaption || value,
+    hasSecondYAxis: !!hasSecondYAxis
   });
   onCompleted(option);
 };
 
 var loadItem = function loadItem(objImpl) {
-  return function (option, onCompleted, onAdded, onFailed) {
-    var parentId = _ChartStore2.default.isLoadToChart();
-    option.adapter = objImpl.adapter;
-    if (!parentId) {
-      _loadToChartComp(objImpl, option, onCompleted, onFailed);
-    } else {
-      option.parentId = parentId;
-      _loadToChart(objImpl, option, onAdded, onFailed);
-    }
+  //_fnToChartComp = _fnFetchToChartComp.bind(null, objImpl)
+  //_fnToChart = _fnFetchToChart.bind(null, objImpl)
+  return {
+    loadItem: function loadItem(option, onCompleted, onAdded, onFailed) {
+      var parentId = _ChartStore2.default.isLoadToChart();
+      //option.adapter = objImpl.adapter
+      if (!parentId) {
+        _loadToChartComp(objImpl, option, onCompleted, onFailed);
+      } else {
+        option.parentId = parentId;
+        _loadToChart(objImpl, option, onAdded, onFailed);
+      }
+    },
+
+    fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
+    fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
+
+    //fnFetchToChartComp: _fnToChartComp,
+    //fnFetchToChart: _fnToChart
   };
 };
 

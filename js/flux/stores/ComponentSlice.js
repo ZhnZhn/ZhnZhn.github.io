@@ -12,24 +12,74 @@ var _Factory2 = _interopRequireDefault(_Factory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ItemDialogLogic = {
+  showItemDialog: function showItemDialog(slice, itemConf) {
+    var type = itemConf.type,
+        browserType = itemConf.browserType;
+
+    if (slice[type]) {
+      return { key: type };
+    } else {
+      var Comp = _Factory2.default.createDialog(type, browserType);
+      slice[type] = true;
+      return { key: type, Comp: Comp };
+    }
+  },
+  showOptionDialog: function showOptionDialog(slice, options) {
+    var type = options.type,
+        data = options.data;
+
+    if (slice[type]) {
+      return { key: type, data: data };
+    } else {
+      options.dialogType = type;
+      var Comp = _Factory2.default.createOptionDialog(options);
+      slice[type] = true;
+      return { key: type, Comp: Comp, data: data };
+    }
+  }
+};
+
+var CheckBoxChartLogic = {
+  toggle: function toggle(slice, options) {
+    var isCheck = options.isCheck,
+        checkBox = options.checkBox,
+        chart = options.chart;
+
+    if (isCheck) {
+      var activeCheckbox = slice.activeCheckbox;
+      if (activeCheckbox && activeCheckbox !== checkBox) {
+        activeCheckbox.setUnchecked();
+      }
+      slice.activeCheckbox = checkBox;
+      slice.activeChart = chart;
+    } else {
+      slice.activeCheckbox = null;
+      slice.activeChart = null;
+    }
+  },
+  uncheckActive: function uncheckActive(slice, chartType) {
+    var activeCheckbox = slice.activeCheckbox;
+    if (activeCheckbox && activeCheckbox.chartType === chartType) {
+      activeCheckbox.setUnchecked();
+      slice.activeCheckbox = null;
+      slice.activeChart = null;
+    }
+  }
+};
+
 var ComponentSlice = {
   dialogInit: {},
   onShowAbout: function onShowAbout() {
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_ABOUT);
   },
-  onShowDialog: function onShowDialog(dialogType, browserType) {
-    if (this.dialogInit[dialogType]) {
-      this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, dialogType);
-    } else {
-      this.dialogInit[dialogType] = true;
-      var dialogComp = _Factory2.default.createDialog(dialogType, browserType);
-      this.trigger(_ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG, { dialogType: dialogType, dialogComp: dialogComp });
-    }
+  onShowDialog: function onShowDialog(type, browserType) {
+    var r = ItemDialogLogic.showItemDialog(this.dialogInit, { type: type, browserType: browserType });
+    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
   },
-  onShowOptionDialog: function onShowOptionDialog(dialogType, option) {
-    option.dialogType = dialogType;
-    option.dialogComp = _Factory2.default.createOptionDialog(option);
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_OPTION_DIALOG, option);
+  onShowOptionDialog: function onShowOptionDialog(type, option) {
+    var r = ItemDialogLogic.showOptionDialog(this.dialogInit, { type: type, data: option });
+    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
   },
   isLoadToChart: function isLoadToChart() {
     if (this.activeChart) {
@@ -42,23 +92,10 @@ var ComponentSlice = {
     return this.activeChart;
   },
   onSetActiveCheckbox: function onSetActiveCheckbox(isCheck, checkBox, chart) {
-    if (isCheck) {
-      if (this.activeCheckbox && this.activeCheckbox !== checkBox) {
-        this.activeCheckbox.setUnchecked();
-      }
-      this.activeCheckbox = checkBox;
-      this.activeChart = chart;
-    } else {
-      this.activeCheckbox = null;
-      this.activeChart = null;
-    }
+    CheckBoxChartLogic.toggle(this, { isCheck: isCheck, checkBox: checkBox, chart: chart });
   },
   uncheckActiveCheckbox: function uncheckActiveCheckbox(chartType) {
-    if (this.activeCheckbox && this.activeCheckbox.chartType === chartType) {
-      this.activeCheckbox.setUnchecked();
-      this.activeCheckbox = null;
-      this.activeChart = null;
-    }
+    CheckBoxChartLogic.uncheckActive(this, chartType);
   },
   onShowModalDialog: function onShowModalDialog(modalDialogType) {
     var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};

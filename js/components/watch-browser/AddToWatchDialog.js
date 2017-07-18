@@ -50,9 +50,9 @@ var _RowInputSelect = require('../dialogs/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
-var _RowText = require('../dialogs/RowText');
+var _Row = require('../dialogs/Row');
 
-var _RowText2 = _interopRequireDefault(_RowText);
+var _Row2 = _interopRequireDefault(_Row);
 
 var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
 
@@ -222,7 +222,7 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
           onSelect: this._handleSelectList,
           options: listOptions
         }),
-        _react2.default.createElement(_RowText2.default, {
+        _react2.default.createElement(_Row2.default.Text, {
           caption: 'Item:',
           text: caption
         }),

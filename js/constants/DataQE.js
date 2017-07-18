@@ -601,6 +601,23 @@ var DataQE = {
       dataSource: 'Alpha Vantage'
     }
   },
+  QE_ALPHA_INTRADAY: {
+    type: 'QE_ALPHA_INTRADAY',
+    menuTitle: 'Alpha Intraday',
+    dialogCaption: 'Alpha Intraday',
+    chartContainerCaption: 'Alpha Intraday',
+    dialogType: 'AlphaIntradayDialog',
+    dialogProps: {
+      descrUrl: './data/quandl/alpha-vantage.html',
+      oneURI: './data/quandl/alpha-indicators.json',
+      oneJsonProp: 'indicators',
+      oneCaption: 'Indicators',
+      valueFn: "ROne",
+      loadId: 'AL',
+      columnName: 'Close',
+      dataSource: 'Alpha Vantage'
+    }
+  },
   QE_TOKIO_STOCK: {
     type: 'QE_TOKIO_STOCK',
     menuTitle: 'Tokio',

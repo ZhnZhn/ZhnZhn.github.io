@@ -1,26 +1,19 @@
 .consent {
-  position : absolute;
-  z-index : 1100;
-  /*
-  top : -300px;
-  right : 32px;
-  width : 355px;
-  height : 200px;
-  */
-  bottom : 0px;
-  left : 0px;
-  right : 0px;
+  position: absolute;
+  z-index: 1100;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 125px;
-  background-color : #222222;
+  background-color: #222;
   border-top: 2px solid #f1d600;
-  /*border-radius : 12px;*/
   opacity: 0;
-  transition : opacity 1000ms ease-out, bottom 1000ms ease-out;
+  transition: opacity 1000ms ease-out, bottom 1000ms ease-out;
 }
 
 .consent__msg {
-  color : #eee;
-  padding : 24px;
+  color: #eee;
+  padding: 24px;
   padding-bottom: 12px;
   line-height: 1.5;
   font-size: 18px;
@@ -32,40 +25,42 @@
 }
 
 .consent__btn {
-  display : inline-block;
+  display: inline-block;
   color: #000;
   font-weight: bold;
   background-color: #f1d600;
-
-  padding : 8px 15px;
+  padding: 8px 15px;
   margin-left: 32px;
   margin-right: 32px;
-  border : 3px solid #f1d600;
-  border-radius : 5px;
-  cursor : pointer;
+  border: 3px solid #f1d600;
+  border-radius: 5px;
+  cursor: pointer;
   transition: color 400ms ease-out;
 }
+
 .consent__btn:hover {
-  border-color : green;
-  color : green;
+  border-color: green;
+  color: green;
 }
 
-
-@media only screen and (max-width : 975px) {
+@media only screen and (max-width: 975px) {
   .consent {
     height: 150px;
   }
 }
-@media only screen and (max-width : 525px) {
+
+@media only screen and (max-width: 525px) {
   .consent {
     height: 200px;
   }
 }
-@media only screen and (max-width : 330px) {
+
+@media only screen and (max-width: 330px) {
   .consent {
     height: 230px;
   }
-  .consent__btn{
+
+  .consent__btn {
     margin-left: 16px;
     margin-right: 16px;
   }

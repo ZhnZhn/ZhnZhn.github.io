@@ -8,7 +8,11 @@ const AlphaApi = {
     const { indicator='SMA', ticket='MSFT', period='50', apiKey='demo' } = option;
     if (indicator === 'SECTOR') {
       return `${C.ROOT}?function=${indicator}&apikey=${apiKey}`;
+    } else if (indicator === 'TIME_SERIES_INTRADAY') {
+      const { interval } = option;
+      return `${C.ROOT}?function=${indicator}&interval=${interval}&symbol=${ticket}&apikey=${apiKey}`;
     }
+
     return `${C.ROOT}?function=${indicator}&symbol=${ticket}&interval=daily&time_period=${period}&series_type=close&apikey=${apiKey}`;
   },
 

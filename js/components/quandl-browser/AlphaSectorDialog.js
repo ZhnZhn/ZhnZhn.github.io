@@ -34,9 +34,9 @@ var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _RowText = require('../dialogs/RowText');
+var _Row = require('../dialogs/Row');
 
-var _RowText2 = _interopRequireDefault(_RowText);
+var _Row2 = _interopRequireDefault(_Row);
 
 var _Button = require('../dialogs/Button');
 
@@ -114,7 +114,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
         _react2.default.createElement(_ToolbarButtonCircle2.default, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_RowText2.default, {
+        _react2.default.createElement(_Row2.default.Text, {
           styleRoot: S.ROW_TEXT,
           caption: 'Alpha:',
           text: 'Performance by Sector'

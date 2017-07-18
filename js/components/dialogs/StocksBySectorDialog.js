@@ -48,10 +48,6 @@ var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
-var _RowText = require('./RowText');
-
-var _RowText2 = _interopRequireDefault(_RowText);
-
 var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
@@ -176,16 +172,16 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
         _react2.default.createElement(_ToolbarButtonCircle2.default, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_RowText2.default, {
+        _react2.default.createElement(_Row2.default.Text, {
+          styleRoot: STYLE.SOURCE_ROOT,
           caption: 'Source:',
-          text: _source,
-          styleRoot: STYLE.SOURCE_ROOT
+          text: _source
         }),
         _react2.default.createElement(
           _ShowHide2.default,
           { isShow: isShowLink, style: STYLE.LINK_SHOW_HIDE },
           _react2.default.createElement(
-            _Row2.default,
+            _Row2.default.Plain,
             { style: STYLE.LINK_ROOT },
             _react2.default.createElement(
               'span',

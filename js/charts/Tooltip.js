@@ -23,7 +23,8 @@ var SPARKLINES_SUFFIX_ID = 'sparklines',
     WIDTH_TOTAL = 50,
     WIDTH_SPARK = 20 + 80 + 16;
 
-var Tooltip = {};
+//const Tooltip = {};
+
 
 var _fnNumberFormat = function _fnNumberFormat(value) {
   var arrSplit = (value + '').split('.'),
@@ -217,21 +218,27 @@ var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(i
   }, 1);
 };
 
+var _fnDateFormatDMY = _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y');
+var _fnDateFormatDMYT = _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M');
+
 var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
   return function () {
     var fnTemplate = option.fnTemplate,
         _option$onAfterRender = option.onAfterRender,
         onAfterRender = _option$onAfterRender === undefined ? _fnAddHandlerClose : _option$onAfterRender,
+        _option$fnDateFormat = option.fnDateFormat,
+        fnDateFormat = _option$fnDateFormat === undefined ? _fnDateFormatDMY : _option$fnDateFormat,
         isWithColor = option.isWithColor,
         isWithValueText = option.isWithValueText,
         isWithValue = option.isWithValue,
         point = this,
         series = point.series,
         id = series.options.zhSeriaId,
-        date = _highcharts2.default.dateFormat('%A, %b %d, %Y', point.x),
+        date = fnDateFormat(point.x),
         color = isWithColor && series.index !== 0 ? series.color : undefined,
         valueText = isWithValueText ? series.userOptions.zhValueText : null,
         value = isWithValue ? _fnNumberFormat(point.y) : null;
+
 
     onAfterRender(id, point);
 
@@ -239,40 +246,53 @@ var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
   };
 };
 
-Tooltip.fnBasePointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnBaseTooltip,
-  isWithColor: true, isWithValueText: true, isWithValue: true
-});
-Tooltip.fnExDividendPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnExDividend
-});
-Tooltip.fnSplitRatioPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnSplitRatio
-});
+var Tooltip = {
+  fnBasePointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnBaseTooltip,
+    isWithColor: true, isWithValueText: true, isWithValue: true
+  }),
+  fnBasePointFormatterT: _fnBasePointFormatter({
+    fnTemplate: _fnBaseTooltip,
+    fnDateFormat: _fnDateFormatDMYT,
+    isWithColor: true, isWithValueText: true, isWithValue: true
+  }),
 
-Tooltip.fnVolumePointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnVolumeTooltip, isWithValue: true
-});
-Tooltip.fnATHPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnATHTooltip
-});
-Tooltip.fnHighLowPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnHighLowTooltip
-});
+  fnExDividendPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnExDividend
+  }),
+  fnSplitRatioPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnSplitRatio
+  }),
 
-Tooltip.fnPiePointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnPieTooltip, isWithValue: true
-});
-Tooltip.fnStackedAreaPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnStackedAreaTooltip,
-  onAfterRender: _fnAddHandlerCloseAndSparklines,
-  isWithValue: true
-});
-Tooltip.fnTreeMapPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnTreeMapTooltip,
-  onAfterRender: _fnAddHandlerCloseAndSparklines,
-  isWithValue: true
-});
+  fnVolumePointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnVolumeTooltip, isWithValue: true
+  }),
+  fnVolumePointFormatterT: _fnBasePointFormatter({
+    fnTemplate: _fnVolumeTooltip,
+    fnDateFormat: _fnDateFormatDMYT,
+    isWithValue: true
+  }),
+
+  fnATHPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnATHTooltip
+  }),
+  fnHighLowPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnHighLowTooltip
+  }),
+  fnPiePointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnPieTooltip, isWithValue: true
+  }),
+  fnStackedAreaPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnStackedAreaTooltip,
+    onAfterRender: _fnAddHandlerCloseAndSparklines,
+    isWithValue: true
+  }),
+  fnTreeMapPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnTreeMapTooltip,
+    onAfterRender: _fnAddHandlerCloseAndSparklines,
+    isWithValue: true
+  })
+};
 
 exports.default = Tooltip;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\Tooltip.js.map

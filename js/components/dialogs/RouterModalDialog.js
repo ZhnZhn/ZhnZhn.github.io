@@ -16,6 +16,10 @@ var _AskDialog = require('./AskDialog');
 
 var _AskDialog2 = _interopRequireDefault(_AskDialog);
 
+var _ReloadDialog = require('./ReloadDialog');
+
+var _ReloadDialog2 = _interopRequireDefault(_ReloadDialog);
+
 var _InfoDialog = require('./InfoDialog');
 
 var _InfoDialog2 = _interopRequireDefault(_InfoDialog);
@@ -62,7 +66,7 @@ var _EditListDialog2 = _interopRequireDefault(_EditListDialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var RouterModalDialog = (_RouterModalDialog = {}, (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.ASK, _AskDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.INFO, _InfoDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.ALERT, _AlertDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.DESCRIPTION, _DescriptionDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.CUSTOMIZE_EXPORT, _CustomizeExportDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.SETTINGS, _SettingsDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.ADD_TO_WATCH, _AddToWatchDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.LOAD_ITEM, _LoadItemDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.US_STOCK_BY_SECTOR, _UsStocksBySectorDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.STOCKS_BY_SECTOR, _StocksBySectorDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.EDIT_WATCH_GROUP, _EditGroupDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.EDIT_WATCH_LIST, _EditListDialog2.default), _RouterModalDialog);
+var RouterModalDialog = (_RouterModalDialog = {}, (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.ASK, _AskDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.RELOAD, _ReloadDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.INFO, _InfoDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.ALERT, _AlertDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.DESCRIPTION, _DescriptionDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.CUSTOMIZE_EXPORT, _CustomizeExportDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.SETTINGS, _SettingsDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.ADD_TO_WATCH, _AddToWatchDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.LOAD_ITEM, _LoadItemDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.US_STOCK_BY_SECTOR, _UsStocksBySectorDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.STOCKS_BY_SECTOR, _StocksBySectorDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.EDIT_WATCH_GROUP, _EditGroupDialog2.default), (0, _defineProperty3.default)(_RouterModalDialog, _Type.ModalDialog.EDIT_WATCH_LIST, _EditListDialog2.default), _RouterModalDialog);
 
 exports.default = RouterModalDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RouterModalDialog.js.map

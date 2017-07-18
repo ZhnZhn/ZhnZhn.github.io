@@ -10,7 +10,7 @@ const SPARKLINES_SUFFIX_ID = 'sparklines'
     , WIDTH_TOTAL = 50
     , WIDTH_SPARK = 20 + 80 + 16;
 
-const Tooltip = {};
+//const Tooltip = {};
 
 
 const _fnNumberFormat = function(value){
@@ -207,16 +207,21 @@ const _fnAddHandlerCloseAndSparklines = function(id, point){
   }, 1);
 }
 
+const _fnDateFormatDMY = Highcharts.dateFormat.bind(null, '%A, %b %d, %Y')
+const _fnDateFormatDMYT = Highcharts.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M')
+
 const _fnBasePointFormatter = function( option ){
   return function(){
    const {
           fnTemplate, onAfterRender=_fnAddHandlerClose,
+          fnDateFormat = _fnDateFormatDMY,
           isWithColor, isWithValueText, isWithValue
          } = option
        , point = this
        , series = point.series
        , id = series.options.zhSeriaId
-       , date = Highcharts.dateFormat('%A, %b %d, %Y', point.x)
+       //, date = Highcharts.dateFormat('%A, %b %d, %Y', point.x)
+       , date = fnDateFormat(point.x)
        , color = (isWithColor && series.index !==0 )
             ? series.color
             : undefined
@@ -229,39 +234,52 @@ const _fnBasePointFormatter = function( option ){
   }
 }
 
-Tooltip.fnBasePointFormatter = _fnBasePointFormatter({
-  fnTemplate : _fnBaseTooltip,
-  isWithColor: true, isWithValueText: true, isWithValue: true
-});
-Tooltip.fnExDividendPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnExDividend
-});
-Tooltip.fnSplitRatioPointFormatter = _fnBasePointFormatter({
-  fnTemplate : _fnSplitRatio
-});
+const Tooltip = {
+   fnBasePointFormatter: _fnBasePointFormatter({
+     fnTemplate : _fnBaseTooltip,
+     isWithColor: true, isWithValueText: true, isWithValue: true
+   }),
+   fnBasePointFormatterT: _fnBasePointFormatter({
+     fnTemplate : _fnBaseTooltip,
+     fnDateFormat: _fnDateFormatDMYT,
+     isWithColor: true, isWithValueText: true, isWithValue: true
+  }),
 
-Tooltip.fnVolumePointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnVolumeTooltip, isWithValue: true
-});
-Tooltip.fnATHPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnATHTooltip
-});
-Tooltip.fnHighLowPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnHighLowTooltip
-});
+  fnExDividendPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnExDividend
+  }),
+  fnSplitRatioPointFormatter: _fnBasePointFormatter({
+    fnTemplate : _fnSplitRatio
+  }),
 
-Tooltip.fnPiePointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnPieTooltip, isWithValue: true
-});
-Tooltip.fnStackedAreaPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnStackedAreaTooltip,
-  onAfterRender: _fnAddHandlerCloseAndSparklines,
-  isWithValue: true
-});
-Tooltip.fnTreeMapPointFormatter = _fnBasePointFormatter({
-  fnTemplate: _fnTreeMapTooltip,
-  onAfterRender: _fnAddHandlerCloseAndSparklines,
-  isWithValue: true
-});
+  fnVolumePointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnVolumeTooltip, isWithValue: true
+  }),
+  fnVolumePointFormatterT: _fnBasePointFormatter({
+    fnTemplate: _fnVolumeTooltip,
+    fnDateFormat: _fnDateFormatDMYT,
+    isWithValue: true
+  }),
+
+  fnATHPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnATHTooltip
+  }),
+  fnHighLowPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnHighLowTooltip
+  }),
+  fnPiePointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnPieTooltip, isWithValue: true
+  }),
+  fnStackedAreaPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnStackedAreaTooltip,
+    onAfterRender: _fnAddHandlerCloseAndSparklines,
+    isWithValue: true
+  }),
+  fnTreeMapPointFormatter: _fnBasePointFormatter({
+    fnTemplate: _fnTreeMapTooltip,
+    onAfterRender: _fnAddHandlerCloseAndSparklines,
+    isWithValue: true
+  })
+}
 
 export default Tooltip

@@ -1,10 +1,10 @@
 
-.option-row:hover{
-  border-bottom: solid 2px #1B75BB;
+.option-row:hover {
+  border-bottom: solid 2px #1b75bb;
   font-weight: bolder;
 }
 
 .option-row__active {
-  border-bottom: solid 2px #1B75BB;
+  border-bottom: solid 2px #1b75bb;
   font-weight: bolder;
 }

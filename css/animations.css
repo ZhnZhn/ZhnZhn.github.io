@@ -2,47 +2,73 @@
 .show-modal {
   animation: showing-modal 400ms linear;
 }
+
 .hide-modal {
   animation: hiding-modal 400ms linear;
 }
+
 @keyframes showing-modal {
-  0%   { background-color: rgba(0,0,0, 0);}
-  100% { background-color: rgba(0,0,0, 0.35);}
-}
-@keyframes hiding-modal {
-  0%   { background-color: rgba(0,0,0, 0.35);}
-  100% { background-color: rgba(0,0,0, 0);}
+  0% { background-color: rgba(0, 0, 0, 0); }
+  100% { background-color: rgba(0, 0, 0, 0.35); }
 }
 
-.show-popup{
+@keyframes hiding-modal {
+  0% { background-color: rgba(0, 0, 0, 0.35); }
+  100% { background-color: rgba(0, 0, 0, 0); }
+}
+
+.show-popup {
   transform-origin: 50% 0;
   animation: showing-popup 400ms ease-out;
-  /*animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);*/
+
+  /* animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); */
 }
+
 .hide-popup {
   transform-origin: 50% 0;
   animation: hiding-popup 400ms ease-out;
-  /*animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);*/
-}
-@keyframes showing-popup{
-  from { opacity: 0; transform: scaleY(0);}
-  to   { opacity: 1; transform: scaleY(1);}
-}
-@keyframes hiding-popup{
-  from { opacity: 1; transform: scaleY(1);}
-  to   { opacity: 0; transform: scaleY(0);}
+
+  /* animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); */
 }
 
-.scaleY-enter{
+@keyframes showing-popup {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes hiding-popup {
+  from {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.scaleY-enter {
   transform-origin: 50% 0;
-  opacity: 0,
+  opacity: 0;
   transform: scaleY(0);
 }
-.scaleY-enter.scaleY-enter-active{
+
+.scaleY-enter.scaleY-enter-active {
   transform-origin: 50% 0;
   transform: scaleY(1);
   opacity: 1;
   transition: transform, opacity 400ms ease-out;
 }
-.scaleY-leave{}
-.scaleY-leave.scaleY-leave-active{}  
+
+/*
+.scaleY-leave { }
+.scaleY-leave.scaleY-leave-active { }
+*/

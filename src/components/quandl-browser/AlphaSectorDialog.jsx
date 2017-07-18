@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import DraggableDialog from '../zhn-moleculs/DraggableDialog'
 import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle'
-import RowText from '../dialogs/RowText'
+import Row from '../dialogs/Row'
 import Button from '../dialogs/Button'
 
 import withToolbar from '../dialogs/decorators/withToolbar'
@@ -64,7 +64,7 @@ class AlphaIndicatorDialog extends Component {
            <ToolbarButtonCircle
               buttons={this.toolbarButtons}
            />
-           <RowText
+           <Row.Text
              styleRoot={S.ROW_TEXT}
              caption="Alpha:"
              text="Performance by Sector"

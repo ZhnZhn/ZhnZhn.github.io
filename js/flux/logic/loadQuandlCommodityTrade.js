@@ -21,7 +21,9 @@ var _QuandlApi = require('../../api/QuandlApi');
 
 var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
 
-var _loadQuandl = require('./loadQuandl');
+var _LoadImpl = require('./LoadImpl');
+
+var _LoadImpl2 = _interopRequireDefault(_LoadImpl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47,7 +49,7 @@ var _fnFailedLoadMeta = function _fnFailedLoadMeta(option, onFailed, optionFaile
 
 var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) {
   var isLoadMeta = option.isLoadMeta,
-      _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChartComp,
+      _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl2.default.Quandl.fnFetchToChartComp,
       _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
 
   (0, _fn.fnFetch)({
@@ -63,7 +65,7 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
 
 var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
   var isLoadMeta = option.isLoadMeta,
-      _onFetch = isLoadMeta ? _fnFetchToChartComp : _loadQuandl.fnFetchToChart,
+      _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl2.default.Quandl.fnFetchToChart,
       _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
 
   (0, _fn.fnFetch)({
@@ -77,18 +79,19 @@ var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
   });
 };
 
-var loadQuandlCommodityTrade = function loadQuandlCommodityTrade(option, onCompleted, onAdded, onFailed) {
-  var parentId = _ChartStore2.default.isLoadToChart();
+var loadQuandlCommodityTrade = {
+  loadItem: function loadItem(option, onCompleted, onAdded, onFailed) {
+    var parentId = _ChartStore2.default.isLoadToChart();
+    option.apiKey = _ChartStore2.default.getQuandlKey();
 
-  option.apiKey = _ChartStore2.default.getQuandlKey();
-
-  if (!parentId) {
-    _loadToChartComp(option, onCompleted, onFailed);
-  } else {
-    option.parentId = parentId;
-    _loadToChart(option, onAdded, onFailed);
+    if (!parentId) {
+      _loadToChartComp(option, onCompleted, onFailed);
+    } else {
+      option.parentId = parentId;
+      _loadToChart(option, onAdded, onFailed);
+    }
   }
 };
 
 exports.loadQuandlCommodityTrade = loadQuandlCommodityTrade;
-//# sourceMappingURL=loadQuandlCommodityTrade.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\loadQuandlCommodityTrade.js.map

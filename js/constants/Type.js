@@ -33,6 +33,7 @@ var Direction = exports.Direction = {
 
 var ModalDialog = exports.ModalDialog = {
    ASK: 'ASK',
+   RELOAD: 'RELOAD',
    INFO: 'info',
    ALERT: 'alert',
    DESCRIPTION: 'DESCRIPTION',
@@ -61,6 +62,7 @@ var LoadType = exports.LoadType = {
    B: 'B',
    AL: 'AL',
    AL_S: 'AL_S',
+   AL_I: 'AL_I',
    QCT: 'QCT',
    EU_STAT: 'EU_STAT',
    WL: 'WL'

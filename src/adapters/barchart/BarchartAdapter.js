@@ -6,7 +6,7 @@ import QuandlFn2 from '../QuandlFn2'
 
 import ChartConfig from '../../charts/ChartConfig'
 import Chart from '../../charts/Chart'
-import ChartFn from '../../charts/ChartFn'
+//import ChartFn from '../../charts/ChartFn'
 import Tooltip from '../../charts/Tooltip'
 
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from '../IndicatorSma';
@@ -16,6 +16,7 @@ const DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.co
 
 const _createCloseSeries = (config, { results=[] }, chartId) => {
   const _data = []
+      , _dataOpen = [], _dataHigh = [], _dataLow = []
       , _dataVolume = [], _dataVolumeColumn = []
       , _dataATH = [], _dataMfi = [];
   let _prevClose
@@ -36,6 +37,9 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
     }
 
     _data.push([_date, close])
+    _dataOpen.push([_date, open])
+    _dataHigh.push([_date, high])
+    _dataLow.push([_date, low])
     _dataVolume.push([_date, volume])
     _dataVolumeColumn.push(
         AdapterFn.volumeColumnPoint({
@@ -54,13 +58,8 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
     _prevClose = close
   })
 
-  config.series[0] = {
-    data: _data,
-    type: 'area',
-    lineWidth: 1
-  }
-  config.series[0].point = Chart.fEventsMouseOver(
-    ChartFn.handlerMouserOverPoint
+  ChartConfig.setStockSerias(
+    config, _data, _dataHigh, _dataLow, _dataOpen
   )
 
   Object.assign(config, {
@@ -78,19 +77,7 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
 
   config.chart.spacingTop = 25
 
-  const plotLines = config.yAxis.plotLines;
-  plotLines[0].value = _maxClose;
-  plotLines[0].label.text = `${ChartConfig.fnNumberFormat(_maxClose)}`;
-  plotLines[1].value = _minClose;
-  plotLines[1].label.text = `${ChartConfig.fnNumberFormat(_minClose)}`;
-
-  Object.assign(config.yAxis, {
-    min: Chart.calcMinY({ minPoint: _minClose, maxPoint: _maxClose}),
-    maxPadding: 0.15,
-    minPadding: 0.15,
-    endOnTick: false,
-    startOnTick: false
-  })
+  ChartConfig.setMinMax(config, _minClose, _maxClose)
 
   Object.assign(config.xAxis, {
     crosshair : Chart.fCrosshair()
@@ -119,9 +106,10 @@ const _createAreaConfig = (json, option) => {
       dataColumn: 4,
       dataSource: "Barchart Market Data Solutions",
       id: _chartId,
-      isWithLegend: false,
       key: `${value}`,
-      linkFn:"NASDAQ"
+      linkFn:"NASDAQ",
+      isWithLegend: true,
+      legend: AdapterFn.stockSeriesLegend()
     }
   })
 

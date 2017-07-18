@@ -1,12 +1,10 @@
-
 import React, { Component } from 'react';
 
 import { BrowserType } from '../../constants/Type';
 
 import QuandlBrowser from '../quandl-browser/QuandlBrowser';
 import WatchBrowser from '../watch-browser/WatchBrowser';
-import DialogContainer3 from '../zhn-containers/DialogContainer3';
-
+import DialogContainer from '../zhn-containers/DialogContainer';
 
 class BrowserContainer extends Component {
   constructor(props){
@@ -38,7 +36,7 @@ class BrowserContainer extends Component {
     const {
             store, showBrowserAction, updateBrowserAction,
             updateWatchAction,
-            initDialogAction, showDialogAction, showOptionDialogAction
+            showDialogAction
           } = this.props
         , { elBrowsers } = this.state;
 
@@ -59,12 +57,10 @@ class BrowserContainer extends Component {
               updateAction={updateWatchAction}
             />
            {elBrowsers}
-           <DialogContainer3
+           <DialogContainer
               maxDialog={3}
               store={store}
-              initAction={initDialogAction}
               showAction={showDialogAction}
-              showOptionAction={showOptionDialogAction}
            />
       </div>
     );

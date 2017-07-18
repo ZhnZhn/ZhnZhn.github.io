@@ -60,6 +60,10 @@ var _AlphaSectorDialog = require('../../components/quandl-browser/AlphaSectorDia
 
 var _AlphaSectorDialog2 = _interopRequireDefault(_AlphaSectorDialog);
 
+var _AlphaIntradayDialog = require('../../components/quandl-browser/AlphaIntradayDialog');
+
+var _AlphaIntradayDialog2 = _interopRequireDefault(_AlphaIntradayDialog);
+
 var _ChartConfigDialog = require('../../components/chart-config/ChartConfigDialog');
 
 var _ChartConfigDialog2 = _interopRequireDefault(_ChartConfigDialog);
@@ -83,6 +87,7 @@ var RouterDialog = {
   ZillowDialog: _ZillowDialog2.default,
   AlphaIndicatorDialog: _AlphaIndicatorDialog2.default,
   AlphaSectorDialog: _AlphaSectorDialog2.default,
+  AlphaIntradayDialog: _AlphaIntradayDialog2.default,
 
   ChartConfigDialog: _ChartConfigDialog2.default
 };

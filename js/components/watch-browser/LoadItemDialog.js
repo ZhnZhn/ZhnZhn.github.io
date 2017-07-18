@@ -56,9 +56,9 @@ var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _RowText = require('../dialogs/RowText');
+var _Row = require('../dialogs/Row');
 
-var _RowText2 = _interopRequireDefault(_RowText);
+var _Row2 = _interopRequireDefault(_Row);
 
 var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
 
@@ -127,7 +127,7 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
           commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_RowText2.default, {
+        _react2.default.createElement(_Row2.default.Text, {
           caption: 'Item:',
           text: caption
         }),

@@ -7,7 +7,7 @@ import ModalDialog from '../zhn-moleculs/ModalDialog';
 import Button from './Button';
 import ValidationMessages from '../zhn/ValidationMessages';
 import RowInputSelect from '../dialogs/RowInputSelect';
-import RowText from '../dialogs/RowText';
+import Row from '../dialogs/Row';
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
@@ -159,7 +159,7 @@ class AddToWatchDialog extends Component {
           onSelect={this._handleSelectList}
           options={listOptions}
         />
-        <RowText
+        <Row.Text
           caption="Item:"
           text={caption}
         />

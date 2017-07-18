@@ -18,8 +18,6 @@ import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
 import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
 import {fCreateTreeMapConfig} from './QuandlToTreeMap';
 
-import COLOR from './Colors'
-
 const C = {
   OPEN : "Open",
   CLOSE : "Close",
@@ -30,7 +28,8 @@ const C = {
   EX_DIVIDEND : "Ex-Dividend",
   SPLIT_RATIO : "Split Ratio",
   UNKNOWN : "Unknown",
-  ...COLOR
+
+  COLOR_BLUE: '#2f7ed8',
 }
 
 

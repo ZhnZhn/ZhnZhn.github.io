@@ -10,7 +10,7 @@ import ModalDialog from '../zhn-moleculs/ModalDialog'
 import Button from '../dialogs/Button'
 import DatesFragment from '../zhn-moleculs/DatesFragment'
 import ValidationMessages from '../zhn/ValidationMessages'
-import RowText from '../dialogs/RowText'
+import Row from '../dialogs/Row'
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
@@ -106,7 +106,7 @@ class LoadItemDialog extends Component {
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
-        <RowText
+        <Row.Text
           caption="Item:"
           text={caption}
         />

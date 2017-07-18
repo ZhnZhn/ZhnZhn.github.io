@@ -8,9 +8,9 @@ var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
 
-var _Colors = require('./Colors');
+var _Color = require('../constants/Color');
 
-var _Colors2 = _interopRequireDefault(_Colors);
+var _Color2 = _interopRequireDefault(_Color);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18,6 +18,12 @@ var AdapterFn = {
   ymdToUTC: function ymdToUTC(date) {
     var _arr = date.split('-');
     return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
+  },
+  ymdhmsToUTC: function ymdhmsToUTC(date) {
+    var _dtArr = date.split(' '),
+        _ymdArr = _dtArr[0].split('-'),
+        _hmsArr = _dtArr[1].split(':');
+    return Date.UTC(_ymdArr[0], parseInt(_ymdArr[1], 10) - 1, _ymdArr[2], _hmsArr[0], _hmsArr[1], _hmsArr[2]);
   },
   volumeColumnPoint: function volumeColumnPoint(_ref) {
     var date = _ref.date,
@@ -28,11 +34,11 @@ var AdapterFn = {
 
     var _color = void 0;
     if (open && close > open) {
-      _color = _Colors2.default.COLOR_GREEN;
+      _color = _Color2.default.GREEN;
     } else if (open && close < open) {
-      _color = _Colors2.default.COLOR_RED;
+      _color = _Color2.default.RED;
     } else {
-      _color = _Colors2.default.COLOR_GRAY;
+      _color = _Color2.default.GRAY;
     }
 
     return Object.assign({
@@ -50,11 +56,11 @@ var AdapterFn = {
 
     var _color = void 0;
     if (_bDelta.gt(0.0)) {
-      _color = _Colors2.default.COLOR_RED;
+      _color = _Color2.default.RED;
     } else if (!_bDelta.gte(0.0)) {
-      _color = _Colors2.default.COLOR_GREEN;
+      _color = _Color2.default.GREEN;
     } else {
-      _color = open ? _Colors2.default.COLOR_GRAY : _Colors2.default.COLOR_WHITE;
+      _color = open ? _Color2.default.GRAY : _Color2.default.WHITE;
     }
 
     return {
@@ -64,6 +70,17 @@ var AdapterFn = {
       open: open ? open : 'Unknown',
       color: _color
     };
+  },
+  legendItem: function legendItem(index, color, name) {
+    var is = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+    return {
+      index: index, color: color, name: name,
+      isVisible: is
+    };
+  },
+  stockSeriesLegend: function stockSeriesLegend() {
+    return [this.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), this.legendItem(1, _Color2.default.S_HIGH, 'High'), this.legendItem(2, _Color2.default.S_LOW, 'Low'), this.legendItem(3, _Color2.default.S_OPEN, 'Open')];
   }
 };
 

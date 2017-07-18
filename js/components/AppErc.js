@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-   value: true
+  value: true
 });
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
@@ -70,55 +70,70 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var PREV_BUILD = '18-07-2017';
+
 var AppErc = function (_Component) {
-   (0, _inherits3.default)(AppErc, _Component);
+  (0, _inherits3.default)(AppErc, _Component);
 
-   function AppErc() {
-      (0, _classCallCheck3.default)(this, AppErc);
-      return (0, _possibleConstructorReturn3.default)(this, (AppErc.__proto__ || Object.getPrototypeOf(AppErc)).apply(this, arguments));
-   }
+  function AppErc() {
+    (0, _classCallCheck3.default)(this, AppErc);
+    return (0, _possibleConstructorReturn3.default)(this, (AppErc.__proto__ || Object.getPrototypeOf(AppErc)).apply(this, arguments));
+  }
 
-   (0, _createClass3.default)(AppErc, [{
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-         _LocationSearch2.default.load(_ComponentActions2.default);
-      }
-   }, {
-      key: 'render',
-      value: function render() {
-         return _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(_HeaderBar2.default, { store: _ChartStore2.default }),
-            _react2.default.createElement(
-               'div',
-               { className: 'component-container' },
-               _react2.default.createElement(_BrowserContainer2.default, {
-                  store: _ChartStore2.default,
-                  showBrowserAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER,
-                  initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
-                  updateBrowserAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
-                  updateWatchAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER,
-                  initDialogAction: _ComponentActions.ComponentActionTypes.INIT_AND_SHOW_DIALOG,
-                  showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-                  showOptionDialogAction: _ComponentActions.ComponentActionTypes.SHOW_OPTION_DIALOG
-               }),
-               _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
-               _react2.default.createElement(_ComponentHrzContainer2.default, {
-                  store: _ChartStore2.default,
-                  addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
-               })
-            ),
-            _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default }),
-            _react2.default.createElement(_ConsentCookiePopup2.default, {
-               onAnswerYes: _AnalyticActions2.default.answerYes,
-               onAnswerNo: _AnalyticActions2.default.answerNo,
-               onNoAnswer: _AnalyticActions2.default.noAnswer
-            })
-         );
-      }
-   }]);
-   return AppErc;
+  (0, _createClass3.default)(AppErc, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _LocationSearch2.default.load(_ComponentActions2.default);
+      fetch('./data/build.json').then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        var _json$build = json.build,
+            build = _json$build === undefined ? '' : _json$build;
+
+        if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
+          _ComponentActions2.default.showModalDialog("RELOAD", {
+            prevDate: PREV_BUILD,
+            nextDate: build
+          });
+        }
+      }).catch(function (err) {
+        console.log(err.message);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_HeaderBar2.default, { store: _ChartStore2.default }),
+        _react2.default.createElement(
+          'div',
+          { className: 'component-container' },
+          _react2.default.createElement(_BrowserContainer2.default, {
+            store: _ChartStore2.default,
+            showBrowserAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER,
+            initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+            updateBrowserAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
+            updateWatchAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER,
+            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG
+          }),
+          _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
+          _react2.default.createElement(_ComponentHrzContainer2.default, {
+            store: _ChartStore2.default,
+            addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
+          })
+        ),
+        _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default }),
+        _react2.default.createElement(_ConsentCookiePopup2.default, {
+          onAnswerYes: _AnalyticActions2.default.answerYes,
+          onAnswerNo: _AnalyticActions2.default.answerNo,
+          onNoAnswer: _AnalyticActions2.default.noAnswer
+        })
+      );
+    }
+  }]);
+  return AppErc;
 }(_react.Component);
 
 exports.default = AppErc;

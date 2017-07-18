@@ -41,7 +41,9 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
 const _addSettings = (option) => {
   if (option.loadId === 'B') {
     option.apiKey = ChartStore.getBarchartKey()
-  } else if (option.loadId === 'AL' || option.loadId === 'AL_S') {
+  } else if (option.loadId === 'AL'
+           || option.loadId === 'AL_S'
+           || option.loadId === 'AL_I') {
     option.apiKey = ChartStore.getAlphaKey()
   } else {
     option.apiKey = ChartStore.getQuandlKey()
@@ -65,7 +67,7 @@ const ChartActions =  Reflux.createActions({
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore
 
-ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function(){
+ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function() {
   const arg = [].slice.call(arguments)
       , chartType = arg[0]
       , option = arg[2]
@@ -81,7 +83,7 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function(){
 
   if (option.loadId === 'B' && !option.apiKey){
     this.cancelLoad(option, Msg.Alert.withoutApiKey('Barchart Market Data'), false);
-  } else if ( (option.loadId === 'AL' || option.loadId === 'AL_S') && !option.apiKey) {
+  } else if ( (option.loadId === 'AL' || option.loadId === 'AL_S' || option.loadId === 'AL_I' ) && !option.apiKey) {
     this.cancelLoad(option, Msg.Alert.withoutApiKey('Alpha Vantage'), false);
   } else if (option.isKeyFeature && !option.apiKey){
     this.cancelLoad(option, Msg.Alert.FEATURE_WITHOUT_KEY, false);
@@ -114,7 +116,7 @@ ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, browserType
   const { loadId='Q' } = option;
   option.chartType = chartType;
   option.browserType = browserType;
-  LoadConfig[loadId](option, this.completed, this.added, this.failed);
+  LoadConfig[loadId].loadItem(option, this.completed, this.added, this.failed);
 })
 
 export default ChartActions

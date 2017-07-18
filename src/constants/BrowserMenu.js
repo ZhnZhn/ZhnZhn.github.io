@@ -86,6 +86,7 @@ const menuQuandl = [
        { id : Quandl.BARCHART_STOCK, isNew: true },
        { id : Quandl.ALPHA_INDICATOR, isNew: true },
        { id : Quandl.ALPHA_SECTOR, isNew: true },
+       { id : Quandl.ALPHA_INTRADAY, isNew: true },
        { id : Quandl.NIKKEI },
        { id : Quandl.UNICORN_RESEARCH }
      ]

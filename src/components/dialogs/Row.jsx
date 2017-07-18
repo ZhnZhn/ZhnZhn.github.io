@@ -1,12 +1,43 @@
 import React from 'react';
 
-import DialogStyles from '../styles/DialogStyles';
-const styles = DialogStyles;
+import STYLE from '../styles/DialogStyles';
 
-const Row = ({ style, children }) => (
-  <div style={Object.assign({},styles.rowDiv, style)}>
+const S = {
+  ROOT_DIV: {
+    margin: '5px',
+    lineHeight: 2,
+    fontWeight: 'bold'
+  },
+  LABEL_SPAN : {
+    display: 'inline-block',
+    color: '#1B75BB',
+    width: '100px',
+    paddingRight: '5px',
+    textAlign: 'right',
+    fontSize: '16px'
+  }
+}
+
+
+const Plain = ({ style, children }) => (
+  <div style={{ ...STYLE.rowDiv, ...style }}>
     {children}
   </div>
 );
 
-export default Row
+const Text = ({ caption, text, styleRoot }) => {
+  return (
+    <div style={{ ...S.ROOT_DIV, ...styleRoot }}>
+      <span style={S.LABEL_SPAN}>
+        {caption}
+      </span>
+      <span>
+        {text}
+      </span>
+    </div>
+  )
+};
+
+
+
+export default { Plain, Text }

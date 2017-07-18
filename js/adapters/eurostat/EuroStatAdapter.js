@@ -43,7 +43,7 @@ var EuroStatAdapter = {
         config = typeof fnToConfig !== 'undefined' ? fnToConfig(json, option) : {};
 
 
-    return config;
+    return { config: config };
   },
   toSeries: function toSeries(json, option, chart) {
     var _option$seriaType2 = option.seriaType,
@@ -57,4 +57,4 @@ var EuroStatAdapter = {
 };
 
 exports.default = EuroStatAdapter;
-//# sourceMappingURL=EuroStatAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatAdapter.js.map

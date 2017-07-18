@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\api\\Api.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\api\\Api.js",
+ "sourceRoot": "",
+ "names": [
+  "Alpha",
+  "Barchart",
+  "EuroStat",
+  "Quandl"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,+BADJ,EACcC;AADd,C"
+}

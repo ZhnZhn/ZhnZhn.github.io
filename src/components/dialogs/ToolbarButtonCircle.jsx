@@ -41,9 +41,9 @@ class ToolbarButtonCircle extends Component {
   render(){
     const { buttons } = this.props;
     return (
-      <Row style={STYLE.ROW}>
+      <Row.Plain style={STYLE.ROW}>
         {this._renderButtons(buttons)}
-      </Row>
+      </Row.Plain>
     )
   }
 

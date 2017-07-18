@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/components/dialogs/Row.jsx"],"names":["styles","Row","style","children","Object","assign","rowDiv"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AACA,IAAMA,+BAAN;;AAEA,IAAMC,MAAM,SAANA,GAAM;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,SACV;AAAA;AAAA,MAAK,OAAOC,OAAOC,MAAP,CAAc,EAAd,EAAiBL,OAAOM,MAAxB,EAAgCJ,KAAhC,CAAZ;AACGC;AADH,GADU;AAAA,CAAZ;;kBAMeF,G","file":"Row.js","sourcesContent":["import React from 'react';\r\n\r\nimport DialogStyles from '../styles/DialogStyles';\r\nconst styles = DialogStyles;\r\n\r\nconst Row = ({ style, children }) => (\r\n  <div style={Object.assign({},styles.rowDiv, style)}>\r\n    {children}\r\n  </div>\r\n);\r\n\r\nexport default Row\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\Row.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\Row.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "ROOT_DIV",
+  "margin",
+  "lineHeight",
+  "fontWeight",
+  "LABEL_SPAN",
+  "display",
+  "color",
+  "width",
+  "paddingRight",
+  "textAlign",
+  "fontSize",
+  "Plain",
+  "style",
+  "children",
+  "rowDiv",
+  "Text",
+  "caption",
+  "text",
+  "styleRoot"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,YAAU;AACRC,YAAQ,KADA;AAERC,gBAAY,CAFJ;AAGRC,gBAAY;AAHJ,GADF;AAMRC,cAAa;AACXC,aAAS,cADE;AAEXC,WAAO,SAFI;AAGXC,WAAO,OAHI;AAIXC,kBAAc,KAJH;AAKXC,eAAW,OALA;AAMXC,cAAU;AANC;AANL,CAAV;;AAiBA,IAAMC,QAAQ,SAARA,KAAQ;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,QAAV,QAAUA,QAAV;AAAA,SACZ;AAAA;AAAA,MAAK,kCAAY,uBAAMC,MAAlB,EAA6BF,KAA7B,CAAL;AACGC;AADH,GADY;AAAA,CAAd;;AAMA,IAAME,OAAO,SAAPA,IAAO,QAAkC;AAAA,MAA/BC,OAA+B,SAA/BA,OAA+B;AAAA,MAAtBC,IAAsB,SAAtBA,IAAsB;AAAA,MAAhBC,SAAgB,SAAhBA,SAAgB;;AAC7C,SACE;AAAA;AAAA,MAAK,kCAAYnB,EAAEC,QAAd,EAA2BkB,SAA3B,CAAL;AACE;AAAA;AAAA,QAAM,OAAOnB,EAAEK,UAAf;AACGY;AADH,KADF;AAIE;AAAA;AAAA;AACGC;AADH;AAJF,GADF;AAUD,CAXD;;kBAee,EAAEN,YAAF,EAASI,UAAT,E"
+}

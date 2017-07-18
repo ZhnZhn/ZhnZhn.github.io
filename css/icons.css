@@ -1,24 +1,24 @@
-.icon__erc{
+.icon__erc {
   display: inline-block;
-  width : 32px;
-  height : 32px;
+  width: 32px;
+  height: 32px;
   cursor: default;
 }
 
-.icon__quandl{
+.icon__quandl {
   position: relative;
   top: -16px;
   display: inline-block;
-  width : 160px;
-  height : 64px;
+  width: 160px;
+  height: 64px;
   margin-right: 32px;
   border: 3px solid #232f3b;
   padding: 14px 16px 10px;
   transition: border-color, border-width, fill 200ms ease-out;
-  stroke : #E95424;
-  fill : #E95424;
+  stroke: #e95424;
+  fill: #e95424;
 }
-.icon__quandl:hover{
+.icon__quandl:hover {
   border-color: #2f7ed8;
   border-width: 6px;
   fill: yellow;
@@ -26,15 +26,15 @@
 
 .icon__github {
   display: inline-block;
-  width : 70px;
-  height : 70px;
+  width: 70px;
+  height: 70px;
   background-color: black;
-  border : 4px solid #232f3b;
-  border-radius : 50%;
-  transition: border-color,background-color, border-width 200ms ease-out;
-  fill : #4d4d4d;
+  border: 4px solid #232f3b;
+  border-radius: 50%;
+  transition: border-color, background-color, border-width 200ms ease-out;
+  fill: #4d4d4d;
 }
-.icon__github:hover{
+.icon__github:hover {
   border-color: #2f7ed8;
   border-width: 8px;
   background-color: yellow;
@@ -46,10 +46,10 @@
   position: relative;
   top: -4px;
   display: inline-block;
-  width : 74px;
-  height : 74px;
-  border : 4px solid #232f3b;
-  border-radius : 50%;
+  width: 74px;
+  height: 74px;
+  border: 4px solid #232f3b;
+  border-radius: 50%;
   padding: 6px;
   margin-left: 32px;
   transition: border-color, border-width, stroke, stroke-width, fill 200ms ease-out;
@@ -67,8 +67,8 @@
 
 .icon__highcharts {
   display: inline-block;
-  width : 192px;
-  height : 64px;
+  width: 192px;
+  height: 64px;
   margin-left: 32px;
   border: 3px solid #232f3b;
   transition: border-color, border-width 200ms ease-out;

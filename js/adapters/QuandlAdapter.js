@@ -8,10 +8,6 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _rToConfig2;
 
 var _lodash = require('lodash.flow');
@@ -58,13 +54,9 @@ var _QuandlToStackedColumn = require('./QuandlToStackedColumn');
 
 var _QuandlToTreeMap = require('./QuandlToTreeMap');
 
-var _Colors = require('./Colors');
-
-var _Colors2 = _interopRequireDefault(_Colors);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var C = (0, _extends3.default)({
+var C = {
   OPEN: "Open",
   CLOSE: "Close",
   PRICE: 'Price',
@@ -73,8 +65,10 @@ var C = (0, _extends3.default)({
   VOLUME: "Volume",
   EX_DIVIDEND: "Ex-Dividend",
   SPLIT_RATIO: "Split Ratio",
-  UNKNOWN: "Unknown"
-}, _Colors2.default);
+  UNKNOWN: "Unknown",
+
+  COLOR_BLUE: '#2f7ed8'
+};
 
 var _fnConvertToUTC = function _fnConvertToUTC(point, result) {
   var arrDate = point[0].split('-');

@@ -17,11 +17,28 @@ import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
+const PREV_BUILD = '18-07-2017';
 
 class AppErc extends Component {
 
   componentDidMount(){
       LocationSearch.load(ComponentActions);
+      fetch('./data/build.json')
+        .then(res => res.json())
+        .then(json => {
+          const { build='' } = json;
+          if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
+            ComponentActions.showModalDialog(
+               "RELOAD", {
+                 prevDate: PREV_BUILD,
+                 nextDate: build
+               }
+            )
+          }
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
   }
 
   render(){
@@ -35,9 +52,7 @@ class AppErc extends Component {
               initBrowserAction={BrowserActionTypes.INIT_BROWSER_DYNAMIC}
               updateBrowserAction={BrowserActionTypes.UPDATE_BROWSER_MENU}
               updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
-              initDialogAction={ComponentActionTypes.INIT_AND_SHOW_DIALOG}
               showDialogAction={ComponentActionTypes.SHOW_DIALOG}
-              showOptionDialogAction={ComponentActionTypes.SHOW_OPTION_DIALOG}
            />
            <About store={ChartStore} isShow={true} />
            <ComponentHrzContainer

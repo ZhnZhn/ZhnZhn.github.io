@@ -8,8 +8,8 @@
 }
 
 .hrz-container {
-  display : flex;
-  flex-direction : row;
+  display: flex;
+  flex-direction: row;
   flex-shrink: 0;
 }
 
@@ -24,8 +24,8 @@
   overflow-x: hidden;
   overflow-y: auto;
   opacity: 1;
-  background: rgba(0,0,0, 0.35) none repeat scroll 0% 0%;
-  outline: 0px none;
+  background: rgba(0, 0, 0, 0.35) none repeat scroll 0% 0%;
+  outline: 0 none;
 }
 
 .row__topic {
@@ -38,11 +38,13 @@
   padding-left: 12px;
   cursor: pointer;
 }
+
 .row__topic:nth-child(odd) {
   background-color: #404040;
 }
+
 .row__topic:hover {
-  border-bottom: 1px solid #1B75BB;
+  border-bottom: 1px solid #1b75bb;
 }
 
 .row__pane-topic {
@@ -50,17 +52,16 @@
   color: black;
   font-size: 16px;
   font-weight: bold;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 1px 16px;
   cursor: pointer;
 }
-.row__pane-topic:nth-child(odd){
+
+.row__pane-topic:nth-child(odd) {
   background-color: #404040;
 }
-.row__pane-topic:hover{
-   border-bottom: 1px solid #1B75BB;
+
+.row__pane-topic:hover {
+  border-bottom: 1px solid #1b75bb;
 }
 
 .row__type2-topic {
@@ -73,35 +74,39 @@
   padding-left: 4px;
   cursor: pointer;
 }
+
 .row__type2-topic:nth-child(odd) {
   background-color: #404040;
 }
+
 .row__type2-topic:hover {
-  border-bottom: 1px solid #1B75BB;
+  border-bottom: 1px solid #1b75bb;
 }
 
-.item__quandl{
+.item__quandl {
   color: #e05927;
 }
-.item__eurostat{
+
+.item__eurostat {
   color: #009ae5;
 }
-.item__watch{
+
+.item__watch {
   color: #80c040;
 }
 
 .menu__badge {
   display: inline-block;
-  /*color: rgba(164, 135, 212, 1);*/
   color: black;
-  background-color: #232F3B;
+  background-color: #232f3b;
   float: right;
   padding-right: 5px;
   padding-left: 5px;
   border-radius: 30%;
 }
-.menu__badge:hover{
-  color: #1B75BB;
+
+.menu__badge:hover {
+  color: #1b75bb;
 }
 
 .svg-close {
@@ -110,29 +115,30 @@
   height: 22px;
   padding: 2px;
   margin-right: 10px;
-  float: right;  
+  float: right;
   cursor: pointer;
-
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -ms-transition: -ms-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-
   -webkit-transform-origin: center center;
   -ms-transform-origin: center center;
   transform-origin: center center;
+  will-change: transform;
 }
+
 .svg-close:hover {
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg) scale(1.3, 1.3) translateY(-3px);
 }
 
-/*TabPane*/
-.tabpane__tabs::before{
+/* TabPane */
+.tabpane__tabs::before {
   content: " ";
   display: table;
 }
-.tabpane__tabs::after{
+
+.tabpane__tabs::after {
   clear: both;
   content: " ";
   display: table;

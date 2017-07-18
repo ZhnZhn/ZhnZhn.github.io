@@ -1,6 +1,6 @@
 
 .header {
-  position : relative;
+  position: relative;
   width: 100%;
   min-width: 550px;
   margin-right: 26px;
@@ -12,8 +12,8 @@
 
 .header__icon-erc {
   display: inline-block;
-  width : 32px;
-  height : 32px;
+  width: 32px;
+  height: 32px;
   cursor: default;
   position: absolute;
   top: 7px;
@@ -21,7 +21,7 @@
 }
 .header__app-label {
   display: inline-block;
-  color:#80c040;
+  color: #80c040;
   margin-top: 8px;
   margin-left: 35px;
   padding-left: 10px;
@@ -29,21 +29,20 @@
   font-weight: bold;
 }
 .header__panel-browser {
-  z-index: : 1010;
-  position : absolute;
-  top : 45px;
-  left : 156px;
-
+  z-index: 1010;
+  position: absolute;
+  top: 45px;
+  left: 156px;
   background-color: rgba(77, 77, 77, 1);
   border-bottom: 4px solid green;
-  border-radius : 5px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 5px;
-
-  padding : 10px;
-  padding-top : 5px;
-  padding-bottom : 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 5px;
+  padding: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-@media screen and (max-width:790px) {
+
+@media screen and (max-width: 790px) {
   .header__app-label {
     display: none;
   }
@@ -54,12 +53,14 @@
     left: 21px;
   }
 }
-@media screen and (max-width:645px) {
+
+@media screen and (max-width: 645px) {
   .header__bt-watch {
     display: none;
   }
 }
-@media screen and (max-width:580px) {
+
+@media screen and (max-width: 580px) {
   .header_bt-eurostat {
     display: none;
   }

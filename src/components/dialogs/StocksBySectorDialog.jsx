@@ -6,7 +6,6 @@ import { LoadType } from '../../constants/Type';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import ToolbarButtonCircle from './ToolbarButtonCircle';
-import RowText from './RowText';
 import ShowHide from '../zhn/ShowHide';
 import Row from './Row';
 import NasdaqLink from '../native-links/NasdaqLink';
@@ -189,18 +188,18 @@ class StocksBySectorDialog extends Component {
         <ToolbarButtonCircle
           buttons={this.toolbarButtons}
         />
-        <RowText
+        <Row.Text
+          styleRoot={STYLE.SOURCE_ROOT}
           caption="Source:"
           text={_source}
-          styleRoot={STYLE.SOURCE_ROOT}
         />
         <ShowHide isShow={isShowLink} style={STYLE.LINK_SHOW_HIDE}>
-          <Row style={STYLE.LINK_ROOT}>
+          <Row.Plain style={STYLE.LINK_ROOT}>
             <span style={STYLE.LINK_CAPTION}>
               Link:
             </span>
             <NasdaqLink item={item} caption="NASDAQ" />
-          </Row>
+          </Row.Plain>
         </ShowHide>
         <DatesFragment
             ref={c => this.datesFragment = c}

@@ -54,8 +54,53 @@ const ChartConfig = {
          fn.apply(this, args);
        }
     });
+  },
 
+  seriaOption(color) {
+    return {
+      type: 'line', visible: false, color,
+      marker: {
+        radius: 3,
+        symbol: "circle"
+      }
+    }
+  },
+
+  setSerieData(config, data, index, options) {
+    config.series[index] = Object.assign({
+      data: data,
+      type: 'area',
+      lineWidth: 1
+    }, options)
+
+    config.series[index].point = Chart.fEventsMouseOver(
+      ChartFn.handlerMouserOverPoint
+    )
+  },
+
+  setStockSerias(config, dClose, dHigh, dLow, dOpen){
+    this.setSerieData(config, dClose, 0)
+    this.setSerieData(config, dHigh, 1, this.seriaOption(COLOR.S_HIGH))
+    this.setSerieData(config, dLow, 2, this.seriaOption(COLOR.S_LOW))
+    this.setSerieData(config, dOpen, 3, this.seriaOption(COLOR.S_OPEN))        
+  },
+
+  setMinMax(config, minValue, maxValue) {
+    const plotLines = config.yAxis.plotLines;
+    plotLines[0].value = maxValue;
+    plotLines[0].label.text = `${ChartConfig.fnNumberFormat(maxValue)}`;
+    plotLines[1].value = minValue;
+    plotLines[1].label.text = `${ChartConfig.fnNumberFormat(minValue)}`;
+
+    Object.assign(config.yAxis, {
+      min: Chart.calcMinY({ minPoint: minValue, maxPoint: maxValue}),
+      maxPadding: 0.15,
+      minPadding: 0.15,
+      endOnTick: false,
+      startOnTick: false
+    })
   }
+
 };
 
 ChartConfig.theme = {
@@ -326,7 +371,6 @@ ChartConfig.fBaseAreaConfig = function() {
 
   return config;
 };
-
 
 ChartConfig.fMarkerExDividend = function(color=COLOR.EX_DIVIDEND){
   return {

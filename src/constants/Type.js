@@ -29,6 +29,7 @@ export const Direction = {
 
 export const ModalDialog = {
   ASK : 'ASK',
+  RELOAD: 'RELOAD',
   INFO : 'info',
   ALERT : 'alert',
   DESCRIPTION : 'DESCRIPTION',
@@ -57,6 +58,7 @@ export const LoadType = {
   B : 'B',
   AL : 'AL',
   AL_S: 'AL_S',
+  AL_I: 'AL_I',
   QCT : 'QCT',
   EU_STAT : 'EU_STAT',
   WL : 'WL'

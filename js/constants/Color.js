@@ -13,6 +13,12 @@ var PALETTE = {
 };
 
 var COLOR = {
+  BLUE: "#2f7ed8", // #7cb5ec
+  GREEN: "#80c040",
+  RED: "#F44336",
+  WHITE: "white",
+  GRAY: '#607d8b',
+
   CHART_PRINT: 'white',
   PLOT_PRINT: 'white',
   LINE_PRINT: 'black',
@@ -88,6 +94,7 @@ var COLOR = {
   S_TURNOVER: '#6b8f4b',
   S_PRE_SETTLE: '#e77f32',
   S_CLOSE: 'black',
+  S_STOCK_CLOSE: '#2f7ed8',
   S_TRADES: 'black',
   S_BALANCE: PALETTE.PURPLE,
   S_IMPORTS: PALETTE.GREEN,

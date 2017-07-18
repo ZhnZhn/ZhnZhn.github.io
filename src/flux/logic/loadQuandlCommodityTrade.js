@@ -7,8 +7,7 @@ import ChartStore from '../stores/ChartStore';
 
 import QuandlApi from '../../api/QuandlApi';
 
-import { fnFetchToChartComp, fnFetchToChart } from './loadQuandl';
-
+import LoadImpl from './LoadImpl'
 
 const _fnFetchToChartComp = function({ json, option, onCompleted }){
   const arr = json.dataset.column_names
@@ -30,7 +29,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
    const { isLoadMeta } = option
        , _onFetch = (isLoadMeta)
             ? _fnFetchToChartComp
-            : fnFetchToChartComp
+            : LoadImpl.Quandl.fnFetchToChartComp
        , _onFailed = (isLoadMeta)
             ? _fnFailedLoadMeta.bind(null, option, onFailed)
             : onFailed;
@@ -48,7 +47,8 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
 const _loadToChart = function(option, onAdded, onFailed){
   const { isLoadMeta } = option
       , _onFetch = (isLoadMeta)
-           ? _fnFetchToChartComp : fnFetchToChart
+           ? _fnFetchToChartComp
+           : LoadImpl.Quandl.fnFetchToChart
       , _onFailed = (isLoadMeta)
            ? _fnFailedLoadMeta.bind(null, option, onFailed)
            : onFailed;
@@ -63,19 +63,17 @@ const _loadToChart = function(option, onAdded, onFailed){
   })
 }
 
+const loadQuandlCommodityTrade = {
+  loadItem(option, onCompleted, onAdded, onFailed){
+    const parentId = ChartStore.isLoadToChart();
+    option.apiKey = ChartStore.getQuandlKey()
 
-const loadQuandlCommodityTrade = function(
-  option, onCompleted, onAdded, onFailed
-){
-  const parentId = ChartStore.isLoadToChart();
-
-  option.apiKey = ChartStore.getQuandlKey();
-
-  if (!parentId){
-    _loadToChartComp(option, onCompleted, onFailed);
-  } else {
-    option.parentId = parentId;
-    _loadToChart(option, onAdded, onFailed);
+    if (!parentId){
+      _loadToChartComp(option, onCompleted, onFailed);
+    } else {
+      option.parentId = parentId;
+      _loadToChart(option, onAdded, onFailed);
+    }
   }
 }
 
