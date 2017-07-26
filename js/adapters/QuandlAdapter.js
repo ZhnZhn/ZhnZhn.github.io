@@ -14,10 +14,6 @@ var _lodash = require('lodash.flow');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _lodash3 = require('lodash.sortby');
-
-var _lodash4 = _interopRequireDefault(_lodash3);
-
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
@@ -226,7 +222,9 @@ var _fnAddCustomSeries = function _fnAddCustomSeries(columns, result) {
       point = result.point,
       legendSeries = result.legendSeries;
 
-  for (var i = 0, max = columns.length; i < max; i++) {
+  var i = 0,
+      max = columns.length;
+  for (; i < max; i++) {
     legendSeries[i].data.push([dateUTC, point[columns[i]]]);
   }
 };
@@ -235,7 +233,9 @@ var _fLegendConfig = function _fLegendConfig(seriaColumnNames, column_names) {
   var legendSeries = [],
       columns = [];
 
-  for (var i = 0, max = seriaColumnNames.length; i < max; i++) {
+  var i = 0,
+      max = seriaColumnNames.length;
+  for (; i < max; i++) {
     var columnName = seriaColumnNames[i],
         columnIndex = _QuandlFn2.default.findColumnIndex(column_names, columnName);
     if (columnIndex) {
@@ -318,20 +318,30 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex, option) {
   var _fnCreatePointFlow2 = _fnCreatePointFlow(json, yPointIndex, option),
       fnPointsFlow = _fnCreatePointFlow2.fnPointsFlow,
       result = _fnCreatePointFlow2.result,
-      points = (0, _lodash4.default)(json.dataset.data, '0');
+      _json$dataset2 = json.dataset,
+      dataset = _json$dataset2 === undefined ? {} : _json$dataset2,
+      _dataset$data = dataset.data,
+      data = _dataset$data === undefined ? [] : _dataset$data,
+      points = data.sort(_AdapterFn2.default.compareByDate);
 
-  for (var i = 0, max = points.length; i < max; i++) {
+  var i = 0,
+      _max = points.length;
+  for (; i < _max; i++) {
     fnPointsFlow(points[i], result);
   }
 
-  result.zhPoints = points;
-  result.minY = _Chart2.default.calcMinY(result);
+  Object.assign(result, {
+    zhPoints: points,
+    minY: _Chart2.default.calcMinY(result)
+  });
 
   return result;
 };
 
 var _fnSetYForPoints = function _fnSetYForPoints(data, y) {
-  for (var i = 0, max = data.length; i < max; i++) {
+  var i = 0,
+      max = data.length;
+  for (; i < max; i++) {
     data[i].y = y;
   }
 };
@@ -355,9 +365,20 @@ var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chart
 var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   var names = json.dataset.column_names;
   if (names[2] === C.HIGH && names[3] === C.LOW && names[4] === C.CLOSE && names[5] === C.VOLUME) {
-    config.zhPoints = zhPoints;
-    config.zhIsMfi = true;
-    config.zhFnGetMfiConfig = _IndicatorSma.fnGetConfigMfi;
+    Object.assign(config, {
+      zhPoints: zhPoints,
+      zhIsMfi: true,
+      zhFnGetMfiConfig: _IndicatorSma.fnGetConfigMfi
+    });
+  }
+};
+var _fnCheckIsMomAth = function _fnCheckIsMomAth(config, json, zhPoints) {
+  var names = json.dataset.column_names;
+  if (names[1] === C.OPEN && names[4] === C.CLOSE) {
+    Object.assign(config, {
+      zhPoints: zhPoints,
+      zhFnMomAthConfig: _IndicatorSma.fnMomAthConfig
+    });
   }
 };
 
@@ -447,8 +468,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
       zhPoints = _fnSeriesPipe2.zhPoints;
 
   _fnCheckIsMfi(config, json, zhPoints);
-  config.zhFnAddSeriesSma = _IndicatorSma.fnAddSeriesSma;
-  config.zhFnRemoveSeries = _IndicatorSma.fnRemoveSeries;
+  _fnCheckIsMomAth(config, json, zhPoints);
 
   config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(seria);
   config.valueMoving.date = _QuandlFn2.default.getRecentDate(seria, json);
@@ -458,10 +478,13 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
-  config.zhVolumeConfig = dataVolume.length > 0 ? _ChartConfig2.default.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume) : undefined;
-
-  config.zhATHConfig = dataATH.length > 0 ? _ChartConfig2.default.fIndicatorATHConfig(chartId, dataATH) : undefined;
-  config.zhHighLowConfig = dataHighLow.length > 0 ? _ChartConfig2.default.fIndicatorHighLowConfig(chartId, dataHighLow) : undefined;
+  Object.assign(config, {
+    zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
+    zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries,
+    zhVolumeConfig: dataVolume.length > 0 ? _ChartConfig2.default.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume) : undefined,
+    zhATHConfig: dataATH.length > 0 ? _ChartConfig2.default.fIndicatorATHConfig(chartId, dataATH) : undefined,
+    zhHighLowConfig: dataHighLow.length > 0 ? _ChartConfig2.default.fIndicatorHighLowConfig(chartId, dataHighLow) : undefined
+  });
 
   if (legendSeries) {
     _fnSetLegendSeriesToConfig(legendSeries, config, chartId);
@@ -545,21 +568,26 @@ var QuandlAdapter = {
   toSeries: function toSeries(json, option) {
     var chartId = option.value,
         parentId = option.parentId,
-        yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option);
+        yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option),
+        _json$dataset3 = json.dataset,
+        dataset = _json$dataset3 === undefined ? {} : _json$dataset3;
 
-    var data = json.dataset.data.map(function (point, index) {
+    var _dataset$data2 = dataset.data,
+        data = _dataset$data2 === undefined ? [] : _dataset$data2;
+
+    data = data.map(function (point) {
       var arrDate = point[0].split('-');
       return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
+    }).sort(_AdapterFn2.default.compareByDate);
+
+    var configSeries = _ChartConfig2.default.fSeries();
+
+    Object.assign(configSeries, {
+      zhSeriaId: parentId + '_' + chartId,
+      zhValueText: chartId.substring(0, 12),
+      data: data,
+      minY: _QuandlFn2.default.findMinY(data)
     });
-    data = (0, _lodash4.default)(data, '0');
-
-    var valueText = chartId.length < 12 ? chartId : chartId.substring(0, 12),
-        configSeries = _ChartConfig2.default.fSeries();
-
-    configSeries.zhSeriaId = parentId + '_' + chartId;
-    configSeries.zhValueText = valueText;
-    configSeries.data = data;
-    configSeries.minY = _QuandlFn2.default.findMinY(data);
 
     return configSeries;
   }

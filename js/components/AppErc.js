@@ -70,7 +70,7 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '18-07-2017';
+var PREV_BUILD = '26-07-2017';
 
 var AppErc = function (_Component) {
   (0, _inherits3.default)(AppErc, _Component);
@@ -84,7 +84,7 @@ var AppErc = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _LocationSearch2.default.load(_ComponentActions2.default);
-      fetch('./data/build.json').then(function (res) {
+      fetch('./data/build.json', { cache: "no-cache" }).then(function (res) {
         return res.json();
       }).then(function (json) {
         var _json$build = json.build,

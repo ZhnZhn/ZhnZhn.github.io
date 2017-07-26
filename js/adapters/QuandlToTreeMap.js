@@ -5,13 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fCreateTreeMapConfig = undefined;
 
-var _lodash = require('lodash.sortby');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
+
+var _AdapterFn = require('./AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 var _Type = require('../constants/Type');
 
@@ -32,11 +32,9 @@ var _StackedFn = require('./StackedFn');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _fnCreateYearTotals = function _fnCreateYearTotals(jsonData, items) {
-  var bYearTotals = [];
-  jsonData.forEach(function (year, yearIndex) {
-    bYearTotals.push((0, _StackedFn.fnCalcTotal)(year, items));
+  return jsonData.map(function (year) {
+    return (0, _StackedFn.fnCalcTotal)(year, items);
   });
-  return bYearTotals;
 };
 
 var _fnCreateDataAndTotal = function _fnCreateDataAndTotal() {
@@ -70,7 +68,7 @@ var _fnCreateDataAndTotal = function _fnCreateDataAndTotal() {
     }
   });
 
-  data = (0, _lodash2.default)(data, 'value').reverse();
+  data.sort(_AdapterFn2.default.compareByValue).reverse();
 
   return { data: data, bTotal: bTotal };
 };
@@ -114,13 +112,14 @@ var _fnSetColorToPoint = function _fnSetColorToPoint(data, level60, level90) {
       base1 = _Chart2.default.COLOR_BASE1,
       base2 = _Chart2.default.COLOR_BASE2;
 
+  var deltaColor = void 0;
   data.forEach(function (point, pointIndex) {
     if (pointIndex < level60) {
-      var deltaColor = pointIndex * (period / level60);
+      deltaColor = pointIndex * (period / level60);
       point.color = _Chart2.default.fCreateMonoColor(base1, deltaColor);
     } else if (pointIndex < level60 + level90) {
-      var _deltaColor = (pointIndex - level60) * (period / level90);
-      point.color = _Chart2.default.fCreateMonoColor(base2, _deltaColor);
+      deltaColor = (pointIndex - level60) * (period / level90);
+      point.color = _Chart2.default.fCreateMonoColor(base2, deltaColor);
     } else {
       point.color = _Chart2.default.fnGetMonoColor(pointIndex - level60 - level90);
     }
@@ -148,17 +147,18 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
 
   _fnSetColorToPoint(data, level60, level90);
 
-  config.series = [_ChartConfig2.default.fCreateTreeMapSeria(zhSeriaId, data)];
   config.chart.height = _Chart2.default.STACKED_HEIGHT;
 
   var yearTitle = jsonData[0] && jsonData[0][0] ? jsonData[0][0].split('-')[0] : '';
   option.title = yearTitle + ':' + option.title;
   _QuandlFn2.default.setTitleToConfig(config, option);
 
-  config.valueMoving = (0, _StackedFn.crValueMoving)(bTotal, yearTitle, bPrevTotal, dateTo);
-  config.zhConfig = (0, _StackedFn.crZhConfig)(option, zhSeriaId);
-
-  config.info = _QuandlFn2.default.createDatasetInfo(json);
+  Object.assign(config, {
+    series: [_ChartConfig2.default.fCreateTreeMapSeria(zhSeriaId, data)],
+    valueMoving: (0, _StackedFn.crValueMoving)(bTotal, yearTitle, bPrevTotal, dateTo),
+    zhConfig: (0, _StackedFn.crZhConfig)(option, zhSeriaId),
+    info: _QuandlFn2.default.createDatasetInfo(json)
+  });
 
   return { config: config };
 };

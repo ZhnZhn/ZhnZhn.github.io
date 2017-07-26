@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loadQuandlCommodityTrade = undefined;
 
-var _lodash = require('lodash.sortby');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _fn = require('../../utils/fn');
 
 var _fnCatch = require('./fnCatch');
@@ -27,6 +23,10 @@ var _LoadImpl2 = _interopRequireDefault(_LoadImpl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _compareByCaption = function _compareByCaption(a, b) {
+  if (a.caption < b.caption) return -1;else if (a.caption > b.caption) return 1;else return 0;
+};
+
 var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
   var json = _ref.json,
       option = _ref.option,
@@ -34,11 +34,12 @@ var _fnFetchToChartComp = function _fnFetchToChartComp(_ref) {
 
   var arr = json.dataset.column_names,
       max = arr.length;
-  var optionTrades = [];
-  for (var i = 1; i < max; i++) {
+  var optionTrades = [],
+      i = 1;
+  for (; i < max; i++) {
     optionTrades.push({ caption: arr[i], value: i });
   }
-  optionTrades = (0, _lodash2.default)(optionTrades, 'caption');
+  optionTrades.sort(_compareByCaption);
   option.onLoad(optionTrades);
 };
 

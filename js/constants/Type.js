@@ -7,6 +7,7 @@ var BrowserType = exports.BrowserType = {
    //QUANDL : 'Quandl',
    //QUANDL : 'QE',
 
+   STOCK_MARKETS: 'SM',
    EUROSTAT: 'ES',
    //GOOGLE : 'QD',
    //YAHOO : 'QY',

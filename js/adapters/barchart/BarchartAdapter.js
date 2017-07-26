@@ -85,7 +85,7 @@ var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
     _prevClose = close;
   });
 
-  _ChartConfig2.default.setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen);
+  _ChartConfig2.default.setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen, chartId);
 
   Object.assign(config, {
     valueMoving: _QuandlFn2.default.createValueMovingFromSeria(_data),

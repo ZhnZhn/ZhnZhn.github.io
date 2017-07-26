@@ -16,6 +16,8 @@ var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
+var _IndicatorSma = require('../IndicatorSma');
+
 var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
@@ -25,8 +27,6 @@ var _Tooltip = require('../../charts/Tooltip');
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//import ChartFn from '../../charts/ChartFn'
 
 var C = {
   TIME_START_DAY: '09:30:00',
@@ -64,7 +64,7 @@ var _fMarkerColor = function _fMarkerColor(date) {
   return { marker: marker, color: color };
 };
 
-var _createSeriaData = function _createSeriaData(json, option, config) {
+var _createSeriaData = function _createSeriaData(json, option, config, chartId) {
   var interval = option.interval,
       _propName = 'Time Series (' + interval + ')',
       _value = json[_propName],
@@ -120,15 +120,13 @@ var _createSeriaData = function _createSeriaData(json, option, config) {
     }
   }
 
-  _ChartConfig2.default.setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen);
+  _ChartConfig2.default.setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen, chartId);
   _ChartConfig2.default.setMinMax(config, _minClose, _maxClose);
 
   Object.assign(config, {
     zhVolumeConfig: _ChartConfig2.default.fIndicatorVolumeConfig(option.value, _dataVolumeColumn, _dataVolume)
   });
   config.zhVolumeConfig.series[1].tooltip = _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatterT);
-
-  //console.log(_data)
 };
 
 var AlphaIntradayAdapter = {
@@ -139,29 +137,28 @@ var AlphaIntradayAdapter = {
         _chartId = value;
 
 
-    _createSeriaData(json, option, config);
-
-    //console.log(json)
-
+    _createSeriaData(json, option, config, _chartId);
     Object.assign(config, {
       title: _Chart2.default.fTitle({
         text: value,
-        y: _Chart2.default.STACKED_TITLE_Y }),
+        y: _Chart2.default.STACKED_TITLE_Y
+      }),
       subtitle: _Chart2.default.fSubtitle({
         text: 'Time Series (' + interval + ')',
         y: _Chart2.default.STACKED_SUBTITLE_Y
       }),
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatterT)
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatterT),
+      zhConfig: {
+        dataSource: "Alpha Vantage",
+        id: _chartId,
+        key: _chartId,
+        isWithLegend: true,
+        legend: _AdapterFn2.default.stockSeriesLegend()
+      },
+      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
+      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     });
-
     config.chart.spacingTop = 25;
-    config.zhConfig = {
-      dataSource: "Alpha Vantage",
-      id: _chartId,
-      key: _chartId,
-      isWithLegend: true,
-      legend: _AdapterFn2.default.stockSeriesLegend()
-    };
 
     return {
       config: config,

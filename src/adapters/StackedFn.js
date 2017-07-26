@@ -1,13 +1,12 @@
-
-import sortBy from 'lodash.sortby';
 import Big from 'big.js';
+
+import AdapterFn from './AdapterFn'
 
 import {ChartType} from '../constants/Type';
 import Chart from '../charts/Chart';
 import ChartConfig from '../charts/ChartConfig';
 
 import QuandlFn2 from './QuandlFn2';
-
 
 const _rFactorySeria = {
   [ChartType.STACKED_AREA] : ChartConfig.fStackAreaSeria,
@@ -31,24 +30,27 @@ const _fnCreateReferenceDataAndTotal = function(jsonData, items){
   let _data = []
     , _bTotal = Big('0.0');
 
-  items.forEach((item, index) =>{
-    let y = jsonData[item.value];
-    if (y){
-       //const _nameFull = item.caption.replace(/;/g, '<br/>')
-       const _name = item.caption.split(';')[0].substring(0, 9);
+  items.forEach( item => {
+    const { caption, value } = item
+        , y = jsonData[value];
+    if (y) {
+       const _arr = caption.split(';')
+            , _name = _arr[0]
+                ? _arr[0].substring(0, 9)
+                : caption;
        _data.push({
           name : _name,
-          nameFull: item.caption,
+          nameFull: caption,
           y: y,
-          _jsonIndex : item.value
+          _jsonIndex : value
         });
        _bTotal = _bTotal.plus(y);
     }
   });
 
-  _data = sortBy(_data, 'y').reverse();
+  _data.sort(AdapterFn.compareByY).reverse()  
 
-  return {referenceData : _data, bTotal : _bTotal}
+  return { referenceData : _data, bTotal : _bTotal };
 }
 
 const _fnCreateDataTopPercent = function(data, bTotal, percent){

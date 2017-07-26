@@ -50,7 +50,7 @@ class AlphaIndicatorDialog extends Component {
   render() {
     const {
             isShow, caption,
-            onShow
+            onShow, onFront
           } = this.props;
 
     return (
@@ -59,6 +59,7 @@ class AlphaIndicatorDialog extends Component {
            isShow={isShow}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
+           onFront={onFront}
            onClose={this._handleClose}
        >
            <ToolbarButtonCircle

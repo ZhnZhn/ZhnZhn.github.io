@@ -107,7 +107,11 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         _zhConfig$dataSource = zhConfig.dataSource,
         dataSource = _zhConfig$dataSource === undefined ? '' : _zhConfig$dataSource,
         itemCaption = zhConfig.itemCaption,
+        id = zhConfig.id,
         _itemCaption = itemCaption ? itemCaption : caption;
+
+    _this._chartId = id;
+    _this._crMomAthConfig = config.zhFnMomAthConfig;
 
     _this._dataSourceEl = _react2.default.createElement(
       'div',
@@ -352,6 +356,12 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     _this3.setState({ mfiConfigs: _this3.state.mfiConfigs });
   };
 
+  this._handleAddMomAth = function () {
+    var config = _this3._crMomAthConfig(_this3.mainChart, _this3._chartId);
+    _this3.state.mfiConfigs.push({ config: config, id: 'MOM_ATH' });
+    _this3.setState({ mfiConfigs: _this3.state.mfiConfigs });
+  };
+
   this._handleClickConfig = function () {
     var _props3 = _this3.props,
         caption = _props3.caption,
@@ -388,6 +398,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         onRemoveSeries: _this3._handleRemoveSeries,
         onAddMfi: _this3._handlerAddMfi,
         onRemoveMfi: _this3._handlerRemoveMfi,
+        onAddMomAth: _this3._handleAddMomAth,
         onClickLegend: _this3._handlerClickLegend,
         onClick2H: _this3._handlerClick2H,
         onAddToWatch: _this3._handlerAddToWatch,
@@ -446,7 +457,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._renderIndicatorCharts = function (arrConfigs) {
-    var _indicatorCharts = arrConfigs.map(function (objConfig, index) {
+    var _indicatorCharts = arrConfigs.map(function (objConfig) {
       var config = objConfig.config,
           id = objConfig.id;
 

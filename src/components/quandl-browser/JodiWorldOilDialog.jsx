@@ -105,7 +105,7 @@ class JodiWorldOilDialog extends Component {
 
    render(){
      const {
-             caption, isShow, onShow,
+             caption, isShow, onShow, onFront,
              oneCaption, oneURI, oneJsonProp,
              parentCaption, parentChildURI, parentJsonProp, childCaption, msgOnNotSelected,
              initFromDate, initToDate, msgOnNotValidFormat, onTestDate
@@ -118,6 +118,7 @@ class JodiWorldOilDialog extends Component {
          isShow={isShow}
          commandButtons={this._commandButtons}
          onShowChart={onShow}
+         onFront={onFront}
          onClose={this._handleClose}
        >
           <ToolbarButtonCircle

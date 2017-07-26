@@ -9,9 +9,12 @@ import Button from './Button';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
+import RowCheckBox from './RowCheckBox';
 
 import withToolbar from './decorators/withToolbar';
 import withValidationLoad from './decorators/withValidationLoad'
+
+const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 @withToolbar
 @withValidationLoad
@@ -20,11 +23,16 @@ class  DialogType5 extends Component {
   constructor(props){
     super()
     this.toolbarButtons = this._createType2WithToolbar(props)
+    this.toolbarButtons.push({
+      caption: 'O', title: 'Toggle Options Input',
+      onClick: this._handleClickOptions
+    })
     this._commandButtons = [
       <Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
-      isShowDate : true,
+      isShowDate : false,
+      isShowOptions: false,
       validationMessages: []
     }
   }
@@ -36,6 +44,10 @@ class  DialogType5 extends Component {
        }
     }
     return true;
+  }
+
+  _handleClickOptions = () => {
+    this.setState({ isShowOptions: !this.state.isShowOptions })
   }
 
   _handleSelectOne = (one) => {
@@ -68,9 +80,10 @@ class  DialogType5 extends Component {
     const { parent:two, child:three } = this.parentChild.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues();
     return this.props.loadFn(
-      this.props,
-      { one : this.one, two, three, fromDate, toDate }
-    );
+      this.props, {
+      one : this.one, two, three, fromDate, toDate,
+      hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
+    });
   }
 
   _handleClose = () => {
@@ -78,14 +91,18 @@ class  DialogType5 extends Component {
     this.props.onClose();
   }
 
+  _handleMode = (propName, value) => {
+     this[propName] = value
+  }
+
   render(){
     const {
-           caption, isShow, onShow,
+           caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
            initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, validationMessages } = this.state;
+        , { isShowDate, isShowOptions, validationMessages } = this.state;
 
     return(
         <DraggableDialog
@@ -93,6 +110,7 @@ class  DialogType5 extends Component {
              isShow={isShow}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
+             onFront={onFront}
              onClose={this._handleClose}
          >
              <ToolbarButtonCircle
@@ -126,6 +144,14 @@ class  DialogType5 extends Component {
                  nForecastDate={nForecastDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
+               />
+             </ShowHide>
+             <ShowHide isShow={isShowOptions}>
+               <RowCheckBox
+                 initValue={false}
+                 caption="Add Seria with Second YAxis"
+                 onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
+                 onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
                />
              </ShowHide>
              <ValidationMessages

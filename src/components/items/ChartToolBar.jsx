@@ -35,6 +35,13 @@ class ChartToolbar extends Component {
     config: PropTypes.object
   }
 
+  constructor(props){
+    super()
+    const { config={} } = props
+        , { zhFnMomAthConfig } = config;
+    this._isMomAthConfig = (typeof zhFnMomAthConfig == 'function') ? true : false
+  }
+
   shouldComponentUpdate(){
     return false;
   }
@@ -43,6 +50,7 @@ class ChartToolbar extends Component {
     const {
             style, config={},
             onAddSma, onRemoveSeries, onAddMfi, onRemoveMfi,
+            onAddMomAth,
             onClickLegend,
             onClick2H,
             onAddToWatch,
@@ -66,6 +74,8 @@ class ChartToolbar extends Component {
           isMfi={config.zhIsMfi}
           onAddMfi={onAddMfi}
           onRemoveMfi={onRemoveMfi}
+          isMomAth={this._isMomAthConfig}
+          onAddMomAth={onAddMomAth}
         />
       </ButtonParentTab>
     ) : undefined;

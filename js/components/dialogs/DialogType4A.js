@@ -171,6 +171,7 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
           msgOnNotSelected = _props.msgOnNotSelected,
           isShow = _props.isShow,
           onShow = _props.onShow,
+          onFront = _props.onFront,
           initFromDate = _props.initFromDate,
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
@@ -188,6 +189,7 @@ var DialogType4A = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

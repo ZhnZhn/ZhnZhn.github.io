@@ -23,9 +23,6 @@ var SPARKLINES_SUFFIX_ID = 'sparklines',
     WIDTH_TOTAL = 50,
     WIDTH_SPARK = 20 + 80 + 16;
 
-//const Tooltip = {};
-
-
 var _fnNumberFormat = function _fnNumberFormat(value) {
   var arrSplit = (value + '').split('.'),
       decimal = arrSplit[1] ? 2 : 0;
@@ -233,16 +230,21 @@ var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
         isWithValue = option.isWithValue,
         point = this,
         series = point.series,
-        id = series.options.zhSeriaId,
         date = fnDateFormat(point.x),
-        color = isWithColor && series.index !== 0 ? series.color : undefined,
-        valueText = isWithValueText ? series.userOptions.zhValueText : null,
+        color = isWithColor ? point.color || series.color : undefined,
+        _series$userOptions = series.userOptions,
+        zhValueText = _series$userOptions.zhValueText,
+        _series$userOptions$n = _series$userOptions.name,
+        name = _series$userOptions$n === undefined ? 'Value' : _series$userOptions$n,
+        id = _series$userOptions.id,
+        zhSeriaId = _series$userOptions.zhSeriaId,
+        _id = zhSeriaId || id || 'TP',
+        valueText = isWithValueText ? zhValueText || name : 'Value',
         value = isWithValue ? _fnNumberFormat(point.y) : null;
 
+    onAfterRender(_id, point);
 
-    onAfterRender(id, point);
-
-    return fnTemplate({ date: date, id: id, color: color, valueText: valueText, value: value, point: point });
+    return fnTemplate({ id: _id, date: date, color: color, valueText: valueText, value: value, point: point });
   };
 };
 

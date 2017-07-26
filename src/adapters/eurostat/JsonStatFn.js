@@ -1,6 +1,6 @@
 import JSONstat from 'jsonstat';
-import sortBy from 'lodash.sortby';
 
+import AdapterFn from '../AdapterFn'
 import { Box, getFromNullable } from '../../utils/fnStyle'
 
 const URL_ID_COUNTRY = './data/eurostat/id-country.json';
@@ -115,7 +115,8 @@ const JsonStatFn = {
 
     return _fnFetchHmIdCountry().then(() => {
        return Box( _combineToArr(dGeo.id, sGeo) )
-               .map( (arr) => sortBy(arr, ['value', 'id']))
+               //.map( (arr) => sortBy(arr, ['value', 'id']))
+               .map(arr => arr.sort(AdapterFn.compareByValueId))
                .fold(_splitForConfig);
        });
   },

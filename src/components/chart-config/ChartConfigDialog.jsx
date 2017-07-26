@@ -46,15 +46,14 @@ class ChartConfigDialog extends Component {
   }
 
   render(){
-    const { isShow, optionData={} } = this.props
+    const { isShow, optionData={}, onFront } = this.props
         , { caption, chart } = optionData;
 
     return (
       <DraggableDialog
-          caption="Configure Chart"
           isShow={isShow}
-          //commandButtons={_commandButtons}
-          //onShowChart={onShow}
+          caption="Configure Chart"
+          onFront={onFront}
           onClose={this._handleClose}
       >
         <div style={STYLE.TITLE}>

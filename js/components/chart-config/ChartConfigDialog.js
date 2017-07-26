@@ -99,6 +99,7 @@ var ChartConfigDialog = function (_Component) {
           isShow = _props.isShow,
           _props$optionData = _props.optionData,
           optionData = _props$optionData === undefined ? {} : _props$optionData,
+          onFront = _props.onFront,
           caption = optionData.caption,
           chart = optionData.chart;
 
@@ -106,11 +107,10 @@ var ChartConfigDialog = function (_Component) {
       return _react2.default.createElement(
         _DraggableDialog2.default,
         {
+          isShow: isShow,
           caption: 'Configure Chart',
-          isShow: isShow
-          //commandButtons={_commandButtons}
-          //onShowChart={onShow}
-          , onClose: this._handleClose
+          onFront: onFront,
+          onClose: this._handleClose
         },
         _react2.default.createElement(
           'div',

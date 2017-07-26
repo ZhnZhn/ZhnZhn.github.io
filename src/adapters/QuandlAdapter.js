@@ -1,6 +1,5 @@
 
 import flow from 'lodash.flow';
-import sortBy from 'lodash.sortby';
 import Big from 'big.js';
 
 import {ChartType} from '../constants/Type';
@@ -8,7 +7,10 @@ import Chart from '../charts/Chart';
 import ChartConfig from '../charts/ChartConfig';
 import ChartLegend from '../charts/ChartLegend';
 
-import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from './IndicatorSma';
+import {
+  fnAddSeriesSma, fnRemoveSeries,
+  fnGetConfigMfi, fnMomAthConfig
+} from './IndicatorSma';
 
 import QuandlFn2 from './QuandlFn2';
 import AdapterFn from './AdapterFn';
@@ -49,7 +51,7 @@ const _fnCheckExtrems = function(result){
     result.minPoint = point[yPointIndex];
   }
 
-  return result
+  return result;
 }
 
 const _fnAddToSeria = function(result){
@@ -129,7 +131,7 @@ const _fnAddHighLow = function(optionIndex, result){
       , _bHigh = (point[high]) ? Big(point[high]).minus(_closeValue) : Big('0.0')
       , _bLow = (point[low]) ? Big(point[low]).minus(_closeValue) : Big('0.0')
       , _dayHigh = (point[high]) ? point[high] : C.UNKNOWN
-      , _dayLow = (point[low]) ? point[low] : C.UNKNOWN
+      , _dayLow = (point[low]) ? point[low] : C.UNKNOWN;
 
   dataHighLow.push({
     x : dateUTC,
@@ -141,12 +143,13 @@ const _fnAddHighLow = function(optionIndex, result){
     close : _closeValue
   });
 
-  return result
+  return result;
 }
 
 const _fnAddCustomSeries = function(columns, result){
    const { dateUTC, point, legendSeries } = result;
-   for (var i=0, max=columns.length ; i<max; i++ ){
+   let i=0, max=columns.length;
+   for (; i<max; i++ ){
       legendSeries[i].data.push([dateUTC, point[columns[i]]])
    }
 }
@@ -155,7 +158,8 @@ const _fLegendConfig = function(seriaColumnNames, column_names){
   const legendSeries = []
       , columns =[];
 
-  for (let i=0, max=seriaColumnNames.length; i<max; i++ ){
+  let i=0, max=seriaColumnNames.length;
+  for (; i<max; i++ ){
      const columnName = seriaColumnNames[i]
          , columnIndex = QuandlFn2.findColumnIndex(column_names, columnName);
      if (columnIndex) {
@@ -164,7 +168,7 @@ const _fLegendConfig = function(seriaColumnNames, column_names){
      }
   }
 
-  return { legendSeries, columns }
+  return { legendSeries, columns };
 }
 
 const _fnCreatePointFlow = function(json, yPointIndex, option){
@@ -233,22 +237,30 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
   };
 }
 
-const _fnSeriesPipe = function(json, yPointIndex, option){
-  const {fnPointsFlow, result} = _fnCreatePointFlow(json, yPointIndex, option)
-      , points = sortBy(json.dataset.data, '0');
 
-  for(var i=0, max=points.length; i<max; i++){
-    fnPointsFlow(points[i], result);
+const _fnSeriesPipe = function(json, yPointIndex, option){
+  const { fnPointsFlow, result } = _fnCreatePointFlow(json, yPointIndex, option)
+      , { dataset={} } = json
+      , { data=[] } = dataset
+      //, points = sortBy(json.dataset.data, '0');
+      , points = data.sort(AdapterFn.compareByDate)
+
+  let i=0, _max=points.length;
+  for(; i<_max; i++) {
+    fnPointsFlow(points[i], result)
   }
 
-  result.zhPoints = points;
-  result.minY = Chart.calcMinY(result);
+  Object.assign(result, {
+    zhPoints: points,
+    minY: Chart.calcMinY(result)
+  })
 
-  return result
+  return result;
 }
 
 const _fnSetYForPoints = function(data, y){
-  for (let i=0, max=data.length; i<max; i++ ){
+  let i=0, max=data.length;
+  for (; i<max; i++ ){
     data[i].y = y;
   }
 }
@@ -273,11 +285,22 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
   const names= json.dataset.column_names;
   if ( names[2] === C.HIGH && names[3] === C.LOW  &&
        names[4] === C.CLOSE && names[5] === C.VOLUME) {
-    config.zhPoints = zhPoints;
-    config.zhIsMfi = true;
-    config.zhFnGetMfiConfig = fnGetConfigMfi;
+    Object.assign(config, {
+      zhPoints: zhPoints,
+      zhIsMfi: true,
+      zhFnGetMfiConfig: fnGetConfigMfi
+    })
   }
 };
+const _fnCheckIsMomAth = function(config, json, zhPoints) {
+  const names= json.dataset.column_names;
+  if ( names[1] === C.OPEN && names[4] === C.CLOSE) {
+    Object.assign(config, {
+      zhPoints: zhPoints,
+      zhFnMomAthConfig: fnMomAthConfig
+    })
+  }
+}
 
 const _fnSetChartTitle = function(config, option){
   const { title, subtitle } = option;
@@ -352,8 +375,7 @@ const fnGetSeries = function(config, json, option){
    } = _fnSeriesPipe(json, yPointIndex, option);
 
    _fnCheckIsMfi(config, json, zhPoints);
-   config.zhFnAddSeriesSma = fnAddSeriesSma;
-   config.zhFnRemoveSeries = fnRemoveSeries;
+   _fnCheckIsMomAth(config, json, zhPoints);
 
    config.valueMoving = QuandlFn2.createValueMovingFromSeria(seria);
    config.valueMoving.date = QuandlFn2.getRecentDate(seria, json);
@@ -363,16 +385,19 @@ const fnGetSeries = function(config, json, option){
    _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
    _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
-   config.zhVolumeConfig = (dataVolume.length>0)
-            ? ChartConfig.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume)
-            : undefined;
-
-   config.zhATHConfig = (dataATH.length>0)
-            ? ChartConfig.fIndicatorATHConfig(chartId, dataATH)
-            : undefined;
-   config.zhHighLowConfig = (dataHighLow.length>0)
-            ? ChartConfig.fIndicatorHighLowConfig(chartId, dataHighLow)
-            : undefined;
+   Object.assign(config, {
+     zhFnAddSeriesSma: fnAddSeriesSma,
+     zhFnRemoveSeries: fnRemoveSeries,
+     zhVolumeConfig: dataVolume.length>0
+        ? ChartConfig.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume)
+        : undefined,
+     zhATHConfig: dataATH.length>0
+        ? ChartConfig.fIndicatorATHConfig(chartId, dataATH)
+        : undefined,
+    zhHighLowConfig: dataHighLow.length>0
+        ? ChartConfig.fIndicatorHighLowConfig(chartId, dataHighLow)
+        : undefined
+   })
 
     if (legendSeries){
       _fnSetLegendSeriesToConfig(legendSeries, config, chartId);
@@ -404,6 +429,7 @@ const _setPlotLinesExtremValues = function(plotLines, minPoint, maxPoint, value,
   plotLines[0].label.text = `${ChartConfig.fnNumberFormat(_maxPoint)}${_deltaMax}`;
   plotLines[1].value = _minPoint;
   plotLines[1].label.text = `${ChartConfig.fnNumberFormat(_minPoint)}${_deltaMin}`;
+
 }
 
 const fnConfigAxes = function(result){
@@ -455,27 +481,29 @@ const _rToConfig = {
 const QuandlAdapter = {
   toConfig(json, option){
      const { seriaType=ChartType.AREA } = option
-         , _config = _rToConfig[seriaType](json, option);     
+         , _config = _rToConfig[seriaType](json, option);
      return _config;
   },
 
   toSeries(json, option){
     const { value:chartId, parentId } = option
-        , yPointIndex = QuandlFn2.getDataColumnIndex(json, option);
+        , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
+        , { dataset={} } = json;
+    let { data=[] } = dataset;
+    data = data.map(point => {
+              const arrDate = point[0].split('-');
+              return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
+           })
+           .sort(AdapterFn.compareByDate);
 
-    let data = json.dataset.data.map((point, index)=> {
-      const arrDate = point[0].split('-');
-      return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
-    });
-    data = sortBy(data, '0');
+    const configSeries = ChartConfig.fSeries();
 
-    const valueText = (chartId.length<12) ? chartId : chartId.substring(0,12)
-        , configSeries = ChartConfig.fSeries();
-
-    configSeries.zhSeriaId = parentId + '_' + chartId;
-    configSeries.zhValueText = valueText;
-    configSeries.data = data;
-    configSeries.minY = QuandlFn2.findMinY(data);
+    Object.assign(configSeries, {
+      zhSeriaId: parentId + '_' + chartId,
+      zhValueText: chartId.substring(0,12),
+      data: data,
+      minY: QuandlFn2.findMinY(data)
+    })
 
     return configSeries;
   }

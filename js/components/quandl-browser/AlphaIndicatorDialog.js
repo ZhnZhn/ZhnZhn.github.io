@@ -89,7 +89,7 @@ var _testInRangeOrEmpty = function _testInRangeOrEmpty(min, max) {
   };
 };
 
-var _testPeriod = _testInRangeOrEmpty(4, 201);
+var _testPeriod = _testInRangeOrEmpty(0, 201);
 var _testForDays = _testInRangeOrEmpty(250, 2500);
 
 var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Component) {
@@ -179,6 +179,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           oneJsonProp = _props.oneJsonProp,
           oneCaption = _props.oneCaption,
           onShow = _props.onShow,
+          onFront = _props.onFront,
           isShowOptions = this.state.isShowOptions;
 
 
@@ -189,6 +190,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {
@@ -217,7 +219,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
             title: 'Period',
             placeholder: 'Default: ' + DF.PERIOD,
             onTest: _testPeriod,
-            errorMsg: 'Number in range 5-200'
+            errorMsg: 'Number in range 1-200'
           }),
           _react2.default.createElement(_RowPattern2.default, {
             ref: this._refForDays,

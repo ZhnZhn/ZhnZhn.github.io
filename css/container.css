@@ -83,14 +83,15 @@
   border-bottom: 1px solid #1b75bb;
 }
 
+.item__browser {
+  color: #a487d4;
+}
 .item__quandl {
   color: #e05927;
 }
-
 .item__eurostat {
   color: #009ae5;
 }
-
 .item__watch {
   color: #80c040;
 }

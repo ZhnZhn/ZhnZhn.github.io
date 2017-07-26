@@ -1,7 +1,7 @@
 
 const _crDefault = (props, options) => {
   const { isPremium, fnValue, loadId, dataSource } = props
-      , { one, two, three, fromDate, toDate } = options
+      , { one, two, three, fromDate, toDate, hasSecondYAxis } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
            : undefined
@@ -14,13 +14,14 @@ const _crDefault = (props, options) => {
     title : `${one.caption}:${two.caption}`,
     subtitle : three.caption,
     dataSource : dataSource,
-    isPremium: isPremium
+    isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis
   }
 }
 
 const _crTreeItem = (props, options) => {
   const { isPremium, fnValue, dataColumn, loadId, dataSource } = props
-      , { one, two, three, fromDate, toDate } = options
+      , { one, two, three, fromDate, toDate, hasSecondYAxis } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, three.value)
            : undefined
@@ -33,13 +34,14 @@ const _crTreeItem = (props, options) => {
     title : `${one.caption}:${two.caption}`,
     subtitle : three.caption,
     dataSource : dataSource,
-    isPremium: isPremium
+    isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis
   };
 };
 
 const _crPlusTreeItem = (props, options) => {
   const { isPremium, fnValue, dataColumn, loadId, dataSource } = props
-      , { one, two, three, fromDate, toDate } = options
+      , { one, two, three, fromDate, toDate, hasSecondYAxis } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value, three.value)
            : undefined
@@ -52,7 +54,8 @@ const _crPlusTreeItem = (props, options) => {
     title : `${two.caption} : ${three.caption}`,
     subtitle : one.caption,
     dataSource : dataSource,
-    isPremium : isPremium
+    isPremium : isPremium,
+    hasSecondYAxis: hasSecondYAxis
   }
 };
 

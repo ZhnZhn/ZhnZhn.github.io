@@ -124,7 +124,8 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
       var _props = this.props,
           isShow = _props.isShow,
           caption = _props.caption,
-          onShow = _props.onShow;
+          onShow = _props.onShow,
+          onFront = _props.onFront;
 
 
       return _react2.default.createElement(
@@ -134,6 +135,7 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

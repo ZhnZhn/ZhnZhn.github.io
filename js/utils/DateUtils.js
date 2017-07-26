@@ -210,7 +210,7 @@ var DateUtils = {
 		    _str$toString$split2$2 = _str$toString$split2[1],
 		    m = _str$toString$split2$2 === undefined ? 10 : _str$toString$split2$2,
 		    _str$toString$split2$3 = _str$toString$split2[2],
-		    y = _str$toString$split2$3 === undefined ? 1000 : _str$toString$split2$3;
+		    y = _str$toString$split2$3 === undefined ? 1970 : _str$toString$split2$3;
 
 		if (DateUtils.isValidDate(y + '-' + m + '-' + d)) {
 			return Date.UTC(y, parseInt(m, 10) - 1, d);

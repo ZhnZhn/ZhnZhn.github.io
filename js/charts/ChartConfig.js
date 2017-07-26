@@ -109,29 +109,33 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
       }
     });
   },
-  seriaOption: function seriaOption(color) {
-    return {
+  seriaOption: function seriaOption(color, option) {
+    return Object.assign({
       type: 'line', visible: false, color: color,
       marker: {
         radius: 3,
         symbol: "circle"
       }
-    };
+    }, option);
   },
-  setSerieData: function setSerieData(config, data, index, options) {
+  setSerieData: function setSerieData(config, data, index, name, options) {
     config.series[index] = Object.assign({
-      data: data,
       type: 'area',
+      name: name,
+      data: data,
       lineWidth: 1
     }, options);
 
     config.series[index].point = _Chart2.default.fEventsMouseOver(_ChartFn2.default.handlerMouserOverPoint);
   },
-  setStockSerias: function setStockSerias(config, dClose, dHigh, dLow, dOpen) {
-    this.setSerieData(config, dClose, 0);
-    this.setSerieData(config, dHigh, 1, this.seriaOption(_Color2.default.S_HIGH));
-    this.setSerieData(config, dLow, 2, this.seriaOption(_Color2.default.S_LOW));
-    this.setSerieData(config, dOpen, 3, this.seriaOption(_Color2.default.S_OPEN));
+  _zhSeriaId: function _zhSeriaId(id) {
+    return { zhSeriaId: id };
+  },
+  setStockSerias: function setStockSerias(config, dClose, dHigh, dLow, dOpen, id) {
+    this.setSerieData(config, dClose, 0, 'Close', this._zhSeriaId(id));
+    this.setSerieData(config, dHigh, 1, 'High', this.seriaOption(_Color2.default.S_HIGH, this._zhSeriaId(id + 'H')));
+    this.setSerieData(config, dLow, 2, 'Low', this.seriaOption(_Color2.default.S_LOW, this._zhSeriaId(id + 'L')));
+    this.setSerieData(config, dOpen, 3, 'Open', this.seriaOption(_Color2.default.S_OPEN, this._zhSeriaId(id + 'O')));
   },
   setMinMax: function setMinMax(config, minValue, maxValue) {
     var plotLines = config.yAxis.plotLines;
@@ -184,7 +188,9 @@ ChartConfig.theme = {
       }
     }
   },
-  colors: ['#7cb5ec', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
+  colors: ['#7cb5ec',
+  //'#2f7ed8',
+  '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
   labels: {
     items: []
   },

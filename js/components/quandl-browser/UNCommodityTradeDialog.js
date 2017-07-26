@@ -394,6 +394,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
       var _props = this.props,
           isShow = _props.isShow,
           onShow = _props.onShow,
+          onFront = _props.onFront,
           countryURI = _props.countryURI,
           countryJsonProp = _props.countryJsonProp,
           commodityURI = _props.commodityURI,
@@ -420,6 +421,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handlerClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

@@ -37,7 +37,7 @@ const _testInRangeOrEmpty = (min, max) => (value) => {
   }
 }
 
-const _testPeriod = _testInRangeOrEmpty(4, 201)
+const _testPeriod = _testInRangeOrEmpty(0, 201)
 const _testForDays = _testInRangeOrEmpty(250, 2500)
 
 @withToolbar
@@ -127,7 +127,7 @@ class AlphaIndicatorDialog extends Component {
     const {
             isShow, caption,
             oneURI, oneJsonProp, oneCaption,
-            onShow
+            onShow, onFront
           } = this.props
         , { isShowOptions } = this.state;
 
@@ -137,6 +137,7 @@ class AlphaIndicatorDialog extends Component {
            isShow={isShow}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
+           onFront={onFront}
            onClose={this._handleClose}
        >
            <ToolbarButtonCircle
@@ -163,7 +164,7 @@ class AlphaIndicatorDialog extends Component {
               title="Period"
               placeholder={`Default: ${DF.PERIOD}`}
               onTest={_testPeriod}
-              errorMsg="Number in range 5-200"
+              errorMsg="Number in range 1-200"
             />
             <RowPattern
               ref={this._refForDays}

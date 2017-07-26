@@ -22,6 +22,15 @@ var _Color2 = _interopRequireDefault(_Color);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C = {
+  MFI: "#90ed7d",
+
+  MOM: '#f7a35c',
+  CLOSE_OPEN: 'rgba(144, 237, 125, 0.75)',
+
+  HIGH_LOW: '#2D7474'
+};
+
 var _configCrossLabel = function _configCrossLabel(chart, option) {
   Object.assign(chart, {
     xDeltaCrossLabel: 4,
@@ -50,6 +59,21 @@ var _legendVolume = {
   },
   itemHiddenStyle: {
     color: _Color2.default.LEGEND_ITEM_HIDDEN
+  }
+};
+
+var _addColumnSeria = function _addColumnSeria(config, option) {
+  var series = config.series,
+      _seria = Object.assign({
+    type: "column",
+    visible: true,
+    tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatter)
+  }, option);
+
+  if (!series[0].data) {
+    Object.assign(config.series[0], _seria);
+  } else {
+    series.push(_seria);
   }
 };
 
@@ -90,9 +114,9 @@ var WithIndicatorConfig = {
       zhSeriaId: parentId + '_' + id,
       zhValueText: id,
       data: data,
-      name: "Spline",
+      name: "MFI",
       type: "spline",
-      color: "#90ed7d",
+      color: C.MFI,
       point: _Chart2.default.fEventsMouseOver(_ChartFn2.default.handlerMouserOverPoint)
     });
     return config;
@@ -100,7 +124,7 @@ var WithIndicatorConfig = {
   fIndicatorVolumeConfig: function fIndicatorVolumeConfig(chartId, dataColumn, data) {
     var config = this.fBaseIndicatorConfig();
     Object.assign(config, {
-      title: _Chart2.default.fTitleIndicator('Volume Chart:'),
+      title: _Chart2.default.fTitleIndicator('Volume:'),
       legend: _legendVolume
     });
     _configCrossLabel(config.chart);
@@ -122,7 +146,6 @@ var WithIndicatorConfig = {
       type: "column",
       name: "Column",
       data: dataColumn,
-
       visible: false,
       borderWidth: 0,
       pointPlacement: 'on',
@@ -140,14 +163,11 @@ var WithIndicatorConfig = {
   },
   fIndicatorATHConfig: function fIndicatorATHConfig(chartId, data) {
     var config = this.fBaseIndicatorConfig();
-    config.title = _Chart2.default.fTitleIndicator('ATH Chart');
+    config.title = _Chart2.default.fTitleIndicator('ATH');
 
-    Object.assign(config.series[0], {
+    _addColumnSeria(config, {
       zhSeriaId: chartId + "_ATH",
-      zhValueText: "ATH",
       name: "ATH",
-      visible: true,
-      type: "column",
       borderWidth: 0,
       pointPlacement: 'on',
       minPointLength: 4,
@@ -158,17 +178,62 @@ var WithIndicatorConfig = {
 
     return config;
   },
+  fnMomAthConfig: function fnMomAthConfig(dataMom, dataAth, dataSum, id) {
+    var config = this.fBaseIndicatorConfig();
+    Object.assign(config, {
+      title: _Chart2.default.fTitleIndicator(''),
+      legend: _legendVolume,
+      plotOptions: {
+        column: {
+          grouping: false,
+          shadow: false,
+          borderWidth: 0,
+          pointPlacement: 'on',
+          pointPadding: 0,
+          groupPadding: 0,
+          turboThreshold: 20000,
+          tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatter)
+        }
+      }
+    });
+    _addColumnSeria(config, {
+      zhSeriaId: id + "_MOM",
+      zhValueText: "MOM(1)",
+      name: "MOM(1)",
+      color: C.MOM,
+      pointPadding: 0.3,
+      data: dataMom
+    });
+    _addColumnSeria(config, {
+      zhSeriaId: id + "_ATH",
+      name: "ATH",
+      data: dataAth
+    });
+    _addColumnSeria(config, {
+      zhSeriaId: id + "_CLOSE_OPEN",
+      name: "Close-Open",
+      color: C.CLOSE_OPEN,
+      visible: false,
+      data: dataSum
+    });
+
+    Object.assign(config.yAxis, {
+      startOnTick: false,
+      endOnTick: false,
+      tickPixelInterval: 20
+    });
+    return config;
+  },
   fIndicatorHighLowConfig: function fIndicatorHighLowConfig(chartId, data) {
     var config = this.fBaseIndicatorConfig();
-    config.title = _Chart2.default.fTitleIndicator('HighLow Chart');
+    config.title = _Chart2.default.fTitleIndicator('HighLow');
 
     Object.assign(config.series[0], {
       zhSeriaId: chartId + '_HL',
-      zhValueText: "HL",
       name: "HL",
       visible: true,
       type: "arearange",
-      color: '#2D7474',
+      color: C.HIGH_LOW,
       data: data,
       tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnHighLowPointFormatter)
     });

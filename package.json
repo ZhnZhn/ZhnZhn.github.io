@@ -73,7 +73,6 @@
       "lodash.flow": "npm:lodash.flow@^3.5.0",
       "lodash.get": "npm:lodash.get@^4.4.2",
       "lodash.merge": "npm:lodash.merge@^4.6.0",
-      "lodash.sortby": "npm:lodash.sortby@^4.7.0",
       "purify": "github:cure53/DOMPurify@^0.8.2",
       "query-string": "npm:query-string@^4.3.2",
       "raven-js": "github:getsentry/raven-js@^3.14.2",

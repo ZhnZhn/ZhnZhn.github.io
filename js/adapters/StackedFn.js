@@ -11,13 +11,13 @@ var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _rFactorySeria2;
 
-var _lodash = require('lodash.sortby');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
+
+var _AdapterFn = require('./AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 var _Type = require('../constants/Type');
 
@@ -55,22 +55,25 @@ var _fnCreateReferenceDataAndTotal = function _fnCreateReferenceDataAndTotal(jso
   var _data = [],
       _bTotal = (0, _big2.default)('0.0');
 
-  items.forEach(function (item, index) {
-    var y = jsonData[item.value];
+  items.forEach(function (item) {
+    var caption = item.caption,
+        value = item.value,
+        y = jsonData[value];
+
     if (y) {
-      //const _nameFull = item.caption.replace(/;/g, '<br/>')
-      var _name = item.caption.split(';')[0].substring(0, 9);
+      var _arr = caption.split(';'),
+          _name = _arr[0] ? _arr[0].substring(0, 9) : caption;
       _data.push({
         name: _name,
-        nameFull: item.caption,
+        nameFull: caption,
         y: y,
-        _jsonIndex: item.value
+        _jsonIndex: value
       });
       _bTotal = _bTotal.plus(y);
     }
   });
 
-  _data = (0, _lodash2.default)(_data, 'y').reverse();
+  _data.sort(_AdapterFn2.default.compareByY).reverse();
 
   return { referenceData: _data, bTotal: _bTotal };
 };

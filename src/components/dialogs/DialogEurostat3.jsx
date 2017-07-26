@@ -94,7 +94,7 @@ class DialogEurostat3 extends Component {
 
   render(){
     const {
-           caption, isShow, onShow,
+           caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp,
            threeCaption, msgOnNotSelected
@@ -107,6 +107,7 @@ class DialogEurostat3 extends Component {
              isShow={isShow}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
+             onFront={onFront}
              onClose={this._handleClose}
          >
              <ToolbarButtonCircle

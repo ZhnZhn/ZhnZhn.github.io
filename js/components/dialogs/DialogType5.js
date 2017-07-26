@@ -58,6 +58,10 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
+var _RowCheckBox = require('./RowCheckBox');
+
+var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
+
 var _withToolbar = require('./decorators/withToolbar');
 
 var _withToolbar2 = _interopRequireDefault(_withToolbar);
@@ -68,6 +72,8 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+
 var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
   (0, _inherits3.default)(DialogType5, _Component);
 
@@ -75,6 +81,10 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
     (0, _classCallCheck3.default)(this, DialogType5);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType5.__proto__ || Object.getPrototypeOf(DialogType5)).call(this));
+
+    _this._handleClickOptions = function () {
+      _this.setState({ isShowOptions: !_this.state.isShowOptions });
+    };
 
     _this._handleSelectOne = function (one) {
       _this.one = one;
@@ -121,7 +131,10 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate;
 
-      return _this.props.loadFn(_this.props, { one: _this.one, two: two, three: three, fromDate: fromDate, toDate: toDate });
+      return _this.props.loadFn(_this.props, {
+        one: _this.one, two: two, three: three, fromDate: fromDate, toDate: toDate,
+        hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
+      });
     };
 
     _this._handleClose = function () {
@@ -129,10 +142,19 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
       _this.props.onClose();
     };
 
+    _this._handleMode = function (propName, value) {
+      _this[propName] = value;
+    };
+
     _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this.toolbarButtons.push({
+      caption: 'O', title: 'Toggle Options Input',
+      onClick: _this._handleClickOptions
+    });
     _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
     _this.state = {
-      isShowDate: true,
+      isShowDate: false,
+      isShowOptions: false,
       validationMessages: []
     };
     return _this;
@@ -157,6 +179,7 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           caption = _props.caption,
           isShow = _props.isShow,
           onShow = _props.onShow,
+          onFront = _props.onFront,
           oneCaption = _props.oneCaption,
           oneURI = _props.oneURI,
           oneJsonProp = _props.oneJsonProp,
@@ -172,6 +195,7 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           onTestDate = _props.onTestDate,
           _state = this.state,
           isShowDate = _state.isShowDate,
+          isShowOptions = _state.isShowOptions,
           validationMessages = _state.validationMessages;
 
 
@@ -182,6 +206,7 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {
@@ -219,6 +244,16 @@ var DialogType5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
             nForecastDate: nForecastDate,
             msgOnNotValidFormat: msgOnNotValidFormat,
             onTestDate: onTestDate
+          })
+        ),
+        _react2.default.createElement(
+          _ShowHide2.default,
+          { isShow: isShowOptions },
+          _react2.default.createElement(_RowCheckBox2.default, {
+            initValue: false,
+            caption: 'Add Seria with Second YAxis',
+            onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
+            onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
           })
         ),
         _react2.default.createElement(_ValidationMessages2.default, {

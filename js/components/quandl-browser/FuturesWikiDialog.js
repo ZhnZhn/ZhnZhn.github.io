@@ -172,6 +172,7 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
           isShow = _props.isShow,
           caption = _props.caption,
           onShow = _props.onShow,
+          onFront = _props.onFront,
           futuresURI = _props.futuresURI,
           msgOnNotSelected = _props.msgOnNotSelected,
           isContinious = _props.isContinious,
@@ -188,6 +189,7 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

@@ -23,6 +23,12 @@ const PanelBrowsers = ({
          isShow={isShow}
       >
           <div
+            className="row__pane-topic item__browser"
+            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.STOCK_MARKETS])}
+          >
+            Stock Markets
+          </div>
+          <div
             className="row__pane-topic item__eurostat"
             onClick={onClickDynamic.bind(null, browserConfig[BROWSER.EUROSTAT])}
           >
@@ -40,25 +46,11 @@ const PanelBrowsers = ({
           >
             France Statistics
           </div>
-          {/*
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.YAHOO])}
-          >
-            Yahoo Finance Stocks
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.GOOGLE])}
-          >
-            Google Finance Stocks
-          </div>
-         */}
           <div
             className="row__pane-topic item__quandl"
             onClick={onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])}
           >
-            Stocks By Sectors
+            US Stocks By Sectors
           </div>
           <div
             className="row__pane-topic item__quandl"

@@ -112,7 +112,7 @@ class Futures3Dialog extends Component {
 
   render(){
     const {
-            isShow, caption, onShow,
+            isShow, caption, onShow, onFront,
             futuresURI, msgOnNotSelected,
             isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
           } = this.props
@@ -124,6 +124,7 @@ class Futures3Dialog extends Component {
          isShow={isShow}
          commandButtons={this._commandButtons}
          onShowChart={onShow}
+         onFront={onFront}
          onClose={this._handleClose}
        >
            <ToolbarButtonCircle

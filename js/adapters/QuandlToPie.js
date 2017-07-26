@@ -5,13 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fCreatePieConfig = undefined;
 
-var _lodash = require('lodash.sortby');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
+
+var _AdapterFn = require('./AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 var _Type = require('../constants/Type');
 
@@ -119,12 +119,12 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
   });
 
   var _dataTop1 = _fnCreateTopDonutData({
-    data: (0, _lodash2.default)(_data1, 'y').reverse(),
+    data: _data1.sort(_AdapterFn2.default.compareByY).reverse(),
     bTotal: _bTotal1,
     isPercent: true
   });
   var _dataTop2 = _fnCreateTopDonutData({
-    data: (0, _lodash2.default)(_data2, 'y').reverse(),
+    data: _data2.sort(_AdapterFn2.default.compareByY).reverse(),
     bTotal: _bTotal2
   });
 
@@ -149,12 +149,14 @@ var fCreatePieConfig = exports.fCreatePieConfig = function fCreatePieConfig(json
 
   _QuandlFn2.default.setTitleToConfig(config, option);
 
-  config.chart = {
-    height: _fnCalcPieLegendHeight(_dataTop1.length)
-  };
-  config.valueMoving = (0, _StackedFn.crValueMoving)(_bTotal1, _year1, _bTotal2, _year2);
-  config.zhConfig = (0, _StackedFn.crZhConfig)(option, zhSeriaId);
-  config.info = _QuandlFn2.default.createDatasetInfo(json);
+  Object.assign(config, {
+    chart: {
+      height: _fnCalcPieLegendHeight(_dataTop1.length)
+    },
+    valueMoving: (0, _StackedFn.crValueMoving)(_bTotal1, _year1, _bTotal2, _year2),
+    zhConfig: (0, _StackedFn.crZhConfig)(option, zhSeriaId),
+    info: _QuandlFn2.default.createDatasetInfo(json)
+  });
 
   return { config: config };
 };

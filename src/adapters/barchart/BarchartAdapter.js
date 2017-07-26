@@ -59,7 +59,7 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
   })
 
   ChartConfig.setStockSerias(
-    config, _data, _dataHigh, _dataLow, _dataOpen
+    config, _data, _dataHigh, _dataLow, _dataOpen, chartId
   )
 
   Object.assign(config, {

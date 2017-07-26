@@ -310,7 +310,7 @@ class UNCommodityTradeDialog extends Component {
 
   render(){
     const {
-           isShow, onShow,
+           isShow, onShow, onFront,
            countryURI, countryJsonProp,
            commodityURI, commodityJsonProp,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
@@ -327,6 +327,7 @@ class UNCommodityTradeDialog extends Component {
              isShow={isShow}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
+             onFront={onFront}
              onClose={this._handlerClose}
          >
              <ToolbarButtonCircle

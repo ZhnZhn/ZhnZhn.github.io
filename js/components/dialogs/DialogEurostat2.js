@@ -207,6 +207,7 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           caption = _props.caption,
           isShow = _props.isShow,
           onShow = _props.onShow,
+          onFront = _props.onFront,
           oneCaption = _props.oneCaption,
           oneURI = _props.oneURI,
           oneJsonProp = _props.oneJsonProp,
@@ -227,6 +228,7 @@ var DialogEurostat2 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

@@ -1,6 +1,12 @@
 import { BrowserType, ModalDialog } from './Type';
 
 const BrowserConfig = {
+  [BrowserType.STOCK_MARKETS]: {
+    browserType: BrowserType.STOCK_MARKETS,
+    isDynamic: true,
+    caption: 'Stock Markets',
+    sourceMenuUrl: './data/stock-markets/source-menu.json'
+  },
   [BrowserType.EUROSTAT] : {
     browserType: BrowserType.EUROSTAT,
     isDynamic : true,
@@ -40,7 +46,7 @@ const BrowserConfig = {
   [BrowserType.US_STOCKS] : {
     browserType : BrowserType.US_STOCKS,
     isDynamic : true,
-    caption: 'Stocks by Sectors',
+    caption: 'US Stocks by Sectors',
     sourceMenuUrl: './data/us-stocks/source-menu.json',
     withoutItemCounter : true,
     modalDialogType : ModalDialog.US_STOCK_BY_SECTOR,

@@ -11,32 +11,35 @@ const S = {
 };
 
 const _doVisible = function(arr, keyValue){
-  let index
-    , max = arr.length
-    , i;
-  for (i=0; i<max; i++){
+  let _index, _max = arr.length, i=0;
+  for (; i<_max; i++){
     if (arr[i].key === keyValue){
-      index = i
+      _index = i
       break;
     }
   }
-  return [ ...arr.slice(0, index), ...arr.slice(index+1), arr[index] ];
+  return [ ...arr.slice(0, _index), ...arr.slice(_index+1), arr[_index] ];
 }
 
 const _updateVisible = (state, key, maxDialog) => {
-  const { hmIs } = state;
-  if (!hmIs[key]){
-    let { visibleDialogs } = state;
-    hmIs[key] = true
-    visibleDialogs.push(key)
-    if (visibleDialogs.length > maxDialog){
-      hmIs[visibleDialogs[0]] = false
-      visibleDialogs = visibleDialogs.slice(1)
-    }
+  const { hmIs, visibleDialogs } = state
+      , _keyIndex = visibleDialogs.indexOf(key);
+  if (_keyIndex !== -1) {
+    visibleDialogs.splice(_keyIndex, 1)
+  }
+  visibleDialogs.push(key)
+  hmIs[key] = true
+  if (visibleDialogs.length > maxDialog ){
+    hmIs[visibleDialogs[0]] = false
+    visibleDialogs.splice(0, 1)
   }
 }
 
 class DialogContainer extends Component {
+  static defaultProps = {
+    maxDialog: 3
+  }
+
   constructor(props){
     super()
     this.elHtml = document.getElementsByTagName('html')[0]
@@ -61,7 +64,7 @@ class DialogContainer extends Component {
          this.setState(prevState => {
            const { key, Comp, data } = option
                , { maxDialog } = this.props;
-           _updateVisible(prevState, key, maxDialog)           
+           _updateVisible(prevState, key, maxDialog)
            if (!Comp){
               prevState.compDialogs = _doVisible(prevState.compDialogs, key)
            } else {
@@ -78,13 +81,27 @@ class DialogContainer extends Component {
       const { hmIs } = prevState;
       hmIs[key] = !hmIs[key]
       if (!hmIs[key]) {
-        prevState.visibleDialogs = prevState.visibleDialogs.filter(value => {
-           return value !== key;
-        })
+        const visibleDialogs = prevState.visibleDialogs
+            , _keyIndex = visibleDialogs.indexOf(key);
+        visibleDialogs.splice(_keyIndex, 1)
         this.elHtml.style.cursor = ''
       }
       return prevState;
     })
+  }
+
+  _handleToFront = (key) => {
+    const { visibleDialogs } = this.state;
+    if (visibleDialogs[visibleDialogs.length-1] !== key) {
+      this.setState(prevState => {
+        prevState.compDialogs = _doVisible(prevState.compDialogs, key)
+        const visibleDialogs = prevState.visibleDialogs
+            , _keyIndex = visibleDialogs.indexOf(key);
+        visibleDialogs.splice(_keyIndex, 1)
+        visibleDialogs.push(key)
+        return prevState;
+      })
+    }
   }
 
   _renderDialogs = () => {
@@ -92,10 +109,11 @@ class DialogContainer extends Component {
     return compDialogs.map(Comp => {
        const key = Comp.key;
        return React.cloneElement(Comp, {
-             key : key,
-             isShow  : hmIs[key],
-             optionData: hmData[key],
-             onClose : this._handleToggleDialog.bind(this, key)
+          key: key,
+          isShow: hmIs[key],
+          optionData: hmData[key],
+          onFront: this._handleToFront.bind(this, key),
+          onClose: this._handleToggleDialog.bind(this, key)
        });
     });
   }

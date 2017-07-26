@@ -69,9 +69,17 @@ var S = {
 var ChartToolbar = function (_Component) {
   (0, _inherits3.default)(ChartToolbar, _Component);
 
-  function ChartToolbar() {
+  function ChartToolbar(props) {
     (0, _classCallCheck3.default)(this, ChartToolbar);
-    return (0, _possibleConstructorReturn3.default)(this, (ChartToolbar.__proto__ || Object.getPrototypeOf(ChartToolbar)).apply(this, arguments));
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ChartToolbar.__proto__ || Object.getPrototypeOf(ChartToolbar)).call(this));
+
+    var _props$config = props.config,
+        config = _props$config === undefined ? {} : _props$config,
+        zhFnMomAthConfig = config.zhFnMomAthConfig;
+
+    _this._isMomAthConfig = typeof zhFnMomAthConfig == 'function' ? true : false;
+    return _this;
   }
 
   (0, _createClass3.default)(ChartToolbar, [{
@@ -84,12 +92,13 @@ var ChartToolbar = function (_Component) {
     value: function render() {
       var _props = this.props,
           style = _props.style,
-          _props$config = _props.config,
-          config = _props$config === undefined ? {} : _props$config,
+          _props$config2 = _props.config,
+          config = _props$config2 === undefined ? {} : _props$config2,
           onAddSma = _props.onAddSma,
           onRemoveSeries = _props.onRemoveSeries,
           onAddMfi = _props.onAddMfi,
           onRemoveMfi = _props.onRemoveMfi,
+          onAddMomAth = _props.onAddMomAth,
           onClickLegend = _props.onClickLegend,
           onClick2H = _props.onClick2H,
           onAddToWatch = _props.onAddToWatch,
@@ -116,7 +125,9 @@ var ChartToolbar = function (_Component) {
           onRemoveSma: onRemoveSeries,
           isMfi: config.zhIsMfi,
           onAddMfi: onAddMfi,
-          onRemoveMfi: onRemoveMfi
+          onRemoveMfi: onRemoveMfi,
+          isMomAth: this._isMomAthConfig,
+          onAddMomAth: onAddMomAth
         })
       ) : undefined;
 

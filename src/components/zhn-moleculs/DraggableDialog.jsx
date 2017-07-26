@@ -82,7 +82,7 @@ class DraggableDialog extends Component {
   render(){
     const {
            isShow, caption, children, commandButtons,
-           onShowChart, onClose
+           onShowChart, onFront, onClose
          } = this.props
         , _styleShow = isShow ? {display: 'block'} : {display: 'none'}
         , _classShow = isShow ? 'show-popup' : undefined;
@@ -91,6 +91,7 @@ class DraggableDialog extends Component {
            ref={c => this.rootDivEl = c}
            className={_classShow}
            style={Object.assign({}, styles.rootDiv, _styleShow)}
+           onClick={onFront}
       >
         <div style={styles.captionDiv}>
           <span className="not-selected">

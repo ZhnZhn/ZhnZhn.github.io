@@ -124,6 +124,7 @@ var DraggableDialog = function (_Component) {
           children = _props.children,
           commandButtons = _props.commandButtons,
           onShowChart = _props.onShowChart,
+          onFront = _props.onFront,
           onClose = _props.onClose,
           _styleShow = isShow ? { display: 'block' } : { display: 'none' },
           _classShow = isShow ? 'show-popup' : undefined;
@@ -135,7 +136,8 @@ var DraggableDialog = function (_Component) {
             return _this2.rootDivEl = c;
           },
           className: _classShow,
-          style: Object.assign({}, styles.rootDiv, _styleShow)
+          style: Object.assign({}, styles.rootDiv, _styleShow),
+          onClick: onFront
         },
         _react2.default.createElement(
           'div',

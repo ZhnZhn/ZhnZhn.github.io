@@ -77,20 +77,6 @@ const menuQuandl = [
        { id : Quandl.BALTIC_INDICES }
      ]
   },{
-     caption : 'World Stocks',
-     items : [
-       { id : Quandl.EURONEXT_STOCK },
-       { id : Quandl.TOKIO_STOCK },
-       { id : Quandl.WIKI_STOCK },
-       { id : Quandl.FREE_US_FUNDAMENTAL, isNew: true },
-       { id : Quandl.BARCHART_STOCK, isNew: true },
-       { id : Quandl.ALPHA_INDICATOR, isNew: true },
-       { id : Quandl.ALPHA_SECTOR, isNew: true },
-       { id : Quandl.ALPHA_INTRADAY, isNew: true },
-       { id : Quandl.NIKKEI },
-       { id : Quandl.UNICORN_RESEARCH }
-     ]
-  },{
     caption : 'Futures', isInitClose : true,
     items : [
       { id : Quandl.CHINA_FINANCE_FUTURE},

@@ -17,13 +17,13 @@ import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const PREV_BUILD = '18-07-2017';
+const PREV_BUILD = '26-07-2017';
 
 class AppErc extends Component {
 
   componentDidMount(){
       LocationSearch.load(ComponentActions);
-      fetch('./data/build.json')
+      fetch('./data/build.json', {cache: "no-cache"})
         .then(res => res.json())
         .then(json => {
           const { build='' } = json;

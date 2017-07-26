@@ -49,6 +49,14 @@ var PanelBrowsers = function PanelBrowsers(_ref) {
       _react2.default.createElement(
         'div',
         {
+          className: 'row__pane-topic item__browser',
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.STOCK_MARKETS])
+        },
+        'Stock Markets'
+      ),
+      _react2.default.createElement(
+        'div',
+        {
           className: 'row__pane-topic item__eurostat',
           onClick: onClickDynamic.bind(null, browserConfig[BROWSER.EUROSTAT])
         },
@@ -76,7 +84,7 @@ var PanelBrowsers = function PanelBrowsers(_ref) {
           className: 'row__pane-topic item__quandl',
           onClick: onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])
         },
-        'Stocks By Sectors'
+        'US Stocks By Sectors'
       ),
       _react2.default.createElement(
         'div',

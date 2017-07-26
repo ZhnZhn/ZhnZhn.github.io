@@ -2,9 +2,12 @@
 import ChartConfig from '../../charts/ChartConfig'
 import AdapterFn from '../AdapterFn'
 
+import {
+  fnAddSeriesSma, fnRemoveSeries
+} from '../IndicatorSma';
+
 import Chart from '../../charts/Chart'
 import Tooltip from '../../charts/Tooltip'
-//import ChartFn from '../../charts/ChartFn'
 
 const C = {
   TIME_START_DAY: '09:30:00',
@@ -41,13 +44,13 @@ const _fMarkerColor = (date) => {
   return { marker, color };
 }
 
-const _createSeriaData = (json, option, config) => {
+const _createSeriaData = (json, option, config, chartId) => {
   const { interval } = option
   , _propName = `Time Series (${interval})`
   , _value = json[_propName]
   , _dateKeys = ( _value)
        ? Object.keys(_value).sort()
-       : []
+       : [];
   let i = 0, _max = _dateKeys.length
   , _data = []
   , _dataVolume = [], _dataVolumeColumn = []
@@ -92,7 +95,7 @@ const _createSeriaData = (json, option, config) => {
   }
 
   ChartConfig.setStockSerias(
-    config, _data, _dataHigh, _dataLow, _dataOpen
+    config, _data, _dataHigh, _dataLow, _dataOpen, chartId
   )
   ChartConfig.setMinMax(config, _minClose, _maxClose)
 
@@ -103,7 +106,6 @@ const _createSeriaData = (json, option, config) => {
   })
   config.zhVolumeConfig.series[1].tooltip = Chart.fTooltip(Tooltip.fnVolumePointFormatterT)
 
-   //console.log(_data)
 }
 
 const AlphaIntradayAdapter = {
@@ -112,29 +114,28 @@ const AlphaIntradayAdapter = {
         , { value, interval } = option
         , _chartId = value;
 
-    _createSeriaData(json, option, config );
-
-    //console.log(json)
-
+    _createSeriaData(json, option, config, _chartId );
     Object.assign(config, {
       title: Chart.fTitle({
         text: value,
-        y: Chart.STACKED_TITLE_Y }),
+        y: Chart.STACKED_TITLE_Y
+      }),
       subtitle: Chart.fSubtitle({
         text: `Time Series (${interval})`,
-        y:Chart.STACKED_SUBTITLE_Y
+        y: Chart.STACKED_SUBTITLE_Y
       }),
-      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatterT)
+      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatterT),
+      zhConfig: {
+        dataSource: "Alpha Vantage",
+        id: _chartId,
+        key: _chartId,
+        isWithLegend: true,
+        legend: AdapterFn.stockSeriesLegend()
+      },
+      zhFnAddSeriesSma: fnAddSeriesSma,
+      zhFnRemoveSeries: fnRemoveSeries
     })
-
     config.chart.spacingTop = 25
-    config.zhConfig = {
-      dataSource: "Alpha Vantage",
-      id: _chartId,
-      key: _chartId,
-      isWithLegend: true,
-      legend: AdapterFn.stockSeriesLegend()
-    }
 
     return {
       config,

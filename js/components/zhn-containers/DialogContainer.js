@@ -24,6 +24,8 @@ var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
+var _class, _temp;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -41,34 +43,35 @@ var S = {
 };
 
 var _doVisible = function _doVisible(arr, keyValue) {
-  var index = void 0,
-      max = arr.length,
-      i = void 0;
-  for (i = 0; i < max; i++) {
+  var _index = void 0,
+      _max = arr.length,
+      i = 0;
+  for (; i < _max; i++) {
     if (arr[i].key === keyValue) {
-      index = i;
+      _index = i;
       break;
     }
   }
-  return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), (0, _toConsumableArray3.default)(arr.slice(index + 1)), [arr[index]]);
+  return [].concat((0, _toConsumableArray3.default)(arr.slice(0, _index)), (0, _toConsumableArray3.default)(arr.slice(_index + 1)), [arr[_index]]);
 };
 
 var _updateVisible = function _updateVisible(state, key, maxDialog) {
-  var hmIs = state.hmIs;
+  var hmIs = state.hmIs,
+      visibleDialogs = state.visibleDialogs,
+      _keyIndex = visibleDialogs.indexOf(key);
 
-  if (!hmIs[key]) {
-    var visibleDialogs = state.visibleDialogs;
-
-    hmIs[key] = true;
-    visibleDialogs.push(key);
-    if (visibleDialogs.length > maxDialog) {
-      hmIs[visibleDialogs[0]] = false;
-      visibleDialogs = visibleDialogs.slice(1);
-    }
+  if (_keyIndex !== -1) {
+    visibleDialogs.splice(_keyIndex, 1);
+  }
+  visibleDialogs.push(key);
+  hmIs[key] = true;
+  if (visibleDialogs.length > maxDialog) {
+    hmIs[visibleDialogs[0]] = false;
+    visibleDialogs.splice(0, 1);
   }
 };
 
-var DialogContainer = function (_Component) {
+var DialogContainer = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(DialogContainer, _Component);
 
   function DialogContainer(props) {
@@ -104,13 +107,28 @@ var DialogContainer = function (_Component) {
 
         hmIs[key] = !hmIs[key];
         if (!hmIs[key]) {
-          prevState.visibleDialogs = prevState.visibleDialogs.filter(function (value) {
-            return value !== key;
-          });
+          var visibleDialogs = prevState.visibleDialogs,
+              _keyIndex = visibleDialogs.indexOf(key);
+          visibleDialogs.splice(_keyIndex, 1);
           _this.elHtml.style.cursor = '';
         }
         return prevState;
       });
+    };
+
+    _this._handleToFront = function (key) {
+      var visibleDialogs = _this.state.visibleDialogs;
+
+      if (visibleDialogs[visibleDialogs.length - 1] !== key) {
+        _this.setState(function (prevState) {
+          prevState.compDialogs = _doVisible(prevState.compDialogs, key);
+          var visibleDialogs = prevState.visibleDialogs,
+              _keyIndex = visibleDialogs.indexOf(key);
+          visibleDialogs.splice(_keyIndex, 1);
+          visibleDialogs.push(key);
+          return prevState;
+        });
+      }
     };
 
     _this._renderDialogs = function () {
@@ -125,6 +143,7 @@ var DialogContainer = function (_Component) {
           key: key,
           isShow: hmIs[key],
           optionData: hmData[key],
+          onFront: _this._handleToFront.bind(_this, key),
           onClose: _this._handleToggleDialog.bind(_this, key)
         });
       });
@@ -161,7 +180,8 @@ var DialogContainer = function (_Component) {
     }
   }]);
   return DialogContainer;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  maxDialog: 3
+}, _temp);
 exports.default = DialogContainer;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-containers\DialogContainer.js.map

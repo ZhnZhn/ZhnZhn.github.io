@@ -3,6 +3,11 @@ import Big from 'big.js';
 
 import ChartConfig from '../charts/ChartConfig';
 
+const C = {
+  ATH_UP: 'rgba(76, 175, 80, 0.75)',
+  ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
+}
+
 export const fnAddSeriesSma = function(option){
   const { chart, id, period, isPlus, plus } = option
       , parentId = chart.options.zhConfig.id
@@ -149,8 +154,33 @@ export const fnGetConfigMfi = function(chart, period, id){
            : ''
        , config = ChartConfig.fIndicatorMfiConfig(
            id, parentId, id + titleNotFullPoint, dataMcad
-         ) ;
-
-
+         );
    return config;
+}
+
+export const fnMomAthConfig = function(chart, id) {
+  const data = chart.options.zhPoints
+      , _dataMom = [], _dataAth = [], _dataSum = [];
+  let i = 1, max=data.length
+    , point, prevPoint
+    , x , mom, ath, co;
+
+  for (;i<max;i++) {
+    prevPoint = data[i-1]
+    point = data[i]
+    x = _fnConvertToUTC(point[0])
+    mom = point[4] - prevPoint[4]
+    _dataMom.push({ x: x, y: mom })
+    ath = parseFloat((point[1] - prevPoint[4]).toFixed(4))
+    _dataAth.push({
+      x: x, y: ath,
+      color: ath > 0 ? C.ATH_UP : C.ATH_DOWN
+    })
+    co = parseFloat((point[4] - point[1]).toFixed(4))
+    _dataSum.push({ x: x, y: co })
+  }
+
+  return ChartConfig.fnMomAthConfig(
+            _dataMom, _dataAth, _dataSum, id
+         );
 }

@@ -1,0 +1,202 @@
+{
+  "menu": [
+    { "caption": "Quandl",
+      "items": [
+        { "id": "SM_EURONEXT" },
+        { "id": "SM_TOKYO" },
+        { "id": "SM_WIKI" },
+        { "id": "SM_FREE_US_FUNDAMENTALS" , "isNew": true },
+        { "id": "SM_NIKKEI" },
+        { "id": "SM_UNICORN_RESEARCH" }
+      ]
+    },{
+      "caption": "Barchart",
+      "items" : [
+        { "id": "SM_B_STOCK", "isNew": true }
+      ]
+    },{
+      "caption": "Alpha Vantage",
+      "items" : [
+        { "id": "SM_A_INDICATOR", "isNew": true },
+        { "id": "SM_A_INTRADAY", "isNew": true },
+        { "id": "SM_A_SECTOR", "isNew": true }
+      ]
+    }
+  ],
+  "items" : {
+    "SM_EURONEXT" : {
+        "type" : "SM_EURONEXT",
+        "menuTitle" : "Euronext",
+        "dialogCaption" : "Euronext Stock Prices",
+        "chartContainerCaption" : "Quandl Euronext Stock Prices",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/euronext.html",
+          "optionURI" : "./data/quandl/euronext.json",
+          "optionsJsonProp" : "tickets",
+          "valueFn" : "RPrefixOne",
+          "valueFnPrefix" : "EURONEXT",
+          "linkFn" : "EURONEXT",
+          "loadId" : "Q",
+          "columnName" : "Last",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Last", "Volume" ],
+          "dataSource" : "Euronext Stock Price (Code: EURONEXT)"
+        }
+    },
+    "SM_TOKYO" : {
+        "type" : "SM_TOKYO",
+        "menuTitle" : "Tokyo",
+        "dialogCaption" : "Tokyo Stock Prices",
+        "chartContainerCaption" : "Quandl Tokyo Stock Prices",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/tokyo.html",
+          "optionURI" : "./data/quandl/tokyo.json",
+          "optionsJsonProp" : "tickets",
+          "valueFn" : "RPrefixOne",
+          "valueFnPrefix" : "TSE",
+          "loadId" : "Q",
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume"],
+          "dataSource" : "Tokyo Stock Exchange (Code: TSE)"
+        }
+    },
+    "SM_WIKI" : {
+        "type" : "SM_WIKI",
+        "menuTitle" : "Wiki: Nasdaq, Nyse",
+        "dialogCaption" : "Wiki Stock Prices",
+        "chartContainerCaption" : "Quandl Wiki Stock Prices",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/wiki.html",
+          "isTransform" : true,
+          "optionURI" : "./data/quandl/wiki.json",
+          "optionsJsonProp" : "tickets",
+          "valueFn" : "RPrefixOne",
+          "valueFnPrefix" : "WIKI",
+          "linkFn" : "NASDAQ",
+          "loadId" : "Q",
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adj. Close" ],
+          "dataSource" : "Wiki EOD Stock Prices (Code: WIKI)"
+        }
+    },
+    "SM_FREE_US_FUNDAMENTALS": {
+        "type" : "SM_FREE_US_FUNDAMENTALS",
+        "menuTitle" : "Free US Fundamentals",
+        "dialogCaption" : "Free US Fundamentals",
+        "chartContainerCaption" : "Quandl Free US Fundamentals",
+        "dialogType" : "DialogType5",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/us-fundamentals.html",
+          "nInitFromDate" : 7,
+          "oneCaption" : "Stock",
+          "oneURI" : "./data/quandl/wiki.json",
+          "oneJsonProp" : "tickets",
+          "twoCaption" : "Group",
+          "twoURI" : "./data/quandl/us-fundamental-indicators.json",
+          "twoJsonProp" : "groups",
+          "threeCaption" : "Indicator",
+          "fnValueType" : "TreeItem",
+          "valueFn" : "RPrefixOneTwoA",
+          "valueFnPrefix" : "SF0",
+          "loadId" : "Q",
+          "isPremium" : true,
+          "dataSource" : "Free US Fundamentals (Code: SF0)"
+        }
+    },
+    "SM_NIKKEI" : {
+        "type" : "SM_NIKKEI",
+        "menuTitle" : "Nikkei",
+        "dialogCaption" : "Nikkei",
+        "chartContainerCaption" : "Quandl Nikkei",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/nikkei.html",
+          "optionURI" : "./data/quandl/nikkei.json",
+          "optionsJsonProp" : "indexes",
+          "valueFn" : "RPrefixOne",
+          "valueFnPrefix" : "NIKKEI",
+          "loadId" : "Q",
+          "dataSource" : "Nikkei (Code: NIKKEI)"
+        }
+    },
+    "SM_UNICORN_RESEARCH" : {
+      "type" : "SM_UNICORN_RESEARCH",
+      "menuTitle" : "Unicorn Research",
+      "dialogCaption" : "Unicorn Research Corporation",
+      "chartContainerCaption" : "Quandl Unicorn Research Corporation",
+      "dialogType" : "DialogType4A",
+      "dialogProps" : {
+        "descrUrl" : "./data/quandl/unicorn-research.html",
+        "oneCaption" : "Exchange",
+        "oneURI" : "./data/quandl/unicorn-research.json",
+        "oneJsonProp" : "exchanges",
+        "twoCaption" : "Metric",
+        "valueFn" : "ROneDashTwo",
+        "loadId" : "Q",
+        "dataSource" : "Unicorn Research Corporation (Code: URC)"
+      }
+    },
+    "SM_B_STOCK" : {
+        "type" : "SM_B_STOCK",
+        "menuTitle" : "Nasdaq, Nyse",
+        "dialogCaption" : "Barchart Stock Prices",
+        "chartContainerCaption" : "Barchart Stock Prices",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/barchart.html",
+          "optionURI" : "./data/quandl/wiki.json",
+          "optionsJsonProp" : "tickets",
+          "isWithInputStock": true,
+          "valueFn" : "ROne",
+          "linkFn" : "NASDAQ",
+          "loadId" : "B",
+          "columnName" : "Close",
+          "seriaColumnNames" : [ "Open", "High", "Low", "Volume", "Adj. Close" ],
+          "dataSource" : "Barchart Market Data Solutions"
+        }
+    },
+    "SM_A_INDICATOR" : {
+        "type" : "SM_A_INDICATOR",
+        "menuTitle" : "Indicators",
+        "dialogCaption" : "Alpha Indicators",
+        "chartContainerCaption" : "Alpha Indicators",
+        "dialogType" : "AlphaIndicatorDialog",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/alpha-vantage.html",
+          "oneURI" : "./data/quandl/alpha-indicators.json",
+          "oneJsonProp" : "indicators",
+          "oneCaption" : "Indicators",
+          "valueFn" : "ROne",
+          "loadId" : "AL",
+          "columnName" : "Close",
+          "dataSource" : "Alpha Vantage"
+        }
+    },
+    "SM_A_INTRADAY" : {
+        "type" : "SM_A_INTRADAY",
+        "menuTitle" : "Intraday",
+        "dialogCaption" : "Alpha Intraday",
+        "chartContainerCaption" : "Alpha Intraday",
+        "dialogType" : "AlphaIntradayDialog",
+        "dialogProps" : {
+          "descrUrl" : "./data/quandl/alpha-vantage.html",
+          "oneURI" : "./data/quandl/alpha-indicators.json",
+          "oneJsonProp" : "indicators",
+          "oneCaption" : "Indicators",
+          "valueFn" : "ROne",
+          "loadId" : "AL",
+          "columnName" : "Close",
+          "dataSource" : "Alpha Vantage"
+        }
+     },
+     "SM_A_SECTOR" : {
+         "type" : "SM_A_SECTOR",
+         "menuTitle" : "Performance by Sector",
+         "dialogCaption" : "Alpha Sector",
+         "chartContainerCaption" : "Alpha Sector: S&P 500",
+         "dialogType" : "AlphaSectorDialog",
+         "dialogProps" : {
+           "descrUrl" : "./data/quandl/alpha-vantage.html",
+           "loadId" : "AL_S",
+           "dataSource" : "Alpha Vantage"
+         }
+     }
+   }
+}

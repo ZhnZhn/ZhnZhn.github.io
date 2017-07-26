@@ -14,6 +14,17 @@ var _Color2 = _interopRequireDefault(_Color);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _compareArrByIndex = function _compareArrByIndex(index) {
+  return function (arrA, arrB) {
+    if (arrA[index] < arrB[index]) return -1;else if (arrA[index] === arrB[index]) return 0;else return 1;
+  };
+};
+var _compareByTwoProp = function _compareByTwoProp(propName1, propName2) {
+  return function (a, b) {
+    if (a[propName1] < b[propName1]) return -1;else if (a[propName1] > b[propName1]) return 1;else if (a[propName2] < b[propName2]) return -1;else if (a[propName2] > a[propName2]) return 1;else return 0;
+  };
+};
+
 var AdapterFn = {
   ymdToUTC: function ymdToUTC(date) {
     var _arr = date.split('-');
@@ -81,7 +92,14 @@ var AdapterFn = {
   },
   stockSeriesLegend: function stockSeriesLegend() {
     return [this.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), this.legendItem(1, _Color2.default.S_HIGH, 'High'), this.legendItem(2, _Color2.default.S_LOW, 'Low'), this.legendItem(3, _Color2.default.S_OPEN, 'Open')];
-  }
+  },
+
+
+  compareByDate: _compareArrByIndex(0),
+  compareByY: _compareArrByIndex('y'),
+  compareByValue: _compareArrByIndex('value'),
+  compareByValueId: _compareByTwoProp('value', 'id')
+
 };
 
 exports.default = AdapterFn;

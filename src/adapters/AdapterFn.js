@@ -3,6 +3,19 @@ import Big from 'big.js'
 
 import C from '../constants/Color'
 
+const _compareArrByIndex = index => (arrA, arrB) => {
+  if (arrA[index] < arrB[index]) return -1;
+  else if (arrA[index] === arrB[index]) return 0;
+  else return 1;
+}
+const _compareByTwoProp = (propName1, propName2) => (a, b) => {
+  if (a[propName1] < b[propName1]) return -1;
+  else if (a[propName1] > b[propName1]) return 1;
+  else if (a[propName2] < b[propName2]) return -1;
+  else if (a[propName2] > a[propName2]) return 1;
+  else return 0;
+}
+
 const AdapterFn = {
   ymdToUTC(date) {
     const _arr = date.split('-');
@@ -77,7 +90,12 @@ const AdapterFn = {
       this.legendItem(2, C.S_LOW, 'Low'),
       this.legendItem(3, C.S_OPEN, 'Open')
     ];
-  }
+  },
+
+  compareByDate: _compareArrByIndex(0),
+  compareByY: _compareArrByIndex('y'),
+  compareByValue: _compareArrByIndex('value'),
+  compareByValueId: _compareByTwoProp('value', 'id')
 
 }
 

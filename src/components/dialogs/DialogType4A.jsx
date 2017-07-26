@@ -91,7 +91,7 @@ class DialogType4A extends Component {
   render(){
     const {
            caption, oneCaption, oneURI, oneJsonProp, twoCaption, msgOnNotSelected,
-           isShow, onShow,
+           isShow, onShow, onFront,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
@@ -104,6 +104,7 @@ class DialogType4A extends Component {
            isShow={isShow}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
+           onFront={onFront}
            onClose={this._handleClose}
          >
              <ToolbarButtonCircle

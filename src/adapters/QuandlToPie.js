@@ -1,7 +1,8 @@
-import sortBy from 'lodash.sortby';
+
 import Big from 'big.js';
 
-import {ChartType} from '../constants/Type';
+import AdapterFn from './AdapterFn';
+import { ChartType } from '../constants/Type';
 import Chart from '../charts/Chart';
 import ChartConfig from '../charts/ChartConfig';
 
@@ -89,12 +90,12 @@ export const fCreatePieConfig = function(json, option){
    });
 
    const _dataTop1 = _fnCreateTopDonutData({
-     data : sortBy(_data1, 'y').reverse(),
+     data: _data1.sort(AdapterFn.compareByY).reverse(),
      bTotal : _bTotal1,
      isPercent : true
    });
    const _dataTop2 = _fnCreateTopDonutData({
-     data: sortBy(_data2, 'y').reverse(),
+     data: _data2.sort(AdapterFn.compareByY).reverse(),
      bTotal: _bTotal2
    });
 
@@ -124,12 +125,14 @@ export const fCreatePieConfig = function(json, option){
 
    QuandlFn2.setTitleToConfig(config, option);
 
-   config.chart = {
-     height : _fnCalcPieLegendHeight(_dataTop1.length)
-   }
-   config.valueMoving = crValueMoving(_bTotal1, _year1, _bTotal2, _year2)
-   config.zhConfig = crZhConfig(option, zhSeriaId)
-   config.info = QuandlFn2.createDatasetInfo(json)
+   Object.assign(config, {
+     chart: {
+       height: _fnCalcPieLegendHeight(_dataTop1.length)
+     },
+     valueMoving: crValueMoving(_bTotal1, _year1, _bTotal2, _year2),
+     zhConfig: crZhConfig(option, zhSeriaId),
+     info: QuandlFn2.createDatasetInfo(json)
+   })
 
-   return {config};
+   return { config };
 }

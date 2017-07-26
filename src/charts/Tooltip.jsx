@@ -10,8 +10,6 @@ const SPARKLINES_SUFFIX_ID = 'sparklines'
     , WIDTH_TOTAL = 50
     , WIDTH_SPARK = 20 + 80 + 16;
 
-//const Tooltip = {};
-
 
 const _fnNumberFormat = function(value){
   const arrSplit = (value+'').split('.')
@@ -219,18 +217,22 @@ const _fnBasePointFormatter = function( option ){
          } = option
        , point = this
        , series = point.series
-       , id = series.options.zhSeriaId
-       //, date = Highcharts.dateFormat('%A, %b %d, %Y', point.x)
        , date = fnDateFormat(point.x)
-       , color = (isWithColor && series.index !==0 )
-            ? series.color
-            : undefined
-       , valueText = (isWithValueText) ? series.userOptions.zhValueText : null
-       , value = (isWithValue) ? _fnNumberFormat(point.y) : null;
+       , color = isWithColor
+           ? point.color || series.color
+           : undefined
+       , { zhValueText, name='Value', id, zhSeriaId } = series.userOptions
+       , _id = zhSeriaId || id || 'TP'
+       , valueText = isWithValueText
+            ? zhValueText || name
+            : 'Value'
+       , value = isWithValue
+           ? _fnNumberFormat(point.y)
+           : null;
 
-       onAfterRender(id, point)
+       onAfterRender(_id, point)
 
-       return fnTemplate({ date, id, color, valueText, value, point });
+       return fnTemplate({ id: _id, date, color, valueText, value, point });
   }
 }
 

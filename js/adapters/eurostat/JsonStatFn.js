@@ -12,9 +12,9 @@ var _jsonstat = require('jsonstat');
 
 var _jsonstat2 = _interopRequireDefault(_jsonstat);
 
-var _lodash = require('lodash.sortby');
+var _AdapterFn = require('../AdapterFn');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 var _fnStyle = require('../../utils/fnStyle');
 
@@ -137,8 +137,10 @@ var JsonStatFn = {
         sGeo = _JsonStatFn$createGeo.sGeo;
 
     return _fnFetchHmIdCountry().then(function () {
-      return (0, _fnStyle.Box)(_combineToArr(dGeo.id, sGeo)).map(function (arr) {
-        return (0, _lodash2.default)(arr, ['value', 'id']);
+      return (0, _fnStyle.Box)(_combineToArr(dGeo.id, sGeo))
+      //.map( (arr) => sortBy(arr, ['value', 'id']))
+      .map(function (arr) {
+        return arr.sort(_AdapterFn2.default.compareByValueId);
       }).fold(_splitForConfig);
     });
   },

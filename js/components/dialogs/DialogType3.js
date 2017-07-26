@@ -174,6 +174,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           caption = _props.caption,
           isShow = _props.isShow,
           onShow = _props.onShow,
+          onFront = _props.onFront,
           optionURI = _props.optionURI,
           optionsJsonProp = _props.optionsJsonProp,
           _props$itemCaption = _props.itemCaption,
@@ -197,6 +198,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           isShow: isShow,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
+          onFront: onFront,
           onClose: this._handleClose
         },
         _react2.default.createElement(_ToolbarButtonCircle2.default, {

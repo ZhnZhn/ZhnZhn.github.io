@@ -68,8 +68,11 @@ class AreaChartItem extends Component {
 
     const { config={}, caption='' } = props
         , { zhConfig } = config
-        , { dataSource='', itemCaption } = zhConfig
+        , { dataSource='', itemCaption, id } = zhConfig
         , _itemCaption = (itemCaption) ? itemCaption : caption;
+
+    this._chartId = id
+    this._crMomAthConfig = config.zhFnMomAthConfig
 
     this._dataSourceEl = (
        <div style={styles.dataSource}>
@@ -215,6 +218,11 @@ class AreaChartItem extends Component {
     })
     this.setState({mfiConfigs: this.state.mfiConfigs})
   }
+  _handleAddMomAth = () => {
+     const config = this._crMomAthConfig(this.mainChart, this._chartId);     
+     this.state.mfiConfigs.push({config, id: 'MOM_ATH'})
+     this.setState({ mfiConfigs: this.state.mfiConfigs })
+  }
 
   _handleClickConfig = () => {
     const { caption, onShowConfigDialog } = this.props
@@ -247,6 +255,7 @@ class AreaChartItem extends Component {
              onRemoveSeries={this._handleRemoveSeries}
              onAddMfi={this._handlerAddMfi}
              onRemoveMfi={this._handlerRemoveMfi}
+             onAddMomAth={this._handleAddMomAth}
              onClickLegend={this._handlerClickLegend}
              onClick2H={this._handlerClick2H}
              onAddToWatch={this._handlerAddToWatch}
@@ -303,7 +312,7 @@ class AreaChartItem extends Component {
   }
 
   _renderIndicatorCharts = (arrConfigs) => {
-    const _indicatorCharts = arrConfigs.map((objConfig, index) => {
+    const _indicatorCharts = arrConfigs.map(objConfig => {
       const { config, id } = objConfig;
       return (
         <ShowHide isShow={true} key={id}>

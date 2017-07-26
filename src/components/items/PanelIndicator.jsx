@@ -15,6 +15,12 @@ const STYLE = {
     fontWeight : 'bold',
     width : '48px'
   },
+  MOM_ATH: {
+    display : 'inline-block',
+    color : 'black',
+    fontWeight : 'bold',
+    paddingRight: '6px'
+  },
   ROW : {
     paddingTop: '5px'
   },
@@ -34,13 +40,27 @@ class PanelIndicator extends Component {
     onAddSma: PropTypes.func,
     onRemoveSma: PropTypes.func,
     onAddMfi: PropTypes.func,
-    onRemoveMfi: PropTypes.func
+    onRemoveMfi: PropTypes.func,
+    isMomAth: PropTypes.bool,
+    onAddMomAth: PropTypes.func,
   }
 
-  state = {
-    plusSma: 5,
-    descr : [],
-    mfiDescrs : []
+
+  constructor(props){
+    super()
+    const { isMomAth } = props;
+    this._divMomAth = isMomAth ? (
+      <div>
+        <span style={STYLE.MOM_ATH}>MOM(1) & ATH</span>
+        <SvgPlus onClick={this._handleAddMomAth.bind(this)} />
+      </div>
+    ) : null;
+
+    this.state = {
+      plusSma: 5,
+      descr : [],
+      mfiDescrs : []
+    }
   }
 
   _checkIfAlreadyAdded = (arrObj, id) => {
@@ -109,6 +129,10 @@ class PanelIndicator extends Component {
     }
   }
 
+  _handleAddMomAth = () => {  
+    this.props.onAddMomAth()
+  }
+
   _renderIndicators = () => {
     const _descr = this.state.descr.map((descr, index) => {
       const {id, color} = descr;
@@ -147,7 +171,7 @@ class PanelIndicator extends Component {
     )
   }
 
-  render(){
+ render(){
     const { rootStyle, isMfi } = this.props
         , { plusSma } = this.state;
 
@@ -164,6 +188,7 @@ class PanelIndicator extends Component {
         {this._renderMfi()}
       </div>
     ) : null;
+
 
     return (
       <SubPanel style={rootStyle}>
@@ -192,6 +217,7 @@ class PanelIndicator extends Component {
         </div>
         {this._renderIndicators()}
         {_mfiDom}
+        {this._divMomAth}
       </SubPanel>
     );
   }

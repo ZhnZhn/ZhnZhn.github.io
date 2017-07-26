@@ -14,6 +14,7 @@ var _crDefault = function _crDefault(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
+      hasSecondYAxis = options.hasSecondYAxis,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : undefined;
 
   return {
@@ -25,7 +26,8 @@ var _crDefault = function _crDefault(props, options) {
     title: one.caption + ':' + two.caption,
     subtitle: three.caption,
     dataSource: dataSource,
-    isPremium: isPremium
+    isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis
   };
 };
 
@@ -40,6 +42,7 @@ var _crTreeItem = function _crTreeItem(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
+      hasSecondYAxis = options.hasSecondYAxis,
       _value = typeof fnValue === 'function' ? fnValue(one.value, three.value) : undefined;
 
   return {
@@ -51,7 +54,8 @@ var _crTreeItem = function _crTreeItem(props, options) {
     title: one.caption + ':' + two.caption,
     subtitle: three.caption,
     dataSource: dataSource,
-    isPremium: isPremium
+    isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis
   };
 };
 
@@ -66,6 +70,7 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
       three = options.three,
       fromDate = options.fromDate,
       toDate = options.toDate,
+      hasSecondYAxis = options.hasSecondYAxis,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value, three.value) : undefined;
 
   return {
@@ -77,7 +82,8 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
     title: two.caption + ' : ' + three.caption,
     subtitle: one.caption,
     dataSource: dataSource,
-    isPremium: isPremium
+    isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis
   };
 };
 

@@ -52,6 +52,12 @@ var STYLE = {
     fontWeight: 'bold',
     width: '48px'
   },
+  MOM_ATH: {
+    display: 'inline-block',
+    color: 'black',
+    fontWeight: 'bold',
+    paddingRight: '6px'
+  },
   ROW: {
     paddingTop: '5px'
   },
@@ -67,22 +73,12 @@ var STYLE = {
 var PanelIndicator = function (_Component) {
   (0, _inherits3.default)(PanelIndicator, _Component);
 
-  function PanelIndicator() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function PanelIndicator(props) {
     (0, _classCallCheck3.default)(this, PanelIndicator);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = (0, _possibleConstructorReturn3.default)(this, (PanelIndicator.__proto__ || Object.getPrototypeOf(PanelIndicator)).call(this));
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = PanelIndicator.__proto__ || Object.getPrototypeOf(PanelIndicator)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      plusSma: 5,
-      descr: [],
-      mfiDescrs: []
-    }, _this._checkIfAlreadyAdded = function (arrObj, id) {
+    _this._checkIfAlreadyAdded = function (arrObj, id) {
       var result = arrObj.find(function (obj) {
         return obj.id === id;
       });
@@ -91,7 +87,9 @@ var PanelIndicator = function (_Component) {
       } else {
         return true;
       }
-    }, _this._handleAddSma = function (ev, isPlus) {
+    };
+
+    _this._handleAddSma = function (ev, isPlus) {
       var period = isPlus ? _this.inputSmaPlus.getValue() : _this.inputSmaComp.getValue(),
           plus = isPlus ? _this.inputPlusSma.getValue() : undefined,
           descr = _this.state.descr,
@@ -112,20 +110,26 @@ var PanelIndicator = function (_Component) {
           }
         })();
       }
-    }, _this._handleRemoveSma = function (id) {
+    };
+
+    _this._handleRemoveSma = function (id) {
       if (_this.props.onRemoveSma(id)) {
         _this.state.descr = _this.state.descr.filter(function (descr) {
           return descr.id !== id;
         });
         _this.setState({ descr: _this.state.descr });
       }
-    }, _this._handleRemoveMfi = function (id) {
+    };
+
+    _this._handleRemoveMfi = function (id) {
       _this.props.onRemoveMfi(id);
       _this.state.mfiDescrs = _this.state.mfiDescrs.filter(function (descr) {
         return descr.id !== id;
       });
       _this.setState({ mfiDescrs: _this.state.mfiDescrs });
-    }, _this._handleAddMfi = function () {
+    };
+
+    _this._handleAddMfi = function () {
       var mfiDescrs = _this.state.mfiDescrs,
           _value = _this.inputMfiComp.getValue(),
           _id = 'MFI(' + _value + ')';
@@ -139,7 +143,13 @@ var PanelIndicator = function (_Component) {
         });
         _this.setState({ mfiDescrs: mfiDescrs });
       }
-    }, _this._renderIndicators = function () {
+    };
+
+    _this._handleAddMomAth = function () {
+      _this.props.onAddMomAth();
+    };
+
+    _this._renderIndicators = function () {
       var _descr = _this.state.descr.map(function (descr, index) {
         var id = descr.id,
             color = descr.color;
@@ -162,7 +172,9 @@ var PanelIndicator = function (_Component) {
         null,
         _descr
       );
-    }, _this._renderMfi = function () {
+    };
+
+    _this._renderMfi = function () {
       var _descr = _this.state.mfiDescrs.map(function (descr, index) {
         var id = descr.id,
             color = descr.color;
@@ -185,7 +197,27 @@ var PanelIndicator = function (_Component) {
         null,
         _descr
       );
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    var isMomAth = props.isMomAth;
+
+    _this._divMomAth = isMomAth ? _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'span',
+        { style: STYLE.MOM_ATH },
+        'MOM(1) & ATH'
+      ),
+      _react2.default.createElement(_SvgPlus2.default, { onClick: _this._handleAddMomAth.bind(_this) })
+    ) : null;
+
+    _this.state = {
+      plusSma: 5,
+      descr: [],
+      mfiDescrs: []
+    };
+    return _this;
   }
 
   (0, _createClass3.default)(PanelIndicator, [{
@@ -268,7 +300,8 @@ var PanelIndicator = function (_Component) {
           _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma })
         ),
         this._renderIndicators(),
-        _mfiDom
+        _mfiDom,
+        this._divMomAth
       );
     }
   }]);
@@ -281,7 +314,9 @@ process.env.NODE_ENV !== "production" ? PanelIndicator.propTypes = {
   onAddSma: _react.PropTypes.func,
   onRemoveSma: _react.PropTypes.func,
   onAddMfi: _react.PropTypes.func,
-  onRemoveMfi: _react.PropTypes.func
+  onRemoveMfi: _react.PropTypes.func,
+  isMomAth: _react.PropTypes.bool,
+  onAddMomAth: _react.PropTypes.func
 } : void 0;
 exports.default = PanelIndicator;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelIndicator.js.map

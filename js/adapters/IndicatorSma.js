@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fnGetConfigMfi = exports.fnRemoveSeries = exports.fnAddSeriesSma = undefined;
+exports.fnMomAthConfig = exports.fnGetConfigMfi = exports.fnRemoveSeries = exports.fnAddSeriesSma = undefined;
 
 var _big = require('big.js');
 
@@ -14,6 +14,11 @@ var _ChartConfig = require('../charts/ChartConfig');
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var C = {
+  ATH_UP: 'rgba(76, 175, 80, 0.75)',
+  ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
+};
 
 var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(option) {
   var chart = option.chart,
@@ -178,7 +183,38 @@ var fnGetConfigMfi = exports.fnGetConfigMfi = function fnGetConfigMfi(chart, per
 
   var titleNotFullPoint = nNotFullPoint !== 0 ? ' Not Full Data HL:' + nNotFullPoint : '',
       config = _ChartConfig2.default.fIndicatorMfiConfig(id, parentId, id + titleNotFullPoint, dataMcad);
-
   return config;
+};
+
+var fnMomAthConfig = exports.fnMomAthConfig = function fnMomAthConfig(chart, id) {
+  var data = chart.options.zhPoints,
+      _dataMom = [],
+      _dataAth = [],
+      _dataSum = [];
+  var i = 1,
+      max = data.length,
+      point = void 0,
+      prevPoint = void 0,
+      x = void 0,
+      mom = void 0,
+      ath = void 0,
+      co = void 0;
+
+  for (; i < max; i++) {
+    prevPoint = data[i - 1];
+    point = data[i];
+    x = _fnConvertToUTC(point[0]);
+    mom = point[4] - prevPoint[4];
+    _dataMom.push({ x: x, y: mom });
+    ath = parseFloat((point[1] - prevPoint[4]).toFixed(4));
+    _dataAth.push({
+      x: x, y: ath,
+      color: ath > 0 ? C.ATH_UP : C.ATH_DOWN
+    });
+    co = parseFloat((point[4] - point[1]).toFixed(4));
+    _dataSum.push({ x: x, y: co });
+  }
+
+  return _ChartConfig2.default.fnMomAthConfig(_dataMom, _dataAth, _dataSum, id);
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\IndicatorSma.js.map

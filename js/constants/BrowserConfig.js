@@ -14,7 +14,12 @@ var _Type = require('./Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
+var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.STOCK_MARKETS, {
+  browserType: _Type.BrowserType.STOCK_MARKETS,
+  isDynamic: true,
+  caption: 'Stock Markets',
+  sourceMenuUrl: './data/stock-markets/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
   browserType: _Type.BrowserType.EUROSTAT,
   isDynamic: true,
   caption: 'European Statistics',
@@ -35,7 +40,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,
-  caption: 'Stocks by Sectors',
+  caption: 'US Stocks by Sectors',
   sourceMenuUrl: './data/us-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.US_STOCK_BY_SECTOR,

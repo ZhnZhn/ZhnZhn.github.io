@@ -56,20 +56,21 @@ const ChartConfig = {
     });
   },
 
-  seriaOption(color) {
-    return {
+  seriaOption(color, option) {
+    return Object.assign({
       type: 'line', visible: false, color,
       marker: {
         radius: 3,
         symbol: "circle"
       }
-    }
+    }, option)
   },
 
-  setSerieData(config, data, index, options) {
+  setSerieData(config, data, index, name, options) {
     config.series[index] = Object.assign({
-      data: data,
       type: 'area',
+      name: name,
+      data: data,
       lineWidth: 1
     }, options)
 
@@ -78,11 +79,23 @@ const ChartConfig = {
     )
   },
 
-  setStockSerias(config, dClose, dHigh, dLow, dOpen){
-    this.setSerieData(config, dClose, 0)
-    this.setSerieData(config, dHigh, 1, this.seriaOption(COLOR.S_HIGH))
-    this.setSerieData(config, dLow, 2, this.seriaOption(COLOR.S_LOW))
-    this.setSerieData(config, dOpen, 3, this.seriaOption(COLOR.S_OPEN))        
+  _zhSeriaId(id){
+    return { zhSeriaId: id };
+  },
+
+  setStockSerias(config, dClose, dHigh, dLow, dOpen, id){
+    this.setSerieData(config, dClose, 0, 'Close',
+      this._zhSeriaId(id)
+    )
+    this.setSerieData(config, dHigh, 1, 'High',
+      this.seriaOption(COLOR.S_HIGH, this._zhSeriaId(id+'H'))
+    )
+    this.setSerieData(config, dLow, 2, 'Low',
+      this.seriaOption(COLOR.S_LOW, this._zhSeriaId(id+'L'))
+    )
+    this.setSerieData(config, dOpen, 3, 'Open',
+      this.seriaOption(COLOR.S_OPEN, this._zhSeriaId(id+'O'))
+    )
   },
 
   setMinMax(config, minValue, maxValue) {
@@ -137,7 +150,10 @@ ChartConfig.theme = {
         }
       }
     },
-    colors: ['#7cb5ec', '#90ed7d', '#f7a35c', '#8085e9',
+    colors: [
+             '#7cb5ec',
+             //'#2f7ed8',
+             '#90ed7d', '#f7a35c', '#8085e9',
              '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
     labels : {
       items : []
