@@ -92,6 +92,17 @@ var _testInRangeOrEmpty = function _testInRangeOrEmpty(min, max) {
 var _testPeriod = _testInRangeOrEmpty(0, 201);
 var _testForDays = _testInRangeOrEmpty(250, 2500);
 
+var _crValue = function _crValue(indicator, period) {
+  switch (indicator) {
+    case 'MACD':
+      return 'MACD(12, 24, 9)';
+    case 'STOCH':
+      return 'STOCH(5, 3, 3, SMA)';
+    default:
+      return indicator + ' (' + period + ')';
+  }
+};
+
 var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Component) {
   (0, _inherits3.default)(AlphaIndicatorDialog, _Component);
 
@@ -112,15 +123,14 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       var _period = _this.periodComp.isValid() ? _this.periodComp.getValue() !== '' ? _this.periodComp.getValue() : DF.PERIOD : DF.PERIOD,
           _forDays = _this.forDaysComp.isValid() ? _this.forDaysComp.getValue() !== '' ? _this.forDaysComp.getValue() : DF.FOR_DAYS : DF.FOR_DAYS,
           _ticket = _this.ticketComp.isValid() ? _this.ticketComp.getValue() : undefined,
-          _indicator = _this.indicator ? _this.indicator.value : DF.INDICATOR,
-          _value = _indicator + ' (' + _period + ')';
+          _indicator = _this.indicator ? _this.indicator.value : DF.INDICATOR;
       var option = {
         loadId: 'AL',
         indicator: _indicator,
         ticket: _ticket,
         period: _period,
         forDays: _forDays,
-        value: _value, //for label
+        value: _crValue(_indicator, _period), //for label
         hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
       };
       _this.props.onLoad(option);

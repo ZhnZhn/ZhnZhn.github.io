@@ -424,9 +424,10 @@ var InputSelect = (_temp = _class = function (_Component) {
           }
           break;
         }
-      //escape
-      case 27:
+      //escape, delete
+      case 27:case 46:
         {
+          event.preventDefault();
           if (_this3.state.isShowOption) {
             _this3.setState({ isShowOption: false });
           } else {

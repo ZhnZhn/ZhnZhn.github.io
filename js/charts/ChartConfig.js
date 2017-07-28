@@ -386,15 +386,17 @@ ChartConfig.fnNumberFormat = function (value) {
   return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
 };
 
-ChartConfig.fBaseAreaConfig = function () {
+ChartConfig.fBaseAreaConfig = function (option) {
   var config = Object.assign(_Chart2.default.fBaseConfig(), {
     zhDetailCharts: [],
     zhToggleSeria: _ChartFn2.default.toggleSeria
-  });
+  }, option);
 
   config.chart = Object.assign(config.chart, {
     zoomType: 'xy',
-    resetZoomButton: _Chart2.default.fResetZoomButton({ position: { x: -10 } }),
+    resetZoomButton: _Chart2.default.fResetZoomButton({
+      position: { x: -10 }
+    }),
     xDeltaCrossLabel: 4,
     yDeltaCrossLabel: 20
   });

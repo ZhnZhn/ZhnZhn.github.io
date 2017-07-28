@@ -1,6 +1,7 @@
 
 const C = {
-  ROOT: 'https://www.alphavantage.co/query'
+  ROOT: 'https://www.alphavantage.co/query',
+  REQUEST_ERROR: 'Request Error'
 }
 
 const AlphaApi = {
@@ -16,20 +17,16 @@ const AlphaApi = {
       default:
         return `${C.ROOT}?function=${indicator}&symbol=${ticket}&interval=daily&time_period=${period}&series_type=close&apikey=${apiKey}`;
     }
-    /*
-    if (indicator === 'SECTOR') {
-      return `${C.ROOT}?function=${indicator}&apikey=${apiKey}`;
-    } else if (indicator === 'TIME_SERIES_INTRADAY') {
-      const { interval } = option;
-      return `${C.ROOT}?function=${indicator}&interval=${interval}&symbol=${ticket}&apikey=${apiKey}`;
-    }
-
-    return `${C.ROOT}?function=${indicator}&symbol=${ticket}&interval=daily&time_period=${period}&series_type=close&apikey=${apiKey}`;
-    */
   },
 
   checkResponse(json){
-    return true;
+    if (!json['Error Message']) return true;
+    else {
+      throw {
+        errCaption : C.REQUEST_ERROR,
+        message : json['Error Message']
+      };
+    }
   }
 }
 

@@ -30,6 +30,11 @@ var AdapterFn = {
     var _arr = date.split('-');
     return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
   },
+  ymdtToUTC: function ymdtToUTC(date) {
+    var _arr = date.split('-'),
+        _d = _arr[2].split(' ')[0];
+    return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _d);
+  },
   ymdhmsToUTC: function ymdhmsToUTC(date) {
     var _dtArr = date.split(' '),
         _ymdArr = _dtArr[0].split('-'),

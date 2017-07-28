@@ -352,8 +352,9 @@ class InputSelect extends Component {
            }
          }
       break; }
-      //escape
-      case 27:{
+      //escape, delete
+      case 27: case 46: {
+        event.preventDefault()
         if (this.state.isShowOption){
           this.setState({ isShowOption : false });
         } else {

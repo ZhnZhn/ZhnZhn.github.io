@@ -63,9 +63,11 @@ class DateField extends Component {
 
    constructor(props){
      super();
-     this.isOnEnter = (typeof props.onEnter == 'function') ? true : false ;
+     this.isOnEnter = (typeof props.onEnter == 'function')
+            ? true
+            : false;
      this.state = {
-       value: props.initValue ? props.initValue : '',
+       value: props.initValue || '',
        errorInput: undefined,
        isValid: true
      };
@@ -105,11 +107,22 @@ class DateField extends Component {
   }
 
   _handleKeyDown = (event) => {
-    if (this.isOnEnter){
-       if (event.keyCode === 13){
-         this.props.onEnter(event.target.value)
-       }
-     }
+    switch(event.keyCode){
+      case 13:
+        if (this.isOnEnter) {
+          this.props.onEnter(event.target.value)
+        }
+        break;
+      case 27: case 46:
+        event.preventDefault()
+        this.setState({
+          value: this.props.initValue || '',
+          errorInput: undefined,
+          isValid: true
+        })
+        break;
+      default: return;
+    }
   }
 
 

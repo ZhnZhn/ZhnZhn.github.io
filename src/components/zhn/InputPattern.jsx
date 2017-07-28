@@ -103,17 +103,23 @@ class InputPattern extends Component {
   }
 
   _handleKeyDown = (event) => {
-    if (event.keyCode === 13 && typeof this.props.onEnter === 'function'){
-      this.props.onEnter(event.target.value)
-    } else if (event.keyCode === 27){
-      this.setState({
-        value: this.props.initValue ? this.props.initValue : '',
-        errorInput: undefined,
-        isValid: true
-      })
+    switch(event.keyCode){
+      case 13:
+        if (typeof this.props.onEnter === 'function') {
+          this.props.onEnter(event.target.value)
+        }
+        break;
+      case 27: case 46:
+        event.preventDefault()
+        this.setState({
+          value: this.props.initValue || '' ,
+          errorInput: undefined,
+          isValid: true
+        })
+        break;
+      default: return;
     }
   }
-
 
   render(){
     const {

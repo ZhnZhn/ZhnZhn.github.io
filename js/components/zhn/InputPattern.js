@@ -124,14 +124,22 @@ var InputPattern = (_temp = _class = function (_Component) {
     };
 
     _this._handleKeyDown = function (event) {
-      if (event.keyCode === 13 && typeof _this.props.onEnter === 'function') {
-        _this.props.onEnter(event.target.value);
-      } else if (event.keyCode === 27) {
-        _this.setState({
-          value: _this.props.initValue ? _this.props.initValue : '',
-          errorInput: undefined,
-          isValid: true
-        });
+      switch (event.keyCode) {
+        case 13:
+          if (typeof _this.props.onEnter === 'function') {
+            _this.props.onEnter(event.target.value);
+          }
+          break;
+        case 27:case 46:
+          event.preventDefault();
+          _this.setState({
+            value: _this.props.initValue || '',
+            errorInput: undefined,
+            isValid: true
+          });
+          break;
+        default:
+          return;
       }
     };
 

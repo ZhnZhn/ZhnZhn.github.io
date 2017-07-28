@@ -359,15 +359,17 @@ ChartConfig.fnNumberFormat = function(value){
   return Highcharts.numberFormat(value, decimal, '.', ' ');
 }
 
-ChartConfig.fBaseAreaConfig = function() {
+ChartConfig.fBaseAreaConfig = function(option) {
   const config = Object.assign( Chart.fBaseConfig(), {
     zhDetailCharts: [],
     zhToggleSeria: ChartFn.toggleSeria
-  });
+  }, option);
 
-  config.chart = Object.assign( config.chart, {
+  config.chart = Object.assign(config.chart, {
     zoomType: 'xy',
-    resetZoomButton: Chart.fResetZoomButton({ position: { x : -10 } }),
+    resetZoomButton: Chart.fResetZoomButton({
+                       position: { x : -10 }
+                     }),
     xDeltaCrossLabel: 4,
     yDeltaCrossLabel: 20
   })

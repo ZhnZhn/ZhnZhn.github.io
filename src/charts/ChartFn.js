@@ -65,7 +65,22 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
     series.yAxis = label
     series.color = _color
   }
-  chart.addSeries(series, true, true)
+
+  if (Array.isArray(series)){
+    const _max = series.length - 1;
+    series.forEach((seria, index) => {
+      if (hasSecondYAxis) {
+        seria.yAxis = label
+      }
+      if (index !== _max ) {
+        chart.addSeries(seria, false, false)
+      } else {
+        chart.addSeries(seria, true, true)
+      }
+    })
+  } else {
+    chart.addSeries(series, true, true)
+  }
   return _color;
 }
 

@@ -6,6 +6,8 @@
     { "caption" : "Average Diractional Movement (ADX)" , "value" : "ADX" },
     { "caption" : "Commodity Channel Index (CCI)" , "value" : "CCI" },
     { "caption" : "Momentum (MOM)" , "value" : "MOM" },
-    { "caption" : "Rate of Change (ROC)" , "value" : "ROC" }
+    { "caption" : "Rate of Change (ROC)" , "value" : "ROC" },
+    { "caption" : "Moving Average Convergence/Divergence (MACD)" , "value" : "MACD" },
+    { "caption" : "Stochastic Oscillator (STOCH)", "value": "STOCH" }    
   ]
 }

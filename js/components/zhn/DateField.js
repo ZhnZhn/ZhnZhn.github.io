@@ -127,10 +127,22 @@ var DateField = (_temp = _class = function (_Component) {
     };
 
     _this._handleKeyDown = function (event) {
-      if (_this.isOnEnter) {
-        if (event.keyCode === 13) {
-          _this.props.onEnter(event.target.value);
-        }
+      switch (event.keyCode) {
+        case 13:
+          if (_this.isOnEnter) {
+            _this.props.onEnter(event.target.value);
+          }
+          break;
+        case 27:case 46:
+          event.preventDefault();
+          _this.setState({
+            value: _this.props.initValue || '',
+            errorInput: undefined,
+            isValid: true
+          });
+          break;
+        default:
+          return;
       }
     };
 
@@ -148,7 +160,7 @@ var DateField = (_temp = _class = function (_Component) {
 
     _this.isOnEnter = typeof props.onEnter == 'function' ? true : false;
     _this.state = {
-      value: props.initValue ? props.initValue : '',
+      value: props.initValue || '',
       errorInput: undefined,
       isValid: true
     };

@@ -18,9 +18,16 @@ const _compareByTwoProp = (propName1, propName2) => (a, b) => {
 
 const AdapterFn = {
   ymdToUTC(date) {
-    const _arr = date.split('-');
+    const _arr = date.split('-')
     return Date.UTC(
       _arr[0], (parseInt(_arr[1], 10)-1), _arr[2]
+    );
+  },
+  ymdtToUTC(date) {
+    const _arr = date.split('-')
+        , _d = _arr[2].split(' ')[0];
+    return Date.UTC(
+      _arr[0], (parseInt(_arr[1], 10)-1), _d
     );
   },
   ymdhmsToUTC(date) {

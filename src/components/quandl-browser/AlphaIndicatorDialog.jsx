@@ -40,6 +40,14 @@ const _testInRangeOrEmpty = (min, max) => (value) => {
 const _testPeriod = _testInRangeOrEmpty(0, 201)
 const _testForDays = _testInRangeOrEmpty(250, 2500)
 
+const _crValue = (indicator, period) => {
+  switch(indicator) {
+    case 'MACD': return 'MACD(12, 24, 9)';
+    case 'STOCH': return 'STOCH(5, 3, 3, SMA)';
+    default: return `${indicator} (${period})`;
+  }
+}
+
 @withToolbar
 class AlphaIndicatorDialog extends Component {
 
@@ -89,17 +97,16 @@ class AlphaIndicatorDialog extends Component {
         , _ticket = (this.ticketComp.isValid())
              ? this.ticketComp.getValue()
              : undefined
-        , _indicator = (this.indicator)
+        , _indicator = this.indicator
              ? this.indicator.value
-             : DF.INDICATOR
-        , _value = `${_indicator} (${_period})`;
+             : DF.INDICATOR;
     const option = {
       loadId: 'AL',
       indicator: _indicator,
       ticket: _ticket,
       period: _period,
       forDays: _forDays,
-      value: _value, //for label
+      value: _crValue(_indicator, _period), //for label
       hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
     }
     this.props.onLoad(option)
