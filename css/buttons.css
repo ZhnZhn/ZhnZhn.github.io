@@ -86,7 +86,7 @@
   border-radius: 50%;
   border: 2px solid gray;
   stroke: gray;
-  line-height: initial;
+  line-height: normal;
   cursor: pointer;
 }
 .svg-resize:hover {
