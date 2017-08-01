@@ -16,6 +16,7 @@ const LoadConfig = {
   [LoadType.AL_I]: LoadImpl.AlphaIntraday,
 
   [LoadType.EU_STAT]: LoadImpl.EuroStat,
+  [LoadType.FS]: LoadImpl.Insee,
   [ChartType.WATCH_LIST]: LoadImpl.Quandl,
   [LoadType.WL]: LoadImpl.Quandl
 };

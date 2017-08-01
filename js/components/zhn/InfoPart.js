@@ -38,6 +38,9 @@ var InfoPart = function InfoPart(props) {
       styleText = props.styleText,
       isHtml = props.isHtml;
 
+  if (!text) {
+    return null;
+  }
   return _react2.default.createElement(
     'div',
     { style: rootStyle },
@@ -51,4 +54,4 @@ var InfoPart = function InfoPart(props) {
 };
 
 exports.default = InfoPart;
-//# sourceMappingURL=InfoPart.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InfoPart.js.map

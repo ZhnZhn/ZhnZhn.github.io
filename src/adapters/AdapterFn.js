@@ -1,7 +1,15 @@
 
 import Big from 'big.js'
 
+import DateUtils from '../utils/DateUtils';
+import ChartConfig from '../charts/ChartConfig';
+import { Direction } from '../constants/Type';
+
+import mathFn from '../math/mathFn';
+
 import C from '../constants/Color'
+
+const BLANK = '';
 
 const _compareArrByIndex = index => (arrA, arrB) => {
   if (arrA[index] < arrB[index]) return -1;
@@ -19,9 +27,14 @@ const _compareByTwoProp = (propName1, propName2) => (a, b) => {
 const AdapterFn = {
   ymdToUTC(date) {
     const _arr = date.split('-')
-    return Date.UTC(
-      _arr[0], (parseInt(_arr[1], 10)-1), _arr[2]
-    );
+        , _len = _arr.length;
+    if (_len === 3) {
+      return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), _arr[2] );
+    } else if ( _len === 2){
+      return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), 27 );
+    } else if ( _len === 1) {
+      return Date.UTC( _arr[0], 11, 30 );
+    }
   },
   ymdtToUTC(date) {
     const _arr = date.split('-')
@@ -102,7 +115,40 @@ const AdapterFn = {
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
-  compareByValueId: _compareByTwoProp('value', 'id')
+  compareByValueId: _compareByTwoProp('value', 'id'),
+
+  crValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){
+    return mathFn.crValueMoving({
+      nowValue: bNowValue,
+      prevValue: bPrevValue,
+      Direction: Direction,
+      fnFormat: ChartConfig.fnNumberFormat
+    })
+  },
+
+  valueMoving(data){
+      const len = data.length
+          , _nowValue = len>0 && data[len-1][1]
+               ? data[len-1][1]
+               : 0
+          , bNowValue = Big(_nowValue)
+          , _prevValue = len>1 && data[len-2][1]
+               ? data[len-2][1]
+               : 0
+          , bPrevValue = Big(_prevValue)
+          , date = len>0
+               ? DateUtils.formatTo(data[len-1][0])
+               : BLANK
+          , dateTo = len>1 && data[len-2][0]
+               ? DateUtils.formatTo(data[len-2][0])
+               : BLANK;
+
+      return  {
+        ...this.crValueMoving({ bNowValue, bPrevValue }),
+        valueTo: ChartConfig.fnNumberFormat(bPrevValue),
+        date, dateTo
+      };
+  }
 
 }
 

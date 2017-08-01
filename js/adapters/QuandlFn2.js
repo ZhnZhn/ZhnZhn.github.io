@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
@@ -31,8 +27,6 @@ var _ChartConfig = require('../charts/ChartConfig');
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var BLANK = '';
 
 var QuandlFn2 = {
   isPrevDateAfter: function isPrevDateAfter(arr, checkedDate, predicate) {
@@ -112,18 +106,6 @@ var QuandlFn2 = {
       prevValue: bPrevValue,
       Direction: _Type.Direction,
       fnFormat: _ChartConfig2.default.fnNumberFormat
-    });
-  },
-  createValueMovingFromSeria: function createValueMovingFromSeria(seria) {
-    var len = seria.length,
-        bNowValue = len > 0 ? seria[len - 1][1] ? (0, _big2.default)(seria[len - 1][1]) : (0, _big2.default)(0.0) : (0, _big2.default)(0.0),
-        bPrevValue = len > 1 ? seria[len - 2][1] ? (0, _big2.default)(seria[len - 2][1]) : (0, _big2.default)(0.0) : (0, _big2.default)(0.0),
-        date = len > 0 ? _DateUtils2.default.formatTo(seria[len - 1][0]) : BLANK,
-        dateTo = len > 1 ? seria[len - 2][0] ? _DateUtils2.default.formatTo(seria[len - 2][0]) : BLANK : BLANK;
-
-    return (0, _extends3.default)({}, this.createValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
-      valueTo: _ChartConfig2.default.fnNumberFormat(bPrevValue),
-      date: date, dateTo: dateTo
     });
   },
   getRecentDate: function getRecentDate() {

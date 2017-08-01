@@ -619,7 +619,6 @@ var DataQE = {
     menuTitle: 'Zillow Research',
     dialogCaption: 'Zillow Real Estate Research',
     chartContainerCaption: 'Quandl Zillow Real Estate Research',
-    //dialogType : 'DialogType5',
     dialogType: 'ZillowDialog',
     dialogProps: {
       descrUrl: './data/quandl/zillow.html',
@@ -631,12 +630,31 @@ var DataQE = {
       twoURI: './data/quandl/zillow-area.json',
       twoJsonProp: 'places',
       threeCaption: 'Area Code',
-      //fnValueType : 'PlusTreeItem',
       valueFn: 'RZill',
       loadId: 'Q',
       dataSource: 'Zillow Real Estate Research (Code: ZILL)'
-    },
-    dataColumn: 1
+    }
+  },
+  QE_ZILLOW_REAL_ESTATE_2: {
+    type: 'QE_ZILLOW_REAL_ESTATE_2',
+    menuTitle: 'Zillow Research 2',
+    dialogCaption: 'Zillow Real Estate Research 2',
+    chartContainerCaption: 'Quandl Zillow Real Estate Research 2',
+    dialogType: 'ZillowDialog',
+    dialogProps: {
+      descrUrl: './data/quandl/zillow-2.html',
+      nInitFromDate: 10,
+      oneCaption: 'Indicator',
+      oneURI: './data/quandl/zillow-indicators-2.json',
+      oneJsonProp: 'indicators',
+      twoCaption: 'Area Type',
+      twoURI: './data/quandl/zillow-area-2.json',
+      twoJsonProp: 'places',
+      threeCaption: 'Area Code',
+      valueFn: 'RZillow',
+      loadId: 'Q',
+      dataSource: 'Zillow Real Estate Research (Code: ZILLOW)'
+    }
   },
   QE_FMAC: {
     type: 'QE_FMAC',

@@ -91,6 +91,7 @@ const menuQuandl = [
     caption : 'Real Estate',
     items : [
       { id : Quandl.ZILLOW_REAL_ESTATE },
+      { id : Quandl.ZILLOW_REAL_ESTATE_2, isNew: true },
       { id : Quandl.FMAC }
     ]
   }

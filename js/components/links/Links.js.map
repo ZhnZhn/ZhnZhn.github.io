@@ -1,0 +1,21 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\links\\Links.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\links\\Links.js",
+ "sourceRoot": "",
+ "names": [
+  "CL_LINK",
+  "Quandl",
+  "className",
+  "href",
+  "style",
+  "color",
+  "title",
+  "Barchart",
+  "AlphaVantage",
+  "Eurostat",
+  "Insee"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,UAAU,oBAAhB;;AAEA,IAAMC,SAAS,yBAAU;AACvBC,aAAWF,OADY;AAEvBG,QAAM,yBAFiB;AAGvBC,SAAO,EAACC,OAAO,SAAR,EAHgB;AAIvBC,SAAO;AAJgB,CAAV,iBAAf;;AAOA,IAAMC,WAAW,yBAAU;AACzBL,aAAWF,OADc;AAEzBG,QAAM,oCAFmB;AAGzBC,SAAO,EAACC,OAAO,SAAR,EAHkB;AAIzBC,SAAO;AAJkB,CAAV,iBAAjB;;AAOA,IAAOE,eAAe,yBAAU;AAC9BN,aAAWF,OADmB;AAE9BG,QAAM,6BAFwB;AAG9BC,SAAO,EAACC,OAAO,SAAR,EAHuB;AAI9BC,SAAO;AAJuB,CAAV,iBAAtB;;AAOA,IAAOG,WAAW,yBAAU;AAC1BP,aAAWF,OADe;AAE1BG,QAAM,8BAFoB;AAG1BC,SAAO,EAACC,OAAO,SAAR,EAHmB;AAI1BC,SAAO;AAJmB,CAAV,iBAAlB;;AAOA,IAAOI,QAAQ,yBAAU;AACvBR,aAAWF,OADY;AAEvBG,QAAM,iCAFiB;AAGvBC,SAAO,EAACC,OAAO,SAAR,EAHgB;AAIvBC,SAAO;AAJgB,CAAV,iBAAf;;kBAOe;AACbL,gBADa;AAEbM,oBAFa;AAGbC,4BAHa;AAIbC,oBAJa;AAKbC;AALa,C"
+}

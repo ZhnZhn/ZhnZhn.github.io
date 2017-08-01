@@ -8,6 +8,7 @@
     { "caption" : "Momentum (MOM)" , "value" : "MOM" },
     { "caption" : "Rate of Change (ROC)" , "value" : "ROC" },
     { "caption" : "Moving Average Convergence/Divergence (MACD)" , "value" : "MACD" },
-    { "caption" : "Stochastic Oscillator (STOCH)", "value": "STOCH" }    
+    { "caption" : "Stochastic Oscillator (STOCH)", "value": "STOCH" },
+    { "caption" : "Bollinger Bands (BBANDS)", "value": "BBANDS" }    
   ]
 }

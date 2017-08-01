@@ -1,15 +1,10 @@
 
 export const BrowserType = {
-   //QUANDL : 'Quandl',
-   //QUANDL : 'QE',
-
    STOCK_MARKETS: 'SM',
    EUROSTAT : 'ES',
-   //GOOGLE : 'QD',
-   //YAHOO : 'QY',
-   PREMIUM_SAMPLE : 'QPS',
-   FRANCE_STATISTICS : 'QFS',
+   FRANCE_STATISTICS : 'FS',
 
+   PREMIUM_SAMPLE : 'QPS',
    ECONOMIC : 'QE',
 
    US_STOCKS : 'QUS',
@@ -62,6 +57,7 @@ export const LoadType = {
   AL_I: 'AL_I',
   QCT : 'QCT',
   EU_STAT : 'EU_STAT',
+  FS : 'FS',
   WL : 'WL'
 }
 

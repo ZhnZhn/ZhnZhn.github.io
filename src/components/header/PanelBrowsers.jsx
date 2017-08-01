@@ -35,16 +35,16 @@ const PanelBrowsers = ({
             Eurostat
           </div>
           <div
+            className="row__pane-topic item__eurostat"
+            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])}
+          >
+            Insee: France Statistics
+          </div>
+          <div
             className="row__pane-topic item__quandl"
             onClick={onClickQuandl}
           >
             Quandl Economic
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])}
-          >
-            France Statistics
           </div>
           <div
             className="row__pane-topic item__quandl"

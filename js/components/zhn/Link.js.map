@@ -1,0 +1,13 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\Link.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\Link.js",
+ "sourceRoot": "",
+ "names": [
+  "Link",
+  "title",
+  "rest"
+ ],
+ "mappings": ";;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAaC,IAAb;AAAA,SACZ;AAAA;AAAA,6BAAG,QAAO,QAAV,EAAmB,WAAU,MAA7B,IAAwCA,IAAxC;AACKD;AADL,GADY;AAAA,CAAb;;kBAKeD,I"
+}

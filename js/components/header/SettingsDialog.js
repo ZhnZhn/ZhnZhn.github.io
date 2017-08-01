@@ -36,6 +36,10 @@ var _RowSecret = require('../dialogs/RowSecret');
 
 var _RowSecret2 = _interopRequireDefault(_RowSecret);
 
+var _RowPattern = require('../dialogs/RowPattern');
+
+var _RowPattern2 = _interopRequireDefault(_RowPattern);
+
 var _FlatButton = require('../zhn-m/FlatButton');
 
 var _FlatButton2 = _interopRequireDefault(_FlatButton);
@@ -50,15 +54,19 @@ var S = {
   MODAL: {
     position: 'static',
     width: '380px',
-    height: '280px',
+    height: '320px',
     margin: '70px auto 0px'
+  },
+  TITLE: {
+    width: '110px'
   }
 };
 
 var SET = {
   QUANDL_KEY: 'setQuandlKey',
   ALPHA_KEY: 'setAlphaKey',
-  BARCHAR_KEY: 'setBarcharKey'
+  BARCHAR_KEY: 'setBarcharKey',
+  PROXY: 'setProxy'
 };
 
 var MODE_ADMIN = 'isAdminMode';
@@ -79,11 +87,13 @@ var SettingsDialog = function (_Component) {
           onClose = _this$props.onClose,
           setQuandlKey = (0, _safeFn2.default)(data, SET.QUANDL_KEY),
           setAlpheKey = (0, _safeFn2.default)(data, SET.ALPHA_KEY),
-          setBarcharKey = (0, _safeFn2.default)(data, SET.BARCHAR_KEY);
+          setBarcharKey = (0, _safeFn2.default)(data, SET.BARCHAR_KEY),
+          setProxy = (0, _safeFn2.default)(data, SET.PROXY);
 
       setQuandlKey(_this.inputComp.getValue());
       setAlpheKey(_this.alphaComp.getValue());
       setBarcharKey(_this.barcharComp.getValue());
+      setProxy(_this.proxyComp.getValue());
       onClose();
     };
 
@@ -119,6 +129,7 @@ var SettingsDialog = function (_Component) {
           isShow = _props.isShow,
           data = _props.data,
           onClose = _props.onClose,
+          _proxy = data.getProxy(),
           _isAdminMode = (0, _safeFn2.default)(data, MODE_ADMIN, false)(),
           _isDrawDeltaExtrems = (0, _safeFn2.default)(data, MODE_DELTA, false)(),
           _isNotZoomToMinMax = (0, _safeFn2.default)(data, MODE_ZOOM, false)();
@@ -136,6 +147,7 @@ var SettingsDialog = function (_Component) {
           ref: function ref(c) {
             return _this2.alphaComp = c;
           },
+          titleStyle: S.TITLE,
           title: 'Alpha:',
           placeholder: 'Alpha API Key'
         }),
@@ -143,6 +155,7 @@ var SettingsDialog = function (_Component) {
           ref: function ref(c) {
             return _this2.barcharComp = c;
           },
+          titleStyle: S.TITLE,
           title: 'Barchar:',
           placeholder: 'Barchar API Key'
         }),
@@ -150,8 +163,18 @@ var SettingsDialog = function (_Component) {
           ref: function ref(c) {
             return _this2.inputComp = c;
           },
+          titleStyle: S.TITLE,
           title: 'Quandl:',
           placeholder: 'Quandl API Key'
+        }),
+        _react2.default.createElement(_RowPattern2.default, {
+          ref: function ref(c) {
+            return _this2.proxyComp = c;
+          },
+          titleStyle: S.TITLE,
+          title: 'Https Proxy:',
+          placeholder: 'Https Proxy for CORS',
+          initValue: _proxy
         }),
         _react2.default.createElement(_RowCheckBox2.default, {
           initValue: _isAdminMode,

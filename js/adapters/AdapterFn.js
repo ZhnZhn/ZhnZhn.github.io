@@ -4,15 +4,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
+
+var _DateUtils = require('../utils/DateUtils');
+
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
+
+var _ChartConfig = require('../charts/ChartConfig');
+
+var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+
+var _Type = require('../constants/Type');
+
+var _mathFn = require('../math/mathFn');
+
+var _mathFn2 = _interopRequireDefault(_mathFn);
 
 var _Color = require('../constants/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BLANK = '';
 
 var _compareArrByIndex = function _compareArrByIndex(index) {
   return function (arrA, arrB) {
@@ -27,8 +47,15 @@ var _compareByTwoProp = function _compareByTwoProp(propName1, propName2) {
 
 var AdapterFn = {
   ymdToUTC: function ymdToUTC(date) {
-    var _arr = date.split('-');
-    return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
+    var _arr = date.split('-'),
+        _len = _arr.length;
+    if (_len === 3) {
+      return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
+    } else if (_len === 2) {
+      return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, 27);
+    } else if (_len === 1) {
+      return Date.UTC(_arr[0], 11, 30);
+    }
   },
   ymdtToUTC: function ymdtToUTC(date) {
     var _arr = date.split('-'),
@@ -103,8 +130,35 @@ var AdapterFn = {
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
-  compareByValueId: _compareByTwoProp('value', 'id')
+  compareByValueId: _compareByTwoProp('value', 'id'),
 
+  crValueMoving: function crValueMoving(_ref3) {
+    var _ref3$bNowValue = _ref3.bNowValue,
+        bNowValue = _ref3$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref3$bNowValue,
+        _ref3$bPrevValue = _ref3.bPrevValue,
+        bPrevValue = _ref3$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref3$bPrevValue;
+
+    return _mathFn2.default.crValueMoving({
+      nowValue: bNowValue,
+      prevValue: bPrevValue,
+      Direction: _Type.Direction,
+      fnFormat: _ChartConfig2.default.fnNumberFormat
+    });
+  },
+  valueMoving: function valueMoving(data) {
+    var len = data.length,
+        _nowValue = len > 0 && data[len - 1][1] ? data[len - 1][1] : 0,
+        bNowValue = (0, _big2.default)(_nowValue),
+        _prevValue = len > 1 && data[len - 2][1] ? data[len - 2][1] : 0,
+        bPrevValue = (0, _big2.default)(_prevValue),
+        date = len > 0 ? _DateUtils2.default.formatTo(data[len - 1][0]) : BLANK,
+        dateTo = len > 1 && data[len - 2][0] ? _DateUtils2.default.formatTo(data[len - 2][0]) : BLANK;
+
+    return (0, _extends3.default)({}, this.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
+      valueTo: _ChartConfig2.default.fnNumberFormat(bPrevValue),
+      date: date, dateTo: dateTo
+    });
+  }
 };
 
 exports.default = AdapterFn;

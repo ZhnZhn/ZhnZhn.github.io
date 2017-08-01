@@ -27,7 +27,8 @@ const InfoPart = (props) => {
     const {
             caption, text, classText,
             rootStyle, styleCaption, styleText, isHtml
-          } = props;
+          } = props;          
+    if (!text) { return null; }
     return (
       <div style={rootStyle}>
         <span style={styleCaption}>

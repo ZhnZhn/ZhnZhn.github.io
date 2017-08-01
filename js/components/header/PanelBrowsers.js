@@ -65,18 +65,18 @@ var PanelBrowsers = function PanelBrowsers(_ref) {
       _react2.default.createElement(
         'div',
         {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickQuandl
+          className: 'row__pane-topic item__eurostat',
+          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])
         },
-        'Quandl Economic'
+        'Insee: France Statistics'
       ),
       _react2.default.createElement(
         'div',
         {
           className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])
+          onClick: onClickQuandl
         },
-        'France Statistics'
+        'Quandl Economic'
       ),
       _react2.default.createElement(
         'div',

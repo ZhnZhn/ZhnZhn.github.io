@@ -32,7 +32,7 @@ const qeSources = [
   'BLSI',
   'ROGERS_INDICES',
   'BALTIC_INDICES',
-  
+
   'CHINA_FINANCE_FUTURE',
   'DCE_FUTURE',
   'ZCE_FUTURE',
@@ -42,6 +42,7 @@ const qeSources = [
   'WIKI_FUTURE',
 
   'ZILLOW_REAL_ESTATE',
+  'ZILLOW_REAL_ESTATE_2',
   'FMAC'
 ];
 const Quandl = createTypeObject(qeSources, 'QE');

@@ -1,0 +1,26 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\fnFetchTxt.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\fnFetchTxt.js",
+ "sourceRoot": "",
+ "names": [
+  "fnFetchTxt",
+  "uri",
+  "option",
+  "onCheckResponse",
+  "onFetch",
+  "onCompleted",
+  "onFailed",
+  "onCatch",
+  "fetch",
+  "then",
+  "response",
+  "text",
+  "str",
+  "json",
+  "catch",
+  "error"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;;;;;AAUA,IAAMA,aAAa,SAAbA,UAAa,OAEhB;AAAA,MADAC,GACA,QADAA,GACA;AAAA,MADKC,MACL,QADKA,MACL;AAAA,MADaC,eACb,QADaA,eACb;AAAA,MAD8BC,OAC9B,QAD8BA,OAC9B;AAAA,MADuCC,WACvC,QADuCA,WACvC;AAAA,MADoDC,QACpD,QADoDA,QACpD;AAAA,MAD8DC,OAC9D,QAD8DA,OAC9D;;AACDC,QAAMP,GAAN,EACGQ,IADH,CACQ,oBAAY;AAChB,WAAOC,SAASC,IAAT,EAAP;AACD,GAHH,EAIGF,IAJH,CAIQ,eAAO;AACV,QAAKN,gBAAgBS,GAAhB,EAAqBV,MAArB,CAAL,EAAoC;AAClCE,cAAQ,EAAES,MAAKD,GAAP,EAAYV,cAAZ,EAAoBG,wBAApB,EAAR;AACD;AACH,GARH,EASGS,KATH,CASS,UAACC,KAAD,EAAW;AACfR,YAAQ,EAAEQ,YAAF,EAASb,cAAT,EAAiBI,kBAAjB,EAAR;AACF,GAXH;AAYD,CAfD;;kBAiBeN,U"
+}

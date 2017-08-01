@@ -361,22 +361,24 @@ ChartConfig.fnNumberFormat = function(value){
 
 ChartConfig.fBaseAreaConfig = function(option) {
   const config = Object.assign( Chart.fBaseConfig(), {
+    chart: {
+      zoomType: 'xy',
+      resetZoomButton: Chart.fResetZoomButton({ position: {x: -10} }),
+      xDeltaCrossLabel: 4,
+      yDeltaCrossLabel: 20
+    },
     zhDetailCharts: [],
     zhToggleSeria: ChartFn.toggleSeria
   }, option);
 
-  config.chart = Object.assign(config.chart, {
-    zoomType: 'xy',
-    resetZoomButton: Chart.fResetZoomButton({
-                       position: { x : -10 }
-                     }),
-    xDeltaCrossLabel: 4,
-    yDeltaCrossLabel: 20
-  })
-
   config.xAxis = Object.assign( Chart.fXAxisOpposite(config.xAxis), {
     events: {
       afterSetExtremes : ChartFn.zoomIndicatorCharts
+    }
+  })
+  config.yAxis = Object.assign(config.yAxis, {
+    events: {
+      afterSetExtremes: ChartFn.afterSetExtremesYAxis
     }
   })
 
@@ -456,8 +458,8 @@ ChartConfig.fSplitRatioSeria = function(data, chartId){
 ChartConfig.fSeries = function(option={}){
   return merge({
       type: 'spline',
-      lineWidth : 1,
-      tooltip : Chart.fTooltip(Tooltip.fnBasePointFormatter)
+      lineWidth: 1,
+      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
   }, option);
 }
 

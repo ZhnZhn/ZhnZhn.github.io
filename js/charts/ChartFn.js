@@ -224,15 +224,29 @@ var ChartFn = {
     }
   },
   zoomIndicatorCharts: function zoomIndicatorCharts(event) {
-    var zhDetailCharts = this.chart.options.zhDetailCharts;
-    if (event.userMin) {
+    var zhDetailCharts = this.chart.options.zhDetailCharts,
+        userMin = event.userMin,
+        userMax = event.userMax,
+        min = event.min,
+        max = event.max;
+
+    if (userMin) {
       zhDetailCharts.forEach(function (chart) {
-        chart.xAxis[0].setExtremes(event.userMin, event.userMax, true, true);
+        chart.xAxis[0].setExtremes(userMin, userMax, true, true);
       });
     } else {
       zhDetailCharts.forEach(function (chart) {
-        chart.xAxis[0].setExtremes(event.min, event.max, true, true);
+        chart.xAxis[0].setExtremes(min, max, true, true);
       });
+    }
+  },
+  afterSetExtremesYAxis: function afterSetExtremesYAxis(event) {
+    var trigger = event.trigger,
+        userMax = event.userMax,
+        userMin = event.userMin;
+
+    if (trigger === 'zoom' && userMax) {
+      this.setExtremes(userMin, userMax + (userMax - userMin) * 0.05, true, true);
     }
   },
   crValueMoving: function crValueMoving(chart, prev, dateTo) {

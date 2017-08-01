@@ -12,10 +12,6 @@ var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
-var _QuandlFn = require('../QuandlFn2');
-
-var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
-
 var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
@@ -32,7 +28,6 @@ var _IndicatorSma = require('../IndicatorSma');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import ChartFn from '../../charts/ChartFn'
 var DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" + "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>";
 
 var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
@@ -88,7 +83,7 @@ var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
   _ChartConfig2.default.setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen, chartId);
 
   Object.assign(config, {
-    valueMoving: _QuandlFn2.default.createValueMovingFromSeria(_data),
+    valueMoving: _AdapterFn2.default.valueMoving(_data),
     zhVolumeConfig: _ChartConfig2.default.fIndicatorVolumeConfig(chartId, _dataVolumeColumn, _dataVolume),
     zhATHConfig: _ChartConfig2.default.fIndicatorATHConfig(chartId, _dataATH),
     zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,

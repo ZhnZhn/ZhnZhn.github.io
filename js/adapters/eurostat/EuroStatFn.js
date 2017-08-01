@@ -20,6 +20,10 @@ var _QuandlFn = require('../QuandlFn2');
 
 var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
 
+var _AdapterFn = require('../AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+
 var _ChoroplethMapSlice = require('./ChoroplethMapSlice');
 
 var _ChoroplethMapSlice2 = _interopRequireDefault(_ChoroplethMapSlice);
@@ -105,7 +109,7 @@ var EuroStatFn = (0, _extends3.default)({
     config.info = this.createDatasetInfo(json, option);
 
     if (seriaType === 'AREA') {
-      config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(data);
+      config.valueMoving = _AdapterFn2.default.valueMoving(data);
     }
 
     config.series[0].zhSeriaId = option.key;

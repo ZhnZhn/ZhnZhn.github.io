@@ -64,12 +64,18 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
 };
 
 var _addSettings = function _addSettings(option) {
-  if (option.loadId === 'B') {
-    option.apiKey = _ChartStore2.default.getBarchartKey();
-  } else if (option.loadId === 'AL' || option.loadId === 'AL_S' || option.loadId === 'AL_I') {
-    option.apiKey = _ChartStore2.default.getAlphaKey();
-  } else {
-    option.apiKey = _ChartStore2.default.getQuandlKey();
+  switch (option.loadId) {
+    case 'B':
+      option.apiKey = _ChartStore2.default.getBarchartKey();
+      break;
+    case 'AL':case 'AL_S':case 'AL_I':
+      option.apiKey = _ChartStore2.default.getAlphaKey();
+      break;
+    case 'FS':
+      option.proxy = _ChartStore2.default.getProxy();
+      break;
+    default:
+      option.apiKey = _ChartStore2.default.getQuandlKey();
   }
 
   option.isDrawDeltaExtrems = _ChartStore2.default.isSetting('isDrawDeltaExtrems');

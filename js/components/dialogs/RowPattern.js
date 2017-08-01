@@ -58,14 +58,15 @@ var RowPattern = function (_Component) {
       var _props = this.props,
           _props$title = _props.title,
           title = _props$title === undefined ? '' : _props$title,
-          rest = (0, _objectWithoutProperties3.default)(_props, ['title']);
+          titleStyle = _props.titleStyle,
+          rest = (0, _objectWithoutProperties3.default)(_props, ['title', 'titleStyle']);
 
       return _react2.default.createElement(
         'div',
         { style: _DialogStyles2.default.rowDiv },
         _react2.default.createElement(
           'span',
-          { style: _DialogStyles2.default.labelSpan },
+          { style: (0, _extends3.default)({}, _DialogStyles2.default.labelSpan, titleStyle) },
           title
         ),
         _react2.default.createElement(_InputPattern2.default, (0, _extends3.default)({

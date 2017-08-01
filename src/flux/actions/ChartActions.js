@@ -39,14 +39,18 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
 }
 
 const _addSettings = (option) => {
-  if (option.loadId === 'B') {
-    option.apiKey = ChartStore.getBarchartKey()
-  } else if (option.loadId === 'AL'
-           || option.loadId === 'AL_S'
-           || option.loadId === 'AL_I') {
-    option.apiKey = ChartStore.getAlphaKey()
-  } else {
-    option.apiKey = ChartStore.getQuandlKey()
+  switch(option.loadId){
+    case 'B':
+      option.apiKey = ChartStore.getBarchartKey()
+      break;
+    case 'AL': case 'AL_S': case 'AL_I':
+      option.apiKey = ChartStore.getAlphaKey()
+      break;
+    case 'FS':
+      option.proxy = ChartStore.getProxy()
+      break;
+    default:
+      option.apiKey = ChartStore.getQuandlKey()
   }
 
   option.isDrawDeltaExtrems = ChartStore.isSetting('isDrawDeltaExtrems')

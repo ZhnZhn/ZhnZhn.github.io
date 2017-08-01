@@ -48,9 +48,9 @@ var _Token = require('./Token');
 
 var _Token2 = _interopRequireDefault(_Token);
 
-var _LinkToken = require('./LinkToken');
+var _Links = require('../links/Links');
 
-var _LinkToken2 = _interopRequireDefault(_LinkToken);
+var _Links2 = _interopRequireDefault(_Links);
 
 var _IconLogoBar = require('./IconLogoBar');
 
@@ -62,10 +62,8 @@ var _ContainerStyles2 = _interopRequireDefault(_ContainerStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = _ContainerStyles2.default;
-
-var Styles = {
-  scrollDiv: {
+var S = {
+  SCROLL_DIV: {
     overflowY: 'auto',
     height: '92%',
     paddingRight: '10px'
@@ -137,7 +135,7 @@ var About = function (_Component) {
         'div',
         {
           className: _classOpen,
-          style: Object.assign({}, styles.aboutRootDiv, _styleOpen)
+          style: Object.assign({}, _ContainerStyles2.default.aboutRootDiv, _styleOpen)
         },
         _react2.default.createElement(
           _BrowserCaption2.default,
@@ -146,51 +144,17 @@ var About = function (_Component) {
             onClose: this._handleClose
           },
           _react2.default.createElement(_TwitterLink2.default, {
-            rootStyle: Styles.BT_TWITTER,
+            rootStyle: S.BT_TWITTER,
             account: 'webapperc',
             title: 'Twitter page @wepapperc with examples'
           })
         ),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: Styles.scrollDiv },
+          { style: S.SCROLL_DIV },
           _react2.default.createElement(
             'div',
-            { style: Styles.DIV_WRAPPER },
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                _Token2.default,
-                { color: '#80c040' },
-                'ANNOUNCEMENT:'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: { marginBottom: '16px' } },
-              'Database ',
-              _react2.default.createElement(
-                _Token2.default,
-                { color: 'black' },
-                'GOOG, YAHOO'
-              ),
-              ' will not be hosted by',
-              _react2.default.createElement(
-                _LinkToken2.default,
-                {
-                  href: 'https://www.quandl.com/',
-                  color: '#E05927',
-                  isFirstBlank: true
-                },
-                'Quandl'
-              ),
-              _react2.default.createElement(
-                _Token2.default,
-                { color: '#fdb316', isFirstBlank: true },
-                'from 1, Jule 2017'
-              )
-            ),
+            { style: S.DIV_WRAPPER },
             _react2.default.createElement(
               'p',
               null,
@@ -207,7 +171,7 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
+              { style: S.P_BOTTOM },
               'With it, you can view economic free open data from WEB.'
             ),
             _react2.default.createElement(
@@ -221,58 +185,40 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
-              _react2.default.createElement(
-                _LinkToken2.default,
-                {
-                  href: 'https://www.quandl.com/',
-                  color: '#E05927'
-                },
-                'Quandl'
-              ),
+              null,
+              _react2.default.createElement(_Links2.default.Quandl, null),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black' },
                 '\xA0(Key),\xA0'
               ),
+              _react2.default.createElement(_Links2.default.Barchart, null),
               _react2.default.createElement(
-                _LinkToken2.default,
-                {
-                  href: 'http://ec.europa.eu/eurostat',
-                  color: '#009ae5'
-                },
-                'Eurostat'
+                _Token2.default,
+                { color: 'black' },
+                '\xA0(Key),\xA0'
               ),
+              _react2.default.createElement(_Links2.default.AlphaVantage, null),
+              _react2.default.createElement(
+                _Token2.default,
+                { color: 'black' },
+                '\xA0(Key),'
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              { style: S.P_BOTTOM },
+              _react2.default.createElement(_Links2.default.Eurostat, null),
               _react2.default.createElement(
                 _Token2.default,
                 { color: '#009ae5' },
                 ',\xA0'
               ),
-              _react2.default.createElement(
-                _LinkToken2.default,
-                {
-                  href: 'https://www.barchartmarketdata.com',
-                  color: '#bd1010'
-                },
-                'Barchart Market Data'
-              ),
+              _react2.default.createElement(_Links2.default.Insee, null),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black' },
-                '\xA0(Key),\xA0'
-              ),
-              _react2.default.createElement(
-                _LinkToken2.default,
-                {
-                  href: 'https://www.alphavantage.co',
-                  color: '#009ae5'
-                },
-                'Alpha Vantage'
-              ),
-              _react2.default.createElement(
-                _Token2.default,
-                { color: 'black' },
-                '\xA0(Key).'
+                '\xA0(Https Proxy for CORS).'
               )
             ),
             _react2.default.createElement(
@@ -282,52 +228,52 @@ var About = function (_Component) {
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black', isFirstBlank: true },
-                'Choose a data source Browser from the header bar'
+                'Choose a data source Browser from Topics.'
               )
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.MARGIN_TOP },
+              { style: S.MARGIN_TOP },
               _react2.default.createElement(_Step2.default, { step: '2' }),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black', isFirstBlank: true },
-                'Choose a dataset menu item in a Browser'
+                'Choose a dataset menu item in a Browser.'
               )
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.MARGIN_TOP },
+              { style: S.MARGIN_TOP },
               _react2.default.createElement(_Step2.default, { step: '3' }),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black', isFirstBlank: true },
-                'Select params and enter query date in a draggable Dialog'
+                'Select params and enter query date in a draggable Dialog.'
               )
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.MARGIN_TOP },
+              { style: S.MARGIN_TOP },
               _react2.default.createElement(_Step2.default, { step: '4' }),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black', isFirstBlank: true },
-                'Click a button Load'
+                'Click a button Load.'
               )
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.MARGIN_TOP },
+              { style: S.MARGIN_TOP },
               _react2.default.createElement(_Step2.default, { step: '5' }),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'black', isFirstBlank: true },
-                'Also you can export chart to PNG, JPG, SVG, print to PDF'
+                'Also you can export chart to PNG, JPG, SVG, print to PDF.'
               )
             ),
             _react2.default.createElement(
               'p',
-              { style: Object.assign({}, Styles.P_BOTTOM, Styles.MARGIN_TOP) },
+              { style: Object.assign({}, S.P_BOTTOM, S.MARGIN_TOP) },
               'The result will be shown in a Chart in a Chart container.'
             ),
             _react2.default.createElement(
@@ -337,7 +283,7 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
+              { style: S.P_BOTTOM },
               'In one time max three Dialogs can be opened.'
             ),
             _react2.default.createElement(
@@ -356,26 +302,18 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
+              { style: S.P_BOTTOM },
               'The value of currency is not always USD as shows in a chart tooltip. Sometimes more details about data can be look at tab Info on a Chart.'
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
+              { style: S.P_BOTTOM },
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'gray' },
-                'In that case of data loading from'
+                'In that case of data loading from\xA0'
               ),
-              _react2.default.createElement(
-                _LinkToken2.default,
-                {
-                  href: 'https://www.quandl.com/',
-                  color: '#E05927',
-                  isFirstBlank: true
-                },
-                'Quandl'
-              ),
+              _react2.default.createElement(_Links2.default.Quandl, null),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'gray', isFirstBlank: true },
@@ -399,7 +337,7 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
+              { style: S.P_BOTTOM },
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'gray' },
@@ -419,7 +357,7 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: Styles.P_BOTTOM },
+              { style: S.P_BOTTOM },
               'Premium Free Sample Data can be requested only with Quandl API Key.'
             ),
             _react2.default.createElement(
@@ -428,17 +366,9 @@ var About = function (_Component) {
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'gray' },
-                'For loading data from'
+                'For loading data from\xA0'
               ),
-              _react2.default.createElement(
-                _LinkToken2.default,
-                {
-                  href: 'http://ec.europa.eu/eurostat',
-                  color: '#009ae5',
-                  isFirstBlank: true
-                },
-                'Eurostat'
-              ),
+              _react2.default.createElement(_Links2.default.Eurostat, null),
               _react2.default.createElement(
                 _Token2.default,
                 { color: 'gray', isFirstBlank: true },

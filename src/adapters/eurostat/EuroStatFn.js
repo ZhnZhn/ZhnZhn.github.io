@@ -2,6 +2,7 @@ import ChartConfig from '../../charts/ChartConfig';
 import Chart from '../../charts/Chart';
 
 import QuandlFn2 from '../QuandlFn2';
+import AdapterFn from '../AdapterFn';
 
 import ChoroplethMapSlice from './ChoroplethMapSlice';
 
@@ -73,7 +74,7 @@ const EuroStatFn = {
     config.info = this.createDatasetInfo(json, option);
 
     if (seriaType === 'AREA'){
-      config.valueMoving = QuandlFn2.createValueMovingFromSeria(data);
+      config.valueMoving = AdapterFn.valueMoving(data)
     }
 
     config.series[0].zhSeriaId = option.key;

@@ -2,11 +2,9 @@
 import DateUtils from '../../utils/DateUtils'
 
 import AdapterFn from '../AdapterFn'
-import QuandlFn2 from '../QuandlFn2'
 
 import ChartConfig from '../../charts/ChartConfig'
 import Chart from '../../charts/Chart'
-//import ChartFn from '../../charts/ChartFn'
 import Tooltip from '../../charts/Tooltip'
 
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from '../IndicatorSma';
@@ -62,8 +60,8 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
     config, _data, _dataHigh, _dataLow, _dataOpen, chartId
   )
 
-  Object.assign(config, {
-    valueMoving: QuandlFn2.createValueMovingFromSeria(_data),
+  Object.assign(config, {    
+    valueMoving: AdapterFn.valueMoving(_data),
     zhVolumeConfig: ChartConfig.fIndicatorVolumeConfig(
       chartId, _dataVolumeColumn, _dataVolume
     ),

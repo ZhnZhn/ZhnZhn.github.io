@@ -8,6 +8,10 @@ var _fn = require('../../utils/fn');
 
 var _fnJsonp = require('../../utils/fnJsonp');
 
+var _fnFetchTxt = require('../../utils/fnFetchTxt');
+
+var _fnFetchTxt2 = _interopRequireDefault(_fnFetchTxt);
+
 var _loadItem = require('./loadItem');
 
 var _loadItem2 = _interopRequireDefault(_loadItem);
@@ -19,6 +23,10 @@ var _Api2 = _interopRequireDefault(_Api);
 var _EuroStatAdapter = require('../../adapters/eurostat/EuroStatAdapter');
 
 var _EuroStatAdapter2 = _interopRequireDefault(_EuroStatAdapter);
+
+var _InseeAdapter = require('../../adapters/insee/InseeAdapter');
+
+var _InseeAdapter2 = _interopRequireDefault(_InseeAdapter);
 
 var _Adapter = require('../../adapters/alpha/Adapter');
 
@@ -70,9 +78,16 @@ var Barchart = (0, _loadItem2.default)({
   adapter: _BarchartAdapter2.default
 });
 
+var Insee = (0, _loadItem2.default)({
+  fnFetch: _fnFetchTxt2.default,
+  api: _Api2.default.Insee,
+  adapter: _InseeAdapter2.default
+});
+
 exports.default = {
   Quandl: Quandl,
   EuroStat: EuroStat,
+  Insee: Insee,
 
   AlphaIndicator: AlphaIndicator,
   AlphaIntraday: AlphaIntraday,

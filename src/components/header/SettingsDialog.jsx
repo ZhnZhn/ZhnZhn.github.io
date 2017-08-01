@@ -4,6 +4,7 @@ import safeFn from '../../utils/safeFn'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import RowSecret from '../dialogs/RowSecret'
+import RowPattern from '../dialogs/RowPattern'
 import FlatButton from '../zhn-m/FlatButton'
 import RowCheckBox from '../dialogs/RowCheckBox'
 
@@ -11,15 +12,19 @@ const S = {
   MODAL : {
     position : 'static',
     width: '380px',
-    height: '280px',
+    height: '320px',
     margin: '70px auto 0px'
+  },
+  TITLE: {
+    width: '110px'
   }
 };
 
 const SET = {
   QUANDL_KEY: 'setQuandlKey',
   ALPHA_KEY: 'setAlphaKey',
-  BARCHAR_KEY: 'setBarcharKey'
+  BARCHAR_KEY: 'setBarcharKey',
+  PROXY: 'setProxy'
 };
 
 const MODE_ADMIN = 'isAdminMode';
@@ -41,7 +46,7 @@ class SettingsDialog extends Component {
     super()
     this._commandButtons = [
       <FlatButton
-        caption="Set & Close"        
+        caption="Set & Close"
         isPrimary={true}
         onClick={this._handleSet}
       />
@@ -59,10 +64,12 @@ class SettingsDialog extends Component {
     const { data, onClose } = this.props
         , setQuandlKey = safeFn(data, SET.QUANDL_KEY)
         , setAlpheKey = safeFn(data, SET.ALPHA_KEY)
-        , setBarcharKey = safeFn(data, SET.BARCHAR_KEY);
+        , setBarcharKey = safeFn(data, SET.BARCHAR_KEY)
+        , setProxy = safeFn(data, SET.PROXY);
     setQuandlKey(this.inputComp.getValue())
     setAlpheKey(this.alphaComp.getValue())
     setBarcharKey(this.barcharComp.getValue())
+    setProxy(this.proxyComp.getValue())
     onClose()
   }
   _handleMode = (fnName, mode) => {
@@ -73,6 +80,7 @@ class SettingsDialog extends Component {
 
   render(){
     const { isShow, data, onClose } = this.props
+        , _proxy = data.getProxy()
         , _isAdminMode = safeFn(data, MODE_ADMIN, false)()
         , _isDrawDeltaExtrems = safeFn(data, MODE_DELTA, false)()
         , _isNotZoomToMinMax = safeFn(data, MODE_ZOOM, false)();
@@ -85,21 +93,30 @@ class SettingsDialog extends Component {
             commandButtons={this._commandButtons}
             onClose={onClose}
          >
-
             <RowSecret
                ref={ c => this.alphaComp = c}
+               titleStyle={S.TITLE}
                title="Alpha:"
                placeholder="Alpha API Key"
             />
             <RowSecret
                ref={ c => this.barcharComp = c}
+               titleStyle={S.TITLE}
                title="Barchar:"
                placeholder="Barchar API Key"
             />
             <RowSecret
                ref={ c => this.inputComp = c}
+               titleStyle={S.TITLE}
                title="Quandl:"
                placeholder="Quandl API Key"
+            />
+            <RowPattern
+               ref={ c => this.proxyComp = c}
+               titleStyle={S.TITLE}
+               title="Https Proxy:"
+               placeholder="Https Proxy for CORS"
+               initValue={_proxy}
             />
 
            <RowCheckBox

@@ -470,8 +470,6 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnCheckIsMfi(config, json, zhPoints);
   _fnCheckIsMomAth(config, json, zhPoints);
 
-  config.valueMoving = _QuandlFn2.default.createValueMovingFromSeria(seria);
-  config.valueMoving.date = _QuandlFn2.default.getRecentDate(seria, json);
   config.series[0].data = seria;
   config.series[0].zhSeriaId = chartId;
 
@@ -479,6 +477,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
   Object.assign(config, {
+    valueMoving: _AdapterFn2.default.valueMoving(seria),
     zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
     zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries,
     zhVolumeConfig: dataVolume.length > 0 ? _ChartConfig2.default.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume) : undefined,

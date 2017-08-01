@@ -4,6 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _rSeries2;
+
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
@@ -26,10 +32,16 @@ var C = {
   SLOW_K: 'SlowK',
   SLOW_D: 'SlowD',
 
+  BBANDS: 'BBANDS',
+  BBANDS_U: 'Real Upper Band',
+  BBANDS_M: 'Real Middle Band',
+  BBANDS_L: 'Real Lower Band',
+
   BLACK: { color: 'black' },
-  RED: { color: 'red' },
+  RED: { color: '#f44336' },
   BLUE: { color: 'rgb(47, 126, 216)' },
-  BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' }
+  BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' },
+  GREEN: { color: '#4caf50' }
 };
 
 var _crValue = function _crValue(json, option) {
@@ -162,6 +174,27 @@ var _crStochSeries = function _crStochSeries(json, option) {
   return [sSlowK, sSlowD];
 };
 
+var _crBbandsSeries = function _crBbandsSeries(json, option) {
+  var ticket = option.ticket,
+      _arrs = _toDataArrs(_crValue(json, option), [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]),
+      sMiddle = _crSplineSeria({
+    data: _arrs[0], valueText: C.BBANDS_M, ticket: ticket
+  }, C.BLUE),
+      sUpper = _crSplineSeria({
+    data: _arrs[1], valueText: C.BBANDS_U, ticket: ticket
+  }, C.GREEN),
+      sLow = _crSplineSeria({
+    data: _arrs[2], valueText: C.BBANDS_L, ticket: ticket
+  }, C.RED);
+
+
+  return [sMiddle, sUpper, sLow];
+};
+
+var _rSeries = (_rSeries2 = {
+  DF: _crSeria
+}, (0, _defineProperty3.default)(_rSeries2, C.MACD, _crMacdSeries), (0, _defineProperty3.default)(_rSeries2, C.STOCH, _crStochSeries), (0, _defineProperty3.default)(_rSeries2, C.BBANDS, _crBbandsSeries), _rSeries2);
+
 var AlphaAdapter = {
   toConfig: function toConfig(json, option) {
     var indicator = option.indicator,
@@ -177,13 +210,10 @@ var AlphaAdapter = {
     }),
         _series = this.toSeries(json, option),
         _isArrSeries = Array.isArray(_series),
-        _data = _isArrSeries ? _series[0].data : _series.data,
-        _type = _isArrSeries ? _series[0].type : 'spline';
+        _refSeries = _isArrSeries ? _series[0] : _series,
+        type = _refSeries.type || 'spline';
 
-    config.series[0] = {
-      data: _data,
-      type: _type
-    };
+    Object.assign(config.series[0], _refSeries, { type: type });
     if (_isArrSeries) {
       for (var i = 1; i < _series.length; i++) {
         config.series.push(_series[i]);
@@ -198,22 +228,12 @@ var AlphaAdapter = {
     };
   },
   toSeries: function toSeries(json, option) {
-    var indicator = option.indicator;
-
-    var series = void 0;
-
-    switch (indicator) {
-      case C.MACD:
-        series = _crMacdSeries(json, option);
-        break;
-      case C.STOCH:
-        series = _crStochSeries(json, option);
-        break;
-      default:
-        series = _crSeria(json, option);
+    var _fnToSeries = _rSeries[option.indicator];
+    if (_fnToSeries) {
+      return _fnToSeries(json, option);
+    } else {
+      return _rSeries.DF(json, option);
     }
-
-    return series;
   }
 };
 

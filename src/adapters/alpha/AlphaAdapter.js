@@ -2,6 +2,7 @@
 import AdapterFn from '../AdapterFn'
 import ChartConfig from '../../charts/ChartConfig'
 
+
 const C = {
   TWO_YEARS_DAYS: 501,
   TA: 'Technical Analysis:',
@@ -14,10 +15,16 @@ const C = {
   SLOW_K: 'SlowK',
   SLOW_D: 'SlowD',
 
+  BBANDS: 'BBANDS',
+  BBANDS_U: 'Real Upper Band',
+  BBANDS_M: 'Real Middle Band',
+  BBANDS_L: 'Real Lower Band',
+
   BLACK: { color: 'black' },
-  RED: { color: 'red' },
+  RED: { color: '#f44336' },
   BLUE: { color: 'rgb(47, 126, 216)' },
-  BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' }
+  BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' },
+  GREEN: { color: '#4caf50' }
 }
 
 const _crValue = ( json, option ) => {
@@ -137,6 +144,32 @@ const _crStochSeries = (json, option) => {
   return [sSlowK, sSlowD];
 }
 
+const _crBbandsSeries = (json, option) => {
+  const { ticket } = option
+      , _arrs = _toDataArrs(
+           _crValue(json, option),
+           [C.BBANDS_M, C.BBANDS_U, C.BBANDS_L]
+        )
+      , sMiddle = _crSplineSeria({
+          data: _arrs[0], valueText: C.BBANDS_M, ticket
+        }, C.BLUE)
+     , sUpper = _crSplineSeria({
+          data: _arrs[1], valueText: C.BBANDS_U, ticket
+       }, C.GREEN)
+     , sLow = _crSplineSeria({
+            data: _arrs[2], valueText: C.BBANDS_L, ticket
+       }, C.RED);
+
+    return [sMiddle, sUpper, sLow];
+}
+
+const _rSeries = {
+  DF: _crSeria,
+  [C.MACD]: _crMacdSeries,
+  [C.STOCH]: _crStochSeries,
+  [C.BBANDS]: _crBbandsSeries,
+}
+
 const AlphaAdapter = {
   toConfig(json, option) {
     const { indicator, ticket } = option
@@ -145,23 +178,16 @@ const AlphaAdapter = {
             zhConfig: {
               id: _chartId,
               key: _chartId,
-              isWithLegend:false,
+              isWithLegend: false,
               dataSource: "Alpha"
             }
-          })        
+          })
         , _series = this.toSeries(json, option)
         , _isArrSeries = Array.isArray(_series)
-        , _data = _isArrSeries
-              ? _series[0].data
-              : _series.data
-        , _type = _isArrSeries
-             ? _series[0].type
-             : 'spline';
+        , _refSeries = _isArrSeries ? _series[0] : _series
+        , type = _refSeries.type || 'spline';
 
-    config.series[0] = {
-      data: _data,
-      type: _type,
-    }
+    Object.assign(config.series[0], _refSeries, {type})
     if (_isArrSeries) {
       for(let i=1; i<_series.length; i++){
         config.series.push(_series[i])
@@ -177,21 +203,12 @@ const AlphaAdapter = {
   },
 
   toSeries(json, option) {
-    const { indicator } = option;
-    let series;
-
-    switch (indicator) {
-      case C.MACD:
-        series = _crMacdSeries(json, option)
-        break;
-      case C.STOCH:
-        series = _crStochSeries(json, option)
-        break;
-      default:
-        series = _crSeria(json, option)
+    const _fnToSeries = _rSeries[option.indicator];
+    if (_fnToSeries){
+      return _fnToSeries(json, option);
+    } else {
+      return _rSeries.DF(json, option);
     }
-
-    return series;
   }
 };
 

@@ -9,10 +9,10 @@ class RowPattern extends Component {
   }
 
   render(){
-    const { title='', ...rest } = this.props;
+    const { title='', titleStyle, ...rest } = this.props;
     return (
       <div style={STYLE.rowDiv}>
-        <span style={STYLE.labelSpan}>
+        <span style={{ ...STYLE.labelSpan, ...titleStyle}}>
            {title}
         </span>
         <InputPattern

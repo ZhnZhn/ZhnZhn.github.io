@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "caption": "Guaranteed Minimum Wage (EUR per Hour)", "value": "000822483" },
+    { "caption": "Guaranteed Minimum Growth Wage (EUR per Hour)", "value": "000822484" },
+    { "caption": "Guaranteed Minimum Growth Wage (increase in %)", "value": "000077502" },
+    { "caption": "Gross Hourly Minimum Wage in the Overseas French Departments (EUR)", "value": "000822501" },
+    { "caption": "Gross Monthly Minimum Wage for 35 hours per week (151.67h/m)", "value": "000879877" },
+    { "caption": "Net Monthly Minimum Wage for 35h/w after deducting CGS & CRDS", "value": "000879878" }
+  ]
+}

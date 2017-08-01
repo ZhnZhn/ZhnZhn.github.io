@@ -187,19 +187,25 @@ const ChartFn = {
   },
 
   zoomIndicatorCharts(event){
-    const zhDetailCharts = this.chart.options.zhDetailCharts;
-    if (event.userMin){
-      zhDetailCharts.forEach((chart)=>{
-        chart.xAxis[0].setExtremes(
-          event.userMin, event.userMax, true, true
-        );
+    const zhDetailCharts = this.chart.options.zhDetailCharts
+       , { userMin, userMax, min, max } = event;
+    if (userMin){
+      zhDetailCharts.forEach( chart => {
+        chart.xAxis[0].setExtremes( userMin, userMax, true, true);
       })
     } else {
-      zhDetailCharts.forEach((chart) => {
-        chart.xAxis[0].setExtremes(
-          event.min, event.max, true, true
-        );
+      zhDetailCharts.forEach( chart => {
+        chart.xAxis[0].setExtremes( min, max, true, true);
       })
+    }
+  },
+  afterSetExtremesYAxis(event){
+    const { trigger, userMax, userMin } = event;
+    if (trigger === 'zoom' && userMax) {
+      this.setExtremes(
+        userMin, userMax + (userMax-userMin)*0.05,
+        true, true
+      )
     }
   },
 

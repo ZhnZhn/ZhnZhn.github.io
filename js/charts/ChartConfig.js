@@ -388,22 +388,24 @@ ChartConfig.fnNumberFormat = function (value) {
 
 ChartConfig.fBaseAreaConfig = function (option) {
   var config = Object.assign(_Chart2.default.fBaseConfig(), {
+    chart: {
+      zoomType: 'xy',
+      resetZoomButton: _Chart2.default.fResetZoomButton({ position: { x: -10 } }),
+      xDeltaCrossLabel: 4,
+      yDeltaCrossLabel: 20
+    },
     zhDetailCharts: [],
     zhToggleSeria: _ChartFn2.default.toggleSeria
   }, option);
 
-  config.chart = Object.assign(config.chart, {
-    zoomType: 'xy',
-    resetZoomButton: _Chart2.default.fResetZoomButton({
-      position: { x: -10 }
-    }),
-    xDeltaCrossLabel: 4,
-    yDeltaCrossLabel: 20
-  });
-
   config.xAxis = Object.assign(_Chart2.default.fXAxisOpposite(config.xAxis), {
     events: {
       afterSetExtremes: _ChartFn2.default.zoomIndicatorCharts
+    }
+  });
+  config.yAxis = Object.assign(config.yAxis, {
+    events: {
+      afterSetExtremes: _ChartFn2.default.afterSetExtremesYAxis
     }
   });
 

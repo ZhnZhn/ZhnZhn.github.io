@@ -88,7 +88,7 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.CHINA_FINANCE_FUTURE }, { id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }, { id: _DialogType.Quandl.LIFFE_FUTURE }, { id: _DialogType.Quandl.ICE_FUTURE }, { id: _DialogType.Quandl.WIKI_FUTURE }]
 }, {
   caption: 'Real Estate',
-  items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }, { id: _DialogType.Quandl.FMAC }]
+  items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE }, { id: _DialogType.Quandl.ZILLOW_REAL_ESTATE_2, isNew: true }, { id: _DialogType.Quandl.FMAC }]
 }];
 
 var BrowserMenu = (_BrowserMenu = {}, (0, _defineProperty3.default)(_BrowserMenu, _Type.BrowserType.ECONOMIC, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.ECONOMIC)), (0, _defineProperty3.default)(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);

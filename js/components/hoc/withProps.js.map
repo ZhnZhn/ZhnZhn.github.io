@@ -1,0 +1,13 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\hoc\\withProps.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\hoc\\withProps.js",
+ "sourceRoot": "",
+ "names": [
+  "withProps",
+  "props",
+  "overrideProps"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,YAAY,SAAZA,SAAY;AAAA,SAAiB;AAAA,WAAiB;AAAA,aAClD,8BAAC,aAAD,6BAAmBC,KAAnB,EAA8BC,aAA9B,EADkD;AAAA,KAAjB;AAAA,GAAjB;AAAA,CAAlB;;kBAGeF,S"
+}

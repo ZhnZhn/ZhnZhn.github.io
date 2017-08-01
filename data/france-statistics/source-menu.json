@@ -3,40 +3,42 @@
     {
       "caption" : "Macro-Economic",
       "items" : [
-        { "id" : "QFS_GDP_BALANCE" }
+        { "id" : "FS_GDP_BALANCE" }
       ]
     },{
       "caption" : "Foreign Trade Of", "isInitClose" : true,
       "items" : [
-        { "id" : "QFS_TRADE_PRODUCT_A17" },
-        { "id" : "QFS_TRADE_PRODUCT_A38" },
-        { "id" : "QFS_TRADE_AREA" },
-        { "id" : "QFS_TRADE_EUROPE" },
-        { "id" : "QFS_TRADE_AFRICA" },
-        { "id" : "QFS_TRADE_AMERICA" },
-        { "id" : "QFS_TRADE_MIDDLE_EAST" },
-        { "id" : "QFS_TRADE_ASIA_OCEANIA" }
+        { "id" : "FS_TRADE_PRODUCT_A17" },
+        { "id" : "FS_TRADE_PRODUCT_A38" },
+        { "id" : "FS_TRADE_AREA" },
+        { "id" : "FS_TRADE_EUROPE" },
+        { "id" : "FS_TRADE_AFRICA" },
+        { "id" : "FS_TRADE_AMERICA" },
+        { "id" : "FS_TRADE_MIDDLE_EAST" },
+        { "id" : "FS_TRADE_ASIA_OCEANIA" }
       ]
     },{
       "caption" : "Prices & Price Indices",
       "items" : [
-        { "id" : "QFS_PRICE_AGRI" },
-        { "id" : "QFS_PRICE_FOOD" },
-        { "id" : "QFS_PRICE_RETAIL" }
+        { "id" : "FS_PRICE_AGRI" },
+        { "id" : "FS_PRICE_FOOD" },
+        { "id" : "FS_PRICE_RETAIL" }
       ]
     },{
       "caption" : "Society",
       "items" : [
-        { "id" : "QFS_CULTURE" }
+        { "id" : "FS_CULTURE" },
+        { "id" : "FS_CAR_REGISTRATION" },
+        { "id" : "FS_MIN_WAGE" }
       ]
     }
   ],
   "items" : {
-    "QFS_GDP_BALANCE" : {
-      "type" : "QFS_GDP_BALANCE",
+    "FS_GDP_BALANCE" : {
+      "type" : "FS_GDP_BALANCE",
       "menuTitle" : "GDP Balance (base 2010)",
       "dialogCaption" : "GDP Balance",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -45,19 +47,18 @@
         "oneJsonProp" : "groups",
         "twoCaption" : "Item:",
         "nInitFromDate" : 16,
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoA",
-        "valueFnPrefix" : "1560",
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
 
-    "QFS_TRADE_PRODUCT_A17" : {
-      "type" : "QFS_TRADE_PRODUCT_A17",
+    "FS_TRADE_PRODUCT_A17" : {
+      "type" : "FS_TRADE_PRODUCT_A17",
       "menuTitle" : "Product Level A17",
       "dialogCaption" : "Foreign Trade of Product Level A17",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -65,18 +66,18 @@
         "oneURI" : "./data/france-statistics/trade-product-a17.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Trade:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1059",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_TRADE_PRODUCT_A38" : {
-      "type" : "QFS_TRADE_PRODUCT_A38",
+    "FS_TRADE_PRODUCT_A38" : {
+      "type" : "FS_TRADE_PRODUCT_A38",
       "menuTitle" : "Product Level A38",
       "dialogCaption" : "Foreign Trade of Product Level A38",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -84,18 +85,18 @@
         "oneURI" : "./data/france-statistics/trade-product-a38.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Trade:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1060",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_TRADE_AREA" : {
-      "type" : "QFS_TRADE_AREA",
+    "FS_TRADE_AREA" : {
+      "type" : "FS_TRADE_AREA",
       "menuTitle" : "Area or Zone",
       "dialogCaption" : "Foreign Trade of Area or Zone",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -103,18 +104,18 @@
         "oneURI" : "./data/france-statistics/trade-area.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Trade:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1061",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_TRADE_EUROPE" : {
-      "type" : "QFS_TRADE_EUROPE",
+    "FS_TRADE_EUROPE" : {
+      "type" : "FS_TRADE_EUROPE",
       "menuTitle" : "Europe",
       "dialogCaption" : "Foreign Trade of Europe",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -122,18 +123,18 @@
         "oneURI" : "./data/france-statistics/trade-countries.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Country:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1062",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_TRADE_AFRICA" : {
-      "type" : "QFS_TRADE_AFRICA",
+    "FS_TRADE_AFRICA" : {
+      "type" : "FS_TRADE_AFRICA",
       "menuTitle" : "Africa",
       "dialogCaption" : "Foreign Trade of Africa",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -141,18 +142,18 @@
         "oneURI" : "./data/france-statistics/trade-africa.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Trade:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1063",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_TRADE_AMERICA" : {
-      "type" : "QFS_TRADE_AMERICA",
+    "FS_TRADE_AMERICA" : {
+      "type" : "FS_TRADE_AMERICA",
       "menuTitle" : "America",
       "dialogCaption" : "Foreign Trade of America",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -160,18 +161,17 @@
         "oneURI" : "./data/france-statistics/trade-america.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Trade:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1064",
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_TRADE_MIDDLE_EAST" : {
-      "type" : "QFS_TRADE_MIDDLE_EAST",
+    "FS_TRADE_MIDDLE_EAST" : {
+      "type" : "FS_TRADE_MIDDLE_EAST",
       "menuTitle" : "Middle East",
       "dialogCaption" : "Foreign Trade of Middle East",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -179,18 +179,18 @@
         "oneURI" : "./data/france-statistics/trade-middle-east.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Trade:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1065",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_TRADE_ASIA_OCEANIA" : {
-      "type" : "QFS_TRADE_ASIA_OCEANIA",
+    "FS_TRADE_ASIA_OCEANIA" : {
+      "type" : "FS_TRADE_ASIA_OCEANIA",
       "menuTitle" : "Asia & Oceania",
       "dialogCaption" : "Foreign Trade of Asia & Oceania",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -198,19 +198,19 @@
         "oneURI" : "./data/france-statistics/trade-asia-oceania.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Trade:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1066",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
 
-    "QFS_PRICE_AGRI" : {
-      "type" : "QFS_PRICE_AGRI",
+    "FS_PRICE_AGRI" : {
+      "type" : "FS_PRICE_AGRI",
       "menuTitle" : "Agriculture Producer (base 2010)",
       "dialogCaption" : "Agriculture Producer",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -218,18 +218,18 @@
         "oneURI" : "./data/france-statistics/agriculture-indices.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Item:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1465",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_PRICE_FOOD" : {
-      "type" : "QFS_PRICE_FOOD",
+    "FS_PRICE_FOOD" : {
+      "type" : "FS_PRICE_FOOD",
       "menuTitle" : "Wholesale Food (base 2005)",
       "dialogCaption" : "Wholesale Food Price Indices",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -237,18 +237,18 @@
         "oneURI" : "./data/france-statistics/wholesale-indices.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Item:",
-        "loadId" : "Q",
-        "valueFn" : "RPrefixInseeTwoM",
-        "valueFnPrefix" : "1328",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_PRICE_RETAIL" : {
-      "type" : "QFS_PRICE_RETAIL",
+    "FS_PRICE_RETAIL" : {
+      "type" : "FS_PRICE_RETAIL",
       "menuTitle" : "Average Retail Prices",
       "dialogCaption" : "Average Retail Prices",
-      "chartContainerCaption" : "Quandl France Statistics",
+      "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
@@ -256,31 +256,65 @@
         "oneURI" : "./data/france-statistics/retail-prices.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Item:",
-        "loadId" : "Q",
-        "valueFn" : "RInseeTwoM",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "RTwo",
         "columnName" : "Value",
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
       }
     },
-    "QFS_CULTURE" : {
-      "type" : "QFS_CULTURE",
+    "FS_CULTURE" : {
+      "type" : "FS_CULTURE",
       "menuTitle" : "Culture",
       "dialogCaption" : "Society - Culture",
-      "chartContainerCaption" : "Quandl France Statistics Culture",
+      "chartContainerCaption" : "Insee: France Statistics Culture",
       "dialogProps" : {
         "descrUrl" : "./data/france-statistics/insee.html",
-
         "optionURI" : "./data/france-statistics/society-culture.json",
         "optionsJsonProp" : "items",
         "optionNames" : "Items",
-
         "itemCaption" : "Item:",
         "nInitFromDate" : 12,
-        "loadId" : "Q",
-        "valueFn" : "RInsee",
+        "loadId" : "FS",
+        "valueFn" : "ROne",
         "columnName" : "Value",
-
-        "dataSource" : "France National Institute of Statistics & Economic (Code: INSEE)"
+        "dataSource" : "INSEE"
+      }
+    },
+    "FS_CAR_REGISTRATION" : {
+      "type" : "FS_CAR_REGISTRATION",
+      "menuTitle" : "Cars Registration",
+      "dialogCaption" : "Cars Registration",
+      "chartContainerCaption" : "Insee: Cars Registration",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/cars-registration.json",
+        "optionsJsonProp" : "items",
+        "optionNames" : "Items",
+        "itemCaption" : "Item:",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "ROne",
+        "columnName" : "Value",
+        "dataSource" : "INSEE"
+      }
+    },
+    "FS_MIN_WAGE" : {
+      "type" : "FS_MIN_WAGE",
+      "menuTitle" : "Guaranteed Min. Wages",
+      "dialogCaption" : "Guaranteed Min. Wages",
+      "chartContainerCaption" : "Insee: Guaranteed Minimum Wages",
+      "dialogProps" : {
+        "descrUrl" : "./data/france-statistics/insee.html",
+        "optionURI" : "./data/france-statistics/min-wages.json",
+        "optionsJsonProp" : "items",
+        "optionNames" : "Items",
+        "itemCaption" : "Item:",
+        "nInitFromDate" : 12,
+        "loadId" : "FS",
+        "valueFn" : "ROne",
+        "columnName" : "Value",
+        "dataSource" : "INSEE"
       }
     }
   }

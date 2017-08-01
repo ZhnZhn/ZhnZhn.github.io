@@ -9,6 +9,7 @@ var SettingSlice = {
     quandlKey: undefined,
     barchartKey: undefined,
     alphaKey: undefined,
+    proxy: 'https://crossorigin.me/',
     isAdminMode: false,
     isDrawDeltaExtrems: false,
     isNotZoomToMinMax: false
@@ -19,6 +20,7 @@ var SettingSlice = {
       setQuandlKey: this.setSetting('quandlKey').bind(this),
       setAlphaKey: this.setSetting('alphaKey').bind(this),
       setBarcharKey: this.setSetting('barchartKey').bind(this),
+      getProxy: this.getProxy.bind(this),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),
       isNotZoomToMinMax: this.isSetting.bind(this, 'isNotZoomToMinMax')
@@ -39,6 +41,9 @@ var SettingSlice = {
   },
   getAlphaKey: function getAlphaKey() {
     return this.setting.alphaKey;
+  },
+  getProxy: function getProxy() {
+    return this.setting.proxy;
   },
   isSetting: function isSetting(propName, value) {
     if (typeof value == 'undefined') {
