@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/flux/actions/BrowserActions.js"],"names":["BrowserActionTypes","SHOW_BROWSER","UPDATE_BROWSER_MENU","SHOW_BROWSER_DYNAMIC","INIT_BROWSER_DYNAMIC","LOAD_BROWSER_DYNAMIC","LOAD_BROWSER_DYNAMIC_COMPLETED","UPDATE_WATCH_BROWSER","BrowserActions","createActions","children","_fnFetchSourceMenu","json","option","onCompleted","browserType","listen","uri","sourceMenuUrl","onCheckResponse","onFetch","completed","onCatch","onFailed","failed"],"mappings":";;;;;;;;;;;;;AAAA;;;;AAEA;;AACA;;;;AAEO,IAAMA,kDAAqB;AAChCC,gBAAe,aADiB;AAEhCC,uBAAsB,mBAFU;;AAIhCC,wBAAuB,oBAJS;AAKhCC,wBAAuB,oBALS;AAMhCC,wBAAuB,oBANS;AAOhCC,kCAAiC,6BAPD;;AAShCC,wBAAuB;AATS,CAA3B;;AAYP,IAAMC,iBAAiB,iBAAOC,aAAP,mFACpBT,mBAAmBC,YADC,EACe,EADf,wDAEpBD,mBAAmBE,mBAFC,EAEsB,EAFtB,wDAIpBF,mBAAmBG,oBAJC,EAIuB,EAJvB,wDAKpBH,mBAAmBI,oBALC,EAKuB,EALvB,wDAMpBJ,mBAAmBK,oBANC,EAMuB,EAAEK,UAAW,CAAC,WAAD,EAAc,QAAd,CAAb,EANvB,wDAQpBV,mBAAmBO,oBARC,EAQuB,EARvB,0BAAvB;;AAWA,IAAMI,qBAAqB,SAArBA,kBAAqB,OAAuC;AAAA,MAA5BC,IAA4B,QAA5BA,IAA4B;AAAA,MAAtBC,MAAsB,QAAtBA,MAAsB;AAAA,MAAdC,WAAc,QAAdA,WAAc;;AAChE;;;;;AADgE,MAMxDC,WANwD,GAMxCF,MANwC,CAMxDE,WANwD;;AAOhED,cAAY,EAAEF,UAAF,EAAQG,wBAAR,EAAZ;AACD,CARD;;AAUAP,eAAeR,mBAAmBK,oBAAlC,EAAwDW,MAAxD,CAA+D,UAASH,MAAT,EAAgB;AAC5E,mBAAQ;AACNI,SAAMJ,OAAOK,aADP;AAENL,YAASA,MAFH;AAGNM,qBAAkB,yBAACP,IAAD;AAAA,aAAU,IAAV;AAAA,KAHZ;AAINQ,aAAUT,kBAJJ;AAKNG,iBAAc,KAAKO,SALb;AAMNC,6BANM;AAONC,cAAW,KAAKC;AAPV,GAAR;AASF,CAVD;;kBAaehB,c","file":"BrowserActions.js","sourcesContent":["import Reflux from 'reflux';\r\n\r\nimport {fnFetch} from '../../utils/fn';\r\nimport {fnCatch} from '../logic/fnCatch';\r\n\r\nexport const BrowserActionTypes = {\r\n  SHOW_BROWSER : 'showBrowser',\r\n  UPDATE_BROWSER_MENU : 'updateBrowserMenu',\r\n\r\n  SHOW_BROWSER_DYNAMIC : 'showBrowserDynamic',\r\n  INIT_BROWSER_DYNAMIC : 'initBrowserDynamic',\r\n  LOAD_BROWSER_DYNAMIC : 'loadBrowserDynamic',\r\n  LOAD_BROWSER_DYNAMIC_COMPLETED : 'loadBrowserDynamicCompleted',\r\n\r\n  UPDATE_WATCH_BROWSER : 'updateWatchBrowser'\r\n}\r\n\r\nconst BrowserActions = Reflux.createActions({\r\n  [BrowserActionTypes.SHOW_BROWSER] : {},\r\n  [BrowserActionTypes.UPDATE_BROWSER_MENU] : {},\r\n\r\n  [BrowserActionTypes.SHOW_BROWSER_DYNAMIC] : {},\r\n  [BrowserActionTypes.INIT_BROWSER_DYNAMIC] : {},\r\n  [BrowserActionTypes.LOAD_BROWSER_DYNAMIC] : { children : ['completed', 'failed']},\r\n\r\n  [BrowserActionTypes.UPDATE_WATCH_BROWSER] : {}\r\n});\r\n\r\nconst _fnFetchSourceMenu = function({ json, option, onCompleted }){\r\n  /*\r\n  const { menu, items } = json\r\n      , { browserType } = option;\r\n  onCompleted({ menu, items, browserType });\r\n  */\r\n  const { browserType } = option;\r\n  onCompleted({ json, browserType });\r\n}\r\n\r\nBrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function(option){\r\n   fnFetch({\r\n     uri : option.sourceMenuUrl,\r\n     option : option,\r\n     onCheckResponse : (json) => true,\r\n     onFetch : _fnFetchSourceMenu,\r\n     onCompleted : this.completed,\r\n     onCatch : fnCatch,\r\n     onFailed : this.failed\r\n   })\r\n})\r\n\r\n\r\nexport default BrowserActions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\BrowserActions.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\BrowserActions.js",
+ "sourceRoot": "",
+ "names": [
+  "BrowserActionTypes",
+  "SHOW_BROWSER",
+  "UPDATE_BROWSER_MENU",
+  "SHOW_BROWSER_DYNAMIC",
+  "INIT_BROWSER_DYNAMIC",
+  "LOAD_BROWSER_DYNAMIC",
+  "LOAD_BROWSER_DYNAMIC_COMPLETED",
+  "UPDATE_WATCH_BROWSER",
+  "BrowserActions",
+  "createActions",
+  "children",
+  "_fnFetchSourceMenu",
+  "json",
+  "option",
+  "onCompleted",
+  "browserType",
+  "listen",
+  "uri",
+  "sourceMenuUrl",
+  "onFetch",
+  "completed",
+  "onCatch",
+  "onFailed",
+  "failed"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;;;AAEA;;AACA;;;;AAEO,IAAMA,kDAAqB;AAChCC,gBAAe,aADiB;AAEhCC,uBAAsB,mBAFU;;AAIhCC,wBAAuB,oBAJS;AAKhCC,wBAAuB,oBALS;AAMhCC,wBAAuB,oBANS;AAOhCC,kCAAiC,6BAPD;;AAShCC,wBAAuB;AATS,CAA3B;;AAYP,IAAMC,iBAAiB,iBAAOC,aAAP,mFACpBT,mBAAmBC,YADC,EACe,EADf,wDAEpBD,mBAAmBE,mBAFC,EAEsB,EAFtB,wDAIpBF,mBAAmBG,oBAJC,EAIuB,EAJvB,wDAKpBH,mBAAmBI,oBALC,EAKuB,EALvB,wDAMpBJ,mBAAmBK,oBANC,EAMuB,EAAEK,UAAW,CAAC,WAAD,EAAc,QAAd,CAAb,EANvB,wDAQpBV,mBAAmBO,oBARC,EAQuB,EARvB,0BAAvB;;AAWA,IAAMI,qBAAqB,SAArBA,kBAAqB,OAAuC;AAAA,MAA5BC,IAA4B,QAA5BA,IAA4B;AAAA,MAAtBC,MAAsB,QAAtBA,MAAsB;AAAA,MAAdC,WAAc,QAAdA,WAAc;AAAA,MACxDC,WADwD,GACxCF,MADwC,CACxDE,WADwD;;AAEhED,cAAY,EAAEF,UAAF,EAAQG,wBAAR,EAAZ;AACD,CAHD;;AAKAP,eAAeR,mBAAmBK,oBAAlC,EAAwDW,MAAxD,CAA+D,UAASH,MAAT,EAAgB;AAC5E,0BAAU;AACRI,SAAMJ,OAAOK,aADL;AAERL,YAASA,MAFD;AAGRM,aAAUR,kBAHF;AAIRG,iBAAc,KAAKM,SAJX;AAKRC,6BALQ;AAMRC,cAAW,KAAKC;AANR,GAAV;AAQF,CATD;;kBAYef,c"
+}

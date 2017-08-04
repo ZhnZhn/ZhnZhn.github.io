@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DOMPurify from 'purify';
 
-import { fnFetchText } from '../../utils/fn';
+import { fetchTxt } from '../../utils/fnFetch';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 
 const DESCR_EMPTY = '<p class="descr__part">Description Empty for this Datasource</p>';
@@ -51,13 +51,13 @@ class DescriptionDialog extends Component {
   }
 
   _loadDescr = ( descrUrl='' ) => {
-     if ( descrUrl ) {
-       fnFetchText({ uri: descrUrl, onFetch: this._setDescrHtml})
+     if ( descrUrl ) {       
+       fetchTxt({ uri: descrUrl, onFetch: this._setDescrHtml})
      } else {
        this._setDescrHtml();
      }
   }
-  _setDescrHtml = ({ text=DESCR_EMPTY }={}) => {
+  _setDescrHtml = ({ json:text=DESCR_EMPTY }={}) => {
     this.setState({ descrHtml: text })
   }
 

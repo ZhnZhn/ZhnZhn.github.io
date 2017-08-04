@@ -7,7 +7,6 @@ import ScrollPane from '../zhn/ScrollPane'
 import BrowserCaption from '../zhn/BrowserCaption'
 import TwitterLink from './TwitterLink'
 import Step from './Step';
-import Token from './Token';
 import Link from '../links/Links';
 import IconLogoBar from './IconLogoBar';
 
@@ -34,6 +33,24 @@ const S = {
   },
   BT_TWITTER : {
     marginLeft: '12px'
+  },
+  GREEN: {
+    color: '#80c040'
+  },
+  GRAY: {
+    color: 'gray'
+  },
+  BLACK: {
+    color: 'black'
+  },
+  BLUE: {
+    color: '#009ae5'
+  },
+  BLUE_DARK: {
+    color: '#2f7ed8'
+  },
+  RED: {
+    color: '#F44336'
   }
 };
 
@@ -92,77 +109,79 @@ class About extends Component {
 
          <ScrollPane style={S.SCROLL_DIV}>
 
-         <div style={S.DIV_WRAPPER}>
+         <div style={{...S.DIV_WRAPPER, ...S.GREY}}>
          <p>
-           <Token color="#80c040">
-             ERC
-           </Token>
-           <Token color="gray" isFirstBlank={true}>
+           <span style={S.GREEN}>
+             ERC&nbsp;
+           </span>
+           <span>
              is an economic RESTful client.
-           </Token>
+           </span>
          </p>
          <p style={S.P_BOTTOM}>
            With it, you can view economic free open data from WEB.
          </p>
          <p>
-          <Token color="gray">
+          <span>
             Data providers:
-          </Token>
+          </span>
         </p>
         <p>
           <Link.Quandl/>
-          <Token color="black">
+          <span style={S.BLACK}>
             &nbsp;(Key),&nbsp;
-          </Token>
+          </span>
           <Link.Barchart/>
-          <Token color="black">
+          <span style={S.BLACK}>
             &nbsp;(Key),&nbsp;
-          </Token>
+          </span>
           <Link.AlphaVantage/>
-          <Token color="black">
+          <span style={S.BLACK}>
             &nbsp;(Key),
-          </Token>
+          </span>
          </p>
          <p style={S.P_BOTTOM}>
            <Link.Eurostat/>
-           <Token color="#009ae5">
+           <span style={S.BLUE}>
              ,&nbsp;
-           </Token>
+           </span>
            <Link.Insee/>
-           <Token color="black">
+           <span style={S.BLACK}>
              &nbsp;(Https Proxy for CORS).
-           </Token>
+           </span>
          </p>
-          <p>
-            <Step step="1" />
-            <Token color="black" isFirstBlank={true}>
-               Choose a data source Browser from Topics.
-            </Token>
-          </p>
-          <p style={S.MARGIN_TOP}>
-            <Step step="2" />
-            <Token color="black" isFirstBlank={true}>
-               Choose a dataset menu item in a Browser.
-            </Token>
-          </p>
-          <p style={S.MARGIN_TOP}>
-            <Step step="3" />
-            <Token color="black" isFirstBlank={true}>
-               Select params and enter query date in a draggable Dialog.
-            </Token>
-          </p>
-          <p style={S.MARGIN_TOP}>
-             <Step step="4" />
-             <Token color="black" isFirstBlank={true}>
-                Click a button Load.
-             </Token>
-          </p>
-          <p style={S.MARGIN_TOP}>
-             <Step step="5" />
-             <Token color="black" isFirstBlank={true}>
-                Also you can export chart to PNG, JPG, SVG, print to PDF.
-             </Token>
-          </p>
+         <div style={S.BLACK}>
+            <p>
+              <Step step="1" />
+              <span>
+                 &nbsp;Choose a data source Browser from Topics.
+              </span>
+            </p>
+            <p style={S.MARGIN_TOP}>
+              <Step step="2" />
+              <span>
+                 &nbsp;Choose a dataset menu item in a Browser.
+              </span>
+            </p>
+            <p style={S.MARGIN_TOP}>
+              <Step step="3" />
+              <span>
+                 &nbsp;Select params and enter query date in a draggable Dialog.
+              </span>
+            </p>
+            <p style={S.MARGIN_TOP}>
+               <Step step="4" />
+               <span>
+                  &nbsp;Click a button Load.
+               </span>
+            </p>
+            <p style={S.MARGIN_TOP}>
+               <Step step="5" />
+               <span>
+                  &nbsp;Also you can export chart to PNG, JPG, SVG, print to PDF.
+               </span>
+            </p>
+         </div>
           <p style={Object.assign({}, S.P_BOTTOM, S.MARGIN_TOP)}>
             The result will be shown in a Chart in a Chart container.
           </p>
@@ -174,35 +193,35 @@ class About extends Component {
              In one time max three Dialogs can be opened.
           </p>
           <p>
-            <Token color="#F44336">
-               Attention:
-            </Token>
-            <Token color="gray" isFirstBlank={true}>
+            <span style={S.RED}>
+               Attention:&nbsp;
+            </span>
+            <span>
               For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it,
               close the chart in the container and load data again.
-            </Token>
+            </span>
          </p>
          <p style={S.P_BOTTOM}>
              The value of currency is not always USD as shows in a chart tooltip.
              Sometimes more details about data can be look at tab Info on a Chart.
          </p>
          <p style={S.P_BOTTOM}>
-           <Token color="gray">
+           <span>
              In that case of data loading from&nbsp;
-           </Token>
+           </span>
            <Link.Quandl/>
-           <Token color="gray" isFirstBlank={true}>
-              data provider, for accessing without API Key, exists some restriction on frequency
-              and amount queries (<Token color="#2f7ed8">50 per day/1 at a time</Token><Token color="gray">).</Token>
-           </Token>
+           <span>
+              &nbsp;data provider, for accessing without API Key, exists some restriction on frequency
+              and amount queries (<span style={S.BLUE_DARK}>50 per day/1 at a time</span><span style={S.GREY}>).</span>
+           </span>
          </p>
          <p>
             According to Quandl, anonymous requests can be deprecated soon. With API Key
          </p>
          <p style={S.P_BOTTOM}>
-           <Token color="gray">
-             you will be have (<Token color="#2f7ed8">50 000 per day/1 at a time</Token>). It's free of charge to receive.
-           </Token>
+           <span>
+             you will be have (<span style={S.BLUE_DARK}>50 000 per day/1 at a time</span>). It's free of charge to receive.
+           </span>
          </p>
          <p>
              A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.
@@ -212,19 +231,19 @@ class About extends Component {
             Premium Free Sample Data can be requested only with Quandl API Key.
          </p>
          <p>
-           <Token color="gray">
+           <span>
              For loading data from&nbsp;
-           </Token>
+           </span>
            <Link.Eurostat/>
-           <Token color="gray" isFirstBlank={true}>
-             does not exist any restrictions.
-           </Token>
+           <span>
+             &nbsp;does not exist any restrictions.
+           </span>
          </p>
          <IconLogoBar />
          <p>
-           <Token color="black">
+           <span style={S.BLACK}>
              *Logos Fair Use.
-           </Token>
+           </span>
          </p>
         </div>
         </ScrollPane>

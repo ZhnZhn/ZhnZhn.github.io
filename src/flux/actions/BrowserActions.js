@@ -1,6 +1,6 @@
 import Reflux from 'reflux';
 
-import {fnFetch} from '../../utils/fn';
+import { fetchJson } from '../../utils/fnFetch'
 import {fnCatch} from '../logic/fnCatch';
 
 export const BrowserActionTypes = {
@@ -26,21 +26,15 @@ const BrowserActions = Reflux.createActions({
   [BrowserActionTypes.UPDATE_WATCH_BROWSER] : {}
 });
 
-const _fnFetchSourceMenu = function({ json, option, onCompleted }){
-  /*
-  const { menu, items } = json
-      , { browserType } = option;
-  onCompleted({ menu, items, browserType });
-  */
+const _fnFetchSourceMenu = function({ json, option, onCompleted }){  
   const { browserType } = option;
   onCompleted({ json, browserType });
 }
 
 BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function(option){
-   fnFetch({
+   fetchJson({
      uri : option.sourceMenuUrl,
      option : option,
-     onCheckResponse : (json) => true,
      onFetch : _fnFetchSourceMenu,
      onCompleted : this.completed,
      onCatch : fnCatch,

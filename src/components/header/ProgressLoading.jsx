@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {ChartActionTypes} from '../../flux/actions/ChartActions';
 import ProgressLine from '../zhn/ProgressLine';
 
-const Colors = {
+const C = {
   LOADING : '#2F7ED8',
   FAILED : 'rgb(237, 88, 19)'
 };
@@ -12,23 +12,23 @@ const Colors = {
 class ProgressLoading extends Component {
   state = {
     completed : 0,
-    color : Colors.LOADING
+    color : C.LOADING
   }
 
   componentDidMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
   }
   componentWillUnmount(){
-    this.unsubscribe();
+    this.unsubscribe()
   }
   _onStore = (actionType, option) => {
       if (actionType === ChartActionTypes.LOAD_STOCK){
-        this.setState({completed: 35, color: Colors.LOADING});
+        this.setState({ completed: 35, color: C.LOADING })
       } else if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED
                  || actionType === ChartActionTypes.LOAD_STOCK_ADDED){
-        this.setState({completed: 100, color: Colors.LOADING});
+        this.setState({ completed: 100, color: C.LOADING })
       } else if (actionType === ChartActionTypes.LOAD_STOCK_FAILED){
-        this.setState({completed: 100, color: Colors.FAILED})
+        this.setState({ completed: 100, color: C.FAILED })
       }
   }
 
@@ -40,7 +40,7 @@ class ProgressLoading extends Component {
          color={color}
          completed={completed}
       />
-    )
+    );
   }
 }
 

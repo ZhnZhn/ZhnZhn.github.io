@@ -30,11 +30,10 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLE = {
+var S = {
   LABEL: {
     display: 'inline-block',
     color: '#2f7ed8',
-    //paddingLeft: '10px',
     paddingRight: '10px',
     fontSize: '16px',
     fontWeight: 'bold'
@@ -65,8 +64,8 @@ var LimitRemainingLabel = function (_Component) {
   }
 
   (0, _createClass3.default)(LimitRemainingLabel, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       var store = this.props.store;
 
       this.unsubscribe = store.listenWithLimitRemaining(this._onStore);
@@ -82,10 +81,9 @@ var LimitRemainingLabel = function (_Component) {
       var style = this.props.style,
           value = this.state.value;
 
-
       return _react2.default.createElement(
         'span',
-        { style: (0, _extends3.default)({}, STYLE.LABEL, style) },
+        { style: (0, _extends3.default)({}, S.LABEL, style) },
         value
       );
     }

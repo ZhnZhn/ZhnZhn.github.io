@@ -32,7 +32,9 @@ var _toData = function _toData(str) {
   var i = 0,
       max = series.length,
       _seria = void 0,
-      _v = void 0;
+      _v = void 0,
+      minClose = Number.POSITIVE_INFINITY,
+      maxClose = Number.NEGATIVE_INFINITY;
   for (i; i < max; i++) {
     _seria = series[i];
     info.push({
@@ -43,17 +45,26 @@ var _toData = function _toData(str) {
       unitMeasure: _seria.getAttribute('UNIT_MEASURE'),
       unitMult: _seria.getAttribute('UNIT_MULT')
     });
+
     _seria.childNodes.forEach(function (node) {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
       if (!Number.isNaN(_v)) {
         data.push([_AdapterFn2.default.ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
+
+        if (minClose > _v) {
+          minClose = _v;
+        }
+        if (maxClose < _v) {
+          maxClose = _v;
+        }
       }
     });
   }
 
   return {
     data: data.sort(_AdapterFn2.default.compareByDate),
-    info: info
+    info: info,
+    minClose: minClose, maxClose: maxClose
   };
 };
 
@@ -84,7 +95,9 @@ var InseeAdapter = {
         config = _ChartConfig2.default.fBaseAreaConfig(),
         _toData2 = _toData(str),
         data = _toData2.data,
-        info = _toData2.info;
+        info = _toData2.info,
+        minClose = _toData2.minClose,
+        maxClose = _toData2.maxClose;
 
     Object.assign(config.series[0], {
       data: data,
@@ -113,12 +126,19 @@ var InseeAdapter = {
     });
     config.chart.spacingTop = 25;
 
+    _ChartConfig2.default.setMinMax(config, minClose, maxClose);
+
     return { config: config };
   },
   toSeries: function toSeries(str, option) {
+    var value = option.value,
+        _toData3 = _toData(str),
+        data = _toData3.data;
+
     return Object.assign(_ChartConfig2.default.fSeries(), {
-      zhSeriaId: 'not_implemented',
-      zhValueText: 'not implemented'
+      data: data,
+      zhSeriaId: value,
+      zhValueText: value
     });
   }
 };

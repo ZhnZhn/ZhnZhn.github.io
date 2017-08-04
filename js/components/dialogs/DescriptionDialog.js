@@ -30,7 +30,7 @@ var _purify = require('purify');
 
 var _purify2 = _interopRequireDefault(_purify);
 
-var _fn = require('../../utils/fn');
+var _fnFetch = require('../../utils/fnFetch');
 
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
@@ -63,7 +63,7 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
       var descrUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
       if (descrUrl) {
-        (0, _fn.fnFetchText)({ uri: descrUrl, onFetch: _this._setDescrHtml });
+        (0, _fnFetch.fetchTxt)({ uri: descrUrl, onFetch: _this._setDescrHtml });
       } else {
         _this._setDescrHtml();
       }
@@ -71,8 +71,8 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
 
     _this._setDescrHtml = function () {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          _ref$text = _ref.text,
-          text = _ref$text === undefined ? DESCR_EMPTY : _ref$text;
+          _ref$json = _ref.json,
+          text = _ref$json === undefined ? DESCR_EMPTY : _ref$json;
 
       _this.setState({ descrHtml: text });
     };

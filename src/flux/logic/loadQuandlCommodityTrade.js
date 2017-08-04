@@ -1,5 +1,5 @@
 
-import { fnFetch } from '../../utils/fn';
+import { fetchJson } from '../../utils/fnFetch'
 import { fnCatch } from './fnCatch';
 import ChartStore from '../stores/ChartStore';
 
@@ -37,7 +37,7 @@ const _loadToChartComp = function(option, onCompleted, onFailed){
        , _onFailed = (isLoadMeta)
             ? _fnFailedLoadMeta.bind(null, option, onFailed)
             : onFailed;
-   fnFetch({
+   fetchJson({
      uri : QuandlApi.getRequestUrl(option),
      option : option,
      onCheckResponse : QuandlApi.checkResponse,
@@ -56,7 +56,7 @@ const _loadToChart = function(option, onAdded, onFailed){
       , _onFailed = (isLoadMeta)
            ? _fnFailedLoadMeta.bind(null, option, onFailed)
            : onFailed;
-  fnFetch({
+  fetchJson({
     uri : QuandlApi.getRequestUrl(option),
     option : option,
     onCheckResponse : QuandlApi.checkResponse,

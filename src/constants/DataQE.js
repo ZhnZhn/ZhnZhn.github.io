@@ -2,6 +2,38 @@
 
 const DataQE = {
 
+  QE_BANK_CANADA: {
+    "type" : "QE_BANK_CANADA",
+    "menuTitle" : "Bank of Canada",
+    "dialogCaption" : "Bank of Canada",
+    "chartContainerCaption" : "Quandl: Bank of Canada",
+    "dialogProps" : {
+      "descrUrl" : "./data/quandl/bank-of-canada.html",
+      "optionURI" : "./data/quandl/bank-of-canada.json",
+      "optionsJsonProp" : "items",
+      "valueFn" : "RPrefixOne",
+      "valueFnPrefix" : "BOC",
+      "loadId" : "Q",
+      "dataSource" : "Bank of Canada (Code: BOC)"
+    }
+  },
+  QE_BANK_SWISS: {
+    "type" : "QE_BANK_SWISS",
+    "menuTitle" : "Swiss National Bank",
+    "dialogCaption" : "Swiss National Bank",
+    "chartContainerCaption" : "Quandl: Swiss National Bank",
+    "dialogProps" : {
+      "descrUrl" : "./data/quandl/bank-of-canada.html",
+      "optionURI" : "./data/quandl/swiss-national-bank.json",
+      "optionsJsonProp" : "items",
+      "valueFn" : "RPrefixOne",
+      "valueFnPrefix" : "SNB",
+      "loadId" : "Q",
+      "seriaColumnNames": ["All"],
+      "dataSource" : "Swiss National Bank (Code: SNB)"
+    }
+  },
+
   QE_COMMODITY_PRICE : {
       type : 'QE_COMMODITY_PRICE',
       menuTitle : 'Commodity Prices',

@@ -44,9 +44,16 @@ class SettingsDialog extends Component {
 
   constructor(props){
     super()
+    const { data } = props;
+
+    this._setQuandlKey = safeFn(data, SET.QUANDL_KEY)
+    this._setAlpheKey = safeFn(data, SET.ALPHA_KEY)
+    this._setBarcharKey = safeFn(data, SET.BARCHAR_KEY)
+    this._setProxy = safeFn(data, SET.PROXY)
+
     this._commandButtons = [
       <FlatButton
-        caption="Set & Close"
+        caption="Set All & Close"
         isPrimary={true}
         onClick={this._handleSet}
       />
@@ -61,15 +68,13 @@ class SettingsDialog extends Component {
   }
 
   _handleSet = () => {
-    const { data, onClose } = this.props
-        , setQuandlKey = safeFn(data, SET.QUANDL_KEY)
-        , setAlpheKey = safeFn(data, SET.ALPHA_KEY)
-        , setBarcharKey = safeFn(data, SET.BARCHAR_KEY)
-        , setProxy = safeFn(data, SET.PROXY);
-    setQuandlKey(this.inputComp.getValue())
-    setAlpheKey(this.alphaComp.getValue())
-    setBarcharKey(this.barcharComp.getValue())
-    setProxy(this.proxyComp.getValue())
+    const { onClose } = this.props;
+
+    this._setQuandlKey(this.inputComp.getValue())
+    this._setAlpheKey(this.alphaComp.getValue())
+    this._setBarcharKey(this.barcharComp.getValue())
+    this._setProxy(this.proxyComp.getValue())
+
     onClose()
   }
   _handleMode = (fnName, mode) => {
@@ -98,18 +103,21 @@ class SettingsDialog extends Component {
                titleStyle={S.TITLE}
                title="Alpha:"
                placeholder="Alpha API Key"
+               onEnter={this._setAlpheKey}
             />
             <RowSecret
                ref={ c => this.barcharComp = c}
                titleStyle={S.TITLE}
                title="Barchar:"
                placeholder="Barchar API Key"
+               onEnter={this._setBarcharKey}
             />
             <RowSecret
                ref={ c => this.inputComp = c}
                titleStyle={S.TITLE}
                title="Quandl:"
                placeholder="Quandl API Key"
+               onEnter={this._setQuandlKey}
             />
             <RowPattern
                ref={ c => this.proxyComp = c}
@@ -117,6 +125,7 @@ class SettingsDialog extends Component {
                title="Https Proxy:"
                placeholder="Https Proxy for CORS"
                initValue={_proxy}
+               onEnter={this._setProxy}
             />
 
            <RowCheckBox

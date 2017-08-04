@@ -178,6 +178,7 @@ ChartConfig.theme = {
     height: _Chart2.default.HEIGHT,
     spacingTop: _Chart2.default.THEME_SPACING_TOP,
     spacingBottom: _Chart2.default.SPACING_BOTTOM,
+    marginRight: _Chart2.default.MARGIN_RIGHT,
     plotBackgroundColor: _Color2.default.PLOT,
     backgroundColor: _Color2.default.CHART,
     reflow: false,

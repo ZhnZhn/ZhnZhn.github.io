@@ -15,7 +15,7 @@ var _reflux = require('reflux');
 
 var _reflux2 = _interopRequireDefault(_reflux);
 
-var _fn = require('../../utils/fn');
+var _fnFetch = require('../../utils/fnFetch');
 
 var _fnCatch = require('../logic/fnCatch');
 
@@ -39,24 +39,15 @@ var _fnFetchSourceMenu = function _fnFetchSourceMenu(_ref) {
   var json = _ref.json,
       option = _ref.option,
       onCompleted = _ref.onCompleted;
-
-  /*
-  const { menu, items } = json
-      , { browserType } = option;
-  onCompleted({ menu, items, browserType });
-  */
   var browserType = option.browserType;
 
   onCompleted({ json: json, browserType: browserType });
 };
 
 BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function (option) {
-  (0, _fn.fnFetch)({
+  (0, _fnFetch.fetchJson)({
     uri: option.sourceMenuUrl,
     option: option,
-    onCheckResponse: function onCheckResponse(json) {
-      return true;
-    },
     onFetch: _fnFetchSourceMenu,
     onCompleted: this.completed,
     onCatch: _fnCatch.fnCatch,
@@ -65,4 +56,4 @@ BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function (option)
 });
 
 exports.default = BrowserActions;
-//# sourceMappingURL=BrowserActions.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\BrowserActions.js.map

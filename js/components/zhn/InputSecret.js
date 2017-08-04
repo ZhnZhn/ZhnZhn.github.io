@@ -76,6 +76,16 @@ var InputSecret = function (_Component) {
     }, _this._handleChangeValue = function (event) {
       _this.secret = event.target.value;
       _this.setState({ value: _maskValue(_this.secret.length) });
+    }, _this._handleKeyDown = function (event) {
+      switch (event.keyCode) {
+        case 13:
+          if (typeof _this.props.onEnter === 'function') {
+            _this.props.onEnter(event.target.value);
+          }
+          break;
+        default:
+          return;
+      }
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
@@ -103,7 +113,8 @@ var InputSecret = function (_Component) {
           placeholder: placeholder,
           maxLength: maxLength,
           defaultValue: value,
-          onChange: this._handleChangeValue
+          onChange: this._handleChangeValue,
+          onKeyDown: this._handleKeyDown
         })
       );
     }

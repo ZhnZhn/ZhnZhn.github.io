@@ -82,7 +82,7 @@ const ChartLegend = {
         );
       default:
        return Object.assign({}, baseConfig,
-         { color: undefined, symbol: undefined, isSecondAxes: undefined}
+         { color: undefined, symbol: 'circle', isSecondAxes: false }
        );
     }
   }

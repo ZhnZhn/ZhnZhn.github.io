@@ -98,11 +98,13 @@ const QuandlFn2 = {
   },
 
   findColumnIndex(obj, columnName=''){
-     const column_names = (Array.isArray(obj))
+     const column_names = Array.isArray(obj)
              ? obj
-             : (obj.dataset.column_names) ? obj.dataset.column_names : []
+             : obj.dataset.column_names
+                  ? obj.dataset.column_names
+                  : []
          , _columnName = columnName.toLowerCase();
-
+    
      if ( columnName && column_names ) {
         for (let i=0, max=column_names.length; i<max; i++){
           if (column_names[i].toLowerCase() === _columnName){

@@ -4,13 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fn = require('../../utils/fn');
-
-var _fnJsonp = require('../../utils/fnJsonp');
-
-var _fnFetchTxt = require('../../utils/fnFetchTxt');
-
-var _fnFetchTxt2 = _interopRequireDefault(_fnFetchTxt);
+var _fnFetch = require('../../utils/fnFetch');
 
 var _loadItem = require('./loadItem');
 
@@ -43,43 +37,46 @@ var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Quandl = (0, _loadItem2.default)({
-  fnFetch: _fn.fnFetch,
+  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Quandl,
   adapter: _QuandlAdapter2.default
 });
 
 var EuroStat = (0, _loadItem2.default)({
-  fnFetch: _fn.fnFetch,
+  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.EuroStat,
   adapter: _EuroStatAdapter2.default
 });
 
 var AlphaIndicator = (0, _loadItem2.default)({
-  fnFetch: _fn.fnFetch,
+  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Alpha,
   adapter: _Adapter2.default.Indicator
 });
 
 var AlphaIntraday = (0, _loadItem2.default)({
-  fnFetch: _fn.fnFetch,
+  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Alpha,
   adapter: _Adapter2.default.Intraday
 });
 
 var AlphaSector = (0, _loadItem2.default)({
-  fnFetch: _fn.fnFetch,
+  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Alpha,
   adapter: _Adapter2.default.Sector
 });
 
 var Barchart = (0, _loadItem2.default)({
-  fnFetch: _fnJsonp.fnFetch,
+  fnFetch: _fnFetch.fetchJsonp,
+  optionFetch: {
+    jsonpCallbackFunction: 'BarchartAPIcallback'
+  },
   api: _Api2.default.Barchart,
   adapter: _BarchartAdapter2.default
 });
 
 var Insee = (0, _loadItem2.default)({
-  fnFetch: _fnFetchTxt2.default,
+  fnFetch: _fnFetch.fetchTxt,
   api: _Api2.default.Insee,
   adapter: _InseeAdapter2.default
 });

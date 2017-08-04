@@ -25,6 +25,9 @@ const qeSources = [
   'OECD',
   'USCENSUS_TRADE',
 
+  'BANK_CANADA',
+  'BANK_SWISS',
+
   'OECD_CPI',
   'RATE_INFLATION',
   'BIG_MAC',

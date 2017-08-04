@@ -18,21 +18,84 @@ var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL = {
+  ROW: 'row__pane-topic',
+  ITEM_DF: 'row__pane-topic item__quandl',
+  ITEM_WATCH: 'row__pane-topic item__watch'
+};
 var S = {
   SHOW_HIDE: {
     padding: '0px'
   }
 };
+var _model = [{
+  id: 'STOCK_MARKETS',
+  cn: 'item__browser',
+  title: 'Stock Markets'
+}, {
+  id: 'EUROSTAT',
+  cn: 'item__eurostat',
+  title: 'Eurostat'
+}, {
+  id: 'FRANCE_STATISTICS',
+  cn: 'item__eurostat',
+  title: 'Insee: France Statistics'
+}, {
+  id: 'QUANDL',
+  isQuandl: true,
+  title: 'Quandl Economic'
+}, {
+  id: 'US_STOCKS',
+  title: 'US Stocks by Sectors'
+}, {
+  id: 'NYSE_STOCKS',
+  title: 'US NYSE by Sectors'
+}, {
+  id: 'NASDAQ_STOCKS',
+  title: 'US NASDAQ by Sectors'
+}, {
+  id: 'LONDON_STOCKS',
+  title: 'LSE by Sectors'
+}, {
+  id: 'PREMIUM_SAMPLE',
+  title: 'Quandl Premium Sample'
+}];
 
-var PanelBrowsers = function PanelBrowsers(_ref) {
-  var className = _ref.className,
-      isShow = _ref.isShow,
-      BROWSER = _ref.BROWSER,
+var _renderItems = function _renderItems(_ref) {
+  var model = _ref.model,
       browserConfig = _ref.browserConfig,
-      onClose = _ref.onClose,
-      onClickQuandl = _ref.onClickQuandl,
+      BROWSER = _ref.BROWSER,
       onClickDynamic = _ref.onClickDynamic,
-      onClickWatch = _ref.onClickWatch;
+      onClickQuandl = _ref.onClickQuandl;
+
+  return model.map(function (item) {
+    var cn = item.cn,
+        id = item.id,
+        title = item.title,
+        isQuandl = item.isQuandl,
+        _className = cn ? CL.ROW + ' ' + cn : CL.ITEM_DF,
+        _onClick = isQuandl ? onClickQuandl : onClickDynamic.bind(null, browserConfig[BROWSER[id]]);
+
+    return _react2.default.createElement(
+      'div',
+      {
+        className: _className,
+        onClick: _onClick
+      },
+      title
+    );
+  });
+};
+
+var PanelBrowsers = function PanelBrowsers(_ref2) {
+  var className = _ref2.className,
+      isShow = _ref2.isShow,
+      BROWSER = _ref2.BROWSER,
+      browserConfig = _ref2.browserConfig,
+      onClose = _ref2.onClose,
+      onClickQuandl = _ref2.onClickQuandl,
+      onClickDynamic = _ref2.onClickDynamic,
+      onClickWatch = _ref2.onClickWatch;
   return _react2.default.createElement(
     _ModalPane2.default,
     {
@@ -46,82 +109,14 @@ var PanelBrowsers = function PanelBrowsers(_ref) {
         style: S.SHOW_HIDE,
         isShow: isShow
       },
+      _renderItems({
+        model: _model, browserConfig: browserConfig, BROWSER: BROWSER,
+        onClickDynamic: onClickDynamic, onClickQuandl: onClickQuandl
+      }),
       _react2.default.createElement(
         'div',
         {
-          className: 'row__pane-topic item__browser',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.STOCK_MARKETS])
-        },
-        'Stock Markets'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__eurostat',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.EUROSTAT])
-        },
-        'Eurostat'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__eurostat',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])
-        },
-        'Insee: France Statistics'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickQuandl
-        },
-        'Quandl Economic'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])
-        },
-        'US Stocks By Sectors'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.NYSE_STOCKS])
-        },
-        'US NYSE by Sectors'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.NASDAQ_STOCKS])
-        },
-        'US NASDAQ by Sectors'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.LONDON_STOCKS])
-        },
-        'LSE by Sectors'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__quandl',
-          onClick: onClickDynamic.bind(null, browserConfig[BROWSER.PREMIUM_SAMPLE])
-        },
-        'Quandl Premium Sample'
-      ),
-      _react2.default.createElement(
-        'div',
-        {
-          className: 'row__pane-topic item__watch',
+          className: CL.ITEM_WATCH,
           onClick: onClickWatch
         },
         'Watch'

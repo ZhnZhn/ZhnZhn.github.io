@@ -112,7 +112,7 @@ const WithIndicatorConfig = {
     _configCrossLabel(config.chart)
     Object.assign(config.yAxis, {
       endOnTick: false,
-      tickPixelInterval: 40
+      tickPixelInterval: 40,
     })
     Object.assign(config.series[0], {
       zhSeriaId: chartId + '_VolumeArea',

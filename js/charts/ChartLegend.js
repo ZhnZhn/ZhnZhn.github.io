@@ -64,7 +64,7 @@ var ChartLegend = {
       case C.EXPORTS:
         return Object.assign({}, baseConfig, { color: _Color2.default.S_EXPORTS, symbol: 'circle' });
       default:
-        return Object.assign({}, baseConfig, { color: undefined, symbol: undefined, isSecondAxes: undefined });
+        return Object.assign({}, baseConfig, { color: undefined, symbol: 'circle', isSecondAxes: false });
     }
   }
 };

@@ -50,6 +50,7 @@ var Chart = {
   COLOR_BASE2: _Color2.default.MONO_BASE2,
 
   HEIGHT: 300,
+  MARGIN_RIGHT: 50,
   STACKED_HEIGHT: 500,
   LEGEND_ROW_HEIGHT: 32,
 
@@ -209,7 +210,7 @@ var Chart = {
         count: 0
       },
       chart: {
-        marginRight: 60
+        marginRight: Chart.MARGIN_RIGHT
       },
       title: {
         text: ''

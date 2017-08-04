@@ -9,7 +9,7 @@ var SettingSlice = {
     quandlKey: undefined,
     barchartKey: undefined,
     alphaKey: undefined,
-    proxy: 'https://crossorigin.me/',
+    proxy: 'https://cors-anywhere.herokuapp.com/',
     isAdminMode: false,
     isDrawDeltaExtrems: false,
     isNotZoomToMinMax: false
@@ -20,6 +20,7 @@ var SettingSlice = {
       setQuandlKey: this.setSetting('quandlKey').bind(this),
       setAlphaKey: this.setSetting('alphaKey').bind(this),
       setBarcharKey: this.setSetting('barchartKey').bind(this),
+      setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),

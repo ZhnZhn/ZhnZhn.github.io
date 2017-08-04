@@ -3,16 +3,14 @@ import { fnCatch } from './fnCatch'
 import ChartStore from '../stores/ChartStore'
 import ChartFn from '../../charts/ChartFn'
 
-//let _fnToChart, _fnToChartComp;
-
 const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
-  const { fnFetch, api } = objImpl;
+  const { fnFetch, optionFetch, api } = objImpl;
   fnFetch({
     uri : api.getRequestUrl(option),
     option : option,
+    optionFetch: optionFetch,
     onCheckResponse : api.checkResponse,
     onFetch : _fnFetchToChartComp.bind(null, objImpl),
-    //onFetch : _fnToChartComp,
     onCompleted : onCompleted,
     onCatch : fnCatch,
     onFailed : onFailed

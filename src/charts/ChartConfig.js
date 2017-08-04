@@ -140,6 +140,7 @@ ChartConfig.theme = {
       height: Chart.HEIGHT,
       spacingTop: Chart.THEME_SPACING_TOP,
       spacingBottom: Chart.SPACING_BOTTOM,
+      marginRight: Chart.MARGIN_RIGHT,
       plotBackgroundColor: COLOR.PLOT,
       backgroundColor : COLOR.CHART,
       reflow: false,

@@ -16,18 +16,17 @@ var _ChartFn2 = _interopRequireDefault(_ChartFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//let _fnToChart, _fnToChartComp;
-
 var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, onFailed) {
   var fnFetch = objImpl.fnFetch,
+      optionFetch = objImpl.optionFetch,
       api = objImpl.api;
 
   fnFetch({
     uri: api.getRequestUrl(option),
     option: option,
+    optionFetch: optionFetch,
     onCheckResponse: api.checkResponse,
     onFetch: _fnFetchToChartComp.bind(null, objImpl),
-    //onFetch : _fnToChartComp,
     onCompleted: onCompleted,
     onCatch: _fnCatch.fnCatch,
     onFailed: onFailed

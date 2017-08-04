@@ -30,6 +30,7 @@ const Chart = {
   COLOR_BASE2 : COLOR.MONO_BASE2,
 
   HEIGHT : 300,
+  MARGIN_RIGHT: 50,
   STACKED_HEIGHT : 500,
   LEGEND_ROW_HEIGHT : 32,
 
@@ -184,7 +185,7 @@ fBaseConfig(){
       count : 0
     },
     chart : {
-      marginRight : 60
+      marginRight: Chart.MARGIN_RIGHT
     },
     title: {
       text: ''

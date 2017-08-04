@@ -32,7 +32,7 @@ var _ProgressLine2 = _interopRequireDefault(_ProgressLine);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Colors = {
+var C = {
   LOADING: '#2F7ED8',
   FAILED: 'rgb(237, 88, 19)'
 };
@@ -53,14 +53,14 @@ var ProgressLoading = function (_Component) {
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ProgressLoading.__proto__ || Object.getPrototypeOf(ProgressLoading)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       completed: 0,
-      color: Colors.LOADING
+      color: C.LOADING
     }, _this._onStore = function (actionType, option) {
       if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK) {
-        _this.setState({ completed: 35, color: Colors.LOADING });
+        _this.setState({ completed: 35, color: C.LOADING });
       } else if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED || actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_ADDED) {
-        _this.setState({ completed: 100, color: Colors.LOADING });
+        _this.setState({ completed: 100, color: C.LOADING });
       } else if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_FAILED) {
-        _this.setState({ completed: 100, color: Colors.FAILED });
+        _this.setState({ completed: 100, color: C.FAILED });
       }
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
@@ -93,4 +93,4 @@ var ProgressLoading = function (_Component) {
 }(_react.Component);
 
 exports.default = ProgressLoading;
-//# sourceMappingURL=ProgressLoading.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\ProgressLoading.js.map

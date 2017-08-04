@@ -3,10 +3,72 @@ import React from 'react'
 import ModalPane from '../zhn-moleculs/ModalPane'
 import ShowHide from '../zhn/ShowHide'
 
+const CL = {
+  ROW: 'row__pane-topic',
+  ITEM_DF: 'row__pane-topic item__quandl',
+  ITEM_WATCH: 'row__pane-topic item__watch'
+};
 const S = {
   SHOW_HIDE: {
     padding: '0px'
   }
+};
+const _model = [
+  {
+    id: 'STOCK_MARKETS',
+    cn: 'item__browser',
+    title: 'Stock Markets',
+  },{
+    id: 'EUROSTAT',
+    cn: 'item__eurostat',
+    title: 'Eurostat'
+  },{
+    id: 'FRANCE_STATISTICS',
+    cn: 'item__eurostat',
+    title: 'Insee: France Statistics'
+  },{
+    id: 'QUANDL',
+    isQuandl: true,
+    title: 'Quandl Economic'
+  },{
+    id: 'US_STOCKS',
+    title: 'US Stocks by Sectors'
+  },{
+    id: 'NYSE_STOCKS',
+    title: 'US NYSE by Sectors'
+  },{
+    id: 'NASDAQ_STOCKS',
+    title: 'US NASDAQ by Sectors'
+  },{
+    id: 'LONDON_STOCKS',
+    title: 'LSE by Sectors'
+  },{
+    id: 'PREMIUM_SAMPLE',
+    title: 'Quandl Premium Sample'
+  }
+];
+
+const _renderItems = ({
+  model, browserConfig, BROWSER,
+  onClickDynamic, onClickQuandl
+}) => {
+  return model.map(item => {
+    const { cn, id, title, isQuandl } = item
+        , _className = cn
+             ? `${CL.ROW} ${cn}`
+             : CL.ITEM_DF
+        , _onClick = isQuandl
+             ? onClickQuandl
+             : onClickDynamic.bind(null, browserConfig[BROWSER[id]]);
+    return (
+      <div
+        className={_className}
+        onClick={_onClick}
+      >
+        {title}
+      </div>
+    );
+  });
 }
 
 const PanelBrowsers = ({
@@ -22,62 +84,14 @@ const PanelBrowsers = ({
          style={S.SHOW_HIDE}
          isShow={isShow}
       >
+          {
+            _renderItems({
+               model: _model, browserConfig, BROWSER,
+               onClickDynamic, onClickQuandl
+            })
+          }
           <div
-            className="row__pane-topic item__browser"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.STOCK_MARKETS])}
-          >
-            Stock Markets
-          </div>
-          <div
-            className="row__pane-topic item__eurostat"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.EUROSTAT])}
-          >
-            Eurostat
-          </div>
-          <div
-            className="row__pane-topic item__eurostat"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.FRANCE_STATISTICS])}
-          >
-            Insee: France Statistics
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickQuandl}
-          >
-            Quandl Economic
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.US_STOCKS])}
-          >
-            US Stocks By Sectors
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.NYSE_STOCKS])}
-          >
-            US NYSE by Sectors
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.NASDAQ_STOCKS])}
-          >
-            US NASDAQ by Sectors
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.LONDON_STOCKS])}
-          >
-            LSE by Sectors
-          </div>
-          <div
-            className="row__pane-topic item__quandl"
-            onClick={onClickDynamic.bind(null, browserConfig[BROWSER.PREMIUM_SAMPLE])}
-          >
-            Quandl Premium Sample
-          </div>
-          <div
-            className="row__pane-topic item__watch"
+            className={CL.ITEM_WATCH}
             onClick={onClickWatch}
           >
             Watch

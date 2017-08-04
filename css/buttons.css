@@ -87,6 +87,7 @@
   border: 2px solid gray;
   stroke: gray;
   line-height: normal;
+  vertical-align: text-bottom;
   cursor: pointer;
 }
 .svg-resize:hover {

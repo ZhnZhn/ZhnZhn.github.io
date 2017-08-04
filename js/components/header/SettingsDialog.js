@@ -20,6 +20,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp, _initialiseProps;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -73,7 +75,7 @@ var MODE_ADMIN = 'isAdminMode';
 var MODE_DELTA = 'isDrawDeltaExtrems';
 var MODE_ZOOM = 'isNotZoomToMinMax';
 
-var SettingsDialog = function (_Component) {
+var SettingsDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(SettingsDialog, _Component);
 
   function SettingsDialog(props) {
@@ -81,31 +83,18 @@ var SettingsDialog = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (SettingsDialog.__proto__ || Object.getPrototypeOf(SettingsDialog)).call(this));
 
-    _this._handleSet = function () {
-      var _this$props = _this.props,
-          data = _this$props.data,
-          onClose = _this$props.onClose,
-          setQuandlKey = (0, _safeFn2.default)(data, SET.QUANDL_KEY),
-          setAlpheKey = (0, _safeFn2.default)(data, SET.ALPHA_KEY),
-          setBarcharKey = (0, _safeFn2.default)(data, SET.BARCHAR_KEY),
-          setProxy = (0, _safeFn2.default)(data, SET.PROXY);
+    _initialiseProps.call(_this);
 
-      setQuandlKey(_this.inputComp.getValue());
-      setAlpheKey(_this.alphaComp.getValue());
-      setBarcharKey(_this.barcharComp.getValue());
-      setProxy(_this.proxyComp.getValue());
-      onClose();
-    };
+    var data = props.data;
 
-    _this._handleMode = function (fnName, mode) {
-      var data = _this.props.data,
-          fnMode = (0, _safeFn2.default)(data, fnName);
 
-      fnMode(mode);
-    };
+    _this._setQuandlKey = (0, _safeFn2.default)(data, SET.QUANDL_KEY);
+    _this._setAlpheKey = (0, _safeFn2.default)(data, SET.ALPHA_KEY);
+    _this._setBarcharKey = (0, _safeFn2.default)(data, SET.BARCHAR_KEY);
+    _this._setProxy = (0, _safeFn2.default)(data, SET.PROXY);
 
     _this._commandButtons = [_react2.default.createElement(_FlatButton2.default, {
-      caption: 'Set & Close',
+      caption: 'Set All & Close',
       isPrimary: true,
       onClick: _this._handleSet
     })];
@@ -149,7 +138,8 @@ var SettingsDialog = function (_Component) {
           },
           titleStyle: S.TITLE,
           title: 'Alpha:',
-          placeholder: 'Alpha API Key'
+          placeholder: 'Alpha API Key',
+          onEnter: this._setAlpheKey
         }),
         _react2.default.createElement(_RowSecret2.default, {
           ref: function ref(c) {
@@ -157,7 +147,8 @@ var SettingsDialog = function (_Component) {
           },
           titleStyle: S.TITLE,
           title: 'Barchar:',
-          placeholder: 'Barchar API Key'
+          placeholder: 'Barchar API Key',
+          onEnter: this._setBarcharKey
         }),
         _react2.default.createElement(_RowSecret2.default, {
           ref: function ref(c) {
@@ -165,7 +156,8 @@ var SettingsDialog = function (_Component) {
           },
           titleStyle: S.TITLE,
           title: 'Quandl:',
-          placeholder: 'Quandl API Key'
+          placeholder: 'Quandl API Key',
+          onEnter: this._setQuandlKey
         }),
         _react2.default.createElement(_RowPattern2.default, {
           ref: function ref(c) {
@@ -174,7 +166,8 @@ var SettingsDialog = function (_Component) {
           titleStyle: S.TITLE,
           title: 'Https Proxy:',
           placeholder: 'Https Proxy for CORS',
-          initValue: _proxy
+          initValue: _proxy,
+          onEnter: this._setProxy
         }),
         _react2.default.createElement(_RowCheckBox2.default, {
           initValue: _isAdminMode,
@@ -198,8 +191,28 @@ var SettingsDialog = function (_Component) {
     }
   }]);
   return SettingsDialog;
-}(_react.Component);
+}(_react.Component), _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
 
+  this._handleSet = function () {
+    var onClose = _this3.props.onClose;
+
+
+    _this3._setQuandlKey(_this3.inputComp.getValue());
+    _this3._setAlpheKey(_this3.alphaComp.getValue());
+    _this3._setBarcharKey(_this3.barcharComp.getValue());
+    _this3._setProxy(_this3.proxyComp.getValue());
+
+    onClose();
+  };
+
+  this._handleMode = function (fnName, mode) {
+    var data = _this3.props.data,
+        fnMode = (0, _safeFn2.default)(data, fnName);
+
+    fnMode(mode);
+  };
+}, _temp);
 process.env.NODE_ENV !== "production" ? SettingsDialog.propTypes = {
   isShow: _react.PropTypes.bool,
   data: _react.PropTypes.shape({

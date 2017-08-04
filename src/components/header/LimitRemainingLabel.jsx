@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 
-const STYLE = {
+const S = {
   LABEL : {
     display: 'inline-block',
     color:'#2f7ed8',
-    //paddingLeft: '10px',
     paddingRight: '10px',
     fontSize: '16px',
     fontWeight: 'bold'
@@ -16,7 +15,7 @@ class LimitRemainingLabel extends Component {
     value : ''
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { store } = this.props;
     this.unsubscribe = store.listenWithLimitRemaining(this._onStore)
   }
@@ -33,9 +32,8 @@ class LimitRemainingLabel extends Component {
   render() {
     const { style } = this.props
         , { value } = this.state;
-
     return (
-       <span style={{ ...STYLE.LABEL, ...style }}>
+       <span style={{ ...S.LABEL, ...style }}>
          {value}
        </span>
     );

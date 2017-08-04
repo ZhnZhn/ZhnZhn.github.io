@@ -16,7 +16,7 @@ const styles = {
     color: 'green',
     width: '100%',
     fontSize: '16px',
-    fontWeight: 'bold'    
+    fontWeight: 'bold'
   }
 }
 
@@ -39,6 +39,17 @@ class InputSecret extends Component {
     this.setState({ value: _maskValue(this.secret.length) });
   }
 
+  _handleKeyDown = (event) => {
+    switch(event.keyCode){
+      case 13:
+        if (typeof this.props.onEnter === 'function') {
+          this.props.onEnter(event.target.value)
+        }
+        break;
+      default: return;
+    }
+  }
+
   render(){
     const { placeholder, maxLength="32" } = this.props
         , { value } = this.state;
@@ -57,6 +68,7 @@ class InputSecret extends Component {
            maxLength={maxLength}
            defaultValue={value}
            onChange={this._handleChangeValue}
+           onKeyDown={this._handleKeyDown}
         >
         </input>
       </div>

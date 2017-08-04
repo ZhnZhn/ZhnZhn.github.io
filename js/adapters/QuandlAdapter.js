@@ -233,14 +233,23 @@ var _fLegendConfig = function _fLegendConfig(seriaColumnNames, column_names) {
   var legendSeries = [],
       columns = [];
 
-  var i = 0,
-      max = seriaColumnNames.length;
-  for (; i < max; i++) {
-    var columnName = seriaColumnNames[i],
-        columnIndex = _QuandlFn2.default.findColumnIndex(column_names, columnName);
-    if (columnIndex) {
-      legendSeries.push(_ChartLegend2.default.fLegendConfig(columnName));
-      columns.push(columnIndex);
+  if (seriaColumnNames[0] === 'All') {
+    var j = 1,
+        _len = column_names.length;
+    for (j; j < _len; j++) {
+      legendSeries.push(_ChartLegend2.default.fLegendConfig(column_names[j]));
+      columns.push(j);
+    }
+  } else {
+    var i = 0,
+        max = seriaColumnNames.length;
+    for (; i < max; i++) {
+      var columnName = seriaColumnNames[i],
+          columnIndex = _QuandlFn2.default.findColumnIndex(column_names, columnName);
+      if (columnIndex) {
+        legendSeries.push(_ChartLegend2.default.fLegendConfig(columnName));
+        columns.push(columnIndex);
+      }
     }
   }
 
@@ -404,7 +413,9 @@ var _fnSetLegendSeriesToConfig = function _fnSetLegendSeriesToConfig(legendSerie
     });
   }
 
-  for (var i = 0, max = legendSeries.length; i < max; i++) {
+  var i = 0,
+      max = legendSeries.length;
+  for (i; i < max; i++) {
     var _legendSeries$i = legendSeries[i],
         data = _legendSeries$i.data,
         name = _legendSeries$i.name,
@@ -499,7 +510,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
 var _setPlotLinesExtremValues = function _setPlotLinesExtremValues(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems) {
   var _bMax = (0, _big2.default)(maxPoint),
       _bMin = (0, _big2.default)(minPoint),
-      _bValue = (0, _big2.default)(value),
+      _bValue = value !== null ? (0, _big2.default)(value) : (0, _big2.default)(0),
       _maxPoint = parseFloat(_bMax.round(4).toString(), 10),
       _minPoint = parseFloat(_bMin.round(4).toString(), 10);
 

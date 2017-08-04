@@ -13,7 +13,9 @@ const _toData = (str) => {
   const xml = _parser.parseFromString(str, 'text/xml')
       , series = xml.getElementsByTagName('Series')
       , data = [], info = [];
-  let i=0, max = series.length, _seria, _v;
+  let i=0, max = series.length, _seria, _v
+    , minClose = Number.POSITIVE_INFINITY
+    , maxClose = Number.NEGATIVE_INFINITY;
   for(i; i<max; i++){
     _seria = series[i]
     info.push({
@@ -24,6 +26,7 @@ const _toData = (str) => {
       unitMeasure: _seria.getAttribute('UNIT_MEASURE'),
       unitMult: _seria.getAttribute('UNIT_MULT')
     })
+
     _seria.childNodes.forEach(node => {
       _v = parseFloat(node.getAttribute('OBS_VALUE'))
       if (!Number.isNaN(_v)) {
@@ -31,13 +34,21 @@ const _toData = (str) => {
           AdapterFn.ymdToUTC(node.getAttribute('TIME_PERIOD')),
           _v
         ])
+
+        if (minClose > _v) {
+          minClose = _v
+        }
+        if (maxClose < _v ) {
+          maxClose = _v
+        }
       }
     })
   }
 
   return {
     data: data.sort(AdapterFn.compareByDate),
-    info: info
+    info: info,
+    minClose, maxClose
   };
 }
 
@@ -76,7 +87,7 @@ const InseeAdapter = {
   toConfig(str, option) {
     const { value, title, subtitle } = option
         , config = ChartConfig.fBaseAreaConfig()
-        , { data, info } = _toData(str);
+        , { data, info, minClose, maxClose } = _toData(str);
 
     Object.assign(config.series[0], {
       data: data,
@@ -105,13 +116,18 @@ const InseeAdapter = {
     })
     config.chart.spacingTop = 25
 
+    ChartConfig.setMinMax(config, minClose, maxClose)
+
     return { config };
   },
 
   toSeries(str, option) {
+     const { value } = option
+         , { data } = _toData(str);
      return Object.assign(ChartConfig.fSeries(), {
-               zhSeriaId:  'not_implemented',
-               zhValueText: 'not implemented'
+               data: data,
+               zhSeriaId: value,
+               zhValueText: value
              });
   }
 }

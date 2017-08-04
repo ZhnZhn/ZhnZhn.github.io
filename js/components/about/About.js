@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -44,10 +48,6 @@ var _Step = require('./Step');
 
 var _Step2 = _interopRequireDefault(_Step);
 
-var _Token = require('./Token');
-
-var _Token2 = _interopRequireDefault(_Token);
-
 var _Links = require('../links/Links');
 
 var _Links2 = _interopRequireDefault(_Links);
@@ -83,6 +83,24 @@ var S = {
   },
   BT_TWITTER: {
     marginLeft: '12px'
+  },
+  GREEN: {
+    color: '#80c040'
+  },
+  GRAY: {
+    color: 'gray'
+  },
+  BLACK: {
+    color: 'black'
+  },
+  BLUE: {
+    color: '#009ae5'
+  },
+  BLUE_DARK: {
+    color: '#2f7ed8'
+  },
+  RED: {
+    color: '#F44336'
   }
 };
 
@@ -154,18 +172,18 @@ var About = function (_Component) {
           { style: S.SCROLL_DIV },
           _react2.default.createElement(
             'div',
-            { style: S.DIV_WRAPPER },
+            { style: (0, _extends3.default)({}, S.DIV_WRAPPER, S.GREY) },
             _react2.default.createElement(
               'p',
               null,
               _react2.default.createElement(
-                _Token2.default,
-                { color: '#80c040' },
-                'ERC'
+                'span',
+                { style: S.GREEN },
+                'ERC\xA0'
               ),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray', isFirstBlank: true },
+                'span',
+                null,
                 'is an economic RESTful client.'
               )
             ),
@@ -178,8 +196,8 @@ var About = function (_Component) {
               'p',
               null,
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray' },
+                'span',
+                null,
                 'Data providers:'
               )
             ),
@@ -188,20 +206,20 @@ var About = function (_Component) {
               null,
               _react2.default.createElement(_Links2.default.Quandl, null),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black' },
+                'span',
+                { style: S.BLACK },
                 '\xA0(Key),\xA0'
               ),
               _react2.default.createElement(_Links2.default.Barchart, null),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black' },
+                'span',
+                { style: S.BLACK },
                 '\xA0(Key),\xA0'
               ),
               _react2.default.createElement(_Links2.default.AlphaVantage, null),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black' },
+                'span',
+                { style: S.BLACK },
                 '\xA0(Key),'
               )
             ),
@@ -210,65 +228,69 @@ var About = function (_Component) {
               { style: S.P_BOTTOM },
               _react2.default.createElement(_Links2.default.Eurostat, null),
               _react2.default.createElement(
-                _Token2.default,
-                { color: '#009ae5' },
+                'span',
+                { style: S.BLUE },
                 ',\xA0'
               ),
               _react2.default.createElement(_Links2.default.Insee, null),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black' },
+                'span',
+                { style: S.BLACK },
                 '\xA0(Https Proxy for CORS).'
               )
             ),
             _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(_Step2.default, { step: '1' }),
+              'div',
+              { style: S.BLACK },
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black', isFirstBlank: true },
-                'Choose a data source Browser from Topics.'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.MARGIN_TOP },
-              _react2.default.createElement(_Step2.default, { step: '2' }),
+                'p',
+                null,
+                _react2.default.createElement(_Step2.default, { step: '1' }),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\xA0Choose a data source Browser from Topics.'
+                )
+              ),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black', isFirstBlank: true },
-                'Choose a dataset menu item in a Browser.'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.MARGIN_TOP },
-              _react2.default.createElement(_Step2.default, { step: '3' }),
+                'p',
+                { style: S.MARGIN_TOP },
+                _react2.default.createElement(_Step2.default, { step: '2' }),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\xA0Choose a dataset menu item in a Browser.'
+                )
+              ),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black', isFirstBlank: true },
-                'Select params and enter query date in a draggable Dialog.'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.MARGIN_TOP },
-              _react2.default.createElement(_Step2.default, { step: '4' }),
+                'p',
+                { style: S.MARGIN_TOP },
+                _react2.default.createElement(_Step2.default, { step: '3' }),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\xA0Select params and enter query date in a draggable Dialog.'
+                )
+              ),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black', isFirstBlank: true },
-                'Click a button Load.'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.MARGIN_TOP },
-              _react2.default.createElement(_Step2.default, { step: '5' }),
+                'p',
+                { style: S.MARGIN_TOP },
+                _react2.default.createElement(_Step2.default, { step: '4' }),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\xA0Click a button Load.'
+                )
+              ),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black', isFirstBlank: true },
-                'Also you can export chart to PNG, JPG, SVG, print to PDF.'
+                'p',
+                { style: S.MARGIN_TOP },
+                _react2.default.createElement(_Step2.default, { step: '5' }),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\xA0Also you can export chart to PNG, JPG, SVG, print to PDF.'
+                )
               )
             ),
             _react2.default.createElement(
@@ -290,13 +312,13 @@ var About = function (_Component) {
               'p',
               null,
               _react2.default.createElement(
-                _Token2.default,
-                { color: '#F44336' },
-                'Attention:'
+                'span',
+                { style: S.RED },
+                'Attention:\xA0'
               ),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray', isFirstBlank: true },
+                'span',
+                null,
                 'For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it, close the chart in the container and load data again.'
               )
             ),
@@ -309,23 +331,23 @@ var About = function (_Component) {
               'p',
               { style: S.P_BOTTOM },
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray' },
+                'span',
+                null,
                 'In that case of data loading from\xA0'
               ),
               _react2.default.createElement(_Links2.default.Quandl, null),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray', isFirstBlank: true },
-                'data provider, for accessing without API Key, exists some restriction on frequency and amount queries (',
+                'span',
+                null,
+                '\xA0data provider, for accessing without API Key, exists some restriction on frequency and amount queries (',
                 _react2.default.createElement(
-                  _Token2.default,
-                  { color: '#2f7ed8' },
+                  'span',
+                  { style: S.BLUE_DARK },
                   '50 per day/1 at a time'
                 ),
                 _react2.default.createElement(
-                  _Token2.default,
-                  { color: 'gray' },
+                  'span',
+                  { style: S.GREY },
                   ').'
                 )
               )
@@ -339,12 +361,12 @@ var About = function (_Component) {
               'p',
               { style: S.P_BOTTOM },
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray' },
+                'span',
+                null,
                 'you will be have (',
                 _react2.default.createElement(
-                  _Token2.default,
-                  { color: '#2f7ed8' },
+                  'span',
+                  { style: S.BLUE_DARK },
                   '50 000 per day/1 at a time'
                 ),
                 '). It\'s free of charge to receive.'
@@ -364,15 +386,15 @@ var About = function (_Component) {
               'p',
               null,
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray' },
+                'span',
+                null,
                 'For loading data from\xA0'
               ),
               _react2.default.createElement(_Links2.default.Eurostat, null),
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'gray', isFirstBlank: true },
-                'does not exist any restrictions.'
+                'span',
+                null,
+                '\xA0does not exist any restrictions.'
               )
             ),
             _react2.default.createElement(_IconLogoBar2.default, null),
@@ -380,8 +402,8 @@ var About = function (_Component) {
               'p',
               null,
               _react2.default.createElement(
-                _Token2.default,
-                { color: 'black' },
+                'span',
+                { style: S.BLACK },
                 '*Logos Fair Use.'
               )
             )

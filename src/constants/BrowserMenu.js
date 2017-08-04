@@ -53,6 +53,12 @@ const menuQuandl = [
        { id:  Quandl.USCENSUS_TRADE }
      ]
   },{
+    caption: 'Central Banks',
+    items: [
+      { id : Quandl.BANK_CANADA, isNew: true },
+      { id : Quandl.BANK_SWISS, isNew: true }
+    ]
+  },{
     caption : 'Inflation & Prices',
     items : [
       { id : Quandl.OECD_CPI },

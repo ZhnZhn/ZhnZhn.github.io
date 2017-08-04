@@ -158,14 +158,26 @@ const _fLegendConfig = function(seriaColumnNames, column_names){
   const legendSeries = []
       , columns =[];
 
-  let i=0, max=seriaColumnNames.length;
-  for (; i<max; i++ ){
-     const columnName = seriaColumnNames[i]
-         , columnIndex = QuandlFn2.findColumnIndex(column_names, columnName);
-     if (columnIndex) {
-        legendSeries.push(ChartLegend.fLegendConfig(columnName));
-        columns.push(columnIndex);
-     }
+  if (seriaColumnNames[0] === 'All'){
+    let j=1, _len = column_names.length;
+    for (j; j<_len; j++){
+      legendSeries.push(
+        ChartLegend.fLegendConfig(column_names[j])
+      )
+      columns.push(j)
+    }
+  } else {
+    let i=0, max=seriaColumnNames.length;
+    for (; i<max; i++ ){
+       const columnName = seriaColumnNames[i]
+           , columnIndex = QuandlFn2.findColumnIndex(column_names, columnName);
+       if (columnIndex) {
+          legendSeries.push(
+            ChartLegend.fLegendConfig(columnName)
+          )
+          columns.push(columnIndex)
+       }
+    }
   }
 
   return { legendSeries, columns };
@@ -227,7 +239,7 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
 
     if (legendSeries.length !== 0){
       result.legendSeries = legendSeries
-      fnStep.push(_fnAddCustomSeries.bind(null, columns));
+      fnStep.push(_fnAddCustomSeries.bind(null, columns))
     }
   }
 
@@ -242,8 +254,7 @@ const _fnSeriesPipe = function(json, yPointIndex, option){
   const { fnPointsFlow, result } = _fnCreatePointFlow(json, yPointIndex, option)
       , { dataset={} } = json
       , { data=[] } = dataset
-      //, points = sortBy(json.dataset.data, '0');
-      , points = data.sort(AdapterFn.compareByDate)
+      , points = data.sort(AdapterFn.compareByDate);
 
   let i=0, _max=points.length;
   for(; i<_max; i++) {
@@ -305,7 +316,7 @@ const _fnCheckIsMomAth = function(config, json, zhPoints) {
 const _fnSetChartTitle = function(config, option){
   const { title, subtitle } = option;
   if (title){
-    Chart.setDefaultTitle(config, title, subtitle);
+    Chart.setDefaultTitle(config, title, subtitle)
   }
 }
 
@@ -322,7 +333,8 @@ const _fnSetLegendSeriesToConfig = function(legendSeries, config, chartId){
     });
   }
 
-  for (let i=0, max=legendSeries.length; i<max; i++){
+  let i=0, max=legendSeries.length;
+  for (i; i<max; i++){
     const { data, name, color, symbol, isSecondAxes } = legendSeries[i]
         , seria = ChartConfig.fSeries({
              zhSeriaId : i + '_' + chartId,
@@ -399,8 +411,8 @@ const fnGetSeries = function(config, json, option){
    })
 
     if (legendSeries){
-      _fnSetLegendSeriesToConfig(legendSeries, config, chartId);
-      config.zhConfig.isWithLegend = true;
+      _fnSetLegendSeriesToConfig(legendSeries, config, chartId)
+      config.zhConfig.isWithLegend = true
     }
 
    return {
@@ -412,7 +424,7 @@ const fnGetSeries = function(config, json, option){
 const _setPlotLinesExtremValues = function(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems){
   const _bMax = Big(maxPoint)
       , _bMin = Big(minPoint)
-      , _bValue = Big(value)
+      , _bValue = (value !== null) ? Big(value) : Big(0)
       , _maxPoint = parseFloat(_bMax.round(4).toString(), 10)
       , _minPoint = parseFloat(_bMin.round(4).toString(), 10);
 

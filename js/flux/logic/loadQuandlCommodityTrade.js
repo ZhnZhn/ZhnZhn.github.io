@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loadQuandlCommodityTrade = undefined;
 
-var _fn = require('../../utils/fn');
+var _fnFetch = require('../../utils/fnFetch');
 
 var _fnCatch = require('./fnCatch');
 
@@ -53,7 +53,7 @@ var _loadToChartComp = function _loadToChartComp(option, onCompleted, onFailed) 
       _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl2.default.Quandl.fnFetchToChartComp,
       _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
 
-  (0, _fn.fnFetch)({
+  (0, _fnFetch.fetchJson)({
     uri: _QuandlApi2.default.getRequestUrl(option),
     option: option,
     onCheckResponse: _QuandlApi2.default.checkResponse,
@@ -69,7 +69,7 @@ var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
       _onFetch = isLoadMeta ? _fnFetchToChartComp : _LoadImpl2.default.Quandl.fnFetchToChart,
       _onFailed = isLoadMeta ? _fnFailedLoadMeta.bind(null, option, onFailed) : onFailed;
 
-  (0, _fn.fnFetch)({
+  (0, _fnFetch.fetchJson)({
     uri: _QuandlApi2.default.getRequestUrl(option),
     option: option,
     onCheckResponse: _QuandlApi2.default.checkResponse,

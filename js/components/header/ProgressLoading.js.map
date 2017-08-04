@@ -1,1 +1,29 @@
-{"version":3,"sources":["../../../src/components/header/ProgressLoading.jsx"],"names":["Colors","LOADING","FAILED","ProgressLoading","state","completed","color","_onStore","actionType","option","LOAD_STOCK","setState","LOAD_STOCK_COMPLETED","LOAD_STOCK_ADDED","LOAD_STOCK_FAILED","unsubscribe","props","store","listen"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,WAAU,SADG;AAEbC,UAAS;AAFI,CAAf;;IAMMC,e;;;;;;;;;;;;;;sNACJC,K,GAAQ;AACNC,iBAAY,CADN;AAENC,aAAQN,OAAOC;AAFT,K,QAWRM,Q,GAAW,UAACC,UAAD,EAAaC,MAAb,EAAwB;AAC/B,UAAID,eAAe,+BAAiBE,UAApC,EAA+C;AAC7C,cAAKC,QAAL,CAAc,EAACN,WAAW,EAAZ,EAAgBC,OAAON,OAAOC,OAA9B,EAAd;AACD,OAFD,MAEO,IAAIO,eAAe,+BAAiBI,oBAAhC,IACGJ,eAAe,+BAAiBK,gBADvC,EACwD;AAC7D,cAAKF,QAAL,CAAc,EAACN,WAAW,GAAZ,EAAiBC,OAAON,OAAOC,OAA/B,EAAd;AACD,OAHM,MAGA,IAAIO,eAAe,+BAAiBM,iBAApC,EAAsD;AAC3D,cAAKH,QAAL,CAAc,EAACN,WAAW,GAAZ,EAAiBC,OAAON,OAAOE,MAA/B,EAAd;AACD;AACJ,K;;;;;wCAfkB;AACjB,WAAKa,WAAL,GAAmB,KAAKC,KAAL,CAAWC,KAAX,CAAiBC,MAAjB,CAAwB,KAAKX,QAA7B,CAAnB;AACD;;;2CACqB;AACpB,WAAKQ,WAAL;AACD;;;6BAYO;AAAA,mBACuB,KAAKX,KAD5B;AAAA,UACEC,SADF,UACEA,SADF;AAAA,UACaC,KADb,UACaA,KADb;;AAEN,aACE;AACG,gBAAQ,CADX;AAEG,eAAOA,KAFV;AAGG,mBAAWD;AAHd,QADF;AAOD;;;;;kBAGYF,e","file":"ProgressLoading.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\nimport {ChartActionTypes} from '../../flux/actions/ChartActions';\r\nimport ProgressLine from '../zhn/ProgressLine';\r\n\r\nconst Colors = {\r\n  LOADING : '#2F7ED8',\r\n  FAILED : 'rgb(237, 88, 19)'\r\n};\r\n\r\n\r\nclass ProgressLoading extends Component {\r\n  state = {\r\n    completed : 0,\r\n    color : Colors.LOADING\r\n  }\r\n\r\n  componentDidMount(){\r\n    this.unsubscribe = this.props.store.listen(this._onStore);\r\n  }\r\n  componentWillUnmount(){\r\n    this.unsubscribe();\r\n  }\r\n  _onStore = (actionType, option) => {\r\n      if (actionType === ChartActionTypes.LOAD_STOCK){\r\n        this.setState({completed: 35, color: Colors.LOADING});\r\n      } else if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED\r\n                 || actionType === ChartActionTypes.LOAD_STOCK_ADDED){\r\n        this.setState({completed: 100, color: Colors.LOADING});\r\n      } else if (actionType === ChartActionTypes.LOAD_STOCK_FAILED){\r\n        this.setState({completed: 100, color: Colors.FAILED})\r\n      }\r\n  }\r\n\r\n  render(){\r\n    const { completed, color } = this.state;\r\n    return (\r\n      <ProgressLine\r\n         height={3}\r\n         color={color}\r\n         completed={completed}\r\n      />\r\n    )\r\n  }\r\n}\r\n\r\nexport default ProgressLoading\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\header\\ProgressLoading.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\header\\ProgressLoading.js",
+ "sourceRoot": "",
+ "names": [
+  "C",
+  "LOADING",
+  "FAILED",
+  "ProgressLoading",
+  "state",
+  "completed",
+  "color",
+  "_onStore",
+  "actionType",
+  "option",
+  "LOAD_STOCK",
+  "setState",
+  "LOAD_STOCK_COMPLETED",
+  "LOAD_STOCK_ADDED",
+  "LOAD_STOCK_FAILED",
+  "unsubscribe",
+  "props",
+  "store",
+  "listen"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAU,SADF;AAERC,UAAS;AAFD,CAAV;;IAMMC,e;;;;;;;;;;;;;;sNACJC,K,GAAQ;AACNC,iBAAY,CADN;AAENC,aAAQN,EAAEC;AAFJ,K,QAWRM,Q,GAAW,UAACC,UAAD,EAAaC,MAAb,EAAwB;AAC/B,UAAID,eAAe,+BAAiBE,UAApC,EAA+C;AAC7C,cAAKC,QAAL,CAAc,EAAEN,WAAW,EAAb,EAAiBC,OAAON,EAAEC,OAA1B,EAAd;AACD,OAFD,MAEO,IAAIO,eAAe,+BAAiBI,oBAAhC,IACGJ,eAAe,+BAAiBK,gBADvC,EACwD;AAC7D,cAAKF,QAAL,CAAc,EAAEN,WAAW,GAAb,EAAkBC,OAAON,EAAEC,OAA3B,EAAd;AACD,OAHM,MAGA,IAAIO,eAAe,+BAAiBM,iBAApC,EAAsD;AAC3D,cAAKH,QAAL,CAAc,EAAEN,WAAW,GAAb,EAAkBC,OAAON,EAAEE,MAA3B,EAAd;AACD;AACJ,K;;;;;wCAfkB;AACjB,WAAKa,WAAL,GAAmB,KAAKC,KAAL,CAAWC,KAAX,CAAiBC,MAAjB,CAAwB,KAAKX,QAA7B,CAAnB;AACD;;;2CACqB;AACpB,WAAKQ,WAAL;AACD;;;6BAYO;AAAA,mBACuB,KAAKX,KAD5B;AAAA,UACEC,SADF,UACEA,SADF;AAAA,UACaC,KADb,UACaA,KADb;;AAEN,aACE;AACG,gBAAQ,CADX;AAEG,eAAOA,KAFV;AAGG,mBAAWD;AAHd,QADF;AAOD;;;;;kBAGYF,e"
+}

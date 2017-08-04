@@ -15,8 +15,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TWITTER_URL = 'https://twitter.com';
-
-var STYLE = {
+var S = {
   LINK: {
     display: 'inline-block',
     position: 'relative',
@@ -52,12 +51,12 @@ var TwitterLink = function TwitterLink(_ref) {
     'a',
     {
       className: 'bt-twitter',
-      style: (0, _extends3.default)({}, STYLE.LINK, rootStyle),
+      style: (0, _extends3.default)({}, S.LINK, rootStyle),
       target: '_blank',
       href: TWITTER_URL + '/' + account,
       title: title
     },
-    _react2.default.createElement('i', { style: (0, _extends3.default)({}, STYLE.ICON, iconStyle) }),
+    _react2.default.createElement('i', { style: (0, _extends3.default)({}, S.ICON, iconStyle) }),
     _react2.default.createElement(
       'span',
       null,
@@ -66,13 +65,6 @@ var TwitterLink = function TwitterLink(_ref) {
     )
   );
 };
-
-process.env.NODE_ENV !== "production" ? TwitterLink.propTypes = {
-  rootStyle: _react.PropTypes.object,
-  iconStyle: _react.PropTypes.object,
-  account: _react.PropTypes.string,
-  title: _react.PropTypes.string
-} : void 0;
 
 exports.default = TwitterLink;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\TwitterLink.js.map
