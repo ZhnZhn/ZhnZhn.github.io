@@ -3,28 +3,34 @@ import {ComponentActionTypes} from '../actions/ComponentActions';
 import Factory from '../logic/Factory';
 
 const ItemDialogLogic = {
+
   showItemDialog(slice, itemConf){
     const { type , browserType } = itemConf;
     if (slice[type]){
-      return { key: type };
+      return Promise.resolve({ key: type });
     } else {
-      const Comp = Factory.createDialog(type, browserType);
-      slice[type] = true
-      return { key:type, Comp };
+      return Factory.createDialog(type, browserType)
+        .then(Comp => {
+             slice[type] = true
+             return { key:type, Comp };
+         });
     }
   },
 
   showOptionDialog(slice, options){
     const { type, data } = options;
     if (slice[type]) {
-      return { key: type, data };
+      return Promise.resolve({ key: type, data });
     } else {
       options.dialogType = type
-      const Comp = Factory.createOptionDialog(options)
-      slice[type] = true
-      return { key: type, Comp, data };
+      return Factory.createOptionDialog(options)
+         .then(Comp => {
+             slice[type] = true
+             return { key: type, Comp, data };
+         })
     }
   }
+
 }
 
 const CheckBoxChartLogic = {
@@ -58,18 +64,30 @@ const ComponentSlice = {
   onShowAbout(){
     this.trigger(ComponentActionTypes.SHOW_ABOUT);
   },
+
   onShowDialog(type, browserType){
-    const r = ItemDialogLogic.showItemDialog(
+    ItemDialogLogic.showItemDialog(
       this.dialogInit, { type, browserType }
-    );
-    this.trigger(ComponentActionTypes.SHOW_DIALOG, r)
+    ).then(r => {
+       this.trigger(ComponentActionTypes.SHOW_DIALOG, r)
+    });
   },
+
   onShowOptionDialog(type, option){
-    const r = ItemDialogLogic.showOptionDialog(
+    ItemDialogLogic.showOptionDialog(
       this.dialogInit, { type, data: option }
-    );
-    this.trigger(ComponentActionTypes.SHOW_DIALOG, r)
+    ).then(r => {
+      this.trigger(ComponentActionTypes.SHOW_DIALOG, r)
+    })
+    .catch(err => {
+      this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, {
+        modalDialogType: 'alert',
+        alertCaption: 'Failed Load',
+        alertDescr: err.message
+      })
+    });
   },
+
 
   isLoadToChart(){
     if (this.activeChart){

@@ -15,7 +15,8 @@
          "polyfill": false,
          "regenerator": false,
          "moduleName": "babel-runtime"
-      }]
+      }],
+      "dynamic-import-system-import"      
     ],
     "presets" : [
                    "es2015",

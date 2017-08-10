@@ -36,8 +36,6 @@ var _RouterModalDialog2 = _interopRequireDefault(_RouterModalDialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _hmDialogs = _RouterModalDialog2.default;
-
 var DialogContainer = function (_Component) {
   (0, _inherits3.default)(DialogContainer, _Component);
 
@@ -72,24 +70,38 @@ var DialogContainer = function (_Component) {
         data[type] = option;
         shows[type] = true;
         if (inits[type]) {
-          _this.setState({ isShow: true, currentDialog: type, shows: shows, data: data });
+          _this.setState({
+            isShow: true, currentDialog: type,
+            shows: shows, data: data
+          });
         } else {
-          dialogs.push({ type: type, comp: _hmDialogs[type] });
+          dialogs.push({
+            type: type,
+            comp: _RouterModalDialog2.default[type]
+          });
           inits[type] = true;
-          _this.setState({ isShow: true, currentDialog: type, shows: shows, data: data, dialogs: dialogs });
+          _this.setState({
+            isShow: true, currentDialog: type,
+            shows: shows, data: data, dialogs: dialogs
+          });
         }
       }
     }, _this._handleClose = function (type) {
       _this.state.shows[type] = false;
-      _this.setState({ isShow: false, currentDialog: null, shows: _this.state.shows });
+      _this.setState({
+        isShow: false,
+        currentDialog: null,
+        shows: _this.state.shows
+      });
     }, _this._renderDialogs = function () {
       var store = _this.props.store,
           _this$state2 = _this.state,
           shows = _this$state2.shows,
-          data = _this$state2.data;
+          data = _this$state2.data,
+          dialogs = _this$state2.dialogs;
 
 
-      return _this.state.dialogs.map(function (dialog, index) {
+      return dialogs.map(function (dialog, index) {
         var type = dialog.type,
             comp = dialog.comp;
 
@@ -98,7 +110,8 @@ var DialogContainer = function (_Component) {
           isShow: shows[type],
           data: data[type],
           store: store,
-          onClose: _this._handleClose.bind(null, type) });
+          onClose: _this._handleClose.bind(null, type)
+        });
       });
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }

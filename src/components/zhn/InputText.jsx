@@ -37,6 +37,13 @@ class InputText extends Component {
     }
   }
 
+  componentDidMount(){
+    const { onReg } = this.props;
+    if (typeof onReg === 'function'){
+      onReg(this)
+    }
+  }
+
   componentWillReceiveProps(nextProps){
     if (nextProps !== this.props){
       this.setState({ value : nextProps.initValue });
@@ -81,10 +88,10 @@ class InputText extends Component {
     )
   }
 
-  getValue = () => {
+  getValue() {
     return this.state.value;
   }
-  setValue = (value) => {
+  setValue(value) {
     this.setState({value})
   }
 }

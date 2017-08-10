@@ -74,14 +74,6 @@ var InputText = (_temp = _class = function (_Component) {
       }
     };
 
-    _this.getValue = function () {
-      return _this.state.value;
-    };
-
-    _this.setValue = function (value) {
-      _this.setState({ value: value });
-    };
-
     _this.isOnEnter = typeof props.onEnter === "function" ? true : false;
     _this.state = {
       value: props.initValue
@@ -90,6 +82,15 @@ var InputText = (_temp = _class = function (_Component) {
   }
 
   (0, _createClass3.default)(InputText, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var onReg = this.props.onReg;
+
+      if (typeof onReg === 'function') {
+        onReg(this);
+      }
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (nextProps !== this.props) {
@@ -115,6 +116,16 @@ var InputText = (_temp = _class = function (_Component) {
         onChange: this._handleInputChange,
         onKeyDown: this._handleKeyDown
       });
+    }
+  }, {
+    key: 'getValue',
+    value: function getValue() {
+      return this.state.value;
+    }
+  }, {
+    key: 'setValue',
+    value: function setValue(value) {
+      this.setState({ value: value });
     }
   }]);
   return InputText;

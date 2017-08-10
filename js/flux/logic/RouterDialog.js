@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
 var _DialogType = require('../../components/dialogs/DialogType3');
 
 var _DialogType2 = _interopRequireDefault(_DialogType);
@@ -64,13 +68,9 @@ var _AlphaIntradayDialog = require('../../components/quandl-browser/AlphaIntrada
 
 var _AlphaIntradayDialog2 = _interopRequireDefault(_AlphaIntradayDialog);
 
-var _ChartConfigDialog = require('../../components/chart-config/ChartConfigDialog');
-
-var _ChartConfigDialog2 = _interopRequireDefault(_ChartConfigDialog);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var RouterDialog = {
+var _router = {
   DEFAULT: _DialogType2.default,
 
   DialogType3: _DialogType2.default,
@@ -89,7 +89,32 @@ var RouterDialog = {
   AlphaSectorDialog: _AlphaSectorDialog2.default,
   AlphaIntradayDialog: _AlphaIntradayDialog2.default,
 
-  ChartConfigDialog: _ChartConfigDialog2.default
+  get ChartConfigDialog() {
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === 'development') {
+      return System.import("js/components/chart-config/ChartConfigDialog.js").then(function (module) {
+        return module.default;
+      });
+    }
+    /*eslint-enable no-undef */
+    return System.import(
+    /* webpackChunkName: "config-dialog" */
+    /* webpackMode: "lazy" */
+    "../../components/chart-config/ChartConfigDialog").then(function (module) {
+      return module.default;
+    });
+  }
+
+};
+
+var RouterDialog = {
+  getDialog: function getDialog(type) {
+    if (type && (0, _typeof3.default)(_router[type]) !== undefined) {
+      return Promise.resolve(_router[type]);
+    } else {
+      return Promise.resolve(_router['DEFAULT']);
+    }
+  }
 };
 
 exports.default = RouterDialog;

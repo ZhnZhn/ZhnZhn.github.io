@@ -23,7 +23,7 @@ const DataQE = {
     "dialogCaption" : "Swiss National Bank",
     "chartContainerCaption" : "Quandl: Swiss National Bank",
     "dialogProps" : {
-      "descrUrl" : "./data/quandl/bank-of-canada.html",
+      "descrUrl" : "./data/quandl/swiss-national-bank.html",
       "optionURI" : "./data/quandl/swiss-national-bank.json",
       "optionsJsonProp" : "items",
       "valueFn" : "RPrefixOne",
@@ -641,32 +641,11 @@ const DataQE = {
       }
   },
 
-  QE_ZILLOW_REAL_ESTATE : {
-      type : 'QE_ZILLOW_REAL_ESTATE',
+  QE_ZILLOW_REAL_ESTATE_2 : {
+      type : 'QE_ZILLOW_REAL_ESTATE_2',
       menuTitle : 'Zillow Research',
       dialogCaption : 'Zillow Real Estate Research',
       chartContainerCaption : 'Quandl Zillow Real Estate Research',
-      dialogType : 'ZillowDialog',
-      dialogProps : {
-        descrUrl: './data/quandl/zillow.html',
-        nInitFromDate : 10,
-        oneCaption : 'Indicator',
-        oneURI : './data/quandl/zillow-indicators.json',
-        oneJsonProp : 'indicators',
-        twoCaption : 'Area Type',
-        twoURI : './data/quandl/zillow-area.json',
-        twoJsonProp : 'places',
-        threeCaption : 'Area Code',
-        valueFn : 'RZill',
-        loadId : 'Q',
-        dataSource : 'Zillow Real Estate Research (Code: ZILL)'
-      }
-  },
-  QE_ZILLOW_REAL_ESTATE_2 : {
-      type : 'QE_ZILLOW_REAL_ESTATE_2',
-      menuTitle : 'Zillow Research 2',
-      dialogCaption : 'Zillow Real Estate Research 2',
-      chartContainerCaption : 'Quandl Zillow Real Estate Research 2',
       dialogType : 'ZillowDialog',
       dialogProps : {
         descrUrl: './data/quandl/zillow-2.html',

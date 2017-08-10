@@ -86,14 +86,13 @@ var _showModalDialogDescription = function _showModalDialogDescription(option) {
 var createDialogComp = function createDialogComp(conf, browserType) {
   var dialogType = conf.type,
       props = conf.dialogProps ? conf.dialogProps : {},
-      Comp = conf.dialogType ? _RouterDialog2.default[conf.dialogType] ? _RouterDialog2.default[conf.dialogType] : _RouterDialog2.default.DEFAULT : _RouterDialog2.default.DEFAULT,
       _initFromDate = props.nInitFromDate ? _DateUtils2.default.getFromDate(props.nInitFromDate) : initFromDate,
       _fnValue = props.valueFn ? props.valueFnPrefix ? _RouterFnValue2.default[props.valueFn].bind(null, props.valueFnPrefix) : _RouterFnValue2.default[props.valueFn] : undefined
-  /*
-   , _fnLink = (props.linkFn)
-        ? RouterFnLink[props.linkFn]
-        : undefined
-  */
+
+  // , _fnLink = (props.linkFn)
+  //      ? RouterFnLink[props.linkFn]
+  //      : undefined
+
   ,
       onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined,
       loadFn = _RouterLoadFn2.default.getFn(props.loadFnType, conf.dialogType);
@@ -107,31 +106,34 @@ var createDialogComp = function createDialogComp(conf, browserType) {
     props.loadId = _Type.LoadType.Q;
   }
 
-  return _react2.default.createElement(Comp, (0, _extends3.default)({
-    key: dialogType,
-    caption: conf.dialogCaption,
-    optionURI: conf.optionURI,
-    optionsJsonProp: conf.optionsJsonProp,
-    dataColumn: conf.dataColumn,
-    msgOnNotSelected: _Msg2.default.NOT_SELECTED,
-    msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
-    onLoad: onLoadChart.bind(null, dialogType, browserType),
-    onShow: onShowChart.bind(null, dialogType, browserType),
-    fnValue: _fnValue,
-    //fnLink : _fnLink,
-    initFromDate: _initFromDate,
-    initToDate: initToDate, onTestDate: onTestDate,
-    onClickInfo: onClickInfo,
-    loadFn: loadFn
-  }, props));
+  return _RouterDialog2.default.getDialog(conf.dialogType).then(function (Comp) {
+    return _react2.default.createElement(Comp, (0, _extends3.default)({
+      key: dialogType,
+      caption: conf.dialogCaption,
+      optionURI: conf.optionURI,
+      optionsJsonProp: conf.optionsJsonProp,
+      dataColumn: conf.dataColumn,
+      msgOnNotSelected: _Msg2.default.NOT_SELECTED,
+      msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
+      onLoad: onLoadChart.bind(null, dialogType, browserType),
+      onShow: onShowChart.bind(null, dialogType, browserType),
+      fnValue: _fnValue,
+      //fnLink : _fnLink,
+      initFromDate: _initFromDate,
+      initToDate: initToDate, onTestDate: onTestDate,
+      onClickInfo: onClickInfo,
+      loadFn: loadFn
+    }, props));
+  });
 };
 
 var _createOptionDialog = function _createOptionDialog(option) {
-  var dialogType = option.dialogType,
-      Comp = _RouterDialog2.default[dialogType];
+  var dialogType = option.dialogType;
 
-  return _react2.default.createElement(Comp, {
-    key: dialogType
+  return _RouterDialog2.default.getDialog(dialogType).then(function (Comp) {
+    return _react2.default.createElement(Comp, {
+      key: dialogType
+    });
   });
 };
 

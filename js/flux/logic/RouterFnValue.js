@@ -48,9 +48,6 @@ var RouterFnValue = {
     }
   },
 
-  RZill: function RZill(one, two, three) {
-    return "ZILL/" + two + three + "_" + one;
-  },
   RZillow: function RZillow(one, two, three) {
     return "ZILLOW/" + two + three + "_" + one;
   },

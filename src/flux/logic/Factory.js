@@ -35,14 +35,10 @@ const _showModalDialogDescription = function(option){
   ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, option);
 }
 
+
 const createDialogComp = function (conf, browserType){
    const dialogType = conf.type
        , props = conf.dialogProps ? conf.dialogProps : {}
-       , Comp = (conf.dialogType)
-            ? (RouterDialog[conf.dialogType])
-                  ? RouterDialog[conf.dialogType]
-                  : RouterDialog.DEFAULT
-            : RouterDialog.DEFAULT
        , _initFromDate = (props.nInitFromDate)
             ? DateUtils.getFromDate(props.nInitFromDate)
             : initFromDate
@@ -51,16 +47,16 @@ const createDialogComp = function (conf, browserType){
                    ? RouterFnValue[props.valueFn].bind(null, props.valueFnPrefix)
                    : RouterFnValue[props.valueFn]
             : undefined
-      /*
-       , _fnLink = (props.linkFn)
-            ? RouterFnLink[props.linkFn]
-            : undefined
-      */
+
+      // , _fnLink = (props.linkFn)
+      //      ? RouterFnLink[props.linkFn]
+      //      : undefined
+
        , onClickInfo = (props.descrUrl)
             ? _showModalDialogDescription
             : undefined
        , loadFn = RouterLoadFn.getFn(props.loadFnType, conf.dialogType);
-       
+
        if (props.isContinious) {
          props.msgTestDateOrEmpty = Msg.TEST_DATE_OR_EMPTY;
          props.onTestDateOrEmpty = onTestDateOrEmpty;
@@ -70,33 +66,40 @@ const createDialogComp = function (conf, browserType){
          props.loadId = LoadType.Q;
        }
 
-   return  React.createElement(Comp, {
-               key : dialogType,
-               caption : conf.dialogCaption,
-               optionURI : conf.optionURI,
-               optionsJsonProp : conf.optionsJsonProp,
-               dataColumn : conf.dataColumn,
-               msgOnNotSelected : Msg.NOT_SELECTED,
-               msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
-               onLoad  : onLoadChart.bind(null, dialogType, browserType),
-               onShow  : onShowChart.bind(null, dialogType, browserType),
-               fnValue : _fnValue,
-               //fnLink : _fnLink,
-               initFromDate : _initFromDate,
-               initToDate, onTestDate,
-               onClickInfo,
-               loadFn,
-               ...props
-  });
+      return RouterDialog.getDialog(conf.dialogType)
+               .then(Comp => {
+                  return React.createElement(Comp, {
+                    key : dialogType,
+                    caption : conf.dialogCaption,
+                    optionURI : conf.optionURI,
+                    optionsJsonProp : conf.optionsJsonProp,
+                    dataColumn : conf.dataColumn,
+                    msgOnNotSelected : Msg.NOT_SELECTED,
+                    msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
+                    onLoad  : onLoadChart.bind(null, dialogType, browserType),
+                    onShow  : onShowChart.bind(null, dialogType, browserType),
+                    fnValue : _fnValue,
+                    //fnLink : _fnLink,
+                    initFromDate : _initFromDate,
+                    initToDate, onTestDate,
+                    onClickInfo,
+                    loadFn,
+                    ...props
+                 });
+               })
 }
+
 
 const _createOptionDialog = function(option) {
   const { dialogType } = option
-      , Comp = RouterDialog[dialogType];
-  return React.createElement(Comp, {
-      key: dialogType
-  })
+  return RouterDialog.getDialog(dialogType)
+           .then(Comp => {
+              return React.createElement(Comp, {
+                  key: dialogType
+              })
+           });
 }
+
 
 const onCloseItem = ChartActions.closeChart;
 const fnCloseChartContainer = function(chartType, browserType){

@@ -17,9 +17,7 @@ import AlphaIndicatorDialog from '../../components/quandl-browser/AlphaIndicator
 import AlphaSectorDialog from '../../components/quandl-browser/AlphaSectorDialog';
 import AlphaIntradayDialog from '../../components/quandl-browser/AlphaIntradayDialog';
 
-import ChartConfigDialog from '../../components/chart-config/ChartConfigDialog'
-
-const RouterDialog = {
+const _router = {
   DEFAULT : DialogType3,
 
   DialogType3 : DialogType3,
@@ -38,7 +36,31 @@ const RouterDialog = {
   AlphaSectorDialog: AlphaSectorDialog,
   AlphaIntradayDialog: AlphaIntradayDialog,
 
-  ChartConfigDialog : ChartConfigDialog
+  get ChartConfigDialog() {
+    /*eslint-disable no-undef */
+    if ( process.env.NODE_ENV === 'development') {
+      return import("js/components/chart-config/ChartConfigDialog.js")
+        .then(module => { return module.default; })
+    }
+    /*eslint-enable no-undef */
+    return import(
+       /* webpackChunkName: "config-dialog" */
+       /* webpackMode: "lazy" */
+       "../../components/chart-config/ChartConfigDialog"
+     ).then(module => { return module.default; })
+  }
+
 }
+
+const RouterDialog = {
+  getDialog(type){
+    if (type && typeof _router[type] !== undefined) {
+      return Promise.resolve(_router[type]);
+    } else {
+      return Promise.resolve(_router['DEFAULT']);
+    }
+  }
+}
+
 
 export default RouterDialog

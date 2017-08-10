@@ -4,7 +4,6 @@ import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
 import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
 
 import RouterModalDialog from './RouterModalDialog';
-const _hmDialogs = RouterModalDialog;
 
 class DialogContainer extends Component {
   static propTypes = {
@@ -23,45 +22,59 @@ class DialogContainer extends Component {
   }
 
   componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore);
+    this.unsubscribe = this.props.store.listen(this._onStore)
   }
   componentWillUnmount(){
-    this.unsubscribe();
+    this.unsubscribe()
   }
   _onStore = (actionType, option) => {
      if (actionType === ComponentActionTypes.SHOW_MODAL_DIALOG){
        const type = option.modalDialogType
            , { inits, shows, data, dialogs } = this.state;
 
-       data[type] = option;
-       shows[type] = true;
+       data[type] = option
+       shows[type] = true
        if (inits[type]){
-         this.setState({isShow: true, currentDialog: type, shows, data})
+         this.setState({
+           isShow: true, currentDialog: type,
+           shows, data
+         })
        } else {
-         dialogs.push({type : type, comp : _hmDialogs[type]});
+         dialogs.push({
+           type : type,
+           comp : RouterModalDialog[type]
+         });
          inits[type] = true
-         this.setState({isShow: true, currentDialog: type, shows, data, dialogs});
+         this.setState({
+           isShow: true, currentDialog: type,
+           shows, data, dialogs
+         });
        }
      }
   }
 
   _handleClose = (type) => {
     this.state.shows[type] = false;
-    this.setState({isShow : false, currentDialog: null, shows : this.state.shows})
+    this.setState({
+      isShow : false,
+      currentDialog: null,
+      shows : this.state.shows
+    })
   }
 
   _renderDialogs = () => {
-    const {store} = this.props
-        , {shows, data} = this.state;
+    const { store } = this.props
+        , { shows, data, dialogs } = this.state;
 
-    return this.state.dialogs.map((dialog, index) => {
-      const {type, comp} = dialog
+    return dialogs.map((dialog, index) => {
+      const { type, comp } = dialog;
       return React.createElement(comp, {
-           key: type,
-           isShow: shows[type],
-           data: data[type],
-           store : store,
-           onClose: this._handleClose.bind(null, type)})
+         key: type,
+         isShow: shows[type],
+         data: data[type],
+         store : store,
+         onClose: this._handleClose.bind(null, type)
+      })
     })
   }
 

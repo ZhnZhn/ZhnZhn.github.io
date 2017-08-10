@@ -20,8 +20,7 @@ const RouterFnValue = {
       return `OECD/${two}_${one}`;
     }
   },
-
-  RZill : (one, two, three) => `ZILL/${two}${three}_${one}`,
+  
   RZillow : (one, two, three) => `ZILLOW/${two}${three}_${one}`,
 
   RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`,

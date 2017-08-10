@@ -43,8 +43,7 @@ const qeSources = [
   'LIFFE_FUTURE',
   'ICE_FUTURE',
   'WIKI_FUTURE',
-
-  'ZILLOW_REAL_ESTATE',
+  
   'ZILLOW_REAL_ESTATE_2',
   'FMAC'
 ];

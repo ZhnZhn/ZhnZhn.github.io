@@ -18,11 +18,12 @@ var ItemDialogLogic = {
         browserType = itemConf.browserType;
 
     if (slice[type]) {
-      return { key: type };
+      return Promise.resolve({ key: type });
     } else {
-      var Comp = _Factory2.default.createDialog(type, browserType);
-      slice[type] = true;
-      return { key: type, Comp: Comp };
+      return _Factory2.default.createDialog(type, browserType).then(function (Comp) {
+        slice[type] = true;
+        return { key: type, Comp: Comp };
+      });
     }
   },
   showOptionDialog: function showOptionDialog(slice, options) {
@@ -30,12 +31,13 @@ var ItemDialogLogic = {
         data = options.data;
 
     if (slice[type]) {
-      return { key: type, data: data };
+      return Promise.resolve({ key: type, data: data });
     } else {
       options.dialogType = type;
-      var Comp = _Factory2.default.createOptionDialog(options);
-      slice[type] = true;
-      return { key: type, Comp: Comp, data: data };
+      return _Factory2.default.createOptionDialog(options).then(function (Comp) {
+        slice[type] = true;
+        return { key: type, Comp: Comp, data: data };
+      });
     }
   }
 };
@@ -74,12 +76,24 @@ var ComponentSlice = {
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_ABOUT);
   },
   onShowDialog: function onShowDialog(type, browserType) {
-    var r = ItemDialogLogic.showItemDialog(this.dialogInit, { type: type, browserType: browserType });
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
+    var _this = this;
+
+    ItemDialogLogic.showItemDialog(this.dialogInit, { type: type, browserType: browserType }).then(function (r) {
+      _this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
+    });
   },
   onShowOptionDialog: function onShowOptionDialog(type, option) {
-    var r = ItemDialogLogic.showOptionDialog(this.dialogInit, { type: type, data: option });
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
+    var _this2 = this;
+
+    ItemDialogLogic.showOptionDialog(this.dialogInit, { type: type, data: option }).then(function (r) {
+      _this2.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
+    }).catch(function (err) {
+      _this2.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
+        modalDialogType: 'alert',
+        alertCaption: 'Failed Load',
+        alertDescr: err.message
+      });
+    });
   },
   isLoadToChart: function isLoadToChart() {
     if (this.activeChart) {
