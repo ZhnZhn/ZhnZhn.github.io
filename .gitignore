@@ -16,3 +16,6 @@ stats.json
 report.html
 out.txt
 coverage
+src/components/chart-config
+js/components/chart-config
+app/config-dialog*.js
