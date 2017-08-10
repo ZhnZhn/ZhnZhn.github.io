@@ -14,8 +14,8 @@ module.exports = {
             "big.js", "interact.js", "localforage", "query-string",
             "lodash.merge", "lodash.flow",
             "purify",
-            "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
-            "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",
+            "highcharts", "highcharts/highcharts-more", "highcharts/modules/treemap",
+            "highcharts/modules/exporting", "highcharts/modules/offline-exporting",
             "accounting",
             "jsonstat",
             "babel-runtime/helpers/classCallCheck",
@@ -29,7 +29,7 @@ module.exports = {
   },
   output: {
       path: path.resolve('app'),
-      filename: "[name]_[chunkhash].js",      
+      filename: "[name]_[chunkhash].js",
       chunkFilename: "[name]_[chunkhash].js",
       publicPath: 'app/'
   },

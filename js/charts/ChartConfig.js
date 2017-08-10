@@ -12,19 +12,19 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
-var _highchartsMore = require('highcharts/lib/highcharts-more');
+var _highchartsMore = require('highcharts/highcharts-more');
 
 var _highchartsMore2 = _interopRequireDefault(_highchartsMore);
 
-var _treemap = require('highcharts/lib/modules/treemap');
+var _treemap = require('highcharts/modules/treemap');
 
 var _treemap2 = _interopRequireDefault(_treemap);
 
-var _exporting = require('highcharts/lib/modules/exporting');
+var _exporting = require('highcharts/modules/exporting');
 
 var _exporting2 = _interopRequireDefault(_exporting);
 
-var _offlineExporting = require('highcharts/lib/modules/offline-exporting');
+var _offlineExporting = require('highcharts/modules/offline-exporting');
 
 var _offlineExporting2 = _interopRequireDefault(_offlineExporting);
 
@@ -75,6 +75,11 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 var _Type = require('../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import HighchartsMore from 'highcharts/lib/highcharts-more';
+//import HighchartsTreemap from 'highcharts/lib/modules/treemap';
+//import HighchartsExporting from 'highcharts/lib/modules/exporting';
+//import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
 var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default, {
   init: function init() {

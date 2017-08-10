@@ -1,8 +1,13 @@
 import Highcharts from 'highcharts';
-import HighchartsMore from 'highcharts/lib/highcharts-more';
-import HighchartsTreemap from 'highcharts/lib/modules/treemap';
-import HighchartsExporting from 'highcharts/lib/modules/exporting';
-import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
+import HighchartsMore from 'highcharts/highcharts-more';
+import HighchartsTreemap from 'highcharts/modules/treemap';
+import HighchartsExporting from 'highcharts/modules/exporting';
+import HighchartsOfflineExporting from 'highcharts/modules/offline-exporting';
+
+//import HighchartsMore from 'highcharts/lib/highcharts-more';
+//import HighchartsTreemap from 'highcharts/lib/modules/treemap';
+//import HighchartsExporting from 'highcharts/lib/modules/exporting';
+//import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
 import merge from 'lodash.merge';
 
