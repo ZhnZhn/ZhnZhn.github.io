@@ -16,6 +16,7 @@ stats.json
 report.html
 out.txt
 coverage
+dll
 src/components/chart-config
 js/components/chart-config
 app/config-dialog*.js
