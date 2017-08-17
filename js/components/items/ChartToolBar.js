@@ -24,21 +24,25 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ButtonParentTab = require('../zhn-moleculs/ButtonParentTab');
-
-var _ButtonParentTab2 = _interopRequireDefault(_ButtonParentTab);
-
 var _ButtonTab = require('../zhn/ButtonTab');
 
 var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
 
-var _PanelIndicator = require('./PanelIndicator');
+var _MenuTabItem = require('../zhn-moleculs/MenuTabItem');
 
-var _PanelIndicator2 = _interopRequireDefault(_PanelIndicator);
+var _MenuTabItem2 = _interopRequireDefault(_MenuTabItem);
 
-var _PanelMini = require('./PanelMini');
+var _ModalMenuIndicator = require('./ModalMenuIndicator');
 
-var _PanelMini2 = _interopRequireDefault(_PanelMini);
+var _ModalMenuIndicator2 = _interopRequireDefault(_ModalMenuIndicator);
+
+var _ModalMenuFn = require('./ModalMenuFn');
+
+var _ModalMenuFn2 = _interopRequireDefault(_ModalMenuFn);
+
+var _ModalMenuMini = require('./ModalMenuMini');
+
+var _ModalMenuMini2 = _interopRequireDefault(_ModalMenuMini);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,14 +56,14 @@ var S = {
   BT_LEGEND: {
     left: '115px'
   },
-  BT_X2H: {
+  TAB_MINI: {
+    left: '350px'
+  },
+  TAB_FN: {
     left: '190px'
   },
   BT_ADD: {
-    left: '240px'
-  },
-  TAB_MINI: {
-    left: '350px'
+    left: '250px'
   },
   BT_CONF: {
     left: '430px'
@@ -84,7 +88,7 @@ var ChartToolbar = function (_Component) {
 
   (0, _createClass3.default)(ChartToolbar, [{
     key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate() {
+    value: function shouldComponentUpdate(nextProps, nextState) {
       return false;
     }
   }, {
@@ -102,6 +106,8 @@ var ChartToolbar = function (_Component) {
           onClickLegend = _props.onClickLegend,
           onClick2H = _props.onClick2H,
           onAddToWatch = _props.onAddToWatch,
+          onCopy = _props.onCopy,
+          onPasteTo = _props.onPasteTo,
           onClickInfo = _props.onClickInfo,
           onClickVolume = _props.onClickVolume,
           onClickATH = _props.onClickATH,
@@ -113,14 +119,14 @@ var ChartToolbar = function (_Component) {
           isWithLegend = zhConfig.isWithLegend,
           isWithoutAdd = zhConfig.isWithoutAdd;
 
-      var _btIndicator = !isWithoutIndicator ? _react2.default.createElement(
-        _ButtonParentTab2.default,
+
+      var _btTabIndicator = !isWithoutIndicator ? _react2.default.createElement(
+        _MenuTabItem2.default,
         {
           style: S.TAB_INDICATOR,
           caption: 'Indicator'
         },
-        _react2.default.createElement(_PanelIndicator2.default, {
-          rootStyle: S.PANE_INDICATOR,
+        _react2.default.createElement(_ModalMenuIndicator2.default, {
           onAddSma: onAddSma,
           onRemoveSma: onRemoveSeries,
           isMfi: config.zhIsMfi,
@@ -129,24 +135,17 @@ var ChartToolbar = function (_Component) {
           isMomAth: this._isMomAthConfig,
           onAddMomAth: onAddMomAth
         })
-      ) : undefined;
+      ) : null;
 
       var _btLegend = isWithLegend ? _react2.default.createElement(_ButtonTab2.default, {
         style: S.BT_LEGEND,
         caption: 'Legend',
         onClick: onClickLegend
-      }) : undefined;
-
-      var _bt2HChart = _react2.default.createElement(_ButtonTab2.default, {
-        style: S.BT_X2H,
-        caption: 'x2H',
-        onClick: onClick2H
-      });
+      }) : null;
 
       var _btAdd = !isWithoutAdd ? _react2.default.createElement(_ButtonTab2.default, {
         style: S.BT_ADD,
         caption: 'Add',
-        isShow: false,
         onClick: onAddToWatch
       }) : null;
 
@@ -159,20 +158,18 @@ var ChartToolbar = function (_Component) {
           zhATHConfig = config.zhATHConfig,
           zhHighLowConfig = config.zhHighLowConfig;
 
-      var _btMini = zhVolumeConfig || zhATHConfig || zhHighLowConfig ? _react2.default.createElement(
-        _ButtonParentTab2.default,
+      var _btTabMini = zhVolumeConfig || zhATHConfig || zhHighLowConfig ? _react2.default.createElement(
+        _MenuTabItem2.default,
         {
           style: S.TAB_MINI,
           caption: 'Mini'
         },
-        _react2.default.createElement(_PanelMini2.default, {
-          config: config,
-          onClickVolume: onClickVolume,
-          onClickATH: onClickATH,
-          onClickHighLow: onClickHighLow
+        _react2.default.createElement(_ModalMenuMini2.default, {
+          onClickVolume: zhVolumeConfig ? onClickVolume : null,
+          onClickATH: zhATHConfig ? onClickATH : null,
+          onClickHighLow: zhHighLowConfig ? onClickHighLow : null
         })
       ) : null;
-
       /*
          const _btConf = (
            <ButtonTab
@@ -180,18 +177,28 @@ var ChartToolbar = function (_Component) {
              caption="Conf"
              onClick={onClickConfig}
            />
-         )
+         );
       */
-
       return _react2.default.createElement(
         'div',
         { style: style },
-        _btIndicator,
+        _btTabIndicator,
         _btLegend,
-        _bt2HChart,
+        _react2.default.createElement(
+          _MenuTabItem2.default,
+          {
+            style: S.TAB_FN,
+            caption: 'Fn'
+          },
+          _react2.default.createElement(_ModalMenuFn2.default, {
+            onX2H: onClick2H,
+            onCopy: onCopy,
+            onPasteTo: onPasteTo
+          })
+        ),
         _btAdd,
         _btInfo,
-        _btMini
+        _btTabMini
       );
     }
   }]);

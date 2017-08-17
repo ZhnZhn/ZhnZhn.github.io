@@ -42,7 +42,10 @@ var ChartActionTypes = exports.ChartActionTypes = {
   LOAD_STOCK_ADDED: 'loadStockAdded',
   LOAD_STOCK_FAILED: 'loadStockFailed',
   SHOW_CHART: 'showChart',
-  CLOSE_CHART: 'closeChart'
+  CLOSE_CHART: 'closeChart',
+
+  COPY: 'copy',
+  PASTE_TO: 'pasteTo'
 };
 
 var _fnOnChangeStore = function _fnOnChangeStore(actionType, data) {
@@ -88,7 +91,7 @@ var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (
   idLoading: undefined,
   isShouldEmit: true,
   cancelLoad: _fnCancelLoad
-}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), _Reflux$createActions));
+}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.PASTE_TO, {}), _Reflux$createActions));
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 

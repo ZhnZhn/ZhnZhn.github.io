@@ -24,9 +24,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SubPanel = require('./SubPanel');
+var _ModalPopup = require('../zhn-moleculs/ModalPopup');
 
-var _SubPanel2 = _interopRequireDefault(_SubPanel);
+var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
 
 var _InputText = require('../zhn/InputText');
 
@@ -40,12 +40,20 @@ var _SvgMinus = require('../zhn/SvgMinus');
 
 var _SvgMinus2 = _interopRequireDefault(_SvgMinus);
 
+var _ModalMenu = require('./ModalMenu.Style');
+
+var _ModalMenu2 = _interopRequireDefault(_ModalMenu);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var INIT_SMA = "50",
     INIT_MFI = "14";
 
 var STYLE = {
+  PANE: {
+    width: '240px',
+    margin: '8px'
+  },
   CAPTION: {
     display: 'inline-block',
     color: 'black',
@@ -70,13 +78,13 @@ var STYLE = {
   }
 };
 
-var PanelIndicator = function (_Component) {
-  (0, _inherits3.default)(PanelIndicator, _Component);
+var ModalMenuIndicator = function (_Component) {
+  (0, _inherits3.default)(ModalMenuIndicator, _Component);
 
-  function PanelIndicator(props) {
-    (0, _classCallCheck3.default)(this, PanelIndicator);
+  function ModalMenuIndicator(props) {
+    (0, _classCallCheck3.default)(this, ModalMenuIndicator);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (PanelIndicator.__proto__ || Object.getPrototypeOf(PanelIndicator)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalMenuIndicator.__proto__ || Object.getPrototypeOf(ModalMenuIndicator)).call(this));
 
     _this._checkIfAlreadyAdded = function (arrObj, id) {
       var result = arrObj.find(function (obj) {
@@ -220,14 +228,15 @@ var PanelIndicator = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(PanelIndicator, [{
+  (0, _createClass3.default)(ModalMenuIndicator, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       var _props = this.props,
-          rootStyle = _props.rootStyle,
+          isShow = _props.isShow,
           isMfi = _props.isMfi,
+          onClose = _props.onClose,
           plusSma = this.state.plusSma;
 
 
@@ -254,61 +263,69 @@ var PanelIndicator = function (_Component) {
       ) : null;
 
       return _react2.default.createElement(
-        _SubPanel2.default,
-        { style: rootStyle },
+        _ModalPopup2.default,
+        {
+          style: _ModalMenu2.default.ROOT,
+          isShow: isShow,
+          onClose: onClose
+        },
         _react2.default.createElement(
           'div',
-          null,
+          { style: STYLE.PANE },
           _react2.default.createElement(
-            'span',
-            { style: STYLE.CAPTION },
-            'SMA+'
+            'div',
+            null,
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.CAPTION },
+              'SMA+'
+            ),
+            _react2.default.createElement(_InputText2.default, {
+              ref: function ref(c) {
+                return _this2.inputSmaPlus = c;
+              },
+              initValue: INIT_SMA
+            }),
+            _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma.bind(null, true) }),
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.SMA_PLUS },
+              '+'
+            ),
+            _react2.default.createElement(_InputText2.default, {
+              ref: function ref(c) {
+                return _this2.inputPlusSma = c;
+              },
+              initValue: plusSma
+            })
           ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: function ref(c) {
-              return _this2.inputSmaPlus = c;
-            },
-            initValue: INIT_SMA
-          }),
-          _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma.bind(null, true) }),
           _react2.default.createElement(
-            'span',
-            { style: STYLE.SMA_PLUS },
-            '+'
+            'div',
+            null,
+            _react2.default.createElement(
+              'span',
+              { style: STYLE.CAPTION },
+              'SMA'
+            ),
+            _react2.default.createElement(_InputText2.default, {
+              ref: function ref(c) {
+                return _this2.inputSmaComp = c;
+              },
+              initValue: INIT_SMA
+            }),
+            _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma })
           ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: function ref(c) {
-              return _this2.inputPlusSma = c;
-            },
-            initValue: plusSma
-          })
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.CAPTION },
-            'SMA'
-          ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: function ref(c) {
-              return _this2.inputSmaComp = c;
-            },
-            initValue: INIT_SMA
-          }),
-          _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma })
-        ),
-        this._renderIndicators(),
-        _mfiDom,
-        this._divMomAth
+          this._renderIndicators(),
+          _mfiDom,
+          this._divMomAth
+        )
       );
     }
   }]);
-  return PanelIndicator;
+  return ModalMenuIndicator;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? PanelIndicator.propTypes = {
+process.env.NODE_ENV !== "production" ? ModalMenuIndicator.propTypes = {
   rootStyle: _react.PropTypes.object,
   isMfi: _react.PropTypes.bool,
   onAddSma: _react.PropTypes.func,
@@ -318,5 +335,5 @@ process.env.NODE_ENV !== "production" ? PanelIndicator.propTypes = {
   isMomAth: _react.PropTypes.bool,
   onAddMomAth: _react.PropTypes.func
 } : void 0;
-exports.default = PanelIndicator;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelIndicator.js.map
+exports.default = ModalMenuIndicator;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ModalMenuIndicator.js.map

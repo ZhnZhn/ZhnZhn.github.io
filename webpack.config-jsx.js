@@ -5,6 +5,7 @@ const path = require('path')
     , HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  cache: true,
   entry: {
      lib: [
             "react", "react-dom", "raven-js",
@@ -13,7 +14,7 @@ module.exports = {
             "fetch-jsonp",
             "big.js", "interact.js", "localforage", "query-string",
             "lodash.merge", "lodash.flow",
-            "purify",
+            "dompurify",
             "highcharts", "highcharts/highcharts-more", "highcharts/modules/treemap",
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting",
             "accounting",
@@ -25,7 +26,7 @@ module.exports = {
             "babel-runtime/helpers/toConsumableArray",
             "babel-runtime/helpers/slicedToArray"
           ],
-    erc: path.resolve('js', 'index.js')
+    erc: path.resolve('src', 'index.jsx')
   },
   output: {
       path: path.resolve('app'),
@@ -41,6 +42,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            "cacheDirectory": true,
             "plugins" : [
                           "transform-decorators-legacy",
                          [ "transform-react-remove-prop-types", {

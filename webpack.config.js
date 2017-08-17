@@ -11,9 +11,9 @@ module.exports = {
             "react-addons-shallow-compare", "react-addons-css-transition-group",
             "reflux",
             "fetch-jsonp",
-            "big.js", "interact.js", "localforage", "query-string",            
-            "lodash.merge", "lodash.flow", 
-            "purify",
+            "big.js", "interact.js", "localforage", "query-string",
+            "lodash.merge", "lodash.flow",
+            "dompurify",
             "highcharts", "highcharts/lib/highcharts-more", "highcharts/lib/modules/treemap",
             "highcharts/lib/modules/exporting", "highcharts/lib/modules/offline-exporting",
             "accounting",
@@ -23,7 +23,7 @@ module.exports = {
             "babel-runtime/helpers/possibleConstructorReturn",
             "babel-runtime/helpers/inherits",
             "babel-runtime/helpers/toConsumableArray",
-            "babel-runtime/helpers/slicedToArray"                                      
+            "babel-runtime/helpers/slicedToArray"
           ],
     erc: path.resolve('js', 'index.js')
   },
@@ -32,7 +32,7 @@ module.exports = {
       filename: "[name]_[chunkhash].js",
       chunkFilename: "[chunkhash].js"
   },
-  resolve: {    
+  resolve: {
     modules: ['local_modules', 'node_modules']
   },
   plugins : [
@@ -44,7 +44,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['lib', 'manifest']
     }),
-    new webpack.optimize.UglifyJsPlugin({        
+    new webpack.optimize.UglifyJsPlugin({
         compress: {
            warnings: false
         },

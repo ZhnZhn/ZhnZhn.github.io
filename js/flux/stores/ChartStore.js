@@ -34,6 +34,10 @@ var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
 var _Type = require('../../constants/Type');
 
+var _ChartFn = require('../../charts/ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
 var _Factory = require('../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
@@ -77,6 +81,21 @@ var _fnLogLoadError = function _fnLogLoadError(_ref) {
 
   console.log('%c' + alertCaption + ':' + alertItemId, CONSOLE_LOG_STYLE);
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
+};
+
+var _Logic = {
+  pasteTo: function pasteTo(fromChart, toChart) {
+    if (toChart && fromChart && fromChart.series) {
+      fromChart.series.forEach(function (seria) {
+        if (seria.visible) {
+          var color = seria.color,
+              userOptions = seria.userOptions;
+
+          _ChartFn2.default.addDataTo(toChart, color, userOptions.data);
+        }
+      });
+    }
+  }
 };
 
 var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
@@ -201,8 +220,14 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   },
   onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
     this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
+  },
+  onCopy: function onCopy(chart) {
+    this.fromChart = chart;
+  },
+  onPasteTo: function onPasteTo(toChart) {
+    _Logic.pasteTo(this.fromChart, toChart);
   }
 }, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default));
 
 exports.default = ChartStore;
-//# sourceMappingURL=ChartStore.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ChartStore.js.map

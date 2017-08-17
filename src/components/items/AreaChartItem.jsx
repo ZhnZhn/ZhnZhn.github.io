@@ -148,6 +148,13 @@ class AreaChartItem extends Component {
     onAddToWatch( {caption, config} )
   }
 
+  _handleCopy = () => {
+    this.props.onCopy(this.mainChart)
+  }
+  _handlePasteTo = () => {
+    this.props.onPasteTo(this.mainChart)
+  }
+
   _handlerClickInfo = () => {
     this.setState({
       isShowInfo: true, isShowChart: false, isShowLegend: false
@@ -219,7 +226,7 @@ class AreaChartItem extends Component {
     this.setState({mfiConfigs: this.state.mfiConfigs})
   }
   _handleAddMomAth = () => {
-     const config = this._crMomAthConfig(this.mainChart, this._chartId);     
+     const config = this._crMomAthConfig(this.mainChart, this._chartId);
      this.state.mfiConfigs.push({config, id: 'MOM_ATH'})
      this.setState({ mfiConfigs: this.state.mfiConfigs })
   }
@@ -244,7 +251,7 @@ class AreaChartItem extends Component {
     })
   }
 
- _createChartToolBar = (config) => {
+ _createChartToolBar = (config) => {   
    const { isShowToolbar } = this.state;
    return (
          <ShowHide isShow={isShowToolbar}>
@@ -264,6 +271,8 @@ class AreaChartItem extends Component {
              onClickATH={this._handlerClickATH}
              onClickHighLow={this._handlerClickHighLow}
              onClickConfig={this._handleClickConfig}
+             onCopy={this._handleCopy}
+             onPasteTo={this._handlePasteTo}
             />
          </ShowHide>
       );

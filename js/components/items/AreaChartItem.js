@@ -272,6 +272,14 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     onAddToWatch({ caption: caption, config: config });
   };
 
+  this._handleCopy = function () {
+    _this3.props.onCopy(_this3.mainChart);
+  };
+
+  this._handlePasteTo = function () {
+    _this3.props.onPasteTo(_this3.mainChart);
+  };
+
   this._handlerClickInfo = function () {
     _this3.setState({
       isShowInfo: true, isShowChart: false, isShowLegend: false
@@ -406,7 +414,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         onClickVolume: _this3._handlerClickVolume,
         onClickATH: _this3._handlerClickATH,
         onClickHighLow: _this3._handlerClickHighLow,
-        onClickConfig: _this3._handleClickConfig
+        onClickConfig: _this3._handleClickConfig,
+        onCopy: _this3._handleCopy,
+        onPasteTo: _this3._handlePasteTo
       })
     );
   };

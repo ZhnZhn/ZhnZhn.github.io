@@ -60,9 +60,18 @@ var SubMenuItem = function (_Component) {
   (0, _createClass3.default)(SubMenuItem, [{
     key: 'render',
     value: function render() {
-      var caption = this.props.caption,
-          isActive = this.state.isActive,
-          _style = isActive ? STYLE.ACTIVE : null;
+      var _props = this.props,
+          caption = _props.caption,
+          isNotActive = _props.isNotActive,
+          onClick = _props.onClick;
+
+      if (typeof onClick !== 'function') {
+        return null;
+      }
+
+      var isActive = this.state.isActive,
+          _style = isActive && !isNotActive ? STYLE.ACTIVE : null;
+
 
       return _react2.default.createElement(
         'div',

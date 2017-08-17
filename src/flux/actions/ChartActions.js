@@ -14,7 +14,10 @@ export const ChartActionTypes = {
   LOAD_STOCK_ADDED : 'loadStockAdded',
   LOAD_STOCK_FAILED : 'loadStockFailed',
   SHOW_CHART : 'showChart',
-  CLOSE_CHART : 'closeChart'
+  CLOSE_CHART : 'closeChart',
+
+  COPY: 'copy',
+  PASTE_TO: 'pasteTo'
 }
 
 const _fnOnChangeStore = function(actionType, data){
@@ -66,7 +69,9 @@ const ChartActions =  Reflux.createActions({
          cancelLoad : _fnCancelLoad
        },
       [ChartActionTypes.SHOW_CHART] : {},
-      [ChartActionTypes.CLOSE_CHART] : {}
+      [ChartActionTypes.CLOSE_CHART] : {},
+      [ChartActionTypes.COPY]: {},
+      [ChartActionTypes.PASTE_TO]: {}
 });
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore

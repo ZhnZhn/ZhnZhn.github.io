@@ -25,11 +25,16 @@ class SubMenuItem extends Component{
   }
 
   render(){
-    const { caption  } = this.props
-        , { isActive } = this.state
-        , _style = (isActive)
+    const { caption, isNotActive, onClick  } = this.props;
+    if (typeof onClick !== 'function'){
+      return null;
+    }
+
+    const { isActive } = this.state
+        , _style = (isActive && !isNotActive)
             ? STYLE.ACTIVE
             : null;
+
     return(
       <div
         className="bt-sub-item"

@@ -1,0 +1,18 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\items\\ModalMenuFn.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\items\\ModalMenuFn.js",
+ "sourceRoot": "",
+ "names": [
+  "ModalMenuFn",
+  "isShow",
+  "onClose",
+  "onX2H",
+  "onCopy",
+  "onPasteTo",
+  "ROOT",
+  "PANE"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,cAAc,SAAdA,WAAc;AAAA,MAClBC,MADkB,QAClBA,MADkB;AAAA,MACVC,OADU,QACVA,OADU;AAAA,MAElBC,KAFkB,QAElBA,KAFkB;AAAA,MAGlBC,MAHkB,QAGlBA,MAHkB;AAAA,MAGVC,SAHU,QAGVA,SAHU;AAAA,SAKlB;AAAA;AAAA;AACE,cAAQJ,MADV;AAEE,aAAO,oBAAMK,IAFf;AAGE,eAASJ;AAHX;AAKE;AAAA;AAAA,QAAK,OAAO,oBAAMK,IAAlB;AACE;AACE,iBAAQ,KADV;AAEE,iBAASJ;AAFX,QADF;AAKE;AACE,iBAAQ,MADV;AAEE,qBAAa,IAFf;AAGE,iBAASC;AAHX,QALF;AAUE;AACE,iBAAQ,SADV;AAEE,qBAAa,IAFf;AAGE,iBAASC;AAHX;AAVF;AALF,GALkB;AAAA,CAApB;;kBA6BeL,W"
+}

@@ -1,14 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 
-import SubPanel from './SubPanel';
+import ModalPopup from '../zhn-moleculs/ModalPopup'
+
 import InputText from '../zhn/InputText';
 import SvgPlus from '../zhn/SvgPlus';
 import SvgMinus from '../zhn/SvgMinus';
+
+import S from './ModalMenu.Style'
 
 const INIT_SMA = "50"
     , INIT_MFI = "14";
 
 const STYLE = {
+  PANE: {
+    width: '240px',
+    margin: '8px'
+  },
   CAPTION : {
     display : 'inline-block',
     color : 'black',
@@ -33,7 +40,7 @@ const STYLE = {
   }
 }
 
-class PanelIndicator extends Component {
+class ModalMenuIndicator extends Component {
   static propTypes = {
     rootStyle: PropTypes.object,
     isMfi: PropTypes.bool,
@@ -129,7 +136,7 @@ class PanelIndicator extends Component {
     }
   }
 
-  _handleAddMomAth = () => {  
+  _handleAddMomAth = () => {
     this.props.onAddMomAth()
   }
 
@@ -172,7 +179,7 @@ class PanelIndicator extends Component {
   }
 
  render(){
-    const { rootStyle, isMfi } = this.props
+    const { isShow, isMfi, onClose } = this.props
         , { plusSma } = this.state;
 
     const _mfiDom = (isMfi) ? (
@@ -189,38 +196,43 @@ class PanelIndicator extends Component {
       </div>
     ) : null;
 
-
     return (
-      <SubPanel style={rootStyle}>
-        <div>
-          <span style={STYLE.CAPTION}>SMA+</span>
-          <InputText
-             ref={c => this.inputSmaPlus = c}
-             initValue={INIT_SMA}
-          />
-          <SvgPlus onClick={this._handleAddSma.bind(null, true)} />
-          <span style={STYLE.SMA_PLUS}>
-            +
-          </span>
-          <InputText
-             ref={c => this.inputPlusSma = c}
-             initValue={plusSma}
-          />
+      <ModalPopup
+        style={S.ROOT}
+        isShow={isShow}
+        onClose={onClose}
+      >
+        <div style={STYLE.PANE}>
+          <div>
+            <span style={STYLE.CAPTION}>SMA+</span>
+            <InputText
+               ref={c => this.inputSmaPlus = c}
+               initValue={INIT_SMA}
+            />
+            <SvgPlus onClick={this._handleAddSma.bind(null, true)} />
+            <span style={STYLE.SMA_PLUS}>
+              +
+            </span>
+            <InputText
+               ref={c => this.inputPlusSma = c}
+               initValue={plusSma}
+            />
+          </div>
+          <div>
+            <span style={STYLE.CAPTION}>SMA</span>
+            <InputText
+               ref={c => this.inputSmaComp = c}
+               initValue={INIT_SMA}
+            />
+            <SvgPlus onClick={this._handleAddSma} />
+          </div>
+          {this._renderIndicators()}
+          {_mfiDom}
+          {this._divMomAth}
         </div>
-        <div>
-          <span style={STYLE.CAPTION}>SMA</span>
-          <InputText
-             ref={c => this.inputSmaComp = c}
-             initValue={INIT_SMA}
-          />
-          <SvgPlus onClick={this._handleAddSma} />
-        </div>
-        {this._renderIndicators()}
-        {_mfiDom}
-        {this._divMomAth}
-      </SubPanel>
+      </ModalPopup>
     );
   }
 }
 
-export default PanelIndicator
+export default ModalMenuIndicator

@@ -49,8 +49,11 @@ class HighchartWrapper extends Component {
         , _rootDivStyle = isShow
              ? STYLE.ROOT_DIV_SHOW
              : STYLE.ROOT_DIV_HIDE;
+
     return (
-       <div style={{...rootStyle, ..._rootDivStyle}}>
+       <div
+         style={{...rootStyle, ..._rootDivStyle}}
+       >
           <div ref={ c => this.chartEl = c }>
           </div>
           {absComp}

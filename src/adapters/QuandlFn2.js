@@ -1,5 +1,5 @@
 import Big from 'big.js';
-import DOMPurify from 'purify';
+import DOMPurify from 'dompurify';
 
 import mathFn from '../math/mathFn';
 
@@ -104,7 +104,7 @@ const QuandlFn2 = {
                   ? obj.dataset.column_names
                   : []
          , _columnName = columnName.toLowerCase();
-    
+
      if ( columnName && column_names ) {
         for (let i=0, max=column_names.length; i<max; i++){
           if (column_names[i].toLowerCase() === _columnName){

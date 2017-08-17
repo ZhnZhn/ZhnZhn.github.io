@@ -8,9 +8,9 @@ var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
 
-var _purify = require('purify');
+var _dompurify = require('dompurify');
 
-var _purify2 = _interopRequireDefault(_purify);
+var _dompurify2 = _interopRequireDefault(_dompurify);
 
 var _mathFn = require('../math/mathFn');
 
@@ -58,7 +58,7 @@ var QuandlFn2 = {
         database_code = _dataset$database_cod === undefined ? '' : _dataset$database_cod,
         _dataset$dataset_code = dataset.dataset_code,
         dataset_code = _dataset$dataset_code === undefined ? '' : _dataset$dataset_code,
-        _description = _purify2.default.sanitize(description);
+        _description = _dompurify2.default.sanitize(description);
 
     return {
       name: name,

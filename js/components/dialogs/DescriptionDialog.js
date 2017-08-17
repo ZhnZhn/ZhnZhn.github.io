@@ -26,9 +26,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _purify = require('purify');
+var _dompurify = require('dompurify');
 
-var _purify2 = _interopRequireDefault(_purify);
+var _dompurify2 = _interopRequireDefault(_dompurify);
 
 var _fnFetch = require('../../utils/fnFetch');
 
@@ -110,7 +110,7 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
           isShow = _props.isShow,
           onClose = _props.onClose,
           descrHtml = this.state.descrHtml,
-          _html = _purify2.default.sanitize(descrHtml);
+          _html = _dompurify2.default.sanitize(descrHtml);
 
       return _react2.default.createElement(
         _ModalDialog2.default,

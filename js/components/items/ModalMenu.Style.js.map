@@ -1,0 +1,23 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\items\\ModalMenu.Style.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\items\\ModalMenu.Style.js",
+ "sourceRoot": "",
+ "names": [
+  "STYLE",
+  "ROOT",
+  "position",
+  "zIndex",
+  "top",
+  "left",
+  "backgroundColor",
+  "border",
+  "borderRadius",
+  "boxShadow",
+  "PANE",
+  "width",
+  "margin"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,QAAM;AACJC,cAAU,UADN;AAEJC,YAAQ,IAFJ;AAGJC,SAAK,MAHD;AAIJC,UAAM,MAJF;AAKJC,qBAAiB,qBALb;AAMJ;AACAC,YAAQ,2BAPJ;AAQJC,kBAAc,KARV;AASJC,eAAW;AATP,GADM;AAYZC,QAAM;AACJC,WAAO,OADH;AAEJC,YAAQ;AAFJ;AAZM,CAAd;;kBAkBeZ,K"
+}

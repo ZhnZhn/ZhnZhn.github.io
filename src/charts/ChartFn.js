@@ -231,6 +231,35 @@ const ChartFn = {
     } else {
       return undefined;
     }
+  },
+
+  addDataTo(toChart, color, data, withoutYAxis){
+    const _id = withoutYAxis
+              ? undefined
+              : "pasteId";
+    if (!withoutYAxis) {
+      toChart.addAxis({
+          id: _id,
+          opossite: true,
+          title: {
+            text: ''
+          },
+          lineColor: color,
+          tickColor: color,
+          labels: {
+            style: {
+              color: color
+            }
+          }
+        }, false, true)
+    }
+    toChart.addSeries({
+      type: 'spline',
+      yAxis: _id,
+      color: color,
+      data: data
+    }, false)
+    toChart.redraw()
   }
 }
 

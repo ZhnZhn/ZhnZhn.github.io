@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 
-import ButtonParentTab from '../zhn-moleculs/ButtonParentTab'
 import ButtonTab from '../zhn/ButtonTab'
-import PanelIndicator from './PanelIndicator'
-import PanelMini from './PanelMini'
+
+import MenuTabItem from '../zhn-moleculs/MenuTabItem'
+import ModalMenuIndicator from './ModalMenuIndicator'
+import ModalMenuFn from './ModalMenuFn'
+import ModalMenuMini from './ModalMenuMini'
 
 const S = {
   TAB_INDICATOR: {
@@ -15,14 +17,14 @@ const S = {
   BT_LEGEND: {
     left: '115px'
   },
-  BT_X2H: {
+  TAB_MINI: {
+    left: '350px'
+  },
+  TAB_FN: {
     left: '190px'
   },
   BT_ADD: {
-    left: '240px'
-  },
-  TAB_MINI: {
-    left: '350px'
+    left: '250px'
   },
   BT_CONF: {
     left: '430px'
@@ -39,10 +41,11 @@ class ChartToolbar extends Component {
     super()
     const { config={} } = props
         , { zhFnMomAthConfig } = config;
-    this._isMomAthConfig = (typeof zhFnMomAthConfig == 'function') ? true : false
+    this._isMomAthConfig = (typeof zhFnMomAthConfig == 'function')
+            ? true : false
   }
 
-  shouldComponentUpdate(){
+  shouldComponentUpdate(nextProps, nextState){
     return false;
   }
 
@@ -54,6 +57,8 @@ class ChartToolbar extends Component {
             onClickLegend,
             onClick2H,
             onAddToWatch,
+            onCopy,
+            onPasteTo,
             onClickInfo,
             onClickVolume,
             onClickATH,
@@ -62,13 +67,13 @@ class ChartToolbar extends Component {
           } = this.props
         , { zhConfig={}, info } = config
         , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
-    const _btIndicator = (!isWithoutIndicator) ? (
-      <ButtonParentTab
+
+    const _btTabIndicator = !isWithoutIndicator ? (
+      <MenuTabItem
         style= {S.TAB_INDICATOR}
         caption="Indicator"
       >
-        <PanelIndicator
-          rootStyle={S.PANE_INDICATOR}
+        <ModalMenuIndicator
           onAddSma={onAddSma}
           onRemoveSma={onRemoveSeries}
           isMfi={config.zhIsMfi}
@@ -77,35 +82,26 @@ class ChartToolbar extends Component {
           isMomAth={this._isMomAthConfig}
           onAddMomAth={onAddMomAth}
         />
-      </ButtonParentTab>
-    ) : undefined;
+      </MenuTabItem>
+    ) : null;
 
-    const _btLegend = (isWithLegend) ? (
+    const _btLegend = isWithLegend ? (
       <ButtonTab
         style={S.BT_LEGEND}
         caption="Legend"
         onClick={onClickLegend}
       />
-    ) : undefined ;
+    ) : null;
 
-    const _bt2HChart = (
-      <ButtonTab
-        style={S.BT_X2H}
-        caption="x2H"
-        onClick={onClick2H}
-      />
-    );
-
-    const _btAdd = (!isWithoutAdd) ? (
+    const _btAdd = !isWithoutAdd ? (
       <ButtonTab
         style={S.BT_ADD}
         caption="Add"
-        isShow={false}
         onClick={onAddToWatch}
       />
     ) : null;
 
-    const _btInfo = (info) ? (
+    const _btInfo = info ? (
       <ButtonTab
         caption="Info"
         onClick={onClickInfo}
@@ -113,22 +109,19 @@ class ChartToolbar extends Component {
     ) : null;
 
    const { zhVolumeConfig, zhATHConfig, zhHighLowConfig } = config;
-   const _btMini = ( zhVolumeConfig || zhATHConfig || zhHighLowConfig)
+   const _btTabMini = ( zhVolumeConfig || zhATHConfig || zhHighLowConfig)
      ? (
-         <ButtonParentTab
-           style= {S.TAB_MINI}
-           caption="Mini"
-         >
-           <PanelMini
-             config={config}
-             onClickVolume={onClickVolume}
-             onClickATH={onClickATH}
-             onClickHighLow={onClickHighLow}
-           />
-        </ButtonParentTab>
+       <MenuTabItem
+         style= {S.TAB_MINI}
+         caption="Mini"
+       >
+         <ModalMenuMini
+           onClickVolume={zhVolumeConfig ? onClickVolume : null}
+           onClickATH={zhATHConfig ? onClickATH : null}
+           onClickHighLow={zhHighLowConfig ? onClickHighLow : null}
+         />
+       </MenuTabItem>
      ) : null;
-
-
 /*
    const _btConf = (
      <ButtonTab
@@ -136,17 +129,25 @@ class ChartToolbar extends Component {
        caption="Conf"
        onClick={onClickConfig}
      />
-   )
+   );
 */
-
     return (
       <div style={style}>
-         {_btIndicator}
+         {_btTabIndicator}
          {_btLegend}
-         {_bt2HChart}
+         <MenuTabItem
+           style={S.TAB_FN}
+           caption="Fn"
+         >
+           <ModalMenuFn
+             onX2H={onClick2H}
+             onCopy={onCopy}
+             onPasteTo={onPasteTo}
+           />
+         </MenuTabItem>
          {_btAdd}
          {_btInfo}
-         {_btMini}
+         {_btTabMini}
          {/*_btConf*/}
       </div>
     );

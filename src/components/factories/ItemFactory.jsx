@@ -3,6 +3,7 @@ import React from 'react';
 import ChartFn from '../../charts/ChartFn';
 
 import ComponentActions from '../../flux/actions/ComponentActions';
+import ChartActions from '../../flux/actions/ChartActions';
 import { ModalDialog, CompItemType } from '../../constants/Type';
 
 import AreaChartItem from '../items/AreaChartItem';
@@ -25,6 +26,8 @@ const _createAreaChartItem = function(config, index, option, props){
            onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
            {...props}
            crValueMoving={ChartFn.crValueMoving}
+           onCopy={ChartActions.copy}
+           onPasteTo={ChartActions.pasteTo}
        />
      );
 };
@@ -50,7 +53,7 @@ const _crSectorItem = (config, index, option, props) => {
   return (
     <SectorItem
        key="key"
-       config={config} 
+       config={config}
      />
   );
 }

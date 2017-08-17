@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -46,6 +50,14 @@ var S = {
   }
 };
 
+var C = {
+  BLANK: '',
+  TEXT: 'text',
+  NEW_TEXT: 'new-text',
+  ON: 'on',
+  OFF: 'off'
+};
+
 var InputText = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(InputText, _Component);
 
@@ -62,7 +74,7 @@ var InputText = (_temp = _class = function (_Component) {
       switch (event.keyCode) {
         case 27:case 46:
           event.preventDefault();
-          _this.setState({ value: '' });
+          _this.setState({ value: C.BLANK });
           break;
         case 13:
           if (_this.isOnEnter) {
@@ -94,25 +106,31 @@ var InputText = (_temp = _class = function (_Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (nextProps !== this.props) {
-        this.setState({ value: nextProps.initValue });
+        this.setState({
+          value: nextProps.initValue != null ? nextProps.initValue : C.BLANK
+        });
       }
     }
   }, {
     key: 'render',
     value: function render() {
-      var style = this.props.style,
-          value = this.state.value;
+      var _props = this.props,
+          style = _props.style,
+          spellCheck = _props.spellCheck,
+          value = this.state.value,
+          _autoCorrect = spellCheck ? C.ON : C.OFF,
+          _spellCheck = spellCheck ? true : false;
 
       return _react2.default.createElement('input', {
-        name: 'text',
-        autoComplete: 'new-text',
-        autoCorrect: 'off',
-        autoCapitalize: 'off',
-        spellCheck: false,
-        type: 'text',
-        style: Object.assign({}, S.INPUT_TEXT, style),
-        value: value,
+        style: (0, _extends3.default)({}, S.INPUT_TEXT, style),
+        type: C.TEXT,
+        name: C.TEXT,
+        autoCapitalize: C.OFF,
+        autoComplete: C.NEW_TEXT,
+        autoCorrect: _autoCorrect,
+        spellCheck: _spellCheck,
         translate: false,
+        value: value,
         onChange: this._handleInputChange,
         onKeyDown: this._handleKeyDown
       });
@@ -130,7 +148,7 @@ var InputText = (_temp = _class = function (_Component) {
   }]);
   return InputText;
 }(_react.Component), _class.defaultProps = {
-  initValue: ''
+  initValue: C.BLANK
 }, _temp);
 process.env.NODE_ENV !== "production" ? InputText.propTypes = {
   initValue: _react.PropTypes.string,

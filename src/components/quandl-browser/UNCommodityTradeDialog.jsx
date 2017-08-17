@@ -281,7 +281,7 @@ class UNCommodityTradeDialog extends Component {
                    `${this.country.caption}`
         , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )
               ? this._createSpliceItems()
-              : undefined;
+              : undefined;         
     return {
        value : fnValue(this.chapter.value, this.country.value),
        fromDate: fromDate,

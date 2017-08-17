@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DOMPurify from 'purify';
+import DOMPurify from 'dompurify';
 
 import { fetchTxt } from '../../utils/fnFetch';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
@@ -51,7 +51,7 @@ class DescriptionDialog extends Component {
   }
 
   _loadDescr = ( descrUrl='' ) => {
-     if ( descrUrl ) {       
+     if ( descrUrl ) {
        fetchTxt({ uri: descrUrl, onFetch: this._setDescrHtml})
      } else {
        this._setDescrHtml();

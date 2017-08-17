@@ -26,6 +26,10 @@ var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
+var _ChartActions = require('../../flux/actions/ChartActions');
+
+var _ChartActions2 = _interopRequireDefault(_ChartActions);
+
 var _Type = require('../../constants/Type');
 
 var _AreaChartItem = require('../items/AreaChartItem');
@@ -58,7 +62,9 @@ var _createAreaChartItem = function _createAreaChartItem(config, index, option, 
     onShowConfigDialog: _ComponentActions2.default.showOptionDialog.bind(null, 'ChartConfigDialog'),
     onAddToWatch: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.ADD_TO_WATCH)
   }, props, {
-    crValueMoving: _ChartFn2.default.crValueMoving
+    crValueMoving: _ChartFn2.default.crValueMoving,
+    onCopy: _ChartActions2.default.copy,
+    onPasteTo: _ChartActions2.default.pasteTo
   }));
 };
 

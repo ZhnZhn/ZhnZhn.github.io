@@ -113,7 +113,9 @@ var HighchartWrapper = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: (0, _extends3.default)({}, rootStyle, _rootDivStyle) },
+        {
+          style: (0, _extends3.default)({}, rootStyle, _rootDivStyle)
+        },
         _react2.default.createElement('div', { ref: function ref(c) {
             return _this2.chartEl = c;
           } }),
