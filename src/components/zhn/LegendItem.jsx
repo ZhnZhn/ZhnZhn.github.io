@@ -5,18 +5,22 @@ const Style = {
     display : 'inline-block',
     border : '1px solid',
     borderRadius : '10px',
-    marginLeft : '18px',
+    //marginLeft : '18px',
+    //marginLeft : '8px',
+    marginLeft : '12px',
     marginTop : '10px',
     cursor : 'pointer'
   },
   ITEM : {
     display : 'inline-block',
     paddingLeft : '5px',
-    paddingRight : '20px'
+    //paddingRight : '20px'
+    paddingRight : '6px'
   },
   CIRCLE : {
     display : 'inline-block',
-    marginLeft : '15px',
+    //marginLeft : '15px',
+    marginLeft : '6px',
     backgroundColor: 'gray',
     width : '12px',
     height : '12px',

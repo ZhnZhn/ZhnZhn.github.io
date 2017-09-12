@@ -47,9 +47,12 @@ var _SectorItem2 = _interopRequireDefault(_SectorItem);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _createAreaChartItem = function _createAreaChartItem(config, index, option, props) {
-  var zhConfig = config.zhConfig,
-      id = zhConfig.id,
-      key = zhConfig.key,
+  var _config$zhConfig = config.zhConfig,
+      zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
+      _zhConfig$id = zhConfig.id,
+      id = _zhConfig$id === undefined ? 'Id:' + index : _zhConfig$id,
+      _zhConfig$key = zhConfig.key,
+      key = _zhConfig$key === undefined ? index : _zhConfig$key,
       chartType = option.chartType;
 
   return _react2.default.createElement(_AreaChartItem2.default, (0, _extends3.default)({
@@ -69,9 +72,12 @@ var _createAreaChartItem = function _createAreaChartItem(config, index, option, 
 };
 
 var _createMapChartItem = function _createMapChartItem(config, index, option, props) {
-  var zhConfig = config.zhConfig,
-      id = zhConfig.id,
-      key = zhConfig.key,
+  var _config$zhConfig2 = config.zhConfig,
+      zhConfig = _config$zhConfig2 === undefined ? {} : _config$zhConfig2,
+      _zhConfig$id2 = zhConfig.id,
+      id = _zhConfig$id2 === undefined ? 'Id:' + index : _zhConfig$id2,
+      _zhConfig$key2 = zhConfig.key,
+      key = _zhConfig$key2 === undefined ? index : _zhConfig$key2,
       chartType = option.chartType;
 
 

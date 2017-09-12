@@ -232,6 +232,12 @@ var About = function (_Component) {
                 { style: S.BLUE },
                 ',\xA0'
               ),
+              _react2.default.createElement(_Links2.default.UnComtrade, null),
+              _react2.default.createElement(
+                'span',
+                { style: S.BLUE },
+                ',\xA0'
+              ),
               _react2.default.createElement(_Links2.default.Insee, null),
               _react2.default.createElement(
                 'span',

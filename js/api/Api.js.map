@@ -9,7 +9,8 @@
   "Barchart",
   "EuroStat",
   "Quandl",
-  "Insee"
+  "Insee",
+  "UnComtrade"
  ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,+BADJ,EACcC,2BADd,EACsBC;AADtB,C"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,+BADJ;AAEbC,6BAFa,EAELC,yBAFK,EAEEC;AAFF,C"
 }

@@ -34,12 +34,22 @@ var _QuandlAdapter = require('../../adapters/QuandlAdapter');
 
 var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
 
+var _UnComtradeAdapter = require('../../adapters/uncomtrade/UnComtradeAdapter');
+
+var _UnComtradeAdapter2 = _interopRequireDefault(_UnComtradeAdapter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Quandl = (0, _loadItem2.default)({
   fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Quandl,
   adapter: _QuandlAdapter2.default
+});
+
+var UnComtrade = (0, _loadItem2.default)({
+  fnFetch: _fnFetch.fetchJson,
+  api: _Api2.default.UnComtrade,
+  adapter: _UnComtradeAdapter2.default
 });
 
 var EuroStat = (0, _loadItem2.default)({
@@ -90,6 +100,8 @@ exports.default = {
   AlphaIntraday: AlphaIntraday,
   AlphaSector: AlphaSector,
 
-  Barchart: Barchart
+  Barchart: Barchart,
+
+  UnComtrade: UnComtrade
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadImpl.js.map

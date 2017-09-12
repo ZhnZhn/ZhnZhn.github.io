@@ -28,7 +28,10 @@ const C = {
   CSS_LABEL : {
     color: 'yellow',
     fontSize: '15px'
-  }
+  },
+
+  DX_CATEGORY: 40,
+  DY_CATEGORY: 32
 }
 
 const _fnNoop = () => {};
@@ -48,15 +51,13 @@ const _initOptionsZhSeries = (chart) => {
 }
 
 const _crYAxisColor = (chart) => {
-  const _ = chart.yAxis.length;
-  if (_ === 1) {
-    return C.C1_SECOND_Y_AXIS;
-  } else if (_ === 2) {
-    return C.C2_SECOND_Y_AXIS;
-  } else {
-    return C.C1_SECOND_Y_AXIS;
+  switch(chart.yAxis.length){
+    case 1: return C.C1_SECOND_Y_AXIS;
+    case 2: return C.C2_SECOND_Y_AXIS;
+    default: return C.C1_SECOND_Y_AXIS;
   }
 }
+
 const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
   let _color;
   if (hasSecondYAxis){
@@ -114,13 +115,37 @@ const _updateYAxisMin = ({ hasSecondYAxis, series, options={}, chart }) => {
   }
 };
 
+const _crCrossParam = (point, chart) => {
+  return {
+    y: point.y,
+    date: Highcharts.dateFormat(C.DATE_PATTERN, point.x),
+    dX: chart.options.chart.xDeltaCrossLabel,
+    dY: chart.options.chart.yDeltaCrossLabel
+  };
+};
+
+const _crCategoryCrossParam = (point, chart) => {
+  return {
+    y: ChartFn.toNumberFormat(point.y),
+    date: point.x,
+    dX: chart.options.chart.xDeltaCrossLabel - C.DX_CATEGORY,
+    dY: chart.options.chart.yDeltaCrossLabel - C.DY_CATEGORY
+  };
+};
+
+const _crYCrossLabelX = (chart, dX) => {
+  return chart.yAxis[0].width + chart.plotLeft + dX;
+};
+const _crYCrossLabelY = (chart, plotY) => {
+  return plotY + chart.plotTop;
+};
+
 const ChartFn = {
   addSeriaWithRenderLabel(props){
     const { chart, series, label, hasSecondYAxis } = props;
-
     const options = _initOptionsZhSeries(chart);
-    const color = _addSeries({ chart, series, label, hasSecondYAxis })
-    const textEl = _renderSeriesLabel({ chart, options, series, label, color })
+    const color = _addSeries({ chart, series, label, hasSecondYAxis });
+    const textEl = _renderSeriesLabel({ chart, options, series, label, color });
 
     options.zhSeries.count +=1
     options.zhSeries.titleEls.push(textEl)
@@ -129,15 +154,11 @@ const ChartFn = {
   },
 
   handlerMouserOverPoint(event){
-     const chart = this.series.chart
-         , x = this.x
-         , y = this.y
-         , plotX = this.plotX
-         , plotY = this.plotY
-         , date = Highcharts.dateFormat(C.DATE_PATTERN, x)
-         , dX = chart.options.chart.xDeltaCrossLabel
-         , dY = chart.options.chart.yDeltaCrossLabel;
-
+     const { isCategory, plotX, plotY, series={} } = this
+         , chart = series.chart
+         , { y, date, dX, dY } = !isCategory
+                ? _crCrossParam(this, chart)
+                : _crCategoryCrossParam(this, chart);
 
      if (chart.xCrossLabel) {
        chart.xCrossLabel.attr({
@@ -145,19 +166,27 @@ const ChartFn = {
          text: date
        });
        chart.yCrossLabel.attr({
-         x : chart.yAxis[0].width + chart.plotLeft + dX,
-         y: plotY + chart.plotTop,
+         x: _crYCrossLabelX(chart, dX),
+         y: _crYCrossLabelY(chart, plotY),
          text: y
        });
      } else {
-       chart.xCrossLabel = chart.renderer.text(date, plotX, chart.plotTop - dY)
-                             .attr(C.ATTR_LABEL)
-                             .css(C.CSS_LABEL)
-                             .add();
-       chart.yCrossLabel = chart.renderer.text(y, chart.yAxis[0].width + chart.plotLeft + dX , plotY + chart.plotTop)
-                             .attr(C.ATTR_LABEL)
-                             .css(C.CSS_LABEL)
-                             .add();
+       chart.xCrossLabel = chart
+          .renderer
+          .text(date, plotX, chart.plotTop - dY)
+          .attr(C.ATTR_LABEL)
+          .css(C.CSS_LABEL)
+          .add();
+       chart.yCrossLabel = chart
+          .renderer
+          .text(
+            y,
+            _crYCrossLabelX(chart, dX),
+            _crYCrossLabelY(chart, plotY)
+          )
+          .attr(C.ATTR_LABEL)
+          .css(C.CSS_LABEL)
+          .add();
      }
   },
 
@@ -260,7 +289,14 @@ const ChartFn = {
       data: data
     }, false)
     toChart.redraw()
+  },
+
+  toNumberFormat(value){
+    const arrSplit = (value+'').split('.')
+        , decimal = (arrSplit[1]) ? 2 : 0;
+    return Highcharts.numberFormat(value, decimal, '.', ' ');
   }
+
 }
 
 export default ChartFn

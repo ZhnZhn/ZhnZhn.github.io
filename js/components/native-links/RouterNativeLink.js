@@ -20,13 +20,18 @@ var _LmeLink = require('./LmeLink');
 
 var _LmeLink2 = _interopRequireDefault(_LmeLink);
 
+var _UnComtradeLink = require('./UnComtradeLink');
+
+var _UnComtradeLink2 = _interopRequireDefault(_UnComtradeLink);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterNativeLink = {
   QUANDL: _QuandlLink2.default,
   EURONEXT: _EuronextLink2.default,
   NASDAQ: _NasdaqLink2.default,
-  LME: _LmeLink2.default
+  LME: _LmeLink2.default,
+  UN_COMTRADE: _UnComtradeLink2.default
 };
 
 exports.default = RouterNativeLink;

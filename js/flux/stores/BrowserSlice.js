@@ -53,6 +53,19 @@ var fnAddCounter = function fnAddCounter(chartType, browserType, browserMenu, va
   }
 };
 
+var _addDialogProps = function _addDialogProps(items) {
+  var propName = void 0,
+      item = void 0,
+      addProps = void 0;
+  for (propName in items) {
+    item = items[propName];
+    addProps = item.addProps;
+    if (addProps !== undefined) {
+      Object.assign(item.dialogProps, items[addProps].dialogProps);
+    }
+  }
+};
+
 var BrowserSlice = {
   browserMenu: _BrowserMenu2.default,
   routeDialog: {
@@ -122,6 +135,8 @@ var BrowserSlice = {
           items = json.items,
           elMenu = _BrowserMenu2.default.createMenu(menu, items, browserType);
 
+      _addDialogProps(items);
+
       this.routeDialog[browserType] = items;
       this.browserMenu[browserType] = elMenu;
       this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
@@ -140,4 +155,4 @@ var BrowserSlice = {
 };
 
 exports.default = BrowserSlice;
-//# sourceMappingURL=BrowserSlice.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\BrowserSlice.js.map

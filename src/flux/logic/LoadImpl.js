@@ -9,11 +9,18 @@ import InseeAdapter from '../../adapters/insee/InseeAdapter'
 import AlphaAdapter from '../../adapters/alpha/Adapter'
 import BarchartAdapter from '../../adapters/barchart/BarchartAdapter'
 import QuandlAdapter from '../../adapters/QuandlAdapter'
+import UnComtradeAdapter from '../../adapters/uncomtrade/UnComtradeAdapter'
 
 const Quandl = loadItem({
   fnFetch: fetchJson,
   api: Api.Quandl,
   adapter: QuandlAdapter
+})
+
+const UnComtrade = loadItem({
+  fnFetch: fetchJson,
+  api: Api.UnComtrade,
+  adapter: UnComtradeAdapter
 })
 
 const EuroStat = loadItem({
@@ -64,5 +71,7 @@ export default {
   AlphaIntraday,
   AlphaSector,
 
-  Barchart
+  Barchart,
+
+  UnComtrade
 }

@@ -4,7 +4,8 @@ import SvgClose from './SvgClose';
 
 const STYLE = {
   ROOT : {
-    backgroundColor: '#232F3B',
+    //backgroundColor: '#232F3B',
+    backgroundColor: '#1B2836',
     color: 'rgba(164, 135, 212, 1)',
     lineHeight: '1.8',
     paddingTop: '4px',
@@ -14,6 +15,8 @@ const STYLE = {
     borderTopRightRadius: '4px'
   },
   CAPTION : {
+    //color: 'lightslategray',
+    color: 'silver',
     fontSize: '18px',
     fontWeight: '500',
     paddingRight: '8px'

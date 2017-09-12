@@ -12,7 +12,7 @@ const qeSources = [
   'COMMODITY_PRICE',
   'WIKI_COMMODITY_PRICE',
   'LME',
-  'COMMODITY_TRADE',
+  'COMMODITY_TRADE',      
   'JODI_WORLD_GAS',
   'JODI_WORLD_OIL',
   'BP',
@@ -43,7 +43,7 @@ const qeSources = [
   'LIFFE_FUTURE',
   'ICE_FUTURE',
   'WIKI_FUTURE',
-  
+
   'ZILLOW_REAL_ESTATE_2',
   'FMAC'
 ];

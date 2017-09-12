@@ -16,6 +16,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var CL_LINK = "descr__quandl-link";
 
+var S = {
+  BLUE: {
+    color: "#009ae5"
+  }
+};
+
 var Quandl = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.quandl.com/",
@@ -33,21 +39,28 @@ var Barchart = (0, _withProps2.default)({
 var AlphaVantage = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.alphavantage.co",
-  style: { color: "#009ae5" },
+  style: S.BLUE,
   title: "Alpha Vantage"
 })(_Link2.default);
 
 var Eurostat = (0, _withProps2.default)({
   className: CL_LINK,
   href: "http://ec.europa.eu/eurostat",
-  style: { color: "#009ae5" },
+  style: S.BLUE,
   title: "Eurostat"
+})(_Link2.default);
+
+var UnComtrade = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://comtrade.un.org",
+  style: S.BLUE,
+  title: "UN Comtrade"
 })(_Link2.default);
 
 var Insee = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
-  style: { color: "#009ae5" },
+  style: S.BLUE,
   title: "Insee: France Statistics"
 })(_Link2.default);
 
@@ -56,6 +69,7 @@ exports.default = {
   Barchart: Barchart,
   AlphaVantage: AlphaVantage,
   Eurostat: Eurostat,
+  UnComtrade: UnComtrade,
   Insee: Insee
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map

@@ -28,6 +28,10 @@ var _type5 = require('../creaters/type5');
 
 var _type6 = _interopRequireDefault(_type5);
 
+var _un = require('../creaters/un5');
+
+var _un2 = _interopRequireDefault(_un);
+
 var _futures = require('../creaters/futures3');
 
 var _futures2 = _interopRequireDefault(_futures);
@@ -58,7 +62,9 @@ var _r = {
 
   DialogEurostat: _eurostat2.default,
   DialogEurostat2: _eurostat4.default,
-  DialogEurostat3: _eurostat6.default
+  DialogEurostat3: _eurostat6.default,
+
+  UnDialog5: _un2.default
 };
 
 var RouterLoadFn = {

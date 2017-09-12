@@ -17,6 +17,8 @@ import AlphaIndicatorDialog from '../../components/quandl-browser/AlphaIndicator
 import AlphaSectorDialog from '../../components/quandl-browser/AlphaSectorDialog';
 import AlphaIntradayDialog from '../../components/quandl-browser/AlphaIntradayDialog';
 
+import UnDialog5 from '../../components/uncomtrade/UnDialog5';
+
 const _router = {
   DEFAULT : DialogType3,
 
@@ -35,6 +37,8 @@ const _router = {
   AlphaIndicatorDialog: AlphaIndicatorDialog,
   AlphaSectorDialog: AlphaSectorDialog,
   AlphaIntradayDialog: AlphaIntradayDialog,
+
+  UnDialog5: UnDialog5,
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */

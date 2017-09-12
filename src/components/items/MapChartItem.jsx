@@ -16,7 +16,8 @@ const styles = {
     marginRight: '25px',
   },
   headerDiv: {
-    backgroundColor: '#232F3B',
+    //backgroundColor: '#232F3B',
+    backgroundColor: '#1b2836',
     paddingTop: '4px',
     paddingLeft: '10px',
     lineHeight: 1.8,

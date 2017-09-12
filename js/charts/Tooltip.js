@@ -10,6 +10,10 @@ var _highcharts2 = _interopRequireDefault(_highcharts);
 
 var _reactDom = require('react-dom');
 
+var _ChartFn = require('./ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
 var _SparkFactory = require('../components/factories/SparkFactory');
 
 var _SparkFactory2 = _interopRequireDefault(_SparkFactory);
@@ -22,12 +26,6 @@ var SPARKLINES_SUFFIX_ID = 'sparklines',
     WIDTH_VALUE = 54,
     WIDTH_TOTAL = 50,
     WIDTH_SPARK = 20 + 80 + 16;
-
-var _fnNumberFormat = function _fnNumberFormat(value) {
-  var arrSplit = (value + '').split('.'),
-      decimal = arrSplit[1] ? 2 : 0;
-  return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
-};
 
 var _fnTooltipHeader = function _fnTooltipHeader(date, id) {
   var cssClass = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -142,7 +140,7 @@ var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref9) {
       percent = _point$percent === undefined ? '0.0' : _point$percent,
       _point$total = point.total,
       total = _point$total === undefined ? 0 : _point$total,
-      _total = _fnNumberFormat(total),
+      _total = _ChartFn2.default.toNumberFormat(total),
       _fnCalcWidthSparkType = _fnCalcWidthSparkType4(value, _total),
       fullWidth = _fnCalcWidthSparkType.fullWidth,
       width = _fnCalcWidthSparkType.width;
@@ -164,8 +162,8 @@ var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref10) {
       percent = _point$percent2 === undefined ? '0.0' : _point$percent2,
       _point$total2 = point.total,
       total = _point$total2 === undefined ? 0 : _point$total2,
-      _value = _fnNumberFormat(value),
-      _total = _fnNumberFormat(total),
+      _value = _ChartFn2.default.toNumberFormat(value),
+      _total = _ChartFn2.default.toNumberFormat(total),
       _fnCalcWidthSparkType2 = _fnCalcWidthSparkType4(_value, _total),
       fullWidth = _fnCalcWidthSparkType2.fullWidth,
       width = _fnCalcWidthSparkType2.width;
@@ -175,21 +173,22 @@ var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref10) {
   });
 };
 
+var _fHide = function _fHide(id, point) {
+  return function _fnHide() {
+    document.getElementById(id).removeEventListener('click', _fnHide);
+    point.series.chart.zhTooltip.hide();
+  };
+};
+
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
-    document.getElementById(id).addEventListener('click', function _fnHide() {
-      document.getElementById(id).removeEventListener('click', _fnHide);
-      point.series.chart.zhTooltip.hide();
-    });
+    document.getElementById(id).addEventListener('click', _fHide(id, point));
   }, 1);
 };
 
 var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(id, point) {
   setTimeout(function () {
-    document.getElementById(id).addEventListener('click', function _fnHide() {
-      document.getElementById(id).removeEventListener('click', _fnHide);
-      point.series.chart.zhTooltip.hide();
-    });
+    document.getElementById(id).addEventListener('click', _fHide(id, point));
 
     var sparkLinesData = [],
         sparkBarsData = [],
@@ -217,6 +216,9 @@ var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(i
 
 var _fnDateFormatDMY = _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y');
 var _fnDateFormatDMYT = _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M');
+var _fnFormatCategory = function _fnFormatCategory(x) {
+  return x;
+};
 
 var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
   return function () {
@@ -240,7 +242,7 @@ var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
         zhSeriaId = _series$userOptions.zhSeriaId,
         _id = zhSeriaId || id || 'TP',
         valueText = isWithValueText ? zhValueText || name : 'Value',
-        value = isWithValue ? _fnNumberFormat(point.y) : null;
+        value = isWithValue ? _ChartFn2.default.toNumberFormat(point.y) : null;
 
     onAfterRender(_id, point);
 
@@ -256,6 +258,11 @@ var Tooltip = {
   fnBasePointFormatterT: _fnBasePointFormatter({
     fnTemplate: _fnBaseTooltip,
     fnDateFormat: _fnDateFormatDMYT,
+    isWithColor: true, isWithValueText: true, isWithValue: true
+  }),
+  fnBasePointFormatterC: _fnBasePointFormatter({
+    fnTemplate: _fnBaseTooltip,
+    fnDateFormat: _fnFormatCategory,
     isWithColor: true, isWithValueText: true, isWithValue: true
   }),
 

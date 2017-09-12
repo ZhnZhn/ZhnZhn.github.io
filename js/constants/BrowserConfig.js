@@ -24,6 +24,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   isDynamic: true,
   caption: 'European Statistics',
   sourceMenuUrl: './data/eurostat/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.UN_COMTRADE, {
+  browserType: _Type.BrowserType.UN_COMTRADE,
+  isDynamic: true,
+  caption: 'UN Comtrade',
+  sourceMenuUrl: './data/uncomtrade/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
   browserType: _Type.BrowserType.ECONOMIC,
   isDynamic: false

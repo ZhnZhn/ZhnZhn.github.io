@@ -70,7 +70,7 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '17-08-2017';
+var PREV_BUILD = '12-09-2017';
 
 var AppErc = function (_Component) {
   (0, _inherits3.default)(AppErc, _Component);

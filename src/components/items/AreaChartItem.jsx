@@ -15,7 +15,6 @@ const styles = {
     lineHeight : 1.5,
     marginBottom: '10px',
     marginRight: '25px',
-    //marginLeft: '8px',
     position : 'relative'
   },
   tabDiv : {
@@ -251,7 +250,7 @@ class AreaChartItem extends Component {
     })
   }
 
- _createChartToolBar = (config) => {   
+ _createChartToolBar = (config) => {
    const { isShowToolbar } = this.state;
    return (
          <ShowHide isShow={isShowToolbar}>

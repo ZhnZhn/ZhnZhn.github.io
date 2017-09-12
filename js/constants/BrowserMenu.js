@@ -79,19 +79,19 @@ var menuQuandl = [{
   items: [{ id: _DialogType.Quandl.CURRENCY_HISTORY }, { id: _DialogType.Quandl.GLOBAL_INDICATOR }, { id: _DialogType.Quandl.WORLDBANK_PRICE }, { id: _DialogType.Quandl.IMF_CROSSCOUNTRY }, { id: _DialogType.Quandl.EU_COMMISSION }, { id: _DialogType.Quandl.OECD }, { id: _DialogType.Quandl.USCENSUS_TRADE }]
 }, {
   caption: 'Central Banks',
-  items: [{ id: _DialogType.Quandl.BANK_CANADA, isNew: true }, { id: _DialogType.Quandl.BANK_SWISS, isNew: true }]
+  items: [{ id: _DialogType.Quandl.BANK_CANADA }, { id: _DialogType.Quandl.BANK_SWISS }]
 }, {
   caption: 'Inflation & Prices',
   items: [{ id: _DialogType.Quandl.OECD_CPI }, { id: _DialogType.Quandl.RATE_INFLATION }, { id: _DialogType.Quandl.BLSI }, { id: _DialogType.Quandl.GDT }, { id: _DialogType.Quandl.BIG_MAC }]
 }, {
   caption: 'Commodity', isInitClose: true,
-  items: [{ id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.WIKI_COMMODITY_PRICE, isNew: true }, { id: _DialogType.Quandl.LME, isNew: true }, { id: _DialogType.Quandl.PETROLEUM_PRICES }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.BP }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }, { id: _DialogType.Quandl.BALTIC_INDICES }]
+  items: [{ id: _DialogType.Quandl.COMMODITY_TRADE }, { id: _DialogType.Quandl.COMMODITY_PRICE }, { id: _DialogType.Quandl.WIKI_COMMODITY_PRICE }, { id: _DialogType.Quandl.LME }, { id: _DialogType.Quandl.PETROLEUM_PRICES }, { id: _DialogType.Quandl.JODI_WORLD_GAS }, { id: _DialogType.Quandl.JODI_WORLD_OIL }, { id: _DialogType.Quandl.BP }, { id: _DialogType.Quandl.EIA_COAL }, { id: _DialogType.Quandl.ROGERS_INDICES }, { id: _DialogType.Quandl.BALTIC_INDICES }]
 }, {
   caption: 'Futures', isInitClose: true,
   items: [{ id: _DialogType.Quandl.CHINA_FINANCE_FUTURE }, { id: _DialogType.Quandl.DCE_FUTURE }, { id: _DialogType.Quandl.ZCE_FUTURE }, { id: _DialogType.Quandl.SHANGHAI_FUTURE }, { id: _DialogType.Quandl.LIFFE_FUTURE }, { id: _DialogType.Quandl.ICE_FUTURE }, { id: _DialogType.Quandl.WIKI_FUTURE }]
 }, {
   caption: 'Real Estate',
-  items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE_2, isNew: true }, { id: _DialogType.Quandl.FMAC }]
+  items: [{ id: _DialogType.Quandl.ZILLOW_REAL_ESTATE_2 }, { id: _DialogType.Quandl.FMAC }]
 }];
 
 var BrowserMenu = (_BrowserMenu = {}, (0, _defineProperty3.default)(_BrowserMenu, _Type.BrowserType.ECONOMIC, fnCreateMenu(menuQuandl, _DataQE2.default, _Type.BrowserType.ECONOMIC)), (0, _defineProperty3.default)(_BrowserMenu, 'createMenu', fnCreateMenu), _BrowserMenu);

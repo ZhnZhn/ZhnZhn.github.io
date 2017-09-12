@@ -32,6 +32,17 @@ const fnAddCounter = function(chartType, browserType, browserMenu, value){
   }
 };
 
+const _addDialogProps = (items) => {
+  let propName, item, addProps;
+  for (propName in items){
+    item = items[propName]
+    addProps = item.addProps
+    if (addProps !== undefined) {
+      Object.assign(item.dialogProps, items[addProps].dialogProps)
+    }
+  }
+}
+
 const BrowserSlice = {
   browserMenu : BrowserMenu,
   routeDialog : {
@@ -99,6 +110,7 @@ const BrowserSlice = {
     if (this.isWithItemCounter(browserType)){
       const { menu, items } = json
           , elMenu = BrowserMenu.createMenu(menu, items, browserType);
+      _addDialogProps(items);
 
       this.routeDialog[browserType] = items;
       this.browserMenu[browserType] = elMenu;

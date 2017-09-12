@@ -63,7 +63,7 @@ class ChartToolbar extends Component {
             onClickVolume,
             onClickATH,
             onClickHighLow,
-            //onClickConfig,
+            //onClickConfig
           } = this.props
         , { zhConfig={}, info } = config
         , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;

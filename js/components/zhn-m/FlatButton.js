@@ -26,7 +26,7 @@ var CL = {
 
 var S = {
   PRIMARY: {
-    color: '#607D8B'
+    color: '#607d8b'
   }
 };
 
@@ -45,7 +45,6 @@ var FlatButton = function FlatButton(_ref) {
 
   var _style = isPrimary ? (0, _extends3.default)({}, rootStyle, S.PRIMARY) : rootStyle,
       _className = className ? CL.BT + ' ' + className : CL.BT;
-
   return _react2.default.createElement(
     'button',
     {

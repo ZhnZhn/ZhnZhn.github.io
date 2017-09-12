@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -24,6 +20,10 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _class, _temp;
 
 var _react = require('react');
@@ -38,6 +38,10 @@ var _FlatButton = require('../zhn-m/FlatButton');
 
 var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
+var _Dialog = require('./Dialog.Style');
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CL = {
@@ -45,46 +49,19 @@ var CL = {
   HIDING: 'hide-popup'
 };
 
-var STYLE = {
-  SHOW: {
-    display: 'block'
-  },
-  HIDE: {
-    display: 'none'
-  },
-  HIDE_POPUP: {
-    opacity: 0,
-    transform: 'scaleY(0)'
-  },
-  ROOT_DIV: {
+var S = (0, _extends3.default)({}, _Dialog2.default, {
+  ROOT_DIV_MODAL: {
     position: 'absolute',
     top: '20%',
     left: '40%',
     display: 'block',
-    backgroundColor: '#4D4D4D',
-    border: 'solid 2px #232F3B',
-    borderRadius: '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
     zIndex: 10
   },
-  CAPTON_DIV: {
-    padding: '5px',
-    color: 'rgba(164, 135, 212,1)',
-    backgroundColor: '#232F3B',
-    textAlign: 'center',
-    fontSize: '18px'
-  },
-  COMMAND_DIV: {
-    cursor: 'default',
-    float: 'right',
-    marginTop: '8px',
-    marginBottom: '10px',
-    marginRight: '4px'
-  },
-  BT_ROOT: {
-    color: 'rgb(35, 47, 59)'
+  HIDE_POPUP: {
+    opacity: 0,
+    transform: 'scaleY(0)'
   }
-};
+});
 
 var ModalDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(ModalDialog, _Component);
@@ -102,10 +79,10 @@ var ModalDialog = (_temp = _class = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: STYLE.COMMAND_DIV },
+        { style: S.COMMAND_DIV },
         commandButtons,
         !withoutClose && _react2.default.createElement(_FlatButton2.default, {
-          rootStyle: STYLE.BT_ROOT,
+          rootStyle: S.BT_ROOT,
           caption: 'Close',
           title: 'Close Modal Dialog',
           onClick: onClose
@@ -160,11 +137,11 @@ var ModalDialog = (_temp = _class = function (_Component) {
           _style = void 0;
 
       if (this.wasClosing) {
-        _style = STYLE.HIDE;
+        _style = S.HIDE;
         this.wasClosing = false;
       } else {
         _className = isShow ? CL.SHOWING : CL.HIDING;
-        _style = isShow ? STYLE.SHOW : STYLE.HIDE_POPUP;
+        _style = isShow ? S.SHOW : S.HIDE_POPUP;
         if (!isShow) {
           this.wasClosing = true;
         }
@@ -174,12 +151,12 @@ var ModalDialog = (_temp = _class = function (_Component) {
         'div',
         {
           className: _className,
-          style: (0, _extends3.default)({}, STYLE.ROOT_DIV, style, _style),
+          style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style),
           onClick: this._handleClickDialog
         },
         _react2.default.createElement(
           'div',
-          { style: STYLE.CAPTON_DIV },
+          { style: S.CAPTION_DIV },
           _react2.default.createElement(
             'span',
             { style: styleCaption },

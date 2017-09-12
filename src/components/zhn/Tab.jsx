@@ -4,10 +4,7 @@ const S = {
   LI : {
     float : 'left',
     display : 'inline-block',
-
-    backgroundColor : '#232F3B',
-
-    //color : 'rgba(164, 135, 212, 1)',
+    backgroundColor : '#1b2836',
     color : 'gray',
     paddingLeft : '10px',
     paddingRight : '10px',
@@ -17,11 +14,10 @@ const S = {
     borderTopRightRadius : '8px',
     cursor : 'pointer',
 
-    fontWeight : 'bold',
-    //border: '2px solid rgb(44, 40, 40)',
+    fontWeight : 'bold',    
     border: '2px solid gray',
     borderBottom : 'none',
-    //borderTop : 'none'
+
   },
   SELECTED : {
     borderColor : 'rgba(164, 135, 212, 1)',

@@ -5,10 +5,9 @@ import SvgClose from '../zhn/SvgClose';
 import ValueMovingBadge from './ValueMovingBadge';
 
 const STYLE = {
-  ROOT : {
-    backgroundColor: '#232F3B',
+  ROOT : {    
+    backgroundColor: '#1b2836',
     paddingTop: '4px',
-    //paddingLeft: '10px',
     lineHeight: 1.8,
     height: '32px',
     width : '100%',

@@ -10,9 +10,9 @@ const CL = {
 
 const S = {
   PRIMARY: {
-    color: '#607D8B'
+    color: '#607d8b'
   }
-}
+};
 
 const FlatButton = ({
   className, rootStyle, clDiv=CL.BT_DIV, isPrimary,
@@ -25,7 +25,6 @@ const FlatButton = ({
       , _className = className
            ? CL.BT + ' ' + className
            : CL.BT;
-
   return (
     <button
       className={_className}
@@ -47,6 +46,5 @@ const FlatButton = ({
     </button>
   );
 }
-
 
 export default FlatButton

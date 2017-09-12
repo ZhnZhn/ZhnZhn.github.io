@@ -68,6 +68,10 @@ var _AlphaIntradayDialog = require('../../components/quandl-browser/AlphaIntrada
 
 var _AlphaIntradayDialog2 = _interopRequireDefault(_AlphaIntradayDialog);
 
+var _UnDialog = require('../../components/uncomtrade/UnDialog5');
+
+var _UnDialog2 = _interopRequireDefault(_UnDialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _router = {
@@ -88,6 +92,8 @@ var _router = {
   AlphaIndicatorDialog: _AlphaIndicatorDialog2.default,
   AlphaSectorDialog: _AlphaSectorDialog2.default,
   AlphaIntradayDialog: _AlphaIntradayDialog2.default,
+
+  UnDialog5: _UnDialog2.default,
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */

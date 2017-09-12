@@ -16,7 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var STYLE = {
   ROOT: {
-    backgroundColor: '#232F3B',
+    //backgroundColor: '#232F3B',
+    backgroundColor: '#1B2836',
     color: 'rgba(164, 135, 212, 1)',
     lineHeight: '1.8',
     paddingTop: '4px',
@@ -26,6 +27,8 @@ var STYLE = {
     borderTopRightRadius: '4px'
   },
   CAPTION: {
+    //color: 'lightslategray',
+    color: 'silver',
     fontSize: '18px',
     fontWeight: '500',
     paddingRight: '8px'
@@ -60,4 +63,4 @@ process.env.NODE_ENV !== "production" ? BrowserCaption.propTypes = {
 } : void 0;
 
 exports.default = BrowserCaption;
-//# sourceMappingURL=BrowserCaption.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\BrowserCaption.js.map

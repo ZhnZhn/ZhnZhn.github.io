@@ -11,8 +11,8 @@ import MapChartItem from '../items/MapChartItem';
 import SectorItem from '../items/SectorItem';
 
 const _createAreaChartItem = function(config, index, option, props){
-  const { zhConfig } = config
-     ,  { id, key } = zhConfig
+  const { zhConfig={} } = config
+     ,  { id=`Id:${index}`, key=index } = zhConfig
      ,  { chartType } = option;
   return (
        <AreaChartItem
@@ -33,9 +33,9 @@ const _createAreaChartItem = function(config, index, option, props){
 };
 
 const _createMapChartItem = function(config, index, option, props){
-  const { zhConfig } = config
-     ,  { id, key } = zhConfig
-     ,  { chartType } = option
+  const { zhConfig={} } = config
+     ,  { id=`Id:${index}`, key=index } = zhConfig
+     ,  { chartType } = option;
 
   return(
     <MapChartItem

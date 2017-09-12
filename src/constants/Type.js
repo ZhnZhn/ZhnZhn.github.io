@@ -3,6 +3,7 @@ export const BrowserType = {
    STOCK_MARKETS: 'SM',
    EUROSTAT : 'ES',
    FRANCE_STATISTICS : 'FS',
+   UN_COMTRADE: 'UN',
 
    PREMIUM_SAMPLE : 'QPS',
    ECONOMIC : 'QE',
@@ -50,15 +51,16 @@ export const ChartType = {
 }
 
 export const LoadType = {
-  Q : 'Q',
-  B : 'B',
-  AL : 'AL',
+  Q: 'Q',
+  B: 'B',
+  AL: 'AL',
   AL_S: 'AL_S',
   AL_I: 'AL_I',
-  QCT : 'QCT',
-  EU_STAT : 'EU_STAT',
-  FS : 'FS',
-  WL : 'WL'
+  QCT: 'QCT',
+  EU_STAT: 'EU_STAT',
+  FS: 'FS',
+  UN: 'UN',
+  WL: 'WL'
 }
 
 export const CompItemType = {

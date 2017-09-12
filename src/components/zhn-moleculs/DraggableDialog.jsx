@@ -5,36 +5,23 @@ import FlatButton from '../zhn-m/FlatButton'
 
 import Interact from '../../utils/Interact'
 
-const styles = {
-  rootDiv: {
+import STYLE from './Dialog.Style'
+
+const CL = {
+  SHOWING: 'show-popup',
+  NOT_SELECTED: 'not-selected'
+};
+
+const S = {
+  ...STYLE,
+  ROOT_DIV_DRAG: {
     position: 'absolute',
     top: '30px',
     left: '50px',
-    backgroundColor: '#4D4D4D',
-    border: 'solid 2px #232F3B',
-    borderRadius: '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
     zIndex: 10
   },
-  captionDiv:{
-    padding: '5px',
-    color: 'rgba(164, 135, 212,1)',
-    backgroundColor: '#232F3B',
-    textAlign: 'center',
-    fontSize: '18px'
-  },
-  childrenDiv : {
-    cursor : 'default'
-  },
-  commandDiv : {
-     cursor: 'default',
-     float: 'right',
-     marginTop: '8px',
-     marginBottom: '10px',
-     marginRight: '4px'
-  },
-  btRoot: {
-    color: 'rgb(35, 47, 59)'
+  CHILDREN_DIV: {
+    cursor: 'default'
   }
 };
 
@@ -57,11 +44,12 @@ class DraggableDialog extends Component {
 
   _renderCommandButton = (commandButtons, onShowChart, onClose) => {
     return (
-      <div style={styles.commandDiv}>
+      <div style={S.COMMAND_DIV}>
         {commandButtons}
-        {typeof onShowChart === 'function' &&
+        {
+          typeof onShowChart === 'function' &&
           <FlatButton
-            rootStyle={styles.btRoot}
+            rootStyle={S.BT_ROOT}
             caption="Show"
             title="Show Pane Container"
             //accessKey="s"
@@ -69,7 +57,7 @@ class DraggableDialog extends Component {
           />
         }
         <FlatButton
-          rootStyle={styles.btRoot}
+          rootStyle={S.BT_ROOT}
           caption="Close"
           title="Close Draggable Dialog"
           //accessKey="c"
@@ -81,25 +69,26 @@ class DraggableDialog extends Component {
 
   render(){
     const {
-           isShow, caption, children, commandButtons,
+           isShow, caption, children,
+           commandButtons,
            onShowChart, onFront, onClose
          } = this.props
-        , _styleShow = isShow ? {display: 'block'} : {display: 'none'}
-        , _classShow = isShow ? 'show-popup' : undefined;
+        , _styleShow = isShow ? S.SHOW : S.HIDE
+        , _classShow = isShow ? CL.SHOWING : undefined;
     return (
       <div
            ref={c => this.rootDivEl = c}
            className={_classShow}
-           style={Object.assign({}, styles.rootDiv, _styleShow)}
+           style={{...S.ROOT_DIV, ...S.ROOT_DIV_DRAG, ..._styleShow}}
            onClick={onFront}
       >
-        <div style={styles.captionDiv}>
-          <span className="not-selected">
+        <div style={S.CAPTION_DIV}>
+          <span className={CL.NOT_SELECTED}>
             {caption}
           </span>
           <SvgClose onClose={onClose} />
         </div>
-        <div style={styles.childrenDiv}>
+        <div style={S.CHILDREN_DIV}>
            {children}
         </div>
         {this._renderCommandButton(commandButtons, onShowChart, onClose)}

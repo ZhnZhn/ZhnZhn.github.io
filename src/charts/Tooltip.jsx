@@ -1,6 +1,7 @@
 import Highcharts from 'highcharts';
 import { render } from 'react-dom';
 
+import ChartFn from './ChartFn'
 import SparkFactory from '../components/factories/SparkFactory';
 
 const SPARKLINES_SUFFIX_ID = 'sparklines'
@@ -9,13 +10,6 @@ const SPARKLINES_SUFFIX_ID = 'sparklines'
     , WIDTH_VALUE = 54
     , WIDTH_TOTAL = 50
     , WIDTH_SPARK = 20 + 80 + 16;
-
-
-const _fnNumberFormat = function(value){
-  const arrSplit = (value+'').split('.')
-      , decimal = (arrSplit[1]) ? 2 : 0;
-  return Highcharts.numberFormat(value, decimal, '.', ' ');
-};
 
 const _fnTooltipHeader = function(date, id, cssClass=''){
   return `<div id="${id}" class="tp__header not-selected ${cssClass}">
@@ -142,7 +136,7 @@ const _fnCalcWidthSparkType4 = function(value, total){
 
 const _fnStackedAreaTooltip = function({id, value, point}){
   const {nameFull, category, percent='0.0', total=0} = point
-      , _total = _fnNumberFormat(total)
+      , _total = ChartFn.toNumberFormat(total)
       , { fullWidth, width } = _fnCalcWidthSparkType4(value, _total);
 
   return _fnTooltipHeader(nameFull, id) + _fnTooltipSparkType4({
@@ -152,8 +146,8 @@ const _fnStackedAreaTooltip = function({id, value, point}){
 
 const _fnTreeMapTooltip = function({id, point}){
   const {nameFull, year, value='0.0', percent='0.0', total=0} = point
-      , _value = _fnNumberFormat(value)
-      , _total = _fnNumberFormat(total)
+      , _value = ChartFn.toNumberFormat(value)
+      , _total = ChartFn.toNumberFormat(total)
       , { fullWidth, width } = _fnCalcWidthSparkType4(_value, _total);
 
   return _fnTooltipHeader(nameFull, id) + _fnTooltipSparkType4({
@@ -161,24 +155,23 @@ const _fnTreeMapTooltip = function({id, point}){
   })
 }
 
+const _fHide = (id, point) => function _fnHide() {
+  document.getElementById(id)
+          .removeEventListener('click', _fnHide);
+  point.series.chart.zhTooltip.hide();
+}
 
 const _fnAddHandlerClose = function(id, point){
   setTimeout( function(){
-          document.getElementById(id)
-             .addEventListener('click', function _fnHide(){
-                    document.getElementById(id).removeEventListener('click', _fnHide);
-                    point.series.chart.zhTooltip.hide();
-         })
+    document.getElementById(id)
+            .addEventListener('click', _fHide(id, point))
   }, 1);
 }
 
 const _fnAddHandlerCloseAndSparklines = function(id, point){
   setTimeout( function(){
           document.getElementById(id)
-             .addEventListener('click', function _fnHide(){
-                    document.getElementById(id).removeEventListener('click', _fnHide);
-                    point.series.chart.zhTooltip.hide();
-         })
+             .addEventListener('click', _fHide(id,point))
 
          let  sparkLinesData = []
             , sparkBarsData = []
@@ -188,8 +181,9 @@ const _fnAddHandlerCloseAndSparklines = function(id, point){
            sparkLinesData = point.sparkvalues;
            sparkBarsData = point.sparkpercent;
            pointIndex = (point.sparkvalues.length !== 0)
-                            ?  point.sparkvalues.length - 1 : 0 ;
-         }  else {
+                            ?  point.sparkvalues.length - 1
+                            : 0 ;
+         } else {
            const seriesData = point.series.data
            seriesData.forEach((item, itemIndex) => {
               sparkLinesData.push(item.y);
@@ -207,6 +201,8 @@ const _fnAddHandlerCloseAndSparklines = function(id, point){
 
 const _fnDateFormatDMY = Highcharts.dateFormat.bind(null, '%A, %b %d, %Y')
 const _fnDateFormatDMYT = Highcharts.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M')
+const _fnFormatCategory = x => x;
+
 
 const _fnBasePointFormatter = function( option ){
   return function(){
@@ -227,8 +223,8 @@ const _fnBasePointFormatter = function( option ){
             ? zhValueText || name
             : 'Value'
        , value = isWithValue
-           ? _fnNumberFormat(point.y)
-           : null;
+            ? ChartFn.toNumberFormat(point.y)
+            : null;
 
        onAfterRender(_id, point)
 
@@ -245,6 +241,11 @@ const Tooltip = {
      fnTemplate : _fnBaseTooltip,
      fnDateFormat: _fnDateFormatDMYT,
      isWithColor: true, isWithValueText: true, isWithValue: true
+  }),
+  fnBasePointFormatterC: _fnBasePointFormatter({
+    fnTemplate : _fnBaseTooltip,
+    fnDateFormat: _fnFormatCategory,
+    isWithColor: true, isWithValueText: true, isWithValue: true
   }),
 
   fnExDividendPointFormatter: _fnBasePointFormatter({

@@ -1,0 +1,24 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\uncomtrade\\UnComtradeAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\uncomtrade\\UnComtradeAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "UnComtradeAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "config",
+  "isDrawDeltaExtrems",
+  "isNotZoomToMinMax",
+  "toSeries",
+  "seria",
+  "fSeries",
+  "Object",
+  "assign",
+  "zhSeriaId",
+  "zhValueText"
+ ],
+ "mappings": ";;;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,oBAAoB;AACxBC,UADwB,oBACfC,IADe,EACTC,MADS,EACF;AACpB;AACA,QAAMC,SAAS,oBAAUH,QAAV,CAAmBC,IAAnB,EAAyBC,MAAzB,CAAf;;AAEA,WAAO;AACJC,oBADI;AAEJC,0BAAoB,KAFhB;AAGJC,yBAAmB;AAHf,KAAP;AAKD,GAVuB;AAYxBC,UAZwB,oBAYfL,IAZe,EAYTC,MAZS,EAYF;AACpB,QAAMK,QAAQ,sBAAYC,OAAZ,EAAd;AACAC,WAAOC,MAAP,CAAcH,KAAd,EAAqB;AACnBI,iBAAW,aADQ;AAEnBC,mBAAa;AAFM,KAArB;AAIA,WAAOL,KAAP;AACD;AAnBuB,CAA1B;;kBAsBeR,iB"
+}

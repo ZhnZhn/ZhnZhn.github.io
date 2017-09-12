@@ -1,0 +1,24 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\uncomtrade\\fnDescr.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\uncomtrade\\fnDescr.js",
+ "sourceRoot": "",
+ "names": [
+  "fnDescr",
+  "toDescr",
+  "json",
+  "dataset",
+  "_firtsItem",
+  "Array",
+  "isArray",
+  "i",
+  "max",
+  "length",
+  "cmdDescE",
+  "qtDesc",
+  "TradeQuantity",
+  "DESCR_EMPTY"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,UAAU;;AAEdC,WAAS,iBAACC,IAAD,EAAU;AACX,QAAEC,OAAF,GAAcD,IAAd,CAAEC,OAAF;AAAA,QACAC,UADA,GACaD,QAAQ,CAAR,CADb;;AAEN,QAAIE,MAAMC,OAAN,CAAcH,OAAd,KAA0BC,UAA9B,EAAyC;AACvC,UAAIG,IAAE,CAAN;AAAA,UAASC,MAAIL,QAAQM,MAArB;AACA,aAAOF,IAAEC,GAAT,EAAcD,GAAd,EAAmB;AAAA,yBAC2BJ,QAAQI,CAAR,CAD3B;AAAA,YACTG,QADS,cACTA,QADS;AAAA,YACCC,MADD,cACCA,MADD;AAAA,YACSC,aADT,cACSA,aADT;;AAEjB,YAAIA,aAAJ,EAAmB;AACjB,iBAAOF,WAAW,GAAX,GAAiBC,MAAjB,GAA0B,GAAjC;AACD;AACF;AACD,aAAOP,WAAWM,QAAX,GACFN,WAAWM,QAAX,GAAsB,GAAtB,GAA4BN,WAAWO,MAAvC,GAAgD,GAD9C,GAEF,eAAEE,WAFP;AAGD,KAXD,MAWO;AACL,aAAO,eAAEA,WAAT;AACD;AACF;;AAnBa,CAAhB;;kBAuBeb,O"
+}

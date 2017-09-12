@@ -13,6 +13,12 @@ const BrowserConfig = {
     caption: 'European Statistics',
     sourceMenuUrl : './data/eurostat/source-menu.json'
   },
+  [BrowserType.UN_COMTRADE]: {
+    browserType: BrowserType.UN_COMTRADE,
+    isDynamic : true,
+    caption: 'UN Comtrade',
+    sourceMenuUrl : './data/uncomtrade/source-menu.json'
+  },
   [BrowserType.ECONOMIC] : {
     browserType: BrowserType.ECONOMIC,
     isDynamic: false

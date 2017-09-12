@@ -183,6 +183,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           twoCaption = _props.twoCaption,
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
+          isWithInputTwo = _props.isWithInputTwo,
           initFromDate = _props.initFromDate,
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
@@ -220,6 +221,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           jsonProp: twoJsonProp,
           caption: twoCaption,
           optionNames: 'Indicators',
+          isWithInput: isWithInputTwo,
           onSelect: this._handleSelectTwo
         }),
         _react2.default.createElement(

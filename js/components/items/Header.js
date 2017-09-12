@@ -24,9 +24,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var STYLE = {
   ROOT: {
-    backgroundColor: '#232F3B',
+    backgroundColor: '#1b2836',
     paddingTop: '4px',
-    //paddingLeft: '10px',
     lineHeight: 1.8,
     height: '32px',
     width: '100%',

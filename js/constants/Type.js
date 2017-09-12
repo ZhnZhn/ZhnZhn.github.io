@@ -7,6 +7,7 @@ var BrowserType = exports.BrowserType = {
   STOCK_MARKETS: 'SM',
   EUROSTAT: 'ES',
   FRANCE_STATISTICS: 'FS',
+  UN_COMTRADE: 'UN',
 
   PREMIUM_SAMPLE: 'QPS',
   ECONOMIC: 'QE',
@@ -62,6 +63,7 @@ var LoadType = exports.LoadType = {
   QCT: 'QCT',
   EU_STAT: 'EU_STAT',
   FS: 'FS',
+  UN: 'UN',
   WL: 'WL'
 };
 

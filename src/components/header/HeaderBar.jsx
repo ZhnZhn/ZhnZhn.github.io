@@ -36,7 +36,8 @@ const styles = {
     marginLeft: '8px'
   },
   btRoot: {
-    color: 'rgb(35, 47, 59)'
+    //color: 'rgb(35, 47, 59)'
+    color: '#1b2836'
   },
   btAbout: {
     float: 'right'

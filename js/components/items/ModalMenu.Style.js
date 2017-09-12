@@ -11,8 +11,7 @@ var STYLE = {
     top: '30px',
     left: '-5px',
     backgroundColor: 'rgba(77, 77, 77, 1)',
-    //borderBottom: '4px solid green',
-    border: '2px solid rgb(35, 47, 59)',
+    border: '2px solid #1b2836',
     borderRadius: '5px',
     boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
   },

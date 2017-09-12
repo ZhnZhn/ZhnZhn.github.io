@@ -119,7 +119,7 @@ class DialogType4 extends Component {
     const {
            caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
-           twoCaption, twoURI, twoJsonProp,
+           twoCaption, twoURI, twoJsonProp, isWithInputTwo,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
@@ -155,6 +155,7 @@ class DialogType4 extends Component {
                jsonProp={twoJsonProp}
                caption={twoCaption}
                optionNames={'Indicators'}
+               isWithInput={isWithInputTwo}
                onSelect={this._handleSelectTwo}
              />
 

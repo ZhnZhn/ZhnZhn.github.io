@@ -3,50 +3,26 @@ import React, { Component, PropTypes } from 'react'
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
 
+import STYLE from './Dialog.Style'
+
 const CL = {
   SHOWING : 'show-popup',
   HIDING : 'hide-popup'
 };
 
-const STYLE = {
-  SHOW : {
-    display : 'block'
-  },
-  HIDE : {
-    display : 'none'
-  },
-  HIDE_POPUP : {
-    opacity: 0,
-    transform : 'scaleY(0)'
-  },
-  ROOT_DIV: {
+const S = {
+  ...STYLE,
+  ROOT_DIV_MODAL: {
     position: 'absolute',
     top: '20%',
     left: '40%',
     display: 'block',
-    backgroundColor: '#4D4D4D',
-    border: 'solid 2px #232F3B',
-    borderRadius: '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
     zIndex: 10
   },
-  CAPTON_DIV:{
-    padding: '5px',
-    color: 'rgba(164, 135, 212,1)',
-    backgroundColor: '#232F3B',
-    textAlign: 'center',
-    fontSize: '18px'
+  HIDE_POPUP: {
+    opacity: 0,
+    transform: 'scaleY(0)'
   },
-  COMMAND_DIV : {
-     cursor: 'default',
-     float: 'right',
-     marginTop: '8px',
-     marginBottom: '10px',
-     marginRight: '4px'
-  },
-  BT_ROOT: {
-    color: 'rgb(35, 47, 59)'
-  }
 };
 
 class ModalDialog extends Component {
@@ -97,13 +73,13 @@ class ModalDialog extends Component {
   _renderCommandButton = () => {
     const { commandButtons, withoutClose, onClose } = this.props;
     return (
-      <div style={STYLE.COMMAND_DIV}>
+      <div style={S.COMMAND_DIV}>
         {commandButtons}
         { !withoutClose &&
             <FlatButton
-              rootStyle={STYLE.BT_ROOT}
+              rootStyle={S.BT_ROOT}
               caption="Close"
-              title="Close Modal Dialog"              
+              title="Close Modal Dialog"
               onClick={onClose}
             />
         }
@@ -121,11 +97,11 @@ class ModalDialog extends Component {
     let _className, _style;
 
     if (this.wasClosing){
-      _style = STYLE.HIDE
+      _style = S.HIDE
       this.wasClosing = false
     } else {
       _className = isShow ? CL.SHOWING : CL.HIDING
-      _style = isShow ? STYLE.SHOW : STYLE.HIDE_POPUP
+      _style = isShow ? S.SHOW : S.HIDE_POPUP
       if (!isShow){
         this.wasClosing = true
       }
@@ -134,10 +110,10 @@ class ModalDialog extends Component {
     return (
          <div
              className={_className}
-             style={{ ...STYLE.ROOT_DIV, ...style, ..._style}}
+             style={{ ...S.ROOT_DIV, ...S.ROOT_DIV_MODAL, ...style, ..._style}}
              onClick={this._handleClickDialog}
          >
-             <div style={STYLE.CAPTON_DIV}>
+             <div style={S.CAPTION_DIV}>
                 <span style={styleCaption}>{caption}</span>
                 <SvgClose onClose={onClose} />
              </div>

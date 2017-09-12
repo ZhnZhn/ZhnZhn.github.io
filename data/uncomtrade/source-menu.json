@@ -1,0 +1,1252 @@
+{
+  "menu": [
+    {
+      "caption": "01-05 Animals Products", "isInitClose" : true,
+      "items": [
+        { "id": "UN_01" },
+        { "id": "UN_02" },
+        { "id": "UN_03" },
+        { "id": "UN_04" },
+        { "id": "UN_05" }
+      ]
+    },{
+      "caption": "06-15 Vegetable Products", "isInitClose" : true,
+      "items": [
+        { "id": "UN_06" },
+        { "id": "UN_07" },
+        { "id": "UN_08" },
+        { "id": "UN_09" },
+        { "id": "UN_10" },
+        { "id": "UN_11" },
+        { "id": "UN_12" },
+        { "id": "UN_13" },
+        { "id": "UN_14" },
+        { "id": "UN_15" }
+      ]
+    },{
+      "caption": "16-24 Footstuffs", "isInitClose" : true,
+      "items": [
+        { "id": "UN_16" },
+        { "id": "UN_17" },
+        { "id": "UN_18" },
+        { "id": "UN_19" },
+        { "id": "UN_20" },
+        { "id": "UN_21" },
+        { "id": "UN_22" },
+        { "id": "UN_23" },
+        { "id": "UN_24" }
+      ]
+    },{
+      "caption": "25-27 Mineral Products", "isInitClose" : true,
+      "items": [
+        { "id": "UN_25" },
+        { "id": "UN_26" },
+        { "id": "UN_27" }
+      ]
+    },{
+      "caption": "28-38 Chemicals Allied Ind.", "isInitClose" : true,
+      "items": [
+        { "id": "UN_28" },
+        { "id": "UN_29" },
+        { "id": "UN_30" },
+        { "id": "UN_31" },
+        { "id": "UN_32" },
+        { "id": "UN_33" },
+        { "id": "UN_34" },
+        { "id": "UN_35" },
+        { "id": "UN_36" },
+        { "id": "UN_37" },
+        { "id": "UN_38" }
+      ]
+    },{
+      "caption": "39-40 Plastics, Rubbers", "isInitClose" : true,
+      "items": [
+        { "id": "UN_39" },
+        { "id": "UN_40" }
+      ]
+    },{
+      "caption": "40-43 Raw Hides, Skins, Leather", "isInitClose" : true,
+      "items": [
+        { "id": "UN_40" },
+        { "id": "UN_41" },
+        { "id": "UN_42" },
+        { "id": "UN_43" }
+      ]
+    },{
+      "caption": "44-49 Wood & Products", "isInitClose" : true,
+      "items": [
+        { "id": "UN_44" },
+        { "id": "UN_45" },
+        { "id": "UN_46" },
+        { "id": "UN_47" },
+        { "id": "UN_48" },
+        { "id": "UN_49" }
+      ]
+    },{
+      "caption": "50-63 Textiles", "isInitClose" : true,
+      "items": [
+        { "id": "UN_50" },
+        { "id": "UN_51" },
+        { "id": "UN_52" },
+        { "id": "UN_53" },
+        { "id": "UN_54" },
+        { "id": "UN_55" },
+        { "id": "UN_56" },
+        { "id": "UN_57" },
+        { "id": "UN_58" },
+        { "id": "UN_59" },
+        { "id": "UN_60" },
+        { "id": "UN_61" },
+        { "id": "UN_62" },
+        { "id": "UN_63" }
+      ]
+    },{
+      "caption": "64-67 Footwear, Headgear", "isInitClose" : true,
+      "items": [
+        { "id": "UN_64" },
+        { "id": "UN_65" },
+        { "id": "UN_66" },
+        { "id": "UN_67" }
+      ]
+    },{
+      "caption": "68-71 Stone, Glass", "isInitClose" : true,
+      "items": [
+        { "id": "UN_68" },
+        { "id": "UN_69" },
+        { "id": "UN_70" },
+        { "id": "UN_71" }
+      ]
+    },{
+      "caption": "72-83 Metals", "isInitClose" : true,
+      "items": [
+        { "id": "UN_72" },
+        { "id": "UN_73" },
+        { "id": "UN_74" },
+        { "id": "UN_75" },
+        { "id": "UN_76" },
+        { "id": "UN_78" },
+        { "id": "UN_79" },
+        { "id": "UN_80" },
+        { "id": "UN_81" },
+        { "id": "UN_82" },
+        { "id": "UN_83" }
+      ]
+    },{
+      "caption": "84-85 Machinery, Electrical", "isInitClose" : true,
+      "items": [
+        { "id": "UN_84" },
+        { "id": "UN_85" }
+      ]
+    },{
+      "caption": "86-89 Transportation", "isInitClose" : true,
+      "items": [
+        { "id": "UN_86" },
+        { "id": "UN_87" },
+        { "id": "UN_88" },
+        { "id": "UN_89" }
+      ]
+    },{
+      "caption": "90-97 Miscellaneous", "isInitClose" : true,
+      "items": [
+        { "id": "UN_90" },
+        { "id": "UN_91" },
+        { "id": "UN_92" },
+        { "id": "UN_93" },
+        { "id": "UN_94" },
+        { "id": "UN_95" },
+        { "id": "UN_96" },
+        { "id": "UN_97" }
+      ]
+    }
+  ],
+  "items": {
+
+    "UN_00": {
+      "dialogProps" : {
+        "descrUrl": "./data/uncomtrade/uncomtrade.html",
+        "nInitFromDate": 5,
+        "oneCaption": "Country",
+        "oneURI": "./data/uncomtrade/country.json",
+        "oneJsonProp": "countries",
+        "twoCaption": "SubGroup",
+        "twoJsonProp": "groups",
+        "threeCaption" : "Item",
+        "valueFn": "RPrefixOneTwo",
+        "valueFnPrefix": "UN",
+        "loadId": "UN",
+        "dataSource": "UN Commodity Trade Statistics"
+      }
+    },
+
+    "UN_01": {
+      "type": "UN_01",
+      "menuTitle": "01 Animals live",
+      "dialogCaption": "01 Animals live",
+      "chartContainerCaption": "UN Comtrade: Animal Products: 01",
+      "dialogType": "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps": {
+        "twoURI": "./data/uncomtrade/01-animal-products.json"
+      }
+    },
+    "UN_02": {
+      "type": "UN_02",
+      "menuTitle": "02 Meat, edible meat offal",
+      "dialogCaption": "02 Meat, edible meat offal",
+      "chartContainerCaption": "UN Comtrade: Animal Products: 02",
+      "dialogType": "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps": {
+        "twoURI": "./data/uncomtrade/02-animal-products.json"
+      }
+    },
+    "UN_03": {
+      "type": "UN_03",
+      "menuTitle": "03 Fish, crustaceans, molluscs",
+      "dialogCaption": "03 Fish, crustaceans, molluscs",
+      "chartContainerCaption": "UN Comtrade: Animal Products: 03",
+      "dialogType": "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps": {
+        "twoURI": "./data/uncomtrade/03-animal-products.json"
+      }
+    },
+    "UN_04": {
+      "type": "UN_04",
+      "menuTitle": "04 Dairy produce, eggs, honey",
+      "dialogCaption": "04 Dairy produce, eggs, honey",
+      "chartContainerCaption": "UN Comtrade: Animal Products: 04",
+      "dialogType": "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps": {
+        "twoURI": "./data/uncomtrade/04-animal-products.json"
+      }
+    },
+    "UN_05": {
+      "type": "UN_05",
+      "menuTitle": "05 Animal originated products",
+      "dialogCaption": "05 Animal originated products",
+      "chartContainerCaption": "UN Comtrade: Animal Products: 05",
+      "dialogType": "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps": {
+        "twoURI": "./data/uncomtrade/05-animal-products.json"
+      }
+    },
+
+    "UN_06": {
+      "type": "UN_06",
+      "menuTitle": "06 Trees, other plants live",
+      "dialogCaption": "06 Trees, other plants live",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 06",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/06-vegetable-products.json"
+      }
+    },
+    "UN_07": {
+      "type": "UN_07",
+      "menuTitle": "07 Vegetable, certain roots, tuners",
+      "dialogCaption": "07 Vegetable, certain roots, tuners",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 07",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/07-vegetable-products.json"
+      }
+    },
+    "UN_08": {
+      "type": "UN_08",
+      "menuTitle": "08 Fruit, nuts, edible",
+      "dialogCaption": "08 Fruit, nuts, edible",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 08",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/08-vegetable-products.json"
+      }
+    },
+    "UN_09": {
+      "type": "UN_09",
+      "menuTitle": "09 Coffee, tea, mate, spices",
+      "dialogCaption": "09 Coffee, tea, mate, spices",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 09",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/09-vegetable-products.json"
+      }
+    },
+    "UN_10": {
+      "type": "UN_10",
+      "menuTitle": "10 Cereals",
+      "dialogCaption": "10 Cereals",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 10",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/10-vegetable-products.json"
+      }
+    },
+    "UN_11": {
+      "type": "UN_11",
+      "menuTitle": "11 Products of the milling industry",
+      "dialogCaption": "11 Products of the milling industry",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 11",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/11-vegetable-products.json"
+      }
+    },
+    "UN_12": {
+      "type": "UN_12",
+      "menuTitle": "12 Oil seeds, oleaginous fruits",
+      "dialogCaption": "12 Oil seeds, oleaginous fruits",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 12",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/12-vegetable-products.json"
+      }
+    },
+    "UN_13": {
+      "type": "UN_13",
+      "menuTitle": "13 Lac",
+      "dialogCaption": "13 Lac",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 13",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/13-vegetable-products.json"
+      }
+    },
+    "UN_14": {
+      "type": "UN_14",
+      "menuTitle": "14 Vegetable plaiting materials",
+      "dialogCaption": "14 Vegetable plaiting materials",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 14",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/14-vegetable-products.json"
+      }
+    },
+    "UN_15": {
+      "type": "UN_15",
+      "menuTitle": "15 Animal or vegetable fats, oils",
+      "dialogCaption": "15 Animal or vegetable fats, oils",
+      "chartContainerCaption": "UN Comtrade: Vegetable Products: 15",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/15-vegetable-products.json"
+      }
+    },
+
+    "UN_16": {
+      "type": "UN_16",
+      "menuTitle": "16 Meat, fish or crustaceans",
+      "dialogCaption": "16 Meat, fish or crustaceans",
+      "chartContainerCaption": "UN Comtrade: Footstuffs: 16",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/16-foodstuffs.json"
+      }
+    },
+    "UN_17": {
+      "type": "UN_17",
+      "menuTitle": "17 Sugars & Confectionery",
+      "dialogCaption": "17 Sugars & Confectionery",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 17",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/17-foodstuffs.json"
+      }
+    },
+    "UN_18": {
+      "type": "UN_18",
+      "menuTitle": "18 Cocoa & Preparations",
+      "dialogCaption": "18 Cocoa & Preparations",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 18",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/18-foodstuffs.json"
+      }
+    },
+    "UN_19": {
+      "type": "UN_19",
+      "menuTitle": "19 Cereals, flour, starch or milk",
+      "dialogCaption": "19 Cereals, flour, starch or milk",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 19",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/19-foodstuffs.json"
+      }
+    },
+    "UN_20": {
+      "type": "UN_20",
+      "menuTitle": "20 Vegetables, fruit, nuts",
+      "dialogCaption": "20 Vegetables, fruit, nuts",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 20",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/20-foodstuffs.json"
+      }
+    },
+    "UN_21": {
+      "type": "UN_21",
+      "menuTitle": "21 Miscellaneous edible",
+      "dialogCaption": "21 Miscellaneous edible",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 21",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/21-foodstuffs.json"
+      }
+    },
+    "UN_22": {
+      "type": "UN_22",
+      "menuTitle": "22 Beverages, spirits, vinegar",
+      "dialogCaption": "22 Beverages, spirits, vinegar",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 22",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/22-foodstuffs.json"
+      }
+    },
+    "UN_23": {
+      "type": "UN_23",
+      "menuTitle": "23 Food industries",
+      "dialogCaption": "23 Food industries",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 23",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/23-foodstuffs.json"
+      }
+    },
+    "UN_24": {
+      "type": "UN_24",
+      "menuTitle": "24 Tobacco",
+      "dialogCaption": "24 Tobacco",
+      "chartContainerCaption": "UN Comtrade: Foodstuffs: 24",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/24-foodstuffs.json"
+      }
+    },
+
+    "UN_25": {
+      "type": "UN_25",
+      "menuTitle": "25 Salt, sulphur, earths, stone",
+      "dialogCaption": "25 Salt, sulphur, earths, stone",
+      "chartContainerCaption": "UN Comtrade: Mineral Products: 25",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/25-mineral-products.json"
+      }
+    },
+    "UN_26": {
+      "type": "UN_26",
+      "menuTitle": "26 Ores, slag, ash",
+      "dialogCaption": "26 Ores, slag, ash",
+      "chartContainerCaption": "UN Comtrade: Mineral Products: 26",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/26-mineral-products.json"
+      }
+    },
+    "UN_27": {
+      "type": "UN_27",
+      "menuTitle": "27 Mineral fuels, oils, products",
+      "dialogCaption": "27 Mineral fuels, oils, products",
+      "chartContainerCaption": "UN Comtrade: Mineral Products: 27",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/27-mineral-products.json"
+      }
+    },
+
+    "UN_28": {
+      "type": "UN_28",
+      "menuTitle": "28 Inorganic chemicals",
+      "dialogCaption": "28 Inorganic chemicals",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 28",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/28-chemicals-allied-ind.json"
+      }
+    },
+    "UN_29": {
+      "type": "UN_29",
+      "menuTitle": "29 Organic chemicals",
+      "dialogCaption": "29 Organic chemicals",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 29",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/29-chemicals-allied-ind.json"
+      }
+    },
+    "UN_30": {
+      "type": "UN_30",
+      "menuTitle": "30 Pharmaceutical products",
+      "dialogCaption": "30 Pharmaceutical products",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 30",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/30-chemicals-allied-ind.json"
+      }
+    },
+    "UN_31": {
+      "type": "UN_31",
+      "menuTitle": "31 Fertilizers",
+      "dialogCaption": "31 Fertilizers",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 31",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/31-chemicals-allied-ind.json"
+      }
+    },
+    "UN_32": {
+      "type": "UN_32",
+      "menuTitle": "32 Tanning or dyeing extracts",
+      "dialogCaption": "32 Tanning or dyeing extracts",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 32",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/32-chemicals-allied-ind.json"
+      }
+    },
+    "UN_33": {
+      "type": "UN_33",
+      "menuTitle": "33 Essential oils, resinoids",
+      "dialogCaption": "33 Essential oils, resinoids",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 33",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/33-chemicals-allied-ind.json"
+      }
+    },
+    "UN_34": {
+      "type": "UN_34",
+      "menuTitle": "34 Soap, organic surface-active agents",
+      "dialogCaption": "34 Soap, organic surface-active agents",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 34",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/34-chemicals-allied-ind.json"
+      }
+    },
+    "UN_35": {
+      "type": "UN_35",
+      "menuTitle": "35 Albuminoidal substances",
+      "dialogCaption": "35 Albuminoidal substances",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 35",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/35-chemicals-allied-ind.json"
+      }
+    },
+    "UN_36": {
+      "type": "UN_36",
+      "menuTitle": "36 Explosives, pyrotechnic products",
+      "dialogCaption": "36 Explosives, pyrotechnic products",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 36",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/36-chemicals-allied-ind.json"
+      }
+    },
+    "UN_37": {
+      "type": "UN_37",
+      "menuTitle": "37 Photographic or cinematographic goods",
+      "dialogCaption": "37 Photographic or cinematographic goods",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 37",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/37-chemicals-allied-ind.json"
+      }
+    },
+    "UN_38": {
+      "type": "UN_38",
+      "menuTitle": "38 Chemical products n.e.c.",
+      "dialogCaption": "38 Chemical products n.e.c.",
+      "chartContainerCaption": "UN Comtrade: Chemicals Allied Industry: 38",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/38-chemicals-allied-ind.json"
+      }
+    },
+
+    "UN_39": {
+      "type": "UN_39",
+      "menuTitle": "39 Plastics, articles thereof",
+      "dialogCaption": "39 Plastics, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Plastics, Rubbers: 39",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/39-plastics-rubbers.json"
+      }
+    },
+    "UN_40": {
+      "type": "UN_40",
+      "menuTitle": "40 Rubber, articles thereof",
+      "dialogCaption": "40 Rubber, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Plastics, Rubbers: 40",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/40-plastics-rubbers.json"
+      }
+    },
+
+    "UN_41": {
+      "type": "UN_41",
+      "menuTitle": "41 Raw hides, skins (other than furskins)",
+      "dialogCaption": "",
+      "chartContainerCaption": "UN Comtrade: Raw Hides, Skins, Leather: 41",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/41-raw-hides-skins.json"
+      }
+    },
+    "UN_42": {
+      "type": "UN_42",
+      "menuTitle": "42 Articles of leather",
+      "dialogCaption": "42 Articles of leather",
+      "chartContainerCaption": "UN Comtrade: Raw Hides, Skins, Leather: 42",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/42-raw-hides-skins.json"
+      }
+    },
+    "UN_43": {
+      "type": "UN_43",
+      "menuTitle": "43 Furskins, artificial fur",
+      "dialogCaption": "43 Furskins, artificial fur",
+      "chartContainerCaption": "UN Comtrade: Raw Hides, Skins, Leather: 43",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/43-raw-hides-skins.json"
+      }
+    },
+
+    "UN_44": {
+      "type": "UN_44",
+      "menuTitle": "44 Wood, articles of wood",
+      "dialogCaption": "44 Wood, articles of wood",
+      "chartContainerCaption": "UN Comtrade: Wood & Products: 44",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/44-wood-products.json"
+      }
+    },
+    "UN_45": {
+      "type": "UN_45",
+      "menuTitle": "45 Cork, articles of cork",
+      "dialogCaption": "45 Cork, articles of cork",
+      "chartContainerCaption": "UN Comtrade: Wood & Products: 45",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/45-wood-products.json"
+      }
+    },
+    "UN_46": {
+      "type": "UN_46",
+      "menuTitle": "46 Manufactures of straw, esparto",
+      "dialogCaption": "46 Manufactures of straw, esparto",
+      "chartContainerCaption": "UN Comtrade: Wood & Products: 46",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/46-wood-products.json"
+      }
+    },
+    "UN_47": {
+      "type": "UN_47",
+      "menuTitle": "47 Pulp of wood or other fibrous",
+      "dialogCaption": "47 Pulp of wood or other fibrous",
+      "chartContainerCaption": "UN Comtrade: Wood & Products: 47",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/47-wood-products.json"
+      }
+    },
+    "UN_48": {
+      "type": "UN_48",
+      "menuTitle": "48 Paper, paperboard",
+      "dialogCaption": "48 Paper, paperboard",
+      "chartContainerCaption": "UN Comtrade: Wood & Products: 48",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/48-wood-products.json"
+      }
+    },
+    "UN_49": {
+      "type": "UN_49",
+      "menuTitle": "49 Printed books, newspapers",
+      "dialogCaption": "49 Printed books, newspapers",
+      "chartContainerCaption": "UN Comtrade: Wood & Products: 49",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/49-wood-products.json"
+      }
+    },
+
+    "UN_50": {
+      "type": "UN_50",
+      "menuTitle": "50 Silk",
+      "dialogCaption": "50 Silk",
+      "chartContainerCaption": "UN Comtrade: Textiles: 50",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/50-textiles.json"
+      }
+    },
+    "UN_51": {
+      "type": "UN_51",
+      "menuTitle": "51 Wool, fine or animal hair",
+      "dialogCaption": "51 Wool, fine or animal hair",
+      "chartContainerCaption": "UN Comtrade: Textiles: 51",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/51-textiles.json"
+      }
+    },
+    "UN_52": {
+      "type": "UN_52",
+      "menuTitle": "52 Cotton",
+      "dialogCaption": "52 Cotton",
+      "chartContainerCaption": "UN Comtrade: Textiles: 52",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/52-textiles.json"
+      }
+    },
+    "UN_53": {
+      "type": "UN_53",
+      "menuTitle": "53 Vegetable textile fibres",
+      "dialogCaption": "53 Vegetable textile fibres",
+      "chartContainerCaption": "UN Comtrade: Textiles: 53",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/53-textiles.json"
+      }
+    },
+    "UN_54": {
+      "type": "UN_54",
+      "menuTitle": "54 Man-made filaments",
+      "dialogCaption": "54 Man-made filaments",
+      "chartContainerCaption": "UN Comtrade: Textiles: 54",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/54-textiles.json"
+      }
+    },
+    "UN_55": {
+      "type": "UN_55",
+      "menuTitle": "55 Man-made staple fibres",
+      "dialogCaption": "55 Man-made staple fibres",
+      "chartContainerCaption": "UN Comtrade: Textiles: 55",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/55-textiles.json"
+      }
+    },
+    "UN_56": {
+      "type": "UN_56",
+      "menuTitle": "56 Wadding, felt, nonwovens",
+      "dialogCaption": "56 Wadding, felt, nonwovens",
+      "chartContainerCaption": "UN Comtrade: Textiles: 56",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/56-textiles.json"
+      }
+    },
+    "UN_57": {
+      "type": "UN_57",
+      "menuTitle": "57 Carpets, other floor coverings",
+      "dialogCaption": "57 Carpets, other floor coverings",
+      "chartContainerCaption": "UN Comtrade: Textiles: 57",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/57-textiles.json"
+      }
+    },
+    "UN_58": {
+      "type": "UN_58",
+      "menuTitle": "58 Fabrics; woven fabrics",
+      "dialogCaption": "58 Fabrics; woven fabrics",
+      "chartContainerCaption": "UN Comtrade: Textiles: 58",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/58-textiles.json"
+      }
+    },
+    "UN_59": {
+      "type": "UN_59",
+      "menuTitle": "59 Textile fabrics",
+      "dialogCaption": "59 Textile fabrics",
+      "chartContainerCaption": "UN Comtrade: Textiles: 59",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/59-textiles.json"
+      }
+    },
+    "UN_60": {
+      "type": "UN_60",
+      "menuTitle": "60 Fabrics; knitted or crocheted",
+      "dialogCaption": "60 Fabrics; knitted or crocheted",
+      "chartContainerCaption": "UN Comtrade: Textiles: 60",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/60-textiles.json"
+      }
+    },
+    "UN_61": {
+      "type": "UN_61",
+      "menuTitle": "61 Apparel; knitted",
+      "dialogCaption": "61 Apparel; knitted",
+      "chartContainerCaption": "UN Comtrade: Textiles: 61",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/61-textiles.json"
+      }
+    },
+    "UN_62": {
+      "type": "UN_62",
+      "menuTitle": "62 Apparel; not knitted",
+      "dialogCaption": "62",
+      "chartContainerCaption": "UN Comtrade: Textiles: 62",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/62-textiles.json"
+      }
+    },
+    "UN_63": {
+      "type": "UN_63",
+      "menuTitle": "63 Made up articles",
+      "dialogCaption": "63 Made up articles",
+      "chartContainerCaption": "UN Comtrade: Textiles: 63",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/63-textiles.json"
+      }
+    },
+
+    "UN_64": {
+      "type": "UN_64",
+      "menuTitle": "64 Footwear",
+      "dialogCaption": "64 Footwear",
+      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 64",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/64-footwear-headgear.json"
+      }
+    },
+    "UN_65": {
+      "type": "UN_65",
+      "menuTitle": "65 Headgear, parts thereof",
+      "dialogCaption": "65 Headgear, parts thereof",
+      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 65",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/65-footwear-headgear.json"
+      }
+    },
+    "UN_66": {
+      "type": "UN_66",
+      "menuTitle": "66 Umbrellas, walking-sticks",
+      "dialogCaption": "66 Umbrellas, walking-sticks",
+      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 66",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/66-footwear-headgear.json"
+      }
+    },
+    "UN_67": {
+      "type": "UN_67",
+      "menuTitle": "67 Feathers, down, prepared",
+      "dialogCaption": "67 Feathers, down, prepared",
+      "chartContainerCaption": "UN Comtrade: Footwear, Headgear: 67",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/67-footwear-headgear.json"
+      }
+    },
+
+    "UN_68": {
+      "type": "UN_68",
+      "menuTitle": "68 Stone, plaster, cement",
+      "dialogCaption": "68 Stone, plaster, cement",
+      "chartContainerCaption": "UN Comtrade: Stone, Glass: 68",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/68-stone-glass.json"
+      }
+    },
+    "UN_69": {
+      "type": "UN_69",
+      "menuTitle": "69 Ceramic products",
+      "dialogCaption": "69 Ceramic products",
+      "chartContainerCaption": "UN Comtrade: Stone, Glass: 69",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/69-stone-glass.json"
+      }
+    },
+    "UN_70": {
+      "type": "UN_70",
+      "menuTitle": "70 Glass, glassware",
+      "dialogCaption": "70 Glass, glassware",
+      "chartContainerCaption": "UN Comtrade: Stone, Glass: 70",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/70-stone-glass.json"
+      }
+    },
+    "UN_71": {
+      "type": "UN_71",
+      "menuTitle": "71 Natural, cultured pearls",
+      "dialogCaption": "71 Natural, cultured pearls",
+      "chartContainerCaption": "UN Comtrade: Stone, Glass: 71",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/71-stone-glass.json"
+      }
+    },
+
+    "UN_72": {
+      "type": "UN_72",
+      "menuTitle": "72 Iron and steel",
+      "dialogCaption": "72 Iron and steel",
+      "chartContainerCaption": "UN Comtrade: Metals: 72",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/72-metals.json"
+      }
+    },
+    "UN_73": {
+      "type": "UN_73",
+      "menuTitle": "73 Iron or steel articles",
+      "dialogCaption": "73 Iron or steel articles",
+      "chartContainerCaption": "UN Comtrade: Metals: 73",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/73-metals.json"
+      }
+    },
+    "UN_74": {
+      "type": "UN_74",
+      "menuTitle": "74 Copper, articles thereof",
+      "dialogCaption": "74 Copper, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Metals: 74",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/74-metals.json"
+      }
+    },
+    "UN_75": {
+      "type": "UN_75",
+      "menuTitle": "75 Nickel, articles thereof",
+      "dialogCaption": "75 Nickel, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Metals: 75",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/75-metals.json"
+      }
+    },
+    "UN_76": {
+      "type": "UN_76",
+      "menuTitle": "76 Aluminium, articles thereof",
+      "dialogCaption": "76 Aluminium, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Metals: 76",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/76-metals.json"
+      }
+    },
+    "UN_78": {
+      "type": "UN_78",
+      "menuTitle": "78 Lead, articles thereof",
+      "dialogCaption": "78 Lead, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Metals: 78",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/78-metals.json"
+      }
+    },
+    "UN_79": {
+      "type": "UN_79",
+      "menuTitle": "79 Zinc, articles thereof",
+      "dialogCaption": "79 Zinc, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Metals: 79",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/79-metals.json"
+      }
+    },
+    "UN_80": {
+      "type": "UN_80",
+      "menuTitle": "80 Tin, articles thereof",
+      "dialogCaption": "80 Tin, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Metals: 80",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/80-metals.json"
+      }
+    },
+    "UN_81": {
+      "type": "UN_81",
+      "menuTitle": "81 N.E.C., cermets, articles thereof",
+      "dialogCaption": "81 N.E.C., cermets, articles thereof",
+      "chartContainerCaption": "UN Comtrade: Metals: 81",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/81-metals.json"
+      }
+    },
+    "UN_82": {
+      "type": "UN_82",
+      "menuTitle": "82 Tools, implements, cutlery",
+      "dialogCaption": "82 Tools, implements, cutlery",
+      "chartContainerCaption": "UN Comtrade: Metals: 82",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/82-metals.json"
+      }
+    },
+    "UN_83": {
+      "type": "UN_83",
+      "menuTitle": "83 Products of base metal",
+      "dialogCaption": "83 Products of base metal",
+      "chartContainerCaption": "UN Comtrade: Metals: 83",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/83-metals.json"
+      }
+    },
+
+    "UN_84": {
+      "type": "UN_84",
+      "menuTitle": "84 Nuclear reactors, boilers",
+      "dialogCaption": "84 Nuclear reactors, boilers",
+      "chartContainerCaption": "UN Comtrade: Machinery Electrical: 84",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/84-machinery-electrical.json"
+      }
+    },
+    "UN_85": {
+      "type": "UN_85",
+      "menuTitle": "85 Electrical machinery",
+      "dialogCaption": "85 Electrical machinery",
+      "chartContainerCaption": "UN Comtrade: Machinery Electrical: 85",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/85-machinery-electrical.json"
+      }
+    },
+
+    "UN_86": {
+      "type": "UN_86",
+      "menuTitle": "86 Railway, tramway locomotives",
+      "dialogCaption": "86 Railway, tramway locomotives",
+      "chartContainerCaption": "UN Comtrade: Transportation: 86",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/86-transportation.json"
+      }
+    },
+    "UN_87": {
+      "type": "UN_87",
+      "menuTitle": "87 Vehicles other than railway",
+      "dialogCaption": "87 Vehicles other than railway",
+      "chartContainerCaption": "UN Comtrade: Transportation: 87",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/87-transportation.json"
+      }
+    },
+    "UN_88": {
+      "type": "UN_88",
+      "menuTitle": "88 Aircraft, spacecraft",
+      "dialogCaption": "88 Aircraft, spacecraft",
+      "chartContainerCaption": "UN Comtrade: Transportation: 88",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/88-transportation.json"
+      }
+    },
+    "UN_89": {
+      "type": "UN_89",
+      "menuTitle": "89 Ships, boats, floating structures",
+      "dialogCaption": "89 Ships, boats, floating structures",
+      "chartContainerCaption": "UN Comtrade: Transportation: 89",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/89-transportation.json"
+      }
+    },
+
+    "UN_90": {
+      "type": "UN_90",
+      "menuTitle": "90 Optical, photographic",
+      "dialogCaption": "90 Optical, photographic",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 90",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/90-miscellaneous.json"
+      }
+    },
+    "UN_91": {
+      "type": "UN_91",
+      "menuTitle": "91 Clocks, watches",
+      "dialogCaption": "91 Clocks, watches",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 91",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/91-miscellaneous.json"
+      }
+    },
+    "UN_92": {
+      "type": "UN_92",
+      "menuTitle": "92 Musical instruments",
+      "dialogCaption": "92 Musical instruments",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 92",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/92-miscellaneous.json"
+      }
+    },
+    "UN_93": {
+      "type": "UN_93",
+      "menuTitle": "93 Arms, ammunition",
+      "dialogCaption": "93 Arms, ammunition",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 93",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/93-miscellaneous.json"
+      }
+    },
+    "UN_94": {
+      "type": "UN_94",
+      "menuTitle": "94 Furniture; bedding, mattresses",
+      "dialogCaption": "94 Furniture; bedding, mattresses",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 94",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/94-miscellaneous.json"
+      }
+    },
+    "UN_95": {
+      "type": "UN_95",
+      "menuTitle": "95 Toys, games, sports",
+      "dialogCaption": "95 Toys, games, sports",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 95",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/95-miscellaneous.json"
+      }
+    },
+    "UN_96": {
+      "type": "UN_96",
+      "menuTitle": "96 Manufactured articles",
+      "dialogCaption": "96 Manufactured articles",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 96",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/96-miscellaneous.json"
+      }
+    },
+    "UN_97": {
+      "type": "UN_97",
+      "menuTitle": "97 Works of art",
+      "dialogCaption": "97 Works of art",
+      "chartContainerCaption": "UN Comtrade: Miscellaneous: 97",
+      "dialogType" : "UnDialog5",
+      "addProps": "UN_00",
+      "dialogProps" : {
+        "twoURI": "./data/uncomtrade/97-miscellaneous.json"
+      }
+    }
+  }
+}

@@ -41,6 +41,10 @@ var _model = [{
   cn: 'item__eurostat',
   title: 'Insee: France Statistics'
 }, {
+  id: 'UN_COMTRADE',
+  cn: 'item__eurostat',
+  title: 'UN Comtrade'
+}, {
   id: 'QUANDL',
   isQuandl: true,
   title: 'Quandl Economic'

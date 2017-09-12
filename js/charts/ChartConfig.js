@@ -156,6 +156,10 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
       endOnTick: false,
       startOnTick: false
     });
+  },
+  getColor: function getColor(seriaIndex) {
+    var colors = ChartConfig.theme.colors;
+    return colors[seriaIndex % colors.length];
   }
 });
 
@@ -194,9 +198,8 @@ ChartConfig.theme = {
       }
     }
   },
-  colors: ['#7cb5ec',
-  //'#2f7ed8',
-  '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
+  colors: ['#7cb5ec', '#8abb5d', //'#90ed7d'
+  '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
   labels: {
     items: []
   },
@@ -303,6 +306,8 @@ ChartConfig.theme = {
     },
     series: {
       marker: {
+        radius: 3,
+        symbol: "circle",
         states: {
           hover: {
             fillColor: _Color2.default.MARKER_HOVER,

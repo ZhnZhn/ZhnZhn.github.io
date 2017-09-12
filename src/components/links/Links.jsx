@@ -3,6 +3,12 @@ import BaseComponent from '../zhn/Link'
 
 const CL_LINK = "descr__quandl-link";
 
+const S = {
+  BLUE: {
+    color: "#009ae5"
+  }
+};
+
 const Quandl = withProps({
   className: CL_LINK,
   href: "https://www.quandl.com/",
@@ -20,21 +26,28 @@ const Barchart = withProps({
 const  AlphaVantage = withProps({
   className: CL_LINK,
   href: "https://www.alphavantage.co",
-  style: {color: "#009ae5"},
+  style: S.BLUE,
   title: "Alpha Vantage"
 })(BaseComponent)
 
 const  Eurostat = withProps({
   className: CL_LINK,
   href: "http://ec.europa.eu/eurostat",
-  style: {color: "#009ae5"},
+  style: S.BLUE,
   title: "Eurostat"
+})(BaseComponent)
+
+const UnComtrade = withProps({
+  className: CL_LINK,
+  href: "https://comtrade.un.org",
+  style: S.BLUE,
+  title: "UN Comtrade"
 })(BaseComponent)
 
 const  Insee = withProps({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
-  style: {color: "#009ae5"},
+  style: S.BLUE,
   title: "Insee: France Statistics"
 })(BaseComponent)
 
@@ -43,5 +56,6 @@ export default {
   Barchart,
   AlphaVantage,
   Eurostat,
+  UnComtrade,
   Insee
 };

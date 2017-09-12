@@ -13,14 +13,14 @@
 
 .with-scroll::-webkit-scrollbar-track-piece {
   width: 2px;
-  background-color: #232f3b;
+  background-color: #1b2836;
 
   /* background-color:#333333; */
 }
 
 .with-scroll::-webkit-scrollbar-thumb {
-	width: 3px;
-	height: 50px;
+  width: 3px;
+  height: 50px;
 	background-color: #8BC34A;
 	/*background-color:#909090;*/
   border-radius: 2px;

@@ -24,7 +24,8 @@ var STYLE = {
     width: '150px',
 
     backgroundColor: 'rgb(77, 77, 77)',
-    border: '2px solid rgb(35, 47, 59)',
+    //border : '2px solid rgb(35, 47, 59)',
+    border: '2px solid #1b2836',
     borderRadius: '5px',
     boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 5px',
     padding: '10px',

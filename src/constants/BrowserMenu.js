@@ -55,8 +55,8 @@ const menuQuandl = [
   },{
     caption: 'Central Banks',
     items: [
-      { id : Quandl.BANK_CANADA, isNew: true },
-      { id : Quandl.BANK_SWISS, isNew: true }
+      { id : Quandl.BANK_CANADA },
+      { id : Quandl.BANK_SWISS }
     ]
   },{
     caption : 'Inflation & Prices',
@@ -72,8 +72,8 @@ const menuQuandl = [
      items : [
        { id : Quandl.COMMODITY_TRADE },
        { id : Quandl.COMMODITY_PRICE },
-       { id : Quandl.WIKI_COMMODITY_PRICE, isNew : true },
-       { id : Quandl.LME, isNew : true },
+       { id : Quandl.WIKI_COMMODITY_PRICE },
+       { id : Quandl.LME },
        { id : Quandl.PETROLEUM_PRICES },
        { id : Quandl.JODI_WORLD_GAS },
        { id : Quandl.JODI_WORLD_OIL },
@@ -95,8 +95,8 @@ const menuQuandl = [
     ]
   },{
     caption : 'Real Estate',
-    items : [      
-      { id : Quandl.ZILLOW_REAL_ESTATE_2, isNew: true },
+    items : [
+      { id : Quandl.ZILLOW_REAL_ESTATE_2 },
       { id : Quandl.FMAC }
     ]
   }

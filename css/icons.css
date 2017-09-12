@@ -12,7 +12,7 @@
   width: 160px;
   height: 64px;
   margin-right: 32px;
-  border: 3px solid #232f3b;
+  border: 3px solid #1b2836;
   padding: 14px 16px 10px;
   transition: border-color, border-width, fill 200ms ease-out;
   stroke: #e95424;
@@ -29,7 +29,7 @@
   width: 70px;
   height: 70px;
   background-color: black;
-  border: 4px solid #232f3b;
+  border: 4px solid #1b2836;
   border-radius: 50%;
   transition: border-color, background-color, border-width 200ms ease-out;
   fill: #4d4d4d;
@@ -48,7 +48,7 @@
   display: inline-block;
   width: 74px;
   height: 74px;
-  border: 4px solid #232f3b;
+  border: 4px solid #1b2836;
   border-radius: 50%;
   padding: 6px;
   margin-left: 32px;
@@ -70,7 +70,7 @@
   width: 192px;
   height: 64px;
   margin-left: 32px;
-  border: 3px solid #232f3b;
+  border: 3px solid #1b2836;
   transition: border-color, border-width 200ms ease-out;
   fill: #eeeaea;
 }
@@ -87,7 +87,7 @@
   font-weight: normal;
   color: #009ae5;
   padding: 6px 16px;
-  border: 3px solid #232f3b;
+  border: 3px solid #1b2836;
   text-decoration: none;
   transition: color, border-color, border-width 200ms ease-out;
 }

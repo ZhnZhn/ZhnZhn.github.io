@@ -7,6 +7,8 @@ import fnType3 from '../creaters/type3'
 import fnType4 from '../creaters/type4'
 import fnType5 from '../creaters/type5'
 
+import fnUn5 from '../creaters/un5'
+
 import fnFutures3 from '../creaters/futures3'
 import fnFuturesWiki from '../creaters/futuresWiki'
 
@@ -29,6 +31,8 @@ const _r = {
   DialogEurostat: fnEuroStat,
   DialogEurostat2: fnEuroStat2,
   DialogEurostat3: fnEuroStat3,
+
+  UnDialog5: fnUn5
 };
 
 const RouterLoadFn = {

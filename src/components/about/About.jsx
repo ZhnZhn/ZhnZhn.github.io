@@ -145,6 +145,10 @@ class About extends Component {
            <span style={S.BLUE}>
              ,&nbsp;
            </span>
+           <Link.UnComtrade />
+           <span style={S.BLUE}>
+             ,&nbsp;
+           </span>
            <Link.Insee/>
            <span style={S.BLACK}>
              &nbsp;(Https Proxy for CORS).

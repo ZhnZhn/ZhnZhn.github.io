@@ -20,6 +20,10 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -36,40 +40,28 @@ var _Interact = require('../../utils/Interact');
 
 var _Interact2 = _interopRequireDefault(_Interact);
 
+var _Dialog = require('./Dialog.Style');
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
+var CL = {
+  SHOWING: 'show-popup',
+  NOT_SELECTED: 'not-selected'
+};
+
+var S = (0, _extends3.default)({}, _Dialog2.default, {
+  ROOT_DIV_DRAG: {
     position: 'absolute',
     top: '30px',
     left: '50px',
-    backgroundColor: '#4D4D4D',
-    border: 'solid 2px #232F3B',
-    borderRadius: '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',
     zIndex: 10
   },
-  captionDiv: {
-    padding: '5px',
-    color: 'rgba(164, 135, 212,1)',
-    backgroundColor: '#232F3B',
-    textAlign: 'center',
-    fontSize: '18px'
-  },
-  childrenDiv: {
+  CHILDREN_DIV: {
     cursor: 'default'
-  },
-  commandDiv: {
-    cursor: 'default',
-    float: 'right',
-    marginTop: '8px',
-    marginBottom: '10px',
-    marginRight: '4px'
-  },
-  btRoot: {
-    color: 'rgb(35, 47, 59)'
   }
-};
+});
 
 var DraggableDialog = function (_Component) {
   (0, _inherits3.default)(DraggableDialog, _Component);
@@ -88,17 +80,17 @@ var DraggableDialog = function (_Component) {
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DraggableDialog.__proto__ || Object.getPrototypeOf(DraggableDialog)).call.apply(_ref, [this].concat(args))), _this), _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
       return _react2.default.createElement(
         'div',
-        { style: styles.commandDiv },
+        { style: S.COMMAND_DIV },
         commandButtons,
         typeof onShowChart === 'function' && _react2.default.createElement(_FlatButton2.default, {
-          rootStyle: styles.btRoot,
+          rootStyle: S.BT_ROOT,
           caption: 'Show',
           title: 'Show Pane Container'
           //accessKey="s"
           , onClick: onShowChart
         }),
         _react2.default.createElement(_FlatButton2.default, {
-          rootStyle: styles.btRoot,
+          rootStyle: S.BT_ROOT,
           caption: 'Close',
           title: 'Close Draggable Dialog'
           //accessKey="c"
@@ -126,8 +118,8 @@ var DraggableDialog = function (_Component) {
           onShowChart = _props.onShowChart,
           onFront = _props.onFront,
           onClose = _props.onClose,
-          _styleShow = isShow ? { display: 'block' } : { display: 'none' },
-          _classShow = isShow ? 'show-popup' : undefined;
+          _styleShow = isShow ? S.SHOW : S.HIDE,
+          _classShow = isShow ? CL.SHOWING : undefined;
 
       return _react2.default.createElement(
         'div',
@@ -136,22 +128,22 @@ var DraggableDialog = function (_Component) {
             return _this2.rootDivEl = c;
           },
           className: _classShow,
-          style: Object.assign({}, styles.rootDiv, _styleShow),
+          style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_DRAG, _styleShow),
           onClick: onFront
         },
         _react2.default.createElement(
           'div',
-          { style: styles.captionDiv },
+          { style: S.CAPTION_DIV },
           _react2.default.createElement(
             'span',
-            { className: 'not-selected' },
+            { className: CL.NOT_SELECTED },
             caption
           ),
           _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
         ),
         _react2.default.createElement(
           'div',
-          { style: styles.childrenDiv },
+          { style: S.CHILDREN_DIV },
           children
         ),
         this._renderCommandButton(commandButtons, onShowChart, onClose)
