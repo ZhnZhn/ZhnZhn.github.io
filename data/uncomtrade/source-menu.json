@@ -174,7 +174,7 @@
         "valueFn": "RPrefixOneTwo",
         "valueFnPrefix": "UN",
         "loadId": "UN",
-        "dataSource": "UN Commodity Trade Statistics"
+        "dataSource": "UN Comtrade, DESA/UNSD"
       }
     },
 

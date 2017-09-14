@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -81,6 +85,7 @@ var OpenClose = function (_Component) {
     value: function render() {
       var _props = this.props,
           caption = _props.caption,
+          rootStyle = _props.rootStyle,
           children = _props.children,
           _state = this.state,
           isOpen = _state.isOpen,
@@ -107,7 +112,7 @@ var OpenClose = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: styles.rootDiv },
+        { style: (0, _extends3.default)({}, styles.rootDiv, rootStyle) },
         _react2.default.createElement(
           'div',
           { className: 'not-selected', onClick: this._handleClickOpenClose },
@@ -146,4 +151,4 @@ var OpenClose = function (_Component) {
 }(_react.Component);
 
 exports.default = OpenClose;
-//# sourceMappingURL=OpenClose.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\OpenClose.js.map

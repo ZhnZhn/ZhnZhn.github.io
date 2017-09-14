@@ -5,7 +5,11 @@ const CL_LINK = "descr__quandl-link";
 
 const S = {
   BLUE: {
+    //whiteSpace: "nowrap",
     color: "#009ae5"
+  },
+  BROWN: {
+    color: "#bd1010"
   }
 };
 
@@ -19,7 +23,7 @@ const Quandl = withProps({
 const Barchart = withProps({
   className: CL_LINK,
   href: "https://www.barchartmarketdata.com",
-  style: {color: "#bd1010"},
+  style: S.BROWN,
   title: "Barchart Market Data"
 })(BaseComponent)
 

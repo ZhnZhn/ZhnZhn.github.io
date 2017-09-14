@@ -127,9 +127,10 @@ var _unmountWithLoadOptions = function _unmountWithLoadOptions() {
 };
 
 var withLoadOptions = function withLoadOptions(target) {
-  var _proto = target.prototype;
-  _proto._handlerWithLoadOptions = _handlerWithLoadOptions;
-  _proto._unmountWithLoadOptions = _unmountWithLoadOptions;
+  Object.assign(target.prototype, {
+    _handlerWithLoadOptions: _handlerWithLoadOptions,
+    _unmountWithLoadOptions: _unmountWithLoadOptions
+  });
 };
 
 exports.default = withLoadOptions;

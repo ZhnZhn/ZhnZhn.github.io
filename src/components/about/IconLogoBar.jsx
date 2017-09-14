@@ -5,6 +5,7 @@ import IconGitHub from './IconGitHub';
 import IconReact from './IconReact';
 import IconHighcharts from './IconHighcharts';
 import IconEurostat from './IconEurostat';
+import IconUnComtrade from './IconUnComtrade';
 
 const S = {
   ROOT : {
@@ -23,6 +24,7 @@ const IconLogoBar = (props) => (
      />
      <IconReact />
      <IconHighcharts />
+     <IconUnComtrade />
      <IconEurostat />
   </div>
 );

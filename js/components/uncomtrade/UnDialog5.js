@@ -21,7 +21,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
-//import RowCheckBox from '../dialogs/RowCheckBox';
 
 var _react = require('react');
 
@@ -72,8 +71,6 @@ var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
 var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 var TRADE_FLOW = [{ caption: "Export Value", value: { rg: 2 } }, { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } }, { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } }, { caption: "Import Value", value: { rg: 1 } }, { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } }, { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }];
 

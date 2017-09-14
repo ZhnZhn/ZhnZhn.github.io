@@ -3,7 +3,7 @@ const _createType2WithToolbar = function(props, withoutDate){
 
   if (typeof props.onClickInfo === 'function') {
      toolbarButtons.push({
-       caption: 'I', title: 'Information About Dataset',
+       caption: 'I', title: 'Description About Dataset',
        onClick: this._clickInfoWithToolbar.bind(this) })
   }
   if (!withoutDate) {
@@ -26,10 +26,11 @@ const _clickDateWithToolbar = function(){
 }
 
 const withToolbar = (target) => {
-  const _proto = target.prototype;
-  _proto._createType2WithToolbar = _createType2WithToolbar
-  _proto._clickInfoWithToolbar = _clickInfoWithToolbar
-  _proto._clickDateWithToolbar = _clickDateWithToolbar
+  Object.assign(target.prototype, {
+    _createType2WithToolbar,
+    _clickInfoWithToolbar,
+    _clickDateWithToolbar
+  })  
 }
 
 export default withToolbar

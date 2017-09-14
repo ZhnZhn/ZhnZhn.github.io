@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IconEurostat = (props) => (
+const IconEurostat = () => (
   <a
     className="icon__eurostat"
     title="Eurostat"

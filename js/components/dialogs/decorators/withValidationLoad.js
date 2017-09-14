@@ -30,10 +30,11 @@ var _updateValidationMessages = function _updateValidationMessages(validationMes
 };
 
 var withValidationLoad = function withValidationLoad(target) {
-  var _proto = target.prototype;
-  _proto._handleWithValidationLoad = _handleWithValidationLoad;
-  _proto._handleWithValidationClose = _handleWithValidationClose;
-  _proto._updateValidationMessages = _updateValidationMessages;
+  Object.assign(target.prototype, {
+    _handleWithValidationLoad: _handleWithValidationLoad,
+    _handleWithValidationClose: _handleWithValidationClose,
+    _updateValidationMessages: _updateValidationMessages
+  });
 };
 
 exports.default = withValidationLoad;

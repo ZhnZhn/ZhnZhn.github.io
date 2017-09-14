@@ -37,6 +37,10 @@ var _fnMsg404 = function _fnMsg404() {
   return '404: Resource is not existed';
 };
 
+var _fnMsg429 = function _fnMsg429() {
+  return '429: Too many request in a given amount of time (rate limiting)';
+};
+
 var _crErr = function _crErr(message) {
   var errCaption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : C.REQ_ERR;
 
@@ -73,6 +77,8 @@ var _fFetch = function _fFetch(propName, type) {
         throw _crErr(_fnMsg400(option));
       } else if (status === 404) {
         throw _crErr(_fnMsg404(option));
+      } else if (status === 429) {
+        throw _crErr(_fnMsg429(option));
       } else if (status > 400 && status < 500) {
         throw _crErr(status + ': ' + statusText);
       } else if (status >= 500 && status < 600) {

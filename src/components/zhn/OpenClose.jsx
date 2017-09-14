@@ -43,7 +43,7 @@ class OpenClose extends Component {
   }
 
   render(){
-    const { caption, children } = this.props
+    const { caption, rootStyle, children } = this.props
         , {
             isOpen,
             pathOpen, fillOpen,
@@ -63,7 +63,7 @@ class OpenClose extends Component {
     }
 
     return (
-      <div style={styles.rootDiv}>
+      <div style={{...styles.rootDiv, ...rootStyle}}>
         <div className="not-selected" onClick={this._handleClickOpenClose}>
           <div style={styles.rootSvg}>
              <svg

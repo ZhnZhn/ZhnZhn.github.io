@@ -20,6 +20,10 @@ const _fnMsg404 = () => {
   return '404: Resource is not existed';
 };
 
+const _fnMsg429 = () => {
+  return '429: Too many request in a given amount of time (rate limiting)';
+};
+
 const _crErr = (message, errCaption=C.REQ_ERR) => {
   return { errCaption, message };
 };
@@ -53,6 +57,8 @@ const _fFetch = (propName, type) => function({
          throw _crErr(_fnMsg400(option));
       } else if (status === 404) {
          throw _crErr(_fnMsg404(option));
+      } else if (status === 429) {
+         throw _crErr(_fnMsg429(option));
       } else if (status>400 && status<500){
          throw _crErr(`${status}: ${statusText}`);
       } else if (status>=500 && status<600){

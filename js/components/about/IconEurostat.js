@@ -10,7 +10,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var IconEurostat = function IconEurostat(props) {
+var IconEurostat = function IconEurostat() {
   return _react2.default.createElement(
     "a",
     {
@@ -23,4 +23,4 @@ var IconEurostat = function IconEurostat(props) {
 };
 
 exports.default = IconEurostat;
-//# sourceMappingURL=IconEurostat.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconEurostat.js.map

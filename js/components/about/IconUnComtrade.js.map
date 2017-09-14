@@ -1,0 +1,15 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\IconUnComtrade.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconUnComtrade.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "A",
+  "marginLeft",
+  "marginRight",
+  "IconUnComtrade"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,KAAG;AACDC,gBAAY,MADX;AAEDC,iBAAa;AAFZ;AADK,CAAV;;AAOA,IAAMC,iBAAiB,SAAjBA,cAAiB;AAAA,SACrB;AAAA;AAAA;AACE,iBAAU,gBADZ;AAEE,aAAOJ,EAAEC,CAFX;AAGE,aAAM,aAHR;AAIE,YAAK;AAJP;AAAA;AAAA,GADqB;AAAA,CAAvB;;kBAWeG,c"
+}

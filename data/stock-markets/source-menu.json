@@ -5,21 +5,21 @@
         { "id": "SM_EURONEXT" },
         { "id": "SM_TOKYO" },
         { "id": "SM_WIKI" },
-        { "id": "SM_FREE_US_FUNDAMENTALS" , "isNew": true },
+        { "id": "SM_FREE_US_FUNDAMENTALS" },
         { "id": "SM_NIKKEI" },
         { "id": "SM_UNICORN_RESEARCH" }
       ]
     },{
       "caption": "Barchart",
       "items" : [
-        { "id": "SM_B_STOCK", "isNew": true }
+        { "id": "SM_B_STOCK" }
       ]
     },{
       "caption": "Alpha Vantage",
       "items" : [
-        { "id": "SM_A_INDICATOR", "isNew": true },
-        { "id": "SM_A_INTRADAY", "isNew": true },
-        { "id": "SM_A_SECTOR", "isNew": true }
+        { "id": "SM_A_INDICATOR" },
+        { "id": "SM_A_INTRADAY" },
+        { "id": "SM_A_SECTOR" }
       ]
     }
   ],

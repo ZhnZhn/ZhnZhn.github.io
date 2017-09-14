@@ -8,7 +8,7 @@ var _createType2WithToolbar = function _createType2WithToolbar(props, withoutDat
 
   if (typeof props.onClickInfo === 'function') {
     toolbarButtons.push({
-      caption: 'I', title: 'Information About Dataset',
+      caption: 'I', title: 'Description About Dataset',
       onClick: this._clickInfoWithToolbar.bind(this) });
   }
   if (!withoutDate) {
@@ -34,10 +34,11 @@ var _clickDateWithToolbar = function _clickDateWithToolbar() {
 };
 
 var withToolbar = function withToolbar(target) {
-  var _proto = target.prototype;
-  _proto._createType2WithToolbar = _createType2WithToolbar;
-  _proto._clickInfoWithToolbar = _clickInfoWithToolbar;
-  _proto._clickDateWithToolbar = _clickDateWithToolbar;
+  Object.assign(target.prototype, {
+    _createType2WithToolbar: _createType2WithToolbar,
+    _clickInfoWithToolbar: _clickInfoWithToolbar,
+    _clickDateWithToolbar: _clickDateWithToolbar
+  });
 };
 
 exports.default = withToolbar;

@@ -109,9 +109,10 @@ const _unmountWithLoadOptions = function(){
 }
 
 const withLoadOptions = (target) => {
-  const _proto = target.prototype;
-  _proto._handlerWithLoadOptions = _handlerWithLoadOptions
-  _proto._unmountWithLoadOptions = _unmountWithLoadOptions
+  Object.assign(target.prototype, {
+    _handlerWithLoadOptions,
+    _unmountWithLoadOptions
+  })  
 }
 
 export default withLoadOptions

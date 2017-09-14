@@ -28,6 +28,10 @@ var _IconEurostat = require('./IconEurostat');
 
 var _IconEurostat2 = _interopRequireDefault(_IconEurostat);
 
+var _IconUnComtrade = require('./IconUnComtrade');
+
+var _IconUnComtrade2 = _interopRequireDefault(_IconUnComtrade);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
@@ -49,9 +53,10 @@ var IconLogoBar = function IconLogoBar(props) {
     }),
     _react2.default.createElement(_IconReact2.default, null),
     _react2.default.createElement(_IconHighcharts2.default, null),
+    _react2.default.createElement(_IconUnComtrade2.default, null),
     _react2.default.createElement(_IconEurostat2.default, null)
   );
 };
 
 exports.default = IconLogoBar;
-//# sourceMappingURL=IconLogoBar.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconLogoBar.js.map

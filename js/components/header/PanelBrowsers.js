@@ -33,6 +33,10 @@ var _model = [{
   cn: 'item__browser',
   title: 'Stock Markets'
 }, {
+  id: 'UN_COMTRADE',
+  cn: 'item__eurostat',
+  title: 'UN Comtrade'
+}, {
   id: 'EUROSTAT',
   cn: 'item__eurostat',
   title: 'Eurostat'
@@ -40,10 +44,6 @@ var _model = [{
   id: 'FRANCE_STATISTICS',
   cn: 'item__eurostat',
   title: 'Insee: France Statistics'
-}, {
-  id: 'UN_COMTRADE',
-  cn: 'item__eurostat',
-  title: 'UN Comtrade'
 }, {
   id: 'QUANDL',
   isQuandl: true,

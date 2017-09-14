@@ -11,12 +11,18 @@ var _Msg2 = _interopRequireDefault(_Msg);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var M = _Msg2.default.Alert;
+
 var C = {
   FETCH: 'fetch',
-  CODE_503: 'code 503'
+  CODE_503: 'code 503',
+  CODE_429: '429'
 };
 
-var _fnAddAlert = function _fnAddAlert(option, caption, descr) {
+var _fnAddAlert = function _fnAddAlert(option, msg) {
+  var caption = msg.caption,
+      descr = msg.descr;
+
   Object.assign(option, {
     alertCaption: caption,
     alertDescr: descr
@@ -26,9 +32,9 @@ var _fnAddAlert = function _fnAddAlert(option, caption, descr) {
 var _fnAddDfAlert = function _fnAddDfAlert(option, error) {
   var errCaption = error.errCaption,
       message = error.message,
-      _caption = error.errCaption ? errCaption : _Msg2.default.Alert.RUNTIME_ERROR.caption;
+      caption = error.errCaption ? errCaption : M.RUNTIME_ERROR.caption;
 
-  _fnAddAlert(option, _caption, message);
+  _fnAddAlert(option, { caption: caption, descr: message });
 };
 
 var fnCatch = exports.fnCatch = function fnCatch(_ref) {
@@ -38,9 +44,11 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
 
   if (error instanceof TypeError) {
     if (error.message.indexOf(C.CODE_503) !== -1) {
-      _fnAddAlert(option, _Msg2.default.Alert.SERVICE_UNAVAILABLE.caption, _Msg2.default.Alert.SERVICE_UNAVAILABLE.descr);
+      _fnAddAlert(option, M.SERVICE_UNAVAILABLE);
+    } else if (error.message.indexOf(C.CODE_429) !== -1) {
+      _fnAddAlert(option, M.TOO_MANY_REQUEST);
     } else if (error.message.indexOf(C.FETCH) !== -1) {
-      _fnAddAlert(option, _Msg2.default.Alert.NETWORK_ERROR.caption, _Msg2.default.Alert.NETWORK_ERROR.descr);
+      _fnAddAlert(option, M.NETWORK_ERROR);
     } else {
       _fnAddDfAlert(option, error);
     }

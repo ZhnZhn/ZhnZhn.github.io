@@ -54,42 +54,40 @@
       }
     },
 
+    "FS_TRADE_PRODUCT": {
+      "type": "FS_TRADE_PRODUCT",
+      "dialogProps": {
+        "descrUrl": "./data/france-statistics/insee.html",
+        "oneCaption": "Product:",
+        "oneJsonProp": "groups",
+        "twoCaption": "Trade:",
+        "nInitFromDate": 12,
+        "loadId": "FS",
+        "valueFn": "RTwo",
+        "columnName": "Value",
+        "dataSource": "INSEE"
+      }
+    },
     "FS_TRADE_PRODUCT_A17" : {
-      "type" : "FS_TRADE_PRODUCT_A17",
-      "menuTitle" : "Product Level A17",
-      "dialogCaption" : "Foreign Trade of Product Level A17",
-      "chartContainerCaption" : "Insee: France Statistics",
-      "dialogType" : "DialogType4A",
-      "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Product:",
-        "oneURI" : "./data/france-statistics/trade-product-a17.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Trade:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+      "type": "FS_TRADE_PRODUCT_A17",
+      "menuTitle": "Product Level A17",
+      "dialogCaption": "Foreign Trade of Product Level A17",
+      "chartContainerCaption": "Insee: France Statistics",
+      "dialogType": "DialogType4A",
+      "addProps": "FS_TRADE_PRODUCT",
+      "dialogProps": {
+        "oneURI": "./data/france-statistics/trade-product-a17.json"
       }
     },
     "FS_TRADE_PRODUCT_A38" : {
-      "type" : "FS_TRADE_PRODUCT_A38",
+      "type": "FS_TRADE_PRODUCT_A38",
       "menuTitle" : "Product Level A38",
       "dialogCaption" : "Foreign Trade of Product Level A38",
       "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
+      "addProps": "FS_TRADE_PRODUCT",
       "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Product:",
-        "oneURI" : "./data/france-statistics/trade-product-a38.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Trade:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+        "oneURI" : "./data/france-statistics/trade-product-a38.json"
       }
     },
     "FS_TRADE_AREA" : {
@@ -111,60 +109,51 @@
         "dataSource" : "INSEE"
       }
     },
-    "FS_TRADE_EUROPE" : {
-      "type" : "FS_TRADE_EUROPE",
-      "menuTitle" : "Europe",
-      "dialogCaption" : "Foreign Trade of Europe",
-      "chartContainerCaption" : "Insee: France Statistics",
-      "dialogType" : "DialogType4A",
+    "FS_TRADE": {
+      "type": "FS_TRADE",
       "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Trade:",
-        "oneURI" : "./data/france-statistics/trade-countries.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Country:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+        "descrUrl": "./data/france-statistics/insee.html",
+        "oneCaption": "Trade:",
+        "oneJsonProp": "groups",
+        "twoCaption": "Country:",
+        "nInitFromDate": 12,
+        "loadId": "FS",
+        "valueFn": "RTwo",
+        "columnName": "Value",
+        "dataSource": "INSEE"
+      }
+    },
+    "FS_TRADE_EUROPE" : {
+      "type": "FS_TRADE_EUROPE",
+      "menuTitle": "Europe",
+      "dialogCaption": "Foreign Trade of Europe",
+      "chartContainerCaption": "Insee: France Statistics",
+      "dialogType": "DialogType4A",
+      "addProps": "FS_TRADE",
+      "dialogProps" : {
+        "oneURI" : "./data/france-statistics/trade-countries.json"
       }
     },
     "FS_TRADE_AFRICA" : {
-      "type" : "FS_TRADE_AFRICA",
-      "menuTitle" : "Africa",
-      "dialogCaption" : "Foreign Trade of Africa",
-      "chartContainerCaption" : "Insee: France Statistics",
-      "dialogType" : "DialogType4A",
-      "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Country:",
-        "oneURI" : "./data/france-statistics/trade-africa.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Trade:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+      "type": "FS_TRADE_AFRICA",
+      "menuTitle": "Africa",
+      "dialogCaption": "Foreign Trade of Africa",
+      "chartContainerCaption": "Insee: France Statistics",
+      "dialogType": "DialogType4A",
+      "addProps": "FS_TRADE",
+      "dialogProps": {
+        "oneURI": "./data/france-statistics/trade-africa.json"
       }
     },
     "FS_TRADE_AMERICA" : {
-      "type" : "FS_TRADE_AMERICA",
-      "menuTitle" : "America",
-      "dialogCaption" : "Foreign Trade of America",
-      "chartContainerCaption" : "Insee: France Statistics",
-      "dialogType" : "DialogType4A",
-      "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Country:",
-        "oneURI" : "./data/france-statistics/trade-america.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Trade:",
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+      "type": "FS_TRADE_AMERICA",
+      "menuTitle": "America",
+      "dialogCaption": "Foreign Trade of America",
+      "chartContainerCaption": "Insee: France Statistics",
+      "dialogType": "DialogType4A",
+      "addProps": "FS_TRADE",
+      "dialogProps": {
+        "oneURI": "./data/france-statistics/trade-america.json"
       }
     },
     "FS_TRADE_MIDDLE_EAST" : {
@@ -173,17 +162,9 @@
       "dialogCaption" : "Foreign Trade of Middle East",
       "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
+      "addProps": "FS_TRADE",
       "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Country:",
-        "oneURI" : "./data/france-statistics/trade-middle-east.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Trade:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+        "oneURI" : "./data/france-statistics/trade-middle-east.json"
       }
     },
     "FS_TRADE_ASIA_OCEANIA" : {
@@ -192,30 +173,17 @@
       "dialogCaption" : "Foreign Trade of Asia & Oceania",
       "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
+      "addProps": "FS_TRADE",
       "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Country:",
-        "oneURI" : "./data/france-statistics/trade-asia-oceania.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Trade:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+        "oneURI" : "./data/france-statistics/trade-asia-oceania.json"
       }
     },
 
-    "FS_PRICE_AGRI" : {
-      "type" : "FS_PRICE_AGRI",
-      "menuTitle" : "Agriculture Producer (base 2010)",
-      "dialogCaption" : "Agriculture Producer",
-      "chartContainerCaption" : "Insee: France Statistics",
-      "dialogType" : "DialogType4A",
-      "dialogProps" : {
+    "FS_PRICE": {
+      "type": "FS_PRICE",
+      "dialogProps": {
         "descrUrl" : "./data/france-statistics/insee.html",
         "oneCaption" : "Group:",
-        "oneURI" : "./data/france-statistics/agriculture-indices.json",
         "oneJsonProp" : "groups",
         "twoCaption" : "Item:",
         "nInitFromDate" : 12,
@@ -223,6 +191,17 @@
         "valueFn" : "RTwo",
         "columnName" : "Value",
         "dataSource" : "INSEE"
+      }
+    },
+    "FS_PRICE_AGRI" : {
+      "type" : "FS_PRICE_AGRI",
+      "menuTitle" : "Agriculture Producer (base 2010)",
+      "dialogCaption" : "Agriculture Producer",
+      "chartContainerCaption" : "Insee: France Statistics",
+      "dialogType" : "DialogType4A",
+      "addProps": "FS_PRICE",
+      "dialogProps" : {
+        "oneURI" : "./data/france-statistics/agriculture-indices.json"
       }
     },
     "FS_PRICE_FOOD" : {
@@ -231,17 +210,9 @@
       "dialogCaption" : "Wholesale Food Price Indices",
       "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
+      "addProps": "FS_PRICE",
       "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Group:",
-        "oneURI" : "./data/france-statistics/wholesale-indices.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Item:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+        "oneURI" : "./data/france-statistics/wholesale-indices.json"
       }
     },
     "FS_PRICE_RETAIL" : {
@@ -250,71 +221,54 @@
       "dialogCaption" : "Average Retail Prices",
       "chartContainerCaption" : "Insee: France Statistics",
       "dialogType" : "DialogType4A",
+      "addProps": "FS_PRICE",
       "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "oneCaption" : "Group:",
-        "oneURI" : "./data/france-statistics/retail-prices.json",
-        "oneJsonProp" : "groups",
-        "twoCaption" : "Item:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "RTwo",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+        "oneURI" : "./data/france-statistics/retail-prices.json"
       }
     },
-    "FS_CULTURE" : {
-      "type" : "FS_CULTURE",
-      "menuTitle" : "Culture",
-      "dialogCaption" : "Society - Culture",
-      "chartContainerCaption" : "Insee: France Statistics Culture",
-      "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "optionURI" : "./data/france-statistics/society-culture.json",
-        "optionsJsonProp" : "items",
-        "optionNames" : "Items",
-        "itemCaption" : "Item:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "ROne",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+
+    "FS_SOCIETY": {
+      "type": "FS_SOCIETY",
+      "dialogProps": {
+        "descrUrl": "./data/france-statistics/insee.html",
+        "optionsJsonProp": "items",
+        "optionNames": "Items",
+        "itemCaption": "Item:",
+        "nInitFromDate": 12,
+        "loadId": "FS",
+        "valueFn": "ROne",
+        "columnName": "Value",
+        "dataSource": "INSEE"
       }
     },
-    "FS_CAR_REGISTRATION" : {
-      "type" : "FS_CAR_REGISTRATION",
-      "menuTitle" : "Cars Registration",
-      "dialogCaption" : "Cars Registration",
-      "chartContainerCaption" : "Insee: Cars Registration",
-      "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "optionURI" : "./data/france-statistics/cars-registration.json",
-        "optionsJsonProp" : "items",
-        "optionNames" : "Items",
-        "itemCaption" : "Item:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "ROne",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+    "FS_CULTURE": {
+      "type": "FS_CULTURE",
+      "menuTitle": "Culture",
+      "dialogCaption": "Society - Culture",
+      "chartContainerCaption": "Insee: France Statistics Culture",
+      "addProps": "FS_SOCIETY",
+      "dialogProps": {
+        "optionURI": "./data/france-statistics/society-culture.json"
       }
     },
-    "FS_MIN_WAGE" : {
-      "type" : "FS_MIN_WAGE",
-      "menuTitle" : "Guaranteed Min. Wages",
-      "dialogCaption" : "Guaranteed Min. Wages",
-      "chartContainerCaption" : "Insee: Guaranteed Minimum Wages",
-      "dialogProps" : {
-        "descrUrl" : "./data/france-statistics/insee.html",
-        "optionURI" : "./data/france-statistics/min-wages.json",
-        "optionsJsonProp" : "items",
-        "optionNames" : "Items",
-        "itemCaption" : "Item:",
-        "nInitFromDate" : 12,
-        "loadId" : "FS",
-        "valueFn" : "ROne",
-        "columnName" : "Value",
-        "dataSource" : "INSEE"
+    "FS_CAR_REGISTRATION": {
+      "type": "FS_CAR_REGISTRATION",
+      "menuTitle": "Cars Registration",
+      "dialogCaption": "Cars Registration",
+      "chartContainerCaption": "Insee: Cars Registration",
+      "addProps": "FS_SOCIETY",
+      "dialogProps": {
+        "optionURI": "./data/france-statistics/cars-registration.json"
+      }
+    },
+    "FS_MIN_WAGE": {
+      "type": "FS_MIN_WAGE",
+      "menuTitle": "Guaranteed Min. Wages",
+      "dialogCaption": "Guaranteed Min. Wages",
+      "chartContainerCaption": "Insee: Guaranteed Minimum Wages",
+      "addProps": "FS_SOCIETY",
+      "dialogProps": {
+        "optionURI": "./data/france-statistics/min-wages.json"
       }
     }
   }

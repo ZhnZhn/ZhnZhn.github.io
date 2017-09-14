@@ -40,6 +40,10 @@ var _BrowserCaption = require('../zhn/BrowserCaption');
 
 var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
 
+var _OpenClose = require('../zhn/OpenClose');
+
+var _OpenClose2 = _interopRequireDefault(_OpenClose);
+
 var _TwitterLink = require('./TwitterLink');
 
 var _TwitterLink2 = _interopRequireDefault(_TwitterLink);
@@ -74,6 +78,12 @@ var S = {
     lineHeight: 1.4,
     color: 'gray',
     fontWeight: 'bold'
+  },
+  LINE_HEIGHT: {
+    lineHeight: 1.8
+  },
+  MORE: {
+    lineHeight: 1.4
   },
   P_BOTTOM: {
     marginBottom: '1em'
@@ -203,7 +213,7 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              null,
+              { style: S.LINE_HEIGHT },
               _react2.default.createElement(_Links2.default.Quandl, null),
               _react2.default.createElement(
                 'span',
@@ -214,7 +224,7 @@ var About = function (_Component) {
               _react2.default.createElement(
                 'span',
                 { style: S.BLACK },
-                '\xA0(Key),\xA0'
+                '\xA0(Key),\u2002'
               ),
               _react2.default.createElement(_Links2.default.AlphaVantage, null),
               _react2.default.createElement(
@@ -225,18 +235,18 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: S.P_BOTTOM },
+              { style: (0, _extends3.default)({}, S.P_BOTTOM, S.LINE_HEIGHT) },
               _react2.default.createElement(_Links2.default.Eurostat, null),
               _react2.default.createElement(
                 'span',
                 { style: S.BLUE },
-                ',\xA0'
+                ',\u2002'
               ),
               _react2.default.createElement(_Links2.default.UnComtrade, null),
               _react2.default.createElement(
                 'span',
                 { style: S.BLUE },
-                ',\xA0'
+                ',\u2002'
               ),
               _react2.default.createElement(_Links2.default.Insee, null),
               _react2.default.createElement(
@@ -305,102 +315,110 @@ var About = function (_Component) {
               'The result will be shown in a Chart in a Chart container.'
             ),
             _react2.default.createElement(
-              'p',
-              null,
-              'After clicking a button Show in a Dialog will be opened Chart container with Charts or empty. After closing a Chart container all Charts remains.'
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.P_BOTTOM },
-              'In one time max three Dialogs can be opened.'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
+              _OpenClose2.default,
+              {
+                isClose: true,
+                caption: 'More...',
+                rootStyle: S.MORE
+              },
               _react2.default.createElement(
-                'span',
-                { style: S.RED },
-                'Attention:\xA0'
+                'p',
+                null,
+                'After clicking a button Show in a Dialog will be opened Chart container with Charts or empty. After closing a Chart container all Charts remains.'
               ),
               _react2.default.createElement(
-                'span',
-                null,
-                'For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it, close the chart in the container and load data again.'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.P_BOTTOM },
-              'The value of currency is not always USD as shows in a chart tooltip. Sometimes more details about data can be look at tab Info on a Chart.'
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.P_BOTTOM },
-              _react2.default.createElement(
-                'span',
-                null,
-                'In that case of data loading from\xA0'
+                'p',
+                { style: S.P_BOTTOM },
+                'In one time max three Dialogs can be opened.'
               ),
-              _react2.default.createElement(_Links2.default.Quandl, null),
               _react2.default.createElement(
-                'span',
+                'p',
                 null,
-                '\xA0data provider, for accessing without API Key, exists some restriction on frequency and amount queries (',
                 _react2.default.createElement(
                   'span',
-                  { style: S.BLUE_DARK },
-                  '50 per day/1 at a time'
+                  { style: S.RED },
+                  'Attention:\xA0'
                 ),
                 _react2.default.createElement(
                   'span',
-                  { style: S.GREY },
-                  ').'
+                  null,
+                  'For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it, close the chart in the container and load data again.'
                 )
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'According to Quandl, anonymous requests can be deprecated soon. With API Key'
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.P_BOTTOM },
+              ),
               _react2.default.createElement(
-                'span',
-                null,
-                'you will be have (',
+                'p',
+                { style: S.P_BOTTOM },
+                'The value of currency is not always USD as shows in a chart tooltip. Sometimes more details about data can be look at tab Info on a Chart.'
+              ),
+              _react2.default.createElement(
+                'p',
+                { style: S.P_BOTTOM },
                 _react2.default.createElement(
                   'span',
-                  { style: S.BLUE_DARK },
-                  '50 000 per day/1 at a time'
+                  null,
+                  'In that case of data loading from\xA0'
                 ),
-                '). It\'s free of charge to receive.'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings. Settings save in browser\'s memory only for a current WEB session.'
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.P_BOTTOM },
-              'Premium Free Sample Data can be requested only with Quandl API Key.'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                'span',
-                null,
-                'For loading data from\xA0'
+                _react2.default.createElement(_Links2.default.Quandl, null),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\xA0data provider, for accessing without API Key, exists some restriction on frequency and amount queries (',
+                  _react2.default.createElement(
+                    'span',
+                    { style: S.BLUE_DARK },
+                    '50 per day/1 at a time'
+                  ),
+                  _react2.default.createElement(
+                    'span',
+                    { style: S.GREY },
+                    ').'
+                  )
+                )
               ),
-              _react2.default.createElement(_Links2.default.Eurostat, null),
               _react2.default.createElement(
-                'span',
+                'p',
                 null,
-                '\xA0does not exist any restrictions.'
+                'According to Quandl, anonymous requests can be deprecated soon. With API Key'
+              ),
+              _react2.default.createElement(
+                'p',
+                { style: S.P_BOTTOM },
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  'you will be have (',
+                  _react2.default.createElement(
+                    'span',
+                    { style: S.BLUE_DARK },
+                    '50 000 per day/1 at a time'
+                  ),
+                  '). It\'s free of charge to receive.'
+                )
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings. Settings save in browser\'s memory only for a current WEB session.'
+              ),
+              _react2.default.createElement(
+                'p',
+                { style: S.P_BOTTOM },
+                'Premium Free Sample Data can be requested only with Quandl API Key.'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  'For loading data from\xA0'
+                ),
+                _react2.default.createElement(_Links2.default.Eurostat, null),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\xA0does not exist any restrictions.'
+                )
               )
             ),
             _react2.default.createElement(_IconLogoBar2.default, null),

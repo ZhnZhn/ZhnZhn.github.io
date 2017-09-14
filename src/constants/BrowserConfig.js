@@ -46,7 +46,7 @@ const BrowserConfig = {
   [BrowserType.FRANCE_STATISTICS] : {
     browserType: BrowserType.FRANCE_STATISTICS,
     isDynamic : true,
-    caption: 'Quandl : France Statistics',
+    caption: 'Insee: France Statistics',
     sourceMenuUrl: './data/france-statistics/source-menu.json'
   },
   [BrowserType.US_STOCKS] : {

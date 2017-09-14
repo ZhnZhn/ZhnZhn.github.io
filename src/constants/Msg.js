@@ -58,6 +58,10 @@ const Msg = {
      RUNTIME_ERROR : {
         caption : 'Runtime Error'
      },
+     TOO_MANY_REQUEST: {
+       caption: 'Http Code 429',
+       descr: 'Too many request in a given amount of time (rate limiting)'
+     },
      NETWORK_ERROR : {
         caption : 'Network Error',
         descr: 'Network error is encountered. Failed to fetch. Maybe you are offline, maybe a DNS lookup failure or maybe a data provider does not respond.'

@@ -5,6 +5,7 @@ import { ChartActionTypes } from '../../flux/actions/ChartActions';
 
 import ScrollPane from '../zhn/ScrollPane'
 import BrowserCaption from '../zhn/BrowserCaption'
+import OpenClose from '../zhn/OpenClose'
 import TwitterLink from './TwitterLink'
 import Step from './Step';
 import Link from '../links/Links';
@@ -24,6 +25,12 @@ const S = {
     lineHeight : 1.4,
     color: 'gray',
     fontWeight: 'bold'
+  },
+  LINE_HEIGHT: {
+    lineHeight: 1.8
+  },
+  MORE : {
+    lineHeight: 1.4
   },
   P_BOTTOM : {
     marginBottom: '1em'
@@ -126,28 +133,28 @@ class About extends Component {
             Data providers:
           </span>
         </p>
-        <p>
+        <p style={S.LINE_HEIGHT}>
           <Link.Quandl/>
           <span style={S.BLACK}>
             &nbsp;(Key),&nbsp;
           </span>
           <Link.Barchart/>
           <span style={S.BLACK}>
-            &nbsp;(Key),&nbsp;
+            &nbsp;(Key),&ensp;
           </span>
           <Link.AlphaVantage/>
           <span style={S.BLACK}>
             &nbsp;(Key),
           </span>
          </p>
-         <p style={S.P_BOTTOM}>
+         <p style={{...S.P_BOTTOM, ...S.LINE_HEIGHT}}>
            <Link.Eurostat/>
            <span style={S.BLUE}>
-             ,&nbsp;
+             ,&ensp;
            </span>
            <Link.UnComtrade />
            <span style={S.BLUE}>
-             ,&nbsp;
+             ,&ensp;
            </span>
            <Link.Insee/>
            <span style={S.BLACK}>
@@ -189,60 +196,66 @@ class About extends Component {
           <p style={Object.assign({}, S.P_BOTTOM, S.MARGIN_TOP)}>
             The result will be shown in a Chart in a Chart container.
           </p>
-          <p>
-             After clicking a button Show in a Dialog will be opened Chart container with Charts
-             or empty. After closing a Chart container all Charts remains.
-          </p>
-          <p style={S.P_BOTTOM}>
-             In one time max three Dialogs can be opened.
-          </p>
-          <p>
-            <span style={S.RED}>
-               Attention:&nbsp;
-            </span>
-            <span>
-              For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it,
-              close the chart in the container and load data again.
-            </span>
-         </p>
-         <p style={S.P_BOTTOM}>
-             The value of currency is not always USD as shows in a chart tooltip.
-             Sometimes more details about data can be look at tab Info on a Chart.
-         </p>
-         <p style={S.P_BOTTOM}>
-           <span>
-             In that case of data loading from&nbsp;
-           </span>
-           <Link.Quandl/>
-           <span>
-              &nbsp;data provider, for accessing without API Key, exists some restriction on frequency
-              and amount queries (<span style={S.BLUE_DARK}>50 per day/1 at a time</span><span style={S.GREY}>).</span>
-           </span>
-         </p>
-         <p>
-            According to Quandl, anonymous requests can be deprecated soon. With API Key
-         </p>
-         <p style={S.P_BOTTOM}>
-           <span>
-             you will be have (<span style={S.BLUE_DARK}>50 000 per day/1 at a time</span>). It's free of charge to receive.
-           </span>
-         </p>
-         <p>
-             A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.
-             Settings save in browser's memory only for a current WEB session.
-         </p>
-         <p style={S.P_BOTTOM}>
-            Premium Free Sample Data can be requested only with Quandl API Key.
-         </p>
-         <p>
-           <span>
-             For loading data from&nbsp;
-           </span>
-           <Link.Eurostat/>
-           <span>
-             &nbsp;does not exist any restrictions.
-           </span>
-         </p>
+          <OpenClose
+            isClose={true}
+            caption="More..."
+            rootStyle={S.MORE}
+          >
+            <p>
+               After clicking a button Show in a Dialog will be opened Chart container with Charts
+               or empty. After closing a Chart container all Charts remains.
+            </p>
+            <p style={S.P_BOTTOM}>
+               In one time max three Dialogs can be opened.
+            </p>
+            <p>
+              <span style={S.RED}>
+                 Attention:&nbsp;
+              </span>
+              <span>
+                For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it,
+                close the chart in the container and load data again.
+              </span>
+           </p>
+           <p style={S.P_BOTTOM}>
+               The value of currency is not always USD as shows in a chart tooltip.
+               Sometimes more details about data can be look at tab Info on a Chart.
+           </p>
+           <p style={S.P_BOTTOM}>
+             <span>
+               In that case of data loading from&nbsp;
+             </span>
+             <Link.Quandl/>
+             <span>
+                &nbsp;data provider, for accessing without API Key, exists some restriction on frequency
+                and amount queries (<span style={S.BLUE_DARK}>50 per day/1 at a time</span><span style={S.GREY}>).</span>
+             </span>
+           </p>
+           <p>
+              According to Quandl, anonymous requests can be deprecated soon. With API Key
+           </p>
+           <p style={S.P_BOTTOM}>
+             <span>
+               you will be have (<span style={S.BLUE_DARK}>50 000 per day/1 at a time</span>). It's free of charge to receive.
+             </span>
+           </p>
+           <p>
+               A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.
+               Settings save in browser's memory only for a current WEB session.
+           </p>
+           <p style={S.P_BOTTOM}>
+              Premium Free Sample Data can be requested only with Quandl API Key.
+           </p>
+           <p>
+             <span>
+               For loading data from&nbsp;
+             </span>
+             <Link.Eurostat/>
+             <span>
+               &nbsp;does not exist any restrictions.
+             </span>
+           </p>
+         </OpenClose>
          <IconLogoBar />
          <p>
            <span style={S.BLACK}>

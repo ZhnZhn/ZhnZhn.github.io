@@ -18,7 +18,11 @@ var CL_LINK = "descr__quandl-link";
 
 var S = {
   BLUE: {
+    //whiteSpace: "nowrap",
     color: "#009ae5"
+  },
+  BROWN: {
+    color: "#bd1010"
   }
 };
 
@@ -32,7 +36,7 @@ var Quandl = (0, _withProps2.default)({
 var Barchart = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.barchartmarketdata.com",
-  style: { color: "#bd1010" },
+  style: S.BROWN,
   title: "Barchart Market Data"
 })(_Link2.default);
 

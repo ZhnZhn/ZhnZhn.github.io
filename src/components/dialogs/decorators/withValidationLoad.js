@@ -25,10 +25,11 @@ const _updateValidationMessages = function(validationMessages){
 };
 
 const withValidationLoad = (target) => {
-  const _proto = target.prototype;
-  _proto._handleWithValidationLoad = _handleWithValidationLoad
-  _proto._handleWithValidationClose = _handleWithValidationClose
-  _proto._updateValidationMessages = _updateValidationMessages
+  Object.assign(target.prototype, {
+    _handleWithValidationLoad,
+    _handleWithValidationClose,
+    _updateValidationMessages
+  })  
 }
 
 export default withValidationLoad

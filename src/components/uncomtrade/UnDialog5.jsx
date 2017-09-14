@@ -10,12 +10,9 @@ import Button from '../dialogs/Button';
 import DatesFragment from '../zhn-moleculs/DatesFragment';
 import ValidationMessages from '../zhn/ValidationMessages';
 import ShowHide from '../zhn/ShowHide';
-//import RowCheckBox from '../dialogs/RowCheckBox';
 
 import withToolbar from '../dialogs/decorators/withToolbar';
 import withValidationLoad from '../dialogs/decorators/withValidationLoad'
-
-//const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 const TRADE_FLOW = [
   { caption: "Export Value", value: { rg: 2 } },
