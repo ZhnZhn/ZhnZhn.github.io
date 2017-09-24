@@ -73,6 +73,13 @@ const ComponentSlice = {
     });
   },
 
+  onCloseDialog(Comp) {
+    this.trigger(ComponentActionTypes.CLOSE_DIALOG, {
+      type: Comp.key,
+      caption: Comp.props.caption
+    })
+  },
+
   onShowOptionDialog(type, option){
     ItemDialogLogic.showOptionDialog(
       this.dialogInit, { type, data: option }

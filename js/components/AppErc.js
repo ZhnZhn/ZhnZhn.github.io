@@ -70,7 +70,7 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '14-09-2017';
+var PREV_BUILD = '24-09-2017';
 
 var AppErc = function (_Component) {
   (0, _inherits3.default)(AppErc, _Component);
@@ -116,7 +116,8 @@ var AppErc = function (_Component) {
             initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
             updateBrowserAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU,
             updateWatchAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER,
-            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG
+            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+            onCloseDialog: _ComponentActions2.default.closeDialog
           }),
           _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
           _react2.default.createElement(_ComponentHrzContainer2.default, {

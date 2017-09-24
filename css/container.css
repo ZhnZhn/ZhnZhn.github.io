@@ -95,6 +95,9 @@
 .item__watch {
   color: #80c040;
 }
+.item__about {
+  color: #1b2836;
+}
 
 .menu__badge {
   display: inline-block;

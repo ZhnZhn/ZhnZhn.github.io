@@ -15,10 +15,10 @@ import withToolbar from '../dialogs/decorators/withToolbar';
 import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
 const TRADE_FLOW = [
-  { caption: "Export Value", value: { rg: 2 } },
+  { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
   { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } },
   { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } },
-  { caption: "Import Value", value: { rg: 1 } },
+  { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } },
   { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } },
   { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }
 ]

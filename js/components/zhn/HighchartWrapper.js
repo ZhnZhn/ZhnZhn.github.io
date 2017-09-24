@@ -50,17 +50,11 @@ var HighchartWrapper = function (_Component) {
   (0, _inherits3.default)(HighchartWrapper, _Component);
 
   function HighchartWrapper() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     (0, _classCallCheck3.default)(this, HighchartWrapper);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = (0, _possibleConstructorReturn3.default)(this, (HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call(this));
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.renderChart = function (config) {
+    _this.renderChart = function (config) {
       if (!config) {
         throw new Error('Config must be specified for the ZhHighchart');
       }
@@ -70,12 +64,12 @@ var HighchartWrapper = function (_Component) {
           renderTo: _this.chartEl
         })
       }));
-    }, _this.getChart = function () {
-      if (!_this.chart) {
-        throw new Error('getChart() should not called before the ZhHighchart component is mounted');
-      }
-      return _this.chart;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    _this.state = {
+      isShowAbsComp: true
+    };
+    return _this;
   }
 
   (0, _createClass3.default)(HighchartWrapper, [{
@@ -109,6 +103,8 @@ var HighchartWrapper = function (_Component) {
           isShow = _props2.isShow,
           rootStyle = _props2.rootStyle,
           absComp = _props2.absComp,
+          isShowAbsComp = this.state.isShowAbsComp,
+          _absComp = isShowAbsComp ? absComp : null,
           _rootDivStyle = isShow ? STYLE.ROOT_DIV_SHOW : STYLE.ROOT_DIV_HIDE;
 
       return _react2.default.createElement(
@@ -119,8 +115,25 @@ var HighchartWrapper = function (_Component) {
         _react2.default.createElement('div', { ref: function ref(c) {
             return _this2.chartEl = c;
           } }),
-        absComp
+        _absComp
       );
+    }
+  }, {
+    key: 'getChart',
+    value: function getChart() {
+      if (!this.chart) {
+        throw new Error('getChart() should not called before the ZhHighchart component is mounted');
+      }
+      return this.chart;
+    }
+  }, {
+    key: 'toggleAbsComp',
+    value: function toggleAbsComp() {
+      this.setState(function (prevState) {
+        return {
+          isShowAbsComp: !prevState.isShowAbsComp
+        };
+      });
     }
   }]);
   return HighchartWrapper;

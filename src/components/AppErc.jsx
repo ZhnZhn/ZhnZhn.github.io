@@ -17,7 +17,7 @@ import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const PREV_BUILD = '14-09-2017';
+const PREV_BUILD = '24-09-2017';
 
 class AppErc extends Component {
 
@@ -53,6 +53,7 @@ class AppErc extends Component {
               updateBrowserAction={BrowserActionTypes.UPDATE_BROWSER_MENU}
               updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
               showDialogAction={ComponentActionTypes.SHOW_DIALOG}
+              onCloseDialog={ComponentActions.closeDialog}
            />
            <About store={ChartStore} isShow={true} />
            <ComponentHrzContainer

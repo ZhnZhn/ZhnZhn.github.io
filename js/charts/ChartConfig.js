@@ -192,6 +192,9 @@ ChartConfig.theme = {
     backgroundColor: _Color2.default.CHART,
     reflow: false,
 
+    panning: true,
+    panKey: 'shift',
+
     events: {
       load: function load() {
         this.zhTooltip = new _highcharts2.default.Tooltip(this, this.options.tooltip);
@@ -310,11 +313,8 @@ ChartConfig.theme = {
         symbol: "circle",
         states: {
           hover: {
-            fillColor: _Color2.default.MARKER_HOVER,
-            lineColor: _Color2.default.MARKER_HOVER,
-            lineWidth: 1,
-            lineWidthPlus: 0,
-            enabled: true,
+            lineColor: 'transparent',
+            lineWidth: 0,
             radius: 2,
             radiusPlus: 0
           }
@@ -331,7 +331,16 @@ ChartConfig.theme = {
       stickyTracking: false,
       events: {
         click: function click(event) {
+
+          this.chart.zhTooltip.options.enabled = true;
+          /*
+          this.chart.update({
+            tooltip: { enabled: true }
+          })
+          */
+          this.chart.zhTooltip.hide(false);
           this.chart.zhTooltip.refresh(event.point, event);
+          this.chart.zhTooltip.options.enabled = false;
         }
       }
     },
@@ -342,6 +351,7 @@ ChartConfig.theme = {
   tooltip: {
     useHTML: true,
     enabled: false,
+    //enabled : true,
     hideDelay: 100,
     followPointer: false,
     shared: false,
@@ -379,7 +389,6 @@ ChartConfig.theme = {
     tickLenght: 5,
     gridLineColor: _Color2.default.Y_GRID_LINE,
     gridLineDashStyle: "Solid",
-    //gridLineDashStyle: "ShortDashDotDot",
     labels: {
       style: {
         color: _Color2.default.Y_LABEL,
@@ -415,6 +424,13 @@ ChartConfig.fBaseAreaConfig = function (option) {
     }
   });
   config.yAxis = Object.assign(config.yAxis, {
+    lineWidth: 0,
+    tickLength: 0,
+    offset: 4,
+    labels: {
+      x: 8,
+      y: 5
+    },
     events: {
       afterSetExtremes: _ChartFn2.default.afterSetExtremesYAxis
     }
@@ -436,6 +452,7 @@ ChartConfig.fMarkerExDividend = function () {
     marker: {
       symbol: 'circle',
       fillColor: color,
+      lineColor: color,
       radius: 6,
       states: {
         hover: {
@@ -450,11 +467,17 @@ ChartConfig.fMarkerExDividend = function () {
     dataLabels: {
       enabled: true,
       inside: true,
+      color: color,
       style: {
+        fill: color,
+        stroke: color,
         color: color,
-        fontSize: '11px',
-        fontWeight: 'bold',
-        textShadow: 'none'
+        fontSize: '12px',
+        //fontSize: '11px',
+        //fontWeight: 'bold',
+        fontWeight: 'normal',
+        textShadow: 'none',
+        textOutline: '0px transparent'
       },
       crop: false,
       overflow: 'none',

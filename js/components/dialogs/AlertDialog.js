@@ -36,6 +36,10 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL = {
+  ELL: 'ellipsis'
+};
+
 var Styles = {
   CAPTION: {
     display: 'inline-block',
@@ -47,20 +51,22 @@ var Styles = {
     lineHeight: 2
   },
   ITEM_ID: {
-    color: 'rgba(164, 135, 212,1)',
-    fontWeight: 'bold'
+    width: '120px',
+    color: '#a487d4',
+    fontWeight: 'bold',
+    verticalAlign: 'bottom'
   },
   DESCR: {
     color: 'gray',
     width: '400px',
     paddingLeft: '10px',
+    paddingRight: '8px',
     fontWeight: 'bold',
     lineHeight: 1.4,
-    whiteSpace: 'pre-line'
+    whiteSpace: 'pre-line',
+    wordWrap: 'break-word'
   }
 };
-
-var ELLIPSIS = '...';
 
 var AlertDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(AlertDialog, _Component);
@@ -88,8 +94,7 @@ var AlertDialog = (_temp = _class = function (_Component) {
           alertCaption = data.alertCaption,
           _data$alertItemId = data.alertItemId,
           alertItemId = _data$alertItemId === undefined ? '' : _data$alertItemId,
-          alertDescr = data.alertDescr,
-          _alertItemId = alertItemId.substring(0, 20) + ELLIPSIS;
+          alertDescr = data.alertDescr;
 
       return _react2.default.createElement(
         _ModalDialog2.default,
@@ -107,8 +112,12 @@ var AlertDialog = (_temp = _class = function (_Component) {
             alertCaption + ': ',
             _react2.default.createElement(
               'span',
-              { style: Styles.ITEM_ID, title: alertItemId },
-              _alertItemId
+              {
+                className: CL.ELL,
+                style: Styles.ITEM_ID,
+                title: alertItemId
+              },
+              alertItemId
             )
           )
         ),

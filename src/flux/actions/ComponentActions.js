@@ -4,7 +4,9 @@ export const ComponentActionTypes = {
   SHOW_ABOUT : 'showAbout',
 
   SHOW_DIALOG : 'showDialog',
+  CLOSE_DIALOG: 'closeDialog',
   SHOW_OPTION_DIALOG : 'showOptionDialog',
+
 
   CLOSE_CHART_CONTAINER : 'closeChartContainer',
   CLOSE_CHART_CONTAINER_2 : 'closeChartContainer2',
@@ -17,6 +19,7 @@ const ComponentActions = Reflux.createActions({
   [ComponentActionTypes.SHOW_ABOUT] : {},
 
   [ComponentActionTypes.SHOW_DIALOG] : {},
+  [ComponentActionTypes.CLOSE_DIALOG]: {},
   [ComponentActionTypes.SHOW_OPTION_DIALOG] : {},
   [ComponentActionTypes.CLOSE_CHART_CONTAINER] : {},
   [ComponentActionTypes.CLOSE_CHART_CONTAINER_2] : {},

@@ -10,7 +10,9 @@ import AreaChartItem from '../items/AreaChartItem';
 import MapChartItem from '../items/MapChartItem';
 import SectorItem from '../items/SectorItem';
 
-const _createAreaChartItem = function(config, index, option, props){
+const _createAreaChartItem = function({
+  store, config, index, option, props
+}) {
   const { zhConfig={} } = config
      ,  { id=`Id:${index}`, key=index } = zhConfig
      ,  { chartType } = option;
@@ -26,13 +28,18 @@ const _createAreaChartItem = function(config, index, option, props){
            onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
            {...props}
            crValueMoving={ChartFn.crValueMoving}
+
            onCopy={ChartActions.copy}
-           onPasteTo={ChartActions.pasteTo}
+           onPasteToDialog={ComponentActions.showModalDialog.bind(null, ModalDialog.PASTE_TO)}
+           getCopyFromChart={store.getCopyFromChart.bind(store)}           
+           ChartFn={ChartFn}
        />
      );
 };
 
-const _createMapChartItem = function(config, index, option, props){
+const _createMapChartItem = function({
+  store, config, index, option, props
+}) {
   const { zhConfig={} } = config
      ,  { id=`Id:${index}`, key=index } = zhConfig
      ,  { chartType } = option;
@@ -49,7 +56,9 @@ const _createMapChartItem = function(config, index, option, props){
   )
 };
 
-const _crSectorItem = (config, index, option, props) => {
+const _crSectorItem = ({
+  store, config, index, option, props
+}) => {
   return (
     <SectorItem
        key="key"
@@ -66,13 +75,13 @@ const _rCreateItem = {
 }
 
 const ItemFactory = {
-  createItem(config, index, option, props){
+  createItem({ store, config, index, option, props }){
     const { zhCompType } = config
         , _fnCreate = (zhCompType && _rCreateItem[zhCompType])
                ? _rCreateItem[zhCompType]
                : _rCreateItem.DEFAULT;
 
-    return _fnCreate(config, index, option, props);
+    return _fnCreate({ store, config, index, option, props });
   }
 };
 

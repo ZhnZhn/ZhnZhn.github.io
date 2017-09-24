@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -48,6 +44,10 @@ var _ModalButton = require('../zhn-m/ModalButton');
 
 var _ModalButton2 = _interopRequireDefault(_ModalButton);
 
+var _HotBar = require('./HotBar');
+
+var _HotBar2 = _interopRequireDefault(_HotBar);
+
 var _LimitRemainingLabel = require('./LimitRemainingLabel');
 
 var _LimitRemainingLabel2 = _interopRequireDefault(_LimitRemainingLabel);
@@ -76,11 +76,6 @@ var LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0",
     CAPTION = "ERC v0.14.0";
 
 var styles = {
-  rootDiv: {
-    position: 'relative',
-    boxShadow: '0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.6)',
-    zIndex: 1050
-  },
   appLabel: {
     display: 'inline-block',
     color: '#80c040',
@@ -91,19 +86,9 @@ var styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  btTopics: {
-    marginLeft: '8px'
-  },
   btRoot: {
     //color: 'rgb(35, 47, 59)'
     color: '#1b2836'
-  },
-  btAbout: {
-    float: 'right'
-  },
-  btSettings: {
-    float: 'right',
-    marginRight: '20px'
   },
   lbLimit: {
     float: 'right',
@@ -131,6 +116,11 @@ var HeaderBar = function (_Component) {
 
     _this._handleClickWatch = function () {
       _BrowserActions2.default.showBrowser(_Type.BrowserType.WATCH_LIST);
+      _this.setState({ isDS: false });
+    };
+
+    _this._handleClickAbout = function () {
+      _ComponentActions2.default.showAbout();
       _this.setState({ isDS: false });
     };
 
@@ -167,7 +157,7 @@ var HeaderBar = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'header', style: styles.rootDiv },
+        { className: 'header' },
         _react2.default.createElement(_ProgressLoading2.default, { store: store }),
         _react2.default.createElement(_IconLogoErc2.default, {
           className: 'header__icon-erc',
@@ -180,7 +170,8 @@ var HeaderBar = function (_Component) {
         _react2.default.createElement(
           _ModalButton2.default,
           {
-            rootStyle: (0, _extends3.default)({}, styles.btRoot, styles.btTopics),
+            className: 'header__bt-topics',
+            rootStyle: styles.btRoot,
             caption: 'Topics',
             title: 'Topic Data Source Browsers',
             accessKey: 't',
@@ -198,7 +189,7 @@ var HeaderBar = function (_Component) {
           onClick: this._handleClickQuandl
         }),
         _react2.default.createElement(_FlatButton2.default, {
-          className: 'header_bt-eurostat',
+          className: 'header__bt-eurostat',
           rootStyle: styles.btRoot,
           caption: 'Eurostat',
           title: 'European Statistics Browser',
@@ -213,8 +204,14 @@ var HeaderBar = function (_Component) {
           accessKey: 'w',
           onClick: this._handleClickWatch
         }),
+        _react2.default.createElement(_HotBar2.default, {
+          store: store,
+          closeDialogAction: _ComponentActions.ComponentActionTypes.CLOSE_DIALOG,
+          onShowDialog: _ComponentActions2.default.showDialog
+        }),
         _react2.default.createElement(_FlatButton2.default, {
-          rootStyle: (0, _extends3.default)({}, styles.btRoot, styles.btSettings),
+          className: 'header__bt-settins',
+          rootStyle: styles.btRoot,
           caption: 'Settings',
           title: 'Application settings',
           accessKey: 's',
@@ -222,7 +219,8 @@ var HeaderBar = function (_Component) {
           onClick: this._handleDialogSettings
         }),
         _react2.default.createElement(_FlatButton2.default, {
-          rootStyle: (0, _extends3.default)({}, styles.btRoot, styles.btAbout),
+          className: 'header__bt-about',
+          rootStyle: styles.btRoot,
           caption: 'About',
           title: 'Description about application ERC',
           accessKey: 'a',
@@ -240,7 +238,8 @@ var HeaderBar = function (_Component) {
           onClose: this._handleCloseDS,
           onClickQuandl: this._handleClickQuandl,
           onClickDynamic: this._handleClickDynamic,
-          onClickWatch: this._handleClickWatch
+          onClickWatch: this._handleClickWatch,
+          onClickAbout: this._handleClickAbout
         })
       );
     }

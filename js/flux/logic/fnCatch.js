@@ -15,7 +15,6 @@ var M = _Msg2.default.Alert;
 
 var C = {
   FETCH: 'fetch',
-  CODE_503: 'code 503',
   CODE_429: '429'
 };
 
@@ -43,9 +42,7 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
       onFailed = _ref.onFailed;
 
   if (error instanceof TypeError) {
-    if (error.message.indexOf(C.CODE_503) !== -1) {
-      _fnAddAlert(option, M.SERVICE_UNAVAILABLE);
-    } else if (error.message.indexOf(C.CODE_429) !== -1) {
+    if (error.message.indexOf(C.CODE_429) !== -1) {
       _fnAddAlert(option, M.TOO_MANY_REQUEST);
     } else if (error.message.indexOf(C.FETCH) !== -1) {
       _fnAddAlert(option, M.NETWORK_ERROR);

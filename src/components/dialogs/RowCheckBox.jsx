@@ -63,7 +63,7 @@ class RowCheckBox extends Component {
   render(){
     const { rootStyle, caption } = this.props
         , { isChecked } = this.state
-        , _style = (isChecked) ? STYLE.CHECKED : null;
+        , _style = isChecked ? STYLE.CHECKED : null;
     return (
       <div style={{...STYLE.ROOT, ...rootStyle}}>
         <SvgCheckBox
@@ -71,12 +71,16 @@ class RowCheckBox extends Component {
           onCheck={this._handleCheck}
           onUnCheck={this._handleUnCheck}
         />
-        <span
-          style={{...STYLE.CAPTION, ..._style }}
-          onClick={this._handleToggle}
-        >
-          {caption}
-        </span>
+        {
+          caption && (
+            <span
+              style={{...STYLE.CAPTION, ..._style }}
+              onClick={this._handleToggle}
+            >
+              {caption}
+            </span>
+          )
+        }
       </div>
     );
   }

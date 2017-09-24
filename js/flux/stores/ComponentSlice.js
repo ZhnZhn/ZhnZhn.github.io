@@ -82,6 +82,12 @@ var ComponentSlice = {
       _this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
     });
   },
+  onCloseDialog: function onCloseDialog(Comp) {
+    this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_DIALOG, {
+      type: Comp.key,
+      caption: Comp.props.caption
+    });
+  },
   onShowOptionDialog: function onShowOptionDialog(type, option) {
     var _this2 = this;
 

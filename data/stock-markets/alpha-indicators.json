@@ -9,6 +9,8 @@
     { "caption" : "Rate of Change (ROC)" , "value" : "ROC" },
     { "caption" : "Moving Average Convergence/Divergence (MACD)" , "value" : "MACD" },
     { "caption" : "Stochastic Oscillator (STOCH)", "value": "STOCH" },
-    { "caption" : "Bollinger Bands (BBANDS)", "value": "BBANDS" }    
+    { "caption" : "Bollinger Bands (BBANDS)", "value": "BBANDS" },
+    { "caption" : "On Balance Volume (OBV)", "value": "OBV" },
+    { "caption" : "Chaikin A/D Line (AD)", "value": "AD" }                
   ]
 }

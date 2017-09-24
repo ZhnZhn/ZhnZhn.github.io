@@ -112,7 +112,7 @@ var RowCheckBox = function (_Component) {
           onCheck: this._handleCheck,
           onUnCheck: this._handleUnCheck
         }),
-        _react2.default.createElement(
+        caption && _react2.default.createElement(
           'span',
           {
             style: (0, _extends3.default)({}, STYLE.CAPTION, _style),

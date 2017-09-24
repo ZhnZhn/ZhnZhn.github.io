@@ -151,7 +151,11 @@ class AreaChartItem extends Component {
     this.props.onCopy(this.mainChart)
   }
   _handlePasteTo = () => {
-    this.props.onPasteTo(this.mainChart)
+    this.props.onPasteToDialog({
+      toChart: this.mainChart,
+      fromChart: this.props.getCopyFromChart(),      
+      ChartFn: this.props.ChartFn
+    })
   }
 
   _handlerClickInfo = () => {
@@ -161,13 +165,24 @@ class AreaChartItem extends Component {
   }
 
   _handlerClickVolume = () => {
-    const { isInitVolume, isShowVolume } = this.state;
+
+    const { ChartFn } = this.props
+        , {
+            isInitVolume, isShowVolume,
+            chartsDescription
+          } = this.state;
+
+    this.mainChart.update(
+      ChartFn.arMetricOption(this.mainChart, isShowVolume)
+    )
+    this.chartComp.toggleAbsComp()
+
     if (isInitVolume){
       this.setState({ isShowVolume: !isShowVolume })
     } else {
-      this.state.chartsDescription.push({ type: 'Volume' })
+      chartsDescription.push({ type: 'Volume' })
       this.setState({
-        chartsDescription : this.state.chartsDescription,
+        chartsDescription,
         isShowVolume: true, isInitVolume: true
       })
     }
@@ -306,6 +321,7 @@ class AreaChartItem extends Component {
               ref={_ref}
               isShow={true}
               config={_config}
+              absComp={this._dataSourceEl}
               onLoaded={this._handlerLoadedMetricChart}
           />
         </ShowHide>
@@ -392,19 +408,31 @@ class AreaChartItem extends Component {
   }
 
   reflowChart(width){
-    this.mainChart.options.chart.width = width
-    this.mainChart.reflow()
+    const { ChartFn } = this.props
+        , _isSecondYAxis = this.mainChart.yAxis.length === 2
+             ? true
+             : false
+        , _deltaYAxis = _isSecondYAxis
+            ? ChartFn.arCalcDeltaYAxis(this.mainChart)
+            : 0;
+
+    this.mainChart.setSize(width, undefined, true)
     if (Array.isArray(this.mainChart.options.zhDetailCharts)) {
       this.mainChart.options.zhDetailCharts.forEach((chart) => {
-        //chart.reflow();
-        chart.setSize(width, chart.options.chart.height, true)
+        if (_isSecondYAxis) {
+          chart.update({
+            chart: {
+              spacingLeft: _deltaYAxis
+             }
+           }, false)
+        }
+        chart.setSize(width, undefined, true)
       })
     }
   }
 
   setChartHeight = (height) => {
-    this.mainChart.options.chart.height = height
-    this.mainChart.reflow()
+    this.mainChart.setSize(undefined, height, true)
   }
 }
 

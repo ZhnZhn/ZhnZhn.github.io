@@ -59,6 +59,8 @@ var ModalButton = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
+          _props$className = _props.className,
+          className = _props$className === undefined ? '' : _props$className,
           rootStyle = _props.rootStyle,
           _props$clDiv = _props.clDiv,
           clDiv = _props$clDiv === undefined ? CL.BT_DIV : _props$clDiv,
@@ -66,7 +68,8 @@ var ModalButton = function (_Component) {
           caption = _props.caption,
           accessKey = _props.accessKey,
           children = _props.children,
-          onClick = _props.onClick;
+          onClick = _props.onClick,
+          _btCl = (CL.BT + ' ' + className).trim();
 
       return _react2.default.createElement(
         'button',
@@ -74,7 +77,7 @@ var ModalButton = function (_Component) {
           ref: function ref(n) {
             return _this2.rootNode = n;
           },
-          className: CL.BT,
+          className: _btCl,
           style: rootStyle,
           type: 'button',
           tabIndex: 0,

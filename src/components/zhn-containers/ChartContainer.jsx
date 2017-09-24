@@ -133,13 +133,15 @@ class ChartContainer extends Component {
      return configs.map((config, index) => {
        const { zhConfig={} } = config
            , { id } = zhConfig;
-       return ItemFactory.createItem(
-             config, index, { chartType },
-             {
-               onCloseItem : onCloseItem.bind(null, chartType, browserType, id),
-               isAdminMode : _isAdminMode
-             }
-       );
+       return ItemFactory.createItem({
+          store: ChartStore,
+          config, index,
+          option: { chartType },
+          props: {
+            onCloseItem : onCloseItem.bind(null, chartType, browserType, id),
+            isAdminMode : _isAdminMode
+          }
+       });
      });
    }
 

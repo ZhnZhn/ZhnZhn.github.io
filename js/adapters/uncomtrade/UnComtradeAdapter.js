@@ -16,9 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var UnComtradeAdapter = {
   toConfig: function toConfig(json, option) {
-    //console.log(json)
     var config = _fnAdapter2.default.toConfig(json, option);
-
     return {
       config: config,
       isDrawDeltaExtrems: false,

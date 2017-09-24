@@ -102,7 +102,8 @@ var WithIndicatorConfig = {
     Object.assign(yAxis, {
       startOnTick: true,
       endOnTick: true,
-      tickPixelInterval: 60
+      tickPixelInterval: 60,
+      offset: 4
     });
     return config;
   },

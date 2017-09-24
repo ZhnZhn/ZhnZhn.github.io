@@ -3,8 +3,41 @@
 }
 
 .highcharts-contextmenu hr {
-   border-style : solid;
-   border-color : #1b2836;
-   margin-top: 5px;
-   margin-bottom: 5px;
+  border-style: solid;
+  border-color: #1b2836;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
+
+/*
+.highcharts-series-0.highcharts-spline-series > .highcharts-point,
+.highcharts-series-0.highcharts-area-series > .highcharts-point {
+  fill: #7cb5ec;
+}
+.highcharts-series-1.highcharts-spline-series > .highcharts-point,
+.highcharts-series-1.highcharts-area-series > .highcharts-point {
+  fill: #8abb5d;
+}
+.highcharts-series-2.highcharts-spline-series > .highcharts-point,
+.highcharts-series-2.highcharts-area-series > .highcharts-point {
+  fill: #f7a35c;
+}
+.highcharts-series-3 > .highcharts-point {
+  fill: #8085e9;
+}
+.highcharts-series-4 > .highcharts-point {
+  fill: #f15c80;
+}
+.highcharts-series-5 > .highcharts-point {
+  fill: #e4d354;
+}
+.highcharts-series-6 > .highcharts-point {
+  fill: #2b908f;
+}
+.highcharts-series-7 > .highcharts-point {
+  fill: #f45b5b;
+}
+.highcharts-series-8 > .highcharts-point {
+  fill: #91e8e1;
+}
+*/

@@ -37,7 +37,8 @@ export const ModalDialog = {
   US_STOCK_BY_SECTOR : 'US_STOCK_BY_SECTOR',
   STOCKS_BY_SECTOR : 'STOCKS_BY_SECTOR',
   EDIT_WATCH_GROUP : 'editWatchGroup',
-  EDIT_WATCH_LIST : 'editWatchList'
+  EDIT_WATCH_LIST : 'editWatchList',
+  PASTE_TO: 'pasteTo'
 }
 
 export const ChartType = {

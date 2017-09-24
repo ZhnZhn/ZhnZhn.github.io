@@ -14,6 +14,13 @@ const STYLE = {
 };
 
 class HighchartWrapper extends Component {
+  constructor(){
+    super()
+    this.state = {
+      isShowAbsComp: true
+    }
+  }
+
   componentDidMount(){
     const { config, onLoaded } = this.props;
     this.renderChart(config);
@@ -46,26 +53,37 @@ class HighchartWrapper extends Component {
 
   render() {
     const { isShow, rootStyle, absComp } = this.props
+        , { isShowAbsComp } = this.state
+        , _absComp = isShowAbsComp
+             ? absComp
+             : null
         , _rootDivStyle = isShow
              ? STYLE.ROOT_DIV_SHOW
              : STYLE.ROOT_DIV_HIDE;
-
     return (
        <div
          style={{...rootStyle, ..._rootDivStyle}}
        >
           <div ref={ c => this.chartEl = c }>
           </div>
-          {absComp}
+          {_absComp}
         </div>
      );
   }
 
-  getChart = () => {
+  getChart() {
     if(!this.chart){
       throw new Error('getChart() should not called before the ZhHighchart component is mounted');
     }
     return this.chart;
+  }
+
+  toggleAbsComp() {
+    this.setState(prevState => {
+      return {
+        isShowAbsComp: !prevState.isShowAbsComp
+      };
+    })
   }
 }
 

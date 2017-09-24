@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
@@ -54,6 +58,16 @@ var fnAdapter = {
     return { zhSeriaId: id };
   },
 
+  crMarker: function crMarker(color) {
+    return {
+      fillColor: color,
+      lineColor: color,
+      lineWidth: 1,
+      radius: 4,
+      symbol: 'circle'
+    };
+  },
+
   addSeriaTo: function addSeriaTo(_ref) {
     var config = _ref.config,
         hm = _ref.hm,
@@ -68,7 +82,11 @@ var fnAdapter = {
         key = _config$zhConfig.key,
         legend = _config$zhConfig.legend,
         _color = color || _ChartConfig2.default.getColor(i),
-        _seriaOption = seriaOption !== null ? isShow ? _conf2.default.SPLINE : _conf2.default.SPLINE_NOT_VISIBLE : null;
+        _seriaColor = {
+      color: _color,
+      marker: this.crMarker(_color)
+    },
+        _seriaOption = seriaOption !== null ? isShow ? (0, _extends3.default)({}, _conf2.default.SPLINE, _seriaColor) : (0, _extends3.default)({}, _conf2.default.SPLINE_NOT_VISIBLE, _seriaColor) : null;
 
     _ChartConfig2.default.setSerieData(config, hm[name], i, name, _seriaOption, this.crSeriaOption(key + '_' + name));
     legend.push(_AdapterFn2.default.legendItem(i, _color, name, isShow));
@@ -123,8 +141,7 @@ var fnAdapter = {
     Object.assign(config.yAxis, _conf2.default.Y_AXIS);
   },
   crBaseConfig: function crBaseConfig(json, option) {
-    var value = option.value,
-        dataSource = option.dataSource,
+    var dataSource = option.dataSource,
         title = option.title,
         subtitle = option.subtitle,
         nativeHref = option.nativeHref;
@@ -144,7 +161,8 @@ var fnAdapter = {
         frequency: "Annual"
       },
       zhConfig: {
-        id: value,
+        //id: value,
+        id: this.crChartId(option),
         key: this.crChartId(option),
         isWithLegend: true,
         legend: [],

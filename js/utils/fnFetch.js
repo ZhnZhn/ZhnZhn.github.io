@@ -27,18 +27,20 @@ var _isFn = function _isFn(fn) {
 
 var _fnMsg400 = function _fnMsg400(option) {
   if (option.loadId === "EU_STAT") {
-    return '400 : Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try request with older date.';
+    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try request with older date.';
   } else {
-    return '400 : Bad request';
+    return '400: Bad request.';
   }
 };
 
 var _fnMsg404 = function _fnMsg404() {
-  return '404: Resource is not existed';
+  return '404: Resource is not existed.';
 };
-
 var _fnMsg429 = function _fnMsg429() {
-  return '429: Too many request in a given amount of time (rate limiting)';
+  return '429: Too many request in a given amount of time (rate limiting).';
+};
+var _fnMsg503 = function _fnMsg503() {
+  return '503: Back-end server is at capacity.';
 };
 
 var _crErr = function _crErr(message) {
@@ -81,6 +83,8 @@ var _fFetch = function _fFetch(propName, type) {
         throw _crErr(_fnMsg429(option));
       } else if (status > 400 && status < 500) {
         throw _crErr(status + ': ' + statusText);
+      } else if (status === 503) {
+        throw _crErr(_fnMsg503(option));
       } else if (status >= 500 && status < 600) {
         throw _crErr(status + ': ' + statusText, C.RESP_ERR);
       } else {

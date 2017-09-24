@@ -1,13 +1,16 @@
 
 .header {
+  display: table;
   position: relative;
+  z-index: 1050;
   width: 100%;
-  min-width: 450px;
+  min-width: 400px;
   margin-right: 26px;
   background-color: rgba(77, 77, 77, 1);
   padding-top: 8px;
   padding-bottom: 4px;
   padding-left: 12px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .header__icon-erc {
@@ -42,29 +45,66 @@
   padding-bottom: 5px;
 }
 
-@media screen and (max-width: 790px) {
+.header__bt-topics {
+  margin-left: 8px;
+}
+.header__bt-about {
+  float: right;
+}
+.header__bt-settins {
+  float: right;
+  margin-right: 16px;
+}
+
+@media screen and (max-width: 1100px) {
+  .header__bt-quandl {
+    display: none;
+  }
+  .header__bt-eurostat {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 940px) {
   .header__app-label {
     display: none;
   }
+  .header__bt-topics {
+    margin-left: 32px;
+  }
+  .header__panel-browser {
+    left: 12px;
+  }
+  .header__bt-about {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 770px) {
   .header__icon-erc {
     display: none;
   }
-  .header__panel-browser {
-    left: 21px;
+  .header__bt-topics {
+    margin-left: 0;
   }
-}
-
-@media screen and (max-width: 645px) {
   .header__bt-watch {
     display: none;
   }
+  .header__bt-settins {
+    margin-right: 8px;
+  }
 }
 
-@media screen and (max-width: 580px) {
-  .header_bt-eurostat {
-    display: none;
+@media screen and (max-width: 600px) {
+  body::after {
+    content: "W600";
+    font-size: 0;
   }
-  .header__bt-quandl {
-    display: none;
+}
+
+@media screen and (max-width: 500px) {
+  body::after {
+    content: "W500";
+    font-size: 0;
   }
 }

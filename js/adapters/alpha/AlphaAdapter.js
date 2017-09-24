@@ -44,11 +44,21 @@ var C = {
   GREEN: { color: '#4caf50' }
 };
 
+var _crValuePropName = function _crValuePropName(indicator) {
+  switch (indicator) {
+    case 'AD':
+      return 'Chaikin A/D';
+    default:
+      return indicator;
+  }
+};
+
 var _crValue = function _crValue(json, option) {
   var indicator = option.indicator,
       _option$forDays = option.forDays,
       forDays = _option$forDays === undefined ? C.TWO_YEARS_DAYS : _option$forDays,
-      value = json[C.TA + ' ' + indicator],
+      _indicator = _crValuePropName(indicator),
+      value = json[C.TA + ' ' + _indicator],
       dateKeys = value ? Object.keys(value).sort().reverse() : [],
       _len = dateKeys.length,
       max = _len < forDays ? _len - 1 : forDays;
@@ -101,6 +111,7 @@ var _crSplineSeria = function _crSplineSeria(_ref2, option) {
 
 var _crSeriaData = function _crSeriaData(json, option) {
   var indicator = option.indicator,
+      _indicator = _crValuePropName(indicator),
       _crValue2 = _crValue(json, option),
       value = _crValue2.value,
       dateKeys = _crValue2.dateKeys,
@@ -108,12 +119,12 @@ var _crSeriaData = function _crSeriaData(json, option) {
       _data = [];
 
 
-  var i = void 0,
+  var i = max,
       _date = void 0,
       _v = void 0;
-  for (i = max; i > -1; i--) {
+  for (; i > -1; i--) {
     _date = dateKeys[i];
-    _v = parseFloat(value[_date][indicator]);
+    _v = parseFloat(value[_date][_indicator]);
     _data.push([_AdapterFn2.default.ymdtToUTC(_date), _v]);
   }
 

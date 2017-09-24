@@ -21,7 +21,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var CL = {
   ROW: 'row__pane-topic',
   ITEM_DF: 'row__pane-topic item__quandl',
-  ITEM_WATCH: 'row__pane-topic item__watch'
+  ITEM_WATCH: 'row__pane-topic item__watch',
+  ITEM_ABOUT: 'row__pane-topic item__about'
 };
 var S = {
   SHOW_HIDE: {
@@ -99,7 +100,8 @@ var PanelBrowsers = function PanelBrowsers(_ref2) {
       onClose = _ref2.onClose,
       onClickQuandl = _ref2.onClickQuandl,
       onClickDynamic = _ref2.onClickDynamic,
-      onClickWatch = _ref2.onClickWatch;
+      onClickWatch = _ref2.onClickWatch,
+      onClickAbout = _ref2.onClickAbout;
   return _react2.default.createElement(
     _ModalPane2.default,
     {
@@ -124,6 +126,14 @@ var PanelBrowsers = function PanelBrowsers(_ref2) {
           onClick: onClickWatch
         },
         'Watch'
+      ),
+      _react2.default.createElement(
+        'div',
+        {
+          className: CL.ITEM_ABOUT,
+          onClick: onClickAbout
+        },
+        'About'
       )
     )
   );

@@ -44,8 +44,7 @@ var ChartActionTypes = exports.ChartActionTypes = {
   SHOW_CHART: 'showChart',
   CLOSE_CHART: 'closeChart',
 
-  COPY: 'copy',
-  PASTE_TO: 'pasteTo'
+  COPY: 'copy'
 };
 
 var _fnOnChangeStore = function _fnOnChangeStore(actionType, data) {

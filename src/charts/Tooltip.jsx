@@ -158,7 +158,7 @@ const _fnTreeMapTooltip = function({id, point}){
 const _fHide = (id, point) => function _fnHide() {
   document.getElementById(id)
           .removeEventListener('click', _fnHide);
-  point.series.chart.zhTooltip.hide();
+  point.series.chart.zhTooltip.hide();  
 }
 
 const _fnAddHandlerClose = function(id, point){

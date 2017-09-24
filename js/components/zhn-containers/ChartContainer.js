@@ -176,9 +176,14 @@ var ChartContainer = function (_Component) {
             zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
             id = zhConfig.id;
 
-        return _ItemFactory2.default.createItem(config, index, { chartType: chartType }, {
-          onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
-          isAdminMode: _isAdminMode
+        return _ItemFactory2.default.createItem({
+          store: _ChartStore2.default,
+          config: config, index: index,
+          option: { chartType: chartType },
+          props: {
+            onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
+            isAdminMode: _isAdminMode
+          }
         });
       });
     };

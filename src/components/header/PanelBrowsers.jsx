@@ -6,7 +6,8 @@ import ShowHide from '../zhn/ShowHide'
 const CL = {
   ROW: 'row__pane-topic',
   ITEM_DF: 'row__pane-topic item__quandl',
-  ITEM_WATCH: 'row__pane-topic item__watch'
+  ITEM_WATCH: 'row__pane-topic item__watch',
+  ITEM_ABOUT: 'row__pane-topic item__about'
 };
 const S = {
   SHOW_HIDE: {
@@ -77,7 +78,8 @@ const _renderItems = ({
 
 const PanelBrowsers = ({
   className, isShow, BROWSER, browserConfig,
-  onClose, onClickQuandl, onClickDynamic, onClickWatch
+  onClose, onClickQuandl, onClickDynamic,
+  onClickWatch, onClickAbout
 }) =>
     <ModalPane
       isShow={isShow}
@@ -99,6 +101,12 @@ const PanelBrowsers = ({
             onClick={onClickWatch}
           >
             Watch
+          </div>
+          <div
+            className={CL.ITEM_ABOUT}
+            onClick={onClickAbout}
+          >
+            About
           </div>
       </ShowHide>
   </ModalPane>

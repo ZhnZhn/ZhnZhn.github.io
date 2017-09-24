@@ -10,19 +10,22 @@ const _isFn = fn => typeof fn === 'function';
 
 const _fnMsg400 = (option) => {
   if (option.loadId === "EU_STAT"){
-    return '400 : Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try request with older date.';
+    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try request with older date.';
   } else {
-    return '400 : Bad request';
+    return '400: Bad request.';
   }
 };
 
 const _fnMsg404 = () => {
-  return '404: Resource is not existed';
+  return '404: Resource is not existed.';
 };
-
 const _fnMsg429 = () => {
-  return '429: Too many request in a given amount of time (rate limiting)';
+  return '429: Too many request in a given amount of time (rate limiting).';
 };
+const _fnMsg503 = () => {
+  return '503: Back-end server is at capacity.'
+}
+
 
 const _crErr = (message, errCaption=C.REQ_ERR) => {
   return { errCaption, message };
@@ -61,6 +64,8 @@ const _fFetch = (propName, type) => function({
          throw _crErr(_fnMsg429(option));
       } else if (status>400 && status<500){
          throw _crErr(`${status}: ${statusText}`);
+      } else if (status === 503) {
+         throw _crErr(_fnMsg503(option));
       } else if (status>=500 && status<600){
          throw _crErr(`${status}: ${statusText}`, C.RESP_ERR);
       } else {

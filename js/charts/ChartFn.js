@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
@@ -34,6 +38,10 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 var _Type = require('../constants/Type');
 
+var _WithAreaChartFn = require('./WithAreaChartFn');
+
+var _WithAreaChartFn2 = _interopRequireDefault(_WithAreaChartFn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _fnFindIndex = _ArrayUtil2.default.findIndexByProp('x');
@@ -55,6 +63,8 @@ var C = {
     color: 'yellow',
     fontSize: '15px'
   },
+
+  CL_DY: 4,
 
   DX_CATEGORY: 40,
   DY_CATEGORY: 32
@@ -180,10 +190,10 @@ var _crYCrossLabelX = function _crYCrossLabelX(chart, dX) {
   return chart.yAxis[0].width + chart.plotLeft + dX;
 };
 var _crYCrossLabelY = function _crYCrossLabelY(chart, plotY) {
-  return plotY + chart.plotTop;
+  return plotY + chart.plotTop + C.CL_DY;
 };
 
-var ChartFn = {
+var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
   addSeriaWithRenderLabel: function addSeriaWithRenderLabel(props) {
     var chart = props.chart,
         series = props.series,
@@ -330,7 +340,7 @@ var ChartFn = {
         decimal = arrSplit[1] ? 2 : 0;
     return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
   }
-};
+});
 
 exports.default = ChartFn;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartFn.js.map

@@ -10,6 +10,8 @@ import Chart from './Chart';
 import ChartConfig from './ChartConfig';
 import { Direction } from '../constants/Type';
 
+import WithAreaChartFn from './WithAreaChartFn'
+
 const _fnFindIndex = ArrayUtil.findIndexByProp('x')
 
 const C = {
@@ -29,6 +31,8 @@ const C = {
     color: 'yellow',
     fontSize: '15px'
   },
+
+  CL_DY: 4,
 
   DX_CATEGORY: 40,
   DY_CATEGORY: 32
@@ -137,10 +141,12 @@ const _crYCrossLabelX = (chart, dX) => {
   return chart.yAxis[0].width + chart.plotLeft + dX;
 };
 const _crYCrossLabelY = (chart, plotY) => {
-  return plotY + chart.plotTop;
+  return plotY + chart.plotTop + C.CL_DY;
 };
 
 const ChartFn = {
+  ...WithAreaChartFn,
+
   addSeriaWithRenderLabel(props){
     const { chart, series, label, hasSecondYAxis } = props;
     const options = _initOptionsZhSeries(chart);

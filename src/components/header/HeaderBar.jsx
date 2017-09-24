@@ -5,9 +5,10 @@ import AppLabel from './AppLabel'
 import IconLogoErc from './IconLogoErc'
 import FlatButton from '../zhn-m/FlatButton'
 import ModalButton from '../zhn-m/ModalButton'
+import HotBar from './HotBar'
 import LimitRemainingLabel from './LimitRemainingLabel'
 import PanelBrowsers from './PanelBrowsers'
-import ComponentActions from '../../flux/actions/ComponentActions'
+import ComponentActions, { ComponentActionTypes} from '../../flux/actions/ComponentActions'
 import BrowserActions from '../../flux/actions/BrowserActions'
 import BrowserConfig from '../../constants/BrowserConfig'
 import { BrowserType, ModalDialog } from '../../constants/Type'
@@ -17,11 +18,6 @@ const LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0"
     , CAPTION = "ERC v0.14.0";
 
 const styles = {
-  rootDiv : {
-    position: 'relative',
-    boxShadow: '0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.6)',
-    zIndex: 1050
-  },
   appLabel : {
     display: 'inline-block',
     color:'#80c040',
@@ -32,19 +28,9 @@ const styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  btTopics: {
-    marginLeft: '8px'
-  },
   btRoot: {
     //color: 'rgb(35, 47, 59)'
     color: '#1b2836'
-  },
-  btAbout: {
-    float: 'right'
-  },
-  btSettings: {
-    float: 'right',
-    marginRight: '20px'
   },
   lbLimit: {
     float: 'right',
@@ -78,6 +64,11 @@ class HeaderBar extends Component {
     this.setState({ isDS: false })
   }
 
+  _handleClickAbout = () => {
+    ComponentActions.showAbout()
+    this.setState({ isDS: false })
+  }
+
   _onRegDS = (dsNode) => {
     this.dsNode = dsNode
   }
@@ -100,7 +91,7 @@ class HeaderBar extends Component {
     const { store } = this.props
         , { isDS } = this.state;
     return (
-      <div className="header" style={styles.rootDiv}>
+      <div className="header">
          <ProgressLoading store={store} />
          <IconLogoErc
             className="header__icon-erc"
@@ -112,7 +103,8 @@ class HeaderBar extends Component {
          />
 
          <ModalButton
-             rootStyle={{ ...styles.btRoot, ...styles.btTopics }}
+             className="header__bt-topics"
+             rootStyle={styles.btRoot}
              caption="Topics"
              title="Topic Data Source Browsers"
              accessKey="t"
@@ -130,7 +122,7 @@ class HeaderBar extends Component {
             onClick={this._handleClickQuandl}
           />
           <FlatButton
-            className="header_bt-eurostat"
+            className="header__bt-eurostat"
             rootStyle={styles.btRoot}
             caption="Eurostat"
             title="European Statistics Browser"
@@ -145,9 +137,15 @@ class HeaderBar extends Component {
              accessKey="w"
              onClick={this._handleClickWatch}
           />
+          <HotBar
+            store={store}
+            closeDialogAction={ComponentActionTypes.CLOSE_DIALOG}
+            onShowDialog={ComponentActions.showDialog}
+          />
 
            <FlatButton
-             rootStyle={{ ...styles.btRoot, ...styles.btSettings }}
+             className="header__bt-settins"
+             rootStyle={styles.btRoot}
              caption="Settings"
              title="Application settings"
              accessKey="s"
@@ -155,7 +153,8 @@ class HeaderBar extends Component {
              onClick={this._handleDialogSettings}
            />
            <FlatButton
-             rootStyle={{ ...styles.btRoot, ...styles.btAbout }}
+             className="header__bt-about"
+             rootStyle={styles.btRoot}
              caption="About"
              title="Description about application ERC"
              accessKey="a"
@@ -175,6 +174,7 @@ class HeaderBar extends Component {
               onClickQuandl={this._handleClickQuandl}
               onClickDynamic={this._handleClickDynamic}
               onClickWatch={this._handleClickWatch}
+              onClickAbout={this._handleClickAbout}
            />
       </div>
     );

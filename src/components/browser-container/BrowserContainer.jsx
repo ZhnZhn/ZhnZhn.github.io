@@ -36,7 +36,7 @@ class BrowserContainer extends Component {
     const {
             store, showBrowserAction, updateBrowserAction,
             updateWatchAction,
-            showDialogAction
+            showDialogAction, onCloseDialog
           } = this.props
         , { elBrowsers } = this.state;
 
@@ -61,6 +61,7 @@ class BrowserContainer extends Component {
               maxDialog={3}
               store={store}
               showAction={showDialogAction}
+              onCloseDialog={onCloseDialog}
            />
       </div>
     );

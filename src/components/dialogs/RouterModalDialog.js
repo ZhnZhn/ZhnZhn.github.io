@@ -15,6 +15,8 @@ import StocksBySectorDialog from './StocksBySectorDialog';
 import EditGroupDialog from '../watch-browser/EditGroupDialog';
 import EditListDialog from '../watch-browser/EditListDialog';
 
+import PasteToModalDialog from '../items/PasteToModalDialog'
+
 const RouterModalDialog = {
   [ModalDialog.ASK] : AskDialog,
   [ModalDialog.RELOAD] : ReloadDialog,
@@ -28,7 +30,8 @@ const RouterModalDialog = {
   [ModalDialog.US_STOCK_BY_SECTOR] : UsStocksBySectorDialog,
   [ModalDialog.STOCKS_BY_SECTOR] : StocksBySectorDialog,
   [ModalDialog.EDIT_WATCH_GROUP] : EditGroupDialog,
-  [ModalDialog.EDIT_WATCH_LIST] : EditListDialog
+  [ModalDialog.EDIT_WATCH_LIST] : EditListDialog,
+  [ModalDialog.PASTE_TO]: PasteToModalDialog
 }
 
 export default RouterModalDialog

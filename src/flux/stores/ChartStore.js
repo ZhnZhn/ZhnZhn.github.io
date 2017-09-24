@@ -8,7 +8,6 @@ import WatchActions from '../actions/WatchActions';
 
 import { ModalDialog } from '../../constants/Type';
 
-import ChartFn from '../../charts/ChartFn'
 import Factory from '../logic/Factory';
 
 import BrowserSlice from './BrowserSlice';
@@ -30,20 +29,6 @@ const _fnLogLoadError = function({
   console.log('%c'+ alertCaption + ':' + alertItemId, CONSOLE_LOG_STYLE);
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 }
-
-const _Logic = {
-  pasteTo(fromChart, toChart){
-    if (toChart && fromChart && fromChart.series) {
-      fromChart.series.forEach(seria => {
-        if (seria.visible) {
-          const { color, userOptions } = seria;
-          ChartFn.addDataTo(toChart, color, userOptions.data)
-        }
-      })
-    }
-  }
-}
-
 
 const ChartStore = Reflux.createStore({
   listenables : [
@@ -177,8 +162,8 @@ const ChartStore = Reflux.createStore({
  onCopy(chart){
    this.fromChart = chart
  },
- onPasteTo(toChart){
-   _Logic.pasteTo(this.fromChart, toChart)
+ getCopyFromChart(){
+   return this.fromChart;
  },
 
  ...BrowserSlice,

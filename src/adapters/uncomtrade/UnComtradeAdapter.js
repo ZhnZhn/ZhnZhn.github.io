@@ -4,10 +4,8 @@ import ChartConfig from '../../charts/ChartConfig'
 import fnAdapter from './fnAdapter'
 
 const UnComtradeAdapter = {
-  toConfig(json, option){
-    //console.log(json)
+  toConfig(json, option){    
     const config = fnAdapter.toConfig(json, option);
-
     return {
        config,
        isDrawDeltaExtrems: false,

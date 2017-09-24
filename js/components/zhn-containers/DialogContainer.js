@@ -38,20 +38,24 @@ var S = {
     position: 'absolute',
     top: '70px',
     left: '10px',
-    width: '99%'
+    width: '98%'
   }
 };
 
-var _doVisible = function _doVisible(arr, keyValue) {
-  var _index = void 0,
-      _max = arr.length,
-      i = 0;
+var _findCompIndex = function _findCompIndex(arr, key) {
+  var _max = arr.length;
+  var i = 0;
   for (; i < _max; i++) {
-    if (arr[i].key === keyValue) {
-      _index = i;
-      break;
+    if (arr[i].key === key) {
+      return i;
     }
   }
+  return undefined;
+};
+
+var _doVisible = function _doVisible(arr, keyValue) {
+  var _index = _findCompIndex(arr, keyValue) || 0;
+
   return [].concat((0, _toConsumableArray3.default)(arr.slice(0, _index)), (0, _toConsumableArray3.default)(arr.slice(_index + 1)), [arr[_index]]);
 };
 
@@ -69,6 +73,11 @@ var _updateVisible = function _updateVisible(state, key, maxDialog) {
     hmIs[visibleDialogs[0]] = false;
     visibleDialogs.splice(0, 1);
   }
+};
+
+var _findCompByKey = function _findCompByKey(comps, key) {
+  var index = _findCompIndex(comps, key);
+  return index !== undefined ? comps[index] : undefined;
 };
 
 var DialogContainer = (_temp = _class = function (_Component) {
@@ -102,6 +111,19 @@ var DialogContainer = (_temp = _class = function (_Component) {
     };
 
     _this._handleToggleDialog = function (key) {
+      var _this$state = _this.state,
+          hmIs = _this$state.hmIs,
+          compDialogs = _this$state.compDialogs;
+
+      if (hmIs[key]) {
+        var onCloseDialog = _this.props.onCloseDialog,
+            _Comp = _findCompByKey(compDialogs, key);
+
+        if (typeof onCloseDialog === 'function' && _Comp) {
+          onCloseDialog(_Comp);
+        }
+      }
+
       _this.setState(function (prevState) {
         var hmIs = prevState.hmIs;
 
@@ -132,10 +154,10 @@ var DialogContainer = (_temp = _class = function (_Component) {
     };
 
     _this._renderDialogs = function () {
-      var _this$state = _this.state,
-          hmIs = _this$state.hmIs,
-          compDialogs = _this$state.compDialogs,
-          hmData = _this$state.hmData;
+      var _this$state2 = _this.state,
+          hmIs = _this$state2.hmIs,
+          compDialogs = _this$state2.compDialogs,
+          hmData = _this$state2.hmData;
 
       return compDialogs.map(function (Comp) {
         var key = Comp.key;

@@ -84,6 +84,7 @@ var BrowserContainer = function (_Component) {
           updateBrowserAction = _props.updateBrowserAction,
           updateWatchAction = _props.updateWatchAction,
           showDialogAction = _props.showDialogAction,
+          onCloseDialog = _props.onCloseDialog,
           elBrowsers = this.state.elBrowsers;
 
 
@@ -108,7 +109,8 @@ var BrowserContainer = function (_Component) {
         _react2.default.createElement(_DialogContainer2.default, {
           maxDialog: 3,
           store: store,
-          showAction: showDialogAction
+          showAction: showDialogAction,
+          onCloseDialog: onCloseDialog
         })
       );
     }

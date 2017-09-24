@@ -7,3 +7,11 @@
   background: #2f7ed8 none repeat scroll 0% 0%;
   z-index: 1000;
 }
+
+.ellipsis {
+  display: inline-block;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

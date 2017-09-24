@@ -3,6 +3,10 @@ import React, { Component, PropTypes } from 'react';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import STYLE from '../styles/DialogStyles'
 
+const CL = {
+  ELL: 'ellipsis'
+};
+
 const Styles = {
   CAPTION : {
     display : 'inline-block',
@@ -14,20 +18,22 @@ const Styles = {
     lineHeight : 2
   },
   ITEM_ID : {
-    color: 'rgba(164, 135, 212,1)',
-    fontWeight : 'bold'
+    width: '120px',
+    color: '#a487d4',
+    fontWeight : 'bold',
+    verticalAlign: 'bottom'
   },
-  DESCR : {
+  DESCR: {
     color: 'gray',
-    width : '400px',
-    paddingLeft : '10px',
+    width: '400px',
+    paddingLeft: '10px',
+    paddingRight: '8px',
     fontWeight: 'bold',
-    lineHeight : 1.4,
-    whiteSpace: 'pre-line'
+    lineHeight: 1.4,
+    whiteSpace: 'pre-line',
+    wordWrap: 'break-word'
   }
 }
-
-const ELLIPSIS = '...';
 
 class AlertDialog extends Component{
 
@@ -53,8 +59,7 @@ class AlertDialog extends Component{
 
   render(){
     const { isShow, data, onClose } = this.props
-        , { alertCaption, alertItemId='', alertDescr } = data
-        , _alertItemId = alertItemId.substring(0,20) + ELLIPSIS;
+        , { alertCaption, alertItemId='', alertDescr } = data;
     return (
       <ModalDialog
         caption="Alert"
@@ -64,8 +69,12 @@ class AlertDialog extends Component{
          <div style={STYLE.rowDiv}>
             <span style={Styles.CAPTION}>
               {alertCaption + ': '}
-              <span style={Styles.ITEM_ID} title={alertItemId}>
-                {_alertItemId}
+              <span
+                className={CL.ELL}
+                style={Styles.ITEM_ID}
+                title={alertItemId}
+              >
+                {alertItemId}
               </span>
             </span>
          </div>

@@ -5,7 +5,7 @@ const C = {
   MAX_SUBTITLE: 60,
   TRADE_FLOW: {
     caption: 'Export Value',
-    value: { rg: 2 }
+    value: { rg: 2, measure: "TradeValue" }
   }
 };
 

@@ -205,12 +205,22 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   }, {
     key: 'reflowChart',
     value: function reflowChart(width) {
-      this.mainChart.options.chart.width = width;
-      this.mainChart.reflow();
+      var ChartFn = this.props.ChartFn,
+          _isSecondYAxis = this.mainChart.yAxis.length === 2 ? true : false,
+          _deltaYAxis = _isSecondYAxis ? ChartFn.arCalcDeltaYAxis(this.mainChart) : 0;
+
+
+      this.mainChart.setSize(width, undefined, true);
       if (Array.isArray(this.mainChart.options.zhDetailCharts)) {
         this.mainChart.options.zhDetailCharts.forEach(function (chart) {
-          //chart.reflow();
-          chart.setSize(width, chart.options.chart.height, true);
+          if (_isSecondYAxis) {
+            chart.update({
+              chart: {
+                spacingLeft: _deltaYAxis
+              }
+            }, false);
+          }
+          chart.setSize(width, undefined, true);
         });
       }
     }
@@ -276,7 +286,11 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handlePasteTo = function () {
-    _this3.props.onPasteTo(_this3.mainChart);
+    _this3.props.onPasteToDialog({
+      toChart: _this3.mainChart,
+      fromChart: _this3.props.getCopyFromChart(),
+      ChartFn: _this3.props.ChartFn
+    });
   };
 
   this._handlerClickInfo = function () {
@@ -286,16 +300,22 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handlerClickVolume = function () {
-    var _state2 = _this3.state,
+    var ChartFn = _this3.props.ChartFn,
+        _state2 = _this3.state,
         isInitVolume = _state2.isInitVolume,
-        isShowVolume = _state2.isShowVolume;
+        isShowVolume = _state2.isShowVolume,
+        chartsDescription = _state2.chartsDescription;
+
+
+    _this3.mainChart.update(ChartFn.arMetricOption(_this3.mainChart, isShowVolume));
+    _this3.chartComp.toggleAbsComp();
 
     if (isInitVolume) {
       _this3.setState({ isShowVolume: !isShowVolume });
     } else {
-      _this3.state.chartsDescription.push({ type: 'Volume' });
+      chartsDescription.push({ type: 'Volume' });
       _this3.setState({
-        chartsDescription: _this3.state.chartsDescription,
+        chartsDescription: chartsDescription,
         isShowVolume: true, isInitVolume: true
       });
     }
@@ -453,6 +473,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
           ref: _ref,
           isShow: true,
           config: _config,
+          absComp: _this3._dataSourceEl,
           onLoaded: _this3._handlerLoadedMetricChart
         })
       );
@@ -489,8 +510,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this.setChartHeight = function (height) {
-    _this3.mainChart.options.chart.height = height;
-    _this3.mainChart.reflow();
+    _this3.mainChart.setSize(undefined, height, true);
   };
 }, _temp);
 process.env.NODE_ENV !== "production" ? AreaChartItem.propTypes = {

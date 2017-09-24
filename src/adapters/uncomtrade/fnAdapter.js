@@ -21,6 +21,16 @@ const fnAdapter = {
     return { zhSeriaId: id };
   },
 
+  crMarker: color => {
+    return {
+      fillColor: color,
+      lineColor: color,
+      lineWidth: 1,
+      radius: 4,
+      symbol: 'circle'
+    };
+  },
+
   addSeriaTo({
     config, hm,
     name, i, color,
@@ -28,10 +38,14 @@ const fnAdapter = {
   }) {
     const { key, legend } = config.zhConfig
         , _color = color || ChartConfig.getColor(i)
+        , _seriaColor = {
+             color: _color,
+             marker: this.crMarker(_color)
+          }
         , _seriaOption = (seriaOption !== null)
                ? isShow
-                  ? C.SPLINE
-                  : C.SPLINE_NOT_VISIBLE
+                  ? { ...C.SPLINE, ..._seriaColor }
+                  : { ...C.SPLINE_NOT_VISIBLE, ..._seriaColor }
                : null;
 
     ChartConfig.setSerieData(
@@ -50,8 +64,8 @@ const fnAdapter = {
       .forEach(item => {
          const name = item.name
              , _isShow = i<C.MAX_SHOW ? true : false ;
-        this.addSeriaTo({ config, hm, name, i, isShow: _isShow })
-        i++
+         this.addSeriaTo({ config, hm, name, i, isShow: _isShow })
+         i++
       })
   },
 
@@ -79,7 +93,7 @@ const fnAdapter = {
     } else {
       this.addSeriesFromHmTo({ config, hm, fromIndex: 0 });
     }
-    
+
     const legend = config.zhConfig.legend;
     config.zhConfig.legend = (one !== C.ALL)
        ? fnLegend.toWorldLegend(legend, hm)
@@ -92,7 +106,7 @@ const fnAdapter = {
 
   crBaseConfig(json, option) {
     const {
-            value, dataSource,
+            dataSource,
             title, subtitle,
             nativeHref
           } = option;
@@ -111,7 +125,8 @@ const fnAdapter = {
           frequency: "Annual"
         },
         zhConfig: {
-          id: value,
+          //id: value,
+          id: this.crChartId(option),
           key: this.crChartId(option),
           isWithLegend: true,
           legend: [],

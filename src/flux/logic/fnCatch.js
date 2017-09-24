@@ -5,7 +5,6 @@ const M = Msg.Alert;
 
 const C = {
   FETCH: 'fetch',
-  CODE_503: 'code 503',
   CODE_429: '429'
 };
 
@@ -25,11 +24,9 @@ const _fnAddDfAlert = (option, error) => {
   _fnAddAlert(option, { caption, descr: message })
 }
 
-export const fnCatch = function({ error, option, onFailed }){
+export const fnCatch = function({ error, option, onFailed }){  
   if (error instanceof TypeError){
-    if (error.message.indexOf(C.CODE_503) !== -1){
-      _fnAddAlert(option, M.SERVICE_UNAVAILABLE)
-    } else if (error.message.indexOf(C.CODE_429) !== -1) {
+    if (error.message.indexOf(C.CODE_429) !== -1) {
       _fnAddAlert(option, M.TOO_MANY_REQUEST)
     } else if (error.message.indexOf(C.FETCH) !== -1) {
        _fnAddAlert(option, M.NETWORK_ERROR)

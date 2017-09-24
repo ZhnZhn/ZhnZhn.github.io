@@ -19,14 +19,18 @@ class ModalButton extends Component {
 
   render(){
     const {
-            rootStyle, clDiv=CL.BT_DIV,
-            title, caption, accessKey,
-            children, onClick
-          } = this.props;
+            className='', rootStyle,
+            clDiv=CL.BT_DIV,
+            title, caption,
+            accessKey,
+            children,
+            onClick
+          } = this.props
+          , _btCl = (CL.BT + ' ' + className).trim();
     return (
       <button
         ref={n => this.rootNode = n}
-        className={CL.BT}
+        className={_btCl}
         style={rootStyle}
         type="button"
         tabIndex={0}

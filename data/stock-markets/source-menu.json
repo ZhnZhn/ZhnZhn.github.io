@@ -11,12 +11,12 @@
       ]
     },{
       "caption": "Barchart",
-      "items" : [
+      "items": [
         { "id": "SM_B_STOCK" }
       ]
     },{
       "caption": "Alpha Vantage",
-      "items" : [
+      "items": [
         { "id": "SM_A_INDICATOR" },
         { "id": "SM_A_INTRADAY" },
         { "id": "SM_A_SECTOR" }
@@ -28,10 +28,10 @@
         "type" : "SM_EURONEXT",
         "menuTitle" : "Euronext",
         "dialogCaption" : "Euronext Stock Prices",
-        "chartContainerCaption" : "Quandl Euronext Stock Prices",
+        "chartContainerCaption" : "Quandl: Euronext Stock Prices",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/euronext.html",
-          "optionURI" : "./data/quandl/euronext.json",
+          "descrUrl" : "./data/stock-markets/euronext.html",
+          "optionURI" : "./data/stock-markets/euronext.json",
           "optionsJsonProp" : "tickets",
           "valueFn" : "RPrefixOne",
           "valueFnPrefix" : "EURONEXT",
@@ -46,10 +46,10 @@
         "type" : "SM_TOKYO",
         "menuTitle" : "Tokyo",
         "dialogCaption" : "Tokyo Stock Prices",
-        "chartContainerCaption" : "Quandl Tokyo Stock Prices",
+        "chartContainerCaption" : "Quandl: Tokyo Stock Prices",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/tokyo.html",
-          "optionURI" : "./data/quandl/tokyo.json",
+          "descrUrl" : "./data/stock-markets/tokyo.html",
+          "optionURI" : "./data/stock-markets/tokyo.json",
           "optionsJsonProp" : "tickets",
           "valueFn" : "RPrefixOne",
           "valueFnPrefix" : "TSE",
@@ -63,11 +63,11 @@
         "type" : "SM_WIKI",
         "menuTitle" : "Wiki: Nasdaq, Nyse",
         "dialogCaption" : "Wiki Stock Prices",
-        "chartContainerCaption" : "Quandl Wiki Stock Prices",
+        "chartContainerCaption" : "Quandl: Wiki Stock Prices",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/wiki.html",
+          "descrUrl" : "./data/stock-markets/wiki.html",
           "isTransform" : true,
-          "optionURI" : "./data/quandl/wiki.json",
+          "optionURI" : "./data/stock-markets/wiki.json",
           "optionsJsonProp" : "tickets",
           "valueFn" : "RPrefixOne",
           "valueFnPrefix" : "WIKI",
@@ -82,16 +82,16 @@
         "type" : "SM_FREE_US_FUNDAMENTALS",
         "menuTitle" : "Free US Fundamentals",
         "dialogCaption" : "Free US Fundamentals",
-        "chartContainerCaption" : "Quandl Free US Fundamentals",
+        "chartContainerCaption" : "Quandl: Free US Fundamentals",
         "dialogType" : "DialogType5",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/us-fundamentals.html",
+          "descrUrl" : "./data/stock-markets/us-fundamentals.html",
           "nInitFromDate" : 7,
           "oneCaption" : "Stock",
-          "oneURI" : "./data/quandl/wiki.json",
+          "oneURI" : "./data/stock-markets/wiki.json",
           "oneJsonProp" : "tickets",
           "twoCaption" : "Group",
-          "twoURI" : "./data/quandl/us-fundamental-indicators.json",
+          "twoURI" : "./data/stock-markets/us-fundamental-indicators.json",
           "twoJsonProp" : "groups",
           "threeCaption" : "Indicator",
           "fnValueType" : "TreeItem",
@@ -106,10 +106,10 @@
         "type" : "SM_NIKKEI",
         "menuTitle" : "Nikkei",
         "dialogCaption" : "Nikkei",
-        "chartContainerCaption" : "Quandl Nikkei",
+        "chartContainerCaption" : "Quandl: Nikkei",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/nikkei.html",
-          "optionURI" : "./data/quandl/nikkei.json",
+          "descrUrl" : "./data/stock-markets/nikkei.html",
+          "optionURI" : "./data/stock-markets/nikkei.json",
           "optionsJsonProp" : "indexes",
           "valueFn" : "RPrefixOne",
           "valueFnPrefix" : "NIKKEI",
@@ -121,12 +121,12 @@
       "type" : "SM_UNICORN_RESEARCH",
       "menuTitle" : "Unicorn Research",
       "dialogCaption" : "Unicorn Research Corporation",
-      "chartContainerCaption" : "Quandl Unicorn Research Corporation",
+      "chartContainerCaption" : "Quandl: Unicorn Research Corporation",
       "dialogType" : "DialogType4A",
       "dialogProps" : {
-        "descrUrl" : "./data/quandl/unicorn-research.html",
+        "descrUrl" : "./data/stock-markets/unicorn-research.html",
         "oneCaption" : "Exchange",
-        "oneURI" : "./data/quandl/unicorn-research.json",
+        "oneURI" : "./data/stock-markets/unicorn-research.json",
         "oneJsonProp" : "exchanges",
         "twoCaption" : "Metric",
         "valueFn" : "ROneDashTwo",
@@ -140,8 +140,8 @@
         "dialogCaption" : "Barchart Stock Prices",
         "chartContainerCaption" : "Barchart Stock Prices",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/barchart.html",
-          "optionURI" : "./data/quandl/wiki.json",
+          "descrUrl" : "./data/stock-markets/barchart.html",
+          "optionURI" : "./data/stock-markets/wiki.json",
           "optionsJsonProp" : "tickets",
           "isWithInputStock": true,
           "valueFn" : "ROne",
@@ -156,11 +156,11 @@
         "type" : "SM_A_INDICATOR",
         "menuTitle" : "Indicators",
         "dialogCaption" : "Alpha Indicators",
-        "chartContainerCaption" : "Alpha Indicators",
+        "chartContainerCaption" : "Alpha Vantage: Indicators",
         "dialogType" : "AlphaIndicatorDialog",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/alpha-vantage.html",
-          "oneURI" : "./data/quandl/alpha-indicators.json",
+          "descrUrl" : "./data/stock-markets/alpha-vantage.html",
+          "oneURI" : "./data/stock-markets/alpha-indicators.json",
           "oneJsonProp" : "indicators",
           "oneCaption" : "Indicators",
           "valueFn" : "ROne",
@@ -173,11 +173,11 @@
         "type" : "SM_A_INTRADAY",
         "menuTitle" : "Intraday",
         "dialogCaption" : "Alpha Intraday",
-        "chartContainerCaption" : "Alpha Intraday",
+        "chartContainerCaption" : "Alpha Vantage: Intraday",
         "dialogType" : "AlphaIntradayDialog",
         "dialogProps" : {
-          "descrUrl" : "./data/quandl/alpha-vantage.html",
-          "oneURI" : "./data/quandl/alpha-indicators.json",
+          "descrUrl" : "./data/stock-markets/alpha-vantage.html",
+          "oneURI" : "./data/stock-markets/alpha-indicators.json",
           "oneJsonProp" : "indicators",
           "oneCaption" : "Indicators",
           "valueFn" : "ROne",
@@ -190,10 +190,10 @@
          "type" : "SM_A_SECTOR",
          "menuTitle" : "Performance by Sector",
          "dialogCaption" : "Alpha Sector",
-         "chartContainerCaption" : "Alpha Sector: S&P 500",
+         "chartContainerCaption" : "Alpha Vantage: Sector: S&P 500",
          "dialogType" : "AlphaSectorDialog",
          "dialogProps" : {
-           "descrUrl" : "./data/quandl/alpha-vantage.html",
+           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
            "loadId" : "AL_S",
            "dataSource" : "Alpha Vantage"
          }

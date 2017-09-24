@@ -1,0 +1,15 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\constants\\Model.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\constants\\Model.js",
+ "sourceRoot": "",
+ "names": [
+  "Model",
+  "palette",
+  "rows",
+  "cols",
+  "colors"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,WAAS;AACPC,UAAM,CADC;AAEPC,UAAM,CAFC;AAGPC,YAAQ,CACN,SADM,EACK,SADL,EACgB,SADhB,EAEN,SAFM,EAEK,SAFL,EAEgB,SAFhB,EAGN,SAHM,EAGK,SAHL,EAGgB,SAHhB;AAHD;AADG,CAAd;;kBAYeJ,K"
+}

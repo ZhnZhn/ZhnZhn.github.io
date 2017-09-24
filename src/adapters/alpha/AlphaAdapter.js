@@ -27,12 +27,20 @@ const C = {
   GREEN: { color: '#4caf50' }
 }
 
+const _crValuePropName = (indicator) => {
+  switch(indicator){
+    case 'AD': return 'Chaikin A/D';
+    default: return indicator;
+  }
+};
+
 const _crValue = ( json, option ) => {
   const {
           indicator,
           forDays=C.TWO_YEARS_DAYS
         } = option
-      , value = json[`${C.TA} ${indicator}`]
+      , _indicator = _crValuePropName(indicator)
+      , value = json[`${C.TA} ${_indicator}`]
       , dateKeys = value
            ? Object.keys(value).sort().reverse()
            : []
@@ -75,13 +83,14 @@ const _crSplineSeria = ({data, ticket, valueText}, option) => {
 
 const _crSeriaData = (json, option) => {
   const { indicator } = option
+      , _indicator = _crValuePropName(indicator)
       , { value, dateKeys, max } = _crValue(json, option)
       , _data = [];
 
-  let i, _date, _v;
-  for(i=max; i>-1; i--) {
+  let i=max, _date, _v;
+  for(; i>-1; i--) {
     _date = dateKeys[i]
-    _v = parseFloat(value[_date][indicator])
+    _v = parseFloat(value[_date][_indicator])
     _data.push([ AdapterFn.ymdtToUTC(_date), _v])
   }
 

@@ -75,8 +75,8 @@ const COLOR = {
   LEGEND_ITEM_HOVER : '#2f7ed8',
   LEGEND_ITEM_HIDDEN : 'gray',
 
-  MARKER_HOVER_FILL : 'yellow',
-  MARKER_HOVER_LINE : 'yellow',
+  MARKER_HOVER_FILL : '#ff0',
+  MARKER_HOVER_LINE : '#ff0',
 
   S_OPEN : '#90ed7d',
   //S_HIGH : '#4caf50',

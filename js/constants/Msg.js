@@ -85,11 +85,7 @@ var Msg = {
     },
     NETWORK_ERROR: {
       caption: 'Network Error',
-      descr: 'Network error is encountered. Failed to fetch. Maybe you are offline, maybe a DNS lookup failure or maybe a data provider does not respond.'
-    },
-    SERVICE_UNAVAILABLE: {
-      caption: 'Service Unavailable 503',
-      descr: 'Back-end server is at capacity. HTTP Code 503'
+      descr: 'Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond, 503.'
     }
   }
 };
