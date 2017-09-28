@@ -12,6 +12,10 @@ var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
+var _ConfigBuilder = require('../../charts/ConfigBuilder');
+
+var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
@@ -38,6 +42,16 @@ var C = {
   HIGH: "#4caf50",
   LOW: "#f44336",
   OPEN: "#90ed7d"
+};
+
+var _crZhConfig = function _crZhConfig(id) {
+  return {
+    id: id,
+    key: id,
+    isWithLegend: true,
+    legend: _AdapterFn2.default.stockSeriesLegend(),
+    dataSource: "Alpha Vantage"
+  };
 };
 
 var _fMarker = function _fMarker(color) {
@@ -131,34 +145,15 @@ var _createSeriaData = function _createSeriaData(json, option, config, chartId) 
 
 var AlphaIntradayAdapter = {
   toConfig: function toConfig(json, option) {
-    var config = _ChartConfig2.default.fBaseAreaConfig(),
+    var baseConfig = _ChartConfig2.default.fBaseAreaConfig(),
         value = option.value,
         interval = option.interval,
         _chartId = value;
 
 
-    _createSeriaData(json, option, config, _chartId);
-    Object.assign(config, {
-      title: _Chart2.default.fTitle({
-        text: value,
-        y: _Chart2.default.STACKED_TITLE_Y
-      }),
-      subtitle: _Chart2.default.fSubtitle({
-        text: 'Time Series (' + interval + ')',
-        y: _Chart2.default.STACKED_SUBTITLE_Y
-      }),
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatterT),
-      zhConfig: {
-        dataSource: "Alpha Vantage",
-        id: _chartId,
-        key: _chartId,
-        isWithLegend: true,
-        legend: _AdapterFn2.default.stockSeriesLegend()
-      },
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
-    });
-    config.chart.spacingTop = 25;
+    _createSeriaData(json, option, baseConfig, _chartId);
+
+    var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(_Tooltip2.default.fnBasePointFormatterT).add('zhConfig', _crZhConfig()).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
 
     return {
       config: config,

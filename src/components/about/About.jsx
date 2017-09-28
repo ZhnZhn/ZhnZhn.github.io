@@ -7,70 +7,34 @@ import ScrollPane from '../zhn/ScrollPane'
 import BrowserCaption from '../zhn/BrowserCaption'
 import OpenClose from '../zhn/OpenClose'
 import TwitterLink from './TwitterLink'
+import DataProviders from './DataProviders'
 import Step from './Step';
 import Link from '../links/Links';
 import IconLogoBar from './IconLogoBar';
 
 import styles from '../styles/ContainerStyles';
-
-const S = {
-  SCROLL_DIV: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px'
-  },
-  DIV_WRAPPER : {
-    paddingLeft: '12px',
-    paddingRight: '5px',
-    lineHeight : 1.4,
-    color: 'gray',
-    fontWeight: 'bold'
-  },
-  LINE_HEIGHT: {
-    lineHeight: 1.8
-  },
-  MORE : {
-    lineHeight: 1.4
-  },
-  P_BOTTOM : {
-    marginBottom: '1em'
-  },
-  MARGIN_TOP : {
-    marginTop: '3px'
-  },
-  BT_TWITTER : {
-    marginLeft: '12px'
-  },
-  GREEN: {
-    color: '#80c040'
-  },
-  GRAY: {
-    color: 'gray'
-  },
-  BLACK: {
-    color: 'black'
-  },
-  BLUE: {
-    color: '#009ae5'
-  },
-  BLUE_DARK: {
-    color: '#2f7ed8'
-  },
-  RED: {
-    color: '#F44336'
-  }
-};
-
+import S from './About.Style'
 
 class About extends Component {
   constructor(props){
     super();
     this.state = {
+      isCloseProviders: this._calcIsProviders(),
       isShow : props.isShow
     }
   }
 
-  componentWillMount(){
+  _calcIsProviders = () => {
+    const strWidth = window
+      .getComputedStyle(document.body, ':after')
+      .getPropertyValue('content');
+    switch(strWidth){
+      case '"W600"': case '"W500"': return true;
+      default: return false;
+    }
+  }
+
+  componentDidMount(){
     this.unsubscribe = this.props.store.listen(this._onStore);
   }
   componentWillUnmount(){
@@ -91,7 +55,7 @@ class About extends Component {
   }
 
   render(){
-    const { isShow } = this.state
+    const { isShow, isCloseProviders } = this.state
         ,  _classOpen = isShow
               ? "show-popup"
               : null
@@ -128,39 +92,7 @@ class About extends Component {
          <p style={S.P_BOTTOM}>
            With it, you can view economic free open data from WEB.
          </p>
-         <p>
-          <span>
-            Data providers:
-          </span>
-        </p>
-        <p style={S.LINE_HEIGHT}>
-          <Link.Quandl/>
-          <span style={S.BLACK}>
-            &nbsp;(Key),&nbsp;
-          </span>
-          <Link.Barchart/>
-          <span style={S.BLACK}>
-            &nbsp;(Key),&ensp;
-          </span>
-          <Link.AlphaVantage/>
-          <span style={S.BLACK}>
-            &nbsp;(Key),
-          </span>
-         </p>
-         <p style={{...S.P_BOTTOM, ...S.LINE_HEIGHT}}>
-           <Link.Eurostat/>
-           <span style={S.BLUE}>
-             ,&ensp;
-           </span>
-           <Link.UnComtrade />
-           <span style={S.BLUE}>
-             ,&ensp;
-           </span>
-           <Link.Insee/>
-           <span style={S.BLACK}>
-             &nbsp;(Https Proxy for CORS).
-           </span>
-         </p>
+         <DataProviders isClose={isCloseProviders} />
          <div style={S.BLACK}>
             <p>
               <Step step="1" />
@@ -194,7 +126,7 @@ class About extends Component {
             </p>
          </div>
           <p style={Object.assign({}, S.P_BOTTOM, S.MARGIN_TOP)}>
-            The result will be shown in a Chart in a Chart container.
+            The result will be shown in a chart in a resizebale container.
           </p>
           <OpenClose
             isClose={true}

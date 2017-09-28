@@ -12,9 +12,9 @@ var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _Chart = require('../../charts/Chart');
+var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
-var _Chart2 = _interopRequireDefault(_Chart);
+var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
 var _IndicatorSma = require('../IndicatorSma');
 
@@ -87,44 +87,30 @@ var _toInfo = function _toInfo(info, title) {
   };
 };
 
+var _crZhConfig = function _crZhConfig(id) {
+  return {
+    id: id,
+    key: id,
+    isWithLegend: false,
+    dataSource: "INSEE"
+  };
+};
+
 var InseeAdapter = {
   toConfig: function toConfig(str, option) {
     var value = option.value,
         title = option.title,
         subtitle = option.subtitle,
-        config = _ChartConfig2.default.fBaseAreaConfig(),
         _toData2 = _toData(str),
         data = _toData2.data,
         info = _toData2.info,
         minClose = _toData2.minClose,
-        maxClose = _toData2.maxClose;
-
-    Object.assign(config.series[0], {
+        maxClose = _toData2.maxClose,
+        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addSeriaBy(0, {
       data: data,
       type: 'spline',
       zhSeriaId: value
-    });
-    Object.assign(config, {
-      title: _Chart2.default.fTitle({
-        text: title,
-        y: _Chart2.default.STACKED_TITLE_Y
-      }),
-      subtitle: _Chart2.default.fSubtitle({
-        text: subtitle ? subtitle : 'INSEE',
-        y: _Chart2.default.STACKED_SUBTITLE_Y
-      }),
-      info: _toInfo(info, title),
-      valueMoving: _AdapterFn2.default.valueMoving(data),
-      zhConfig: {
-        id: value,
-        key: value,
-        isWithLegend: false,
-        dataSource: "INSEE"
-      },
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
-    });
-    config.chart.spacingTop = 25;
+    }).addCaption(title, subtitle).add('info', _toInfo(info, title)).add('valueMoving', _AdapterFn2.default.valueMoving(data)).add('zhConfig', _crZhConfig(value)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
 
     _ChartConfig2.default.setMinMax(config, minClose, maxClose);
 

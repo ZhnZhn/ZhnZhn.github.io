@@ -4,6 +4,7 @@ import DateUtils from '../../utils/DateUtils'
 import AdapterFn from '../AdapterFn'
 
 import ChartConfig from '../../charts/ChartConfig'
+import ConfigBuilder from '../../charts/ConfigBuilder'
 import Chart from '../../charts/Chart'
 import Tooltip from '../../charts/Tooltip'
 
@@ -11,6 +12,25 @@ import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from '../IndicatorSma'
 
 const DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" +
               "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>"
+
+const _crInfo = (caption) => ({
+  description: DESCR,
+  frequency: "Daily",
+  name: caption,
+  newest_available_date: DateUtils.getFromDate(0),
+  oldest_available_date: DateUtils.getFromDate(2)
+});
+
+const _crZhConfig = (id, value) => ({
+  columnName: "Close",
+  dataColumn: 4,
+  dataSource: "Barchart Market Data Solutions",
+  id: id,
+  key: value,
+  linkFn: "NASDAQ",
+  isWithLegend: true,
+  legend: AdapterFn.stockSeriesLegend()
+});
 
 const _createCloseSeries = (config, { results=[] }, chartId) => {
   const _data = []
@@ -60,7 +80,7 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
     config, _data, _dataHigh, _dataLow, _dataOpen, chartId
   )
 
-  Object.assign(config, {    
+  Object.assign(config, {
     valueMoving: AdapterFn.valueMoving(_data),
     zhVolumeConfig: ChartConfig.fIndicatorVolumeConfig(
       chartId, _dataVolumeColumn, _dataVolume
@@ -73,43 +93,23 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
     zhFnGetMfiConfig: fnGetConfigMfi
   })
 
-  config.chart.spacingTop = 25
-
   ChartConfig.setMinMax(config, _minClose, _maxClose)
 
-  Object.assign(config.xAxis, {
-    crosshair : Chart.fCrosshair()
-  })
 }
 
 const _createAreaConfig = (json, option) => {
-  const config = ChartConfig.fBaseAreaConfig()
-      , { stock={} } = option
+  const { stock={} } = option
       , { caption='', value='' } = stock
-      , _chartId = `B/${value}`;
-
-  Object.assign(config, {
-    title: Chart.fTitle({ text: caption, y: Chart.STACKED_TITLE_Y }),
-    subtitle: Chart.fSubtitle({ y:Chart.STACKED_SUBTITLE_Y }),
-    tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
-    info: {
-      description: DESCR,
-      frequency:"daily",
-      name: caption,
-      newest_available_date: DateUtils.getFromDate(0),
-      oldest_available_date: DateUtils.getFromDate(2)
-    },
-    zhConfig: {
-      columnName: "Close",
-      dataColumn: 4,
-      dataSource: "Barchart Market Data Solutions",
-      id: _chartId,
-      key: `${value}`,
-      linkFn:"NASDAQ",
-      isWithLegend: true,
-      legend: AdapterFn.stockSeriesLegend()
-    }
-  })
+      , _chartId = `B/${value}`
+      , config = ConfigBuilder()
+         .initBaseArea()
+         .add('chart', { spacingTop: 25 })
+         .addCaption(caption)
+         .addTooltip(Tooltip.fnBasePointFormatter)
+         .add('xAxis', { crosshair : Chart.fCrosshair() })
+         .add('info', _crInfo(caption))
+         .add('zhConfig', _crZhConfig(_chartId, value))
+         .toConfig();
 
   _createCloseSeries(config, json, _chartId)
 
@@ -122,11 +122,11 @@ const _createAreaConfig = (json, option) => {
 
 const BarchartAdapter = {
   toConfig(json, option) {
-    const _config = _createAreaConfig(json, option)
+    const _config = _createAreaConfig(json, option);
     return _config;
   },
   toSeries(json, option) {
-    const seria = ChartConfig.fSeries()
+    const seria = ChartConfig.fSeries();
     Object.assign(seria, {
       zhSeriaId: 'Empty_Seria',
       zhValueText: 'Empty Seria'

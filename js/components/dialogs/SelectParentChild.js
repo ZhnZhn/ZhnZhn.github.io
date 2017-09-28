@@ -36,7 +36,8 @@ var _withLoadOptions2 = _interopRequireDefault(_withLoadOptions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var defaultChildOptions = [];
+//const defaultChildOptions = [];
+
 
 var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(SelectParentChild, _Component);
@@ -61,21 +62,37 @@ var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2
       _this._handlerWithLoadOptions('parentOptions', 'isLoading', 'isLoadingFailed', uri, parentJsonProp);
     };
 
+    _this._setChildOptions = function () {
+      var childOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+      _this.child = null;
+      _this.setState({ childOptions: childOptions });
+    };
+
     _this._handlerSelectParent = function (parent) {
       var onSelectParent = _this.props.onSelectParent;
 
       _this.parent = parent;
       if (parent) {
         if (parent.columns) {
-          _this.child = null;
-          _this.setState({ childOptions: parent.columns });
-        } else {
-          _this.child = null;
-          _this.setState({ childOptions: defaultChildOptions });
+          _this._setChildOptions(parent.columns);
+          /*
+          this.child = null;
+          this.setState({ childOptions: parent.columns });
+          */
+        } else if (!_this._isDfColumns) {
+          _this._setChildOptions();
+          /*
+          this.child = null;
+          this.setState({ childOptions : defaultChildOptions });
+          */
         }
-      } else {
-        _this.child = null;
-        _this.setState({ childOptions: [] });
+      } else if (!_this._isDfColumns) {
+        _this._setChildOptions();
+        /*
+        this.child = null;
+        this.setState({ childOptions: [] });
+        */
       }
       if (typeof onSelectParent === 'function') {
         onSelectParent(parent);

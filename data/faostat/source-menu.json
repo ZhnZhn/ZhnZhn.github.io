@@ -1,0 +1,184 @@
+{
+  "menu": [
+    {
+      "caption": "Production",
+      "items": [
+        { "id": "FAO_CROPS" },
+        { "id": "FAO_CROPS_PROCESSED" },
+        { "id": "FAO_LIVE_ANIMAL" }
+      ]
+    },{
+      "caption": "Inputs",
+      "items": [
+        { "id": "FAO_PESTICIDES" },
+        { "id": "FAO_PESTICIDES_PER" },
+        { "id": "FAO_FERTILIZERS" },
+        { "id": "FAO_FERTILIZER_PER" }
+      ]
+    },{
+      "caption": "Investments",
+      "items": [
+        { "id": "FAO_GOV_EXP" },
+        { "id": "FAO_CREDIT_TO_AGRI" }
+      ]
+    }
+  ],
+
+  "items": {
+    "FAO_PRODUCTION": {
+      "type": "FAO_PRODUCTION",
+      "dialogProps": {
+        "descrUrl": "./data/faostat/faostat.html",
+        "oneCaption": "Country",
+        "oneURI": "./data/faostat/country.json",
+        "oneJsonProp": "countries",
+        "twoCaption": "Item",
+        "twoJsonProp": "items",
+        "valueFn": "RPrefixOneTwo",
+        "valueFnPrefix": "FAO",
+        "loadId": "FAO",
+        "dataSource": "FAOSTAT: Production Crops"
+      }
+    },
+
+    "FAO_CROPS": {
+      "type": "FAO_CROPS",
+      "menuTitle": "Crops",
+      "dialogCaption": "Production Crops",
+      "chartContainerCaption": "FAOSTAT: Production Crops",
+      "dialogType": "DialogType5",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/crops.json",
+        "threeCaption": "Element",
+        "dfProps": {
+          "dfDomain": "QC"
+        }
+      }
+    },
+    "FAO_CROPS_PROCESSED": {
+      "type": "FAO_CROPS_PROCESSED",
+      "menuTitle": "Crops Processed",
+      "dialogCaption": "Crops Processsed",
+      "chartContainerCaption": "FAOSTAT: Production Crops Processsed",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/crops-processed.json",
+        "dfProps": {
+          "dfDomain": "QD",
+          "dfElement": "2510"
+        }
+      }
+    },
+    "FAO_LIVE_ANIMAL": {
+      "type": "FAO_LIVE_ANIMAL",
+      "menuTitle": "Live Animal",
+      "dialogCaption": "Live Animal",
+      "chartContainerCaption": "FAOSTAT: Production Live Animal",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/live-animals.json",
+        "dfProps": {
+          "dfDomain": "QA",
+          "dfElement": "2111"
+        }
+      }
+    },
+
+
+    "FAO_PESTICIDES": {
+      "type": "FAO_PESTICIDES",
+      "menuTitle": "Pesticides Use",
+      "dialogCaption": "Pesticides Use",
+      "chartContainerCaption": "FAOSTAT: Input: Pesticides Use",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/pesticides.json",
+        "dfProps": {
+          "dfDomain": "RP",
+          "dfElement": "5161"
+        }
+      }
+    },
+    "FAO_PESTICIDES_PER": {
+      "type": "FAO_PESTICIDES_PER",
+      "menuTitle": "Pesticides per Cropland",
+      "dialogCaption": "Pesticides per Cropland",
+      "chartContainerCaption": "FAOSTAT: Input: Pesticides per Cropland",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/pesticides-per.json",
+        "dfProps": {
+          "dfDomain": "EP",
+          "dfElement": "5159"
+        }
+      }
+    },
+    "FAO_FERTILIZERS": {
+      "type": "FAO_FERTILIZERS",
+      "menuTitle": "Fertilizers Use",
+      "dialogCaption": "Fertilizers Use",
+      "chartContainerCaption": "FAOSTAT: Inputs: Fertilizers Use",
+      "dialogType": "DialogType5",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/fertilizers.json",
+        "threeCaption": "Element",
+        "dfProps": {
+          "dfDomain": "RF"
+        }
+      }
+    },
+    "FAO_FERTILIZER_PER": {
+      "type": "FAO_FERTILIZER_PER",
+      "menuTitle": "Fertilizers per Cropland",
+      "dialogCaption": "Fertilizers per Cropland",
+      "chartContainerCaption": "FAOSTAT: Inputs: Fertilizers per Cropland",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/fertilizer-per.json",
+        "dfProps": {
+          "dfDomain": "EF",
+          "dfElement": "5159"
+        }
+      }
+    },
+
+    "FAO_GOV_EXP": {
+      "type": "FAO_GOV_EXP",
+      "menuTitle": "Government Expenditure",
+      "dialogCaption": "Government Expenditure",
+      "chartContainerCaption": "FAOSTAT: Investments: Government Expenditure",
+      "dialogType": "DialogType5",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/government-expenditure.json",
+        "threeCaption": "Element",
+        "dfProps": {
+          "dfDomain": "IG"
+        }
+      }
+    },
+    "FAO_CREDIT_TO_AGRI": {
+      "type": "FAO_CREDIT_TO_AGRI",
+      "menuTitle": "Credit to Agriculture",
+      "dialogCaption": "Credit to Agriculture",
+      "chartContainerCaption": "FAOSTAT: Investments: Credit to Agriculture",
+      "dialogType": "DialogType5",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/credit-to-agriculture.json",
+        "threeCaption": "Element",
+        "dfProps": {
+          "dfDomain": "IC"
+        }
+      }
+    }
+
+  }
+}

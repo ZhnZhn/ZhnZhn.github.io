@@ -27,6 +27,11 @@ var CL = {
 var S = {
   SHOW_HIDE: {
     padding: '0px'
+  },
+  NEW: {
+    display: 'inline-block',
+    float: 'right',
+    color: 'black'
   }
 };
 var _model = [{
@@ -36,7 +41,13 @@ var _model = [{
 }, {
   id: 'UN_COMTRADE',
   cn: 'item__eurostat',
-  title: 'UN Comtrade'
+  title: 'UN Comtrade',
+  isNew: true
+}, {
+  id: 'FAOSTAT',
+  cn: 'item__eurostat',
+  title: 'FAOSTAT',
+  isNew: true
 }, {
   id: 'EUROSTAT',
   cn: 'item__eurostat',
@@ -78,8 +89,14 @@ var _renderItems = function _renderItems(_ref) {
         id = item.id,
         title = item.title,
         isQuandl = item.isQuandl,
+        isNew = item.isNew,
         _className = cn ? CL.ROW + ' ' + cn : CL.ITEM_DF,
-        _onClick = isQuandl ? onClickQuandl : onClickDynamic.bind(null, browserConfig[BROWSER[id]]);
+        _onClick = isQuandl ? onClickQuandl : onClickDynamic.bind(null, browserConfig[BROWSER[id]]),
+        _el = isNew ? _react2.default.createElement(
+      'span',
+      { style: S.NEW },
+      'New'
+    ) : null;
 
     return _react2.default.createElement(
       'div',
@@ -87,7 +104,8 @@ var _renderItems = function _renderItems(_ref) {
         className: _className,
         onClick: _onClick
       },
-      title
+      title,
+      _el
     );
   });
 };

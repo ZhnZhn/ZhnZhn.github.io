@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-     value: true
+  value: true
 });
 
 var _ChartConfig = require('../../charts/ChartConfig');
@@ -14,40 +14,55 @@ var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _crTimeIndexAndValue = function _crTimeIndexAndValue(json) {
+  var _json$dimension = json.dimension,
+      dimension = _json$dimension === undefined ? {} : _json$dimension,
+      _json$value = json.value,
+      value = _json$value === undefined ? [] : _json$value,
+      _dimension$time = dimension.time,
+      time = _dimension$time === undefined ? {} : _dimension$time,
+      _time$category = time.category,
+      category = _time$category === undefined ? {} : _time$category,
+      _category$index = category.index,
+      timeIndex = _category$index === undefined ? 0 : _category$index;
+
+  return { timeIndex: timeIndex, value: value };
+};
+
 var toArea = {
-     createConfig: function createConfig(json, option) {
-          var timeIndex = json.dimension.time.category.index,
-              value = json.value,
-              isNotZoomToMinMax = option.isNotZoomToMinMax,
-              _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
-              data = _EuroStatFn$createDat.data,
-              max = _EuroStatFn$createDat.max,
-              min = _EuroStatFn$createDat.min,
-              config = _ChartConfig2.default.fBaseAreaConfig();
+  createConfig: function createConfig(json, option) {
+    var _crTimeIndexAndValue2 = _crTimeIndexAndValue(json),
+        timeIndex = _crTimeIndexAndValue2.timeIndex,
+        value = _crTimeIndexAndValue2.value,
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
+        _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
+        data = _EuroStatFn$createDat.data,
+        max = _EuroStatFn$createDat.max,
+        min = _EuroStatFn$createDat.min,
+        config = _ChartConfig2.default.fBaseAreaConfig();
 
+    _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
+    _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min, isNotZoomToMinMax: isNotZoomToMinMax });
 
-          _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
-          _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min, isNotZoomToMinMax: isNotZoomToMinMax });
+    return config;
+  },
 
-          return config;
-     },
-     createSeria: function createSeria(json, option) {
-          var timeIndex = json.dimension.time.category.index,
-              value = json.value,
-              valueText = option.itemCaption,
-              seria = _ChartConfig2.default.fSeries(),
-              _EuroStatFn$createDat2 = _EuroStatFn2.default.createData(timeIndex, value),
-              data = _EuroStatFn$createDat2.data;
-          //, { data } = _fnCreateData(timeIndex, value);
+  createSeria: function createSeria(json, option) {
+    var _crTimeIndexAndValue3 = _crTimeIndexAndValue(json),
+        timeIndex = _crTimeIndexAndValue3.timeIndex,
+        value = _crTimeIndexAndValue3.value,
+        valueText = option.itemCaption,
+        seria = _ChartConfig2.default.fSeries(),
+        _EuroStatFn$createDat2 = _EuroStatFn2.default.createData(timeIndex, value),
+        data = _EuroStatFn$createDat2.data;
 
-          seria.zhSeriaId = option.key;
-          seria.zhValueText = valueText;
-          seria.data = data;
-
-          seria.minY = _EuroStatFn2.default.findMinY(data);
-
-          return seria;
-     }
+    return Object.assign(seria, {
+      zhSeriaId: option.key,
+      zhValueText: valueText,
+      data: data,
+      minY: _EuroStatFn2.default.findMinY(data)
+    });
+  }
 };
 
 exports.default = toArea;

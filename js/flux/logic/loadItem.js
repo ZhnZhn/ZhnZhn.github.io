@@ -82,19 +82,16 @@ var _fnFetchToChart = function _fnFetchToChart(objImpl, _ref2) {
 
   _ChartFn2.default.addSeriaWithRenderLabel({
     chart: chart, series: series,
-    label: itemCaption || value,
+    label: series.zhItemCaption || itemCaption || value,
     hasSecondYAxis: !!hasSecondYAxis
   });
   onCompleted(option);
 };
 
 var loadItem = function loadItem(objImpl) {
-  //_fnToChartComp = _fnFetchToChartComp.bind(null, objImpl)
-  //_fnToChart = _fnFetchToChart.bind(null, objImpl)
   return {
     loadItem: function loadItem(option, onCompleted, onAdded, onFailed) {
       var parentId = _ChartStore2.default.isLoadToChart();
-      //option.adapter = objImpl.adapter
       if (!parentId) {
         _loadToChartComp(objImpl, option, onCompleted, onFailed);
       } else {
@@ -105,9 +102,6 @@ var loadItem = function loadItem(objImpl) {
 
     fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
     fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
-
-    //fnFetchToChartComp: _fnToChartComp,
-    //fnFetchToChart: _fnToChart
   };
 };
 

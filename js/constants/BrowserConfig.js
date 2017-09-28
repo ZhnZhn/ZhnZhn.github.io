@@ -29,6 +29,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   isDynamic: true,
   caption: 'UN Comtrade',
   sourceMenuUrl: './data/uncomtrade/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.FAOSTAT, {
+  browserType: _Type.BrowserType.FAOSTAT,
+  isDynamic: true,
+  caption: 'FAOSTAT',
+  sourceMenuUrl: './data/faostat/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
   browserType: _Type.BrowserType.ECONOMIC,
   isDynamic: false

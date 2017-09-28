@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import RowInputSelect from './RowInputSelect';
 import withLoadOptions from './decorators/withLoadOptions';
 
-const defaultChildOptions = [];
+//const defaultChildOptions = [];
 
 
 @withLoadOptions
@@ -48,20 +48,35 @@ class SelectParentChild extends Component {
           uri, parentJsonProp
     );
   }
+
+  _setChildOptions = (childOptions=[]) => {
+    this.child = null;
+    this.setState({ childOptions });
+  }
+
   _handlerSelectParent = (parent) => {
     const { onSelectParent } = this.props;
     this.parent = parent;
     if (parent) {
       if (parent.columns) {
+        this._setChildOptions(parent.columns)
+        /*
         this.child = null;
         this.setState({ childOptions: parent.columns });
-      } else {
+        */
+      } else if (!this._isDfColumns) {
+        this._setChildOptions()
+        /*
         this.child = null;
         this.setState({ childOptions : defaultChildOptions });
+        */
       }
-    } else {
+    } else if (!this._isDfColumns) {
+      this._setChildOptions()
+      /*
       this.child = null;
       this.setState({ childOptions: [] });
+      */
     }
     if (typeof onSelectParent === 'function') {
       onSelectParent(parent)

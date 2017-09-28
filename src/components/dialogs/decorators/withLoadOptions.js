@@ -56,10 +56,19 @@ const _onLoadOptionsCompleted = function(
    target, {toStateProp, isLoadingProp, json, optionJsonProp}
  ){
   if (toStateProp && optionJsonProp) {
-     target.setState({
-       [isLoadingProp] : false,
-       [toStateProp] : json[optionJsonProp]
-     });
+     if (!json.dfColumns) {
+       target.setState({
+         [isLoadingProp]: false,
+         [toStateProp]: json[optionJsonProp]
+       });
+     } else {
+       target._isDfColumns = true
+       target.setState({
+         [isLoadingProp]: false,
+         [toStateProp]: json[optionJsonProp],
+         childOptions: json.dfColumns
+       });
+     }
   }
 }
 
@@ -112,7 +121,7 @@ const withLoadOptions = (target) => {
   Object.assign(target.prototype, {
     _handlerWithLoadOptions,
     _unmountWithLoadOptions
-  })  
+  })
 }
 
 export default withLoadOptions

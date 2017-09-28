@@ -24,6 +24,10 @@ var _UnComtradeLink = require('./UnComtradeLink');
 
 var _UnComtradeLink2 = _interopRequireDefault(_UnComtradeLink);
 
+var _FaoStatLink = require('./FaoStatLink');
+
+var _FaoStatLink2 = _interopRequireDefault(_FaoStatLink);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterNativeLink = {
@@ -31,7 +35,8 @@ var RouterNativeLink = {
   EURONEXT: _EuronextLink2.default,
   NASDAQ: _NasdaqLink2.default,
   LME: _LmeLink2.default,
-  UN_COMTRADE: _UnComtradeLink2.default
+  UN_COMTRADE: _UnComtradeLink2.default,
+  FAO_STAT: _FaoStatLink2.default
 };
 
 exports.default = RouterNativeLink;

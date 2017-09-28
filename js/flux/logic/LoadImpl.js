@@ -38,6 +38,10 @@ var _UnComtradeAdapter = require('../../adapters/uncomtrade/UnComtradeAdapter');
 
 var _UnComtradeAdapter2 = _interopRequireDefault(_UnComtradeAdapter);
 
+var _FaoStatAdapter = require('../../adapters/faostat/FaoStatAdapter');
+
+var _FaoStatAdapter2 = _interopRequireDefault(_FaoStatAdapter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Quandl = (0, _loadItem2.default)({
@@ -50,6 +54,12 @@ var UnComtrade = (0, _loadItem2.default)({
   fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.UnComtrade,
   adapter: _UnComtradeAdapter2.default
+});
+
+var FaoStat = (0, _loadItem2.default)({
+  fnFetch: _fnFetch.fetchJson,
+  api: _Api2.default.FaoStat,
+  adapter: _FaoStatAdapter2.default
 });
 
 var EuroStat = (0, _loadItem2.default)({
@@ -102,6 +112,7 @@ exports.default = {
 
   Barchart: Barchart,
 
-  UnComtrade: UnComtrade
+  UnComtrade: UnComtrade,
+  FaoStat: FaoStat
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadImpl.js.map

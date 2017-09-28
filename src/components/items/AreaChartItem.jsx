@@ -66,7 +66,7 @@ class AreaChartItem extends Component {
     this._fnOnUnCheck = this._handlerCheckBox.bind(this, false)
 
     const { config={}, caption='' } = props
-        , { zhConfig } = config
+        , { zhConfig={} } = config
         , { dataSource='', itemCaption, id } = zhConfig
         , _itemCaption = (itemCaption) ? itemCaption : caption;
 
@@ -153,7 +153,7 @@ class AreaChartItem extends Component {
   _handlePasteTo = () => {
     this.props.onPasteToDialog({
       toChart: this.mainChart,
-      fromChart: this.props.getCopyFromChart(),      
+      fromChart: this.props.getCopyFromChart(),
       ChartFn: this.props.ChartFn
     })
   }
@@ -292,12 +292,14 @@ class AreaChartItem extends Component {
       );
    }
 
-  _renderLegend = (config) => {
-    const { isShowLegend } = this.state;
-    const _compLegend = (config.zhConfig.isWithLegend) ? (
+  _renderLegend = (config={}) => {
+    const { isShowLegend } = this.state
+        , { zhConfig={} } = config
+        , { isWithLegend, legend } = zhConfig
+    const _compLegend = isWithLegend ? (
       <ShowHide isShow={isShowLegend}>
         <Legend
-           legend={config.zhConfig.legend}
+           legend={legend}
            onClickItem={this._handlerToggleSeria}
         />
       </ShowHide>
@@ -358,10 +360,11 @@ class AreaChartItem extends Component {
 
   render(){
     const {
-            chartType, caption, config,
+            chartType, caption, config={},
             onCloseItem, isAdminMode
           } = this.props
-        , { itemTime } = config.zhConfig
+        , { zhConfig={} } = config
+        , { itemTime } = zhConfig
         , {
             isOpen, isShowChart, isShowInfo,
             itemCaption,

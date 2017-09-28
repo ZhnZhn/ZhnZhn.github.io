@@ -1,6 +1,11 @@
 
 import AdapterFn from '../AdapterFn'
 import ChartConfig from '../../charts/ChartConfig'
+import ConfigBuilder from '../../charts/ConfigBuilder'
+
+import {
+  fnAddSeriesSma, fnRemoveSeries
+} from '../IndicatorSma'
 
 
 const C = {
@@ -26,6 +31,13 @@ const C = {
   BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' },
   GREEN: { color: '#4caf50' }
 }
+
+const _crZhConfig = (id) => ({
+  id: id,
+  key: id,
+  isWithLegend: false,
+  dataSource: "Alpha Vantage"
+});
 
 const _crValuePropName = (indicator) => {
   switch(indicator){
@@ -183,26 +195,25 @@ const AlphaAdapter = {
   toConfig(json, option) {
     const { indicator, ticket } = option
         , _chartId = `${ticket}-${indicator}`
-        , config = ChartConfig.fBaseAreaConfig({
-            zhConfig: {
-              id: _chartId,
-              key: _chartId,
-              isWithLegend: false,
-              dataSource: "Alpha"
-            }
-          })
         , _series = this.toSeries(json, option)
         , _isArrSeries = Array.isArray(_series)
         , _refSeries = _isArrSeries ? _series[0] : _series
-        , type = _refSeries.type || 'spline';
+        , type = _refSeries.type || 'spline'
+        , config = ConfigBuilder()
+            .initBaseArea()
+            .add('chart', { spacingTop: 25 })
+            .addSeriaBy(0, _refSeries)
+            .addSeriaBy(0, { type })
+            .add('zhConfig', _crZhConfig(_chartId))
+            .add('zhFnAddSeriesSma', fnAddSeriesSma)
+            .add('zhFnRemoveSeries', fnRemoveSeries)
+            .toConfig();
 
-    Object.assign(config.series[0], _refSeries, {type})
     if (_isArrSeries) {
       for(let i=1; i<_series.length; i++){
         config.series.push(_series[i])
       }
     }
-    config.chart.spacingTop = 25
 
     return {
       config,

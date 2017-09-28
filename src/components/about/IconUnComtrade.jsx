@@ -2,6 +2,7 @@ import React from 'react'
 
 const S = {
   A: {
+    marginTop: '8px',
     marginLeft: '16px',
     marginRight: '16px'
   }

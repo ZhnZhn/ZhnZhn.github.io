@@ -1,7 +1,7 @@
 import AdapterFn from '../AdapterFn'
 
 import ChartConfig from '../../charts/ChartConfig'
-import Chart from '../../charts/Chart'
+import ConfigBuilder from '../../charts/ConfigBuilder'
 
 import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma';
 
@@ -83,38 +83,32 @@ const _toInfo = (info, title) => {
   };
 }
 
+const _crZhConfig = id => ({
+  id: id,
+  key: id,
+  isWithLegend: false,
+  dataSource: "INSEE"
+});
+
 const InseeAdapter = {
   toConfig(str, option) {
     const { value, title, subtitle } = option
-        , config = ChartConfig.fBaseAreaConfig()
-        , { data, info, minClose, maxClose } = _toData(str);
-
-    Object.assign(config.series[0], {
-      data: data,
-      type: 'spline',
-      zhSeriaId: value,
-    })
-    Object.assign(config, {
-      title: Chart.fTitle({
-        text: title,
-        y: Chart.STACKED_TITLE_Y
-      }),
-      subtitle: Chart.fSubtitle({
-         text : subtitle ? subtitle: 'INSEE',
-         y : Chart.STACKED_SUBTITLE_Y
-      }),
-      info: _toInfo(info, title),
-      valueMoving: AdapterFn.valueMoving(data),
-      zhConfig: {
-        id: value,
-        key: value,
-        isWithLegend: false,
-        dataSource: "INSEE"
-      },
-      zhFnAddSeriesSma: fnAddSeriesSma,
-      zhFnRemoveSeries: fnRemoveSeries
-    })
-    config.chart.spacingTop = 25
+        , { data, info, minClose, maxClose } = _toData(str)
+        , config = ConfigBuilder()
+            .initBaseArea()
+            .add('chart', { spacingTop: 25 })
+            .addSeriaBy(0, {
+               data: data,
+               type: 'spline',
+               zhSeriaId: value,
+            })
+            .addCaption(title, subtitle)
+            .add('info', _toInfo(info, title))
+            .add('valueMoving', AdapterFn.valueMoving(data))
+            .add('zhConfig', _crZhConfig(value))
+            .add('zhFnAddSeriesSma', fnAddSeriesSma)
+            .add('zhFnRemoveSeries', fnRemoveSeries)
+            .toConfig();
 
     ChartConfig.setMinMax(config, minClose, maxClose)
 

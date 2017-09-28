@@ -1,0 +1,15 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\IconFaoStat.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconFaoStat.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "A",
+  "marginTop",
+  "marginRight",
+  "IconFaoStat"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,KAAG;AACDC,eAAW,KADV;AAEDC,iBAAa;AAFZ;AADK,CAAV;;AAOA,IAAMC,cAAc,SAAdA,WAAc;AAAA,SAClB;AAAA;AAAA;AACE,iBAAU,gBADZ;AAEE,aAAOJ,EAAEC,CAFX;AAGE,aAAM,SAHR;AAIE,YAAK;AAJP;AAAA;AAAA,GADkB;AAAA,CAApB;;kBAWeG,W"
+}

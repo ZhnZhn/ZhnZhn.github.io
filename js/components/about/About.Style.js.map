@@ -1,0 +1,36 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\About.Style.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\About.Style.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "SCROLL_DIV",
+  "overflowY",
+  "height",
+  "paddingRight",
+  "DIV_WRAPPER",
+  "paddingLeft",
+  "lineHeight",
+  "color",
+  "fontWeight",
+  "PROVIDER",
+  "display",
+  "LINE_HEIGHT",
+  "MORE",
+  "P_BOTTOM",
+  "marginBottom",
+  "MARGIN_TOP",
+  "marginTop",
+  "BT_TWITTER",
+  "marginLeft",
+  "GREEN",
+  "GRAY",
+  "BLACK",
+  "BLUE",
+  "BLUE_DARK",
+  "RED"
+ ],
+ "mappings": ";;;;;AAAA,IAAMA,IAAI;AACRC,cAAY;AACVC,eAAW,MADD;AAEVC,YAAQ,KAFE;AAGVC,kBAAc;AAHJ,GADJ;AAMRC,eAAc;AACZC,iBAAa,MADD;AAEZF,kBAAc,KAFF;AAGZG,gBAAa,GAHD;AAIZC,WAAO,MAJK;AAKZC,gBAAY;AALA,GANN;AAaRC,YAAU;AACRC,aAAS,cADD;AAERP,kBAAc,KAFN;AAGRE,iBAAa;AAHL,GAbF;AAkBRM,eAAa;AACXL,gBAAY;AADD,GAlBL;AAqBRM,QAAO;AACLN,gBAAY;AADP,GArBC;AAwBRO,YAAW;AACTC,kBAAc;AADL,GAxBH;AA2BRC,cAAa;AACXC,eAAW;AADA,GA3BL;AA8BRC,cAAa;AACXC,gBAAY;AADD,GA9BL;AAiCRC,SAAO;AACLZ,WAAO;AADF,GAjCC;AAoCRa,QAAM;AACJb,WAAO;AADH,GApCE;AAuCRc,SAAO;AACLd,WAAO;AADF,GAvCC;AA0CRe,QAAM;AACJf,WAAO;AADH,GA1CE;AA6CRgB,aAAW;AACThB,WAAO;AADE,GA7CH;AAgDRiB,OAAK;AACHjB,WAAO;AADJ;AAhDG,CAAV;;kBAqDeR,C"
+}

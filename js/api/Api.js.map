@@ -10,7 +10,8 @@
   "EuroStat",
   "Quandl",
   "Insee",
-  "UnComtrade"
+  "UnComtrade",
+  "FaoStat"
  ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,+BADJ;AAEbC,6BAFa,EAELC,yBAFK,EAEEC;AAFF,C"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,+BADJ;AAEbC,6BAFa,EAELC,yBAFK,EAEEC,mCAFF,EAEcC;AAFd,C"
 }

@@ -19,24 +19,17 @@ const BrowserConfig = {
     caption: 'UN Comtrade',
     sourceMenuUrl : './data/uncomtrade/source-menu.json'
   },
+  [BrowserType.FAOSTAT]: {
+    browserType: BrowserType.FAOSTAT,
+    isDynamic : true,
+    caption: 'FAOSTAT',
+    sourceMenuUrl : './data/faostat/source-menu.json'
+  },  
   [BrowserType.ECONOMIC] : {
     browserType: BrowserType.ECONOMIC,
     isDynamic: false
   },
-  /*
-  [BrowserType.GOOGLE] : {
-    browserType: BrowserType.GOOGLE,
-    isDynamic : true,
-    caption: 'Quandl : Google Stocks',
-    sourceMenuUrl : './data/google/source-menu.json'
-  },
-  [BrowserType.YAHOO] : {
-    browserType: BrowserType.YAHOO,
-    isDynamic : true,
-    caption: 'Quandl : Yahoo Stocks',
-    sourceMenuUrl : './data/yahoo/source-menu.json'
-  },
-  */
+
   [BrowserType.PREMIUM_SAMPLE] : {
     browserType: BrowserType.PREMIUM_SAMPLE,
     isDynamic : true,

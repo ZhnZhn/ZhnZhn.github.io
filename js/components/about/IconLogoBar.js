@@ -32,12 +32,17 @@ var _IconUnComtrade = require('./IconUnComtrade');
 
 var _IconUnComtrade2 = _interopRequireDefault(_IconUnComtrade);
 
+var _IconFaoStat = require('./IconFaoStat');
+
+var _IconFaoStat2 = _interopRequireDefault(_IconFaoStat);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
   ROOT: {
     textAlign: 'center',
-    paddingTop: '20px'
+    paddingTop: '20px',
+    paddingBottom: '8px'
   }
 };
 
@@ -53,8 +58,9 @@ var IconLogoBar = function IconLogoBar(props) {
     }),
     _react2.default.createElement(_IconReact2.default, null),
     _react2.default.createElement(_IconHighcharts2.default, null),
+    _react2.default.createElement(_IconEurostat2.default, null),
     _react2.default.createElement(_IconUnComtrade2.default, null),
-    _react2.default.createElement(_IconEurostat2.default, null)
+    _react2.default.createElement(_IconFaoStat2.default, null)
   );
 };
 

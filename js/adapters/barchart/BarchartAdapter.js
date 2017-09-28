@@ -16,6 +16,10 @@ var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
+var _ConfigBuilder = require('../../charts/ConfigBuilder');
+
+var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+
 var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
@@ -29,6 +33,29 @@ var _IndicatorSma = require('../IndicatorSma');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" + "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>";
+
+var _crInfo = function _crInfo(caption) {
+  return {
+    description: DESCR,
+    frequency: "Daily",
+    name: caption,
+    newest_available_date: _DateUtils2.default.getFromDate(0),
+    oldest_available_date: _DateUtils2.default.getFromDate(2)
+  };
+};
+
+var _crZhConfig = function _crZhConfig(id, value) {
+  return {
+    columnName: "Close",
+    dataColumn: 4,
+    dataSource: "Barchart Market Data Solutions",
+    id: id,
+    key: value,
+    linkFn: "NASDAQ",
+    isWithLegend: true,
+    legend: _AdapterFn2.default.stockSeriesLegend()
+  };
+};
 
 var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
   var _ref$results = _ref.results,
@@ -93,48 +120,18 @@ var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
     zhFnGetMfiConfig: _IndicatorSma.fnGetConfigMfi
   });
 
-  config.chart.spacingTop = 25;
-
   _ChartConfig2.default.setMinMax(config, _minClose, _maxClose);
-
-  Object.assign(config.xAxis, {
-    crosshair: _Chart2.default.fCrosshair()
-  });
 };
 
 var _createAreaConfig = function _createAreaConfig(json, option) {
-  var config = _ChartConfig2.default.fBaseAreaConfig(),
-      _option$stock = option.stock,
+  var _option$stock = option.stock,
       stock = _option$stock === undefined ? {} : _option$stock,
       _stock$caption = stock.caption,
       caption = _stock$caption === undefined ? '' : _stock$caption,
       _stock$value = stock.value,
       value = _stock$value === undefined ? '' : _stock$value,
-      _chartId = 'B/' + value;
-
-
-  Object.assign(config, {
-    title: _Chart2.default.fTitle({ text: caption, y: _Chart2.default.STACKED_TITLE_Y }),
-    subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.STACKED_SUBTITLE_Y }),
-    tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatter),
-    info: {
-      description: DESCR,
-      frequency: "daily",
-      name: caption,
-      newest_available_date: _DateUtils2.default.getFromDate(0),
-      oldest_available_date: _DateUtils2.default.getFromDate(2)
-    },
-    zhConfig: {
-      columnName: "Close",
-      dataColumn: 4,
-      dataSource: "Barchart Market Data Solutions",
-      id: _chartId,
-      key: '' + value,
-      linkFn: "NASDAQ",
-      isWithLegend: true,
-      legend: _AdapterFn2.default.stockSeriesLegend()
-    }
-  });
+      _chartId = 'B/' + value,
+      config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(caption).addTooltip(_Tooltip2.default.fnBasePointFormatter).add('xAxis', { crosshair: _Chart2.default.fCrosshair() }).add('info', _crInfo(caption)).add('zhConfig', _crZhConfig(_chartId, value)).toConfig();
 
   _createCloseSeries(config, json, _chartId);
 

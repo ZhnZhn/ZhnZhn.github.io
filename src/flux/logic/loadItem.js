@@ -53,19 +53,16 @@ const _fnFetchToChart = function(objImpl, { json, option, onCompleted }){
 
   ChartFn.addSeriaWithRenderLabel({
     chart, series,
-    label: itemCaption || value,
+    label: series.zhItemCaption || itemCaption || value,
     hasSecondYAxis: !!hasSecondYAxis
   })
   onCompleted(option)
 }
 
 const loadItem = (objImpl) => {
-    //_fnToChartComp = _fnFetchToChartComp.bind(null, objImpl)
-    //_fnToChart = _fnFetchToChart.bind(null, objImpl)
     return {
       loadItem(option, onCompleted, onAdded, onFailed){
         const parentId = ChartStore.isLoadToChart();
-        //option.adapter = objImpl.adapter
         if (!parentId) {
            _loadToChartComp(objImpl, option, onCompleted, onFailed);
         } else {
@@ -75,9 +72,6 @@ const loadItem = (objImpl) => {
      },
      fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
      fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
-
-     //fnFetchToChartComp: _fnToChartComp,
-     //fnFetchToChart: _fnToChart
    }
 }
 

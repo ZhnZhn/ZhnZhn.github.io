@@ -131,6 +131,7 @@ var ChartContainer = function (_Component) {
     _this._onStore = function (actionType, data) {
       if (isInArray(compActions, actionType)) {
         if (data && data.chartType === _this.props.chartType) {
+          _this.spComp.scrollTop();
           _this.setState(data);
         }
       } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
@@ -194,8 +195,8 @@ var ChartContainer = function (_Component) {
   }
 
   (0, _createClass3.default)(ChartContainer, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       this.unsubscribe = _ChartStore2.default.listen(this._onStore);
       var _initState = _ChartStore2.default.getConfigs(this.props.chartType);
       if (_initState) {
@@ -210,6 +211,8 @@ var ChartContainer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var caption = this.props.caption,
           isShow = this.state.isShow,
           _styleIsShow = isShow ? styles.inlineBlock : styles.none,
@@ -236,7 +239,12 @@ var ChartContainer = function (_Component) {
         ),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: styles.scrollDiv },
+          {
+            ref: function ref(node) {
+              return _this2.spComp = node;
+            },
+            style: styles.scrollDiv
+          },
           _react2.default.createElement(
             _reactAddonsCssTransitionGroup2.default,
             (0, _extends3.default)({}, styles.transitionOption, {

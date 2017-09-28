@@ -9,6 +9,7 @@ const createLoadOptions = (props={}, options={}) => {
            ? fnValue(one.value, two.value)
            : undefined
   return {
+       ...dfProps,
        value : _value,
        fromDate: fromDate,
        toDate: toDate,
@@ -19,9 +20,9 @@ const createLoadOptions = (props={}, options={}) => {
        isPremium : isPremium,
        dataSource: dataSource,
        hasSecondYAxis: hasSecondYAxis,
+       oneCaption: one.caption,
        one: one.value,
        two: two.value,
-       ...dfProps
     }
 }
 

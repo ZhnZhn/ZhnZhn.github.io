@@ -48,6 +48,10 @@ var _TwitterLink = require('./TwitterLink');
 
 var _TwitterLink2 = _interopRequireDefault(_TwitterLink);
 
+var _DataProviders = require('./DataProviders');
+
+var _DataProviders2 = _interopRequireDefault(_DataProviders);
+
 var _Step = require('./Step');
 
 var _Step2 = _interopRequireDefault(_Step);
@@ -64,55 +68,11 @@ var _ContainerStyles = require('../styles/ContainerStyles');
 
 var _ContainerStyles2 = _interopRequireDefault(_ContainerStyles);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _About = require('./About.Style');
 
-var S = {
-  SCROLL_DIV: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px'
-  },
-  DIV_WRAPPER: {
-    paddingLeft: '12px',
-    paddingRight: '5px',
-    lineHeight: 1.4,
-    color: 'gray',
-    fontWeight: 'bold'
-  },
-  LINE_HEIGHT: {
-    lineHeight: 1.8
-  },
-  MORE: {
-    lineHeight: 1.4
-  },
-  P_BOTTOM: {
-    marginBottom: '1em'
-  },
-  MARGIN_TOP: {
-    marginTop: '3px'
-  },
-  BT_TWITTER: {
-    marginLeft: '12px'
-  },
-  GREEN: {
-    color: '#80c040'
-  },
-  GRAY: {
-    color: 'gray'
-  },
-  BLACK: {
-    color: 'black'
-  },
-  BLUE: {
-    color: '#009ae5'
-  },
-  BLUE_DARK: {
-    color: '#2f7ed8'
-  },
-  RED: {
-    color: '#F44336'
-  }
-};
+var _About2 = _interopRequireDefault(_About);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var About = function (_Component) {
   (0, _inherits3.default)(About, _Component);
@@ -121,6 +81,16 @@ var About = function (_Component) {
     (0, _classCallCheck3.default)(this, About);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this));
+
+    _this._calcIsProviders = function () {
+      var strWidth = window.getComputedStyle(document.body, ':after').getPropertyValue('content');
+      switch (strWidth) {
+        case '"W600"':case '"W500"':
+          return true;
+        default:
+          return false;
+      }
+    };
 
     _this._onStore = function (actionType, data) {
       if (actionType === _ComponentActions.ComponentActionTypes.SHOW_ABOUT) {
@@ -137,14 +107,15 @@ var About = function (_Component) {
     };
 
     _this.state = {
+      isCloseProviders: _this._calcIsProviders(),
       isShow: props.isShow
     };
     return _this;
   }
 
   (0, _createClass3.default)(About, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       this.unsubscribe = this.props.store.listen(this._onStore);
     }
   }, {
@@ -155,7 +126,9 @@ var About = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var isShow = this.state.isShow,
+      var _state = this.state,
+          isShow = _state.isShow,
+          isCloseProviders = _state.isCloseProviders,
           _classOpen = isShow ? "show-popup" : null,
           _styleOpen = isShow ? { display: 'block' } : { display: 'none' };
 
@@ -172,23 +145,23 @@ var About = function (_Component) {
             onClose: this._handleClose
           },
           _react2.default.createElement(_TwitterLink2.default, {
-            rootStyle: S.BT_TWITTER,
+            rootStyle: _About2.default.BT_TWITTER,
             account: 'webapperc',
             title: 'Twitter page @wepapperc with examples'
           })
         ),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: S.SCROLL_DIV },
+          { style: _About2.default.SCROLL_DIV },
           _react2.default.createElement(
             'div',
-            { style: (0, _extends3.default)({}, S.DIV_WRAPPER, S.GREY) },
+            { style: (0, _extends3.default)({}, _About2.default.DIV_WRAPPER, _About2.default.GREY) },
             _react2.default.createElement(
               'p',
               null,
               _react2.default.createElement(
                 'span',
-                { style: S.GREEN },
+                { style: _About2.default.GREEN },
                 'ERC\xA0'
               ),
               _react2.default.createElement(
@@ -199,65 +172,13 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: S.P_BOTTOM },
+              { style: _About2.default.P_BOTTOM },
               'With it, you can view economic free open data from WEB.'
             ),
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                'span',
-                null,
-                'Data providers:'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: S.LINE_HEIGHT },
-              _react2.default.createElement(_Links2.default.Quandl, null),
-              _react2.default.createElement(
-                'span',
-                { style: S.BLACK },
-                '\xA0(Key),\xA0'
-              ),
-              _react2.default.createElement(_Links2.default.Barchart, null),
-              _react2.default.createElement(
-                'span',
-                { style: S.BLACK },
-                '\xA0(Key),\u2002'
-              ),
-              _react2.default.createElement(_Links2.default.AlphaVantage, null),
-              _react2.default.createElement(
-                'span',
-                { style: S.BLACK },
-                '\xA0(Key),'
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { style: (0, _extends3.default)({}, S.P_BOTTOM, S.LINE_HEIGHT) },
-              _react2.default.createElement(_Links2.default.Eurostat, null),
-              _react2.default.createElement(
-                'span',
-                { style: S.BLUE },
-                ',\u2002'
-              ),
-              _react2.default.createElement(_Links2.default.UnComtrade, null),
-              _react2.default.createElement(
-                'span',
-                { style: S.BLUE },
-                ',\u2002'
-              ),
-              _react2.default.createElement(_Links2.default.Insee, null),
-              _react2.default.createElement(
-                'span',
-                { style: S.BLACK },
-                '\xA0(Https Proxy for CORS).'
-              )
-            ),
+            _react2.default.createElement(_DataProviders2.default, { isClose: isCloseProviders }),
             _react2.default.createElement(
               'div',
-              { style: S.BLACK },
+              { style: _About2.default.BLACK },
               _react2.default.createElement(
                 'p',
                 null,
@@ -270,7 +191,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.MARGIN_TOP },
+                { style: _About2.default.MARGIN_TOP },
                 _react2.default.createElement(_Step2.default, { step: '2' }),
                 _react2.default.createElement(
                   'span',
@@ -280,7 +201,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.MARGIN_TOP },
+                { style: _About2.default.MARGIN_TOP },
                 _react2.default.createElement(_Step2.default, { step: '3' }),
                 _react2.default.createElement(
                   'span',
@@ -290,7 +211,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.MARGIN_TOP },
+                { style: _About2.default.MARGIN_TOP },
                 _react2.default.createElement(_Step2.default, { step: '4' }),
                 _react2.default.createElement(
                   'span',
@@ -300,7 +221,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.MARGIN_TOP },
+                { style: _About2.default.MARGIN_TOP },
                 _react2.default.createElement(_Step2.default, { step: '5' }),
                 _react2.default.createElement(
                   'span',
@@ -311,15 +232,15 @@ var About = function (_Component) {
             ),
             _react2.default.createElement(
               'p',
-              { style: Object.assign({}, S.P_BOTTOM, S.MARGIN_TOP) },
-              'The result will be shown in a Chart in a Chart container.'
+              { style: Object.assign({}, _About2.default.P_BOTTOM, _About2.default.MARGIN_TOP) },
+              'The result will be shown in a chart in a resizebale container.'
             ),
             _react2.default.createElement(
               _OpenClose2.default,
               {
                 isClose: true,
                 caption: 'More...',
-                rootStyle: S.MORE
+                rootStyle: _About2.default.MORE
               },
               _react2.default.createElement(
                 'p',
@@ -328,7 +249,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.P_BOTTOM },
+                { style: _About2.default.P_BOTTOM },
                 'In one time max three Dialogs can be opened.'
               ),
               _react2.default.createElement(
@@ -336,7 +257,7 @@ var About = function (_Component) {
                 null,
                 _react2.default.createElement(
                   'span',
-                  { style: S.RED },
+                  { style: _About2.default.RED },
                   'Attention:\xA0'
                 ),
                 _react2.default.createElement(
@@ -347,12 +268,12 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.P_BOTTOM },
+                { style: _About2.default.P_BOTTOM },
                 'The value of currency is not always USD as shows in a chart tooltip. Sometimes more details about data can be look at tab Info on a Chart.'
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.P_BOTTOM },
+                { style: _About2.default.P_BOTTOM },
                 _react2.default.createElement(
                   'span',
                   null,
@@ -365,12 +286,12 @@ var About = function (_Component) {
                   '\xA0data provider, for accessing without API Key, exists some restriction on frequency and amount queries (',
                   _react2.default.createElement(
                     'span',
-                    { style: S.BLUE_DARK },
+                    { style: _About2.default.BLUE_DARK },
                     '50 per day/1 at a time'
                   ),
                   _react2.default.createElement(
                     'span',
-                    { style: S.GREY },
+                    { style: _About2.default.GREY },
                     ').'
                   )
                 )
@@ -382,14 +303,14 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.P_BOTTOM },
+                { style: _About2.default.P_BOTTOM },
                 _react2.default.createElement(
                   'span',
                   null,
                   'you will be have (',
                   _react2.default.createElement(
                     'span',
-                    { style: S.BLUE_DARK },
+                    { style: _About2.default.BLUE_DARK },
                     '50 000 per day/1 at a time'
                   ),
                   '). It\'s free of charge to receive.'
@@ -402,7 +323,7 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                { style: S.P_BOTTOM },
+                { style: _About2.default.P_BOTTOM },
                 'Premium Free Sample Data can be requested only with Quandl API Key.'
               ),
               _react2.default.createElement(
@@ -427,7 +348,7 @@ var About = function (_Component) {
               null,
               _react2.default.createElement(
                 'span',
-                { style: S.BLACK },
+                { style: _About2.default.BLACK },
                 '*Logos Fair Use.'
               )
             )

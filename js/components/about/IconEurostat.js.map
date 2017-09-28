@@ -5,7 +5,10 @@
  "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconEurostat.js",
  "sourceRoot": "",
  "names": [
+  "S",
+  "A",
+  "marginLeft",
   "IconEurostat"
  ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,eAAe,SAAfA,YAAe;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,gBADZ;AAEE,aAAM,UAFR;AAGE,YAAK;AAHP;AAAA;AAAA,GADmB;AAAA,CAArB;;kBAUeA,Y"
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,KAAG;AACDC,gBAAY;AADX;AADK,CAAV;;AAMA,IAAMC,eAAe,SAAfA,YAAe;AAAA,SACnB;AAAA;AAAA;AACE,iBAAU,gBADZ;AAEE,aAAM,UAFR;AAGE,aAAOH,EAAEC,CAHX;AAIE,YAAK;AAJP;AAAA;AAAA,GADmB;AAAA,CAArB;;kBAWeE,Y"
 }

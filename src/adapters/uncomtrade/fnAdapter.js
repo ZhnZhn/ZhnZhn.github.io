@@ -1,5 +1,5 @@
 import ChartConfig from '../../charts/ChartConfig'
-import Chart from '../../charts/Chart'
+import ConfigBuilder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import AdapterFn from '../AdapterFn'
@@ -12,7 +12,7 @@ import C from './conf'
 
 const fnAdapter = {
 
-  crChartId: (option) => {
+  crChartId: option => {
     const { value, rg=2, measure="A" } = option;
     return value + '_' + rg + '_' + measure;
   },
@@ -28,6 +28,25 @@ const fnAdapter = {
       lineWidth: 1,
       radius: 4,
       symbol: 'circle'
+    };
+  },
+
+  crInfo: json => ({
+    description: fnDescr.toDescr(json),
+    frequency: "Annual"
+  }),
+
+  crZhConfig(option) {
+    const { dataSource, nativeHref } = option
+        , _id = this.crChartId(option);
+    return {
+      id: _id,
+      key: _id,
+      isWithLegend: true,
+      legend: [],
+      dataSource: dataSource,
+      linkFn: "UN_COMTRADE",
+      item: nativeHref
     };
   },
 
@@ -99,47 +118,25 @@ const fnAdapter = {
        ? fnLegend.toWorldLegend(legend, hm)
        : fnLegend.toAllLegend(legend, hm, measure)
 
-    Object.assign(config.xAxis, { categories }, C.X_AXIS)
-    Object.assign(config.yAxis, C.Y_AXIS)
-
+    Object.assign(config.xAxis, { categories })
   },
 
   crBaseConfig(json, option) {
-    const {
-            dataSource,
-            title, subtitle,
-            nativeHref
-          } = option;
-    return Object.assign(ChartConfig.fBaseAreaConfig(), {
-        title: Chart.fTitle({
-          text: title,
-          y: Chart.STACKED_TITLE_Y
-        }),
-        subtitle: Chart.fSubtitle({
-          text: subtitle,
-          y: Chart.STACKED_SUBTITLE_Y
-        }),
-        tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatterC),
-        info: {
-          description: fnDescr.toDescr(json),
-          frequency: "Annual"
-        },
-        zhConfig: {
-          //id: value,
-          id: this.crChartId(option),
-          key: this.crChartId(option),
-          isWithLegend: true,
-          legend: [],
-          dataSource: dataSource,
-          linkFn: "UN_COMTRADE",
-          item: nativeHref
-       }
-     });
+    const { title, subtitle } = option;
+    return (new ConfigBuilder())
+      .initBaseArea()
+      .add('chart', C.CHART)
+      .addCaption(title, subtitle)
+      .add('xAxis', C.X_AXIS)
+      .add('yAxis', C.Y_AXIS)
+      .addTooltip(Tooltip.fnBasePointFormatterC)
+      .add('info', this.crInfo(json))
+      .add('zhConfig', this.crZhConfig(option))
+      .toConfig();
   },
 
   toConfig(json, option){
     const config = this.crBaseConfig(json, option);
-    Object.assign(config.chart, C.CHART)
     this.addSeriasTo(config, json, option)
 
     return config;

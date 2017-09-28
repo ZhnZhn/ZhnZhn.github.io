@@ -108,7 +108,7 @@ var _fnAddSplitRatio = function _fnAddSplitRatio(splitRationIndex, result) {
 
   if (point[splitRationIndex] !== 1) {
     var x = dateUTC,
-        splitRatio = point[splitRationIndex],
+        splitRatio = parseFloat(point[splitRationIndex].toFixed(2)),
         price = point[yPointIndex];
 
     dataSplitRatio.push(Object.assign(_ChartConfig2.default.fMarkerSplitRatio(), { x: x, splitRatio: splitRatio, price: price }));

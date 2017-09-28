@@ -61,6 +61,13 @@ var UnComtrade = (0, _withProps2.default)({
   title: "UN Comtrade"
 })(_Link2.default);
 
+var FaoStat = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "http://www.fao.org/faostat/en/#data",
+  style: S.BLUE,
+  title: "FAOSTAT"
+})(_Link2.default);
+
 var Insee = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
@@ -74,6 +81,7 @@ exports.default = {
   AlphaVantage: AlphaVantage,
   Eurostat: Eurostat,
   UnComtrade: UnComtrade,
+  FaoStat: FaoStat,
   Insee: Insee
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map

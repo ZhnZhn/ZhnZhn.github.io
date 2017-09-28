@@ -28,12 +28,22 @@ var _fnAddAlert = function _fnAddAlert(option, msg) {
   });
 };
 
-var _fnAddDfAlert = function _fnAddDfAlert(option, error) {
+var _crAlertDescr = function _crAlertDescr(error) {
   var errCaption = error.errCaption,
-      message = error.message,
-      caption = error.errCaption ? errCaption : M.RUNTIME_ERROR.caption;
+      message = error.message;
 
-  _fnAddAlert(option, { caption: caption, descr: message });
+  if (error.errCaption) {
+    return { caption: errCaption, descr: message };
+  } else if (message.indexOf(M.ZH_1000.token) !== -1) {
+    return M.ZH_1000;
+  } else {
+    return { caption: M.RUNTIME_ERROR.caption, descr: message };
+  }
+};
+
+var _fnAddDfAlert = function _fnAddDfAlert(option, error) {
+  var _obj = _crAlertDescr(error);
+  _fnAddAlert(option, _obj);
 };
 
 var fnCatch = exports.fnCatch = function fnCatch(_ref) {

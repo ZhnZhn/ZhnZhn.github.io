@@ -102,7 +102,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         config = _props$config === undefined ? {} : _props$config,
         _props$caption = props.caption,
         caption = _props$caption === undefined ? '' : _props$caption,
-        zhConfig = config.zhConfig,
+        _config$zhConfig = config.zhConfig,
+        zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
         _zhConfig$dataSource = zhConfig.dataSource,
         dataSource = _zhConfig$dataSource === undefined ? '' : _zhConfig$dataSource,
         itemCaption = zhConfig.itemCaption,
@@ -148,10 +149,13 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       var _props = this.props,
           chartType = _props.chartType,
           caption = _props.caption,
-          config = _props.config,
+          _props$config2 = _props.config,
+          config = _props$config2 === undefined ? {} : _props$config2,
           onCloseItem = _props.onCloseItem,
           isAdminMode = _props.isAdminMode,
-          itemTime = config.zhConfig.itemTime,
+          _config$zhConfig2 = config.zhConfig,
+          zhConfig = _config$zhConfig2 === undefined ? {} : _config$zhConfig2,
+          itemTime = zhConfig.itemTime,
           _state = this.state,
           isOpen = _state.isOpen,
           isShowChart = _state.isShowChart,
@@ -440,14 +444,19 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     );
   };
 
-  this._renderLegend = function (config) {
-    var isShowLegend = _this3.state.isShowLegend;
+  this._renderLegend = function () {
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var isShowLegend = _this3.state.isShowLegend,
+        _config$zhConfig3 = config.zhConfig,
+        zhConfig = _config$zhConfig3 === undefined ? {} : _config$zhConfig3,
+        isWithLegend = zhConfig.isWithLegend,
+        legend = zhConfig.legend;
 
-    var _compLegend = config.zhConfig.isWithLegend ? _react2.default.createElement(
+    var _compLegend = isWithLegend ? _react2.default.createElement(
       _ShowHide2.default,
       { isShow: isShowLegend },
       _react2.default.createElement(_Legend2.default, {
-        legend: config.zhConfig.legend,
+        legend: legend,
         onClickItem: _this3._handlerToggleSeria
       })
     ) : undefined;

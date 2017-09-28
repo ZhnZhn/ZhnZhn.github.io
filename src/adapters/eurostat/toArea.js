@@ -2,13 +2,19 @@ import ChartConfig from '../../charts/ChartConfig';
 
 import EuroStatFn from './EuroStatFn';
 
+const _crTimeIndexAndValue = json => {
+  const { dimension={}, value=[] } = json
+      , { time={} } = dimension
+      , { category={} } = time
+      , { index:timeIndex=0 } = category;
+  return { timeIndex, value };
+}
+
 
 const toArea = {
-   createConfig : (json, option) => {
-     const timeIndex = json.dimension.time.category.index
-         , value = json.value
+   createConfig: (json, option) => {
+     const { timeIndex, value } = _crTimeIndexAndValue(json)
          , { isNotZoomToMinMax } = option
-         //, { data, max, min } = _fnCreateData(timeIndex, value)
          , { data, max, min } = EuroStatFn.createData(timeIndex, value)
          , config = ChartConfig.fBaseAreaConfig();
 
@@ -17,21 +23,19 @@ const toArea = {
 
       return config;
    },
-   createSeria : (json, option) => {
-     const timeIndex = json.dimension.time.category.index
-         , value = json.value
+
+   createSeria: (json, option) => {
+     const { timeIndex, value } = _crTimeIndexAndValue(json)
          , valueText = option.itemCaption
          , seria = ChartConfig.fSeries()
-         , { data } = EuroStatFn.createData(timeIndex, value)
-         //, { data } = _fnCreateData(timeIndex, value);
+         , { data } = EuroStatFn.createData(timeIndex, value);
 
-     seria.zhSeriaId = option.key;
-     seria.zhValueText = valueText;
-     seria.data = data
-
-     seria.minY = EuroStatFn.findMinY(data);
-
-     return seria;
+     return Object.assign(seria, {
+       zhSeriaId: option.key,
+       zhValueText: valueText,
+       data: data,
+       minY: EuroStatFn.findMinY(data)
+     });
    }
 };
 

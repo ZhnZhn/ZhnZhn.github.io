@@ -6,13 +6,15 @@ import IconReact from './IconReact';
 import IconHighcharts from './IconHighcharts';
 import IconEurostat from './IconEurostat';
 import IconUnComtrade from './IconUnComtrade';
+import IconFaoStat from './IconFaoStat';
 
 const S = {
   ROOT : {
     textAlign : 'center',
-    paddingTop: '20px'
+    paddingTop: '20px',
+    paddingBottom: '8px'
   }
-}
+};
 
 const IconLogoBar = (props) => (
   <div style={S.ROOT}>
@@ -24,8 +26,9 @@ const IconLogoBar = (props) => (
      />
      <IconReact />
      <IconHighcharts />
-     <IconUnComtrade />
      <IconEurostat />
+     <IconUnComtrade />
+     <IconFaoStat />
   </div>
 );
 

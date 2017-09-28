@@ -4,6 +4,7 @@ export const BrowserType = {
    EUROSTAT : 'ES',
    FRANCE_STATISTICS : 'FS',
    UN_COMTRADE: 'UN',
+   FAOSTAT: 'FAO',
 
    PREMIUM_SAMPLE : 'QPS',
    ECONOMIC : 'QE',
@@ -61,6 +62,7 @@ export const LoadType = {
   EU_STAT: 'EU_STAT',
   FS: 'FS',
   UN: 'UN',
+  FAO: 'FAO',
   WL: 'WL'
 }
 

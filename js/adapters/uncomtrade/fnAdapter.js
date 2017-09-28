@@ -12,9 +12,9 @@ var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
-var _Chart = require('../../charts/Chart');
+var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
-var _Chart2 = _interopRequireDefault(_Chart);
+var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
 var _Tooltip = require('../../charts/Tooltip');
 
@@ -68,6 +68,28 @@ var fnAdapter = {
     };
   },
 
+  crInfo: function crInfo(json) {
+    return {
+      description: _fnDescr2.default.toDescr(json),
+      frequency: "Annual"
+    };
+  },
+
+  crZhConfig: function crZhConfig(option) {
+    var dataSource = option.dataSource,
+        nativeHref = option.nativeHref,
+        _id = this.crChartId(option);
+
+    return {
+      id: _id,
+      key: _id,
+      isWithLegend: true,
+      legend: [],
+      dataSource: dataSource,
+      linkFn: "UN_COMTRADE",
+      item: nativeHref
+    };
+  },
   addSeriaTo: function addSeriaTo(_ref) {
     var config = _ref.config,
         hm = _ref.hm,
@@ -137,44 +159,16 @@ var fnAdapter = {
     var legend = config.zhConfig.legend;
     config.zhConfig.legend = one !== _conf2.default.ALL ? _fnLegend2.default.toWorldLegend(legend, hm) : _fnLegend2.default.toAllLegend(legend, hm, measure);
 
-    Object.assign(config.xAxis, { categories: categories }, _conf2.default.X_AXIS);
-    Object.assign(config.yAxis, _conf2.default.Y_AXIS);
+    Object.assign(config.xAxis, { categories: categories });
   },
   crBaseConfig: function crBaseConfig(json, option) {
-    var dataSource = option.dataSource,
-        title = option.title,
-        subtitle = option.subtitle,
-        nativeHref = option.nativeHref;
+    var title = option.title,
+        subtitle = option.subtitle;
 
-    return Object.assign(_ChartConfig2.default.fBaseAreaConfig(), {
-      title: _Chart2.default.fTitle({
-        text: title,
-        y: _Chart2.default.STACKED_TITLE_Y
-      }),
-      subtitle: _Chart2.default.fSubtitle({
-        text: subtitle,
-        y: _Chart2.default.STACKED_SUBTITLE_Y
-      }),
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatterC),
-      info: {
-        description: _fnDescr2.default.toDescr(json),
-        frequency: "Annual"
-      },
-      zhConfig: {
-        //id: value,
-        id: this.crChartId(option),
-        key: this.crChartId(option),
-        isWithLegend: true,
-        legend: [],
-        dataSource: dataSource,
-        linkFn: "UN_COMTRADE",
-        item: nativeHref
-      }
-    });
+    return new _ConfigBuilder2.default().initBaseArea().add('chart', _conf2.default.CHART).addCaption(title, subtitle).add('xAxis', _conf2.default.X_AXIS).add('yAxis', _conf2.default.Y_AXIS).addTooltip(_Tooltip2.default.fnBasePointFormatterC).add('info', this.crInfo(json)).add('zhConfig', this.crZhConfig(option)).toConfig();
   },
   toConfig: function toConfig(json, option) {
     var config = this.crBaseConfig(json, option);
-    Object.assign(config.chart, _conf2.default.CHART);
     this.addSeriasTo(config, json, option);
 
     return config;

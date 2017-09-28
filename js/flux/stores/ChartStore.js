@@ -116,7 +116,10 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   onLoadStockCompleted: function onLoadStockCompleted(option, config) {
     var chartType = option.chartType,
         browserType = option.browserType,
-        zhCompType = option.zhCompType;
+        zhCompType = option.zhCompType,
+        _config$zhConfig = config.zhConfig,
+        zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
+        limitRemaining = zhConfig.limitRemaining;
 
     if (zhCompType) {
       config.zhCompType = zhCompType;
@@ -130,14 +133,14 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
       chartCont.isShow = true;
 
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, chartCont);
-      this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);
+      this.triggerWithLimitRemaining(limitRemaining);
     } else {
       this.charts[chartType] = this.createInitConfig(chartType);
       this.charts[chartType].configs.unshift(config);
 
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED);
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
-      this.triggerWithLimitRemaining(config.zhConfig.limitRemaining);
+      this.triggerWithLimitRemaining(limitRemaining);
     }
 
     this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);

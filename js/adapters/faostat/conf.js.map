@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\faostat\\conf.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\faostat\\conf.js",
+ "sourceRoot": "",
+ "names": [
+  "C",
+  "DATASET_EMPTY",
+  "ONE_BLANK",
+  "MM_DD"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,iBAAe,kBADP;AAERC,aAAW,GAFH;AAGRC,SAAO;AAHC,CAAV;;kBAMeH,C"
+}

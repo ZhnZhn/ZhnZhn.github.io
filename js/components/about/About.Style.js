@@ -1,0 +1,60 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var S = {
+  SCROLL_DIV: {
+    overflowY: 'auto',
+    height: '92%',
+    paddingRight: '10px'
+  },
+  DIV_WRAPPER: {
+    paddingLeft: '12px',
+    paddingRight: '5px',
+    lineHeight: 1.4,
+    color: 'gray',
+    fontWeight: 'bold'
+  },
+  PROVIDER: {
+    display: 'inline-block',
+    paddingRight: '8px',
+    paddingLeft: '8px'
+  },
+  LINE_HEIGHT: {
+    lineHeight: 1.8
+  },
+  MORE: {
+    lineHeight: 1.4
+  },
+  P_BOTTOM: {
+    marginBottom: '0.8em'
+  },
+  MARGIN_TOP: {
+    marginTop: '3px'
+  },
+  BT_TWITTER: {
+    marginLeft: '12px'
+  },
+  GREEN: {
+    color: '#80c040'
+  },
+  GRAY: {
+    color: 'gray'
+  },
+  BLACK: {
+    color: 'black'
+  },
+  BLUE: {
+    color: '#009ae5'
+  },
+  BLUE_DARK: {
+    color: '#2f7ed8'
+  },
+  RED: {
+    color: '#F44336'
+  }
+};
+
+exports.default = S;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\About.Style.js.map

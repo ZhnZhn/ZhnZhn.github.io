@@ -65,6 +65,11 @@ const Msg = {
      NETWORK_ERROR : {
         caption : 'Network Error',
         descr: 'Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond, 503.'
+     },
+     ZH_1000: {
+       token: 'ZH_1000',
+       caption: 'Not Allowed to Add',
+       descr: "This type of request isn't allowed to be added to selected chart. This type of request can be loaded in his own chart.",
      }
   }
 }

@@ -18,6 +18,12 @@ var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
+var _ConfigBuilder = require('../../charts/ConfigBuilder');
+
+var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+
+var _IndicatorSma = require('../IndicatorSma');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var C = {
@@ -42,6 +48,15 @@ var C = {
   BLUE: { color: 'rgb(47, 126, 216)' },
   BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' },
   GREEN: { color: '#4caf50' }
+};
+
+var _crZhConfig = function _crZhConfig(id) {
+  return {
+    id: id,
+    key: id,
+    isWithLegend: false,
+    dataSource: "Alpha Vantage"
+  };
 };
 
 var _crValuePropName = function _crValuePropName(indicator) {
@@ -211,26 +226,17 @@ var AlphaAdapter = {
     var indicator = option.indicator,
         ticket = option.ticket,
         _chartId = ticket + '-' + indicator,
-        config = _ChartConfig2.default.fBaseAreaConfig({
-      zhConfig: {
-        id: _chartId,
-        key: _chartId,
-        isWithLegend: false,
-        dataSource: "Alpha"
-      }
-    }),
         _series = this.toSeries(json, option),
         _isArrSeries = Array.isArray(_series),
         _refSeries = _isArrSeries ? _series[0] : _series,
-        type = _refSeries.type || 'spline';
+        type = _refSeries.type || 'spline',
+        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addSeriaBy(0, _refSeries).addSeriaBy(0, { type: type }).add('zhConfig', _crZhConfig(_chartId)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
 
-    Object.assign(config.series[0], _refSeries, { type: type });
     if (_isArrSeries) {
       for (var i = 1; i < _series.length; i++) {
         config.series.push(_series[i]);
       }
     }
-    config.chart.spacingTop = 25;
 
     return {
       config: config,

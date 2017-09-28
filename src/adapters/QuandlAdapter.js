@@ -65,7 +65,7 @@ const _fnAddSplitRatio = function(splitRationIndex, result){
   const { point, dateUTC, yPointIndex, dataSplitRatio } = result;
   if (point[splitRationIndex] !== 1){
     const x = dateUTC
-        , splitRatio = point[splitRationIndex]
+        , splitRatio = parseFloat(point[splitRationIndex].toFixed(2))
         , price = point[yPointIndex];
 
     dataSplitRatio.push(Object.assign(ChartConfig.fMarkerSplitRatio(), {x, splitRatio, price}));

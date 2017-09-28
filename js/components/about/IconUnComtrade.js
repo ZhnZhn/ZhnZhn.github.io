@@ -12,6 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var S = {
   A: {
+    marginTop: '8px',
     marginLeft: '16px',
     marginRight: '16px'
   }

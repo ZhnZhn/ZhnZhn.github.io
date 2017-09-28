@@ -66,9 +66,9 @@ const Chart = {
 
   fCreateMonoColor(base=COLOR.MONO_BASE1, deltaColor=0, opacity=0.75){
     return Highcharts.Color(base)
-                      .brighten( (this.COLOR_LOW_LEVEL) + deltaColor)
-                      .setOpacity(opacity)
-                      .get()
+       .brighten( (this.COLOR_LOW_LEVEL) + deltaColor)
+       .setOpacity(opacity)
+       .get();
   },
 
   fnGetMonoColor(index){

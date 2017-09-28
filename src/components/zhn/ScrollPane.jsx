@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const ScrollPane = ({ style, className="", children }) => (
-   <div className={`with-scroll ${className}`} style={style}>
-      {children}
-   </div>
-)
+class ScrollPane extends Component {
+  render(){
+    const { style, className="", children } = this.props;
+    return (
+      <div
+        ref={ node => this.rootNode = node}
+        className={`with-scroll ${className}`}
+        style={style}
+      >
+         {children}
+      </div>
+    );
+  }
+
+  scrollTop(){
+    this.rootNode.scrollTop = 0
+  }
+}
 
 export default ScrollPane

@@ -80,20 +80,27 @@ var _onLoadOptionsCompleted = function _onLoadOptionsCompleted(target, _ref) {
       optionJsonProp = _ref.optionJsonProp;
 
   if (toStateProp && optionJsonProp) {
-    var _target$setState;
+    if (!json.dfColumns) {
+      var _target$setState;
 
-    target.setState((_target$setState = {}, (0, _defineProperty3.default)(_target$setState, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState, toStateProp, json[optionJsonProp]), _target$setState));
+      target.setState((_target$setState = {}, (0, _defineProperty3.default)(_target$setState, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState, toStateProp, json[optionJsonProp]), _target$setState));
+    } else {
+      var _target$setState2;
+
+      target._isDfColumns = true;
+      target.setState((_target$setState2 = {}, (0, _defineProperty3.default)(_target$setState2, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState2, toStateProp, json[optionJsonProp]), (0, _defineProperty3.default)(_target$setState2, 'childOptions', json.dfColumns), _target$setState2));
+    }
   }
 };
 
 var _onLoadOptionsFailed = function _onLoadOptionsFailed(target, _ref2) {
-  var _target$setState2;
+  var _target$setState3;
 
   var error = _ref2.error,
       isLoadingProp = _ref2.isLoadingProp,
       isLoadingFailedProp = _ref2.isLoadingFailedProp;
 
-  target.setState((_target$setState2 = {}, (0, _defineProperty3.default)(_target$setState2, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState2, isLoadingFailedProp, true), _target$setState2));
+  target.setState((_target$setState3 = {}, (0, _defineProperty3.default)(_target$setState3, isLoadingProp, false), (0, _defineProperty3.default)(_target$setState3, isLoadingFailedProp, true), _target$setState3));
   if (error instanceof TypeError) {
     _fnShowAlertDialog(_Msg2.default.Alert.NETWORK_ERROR.caption, _Msg2.default.Alert.NETWORK_ERROR.descr);
   }

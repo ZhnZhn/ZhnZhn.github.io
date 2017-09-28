@@ -4,11 +4,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var _crDefault = function _crDefault(props, options) {
   var isPremium = props.isPremium,
       fnValue = props.fnValue,
       loadId = props.loadId,
       dataSource = props.dataSource,
+      _props$dfProps = props.dfProps,
+      dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
       one = options.one,
       two = options.two,
       three = options.three,
@@ -17,18 +25,22 @@ var _crDefault = function _crDefault(props, options) {
       hasSecondYAxis = options.hasSecondYAxis,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : undefined;
 
-  return {
+  return (0, _extends3.default)({}, dfProps, {
     value: _value,
     fromDate: fromDate,
     toDate: toDate,
     dataColumn: three ? three.value : 1,
     loadId: loadId,
-    title: one.caption + ':' + two.caption,
+    title: one.caption + ': ' + two.caption,
     subtitle: three.caption,
     dataSource: dataSource,
     isPremium: isPremium,
-    hasSecondYAxis: hasSecondYAxis
-  };
+    hasSecondYAxis: hasSecondYAxis,
+    oneCaption: one.caption,
+    one: one.value,
+    two: two.value,
+    three: three.value
+  });
 };
 
 var _crTreeItem = function _crTreeItem(props, options) {

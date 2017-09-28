@@ -83,7 +83,7 @@ class ChartContainer extends Component {
     this.state = {};
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.unsubscribe = ChartStore.listen(this._onStore);
     const _initState = ChartStore.getConfigs(this.props.chartType)
     if (_initState) {
@@ -97,6 +97,7 @@ class ChartContainer extends Component {
    _onStore = (actionType, data) => {
       if (isInArray(compActions, actionType)) {
         if (data && data.chartType === this.props.chartType){
+          this.spComp.scrollTop()
           this.setState(data);
         }
       } else if (actionType === ComponentActionTypes.CLOSE_CHART_CONTAINER_2){
@@ -171,7 +172,10 @@ class ChartContainer extends Component {
              />
           </BrowserCaption>
 
-          <ScrollPane style={styles.scrollDiv}>
+          <ScrollPane
+             ref={ node => this.spComp = node}
+             style={styles.scrollDiv}
+          >
             <ReactCSSTransitionGroup
                {...styles.transitionOption}
                component="div"

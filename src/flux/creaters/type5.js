@@ -1,21 +1,26 @@
 
 const _crDefault = (props, options) => {
-  const { isPremium, fnValue, loadId, dataSource } = props
+  const { isPremium, fnValue, loadId, dataSource, dfProps={} } = props
       , { one, two, three, fromDate, toDate, hasSecondYAxis } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
            : undefined
   return {
+    ...dfProps,
     value : _value,
     fromDate: fromDate,
     toDate: toDate,
-    dataColumn : (three) ? three.value : 1,
-    loadId : loadId,
-    title : `${one.caption}:${two.caption}`,
-    subtitle : three.caption,
-    dataSource : dataSource,
+    dataColumn: (three) ? three.value : 1,
+    loadId: loadId,
+    title: `${one.caption}: ${two.caption}`,
+    subtitle: three.caption,
+    dataSource: dataSource,
     isPremium: isPremium,
-    hasSecondYAxis: hasSecondYAxis
+    hasSecondYAxis: hasSecondYAxis,
+    oneCaption: one.caption,
+    one: one.value,
+    two: two.value,
+    three: three.value
   }
 }
 

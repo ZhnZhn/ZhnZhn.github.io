@@ -18,6 +18,7 @@ const LoadConfig = {
   [LoadType.EU_STAT]: LoadImpl.EuroStat,
   [LoadType.FS]: LoadImpl.Insee,
   [LoadType.UN]: LoadImpl.UnComtrade,
+  [LoadType.FAO]: LoadImpl.FaoStat,
   [ChartType.WATCH_LIST]: LoadImpl.Quandl,
   [LoadType.WL]: LoadImpl.Quandl
 };

@@ -48,6 +48,13 @@ const UnComtrade = withProps({
   title: "UN Comtrade"
 })(BaseComponent)
 
+const FaoStat = withProps({
+  className: CL_LINK,
+  href: "http://www.fao.org/faostat/en/#data",
+  style: S.BLUE,
+  title: "FAOSTAT"
+})(BaseComponent)
+
 const  Insee = withProps({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
@@ -61,5 +68,6 @@ export default {
   AlphaVantage,
   Eurostat,
   UnComtrade,
+  FaoStat,
   Insee
 };

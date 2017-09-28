@@ -1,5 +1,6 @@
 
 import ChartConfig from '../../charts/ChartConfig'
+import ConfigBuilder from '../../charts/ConfigBuilder'
 import AdapterFn from '../AdapterFn'
 
 import {
@@ -21,13 +22,19 @@ const C = {
   OPEN: "#90ed7d"
 }
 
-const _fMarker = (color) => {
-   return {
-     radius: 3,
-     enabled: true,
-     fillColor: color
-   };
-};
+const _crZhConfig = id => ({
+  id: id,
+  key: id,
+  isWithLegend: true,
+  legend: AdapterFn.stockSeriesLegend(),
+  dataSource: "Alpha Vantage"
+});
+
+const _fMarker = color => ({
+  radius: 3,
+  enabled: true,
+  fillColor: color
+});
 
 const _fMarkerColor = (date) => {
   let marker, color;
@@ -110,37 +117,26 @@ const _createSeriaData = (json, option, config, chartId) => {
 
 const AlphaIntradayAdapter = {
   toConfig(json, option){
-    const config = ChartConfig.fBaseAreaConfig()
+    const baseConfig = ChartConfig.fBaseAreaConfig()
         , { value, interval } = option
         , _chartId = value;
 
-    _createSeriaData(json, option, config, _chartId );
-    Object.assign(config, {
-      title: Chart.fTitle({
-        text: value,
-        y: Chart.STACKED_TITLE_Y
-      }),
-      subtitle: Chart.fSubtitle({
-        text: `Time Series (${interval})`,
-        y: Chart.STACKED_SUBTITLE_Y
-      }),
-      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatterT),
-      zhConfig: {
-        dataSource: "Alpha Vantage",
-        id: _chartId,
-        key: _chartId,
-        isWithLegend: true,
-        legend: AdapterFn.stockSeriesLegend()
-      },
-      zhFnAddSeriesSma: fnAddSeriesSma,
-      zhFnRemoveSeries: fnRemoveSeries
-    })
-    config.chart.spacingTop = 25
+    _createSeriaData(json, option, baseConfig, _chartId );
+
+    const config = ConfigBuilder()
+      .init(baseConfig)
+      .add('chart', { spacingTop: 25 })
+      .addCaption(value, `Time Series (${interval})`)
+      .addTooltip(Tooltip.fnBasePointFormatterT)
+      .add('zhConfig', _crZhConfig())
+      .add('zhFnAddSeriesSma', fnAddSeriesSma)
+      .add('zhFnRemoveSeries', fnRemoveSeries)
+      .toConfig();
 
     return {
       config,
-      isDrawDeltaExtrems:false,
-      isNotZoomToMinMax:false
+      isDrawDeltaExtrems: false,
+      isNotZoomToMinMax: false
     };
   },
 
