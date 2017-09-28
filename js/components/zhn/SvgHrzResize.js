@@ -110,11 +110,13 @@ var SvgHrzResize = function (_Component) {
     value: function componentDidMount() {
       var _props = this.props,
           comp = _props.comp,
+          initWidth = _props.initWidth,
           minWidth = _props.minWidth,
           maxWidth = _props.maxWidth;
 
       this.domNode = _reactDom2.default.findDOMNode(comp);
-      this.initWidth = this.domNode.getBoundingClientRect().width;
+      //this.initWidth = this.domNode.getBoundingClientRect().width;
+      this.initWidth = initWidth;
       this.currentWidth = this.initWidth;
       this.minDelta = minWidth - this.initWidth;
       this.maxDelta = maxWidth - this.initWidth;

@@ -25,9 +25,10 @@ class SvgHrzResize extends Component {
   }
 
   componentDidMount(){
-     const {comp, minWidth, maxWidth} = this.props;
+     const { comp, initWidth, minWidth, maxWidth } = this.props;
      this.domNode = ReactDOM.findDOMNode(comp);
-     this.initWidth = this.domNode.getBoundingClientRect().width;
+     //this.initWidth = this.domNode.getBoundingClientRect().width;
+     this.initWidth = initWidth;
      this.currentWidth = this.initWidth;
      this.minDelta = minWidth - this.initWidth;
      this.maxDelta = maxWidth - this.initWidth;
@@ -36,7 +37,7 @@ class SvgHrzResize extends Component {
   _increaseStepValue = () => {
     this.countStep +=1;
     if ( this.countStep > 30){
-      this.step = 3;    
+      this.step = 3;
     } else if ( this.countStep > 15){
       this.step = 2;
     }
@@ -62,7 +63,7 @@ class SvgHrzResize extends Component {
       this._increaseStepValue();
     }
   }
-  _handlerStartResize = (fnResize) => {
+  _handlerStartResize = (fnResize) => {    
     if (this.id !== null){
       this._handlerStopResize(false);
     }

@@ -60,6 +60,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SHOW_POPUP = "show-popup",
     CHILD_MARGIN = 36,
+    RESIZE_INIT_WIDTH = 635,
     RESIZE_MIN_WIDTH = 540,
     RESIZE_MAX_WIDTH = 1200;
 
@@ -231,6 +232,7 @@ var ChartContainer = function (_Component) {
             onClose: this._handleHide
           },
           _react2.default.createElement(_SvgHrzResize2.default, {
+            initWidth: RESIZE_INIT_WIDTH,
             minWidth: RESIZE_MIN_WIDTH,
             maxWidth: RESIZE_MAX_WIDTH,
             comp: this,

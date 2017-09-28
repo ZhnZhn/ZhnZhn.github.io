@@ -14,6 +14,7 @@ import ItemFactory from '../factories/ItemFactory';
 
 const SHOW_POPUP = "show-popup"
     , CHILD_MARGIN = 36
+    , RESIZE_INIT_WIDTH = 635
     , RESIZE_MIN_WIDTH = 540
     , RESIZE_MAX_WIDTH = 1200;
 
@@ -165,6 +166,7 @@ class ChartContainer extends Component {
              onClose={this._handleHide}
           >
              <SvgHrzResize
+               initWidth={RESIZE_INIT_WIDTH}
                minWidth={RESIZE_MIN_WIDTH}
                maxWidth={RESIZE_MAX_WIDTH}
                comp={this}
