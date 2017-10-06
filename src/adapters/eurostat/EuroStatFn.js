@@ -67,13 +67,13 @@ const EuroStatFn = {
   },
 
   setDataAndInfo({ config, data, json, option }){
-    const { title, subtitle, seriaType } = option;
+    const { title, subtitle, seriaType='AREA' } = option;
     Chart.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(option);
     config.info = this.createDatasetInfo(json, option);
-
-    if (seriaType === 'AREA'){
+    
+    if (seriaType && seriaType.toUpperCase() === 'AREA'){
       config.valueMoving = AdapterFn.valueMoving(data)
     }
 

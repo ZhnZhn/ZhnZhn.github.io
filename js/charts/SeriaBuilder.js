@@ -4,29 +4,54 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
 var _ChartConfig = require('./ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var C = {
-  TYPE_A: 'A',
-  TYPE_B: 'B'
-};
-
-var _crLegendItem = function _crLegendItem(index, color, name) {
-  var is = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+var _crLegendItem = function _crLegendItem(_ref) {
+  var index = _ref.index,
+      color = _ref.color,
+      name = _ref.name,
+      _ref$is = _ref.is,
+      is = _ref$is === undefined ? false : _ref$is;
   return {
     index: index, color: color, name: name,
     isVisible: is
   };
 };
 
+var _addSeriesImpl = function _addSeriesImpl(to, series) {
+  var _legend = [];
+  series.forEach(function (seria, index) {
+    var color = seria.color,
+        _seria$zhValueText = seria.zhValueText,
+        zhValueText = _seria$zhValueText === undefined ? '' : _seria$zhValueText,
+        visible = seria.visible;
+
+    to.push(seria);
+    _legend.push(_crLegendItem({
+      index: index, color: color, name: zhValueText, is: visible
+    }));
+  });
+  return _legend;
+};
+
 var SeriaBuilder = {
   initBaseSeria: function initBaseSeria() {
+    this._type = 'S';
     this.config = _ChartConfig2.default.fSeries();
     return this;
+  },
+  addLegend: function addLegend(legend) {
+    return this.add('zhConfig', {
+      legend: legend, isWithLegend: true
+    });
   },
   addSeriaBy: function addSeriaBy(index, obj) {
     if (this.config.series[index]) {
@@ -36,48 +61,78 @@ var SeriaBuilder = {
     }
     return this;
   },
-  addSeriesWithLegend: function addSeriesWithLegend(id, points) {
+  addSeriaPoints: function addSeriaPoints(id, points) {
     var _this = this;
 
-    var maxVisible = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 6;
+    var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+        _ref2$maxVisible = _ref2.maxVisible,
+        maxVisible = _ref2$maxVisible === undefined ? 6 : _ref2$maxVisible,
+        _ref2$isWithLegend = _ref2.isWithLegend,
+        isWithLegend = _ref2$isWithLegend === undefined ? false : _ref2$isWithLegend;
 
     var _legend = [];
-    points.forEach(function (data, i) {
-      var _isShow = i < maxVisible ? true : false,
-          _color = _ChartConfig2.default.getColor(i),
+    points.forEach(function (data, index) {
+      var is = index < maxVisible ? true : false,
+          color = _ChartConfig2.default.getColor(index),
           seriaName = data.seriaName;
 
-      _legend.push(_crLegendItem(i, _color, seriaName, _isShow));
-      _this.addSeriaBy(i, {
+      _legend.push(_crLegendItem({
+        index: index, color: color, name: seriaName, is: is
+      }));
+      _this.addSeriaBy(index, {
         type: 'spline',
         data: data,
         name: seriaName,
         zhValueText: seriaName,
-        zhSeriaId: id + '_' + i,
-        visible: _isShow
+        zhSeriaId: id + '_' + index,
+        visible: is
       });
     });
-    return this.add('zhConfig', {
-      isWithLegend: true,
-      legend: _legend
-    });
-  },
-  addPoints: function addPoints(id, _ref) {
-    var type = _ref.type,
-        points = _ref.points;
-
-    switch (type) {
-      case C.TYPE_A:
-        return this.addSeriaBy(0, {
-          type: 'spline',
-          data: points,
-          zhSeriaId: id
-        });
-      case C.TYPE_B:
-        return this.addSeriesWithLegend(id, points);
-      default:
-        return this;
+    if (!isWithLegend) {
+      this.addLegend(_legend);
     }
+    return this;
+  },
+  _addPointsToConfig: function _addPointsToConfig(id, points) {
+    if (points[0] && Array.isArray(points[0]) && points[0][0] && typeof points[0][0] !== 'number') {
+      this.addSeriaPoints(id, points);
+    } else {
+      this.addSeriaBy(0, {
+        type: 'spline',
+        data: points,
+        zhSeriaId: id
+      });
+    }
+  },
+  addPoints: function addPoints(id, points, text) {
+    if (this._type !== 'S') {
+      this._addPointsToConfig(id, points);
+    } else {
+      this.add({
+        data: points,
+        zhSeriaId: id,
+        zhValueText: text ? text : id
+      });
+    }
+    return this;
+  },
+  clearSeries: function clearSeries() {
+    this.config.series = [];
+    return this;
+  },
+  addSeries: function addSeries(series) {
+    var isWithoutLegend = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    var _to = Array.isArray(this.config.series) ? this.config.series : this.config.series = [];
+    if (Array.isArray(series)) {
+      var _legend = _addSeriesImpl(_to, series);
+      if (!isWithoutLegend) {
+        this.addLegend(_legend);
+      }
+    } else if ((typeof series === 'undefined' ? 'undefined' : (0, _typeof3.default)(series)) === 'object') {
+      _to[0] = series;
+    }
+    return this;
   }
 };
 

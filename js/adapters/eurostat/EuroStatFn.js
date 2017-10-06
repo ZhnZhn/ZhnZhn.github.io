@@ -101,14 +101,15 @@ var EuroStatFn = (0, _extends3.default)({
         option = _ref.option;
     var title = option.title,
         subtitle = option.subtitle,
-        seriaType = option.seriaType;
+        _option$seriaType = option.seriaType,
+        seriaType = _option$seriaType === undefined ? 'AREA' : _option$seriaType;
 
     _Chart2.default.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(option);
     config.info = this.createDatasetInfo(json, option);
 
-    if (seriaType === 'AREA') {
+    if (seriaType && seriaType.toUpperCase() === 'AREA') {
       config.valueMoving = _AdapterFn2.default.valueMoving(data);
     }
 

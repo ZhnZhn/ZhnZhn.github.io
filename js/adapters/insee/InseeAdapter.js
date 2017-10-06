@@ -8,21 +8,30 @@ var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
-var _ChartConfig = require('../../charts/ChartConfig');
-
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
 var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
 var _IndicatorSma = require('../IndicatorSma');
 
+var _fnDescr = require('./fnDescr');
+
+var _fnDescr2 = _interopRequireDefault(_fnDescr);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _parser = new window.DOMParser();
 
 //€
+
+var _crZhConfig = function _crZhConfig(id) {
+  return {
+    id: id,
+    key: id,
+    isWithLegend: false,
+    dataSource: "INSEE"
+  };
+};
 
 var _toData = function _toData(str) {
   var xml = _parser.parseFromString(str, 'text/xml'),
@@ -68,34 +77,6 @@ var _toData = function _toData(str) {
   };
 };
 
-var ST_TITLE = 'style="color:#1b75bb;"';
-var _toInfo = function _toInfo(info, title) {
-  var strDom = '';
-  info.forEach(function (seria) {
-    var title = seria.title,
-        id = seria.id,
-        updatedOn = seria.updatedOn,
-        frequency = seria.frequency,
-        unitMeasure = seria.unitMeasure,
-        unitMult = seria.unitMult;
-
-    strDom += '\n      <div style="color:black;">' + title + '</div>\n      <div>\n        <span ' + ST_TITLE + '>IDBANK:</span><span>' + id + '</span>\n        <span ' + ST_TITLE + '>Frequency:</span><span>' + frequency + '&nbsp;</span>\n        <span ' + ST_TITLE + '>UpdatedOn:</span><span>' + updatedOn + '&nbsp;</span>\n      </div>\n      <div>\n        <span ' + ST_TITLE + '>UnitMeasure:</span><span>' + unitMeasure + '&nbsp;</span>\n        <span ' + ST_TITLE + '>UnitMult:</span><span>' + unitMult + '&nbsp;</span>\n      </div>\n      <div>\n        <a href="https://www.insee.fr/en/statistiques/serie/' + id + '">INSEE Data Link</a>\n      </div>\n      <br/>\n    ';
-  });
-  return {
-    name: title,
-    description: strDom
-  };
-};
-
-var _crZhConfig = function _crZhConfig(id) {
-  return {
-    id: id,
-    key: id,
-    isWithLegend: false,
-    dataSource: "INSEE"
-  };
-};
-
 var InseeAdapter = {
   toConfig: function toConfig(str, option) {
     var value = option.value,
@@ -106,26 +87,25 @@ var InseeAdapter = {
         info = _toData2.info,
         minClose = _toData2.minClose,
         maxClose = _toData2.maxClose,
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addSeriaBy(0, {
-      data: data,
-      type: 'spline',
-      zhSeriaId: value
-    }).addCaption(title, subtitle).add('info', _toInfo(info, title)).add('valueMoving', _AdapterFn2.default.valueMoving(data)).add('zhConfig', _crZhConfig(value)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
-
-    _ChartConfig2.default.setMinMax(config, minClose, maxClose);
+        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).setMinMax(minClose, maxClose).add({
+      info: _fnDescr2.default.toInfo(info, title),
+      valueMoving: _AdapterFn2.default.valueMoving(data),
+      zhConfig: _crZhConfig(value),
+      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
+      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+    }).toConfig();
 
     return { config: config };
   },
   toSeries: function toSeries(str, option) {
     var value = option.value,
+        title = option.title,
+        subtitle = option.subtitle,
+        _text = subtitle ? subtitle : title,
         _toData3 = _toData(str),
         data = _toData3.data;
 
-    return Object.assign(_ChartConfig2.default.fSeries(), {
-      data: data,
-      zhSeriaId: value,
-      zhValueText: value
-    });
+    return (0, _ConfigBuilder2.default)().initBaseSeria().addPoints(value, data, _text).toConfig();
   }
 };
 

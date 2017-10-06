@@ -46,8 +46,18 @@
     }
   ],
   "items" : {
-    "ES_8_ECONOMIC" : {
-      "type" : "ES_8_ECONOMIC",
+    "ES_COUNTRIES_BASE": {
+      "dialogProps": {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Country",
+        "oneURI" : "./data/eurostat/countries.json",
+        "oneJsonProp" : "countries",
+        "loadId" : "EU_STAT"
+      }
+    },
+
+    "ES_8_ECONOMIC": {
+      "type": "ES_8_ECONOMIC",
       "menuTitle" : "8 Economic Indicators",
       "dialogCaption" : "8 Economic Indicators",
       "chartContainerCaption" : "Eurostat 8 Economic Indicators",
@@ -69,15 +79,11 @@
       "dialogCaption" : "HCPI (2015=100)",
       "chartContainerCaption" : "Eurostat Harmonised Consume Price Index",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "HCPI",
         "twoURI" : "./data/eurostat/cpi.json",
         "twoJsonProp" : "cpis",
-        "loadId" : "EU_STAT",
         "group" : "ei_cphi_m",
         "mapType" : "I",
         "mapSlice" : {
@@ -91,15 +97,11 @@
       "dialogCaption" : "Labour Cost",
       "chartContainerCaption" : "Eurostat Labour Cost",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/labour.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT",
         "mapType" : "Z",
         "mapFrequency" : "Y"
       }
@@ -110,15 +112,11 @@
       "dialogCaption" : "Social Protection",
       "chartContainerCaption" : "Eurostat Social Protection",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/social-protection.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT",
         "mapType" : "Z",
         "mapFrequency" : "Y",
         "mapDateDf" : 2
@@ -130,15 +128,11 @@
       "dialogCaption" : "Gross Domestic Product",
       "chartContainerCaption" : "Eurostat Gross Domestic Product",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/gdp.json",
-        "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT"
+        "twoJsonProp" : "metrics"
       }
     },
     "ES_UNEMP" : {
@@ -147,15 +141,11 @@
       "dialogCaption" : "Unemployment (unadjusted)",
       "chartContainerCaption" : "Eurostat Unemployment (unadjusted)",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/unemployment.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT",
         "group" : "ei_lmhr_m",
         "mapFrequency" : "M",
         "mapType" : "I",
@@ -170,16 +160,12 @@
         "dialogCaption" : "Economic Indicators",
         "chartContainerCaption" : "Eurostat Economic Indicators",
         "dialogType" : "DialogEurostat3",
+        "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
-          "descrUrl": "./data/eurostat/eurostat.html",
-          "oneCaption" : "Country",
-          "oneURI" : "./data/eurostat/countries.json",
-          "oneJsonProp" : "countries",
           "twoCaption" : "Group",
           "twoURI" : "./data/eurostat/group-metric.json",
           "twoJsonProp" : "groups",
-          "threeCaption" : "Metric",
-          "loadId" : "EU_STAT"
+          "threeCaption" : "Metric"
         }
     },
 
@@ -189,15 +175,11 @@
         "dialogCaption" : "Energy Main Indicators",
         "chartContainerCaption" : "Eurostat Energy Main Indicators",
         "dialogType" : "DialogEurostat2",
+        "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
-          "descrUrl": "./data/eurostat/eurostat.html",
-          "oneCaption" : "Country",
-          "oneURI" : "./data/eurostat/countries.json",
-          "oneJsonProp" : "countries",
           "twoCaption" : "Indicators",
           "twoURI" : "./data/eurostat/energy-indicators.json",
           "twoJsonProp" : "indicators",
-          "loadId" : "EU_STAT",
           "mapDateDf" : 2
         }
     },
@@ -207,16 +189,12 @@
         "dialogCaption" : "Energy Statistics Quantities",
         "chartContainerCaption" : "Eurostat Energy Statistics Quantities",
         "dialogType" : "DialogEurostat3",
+        "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
-          "descrUrl": "./data/eurostat/eurostat.html",
-          "oneCaption" : "Country",
-          "oneURI" : "./data/eurostat/countries.json",
-          "oneJsonProp" : "countries",
           "twoCaption" : "Group",
           "twoURI" : "./data/eurostat/energy-statistics-quantities.json",
           "twoJsonProp" : "groups",
-          "threeCaption" : "Metric",
-          "loadId" : "EU_STAT"
+          "threeCaption" : "Metric"
         }
     },
     "ES_E_STAT_PR" : {
@@ -225,15 +203,11 @@
         "dialogCaption" : "Energy Statistics Prices",
         "chartContainerCaption" : "Eurostat Energy Statistics Prices",
         "dialogType" : "DialogEurostat2",
+        "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
-          "descrUrl": "./data/eurostat/eurostat.html",
-          "oneCaption" : "Country",
-          "oneURI" : "./data/eurostat/countries.json",
-          "oneJsonProp" : "countries",
           "twoCaption" : "Item",
           "twoURI" : "./data/eurostat/energy-statistic-prices.json",
-          "twoJsonProp" : "items",
-          "loadId" : "EU_STAT"
+          "twoJsonProp" : "items"
         }
     },
     "ES_I_ENERGY" : {
@@ -242,15 +216,11 @@
       "dialogCaption" : "Industry Energy",
       "chartContainerCaption" : "Eurostat Industry Energy",
       "dialogType" : "DialogEurostat",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/industry-energy.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT",
         "group" : "ei_isen_m"
       }
     },
@@ -261,15 +231,11 @@
       "dialogCaption" : "Government Public",
       "chartContainerCaption" : "Eurostat Finance Government Public",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/finance-public.json",
-        "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT"
+        "twoJsonProp" : "metrics"
       }
     },
     "ES_F_INTEREST" : {
@@ -278,15 +244,11 @@
       "dialogCaption" : "Interest Rates",
       "chartContainerCaption" : "Eurostat Finance Interest Rates",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/interest-rates.json",
-        "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT"
+        "twoJsonProp" : "metrics"
       }
     },
 
@@ -296,15 +258,11 @@
       "dialogCaption" : "Agriculture Selling Prices",
       "chartContainerCaption" : "Eurostat Agriculture Selling Prices",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Price",
         "twoURI" : "./data/eurostat/agri-prices.json",
         "twoJsonProp" : "prices",
-        "loadId" : "EU_STAT",
         "mapType" : "Z",
         "mapFrequency" : "Y",
         "mapDateDf" : 1
@@ -316,15 +274,11 @@
       "dialogCaption" : "Agriculture Milk Production",
       "chartContainerCaption" : "Eurostat Agriculture Milk Production",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/agri-milk.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT",
         "mapType" : "Z",
         "mapFrequency" : "Y",
         "mapDateDf" : 1
@@ -336,15 +290,11 @@
       "dialogCaption" : "Meat Production & Livestock",
       "chartContainerCaption" : "Eurostat Meat Production & Livestock",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/agri-meat.json",
         "twoJsonProp" : "metrics",
-        "loadId" : "EU_STAT",
         "mapType" : "Z",
         "mapFrequency" : "Y",
         "mapDateDf" : 1
@@ -356,15 +306,11 @@
       "dialogCaption" : "Agri-Enviroment Indicators",
       "chartContainerCaption" : "Eurostat Agri-Enviroment Indicators",
       "dialogType" : "DialogEurostat",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/agri-envi.json",
-        "twoJsonProp" : "indicators",
-        "loadId" : "EU_STAT"
+        "twoJsonProp" : "indicators"
       }
     },
 
@@ -374,15 +320,11 @@
       "dialogCaption" : "High-Tech Indicators",
       "chartContainerCaption" : "High-Tech Indicators",
       "dialogType" : "DialogEurostat",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/high-tech-indicators.json",
-        "twoJsonProp" : "indicators",
-        "loadId" : "EU_STAT"
+        "twoJsonProp" : "indicators"
       }
     },
 
@@ -392,15 +334,11 @@
       "dialogCaption" : "House Price Indicators",
       "chartContainerCaption" : "Eurostat House Indicators",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/real-estate-index.json",
-        "twoJsonProp" : "indicators",
-        "loadId" : "EU_STAT"
+        "twoJsonProp" : "indicators"
       }
     }
   }

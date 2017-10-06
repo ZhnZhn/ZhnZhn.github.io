@@ -70,20 +70,30 @@ var QuandlFn2 = {
     };
   },
   createZhConfig: function createZhConfig(option) {
-    var _dataSource = option.dataSource ? 'Quandl: ' + option.dataSource : 'Quandl';
+    var item = option.stock,
+        title = option.title,
+        _option$subtitle = option.subtitle,
+        subtitle = _option$subtitle === undefined ? '' : _option$subtitle,
+        id = option.value,
+        key = option.key,
+        columnName = option.columnName,
+        dataColumn = option.dataColumn,
+        itemCaption = option.itemCaption,
+        fromDate = option.fromDate,
+        seriaColumnNames = option.seriaColumnNames,
+        linkFn = option.linkFn,
+        limitRemaining = option.limitRemaining,
+        dataSource = option.dataSource,
+        _dataSource = dataSource ? 'Quandl: ' + dataSource : 'Quandl';
+
     return {
-      item: option.stock,
-      title: option.title,
-      subtitle: option.subtitle ? option.subtitle : '',
-      id: option.value,
-      key: option.key,
-      columnName: option.columnName,
-      dataColumn: option.dataColumn,
-      itemCaption: option.itemCaption,
-      fromDate: option.fromDate,
-      seriaColumnNames: option.seriaColumnNames,
-      linkFn: option.linkFn,
-      limitRemaining: option.limitRemaining,
+      item: item,
+      title: title, subtitle: subtitle,
+      id: id, key: key,
+      columnName: columnName, dataColumn: dataColumn, itemCaption: itemCaption,
+      fromDate: fromDate, seriaColumnNames: seriaColumnNames,
+      linkFn: linkFn,
+      limitRemaining: limitRemaining,
       dataSource: _dataSource
     };
   },

@@ -44,6 +44,10 @@ var _ModalPalette = require('../zhn-moleculs/ModalPalette');
 
 var _ModalPalette2 = _interopRequireDefault(_ModalPalette);
 
+var _InputSelect = require('../zhn-select/InputSelect');
+
+var _InputSelect2 = _interopRequireDefault(_InputSelect);
+
 var _RowCheckBox = require('../dialogs/RowCheckBox');
 
 var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
@@ -62,11 +66,12 @@ var S = {
     paddingBottom: '16px'
   },
   TITLE: {
+    verticalAlign: 'middle',
     color: 'rgb(27, 117, 187)',
     textAlign: 'right',
     width: '100px',
     paddingLeft: '4px',
-    paddingRight: '8px',
+    paddingRight: '16px',
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
@@ -77,11 +82,19 @@ var S = {
     height: '32px',
     width: '32px',
     borderRadius: '2px',
-    verticalAlign: 'bottom',
+    verticalAlign: 'middle',
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   },
   ROW_CHECK_BOX: {
-    display: 'inline-block'
+    display: 'inline-block',
+    verticalAlign: 'middle'
+  },
+  SELECT: {
+    verticalAlign: 'middle',
+    marginLeft: '24px'
+  },
+  SELECT_OPTIONS: {
+    minHeight: '100px'
   }
 };
 
@@ -104,9 +117,7 @@ var SeriaRow = function (_Component) {
     _this._hCheck = _HandleF2.default.set('isChecked', true).bind(_this);
     _this._hUnCheck = _HandleF2.default.set('isChecked', false).bind(_this);
 
-    _this.isWithYAxis = false;
-    _this._hCheckYAxis = _HandleF2.default.set('isWithYAxis', true).bind(_this);
-    _this._hUnCheckYAxis = _HandleF2.default.set('isWithYAxis', false).bind(_this);
+    _this._hSelectYAxis = _HandleF2.default.reg('toYAxis').bind(_this);
 
     _this._hRegCellColor = _HandleF2.default.reg('cellColorNode').bind(_this);
     _this._hEnterColor = _HandleF2.default.enterTo('colorEntered').bind(_this);
@@ -142,8 +153,10 @@ var SeriaRow = function (_Component) {
     key: 'render',
     value: function render() {
       var isShowPallete = this.state.isShowPallete,
-          _props$seria = this.props.seria,
+          _props = this.props,
+          _props$seria = _props.seria,
           seria = _props$seria === undefined ? {} : _props$seria,
+          yAxisOptions = _props.yAxisOptions,
           name = seria.name,
           _seria$options = seria.options,
           options = _seria$options === undefined ? {} : _seria$options,
@@ -183,11 +196,13 @@ var SeriaRow = function (_Component) {
             onClose: this._hClosePalette
           })
         ),
-        _react2.default.createElement(_RowCheckBox2.default, {
-          rootStyle: S.ROW_CHECK_BOX,
-          caption: 'withYAxis',
-          onCheck: this._hCheckYAxis,
-          onUnCheck: this._hUnCheckYAxis
+        _react2.default.createElement(_InputSelect2.default, {
+          placeholder: 'withYAxis',
+          width: '150',
+          rootStyle: S.SELECT,
+          rootOptionsStyle: S.SELECT_OPTIONS,
+          options: yAxisOptions,
+          onSelect: this._hSelectYAxis
         })
       );
     }
@@ -197,7 +212,7 @@ var SeriaRow = function (_Component) {
       return {
         isChecked: this.isChecked,
         color: this._getColor(),
-        isWithYAxis: this.isWithYAxis,
+        toYAxis: this.toYAxis,
         data: this.props.seria.userOptions.data
       };
     }

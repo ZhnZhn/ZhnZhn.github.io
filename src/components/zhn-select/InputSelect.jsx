@@ -24,23 +24,28 @@ const _toItem = (item, propCaption) => {
   }
 }
 
-const _crWidth = (width) => {
+const _crWidth = (width, style) => {
   return (width)
            ? ((''+width).indexOf('%') !== -1)
-                ? { width: width }
-                : { width: width + 'px'}
+                ? { ...style, width: width }
+                : { ...style, width: width + 'px'}
            : null;
 }
 
-const styles = {
-  rootDiv: {
+const S = {
+  BLOCK: {
+    display: 'block'
+  },
+  NONE: {
+    display: 'none'
+  },
+  ROOT_DIV: {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     width: '160px'
-
   },
-  inputText: {
+  INPUT_TEXT: {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -53,7 +58,7 @@ const styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  rootOptionDiv: {
+  ROOT_OPTION_DIV: {
     position: 'absolute',
     left: 0,
     backgroundColor: '#E1E1CB',
@@ -64,14 +69,15 @@ const styles = {
     borderBottomLeftRadius : '5px',
     borderBottomRightRadius : '5px'
   },
-  optionDiv: {
+  OPTION_DIV: {
     //height: '160px',
     minHeight: '160px',
+    //minHeight: '100px',
     maxHeight: '200px',
     paddingBottom: '2px',
     overflow: 'auto'
   },
-  spinnerCell : {
+  SPINNER_CELL: {
     position: 'absolute',
     top: '6px',
     right: '10px',
@@ -79,7 +85,7 @@ const styles = {
     width: '20px',
     height: '20px'
   },
-  spinnerFailedCell : {
+  SPINNER_FAILED_CELL: {
     position: 'absolute',
     top: '6px',
     right: '10px',
@@ -89,10 +95,10 @@ const styles = {
     borderColor : '#F44336',
     cursor : 'pointer'
   },
- arrowShow: {
+ ARROW_SHOW: {
     borderColor: '#1B75BB transparent transparent'
  },
- inputHr: {
+ INPUT_HR: {
    borderWidth: 'medium medium 1px',
    borderStyle: 'none none solid',
    borderColor: '#1B75BB',
@@ -101,37 +107,34 @@ const styles = {
    marginLeft: '10px',
    marginBottom: '5px',
    marginRight: '40px'
-   //width: '150px'
-
  },
-  itemDiv:{
+  ITEM_DIV: {
     cursor: 'pointer',
     paddingTop: '6px',
     paddingLeft: '5px',
     paddingBottom: '6px'
     //lineHeight: '14px'
   },
-  itemOdd: {
+  ITEM_ODD: {
     backgroundColor: '#C3C3AC'
   },
-  itemEven: {
+  ITEM_EVEN: {
     backgroundColor: '#D5D5BC'
   },
-  optionsFooter : {
+  OPTIONS_FOOTER: {
     backgroundColor: 'silver',
     borderBottomLeftRadius : '5px',
     borderBottomRightRadius : '5px'
   },
-  fileredSpan : {
+  FILTERED_SPAN : {
     display: 'inline-block',
     color: 'gray',
     fontWeight : 'bold',
-    //height: '20px',
     paddingLeft: '10px',
     paddingTop: '4px',
     paddingBottom : '4px'
   }
-}
+};
 
 const ItemOptionDf = ({ item, propCaption }) => (
   <span>
@@ -345,7 +348,7 @@ class InputSelect extends Component {
              this.props.onSelect(item);
            } else {
              if (!this.props.isWithInput) {
-                this.props.onSelect(null);
+                this.props.onSelect(undefined);
              } else {
                this.props.onSelect(_toItem(item, this.propCaption))
              }
@@ -360,7 +363,7 @@ class InputSelect extends Component {
         } else {
           this._undecorateActiveRowComp();
           this._setStateToInit(this.props.options);
-          this.props.onSelect(null);
+          this.props.onSelect(undefined);
         }
       break;}
       //down
@@ -443,7 +446,10 @@ class InputSelect extends Component {
   }
 
   renderOptions = () => {
-    const { ItemOptionComp } = this.props
+    const {
+            rootOptionsStyle,
+            ItemOptionComp
+          } = this.props
         , { isShowOption, options, isValidDomOptionsCache } = this.state
         , _propCaption = this.propCaption;
 
@@ -451,12 +457,13 @@ class InputSelect extends Component {
     if (options){
       if (!isValidDomOptionsCache){
          _domOptions = options.map((item, index)=>{
-           const _styleDiv = (index % 2 === 0) ? styles.itemOdd : styles.itemEven;
+           const _styleDiv = (index % 2 === 0)
+                     ? S.ITEM_ODD : S.ITEM_EVEN;
            return (
              <div
                 key={index}
                 className="option-row"
-                style={Object.assign({}, styles.itemDiv, _styleDiv)}
+                style={{...S.ITEM_DIV, ..._styleDiv}}
                 ref={c => this[`v${index}`] = c}
                 onClick={this._handleClickItem.bind(this, item, index)}
               >
@@ -475,24 +482,26 @@ class InputSelect extends Component {
     }
 
     const { width } = this.props
-        ,  _styleOptions = isShowOption
-              ? {display: 'block'} : { display: 'none'}
-        , _rootWidthStyle = _crWidth(width)
+        ,  _styleOptions = isShowOption ? S.BLOCK : S.NONE
+        , _rootWidthStyle = _crWidth(width, _styleOptions)
         , _numberFilteredItems = (options[0] && (options[0].value !== 'noresult') )
               ? options.length : 0
         , _numberAllItems = this.props.options
               ? this.props.options.length : 0;
 
     return (
-        <div style={{ ...styles.rootOptionDiv, ..._styleOptions, ..._rootWidthStyle}}>
+        <div style={{ ...S.ROOT_OPTION_DIV, ..._rootWidthStyle}}>
           <div
              ref={c => this.optionsComp = c}
-             style={{ ...styles.optionDiv, ..._styleOptions, ..._rootWidthStyle}}
+             style={{ ...S.OPTION_DIV,
+                      ...rootOptionsStyle,
+                      ..._rootWidthStyle
+                    }}
            >
             {_domOptions}
           </div>
-          <div style={styles.optionsFooter}>
-            <span style={styles.fileredSpan}>
+          <div style={S.OPTIONS_FOOTER}>
+            <span style={S.FILTERED_SPAN}>
               Filtered {_numberFilteredItems} : {_numberAllItems}
             </span>
           </div>
@@ -501,13 +510,16 @@ class InputSelect extends Component {
   }
 
   _crAfterInputEl = () => {
-    const { isLoading, isLoadingFailed, placeholder } = this.props
+    const {
+           isLoading, isLoadingFailed,
+           placeholder, onLoadOption
+         } = this.props
         , { isShowOption, optionName, optionNames } = this.state;
 
     let _placeholder, _afterInputEl
     if (!isLoading && !isLoadingFailed){
        const _styleArrow = isShowOption
-                ? styles.arrowShow
+                ? S.ARROW_SHOW
                 : null;
       _placeholder = (placeholder)
           ? placeholder
@@ -523,7 +535,7 @@ class InputSelect extends Component {
       _placeholder = `Loading ${optionNames}...`;
       _afterInputEl = (
         <span
-          style={styles.spinnerCell}
+          style={S.SPINNER_CELL}
           data-loader="circle"
         >
         </span>
@@ -532,9 +544,9 @@ class InputSelect extends Component {
        _placeholder=`Loading ${optionNames} Failed`;
        _afterInputEl = (
         <span
-          style={styles.spinnerFailedCell}
+          style={S.SPINNER_FAILED_CELL}
           data-loader="circle-failed"
-          onClick={this.props.onLoadOption}
+          onClick={onLoadOption}
          >
         </span>
       )
@@ -546,16 +558,16 @@ class InputSelect extends Component {
   }
 
   render(){
-    const { width } = this.props
+    const { rootStyle, width } = this.props
         , { value, isLocalMode, isShowOption } = this.state
-        , _rootWidthStyle = _crWidth(width)
+        , _rootWidthStyle = _crWidth(width, rootStyle)
         , { afterInputEl, placeholder } = this._crAfterInputEl()
         , _domOptions = (isLocalMode || isShowOption)
               ? this.renderOptions()
               : null;
 
     return (
-      <div style={{...styles.rootDiv, ..._rootWidthStyle}}>
+      <div style={{...S.ROOT_DIV, ..._rootWidthStyle}}>
         <input
            ref={c => this.domInputText = c}
            type="text"
@@ -565,13 +577,13 @@ class InputSelect extends Component {
            autoCapitalize="off"
            spellCheck={false}
            value={value}
-           style={styles.inputText}
+           style={S.INPUT_TEXT}
            placeholder={placeholder}
            onChange={this._handleInputChange}
            onKeyDown={this._handleInputKeyDown}>
         </input>
         {afterInputEl}
-        <hr style={styles.inputHr}></hr>
+        <hr style={S.INPUT_HR}></hr>
         {_domOptions}
       </div>
     )

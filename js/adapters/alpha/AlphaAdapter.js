@@ -46,7 +46,7 @@ var C = {
   BLACK: { color: 'black' },
   RED: { color: '#f44336' },
   BLUE: { color: 'rgb(47, 126, 216)' },
-  BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' },
+  COLOR_BLUE_A: 'rgba(47, 126, 216, 0.75)',
   GREEN: { color: '#4caf50' }
 };
 
@@ -54,7 +54,7 @@ var _crZhConfig = function _crZhConfig(id) {
   return {
     id: id,
     key: id,
-    isWithLegend: false,
+    itemCaption: id,
     dataSource: "Alpha Vantage"
   };
 };
@@ -115,6 +115,8 @@ var _crSplineSeria = function _crSplineSeria(_ref2, option) {
       valueText = _ref2.valueText;
 
   return Object.assign(_ChartConfig2.default.fSeries(), {
+    type: 'spline',
+    visible: true,
     data: data,
     marker: {
       symbol: 'circle'
@@ -166,12 +168,10 @@ var _crMacdSeries = function _crMacdSeries(json, option) {
     data: _arrs[1], valueText: C.MACD_S, ticket: ticket
   }, C.RED),
       sHist = Object.assign(_ChartConfig2.default.fSeries(), {
-    color: C.BLUE_A,
+    color: C.COLOR_BLUE_A,
     data: _arrs[2],
-    zhSeriaId: ticket + '_' + C.MCAD_H,
-    zhValueText: C.MCAD_H,
-    //type: 'area',
-    //visible: true
+    zhSeriaId: ticket + '_' + C.MACD_H,
+    zhValueText: C.MACD_H,
     type: 'column',
     visible: false,
     shadow: false,
@@ -223,20 +223,12 @@ var _rSeries = (_rSeries2 = {
 
 var AlphaAdapter = {
   toConfig: function toConfig(json, option) {
-    var indicator = option.indicator,
-        ticket = option.ticket,
-        _chartId = ticket + '-' + indicator,
+    var ticket = option.ticket,
+        value = option.value,
+        _chartId = ticket + '-' + value,
+        _title = ticket + ': ' + value,
         _series = this.toSeries(json, option),
-        _isArrSeries = Array.isArray(_series),
-        _refSeries = _isArrSeries ? _series[0] : _series,
-        type = _refSeries.type || 'spline',
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addSeriaBy(0, _refSeries).addSeriaBy(0, { type: type }).add('zhConfig', _crZhConfig(_chartId)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
-
-    if (_isArrSeries) {
-      for (var i = 1; i < _series.length; i++) {
-        config.series.push(_series[i]);
-      }
-    }
+        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(_title).clearSeries().addSeries(_series).add('zhConfig', _crZhConfig(_chartId)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
 
     return {
       config: config,

@@ -125,7 +125,7 @@ var _fnAddExDividend = function _fnAddExDividend(exDividendIndex, result) {
 
   if (point[exDividendIndex] !== 0) {
     var x = dateUTC,
-        exValue = point[exDividendIndex],
+        exValue = parseFloat(point[exDividendIndex].toFixed(2)),
         price = point[yPointIndex];
 
     if (_QuandlFn2.default.isPrevDateAfter(dataExDividend, x, 14)) {

@@ -51,8 +51,8 @@ class PasteToModalDialog extends Component {
     this.seriesPaneComp
       .getValues()
       .forEach(conf => {
-          const { color, isWithYAxis, data } = conf;
-          ChartFn.addDataTo(toChart, color, data, !isWithYAxis)
+          const { color, toYAxis={}, data } = conf;
+          ChartFn.addDataToYAxis(toChart, color, data, toYAxis.value)
       })
 
     onClose()
@@ -60,10 +60,9 @@ class PasteToModalDialog extends Component {
 
   render(){
     const {
-            isShow,
-            data,
-            onClose
-          } = this.props;
+            isShow, data={}, onClose
+          } = this.props
+        , { fromChart, toChart } = data;
     return (
       <ModalDialog
         style={S.MODAL}
@@ -75,7 +74,8 @@ class PasteToModalDialog extends Component {
         <SeriesPane
            ref={ comp => this.seriesPaneComp = comp }
            rootStyle={S.SCROLL_PANE}
-           fromChart={data.fromChart}
+           fromChart={fromChart}
+           toChart={toChart}
         />
       </ModalDialog>
     );

@@ -40,6 +40,7 @@ var createLoadOptions = function createLoadOptions() {
     dataSource: dataSource,
     hasSecondYAxis: hasSecondYAxis,
     oneCaption: one.caption,
+    twoCaption: two.caption,
     one: one.value,
     two: two.value
   });

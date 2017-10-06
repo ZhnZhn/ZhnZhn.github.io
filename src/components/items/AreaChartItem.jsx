@@ -412,22 +412,14 @@ class AreaChartItem extends Component {
 
   reflowChart(width){
     const { ChartFn } = this.props
-        , _isSecondYAxis = this.mainChart.yAxis.length === 2
-             ? true
-             : false
-        , _deltaYAxis = _isSecondYAxis
-            ? ChartFn.arCalcDeltaYAxis(this.mainChart)
-            : 0;
+        , spacingLeft = ChartFn.arCalcDeltaYAxis(this.mainChart)
+        , zhDetailCharts = this.mainChart.options.zhDetailCharts;
 
     this.mainChart.setSize(width, undefined, true)
-    if (Array.isArray(this.mainChart.options.zhDetailCharts)) {
-      this.mainChart.options.zhDetailCharts.forEach((chart) => {
-        if (_isSecondYAxis) {
-          chart.update({
-            chart: {
-              spacingLeft: _deltaYAxis
-             }
-           }, false)
+    if (Array.isArray(zhDetailCharts)) {
+      zhDetailCharts.forEach(chart => {
+        if (spacingLeft) {
+          chart.update({ chart: { spacingLeft } }, false)
         }
         chart.setSize(width, undefined, true)
       })

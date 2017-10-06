@@ -43,22 +43,23 @@ const QuandlFn2 = {
   },
 
   createZhConfig(option){
-    const _dataSource = (option.dataSource)
-             ? `Quandl: ${option.dataSource}`
+    const {
+            stock:item, title, subtitle='',
+            value:id, key, columnName, dataColumn,
+            itemCaption, fromDate, seriaColumnNames,
+            linkFn, limitRemaining, dataSource
+          } = option
+        , _dataSource = dataSource
+             ? `Quandl: ${dataSource}`
              : 'Quandl';
     return {
-      item : option.stock,
-      title : option.title,
-      subtitle : (option.subtitle) ? option.subtitle : '',
-      id : option.value,
-      key : option.key,
-      columnName : option.columnName,
-      dataColumn: option.dataColumn,
-      itemCaption : option.itemCaption,
-      fromDate : option.fromDate,
-      seriaColumnNames : option.seriaColumnNames,
-      linkFn : option.linkFn,
-      limitRemaining : option.limitRemaining,
+      item,
+      title, subtitle,
+      id, key, 
+      columnName, dataColumn, itemCaption,
+      fromDate, seriaColumnNames,
+      linkFn,
+      limitRemaining,
       dataSource: _dataSource
     }
   },

@@ -28,14 +28,14 @@ const C = {
   BLACK: { color: 'black' },
   RED: { color: '#f44336' },
   BLUE: { color: 'rgb(47, 126, 216)' },
-  BLUE_A: { color: 'rgba(47, 126, 216, 0.75)' },
+  COLOR_BLUE_A: 'rgba(47, 126, 216, 0.75)',
   GREEN: { color: '#4caf50' }
 }
 
 const _crZhConfig = (id) => ({
   id: id,
   key: id,
-  isWithLegend: false,
+  itemCaption: id,
   dataSource: "Alpha Vantage"
 });
 
@@ -84,6 +84,8 @@ const _toDataArrs = ({dateKeys, value, max}, arrProp) => {
 
 const _crSplineSeria = ({data, ticket, valueText}, option) => {
   return Object.assign(ChartConfig.fSeries(), {
+            type: 'spline',
+            visible: true,
             data: data,
             marker: {
               symbol: 'circle'
@@ -131,12 +133,10 @@ const _crMacdSeries = (json, option) => {
            data: _arrs[1], valueText: C.MACD_S, ticket
         }, C.RED)
       , sHist = Object.assign(ChartConfig.fSeries(), {
-           color: C.BLUE_A,
+           color: C.COLOR_BLUE_A,
            data: _arrs[2],
-           zhSeriaId: ticket + '_' + C.MCAD_H,
-           zhValueText: C.MCAD_H,
-           //type: 'area',
-           //visible: true
+           zhSeriaId: ticket + '_' + C.MACD_H,
+           zhValueText: C.MACD_H,
            type: 'column',
            visible: false,
            shadow: false,
@@ -193,28 +193,20 @@ const _rSeries = {
 
 const AlphaAdapter = {
   toConfig(json, option) {
-    const { indicator, ticket } = option
-        , _chartId = `${ticket}-${indicator}`
+    const { ticket, value } = option
+        , _chartId = `${ticket}-${value}`
+        , _title = `${ticket}: ${value}`
         , _series = this.toSeries(json, option)
-        , _isArrSeries = Array.isArray(_series)
-        , _refSeries = _isArrSeries ? _series[0] : _series
-        , type = _refSeries.type || 'spline'
         , config = ConfigBuilder()
             .initBaseArea()
             .add('chart', { spacingTop: 25 })
-            .addSeriaBy(0, _refSeries)
-            .addSeriaBy(0, { type })
+            .addCaption(_title)
+            .clearSeries()
+            .addSeries(_series)
             .add('zhConfig', _crZhConfig(_chartId))
             .add('zhFnAddSeriesSma', fnAddSeriesSma)
             .add('zhFnRemoveSeries', fnRemoveSeries)
             .toConfig();
-
-    if (_isArrSeries) {
-      for(let i=1; i<_series.length; i++){
-        config.series.push(_series[i])
-      }
-    }
-
     return {
       config,
       isDrawDeltaExtrems:false,

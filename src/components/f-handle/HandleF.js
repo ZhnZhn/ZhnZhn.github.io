@@ -11,7 +11,7 @@ const HandleF = {
       this[propName] = node
     };
   },
-
+  
   enterTo: (propName) => {
     return function(value) {
       this.setState({ [propName]: value })

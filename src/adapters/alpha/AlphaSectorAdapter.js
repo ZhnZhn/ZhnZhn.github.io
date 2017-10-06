@@ -1,6 +1,4 @@
 
-import ChartConfig from '../../charts/ChartConfig'
-
 const _objToArrItems = (obj) => {
   const keys = Object.keys(obj).sort();
   const arr = [];
@@ -44,12 +42,7 @@ const AlphaSectorAdapter = {
   },
 
   toSeries(json, option) {
-    const seria = ChartConfig.fSeries()
-    Object.assign(seria, {
-      zhSeriaId: 'Empty_Seria',
-      zhValueText: 'Empty Seria'
-    })
-    return seria;
+    throw new Error('ZH_1000');
   }
 }
 

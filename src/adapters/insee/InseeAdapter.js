@@ -1,13 +1,20 @@
 import AdapterFn from '../AdapterFn'
 
-import ChartConfig from '../../charts/ChartConfig'
 import ConfigBuilder from '../../charts/ConfigBuilder'
 
-import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma';
+import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
+import fnDescr from './fnDescr'
 
 const _parser = new window.DOMParser();
 
 //€
+
+const _crZhConfig = id => ({
+  id: id,
+  key: id,
+  isWithLegend: false,
+  dataSource: "INSEE"
+});
 
 const _toData = (str) => {
   const xml = _parser.parseFromString(str, 'text/xml')
@@ -52,44 +59,6 @@ const _toData = (str) => {
   };
 }
 
-const ST_TITLE = 'style="color:#1b75bb;"';
-const _toInfo = (info, title) => {
-  let strDom='';
-  info.forEach(seria => {
-    const {
-            title, id, updatedOn,
-            frequency, unitMeasure, unitMult
-          } = seria;
-    strDom += `
-      <div style="color:black;">${title}</div>
-      <div>
-        <span ${ST_TITLE}>IDBANK:</span><span>${id}</span>
-        <span ${ST_TITLE}>Frequency:</span><span>${frequency}&nbsp;</span>
-        <span ${ST_TITLE}>UpdatedOn:</span><span>${updatedOn}&nbsp;</span>
-      </div>
-      <div>
-        <span ${ST_TITLE}>UnitMeasure:</span><span>${unitMeasure}&nbsp;</span>
-        <span ${ST_TITLE}>UnitMult:</span><span>${unitMult}&nbsp;</span>
-      </div>
-      <div>
-        <a href="https://www.insee.fr/en/statistiques/serie/${id}">INSEE Data Link</a>
-      </div>
-      <br/>
-    `
-  })
-  return {
-    name: title,
-    description: strDom
-  };
-}
-
-const _crZhConfig = id => ({
-  id: id,
-  key: id,
-  isWithLegend: false,
-  dataSource: "INSEE"
-});
-
 const InseeAdapter = {
   toConfig(str, option) {
     const { value, title, subtitle } = option
@@ -97,32 +66,29 @@ const InseeAdapter = {
         , config = ConfigBuilder()
             .initBaseArea()
             .add('chart', { spacingTop: 25 })
-            .addSeriaBy(0, {
-               data: data,
-               type: 'spline',
-               zhSeriaId: value,
-            })
             .addCaption(title, subtitle)
-            .add('info', _toInfo(info, title))
-            .add('valueMoving', AdapterFn.valueMoving(data))
-            .add('zhConfig', _crZhConfig(value))
-            .add('zhFnAddSeriesSma', fnAddSeriesSma)
-            .add('zhFnRemoveSeries', fnRemoveSeries)
+            .addPoints(value, data)
+            .setMinMax(minClose, maxClose)
+            .add({
+              info: fnDescr.toInfo(info, title),
+              valueMoving: AdapterFn.valueMoving(data),
+              zhConfig: _crZhConfig(value),
+              zhFnAddSeriesSma: fnAddSeriesSma,
+              zhFnRemoveSeries: fnRemoveSeries
+            })
             .toConfig();
-
-    ChartConfig.setMinMax(config, minClose, maxClose)
 
     return { config };
   },
 
   toSeries(str, option) {
-     const { value } = option
+     const { value, title, subtitle } = option
+         , _text = subtitle ? subtitle : title
          , { data } = _toData(str);
-     return Object.assign(ChartConfig.fSeries(), {
-               data: data,
-               zhSeriaId: value,
-               zhValueText: value
-             });
+      return ConfigBuilder()
+        .initBaseSeria()
+        .addPoints(value, data, _text)
+        .toConfig();
   }
 }
 

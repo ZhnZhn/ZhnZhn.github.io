@@ -136,7 +136,7 @@ var _crSeriaData = function _crSeriaData(json, option) {
 var _toDataPoints = function _toDataPoints(json, option) {
   var one = option.one;
 
-  return ('' + one).indexOf('>') === -1 ? { type: 'A', points: _crSeriaData(json, option) } : { type: 'B', points: _crSeriesData(json, option) };
+  return ('' + one).indexOf('>') === -1 ? _crSeriaData(json, option) : _crSeriesData(json, option);
 };
 
 var _checkToSeries = function _checkToSeries(option) {

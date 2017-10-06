@@ -54,6 +54,11 @@ ConfigBuilder.prototype = {
     return this;
   },
 
+  addXAxisCrosshair(){
+    this.add('xAxis', { crosshair : Chart.fCrosshair() })
+    return this;
+  },
+
   add(propName, option){
     if (typeof propName === 'string'){
       const _to = this.config[propName];
@@ -65,6 +70,50 @@ ConfigBuilder.prototype = {
     } else if (propName && typeof propName === 'object'){
       Object.assign(this.config, propName)
     }
+    return this;
+  },
+
+  addZhVolumeConfig(id, dColumn, dVolume){
+    this.add('zhVolumeConfig',
+       ChartConfig.fIndicatorVolumeConfig(id, dColumn, dVolume)
+    )
+    return this;
+  },
+  addZhATHConfig(id, data){
+    this.add('zhATHConfig',
+       ChartConfig.fIndicatorATHConfig(id, data)
+    )
+    return this;
+  },
+  addZhPoints(data, fn){
+    this.add({
+      zhPoints: data,
+      zhIsMfi: true,
+      zhFnGetMfiConfig: fn
+    })
+    return this;
+  },
+
+
+  setMinMax(minValue, maxValue){
+    const plotLines = this.config.yAxis.plotLines;
+    plotLines[0].value = maxValue;
+    plotLines[0].label.text = `${ChartConfig.fnNumberFormat(maxValue)}`;
+    plotLines[1].value = minValue;
+    plotLines[1].label.text = `${ChartConfig.fnNumberFormat(minValue)}`;
+    this.add('yAxis', {
+      min: Chart.calcMinY({ minPoint: minValue, maxPoint: maxValue}),
+      maxPadding: 0.15,
+      minPadding: 0.15,
+      endOnTick: false,
+      startOnTick: false
+    })
+    return this;
+  },
+  setStockSerias(id, d, dH, dL, dO){
+    ChartConfig.setStockSerias(
+      this.config, d, dH, d, dO, id
+    )
     return this;
   },
 

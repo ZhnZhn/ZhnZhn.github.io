@@ -4,12 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ChartConfig = require("../../charts/ChartConfig");
-
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var _objToArrItems = function _objToArrItems(obj) {
   var keys = Object.keys(obj).sort();
   var arr = [];
@@ -50,12 +44,7 @@ var AlphaSectorAdapter = {
     return { config: config };
   },
   toSeries: function toSeries(json, option) {
-    var seria = _ChartConfig2.default.fSeries();
-    Object.assign(seria, {
-      zhSeriaId: 'Empty_Seria',
-      zhValueText: 'Empty Seria'
-    });
-    return seria;
+    throw new Error('ZH_1000');
   }
 };
 

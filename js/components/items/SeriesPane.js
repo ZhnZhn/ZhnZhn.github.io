@@ -56,6 +56,20 @@ var S = {
   }
 };
 
+var _crYAxisOption = function _crYAxisOption(toChart) {
+  var options = [{
+    caption: 'withYAxis',
+    value: -1
+  }];
+  toChart.yAxis.forEach(function (yAxis, index) {
+    options.push({
+      caption: 'toYAxis' + (index + 1),
+      value: index
+    });
+  });
+  return options;
+};
+
 var SeriesPane = function (_Component) {
   (0, _inherits3.default)(SeriesPane, _Component);
 
@@ -74,7 +88,7 @@ var SeriesPane = function (_Component) {
       _this.compSeries[compIndex] = null;
     };
 
-    _this._renderSeries = function (chartId, series) {
+    _this._renderSeries = function (chartId, series, options) {
       return series.filter(function (seria) {
         return seria.visible;
       }).map(function (seria, index) {
@@ -82,6 +96,7 @@ var SeriesPane = function (_Component) {
           key: chartId + index,
           seria: seria,
           compIndex: index,
+          yAxisOptions: options,
           onReg: _this._regSeriaRow,
           onUnReg: _this._unregSeriaRow
         });
@@ -97,8 +112,10 @@ var SeriesPane = function (_Component) {
     value: function render() {
       var _props = this.props,
           rootStyle = _props.rootStyle,
+          toChart = _props.toChart,
           _props$fromChart = _props.fromChart,
           fromChart = _props$fromChart === undefined ? {} : _props$fromChart,
+          _yAxisOption = _crYAxisOption(toChart),
           _fromChart$userOption = fromChart.userOptions,
           userOptions = _fromChart$userOption === undefined ? {} : _fromChart$userOption,
           _fromChart$series = fromChart.series,
@@ -134,7 +151,7 @@ var SeriesPane = function (_Component) {
           _react2.default.createElement(
             'div',
             null,
-            this._renderSeries(chartId, series)
+            this._renderSeries(chartId, series, _yAxisOption)
           )
         )
       );

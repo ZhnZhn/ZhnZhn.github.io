@@ -1,20 +1,34 @@
 import ChartConfig from './ChartConfig'
 
-const C = {
-  TYPE_A: 'A',
-  TYPE_B: 'B'
-};
-
-const _crLegendItem = (index, color, name, is=false) => ({
+const _crLegendItem = ({ index, color, name, is=false }) => ({
   index, color, name,
   isVisible: is
 });
 
+const _addSeriesImpl = (to, series) => {
+  const _legend = [];
+  series.forEach((seria, index) => {
+    const { color, zhValueText='', visible } = seria;
+    to.push(seria)
+    _legend.push(_crLegendItem({
+       index, color, name:zhValueText, is:visible
+     }))
+  })
+  return _legend;
+}
+
 const SeriaBuilder = {
 
   initBaseSeria(){
+    this._type = 'S'
     this.config = ChartConfig.fSeries()
     return this;
+  },
+
+  addLegend(legend){
+    return this.add('zhConfig', {
+      legend, isWithLegend: true,
+    });
   },
 
   addSeriaBy(index, obj) {
@@ -26,41 +40,79 @@ const SeriaBuilder = {
     return this;
   },
 
-  addSeriesWithLegend(id, points, maxVisible=6){
+  addSeriaPoints(id, points, { maxVisible=6, isWithLegend=false }={}){
     const _legend = [];
-    points.forEach((data, i) => {
-      const _isShow = i<maxVisible ? true : false
-          , _color = ChartConfig.getColor(i)
+    points.forEach((data, index) => {
+      const is = index<maxVisible ? true : false
+          , color = ChartConfig.getColor(index)
           , { seriaName } = data;
-      _legend.push(_crLegendItem(i, _color, seriaName, _isShow))
-      this.addSeriaBy(i, {
+      _legend.push(_crLegendItem({
+        index, color, name: seriaName, is
+      }))
+      this.addSeriaBy(index, {
            type: 'spline',
            data: data,
            name: seriaName,
            zhValueText: seriaName,
-           zhSeriaId: id + '_' + i,
-           visible: _isShow
+           zhSeriaId: id + '_' + index,
+           visible: is
         })
     })
-    return this.add('zhConfig', {
-      isWithLegend: true,
-      legend: _legend
-    });
+    if (!isWithLegend){
+      this.addLegend(_legend);
+    }
+    return this;
   },
 
-  addPoints(id, { type, points }){
-    switch(type){
-      case C.TYPE_A:
-        return this.addSeriaBy(0, {
-           type: 'spline',
-           data: points,
-           zhSeriaId: id
-        });
-      case C.TYPE_B:
-        return this.addSeriesWithLegend(id, points)
-      default: return this;
+  _addPointsToConfig(id, points){
+    if (points[0]
+        && Array.isArray(points[0])
+        && points[0][0]
+        && typeof points[0][0] !== 'number'
+    ) {
+      this.addSeriaPoints(id, points)
+    } else {
+      this.addSeriaBy(0, {
+         type: 'spline',
+         data: points,
+         zhSeriaId: id
+      });
     }
+  },
+
+  addPoints(id, points, text){
+    if (this._type !== 'S') {
+      this._addPointsToConfig(id, points)
+    } else {
+      this.add({
+        data: points,
+        zhSeriaId: id,
+        zhValueText: text ? text : id
+      })
+    }
+    return this;
+  },
+
+  clearSeries(){
+    this.config.series = []
+    return this;
+  },
+
+  addSeries(series, isWithoutLegend=false){
+    const _to = Array.isArray(this.config.series)
+             ? this.config.series
+             : this.config.series = [];
+    if (Array.isArray(series)){
+      const _legend = _addSeriesImpl(_to, series);
+      if (!isWithoutLegend) {
+        this.addLegend(_legend)
+      }
+    } else if (typeof series === 'object') {
+      _to[0] = series
+    }
+    return this;
   }
+
 }
 
 export default SeriaBuilder

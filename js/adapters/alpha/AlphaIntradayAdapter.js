@@ -161,7 +161,9 @@ var AlphaIntradayAdapter = {
       isNotZoomToMinMax: false
     };
   },
-  toSeries: function toSeries(json, option) {}
+  toSeries: function toSeries(json, option) {
+    throw new Error('ZH_1000');
+  }
 };
 
 exports.default = AlphaIntradayAdapter;

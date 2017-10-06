@@ -54,16 +54,19 @@ var WithAreaChartFn = {
     }
   },
   arCalcDeltaYAxis: function arCalcDeltaYAxis(chart) {
-    var yAxis = chart.yAxis[1],
-        _yAxis$getExtremes = yAxis.getExtremes(),
-        max = _yAxis$getExtremes.max,
-        _maxLen = max ? ('' + max).length : 0,
-        _maxLabelLenght = yAxis.maxLabelLength;
+    var delta = 0;
+    chart.yAxis.forEach(function (_yAxis) {
+      if (!_yAxis.opposite) {
+        var _yAxis$getExtremes = _yAxis.getExtremes(),
+            max = _yAxis$getExtremes.max,
+            _maxLen = max ? ('' + max).length : 0,
+            _maxLabelLenght = _yAxis.maxLabelLength,
+            _offset = delta === 0 ? 25 : 15;
 
-
-    return _maxLen !== 0
-    //? 10*_maxLen + 25 - (_maxLen - 1)
-    ? 25 + Math.round(_maxLabelLenght) : 0;
+        delta = _maxLen !== 0 ? delta + _offset + Math.round(_maxLabelLenght) : delta;
+      }
+    });
+    return delta;
   }
 };
 

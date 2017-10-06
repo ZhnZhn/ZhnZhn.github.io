@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -23,6 +19,10 @@ var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorRet
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
@@ -57,19 +57,24 @@ var _toItem = function _toItem(item, propCaption) {
   return _ref2 = {}, (0, _defineProperty3.default)(_ref2, propCaption, 'From Input'), (0, _defineProperty3.default)(_ref2, 'value', item.inputValue), _ref2;
 };
 
-var _crWidth = function _crWidth(width) {
-  return width ? ('' + width).indexOf('%') !== -1 ? { width: width } : { width: width + 'px' } : null;
+var _crWidth = function _crWidth(width, style) {
+  return width ? ('' + width).indexOf('%') !== -1 ? (0, _extends3.default)({}, style, { width: width }) : (0, _extends3.default)({}, style, { width: width + 'px' }) : null;
 };
 
-var styles = {
-  rootDiv: {
+var S = {
+  BLOCK: {
+    display: 'block'
+  },
+  NONE: {
+    display: 'none'
+  },
+  ROOT_DIV: {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     width: '160px'
-
   },
-  inputText: {
+  INPUT_TEXT: {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -82,7 +87,7 @@ var styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  rootOptionDiv: {
+  ROOT_OPTION_DIV: {
     position: 'absolute',
     left: 0,
     backgroundColor: '#E1E1CB',
@@ -93,14 +98,15 @@ var styles = {
     borderBottomLeftRadius: '5px',
     borderBottomRightRadius: '5px'
   },
-  optionDiv: {
+  OPTION_DIV: {
     //height: '160px',
     minHeight: '160px',
+    //minHeight: '100px',
     maxHeight: '200px',
     paddingBottom: '2px',
     overflow: 'auto'
   },
-  spinnerCell: {
+  SPINNER_CELL: {
     position: 'absolute',
     top: '6px',
     right: '10px',
@@ -108,7 +114,7 @@ var styles = {
     width: '20px',
     height: '20px'
   },
-  spinnerFailedCell: {
+  SPINNER_FAILED_CELL: {
     position: 'absolute',
     top: '6px',
     right: '10px',
@@ -118,10 +124,10 @@ var styles = {
     borderColor: '#F44336',
     cursor: 'pointer'
   },
-  arrowShow: {
+  ARROW_SHOW: {
     borderColor: '#1B75BB transparent transparent'
   },
-  inputHr: {
+  INPUT_HR: {
     borderWidth: 'medium medium 1px',
     borderStyle: 'none none solid',
     borderColor: '#1B75BB',
@@ -130,32 +136,29 @@ var styles = {
     marginLeft: '10px',
     marginBottom: '5px',
     marginRight: '40px'
-    //width: '150px'
-
   },
-  itemDiv: {
+  ITEM_DIV: {
     cursor: 'pointer',
     paddingTop: '6px',
     paddingLeft: '5px',
     paddingBottom: '6px'
     //lineHeight: '14px'
   },
-  itemOdd: {
+  ITEM_ODD: {
     backgroundColor: '#C3C3AC'
   },
-  itemEven: {
+  ITEM_EVEN: {
     backgroundColor: '#D5D5BC'
   },
-  optionsFooter: {
+  OPTIONS_FOOTER: {
     backgroundColor: 'silver',
     borderBottomLeftRadius: '5px',
     borderBottomRightRadius: '5px'
   },
-  fileredSpan: {
+  FILTERED_SPAN: {
     display: 'inline-block',
     color: 'gray',
     fontWeight: 'bold',
-    //height: '20px',
     paddingLeft: '10px',
     paddingTop: '4px',
     paddingBottom: '4px'
@@ -238,21 +241,22 @@ var InputSelect = (_temp = _class = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var width = this.props.width,
+      var _props = this.props,
+          rootStyle = _props.rootStyle,
+          width = _props.width,
           _state = this.state,
           value = _state.value,
           isLocalMode = _state.isLocalMode,
           isShowOption = _state.isShowOption,
-          _rootWidthStyle = _crWidth(width),
+          _rootWidthStyle = _crWidth(width, rootStyle),
           _crAfterInputEl = this._crAfterInputEl(),
           afterInputEl = _crAfterInputEl.afterInputEl,
           placeholder = _crAfterInputEl.placeholder,
           _domOptions = isLocalMode || isShowOption ? this.renderOptions() : null;
 
-
       return _react2.default.createElement(
         'div',
-        { style: (0, _extends3.default)({}, styles.rootDiv, _rootWidthStyle) },
+        { style: (0, _extends3.default)({}, S.ROOT_DIV, _rootWidthStyle) },
         _react2.default.createElement('input', {
           ref: function ref(c) {
             return _this2.domInputText = c;
@@ -264,12 +268,12 @@ var InputSelect = (_temp = _class = function (_Component) {
           autoCapitalize: 'off',
           spellCheck: false,
           value: value,
-          style: styles.inputText,
+          style: S.INPUT_TEXT,
           placeholder: placeholder,
           onChange: this._handleInputChange,
           onKeyDown: this._handleInputKeyDown }),
         afterInputEl,
-        _react2.default.createElement('hr', { style: styles.inputHr }),
+        _react2.default.createElement('hr', { style: S.INPUT_HR }),
         _domOptions
       );
     }
@@ -416,7 +420,7 @@ var InputSelect = (_temp = _class = function (_Component) {
               _this3.props.onSelect(item);
             } else {
               if (!_this3.props.isWithInput) {
-                _this3.props.onSelect(null);
+                _this3.props.onSelect(undefined);
               } else {
                 _this3.props.onSelect(_toItem(item, _this3.propCaption));
               }
@@ -433,7 +437,7 @@ var InputSelect = (_temp = _class = function (_Component) {
           } else {
             _this3._undecorateActiveRowComp();
             _this3._setStateToInit(_this3.props.options);
-            _this3.props.onSelect(null);
+            _this3.props.onSelect(undefined);
           }
           break;
         }
@@ -520,7 +524,9 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 
   this.renderOptions = function () {
-    var ItemOptionComp = _this3.props.ItemOptionComp,
+    var _props2 = _this3.props,
+        rootOptionsStyle = _props2.rootOptionsStyle,
+        ItemOptionComp = _props2.ItemOptionComp,
         _state2 = _this3.state,
         isShowOption = _state2.isShowOption,
         options = _state2.options,
@@ -532,13 +538,13 @@ var InputSelect = (_temp = _class = function (_Component) {
     if (options) {
       if (!isValidDomOptionsCache) {
         _domOptions = options.map(function (item, index) {
-          var _styleDiv = index % 2 === 0 ? styles.itemOdd : styles.itemEven;
+          var _styleDiv = index % 2 === 0 ? S.ITEM_ODD : S.ITEM_EVEN;
           return _react2.default.createElement(
             'div',
             {
               key: index,
               className: 'option-row',
-              style: Object.assign({}, styles.itemDiv, _styleDiv),
+              style: (0, _extends3.default)({}, S.ITEM_DIV, _styleDiv),
               ref: function ref(c) {
                 return _this3['v' + index] = c;
               },
@@ -557,31 +563,31 @@ var InputSelect = (_temp = _class = function (_Component) {
     }
 
     var width = _this3.props.width,
-        _styleOptions = isShowOption ? { display: 'block' } : { display: 'none' },
-        _rootWidthStyle = _crWidth(width),
+        _styleOptions = isShowOption ? S.BLOCK : S.NONE,
+        _rootWidthStyle = _crWidth(width, _styleOptions),
         _numberFilteredItems = options[0] && options[0].value !== 'noresult' ? options.length : 0,
         _numberAllItems = _this3.props.options ? _this3.props.options.length : 0;
 
 
     return _react2.default.createElement(
       'div',
-      { style: (0, _extends3.default)({}, styles.rootOptionDiv, _styleOptions, _rootWidthStyle) },
+      { style: (0, _extends3.default)({}, S.ROOT_OPTION_DIV, _rootWidthStyle) },
       _react2.default.createElement(
         'div',
         {
           ref: function ref(c) {
             return _this3.optionsComp = c;
           },
-          style: (0, _extends3.default)({}, styles.optionDiv, _styleOptions, _rootWidthStyle)
+          style: (0, _extends3.default)({}, S.OPTION_DIV, rootOptionsStyle, _rootWidthStyle)
         },
         _domOptions
       ),
       _react2.default.createElement(
         'div',
-        { style: styles.optionsFooter },
+        { style: S.OPTIONS_FOOTER },
         _react2.default.createElement(
           'span',
-          { style: styles.fileredSpan },
+          { style: S.FILTERED_SPAN },
           'Filtered ',
           _numberFilteredItems,
           ' : ',
@@ -592,10 +598,11 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 
   this._crAfterInputEl = function () {
-    var _props = _this3.props,
-        isLoading = _props.isLoading,
-        isLoadingFailed = _props.isLoadingFailed,
-        placeholder = _props.placeholder,
+    var _props3 = _this3.props,
+        isLoading = _props3.isLoading,
+        isLoadingFailed = _props3.isLoadingFailed,
+        placeholder = _props3.placeholder,
+        onLoadOption = _props3.onLoadOption,
         _state3 = _this3.state,
         isShowOption = _state3.isShowOption,
         optionName = _state3.optionName,
@@ -605,7 +612,7 @@ var InputSelect = (_temp = _class = function (_Component) {
     var _placeholder = void 0,
         _afterInputEl = void 0;
     if (!isLoading && !isLoadingFailed) {
-      var _styleArrow = isShowOption ? styles.arrowShow : null;
+      var _styleArrow = isShowOption ? S.ARROW_SHOW : null;
       _placeholder = placeholder ? placeholder : 'Select ' + optionName + '...';
       _afterInputEl = _react2.default.createElement(_ArrowCell2.default, {
         ref: function ref(c) {
@@ -617,15 +624,15 @@ var InputSelect = (_temp = _class = function (_Component) {
     } else if (isLoading) {
       _placeholder = 'Loading ' + optionNames + '...';
       _afterInputEl = _react2.default.createElement('span', {
-        style: styles.spinnerCell,
+        style: S.SPINNER_CELL,
         'data-loader': 'circle'
       });
     } else if (isLoadingFailed) {
       _placeholder = 'Loading ' + optionNames + ' Failed';
       _afterInputEl = _react2.default.createElement('span', {
-        style: styles.spinnerFailedCell,
+        style: S.SPINNER_FAILED_CELL,
         'data-loader': 'circle-failed',
-        onClick: _this3.props.onLoadOption
+        onClick: onLoadOption
       });
     }
     return {

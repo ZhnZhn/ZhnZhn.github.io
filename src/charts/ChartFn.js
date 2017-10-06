@@ -268,33 +268,54 @@ const ChartFn = {
     }
   },
 
-  addDataTo(toChart, color, data, withoutYAxis){
-    const _id = withoutYAxis
-              ? undefined
-              : "pasteId";
-    if (!withoutYAxis) {
-      toChart.addAxis({
-          id: _id,
-          opossite: true,
-          title: {
-            text: ''
-          },
-          lineColor: color,
-          tickColor: color,
-          labels: {
-            style: {
-              color: color
-            }
+  _addAxis(toChart, id, color){
+    toChart.addAxis({
+        id: id,
+        opossite: true,
+        title: {
+          text: ''
+        },
+        lineColor: color,
+        tickColor: color,
+        labels: {
+          style: {
+            color: color
           }
-        }, false, true)
-    }
+        }
+      }, false, true)
+  },
+  _addSeries(toChart, id, color, data){
     toChart.addSeries({
       type: 'spline',
-      yAxis: _id,
+      yAxis: id,
       color: color,
       data: data
     }, false)
+  },
+  _addDataToYAxis(toChart, id, color, data, isWithYAxis){
+    if (isWithYAxis) {
+      this._addAxis(toChart, id, color)
+    }
+    this._addSeries(toChart, id, color, data)
     toChart.redraw()
+  },
+
+  addDataTo(toChart, color, data, withoutYAxis){
+    const _id = withoutYAxis ? undefined: "pasteId";
+    this._addDataToYAxis(toChart,
+        _id, color, data, !withoutYAxis
+    )
+  },
+  addDataToYAxis(toChart, color, data, yAxisIndex=-1){
+    const _id = yAxisIndex === -1
+              ? 'yAxis' + toChart.yAxis.length
+              : yAxisIndex === 0
+                   ? undefined
+                   : 'yAxis' + yAxisIndex
+        , _isWithYAxis = yAxisIndex === -1;
+     this._addDataToYAxis(toChart,
+         _id, color, data, _isWithYAxis
+     )
   },
 
   toNumberFormat(value){

@@ -5,7 +5,7 @@ import SeriaRow from './SeriaRow'
 
 const CL = {
   ELL: 'ellipsis'
-}
+};
 
 const S = {
   ROOT_DIV: {
@@ -25,6 +25,20 @@ const S = {
   }
 };
 
+const _crYAxisOption = (toChart) => {
+  const options = [{
+    caption: 'withYAxis',
+    value: -1
+  }]
+  toChart.yAxis.forEach((yAxis, index) => {
+    options.push ({
+      caption: `toYAxis${index+1}`,
+      value: index
+    })
+  })
+  return options;
+};
+
 class SeriesPane extends Component {
 
    constructor(){
@@ -41,7 +55,7 @@ class SeriesPane extends Component {
     this.compSeries[compIndex] = null
   }
 
-  _renderSeries = (chartId, series) => {
+  _renderSeries = (chartId, series, options) => {
     return series
       .filter(seria => seria.visible)
       .map((seria, index) => {
@@ -50,6 +64,7 @@ class SeriesPane extends Component {
               key={chartId + index}
               seria={seria}
               compIndex={index}
+              yAxisOptions={options}
               onReg={this._regSeriaRow}
               onUnReg={this._unregSeriaRow}
            />
@@ -58,7 +73,8 @@ class SeriesPane extends Component {
   }
 
   render(){
-    const { rootStyle, fromChart={} } = this.props
+    const { rootStyle, toChart, fromChart={} } = this.props
+        , _yAxisOption = _crYAxisOption(toChart)
         , { userOptions={}, series=[] } = fromChart
         , { zhConfig={} } = userOptions
         , { id:chartId='id' } = zhConfig;
@@ -75,7 +91,7 @@ class SeriesPane extends Component {
             </span>
           </div>
           <div>
-            {this._renderSeries(chartId, series)}
+            {this._renderSeries(chartId, series, _yAxisOption)}
           </div>
         </div>
       </ScrollPane>

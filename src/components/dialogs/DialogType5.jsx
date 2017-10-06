@@ -121,7 +121,7 @@ class  DialogType5 extends Component {
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
-               optionNames={'Items'}
+               optionNames="Items"
                onSelect={this._handleSelectOne}
              />
 

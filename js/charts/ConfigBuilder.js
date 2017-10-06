@@ -72,6 +72,10 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     this.config.tooltip = _Chart2.default.fTooltip(tooltip);
     return this;
   },
+  addXAxisCrosshair: function addXAxisCrosshair() {
+    this.add('xAxis', { crosshair: _Chart2.default.fCrosshair() });
+    return this;
+  },
   add: function add(propName, option) {
     if (typeof propName === 'string') {
       var _to = this.config[propName];
@@ -83,6 +87,41 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     } else if (propName && (typeof propName === 'undefined' ? 'undefined' : (0, _typeof3.default)(propName)) === 'object') {
       Object.assign(this.config, propName);
     }
+    return this;
+  },
+  addZhVolumeConfig: function addZhVolumeConfig(id, dColumn, dVolume) {
+    this.add('zhVolumeConfig', _ChartConfig2.default.fIndicatorVolumeConfig(id, dColumn, dVolume));
+    return this;
+  },
+  addZhATHConfig: function addZhATHConfig(id, data) {
+    this.add('zhATHConfig', _ChartConfig2.default.fIndicatorATHConfig(id, data));
+    return this;
+  },
+  addZhPoints: function addZhPoints(data, fn) {
+    this.add({
+      zhPoints: data,
+      zhIsMfi: true,
+      zhFnGetMfiConfig: fn
+    });
+    return this;
+  },
+  setMinMax: function setMinMax(minValue, maxValue) {
+    var plotLines = this.config.yAxis.plotLines;
+    plotLines[0].value = maxValue;
+    plotLines[0].label.text = '' + _ChartConfig2.default.fnNumberFormat(maxValue);
+    plotLines[1].value = minValue;
+    plotLines[1].label.text = '' + _ChartConfig2.default.fnNumberFormat(minValue);
+    this.add('yAxis', {
+      min: _Chart2.default.calcMinY({ minPoint: minValue, maxPoint: maxValue }),
+      maxPadding: 0.15,
+      minPadding: 0.15,
+      endOnTick: false,
+      startOnTick: false
+    });
+    return this;
+  },
+  setStockSerias: function setStockSerias(id, d, dH, dL, dO) {
+    _ChartConfig2.default.setStockSerias(this.config, d, dH, d, dO, id);
     return this;
   },
   toConfig: function toConfig() {

@@ -72,10 +72,11 @@ var PasteToModalDialog = function (_Component) {
 
       _this.seriesPaneComp.getValues().forEach(function (conf) {
         var color = conf.color,
-            isWithYAxis = conf.isWithYAxis,
+            _conf$toYAxis = conf.toYAxis,
+            toYAxis = _conf$toYAxis === undefined ? {} : _conf$toYAxis,
             data = conf.data;
 
-        ChartFn.addDataTo(toChart, color, data, !isWithYAxis);
+        ChartFn.addDataToYAxis(toChart, color, data, toYAxis.value);
       });
 
       onClose();
@@ -104,8 +105,11 @@ var PasteToModalDialog = function (_Component) {
 
       var _props = this.props,
           isShow = _props.isShow,
-          data = _props.data,
-          onClose = _props.onClose;
+          _props$data = _props.data,
+          data = _props$data === undefined ? {} : _props$data,
+          onClose = _props.onClose,
+          fromChart = data.fromChart,
+          toChart = data.toChart;
 
       return _react2.default.createElement(
         _ModalDialog2.default,
@@ -121,7 +125,8 @@ var PasteToModalDialog = function (_Component) {
             return _this2.seriesPaneComp = comp;
           },
           rootStyle: S.SCROLL_PANE,
-          fromChart: data.fromChart
+          fromChart: fromChart,
+          toChart: toChart
         })
       );
     }

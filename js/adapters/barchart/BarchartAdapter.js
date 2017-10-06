@@ -12,21 +12,13 @@ var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
-var _ChartConfig = require('../../charts/ChartConfig');
+var _Tooltip = require('../../charts/Tooltip');
 
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
-
-var _Chart = require('../../charts/Chart');
-
-var _Chart2 = _interopRequireDefault(_Chart);
-
-var _Tooltip = require('../../charts/Tooltip');
-
-var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 var _IndicatorSma = require('../IndicatorSma');
 
@@ -47,7 +39,6 @@ var _crInfo = function _crInfo(caption) {
 var _crZhConfig = function _crZhConfig(id, value) {
   return {
     columnName: "Close",
-    dataColumn: 4,
     dataSource: "Barchart Market Data Solutions",
     id: id,
     key: value,
@@ -57,21 +48,23 @@ var _crZhConfig = function _crZhConfig(id, value) {
   };
 };
 
-var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
-  var _ref$results = _ref.results,
-      results = _ref$results === undefined ? [] : _ref$results;
+var _crSeriesData = function _crSeriesData(chartId) {
+  var json = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var isAllSeries = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var _json$results = json.results,
+      results = _json$results === undefined ? [] : _json$results,
+      data = [],
+      dataOpen = [],
+      dataHigh = [],
+      dataLow = [],
+      dataVolume = [],
+      dataVolumeColumn = [],
+      dataATH = [],
+      dataMfi = [];
 
-  var _data = [],
-      _dataOpen = [],
-      _dataHigh = [],
-      _dataLow = [],
-      _dataVolume = [],
-      _dataVolumeColumn = [],
-      _dataATH = [],
-      _dataMfi = [];
   var _prevClose = void 0,
-      _minClose = Number.POSITIVE_INFINITY,
-      _maxClose = Number.NEGATIVE_INFINITY;
+      minClose = Number.POSITIVE_INFINITY,
+      maxClose = Number.NEGATIVE_INFINITY;
   results.forEach(function (item) {
     var _item$tradingDay = item.tradingDay,
         tradingDay = _item$tradingDay === undefined ? '' : _item$tradingDay,
@@ -82,58 +75,77 @@ var _createCloseSeries = function _createCloseSeries(config, _ref, chartId) {
         volume = item.volume,
         _date = _AdapterFn2.default.ymdToUTC(tradingDay);
 
-    if (_minClose > close) {
-      _minClose = close;
-    }
-    if (_maxClose < close) {
-      _maxClose = close;
-    }
+    data.push([_date, close]);
 
-    _data.push([_date, close]);
-    _dataOpen.push([_date, open]);
-    _dataHigh.push([_date, high]);
-    _dataLow.push([_date, low]);
-    _dataVolume.push([_date, volume]);
-    _dataVolumeColumn.push(_AdapterFn2.default.volumeColumnPoint({
-      open: open, close: close, volume: volume, date: _date,
-      option: { _high: high, _low: low }
-    }));
-    _dataMfi.push([tradingDay, close, high, low, close, volume]);
-    if (typeof _prevClose !== 'undefined') {
-      _dataATH.push(_AdapterFn2.default.athPoint({
-        date: _date, prevClose: _prevClose, open: open
+    if (isAllSeries) {
+      if (minClose > close) {
+        minClose = close;
+      }
+      if (maxClose < close) {
+        maxClose = close;
+      }
+
+      dataOpen.push([_date, open]);
+      dataHigh.push([_date, high]);
+      dataLow.push([_date, low]);
+      dataVolume.push([_date, volume]);
+      dataVolumeColumn.push(_AdapterFn2.default.volumeColumnPoint({
+        open: open, close: close, volume: volume, date: _date,
+        option: { _high: high, _low: low }
       }));
+      dataMfi.push([tradingDay, close, high, low, close, volume]);
+      if (typeof _prevClose !== 'undefined') {
+        dataATH.push(_AdapterFn2.default.athPoint({
+          date: _date, prevClose: _prevClose, open: open
+        }));
+      }
+      _prevClose = close;
     }
-    _prevClose = close;
   });
 
-  _ChartConfig2.default.setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen, chartId);
-
-  Object.assign(config, {
-    valueMoving: _AdapterFn2.default.valueMoving(_data),
-    zhVolumeConfig: _ChartConfig2.default.fIndicatorVolumeConfig(chartId, _dataVolumeColumn, _dataVolume),
-    zhATHConfig: _ChartConfig2.default.fIndicatorATHConfig(chartId, _dataATH),
-    zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-    zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries,
-    zhPoints: _dataMfi,
-    zhIsMfi: true,
-    zhFnGetMfiConfig: _IndicatorSma.fnGetConfigMfi
-  });
-
-  _ChartConfig2.default.setMinMax(config, _minClose, _maxClose);
+  return {
+    data: data, minClose: minClose, maxClose: maxClose,
+    dataOpen: dataOpen, dataHigh: dataHigh, dataLow: dataLow,
+    dataVolume: dataVolume, dataVolumeColumn: dataVolumeColumn,
+    dataATH: dataATH, dataMfi: dataMfi
+  };
 };
 
-var _createAreaConfig = function _createAreaConfig(json, option) {
+var _crChartId = function _crChartId(option) {
   var _option$stock = option.stock,
       stock = _option$stock === undefined ? {} : _option$stock,
+      _stock$value = stock.value,
+      value = _stock$value === undefined ? '' : _stock$value;
+
+  return 'B/' + value;
+};
+
+var _crConfig = function _crConfig(json, option) {
+  var _option$stock2 = option.stock,
+      stock = _option$stock2 === undefined ? {} : _option$stock2,
       _stock$caption = stock.caption,
       caption = _stock$caption === undefined ? '' : _stock$caption,
-      _stock$value = stock.value,
-      value = _stock$value === undefined ? '' : _stock$value,
-      _chartId = 'B/' + value,
-      config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(caption).addTooltip(_Tooltip2.default.fnBasePointFormatter).add('xAxis', { crosshair: _Chart2.default.fCrosshair() }).add('info', _crInfo(caption)).add('zhConfig', _crZhConfig(_chartId, value)).toConfig();
-
-  _createCloseSeries(config, json, _chartId);
+      _stock$value2 = stock.value,
+      value = _stock$value2 === undefined ? '' : _stock$value2,
+      _chartId = _crChartId(option),
+      _crSeriesData2 = _crSeriesData(_chartId, json),
+      data = _crSeriesData2.data,
+      minClose = _crSeriesData2.minClose,
+      maxClose = _crSeriesData2.maxClose,
+      dataOpen = _crSeriesData2.dataOpen,
+      dataHigh = _crSeriesData2.dataHigh,
+      dataLow = _crSeriesData2.dataLow,
+      dataVolume = _crSeriesData2.dataVolume,
+      dataVolumeColumn = _crSeriesData2.dataVolumeColumn,
+      dataATH = _crSeriesData2.dataATH,
+      dataMfi = _crSeriesData2.dataMfi,
+      config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(caption).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
+    valueMoving: _AdapterFn2.default.valueMoving(data),
+    info: _crInfo(caption),
+    zhConfig: _crZhConfig(_chartId, value),
+    zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
+    zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+  }).addZhVolumeConfig(_chartId, dataVolumeColumn, dataVolume).addZhATHConfig(_chartId, dataATH).addZhPoints(dataMfi, _IndicatorSma.fnGetConfigMfi).setMinMax(minClose, maxClose).setStockSerias(_chartId, data, dataHigh, dataLow, dataOpen).toConfig();
 
   return {
     config: config,
@@ -144,16 +156,16 @@ var _createAreaConfig = function _createAreaConfig(json, option) {
 
 var BarchartAdapter = {
   toConfig: function toConfig(json, option) {
-    var _config = _createAreaConfig(json, option);
+    var _config = _crConfig(json, option);
     return _config;
   },
   toSeries: function toSeries(json, option) {
-    var seria = _ChartConfig2.default.fSeries();
-    Object.assign(seria, {
-      zhSeriaId: 'Empty_Seria',
-      zhValueText: 'Empty Seria'
-    });
-    return seria;
+    var parentId = option.parentId,
+        _id = parentId + '_' + _crChartId(option),
+        _crSeriesData3 = _crSeriesData(_id, json, false),
+        data = _crSeriesData3.data;
+
+    return (0, _ConfigBuilder2.default)().initBaseSeria().addPoints(_id, data).toConfig();
   }
 };
 

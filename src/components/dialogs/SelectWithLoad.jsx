@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import InputSelect from '../zhn-select/InputSelect';
-import STYLE from '../styles/DialogStyles';
+import RowInputSelect from './RowInputSelect'
 
 import withLoadOptions from './decorators/withLoadOptions';
 
@@ -38,30 +37,12 @@ class SelectWithLoad extends Component {
     }
 
     render(){
-      const {
-              caption, optionNames, placeholder,
-              isWithInput,
-              onSelect
-            } = this.props
-          , { isLoading, isLoadingFailed, options } = this.state;
-
       return (
-        <div style={STYLE.rowDiv}>
-           <span style={STYLE.labelSpan}>
-              {caption}
-           </span>
-           <InputSelect
-             width="250"
-             isLoading={isLoading}
-             isLoadingFailed={isLoadingFailed}
-             options={options}
-             optionNames={optionNames}
-             placeholder={placeholder}
-             isWithInput={isWithInput}
-             onLoadOption={this._handlerLoadOptions}
-             onSelect={onSelect}
-           />
-       </div>
+        <RowInputSelect
+           {...this.props}
+           {...this.state}
+           onLoadOption={this._handlerLoadOptions}
+        />
       );
     }
 }

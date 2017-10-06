@@ -141,6 +141,7 @@ const AlphaIntradayAdapter = {
   },
 
   toSeries(json, option){
+    throw new Error('ZH_1000');
   }
 }
 

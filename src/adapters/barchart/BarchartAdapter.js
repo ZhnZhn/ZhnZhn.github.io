@@ -2,11 +2,8 @@
 import DateUtils from '../../utils/DateUtils'
 
 import AdapterFn from '../AdapterFn'
-
-import ChartConfig from '../../charts/ChartConfig'
-import ConfigBuilder from '../../charts/ConfigBuilder'
-import Chart from '../../charts/Chart'
 import Tooltip from '../../charts/Tooltip'
+import ConfigBuilder from '../../charts/ConfigBuilder'
 
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from '../IndicatorSma';
 
@@ -23,7 +20,6 @@ const _crInfo = (caption) => ({
 
 const _crZhConfig = (id, value) => ({
   columnName: "Close",
-  dataColumn: 4,
   dataSource: "Barchart Market Data Solutions",
   id: id,
   key: value,
@@ -32,14 +28,15 @@ const _crZhConfig = (id, value) => ({
   legend: AdapterFn.stockSeriesLegend()
 });
 
-const _createCloseSeries = (config, { results=[] }, chartId) => {
-  const _data = []
-      , _dataOpen = [], _dataHigh = [], _dataLow = []
-      , _dataVolume = [], _dataVolumeColumn = []
-      , _dataATH = [], _dataMfi = [];
+const _crSeriesData = (chartId, json={}, isAllSeries=true ) => {
+  const { results=[] } = json
+      , data = []
+      , dataOpen = [], dataHigh = [], dataLow = []
+      , dataVolume = [], dataVolumeColumn = []
+      , dataATH = [], dataMfi = [];
   let _prevClose
-    , _minClose = Number.POSITIVE_INFINITY
-    , _maxClose = Number.NEGATIVE_INFINITY;
+    , minClose = Number.POSITIVE_INFINITY
+    , maxClose = Number.NEGATIVE_INFINITY;
   results.forEach(item => {
     const {
            tradingDay='',
@@ -47,72 +44,77 @@ const _createCloseSeries = (config, { results=[] }, chartId) => {
           } = item
         , _date = AdapterFn.ymdToUTC(tradingDay);
 
-    if (_minClose > close) {
-      _minClose = close
-    }
-    if (_maxClose < close ) {
-      _maxClose = close
-    }
+    data.push([_date, close])
 
-    _data.push([_date, close])
-    _dataOpen.push([_date, open])
-    _dataHigh.push([_date, high])
-    _dataLow.push([_date, low])
-    _dataVolume.push([_date, volume])
-    _dataVolumeColumn.push(
-        AdapterFn.volumeColumnPoint({
-           open, close, volume, date: _date,
-           option: { _high: high, _low: low }
-        })
-    )
-    _dataMfi.push([tradingDay, close, high, low, close, volume])
-    if (typeof _prevClose !== 'undefined'){
-      _dataATH.push(
-         AdapterFn.athPoint({
-           date: _date, prevClose: _prevClose, open
-         })
+    if (isAllSeries) {
+      if (minClose > close) { minClose = close }
+      if (maxClose < close ) { maxClose = close }
+
+      dataOpen.push([_date, open])
+      dataHigh.push([_date, high])
+      dataLow.push([_date, low])
+      dataVolume.push([_date, volume])
+      dataVolumeColumn.push(
+          AdapterFn.volumeColumnPoint({
+             open, close, volume, date: _date,
+             option: { _high: high, _low: low }
+          })
       )
-    }
-    _prevClose = close
+      dataMfi.push([tradingDay, close, high, low, close, volume])
+      if (typeof _prevClose !== 'undefined'){
+        dataATH.push(
+           AdapterFn.athPoint({
+             date: _date, prevClose: _prevClose, open
+           })
+        )
+      }
+      _prevClose = close
+     }
   })
 
-  ChartConfig.setStockSerias(
-    config, _data, _dataHigh, _dataLow, _dataOpen, chartId
-  )
-
-  Object.assign(config, {
-    valueMoving: AdapterFn.valueMoving(_data),
-    zhVolumeConfig: ChartConfig.fIndicatorVolumeConfig(
-      chartId, _dataVolumeColumn, _dataVolume
-    ),
-    zhATHConfig: ChartConfig.fIndicatorATHConfig(chartId, _dataATH),
-    zhFnAddSeriesSma: fnAddSeriesSma,
-    zhFnRemoveSeries: fnRemoveSeries,
-    zhPoints: _dataMfi,
-    zhIsMfi: true,
-    zhFnGetMfiConfig: fnGetConfigMfi
-  })
-
-  ChartConfig.setMinMax(config, _minClose, _maxClose)
+  return {
+    data, minClose, maxClose,
+    dataOpen, dataHigh, dataLow,
+    dataVolume, dataVolumeColumn,
+    dataATH, dataMfi
+  };
 
 }
 
-const _createAreaConfig = (json, option) => {
+const _crChartId = (option) => {
+  const { stock={} } = option
+      , { value=''} = stock;
+  return `B/${value}`;
+}
+
+const _crConfig = (json, option) => {
   const { stock={} } = option
       , { caption='', value='' } = stock
-      , _chartId = `B/${value}`
+      , _chartId = _crChartId(option)
+      , {
+          data, minClose, maxClose,
+          dataOpen, dataHigh, dataLow,
+          dataVolume, dataVolumeColumn,
+          dataATH, dataMfi
+        } = _crSeriesData(_chartId, json)
       , config = ConfigBuilder()
          .initBaseArea()
          .add('chart', { spacingTop: 25 })
          .addCaption(caption)
          .addTooltip(Tooltip.fnBasePointFormatter)
-         .add('xAxis', { crosshair : Chart.fCrosshair() })
-         .add('info', _crInfo(caption))
-         .add('zhConfig', _crZhConfig(_chartId, value))
-         .toConfig();
-
-  _createCloseSeries(config, json, _chartId)
-
+         .add({
+            valueMoving: AdapterFn.valueMoving(data),
+            info: _crInfo(caption),
+            zhConfig: _crZhConfig(_chartId, value),
+            zhFnAddSeriesSma: fnAddSeriesSma,
+            zhFnRemoveSeries: fnRemoveSeries
+          })
+          .addZhVolumeConfig(_chartId, dataVolumeColumn, dataVolume)
+          .addZhATHConfig(_chartId, dataATH)
+          .addZhPoints(dataMfi, fnGetConfigMfi)
+          .setMinMax(minClose, maxClose)
+          .setStockSerias(_chartId, data, dataHigh, dataLow, dataOpen)
+          .toConfig();
   return {
     config,
     isDrawDeltaExtrems:false,
@@ -122,16 +124,18 @@ const _createAreaConfig = (json, option) => {
 
 const BarchartAdapter = {
   toConfig(json, option) {
-    const _config = _createAreaConfig(json, option);
+    const _config = _crConfig(json, option);
     return _config;
   },
+
   toSeries(json, option) {
-    const seria = ChartConfig.fSeries();
-    Object.assign(seria, {
-      zhSeriaId: 'Empty_Seria',
-      zhValueText: 'Empty Seria'
-    })
-    return seria;
+    const { parentId } = option
+        , _id = `${parentId}_${_crChartId(option)}`
+        , { data } = _crSeriesData(_id, json, false);
+    return ConfigBuilder()
+      .initBaseSeria()
+      .addPoints(_id, data)
+      .toConfig();
   }
 }
 

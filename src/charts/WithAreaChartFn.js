@@ -53,17 +53,19 @@ const WithAreaChartFn = {
   },
 
   arCalcDeltaYAxis(chart) {
-    const yAxis = chart.yAxis[1]
-        , { max } = yAxis.getExtremes()
-        , _maxLen = max
-             ? (''+max).length
-             : 0
-        , _maxLabelLenght = yAxis.maxLabelLength;
-
-    return _maxLen !== 0
-      //? 10*_maxLen + 25 - (_maxLen - 1)
-      ? 25 + Math.round(_maxLabelLenght)
-      : 0;
+    let delta = 0;
+    chart.yAxis.forEach(_yAxis => {
+      if (!_yAxis.opposite) {
+        const { max } = _yAxis.getExtremes()
+            , _maxLen = max ? (''+max).length : 0
+            , _maxLabelLenght = _yAxis.maxLabelLength
+            , _offset = delta === 0 ? 25 : 15;
+        delta = _maxLen !== 0
+          ? delta + _offset + Math.round(_maxLabelLenght)
+          : delta
+      }
+    })
+    return delta;
   }
 
 };

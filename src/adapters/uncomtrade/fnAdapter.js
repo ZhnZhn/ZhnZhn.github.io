@@ -123,7 +123,7 @@ const fnAdapter = {
 
   crBaseConfig(json, option) {
     const { title, subtitle } = option;
-    return (new ConfigBuilder())
+    return ConfigBuilder()
       .initBaseArea()
       .add('chart', C.CHART)
       .addCaption(title, subtitle)

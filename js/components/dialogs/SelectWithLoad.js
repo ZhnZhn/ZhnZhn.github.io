@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -26,13 +30,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _InputSelect = require('../zhn-select/InputSelect');
+var _RowInputSelect = require('./RowInputSelect');
 
-var _InputSelect2 = _interopRequireDefault(_InputSelect);
-
-var _DialogStyles = require('../styles/DialogStyles');
-
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
+var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
 var _withLoadOptions = require('./decorators/withLoadOptions');
 
@@ -89,38 +89,9 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          caption = _props.caption,
-          optionNames = _props.optionNames,
-          placeholder = _props.placeholder,
-          isWithInput = _props.isWithInput,
-          onSelect = _props.onSelect,
-          _state = this.state,
-          isLoading = _state.isLoading,
-          isLoadingFailed = _state.isLoadingFailed,
-          options = _state.options;
-
-
-      return _react2.default.createElement(
-        'div',
-        { style: _DialogStyles2.default.rowDiv },
-        _react2.default.createElement(
-          'span',
-          { style: _DialogStyles2.default.labelSpan },
-          caption
-        ),
-        _react2.default.createElement(_InputSelect2.default, {
-          width: '250',
-          isLoading: isLoading,
-          isLoadingFailed: isLoadingFailed,
-          options: options,
-          optionNames: optionNames,
-          placeholder: placeholder,
-          isWithInput: isWithInput,
-          onLoadOption: this._handlerLoadOptions,
-          onSelect: onSelect
-        })
-      );
+      return _react2.default.createElement(_RowInputSelect2.default, (0, _extends3.default)({}, this.props, this.state, {
+        onLoadOption: this._handlerLoadOptions
+      }));
     }
   }]);
   return SelectWithLoad;

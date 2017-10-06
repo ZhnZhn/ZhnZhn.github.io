@@ -5,6 +5,7 @@ import HandleF from '../f-handle/HandleF'
 
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
+import InputSelect from '../zhn-select/InputSelect'
 import RowCheckBox from '../dialogs/RowCheckBox'
 
 const DF = {
@@ -19,11 +20,12 @@ const S = {
     paddingBottom: '16px'
   },
   TITLE: {
+    verticalAlign: 'middle',
     color: 'rgb(27, 117, 187)',
     textAlign: 'right',
     width: '100px',
     paddingLeft: '4px',
-    paddingRight: '8px',
+    paddingRight: '16px',
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
@@ -34,11 +36,19 @@ const S = {
     height: '32px',
     width: '32px',
     borderRadius: '2px',
-    verticalAlign: 'bottom',
+    verticalAlign: 'middle',
     boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   },
   ROW_CHECK_BOX: {
-    display: 'inline-block'
+    display: 'inline-block',
+    verticalAlign: 'middle'
+  },
+  SELECT: {
+     verticalAlign: 'middle',
+     marginLeft: '24px'
+  },
+  SELECT_OPTIONS: {
+    minHeight: '100px'
   }
 };
 
@@ -52,11 +62,8 @@ class SeriaRow extends Component {
     this._hUnCheck = HandleF
       .set('isChecked', false).bind(this)
 
-    this.isWithYAxis = false
-    this._hCheckYAxis = HandleF
-      .set('isWithYAxis', true).bind(this)
-    this._hUnCheckYAxis = HandleF
-      .set('isWithYAxis', false).bind(this)
+    this._hSelectYAxis = HandleF
+      .reg('toYAxis').bind(this)
 
     this._hRegCellColor = HandleF.
       reg('cellColorNode').bind(this)
@@ -94,7 +101,7 @@ class SeriaRow extends Component {
 
   render(){
     const { isShowPallete } = this.state
-        , { seria={} } = this.props
+        , { seria={}, yAxisOptions } = this.props
         , { name, options={} } = seria
         , { zhValueText } = options
         , _name = zhValueText || name
@@ -126,11 +133,13 @@ class SeriaRow extends Component {
              onClose={this._hClosePalette}
           />
         </CellColor>
-        <RowCheckBox
-           rootStyle={S.ROW_CHECK_BOX}
-           caption="withYAxis"
-           onCheck={this._hCheckYAxis}
-           onUnCheck={this._hUnCheckYAxis}
+        <InputSelect
+          placeholder="withYAxis"
+          width="150"
+          rootStyle={S.SELECT}
+          rootOptionsStyle={S.SELECT_OPTIONS}
+          options={yAxisOptions}
+          onSelect={this._hSelectYAxis}
         />
       </div>
     )
@@ -140,7 +149,7 @@ class SeriaRow extends Component {
     return {
       isChecked: this.isChecked,
       color: this._getColor(),
-      isWithYAxis: this.isWithYAxis,
+      toYAxis: this.toYAxis,
       data: this.props.seria.userOptions.data
     };
   }

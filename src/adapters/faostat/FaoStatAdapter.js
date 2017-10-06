@@ -97,8 +97,8 @@ const _crSeriaData = (json, option) => {
 const _toDataPoints = (json, option) => {
   const { one } = option
   return ( (''+one).indexOf('>') === -1 )
-    ? { type: 'A', points: _crSeriaData(json, option)  }
-    : { type: 'B', points: _crSeriesData(json, option) }
+    ? _crSeriaData(json, option)
+    : _crSeriesData(json, option)
 }
 
 const _checkToSeries = option => {
