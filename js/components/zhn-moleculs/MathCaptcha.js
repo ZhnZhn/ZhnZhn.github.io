@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _InputSlider = require('../zhn/InputSlider');
 
 var _InputSlider2 = _interopRequireDefault(_InputSlider);
@@ -127,7 +131,7 @@ var MatchCaptcha = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? MatchCaptcha.propTypes = {
-  rootStyle: _react.PropTypes.object
+  rootStyle: _propTypes2.default.object
 } : void 0;
 exports.default = MatchCaptcha;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\MathCaptcha.js.map

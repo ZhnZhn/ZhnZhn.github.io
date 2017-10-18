@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react';
+import PropTypes from "prop-types";
 
 const SHOW_POPUP = 'show-popup'
 const S = {
@@ -34,8 +35,7 @@ ShowHide.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.oneOfType[
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    (PropTypes.arrayOf(PropTypes.node), PropTypes.node)
   ]
 }
 

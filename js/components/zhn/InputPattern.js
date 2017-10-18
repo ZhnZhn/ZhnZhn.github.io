@@ -30,6 +30,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var STYLE = {
@@ -218,13 +222,13 @@ var InputPattern = (_temp = _class = function (_Component) {
   }
 }, _temp);
 process.env.NODE_ENV !== "production" ? InputPattern.propTypes = {
-  rootStyle: _react.PropTypes.object,
-  inputStyle: _react.PropTypes.object,
-  initValue: _react.PropTypes.string,
-  placeholder: _react.PropTypes.string,
-  errorMsg: _react.PropTypes.string,
-  onTest: _react.PropTypes.func,
-  onEnter: _react.PropTypes.func
+  rootStyle: _propTypes2.default.object,
+  inputStyle: _propTypes2.default.object,
+  initValue: _propTypes2.default.string,
+  placeholder: _propTypes2.default.string,
+  errorMsg: _propTypes2.default.string,
+  onTest: _propTypes2.default.func,
+  onEnter: _propTypes2.default.func
 } : void 0;
 exports.default = InputPattern;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputPattern.js.map

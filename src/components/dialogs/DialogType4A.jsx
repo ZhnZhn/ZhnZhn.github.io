@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from './ToolbarButtonCircle';
-import SelectParentChild from './SelectParentChild';
-import Button from './Button'
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import RowCheckBox from './RowCheckBox';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ShowHide from '../zhn/ShowHide';
-
-import withToolbar from './decorators/withToolbar';
-import withValidationLoad from './decorators/withValidationLoad';
+import D from './DialogCell'
+import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
-@withToolbar
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class DialogType4A extends Component {
 
   constructor(props){
@@ -27,7 +18,7 @@ class DialogType4A extends Component {
     })
     this[HAS_SECOND_Y_AXIS] = false
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
       isShowDate: true,
@@ -99,7 +90,7 @@ class DialogType4A extends Component {
           } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
            caption={caption}
            isShow={isShow}
            commandButtons={this._commandButtons}
@@ -107,11 +98,11 @@ class DialogType4A extends Component {
            onFront={onFront}
            onClose={this._handleClose}
          >
-             <ToolbarButtonCircle
+             <D.ToolbarButtonCircle
                 buttons={this.toolbarButtons}
              />
 
-             <SelectParentChild
+             <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
                  uri={oneURI}
@@ -122,27 +113,27 @@ class DialogType4A extends Component {
                  msgOnNotSelected={msgOnNotSelected}
              />
 
-             <ShowHide isShow={isShowDate}>
-               <DatesFragment
+             <D.ShowHide isShow={isShowDate}>
+               <D.DatesFragment
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />
-             </ShowHide>
-             <ShowHide isShow={isShowOptions}>
-               <RowCheckBox
+             </D.ShowHide>
+             <D.ShowHide isShow={isShowOptions}>
+               <D.RowCheckBox
                  initValue={false}
                  caption="Add Seria with Second YAxis"
                  onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
                  onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
                />
-             </ShowHide>
-             <ValidationMessages
+             </D.ShowHide>
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }

@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _DateField = require('../zhn/DateField');
 
 var _DateField2 = _interopRequireDefault(_DateField);
@@ -92,10 +96,10 @@ var RowDate = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? RowDate.propTypes = {
-  labelTitle: _react.PropTypes.string,
-  initValue: _react.PropTypes.string,
-  errorMsg: _react.PropTypes.string,
-  onTestDate: _react.PropTypes.func
+  labelTitle: _propTypes2.default.string,
+  initValue: _propTypes2.default.string,
+  errorMsg: _propTypes2.default.string,
+  onTestDate: _propTypes2.default.func
 } : void 0;
 exports.default = RowDate;
-//# sourceMappingURL=RowDate.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowDate.js.map

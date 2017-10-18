@@ -1,21 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+//import PropTypes from "prop-types";
 
 import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
 import ArrayUtil from '../../utils/ArrayUtil';
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-
-import ToolbarButtonCircle from './ToolbarButtonCircle';
-import SelectWithLoad from './SelectWithLoad';
-import Button from './Button'
-import ShowHide from '../zhn/ShowHide';
-import RowInputSelect from './RowInputSelect';
-
-import ValidationMessages from '../zhn/ValidationMessages';
-
-import withToolbar from './decorators/withToolbar';
-import withValidationLoad from './decorators/withValidationLoad';
+import D from '../dialogs/DialogCell'
+import Decor from '../dialogs/decorators/Decorators';
 
 const  DATE_PLACEHOLDER = 'Before Select Indicator'
      , MAP_FREQUENCY_DF = 'M'
@@ -38,10 +29,10 @@ const isCategoryType = (chartType) => {
 }
 
 
-@withToolbar
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class DialogEurostat2 extends Component {
-
+  /*
   static propTypes = {
     isShow: PropTypes.bool,
     caption: PropTypes.string,
@@ -61,7 +52,7 @@ class DialogEurostat2 extends Component {
     onShow: PropTypes.func,
     loadFn: PropTypes.func
   }
-
+ */
   constructor(props){
     super();
     this.one = undefined;
@@ -73,7 +64,7 @@ class DialogEurostat2 extends Component {
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
       isShowDate : false,
@@ -182,7 +173,7 @@ class DialogEurostat2 extends Component {
           } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={this._commandButtons}
@@ -190,43 +181,43 @@ class DialogEurostat2 extends Component {
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <ToolbarButtonCircle
+             <D.ToolbarButtonCircle
                buttons={this.toolbarButtons}
              />
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
-               optionNames={'Items'}
+               optionNames="Items"
                onSelect={this._handleSelectOne}
              />
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={twoURI}
                jsonProp={twoJsonProp}
                caption={twoCaption}
-               optionNames={'Items'}
+               optionNames="Items"
                onSelect={this._handleSelectTwo}
              />
-             <RowInputSelect
-               caption={'Chart Type'}
-               placeholder={'Default: Area'}
+             <D.RowInputSelect
+               caption="Chart Type"
+               placeholder="Default: Area"
                options={chartTypeOptions}
                onSelect={this._handleSelectChartType}
              />
-             <ShowHide isShow={isShowDate}>
-               <RowInputSelect
-                  caption={'For Date'}
+             <D.ShowHide isShow={isShowDate}>
+               <D.RowInputSelect
+                  caption="For Date"
                   placeholder={dateDefault}
                   options={dateOptions}
                   onSelect={this._handleSelectDate}
                />
-             </ShowHide>
-             <ValidationMessages
+             </D.ShowHide>
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }

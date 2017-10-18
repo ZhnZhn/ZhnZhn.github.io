@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _index = require('./dataProcessing/index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31,9 +35,9 @@ var SparklinesReferenceLine = function SparklinesReferenceLine(props) {
 };
 
 process.env.NODE_ENV !== "production" ? SparklinesReferenceLine.propTypes = {
-    type: _react2.default.PropTypes.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
-    value: _react2.default.PropTypes.number,
-    style: _react2.default.PropTypes.object
+    type: _propTypes2.default.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
+    value: _propTypes2.default.number,
+    style: _propTypes2.default.object
 } : void 0;
 
 SparklinesReferenceLine.defaultProps = {

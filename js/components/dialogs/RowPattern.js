@@ -32,6 +32,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _InputPattern = require('../zhn/InputPattern');
 
 var _InputPattern2 = _interopRequireDefault(_InputPattern);
@@ -91,7 +95,7 @@ var RowPattern = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? RowPattern.propTypes = {
-  title: _react.PropTypes.string
+  title: _propTypes2.default.string
 } : void 0;
 exports.default = RowPattern;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowPattern.js.map

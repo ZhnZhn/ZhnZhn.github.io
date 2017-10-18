@@ -18,12 +18,14 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   browserType: _Type.BrowserType.STOCK_MARKETS,
   isDynamic: true,
   caption: 'Stock Markets',
-  sourceMenuUrl: './data/stock-markets/source-menu.json'
+  sourceMenuUrl: './data/stock-markets/source-menu.json',
+  dialogsId: 'ALPHA'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
   browserType: _Type.BrowserType.EUROSTAT,
   isDynamic: true,
   caption: 'European Statistics',
-  sourceMenuUrl: './data/eurostat/source-menu.json'
+  sourceMenuUrl: './data/eurostat/source-menu.json',
+  dialogsId: 'EUROSTAT'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.UN_COMTRADE, {
   browserType: _Type.BrowserType.UN_COMTRADE,
   isDynamic: true,

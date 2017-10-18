@@ -1,4 +1,22 @@
+import Chart from './Chart'
 import ChartConfig from './ChartConfig'
+
+const C = {
+  BASE_AREA_RANGE: {
+    type: 'arearange',
+    color: '#7cb5ec',                 
+    fillColor: {
+      linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+      stops: [
+         [0, "rgba(69, 114, 167, 1)"],
+         [1, "rgba(2, 0, 0, 0)"]
+      ]
+    },
+    marker: {
+      radius: 0
+    }
+  }
+};
 
 const _crLegendItem = ({ index, color, name, is=false }) => ({
   index, color, name,
@@ -22,6 +40,12 @@ const SeriaBuilder = {
   initBaseSeria(){
     this._type = 'S'
     this.config = ChartConfig.fSeries()
+    return this;
+  },
+  initAreaRange(tooltip, option){
+    this._type = 'S'
+    this.config = { ...C.BASE_AREA_RANGE, ...option }
+    this.add('tooltip', Chart.fTooltip(tooltip))
     return this;
   },
 

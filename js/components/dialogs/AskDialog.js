@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _Button = require('./Button');
 
 var _Button2 = _interopRequireDefault(_Button);
@@ -181,14 +185,14 @@ var AskDialog = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? AskDialog.propTypes = {
-  isShow: _react.PropTypes.bool,
-  data: _react.PropTypes.shape({
-    options: _react.PropTypes.shape({
-      chartType: _react.PropTypes.string,
-      browserType: _react.PropTypes.string
+  isShow: _propTypes2.default.bool,
+  data: _propTypes2.default.shape({
+    options: _propTypes2.default.shape({
+      chartType: _propTypes2.default.string,
+      browserType: _propTypes2.default.string
     })
   }),
-  onClose: _react.PropTypes.func
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = AskDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\AskDialog.js.map

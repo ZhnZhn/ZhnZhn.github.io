@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _Type = require('../../constants/Type');
 
 var _SvgDown = require('../zhn/SvgDown');
@@ -206,15 +210,15 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
   }
 }, _temp);
 process.env.NODE_ENV !== "production" ? ValueMovingBadge.propTypes = {
-  valueMoving: _react.PropTypes.shape({
-    value: _react.PropTypes.number,
-    delta: _react.PropTypes.number,
-    percent: _react.PropTypes.number,
-    direction: _react.PropTypes.oneOf('up', 'down', 'equal'),
-    date: _react.PropTypes.string
+  valueMoving: _propTypes2.default.shape({
+    value: _propTypes2.default.number,
+    delta: _propTypes2.default.number,
+    percent: _propTypes2.default.number,
+    direction: _propTypes2.default.oneOf('up', 'down', 'equal'),
+    date: _propTypes2.default.string
   }),
-  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
-  crValueMoving: _react.PropTypes.func
+  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
+  crValueMoving: _propTypes2.default.func
 } : void 0;
 exports.default = ValueMovingBadge;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ValueMovingBadge.js.map

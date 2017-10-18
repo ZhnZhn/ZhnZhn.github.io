@@ -32,37 +32,9 @@ var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _SelectWithLoad = require('../dialogs/SelectWithLoad');
-
-var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
-
-var _RowInputSelect = require('../dialogs/RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _Button = require('../dialogs/Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _DatesFragment = require('../zhn-moleculs/DatesFragment');
-
-var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
 
@@ -357,12 +329,12 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
       caption: 'C', title: 'Toggle ChartType Input',
       onClick: _this._handlerClickChartType
     }];
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Flat, {
       rootStyle: S.BT_ROOT,
       caption: 'Load Meta',
       title: 'First Load Meta, then Load Item',
       onClick: _this._handlerLoadMeta
-    }), _react2.default.createElement(_Button2.default.Load, { onClick: _this._handlerLoadData })];
+    }), _react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handlerLoadData })];
     _this.state = {
       isShowFilter: false,
       isShowDate: true,
@@ -415,7 +387,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: 'United Nations Commodity Trade',
           isShow: isShow,
@@ -424,10 +396,10 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           onFront: onFront,
           onClose: this._handlerClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: countryURI,
           jsonProp: countryJsonProp,
@@ -435,7 +407,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           optionNames: 'Countries',
           onSelect: this._handlerSelectCountry
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: commodityURI,
           jsonProp: commodityJsonProp,
@@ -444,16 +416,16 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           onSelect: this._handlerSelectChapter
         }),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowFilter },
-          _react2.default.createElement(_RowInputSelect2.default, {
+          _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
             caption: 'Filter Trade:',
             options: TRADE_FILTER_OPTIONS,
             placeholder: 'Filter...',
             onSelect: this._handlerSelectTradeFilter
           })
         ),
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           caption: 'Subheading:',
           options: optionTrades,
           optionNames: 'Meta',
@@ -465,9 +437,9 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
 
         }),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
-          _react2.default.createElement(_DatesFragment2.default, {
+          _react2.default.createElement(_DialogCell2.default.DatesFragment, {
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
@@ -478,15 +450,15 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           })
         ),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowChartType },
-          _react2.default.createElement(_RowInputSelect2.default, {
+          _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
             caption: 'Chart Type:',
             options: CHART_TYPE_OPTIONS,
             onSelect: this._handlerSelectChartType
           })
         ),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );

@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -189,16 +193,16 @@ var PanelValueMoving = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? PanelValueMoving.propTypes = {
-  valueMoving: _react.PropTypes.shape({
-    value: _react.PropTypes.string,
-    date: _react.PropTypes.string,
-    valueTo: _react.PropTypes.string,
-    dateTo: _react.PropTypes.string,
-    isDenyToChange: _react.PropTypes.bool
+  valueMoving: _propTypes2.default.shape({
+    value: _propTypes2.default.string,
+    date: _propTypes2.default.string,
+    valueTo: _propTypes2.default.string,
+    dateTo: _propTypes2.default.string,
+    isDenyToChange: _propTypes2.default.bool
   }),
-  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
-  msgDateTo: _react.PropTypes.string,
-  updateDateTo: _react.PropTypes.func
+  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
+  msgDateTo: _propTypes2.default.string,
+  updateDateTo: _propTypes2.default.func
 } : void 0;
 exports.default = PanelValueMoving;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelValueMoving.js.map

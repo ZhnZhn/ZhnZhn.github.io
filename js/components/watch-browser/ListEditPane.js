@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _FragmentSelectGroupList = require('./FragmentSelectGroupList');
 
 var _FragmentSelectGroupList2 = _interopRequireDefault(_FragmentSelectGroupList);
@@ -177,14 +181,14 @@ var ListEditPane = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ListEditPane.propTypes = {
-  store: _react.PropTypes.shape({
-    listen: _react.PropTypes.func,
-    getWatchGroups: _react.PropTypes.func
+  store: _propTypes2.default.shape({
+    listen: _propTypes2.default.func,
+    getWatchGroups: _propTypes2.default.func
   }),
-  actionCompleted: _react.PropTypes.string,
-  forActionType: _react.PropTypes.string,
-  onRename: _react.PropTypes.func,
-  onClose: _react.PropTypes.func
+  actionCompleted: _propTypes2.default.string,
+  forActionType: _propTypes2.default.string,
+  onRename: _propTypes2.default.func,
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = ListEditPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ListEditPane.js.map

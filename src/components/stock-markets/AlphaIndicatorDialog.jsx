@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog'
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle'
-import SelectWithLoad from '../dialogs/SelectWithLoad'
-import RowPattern from '../dialogs/RowPattern'
-import RowCheckBox from '../dialogs/RowCheckBox'
-import ShowHide from '../zhn/ShowHide'
-import Button from '../dialogs/Button'
-
+import D from '../dialogs/DialogCell'
 import withToolbar from '../dialogs/decorators/withToolbar'
 
 const DF = {
@@ -59,7 +52,7 @@ class AlphaIndicatorDialog extends Component {
       onClick: this._handleClickOptions
     })
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
       isShowOptions: false
@@ -139,7 +132,7 @@ class AlphaIndicatorDialog extends Component {
         , { isShowOptions } = this.state;
 
     return (
-      <DraggableDialog
+      <D.DraggableDialog
            caption={caption}
            isShow={isShow}
            commandButtons={this._commandButtons}
@@ -147,33 +140,33 @@ class AlphaIndicatorDialog extends Component {
            onFront={onFront}
            onClose={this._handleClose}
        >
-           <ToolbarButtonCircle
+           <D.ToolbarButtonCircle
               buttons={this.toolbarButtons}
            />
-           <SelectWithLoad
+           <D.SelectWithLoad
              isShow={isShow}
              uri={oneURI}
              jsonProp={oneJsonProp}
              caption={oneCaption}
-             optionNames={'Items'}
+             optionNames="Items"
              onSelect={this._handleSelectOne}
            />
-          <RowPattern
+          <D.RowPattern
             ref={this._refTicket}
             title="Ticket"
             placeholder="Nyse or Nasdaq Ticket"
             onTest={_testTicket}
             errorMsg="Not Empty"
           />
-          <ShowHide isShow={isShowOptions}>
-            <RowPattern
+          <D.ShowHide isShow={isShowOptions}>
+            <D.RowPattern
               ref={this._refPeriod}
               title="Period"
               placeholder={`Default: ${DF.PERIOD}`}
               onTest={_testPeriod}
               errorMsg="Number in range 1-200"
             />
-            <RowPattern
+            <D.RowPattern
               ref={this._refForDays}
               title="For Days"
               placeholder={`Default: ${DF.FOR_DAYS} (2 Years)`}
@@ -181,14 +174,14 @@ class AlphaIndicatorDialog extends Component {
               errorMsg="Number in range 250-2500"
             />
 
-          </ShowHide>
-          <RowCheckBox
+          </D.ShowHide>
+          <D.RowCheckBox
             initValue={false}
             caption="Add Seria with Second YAxis"
             onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
             onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
           />
-      </DraggableDialog>
+      </D.DraggableDialog>
     );
   }
 }

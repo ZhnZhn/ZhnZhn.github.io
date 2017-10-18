@@ -26,33 +26,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _SelectWithLoad = require('../dialogs/SelectWithLoad');
-
-var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
-
-var _RowPattern = require('../dialogs/RowPattern');
-
-var _RowPattern2 = _interopRequireDefault(_RowPattern);
-
-var _RowCheckBox = require('../dialogs/RowCheckBox');
-
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _Button = require('../dialogs/Button');
-
-var _Button2 = _interopRequireDefault(_Button);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withToolbar = require('../dialogs/decorators/withToolbar');
 
@@ -162,7 +138,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowOptions: false
     };
@@ -194,7 +170,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -203,10 +179,10 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: oneURI,
           jsonProp: oneJsonProp,
@@ -214,7 +190,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           optionNames: 'Items',
           onSelect: this._handleSelectOne
         }),
-        _react2.default.createElement(_RowPattern2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowPattern, {
           ref: this._refTicket,
           title: 'Ticket',
           placeholder: 'Nyse or Nasdaq Ticket',
@@ -222,16 +198,16 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           errorMsg: 'Not Empty'
         }),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowOptions },
-          _react2.default.createElement(_RowPattern2.default, {
+          _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refPeriod,
             title: 'Period',
             placeholder: 'Default: ' + DF.PERIOD,
             onTest: _testPeriod,
             errorMsg: 'Number in range 1-200'
           }),
-          _react2.default.createElement(_RowPattern2.default, {
+          _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refForDays,
             title: 'For Days',
             placeholder: 'Default: ' + DF.FOR_DAYS + ' (2 Years)',
@@ -239,7 +215,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
             errorMsg: 'Number in range 250-2500'
           })
         ),
-        _react2.default.createElement(_RowCheckBox2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           initValue: false,
           caption: 'Add Seria with Second YAxis',
           onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
@@ -252,4 +228,4 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
 }(_react.Component)) || _class;
 
 exports.default = AlphaIndicatorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\AlphaIndicatorDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\stock-markets\AlphaIndicatorDialog.js.map

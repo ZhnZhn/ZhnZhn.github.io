@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
@@ -236,14 +240,14 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
 }(_react.Component)) || _class;
 
 process.env.NODE_ENV !== "production" ? AddToWatchDialog.propTypes = {
-  isShow: _react.PropTypes.bool,
-  data: _react.PropTypes.object,
-  store: _react.PropTypes.shape({
-    listen: _react.PropTypes.func,
-    getWatchGroups: _react.PropTypes.func,
-    getWatchListsByGroup: _react.PropTypes.func
+  isShow: _propTypes2.default.bool,
+  data: _propTypes2.default.object,
+  store: _propTypes2.default.shape({
+    listen: _propTypes2.default.func,
+    getWatchGroups: _propTypes2.default.func,
+    getWatchListsByGroup: _propTypes2.default.func
   }),
-  onClose: _react.PropTypes.func
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = AddToWatchDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\AddToWatchDialog.js.map

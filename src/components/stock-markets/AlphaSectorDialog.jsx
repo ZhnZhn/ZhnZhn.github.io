@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog'
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle'
-import Row from '../dialogs/Row'
-import Button from '../dialogs/Button'
-
+import D from '../dialogs/DialogCell'
 import withToolbar from '../dialogs/decorators/withToolbar'
 
 const S = {
   ROW_TEXT: {
     paddingRight: '16px'
   }
-}
+};
 
 @withToolbar
 class AlphaIndicatorDialog extends Component {
@@ -20,7 +16,7 @@ class AlphaIndicatorDialog extends Component {
     super()
     this.toolbarButtons = this._createType2WithToolbar(props, true)
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ];
   }
 
@@ -54,7 +50,7 @@ class AlphaIndicatorDialog extends Component {
           } = this.props;
 
     return (
-      <DraggableDialog
+      <D.DraggableDialog
            caption={caption}
            isShow={isShow}
            commandButtons={this._commandButtons}
@@ -62,15 +58,15 @@ class AlphaIndicatorDialog extends Component {
            onFront={onFront}
            onClose={this._handleClose}
        >
-           <ToolbarButtonCircle
+           <D.ToolbarButtonCircle
               buttons={this.toolbarButtons}
            />
-           <Row.Text
+           <D.Row.Text
              styleRoot={S.ROW_TEXT}
              caption="Alpha:"
              text="Performance by Sector"
            />
-      </DraggableDialog>
+      </D.DraggableDialog>
     );
   }
 }

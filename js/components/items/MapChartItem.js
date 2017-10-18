@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ChoroplethMap = require('../../adapters/eurostat/ChoroplethMap');
 
 var _ChoroplethMap2 = _interopRequireDefault(_ChoroplethMap);
@@ -260,16 +264,16 @@ var MapChartItem = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? MapChartItem.propTypes = {
-  caption: _react.PropTypes.string,
-  config: _react.PropTypes.shape({
-    json: _react.PropTypes.object,
-    zhMapSlice: _react.PropTypes.object,
-    zhDialog: _react.PropTypes.shape({
-      subtitle: _react.PropTypes.string,
-      time: _react.PropTypes.string
+  caption: _propTypes2.default.string,
+  config: _propTypes2.default.shape({
+    json: _propTypes2.default.object,
+    zhMapSlice: _propTypes2.default.object,
+    zhDialog: _propTypes2.default.shape({
+      subtitle: _propTypes2.default.string,
+      time: _propTypes2.default.string
     })
   }),
-  onCloseItem: _react.PropTypes.func
+  onCloseItem: _propTypes2.default.func
 } : void 0;
 exports.default = MapChartItem;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\MapChartItem.js.map

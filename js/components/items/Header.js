@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _SvgCheckBox = require('../zhn/SvgCheckBox');
 
 var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
@@ -113,18 +117,18 @@ var Header = function Header(props) {
 };
 
 process.env.NODE_ENV !== "production" ? Header.propTypes = {
-  isOpen: _react.PropTypes.bool.isRequired,
-  chartType: _react.PropTypes.string.isRequired,
-  onCheck: _react.PropTypes.func.isRequired,
-  onUnCheck: _react.PropTypes.func.isRequired,
-  itemCaption: _react.PropTypes.string.isRequired,
-  itemTitle: _react.PropTypes.string.isRequired,
-  itemTime: _react.PropTypes.string,
-  onToggle: _react.PropTypes.func.isRequired,
-  valueMoving: _react.PropTypes.object,
-  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
-  crValueMoving: _react.PropTypes.func,
-  onClose: _react.PropTypes.func.isRequired
+  isOpen: _propTypes2.default.bool.isRequired,
+  chartType: _propTypes2.default.string.isRequired,
+  onCheck: _propTypes2.default.func.isRequired,
+  onUnCheck: _propTypes2.default.func.isRequired,
+  itemCaption: _propTypes2.default.string.isRequired,
+  itemTitle: _propTypes2.default.string.isRequired,
+  itemTime: _propTypes2.default.string,
+  onToggle: _propTypes2.default.func.isRequired,
+  valueMoving: _propTypes2.default.object,
+  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
+  crValueMoving: _propTypes2.default.func,
+  onClose: _propTypes2.default.func.isRequired
 } : void 0;
 
 exports.default = Header;

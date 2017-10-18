@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 
 const S = {
   LI : {
@@ -14,7 +15,7 @@ const S = {
     borderTopRightRadius : '8px',
     cursor : 'pointer',
 
-    fontWeight : 'bold',    
+    fontWeight : 'bold',
     border: '2px solid gray',
     borderBottom : 'none',
 

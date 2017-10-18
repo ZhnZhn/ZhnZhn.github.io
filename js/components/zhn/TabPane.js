@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
@@ -132,10 +136,10 @@ var TabPane = (_temp = _class = function (_Component) {
   };
 }, _temp);
 process.env.NODE_ENV !== "production" ? TabPane.propTypes = {
-  isUpdateInit: _react.PropTypes.bool,
-  width: _react.PropTypes.string,
-  height: _react.PropTypes.string,
-  children: _react.PropTypes.arrayOf(_react.PropTypes.node)
+  isUpdateInit: _propTypes2.default.bool,
+  width: _propTypes2.default.string,
+  height: _propTypes2.default.string,
+  children: _propTypes2.default.arrayOf(_propTypes2.default.node)
 } : void 0;
 exports.default = TabPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\TabPane.js.map

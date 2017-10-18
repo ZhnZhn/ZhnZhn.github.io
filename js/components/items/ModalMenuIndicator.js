@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ModalPopup = require('../zhn-moleculs/ModalPopup');
 
 var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
@@ -326,14 +330,14 @@ var ModalMenuIndicator = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ModalMenuIndicator.propTypes = {
-  rootStyle: _react.PropTypes.object,
-  isMfi: _react.PropTypes.bool,
-  onAddSma: _react.PropTypes.func,
-  onRemoveSma: _react.PropTypes.func,
-  onAddMfi: _react.PropTypes.func,
-  onRemoveMfi: _react.PropTypes.func,
-  isMomAth: _react.PropTypes.bool,
-  onAddMomAth: _react.PropTypes.func
+  rootStyle: _propTypes2.default.object,
+  isMfi: _propTypes2.default.bool,
+  onAddSma: _propTypes2.default.func,
+  onRemoveSma: _propTypes2.default.func,
+  onAddMfi: _propTypes2.default.func,
+  onRemoveMfi: _propTypes2.default.func,
+  isMomAth: _propTypes2.default.bool,
+  onAddMomAth: _propTypes2.default.func
 } : void 0;
 exports.default = ModalMenuIndicator;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ModalMenuIndicator.js.map

@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
@@ -138,13 +142,13 @@ var AlertDialog = (_temp = _class = function (_Component) {
   data: {}
 }, _temp);
 process.env.NODE_ENV !== "production" ? AlertDialog.propTypes = {
-  isShow: _react.PropTypes.bool,
-  data: _react.PropTypes.shape({
-    alertCaption: _react.PropTypes.string,
-    alertItemId: _react.PropTypes.string,
-    alertDescr: _react.PropTypes.string
+  isShow: _propTypes2.default.bool,
+  data: _propTypes2.default.shape({
+    alertCaption: _propTypes2.default.string,
+    alertItemId: _propTypes2.default.string,
+    alertDescr: _propTypes2.default.string
   }),
-  onClose: _react.PropTypes.func
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = AlertDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\AlertDialog.js.map

@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 
-const styles = {
-  rootDiv: {
+const CL = {
+  SHOW_POPUP: 'show-popup',
+  NOT_SELECTED: 'not-selected'
+};
+
+const DF = {
+  OPEN_COLOR: "yellow",
+  CLOSE_COLOR: "#4D4D4D"
+};
+
+const S = {
+  ROOT_DIV: {
     lineHeight: 2,
     backgroundColor: '#4D4D4D'
   },
-  rootSvg: {
+  ROOT_SVG: {
     display: 'inline-block',
     width: '16px',
     height: '16px',
     marginLeft: '8px'
   },
-  labelCaption: {
+  LABEL_CAPTION: {
     paddingLeft: '4px',
     verticalAlign: 'top',
     color: 'rgba(164, 135, 212, 1)',
@@ -20,70 +30,96 @@ const styles = {
     fontSize: '16px',
     cursor: 'pointer'
   },
-  itemRow : {
-    backgroundColor: '#404040'
+
+  INLINE_BLOCK: {
+    display: 'inline-block'
+  },
+  BLOCK: {
+    display: 'block'
+  },
+  NONE: {
+    display: 'none'
   }
 };
 
 class OpenClose extends Component {
    constructor(props){
      super();
-     const isOpen = (props.isClose) ? false : true;
+     const {
+             isClose,
+             openColor=DF.OPEN_COLOR,
+             closeColor=DF.CLOSE_COLOR
+           } = props
+          , isOpen = isClose ? false : true;
      this.state = {
        isOpen: isOpen,
+       openColor: openColor,
+       closeColor: closeColor,
        pathOpen: "M 2,14 L 14,14 14,2 2,14",
-       fillOpen: "yellow",
        pathClose: "M 2,2 L 14,8 2,14 2,2",
-       fillClose: "#4D4D4D"
      }
    }
 
-  _handleClickOpenClose = () => {
+  _handleClick = () => {
     this.setState(prev => ({ isOpen: !prev.isOpen }));
   }
 
   render(){
-    const { caption, rootStyle, children } = this.props
+    const {
+            rootStyle, caption,
+            CompAfter, children
+          } = this.props
         , {
             isOpen,
-            pathOpen, fillOpen,
-            pathClose, fillClose
+            pathOpen, pathClose,
+            openColor, closeColor
           } = this.state;
-    let pathV, fillV, displayDivStyle, classShow;
+    let _pathV, _fillV,
+       _rootChildStyle, _rootChildCl;
     if (isOpen){
-      pathV = pathOpen;
-      fillV = fillOpen;
-      displayDivStyle = 'block';
-      classShow = 'show-popup';
+      _pathV = pathOpen
+      _fillV = openColor
+      _rootChildStyle = S.BLOCK
+      _rootChildCl = CL.SHOW_POPUP
     } else {
-      pathV = pathClose;
-      fillV = fillClose;
-      displayDivStyle = 'none';
-      classShow = null;
+      _pathV = pathClose
+      _fillV = closeColor
+      _rootChildStyle = S.NONE
+      _rootChildCl = null;
     }
 
     return (
-      <div style={{...styles.rootDiv, ...rootStyle}}>
-        <div className="not-selected" onClick={this._handleClickOpenClose}>
-          <div style={styles.rootSvg}>
-             <svg
-                viewBox="0 0 16 16" width="100%" height="100%"
-                preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
-                style={{display: 'inline-block'}}
-              >
-             <path
-                d={pathV}
-                fill={fillV}
-                strokeWidth="1" stroke="yellow"
-             >
-             </path>
-             </svg>
+      <div style={{...S.ROOT_DIV, ...rootStyle}}>
+        <div className={CL.NOT_SELECTED}>
+          <div
+            style={S.INLINE_BLOCK}
+            onClick={this._handleClick}
+          >
+            <div style={S.ROOT_SVG}>
+               <svg
+                  viewBox="0 0 16 16" width="100%" height="100%"
+                  preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+                  style={S.INLINE_BLOCK}
+                >
+               <path
+                  d={_pathV}
+                  fill={_fillV}
+                  strokeWidth="1"
+                  stroke={openColor}
+               >
+               </path>
+               </svg>
+           </div>
+           <span style={S.LABEL_CAPTION} >
+              {caption}
+           </span>
          </div>
-         <span style={styles.labelCaption} >
-            {caption}
-         </span>
+         {CompAfter}
       </div>
-      <div className={classShow} style={{display: displayDivStyle}}>
+      <div
+        className={_rootChildCl}
+        style={_rootChildStyle}
+      >
         {children}
       </div>
      </div>

@@ -30,6 +30,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -40,37 +44,17 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 var _Type = require('../../constants/Type');
 
+var _DialogCell = require('./DialogCell');
+
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
+
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _Row = require('./Row');
-
-var _Row2 = _interopRequireDefault(_Row);
-
 var _NasdaqLink = require('../native-links/NasdaqLink');
 
 var _NasdaqLink2 = _interopRequireDefault(_NasdaqLink);
-
-var _DatesFragment = require('../zhn-moleculs/DatesFragment');
-
-var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
 
 var _withValidationLoad = require('./decorators/withValidationLoad');
 
@@ -120,7 +104,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
     _initialiseProps.call(_this);
 
     _this.toolbarButtons = [{ caption: 'L', onClick: _this._handleClickLink }];
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_Button2.default.Show, { onClick: props.data.onShow })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_DialogCell2.default.Button.Show, { onClick: props.data.onShow })];
     _this.state = _this._createInitialState(props);
     return _this;
   }
@@ -169,19 +153,19 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_Row2.default.Text, {
+        _react2.default.createElement(_DialogCell2.default.Row.Text, {
           styleRoot: STYLE.SOURCE_ROOT,
           caption: 'Source:',
           text: _source
         }),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowLink, style: STYLE.LINK_SHOW_HIDE },
           _react2.default.createElement(
-            _Row2.default.Plain,
+            _DialogCell2.default.Row.Plain,
             { style: STYLE.LINK_ROOT },
             _react2.default.createElement(
               'span',
@@ -191,7 +175,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
             _react2.default.createElement(_NasdaqLink2.default, { item: item, caption: 'NASDAQ' })
           )
         ),
-        _react2.default.createElement(_DatesFragment2.default, {
+        _react2.default.createElement(_DialogCell2.default.DatesFragment, {
           ref: function ref(c) {
             return _this2.datesFragment = c;
           },
@@ -199,7 +183,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           initToDate: initToDate,
           onTestDate: onTestDate
         }),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );
@@ -315,10 +299,10 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
 }, _temp)) || _class;
 
 process.env.NODE_ENV !== "production" ? StocksBySectorDialog.propTypes = {
-  isShow: _react.PropTypes.bool.isRequired,
-  data: _react.PropTypes.object.isRequired,
-  store: _react.PropTypes.object,
-  onClose: _react.PropTypes.func.isRequired
+  isShow: _propTypes2.default.bool.isRequired,
+  data: _propTypes2.default.object.isRequired,
+  store: _propTypes2.default.object,
+  onClose: _propTypes2.default.func.isRequired
 } : void 0;
 exports.default = StocksBySectorDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\StocksBySectorDialog.js.map

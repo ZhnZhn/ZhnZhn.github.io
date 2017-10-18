@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 
-//import InputSelect from '../zhn/InputSelect';
 import InputSelect from '../zhn-select/InputSelect';
 import STYLE from '../styles/DialogStyles';
 

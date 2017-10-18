@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _safeFn = require('../../utils/safeFn');
 
 var _safeFn2 = _interopRequireDefault(_safeFn);
@@ -214,13 +218,13 @@ var SettingsDialog = (_temp = _class = function (_Component) {
   };
 }, _temp);
 process.env.NODE_ENV !== "production" ? SettingsDialog.propTypes = {
-  isShow: _react.PropTypes.bool,
-  data: _react.PropTypes.shape({
-    setQuandlKey: _react.PropTypes.func,
-    isAdminMode: _react.PropTypes.func,
-    isDrawDeltaExtrems: _react.PropTypes.func
+  isShow: _propTypes2.default.bool,
+  data: _propTypes2.default.shape({
+    setQuandlKey: _propTypes2.default.func,
+    isAdminMode: _propTypes2.default.func,
+    isDrawDeltaExtrems: _propTypes2.default.func
   }),
-  onClose: _react.PropTypes.func
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = SettingsDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\SettingsDialog.js.map

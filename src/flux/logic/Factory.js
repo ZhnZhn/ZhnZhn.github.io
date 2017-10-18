@@ -37,54 +37,62 @@ const _showModalDialogDescription = function(option){
 
 
 const createDialogComp = function (conf, browserType){
-   const dialogType = conf.type
-       , props = conf.dialogProps ? conf.dialogProps : {}
-       , _initFromDate = (props.nInitFromDate)
-            ? DateUtils.getFromDate(props.nInitFromDate)
+   const {
+           type:itemKey,
+           dialogProps={}, dialogType,
+           dialogCaption,
+           optionURI, optionsJsonProp,
+           dataColumn,
+         } = conf
+       , {
+           nInitFromDate,
+           valueFn, valueFnPrefix,
+           descrUrl,
+           loadFnType,
+           isContinious,
+           loadId
+         } = dialogProps
+       , _initFromDate = (nInitFromDate)
+            ? DateUtils.getFromDate(nInitFromDate)
             : initFromDate
-       , _fnValue = (props.valueFn)
-            ? (props.valueFnPrefix )
-                   ? RouterFnValue[props.valueFn].bind(null, props.valueFnPrefix)
-                   : RouterFnValue[props.valueFn]
+       , _fnValue = (valueFn)
+            ? (valueFnPrefix )
+                 ? RouterFnValue[valueFn].bind(null, valueFnPrefix)
+                 : RouterFnValue[valueFn]
             : undefined
-
-      // , _fnLink = (props.linkFn)
-      //      ? RouterFnLink[props.linkFn]
-      //      : undefined
-
-       , onClickInfo = (props.descrUrl)
+       , onClickInfo = (descrUrl)
             ? _showModalDialogDescription
             : undefined
-       , loadFn = RouterLoadFn.getFn(props.loadFnType, conf.dialogType);
+       , loadFn = RouterLoadFn.getFn(loadFnType, dialogType);
 
-       if (props.isContinious) {
-         props.msgTestDateOrEmpty = Msg.TEST_DATE_OR_EMPTY;
-         props.onTestDateOrEmpty = onTestDateOrEmpty;
+       if (isContinious) {
+         Object.assign(dialogProps, {
+           msgTestDateOrEmpty: Msg.TEST_DATE_OR_EMPTY,
+           onTestDateOrEmpty: onTestDateOrEmpty
+         })
+       }
+       if (!loadId){
+         dialogProps.loadId = LoadType.Q;
        }
 
-       if (!props.loadId){
-         props.loadId = LoadType.Q;
-       }
-
-      return RouterDialog.getDialog(conf.dialogType)
+      return RouterDialog.getDialog(dialogType)
                .then(Comp => {
                   return React.createElement(Comp, {
-                    key : dialogType,
-                    caption : conf.dialogCaption,
-                    optionURI : conf.optionURI,
-                    optionsJsonProp : conf.optionsJsonProp,
-                    dataColumn : conf.dataColumn,
+                    key : itemKey,
+                    caption : dialogCaption,
+                    optionURI : optionURI,
+                    optionsJsonProp : optionsJsonProp,
+                    dataColumn : dataColumn,
                     msgOnNotSelected : Msg.NOT_SELECTED,
                     msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
-                    onLoad  : onLoadChart.bind(null, dialogType, browserType),
-                    onShow  : onShowChart.bind(null, dialogType, browserType),
+                    onLoad : onLoadChart.bind(null, itemKey, browserType),
+                    onShow : onShowChart.bind(null, itemKey, browserType),
                     fnValue : _fnValue,
-                    //fnLink : _fnLink,
                     initFromDate : _initFromDate,
                     initToDate, onTestDate,
                     onClickInfo,
                     loadFn,
-                    ...props
+                    ...dialogProps
                  });
                })
 }
@@ -148,6 +156,7 @@ const Factory = {
  {
     const {
              browserType, caption='Source Browser' , sourceMenuUrl,
+             dialogsId,
              chartContainerType,
              modalDialogType, itemOptionType, itemType, descrUrl
            } = option
@@ -181,6 +190,7 @@ const Factory = {
       showAction : BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
       loadCompletedAction : BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
       updateAction : BrowserActionTypes.UPDATE_BROWSER_MENU,  //for Type
+      dialogsId: dialogsId,
       onLoadMenu : BrowserActions.loadBrowserDynamic,
       onShowLoadDialog : ComponentActions.showModalDialog  //for Type2
 

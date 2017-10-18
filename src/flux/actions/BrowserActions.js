@@ -1,7 +1,9 @@
 import Reflux from 'reflux';
 
+import RouterDialog from '../logic/RouterDialog'
+
 import { fetchJson } from '../../utils/fnFetch'
-import {fnCatch} from '../logic/fnCatch';
+import { fnCatch } from '../logic/fnCatch';
 
 export const BrowserActionTypes = {
   SHOW_BROWSER : 'showBrowser',
@@ -26,12 +28,14 @@ const BrowserActions = Reflux.createActions({
   [BrowserActionTypes.UPDATE_WATCH_BROWSER] : {}
 });
 
-const _fnFetchSourceMenu = function({ json, option, onCompleted }){  
+const _fnFetchSourceMenu = function({ json, option, onCompleted }){
   const { browserType } = option;
   onCompleted({ json, browserType });
 }
 
 BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function(option){
+
+   RouterDialog.loadDialogs(option.dialogsId)   
    fetchJson({
      uri : option.sourceMenuUrl,
      option : option,

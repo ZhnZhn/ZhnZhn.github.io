@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
@@ -191,16 +195,16 @@ var ClusterItem = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ClusterItem.propTypes = {
-  point: _react.PropTypes.shape({
-    0: _react.PropTypes.number,
-    id: _react.PropTypes.string,
-    seria: _react.PropTypes.shape({
-      data: _react.PropTypes.array
+  point: _propTypes2.default.shape({
+    0: _propTypes2.default.number,
+    id: _propTypes2.default.string,
+    seria: _propTypes2.default.shape({
+      data: _propTypes2.default.array
     })
   }),
-  color: _react.PropTypes.string,
-  index: _react.PropTypes.number,
-  isShowRange: _react.PropTypes.bool
+  color: _propTypes2.default.string,
+  index: _propTypes2.default.number,
+  isShowRange: _propTypes2.default.bool
 } : void 0;
 
 
@@ -221,12 +225,12 @@ var Cluster = function Cluster(_ref3) {
   );
 };
 process.env.NODE_ENV !== "production" ? Cluster.propTypes = {
-  cluster: _react.PropTypes.shape({
-    points: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-      id: _react.PropTypes.string
+  cluster: _propTypes2.default.shape({
+    points: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+      id: _propTypes2.default.string
     }))
   }),
-  color: _react.PropTypes.string
+  color: _propTypes2.default.string
 } : void 0;
 
 var ClusterInfo = function (_Component2) {
@@ -271,10 +275,10 @@ var ClusterInfo = function (_Component2) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ClusterInfo.propTypes = {
-  cluster: _react.PropTypes.object,
-  color: _react.PropTypes.string,
-  from: _react.PropTypes.string,
-  to: _react.PropTypes.string
+  cluster: _propTypes2.default.object,
+  color: _propTypes2.default.string,
+  from: _propTypes2.default.string,
+  to: _propTypes2.default.string
 } : void 0;
 
 exports.default = ClusterInfo;

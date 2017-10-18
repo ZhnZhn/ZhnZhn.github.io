@@ -3,15 +3,7 @@ import React, { Component } from 'react';
 import { ChartType, ModalDialog } from '../../constants/Type';
 import ComponentActions from '../../flux/actions/ComponentActions';
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
-import SelectWithLoad from '../dialogs/SelectWithLoad';
-import RowInputSelect from '../dialogs/RowInputSelect';
-import ShowHide from '../zhn/ShowHide';
-import Button from '../dialogs/Button';
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-
+import D from '../dialogs/DialogCell'
 import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
 const S = {
@@ -85,13 +77,13 @@ class UNCommodityTradeDialog extends Component {
       }
     ]
     this._commandButtons = [
-      <Button.Flat
+      <D.Button.Flat
         rootStyle={S.BT_ROOT}
         caption="Load Meta"
         title="First Load Meta, then Load Item"
         onClick={this._handlerLoadMeta}
       />,
-      <Button.Load onClick={this._handlerLoadData} />
+      <D.Button.Load onClick={this._handlerLoadData} />
     ]
     this.state = {
       isShowFilter : false,
@@ -281,7 +273,7 @@ class UNCommodityTradeDialog extends Component {
                    `${this.country.caption}`
         , _sliceItems = ( !(!this.chartType || this.chartType.value === ChartType.AREA) )
               ? this._createSpliceItems()
-              : undefined;         
+              : undefined;
     return {
        value : fnValue(this.chapter.value, this.country.value),
        fromDate: fromDate,
@@ -322,7 +314,7 @@ class UNCommodityTradeDialog extends Component {
          } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
              caption="United Nations Commodity Trade"
              isShow={isShow}
              commandButtons={this._commandButtons}
@@ -330,39 +322,39 @@ class UNCommodityTradeDialog extends Component {
              onFront={onFront}
              onClose={this._handlerClose}
          >
-             <ToolbarButtonCircle
+             <D.ToolbarButtonCircle
                buttons={this.toolbarButtons}
              />
 
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={countryURI}
                jsonProp={countryJsonProp}
-               caption={'Country:'}
-               optionNames={'Countries'}
+               caption="Country:"
+               optionNames="Countries"
                onSelect={this._handlerSelectCountry}
              />
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={commodityURI}
                jsonProp={commodityJsonProp}
-               caption={'Chapter:'}
-               optionNames={'Chapters'}
+               caption="Chapter:"
+               optionNames="Chapters"
                onSelect={this._handlerSelectChapter}
              />
 
-             <ShowHide isShow={isShowFilter}>
-               <RowInputSelect
-                 caption={'Filter Trade:'}
+             <D.ShowHide isShow={isShowFilter}>
+               <D.RowInputSelect
+                 caption="Filter Trade:"
                  options={TRADE_FILTER_OPTIONS}
-                 placeholder={'Filter...'}
+                 placeholder="Filter..."
                  onSelect={this._handlerSelectTradeFilter}
                />
-             </ShowHide>
-             <RowInputSelect
-               caption={'Subheading:'}
+             </D.ShowHide>
+             <D.RowInputSelect
+               caption="Subheading:"
                options={optionTrades}
-               optionNames={'Meta'}
+               optionNames="Meta"
                isLoading={isLoadingTrade}
                isLoadingFailed={isLoadingTradeFailed}
                placeholder={placeholderTrade}
@@ -370,26 +362,26 @@ class UNCommodityTradeDialog extends Component {
                onSelect={this._handlerSelectTrade}
 
              />
-             <ShowHide isShow={isShowDate}>
-               <DatesFragment
+             <D.ShowHide isShow={isShowDate}>
+               <D.DatesFragment
                    ref={c => this.datesFragment = c}
                    initFromDate={initFromDate}
                    initToDate={initToDate}
                    msgOnNotValidFormat={msgOnNotValidFormat}
                    onTestDate={onTestDate}
                />
-             </ShowHide>
-             <ShowHide isShow={isShowChartType}>
-               <RowInputSelect
-                 caption={'Chart Type:'}
+             </D.ShowHide>
+             <D.ShowHide isShow={isShowChartType}>
+               <D.RowInputSelect
+                 caption="Chart Type:"
                  options={CHART_TYPE_OPTIONS}
                  onSelect={this._handlerSelectChartType}
                />
-             </ShowHide>
-             <ValidationMessages
+             </D.ShowHide>
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }

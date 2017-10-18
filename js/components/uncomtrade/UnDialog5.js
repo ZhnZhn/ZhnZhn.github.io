@@ -20,61 +20,25 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
+var _Decorators = require('../dialogs/decorators/Decorators');
 
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _SelectWithLoad = require('../dialogs/SelectWithLoad');
-
-var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
-
-var _SelectParentChild = require('../dialogs/SelectParentChild');
-
-var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
-
-var _RowInputSelect = require('../dialogs/RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _Button = require('../dialogs/Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _DatesFragment = require('../zhn-moleculs/DatesFragment');
-
-var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _withToolbar = require('../dialogs/decorators/withToolbar');
-
-var _withToolbar2 = _interopRequireDefault(_withToolbar);
-
-var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
-
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TRADE_FLOW = [{ caption: "Export Value", value: { rg: 2, measure: "TradeValue" } }, { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } }, { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } }, { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } }, { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } }, { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }];
 
-var UnDialog5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
+var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(UnDialog5, _Component);
 
   function UnDialog5(props) {
@@ -150,7 +114,7 @@ var UnDialog5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.def
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowDate: false,
       isShowOptions: false,
@@ -199,7 +163,7 @@ var UnDialog5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.def
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -208,10 +172,10 @@ var UnDialog5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.def
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: oneURI,
           jsonProp: oneJsonProp,
@@ -220,7 +184,7 @@ var UnDialog5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.def
           , placeholder: 'Default: All',
           onSelect: this._handleSelectOne
         }),
-        _react2.default.createElement(_SelectParentChild2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
           ref: function ref(c) {
             return _this2.parentChild = c;
           },
@@ -233,9 +197,9 @@ var UnDialog5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.def
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
-          _react2.default.createElement(_DatesFragment2.default, {
+          _react2.default.createElement(_DialogCell2.default.DatesFragment, {
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
@@ -247,23 +211,22 @@ var UnDialog5 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.def
           })
         ),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowOptions },
-          _react2.default.createElement(_RowInputSelect2.default, {
+          _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
             caption: 'Trade Flow',
             options: TRADE_FLOW,
             placeholder: 'Default: Export Value',
             onSelect: this._handleSelectTradeFlow
           })
         ),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );
     }
   }]);
   return UnDialog5;
-}(_react.Component)) || _class) || _class;
-
+}(_react.Component)) || _class) || _class);
 exports.default = UnDialog5;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\uncomtrade\UnDialog5.js.map

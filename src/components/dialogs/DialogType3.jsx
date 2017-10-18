@@ -1,14 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from './ToolbarButtonCircle';
-import SelectWithLoad from './SelectWithLoad';
-import Button from './Button';
-import ShowHide from '../zhn/ShowHide';
-import RowInputSelect from './RowInputSelect';
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-
+import D from './DialogCell'
 import withValidationLoad from './decorators/withValidationLoad';
 
 const transformOptions = [
@@ -17,7 +10,7 @@ const transformOptions = [
   { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" },
   { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" },
   { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }
-]
+];
 
 @withValidationLoad
 class DialogType3 extends Component {
@@ -57,7 +50,7 @@ class DialogType3 extends Component {
       })
     }
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
            isShowTransform: false,
@@ -91,8 +84,8 @@ class DialogType3 extends Component {
     this.stock = stock
   }
 
-  _handleLoad = (event) => {
-    event.target.focus();
+  _handleLoad = () => {
+    //event.target.focus();
     this._handleWithValidationLoad(
       this._createValidationMessages(),
       this._createLoadOption
@@ -132,7 +125,7 @@ class DialogType3 extends Component {
         , { isShowTransform, validationMessages } = this.state;
 
     return (
-       <DraggableDialog
+       <D.DraggableDialog
            caption={caption}
            isShow={isShow}
            commandButtons={this._commandButtons}
@@ -140,10 +133,10 @@ class DialogType3 extends Component {
            onFront={onFront}
            onClose={this._handleClose}
        >
-         <ToolbarButtonCircle
+         <D.ToolbarButtonCircle
            buttons={this.toolbarButtons}
          />
-         <SelectWithLoad
+         <D.SelectWithLoad
            isShow={isShow}
            uri={optionURI}
            jsonProp={optionsJsonProp}
@@ -152,24 +145,24 @@ class DialogType3 extends Component {
            isWithInput={isWithInputStock}
            onSelect={this._handleSelectStock}
          />
-         <ShowHide isShow={isShowTransform}>
-           <RowInputSelect
+         <D.ShowHide isShow={isShowTransform}>
+           <D.RowInputSelect
              caption="Transform:"
              options={transformOptions}
              onSelect={this._handleSelectTransform}
            />
-         </ShowHide>
-         <DatesFragment
+         </D.ShowHide>
+         <D.DatesFragment
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
             msgOnNotValidFormat={msgOnNotValidFormat}
             onTestDate={onTestDate}
          />
-         <ValidationMessages
+         <D.ValidationMessages
             validationMessages={validationMessages}
          />
-      </DraggableDialog>
+      </D.DraggableDialog>
     );
   }
 }

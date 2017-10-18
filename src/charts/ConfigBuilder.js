@@ -3,6 +3,37 @@ import ChartConfig from './ChartConfig'
 
 import SeriaBuilder from './SeriaBuilder'
 
+const C = {
+  CATEGORIES_X_AXIS: {
+    type: 'category',
+    categories: [],
+    opposite: false,
+    labels: {
+      y: 18
+    },
+    crosshair: undefined,
+    tickColor: 'gray',
+    tickWidth: 3,
+    tickLength: 7,
+    tickPosition: 'outside',
+    gridLineWidth: 0
+  },
+
+  CATEGORIES_Y_AXIS: {
+    lineWidth: 0,
+    tickLength: 0,
+    startOnTick: true,
+    endOnTick: true,
+    minPadding: 0.05,
+    maxPadding: 0.05,
+    plotLines: null,
+    labels: {
+      x: 3
+    }
+  }
+}
+
+
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
     return (new ConfigBuilder(config));
@@ -19,6 +50,13 @@ ConfigBuilder.prototype = {
   },
   initBaseArea(){
     this.config = ChartConfig.fBaseAreaConfig()
+    return this;
+  },
+  initBaseCategories(categories=[]){
+    this.config = ChartConfig.fBaseAreaConfig()
+    const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
+    this.add('xAxis', xAxis)
+    this.add('yAxis', C.CATEGORIES_Y_AXIS)
     return this;
   },
 

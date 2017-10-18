@@ -30,6 +30,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
@@ -151,9 +155,9 @@ var InputText = (_temp = _class = function (_Component) {
   initValue: C.BLANK
 }, _temp);
 process.env.NODE_ENV !== "production" ? InputText.propTypes = {
-  initValue: _react.PropTypes.string,
-  style: _react.PropTypes.object,
-  onEnter: _react.PropTypes.func
+  initValue: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  onEnter: _propTypes2.default.func
 } : void 0;
 exports.default = InputText;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputText.js.map

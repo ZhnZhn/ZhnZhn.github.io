@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 if (!Math.sign) {
   Math.sign = function(x) { return x > 0 ? 1 : -1; }
@@ -38,9 +39,9 @@ const SparklinesSpots = (props) => {
 }
 
 SparklinesSpots.propTypes = {
-    size: React.PropTypes.number,
-    style: React.PropTypes.object,
-    spotColors: React.PropTypes.object
+    size: PropTypes.number,
+    style: PropTypes.object,
+    spotColors: PropTypes.object
 };
 SparklinesSpots.defaultProps = {
     size: 2,

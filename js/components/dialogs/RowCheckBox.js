@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _SvgCheckBox = require('../zhn/SvgCheckBox');
 
 var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
@@ -127,11 +131,11 @@ var RowCheckBox = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? RowCheckBox.propTypes = {
-  rootStyle: _react.PropTypes.object,
-  caption: _react.PropTypes.string,
-  initValue: _react.PropTypes.bool,
-  onCheck: _react.PropTypes.func,
-  onUnCheck: _react.PropTypes.func
+  rootStyle: _propTypes2.default.object,
+  caption: _propTypes2.default.string,
+  initValue: _propTypes2.default.bool,
+  onCheck: _propTypes2.default.func,
+  onUnCheck: _propTypes2.default.func
 } : void 0;
 exports.default = RowCheckBox;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowCheckBox.js.map

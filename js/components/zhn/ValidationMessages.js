@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _DialogStyles = require('../styles/DialogStyles');
 
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
@@ -91,7 +95,7 @@ var ValidationMessages = (_temp2 = _class = function (_Component) {
   validationMessages: []
 }, _temp2);
 process.env.NODE_ENV !== "production" ? ValidationMessages.propTypes = {
-  validationMessages: _react.PropTypes.array
+  validationMessages: _propTypes2.default.array
 } : void 0;
 exports.default = ValidationMessages;
-//# sourceMappingURL=ValidationMessages.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ValidationMessages.js.map

@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var STYLE = {
@@ -88,8 +92,8 @@ var SubMenuItem = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? SubMenuItem.propTypes = {
-  caption: _react.PropTypes.string,
-  onClick: _react.PropTypes.func
+  caption: _propTypes2.default.string,
+  onClick: _propTypes2.default.func
 } : void 0;
 exports.default = SubMenuItem;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\SubMenuItem.js.map

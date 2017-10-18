@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -28,7 +32,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Style = {
+var S = {
   ROOT: {
     display: 'inline-block',
     border: '1px solid',
@@ -84,23 +88,25 @@ var LegendItem = (_temp = _class = function (_Component) {
     key: 'render',
     value: function render() {
       var item = this.props.item,
+          color = item.color,
+          name = item.name,
           isVisible = this.state.isVisible,
-          _styleRoot = isVisible ? { color: item.color, borderColor: item.color, borderWidth: '2px', fontWeight: 'bold' } : { color: item.color, borderColor: 'gray', borderWidth: '1px', fontWeight: 'normal' },
-          _styleCircle = isVisible ? { backgroundColor: item.color, borderColor: item.color } : { backgroundColor: 'gray', borderColor: 'gray' };
+          _styleRoot = isVisible ? { color: color, borderColor: color, borderWidth: '2px', fontWeight: 'bold' } : { color: color, borderColor: 'gray', borderWidth: '1px', fontWeight: 'normal' },
+          _styleCircle = isVisible ? { backgroundColor: color, borderColor: color } : { backgroundColor: 'gray', borderColor: 'gray' };
 
       return _react2.default.createElement(
         'span',
         {
-          style: Object.assign({}, Style.ROOT, _styleRoot),
+          style: (0, _extends3.default)({}, S.ROOT, _styleRoot),
           onClick: this._handleClickItem
         },
-        _react2.default.createElement('span', { style: Object.assign({}, Style.CIRCLE, _styleCircle) }),
+        _react2.default.createElement('span', { style: (0, _extends3.default)({}, S.CIRCLE, _styleCircle) }),
         _react2.default.createElement(
           'span',
           {
-            style: Style.ITEM
+            style: S.ITEM
           },
-          item.name
+          name
         )
       );
     }

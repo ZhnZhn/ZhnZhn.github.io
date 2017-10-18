@@ -26,33 +26,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _SelectParentChild = require('../dialogs/SelectParentChild');
-
-var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
-
-var _RowInputSelect = require('../dialogs/RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _RowDate = require('../dialogs/RowDate');
-
-var _RowDate2 = _interopRequireDefault(_RowDate);
-
-var _Button = require('../dialogs/Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
 
@@ -130,7 +106,7 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
     };
 
     _this._renderFromDate = function (initFromDate, onTestDate, msgTestDate) {
-      return _react2.default.createElement(_RowDate2.default, {
+      return _react2.default.createElement(_DialogCell2.default.RowDate, {
         ref: function ref(c) {
           return _this.fromDate = c;
         },
@@ -146,7 +122,7 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
       caption: 'I', title: 'Information About Dataset',
       onClick: _this._handleClickInfo
     }];
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       validationMessages: []
     };
@@ -183,7 +159,7 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -192,10 +168,10 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_SelectParentChild2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
           ref: function ref(c) {
             return _this2.exchangeItem = c;
           },
@@ -207,13 +183,13 @@ var FuturesWikiDialog = (0, _withValidationLoad2.default)(_class = function (_Co
           childCaption: 'Asset',
           msgOnNotSelected: msgOnNotSelected
         }),
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           caption: 'Type',
           options: typeOptions,
           onSelect: this._handleSelectType
         }),
         isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );

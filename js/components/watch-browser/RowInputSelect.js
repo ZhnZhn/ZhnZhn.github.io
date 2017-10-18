@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _InputSelect = require('../zhn-select/InputSelect');
 
 var _InputSelect2 = _interopRequireDefault(_InputSelect);
@@ -22,7 +26,6 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import InputSelect from '../zhn/InputSelect';
 var S = {
   CAPTION: {
     width: '120px'
@@ -53,10 +56,10 @@ var RowInputSelect = function RowInputSelect(_ref) {
 };
 
 process.env.NODE_ENV !== "production" ? RowInputSelect.propTypes = {
-  caption: _react.PropTypes.string,
-  options: _react.PropTypes.array,
-  isUpdateOptions: _react.PropTypes.bool,
-  onSelect: _react.PropTypes.func
+  caption: _propTypes2.default.string,
+  options: _propTypes2.default.array,
+  isUpdateOptions: _propTypes2.default.bool,
+  onSelect: _propTypes2.default.func
 } : void 0;
 
 exports.default = RowInputSelect;

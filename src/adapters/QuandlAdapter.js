@@ -19,6 +19,7 @@ import {fCreatePieConfig} from './QuandlToPie';
 import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
 import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
 import {fCreateTreeMapConfig} from './QuandlToTreeMap';
+import ToYearly from './ToYearly'
 
 const C = {
   OPEN : "Open",
@@ -479,6 +480,14 @@ const _fCreateAreaConfig = function(json, option){
   return fnQuandlFlow(config, json, option);
 }
 
+const fCrYearlyConfig = (json, option) => {
+  const { dataset={} } = json
+      , { data=[] } = dataset;
+   return {
+     config: ToYearly.toConfig(data, option)
+   };
+}
+
 const _rToConfig = {
   [ChartType.AREA] : _fCreateAreaConfig,
   [ChartType.SEMI_DONUT] : fCreatePieConfig,
@@ -486,7 +495,9 @@ const _rToConfig = {
   [ChartType.STACKED_AREA_PERCENT] : fCreateStackedAreaConfig,
   [ChartType.STACKED_COLUMN] : fCreateStackedColumnConfig,
   [ChartType.STACKED_COLUMN_PERCENT] : fCreateStackedColumnConfig,
-  [ChartType.TREE_MAP] : fCreateTreeMapConfig
+  [ChartType.TREE_MAP] : fCreateTreeMapConfig,
+  [ChartType.YEARLY]: fCrYearlyConfig
+
 }
 
 const QuandlAdapter = {

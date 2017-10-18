@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -58,8 +62,8 @@ var BrowserCaption = function BrowserCaption(_ref) {
   );
 };
 process.env.NODE_ENV !== "production" ? BrowserCaption.propTypes = {
-  caption: _react.PropTypes.string,
-  onClose: _react.PropTypes.func
+  caption: _propTypes2.default.string,
+  onClose: _propTypes2.default.func
 } : void 0;
 
 exports.default = BrowserCaption;

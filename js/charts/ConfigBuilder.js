@@ -26,6 +26,36 @@ var _SeriaBuilder2 = _interopRequireDefault(_SeriaBuilder);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C = {
+  CATEGORIES_X_AXIS: {
+    type: 'category',
+    categories: [],
+    opposite: false,
+    labels: {
+      y: 18
+    },
+    crosshair: undefined,
+    tickColor: 'gray',
+    tickWidth: 3,
+    tickLength: 7,
+    tickPosition: 'outside',
+    gridLineWidth: 0
+  },
+
+  CATEGORIES_Y_AXIS: {
+    lineWidth: 0,
+    tickLength: 0,
+    startOnTick: true,
+    endOnTick: true,
+    minPadding: 0.05,
+    maxPadding: 0.05,
+    plotLines: null,
+    labels: {
+      x: 3
+    }
+  }
+};
+
 var ConfigBuilder = function ConfigBuilder() {
   var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -44,6 +74,15 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
   },
   initBaseArea: function initBaseArea() {
     this.config = _ChartConfig2.default.fBaseAreaConfig();
+    return this;
+  },
+  initBaseCategories: function initBaseCategories() {
+    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    this.config = _ChartConfig2.default.fBaseAreaConfig();
+    var xAxis = (0, _extends3.default)({}, C.CATEGORIES_X_AXIS, { categories: categories });
+    this.add('xAxis', xAxis);
+    this.add('yAxis', C.CATEGORIES_Y_AXIS);
     return this;
   },
   addTitle: function addTitle(title) {

@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -170,17 +174,17 @@ var GroupEditPane = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? GroupEditPane.propTypes = {
-  store: _react.PropTypes.shape({
-    listen: _react.PropTypes.func,
-    getWatchGroups: _react.PropTypes.func
+  store: _propTypes2.default.shape({
+    listen: _propTypes2.default.func,
+    getWatchGroups: _propTypes2.default.func
   }),
-  actionCompleted: _react.PropTypes.string,
-  actionFailed: _react.PropTypes.string,
-  forActionType: _react.PropTypes.string,
-  msgOnIsEmptyName: _react.PropTypes.func,
-  msgOnNotSelect: _react.PropTypes.func,
-  onRename: _react.PropTypes.func,
-  onClose: _react.PropTypes.func
+  actionCompleted: _propTypes2.default.string,
+  actionFailed: _propTypes2.default.string,
+  forActionType: _propTypes2.default.string,
+  msgOnIsEmptyName: _propTypes2.default.func,
+  msgOnNotSelect: _propTypes2.default.func,
+  onRename: _propTypes2.default.func,
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = GroupEditPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\GroupEditPane.js.map

@@ -8,11 +8,33 @@ var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _Chart = require('./Chart');
+
+var _Chart2 = _interopRequireDefault(_Chart);
+
 var _ChartConfig = require('./ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var C = {
+  BASE_AREA_RANGE: {
+    type: 'arearange',
+    color: '#7cb5ec',
+    fillColor: {
+      linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+      stops: [[0, "rgba(69, 114, 167, 1)"], [1, "rgba(2, 0, 0, 0)"]]
+    },
+    marker: {
+      radius: 0
+    }
+  }
+};
 
 var _crLegendItem = function _crLegendItem(_ref) {
   var index = _ref.index,
@@ -46,6 +68,12 @@ var SeriaBuilder = {
   initBaseSeria: function initBaseSeria() {
     this._type = 'S';
     this.config = _ChartConfig2.default.fSeries();
+    return this;
+  },
+  initAreaRange: function initAreaRange(tooltip, option) {
+    this._type = 'S';
+    this.config = (0, _extends3.default)({}, C.BASE_AREA_RANGE, option);
+    this.add('tooltip', _Chart2.default.fTooltip(tooltip));
     return this;
   },
   addLegend: function addLegend(legend) {

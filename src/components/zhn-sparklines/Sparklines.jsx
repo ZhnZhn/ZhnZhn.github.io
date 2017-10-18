@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import SparklinesLine from './SparklinesLine';
 
 import SparklinesSpots from './SparklinesSpots';
@@ -11,7 +12,6 @@ import SparklinesMinLabel from './SparklinesMinLabel';
 import SparklinesMaxLabel from './SparklinesMaxLabel';
 
 import dataToPoints from './dataProcessing/dataToPoints';
-import shallowCompare from 'react-addons-shallow-compare';
 
 //fork https://github.com/borisyankov/react-sparklines
 
@@ -21,7 +21,7 @@ const DEFAULT_DATA = []
     , DEFAULT_RATIO='none'
     , DEFAULT_MARGIN = 2;
 
-class Sparklines extends Component {
+class Sparklines extends PureComponent {
      static propTypes = {
         data: PropTypes.array,
         limit: PropTypes.number,
@@ -35,11 +35,7 @@ class Sparklines extends Component {
         min: PropTypes.number,
         max: PropTypes.number
      }
-
-    shouldComponentUpdate(nextProps) {
-        return shallowCompare(this, nextProps);
-    }
-
+   
     render() {
         const {
                data=DEFAULT_DATA, limit,

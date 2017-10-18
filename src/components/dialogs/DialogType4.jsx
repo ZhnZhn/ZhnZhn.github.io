@@ -1,22 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from './ToolbarButtonCircle';
-import Button from './Button';
-
-import SelectWithLoad from './SelectWithLoad';
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import RowCheckBox from './RowCheckBox';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ShowHide from '../zhn/ShowHide';
-
-import withToolbar from './decorators/withToolbar';
-import withValidationLoad from './decorators/withValidationLoad'
+import D from './DialogCell'
+import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
-@withToolbar
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class DialogType4 extends Component {
   static propTypes = {
     isShow: PropTypes.bool,
@@ -48,7 +39,7 @@ class DialogType4 extends Component {
       onClick: this._handleClickOptions
     })
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
       isShowDate : true,
@@ -128,7 +119,7 @@ class DialogType4 extends Component {
           } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
            caption={caption}
            isShow={isShow}
            commandButtons={this._commandButtons}
@@ -136,50 +127,50 @@ class DialogType4 extends Component {
            onFront={onFront}
            onClose={this._handleClose}
          >
-             <ToolbarButtonCircle
+             <D.ToolbarButtonCircle
                 buttons={this.toolbarButtons}
              />
 
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
-               optionNames={'Stocks'}
+               optionNames="Stocks"
                onSelect={this._handleSelectOne}
              />
 
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={twoURI}
                jsonProp={twoJsonProp}
                caption={twoCaption}
-               optionNames={'Indicators'}
+               optionNames="Indicators"
                isWithInput={isWithInputTwo}
                onSelect={this._handleSelectTwo}
              />
 
-             <ShowHide isShow={isShowDate}>
-               <DatesFragment
+             <D.ShowHide isShow={isShowDate}>
+               <D.DatesFragment
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />
-             </ShowHide>
-             <ShowHide isShow={isShowOptions}>
-               <RowCheckBox
+             </D.ShowHide>
+             <D.ShowHide isShow={isShowOptions}>
+               <D.RowCheckBox
                  initValue={false}
                  caption="Add Seria with Second YAxis"
                  onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
                  onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
                />
-             </ShowHide>
-             <ValidationMessages
+             </D.ShowHide>
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }

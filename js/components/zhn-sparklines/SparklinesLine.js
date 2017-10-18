@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SparklinesLine = function SparklinesLine(props) {
@@ -48,8 +52,8 @@ var SparklinesLine = function SparklinesLine(props) {
 };
 
 process.env.NODE_ENV !== "production" ? SparklinesLine.propTypes = {
-    color: _react2.default.PropTypes.string,
-    style: _react2.default.PropTypes.object
+    color: _propTypes2.default.string,
+    style: _propTypes2.default.object
 } : void 0;
 SparklinesLine.defaultProps = {
     style: {}

@@ -30,6 +30,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*
@@ -306,10 +310,10 @@ var InputSlider = (_temp = _class = function (_Component) {
   step: 1
 }, _temp);
 process.env.NODE_ENV !== "production" ? InputSlider.propTypes = {
-  step: _react.PropTypes.number,
-  min: _react.PropTypes.number,
-  max: _react.PropTypes.number,
-  onChange: _react.PropTypes.func
+  step: _propTypes2.default.number,
+  min: _propTypes2.default.number,
+  max: _propTypes2.default.number,
+  onChange: _propTypes2.default.func
 } : void 0;
 exports.default = InputSlider;
-//# sourceMappingURL=InputSlider.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputSlider.js.map

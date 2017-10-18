@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ModalDialogContainer = require('../zhn-containers/ModalDialogContainer');
 
 var _ModalDialogContainer2 = _interopRequireDefault(_ModalDialogContainer);
@@ -148,8 +152,8 @@ var DialogContainer = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? DialogContainer.propTypes = {
-  store: _react.PropTypes.shape({
-    listen: _react.PropTypes.func
+  store: _propTypes2.default.shape({
+    listen: _propTypes2.default.func
   })
 } : void 0;
 exports.default = DialogContainer;

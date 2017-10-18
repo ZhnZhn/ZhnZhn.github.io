@@ -9,6 +9,12 @@
   margin-bottom: 5px;
 }
 
+.highcharts-text-outline {
+  fill: transparent;
+  stroke: transparent;
+  color: black;
+}
+
 /*
 .highcharts-series-0.highcharts-spline-series > .highcharts-point,
 .highcharts-series-0.highcharts-area-series > .highcharts-point {

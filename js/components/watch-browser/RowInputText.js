@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _InputText = require('../zhn/InputText');
 
 var _InputText2 = _interopRequireDefault(_InputText);
@@ -100,7 +104,7 @@ var RowInputText = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? RowInputText.propTypes = {
-  caption: _react.PropTypes.string
+  caption: _propTypes2.default.string
 } : void 0;
 exports.default = RowInputText;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\RowInputText.js.map

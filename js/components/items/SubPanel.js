@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var STYLE = {
@@ -46,8 +50,8 @@ var SubPanel = function SubPanel(_ref) {
 };
 
 process.env.NODE_ENV !== "production" ? SubPanel.propTypes = {
-  style: _react.PropTypes.object,
-  children: _react.PropTypes.oneOfType([_react.PropTypes.arrayOf(_react.PropTypes.node), _react.PropTypes.node])
+  style: _propTypes2.default.object,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node])
 } : void 0;
 
 exports.default = SubPanel;

@@ -178,6 +178,11 @@ class ChartContainer extends Component {
              ref={ node => this.spComp = node}
              style={styles.scrollDiv}
           >
+            {/*
+            <div>
+              { this._renderCharts() }
+            </div>
+            */}
             <ReactCSSTransitionGroup
                {...styles.transitionOption}
                component="div"

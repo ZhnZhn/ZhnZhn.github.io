@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -124,13 +128,13 @@ var FragmentSelectGroupList = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? FragmentSelectGroupList.propTypes = {
-  store: _react.PropTypes.shape({
-    listen: _react.PropTypes.func,
-    getWatchListsByGroup: _react.PropTypes.func
+  store: _propTypes2.default.shape({
+    listen: _propTypes2.default.func,
+    getWatchListsByGroup: _propTypes2.default.func
   }),
-  groupCaption: _react.PropTypes.string,
-  groupOptions: _react.PropTypes.array,
-  listCaption: _react.PropTypes.string
+  groupCaption: _propTypes2.default.string,
+  groupOptions: _propTypes2.default.array,
+  listCaption: _propTypes2.default.string
 } : void 0;
 exports.default = FragmentSelectGroupList;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\FragmentSelectGroupList.js.map

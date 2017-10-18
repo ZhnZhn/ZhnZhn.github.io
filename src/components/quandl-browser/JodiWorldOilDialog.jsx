@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
-import SelectWithLoad from '../dialogs/SelectWithLoad';
-import RowInputSelect from '../dialogs/RowInputSelect';
-import SelectParentChild from '../dialogs/SelectParentChild';
-import Button from '../dialogs/Button';
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ShowHide from '../zhn/ShowHide';
-
-import withToolbar from '../dialogs/decorators/withToolbar'
-import withValidationLoad from '../dialogs/decorators/withValidationLoad'
+import D from '../dialogs/DialogCell'
+import Decor from '../dialogs/decorators/Decorators'
 
 const unitOptions = [
   { "caption" : "Thousand Barrels per day (kb/d)", "value" : "KD" },
@@ -19,10 +9,15 @@ const unitOptions = [
   { "caption" : "Thousand Kilolitres (kl)", "value" : "KL" },
   { "caption" : "Thousand Metric Tons (kmt)", "value" : "KT" },
   { "caption" : "Conversion factor barrels/ktons", "value" : "BK" }
-]
+];
 
-@withToolbar
-@withValidationLoad
+const chartTypes = [
+  { caption: "AreaSpline", value: "AREA" },
+  { caption: "Yearly by Month", value: "YEARLY" }
+];
+
+@Decor.withToolbar
+@Decor.withValidationLoad
 class JodiWorldOilDialog extends Component {
 
    constructor(props){
@@ -31,13 +26,20 @@ class JodiWorldOilDialog extends Component {
      this.product = null
      this.flow = null
      this.units = null
+     this.chartType = undefined
 
      this.toolbarButtons = this._createType2WithToolbar(props)
+     this.toolbarButtons.push({
+       caption: 'O', title: 'Toggle Options Input',
+       onClick: this._hClickOptions
+     })
+
      this._commandButtons = [
-       <Button.Load onClick={this._handleLoad} />
+       <D.Button.Load onClick={this._handleLoad} />
      ]
      this.state = {
-       isShowDate : true,
+       isShowDate: false,
+       isShowOptions: false,
        validationMessages : []
      }
    }
@@ -51,11 +53,18 @@ class JodiWorldOilDialog extends Component {
      return true;
    }
 
-   _handleSelectCountry = (country) => {
+   _hClickOptions = () => {
+     this.setState({ isShowOptions: !this.state.isShowOptions })
+   }
+
+   _hSelectCountry = (country) => {
      this.country = country
    }
-   _handleSelectUnits = (units) => {
+   _hSelectUnits = (units) => {
      this.units = units
+   }
+   _hSelectChartType = (chartType) => {
+     this.chartType = chartType
    }
 
    _handleLoad = () => {
@@ -86,16 +95,15 @@ class JodiWorldOilDialog extends Component {
    _createLoadOption = () => {
       const { parent:product, child:flow } = this.productFlow.getValues()
           , { fromDate, toDate } = this.datesFragment.getValues()
+          , seriaType = this.chartType ? this.chartType.value: undefined
           , { fnValue, dataColumn, loadId, dataSource } = this.props;
       return {
         value : fnValue(this.country.value, product.value, flow.value, this.units.value),
-        fromDate: fromDate,
-        toDate: toDate,
-        dataColumn : dataColumn,
-        loadId : loadId,
-        title : `${this.country.caption}:${product.caption}`,
-        subtitle : `${flow.caption}:${this.units.caption}`,
-        dataSource : dataSource
+        title : `${this.country.caption}: ${product.caption}`,
+        subtitle : `${flow.caption}: ${this.units.caption}`,
+        fromDate, toDate,
+        dataColumn, seriaType, loadId,
+        dataSource
       };
    }
    _handleClose = () => {
@@ -110,10 +118,13 @@ class JodiWorldOilDialog extends Component {
              parentCaption, parentChildURI, parentJsonProp, childCaption, msgOnNotSelected,
              initFromDate, initToDate, msgOnNotValidFormat, onTestDate
            } = this.props
-         , { isShowDate, validationMessages } = this.state;
+         , {
+             isShowDate, isShowOptions,
+             validationMessages
+           } = this.state;
 
      return (
-       <DraggableDialog
+       <D.DraggableDialog
          caption={caption}
          isShow={isShow}
          commandButtons={this._commandButtons}
@@ -121,19 +132,19 @@ class JodiWorldOilDialog extends Component {
          onFront={onFront}
          onClose={this._handleClose}
        >
-          <ToolbarButtonCircle
+          <D.ToolbarButtonCircle
             buttons={this.toolbarButtons}
           />
 
-          <SelectWithLoad
+          <D.SelectWithLoad
              isShow={isShow}
              uri={oneURI}
              jsonProp={oneJsonProp}
              caption={oneCaption}
-             optionNames={'Items'}
-             onSelect={this._handleSelectCountry}
+             optionNames="Items"
+             onSelect={this._hSelectCountry}
           />
-          <SelectParentChild
+          <D.SelectParentChild
              ref={c => this.productFlow = c}
              isShow={isShow}
              uri={parentChildURI}
@@ -143,25 +154,35 @@ class JodiWorldOilDialog extends Component {
              childCaption={childCaption}
              msgOnNotSelected={msgOnNotSelected}
           />
-          <RowInputSelect
+          <D.RowInputSelect
             caption="Units"
             options={unitOptions}
-            onSelect={this._handleSelectUnits}
+            onSelect={this._hSelectUnits}
           />
 
-          <ShowHide isShow={isShowDate}>
-            <DatesFragment
+          <D.ShowHide isShow={isShowDate}>
+            <D.DatesFragment
               ref={c => this.datesFragment = c}
               initFromDate={initFromDate}
               initToDate={initToDate}
               msgOnNotValidFormat={msgOnNotValidFormat}
               onTestDate={onTestDate}
             />
-          </ShowHide>
-          <ValidationMessages
+          </D.ShowHide>
+
+          <D.ShowHide isShow={isShowOptions}>
+            <D.RowInputSelect
+              caption="Chart Type"
+              placeholder="Default: AreaSpline"
+              options={chartTypes}
+              onSelect={this._hSelectChartType}
+            />
+          </D.ShowHide>
+
+          <D.ValidationMessages
               validationMessages={validationMessages}
           />
-       </DraggableDialog>
+       </D.DraggableDialog>
      );
    }
 }

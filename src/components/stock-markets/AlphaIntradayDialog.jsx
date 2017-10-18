@@ -1,18 +1,11 @@
 import React, { Component } from 'react'
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog'
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle'
-import RowInputSelect from '../dialogs/RowInputSelect'
-//import SelectWithLoad from '../dialogs/SelectWithLoad'
-import RowPattern from '../dialogs/RowPattern'
-import Button from '../dialogs/Button'
-
+import D from '../dialogs/DialogCell'
 import withToolbar from '../dialogs/decorators/withToolbar'
 
 const DF = {
   INTERVAL: '15min',
 };
-//const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 const _testTicket = (value) => {
   if (String(value).trim() === '') {
@@ -37,7 +30,7 @@ class AlphaIntradayDialog extends Component {
     super()
     this.toolbarButtons = this._createType2WithToolbar(props, true)
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ];
   }
 
@@ -91,7 +84,7 @@ class AlphaIntradayDialog extends Component {
           } = this.props;
 
     return (
-      <DraggableDialog
+      <D.DraggableDialog
            caption={caption}
            isShow={isShow}
            commandButtons={this._commandButtons}
@@ -99,23 +92,23 @@ class AlphaIntradayDialog extends Component {
            onFront={onFront}
            onClose={this._handleClose}
        >
-           <ToolbarButtonCircle
+           <D.ToolbarButtonCircle
               buttons={this.toolbarButtons}
            />
-          <RowPattern
+          <D.RowPattern
             ref={this._refTicket}
             title="Ticket"
             placeholder="Nyse or Nasdaq Ticket"
             onTest={_testTicket}
             errorMsg="Not Empty"
           />
-          <RowInputSelect
+          <D.RowInputSelect
             caption="Interval"
             placeholder="Default: 15min"
             options={_intervalOptions}
             onSelect={this._handleSelectInterval}
           />
-      </DraggableDialog>
+      </D.DraggableDialog>
     );
   }
 }

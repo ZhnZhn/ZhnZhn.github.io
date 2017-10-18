@@ -1,18 +1,7 @@
 import React, { Component } from 'react'
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog'
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle'
-import SelectWithLoad from '../dialogs/SelectWithLoad'
-import SelectParentChild from '../dialogs/SelectParentChild'
-import RowPattern from '../dialogs/RowPattern'
-import Button from '../dialogs/Button'
-import DatesFragment from '../zhn-moleculs/DatesFragment'
-import ValidationMessages from '../zhn/ValidationMessages'
-import ShowHide from '../zhn/ShowHide'
-
-import withToolbar from '../dialogs/decorators/withToolbar'
-import withValidationLoad from '../dialogs/decorators/withValidationLoad'
-
+import D from '../dialogs/DialogCell'
+import Decor from '../dialogs/decorators/Decorators'
 
 const S = {
   TIP: {
@@ -52,15 +41,15 @@ const _isZipCode = (value) => {
   return _reZipCode.test(value);
 }
 
-@withToolbar
-@withValidationLoad
-class  DialogType5 extends Component {
+@Decor.withToolbar
+@Decor.withValidationLoad
+class  ZillowDialog extends Component {
 
   constructor(props){
     super()
     this.toolbarButtons = this._createType2WithToolbar(props)
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
       isShowDate : true,
@@ -144,7 +133,7 @@ class  DialogType5 extends Component {
         , { isShowDate, isShowPattern, validationMessages } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={this._commandButtons}
@@ -152,19 +141,19 @@ class  DialogType5 extends Component {
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <ToolbarButtonCircle
+             <D.ToolbarButtonCircle
                 buttons={this.toolbarButtons}
              />
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
-               optionNames={'Items'}
+               optionNames="Items"
                onSelect={this._handleSelectOne}
              />
 
-             <SelectParentChild
+             <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
                  uri={twoURI}
@@ -175,17 +164,17 @@ class  DialogType5 extends Component {
                  msgOnNotSelected={msgOnNotSelected}
                  onSelectParent={this._handleSelectType}
              />
-             <ShowHide isShow={isShowPattern}>
-                <RowPattern
+             <D.ShowHide isShow={isShowPattern}>
+                <D.RowPattern
                   ref={n => this.inputZipCode = n}
                   title="Zip Code*"
                   placeholder="Zip Code, 5 Digit"
                   onTest={_isZipCode}
                   errorMsg="5 digit format must be"
                 />
-             </ShowHide>
-             <ShowHide isShow={isShowDate}>
-               <DatesFragment
+             </D.ShowHide>
+             <D.ShowHide isShow={isShowDate}>
+               <D.DatesFragment
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
@@ -193,18 +182,18 @@ class  DialogType5 extends Component {
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />
-             </ShowHide>
-             <ShowHide isShow={isShowPattern}>
+             </D.ShowHide>
+             <D.ShowHide isShow={isShowPattern}>
                <div style={S.TIP}>
                  * Not for all Zip Code data are available.
                </div>
-             </ShowHide>
-             <ValidationMessages
+             </D.ShowHide>
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }
 
-export default DialogType5
+export default ZillowDialog

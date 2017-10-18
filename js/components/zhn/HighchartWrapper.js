@@ -92,7 +92,17 @@ var HighchartWrapper = function (_Component) {
       if (typeof onWillUnLoaded === 'function') {
         onWillUnLoaded(this.chart);
       }
-      this.chart.destroy();
+
+      try {
+        this.chart.destroy();
+      } catch (err) {
+        /*eslint-disable no-undef */
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Exception during destroy chart');
+          console.log(err);
+        }
+        /*eslint-enable no-undef */
+      }
     }
   }, {
     key: 'render',

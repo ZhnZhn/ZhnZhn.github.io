@@ -89,6 +89,17 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
     (0, _offlineExporting2.default)(_highcharts2.default);
     _highcharts2.default.setOptions(ChartConfig.theme);
 
+    /*
+       Drop-in fix for arearange destroy exception:
+       "isSVG of undefined": 5.0.14: issues/7021
+    */
+    _highcharts2.default.wrap(_highcharts2.default.seriesTypes.arearange.prototype.pointClass.prototype, 'setState', function (proceed) {
+      proceed.apply(this, Array.prototype.slice.call(arguments, 1));
+      if (this.series.stateMarkerGraphic) {
+        this.series.lowerStateMarkerGraphic = undefined;
+      }
+    });
+
     _highcharts2.default.wrap(_highcharts2.default.Chart.prototype, 'showCredits', function (next, credits) {
       next.call(this, credits);
       if (credits.enabled) {

@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 
 import SvgCheckBox from '../zhn/SvgCheckBox';
 import SvgClose from '../zhn/SvgClose';
 import ValueMovingBadge from './ValueMovingBadge';
 
 const STYLE = {
-  ROOT : {    
+  ROOT : {
     backgroundColor: '#1b2836',
     paddingTop: '4px',
     lineHeight: 1.8,

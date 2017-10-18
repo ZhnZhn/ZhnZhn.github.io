@@ -8,6 +8,24 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _class, _temp2;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -23,51 +41,93 @@ var CL = {
   BT_DIV: 'bt-flat__div',
   BT_SPAN: 'bt-flat__span'
 };
-
 var S = {
   PRIMARY: {
     color: '#607d8b'
   }
 };
+var POINTER_EVENTS = 'pointer-events';
 
-var FlatButton = function FlatButton(_ref) {
-  var className = _ref.className,
-      rootStyle = _ref.rootStyle,
-      _ref$clDiv = _ref.clDiv,
-      clDiv = _ref$clDiv === undefined ? CL.BT_DIV : _ref$clDiv,
-      isPrimary = _ref.isPrimary,
-      _ref$title = _ref.title,
-      title = _ref$title === undefined ? '' : _ref$title,
-      caption = _ref.caption,
-      accessKey = _ref.accessKey,
-      children = _ref.children,
-      onClick = _ref.onClick;
+var FlatButton = (_temp2 = _class = function (_Component) {
+  (0, _inherits3.default)(FlatButton, _Component);
 
-  var _style = isPrimary ? (0, _extends3.default)({}, rootStyle, S.PRIMARY) : rootStyle,
-      _className = className ? CL.BT + ' ' + className : CL.BT;
-  return _react2.default.createElement(
-    'button',
-    {
-      className: _className,
-      style: _style,
-      type: 'button',
-      tabIndex: 0,
-      title: title,
-      accessKey: accessKey,
-      onClick: onClick
-    },
-    _react2.default.createElement(
-      'div',
-      { className: clDiv },
-      _react2.default.createElement(_CaptionInput2.default, {
-        className: CL.BT_SPAN,
-        caption: caption,
-        accessKey: accessKey
-      }),
-      children
-    )
-  );
-};
+  function FlatButton() {
+    var _ref;
 
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, FlatButton);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = FlatButton.__proto__ || Object.getPrototypeOf(FlatButton)).call.apply(_ref, [this].concat(args))), _this), _this._setPointerEvents = function () {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'auto';
+
+      if (_this && _this.rootNode && _this.rootNode.style) {
+        _this.rootNode.style[POINTER_EVENTS] = value;
+      }
+    }, _this._hClick = function (event) {
+      _this._setPointerEvents('none');
+      var _this$props = _this.props,
+          timeout = _this$props.timeout,
+          onClick = _this$props.onClick;
+
+      setTimeout(_this._setPointerEvents, timeout);
+      onClick(event);
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+
+  (0, _createClass3.default)(FlatButton, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          className = _props.className,
+          rootStyle = _props.rootStyle,
+          _props$clDiv = _props.clDiv,
+          clDiv = _props$clDiv === undefined ? CL.BT_DIV : _props$clDiv,
+          isPrimary = _props.isPrimary,
+          _props$title = _props.title,
+          title = _props$title === undefined ? '' : _props$title,
+          caption = _props.caption,
+          accessKey = _props.accessKey,
+          children = _props.children,
+          _style = isPrimary ? (0, _extends3.default)({}, rootStyle, S.PRIMARY) : rootStyle,
+          _className = className ? CL.BT + ' ' + className : CL.BT;
+
+      return _react2.default.createElement(
+        'button',
+        {
+          ref: function ref(node) {
+            return _this2.rootNode = node;
+          },
+          className: _className,
+          style: _style,
+          type: 'button',
+          tabIndex: 0,
+          title: title,
+          accessKey: accessKey,
+          onClick: this._hClick
+        },
+        _react2.default.createElement(
+          'div',
+          { className: clDiv },
+          _react2.default.createElement(_CaptionInput2.default, {
+            className: CL.BT_SPAN,
+            caption: caption,
+            accessKey: accessKey
+          }),
+          children
+        )
+      );
+    }
+  }]);
+  return FlatButton;
+}(_react.Component), _class.defaultProps = {
+  timeout: 3000
+}, _temp2);
 exports.default = FlatButton;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-m\FlatButton.js.map

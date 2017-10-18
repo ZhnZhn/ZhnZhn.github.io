@@ -25,6 +25,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _SparklinesLine = require('./SparklinesLine');
 
 var _SparklinesLine2 = _interopRequireDefault(_SparklinesLine);
@@ -57,10 +61,6 @@ var _dataToPoints = require('./dataProcessing/dataToPoints');
 
 var _dataToPoints2 = _interopRequireDefault(_dataToPoints);
 
-var _reactAddonsShallowCompare = require('react-addons-shallow-compare');
-
-var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //fork https://github.com/borisyankov/react-sparklines
@@ -71,8 +71,8 @@ var DEFAULT_DATA = [],
     DEFAULT_RATIO = 'none',
     DEFAULT_MARGIN = 2;
 
-var Sparklines = function (_Component) {
-    (0, _inherits3.default)(Sparklines, _Component);
+var Sparklines = function (_PureComponent) {
+    (0, _inherits3.default)(Sparklines, _PureComponent);
 
     function Sparklines() {
         (0, _classCallCheck3.default)(this, Sparklines);
@@ -80,11 +80,6 @@ var Sparklines = function (_Component) {
     }
 
     (0, _createClass3.default)(Sparklines, [{
-        key: 'shouldComponentUpdate',
-        value: function shouldComponentUpdate(nextProps) {
-            return (0, _reactAddonsShallowCompare2.default)(this, nextProps);
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _props = this.props,
@@ -124,21 +119,21 @@ var Sparklines = function (_Component) {
         }
     }]);
     return Sparklines;
-}(_react.Component);
+}(_react.PureComponent);
 
-process.env.NODE_ENV !== "production" ? Sparklines.propTypes = {
-    data: _react.PropTypes.array,
-    limit: _react.PropTypes.number,
-    width: _react.PropTypes.number,
-    height: _react.PropTypes.number,
-    svgWidth: _react.PropTypes.number,
-    svgHeight: _react.PropTypes.number,
-    preserveAspectRatio: _react.PropTypes.string,
-    margin: _react.PropTypes.number,
-    style: _react.PropTypes.object,
-    min: _react.PropTypes.number,
-    max: _react.PropTypes.number
-} : void 0;
+Sparklines.propTypes = process.env.NODE_ENV !== "production" ? {
+    data: _propTypes2.default.array,
+    limit: _propTypes2.default.number,
+    width: _propTypes2.default.number,
+    height: _propTypes2.default.number,
+    svgWidth: _propTypes2.default.number,
+    svgHeight: _propTypes2.default.number,
+    preserveAspectRatio: _propTypes2.default.string,
+    margin: _propTypes2.default.number,
+    style: _propTypes2.default.object,
+    min: _propTypes2.default.number,
+    max: _propTypes2.default.number
+} : {};
 exports.Sparklines = Sparklines;
 exports.SparklinesLine = _SparklinesLine2.default;
 exports.SparklinesSpots = _SparklinesSpots2.default;

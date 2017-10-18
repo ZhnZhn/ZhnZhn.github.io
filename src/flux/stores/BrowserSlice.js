@@ -83,7 +83,7 @@ const BrowserSlice = {
     }
   },
 
-  getSourceConfig(browserId, sourceId){
+  getSourceConfig(browserId, sourceId){    
     if (sourceId.indexOf(BrowserType.STOCKS_BY_SECTORS) > 0){
       return BrowserConfig[browserId];
     }

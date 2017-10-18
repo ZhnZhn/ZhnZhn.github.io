@@ -105,18 +105,39 @@ const _fnATHTooltip = function({date, id, value, point}){
 }
 
 const _fnHighLowTooltip = function({date, id, value, point}){
+  const { open, dayHigh, dayLow, close } = point;
   return _fnTooltipHeader(date, id) +
   `<div class="tp__body">
   <span class="tp__body__title">Open: </span>
-  <span class="tp__body__value">${point.open}</span><br/>
+  <span class="tp__body__value">${open}</span><br/>
   <span class="tp__body__title">High: </span>
-  <span class="tp__body__value">${point.dayHigh}</span><br/>
+  <span class="tp__body__value">${dayHigh}</span><br/>
   <span class="tp__body__title">Low: </span>
-  <span class="tp__body__value">${point.dayLow}</span><br/>
+  <span class="tp__body__value">${dayLow}</span><br/>
   <span class="tp__body__title">Close: </span>
-  <span class="tp__body__value">${point.close}</span>
+  <span class="tp__body__value">${close}</span>
   </div>`
 }
+const _fnCategoryAreaRange = function({ id, point }){
+  const { high, low, c } = point;
+  return _fnTooltipHeader(c, id) +
+  `<div class="tp__body">
+  <span class="tp__body__title">High: </span>
+  <span class="tp__body__value">${high}</span><br/>
+  <span class="tp__body__title">Low: </span>
+  <span class="tp__body__value">${low}</span>
+  </div>`;
+};
+const _fnCategory = function({ id, point }){
+  const { y, c } = point;
+  return _fnTooltipHeader(c, id) +
+  `<div class="tp__body">
+  <span class="tp__body__title">Value: </span>
+  <span class="tp__body__value">${y}</span>
+  </div>`;
+};
+
+
 
 const _fnPieTooltip = function({id, value, point}){
   return _fnTooltipHeader(point.nameFull, id) +
@@ -158,7 +179,7 @@ const _fnTreeMapTooltip = function({id, point}){
 const _fHide = (id, point) => function _fnHide() {
   document.getElementById(id)
           .removeEventListener('click', _fnHide);
-  point.series.chart.zhTooltip.hide();  
+  point.series.chart.zhTooltip.hide();
 }
 
 const _fnAddHandlerClose = function(id, point){
@@ -247,6 +268,9 @@ const Tooltip = {
     fnDateFormat: _fnFormatCategory,
     isWithColor: true, isWithValueText: true, isWithValue: true
   }),
+  category: _fnBasePointFormatter({
+    fnTemplate: _fnCategory
+  }),
 
   fnExDividendPointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnExDividend
@@ -269,6 +293,9 @@ const Tooltip = {
   }),
   fnHighLowPointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnHighLowTooltip
+  }),
+  categoryAreaRange: _fnBasePointFormatter({
+    fnTemplate: _fnCategoryAreaRange
   }),
   fnPiePointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnPieTooltip, isWithValue: true

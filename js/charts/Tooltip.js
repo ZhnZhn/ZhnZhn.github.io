@@ -109,14 +109,35 @@ var _fnHighLowTooltip = function _fnHighLowTooltip(_ref7) {
       id = _ref7.id,
       value = _ref7.value,
       point = _ref7.point;
+  var open = point.open,
+      dayHigh = point.dayHigh,
+      dayLow = point.dayLow,
+      close = point.close;
 
-  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + point.open + '</span><br/>\n  <span class="tp__body__title">High: </span>\n  <span class="tp__body__value">' + point.dayHigh + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + point.dayLow + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + point.close + '</span>\n  </div>');
+  return _fnTooltipHeader(date, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Open: </span>\n  <span class="tp__body__value">' + open + '</span><br/>\n  <span class="tp__body__title">High: </span>\n  <span class="tp__body__value">' + dayHigh + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + dayLow + '</span><br/>\n  <span class="tp__body__title">Close: </span>\n  <span class="tp__body__value">' + close + '</span>\n  </div>');
+};
+var _fnCategoryAreaRange = function _fnCategoryAreaRange(_ref8) {
+  var id = _ref8.id,
+      point = _ref8.point;
+  var high = point.high,
+      low = point.low,
+      c = point.c;
+
+  return _fnTooltipHeader(c, id) + ('<div class="tp__body">\n  <span class="tp__body__title">High: </span>\n  <span class="tp__body__value">' + high + '</span><br/>\n  <span class="tp__body__title">Low: </span>\n  <span class="tp__body__value">' + low + '</span>\n  </div>');
+};
+var _fnCategory = function _fnCategory(_ref9) {
+  var id = _ref9.id,
+      point = _ref9.point;
+  var y = point.y,
+      c = point.c;
+
+  return _fnTooltipHeader(c, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + y + '</span>\n  </div>');
 };
 
-var _fnPieTooltip = function _fnPieTooltip(_ref8) {
-  var id = _ref8.id,
-      value = _ref8.value,
-      point = _ref8.point;
+var _fnPieTooltip = function _fnPieTooltip(_ref10) {
+  var id = _ref10.id,
+      value = _ref10.value,
+      point = _ref10.point;
 
   return _fnTooltipHeader(point.nameFull, id) + ('<div class="tp__body">\n  <span class="tp__body__title">Value: </span>\n  <span class="tp__body__value">' + value + '</span></br>\n  </div>');
 };
@@ -129,10 +150,10 @@ var _fnCalcWidthSparkType4 = function _fnCalcWidthSparkType4(value, total) {
   return { fullWidth: fullWidth, width: width };
 };
 
-var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref9) {
-  var id = _ref9.id,
-      value = _ref9.value,
-      point = _ref9.point;
+var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref11) {
+  var id = _ref11.id,
+      value = _ref11.value,
+      point = _ref11.point;
 
   var nameFull = point.nameFull,
       category = point.category,
@@ -150,9 +171,9 @@ var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref9) {
   });
 };
 
-var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref10) {
-  var id = _ref10.id,
-      point = _ref10.point;
+var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref12) {
+  var id = _ref12.id,
+      point = _ref12.point;
 
   var nameFull = point.nameFull,
       year = point.year,
@@ -265,6 +286,9 @@ var Tooltip = {
     fnDateFormat: _fnFormatCategory,
     isWithColor: true, isWithValueText: true, isWithValue: true
   }),
+  category: _fnBasePointFormatter({
+    fnTemplate: _fnCategory
+  }),
 
   fnExDividendPointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnExDividend
@@ -287,6 +311,9 @@ var Tooltip = {
   }),
   fnHighLowPointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnHighLowTooltip
+  }),
+  categoryAreaRange: _fnBasePointFormatter({
+    fnTemplate: _fnCategoryAreaRange
   }),
   fnPiePointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnPieTooltip, isWithValue: true

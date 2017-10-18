@@ -1,28 +1,32 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require("babel-runtime/helpers/createClass");
+var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = require("babel-runtime/helpers/possibleConstructorReturn");
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = require("babel-runtime/helpers/inherits");
+var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50,32 +54,32 @@ var ComponentHrzContainer = function (_Component) {
   }
 
   (0, _createClass3.default)(ComponentHrzContainer, [{
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       var store = this.props.store;
 
       this.unsubscribe = store.listen(this._onStore);
     }
   }, {
-    key: "componentWillUnmount",
+    key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this.unsubscribe();
     }
   }, {
-    key: "_renderContainers",
+    key: '_renderContainers',
     value: function _renderContainers(containers) {
       return containers.map(function (container) {
         return container;
       });
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var containers = this.state.containers;
 
       return _react2.default.createElement(
-        "div",
-        { className: "hrz-container" },
+        'div',
+        { className: 'hrz-container' },
         this._renderContainers(containers)
       );
     }
@@ -84,10 +88,10 @@ var ComponentHrzContainer = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? ComponentHrzContainer.propTypes = {
-  store: _react.PropTypes.shape({
-    listen: _react.PropTypes.func
+  store: _propTypes2.default.shape({
+    listen: _propTypes2.default.func
   }),
-  addAction: _react.PropTypes.string
+  addAction: _propTypes2.default.string
 } : void 0;
 exports.default = ComponentHrzContainer;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-container\ComponentHrzContainer.js.map

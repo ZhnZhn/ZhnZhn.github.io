@@ -26,21 +26,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _Row = require('../dialogs/Row');
-
-var _Row2 = _interopRequireDefault(_Row);
-
-var _Button = require('../dialogs/Button');
-
-var _Button2 = _interopRequireDefault(_Button);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withToolbar = require('../dialogs/decorators/withToolbar');
 
@@ -79,7 +67,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
     };
 
     _this.toolbarButtons = _this._createType2WithToolbar(props, true);
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     return _this;
   }
 
@@ -104,7 +92,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -113,10 +101,10 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_Row2.default.Text, {
+        _react2.default.createElement(_DialogCell2.default.Row.Text, {
           styleRoot: S.ROW_TEXT,
           caption: 'Alpha:',
           text: 'Performance by Sector'
@@ -128,4 +116,4 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
 }(_react.Component)) || _class;
 
 exports.default = AlphaIndicatorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\AlphaSectorDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\stock-markets\AlphaSectorDialog.js.map

@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+
 
 const CL = {
   INIT : 'modal-root',
@@ -36,7 +38,7 @@ class ModalDialogContainer extends Component {
   componentDidUpdate(prevProps, prevState){
     if (this.wasClosing){
       setTimeout(
-        () => { this.setState({}) },        
+        () => { this.setState({}) },
         this.props.timeout
       )
     }

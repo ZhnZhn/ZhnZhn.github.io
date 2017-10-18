@@ -15,6 +15,10 @@ var _reflux = require('reflux');
 
 var _reflux2 = _interopRequireDefault(_reflux);
 
+var _RouterDialog = require('../logic/RouterDialog');
+
+var _RouterDialog2 = _interopRequireDefault(_RouterDialog);
+
 var _fnFetch = require('../../utils/fnFetch');
 
 var _fnCatch = require('../logic/fnCatch');
@@ -45,6 +49,8 @@ var _fnFetchSourceMenu = function _fnFetchSourceMenu(_ref) {
 };
 
 BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function (option) {
+
+  _RouterDialog2.default.loadDialogs(option.dialogsId);
   (0, _fnFetch.fetchJson)({
     uri: option.sourceMenuUrl,
     option: option,

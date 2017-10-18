@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import calcDirection from './dataProcessing/calcDirection';
 
 const SparklinesBars = (props) => {
@@ -35,10 +36,10 @@ const SparklinesBars = (props) => {
 }
 
 SparklinesBars.propTypes = {
-    points: React.PropTypes.arrayOf(React.PropTypes.object),
-    height: React.PropTypes.number,
-    style: React.PropTypes.object,
-    barWidth: React.PropTypes.number
+    points: PropTypes.arrayOf(PropTypes.object),
+    height: PropTypes.number,
+    style: PropTypes.object,
+    barWidth: PropTypes.number
 };
 SparklinesBars.defaultProps = {
     style: { fill: 'slategray' },

@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ContainerStyles = require('../styles/ContainerStyles');
 
 var _ContainerStyles2 = _interopRequireDefault(_ContainerStyles);
@@ -46,8 +50,8 @@ var Browser = function Browser(_ref) {
 };
 
 process.env.NODE_ENV !== "production" ? Browser.propTypes = {
-  isShow: _react.PropTypes.bool,
-  style: _react.PropTypes.object
+  isShow: _propTypes2.default.bool,
+  style: _propTypes2.default.object
 } : void 0;
 
 exports.default = Browser;

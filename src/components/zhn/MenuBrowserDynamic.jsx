@@ -41,15 +41,15 @@ class MenuBrowserDynamic extends Component{
   }
 
   _loadMenu = () => {
-    const { browserType, caption, sourceMenuUrl, onLoadMenu } = this.props;
-    onLoadMenu({ browserType, caption, sourceMenuUrl });
+    const { browserType, caption, sourceMenuUrl, dialogsId, onLoadMenu } = this.props;
+    onLoadMenu({ browserType, caption, sourceMenuUrl, dialogsId });
   }
 
   _onStore = (actionType, data) => {
     const { browserType, store, showAction, updateAction, loadCompletedAction } = this.props;
     if (actionType === showAction && data === browserType){
       this._handleShow();
-    } else if (actionType === loadCompletedAction && data.browserType === browserType){      
+    } else if (actionType === loadCompletedAction && data.browserType === browserType){
       this.setState({ menuItems: data.menuItems, isLoaded : true });
     } else if (actionType === updateAction && data === browserType){
       this.setState({ menuItems: store.getBrowserMenu(browserType) });

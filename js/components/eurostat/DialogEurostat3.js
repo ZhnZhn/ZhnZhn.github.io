@@ -20,48 +20,42 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
+var _Decorators = require('../dialogs/decorators/Decorators');
 
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _SelectWithLoad = require('./SelectWithLoad');
-
-var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
-
-var _SelectParentChild = require('./SelectParentChild');
-
-var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _withToolbar = require('./decorators/withToolbar');
-
-var _withToolbar2 = _interopRequireDefault(_withToolbar);
-
-var _withValidationLoad = require('./decorators/withValidationLoad');
-
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
+var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(DialogEurostat3, _Component);
+
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+      oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+      twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+      threeCaption: PropTypes.string,
+    msgOnNotSelected: PropTypes.func,
+      onShow: PropTypes.func,
+    loadFn: PropTypes.func
+  }
+  */
 
   function DialogEurostat3(props) {
     (0, _classCallCheck3.default)(this, DialogEurostat3);
@@ -112,7 +106,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
 
     _this.one = undefined;
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       validationMessages: []
     };
@@ -151,7 +145,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -160,10 +154,10 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: oneURI,
           jsonProp: oneJsonProp,
@@ -171,7 +165,7 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           optionNames: 'Items',
           onSelect: this._handleSelectOne
         }),
-        _react2.default.createElement(_SelectParentChild2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
           ref: function ref(c) {
             return _this2.parentChild = c;
           },
@@ -183,36 +177,13 @@ var DialogEurostat3 = (0, _withToolbar2.default)(_class = (0, _withValidationLoa
           childCaption: threeCaption,
           msgOnNotSelected: msgOnNotSelected
         }),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );
     }
   }]);
   return DialogEurostat3;
-}(_react.Component)) || _class) || _class;
-
-process.env.NODE_ENV !== "production" ? DialogEurostat3.propTypes = {
-  isShow: _react.PropTypes.bool,
-  caption: _react.PropTypes.string,
-
-  oneCaption: _react.PropTypes.string,
-  oneURI: _react.PropTypes.string,
-  oneJsonProp: _react.PropTypes.string,
-
-  twoCaption: _react.PropTypes.string,
-  twoURI: _react.PropTypes.string,
-  twoJsonProp: _react.PropTypes.string,
-
-  threeCaption: _react.PropTypes.string,
-  msgOnNotSelected: _react.PropTypes.func,
-
-  onShow: _react.PropTypes.func,
-  loadFn: _react.PropTypes.func
-} : void 0;
-
-
-DialogEurostat3.displayName = 'DialogEurostat3';
-
+}(_react.Component)) || _class) || _class);
 exports.default = DialogEurostat3;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogEurostat3.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogEurostat3.js.map

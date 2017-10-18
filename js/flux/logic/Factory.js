@@ -84,46 +84,53 @@ var _showModalDialogDescription = function _showModalDialogDescription(option) {
 };
 
 var createDialogComp = function createDialogComp(conf, browserType) {
-  var dialogType = conf.type,
-      props = conf.dialogProps ? conf.dialogProps : {},
-      _initFromDate = props.nInitFromDate ? _DateUtils2.default.getFromDate(props.nInitFromDate) : initFromDate,
-      _fnValue = props.valueFn ? props.valueFnPrefix ? _RouterFnValue2.default[props.valueFn].bind(null, props.valueFnPrefix) : _RouterFnValue2.default[props.valueFn] : undefined
+  var itemKey = conf.type,
+      _conf$dialogProps = conf.dialogProps,
+      dialogProps = _conf$dialogProps === undefined ? {} : _conf$dialogProps,
+      dialogType = conf.dialogType,
+      dialogCaption = conf.dialogCaption,
+      optionURI = conf.optionURI,
+      optionsJsonProp = conf.optionsJsonProp,
+      dataColumn = conf.dataColumn,
+      nInitFromDate = dialogProps.nInitFromDate,
+      valueFn = dialogProps.valueFn,
+      valueFnPrefix = dialogProps.valueFnPrefix,
+      descrUrl = dialogProps.descrUrl,
+      loadFnType = dialogProps.loadFnType,
+      isContinious = dialogProps.isContinious,
+      loadId = dialogProps.loadId,
+      _initFromDate = nInitFromDate ? _DateUtils2.default.getFromDate(nInitFromDate) : initFromDate,
+      _fnValue = valueFn ? valueFnPrefix ? _RouterFnValue2.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue2.default[valueFn] : undefined,
+      onClickInfo = descrUrl ? _showModalDialogDescription : undefined,
+      loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType);
 
-  // , _fnLink = (props.linkFn)
-  //      ? RouterFnLink[props.linkFn]
-  //      : undefined
-
-  ,
-      onClickInfo = props.descrUrl ? _showModalDialogDescription : undefined,
-      loadFn = _RouterLoadFn2.default.getFn(props.loadFnType, conf.dialogType);
-
-  if (props.isContinious) {
-    props.msgTestDateOrEmpty = _Msg2.default.TEST_DATE_OR_EMPTY;
-    props.onTestDateOrEmpty = onTestDateOrEmpty;
+  if (isContinious) {
+    Object.assign(dialogProps, {
+      msgTestDateOrEmpty: _Msg2.default.TEST_DATE_OR_EMPTY,
+      onTestDateOrEmpty: onTestDateOrEmpty
+    });
+  }
+  if (!loadId) {
+    dialogProps.loadId = _Type.LoadType.Q;
   }
 
-  if (!props.loadId) {
-    props.loadId = _Type.LoadType.Q;
-  }
-
-  return _RouterDialog2.default.getDialog(conf.dialogType).then(function (Comp) {
+  return _RouterDialog2.default.getDialog(dialogType).then(function (Comp) {
     return _react2.default.createElement(Comp, (0, _extends3.default)({
-      key: dialogType,
-      caption: conf.dialogCaption,
-      optionURI: conf.optionURI,
-      optionsJsonProp: conf.optionsJsonProp,
-      dataColumn: conf.dataColumn,
+      key: itemKey,
+      caption: dialogCaption,
+      optionURI: optionURI,
+      optionsJsonProp: optionsJsonProp,
+      dataColumn: dataColumn,
       msgOnNotSelected: _Msg2.default.NOT_SELECTED,
       msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
-      onLoad: onLoadChart.bind(null, dialogType, browserType),
-      onShow: onShowChart.bind(null, dialogType, browserType),
+      onLoad: onLoadChart.bind(null, itemKey, browserType),
+      onShow: onShowChart.bind(null, itemKey, browserType),
       fnValue: _fnValue,
-      //fnLink : _fnLink,
       initFromDate: _initFromDate,
       initToDate: initToDate, onTestDate: onTestDate,
       onClickInfo: onClickInfo,
       loadFn: loadFn
-    }, props));
+    }, dialogProps));
   });
 };
 
@@ -179,6 +186,7 @@ var Factory = {
         _option$caption = option.caption,
         caption = _option$caption === undefined ? 'Source Browser' : _option$caption,
         sourceMenuUrl = option.sourceMenuUrl,
+        dialogsId = option.dialogsId,
         chartContainerType = option.chartContainerType,
         modalDialogType = option.modalDialogType,
         itemOptionType = option.itemOptionType,
@@ -208,6 +216,7 @@ var Factory = {
       showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
       loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
       updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, //for Type
+      dialogsId: dialogsId,
       onLoadMenu: _BrowserActions2.default.loadBrowserDynamic,
       onShowLoadDialog: _ComponentActions2.default.showModalDialog //for Type2
 

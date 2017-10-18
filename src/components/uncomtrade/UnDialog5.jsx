@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
-import SelectWithLoad from '../dialogs/SelectWithLoad';
-import SelectParentChild from '../dialogs/SelectParentChild';
-import RowInputSelect from '../dialogs/RowInputSelect';
-import Button from '../dialogs/Button';
-
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ShowHide from '../zhn/ShowHide';
-
-import withToolbar from '../dialogs/decorators/withToolbar';
-import withValidationLoad from '../dialogs/decorators/withValidationLoad'
+import D from '../dialogs/DialogCell'
+import Decor from '../dialogs/decorators/Decorators'
 
 const TRADE_FLOW = [
   { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
@@ -21,10 +10,10 @@ const TRADE_FLOW = [
   { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } },
   { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } },
   { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }
-]
+];
 
-@withToolbar
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class  UnDialog5 extends Component {
 
   constructor(props){
@@ -35,7 +24,7 @@ class  UnDialog5 extends Component {
       onClick: this._handleClickOptions
     })
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
       isShowDate : false,
@@ -116,7 +105,7 @@ class  UnDialog5 extends Component {
         , { isShowDate, isShowOptions, validationMessages } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={this._commandButtons}
@@ -124,10 +113,10 @@ class  UnDialog5 extends Component {
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <ToolbarButtonCircle
+             <D.ToolbarButtonCircle
                 buttons={this.toolbarButtons}
              />
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={oneURI}
                jsonProp={oneJsonProp}
@@ -137,7 +126,7 @@ class  UnDialog5 extends Component {
                onSelect={this._handleSelectOne}
              />
 
-             <SelectParentChild
+             <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
                  uri={twoURI}
@@ -148,8 +137,8 @@ class  UnDialog5 extends Component {
                  msgOnNotSelected={msgOnNotSelected}
              />
 
-             <ShowHide isShow={isShowDate}>
-               <DatesFragment
+             <D.ShowHide isShow={isShowDate}>
+               <D.DatesFragment
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
@@ -157,19 +146,19 @@ class  UnDialog5 extends Component {
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />
-             </ShowHide>
-             <ShowHide isShow={isShowOptions}>
-               <RowInputSelect
+             </D.ShowHide>
+             <D.ShowHide isShow={isShowOptions}>
+               <D.RowInputSelect
                  caption="Trade Flow"
                  options={TRADE_FLOW}
                  placeholder="Default: Export Value"
                  onSelect={this._handleSelectTradeFlow}
                />
-             </ShowHide>
-             <ValidationMessages
+             </D.ShowHide>
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }

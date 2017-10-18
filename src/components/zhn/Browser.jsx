@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 
 import STYLE from '../styles/ContainerStyles';
 
@@ -10,7 +11,7 @@ const S = {
   NONE : {
     display : 'none'
   }
-}
+};
 
 const Browser = ({ isShow, style, children }) => {
   const _styleOpen = isShow ? S.BLOCK : S.NONE

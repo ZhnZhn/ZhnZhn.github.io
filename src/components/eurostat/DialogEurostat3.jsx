@@ -1,17 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+//import PropTypes from "prop-types";
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from './ToolbarButtonCircle';
-import SelectWithLoad from './SelectWithLoad';
-import Button from './Button'
-import ValidationMessages from '../zhn/ValidationMessages';
+import D from '../dialogs/DialogCell'
+import Decor from '../dialogs/decorators/Decorators'
 
-import withToolbar from './decorators/withToolbar';
-import withValidationLoad from './decorators/withValidationLoad';
-
-@withToolbar
-@withValidationLoad
-class DialogEurostat extends Component {
+@Decor.withToolbar
+@Decor.withValidationLoad
+class DialogEurostat3 extends Component {
+  /*
   static propTypes = {
     isShow: PropTypes.bool,
     caption: PropTypes.string,
@@ -24,21 +20,23 @@ class DialogEurostat extends Component {
     twoURI: PropTypes.string,
     twoJsonProp: PropTypes.string,
 
+    threeCaption: PropTypes.string,
     msgOnNotSelected: PropTypes.func,
+
     onShow: PropTypes.func,
     loadFn: PropTypes.func
   }
+  */
 
   constructor(props){
-    super();
-    this.one = undefined;
-    this.two = undefined;
+    super()
+    this.one = undefined
     this.toolbarButtons = [
       { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
-    ];
+    ]
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
-    ];
+      <D.Button.Load onClick={this._handleLoad} />
+    ]
     this.state = {
       validationMessages: []
     }
@@ -56,9 +54,6 @@ class DialogEurostat extends Component {
   _handleSelectOne = (one) => {
     this.one = one;
   }
-  _handleSelectTwo = (two) => {
-    this.two = two;
-  }
 
   _handleLoad = () => {
     this._handleWithValidationLoad(
@@ -67,19 +62,23 @@ class DialogEurostat extends Component {
     );
   }
   _createValidationMessages = () => {
-     const { oneCaption, twoCaption } = this.props;
+     const { oneCaption } = this.props;
      let msg = [];
 
      if (!this.one) { msg.push(this.props.msgOnNotSelected(oneCaption)); }
-     if (!this.two) { msg.push(this.props.msgOnNotSelected(twoCaption)); }
+
+     const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
+     if (!isValid1) { msg = msg.concat(msg1); }
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   }
   _createLoadOption = () => {
+    const { parent:group, child:metric } = this.parentChild.getValues();
+
     return this.props.loadFn(
       this.props,
-      { one : this.one, two : this.two }
+      { one : this.one, group, metric }
     );
   }
 
@@ -92,12 +91,13 @@ class DialogEurostat extends Component {
     const {
            caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
-           twoCaption, twoURI, twoJsonProp
+           twoCaption, twoURI, twoJsonProp,
+           threeCaption, msgOnNotSelected
           } = this.props
         , { validationMessages } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={this._commandButtons}
@@ -105,34 +105,33 @@ class DialogEurostat extends Component {
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <ToolbarButtonCircle
-               buttons={this.toolbarButtons}
+             <D.ToolbarButtonCircle
+                buttons={this.toolbarButtons}
              />
-
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
-               optionNames={'Items'}
+               optionNames="Items"
                onSelect={this._handleSelectOne}
              />
-
-             <SelectWithLoad
-               isShow={isShow}
-               uri={twoURI}
-               jsonProp={twoJsonProp}
-               caption={twoCaption}
-               optionNames={'Items'}
-               onSelect={this._handleSelectTwo}
+             <D.SelectParentChild
+                 ref={c => this.parentChild = c}
+                 isShow={isShow}
+                 uri={twoURI}
+                 parentCaption={twoCaption}
+                 parentOptionNames="Items"
+                 parentJsonProp={twoJsonProp}
+                 childCaption={threeCaption}
+                 msgOnNotSelected={msgOnNotSelected}
              />
-
-             <ValidationMessages
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }
 
-export default DialogEurostat
+export default DialogEurostat3

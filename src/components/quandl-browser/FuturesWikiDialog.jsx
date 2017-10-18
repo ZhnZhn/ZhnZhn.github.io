@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from '../dialogs/ToolbarButtonCircle';
-import SelectParentChild from '../dialogs/SelectParentChild';
-import RowInputSelect from '../dialogs/RowInputSelect';
-import RowDate from '../dialogs/RowDate';
-import Button from '../dialogs/Button';
-import ValidationMessages from '../zhn/ValidationMessages';
-
+import D from '../dialogs/DialogCell'
 import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
 const typeOptions = [
@@ -30,7 +23,7 @@ class FuturesWikiDialog extends Component {
       }
     ]
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
       validationMessages : []
@@ -96,7 +89,7 @@ class FuturesWikiDialog extends Component {
 
   _renderFromDate = (initFromDate, onTestDate, msgTestDate) => {
     return (
-       <RowDate
+       <D.RowDate
           ref={ c => this.fromDate = c}
           labelTitle="From Date:"
           initValue={initFromDate}
@@ -115,7 +108,7 @@ class FuturesWikiDialog extends Component {
         , { validationMessages } = this.state;
 
     return (
-      <DraggableDialog
+      <D.DraggableDialog
          caption={caption}
          isShow={isShow}
          commandButtons={this._commandButtons}
@@ -123,11 +116,11 @@ class FuturesWikiDialog extends Component {
          onFront={onFront}
          onClose={this._handleClose}
        >
-           <ToolbarButtonCircle
+           <D.ToolbarButtonCircle
               buttons={this.toolbarButtons}
            />
 
-           <SelectParentChild
+           <D.SelectParentChild
                ref={c => this.exchangeItem = c}
                isShow={isShow}
                uri={futuresURI}
@@ -137,16 +130,16 @@ class FuturesWikiDialog extends Component {
                childCaption="Asset"
                msgOnNotSelected={msgOnNotSelected}
            />
-           <RowInputSelect
+           <D.RowInputSelect
               caption="Type"
               options={typeOptions}
               onSelect={this._handleSelectType}
            />
            {isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty)}
-           <ValidationMessages
+           <D.ValidationMessages
               validationMessages={validationMessages}
            />
-      </DraggableDialog>
+      </D.DraggableDialog>
     );
   }
 }

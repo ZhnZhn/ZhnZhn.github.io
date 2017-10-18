@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import RowInputSelect from './RowInputSelect'
 import RowInputText from './RowInputText'
@@ -115,7 +116,7 @@ class ListCreatePane extends Component {
            Primary={this._primaryBt}
            onClear={this._handleClear}
            onClose={onClose}
-        />        
+        />
       </div>
     )
   }

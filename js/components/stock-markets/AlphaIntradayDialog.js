@@ -21,32 +21,14 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
-//import SelectWithLoad from '../dialogs/SelectWithLoad'
-
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _ToolbarButtonCircle = require('../dialogs/ToolbarButtonCircle');
-
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _RowInputSelect = require('../dialogs/RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _RowPattern = require('../dialogs/RowPattern');
-
-var _RowPattern2 = _interopRequireDefault(_RowPattern);
-
-var _Button = require('../dialogs/Button');
-
-var _Button2 = _interopRequireDefault(_Button);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withToolbar = require('../dialogs/decorators/withToolbar');
 
@@ -57,7 +39,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var DF = {
   INTERVAL: '15min'
 };
-//const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 var _testTicket = function _testTicket(value) {
   if (String(value).trim() === '') {
@@ -104,7 +85,7 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
     };
 
     _this.toolbarButtons = _this._createType2WithToolbar(props, true);
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     return _this;
   }
 
@@ -129,7 +110,7 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -138,17 +119,17 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_RowPattern2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowPattern, {
           ref: this._refTicket,
           title: 'Ticket',
           placeholder: 'Nyse or Nasdaq Ticket',
           onTest: _testTicket,
           errorMsg: 'Not Empty'
         }),
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           caption: 'Interval',
           placeholder: 'Default: 15min',
           options: _intervalOptions,
@@ -161,4 +142,4 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
 }(_react.Component)) || _class;
 
 exports.default = AlphaIntradayDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\AlphaIntradayDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\stock-markets\AlphaIntradayDialog.js.map

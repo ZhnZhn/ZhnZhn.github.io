@@ -34,6 +34,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ArrowCell = require('./ArrowCell');
 
 var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
@@ -642,24 +646,24 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 }, _temp);
 process.env.NODE_ENV !== "production" ? InputSelect.propTypes = {
-  propCaption: _react.PropTypes.string,
-  ItemOptionComp: _react.PropTypes.element,
-  width: _react.PropTypes.string,
-  isShowOptionAnim: _react.PropTypes.bool,
-  options: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-    caption: _react.PropTypes.string,
-    value: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number])
+  propCaption: _propTypes2.default.string,
+  ItemOptionComp: _propTypes2.default.element,
+  width: _propTypes2.default.string,
+  isShowOptionAnim: _propTypes2.default.bool,
+  options: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+    caption: _propTypes2.default.string,
+    value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
   })),
-  optionName: _react.PropTypes.string,
-  optionNames: _react.PropTypes.string,
-  isUpdateOptions: _react.PropTypes.bool,
-  placeholder: _react.PropTypes.string,
+  optionName: _propTypes2.default.string,
+  optionNames: _propTypes2.default.string,
+  isUpdateOptions: _propTypes2.default.bool,
+  placeholder: _propTypes2.default.string,
 
-  isLoading: _react.PropTypes.bool,
-  isLoadingFailed: _react.PropTypes.bool,
+  isLoading: _propTypes2.default.bool,
+  isLoadingFailed: _propTypes2.default.bool,
 
-  onSelect: _react.PropTypes.func,
-  onLoadOption: _react.PropTypes.func
+  onSelect: _propTypes2.default.func,
+  onLoadOption: _propTypes2.default.func
 } : void 0;
 exports.default = InputSelect;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-select\InputSelect.js.map

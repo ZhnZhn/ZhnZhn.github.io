@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _ButtonTab = require('../zhn/ButtonTab');
 
 var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
@@ -205,9 +209,9 @@ var ChartToolbar = function (_Component) {
   return ChartToolbar;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? ChartToolbar.propTypes = {
-  style: _react.PropTypes.object,
-  config: _react.PropTypes.object
-} : void 0;
+ChartToolbar.propTypes = process.env.NODE_ENV !== "production" ? {
+  style: _propTypes2.default.object,
+  config: _propTypes2.default.object
+} : {};
 exports.default = ChartToolbar;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ChartToolBar.js.map

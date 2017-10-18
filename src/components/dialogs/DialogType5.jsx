@@ -1,23 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import DraggableDialog from '../zhn-moleculs/DraggableDialog';
-import ToolbarButtonCircle from './ToolbarButtonCircle';
-import SelectWithLoad from './SelectWithLoad';
-import SelectParentChild from './SelectParentChild';
-import Button from './Button';
-
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-import ShowHide from '../zhn/ShowHide';
-import RowCheckBox from './RowCheckBox';
-
-import withToolbar from './decorators/withToolbar';
-import withValidationLoad from './decorators/withValidationLoad'
+import D from './DialogCell'
+import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
-@withToolbar
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class  DialogType5 extends Component {
 
   constructor(props){
@@ -28,7 +17,7 @@ class  DialogType5 extends Component {
       onClick: this._handleClickOptions
     })
     this._commandButtons = [
-      <Button.Load onClick={this._handleLoad} />
+      <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
       isShowDate : false,
@@ -105,7 +94,7 @@ class  DialogType5 extends Component {
         , { isShowDate, isShowOptions, validationMessages } = this.state;
 
     return(
-        <DraggableDialog
+        <D.DraggableDialog
              caption={caption}
              isShow={isShow}
              commandButtons={this._commandButtons}
@@ -113,10 +102,10 @@ class  DialogType5 extends Component {
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <ToolbarButtonCircle
+             <D.ToolbarButtonCircle
                 buttons={this.toolbarButtons}
              />
-             <SelectWithLoad
+             <D.SelectWithLoad
                isShow={isShow}
                uri={oneURI}
                jsonProp={oneJsonProp}
@@ -125,7 +114,7 @@ class  DialogType5 extends Component {
                onSelect={this._handleSelectOne}
              />
 
-             <SelectParentChild
+             <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
                  uri={twoURI}
@@ -136,8 +125,8 @@ class  DialogType5 extends Component {
                  msgOnNotSelected={msgOnNotSelected}
              />
 
-             <ShowHide isShow={isShowDate}>
-               <DatesFragment
+             <D.ShowHide isShow={isShowDate}>
+               <D.DatesFragment
                  ref={c => this.datesFragment = c}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
@@ -145,19 +134,19 @@ class  DialogType5 extends Component {
                  msgOnNotValidFormat={msgOnNotValidFormat}
                  onTestDate={onTestDate}
                />
-             </ShowHide>
-             <ShowHide isShow={isShowOptions}>
-               <RowCheckBox
+             </D.ShowHide>
+             <D.ShowHide isShow={isShowOptions}>
+               <D.RowCheckBox
                  initValue={false}
                  caption="Add Seria with Second YAxis"
                  onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
                  onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
                />
-             </ShowHide>
-             <ValidationMessages
+             </D.ShowHide>
+             <D.ValidationMessages
                  validationMessages={validationMessages}
              />
-        </DraggableDialog>
+        </D.DraggableDialog>
     );
   }
 }

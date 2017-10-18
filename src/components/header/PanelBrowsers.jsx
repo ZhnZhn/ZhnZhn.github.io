@@ -15,7 +15,7 @@ const S = {
   },
   NEW: {
     display: 'inline-block',
-    float: 'right',    
+    float: 'right',
     color: 'black'
   }
 };
@@ -23,7 +23,7 @@ const _model = [
   {
     id: 'STOCK_MARKETS',
     cn: 'item__browser',
-    title: 'Stock Markets',
+    title: 'Stock Markets'
   },{
     id: 'UN_COMTRADE',
     cn: 'item__eurostat',

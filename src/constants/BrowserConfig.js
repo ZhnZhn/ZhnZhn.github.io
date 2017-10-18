@@ -5,13 +5,15 @@ const BrowserConfig = {
     browserType: BrowserType.STOCK_MARKETS,
     isDynamic: true,
     caption: 'Stock Markets',
-    sourceMenuUrl: './data/stock-markets/source-menu.json'
+    sourceMenuUrl: './data/stock-markets/source-menu.json',
+    dialogsId: 'ALPHA'
   },
   [BrowserType.EUROSTAT] : {
     browserType: BrowserType.EUROSTAT,
     isDynamic : true,
     caption: 'European Statistics',
-    sourceMenuUrl : './data/eurostat/source-menu.json'
+    sourceMenuUrl : './data/eurostat/source-menu.json',
+    dialogsId: 'EUROSTAT'
   },
   [BrowserType.UN_COMTRADE]: {
     browserType: BrowserType.UN_COMTRADE,
@@ -24,7 +26,7 @@ const BrowserConfig = {
     isDynamic : true,
     caption: 'FAOSTAT',
     sourceMenuUrl : './data/faostat/source-menu.json'
-  },  
+  },
   [BrowserType.ECONOMIC] : {
     browserType: BrowserType.ECONOMIC,
     isDynamic: false

@@ -17,6 +17,7 @@ report.html
 out.txt
 coverage
 dll
+_codemods
 src/components/chart-config
 js/components/chart-config
 app/config-dialog*.js

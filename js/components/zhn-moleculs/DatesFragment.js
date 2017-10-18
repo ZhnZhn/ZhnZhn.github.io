@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _DateField = require('../zhn/DateField');
 
 var _DateField2 = _interopRequireDefault(_DateField);
@@ -154,11 +158,11 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
   }
 }, _temp2);
 process.env.NODE_ENV !== "production" ? DatesFragment.propTypes = {
-  initFromDate: _react.PropTypes.string,
-  initToDate: _react.PropTypes.string,
-  nForecastDate: _react.PropTypes.number,
-  onTestDate: _react.PropTypes.func,
-  msgOnNotValidFormat: _react.PropTypes.func
+  initFromDate: _propTypes2.default.string,
+  initToDate: _propTypes2.default.string,
+  nForecastDate: _propTypes2.default.number,
+  onTestDate: _propTypes2.default.func,
+  msgOnNotValidFormat: _propTypes2.default.func
 } : void 0;
 exports.default = DatesFragment;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\DatesFragment.js.map

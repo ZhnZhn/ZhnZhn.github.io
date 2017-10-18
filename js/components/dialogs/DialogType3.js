@@ -26,37 +26,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _propTypes = require('prop-types');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
+var _DialogCell = require('./DialogCell');
 
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
-
-var _SelectWithLoad = require('./SelectWithLoad');
-
-var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _RowInputSelect = require('./RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _DatesFragment = require('../zhn-moleculs/DatesFragment');
-
-var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withValidationLoad = require('./decorators/withValidationLoad');
 
@@ -96,8 +72,8 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
       _this.stock = stock;
     };
 
-    _this._handleLoad = function (event) {
-      event.target.focus();
+    _this._handleLoad = function () {
+      //event.target.focus();
       _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
     };
 
@@ -147,7 +123,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
         caption: 'T', onClick: _this._handleClickTransform
       });
     }
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowTransform: false,
       validationMessages: []
@@ -192,7 +168,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -201,10 +177,10 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: optionURI,
           jsonProp: optionsJsonProp,
@@ -214,15 +190,15 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           onSelect: this._handleSelectStock
         }),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowTransform },
-          _react2.default.createElement(_RowInputSelect2.default, {
+          _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
             caption: 'Transform:',
             options: transformOptions,
             onSelect: this._handleSelectTransform
           })
         ),
-        _react2.default.createElement(_DatesFragment2.default, {
+        _react2.default.createElement(_DialogCell2.default.DatesFragment, {
           ref: function ref(c) {
             return _this2.datesFragment = c;
           },
@@ -231,7 +207,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           msgOnNotValidFormat: msgOnNotValidFormat,
           onTestDate: onTestDate
         }),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );
@@ -241,22 +217,22 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
 }(_react.Component)) || _class;
 
 process.env.NODE_ENV !== "production" ? DialogType3.propTypes = {
-  isShow: _react.PropTypes.bool,
-  caption: _react.PropTypes.string,
-  itemCaption: _react.PropTypes.string,
-  optionURI: _react.PropTypes.string,
-  optionsJsonProp: _react.PropTypes.string,
-  optionNames: _react.PropTypes.string,
-  initFromDate: _react.PropTypes.string,
-  initToDate: _react.PropTypes.string,
-  msgOnNotValidFormat: _react.PropTypes.func,
-  onTestDate: _react.PropTypes.func,
-  onShow: _react.PropTypes.func,
+  isShow: _propTypes2.default.bool,
+  caption: _propTypes2.default.string,
+  itemCaption: _propTypes2.default.string,
+  optionURI: _propTypes2.default.string,
+  optionsJsonProp: _propTypes2.default.string,
+  optionNames: _propTypes2.default.string,
+  initFromDate: _propTypes2.default.string,
+  initToDate: _propTypes2.default.string,
+  msgOnNotValidFormat: _propTypes2.default.func,
+  onTestDate: _propTypes2.default.func,
+  onShow: _propTypes2.default.func,
 
-  descrUrl: _react.PropTypes.string,
-  isTransform: _react.PropTypes.bool,
-  onClickInfo: _react.PropTypes.func,
-  loadFn: _react.PropTypes.func
+  descrUrl: _propTypes2.default.string,
+  isTransform: _propTypes2.default.bool,
+  onClickInfo: _propTypes2.default.func,
+  loadFn: _propTypes2.default.func
 } : void 0;
 exports.default = DialogType3;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType3.js.map

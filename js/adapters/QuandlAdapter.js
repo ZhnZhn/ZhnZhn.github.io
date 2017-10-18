@@ -50,6 +50,10 @@ var _QuandlToStackedColumn = require('./QuandlToStackedColumn');
 
 var _QuandlToTreeMap = require('./QuandlToTreeMap');
 
+var _ToYearly = require('./ToYearly');
+
+var _ToYearly2 = _interopRequireDefault(_ToYearly);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var C = {
@@ -565,7 +569,18 @@ var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   return fnQuandlFlow(config, json, option);
 };
 
-var _rToConfig = (_rToConfig2 = {}, (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), _rToConfig2);
+var fCrYearlyConfig = function fCrYearlyConfig(json, option) {
+  var _json$dataset3 = json.dataset,
+      dataset = _json$dataset3 === undefined ? {} : _json$dataset3,
+      _dataset$data2 = dataset.data,
+      data = _dataset$data2 === undefined ? [] : _dataset$data2;
+
+  return {
+    config: _ToYearly2.default.toConfig(data, option)
+  };
+};
+
+var _rToConfig = (_rToConfig2 = {}, (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.YEARLY, fCrYearlyConfig), _rToConfig2);
 
 var QuandlAdapter = {
   toConfig: function toConfig(json, option) {
@@ -579,11 +594,11 @@ var QuandlAdapter = {
     var chartId = option.value,
         parentId = option.parentId,
         yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option),
-        _json$dataset3 = json.dataset,
-        dataset = _json$dataset3 === undefined ? {} : _json$dataset3;
+        _json$dataset4 = json.dataset,
+        dataset = _json$dataset4 === undefined ? {} : _json$dataset4;
 
-    var _dataset$data2 = dataset.data,
-        data = _dataset$data2 === undefined ? [] : _dataset$data2;
+    var _dataset$data3 = dataset.data,
+        data = _dataset$data3 === undefined ? [] : _dataset$data3;
 
     data = data.map(function (point) {
       var arrDate = point[0].split('-');

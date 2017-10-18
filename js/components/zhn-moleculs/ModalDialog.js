@@ -30,6 +30,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -180,15 +184,15 @@ var ModalDialog = (_temp = _class = function (_Component) {
   timeout: 450
 }, _temp);
 process.env.NODE_ENV !== "production" ? ModalDialog.propTypes = {
-  isShow: _react.PropTypes.bool,
-  isWithButton: _react.PropTypes.bool,
-  isNotUpdate: _react.PropTypes.bool,
-  withoutClose: _react.PropTypes.bool,
-  commandButtons: _react.PropTypes.arrayOf(_react.PropTypes.element),
-  timeout: _react.PropTypes.number,
-  caption: _react.PropTypes.string,
-  style: _react.PropTypes.object,
-  onClose: _react.PropTypes.func
+  isShow: _propTypes2.default.bool,
+  isWithButton: _propTypes2.default.bool,
+  isNotUpdate: _propTypes2.default.bool,
+  withoutClose: _propTypes2.default.bool,
+  commandButtons: _propTypes2.default.arrayOf(_propTypes2.default.element),
+  timeout: _propTypes2.default.number,
+  caption: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = ModalDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\ModalDialog.js.map

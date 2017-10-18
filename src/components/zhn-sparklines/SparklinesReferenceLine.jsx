@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { hm as dataProcessing } from './dataProcessing/index';
 
 const SparklinesReferenceLine = (props) => {
@@ -17,9 +18,9 @@ const SparklinesReferenceLine = (props) => {
 }
 
 SparklinesReferenceLine.propTypes = {
-    type: React.PropTypes.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
-    value: React.PropTypes.number,
-    style: React.PropTypes.object
+    type: PropTypes.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
+    value: PropTypes.number,
+    style: PropTypes.object
 };
 
 SparklinesReferenceLine.defaultProps = {

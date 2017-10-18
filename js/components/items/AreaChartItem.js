@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _safeGet = require('../../utils/safeGet');
 
 var _safeGet2 = _interopRequireDefault(_safeGet);
@@ -519,20 +523,20 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 }, _temp);
 process.env.NODE_ENV !== "production" ? AreaChartItem.propTypes = {
-  caption: _react.PropTypes.string,
-  chartType: _react.PropTypes.string,
-  config: _react.PropTypes.shape({
-    zhConfig: _react.PropTypes.shape({
-      dataSource: _react.PropTypes.string,
-      itemCaption: _react.PropTypes.string
+  caption: _propTypes2.default.string,
+  chartType: _propTypes2.default.string,
+  config: _propTypes2.default.shape({
+    zhConfig: _propTypes2.default.shape({
+      dataSource: _propTypes2.default.string,
+      itemCaption: _propTypes2.default.string
     })
   }),
-  onAddToWatch: _react.PropTypes.func,
-  onSetActive: _react.PropTypes.func,
-  onShowConfigDialog: _react.PropTypes.func,
-  onCloseItem: _react.PropTypes.func,
-  isAdminMode: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.bool]),
-  crValueMoving: _react.PropTypes.func
+  onAddToWatch: _propTypes2.default.func,
+  onSetActive: _propTypes2.default.func,
+  onShowConfigDialog: _propTypes2.default.func,
+  onCloseItem: _propTypes2.default.func,
+  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
+  crValueMoving: _propTypes2.default.func
 } : void 0;
 exports.default = AreaChartItem;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\AreaChartItem.js.map

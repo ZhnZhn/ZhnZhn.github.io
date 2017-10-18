@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const Style = {
+const S = {
   ROOT : {
     display : 'inline-block',
     border : '1px solid',
@@ -48,24 +48,25 @@ class LegendItem extends Component {
 
   render(){
     const { item } = this.props
+        , { color, name } = item
         , { isVisible } = this.state
         , _styleRoot = (isVisible)
-            ?  { color: item.color, borderColor: item.color, borderWidth: '2px', fontWeight: 'bold'}
-            :  { color: item.color, borderColor: 'gray', borderWidth: '1px', fontWeight: 'normal' }
+            ?  { color: color, borderColor: color, borderWidth: '2px', fontWeight: 'bold'}
+            :  { color: color, borderColor: 'gray', borderWidth: '1px', fontWeight: 'normal' }
         , _styleCircle = (isVisible)
-            ? { backgroundColor: item.color, borderColor: item.color}
+            ? { backgroundColor: color, borderColor: color}
             : { backgroundColor: 'gray', borderColor: 'gray' };
     return (
       <span
-         style={Object.assign({}, Style.ROOT, _styleRoot)}
+         style={{...S.ROOT, ..._styleRoot}}
          onClick={this._handleClickItem}
       >
-        <span style={Object.assign({}, Style.CIRCLE, _styleCircle)}>
+        <span style={{...S.CIRCLE, ..._styleCircle}}>
         </span>
         <span
-          style={Style.ITEM}
+          style={S.ITEM}
         >
-           {item.name}
+           {name}
         </span>
      </span>
     )

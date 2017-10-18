@@ -1,14 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
 import { LoadType } from '../../constants/Type';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import RowInputSelect from './RowInputSelect';
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-import Button from './Button';
+import D from './DialogCell'
 
 import withValidationLoad from './decorators/withValidationLoad';
 
@@ -45,8 +43,8 @@ class UsStocksBySectorDialog extends Component {
          , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
 
      this._commandButtons = [
-       <Button.Load onClick={this._handleLoad} />,
-       <Button.Show onClick={props.data.onShow} />
+       <D.Button.Load onClick={this._handleLoad} />,
+       <D.Button.Show onClick={props.data.onShow} />
      ]
      this.state = {
        initFromDate : _initFromDate,
@@ -131,19 +129,19 @@ class UsStocksBySectorDialog extends Component {
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
-        <RowInputSelect
-           caption="Data Source"
+        <D.RowInputSelect
+           caption="Source"
            placeholder="Default: WIKI"
            options={sourceOptions}
            onSelect={this._handleSelectDataSource}
         />
-        <DatesFragment
+        <D.DatesFragment
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
             onTestDate={onTestDate}
         />
-        <ValidationMessages
+        <D.ValidationMessages
             validationMessages={validationMessages}
         />
       </ModalDialog>

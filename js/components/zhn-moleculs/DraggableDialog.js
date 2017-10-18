@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -154,12 +158,12 @@ var DraggableDialog = function (_Component) {
 }(_react.Component);
 
 process.env.NODE_ENV !== "production" ? DraggableDialog.propTypes = {
-  isShow: _react.PropTypes.bool,
-  caption: _react.PropTypes.string,
-  children: _react.PropTypes.oneOfType([_react.PropTypes.arrayOf(_react.PropTypes.node), _react.PropTypes.node]),
-  commandButtons: _react.PropTypes.arrayOf(_react.PropTypes.element),
-  onShowChart: _react.PropTypes.func,
-  onClose: _react.PropTypes.func
+  isShow: _propTypes2.default.bool,
+  caption: _propTypes2.default.string,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]),
+  commandButtons: _propTypes2.default.arrayOf(_propTypes2.default.element),
+  onShowChart: _propTypes2.default.func,
+  onClose: _propTypes2.default.func
 } : void 0;
 exports.default = DraggableDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\DraggableDialog.js.map

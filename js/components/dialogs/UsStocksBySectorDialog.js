@@ -26,6 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -40,21 +44,9 @@ var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 
-var _RowInputSelect = require('./RowInputSelect');
+var _DialogCell = require('./DialogCell');
 
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _DatesFragment = require('../zhn-moleculs/DatesFragment');
-
-var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withValidationLoad = require('./decorators/withValidationLoad');
 
@@ -91,7 +83,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
         _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
         _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
 
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_Button2.default.Show, { onClick: props.data.onShow })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_DialogCell2.default.Button.Show, { onClick: props.data.onShow })];
     _this.state = {
       initFromDate: _initFromDate,
       initToDate: _initToDate,
@@ -138,13 +130,13 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_RowInputSelect2.default, {
-          caption: 'Data Source',
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          caption: 'Source',
           placeholder: 'Default: WIKI',
           options: sourceOptions,
           onSelect: this._handleSelectDataSource
         }),
-        _react2.default.createElement(_DatesFragment2.default, {
+        _react2.default.createElement(_DialogCell2.default.DatesFragment, {
           ref: function ref(c) {
             return _this2.datesFragment = c;
           },
@@ -152,7 +144,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           initToDate: initToDate,
           onTestDate: onTestDate
         }),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );
@@ -228,10 +220,10 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
 }, _temp)) || _class;
 
 process.env.NODE_ENV !== "production" ? UsStocksBySectorDialog.propTypes = {
-  isShow: _react.PropTypes.bool.isRequired,
-  data: _react.PropTypes.object.isRequired,
-  store: _react.PropTypes.object,
-  onClose: _react.PropTypes.func.isRequired
+  isShow: _propTypes2.default.bool.isRequired,
+  data: _propTypes2.default.object.isRequired,
+  store: _propTypes2.default.object,
+  onClose: _propTypes2.default.func.isRequired
 } : void 0;
 exports.default = UsStocksBySectorDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map

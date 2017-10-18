@@ -20,57 +20,29 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
+var _propTypes = require('prop-types');
 
-var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
+var _DialogCell = require('./DialogCell');
 
-var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _Button = require('./Button');
+var _Decorators = require('./decorators/Decorators');
 
-var _Button2 = _interopRequireDefault(_Button);
-
-var _SelectWithLoad = require('./SelectWithLoad');
-
-var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
-
-var _DatesFragment = require('../zhn-moleculs/DatesFragment');
-
-var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
-
-var _RowCheckBox = require('./RowCheckBox');
-
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _withToolbar = require('./decorators/withToolbar');
-
-var _withToolbar2 = _interopRequireDefault(_withToolbar);
-
-var _withValidationLoad = require('./decorators/withValidationLoad');
-
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
-var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.default)(_class = function (_Component) {
+var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(DialogType4, _Component);
 
   function DialogType4(props) {
@@ -148,7 +120,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowDate: true,
       isShowOptions: false,
@@ -195,7 +167,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
 
 
       return _react2.default.createElement(
-        _DraggableDialog2.default,
+        _DialogCell2.default.DraggableDialog,
         {
           caption: caption,
           isShow: isShow,
@@ -204,10 +176,10 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_ToolbarButtonCircle2.default, {
+        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: oneURI,
           jsonProp: oneJsonProp,
@@ -215,7 +187,7 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           optionNames: 'Stocks',
           onSelect: this._handleSelectOne
         }),
-        _react2.default.createElement(_SelectWithLoad2.default, {
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           uri: twoURI,
           jsonProp: twoJsonProp,
@@ -225,9 +197,9 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           onSelect: this._handleSelectTwo
         }),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
-          _react2.default.createElement(_DatesFragment2.default, {
+          _react2.default.createElement(_DialogCell2.default.DatesFragment, {
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
@@ -238,42 +210,41 @@ var DialogType4 = (0, _withToolbar2.default)(_class = (0, _withValidationLoad2.d
           })
         ),
         _react2.default.createElement(
-          _ShowHide2.default,
+          _DialogCell2.default.ShowHide,
           { isShow: isShowOptions },
-          _react2.default.createElement(_RowCheckBox2.default, {
+          _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
             initValue: false,
             caption: 'Add Seria with Second YAxis',
             onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
             onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
           })
         ),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
       );
     }
   }]);
   return DialogType4;
-}(_react.Component)) || _class) || _class;
-
+}(_react.Component)) || _class) || _class);
 process.env.NODE_ENV !== "production" ? DialogType4.propTypes = {
-  isShow: _react.PropTypes.bool,
-  caption: _react.PropTypes.string,
+  isShow: _propTypes2.default.bool,
+  caption: _propTypes2.default.string,
 
-  oneCaption: _react.PropTypes.string,
-  oneURI: _react.PropTypes.string,
-  oneJsonProp: _react.PropTypes.string,
-  twoCaption: _react.PropTypes.string,
-  twoURI: _react.PropTypes.string,
-  twoJsonProp: _react.PropTypes.string,
+  oneCaption: _propTypes2.default.string,
+  oneURI: _propTypes2.default.string,
+  oneJsonProp: _propTypes2.default.string,
+  twoCaption: _propTypes2.default.string,
+  twoURI: _propTypes2.default.string,
+  twoJsonProp: _propTypes2.default.string,
 
-  initFromDate: _react.PropTypes.string,
-  initToDate: _react.PropTypes.string,
-  msgOnNotValidFormat: _react.PropTypes.func,
-  onTestDate: _react.PropTypes.func,
-  onShow: _react.PropTypes.func,
+  initFromDate: _propTypes2.default.string,
+  initToDate: _propTypes2.default.string,
+  msgOnNotValidFormat: _propTypes2.default.func,
+  onTestDate: _propTypes2.default.func,
+  onShow: _propTypes2.default.func,
 
-  loadFn: _react.PropTypes.func
+  loadFn: _propTypes2.default.func
 } : void 0;
 exports.default = DialogType4;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map

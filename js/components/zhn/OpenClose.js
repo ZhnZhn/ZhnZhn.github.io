@@ -30,18 +30,28 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
+var CL = {
+  SHOW_POPUP: 'show-popup',
+  NOT_SELECTED: 'not-selected'
+};
+
+var DF = {
+  OPEN_COLOR: "yellow",
+  CLOSE_COLOR: "#4D4D4D"
+};
+
+var S = {
+  ROOT_DIV: {
     lineHeight: 2,
     backgroundColor: '#4D4D4D'
   },
-  rootSvg: {
+  ROOT_SVG: {
     display: 'inline-block',
     width: '16px',
     height: '16px',
     marginLeft: '8px'
   },
-  labelCaption: {
+  LABEL_CAPTION: {
     paddingLeft: '4px',
     verticalAlign: 'top',
     color: 'rgba(164, 135, 212, 1)',
@@ -50,8 +60,15 @@ var styles = {
     fontSize: '16px',
     cursor: 'pointer'
   },
-  itemRow: {
-    backgroundColor: '#404040'
+
+  INLINE_BLOCK: {
+    display: 'inline-block'
+  },
+  BLOCK: {
+    display: 'block'
+  },
+  NONE: {
+    display: 'none'
   }
 };
 
@@ -63,19 +80,25 @@ var OpenClose = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (OpenClose.__proto__ || Object.getPrototypeOf(OpenClose)).call(this));
 
-    _this._handleClickOpenClose = function () {
+    _this._handleClick = function () {
       _this.setState(function (prev) {
         return { isOpen: !prev.isOpen };
       });
     };
 
-    var isOpen = props.isClose ? false : true;
+    var isClose = props.isClose,
+        _props$openColor = props.openColor,
+        openColor = _props$openColor === undefined ? DF.OPEN_COLOR : _props$openColor,
+        _props$closeColor = props.closeColor,
+        closeColor = _props$closeColor === undefined ? DF.CLOSE_COLOR : _props$closeColor,
+        isOpen = isClose ? false : true;
+
     _this.state = {
       isOpen: isOpen,
+      openColor: openColor,
+      closeColor: closeColor,
       pathOpen: "M 2,14 L 14,14 14,2 2,14",
-      fillOpen: "yellow",
-      pathClose: "M 2,2 L 14,8 2,14 2,2",
-      fillClose: "#4D4D4D"
+      pathClose: "M 2,2 L 14,8 2,14 2,2"
     };
     return _this;
   }
@@ -84,64 +107,77 @@ var OpenClose = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          caption = _props.caption,
           rootStyle = _props.rootStyle,
+          caption = _props.caption,
+          CompAfter = _props.CompAfter,
           children = _props.children,
           _state = this.state,
           isOpen = _state.isOpen,
           pathOpen = _state.pathOpen,
-          fillOpen = _state.fillOpen,
           pathClose = _state.pathClose,
-          fillClose = _state.fillClose;
+          openColor = _state.openColor,
+          closeColor = _state.closeColor;
 
-      var pathV = void 0,
-          fillV = void 0,
-          displayDivStyle = void 0,
-          classShow = void 0;
+      var _pathV = void 0,
+          _fillV = void 0,
+          _rootChildStyle = void 0,
+          _rootChildCl = void 0;
       if (isOpen) {
-        pathV = pathOpen;
-        fillV = fillOpen;
-        displayDivStyle = 'block';
-        classShow = 'show-popup';
+        _pathV = pathOpen;
+        _fillV = openColor;
+        _rootChildStyle = S.BLOCK;
+        _rootChildCl = CL.SHOW_POPUP;
       } else {
-        pathV = pathClose;
-        fillV = fillClose;
-        displayDivStyle = 'none';
-        classShow = null;
+        _pathV = pathClose;
+        _fillV = closeColor;
+        _rootChildStyle = S.NONE;
+        _rootChildCl = null;
       }
 
       return _react2.default.createElement(
         'div',
-        { style: (0, _extends3.default)({}, styles.rootDiv, rootStyle) },
+        { style: (0, _extends3.default)({}, S.ROOT_DIV, rootStyle) },
         _react2.default.createElement(
           'div',
-          { className: 'not-selected', onClick: this._handleClickOpenClose },
+          { className: CL.NOT_SELECTED },
           _react2.default.createElement(
             'div',
-            { style: styles.rootSvg },
+            {
+              style: S.INLINE_BLOCK,
+              onClick: this._handleClick
+            },
             _react2.default.createElement(
-              'svg',
-              {
-                viewBox: '0 0 16 16', width: '100%', height: '100%',
-                preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg',
-                style: { display: 'inline-block' }
-              },
-              _react2.default.createElement('path', {
-                d: pathV,
-                fill: fillV,
-                strokeWidth: '1', stroke: 'yellow'
-              })
+              'div',
+              { style: S.ROOT_SVG },
+              _react2.default.createElement(
+                'svg',
+                {
+                  viewBox: '0 0 16 16', width: '100%', height: '100%',
+                  preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg',
+                  style: S.INLINE_BLOCK
+                },
+                _react2.default.createElement('path', {
+                  d: _pathV,
+                  fill: _fillV,
+                  strokeWidth: '1',
+                  stroke: openColor
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'span',
+              { style: S.LABEL_CAPTION },
+              caption
             )
           ),
-          _react2.default.createElement(
-            'span',
-            { style: styles.labelCaption },
-            caption
-          )
+          CompAfter
         ),
         _react2.default.createElement(
           'div',
-          { className: classShow, style: { display: displayDivStyle } },
+          {
+            className: _rootChildCl,
+            style: _rootChildStyle
+          },
           children
         )
       );

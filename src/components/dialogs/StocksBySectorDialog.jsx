@@ -1,17 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
 import { LoadType } from '../../constants/Type';
 
+import D from './DialogCell'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
-import ToolbarButtonCircle from './ToolbarButtonCircle';
-import ShowHide from '../zhn/ShowHide';
-import Row from './Row';
 import NasdaqLink from '../native-links/NasdaqLink';
-import DatesFragment from '../zhn-moleculs/DatesFragment';
-import ValidationMessages from '../zhn/ValidationMessages';
-import Button from './Button';
 
 import withValidationLoad from './decorators/withValidationLoad';
 
@@ -61,8 +57,8 @@ class StocksBySectorDialog extends Component {
        { caption: 'L', onClick: this._handleClickLink }
      ]
      this._commandButtons = [
-       <Button.Load onClick={this._handleLoad} />,
-       <Button.Show onClick={props.data.onShow} />
+       <D.Button.Load onClick={this._handleLoad} />,
+       <D.Button.Show onClick={props.data.onShow} />
      ]
      this.state = this._createInitialState(props)
    }
@@ -185,29 +181,29 @@ class StocksBySectorDialog extends Component {
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
-        <ToolbarButtonCircle
+        <D.ToolbarButtonCircle
           buttons={this.toolbarButtons}
         />
-        <Row.Text
+        <D.Row.Text
           styleRoot={STYLE.SOURCE_ROOT}
           caption="Source:"
           text={_source}
         />
-        <ShowHide isShow={isShowLink} style={STYLE.LINK_SHOW_HIDE}>
-          <Row.Plain style={STYLE.LINK_ROOT}>
+        <D.ShowHide isShow={isShowLink} style={STYLE.LINK_SHOW_HIDE}>
+          <D.Row.Plain style={STYLE.LINK_ROOT}>
             <span style={STYLE.LINK_CAPTION}>
               Link:
             </span>
             <NasdaqLink item={item} caption="NASDAQ" />
-          </Row.Plain>
-        </ShowHide>
-        <DatesFragment
+          </D.Row.Plain>
+        </D.ShowHide>
+        <D.DatesFragment
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}
             onTestDate={onTestDate}
         />
-        <ValidationMessages
+        <D.ValidationMessages
             validationMessages={validationMessages}
         />
       </ModalDialog>

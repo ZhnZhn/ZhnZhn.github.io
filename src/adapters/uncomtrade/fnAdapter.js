@@ -138,7 +138,7 @@ const fnAdapter = {
   toConfig(json, option){
     const config = this.crBaseConfig(json, option);
     this.addSeriasTo(config, json, option)
-
+    
     return config;
   }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import calcDirection from './dataProcessing/calcDirection';
 
 const SparklinesSpot = (props) => {
@@ -23,10 +24,10 @@ const SparklinesSpot = (props) => {
 }
 
 SparklinesSpot.propTypes = {
-    size: React.PropTypes.number,
-    style: React.PropTypes.object,
-    spotColors: React.PropTypes.object,
-    pointIndex: React.PropTypes.number
+    size: PropTypes.number,
+    style: PropTypes.object,
+    spotColors: PropTypes.object,
+    pointIndex: PropTypes.number
 };
 SparklinesSpot.defaultProps = {
     size: 2,
