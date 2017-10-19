@@ -54,7 +54,7 @@ class HeaderBar extends Component {
     this.setState({ isDS: false })
   }
 
-  _handleClickDynamic = (browserConfig) => {
+  _handleClickDynamic = (browserConfig) => {    
     BrowserActions.showBrowserDynamic(browserConfig)
     this.setState({ isDS: false })
   }

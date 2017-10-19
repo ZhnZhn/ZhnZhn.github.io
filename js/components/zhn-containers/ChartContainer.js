@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -27,10 +23,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
-
-var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
 var _ChartStore = require('../../flux/stores/ChartStore');
 
@@ -92,11 +84,13 @@ var styles = {
     overflowY: 'auto',
     height: '680px'
   },
-  transitionOption: {
-    transitionName: "scaleY",
-    transitionEnterTimeout: 400,
-    transitionLeave: false
+  /*
+  transitionOption : {
+    transitionName : "scaleY",
+    transitionEnterTimeout : 400,
+    transitionLeave : false
   },
+  */
   inlineBlock: {
     display: 'inline-block'
   },
@@ -248,10 +242,8 @@ var ChartContainer = function (_Component) {
             style: styles.scrollDiv
           },
           _react2.default.createElement(
-            _reactAddonsCssTransitionGroup2.default,
-            (0, _extends3.default)({}, styles.transitionOption, {
-              component: 'div'
-            }),
+            'div',
+            null,
             this._renderCharts()
           )
         )

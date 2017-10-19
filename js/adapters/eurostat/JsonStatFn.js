@@ -137,9 +137,7 @@ var JsonStatFn = {
         sGeo = _JsonStatFn$createGeo.sGeo;
 
     return _fnFetchHmIdCountry().then(function () {
-      return (0, _fnStyle.Box)(_combineToArr(dGeo.id, sGeo))
-      //.map( (arr) => sortBy(arr, ['value', 'id']))
-      .map(function (arr) {
+      return (0, _fnStyle.Box)(_combineToArr(dGeo.id, sGeo)).map(function (arr) {
         return arr.sort(_AdapterFn2.default.compareByValueId);
       }).fold(_splitForConfig);
     });

@@ -32,6 +32,10 @@ class BrowserContainer extends Component {
      }
   }
 
+  _renderBrowsers = (elBrowsers) => {
+    return elBrowsers.map(Comp => React.cloneElement(Comp));
+  }
+
   render(){
     const {
             store, showBrowserAction, updateBrowserAction,
@@ -56,7 +60,9 @@ class BrowserContainer extends Component {
               showAction={showBrowserAction}
               updateAction={updateWatchAction}
             />
-           {elBrowsers}
+           {/*elBrowsers*/}
+           {this._renderBrowsers(elBrowsers)}
+
            <DialogContainer
               maxDialog={3}
               store={store}

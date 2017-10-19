@@ -115,7 +115,6 @@ const JsonStatFn = {
 
     return _fnFetchHmIdCountry().then(() => {
        return Box( _combineToArr(dGeo.id, sGeo) )
-               //.map( (arr) => sortBy(arr, ['value', 'id']))
                .map(arr => arr.sort(AdapterFn.compareByValueId))
                .fold(_splitForConfig);
        });

@@ -35,7 +35,7 @@ const _fnFetchSourceMenu = function({ json, option, onCompleted }){
 
 BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function(option){
 
-   RouterDialog.loadDialogs(option.dialogsId)   
+   RouterDialog.loadDialogs(option.dialogsId)
    fetchJson({
      uri : option.sourceMenuUrl,
      option : option,

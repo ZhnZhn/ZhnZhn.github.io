@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ChartStore from '../../flux/stores/ChartStore';
 import { ChartActionTypes } from '../../flux/actions/ChartActions';
@@ -46,11 +45,13 @@ const styles = {
     overflowY: 'auto',
     height : '680px'
   },
+  /*
   transitionOption : {
     transitionName : "scaleY",
     transitionEnterTimeout : 400,
     transitionLeave : false
   },
+  */
   inlineBlock : {
     display : 'inline-block'
   },
@@ -178,17 +179,9 @@ class ChartContainer extends Component {
              ref={ node => this.spComp = node}
              style={styles.scrollDiv}
           >
-            {/*
             <div>
               { this._renderCharts() }
             </div>
-            */}
-            <ReactCSSTransitionGroup
-               {...styles.transitionOption}
-               component="div"
-            >
-               { this._renderCharts() }
-            </ReactCSSTransitionGroup>
           </ScrollPane>
 
         </div>

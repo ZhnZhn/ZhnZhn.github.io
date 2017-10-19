@@ -8,7 +8,6 @@ module.exports = {
   entry: {
      lib: [
             "react", "react-dom", "raven-js",
-            "react-addons-css-transition-group",
             "reflux",
             "fetch-jsonp",
             "big.js", "interact.js", "localforage", "query-string",

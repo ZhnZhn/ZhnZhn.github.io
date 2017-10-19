@@ -57,6 +57,12 @@ var BrowserContainer = function (_Component) {
       }
     };
 
+    _this._renderBrowsers = function (elBrowsers) {
+      return elBrowsers.map(function (Comp) {
+        return _react2.default.cloneElement(Comp);
+      });
+    };
+
     _this.state = {
       elBrowsers: []
     };
@@ -105,7 +111,7 @@ var BrowserContainer = function (_Component) {
           showAction: showBrowserAction,
           updateAction: updateWatchAction
         }),
-        elBrowsers,
+        this._renderBrowsers(elBrowsers),
         _react2.default.createElement(_DialogContainer2.default, {
           maxDialog: 3,
           store: store,
