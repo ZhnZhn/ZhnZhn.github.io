@@ -2,13 +2,13 @@
   "metrics" : [
     {
       "caption" : "GDP at market prices, M EUR",
-      "value" : "tec00001",
+      "value" : "tec00001?unit=CP_MEUR",
       "mapFrequency" : "Y",
       "mapValue" : "tec00001?unit=CP_MEUR",
       "mapSlice" : { "unit" : "CP_MEUR" }
     },{
       "caption" : "Compensation of employees, M EUR",
-      "value" : "tec00013",
+      "value" : "tec00013?unit=CP_MEUR",
       "mapFrequency" : "Y",
       "mapValue" : "tec00013?unit=CP_MEUR",
       "mapSlice" : { "unit" : "CP_MEUR" }
@@ -20,49 +20,49 @@
       "mapSlice" : { "unit" : "PC_GDP" }
     },{
       "caption" : "Taxes on production and imports less subsidies, M EUR",
-      "value" : "tec00016",
+      "value" : "tec00016?unit=CP_MEUR",
       "mapFrequency" : "Y",
       "mapValue" : "tec00016?unit=CP_MEUR",
       "mapSlice" : { "unit" : "CP_MEUR" }
     },{
       "caption" : "Taxes on production and imports less subsidies, % GDP",
-      "value" : "tec00016",
+      "value" : "tec00016?unit=PC_GDP",
       "mapFrequency" : "Y",
       "mapValue" : "tec00016?unit=PC_GDP",
       "mapSlice" : { "unit" : "PC_GDP" }
     },{
       "caption" : "Final consumption expenditure of households and non-profit institutions serving households, M EUR",
-      "value" : "tec00009",
+      "value" : "tec00009?unit=CP_MEUR",
       "mapFrequency" : "Y",
       "mapValue" : "tec00009?unit=CP_MEUR",
       "mapSlice" : { "unit" : "CP_MEUR" }
     },{
       "caption" : "Final consumption expenditure of households and non-profit institutions serving households, % GDP",
-      "value" : "tec00009",
+      "value" : "tec00009?unit=PC_GDP",
       "mapFrequency" : "Y",
       "mapValue" : "tec00009?unit=PC_GDP",
       "mapSlice" : { "unit" : "PC_GDP" }
     },{
       "caption" : "Final consumption expenditure of general government, M EUR",
-      "value" : "tec00010",
+      "value" : "tec00010?unit=CP_MEUR",
       "mapFrequency" : "Y",
       "mapValue" : "tec00010?unit=CP_MEUR",
       "mapSlice" : { "unit" : "CP_MEUR" }
     },{
       "caption" : "Final consumption expenditure of general government, % GDP",
-      "value" : "tec00010",
+      "value" : "tec00010?unit=PC_GDP",
       "mapFrequency" : "Y",
       "mapValue" : "tec00010?unit=PC_GDP",
       "mapSlice" : { "unit" : "PC_GDP" }
     },{
       "caption" : "Gross fixed capital formation (investments), M EUR",
-      "value" : "tec00011",
+      "value" : "tec00011?unit=CP_MEUR",
       "mapFrequency" : "Y",
       "mapValue" : "tec00011?unit=CP_MEUR",
       "mapSlice" : { "unit" : "CP_MEUR" }
     },{
       "caption" : "Gross fixed capital formation (investments), % GDP",
-      "value" : "tec00011",
+      "value" : "tec00011?unit=PC_GDP",
       "mapFrequency" : "Y",
       "mapValue" : "tec00011?unit=PC_GDP",
       "mapSlice" : { "unit" : "PC_GDP" }

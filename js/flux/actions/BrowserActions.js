@@ -15,6 +15,10 @@ var _reflux = require('reflux');
 
 var _reflux2 = _interopRequireDefault(_reflux);
 
+var _RouterModalDialog = require('../../components/dialogs/RouterModalDialog');
+
+var _RouterModalDialog2 = _interopRequireDefault(_RouterModalDialog);
+
 var _RouterDialog = require('../logic/RouterDialog');
 
 var _RouterDialog2 = _interopRequireDefault(_RouterDialog);
@@ -36,8 +40,9 @@ var BrowserActionTypes = exports.BrowserActionTypes = {
 
   UPDATE_WATCH_BROWSER: 'updateWatchBrowser'
 };
+var A = BrowserActionTypes;
 
-var BrowserActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, BrowserActionTypes.SHOW_BROWSER, {}), (0, _defineProperty3.default)(_Reflux$createActions, BrowserActionTypes.UPDATE_BROWSER_MENU, {}), (0, _defineProperty3.default)(_Reflux$createActions, BrowserActionTypes.SHOW_BROWSER_DYNAMIC, {}), (0, _defineProperty3.default)(_Reflux$createActions, BrowserActionTypes.INIT_BROWSER_DYNAMIC, {}), (0, _defineProperty3.default)(_Reflux$createActions, BrowserActionTypes.LOAD_BROWSER_DYNAMIC, { children: ['completed', 'failed'] }), (0, _defineProperty3.default)(_Reflux$createActions, BrowserActionTypes.UPDATE_WATCH_BROWSER, {}), _Reflux$createActions));
+var BrowserActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_BROWSER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.UPDATE_BROWSER_MENU, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_BROWSER_DYNAMIC, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.INIT_BROWSER_DYNAMIC, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_BROWSER_DYNAMIC, { children: ['completed', 'failed'] }), (0, _defineProperty3.default)(_Reflux$createActions, A.UPDATE_WATCH_BROWSER, {}), _Reflux$createActions));
 
 var _fnFetchSourceMenu = function _fnFetchSourceMenu(_ref) {
   var json = _ref.json,
@@ -48,11 +53,19 @@ var _fnFetchSourceMenu = function _fnFetchSourceMenu(_ref) {
   onCompleted({ json: json, browserType: browserType });
 };
 
-BrowserActions[BrowserActionTypes.LOAD_BROWSER_DYNAMIC].listen(function (option) {
+BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function (option) {
+  var browserType = option.browserType;
 
-  _RouterDialog2.default.loadDialogs(option.dialogsId);
+  _RouterModalDialog2.default.loadDialogs(browserType);
+  _RouterDialog2.default.loadDialogs(browserType);
+});
+
+BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
+  var sourceMenuUrl = option.sourceMenuUrl;
+  //RouterDialog.loadDialogs(dialogsId)
+
   (0, _fnFetch.fetchJson)({
-    uri: option.sourceMenuUrl,
+    uri: sourceMenuUrl,
     option: option,
     onFetch: _fnFetchSourceMenu,
     onCompleted: this.completed,

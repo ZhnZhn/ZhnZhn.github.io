@@ -8,6 +8,8 @@ var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
+var _Type = require('../../constants/Type');
+
 var _DialogType = require('../../components/dialogs/DialogType3');
 
 var _DialogType2 = _interopRequireDefault(_DialogType);
@@ -84,17 +86,17 @@ var _router = {
     });
   },
 
-  _loadAD: function _loadAD() {
+  _loadSM: function _loadSM() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === 'development') {
-      this.AD = System.import("js/components/stock-markets/AlphaDialogs.js").then(function (module) {
+      this.SM = System.import("js/components/stock-markets/AlphaDialogs.js").then(function (module) {
         return module.default;
       }).catch(function (err) {
         return console.log(MSG_OFFLINE);
       });
       /*eslint-enable no-undef */
     } else {
-      this.AD = System.import(
+      this.SM = System.import(
       /* webpackChunkName: "alpha-dialogs" */
       /* webpackMode: "lazy" */
       "../../components/stock-markets/AlphaDialogs").then(function (module) {
@@ -106,32 +108,32 @@ var _router = {
   },
 
   get AlphaIndicatorDialog() {
-    return this.AD.then(function (D) {
+    return this.SM.then(function (D) {
       return D.Indicator;
     });
   },
   get AlphaSectorDialog() {
-    return this.AD.then(function (D) {
+    return this.SM.then(function (D) {
       return D.Sector;
     });
   },
   get AlphaIntradayDialog() {
-    return this.AD.then(function (D) {
+    return this.SM.then(function (D) {
       return D.Intraday;
     });
   },
 
-  _loadESD: function _loadESD() {
+  _loadES: function _loadES() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === 'development') {
-      this.ESD = System.import("js/components/eurostat/EurostatDialogs.js").then(function (module) {
+      this.ES = System.import("js/components/eurostat/EurostatDialogs.js").then(function (module) {
         return module.default;
       }).catch(function (err) {
         return console.log(MSG_OFFLINE);
       });
       /*eslint-enable no-undef */
     } else {
-      this.ESD = System.import(
+      this.ES = System.import(
       /* webpackChunkName: "eurostat-dialogs" */
       /* webpackMode: "lazy" */
       "../../components/eurostat/EurostatDialogs").then(function (module) {
@@ -143,27 +145,27 @@ var _router = {
   },
 
   get DialogEurostat() {
-    return this.ESD.then(function (D) {
+    return this.ES.then(function (D) {
       return D.Eurostat;
     });
   },
   get DialogEurostat2() {
-    return this.ESD.then(function (D) {
+    return this.ES.then(function (D) {
       return D.Eurostat2;
     });
   },
   get DialogEurostat3() {
-    return this.ESD.then(function (D) {
+    return this.ES.then(function (D) {
       return D.Eurostat3;
     });
   },
 
-  loadDialogs: function loadDialogs(dialogsId) {
-    switch (dialogsId) {
-      case 'ALPHA':
-        this._loadAD();break;
-      case 'EUROSTAT':
-        this._loadESD();break;
+  loadDialogs: function loadDialogs(browserType) {
+    switch (browserType) {
+      case _Type.BrowserType.STOCK_MARKETS:
+        this._loadSM();break;
+      case _Type.BrowserType.EUROSTAT:
+        this._loadES();break;
       default:
         return undefined;
     }
@@ -178,8 +180,8 @@ var RouterDialog = {
       return Promise.resolve(_router['DEFAULT']);
     }
   },
-  loadDialogs: function loadDialogs(dialogsId) {
-    _router.loadDialogs(dialogsId);
+  loadDialogs: function loadDialogs(browserType) {
+    _router.loadDialogs(browserType);
   }
 };
 

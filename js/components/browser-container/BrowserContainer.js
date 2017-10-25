@@ -30,10 +30,6 @@ var _QuandlBrowser = require('../quandl-browser/QuandlBrowser');
 
 var _QuandlBrowser2 = _interopRequireDefault(_QuandlBrowser);
 
-var _WatchBrowser = require('../watch-browser/WatchBrowser');
-
-var _WatchBrowser2 = _interopRequireDefault(_WatchBrowser);
-
 var _DialogContainer = require('../zhn-containers/DialogContainer');
 
 var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
@@ -88,7 +84,6 @@ var BrowserContainer = function (_Component) {
           store = _props.store,
           showBrowserAction = _props.showBrowserAction,
           updateBrowserAction = _props.updateBrowserAction,
-          updateWatchAction = _props.updateWatchAction,
           showDialogAction = _props.showDialogAction,
           onCloseDialog = _props.onCloseDialog,
           elBrowsers = this.state.elBrowsers;
@@ -104,13 +99,6 @@ var BrowserContainer = function (_Component) {
           showAction: showBrowserAction,
           updateAction: updateBrowserAction
         }),
-        _react2.default.createElement(_WatchBrowser2.default, {
-          browserType: _Type.BrowserType.WATCH_LIST,
-          caption: 'Watch List',
-          store: store,
-          showAction: showBrowserAction,
-          updateAction: updateWatchAction
-        }),
         this._renderBrowsers(elBrowsers),
         _react2.default.createElement(_DialogContainer2.default, {
           maxDialog: 3,
@@ -123,6 +111,8 @@ var BrowserContainer = function (_Component) {
   }]);
   return BrowserContainer;
 }(_react.Component);
+//import WatchBrowser from '../watch-browser/WatchBrowser';
+
 
 exports.default = BrowserContainer;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-container\BrowserContainer.js.map

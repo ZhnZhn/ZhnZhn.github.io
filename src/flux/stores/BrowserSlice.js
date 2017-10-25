@@ -83,7 +83,7 @@ const BrowserSlice = {
     }
   },
 
-  getSourceConfig(browserId, sourceId){    
+  getSourceConfig(browserId, sourceId){
     if (sourceId.indexOf(BrowserType.STOCKS_BY_SECTORS) > 0){
       return BrowserConfig[browserId];
     }
@@ -98,9 +98,18 @@ const BrowserSlice = {
   onShowBrowserDynamic(option){
     const { browserType } = option;
     if (!this.browserMenu[browserType]) {
-       const elBrowser = Factory.createBrowserDynamic(option);
-       this.browserMenu[browserType] = [];
-       this.trigger(BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
+      Factory.crAsyncBrowser(option)
+        .then(elBrowser => {
+           this.browserMenu[browserType] = [];
+           this.trigger(
+              BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+              elBrowser
+           );
+        })
+        .catch(err => {
+          //this.showAlertDialog(option);
+          console.log(err)
+        })       
     } else {
        this.trigger(BrowserActionTypes.SHOW_BROWSER_DYNAMIC, browserType);
     }

@@ -32,11 +32,13 @@ var WatchActionTypes = exports.WatchActionTypes = {
   CREATE_LIST: 'createList',
   RENAME_LIST: 'renameList',
   DELETE_LIST: 'deleteList',
+
   EDIT_WATCH_COMPLETED: 'editWatchCompleted',
   EDIT_WATCH_FAILED: 'editWatchFailed'
 };
+var A = WatchActionTypes;
 
-var WatchActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.ADD_ITEM, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.REMOVE_ITEM, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.SAVE_WATCH, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.DRAG_DROP_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.DRAG_DROP_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.DRAG_DROP_ITEM, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.ADD_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.RENAME_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.DELETE_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.CREATE_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.RENAME_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.DELETE_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.EDIT_WATCH_COMPLETED, {}), (0, _defineProperty3.default)(_Reflux$createActions, WatchActionTypes.EDIT_WATCH_FAILED, {}), _Reflux$createActions));
+var WatchActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.ADD_ITEM, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.REMOVE_ITEM, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SAVE_WATCH, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.DRAG_DROP_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.DRAG_DROP_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.DRAG_DROP_ITEM, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.ADD_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.RENAME_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.DELETE_GROUP, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CREATE_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.RENAME_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.DELETE_LIST, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.EDIT_WATCH_COMPLETED, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.EDIT_WATCH_FAILED, {}), _Reflux$createActions));
 
 exports.default = WatchActions;
-//# sourceMappingURL=WatchActions.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\WatchActions.js.map

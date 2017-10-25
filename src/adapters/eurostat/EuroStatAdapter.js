@@ -1,4 +1,5 @@
 import toArea from './toArea';
+import toAreaYearly from './toAreaYearly'
 import toColumn from './toColumn';
 import toBar from './toBar';
 import toMap from './toMap';
@@ -6,6 +7,7 @@ import toMap from './toMap';
 
 const _rToConfig = {
   AREA : toArea.createConfig,
+  AREA_YEARLY: toAreaYearly.createConfig,
   MAP : toMap.createConfig,
   COLUMN : toColumn.createConfig,
   BAR : toBar.createConfig

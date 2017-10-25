@@ -71,10 +71,9 @@ var MenuBrowserDynamic = function (_Component) {
           browserType = _this$props.browserType,
           caption = _this$props.caption,
           sourceMenuUrl = _this$props.sourceMenuUrl,
-          dialogsId = _this$props.dialogsId,
           onLoadMenu = _this$props.onLoadMenu;
 
-      onLoadMenu({ browserType: browserType, caption: caption, sourceMenuUrl: sourceMenuUrl, dialogsId: dialogsId });
+      onLoadMenu({ browserType: browserType, caption: caption, sourceMenuUrl: sourceMenuUrl });
     };
 
     _this._onStore = function (actionType, data) {

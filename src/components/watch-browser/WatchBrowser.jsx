@@ -12,10 +12,7 @@ import OpenClose2 from '../zhn/OpenClose2';
 import EditBar from './EditBar';
 import WatchItem from './WatchItem';
 
-import withDnDStyle from './decorators/withDnDStyle';
-import withDnDGroup from './decorators/withDnDGroup';
-import withDnDList from './decorators/withDnDList';
-import withDnDItem from './decorators/withDnDItem';
+import Decor from './decorators/Decorators';
 
 const C_FILL_OPEN = '#80c040';
 const CL_WATCH_ITEM = 'row__type2-topic not-selected';
@@ -26,45 +23,45 @@ const DRAG = {
   ITEM : 'ITEM'
 };
 
-const styles = {
-  browser : {
+const S = {
+  BROWSER: {
     paddingRight: '0px'
   },
-  btCircle : {
+  BT_CIRCLE: {
     marginLeft: '20px',
     position: 'relative',
     top: '-2px'
   },
-  scrollDiv : {
+  SCROLL_DIV: {
     overflowY: 'auto',
     height: '92%',
     paddingRight: '10px'
   },
-  groupDiv : {
+  GROUP_DIV: {
     lineHeight : 2
   },
-  listDiv : {
+  LIST_DIV: {
     marginLeft : '8px',
     paddingLeft : '12px',
     borderLeft : '1px solid yellow',
     lineHeight : 2
   },
-  itemNotSelected : {
+  ITEM_NOT_SELECTED: {
     borderBottom : '1px solid rgba(128, 192, 64, 0.6)',
     marginRight : '10px'
   }
 };
 
-@withDnDStyle
-@withDnDGroup(DRAG, WatchActions)
-@withDnDList(DRAG, WatchActions)
-@withDnDItem(DRAG, WatchActions)
+@Decor.withDnDStyle
+@Decor.withDnDGroup(DRAG, WatchActions)
+@Decor.withDnDList(DRAG, WatchActions)
+@Decor.withDnDItem(DRAG, WatchActions)
 class WatchBrowser extends Component {
 
   constructor(props){
     super()
 
-    this._handlerDragStartGroup =this._handlerDragStartGroup.bind(this)
+    this._handlerDragStartGroup = this._handlerDragStartGroup.bind(this)
     this._handlerDropGroup = this._handlerDropGroup.bind(this)
     this._handlerDragEnterGroup = this._handlerDragEnterGroup.bind(this)
     this._handlerDragLeaveGroup = this._handlerDragLeaveGroup.bind(this)
@@ -80,7 +77,7 @@ class WatchBrowser extends Component {
     this._handlerDragLeaveItem = this._handlerDragLeaveItem.bind(this)
 
     this.state = {
-      isShow : false,
+      isShow : !!props.isInitShow,
       isModeEdit : false,
       watchList : props.store.getWatchList()
     }
@@ -129,7 +126,7 @@ class WatchBrowser extends Component {
        return (
                <OpenClose2
                   key={index}
-                  style={styles.groupDiv}
+                  style={S.GROUP_DIV}
                   caption={caption}
                   isClose={true}
                   isDraggable={isModeEdit}
@@ -154,8 +151,8 @@ class WatchBrowser extends Component {
         <OpenClose2
            key={index}
            fillOpen={C_FILL_OPEN}
-           style={styles.listDiv}
-           styleNotSelected={styles.itemNotSelected}
+           style={S.LIST_DIV}
+           styleNotSelected={S.ITEM_NOT_SELECTED}
            caption={caption}
            isClose={true}
            isDraggable={isModeEdit}
@@ -206,9 +203,9 @@ class WatchBrowser extends Component {
   render(){
     const { caption } = this.props
         , { isShow, isModeEdit, watchList } = this.state
-        , _captionEV = (isModeEdit) ? 'V' : 'E';
+        , _captionEV = isModeEdit ? 'V' : 'E';
     return (
-       <Browser isShow={isShow} style={styles.browser}>
+       <Browser isShow={isShow} style={S.BROWSER}>
           <BrowserCaption
             caption={caption}
             onClose={this._handlerHide}
@@ -216,13 +213,13 @@ class WatchBrowser extends Component {
            <ButtonCircle
              caption="S"
              title="Save to LocalStorage"
-             style={styles.btCircle}
+             style={S.BT_CIRCLE}
              onClick={this._handlerSaveWatch}
            />
            <ButtonCircle
               caption={_captionEV}
               title="Toggle Edit Mode: E/V"
-              style={styles.btCircle}
+              style={S.BT_CIRCLE}
               onClick={this._handlerToggleEditMode}
            />
          </BrowserCaption>
@@ -231,7 +228,7 @@ class WatchBrowser extends Component {
             onClickGroup={this._handlerEditGroup}
             onClickList={this._handlerEditList}
          />
-         <ScrollPane style={styles.scrollDiv}>
+         <ScrollPane style={S.SCROLL_DIV}>
            {watchList && this._renderWatchList(watchList)}
          </ScrollPane>
       </Browser>

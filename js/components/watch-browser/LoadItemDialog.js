@@ -21,14 +21,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _class2, _temp, _initialiseProps;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _DateUtils = require('../../utils/DateUtils');
 
@@ -72,6 +69,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(LoadItemDialog, _Component);
+
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    data: PropTypes.shape({
+      fromDate: PropTypes.string,
+      initToDate: PropTypes.string,
+      onTestDate: PropTypes.func
+    }),
+    store: PropTypes.object,
+    onClose: PropTypes.func
+  }
+  */
 
   function LoadItemDialog(props) {
     (0, _classCallCheck3.default)(this, LoadItemDialog);
@@ -209,15 +219,5 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
   };
 }, _temp)) || _class;
 
-process.env.NODE_ENV !== "production" ? LoadItemDialog.propTypes = {
-  isShow: _propTypes2.default.bool,
-  data: _propTypes2.default.shape({
-    fromDate: _propTypes2.default.string,
-    initToDate: _propTypes2.default.string,
-    onTestDate: _propTypes2.default.func
-  }),
-  store: _propTypes2.default.object,
-  onClose: _propTypes2.default.func
-} : void 0;
 exports.default = LoadItemDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\LoadItemDialog.js.map

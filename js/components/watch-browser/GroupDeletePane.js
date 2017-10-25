@@ -24,30 +24,28 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _Atoms = require('./Atoms');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _RowInputSelect = require('./RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _RowButtons = require('./RowButtons');
-
-var _RowButtons2 = _interopRequireDefault(_RowButtons);
+var _Atoms2 = _interopRequireDefault(_Atoms);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GroupDeletePane = function (_Component) {
   (0, _inherits3.default)(GroupDeletePane, _Component);
+
+  /*
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchGroups: PropTypes.func
+    }),
+    actionCompleted: PropTypes.string,
+    forActionType: PropTypes.string,
+    msgOnNotSelect: PropTypes.func,
+    onDelete: PropTypes.func,
+    onClose: PropTypes.func
+  }
+  */
 
   function GroupDeletePane(props) {
     (0, _classCallCheck3.default)(this, GroupDeletePane);
@@ -95,7 +93,7 @@ var GroupDeletePane = function (_Component) {
     };
 
     _this.caption = null;
-    _this._primaryBt = _react2.default.createElement(_Button2.default.Primary, {
+    _this._primaryBt = _react2.default.createElement(_Atoms2.default.Button.Primary, {
       caption: 'Delete',
       title: 'Delete Group',
       onClick: _this._handleDeleteGroup
@@ -129,16 +127,15 @@ var GroupDeletePane = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_Atoms2.default.RowInputSelect, {
           caption: 'Group:',
-          options: groupOptions
-          //isUpdateOptions={true}
-          , onSelect: this._handleSelectGroup
+          options: groupOptions,
+          onSelect: this._handleSelectGroup
         }),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_Atoms2.default.ValidationMessages, {
           validationMessages: validationMessages
         }),
-        _react2.default.createElement(_RowButtons2.default, {
+        _react2.default.createElement(_Atoms2.default.RowButtons, {
           Primary: this._primaryBt,
           withoutClear: true,
           onClose: onClose
@@ -148,17 +145,7 @@ var GroupDeletePane = function (_Component) {
   }]);
   return GroupDeletePane;
 }(_react.Component);
+//import PropTypes from "prop-types";
 
-process.env.NODE_ENV !== "production" ? GroupDeletePane.propTypes = {
-  store: _propTypes2.default.shape({
-    listen: _propTypes2.default.func,
-    getWatchGroups: _propTypes2.default.func
-  }),
-  actionCompleted: _propTypes2.default.string,
-  forActionType: _propTypes2.default.string,
-  msgOnNotSelect: _propTypes2.default.func,
-  onDelete: _propTypes2.default.func,
-  onClose: _propTypes2.default.func
-} : void 0;
 exports.default = GroupDeletePane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\GroupDeletePane.js.map

@@ -10,7 +10,6 @@ const _crTimeIndexAndValue = json => {
   return { timeIndex, value };
 }
 
-
 const toArea = {
    createConfig: (json, option) => {
      const { timeIndex, value } = _crTimeIndexAndValue(json)

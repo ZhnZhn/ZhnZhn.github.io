@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-import RowInputSelect from './RowInputSelect'
-import RowInputText from './RowInputText'
-import ValidationMessages from '../zhn/ValidationMessages'
-import Button from './Button'
-import RowButtons from './RowButtons'
+import A from './Atoms'
 
 class ListCreatePane extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func,
@@ -21,11 +18,12 @@ class ListCreatePane extends Component {
     onCreate: PropTypes.func,
     onClose: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
     this.captionGroup = null
-    this._primaryBt = <Button.Primary
+    this._primaryBt = <A.Button.Primary
                          caption="Create"
                          title="Create New List"
                          onClick={this._handleCreate}
@@ -99,20 +97,20 @@ class ListCreatePane extends Component {
         , { groupOptions, validationMessages } = this.state;
     return (
       <div>
-        <RowInputSelect
+        <A.RowInputSelect
            caption="In Group:"
            options={groupOptions}
            //isUpdateOptions={isUpdateGroup}
            onSelect={this._handleSelectGroup}
         />
-        <RowInputText
+        <A.RowInputText
            ref={c => this.inputText = c}
            caption="List:"
         />
-        <ValidationMessages
+        <A.ValidationMessages
           validationMessages={validationMessages}
         />
-        <RowButtons
+        <A.RowButtons
            Primary={this._primaryBt}
            onClear={this._handleClear}
            onClose={onClose}

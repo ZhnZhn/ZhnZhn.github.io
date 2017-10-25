@@ -13,7 +13,6 @@ import BrowserActions from '../../flux/actions/BrowserActions'
 import BrowserConfig from '../../constants/BrowserConfig'
 import { BrowserType, ModalDialog } from '../../constants/Type'
 
-
 const LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0"
     , CAPTION = "ERC v0.14.0";
 
@@ -54,13 +53,8 @@ class HeaderBar extends Component {
     this.setState({ isDS: false })
   }
 
-  _handleClickDynamic = (browserConfig) => {    
+  _handleClickDynamic = (browserConfig) => {
     BrowserActions.showBrowserDynamic(browserConfig)
-    this.setState({ isDS: false })
-  }
-
-  _handleClickWatch = () => {
-    BrowserActions.showBrowser(BrowserType.WATCH_LIST)
     this.setState({ isDS: false })
   }
 
@@ -135,7 +129,7 @@ class HeaderBar extends Component {
              caption="Watch"
              title="Watch List Browser"
              accessKey="w"
-             onClick={this._handleClickWatch}
+             onClick={this._handleClickDynamic.bind(null, BrowserConfig[BrowserType.WATCH_LIST])}
           />
           <HotBar
             store={store}
@@ -173,7 +167,6 @@ class HeaderBar extends Component {
               onClose={this._handleCloseDS}
               onClickQuandl={this._handleClickQuandl}
               onClickDynamic={this._handleClickDynamic}
-              onClickWatch={this._handleClickWatch}
               onClickAbout={this._handleClickAbout}
            />
       </div>

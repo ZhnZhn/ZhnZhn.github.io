@@ -1,0 +1,89 @@
+{
+  "metrics" : [
+    {
+      "caption" : "Gross electricity generation - Total (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107000",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107000",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107000" }
+    },{
+      "caption" : "Gross electricity generation - Hydro (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107001",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107001",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107001" }
+    },{
+      "caption" : "Gross electricity generation - Geothermal (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107002",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107002",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107002" }
+    },{
+      "caption" : "Gross electricity generation - Nuclear (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107003",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107003",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107003" }
+    },{
+      "caption" : "Gross electricity generation - Conventional Thermal (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107004",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107004",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107004" }
+    },{
+      "caption" : "Gross electricity generation - Wind (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107005",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107005",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107005" }
+    },{
+      "caption" : "Gross electricity generation - Hydro (of which from pumped storage) (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107006",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107006",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107006" }
+    },{
+      "caption" : "Net electricity generation - Total (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107100B",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107100B",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107100B" }
+    },        {
+      "caption" : "Net electricity generation - Wind - Total (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105" }
+    },{
+      "caption" : "Net electricity generation - Wind Onshore (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105A",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105A",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105A" }
+    },{
+      "caption" : "Net electricity generation - Wind Offshore (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105B",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105B",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105B" }
+    },{
+      "caption" : "Net electricity generation - Solar Ratiation - Total (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105C" }
+    },{
+      "caption" : "Net electricity generation - Solar Photovoltaic Installations (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C1",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C1",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105C1" }
+    },{
+      "caption" : "Net electricity generation - Solar Thermal Plants (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C2",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C2",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105C2" }
+    }
+  ]
+}

@@ -17,7 +17,7 @@ import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const PREV_BUILD = '19-10-2017';
+const PREV_BUILD = '25-10-2017';
 
 class AppErc extends Component {
 
@@ -51,7 +51,7 @@ class AppErc extends Component {
               showBrowserAction={BrowserActionTypes.SHOW_BROWSER}
               initBrowserAction={BrowserActionTypes.INIT_BROWSER_DYNAMIC}
               updateBrowserAction={BrowserActionTypes.UPDATE_BROWSER_MENU}
-              updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
+              //updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
               showDialogAction={ComponentActionTypes.SHOW_DIALOG}
               onCloseDialog={ComponentActions.closeDialog}
            />

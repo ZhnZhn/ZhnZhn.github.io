@@ -37,8 +37,7 @@ const _loadToChart = function(objImpl, option, onAdded, onFailed){
     uri : api.getRequestUrl(option),
     option : option,
     onCheckResponse : api.checkResponse,
-    onFetch : _fnFetchToChart.bind(null, objImpl),
-    //onFetch : _fnToChart,
+    onFetch : _fnFetchToChart.bind(null, objImpl),    
     onCompleted : onAdded,
     onCatch : fnCatch,
     onFailed : onFailed
@@ -60,7 +59,7 @@ const _fnFetchToChart = function(objImpl, { json, option, onCompleted }){
 }
 
 const loadItem = (objImpl) => {
-    return {
+   return {
       loadItem(option, onCompleted, onAdded, onFailed){
         const parentId = ChartStore.isLoadToChart();
         if (!parentId) {
@@ -72,7 +71,7 @@ const loadItem = (objImpl) => {
      },
      fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
      fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
-   }
+   };
 }
 
 export default loadItem

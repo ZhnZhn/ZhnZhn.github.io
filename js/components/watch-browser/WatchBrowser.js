@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _dec3, _class;
+var _dec, _dec2, _dec3, _dec4, _class;
 
 var _react = require('react');
 
@@ -64,21 +64,9 @@ var _WatchItem = require('./WatchItem');
 
 var _WatchItem2 = _interopRequireDefault(_WatchItem);
 
-var _withDnDStyle = require('./decorators/withDnDStyle');
+var _Decorators = require('./decorators/Decorators');
 
-var _withDnDStyle2 = _interopRequireDefault(_withDnDStyle);
-
-var _withDnDGroup = require('./decorators/withDnDGroup');
-
-var _withDnDGroup2 = _interopRequireDefault(_withDnDGroup);
-
-var _withDnDList = require('./decorators/withDnDList');
-
-var _withDnDList2 = _interopRequireDefault(_withDnDList);
-
-var _withDnDItem = require('./decorators/withDnDItem');
-
-var _withDnDItem2 = _interopRequireDefault(_withDnDItem);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -91,36 +79,36 @@ var DRAG = {
   ITEM: 'ITEM'
 };
 
-var styles = {
-  browser: {
+var S = {
+  BROWSER: {
     paddingRight: '0px'
   },
-  btCircle: {
+  BT_CIRCLE: {
     marginLeft: '20px',
     position: 'relative',
     top: '-2px'
   },
-  scrollDiv: {
+  SCROLL_DIV: {
     overflowY: 'auto',
     height: '92%',
     paddingRight: '10px'
   },
-  groupDiv: {
+  GROUP_DIV: {
     lineHeight: 2
   },
-  listDiv: {
+  LIST_DIV: {
     marginLeft: '8px',
     paddingLeft: '12px',
     borderLeft: '1px solid yellow',
     lineHeight: 2
   },
-  itemNotSelected: {
+  ITEM_NOT_SELECTED: {
     borderBottom: '1px solid rgba(128, 192, 64, 0.6)',
     marginRight: '10px'
   }
 };
 
-var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.default), _dec2 = (0, _withDnDList2.default)(DRAG, _WatchActions2.default), _dec3 = (0, _withDnDItem2.default)(DRAG, _WatchActions2.default), (0, _withDnDStyle2.default)(_class = _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
+var WatchBrowser = (_dec = _Decorators2.default.withDnDStyle, _dec2 = _Decorators2.default.withDnDGroup(DRAG, _WatchActions2.default), _dec3 = _Decorators2.default.withDnDList(DRAG, _WatchActions2.default), _dec4 = _Decorators2.default.withDnDItem(DRAG, _WatchActions2.default), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = function (_Component) {
   (0, _inherits3.default)(WatchBrowser, _Component);
 
   function WatchBrowser(props) {
@@ -164,7 +152,7 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
           _OpenClose2.default,
           {
             key: index,
-            style: styles.groupDiv,
+            style: S.GROUP_DIV,
             caption: caption,
             isClose: true,
             isDraggable: isModeEdit,
@@ -192,8 +180,8 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
           {
             key: index,
             fillOpen: C_FILL_OPEN,
-            style: styles.listDiv,
-            styleNotSelected: styles.itemNotSelected,
+            style: S.LIST_DIV,
+            styleNotSelected: S.ITEM_NOT_SELECTED,
             caption: caption,
             isClose: true,
             isDraggable: isModeEdit,
@@ -249,7 +237,7 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
     _this._handlerDragLeaveItem = _this._handlerDragLeaveItem.bind(_this);
 
     _this.state = {
-      isShow: false,
+      isShow: !!props.isInitShow,
       isModeEdit: false,
       watchList: props.store.getWatchList()
     };
@@ -304,7 +292,7 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
 
       return _react2.default.createElement(
         _Browser2.default,
-        { isShow: isShow, style: styles.browser },
+        { isShow: isShow, style: S.BROWSER },
         _react2.default.createElement(
           _BrowserCaption2.default,
           {
@@ -314,13 +302,13 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
           _react2.default.createElement(_ButtonCircle2.default, {
             caption: 'S',
             title: 'Save to LocalStorage',
-            style: styles.btCircle,
+            style: S.BT_CIRCLE,
             onClick: this._handlerSaveWatch
           }),
           _react2.default.createElement(_ButtonCircle2.default, {
             caption: _captionEV,
             title: 'Toggle Edit Mode: E/V',
-            style: styles.btCircle,
+            style: S.BT_CIRCLE,
             onClick: this._handlerToggleEditMode
           })
         ),
@@ -331,7 +319,7 @@ var WatchBrowser = (_dec = (0, _withDnDGroup2.default)(DRAG, _WatchActions2.defa
         }),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: styles.scrollDiv },
+          { style: S.SCROLL_DIV },
           watchList && this._renderWatchList(watchList)
         )
       );

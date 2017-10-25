@@ -61,7 +61,6 @@ var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
     option: option,
     onCheckResponse: api.checkResponse,
     onFetch: _fnFetchToChart.bind(null, objImpl),
-    //onFetch : _fnToChart,
     onCompleted: onAdded,
     onCatch: _fnCatch.fnCatch,
     onFailed: onFailed

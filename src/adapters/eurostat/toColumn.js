@@ -7,13 +7,13 @@ const toColumn = {
   createConfig : (json, option) => {
     const { zhMapSlice:configSlice, time='', subtitle='' } = option
     return JsonStatFn.trJsonToCategory(json, configSlice)
-             .then(({ categories, data, min }) => {
-                 const config = FactoryChart.createColumnConfig()
-                 EuroStatFn.setDataAndInfo({ config, data, json, option })
-                 EuroStatFn.setCategories({ config, categories, min, time, subtitle })
-                 EuroStatFn.colorEU({ config, categories })
-                 return config;
-             });
+       .then(({ categories, data, min }) => {
+          const config = FactoryChart.createColumnConfig()
+          EuroStatFn.setDataAndInfo({ config, data, json, option })
+          EuroStatFn.setCategories({ config, categories, min, time, subtitle })
+          EuroStatFn.colorEU({ config, categories })
+          return config;
+       });
   },
 
   createSeria : (json, option, chart) => {

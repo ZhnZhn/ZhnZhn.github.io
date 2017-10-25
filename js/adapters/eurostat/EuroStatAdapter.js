@@ -8,6 +8,10 @@ var _toArea = require('./toArea');
 
 var _toArea2 = _interopRequireDefault(_toArea);
 
+var _toAreaYearly = require('./toAreaYearly');
+
+var _toAreaYearly2 = _interopRequireDefault(_toAreaYearly);
+
 var _toColumn = require('./toColumn');
 
 var _toColumn2 = _interopRequireDefault(_toColumn);
@@ -24,6 +28,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _rToConfig = {
   AREA: _toArea2.default.createConfig,
+  AREA_YEARLY: _toAreaYearly2.default.createConfig,
   MAP: _toMap2.default.createConfig,
   COLUMN: _toColumn2.default.createConfig,
   BAR: _toBar2.default.createConfig

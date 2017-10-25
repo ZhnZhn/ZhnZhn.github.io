@@ -114,11 +114,6 @@ var HeaderBar = function (_Component) {
       _this.setState({ isDS: false });
     };
 
-    _this._handleClickWatch = function () {
-      _BrowserActions2.default.showBrowser(_Type.BrowserType.WATCH_LIST);
-      _this.setState({ isDS: false });
-    };
-
     _this._handleClickAbout = function () {
       _ComponentActions2.default.showAbout();
       _this.setState({ isDS: false });
@@ -202,7 +197,7 @@ var HeaderBar = function (_Component) {
           caption: 'Watch',
           title: 'Watch List Browser',
           accessKey: 'w',
-          onClick: this._handleClickWatch
+          onClick: this._handleClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.WATCH_LIST])
         }),
         _react2.default.createElement(_HotBar2.default, {
           store: store,
@@ -238,7 +233,6 @@ var HeaderBar = function (_Component) {
           onClose: this._handleCloseDS,
           onClickQuandl: this._handleClickQuandl,
           onClickDynamic: this._handleClickDynamic,
-          onClickWatch: this._handleClickWatch,
           onClickAbout: this._handleClickAbout
         })
       );

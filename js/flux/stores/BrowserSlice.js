@@ -116,12 +116,18 @@ var BrowserSlice = {
     this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER, browserType);
   },
   onShowBrowserDynamic: function onShowBrowserDynamic(option) {
+    var _this = this;
+
     var browserType = option.browserType;
 
     if (!this.browserMenu[browserType]) {
-      var elBrowser = _Factory2.default.createBrowserDynamic(option);
-      this.browserMenu[browserType] = [];
-      this.trigger(_BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
+      _Factory2.default.crAsyncBrowser(option).then(function (elBrowser) {
+        _this.browserMenu[browserType] = [];
+        _this.trigger(_BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
+      }).catch(function (err) {
+        //this.showAlertDialog(option);
+        console.log(err);
+      });
     } else {
       this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC, browserType);
     }

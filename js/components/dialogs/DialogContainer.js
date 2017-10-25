@@ -63,32 +63,44 @@ var DialogContainer = function (_Component) {
       currentDialog: null
     }, _this._onStore = function (actionType, option) {
       if (actionType === _ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG) {
-        var type = option.modalDialogType,
-            _this$state = _this.state,
-            inits = _this$state.inits,
-            shows = _this$state.shows,
-            data = _this$state.data,
-            dialogs = _this$state.dialogs;
+        (function () {
+          var type = option.modalDialogType,
+              _this$state = _this.state,
+              inits = _this$state.inits,
+              shows = _this$state.shows,
+              data = _this$state.data,
+              dialogs = _this$state.dialogs;
 
 
-        data[type] = option;
-        shows[type] = true;
-        if (inits[type]) {
-          _this.setState({
-            isShow: true, currentDialog: type,
-            shows: shows, data: data
-          });
-        } else {
-          dialogs.push({
-            type: type,
-            comp: _RouterModalDialog2.default[type]
-          });
-          inits[type] = true;
-          _this.setState({
-            isShow: true, currentDialog: type,
-            shows: shows, data: data, dialogs: dialogs
-          });
-        }
+          data[type] = option;
+          shows[type] = true;
+          if (inits[type]) {
+            _this.setState({
+              isShow: true, currentDialog: type,
+              shows: shows, data: data
+            });
+          } else {
+            _RouterModalDialog2.default.getDialog(type).then(function (comp) {
+              dialogs.push({ type: type, comp: comp });
+              inits[type] = true;
+              _this.setState({
+                isShow: true, currentDialog: type,
+                shows: shows, data: data, dialogs: dialogs
+              });
+            });
+            /*
+             dialogs.push({
+               type : type,
+               comp : RouterModalDialog[type]
+             });
+             inits[type] = true
+             this.setState({
+               isShow: true, currentDialog: type,
+               shows, data, dialogs
+             });
+             */
+          }
+        })();
       }
     }, _this._handleClose = function (type) {
       _this.state.shows[type] = false;
@@ -151,10 +163,10 @@ var DialogContainer = function (_Component) {
   return DialogContainer;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? DialogContainer.propTypes = {
+DialogContainer.propTypes = process.env.NODE_ENV !== "production" ? {
   store: _propTypes2.default.shape({
     listen: _propTypes2.default.func
   })
-} : void 0;
+} : {};
 exports.default = DialogContainer;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogContainer.js.map

@@ -43,8 +43,9 @@ const _splitForConfig = (arr) => {
      , min = Number.POSITIVE_INFINITY;
    arr.forEach((item) => {
      const { id, value } = item
-     categories.push(_fnIdToCountry(id));
-     data.push(value);
+         , country = _fnIdToCountry(id);
+     categories.push(country);     
+     data.push({ y: value, c: country })
      if (value>=max) { max = value; }
      if (value<=min) { min = value; }
    })
@@ -67,8 +68,10 @@ const _trHmToData = (hm, categories) => {
   categories.forEach((id) => {
     if (hm[id] != null){
       data.push(hm[id]);
+      //data.push({ y: hm[id], c: id });
     }
     else {
+      //data.push({ y: 0, c: id });
       data.push(0);
     }
   })

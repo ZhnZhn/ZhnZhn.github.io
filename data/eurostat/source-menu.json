@@ -17,7 +17,8 @@
         { "id" : "ES_E_INDIC" },
         { "id" : "ES_E_STAT_Q" },
         { "id" : "ES_E_STAT_PR" },
-        { "id" : "ES_I_ENERGY" }
+        { "id" : "ES_I_ENERGY" },
+        { "id" : "ES_I_ELECTRICITY_GENERATION" }
       ]
     },{
       "caption" : "Finance", "isInitClose" : true,
@@ -52,7 +53,8 @@
         "oneCaption" : "Country",
         "oneURI" : "./data/eurostat/countries.json",
         "oneJsonProp" : "countries",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "dataSource": "Eurostat"
       }
     },
 
@@ -215,13 +217,28 @@
       "menuTitle" : "Industry Energy",
       "dialogCaption" : "Industry Energy",
       "chartContainerCaption" : "Eurostat Industry Energy",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/industry-energy.json",
         "twoJsonProp" : "metrics",
-        "group" : "ei_isen_m"
+        "group" : "ei_isen_m",
+        "chartsType": "t2"
+      }
+    },
+   "ES_I_ELECTRICITY_GENERATION" : {
+      "type" : "ES_I_ELECTRICITY_GENERATION",
+      "menuTitle" : "Supply of Electricity",
+      "dialogCaption" : "Supply of Electricity",
+      "chartContainerCaption" : "Eurostat Supply of Electricity",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/electricity-generation.json",
+        "twoJsonProp" : "metrics",
+        "chartsType": "t2"
       }
     },
 

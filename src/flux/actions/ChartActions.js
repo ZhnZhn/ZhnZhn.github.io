@@ -17,14 +17,16 @@ export const ChartActionTypes = {
   CLOSE_CHART : 'closeChart',
 
   COPY: 'copy'
-}
+};
+const A = ChartActionTypes;
+const M = Msg.Alert;
 
 const _fnOnChangeStore = function(actionType, data){
-   if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED ||
-       actionType === ChartActionTypes.LOAD_STOCK_ADDED ||
-       actionType === ChartActionTypes.LOAD_STOCK_FAILED )
+   if (actionType === A.LOAD_STOCK_COMPLETED ||
+       actionType === A.LOAD_STOCK_ADDED ||
+       actionType === A.LOAD_STOCK_FAILED )
    {
-     ChartActions[ChartActionTypes.LOAD_STOCK].isLoading = false;
+     ChartActions[A.LOAD_STOCK].isLoading = false;
    }
 }
 
@@ -60,22 +62,22 @@ const _addSettings = (option) => {
 }
 
 const ChartActions =  Reflux.createActions({
-      [ChartActionTypes.LOAD_STOCK] : {
+      [A.LOAD_STOCK] : {
          children : ['completed', 'added', 'failed'],
          isLoading : false,
          idLoading : undefined,
          isShouldEmit : true,
          cancelLoad : _fnCancelLoad
        },
-      [ChartActionTypes.SHOW_CHART] : {},
-      [ChartActionTypes.CLOSE_CHART] : {},
-      [ChartActionTypes.COPY]: {},
-      [ChartActionTypes.PASTE_TO]: {}
+      [A.SHOW_CHART] : {},
+      [A.CLOSE_CHART] : {},
+      [A.COPY]: {},
+      [A.PASTE_TO]: {}
 });
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore
 
-ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function() {
+ChartActions[A.LOAD_STOCK].preEmit = function() {
   const arg = [].slice.call(arguments)
       , chartType = arg[0]
       , option = arg[2]
@@ -90,30 +92,30 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function() {
   _addSettings(option)
 
   if (option.loadId === 'B' && !option.apiKey){
-    this.cancelLoad(option, Msg.Alert.withoutApiKey('Barchart Market Data'), false);
+    this.cancelLoad(option, M.withoutApiKey('Barchart Market Data'), false);
   } else if ( (option.loadId === 'AL' || option.loadId === 'AL_S' || option.loadId === 'AL_I' ) && !option.apiKey) {
-    this.cancelLoad(option, Msg.Alert.withoutApiKey('Alpha Vantage'), false);
+    this.cancelLoad(option, M.withoutApiKey('Alpha Vantage'), false);
   } else if (option.isKeyFeature && !option.apiKey){
-    this.cancelLoad(option, Msg.Alert.FEATURE_WITHOUT_KEY, false);
+    this.cancelLoad(option, M.FEATURE_WITHOUT_KEY, false);
   } else if (option.isPremium && !option.apiKey){
-    this.cancelLoad(option, Msg.Alert.PREMIUM_WITHOUT_KEY, false);
+    this.cancelLoad(option, M.PREMIUM_WITHOUT_KEY, false);
   } else if (isDoublingLoad){
-    this.cancelLoad(option, Msg.Alert.LOADING_IN_PROGRESS, false);
+    this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta){
-    this.cancelLoad(option, Msg.Alert.DOUBLE_LOAD_META, false);
+    this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
   }  else if (!ChartStore.isLoadToChart()){
      if (ChartStore.isChartExist(chartType, key)){
-       this.cancelLoad(option, Msg.Alert.ALREADY_EXIST, true);
+       this.cancelLoad(option, M.ALREADY_EXIST, true);
      }
   }
 
   return undefined;
 }
 
-ChartActions[ChartActionTypes.LOAD_STOCK].shouldEmit = function(){
+ChartActions[A.LOAD_STOCK].shouldEmit = function(){
   return this.isShouldEmit;
 }
-ChartActions[ChartActionTypes.LOAD_STOCK].listen(function(chartType, browserType, option){
+ChartActions[A.LOAD_STOCK].listen(function(chartType, browserType, option){
 
   this.isLoading = true;
   this.idLoading = option.key;

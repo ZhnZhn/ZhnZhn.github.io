@@ -50,10 +50,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var DATE_PLACEHOLDER = 'Before Select Indicator',
     MAP_FREQUENCY_DF = 'M',
     AREA = 'AREA',
+    AREA_YEARLY = 'AREA_YEARLY',
     MAP = 'MAP',
     categoryTypes = ['MAP', 'COLUMN', 'BAR'];
 
 var chartTypeOptions = [{ caption: 'Default : Area', value: AREA }, { caption: 'Map : All Countries', value: MAP, compType: _Type.CompItemType.EUROSTAT_MAP }, { caption: 'Column : All Countries', value: 'COLUMN' }, { caption: 'Bar : All Countries', value: 'BAR' }];
+var chartTypeOptions2 = [{ caption: 'Default : Area', value: AREA }, { caption: 'Yearly by Months', value: AREA_YEARLY }];
 
 var isCategoryType = function isCategoryType(chartType) {
   if (!chartType) {
@@ -171,6 +173,14 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
 
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+
+    switch (props.chartsType) {
+      case 't2':
+        _this._chartOptions = chartTypeOptions2;break;
+      default:
+        _this._chartOptions = chartTypeOptions;
+    }
+
     _this.state = {
       isShowDate: false,
       dateDefault: DATE_PLACEHOLDER,
@@ -243,7 +253,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           caption: 'Chart Type',
           placeholder: 'Default: Area',
-          options: chartTypeOptions,
+          options: this._chartOptions,
           onSelect: this._handleSelectChartType
         }),
         _react2.default.createElement(

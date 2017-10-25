@@ -181,12 +181,11 @@ var Factory = {
   createChartContainer: function createChartContainer(dialogType, browserType) {
     return createChartContainerComp(_getDialogConf(dialogType), browserType);
   },
-  createBrowserDynamic: function createBrowserDynamic(option) {
+  _crBrowserDynamic: function _crBrowserDynamic(option) {
     var browserType = option.browserType,
         _option$caption = option.caption,
         caption = _option$caption === undefined ? 'Source Browser' : _option$caption,
         sourceMenuUrl = option.sourceMenuUrl,
-        dialogsId = option.dialogsId,
         chartContainerType = option.chartContainerType,
         modalDialogType = option.modalDialogType,
         itemOptionType = option.itemOptionType,
@@ -216,11 +215,49 @@ var Factory = {
       showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
       loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
       updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, //for Type
-      dialogsId: dialogsId,
       onLoadMenu: _BrowserActions2.default.loadBrowserDynamic,
       onShowLoadDialog: _ComponentActions2.default.showModalDialog //for Type2
 
     });
+  },
+  crAsyncBrowser: function crAsyncBrowser(option) {
+    var browserType = option.browserType;
+
+    switch (browserType) {
+      case _Type.BrowserType.WATCH_LIST:
+        /*eslint-disable no-undef */
+        if (process.env.NODE_ENV === 'development') {
+          return System.import("js/components/watch-browser/WatchBrowser.js").then(function (module) {
+            return _react2.default.createElement(module.default, {
+              key: browserType,
+              browserType: browserType,
+              caption: "Watch List",
+              isInitShow: true,
+              store: _ChartStore2.default,
+              //showAction: BAT.SHOW_BROWSER,
+              showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
+              updateAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER
+            });
+          });
+        }
+        /*eslint-enable no-undef */
+        return System.import(
+        /* webpackChunkName: "watch-browser" */
+        /* webpackMode: "lazy" */
+        "../../components/watch-browser/WatchBrowser").then(function (module) {
+          return _react2.default.createElement(module.default, {
+            key: browserType,
+            browserType: browserType,
+            caption: "Watch List",
+            isInitShow: true,
+            store: _ChartStore2.default,
+            showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
+            updateAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER
+          });
+        });
+      default:
+        return Promise.resolve(this._crBrowserDynamic(option));
+    }
   }
 };
 

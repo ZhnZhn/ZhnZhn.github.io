@@ -61,6 +61,10 @@ const _model = [
   },{
     id: 'PREMIUM_SAMPLE',
     title: 'Quandl Premium Sample'
+  },{
+    id: 'WATCH_LIST',
+    cn: 'item__watch',
+    title: 'Watch'
   }
 ];
 
@@ -94,7 +98,7 @@ const _renderItems = ({
 const PanelBrowsers = ({
   className, isShow, BROWSER, browserConfig,
   onClose, onClickQuandl, onClickDynamic,
-  onClickWatch, onClickAbout
+  onClickAbout
 }) =>
     <ModalPane
       isShow={isShow}
@@ -111,12 +115,6 @@ const PanelBrowsers = ({
                onClickDynamic, onClickQuandl
             })
           }
-          <div
-            className={CL.ITEM_WATCH}
-            onClick={onClickWatch}
-          >
-            Watch
-          </div>
           <div
             className={CL.ITEM_ABOUT}
             onClick={onClickAbout}

@@ -46,10 +46,12 @@ var ChartActionTypes = exports.ChartActionTypes = {
 
   COPY: 'copy'
 };
+var A = ChartActionTypes;
+var M = _Msg2.default.Alert;
 
 var _fnOnChangeStore = function _fnOnChangeStore(actionType, data) {
-  if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED || actionType === ChartActionTypes.LOAD_STOCK_ADDED || actionType === ChartActionTypes.LOAD_STOCK_FAILED) {
-    ChartActions[ChartActionTypes.LOAD_STOCK].isLoading = false;
+  if (actionType === A.LOAD_STOCK_COMPLETED || actionType === A.LOAD_STOCK_ADDED || actionType === A.LOAD_STOCK_FAILED) {
+    ChartActions[A.LOAD_STOCK].isLoading = false;
   }
 };
 
@@ -84,17 +86,17 @@ var _addSettings = function _addSettings(option) {
   option.isNotZoomToMinMax = _ChartStore2.default.isSetting('isNotZoomToMinMax');
 };
 
-var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.LOAD_STOCK, {
+var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_STOCK, {
   children: ['completed', 'added', 'failed'],
   isLoading: false,
   idLoading: undefined,
   isShouldEmit: true,
   cancelLoad: _fnCancelLoad
-}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, ChartActionTypes.PASTE_TO, {}), _Reflux$createActions));
+}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.PASTE_TO, {}), _Reflux$createActions));
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 
-ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function () {
+ChartActions[A.LOAD_STOCK].preEmit = function () {
   var arg = [].slice.call(arguments),
       chartType = arg[0],
       option = arg[2],
@@ -107,30 +109,30 @@ ChartActions[ChartActionTypes.LOAD_STOCK].preEmit = function () {
   _addSettings(option);
 
   if (option.loadId === 'B' && !option.apiKey) {
-    this.cancelLoad(option, _Msg2.default.Alert.withoutApiKey('Barchart Market Data'), false);
+    this.cancelLoad(option, M.withoutApiKey('Barchart Market Data'), false);
   } else if ((option.loadId === 'AL' || option.loadId === 'AL_S' || option.loadId === 'AL_I') && !option.apiKey) {
-    this.cancelLoad(option, _Msg2.default.Alert.withoutApiKey('Alpha Vantage'), false);
+    this.cancelLoad(option, M.withoutApiKey('Alpha Vantage'), false);
   } else if (option.isKeyFeature && !option.apiKey) {
-    this.cancelLoad(option, _Msg2.default.Alert.FEATURE_WITHOUT_KEY, false);
+    this.cancelLoad(option, M.FEATURE_WITHOUT_KEY, false);
   } else if (option.isPremium && !option.apiKey) {
-    this.cancelLoad(option, _Msg2.default.Alert.PREMIUM_WITHOUT_KEY, false);
+    this.cancelLoad(option, M.PREMIUM_WITHOUT_KEY, false);
   } else if (isDoublingLoad) {
-    this.cancelLoad(option, _Msg2.default.Alert.LOADING_IN_PROGRESS, false);
+    this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta) {
-    this.cancelLoad(option, _Msg2.default.Alert.DOUBLE_LOAD_META, false);
+    this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
   } else if (!_ChartStore2.default.isLoadToChart()) {
     if (_ChartStore2.default.isChartExist(chartType, key)) {
-      this.cancelLoad(option, _Msg2.default.Alert.ALREADY_EXIST, true);
+      this.cancelLoad(option, M.ALREADY_EXIST, true);
     }
   }
 
   return undefined;
 };
 
-ChartActions[ChartActionTypes.LOAD_STOCK].shouldEmit = function () {
+ChartActions[A.LOAD_STOCK].shouldEmit = function () {
   return this.isShouldEmit;
 };
-ChartActions[ChartActionTypes.LOAD_STOCK].listen(function (chartType, browserType, option) {
+ChartActions[A.LOAD_STOCK].listen(function (chartType, browserType, option) {
 
   this.isLoading = true;
   this.idLoading = option.key;

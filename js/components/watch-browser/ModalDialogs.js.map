@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\ModalDialogs.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\ModalDialogs.js",
+ "sourceRoot": "",
+ "names": [
+  "ModalDialogs",
+  "LoadItem",
+  "EditGroup",
+  "EditList"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,eAAe;AACnBC,oCADmB;AAEnBC,sCAFmB;AAGnBC;AAHmB,CAArB;;kBAMeH,Y"
+}

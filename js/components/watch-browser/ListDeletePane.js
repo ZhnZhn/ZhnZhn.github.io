@@ -24,30 +24,27 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _Atoms = require('./Atoms');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _FragmentSelectGroupList = require('./FragmentSelectGroupList');
-
-var _FragmentSelectGroupList2 = _interopRequireDefault(_FragmentSelectGroupList);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _RowButtons = require('./RowButtons');
-
-var _RowButtons2 = _interopRequireDefault(_RowButtons);
+var _Atoms2 = _interopRequireDefault(_Atoms);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ListDeletePane = function (_Component) {
   (0, _inherits3.default)(ListDeletePane, _Component);
+
+  /*
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchGroups: PropTypes.func
+    }),
+    actionCompleted: PropTypes.string,
+    forActionType: PropTypes.string,
+    onRename: PropTypes.func,
+    onClose: PropTypes.func
+  }
+  */
 
   function ListDeletePane(props) {
     (0, _classCallCheck3.default)(this, ListDeletePane);
@@ -96,7 +93,7 @@ var ListDeletePane = function (_Component) {
       }
     };
 
-    _this._primaryBt = _react2.default.createElement(_Button2.default.Primary, {
+    _this._primaryBt = _react2.default.createElement(_Atoms2.default.Button.Primary, {
       caption: 'Delete',
       title: 'Delete List',
       onClick: _this._handleDelete
@@ -133,7 +130,7 @@ var ListDeletePane = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_FragmentSelectGroupList2.default, {
+        _react2.default.createElement(_Atoms2.default.FragmentSelectGroupList, {
           ref: function ref(c) {
             return _this2.selectGroupList = c;
           },
@@ -142,10 +139,10 @@ var ListDeletePane = function (_Component) {
           groupOptions: groupOptions,
           listCaption: 'List:'
         }),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_Atoms2.default.ValidationMessages, {
           validationMessages: validationMessages
         }),
-        _react2.default.createElement(_RowButtons2.default, {
+        _react2.default.createElement(_Atoms2.default.RowButtons, {
           Primary: this._primaryBt,
           onClear: this._handleClear,
           onClose: onClose
@@ -155,16 +152,7 @@ var ListDeletePane = function (_Component) {
   }]);
   return ListDeletePane;
 }(_react.Component);
+//import PropTypes from "prop-types";
 
-process.env.NODE_ENV !== "production" ? ListDeletePane.propTypes = {
-  store: _propTypes2.default.shape({
-    listen: _propTypes2.default.func,
-    getWatchGroups: _propTypes2.default.func
-  }),
-  actionCompleted: _propTypes2.default.string,
-  forActionType: _propTypes2.default.string,
-  onRename: _propTypes2.default.func,
-  onClose: _propTypes2.default.func
-} : void 0;
 exports.default = ListDeletePane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ListDeletePane.js.map

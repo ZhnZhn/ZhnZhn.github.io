@@ -75,6 +75,10 @@ var _model = [{
 }, {
   id: 'PREMIUM_SAMPLE',
   title: 'Quandl Premium Sample'
+}, {
+  id: 'WATCH_LIST',
+  cn: 'item__watch',
+  title: 'Watch'
 }];
 
 var _renderItems = function _renderItems(_ref) {
@@ -118,7 +122,6 @@ var PanelBrowsers = function PanelBrowsers(_ref2) {
       onClose = _ref2.onClose,
       onClickQuandl = _ref2.onClickQuandl,
       onClickDynamic = _ref2.onClickDynamic,
-      onClickWatch = _ref2.onClickWatch,
       onClickAbout = _ref2.onClickAbout;
   return _react2.default.createElement(
     _ModalPane2.default,
@@ -137,14 +140,6 @@ var PanelBrowsers = function PanelBrowsers(_ref2) {
         model: _model, browserConfig: browserConfig, BROWSER: BROWSER,
         onClickDynamic: onClickDynamic, onClickQuandl: onClickQuandl
       }),
-      _react2.default.createElement(
-        'div',
-        {
-          className: CL.ITEM_WATCH,
-          onClick: onClickWatch
-        },
-        'Watch'
-      ),
       _react2.default.createElement(
         'div',
         {

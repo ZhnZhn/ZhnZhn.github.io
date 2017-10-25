@@ -36,6 +36,8 @@ var _crZhConfig = function _crZhConfig(id, _ref) {
   return {
     id: id,
     key: id,
+    isWithoutIndicator: true,
+    isWithoutAdd: true,
     dataSource: "FAOSTAT",
     linkFn: "FAO_STAT",
     item: dfDomain,

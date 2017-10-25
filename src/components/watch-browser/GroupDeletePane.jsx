@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-import RowInputSelect from './RowInputSelect'
-import ValidationMessages from '../zhn/ValidationMessages'
-import Button from './Button'
-import RowButtons from './RowButtons'
+import A from './Atoms'
 
 class GroupDeletePane extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func,
@@ -18,11 +16,12 @@ class GroupDeletePane extends Component {
     onDelete: PropTypes.func,
     onClose: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
     this.caption = null
-    this._primaryBt = <Button.Primary
+    this._primaryBt = <A.Button.Primary
                          caption="Delete"
                          title="Delete Group"
                          onClick={this._handleDeleteGroup}
@@ -80,16 +79,15 @@ class GroupDeletePane extends Component {
 
       return (
          <div>
-           <RowInputSelect
+           <A.RowInputSelect
              caption="Group:"
              options={groupOptions}
-             //isUpdateOptions={true}
              onSelect={this._handleSelectGroup}
            />
-           <ValidationMessages
+           <A.ValidationMessages
              validationMessages={validationMessages}
            />
-           <RowButtons
+           <A.RowButtons
              Primary={this._primaryBt}
              withoutClear={true}
              onClose={onClose}

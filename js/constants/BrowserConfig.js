@@ -18,14 +18,12 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   browserType: _Type.BrowserType.STOCK_MARKETS,
   isDynamic: true,
   caption: 'Stock Markets',
-  sourceMenuUrl: './data/stock-markets/source-menu.json',
-  dialogsId: 'ALPHA'
+  sourceMenuUrl: './data/stock-markets/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
   browserType: _Type.BrowserType.EUROSTAT,
   isDynamic: true,
   caption: 'European Statistics',
-  sourceMenuUrl: './data/eurostat/source-menu.json',
-  dialogsId: 'EUROSTAT'
+  sourceMenuUrl: './data/eurostat/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.UN_COMTRADE, {
   browserType: _Type.BrowserType.UN_COMTRADE,
   isDynamic: true,
@@ -99,7 +97,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   descrUrl: './data/london-stocks/lse-stocks.html'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.WATCH_LIST, {
   browserType: _Type.BrowserType.WATCH_LIST,
-  isDynamic: false,
+  //isDynamic : false,
   withoutItemCounter: true
 }), _BrowserConfig);
 

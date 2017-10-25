@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-import RowInputSelect from './RowInputSelect'
-import RowInputText from './RowInputText'
-import ValidationMessages from '../zhn/ValidationMessages'
-import Button from './Button'
-import RowButtons from './RowButtons'
+import A from './Atoms'
 
 class GroupEditPane extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func,
@@ -21,11 +18,12 @@ class GroupEditPane extends Component {
     onRename: PropTypes.func,
     onClose: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
     this.captionFrom = null
-    this._primaryBt = <Button.Primary
+    this._primaryBt = <A.Button.Primary
                          caption="Edit"
                          title="Edit Group Name"
                          onClick={this._handleRename}
@@ -93,19 +91,19 @@ class GroupEditPane extends Component {
 
     return (
        <div>
-          <RowInputSelect
+          <A.RowInputSelect
              caption="Group From:"
              options={groupOptions}
              onSelect={this._handleSelectGroup}
           />
-         <RowInputText
+         <A.RowInputText
            ref={c => this.inputText = c}
            caption="Group To:"
          />
-         <ValidationMessages
+         <A.ValidationMessages
            validationMessages={validationMessages}
          />
-         <RowButtons
+         <A.RowButtons
             Primary={this._primaryBt}
             onClear={this._handleClear}
             onClose={onClose}

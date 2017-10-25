@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/flux/actions/WatchActions.js"],"names":["WatchActionTypes","ADD_ITEM","REMOVE_ITEM","SAVE_WATCH","DRAG_DROP_GROUP","DRAG_DROP_LIST","DRAG_DROP_ITEM","ADD_GROUP","RENAME_GROUP","DELETE_GROUP","CREATE_LIST","RENAME_LIST","DELETE_LIST","EDIT_WATCH_COMPLETED","EDIT_WATCH_FAILED","WatchActions","createActions"],"mappings":";;;;;;;;;;;;;AAAA;;;;;;AAEO,IAAMA,8CAAmB;AAC9BC,YAAW,SADmB;AAE9BC,eAAc,YAFgB;AAG9BC,cAAa,WAHiB;;AAK9BC,mBAAkB,eALY;AAM9BC,kBAAiB,cANa;AAO9BC,kBAAiB,cAPa;;AAS9BC,aAAY,UATkB;AAU9BC,gBAAe,aAVe;AAW9BC,gBAAe,aAXe;AAY9BC,eAAc,YAZgB;AAa9BC,eAAc,YAbgB;AAc9BC,eAAc,YAdgB;AAe5BC,wBAAuB,oBAfK;AAgB5BC,qBAAoB;AAhBQ,CAAzB;;AAmBP,IAAMC,eAAe,iBAAOC,aAAP,mFAClBhB,iBAAiBC,QADC,EACW,EADX,wDAElBD,iBAAiBE,WAFC,EAEc,EAFd,wDAGlBF,iBAAiBG,UAHC,EAGa,EAHb,wDAKlBH,iBAAiBI,eALC,EAKkB,EALlB,wDAMlBJ,iBAAiBK,cANC,EAMiB,EANjB,wDAOlBL,iBAAiBM,cAPC,EAOiB,EAPjB,wDASlBN,iBAAiBO,SATC,EASY,EATZ,wDAUlBP,iBAAiBQ,YAVC,EAUe,EAVf,wDAWlBR,iBAAiBS,YAXC,EAWe,EAXf,wDAYlBT,iBAAiBU,WAZC,EAYc,EAZd,wDAalBV,iBAAiBW,WAbC,EAac,EAbd,wDAclBX,iBAAiBY,WAdC,EAcc,EAdd,wDAedZ,iBAAiBa,oBAfH,EAe2B,EAf3B,wDAgBdb,iBAAiBc,iBAhBH,EAgBwB,EAhBxB,0BAArB;;kBAoBeC,Y","file":"WatchActions.js","sourcesContent":["import Reflux from 'reflux';\r\n\r\nexport const WatchActionTypes = {\r\n  ADD_ITEM : 'addItem',\r\n  REMOVE_ITEM : 'removeItem',\r\n  SAVE_WATCH : 'saveWatch',\r\n\r\n  DRAG_DROP_GROUP : 'dragDropGroup',\r\n  DRAG_DROP_LIST : 'dragDropList',\r\n  DRAG_DROP_ITEM : 'dragDropItem',\r\n\r\n  ADD_GROUP : 'addGroup',\r\n  RENAME_GROUP : 'renameGroup',\r\n  DELETE_GROUP : 'deleteGroup',\r\n  CREATE_LIST : 'createList',\r\n  RENAME_LIST : 'renameList',\r\n  DELETE_LIST : 'deleteList',\r\n    EDIT_WATCH_COMPLETED : 'editWatchCompleted',\r\n    EDIT_WATCH_FAILED : 'editWatchFailed'\r\n}\r\n\r\nconst WatchActions = Reflux.createActions({\r\n  [WatchActionTypes.ADD_ITEM] : {},\r\n  [WatchActionTypes.REMOVE_ITEM] : {},\r\n  [WatchActionTypes.SAVE_WATCH] : {},\r\n\r\n  [WatchActionTypes.DRAG_DROP_GROUP] : {},\r\n  [WatchActionTypes.DRAG_DROP_LIST] : {},\r\n  [WatchActionTypes.DRAG_DROP_ITEM] : {},\r\n\r\n  [WatchActionTypes.ADD_GROUP] : {},\r\n  [WatchActionTypes.RENAME_GROUP] : {},\r\n  [WatchActionTypes.DELETE_GROUP] : {},\r\n  [WatchActionTypes.CREATE_LIST] : {},\r\n  [WatchActionTypes.RENAME_LIST] : {},\r\n  [WatchActionTypes.DELETE_LIST] : {},\r\n      [WatchActionTypes.EDIT_WATCH_COMPLETED] : {},\r\n      [WatchActionTypes.EDIT_WATCH_FAILED] : {}\r\n\r\n})\r\n\r\nexport default WatchActions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\WatchActions.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\WatchActions.js",
+ "sourceRoot": "",
+ "names": [
+  "WatchActionTypes",
+  "ADD_ITEM",
+  "REMOVE_ITEM",
+  "SAVE_WATCH",
+  "DRAG_DROP_GROUP",
+  "DRAG_DROP_LIST",
+  "DRAG_DROP_ITEM",
+  "ADD_GROUP",
+  "RENAME_GROUP",
+  "DELETE_GROUP",
+  "CREATE_LIST",
+  "RENAME_LIST",
+  "DELETE_LIST",
+  "EDIT_WATCH_COMPLETED",
+  "EDIT_WATCH_FAILED",
+  "A",
+  "WatchActions",
+  "createActions"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;;;;;AAEO,IAAMA,8CAAmB;AAC9BC,YAAW,SADmB;AAE9BC,eAAc,YAFgB;AAG9BC,cAAa,WAHiB;;AAK9BC,mBAAkB,eALY;AAM9BC,kBAAiB,cANa;AAO9BC,kBAAiB,cAPa;;AAS9BC,aAAY,UATkB;AAU9BC,gBAAe,aAVe;AAW9BC,gBAAe,aAXe;AAY9BC,eAAc,YAZgB;AAa9BC,eAAc,YAbgB;AAc9BC,eAAc,YAdgB;;AAgB9BC,wBAAuB,oBAhBO;AAiB9BC,qBAAoB;AAjBU,CAAzB;AAmBP,IAAMC,IAAIf,gBAAV;;AAEA,IAAMgB,eAAe,iBAAOC,aAAP,mFAClBF,EAAEd,QADgB,EACJ,EADI,wDAElBc,EAAEb,WAFgB,EAED,EAFC,wDAGlBa,EAAEZ,UAHgB,EAGF,EAHE,wDAKlBY,EAAEX,eALgB,EAKG,EALH,wDAMlBW,EAAEV,cANgB,EAME,EANF,wDAOlBU,EAAET,cAPgB,EAOE,EAPF,wDASlBS,EAAER,SATgB,EASH,EATG,wDAUlBQ,EAAEP,YAVgB,EAUA,EAVA,wDAWlBO,EAAEN,YAXgB,EAWA,EAXA,wDAYlBM,EAAEL,WAZgB,EAYD,EAZC,wDAalBK,EAAEJ,WAbgB,EAaD,EAbC,wDAclBI,EAAEH,WAdgB,EAcD,EAdC,wDAgBlBG,EAAEF,oBAhBgB,EAgBQ,EAhBR,wDAiBlBE,EAAED,iBAjBgB,EAiBK,EAjBL,0BAArB;;kBAoBeE,Y"
+}

@@ -11,6 +11,7 @@ import Decor from '../dialogs/decorators/Decorators';
 const  DATE_PLACEHOLDER = 'Before Select Indicator'
      , MAP_FREQUENCY_DF = 'M'
      , AREA = 'AREA'
+     , AREA_YEARLY = 'AREA_YEARLY'
      , MAP = 'MAP'
      , categoryTypes = [ 'MAP', 'COLUMN', 'BAR'];
 
@@ -19,7 +20,11 @@ const chartTypeOptions = [
     { caption : 'Map : All Countries' , value: MAP, compType : CompItemType.EUROSTAT_MAP },
     { caption : 'Column : All Countries', value: 'COLUMN' },
     { caption : 'Bar : All Countries', value: 'BAR' }
-]
+];
+const chartTypeOptions2 = [
+  { caption : 'Default : Area', value: AREA },
+  { caption : 'Yearly by Months' , value: AREA_YEARLY },
+];
 
 const isCategoryType = (chartType) => {
   if (!chartType){
@@ -66,6 +71,12 @@ class DialogEurostat2 extends Component {
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ];
+
+    switch(props.chartsType){
+      case 't2': this._chartOptions = chartTypeOptions2; break;
+      default: this._chartOptions = chartTypeOptions
+    }
+
     this.state = {
       isShowDate : false,
       dateDefault : DATE_PLACEHOLDER,
@@ -203,7 +214,7 @@ class DialogEurostat2 extends Component {
              <D.RowInputSelect
                caption="Chart Type"
                placeholder="Default: Area"
-               options={chartTypeOptions}
+               options={this._chartOptions}
                onSelect={this._handleSelectChartType}
              />
              <D.ShowHide isShow={isShowDate}>

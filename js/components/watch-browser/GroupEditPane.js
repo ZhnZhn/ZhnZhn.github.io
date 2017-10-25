@@ -24,34 +24,30 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _Atoms = require('./Atoms');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _RowInputSelect = require('./RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _RowInputText = require('./RowInputText');
-
-var _RowInputText2 = _interopRequireDefault(_RowInputText);
-
-var _ValidationMessages = require('../zhn/ValidationMessages');
-
-var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
-
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _RowButtons = require('./RowButtons');
-
-var _RowButtons2 = _interopRequireDefault(_RowButtons);
+var _Atoms2 = _interopRequireDefault(_Atoms);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GroupEditPane = function (_Component) {
   (0, _inherits3.default)(GroupEditPane, _Component);
+
+  /*
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchGroups: PropTypes.func
+    }),
+    actionCompleted: PropTypes.string,
+    actionFailed: PropTypes.string,
+    forActionType: PropTypes.string,
+    msgOnIsEmptyName: PropTypes.func,
+    msgOnNotSelect: PropTypes.func,
+    onRename: PropTypes.func,
+    onClose: PropTypes.func
+  }
+  */
 
   function GroupEditPane(props) {
     (0, _classCallCheck3.default)(this, GroupEditPane);
@@ -112,7 +108,7 @@ var GroupEditPane = function (_Component) {
     };
 
     _this.captionFrom = null;
-    _this._primaryBt = _react2.default.createElement(_Button2.default.Primary, {
+    _this._primaryBt = _react2.default.createElement(_Atoms2.default.Button.Primary, {
       caption: 'Edit',
       title: 'Edit Group Name',
       onClick: _this._handleRename
@@ -148,21 +144,21 @@ var GroupEditPane = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_Atoms2.default.RowInputSelect, {
           caption: 'Group From:',
           options: groupOptions,
           onSelect: this._handleSelectGroup
         }),
-        _react2.default.createElement(_RowInputText2.default, {
+        _react2.default.createElement(_Atoms2.default.RowInputText, {
           ref: function ref(c) {
             return _this2.inputText = c;
           },
           caption: 'Group To:'
         }),
-        _react2.default.createElement(_ValidationMessages2.default, {
+        _react2.default.createElement(_Atoms2.default.ValidationMessages, {
           validationMessages: validationMessages
         }),
-        _react2.default.createElement(_RowButtons2.default, {
+        _react2.default.createElement(_Atoms2.default.RowButtons, {
           Primary: this._primaryBt,
           onClear: this._handleClear,
           onClose: onClose
@@ -172,19 +168,7 @@ var GroupEditPane = function (_Component) {
   }]);
   return GroupEditPane;
 }(_react.Component);
+//import PropTypes from "prop-types";
 
-process.env.NODE_ENV !== "production" ? GroupEditPane.propTypes = {
-  store: _propTypes2.default.shape({
-    listen: _propTypes2.default.func,
-    getWatchGroups: _propTypes2.default.func
-  }),
-  actionCompleted: _propTypes2.default.string,
-  actionFailed: _propTypes2.default.string,
-  forActionType: _propTypes2.default.string,
-  msgOnIsEmptyName: _propTypes2.default.func,
-  msgOnNotSelect: _propTypes2.default.func,
-  onRename: _propTypes2.default.func,
-  onClose: _propTypes2.default.func
-} : void 0;
 exports.default = GroupEditPane;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\GroupEditPane.js.map

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-import RowInputText from './RowInputText'
-import Button from './Button'
-import RowButtons from './RowButtons'
-import ValidationMessages from '../zhn/ValidationMessages'
+import A from './Atoms'
 
 class GroupAddPane extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func
@@ -18,10 +16,11 @@ class GroupAddPane extends Component {
     onCreate: PropTypes.func,
     onClose: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
-    this._primaryBt = <Button.Primary
+    this._primaryBt = <A.Button.Primary
                          caption="Create"
                          title="Create New Group"
                          onClick={this._handleCreate}
@@ -69,14 +68,14 @@ class GroupAddPane extends Component {
         , { validationMessages } = this.state;
     return (
       <div>
-        <RowInputText
+        <A.RowInputText
            ref={c => this.inputText = c}
            caption="Group:"
         />
-        <ValidationMessages
+        <A.ValidationMessages
            validationMessages={validationMessages}
          />
-         <RowButtons
+         <A.RowButtons
             Primary={this._primaryBt}
             onClear={this._handleClear}
             onClose={onClose}

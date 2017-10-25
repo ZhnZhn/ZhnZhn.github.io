@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/flux/actions/AnalyticActions.js"],"names":["AnalyticActionTypes","ANSWER_YES","ANSWER_NO","NO_ANSWER","AnalyticActions","createActions"],"mappings":";;;;;;;;;;;;;AAAA;;;;;;AAEO,IAAMA,oDAAsB;AACjCC,cAAa,WADoB;AAEjCC,aAAa,UAFoB;AAGjCC,aAAa;AAHoB,CAA5B;;AAMP,IAAMC,kBAAkB,iBAAOC,aAAP,mFACrBL,oBAAoBC,UADC,EACa,EADb,wDAErBD,oBAAoBE,SAFC,EAEY,EAFZ,wDAGrBF,oBAAoBG,SAHC,EAGY,EAHZ,0BAAxB;;kBAMeC,e","file":"AnalyticActions.js","sourcesContent":["import Reflux from 'reflux';\r\n\r\nexport const AnalyticActionTypes = {\r\n  ANSWER_YES : 'answerYes',\r\n  ANSWER_NO  : 'answerNo',\r\n  NO_ANSWER  : 'noAnswer'\r\n};\r\n\r\nconst AnalyticActions = Reflux.createActions({\r\n  [AnalyticActionTypes.ANSWER_YES] : {},\r\n  [AnalyticActionTypes.ANSWER_NO] : {},\r\n  [AnalyticActionTypes.NO_ANSWER] : {}\r\n});\r\n\r\nexport default AnalyticActions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\AnalyticActions.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\AnalyticActions.js",
+ "sourceRoot": "",
+ "names": [
+  "AnalyticActionTypes",
+  "ANSWER_YES",
+  "ANSWER_NO",
+  "NO_ANSWER",
+  "A",
+  "AnalyticActions",
+  "createActions"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;;;;;AAEO,IAAMA,oDAAsB;AACjCC,cAAa,WADoB;AAEjCC,aAAa,UAFoB;AAGjCC,aAAa;AAHoB,CAA5B;AAKP,IAAMC,IAAIJ,mBAAV;;AAEA,IAAMK,kBAAkB,iBAAOC,aAAP,mFACrBF,EAAEH,UADmB,EACN,EADM,wDAErBG,EAAEF,SAFmB,EAEP,EAFO,wDAGrBE,EAAED,SAHmB,EAGP,EAHO,0BAAxB;;kBAMeE,e"
+}

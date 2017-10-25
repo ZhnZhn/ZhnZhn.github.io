@@ -41,6 +41,16 @@ class DialogContainer extends Component {
            shows, data
          })
        } else {
+         RouterModalDialog.getDialog(type)
+           .then(comp => {
+             dialogs.push({ type, comp })
+             inits[type] = true
+             this.setState({
+               isShow: true, currentDialog: type,
+               shows, data, dialogs
+             });
+           })
+        /*
          dialogs.push({
            type : type,
            comp : RouterModalDialog[type]
@@ -50,6 +60,7 @@ class DialogContainer extends Component {
            isShow: true, currentDialog: type,
            shows, data, dialogs
          });
+         */
        }
      }
   }

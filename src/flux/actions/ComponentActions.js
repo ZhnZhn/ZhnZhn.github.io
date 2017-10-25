@@ -1,31 +1,31 @@
 import Reflux from 'reflux';
 
 export const ComponentActionTypes = {
-  SHOW_ABOUT : 'showAbout',
+  SHOW_ABOUT: 'showAbout',
 
-  SHOW_DIALOG : 'showDialog',
+  SHOW_DIALOG: 'showDialog',
   CLOSE_DIALOG: 'closeDialog',
-  SHOW_OPTION_DIALOG : 'showOptionDialog',
+  SHOW_OPTION_DIALOG: 'showOptionDialog',
 
+  CLOSE_CHART_CONTAINER: 'closeChartContainer',
+  CLOSE_CHART_CONTAINER_2: 'closeChartContainer2',
+  SET_ACTIVE_CHECKBOX: 'setActiveCheckbox',
 
-  CLOSE_CHART_CONTAINER : 'closeChartContainer',
-  CLOSE_CHART_CONTAINER_2 : 'closeChartContainer2',
-  SET_ACTIVE_CHECKBOX : 'setActiveCheckbox',
-
-  SHOW_MODAL_DIALOG : 'showModalDialog'
-}
+  SHOW_MODAL_DIALOG: 'showModalDialog'
+};
+const A = ComponentActionTypes;
 
 const ComponentActions = Reflux.createActions({
-  [ComponentActionTypes.SHOW_ABOUT] : {},
+  [A.SHOW_ABOUT] : {},
 
-  [ComponentActionTypes.SHOW_DIALOG] : {},
-  [ComponentActionTypes.CLOSE_DIALOG]: {},
-  [ComponentActionTypes.SHOW_OPTION_DIALOG] : {},
-  [ComponentActionTypes.CLOSE_CHART_CONTAINER] : {},
-  [ComponentActionTypes.CLOSE_CHART_CONTAINER_2] : {},
-  [ComponentActionTypes.SET_ACTIVE_CHECKBOX] : {},
+  [A.SHOW_DIALOG] : {},
+  [A.CLOSE_DIALOG]: {},
+  [A.SHOW_OPTION_DIALOG] : {},
+  [A.CLOSE_CHART_CONTAINER] : {},
+  [A.CLOSE_CHART_CONTAINER_2] : {},
+  [A.SET_ACTIVE_CHECKBOX] : {},
 
-  [ComponentActionTypes.SHOW_MODAL_DIALOG] : {}
+  [A.SHOW_MODAL_DIALOG] : {}
 });
 
 

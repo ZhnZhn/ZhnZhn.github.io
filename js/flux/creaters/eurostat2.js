@@ -23,6 +23,7 @@ var createLoadOptions = function createLoadOptions() {
 
   var loadId = props.loadId,
       group = props.group,
+      dataSource = props.dataSource,
       one = options.one,
       _options$two = options.two,
       two = _options$two === undefined ? {} : _options$two,
@@ -67,7 +68,8 @@ var createLoadOptions = function createLoadOptions() {
     zhCompType: _zhCompType,
     mapValue: _mapValue,
     zhMapSlice: (0, _extends3.default)({}, _mapSlice, { time: _time }),
-    time: _time
+    time: _time,
+    dataSource: dataSource
   };
 };
 

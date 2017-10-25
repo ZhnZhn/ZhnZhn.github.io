@@ -35,7 +35,9 @@ const C = {
   CL_DY: 4,
 
   DX_CATEGORY: 40,
-  DY_CATEGORY: 32
+  DY_CATEGORY: 32,
+
+  DX_DELTA_Y_AXIS: 10
 }
 
 const _fnNoop = () => {};
@@ -160,39 +162,33 @@ const ChartFn = {
   },
 
   handlerMouserOverPoint(event){
-     const { isCategory, plotX, plotY, series={} } = this
+     const { isCategory, c, plotX, plotY, series } = this
          , chart = series.chart
-         , { y, date, dX, dY } = !isCategory
+         , { xCrossLabel, yCrossLabel } = chart
+         , { y, date, dX, dY } = (!isCategory || c)
                 ? _crCrossParam(this, chart)
-                : _crCategoryCrossParam(this, chart);
+                : _crCategoryCrossParam(this, chart)
+         , deltaYAxis = ChartFn.arCalcDeltaYAxis(chart)
+         , xLX = deltaYAxis
+             ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS
+             : plotX
+         , xLY = _crYCrossLabelX(chart, dX)
+         , yLY = _crYCrossLabelY(chart, plotY);
 
-     if (chart.xCrossLabel) {
-       chart.xCrossLabel.attr({
-         x : plotX,
-         text: date
-       });
-       chart.yCrossLabel.attr({
-         x: _crYCrossLabelX(chart, dX),
-         y: _crYCrossLabelY(chart, plotY),
-         text: y
-       });
+     if (xCrossLabel) {
+       xCrossLabel.attr({ x: xLX, text: date });
+       yCrossLabel.attr({ x: xLY, y: yLY, text: y });
      } else {
-       chart.xCrossLabel = chart
-          .renderer
-          .text(date, plotX, chart.plotTop - dY)
-          .attr(C.ATTR_LABEL)
-          .css(C.CSS_LABEL)
-          .add();
-       chart.yCrossLabel = chart
-          .renderer
-          .text(
-            y,
-            _crYCrossLabelX(chart, dX),
-            _crYCrossLabelY(chart, plotY)
-          )
-          .attr(C.ATTR_LABEL)
-          .css(C.CSS_LABEL)
-          .add();
+       chart.xCrossLabel = chart.renderer
+         .text(date, xLX, chart.plotTop - dY)
+         .attr(C.ATTR_LABEL)
+         .css(C.CSS_LABEL)
+         .add();
+       chart.yCrossLabel = chart.renderer
+         .text(y, xLY, yLY)
+         .attr(C.ATTR_LABEL)
+         .css(C.CSS_LABEL)
+         .add();
      }
   },
 

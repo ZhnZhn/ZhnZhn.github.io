@@ -15,28 +15,30 @@ export const WatchActionTypes = {
   CREATE_LIST : 'createList',
   RENAME_LIST : 'renameList',
   DELETE_LIST : 'deleteList',
-    EDIT_WATCH_COMPLETED : 'editWatchCompleted',
-    EDIT_WATCH_FAILED : 'editWatchFailed'
-}
+
+  EDIT_WATCH_COMPLETED : 'editWatchCompleted',
+  EDIT_WATCH_FAILED : 'editWatchFailed'
+};
+const A = WatchActionTypes;
 
 const WatchActions = Reflux.createActions({
-  [WatchActionTypes.ADD_ITEM] : {},
-  [WatchActionTypes.REMOVE_ITEM] : {},
-  [WatchActionTypes.SAVE_WATCH] : {},
+  [A.ADD_ITEM] : {},
+  [A.REMOVE_ITEM] : {},
+  [A.SAVE_WATCH] : {},
 
-  [WatchActionTypes.DRAG_DROP_GROUP] : {},
-  [WatchActionTypes.DRAG_DROP_LIST] : {},
-  [WatchActionTypes.DRAG_DROP_ITEM] : {},
+  [A.DRAG_DROP_GROUP] : {},
+  [A.DRAG_DROP_LIST] : {},
+  [A.DRAG_DROP_ITEM] : {},
 
-  [WatchActionTypes.ADD_GROUP] : {},
-  [WatchActionTypes.RENAME_GROUP] : {},
-  [WatchActionTypes.DELETE_GROUP] : {},
-  [WatchActionTypes.CREATE_LIST] : {},
-  [WatchActionTypes.RENAME_LIST] : {},
-  [WatchActionTypes.DELETE_LIST] : {},
-      [WatchActionTypes.EDIT_WATCH_COMPLETED] : {},
-      [WatchActionTypes.EDIT_WATCH_FAILED] : {}
+  [A.ADD_GROUP] : {},
+  [A.RENAME_GROUP] : {},
+  [A.DELETE_GROUP] : {},
+  [A.CREATE_LIST] : {},
+  [A.RENAME_LIST] : {},
+  [A.DELETE_LIST] : {},
 
+  [A.EDIT_WATCH_COMPLETED] : {},
+  [A.EDIT_WATCH_FAILED] : {}
 })
 
 export default WatchActions

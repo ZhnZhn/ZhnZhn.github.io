@@ -41,7 +41,8 @@ const fnAdapter = {
         , _id = this.crChartId(option);
     return {
       id: _id,
-      key: _id,
+      key: _id,      
+      isWithoutAdd: true,
       isWithLegend: true,
       legend: [],
       dataSource: dataSource,
@@ -138,7 +139,7 @@ const fnAdapter = {
   toConfig(json, option){
     const config = this.crBaseConfig(json, option);
     this.addSeriasTo(config, json, option)
-    
+
     return config;
   }
 

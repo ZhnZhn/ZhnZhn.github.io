@@ -9,6 +9,7 @@ var createLoadOptions = function createLoadOptions() {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var loadId = props.loadId,
       group = props.group,
+      dataSource = props.dataSource,
       one = options.one,
       two = options.two,
       oneValue = one.value,
@@ -29,7 +30,8 @@ var createLoadOptions = function createLoadOptions() {
     subtitle: twoCaption,
     alertItemId: oneCaption + ':' + twoCaption,
     alertGeo: oneCaption,
-    alertMetric: twoCaption
+    alertMetric: twoCaption,
+    dataSource: dataSource
   };
 };
 

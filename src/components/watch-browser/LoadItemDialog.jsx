@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils'
 
@@ -17,6 +17,7 @@ import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
 @withValidationLoad
 class LoadItemDialog extends Component {
+   /*
    static propTypes = {
      isShow: PropTypes.bool,
      data: PropTypes.shape({
@@ -27,6 +28,7 @@ class LoadItemDialog extends Component {
      store: PropTypes.object,
      onClose: PropTypes.func
    }
+   */
 
    constructor(props){
      super()

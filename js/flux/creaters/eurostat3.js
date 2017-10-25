@@ -8,6 +8,7 @@ var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var loadId = props.loadId,
+      dataSource = props.dataSource,
       _options$one = options.one,
       one = _options$one === undefined ? {} : _options$one,
       _options$group = options.group,
@@ -34,9 +35,10 @@ var createLoadOptions = function createLoadOptions() {
     subtitle: groupC + ':' + metricC,
     alertItemId: oneC + ':' + metricC,
     alertGeo: oneC,
-    alertMetric: metricC
+    alertMetric: metricC,
+    dataSource: dataSource
   };
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=eurostat3.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\eurostat3.js.map

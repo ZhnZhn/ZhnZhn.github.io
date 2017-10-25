@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-import FragmentSelectGroupList from './FragmentSelectGroupList'
-import RowInputText from './RowInputText'
-import ValidationMessages from '../zhn/ValidationMessages'
-import Button from './Button'
-import RowButtons from './RowButtons'
+import A from './Atoms'
 
 class ListEditPane extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func,
@@ -18,10 +15,11 @@ class ListEditPane extends Component {
     onRename: PropTypes.func,
     onClose: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
-    this._primaryBt = <Button.Primary
+    this._primaryBt = <A.Button.Primary
                          caption="Edit"
                          title="Edit List Name"
                          onClick={this._handleRename}
@@ -82,21 +80,21 @@ class ListEditPane extends Component {
         , { groupOptions, validationMessages } = this.state;
     return (
       <div>
-         <FragmentSelectGroupList
+         <A.FragmentSelectGroupList
            ref={c => this.selectGroupList = c}
            store={store}
            groupCaption="In Group:"
            groupOptions={groupOptions}
            listCaption="List From:"
          />
-         <RowInputText
+         <A.RowInputText
             ref={c => this.inputText = c}
             caption="List To:"
          />
-         <ValidationMessages
+         <A.ValidationMessages
            validationMessages={validationMessages}
          />
-         <RowButtons
+         <A.RowButtons
             Primary={this._primaryBt}
             onClear={this._handleClear}
             onClose={onClose}

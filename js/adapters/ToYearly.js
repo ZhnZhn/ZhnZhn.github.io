@@ -72,12 +72,35 @@ var _crPoint = function _crPoint(item) {
     y: item[1]
   };
 };
-var _crHighLowPoint = function _crHighLowPoint(key, arr) {
+var _crValuePoint = function _crValuePoint(item) {
+  return item[1];
+};
+var _crValueYearPoint = function _crValueYearPoint(item) {
   return {
-    c: key,
-    high: Math.max.apply(null, arr),
-    low: Math.min.apply(null, arr)
+    v: item[1],
+    y: _getYear(item[0])
   };
+};
+var _findHighLow = function _findHighLow(arr) {
+  var h = { v: Number.NEGATIVE_INFINITY, y: '' },
+      l = { v: Number.POSITIVE_INFINITY, y: '' };
+  arr.forEach(function (item) {
+    if (item.v > h.v) {
+      h = item;
+    }
+    if (item.v < l.v) {
+      l = item;
+    }
+  });
+  return {
+    high: h.v, yHigh: h.y,
+    low: l.v, yLow: l.y
+  };
+};
+var _crHighLowPoint = function _crHighLowPoint(key, arr) {
+  return (0, _extends3.default)({
+    c: key
+  }, _findHighLow(arr));
 };
 var _calcAvg = function _calcAvg(arr) {
   var sum = arr.reduce(function (acc, a) {
@@ -143,7 +166,9 @@ var _crBaseHm = function _crBaseHm() {
   });
   return hm;
 };
-var _crHm = function _crHm(i, data, stopYear) {
+var _crMonthHm = function _crMonthHm(i, data, stopYear) {
+  var crPoint = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _crValuePoint;
+
   var hm = _crBaseHm(),
       max = data.length;
   var isBreaked = false;
@@ -155,7 +180,8 @@ var _crHm = function _crHm(i, data, stopYear) {
       break;
     }
     var _m = _getMonth(_item[0]);
-    hm[_m].push(_item[1]);
+    //hm[_m].push(_item[1])
+    hm[_m].push(crPoint(_item));
   }
 
   return { hm: hm, isBreaked: isBreaked };
@@ -164,9 +190,9 @@ var _crHm = function _crHm(i, data, stopYear) {
 var _crRangeSeria = function _crRangeSeria(data) {
   var refYear = parseFloat(_getYear(data[0][0])),
       stopYear = '' + (refYear - 5),
-      _crHm2 = _crHm(0, data, stopYear),
-      hm = _crHm2.hm,
-      isBreaked = _crHm2.isBreaked,
+      _crMonthHm2 = _crMonthHm(0, data, stopYear, _crValueYearPoint),
+      hm = _crMonthHm2.hm,
+      isBreaked = _crMonthHm2.isBreaked,
       max = data.length,
       _stopYear = isBreaked ? stopYear : _getYear(data[max - 1][0]),
       name = 'Range ' + refYear + ':' + _stopYear,
@@ -174,7 +200,7 @@ var _crRangeSeria = function _crRangeSeria(data) {
 
 
   return {
-    rangeSeria: (0, _ConfigBuilder2.default)().initAreaRange(_Tooltip2.default.categoryAreaRange, {
+    rangeSeria: (0, _ConfigBuilder2.default)().initAreaRange(_Tooltip2.default.categoryRHLY, {
       data: _data,
       name: name,
       point: {}
@@ -200,9 +226,9 @@ var _crAvgSeria = function _crAvgSeria(data) {
       stopYear = '' + (parseFloat(yearNow) - 5),
       max = data.length,
       startIndex = _findStartYearIndex(data, yearNow),
-      _crHm3 = _crHm(startIndex, data, stopYear),
-      hm = _crHm3.hm,
-      isBreaked = _crHm3.isBreaked,
+      _crMonthHm3 = _crMonthHm(startIndex, data, stopYear),
+      hm = _crMonthHm3.hm,
+      isBreaked = _crMonthHm3.isBreaked,
       _stopYear = isBreaked ? stopYear : _getYear(data[max - 1][0]),
       _data = _hmToSeriaData(hm, _crAvgPoint),
       name = 'Avg ' + fromYear + ':' + _stopYear;
@@ -219,11 +245,15 @@ var _crZhConfig = function _crZhConfig(option, _ref3) {
 
   var value = option.value,
       dataSource = option.dataSource,
+      itemCaption = option.itemCaption,
       _id = value + '_' + 'YEARLY';
 
   return {
     id: _id,
     key: _id,
+    itemCaption: itemCaption,
+    isWithoutIndicator: true,
+    isWithoutAdd: true,
     isWithLegend: true,
     legend: legend,
     dataSource: dataSource

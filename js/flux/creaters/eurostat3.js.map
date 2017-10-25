@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/flux/creaters/eurostat3.js"],"names":["createLoadOptions","props","options","loadId","one","group","metric","caption","oneC","oneV","value","groupC","groupV","metricC","metricV","geo","itemCaption","title","subtitle","alertItemId","alertGeo","alertMetric"],"mappings":";;;;;;AACA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;AAC5C,MAAEC,MAAF,GAAaF,KAAb,CAAEE,MAAF;AAAA,qBACiCD,OADjC,CACEE,GADF;AAAA,MACEA,GADF,gCACM,EADN;AAAA,uBACiCF,OADjC,CACUG,KADV;AAAA,MACUA,KADV,kCACgB,EADhB;AAAA,wBACiCH,OADjC,CACoBI,MADpB;AAAA,MACoBA,MADpB,mCAC2B,EAD3B;AAAA,qBAEkCF,GAFlC,CAEEG,OAFF;AAAA,MAEUC,IAFV,gCAEe,EAFf;AAAA,MAEyBC,IAFzB,GAEkCL,GAFlC,CAEmBM,KAFnB;AAAA,uBAGsCL,KAHtC,CAGEE,OAHF;AAAA,MAGUI,MAHV,kCAGiB,EAHjB;AAAA,MAG2BC,MAH3B,GAGsCP,KAHtC,CAGqBK,KAHrB;AAAA,wBAIwCJ,MAJxC,CAIEC,OAJF;AAAA,MAIUM,OAJV,mCAIkB,EAJlB;AAAA,MAI4BC,OAJ5B,GAIwCR,MAJxC,CAIsBI,KAJtB;;AAKN,SAAO;AACLK,SAAMN,IADD;AAELJ,WAAQO,MAFH;AAGLN,YAASQ,OAHJ;AAILX,YAASA,MAJJ;AAKLa,iBAAaR,IALR;AAMLS,WAAQT,IANH;AAOLU,cAAcP,MAAd,SAAwBE,OAPnB;AAQLM,iBAAiBX,IAAjB,SAAyBK,OARpB;AASLO,cAAWZ,IATN;AAULa,iBAAcR;AAVT,GAAP;AAYD,CAlBD;;kBAoBeb,iB","file":"eurostat3.js","sourcesContent":["\r\nconst createLoadOptions = (props={}, options={}) => {\r\n  const { loadId } = props\r\n      , { one={}, group={}, metric={}} = options\r\n      , { caption:oneC='', value:oneV } = one\r\n      , { caption:groupC='', value:groupV } = group\r\n      , { caption:metricC='', value:metricV } = metric\r\n  return {\r\n    geo : oneV,\r\n    group : groupV,\r\n    metric : metricV,\r\n    loadId : loadId,\r\n    itemCaption: oneC,\r\n    title : oneC,\r\n    subtitle : `${groupC}:${metricC}`,\r\n    alertItemId : `${oneC}:${metricC}`,\r\n    alertGeo : oneC,\r\n    alertMetric : metricC\r\n  }\r\n};\r\n\r\nexport default createLoadOptions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\creaters\\eurostat3.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\creaters\\eurostat3.js",
+ "sourceRoot": "",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "loadId",
+  "dataSource",
+  "one",
+  "group",
+  "metric",
+  "caption",
+  "oneC",
+  "oneV",
+  "value",
+  "groupC",
+  "groupV",
+  "metricC",
+  "metricV",
+  "geo",
+  "itemCaption",
+  "title",
+  "subtitle",
+  "alertItemId",
+  "alertGeo",
+  "alertMetric"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;AAAA,MAC1CC,MAD0C,GACnBF,KADmB,CAC1CE,MAD0C;AAAA,MAClCC,UADkC,GACnBH,KADmB,CAClCG,UADkC;AAAA,qBAEXF,OAFW,CAE1CG,GAF0C;AAAA,MAE1CA,GAF0C,gCAEtC,EAFsC;AAAA,uBAEXH,OAFW,CAElCI,KAFkC;AAAA,MAElCA,KAFkC,kCAE5B,EAF4B;AAAA,wBAEXJ,OAFW,CAExBK,MAFwB;AAAA,MAExBA,MAFwB,mCAEjB,EAFiB;AAAA,qBAGVF,GAHU,CAG1CG,OAH0C;AAAA,MAGlCC,IAHkC,gCAG7B,EAH6B;AAAA,MAGnBC,IAHmB,GAGVL,GAHU,CAGzBM,KAHyB;AAAA,uBAINL,KAJM,CAI1CE,OAJ0C;AAAA,MAIlCI,MAJkC,kCAI3B,EAJ2B;AAAA,MAIjBC,MAJiB,GAINP,KAJM,CAIvBK,KAJuB;AAAA,wBAKJJ,MALI,CAK1CC,OAL0C;AAAA,MAKlCM,OALkC,mCAK1B,EAL0B;AAAA,MAKhBC,OALgB,GAKJR,MALI,CAKtBI,KALsB;;AAMlD,SAAO;AACLK,SAAMN,IADD;AAELJ,WAAQO,MAFH;AAGLN,YAASQ,OAHJ;AAILZ,YAASA,MAJJ;AAKLc,iBAAaR,IALR;AAMLS,WAAQT,IANH;AAOLU,cAAcP,MAAd,SAAwBE,OAPnB;AAQLM,iBAAiBX,IAAjB,SAAyBK,OARpB;AASLO,cAAWZ,IATN;AAULa,iBAAcR,OAVT;AAWLV;AAXK,GAAP;AAaD,CAnBD;;kBAqBeJ,iB"
+}

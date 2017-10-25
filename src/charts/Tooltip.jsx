@@ -11,140 +11,146 @@ const SPARKLINES_SUFFIX_ID = 'sparklines'
     , WIDTH_TOTAL = 50
     , WIDTH_SPARK = 20 + 80 + 16;
 
-const _fnTooltipHeader = function(date, id, cssClass=''){
+const C = {
+  TITLE_C: '#a487d4',
+  YEAR_C: '#fdb316',
+  VALUE_C: '#2f7ed8',
+  EX_DIVIDEND_C: 'green'
+}
+const TITLE_STYLE = `style="color:${C.TITLE_C};"`
+
+const _crSpan = (t='', v='', { color=C.VALUE_C }={}) => {
+  const _vStyle = `style="color:${color};"`;
+  return `
+  <span ${TITLE_STYLE}>${t}: </span>
+  <span ${_vStyle}>${v}</span>`;
+}
+const _crRow = (t='', v='', option) => {
+  return `<div>${_crSpan(t, v, option)}</div>`;
+}
+
+const _crHeader = (date, id, cssClass='') => {
   return `<div id="${id}" class="tp__header not-selected ${cssClass}">
-  <span class="tp__header__caption">${date}</span>
-  <span class="tp__header__close">X</span>
-  </div>`
+    <span class="tp__header__caption">${date}</span>
+    <span class="tp__header__close">X</span>
+  </div>`;
 }
 
 const _fnTooltipSparkType4 = function({
   fullWidth, width, year, value, total, percent, id
 }){
+  const _style = `style="float:left;padding-right:10px;width:${width}px;"`;
   return `<div class="tp__body">
   <div class="tp__body__part1" style="width:${fullWidth}px;" >
-    <div style="float:left;padding-right:10px;width:${width}px;">
-      <span class="tp__body__title">Year: </span>
-      <span class="tp__body__year">${year}</span></br>
-      <span class="tp__body__title">Value: </span>
-      <span class="tp__body__value">${value}</span></br>
+    <div ${_style}>
+      ${_crRow('Year', year, { color: C.YEAR_C })}
+      ${_crRow('Value', value)}
     </div>
     <div id="${id}_${SPARKLINES_SUFFIX_ID}" class="tp__body__sparklines">
     </div>
   </div>
   <div class="tp__body__part1" style="width:${fullWidth}px;" >
-    <div style="float:left;padding-right:10px;width:${width}px;">
-      <span class="tp__body__title">Total: </span>
-      <span class="tp__body__value">${total}</span></br>
-      <span class="tp__body__title">Percent: </span>
-      <span class="tp__body__value">${percent}</span></br>
+    <div ${_style}>
+      ${_crRow('Total', total)}
+      ${_crRow('Percent', percent)}
     </div>
     <div id="${id}_${SPARKLINES_BAR_SUFFIX_ID}" class="tp__body__sparklines">
     </div>
-  </div>`
+  </div>`;
 }
 
 const _fnBaseTooltip = function({date, id, color, valueText='Value', value}){
-  const _style = (color)
-           ? `style="color:${color};"`
-           : '';
-  return _fnTooltipHeader(date, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">${valueText}:&nbsp;</span>
-  <span class="tp__body__value" ${_style}>${value}</span>
-  </div>`
+  return `${_crHeader(date, id)}
+  <div class="tp__body">
+    ${_crRow(valueText, value, { color })}
+  </div>`;
 }
 
 const _fnExDividend = function({date, id, valueText, value, point}){
-  return _fnTooltipHeader(date, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">Ex-Dividend: </span>
-  <span style="color: #90ed7d;">${point.exValue}</span><br/>
-  <span class="tp__body__title">Close: </span>
-  <span class="tp__body__value">${point.price}</span>
-  </div>`
+  const { exValue, price } = point;
+  return `${_crHeader(date, id)}
+  <div class="tp__body">
+    ${_crRow('Ex-Dividend', exValue, { color: '#90ed7d'})}
+    ${_crRow('Close', price)}
+  </div>`;
 }
 
 const _fnSplitRatio = function({date, id, valueText, value, point}){
-  return _fnTooltipHeader(date, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">Split Ratio: </span>
-  <span style="color: #ED5813;">${point.splitRatio}</span><br/>
-  <span class="tp__body__title">Close: </span>
-  <span class="tp__body__value">${point.price}</span>
-  </div>`
+  const { splitRatio, price } = point
+  return `${_crHeader(date, id)}
+  <div class="tp__body">
+    ${_crRow('Split Ratio', splitRatio, { color: '#ED5813'})}
+    ${_crRow('Close', price)}
+  </div>`;
 }
 
 const _fnVolumeTooltip = function({ date, id, value, point }){
   const { _open='NoData', _close='', _low='', _high='' } = point;
-  return _fnTooltipHeader(date, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">Volume: </span>
-  <span class="tp__body__value">${value}</span><br/>
-  <span class="tp__body__title">Open: </span>
-  <span class="tp__body__value">${_open}</span>
-  <span class="tp__body__title"> Close: </span>
-  <span class="tp__body__value">${_close}</span><br/>
-  <span class="tp__body__title">Low: </span>
-  <span class="tp__body__value">${_low}</span>
-  <span class="tp__body__title"> High: </span>
-  <span class="tp__body__value">${_high}</span>
-  </div>`
+  return `${_crHeader(date, id)}
+  <div class="tp__body">
+    ${_crRow('Volume', value)}
+    <div>
+      ${_crSpan('Open', _open)}
+      ${_crSpan('Close', _close)}
+    </div>
+    <div>
+      ${_crSpan('Low', _low)}
+      ${_crSpan('High', _high)}
+    </div>
+  </div>`;
 }
 
 const _fnATHTooltip = function({date, id, value, point}){
-   return _fnTooltipHeader(date, id) +
-   `<div class="tp__body">
-   <span class="tp__body__title">ATH: </span>
-   <span class="tp__body__value" style="color:${point.color};">${point.y}%</span><br/>
-   <span class="tp__body__title">Prev Close: </span>
-   <span class="tp__body__value">${point.close}</span><br/>
-   <span class="tp__body__title">Next Open: </span>
-   <span class="tp__body__value">${point.open}</span><br/>
-   </div>`
+  const { color, y, close, open } = point
+   return `${_crHeader(date, id)}
+    <div class="tp__body">
+      ${_crRow('ATH', y+'%', { color })}
+      ${_crRow('Prev Close', close)}
+      ${_crRow('Next Open', open)}
+    </div>`;
 }
 
 const _fnHighLowTooltip = function({date, id, value, point}){
   const { open, dayHigh, dayLow, close } = point;
-  return _fnTooltipHeader(date, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">Open: </span>
-  <span class="tp__body__value">${open}</span><br/>
-  <span class="tp__body__title">High: </span>
-  <span class="tp__body__value">${dayHigh}</span><br/>
-  <span class="tp__body__title">Low: </span>
-  <span class="tp__body__value">${dayLow}</span><br/>
-  <span class="tp__body__title">Close: </span>
-  <span class="tp__body__value">${close}</span>
-  </div>`
+  return `${_crHeader(date, id)}
+  <div class="tp__body">
+    ${_crRow('Open', open)}
+    ${_crRow('High', dayHigh)}
+    ${_crRow('Low', dayLow)}
+    ${_crRow('Close', close)}
+  </div>`;
 }
-const _fnCategoryAreaRange = function({ id, point }){
-  const { high, low, c } = point;
-  return _fnTooltipHeader(c, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">High: </span>
-  <span class="tp__body__value">${high}</span><br/>
-  <span class="tp__body__title">Low: </span>
-  <span class="tp__body__value">${low}</span>
+const _fnCategoryRHLY = function({ id, point }){
+  const { high, yHigh, low, yLow, c } = point;
+  return `${_crHeader(c, id)}
+  <div class="tp__body">
+    <div>
+      ${_crSpan('High', high)}
+      ${_crSpan('', yHigh, { color: C.YEAR_C })}
+    </div>
+    <div>
+      ${_crSpan('&nbsp;Low', low)}
+      ${_crSpan('', yLow, { color: C.YEAR_C })}
+    </div>
   </div>`;
 };
+
+
 const _fnCategory = function({ id, point }){
   const { y, c } = point;
-  return _fnTooltipHeader(c, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">Value: </span>
-  <span class="tp__body__value">${y}</span>
+  return `${_crHeader(c, id)}
+  <div class="tp__body">
+    ${_crRow('Value', y)}
   </div>`;
 };
 
 
 
-const _fnPieTooltip = function({id, value, point}){
-  return _fnTooltipHeader(point.nameFull, id) +
-  `<div class="tp__body">
-  <span class="tp__body__title">Value: </span>
-  <span class="tp__body__value">${value}</span></br>
-  </div>`
+const _fnPieTooltip = function({ id, value, point }){
+  return `${_crHeader(point.nameFull, id)}
+  <div class="tp__body">
+    ${_crRow('Value', value)}
+  </div>`;
 }
 
 const _fnCalcWidthSparkType4 = function(value, total){
@@ -152,7 +158,7 @@ const _fnCalcWidthSparkType4 = function(value, total){
       , _width2 = WIDTH_TOTAL + total.length*WIDTH_CHAR
       , width = (_width1>_width2) ? _width1 : _width2
       , fullWidth = width + WIDTH_SPARK;
-  return { fullWidth, width }
+  return { fullWidth, width };
 }
 
 const _fnStackedAreaTooltip = function({id, value, point}){
@@ -160,7 +166,7 @@ const _fnStackedAreaTooltip = function({id, value, point}){
       , _total = ChartFn.toNumberFormat(total)
       , { fullWidth, width } = _fnCalcWidthSparkType4(value, _total);
 
-  return _fnTooltipHeader(nameFull, id) + _fnTooltipSparkType4({
+  return _crHeader(nameFull, id) + _fnTooltipSparkType4({
     fullWidth, width, year: category, value, total: _total, percent, id
   });
 }
@@ -171,7 +177,7 @@ const _fnTreeMapTooltip = function({id, point}){
       , _total = ChartFn.toNumberFormat(total)
       , { fullWidth, width } = _fnCalcWidthSparkType4(_value, _total);
 
-  return _fnTooltipHeader(nameFull, id) + _fnTooltipSparkType4({
+  return _crHeader(nameFull, id) + _fnTooltipSparkType4({
     fullWidth, width, year, value: _value, total: _total, percent, id
   })
 }
@@ -189,31 +195,40 @@ const _fnAddHandlerClose = function(id, point){
   }, 1);
 }
 
+
+const _crSparkData = (point) => {
+  const { sparkvalues, sparkpercent } = point;
+  let  sparkLinesData = []
+     , sparkBarsData = []
+     , pointIndex;
+
+  if (sparkvalues) {
+    sparkLinesData = sparkvalues;
+    sparkBarsData = sparkpercent;
+    pointIndex = (sparkvalues.length !== 0)
+           ? sparkvalues.length - 1
+           : 0 ;
+  } else {
+    const seriesData = point.series.data;
+    seriesData.forEach((item, itemIndex) => {
+       sparkLinesData.push(item.y);
+       sparkBarsData.push(item.percentage)
+    })
+    pointIndex = point.index
+  }
+  return { sparkLinesData, sparkBarsData, pointIndex };
+}
+
 const _fnAddHandlerCloseAndSparklines = function(id, point){
   setTimeout( function(){
           document.getElementById(id)
              .addEventListener('click', _fHide(id,point))
 
-         let  sparkLinesData = []
-            , sparkBarsData = []
-            , pointIndex;
-
-         if (point.sparkvalues) {
-           sparkLinesData = point.sparkvalues;
-           sparkBarsData = point.sparkpercent;
-           pointIndex = (point.sparkvalues.length !== 0)
-                            ?  point.sparkvalues.length - 1
-                            : 0 ;
-         } else {
-           const seriesData = point.series.data
-           seriesData.forEach((item, itemIndex) => {
-              sparkLinesData.push(item.y);
-              sparkBarsData.push(item.percentage)
-           })
-           pointIndex = point.index
-         }
-
-         const sparklines = SparkFactory.createSparklines(sparkLinesData, pointIndex)
+          const {
+                  sparkLinesData, sparkBarsData,
+                  pointIndex
+                } = _crSparkData(point)
+             , sparklines = SparkFactory.createSparklines(sparkLinesData, pointIndex)
              , sparkbars = SparkFactory.createSparkbars(sparkBarsData, pointIndex);
          render( sparklines, document.getElementById(`${id}_${SPARKLINES_SUFFIX_ID}`))
          render( sparkbars, document.getElementById(`${id}_${SPARKLINES_BAR_SUFFIX_ID}`))
@@ -271,6 +286,9 @@ const Tooltip = {
   category: _fnBasePointFormatter({
     fnTemplate: _fnCategory
   }),
+  categoryRHLY: _fnBasePointFormatter({
+    fnTemplate: _fnCategoryRHLY
+  }),
 
   fnExDividendPointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnExDividend
@@ -293,9 +311,6 @@ const Tooltip = {
   }),
   fnHighLowPointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnHighLowTooltip
-  }),
-  categoryAreaRange: _fnBasePointFormatter({
-    fnTemplate: _fnCategoryAreaRange
   }),
   fnPiePointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnPieTooltip, isWithValue: true

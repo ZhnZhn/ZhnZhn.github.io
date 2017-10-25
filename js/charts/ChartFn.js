@@ -67,7 +67,9 @@ var C = {
   CL_DY: 4,
 
   DX_CATEGORY: 40,
-  DY_CATEGORY: 32
+  DY_CATEGORY: 32,
+
+  DX_DELTA_Y_AXIS: 10
 };
 
 var _fnNoop = function _fnNoop() {};
@@ -211,30 +213,29 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
   },
   handlerMouserOverPoint: function handlerMouserOverPoint(event) {
     var isCategory = this.isCategory,
+        c = this.c,
         plotX = this.plotX,
         plotY = this.plotY,
-        _series = this.series,
-        series = _series === undefined ? {} : _series,
+        series = this.series,
         chart = series.chart,
-        _ref4 = !isCategory ? _crCrossParam(this, chart) : _crCategoryCrossParam(this, chart),
+        xCrossLabel = chart.xCrossLabel,
+        yCrossLabel = chart.yCrossLabel,
+        _ref4 = !isCategory || c ? _crCrossParam(this, chart) : _crCategoryCrossParam(this, chart),
         y = _ref4.y,
         date = _ref4.date,
         dX = _ref4.dX,
-        dY = _ref4.dY;
+        dY = _ref4.dY,
+        deltaYAxis = ChartFn.arCalcDeltaYAxis(chart),
+        xLX = deltaYAxis ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS : plotX,
+        xLY = _crYCrossLabelX(chart, dX),
+        yLY = _crYCrossLabelY(chart, plotY);
 
-    if (chart.xCrossLabel) {
-      chart.xCrossLabel.attr({
-        x: plotX,
-        text: date
-      });
-      chart.yCrossLabel.attr({
-        x: _crYCrossLabelX(chart, dX),
-        y: _crYCrossLabelY(chart, plotY),
-        text: y
-      });
+    if (xCrossLabel) {
+      xCrossLabel.attr({ x: xLX, text: date });
+      yCrossLabel.attr({ x: xLY, y: yLY, text: y });
     } else {
-      chart.xCrossLabel = chart.renderer.text(date, plotX, chart.plotTop - dY).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
-      chart.yCrossLabel = chart.renderer.text(y, _crYCrossLabelX(chart, dX), _crYCrossLabelY(chart, plotY)).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
+      chart.xCrossLabel = chart.renderer.text(date, xLX, chart.plotTop - dY).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
+      chart.yCrossLabel = chart.renderer.text(y, xLY, yLY).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
     }
   },
   toggleSeria: function toggleSeria(chart, item) {

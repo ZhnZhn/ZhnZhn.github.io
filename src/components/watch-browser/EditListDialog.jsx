@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import WatchActions, { WatchActionTypes } from '../../flux/actions/WatchActions';
 
@@ -13,11 +13,13 @@ import ListEditPane from './ListEditPane';
 import ListDeletePane from './ListDeletePane';
 
 class EditListDialog extends Component {
+  /*
   static propTypes = {
     isShow : PropTypes.bool,
     store : PropTypes.object,
     onClose : PropTypes.func
   }
+  */
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {

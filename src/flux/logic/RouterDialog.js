@@ -1,4 +1,6 @@
 
+import { BrowserType as BT } from '../../constants/Type'
+
 import DialogType3 from '../../components/dialogs/DialogType3';
 import DialogType4 from '../../components/dialogs/DialogType4';
 import DialogType4A from '../../components/dialogs/DialogType4A';
@@ -45,15 +47,15 @@ const _router = {
   },
 
 
-  _loadAD() {
+  _loadSM() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === 'development') {
-       this.AD = import("js/components/stock-markets/AlphaDialogs.js")
+       this.SM = import("js/components/stock-markets/AlphaDialogs.js")
          .then(module => module.default )
          .catch(err => console.log(MSG_OFFLINE))
     /*eslint-enable no-undef */
      } else {
-      this.AD = import(
+      this.SM = import(
            /* webpackChunkName: "alpha-dialogs" */
            /* webpackMode: "lazy" */
            "../../components/stock-markets/AlphaDialogs"
@@ -63,24 +65,24 @@ const _router = {
       }
   },
   get AlphaIndicatorDialog() {
-    return this.AD.then( D => D.Indicator);
+    return this.SM.then( D => D.Indicator);
   },
   get AlphaSectorDialog() {
-    return this.AD.then( D => D.Sector);
+    return this.SM.then( D => D.Sector);
   },
   get AlphaIntradayDialog() {
-    return this.AD.then( D => D.Intraday);
+    return this.SM.then( D => D.Intraday);
   },
 
-  _loadESD() {
+  _loadES() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === 'development') {
-       this.ESD = import("js/components/eurostat/EurostatDialogs.js")
+       this.ES = import("js/components/eurostat/EurostatDialogs.js")
          .then(module => module.default )
          .catch(err => console.log(MSG_OFFLINE))
     /*eslint-enable no-undef */
      } else {
-      this.ESD = import(
+      this.ES = import(
            /* webpackChunkName: "eurostat-dialogs" */
            /* webpackMode: "lazy" */
            "../../components/eurostat/EurostatDialogs"
@@ -90,19 +92,19 @@ const _router = {
       }
   },
   get DialogEurostat() {
-    return this.ESD.then( D => D.Eurostat )
+    return this.ES.then( D => D.Eurostat )
   },
   get DialogEurostat2() {
-    return this.ESD.then( D => D.Eurostat2 )
+    return this.ES.then( D => D.Eurostat2 )
   },
   get DialogEurostat3() {
-    return this.ESD.then( D => D.Eurostat3 )
+    return this.ES.then( D => D.Eurostat3 )
   },
 
-  loadDialogs(dialogsId) {
-    switch(dialogsId){
-      case 'ALPHA': this._loadAD(); break;
-      case 'EUROSTAT': this._loadESD(); break;
+  loadDialogs(browserType) {
+    switch(browserType){
+      case BT.STOCK_MARKETS: this._loadSM(); break;
+      case BT.EUROSTAT: this._loadES(); break;
       default: return undefined;
     }
   }
@@ -118,8 +120,8 @@ const RouterDialog = {
     }
   },
 
-  loadDialogs(dialogsId) {
-    _router.loadDialogs(dialogsId)
+  loadDialogs(browserType) {
+    _router.loadDialogs(browserType)
   }
 }
 

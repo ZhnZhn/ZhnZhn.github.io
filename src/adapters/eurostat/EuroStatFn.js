@@ -1,16 +1,29 @@
 import ChartConfig from '../../charts/ChartConfig';
 import Chart from '../../charts/Chart';
+import Tooltip from '../../charts/Tooltip';
 
 import QuandlFn2 from '../QuandlFn2';
 import AdapterFn from '../AdapterFn';
 
 import ChoroplethMapSlice from './ChoroplethMapSlice';
 
-const COLOR_EU = "#0088FF";
-const COLOR_EA = "#FF5800";
-//const COLOR_BAR = "#92D050";
-const EU_CODES = ["EU", "EU27", "EU28"];
-const EA_CODES = ["EA", "EA18", "EA19"];
+const COLOR = {
+  EU: "#0088FF",
+  EA: "#FF5800",
+  EU_MEMBER: "#7CB5EC"
+};
+const C = {
+  EU_CODES: ["EU", "EU27", "EU28"],
+  EA_CODES: ["EA", "EA18", "EA19"],
+  EU_MEMBER: [
+    "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus",
+    "Czech Republic", "Denmark", "Estonia", "Finland", "France",
+    "Germany", "Greece", "Hungary", "Ireland", "Italy",
+    "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands",
+    "Poland", "Portugal", "Romania", "Slovakia", "Slovenia",
+    "Spain", "Sweden", "United Kingdom"
+  ]
+};
 
 const SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 
@@ -34,11 +47,11 @@ const _crSubTitle = function(subTitle){
 const _is = (value) => (element) => element === value;
 
 const _colorSeria = (config, categories, codes, color) => {
+  const data = config.series[0].data;
   codes.forEach(code => {
     const _index = categories.findIndex(_is(code))
     if (_index !== -1) {
-      const value = config.series[0].data[_index]
-      config.series[0].data[_index] = { y:value, color }
+      data[_index].color = color
     }
   })
 }
@@ -66,13 +79,28 @@ const EuroStatFn = {
     return { data, max, min };
   },
 
+  toPointArr(timeIndex, value){
+    const data = [];
+    Object.keys(timeIndex).map((key) => {
+       const pointValue = value[timeIndex[key]];
+       if ( !(pointValue == null) ){
+         data.push([
+            key.replace('M', '-'),
+            pointValue
+          ]);
+       }
+    })
+
+    return data;
+  },
+
   setDataAndInfo({ config, data, json, option }){
     const { title, subtitle, seriaType='AREA' } = option;
     Chart.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(option);
     config.info = this.createDatasetInfo(json, option);
-    
+
     if (seriaType && seriaType.toUpperCase() === 'AREA'){
       config.valueMoving = AdapterFn.valueMoving(data)
     }
@@ -81,19 +109,31 @@ const EuroStatFn = {
     config.series[0].data = data;
   },
 
-  setCategories({ config, categories, min, time, subtitle}){
+  setInfo({ config, json, option }){
+    config.info = this.createDatasetInfo(json, option);
+  },
+
+  setCategories({
+    config, categories, min, time, subtitle,
+    tooltip=Tooltip.category
+  }){
     config.xAxis.categories = categories
     config.yAxis.min = min
     config.series[0].name = time
-    //config.series[0].color = COLOR_BAR
+    config.tooltip = Chart.fTooltip(tooltip)
 
-    config.zhConfig.itemCaption = `EU:${subtitle}`
+    config.zhConfig.itemCaption = `EU: ${subtitle}`
     config.zhConfig.itemTime = time
   },
 
   colorEU({ config, categories }){
-    _colorSeria(config, categories, EU_CODES, COLOR_EU)
-    _colorSeria(config, categories, EA_CODES, COLOR_EA)
+    _colorSeria(config, categories, C.EU_CODES, COLOR.EU)
+    _colorSeria(config, categories, C.EA_CODES, COLOR.EA)
+    _colorSeria(config, categories, C.EU_MEMBER, COLOR.EU_MEMBER)
+  },
+
+  setTooltip({ config, tooltip }) {
+    config.tooltip = Chart.fTooltip(tooltip)
   },
 
   convertToUTC(str){
@@ -132,14 +172,14 @@ const EuroStatFn = {
   },
 
   createZhConfig(option){
-    const { key, itemCaption } = option
+    const { key, itemCaption, dataSource } = option
     return {
       id : key,
       key : key,
       itemCaption : itemCaption,
       isWithoutIndicator : true,
       isWithoutAdd : true,
-      dataSource: 'EuroStat'
+      dataSource
     }
   },
 

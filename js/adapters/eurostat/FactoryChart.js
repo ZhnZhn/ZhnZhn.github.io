@@ -39,6 +39,7 @@ var FactoryChart = {
       },
       plotOptions: {
         column: {
+          color: '#8085e9',
           minPointLength: 5,
           pointWidth: 6,
           pointPadding: 0,
@@ -47,6 +48,7 @@ var FactoryChart = {
           shadow: false
         },
         bar: {
+          color: '#8085e9',
           minPointLength: 5,
           pointWidth: 4,
           pointPadding: 0,
@@ -60,13 +62,15 @@ var FactoryChart = {
   },
   createBarConfig: function createBarConfig() {
     var config = FactoryChart.createColumnConfig();
-    config.chart.type = 'bar';
-    config.chart.marginTop = '75';
-    config.chart.height = 600;
+    Object.assign(config.chart, {
+      type: 'bar',
+      marginTop: 75,
+      height: 600
+    });
 
     return config;
   }
 };
 
 exports.default = FactoryChart;
-//# sourceMappingURL=FactoryChart.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\FactoryChart.js.map

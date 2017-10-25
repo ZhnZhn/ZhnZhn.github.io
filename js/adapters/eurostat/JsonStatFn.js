@@ -57,10 +57,11 @@ var _splitForConfig = function _splitForConfig(arr) {
       min = Number.POSITIVE_INFINITY;
   arr.forEach(function (item) {
     var id = item.id,
-        value = item.value;
+        value = item.value,
+        country = _fnIdToCountry(id);
 
-    categories.push(_fnIdToCountry(id));
-    data.push(value);
+    categories.push(country);
+    data.push({ y: value, c: country });
     if (value >= max) {
       max = value;
     }
@@ -87,7 +88,9 @@ var _trHmToData = function _trHmToData(hm, categories) {
   categories.forEach(function (id) {
     if (hm[id] != null) {
       data.push(hm[id]);
+      //data.push({ y: hm[id], c: id });
     } else {
+      //data.push({ y: 0, c: id });
       data.push(0);
     }
   });

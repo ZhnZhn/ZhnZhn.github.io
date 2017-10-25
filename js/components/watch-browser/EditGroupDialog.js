@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
@@ -62,6 +58,8 @@ var _GroupDeletePane2 = _interopRequireDefault(_GroupDeletePane);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import PropTypes from "prop-types";
+
 var EditGroupDialog = function (_Component) {
   (0, _inherits3.default)(EditGroupDialog, _Component);
 
@@ -72,6 +70,15 @@ var EditGroupDialog = function (_Component) {
 
   (0, _createClass3.default)(EditGroupDialog, [{
     key: 'shouldComponentUpdate',
+
+    /*
+    static propTypes = {
+      isShow: PropTypes.bool,
+      store: PropTypes.object,
+      onClose: PropTypes.func
+    }
+    */
+
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
         return false;
@@ -143,10 +150,5 @@ var EditGroupDialog = function (_Component) {
   return EditGroupDialog;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? EditGroupDialog.propTypes = {
-  isShow: _propTypes2.default.bool,
-  store: _propTypes2.default.object,
-  onClose: _propTypes2.default.func
-} : void 0;
 exports.default = EditGroupDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\EditGroupDialog.js.map

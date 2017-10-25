@@ -12,11 +12,11 @@ import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem'
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 
 import Msg from '../../constants/Msg';
-import { ModalDialog, LoadType } from '../../constants/Type';
+import { ModalDialog, LoadType, BrowserType } from '../../constants/Type';
 
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
-import BrowserActions, { BrowserActionTypes } from '../actions/BrowserActions';
+import BrowserActions, { BrowserActionTypes as BAT } from '../actions/BrowserActions';
 import DateUtils from '../../utils/DateUtils';
 
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -152,11 +152,9 @@ const Factory = {
   return createChartContainerComp(_getDialogConf(dialogType), browserType);
  },
 
- createBrowserDynamic(option)
- {
+ _crBrowserDynamic(option) {
     const {
              browserType, caption='Source Browser' , sourceMenuUrl,
-             dialogsId,
              chartContainerType,
              modalDialogType, itemOptionType, itemType, descrUrl
            } = option
@@ -187,15 +185,53 @@ const Factory = {
       onClickInfo : onClickInfo,
       onShowContainer : onShowContainer,
 
-      showAction : BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
-      loadCompletedAction : BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
-      updateAction : BrowserActionTypes.UPDATE_BROWSER_MENU,  //for Type
-      dialogsId: dialogsId,
+      showAction : BAT.SHOW_BROWSER_DYNAMIC,
+      loadCompletedAction : BAT.LOAD_BROWSER_DYNAMIC_COMPLETED,
+      updateAction : BAT.UPDATE_BROWSER_MENU,  //for Type
       onLoadMenu : BrowserActions.loadBrowserDynamic,
       onShowLoadDialog : ComponentActions.showModalDialog  //for Type2
 
     });
+  },
+
+  crAsyncBrowser(option) {
+    const { browserType } = option;
+    switch (browserType) {
+      case BrowserType.WATCH_LIST:
+        /*eslint-disable no-undef */
+        if ( process.env.NODE_ENV === 'development') {
+          return import("js/components/watch-browser/WatchBrowser.js")
+            .then(module => React.createElement(module.default, {
+               key: browserType,
+               browserType: browserType,
+               caption: "Watch List",
+               isInitShow: true,
+               store: ChartStore,
+               //showAction: BAT.SHOW_BROWSER,
+               showAction: BAT.SHOW_BROWSER_DYNAMIC,
+               updateAction: BAT.UPDATE_WATCH_BROWSER
+            }));
+        }
+        /*eslint-enable no-undef */
+        return import(
+           /* webpackChunkName: "watch-browser" */
+           /* webpackMode: "lazy" */
+           "../../components/watch-browser/WatchBrowser"
+         ).then(module => React.createElement(module.default, {
+             key: browserType,
+             browserType: browserType,
+             caption: "Watch List",
+             isInitShow: true,
+             store: ChartStore,
+             showAction: BAT.SHOW_BROWSER_DYNAMIC,
+             updateAction: BAT.UPDATE_WATCH_BROWSER
+         }));
+      default: return Promise.resolve(
+           this._crBrowserDynamic(option)
+      )
+    }
   }
+
 }
 
 export default Factory

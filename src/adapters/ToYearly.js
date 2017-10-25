@@ -50,11 +50,33 @@ const _crPoint = (item) => {
     y: item[1]
   };
 }
+const _crValuePoint = item => item[1];
+const _crValueYearPoint = item => {
+  return {
+    v: item[1],
+    y: _getYear(item[0])
+  }
+}
+const _findHighLow = (arr) => {
+  let h = { v: Number.NEGATIVE_INFINITY, y: '' },
+      l = { v: Number.POSITIVE_INFINITY, y: '' };
+  arr.forEach(item => {
+    if (item.v > h.v) {
+      h = item
+    }
+    if (item.v < l.v ) {
+      l = item
+    }
+  })
+  return {
+    high: h.v, yHigh: h.y,
+    low: l.v, yLow: l.y
+  };
+}
 const _crHighLowPoint = (key, arr) => {
   return {
       c: key,
-      high: Math.max.apply(null, arr),
-      low: Math.min.apply(null, arr)
+      ..._findHighLow(arr)
   };
 }
 const _calcAvg = (arr) => {
@@ -87,6 +109,7 @@ const _crSeries = (data) => {
   const firtsItem = data[0][0]
       , _yearNow = _getYear(firtsItem)
       , { i, arr:_dNow } = _crSeriaData(data, 0, _yearNow)
+      //
       , prevItem = data[i][0]
       , _yearPrev = _getYear(prevItem)
       , { arr:_dPrev } = _crSeriaData(data, i, _yearPrev);
@@ -114,7 +137,7 @@ const _crBaseHm = () => {
   })
   return hm;
 }
-const _crHm = (i, data, stopYear) => {
+const _crMonthHm = (i, data, stopYear, crPoint=_crValuePoint) => {
   const hm = _crBaseHm()
       , max = data.length;
   let isBreaked = false;
@@ -126,7 +149,8 @@ const _crHm = (i, data, stopYear) => {
       break;
     }
     const _m = _getMonth(_item[0])
-    hm[_m].push(_item[1])
+    //hm[_m].push(_item[1])
+    hm[_m].push(crPoint(_item))
   }
 
   return { hm, isBreaked };
@@ -136,7 +160,9 @@ const _crHm = (i, data, stopYear) => {
 const _crRangeSeria = (data) => {
   const refYear = parseFloat(_getYear(data[0][0]))
       , stopYear = '' + (refYear - 5)
-      , { hm, isBreaked } = _crHm(0, data, stopYear)
+      , { hm, isBreaked } = _crMonthHm(
+            0, data, stopYear, _crValueYearPoint
+        )
       , max = data.length
       , _stopYear = isBreaked
            ? stopYear
@@ -146,8 +172,8 @@ const _crRangeSeria = (data) => {
 
   return {
     rangeSeria: ConfigBuilder()
-      .initAreaRange(
-         Tooltip.categoryAreaRange, {
+      .initAreaRange(         
+         Tooltip.categoryRHLY, {
            data: _data,
            name: name,
            point: {}
@@ -174,7 +200,7 @@ const _crAvgSeria = (data) => {
       , stopYear = '' + (parseFloat(yearNow) - 5)
       , max = data.length
       , startIndex = _findStartYearIndex(data, yearNow)
-      , { hm, isBreaked } = _crHm(startIndex, data, stopYear)
+      , { hm, isBreaked } = _crMonthHm(startIndex, data, stopYear)
       , _stopYear = isBreaked
            ? stopYear
            : _getYear(data[max-1][0])
@@ -189,11 +215,14 @@ const _crAvgSeria = (data) => {
 
 
 const _crZhConfig = (option, { legend }) => {
-  const { value, dataSource } = option
+  const { value, dataSource, itemCaption } = option
       , _id = value + '_' + 'YEARLY';
   return {
     id: _id,
     key: _id,
+    itemCaption,
+    isWithoutIndicator: true,
+    isWithoutAdd: true,
     isWithLegend: true,
     legend: legend,
     dataSource: dataSource

@@ -5,15 +5,13 @@ const BrowserConfig = {
     browserType: BrowserType.STOCK_MARKETS,
     isDynamic: true,
     caption: 'Stock Markets',
-    sourceMenuUrl: './data/stock-markets/source-menu.json',
-    dialogsId: 'ALPHA'
+    sourceMenuUrl: './data/stock-markets/source-menu.json'
   },
   [BrowserType.EUROSTAT] : {
     browserType: BrowserType.EUROSTAT,
     isDynamic : true,
     caption: 'European Statistics',
-    sourceMenuUrl : './data/eurostat/source-menu.json',
-    dialogsId: 'EUROSTAT'
+    sourceMenuUrl : './data/eurostat/source-menu.json'    
   },
   [BrowserType.UN_COMTRADE]: {
     browserType: BrowserType.UN_COMTRADE,
@@ -99,7 +97,7 @@ const BrowserConfig = {
 
   [BrowserType.WATCH_LIST] : {
     browserType : BrowserType.WATCH_LIST,
-    isDynamic : false,
+    //isDynamic : false,
     withoutItemCounter : true
   }
 };

@@ -5,11 +5,12 @@ export const AnalyticActionTypes = {
   ANSWER_NO  : 'answerNo',
   NO_ANSWER  : 'noAnswer'
 };
+const A = AnalyticActionTypes;
 
 const AnalyticActions = Reflux.createActions({
-  [AnalyticActionTypes.ANSWER_YES] : {},
-  [AnalyticActionTypes.ANSWER_NO] : {},
-  [AnalyticActionTypes.NO_ANSWER] : {}
+  [A.ANSWER_YES]: {},
+  [A.ANSWER_NO]: {},
+  [A.NO_ANSWER]: {}
 });
 
 export default AnalyticActions

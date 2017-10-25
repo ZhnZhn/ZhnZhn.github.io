@@ -16,6 +16,10 @@ var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
+var _Tooltip = require('../../charts/Tooltip');
+
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
+
 var _QuandlFn = require('../QuandlFn2');
 
 var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
@@ -30,11 +34,16 @@ var _ChoroplethMapSlice2 = _interopRequireDefault(_ChoroplethMapSlice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var COLOR_EU = "#0088FF";
-var COLOR_EA = "#FF5800";
-//const COLOR_BAR = "#92D050";
-var EU_CODES = ["EU", "EU27", "EU28"];
-var EA_CODES = ["EA", "EA18", "EA19"];
+var COLOR = {
+  EU: "#0088FF",
+  EA: "#FF5800",
+  EU_MEMBER: "#7CB5EC"
+};
+var C = {
+  EU_CODES: ["EU", "EU27", "EU28"],
+  EA_CODES: ["EA", "EA18", "EA19"],
+  EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
+};
 
 var SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
 
@@ -61,11 +70,11 @@ var _is = function _is(value) {
 };
 
 var _colorSeria = function _colorSeria(config, categories, codes, color) {
+  var data = config.series[0].data;
   codes.forEach(function (code) {
     var _index = categories.findIndex(_is(code));
     if (_index !== -1) {
-      var value = config.series[0].data[_index];
-      config.series[0].data[_index] = { y: value, color: color };
+      data[_index].color = color;
     }
   });
 };
@@ -94,6 +103,17 @@ var EuroStatFn = (0, _extends3.default)({
 
     return { data: data, max: max, min: min };
   },
+  toPointArr: function toPointArr(timeIndex, value) {
+    var data = [];
+    Object.keys(timeIndex).map(function (key) {
+      var pointValue = value[timeIndex[key]];
+      if (!(pointValue == null)) {
+        data.push([key.replace('M', '-'), pointValue]);
+      }
+    });
+
+    return data;
+  },
   setDataAndInfo: function setDataAndInfo(_ref) {
     var config = _ref.config,
         data = _ref.data,
@@ -116,27 +136,43 @@ var EuroStatFn = (0, _extends3.default)({
     config.series[0].zhSeriaId = option.key;
     config.series[0].data = data;
   },
-  setCategories: function setCategories(_ref2) {
+  setInfo: function setInfo(_ref2) {
     var config = _ref2.config,
-        categories = _ref2.categories,
-        min = _ref2.min,
-        time = _ref2.time,
-        subtitle = _ref2.subtitle;
+        json = _ref2.json,
+        option = _ref2.option;
+
+    config.info = this.createDatasetInfo(json, option);
+  },
+  setCategories: function setCategories(_ref3) {
+    var config = _ref3.config,
+        categories = _ref3.categories,
+        min = _ref3.min,
+        time = _ref3.time,
+        subtitle = _ref3.subtitle,
+        _ref3$tooltip = _ref3.tooltip,
+        tooltip = _ref3$tooltip === undefined ? _Tooltip2.default.category : _ref3$tooltip;
 
     config.xAxis.categories = categories;
     config.yAxis.min = min;
     config.series[0].name = time;
-    //config.series[0].color = COLOR_BAR
+    config.tooltip = _Chart2.default.fTooltip(tooltip);
 
-    config.zhConfig.itemCaption = 'EU:' + subtitle;
+    config.zhConfig.itemCaption = 'EU: ' + subtitle;
     config.zhConfig.itemTime = time;
   },
-  colorEU: function colorEU(_ref3) {
-    var config = _ref3.config,
-        categories = _ref3.categories;
+  colorEU: function colorEU(_ref4) {
+    var config = _ref4.config,
+        categories = _ref4.categories;
 
-    _colorSeria(config, categories, EU_CODES, COLOR_EU);
-    _colorSeria(config, categories, EA_CODES, COLOR_EA);
+    _colorSeria(config, categories, C.EU_CODES, COLOR.EU);
+    _colorSeria(config, categories, C.EA_CODES, COLOR.EA);
+    _colorSeria(config, categories, C.EU_MEMBER, COLOR.EU_MEMBER);
+  },
+  setTooltip: function setTooltip(_ref5) {
+    var config = _ref5.config,
+        tooltip = _ref5.tooltip;
+
+    config.tooltip = _Chart2.default.fTooltip(tooltip);
   },
   convertToUTC: function convertToUTC(str) {
     if (str.indexOf('M') !== -1) {
@@ -154,11 +190,11 @@ var EuroStatFn = (0, _extends3.default)({
       return Date.UTC(str, 11, 31);
     }
   },
-  setLineExtrems: function setLineExtrems(_ref4) {
-    var config = _ref4.config,
-        max = _ref4.max,
-        min = _ref4.min,
-        isNotZoomToMinMax = _ref4.isNotZoomToMinMax;
+  setLineExtrems: function setLineExtrems(_ref6) {
+    var config = _ref6.config,
+        max = _ref6.max,
+        min = _ref6.min,
+        isNotZoomToMinMax = _ref6.isNotZoomToMinMax;
 
     var plotLines = config.yAxis.plotLines;
 
@@ -177,7 +213,8 @@ var EuroStatFn = (0, _extends3.default)({
   },
   createZhConfig: function createZhConfig(option) {
     var key = option.key,
-        itemCaption = option.itemCaption;
+        itemCaption = option.itemCaption,
+        dataSource = option.dataSource;
 
     return {
       id: key,
@@ -185,7 +222,7 @@ var EuroStatFn = (0, _extends3.default)({
       itemCaption: itemCaption,
       isWithoutIndicator: true,
       isWithoutAdd: true,
-      dataSource: 'EuroStat'
+      dataSource: dataSource
     };
   },
   createDatasetInfo: function createDatasetInfo(json, option) {

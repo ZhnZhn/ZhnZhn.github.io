@@ -5,7 +5,7 @@ const COUNTRY_CAPTION_DF = 'EU'
     , AREA = 'AREA'
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, group } = props
+  const { loadId, group, dataSource } = props
       , { one, two={}, chartType={}, date, dateDefault } = options
       , { value:chartTypeValue='AREA' } = chartType
       , _countryValue = (one)
@@ -43,7 +43,8 @@ const createLoadOptions = (props={}, options={}) => {
     zhCompType : _zhCompType,
     mapValue : _mapValue,
     zhMapSlice : { ..._mapSlice, time : _time },
-    time : _time
+    time : _time,
+    dataSource
   }
 };
 

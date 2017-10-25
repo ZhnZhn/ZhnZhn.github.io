@@ -1,0 +1,38 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\eurostat\\toAreaYearly.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\eurostat\\toAreaYearly.js",
+ "sourceRoot": "",
+ "names": [
+  "_crTimeIndexAndValue",
+  "json",
+  "dimension",
+  "value",
+  "time",
+  "category",
+  "index",
+  "timeIndex",
+  "toAreaYearly",
+  "createConfig",
+  "option",
+  "data",
+  "toPointArr",
+  "title",
+  "subtitle",
+  "dataSource",
+  "config",
+  "toConfig",
+  "reverse",
+  "itemCaption",
+  "setInfo",
+  "createSeria",
+  "seria",
+  "fSeries",
+  "Object",
+  "assign",
+  "zhSeriaId",
+  "zhValueText"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,uBAAuB,SAAvBA,oBAAuB,OAAQ;AAAA,wBACAC,IADA,CAC3BC,SAD2B;AAAA,MAC3BA,SAD2B,mCACjB,EADiB;AAAA,oBACAD,IADA,CACbE,KADa;AAAA,MACbA,KADa,+BACP,EADO;AAAA,wBAEfD,SAFe,CAE3BE,IAF2B;AAAA,MAE3BA,IAF2B,mCAEtB,EAFsB;AAAA,uBAGXA,IAHW,CAG3BC,QAH2B;AAAA,MAG3BA,QAH2B,kCAGlB,EAHkB;AAAA,wBAILA,QAJK,CAI3BC,KAJ2B;AAAA,MAIrBC,SAJqB,mCAIX,CAJW;;AAKnC,SAAO,EAAEA,oBAAF,EAAaJ,YAAb,EAAP;AACD,CAND;;AAQA,IAAMK,eAAe;AAClBC,gBAAc,sBAACR,IAAD,EAAOS,MAAP,EAAkB;AAAA,gCACDV,qBAAqBC,IAArB,CADC;AAAA,QACtBM,SADsB,yBACtBA,SADsB;AAAA,QACXJ,KADW,yBACXA,KADW;AAAA,QAExBQ,IAFwB,GAEjB,qBAAWC,UAAX,CAAsBL,SAAtB,EAAiCJ,KAAjC,CAFiB;AAAA,QAGtBU,KAHsB,GAGUH,MAHV,CAGtBG,KAHsB;AAAA,QAGfC,QAHe,GAGUJ,MAHV,CAGfI,QAHe;AAAA,QAGLC,UAHK,GAGUL,MAHV,CAGLK,UAHK;AAAA,QAIxBC,MAJwB,GAIf,mBAASC,QAAT,CACPN,KAAKO,OAAL,EADO,EACS;AAChBL,kBADgB,EACTC,kBADS;AAEhBK,mBAAaN,QAAQ,IAAR,GAAeC,QAFZ;AAGhBX,aAAOU,QAAQ,GAAR,GAAcC,QAHL;AAIhBC;AAJgB,KADT,CAJe;;AAY7B,yBAAWK,OAAX,CAAmB,EAAEJ,cAAF,EAAUf,UAAV,EAAgBS,cAAhB,EAAnB;AACA,WAAOM,MAAP;AACF,GAfiB;;AAiBlBK,eAAa,qBAACpB,IAAD,EAAOS,MAAP,EAAkB;AAC7B,QAAMY,QAAQ,sBAAYC,OAAZ,EAAd;AACAC,WAAOC,MAAP,CAAcH,KAAd,EAAqB;AACnBI,iBAAW,aADQ;AAEnBC,mBAAa;AAFM,KAArB;AAIA,WAAOL,KAAP;AACD;;AAxBiB,CAArB;;kBA4Bed,Y"
+}

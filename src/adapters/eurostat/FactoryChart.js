@@ -34,6 +34,7 @@ const FactoryChart = {
       },
       plotOptions: {
         column : {
+          color: '#8085e9',
           minPointLength : 5,
           pointWidth : 6,
           pointPadding : 0,
@@ -42,6 +43,7 @@ const FactoryChart = {
           shadow : false
         },
         bar : {
+          color: '#8085e9',
           minPointLength : 5,
           pointWidth : 4,
           pointPadding : 0,
@@ -54,10 +56,12 @@ const FactoryChart = {
     }
   },
   createBarConfig : () => {
-    const config = FactoryChart.createColumnConfig()
-    config.chart.type = 'bar';
-    config.chart.marginTop = '75';
-    config.chart.height = 600;
+    const config = FactoryChart.createColumnConfig();
+    Object.assign(config.chart, {
+      type: 'bar',
+      marginTop: 75,
+      height: 600
+    })
 
     return config;
   }

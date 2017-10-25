@@ -1,6 +1,6 @@
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, group } = props
+  const { loadId, group, dataSource } = props
       , { one, two } = options
       , { value:oneValue, caption:oneCaption='' } = one
       , { value:twoValue, caption:twoCaption='' } = two
@@ -15,7 +15,8 @@ const createLoadOptions = (props={}, options={}) => {
     subtitle : twoCaption,
     alertItemId : `${oneCaption}:${twoCaption}`,
     alertGeo : oneCaption,
-    alertMetric : twoCaption
+    alertMetric : twoCaption,
+    dataSource
   }
 }
 

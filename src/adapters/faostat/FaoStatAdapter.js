@@ -11,6 +11,8 @@ import C from './conf'
 const _crZhConfig = (id, { dfDomain, oneCaption }) => ({
   id: id,
   key: id,
+  isWithoutIndicator: true,
+  isWithoutAdd: true,
   dataSource: "FAOSTAT",
   linkFn: "FAO_STAT",
   item: dfDomain,
