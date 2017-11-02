@@ -27,13 +27,11 @@ const _model = [
   },{
     id: 'UN_COMTRADE',
     cn: 'item__eurostat',
-    title: 'UN Comtrade',
-    isNew: true
+    title: 'UN Comtrade'
   },{
     id: 'FAOSTAT',
     cn: 'item__eurostat',
     title: 'FAOSTAT',
-    isNew: true
   },{
     id: 'EUROSTAT',
     cn: 'item__eurostat',
@@ -42,6 +40,11 @@ const _model = [
     id: 'FRANCE_STATISTICS',
     cn: 'item__eurostat',
     title: 'Insee: France Statistics'
+  },{
+    id: 'NORWAY_STATISTICS',
+    cn: 'item__eurostat',
+    title: 'Statistics Norway',
+    isNew: true
   },{
     id: 'QUANDL',
     isQuandl: true,

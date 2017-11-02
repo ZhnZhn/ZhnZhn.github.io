@@ -31,7 +31,7 @@ const _fnForMonthSelect = function(mapDateDf=2){
 	return { options, dateDefault };
 }
 
-const _fnForQuarterSelect = function(mapDateDf=1){
+const _fnForQuarterSelect = function(mapDateDf=1, delimeter='Q'){
 	const options = []
 	, dNow = new Date(Date.now())
 
@@ -49,12 +49,12 @@ const _fnForQuarterSelect = function(mapDateDf=1){
 		 if (qNow < 1) { y = y - 1; qNow = 4; }
 
 		 options.push({
-			 caption : `${y}Q${qNow}`,
-			 value : `${y}Q${qNow}`
+			 caption : `${y}${delimeter}${qNow}`,
+			 value : `${y}${delimeter}${qNow}`
 		 })
 
 		 if (i === mapDateDf) {
-		    dateDefault = `${y}Q${qNow}`
+		    dateDefault = `${y}${delimeter}${qNow}`
 		 }
 
 		 qNow = qNow - 1;
@@ -170,6 +170,8 @@ const DateUtils = {
 			 return _fnForMonthSelect(mapDateDf);
 		 } else if ( frequency === 'Q'){
 			 return _fnForQuarterSelect(mapDateDf);
+		 } else if ( frequency === 'K') {
+			 return _fnForQuarterSelect(mapDateDf, 'K');
 		 } else if ( frequency === 'Y'){
 			 return _fnForYearSelect(mapDateDf);
 		 }

@@ -24,6 +24,7 @@ var createLoadOptions = function createLoadOptions() {
   var loadId = props.loadId,
       group = props.group,
       dataSource = props.dataSource,
+      dfProps = props.dfProps,
       one = options.one,
       _options$two = options.two,
       two = _options$two === undefined ? {} : _options$two,
@@ -53,7 +54,7 @@ var createLoadOptions = function createLoadOptions() {
     }
   }
 
-  return {
+  return (0, _extends3.default)({}, dfProps, {
     geo: _countryValue,
     group: group,
     metric: two.value,
@@ -69,8 +70,9 @@ var createLoadOptions = function createLoadOptions() {
     mapValue: _mapValue,
     zhMapSlice: (0, _extends3.default)({}, _mapSlice, { time: _time }),
     time: _time,
-    dataSource: dataSource
-  };
+    dataSource: dataSource,
+    items: [one, two]
+  });
 };
 
 exports.default = createLoadOptions;

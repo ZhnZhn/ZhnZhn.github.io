@@ -4,6 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+
+var C = {
+  N: 6,
+  ITERATION: 100
+};
+
 // convenience functions
 var getterSetter = function getterSetter(initialValue, validator) {
   var thingToGetSet = initialValue;
@@ -181,8 +187,18 @@ var clusterMaker = {
       cluster.points = cluster.points.sort(compareUnaryPoint);
       return cluster;
     });
+  },
+  crUnarySortedCluster: function crUnarySortedCluster() {
+    var points = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : C.N;
+    var iteration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : C.ITERATION;
+
+    this.k(n);
+    this.iterations(iteration);
+    this.data(points);
+    return this.unarySortedClusters();
   }
 };
 
 exports.default = clusterMaker;
-//# sourceMappingURL=k-means.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\math\k-means.js.map

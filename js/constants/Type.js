@@ -6,9 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 var BrowserType = exports.BrowserType = {
   STOCK_MARKETS: 'SM',
   EUROSTAT: 'ES',
-  FRANCE_STATISTICS: 'FS',
   UN_COMTRADE: 'UN',
   FAOSTAT: 'FAO',
+  FRANCE_STATISTICS: 'FS',
+  NORWAY_STATISTICS: 'NST',
 
   PREMIUM_SAMPLE: 'QPS',
   ECONOMIC: 'QE',
@@ -66,6 +67,7 @@ var LoadType = exports.LoadType = {
   QCT: 'QCT',
   EU_STAT: 'EU_STAT',
   FS: 'FS',
+  NST: 'NST',
   UN: 'UN',
   FAO: 'FAO',
   WL: 'WL'

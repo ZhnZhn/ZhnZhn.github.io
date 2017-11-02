@@ -47,6 +47,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   isDynamic: true,
   caption: 'Insee: France Statistics',
   sourceMenuUrl: './data/france-statistics/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NORWAY_STATISTICS, {
+  browserType: _Type.BrowserType.NORWAY_STATISTICS,
+  isDynamic: true,
+  caption: 'Statistics Norway',
+  sourceMenuUrl: './data/statistics-norway/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,

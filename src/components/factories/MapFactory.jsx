@@ -7,6 +7,19 @@ const MapFactory = {
     return (
       <ClusterInfo {...props} />
     );
+  },
+  
+  crInfo({ label, value }){
+    return(
+      <p>
+        <span>
+          {label}:&nbsp;
+        </span>
+        <span>
+          {value ? value : 'unknown'}
+        </span>
+      </p>
+    );
   }
 }
 

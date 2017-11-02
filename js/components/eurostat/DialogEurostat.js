@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -37,7 +37,7 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat, _Component);
 
   /*
@@ -173,6 +173,11 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
     }
   }]);
   return DialogEurostat;
-}(_react.Component)) || _class) || _class);
+}(_react.Component), _class2.defaultProps = {
+  oneCaption: 'Item',
+  oneJsonProp: 'items',
+  twoCaption: 'Metric',
+  twoJsonProp: 'metrics'
+}, _temp)) || _class) || _class);
 exports.default = DialogEurostat;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogEurostat.js.map

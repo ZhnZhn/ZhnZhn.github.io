@@ -1,0 +1,31 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-norway\\fnAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-norway\\fnAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "fnAdapter",
+  "crId",
+  "option",
+  "items",
+  "dfId",
+  "_caption",
+  "caption",
+  "crInfo",
+  "label",
+  "updated",
+  "name",
+  "description",
+  "replace",
+  "crZhConfig",
+  "dataSource",
+  "_id",
+  "id",
+  "key",
+  "itemCaption",
+  "isWithoutAdd",
+  "isWithLegend"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,YAAY;AAChBC,QAAM,cAACC,MAAD,EAAY;AAAA,QACRC,KADQ,GACaD,MADb,CACRC,KADQ;AAAA,uBACaD,MADb,CACDE,IADC;AAAA,QACDA,IADC,gCACI,IADJ;AAAA,QAETC,QAFS,GAEGF,MAAM,CAAN,IAAWA,MAAM,CAAN,EAASG,OAApB,GAA8B,WAFjC;;AAGhB,WAAOF,OAAO,GAAP,GAAaC,QAApB;AACD,GALe;;AAOhBE,UAAQ;AAAA,0BAAGC,KAAH;AAAA,QAAGA,KAAH,8BAAS,EAAT;AAAA,4BAAaC,OAAb;AAAA,QAAaA,OAAb,gCAAqB,EAArB;AAAA,WAA+B;AACrCC,YAAMF,KAD+B;AAErCG,mBAAa,yBAAyBF,QAAQG,OAAR,CAAgB,GAAhB,EAAqB,GAArB,EAA0BA,OAA1B,CAAkC,GAAlC,EAAuC,EAAvC;AAFD,KAA/B;AAAA,GAPQ;;AAYhBC,cAAY,oBAACX,MAAD,EAAY;AAChB,QAAEY,UAAF,GAAiBZ,MAAjB,CAAEY,UAAF;AAAA,QACAC,GADA,GACMf,UAAUC,IAAV,CAAeC,MAAf,CADN;;AAEN,WAAO;AACLc,UAAID,GADC;AAELE,WAAKF,GAFA;AAGLG,mBAAaH,GAHR;AAILI,oBAAc,IAJT;AAKLC,oBAAc,KALT;AAMLN;AANK,KAAP;AAQD;AAvBe,CAAlB;;kBA0Bed,S"
+}

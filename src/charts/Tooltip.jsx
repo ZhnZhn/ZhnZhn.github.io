@@ -2,6 +2,7 @@ import Highcharts from 'highcharts';
 import { render } from 'react-dom';
 
 import ChartFn from './ChartFn'
+//import ChartConfig from './ChartConfig'
 import SparkFactory from '../components/factories/SparkFactory';
 
 const SPARKLINES_SUFFIX_ID = 'sparklines'
@@ -11,13 +12,22 @@ const SPARKLINES_SUFFIX_ID = 'sparklines'
     , WIDTH_TOTAL = 50
     , WIDTH_SPARK = 20 + 80 + 16;
 
+//const formatNumber = ChartConfig.fnNumberFormat;
+
 const C = {
   TITLE_C: '#a487d4',
   YEAR_C: '#fdb316',
   VALUE_C: '#2f7ed8',
   EX_DIVIDEND_C: 'green'
 }
-const TITLE_STYLE = `style="color:${C.TITLE_C};"`
+const TITLE_STYLE = `style="color:${C.TITLE_C};"`;
+
+const _numberFormat = (value) => {
+  const arrSplit = (value+'').split('.')
+      , decimal = arrSplit[1] ? arrSplit[1].length : 0;
+   return Highcharts
+     .numberFormat(value, decimal, '.', ' ');
+}
 
 const _crSpan = (t='', v='', { color=C.VALUE_C }={}) => {
   const _vStyle = `style="color:${color};"`;
@@ -140,7 +150,7 @@ const _fnCategory = function({ id, point }){
   const { y, c } = point;
   return `${_crHeader(c, id)}
   <div class="tp__body">
-    ${_crRow('Value', y)}
+    ${_crRow('Value', _numberFormat(y))}
   </div>`;
 };
 

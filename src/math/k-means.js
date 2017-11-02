@@ -1,4 +1,10 @@
 
+
+const C = {
+  N: 6,
+  ITERATION: 100
+};
+
 // convenience functions
 const getterSetter = function(initialValue, validator) {
   let thingToGetSet = initialValue;
@@ -144,6 +150,13 @@ const clusterMaker = {
            cluster.points = cluster.points.sort(compareUnaryPoint);
            return cluster;
         });
+  },
+
+  crUnarySortedCluster(points=[], n=C.N, iteration=C.ITERATION){
+    this.k(n)
+    this.iterations(iteration)
+    this.data(points)
+    return this.unarySortedClusters();
   }
 
 };

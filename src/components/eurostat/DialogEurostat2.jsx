@@ -1,42 +1,26 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import { CompItemType } from '../../constants/Type';
 import DateUtils from '../../utils/DateUtils';
-import ArrayUtil from '../../utils/ArrayUtil';
 
 import D from '../dialogs/DialogCell'
 import Decor from '../dialogs/decorators/Decorators';
 
-const  DATE_PLACEHOLDER = 'Before Select Indicator'
-     , MAP_FREQUENCY_DF = 'M'
-     , AREA = 'AREA'
-     , AREA_YEARLY = 'AREA_YEARLY'
-     , MAP = 'MAP'
-     , categoryTypes = [ 'MAP', 'COLUMN', 'BAR'];
+import RouterOptions from './RouterOptions';
 
-const chartTypeOptions = [
-    { caption : 'Default : Area', value: AREA },
-    { caption : 'Map : All Countries' , value: MAP, compType : CompItemType.EUROSTAT_MAP },
-    { caption : 'Column : All Countries', value: 'COLUMN' },
-    { caption : 'Bar : All Countries', value: 'BAR' }
-];
-const chartTypeOptions2 = [
-  { caption : 'Default : Area', value: AREA },
-  { caption : 'Yearly by Months' , value: AREA_YEARLY },
-];
-
-const isCategoryType = (chartType) => {
-  if (!chartType){
-    return false;
-  }
-  return ArrayUtil.isStrInArr(chartType.value)(categoryTypes);
-}
-
+const  DATE_PLACEHOLDER = 'Before Select Metric'
+     , MAP_FREQUENCY_DF = 'M';
 
 @Decor.withToolbar
 @Decor.withValidationLoad
 class DialogEurostat2 extends Component {
+  static defaultProps = {
+    oneCaption: 'Item',
+    oneJsonProp: 'items',
+    twoCaption: 'Metric',
+    twoJsonProp: 'metrics',
+  }
+
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -72,10 +56,7 @@ class DialogEurostat2 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
 
-    switch(props.chartsType){
-      case 't2': this._chartOptions = chartTypeOptions2; break;
-      default: this._chartOptions = chartTypeOptions
-    }
+    this._chartOptions = RouterOptions.getOptions(props.chartsType)
 
     this.state = {
       isShowDate : false,
@@ -94,8 +75,8 @@ class DialogEurostat2 extends Component {
     return true;
   }
 
-  _handleSelectOne = (one) => {
-    this.one = one;
+  _isCategory = () => {
+    return RouterOptions.isCategory(this.chartType)
   }
 
   _updateForDate = () => {
@@ -119,16 +100,20 @@ class DialogEurostat2 extends Component {
     });
   }
 
+  _handleSelectOne = (one) => {
+    this.one = one;
+  }
+
   _handleSelectTwo = (two) => {
     this.two = two;
-    if(isCategoryType(this.chartType)){
+    if (this._isCategory()) {
       this._updateForDate();
     }
   }
 
   _handleSelectChartType = (chartType) => {
     this.chartType = chartType;
-    if(isCategoryType(this.chartType)){
+    if (this._isCategory()) {
       this._updateForDate();
     } else {
       this.setState({ isShowDate : false });
@@ -147,9 +132,9 @@ class DialogEurostat2 extends Component {
   }
   _createValidationMessages = () => {
      const { oneCaption, twoCaption } = this.props;
-     let msg = [];
+     const msg = [];
 
-     if(!isCategoryType(this.chartType)){
+     if (!this._isCategory()) {
         if (!this.one) { msg.push(this.props.msgOnNotSelected(oneCaption)); }
      }
      if (!this.two) { msg.push(this.props.msgOnNotSelected(twoCaption)); }
@@ -208,11 +193,11 @@ class DialogEurostat2 extends Component {
                uri={twoURI}
                jsonProp={twoJsonProp}
                caption={twoCaption}
-               optionNames="Items"
+               optionNames="Metrics"
                onSelect={this._handleSelectTwo}
              />
              <D.RowInputSelect
-               caption="Chart Type"
+               caption="Chart"
                placeholder="Default: Area"
                options={this._chartOptions}
                onSelect={this._handleSelectChartType}

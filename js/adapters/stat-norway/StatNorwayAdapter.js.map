@@ -1,0 +1,21 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-norway\\StatNorwayAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-norway\\StatNorwayAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "AREA",
+  "StatNorwayAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "seriaType",
+  "crConfig",
+  "getCrConfig",
+  "config",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,OAAO,MAAb;;AAEA,IAAMC,oBAAoB;AACxBC,UADwB,oBACfC,IADe,EACTC,MADS,EACF;AACd,QAAEC,SAAF,GAAgBD,MAAhB,CAAEC,SAAF;AAAA,QACAC,QADA,GACW,uBAAaC,WAAb,CAAyBF,SAAzB,CADX;AAAA,QAEAG,MAFA,GAESF,SAASH,IAAT,EAAeC,MAAf,CAFT;;;AAIN,WAAO,EAAEI,cAAF,EAAP;AACD,GAPuB;AASxBC,UATwB,oBASfN,IATe,EASTC,MATS,EASD;AACpB,QAAME,WAAW,uBAAaC,WAAb,CAAyBP,IAAzB,CAAjB;AAAA,QACMQ,SAASF,SAASH,IAAT,EAAeC,MAAf,CADf;;AAGA,WAAOI,OAAOE,MAAP,CAAc,CAAd,CAAP;AACF;AAduB,CAA1B;;kBAiBeT,iB"
+}

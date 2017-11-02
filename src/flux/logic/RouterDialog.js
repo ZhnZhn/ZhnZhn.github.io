@@ -103,8 +103,10 @@ const _router = {
 
   loadDialogs(browserType) {
     switch(browserType){
-      case BT.STOCK_MARKETS: this._loadSM(); break;
-      case BT.EUROSTAT: this._loadES(); break;
+      case BT.STOCK_MARKETS:
+        this._loadSM(); break;
+      case BT.EUROSTAT: case BT.NORWAY_STATISTICS:
+         this._loadES(); break;
       default: return undefined;
     }
   }

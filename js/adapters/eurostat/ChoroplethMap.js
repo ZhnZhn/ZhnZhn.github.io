@@ -95,13 +95,6 @@ var _fnMergeGeoAndValue = function _fnMergeGeoAndValue(sGeo, dGeo, json) {
   return { minValue: minValue, maxValue: maxValue, points: points };
 };
 
-var _fnCreateClusters = function _fnCreateClusters(points, n, iteration) {
-  _kMeans2.default.k(n);
-  _kMeans2.default.iterations(iteration);
-  _kMeans2.default.data(points);
-  return _kMeans2.default.unarySortedClusters();
-};
-
 var _fnCreateHmIdCluster = function _fnCreateHmIdCluster(clusters) {
   var hm = {};
   clusters.forEach(function (cluster, i) {
@@ -179,10 +172,8 @@ var _fnCreateInfoControl = function _fnCreateInfoControl(L, mapId) {
   };
   wgInfo.update = function (props) {
     if (props) {
-      var label = props.label,
-          value = props.value;
-
-      this.divEl.innerHTML = '<p><span>' + label + ':&nbsp;</span><span>' + (value ? value : 'unknown') + '</span></p>';
+      var elInfo = _MapFactory2.default.crInfo(props);
+      (0, _reactDom.render)(elInfo, document.getElementById(this.idEl));
     }
   };
   wgInfo.updateCluster = function (cluster, color, from, to) {
@@ -285,7 +276,7 @@ var _createChoroplethMap = function _createChoroplethMap(option) {
       maxValue = _fnMergeGeoAndValue2.maxValue,
       points = _fnMergeGeoAndValue2.points,
       _points = _fnAddGeoSeria(points, statJson, configSlice),
-      _clusters = _fnCreateClusters(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
+      _clusters = _kMeans2.default.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION),
       _hmIdCluster = _fnCreateHmIdCluster(_clusters);
 
   _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);

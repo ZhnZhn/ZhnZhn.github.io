@@ -7,6 +7,13 @@ import Decor from '../dialogs/decorators/Decorators'
 @Decor.withToolbar
 @Decor.withValidationLoad
 class DialogEurostat extends Component {
+  static defaultProps = {
+    oneCaption: 'Item',
+    oneJsonProp: 'items',
+    twoCaption: 'Metric',
+    twoJsonProp: 'metrics',
+  }
+
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -25,7 +32,7 @@ class DialogEurostat extends Component {
     loadFn: PropTypes.func
   }
   */
-  
+
   constructor(props){
     super();
     this.one = undefined;

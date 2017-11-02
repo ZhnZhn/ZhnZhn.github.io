@@ -2,9 +2,10 @@
 export const BrowserType = {
    STOCK_MARKETS: 'SM',
    EUROSTAT : 'ES',
-   FRANCE_STATISTICS : 'FS',
    UN_COMTRADE: 'UN',
    FAOSTAT: 'FAO',
+   FRANCE_STATISTICS : 'FS',
+   NORWAY_STATISTICS: 'NST',
 
    PREMIUM_SAMPLE : 'QPS',
    ECONOMIC : 'QE',
@@ -62,6 +63,7 @@ export const LoadType = {
   QCT: 'QCT',
   EU_STAT: 'EU_STAT',
   FS: 'FS',
+  NST: 'NST',
   UN: 'UN',
   FAO: 'FAO',
   WL: 'WL'

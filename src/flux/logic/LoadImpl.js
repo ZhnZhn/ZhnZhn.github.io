@@ -5,6 +5,7 @@ import loadItem from './loadItem'
 import Api from '../../api/Api'
 
 import EuroStatAdapter from '../../adapters/eurostat/EuroStatAdapter'
+import StatNorwayAdapter from '../../adapters/stat-norway/StatNorwayAdapter'
 import InseeAdapter from '../../adapters/insee/InseeAdapter'
 import AlphaAdapter from '../../adapters/alpha/Adapter'
 import BarchartAdapter from '../../adapters/barchart/BarchartAdapter'
@@ -34,6 +35,12 @@ const EuroStat = loadItem({
   fnFetch: fetchJson,
   api: Api.EuroStat,
   adapter: EuroStatAdapter
+})
+
+const StatNorway = loadItem({
+  fnFetch: fetchJson,
+  api: Api.StatNorway,
+  adapter: StatNorwayAdapter
 })
 
 const AlphaIndicator = loadItem({
@@ -72,6 +79,7 @@ const Insee = loadItem({
 export default {
   Quandl,
   EuroStat,
+  StatNorway,
   Insee,
 
   AlphaIndicator,

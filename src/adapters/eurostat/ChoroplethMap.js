@@ -65,13 +65,6 @@ const _fnMergeGeoAndValue = function(sGeo, dGeo, json){
   return { minValue, maxValue, points };
 }
 
-const _fnCreateClusters = function(points, n, iteration){
-  clusterMaker.k(n);
-  clusterMaker.iterations(iteration);
-  clusterMaker.data(points);
-  return clusterMaker.unarySortedClusters();
-};
-
 const _fnCreateHmIdCluster = function(clusters){
   const hm = {};
   clusters.forEach((cluster, i) => {
@@ -128,8 +121,8 @@ const _fnCreateInfoControl = function(L, mapId){
   }
   wgInfo.update = function(props){
     if (props){
-      const { label, value } = props;
-      this.divEl.innerHTML = `<p><span>${label}:&nbsp;</span><span>${value ? value : 'unknown'}</span></p>`
+      const elInfo = MapFactory.crInfo(props);
+      render(elInfo, document.getElementById(this.idEl))
     }
   }
   wgInfo.updateCluster = function(cluster, color, from, to){
@@ -225,7 +218,7 @@ const _createChoroplethMap = function(option){
        , { dGeo, sGeo, time } = JsonStatFn.createGeoSlice(statJson, configSlice)
        , { minValue, maxValue, points } = _fnMergeGeoAndValue(sGeo, dGeo, geoJson)
        , _points = _fnAddGeoSeria(points, statJson, configSlice)
-       , _clusters = _fnCreateClusters(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
+       , _clusters = clusterMaker.crUnarySortedCluster(_points, NUMBER_OF_CLUSTERS, NUMBER_OF_ITERATION)
        , _hmIdCluster = _fnCreateHmIdCluster(_clusters);
 
   _fnMergeGeoJsonAndClusters(geoJson, _hmIdCluster, NUMBER_OF_CLUSTERS);

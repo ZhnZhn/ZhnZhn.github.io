@@ -18,6 +18,10 @@ var _EuroStatAdapter = require('../../adapters/eurostat/EuroStatAdapter');
 
 var _EuroStatAdapter2 = _interopRequireDefault(_EuroStatAdapter);
 
+var _StatNorwayAdapter = require('../../adapters/stat-norway/StatNorwayAdapter');
+
+var _StatNorwayAdapter2 = _interopRequireDefault(_StatNorwayAdapter);
+
 var _InseeAdapter = require('../../adapters/insee/InseeAdapter');
 
 var _InseeAdapter2 = _interopRequireDefault(_InseeAdapter);
@@ -68,6 +72,12 @@ var EuroStat = (0, _loadItem2.default)({
   adapter: _EuroStatAdapter2.default
 });
 
+var StatNorway = (0, _loadItem2.default)({
+  fnFetch: _fnFetch.fetchJson,
+  api: _Api2.default.StatNorway,
+  adapter: _StatNorwayAdapter2.default
+});
+
 var AlphaIndicator = (0, _loadItem2.default)({
   fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Alpha,
@@ -104,6 +114,7 @@ var Insee = (0, _loadItem2.default)({
 exports.default = {
   Quandl: Quandl,
   EuroStat: EuroStat,
+  StatNorway: StatNorway,
   Insee: Insee,
 
   AlphaIndicator: AlphaIndicator,

@@ -1,10 +1,11 @@
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, group, dataSource } = props
+  const { loadId, group, dataSource, dfProps } = props
       , { one, two } = options
       , { value:oneValue, caption:oneCaption='' } = one
-      , { value:twoValue, caption:twoCaption='' } = two
+      , { value:twoValue, caption:twoCaption='', mapSlice } = two;
   return {
+    ...dfProps,
     seriaType: 'AREA',
     geo : oneValue,
     group : group,
@@ -16,7 +17,8 @@ const createLoadOptions = (props={}, options={}) => {
     alertItemId : `${oneCaption}:${twoCaption}`,
     alertGeo : oneCaption,
     alertMetric : twoCaption,
-    dataSource
+    dataSource, mapSlice,
+    items: [ one, two ]
   }
 }
 

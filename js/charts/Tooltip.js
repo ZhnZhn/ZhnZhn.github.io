@@ -27,6 +27,9 @@ var SPARKLINES_SUFFIX_ID = 'sparklines',
     WIDTH_TOTAL = 50,
     WIDTH_SPARK = 20 + 80 + 16;
 
+//const formatNumber = ChartConfig.fnNumberFormat;
+
+//import ChartConfig from './ChartConfig'
 var C = {
   TITLE_C: '#a487d4',
   YEAR_C: '#fdb316',
@@ -34,6 +37,12 @@ var C = {
   EX_DIVIDEND_C: 'green'
 };
 var TITLE_STYLE = 'style="color:' + C.TITLE_C + ';"';
+
+var _numberFormat = function _numberFormat(value) {
+  var arrSplit = (value + '').split('.'),
+      decimal = arrSplit[1] ? arrSplit[1].length : 0;
+  return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
+};
 
 var _crSpan = function _crSpan() {
   var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -169,7 +178,7 @@ var _fnCategory = function _fnCategory(_ref10) {
   var y = point.y,
       c = point.c;
 
-  return _crHeader(c, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', y) + '\n  </div>';
+  return _crHeader(c, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', _numberFormat(y)) + '\n  </div>';
 };
 
 var _fnPieTooltip = function _fnPieTooltip(_ref11) {

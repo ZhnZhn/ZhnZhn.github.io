@@ -20,22 +20,16 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Type = require('../../constants/Type');
-
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
-var _ArrayUtil = require('../../utils/ArrayUtil');
-
-var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
 
 var _DialogCell = require('../dialogs/DialogCell');
 
@@ -45,26 +39,16 @@ var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
 
+var _RouterOptions = require('./RouterOptions');
+
+var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DATE_PLACEHOLDER = 'Before Select Indicator',
-    MAP_FREQUENCY_DF = 'M',
-    AREA = 'AREA',
-    AREA_YEARLY = 'AREA_YEARLY',
-    MAP = 'MAP',
-    categoryTypes = ['MAP', 'COLUMN', 'BAR'];
+var DATE_PLACEHOLDER = 'Before Select Metric',
+    MAP_FREQUENCY_DF = 'M';
 
-var chartTypeOptions = [{ caption: 'Default : Area', value: AREA }, { caption: 'Map : All Countries', value: MAP, compType: _Type.CompItemType.EUROSTAT_MAP }, { caption: 'Column : All Countries', value: 'COLUMN' }, { caption: 'Bar : All Countries', value: 'BAR' }];
-var chartTypeOptions2 = [{ caption: 'Default : Area', value: AREA }, { caption: 'Yearly by Months', value: AREA_YEARLY }];
-
-var isCategoryType = function isCategoryType(chartType) {
-  if (!chartType) {
-    return false;
-  }
-  return _ArrayUtil2.default.isStrInArr(chartType.value)(categoryTypes);
-};
-
-var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat2, _Component);
 
   /*
@@ -89,8 +73,8 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (DialogEurostat2.__proto__ || Object.getPrototypeOf(DialogEurostat2)).call(this));
 
-    _this._handleSelectOne = function (one) {
-      _this.one = one;
+    _this._isCategory = function () {
+      return _RouterOptions2.default.isCategory(_this.chartType);
     };
 
     _this._updateForDate = function () {
@@ -107,16 +91,20 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
       });
     };
 
+    _this._handleSelectOne = function (one) {
+      _this.one = one;
+    };
+
     _this._handleSelectTwo = function (two) {
       _this.two = two;
-      if (isCategoryType(_this.chartType)) {
+      if (_this._isCategory()) {
         _this._updateForDate();
       }
     };
 
     _this._handleSelectChartType = function (chartType) {
       _this.chartType = chartType;
-      if (isCategoryType(_this.chartType)) {
+      if (_this._isCategory()) {
         _this._updateForDate();
       } else {
         _this.setState({ isShowDate: false });
@@ -138,7 +126,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
 
       var msg = [];
 
-      if (!isCategoryType(_this.chartType)) {
+      if (!_this._isCategory()) {
         if (!_this.one) {
           msg.push(_this.props.msgOnNotSelected(oneCaption));
         }
@@ -174,12 +162,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
 
-    switch (props.chartsType) {
-      case 't2':
-        _this._chartOptions = chartTypeOptions2;break;
-      default:
-        _this._chartOptions = chartTypeOptions;
-    }
+    _this._chartOptions = _RouterOptions2.default.getOptions(props.chartsType);
 
     _this.state = {
       isShowDate: false,
@@ -247,11 +230,11 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           uri: twoURI,
           jsonProp: twoJsonProp,
           caption: twoCaption,
-          optionNames: 'Items',
+          optionNames: 'Metrics',
           onSelect: this._handleSelectTwo
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          caption: 'Chart Type',
+          caption: 'Chart',
           placeholder: 'Default: Area',
           options: this._chartOptions,
           onSelect: this._handleSelectChartType
@@ -273,6 +256,11 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     }
   }]);
   return DialogEurostat2;
-}(_react.Component)) || _class) || _class);
+}(_react.Component), _class2.defaultProps = {
+  oneCaption: 'Item',
+  oneJsonProp: 'items',
+  twoCaption: 'Metric',
+  twoJsonProp: 'metrics'
+}, _temp)) || _class) || _class);
 exports.default = DialogEurostat2;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogEurostat2.js.map

@@ -50,6 +50,7 @@ var _fnForMonthSelect = function _fnForMonthSelect() {
 
 var _fnForQuarterSelect = function _fnForQuarterSelect() {
 	var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+	var delimeter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Q';
 
 	var options = [],
 	    dNow = new Date(Date.now());
@@ -68,12 +69,12 @@ var _fnForQuarterSelect = function _fnForQuarterSelect() {
 		}
 
 		options.push({
-			caption: y + 'Q' + qNow,
-			value: y + 'Q' + qNow
+			caption: '' + y + delimeter + qNow,
+			value: '' + y + delimeter + qNow
 		});
 
 		if (i === mapDateDf) {
-			dateDefault = y + 'Q' + qNow;
+			dateDefault = '' + y + delimeter + qNow;
 		}
 
 		qNow = qNow - 1;
@@ -197,6 +198,8 @@ var DateUtils = {
 			return _fnForMonthSelect(mapDateDf);
 		} else if (frequency === 'Q') {
 			return _fnForQuarterSelect(mapDateDf);
+		} else if (frequency === 'K') {
+			return _fnForQuarterSelect(mapDateDf, 'K');
 		} else if (frequency === 'Y') {
 			return _fnForYearSelect(mapDateDf);
 		}

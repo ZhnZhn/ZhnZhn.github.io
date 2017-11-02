@@ -20,6 +20,10 @@ var _ChartConfig = require('./ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
+var _ChartFactory = require('./ChartFactory');
+
+var _ChartFactory2 = _interopRequireDefault(_ChartFactory);
+
 var _SeriaBuilder = require('./SeriaBuilder');
 
 var _SeriaBuilder2 = _interopRequireDefault(_SeriaBuilder);
@@ -84,6 +88,30 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     this.add('xAxis', xAxis);
     this.add('yAxis', C.CATEGORIES_Y_AXIS);
     return this;
+  },
+  initBaseColumn: function initBaseColumn() {
+    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    this.config = _ChartFactory2.default.crColumnConfig();
+    this.add('xAxis', { categories: categories });
+    return this;
+  },
+  initBaseBar: function initBaseBar() {
+    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    this.config = _ChartFactory2.default.crBarConfig();
+    this.add('xAxis', { categories: categories });
+    return this;
+  },
+  initBaseColumnOrBar: function initBaseColumnOrBar() {
+    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var type = arguments[1];
+
+    if (type === 'BAR') {
+      return this.initBaseBar(categories);
+    } else {
+      return this.initBaseColumn(categories);
+    }
   },
   addTitle: function addTitle(title) {
     var _to = this.config.title || {};

@@ -1,104 +1,110 @@
-import { BrowserType, ModalDialog } from './Type';
+import { BrowserType as BT, ModalDialog as MD } from './Type';
 
 const BrowserConfig = {
-  [BrowserType.STOCK_MARKETS]: {
-    browserType: BrowserType.STOCK_MARKETS,
+  [BT.STOCK_MARKETS]: {
+    browserType: BT.STOCK_MARKETS,
     isDynamic: true,
     caption: 'Stock Markets',
     sourceMenuUrl: './data/stock-markets/source-menu.json'
   },
-  [BrowserType.EUROSTAT] : {
-    browserType: BrowserType.EUROSTAT,
-    isDynamic : true,
+  [BT.EUROSTAT]: {
+    browserType: BT.EUROSTAT,
+    isDynamic: true,
     caption: 'European Statistics',
-    sourceMenuUrl : './data/eurostat/source-menu.json'    
+    sourceMenuUrl: './data/eurostat/source-menu.json'
   },
-  [BrowserType.UN_COMTRADE]: {
-    browserType: BrowserType.UN_COMTRADE,
-    isDynamic : true,
+  [BT.UN_COMTRADE]: {
+    browserType: BT.UN_COMTRADE,
+    isDynamic: true,
     caption: 'UN Comtrade',
-    sourceMenuUrl : './data/uncomtrade/source-menu.json'
+    sourceMenuUrl: './data/uncomtrade/source-menu.json'
   },
-  [BrowserType.FAOSTAT]: {
-    browserType: BrowserType.FAOSTAT,
-    isDynamic : true,
+  [BT.FAOSTAT]: {
+    browserType: BT.FAOSTAT,
+    isDynamic: true,
     caption: 'FAOSTAT',
-    sourceMenuUrl : './data/faostat/source-menu.json'
+    sourceMenuUrl: './data/faostat/source-menu.json'
   },
-  [BrowserType.ECONOMIC] : {
-    browserType: BrowserType.ECONOMIC,
+  [BT.ECONOMIC]: {
+    browserType: BT.ECONOMIC,
     isDynamic: false
   },
 
-  [BrowserType.PREMIUM_SAMPLE] : {
-    browserType: BrowserType.PREMIUM_SAMPLE,
-    isDynamic : true,
+  [BT.PREMIUM_SAMPLE]: {
+    browserType: BT.PREMIUM_SAMPLE,
+    isDynamic: true,
     caption: 'Quandl Premium Sample',
-    sourceMenuUrl : './data/quandl-sample/source-menu.json'
+    sourceMenuUrl: './data/quandl-sample/source-menu.json'
   },
-  [BrowserType.FRANCE_STATISTICS] : {
-    browserType: BrowserType.FRANCE_STATISTICS,
-    isDynamic : true,
+  [BT.FRANCE_STATISTICS]: {
+    browserType: BT.FRANCE_STATISTICS,
+    isDynamic: true,
     caption: 'Insee: France Statistics',
     sourceMenuUrl: './data/france-statistics/source-menu.json'
   },
-  [BrowserType.US_STOCKS] : {
-    browserType : BrowserType.US_STOCKS,
-    isDynamic : true,
+  [BT.NORWAY_STATISTICS]: {
+    browserType: BT.NORWAY_STATISTICS,
+    isDynamic: true,
+    caption: 'Statistics Norway',
+    sourceMenuUrl: './data/statistics-norway/source-menu.json'
+  },
+  [BT.US_STOCKS]: {
+    browserType: BT.US_STOCKS,
+    isDynamic: true,
     caption: 'US Stocks by Sectors',
     sourceMenuUrl: './data/us-stocks/source-menu.json',
-    withoutItemCounter : true,
-    modalDialogType : ModalDialog.US_STOCK_BY_SECTOR,
-    chartContainerType : BrowserType.US_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
-    chartContainerCaption : 'Quandl : Stocks by Sectors',
+    withoutItemCounter: true,
+    modalDialogType: MD.US_STOCK_BY_SECTOR,
+    chartContainerType: BT.US_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
+    chartContainerCaption: 'Quandl : Stocks by Sectors',
     itemOptionType: 'ItemTopicOption',
-    itemType : 'Item',
-    descrUrl : './data/us-stocks/description.html'
+    itemType: 'Item',
+    descrUrl: './data/us-stocks/description.html'
   },
-  [BrowserType.NYSE_STOCKS] : {
-    browserType : BrowserType.NYSE_STOCKS,
-    isDynamic : true,
+  [BT.NYSE_STOCKS]: {
+    browserType: BT.NYSE_STOCKS,
+    isDynamic: true,
     caption: 'US NYSE by Sectors',
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
-    withoutItemCounter : true,
-    modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
-    chartContainerType : BrowserType.NYSE_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
-    chartContainerCaption : 'Quandl : US NYSE by Sectors',
+    withoutItemCounter: true,
+    modalDialogType: MD.STOCKS_BY_SECTOR,
+    chartContainerType: BT.NYSE_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
+    chartContainerCaption: 'Quandl : US NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
-    itemType : 'ItemWithCap',
-    descrUrl : './data/nyse-stocks/nyse-stocks.html'
+    itemType: 'ItemWithCap',
+    descrUrl: './data/nyse-stocks/nyse-stocks.html'
   },
-  [BrowserType.NASDAQ_STOCKS] : {
-    browserType : BrowserType.NASDAQ_STOCKS,
-    isDynamic : true,
+  [BT.NASDAQ_STOCKS]: {
+    browserType: BT.NASDAQ_STOCKS,
+    isDynamic: true,
     caption: 'US NASDAQ by Sectors',
     sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
-    withoutItemCounter : true,
-    modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
-    chartContainerType : BrowserType.NASDAQ_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
-    chartContainerCaption : 'Quandl : US NASDAQ by Sectors',
+    withoutItemCounter: true,
+    modalDialogType: MD.STOCKS_BY_SECTOR,
+    chartContainerType: BT.NASDAQ_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
+    chartContainerCaption: 'Quandl : US NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',
-    itemType : 'ItemWithCap',
-    descrUrl : './data/nasdaq-stocks/nasdaq-stocks.html'
+    itemType: 'ItemWithCap',
+    descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
   },
-  [BrowserType.LONDON_STOCKS] : {
-    browserType : BrowserType.LONDON_STOCKS,
-    isDynamic : true,
+  [BT.LONDON_STOCKS]: {
+    browserType: BT.LONDON_STOCKS,
+    isDynamic: true,
     caption: 'London Stocks by Sectors',
     sourceMenuUrl: './data/london-stocks/source-menu.json',
-    withoutItemCounter : true,
-    modalDialogType : ModalDialog.STOCKS_BY_SECTOR,
-    chartContainerType : BrowserType.LONDON_STOCKS + '_' + BrowserType.STOCKS_BY_SECTORS,
-    chartContainerCaption : 'Quandl : London Stock Exchange by Sectors',
+    withoutItemCounter: true,
+    modalDialogType: MD.STOCKS_BY_SECTOR,
+    chartContainerType: BT.LONDON_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
+    chartContainerCaption: 'Quandl : London Stock Exchange by Sectors',
     itemOptionType: 'ItemTopicOption',
-    itemType : 'ItemLse',
-    descrUrl : './data/london-stocks/lse-stocks.html'
+    itemType: 'ItemLse',
+    descrUrl: './data/london-stocks/lse-stocks.html'
   },
 
-  [BrowserType.WATCH_LIST] : {
-    browserType : BrowserType.WATCH_LIST,
+  [BT.WATCH_LIST]: {
+    browserType: BT.WATCH_LIST,
     //isDynamic : false,
-    withoutItemCounter : true
+    withoutItemCounter: true
   }
 };
 

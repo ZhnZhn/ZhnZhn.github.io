@@ -194,7 +194,7 @@ var ClusterItem = function (_Component) {
   return ClusterItem;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? ClusterItem.propTypes = {
+ClusterItem.propTypes = process.env.NODE_ENV !== "production" ? {
   point: _propTypes2.default.shape({
     0: _propTypes2.default.number,
     id: _propTypes2.default.string,
@@ -205,7 +205,7 @@ process.env.NODE_ENV !== "production" ? ClusterItem.propTypes = {
   color: _propTypes2.default.string,
   index: _propTypes2.default.number,
   isShowRange: _propTypes2.default.bool
-} : void 0;
+} : {};
 
 
 var Cluster = function Cluster(_ref3) {
@@ -224,14 +224,14 @@ var Cluster = function Cluster(_ref3) {
     })
   );
 };
-process.env.NODE_ENV !== "production" ? Cluster.propTypes = {
+Cluster.propTypes = process.env.NODE_ENV !== "production" ? {
   cluster: _propTypes2.default.shape({
     points: _propTypes2.default.arrayOf(_propTypes2.default.shape({
       id: _propTypes2.default.string
     }))
   }),
   color: _propTypes2.default.string
-} : void 0;
+} : {};
 
 var ClusterInfo = function (_Component2) {
   (0, _inherits3.default)(ClusterInfo, _Component2);
@@ -274,12 +274,12 @@ var ClusterInfo = function (_Component2) {
   return ClusterInfo;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? ClusterInfo.propTypes = {
+ClusterInfo.propTypes = process.env.NODE_ENV !== "production" ? {
   cluster: _propTypes2.default.object,
   color: _propTypes2.default.string,
   from: _propTypes2.default.string,
   to: _propTypes2.default.string
-} : void 0;
+} : {};
 
 exports.default = ClusterInfo;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\map\ClusterInfo.js.map

@@ -47,6 +47,12 @@ const DataProviders = ({ isClose }) => (
       <span style={S.PROVIDER}>
         <Link.Insee/>
         <span style={S.BLACK}>
+          &nbsp;(Https Proxy for CORS),
+        </span>
+      </span>
+      <span style={S.PROVIDER}>
+        <Link.StatNorway/>
+        <span style={S.BLACK}>
           &nbsp;(Https Proxy for CORS).
         </span>
       </span>

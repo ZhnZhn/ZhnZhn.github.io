@@ -75,6 +75,13 @@ var Insee = (0, _withProps2.default)({
   title: "Insee: France Statistics"
 })(_Link2.default);
 
+var StatNorway = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "http://www.ssb.no/en",
+  style: S.BLUE,
+  title: "Statistics Norway"
+})(_Link2.default);
+
 exports.default = {
   Quandl: Quandl,
   Barchart: Barchart,
@@ -82,6 +89,7 @@ exports.default = {
   Eurostat: Eurostat,
   UnComtrade: UnComtrade,
   FaoStat: FaoStat,
-  Insee: Insee
+  Insee: Insee,
+  StatNorway: StatNorway
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map

@@ -1,0 +1,23 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-norway\\RouterConfig.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-norway\\RouterConfig.js",
+ "sourceRoot": "",
+ "names": [
+  "_r",
+  "DF",
+  "crConfig",
+  "AREA",
+  "COLUMN",
+  "BAR",
+  "COLUMN_CLUSTER",
+  "fCrConfig",
+  "isCluster",
+  "seriaType",
+  "BAR_CLUSTER",
+  "RouterConfig",
+  "getCrConfig"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,KAAK;AACTC,MAAI,iBAAIC,QADC;AAETC,QAAO,iBAAID,QAFF;AAGTE,UAAQ,mBAAIF,QAHH;AAITG,OAAK,mBAAIH,QAJA;AAKTI,kBAAgB,mBAAIC,SAAJ,CAAc;AAC5BC,eAAW,IADiB,EACXC,WAAW;AADA,GAAd,CALP;AAQTC,eAAa,mBAAIH,SAAJ,CAAc;AACzBC,eAAW,IADc,EACRC,WAAW;AADH,GAAd;AARJ,CAAX;;AAaA,IAAME,eAAe;AACnBC,aADmB,uBACPH,SADO,EACI;AACrB,WAAOT,GAAGS,SAAH,KAAiBT,GAAGC,EAA3B;AACD;AAHkB,CAArB;;kBAMeU,Y"
+}

@@ -1,26 +1,28 @@
 
 import ChartType from '../../constants/ChartType';
-import { LoadType } from '../../constants/Type';
+import { LoadType as LT } from '../../constants/Type';
 
 import { loadQuandlCommodityTrade } from './loadQuandlCommodityTrade';
 
 import LoadImpl from './LoadImpl'
 
 const LoadConfig = {
-  [LoadType.Q]: LoadImpl.Quandl,
-  [LoadType.QCT]: loadQuandlCommodityTrade,
+  [LT.Q]: LoadImpl.Quandl,
+  [LT.QCT]: loadQuandlCommodityTrade,
 
-  [LoadType.B]: LoadImpl.Barchart,
-  [LoadType.AL]: LoadImpl.AlphaIndicator,
-  [LoadType.AL_S]: LoadImpl.AlphaSector,
-  [LoadType.AL_I]: LoadImpl.AlphaIntraday,
+  [LT.B]: LoadImpl.Barchart,
+  [LT.AL]: LoadImpl.AlphaIndicator,
+  [LT.AL_S]: LoadImpl.AlphaSector,
+  [LT.AL_I]: LoadImpl.AlphaIntraday,
 
-  [LoadType.EU_STAT]: LoadImpl.EuroStat,
-  [LoadType.FS]: LoadImpl.Insee,
-  [LoadType.UN]: LoadImpl.UnComtrade,
-  [LoadType.FAO]: LoadImpl.FaoStat,
+  [LT.EU_STAT]: LoadImpl.EuroStat,
+  [LT.NST]: LoadImpl.StatNorway,
+
+  [LT.FS]: LoadImpl.Insee,
+  [LT.UN]: LoadImpl.UnComtrade,
+  [LT.FAO]: LoadImpl.FaoStat,
   [ChartType.WATCH_LIST]: LoadImpl.Quandl,
-  [LoadType.WL]: LoadImpl.Quandl
+  [LT.WL]: LoadImpl.Quandl
 };
 
 export default LoadConfig

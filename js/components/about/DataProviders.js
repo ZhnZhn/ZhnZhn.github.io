@@ -105,6 +105,16 @@ var DataProviders = function DataProviders(_ref) {
         _react2.default.createElement(
           'span',
           { style: _About2.default.BLACK },
+          '\xA0(Https Proxy for CORS),'
+        )
+      ),
+      _react2.default.createElement(
+        'span',
+        { style: _About2.default.PROVIDER },
+        _react2.default.createElement(_Links2.default.StatNorway, null),
+        _react2.default.createElement(
+          'span',
+          { style: _About2.default.BLACK },
           '\xA0(Https Proxy for CORS).'
         )
       )

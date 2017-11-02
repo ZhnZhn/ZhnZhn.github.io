@@ -17,6 +17,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MapFactory = {
   crClusterInfo: function crClusterInfo(props) {
     return _react2.default.createElement(_ClusterInfo2.default, props);
+  },
+  crInfo: function crInfo(_ref) {
+    var label = _ref.label,
+        value = _ref.value;
+
+    return _react2.default.createElement(
+      'p',
+      null,
+      _react2.default.createElement(
+        'span',
+        null,
+        label,
+        ':\xA0'
+      ),
+      _react2.default.createElement(
+        'span',
+        null,
+        value ? value : 'unknown'
+      )
+    );
   }
 };
 

@@ -7,11 +7,12 @@
  "names": [
   "Alpha",
   "Barchart",
-  "EuroStat",
   "Quandl",
-  "Insee",
   "UnComtrade",
-  "FaoStat"
+  "FaoStat",
+  "Insee",
+  "EuroStat",
+  "StatNorway"
  ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,+BADJ;AAEbC,6BAFa,EAELC,yBAFK,EAEEC,mCAFF,EAEcC;AAFd,C"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,2BADJ;AAEbC,qCAFa,EAEDC,6BAFC;AAGbC,2BAHa,EAGNC,+BAHM,EAGIC;AAHJ,C"
 }

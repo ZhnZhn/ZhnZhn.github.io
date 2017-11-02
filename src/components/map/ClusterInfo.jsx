@@ -183,7 +183,7 @@ class ClusterInfo extends Component {
 
   render(){
     const  { cluster, color, from, to } = this.props
-        ,  { isShowRange } = this.state;
+        ,  { isShowRange } = this.state;    
     return  (
       <div>
         <Caption {...{ color, from, to, onClick:this._handleToggleRange } } />

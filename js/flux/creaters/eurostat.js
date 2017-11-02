@@ -4,12 +4,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var loadId = props.loadId,
       group = props.group,
       dataSource = props.dataSource,
+      dfProps = props.dfProps,
       one = options.one,
       two = options.two,
       oneValue = one.value,
@@ -17,9 +24,10 @@ var createLoadOptions = function createLoadOptions() {
       oneCaption = _one$caption === undefined ? '' : _one$caption,
       twoValue = two.value,
       _two$caption = two.caption,
-      twoCaption = _two$caption === undefined ? '' : _two$caption;
+      twoCaption = _two$caption === undefined ? '' : _two$caption,
+      mapSlice = two.mapSlice;
 
-  return {
+  return (0, _extends3.default)({}, dfProps, {
     seriaType: 'AREA',
     geo: oneValue,
     group: group,
@@ -31,8 +39,9 @@ var createLoadOptions = function createLoadOptions() {
     alertItemId: oneCaption + ':' + twoCaption,
     alertGeo: oneCaption,
     alertMetric: twoCaption,
-    dataSource: dataSource
-  };
+    dataSource: dataSource, mapSlice: mapSlice,
+    items: [one, two]
+  });
 };
 
 exports.default = createLoadOptions;

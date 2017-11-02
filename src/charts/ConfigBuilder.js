@@ -1,5 +1,6 @@
 import Chart from './Chart'
 import ChartConfig from './ChartConfig'
+import Factory from './ChartFactory'
 
 import SeriaBuilder from './SeriaBuilder'
 
@@ -58,6 +59,23 @@ ConfigBuilder.prototype = {
     this.add('xAxis', xAxis)
     this.add('yAxis', C.CATEGORIES_Y_AXIS)
     return this;
+  },
+  initBaseColumn(categories=[]){
+    this.config = Factory.crColumnConfig()
+    this.add('xAxis', { categories })
+    return this;
+  },
+  initBaseBar(categories=[]){
+    this.config = Factory.crBarConfig()
+    this.add('xAxis', { categories })
+    return this;
+  },
+  initBaseColumnOrBar(categories=[], type){
+    if (type === 'BAR') {
+      return this.initBaseBar(categories);
+    } else {
+      return this.initBaseColumn(categories);
+    }
   },
 
 

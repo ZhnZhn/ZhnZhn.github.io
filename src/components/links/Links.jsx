@@ -62,6 +62,13 @@ const  Insee = withProps({
   title: "Insee: France Statistics"
 })(BaseComponent)
 
+const StatNorway = withProps({
+  className: CL_LINK,
+  href: "http://www.ssb.no/en",
+  style: S.BLUE,
+  title: "Statistics Norway"
+})(BaseComponent)
+
 export default {
   Quandl,
   Barchart,
@@ -69,5 +76,6 @@ export default {
   Eurostat,
   UnComtrade,
   FaoStat,
-  Insee
+  Insee,
+  StatNorway
 };
