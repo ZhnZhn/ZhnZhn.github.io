@@ -17,6 +17,7 @@ const LoadConfig = {
 
   [LT.EU_STAT]: LoadImpl.EuroStat,
   [LT.NST]: LoadImpl.StatNorway,
+  [LT.NST_2]: LoadImpl.StatNorway2,
 
   [LT.FS]: LoadImpl.Insee,
   [LT.UN]: LoadImpl.UnComtrade,

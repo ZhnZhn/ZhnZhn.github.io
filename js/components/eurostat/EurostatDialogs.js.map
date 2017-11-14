@@ -8,7 +8,8 @@
   "EurostatDialogs",
   "Eurostat",
   "Eurostat2",
-  "Eurostat3"
+  "Eurostat3",
+  "StatN"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB;AACtBC,oCADsB,EACZC,mCADY,EACDC;AADC,CAAxB;;kBAIeH,e"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB;AACtBC,oCADsB,EACZC,mCADY,EACDC,mCADC;AAEtBC;AAFsB,CAAxB;;kBAKeJ,e"
 }

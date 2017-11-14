@@ -77,6 +77,12 @@ var StatNorway = (0, _loadItem2.default)({
   api: _Api2.default.StatNorway,
   adapter: _StatNorwayAdapter2.default
 });
+var StatNorway2 = (0, _loadItem2.default)({
+  fnFetch: _fnFetch.fetchJson,
+  api: _Api2.default.StatNorway2,
+  optionFetch: _Api2.default.StatNorway2.crOptionFetch,
+  adapter: _StatNorwayAdapter2.default
+});
 
 var AlphaIndicator = (0, _loadItem2.default)({
   fnFetch: _fnFetch.fetchJson,
@@ -115,6 +121,7 @@ exports.default = {
   Quandl: Quandl,
   EuroStat: EuroStat,
   StatNorway: StatNorway,
+  StatNorway2: StatNorway2,
   Insee: Insee,
 
   AlphaIndicator: AlphaIndicator,

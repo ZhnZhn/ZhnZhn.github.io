@@ -194,7 +194,6 @@ ChartConfig.theme = {
   },
   chart: {
     alignTicks: false,
-    //width: 600,
     height: _Chart2.default.HEIGHT,
     spacingTop: _Chart2.default.THEME_SPACING_TOP,
     spacingBottom: _Chart2.default.SPACING_BOTTOM,
@@ -371,7 +370,7 @@ ChartConfig.theme = {
     borderWidth: 2,
     borderRadius: 10,
 
-    headerFormat: '<span style="font-weight: bold; font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
+    headerFormat: '<span style="font-weight:bold;font-size: 12px; color:rgba(194,149,23,1);">{point.key}</span><br/>',
     pointFormat: '<span style="color:rgba(69, 114, 167, 1);font-weight:bold;">Value: </span>' + '<span style="font-weight: bold; color:rgba(194,149,23,1);">{point.y}</span><br/>'
   },
   xAxis: {

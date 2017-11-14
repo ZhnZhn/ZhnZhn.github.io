@@ -3,8 +3,17 @@ import { fnCatch } from './fnCatch'
 import ChartStore from '../stores/ChartStore'
 import ChartFn from '../../charts/ChartFn'
 
+const _crOptionFetch = (objImpl, option) => {
+  const { optionFetch } = objImpl
+  return typeof optionFetch === 'function'
+    ? optionFetch(option)
+    : optionFetch;
+}
+
 const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
-  const { fnFetch, optionFetch, api } = objImpl;
+  const { fnFetch, api } = objImpl
+      , optionFetch = _crOptionFetch(objImpl, option)
+
   fnFetch({
     uri : api.getRequestUrl(option),
     option : option,
@@ -32,12 +41,14 @@ const _fnFetchToChartComp = function(objImpl ,{json, option, onCompleted}){
 }
 
 const _loadToChart = function(objImpl, option, onAdded, onFailed){
-  const { fnFetch, api } = objImpl;
+  const { fnFetch, api } = objImpl
+      , optionFetch = _crOptionFetch(objImpl, option);
   fnFetch({
     uri : api.getRequestUrl(option),
     option : option,
+    optionFetch: optionFetch,
     onCheckResponse : api.checkResponse,
-    onFetch : _fnFetchToChart.bind(null, objImpl),    
+    onFetch : _fnFetchToChart.bind(null, objImpl),
     onCompleted : onAdded,
     onCatch : fnCatch,
     onFailed : onFailed

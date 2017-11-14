@@ -12,34 +12,34 @@ import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
 import PanelValueMoving from './PanelValueMoving'
 
-const styles = {
-  rootSpan : {
+const S = {
+  ROOT: {
     display : 'inline-block',
     position: 'relative',
     marginLeft : '10px',
     cursor: 'pointer'
   },
-  rowSpan: {
+  ROW: {
     display : 'inline-block',
   },
-  deltaSpan : {
+  DELTA: {
     marginLeft : '5px',
     fontWeight : 'bold'
   },
-  dateSpan : {
+  DATE: {
     marginLeft: '10px'
   },
-  up : {
+  UP: {
     color: '#4CAF50'
   },
-  down : {
+  DOWN: {
     //color: '#ED5813'
     color : '#F44336'
   },
-  equal : {
+  EQUAL: {
     color : '#2F7ED8'
   },
-  showHide : {
+  SHOW_HIDE: {
     position: 'absolute',
     top: '0px',
     left: '0px',
@@ -53,7 +53,9 @@ class ValueMovingBadge extends Component {
       value: PropTypes.number,
       delta: PropTypes.number,
       percent: PropTypes.number,
-      direction: PropTypes.oneOf('up', 'down', 'equal'),
+      direction: PropTypes.oneOf(
+        'up', 'down', 'equal', 'empty'
+      ),
       date: PropTypes.string
     }),
     isAdminMode: PropTypes.oneOfType([
@@ -71,7 +73,6 @@ class ValueMovingBadge extends Component {
       date : ''
     }
   }
-
 
   constructor(props){
     super()
@@ -101,50 +102,67 @@ class ValueMovingBadge extends Component {
 
   render(){
     const { isAdminMode } = this.props
-        , { isShowPanel, valueMoving, msgDateTo } = this.state
-        , { value, delta, percent, direction, date } = valueMoving;
+        , {
+            isShowPanel,
+            valueMoving,
+            msgDateTo
+          } = this.state
+        , {
+            value, delta, percent,
+            direction,
+            date
+          } = valueMoving;
 
     let _svgDirection, _dStyle;
-    if (direction === Direction.DOWN){
-      _svgDirection = <SvgDown />;
-      _dStyle = styles.down;
-    } else if (direction === Direction.UP){
-      _svgDirection = <SvgUp />;
-      _dStyle = styles.up;
-    } else {
-      _svgDirection = <SvgEqual />;
-      _dStyle = styles.equal;
+    switch(direction){
+      case Direction.DOWN:
+        _svgDirection = <SvgDown />;
+        _dStyle = S.DOWN;
+        break;
+      case Direction.UP:
+        _svgDirection = <SvgUp />;
+        _dStyle = S.UP;
+        break;
+      case Direction.EQUAL:
+        _svgDirection = <SvgEqual />;
+        _dStyle = S.EQUAL;
+        break;
+      default:
+        _svgDirection = null;
     }
 
     return (
       <span
-         style={styles.rootSpan}
+         style={S.ROOT}
       >
          <span
-            style={styles.rowSpan}
+            style={S.ROW}
             onClick={this._handleClickRoot}
          >
            <SpanValue value={value} />
            {_svgDirection}
-           <span style={Object.assign({}, styles.deltaSpan, _dStyle)}>
+           <span style={{...S.DELTA, ..._dStyle}}>
              {percent}
            </span>
-           <span style={Object.assign({}, styles.deltaSpan, _dStyle)}>
+           <span style={{...S.DELTA, ..._dStyle}}>
              {delta}
            </span>
-           <SpanDate style={styles.dateSpan} date={date} />
+           <SpanDate style={S.DATE} date={date} />
          </span>
-         <ShowHide
-            style={styles.showHide}
-            isShow={isShowPanel}
-         >
-           <PanelValueMoving
-              valueMoving={valueMoving}
-              isAdminMode={isAdminMode}
-              msgDateTo={msgDateTo}
-              updateDateTo={this._updateDateTo}
-           />
-         </ShowHide>
+         {
+           _svgDirection !== null &&
+           <ShowHide
+              style={S.SHOW_HIDE}
+              isShow={isShowPanel}
+           >
+             <PanelValueMoving
+                valueMoving={valueMoving}
+                isAdminMode={isAdminMode}
+                msgDateTo={msgDateTo}
+                updateDateTo={this._updateDateTo}
+             />
+           </ShowHide>
+         }
       </span>
     );
   }

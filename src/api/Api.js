@@ -6,9 +6,11 @@ import UnComtrade from './UnComtradeApi'
 import FaoStat from './FaoStatApi'
 import Insee from './InseeApi'
 import StatNorway from './StatNorwayApi'
+import StatNorway2 from './StatNorway2Api'
 
 export default {
   Alpha, Barchart, Quandl,
   UnComtrade, FaoStat,
-  Insee, EuroStat, StatNorway
+  Insee, EuroStat,
+  StatNorway, StatNorway2
 }

@@ -100,6 +100,9 @@ const _router = {
   get DialogEurostat3() {
     return this.ES.then( D => D.Eurostat3 )
   },
+  get DialogStatN() {
+    return this.ES.then( D => D.StatN )
+  },
 
   loadDialogs(browserType) {
     switch(browserType){

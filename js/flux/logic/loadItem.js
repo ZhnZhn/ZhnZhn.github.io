@@ -16,10 +16,16 @@ var _ChartFn2 = _interopRequireDefault(_ChartFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _crOptionFetch = function _crOptionFetch(objImpl, option) {
+  var optionFetch = objImpl.optionFetch;
+
+  return typeof optionFetch === 'function' ? optionFetch(option) : optionFetch;
+};
+
 var _loadToChartComp = function _loadToChartComp(objImpl, option, onCompleted, onFailed) {
   var fnFetch = objImpl.fnFetch,
-      optionFetch = objImpl.optionFetch,
-      api = objImpl.api;
+      api = objImpl.api,
+      optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri: api.getRequestUrl(option),
@@ -54,11 +60,13 @@ var _fnFetchToChartComp = function _fnFetchToChartComp(objImpl, _ref) {
 
 var _loadToChart = function _loadToChart(objImpl, option, onAdded, onFailed) {
   var fnFetch = objImpl.fnFetch,
-      api = objImpl.api;
+      api = objImpl.api,
+      optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri: api.getRequestUrl(option),
     option: option,
+    optionFetch: optionFetch,
     onCheckResponse: api.checkResponse,
     onFetch: _fnFetchToChart.bind(null, objImpl),
     onCompleted: onAdded,

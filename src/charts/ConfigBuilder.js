@@ -77,6 +77,17 @@ ConfigBuilder.prototype = {
       return this.initBaseColumn(categories);
     }
   },
+  initBaseTreeMap(){
+    this.config = ChartConfig.fBaseTreeMapConfig()
+    return this;
+  },
+
+  alignButtonExport(){
+    Object.assign(
+      this.config.navigation.buttonOptions, { x: -10, y: -20 }
+    )
+    return this;
+  },
 
 
   addTitle(title) {
@@ -124,7 +135,16 @@ ConfigBuilder.prototype = {
         this.config[propName] = option
       }
     } else if (propName && typeof propName === 'object'){
-      Object.assign(this.config, propName)
+      let _propName;
+      for (_propName in propName){
+        const _to = this.config[_propName]
+            , _from = propName[_propName];
+        if (_to) {
+          Object.assign(_to, _from)
+        } else {
+          this.config[_propName] = _from
+        }
+      }
     }
     return this;
   },

@@ -93,6 +93,11 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
         onLoadOption: this._handlerLoadOptions
       }));
     }
+  }, {
+    key: 'getOptions',
+    value: function getOptions() {
+      return this.state.options;
+    }
   }]);
   return SelectWithLoad;
 }(_react.Component), _class2.defaultProps = { isShow: true }, _temp2)) || _class;

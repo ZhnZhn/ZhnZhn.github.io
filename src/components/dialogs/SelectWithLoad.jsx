@@ -45,6 +45,10 @@ class SelectWithLoad extends Component {
         />
       );
     }
+
+    getOptions(){
+      return this.state.options;
+    }
 }
 
 

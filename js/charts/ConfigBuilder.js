@@ -113,6 +113,14 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
       return this.initBaseColumn(categories);
     }
   },
+  initBaseTreeMap: function initBaseTreeMap() {
+    this.config = _ChartConfig2.default.fBaseTreeMapConfig();
+    return this;
+  },
+  alignButtonExport: function alignButtonExport() {
+    Object.assign(this.config.navigation.buttonOptions, { x: -10, y: -20 });
+    return this;
+  },
   addTitle: function addTitle(title) {
     var _to = this.config.title || {};
     this.config.title = Object.assign(_to, _Chart2.default.fTitle({
@@ -152,7 +160,16 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
         this.config[propName] = option;
       }
     } else if (propName && (typeof propName === 'undefined' ? 'undefined' : (0, _typeof3.default)(propName)) === 'object') {
-      Object.assign(this.config, propName);
+      var _propName = void 0;
+      for (_propName in propName) {
+        var _to2 = this.config[_propName],
+            _from = propName[_propName];
+        if (_to2) {
+          Object.assign(_to2, _from);
+        } else {
+          this.config[_propName] = _from;
+        }
+      }
     }
     return this;
   },

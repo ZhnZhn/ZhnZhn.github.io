@@ -22,13 +22,13 @@ const COLORS = [
       '#74c476'
   ];
 
-const _crCategoryPoint = (c, v, i) => {
+const _fCrCategoryPoint = (c) => (v, i) => {
   return {
     y: v.value,
     c: c.Category(i).label,
   };
 }
-const _isCategoryPoint = (dfT, p) => {
+const _fIsCategoryPoint = (dfT) => (p) => {
   if (dfT && p.c === dfT) {
     return false;
   }
@@ -54,56 +54,84 @@ const _setClusters = (data) => {
   _colorItems(data, _clusters)
 }
 
-const _crColumnSeria = (values, c, time, option) => {
-  const _crPoint = _crCategoryPoint.bind(null, c)
-      , _fnIs = _isCategoryPoint.bind(null, option.dfT)
-      , data = values.map(_crPoint)
-         .filter(_fnIs)
-         .sort(_compareByY)
-         .reverse()
-     , _c = data.map(item => item.c)
-     , { seriaType, isCluster, items=[] } = option
-     , _subtitle = `${items[1].caption || ''}: ${time}`;
-
-  const config = ConfigBuilder()
-    .initBaseColumnOrBar(_c, seriaType)
-    .addCaption(C.TITLE, _subtitle)
-    .add('chart', { spacingTop: 25 })
-    .addTooltip(Tooltip.category)
-    .add('yAxis', { gridZIndex: 100 })
-    .add('zhConfig', _crZhConfig(option))
-    .toConfig()
-
-  if (isCluster) {
-    _setClusters(data)
+const _crCategory = (option, by) => {
+  const { items=[], dfC, dfT, dfC2, dfT2 } = option;
+  let itemSlice={}, i;
+  switch(by){
+    case '2':
+      for (i=0; i<items.length; i++){
+        if (i!==1){
+          Object.assign(itemSlice, items[i].slice)
+        }
+      }
+      return {
+        category: dfC2,
+        cTotal: dfT2,
+        itemSlice: items[0].slice
+      };
+    default:
+      for (i=1; i<items.length; i++){
+        Object.assign(itemSlice, items[i].slice)
+      }
+      return {
+        category: dfC,
+        cTotal: dfT,
+        itemSlice
+        //itemSlice: items[1].slice
+      };
   }
+}
 
-  config.series[0].data = data
-
-  return config;
+const _crData = (values, c, cTotal ) => {
+  return values
+     .map(_fCrCategoryPoint(c))
+     .filter(_fIsCategoryPoint(cTotal))
+     .sort(_compareByY)
+     .reverse();
 }
 
 const toColumn = {
   crConfig: (json, option) => {
-    const  { items, dfC, time } = option
-    , ds = JSONstat(json).Dataset(0)
-    , times = ds.Dimension("Tid").id
-    , _c = dfC || items[0].category
-    , categories = ds.Dimension(_c)
-    , tidId = time || times[times.length-1]
-    , values = ds.Data({
-       Tid: tidId,
-       ...items[1].slice
-    })
-    , config = _crColumnSeria(values, categories, tidId, option);
+    const {
+            category, itemSlice, time, dfTSlice,
+            seriaType, isCluster,
+            items=[], cTotal
+          } = option
+        , _ds = JSONstat(json).Dataset(0)
+        , _times = _ds.Dimension("Tid").id
+        , _dimC = _ds.Dimension(category)
+        , Tid = time || _times[_times.length-1]
+        , _values = _ds.Data({ Tid, ...itemSlice, ...dfTSlice })
+        , _subtitle = `${items[1].caption || ''}: ${Tid}`
+        , data = _crData(_values, _dimC, cTotal)
+        , _c = data.map(item => item.c)
+        , config = ConfigBuilder()
+           .initBaseColumnOrBar(_c, seriaType)
+           .addCaption(C.TITLE, _subtitle)
+           .addTooltip(Tooltip.category)
+           .add({
+             chart: { spacingTop: 25 },
+             yAxis: { gridZIndex: 100 },
+             valueMoving: { date: Tid, direction: 'empty' },
+             info: _crInfo(_ds, option),
+             zhConfig: _crZhConfig(option)
+            })
+           .toConfig()
 
-    config.info = _crInfo(ds)
+    if (isCluster) {
+      _setClusters(data)
+    }
+
+    config.series[0].data = data
+
     return config;
   },
 
-  fCrConfig: (param={}) => {
-    return (json, option) =>
-      toColumn.crConfig(json, { ...option, ...param });
+  fCrConfig: (param={}, config={}) => {
+    return (json, option) => toColumn.crConfig(json, {
+      ...option, ...param,
+      ..._crCategory(option, config.by)
+    });
   }
 }
 

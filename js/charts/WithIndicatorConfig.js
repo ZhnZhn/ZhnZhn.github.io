@@ -103,7 +103,13 @@ var WithIndicatorConfig = {
       startOnTick: true,
       endOnTick: true,
       tickPixelInterval: 60,
-      offset: 4
+      offset: 4,
+      lineWidth: 0,
+      tickLength: 0,
+      labels: {
+        x: 8,
+        y: 5
+      }
     });
     return config;
   },

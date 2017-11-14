@@ -42,6 +42,13 @@ const StatNorway = loadItem({
   api: Api.StatNorway,
   adapter: StatNorwayAdapter
 })
+const StatNorway2 = loadItem({
+  fnFetch: fetchJson,
+  api: Api.StatNorway2,
+  optionFetch: Api.StatNorway2.crOptionFetch,
+  adapter: StatNorwayAdapter
+})
+
 
 const AlphaIndicator = loadItem({
   fnFetch: fetchJson,
@@ -80,6 +87,7 @@ export default {
   Quandl,
   EuroStat,
   StatNorway,
+  StatNorway2,
   Insee,
 
   AlphaIndicator,

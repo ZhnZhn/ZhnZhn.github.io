@@ -2,7 +2,7 @@ import Highcharts from 'highcharts';
 import { render } from 'react-dom';
 
 import ChartFn from './ChartFn'
-//import ChartConfig from './ChartConfig'
+
 import SparkFactory from '../components/factories/SparkFactory';
 
 const SPARKLINES_SUFFIX_ID = 'sparklines'
@@ -12,8 +12,6 @@ const SPARKLINES_SUFFIX_ID = 'sparklines'
     , WIDTH_TOTAL = 50
     , WIDTH_SPARK = 20 + 80 + 16;
 
-//const formatNumber = ChartConfig.fnNumberFormat;
-
 const C = {
   TITLE_C: '#a487d4',
   YEAR_C: '#fdb316',
@@ -21,6 +19,7 @@ const C = {
   EX_DIVIDEND_C: 'green'
 }
 const TITLE_STYLE = `style="color:${C.TITLE_C};"`;
+const FONT_STYLE = 'font-size:16px;font-weight:bold';
 
 const _numberFormat = (value) => {
   const arrSplit = (value+'').split('.')
@@ -30,9 +29,10 @@ const _numberFormat = (value) => {
 }
 
 const _crSpan = (t='', v='', { color=C.VALUE_C }={}) => {
-  const _vStyle = `style="color:${color};"`;
+  const _vStyle = `style="color:${color};${FONT_STYLE}"`
+      , _t = t ? `${t}: `: '';
   return `
-  <span ${TITLE_STYLE}>${t}: </span>
+  <span ${TITLE_STYLE}>${_t}</span>
   <span ${_vStyle}>${v}</span>`;
 }
 const _crRow = (t='', v='', option) => {
@@ -153,6 +153,18 @@ const _fnCategory = function({ id, point }){
     ${_crRow('Value', _numberFormat(y))}
   </div>`;
 };
+
+const _fnTreeMap = function({ id, point }){
+  const { title, label, value, percent='' } = point
+  , _percent = percent ? `(${percent}%)` : ''
+  , _value = `${_numberFormat(value)} ${_percent}`;
+  return `${_crHeader(title, id)}
+  <div class="tp_body">
+    ${_crRow('', label)}
+    ${_crRow('', _value, { color: C.YEAR_C })}
+  </div>
+  `;
+}
 
 
 
@@ -334,6 +346,9 @@ const Tooltip = {
     fnTemplate: _fnTreeMapTooltip,
     onAfterRender: _fnAddHandlerCloseAndSparklines,
     isWithValue: true
+  }),
+  treeMap: _fnBasePointFormatter({
+    fnTemplate: _fnTreeMap
   })
 }
 

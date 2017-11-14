@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -62,34 +66,34 @@ var _PanelValueMoving2 = _interopRequireDefault(_PanelValueMoving);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootSpan: {
+var S = {
+  ROOT: {
     display: 'inline-block',
     position: 'relative',
     marginLeft: '10px',
     cursor: 'pointer'
   },
-  rowSpan: {
+  ROW: {
     display: 'inline-block'
   },
-  deltaSpan: {
+  DELTA: {
     marginLeft: '5px',
     fontWeight: 'bold'
   },
-  dateSpan: {
+  DATE: {
     marginLeft: '10px'
   },
-  up: {
+  UP: {
     color: '#4CAF50'
   },
-  down: {
+  DOWN: {
     //color: '#ED5813'
     color: '#F44336'
   },
-  equal: {
+  EQUAL: {
     color: '#2F7ED8'
   },
-  showHide: {
+  SHOW_HIDE: {
     position: 'absolute',
     top: '0px',
     left: '0px',
@@ -147,46 +151,52 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
 
       var _svgDirection = void 0,
           _dStyle = void 0;
-      if (direction === _Type.Direction.DOWN) {
-        _svgDirection = _react2.default.createElement(_SvgDown2.default, null);
-        _dStyle = styles.down;
-      } else if (direction === _Type.Direction.UP) {
-        _svgDirection = _react2.default.createElement(_SvgUp2.default, null);
-        _dStyle = styles.up;
-      } else {
-        _svgDirection = _react2.default.createElement(_SvgEqual2.default, null);
-        _dStyle = styles.equal;
+      switch (direction) {
+        case _Type.Direction.DOWN:
+          _svgDirection = _react2.default.createElement(_SvgDown2.default, null);
+          _dStyle = S.DOWN;
+          break;
+        case _Type.Direction.UP:
+          _svgDirection = _react2.default.createElement(_SvgUp2.default, null);
+          _dStyle = S.UP;
+          break;
+        case _Type.Direction.EQUAL:
+          _svgDirection = _react2.default.createElement(_SvgEqual2.default, null);
+          _dStyle = S.EQUAL;
+          break;
+        default:
+          _svgDirection = null;
       }
 
       return _react2.default.createElement(
         'span',
         {
-          style: styles.rootSpan
+          style: S.ROOT
         },
         _react2.default.createElement(
           'span',
           {
-            style: styles.rowSpan,
+            style: S.ROW,
             onClick: this._handleClickRoot
           },
           _react2.default.createElement(_SpanValue2.default, { value: value }),
           _svgDirection,
           _react2.default.createElement(
             'span',
-            { style: Object.assign({}, styles.deltaSpan, _dStyle) },
+            { style: (0, _extends3.default)({}, S.DELTA, _dStyle) },
             percent
           ),
           _react2.default.createElement(
             'span',
-            { style: Object.assign({}, styles.deltaSpan, _dStyle) },
+            { style: (0, _extends3.default)({}, S.DELTA, _dStyle) },
             delta
           ),
-          _react2.default.createElement(_SpanDate2.default, { style: styles.dateSpan, date: date })
+          _react2.default.createElement(_SpanDate2.default, { style: S.DATE, date: date })
         ),
-        _react2.default.createElement(
+        _svgDirection !== null && _react2.default.createElement(
           _ShowHide2.default,
           {
-            style: styles.showHide,
+            style: S.SHOW_HIDE,
             isShow: isShowPanel
           },
           _react2.default.createElement(_PanelValueMoving2.default, {
@@ -209,16 +219,16 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
     date: ''
   }
 }, _temp);
-process.env.NODE_ENV !== "production" ? ValueMovingBadge.propTypes = {
+ValueMovingBadge.propTypes = process.env.NODE_ENV !== "production" ? {
   valueMoving: _propTypes2.default.shape({
     value: _propTypes2.default.number,
     delta: _propTypes2.default.number,
     percent: _propTypes2.default.number,
-    direction: _propTypes2.default.oneOf('up', 'down', 'equal'),
+    direction: _propTypes2.default.oneOf('up', 'down', 'equal', 'empty'),
     date: _propTypes2.default.string
   }),
   isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
   crValueMoving: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = ValueMovingBadge;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ValueMovingBadge.js.map

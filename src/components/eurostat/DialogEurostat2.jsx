@@ -56,7 +56,7 @@ class DialogEurostat2 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
 
-    this._chartOptions = RouterOptions.getOptions(props.chartsType)
+    this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
       isShowDate : false,
@@ -143,17 +143,32 @@ class DialogEurostat2 extends Component {
      return msg;
   }
   _createLoadOption = () => {
-    const { one, two, chartType, date } = this
+    const {
+            one, two, chartType, date,
+            compSelect1, compSelect2
+          } = this
         , { dateDefault } = this.state;
     return this.props.loadFn(
-      this.props,
-      { one, two, chartType, date, dateDefault }
+      this.props, {
+        one, two, chartType, date, dateDefault,
+        selectOptions: [
+          compSelect1.getOptions(),
+          compSelect2.getOptions()
+        ]
+      }
     );
   }
 
   _handleClose = () => {
     this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
+  }
+
+  _refSelect1 = (comp) => {
+    this.compSelect1 = comp
+  }
+  _refSelect2 = (comp) => {
+    this.compSelect2 = comp
   }
 
   render(){
@@ -181,6 +196,7 @@ class DialogEurostat2 extends Component {
                buttons={this.toolbarButtons}
              />
              <D.SelectWithLoad
+               ref={this._refSelect1}
                isShow={isShow}
                uri={oneURI}
                jsonProp={oneJsonProp}
@@ -189,6 +205,7 @@ class DialogEurostat2 extends Component {
                onSelect={this._handleSelectOne}
              />
              <D.SelectWithLoad
+               ref={this._refSelect2}
                isShow={isShow}
                uri={twoURI}
                jsonProp={twoJsonProp}

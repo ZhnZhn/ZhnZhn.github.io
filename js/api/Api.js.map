@@ -12,7 +12,8 @@
   "FaoStat",
   "Insee",
   "EuroStat",
-  "StatNorway"
+  "StatNorway",
+  "StatNorway2"
  ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,2BADJ;AAEbC,qCAFa,EAEDC,6BAFC;AAGbC,2BAHa,EAGNC,+BAHM,EAGIC;AAHJ,C"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,2BADa,EACNC,+BADM,EACIC,2BADJ;AAEbC,qCAFa,EAEDC,6BAFC;AAGbC,2BAHa,EAGNC,+BAHM;AAIbC,qCAJa,EAIDC;AAJC,C"
 }

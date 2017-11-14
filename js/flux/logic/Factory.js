@@ -89,6 +89,7 @@ var createDialogComp = function createDialogComp(conf, browserType) {
       dialogProps = _conf$dialogProps === undefined ? {} : _conf$dialogProps,
       dialogType = conf.dialogType,
       dialogCaption = conf.dialogCaption,
+      menuTitle = conf.menuTitle,
       optionURI = conf.optionURI,
       optionsJsonProp = conf.optionsJsonProp,
       dataColumn = conf.dataColumn,
@@ -99,10 +100,12 @@ var createDialogComp = function createDialogComp(conf, browserType) {
       loadFnType = dialogProps.loadFnType,
       isContinious = dialogProps.isContinious,
       loadId = dialogProps.loadId,
+      isProxy = dialogProps.isProxy,
       _initFromDate = nInitFromDate ? _DateUtils2.default.getFromDate(nInitFromDate) : initFromDate,
       _fnValue = valueFn ? valueFnPrefix ? _RouterFnValue2.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue2.default[valueFn] : undefined,
       onClickInfo = descrUrl ? _showModalDialogDescription : undefined,
-      loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType);
+      loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType),
+      proxy = isProxy ? _ChartStore2.default.getProxy() : undefined;
 
   if (isContinious) {
     Object.assign(dialogProps, {
@@ -117,7 +120,7 @@ var createDialogComp = function createDialogComp(conf, browserType) {
   return _RouterDialog2.default.getDialog(dialogType).then(function (Comp) {
     return _react2.default.createElement(Comp, (0, _extends3.default)({
       key: itemKey,
-      caption: dialogCaption,
+      caption: dialogCaption || menuTitle,
       optionURI: optionURI,
       optionsJsonProp: optionsJsonProp,
       dataColumn: dataColumn,
@@ -129,7 +132,8 @@ var createDialogComp = function createDialogComp(conf, browserType) {
       initFromDate: _initFromDate,
       initToDate: initToDate, onTestDate: onTestDate,
       onClickInfo: onClickInfo,
-      loadFn: loadFn
+      loadFn: loadFn,
+      proxy: proxy
     }, dialogProps));
   });
 };

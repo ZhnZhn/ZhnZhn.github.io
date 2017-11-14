@@ -40,7 +40,7 @@ const _fFetch = (propName, type) => function({
  }){
   const _fnFetch = (type !== 'jsonp')
           ? fetch
-          : fetchJsonpImpl;
+          : fetchJsonpImpl;  
   _fnFetch(uri, optionFetch)
     .then(response => {
       const { status, statusText, headers={}, ok } = response;

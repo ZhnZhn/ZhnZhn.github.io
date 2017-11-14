@@ -144,14 +144,27 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           two = _this.two,
           chartType = _this.chartType,
           date = _this.date,
+          compSelect1 = _this.compSelect1,
+          compSelect2 = _this.compSelect2,
           dateDefault = _this.state.dateDefault;
 
-      return _this.props.loadFn(_this.props, { one: one, two: two, chartType: chartType, date: date, dateDefault: dateDefault });
+      return _this.props.loadFn(_this.props, {
+        one: one, two: two, chartType: chartType, date: date, dateDefault: dateDefault,
+        selectOptions: [compSelect1.getOptions(), compSelect2.getOptions()]
+      });
     };
 
     _this._handleClose = function () {
       _this._handleWithValidationClose(_this._createValidationMessages);
       _this.props.onClose();
+    };
+
+    _this._refSelect1 = function (comp) {
+      _this.compSelect1 = comp;
+    };
+
+    _this._refSelect2 = function (comp) {
+      _this.compSelect2 = comp;
     };
 
     _this.one = undefined;
@@ -162,7 +175,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
 
-    _this._chartOptions = _RouterOptions2.default.getOptions(props.chartsType);
+    _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
     _this.state = {
       isShowDate: false,
@@ -218,6 +231,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           buttons: this.toolbarButtons
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+          ref: this._refSelect1,
           isShow: isShow,
           uri: oneURI,
           jsonProp: oneJsonProp,
@@ -226,6 +240,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           onSelect: this._handleSelectOne
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+          ref: this._refSelect2,
           isShow: isShow,
           uri: twoURI,
           jsonProp: twoJsonProp,

@@ -16,6 +16,10 @@ var _eurostat5 = require('../creaters/eurostat3');
 
 var _eurostat6 = _interopRequireDefault(_eurostat5);
 
+var _eurostatN = require('../creaters/eurostatN');
+
+var _eurostatN2 = _interopRequireDefault(_eurostatN);
+
 var _type = require('../creaters/type3');
 
 var _type2 = _interopRequireDefault(_type);
@@ -63,6 +67,7 @@ var _r = {
   DialogEurostat: _eurostat2.default,
   DialogEurostat2: _eurostat4.default,
   DialogEurostat3: _eurostat6.default,
+  DialogStatN: _eurostatN2.default,
 
   UnDialog5: _un2.default
 };

@@ -45,6 +45,13 @@ var _compareByTwoProp = function _compareByTwoProp(propName1, propName2) {
   };
 };
 
+var _getDate = function _getDate(point) {
+  return Array.isArray(point) ? point[0] : point.x;
+};
+var _getValue = function _getValue(point) {
+  return Array.isArray(point) ? point[1] : point.y;
+};
+
 var AdapterFn = {
   ymdToUTC: function ymdToUTC(date) {
     var _arr = date.split('-'),
@@ -147,12 +154,16 @@ var AdapterFn = {
   },
   valueMoving: function valueMoving(data) {
     var len = data.length,
-        _nowValue = len > 0 && data[len - 1][1] ? data[len - 1][1] : 0,
+        _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [BLANK, 0],
+        _nowValue = _getValue(_pointNow),
         bNowValue = (0, _big2.default)(_nowValue),
-        _prevValue = len > 1 && data[len - 2][1] ? data[len - 2][1] : 0,
+        _pointPrev = len > 1 && data[len - 2] ? data[len - 2] : [BLANK, 0],
+        _prevValue = _getValue(_pointPrev),
         bPrevValue = (0, _big2.default)(_prevValue),
-        date = len > 0 ? _DateUtils2.default.formatTo(data[len - 1][0]) : BLANK,
-        dateTo = len > 1 && data[len - 2][0] ? _DateUtils2.default.formatTo(data[len - 2][0]) : BLANK;
+        _nowDate = _getDate(_pointNow),
+        date = len > 0 ? _DateUtils2.default.formatTo(_nowDate) : BLANK,
+        _prevDate = _getDate(_pointPrev),
+        dateTo = len > 1 && _prevDate ? _DateUtils2.default.formatTo(_prevDate) : BLANK;
 
     return (0, _extends3.default)({}, this.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
       valueTo: _ChartConfig2.default.fnNumberFormat(bPrevValue),

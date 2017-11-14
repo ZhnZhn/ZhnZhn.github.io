@@ -27,7 +27,8 @@ var BrowserType = exports.BrowserType = {
 var Direction = exports.Direction = {
   UP: 'up',
   DOWN: 'down',
-  EQUAL: 'equal'
+  EQUAL: 'equal',
+  EMPTY: 'empty'
 };
 
 var ModalDialog = exports.ModalDialog = {
@@ -68,6 +69,7 @@ var LoadType = exports.LoadType = {
   EU_STAT: 'EU_STAT',
   FS: 'FS',
   NST: 'NST',
+  NST_2: 'NST_2',
   UN: 'UN',
   FAO: 'FAO',
   WL: 'WL'

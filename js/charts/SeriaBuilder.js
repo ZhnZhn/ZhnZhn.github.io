@@ -33,6 +33,31 @@ var C = {
     marker: {
       radius: 0
     }
+  },
+  BASE_TREE_MAP: {
+    //zhSeriaId : zhSeriaId,
+    type: 'treemap',
+    layoutAlgorithm: 'squarified',
+    //layoutAlgorithm : 'sliceAndDice',
+    borderColor: 'gray',
+    dataLabels: {
+      align: 'left',
+      verticalAlign: 'top',
+      style: {
+        fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        color: 'black',
+        textShadow: 'none'
+      }
+    },
+    //data : data,
+    states: {
+      hover: {
+        borderColor: 'yellow',
+        brightness: 0
+      }
+    }
   }
 };
 
@@ -70,11 +95,17 @@ var SeriaBuilder = {
     this.config = _ChartConfig2.default.fSeries();
     return this;
   },
-  initAreaRange: function initAreaRange(tooltip, option) {
+  _initBaseSeria: function _initBaseSeria(BASE, tooltip, option) {
     this._type = 'S';
-    this.config = (0, _extends3.default)({}, C.BASE_AREA_RANGE, option);
+    this.config = (0, _extends3.default)({}, BASE, option);
     this.add('tooltip', _Chart2.default.fTooltip(tooltip));
     return this;
+  },
+  initAreaRange: function initAreaRange(tooltip, option) {
+    return this._initBaseSeria(C.BASE_AREA_RANGE, tooltip, option);
+  },
+  initTreeMap: function initTreeMap(tooltip, option) {
+    return this._initBaseSeria(C.BASE_TREE_MAP, tooltip, option);
   },
   addLegend: function addLegend(legend) {
     return this.add('zhConfig', {

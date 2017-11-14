@@ -32,6 +32,7 @@ var createLoadOptions = function createLoadOptions() {
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       date = options.date,
       dateDefault = options.dateDefault,
+      selectOptions = options.selectOptions,
       _chartType$value = chartType.value,
       chartTypeValue = _chartType$value === undefined ? 'AREA' : _chartType$value,
       _countryValue = one ? one.value : COUNTRY_CAPTION_DF,
@@ -71,7 +72,8 @@ var createLoadOptions = function createLoadOptions() {
     zhMapSlice: (0, _extends3.default)({}, _mapSlice, { time: _time }),
     time: _time,
     dataSource: dataSource,
-    items: [one, two]
+    items: [one, two],
+    selectOptions: selectOptions
   });
 };
 

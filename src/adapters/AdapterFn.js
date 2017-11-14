@@ -24,6 +24,17 @@ const _compareByTwoProp = (propName1, propName2) => (a, b) => {
   else return 0;
 }
 
+const _getDate = (point) => {
+  return Array.isArray(point)
+    ? point[0]
+    : point.x;
+}
+const _getValue = (point) => {
+  return Array.isArray(point)
+    ? point[1]
+    : point.y;
+}
+
 const AdapterFn = {
   ymdToUTC(date) {
     const _arr = date.split('-')
@@ -127,20 +138,24 @@ const AdapterFn = {
   },
 
   valueMoving(data){
-      const len = data.length
-          , _nowValue = len>0 && data[len-1][1]
-               ? data[len-1][1]
-               : 0
+    const len = data.length
+          , _pointNow = len>0 && data[len-1]
+               ? data[len-1]
+               : [ BLANK, 0 ]
+          , _nowValue = _getValue(_pointNow)
           , bNowValue = Big(_nowValue)
-          , _prevValue = len>1 && data[len-2][1]
-               ? data[len-2][1]
-               : 0
+          , _pointPrev = len>1 && data[len-2]
+              ? data[len-2]
+              : [ BLANK, 0 ]
+          , _prevValue = _getValue(_pointPrev)
           , bPrevValue = Big(_prevValue)
+          , _nowDate = _getDate(_pointNow)
           , date = len>0
-               ? DateUtils.formatTo(data[len-1][0])
+               ? DateUtils.formatTo(_nowDate)
                : BLANK
-          , dateTo = len>1 && data[len-2][0]
-               ? DateUtils.formatTo(data[len-2][0])
+          , _prevDate = _getDate(_pointPrev)
+          , dateTo = len>1 && _prevDate
+               ? DateUtils.formatTo(_prevDate)
                : BLANK;
 
       return  {

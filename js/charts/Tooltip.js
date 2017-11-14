@@ -27,9 +27,6 @@ var SPARKLINES_SUFFIX_ID = 'sparklines',
     WIDTH_TOTAL = 50,
     WIDTH_SPARK = 20 + 80 + 16;
 
-//const formatNumber = ChartConfig.fnNumberFormat;
-
-//import ChartConfig from './ChartConfig'
 var C = {
   TITLE_C: '#a487d4',
   YEAR_C: '#fdb316',
@@ -37,6 +34,7 @@ var C = {
   EX_DIVIDEND_C: 'green'
 };
 var TITLE_STYLE = 'style="color:' + C.TITLE_C + ';"';
+var FONT_STYLE = 'font-size:16px;font-weight:bold';
 
 var _numberFormat = function _numberFormat(value) {
   var arrSplit = (value + '').split('.'),
@@ -52,8 +50,9 @@ var _crSpan = function _crSpan() {
       _ref$color = _ref.color,
       color = _ref$color === undefined ? C.VALUE_C : _ref$color;
 
-  var _vStyle = 'style="color:' + color + ';"';
-  return '\n  <span ' + TITLE_STYLE + '>' + t + ': </span>\n  <span ' + _vStyle + '>' + v + '</span>';
+  var _vStyle = 'style="color:' + color + ';' + FONT_STYLE + '"',
+      _t = t ? t + ': ' : '';
+  return '\n  <span ' + TITLE_STYLE + '>' + _t + '</span>\n  <span ' + _vStyle + '>' + v + '</span>';
 };
 var _crRow = function _crRow() {
   var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -181,10 +180,25 @@ var _fnCategory = function _fnCategory(_ref10) {
   return _crHeader(c, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', _numberFormat(y)) + '\n  </div>';
 };
 
-var _fnPieTooltip = function _fnPieTooltip(_ref11) {
+var _fnTreeMap = function _fnTreeMap(_ref11) {
   var id = _ref11.id,
-      value = _ref11.value,
       point = _ref11.point;
+
+  var title = point.title,
+      label = point.label,
+      value = point.value,
+      _point$percent = point.percent,
+      percent = _point$percent === undefined ? '' : _point$percent,
+      _percent = percent ? '(' + percent + '%)' : '',
+      _value = _numberFormat(value) + ' ' + _percent;
+
+  return _crHeader(title, id) + '\n  <div class="tp_body">\n    ' + _crRow('', label) + '\n    ' + _crRow('', _value, { color: C.YEAR_C }) + '\n  </div>\n  ';
+};
+
+var _fnPieTooltip = function _fnPieTooltip(_ref12) {
+  var id = _ref12.id,
+      value = _ref12.value,
+      point = _ref12.point;
 
   return _crHeader(point.nameFull, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', value) + '\n  </div>';
 };
@@ -197,15 +211,15 @@ var _fnCalcWidthSparkType4 = function _fnCalcWidthSparkType4(value, total) {
   return { fullWidth: fullWidth, width: width };
 };
 
-var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref12) {
-  var id = _ref12.id,
-      value = _ref12.value,
-      point = _ref12.point;
+var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref13) {
+  var id = _ref13.id,
+      value = _ref13.value,
+      point = _ref13.point;
 
   var nameFull = point.nameFull,
       category = point.category,
-      _point$percent = point.percent,
-      percent = _point$percent === undefined ? '0.0' : _point$percent,
+      _point$percent2 = point.percent,
+      percent = _point$percent2 === undefined ? '0.0' : _point$percent2,
       _point$total = point.total,
       total = _point$total === undefined ? 0 : _point$total,
       _total = _ChartFn2.default.toNumberFormat(total),
@@ -218,16 +232,16 @@ var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref12) {
   });
 };
 
-var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref13) {
-  var id = _ref13.id,
-      point = _ref13.point;
+var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref14) {
+  var id = _ref14.id,
+      point = _ref14.point;
 
   var nameFull = point.nameFull,
       year = point.year,
       _point$value = point.value,
       value = _point$value === undefined ? '0.0' : _point$value,
-      _point$percent2 = point.percent,
-      percent = _point$percent2 === undefined ? '0.0' : _point$percent2,
+      _point$percent3 = point.percent,
+      percent = _point$percent3 === undefined ? '0.0' : _point$percent3,
       _point$total2 = point.total,
       total = _point$total2 === undefined ? 0 : _point$total2,
       _value = _ChartFn2.default.toNumberFormat(value),
@@ -385,6 +399,9 @@ var Tooltip = {
     fnTemplate: _fnTreeMapTooltip,
     onAfterRender: _fnAddHandlerCloseAndSparklines,
     isWithValue: true
+  }),
+  treeMap: _fnBasePointFormatter({
+    fnTemplate: _fnTreeMap
   })
 };
 

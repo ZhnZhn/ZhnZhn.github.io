@@ -159,6 +159,11 @@ var _router = {
       return D.Eurostat3;
     });
   },
+  get DialogStatN() {
+    return this.ES.then(function (D) {
+      return D.StatN;
+    });
+  },
 
   loadDialogs: function loadDialogs(browserType) {
     switch (browserType) {

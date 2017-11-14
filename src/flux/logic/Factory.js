@@ -40,7 +40,7 @@ const createDialogComp = function (conf, browserType){
    const {
            type:itemKey,
            dialogProps={}, dialogType,
-           dialogCaption,
+           dialogCaption, menuTitle,
            optionURI, optionsJsonProp,
            dataColumn,
          } = conf
@@ -50,7 +50,8 @@ const createDialogComp = function (conf, browserType){
            descrUrl,
            loadFnType,
            isContinious,
-           loadId
+           loadId,
+           isProxy
          } = dialogProps
        , _initFromDate = (nInitFromDate)
             ? DateUtils.getFromDate(nInitFromDate)
@@ -63,7 +64,10 @@ const createDialogComp = function (conf, browserType){
        , onClickInfo = (descrUrl)
             ? _showModalDialogDescription
             : undefined
-       , loadFn = RouterLoadFn.getFn(loadFnType, dialogType);
+       , loadFn = RouterLoadFn.getFn(loadFnType, dialogType)
+       , proxy = isProxy
+            ? ChartStore.getProxy()
+            : undefined;
 
        if (isContinious) {
          Object.assign(dialogProps, {
@@ -79,7 +83,7 @@ const createDialogComp = function (conf, browserType){
                .then(Comp => {
                   return React.createElement(Comp, {
                     key : itemKey,
-                    caption : dialogCaption,
+                    caption : dialogCaption || menuTitle,
                     optionURI : optionURI,
                     optionsJsonProp : optionsJsonProp,
                     dataColumn : dataColumn,
@@ -92,6 +96,7 @@ const createDialogComp = function (conf, browserType){
                     initToDate, onTestDate,
                     onClickInfo,
                     loadFn,
+                    proxy,
                     ...dialogProps
                  });
                })

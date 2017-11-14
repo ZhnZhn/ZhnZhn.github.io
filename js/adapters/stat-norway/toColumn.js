@@ -39,17 +39,21 @@ var C = {
 
 var COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
-var _crCategoryPoint = function _crCategoryPoint(c, v, i) {
-  return {
-    y: v.value,
-    c: c.Category(i).label
+var _fCrCategoryPoint = function _fCrCategoryPoint(c) {
+  return function (v, i) {
+    return {
+      y: v.value,
+      c: c.Category(i).label
+    };
   };
 };
-var _isCategoryPoint = function _isCategoryPoint(dfT, p) {
-  if (dfT && p.c === dfT) {
-    return false;
-  }
-  return p.y !== null && p.y !== 0;
+var _fIsCategoryPoint = function _fIsCategoryPoint(dfT) {
+  return function (p) {
+    if (dfT && p.c === dfT) {
+      return false;
+    }
+    return p.y !== null && p.y !== 0;
+  };
 };
 var _compareByY = function _compareByY(a, b) {
   return a.y - b.y;
@@ -73,55 +77,89 @@ var _setClusters = function _setClusters(data) {
   _colorItems(data, _clusters);
 };
 
-var _crColumnSeria = function _crColumnSeria(values, c, time, option) {
-  var _crPoint = _crCategoryPoint.bind(null, c),
-      _fnIs = _isCategoryPoint.bind(null, option.dfT),
-      data = values.map(_crPoint).filter(_fnIs).sort(_compareByY).reverse(),
-      _c = data.map(function (item) {
-    return item.c;
-  }),
-      seriaType = option.seriaType,
-      isCluster = option.isCluster,
-      _option$items = option.items,
+var _crCategory = function _crCategory(option, by) {
+  var _option$items = option.items,
       items = _option$items === undefined ? [] : _option$items,
-      _subtitle = (items[1].caption || '') + ': ' + time;
+      dfC = option.dfC,
+      dfT = option.dfT,
+      dfC2 = option.dfC2,
+      dfT2 = option.dfT2;
 
-
-  var config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType).addCaption(C.TITLE, _subtitle).add('chart', { spacingTop: 25 }).addTooltip(_Tooltip2.default.category).add('yAxis', { gridZIndex: 100 }).add('zhConfig', _crZhConfig(option)).toConfig();
-
-  if (isCluster) {
-    _setClusters(data);
+  var itemSlice = {},
+      i = void 0;
+  switch (by) {
+    case '2':
+      for (i = 0; i < items.length; i++) {
+        if (i !== 1) {
+          Object.assign(itemSlice, items[i].slice);
+        }
+      }
+      return {
+        category: dfC2,
+        cTotal: dfT2,
+        itemSlice: items[0].slice
+      };
+    default:
+      for (i = 1; i < items.length; i++) {
+        Object.assign(itemSlice, items[i].slice);
+      }
+      return {
+        category: dfC,
+        cTotal: dfT,
+        itemSlice: itemSlice
+        //itemSlice: items[1].slice
+      };
   }
+};
 
-  config.series[0].data = data;
-
-  return config;
+var _crData = function _crData(values, c, cTotal) {
+  return values.map(_fCrCategoryPoint(c)).filter(_fIsCategoryPoint(cTotal)).sort(_compareByY).reverse();
 };
 
 var toColumn = {
   crConfig: function crConfig(json, option) {
-    var items = option.items,
-        dfC = option.dfC,
+    var category = option.category,
+        itemSlice = option.itemSlice,
         time = option.time,
-        ds = (0, _jsonstat2.default)(json).Dataset(0),
-        times = ds.Dimension("Tid").id,
-        _c = dfC || items[0].category,
-        categories = ds.Dimension(_c),
-        tidId = time || times[times.length - 1],
-        values = ds.Data((0, _extends3.default)({
-      Tid: tidId
-    }, items[1].slice)),
-        config = _crColumnSeria(values, categories, tidId, option);
+        dfTSlice = option.dfTSlice,
+        seriaType = option.seriaType,
+        isCluster = option.isCluster,
+        _option$items2 = option.items,
+        items = _option$items2 === undefined ? [] : _option$items2,
+        cTotal = option.cTotal,
+        _ds = (0, _jsonstat2.default)(json).Dataset(0),
+        _times = _ds.Dimension("Tid").id,
+        _dimC = _ds.Dimension(category),
+        Tid = time || _times[_times.length - 1],
+        _values = _ds.Data((0, _extends3.default)({ Tid: Tid }, itemSlice, dfTSlice)),
+        _subtitle = (items[1].caption || '') + ': ' + Tid,
+        data = _crData(_values, _dimC, cTotal),
+        _c = data.map(function (item) {
+      return item.c;
+    }),
+        config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType).addCaption(C.TITLE, _subtitle).addTooltip(_Tooltip2.default.category).add({
+      chart: { spacingTop: 25 },
+      yAxis: { gridZIndex: 100 },
+      valueMoving: { date: Tid, direction: 'empty' },
+      info: _crInfo(_ds, option),
+      zhConfig: _crZhConfig(option)
+    }).toConfig();
 
-    config.info = _crInfo(ds);
+    if (isCluster) {
+      _setClusters(data);
+    }
+
+    config.series[0].data = data;
+
     return config;
   },
 
   fCrConfig: function fCrConfig() {
     var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     return function (json, option) {
-      return toColumn.crConfig(json, (0, _extends3.default)({}, option, param));
+      return toColumn.crConfig(json, (0, _extends3.default)({}, option, param, _crCategory(option, config.by)));
     };
   }
 };

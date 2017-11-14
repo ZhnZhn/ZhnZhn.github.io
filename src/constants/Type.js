@@ -23,7 +23,8 @@ export const BrowserType = {
 export const Direction = {
   UP : 'up',
   DOWN : 'down',
-  EQUAL : 'equal'
+  EQUAL : 'equal',
+  EMPTY: 'empty'
 }
 
 export const ModalDialog = {
@@ -64,6 +65,7 @@ export const LoadType = {
   EU_STAT: 'EU_STAT',
   FS: 'FS',
   NST: 'NST',
+  NST_2: 'NST_2',
   UN: 'UN',
   FAO: 'FAO',
   WL: 'WL'
