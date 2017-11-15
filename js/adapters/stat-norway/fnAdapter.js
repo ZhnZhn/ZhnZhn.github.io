@@ -8,6 +8,10 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
+var _AdapterFn = require('../AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _crDescr = function _crDescr(updated, option) {
@@ -27,6 +31,14 @@ var fnAdapter = {
         _caption = items[0] ? items[0].caption : 'All Items';
 
     return dfId + '_' + _caption;
+  },
+
+  crTid: function crTid(time, ds) {
+    if (time) {
+      return time;
+    }
+    var tidIds = ds.Dimension("Tid").id;
+    return tidIds[tidIds.length - 1];
   },
 
   crInfo: function crInfo(_ref, option) {
@@ -52,6 +64,13 @@ var fnAdapter = {
       isWithLegend: false,
       dataSource: dataSource
     };
+  },
+
+  crValueMoving: function crValueMoving(d) {
+    if (Array.isArray(d)) {
+      return _AdapterFn2.default.valueMoving(d);
+    }
+    return { date: d, direction: 'empty' };
   },
 
   numberFormat: function numberFormat(value) {

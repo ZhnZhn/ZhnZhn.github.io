@@ -1,4 +1,5 @@
 import Highcharts from 'highcharts';
+import AdapterFn from '../AdapterFn'
 
 const _crDescr = (updated, option) => {
   const _date = updated
@@ -17,6 +18,14 @@ const fnAdapter = {
     return dfId + '_' + _caption;
   },
 
+  crTid: (time, ds) => {
+    if (time) {
+      return time;
+    }
+    const tidIds = ds.Dimension("Tid").id;
+    return tidIds[tidIds.length-1];
+  },
+
   crInfo: ({ label='', updated='' }, option) => ({
     name: label,
     description: _crDescr(updated, option)
@@ -33,6 +42,13 @@ const fnAdapter = {
       isWithLegend: false,
       dataSource
     };
+  },
+
+  crValueMoving: (d) => {
+    if (Array.isArray(d)) {
+      return AdapterFn.valueMoving(d);
+    }
+    return { date: d, direction: 'empty' };
   },
 
   numberFormat: (value) => {

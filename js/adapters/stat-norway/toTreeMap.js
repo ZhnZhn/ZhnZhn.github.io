@@ -30,8 +30,12 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _crZhConfig = _fnAdapter2.default.crZhConfig;
-var _numberFormat = _fnAdapter2.default.numberFormat;
+var crTid = _fnAdapter2.default.crTid,
+    crZhConfig = _fnAdapter2.default.crZhConfig,
+    crValueMoving = _fnAdapter2.default.crValueMoving,
+    crInfo = _fnAdapter2.default.crInfo,
+    numberFormat = _fnAdapter2.default.numberFormat;
+
 
 var C = {
   TITLE: 'Statisctics Norway: All Items'
@@ -39,7 +43,7 @@ var C = {
 
 var NUMBER_STYLE = 'style="color:#333;"';
 var _crPointName = function _crPointName(label, value) {
-  return label + ' <br/>\n  <span ' + NUMBER_STYLE + '>' + _numberFormat(value) + '</span>';
+  return label + ' <br/>\n  <span ' + NUMBER_STYLE + '>' + numberFormat(value) + '</span>';
 };
 
 var _fCrTreeMapPoint = function _fCrTreeMapPoint(c, title) {
@@ -173,12 +177,12 @@ var _addColor = function _addColor(data, level60, level90) {
   });
 };
 
-var _crData = function _crData(values, categories, tidId, option) {
+var _crData = function _crData(values, categories, Tid, option) {
   var selectOptions = option.selectOptions,
       depth = option.depth,
       cTotal = option.cTotal;
 
-  return values.map(_fCrTreeMapPoint(categories, tidId)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth)).sort(_compareByValue).reverse();
+  return values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth)).sort(_compareByValue).reverse();
 };
 
 var toTreeMap = {
@@ -187,20 +191,19 @@ var toTreeMap = {
         itemSlice = option.itemSlice,
         time = option.time,
         dfTSlice = option.dfTSlice,
-        ds = (0, _jsonstat2.default)(json).Dataset(0),
-        times = ds.Dimension("Tid").id,
-        categories = ds.Dimension(category),
-        tidId = time || times[times.length - 1],
-        values = ds.Data((0, _extends3.default)({ Tid: tidId }, itemSlice, dfTSlice)),
-        _d1 = _crData(values, categories, tidId, option),
-        _c = _d1.map(function (item) {
-      return item.c;
-    }),
         seriaType = option.seriaType,
         isCluster = option.isCluster,
         _option$items2 = option.items,
         items = _option$items2 === undefined ? [] : _option$items2,
-        _subtitle = (items[1].caption || '') + ': ' + time,
+        ds = (0, _jsonstat2.default)(json).Dataset(0),
+        categories = ds.Dimension(category),
+        Tid = crTid(time, ds),
+        _subtitle = (items[1].caption || '') + ': ' + Tid,
+        values = ds.Data((0, _extends3.default)({ Tid: Tid }, itemSlice, dfTSlice)),
+        _d1 = _crData(values, categories, Tid, option),
+        _c = _d1.map(function (item) {
+      return item.c;
+    }),
         _data = _addPercent(_d1),
         _findLevelIndex2 = _findLevelIndex(_data, 60, 90),
         index1 = _findLevelIndex2.index1,
@@ -221,7 +224,9 @@ var toTreeMap = {
         marginRight: 5,
         height: 500
       },
-      zhConfig: _crZhConfig(option)
+      info: crInfo(ds, option),
+      valueMoving: crValueMoving(Tid),
+      zhConfig: crZhConfig(option)
     }).alignButtonExport().toConfig();
 
     return config;

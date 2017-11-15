@@ -3,15 +3,14 @@ import JSONstat from 'jsonstat';
 import ChartConfig from '../../charts/ChartConfig'
 import ConfigBuilder from '../../charts/ConfigBuilder'
 
-import AdapterFn from '../AdapterFn'
 import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
 
 import fnUtil from './fnUtil'
 import fnAdapter from './fnAdapter'
 
-const _toUTC = fnUtil.toUTC
-const _crZhConfig = fnAdapter.crZhConfig
-const _crInfo = fnAdapter.crInfo
+const _toUTC = fnUtil.toUTC;
+const { crZhConfig, crInfo, crValueMoving } = fnAdapter;
+
 
 const _crAreaMapSlice = (option) => {
   const { items, dfTSlice } = option
@@ -68,9 +67,9 @@ const toArea = {
          .clearSeries()
          .addSeries(seria)
          .add({
-           info: _crInfo(ds, option),
-           valueMoving: AdapterFn.valueMoving(data),
-           zhConfig: _crZhConfig(option),
+           info: crInfo(ds, option),
+           valueMoving: crValueMoving(data),
+           zhConfig: crZhConfig(option),
            zhFnAddSeriesSma: fnAddSeriesSma,
            zhFnRemoveSeries: fnRemoveSeries
          })

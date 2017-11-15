@@ -16,10 +16,6 @@ var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
-var _AdapterFn = require('../AdapterFn');
-
-var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
-
 var _IndicatorSma = require('../IndicatorSma');
 
 var _fnUtil = require('./fnUtil');
@@ -33,8 +29,10 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _toUTC = _fnUtil2.default.toUTC;
-var _crZhConfig = _fnAdapter2.default.crZhConfig;
-var _crInfo = _fnAdapter2.default.crInfo;
+var crZhConfig = _fnAdapter2.default.crZhConfig,
+    crInfo = _fnAdapter2.default.crInfo,
+    crValueMoving = _fnAdapter2.default.crValueMoving;
+
 
 var _crAreaMapSlice = function _crAreaMapSlice(option) {
   var items = option.items,
@@ -91,9 +89,9 @@ var toArea = {
         data = _toData(values, times),
         seria = _crSplineSeria(data, option),
         config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add({
-      info: _crInfo(ds, option),
-      valueMoving: _AdapterFn2.default.valueMoving(data),
-      zhConfig: _crZhConfig(option),
+      info: crInfo(ds, option),
+      valueMoving: crValueMoving(data),
+      zhConfig: crZhConfig(option),
       zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
       zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     }).toConfig();

@@ -30,8 +30,11 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _crZhConfig = _fnAdapter2.default.crZhConfig;
-var _crInfo = _fnAdapter2.default.crInfo;
+var crTid = _fnAdapter2.default.crTid,
+    crZhConfig = _fnAdapter2.default.crZhConfig,
+    crInfo = _fnAdapter2.default.crInfo,
+    crValueMoving = _fnAdapter2.default.crValueMoving;
+
 
 var C = {
   TITLE: 'Statisctics Norway: All Items'
@@ -128,9 +131,8 @@ var toColumn = {
         items = _option$items2 === undefined ? [] : _option$items2,
         cTotal = option.cTotal,
         _ds = (0, _jsonstat2.default)(json).Dataset(0),
-        _times = _ds.Dimension("Tid").id,
         _dimC = _ds.Dimension(category),
-        Tid = time || _times[_times.length - 1],
+        Tid = crTid(time, _ds),
         _values = _ds.Data((0, _extends3.default)({ Tid: Tid }, itemSlice, dfTSlice)),
         _subtitle = (items[1].caption || '') + ': ' + Tid,
         data = _crData(_values, _dimC, cTotal),
@@ -140,9 +142,9 @@ var toColumn = {
         config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType).addCaption(C.TITLE, _subtitle).addTooltip(_Tooltip2.default.category).add({
       chart: { spacingTop: 25 },
       yAxis: { gridZIndex: 100 },
-      valueMoving: { date: Tid, direction: 'empty' },
-      info: _crInfo(_ds, option),
-      zhConfig: _crZhConfig(option)
+      valueMoving: crValueMoving(Tid),
+      info: crInfo(_ds, option),
+      zhConfig: crZhConfig(option)
     }).toConfig();
 
     if (isCluster) {

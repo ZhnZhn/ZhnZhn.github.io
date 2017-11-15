@@ -6,8 +6,11 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 
-const _crZhConfig = fnAdapter.crZhConfig;
-const _numberFormat = fnAdapter.numberFormat
+const {
+        crTid,
+        crZhConfig, crValueMoving, crInfo,
+        numberFormat
+      } = fnAdapter
 
 const C = {
   TITLE: 'Statisctics Norway: All Items'
@@ -16,7 +19,7 @@ const C = {
 const NUMBER_STYLE = 'style="color:#333;"';
 const _crPointName = (label, value) => {
   return `${label} <br/>
-  <span ${NUMBER_STYLE}>${_numberFormat(value)}</span>`;
+  <span ${NUMBER_STYLE}>${numberFormat(value)}</span>`;
 }
 
 const _fCrTreeMapPoint = (c, title) => {
@@ -141,10 +144,10 @@ const _addColor = function(data, level60, level90){
 }
 
 
-const _crData = (values, categories, tidId, option) => {
-  const { selectOptions, depth, cTotal } = option;       
+const _crData = (values, categories, Tid, option) => {
+  const { selectOptions, depth, cTotal } = option;
   return values
-    .map(_fCrTreeMapPoint(categories, tidId))
+    .map(_fCrTreeMapPoint(categories, Tid))
     .filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth))
     .sort(_compareByValue)
     .reverse();
@@ -154,16 +157,15 @@ const toTreeMap = {
   crConfig: (json, option) => {
     const  {
              category, itemSlice, time, dfTSlice,
+             seriaType, isCluster, items=[]
            } = option
         , ds = JSONstat(json).Dataset(0)
-        , times = ds.Dimension("Tid").id
         , categories = ds.Dimension(category)
-        , tidId = time || times[times.length-1]
-        , values = ds.Data({ Tid: tidId, ...itemSlice, ...dfTSlice })
-        , _d1 = _crData(values, categories, tidId, option )
+        , Tid = crTid(time, ds)
+        , _subtitle = `${items[1].caption || ''}: ${Tid}`
+        , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
+        , _d1 = _crData(values, categories, Tid, option )
         , _c = _d1.map(item => item.c)
-        , { seriaType, isCluster, items=[] } = option
-        , _subtitle = `${items[1].caption || ''}: ${time}`
         , _data = _addPercent(_d1)
         , { index1, index2 } = _findLevelIndex(_data, 60, 90);
 
@@ -172,13 +174,13 @@ const toTreeMap = {
   }
 
    const _seria = ConfigBuilder()
-       .initTreeMap(
-          Tooltip.treeMap, {
-            zhSeriaId: 'id_TREE_MAP',
-            data: _data
-          }
-        )
-        .toConfig();
+     .initTreeMap(
+        Tooltip.treeMap, {
+          zhSeriaId: 'id_TREE_MAP',
+          data: _data
+        }
+      )
+      .toConfig();
     const config = ConfigBuilder()
       .initBaseTreeMap(_c, seriaType)
       .addCaption(C.TITLE, _subtitle)
@@ -190,7 +192,9 @@ const toTreeMap = {
           marginRight: 5,
           height: 500,
         },
-        zhConfig: _crZhConfig(option)
+        info: crInfo(ds, option),
+        valueMoving: crValueMoving(Tid),
+        zhConfig: crZhConfig(option)
        })
       .alignButtonExport()
       .toConfig();

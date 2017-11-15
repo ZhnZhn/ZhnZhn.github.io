@@ -2,7 +2,9 @@
 const DialogStyles = {
   //Dialogs, DatesFragments
   rowDiv: {
-    display: 'block',
+    //display: 'block',
+    display: 'flex',
+    alignItems: 'center',
     margin: '5px'
   },
   labelSpan : {

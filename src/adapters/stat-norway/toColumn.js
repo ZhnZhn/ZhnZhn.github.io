@@ -6,8 +6,11 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 
-const _crZhConfig = fnAdapter.crZhConfig;
-const _crInfo = fnAdapter.crInfo;
+const {
+        crTid,
+        crZhConfig, crInfo, crValueMoving
+      } = fnAdapter;
+
 
 
 const C = {
@@ -97,10 +100,9 @@ const toColumn = {
             seriaType, isCluster,
             items=[], cTotal
           } = option
-        , _ds = JSONstat(json).Dataset(0)
-        , _times = _ds.Dimension("Tid").id
+        , _ds = JSONstat(json).Dataset(0)        
         , _dimC = _ds.Dimension(category)
-        , Tid = time || _times[_times.length-1]
+        , Tid = crTid(time, _ds)
         , _values = _ds.Data({ Tid, ...itemSlice, ...dfTSlice })
         , _subtitle = `${items[1].caption || ''}: ${Tid}`
         , data = _crData(_values, _dimC, cTotal)
@@ -112,9 +114,9 @@ const toColumn = {
            .add({
              chart: { spacingTop: 25 },
              yAxis: { gridZIndex: 100 },
-             valueMoving: { date: Tid, direction: 'empty' },
-             info: _crInfo(_ds, option),
-             zhConfig: _crZhConfig(option)
+             valueMoving: crValueMoving(Tid),
+             info: crInfo(_ds, option),
+             zhConfig: crZhConfig(option)
             })
            .toConfig()
 
