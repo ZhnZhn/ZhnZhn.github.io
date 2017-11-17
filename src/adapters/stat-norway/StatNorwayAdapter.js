@@ -13,9 +13,10 @@ const StatNorwayAdapter = {
   },
 
   toSeries(json, option) {
-     const crConfig = RouterConfig.getCrConfig(AREA)
+     const { seriaType=AREA } = option
+         , crConfig = RouterConfig.getCrConfig(seriaType)
          , config = crConfig(json, option);
-
+     
      return config.series[0];
   }
 }

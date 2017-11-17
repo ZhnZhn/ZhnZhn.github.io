@@ -169,7 +169,13 @@ var AdapterFn = {
       valueTo: _ChartConfig2.default.fnNumberFormat(bPrevValue),
       date: date, dateTo: dateTo
     });
+  },
+
+
+  crId: function crId() {
+    return (Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
   }
+
 };
 
 exports.default = AdapterFn;

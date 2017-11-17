@@ -23,14 +23,18 @@ var _crDescr = function _crDescr(updated, option) {
   return 'TableId: ' + dfId + ' <BR/> Statisctics Norway: ' + _date;
 };
 
-var fnAdapter = {
-  crId: function crId(option) {
-    var items = option.items,
-        _option$dfId2 = option.dfId,
-        dfId = _option$dfId2 === undefined ? 'id' : _option$dfId2,
-        _caption = items[0] ? items[0].caption : 'All Items';
+var _crItemCaption = function _crItemCaption(option) {
+  var items = option.items,
+      _option$dfId2 = option.dfId,
+      dfId = _option$dfId2 === undefined ? 'id' : _option$dfId2,
+      caption = items[0] ? items[0].caption : 'All Items';
 
-    return dfId + '_' + _caption;
+  return dfId + '_' + caption;
+};
+
+var fnAdapter = {
+  crId: function crId() {
+    return _AdapterFn2.default.crId();
   },
 
   crTid: function crTid(time, ds) {
@@ -54,12 +58,12 @@ var fnAdapter = {
 
   crZhConfig: function crZhConfig(option) {
     var dataSource = option.dataSource,
-        _id = fnAdapter.crId(option);
+        id = fnAdapter.crId(),
+        itemCaption = _crItemCaption(option);
 
     return {
-      id: _id,
-      key: _id,
-      itemCaption: _id,
+      id: id, key: id,
+      itemCaption: itemCaption,
       isWithoutAdd: true,
       isWithLegend: false,
       dataSource: dataSource
@@ -71,6 +75,14 @@ var fnAdapter = {
       return _AdapterFn2.default.valueMoving(d);
     }
     return { date: d, direction: 'empty' };
+  },
+
+  crChartOption: function crChartOption(ds, data, option) {
+    return {
+      info: fnAdapter.crInfo(ds, option),
+      valueMoving: fnAdapter.crValueMoving(data),
+      zhConfig: fnAdapter.crZhConfig(option)
+    };
   },
 
   numberFormat: function numberFormat(value) {

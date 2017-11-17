@@ -141,7 +141,8 @@ class DateField extends Component {
         <input
            style={{...STYLE.INPUT, ...inputStyle}}
            name="text-date"
-           autoComplete="new-text-date"
+           //autoComplete="new-text-date"
+           autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
            spellCheck={false}

@@ -266,8 +266,9 @@ var InputSelect = (_temp = _class = function (_Component) {
             return _this2.domInputText = c;
           },
           type: 'text',
-          name: 'select',
-          autoComplete: 'new-select',
+          name: 'select'
+          //autoComplete="new-select"
+          , autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
           spellCheck: false,
@@ -645,7 +646,7 @@ var InputSelect = (_temp = _class = function (_Component) {
     };
   };
 }, _temp);
-process.env.NODE_ENV !== "production" ? InputSelect.propTypes = {
+InputSelect.propTypes = process.env.NODE_ENV !== "production" ? {
   propCaption: _propTypes2.default.string,
   ItemOptionComp: _propTypes2.default.element,
   width: _propTypes2.default.string,
@@ -664,6 +665,6 @@ process.env.NODE_ENV !== "production" ? InputSelect.propTypes = {
 
   onSelect: _propTypes2.default.func,
   onLoadOption: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = InputSelect;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-select\InputSelect.js.map

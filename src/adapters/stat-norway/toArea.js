@@ -9,7 +9,7 @@ import fnUtil from './fnUtil'
 import fnAdapter from './fnAdapter'
 
 const _toUTC = fnUtil.toUTC;
-const { crZhConfig, crInfo, crValueMoving } = fnAdapter;
+const { crChartOption } = fnAdapter;
 
 
 const _crAreaMapSlice = (option) => {
@@ -36,18 +36,15 @@ const _toData = (values, times ) => {
 }
 
 const _crSplineSeria = (data, option={}) => {
-  const { metric:id="id" } = option;
   return Object.assign(ChartConfig.fSeries(), {
-            type: 'spline',
-            visible: true,
-            data: data,
-            marker: {
-              symbol: 'circle'
-            },
-            //zhSeriaId: ticket + '_' + valueText ,
-            zhSeriaId: id
-            //zhValueText: valueText
-          }, option);
+     type: 'spline',
+     visible: true,
+     data: data,
+     marker: {
+       symbol: 'circle'
+     },
+     zhSeriaId: fnAdapter.crId()
+  }, option);
 }
 
 
@@ -67,9 +64,7 @@ const toArea = {
          .clearSeries()
          .addSeries(seria)
          .add({
-           info: crInfo(ds, option),
-           valueMoving: crValueMoving(data),
-           zhConfig: crZhConfig(option),
+           ...crChartOption(ds, data, option),
            zhFnAddSeriesSma: fnAddSeriesSma,
            zhFnRemoveSeries: fnRemoveSeries
          })

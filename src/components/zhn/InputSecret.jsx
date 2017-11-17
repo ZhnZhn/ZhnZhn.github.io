@@ -57,7 +57,8 @@ class InputSecret extends Component {
       <div style={styles.rootDiv}>
         <input
            name="secret"
-           autoComplete="new-secret"
+           //autoComplete="new-secret"
+           autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
            spellCheck={false}

@@ -1,5 +1,5 @@
 import Highcharts from 'highcharts';
-import AdapterFn from '../AdapterFn'
+import AdapterFn from '../AdapterFn';
 
 const _crDescr = (updated, option) => {
   const _date = updated
@@ -10,13 +10,16 @@ const _crDescr = (updated, option) => {
   return `TableId: ${dfId} <BR/> Statisctics Norway: ${_date}`;
 }
 
+const _crItemCaption = (option) => {
+  const { items, dfId='id'} = option
+       , caption =  items[0]
+            ? items[0].caption
+            : 'All Items';
+  return `${dfId}_${caption}`;
+}
+
 const fnAdapter = {
-  crId: (option) => {
-    const { items, dfId='id' } = option
-         , _caption =  items[0]
-              ? items[0].caption : 'All Items';
-    return dfId + '_' + _caption;
-  },
+  crId: () => AdapterFn.crId(),
 
   crTid: (time, ds) => {
     if (time) {
@@ -33,11 +36,11 @@ const fnAdapter = {
 
   crZhConfig: (option) => {
     const { dataSource } = option
-        , _id = fnAdapter.crId(option);
+        , id = fnAdapter.crId()
+        , itemCaption = _crItemCaption(option);
     return {
-      id: _id,
-      key: _id,
-      itemCaption: _id,
+      id, key: id,
+      itemCaption,
       isWithoutAdd: true,
       isWithLegend: false,
       dataSource
@@ -51,9 +54,19 @@ const fnAdapter = {
     return { date: d, direction: 'empty' };
   },
 
+  crChartOption: (ds, data, option) => {
+    return {
+      info: fnAdapter.crInfo(ds, option),
+      valueMoving: fnAdapter.crValueMoving(data),
+      zhConfig: fnAdapter.crZhConfig(option)
+    };
+  },
+
   numberFormat: (value) => {
     const arrSplit = (value+'').split('.')
-        , decimal = arrSplit[1] ? arrSplit[1].length : 0;
+        , decimal = arrSplit[1]
+            ? arrSplit[1].length
+            : 0;
      return Highcharts
        .numberFormat(value, decimal, '.', ' ');
   }

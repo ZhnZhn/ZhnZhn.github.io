@@ -31,9 +31,7 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var crTid = _fnAdapter2.default.crTid,
-    crZhConfig = _fnAdapter2.default.crZhConfig,
-    crInfo = _fnAdapter2.default.crInfo,
-    crValueMoving = _fnAdapter2.default.crValueMoving;
+    crChartOption = _fnAdapter2.default.crChartOption;
 
 
 var C = {
@@ -46,6 +44,7 @@ var _fCrCategoryPoint = function _fCrCategoryPoint(c) {
   return function (v, i) {
     return {
       y: v.value,
+      name: c.Category(i).label,
       c: c.Category(i).label
     };
   };
@@ -116,10 +115,23 @@ var _crCategory = function _crCategory(option, by) {
 };
 
 var _crData = function _crData(values, c, cTotal) {
+  if (!Array.isArray(values)) {
+    return [];
+  }
   return values.map(_fCrCategoryPoint(c)).filter(_fIsCategoryPoint(cTotal)).sort(_compareByY).reverse();
 };
 
 var toColumn = {
+
+  fCrConfig: function fCrConfig() {
+    var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    return function (json, option) {
+      return toColumn.crConfig(json, (0, _extends3.default)({}, option, param, _crCategory(option, config.by)));
+    };
+  },
+
   crConfig: function crConfig(json, option) {
     var category = option.category,
         itemSlice = option.itemSlice,
@@ -139,13 +151,10 @@ var toColumn = {
         _c = data.map(function (item) {
       return item.c;
     }),
-        config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType).addCaption(C.TITLE, _subtitle).addTooltip(_Tooltip2.default.category).add({
+        config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType).addCaption(C.TITLE, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
       chart: { spacingTop: 25 },
-      yAxis: { gridZIndex: 100 },
-      valueMoving: crValueMoving(Tid),
-      info: crInfo(_ds, option),
-      zhConfig: crZhConfig(option)
-    }).toConfig();
+      yAxis: { gridZIndex: 100 }
+    }, crChartOption(_ds, Tid, option))).toConfig();
 
     if (isCluster) {
       _setClusters(data);
@@ -154,16 +163,8 @@ var toColumn = {
     config.series[0].data = data;
 
     return config;
-  },
-
-  fCrConfig: function fCrConfig() {
-    var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    return function (json, option) {
-      return toColumn.crConfig(json, (0, _extends3.default)({}, option, param, _crCategory(option, config.by)));
-    };
   }
+
 };
 
 exports.default = toColumn;

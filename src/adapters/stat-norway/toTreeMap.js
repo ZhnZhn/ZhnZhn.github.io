@@ -6,11 +6,7 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 
-const {
-        crTid,
-        crZhConfig, crValueMoving, crInfo,
-        numberFormat
-      } = fnAdapter
+const { crTid, crChartOption, numberFormat } = fnAdapter;
 
 const C = {
   TITLE: 'Statisctics Norway: All Items'
@@ -176,7 +172,7 @@ const toTreeMap = {
    const _seria = ConfigBuilder()
      .initTreeMap(
         Tooltip.treeMap, {
-          zhSeriaId: 'id_TREE_MAP',
+          zhSeriaId: fnAdapter.crId(),
           data: _data
         }
       )
@@ -192,9 +188,7 @@ const toTreeMap = {
           marginRight: 5,
           height: 500,
         },
-        info: crInfo(ds, option),
-        valueMoving: crValueMoving(Tid),
-        zhConfig: crZhConfig(option)
+        ...crChartOption(ds, Tid, option)
        })
       .alignButtonExport()
       .toConfig();

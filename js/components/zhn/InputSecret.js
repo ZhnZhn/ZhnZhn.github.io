@@ -102,8 +102,9 @@ var InputSecret = function (_Component) {
         'div',
         { style: styles.rootDiv },
         _react2.default.createElement('input', {
-          name: 'secret',
-          autoComplete: 'new-secret',
+          name: 'secret'
+          //autoComplete="new-secret"
+          , autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
           spellCheck: false,

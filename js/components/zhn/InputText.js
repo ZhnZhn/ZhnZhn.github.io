@@ -57,7 +57,7 @@ var S = {
 var C = {
   BLANK: '',
   TEXT: 'text',
-  NEW_TEXT: 'new-text',
+  //NEW_TEXT: 'new-text',
   ON: 'on',
   OFF: 'off'
 };
@@ -130,7 +130,7 @@ var InputText = (_temp = _class = function (_Component) {
         type: C.TEXT,
         name: C.TEXT,
         autoCapitalize: C.OFF,
-        autoComplete: C.NEW_TEXT,
+        autoComplete: C.OFF,
         autoCorrect: _autoCorrect,
         spellCheck: _spellCheck,
         translate: false,
@@ -154,10 +154,10 @@ var InputText = (_temp = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   initValue: C.BLANK
 }, _temp);
-process.env.NODE_ENV !== "production" ? InputText.propTypes = {
+InputText.propTypes = process.env.NODE_ENV !== "production" ? {
   initValue: _propTypes2.default.string,
   style: _propTypes2.default.object,
   onEnter: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = InputText;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputText.js.map

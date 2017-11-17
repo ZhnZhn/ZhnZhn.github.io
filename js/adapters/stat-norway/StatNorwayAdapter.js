@@ -22,7 +22,9 @@ var StatNorwayAdapter = {
     return { config: config };
   },
   toSeries: function toSeries(json, option) {
-    var crConfig = _RouterConfig2.default.getCrConfig(AREA),
+    var _option$seriaType = option.seriaType,
+        seriaType = _option$seriaType === undefined ? AREA : _option$seriaType,
+        crConfig = _RouterConfig2.default.getCrConfig(seriaType),
         config = crConfig(json, option);
 
     return config.series[0];

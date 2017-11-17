@@ -174,6 +174,7 @@ var ChartToolbar = function (_Component) {
           onClickHighLow: zhHighLowConfig ? onClickHighLow : null
         })
       ) : null;
+
       /*
          const _btConf = (
            <ButtonTab

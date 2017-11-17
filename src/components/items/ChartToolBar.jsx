@@ -123,6 +123,7 @@ class ChartToolbar extends Component {
          />
        </MenuTabItem>
      ) : null;
+
 /*
    const _btConf = (
      <ButtonTab

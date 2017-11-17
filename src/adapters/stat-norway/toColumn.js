@@ -6,17 +6,11 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 
-const {
-        crTid,
-        crZhConfig, crInfo, crValueMoving
-      } = fnAdapter;
-
-
+const { crTid, crChartOption } = fnAdapter;
 
 const C = {
   TITLE: 'Statisctics Norway: All Items'
 };
-
 
 const COLORS = [
       '#9ecae1', '#6baed6',
@@ -28,7 +22,8 @@ const COLORS = [
 const _fCrCategoryPoint = (c) => (v, i) => {
   return {
     y: v.value,
-    c: c.Category(i).label,
+    name: c.Category(i).label,
+    c: c.Category(i).label
   };
 }
 const _fIsCategoryPoint = (dfT) => (p) => {
@@ -86,6 +81,9 @@ const _crCategory = (option, by) => {
 }
 
 const _crData = (values, c, cTotal ) => {
+  if (!Array.isArray(values)) {
+    return [];
+  }
   return values
      .map(_fCrCategoryPoint(c))
      .filter(_fIsCategoryPoint(cTotal))
@@ -94,13 +92,21 @@ const _crData = (values, c, cTotal ) => {
 }
 
 const toColumn = {
+
+  fCrConfig: (param={}, config={}) => {
+    return (json, option) => toColumn.crConfig(json, {
+      ...option, ...param,
+      ..._crCategory(option, config.by)
+    });
+  },
+
   crConfig: (json, option) => {
     const {
             category, itemSlice, time, dfTSlice,
             seriaType, isCluster,
             items=[], cTotal
           } = option
-        , _ds = JSONstat(json).Dataset(0)        
+        , _ds = JSONstat(json).Dataset(0)
         , _dimC = _ds.Dimension(category)
         , Tid = crTid(time, _ds)
         , _values = _ds.Data({ Tid, ...itemSlice, ...dfTSlice })
@@ -114,9 +120,7 @@ const toColumn = {
            .add({
              chart: { spacingTop: 25 },
              yAxis: { gridZIndex: 100 },
-             valueMoving: crValueMoving(Tid),
-             info: crInfo(_ds, option),
-             zhConfig: crZhConfig(option)
+             ...crChartOption(_ds, Tid, option)
             })
            .toConfig()
 
@@ -127,14 +131,8 @@ const toColumn = {
     config.series[0].data = data
 
     return config;
-  },
-
-  fCrConfig: (param={}, config={}) => {
-    return (json, option) => toColumn.crConfig(json, {
-      ...option, ...param,
-      ..._crCategory(option, config.by)
-    });
   }
+
 }
 
 export default toColumn

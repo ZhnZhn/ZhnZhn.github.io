@@ -573,7 +573,8 @@ class InputSelect extends Component {
            ref={c => this.domInputText = c}
            type="text"
            name="select"
-           autoComplete="new-select"
+           //autoComplete="new-select"
+           autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
            spellCheck={false}

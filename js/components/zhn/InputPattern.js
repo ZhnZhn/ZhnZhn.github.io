@@ -176,8 +176,9 @@ var InputPattern = (_temp = _class = function (_Component) {
         { style: (0, _extends3.default)({}, STYLE.ROOT, rootStyle) },
         _react2.default.createElement('input', {
           style: (0, _extends3.default)({}, STYLE.INPUT, inputStyle),
-          name: 'text-date',
-          autoComplete: 'new-text-date',
+          name: 'text-date'
+          //autoComplete="new-text-date"
+          , autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
           spellCheck: false,
@@ -221,7 +222,7 @@ var InputPattern = (_temp = _class = function (_Component) {
     return true;
   }
 }, _temp);
-process.env.NODE_ENV !== "production" ? InputPattern.propTypes = {
+InputPattern.propTypes = process.env.NODE_ENV !== "production" ? {
   rootStyle: _propTypes2.default.object,
   inputStyle: _propTypes2.default.object,
   initValue: _propTypes2.default.string,
@@ -229,6 +230,6 @@ process.env.NODE_ENV !== "production" ? InputPattern.propTypes = {
   errorMsg: _propTypes2.default.string,
   onTest: _propTypes2.default.func,
   onEnter: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = InputPattern;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputPattern.js.map

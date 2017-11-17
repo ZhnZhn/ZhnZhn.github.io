@@ -22,7 +22,7 @@ const S = {
 const C = {
   BLANK: '',
   TEXT: 'text',
-  NEW_TEXT: 'new-text',
+  //NEW_TEXT: 'new-text',
   ON: 'on',
   OFF: 'off'
 }
@@ -97,7 +97,7 @@ class InputText extends Component {
         type={C.TEXT}
         name={C.TEXT}
         autoCapitalize={C.OFF}
-        autoComplete={C.NEW_TEXT}
+        autoComplete={C.OFF}
         autoCorrect={_autoCorrect}
         spellCheck={_spellCheck}
         translate={false}

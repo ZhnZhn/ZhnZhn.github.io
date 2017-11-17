@@ -163,6 +163,14 @@ const AdapterFn = {
         valueTo: ChartConfig.fnNumberFormat(bPrevValue),
         date, dateTo
       };
+  },
+
+  crId: () => {
+    return (
+        Date.now().toString(36) +
+        Math.random().toString(36).substr(2, 9)
+      )
+      .toUpperCase();
   }
 
 }

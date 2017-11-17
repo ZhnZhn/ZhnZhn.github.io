@@ -31,9 +31,7 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var crTid = _fnAdapter2.default.crTid,
-    crZhConfig = _fnAdapter2.default.crZhConfig,
-    crValueMoving = _fnAdapter2.default.crValueMoving,
-    crInfo = _fnAdapter2.default.crInfo,
+    crChartOption = _fnAdapter2.default.crChartOption,
     numberFormat = _fnAdapter2.default.numberFormat;
 
 
@@ -214,20 +212,17 @@ var toTreeMap = {
     }
 
     var _seria = (0, _ConfigBuilder2.default)().initTreeMap(_Tooltip2.default.treeMap, {
-      zhSeriaId: 'id_TREE_MAP',
+      zhSeriaId: _fnAdapter2.default.crId(),
       data: _data
     }).toConfig();
-    var config = (0, _ConfigBuilder2.default)().initBaseTreeMap(_c, seriaType).addCaption(C.TITLE, _subtitle).addSeries(_seria).add({
+    var config = (0, _ConfigBuilder2.default)().initBaseTreeMap(_c, seriaType).addCaption(C.TITLE, _subtitle).addSeries(_seria).add((0, _extends3.default)({
       chart: {
         spacingTop: 25,
         marginTop: 50,
         marginRight: 5,
         height: 500
-      },
-      info: crInfo(ds, option),
-      valueMoving: crValueMoving(Tid),
-      zhConfig: crZhConfig(option)
-    }).alignButtonExport().toConfig();
+      }
+    }, crChartOption(ds, Tid, option))).alignButtonExport().toConfig();
 
     return config;
   },
