@@ -21,14 +21,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp, _initialiseProps;
+//import PropTypes from 'prop-types'
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _safeFn = require('../../utils/safeFn');
 
@@ -81,6 +78,18 @@ var MODE_ZOOM = 'isNotZoomToMinMax';
 
 var SettingsDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(SettingsDialog, _Component);
+
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    data: PropTypes.shape({
+      setQuandlKey: PropTypes.func,
+      isAdminMode: PropTypes.func,
+      isDrawDeltaExtrems: PropTypes.func
+    }),
+    onClose: PropTypes.func
+  }
+  */
 
   function SettingsDialog(props) {
     (0, _classCallCheck3.default)(this, SettingsDialog);
@@ -217,14 +226,5 @@ var SettingsDialog = (_temp = _class = function (_Component) {
     fnMode(mode);
   };
 }, _temp);
-process.env.NODE_ENV !== "production" ? SettingsDialog.propTypes = {
-  isShow: _propTypes2.default.bool,
-  data: _propTypes2.default.shape({
-    setQuandlKey: _propTypes2.default.func,
-    isAdminMode: _propTypes2.default.func,
-    isDrawDeltaExtrems: _propTypes2.default.func
-  }),
-  onClose: _propTypes2.default.func
-} : void 0;
 exports.default = SettingsDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\SettingsDialog.js.map

@@ -35,7 +35,7 @@ const DialogStyles = {
   rowDiv: { ...S.ROW },
   labelSpan : { ...S.LABEL },
 
-  crRowLabelStyle: (isShowLabels) => {
+  crRowLabelStyle: (isShowLabels=true) => {
     const rowStyle = isShowLabels
              ? { ...S.ROW }
              : { ...S.ROW, ...S.ROW_SHORT }

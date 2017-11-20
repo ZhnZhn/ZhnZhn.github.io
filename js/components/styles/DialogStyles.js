@@ -46,7 +46,9 @@ var DialogStyles = {
   rowDiv: (0, _extends3.default)({}, S.ROW),
   labelSpan: (0, _extends3.default)({}, S.LABEL),
 
-  crRowLabelStyle: function crRowLabelStyle(isShowLabels) {
+  crRowLabelStyle: function crRowLabelStyle() {
+    var isShowLabels = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
     var rowStyle = isShowLabels ? (0, _extends3.default)({}, S.ROW) : (0, _extends3.default)({}, S.ROW, S.ROW_SHORT),
         labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL) : (0, _extends3.default)({}, S.LABEL, S.NONE);
     return { rowStyle: rowStyle, labelStyle: labelStyle };

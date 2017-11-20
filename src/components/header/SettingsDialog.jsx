@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 import safeFn from '../../utils/safeFn'
 
@@ -33,6 +33,7 @@ const MODE_DELTA = 'isDrawDeltaExtrems';
 const MODE_ZOOM = 'isNotZoomToMinMax';
 
 class SettingsDialog extends Component {
+  /*
   static propTypes = {
     isShow: PropTypes.bool,
     data: PropTypes.shape({
@@ -42,6 +43,7 @@ class SettingsDialog extends Component {
     }),
     onClose: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
