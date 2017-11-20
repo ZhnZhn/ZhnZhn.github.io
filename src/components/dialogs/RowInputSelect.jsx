@@ -3,19 +3,25 @@ import React from 'react';
 import InputSelect from '../zhn-select/InputSelect';
 import STYLE from '../styles/DialogStyles';
 
-const RowInputSelect = ({ caption='', ...rest }) => {
+const RowInputSelect = ({
+  isShowLabels=true, caption='', ...rest
+}) => {
   const _caption = caption.indexOf(':') === -1 && caption !== ''
-           ? caption + ':'
-           : caption;                 
+           ? `${caption}:`
+           : caption
+       , {
+           rowStyle, labelStyle
+         } = STYLE.crRowLabelStyle(isShowLabels)
+       , optionName = isShowLabels
+            ? ''
+            : caption.replace(':', '')
+       , _options = { width: "250", ...rest, optionName};
   return (
-     <div style={STYLE.rowDiv}>
-        <span style={STYLE.labelSpan}>
+     <div style={rowStyle}>
+        <span style={labelStyle}>
            {_caption}
         </span>
-        <InputSelect
-           width="250"
-           {...rest}
-        />
+        <InputSelect {..._options} />
     </div>
   );
 };

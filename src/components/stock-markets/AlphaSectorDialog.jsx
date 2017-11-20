@@ -14,7 +14,9 @@ class AlphaIndicatorDialog extends Component {
 
   constructor(props){
     super()
-    this.toolbarButtons = this._createType2WithToolbar(props, true)
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate: true, noLabels: true }
+    )
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ];

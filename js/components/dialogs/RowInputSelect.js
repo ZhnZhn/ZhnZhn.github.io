@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-   value: true
+  value: true
 });
 
 var _extends2 = require('babel-runtime/helpers/extends');
@@ -27,23 +27,28 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RowInputSelect = function RowInputSelect(_ref) {
-   var _ref$caption = _ref.caption,
-       caption = _ref$caption === undefined ? '' : _ref$caption,
-       rest = (0, _objectWithoutProperties3.default)(_ref, ['caption']);
+  var _ref$isShowLabels = _ref.isShowLabels,
+      isShowLabels = _ref$isShowLabels === undefined ? true : _ref$isShowLabels,
+      _ref$caption = _ref.caption,
+      caption = _ref$caption === undefined ? '' : _ref$caption,
+      rest = (0, _objectWithoutProperties3.default)(_ref, ['isShowLabels', 'caption']);
+  var _caption = caption.indexOf(':') === -1 && caption !== '' ? caption + ':' : caption,
+      _STYLE$crRowLabelStyl = _DialogStyles2.default.crRowLabelStyle(isShowLabels),
+      rowStyle = _STYLE$crRowLabelStyl.rowStyle,
+      labelStyle = _STYLE$crRowLabelStyl.labelStyle,
+      optionName = isShowLabels ? '' : caption.replace(':', ''),
+      _options = (0, _extends3.default)({ width: "250" }, rest, { optionName: optionName });
 
-   var _caption = caption.indexOf(':') === -1 && caption !== '' ? caption + ':' : caption;
-   return _react2.default.createElement(
-      'div',
-      { style: _DialogStyles2.default.rowDiv },
-      _react2.default.createElement(
-         'span',
-         { style: _DialogStyles2.default.labelSpan },
-         _caption
-      ),
-      _react2.default.createElement(_InputSelect2.default, (0, _extends3.default)({
-         width: '250'
-      }, rest))
-   );
+  return _react2.default.createElement(
+    'div',
+    { style: rowStyle },
+    _react2.default.createElement(
+      'span',
+      { style: labelStyle },
+      _caption
+    ),
+    _react2.default.createElement(_InputSelect2.default, _options)
+  );
 };
 
 exports.default = RowInputSelect;

@@ -52,6 +52,7 @@ class  ZillowDialog extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isShowLabels: true,
       isShowDate : true,
       isShowPattern : false,
       validationMessages: []
@@ -119,8 +120,7 @@ class  ZillowDialog extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()
   }
 
   render(){
@@ -130,7 +130,10 @@ class  ZillowDialog extends Component {
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
            initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, isShowPattern, validationMessages } = this.state;
+        , {
+            isShowLabels, isShowDate, isShowPattern,
+            validationMessages
+          } = this.state;
 
     return(
         <D.DraggableDialog
@@ -146,6 +149,7 @@ class  ZillowDialog extends Component {
              />
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
@@ -156,6 +160,7 @@ class  ZillowDialog extends Component {
              <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
+                 isShowLabels={isShowLabels}
                  uri={twoURI}
                  parentCaption={twoCaption}
                  parentOptionNames="Items"
@@ -167,6 +172,7 @@ class  ZillowDialog extends Component {
              <D.ShowHide isShow={isShowPattern}>
                 <D.RowPattern
                   ref={n => this.inputZipCode = n}
+                  isShowLabels={isShowLabels}
                   title="Zip Code*"
                   placeholder="Zip Code, 5 Digit"
                   onTest={_isZipCode}
@@ -176,6 +182,7 @@ class  ZillowDialog extends Component {
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
                  ref={c => this.datesFragment = c}
+                 isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
                  nForecastDate={nForecastDate}

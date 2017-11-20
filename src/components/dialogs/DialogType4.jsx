@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import D from './DialogCell'
 import Decor from './decorators/Decorators'
@@ -9,6 +9,7 @@ const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 @Decor.withToolbar
 @Decor.withValidationLoad
 class DialogType4 extends Component {
+  /*
   static propTypes = {
     isShow: PropTypes.bool,
     caption: PropTypes.string,
@@ -28,6 +29,7 @@ class DialogType4 extends Component {
 
     loadFn: PropTypes.func
   }
+  */
 
   constructor(props){
     super();
@@ -42,6 +44,7 @@ class DialogType4 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isShowLabels: true,
       isShowDate : true,
       isShowOptions: false,
       validationMessages: []
@@ -98,8 +101,7 @@ class DialogType4 extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()    
   }
 
   _handleMode = (propName, value) => {
@@ -114,7 +116,7 @@ class DialogType4 extends Component {
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
-            isShowDate, isShowOptions,
+            isShowLabels, isShowDate, isShowOptions,
             validationMessages
           } = this.state;
 
@@ -133,6 +135,7 @@ class DialogType4 extends Component {
 
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
@@ -142,6 +145,7 @@ class DialogType4 extends Component {
 
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={twoURI}
                jsonProp={twoJsonProp}
                caption={twoCaption}
@@ -153,6 +157,7 @@ class DialogType4 extends Component {
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
                  ref={c => this.datesFragment = c}
+                 isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}

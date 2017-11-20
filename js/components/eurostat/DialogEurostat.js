@@ -96,15 +96,15 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this.one = undefined;
     _this.two = undefined;
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       validationMessages: []
     };
     return _this;
@@ -134,7 +134,9 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
           twoCaption = _props.twoCaption,
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
-          validationMessages = this.state.validationMessages;
+          _state = this.state,
+          isShowLabels = _state.isShowLabels,
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -152,6 +154,7 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -160,6 +163,7 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: twoURI,
           jsonProp: twoJsonProp,
           caption: twoCaption,

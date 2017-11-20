@@ -27,7 +27,8 @@ class  UnDialog5 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
-      isShowDate : false,
+      isShowLabels: true,
+      isShowDate: false,
       isShowOptions: false,
       validationMessages: []
     }
@@ -43,7 +44,9 @@ class  UnDialog5 extends Component {
   }
 
   _handleClickOptions = () => {
-    this.setState({ isShowOptions: !this.state.isShowOptions })
+    this.setState({
+      isShowOptions: !this.state.isShowOptions
+    })
   }
 
   _handleSelectOne = (one) => {
@@ -60,12 +63,11 @@ class  UnDialog5 extends Component {
     );
   }
   _createValidationMessages = () => {
-     //const { oneCaption } = this.props;
      let msg = [];
 
-     //if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
-
-     const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
+     const {
+             isValid:isValid1, msg:msg1
+           } = this.parentChild.getValidation();
      if (!isValid1) { msg = msg.concat(msg1); }
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
@@ -87,8 +89,7 @@ class  UnDialog5 extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()
   }
 
   _handleMode = (propName, value) => {
@@ -102,7 +103,11 @@ class  UnDialog5 extends Component {
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
            initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowDate, isShowOptions, validationMessages } = this.state;
+        , {
+            isShowLabels,
+            isShowDate, isShowOptions,
+            validationMessages
+          } = this.state;
 
     return(
         <D.DraggableDialog
@@ -118,10 +123,10 @@ class  UnDialog5 extends Component {
              />
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
-               //optionNames="Items"
                placeholder="Default: All"
                onSelect={this._handleSelectOne}
              />
@@ -129,6 +134,7 @@ class  UnDialog5 extends Component {
              <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
+                 isShowLabels={isShowLabels}
                  uri={twoURI}
                  parentCaption={twoCaption}
                  parentOptionNames="Items"
@@ -140,6 +146,7 @@ class  UnDialog5 extends Component {
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
                  ref={c => this.datesFragment = c}
+                 isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
                  nForecastDate={nForecastDate}
@@ -149,6 +156,7 @@ class  UnDialog5 extends Component {
              </D.ShowHide>
              <D.ShowHide isShow={isShowOptions}>
                <D.RowInputSelect
+                 isShowLabels={isShowLabels}
                  caption="Trade Flow"
                  options={TRADE_FLOW}
                  placeholder="Default: Export Value"

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 import ArrowCell from './ArrowCell';
 
-const MAX_WITHOUT_ANIMATION = 800
-    , CLASS_ROW_ACTIVE = "option-row__active";
+const MAX_WITHOUT_ANIMATION = 800;
+
+const CL = {
+  ROW_ACTIVE: 'option-row__active',
+  NOT_SELECTED: 'not-selected'
+};
 
 const _fnNoItem = (propCaption, inputValue, isWithInput) => {
   const _inputValue = String(inputValue).trim()
@@ -123,17 +127,34 @@ const S = {
     backgroundColor: '#D5D5BC'
   },
   OPTIONS_FOOTER: {
+    position: 'relative',
     backgroundColor: 'silver',
-    borderBottomLeftRadius : '5px',
-    borderBottomRightRadius : '5px'
+    borderBottomLeftRadius: '5px',
+    borderBottomRightRadius: '5px',
+    lineHeight: 1.5
   },
-  FILTERED_SPAN : {
+  FOOTER_INDEX: {
     display: 'inline-block',
     color: 'gray',
     fontWeight : 'bold',
     paddingLeft: '10px',
     paddingTop: '4px',
     paddingBottom : '4px'
+  },
+  FOOTER_BUTTONS: {
+    display: 'inline-block',
+    position: 'absolute',
+    top: '4px',
+    right: '8px',
+    color: 'black',
+    fontWeight: 'bold'
+  },
+  FOOTER_BT: {
+    display: 'inline-block',
+    cursor: 'pointer'
+  },
+  FOOTER_PADDING: {
+    paddingRight: '12px',
   }
 };
 
@@ -144,6 +165,7 @@ const ItemOptionDf = ({ item, propCaption }) => (
 );
 
 class InputSelect extends Component {
+  /*
   static propTypes = {
      propCaption: PropTypes.string,
      ItemOptionComp: PropTypes.element,
@@ -167,6 +189,7 @@ class InputSelect extends Component {
      onSelect: PropTypes.func,
      onLoadOption: PropTypes.func
   }
+  */
 
   static defaultProps = {
     propCaption: 'caption',
@@ -197,7 +220,6 @@ class InputSelect extends Component {
       value: '',
       isShowOption: false,
       options: props.options,
-      optionName : optionName,
       optionNames : _optionNames,
       isValidDomOptionsCache: false,
       isLocalMode: false
@@ -248,16 +270,27 @@ class InputSelect extends Component {
   }
   _decorateActiveRowComp = (comp) => {
     if (comp){
-      comp.classList.add(CLASS_ROW_ACTIVE);
+      comp.classList.add(CL.ROW_ACTIVE);
+    }
+    if (this.indexNode) {
+      this.indexNode.innerHTML = this.indexActiveOption + 1
     }
   }
   _undecorateActiveRowComp = (comp) => {
+     const _comp = !comp
+              ? this._getActiveItemComp()
+              : comp;
+     if (_comp){
+      _comp.classList.remove(CL.ROW_ACTIVE);
+     }
+    /*
      if (!comp){
        comp = this._getActiveItemComp()
      }
      if (comp){
-       comp.classList.remove(CLASS_ROW_ACTIVE);
+       comp.classList.remove(CL.ROW_ACTIVE);
      }
+     */
   }
 
   _makeVisibleActiveRowComp = (comp) => {
@@ -332,6 +365,54 @@ class InputSelect extends Component {
     }
   }
 
+  _stepDownOption = () => {
+    const prevComp = this._getActiveItemComp();
+
+    if (prevComp){
+       this._undecorateActiveRowComp(prevComp);
+
+       this.indexActiveOption += 1;
+       if (this.indexActiveOption>=this.state.options.length){
+          this.indexActiveOption = 0;
+          this.optionsComp.scrollTop = 0;
+       }
+
+       const nextComp = this._getActiveItemComp();
+       this._decorateActiveRowComp(nextComp)
+       //this.indexNode.innerHTML = this.indexActiveOption
+
+       const offsetTop = nextComp.offsetTop
+       const scrollTop = this.optionsComp.scrollTop;
+       if ( (offsetTop - scrollTop) > 70){
+          this.optionsComp.scrollTop += (offsetTop - scrollTop - 70);
+       }
+    }
+  }
+
+  _stepUpOption = () => {
+    const prevComp = this._getActiveItemComp();
+    if (prevComp){
+      this._undecorateActiveRowComp(prevComp);
+
+      this.indexActiveOption -= 1;
+      if (this.indexActiveOption < 0){
+        this.indexActiveOption = this.state.options.length - 1;
+        const bottomComp = this._getActiveItemComp()
+        this.optionsComp.scrollTop = bottomComp.offsetTop
+      }
+
+      const nextComp = this._getActiveItemComp();
+      this._decorateActiveRowComp(nextComp);
+      //this.indexNode.innerHTML = this.indexActiveOption
+
+      const offsetTop = nextComp.offsetTop;
+      const scrollTop = this.optionsComp.scrollTop;
+      if ( (offsetTop - scrollTop) < 70){
+        this.optionsComp.scrollTop -= ( 70 - (offsetTop - scrollTop) );
+      }
+    }
+  }
+
   _handleInputKeyDown = (event) => {
     switch(event.keyCode){
       // enter
@@ -367,63 +448,21 @@ class InputSelect extends Component {
           this.props.onSelect(undefined);
         }
       break;}
-      //down
-      case 40:{
+      case 40: //down
         if (!this.state.isShowOption){
           this._showOptions(0)
           //this.setState({ isShowOption : true });
         } else {
-          event.preventDefault();
-
-          const prevComp = this._getActiveItemComp();
-
-          if (prevComp){
-             this._undecorateActiveRowComp(prevComp);
-
-             this.indexActiveOption += 1;
-             if (this.indexActiveOption>=this.state.options.length){
-                this.indexActiveOption = 0;
-                this.optionsComp.scrollTop = 0;
-             }
-
-             const nextComp = this._getActiveItemComp();
-             this._decorateActiveRowComp(nextComp)
-
-             const offsetTop = nextComp.offsetTop
-             const scrollTop = this.optionsComp.scrollTop;
-             if ( (offsetTop - scrollTop) > 70){
-                this.optionsComp.scrollTop += (offsetTop - scrollTop - 70);
-             }
-          }
+          event.preventDefault()
+          this._stepDownOption()
         }
-      break;}
-      //up
-      case 38:
+        break;
+      case 38: //up
         if (this.state.isShowOption){
-          event.preventDefault();
-
-          const prevComp = this._getActiveItemComp();
-          if (prevComp){
-            this._undecorateActiveRowComp(prevComp);
-
-            this.indexActiveOption -= 1;
-            if (this.indexActiveOption < 0){
-              this.indexActiveOption = this.state.options.length - 1;
-              const bottomComp = this._getActiveItemComp()
-              this.optionsComp.scrollTop = bottomComp.offsetTop
-            }
-
-            const nextComp = this._getActiveItemComp();
-            this._decorateActiveRowComp(nextComp);
-
-            const offsetTop = nextComp.offsetTop;
-            const scrollTop = this.optionsComp.scrollTop;
-            if ( (offsetTop - scrollTop) < 70){
-              this.optionsComp.scrollTop -= ( 70 - (offsetTop - scrollTop) );
-            }
-          }
+          event.preventDefault()
+          this._stepUpOption()
         }
-      break;
+        break;
       default: return undefined;
     }
   }
@@ -438,12 +477,53 @@ class InputSelect extends Component {
   }
 
   _handleClickItem = (item, index, event) => {
+    this._undecorateActiveRowComp()
     this.indexActiveOption = index;
     this.setState({
       value : item[this.propCaption],
       isShowOption : false
     });
     this.props.onSelect(item);
+  }
+
+  _refIndexNode = n => this.indexNode = n
+
+  _renderOptionsFooter = (nFiltered, nAll) => {
+    return (
+      <div
+         className={CL.NOT_SELECTED}
+         style={S.OPTIONS_FOOTER}
+      >
+        <span style={S.FOOTER_INDEX}>
+          <span ref={this._refIndexNode} >
+            {this.indexActiveOption}
+          </span>
+          <span>
+             : {nFiltered}: {nAll}
+          </span>
+        </span>
+        <span style={S.FOOTER_BUTTONS}>
+          <span
+             style={{ ...S.FOOTER_BT, ...S.FOOTER_PADDING}}
+             onClick={this._stepDownOption}
+          >
+             Dn
+          </span>
+          <span
+             style={{ ...S.FOOTER_BT, ...S.FOOTER_PADDING}}
+             onClick={this._stepUpOption}
+          >
+             Up
+          </span>
+          <span
+            style={S.FOOTER_BT}
+            onClick={this.clearInput}
+          >
+             CL
+          </span>
+        </span>
+      </div>
+    );
   }
 
   renderOptions = () => {
@@ -485,9 +565,9 @@ class InputSelect extends Component {
     const { width } = this.props
         ,  _styleOptions = isShowOption ? S.BLOCK : S.NONE
         , _rootWidthStyle = _crWidth(width, _styleOptions)
-        , _numberFilteredItems = (options[0] && (options[0].value !== 'noresult') )
+        , _nFiltered = (options[0] && (options[0].value !== 'noresult') )
               ? options.length : 0
-        , _numberAllItems = this.props.options
+        , _nAll = this.props.options
               ? this.props.options.length : 0;
 
     return (
@@ -501,21 +581,17 @@ class InputSelect extends Component {
            >
             {_domOptions}
           </div>
-          <div style={S.OPTIONS_FOOTER}>
-            <span style={S.FILTERED_SPAN}>
-              Filtered {_numberFilteredItems} : {_numberAllItems}
-            </span>
-          </div>
+          { this._renderOptionsFooter(_nFiltered, _nAll) }
         </div>
-    )
+    );
   }
 
   _crAfterInputEl = () => {
     const {
            isLoading, isLoadingFailed,
-           placeholder, onLoadOption
+           placeholder, optionName, onLoadOption
          } = this.props
-        , { isShowOption, optionName, optionNames } = this.state;
+        , { isShowOption, optionNames } = this.state;
 
     let _placeholder, _afterInputEl
     if (!isLoading && !isLoadingFailed){
@@ -589,6 +665,14 @@ class InputSelect extends Component {
         {_domOptions}
       </div>
     )
+  }
+
+  clearInput = () => {
+    const { options, onSelect } = this.props;
+    this._undecorateActiveRowComp()
+    onSelect(undefined)
+    this._setStateToInit(options)    
+    this.setState({ isShowOption : false });
   }
 
   focusInput(){

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import D from '../dialogs/DialogCell'
-import withValidationLoad from '../dialogs/decorators/withValidationLoad';
+import Decor from '../dialogs/decorators/Decorators'
 
 const typeOptions = [
   { caption: 'Continuous Contract #1', value: 1 },
@@ -11,21 +11,20 @@ const typeOptions = [
   { caption: 'Continuous Contract #5', value: 5 }
 ]
 
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class FuturesWikiDialog extends Component {
   constructor(props){
     super()
     this.type = undefined
-    this.toolbarButtons = [
-      {
-        caption: 'I', title: 'Information About Dataset',
-        onClick: this._handleClickInfo
-      }
-    ]
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate: true }
+    )
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isShowLabels: true,
       validationMessages : []
     }
   }
@@ -37,11 +36,6 @@ class FuturesWikiDialog extends Component {
        }
     }
     return true;
-  }
-
-  _handleClickInfo = () => {
-    const { descrUrl, onClickInfo } = this.props;
-    onClickInfo({ descrUrl })
   }
 
   _handleSelectType = (type) => {
@@ -83,20 +77,7 @@ class FuturesWikiDialog extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
-  }
-
-  _renderFromDate = (initFromDate, onTestDate, msgTestDate) => {
-    return (
-       <D.RowDate
-          ref={ c => this.fromDate = c}
-          labelTitle="From Date:"
-          initValue={initFromDate}
-          errorMsg={msgTestDate}
-          onTestDate={onTestDate}
-       />
-    );
+    this._handleWithValidationClose()
   }
 
   render(){
@@ -105,7 +86,7 @@ class FuturesWikiDialog extends Component {
             futuresURI, msgOnNotSelected,
             isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
           } = this.props
-        , { validationMessages } = this.state;
+        , { isShowLabels, validationMessages } = this.state;
 
     return (
       <D.DraggableDialog
@@ -123,6 +104,7 @@ class FuturesWikiDialog extends Component {
            <D.SelectParentChild
                ref={c => this.exchangeItem = c}
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={futuresURI}
                parentCaption="Exchange"
                parentOptionNames="Exchanges"
@@ -131,11 +113,22 @@ class FuturesWikiDialog extends Component {
                msgOnNotSelected={msgOnNotSelected}
            />
            <D.RowInputSelect
+              isShowLabels={isShowLabels}
               caption="Type"
               options={typeOptions}
               onSelect={this._handleSelectType}
            />
-           {isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty)}
+           {
+             isContinious &&
+             <D.RowDate
+                ref={ c => this.fromDate = c}
+                isShowLabels={isShowLabels}
+                labelTitle="From Date:"
+                initValue={initFromDate}
+                errorMsg={msgTestDateOrEmpty}
+                onTestDate={onTestDateOrEmpty}
+             />
+           }
            <D.ValidationMessages
               validationMessages={validationMessages}
            />

@@ -152,13 +152,13 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this.toolbarButtons = _this._createType2WithToolbar(props);
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       isShowDate: true,
       isShowPattern: false,
       validationMessages: []
@@ -200,6 +200,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           isShowPattern = _state.isShowPattern,
           validationMessages = _state.validationMessages;
@@ -220,6 +221,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -231,6 +233,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
             return _this2.parentChild = c;
           },
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: twoURI,
           parentCaption: twoCaption,
           parentOptionNames: 'Items',
@@ -246,6 +249,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
             ref: function ref(n) {
               return _this2.inputZipCode = n;
             },
+            isShowLabels: isShowLabels,
             title: 'Zip Code*',
             placeholder: 'Zip Code, 5 Digit',
             onTest: _isZipCode,
@@ -259,6 +263,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
+            isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
             nForecastDate: nForecastDate,

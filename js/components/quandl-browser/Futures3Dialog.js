@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
@@ -30,29 +30,21 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
+var _Decorators = require('../dialogs/decorators/Decorators');
 
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var yearOptions = [{ caption: '2017', value: 2017 }, { caption: '2016', value: 2016 }, { caption: '2015', value: 2015 }, { caption: '2014', value: 2014 }, { caption: '2013', value: 2013 }, { caption: '2012', value: 2012 }];
 
-var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Component) {
+var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(Futures3Dialog, _Component);
 
   function Futures3Dialog(props) {
     (0, _classCallCheck3.default)(this, Futures3Dialog);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Futures3Dialog.__proto__ || Object.getPrototypeOf(Futures3Dialog)).call(this));
-
-    _this._handleClickInfo = function () {
-      var _this$props = _this.props,
-          descrUrl = _this$props.descrUrl,
-          onClickInfo = _this$props.onClickInfo;
-
-      onClickInfo({ descrUrl: descrUrl });
-    };
 
     _this._handleSelectYear = function (year) {
       _this.year = year;
@@ -63,10 +55,10 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
     };
 
     _this._createValidationMessages = function () {
-      var _this$props2 = _this.props,
-          msgOnNotSelected = _this$props2.msgOnNotSelected,
-          msgOnNotValidFormat = _this$props2.msgOnNotValidFormat,
-          isContinious = _this$props2.isContinious;
+      var _this$props = _this.props,
+          msgOnNotSelected = _this$props.msgOnNotSelected,
+          msgOnNotValidFormat = _this$props.msgOnNotValidFormat,
+          isContinious = _this$props.isContinious;
 
       var msg = [];
 
@@ -101,29 +93,14 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
-    };
-
-    _this._renderFromDate = function (initFromDate, onTestDate, msgTestDate) {
-      return _react2.default.createElement(_DialogCell2.default.RowDate, {
-        ref: function ref(c) {
-          return _this.fromDate = c;
-        },
-        labelTitle: 'From Date:',
-        initValue: initFromDate,
-        errorMsg: msgTestDate,
-        onTestDate: onTestDate
-      });
+      _this._handleWithValidationClose();
     };
 
     _this.year = undefined;
-    _this.toolbarButtons = [{
-      caption: 'I', title: 'Information About Dataset',
-      onClick: _this._handleClickInfo
-    }];
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       validationMessages: []
     };
     return _this;
@@ -155,7 +132,9 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
           initFromDate = _props.initFromDate,
           onTestDateOrEmpty = _props.onTestDateOrEmpty,
           msgTestDateOrEmpty = _props.msgTestDateOrEmpty,
-          validationMessages = this.state.validationMessages;
+          _state = this.state,
+          isShowLabels = _state.isShowLabels,
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -176,6 +155,7 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
             return _this2.itemMonth = c;
           },
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: futuresURI,
           parentCaption: 'Futures',
           parentOptionNames: 'Futures',
@@ -184,11 +164,21 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
           caption: 'Year',
           options: yearOptions,
           onSelect: this._handleSelectYear
         }),
-        isContinious && this._renderFromDate(initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty),
+        isContinious && _react2.default.createElement(_DialogCell2.default.RowDate, {
+          ref: function ref(c) {
+            return _this2.fromDate = c;
+          },
+          isShowLabels: isShowLabels,
+          labelTitle: 'From Date:',
+          initValue: initFromDate,
+          errorMsg: msgTestDateOrEmpty,
+          onTestDate: onTestDateOrEmpty
+        }),
         _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
@@ -196,7 +186,6 @@ var Futures3Dialog = (0, _withValidationLoad2.default)(_class = function (_Compo
     }
   }]);
   return Futures3Dialog;
-}(_react.Component)) || _class;
-
+}(_react.Component)) || _class) || _class);
 exports.default = Futures3Dialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\Futures3Dialog.js.map

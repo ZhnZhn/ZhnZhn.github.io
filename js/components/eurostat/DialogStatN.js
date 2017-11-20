@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
@@ -75,7 +75,7 @@ var S = {
   }
 };
 
-var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec(_class = function (_Component) {
+var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(DialogStatN, _Component);
 
   function DialogStatN(props) {
@@ -177,12 +177,7 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec(_class = functi
     };
 
     _this._handleClose = function () {
-      //this._handleWithValidationClose(this._createValidationMessages);
-      _this.props.onClose();
-      _this.setState(function (prevState) {
-        prevState.validationMessages = [];
-        return prevState;
-      });
+      _this._handleWithValidationClose();
     };
 
     _this._hSelectChartType = function (chartType) {
@@ -205,29 +200,32 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec(_class = functi
     };
 
     _this._renderSelectInputs = function () {
-      var configs = _this.state.configs;
+      var _this$state2 = _this.state,
+          isShowLabels = _this$state2.isShowLabels,
+          configs = _this$state2.configs;
 
       return configs.map(function (conf, index) {
         var id = conf.id,
             caption = conf.caption,
-            options = conf.options;
+            options = conf.options,
+            rest = { isShowLabels: isShowLabels, caption: caption, options: options };
 
-        return _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-          key: id,
-          caption: caption,
-          options: options,
+        return _react2.default.createElement(_DialogCell2.default.RowInputSelect, (0, _extends3.default)({
+          key: id
+        }, rest, {
           onSelect: _this._fSelect(index).bind(_this)
-        });
+        }));
       });
     };
 
+    _this.toolbarButtons = _this._createType2WithToolbar(props);
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
     _this._items = [];
     _this._selectOptions = [];
 
     _this.state = {
+      isShowLabels: true,
       isLoading: true,
       isLoadFailed: false,
       isShowDate: false,
@@ -273,6 +271,7 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec(_class = functi
           onShow = _props.onShow,
           onFront = _props.onFront,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isLoading = _state.isLoading,
           isLoadFailed = _state.isLoadFailed,
           isShowDate = _state.isShowDate,
@@ -299,6 +298,7 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec(_class = functi
         }),
         !isLoading && !isLoadFailed && this._renderSelectInputs(),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
           caption: 'Chart',
           placeholder: 'Default: Area',
           options: this._chartOptions,
@@ -308,6 +308,7 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec(_class = functi
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
             caption: 'For Date',
             placeholder: dateDefault,
             options: dateOptions,
@@ -321,6 +322,6 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec(_class = functi
     }
   }]);
   return DialogStatN;
-}(_react.Component)) || _class);
+}(_react.Component)) || _class) || _class);
 exports.default = DialogStatN;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogStatN.js.map

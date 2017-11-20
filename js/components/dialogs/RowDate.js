@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _DateField = require('../zhn/DateField');
 
 var _DateField2 = _interopRequireDefault(_DateField);
@@ -38,7 +34,7 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Styles = _DialogStyles2.default;
+//import PropTypes from "prop-types";
 
 var RowDate = function (_Component) {
   (0, _inherits3.default)(RowDate, _Component);
@@ -63,22 +59,36 @@ var RowDate = function (_Component) {
 
   (0, _createClass3.default)(RowDate, [{
     key: 'render',
+
+    /*
+    static propTypes = {
+       labelTitle : PropTypes.string,
+       initValue : PropTypes.string,
+       errorMsg : PropTypes.string,
+       onTestDate : PropTypes.func
+    }
+    */
+
     value: function render() {
       var _this2 = this;
 
       var _props = this.props,
+          isShowLabels = _props.isShowLabels,
           _props$labelTitle = _props.labelTitle,
           labelTitle = _props$labelTitle === undefined ? '' : _props$labelTitle,
           initValue = _props.initValue,
           errorMsg = _props.errorMsg,
-          onTestDate = _props.onTestDate;
+          onTestDate = _props.onTestDate,
+          _STYLE$crRowLabelStyl = _DialogStyles2.default.crRowLabelStyle(isShowLabels),
+          rowStyle = _STYLE$crRowLabelStyl.rowStyle,
+          labelStyle = _STYLE$crRowLabelStyl.labelStyle;
 
       return _react2.default.createElement(
         'div',
-        { style: Styles.rowDiv },
+        { style: rowStyle },
         _react2.default.createElement(
           'span',
-          { style: Styles.labelSpan },
+          { style: labelStyle },
           labelTitle
         ),
         _react2.default.createElement(_DateField2.default, {
@@ -95,11 +105,5 @@ var RowDate = function (_Component) {
   return RowDate;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? RowDate.propTypes = {
-  labelTitle: _propTypes2.default.string,
-  initValue: _propTypes2.default.string,
-  errorMsg: _propTypes2.default.string,
-  onTestDate: _propTypes2.default.func
-} : void 0;
 exports.default = RowDate;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowDate.js.map

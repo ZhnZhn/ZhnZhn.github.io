@@ -88,6 +88,7 @@ class SelectParentChild extends Component {
 
   render(){
     const {
+            isShowLabels,
             parentCaption, parentOptionNames,
             childCaption
           } = this.props
@@ -98,6 +99,7 @@ class SelectParentChild extends Component {
     return (
       <div>
          <RowInputSelect
+           isShowLabels={isShowLabels}
            caption={parentCaption}
            options={parentOptions}
            optionNames={parentOptionNames}
@@ -107,6 +109,7 @@ class SelectParentChild extends Component {
            onSelect={this._handlerSelectParent}
          />
          <RowInputSelect
+           isShowLabels={isShowLabels}
            caption={childCaption}
            options={childOptions}
            onSelect={this._handlerSelectChild}

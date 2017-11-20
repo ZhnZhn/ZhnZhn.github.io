@@ -30,22 +30,22 @@ const S = {
 };
 
 @Decor.withToolbar
+@Decor.withValidationLoad
 class DialogStatN extends Component {
 
   constructor(props){
     super()
 
+    this.toolbarButtons = this._createType2WithToolbar(props)
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
-    ];
-    this.toolbarButtons = [
-      { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
     ];
     this._chartOptions = RouterOptions.crOptions(props)
     this._items = []
     this._selectOptions = []
 
     this.state = {
+      isShowLabels: true,
       isLoading: true,
       isLoadFailed: false,
       isShowDate: false,
@@ -170,12 +170,7 @@ class DialogStatN extends Component {
   }
 
   _handleClose = () => {
-    //this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
-    this.setState(prevState => {
-      prevState.validationMessages = []
-      return prevState;
-    })
+    this._handleWithValidationClose();
   }
 
   _hSelectChartType = (chartType) => {
@@ -199,14 +194,14 @@ class DialogStatN extends Component {
   }
 
   _renderSelectInputs = () => {
-    const { configs } = this.state
+    const { isShowLabels, configs } = this.state
     return configs.map((conf, index) => {
-      const { id, caption, options } = conf;
+      const { id, caption, options } = conf
+         , rest = { isShowLabels, caption, options };
       return (
         <D.RowInputSelect
           key={id}
-          caption={caption}
-          options={options}
+          {...rest}          
           onSelect={this._fSelect(index).bind(this)}
         />
       );
@@ -218,6 +213,7 @@ class DialogStatN extends Component {
             caption, isShow, onShow, onFront,
           } = this.props
         , {
+            isShowLabels,
             isLoading, isLoadFailed,
             isShowDate, dateDefault, dateOptions,
             validationMessages
@@ -251,6 +247,7 @@ class DialogStatN extends Component {
          }
 
          <D.RowInputSelect
+           isShowLabels={isShowLabels}
            caption="Chart"
            placeholder="Default: Area"
            options={this._chartOptions}
@@ -258,6 +255,7 @@ class DialogStatN extends Component {
          />
          <D.ShowHide isShow={isShowDate}>
            <D.RowInputSelect
+              isShowLabels={isShowLabels}
               caption="For Date"
               placeholder={dateDefault}
               options={dateOptions}

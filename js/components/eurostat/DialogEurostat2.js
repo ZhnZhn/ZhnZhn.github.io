@@ -155,8 +155,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this._refSelect1 = function (comp) {
@@ -172,12 +171,14 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     _this.date = undefined;
     _this.chartType = undefined;
 
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
+    _this.toolbarButtons = _this._createType2WithToolbar(props);
+
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
 
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
     _this.state = {
+      isShowLabels: true,
       isShowDate: false,
       dateDefault: DATE_PLACEHOLDER,
       dateOptions: [],
@@ -211,6 +212,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           dateDefault = _state.dateDefault,
           dateOptions = _state.dateOptions,
@@ -233,6 +235,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           ref: this._refSelect1,
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -242,6 +245,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           ref: this._refSelect2,
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: twoURI,
           jsonProp: twoJsonProp,
           caption: twoCaption,
@@ -249,6 +253,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           onSelect: this._handleSelectTwo
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
           caption: 'Chart',
           placeholder: 'Default: Area',
           options: this._chartOptions,
@@ -258,6 +263,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
             caption: 'For Date',
             placeholder: dateDefault,
             options: dateOptions,

@@ -84,8 +84,11 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
       _this.ticketComp = comp;
     };
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props, true);
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+    _this.state = {
+      isShowLabels: true
+    };
     return _this;
   }
 
@@ -106,7 +109,8 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
           isShow = _props.isShow,
           caption = _props.caption,
           onShow = _props.onShow,
-          onFront = _props.onFront;
+          onFront = _props.onFront,
+          isShowLabels = this.state.isShowLabels;
 
 
       return _react2.default.createElement(
@@ -124,12 +128,14 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
         }),
         _react2.default.createElement(_DialogCell2.default.RowPattern, {
           ref: this._refTicket,
+          isShowLabels: isShowLabels,
           title: 'Ticket',
           placeholder: 'Nyse or Nasdaq Ticket',
           onTest: _testTicket,
           errorMsg: 'Not Empty'
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
           caption: 'Interval',
           placeholder: 'Default: 15min',
           options: _intervalOptions,

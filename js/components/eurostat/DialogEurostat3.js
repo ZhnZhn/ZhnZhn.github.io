@@ -100,14 +100,14 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this.one = undefined;
-    _this.toolbarButtons = [{ caption: 'I', onClick: _this._clickInfoWithToolbar.bind(_this) }];
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       validationMessages: []
     };
     return _this;
@@ -141,7 +141,9 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           twoJsonProp = _props.twoJsonProp,
           threeCaption = _props.threeCaption,
           msgOnNotSelected = _props.msgOnNotSelected,
-          validationMessages = this.state.validationMessages;
+          _state = this.state,
+          isShowLabels = _state.isShowLabels,
+          validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
@@ -159,6 +161,7 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -170,6 +173,7 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
             return _this2.parentChild = c;
           },
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: twoURI,
           parentCaption: twoCaption,
           parentOptionNames: 'Items',

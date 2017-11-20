@@ -20,43 +20,52 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _DialogCell = require('./DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _withValidationLoad = require('./decorators/withValidationLoad');
+var _Decorators = require('./decorators/Decorators');
 
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var transformOptions = [{ caption: "NO EFFECT: z[t]=y[t]", value: "none" }, { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" }, { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" }, { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" }, { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }];
 
-var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Component) {
+var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(DialogType3, _Component);
+
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+    itemCaption: PropTypes.string,
+    optionURI: PropTypes.string,
+    optionsJsonProp: PropTypes.string,
+    optionNames: PropTypes.string,
+    initFromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    msgOnNotValidFormat: PropTypes.func,
+    onTestDate: PropTypes.func,
+    onShow: PropTypes.func,
+      descrUrl: PropTypes.string,
+    isTransform: PropTypes.bool,
+    onClickInfo: PropTypes.func,
+    loadFn: PropTypes.func
+  }
+  */
 
   function DialogType3(props) {
     (0, _classCallCheck3.default)(this, DialogType3);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType3.__proto__ || Object.getPrototypeOf(DialogType3)).call(this, props));
-
-    _this._handleClickInfo = function () {
-      var _this$props = _this.props,
-          descrUrl = _this$props.descrUrl,
-          onClickInfo = _this$props.onClickInfo;
-
-      onClickInfo({ descrUrl: descrUrl });
-    };
 
     _this._handleClickTransform = function () {
       _this.setState(function (prevState) {
@@ -106,18 +115,12 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this.stock = undefined;
     _this.transform = undefined;
-    _this.toolbarButtons = [];
-    if (props.descrUrl) {
-      _this.toolbarButtons.push({
-        caption: 'I', onClick: _this._handleClickInfo
-      });
-    }
+    _this.toolbarButtons = _this._createType2WithToolbar(props);
     if (props.isTransform) {
       _this.toolbarButtons.push({
         caption: 'T', onClick: _this._handleClickTransform
@@ -125,6 +128,8 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
     }
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
+      isShowDate: true,
       isShowTransform: false,
       validationMessages: []
     };
@@ -154,7 +159,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           optionURI = _props.optionURI,
           optionsJsonProp = _props.optionsJsonProp,
           _props$itemCaption = _props.itemCaption,
-          itemCaption = _props$itemCaption === undefined ? 'Stock:' : _props$itemCaption,
+          itemCaption = _props$itemCaption === undefined ? 'Stock' : _props$itemCaption,
           _props$optionNames = _props.optionNames,
           optionNames = _props$optionNames === undefined ? 'Stocks' : _props$optionNames,
           isWithInputStock = _props.isWithInputStock,
@@ -163,15 +168,17 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowTransform = _state.isShowTransform,
+          isShowDate = _state.isShowDate,
           validationMessages = _state.validationMessages;
 
 
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: caption,
           isShow: isShow,
+          caption: caption,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
@@ -182,6 +189,7 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: optionURI,
           jsonProp: optionsJsonProp,
           caption: itemCaption,
@@ -193,20 +201,26 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
           _DialogCell2.default.ShowHide,
           { isShow: isShowTransform },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
-            caption: 'Transform:',
+            isShowLabels: isShowLabels,
+            caption: 'Transform',
             options: transformOptions,
             onSelect: this._handleSelectTransform
           })
         ),
-        _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-          ref: function ref(c) {
-            return _this2.datesFragment = c;
-          },
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          msgOnNotValidFormat: msgOnNotValidFormat,
-          onTestDate: onTestDate
-        }),
+        _react2.default.createElement(
+          _DialogCell2.default.ShowHide,
+          { isShow: isShowDate },
+          _react2.default.createElement(_DialogCell2.default.DatesFragment, {
+            ref: function ref(c) {
+              return _this2.datesFragment = c;
+            },
+            isShowLabels: isShowLabels,
+            initFromDate: initFromDate,
+            initToDate: initToDate,
+            msgOnNotValidFormat: msgOnNotValidFormat,
+            onTestDate: onTestDate
+          })
+        ),
         _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
           validationMessages: validationMessages
         })
@@ -214,25 +228,6 @@ var DialogType3 = (0, _withValidationLoad2.default)(_class = function (_Componen
     }
   }]);
   return DialogType3;
-}(_react.Component)) || _class;
-
-process.env.NODE_ENV !== "production" ? DialogType3.propTypes = {
-  isShow: _propTypes2.default.bool,
-  caption: _propTypes2.default.string,
-  itemCaption: _propTypes2.default.string,
-  optionURI: _propTypes2.default.string,
-  optionsJsonProp: _propTypes2.default.string,
-  optionNames: _propTypes2.default.string,
-  initFromDate: _propTypes2.default.string,
-  initToDate: _propTypes2.default.string,
-  msgOnNotValidFormat: _propTypes2.default.func,
-  onTestDate: _propTypes2.default.func,
-  onShow: _propTypes2.default.func,
-
-  descrUrl: _propTypes2.default.string,
-  isTransform: _propTypes2.default.bool,
-  onClickInfo: _propTypes2.default.func,
-  loadFn: _propTypes2.default.func
-} : void 0;
+}(_react.Component)) || _class) || _class);
 exports.default = DialogType3;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType3.js.map

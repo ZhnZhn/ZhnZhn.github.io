@@ -46,7 +46,9 @@ class AlphaIndicatorDialog extends Component {
 
   constructor(props){
     super()
-    this.toolbarButtons = this._createType2WithToolbar(props, true)
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate: true }
+    )
     this.toolbarButtons.push({
       caption: 'O', title: 'Toggle Options Input',
       onClick: this._handleClickOptions
@@ -55,6 +57,7 @@ class AlphaIndicatorDialog extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isShowLabels: true,
       isShowOptions: false
     }
   }
@@ -129,7 +132,9 @@ class AlphaIndicatorDialog extends Component {
             oneURI, oneJsonProp, oneCaption,
             onShow, onFront
           } = this.props
-        , { isShowOptions } = this.state;
+        , {
+            isShowLabels, isShowOptions
+          } = this.state;
 
     return (
       <D.DraggableDialog
@@ -145,6 +150,7 @@ class AlphaIndicatorDialog extends Component {
            />
            <D.SelectWithLoad
              isShow={isShow}
+             isShowLabels={isShowLabels}
              uri={oneURI}
              jsonProp={oneJsonProp}
              caption={oneCaption}
@@ -153,6 +159,7 @@ class AlphaIndicatorDialog extends Component {
            />
           <D.RowPattern
             ref={this._refTicket}
+            isShowLabels={isShowLabels}
             title="Ticket"
             placeholder="Nyse or Nasdaq Ticket"
             onTest={_testTicket}
@@ -161,6 +168,7 @@ class AlphaIndicatorDialog extends Component {
           <D.ShowHide isShow={isShowOptions}>
             <D.RowPattern
               ref={this._refPeriod}
+              isShowLabels={isShowLabels}
               title="Period"
               placeholder={`Default: ${DF.PERIOD}`}
               onTest={_testPeriod}
@@ -168,6 +176,7 @@ class AlphaIndicatorDialog extends Component {
             />
             <D.RowPattern
               ref={this._refForDays}
+              isShowLabels={isShowLabels}
               title="For Days"
               placeholder={`Default: ${DF.FOR_DAYS} (2 Years)`}
               onTest={_testForDays}

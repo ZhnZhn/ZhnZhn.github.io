@@ -49,9 +49,8 @@ class DialogEurostat2 extends Component {
     this.date = undefined;
     this.chartType = undefined;
 
-    this.toolbarButtons = [
-      { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
-    ];
+    this.toolbarButtons = this._createType2WithToolbar(props)
+
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ];
@@ -59,9 +58,10 @@ class DialogEurostat2 extends Component {
     this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
-      isShowDate : false,
-      dateDefault : DATE_PLACEHOLDER,
-      dateOptions : [],
+      isShowLabels: true,
+      isShowDate: false,
+      dateDefault: DATE_PLACEHOLDER,
+      dateOptions: [],
       validationMessages: []
     }
   }
@@ -160,8 +160,7 @@ class DialogEurostat2 extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()
   }
 
   _refSelect1 = (comp) => {
@@ -178,7 +177,7 @@ class DialogEurostat2 extends Component {
            twoCaption, twoURI, twoJsonProp
           } = this.props
         , {
-            isShowDate,
+            isShowLabels, isShowDate,
             dateDefault, dateOptions,
             validationMessages
           } = this.state;
@@ -198,6 +197,7 @@ class DialogEurostat2 extends Component {
              <D.SelectWithLoad
                ref={this._refSelect1}
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
@@ -207,6 +207,7 @@ class DialogEurostat2 extends Component {
              <D.SelectWithLoad
                ref={this._refSelect2}
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={twoURI}
                jsonProp={twoJsonProp}
                caption={twoCaption}
@@ -214,6 +215,7 @@ class DialogEurostat2 extends Component {
                onSelect={this._handleSelectTwo}
              />
              <D.RowInputSelect
+               isShowLabels={isShowLabels}
                caption="Chart"
                placeholder="Default: Area"
                options={this._chartOptions}
@@ -221,6 +223,7 @@ class DialogEurostat2 extends Component {
              />
              <D.ShowHide isShow={isShowDate}>
                <D.RowInputSelect
+                  isShowLabels={isShowLabels}
                   caption="For Date"
                   placeholder={dateDefault}
                   options={dateOptions}

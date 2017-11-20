@@ -126,8 +126,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this.country = null;
@@ -144,6 +143,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
 
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       isShowDate: false,
       isShowOptions: false,
       validationMessages: []
@@ -184,6 +184,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
           validationMessages = _state.validationMessages;
@@ -204,6 +205,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -215,6 +217,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
             return _this2.productFlow = c;
           },
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: parentChildURI,
           parentCaption: parentCaption,
           parentOptionNames: 'Items',
@@ -223,6 +226,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
           caption: 'Units',
           options: unitOptions,
           onSelect: this._hSelectUnits
@@ -234,6 +238,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
+            isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
             msgOnNotValidFormat: msgOnNotValidFormat,
@@ -244,6 +249,7 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
           _DialogCell2.default.ShowHide,
           { isShow: isShowOptions },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
             caption: 'Chart Type',
             placeholder: 'Default: AreaSpline',
             options: chartTypes,

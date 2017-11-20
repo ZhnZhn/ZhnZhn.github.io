@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
@@ -28,17 +28,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Type = require('../../constants/Type');
 
-var _ComponentActions = require('../../flux/actions/ComponentActions');
-
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
 var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
+var _Decorators = require('../dialogs/decorators/Decorators');
 
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66,7 +62,7 @@ var TRADE_FILTER_OPTIONS = [{ caption: 'Default : Empty Filter', value: Filter.D
 
 var CHART_TYPE_OPTIONS = [{ caption: 'Default : Area', value: _Type.ChartType.AREA }, { caption: 'Semi Donut : Total Top90, On Every Year : Recent 2 Years', value: _Type.ChartType.SEMI_DONUT }, { caption: 'Stacked Area : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_AREA }, { caption: 'Stacked Area Percent : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_AREA_PERCENT }, { caption: 'Stacked Column : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_COLUMN }, { caption: 'Stacked Column Percent : Total Top90, On Recent Year', value: _Type.ChartType.STACKED_COLUMN_PERCENT }, { caption: 'Tree Map : On Recent Year', value: _Type.ChartType.TREE_MAP }];
 
-var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function (_Component) {
+var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(UNCommodityTradeDialog, _Component);
 
   function UNCommodityTradeDialog(props) {
@@ -111,12 +107,6 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
         options = _this.optionTrades;
       }
       return options;
-    };
-
-    _this._handlerClickInfo = function () {
-      _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, {
-        descrUrl: _this.props.descrUrl
-      });
     };
 
     _this._handlerClickAll = function () {
@@ -302,8 +292,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
     };
 
     _this._handlerClose = function () {
-      _this._handleWithValidationClose(_this._createMetaValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this.country = null;
@@ -313,10 +302,8 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
     _this.optionTrades = null;
     _this.chartType = null;
 
-    _this.toolbarButtons = [{
-      caption: 'I', title: 'Information About Dataset',
-      onClick: _this._handlerClickInfo
-    }, {
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
+    _this.toolbarButtons.push({
       caption: 'A', title: 'Toggle All Input',
       onClick: _this._handlerClickAll
     }, {
@@ -328,7 +315,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
     }, {
       caption: 'C', title: 'Toggle ChartType Input',
       onClick: _this._handlerClickChartType
-    }];
+    });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Flat, {
       rootStyle: S.BT_ROOT,
       caption: 'Load Meta',
@@ -336,6 +323,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
       onClick: _this._handlerLoadMeta
     }), _react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handlerLoadData })];
     _this.state = {
+      isShowLabels: true,
       isShowFilter: false,
       isShowDate: true,
       isShowChartType: false,
@@ -376,6 +364,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowFilter = _state.isShowFilter,
           isShowDate = _state.isShowDate,
           isShowChartType = _state.isShowChartType,
@@ -401,6 +390,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: countryURI,
           jsonProp: countryJsonProp,
           caption: 'Country:',
@@ -409,6 +399,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: commodityURI,
           jsonProp: commodityJsonProp,
           caption: 'Chapter:',
@@ -419,6 +410,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           _DialogCell2.default.ShowHide,
           { isShow: isShowFilter },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
             caption: 'Filter Trade:',
             options: TRADE_FILTER_OPTIONS,
             placeholder: 'Filter...',
@@ -426,6 +418,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           })
         ),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
           caption: 'Subheading:',
           options: optionTrades,
           optionNames: 'Meta',
@@ -434,7 +427,6 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           placeholder: placeholderTrade,
           onLoadOption: this._handlerLoadMeta,
           onSelect: this._handlerSelectTrade
-
         }),
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,
@@ -443,6 +435,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
+            isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
             msgOnNotValidFormat: msgOnNotValidFormat,
@@ -453,6 +446,7 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
           _DialogCell2.default.ShowHide,
           { isShow: isShowChartType },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
             caption: 'Chart Type:',
             options: CHART_TYPE_OPTIONS,
             onSelect: this._handlerSelectChartType
@@ -465,7 +459,6 @@ var UNCommodityTradeDialog = (0, _withValidationLoad2.default)(_class = function
     }
   }]);
   return UNCommodityTradeDialog;
-}(_react.Component)) || _class;
-
+}(_react.Component)) || _class) || _class);
 exports.default = UNCommodityTradeDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\UNCommodityTradeDialog.js.map

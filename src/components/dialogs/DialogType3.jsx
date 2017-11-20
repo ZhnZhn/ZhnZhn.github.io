@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import D from './DialogCell'
-import withValidationLoad from './decorators/withValidationLoad';
+import Decor from './decorators/Decorators'
 
 const transformOptions = [
   { caption: "NO EFFECT: z[t]=y[t]", value: "none" },
@@ -12,8 +12,10 @@ const transformOptions = [
   { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }
 ];
 
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class DialogType3 extends Component {
+  /*
   static propTypes = {
     isShow: PropTypes.bool,
     caption: PropTypes.string,
@@ -32,18 +34,14 @@ class DialogType3 extends Component {
     onClickInfo: PropTypes.func,
     loadFn: PropTypes.func
   }
+  */
 
   constructor(props){
     super(props);
 
     this.stock = undefined
     this.transform = undefined
-    this.toolbarButtons = []
-    if (props.descrUrl) {
-      this.toolbarButtons.push({
-        caption: 'I', onClick: this._handleClickInfo
-      })
-    }
+    this.toolbarButtons = this._createType2WithToolbar(props)
     if (props.isTransform){
       this.toolbarButtons.push({
         caption: 'T', onClick: this._handleClickTransform
@@ -53,8 +51,10 @@ class DialogType3 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
-           isShowTransform: false,
-           validationMessages: []
+       isShowLabels: true,
+       isShowDate: true,
+       isShowTransform: false,
+       validationMessages: []
     }
   }
 
@@ -67,10 +67,6 @@ class DialogType3 extends Component {
     return true;
   }
 
-  _handleClickInfo = () => {
-    const {descrUrl, onClickInfo} = this.props;
-    onClickInfo({ descrUrl });
-  }
   _handleClickTransform = () => {
     this.setState(prevState => {
       return { isShowTransform: !prevState.isShowTransform };
@@ -110,24 +106,26 @@ class DialogType3 extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()    
   }
 
   render(){
     const {
             caption, isShow, onShow, onFront,
             optionURI, optionsJsonProp,
-            itemCaption='Stock:', optionNames='Stocks',
+            itemCaption='Stock', optionNames='Stocks',
             isWithInputStock,
             initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
-        , { isShowTransform, validationMessages } = this.state;
+        , {
+            isShowLabels, isShowTransform, isShowDate,
+            validationMessages
+          } = this.state;
 
     return (
        <D.DraggableDialog
-           caption={caption}
            isShow={isShow}
+           caption={caption}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
            onFront={onFront}
@@ -138,6 +136,7 @@ class DialogType3 extends Component {
          />
          <D.SelectWithLoad
            isShow={isShow}
+           isShowLabels={isShowLabels}
            uri={optionURI}
            jsonProp={optionsJsonProp}
            caption={itemCaption}
@@ -147,18 +146,22 @@ class DialogType3 extends Component {
          />
          <D.ShowHide isShow={isShowTransform}>
            <D.RowInputSelect
-             caption="Transform:"
+             isShowLabels={isShowLabels}
+             caption="Transform"
              options={transformOptions}
              onSelect={this._handleSelectTransform}
            />
          </D.ShowHide>
-         <D.DatesFragment
-            ref={c => this.datesFragment = c}
-            initFromDate={initFromDate}
-            initToDate={initToDate}
-            msgOnNotValidFormat={msgOnNotValidFormat}
-            onTestDate={onTestDate}
-         />
+         <D.ShowHide isShow={isShowDate}>
+           <D.DatesFragment
+              ref={c => this.datesFragment = c}
+              isShowLabels={isShowLabels}
+              initFromDate={initFromDate}
+              initToDate={initToDate}
+              msgOnNotValidFormat={msgOnNotValidFormat}
+              onTestDate={onTestDate}
+           />
+         </D.ShowHide>
          <D.ValidationMessages
             validationMessages={validationMessages}
          />

@@ -37,13 +37,14 @@ class DialogEurostat extends Component {
     super();
     this.one = undefined;
     this.two = undefined;
-    this.toolbarButtons = [
-      { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
-    ];
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate: true }
+    )
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isShowLabels: true,
       validationMessages: []
     }
   }
@@ -88,8 +89,7 @@ class DialogEurostat extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()
   }
 
   render(){
@@ -98,7 +98,10 @@ class DialogEurostat extends Component {
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp
           } = this.props
-        , { validationMessages } = this.state;
+        , {
+            isShowLabels,
+            validationMessages
+          } = this.state;
 
     return(
         <D.DraggableDialog
@@ -112,25 +115,24 @@ class DialogEurostat extends Component {
              <D.ToolbarButtonCircle
                buttons={this.toolbarButtons}
              />
-
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames="Items"
                onSelect={this._handleSelectOne}
              />
-
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={twoURI}
                jsonProp={twoJsonProp}
                caption={twoCaption}
                optionNames="Items"
                onSelect={this._handleSelectTwo}
              />
-
              <D.ValidationMessages
                  validationMessages={validationMessages}
              />

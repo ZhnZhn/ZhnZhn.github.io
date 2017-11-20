@@ -21,14 +21,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp2;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _DateField = require('../zhn/DateField');
 
@@ -39,8 +36,6 @@ var _DialogStyles = require('../styles/DialogStyles');
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
 
 var FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 var NEAR_ERR_MSG = "From Date is near that To Date";
@@ -97,6 +92,16 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
       return false;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+  static propTypes = {
+    isShowLabels: PropTypes.bool,
+    initFromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    nForecastDate: PropTypes.number,
+    onTestDate: PropTypes.func,
+    msgOnNotValidFormat: PropTypes.func
+  }
+  */
 
   (0, _createClass3.default)(DatesFragment, [{
     key: 'render',
@@ -104,20 +109,24 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
+          isShowLabels = _props.isShowLabels,
           initFromDate = _props.initFromDate,
           initToDate = _props.initToDate,
           nForecastDate = _props.nForecastDate,
-          onTestDate = _props.onTestDate;
+          onTestDate = _props.onTestDate,
+          _STYLE$crRowLabelStyl = _DialogStyles2.default.crRowLabelStyle(isShowLabels),
+          rowStyle = _STYLE$crRowLabelStyl.rowStyle,
+          labelStyle = _STYLE$crRowLabelStyl.labelStyle;
 
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv },
+          { style: rowStyle },
           _react2.default.createElement(
             'span',
-            { style: styles.labelSpan },
+            { style: labelStyle },
             'From Date:'
           ),
           _react2.default.createElement(_DateField2.default, {
@@ -131,10 +140,10 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { style: styles.rowDiv },
+          { style: rowStyle },
           _react2.default.createElement(
             'span',
-            { style: styles.labelSpan },
+            { style: labelStyle },
             'To Date:'
           ),
           _react2.default.createElement(_DateField2.default, {
@@ -152,17 +161,11 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
   }]);
   return DatesFragment;
 }(_react.Component), _class.defaultProps = {
+  isShowLabels: true,
   msgOnNotValidFormat: function msgOnNotValidFormat() {
     var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Date';
     return item + ' is not in valid format';
   }
 }, _temp2);
-process.env.NODE_ENV !== "production" ? DatesFragment.propTypes = {
-  initFromDate: _propTypes2.default.string,
-  initToDate: _propTypes2.default.string,
-  nForecastDate: _propTypes2.default.number,
-  onTestDate: _propTypes2.default.func,
-  msgOnNotValidFormat: _propTypes2.default.func
-} : void 0;
 exports.default = DatesFragment;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\DatesFragment.js.map

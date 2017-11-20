@@ -102,8 +102,7 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this._handleMode = function (propName, value) {
@@ -117,6 +116,7 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       isShowDate: false,
       isShowOptions: false,
       validationMessages: []
@@ -158,6 +158,7 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
           validationMessages = _state.validationMessages;
@@ -178,6 +179,7 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -189,6 +191,7 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
             return _this2.parentChild = c;
           },
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: twoURI,
           parentCaption: twoCaption,
           parentOptionNames: 'Items',
@@ -203,6 +206,7 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
+            isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
             nForecastDate: nForecastDate,

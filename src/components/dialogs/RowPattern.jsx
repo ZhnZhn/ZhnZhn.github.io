@@ -10,10 +10,17 @@ class RowPattern extends Component {
   }
 
   render(){
-    const { title='', titleStyle, ...rest } = this.props;
+    const {
+            isShowLabels,
+            title='', titleStyle,
+            ...rest
+          } = this.props
+        , {
+            rowStyle, labelStyle
+          } = STYLE.crRowLabelStyle(isShowLabels);
     return (
-      <div style={STYLE.rowDiv}>
-        <span style={{ ...STYLE.labelSpan, ...titleStyle}}>
+      <div style={rowStyle}>
+        <span style={{ ...labelStyle, ...titleStyle}}>
            {title}
         </span>
         <InputPattern

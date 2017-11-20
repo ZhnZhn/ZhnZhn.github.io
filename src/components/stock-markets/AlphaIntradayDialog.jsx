@@ -28,10 +28,15 @@ class AlphaIntradayDialog extends Component {
 
   constructor(props){
     super()
-    this.toolbarButtons = this._createType2WithToolbar(props, true)
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate: true }
+    )
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ];
+    this.state = {
+      isShowLabels: true
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -81,7 +86,8 @@ class AlphaIntradayDialog extends Component {
     const {
             isShow, caption,
             onShow, onFront
-          } = this.props;
+          } = this.props
+        , { isShowLabels } = this.state ;
 
     return (
       <D.DraggableDialog
@@ -97,12 +103,14 @@ class AlphaIntradayDialog extends Component {
            />
           <D.RowPattern
             ref={this._refTicket}
+            isShowLabels={isShowLabels}
             title="Ticket"
             placeholder="Nyse or Nasdaq Ticket"
             onTest={_testTicket}
             errorMsg="Not Empty"
           />
           <D.RowInputSelect
+            isShowLabels={isShowLabels}
             caption="Interval"
             placeholder="Default: 15min"
             options={_intervalOptions}

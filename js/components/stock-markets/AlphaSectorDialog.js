@@ -66,7 +66,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       _this.props.onClose();
     };
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props, true);
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, noLabels: true });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     return _this;
   }

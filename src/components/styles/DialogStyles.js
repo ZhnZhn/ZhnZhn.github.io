@@ -1,13 +1,20 @@
 
-const DialogStyles = {
+const S = {
   //Dialogs, DatesFragments
-  rowDiv: {
+  ROW: {
     //display: 'block',
     display: 'flex',
     alignItems: 'center',
-    margin: '5px'
+    marginRight: '5px',
+    marginTop: '5px',
+    marginLeft: '5px',
+    marginBottom: '5px'
   },
-  labelSpan : {
+  ROW_SHORT: {
+    marginLeft: '12px',
+    marginRight: '12px'
+  },
+  LABEL: {
     color: '#1B75BB',
     display: 'inline-block',
     //verticalAlign: 'top',
@@ -17,6 +24,25 @@ const DialogStyles = {
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
+  },
+  NONE: {
+    display: 'none'
+  }
+}
+
+const DialogStyles = {
+  //Dialogs, DatesFragments
+  rowDiv: { ...S.ROW },
+  labelSpan : { ...S.LABEL },
+
+  crRowLabelStyle: (isShowLabels) => {
+    const rowStyle = isShowLabels
+             ? { ...S.ROW }
+             : { ...S.ROW, ...S.ROW_SHORT }
+         , labelStyle = isShowLabels
+             ? { ...S.LABEL }
+             : { ...S.LABEL, ...S.NONE };
+    return { rowStyle, labelStyle };
   },
 
   //ValidationMessagesFragment

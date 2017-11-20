@@ -158,6 +158,7 @@ var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2
     key: 'render',
     value: function render() {
       var _props = this.props,
+          isShowLabels = _props.isShowLabels,
           parentCaption = _props.parentCaption,
           parentOptionNames = _props.parentOptionNames,
           childCaption = _props.childCaption,
@@ -171,6 +172,7 @@ var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2
         'div',
         null,
         _react2.default.createElement(_RowInputSelect2.default, {
+          isShowLabels: isShowLabels,
           caption: parentCaption,
           options: parentOptions,
           optionNames: parentOptionNames,
@@ -180,6 +182,7 @@ var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2
           onSelect: this._handlerSelectParent
         }),
         _react2.default.createElement(_RowInputSelect2.default, {
+          isShowLabels: isShowLabels,
           caption: childCaption,
           options: childOptions,
           onSelect: this._handlerSelectChild

@@ -47,7 +47,9 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     var _this = (0, _possibleConstructorReturn3.default)(this, (UnDialog5.__proto__ || Object.getPrototypeOf(UnDialog5)).call(this));
 
     _this._handleClickOptions = function () {
-      _this.setState({ isShowOptions: !_this.state.isShowOptions });
+      _this.setState({
+        isShowOptions: !_this.state.isShowOptions
+      });
     };
 
     _this._handleSelectOne = function (one) {
@@ -63,10 +65,7 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     };
 
     _this._createValidationMessages = function () {
-      //const { oneCaption } = this.props;
       var msg = [];
-
-      //if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
 
       var _this$parentChild$get = _this.parentChild.getValidation(),
           isValid1 = _this$parentChild$get.isValid,
@@ -101,8 +100,7 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this._handleMode = function (propName, value) {
@@ -116,6 +114,7 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       isShowDate: false,
       isShowOptions: false,
       validationMessages: []
@@ -157,6 +156,7 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
           validationMessages = _state.validationMessages;
@@ -177,11 +177,11 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
-          caption: oneCaption
-          //optionNames="Items"
-          , placeholder: 'Default: All',
+          caption: oneCaption,
+          placeholder: 'Default: All',
           onSelect: this._handleSelectOne
         }),
         _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
@@ -189,6 +189,7 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
             return _this2.parentChild = c;
           },
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: twoURI,
           parentCaption: twoCaption,
           parentOptionNames: 'Items',
@@ -203,6 +204,7 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
+            isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
             nForecastDate: nForecastDate,
@@ -214,6 +216,7 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
           _DialogCell2.default.ShowHide,
           { isShow: isShowOptions },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
             caption: 'Trade Flow',
             options: TRADE_FLOW,
             placeholder: 'Default: Export Value',

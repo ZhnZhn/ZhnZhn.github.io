@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import DateField from '../zhn/DateField';
-import DialogStyles from '../styles/DialogStyles';
-
-const Styles = DialogStyles;
+import STYLE from '../styles/DialogStyles';
 
 class RowDate extends Component {
+  /*
   static propTypes = {
      labelTitle : PropTypes.string,
      initValue : PropTypes.string,
      errorMsg : PropTypes.string,
      onTestDate : PropTypes.func
   }
+  */
 
   render(){
-    const { labelTitle='', initValue, errorMsg, onTestDate } = this.props;
+    const {
+            isShowLabels, labelTitle='',
+            initValue, errorMsg, onTestDate
+          } = this.props
+        , {
+            rowStyle, labelStyle
+          } = STYLE.crRowLabelStyle(isShowLabels);
     return (
-      <div style={Styles.rowDiv}>
-        <span style={Styles.labelSpan}>
+      <div style={rowStyle}>
+        <span style={labelStyle}>
            {labelTitle}
         </span>
         <DateField

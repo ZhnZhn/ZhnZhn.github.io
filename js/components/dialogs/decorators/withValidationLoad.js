@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -13,10 +13,16 @@ var _handleWithValidationLoad = function _handleWithValidationLoad(validationMes
   this._updateValidationMessages(validationMessages);
 };
 
-var _handleWithValidationClose = function _handleWithValidationClose(fnCreateMessages) {
-  if (this.state.validationMessages.length > 0) {
-    this.setState({ validationMessages: fnCreateMessages() });
+var _handleWithValidationClose = function _handleWithValidationClose() {
+  var onClose = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props.onClose;
+
+  if (typeof onClose === 'function') {
+    onClose();
   }
+  this.setState(function (prevState) {
+    prevState.validationMessages = [];
+    return prevState;
+  });
 };
 
 var _updateValidationMessages = function _updateValidationMessages(validationMessages) {

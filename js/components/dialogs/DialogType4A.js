@@ -92,8 +92,7 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this._handleMode = function (propName, value) {
@@ -108,6 +107,7 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     _this[HAS_SECOND_Y_AXIS] = false;
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       isShowDate: true,
       isShowOptions: false,
       validationMessages: []
@@ -145,6 +145,7 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
           validationMessages = _state.validationMessages;
@@ -168,6 +169,7 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
             return _this2.parentChild = c;
           },
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           parentCaption: oneCaption,
           parentOptionNames: 'Items',
@@ -182,6 +184,7 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
+            isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
             msgOnNotValidFormat: msgOnNotValidFormat,

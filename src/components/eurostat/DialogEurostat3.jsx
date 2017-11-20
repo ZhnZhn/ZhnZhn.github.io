@@ -31,13 +31,14 @@ class DialogEurostat3 extends Component {
   constructor(props){
     super()
     this.one = undefined
-    this.toolbarButtons = [
-      { caption: 'I', onClick: this._clickInfoWithToolbar.bind(this) }
-    ]
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate: true }
+    )
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isShowLabels: true,
       validationMessages: []
     }
   }
@@ -83,8 +84,7 @@ class DialogEurostat3 extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()
   }
 
   render(){
@@ -94,7 +94,7 @@ class DialogEurostat3 extends Component {
            twoCaption, twoURI, twoJsonProp,
            threeCaption, msgOnNotSelected
           } = this.props
-        , { validationMessages } = this.state;
+        , { isShowLabels, validationMessages } = this.state;
 
     return(
         <D.DraggableDialog
@@ -110,6 +110,7 @@ class DialogEurostat3 extends Component {
              />
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
@@ -119,6 +120,7 @@ class DialogEurostat3 extends Component {
              <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
+                 isShowLabels={isShowLabels}
                  uri={twoURI}
                  parentCaption={twoCaption}
                  parentOptionNames="Items"

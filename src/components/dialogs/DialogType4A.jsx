@@ -21,6 +21,7 @@ class DialogType4A extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isShowLabels: true,
       isShowDate: true,
       isShowOptions: false,
       validationMessages: []
@@ -71,8 +72,7 @@ class DialogType4A extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose(this._createValidationMessages);
-    this.props.onClose();
+    this._handleWithValidationClose()        
   }
 
   _handleMode = (propName, value) => {
@@ -86,7 +86,8 @@ class DialogType4A extends Component {
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
-            isShowDate, isShowOptions, validationMessages
+            isShowLabels, isShowDate, isShowOptions,
+            validationMessages
           } = this.state;
 
     return(
@@ -105,6 +106,7 @@ class DialogType4A extends Component {
              <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}
+                 isShowLabels={isShowLabels}
                  uri={oneURI}
                  parentCaption={oneCaption}
                  parentOptionNames="Items"
@@ -116,6 +118,7 @@ class DialogType4A extends Component {
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
                  ref={c => this.datesFragment = c}
+                 isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}
                  msgOnNotValidFormat={msgOnNotValidFormat}

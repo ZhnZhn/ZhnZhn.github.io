@@ -1,36 +1,43 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import DateField from '../zhn/DateField';
-import DialogStyles from '../styles/DialogStyles';
-
-const styles = DialogStyles;
+import STYLE from '../styles/DialogStyles';
 
 const FORMAT_ERR_MSG = "YYYY-MM-DD format must be";
 const NEAR_ERR_MSG = "From Date is near that To Date";
 
 class DatesFragment extends Component {
+  /*
   static propTypes = {
+    isShowLabels: PropTypes.bool,
     initFromDate: PropTypes.string,
     initToDate: PropTypes.string,
     nForecastDate: PropTypes.number,
     onTestDate: PropTypes.func,
     msgOnNotValidFormat: PropTypes.func
   }
+  */
 
   static defaultProps = {
-    msgOnNotValidFormat : (item='Date') => `${item} is not in valid format`
+    isShowLabels: true,
+    msgOnNotValidFormat: (item='Date') => `${item} is not in valid format`
   }
 
   render(){
     const {
+            isShowLabels,
             initFromDate, initToDate,
             nForecastDate, onTestDate
-        } = this.props;
+          } = this.props
+        , {
+            rowStyle, labelStyle
+          } = STYLE.crRowLabelStyle(isShowLabels);
+
     return (
         <div>
-          <div style={styles.rowDiv}>
-            <span style={styles.labelSpan}>
+          <div style={rowStyle}>
+            <span style={labelStyle}>
                From Date:
             </span>
             <DateField
@@ -40,8 +47,8 @@ class DatesFragment extends Component {
                onTest={onTestDate}
             />
          </div>
-         <div style={styles.rowDiv}>
-            <span style={styles.labelSpan}>
+         <div style={rowStyle}>
+            <span style={labelStyle}>
               To Date:
             </span>
             <DateField

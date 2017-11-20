@@ -8,11 +8,18 @@ const _handleWithValidationLoad = function(
   this._updateValidationMessages(validationMessages)
 };
 
-const _handleWithValidationClose = function(fnCreateMessages){
-    if (this.state.validationMessages.length > 0){
-      this.setState({ validationMessages : fnCreateMessages() })
+const _handleWithValidationClose = function(
+   onClose=this.props.onClose
+ ){
+    if (typeof onClose === 'function') {
+       onClose()
     }
+    this.setState(prevState => {
+      prevState.validationMessages = []
+      return prevState;
+    })
 };
+
 
 const _updateValidationMessages = function(validationMessages){
   if (validationMessages.isValid){
@@ -29,7 +36,7 @@ const withValidationLoad = (target) => {
     _handleWithValidationLoad,
     _handleWithValidationClose,
     _updateValidationMessages
-  })  
+  })
 }
 
 export default withValidationLoad

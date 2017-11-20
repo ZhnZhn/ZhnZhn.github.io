@@ -133,13 +133,14 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       _this[propName] = value;
     };
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props, true);
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this.toolbarButtons.push({
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       isShowOptions: false
     };
     return _this;
@@ -166,7 +167,9 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           oneCaption = _props.oneCaption,
           onShow = _props.onShow,
           onFront = _props.onFront,
-          isShowOptions = this.state.isShowOptions;
+          _state = this.state,
+          isShowLabels = _state.isShowLabels,
+          isShowOptions = _state.isShowOptions;
 
 
       return _react2.default.createElement(
@@ -184,6 +187,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -192,6 +196,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
         }),
         _react2.default.createElement(_DialogCell2.default.RowPattern, {
           ref: this._refTicket,
+          isShowLabels: isShowLabels,
           title: 'Ticket',
           placeholder: 'Nyse or Nasdaq Ticket',
           onTest: _testTicket,
@@ -202,6 +207,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           { isShow: isShowOptions },
           _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refPeriod,
+            isShowLabels: isShowLabels,
             title: 'Period',
             placeholder: 'Default: ' + DF.PERIOD,
             onTest: _testPeriod,
@@ -209,6 +215,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           }),
           _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refForDays,
+            isShowLabels: isShowLabels,
             title: 'For Days',
             placeholder: 'Default: ' + DF.FOR_DAYS + ' (2 Years)',
             onTest: _testForDays,

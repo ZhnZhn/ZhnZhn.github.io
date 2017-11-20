@@ -38,6 +38,7 @@ class JodiWorldOilDialog extends Component {
        <D.Button.Load onClick={this._handleLoad} />
      ]
      this.state = {
+       isShowLabels: true,
        isShowDate: false,
        isShowOptions: false,
        validationMessages : []
@@ -107,8 +108,7 @@ class JodiWorldOilDialog extends Component {
       };
    }
    _handleClose = () => {
-     this._handleWithValidationClose(this._createValidationMessages)
-     this.props.onClose()
+     this._handleWithValidationClose()     
    }
 
    render(){
@@ -119,6 +119,7 @@ class JodiWorldOilDialog extends Component {
              initFromDate, initToDate, msgOnNotValidFormat, onTestDate
            } = this.props
          , {
+             isShowLabels,
              isShowDate, isShowOptions,
              validationMessages
            } = this.state;
@@ -138,6 +139,7 @@ class JodiWorldOilDialog extends Component {
 
           <D.SelectWithLoad
              isShow={isShow}
+             isShowLabels={isShowLabels}
              uri={oneURI}
              jsonProp={oneJsonProp}
              caption={oneCaption}
@@ -147,6 +149,7 @@ class JodiWorldOilDialog extends Component {
           <D.SelectParentChild
              ref={c => this.productFlow = c}
              isShow={isShow}
+             isShowLabels={isShowLabels}
              uri={parentChildURI}
              parentCaption={parentCaption}
              parentOptionNames="Items"
@@ -155,6 +158,7 @@ class JodiWorldOilDialog extends Component {
              msgOnNotSelected={msgOnNotSelected}
           />
           <D.RowInputSelect
+            isShowLabels={isShowLabels}
             caption="Units"
             options={unitOptions}
             onSelect={this._hSelectUnits}
@@ -163,6 +167,7 @@ class JodiWorldOilDialog extends Component {
           <D.ShowHide isShow={isShowDate}>
             <D.DatesFragment
               ref={c => this.datesFragment = c}
+              isShowLabels={isShowLabels}
               initFromDate={initFromDate}
               initToDate={initToDate}
               msgOnNotValidFormat={msgOnNotValidFormat}
@@ -172,6 +177,7 @@ class JodiWorldOilDialog extends Component {
 
           <D.ShowHide isShow={isShowOptions}>
             <D.RowInputSelect
+              isShowLabels={isShowLabels}
               caption="Chart Type"
               placeholder="Default: AreaSpline"
               options={chartTypes}

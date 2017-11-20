@@ -4,15 +4,28 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var DialogStyles = {
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var S = {
   //Dialogs, DatesFragments
-  rowDiv: {
+  ROW: {
     //display: 'block',
     display: 'flex',
     alignItems: 'center',
-    margin: '5px'
+    marginRight: '5px',
+    marginTop: '5px',
+    marginLeft: '5px',
+    marginBottom: '5px'
   },
-  labelSpan: {
+  ROW_SHORT: {
+    marginLeft: '12px',
+    marginRight: '12px'
+  },
+  LABEL: {
     color: '#1B75BB',
     display: 'inline-block',
     //verticalAlign: 'top',
@@ -22,6 +35,21 @@ var DialogStyles = {
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
+  },
+  NONE: {
+    display: 'none'
+  }
+};
+
+var DialogStyles = {
+  //Dialogs, DatesFragments
+  rowDiv: (0, _extends3.default)({}, S.ROW),
+  labelSpan: (0, _extends3.default)({}, S.LABEL),
+
+  crRowLabelStyle: function crRowLabelStyle(isShowLabels) {
+    var rowStyle = isShowLabels ? (0, _extends3.default)({}, S.ROW) : (0, _extends3.default)({}, S.ROW, S.ROW_SHORT),
+        labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL) : (0, _extends3.default)({}, S.LABEL, S.NONE);
+    return { rowStyle: rowStyle, labelStyle: labelStyle };
   },
 
   //ValidationMessagesFragment

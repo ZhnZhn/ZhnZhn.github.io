@@ -60,17 +60,21 @@ var RowPattern = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
+          isShowLabels = _props.isShowLabels,
           _props$title = _props.title,
           title = _props$title === undefined ? '' : _props$title,
           titleStyle = _props.titleStyle,
-          rest = (0, _objectWithoutProperties3.default)(_props, ['title', 'titleStyle']);
+          rest = (0, _objectWithoutProperties3.default)(_props, ['isShowLabels', 'title', 'titleStyle']),
+          _STYLE$crRowLabelStyl = _DialogStyles2.default.crRowLabelStyle(isShowLabels),
+          rowStyle = _STYLE$crRowLabelStyl.rowStyle,
+          labelStyle = _STYLE$crRowLabelStyl.labelStyle;
 
       return _react2.default.createElement(
         'div',
-        { style: _DialogStyles2.default.rowDiv },
+        { style: rowStyle },
         _react2.default.createElement(
           'span',
-          { style: (0, _extends3.default)({}, _DialogStyles2.default.labelSpan, titleStyle) },
+          { style: (0, _extends3.default)({}, labelStyle, titleStyle) },
           title
         ),
         _react2.default.createElement(_InputPattern2.default, (0, _extends3.default)({
@@ -94,8 +98,8 @@ var RowPattern = function (_Component) {
   return RowPattern;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? RowPattern.propTypes = {
+RowPattern.propTypes = process.env.NODE_ENV !== "production" ? {
   title: _propTypes2.default.string
-} : void 0;
+} : {};
 exports.default = RowPattern;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowPattern.js.map

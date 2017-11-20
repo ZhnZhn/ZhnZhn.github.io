@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import { ChartType, ModalDialog } from '../../constants/Type';
-import ComponentActions from '../../flux/actions/ComponentActions';
+import { ChartType } from '../../constants/Type';
 
 import D from '../dialogs/DialogCell'
-import withValidationLoad from '../dialogs/decorators/withValidationLoad'
+import Decor from '../dialogs/decorators/Decorators'
 
 const S = {
   BT_ROOT: {
@@ -46,7 +45,8 @@ const CHART_TYPE_OPTIONS = [
   { caption : 'Tree Map : On Recent Year', value: ChartType.TREE_MAP }
 ]
 
-@withValidationLoad
+@Decor.withToolbar
+@Decor.withValidationLoad
 class UNCommodityTradeDialog extends Component {
 
   constructor(props){
@@ -58,11 +58,10 @@ class UNCommodityTradeDialog extends Component {
     this.optionTrades = null
     this.chartType = null
 
-    this.toolbarButtons = [
-      {
-        caption:'I', title: 'Information About Dataset',
-        onClick: this._handlerClickInfo
-      },{
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate: true }
+    )
+    this.toolbarButtons.push({
         caption:'A', title: 'Toggle All Input',
         onClick: this._handlerClickAll
       },{
@@ -74,8 +73,7 @@ class UNCommodityTradeDialog extends Component {
       },{
         caption:'C', title: 'Toggle ChartType Input',
         onClick: this._handlerClickChartType
-      }
-    ]
+      })
     this._commandButtons = [
       <D.Button.Flat
         rootStyle={S.BT_ROOT}
@@ -86,6 +84,7 @@ class UNCommodityTradeDialog extends Component {
       <D.Button.Load onClick={this._handlerLoadData} />
     ]
     this.state = {
+      isShowLabels: true,
       isShowFilter : false,
       isShowDate : true,
       isShowChartType : false,
@@ -141,12 +140,6 @@ class UNCommodityTradeDialog extends Component {
       options = this.optionTrades
     }
     return options;
-  }
-
-  _handlerClickInfo = () => {
-    ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, {
-      descrUrl: this.props.descrUrl
-    });
   }
 
   _handlerClickAll = () => {
@@ -296,8 +289,7 @@ class UNCommodityTradeDialog extends Component {
     });
   }
   _handlerClose = () => {
-    this._handleWithValidationClose(this._createMetaValidationMessages)
-    this.props.onClose()
+    this._handleWithValidationClose()
   }
 
   render(){
@@ -308,6 +300,7 @@ class UNCommodityTradeDialog extends Component {
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
+           isShowLabels,
            isShowFilter, isShowDate, isShowChartType,
            isLoadingTrade, isLoadingTradeFailed, optionTrades, placeholderTrade,
            validationMessages
@@ -328,6 +321,7 @@ class UNCommodityTradeDialog extends Component {
 
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={countryURI}
                jsonProp={countryJsonProp}
                caption="Country:"
@@ -336,6 +330,7 @@ class UNCommodityTradeDialog extends Component {
              />
              <D.SelectWithLoad
                isShow={isShow}
+               isShowLabels={isShowLabels}
                uri={commodityURI}
                jsonProp={commodityJsonProp}
                caption="Chapter:"
@@ -345,6 +340,7 @@ class UNCommodityTradeDialog extends Component {
 
              <D.ShowHide isShow={isShowFilter}>
                <D.RowInputSelect
+                 isShowLabels={isShowLabels}
                  caption="Filter Trade:"
                  options={TRADE_FILTER_OPTIONS}
                  placeholder="Filter..."
@@ -352,6 +348,7 @@ class UNCommodityTradeDialog extends Component {
                />
              </D.ShowHide>
              <D.RowInputSelect
+               isShowLabels={isShowLabels}
                caption="Subheading:"
                options={optionTrades}
                optionNames="Meta"
@@ -360,11 +357,11 @@ class UNCommodityTradeDialog extends Component {
                placeholder={placeholderTrade}
                onLoadOption={this._handlerLoadMeta}
                onSelect={this._handlerSelectTrade}
-
              />
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
                    ref={c => this.datesFragment = c}
+                   isShowLabels={isShowLabels}
                    initFromDate={initFromDate}
                    initToDate={initToDate}
                    msgOnNotValidFormat={msgOnNotValidFormat}
@@ -373,6 +370,7 @@ class UNCommodityTradeDialog extends Component {
              </D.ShowHide>
              <D.ShowHide isShow={isShowChartType}>
                <D.RowInputSelect
+                 isShowLabels={isShowLabels}
                  caption="Chart Type:"
                  options={CHART_TYPE_OPTIONS}
                  onSelect={this._handlerSelectChartType}

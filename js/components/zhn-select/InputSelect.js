@@ -29,14 +29,11 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _class, _temp, _initialiseProps;
+//import PropTypes from 'prop-types'
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _ArrowCell = require('./ArrowCell');
 
@@ -44,8 +41,12 @@ var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var MAX_WITHOUT_ANIMATION = 800,
-    CLASS_ROW_ACTIVE = "option-row__active";
+var MAX_WITHOUT_ANIMATION = 800;
+
+var CL = {
+  ROW_ACTIVE: 'option-row__active',
+  NOT_SELECTED: 'not-selected'
+};
 
 var _fnNoItem = function _fnNoItem(propCaption, inputValue, isWithInput) {
   var _ref;
@@ -155,17 +156,34 @@ var S = {
     backgroundColor: '#D5D5BC'
   },
   OPTIONS_FOOTER: {
+    position: 'relative',
     backgroundColor: 'silver',
     borderBottomLeftRadius: '5px',
-    borderBottomRightRadius: '5px'
+    borderBottomRightRadius: '5px',
+    lineHeight: 1.5
   },
-  FILTERED_SPAN: {
+  FOOTER_INDEX: {
     display: 'inline-block',
     color: 'gray',
     fontWeight: 'bold',
     paddingLeft: '10px',
     paddingTop: '4px',
     paddingBottom: '4px'
+  },
+  FOOTER_BUTTONS: {
+    display: 'inline-block',
+    position: 'absolute',
+    top: '4px',
+    right: '8px',
+    color: 'black',
+    fontWeight: 'bold'
+  },
+  FOOTER_BT: {
+    display: 'inline-block',
+    cursor: 'pointer'
+  },
+  FOOTER_PADDING: {
+    paddingRight: '12px'
   }
 };
 
@@ -201,13 +219,35 @@ var InputSelect = (_temp = _class = function (_Component) {
       value: '',
       isShowOption: false,
       options: props.options,
-      optionName: optionName,
       optionNames: _optionNames,
       isValidDomOptionsCache: false,
       isLocalMode: false
     };
     return _this;
   }
+  /*
+  static propTypes = {
+     propCaption: PropTypes.string,
+     ItemOptionComp: PropTypes.element,
+     width: PropTypes.string,
+     isShowOptionAnim: PropTypes.bool,
+     options: PropTypes.arrayOf(PropTypes.shape({
+        caption: PropTypes.string,
+        value: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number
+        ])
+     })),
+     optionName: PropTypes.string,
+     optionNames: PropTypes.string,
+     isUpdateOptions: PropTypes.bool,
+     placeholder: PropTypes.string,
+       isLoading: PropTypes.bool,
+     isLoadingFailed: PropTypes.bool,
+       onSelect: PropTypes.func,
+     onLoadOption: PropTypes.func
+  }
+  */
 
   (0, _createClass3.default)(InputSelect, [{
     key: 'componentWillReceiveProps',
@@ -323,17 +363,26 @@ var InputSelect = (_temp = _class = function (_Component) {
 
   this._decorateActiveRowComp = function (comp) {
     if (comp) {
-      comp.classList.add(CLASS_ROW_ACTIVE);
+      comp.classList.add(CL.ROW_ACTIVE);
+    }
+    if (_this3.indexNode) {
+      _this3.indexNode.innerHTML = _this3.indexActiveOption + 1;
     }
   };
 
   this._undecorateActiveRowComp = function (comp) {
-    if (!comp) {
-      comp = _this3._getActiveItemComp();
+    var _comp = !comp ? _this3._getActiveItemComp() : comp;
+    if (_comp) {
+      _comp.classList.remove(CL.ROW_ACTIVE);
     }
-    if (comp) {
-      comp.classList.remove(CLASS_ROW_ACTIVE);
-    }
+    /*
+     if (!comp){
+       comp = this._getActiveItemComp()
+     }
+     if (comp){
+       comp.classList.remove(CL.ROW_ACTIVE);
+     }
+     */
   };
 
   this._makeVisibleActiveRowComp = function (comp) {
@@ -407,6 +456,54 @@ var InputSelect = (_temp = _class = function (_Component) {
     }
   };
 
+  this._stepDownOption = function () {
+    var prevComp = _this3._getActiveItemComp();
+
+    if (prevComp) {
+      _this3._undecorateActiveRowComp(prevComp);
+
+      _this3.indexActiveOption += 1;
+      if (_this3.indexActiveOption >= _this3.state.options.length) {
+        _this3.indexActiveOption = 0;
+        _this3.optionsComp.scrollTop = 0;
+      }
+
+      var nextComp = _this3._getActiveItemComp();
+      _this3._decorateActiveRowComp(nextComp);
+      //this.indexNode.innerHTML = this.indexActiveOption
+
+      var offsetTop = nextComp.offsetTop;
+      var scrollTop = _this3.optionsComp.scrollTop;
+      if (offsetTop - scrollTop > 70) {
+        _this3.optionsComp.scrollTop += offsetTop - scrollTop - 70;
+      }
+    }
+  };
+
+  this._stepUpOption = function () {
+    var prevComp = _this3._getActiveItemComp();
+    if (prevComp) {
+      _this3._undecorateActiveRowComp(prevComp);
+
+      _this3.indexActiveOption -= 1;
+      if (_this3.indexActiveOption < 0) {
+        _this3.indexActiveOption = _this3.state.options.length - 1;
+        var bottomComp = _this3._getActiveItemComp();
+        _this3.optionsComp.scrollTop = bottomComp.offsetTop;
+      }
+
+      var nextComp = _this3._getActiveItemComp();
+      _this3._decorateActiveRowComp(nextComp);
+      //this.indexNode.innerHTML = this.indexActiveOption
+
+      var offsetTop = nextComp.offsetTop;
+      var scrollTop = _this3.optionsComp.scrollTop;
+      if (offsetTop - scrollTop < 70) {
+        _this3.optionsComp.scrollTop -= 70 - (offsetTop - scrollTop);
+      }
+    }
+  };
+
   this._handleInputKeyDown = function (event) {
     switch (event.keyCode) {
       // enter
@@ -446,63 +543,21 @@ var InputSelect = (_temp = _class = function (_Component) {
           }
           break;
         }
-      //down
       case 40:
-        {
-          if (!_this3.state.isShowOption) {
-            _this3._showOptions(0);
-            //this.setState({ isShowOption : true });
-          } else {
-            event.preventDefault();
-
-            var prevComp = _this3._getActiveItemComp();
-
-            if (prevComp) {
-              _this3._undecorateActiveRowComp(prevComp);
-
-              _this3.indexActiveOption += 1;
-              if (_this3.indexActiveOption >= _this3.state.options.length) {
-                _this3.indexActiveOption = 0;
-                _this3.optionsComp.scrollTop = 0;
-              }
-
-              var nextComp = _this3._getActiveItemComp();
-              _this3._decorateActiveRowComp(nextComp);
-
-              var offsetTop = nextComp.offsetTop;
-              var scrollTop = _this3.optionsComp.scrollTop;
-              if (offsetTop - scrollTop > 70) {
-                _this3.optionsComp.scrollTop += offsetTop - scrollTop - 70;
-              }
-            }
-          }
-          break;
+        //down
+        if (!_this3.state.isShowOption) {
+          _this3._showOptions(0);
+          //this.setState({ isShowOption : true });
+        } else {
+          event.preventDefault();
+          _this3._stepDownOption();
         }
-      //up
+        break;
       case 38:
+        //up
         if (_this3.state.isShowOption) {
           event.preventDefault();
-
-          var _prevComp = _this3._getActiveItemComp();
-          if (_prevComp) {
-            _this3._undecorateActiveRowComp(_prevComp);
-
-            _this3.indexActiveOption -= 1;
-            if (_this3.indexActiveOption < 0) {
-              _this3.indexActiveOption = _this3.state.options.length - 1;
-              var bottomComp = _this3._getActiveItemComp();
-              _this3.optionsComp.scrollTop = bottomComp.offsetTop;
-            }
-
-            var _nextComp = _this3._getActiveItemComp();
-            _this3._decorateActiveRowComp(_nextComp);
-
-            var _offsetTop = _nextComp.offsetTop;
-            var _scrollTop = _this3.optionsComp.scrollTop;
-            if (_offsetTop - _scrollTop < 70) {
-              _this3.optionsComp.scrollTop -= 70 - (_offsetTop - _scrollTop);
-            }
-          }
+          _this3._stepUpOption();
         }
         break;
       default:
@@ -520,12 +575,72 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 
   this._handleClickItem = function (item, index, event) {
+    _this3._undecorateActiveRowComp();
     _this3.indexActiveOption = index;
     _this3.setState({
       value: item[_this3.propCaption],
       isShowOption: false
     });
     _this3.props.onSelect(item);
+  };
+
+  this._refIndexNode = function (n) {
+    return _this3.indexNode = n;
+  };
+
+  this._renderOptionsFooter = function (nFiltered, nAll) {
+    return _react2.default.createElement(
+      'div',
+      {
+        className: CL.NOT_SELECTED,
+        style: S.OPTIONS_FOOTER
+      },
+      _react2.default.createElement(
+        'span',
+        { style: S.FOOTER_INDEX },
+        _react2.default.createElement(
+          'span',
+          { ref: _this3._refIndexNode },
+          _this3.indexActiveOption
+        ),
+        _react2.default.createElement(
+          'span',
+          null,
+          ': ',
+          nFiltered,
+          ': ',
+          nAll
+        )
+      ),
+      _react2.default.createElement(
+        'span',
+        { style: S.FOOTER_BUTTONS },
+        _react2.default.createElement(
+          'span',
+          {
+            style: (0, _extends3.default)({}, S.FOOTER_BT, S.FOOTER_PADDING),
+            onClick: _this3._stepDownOption
+          },
+          'Dn'
+        ),
+        _react2.default.createElement(
+          'span',
+          {
+            style: (0, _extends3.default)({}, S.FOOTER_BT, S.FOOTER_PADDING),
+            onClick: _this3._stepUpOption
+          },
+          'Up'
+        ),
+        _react2.default.createElement(
+          'span',
+          {
+            style: S.FOOTER_BT,
+            onClick: _this3.clearInput
+          },
+          'CL'
+        )
+      )
+    );
   };
 
   this.renderOptions = function () {
@@ -570,8 +685,8 @@ var InputSelect = (_temp = _class = function (_Component) {
     var width = _this3.props.width,
         _styleOptions = isShowOption ? S.BLOCK : S.NONE,
         _rootWidthStyle = _crWidth(width, _styleOptions),
-        _numberFilteredItems = options[0] && options[0].value !== 'noresult' ? options.length : 0,
-        _numberAllItems = _this3.props.options ? _this3.props.options.length : 0;
+        _nFiltered = options[0] && options[0].value !== 'noresult' ? options.length : 0,
+        _nAll = _this3.props.options ? _this3.props.options.length : 0;
 
 
     return _react2.default.createElement(
@@ -587,18 +702,7 @@ var InputSelect = (_temp = _class = function (_Component) {
         },
         _domOptions
       ),
-      _react2.default.createElement(
-        'div',
-        { style: S.OPTIONS_FOOTER },
-        _react2.default.createElement(
-          'span',
-          { style: S.FILTERED_SPAN },
-          'Filtered ',
-          _numberFilteredItems,
-          ' : ',
-          _numberAllItems
-        )
-      )
+      _this3._renderOptionsFooter(_nFiltered, _nAll)
     );
   };
 
@@ -607,10 +711,10 @@ var InputSelect = (_temp = _class = function (_Component) {
         isLoading = _props3.isLoading,
         isLoadingFailed = _props3.isLoadingFailed,
         placeholder = _props3.placeholder,
+        optionName = _props3.optionName,
         onLoadOption = _props3.onLoadOption,
         _state3 = _this3.state,
         isShowOption = _state3.isShowOption,
-        optionName = _state3.optionName,
         optionNames = _state3.optionNames;
 
 
@@ -645,26 +749,17 @@ var InputSelect = (_temp = _class = function (_Component) {
       afterInputEl: _afterInputEl
     };
   };
+
+  this.clearInput = function () {
+    var _props4 = _this3.props,
+        options = _props4.options,
+        onSelect = _props4.onSelect;
+
+    _this3._undecorateActiveRowComp();
+    onSelect(undefined);
+    _this3._setStateToInit(options);
+    _this3.setState({ isShowOption: false });
+  };
 }, _temp);
-InputSelect.propTypes = process.env.NODE_ENV !== "production" ? {
-  propCaption: _propTypes2.default.string,
-  ItemOptionComp: _propTypes2.default.element,
-  width: _propTypes2.default.string,
-  isShowOptionAnim: _propTypes2.default.bool,
-  options: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-    caption: _propTypes2.default.string,
-    value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
-  })),
-  optionName: _propTypes2.default.string,
-  optionNames: _propTypes2.default.string,
-  isUpdateOptions: _propTypes2.default.bool,
-  placeholder: _propTypes2.default.string,
-
-  isLoading: _propTypes2.default.bool,
-  isLoadingFailed: _propTypes2.default.bool,
-
-  onSelect: _propTypes2.default.func,
-  onLoadOption: _propTypes2.default.func
-} : {};
 exports.default = InputSelect;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-select\InputSelect.js.map

@@ -21,14 +21,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _dec, _dec2, _class;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _DialogCell = require('./DialogCell');
 
@@ -44,6 +41,25 @@ var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(DialogType4, _Component);
+
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+      oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+    twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+      initFromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    msgOnNotValidFormat: PropTypes.func,
+    onTestDate: PropTypes.func,
+    onShow: PropTypes.func,
+      loadFn: PropTypes.func
+  }
+  */
 
   function DialogType4(props) {
     (0, _classCallCheck3.default)(this, DialogType4);
@@ -105,8 +121,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     };
 
     _this._handleClose = function () {
-      _this._handleWithValidationClose(_this._createValidationMessages);
-      _this.props.onClose();
+      _this._handleWithValidationClose();
     };
 
     _this._handleMode = function (propName, value) {
@@ -122,6 +137,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isShowLabels: true,
       isShowDate: true,
       isShowOptions: false,
       validationMessages: []
@@ -161,6 +177,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
           validationMessages = _state.validationMessages;
@@ -181,6 +198,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
@@ -189,6 +207,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
+          isShowLabels: isShowLabels,
           uri: twoURI,
           jsonProp: twoJsonProp,
           caption: twoCaption,
@@ -203,6 +222,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
             ref: function ref(c) {
               return _this2.datesFragment = c;
             },
+            isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
             msgOnNotValidFormat: msgOnNotValidFormat,
@@ -227,24 +247,5 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   }]);
   return DialogType4;
 }(_react.Component)) || _class) || _class);
-process.env.NODE_ENV !== "production" ? DialogType4.propTypes = {
-  isShow: _propTypes2.default.bool,
-  caption: _propTypes2.default.string,
-
-  oneCaption: _propTypes2.default.string,
-  oneURI: _propTypes2.default.string,
-  oneJsonProp: _propTypes2.default.string,
-  twoCaption: _propTypes2.default.string,
-  twoURI: _propTypes2.default.string,
-  twoJsonProp: _propTypes2.default.string,
-
-  initFromDate: _propTypes2.default.string,
-  initToDate: _propTypes2.default.string,
-  msgOnNotValidFormat: _propTypes2.default.func,
-  onTestDate: _propTypes2.default.func,
-  onShow: _propTypes2.default.func,
-
-  loadFn: _propTypes2.default.func
-} : void 0;
 exports.default = DialogType4;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map
