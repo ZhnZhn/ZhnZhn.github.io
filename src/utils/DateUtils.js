@@ -124,7 +124,7 @@ const DateUtils = {
 		}
 	},
 
-	getFromDate(yearMinus){
+	getFromDate(yearMinus=2){
 		const dateNow = new Date()
 		    , yearTo = dateNow.getUTCFullYear();
 

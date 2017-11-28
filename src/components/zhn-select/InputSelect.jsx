@@ -272,8 +272,8 @@ class InputSelect extends Component {
     if (comp){
       comp.classList.add(CL.ROW_ACTIVE);
     }
-    if (this.indexNode) {
-      this.indexNode.innerHTML = this.indexActiveOption + 1
+    if (this.indexNode) {      
+      this.indexNode.textContent = this.indexActiveOption + 1
     }
   }
   _undecorateActiveRowComp = (comp) => {
@@ -671,7 +671,7 @@ class InputSelect extends Component {
     const { options, onSelect } = this.props;
     this._undecorateActiveRowComp()
     onSelect(undefined)
-    this._setStateToInit(options)    
+    this._setStateToInit(options)
     this.setState({ isShowOption : false });
   }
 

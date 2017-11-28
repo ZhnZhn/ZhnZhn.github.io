@@ -30,10 +30,11 @@ const _numberFormat = (value) => {
 
 const _crSpan = (t='', v='', { color=C.VALUE_C }={}) => {
   const _vStyle = `style="color:${color};${FONT_STYLE}"`
-      , _t = t ? `${t}: `: '';
+      , _t = t ? `${t}: `: ''
+      , _v = v !== null ? v: '';
   return `
   <span ${TITLE_STYLE}>${_t}</span>
-  <span ${_vStyle}>${v}</span>`;
+  <span ${_vStyle}>${_v}</span>`;
 }
 const _crRow = (t='', v='', option) => {
   return `<div>${_crSpan(t, v, option)}</div>`;
@@ -91,6 +92,37 @@ const _fnSplitRatio = function({date, id, valueText, value, point}){
   <div class="tp__body">
     ${_crRow('Split Ratio', splitRatio, { color: '#ED5813'})}
     ${_crRow('Close', price)}
+  </div>`;
+}
+
+const _fnExValue = function({ date, id, point }){
+  const { exValue } = point;
+  return `${_crHeader(date, id)}
+  <div class="tp__body">
+    ${_crRow('Value', exValue)}
+  </div>`;
+}
+const _fnEPS = function({ date, id, point }){
+  const {
+          announceTime, fiscalPeriod, fiscalEndDate,
+          actualEPS, estimatedEPS,
+          numberOfEstimates, EPSSurpriseDollar
+        } = point;
+  return `${_crHeader(date, id)}
+  <div class="tp_body">
+    <div>
+      ${_crSpan('', announceTime, { color: C.YEAR_C })}
+      ${_crSpan('', fiscalPeriod)}
+      ${_crSpan('', fiscalEndDate)}
+    </div>
+    <div style=${FONT_STYLE}>
+      ${_crSpan('EPS', actualEPS)}
+      ${_crSpan('Est.', estimatedEPS)}
+    </div>
+    <div style=${FONT_STYLE}>
+      ${_crSpan('Supr.', EPSSurpriseDollar)}
+      ${_crSpan('NumbEst.', numberOfEstimates)}
+    </div>
   </div>`;
 }
 
@@ -317,6 +349,12 @@ const Tooltip = {
   }),
   fnSplitRatioPointFormatter: _fnBasePointFormatter({
     fnTemplate : _fnSplitRatio
+  }),
+  exValue: _fnBasePointFormatter({
+    fnTemplate: _fnExValue
+  }),
+  eps: _fnBasePointFormatter({
+    fnTemplate : _fnEPS
   }),
 
   fnVolumePointFormatter: _fnBasePointFormatter({

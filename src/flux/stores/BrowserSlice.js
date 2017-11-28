@@ -4,12 +4,16 @@ import BrowserConfig from '../../constants/BrowserConfig';
 import { BrowserType } from '../../constants/Type';
 
 import Factory from '../logic/Factory';
-import { BrowserActionTypes } from '../actions/BrowserActions';
+import { BrowserActionTypes as BA } from '../actions/BrowserActions';
 
 import DataQE from '../../constants/DataQE';
 import DataWL from '../../constants/DataWL';
 
 const fnFindObj = function(menu, chartType){
+  if (!menu) {
+    return undefined;
+  }
+
   for (var i=0, maxPart=menu.length; i<maxPart; i++){
     for(var j=0, maxItem=menu[i].items.length; j<maxItem; j++){
       if (menu[i].items[j].id === chartType){
@@ -17,11 +21,14 @@ const fnFindObj = function(menu, chartType){
       }
     }
   }
+
 };
 
 const fnSetIsOpen = function(chartType, browserMenu, browserType, value){
   const obj = fnFindObj(browserMenu[browserType], chartType);
-  obj.isOpen = value;
+  if (obj) {
+    obj.isOpen = value;
+  }
 };
 
 const fnAddCounter = function(chartType, browserType, browserMenu, value){
@@ -87,12 +94,12 @@ const BrowserSlice = {
     if (sourceId.indexOf(BrowserType.STOCKS_BY_SECTORS) > 0){
       return BrowserConfig[browserId];
     }
-
-    return this.routeDialog[browserId][sourceId];
+    const _r = this.routeDialog[browserId];    
+    return _r ? _r[sourceId] : undefined;
   },
 
   onShowBrowser(browserType){
-    this.trigger(BrowserActionTypes.SHOW_BROWSER, browserType);
+    this.trigger(BA.SHOW_BROWSER, browserType);
   },
 
   onShowBrowserDynamic(option){
@@ -102,16 +109,16 @@ const BrowserSlice = {
         .then(elBrowser => {
            this.browserMenu[browserType] = [];
            this.trigger(
-              BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+              BA.INIT_BROWSER_DYNAMIC,
               elBrowser
            );
         })
         .catch(err => {
           //this.showAlertDialog(option);
           console.log(err)
-        })       
+        })
     } else {
-       this.trigger(BrowserActionTypes.SHOW_BROWSER_DYNAMIC, browserType);
+       this.trigger(BA.SHOW_BROWSER_DYNAMIC, browserType);
     }
   },
   onLoadBrowserDynamicCompleted(option){
@@ -123,11 +130,11 @@ const BrowserSlice = {
 
       this.routeDialog[browserType] = items;
       this.browserMenu[browserType] = elMenu;
-      this.trigger(BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+      this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
          menuItems : elMenu, browserType: browserType
       })
     } else {
-      this.trigger(BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
+      this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
                json, browserType
       })
     }

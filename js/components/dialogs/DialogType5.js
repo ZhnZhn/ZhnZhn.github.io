@@ -26,6 +26,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Type = require('../../constants/Type');
+
 var _DialogCell = require('./DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
@@ -37,6 +39,8 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+
+var CHART_TYPE_OPTIONS = [{ caption: 'Default: Area', value: _Type.ChartType.AREA }, { caption: 'Scatter: Label Up', value: _Type.ChartType.SCATTER_UP }, { caption: 'Scatter: Label Down', value: _Type.ChartType.SCATTER_DOWN }];
 
 var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(DialogType5, _Component);
@@ -93,11 +97,13 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           three = _this$parentChild$get2.child,
           _this$datesFragment$g2 = _this.datesFragment.getValues(),
           fromDate = _this$datesFragment$g2.fromDate,
-          toDate = _this$datesFragment$g2.toDate;
+          toDate = _this$datesFragment$g2.toDate,
+          seriaType = _this.chartType ? _this.chartType.value : undefined;
 
       return _this.props.loadFn(_this.props, {
         one: _this.one, two: two, three: three, fromDate: fromDate, toDate: toDate,
-        hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
+        hasSecondYAxis: _this[HAS_SECOND_Y_AXIS],
+        seriaType: seriaType
       });
     };
 
@@ -107,6 +113,10 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 
     _this._handleMode = function (propName, value) {
       _this[propName] = value;
+    };
+
+    _this._handlerSelectChartType = function (item) {
+      _this.chartType = item;
     };
 
     _this.toolbarButtons = _this._createType2WithToolbar(props);
@@ -157,6 +167,7 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           nForecastDate = _props.nForecastDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
+          isChartType = _props.isChartType,
           _state = this.state,
           isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
@@ -217,6 +228,12 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowOptions },
+          isChartType && _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
+            caption: 'Chart Type:',
+            options: CHART_TYPE_OPTIONS,
+            onSelect: this._handlerSelectChartType
+          }),
           _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
             initValue: false,
             caption: 'Add Seria with Second YAxis',

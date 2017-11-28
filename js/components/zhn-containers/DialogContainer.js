@@ -192,6 +192,16 @@ var DialogContainer = (_temp = _class = function (_Component) {
       this.unsubscribe();
     }
   }, {
+    key: 'componentDidCatch',
+    value: function componentDidCatch(error, info) {
+      /*
+      console.log('error:')
+      console.log(error)
+      console.log('info:')
+      console.log(info)
+      */
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(

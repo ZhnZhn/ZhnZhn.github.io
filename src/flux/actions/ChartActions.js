@@ -6,6 +6,7 @@ import LoadConfig from '../logic/LoadConfig';
 import LogicUtils from '../logic/LogicUtils';
 
 const META = '_Meta';
+const _fnNoop = () => {};
 
 export const ChartActionTypes = {
   INIT_AND_SHOW_CHART : 'initAndShowChart',
@@ -13,6 +14,11 @@ export const ChartActionTypes = {
   LOAD_STOCK_COMPLETED : 'loadStockCompleted',
   LOAD_STOCK_ADDED : 'loadStockAdded',
   LOAD_STOCK_FAILED : 'loadStockFailed',
+
+  LOAD_STOCK_BY_QUERY: 'loadStockByQuery',
+  LOAD_STOCK_BY_QUERY_C: 'loadStockByQueryC',
+  LOAD_STOCK_BY_QUERY_F: 'loadStockByQueryF',
+
   SHOW_CHART : 'showChart',
   CLOSE_CHART : 'closeChart',
 
@@ -69,6 +75,9 @@ const ChartActions =  Reflux.createActions({
          isShouldEmit : true,
          cancelLoad : _fnCancelLoad
        },
+      [A.LOAD_STOCK_BY_QUERY]: {
+        children: [ 'completed', 'failed']
+      },
       [A.SHOW_CHART] : {},
       [A.CLOSE_CHART] : {},
       [A.COPY]: {},
@@ -127,6 +136,21 @@ ChartActions[A.LOAD_STOCK].listen(function(chartType, browserType, option){
   option.chartType = chartType;
   option.browserType = browserType;
   LoadConfig[loadId].loadItem(option, this.completed, this.added, this.failed);
+})
+
+ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
+  const {
+          chartType, browserType,
+          loadId
+         } = option
+      , impl = LoadConfig[loadId];
+  if (impl) {
+    const config = ChartStore.getSourceConfig(browserType, chartType);
+    Object.assign(option, config.dialogProps )
+    impl.loadItem(option, this.completed, _fnNoop, this.failed);
+   } else {
+     this.failed()
+   }
 })
 
 export default ChartActions

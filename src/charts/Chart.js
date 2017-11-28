@@ -5,22 +5,57 @@ import Highcharts from 'highcharts';
 import COLOR from '../constants/Color';
 import Tooltip from './Tooltip';
 
-const _fMonoColors = function({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }){
-  const colors = []
+const S = {
+  TITLE_BASE: {
+    stroke: 'transparent',
+    fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
+    fontSize: '16px',
+    fontWeight: 'bold'
+  }
+};
 
-  for (let i = 0; i < 4; i += 1) {
+const _addMonoColorsTo = (colors=[], base) => {
+  let i;
+  for (i=0; i<4; i++) {
     // Start out with a darkened base color (negative brighten), and end
     // up with a much brighter color
-   colors.push(Highcharts.Color(base1).brighten((i - 3) / 7).setOpacity(0.75).get());
-
+   colors.push(
+     Highcharts.Color(base)
+       .brighten((i - 3) / 7)
+       .setOpacity(0.75)
+       .get()
+     );
   }
-  for (let i = 0; i < 4; i += 1) {
-     colors.push(Highcharts.Color(base2).brighten((i - 3) / 7).setOpacity(0.75).get());
-  }
-
-  return colors;
 }
 
+const _fMonoColors = function({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}){
+  const colors = [];
+  //let i;
+
+  _addMonoColorsTo(colors, base1);
+  _addMonoColorsTo(colors, base2);
+  /*
+  for (i = 0; i < 4; i++) {
+    // Start out with a darkened base color (negative brighten), and end
+    // up with a much brighter color
+   colors.push(
+     Highcharts.Color(base1)
+       .brighten((i - 3) / 7)
+       .setOpacity(0.75)
+       .get()
+     );
+  }
+  for (i = 0; i < 4; i++) {
+     colors.push(
+       Highcharts.Color(base2)
+         .brighten((i - 3) / 7)
+         .setOpacity(0.75)
+         .get()
+      );
+  }
+  */
+  return colors;
+}
 
 const Chart = {
   COLOR_PERIOD : 4/7,
@@ -49,16 +84,25 @@ const Chart = {
   SEMIDONUT_SUBTITLE_Y: 35,
 
 
-  _monoColors : _fMonoColors({}),
+  _monoColors : _fMonoColors(),
 
   fMonoPieColors({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}){
     const colors = [];
+    let i;
 
-    for (let i = 0; i < 4; i += 1) {
-      colors.push(Highcharts.Color(base1).brighten((i - 3) / 7).get());
+    for (i = 0; i < 4; i++) {
+      colors.push(
+         Highcharts.Color(base1)
+         .brighten((i - 3) / 7)
+         .get()
+       );
     }
-    for (let i = 0; i < 4; i += 1) {
-      colors.push(Highcharts.Color(base2).brighten((i - 3) / 7).get());
+    for (i = 0; i < 4; i++) {
+      colors.push(
+        Highcharts.Color(base2)
+          .brighten((i - 3) / 7)
+          .get()
+        );
     }
 
     return colors;
@@ -132,10 +176,9 @@ const Chart = {
        x: 25,
        y: 25,
        style: {
+         ...S.TITLE_BASE,
          color: COLOR.CHART_TITLE,
-         fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-         fontSize: '16px',
-         fontWeight: 'bold'
+         fill: COLOR.CHART_TITLE,
        }
     }, option)
   },
@@ -147,10 +190,9 @@ const Chart = {
       x: 25,
       y: 45,
       style: {
+        ...S.TITLE_BASE,
         color: COLOR.CHART_SUBTITLE,
-        fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-        fontSize: '16px',
-        fontWeight: 'bold'
+        fill: COLOR.CHART_SUBTITLE
       }
     }, option)
   },

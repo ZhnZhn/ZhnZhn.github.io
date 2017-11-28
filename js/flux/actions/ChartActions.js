@@ -34,6 +34,7 @@ var _LogicUtils2 = _interopRequireDefault(_LogicUtils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var META = '_Meta';
+var _fnNoop = function _fnNoop() {};
 
 var ChartActionTypes = exports.ChartActionTypes = {
   INIT_AND_SHOW_CHART: 'initAndShowChart',
@@ -41,6 +42,11 @@ var ChartActionTypes = exports.ChartActionTypes = {
   LOAD_STOCK_COMPLETED: 'loadStockCompleted',
   LOAD_STOCK_ADDED: 'loadStockAdded',
   LOAD_STOCK_FAILED: 'loadStockFailed',
+
+  LOAD_STOCK_BY_QUERY: 'loadStockByQuery',
+  LOAD_STOCK_BY_QUERY_C: 'loadStockByQueryC',
+  LOAD_STOCK_BY_QUERY_F: 'loadStockByQueryF',
+
   SHOW_CHART: 'showChart',
   CLOSE_CHART: 'closeChart',
 
@@ -92,6 +98,8 @@ var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (
   idLoading: undefined,
   isShouldEmit: true,
   cancelLoad: _fnCancelLoad
+}), (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_STOCK_BY_QUERY, {
+  children: ['completed', 'failed']
 }), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.PASTE_TO, {}), _Reflux$createActions));
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
@@ -146,6 +154,21 @@ ChartActions[A.LOAD_STOCK].listen(function (chartType, browserType, option) {
   option.chartType = chartType;
   option.browserType = browserType;
   _LoadConfig2.default[loadId].loadItem(option, this.completed, this.added, this.failed);
+});
+
+ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
+  var chartType = option.chartType,
+      browserType = option.browserType,
+      loadId = option.loadId,
+      impl = _LoadConfig2.default[loadId];
+
+  if (impl) {
+    var config = _ChartStore2.default.getSourceConfig(browserType, chartType);
+    Object.assign(option, config.dialogProps);
+    impl.loadItem(option, this.completed, _fnNoop, this.failed);
+  } else {
+    this.failed();
+  }
 });
 
 exports.default = ChartActions;

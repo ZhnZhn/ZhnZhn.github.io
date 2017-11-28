@@ -4,7 +4,7 @@ import ChartStore from '../stores/ChartStore'
 import ChartFn from '../../charts/ChartFn'
 
 const _crOptionFetch = (objImpl, option) => {
-  const { optionFetch } = objImpl
+  const { optionFetch } = objImpl;
   return typeof optionFetch === 'function'
     ? optionFetch(option)
     : optionFetch;
@@ -12,7 +12,7 @@ const _crOptionFetch = (objImpl, option) => {
 
 const _loadToChartComp = function(objImpl, option, onCompleted, onFailed){
   const { fnFetch, api } = objImpl
-      , optionFetch = _crOptionFetch(objImpl, option)
+      , optionFetch = _crOptionFetch(objImpl, option);
 
   fnFetch({
     uri : api.getRequestUrl(option),
@@ -58,12 +58,13 @@ const _loadToChart = function(objImpl, option, onAdded, onFailed){
 const _fnFetchToChart = function(objImpl, { json, option, onCompleted }){
   const { adapter } = objImpl
       , { itemCaption, value, hasSecondYAxis } = option
-      , series = adapter.toSeries(json, option)
-      , chart = ChartStore.getActiveChart();
+      , chart = ChartStore.getActiveChart()
+      , series = adapter.toSeries(json, option, chart);
 
   ChartFn.addSeriaWithRenderLabel({
     chart, series,
     label: series.zhItemCaption || itemCaption || value,
+    color: series.zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   })
   onCompleted(option)

@@ -154,7 +154,9 @@ var DateUtils = {
 			return DateUtils.isValidDate(str);
 		}
 	},
-	getFromDate: function getFromDate(yearMinus) {
+	getFromDate: function getFromDate() {
+		var yearMinus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
+
 		var dateNow = new Date(),
 		    yearTo = dateNow.getUTCFullYear();
 

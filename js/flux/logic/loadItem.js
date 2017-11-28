@@ -83,13 +83,14 @@ var _fnFetchToChart = function _fnFetchToChart(objImpl, _ref2) {
       itemCaption = option.itemCaption,
       value = option.value,
       hasSecondYAxis = option.hasSecondYAxis,
-      series = adapter.toSeries(json, option),
-      chart = _ChartStore2.default.getActiveChart();
+      chart = _ChartStore2.default.getActiveChart(),
+      series = adapter.toSeries(json, option, chart);
 
 
   _ChartFn2.default.addSeriaWithRenderLabel({
     chart: chart, series: series,
     label: series.zhItemCaption || itemCaption || value,
+    color: series.zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   });
   onCompleted(option);

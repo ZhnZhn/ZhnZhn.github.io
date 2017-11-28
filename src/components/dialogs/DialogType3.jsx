@@ -41,8 +41,12 @@ class DialogType3 extends Component {
 
     this.stock = undefined
     this.transform = undefined
-    this.toolbarButtons = this._createType2WithToolbar(props)
-    if (props.isTransform){
+
+    const { noDate, isTransform } = props;
+    this.toolbarButtons = this._createType2WithToolbar(
+       props, { noDate }
+    )
+    if (isTransform){
       this.toolbarButtons.push({
         caption: 'T', onClick: this._handleClickTransform
       })
@@ -88,25 +92,45 @@ class DialogType3 extends Component {
     );
   }
   _createValidationMessages = () => {
-    const { itemCaption='Stock' } = this.props;
+    const {
+            msgOnNotSelected, itemCaption='Stock',
+          } = this.props;
     let msg = [];
-    if (!this.stock) { msg.push(this.props.msgOnNotSelected(itemCaption));}
-    const {isValid, datesMsg} = this.datesFragment.getValidation();
-    if (!isValid) { msg = msg.concat(datesMsg); }
-    msg.isValid = (msg.length === 0) ? true : false;
+
+    if (!this.stock) {
+      msg.push(msgOnNotSelected(itemCaption));
+    }
+
+    if (this.datesFragment) {
+       const {
+               isValid, datesMsg
+             } = this.datesFragment.getValidation();
+       if (!isValid) {
+         msg = msg.concat(datesMsg);
+       }
+    }
+
+    msg.isValid = (msg.length === 0)
+         ? true
+         : false;
     return msg;
   }
 
   _createLoadOption = () => {
-    const { fromDate, toDate } = this.datesFragment.getValues()
+    const { fromDate, toDate } = this.datesFragment
+              ? this.datesFragment.getValues()
+              : {};
     return this.props.loadFn(
-      this.props,
-      { stock : this.stock, fromDate, toDate, transform: this.transform }
+      this.props, {
+        stock : this.stock,
+        fromDate, toDate,
+        transform: this.transform
+      }
     );
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose()    
+    this._handleWithValidationClose()
   }
 
   render(){
@@ -115,7 +139,9 @@ class DialogType3 extends Component {
             optionURI, optionsJsonProp,
             itemCaption='Stock', optionNames='Stocks',
             isWithInputStock,
-            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
+            noDate,
+            initFromDate, initToDate,
+            msgOnNotValidFormat, onTestDate
           } = this.props
         , {
             isShowLabels, isShowTransform, isShowDate,
@@ -152,16 +178,19 @@ class DialogType3 extends Component {
              onSelect={this._handleSelectTransform}
            />
          </D.ShowHide>
-         <D.ShowHide isShow={isShowDate}>
-           <D.DatesFragment
-              ref={c => this.datesFragment = c}
-              isShowLabels={isShowLabels}
-              initFromDate={initFromDate}
-              initToDate={initToDate}
-              msgOnNotValidFormat={msgOnNotValidFormat}
-              onTestDate={onTestDate}
-           />
-         </D.ShowHide>
+         {
+           !noDate &&
+           <D.ShowHide isShow={isShowDate}>
+             <D.DatesFragment
+                ref={c => this.datesFragment = c}
+                isShowLabels={isShowLabels}
+                initFromDate={initFromDate}
+                initToDate={initToDate}
+                msgOnNotValidFormat={msgOnNotValidFormat}
+                onTestDate={onTestDate}
+             />
+           </D.ShowHide>
+         }
          <D.ValidationMessages
             validationMessages={validationMessages}
          />

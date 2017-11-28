@@ -17,7 +17,7 @@ import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const PREV_BUILD = '20-11-2017';
+const PREV_BUILD = '28-11-2017';
 
 class AppErc extends Component {
 
@@ -68,7 +68,8 @@ class AppErc extends Component {
           onNoAnswer={AnalyticActions.noAnswer}
        />
      </div>
-    )}
+   );
+  }
 }
 
 export default AppErc

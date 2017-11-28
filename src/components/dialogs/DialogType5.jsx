@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
 
+import { ChartType } from '../../constants/Type';
+
 import D from './DialogCell'
 import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+
+const CHART_TYPE_OPTIONS = [
+  { caption : 'Default: Area', value: ChartType.AREA },
+  { caption : 'Scatter: Label Up', value: ChartType.SCATTER_UP },
+  { caption : 'Scatter: Label Down', value: ChartType.SCATTER_DOWN }
+];
+
 
 @Decor.withToolbar
 @Decor.withValidationLoad
@@ -68,20 +77,28 @@ class  DialogType5 extends Component {
 
   _createLoadOption = () => {
     const { parent:two, child:three } = this.parentChild.getValues()
-        , { fromDate, toDate } = this.datesFragment.getValues();
+        , { fromDate, toDate } = this.datesFragment.getValues()
+        , seriaType = this.chartType
+             ? this.chartType.value
+             : undefined;
     return this.props.loadFn(
       this.props, {
       one : this.one, two, three, fromDate, toDate,
-      hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
+      hasSecondYAxis: this[HAS_SECOND_Y_AXIS],
+      seriaType
     });
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose()    
+    this._handleWithValidationClose()
   }
 
   _handleMode = (propName, value) => {
      this[propName] = value
+  }
+
+  _handlerSelectChartType = (item) => {
+    this.chartType = item
   }
 
   render(){
@@ -89,7 +106,8 @@ class  DialogType5 extends Component {
            caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
-           initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
+           initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate,
+           isChartType
           } = this.props
         , {
             isShowLabels, isShowDate, isShowOptions,
@@ -142,6 +160,15 @@ class  DialogType5 extends Component {
                />
              </D.ShowHide>
              <D.ShowHide isShow={isShowOptions}>
+               {
+                 isChartType &&
+                 <D.RowInputSelect
+                    isShowLabels={isShowLabels}
+                    caption="Chart Type:"
+                    options={CHART_TYPE_OPTIONS}
+                    onSelect={this._handlerSelectChartType}
+                 />
+               }
                <D.RowCheckBox
                  initValue={false}
                  caption="Add Seria with Second YAxis"

@@ -34,6 +34,10 @@ var _BarchartAdapter = require('../../adapters/barchart/BarchartAdapter');
 
 var _BarchartAdapter2 = _interopRequireDefault(_BarchartAdapter);
 
+var _IexAdapter = require('../../adapters/iex/IexAdapter');
+
+var _IexAdapter2 = _interopRequireDefault(_IexAdapter);
+
 var _QuandlAdapter = require('../../adapters/QuandlAdapter');
 
 var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
@@ -111,6 +115,12 @@ var Barchart = (0, _loadItem2.default)({
   adapter: _BarchartAdapter2.default
 });
 
+var Iex = (0, _loadItem2.default)({
+  fnFetch: _fnFetch.fetchJson,
+  api: _Api2.default.Iex,
+  adapter: _IexAdapter2.default
+});
+
 var Insee = (0, _loadItem2.default)({
   fnFetch: _fnFetch.fetchTxt,
   api: _Api2.default.Insee,
@@ -129,6 +139,8 @@ exports.default = {
   AlphaSector: AlphaSector,
 
   Barchart: Barchart,
+
+  Iex: Iex,
 
   UnComtrade: UnComtrade,
   FaoStat: FaoStat

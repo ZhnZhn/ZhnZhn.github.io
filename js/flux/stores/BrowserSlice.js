@@ -31,6 +31,10 @@ var _DataWL2 = _interopRequireDefault(_DataWL);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var fnFindObj = function fnFindObj(menu, chartType) {
+  if (!menu) {
+    return undefined;
+  }
+
   for (var i = 0, maxPart = menu.length; i < maxPart; i++) {
     for (var j = 0, maxItem = menu[i].items.length; j < maxItem; j++) {
       if (menu[i].items[j].id === chartType) {
@@ -42,7 +46,9 @@ var fnFindObj = function fnFindObj(menu, chartType) {
 
 var fnSetIsOpen = function fnSetIsOpen(chartType, browserMenu, browserType, value) {
   var obj = fnFindObj(browserMenu[browserType], chartType);
-  obj.isOpen = value;
+  if (obj) {
+    obj.isOpen = value;
+  }
 };
 
 var fnAddCounter = function fnAddCounter(chartType, browserType, browserMenu, value) {
@@ -109,8 +115,8 @@ var BrowserSlice = {
     if (sourceId.indexOf(_Type.BrowserType.STOCKS_BY_SECTORS) > 0) {
       return _BrowserConfig2.default[browserId];
     }
-
-    return this.routeDialog[browserId][sourceId];
+    var _r = this.routeDialog[browserId];
+    return _r ? _r[sourceId] : undefined;
   },
   onShowBrowser: function onShowBrowser(browserType) {
     this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER, browserType);

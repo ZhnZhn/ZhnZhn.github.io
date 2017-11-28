@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _lodash = require('lodash.merge');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -22,23 +26,59 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fMonoColors = function _fMonoColors(_ref) {
-  var _ref$base = _ref.base1,
+var S = {
+  TITLE_BASE: {
+    stroke: 'transparent',
+    fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
+    fontSize: '16px',
+    fontWeight: 'bold'
+  }
+};
+
+var _addMonoColorsTo = function _addMonoColorsTo() {
+  var colors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var base = arguments[1];
+
+  var i = void 0;
+  for (i = 0; i < 4; i++) {
+    // Start out with a darkened base color (negative brighten), and end
+    // up with a much brighter color
+    colors.push(_highcharts2.default.Color(base).brighten((i - 3) / 7).setOpacity(0.75).get());
+  }
+};
+
+var _fMonoColors = function _fMonoColors() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$base = _ref.base1,
       base1 = _ref$base === undefined ? _Color2.default.MONO_BASE1 : _ref$base,
       _ref$base2 = _ref.base2,
       base2 = _ref$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref$base2;
 
   var colors = [];
+  //let i;
 
-  for (var i = 0; i < 4; i += 1) {
+  _addMonoColorsTo(colors, base1);
+  _addMonoColorsTo(colors, base2);
+  /*
+  for (i = 0; i < 4; i++) {
     // Start out with a darkened base color (negative brighten), and end
     // up with a much brighter color
-    colors.push(_highcharts2.default.Color(base1).brighten((i - 3) / 7).setOpacity(0.75).get());
+   colors.push(
+     Highcharts.Color(base1)
+       .brighten((i - 3) / 7)
+       .setOpacity(0.75)
+       .get()
+     );
   }
-  for (var _i = 0; _i < 4; _i += 1) {
-    colors.push(_highcharts2.default.Color(base2).brighten((_i - 3) / 7).setOpacity(0.75).get());
+  for (i = 0; i < 4; i++) {
+     colors.push(
+       Highcharts.Color(base2)
+         .brighten((i - 3) / 7)
+         .setOpacity(0.75)
+         .get()
+      );
   }
-
+  */
   return colors;
 };
 
@@ -68,7 +108,7 @@ var Chart = {
   SEMIDONUT_TITLE_Y: 15,
   SEMIDONUT_SUBTITLE_Y: 35,
 
-  _monoColors: _fMonoColors({}),
+  _monoColors: _fMonoColors(),
 
   fMonoPieColors: function fMonoPieColors() {
     var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -78,12 +118,13 @@ var Chart = {
         base2 = _ref2$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref2$base2;
 
     var colors = [];
+    var i = void 0;
 
-    for (var i = 0; i < 4; i += 1) {
+    for (i = 0; i < 4; i++) {
       colors.push(_highcharts2.default.Color(base1).brighten((i - 3) / 7).get());
     }
-    for (var _i2 = 0; _i2 < 4; _i2 += 1) {
-      colors.push(_highcharts2.default.Color(base2).brighten((_i2 - 3) / 7).get());
+    for (i = 0; i < 4; i++) {
+      colors.push(_highcharts2.default.Color(base2).brighten((i - 3) / 7).get());
     }
 
     return colors;
@@ -157,12 +198,10 @@ var Chart = {
       align: 'left',
       x: 25,
       y: 25,
-      style: {
+      style: (0, _extends3.default)({}, S.TITLE_BASE, {
         color: _Color2.default.CHART_TITLE,
-        fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }
+        fill: _Color2.default.CHART_TITLE
+      })
     }, option);
   },
   fSubtitle: function fSubtitle() {
@@ -174,12 +213,10 @@ var Chart = {
       align: 'left',
       x: 25,
       y: 45,
-      style: {
+      style: (0, _extends3.default)({}, S.TITLE_BASE, {
         color: _Color2.default.CHART_SUBTITLE,
-        fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }
+        fill: _Color2.default.CHART_SUBTITLE
+      })
     }, option);
   },
   fTitleIndicator: function fTitleIndicator(text) {

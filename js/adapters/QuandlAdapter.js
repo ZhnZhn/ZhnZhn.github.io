@@ -8,7 +8,7 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _rToConfig2;
+var _rToConfig2, _rToSeria2;
 
 var _lodash = require('lodash.flow');
 
@@ -53,6 +53,10 @@ var _QuandlToTreeMap = require('./QuandlToTreeMap');
 var _ToYearly = require('./ToYearly');
 
 var _ToYearly2 = _interopRequireDefault(_ToYearly);
+
+var _ToScatter = require('./ToScatter');
+
+var _ToScatter2 = _interopRequireDefault(_ToScatter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -569,52 +573,68 @@ var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   return fnQuandlFlow(config, json, option);
 };
 
-var fCrYearlyConfig = function fCrYearlyConfig(json, option) {
+var _getData = function _getData(json) {
   var _json$dataset3 = json.dataset,
       dataset = _json$dataset3 === undefined ? {} : _json$dataset3,
       _dataset$data2 = dataset.data,
       data = _dataset$data2 === undefined ? [] : _dataset$data2;
 
-  return {
-    config: _ToYearly2.default.toConfig(data, option)
+  return data;
+};
+var _fToConfig = function _fToConfig(builder) {
+  return function (json, option) {
+    var data = _getData(json);
+    return { config: builder.toConfig(data, option) };
+  };
+};
+var _fToSeria = function _fToSeria(builder) {
+  return function (json, option, chart) {
+    var data = _getData(json);
+    return builder.toSeria(data, option, chart);
   };
 };
 
-var _rToConfig = (_rToConfig2 = {}, (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.YEARLY, fCrYearlyConfig), _rToConfig2);
+var _rToConfig = (_rToConfig2 = {}, (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.YEARLY, _fToConfig(_ToYearly2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER, _fToConfig(_ToScatter2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER_UP, _fToConfig(_ToScatter2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER_DOWN, _fToConfig(_ToScatter2.default)), _rToConfig2);
+
+var _crSeriaData = function _crSeriaData(data, yIndex) {
+  return data.map(function (p) {
+    return [_AdapterFn2.default.ymdToUTC(p[0]), p[yIndex]];
+  }).sort(_AdapterFn2.default.compareByDate);
+};
+
+var _toSeria = function _toSeria(json, option) {
+  var chartId = option.value,
+      parentId = option.parentId,
+      yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option),
+      data = _crSeriaData(_getData(json), yPointIndex),
+      seria = Object.assign(_ChartConfig2.default.fSeries(), {
+    zhSeriaId: parentId + '_' + chartId,
+    zhValueText: chartId.substring(0, 12),
+    data: data,
+    minY: _QuandlFn2.default.findMinY(data)
+  });
+
+  return seria;
+};
+
+var _rToSeria = (_rToSeria2 = {
+  DF: _toSeria
+}, (0, _defineProperty3.default)(_rToSeria2, _Type.ChartType.SCATTER, _fToSeria(_ToScatter2.default)), (0, _defineProperty3.default)(_rToSeria2, _Type.ChartType.SCATTER_UP, _fToSeria(_ToScatter2.default)), (0, _defineProperty3.default)(_rToSeria2, _Type.ChartType.SCATTER_DOWN, _fToSeria(_ToScatter2.default)), _rToSeria2);
 
 var QuandlAdapter = {
   toConfig: function toConfig(json, option) {
     var _option$seriaType = option.seriaType,
         seriaType = _option$seriaType === undefined ? _Type.ChartType.AREA : _option$seriaType,
-        _config = _rToConfig[seriaType](json, option);
+        config = _rToConfig[seriaType](json, option);
 
-    return _config;
+    return config;
   },
-  toSeries: function toSeries(json, option) {
-    var chartId = option.value,
-        parentId = option.parentId,
-        yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option),
-        _json$dataset4 = json.dataset,
-        dataset = _json$dataset4 === undefined ? {} : _json$dataset4;
+  toSeries: function toSeries(json, option, chart) {
+    var seriaType = option.seriaType,
+        _toSeria = _rToSeria[seriaType] || _rToSeria.DF,
+        seria = _toSeria(json, option, chart);
 
-    var _dataset$data3 = dataset.data,
-        data = _dataset$data3 === undefined ? [] : _dataset$data3;
-
-    data = data.map(function (point) {
-      var arrDate = point[0].split('-');
-      return [Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]), point[yPointIndex]];
-    }).sort(_AdapterFn2.default.compareByDate);
-
-    var configSeries = _ChartConfig2.default.fSeries();
-
-    Object.assign(configSeries, {
-      zhSeriaId: parentId + '_' + chartId,
-      zhValueText: chartId.substring(0, 12),
-      data: data,
-      minY: _QuandlFn2.default.findMinY(data)
-    });
-
-    return configSeries;
+    return seria;
   }
 };
 

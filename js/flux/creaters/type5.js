@@ -23,23 +23,22 @@ var _crDefault = function _crDefault(props, options) {
       fromDate = options.fromDate,
       toDate = options.toDate,
       hasSecondYAxis = options.hasSecondYAxis,
+      seriaType = options.seriaType,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : undefined;
 
   return (0, _extends3.default)({}, dfProps, {
     value: _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn: three ? three.value : 1,
-    loadId: loadId,
     title: one.caption + ': ' + two.caption,
     subtitle: three.caption,
-    dataSource: dataSource,
-    isPremium: isPremium,
-    hasSecondYAxis: hasSecondYAxis,
     oneCaption: one.caption,
     one: one.value,
     two: two.value,
-    three: three.value
+    three: three.value,
+    fromDate: fromDate, toDate: toDate,
+    dataColumn: three ? three.value : 1,
+    loadId: loadId,
+    dataSource: dataSource, isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis, seriaType: seriaType
   });
 };
 
@@ -55,19 +54,17 @@ var _crTreeItem = function _crTreeItem(props, options) {
       fromDate = options.fromDate,
       toDate = options.toDate,
       hasSecondYAxis = options.hasSecondYAxis,
+      seriaType = options.seriaType,
       _value = typeof fnValue === 'function' ? fnValue(one.value, three.value) : undefined;
 
   return {
     value: _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn: dataColumn,
-    loadId: loadId,
     title: one.caption + ':' + two.caption,
     subtitle: three.caption,
-    dataSource: dataSource,
-    isPremium: isPremium,
-    hasSecondYAxis: hasSecondYAxis
+    fromDate: fromDate, toDate: toDate,
+    dataColumn: dataColumn, loadId: loadId,
+    dataSource: dataSource, isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis, seriaType: seriaType
   };
 };
 
@@ -83,19 +80,17 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
       fromDate = options.fromDate,
       toDate = options.toDate,
       hasSecondYAxis = options.hasSecondYAxis,
+      seriaType = options.seriaType,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value, three.value) : undefined;
 
   return {
     value: _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn: dataColumn,
-    loadId: loadId,
     title: two.caption + ' : ' + three.caption,
     subtitle: one.caption,
-    dataSource: dataSource,
-    isPremium: isPremium,
-    hasSecondYAxis: hasSecondYAxis
+    fromDate: fromDate, toDate: toDate,
+    dataColumn: dataColumn, loadId: loadId,
+    dataSource: dataSource, isPremium: isPremium,
+    hasSecondYAxis: hasSecondYAxis, seriaType: seriaType
   };
 };
 

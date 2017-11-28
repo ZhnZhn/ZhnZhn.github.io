@@ -12,6 +12,10 @@ var _BarchartApi = require('./BarchartApi');
 
 var _BarchartApi2 = _interopRequireDefault(_BarchartApi);
 
+var _IexApi = require('./IexApi');
+
+var _IexApi2 = _interopRequireDefault(_IexApi);
+
 var _EuroStatApi = require('./EuroStatApi');
 
 var _EuroStatApi2 = _interopRequireDefault(_EuroStatApi);
@@ -43,7 +47,7 @@ var _StatNorway2Api2 = _interopRequireDefault(_StatNorway2Api);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  Alpha: _AlphaApi2.default, Barchart: _BarchartApi2.default, Quandl: _QuandlApi2.default,
+  Alpha: _AlphaApi2.default, Barchart: _BarchartApi2.default, Iex: _IexApi2.default, Quandl: _QuandlApi2.default,
   UnComtrade: _UnComtradeApi2.default, FaoStat: _FaoStatApi2.default,
   Insee: _InseeApi2.default, EuroStat: _EuroStatApi2.default,
   StatNorway: _StatNorwayApi2.default, StatNorway2: _StatNorway2Api2.default

@@ -150,10 +150,17 @@ const ChartFn = {
   ...WithAreaChartFn,
 
   addSeriaWithRenderLabel(props){
-    const { chart, series, label, hasSecondYAxis } = props;
-    const options = _initOptionsZhSeries(chart);
-    const color = _addSeries({ chart, series, label, hasSecondYAxis });
-    const textEl = _renderSeriesLabel({ chart, options, series, label, color });
+    const {
+            chart, series, label, color, hasSecondYAxis
+          } = props
+        ,  options = _initOptionsZhSeries(chart)
+        , _color = _addSeries({
+            chart, series, label, hasSecondYAxis
+          })
+        , textEl = _renderSeriesLabel({
+            chart, options, series, label,
+            color: color || _color
+          });    
 
     options.zhSeries.count +=1
     options.zhSeries.titleEls.push(textEl)

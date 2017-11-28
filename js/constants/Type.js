@@ -56,7 +56,10 @@ var ChartType = exports.ChartType = {
   STACKED_COLUMN: 'STACKED_COLUMN',
   STACKED_COLUMN_PERCENT: 'STACKED_COLUMN_PERCENT',
   TREE_MAP: 'TREE_MAP',
-  YEARLY: 'YEARLY'
+  YEARLY: 'YEARLY',
+  SCATTER: 'SCATTER',
+  SCATTER_UP: 'SCATTER_UP',
+  SCATTER_DOWN: 'SCATTER_DOWN'
 };
 
 var LoadType = exports.LoadType = {
@@ -65,6 +68,7 @@ var LoadType = exports.LoadType = {
   AL: 'AL',
   AL_S: 'AL_S',
   AL_I: 'AL_I',
+  IEX: 'IEX',
   QCT: 'QCT',
   EU_STAT: 'EU_STAT',
   FS: 'FS',

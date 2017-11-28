@@ -21,6 +21,11 @@
         { "id": "SM_A_INTRADAY" },
         { "id": "SM_A_SECTOR" }
       ]
+    },{
+      "caption": "IEX",
+      "items": [
+        { "id": "SM_IEX_EARNINGS" }
+      ]
     }
   ],
   "items" : {
@@ -98,6 +103,7 @@
           "valueFn" : "RPrefixOneTwoA",
           "valueFnPrefix" : "SF0",
           "loadId" : "Q",
+          "isChartType": true,
           "isPremium" : true,
           "dataSource" : "Free US Fundamentals (Code: SF0)"
         }
@@ -152,6 +158,7 @@
           "dataSource" : "Barchart Market Data Solutions"
         }
     },
+
     "SM_A_INDICATOR" : {
         "type" : "SM_A_INDICATOR",
         "menuTitle" : "Indicators",
@@ -196,6 +203,27 @@
            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
            "loadId" : "AL_S",
            "dataSource" : "Alpha Vantage"
+         }
+     },
+
+     "SM_IEX_EARNINGS" : {
+         "type" : "SM_IEX_EARNINGS",
+         "menuTitle" : "Earnings Latest 4 Q",
+         "chartContainerCaption" : "IEX: Earnings Latest 4 Quartals",
+         "dialogProps" : {
+           "descrUrl" : "./data/stock-markets/iex.html",
+           "optionURI" : "./data/stock-markets/wiki.json",
+           "optionsJsonProp" : "tickets",
+           "isWithInputStock": true,
+           "noDate": true,
+           "valueFn" : "ROneSufix",
+           "valueFnPrefix": "earnings",
+           "linkFn" : "NASDAQ",
+           "loadId" : "IEX",
+           "dataSource" : "Data for free by IEX",
+           "dfProps": {
+             "dfType": "earnings"
+           }
          }
      }
    }

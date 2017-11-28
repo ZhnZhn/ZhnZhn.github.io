@@ -6,6 +6,7 @@ const RouterFnValue = {
   ROneTwo : (one, two) => `${one}/${two}`,
   ROneDashTwo : (one, two) => `${one}_${two}`,
   RPrefixOne : (prefix, one) => `${prefix}/${one}`,
+  ROneSufix: (sufix, one) => `${one}/${sufix}`, 
   RPrefixDashOne : (prefix, one) => `${prefix}_${one}`,
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
   RPrefixOneTwoA : (prefix, one, two) => `${prefix}/${one}_${two}_MRY`,
@@ -20,7 +21,7 @@ const RouterFnValue = {
       return `OECD/${two}_${one}`;
     }
   },
-  
+
   RZillow : (one, two, three) => `ZILLOW/${two}${three}_${one}`,
 
   RJodiGas : (one, two, three) => `JODI/GAS_${two}${three}_${one}`,

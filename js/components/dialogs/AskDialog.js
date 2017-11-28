@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _Button = require('./Button');
 
 var _Button2 = _interopRequireDefault(_Button);
@@ -40,9 +36,9 @@ var _MathCaptcha = require('../zhn-moleculs/MathCaptcha');
 
 var _MathCaptcha2 = _interopRequireDefault(_MathCaptcha);
 
-var _DialogStyles = require('../styles/DialogStyles');
+var _FactorySeqAction = require('../../flux/actions/FactorySeqAction');
 
-var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
+var _FactorySeqAction2 = _interopRequireDefault(_FactorySeqAction);
 
 var _BrowserActions = require('../../flux/actions/BrowserActions');
 
@@ -54,6 +50,8 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import PropTypes from "prop-types";
+
 var MSG_PREFIX = "Would you like load item";
 var MSG_SUFFIX = "from url?";
 
@@ -63,6 +61,10 @@ var S = {
     width: '400px',
     height: '205px',
     margin: '70px auto'
+  },
+  ROOT_DIV: {
+    display: 'block',
+    margin: '5px'
   },
   NAME: {
     color: '#a487d4',
@@ -86,6 +88,19 @@ var S = {
 
 var AskDialog = function (_Component) {
   (0, _inherits3.default)(AskDialog, _Component);
+
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    data: PropTypes.shape({
+      options: PropTypes.shape({
+        chartType: PropTypes.string,
+        browserType: PropTypes.string
+      })
+    }),
+    onClose: PropTypes.func
+  }
+  */
 
   function AskDialog(props) {
     (0, _classCallCheck3.default)(this, AskDialog);
@@ -118,8 +133,17 @@ var AskDialog = function (_Component) {
 
 
       if (this.captchaComp.isOk()) {
-        _BrowserActions2.default.showBrowser(options.browserType);
-        _ChartActions2.default.loadStock(options.chartType, options.browserType, options);
+        var isStaticBrowser = options.isStaticBrowser,
+            browserType = options.browserType,
+            chartType = options.chartType;
+
+
+        if (isStaticBrowser) {
+          _BrowserActions2.default.showBrowser(browserType);
+          _ChartActions2.default.loadStock(chartType, browserType, options);
+        } else {
+          _FactorySeqAction2.default.crLoadQueryDynamic(options).run();
+        }
         onClose();
       }
     }
@@ -159,7 +183,7 @@ var AskDialog = function (_Component) {
         },
         _react2.default.createElement(
           'div',
-          { style: _DialogStyles2.default.rowDiv },
+          { style: S.ROOT_DIV },
           _react2.default.createElement(
             'p',
             { style: S.DESCR },
@@ -184,15 +208,5 @@ var AskDialog = function (_Component) {
   return AskDialog;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? AskDialog.propTypes = {
-  isShow: _propTypes2.default.bool,
-  data: _propTypes2.default.shape({
-    options: _propTypes2.default.shape({
-      chartType: _propTypes2.default.string,
-      browserType: _propTypes2.default.string
-    })
-  }),
-  onClose: _propTypes2.default.func
-} : void 0;
 exports.default = AskDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\AskDialog.js.map

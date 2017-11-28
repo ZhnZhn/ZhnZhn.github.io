@@ -116,6 +116,17 @@ const ChartStore = Reflux.createStore({
    _fnLogLoadError(option);
  },
 
+ onLoadStockByQuery(){
+   this.onLoadStock()
+ },
+ onLoadStockByQueryCompleted(option, config){
+   this.onLoadStockCompleted(option, config)
+ },
+ onLoadStockByQueryFailed(option){
+   this.onLoadStockFailed(option)
+ },
+
+
  onShowChart(chartType, browserType){
    this.setMenuItemOpen(chartType, browserType);
 

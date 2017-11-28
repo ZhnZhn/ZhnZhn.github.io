@@ -87,31 +87,41 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     };
 
     _this._createValidationMessages = function () {
-      var _this$props$itemCapti = _this.props.itemCaption,
+      var _this$props = _this.props,
+          msgOnNotSelected = _this$props.msgOnNotSelected,
+          _this$props$itemCapti = _this$props.itemCaption,
           itemCaption = _this$props$itemCapti === undefined ? 'Stock' : _this$props$itemCapti;
 
       var msg = [];
+
       if (!_this.stock) {
-        msg.push(_this.props.msgOnNotSelected(itemCaption));
+        msg.push(msgOnNotSelected(itemCaption));
       }
 
-      var _this$datesFragment$g = _this.datesFragment.getValidation(),
-          isValid = _this$datesFragment$g.isValid,
-          datesMsg = _this$datesFragment$g.datesMsg;
+      if (_this.datesFragment) {
+        var _this$datesFragment$g = _this.datesFragment.getValidation(),
+            isValid = _this$datesFragment$g.isValid,
+            datesMsg = _this$datesFragment$g.datesMsg;
 
-      if (!isValid) {
-        msg = msg.concat(datesMsg);
+        if (!isValid) {
+          msg = msg.concat(datesMsg);
+        }
       }
+
       msg.isValid = msg.length === 0 ? true : false;
       return msg;
     };
 
     _this._createLoadOption = function () {
-      var _this$datesFragment$g2 = _this.datesFragment.getValues(),
-          fromDate = _this$datesFragment$g2.fromDate,
-          toDate = _this$datesFragment$g2.toDate;
+      var _ref = _this.datesFragment ? _this.datesFragment.getValues() : {},
+          fromDate = _ref.fromDate,
+          toDate = _ref.toDate;
 
-      return _this.props.loadFn(_this.props, { stock: _this.stock, fromDate: fromDate, toDate: toDate, transform: _this.transform });
+      return _this.props.loadFn(_this.props, {
+        stock: _this.stock,
+        fromDate: fromDate, toDate: toDate,
+        transform: _this.transform
+      });
     };
 
     _this._handleClose = function () {
@@ -120,8 +130,12 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 
     _this.stock = undefined;
     _this.transform = undefined;
-    _this.toolbarButtons = _this._createType2WithToolbar(props);
-    if (props.isTransform) {
+
+    var noDate = props.noDate,
+        isTransform = props.isTransform;
+
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: noDate });
+    if (isTransform) {
       _this.toolbarButtons.push({
         caption: 'T', onClick: _this._handleClickTransform
       });
@@ -163,6 +177,7 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           _props$optionNames = _props.optionNames,
           optionNames = _props$optionNames === undefined ? 'Stocks' : _props$optionNames,
           isWithInputStock = _props.isWithInputStock,
+          noDate = _props.noDate,
           initFromDate = _props.initFromDate,
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
@@ -207,7 +222,7 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
             onSelect: this._handleSelectTransform
           })
         ),
-        _react2.default.createElement(
+        !noDate && _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.DatesFragment, {

@@ -165,6 +165,15 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
     this.showAlertDialog(option);
     _fnLogLoadError(option);
   },
+  onLoadStockByQuery: function onLoadStockByQuery() {
+    this.onLoadStock();
+  },
+  onLoadStockByQueryCompleted: function onLoadStockByQueryCompleted(option, config) {
+    this.onLoadStockCompleted(option, config);
+  },
+  onLoadStockByQueryFailed: function onLoadStockByQueryFailed(option) {
+    this.onLoadStockFailed(option);
+  },
   onShowChart: function onShowChart(chartType, browserType) {
     this.setMenuItemOpen(chartType, browserType);
 

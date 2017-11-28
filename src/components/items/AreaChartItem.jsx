@@ -99,6 +99,14 @@ class AreaChartItem extends Component {
   setItemCaption = (str) => {
     this.setState({ itemCaption: str })
   }
+  setDataSource = (strDataSource) => {
+    this._dataSourceEl = (
+       <div style={styles.dataSource}>
+         {strDataSource}
+       </div>
+    )
+    this.forceUpdate()
+  }
 
   componentDidMount(){
     this.mainChart = this.chartComp.getChart()
@@ -161,7 +169,9 @@ class AreaChartItem extends Component {
 
   _handlerClickInfo = () => {
     this.setState({
-      isShowInfo: true, isShowChart: false, isShowLegend: false
+      isShowInfo: true,
+      isShowChart: false,
+      isShowLegend: false
     });
   }
 
@@ -247,11 +257,12 @@ class AreaChartItem extends Component {
   }
 
   _handleClickConfig = () => {
-    const { caption, onShowConfigDialog } = this.props
+    const { caption, onShowConfigDialog } = this.props;
     onShowConfigDialog({
       caption,
       chart: this.mainChart,
       setItemCaption: this.setItemCaption,
+      setDataSource: this.setDataSource,
       onToggleToolbar: this._handleToggleToolbar
     })
   }

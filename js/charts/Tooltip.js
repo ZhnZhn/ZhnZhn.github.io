@@ -51,8 +51,9 @@ var _crSpan = function _crSpan() {
       color = _ref$color === undefined ? C.VALUE_C : _ref$color;
 
   var _vStyle = 'style="color:' + color + ';' + FONT_STYLE + '"',
-      _t = t ? t + ': ' : '';
-  return '\n  <span ' + TITLE_STYLE + '>' + _t + '</span>\n  <span ' + _vStyle + '>' + v + '</span>';
+      _t = t ? t + ': ' : '',
+      _v = v !== null ? v : '';
+  return '\n  <span ' + TITLE_STYLE + '>' + _t + '</span>\n  <span ' + _vStyle + '>' + _v + '</span>';
 };
 var _crRow = function _crRow() {
   var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -116,11 +117,34 @@ var _fnSplitRatio = function _fnSplitRatio(_ref5) {
   return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Split Ratio', splitRatio, { color: '#ED5813' }) + '\n    ' + _crRow('Close', price) + '\n  </div>';
 };
 
-var _fnVolumeTooltip = function _fnVolumeTooltip(_ref6) {
+var _fnExValue = function _fnExValue(_ref6) {
   var date = _ref6.date,
       id = _ref6.id,
-      value = _ref6.value,
       point = _ref6.point;
+  var exValue = point.exValue;
+
+  return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', exValue) + '\n  </div>';
+};
+var _fnEPS = function _fnEPS(_ref7) {
+  var date = _ref7.date,
+      id = _ref7.id,
+      point = _ref7.point;
+  var announceTime = point.announceTime,
+      fiscalPeriod = point.fiscalPeriod,
+      fiscalEndDate = point.fiscalEndDate,
+      actualEPS = point.actualEPS,
+      estimatedEPS = point.estimatedEPS,
+      numberOfEstimates = point.numberOfEstimates,
+      EPSSurpriseDollar = point.EPSSurpriseDollar;
+
+  return _crHeader(date, id) + '\n  <div class="tp_body">\n    <div>\n      ' + _crSpan('', announceTime, { color: C.YEAR_C }) + '\n      ' + _crSpan('', fiscalPeriod) + '\n      ' + _crSpan('', fiscalEndDate) + '\n    </div>\n    <div style=' + FONT_STYLE + '>\n      ' + _crSpan('EPS', actualEPS) + '\n      ' + _crSpan('Est.', estimatedEPS) + '\n    </div>\n    <div style=' + FONT_STYLE + '>\n      ' + _crSpan('Supr.', EPSSurpriseDollar) + '\n      ' + _crSpan('NumbEst.', numberOfEstimates) + '\n    </div>\n  </div>';
+};
+
+var _fnVolumeTooltip = function _fnVolumeTooltip(_ref8) {
+  var date = _ref8.date,
+      id = _ref8.id,
+      value = _ref8.value,
+      point = _ref8.point;
 
   var _point$_open = point._open,
       _open = _point$_open === undefined ? 'NoData' : _point$_open,
@@ -134,11 +158,11 @@ var _fnVolumeTooltip = function _fnVolumeTooltip(_ref6) {
   return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Volume', value) + '\n    <div>\n      ' + _crSpan('Open', _open) + '\n      ' + _crSpan('Close', _close) + '\n    </div>\n    <div>\n      ' + _crSpan('Low', _low) + '\n      ' + _crSpan('High', _high) + '\n    </div>\n  </div>';
 };
 
-var _fnATHTooltip = function _fnATHTooltip(_ref7) {
-  var date = _ref7.date,
-      id = _ref7.id,
-      value = _ref7.value,
-      point = _ref7.point;
+var _fnATHTooltip = function _fnATHTooltip(_ref9) {
+  var date = _ref9.date,
+      id = _ref9.id,
+      value = _ref9.value,
+      point = _ref9.point;
   var color = point.color,
       y = point.y,
       close = point.close,
@@ -147,11 +171,11 @@ var _fnATHTooltip = function _fnATHTooltip(_ref7) {
   return _crHeader(date, id) + '\n    <div class="tp__body">\n      ' + _crRow('ATH', y + '%', { color: color }) + '\n      ' + _crRow('Prev Close', close) + '\n      ' + _crRow('Next Open', open) + '\n    </div>';
 };
 
-var _fnHighLowTooltip = function _fnHighLowTooltip(_ref8) {
-  var date = _ref8.date,
-      id = _ref8.id,
-      value = _ref8.value,
-      point = _ref8.point;
+var _fnHighLowTooltip = function _fnHighLowTooltip(_ref10) {
+  var date = _ref10.date,
+      id = _ref10.id,
+      value = _ref10.value,
+      point = _ref10.point;
   var open = point.open,
       dayHigh = point.dayHigh,
       dayLow = point.dayLow,
@@ -159,9 +183,9 @@ var _fnHighLowTooltip = function _fnHighLowTooltip(_ref8) {
 
   return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Open', open) + '\n    ' + _crRow('High', dayHigh) + '\n    ' + _crRow('Low', dayLow) + '\n    ' + _crRow('Close', close) + '\n  </div>';
 };
-var _fnCategoryRHLY = function _fnCategoryRHLY(_ref9) {
-  var id = _ref9.id,
-      point = _ref9.point;
+var _fnCategoryRHLY = function _fnCategoryRHLY(_ref11) {
+  var id = _ref11.id,
+      point = _ref11.point;
   var high = point.high,
       yHigh = point.yHigh,
       low = point.low,
@@ -171,18 +195,18 @@ var _fnCategoryRHLY = function _fnCategoryRHLY(_ref9) {
   return _crHeader(c, id) + '\n  <div class="tp__body">\n    <div>\n      ' + _crSpan('High', high) + '\n      ' + _crSpan('', yHigh, { color: C.YEAR_C }) + '\n    </div>\n    <div>\n      ' + _crSpan('&nbsp;Low', low) + '\n      ' + _crSpan('', yLow, { color: C.YEAR_C }) + '\n    </div>\n  </div>';
 };
 
-var _fnCategory = function _fnCategory(_ref10) {
-  var id = _ref10.id,
-      point = _ref10.point;
+var _fnCategory = function _fnCategory(_ref12) {
+  var id = _ref12.id,
+      point = _ref12.point;
   var y = point.y,
       c = point.c;
 
   return _crHeader(c, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', _numberFormat(y)) + '\n  </div>';
 };
 
-var _fnTreeMap = function _fnTreeMap(_ref11) {
-  var id = _ref11.id,
-      point = _ref11.point;
+var _fnTreeMap = function _fnTreeMap(_ref13) {
+  var id = _ref13.id,
+      point = _ref13.point;
 
   var title = point.title,
       label = point.label,
@@ -195,10 +219,10 @@ var _fnTreeMap = function _fnTreeMap(_ref11) {
   return _crHeader(title, id) + '\n  <div class="tp_body">\n    ' + _crRow('', label) + '\n    ' + _crRow('', _value, { color: C.YEAR_C }) + '\n  </div>\n  ';
 };
 
-var _fnPieTooltip = function _fnPieTooltip(_ref12) {
-  var id = _ref12.id,
-      value = _ref12.value,
-      point = _ref12.point;
+var _fnPieTooltip = function _fnPieTooltip(_ref14) {
+  var id = _ref14.id,
+      value = _ref14.value,
+      point = _ref14.point;
 
   return _crHeader(point.nameFull, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', value) + '\n  </div>';
 };
@@ -211,10 +235,10 @@ var _fnCalcWidthSparkType4 = function _fnCalcWidthSparkType4(value, total) {
   return { fullWidth: fullWidth, width: width };
 };
 
-var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref13) {
-  var id = _ref13.id,
-      value = _ref13.value,
-      point = _ref13.point;
+var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref15) {
+  var id = _ref15.id,
+      value = _ref15.value,
+      point = _ref15.point;
 
   var nameFull = point.nameFull,
       category = point.category,
@@ -232,9 +256,9 @@ var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref13) {
   });
 };
 
-var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref14) {
-  var id = _ref14.id,
-      point = _ref14.point;
+var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref16) {
+  var id = _ref16.id,
+      point = _ref16.point;
 
   var nameFull = point.nameFull,
       year = point.year,
@@ -370,6 +394,12 @@ var Tooltip = {
   }),
   fnSplitRatioPointFormatter: _fnBasePointFormatter({
     fnTemplate: _fnSplitRatio
+  }),
+  exValue: _fnBasePointFormatter({
+    fnTemplate: _fnExValue
+  }),
+  eps: _fnBasePointFormatter({
+    fnTemplate: _fnEPS
   }),
 
   fnVolumePointFormatter: _fnBasePointFormatter({

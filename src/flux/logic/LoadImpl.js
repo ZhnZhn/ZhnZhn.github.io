@@ -9,6 +9,7 @@ import StatNorwayAdapter from '../../adapters/stat-norway/StatNorwayAdapter'
 import InseeAdapter from '../../adapters/insee/InseeAdapter'
 import AlphaAdapter from '../../adapters/alpha/Adapter'
 import BarchartAdapter from '../../adapters/barchart/BarchartAdapter'
+import IexAdapter from '../../adapters/iex/IexAdapter'
 import QuandlAdapter from '../../adapters/QuandlAdapter'
 import UnComtradeAdapter from '../../adapters/uncomtrade/UnComtradeAdapter'
 import FaoStatAdapter from '../../adapters/faostat/FaoStatAdapter'
@@ -77,6 +78,12 @@ const Barchart = loadItem({
   adapter: BarchartAdapter
 })
 
+const Iex = loadItem({
+  fnFetch: fetchJson,
+  api: Api.Iex,
+  adapter: IexAdapter
+})
+
 const Insee = loadItem({
   fnFetch: fetchTxt,
   api: Api.Insee,
@@ -95,6 +102,8 @@ export default {
   AlphaSector,
 
   Barchart,
+
+  Iex,
 
   UnComtrade,
   FaoStat

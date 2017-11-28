@@ -1,55 +1,48 @@
 
 import queryString from 'query-string';
-import DateUtils from '../../utils/DateUtils'
 
 import { ModalDialog } from '../../constants/Type'
+import LocationQuery from './LocationQuery'
 
-const DF_TITLE = 'Item from search, more on Info Tab';
-const DF_SUFFIX_TITLE =', more on Info Tab'
-const BLANK = ''
+const C = {
+  SM_WIKI: 'SM_WIKI',
+  UN: 'UN',
+  Q: 'Q'
+};
+
+/*
 const QE = "QE";
 const QE_BLSI = "QE_BLSI"
 const Q = "Q"
-const YEAR_MINUS = 15
+*/
 
 const _trSearchToOptions = () => {
   const search = (window.location)
            ? window.location.search
            : null;
-  const obj = queryString.parse(search);
+  try {
+    const obj = queryString.parse(search);
 
-  if (obj && obj.bT===QE && obj.cT===QE_BLSI && obj.lI==Q){
-    const _title = (obj.t)
-             ? obj.t + DF_SUFFIX_TITLE
-             : DF_TITLE
-        , _name = (obj.t)
-            ? obj.t
-            : BLANK
-        , _fromDate = (obj.fD)
-             ? obj.fD
-             : DateUtils.getFromDate(YEAR_MINUS);
-    return {
-      browserType: obj.bT,
-      chartType: obj.cT,
-      fromDate: _fromDate,
-      toDate: DateUtils.getToDate(),
-      loadId: obj.lI,
-      key: obj.id,
-      value: obj.id,
-      title: _title,
-      name: _name
-    };
-  } else {
+    if (obj &&
+        obj.cT === C.SM_WIKI ||
+        obj.bT === C.UN
+    ) {
+      return LocationQuery
+        .toOptions(obj);
+    } else {
+      return undefined;
+    }
+  } catch(err) {
     return undefined;
   }
 }
 
 const LocationSearch = {
-  load : (componentActions) => {
+  load : (Action) => {
     const options = _trSearchToOptions();
 
     if (options) {
-      componentActions.showModalDialog(ModalDialog.ASK, { options })
+      Action.showModalDialog(ModalDialog.ASK, { options })
     }
   }
 }

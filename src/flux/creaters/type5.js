@@ -1,66 +1,70 @@
 
 const _crDefault = (props, options) => {
   const { isPremium, fnValue, loadId, dataSource, dfProps={} } = props
-      , { one, two, three, fromDate, toDate, hasSecondYAxis } = options
+      , {
+          one, two, three,
+          fromDate, toDate,
+          hasSecondYAxis, seriaType
+        } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
            : undefined
   return {
     ...dfProps,
     value : _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn: (three) ? three.value : 1,
-    loadId: loadId,
     title: `${one.caption}: ${two.caption}`,
     subtitle: three.caption,
-    dataSource: dataSource,
-    isPremium: isPremium,
-    hasSecondYAxis: hasSecondYAxis,
     oneCaption: one.caption,
     one: one.value,
     two: two.value,
-    three: three.value
+    three: three.value,
+    fromDate, toDate,
+    dataColumn: (three) ? three.value : 1,
+    loadId,
+    dataSource, isPremium,
+    hasSecondYAxis, seriaType
   }
 }
 
 const _crTreeItem = (props, options) => {
   const { isPremium, fnValue, dataColumn, loadId, dataSource } = props
-      , { one, two, three, fromDate, toDate, hasSecondYAxis } = options
+      , {
+          one, two, three,
+          fromDate, toDate,
+          hasSecondYAxis, seriaType
+        } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, three.value)
            : undefined
   return {
     value : _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn : dataColumn,
-    loadId : loadId,
     title : `${one.caption}:${two.caption}`,
     subtitle : three.caption,
-    dataSource : dataSource,
-    isPremium: isPremium,
-    hasSecondYAxis: hasSecondYAxis
+    fromDate, toDate,
+    dataColumn, loadId,
+    dataSource, isPremium,
+    hasSecondYAxis, seriaType
   };
 };
 
 const _crPlusTreeItem = (props, options) => {
   const { isPremium, fnValue, dataColumn, loadId, dataSource } = props
-      , { one, two, three, fromDate, toDate, hasSecondYAxis } = options
+      , {
+          one, two, three,
+          fromDate, toDate,
+          hasSecondYAxis, seriaType
+        } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value, three.value)
            : undefined
   return {
     value : _value,
-    fromDate: fromDate,
-    toDate: toDate,
-    dataColumn : dataColumn,
-    loadId : loadId,
     title : `${two.caption} : ${three.caption}`,
     subtitle : one.caption,
-    dataSource : dataSource,
-    isPremium : isPremium,
-    hasSecondYAxis: hasSecondYAxis
+    fromDate, toDate,
+    dataColumn, loadId,
+    dataSource, isPremium,
+    hasSecondYAxis, seriaType
   }
 };
 

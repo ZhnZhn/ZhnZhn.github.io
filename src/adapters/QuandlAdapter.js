@@ -20,6 +20,7 @@ import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
 import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
 import {fCreateTreeMapConfig} from './QuandlToTreeMap';
 import ToYearly from './ToYearly'
+import ToScatter from './ToScatter'
 
 const C = {
   OPEN : "Open",
@@ -480,12 +481,18 @@ const _fCreateAreaConfig = function(json, option){
   return fnQuandlFlow(config, json, option);
 }
 
-const fCrYearlyConfig = (json, option) => {
+const _getData = (json) => {
   const { dataset={} } = json
       , { data=[] } = dataset;
-   return {
-     config: ToYearly.toConfig(data, option)
-   };
+  return data;
+}
+const _fToConfig = builder => (json, option) => {
+  const data = _getData(json);
+  return { config: builder.toConfig(data, option) };
+}
+const _fToSeria = builder => (json, option, chart) => {
+  const data = _getData(json);
+  return builder.toSeria(data, option, chart);
 }
 
 const _rToConfig = {
@@ -496,38 +503,53 @@ const _rToConfig = {
   [ChartType.STACKED_COLUMN] : fCreateStackedColumnConfig,
   [ChartType.STACKED_COLUMN_PERCENT] : fCreateStackedColumnConfig,
   [ChartType.TREE_MAP] : fCreateTreeMapConfig,
-  [ChartType.YEARLY]: fCrYearlyConfig
+  [ChartType.YEARLY]: _fToConfig(ToYearly),
+  [ChartType.SCATTER]: _fToConfig(ToScatter),
+  [ChartType.SCATTER_UP]: _fToConfig(ToScatter),
+  [ChartType.SCATTER_DOWN]: _fToConfig(ToScatter)
+}
 
+const _crSeriaData = (data, yIndex) => {
+  return data
+    .map(p => [ AdapterFn.ymdToUTC(p[0]), p[yIndex] ])
+    .sort(AdapterFn.compareByDate);
+};
+
+const _toSeria = (json, option) => {
+  const { value:chartId, parentId } = option
+      , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
+      , data = _crSeriaData(_getData(json), yPointIndex)
+      , seria = Object.assign(
+           ChartConfig.fSeries(), {
+             zhSeriaId: parentId + '_' + chartId,
+             zhValueText: chartId.substring(0,12),
+             data: data,
+             minY: QuandlFn2.findMinY(data)
+           }
+         );
+
+  return seria;
+}
+
+const _rToSeria = {
+  DF: _toSeria,
+  [ChartType.SCATTER]: _fToSeria(ToScatter),
+  [ChartType.SCATTER_UP]: _fToSeria(ToScatter),
+  [ChartType.SCATTER_DOWN]: _fToSeria(ToScatter)
 }
 
 const QuandlAdapter = {
   toConfig(json, option){
      const { seriaType=ChartType.AREA } = option
-         , _config = _rToConfig[seriaType](json, option);
-     return _config;
+         , config = _rToConfig[seriaType](json, option);
+     return config;
   },
 
-  toSeries(json, option){
-    const { value:chartId, parentId } = option
-        , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
-        , { dataset={} } = json;
-    let { data=[] } = dataset;
-    data = data.map(point => {
-              const arrDate = point[0].split('-');
-              return [Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]), point[yPointIndex]];
-           })
-           .sort(AdapterFn.compareByDate);
-
-    const configSeries = ChartConfig.fSeries();
-
-    Object.assign(configSeries, {
-      zhSeriaId: parentId + '_' + chartId,
-      zhValueText: chartId.substring(0,12),
-      data: data,
-      minY: QuandlFn2.findMinY(data)
-    })
-
-    return configSeries;
+  toSeries(json, option, chart){
+    const { seriaType } = option
+       , _toSeria = _rToSeria[seriaType] || _rToSeria.DF
+       , seria = _toSeria(json, option, chart);
+    return seria;
   }
 
 }

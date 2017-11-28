@@ -200,11 +200,16 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
     var chart = props.chart,
         series = props.series,
         label = props.label,
-        hasSecondYAxis = props.hasSecondYAxis;
-
-    var options = _initOptionsZhSeries(chart);
-    var color = _addSeries({ chart: chart, series: series, label: label, hasSecondYAxis: hasSecondYAxis });
-    var textEl = _renderSeriesLabel({ chart: chart, options: options, series: series, label: label, color: color });
+        color = props.color,
+        hasSecondYAxis = props.hasSecondYAxis,
+        options = _initOptionsZhSeries(chart),
+        _color = _addSeries({
+      chart: chart, series: series, label: label, hasSecondYAxis: hasSecondYAxis
+    }),
+        textEl = _renderSeriesLabel({
+      chart: chart, options: options, series: series, label: label,
+      color: color || _color
+    });
 
     options.zhSeries.count += 1;
     options.zhSeries.titleEls.push(textEl);

@@ -237,6 +237,15 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     _this3.setState({ itemCaption: str });
   };
 
+  this.setDataSource = function (strDataSource) {
+    _this3._dataSourceEl = _react2.default.createElement(
+      'div',
+      { style: styles.dataSource },
+      strDataSource
+    );
+    _this3.forceUpdate();
+  };
+
   this.getMainChart = function () {
     return _this3.mainChart;
   };
@@ -299,7 +308,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
 
   this._handlerClickInfo = function () {
     _this3.setState({
-      isShowInfo: true, isShowChart: false, isShowLegend: false
+      isShowInfo: true,
+      isShowChart: false,
+      isShowLegend: false
     });
   };
 
@@ -402,6 +413,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       caption: caption,
       chart: _this3.mainChart,
       setItemCaption: _this3.setItemCaption,
+      setDataSource: _this3.setDataSource,
       onToggleToolbar: _this3._handleToggleToolbar
     });
   };
@@ -522,7 +534,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     _this3.mainChart.setSize(undefined, height, true);
   };
 }, _temp);
-process.env.NODE_ENV !== "production" ? AreaChartItem.propTypes = {
+AreaChartItem.propTypes = process.env.NODE_ENV !== "production" ? {
   caption: _propTypes2.default.string,
   chartType: _propTypes2.default.string,
   config: _propTypes2.default.shape({
@@ -537,6 +549,6 @@ process.env.NODE_ENV !== "production" ? AreaChartItem.propTypes = {
   onCloseItem: _propTypes2.default.func,
   isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
   crValueMoving: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = AreaChartItem;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\AreaChartItem.js.map

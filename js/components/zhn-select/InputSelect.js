@@ -366,7 +366,7 @@ var InputSelect = (_temp = _class = function (_Component) {
       comp.classList.add(CL.ROW_ACTIVE);
     }
     if (_this3.indexNode) {
-      _this3.indexNode.innerHTML = _this3.indexActiveOption + 1;
+      _this3.indexNode.textContent = _this3.indexActiveOption + 1;
     }
   };
 

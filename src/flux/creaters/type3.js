@@ -3,7 +3,8 @@ const createLoadOptions = (props={}, options={}) => {
   const {
           columnName, dataColumn, seriaColumnNames, loadId,
           fnValue, fnItemCaption,
-          linkFn, dataSource
+          linkFn, dataSource,
+          dfProps
         } = props
       , { fromDate, toDate, stock, transform } = options
       , _value = (typeof fnValue === 'function')
@@ -31,7 +32,8 @@ const createLoadOptions = (props={}, options={}) => {
     itemCaption : _itemCaption,
     loadId : loadId,
     linkFn : linkFn,
-    seriaColumnNames, dataSource
+    seriaColumnNames, dataSource,
+    ...dfProps
   }
 }
 

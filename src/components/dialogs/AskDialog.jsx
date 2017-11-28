@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import Button from './Button'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
-import STYLE from '../styles/DialogStyles';
 
+import FactorySeqAction from '../../flux/actions/FactorySeqAction'
 import BrowserActions from '../../flux/actions/BrowserActions';
 import ChartActions from '../../flux/actions/ChartActions';
 
@@ -18,6 +18,10 @@ const S = {
     width: '400px',
     height: '205px',
     margin: '70px auto'
+  },
+  ROOT_DIV: {
+    display: 'block',
+    margin: '5px'
   },
   NAME : {
     color: '#a487d4',
@@ -40,7 +44,7 @@ const S = {
 }
 
 class AskDialog extends Component {
-
+   /*
    static propTypes = {
      isShow: PropTypes.bool,
      data: PropTypes.shape({
@@ -51,6 +55,7 @@ class AskDialog extends Component {
      }),
      onClose: PropTypes.func
    }
+   */
 
   constructor(props){
     super();
@@ -76,12 +81,19 @@ class AskDialog extends Component {
         , { options={} } = data;
 
     if (this.captchaComp.isOk()){
-      BrowserActions.showBrowser(options.browserType)
-      ChartActions.loadStock(
-        options.chartType,
-        options.browserType,
-        options
-      )
+      const {
+              isStaticBrowser,
+              browserType, chartType
+            } = options;
+
+      if (isStaticBrowser) {
+        BrowserActions.showBrowser(browserType)
+        ChartActions.loadStock(chartType, browserType, options)
+      } else {
+        FactorySeqAction
+          .crLoadQueryDynamic(options)
+          .run()
+      }
       onClose()
     }
   }
@@ -107,7 +119,7 @@ class AskDialog extends Component {
         withoutClose={true}
         onClose={onClose}
       >
-         <div style={STYLE.rowDiv}>
+         <div style={S.ROOT_DIV}>
             <p style={S.DESCR}>
                {MSG_PREFIX}
                <span style={S.NAME}>{name}</span>

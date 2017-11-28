@@ -71,6 +71,17 @@ class DialogContainer extends Component {
      this.unsubscribe()
    }
 
+
+   componentDidCatch(error, info){
+     /*
+     console.log('error:')
+     console.log(error)
+     console.log('info:')
+     console.log(info)
+     */
+   }
+   
+
    _onStore = (actionType, option) => {
       const { showAction } = this.props;
       if (actionType === showAction){
