@@ -34,60 +34,9 @@ var S = {
     color: 'black'
   }
 };
-var _model = [{
-  id: 'STOCK_MARKETS',
-  cn: 'item__browser',
-  title: 'Stock Markets'
-}, {
-  id: 'UN_COMTRADE',
-  cn: 'item__eurostat',
-  title: 'UN Comtrade'
-}, {
-  id: 'FAOSTAT',
-  cn: 'item__eurostat',
-  title: 'FAOSTAT'
-}, {
-  id: 'EUROSTAT',
-  cn: 'item__eurostat',
-  title: 'Eurostat'
-}, {
-  id: 'FRANCE_STATISTICS',
-  cn: 'item__eurostat',
-  title: 'Insee: France Statistics'
-}, {
-  id: 'NORWAY_STATISTICS',
-  cn: 'item__eurostat',
-  title: 'Statistics Norway',
-  isNew: true
-}, {
-  id: 'QUANDL',
-  isQuandl: true,
-  title: 'Quandl Economic'
-}, {
-  id: 'US_STOCKS',
-  title: 'US Stocks by Sectors'
-}, {
-  id: 'NYSE_STOCKS',
-  title: 'US NYSE by Sectors'
-}, {
-  id: 'NASDAQ_STOCKS',
-  title: 'US NASDAQ by Sectors'
-}, {
-  id: 'LONDON_STOCKS',
-  title: 'LSE by Sectors'
-}, {
-  id: 'PREMIUM_SAMPLE',
-  title: 'Quandl Premium Sample'
-}, {
-  id: 'WATCH_LIST',
-  cn: 'item__watch',
-  title: 'Watch'
-}];
 
 var _renderItems = function _renderItems(_ref) {
   var model = _ref.model,
-      browserConfig = _ref.browserConfig,
-      BROWSER = _ref.BROWSER,
       onClickDynamic = _ref.onClickDynamic,
       onClickQuandl = _ref.onClickQuandl;
 
@@ -98,7 +47,7 @@ var _renderItems = function _renderItems(_ref) {
         isQuandl = item.isQuandl,
         isNew = item.isNew,
         _className = cn ? CL.ROW + ' ' + cn : CL.ITEM_DF,
-        _onClick = isQuandl ? onClickQuandl : onClickDynamic.bind(null, browserConfig[BROWSER[id]]),
+        _onClick = isQuandl ? onClickQuandl : onClickDynamic.bind(null, id),
         _el = isNew ? _react2.default.createElement(
       'span',
       { style: S.NEW },
@@ -120,8 +69,7 @@ var _renderItems = function _renderItems(_ref) {
 var PanelBrowsers = function PanelBrowsers(_ref2) {
   var className = _ref2.className,
       isShow = _ref2.isShow,
-      BROWSER = _ref2.BROWSER,
-      browserConfig = _ref2.browserConfig,
+      model = _ref2.model,
       onClose = _ref2.onClose,
       onClickQuandl = _ref2.onClickQuandl,
       onClickDynamic = _ref2.onClickDynamic,
@@ -139,10 +87,7 @@ var PanelBrowsers = function PanelBrowsers(_ref2) {
         style: S.SHOW_HIDE,
         isShow: isShow
       },
-      _renderItems({
-        model: _model, browserConfig: browserConfig, BROWSER: BROWSER,
-        onClickDynamic: onClickDynamic, onClickQuandl: onClickQuandl
-      }),
+      _renderItems({ model: model, onClickDynamic: onClickDynamic, onClickQuandl: onClickQuandl }),
       _react2.default.createElement(
         'div',
         {

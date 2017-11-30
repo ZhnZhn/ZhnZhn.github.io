@@ -4,18 +4,12 @@ import DateUtils from '../../utils/DateUtils'
 const HM_S = {
   browserType: 'bT',
   chartType: 'cT',
-  loadId: 'lI',
   value: 'v',
 
   columnName: 'cN',
-  dataSource: 'dS',
   fromDate: 'fD',
-  //iFD: 'iFD',
   toDate: 'tD',
-  key: 'k',
-  title: 't',
-
-  isStaticBrowser: 'iSB'
+  key: 'k'
 };
 
 const _keyToValue = (hm) => {

@@ -64,7 +64,7 @@ const WithAreaChartFn = {
           ? delta + _offset + Math.round(_maxLabelLenght)
           : delta
       }
-    })
+    })    
     return delta;
   }
 

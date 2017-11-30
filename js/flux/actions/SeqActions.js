@@ -72,6 +72,8 @@ var SeqActions = function () {
         } else {
           this._clear();
         }
+      } else if (type && type === step.typeFail) {
+        this._clear();
       }
     }
   }]);

@@ -5,9 +5,7 @@ import Button from './Button'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import MathCaptcha from '../zhn-moleculs/MathCaptcha';
 
-import FactorySeqAction from '../../flux/actions/FactorySeqAction'
-import BrowserActions from '../../flux/actions/BrowserActions';
-import ChartActions from '../../flux/actions/ChartActions';
+import FactoryAction from '../../flux/actions/FactoryAction'
 
 const MSG_PREFIX = "Would you like load item";
 const MSG_SUFFIX = "from url?";
@@ -79,21 +77,10 @@ class AskDialog extends Component {
   _handleLoad(){
     const { data={}, onClose } = this.props
         , { options={} } = data;
-
     if (this.captchaComp.isOk()){
-      const {
-              isStaticBrowser,
-              browserType, chartType
-            } = options;
-
-      if (isStaticBrowser) {
-        BrowserActions.showBrowser(browserType)
-        ChartActions.loadStock(chartType, browserType, options)
-      } else {
-        FactorySeqAction
-          .crLoadQueryDynamic(options)
-          .run()
-      }
+       FactoryAction
+         .crLoadQuery(options)
+         .run()
       onClose()
     }
   }
@@ -109,7 +96,6 @@ class AskDialog extends Component {
     const { isShow, data={}, onClose } = this.props
         , { options={} } = data
         , { name='' } = options;
-
     return (
       <ModalDialog
         style={S.MODAL}

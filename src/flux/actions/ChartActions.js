@@ -5,6 +5,10 @@ import ChartStore from '../stores/ChartStore';
 import LoadConfig from '../logic/LoadConfig';
 import LogicUtils from '../logic/LogicUtils';
 
+const C = {
+  DESR_LOADER: "Loader for this item hasn't found."
+};
+
 const META = '_Meta';
 const _fnNoop = () => {};
 
@@ -139,18 +143,17 @@ ChartActions[A.LOAD_STOCK].listen(function(chartType, browserType, option){
 })
 
 ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
-  const {
-          chartType, browserType,
-          loadId
-         } = option
-      , impl = LoadConfig[loadId];
+  const { chartType, browserType } = option
+      , { dialogProps } = ChartStore
+            .getSourceConfig(browserType, chartType) || {};
+  Object.assign(option, dialogProps)
+  const impl = LoadConfig[option.loadId];
   if (impl) {
-    const config = ChartStore.getSourceConfig(browserType, chartType);
-    Object.assign(option, config.dialogProps )
-    impl.loadItem(option, this.completed, _fnNoop, this.failed);
-   } else {
-     this.failed()
-   }
+    impl.loadItem(option, this.completed, _fnNoop, this.failed)
+  } else {
+    option.alertDescr = C.DESCR_LOADER
+    this.failed(option)
+  }
 })
 
 export default ChartActions

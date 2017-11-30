@@ -7,14 +7,9 @@ import LocationQuery from './LocationQuery'
 const C = {
   SM_WIKI: 'SM_WIKI',
   UN: 'UN',
+  QE: 'QE',
   Q: 'Q'
 };
-
-/*
-const QE = "QE";
-const QE_BLSI = "QE_BLSI"
-const Q = "Q"
-*/
 
 const _trSearchToOptions = () => {
   const search = (window.location)
@@ -25,7 +20,8 @@ const _trSearchToOptions = () => {
 
     if (obj &&
         obj.cT === C.SM_WIKI ||
-        obj.bT === C.UN
+        obj.bT === C.UN ||
+        obj.bT === C.QE
     ) {
       return LocationQuery
         .toOptions(obj);

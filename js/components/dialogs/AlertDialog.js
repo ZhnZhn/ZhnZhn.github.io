@@ -44,7 +44,7 @@ var CL = {
   ELL: 'ellipsis'
 };
 
-var Styles = {
+var S = {
   CAPTION: {
     display: 'inline-block',
     width: '400px',
@@ -95,10 +95,12 @@ var AlertDialog = (_temp = _class = function (_Component) {
           isShow = _props.isShow,
           data = _props.data,
           onClose = _props.onClose,
-          alertCaption = data.alertCaption,
+          _data$alertCaption = data.alertCaption,
+          alertCaption = _data$alertCaption === undefined ? 'Item' : _data$alertCaption,
           _data$alertItemId = data.alertItemId,
           alertItemId = _data$alertItemId === undefined ? '' : _data$alertItemId,
-          alertDescr = data.alertDescr;
+          alertDescr = data.alertDescr,
+          _caption = alertCaption + ': ';
 
       return _react2.default.createElement(
         _ModalDialog2.default,
@@ -112,13 +114,13 @@ var AlertDialog = (_temp = _class = function (_Component) {
           { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'span',
-            { style: Styles.CAPTION },
-            alertCaption + ': ',
+            { style: S.CAPTION },
+            _caption,
             _react2.default.createElement(
               'span',
               {
                 className: CL.ELL,
-                style: Styles.ITEM_ID,
+                style: S.ITEM_ID,
                 title: alertItemId
               },
               alertItemId
@@ -130,7 +132,7 @@ var AlertDialog = (_temp = _class = function (_Component) {
           { style: _DialogStyles2.default.rowDiv },
           _react2.default.createElement(
             'p',
-            { style: Styles.DESCR },
+            { style: S.DESCR },
             alertDescr
           )
         )
@@ -141,7 +143,7 @@ var AlertDialog = (_temp = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   data: {}
 }, _temp);
-process.env.NODE_ENV !== "production" ? AlertDialog.propTypes = {
+AlertDialog.propTypes = process.env.NODE_ENV !== "production" ? {
   isShow: _propTypes2.default.bool,
   data: _propTypes2.default.shape({
     alertCaption: _propTypes2.default.string,
@@ -149,6 +151,6 @@ process.env.NODE_ENV !== "production" ? AlertDialog.propTypes = {
     alertDescr: _propTypes2.default.string
   }),
   onClose: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = AlertDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\AlertDialog.js.map

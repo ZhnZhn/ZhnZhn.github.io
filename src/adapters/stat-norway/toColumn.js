@@ -118,8 +118,7 @@ const toColumn = {
            .addCaption(C.TITLE, _subtitle)
            .addTooltip(Tooltip.category)
            .add({
-             chart: { spacingTop: 25 },
-             yAxis: { gridZIndex: 100 },
+             chart: { spacingTop: 25 },             
              ...crChartOption(_ds, Tid, option)
             })
            .toConfig()

@@ -36,17 +36,9 @@ var _MathCaptcha = require('../zhn-moleculs/MathCaptcha');
 
 var _MathCaptcha2 = _interopRequireDefault(_MathCaptcha);
 
-var _FactorySeqAction = require('../../flux/actions/FactorySeqAction');
+var _FactoryAction = require('../../flux/actions/FactoryAction');
 
-var _FactorySeqAction2 = _interopRequireDefault(_FactorySeqAction);
-
-var _BrowserActions = require('../../flux/actions/BrowserActions');
-
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
-
-var _ChartActions = require('../../flux/actions/ChartActions');
-
-var _ChartActions2 = _interopRequireDefault(_ChartActions);
+var _FactoryAction2 = _interopRequireDefault(_FactoryAction);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -131,19 +123,8 @@ var AskDialog = function (_Component) {
           _data$options = data.options,
           options = _data$options === undefined ? {} : _data$options;
 
-
       if (this.captchaComp.isOk()) {
-        var isStaticBrowser = options.isStaticBrowser,
-            browserType = options.browserType,
-            chartType = options.chartType;
-
-
-        if (isStaticBrowser) {
-          _BrowserActions2.default.showBrowser(browserType);
-          _ChartActions2.default.loadStock(chartType, browserType, options);
-        } else {
-          _FactorySeqAction2.default.crLoadQueryDynamic(options).run();
-        }
+        _FactoryAction2.default.crLoadQuery(options).run();
         onClose();
       }
     }
@@ -169,7 +150,6 @@ var AskDialog = function (_Component) {
           options = _data$options2 === undefined ? {} : _data$options2,
           _options$name = options.name,
           name = _options$name === undefined ? '' : _options$name;
-
 
       return _react2.default.createElement(
         _ModalDialog2.default,

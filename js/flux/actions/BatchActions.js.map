@@ -1,0 +1,16 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\BatchActions.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\BatchActions.js",
+ "sourceRoot": "",
+ "names": [
+  "BatchActions",
+  "arr",
+  "forEach",
+  "action",
+  "item",
+  "args"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;IACMA,Y;AACJ,wBAAYC,GAAZ,EAAiB;AAAA;;AACf,SAAKA,GAAL,GAAWA,GAAX;AACD;;;;0BAEI;AACH,WAAKA,GAAL,CAASC,OAAT,CAAiB,gBAAQ;AAAA,YACfC,MADe,GACEC,IADF,CACfD,MADe;AAAA,YACPE,IADO,GACED,IADF,CACPC,IADO;;AAEvBF,iEAAUE,IAAV;AACD,OAHD;AAID;;;;;kBAGYL,Y"
+}

@@ -1,5 +1,7 @@
 import Reflux from 'reflux';
 
+import BrowserConfig from '../../constants/BrowserConfig'
+
 import RouterModalDialog from '../../components/dialogs/RouterModalDialog'
 import RouterDialog from '../logic/RouterDialog'
 
@@ -11,6 +13,7 @@ export const BrowserActionTypes = {
   UPDATE_BROWSER_MENU: 'updateBrowserMenu',
 
   SHOW_BROWSER_DYNAMIC: 'showBrowserDynamic',
+
   INIT_BROWSER_DYNAMIC: 'initBrowserDynamic',
   LOAD_BROWSER_DYNAMIC: 'loadBrowserDynamic',
   LOAD_BROWSER_DYNAMIC_COMPLETED: 'loadBrowserDynamicCompleted',
@@ -23,9 +26,13 @@ const BrowserActions = Reflux.createActions({
   [A.SHOW_BROWSER] : {},
   [A.UPDATE_BROWSER_MENU] : {},
 
-  [A.SHOW_BROWSER_DYNAMIC] : {},
+  [A.SHOW_BROWSER_DYNAMIC]: {
+    children: ['completed', 'failed']
+  },
   [A.INIT_BROWSER_DYNAMIC] : {},
-  [A.LOAD_BROWSER_DYNAMIC] : { children : ['completed', 'failed']},
+  [A.LOAD_BROWSER_DYNAMIC] : {
+    children : ['completed', 'failed']
+  },
 
   [A.UPDATE_WATCH_BROWSER] : {}
 });
@@ -35,10 +42,22 @@ const _fnFetchSourceMenu = function({ json, option, onCompleted }){
   onCompleted({ json, browserType });
 }
 
-BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function(option){
-  const { browserType } = option
-  RouterModalDialog.loadDialogs(browserType)
-  RouterDialog.loadDialogs(browserType)
+BrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){
+  const _option = typeof option === 'string'
+           ? { browserType: option }
+           : option
+      , { browserType:bT } = _option
+      , config = BrowserConfig[bT];
+  if (bT && config) {
+    RouterModalDialog.loadDialogs(bT)
+    RouterDialog.loadDialogs(bT)
+    this.completed(config)
+  } else {
+    this.failed(Object.assign(_option, {
+      alertDescr: "Browser hasn't found.",
+      alertItemId: "Browser"
+    }))
+  }
 })
 
 BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function(option){

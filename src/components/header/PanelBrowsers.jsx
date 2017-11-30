@@ -19,62 +19,8 @@ const S = {
     color: 'black'
   }
 };
-const _model = [
-  {
-    id: 'STOCK_MARKETS',
-    cn: 'item__browser',
-    title: 'Stock Markets'
-  },{
-    id: 'UN_COMTRADE',
-    cn: 'item__eurostat',
-    title: 'UN Comtrade'
-  },{
-    id: 'FAOSTAT',
-    cn: 'item__eurostat',
-    title: 'FAOSTAT',
-  },{
-    id: 'EUROSTAT',
-    cn: 'item__eurostat',
-    title: 'Eurostat'
-  },{
-    id: 'FRANCE_STATISTICS',
-    cn: 'item__eurostat',
-    title: 'Insee: France Statistics'
-  },{
-    id: 'NORWAY_STATISTICS',
-    cn: 'item__eurostat',
-    title: 'Statistics Norway',
-    isNew: true
-  },{
-    id: 'QUANDL',
-    isQuandl: true,
-    title: 'Quandl Economic'
-  },{
-    id: 'US_STOCKS',
-    title: 'US Stocks by Sectors'
-  },{
-    id: 'NYSE_STOCKS',
-    title: 'US NYSE by Sectors'
-  },{
-    id: 'NASDAQ_STOCKS',
-    title: 'US NASDAQ by Sectors'
-  },{
-    id: 'LONDON_STOCKS',
-    title: 'LSE by Sectors'
-  },{
-    id: 'PREMIUM_SAMPLE',
-    title: 'Quandl Premium Sample'
-  },{
-    id: 'WATCH_LIST',
-    cn: 'item__watch',
-    title: 'Watch'
-  }
-];
 
-const _renderItems = ({
-  model, browserConfig, BROWSER,
-  onClickDynamic, onClickQuandl
-}) => {
+const _renderItems = ({ model, onClickDynamic, onClickQuandl }) => {
   return model.map(item => {
     const { cn, id, title, isQuandl, isNew } = item
         , _className = cn
@@ -82,7 +28,7 @@ const _renderItems = ({
              : CL.ITEM_DF
         , _onClick = isQuandl
              ? onClickQuandl
-             : onClickDynamic.bind(null, browserConfig[BROWSER[id]])
+             : onClickDynamic.bind(null, id)
         , _el = isNew
             ? (<span style={S.NEW}>New</span>)
             : null ;
@@ -99,7 +45,7 @@ const _renderItems = ({
 }
 
 const PanelBrowsers = ({
-  className, isShow, BROWSER, browserConfig,
+  className, isShow, model,
   onClose, onClickQuandl, onClickDynamic,
   onClickAbout
 }) =>
@@ -112,12 +58,7 @@ const PanelBrowsers = ({
          style={S.SHOW_HIDE}
          isShow={isShow}
       >
-          {
-            _renderItems({
-               model: _model, browserConfig, BROWSER,
-               onClickDynamic, onClickQuandl
-            })
-          }
+         { _renderItems({ model, onClickDynamic, onClickQuandl }) }
           <div
             className={CL.ITEM_ABOUT}
             onClick={onClickAbout}

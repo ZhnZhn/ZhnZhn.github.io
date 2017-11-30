@@ -152,8 +152,7 @@ var toColumn = {
       return item.c;
     }),
         config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType).addCaption(C.TITLE, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
-      chart: { spacingTop: 25 },
-      yAxis: { gridZIndex: 100 }
+      chart: { spacingTop: 25 }
     }, crChartOption(_ds, Tid, option))).toConfig();
 
     if (isCluster) {

@@ -1,0 +1,31 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\FactoryAction.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\FactoryAction.js",
+ "sourceRoot": "",
+ "names": [
+  "SUBTITLE",
+  "_crLoadQueryStatic",
+  "browserType",
+  "option",
+  "chartType",
+  "action",
+  "showBrowser",
+  "args",
+  "loadStock",
+  "_crLoadQueryDynamic",
+  "showBrowserDynamic",
+  "type",
+  "typeFail",
+  "loadStockByQuery",
+  "FactoryAction",
+  "crLoadQuery",
+  "getSourceConfig",
+  "dialogProps",
+  "subtitle",
+  "Object",
+  "assign"
+ ],
+ "mappings": ";;;;;;AACA;;;;AAEA;;;;AACA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,WAAW,uBAAjB;;AAEA,IAAMC,qBAAqB,SAArBA,kBAAqB,SAAU;AAAA,MAC3BC,WAD2B,GACAC,MADA,CAC3BD,WAD2B;AAAA,MACdE,SADc,GACAD,MADA,CACdC,SADc;;AAEnC,SAAO,2BAAiB,CACpB;AACEC,YAAQ,yBAAeC,WADzB;AAEEC,UAAM,CAAEL,WAAF;AAFR,GADoB,EAIlB;AACAG,YAAQ,uBAAaG,SADrB;AAEAD,UAAM,CAAEH,SAAF,EAAaF,WAAb,EAA0BC,MAA1B;AAFN,GAJkB,CAAjB,CAAP;AASD,CAXD;;AAaA,IAAMM,sBAAsB,SAAtBA,mBAAsB,SAAU;AAAA,MAC5BP,WAD4B,GACZC,MADY,CAC5BD,WAD4B;;AAEpC,SAAO,yBAAe,CACpB;AACEG,YAAQ,yBAAeK,kBADzB;AAEEC,UAAM,6BAFR;AAGEC,cAAU,0BAHZ;AAIEL,UAAM,CAAEL,WAAF;AAJR,GADoB,EAMlB;AACAG,YAAQ,uBAAaQ,gBADrB;AAEAF,UAAM,oBAFN;AAGAJ,UAAM,CAAEJ,MAAF;AAHN,GANkB,CAAf,CAAP;AAYD,CAdD;;AAgBA,IAAMW,gBAAgB;AACnBC,eAAa,qBAACZ,MAAD,EAAY;AAAA,QACfD,WADe,GACYC,MADZ,CACfD,WADe;AAAA,QACFE,SADE,GACYD,MADZ,CACFC,SADE;AAAA,eAEC,qBACbY,eADa,CACGd,WADH,EACgBE,SADhB,KAC8B,EAH/B;AAAA,QAEfa,WAFe,QAEfA,WAFe;;AAIvBd,WAAOe,QAAP,GAAkBlB,QAAlB;AACA,QAAIiB,WAAJ,EAAiB;AACfE,aAAOC,MAAP,CAAcjB,MAAd,EAAsBc,WAAtB;AACA,aAAOhB,mBAAmBE,MAAnB,CAAP;AACD,KAHD,MAGO;AACL,aAAOM,oBAAoBN,MAApB,CAAP;AACD;AACF;AAZkB,CAAtB;;kBAeeW,a"
+}

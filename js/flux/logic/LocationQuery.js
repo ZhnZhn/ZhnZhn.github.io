@@ -13,18 +13,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var HM_S = {
   browserType: 'bT',
   chartType: 'cT',
-  loadId: 'lI',
   value: 'v',
 
   columnName: 'cN',
-  dataSource: 'dS',
   fromDate: 'fD',
-  //iFD: 'iFD',
   toDate: 'tD',
-  key: 'k',
-  title: 't',
-
-  isStaticBrowser: 'iSB'
+  key: 'k'
 };
 
 var _keyToValue = function _keyToValue(hm) {

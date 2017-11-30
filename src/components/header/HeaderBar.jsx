@@ -10,8 +10,8 @@ import LimitRemainingLabel from './LimitRemainingLabel'
 import PanelBrowsers from './PanelBrowsers'
 import ComponentActions, { ComponentActionTypes} from '../../flux/actions/ComponentActions'
 import BrowserActions from '../../flux/actions/BrowserActions'
-import BrowserConfig from '../../constants/BrowserConfig'
-import { BrowserType, ModalDialog } from '../../constants/Type'
+
+import { BrowserType as BT, ModalDialog } from '../../constants/Type'
 
 const LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0"
     , CAPTION = "ERC v0.14.0";
@@ -37,6 +37,59 @@ const styles = {
   }
 }
 
+const MODEL = [
+  {
+    id: BT.STOCK_MARKETS,
+    cn: 'item__browser',
+    title: 'Stock Markets'
+  },{
+    id: BT.UN_COMTRADE,
+    cn: 'item__eurostat',
+    title: 'UN Comtrade'
+  },{
+    id: BT.FAOSTAT,
+    cn: 'item__eurostat',
+    title: 'FAOSTAT',
+  },{
+    id: BT.EUROSTAT,
+    cn: 'item__eurostat',
+    title: 'Eurostat'
+  },{
+    id: BT.FRANCE_STATISTICS,
+    cn: 'item__eurostat',
+    title: 'Insee: France Statistics'
+  },{
+    id: BT.NORWAY_STATISTICS,
+    cn: 'item__eurostat',
+    title: 'Statistics Norway',
+    isNew: true
+  },{
+    id: BT.QUANDL,
+    isQuandl: true,
+    title: 'Quandl Economic'
+  },{
+    id: BT.US_STOCKS,
+    title: 'US Stocks by Sectors'
+  },{
+    id: BT.NYSE_STOCKS,
+    title: 'US NYSE by Sectors'
+  },{
+    id: BT.NASDAQ_STOCKS,
+    title: 'US NASDAQ by Sectors'
+  },{
+    id: BT.LONDON_STOCKS,
+    title: 'LSE by Sectors'
+  },{
+    id: BT.PREMIUM_SAMPLE,
+    title: 'Quandl Premium Sample'
+  },{
+    id: BT.WATCH_LIST,
+    cn: 'item__watch',
+    title: 'Watch'
+  }
+];
+
+
 class HeaderBar extends Component {
 
   constructor(props){
@@ -49,7 +102,7 @@ class HeaderBar extends Component {
   }
 
   _handleClickQuandl = () => {
-    BrowserActions.showBrowser(BrowserType.ECONOMIC)
+    BrowserActions.showBrowser(BT.ECONOMIC)
     this.setState({ isDS: false })
   }
 
@@ -121,7 +174,7 @@ class HeaderBar extends Component {
             caption="Eurostat"
             title="European Statistics Browser"
             accessKey="u"
-            onClick={this._handleClickDynamic.bind(null, BrowserConfig[BrowserType.EUROSTAT])}
+            onClick={this._handleClickDynamic.bind(null, BT.EUROSTAT)}
           />
           <FlatButton
              className="header__bt-watch"
@@ -129,7 +182,7 @@ class HeaderBar extends Component {
              caption="Watch"
              title="Watch List Browser"
              accessKey="w"
-             onClick={this._handleClickDynamic.bind(null, BrowserConfig[BrowserType.WATCH_LIST])}
+             onClick={this._handleClickDynamic.bind(null, BT.WATCH_LIST)}
           />
           <HotBar
             store={store}
@@ -162,8 +215,7 @@ class HeaderBar extends Component {
            <PanelBrowsers
               className="header__panel-browser"
               isShow={isDS}
-              BROWSER={BrowserType}
-              browserConfig={BrowserConfig}
+              model={MODEL}
               onClose={this._handleCloseDS}
               onClickQuandl={this._handleClickQuandl}
               onClickDynamic={this._handleClickDynamic}

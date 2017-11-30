@@ -9,6 +9,10 @@ import { BrowserActionTypes as BA } from '../actions/BrowserActions';
 import DataQE from '../../constants/DataQE';
 import DataWL from '../../constants/DataWL';
 
+const C = {
+  FAILED: 'Failed'
+};
+
 const fnFindObj = function(menu, chartType){
   if (!menu) {
     return undefined;
@@ -94,7 +98,7 @@ const BrowserSlice = {
     if (sourceId.indexOf(BrowserType.STOCKS_BY_SECTORS) > 0){
       return BrowserConfig[browserId];
     }
-    const _r = this.routeDialog[browserId];    
+    const _r = this.routeDialog[browserId];
     return _r ? _r[sourceId] : undefined;
   },
 
@@ -102,7 +106,7 @@ const BrowserSlice = {
     this.trigger(BA.SHOW_BROWSER, browserType);
   },
 
-  onShowBrowserDynamic(option){
+  onShowBrowserDynamicCompleted(option){
     const { browserType } = option;
     if (!this.browserMenu[browserType]) {
       Factory.crAsyncBrowser(option)
@@ -121,6 +125,11 @@ const BrowserSlice = {
        this.trigger(BA.SHOW_BROWSER_DYNAMIC, browserType);
     }
   },
+  onShowBrowserDynamicFailed(option){
+      this.showAlertDialog(option)
+      this.trigger(BA.SHOW_BROWSER_DYNAMIC + C.FAILED)
+  },
+
   onLoadBrowserDynamicCompleted(option){
     const { json, browserType } = option;
     if (this.isWithItemCounter(browserType)){
@@ -140,9 +149,8 @@ const BrowserSlice = {
     }
   },
   onLoadBrowserDynamicFailed(option){
-    option.alertItemId = (option.alertItemId)
-              ? option.alertItemId
-              : option.caption;
+    const { alertItemId, caption } = option;
+    option.alertItemId = alertItemId || caption                            
     this.showAlertDialog(option);
   }
 

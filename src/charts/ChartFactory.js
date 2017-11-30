@@ -22,6 +22,7 @@ const ChartFactory = {
         opposite: true,
         lineWidth: 0,
         tickLength: 0,
+        gridLineDashStyle: 'Dot',
         labels: {
           x: 3
         },
@@ -65,10 +66,16 @@ const ChartFactory = {
     const config = this.crColumnConfig();
     Object.assign(config.chart, {
       type: 'bar',
-      marginTop: 75,
+      //marginTop: 75,
+      marginTop: 50,
       height: 450
     })
-    config.yAxis.labels = { x: 0, y: -7 }
+    //config.yAxis.labels = { x: 0, y: -7 }
+    Object.assign(config.yAxis, {
+      labels: { x: 0, y: 14 },
+      opposite: false,
+      gridLineDashStyle: 'ShortDot'
+    })
 
     return config;
   }

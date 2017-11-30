@@ -8,7 +8,7 @@ const CL = {
   ELL: 'ellipsis'
 };
 
-const Styles = {
+const S = {
   CAPTION : {
     display : 'inline-block',
     width : '400px',
@@ -60,7 +60,8 @@ class AlertDialog extends Component{
 
   render(){
     const { isShow, data, onClose } = this.props
-        , { alertCaption, alertItemId='', alertDescr } = data;
+        , { alertCaption='Item', alertItemId='', alertDescr } = data
+        , _caption = alertCaption + ': ';
     return (
       <ModalDialog
         caption="Alert"
@@ -68,11 +69,11 @@ class AlertDialog extends Component{
         onClose={onClose}
       >
          <div style={STYLE.rowDiv}>
-            <span style={Styles.CAPTION}>
-              {alertCaption + ': '}
+            <span style={S.CAPTION}>
+              {_caption}
               <span
                 className={CL.ELL}
-                style={Styles.ITEM_ID}
+                style={S.ITEM_ID}
                 title={alertItemId}
               >
                 {alertItemId}
@@ -80,7 +81,9 @@ class AlertDialog extends Component{
             </span>
          </div>
          <div style={STYLE.rowDiv}>
-            <p style={Styles.DESCR}>{alertDescr}</p>
+            <p style={S.DESCR}>
+              {alertDescr}
+            </p>
          </div>
       </ModalDialog>
     );

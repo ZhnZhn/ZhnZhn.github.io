@@ -33,6 +33,10 @@ var _LogicUtils2 = _interopRequireDefault(_LogicUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C = {
+  DESR_LOADER: "Loader for this item hasn't found."
+};
+
 var META = '_Meta';
 var _fnNoop = function _fnNoop() {};
 
@@ -159,15 +163,16 @@ ChartActions[A.LOAD_STOCK].listen(function (chartType, browserType, option) {
 ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
   var chartType = option.chartType,
       browserType = option.browserType,
-      loadId = option.loadId,
-      impl = _LoadConfig2.default[loadId];
+      _ref = _ChartStore2.default.getSourceConfig(browserType, chartType) || {},
+      dialogProps = _ref.dialogProps;
 
+  Object.assign(option, dialogProps);
+  var impl = _LoadConfig2.default[option.loadId];
   if (impl) {
-    var config = _ChartStore2.default.getSourceConfig(browserType, chartType);
-    Object.assign(option, config.dialogProps);
     impl.loadItem(option, this.completed, _fnNoop, this.failed);
   } else {
-    this.failed();
+    option.alertDescr = C.DESCR_LOADER;
+    this.failed(option);
   }
 });
 

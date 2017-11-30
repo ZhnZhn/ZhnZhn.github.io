@@ -64,10 +64,6 @@ var _BrowserActions = require('../../flux/actions/BrowserActions');
 
 var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 
-var _BrowserConfig = require('../../constants/BrowserConfig');
-
-var _BrowserConfig2 = _interopRequireDefault(_BrowserConfig);
-
 var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -95,6 +91,56 @@ var styles = {
     paddingTop: '9px'
   }
 };
+
+var MODEL = [{
+  id: _Type.BrowserType.STOCK_MARKETS,
+  cn: 'item__browser',
+  title: 'Stock Markets'
+}, {
+  id: _Type.BrowserType.UN_COMTRADE,
+  cn: 'item__eurostat',
+  title: 'UN Comtrade'
+}, {
+  id: _Type.BrowserType.FAOSTAT,
+  cn: 'item__eurostat',
+  title: 'FAOSTAT'
+}, {
+  id: _Type.BrowserType.EUROSTAT,
+  cn: 'item__eurostat',
+  title: 'Eurostat'
+}, {
+  id: _Type.BrowserType.FRANCE_STATISTICS,
+  cn: 'item__eurostat',
+  title: 'Insee: France Statistics'
+}, {
+  id: _Type.BrowserType.NORWAY_STATISTICS,
+  cn: 'item__eurostat',
+  title: 'Statistics Norway',
+  isNew: true
+}, {
+  id: _Type.BrowserType.QUANDL,
+  isQuandl: true,
+  title: 'Quandl Economic'
+}, {
+  id: _Type.BrowserType.US_STOCKS,
+  title: 'US Stocks by Sectors'
+}, {
+  id: _Type.BrowserType.NYSE_STOCKS,
+  title: 'US NYSE by Sectors'
+}, {
+  id: _Type.BrowserType.NASDAQ_STOCKS,
+  title: 'US NASDAQ by Sectors'
+}, {
+  id: _Type.BrowserType.LONDON_STOCKS,
+  title: 'LSE by Sectors'
+}, {
+  id: _Type.BrowserType.PREMIUM_SAMPLE,
+  title: 'Quandl Premium Sample'
+}, {
+  id: _Type.BrowserType.WATCH_LIST,
+  cn: 'item__watch',
+  title: 'Watch'
+}];
 
 var HeaderBar = function (_Component) {
   (0, _inherits3.default)(HeaderBar, _Component);
@@ -189,7 +235,7 @@ var HeaderBar = function (_Component) {
           caption: 'Eurostat',
           title: 'European Statistics Browser',
           accessKey: 'u',
-          onClick: this._handleClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.EUROSTAT])
+          onClick: this._handleClickDynamic.bind(null, _Type.BrowserType.EUROSTAT)
         }),
         _react2.default.createElement(_FlatButton2.default, {
           className: 'header__bt-watch',
@@ -197,7 +243,7 @@ var HeaderBar = function (_Component) {
           caption: 'Watch',
           title: 'Watch List Browser',
           accessKey: 'w',
-          onClick: this._handleClickDynamic.bind(null, _BrowserConfig2.default[_Type.BrowserType.WATCH_LIST])
+          onClick: this._handleClickDynamic.bind(null, _Type.BrowserType.WATCH_LIST)
         }),
         _react2.default.createElement(_HotBar2.default, {
           store: store,
@@ -228,8 +274,7 @@ var HeaderBar = function (_Component) {
         _react2.default.createElement(_PanelBrowsers2.default, {
           className: 'header__panel-browser',
           isShow: isDS,
-          BROWSER: _Type.BrowserType,
-          browserConfig: _BrowserConfig2.default,
+          model: MODEL,
           onClose: this._handleCloseDS,
           onClickQuandl: this._handleClickQuandl,
           onClickDynamic: this._handleClickDynamic,

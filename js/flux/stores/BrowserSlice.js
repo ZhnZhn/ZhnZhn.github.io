@@ -30,6 +30,10 @@ var _DataWL2 = _interopRequireDefault(_DataWL);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C = {
+  FAILED: 'Failed'
+};
+
 var fnFindObj = function fnFindObj(menu, chartType) {
   if (!menu) {
     return undefined;
@@ -121,7 +125,7 @@ var BrowserSlice = {
   onShowBrowser: function onShowBrowser(browserType) {
     this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER, browserType);
   },
-  onShowBrowserDynamic: function onShowBrowserDynamic(option) {
+  onShowBrowserDynamicCompleted: function onShowBrowserDynamicCompleted(option) {
     var _this = this;
 
     var browserType = option.browserType;
@@ -137,6 +141,10 @@ var BrowserSlice = {
     } else {
       this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC, browserType);
     }
+  },
+  onShowBrowserDynamicFailed: function onShowBrowserDynamicFailed(option) {
+    this.showAlertDialog(option);
+    this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC + C.FAILED);
   },
   onLoadBrowserDynamicCompleted: function onLoadBrowserDynamicCompleted(option) {
     var json = option.json,
@@ -161,7 +169,10 @@ var BrowserSlice = {
     }
   },
   onLoadBrowserDynamicFailed: function onLoadBrowserDynamicFailed(option) {
-    option.alertItemId = option.alertItemId ? option.alertItemId : option.caption;
+    var alertItemId = option.alertItemId,
+        caption = option.caption;
+
+    option.alertItemId = alertItemId || caption;
     this.showAlertDialog(option);
   }
 };
