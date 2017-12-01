@@ -53,55 +53,46 @@ var _FaoStatAdapter2 = _interopRequireDefault(_FaoStatAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Quandl = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Quandl,
   adapter: _QuandlAdapter2.default
 });
 
 var UnComtrade = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.UnComtrade,
   adapter: _UnComtradeAdapter2.default
 });
 
 var FaoStat = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.FaoStat,
   adapter: _FaoStatAdapter2.default
 });
 
 var EuroStat = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.EuroStat,
   adapter: _EuroStatAdapter2.default
 });
 
 var StatNorway = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.StatNorway,
   adapter: _StatNorwayAdapter2.default
 });
 var StatNorway2 = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.StatNorway2,
   optionFetch: _Api2.default.StatNorway2.crOptionFetch,
   adapter: _StatNorwayAdapter2.default
 });
 
 var AlphaIndicator = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Alpha,
   adapter: _Adapter2.default.Indicator
 });
 
 var AlphaIntraday = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Alpha,
   adapter: _Adapter2.default.Intraday
 });
 
 var AlphaSector = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Alpha,
   adapter: _Adapter2.default.Sector
 });
@@ -116,7 +107,6 @@ var Barchart = (0, _loadItem2.default)({
 });
 
 var Iex = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJson,
   api: _Api2.default.Iex,
   adapter: _IexAdapter2.default
 });

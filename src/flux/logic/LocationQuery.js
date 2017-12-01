@@ -8,8 +8,7 @@ const HM_S = {
 
   columnName: 'cN',
   fromDate: 'fD',
-  toDate: 'tD',
-  key: 'k'
+  toDate: 'tD'
 };
 
 const _keyToValue = (hm) => {
@@ -37,13 +36,9 @@ const LocationQuery = {
     Object.assign(options, obj)
 
     options.toDate = options.toDate
-      || DateUtils.getToDate()
-    options.fromDate = options.fromDate
-      || DateUtils.getFromDate(options.iFD)
-    options.title = options.title
-      || options.value
-    options.key = options.key
-      || options.value
+      || DateUtils.getToDate()    
+    options.title = options.value
+    options.key = options.value
 
     return options;
   }

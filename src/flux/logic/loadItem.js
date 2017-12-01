@@ -1,7 +1,9 @@
-import { fnCatch } from './fnCatch'
+import { fetchJson } from '../../utils/fnFetch'
 
 import ChartStore from '../stores/ChartStore'
 import ChartFn from '../../charts/ChartFn'
+
+import { fnCatch } from './fnCatch'
 
 const _crOptionFetch = (objImpl, option) => {
   const { optionFetch } = objImpl;
@@ -70,20 +72,24 @@ const _fnFetchToChart = function(objImpl, { json, option, onCompleted }){
   onCompleted(option)
 }
 
-const loadItem = (objImpl) => {
+const _fnLoadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
+  const parentId = ChartStore.isLoadToChart();
+  if (!parentId) {
+     _loadToChartComp(objImpl, option, onCompleted, onFailed);
+  } else {
+     option.parentId = parentId;
+     _loadToChart(objImpl, option, onAdded, onFailed);
+  }
+};
+
+const fLoadItem = (objImpl) => {
+   const { fnFetch=fetchJson } = objImpl;
+   objImpl.fnFetch = fnFetch
    return {
-      loadItem(option, onCompleted, onAdded, onFailed){
-        const parentId = ChartStore.isLoadToChart();
-        if (!parentId) {
-           _loadToChartComp(objImpl, option, onCompleted, onFailed);
-        } else {
-           option.parentId = parentId;
-           _loadToChart(objImpl, option, onAdded, onFailed);
-        }
-     },
+     loadItem: _fnLoadItem.bind(null, objImpl),      
      fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
      fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
    };
 }
 
-export default loadItem
+export default fLoadItem

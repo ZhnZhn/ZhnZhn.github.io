@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fnCatch = require('./fnCatch');
+var _fnFetch = require('../../utils/fnFetch');
 
 var _ChartStore = require('../stores/ChartStore');
 
@@ -13,6 +13,8 @@ var _ChartStore2 = _interopRequireDefault(_ChartStore);
 var _ChartFn = require('../../charts/ChartFn');
 
 var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
+var _fnCatch = require('./fnCatch');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -96,22 +98,27 @@ var _fnFetchToChart = function _fnFetchToChart(objImpl, _ref2) {
   onCompleted(option);
 };
 
-var loadItem = function loadItem(objImpl) {
-  return {
-    loadItem: function loadItem(option, onCompleted, onAdded, onFailed) {
-      var parentId = _ChartStore2.default.isLoadToChart();
-      if (!parentId) {
-        _loadToChartComp(objImpl, option, onCompleted, onFailed);
-      } else {
-        option.parentId = parentId;
-        _loadToChart(objImpl, option, onAdded, onFailed);
-      }
-    },
+var _fnLoadItem = function _fnLoadItem(objImpl, option, onCompleted, onAdded, onFailed) {
+  var parentId = _ChartStore2.default.isLoadToChart();
+  if (!parentId) {
+    _loadToChartComp(objImpl, option, onCompleted, onFailed);
+  } else {
+    option.parentId = parentId;
+    _loadToChart(objImpl, option, onAdded, onFailed);
+  }
+};
 
+var fLoadItem = function fLoadItem(objImpl) {
+  var _objImpl$fnFetch = objImpl.fnFetch,
+      fnFetch = _objImpl$fnFetch === undefined ? _fnFetch.fetchJson : _objImpl$fnFetch;
+
+  objImpl.fnFetch = fnFetch;
+  return {
+    loadItem: _fnLoadItem.bind(null, objImpl),
     fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
     fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
   };
 };
 
-exports.default = loadItem;
+exports.default = fLoadItem;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\loadItem.js.map

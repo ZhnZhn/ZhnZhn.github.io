@@ -1,6 +1,6 @@
-import { fetchJson, fetchTxt, fetchJsonp } from '../../utils/fnFetch'
+import { fetchTxt, fetchJsonp } from '../../utils/fnFetch'
 
-import loadItem from './loadItem'
+import fLoadItem from './loadItem'
 
 import Api from '../../api/Api'
 
@@ -14,62 +14,53 @@ import QuandlAdapter from '../../adapters/QuandlAdapter'
 import UnComtradeAdapter from '../../adapters/uncomtrade/UnComtradeAdapter'
 import FaoStatAdapter from '../../adapters/faostat/FaoStatAdapter'
 
-const Quandl = loadItem({
-  fnFetch: fetchJson,
+const Quandl = fLoadItem({
   api: Api.Quandl,
   adapter: QuandlAdapter
 })
 
-const UnComtrade = loadItem({
-  fnFetch: fetchJson,
+const UnComtrade = fLoadItem({
   api: Api.UnComtrade,
   adapter: UnComtradeAdapter
 })
 
-const FaoStat = loadItem({
-  fnFetch: fetchJson,
+const FaoStat = fLoadItem({
   api: Api.FaoStat,
   adapter: FaoStatAdapter
 })
 
-const EuroStat = loadItem({
-  fnFetch: fetchJson,
+const EuroStat = fLoadItem({
   api: Api.EuroStat,
   adapter: EuroStatAdapter
 })
 
-const StatNorway = loadItem({
-  fnFetch: fetchJson,
+const StatNorway = fLoadItem({
   api: Api.StatNorway,
   adapter: StatNorwayAdapter
 })
-const StatNorway2 = loadItem({
-  fnFetch: fetchJson,
+const StatNorway2 = fLoadItem({
   api: Api.StatNorway2,
   optionFetch: Api.StatNorway2.crOptionFetch,
   adapter: StatNorwayAdapter
 })
 
 
-const AlphaIndicator = loadItem({
-  fnFetch: fetchJson,
+const AlphaIndicator = fLoadItem({
   api: Api.Alpha,
   adapter: AlphaAdapter.Indicator
 })
 
-const AlphaIntraday = loadItem({
-  fnFetch: fetchJson,
+const AlphaIntraday = fLoadItem({
   api: Api.Alpha,
   adapter: AlphaAdapter.Intraday
 })
 
-const AlphaSector = loadItem({
-  fnFetch: fetchJson,
+const AlphaSector = fLoadItem({
   api: Api.Alpha,
   adapter: AlphaAdapter.Sector
 })
 
-const Barchart = loadItem({
+const Barchart = fLoadItem({
   fnFetch: fetchJsonp,
   optionFetch: {
     jsonpCallbackFunction: 'BarchartAPIcallback'
@@ -78,13 +69,12 @@ const Barchart = loadItem({
   adapter: BarchartAdapter
 })
 
-const Iex = loadItem({
-  fnFetch: fetchJson,
+const Iex = fLoadItem({
   api: Api.Iex,
   adapter: IexAdapter
 })
 
-const Insee = loadItem({
+const Insee = fLoadItem({
   fnFetch: fetchTxt,
   api: Api.Insee,
   adapter: InseeAdapter

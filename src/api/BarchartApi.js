@@ -1,8 +1,7 @@
 
 const C = {
-  //ROOT: "https://crossorigin.me/https://marketdata.websol.barchart.com/getHistory.json"
   ROOT: "https://marketdata.websol.barchart.com/getHistory.jsonp"
-}
+};
 
 const BarchartApi = {
   getRequestUrl(option) {

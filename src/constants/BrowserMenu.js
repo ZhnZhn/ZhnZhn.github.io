@@ -16,7 +16,7 @@ const fnBadgeClose = function(chartType){
 }
 
 
-const fnCreateMenu = function(menu=[], data, browserType){  
+const fnCreateMenu = function(menu=[], data, browserType){
   return menu.map((menuPart) => {
      const { caption, isInitClose, items=[] } = menuPart
          , _items = items.map((item, index) =>{
@@ -49,8 +49,7 @@ const menuQuandl = [
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
        { id : Quandl.EU_COMMISSION },
-       { id:  Quandl.OECD },
-       { id:  Quandl.USCENSUS_TRADE }
+       { id:  Quandl.OECD }       
      ]
   },{
     caption: 'Central Banks',

@@ -324,6 +324,7 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
       },
       lineColor: color,
       tickColor: color,
+      gridLineWidth: 0,
       labels: {
         style: {
           color: color

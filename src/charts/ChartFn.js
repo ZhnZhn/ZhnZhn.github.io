@@ -160,7 +160,7 @@ const ChartFn = {
         , textEl = _renderSeriesLabel({
             chart, options, series, label,
             color: color || _color
-          });    
+          });
 
     options.zhSeries.count +=1
     options.zhSeries.titleEls.push(textEl)
@@ -280,6 +280,7 @@ const ChartFn = {
         },
         lineColor: color,
         tickColor: color,
+        gridLineWidth: 0,
         labels: {
           style: {
             color: color

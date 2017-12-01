@@ -17,8 +17,7 @@ var HM_S = {
 
   columnName: 'cN',
   fromDate: 'fD',
-  toDate: 'tD',
-  key: 'k'
+  toDate: 'tD'
 };
 
 var _keyToValue = function _keyToValue(hm) {
@@ -45,9 +44,8 @@ var LocationQuery = {
     Object.assign(options, obj);
 
     options.toDate = options.toDate || _DateUtils2.default.getToDate();
-    options.fromDate = options.fromDate || _DateUtils2.default.getFromDate(options.iFD);
-    options.title = options.title || options.value;
-    options.key = options.key || options.value;
+    options.title = options.value;
+    options.key = options.value;
 
     return options;
   }
