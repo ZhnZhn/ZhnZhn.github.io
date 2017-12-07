@@ -1,4 +1,6 @@
 import Highcharts from 'highcharts';
+import JSONstat from 'jsonstat';
+
 import AdapterFn from '../AdapterFn';
 
 const _crDescr = (updated, option) => {
@@ -18,7 +20,27 @@ const _crItemCaption = (option) => {
   return `${dfId}_${caption}`;
 }
 
+const _crAreaMapSlice = (option) => {
+  const { items, dfTSlice } = option
+      , mapSlice = {};
+  items.forEach(item => {
+    if (item.slice) {
+      Object.assign(mapSlice, item.slice)
+    }
+  })
+  return Object.assign(mapSlice, dfTSlice)
+};
+
 const fnAdapter = {
+  crDsValuesTimes: (json, option) => {
+    const mapSlice = _crAreaMapSlice(option)
+        , ds = JSONstat(json).Dataset(0)
+        , values = ds.Data(mapSlice)
+        , times = ds.Dimension("Tid").id;
+
+    return { ds, values, times };
+  },
+
   crId: () => AdapterFn.crId(),
 
   crTid: (time, ds) => {

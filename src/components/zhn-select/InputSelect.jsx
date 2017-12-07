@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from 'prop-types'
 
 import ArrowCell from './ArrowCell';
+import SpanBt from './SpanButton';
 
 const MAX_WITHOUT_ANIMATION = 800;
 
@@ -149,10 +150,6 @@ const S = {
     color: 'black',
     fontWeight: 'bold'
   },
-  FOOTER_BT: {
-    display: 'inline-block',
-    cursor: 'pointer'
-  },
   FOOTER_PADDING: {
     paddingRight: '12px',
   }
@@ -272,7 +269,7 @@ class InputSelect extends Component {
     if (comp){
       comp.classList.add(CL.ROW_ACTIVE);
     }
-    if (this.indexNode) {      
+    if (this.indexNode) {
       this.indexNode.textContent = this.indexActiveOption + 1
     }
   }
@@ -283,14 +280,6 @@ class InputSelect extends Component {
      if (_comp){
       _comp.classList.remove(CL.ROW_ACTIVE);
      }
-    /*
-     if (!comp){
-       comp = this._getActiveItemComp()
-     }
-     if (comp){
-       comp.classList.remove(CL.ROW_ACTIVE);
-     }
-     */
   }
 
   _makeVisibleActiveRowComp = (comp) => {
@@ -503,24 +492,20 @@ class InputSelect extends Component {
           </span>
         </span>
         <span style={S.FOOTER_BUTTONS}>
-          <span
-             style={{ ...S.FOOTER_BT, ...S.FOOTER_PADDING}}
+          <SpanBt
+             style={S.FOOTER_PADDING}
+             caption="Dn"
              onClick={this._stepDownOption}
-          >
-             Dn
-          </span>
-          <span
-             style={{ ...S.FOOTER_BT, ...S.FOOTER_PADDING}}
+          />
+          <SpanBt
+             style={S.FOOTER_PADDING}
+             caption="Up"
              onClick={this._stepUpOption}
-          >
-             Up
-          </span>
-          <span
-            style={S.FOOTER_BT}
+          />
+          <SpanBt
+            caption="CL"
             onClick={this.clearInput}
-          >
-             CL
-          </span>
+          />
         </span>
       </div>
     );
@@ -540,8 +525,12 @@ class InputSelect extends Component {
          _domOptions = options.map((item, index)=>{
            const _styleDiv = (index % 2 === 0)
                      ? S.ITEM_ODD : S.ITEM_EVEN;
+
            return (
              <div
+                //role="option"
+                //aria-selected={this.indexActiveOption === index}
+                //tabIndex="0"
                 key={index}
                 className="option-row"
                 style={{...S.ITEM_DIV, ..._styleDiv}}
@@ -620,13 +609,12 @@ class InputSelect extends Component {
     } else if (isLoadingFailed) {
        _placeholder=`Loading ${optionNames} Failed`;
        _afterInputEl = (
-        <span
-          style={S.SPINNER_FAILED_CELL}
-          data-loader="circle-failed"
-          onClick={onLoadOption}
-         >
-        </span>
-      )
+         <SpanBt
+           style={S.SPINNER_FAILED_CELL}
+           data-loader="circle-failed"
+           onClick={onLoadOption}
+         />
+       )
     }
     return {
       placeholder: _placeholder,

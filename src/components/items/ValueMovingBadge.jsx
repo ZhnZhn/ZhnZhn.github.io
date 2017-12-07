@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import { Direction } from '../../constants/Type'
 
@@ -48,6 +48,7 @@ const S = {
 }
 
 class ValueMovingBadge extends Component {
+  /*
   static propTypes = {
     valueMoving: PropTypes.shape({
       value: PropTypes.number,
@@ -64,6 +65,8 @@ class ValueMovingBadge extends Component {
     ]),
     crValueMoving: PropTypes.func
   }
+  */
+  
   static defaultProps = {
     valueMoving : {
       value : 0,

@@ -15,6 +15,10 @@ var _reflux = require('reflux');
 
 var _reflux2 = _interopRequireDefault(_reflux);
 
+var _DateUtils = require('../../utils/DateUtils');
+
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
+
 var _Msg = require('../../constants/Msg');
 
 var _Msg2 = _interopRequireDefault(_Msg);
@@ -160,15 +164,33 @@ ChartActions[A.LOAD_STOCK].listen(function (chartType, browserType, option) {
   _LoadConfig2.default[loadId].loadItem(option, this.completed, this.added, this.failed);
 });
 
-ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
+var SUBTITLE = 'Loaded from URL Query';
+var _addDialogPropsTo = function _addDialogPropsTo(option) {
   var chartType = option.chartType,
       browserType = option.browserType,
       _ref = _ChartStore2.default.getSourceConfig(browserType, chartType) || {},
       dialogProps = _ref.dialogProps;
 
-  Object.assign(option, dialogProps);
+  Object.assign(option, dialogProps, { subtitle: SUBTITLE });
+
+  var fromDate = option.fromDate,
+      nInitFromDate = option.nInitFromDate;
+
+  if (!fromDate) {
+    option.fromDate = nInitFromDate ? _DateUtils2.default.getFromDate(nInitFromDate) : _DateUtils2.default.getFromDate(2);
+  }
+};
+
+ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
+  _addDialogPropsTo(option);
+
   var impl = _LoadConfig2.default[option.loadId];
   if (impl) {
+    var addPropsTo = impl.addPropsTo;
+
+    if (typeof addPropsTo === 'function') {
+      addPropsTo(option);
+    }
     impl.loadItem(option, this.completed, _fnNoop, this.failed);
   } else {
     option.alertDescr = C.DESCR_LOADER;

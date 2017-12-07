@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -53,6 +49,8 @@ var _SubPanel = require('./SubPanel');
 var _SubPanel2 = _interopRequireDefault(_SubPanel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from "prop-types";
 
 var STYLE = {
   SUB_PANEL: {
@@ -90,6 +88,24 @@ var STYLE = {
 
 var PanelValueMoving = function (_Component) {
   (0, _inherits3.default)(PanelValueMoving, _Component);
+
+  /*
+  static propTypes = {
+    valueMoving: PropTypes.shape({
+      value: PropTypes.string,
+      date: PropTypes.string,
+      valueTo: PropTypes.string,
+      dateTo: PropTypes.string,
+      isDenyToChange: PropTypes.bool
+    }),
+    isAdminMode: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool
+    ]),
+    msgDateTo: PropTypes.string,
+    updateDateTo: PropTypes.func
+  }
+  */
 
   function PanelValueMoving(props) {
     (0, _classCallCheck3.default)(this, PanelValueMoving);
@@ -192,17 +208,5 @@ var PanelValueMoving = function (_Component) {
   return PanelValueMoving;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? PanelValueMoving.propTypes = {
-  valueMoving: _propTypes2.default.shape({
-    value: _propTypes2.default.string,
-    date: _propTypes2.default.string,
-    valueTo: _propTypes2.default.string,
-    dateTo: _propTypes2.default.string,
-    isDenyToChange: _propTypes2.default.bool
-  }),
-  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
-  msgDateTo: _propTypes2.default.string,
-  updateDateTo: _propTypes2.default.func
-} : void 0;
 exports.default = PanelValueMoving;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelValueMoving.js.map

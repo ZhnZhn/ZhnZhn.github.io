@@ -10,10 +10,14 @@
         "experimentalObjectRestSpread" : true
     },
     "plugins" : [
-          "react"
+          "react",
+          "jsx-a11y" 
     ],
 
-    "extends": "eslint:recommended",
+    "extends": [ 
+      "eslint:recommended",
+      "plugin:jsx-a11y/recommended"
+    ],
 
 
     "rules" : {
@@ -51,7 +55,10 @@
     "react/self-closing-comp": 1,
 
     "react/sort-comp": 0,
-    "react/wrap-multilines": [1, {"declaration": false, "assignment": false}]
+    "react/wrap-multilines": [1, {"declaration": false, "assignment": false}],
+
+
+      "jsx-a11y/no-access-key": 0 
 
     }
 

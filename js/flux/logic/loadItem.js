@@ -86,13 +86,16 @@ var _fnFetchToChart = function _fnFetchToChart(objImpl, _ref2) {
       value = option.value,
       hasSecondYAxis = option.hasSecondYAxis,
       chart = _ChartStore2.default.getActiveChart(),
-      series = adapter.toSeries(json, option, chart);
+      series = adapter.toSeries(json, option, chart),
+      _ref3 = series || {},
+      zhItemCaption = _ref3.zhItemCaption,
+      zhColor = _ref3.zhColor;
 
 
   _ChartFn2.default.addSeriaWithRenderLabel({
     chart: chart, series: series,
-    label: series.zhItemCaption || itemCaption || value,
-    color: series.zhColor,
+    label: zhItemCaption || itemCaption || value,
+    color: zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   });
   onCompleted(option);
@@ -110,13 +113,15 @@ var _fnLoadItem = function _fnLoadItem(objImpl, option, onCompleted, onAdded, on
 
 var fLoadItem = function fLoadItem(objImpl) {
   var _objImpl$fnFetch = objImpl.fnFetch,
-      fnFetch = _objImpl$fnFetch === undefined ? _fnFetch.fetchJson : _objImpl$fnFetch;
+      fnFetch = _objImpl$fnFetch === undefined ? _fnFetch.fetchJson : _objImpl$fnFetch,
+      api = objImpl.api;
 
   objImpl.fnFetch = fnFetch;
   return {
     loadItem: _fnLoadItem.bind(null, objImpl),
     fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
-    fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
+    fnFetchToChart: _fnFetchToChart.bind(null, objImpl),
+    addPropsTo: api.addPropsTo
   };
 };
 

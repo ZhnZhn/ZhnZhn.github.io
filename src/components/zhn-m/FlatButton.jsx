@@ -33,6 +33,8 @@ class FlatButton extends Component {
     onClick(event)
   }
 
+  _refNode = node => this.rootNode = node
+
   render() {
     const {
            className, rootStyle, clDiv=CL.BT_DIV, isPrimary,
@@ -43,17 +45,20 @@ class FlatButton extends Component {
              ? {...rootStyle, ...S.PRIMARY }
              : rootStyle
         , _className = className
-             ? CL.BT + ' ' + className
-             : CL.BT;
+             ? `${CL.BT} ${className}`
+             : CL.BT
+        , _title = accessKey
+             ? `${title} [${accessKey}]`
+             : title;
   return (
     <button
-      ref = {node => this.rootNode = node }
+      type="button"
+      ref = {this._refNode}
       className={_className}
       style={_style}
-      type="button"
-      tabIndex={0}
-      title={title}
       accessKey={accessKey}
+      tabIndex={0}
+      title={_title}
       onClick={this._hClick}
     >
       <div className={clDiv}>

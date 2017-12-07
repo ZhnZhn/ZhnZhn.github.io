@@ -15,6 +15,7 @@ import COLOR from '../constants/Color';
 import Chart from './Chart';
 import ChartFn from './ChartFn';
 import Tooltip from './Tooltip';
+import C from './conf';
 
 import WithIndicator from './WithIndicatorConfig';
 import WithPie from './WithPieConfig';
@@ -161,10 +162,10 @@ ChartConfig.theme = {
     },
     chart : {
       alignTicks: false,
-      height: Chart.HEIGHT,
-      spacingTop: Chart.THEME_SPACING_TOP,
-      spacingBottom: Chart.SPACING_BOTTOM,
-      marginRight: Chart.MARGIN_RIGHT,
+      height: C.HEIGHT,
+      spacingTop: C.THEME_SPACING_TOP,
+      spacingBottom: C.SPACING_BOTTOM,
+      marginRight: C.MARGIN_RIGHT,
       plotBackgroundColor: COLOR.PLOT,
       backgroundColor : COLOR.CHART,
       reflow: false,
@@ -318,6 +319,7 @@ ChartConfig.theme = {
         stickyTracking : false,
         events : {
           click : function(event) {
+            //const tooltip = this.chart.zhTooltip
 
             this.chart.zhTooltip.options.enabled = true
             /*
@@ -332,7 +334,8 @@ ChartConfig.theme = {
         }
       },
       pie : {
-        colors : Chart.fMonoPieColors()
+        //colors : Chart.fMonoPieColors()
+        colors: C.fMonoPieColors()
       }
     },
     tooltip: {

@@ -25,14 +25,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _Type = require('../../constants/Type');
 
@@ -133,6 +130,24 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
     };
     return _this;
   }
+  /*
+  static propTypes = {
+    valueMoving: PropTypes.shape({
+      value: PropTypes.number,
+      delta: PropTypes.number,
+      percent: PropTypes.number,
+      direction: PropTypes.oneOf(
+        'up', 'down', 'equal', 'empty'
+      ),
+      date: PropTypes.string
+    }),
+    isAdminMode: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool
+    ]),
+    crValueMoving: PropTypes.func
+  }
+  */
 
   (0, _createClass3.default)(ValueMovingBadge, [{
     key: 'render',
@@ -219,16 +234,5 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
     date: ''
   }
 }, _temp);
-ValueMovingBadge.propTypes = process.env.NODE_ENV !== "production" ? {
-  valueMoving: _propTypes2.default.shape({
-    value: _propTypes2.default.number,
-    delta: _propTypes2.default.number,
-    percent: _propTypes2.default.number,
-    direction: _propTypes2.default.oneOf('up', 'down', 'equal', 'empty'),
-    date: _propTypes2.default.string
-  }),
-  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
-  crValueMoving: _propTypes2.default.func
-} : {};
 exports.default = ValueMovingBadge;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ValueMovingBadge.js.map

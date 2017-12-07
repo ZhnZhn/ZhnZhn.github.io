@@ -55,30 +55,10 @@ var _fMonoColors = function _fMonoColors() {
       base2 = _ref$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref$base2;
 
   var colors = [];
-  //let i;
 
   _addMonoColorsTo(colors, base1);
   _addMonoColorsTo(colors, base2);
-  /*
-  for (i = 0; i < 4; i++) {
-    // Start out with a darkened base color (negative brighten), and end
-    // up with a much brighter color
-   colors.push(
-     Highcharts.Color(base1)
-       .brighten((i - 3) / 7)
-       .setOpacity(0.75)
-       .get()
-     );
-  }
-  for (i = 0; i < 4; i++) {
-     colors.push(
-       Highcharts.Color(base2)
-         .brighten((i - 3) / 7)
-         .setOpacity(0.75)
-         .get()
-      );
-  }
-  */
+
   return colors;
 };
 
@@ -110,25 +90,6 @@ var Chart = {
 
   _monoColors: _fMonoColors(),
 
-  fMonoPieColors: function fMonoPieColors() {
-    var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref2$base = _ref2.base1,
-        base1 = _ref2$base === undefined ? _Color2.default.MONO_BASE1 : _ref2$base,
-        _ref2$base2 = _ref2.base2,
-        base2 = _ref2$base2 === undefined ? _Color2.default.MONO_BASE2 : _ref2$base2;
-
-    var colors = [];
-    var i = void 0;
-
-    for (i = 0; i < 4; i++) {
-      colors.push(_highcharts2.default.Color(base1).brighten((i - 3) / 7).get());
-    }
-    for (i = 0; i < 4; i++) {
-      colors.push(_highcharts2.default.Color(base2).brighten((i - 3) / 7).get());
-    }
-
-    return colors;
-  },
   fCreateMonoColor: function fCreateMonoColor() {
     var base = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _Color2.default.MONO_BASE1;
     var deltaColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -372,9 +333,9 @@ var Chart = {
       }
     };
   },
-  calcMinY: function calcMinY(_ref3) {
-    var minPoint = _ref3.minPoint,
-        maxPoint = _ref3.maxPoint;
+  calcMinY: function calcMinY(_ref2) {
+    var minPoint = _ref2.minPoint,
+        maxPoint = _ref2.maxPoint;
 
     if (maxPoint > Number.NEGATIVE_INFINITY && minPoint < Number.POSITIVE_INFINITY) {
       return minPoint - (maxPoint - minPoint) * 1 / 6;
@@ -453,9 +414,9 @@ var Chart = {
       }
     }, option);
   },
-  fSeriaMarker: function fSeriaMarker(_ref4) {
-    var color = _ref4.color,
-        symbol = _ref4.symbol;
+  fSeriaMarker: function fSeriaMarker(_ref3) {
+    var color = _ref3.color,
+        symbol = _ref3.symbol;
 
     return {
       radius: 4,

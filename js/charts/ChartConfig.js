@@ -48,6 +48,10 @@ var _Tooltip = require('./Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
+var _conf = require('./conf');
+
+var _conf2 = _interopRequireDefault(_conf);
+
 var _WithIndicatorConfig = require('./WithIndicatorConfig');
 
 var _WithIndicatorConfig2 = _interopRequireDefault(_WithIndicatorConfig);
@@ -75,11 +79,6 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 var _Type = require('../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//import HighchartsMore from 'highcharts/lib/highcharts-more';
-//import HighchartsTreemap from 'highcharts/lib/modules/treemap';
-//import HighchartsExporting from 'highcharts/lib/modules/exporting';
-//import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
 var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default, {
   init: function init() {
@@ -174,6 +173,11 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
   }
 });
 
+//import HighchartsMore from 'highcharts/lib/highcharts-more';
+//import HighchartsTreemap from 'highcharts/lib/modules/treemap';
+//import HighchartsExporting from 'highcharts/lib/modules/exporting';
+//import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
+
 ChartConfig.theme = {
   credits: {
     enabled: true,
@@ -194,10 +198,10 @@ ChartConfig.theme = {
   },
   chart: {
     alignTicks: false,
-    height: _Chart2.default.HEIGHT,
-    spacingTop: _Chart2.default.THEME_SPACING_TOP,
-    spacingBottom: _Chart2.default.SPACING_BOTTOM,
-    marginRight: _Chart2.default.MARGIN_RIGHT,
+    height: _conf2.default.HEIGHT,
+    spacingTop: _conf2.default.THEME_SPACING_TOP,
+    spacingBottom: _conf2.default.SPACING_BOTTOM,
+    marginRight: _conf2.default.MARGIN_RIGHT,
     plotBackgroundColor: _Color2.default.PLOT,
     backgroundColor: _Color2.default.CHART,
     reflow: false,
@@ -341,6 +345,7 @@ ChartConfig.theme = {
       stickyTracking: false,
       events: {
         click: function click(event) {
+          //const tooltip = this.chart.zhTooltip
 
           this.chart.zhTooltip.options.enabled = true;
           /*
@@ -355,7 +360,8 @@ ChartConfig.theme = {
       }
     },
     pie: {
-      colors: _Chart2.default.fMonoPieColors()
+      //colors : Chart.fMonoPieColors()
+      colors: _conf2.default.fMonoPieColors()
     }
   },
   tooltip: {

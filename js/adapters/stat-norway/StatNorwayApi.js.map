@@ -1,0 +1,20 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-norway\\StatNorwayApi.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-norway\\StatNorwayApi.js",
+ "sourceRoot": "",
+ "names": [
+  "C",
+  "ROOT_URL",
+  "StatNorwayApi",
+  "getRequestUrl",
+  "option",
+  "proxy",
+  "metric",
+  "dfId",
+  "id",
+  "checkResponse"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,YAAU;AADF,CAAV;;AAIA,IAAMC,gBAAgB;AACpBC,eADoB,yBACLC,MADK,EACG;AAAA,QACbC,KADa,GACWD,MADX,CACbC,KADa;AAAA,QACNC,MADM,GACWF,MADX,CACNE,MADM;AAAA,QACEC,IADF,GACWH,MADX,CACEG,IADF;AAAA,QAEfC,EAFe,GAEVD,OAAOA,IAAP,GAAcD,MAFJ;;AAGrB,gBAAUD,KAAV,GAAkBL,EAAEC,QAApB,SAAgCO,EAAhC;AACD,GALmB;AAMpBC,eANoB,2BAML;AACb,WAAO,IAAP;AACD;AARmB,CAAtB;;kBAWeP,a"
+}

@@ -61,12 +61,13 @@ const _fnFetchToChart = function(objImpl, { json, option, onCompleted }){
   const { adapter } = objImpl
       , { itemCaption, value, hasSecondYAxis } = option
       , chart = ChartStore.getActiveChart()
-      , series = adapter.toSeries(json, option, chart);
+      , series = adapter.toSeries(json, option, chart)
+      , { zhItemCaption, zhColor } = series || {};
 
   ChartFn.addSeriaWithRenderLabel({
     chart, series,
-    label: series.zhItemCaption || itemCaption || value,
-    color: series.zhColor,
+    label: zhItemCaption || itemCaption || value,
+    color: zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   })
   onCompleted(option)
@@ -83,12 +84,13 @@ const _fnLoadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
 };
 
 const fLoadItem = (objImpl) => {
-   const { fnFetch=fetchJson } = objImpl;
+   const { fnFetch=fetchJson, api } = objImpl;
    objImpl.fnFetch = fnFetch
    return {
-     loadItem: _fnLoadItem.bind(null, objImpl),      
+     loadItem: _fnLoadItem.bind(null, objImpl),
      fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
-     fnFetchToChart: _fnFetchToChart.bind(null, objImpl)
+     fnFetchToChart: _fnFetchToChart.bind(null, objImpl),
+     addPropsTo: api.addPropsTo,
    };
 }
 

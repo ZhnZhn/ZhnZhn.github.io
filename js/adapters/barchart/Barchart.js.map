@@ -1,0 +1,15 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\barchart\\Barchart.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\barchart\\Barchart.js",
+ "sourceRoot": "",
+ "names": [
+  "Barchart",
+  "optionFetch",
+  "jsonpCallbackFunction",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,WAAW;AACfC,eAAa;AACXC,2BAAuB;AADZ,GADE;AAIfC,4BAJe,EAIVC;AAJU,CAAjB;;kBAOeJ,Q"
+}

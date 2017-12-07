@@ -26,18 +26,15 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SUBTITLE = 'Loaded from URL Query';
-
 var _crLoadQueryStatic = function _crLoadQueryStatic(option) {
-  var browserType = option.browserType,
-      chartType = option.chartType;
+  var browserType = option.browserType;
 
   return new _BatchActions2.default([{
     action: _BrowserActions2.default.showBrowser,
     args: [browserType]
   }, {
-    action: _ChartActions2.default.loadStock,
-    args: [chartType, browserType, option]
+    action: _ChartActions2.default.loadStockByQuery,
+    args: [option]
   }]);
 };
 
@@ -63,9 +60,7 @@ var FactoryAction = {
         _ref = _ChartStore2.default.getSourceConfig(browserType, chartType) || {},
         dialogProps = _ref.dialogProps;
 
-    option.subtitle = SUBTITLE;
     if (dialogProps) {
-      Object.assign(option, dialogProps);
       return _crLoadQueryStatic(option);
     } else {
       return _crLoadQueryDynamic(option);

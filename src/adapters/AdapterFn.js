@@ -123,6 +123,10 @@ const AdapterFn = {
     ];
   },
 
+  numberFormat(value){
+    return ChartConfig.fnNumberFormat(value);
+  },
+
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
@@ -160,7 +164,7 @@ const AdapterFn = {
 
       return  {
         ...this.crValueMoving({ bNowValue, bPrevValue }),
-        valueTo: ChartConfig.fnNumberFormat(bPrevValue),
+        valueTo: this.numberFormat(bPrevValue),        
         date, dateTo
       };
   },

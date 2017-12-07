@@ -6,7 +6,7 @@ import { loadQuandlCommodityTrade } from './loadQuandlCommodityTrade';
 
 import LoadImpl from './LoadImpl'
 
-const LoadConfig = {
+const LoadConfig = {  
   [LT.Q]: LoadImpl.Quandl,
   [LT.QCT]: loadQuandlCommodityTrade,
 

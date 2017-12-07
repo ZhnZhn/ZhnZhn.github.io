@@ -2,13 +2,18 @@
 import { ChartType, LoadType } from '../../constants/Type';
 
 const _fnCreateQuandlKey = function(option){
-  return (option.loadId === LoadType.QCT && !option.isLoadMeta)
-          ? (option.seriaType === ChartType.AREA)
-                ? `${option.value}_${ChartType.AREA}_${option.dataColumn}`
-                : `${option.value}_${option.seriaType}`
-          : (option.viewKey)
-              ? option.viewKey
-              : option.value;
+  const {
+          loadId, isLoadMeta,
+          value, dataColumn, seriaType,
+          viewKey
+        } = option;
+  return (loadId === LoadType.QCT && !isLoadMeta)
+          ? (seriaType === ChartType.AREA)
+                ? `${value}_${ChartType.AREA}_${dataColumn}`
+                : `${value}_${seriaType}`
+          : (viewKey)
+              ? viewKey
+              : value;
 }
 
 const _fnCreateEuroStatKey = function(option){

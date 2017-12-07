@@ -132,6 +132,9 @@ var AdapterFn = {
   stockSeriesLegend: function stockSeriesLegend() {
     return [this.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), this.legendItem(1, _Color2.default.S_HIGH, 'High'), this.legendItem(2, _Color2.default.S_LOW, 'Low'), this.legendItem(3, _Color2.default.S_OPEN, 'Open')];
   },
+  numberFormat: function numberFormat(value) {
+    return _ChartConfig2.default.fnNumberFormat(value);
+  },
 
 
   compareByDate: _compareArrByIndex(0),
@@ -166,7 +169,7 @@ var AdapterFn = {
         dateTo = len > 1 && _prevDate ? _DateUtils2.default.formatTo(_prevDate) : BLANK;
 
     return (0, _extends3.default)({}, this.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
-      valueTo: _ChartConfig2.default.fnNumberFormat(bPrevValue),
+      valueTo: this.numberFormat(bPrevValue),
       date: date, dateTo: dateTo
     });
   },

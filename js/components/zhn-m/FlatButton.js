@@ -76,14 +76,14 @@ var FlatButton = (_temp2 = _class = function (_Component) {
 
       setTimeout(_this._setPointerEvents, timeout);
       onClick(event);
+    }, _this._refNode = function (node) {
+      return _this.rootNode = node;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(FlatButton, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           className = _props.className,
           rootStyle = _props.rootStyle,
@@ -96,20 +96,19 @@ var FlatButton = (_temp2 = _class = function (_Component) {
           accessKey = _props.accessKey,
           children = _props.children,
           _style = isPrimary ? (0, _extends3.default)({}, rootStyle, S.PRIMARY) : rootStyle,
-          _className = className ? CL.BT + ' ' + className : CL.BT;
+          _className = className ? CL.BT + ' ' + className : CL.BT,
+          _title = accessKey ? title + ' [' + accessKey + ']' : title;
 
       return _react2.default.createElement(
         'button',
         {
-          ref: function ref(node) {
-            return _this2.rootNode = node;
-          },
+          type: 'button',
+          ref: this._refNode,
           className: _className,
           style: _style,
-          type: 'button',
-          tabIndex: 0,
-          title: title,
           accessKey: accessKey,
+          tabIndex: 0,
+          title: _title,
           onClick: this._hClick
         },
         _react2.default.createElement(

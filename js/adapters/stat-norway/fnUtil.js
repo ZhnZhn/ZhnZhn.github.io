@@ -25,6 +25,12 @@ var fnUtil = {
     } else {
       return Date.UTC(str, 11, 31);
     }
+  },
+
+  toYMD: function toYMD(str) {
+    var ms = fnUtil.toUTC(str),
+        d = new Date(ms);
+    return d.getUTCFullYear() + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + d.getUTCDate()).slice(-2);
   }
 };
 

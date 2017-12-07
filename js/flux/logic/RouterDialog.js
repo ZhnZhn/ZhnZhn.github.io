@@ -10,41 +10,13 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 
 var _Type = require('../../constants/Type');
 
-var _DialogType = require('../../components/dialogs/DialogType3');
+var _Dialogs = require('../../components/dialogs/Dialogs');
 
-var _DialogType2 = _interopRequireDefault(_DialogType);
+var _Dialogs2 = _interopRequireDefault(_Dialogs);
 
-var _DialogType3 = require('../../components/dialogs/DialogType4');
+var _Dialogs3 = require('../../components/quandl-browser/Dialogs');
 
-var _DialogType4 = _interopRequireDefault(_DialogType3);
-
-var _DialogType4A = require('../../components/dialogs/DialogType4A');
-
-var _DialogType4A2 = _interopRequireDefault(_DialogType4A);
-
-var _DialogType5 = require('../../components/dialogs/DialogType5');
-
-var _DialogType6 = _interopRequireDefault(_DialogType5);
-
-var _UNCommodityTradeDialog = require('../../components/quandl-browser/UNCommodityTradeDialog');
-
-var _UNCommodityTradeDialog2 = _interopRequireDefault(_UNCommodityTradeDialog);
-
-var _Futures3Dialog = require('../../components/quandl-browser/Futures3Dialog');
-
-var _Futures3Dialog2 = _interopRequireDefault(_Futures3Dialog);
-
-var _FuturesWikiDialog = require('../../components/quandl-browser/FuturesWikiDialog');
-
-var _FuturesWikiDialog2 = _interopRequireDefault(_FuturesWikiDialog);
-
-var _JodiWorldOilDialog = require('../../components/quandl-browser/JodiWorldOilDialog');
-
-var _JodiWorldOilDialog2 = _interopRequireDefault(_JodiWorldOilDialog);
-
-var _ZillowDialog = require('../../components/quandl-browser/ZillowDialog');
-
-var _ZillowDialog2 = _interopRequireDefault(_ZillowDialog);
+var _Dialogs4 = _interopRequireDefault(_Dialogs3);
 
 var _UnDialog = require('../../components/uncomtrade/UnDialog5');
 
@@ -55,18 +27,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MSG_OFFLINE = 'It seems you are offline';
 
 var _router = {
-  DEFAULT: _DialogType2.default,
+  DEFAULT: _Dialogs2.default.Type3,
 
-  DialogType3: _DialogType2.default,
-  DialogType4: _DialogType4.default,
-  DialogType4A: _DialogType4A2.default,
-  DialogType5: _DialogType6.default,
+  DialogType3: _Dialogs2.default.Type3,
+  DialogType4: _Dialogs2.default.Type4,
+  DialogType4A: _Dialogs2.default.Type4A,
+  DialogType5: _Dialogs2.default.Type5,
 
-  UNCommodityTradeDialog: _UNCommodityTradeDialog2.default,
-  Futures3Dialog: _Futures3Dialog2.default,
-  FuturesWikiDialog: _FuturesWikiDialog2.default,
-  JodiWorldOilDialog: _JodiWorldOilDialog2.default,
-  ZillowDialog: _ZillowDialog2.default,
+  UNCommodityTradeDialog: _Dialogs4.default.UNCommodityTrade,
+  Futures3Dialog: _Dialogs4.default.Futures3,
+  FuturesWikiDialog: _Dialogs4.default.FuturesWiki,
+  JodiWorldOilDialog: _Dialogs4.default.JodiWorldOil,
+  ZillowDialog: _Dialogs4.default.Zillow,
 
   UnDialog5: _UnDialog2.default,
 

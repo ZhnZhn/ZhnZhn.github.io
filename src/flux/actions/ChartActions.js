@@ -1,5 +1,6 @@
 import Reflux from 'reflux';
 
+import DU from '../../utils/DateUtils';
 import Msg from '../../constants/Msg';
 import ChartStore from '../stores/ChartStore';
 import LoadConfig from '../logic/LoadConfig';
@@ -142,13 +143,33 @@ ChartActions[A.LOAD_STOCK].listen(function(chartType, browserType, option){
   LoadConfig[loadId].loadItem(option, this.completed, this.added, this.failed);
 })
 
-ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
+const SUBTITLE = 'Loaded from URL Query';
+const _addDialogPropsTo = option => {
   const { chartType, browserType } = option
       , { dialogProps } = ChartStore
             .getSourceConfig(browserType, chartType) || {};
-  Object.assign(option, dialogProps)
+
+  Object.assign(option,
+    dialogProps, { subtitle: SUBTITLE }
+  )
+
+  const { fromDate, nInitFromDate } = option;
+  if (!fromDate) {
+    option.fromDate = nInitFromDate
+       ? DU.getFromDate(nInitFromDate)
+       : DU.getFromDate(2)
+  }
+};
+
+ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
+  _addDialogPropsTo(option)
+
   const impl = LoadConfig[option.loadId];
   if (impl) {
+    const { addPropsTo } = impl;
+    if (typeof addPropsTo === 'function'){
+      addPropsTo(option)
+    }
     impl.loadItem(option, this.completed, _fnNoop, this.failed)
   } else {
     option.alertDescr = C.DESCR_LOADER

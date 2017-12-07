@@ -1,34 +1,26 @@
 
 import { BrowserType as BT } from '../../constants/Type'
 
-import DialogType3 from '../../components/dialogs/DialogType3';
-import DialogType4 from '../../components/dialogs/DialogType4';
-import DialogType4A from '../../components/dialogs/DialogType4A';
-import DialogType5 from '../../components/dialogs/DialogType5';
-
-import UNCommodityTradeDialog from '../../components/quandl-browser/UNCommodityTradeDialog';
-import Futures3Dialog from '../../components/quandl-browser/Futures3Dialog';
-import FuturesWikiDialog from '../../components/quandl-browser/FuturesWikiDialog';
-import JodiWorldOilDialog from '../../components/quandl-browser/JodiWorldOilDialog';
-import ZillowDialog from '../../components/quandl-browser/ZillowDialog';
+import D from '../../components/dialogs/Dialogs';
+import QD from '../../components/quandl-browser/Dialogs';
 
 import UnDialog5 from '../../components/uncomtrade/UnDialog5';
 
 const MSG_OFFLINE = 'It seems you are offline';
 
 const _router = {
-  DEFAULT : DialogType3,
+  DEFAULT : D.Type3,
 
-  DialogType3 : DialogType3,
-  DialogType4 : DialogType4,
-  DialogType4A : DialogType4A,
-  DialogType5 : DialogType5,
+  DialogType3 : D.Type3,
+  DialogType4 : D.Type4,
+  DialogType4A : D.Type4A,
+  DialogType5 : D.Type5,
 
-  UNCommodityTradeDialog : UNCommodityTradeDialog,
-  Futures3Dialog : Futures3Dialog,
-  FuturesWikiDialog : FuturesWikiDialog,
-  JodiWorldOilDialog : JodiWorldOilDialog,
-  ZillowDialog : ZillowDialog,
+  UNCommodityTradeDialog : QD.UNCommodityTrade,
+  Futures3Dialog : QD.Futures3,
+  FuturesWikiDialog : QD.FuturesWiki,
+  JodiWorldOilDialog : QD.JodiWorldOil,
+  ZillowDialog : QD.Zillow,
 
   UnDialog5: UnDialog5,
 

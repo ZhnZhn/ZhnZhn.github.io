@@ -7,7 +7,14 @@ Object.defineProperty(exports, "__esModule", {
 var _Type = require('../../constants/Type');
 
 var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
-  return option.loadId === _Type.LoadType.QCT && !option.isLoadMeta ? option.seriaType === _Type.ChartType.AREA ? option.value + '_' + _Type.ChartType.AREA + '_' + option.dataColumn : option.value + '_' + option.seriaType : option.viewKey ? option.viewKey : option.value;
+  var loadId = option.loadId,
+      isLoadMeta = option.isLoadMeta,
+      value = option.value,
+      dataColumn = option.dataColumn,
+      seriaType = option.seriaType,
+      viewKey = option.viewKey;
+
+  return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + '_' + _Type.ChartType.AREA + '_' + dataColumn : value + '_' + seriaType : viewKey ? viewKey : value;
 };
 
 var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {

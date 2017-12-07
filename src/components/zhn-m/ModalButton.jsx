@@ -9,7 +9,7 @@ const CL = {
 };
 
 class ModalButton extends Component {
-
+  
   componentDidMount(){
     const { onReg } = this.props;
     if (typeof onReg === 'function'){
@@ -17,25 +17,30 @@ class ModalButton extends Component {
     }
   }
 
+  _refNode = n => this.rootNode = n
+
   render(){
     const {
             className='', rootStyle,
             clDiv=CL.BT_DIV,
-            title, caption,
+            title='', caption,
             accessKey,
             children,
             onClick
           } = this.props
-          , _btCl = (CL.BT + ' ' + className).trim();
+          , _className = (CL.BT + ' ' + className).trim()
+          , _title = accessKey
+              ? `${title} [${accessKey}]`
+              : title;
     return (
       <button
-        ref={n => this.rootNode = n}
-        className={_btCl}
-        style={rootStyle}
         type="button"
-        tabIndex={0}
-        title={title}
+        ref={this._refNode}
+        className={_className}
+        style={rootStyle}
         accessKey={accessKey}
+        title={_title}
+        tabIndex={0}
         onClick={onClick}
       >
         <div className={clDiv}>

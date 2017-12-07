@@ -30,30 +30,10 @@ const _addMonoColorsTo = (colors=[], base) => {
 
 const _fMonoColors = function({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}){
   const colors = [];
-  //let i;
 
   _addMonoColorsTo(colors, base1);
   _addMonoColorsTo(colors, base2);
-  /*
-  for (i = 0; i < 4; i++) {
-    // Start out with a darkened base color (negative brighten), and end
-    // up with a much brighter color
-   colors.push(
-     Highcharts.Color(base1)
-       .brighten((i - 3) / 7)
-       .setOpacity(0.75)
-       .get()
-     );
-  }
-  for (i = 0; i < 4; i++) {
-     colors.push(
-       Highcharts.Color(base2)
-         .brighten((i - 3) / 7)
-         .setOpacity(0.75)
-         .get()
-      );
-  }
-  */
+
   return colors;
 }
 
@@ -85,29 +65,7 @@ const Chart = {
 
 
   _monoColors : _fMonoColors(),
-
-  fMonoPieColors({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}){
-    const colors = [];
-    let i;
-
-    for (i = 0; i < 4; i++) {
-      colors.push(
-         Highcharts.Color(base1)
-         .brighten((i - 3) / 7)
-         .get()
-       );
-    }
-    for (i = 0; i < 4; i++) {
-      colors.push(
-        Highcharts.Color(base2)
-          .brighten((i - 3) / 7)
-          .get()
-        );
-    }
-
-    return colors;
-  },
-
+  
   fCreateMonoColor(base=COLOR.MONO_BASE1, deltaColor=0, opacity=0.75){
     return Highcharts.Color(base)
        .brighten( (this.COLOR_LOW_LEVEL) + deltaColor)

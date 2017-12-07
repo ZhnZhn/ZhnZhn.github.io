@@ -16,6 +16,10 @@ var _Tooltip = require('../charts/Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
+var _AdapterFn = require('./AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CATEGORIES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
@@ -260,6 +264,40 @@ var _crZhConfig = function _crZhConfig(option, _ref3) {
   };
 };
 
+var _crValueAndDate = function _crValueAndDate(seria, index) {
+  var _seria$data = seria.data,
+      data = _seria$data === undefined ? [] : _seria$data,
+      name = seria.name,
+      _data$index = data[index],
+      value = _data$index.y,
+      c = _data$index.c;
+
+  return {
+    value: value,
+    date: c + '-' + name
+  };
+};
+var _crValueMoving = function _crValueMoving(nowSeria, prevSeria) {
+  var _nowSeria$data = nowSeria.data,
+      data = _nowSeria$data === undefined ? [] : _nowSeria$data,
+      max = data.length - 1,
+      _crValueAndDate2 = _crValueAndDate(nowSeria, max),
+      bNowValue = _crValueAndDate2.value,
+      date = _crValueAndDate2.date,
+      _crValueAndDate3 = _crValueAndDate(prevSeria, max),
+      bPrevValue = _crValueAndDate3.value,
+      dateTo = _crValueAndDate3.date,
+      moving = _AdapterFn2.default.crValueMoving({
+    bNowValue: bNowValue,
+    bPrevValue: bPrevValue
+  });
+
+  return (0, _extends3.default)({}, moving, { date: date, dateTo: dateTo,
+    valueTo: _AdapterFn2.default.numberFormat(bPrevValue),
+    isDenyToChange: true
+  });
+};
+
 var ToYearly = {
   toConfig: function toConfig(data, option) {
     var title = option.title,
@@ -276,7 +314,11 @@ var ToYearly = {
         avgSeria = _crAvgSeria2.avgSeria,
         avgItem = _crAvgSeria2.avgItem,
         legend = [nowItem, prevItem, rangeItem, avgItem],
-        config = (0, _ConfigBuilder2.default)().initBaseCategories(CATEGORIES).add('chart', { spacingTop: 25, marginTop: 45 }).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip2.default.category).add('zhConfig', _crZhConfig(option, { legend: legend })).toConfig();
+        config = (0, _ConfigBuilder2.default)().initBaseCategories(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip2.default.category).add({
+      chart: { spacingTop: 25, marginTop: 45 },
+      zhConfig: _crZhConfig(option, { legend: legend }),
+      valueMoving: _crValueMoving(nowSeria, prevSeria)
+    }).toConfig();
 
     return config;
   }

@@ -1,6 +1,9 @@
 import ConfigBuilder from '../charts/ConfigBuilder'
 import Tooltip from '../charts/Tooltip'
 
+import Fn from './AdapterFn'
+
+
 const CATEGORIES = [
   '01', '02', '03', '04', '05', '06',
   '07', '08', '09', '10', '11', '12'
@@ -36,7 +39,7 @@ const _getMonth = (str) => {
 const _crSeria = (
   name, { type='spline', data, color, isVisible=true }
 ) => {
-  return { type, name, data, color, visible:isVisible };
+  return { type, name, data, color, visible: isVisible };
 }
 const _crItem = (
   name, { index, color, isVisible=true }
@@ -109,7 +112,6 @@ const _crSeries = (data) => {
   const firtsItem = data[0][0]
       , _yearNow = _getYear(firtsItem)
       , { i, arr:_dNow } = _crSeriaData(data, 0, _yearNow)
-      //
       , prevItem = data[i][0]
       , _yearPrev = _getYear(prevItem)
       , { arr:_dPrev } = _crSeriaData(data, i, _yearPrev);
@@ -172,7 +174,7 @@ const _crRangeSeria = (data) => {
 
   return {
     rangeSeria: ConfigBuilder()
-      .initAreaRange(         
+      .initAreaRange(
          Tooltip.categoryRHLY, {
            data: _data,
            name: name,
@@ -230,6 +232,38 @@ const _crZhConfig = (option, { legend }) => {
 }
 
 
+const _crValueAndDate = (seria, index) => {
+  const { data=[], name } = seria
+      , { y:value, c } = data[index];
+  return {
+    value,
+    date: `${c}-${name}`
+  };
+}
+const _crValueMoving = (nowSeria, prevSeria) => {
+  const { data=[] } = nowSeria
+      , max = data.length - 1
+      , {
+          value:bNowValue,
+          date
+        } = _crValueAndDate(nowSeria, max)
+      , {
+          value:bPrevValue,
+          date:dateTo
+        } = _crValueAndDate(prevSeria, max)
+      , moving = Fn.crValueMoving({
+            bNowValue,
+            bPrevValue
+        });
+
+  return {
+    ...moving, date, dateTo,
+    valueTo: Fn.numberFormat(bPrevValue),
+    isDenyToChange: true
+  };
+};
+
+
 const ToYearly = {
   toConfig(data, option) {
     const { title, subtitle } = option
@@ -241,15 +275,18 @@ const ToYearly = {
     , { avgSeria, avgItem } = _crAvgSeria(data)
     , legend = [ nowItem, prevItem, rangeItem, avgItem ]
     , config = ConfigBuilder()
-       .initBaseCategories(CATEGORIES)
-       .add('chart', { spacingTop: 25, marginTop: 45 })
+       .initBaseCategories(CATEGORIES)       
        .addCaption(title, subtitle)
        .addSeriaBy(0, rangeSeria)
        .addSeriaBy(1, avgSeria)
        .addSeriaBy(2, prevSeria)
        .addSeriaBy(3, nowSeria)
        .addTooltip(Tooltip.category)
-       .add('zhConfig', _crZhConfig(option, { legend }))
+       .add({
+         chart: { spacingTop: 25, marginTop: 45 },
+         zhConfig: _crZhConfig(option, { legend }),
+         valueMoving:  _crValueMoving(nowSeria, prevSeria)
+       })
        .toConfig();
 
     return config;

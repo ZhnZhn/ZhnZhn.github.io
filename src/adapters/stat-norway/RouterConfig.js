@@ -1,11 +1,13 @@
 
 import toA from './toArea'
+import toY from './toYearly'
 import toC from './toColumn'
 import toT from './toTreeMap'
 
 const _r = {
   DF: toA.crConfig,
   AREA : toA.crConfig,
+  AREA_YEARLY: toY.crConfig,
   COLUMN: toC.fCrConfig(),
   BAR: toC.fCrConfig(),
   COLUMN_CLUSTER: toC.fCrConfig({

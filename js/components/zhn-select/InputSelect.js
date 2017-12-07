@@ -39,6 +39,10 @@ var _ArrowCell = require('./ArrowCell');
 
 var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
 
+var _SpanButton = require('./SpanButton');
+
+var _SpanButton2 = _interopRequireDefault(_SpanButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MAX_WITHOUT_ANIMATION = 800;
@@ -177,10 +181,6 @@ var S = {
     right: '8px',
     color: 'black',
     fontWeight: 'bold'
-  },
-  FOOTER_BT: {
-    display: 'inline-block',
-    cursor: 'pointer'
   },
   FOOTER_PADDING: {
     paddingRight: '12px'
@@ -375,14 +375,6 @@ var InputSelect = (_temp = _class = function (_Component) {
     if (_comp) {
       _comp.classList.remove(CL.ROW_ACTIVE);
     }
-    /*
-     if (!comp){
-       comp = this._getActiveItemComp()
-     }
-     if (comp){
-       comp.classList.remove(CL.ROW_ACTIVE);
-     }
-     */
   };
 
   this._makeVisibleActiveRowComp = function (comp) {
@@ -615,30 +607,20 @@ var InputSelect = (_temp = _class = function (_Component) {
       _react2.default.createElement(
         'span',
         { style: S.FOOTER_BUTTONS },
-        _react2.default.createElement(
-          'span',
-          {
-            style: (0, _extends3.default)({}, S.FOOTER_BT, S.FOOTER_PADDING),
-            onClick: _this3._stepDownOption
-          },
-          'Dn'
-        ),
-        _react2.default.createElement(
-          'span',
-          {
-            style: (0, _extends3.default)({}, S.FOOTER_BT, S.FOOTER_PADDING),
-            onClick: _this3._stepUpOption
-          },
-          'Up'
-        ),
-        _react2.default.createElement(
-          'span',
-          {
-            style: S.FOOTER_BT,
-            onClick: _this3.clearInput
-          },
-          'CL'
-        )
+        _react2.default.createElement(_SpanButton2.default, {
+          style: S.FOOTER_PADDING,
+          caption: 'Dn',
+          onClick: _this3._stepDownOption
+        }),
+        _react2.default.createElement(_SpanButton2.default, {
+          style: S.FOOTER_PADDING,
+          caption: 'Up',
+          onClick: _this3._stepUpOption
+        }),
+        _react2.default.createElement(_SpanButton2.default, {
+          caption: 'CL',
+          onClick: _this3.clearInput
+        })
       )
     );
   };
@@ -659,9 +641,13 @@ var InputSelect = (_temp = _class = function (_Component) {
       if (!isValidDomOptionsCache) {
         _domOptions = options.map(function (item, index) {
           var _styleDiv = index % 2 === 0 ? S.ITEM_ODD : S.ITEM_EVEN;
+
           return _react2.default.createElement(
             'div',
             {
+              //role="option"
+              //aria-selected={this.indexActiveOption === index}
+              //tabIndex="0"
               key: index,
               className: 'option-row',
               style: (0, _extends3.default)({}, S.ITEM_DIV, _styleDiv),
@@ -738,7 +724,7 @@ var InputSelect = (_temp = _class = function (_Component) {
       });
     } else if (isLoadingFailed) {
       _placeholder = 'Loading ' + optionNames + ' Failed';
-      _afterInputEl = _react2.default.createElement('span', {
+      _afterInputEl = _react2.default.createElement(_SpanButton2.default, {
         style: S.SPINNER_FAILED_CELL,
         'data-loader': 'circle-failed',
         onClick: onLoadOption

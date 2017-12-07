@@ -1,0 +1,25 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\faostat\\FaoStatApi.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\faostat\\FaoStatApi.js",
+ "sourceRoot": "",
+ "names": [
+  "C",
+  "BASE",
+  "TAIL",
+  "FaoStatApi",
+  "getRequestUrl",
+  "option",
+  "proxy",
+  "one",
+  "two",
+  "three",
+  "dfElement",
+  "dfDomain",
+  "_element",
+  "checkResponse",
+  "json"
+ ],
+ "mappings": ";;;;;AAAA,IAAMA,IAAI;AACRC,QAAM,qDADE;AAERC,QAAM;AAFE,CAAV;;AAKA,IAAMC,aAAa;AACjBC,eADiB,yBACHC,MADG,EACI;AAAA,QACXC,KADW,GAC0CD,MAD1C,CACXC,KADW;AAAA,QACJC,GADI,GAC0CF,MAD1C,CACJE,GADI;AAAA,QACCC,GADD,GAC0CH,MAD1C,CACCG,GADD;AAAA,QACMC,KADN,GAC0CJ,MAD1C,CACMI,KADN;AAAA,QACaC,SADb,GAC0CL,MAD1C,CACaK,SADb;AAAA,2BAC0CL,MAD1C,CACwBM,QADxB;AAAA,QACwBA,QADxB,oCACiC,IADjC;AAAA,QAEZC,QAFY,GAEDH,SAASC,SAFR;;AAInB,gBAAUJ,KAAV,GAAkBN,EAAEC,IAApB,SAA4BU,QAA5B,iBAAgDC,QAAhD,cAAiEL,GAAjE,cAA6EC,GAA7E,SAAoFR,EAAEE,IAAtF;AACD,GANgB;AAQjBW,eARiB,yBAQHC,IARG,EAQE;AACjB,WAAO,IAAP;AACD;AAVgB,CAAnB;;kBAaeX,U"
+}

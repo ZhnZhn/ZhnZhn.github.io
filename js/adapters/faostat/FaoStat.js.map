@@ -1,0 +1,13 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\faostat\\FaoStat.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\faostat\\FaoStat.js",
+ "sourceRoot": "",
+ "names": [
+  "FaoStat",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU,EAAEC,yBAAF,EAAOC,iCAAP,EAAhB;;kBAEeF,O"
+}

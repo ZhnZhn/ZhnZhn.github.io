@@ -1,5 +1,5 @@
 
-import ArrayUtil from '../utils/ArrayUtil';
+import ArrayUtil from '../../utils/ArrayUtil';
 
 const rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
     , queryTail = "&precision=1&sinceTimePeriod=1996M01";
@@ -39,7 +39,7 @@ const EuroStatApi = {
            : metric ;
         _param = `&${_param}`;
       }
-      
+
       return `${rootUrl}${_group}${_param}${queryTail}`;
   } else if (seriaType === 'COLUMN') {
     return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;

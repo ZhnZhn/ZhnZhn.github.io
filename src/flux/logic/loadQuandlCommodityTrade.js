@@ -3,7 +3,7 @@ import { fetchJson } from '../../utils/fnFetch'
 import { fnCatch } from './fnCatch';
 import ChartStore from '../stores/ChartStore';
 
-import QuandlApi from '../../api/QuandlApi';
+import QuandlApi from '../../adapters/QuandlApi';
 
 import LoadImpl from './LoadImpl'
 

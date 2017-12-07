@@ -1,0 +1,17 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-norway\\StatNorway.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-norway\\StatNorway.js",
+ "sourceRoot": "",
+ "names": [
+  "StatNorway",
+  "Dataset",
+  "api",
+  "adapter",
+  "Table",
+  "optionFetch",
+  "crOptionFetch"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,WAAS,EAAEC,yBAAF,EAAOC,oCAAP,EADQ;AAEjBC,SAAO;AACLF,2BADK;AAELG,iBAAa,mBAASC,aAFjB;AAGLH;AAHK;AAFU,CAAnB;;kBASeH,U"
+}

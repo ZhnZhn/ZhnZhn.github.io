@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import D from './DialogCell'
 import Decor from './decorators/Decorators'
 
+const DF_TIMEOUT = 4000;
+
 const transformOptions = [
   { caption: "NO EFFECT: z[t]=y[t]", value: "none" },
   { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" },
@@ -41,6 +43,7 @@ class DialogType3 extends Component {
 
     this.stock = undefined
     this.transform = undefined
+    this.isLoaded = false
 
     const { noDate, isTransform } = props;
     this.toolbarButtons = this._createType2WithToolbar(
@@ -80,8 +83,21 @@ class DialogType3 extends Component {
     this.transform = option
   }
 
+  _clearLoaded = (stock) => {
+    if (this.isLoaded && this.stock === stock) {
+      this.isLoaded = false
+    }
+  }
   _handleSelectStock = (stock) => {
-    this.stock = stock
+    if (stock && this.stock === stock && !this.isLoaded) {
+      this._handleLoad()
+      this.isLoaded = true
+      setTimeout(this._clearLoaded, DF_TIMEOUT, stock)
+    } else {
+      this.stock = stock
+      this.isLoaded = false
+    }
+
   }
 
   _handleLoad = () => {

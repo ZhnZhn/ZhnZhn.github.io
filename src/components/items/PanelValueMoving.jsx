@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils'
 
@@ -45,6 +45,7 @@ const STYLE = {
 }
 
 class PanelValueMoving extends Component {
+  /*
   static propTypes = {
     valueMoving: PropTypes.shape({
       value: PropTypes.string,
@@ -60,6 +61,7 @@ class PanelValueMoving extends Component {
     msgDateTo: PropTypes.string,
     updateDateTo: PropTypes.func
   }
+  */
 
   constructor(props){
     super()

@@ -13,7 +13,7 @@ const _crTidTop = (v) => {
   };
 }
 
-const StatNorway2Api = {
+const TableApi = {
   getRequestUrl(option){
     const { proxy, metric, dfId } = option
         , id = dfId ? dfId : metric;
@@ -62,4 +62,4 @@ const StatNorway2Api = {
   }
 }
 
-export default StatNorway2Api
+export default TableApi

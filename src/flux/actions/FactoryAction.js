@@ -7,17 +7,15 @@ import BatchActions from './BatchActions'
 import BrowserActions from './BrowserActions'
 import ChartActions from './ChartActions'
 
-const SUBTITLE = 'Loaded from URL Query';
-
 const _crLoadQueryStatic = option => {
-  const { browserType, chartType } = option;
+  const { browserType } = option;
   return new BatchActions([
       {
         action: BrowserActions.showBrowser,
         args: [ browserType ]
       },{
-        action: ChartActions.loadStock,
-        args: [ chartType, browserType, option ]
+        action: ChartActions.loadStockByQuery,
+        args: [ option ]
       }
     ]);
 };
@@ -43,9 +41,7 @@ const FactoryAction = {
      const { browserType, chartType } = option
          , { dialogProps } = ChartStore
                .getSourceConfig(browserType, chartType) || {};
-     option.subtitle = SUBTITLE
-     if (dialogProps) {
-       Object.assign(option, dialogProps)
+     if (dialogProps) {       
        return _crLoadQueryStatic(option);
      } else {
        return _crLoadQueryDynamic(option);

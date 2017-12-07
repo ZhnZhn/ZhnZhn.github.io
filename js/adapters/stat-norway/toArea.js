@@ -8,10 +8,6 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _jsonstat = require('jsonstat');
-
-var _jsonstat2 = _interopRequireDefault(_jsonstat);
-
 var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
@@ -33,21 +29,9 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _toUTC = _fnUtil2.default.toUTC;
-var crChartOption = _fnAdapter2.default.crChartOption;
+var crDsValuesTimes = _fnAdapter2.default.crDsValuesTimes,
+    crChartOption = _fnAdapter2.default.crChartOption;
 
-
-var _crAreaMapSlice = function _crAreaMapSlice(option) {
-  var items = option.items,
-      dfTSlice = option.dfTSlice,
-      mapSlice = {};
-
-  items.forEach(function (item) {
-    if (item.slice) {
-      Object.assign(mapSlice, item.slice);
-    }
-  });
-  return Object.assign(mapSlice, dfTSlice);
-};
 
 var _toData = function _toData(values, times) {
   var _values = Array.isArray(values) ? values : [values];
@@ -80,10 +64,10 @@ var toArea = {
     var _option$title = option.title,
         title = _option$title === undefined ? '' : _option$title,
         subtitle = option.subtitle,
-        mapSlice = _crAreaMapSlice(option),
-        ds = (0, _jsonstat2.default)(json).Dataset(0),
-        values = ds.Data(mapSlice),
-        times = ds.Dimension("Tid").id,
+        _crDsValuesTimes = crDsValuesTimes(json, option),
+        ds = _crDsValuesTimes.ds,
+        values = _crDsValuesTimes.values,
+        times = _crDsValuesTimes.times,
         data = _toData(values, times),
         seria = _crSplineSeria(data, option),
         config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add((0, _extends3.default)({}, crChartOption(ds, data, option), {
@@ -91,6 +75,7 @@ var toArea = {
       zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     })).toConfig();
 
+    console.log(data);
     return config;
   }
 };

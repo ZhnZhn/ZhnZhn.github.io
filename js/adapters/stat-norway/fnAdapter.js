@@ -8,6 +8,10 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
+var _jsonstat = require('jsonstat');
+
+var _jsonstat2 = _interopRequireDefault(_jsonstat);
+
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
@@ -32,7 +36,29 @@ var _crItemCaption = function _crItemCaption(option) {
   return dfId + '_' + caption;
 };
 
+var _crAreaMapSlice = function _crAreaMapSlice(option) {
+  var items = option.items,
+      dfTSlice = option.dfTSlice,
+      mapSlice = {};
+
+  items.forEach(function (item) {
+    if (item.slice) {
+      Object.assign(mapSlice, item.slice);
+    }
+  });
+  return Object.assign(mapSlice, dfTSlice);
+};
+
 var fnAdapter = {
+  crDsValuesTimes: function crDsValuesTimes(json, option) {
+    var mapSlice = _crAreaMapSlice(option),
+        ds = (0, _jsonstat2.default)(json).Dataset(0),
+        values = ds.Data(mapSlice),
+        times = ds.Dimension("Tid").id;
+
+    return { ds: ds, values: values, times: times };
+  },
+
   crId: function crId() {
     return _AdapterFn2.default.crId();
   },

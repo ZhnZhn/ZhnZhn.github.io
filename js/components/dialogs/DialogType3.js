@@ -37,6 +37,8 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var DF_TIMEOUT = 4000;
+
 var transformOptions = [{ caption: "NO EFFECT: z[t]=y[t]", value: "none" }, { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" }, { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" }, { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" }, { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }];
 
 var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
@@ -77,8 +79,21 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       _this.transform = option;
     };
 
+    _this._clearLoaded = function (stock) {
+      if (_this.isLoaded && _this.stock === stock) {
+        _this.isLoaded = false;
+      }
+    };
+
     _this._handleSelectStock = function (stock) {
-      _this.stock = stock;
+      if (stock && _this.stock === stock && !_this.isLoaded) {
+        _this._handleLoad();
+        _this.isLoaded = true;
+        setTimeout(_this._clearLoaded, DF_TIMEOUT, stock);
+      } else {
+        _this.stock = stock;
+        _this.isLoaded = false;
+      }
     };
 
     _this._handleLoad = function () {
@@ -130,6 +145,7 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 
     _this.stock = undefined;
     _this.transform = undefined;
+    _this.isLoaded = false;
 
     var noDate = props.noDate,
         isTransform = props.isTransform;

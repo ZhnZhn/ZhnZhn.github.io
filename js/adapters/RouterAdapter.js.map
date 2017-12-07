@@ -1,0 +1,22 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\RouterAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\RouterAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "RouterAdapter",
+  "Quandl",
+  "api",
+  "adapter",
+  "EuroStat",
+  "UnComtrade",
+  "FaoStat",
+  "StatNorway",
+  "AlphaVantage",
+  "Barchart",
+  "Iex",
+  "Insee"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AACpBC,UAAQ;AACNC,4BADM;AAENC;AAFM,GADY;;AAMpBC,8BANoB;AAOpBC,kCAPoB;AAQpBC,4BARoB;AASpBC,kCAToB;AAUpBC,sCAVoB;AAWpBC,8BAXoB;AAYpBC,oBAZoB;AAapBC;AAboB,CAAtB;;kBAgBeX,a"
+}

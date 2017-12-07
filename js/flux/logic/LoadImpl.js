@@ -4,135 +4,55 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _fnFetch = require('../../utils/fnFetch');
+
+var _RouterAdapter = require('../../adapters/RouterAdapter');
+
+var _RouterAdapter2 = _interopRequireDefault(_RouterAdapter);
 
 var _loadItem = require('./loadItem');
 
 var _loadItem2 = _interopRequireDefault(_loadItem);
 
-var _Api = require('../../api/Api');
-
-var _Api2 = _interopRequireDefault(_Api);
-
-var _EuroStatAdapter = require('../../adapters/eurostat/EuroStatAdapter');
-
-var _EuroStatAdapter2 = _interopRequireDefault(_EuroStatAdapter);
-
-var _StatNorwayAdapter = require('../../adapters/stat-norway/StatNorwayAdapter');
-
-var _StatNorwayAdapter2 = _interopRequireDefault(_StatNorwayAdapter);
-
-var _InseeAdapter = require('../../adapters/insee/InseeAdapter');
-
-var _InseeAdapter2 = _interopRequireDefault(_InseeAdapter);
-
-var _Adapter = require('../../adapters/alpha/Adapter');
-
-var _Adapter2 = _interopRequireDefault(_Adapter);
-
-var _BarchartAdapter = require('../../adapters/barchart/BarchartAdapter');
-
-var _BarchartAdapter2 = _interopRequireDefault(_BarchartAdapter);
-
-var _IexAdapter = require('../../adapters/iex/IexAdapter');
-
-var _IexAdapter2 = _interopRequireDefault(_IexAdapter);
-
-var _QuandlAdapter = require('../../adapters/QuandlAdapter');
-
-var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
-
-var _UnComtradeAdapter = require('../../adapters/uncomtrade/UnComtradeAdapter');
-
-var _UnComtradeAdapter2 = _interopRequireDefault(_UnComtradeAdapter);
-
-var _FaoStatAdapter = require('../../adapters/faostat/FaoStatAdapter');
-
-var _FaoStatAdapter2 = _interopRequireDefault(_FaoStatAdapter);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Quandl = (0, _loadItem2.default)({
-  api: _Api2.default.Quandl,
-  adapter: _QuandlAdapter2.default
-});
+var Quandl = _RouterAdapter2.default.Quandl,
+    UnComtrade = _RouterAdapter2.default.UnComtrade,
+    FaoStat = _RouterAdapter2.default.FaoStat,
+    EuroStat = _RouterAdapter2.default.EuroStat,
+    StatNorway = _RouterAdapter2.default.StatNorway,
+    AlphaVantage = _RouterAdapter2.default.AlphaVantage,
+    Barchart = _RouterAdapter2.default.Barchart,
+    Iex = _RouterAdapter2.default.Iex,
+    Insee = _RouterAdapter2.default.Insee;
 
-var UnComtrade = (0, _loadItem2.default)({
-  api: _Api2.default.UnComtrade,
-  adapter: _UnComtradeAdapter2.default
-});
 
-var FaoStat = (0, _loadItem2.default)({
-  api: _Api2.default.FaoStat,
-  adapter: _FaoStatAdapter2.default
-});
+var LoadImpl = {
+  Quandl: (0, _loadItem2.default)((0, _extends3.default)({}, Quandl)),
+  UnComtrade: (0, _loadItem2.default)((0, _extends3.default)({}, UnComtrade)),
+  FaoStat: (0, _loadItem2.default)((0, _extends3.default)({}, FaoStat)),
+  EuroStat: (0, _loadItem2.default)((0, _extends3.default)({}, EuroStat)),
 
-var EuroStat = (0, _loadItem2.default)({
-  api: _Api2.default.EuroStat,
-  adapter: _EuroStatAdapter2.default
-});
+  StatNorway: (0, _loadItem2.default)((0, _extends3.default)({}, StatNorway.Dataset)),
+  StatNorway2: (0, _loadItem2.default)((0, _extends3.default)({}, StatNorway.Table)),
 
-var StatNorway = (0, _loadItem2.default)({
-  api: _Api2.default.StatNorway,
-  adapter: _StatNorwayAdapter2.default
-});
-var StatNorway2 = (0, _loadItem2.default)({
-  api: _Api2.default.StatNorway2,
-  optionFetch: _Api2.default.StatNorway2.crOptionFetch,
-  adapter: _StatNorwayAdapter2.default
-});
+  AlphaIndicator: (0, _loadItem2.default)((0, _extends3.default)({}, AlphaVantage.Indicator)),
+  AlphaIntraday: (0, _loadItem2.default)((0, _extends3.default)({}, AlphaVantage.Intraday)),
+  AlphaSector: (0, _loadItem2.default)((0, _extends3.default)({}, AlphaVantage.Sector)),
 
-var AlphaIndicator = (0, _loadItem2.default)({
-  api: _Api2.default.Alpha,
-  adapter: _Adapter2.default.Indicator
-});
+  Barchart: (0, _loadItem2.default)((0, _extends3.default)({
+    fnFetch: _fnFetch.fetchJsonp
+  }, Barchart)),
 
-var AlphaIntraday = (0, _loadItem2.default)({
-  api: _Api2.default.Alpha,
-  adapter: _Adapter2.default.Intraday
-});
-
-var AlphaSector = (0, _loadItem2.default)({
-  api: _Api2.default.Alpha,
-  adapter: _Adapter2.default.Sector
-});
-
-var Barchart = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchJsonp,
-  optionFetch: {
-    jsonpCallbackFunction: 'BarchartAPIcallback'
-  },
-  api: _Api2.default.Barchart,
-  adapter: _BarchartAdapter2.default
-});
-
-var Iex = (0, _loadItem2.default)({
-  api: _Api2.default.Iex,
-  adapter: _IexAdapter2.default
-});
-
-var Insee = (0, _loadItem2.default)({
-  fnFetch: _fnFetch.fetchTxt,
-  api: _Api2.default.Insee,
-  adapter: _InseeAdapter2.default
-});
-
-exports.default = {
-  Quandl: Quandl,
-  EuroStat: EuroStat,
-  StatNorway: StatNorway,
-  StatNorway2: StatNorway2,
-  Insee: Insee,
-
-  AlphaIndicator: AlphaIndicator,
-  AlphaIntraday: AlphaIntraday,
-  AlphaSector: AlphaSector,
-
-  Barchart: Barchart,
-
-  Iex: Iex,
-
-  UnComtrade: UnComtrade,
-  FaoStat: FaoStat
+  Iex: (0, _loadItem2.default)((0, _extends3.default)({}, Iex)),
+  Insee: (0, _loadItem2.default)((0, _extends3.default)({
+    fnFetch: _fnFetch.fetchTxt
+  }, Insee))
 };
+
+exports.default = LoadImpl;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadImpl.js.map
