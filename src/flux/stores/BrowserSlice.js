@@ -44,14 +44,17 @@ const fnAddCounter = function(chartType, browserType, browserMenu, value){
 };
 
 const _addDialogProps = (items) => {
-  let propName, item, addProps;
-  for (propName in items){
-    item = items[propName]
-    addProps = item.addProps
+  Object.keys(items).forEach(propName => {
+    const item = items[propName]
+        , addProps = item.addProps;
     if (addProps !== undefined) {
-      Object.assign(item.dialogProps, items[addProps].dialogProps)
+      //Object.assign(item.dialogProps, items[addProps].dialogProps)
+      item.dialogProps = Object.assign({},
+        items[addProps].dialogProps,
+        item.dialogProps
+      )
     }
-  }
+  })
 }
 
 const BrowserSlice = {
@@ -150,7 +153,7 @@ const BrowserSlice = {
   },
   onLoadBrowserDynamicFailed(option){
     const { alertItemId, caption } = option;
-    option.alertItemId = alertItemId || caption                            
+    option.alertItemId = alertItemId || caption
     this.showAlertDialog(option);
   }
 

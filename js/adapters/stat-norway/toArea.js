@@ -75,7 +75,6 @@ var toArea = {
       zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     })).toConfig();
 
-    console.log(data);
     return config;
   }
 };

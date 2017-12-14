@@ -48,6 +48,12 @@ const BrowserConfig = {
     caption: 'Statistics Norway',
     sourceMenuUrl: './data/statistics-norway/source-menu.json'
   },
+  [BT.SWEDEN_STAT]: {
+    browserType: BT.SWEDEN_STAT,
+    isDynamic: true,
+    caption: 'Statistics Sweden',
+    sourceMenuUrl: './data/stat-sweden/source-menu.json'
+  },
   [BT.US_STOCKS]: {
     browserType: BT.US_STOCKS,
     isDynamic: true,

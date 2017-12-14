@@ -55,8 +55,7 @@ const toArea = {
            zhFnRemoveSeries: fnRemoveSeries
          })
          .toConfig()
-
-       console.log(data);
+       
        return config;
    }
 }

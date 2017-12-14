@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _ButtonTab = require('../zhn/ButtonTab');
 
 var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
@@ -73,9 +69,17 @@ var S = {
     left: '430px'
   }
 };
+//import PropTypes from "prop-types";
 
 var ChartToolbar = function (_Component) {
   (0, _inherits3.default)(ChartToolbar, _Component);
+
+  /*
+  static propTypes = {
+    style: PropTypes.object,
+    config: PropTypes.object
+  }
+  */
 
   function ChartToolbar(props) {
     (0, _classCallCheck3.default)(this, ChartToolbar);
@@ -210,9 +214,5 @@ var ChartToolbar = function (_Component) {
   return ChartToolbar;
 }(_react.Component);
 
-ChartToolbar.propTypes = process.env.NODE_ENV !== "production" ? {
-  style: _propTypes2.default.object,
-  config: _propTypes2.default.object
-} : {};
 exports.default = ChartToolbar;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ChartToolBar.js.map

@@ -12,6 +12,7 @@ import ComponentActions, { ComponentActionTypes} from '../../flux/actions/Compon
 import BrowserActions from '../../flux/actions/BrowserActions'
 
 import { BrowserType as BT, ModalDialog } from '../../constants/Type'
+import MODEL from './Model'
 
 const LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0"
     , CAPTION = "ERC v0.14.0";
@@ -36,59 +37,6 @@ const styles = {
     paddingTop: '9px'
   }
 }
-
-const MODEL = [
-  {
-    id: BT.STOCK_MARKETS,
-    cn: 'item__browser',
-    title: 'Stock Markets'
-  },{
-    id: BT.UN_COMTRADE,
-    cn: 'item__eurostat',
-    title: 'UN Comtrade'
-  },{
-    id: BT.FAOSTAT,
-    cn: 'item__eurostat',
-    title: 'FAOSTAT',
-  },{
-    id: BT.EUROSTAT,
-    cn: 'item__eurostat',
-    title: 'Eurostat'
-  },{
-    id: BT.FRANCE_STATISTICS,
-    cn: 'item__eurostat',
-    title: 'Insee: France Statistics'
-  },{
-    id: BT.NORWAY_STATISTICS,
-    cn: 'item__eurostat',
-    title: 'Statistics Norway',
-    isNew: true
-  },{
-    id: BT.QUANDL,
-    isQuandl: true,
-    title: 'Quandl Economic'
-  },{
-    id: BT.US_STOCKS,
-    title: 'US Stocks by Sectors'
-  },{
-    id: BT.NYSE_STOCKS,
-    title: 'US NYSE by Sectors'
-  },{
-    id: BT.NASDAQ_STOCKS,
-    title: 'US NASDAQ by Sectors'
-  },{
-    id: BT.LONDON_STOCKS,
-    title: 'LSE by Sectors'
-  },{
-    id: BT.PREMIUM_SAMPLE,
-    title: 'Quandl Premium Sample'
-  },{
-    id: BT.WATCH_LIST,
-    cn: 'item__watch',
-    title: 'Watch'
-  }
-];
-
 
 class HeaderBar extends Component {
 

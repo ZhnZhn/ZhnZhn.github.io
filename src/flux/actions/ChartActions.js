@@ -61,7 +61,9 @@ const _addSettings = (option) => {
     case 'AL': case 'AL_S': case 'AL_I':
       option.apiKey = ChartStore.getAlphaKey()
       break;
-    case 'FS': case 'FAO': case 'NST': case 'NST_2':
+    case 'FS': case 'FAO':
+    case 'NST': case 'NST_2':
+    case 'SWS':
       option.proxy = ChartStore.getProxy()
       break;
     default:

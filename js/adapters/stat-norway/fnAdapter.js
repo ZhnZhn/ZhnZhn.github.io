@@ -18,13 +18,21 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var SOURCE = {
+  DF: 'Unknown',
+  NST: 'Statisctics Norway',
+  SWS: 'Statisctics Sweden'
+};
+
 var _crDescr = function _crDescr(updated, option) {
   var _date = updated.replace('T', ' ').replace('Z', ''),
       _option$dfId = option.dfId,
-      dfId = _option$dfId === undefined ? '' : _option$dfId;
+      dfId = _option$dfId === undefined ? '' : _option$dfId,
+      browserType = option.browserType,
+      _source = SOURCE[browserType] || SOURCE.DF;
 
 
-  return 'TableId: ' + dfId + ' <BR/> Statisctics Norway: ' + _date;
+  return 'TableId: ' + dfId + ' <BR/> ' + _source + ': ' + _date;
 };
 
 var _crItemCaption = function _crItemCaption(option) {

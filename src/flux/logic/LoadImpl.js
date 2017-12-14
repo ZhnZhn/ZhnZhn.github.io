@@ -4,8 +4,9 @@ import Adapter from '../../adapters/RouterAdapter'
 import f from './loadItem'
 
 const {
-  Quandl, UnComtrade, FaoStat, EuroStat,
-  StatNorway, AlphaVantage, Barchart,
+  Quandl, UnComtrade, FaoStat,
+  EuroStat, StatNorway, StatSweden,
+  AlphaVantage, Barchart,
   Iex, Insee
 } = Adapter;
 
@@ -17,6 +18,8 @@ const LoadImpl = {
 
   StatNorway: f({ ...StatNorway.Dataset }),
   StatNorway2: f({ ...StatNorway.Table }),
+
+  StatSweden: f({ ...StatSweden.Table }),
 
   AlphaIndicator: f({ ...AlphaVantage.Indicator }),
   AlphaIntraday: f({ ...AlphaVantage.Intraday }),

@@ -6,7 +6,7 @@ import { loadQuandlCommodityTrade } from './loadQuandlCommodityTrade';
 
 import LoadImpl from './LoadImpl'
 
-const LoadConfig = {  
+const LoadConfig = {
   [LT.Q]: LoadImpl.Quandl,
   [LT.QCT]: loadQuandlCommodityTrade,
 
@@ -19,6 +19,7 @@ const LoadConfig = {
   [LT.EU_STAT]: LoadImpl.EuroStat,
   [LT.NST]: LoadImpl.StatNorway,
   [LT.NST_2]: LoadImpl.StatNorway2,
+  [LT.SWS]: LoadImpl.StatSweden,
 
   [LT.FS]: LoadImpl.Insee,
   [LT.UN]: LoadImpl.UnComtrade,

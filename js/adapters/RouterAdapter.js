@@ -28,6 +28,10 @@ var _StatNorway = require('./stat-norway/StatNorway');
 
 var _StatNorway2 = _interopRequireDefault(_StatNorway);
 
+var _StatSweden = require('./stat-sweden/StatSweden');
+
+var _StatSweden2 = _interopRequireDefault(_StatSweden);
+
 var _AlphaVantage = require('./alpha/AlphaVantage');
 
 var _AlphaVantage2 = _interopRequireDefault(_AlphaVantage);
@@ -56,6 +60,7 @@ var RouterAdapter = {
   UnComtrade: _UnComtrade2.default,
   FaoStat: _FaoStat2.default,
   StatNorway: _StatNorway2.default,
+  StatSweden: _StatSweden2.default,
   AlphaVantage: _AlphaVantage2.default,
   Barchart: _Barchart2.default,
   Iex: _Iex2.default,

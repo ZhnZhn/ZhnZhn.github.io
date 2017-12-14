@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import ButtonTab from '../zhn/ButtonTab'
 
@@ -33,10 +33,12 @@ const S = {
 }
 
 class ChartToolbar extends Component {
+  /*
   static propTypes = {
     style: PropTypes.object,
     config: PropTypes.object
   }
+  */
 
   constructor(props){
     super()

@@ -6,6 +6,7 @@ export const BrowserType = {
    FAOSTAT: 'FAO',
    FRANCE_STATISTICS : 'FS',
    NORWAY_STATISTICS: 'NST',
+   SWEDEN_STAT: 'SWS',
 
    PREMIUM_SAMPLE : 'QPS',
    ECONOMIC : 'QE',
@@ -70,6 +71,7 @@ export const LoadType = {
   FS: 'FS',
   NST: 'NST',
   NST_2: 'NST_2',
+  SWS: 'SWS',
   UN: 'UN',
   FAO: 'FAO',
   WL: 'WL'

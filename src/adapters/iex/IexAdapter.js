@@ -5,8 +5,7 @@ const IexAdapter = {
   toConfig(json, option){
     const config = Router
             .getAdapter(option)
-            .toConfig(json, option);
-    //console.log(json)
+            .toConfig(json, option);    
     return { config };
   },
 

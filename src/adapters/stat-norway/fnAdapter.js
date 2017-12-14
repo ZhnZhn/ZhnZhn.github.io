@@ -3,13 +3,20 @@ import JSONstat from 'jsonstat';
 
 import AdapterFn from '../AdapterFn';
 
+const SOURCE = {
+  DF: 'Unknown',
+  NST: 'Statisctics Norway',
+  SWS: 'Statisctics Sweden'
+};
+
 const _crDescr = (updated, option) => {
   const _date = updated
           .replace('T', ' ')
           .replace('Z', '')
-      , { dfId='' } = option;
-
-  return `TableId: ${dfId} <BR/> Statisctics Norway: ${_date}`;
+      , { dfId='', browserType } = option
+      , _source = SOURCE[browserType] || SOURCE.DF;
+  
+  return `TableId: ${dfId} <BR/> ${_source}: ${_date}`;
 }
 
 const _crItemCaption = (option) => {

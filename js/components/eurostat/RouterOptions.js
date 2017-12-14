@@ -13,6 +13,7 @@ var _Type = require('../../constants/Type');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var T = {
+  T1: 't1',
   T2: 't2',
   T3: 't3',
   T3A: 't3a',
@@ -42,6 +43,10 @@ var C = {
 
 var _crDF = function _crDF() {
   return [{ caption: 'Default: Area', value: V.A }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Bar: All Countries', value: V.B }];
+};
+
+var _crT1 = function _crT1() {
+  return [{ caption: 'Area', value: V.A }];
 };
 
 var _crT2 = function _crT2() {
@@ -127,6 +132,8 @@ var RouterOptions = {
         _captions = _crCaptions(option);
 
     switch (chartsType) {
+      case T.T1:
+        return _crT1();
       case T.T2:
         return _crT2();
       case T.T3:

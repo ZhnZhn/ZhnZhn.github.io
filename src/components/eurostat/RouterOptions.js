@@ -2,6 +2,7 @@
 import { CompItemType } from '../../constants/Type'
 
 const T = {
+  T1: 't1',
   T2: 't2',
   T3: 't3',
   T3A: 't3a',
@@ -35,6 +36,12 @@ const _crDF = () => {
     { caption : 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
     { caption : 'Column: All Countries', value: V.C },
     { caption : 'Bar: All Countries', value: V.B }
+  ];
+}
+
+const _crT1 = () => {
+  return [
+    { caption : 'Area', value: V.A },
   ];
 }
 
@@ -136,6 +143,7 @@ const RouterOptions = {
      const { chartsType } = option
           , _captions = _crCaptions(option);
      switch(chartsType){
+       case T.T1: return _crT1();
        case T.T2: return _crT2();
        case T.T3: return _crT3(_captions[0]);
        case T.T3A: return _crT3A(_captions[0]);

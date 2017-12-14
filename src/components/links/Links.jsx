@@ -69,6 +69,14 @@ const StatNorway = withProps({
   title: "Statistics Norway"
 })(BaseComponent)
 
+const StatSweden = withProps({
+  className: CL_LINK,
+  href: "https://www.scb.se/en/",
+  style: S.BLUE,
+  title: "Statistics Sweden"
+})(BaseComponent)
+
+
 export default {
   Quandl,
   Barchart,
@@ -77,5 +85,6 @@ export default {
   UnComtrade,
   FaoStat,
   Insee,
-  StatNorway
+  StatNorway,
+  StatSweden
 };

@@ -141,7 +141,9 @@ var _router = {
     switch (browserType) {
       case _Type.BrowserType.STOCK_MARKETS:
         this._loadSM();break;
-      case _Type.BrowserType.EUROSTAT:case _Type.BrowserType.NORWAY_STATISTICS:
+      case _Type.BrowserType.EUROSTAT:
+      case _Type.BrowserType.NORWAY_STATISTICS:
+      case _Type.BrowserType.SWEDEN_STAT:
         this._loadES();break;
       default:
         return undefined;

@@ -42,7 +42,7 @@ class DialogStatN extends Component {
     ];
     this._chartOptions = RouterOptions.crOptions(props)
     this._items = []
-    this._selectOptions = []
+    this._selectOptions = []    
 
     this.state = {
       isShowLabels: true,
@@ -201,7 +201,7 @@ class DialogStatN extends Component {
       return (
         <D.RowInputSelect
           key={id}
-          {...rest}          
+          {...rest}
           onSelect={this._fSelect(index).bind(this)}
         />
       );

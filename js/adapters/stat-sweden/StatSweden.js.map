@@ -1,0 +1,16 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-sweden\\StatSweden.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-sweden\\StatSweden.js",
+ "sourceRoot": "",
+ "names": [
+  "StatSweden",
+  "Table",
+  "api",
+  "optionFetch",
+  "crOptionFetch",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,SAAO;AACLC,2BADK;AAELC,iBAAa,mBAASC,aAFjB;AAGLC;AAHK;AADU,CAAnB;;kBAQeL,U"
+}

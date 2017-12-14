@@ -52,6 +52,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   isDynamic: true,
   caption: 'Statistics Norway',
   sourceMenuUrl: './data/statistics-norway/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.SWEDEN_STAT, {
+  browserType: _Type.BrowserType.SWEDEN_STAT,
+  isDynamic: true,
+  caption: 'Statistics Sweden',
+  sourceMenuUrl: './data/stat-sweden/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,

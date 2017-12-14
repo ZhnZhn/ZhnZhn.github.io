@@ -82,6 +82,13 @@ var StatNorway = (0, _withProps2.default)({
   title: "Statistics Norway"
 })(_Link2.default);
 
+var StatSweden = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://www.scb.se/en/",
+  style: S.BLUE,
+  title: "Statistics Sweden"
+})(_Link2.default);
+
 exports.default = {
   Quandl: Quandl,
   Barchart: Barchart,
@@ -90,6 +97,7 @@ exports.default = {
   UnComtrade: UnComtrade,
   FaoStat: FaoStat,
   Insee: Insee,
-  StatNorway: StatNorway
+  StatNorway: StatNorway,
+  StatSweden: StatSweden
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map

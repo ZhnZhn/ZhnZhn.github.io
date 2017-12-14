@@ -64,16 +64,14 @@ var fnAddCounter = function fnAddCounter(chartType, browserType, browserMenu, va
 };
 
 var _addDialogProps = function _addDialogProps(items) {
-  var propName = void 0,
-      item = void 0,
-      addProps = void 0;
-  for (propName in items) {
-    item = items[propName];
-    addProps = item.addProps;
+  Object.keys(items).forEach(function (propName) {
+    var item = items[propName],
+        addProps = item.addProps;
     if (addProps !== undefined) {
-      Object.assign(item.dialogProps, items[addProps].dialogProps);
+      //Object.assign(item.dialogProps, items[addProps].dialogProps)
+      item.dialogProps = Object.assign({}, items[addProps].dialogProps, item.dialogProps);
     }
-  }
+  });
 };
 
 var BrowserSlice = {

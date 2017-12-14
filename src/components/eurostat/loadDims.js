@@ -4,7 +4,8 @@ import JSONstat from 'jsonstat';
 const MSG_STILL_LOADING = "Another dims are still loading.";
 
 const C = {
-  ROOT_URL: 'http://data.ssb.no/api/v0/en/table',
+  //ROOT_URL: 'http://data.ssb.no/api/v0/en/table',
+  //ROOT_URL: 'http://api.scb.se/OV0104/v1/doris/en/ssd',
   SELECTION_ALL: {
     selection: {
       filter: 'all',

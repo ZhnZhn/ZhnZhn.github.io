@@ -100,7 +100,9 @@ const _router = {
     switch(browserType){
       case BT.STOCK_MARKETS:
         this._loadSM(); break;
-      case BT.EUROSTAT: case BT.NORWAY_STATISTICS:
+      case BT.EUROSTAT:
+      case BT.NORWAY_STATISTICS:
+      case BT.SWEDEN_STAT:
          this._loadES(); break;
       default: return undefined;
     }

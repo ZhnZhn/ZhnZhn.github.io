@@ -13,7 +13,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var IexAdapter = {
   toConfig: function toConfig(json, option) {
     var config = _RouterAdapter2.default.getAdapter(option).toConfig(json, option);
-    //console.log(json)
     return { config: config };
   },
   toSeries: function toSeries(json, option, chart) {
