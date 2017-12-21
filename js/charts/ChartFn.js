@@ -362,7 +362,21 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
     var arrSplit = (value + '').split('.'),
         decimal = arrSplit[1] ? 2 : 0;
     return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
-  }
+  },
+  toNumberFormatAll: function toNumberFormatAll(value) {
+    var arrSplit = (value + '').split('.'),
+        decimal = arrSplit[1] ? arrSplit[1].length : 0;
+    return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
+  },
+
+
+  crTpId: function crTpId() {
+    return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
+  },
+
+  toDateFormatDMY: _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y'),
+  toDateFormatDMYT: _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M')
+
 });
 
 exports.default = ChartFn;

@@ -25,7 +25,7 @@ class ComponentHrzContainer extends Component {
   }
 
   _onStore = (actionType, data) => {
-     if (actionType === this.props.addAction){
+     if (actionType === this.props.addAction){       
        this.setState(prevState => {
          prevState.containers.unshift(data)
          return prevState;

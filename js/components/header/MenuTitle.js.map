@@ -1,0 +1,25 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\header\\MenuTitle.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\header\\MenuTitle.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "ROOT",
+  "position",
+  "paddingLeft",
+  "color",
+  "ARROW",
+  "top",
+  "left",
+  "MenuTitle",
+  "props",
+  "title",
+  "CL",
+  "onClick",
+  "onReg",
+  "TITLE"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAM;AACJC,cAAU,UADN;AAEJC,iBAAa,MAFT;AAGJC,WAAO;AAHH,GADE;AAMRC,SAAO;AACLH,cAAU,UADL;AAELI,SAAK,GAFA;AAGLC,UAAM;AAHD;AANC,CAAV;;IAaMC,S;;;;;;;;;;6BACI;AAAA,mBACgC,KAAKC,KADrC;AAAA,UACEC,KADF,UACEA,KADF;AAAA,UACSC,EADT,UACSA,EADT;AAAA,UACaC,OADb,UACaA,OADb;AAAA,UACsBC,KADtB,UACsBA,KADtB;;AAEN,UAAI,CAACH,KAAL,EAAY;AACV,eAAO,IAAP;AACD;AACD,aACE;AAAA;AAAA;AACE,qBAAWC,GAAGG,KADhB;AAEE,iBAAOd,EAAEC,IAFX;AAGE,mBAASW,OAHX;AAIE,iBAAOC;AAJT;AAMGH,aANH;AAOE;AAAA;AAAA,YAAM,OAAOV,EAAEK,KAAf;AACG;AADH;AAPF,OADF;AAaD;;;;;kBAGYG,S"
+}

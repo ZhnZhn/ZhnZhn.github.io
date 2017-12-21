@@ -19,20 +19,20 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SOURCE = {
-  DF: 'Unknown',
-  NST: 'Statisctics Norway',
-  SWS: 'Statisctics Sweden'
+  DF: 'Unknown'
 };
 
-var _crDescr = function _crDescr(updated, option) {
+var _crDescr = function _crDescr(_ref, option) {
+  var _ref$updated = _ref.updated,
+      updated = _ref$updated === undefined ? '' : _ref$updated,
+      _ref$source = _ref.source,
+      source = _ref$source === undefined ? SOURCE.DF : _ref$source;
   var _date = updated.replace('T', ' ').replace('Z', ''),
       _option$dfId = option.dfId,
-      dfId = _option$dfId === undefined ? '' : _option$dfId,
-      browserType = option.browserType,
-      _source = SOURCE[browserType] || SOURCE.DF;
+      dfId = _option$dfId === undefined ? '' : _option$dfId;
 
 
-  return 'TableId: ' + dfId + ' <BR/> ' + _source + ': ' + _date;
+  return 'TableId: ' + dfId + ' <BR/> ' + source + ': ' + _date;
 };
 
 var _crItemCaption = function _crItemCaption(option) {
@@ -79,14 +79,13 @@ var fnAdapter = {
     return tidIds[tidIds.length - 1];
   },
 
-  crInfo: function crInfo(_ref, option) {
-    var _ref$label = _ref.label,
-        label = _ref$label === undefined ? '' : _ref$label,
-        _ref$updated = _ref.updated,
-        updated = _ref$updated === undefined ? '' : _ref$updated;
+  crInfo: function crInfo(ds, option) {
+    var _ds$label = ds.label,
+        label = _ds$label === undefined ? '' : _ds$label;
+
     return {
       name: label,
-      description: _crDescr(updated, option)
+      description: _crDescr(ds, option)
     };
   },
 

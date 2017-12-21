@@ -28,14 +28,14 @@ const _router = {
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === 'development') {
       return import("js/components/chart-config/ChartConfigDialog.js")
-        .then(module => { return module.default; })
+        .then(module => module.default)
     }
     /*eslint-enable no-undef */
     return import(
        /* webpackChunkName: "config-dialog" */
        /* webpackMode: "lazy" */
        "../../components/chart-config/ChartConfigDialog"
-     ).then(module => { return module.default; })
+     ).then(module => module.default)
   },
 
 
@@ -69,18 +69,18 @@ const _router = {
   _loadES() {
      /*eslint-disable no-undef */
      if ( process.env.NODE_ENV === 'development') {
-       this.ES = import("js/components/eurostat/EurostatDialogs.js")
+       return this.ES = import("js/components/eurostat/EurostatDialogs.js")
          .then(module => module.default )
-         .catch(err => console.log(MSG_OFFLINE))
+         .catch(err => console.log(MSG_OFFLINE));
     /*eslint-enable no-undef */
      } else {
-      this.ES = import(
-           /* webpackChunkName: "eurostat-dialogs" */
-           /* webpackMode: "lazy" */
-           "../../components/eurostat/EurostatDialogs"
+      return this.ES = import(
+         /* webpackChunkName: "eurostat-dialogs" */
+         /* webpackMode: "lazy" */
+          "../../components/eurostat/EurostatDialogs"
          )
         .then(module => module.default )
-        .catch(err => console.log(MSG_OFFLINE))
+        .catch(err => console.log(MSG_OFFLINE));
       }
   },
   get DialogEurostat() {
@@ -93,7 +93,8 @@ const _router = {
     return this.ES.then( D => D.Eurostat3 )
   },
   get DialogStatN() {
-    return this.ES.then( D => D.StatN )
+    const ES = this.ES || this._loadES()
+    return ES.then( D => D.StatN );
   },
 
   loadDialogs(browserType) {

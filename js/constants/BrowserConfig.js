@@ -52,11 +52,34 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   isDynamic: true,
   caption: 'Statistics Norway',
   sourceMenuUrl: './data/statistics-norway/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NORWAY_STAT_ALL, {
+  browserType: _Type.BrowserType.NORWAY_STAT_ALL,
+  isDynamic: true,
+  caption: 'Statistics Norway All',
+  dfProps: {
+    bT: _Type.BrowserType.NORWAY_STAT_ALL,
+    lT: 'NST_2',
+    sP: 'Stat. Norway',
+    dU: './data/statistics-norway/statistics-norway.html',
+    rootUrl: 'http://data.ssb.no/api/v0/en/table'
+  }
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.SWEDEN_STAT, {
   browserType: _Type.BrowserType.SWEDEN_STAT,
   isDynamic: true,
   caption: 'Statistics Sweden',
   sourceMenuUrl: './data/stat-sweden/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.SWEDEN_STAT_ALL, {
+  browserType: _Type.BrowserType.SWEDEN_STAT_ALL,
+  isDynamic: true,
+  caption: 'Statistics Sweden All',
+  sourceMenuUrl: './data/stat-sweden/source-menu.json',
+  dfProps: {
+    bT: _Type.BrowserType.SWEDEN_STAT_ALL,
+    lT: 'SWS',
+    sP: 'Stat. Sweden',
+    dU: './data/stat-sweden/statistics-sweden.html',
+    rootUrl: 'http://api.scb.se/OV0104/v1/doris/en/ssd'
+  }
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,

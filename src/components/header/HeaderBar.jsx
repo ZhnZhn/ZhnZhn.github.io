@@ -7,7 +7,7 @@ import FlatButton from '../zhn-m/FlatButton'
 import ModalButton from '../zhn-m/ModalButton'
 import HotBar from './HotBar'
 import LimitRemainingLabel from './LimitRemainingLabel'
-import PanelBrowsers from './PanelBrowsers'
+import BrowserMenu from './BrowserMenu'
 import ComponentActions, { ComponentActionTypes} from '../../flux/actions/ComponentActions'
 import BrowserActions from '../../flux/actions/BrowserActions'
 
@@ -160,7 +160,7 @@ class HeaderBar extends Component {
               style={styles.lbLimit}
            />
 
-           <PanelBrowsers
+           <BrowserMenu
               className="header__panel-browser"
               isShow={isDS}
               model={MODEL}

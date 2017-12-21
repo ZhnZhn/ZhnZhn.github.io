@@ -5,11 +5,11 @@ import Factory from '../logic/Factory';
 const ItemDialogLogic = {
 
   showItemDialog(slice, itemConf){
-    const { type , browserType } = itemConf;
+    const { type , browserType, conf } = itemConf;
     if (slice[type]){
       return Promise.resolve({ key: type });
     } else {
-      return Factory.createDialog(type, browserType)
+      return Factory.createDialog(type, browserType, conf)
         .then(Comp => {
              slice[type] = true
              return { key:type, Comp };
@@ -65,9 +65,9 @@ const ComponentSlice = {
     this.trigger(ComponentActionTypes.SHOW_ABOUT);
   },
 
-  onShowDialog(type, browserType){
+  onShowDialog(type, browserType, conf){    
     ItemDialogLogic.showItemDialog(
-      this.dialogInit, { type, browserType }
+      this.dialogInit, { type, browserType, conf }
     ).then(r => {
        this.trigger(ComponentActionTypes.SHOW_DIALOG, r)
     });

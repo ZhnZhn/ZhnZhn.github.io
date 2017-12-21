@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../../src/flux/logic/RouterBrowser.js"],"names":["RouterBrowser","DEFAULT","US_STOCKS","NYSE_STOCKS","NASDAQ_STOCKS","LONDON_STOCKS"],"mappings":";;;;;;;;;;;;AAAA;;AAEA;;;;AACA;;;;;;AAEA,IAAMA;AACHC;;AADG,iDAGH,kBAAYC,SAHT,iFAIH,kBAAYC,WAJT,iFAKH,kBAAYC,aALT,iFAMH,kBAAYC,aANT,kDAAN;;kBASeL,a","file":"RouterBrowser.js","sourcesContent":["import { BrowserType } from '../../constants/Type';\r\n\r\nimport SourceBrowserDynamic from '../../components/browser-container/SourceBrowserDynamic';\r\nimport SourceBrowserDynamic2 from '../../components/browser-container/SourceBrowserDynamic2';\r\n\r\nconst RouterBrowser = {\r\n   DEFAULT : SourceBrowserDynamic,\r\n\r\n  [BrowserType.US_STOCKS] : SourceBrowserDynamic2,\r\n  [BrowserType.NYSE_STOCKS] : SourceBrowserDynamic2,\r\n  [BrowserType.NASDAQ_STOCKS] : SourceBrowserDynamic2,\r\n  [BrowserType.LONDON_STOCKS] : SourceBrowserDynamic2\r\n};\r\n\r\nexport default RouterBrowser\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\RouterBrowser.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\RouterBrowser.js",
+ "sourceRoot": "",
+ "names": [
+  "RouterBrowser",
+  "DEFAULT",
+  "US_STOCKS",
+  "NYSE_STOCKS",
+  "NASDAQ_STOCKS",
+  "LONDON_STOCKS",
+  "WATCH_LIST",
+  "process",
+  "env",
+  "NODE_ENV",
+  "then",
+  "module",
+  "default",
+  "_BrowserSlider"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;AAAA;;AAEA;;;;AACA;;;;;;AAEA,IAAMA;AACJC;;AADI,iDAGH,kBAAGC,SAHA,iFAIH,kBAAGC,WAJA,iFAKH,kBAAGC,aALA,iFAMH,kBAAGC,aANA,oDAQC,kBAAGC,UARJ,mIAQkB;AACpB;AACA,MAAKC,QAAQC,GAAR,CAAYC,QAAZ,KAAyB,aAA9B,EAA6C;AAC3C,WAAO,cAAO,6CAAP,EACJC,IADI,CACC;AAAA,aAAUC,OAAOC,OAAjB;AAAA,KADD,CAAP;AAED;AACD;AACA,SAAO;AACJ;AACA;AACA,+CAHI,EAIJF,IAJI,CAIC;AAAA,WAAUC,OAAOC,OAAjB;AAAA,GAJD,CAAP;AAKD,CApBG,oJAsBiB;AACnB;AACA,MAAKL,QAAQC,GAAR,CAAYC,QAAZ,KAAyB,aAA9B,EAA6C;AAC3C,WAAO,cAAO,+CAAP,EACJC,IADI,CACC;AAAA,aAAUC,OAAOC,OAAjB;AAAA,KADD,CAAP;AAED;AACD;AACA,SAAO;AACJ;AACA;AACA,iDAHI,EAIJF,IAJI,CAIC;AAAA,WAAUC,OAAOC,OAAjB;AAAA,GAJD,CAAP;AAKD,CAlCG,0HAoCW;AACb,SAAO,KAAKC,cAAZ;AACD,CAtCG,yFAAN;;kBA0Ceb,a"
+}

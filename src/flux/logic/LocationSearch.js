@@ -11,18 +11,18 @@ const C = {
   Q: 'Q'
 };
 
+const _isQuery = (obj) => obj &&
+    obj.cT === C.SM_WIKI ||
+    obj.bT === C.UN ||
+    obj.bT === C.QE;
+
 const _trSearchToOptions = () => {
   const search = (window.location)
            ? window.location.search
            : null;
   try {
     const obj = queryString.parse(search);
-
-    if (obj &&
-        obj.cT === C.SM_WIKI ||
-        obj.bT === C.UN ||
-        obj.bT === C.QE
-    ) {
+    if (_isQuery(obj)){
       return LocationQuery
         .toOptions(obj);
     } else {

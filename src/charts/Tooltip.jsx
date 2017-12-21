@@ -1,4 +1,4 @@
-import Highcharts from 'highcharts';
+
 import { render } from 'react-dom';
 
 import ChartFn from './ChartFn'
@@ -21,12 +21,13 @@ const C = {
 const TITLE_STYLE = `style="color:${C.TITLE_C};"`;
 const FONT_STYLE = 'font-size:16px;font-weight:bold';
 
-const _numberFormat = (value) => {
-  const arrSplit = (value+'').split('.')
-      , decimal = arrSplit[1] ? arrSplit[1].length : 0;
-   return Highcharts
-     .numberFormat(value, decimal, '.', ' ');
-}
+const {
+  crTpId,
+  toNumberFormat,
+  toNumberFormatAll,
+  toDateFormatDMY,
+  toDateFormatDMYT
+} = ChartFn;
 
 const _crSpan = (t='', v='', { color=C.VALUE_C }={}) => {
   const _vStyle = `style="color:${color};${FONT_STYLE}"`
@@ -182,14 +183,14 @@ const _fnCategory = function({ id, point }){
   const { y, c } = point;
   return `${_crHeader(c, id)}
   <div class="tp__body">
-    ${_crRow('Value', _numberFormat(y))}
+    ${_crRow('Value', toNumberFormatAll(y))}
   </div>`;
 };
 
 const _fnTreeMap = function({ id, point }){
   const { title, label, value, percent='' } = point
   , _percent = percent ? `(${percent}%)` : ''
-  , _value = `${_numberFormat(value)} ${_percent}`;
+  , _value = `${toNumberFormatAll(value)} ${_percent}`;
   return `${_crHeader(title, id)}
   <div class="tp_body">
     ${_crRow('', label)}
@@ -217,7 +218,7 @@ const _fnCalcWidthSparkType4 = function(value, total){
 
 const _fnStackedAreaTooltip = function({id, value, point}){
   const {nameFull, category, percent='0.0', total=0} = point
-      , _total = ChartFn.toNumberFormat(total)
+      , _total = toNumberFormat(total)
       , { fullWidth, width } = _fnCalcWidthSparkType4(value, _total);
 
   return _crHeader(nameFull, id) + _fnTooltipSparkType4({
@@ -227,8 +228,8 @@ const _fnStackedAreaTooltip = function({id, value, point}){
 
 const _fnTreeMapTooltip = function({id, point}){
   const {nameFull, year, value='0.0', percent='0.0', total=0} = point
-      , _value = ChartFn.toNumberFormat(value)
-      , _total = ChartFn.toNumberFormat(total)
+      , _value = toNumberFormat(value)
+      , _total = toNumberFormat(total)
       , { fullWidth, width } = _fnCalcWidthSparkType4(_value, _total);
 
   return _crHeader(nameFull, id) + _fnTooltipSparkType4({
@@ -289,16 +290,13 @@ const _fnAddHandlerCloseAndSparklines = function(id, point){
   }, 1);
 }
 
-const _fnDateFormatDMY = Highcharts.dateFormat.bind(null, '%A, %b %d, %Y')
-const _fnDateFormatDMYT = Highcharts.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M')
 const _fnFormatCategory = x => x;
-
 
 const _fnBasePointFormatter = function( option ){
   return function(){
    const {
           fnTemplate, onAfterRender=_fnAddHandlerClose,
-          fnDateFormat = _fnDateFormatDMY,
+          fnDateFormat = toDateFormatDMY,
           isWithColor, isWithValueText, isWithValue
          } = option
        , point = this
@@ -307,13 +305,16 @@ const _fnBasePointFormatter = function( option ){
        , color = isWithColor
            ? point.color || series.color
            : undefined
-       , { zhValueText, name='Value', id, zhSeriaId } = series.userOptions
-       , _id = zhSeriaId || id || 'TP'
+       , { zhValueText, name='Value',
+           //id, zhSeriaId
+         } = series.userOptions
+       //, _id = zhSeriaId || id || 'TP'
+       , _id = crTpId()
        , valueText = isWithValueText
             ? zhValueText || name
             : 'Value'
        , value = isWithValue
-            ? ChartFn.toNumberFormat(point.y)
+            ? toNumberFormat(point.y)
             : null;
 
        onAfterRender(_id, point)
@@ -329,7 +330,7 @@ const Tooltip = {
    }),
    fnBasePointFormatterT: _fnBasePointFormatter({
      fnTemplate : _fnBaseTooltip,
-     fnDateFormat: _fnDateFormatDMYT,
+     fnDateFormat: toDateFormatDMYT,
      isWithColor: true, isWithValueText: true, isWithValue: true
   }),
   fnBasePointFormatterC: _fnBasePointFormatter({
@@ -361,8 +362,8 @@ const Tooltip = {
     fnTemplate: _fnVolumeTooltip, isWithValue: true
   }),
   fnVolumePointFormatterT: _fnBasePointFormatter({
-    fnTemplate: _fnVolumeTooltip,
-    fnDateFormat: _fnDateFormatDMYT,
+    fnTemplate: _fnVolumeTooltip,    
+    fnDateFormat: toDateFormatDMYT,
     isWithValue: true
   }),
 

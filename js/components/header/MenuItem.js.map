@@ -1,0 +1,32 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\header\\MenuItem.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\header\\MenuItem.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "NEW",
+  "display",
+  "float",
+  "color",
+  "MenuItem",
+  "props",
+  "CL",
+  "item",
+  "onClickDynamic",
+  "onClickQuandl",
+  "cn",
+  "id",
+  "title",
+  "isQuandl",
+  "isNew",
+  "_className",
+  "ROW",
+  "ITEM_DF",
+  "_onClick",
+  "bind",
+  "_el"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,OAAK;AACHC,aAAS,cADN;AAEHC,WAAO,OAFJ;AAGHC,WAAO;AAHJ;AADG,CAAV;;AAQA,IAAMC,WAAW,SAAXA,QAAW,CAACC,KAAD,EAAW;AAAA,MAClBC,EADkB,GAC0BD,KAD1B,CAClBC,EADkB;AAAA,MACdC,IADc,GAC0BF,KAD1B,CACdE,IADc;AAAA,MACRC,cADQ,GAC0BH,KAD1B,CACRG,cADQ;AAAA,MACQC,aADR,GAC0BJ,KAD1B,CACQI,aADR;;AAAA,MAElBC,EAFkB,GAEiBH,IAFjB,CAElBG,EAFkB;AAAA,MAEdC,EAFc,GAEiBJ,IAFjB,CAEdI,EAFc;AAAA,MAEVC,KAFU,GAEiBL,IAFjB,CAEVK,KAFU;AAAA,MAEHC,QAFG,GAEiBN,IAFjB,CAEHM,QAFG;AAAA,MAEOC,KAFP,GAEiBP,IAFjB,CAEOO,KAFP;AAAA,MAGpBC,UAHoB,GAGPL,KACLJ,GAAGU,GADE,SACKN,EADL,GAERJ,GAAGW,OALY;AAAA,MAMpBC,QANoB,GAMTL,WACNJ,aADM,GAEND,eAAeW,IAAf,CAAoB,IAApB,EAA0BR,EAA1B,CARe;AAAA,MASpBS,GAToB,GASdN,QACD;AAAA;AAAA,MAAM,OAAOf,EAAEC,GAAf;AAAA;AAAA,GADC,GAEF,IAXgB;;AAY1B,SACE;AAAA;AAAA;AACE,iBAAWe,UADb;AAEE,eAASG;AAFX;AAIGN,SAJH;AAKGQ;AALH,GADF;AASD,CArBD;;kBAuBehB,Q"
+}

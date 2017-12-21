@@ -4,8 +4,6 @@ import JSONstat from 'jsonstat';
 const MSG_STILL_LOADING = "Another dims are still loading.";
 
 const C = {
-  //ROOT_URL: 'http://data.ssb.no/api/v0/en/table',
-  //ROOT_URL: 'http://api.scb.se/OV0104/v1/doris/en/ssd',
   SELECTION_ALL: {
     selection: {
       filter: 'all',
@@ -91,7 +89,14 @@ const loadDims = ({ proxy, baseMeta, id, dims }) => {
         , _option = _crOption(dims);
     _markStartLoading(_url)
     return fetch(_url, _option)
-      .then(res => res.json())
+      .then(res => {
+        const { status, statusText } = res;
+        if (status>=200 && status<400) {
+          return res.json();
+        } else {
+          throw Error(statusText);
+        }
+      })
       .then(json => {
         const _ds = JSONstat(json).Dataset(0)
             , configs = dims.map(dim => ({

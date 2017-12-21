@@ -91,7 +91,10 @@ class UsStocksBySectorDialog extends Component {
              dataSource : `(Code: ${_dataSource})`
            };
 
-      ChartActions.loadStock(chartContainerType, browserType, option)
+      ChartActions.loadStock(
+        { chartType: chartContainerType, browserType },
+        option
+      )
       onClose()
     }
     this._updateValidationMessages(validationMessages)

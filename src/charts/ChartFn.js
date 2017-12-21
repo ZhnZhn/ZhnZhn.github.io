@@ -325,8 +325,31 @@ const ChartFn = {
   toNumberFormat(value){
     const arrSplit = (value+'').split('.')
         , decimal = (arrSplit[1]) ? 2 : 0;
-    return Highcharts.numberFormat(value, decimal, '.', ' ');
-  }
+    return Highcharts
+      .numberFormat(value, decimal, '.', ' ');
+  },
+  toNumberFormatAll(value){
+    const arrSplit = (value+'').split('.')
+        , decimal = arrSplit[1]
+            ? arrSplit[1].length
+            : 0;
+    return Highcharts
+      .numberFormat(value, decimal, '.', ' ');
+  },
+
+  crTpId: () => {
+    return (
+       'TP_' +
+        Date.now().toString(36) +
+        Math.random().toString(36).substr(2, 9)
+      )
+      .toUpperCase();
+  },
+
+  toDateFormatDMY: Highcharts
+     .dateFormat.bind(null, '%A, %b %d, %Y'),
+  toDateFormatDMYT: Highcharts
+     .dateFormat.bind(null, '%A, %b %d, %Y, %H:%M')
 
 }
 

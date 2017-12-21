@@ -10,7 +10,9 @@ var BrowserType = exports.BrowserType = {
   FAOSTAT: 'FAO',
   FRANCE_STATISTICS: 'FS',
   NORWAY_STATISTICS: 'NST',
+  NORWAY_STAT_ALL: 'NST_ALL',
   SWEDEN_STAT: 'SWS',
+  SWEDEN_STAT_ALL: 'SWS_ALL',
 
   PREMIUM_SAMPLE: 'QPS',
   ECONOMIC: 'QE',

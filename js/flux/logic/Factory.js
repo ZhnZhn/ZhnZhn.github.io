@@ -24,17 +24,9 @@ var _RouterFnValue = require('./RouterFnValue');
 
 var _RouterFnValue2 = _interopRequireDefault(_RouterFnValue);
 
-var _RouterBrowser = require('./RouterBrowser');
+var _fBrowser = require('./fBrowser');
 
-var _RouterBrowser2 = _interopRequireDefault(_RouterBrowser);
-
-var _RouterItemOption = require('../../components/zhn-select/RouterItemOption');
-
-var _RouterItemOption2 = _interopRequireDefault(_RouterItemOption);
-
-var _RouterBrowserItem = require('../../components/browser-items/RouterBrowserItem');
-
-var _RouterBrowserItem2 = _interopRequireDefault(_RouterBrowserItem);
+var _fBrowser2 = _interopRequireDefault(_fBrowser);
 
 var _ChartContainer = require('../../components/zhn-containers/ChartContainer');
 
@@ -53,10 +45,6 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 var _ChartActions = require('../actions/ChartActions');
 
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
-
-var _BrowserActions = require('../actions/BrowserActions');
-
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 
 var _DateUtils = require('../../utils/DateUtils');
 
@@ -105,7 +93,12 @@ var createDialogComp = function createDialogComp(conf, browserType) {
       _fnValue = valueFn ? valueFnPrefix ? _RouterFnValue2.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue2.default[valueFn] : undefined,
       onClickInfo = descrUrl ? _showModalDialogDescription : undefined,
       loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType),
-      proxy = isProxy ? _ChartStore2.default.getProxy() : undefined;
+      proxy = isProxy ? _ChartStore2.default.getProxy() : undefined,
+      onLoad = onLoadChart.bind(null, {
+    chartType: itemKey,
+    browserType: browserType, conf: conf
+  }),
+      onShow = onShowChart.bind(null, itemKey, browserType, conf);
 
   if (isContinious) {
     Object.assign(dialogProps, {
@@ -126,8 +119,7 @@ var createDialogComp = function createDialogComp(conf, browserType) {
       dataColumn: dataColumn,
       msgOnNotSelected: _Msg2.default.NOT_SELECTED,
       msgOnNotValidFormat: _Msg2.default.NOT_VALID_FORMAT,
-      onLoad: onLoadChart.bind(null, itemKey, browserType),
-      onShow: onShowChart.bind(null, itemKey, browserType),
+      onLoad: onLoad, onShow: onShow,
       fnValue: _fnValue,
       initFromDate: _initFromDate,
       initToDate: initToDate, onTestDate: onTestDate,
@@ -175,95 +167,22 @@ var _getDialogConf = function _getDialogConf(dialogType) {
   return _ChartStore2.default.getSourceConfig(_browserId, dialogType);
 };
 
-var Factory = {
-  createDialog: function createDialog(dialogType, browserType) {
-    return createDialogComp(_getDialogConf(dialogType), browserType);
+var Factory = (0, _extends3.default)({}, _fBrowser2.default, {
+  createDialog: function createDialog(dialogType, browserType, conf) {
+    //const _conf = conf || _getDialogConf(dialogType);
+    var _conf = !conf.dialogConf ? _getDialogConf(dialogType) : conf;
+    return createDialogComp(_conf, browserType);
+    //return createDialogComp(_getDialogConf(dialogType), browserType);
   },
   createOptionDialog: function createOptionDialog(option) {
     return _createOptionDialog(option);
   },
-  createChartContainer: function createChartContainer(dialogType, browserType) {
-    return createChartContainerComp(_getDialogConf(dialogType), browserType);
-  },
-  _crBrowserDynamic: function _crBrowserDynamic(option) {
-    var browserType = option.browserType,
-        _option$caption = option.caption,
-        caption = _option$caption === undefined ? 'Source Browser' : _option$caption,
-        sourceMenuUrl = option.sourceMenuUrl,
-        chartContainerType = option.chartContainerType,
-        modalDialogType = option.modalDialogType,
-        itemOptionType = option.itemOptionType,
-        itemType = option.itemType,
-        descrUrl = option.descrUrl,
-        comp = _RouterBrowser2.default[browserType] || _RouterBrowser2.default.DEFAULT,
-        ItemOptionComp = itemOptionType ? _RouterItemOption2.default[itemOptionType] || _RouterBrowserItem2.default.DEFAULT : _RouterBrowserItem2.default.DEFAULT,
-        ItemComp = itemType ? _RouterBrowserItem2.default[itemType] || _RouterBrowserItem2.default.DEFAULT : undefined,
-        onClickInfo = typeof ItemComp !== "undefined" ? _showModalDialogDescription : undefined,
-        onShowContainer = _ChartActions2.default.showChart.bind(null, chartContainerType, browserType);
-
-    return _react2.default.createElement(comp, {
-      key: browserType,
-      browserType: browserType,
-      store: _ChartStore2.default,
-      isInitShow: true,
-      caption: caption,
-      sourceMenuUrl: sourceMenuUrl,
-      modalDialogType: modalDialogType,
-      chartContainerType: chartContainerType,
-      ItemOptionComp: ItemOptionComp,
-      ItemComp: ItemComp,
-      descrUrl: descrUrl,
-      onClickInfo: onClickInfo,
-      onShowContainer: onShowContainer,
-
-      showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
-      loadCompletedAction: _BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED,
-      updateAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, //for Type
-      onLoadMenu: _BrowserActions2.default.loadBrowserDynamic,
-      onShowLoadDialog: _ComponentActions2.default.showModalDialog //for Type2
-
-    });
-  },
-  crAsyncBrowser: function crAsyncBrowser(option) {
-    var browserType = option.browserType;
-
-    switch (browserType) {
-      case _Type.BrowserType.WATCH_LIST:
-        /*eslint-disable no-undef */
-        if (process.env.NODE_ENV === 'development') {
-          return System.import("js/components/watch-browser/WatchBrowser.js").then(function (module) {
-            return _react2.default.createElement(module.default, {
-              key: browserType,
-              browserType: browserType,
-              caption: "Watch List",
-              isInitShow: true,
-              store: _ChartStore2.default,
-              //showAction: BAT.SHOW_BROWSER,
-              showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
-              updateAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER
-            });
-          });
-        }
-        /*eslint-enable no-undef */
-        return System.import(
-        /* webpackChunkName: "watch-browser" */
-        /* webpackMode: "lazy" */
-        "../../components/watch-browser/WatchBrowser").then(function (module) {
-          return _react2.default.createElement(module.default, {
-            key: browserType,
-            browserType: browserType,
-            caption: "Watch List",
-            isInitShow: true,
-            store: _ChartStore2.default,
-            showAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER_DYNAMIC,
-            updateAction: _BrowserActions.BrowserActionTypes.UPDATE_WATCH_BROWSER
-          });
-        });
-      default:
-        return Promise.resolve(this._crBrowserDynamic(option));
-    }
+  createChartContainer: function createChartContainer(dialogType, browserType, conf) {
+    var _conf = conf && conf.dialogConf ? conf : _getDialogConf(dialogType);
+    return createChartContainerComp(_conf, browserType);
+    //return createChartContainerComp(_getDialogConf(dialogType), browserType);
   }
-};
+});
 
 exports.default = Factory;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\Factory.js.map

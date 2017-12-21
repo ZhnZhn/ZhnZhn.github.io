@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _highcharts = require('highcharts');
-
-var _highcharts2 = _interopRequireDefault(_highcharts);
-
 var _reactDom = require('react-dom');
 
 var _ChartFn = require('./ChartFn');
@@ -36,11 +32,12 @@ var C = {
 var TITLE_STYLE = 'style="color:' + C.TITLE_C + ';"';
 var FONT_STYLE = 'font-size:16px;font-weight:bold';
 
-var _numberFormat = function _numberFormat(value) {
-  var arrSplit = (value + '').split('.'),
-      decimal = arrSplit[1] ? arrSplit[1].length : 0;
-  return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
-};
+var crTpId = _ChartFn2.default.crTpId,
+    toNumberFormat = _ChartFn2.default.toNumberFormat,
+    toNumberFormatAll = _ChartFn2.default.toNumberFormatAll,
+    toDateFormatDMY = _ChartFn2.default.toDateFormatDMY,
+    toDateFormatDMYT = _ChartFn2.default.toDateFormatDMYT;
+
 
 var _crSpan = function _crSpan() {
   var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -201,7 +198,7 @@ var _fnCategory = function _fnCategory(_ref12) {
   var y = point.y,
       c = point.c;
 
-  return _crHeader(c, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', _numberFormat(y)) + '\n  </div>';
+  return _crHeader(c, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', toNumberFormatAll(y)) + '\n  </div>';
 };
 
 var _fnTreeMap = function _fnTreeMap(_ref13) {
@@ -214,7 +211,7 @@ var _fnTreeMap = function _fnTreeMap(_ref13) {
       _point$percent = point.percent,
       percent = _point$percent === undefined ? '' : _point$percent,
       _percent = percent ? '(' + percent + '%)' : '',
-      _value = _numberFormat(value) + ' ' + _percent;
+      _value = toNumberFormatAll(value) + ' ' + _percent;
 
   return _crHeader(title, id) + '\n  <div class="tp_body">\n    ' + _crRow('', label) + '\n    ' + _crRow('', _value, { color: C.YEAR_C }) + '\n  </div>\n  ';
 };
@@ -246,7 +243,7 @@ var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref15) {
       percent = _point$percent2 === undefined ? '0.0' : _point$percent2,
       _point$total = point.total,
       total = _point$total === undefined ? 0 : _point$total,
-      _total = _ChartFn2.default.toNumberFormat(total),
+      _total = toNumberFormat(total),
       _fnCalcWidthSparkType = _fnCalcWidthSparkType4(value, _total),
       fullWidth = _fnCalcWidthSparkType.fullWidth,
       width = _fnCalcWidthSparkType.width;
@@ -268,8 +265,8 @@ var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref16) {
       percent = _point$percent3 === undefined ? '0.0' : _point$percent3,
       _point$total2 = point.total,
       total = _point$total2 === undefined ? 0 : _point$total2,
-      _value = _ChartFn2.default.toNumberFormat(value),
-      _total = _ChartFn2.default.toNumberFormat(total),
+      _value = toNumberFormat(value),
+      _total = toNumberFormat(total),
       _fnCalcWidthSparkType2 = _fnCalcWidthSparkType4(_value, _total),
       fullWidth = _fnCalcWidthSparkType2.fullWidth,
       width = _fnCalcWidthSparkType2.width;
@@ -331,8 +328,6 @@ var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(i
   }, 1);
 };
 
-var _fnDateFormatDMY = _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y');
-var _fnDateFormatDMYT = _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M');
 var _fnFormatCategory = function _fnFormatCategory(x) {
   return x;
 };
@@ -343,7 +338,7 @@ var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
         _option$onAfterRender = option.onAfterRender,
         onAfterRender = _option$onAfterRender === undefined ? _fnAddHandlerClose : _option$onAfterRender,
         _option$fnDateFormat = option.fnDateFormat,
-        fnDateFormat = _option$fnDateFormat === undefined ? _fnDateFormatDMY : _option$fnDateFormat,
+        fnDateFormat = _option$fnDateFormat === undefined ? toDateFormatDMY : _option$fnDateFormat,
         isWithColor = option.isWithColor,
         isWithValueText = option.isWithValueText,
         isWithValue = option.isWithValue,
@@ -355,11 +350,9 @@ var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
         zhValueText = _series$userOptions.zhValueText,
         _series$userOptions$n = _series$userOptions.name,
         name = _series$userOptions$n === undefined ? 'Value' : _series$userOptions$n,
-        id = _series$userOptions.id,
-        zhSeriaId = _series$userOptions.zhSeriaId,
-        _id = zhSeriaId || id || 'TP',
+        _id = crTpId(),
         valueText = isWithValueText ? zhValueText || name : 'Value',
-        value = isWithValue ? _ChartFn2.default.toNumberFormat(point.y) : null;
+        value = isWithValue ? toNumberFormat(point.y) : null;
 
     onAfterRender(_id, point);
 
@@ -374,7 +367,7 @@ var Tooltip = {
   }),
   fnBasePointFormatterT: _fnBasePointFormatter({
     fnTemplate: _fnBaseTooltip,
-    fnDateFormat: _fnDateFormatDMYT,
+    fnDateFormat: toDateFormatDMYT,
     isWithColor: true, isWithValueText: true, isWithValue: true
   }),
   fnBasePointFormatterC: _fnBasePointFormatter({
@@ -407,7 +400,7 @@ var Tooltip = {
   }),
   fnVolumePointFormatterT: _fnBasePointFormatter({
     fnTemplate: _fnVolumeTooltip,
-    fnDateFormat: _fnDateFormatDMYT,
+    fnDateFormat: toDateFormatDMYT,
     isWithValue: true
   }),
 

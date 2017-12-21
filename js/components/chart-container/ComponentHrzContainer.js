@@ -87,11 +87,11 @@ var ComponentHrzContainer = function (_Component) {
   return ComponentHrzContainer;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? ComponentHrzContainer.propTypes = {
+ComponentHrzContainer.propTypes = process.env.NODE_ENV !== "production" ? {
   store: _propTypes2.default.shape({
     listen: _propTypes2.default.func
   }),
   addAction: _propTypes2.default.string
-} : void 0;
+} : {};
 exports.default = ComponentHrzContainer;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-container\ComponentHrzContainer.js.map

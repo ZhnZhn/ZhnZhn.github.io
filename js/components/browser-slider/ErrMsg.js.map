@@ -1,0 +1,13 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-slider\\ErrMsg.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-slider\\ErrMsg.js",
+ "sourceRoot": "",
+ "names": [
+  "ErrMsg",
+  "errMsg",
+  "MSG_ERR"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,SAAS,SAATA,MAAS,OAAgB;AAAA,MAAbC,MAAa,QAAbA,MAAa;;AAC7B,MAAI,CAACA,MAAL,EAAa,OAAO,IAAP;AACb,SACE;AAAA;AAAA,MAAK,OAAO,gBAAEC,OAAd;AACGD;AADH,GADF;AAKD,CAPD;;kBASeD,M"
+}

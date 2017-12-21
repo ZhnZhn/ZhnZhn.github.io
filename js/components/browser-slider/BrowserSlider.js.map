@@ -1,0 +1,36 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-slider\\BrowserSlider.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-slider\\BrowserSlider.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "BROWSER",
+  "paddingRight",
+  "SCROLL_DIV",
+  "overflowY",
+  "height",
+  "paddingBottom",
+  "BrowserSlider",
+  "props",
+  "_onStore",
+  "actionType",
+  "data",
+  "browserType",
+  "showAction",
+  "_handleShow",
+  "_handleHide",
+  "setState",
+  "isShow",
+  "state",
+  "isInitShow",
+  "unsubscribe",
+  "store",
+  "listen",
+  "nextProps",
+  "nextState",
+  "caption"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAU;AACRC,kBAAc;AADN,GADF;AAIRC,cAAa;AACXC,eAAW,MADA;AAEXC,YAAQ,KAFG;AAGXH,kBAAc,MAHH;AAIXI,mBAAe;AAJJ;AAJL,CAAV;;IAaMC,a;;;AACJ,yBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAsBlBC,QAtBkB,GAsBP,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAAA,wBACM,MAAKH,KADX;AAAA,UACvBI,WADuB,eACvBA,WADuB;AAAA,UACVC,UADU,eACVA,UADU;;AAE/B,UAAIH,eAAeG,UAAf,IAA6BF,SAASC,WAA1C,EAAsD;AACpD,cAAKE,WAAL;AACD;AACF,KA3BiB;;AAAA,UA6BlBC,WA7BkB,GA6BJ,YAAM;AAClB,YAAKC,QAAL,CAAc,EAAEC,QAAS,KAAX,EAAd;AACD,KA/BiB;;AAAA,UAgClBH,WAhCkB,GAgCJ,YAAM;AAClB,YAAKE,QAAL,CAAc,EAAEC,QAAS,IAAX,EAAd;AACD,KAlCiB;;AAEhB,UAAKC,KAAL,GAAa;AACXD,cAAQT,MAAMW,UAAN,GAAmB,IAAnB,GAA0B;AADvB,KAAb;AAFgB;AAKjB;;;;wCAEkB;AACjB,WAAKC,WAAL,GAAmB,KAAKZ,KAAL,CAAWa,KAAX,CAAiBC,MAAjB,CAAwB,KAAKb,QAA7B,CAAnB;AACD;;;0CAEqBc,S,EAAWC,S,EAAU;AACzC,UAAI,KAAKN,KAAL,CAAWD,MAAX,KAAsBO,UAAUP,MAApC,EAA2C;AACzC,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;2CAEqB;AACpB,WAAKG,WAAL;AACD;;;6BAgBO;AACA,UAAEK,OAAF,GAAc,KAAKjB,KAAnB,CAAEiB,OAAF;AAAA,UACER,MADF,GACa,KAAKC,KADlB,CACED,MADF;;AAEN,aACE;AAAA;AAAA,UAAS,QAAQA,MAAjB,EAAyB,OAAOjB,EAAEC,OAAlC;AACE;AACG,mBAASwB,OADZ;AAEG,mBAAS,KAAKV;AAFjB,UADF;AAKG;AAAA;AAAA,YAAY,OAAOf,EAAEG,UAArB;AACE,8DAAgB,KAAKK,KAArB;AADF;AALH,OADF;AAWD;;;;;kBAGYD,a"
+}

@@ -191,7 +191,7 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
         dataSource: '(Code: ' + _dataSource + ')'
       };
 
-      _ChartActions2.default.loadStock(chartContainerType, browserType, option);
+      _ChartActions2.default.loadStock({ chartType: chartContainerType, browserType: browserType }, option);
       onClose();
     }
     _this3._updateValidationMessages(validationMessages);
@@ -219,11 +219,11 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
   };
 }, _temp)) || _class;
 
-process.env.NODE_ENV !== "production" ? UsStocksBySectorDialog.propTypes = {
+UsStocksBySectorDialog.propTypes = process.env.NODE_ENV !== "production" ? {
   isShow: _propTypes2.default.bool.isRequired,
   data: _propTypes2.default.object.isRequired,
   store: _propTypes2.default.object,
   onClose: _propTypes2.default.func.isRequired
-} : void 0;
+} : {};
 exports.default = UsStocksBySectorDialog;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map

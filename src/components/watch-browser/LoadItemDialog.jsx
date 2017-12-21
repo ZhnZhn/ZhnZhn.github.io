@@ -75,7 +75,13 @@ class LoadItemDialog extends Component {
              dataColumn,
              seriaColumnNames
            };
-      ChartActions.loadStock(ChartType.WATCH_LIST, BrowserType.WATCH_LIST, option);
+      ChartActions.loadStock(
+        {
+          chartType: ChartType.WATCH_LIST,
+          browserType: BrowserType.WATCH_LIST
+        },
+        option
+      );
       onClose()
     }
     this._updateValidationMessages(validationMessages)

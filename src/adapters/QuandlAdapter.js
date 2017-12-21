@@ -80,16 +80,17 @@ const _fnAddExDividend = function(exDividendIndex, result){
 
      if (point[exDividendIndex] !== 0){
        const x = dateUTC
-           , exValue = parseFloat(point[exDividendIndex].toFixed(2))
-           , price = point[yPointIndex];
-
-       if (QuandlFn2.isPrevDateAfter(dataExDividend, x , 14)) {
-          dataExDividend.push(Object.assign(ChartConfig.fMarkerExDividend(), {x, exValue, price}));
-       } else {
-          const marker = Object.assign(ChartConfig.fMarkerExDividend(), {x, exValue, price});
-          marker.dataLabels.y = 0;
-          dataExDividend.push(marker);
+           //, exValue = parseFloat(point[exDividendIndex].toFixed(2))
+           , exValue = point[exDividendIndex]
+           , price = point[yPointIndex]
+           , marker = Object.assign(
+                ChartConfig.fMarkerExDividend(),
+                { x, exValue, price }
+             );
+       if (!QuandlFn2.isPrevDateAfter(dataExDividend, x , 14)) {
+         marker.dataLabels.y = 0;
        }
+       dataExDividend.push(marker);
     }
 
     return result;

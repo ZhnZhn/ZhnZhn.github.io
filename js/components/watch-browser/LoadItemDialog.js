@@ -193,7 +193,10 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
         seriaColumnNames: seriaColumnNames
       };
 
-      _ChartActions2.default.loadStock(_ChartType2.default.WATCH_LIST, _Type.BrowserType.WATCH_LIST, option);
+      _ChartActions2.default.loadStock({
+        chartType: _ChartType2.default.WATCH_LIST,
+        browserType: _Type.BrowserType.WATCH_LIST
+      }, option);
       onClose();
     }
     _this3._updateValidationMessages(validationMessages);

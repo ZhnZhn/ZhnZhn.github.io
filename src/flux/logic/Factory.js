@@ -4,19 +4,19 @@ import React from 'react';
 import RouterDialog from './RouterDialog';
 import RouterLoadFn from './RouterLoadFn';
 import RouterFnValue from './RouterFnValue';
-import RouterBrowser from './RouterBrowser';
 
-import RouterItemOption from '../../components/zhn-select/RouterItemOption';
-import RouterBrowserItem from '../../components/browser-items/RouterBrowserItem';
+import fBrowser from './fBrowser'
 
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 
 import Msg from '../../constants/Msg';
-import { ModalDialog, LoadType, BrowserType } from '../../constants/Type';
+import {
+  ModalDialog,
+  LoadType
+} from '../../constants/Type';
 
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
-import BrowserActions, { BrowserActionTypes as BAT } from '../actions/BrowserActions';
 import DateUtils from '../../utils/DateUtils';
 
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -29,7 +29,6 @@ const onLoadChart = ChartActions.loadStock
     , initToDate = DateUtils.getToDate()
     , onTestDate = DateUtils.isValidDate
     , onTestDateOrEmpty = DateUtils.isValidDateOrEmpty;
-
 
 const _showModalDialogDescription = function(option){
   ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, option);
@@ -67,7 +66,12 @@ const createDialogComp = function (conf, browserType){
        , loadFn = RouterLoadFn.getFn(loadFnType, dialogType)
        , proxy = isProxy
             ? ChartStore.getProxy()
-            : undefined;
+            : undefined
+       , onLoad = onLoadChart.bind(null, {
+            chartType: itemKey,
+            browserType, conf
+          })
+       , onShow = onShowChart.bind(null, itemKey, browserType, conf);
 
        if (isContinious) {
          Object.assign(dialogProps, {
@@ -80,37 +84,36 @@ const createDialogComp = function (conf, browserType){
        }
 
       return RouterDialog.getDialog(dialogType)
-               .then(Comp => {
-                  return React.createElement(Comp, {
-                    key : itemKey,
-                    caption : dialogCaption || menuTitle,
-                    optionURI : optionURI,
-                    optionsJsonProp : optionsJsonProp,
-                    dataColumn : dataColumn,
-                    msgOnNotSelected : Msg.NOT_SELECTED,
-                    msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
-                    onLoad : onLoadChart.bind(null, itemKey, browserType),
-                    onShow : onShowChart.bind(null, itemKey, browserType),
-                    fnValue : _fnValue,
-                    initFromDate : _initFromDate,
-                    initToDate, onTestDate,
-                    onClickInfo,
-                    loadFn,
-                    proxy,
-                    ...dialogProps
-                 });
-               })
+         .then(Comp => {
+            return React.createElement(Comp, {
+              key : itemKey,
+              caption : dialogCaption || menuTitle,
+              optionURI : optionURI,
+              optionsJsonProp : optionsJsonProp,
+              dataColumn : dataColumn,
+              msgOnNotSelected : Msg.NOT_SELECTED,
+              msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
+              onLoad, onShow,
+              fnValue : _fnValue,
+              initFromDate : _initFromDate,
+              initToDate, onTestDate,
+              onClickInfo,
+              loadFn,
+              proxy,
+              ...dialogProps
+           });
+         })
 }
 
 
 const _createOptionDialog = function(option) {
   const { dialogType } = option
   return RouterDialog.getDialog(dialogType)
-           .then(Comp => {
-              return React.createElement(Comp, {
-                  key: dialogType
-              })
-           });
+     .then(Comp => {
+        return React.createElement(Comp, {
+            key: dialogType
+        })
+     });
 }
 
 
@@ -146,96 +149,27 @@ const _getDialogConf = function(dialogType){
 }
 
 const Factory = {
-  createDialog(dialogType, browserType){
-   return createDialogComp(_getDialogConf(dialogType), browserType);
+  ...fBrowser,
+
+  createDialog(dialogType, browserType, conf){
+    //const _conf = conf || _getDialogConf(dialogType);
+    const _conf = !conf.dialogConf
+            ? _getDialogConf(dialogType)
+            : conf
+    return createDialogComp(_conf, browserType);
+    //return createDialogComp(_getDialogConf(dialogType), browserType);
  },
  createOptionDialog(option){
    return _createOptionDialog(option)
  },
 
- createChartContainer(dialogType, browserType){
-  return createChartContainerComp(_getDialogConf(dialogType), browserType);
- },
-
- _crBrowserDynamic(option) {
-    const {
-             browserType, caption='Source Browser' , sourceMenuUrl,
-             chartContainerType,
-             modalDialogType, itemOptionType, itemType, descrUrl
-           } = option
-        , comp = RouterBrowser[browserType] || RouterBrowser.DEFAULT
-        , ItemOptionComp = (itemOptionType)
-              ? ( RouterItemOption[itemOptionType] || RouterBrowserItem.DEFAULT )
-              : RouterBrowserItem.DEFAULT
-        , ItemComp = (itemType)
-              ? ( RouterBrowserItem[itemType] || RouterBrowserItem.DEFAULT )
-              : undefined
-        , onClickInfo = (typeof ItemComp !== "undefined")
-             ? _showModalDialogDescription
-             : undefined
-        , onShowContainer = ChartActions.showChart.bind(null, chartContainerType, browserType);
-
-    return React.createElement(comp , {
-      key : browserType,
-      browserType : browserType,
-      store : ChartStore,
-      isInitShow : true,
-      caption : caption,
-      sourceMenuUrl : sourceMenuUrl,
-      modalDialogType : modalDialogType,
-      chartContainerType : chartContainerType,
-      ItemOptionComp: ItemOptionComp,
-      ItemComp : ItemComp,
-      descrUrl : descrUrl,
-      onClickInfo : onClickInfo,
-      onShowContainer : onShowContainer,
-
-      showAction : BAT.SHOW_BROWSER_DYNAMIC,
-      loadCompletedAction : BAT.LOAD_BROWSER_DYNAMIC_COMPLETED,
-      updateAction : BAT.UPDATE_BROWSER_MENU,  //for Type
-      onLoadMenu : BrowserActions.loadBrowserDynamic,
-      onShowLoadDialog : ComponentActions.showModalDialog  //for Type2
-
-    });
-  },
-
-  crAsyncBrowser(option) {
-    const { browserType } = option;
-    switch (browserType) {
-      case BrowserType.WATCH_LIST:
-        /*eslint-disable no-undef */
-        if ( process.env.NODE_ENV === 'development') {
-          return import("js/components/watch-browser/WatchBrowser.js")
-            .then(module => React.createElement(module.default, {
-               key: browserType,
-               browserType: browserType,
-               caption: "Watch List",
-               isInitShow: true,
-               store: ChartStore,
-               //showAction: BAT.SHOW_BROWSER,
-               showAction: BAT.SHOW_BROWSER_DYNAMIC,
-               updateAction: BAT.UPDATE_WATCH_BROWSER
-            }));
-        }
-        /*eslint-enable no-undef */
-        return import(
-           /* webpackChunkName: "watch-browser" */
-           /* webpackMode: "lazy" */
-           "../../components/watch-browser/WatchBrowser"
-         ).then(module => React.createElement(module.default, {
-             key: browserType,
-             browserType: browserType,
-             caption: "Watch List",
-             isInitShow: true,
-             store: ChartStore,
-             showAction: BAT.SHOW_BROWSER_DYNAMIC,
-             updateAction: BAT.UPDATE_WATCH_BROWSER
-         }));
-      default: return Promise.resolve(
-           this._crBrowserDynamic(option)
-      )
-    }
-  }
+ createChartContainer(dialogType, browserType, conf){
+   const _conf = conf && conf.dialogConf
+            ? conf
+            : _getDialogConf(dialogType);
+   return createChartContainerComp(_conf, browserType);
+   //return createChartContainerComp(_getDialogConf(dialogType), browserType);
+ }
 
 }
 

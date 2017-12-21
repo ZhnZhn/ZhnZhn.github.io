@@ -15,12 +15,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ItemDialogLogic = {
   showItemDialog: function showItemDialog(slice, itemConf) {
     var type = itemConf.type,
-        browserType = itemConf.browserType;
+        browserType = itemConf.browserType,
+        conf = itemConf.conf;
 
     if (slice[type]) {
       return Promise.resolve({ key: type });
     } else {
-      return _Factory2.default.createDialog(type, browserType).then(function (Comp) {
+      return _Factory2.default.createDialog(type, browserType, conf).then(function (Comp) {
         slice[type] = true;
         return { key: type, Comp: Comp };
       });
@@ -75,10 +76,10 @@ var ComponentSlice = {
   onShowAbout: function onShowAbout() {
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_ABOUT);
   },
-  onShowDialog: function onShowDialog(type, browserType) {
+  onShowDialog: function onShowDialog(type, browserType, conf) {
     var _this = this;
 
-    ItemDialogLogic.showItemDialog(this.dialogInit, { type: type, browserType: browserType }).then(function (r) {
+    ItemDialogLogic.showItemDialog(this.dialogInit, { type: type, browserType: browserType, conf: conf }).then(function (r) {
       _this.trigger(_ComponentActions.ComponentActionTypes.SHOW_DIALOG, r);
     });
   },

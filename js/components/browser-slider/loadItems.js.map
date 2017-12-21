@@ -1,0 +1,24 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-slider\\loadItems.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-slider\\loadItems.js",
+ "sourceRoot": "",
+ "names": [
+  "_compareByText",
+  "a",
+  "b",
+  "text",
+  "loadItems",
+  "url",
+  "fetch",
+  "cache",
+  "then",
+  "res",
+  "json",
+  "Array",
+  "isArray",
+  "sort"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,iBAAiB,SAAjBA,cAAiB,CAACC,CAAD,EAAIC,CAAJ,EAAU;AAC/B,MAAID,EAAEE,IAAF,GAASD,EAAEC,IAAf,EAAqB,OAAO,CAAC,CAAR;AACrB,MAAIF,EAAEE,IAAF,GAASD,EAAEC,IAAf,EAAqB,OAAO,CAAP;AACrB,SAAO,CAAP;AACD,CAJD;;AAMA,IAAMC,YAAY,SAAZA,SAAY,CAACC,GAAD,EAAS;AACzB,SAAOC,MAAMD,GAAN,EAAW,EAAEE,OAAO,SAAT,EAAX,EACJC,IADI,CACC;AAAA,WAAOC,IAAIC,IAAJ,EAAP;AAAA,GADD,EAEJF,IAFI,CAEC,gBAAQ;AACZ,QAAIG,MAAMC,OAAN,CAAcF,IAAd,CAAJ,EAAyB;AACtBA,WAAKG,IAAL,CAAUb,cAAV;AACF;AACD,WAAOU,IAAP;AACD,GAPI,CAAP;AAQD,CATD;;kBAWeN,S"
+}

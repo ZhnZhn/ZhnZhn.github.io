@@ -52,9 +52,9 @@ var _LimitRemainingLabel = require('./LimitRemainingLabel');
 
 var _LimitRemainingLabel2 = _interopRequireDefault(_LimitRemainingLabel);
 
-var _PanelBrowsers = require('./PanelBrowsers');
+var _BrowserMenu = require('./BrowserMenu');
 
-var _PanelBrowsers2 = _interopRequireDefault(_PanelBrowsers);
+var _BrowserMenu2 = _interopRequireDefault(_BrowserMenu);
 
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
@@ -225,7 +225,7 @@ var HeaderBar = function (_Component) {
           store: store,
           style: styles.lbLimit
         }),
-        _react2.default.createElement(_PanelBrowsers2.default, {
+        _react2.default.createElement(_BrowserMenu2.default, {
           className: 'header__panel-browser',
           isShow: isDS,
           model: _Model2.default,

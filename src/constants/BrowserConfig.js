@@ -48,12 +48,38 @@ const BrowserConfig = {
     caption: 'Statistics Norway',
     sourceMenuUrl: './data/statistics-norway/source-menu.json'
   },
+  [BT.NORWAY_STAT_ALL]: {
+    browserType: BT.NORWAY_STAT_ALL,
+    isDynamic: true,
+    caption: 'Statistics Norway All',
+    dfProps: {
+      bT: BT.NORWAY_STAT_ALL,
+      lT: 'NST_2',
+      sP: 'Stat. Norway',
+      dU: './data/statistics-norway/statistics-norway.html',
+      rootUrl: 'http://data.ssb.no/api/v0/en/table'
+    }
+  },
   [BT.SWEDEN_STAT]: {
     browserType: BT.SWEDEN_STAT,
     isDynamic: true,
     caption: 'Statistics Sweden',
     sourceMenuUrl: './data/stat-sweden/source-menu.json'
   },
+  [BT.SWEDEN_STAT_ALL]: {
+    browserType: BT.SWEDEN_STAT_ALL,
+    isDynamic: true,
+    caption: 'Statistics Sweden All',
+    sourceMenuUrl: './data/stat-sweden/source-menu.json',
+    dfProps: {
+      bT: BT.SWEDEN_STAT_ALL,
+      lT: 'SWS',
+      sP: 'Stat. Sweden',
+      dU: './data/stat-sweden/statistics-sweden.html',
+      rootUrl: 'http://api.scb.se/OV0104/v1/doris/en/ssd'
+    }
+  },
+
   [BT.US_STOCKS]: {
     browserType: BT.US_STOCKS,
     isDynamic: true,

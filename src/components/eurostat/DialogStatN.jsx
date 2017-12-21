@@ -42,7 +42,7 @@ class DialogStatN extends Component {
     ];
     this._chartOptions = RouterOptions.crOptions(props)
     this._items = []
-    this._selectOptions = []    
+    this._selectOptions = []
 
     this.state = {
       isShowLabels: true,
@@ -221,7 +221,7 @@ class DialogStatN extends Component {
         , _spinnerStyle = !isLoadFailed
              ? S.SPINNER_LOADING
              : { ...S.SPINNER_LOADING, ...S.SPINNER_FAILED};
-
+        
     return (
       <D.DraggableDialog
            caption={caption}

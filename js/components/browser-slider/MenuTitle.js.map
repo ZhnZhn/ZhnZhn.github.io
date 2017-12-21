@@ -1,0 +1,25 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-slider\\MenuTitle.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-slider\\MenuTitle.js",
+ "sourceRoot": "",
+ "names": [
+  "CL",
+  "ITEM",
+  "MenuTitle",
+  "_refNode",
+  "n",
+  "_node",
+  "focus",
+  "props",
+  "title",
+  "onClick",
+  "TITLE",
+  "evt",
+  "preventDefault",
+  "which",
+  "TITLE_ARROW"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,KAAK;AACTC,QAAM;AADG,CAAX;;IAIMC,S;;;;;;;;;;;;;;0MAEJC,Q,GAAW,UAACC,CAAD;AAAA,aAAO,MAAKC,KAAL,GAAaD,CAApB;AAAA,K,QA4BXE,K,GAAQ,YAAM;AACZ,UAAI,MAAKD,KAAT,EAAgB;AACd,cAAKA,KAAL,CAAWC,KAAX;AACD;AACF,K;;;;;6BA9BO;AAAA,mBACwB,KAAKC,KAD7B;AAAA,gCACEC,KADF;AAAA,UACEA,KADF,gCACQ,EADR;AAAA,UACYC,OADZ,UACYA,OADZ;;AAEN,aACE;AAAA;AAAA;AACE,eAAK,KAAKN,QADZ;AAEE,qBAAWH,GAAGC,IAFhB;AAGE,iBAAO,gBAAES,KAHX;AAIE,gBAAK,UAJP;AAKE,oBAAS,GALX;AAME,mBAASD,OANX;AAOE,sBAAY,oBAACE,GAAD,EAAS;AACnBA,gBAAIC,cAAJ;AADmB,gBAEXC,KAFW,GAEDF,GAFC,CAEXE,KAFW;;AAGnB,gBAAIA,UAAU,EAAV,IAAgBA,UAAU,EAA9B,EAAmC;AACjCJ;AACD;AACF;AAbH;AAeGD,aAfH;AAgBE;AAAA;AAAA,YAAM,OAAO,gBAAEM,WAAf;AACG;AADH;AAhBF,OADF;AAsBD;;;;;kBAUYZ,S"
+}

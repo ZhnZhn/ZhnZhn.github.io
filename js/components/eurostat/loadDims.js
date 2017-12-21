@@ -21,8 +21,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MSG_STILL_LOADING = "Another dims are still loading.";
 
 var C = {
-  //ROOT_URL: 'http://data.ssb.no/api/v0/en/table',
-  //ROOT_URL: 'http://api.scb.se/OV0104/v1/doris/en/ssd',
   SELECTION_ALL: {
     selection: {
       filter: 'all',
@@ -113,7 +111,14 @@ var loadDims = function loadDims(_ref) {
         _option = _crOption(dims);
     _markStartLoading(_url);
     return fetch(_url, _option).then(function (res) {
-      return res.json();
+      var status = res.status,
+          statusText = res.statusText;
+
+      if (status >= 200 && status < 400) {
+        return res.json();
+      } else {
+        throw Error(statusText);
+      }
     }).then(function (json) {
       var _ds = (0, _jsonstat2.default)(json).Dataset(0),
           configs = dims.map(function (dim) {

@@ -4,19 +4,16 @@ import JSONstat from 'jsonstat';
 import AdapterFn from '../AdapterFn';
 
 const SOURCE = {
-  DF: 'Unknown',
-  NST: 'Statisctics Norway',
-  SWS: 'Statisctics Sweden'
+  DF: 'Unknown'
 };
 
-const _crDescr = (updated, option) => {
+const _crDescr = ({ updated='', source=SOURCE.DF }, option) => {
   const _date = updated
           .replace('T', ' ')
           .replace('Z', '')
-      , { dfId='', browserType } = option
-      , _source = SOURCE[browserType] || SOURCE.DF;
-  
-  return `TableId: ${dfId} <BR/> ${_source}: ${_date}`;
+      , { dfId='' } = option;
+
+  return `TableId: ${dfId} <BR/> ${source}: ${_date}`;
 }
 
 const _crItemCaption = (option) => {
@@ -58,10 +55,13 @@ const fnAdapter = {
     return tidIds[tidIds.length-1];
   },
 
-  crInfo: ({ label='', updated='' }, option) => ({
-    name: label,
-    description: _crDescr(updated, option)
-  }),
+  crInfo: (ds, option) => {
+    const { label='' } = ds;
+    return {
+      name: label,
+      description: _crDescr(ds, option)
+    }
+  },
 
   crZhConfig: (option) => {
     const { dataSource } = option
@@ -83,7 +83,7 @@ const fnAdapter = {
     return { date: d, direction: 'empty' };
   },
 
-  crChartOption: (ds, data, option) => {
+  crChartOption: (ds, data, option) => {    
     return {
       info: fnAdapter.crInfo(ds, option),
       valueMoving: fnAdapter.crValueMoving(data),

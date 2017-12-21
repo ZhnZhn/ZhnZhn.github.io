@@ -98,14 +98,14 @@ var _router = {
   _loadES: function _loadES() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === 'development') {
-      this.ES = System.import("js/components/eurostat/EurostatDialogs.js").then(function (module) {
+      return this.ES = System.import("js/components/eurostat/EurostatDialogs.js").then(function (module) {
         return module.default;
       }).catch(function (err) {
         return console.log(MSG_OFFLINE);
       });
       /*eslint-enable no-undef */
     } else {
-      this.ES = System.import(
+      return this.ES = System.import(
       /* webpackChunkName: "eurostat-dialogs" */
       /* webpackMode: "lazy" */
       "../../components/eurostat/EurostatDialogs").then(function (module) {
@@ -132,7 +132,8 @@ var _router = {
     });
   },
   get DialogStatN() {
-    return this.ES.then(function (D) {
+    var ES = this.ES || this._loadES();
+    return ES.then(function (D) {
       return D.StatN;
     });
   },

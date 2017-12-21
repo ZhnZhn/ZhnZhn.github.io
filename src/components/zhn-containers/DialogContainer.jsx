@@ -80,7 +80,7 @@ class DialogContainer extends Component {
      console.log(info)
      */
    }
-   
+
 
    _onStore = (actionType, option) => {
       const { showAction } = this.props;
@@ -151,7 +151,7 @@ class DialogContainer extends Component {
     });
   }
 
-  render() {
+  render() {    
     return (
       <div style={S.ROOT}>
         {this._renderDialogs()}

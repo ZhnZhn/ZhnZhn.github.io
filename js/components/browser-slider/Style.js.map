@@ -1,0 +1,28 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-slider\\Style.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-slider\\Style.js",
+ "sourceRoot": "",
+ "names": [
+  "Style",
+  "MSG_ERR",
+  "paddingLeft",
+  "color",
+  "fontFamily",
+  "fontWeight",
+  "fontSize",
+  "TITLE",
+  "position",
+  "paddingTop",
+  "paddingBottom",
+  "cursor",
+  "TITLE_ARROW",
+  "top",
+  "left",
+  "ITEM_L",
+  "padding",
+  "ITEM_T"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,WAAS;AACPC,iBAAa,MADN;AAEPC,WAAO,SAFA;AAGPC,gBAAY,+CAHL;AAIPC,gBAAY,MAJL;AAKPC,cAAU;AALH,GADG;AAQZC,SAAO;AACLC,cAAU,UADL;AAELL,WAAO,QAFF;AAGLD,iBAAa,MAHR;AAILO,gBAAY,KAJP;AAKLC,mBAAe,KALV;AAMLN,gBAAY,+CANP;AAOLC,gBAAY,MAPP;AAQLC,cAAU,MARL;AASLK,YAAQ;AATH,GARK;AAmBZC,eAAa;AACXJ,cAAU,UADC;AAEXK,SAAK,KAFM;AAGXC,UAAM;AAHK,GAnBD;AAwBZC,UAAQ;AACNZ,WAAO,SADD;AAENC,gBAAY,+CAFN;AAGNC,gBAAY,MAHN;AAINC,cAAU,MAJJ;AAKNU,aAAS,KALH;AAMNd,iBAAa,MANP;AAONS,YAAQ;AAPF,GAxBI;AAiCZM,UAAQ;AACNd,WAAO,OADD;AAENC,gBAAY,+CAFN;AAGNC,gBAAY,MAHN;AAINC,cAAU,MAJJ;AAKNU,aAAS,KALH;AAMNL,YAAQ;AANF;AAjCI,CAAd;;kBA2CeX,K"
+}

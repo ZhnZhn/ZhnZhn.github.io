@@ -116,6 +116,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   onLoadStockCompleted: function onLoadStockCompleted(option, config) {
     var chartType = option.chartType,
         browserType = option.browserType,
+        conf = option.conf,
         zhCompType = option.zhCompType,
         _config$zhConfig = config.zhConfig,
         zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
@@ -139,7 +140,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
       this.charts[chartType].configs.unshift(config);
 
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED);
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
+      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType, conf));
       this.triggerWithLimitRemaining(limitRemaining);
     }
 
@@ -174,7 +175,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   onLoadStockByQueryFailed: function onLoadStockByQueryFailed(option) {
     this.onLoadStockFailed(option);
   },
-  onShowChart: function onShowChart(chartType, browserType) {
+  onShowChart: function onShowChart(chartType, browserType, conf) {
     this.setMenuItemOpen(chartType, browserType);
 
     var chartCont = this.charts[chartType];
@@ -184,7 +185,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
       this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
     } else {
       this.charts[chartType] = this.createInitConfig(chartType);
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType));
+      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType, conf));
       this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
     }
   },

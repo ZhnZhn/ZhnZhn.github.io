@@ -95,8 +95,9 @@ ChartActions.fnOnChangeStore = _fnOnChangeStore
 
 ChartActions[A.LOAD_STOCK].preEmit = function() {
   const arg = [].slice.call(arguments)
-      , chartType = arg[0]
-      , option = arg[2]
+      , confItem = arg[0]
+      , { chartType } = confItem
+      , option = arg[1]      
       , key = LogicUtils.createKeyForConfig(option)
       , isDoublingLoad = this.isLoading && key === this.idLoading
       , isDoublLoadMeta = (option.isLoadMeta)
@@ -131,7 +132,9 @@ ChartActions[A.LOAD_STOCK].preEmit = function() {
 ChartActions[A.LOAD_STOCK].shouldEmit = function(){
   return this.isShouldEmit;
 }
-ChartActions[A.LOAD_STOCK].listen(function(chartType, browserType, option){
+ChartActions[A.LOAD_STOCK].listen(function(confItem, option){
+  const { chartType, browserType, conf } = confItem;
+  option.conf = conf
 
   this.isLoading = true;
   this.idLoading = option.key;

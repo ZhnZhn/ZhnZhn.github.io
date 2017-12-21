@@ -116,11 +116,13 @@ ChartActions.fnOnChangeStore = _fnOnChangeStore;
 
 ChartActions[A.LOAD_STOCK].preEmit = function () {
   var arg = [].slice.call(arguments),
-      chartType = arg[0],
-      option = arg[2],
+      confItem = arg[0],
+      chartType = confItem.chartType,
+      option = arg[1],
       key = _LogicUtils2.default.createKeyForConfig(option),
       isDoublingLoad = this.isLoading && key === this.idLoading,
       isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
+
 
   option.key = key;
   this.isShouldEmit = true;
@@ -150,7 +152,12 @@ ChartActions[A.LOAD_STOCK].preEmit = function () {
 ChartActions[A.LOAD_STOCK].shouldEmit = function () {
   return this.isShouldEmit;
 };
-ChartActions[A.LOAD_STOCK].listen(function (chartType, browserType, option) {
+ChartActions[A.LOAD_STOCK].listen(function (confItem, option) {
+  var chartType = confItem.chartType,
+      browserType = confItem.browserType,
+      conf = confItem.conf;
+
+  option.conf = conf;
 
   this.isLoading = true;
   this.idLoading = option.key;

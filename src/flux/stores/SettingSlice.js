@@ -3,7 +3,7 @@ const SettingSlice = {
   setting: {
     quandlKey: undefined,
     barchartKey: undefined,
-    alphaKey: undefined,
+    alphaKey: undefined,    
     proxy: 'https://cors-anywhere.herokuapp.com/',
     isAdminMode: false,
     isDrawDeltaExtrems: false,

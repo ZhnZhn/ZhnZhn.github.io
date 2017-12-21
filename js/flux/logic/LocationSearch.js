@@ -23,12 +23,15 @@ var C = {
   Q: 'Q'
 };
 
+var _isQuery = function _isQuery(obj) {
+  return obj && obj.cT === C.SM_WIKI || obj.bT === C.UN || obj.bT === C.QE;
+};
+
 var _trSearchToOptions = function _trSearchToOptions() {
   var search = window.location ? window.location.search : null;
   try {
     var obj = _queryString2.default.parse(search);
-
-    if (obj && obj.cT === C.SM_WIKI || obj.bT === C.UN || obj.bT === C.QE) {
+    if (_isQuery(obj)) {
       return _LocationQuery2.default.toOptions(obj);
     } else {
       return undefined;

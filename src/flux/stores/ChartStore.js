@@ -67,7 +67,10 @@ const ChartStore = Reflux.createStore({
    this.trigger(ChartActionTypes.LOAD_STOCK);
  },
  onLoadStockCompleted(option, config){
-     const { chartType, browserType, zhCompType } = option
+     const {
+             chartType, browserType, conf,
+             zhCompType
+           } = option
          , { zhConfig={} } = config
          , { limitRemaining } = zhConfig;
      if (zhCompType){
@@ -89,7 +92,7 @@ const ChartStore = Reflux.createStore({
 
       this.trigger(ChartActionTypes.LOAD_STOCK_COMPLETED);
       this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
-                  Factory.createChartContainer(chartType, browserType));
+                  Factory.createChartContainer(chartType, browserType, conf));
       this.triggerWithLimitRemaining(limitRemaining);
     }
 
@@ -127,7 +130,7 @@ const ChartStore = Reflux.createStore({
  },
 
 
- onShowChart(chartType, browserType){
+ onShowChart(chartType, browserType, conf){
    this.setMenuItemOpen(chartType, browserType);
 
    const chartCont = this.charts[chartType];
@@ -137,8 +140,12 @@ const ChartStore = Reflux.createStore({
      this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
    } else {
      this.charts[chartType] = this.createInitConfig(chartType);
-     this.trigger(ChartActionTypes.INIT_AND_SHOW_CHART,
-                  Factory.createChartContainer(chartType, browserType));
+     this.trigger(
+       ChartActionTypes.INIT_AND_SHOW_CHART,
+       Factory.createChartContainer(
+          chartType, browserType, conf
+        )
+      );
      this.trigger(BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
    }
 
