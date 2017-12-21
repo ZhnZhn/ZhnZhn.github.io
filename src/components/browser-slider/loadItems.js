@@ -5,14 +5,17 @@ const _compareByText = (a, b) => {
   return 0;
 }
 
-const loadItems = (url) => {
-  return fetch(url, { cache: "default" })
+const loadItems = (url, proxy) => {
+  const _url = proxy
+          ? proxy + url
+          : url;
+  return fetch(_url, { cache: "default" })
     .then(res => res.json())
     .then(json => {
       if (Array.isArray(json)) {
          json.sort(_compareByText)
       }
-      return json;      
+      return json;
     })
 }
 

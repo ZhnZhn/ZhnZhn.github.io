@@ -59,8 +59,9 @@ class MenuSlider extends Component {
 
   _loadItems = () => {
     //const { rootUrl } = this.props
-    const { dfProps } = this.props
-    loadItems(dfProps.rootUrl)
+    const { dfProps, store } = this.props
+        , proxy = store.getProxy();
+    loadItems(dfProps.rootUrl, proxy)
       .then(model => {
          if (Array.isArray(model)) {
             this.setState({ model, errMsg: undefined })
@@ -81,12 +82,13 @@ class MenuSlider extends Component {
   }
 
   _addPage = (pages, id, title) => {
-    const { dfProps } = this.props;
+    const { dfProps, store } = this.props;
     pages.push((
       <Frame
         key={id}
         id={id}
         rootStyle={S.PAGE}
+        store={store}
         title={title}
         dfProps={dfProps}
         onClickPrev={this.hPrevPage}
@@ -99,7 +101,7 @@ class MenuSlider extends Component {
 
 
   hNextPage = (id, title, pageNumber) => {
-    this.setState(prevState => {      
+    this.setState(prevState => {
        const { pages } = prevState
           , _max = pages.length-1;
 

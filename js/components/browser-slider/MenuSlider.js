@@ -89,9 +89,12 @@ var MenuSlider = function (_Component) {
 
     _this._loadItems = function () {
       //const { rootUrl } = this.props
-      var dfProps = _this.props.dfProps;
+      var _this$props = _this.props,
+          dfProps = _this$props.dfProps,
+          store = _this$props.store,
+          proxy = store.getProxy();
 
-      (0, _loadItems2.default)(dfProps.rootUrl).then(function (model) {
+      (0, _loadItems2.default)(dfProps.rootUrl, proxy).then(function (model) {
         if (Array.isArray(model)) {
           _this.setState({ model: model, errMsg: undefined });
         }
@@ -109,12 +112,15 @@ var MenuSlider = function (_Component) {
     };
 
     _this._addPage = function (pages, id, title) {
-      var dfProps = _this.props.dfProps;
+      var _this$props2 = _this.props,
+          dfProps = _this$props2.dfProps,
+          store = _this$props2.store;
 
       pages.push(_react2.default.createElement(_Frame2.default, {
         key: id,
         id: id,
         rootStyle: S.PAGE,
+        store: store,
         title: title,
         dfProps: dfProps,
         onClickPrev: _this.hPrevPage,

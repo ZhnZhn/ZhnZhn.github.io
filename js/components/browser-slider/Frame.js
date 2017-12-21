@@ -53,9 +53,11 @@ var Frame = function (_Component) {
     _this.loadMenu = function (id) {
       var _this$props = _this.props,
           dfProps = _this$props.dfProps,
-          loadItems = _this$props.loadItems;
+          loadItems = _this$props.loadItems,
+          store = _this$props.store,
+          proxy = store.getProxy();
 
-      loadItems(dfProps.rootUrl + '/' + id).then(function (model) {
+      loadItems(dfProps.rootUrl + '/' + id, proxy).then(function (model) {
         if (Array.isArray(model)) {
           _this.setState({ model: model, errMsg: undefined });
         }

@@ -21,8 +21,9 @@ class Frame extends Component {
   }
 
   loadMenu = (id) => {
-    const { dfProps, loadItems } = this.props;
-    loadItems(`${dfProps.rootUrl}/${id}`)
+    const { dfProps, loadItems, store } = this.props
+        , proxy = store.getProxy();
+    loadItems(`${dfProps.rootUrl}/${id}`, proxy)
       .then(model => {
         if (Array.isArray(model)){
            this.setState({ model, errMsg: undefined })
@@ -47,7 +48,7 @@ class Frame extends Component {
                     ? onClickNext.bind(null, `${rootId}/${id}`, text, pageNumber)
                     : fOnClickItem({
                          ...dfProps,
-                         id: `${rootId}/${id}`                         
+                         id: `${rootId}/${id}`
                        })
              return (
                <MenuItem

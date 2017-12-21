@@ -10,8 +10,9 @@ var _compareByText = function _compareByText(a, b) {
   return 0;
 };
 
-var loadItems = function loadItems(url) {
-  return fetch(url, { cache: "default" }).then(function (res) {
+var loadItems = function loadItems(url, proxy) {
+  var _url = proxy ? proxy + url : url;
+  return fetch(_url, { cache: "default" }).then(function (res) {
     return res.json();
   }).then(function (json) {
     if (Array.isArray(json)) {
