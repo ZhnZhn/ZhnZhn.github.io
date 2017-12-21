@@ -35,7 +35,8 @@ class Frame extends Component {
   }
 
   _renderMenu = () => {
-    const { dfProps, pageNumber } = this.props
+    const { dfProps, pageNumber, store } = this.props
+        , proxy = store.getProxy()
         , { model } = this.state;
     const {
             onClickNext,
@@ -47,8 +48,9 @@ class Frame extends Component {
                 , _onClick = type === 'l'
                     ? onClickNext.bind(null, `${rootId}/${id}`, text, pageNumber)
                     : fOnClickItem({
+                         id: `${rootId}/${id}`,
                          ...dfProps,
-                         id: `${rootId}/${id}`
+                         proxy
                        })
              return (
                <MenuItem

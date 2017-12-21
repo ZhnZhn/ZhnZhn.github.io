@@ -58,9 +58,11 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
       bT = _ref.bT,
       lT = _ref.lT,
       sP = _ref.sP,
-      dU = _ref.dU;
+      dU = _ref.dU,
+      proxy = _ref.proxy;
   return function () {
-    fetch(rootUrl + "/" + id).then(function (res) {
+    var _url = proxy ? "" + proxy + rootUrl + "/" + id : rootUrl + "/" + id;
+    fetch(_url).then(function (res) {
       var status = res.status,
           statusText = res.statusText;
 

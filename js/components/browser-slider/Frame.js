@@ -70,6 +70,8 @@ var Frame = function (_Component) {
       var _this$props2 = _this.props,
           dfProps = _this$props2.dfProps,
           pageNumber = _this$props2.pageNumber,
+          store = _this$props2.store,
+          proxy = store.getProxy(),
           model = _this.state.model;
       var _this$props3 = _this.props,
           onClickNext = _this$props3.onClickNext,
@@ -79,8 +81,10 @@ var Frame = function (_Component) {
         var text = item.text,
             id = item.id,
             type = item.type,
-            _onClick = type === 'l' ? onClickNext.bind(null, rootId + '/' + id, text, pageNumber) : fOnClickItem((0, _extends3.default)({}, dfProps, {
+            _onClick = type === 'l' ? onClickNext.bind(null, rootId + '/' + id, text, pageNumber) : fOnClickItem((0, _extends3.default)({
           id: rootId + '/' + id
+        }, dfProps, {
+          proxy: proxy
         }));
 
         return _react2.default.createElement(_MenuItem2.default, {

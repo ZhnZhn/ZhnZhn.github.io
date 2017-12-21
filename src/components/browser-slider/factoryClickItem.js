@@ -38,8 +38,11 @@ const _getFrequencyAndDims = (json) => {
   return { mapFrequency, dims };
 }
 
-const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU }) => () => {
-   fetch(`${rootUrl}/${id}`)
+const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
+   const _url = proxy
+           ? `${proxy}${rootUrl}/${id}`
+           : `${rootUrl}/${id}`;
+   fetch(_url)
       .then(res => {
         const { status, statusText } = res;
         if (status>=200 && status<400) {
