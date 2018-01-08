@@ -43,4 +43,4 @@ var SparklinesMinLabel = function SparklinesMinLabel(props) {
 };
 
 exports.default = SparklinesMinLabel;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\SparklinesMinLabel.js.map
+//# sourceMappingURL=SparklinesMinLabel.js.map

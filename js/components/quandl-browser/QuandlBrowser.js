@@ -19,4 +19,4 @@ var QuandlBrowser = function QuandlBrowser(props) {
 };
 
 exports.default = QuandlBrowser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\QuandlBrowser.js.map
+//# sourceMappingURL=QuandlBrowser.js.map

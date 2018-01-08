@@ -54,4 +54,4 @@ var InfoPart = function InfoPart(props) {
 };
 
 exports.default = InfoPart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InfoPart.js.map
+//# sourceMappingURL=InfoPart.js.map

@@ -20,10 +20,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Link = function Link(_ref) {
   var title = _ref.title,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ["title"]);
+      dfStyle = _ref.dfStyle,
+      style = _ref.style,
+      rest = (0, _objectWithoutProperties3.default)(_ref, ["title", "dfStyle", "style"]);
   return _react2.default.createElement(
     "a",
-    (0, _extends3.default)({ target: "_blank", className: "link" }, rest),
+    (0, _extends3.default)({
+      target: "_blank",
+      className: "link",
+      style: (0, _extends3.default)({}, dfStyle, style)
+    }, rest),
     title
   );
 };

@@ -140,4 +140,4 @@ var loadDims = function loadDims(_ref) {
 };
 
 exports.default = loadDims;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\loadDims.js.map
+//# sourceMappingURL=loadDims.js.map

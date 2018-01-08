@@ -5,72 +5,128 @@ import Link from '../links/Links';
 
 import S from './About.Style'
 
+const CL = {
+  BR: "provider__note__br"
+};
+
+const OPEN_COLOR_L2 = "#80c040";
+
 const ST = {
+  ROOT_CHILD: {
+    borderLeft: '1px dashed yellow',
+    marginLeft: '-5px',
+    paddingLeft: '8px'
+  },
+  OPEN_CLOSE: {
+    paddingTop: '6px',
+    lineHeight: 1.8
+  },
+  CHILD_STYLE: {
+    borderLeft: '1px dotted #80c040',
+    marginLeft: '2px',
+    paddingLeft: '6px'
+  },
   P4: {
     paddingTop: '4px'
+  },
+  NOTE: {
+    padding: '8px 4px 4px 6px',
+    lineHeight: 1.4
+  },
+  SETTINGS: {
+    color: '#607d8b'
   }
 }
 
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers:"
+     caption="Data Providers (All 11):"
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM}}
+     childStyle={ST.ROOT_CHILD}
   >
     <div>
       <p>
         <span style={S.PROVIDER}>
-          <Link.Eurostat/>
+          <Link.Quandl/>
           <span style={S.BLACK}>
-            &nbsp;
+            &nbsp;(50 per day)
           </span>
         </span>
         <span style={S.PROVIDER}>
-         <Link.UnComtrade />
-         <span style={S.BLUE}>;</span>
+          <Link.Eurostat />
         </span>
+        <span style={S.PROVIDER}>
+          <Link.UnComtrade />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Iex />
+        </span>  
       </p>
+      <OpenClose
+        caption="(4) Required API key:"
+        rootStyle={ST.OPEN_CLOSE}
+        childStyle={ST.CHILD_STYLE}
+        isClose={true}
+        openColor={OPEN_COLOR_L2}
+      >
       <p style={ST.P4}>
         <span style={S.PROVIDER}>
           <Link.Quandl/>
           <span style={S.BLACK}>
-            &nbsp;
+             &nbsp;(50 000 per day)
           </span>
         </span>
         <span style={S.PROVIDER}>
           <Link.Barchart/>
-          <span style={S.BLACK}>
-            &nbsp;
-          </span>
         </span>
         <span style={S.PROVIDER}>
           <Link.AlphaVantage/>
-          <span style={S.BLACK}>
-            &nbsp;:&nbsp;(API Key);
-          </span>
-        </span>
-      </p>
-      <p style={ST.P4}>
-        <span style={S.PROVIDER}>
-         <Link.FaoStat />
-         <span>&nbsp;</span>
         </span>
         <span style={S.PROVIDER}>
-          <Link.Insee/>
-          <span>&nbsp;</span>
+          <Link.Bea/>
         </span>
-        <span style={S.PROVIDER}>
-          <Link.StatNorway/>
-          <span>&nbsp;</span>
-        </span>
-        <span style={S.PROVIDER}>
-          <Link.StatSweden/>
-          <span style={S.BLACK}>
-            &nbsp;:&nbsp;(Https Proxy for CORS);
-          </span>
-        </span>
-      </p>
 
+      </p>
+      <div style={ST.NOTE}>
+        <p>
+          <span style={S.BLACK}>Note:&nbsp;</span>
+          User API key from data provider required for request.&nbsp;
+          <br className={CL.BR} />
+          Can be set in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
+        </p>
+      </div>
+      </OpenClose>
+      <OpenClose
+        caption="(4) Required Https Proxy:"
+        rootStyle={ST.OPEN_CLOSE}
+        childStyle={ST.CHILD_STYLE}
+        isClose={true}
+        openColor={OPEN_COLOR_L2}
+      >
+        <p style={ST.P4}>
+          <span style={S.PROVIDER}>
+           <Link.FaoStat />
+          </span>
+          <span style={S.PROVIDER}>
+            <Link.Insee/>
+          </span>
+          <span style={S.PROVIDER}>
+            <Link.StatNorway/>
+          </span>
+          <span style={S.PROVIDER}>
+            <Link.StatSweden/>
+          </span>
+        </p>
+        <div style={ST.NOTE}>
+          <p>
+            <span style={S.BLACK}>Note:&nbsp;</span>
+            Https Proxy is required for CORS Http API services.&nbsp;
+            <br className={CL.BR} />
+            By default set. Can be changed in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
+          </p>
+        </div>
+      </OpenClose>
      </div>
    </OpenClose>
 );

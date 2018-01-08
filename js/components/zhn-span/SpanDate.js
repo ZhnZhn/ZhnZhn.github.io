@@ -32,4 +32,4 @@ var SpanDate = function SpanDate(_ref) {
 };
 
 exports.default = SpanDate;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-span\SpanDate.js.map
+//# sourceMappingURL=SpanDate.js.map

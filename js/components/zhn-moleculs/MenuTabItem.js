@@ -93,4 +93,4 @@ var MenuTabItem = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuTabItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\MenuTabItem.js.map
+//# sourceMappingURL=MenuTabItem.js.map

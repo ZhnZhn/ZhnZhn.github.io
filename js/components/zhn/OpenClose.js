@@ -110,6 +110,7 @@ var OpenClose = function (_Component) {
           rootStyle = _props.rootStyle,
           caption = _props.caption,
           CompAfter = _props.CompAfter,
+          childStyle = _props.childStyle,
           children = _props.children,
           _state = this.state,
           isOpen = _state.isOpen,
@@ -176,7 +177,7 @@ var OpenClose = function (_Component) {
           'div',
           {
             className: _rootChildCl,
-            style: _rootChildStyle
+            style: (0, _extends3.default)({}, childStyle, _rootChildStyle)
           },
           children
         )

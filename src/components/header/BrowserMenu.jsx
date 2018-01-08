@@ -93,7 +93,11 @@ class BrowserMenu extends Component {
   }
 
   _addPage = (pages, id, title) => {
-    const { model, onClickDynamic } = this.props
+    const {
+            model,
+            onClickDynamic,
+            onClickQuandl
+           } = this.props
          //, { pageCurrent } = this.state;
     pages.push((
       <MenuPage
@@ -103,6 +107,7 @@ class BrowserMenu extends Component {
         title={title}
         model={model[id]}
         onClickDynamic={onClickDynamic}
+        onClickQuandl={onClickQuandl}
         onClickPrev={this.hPrevPage}
         //onClickPrev={this.hPrevPage.bind(null, pageCurrent)}
       />

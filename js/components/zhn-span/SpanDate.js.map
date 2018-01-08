@@ -1,17 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-span\\SpanDate.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-span\\SpanDate.js",
- "sourceRoot": "",
- "names": [
-  "STYLE",
-  "ROOT",
-  "color",
-  "fontWeight",
-  "SpanDate",
-  "date",
-  "style"
- ],
- "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,WAAO,SADF;AAELC,gBAAa;AAFR;AADK,CAAd;;AAOA,IAAMC,WAAW,SAAXA,QAAW;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SACf;AAAA;AAAA,MAAM,kCAAWN,MAAMC,IAAjB,EAA0BK,KAA1B,CAAN;AACGD;AADH,GADe;AAAA,CAAjB;;kBAMeD,Q"
-}
+{"version":3,"sources":["../../../src/components/zhn-span/SpanDate.jsx"],"names":["STYLE","ROOT","color","fontWeight","SpanDate","date","style"],"mappings":";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,WAAO,SADF;AAELC,gBAAa;AAFR;AADK,CAAd;;AAOA,IAAMC,WAAW,SAAXA,QAAW;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SACf;AAAA;AAAA,MAAM,kCAAWN,MAAMC,IAAjB,EAA0BK,KAA1B,CAAN;AACGD;AADH,GADe;AAAA,CAAjB;;kBAMeD,Q","file":"SpanDate.js","sourcesContent":["import React from 'react'\r\n\r\nconst STYLE = {\r\n  ROOT : {\r\n    color: '#FDB316',\r\n    fontWeight : 'bold'\r\n  }\r\n}\r\n\r\nconst SpanDate = ({ date, style }) => (\r\n  <span style={{...STYLE.ROOT, ...style}}>\r\n    {date}\r\n  </span>\r\n)\r\n\r\nexport default SpanDate\r\n"]}

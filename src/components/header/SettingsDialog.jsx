@@ -13,7 +13,7 @@ const S = {
   MODAL : {
     position : 'static',
     width: '380px',
-    height: '320px',
+    height: '360px',
     margin: '70px auto 0px'
   },
   TITLE: {
@@ -25,6 +25,7 @@ const SET = {
   QUANDL_KEY: 'setQuandlKey',
   ALPHA_KEY: 'setAlphaKey',
   BARCHAR_KEY: 'setBarcharKey',
+  BEA_KEY: 'setBeaKey',
   PROXY: 'setProxy'
 };
 
@@ -50,8 +51,9 @@ class SettingsDialog extends Component {
     const { data } = props;
 
     this._setQuandlKey = safeFn(data, SET.QUANDL_KEY)
-    this._setAlpheKey = safeFn(data, SET.ALPHA_KEY)
+    this._setAlphaKey = safeFn(data, SET.ALPHA_KEY)
     this._setBarcharKey = safeFn(data, SET.BARCHAR_KEY)
+    this._setBeaKey = safeFn(data, SET.BEA_KEY)
     this._setProxy = safeFn(data, SET.PROXY)
 
     this._commandButtons = [
@@ -74,8 +76,9 @@ class SettingsDialog extends Component {
     const { onClose } = this.props;
 
     this._setQuandlKey(this.inputComp.getValue())
-    this._setAlpheKey(this.alphaComp.getValue())
+    this._setAlphaKey(this.alphaComp.getValue())
     this._setBarcharKey(this.barcharComp.getValue())
+    this._setBeaKey(this.beaComp.getValue())
     this._setProxy(this.proxyComp.getValue())
 
     onClose()
@@ -85,6 +88,12 @@ class SettingsDialog extends Component {
         , fnMode = safeFn(data, fnName);
     fnMode(mode)
   }
+
+  _refBarchart = n => this.barcharComp = n
+  _refAlpha = n => this.alphaComp = n
+  _refQuandl = n => this.inputComp = n
+  _refBea = n => this.beaComp = n
+  _refProxy = n => this.proxyComp = n
 
   render(){
     const { isShow, data, onClose } = this.props
@@ -102,28 +111,36 @@ class SettingsDialog extends Component {
             onClose={onClose}
          >
             <RowSecret
-               ref={ c => this.alphaComp = c}
+               ref={ this._refAlpha}
                titleStyle={S.TITLE}
                title="Alpha:"
-               placeholder="Alpha API Key"
-               onEnter={this._setAlpheKey}
+               placeholder="Alpha Vantage API Key"
+               onEnter={this._setAlphaKey}
             />
             <RowSecret
-               ref={ c => this.barcharComp = c}
+               ref={this._refBarchart}
                titleStyle={S.TITLE}
                title="Barchar:"
                placeholder="Barchar API Key"
                onEnter={this._setBarcharKey}
             />
             <RowSecret
-               ref={ c => this.inputComp = c}
+               ref={this._refBea}
+               titleStyle={S.TITLE}
+               title="BEA:"
+               placeholder="BEA API Key"
+               maxLength="36"
+               onEnter={this._setBeaKey}
+            />
+            <RowSecret
+               ref={this._refQuandl}
                titleStyle={S.TITLE}
                title="Quandl:"
                placeholder="Quandl API Key"
                onEnter={this._setQuandlKey}
             />
             <RowPattern
-               ref={ c => this.proxyComp = c}
+               ref={this._refProxy}
                titleStyle={S.TITLE}
                title="Https Proxy:"
                placeholder="Https Proxy for CORS"

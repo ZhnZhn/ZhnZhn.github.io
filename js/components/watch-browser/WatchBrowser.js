@@ -328,4 +328,4 @@ var WatchBrowser = (_dec = _Decorators2.default.withDnDStyle, _dec2 = _Decorator
   return WatchBrowser;
 }(_react.Component)) || _class) || _class) || _class) || _class);
 exports.default = WatchBrowser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\WatchBrowser.js.map
+//# sourceMappingURL=WatchBrowser.js.map

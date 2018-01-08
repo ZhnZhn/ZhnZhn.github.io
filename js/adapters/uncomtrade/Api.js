@@ -58,4 +58,4 @@ var UnComtradeApi = {
 };
 
 exports.default = UnComtradeApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\uncomtrade\Api.js.map
+//# sourceMappingURL=Api.js.map

@@ -116,7 +116,7 @@ var Header = function Header(props) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? Header.propTypes = {
+Header.propTypes = process.env.NODE_ENV !== "production" ? {
   isOpen: _propTypes2.default.bool.isRequired,
   chartType: _propTypes2.default.string.isRequired,
   onCheck: _propTypes2.default.func.isRequired,
@@ -129,7 +129,7 @@ process.env.NODE_ENV !== "production" ? Header.propTypes = {
   isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
   crValueMoving: _propTypes2.default.func,
   onClose: _propTypes2.default.func.isRequired
-} : void 0;
+} : {};
 
 exports.default = Header;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\Header.js.map
+//# sourceMappingURL=Header.js.map

@@ -7,4 +7,4 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (data) {
     return Math.min.apply(Math, data);
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\dataProcessing\min.js.map
+//# sourceMappingURL=min.js.map

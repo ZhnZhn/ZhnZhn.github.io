@@ -29,7 +29,8 @@ var Quandl = _RouterAdapter2.default.Quandl,
     AlphaVantage = _RouterAdapter2.default.AlphaVantage,
     Barchart = _RouterAdapter2.default.Barchart,
     Iex = _RouterAdapter2.default.Iex,
-    Insee = _RouterAdapter2.default.Insee;
+    Insee = _RouterAdapter2.default.Insee,
+    Bea = _RouterAdapter2.default.Bea;
 
 
 var LoadImpl = {
@@ -54,8 +55,10 @@ var LoadImpl = {
   Iex: (0, _loadItem2.default)((0, _extends3.default)({}, Iex)),
   Insee: (0, _loadItem2.default)((0, _extends3.default)({
     fnFetch: _fnFetch.fetchTxt
-  }, Insee))
+  }, Insee)),
+
+  Bea: (0, _loadItem2.default)((0, _extends3.default)({}, Bea))
 };
 
 exports.default = LoadImpl;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadImpl.js.map
+//# sourceMappingURL=LoadImpl.js.map

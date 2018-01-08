@@ -35,4 +35,4 @@ var toMap = {
 };
 
 exports.default = toMap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\toMap.js.map
+//# sourceMappingURL=toMap.js.map

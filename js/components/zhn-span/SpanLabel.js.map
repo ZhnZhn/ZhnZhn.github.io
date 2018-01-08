@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-span\\SpanLabel.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-span\\SpanLabel.js",
- "sourceRoot": "",
- "names": [
-  "STYLE",
-  "ROOT",
-  "color",
-  "fontSize",
-  "fontWeight",
-  "SpanLabel",
-  "label",
-  "style"
- ],
- "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,WAAO,SADF;AAELC,cAAU,MAFL;AAGLC,gBAAY;AAHP;AADK,CAAd;;AAQA,IAAMC,YAAY,SAAZA,SAAY;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,KAAV,QAAUA,KAAV;AAAA,SAChB;AAAA;AAAA,MAAM,kCAAWP,MAAMC,IAAjB,EAA0BM,KAA1B,CAAN;AACGD;AADH,GADgB;AAAA,CAAlB;;kBAMeD,S"
-}
+{"version":3,"sources":["../../../src/components/zhn-span/SpanLabel.jsx"],"names":["STYLE","ROOT","color","fontSize","fontWeight","SpanLabel","label","style"],"mappings":";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,WAAO,SADF;AAELC,cAAU,MAFL;AAGLC,gBAAY;AAHP;AADK,CAAd;;AAQA,IAAMC,YAAY,SAAZA,SAAY;AAAA,MAAGC,KAAH,QAAGA,KAAH;AAAA,MAAUC,KAAV,QAAUA,KAAV;AAAA,SAChB;AAAA;AAAA,MAAM,kCAAWP,MAAMC,IAAjB,EAA0BM,KAA1B,CAAN;AACGD;AADH,GADgB;AAAA,CAAlB;;kBAMeD,S","file":"SpanLabel.js","sourcesContent":["import React from 'react'\r\n\r\nconst STYLE = {\r\n  ROOT : {\r\n    color: '#1b75bb',\r\n    fontSize: '16px',\r\n    fontWeight: 'bold'\r\n  }\r\n}\r\n\r\nconst SpanLabel = ({ label, style }) => (\r\n  <span style={{...STYLE.ROOT, ...style}}>\r\n    {label}\r\n  </span>\r\n)\r\n\r\nexport default SpanLabel\r\n"]}

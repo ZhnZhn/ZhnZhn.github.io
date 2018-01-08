@@ -239,4 +239,4 @@ var crZhConfig = exports.crZhConfig = function crZhConfig(option, zhSeriaId) {
     isWithoutIndicator: true
   });
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\StackedFn.js.map
+//# sourceMappingURL=StackedFn.js.map

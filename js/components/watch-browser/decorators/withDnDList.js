@@ -82,4 +82,4 @@ var withDnDList = function withDnDList(DRAG, WatchActions) {
 };
 
 exports.default = withDnDList;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDList.js.map
+//# sourceMappingURL=withDnDList.js.map

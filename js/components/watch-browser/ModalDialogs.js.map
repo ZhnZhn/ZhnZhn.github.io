@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\ModalDialogs.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\ModalDialogs.js",
- "sourceRoot": "",
- "names": [
-  "ModalDialogs",
-  "LoadItem",
-  "EditGroup",
-  "EditList"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,eAAe;AACnBC,oCADmB;AAEnBC,sCAFmB;AAGnBC;AAHmB,CAArB;;kBAMeH,Y"
-}
+{"version":3,"sources":["../../../src/components/watch-browser/ModalDialogs.js"],"names":["ModalDialogs","LoadItem","EditGroup","EditList"],"mappings":";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,eAAe;AACnBC,oCADmB;AAEnBC,sCAFmB;AAGnBC;AAHmB,CAArB;;kBAMeH,Y","file":"ModalDialogs.js","sourcesContent":["import LoadItem from './LoadItemDialog';\r\nimport EditGroup from './EditGroupDialog';\r\nimport EditList from './EditListDialog';\r\n\r\nconst ModalDialogs = {\r\n  LoadItem,\r\n  EditGroup,\r\n  EditList\r\n}\r\n\r\nexport default ModalDialogs\r\n"]}

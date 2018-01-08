@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\items\\ModalMenuFn.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\items\\ModalMenuFn.js",
- "sourceRoot": "",
- "names": [
-  "ModalMenuFn",
-  "isShow",
-  "onClose",
-  "onX2H",
-  "onCopy",
-  "onPasteTo",
-  "ROOT",
-  "PANE"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,cAAc,SAAdA,WAAc;AAAA,MAClBC,MADkB,QAClBA,MADkB;AAAA,MACVC,OADU,QACVA,OADU;AAAA,MAElBC,KAFkB,QAElBA,KAFkB;AAAA,MAGlBC,MAHkB,QAGlBA,MAHkB;AAAA,MAGVC,SAHU,QAGVA,SAHU;AAAA,SAKlB;AAAA;AAAA;AACE,cAAQJ,MADV;AAEE,aAAO,oBAAMK,IAFf;AAGE,eAASJ;AAHX;AAKE;AAAA;AAAA,QAAK,OAAO,oBAAMK,IAAlB;AACE;AACE,iBAAQ,KADV;AAEE,iBAASJ;AAFX,QADF;AAKE;AACE,iBAAQ,MADV;AAEE,qBAAa,IAFf;AAGE,iBAASC;AAHX,QALF;AAUE;AACE,iBAAQ,SADV;AAEE,qBAAa,IAFf;AAGE,iBAASC;AAHX;AAVF;AALF,GALkB;AAAA,CAApB;;kBA6BeL,W"
-}
+{"version":3,"sources":["../../../src/components/items/ModalMenuFn.jsx"],"names":["ModalMenuFn","isShow","onClose","onX2H","onCopy","onPasteTo","ROOT","PANE"],"mappings":";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,cAAc,SAAdA,WAAc;AAAA,MAClBC,MADkB,QAClBA,MADkB;AAAA,MACVC,OADU,QACVA,OADU;AAAA,MAElBC,KAFkB,QAElBA,KAFkB;AAAA,MAGlBC,MAHkB,QAGlBA,MAHkB;AAAA,MAGVC,SAHU,QAGVA,SAHU;AAAA,SAKlB;AAAA;AAAA;AACE,cAAQJ,MADV;AAEE,aAAO,oBAAMK,IAFf;AAGE,eAASJ;AAHX;AAKE;AAAA;AAAA,QAAK,OAAO,oBAAMK,IAAlB;AACE;AACE,iBAAQ,KADV;AAEE,iBAASJ;AAFX,QADF;AAKE;AACE,iBAAQ,MADV;AAEE,qBAAa,IAFf;AAGE,iBAASC;AAHX,QALF;AAUE;AACE,iBAAQ,SADV;AAEE,qBAAa,IAFf;AAGE,iBAASC;AAHX;AAVF;AALF,GALkB;AAAA,CAApB;;kBA6BeL,W","file":"ModalMenuFn.js","sourcesContent":["import React from 'react'\r\n\r\nimport ModalPopup from '../zhn-moleculs/ModalPopup'\r\nimport SubMenuItem from './SubMenuItem'\r\n\r\nimport STYLE from './ModalMenu.Style'\r\n\r\nconst ModalMenuFn = ({\r\n  isShow, onClose,\r\n  onX2H,\r\n  onCopy, onPasteTo\r\n}) => (\r\n  <ModalPopup\r\n    isShow={isShow}\r\n    style={STYLE.ROOT}\r\n    onClose={onClose}\r\n  >\r\n    <div style={STYLE.PANE}>\r\n      <SubMenuItem\r\n        caption=\"x2H\"\r\n        onClick={onX2H}\r\n      />\r\n      <SubMenuItem\r\n        caption=\"Copy\"\r\n        isNotActive={true}\r\n        onClick={onCopy}\r\n      />\r\n      <SubMenuItem\r\n        caption=\"PasteTo\"\r\n        isNotActive={true}\r\n        onClick={onPasteTo}\r\n      />\r\n    </div>\r\n  </ModalPopup>\r\n);\r\n\r\nexport default ModalMenuFn\r\n"]}

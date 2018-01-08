@@ -214,4 +214,4 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
 });
 
 exports.default = ConfigBuilder;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ConfigBuilder.js.map
+//# sourceMappingURL=ConfigBuilder.js.map

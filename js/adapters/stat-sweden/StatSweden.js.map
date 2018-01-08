@@ -1,16 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-sweden\\StatSweden.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-sweden\\StatSweden.js",
- "sourceRoot": "",
- "names": [
-  "StatSweden",
-  "Table",
-  "api",
-  "optionFetch",
-  "crOptionFetch",
-  "adapter"
- ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,SAAO;AACLC,2BADK;AAELC,iBAAa,mBAASC,aAFjB;AAGLC;AAHK;AADU,CAAnB;;kBAQeL,U"
-}
+{"version":3,"sources":["../../../src/adapters/stat-sweden/StatSweden.js"],"names":["StatSweden","Table","api","optionFetch","crOptionFetch","adapter"],"mappings":";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,SAAO;AACLC,2BADK;AAELC,iBAAa,mBAASC,aAFjB;AAGLC;AAHK;AADU,CAAnB;;kBAQeL,U","file":"StatSweden.js","sourcesContent":["import tableApi from './ApiTable'\r\nimport adapter from '../stat-norway/StatNorwayAdapter'\r\n\r\nconst StatSweden = {\r\n  Table: {\r\n    api: tableApi,\r\n    optionFetch: tableApi.crOptionFetch,\r\n    adapter\r\n  }\r\n};\r\n\r\nexport default StatSweden\r\n"]}

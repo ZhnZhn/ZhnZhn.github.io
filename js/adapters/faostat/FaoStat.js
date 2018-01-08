@@ -17,4 +17,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var FaoStat = { api: _FaoStatApi2.default, adapter: _FaoStatAdapter2.default };
 
 exports.default = FaoStat;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\FaoStat.js.map
+//# sourceMappingURL=FaoStat.js.map

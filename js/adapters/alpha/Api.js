@@ -44,4 +44,4 @@ var AlphaApi = {
 };
 
 exports.default = AlphaApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\Api.js.map
+//# sourceMappingURL=Api.js.map

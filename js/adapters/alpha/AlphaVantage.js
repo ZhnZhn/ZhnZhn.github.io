@@ -29,4 +29,4 @@ var AlphaVantage = {
 };
 
 exports.default = AlphaVantage;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\AlphaVantage.js.map
+//# sourceMappingURL=AlphaVantage.js.map

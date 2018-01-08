@@ -238,4 +238,4 @@ var toTreeMap = {
 };
 
 exports.default = toTreeMap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\toTreeMap.js.map
+//# sourceMappingURL=toTreeMap.js.map

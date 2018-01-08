@@ -57,4 +57,4 @@ var fnLegend = {
 };
 
 exports.default = fnLegend;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\uncomtrade\fnLegend.js.map
+//# sourceMappingURL=fnLegend.js.map

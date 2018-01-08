@@ -20,6 +20,8 @@ export const BrowserType = {
 
    STOCKS_BY_SECTORS : 'STOCKS_BY_SECTORS',
 
+   US_ECONOMY: 'USAE',
+
    WATCH_LIST : 'WL'
 }
 
@@ -76,6 +78,7 @@ export const LoadType = {
   SWS: 'SWS',
   UN: 'UN',
   FAO: 'FAO',
+  BEA: 'BEA',
   WL: 'WL'
 }
 

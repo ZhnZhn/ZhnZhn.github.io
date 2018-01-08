@@ -21,6 +21,8 @@ const LoadConfig = {
   [LT.NST_2]: LoadImpl.StatNorway2,
   [LT.SWS]: LoadImpl.StatSweden,
 
+  [LT.BEA]: LoadImpl.Bea,
+
   [LT.FS]: LoadImpl.Insee,
   [LT.UN]: LoadImpl.UnComtrade,
   [LT.FAO]: LoadImpl.FaoStat,

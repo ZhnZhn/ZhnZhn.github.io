@@ -171,4 +171,4 @@ var Frame = function (_Component) {
 }(_react.Component);
 
 exports.default = Frame;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\Frame.js.map
+//# sourceMappingURL=Frame.js.map

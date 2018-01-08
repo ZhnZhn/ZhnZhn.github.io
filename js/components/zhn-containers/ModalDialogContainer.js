@@ -106,10 +106,10 @@ var ModalDialogContainer = (_temp = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   timeout: 450
 }, _temp);
-process.env.NODE_ENV !== "production" ? ModalDialogContainer.propTypes = {
+ModalDialogContainer.propTypes = process.env.NODE_ENV !== "production" ? {
   isShow: _propTypes2.default.bool,
   timeout: _propTypes2.default.number,
   onClose: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = ModalDialogContainer;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-containers\ModalDialogContainer.js.map
+//# sourceMappingURL=ModalDialogContainer.js.map

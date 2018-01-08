@@ -82,14 +82,12 @@ const _crSeriesData = (chartId, json={}, isAllSeries=true ) => {
 }
 
 const _crChartId = (option) => {
-  const { stock={} } = option
-      , { value=''} = stock;
+  const { value='' } = option;
   return `B/${value}`;
 }
 
 const _crConfig = (json, option) => {
-  const { stock={} } = option
-      , { caption='', value='' } = stock
+  const  { value='', title='' } = option
       , _chartId = _crChartId(option)
       , {
           data, minClose, maxClose,
@@ -100,11 +98,11 @@ const _crConfig = (json, option) => {
       , config = ConfigBuilder()
          .initBaseArea()
          .add('chart', { spacingTop: 25 })
-         .addCaption(caption)
+         .addCaption(title)
          .addTooltip(Tooltip.fnBasePointFormatter)
          .add({
             valueMoving: AdapterFn.valueMoving(data),
-            info: _crInfo(caption),
+            info: _crInfo(title),
             zhConfig: _crZhConfig(_chartId, value),
             zhFnAddSeriesSma: fnAddSeriesSma,
             zhFnRemoveSeries: fnRemoveSeries

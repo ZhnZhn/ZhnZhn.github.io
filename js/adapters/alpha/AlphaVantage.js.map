@@ -1,16 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\alpha\\AlphaVantage.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\alpha\\AlphaVantage.js",
- "sourceRoot": "",
- "names": [
-  "AlphaVantage",
-  "Indicator",
-  "api",
-  "adapter",
-  "Intraday",
-  "Sector"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,eAAe;AACnBC,aAAW,EAAEC,kBAAF,EAAOC,+BAAP,EADQ;AAEnBC,YAAU,EAAEF,kBAAF,EAAOC,uCAAP,EAFS;AAGnBE,UAAQ,EAAEH,kBAAF,EAAOC,qCAAP;AAHW,CAArB;;kBAMeH,Y"
-}
+{"version":3,"sources":["../../../src/adapters/alpha/AlphaVantage.js"],"names":["AlphaVantage","Indicator","api","adapter","Intraday","Sector"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,eAAe;AACnBC,aAAW,EAAEC,kBAAF,EAAOC,+BAAP,EADQ;AAEnBC,YAAU,EAAEF,kBAAF,EAAOC,uCAAP,EAFS;AAGnBE,UAAQ,EAAEH,kBAAF,EAAOC,qCAAP;AAHW,CAArB;;kBAMeH,Y","file":"AlphaVantage.js","sourcesContent":["\r\nimport api from './Api'\r\nimport Indicator from './AlphaAdapter'\r\nimport Intraday from './AlphaIntradayAdapter'\r\nimport Sector from './AlphaSectorAdapter'\r\n\r\nconst AlphaVantage = {\r\n  Indicator: { api, adapter: Indicator },\r\n  Intraday: { api, adapter: Intraday },\r\n  Sector: { api, adapter: Sector }\r\n};\r\n\r\nexport default AlphaVantage\r\n"]}

@@ -59,4 +59,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\eurostatN.js.map
+//# sourceMappingURL=eurostatN.js.map

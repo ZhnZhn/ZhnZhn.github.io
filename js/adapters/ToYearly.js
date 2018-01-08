@@ -325,4 +325,4 @@ var ToYearly = {
 };
 
 exports.default = ToYearly;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\ToYearly.js.map
+//# sourceMappingURL=ToYearly.js.map

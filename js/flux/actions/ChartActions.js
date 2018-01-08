@@ -82,24 +82,34 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
 };
 
 var _addSettings = function _addSettings(option) {
-  switch (option.loadId) {
+  var loadId = option.loadId;
+
+  var apiKey = void 0,
+      proxy = void 0;
+  switch (loadId) {
     case 'B':
-      option.apiKey = _ChartStore2.default.getBarchartKey();
+      apiKey = _ChartStore2.default.getBarchartKey();
       break;
     case 'AL':case 'AL_S':case 'AL_I':
-      option.apiKey = _ChartStore2.default.getAlphaKey();
+      apiKey = _ChartStore2.default.getAlphaKey();
+      break;
+    case 'BEA':
+      apiKey = _ChartStore2.default.getBeaKey();
       break;
     case 'FS':case 'FAO':
     case 'NST':case 'NST_2':
     case 'SWS':
-      option.proxy = _ChartStore2.default.getProxy();
+      proxy = _ChartStore2.default.getProxy();
       break;
     default:
-      option.apiKey = _ChartStore2.default.getQuandlKey();
+      apiKey = _ChartStore2.default.getQuandlKey();
   }
 
-  option.isDrawDeltaExtrems = _ChartStore2.default.isSetting('isDrawDeltaExtrems');
-  option.isNotZoomToMinMax = _ChartStore2.default.isSetting('isNotZoomToMinMax');
+  Object.assign(option, {
+    apiKey: apiKey, proxy: proxy,
+    isDrawDeltaExtrems: _ChartStore2.default.isSetting('isDrawDeltaExtrems'),
+    isNotZoomToMinMax: _ChartStore2.default.isSetting('isNotZoomToMinMax')
+  });
 };
 
 var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_STOCK, {
@@ -128,13 +138,21 @@ ChartActions[A.LOAD_STOCK].preEmit = function () {
   this.isShouldEmit = true;
   _addSettings(option);
 
-  if (option.loadId === 'B' && !option.apiKey) {
+  var loadId = option.loadId,
+      apiKey = option.apiKey,
+      isKeyFeature = option.isKeyFeature,
+      isPremium = option.isPremium;
+
+
+  if (loadId === 'B' && !apiKey) {
     this.cancelLoad(option, M.withoutApiKey('Barchart Market Data'), false);
-  } else if ((option.loadId === 'AL' || option.loadId === 'AL_S' || option.loadId === 'AL_I') && !option.apiKey) {
+  } else if ((loadId === 'AL' || loadId === 'AL_S' || loadId === 'AL_I') && !apiKey) {
     this.cancelLoad(option, M.withoutApiKey('Alpha Vantage'), false);
-  } else if (option.isKeyFeature && !option.apiKey) {
+  } else if (loadId === 'BEA' && !apiKey) {
+    this.cancelLoad(option, M.withoutApiKey('BEA'), false);
+  } else if (isKeyFeature && !apiKey) {
     this.cancelLoad(option, M.FEATURE_WITHOUT_KEY, false);
-  } else if (option.isPremium && !option.apiKey) {
+  } else if (isPremium && !apiKey) {
     this.cancelLoad(option, M.PREMIUM_WITHOUT_KEY, false);
   } else if (isDoublingLoad) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
@@ -208,4 +226,4 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
 });
 
 exports.default = ChartActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ChartActions.js.map
+//# sourceMappingURL=ChartActions.js.map

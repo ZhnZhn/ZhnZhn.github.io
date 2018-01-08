@@ -76,4 +76,4 @@ var DialogCell = {
 };
 
 exports.default = DialogCell;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogCell.js.map
+//# sourceMappingURL=DialogCell.js.map

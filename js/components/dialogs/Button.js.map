@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\Button.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\Button.js",
- "sourceRoot": "",
- "names": [
-  "S",
-  "LOAD",
-  "color",
-  "SHOW",
-  "Load",
-  "onClick",
-  "Show",
-  "Flat"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAM;AACJC,WAAO;AADH,GADE;AAIRC,QAAM;AACJD,WAAO;AADH;AAJE,CAAV;;AASA,IAAME,OAAO,SAAPA,IAAO;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,SACX;AACE,eAAWL,EAAEC,IADf;AAEE,aAAQ,MAFV;AAGE,WAAM;AACN;AAJF,MAKE,SAASI;AALX,IADW;AAAA,CAAb;;AASE,IAAMC,OAAO,SAAPA,IAAO;AAAA,MAAGD,OAAH,SAAGA,OAAH;AAAA,SACX;AACE,eAAWL,EAAEG,IADf;AAEE,aAAQ,MAFV;AAGE,WAAM;AACN;AAJF,MAKE,SAASE;AALX,IADW;AAAA,CAAb;;kBAUa,EAAED,UAAF,EAAQE,UAAR,EAAcC,0BAAd,E"
-}
+{"version":3,"sources":["../../../src/components/dialogs/Button.jsx"],"names":["S","LOAD","color","SHOW","Load","onClick","Show","Flat"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAM;AACJC,WAAO;AADH,GADE;AAIRC,QAAM;AACJD,WAAO;AADH;AAJE,CAAV;;AASA,IAAME,OAAO,SAAPA,IAAO;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,SACX;AACE,eAAWL,EAAEC,IADf;AAEE,aAAQ,MAFV;AAGE,WAAM;AACN;AAJF,MAKE,SAASI;AALX,IADW;AAAA,CAAb;;AASE,IAAMC,OAAO,SAAPA,IAAO;AAAA,MAAGD,OAAH,SAAGA,OAAH;AAAA,SACX;AACE,eAAWL,EAAEG,IADf;AAEE,aAAQ,MAFV;AAGE,WAAM;AACN;AAJF,MAKE,SAASE;AALX,IADW;AAAA,CAAb;;kBAUa,EAAED,UAAF,EAAQE,UAAR,EAAcC,0BAAd,E","file":"Button.js","sourcesContent":["import React from 'react'\r\n\r\nimport FlatButton from '../zhn-m/FlatButton'\r\n\r\nconst S = {\r\n  LOAD: {\r\n    color: '#607D8B'\r\n  },\r\n  SHOW: {\r\n    color: 'rgb(35, 47, 59)'\r\n  }\r\n};\r\n\r\nconst Load = ({ onClick }) =>\r\n  <FlatButton\r\n    rootStyle={S.LOAD}\r\n    caption=\"Load\"\r\n    title=\"Load Item to Pane Container\"\r\n    //accessKey=\"l\"\r\n    onClick={onClick}\r\n  />\r\n\r\n  const Show = ({ onClick }) =>\r\n    <FlatButton\r\n      rootStyle={S.SHOW}\r\n      caption=\"Show\"\r\n      title=\"Show Pane Container\"\r\n      //accessKey=\"s\"\r\n      onClick={onClick}\r\n    />\r\n\r\n\r\nexport default { Load, Show, Flat: FlatButton }\r\n"]}

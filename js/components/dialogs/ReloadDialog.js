@@ -144,4 +144,4 @@ var ReloadDialog = function (_Component) {
 }(_react.Component);
 
 exports.default = ReloadDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\ReloadDialog.js.map
+//# sourceMappingURL=ReloadDialog.js.map

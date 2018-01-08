@@ -209,4 +209,4 @@ var PanelValueMoving = function (_Component) {
 }(_react.Component);
 
 exports.default = PanelValueMoving;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelValueMoving.js.map
+//# sourceMappingURL=PanelValueMoving.js.map

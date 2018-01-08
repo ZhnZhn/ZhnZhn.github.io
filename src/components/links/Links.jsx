@@ -8,82 +8,104 @@ const S = {
     //whiteSpace: "nowrap",
     color: "#009ae5"
   },
-  BROWN: {
-    color: "#bd1010"
+  ORANGE: {
+    color: "#e05927"
+  },
+  SUNNY: {
+    color: "#ffa200",
+  },
+  WHITE: {
+    color: 'white'
   }
 };
 
 const Quandl = withProps({
   className: CL_LINK,
   href: "https://www.quandl.com/",
-  style: {color: "#E05927"},
+  dfStyle: S.ORANGE,
   title: "Quandl"
+})(BaseComponent)
+
+const Iex = withProps({
+  className: CL_LINK,
+  href: "https://iextrading.com/developer/",
+  dfStyle: S.SUNNY,
+  title: "IEX Platform"
 })(BaseComponent)
 
 const Barchart = withProps({
   className: CL_LINK,
   href: "https://www.barchartmarketdata.com",
-  style: S.BROWN,
+  dfStyle: S.BLUE,
   title: "Barchart Market Data"
 })(BaseComponent)
 
 const  AlphaVantage = withProps({
   className: CL_LINK,
   href: "https://www.alphavantage.co",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Alpha Vantage"
 })(BaseComponent)
 
 const  Eurostat = withProps({
   className: CL_LINK,
   href: "http://ec.europa.eu/eurostat",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Eurostat"
 })(BaseComponent)
 
 const UnComtrade = withProps({
   className: CL_LINK,
   href: "https://comtrade.un.org",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "UN Comtrade"
 })(BaseComponent)
 
 const FaoStat = withProps({
   className: CL_LINK,
   href: "http://www.fao.org/faostat/en/#data",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "FAOSTAT"
+})(BaseComponent)
+
+const Bea = withProps({
+  className: CL_LINK,
+  href: "https://www.bea.gov/index.htm",
+  dfStyle: S.WHITE,
+  title: "U.S. Bureau of Economic Analysis"
 })(BaseComponent)
 
 const  Insee = withProps({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Insee: France Statistics"
 })(BaseComponent)
 
 const StatNorway = withProps({
   className: CL_LINK,
   href: "http://www.ssb.no/en",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Statistics Norway"
 })(BaseComponent)
 
 const StatSweden = withProps({
   className: CL_LINK,
   href: "https://www.scb.se/en/",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Statistics Sweden"
 })(BaseComponent)
 
 
 export default {
   Quandl,
+  Iex,
   Barchart,
   AlphaVantage,
   Eurostat,
   UnComtrade,
   FaoStat,
+  Bea,
   Insee,
   StatNorway,
   StatSweden

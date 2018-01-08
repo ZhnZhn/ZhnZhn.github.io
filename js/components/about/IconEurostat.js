@@ -30,4 +30,4 @@ var IconEurostat = function IconEurostat() {
 };
 
 exports.default = IconEurostat;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconEurostat.js.map
+//# sourceMappingURL=IconEurostat.js.map

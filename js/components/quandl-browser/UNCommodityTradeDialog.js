@@ -83,26 +83,24 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
     _this._filterTrade = function () {
       var options = void 0;
       if (_this.tradeFilter && _this.optionTrades) {
-        (function () {
-          var filterValue = _this.tradeFilter.value;
-          if (filterValue !== Filter.DEFAULT) {
-            options = _this.optionTrades.filter(function (item, index) {
-              return item.caption.indexOf(filterValue) !== -1;
+        var filterValue = _this.tradeFilter.value;
+        if (filterValue !== Filter.DEFAULT) {
+          options = _this.optionTrades.filter(function (item, index) {
+            return item.caption.indexOf(filterValue) !== -1;
+          });
+          if (filterValue === Filter.IMPORT) {
+            options = options.filter(function (item, index) {
+              return item.caption.indexOf(Filter.REIMPORT) === -1;
             });
-            if (filterValue === Filter.IMPORT) {
-              options = options.filter(function (item, index) {
-                return item.caption.indexOf(Filter.REIMPORT) === -1;
-              });
-            }
-            if (filterValue === Filter.EXPORT) {
-              options = options.filter(function (item, index) {
-                return item.caption.indexOf(Filter.REEXPORT) === -1;
-              });
-            }
-          } else {
-            options = _this.optionTrades;
           }
-        })();
+          if (filterValue === Filter.EXPORT) {
+            options = options.filter(function (item, index) {
+              return item.caption.indexOf(Filter.REEXPORT) === -1;
+            });
+          }
+        } else {
+          options = _this.optionTrades;
+        }
       } else {
         options = _this.optionTrades;
       }
@@ -461,4 +459,4 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
   return UNCommodityTradeDialog;
 }(_react.Component)) || _class) || _class);
 exports.default = UNCommodityTradeDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\UNCommodityTradeDialog.js.map
+//# sourceMappingURL=UNCommodityTradeDialog.js.map

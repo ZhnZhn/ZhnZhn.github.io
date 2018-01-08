@@ -162,4 +162,4 @@ var fCreateTreeMapConfig = exports.fCreateTreeMapConfig = function fCreateTreeMa
 
   return { config: config };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToTreeMap.js.map
+//# sourceMappingURL=QuandlToTreeMap.js.map

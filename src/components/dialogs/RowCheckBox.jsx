@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import SvgCheckBox from '../zhn/SvgCheckBox'
 
@@ -23,6 +23,7 @@ const STYLE = {
 }
 
 class RowCheckBox extends Component {
+  /*
   static propTypes = {
     rootStyle : PropTypes.object,
     caption: PropTypes.string,
@@ -30,6 +31,7 @@ class RowCheckBox extends Component {
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func
   }
+  */
 
   constructor(props){
     super()

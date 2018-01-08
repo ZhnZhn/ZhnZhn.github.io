@@ -23,4 +23,4 @@ exports.default = function (points, pointIndex) {
     return -1;
   }
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\dataProcessing\calcDirection.js.map
+//# sourceMappingURL=calcDirection.js.map

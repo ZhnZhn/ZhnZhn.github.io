@@ -1,13 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\insee\\Insee.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\insee\\Insee.js",
- "sourceRoot": "",
- "names": [
-  "Insee",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,QAAQ,EAAEC,uBAAF,EAAOC,+BAAP,EAAd;;kBAEeF,K"
-}
+{"version":3,"sources":["../../../src/adapters/insee/Insee.js"],"names":["Insee","api","adapter"],"mappings":";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,QAAQ,EAAEC,uBAAF,EAAOC,+BAAP,EAAd;;kBAEeF,K","file":"Insee.js","sourcesContent":["\r\nimport api from './InseeApi'\r\nimport adapter from './InseeAdapter'\r\n\r\nconst Insee = { api, adapter };\r\n\r\nexport default Insee\r\n"]}

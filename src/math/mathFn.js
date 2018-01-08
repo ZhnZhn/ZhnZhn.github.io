@@ -10,9 +10,14 @@ const mathFn = {
               : Big(0.0).toFixed(2);
   },
 
-  crValueMoving: ({
-    nowValue='0.0', prevValue='0.0', Direction, fnFormat=fnEcho
-  }) => {
+  crValueMoving: (option) => {
+    const {
+            nowValue='0.0',
+            prevValue='0.0',
+            Direction,
+            fnFormat=fnEcho
+          } = option;
+
     const bNowValue = Big(nowValue.toString().replace(' ',''))
         , bPrevValue = Big(prevValue.toString().replace(' ', ''));
 
@@ -36,12 +41,12 @@ const mathFn = {
       _bDelta = _bDelta.toFixed(0);
     }
 
-    return {
-      value : fnFormat(_bNowValue).toString(),
-      delta : fnFormat(_bDelta).toString(),
-      percent : _bPercent.toString() + '%',
-      direction : _direction
-    };
+      return {
+        value : fnFormat(_bNowValue).toString(),
+        delta : fnFormat(_bDelta).toString(),
+        percent : _bPercent.toString() + '%',
+        direction : _direction
+      };
   },
 
   toFixed : (value) => {

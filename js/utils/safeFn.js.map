@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\utils\\safeFn.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\utils\\safeFn.js",
- "sourceRoot": "",
- "names": [
-  "safeFn",
-  "obj",
-  "propName",
-  "dfValue"
- ],
- "mappings": ";;;;;kBACwBA,M;AAAT,SAASA,MAAT,CAAgBC,GAAhB,EAAqBC,QAArB,EAA+BC,OAA/B,EAAwC;AACrD,MAAI,CAACF,GAAL,EAAU;AACR,WAAO,YAAM;AAAE,aAAOE,OAAP;AAAiB,KAAhC;AACD;;AAED,MAAI,OAAOF,IAAIC,QAAJ,CAAP,IAAwB,UAA5B,EAAuC;AACrC,WAAOD,IAAIC,QAAJ,CAAP;AACD,GAFD,MAEQ;AACN,WAAO,YAAM;AAAE,aAAOC,OAAP;AAAiB,KAAhC;AACD;AACF"
-}
+{"version":3,"sources":["../../src/utils/safeFn.js"],"names":["safeFn","obj","propName","dfValue"],"mappings":";;;;;kBACwBA,M;AAAT,SAASA,MAAT,CAAgBC,GAAhB,EAAqBC,QAArB,EAA+BC,OAA/B,EAAwC;AACrD,MAAI,CAACF,GAAL,EAAU;AACR,WAAO,YAAM;AAAE,aAAOE,OAAP;AAAiB,KAAhC;AACD;;AAED,MAAI,OAAOF,IAAIC,QAAJ,CAAP,IAAwB,UAA5B,EAAuC;AACrC,WAAOD,IAAIC,QAAJ,CAAP;AACD,GAFD,MAEQ;AACN,WAAO,YAAM;AAAE,aAAOC,OAAP;AAAiB,KAAhC;AACD;AACF","file":"safeFn.js","sourcesContent":["\r\nexport default function safeFn(obj, propName, dfValue) {\r\n  if (!obj) {\r\n    return () => { return dfValue; };\r\n  }\r\n\r\n  if (typeof obj[propName] == 'function'){\r\n    return obj[propName];\r\n  } else  {\r\n    return () => { return dfValue; };\r\n  }    \r\n}\r\n"]}

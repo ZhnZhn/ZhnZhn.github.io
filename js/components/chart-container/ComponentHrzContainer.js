@@ -94,4 +94,4 @@ ComponentHrzContainer.propTypes = process.env.NODE_ENV !== "production" ? {
   addAction: _propTypes2.default.string
 } : {};
 exports.default = ComponentHrzContainer;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\chart-container\ComponentHrzContainer.js.map
+//# sourceMappingURL=ComponentHrzContainer.js.map

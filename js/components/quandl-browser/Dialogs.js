@@ -35,4 +35,4 @@ var Dialogs = {
 };
 
 exports.default = Dialogs;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\Dialogs.js.map
+//# sourceMappingURL=Dialogs.js.map

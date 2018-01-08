@@ -58,6 +58,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       var option = {
         loadId: loadId,
         indicator: 'SECTOR'
+        //value: _value, //for label
       };
       onLoad(option);
     };
@@ -116,4 +117,4 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
 }(_react.Component)) || _class;
 
 exports.default = AlphaIndicatorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\stock-markets\AlphaSectorDialog.js.map
+//# sourceMappingURL=AlphaSectorDialog.js.map

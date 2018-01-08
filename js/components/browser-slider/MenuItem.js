@@ -93,4 +93,4 @@ var MenuItem = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\MenuItem.js.map
+//# sourceMappingURL=MenuItem.js.map

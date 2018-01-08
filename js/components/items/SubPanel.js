@@ -49,10 +49,10 @@ var SubPanel = function SubPanel(_ref) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? SubPanel.propTypes = {
+SubPanel.propTypes = process.env.NODE_ENV !== "production" ? {
   style: _propTypes2.default.object,
   children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node])
-} : void 0;
+} : {};
 
 exports.default = SubPanel;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\SubPanel.js.map
+//# sourceMappingURL=SubPanel.js.map

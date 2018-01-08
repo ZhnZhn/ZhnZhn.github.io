@@ -1,17 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\RouterNativeLink.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\RouterNativeLink.js",
- "sourceRoot": "",
- "names": [
-  "RouterNativeLink",
-  "QUANDL",
-  "EURONEXT",
-  "NASDAQ",
-  "LME",
-  "UN_COMTRADE",
-  "FAO_STAT"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB;AACvBC,8BADuB;AAEvBC,kCAFuB;AAGvBC,8BAHuB;AAIvBC,wBAJuB;AAKvBC,uCALuB;AAMvBC;AANuB,CAAzB;;kBASeN,gB"
-}
+{"version":3,"sources":["../../../src/components/native-links/RouterNativeLink.js"],"names":["RouterNativeLink","QUANDL","EURONEXT","NASDAQ","LME","UN_COMTRADE","FAO_STAT"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB;AACvBC,8BADuB;AAEvBC,kCAFuB;AAGvBC,8BAHuB;AAIvBC,wBAJuB;AAKvBC,uCALuB;AAMvBC;AANuB,CAAzB;;kBASeN,gB","file":"RouterNativeLink.js","sourcesContent":["\r\nimport QuandlLink from './QuandlLink'\r\nimport EuronextLink from './EuronextLink'\r\nimport NasdaqLink from './NasdaqLink'\r\nimport LmeLink from './LmeLink'\r\nimport UnComtradeLink from './UnComtradeLink'\r\nimport FaoStatLink from './FaoStatLink'\r\n\r\nconst RouterNativeLink = {\r\n  QUANDL: QuandlLink,\r\n  EURONEXT: EuronextLink,\r\n  NASDAQ: NasdaqLink,\r\n  LME: LmeLink,\r\n  UN_COMTRADE: UnComtradeLink,\r\n  FAO_STAT: FaoStatLink\r\n}\r\n\r\nexport default RouterNativeLink\r\n"]}

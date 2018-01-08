@@ -1,13 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\uncomtrade\\UnComtrade.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\uncomtrade\\UnComtrade.js",
- "sourceRoot": "",
- "names": [
-  "UnComtrade",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa,EAAEC,kBAAF,EAAOC,oCAAP,EAAnB;;kBAEeF,U"
-}
+{"version":3,"sources":["../../../src/adapters/uncomtrade/UnComtrade.js"],"names":["UnComtrade","api","adapter"],"mappings":";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa,EAAEC,kBAAF,EAAOC,oCAAP,EAAnB;;kBAEeF,U","file":"UnComtrade.js","sourcesContent":["\r\nimport api from './Api'\r\nimport adapter from './UnComtradeAdapter'\r\n\r\nconst UnComtrade = { api, adapter };\r\n\r\nexport default UnComtrade\r\n"]}

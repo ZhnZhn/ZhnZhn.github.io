@@ -23,4 +23,4 @@ var DatasetApi = {
 };
 
 exports.default = DatasetApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\ApiDataset.js.map
+//# sourceMappingURL=ApiDataset.js.map

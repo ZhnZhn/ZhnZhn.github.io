@@ -26,7 +26,7 @@ const S = {
     marginBottom: '0.8em'
   },
   MARGIN_TOP : {
-    marginTop: '3px'
+    marginTop: '8px'
   },
   BT_TWITTER : {
     marginLeft: '12px'
@@ -40,15 +40,13 @@ const S = {
   BLACK: {
     color: 'black'
   },
-  BLUE: {
-    color: '#009ae5'
-  },
   BLUE_DARK: {
     color: '#2f7ed8'
   },
   RED: {
-    color: '#F44336'
+    color: '#f44336'
   }
+
 };
 
 export default S

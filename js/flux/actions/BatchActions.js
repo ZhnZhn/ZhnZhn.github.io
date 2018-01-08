@@ -40,4 +40,4 @@ var BatchActions = function () {
 }();
 
 exports.default = BatchActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\BatchActions.js.map
+//# sourceMappingURL=BatchActions.js.map

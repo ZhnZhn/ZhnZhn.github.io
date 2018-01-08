@@ -221,4 +221,4 @@ var SeriaRow = function (_Component) {
 }(_react.Component);
 
 exports.default = SeriaRow;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\SeriaRow.js.map
+//# sourceMappingURL=SeriaRow.js.map

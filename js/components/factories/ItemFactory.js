@@ -137,4 +137,4 @@ var ItemFactory = {
 };
 
 exports.default = ItemFactory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\factories\ItemFactory.js.map
+//# sourceMappingURL=ItemFactory.js.map

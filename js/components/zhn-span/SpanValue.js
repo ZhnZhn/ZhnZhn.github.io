@@ -33,4 +33,4 @@ var SpanValue = function SpanValue(_ref) {
 };
 
 exports.default = SpanValue;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-span\SpanValue.js.map
+//# sourceMappingURL=SpanValue.js.map

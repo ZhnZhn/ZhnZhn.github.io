@@ -101,8 +101,10 @@ var SelectWithLoad = (0, _withLoadOptions2.default)(_class = (_temp2 = _class2 =
   }]);
   return SelectWithLoad;
 }(_react.Component), _class2.defaultProps = {
-  isShow: true
+  isShow: true,
+  optionNames: 'Items',
+  jsonProp: 'items'
 }, _temp2)) || _class;
 
 exports.default = SelectWithLoad;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\SelectWithLoad.js.map
+//# sourceMappingURL=SelectWithLoad.js.map

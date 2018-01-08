@@ -135,11 +135,11 @@ var TabPane = (_temp = _class = function (_Component) {
     return _this2.state.selectedTabIndex;
   };
 }, _temp);
-process.env.NODE_ENV !== "production" ? TabPane.propTypes = {
+TabPane.propTypes = process.env.NODE_ENV !== "production" ? {
   isUpdateInit: _propTypes2.default.bool,
   width: _propTypes2.default.string,
   height: _propTypes2.default.string,
   children: _propTypes2.default.arrayOf(_propTypes2.default.node)
-} : void 0;
+} : {};
 exports.default = TabPane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\TabPane.js.map
+//# sourceMappingURL=TabPane.js.map

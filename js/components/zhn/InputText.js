@@ -30,11 +30,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from "prop-types";
 
 var S = {
   INPUT_TEXT: {
@@ -96,6 +94,15 @@ var InputText = (_temp = _class = function (_Component) {
     };
     return _this;
   }
+  /*
+  static propTypes = {
+    placeholder: PropTypes.string,
+    initValue: PropTypes.string,
+    style: PropTypes.object,
+    onEnter: PropTypes.func
+  }
+  */
+
 
   (0, _createClass3.default)(InputText, [{
     key: 'componentDidMount',
@@ -121,6 +128,7 @@ var InputText = (_temp = _class = function (_Component) {
       var _props = this.props,
           style = _props.style,
           spellCheck = _props.spellCheck,
+          placeholder = _props.placeholder,
           value = this.state.value,
           _autoCorrect = spellCheck ? C.ON : C.OFF,
           _spellCheck = spellCheck ? true : false;
@@ -135,6 +143,7 @@ var InputText = (_temp = _class = function (_Component) {
         spellCheck: _spellCheck,
         translate: false,
         value: value,
+        placeholder: placeholder,
         onChange: this._handleInputChange,
         onKeyDown: this._handleKeyDown
       });
@@ -154,10 +163,5 @@ var InputText = (_temp = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   initValue: C.BLANK
 }, _temp);
-InputText.propTypes = process.env.NODE_ENV !== "production" ? {
-  initValue: _propTypes2.default.string,
-  style: _propTypes2.default.object,
-  onEnter: _propTypes2.default.func
-} : {};
 exports.default = InputText;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputText.js.map

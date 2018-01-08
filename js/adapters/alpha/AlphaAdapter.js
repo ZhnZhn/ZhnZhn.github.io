@@ -247,4 +247,4 @@ var AlphaAdapter = {
 };
 
 exports.default = AlphaAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\AlphaAdapter.js.map
+//# sourceMappingURL=AlphaAdapter.js.map

@@ -17,4 +17,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Insee = { api: _InseeApi2.default, adapter: _InseeAdapter2.default };
 
 exports.default = Insee;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\insee\Insee.js.map
+//# sourceMappingURL=Insee.js.map

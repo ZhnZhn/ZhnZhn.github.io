@@ -13,4 +13,4 @@ var Model = {
 };
 
 exports.default = Model;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Model.js.map
+//# sourceMappingURL=Model.js.map

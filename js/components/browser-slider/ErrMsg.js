@@ -26,4 +26,4 @@ var ErrMsg = function ErrMsg(_ref) {
 };
 
 exports.default = ErrMsg;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\ErrMsg.js.map
+//# sourceMappingURL=ErrMsg.js.map

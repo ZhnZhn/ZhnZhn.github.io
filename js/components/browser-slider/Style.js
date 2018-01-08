@@ -48,4 +48,4 @@ var Style = {
 };
 
 exports.default = Style;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\Style.js.map
+//# sourceMappingURL=Style.js.map

@@ -133,4 +133,4 @@ var MenuPage = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuPage;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\MenuPage.js.map
+//# sourceMappingURL=MenuPage.js.map

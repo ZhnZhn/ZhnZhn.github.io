@@ -127,7 +127,7 @@ var FragmentSelectGroupList = function (_Component) {
   return FragmentSelectGroupList;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? FragmentSelectGroupList.propTypes = {
+FragmentSelectGroupList.propTypes = process.env.NODE_ENV !== "production" ? {
   store: _propTypes2.default.shape({
     listen: _propTypes2.default.func,
     getWatchListsByGroup: _propTypes2.default.func
@@ -135,6 +135,6 @@ process.env.NODE_ENV !== "production" ? FragmentSelectGroupList.propTypes = {
   groupCaption: _propTypes2.default.string,
   groupOptions: _propTypes2.default.array,
   listCaption: _propTypes2.default.string
-} : void 0;
+} : {};
 exports.default = FragmentSelectGroupList;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\FragmentSelectGroupList.js.map
+//# sourceMappingURL=FragmentSelectGroupList.js.map

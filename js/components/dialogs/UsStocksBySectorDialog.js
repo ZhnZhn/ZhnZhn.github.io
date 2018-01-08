@@ -21,14 +21,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _class2, _temp, _initialiseProps;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _DateUtils = require('../../utils/DateUtils');
 
@@ -93,6 +90,15 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
 
     return _this;
   }
+  /*
+   static propTypes = {
+     isShow: PropTypes.bool.isRequired,
+     data: PropTypes.object.isRequired,
+     store: PropTypes.object,
+     onClose: PropTypes.func.isRequired
+   }
+   */
+
 
   (0, _createClass3.default)(UsStocksBySectorDialog, [{
     key: 'shouldComponentUpdate',
@@ -179,9 +185,8 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
           _value = '' + _dataSource + id,
           option = {
         title: text,
-        //subtitle : subtitle,
         value: _value,
-        stock: _value,
+        item: _value,
         fromDate: fromDate,
         toDate: toDate,
         loadId: _Type.LoadType.WL,
@@ -219,11 +224,5 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
   };
 }, _temp)) || _class;
 
-UsStocksBySectorDialog.propTypes = process.env.NODE_ENV !== "production" ? {
-  isShow: _propTypes2.default.bool.isRequired,
-  data: _propTypes2.default.object.isRequired,
-  store: _propTypes2.default.object,
-  onClose: _propTypes2.default.func.isRequired
-} : {};
 exports.default = UsStocksBySectorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map
+//# sourceMappingURL=UsStocksBySectorDialog.js.map

@@ -49,10 +49,10 @@ var Browser = function Browser(_ref) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? Browser.propTypes = {
+Browser.propTypes = process.env.NODE_ENV !== "production" ? {
   isShow: _propTypes2.default.bool,
   style: _propTypes2.default.object
-} : void 0;
+} : {};
 
 exports.default = Browser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\Browser.js.map
+//# sourceMappingURL=Browser.js.map

@@ -23,4 +23,4 @@ var loadItems = function loadItems(url, proxy) {
 };
 
 exports.default = loadItems;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\loadItems.js.map
+//# sourceMappingURL=loadItems.js.map

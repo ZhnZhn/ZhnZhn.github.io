@@ -92,4 +92,4 @@ var LimitRemainingLabel = function (_Component) {
 }(_react.Component);
 
 exports.default = LimitRemainingLabel;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\LimitRemainingLabel.js.map
+//# sourceMappingURL=LimitRemainingLabel.js.map

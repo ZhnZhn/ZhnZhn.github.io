@@ -167,4 +167,4 @@ var AlphaIntradayAdapter = {
 };
 
 exports.default = AlphaIntradayAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\AlphaIntradayAdapter.js.map
+//# sourceMappingURL=AlphaIntradayAdapter.js.map

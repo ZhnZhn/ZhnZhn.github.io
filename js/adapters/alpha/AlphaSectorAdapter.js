@@ -49,4 +49,4 @@ var AlphaSectorAdapter = {
 };
 
 exports.default = AlphaSectorAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\AlphaSectorAdapter.js.map
+//# sourceMappingURL=AlphaSectorAdapter.js.map

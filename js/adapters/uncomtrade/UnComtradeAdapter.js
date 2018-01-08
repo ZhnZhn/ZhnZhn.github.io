@@ -34,4 +34,4 @@ var UnComtradeAdapter = {
 };
 
 exports.default = UnComtradeAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\uncomtrade\UnComtradeAdapter.js.map
+//# sourceMappingURL=UnComtradeAdapter.js.map

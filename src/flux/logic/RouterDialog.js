@@ -23,7 +23,7 @@ const _router = {
   ZillowDialog : QD.Zillow,
 
   UnDialog5: UnDialog5,
-
+    
   get ChartConfigDialog() {
     /*eslint-disable no-undef */
     if ( process.env.NODE_ENV === 'development') {

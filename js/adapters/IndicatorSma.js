@@ -217,4 +217,4 @@ var fnMomAthConfig = exports.fnMomAthConfig = function fnMomAthConfig(chart, id)
 
   return _ChartConfig2.default.fnMomAthConfig(_dataMom, _dataAth, _dataSum, id);
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\IndicatorSma.js.map
+//# sourceMappingURL=IndicatorSma.js.map

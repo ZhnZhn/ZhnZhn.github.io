@@ -6,12 +6,13 @@ const createLoadOptions = (props={}, options={}) => {
           linkFn, dataSource,
           dfProps
         } = props
-      , { fromDate, toDate, stock, transform } = options
+      , { one, fromDate, toDate, transform } = options
+      , { value, caption } = one
       , _value = (typeof fnValue === 'function')
-            ? fnValue(stock.value)
-            : stock.value
+            ? fnValue(value)
+            : value
       , _itemCaption = (typeof fnItemCaption === 'function')
-            ? fnItemCaption(stock.value)
+            ? fnItemCaption(value)
             : undefined
       , _transform = (transform)
             ? transform.value
@@ -22,9 +23,10 @@ const createLoadOptions = (props={}, options={}) => {
   return {
     value : _value,
     transform: _transform,
-    title: stock.caption,
+    title: caption,
     subtitle: _subtitle,
-    stock: stock,
+    item: one,
+    oneCaption: caption,
     fromDate: fromDate,
     toDate: toDate,
     columnName : columnName,

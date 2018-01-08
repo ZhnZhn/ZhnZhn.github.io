@@ -38,10 +38,15 @@ class DialogType3 extends Component {
   }
   */
 
+  static defaultProps = {
+    itemCaption: 'Stock',
+    optionNames: 'Stocks'
+  }
+
   constructor(props){
     super(props);
 
-    this.stock = undefined
+    this.one = undefined
     this.transform = undefined
     this.isLoaded = false
 
@@ -83,18 +88,18 @@ class DialogType3 extends Component {
     this.transform = option
   }
 
-  _clearLoaded = (stock) => {
-    if (this.isLoaded && this.stock === stock) {
+  _clearLoaded = (one) => {
+    if (this.isLoaded && this.one === one) {
       this.isLoaded = false
     }
   }
-  _handleSelectStock = (stock) => {
-    if (stock && this.stock === stock && !this.isLoaded) {
+  _handleSelectStock = (one) => {
+    if (one && this.one === one && !this.isLoaded) {
       this._handleLoad()
       this.isLoaded = true
-      setTimeout(this._clearLoaded, DF_TIMEOUT, stock)
+      setTimeout(this._clearLoaded, DF_TIMEOUT, one)
     } else {
-      this.stock = stock
+      this.one = one
       this.isLoaded = false
     }
 
@@ -109,12 +114,12 @@ class DialogType3 extends Component {
   }
   _createValidationMessages = () => {
     const {
-            msgOnNotSelected, itemCaption='Stock',
+            msgOnNotSelected, oneCaption, itemCaption,
           } = this.props;
     let msg = [];
 
-    if (!this.stock) {
-      msg.push(msgOnNotSelected(itemCaption));
+    if (!this.one) {
+      msg.push(msgOnNotSelected(oneCaption || itemCaption));
     }
 
     if (this.datesFragment) {
@@ -138,7 +143,7 @@ class DialogType3 extends Component {
               : {};
     return this.props.loadFn(
       this.props, {
-        stock : this.stock,
+        one: this.one,
         fromDate, toDate,
         transform: this.transform
       }
@@ -152,13 +157,15 @@ class DialogType3 extends Component {
   render(){
     const {
             caption, isShow, onShow, onFront,
-            optionURI, optionsJsonProp,
-            itemCaption='Stock', optionNames='Stocks',
+            oneURI, optionURI, optionsJsonProp,
+            oneCaption, itemCaption, optionNames,
             isWithInputStock,
             noDate,
             initFromDate, initToDate,
             msgOnNotValidFormat, onTestDate
           } = this.props
+        , _oneCaption = oneCaption || itemCaption
+        , _oneURI = oneURI || optionURI
         , {
             isShowLabels, isShowTransform, isShowDate,
             validationMessages
@@ -179,9 +186,9 @@ class DialogType3 extends Component {
          <D.SelectWithLoad
            isShow={isShow}
            isShowLabels={isShowLabels}
-           uri={optionURI}
+           uri={_oneURI}
            jsonProp={optionsJsonProp}
-           caption={itemCaption}
+           caption={_oneCaption}
            optionNames={optionNames}
            isWithInput={isWithInputStock}
            onSelect={this._handleSelectStock}

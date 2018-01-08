@@ -57,4 +57,4 @@ var C = {
 };
 
 exports.default = C;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\uncomtrade\conf.js.map
+//# sourceMappingURL=conf.js.map

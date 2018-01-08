@@ -111,4 +111,4 @@ var toEarnings = {
 };
 
 exports.default = toEarnings;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\toEarnings.js.map
+//# sourceMappingURL=toEarnings.js.map

@@ -117,4 +117,4 @@ var _fFetch = function _fFetch(propName, type) {
 var fetchJson = exports.fetchJson = _fFetch('json');
 var fetchTxt = exports.fetchTxt = _fFetch('text');
 var fetchJsonp = exports.fetchJsonp = _fFetch('json', 'jsonp');
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\fnFetch.js.map
+//# sourceMappingURL=fnFetch.js.map

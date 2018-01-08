@@ -52,4 +52,4 @@ var LocationQuery = {
 };
 
 exports.default = LocationQuery;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LocationQuery.js.map
+//# sourceMappingURL=LocationQuery.js.map

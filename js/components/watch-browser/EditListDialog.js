@@ -152,4 +152,4 @@ var EditListDialog = function (_Component) {
 }(_react.Component);
 
 exports.default = EditListDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\EditListDialog.js.map
+//# sourceMappingURL=EditListDialog.js.map

@@ -1,15 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\constants\\Model.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\constants\\Model.js",
- "sourceRoot": "",
- "names": [
-  "Model",
-  "palette",
-  "rows",
-  "cols",
-  "colors"
- ],
- "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,WAAS;AACPC,UAAM,CADC;AAEPC,UAAM,CAFC;AAGPC,YAAQ,CACN,SADM,EACK,SADL,EACgB,SADhB,EAEN,SAFM,EAEK,SAFL,EAEgB,SAFhB,EAGN,SAHM,EAGK,SAHL,EAGgB,SAHhB;AAHD;AADG,CAAd;;kBAYeJ,K"
-}
+{"version":3,"sources":["../../src/constants/Model.js"],"names":["Model","palette","rows","cols","colors"],"mappings":";;;;;;AACA,IAAMA,QAAQ;AACZC,WAAS;AACPC,UAAM,CADC;AAEPC,UAAM,CAFC;AAGPC,YAAQ,CACN,SADM,EACK,SADL,EACgB,SADhB,EAEN,SAFM,EAEK,SAFL,EAEgB,SAFhB,EAGN,SAHM,EAGK,SAHL,EAGgB,SAHhB;AAHD;AADG,CAAd;;kBAYeJ,K","file":"Model.js","sourcesContent":["\r\nconst Model = {\r\n  palette: {\r\n    rows: 3,\r\n    cols: 3,\r\n    colors: [\r\n      '#7cb5ec', '#90ed7d', '#f7a35c',\r\n      '#8085e9', '#f15c80', '#e4d354',\r\n      '#2b908f', '#f45b5b', '#91e8e1'\r\n    ]\r\n  }\r\n};\r\n\r\nexport default Model\r\n"]}

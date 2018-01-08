@@ -111,4 +111,4 @@ var InfoDialog = function (_Component) {
 }(_react.Component);
 
 exports.default = InfoDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\InfoDialog.js.map
+//# sourceMappingURL=InfoDialog.js.map

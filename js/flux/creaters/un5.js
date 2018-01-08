@@ -51,4 +51,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\un5.js.map
+//# sourceMappingURL=un5.js.map

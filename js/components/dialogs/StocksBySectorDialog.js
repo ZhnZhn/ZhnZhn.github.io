@@ -25,14 +25,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _class2, _temp, _initialiseProps;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _DateUtils = require('../../utils/DateUtils');
 
@@ -95,6 +92,15 @@ var STYLE = {
 
 var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(StocksBySectorDialog, _Component);
+
+  /*
+   static propTypes = {
+     isShow  : PropTypes.bool.isRequired,
+     data    : PropTypes.object.isRequired,
+     store   : PropTypes.object,
+     onClose : PropTypes.func.isRequired
+   }
+  */
 
   function StocksBySectorDialog(props) {
     (0, _classCallCheck3.default)(this, StocksBySectorDialog);
@@ -252,10 +258,8 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
           _source = _this3._getItemSource(_this3.props),
           option = (0, _extends3.default)({
         title: text,
-        //subtitle : subtitle,
         value: id,
-        //stock: id,
-        stock: item,
+        item: item,
         fromDate: fromDate,
         toDate: toDate,
         loadId: _Type.LoadType.WL,
@@ -298,11 +302,5 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
   };
 }, _temp)) || _class;
 
-StocksBySectorDialog.propTypes = process.env.NODE_ENV !== "production" ? {
-  isShow: _propTypes2.default.bool.isRequired,
-  data: _propTypes2.default.object.isRequired,
-  store: _propTypes2.default.object,
-  onClose: _propTypes2.default.func.isRequired
-} : {};
 exports.default = StocksBySectorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\StocksBySectorDialog.js.map
+//# sourceMappingURL=StocksBySectorDialog.js.map

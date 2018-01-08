@@ -54,6 +54,7 @@ var S = {
   ROOT: {
     width: '300px',
     overflow: 'hidden'
+    //border: '1px solid green'
   },
   PAGES: {
     width: '1500px',
@@ -276,4 +277,4 @@ var MenuSlider = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuSlider;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\MenuSlider.js.map
+//# sourceMappingURL=MenuSlider.js.map

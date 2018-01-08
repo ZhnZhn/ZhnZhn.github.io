@@ -1,13 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\eurostat\\EuroStat.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\eurostat\\EuroStat.js",
- "sourceRoot": "",
- "names": [
-  "EuroStat",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,WAAW,EAAEC,0BAAF,EAAOC,kCAAP,EAAjB;;kBAEeF,Q"
-}
+{"version":3,"sources":["../../../src/adapters/eurostat/EuroStat.js"],"names":["EuroStat","api","adapter"],"mappings":";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,WAAW,EAAEC,0BAAF,EAAOC,kCAAP,EAAjB;;kBAEeF,Q","file":"EuroStat.js","sourcesContent":["\r\nimport api from './EuroStatApi'\r\nimport adapter from './EuroStatAdapter'\r\n\r\nconst EuroStat = { api, adapter };\r\n\r\nexport default EuroStat\r\n"]}

@@ -33,4 +33,4 @@ var SpanLabel = function SpanLabel(_ref) {
 };
 
 exports.default = SpanLabel;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-span\SpanLabel.js.map
+//# sourceMappingURL=SpanLabel.js.map

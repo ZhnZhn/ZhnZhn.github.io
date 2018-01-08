@@ -42,17 +42,17 @@ const fnCreateMenu = function(menu=[], data, browserType){
 
 const menuQuandl = [
   {
-     caption : 'Economic',
+     caption : 'Economy',
      items : [
        { id : Quandl.CURRENCY_HISTORY },
        { id : Quandl.GLOBAL_INDICATOR },
        { id : Quandl.WORLDBANK_PRICE },
        { id : Quandl.IMF_CROSSCOUNTRY },
        { id : Quandl.EU_COMMISSION },
-       { id:  Quandl.OECD }       
+       { id:  Quandl.OECD }
      ]
   },{
-    caption: 'Central Banks',
+    caption: 'Central Banks', isInitClose: true,
     items: [
       { id : Quandl.BANK_CANADA },
       { id : Quandl.BANK_SWISS }
@@ -62,7 +62,6 @@ const menuQuandl = [
     items : [
       { id : Quandl.OECD_CPI },
       { id : Quandl.RATE_INFLATION },
-      { id : Quandl.BLSI },
       { id : Quandl.GDT },
       { id : Quandl.BIG_MAC }
     ]
@@ -77,7 +76,6 @@ const menuQuandl = [
        { id : Quandl.JODI_WORLD_GAS },
        { id : Quandl.JODI_WORLD_OIL },
        { id:  Quandl.BP },
-       { id : Quandl.EIA_COAL },
        { id : Quandl.ROGERS_INDICES },
        { id : Quandl.BALTIC_INDICES }
      ]
@@ -91,12 +89,6 @@ const menuQuandl = [
       { id : Quandl.LIFFE_FUTURE },
       { id : Quandl.ICE_FUTURE },
       { id : Quandl.WIKI_FUTURE }
-    ]
-  },{
-    caption : 'Real Estate',
-    items : [
-      { id : Quandl.ZILLOW_REAL_ESTATE_2 },
-      { id : Quandl.FMAC }
     ]
   }
 ];

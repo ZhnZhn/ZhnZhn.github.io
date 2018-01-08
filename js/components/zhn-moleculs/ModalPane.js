@@ -81,4 +81,4 @@ var ModalPane = (_temp2 = _class = function (_Component) {
   onClose: function onClose() {}
 }, _temp2);
 exports.default = ModalPane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\ModalPane.js.map
+//# sourceMappingURL=ModalPane.js.map

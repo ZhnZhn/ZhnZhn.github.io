@@ -46,4 +46,4 @@ var Show = function Show(_ref2) {
 };
 
 exports.default = { Load: Load, Show: Show, Flat: _FlatButton2.default };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\Button.js.map
+//# sourceMappingURL=Button.js.map

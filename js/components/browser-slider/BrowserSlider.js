@@ -129,4 +129,4 @@ var BrowserSlider = function (_Component) {
 }(_react.Component);
 
 exports.default = BrowserSlider;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\BrowserSlider.js.map
+//# sourceMappingURL=BrowserSlider.js.map

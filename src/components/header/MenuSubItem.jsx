@@ -11,6 +11,9 @@ const S = {
     display: 'inline-block',
     top: '0',
     right: '4px',
+    color: 'inherit',
+    backgroundColor: 'inherit',
+    padding: "1px 16px 1px 0px",
     fontWeight: 'bold'
   }
 }
@@ -29,10 +32,7 @@ const MenuSubItem = (props) => {
       onReg={onReg}
     >
       {title}
-      <span
-        className={_className}
-        style={S.ARROW}
-      >
+      <span style={S.ARROW}>
         {'>'}
       </span>
     </MenuAriaItem>

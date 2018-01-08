@@ -60,4 +60,4 @@ var withToolbar = function withToolbar(target) {
 };
 
 exports.default = withToolbar;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\decorators\withToolbar.js.map
+//# sourceMappingURL=withToolbar.js.map

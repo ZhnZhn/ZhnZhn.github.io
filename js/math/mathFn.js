@@ -25,14 +25,15 @@ var mathFn = {
     return !bTotal.eq((0, _big2.default)(0.0)) ? bValue.times(100).div(bTotal).abs().toFixed(2) : (0, _big2.default)(0.0).toFixed(2);
   },
 
-  crValueMoving: function crValueMoving(_ref2) {
-    var _ref2$nowValue = _ref2.nowValue,
-        nowValue = _ref2$nowValue === undefined ? '0.0' : _ref2$nowValue,
-        _ref2$prevValue = _ref2.prevValue,
-        prevValue = _ref2$prevValue === undefined ? '0.0' : _ref2$prevValue,
-        Direction = _ref2.Direction,
-        _ref2$fnFormat = _ref2.fnFormat,
-        fnFormat = _ref2$fnFormat === undefined ? fnEcho : _ref2$fnFormat;
+  crValueMoving: function crValueMoving(option) {
+    var _option$nowValue = option.nowValue,
+        nowValue = _option$nowValue === undefined ? '0.0' : _option$nowValue,
+        _option$prevValue = option.prevValue,
+        prevValue = _option$prevValue === undefined ? '0.0' : _option$prevValue,
+        Direction = option.Direction,
+        _option$fnFormat = option.fnFormat,
+        fnFormat = _option$fnFormat === undefined ? fnEcho : _option$fnFormat;
+
 
     var bNowValue = (0, _big2.default)(nowValue.toString().replace(' ', '')),
         bPrevValue = (0, _big2.default)(prevValue.toString().replace(' ', ''));
@@ -76,4 +77,4 @@ var mathFn = {
 };
 
 exports.default = mathFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\math\mathFn.js.map
+//# sourceMappingURL=mathFn.js.map

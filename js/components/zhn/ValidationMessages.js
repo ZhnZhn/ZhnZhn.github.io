@@ -94,8 +94,8 @@ var ValidationMessages = (_temp2 = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   validationMessages: []
 }, _temp2);
-process.env.NODE_ENV !== "production" ? ValidationMessages.propTypes = {
+ValidationMessages.propTypes = process.env.NODE_ENV !== "production" ? {
   validationMessages: _propTypes2.default.array
-} : void 0;
+} : {};
 exports.default = ValidationMessages;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ValidationMessages.js.map
+//# sourceMappingURL=ValidationMessages.js.map

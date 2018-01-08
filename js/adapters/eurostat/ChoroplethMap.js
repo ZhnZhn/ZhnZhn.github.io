@@ -369,4 +369,4 @@ var ChoroplethMap = {
 };
 
 exports.default = ChoroplethMap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\ChoroplethMap.js.map
+//# sourceMappingURL=ChoroplethMap.js.map

@@ -41,4 +41,4 @@ var MapFactory = {
 };
 
 exports.default = MapFactory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\factories\MapFactory.js.map
+//# sourceMappingURL=MapFactory.js.map

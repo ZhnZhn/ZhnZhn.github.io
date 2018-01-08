@@ -127,4 +127,4 @@ var ComponentSlice = {
 };
 
 exports.default = ComponentSlice;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ComponentSlice.js.map
+//# sourceMappingURL=ComponentSlice.js.map

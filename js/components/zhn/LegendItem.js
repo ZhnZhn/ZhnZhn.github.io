@@ -116,4 +116,4 @@ var LegendItem = (_temp = _class = function (_Component) {
   item: {}
 }, _temp);
 exports.default = LegendItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\LegendItem.js.map
+//# sourceMappingURL=LegendItem.js.map

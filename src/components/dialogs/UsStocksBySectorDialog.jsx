@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
@@ -23,12 +23,14 @@ const sourceOptions = [
 
 @withValidationLoad
 class UsStocksBySectorDialog extends Component {
+  /*
    static propTypes = {
      isShow: PropTypes.bool.isRequired,
      data: PropTypes.object.isRequired,
      store: PropTypes.object,
      onClose: PropTypes.func.isRequired
    }
+   */
    static defaultProps = {
      data: {}
    }
@@ -79,9 +81,8 @@ class UsStocksBySectorDialog extends Component {
           , _value = `${_dataSource}${id}`
           , option = {
              title : text,
-             //subtitle : subtitle,
              value : _value,
-             stock: _value,
+             item: _value,
              fromDate: fromDate,
              toDate: toDate,
              loadId : LoadType.WL,

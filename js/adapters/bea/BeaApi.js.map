@@ -1,0 +1,31 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\bea\\BeaApi.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\bea\\BeaApi.js",
+ "sourceRoot": "",
+ "names": [
+  "C",
+  "URL",
+  "BeaApi",
+  "getRequestUrl",
+  "option",
+  "TableID",
+  "DataSetName",
+  "apiKey",
+  "ValueName",
+  "value",
+  "oneCaption",
+  "_Frequncy",
+  "indexOf",
+  "checkResponse",
+  "json",
+  "BEAAPI",
+  "Results",
+  "Error",
+  "Array",
+  "isArray",
+  "Data"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,OAAK;AADG,CAAV;;AAIA,IAAMC,SAAS;AACbC,eADa,yBACCC,MADD,EACQ;AAAA,QAEXC,OAFW,GAMTD,MANS,CAEXC,OAFW;AAAA,QAEFC,WAFE,GAMTF,MANS,CAEFE,WAFE;AAAA,QAGXC,MAHW,GAMTH,MANS,CAGXG,MAHW;AAAA,QAIXC,SAJW,GAMTJ,MANS,CAIXI,SAJW;AAAA,QAIAC,KAJA,GAMTL,MANS,CAIAK,KAJA;AAAA,6BAMTL,MANS,CAKXM,UALW;AAAA,QAKXA,UALW,sCAKA,EALA;AAAA,QAObC,SAPa,GAODD,WAAWE,OAAX,CAAmB,OAAnB,MAAgC,CAAC,CAAjC,GACP,GADO,GACD,GARE;;AAUnB,WAAUZ,EAAEC,GAAZ,SAAmBM,MAAnB,iBAAqCF,OAArC,qBAA4DC,WAA5D,mBAAqFK,SAArF,SAAkGH,SAAlG,SAA+GC,KAA/G;AACD,GAZY;AAcbI,eAda,yBAcCC,IAdD,EAcM;AAAA,uBACKA,IADL,CACTC,MADS;AAAA,QACTA,MADS,gCACF,EADE;AAAA,0BAEMA,MAFN,CAETC,OAFS;AAAA,QAETA,OAFS,mCAED,EAFC;;AAGjB,QAAKA,QAAQC,KAAR,IAAiB,CAACC,MAAMC,OAAN,CAAcH,QAAQI,IAAtB,CAAvB,EAAqD;AACnD,aAAO,KAAP;AACD;AACD,WAAO,IAAP;AACD;AArBY,CAAf;;kBAyBelB,M"
+}

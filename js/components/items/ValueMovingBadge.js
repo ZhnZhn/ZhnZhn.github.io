@@ -235,4 +235,4 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
   }
 }, _temp);
 exports.default = ValueMovingBadge;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ValueMovingBadge.js.map
+//# sourceMappingURL=ValueMovingBadge.js.map

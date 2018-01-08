@@ -155,4 +155,4 @@ var ListDeletePane = function (_Component) {
 //import PropTypes from "prop-types";
 
 exports.default = ListDeletePane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ListDeletePane.js.map
+//# sourceMappingURL=ListDeletePane.js.map

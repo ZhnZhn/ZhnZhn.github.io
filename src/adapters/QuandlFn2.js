@@ -44,7 +44,7 @@ const QuandlFn2 = {
 
   createZhConfig(option){
     const {
-            stock:item, title, subtitle='',
+            item, title, subtitle='',
             value:id, key, columnName, dataColumn,
             itemCaption, fromDate, seriaColumnNames,
             linkFn, limitRemaining, dataSource
@@ -55,7 +55,7 @@ const QuandlFn2 = {
     return {
       item,
       title, subtitle,
-      id, key, 
+      id, key,
       columnName, dataColumn, itemCaption,
       fromDate, seriaColumnNames,
       linkFn,

@@ -265,4 +265,4 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
   return JodiWorldOilDialog;
 }(_react.Component)) || _class) || _class);
 exports.default = JodiWorldOilDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\JodiWorldOilDialog.js.map
+//# sourceMappingURL=JodiWorldOilDialog.js.map

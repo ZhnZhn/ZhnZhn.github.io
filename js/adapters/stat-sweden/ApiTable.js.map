@@ -1,12 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-sweden\\ApiTable.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-sweden\\ApiTable.js",
- "sourceRoot": "",
- "names": [
-  "ROOT_URL",
-  "TableApi"
- ],
- "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,WAAW,0CAAjB;AACA,IAAMC,WAAW,+BAAUD,QAAV,CAAjB;;kBAEeC,Q"
-}
+{"version":3,"sources":["../../../src/adapters/stat-sweden/ApiTable.js"],"names":["ROOT_URL","TableApi"],"mappings":";;;;;;AACA;;;;;;AAEA,IAAMA,WAAW,0CAAjB;AACA,IAAMC,WAAW,+BAAUD,QAAV,CAAjB;;kBAEeC,Q","file":"ApiTable.js","sourcesContent":["\r\nimport fTableApi from '../stat-json/factoryTableApi'\r\n\r\nconst ROOT_URL = 'http://api.scb.se/OV0104/v1/doris/en/ssd';\r\nconst TableApi = fTableApi(ROOT_URL);\r\n\r\nexport default TableApi\r\n"]}

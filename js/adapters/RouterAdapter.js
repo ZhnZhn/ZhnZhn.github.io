@@ -48,6 +48,10 @@ var _Insee = require('./insee/Insee');
 
 var _Insee2 = _interopRequireDefault(_Insee);
 
+var _Bea = require('./bea/Bea');
+
+var _Bea2 = _interopRequireDefault(_Bea);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterAdapter = {
@@ -64,8 +68,9 @@ var RouterAdapter = {
   AlphaVantage: _AlphaVantage2.default,
   Barchart: _Barchart2.default,
   Iex: _Iex2.default,
-  Insee: _Insee2.default
+  Insee: _Insee2.default,
+  Bea: _Bea2.default
 };
 
 exports.default = RouterAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\RouterAdapter.js.map
+//# sourceMappingURL=RouterAdapter.js.map

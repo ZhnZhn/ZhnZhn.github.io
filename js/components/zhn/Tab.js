@@ -59,11 +59,11 @@ var Tab = function Tab(_ref) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? Tab.propTypes = {
+Tab.propTypes = process.env.NODE_ENV !== "production" ? {
   title: _propTypes2.default.string,
   isSelected: _propTypes2.default.bool,
   onClick: _propTypes2.default.func
-} : void 0;
+} : {};
 
 exports.default = Tab;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\Tab.js.map
+//# sourceMappingURL=Tab.js.map

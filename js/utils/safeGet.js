@@ -16,4 +16,4 @@ function safeGet(obj, path, df) {
 
 		return steps.every(everyFn) ? obj : df;
 }
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\safeGet.js.map
+//# sourceMappingURL=safeGet.js.map

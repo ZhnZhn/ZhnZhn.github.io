@@ -67,7 +67,7 @@ class OpenClose extends Component {
   render(){
     const {
             rootStyle, caption,
-            CompAfter, children
+            CompAfter, childStyle, children
           } = this.props
         , {
             isOpen,
@@ -101,13 +101,12 @@ class OpenClose extends Component {
                   preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
                   style={S.INLINE_BLOCK}
                 >
-               <path
-                  d={_pathV}
-                  fill={_fillV}
-                  strokeWidth="1"
-                  stroke={openColor}
-               >
-               </path>
+                 <path
+                    d={_pathV}
+                    fill={_fillV}
+                    strokeWidth="1"
+                    stroke={openColor}
+                 />                 
                </svg>
            </div>
            <span style={S.LABEL_CAPTION} >
@@ -118,7 +117,7 @@ class OpenClose extends Component {
       </div>
       <div
         className={_rootChildCl}
-        style={_rootChildStyle}
+        style={{ ...childStyle, ..._rootChildStyle}}
       >
         {children}
       </div>

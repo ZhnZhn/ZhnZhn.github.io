@@ -1,0 +1,13 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\StepTitle.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\StepTitle.js",
+ "sourceRoot": "",
+ "names": [
+  "StepTitle",
+  "step",
+  "title"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,YAAY,SAAZA,SAAY;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SAChB;AAAA;AAAA;AACE,oDAAM,MAAMD,IAAZ,GADF;AAEE;AAAA;AAAA;AAAA;AACUC,WADV;AAAA;AAAA;AAFF,GADgB;AAAA,CAAlB;;kBASeF,S"
+}

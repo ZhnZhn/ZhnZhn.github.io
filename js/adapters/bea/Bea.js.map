@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/adapters/bea/Bea.js"],"names":["Bea","api","adapter"],"mappings":";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,uBADU,EACLC;AADK,CAAZ;;kBAIeF,G","file":"Bea.js","sourcesContent":["import api from './BeaApi'\r\nimport adapter from './BeaAdapter'\r\n\r\nconst Bea = {\r\n  api, adapter\r\n};\r\n\r\nexport default Bea\r\n"]}

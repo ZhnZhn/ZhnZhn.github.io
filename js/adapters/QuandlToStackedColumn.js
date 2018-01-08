@@ -57,4 +57,4 @@ var fCreateStackedColumnConfig = exports.fCreateStackedColumnConfig = function f
 
    return { config: config };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToStackedColumn.js.map
+//# sourceMappingURL=QuandlToStackedColumn.js.map

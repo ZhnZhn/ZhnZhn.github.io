@@ -77,4 +77,4 @@ var withDnDItem = function withDnDItem(DRAG, WatchActions) {
 };
 
 exports.default = withDnDItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDItem.js.map
+//# sourceMappingURL=withDnDItem.js.map

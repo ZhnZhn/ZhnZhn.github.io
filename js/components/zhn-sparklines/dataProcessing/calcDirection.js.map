@@ -1,15 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\dataProcessing\\calcDirection.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\dataProcessing\\calcDirection.js",
- "sourceRoot": "",
- "names": [
-  "points",
-  "pointIndex",
-  "length",
-  "_diff",
-  "y"
- ],
- "mappings": ";;;;;;kBAAe,UAACA,MAAD,EAASC,UAAT,EAAwB;AACrC;;;;;;AAQA,MAAID,OAAOE,MAAP,GAAgB,CAAhB,IAAsBD,eAAe,CAAzC,EAA2C;AACzC,WAAO,CAAP;AACD;AACD,MAAME,QAAQH,OAAOC,aAAa,CAApB,EAAuBG,CAAvB,GAA2BJ,OAAOC,UAAP,EAAmBG,CAA5D;AACA,MAAID,UAAU,CAAd,EAAgB;AACd,WAAO,CAAP;AACD,GAFD,MAEO,IAAIA,QAAQ,CAAZ,EAAe;AACpB,WAAO,CAAP;AACD,GAFM,MAEA;AACL,WAAO,CAAC,CAAR;AACD;AACF,C"
-}
+{"version":3,"sources":["../../../../src/components/zhn-sparklines/dataProcessing/calcDirection.js"],"names":["points","pointIndex","length","_diff","y"],"mappings":";;;;;;kBAAe,UAACA,MAAD,EAASC,UAAT,EAAwB;AACrC;;;;;;AAQA,MAAID,OAAOE,MAAP,GAAgB,CAAhB,IAAsBD,eAAe,CAAzC,EAA2C;AACzC,WAAO,CAAP;AACD;AACD,MAAME,QAAQH,OAAOC,aAAa,CAApB,EAAuBG,CAAvB,GAA2BJ,OAAOC,UAAP,EAAmBG,CAA5D;AACA,MAAID,UAAU,CAAd,EAAgB;AACd,WAAO,CAAP;AACD,GAFD,MAEO,IAAIA,QAAQ,CAAZ,EAAe;AACpB,WAAO,CAAP;AACD,GAFM,MAEA;AACL,WAAO,CAAC,CAAR;AACD;AACF,C","file":"calcDirection.js","sourcesContent":["export default (points, pointIndex) => {\r\n  /*\r\n  Math.sign = Math.sign || function(x) { return x > 0 ? 1 : -1; }\r\n\r\n  return ( points.length < 2  || pointIndex === 0)\r\n      ? 0\r\n      : Math.sign(points[pointIndex - 1].y - points[pointIndex].y);\r\n\r\n  */\r\n  if (points.length < 2  || pointIndex === 0){\r\n    return 0;\r\n  }\r\n  const _diff = points[pointIndex - 1].y - points[pointIndex].y\r\n  if (_diff === 0){\r\n    return 0;\r\n  } else if (_diff > 0) {\r\n    return 1;\r\n  } else {\r\n    return -1;\r\n  }\r\n}\r\n"]}

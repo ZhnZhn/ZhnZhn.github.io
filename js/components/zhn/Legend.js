@@ -168,4 +168,4 @@ var Legend = function (_Component) {
 }(_react.Component);
 
 exports.default = Legend;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\Legend.js.map
+//# sourceMappingURL=Legend.js.map

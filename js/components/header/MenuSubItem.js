@@ -23,6 +23,9 @@ var S = {
     display: 'inline-block',
     top: '0',
     right: '4px',
+    color: 'inherit',
+    backgroundColor: 'inherit',
+    padding: "1px 16px 1px 0px",
     fontWeight: 'bold'
   }
 };
@@ -47,14 +50,11 @@ var MenuSubItem = function MenuSubItem(props) {
     title,
     _react2.default.createElement(
       'span',
-      {
-        className: _className,
-        style: S.ARROW
-      },
+      { style: S.ARROW },
       '>'
     )
   );
 };
 
 exports.default = MenuSubItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\MenuSubItem.js.map
+//# sourceMappingURL=MenuSubItem.js.map

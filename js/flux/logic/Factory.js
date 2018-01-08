@@ -169,10 +169,8 @@ var _getDialogConf = function _getDialogConf(dialogType) {
 
 var Factory = (0, _extends3.default)({}, _fBrowser2.default, {
   createDialog: function createDialog(dialogType, browserType, conf) {
-    //const _conf = conf || _getDialogConf(dialogType);
     var _conf = !conf.dialogConf ? _getDialogConf(dialogType) : conf;
     return createDialogComp(_conf, browserType);
-    //return createDialogComp(_getDialogConf(dialogType), browserType);
   },
   createOptionDialog: function createOptionDialog(option) {
     return _createOptionDialog(option);
@@ -185,4 +183,4 @@ var Factory = (0, _extends3.default)({}, _fBrowser2.default, {
 });
 
 exports.default = Factory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\Factory.js.map
+//# sourceMappingURL=Factory.js.map

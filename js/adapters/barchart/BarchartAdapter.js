@@ -112,21 +112,17 @@ var _crSeriesData = function _crSeriesData(chartId) {
 };
 
 var _crChartId = function _crChartId(option) {
-  var _option$stock = option.stock,
-      stock = _option$stock === undefined ? {} : _option$stock,
-      _stock$value = stock.value,
-      value = _stock$value === undefined ? '' : _stock$value;
+  var _option$value = option.value,
+      value = _option$value === undefined ? '' : _option$value;
 
   return 'B/' + value;
 };
 
 var _crConfig = function _crConfig(json, option) {
-  var _option$stock2 = option.stock,
-      stock = _option$stock2 === undefined ? {} : _option$stock2,
-      _stock$caption = stock.caption,
-      caption = _stock$caption === undefined ? '' : _stock$caption,
-      _stock$value2 = stock.value,
-      value = _stock$value2 === undefined ? '' : _stock$value2,
+  var _option$value2 = option.value,
+      value = _option$value2 === undefined ? '' : _option$value2,
+      _option$title = option.title,
+      title = _option$title === undefined ? '' : _option$title,
       _chartId = _crChartId(option),
       _crSeriesData2 = _crSeriesData(_chartId, json),
       data = _crSeriesData2.data,
@@ -139,9 +135,9 @@ var _crConfig = function _crConfig(json, option) {
       dataVolumeColumn = _crSeriesData2.dataVolumeColumn,
       dataATH = _crSeriesData2.dataATH,
       dataMfi = _crSeriesData2.dataMfi,
-      config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(caption).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
+      config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
     valueMoving: _AdapterFn2.default.valueMoving(data),
-    info: _crInfo(caption),
+    info: _crInfo(title),
     zhConfig: _crZhConfig(_chartId, value),
     zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
     zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
@@ -170,4 +166,4 @@ var BarchartAdapter = {
 };
 
 exports.default = BarchartAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\barchart\BarchartAdapter.js.map
+//# sourceMappingURL=BarchartAdapter.js.map

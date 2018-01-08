@@ -177,4 +177,4 @@ var fnAdapter = {
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\uncomtrade\fnAdapter.js.map
+//# sourceMappingURL=fnAdapter.js.map

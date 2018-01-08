@@ -17,4 +17,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var UnComtrade = { api: _Api2.default, adapter: _UnComtradeAdapter2.default };
 
 exports.default = UnComtrade;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\uncomtrade\UnComtrade.js.map
+//# sourceMappingURL=UnComtrade.js.map

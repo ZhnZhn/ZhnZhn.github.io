@@ -140,4 +140,4 @@ var GroupAddPane = function (_Component) {
 //import PropTypes from "prop-types";
 
 exports.default = GroupAddPane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\GroupAddPane.js.map
+//# sourceMappingURL=GroupAddPane.js.map

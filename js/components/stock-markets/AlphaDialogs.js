@@ -23,4 +23,4 @@ var AlphaDialog = {
 };
 
 exports.default = AlphaDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\stock-markets\AlphaDialogs.js.map
+//# sourceMappingURL=AlphaDialogs.js.map

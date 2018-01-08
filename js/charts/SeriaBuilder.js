@@ -23,6 +23,13 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var C = {
+  BASE_SPLINE: {
+    type: 'spline',
+    visible: true,
+    marker: {
+      symbol: 'circle'
+    }
+  },
   BASE_AREA_RANGE: {
     type: 'arearange',
     color: '#7cb5ec',
@@ -90,10 +97,13 @@ var _addSeriesImpl = function _addSeriesImpl(to, series) {
 };
 
 var SeriaBuilder = {
-  initBaseSeria: function initBaseSeria() {
+  initBaseSeria: function initBaseSeria(option) {
     this._type = 'S';
-    this.config = _ChartConfig2.default.fSeries();
+    this.config = Object.assign(_ChartConfig2.default.fSeries(), option);
     return this;
+  },
+  initSpline: function initSpline(option) {
+    return this.initBaseSeria((0, _extends3.default)({}, C.BASE_SPLINE, option));
   },
   _initBaseSeria: function _initBaseSeria(BASE, tooltip, option) {
     this._type = 'S';
@@ -196,4 +206,4 @@ var SeriaBuilder = {
 };
 
 exports.default = SeriaBuilder;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\SeriaBuilder.js.map
+//# sourceMappingURL=SeriaBuilder.js.map

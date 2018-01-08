@@ -30,9 +30,15 @@ const _getDate = (point) => {
     : point.x;
 }
 const _getValue = (point) => {
-  return Array.isArray(point)
-    ? point[1]
-    : point.y;
+  if (Array.isArray(point)){
+    return point[1] != null
+       ? point[1]
+       : '0.0';
+  } else {
+    return point && point.y != null
+       ? point.y
+       : '0.0';
+  }
 }
 
 const AdapterFn = {
@@ -142,6 +148,10 @@ const AdapterFn = {
   },
 
   valueMoving(data){
+    if (!Array.isArray(data)) {
+      return { date: data, direction: 'empty' };
+    }
+    
     const len = data.length
           , _pointNow = len>0 && data[len-1]
                ? data[len-1]
@@ -164,7 +174,7 @@ const AdapterFn = {
 
       return  {
         ...this.crValueMoving({ bNowValue, bPrevValue }),
-        valueTo: this.numberFormat(bPrevValue),        
+        valueTo: this.numberFormat(bPrevValue),
         date, dateTo
       };
   },

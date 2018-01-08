@@ -53,4 +53,4 @@ var MenuItem = function MenuItem(props) {
 };
 
 exports.default = MenuItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\MenuItem.js.map
+//# sourceMappingURL=MenuItem.js.map

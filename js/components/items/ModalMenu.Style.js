@@ -22,4 +22,4 @@ var STYLE = {
 };
 
 exports.default = STYLE;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ModalMenu.Style.js.map
+//# sourceMappingURL=ModalMenu.Style.js.map

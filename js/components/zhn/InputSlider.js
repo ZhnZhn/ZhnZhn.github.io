@@ -309,11 +309,11 @@ var InputSlider = (_temp = _class = function (_Component) {
   max: 20,
   step: 1
 }, _temp);
-process.env.NODE_ENV !== "production" ? InputSlider.propTypes = {
+InputSlider.propTypes = process.env.NODE_ENV !== "production" ? {
   step: _propTypes2.default.number,
   min: _propTypes2.default.number,
   max: _propTypes2.default.number,
   onChange: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = InputSlider;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputSlider.js.map
+//# sourceMappingURL=InputSlider.js.map

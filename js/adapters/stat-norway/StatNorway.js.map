@@ -1,17 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-norway\\StatNorway.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-norway\\StatNorway.js",
- "sourceRoot": "",
- "names": [
-  "StatNorway",
-  "Dataset",
-  "api",
-  "adapter",
-  "Table",
-  "optionFetch",
-  "crOptionFetch"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,WAAS,EAAEC,yBAAF,EAAOC,oCAAP,EADQ;AAEjBC,SAAO;AACLF,2BADK;AAELG,iBAAa,mBAASC,aAFjB;AAGLH;AAHK;AAFU,CAAnB;;kBASeH,U"
-}
+{"version":3,"sources":["../../../src/adapters/stat-norway/StatNorway.js"],"names":["StatNorway","Dataset","api","adapter","Table","optionFetch","crOptionFetch"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,WAAS,EAAEC,yBAAF,EAAOC,oCAAP,EADQ;AAEjBC,SAAO;AACLF,2BADK;AAELG,iBAAa,mBAASC,aAFjB;AAGLH;AAHK;AAFU,CAAnB;;kBASeH,U","file":"StatNorway.js","sourcesContent":["\r\nimport api from './ApiDataset'\r\nimport tableApi from './ApiTable'\r\nimport adapter from './StatNorwayAdapter'\r\n\r\nconst StatNorway = {\r\n  Dataset: { api, adapter },\r\n  Table: {\r\n    api: tableApi,\r\n    optionFetch: tableApi.crOptionFetch,\r\n    adapter\r\n  }\r\n};\r\n\r\nexport default StatNorway\r\n"]}

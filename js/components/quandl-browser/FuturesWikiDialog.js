@@ -188,4 +188,4 @@ var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decor
   return FuturesWikiDialog;
 }(_react.Component)) || _class) || _class);
 exports.default = FuturesWikiDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\FuturesWikiDialog.js.map
+//# sourceMappingURL=FuturesWikiDialog.js.map

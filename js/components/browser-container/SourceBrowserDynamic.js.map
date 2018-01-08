@@ -1,12 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\browser-container\\SourceBrowserDynamic.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\browser-container\\SourceBrowserDynamic.js",
- "sourceRoot": "",
- "names": [
-  "SourceBrowserDynamic",
-  "props"
- ],
- "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;;;IAEMA,oB;;;;;;;;;;4CACmB;AACrB,aAAO,KAAP;AACD;;;6BAEO;AACN,aAAS,4DAAwB,KAAKC,KAA7B,CAAT;AACD;;;;;kBAGYD,oB"
-}
+{"version":3,"sources":["../../../src/components/browser-container/SourceBrowserDynamic.jsx"],"names":["SourceBrowserDynamic","props"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;;;IAEMA,oB;;;;;;;;;;4CACmB;AACrB,aAAO,KAAP;AACD;;;6BAEO;AACN,aAAS,4DAAwB,KAAKC,KAA7B,CAAT;AACD;;;;;kBAGYD,oB","file":"SourceBrowserDynamic.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\nimport MenuBrowserDynamic from '../zhn/MenuBrowserDynamic';\r\n\r\nclass SourceBrowserDynamic extends Component {\r\n  shouldComponentUpdate(){\r\n    return false;\r\n  }\r\n\r\n  render(){\r\n    return ( <MenuBrowserDynamic {...this.props} /> );\r\n  }\r\n}\r\n\r\nexport default SourceBrowserDynamic\r\n"]}

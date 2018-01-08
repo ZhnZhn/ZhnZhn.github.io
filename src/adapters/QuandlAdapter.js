@@ -425,8 +425,12 @@ const fnGetSeries = function(config, json, option){
 }
 
 const _setPlotLinesExtremValues = function(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems){
-  const _bMax = Big(maxPoint)
-      , _bMin = Big(minPoint)
+  const _bMax = maxPoint !== Number.NEGATIVE_INFINITY
+          ? Big(maxPoint)
+          : Big('0.0')
+      , _bMin = minPoint !== Number.POSITIVE_INFINITY
+          ? Big(minPoint)
+          : Big('0.0')
       , _bValue = (value !== null) ? Big(value) : Big(0)
       , _maxPoint = parseFloat(_bMax.round(4).toString(), 10)
       , _minPoint = parseFloat(_bMin.round(4).toString(), 10);

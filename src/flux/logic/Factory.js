@@ -35,7 +35,7 @@ const _showModalDialogDescription = function(option){
 }
 
 
-const createDialogComp = function (conf, browserType){
+const createDialogComp = function (conf, browserType){   
    const {
            type:itemKey,
            dialogProps={}, dialogType,
@@ -152,12 +152,10 @@ const Factory = {
   ...fBrowser,
 
   createDialog(dialogType, browserType, conf){
-    //const _conf = conf || _getDialogConf(dialogType);
     const _conf = !conf.dialogConf
             ? _getDialogConf(dialogType)
-            : conf
+            : conf;
     return createDialogComp(_conf, browserType);
-    //return createDialogComp(_getDialogConf(dialogType), browserType);
  },
  createOptionDialog(option){
    return _createOptionDialog(option)

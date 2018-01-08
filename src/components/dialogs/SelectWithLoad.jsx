@@ -7,7 +7,9 @@ import withLoadOptions from './decorators/withLoadOptions';
 @withLoadOptions
 class SelectWithLoad extends Component {
     static defaultProps = {
-       isShow: true
+       isShow: true,
+       optionNames: 'Items',
+       jsonProp: 'items'                              
      }
 
     state = {

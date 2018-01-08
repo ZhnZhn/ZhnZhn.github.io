@@ -235,4 +235,4 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
 }(_react.Component)) || _class;
 
 exports.default = AlphaIndicatorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\stock-markets\AlphaIndicatorDialog.js.map
+//# sourceMappingURL=AlphaIndicatorDialog.js.map

@@ -38,12 +38,12 @@ var SparklinesSpot = function SparklinesSpot(props) {
     );
 };
 
-process.env.NODE_ENV !== "production" ? SparklinesSpot.propTypes = {
+SparklinesSpot.propTypes = process.env.NODE_ENV !== "production" ? {
     size: _propTypes2.default.number,
     style: _propTypes2.default.object,
     spotColors: _propTypes2.default.object,
     pointIndex: _propTypes2.default.number
-} : void 0;
+} : {};
 SparklinesSpot.defaultProps = {
     size: 2,
     spotColors: {
@@ -54,4 +54,4 @@ SparklinesSpot.defaultProps = {
 };
 
 exports.default = SparklinesSpot;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\SparklinesSpot.js.map
+//# sourceMappingURL=SparklinesSpot.js.map

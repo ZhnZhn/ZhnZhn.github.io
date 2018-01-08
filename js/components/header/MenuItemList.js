@@ -101,4 +101,4 @@ var MenuItemList = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuItemList;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\MenuItemList.js.map
+//# sourceMappingURL=MenuItemList.js.map

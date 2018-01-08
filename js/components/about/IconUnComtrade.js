@@ -32,4 +32,4 @@ var IconUnComtrade = function IconUnComtrade() {
 };
 
 exports.default = IconUnComtrade;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconUnComtrade.js.map
+//# sourceMappingURL=IconUnComtrade.js.map

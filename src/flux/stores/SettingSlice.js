@@ -3,7 +3,8 @@ const SettingSlice = {
   setting: {
     quandlKey: undefined,
     barchartKey: undefined,
-    alphaKey: undefined,    
+    alphaKey: undefined,
+    beaKey: undefined,
     proxy: 'https://cors-anywhere.herokuapp.com/',
     isAdminMode: false,
     isDrawDeltaExtrems: false,
@@ -15,6 +16,7 @@ const SettingSlice = {
       setQuandlKey: this.setSetting('quandlKey').bind(this),
       setAlphaKey: this.setSetting('alphaKey').bind(this),
       setBarcharKey: this.setSetting('barchartKey').bind(this),
+      setBeaKey: this.setSetting('beaKey').bind(this),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this),
       isAdminMode: this.isAdminMode.bind(this),
@@ -34,6 +36,9 @@ const SettingSlice = {
   },
   getAlphaKey(){
     return this.setting.alphaKey;
+  },
+  getBeaKey(){
+    return this.setting.beaKey;
   },
   getProxy(){
     return this.setting.proxy;

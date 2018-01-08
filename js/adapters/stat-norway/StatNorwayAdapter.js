@@ -32,4 +32,4 @@ var StatNorwayAdapter = {
 };
 
 exports.default = StatNorwayAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\StatNorwayAdapter.js.map
+//# sourceMappingURL=StatNorwayAdapter.js.map

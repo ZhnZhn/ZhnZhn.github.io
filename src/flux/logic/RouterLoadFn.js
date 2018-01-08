@@ -26,6 +26,8 @@ const _r = {
   DialogType4A: fnType4,
   DialogType5: fnType5,
 
+  DialogType5A: fnType5,
+
   Futures3Dialog: fnFutures3,
   FuturesWikiDialog: fnFuturesWiki,
 

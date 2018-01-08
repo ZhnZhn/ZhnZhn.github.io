@@ -24,4 +24,4 @@ var RouterAdapter = {
 };
 
 exports.default = RouterAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\RouterAdapter.js.map
+//# sourceMappingURL=RouterAdapter.js.map

@@ -30,4 +30,4 @@ var Decorators = {
 };
 
 exports.default = Decorators;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\Decorators.js.map
+//# sourceMappingURL=Decorators.js.map

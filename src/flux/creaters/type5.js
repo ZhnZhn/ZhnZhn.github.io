@@ -1,6 +1,9 @@
 
 const _crDefault = (props, options) => {
-  const { isPremium, fnValue, loadId, dataSource, dfProps={} } = props
+  const {
+         isPremium, fnValue, loadId,
+         dataSource, dfProps={}
+       } = props
       , {
           one, two, three,
           fromDate, toDate,
@@ -8,7 +11,7 @@ const _crDefault = (props, options) => {
         } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
-           : undefined
+           : undefined;
   return {
     ...dfProps,
     value : _value,
@@ -24,6 +27,18 @@ const _crDefault = (props, options) => {
     dataSource, isPremium,
     hasSecondYAxis, seriaType
   }
+}
+
+const _crType5A = (props, option) => {
+  const r = _crDefault(props, option)
+     , { one, two, three } = option
+     , { fnValue, dataColumn=1 } = props
+     , value = (typeof fnValue === 'function')
+          ? fnValue(one.value, two.value, three.value)
+          : undefined;
+
+  Object.assign(r, { dataColumn, value })
+  return r;
 }
 
 const _crTreeItem = (props, options) => {
@@ -71,7 +86,8 @@ const _crPlusTreeItem = (props, options) => {
 const _rFn = {
   DEFAULT : _crDefault,
   TreeItem : _crTreeItem,
-  PlusTreeItem : _crPlusTreeItem
+  PlusTreeItem : _crPlusTreeItem,
+  Type5A: _crType5A
 }
 
 const createLoadOptions = (props={}, options={}) => {

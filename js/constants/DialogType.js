@@ -16,4 +16,4 @@ var qeSources = ['CURRENCY_HISTORY', 'COMMODITY_PRICE', 'WIKI_COMMODITY_PRICE', 
 var Quandl = createTypeObject(qeSources, 'QE');
 
 exports.Quandl = Quandl;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\DialogType.js.map
+//# sourceMappingURL=DialogType.js.map

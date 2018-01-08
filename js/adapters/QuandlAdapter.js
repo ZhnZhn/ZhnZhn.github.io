@@ -515,8 +515,8 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
 };
 
 var _setPlotLinesExtremValues = function _setPlotLinesExtremValues(plotLines, minPoint, maxPoint, value, isDrawDeltaExtrems) {
-  var _bMax = (0, _big2.default)(maxPoint),
-      _bMin = (0, _big2.default)(minPoint),
+  var _bMax = maxPoint !== Number.NEGATIVE_INFINITY ? (0, _big2.default)(maxPoint) : (0, _big2.default)('0.0'),
+      _bMin = minPoint !== Number.POSITIVE_INFINITY ? (0, _big2.default)(minPoint) : (0, _big2.default)('0.0'),
       _bValue = value !== null ? (0, _big2.default)(value) : (0, _big2.default)(0),
       _maxPoint = parseFloat(_bMax.round(4).toString(), 10),
       _minPoint = parseFloat(_bMin.round(4).toString(), 10);
@@ -638,4 +638,4 @@ var QuandlAdapter = {
 };
 
 exports.default = QuandlAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlAdapter.js.map
+//# sourceMappingURL=QuandlAdapter.js.map

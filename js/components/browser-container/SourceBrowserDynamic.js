@@ -53,4 +53,4 @@ var SourceBrowserDynamic = function (_Component) {
 }(_react.Component);
 
 exports.default = SourceBrowserDynamic;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-container\SourceBrowserDynamic.js.map
+//# sourceMappingURL=SourceBrowserDynamic.js.map

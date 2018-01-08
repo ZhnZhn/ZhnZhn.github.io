@@ -35,4 +35,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\bigMac.js.map
+//# sourceMappingURL=bigMac.js.map

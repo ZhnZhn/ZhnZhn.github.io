@@ -30,4 +30,4 @@ var hm = exports.hm = {
   avg: _mean2.default,
   median: _median2.default
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\dataProcessing\index.js.map
+//# sourceMappingURL=index.js.map

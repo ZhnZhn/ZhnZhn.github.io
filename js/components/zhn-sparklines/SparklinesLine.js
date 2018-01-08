@@ -51,13 +51,13 @@ var SparklinesLine = function SparklinesLine(props) {
     );
 };
 
-process.env.NODE_ENV !== "production" ? SparklinesLine.propTypes = {
+SparklinesLine.propTypes = process.env.NODE_ENV !== "production" ? {
     color: _propTypes2.default.string,
     style: _propTypes2.default.object
-} : void 0;
+} : {};
 SparklinesLine.defaultProps = {
     style: {}
 };
 
 exports.default = SparklinesLine;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\SparklinesLine.js.map
+//# sourceMappingURL=SparklinesLine.js.map

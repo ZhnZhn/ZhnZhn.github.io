@@ -1,15 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\Dialogs.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\Dialogs.js",
- "sourceRoot": "",
- "names": [
-  "Dialogs",
-  "Type3",
-  "Type4",
-  "Type4A",
-  "Type5"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU;AACdC,6BADc;AAEdC,6BAFc;AAGdC,gCAHc;AAIdC;AAJc,CAAhB;;kBAOeJ,O"
-}
+{"version":3,"sources":["../../../src/components/dialogs/Dialogs.js"],"names":["Dialogs","Type3","Type4","Type4A","Type5"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU;AACdC,6BADc;AAEdC,6BAFc;AAGdC,gCAHc;AAIdC;AAJc,CAAhB;;kBAOeJ,O","file":"Dialogs.js","sourcesContent":["\r\nimport Type3 from './DialogType3';\r\nimport Type4 from './DialogType4';\r\nimport Type4A from './DialogType4A';\r\nimport Type5 from './DialogType5';\r\n\r\nconst Dialogs = {\r\n  Type3,\r\n  Type4,\r\n  Type4A,\r\n  Type5\r\n};\r\n\r\nexport default Dialogs\r\n"]}

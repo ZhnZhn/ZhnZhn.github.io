@@ -38,4 +38,4 @@ var fnDescr = {
 };
 
 exports.default = fnDescr;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\uncomtrade\fnDescr.js.map
+//# sourceMappingURL=fnDescr.js.map

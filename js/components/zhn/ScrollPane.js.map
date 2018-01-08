@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn\\ScrollPane.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn\\ScrollPane.js",
- "sourceRoot": "",
- "names": [
-  "ScrollPane",
-  "props",
-  "style",
-  "className",
-  "children",
-  "rootNode",
-  "node",
-  "scrollTop"
- ],
- "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;IAEMA,U;;;;;;;;;;6BACI;AAAA;;AAAA,mBACoC,KAAKC,KADzC;AAAA,UACEC,KADF,UACEA,KADF;AAAA,oCACSC,SADT;AAAA,UACSA,SADT,oCACmB,EADnB;AAAA,UACuBC,QADvB,UACuBA,QADvB;;AAEN,aACE;AAAA;AAAA;AACE,eAAM;AAAA,mBAAQ,OAAKC,QAAL,GAAgBC,IAAxB;AAAA,WADR;AAEE,sCAA0BH,SAF5B;AAGE,iBAAOD;AAHT;AAKIE;AALJ,OADF;AASD;;;gCAEU;AACT,WAAKC,QAAL,CAAcE,SAAd,GAA0B,CAA1B;AACD;;;;;kBAGYP,U"
-}
+{"version":3,"sources":["../../../src/components/zhn/ScrollPane.jsx"],"names":["ScrollPane","props","style","className","children","rootNode","node","scrollTop"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;IAEMA,U;;;;;;;;;;6BACI;AAAA;;AAAA,mBACoC,KAAKC,KADzC;AAAA,UACEC,KADF,UACEA,KADF;AAAA,oCACSC,SADT;AAAA,UACSA,SADT,oCACmB,EADnB;AAAA,UACuBC,QADvB,UACuBA,QADvB;;AAEN,aACE;AAAA;AAAA;AACE,eAAM;AAAA,mBAAQ,OAAKC,QAAL,GAAgBC,IAAxB;AAAA,WADR;AAEE,sCAA0BH,SAF5B;AAGE,iBAAOD;AAHT;AAKIE;AALJ,OADF;AASD;;;gCAEU;AACT,WAAKC,QAAL,CAAcE,SAAd,GAA0B,CAA1B;AACD;;;;;kBAGYP,U","file":"ScrollPane.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\nclass ScrollPane extends Component {\r\n  render(){\r\n    const { style, className=\"\", children } = this.props;\r\n    return (\r\n      <div\r\n        ref={ node => this.rootNode = node}\r\n        className={`with-scroll ${className}`}\r\n        style={style}\r\n      >\r\n         {children}\r\n      </div>\r\n    );\r\n  }\r\n\r\n  scrollTop(){\r\n    this.rootNode.scrollTop = 0\r\n  }\r\n}\r\n\r\nexport default ScrollPane\r\n"]}

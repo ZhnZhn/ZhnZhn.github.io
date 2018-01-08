@@ -90,4 +90,4 @@ var MenuTab = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuTab;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\MenuTab.js.map
+//# sourceMappingURL=MenuTab.js.map

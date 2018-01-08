@@ -172,4 +172,4 @@ var SeriesPane = function (_Component) {
 }(_react.Component);
 
 exports.default = SeriesPane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\SeriesPane.js.map
+//# sourceMappingURL=SeriesPane.js.map

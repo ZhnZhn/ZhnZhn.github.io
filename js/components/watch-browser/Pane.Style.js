@@ -15,4 +15,4 @@ var STYLE = {
 };
 
 exports.default = STYLE;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\Pane.Style.js.map
+//# sourceMappingURL=Pane.Style.js.map

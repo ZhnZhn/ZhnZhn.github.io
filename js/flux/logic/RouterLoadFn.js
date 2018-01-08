@@ -61,6 +61,8 @@ var _r = {
   DialogType4A: _type4.default,
   DialogType5: _type6.default,
 
+  DialogType5A: _type6.default,
+
   Futures3Dialog: _futures2.default,
   FuturesWikiDialog: _futuresWiki2.default,
 
@@ -89,4 +91,4 @@ var RouterLoadFn = {
 };
 
 exports.default = RouterLoadFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\RouterLoadFn.js.map
+//# sourceMappingURL=RouterLoadFn.js.map

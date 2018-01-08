@@ -175,4 +175,4 @@ var ListEditPane = function (_Component) {
 //import PropTypes from "prop-types";
 
 exports.default = ListEditPane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ListEditPane.js.map
+//# sourceMappingURL=ListEditPane.js.map

@@ -31,4 +31,4 @@ var IconFaoStat = function IconFaoStat() {
 };
 
 exports.default = IconFaoStat;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconFaoStat.js.map
+//# sourceMappingURL=IconFaoStat.js.map

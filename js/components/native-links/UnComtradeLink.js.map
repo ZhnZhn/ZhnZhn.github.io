@@ -1,12 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\UnComtradeLink.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\UnComtradeLink.js",
- "sourceRoot": "",
- "names": [
-  "UnComtradeLink",
-  "item"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,iBAAiB,SAAjBA,cAAiB;AAAA,OAAGC,IAAH,QAAGA,IAAH;AAAA,UACrB;AACG,iBAAU,aADb;AAEG,YAAMA,IAFT;AAGG,eAAQ;AAHX,KADqB;AAAA,CAAvB;;kBASeD,c"
-}
+{"version":3,"sources":["../../../src/components/native-links/UnComtradeLink.jsx"],"names":["UnComtradeLink","item"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,iBAAiB,SAAjBA,cAAiB;AAAA,OAAGC,IAAH,QAAGA,IAAH;AAAA,UACrB;AACG,iBAAU,aADb;AAEG,YAAMA,IAFT;AAGG,eAAQ;AAHX,KADqB;AAAA,CAAvB;;kBASeD,c","file":"UnComtradeLink.js","sourcesContent":["import React from 'react'\r\n\r\nimport Link from './Link'\r\n\r\nconst UnComtradeLink = ({ item }) => (\r\n  <Link\r\n     className=\"native-link\"\r\n     href={item}\r\n     caption=\"UN Comtrade Link\"\r\n  />\r\n);\r\n\r\n\r\nexport default UnComtradeLink\r\n"]}

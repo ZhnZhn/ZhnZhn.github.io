@@ -1,18 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\items\\ModalMenuMini.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\items\\ModalMenuMini.js",
- "sourceRoot": "",
- "names": [
-  "ModalMenuMini",
-  "isShow",
-  "onClose",
-  "onClickVolume",
-  "onClickATH",
-  "onClickHighLow",
-  "ROOT",
-  "PANE"
- ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,gBAAgB,SAAhBA,aAAgB;AAAA,MACpBC,MADoB,QACpBA,MADoB;AAAA,MACZC,OADY,QACZA,OADY;AAAA,MAEpBC,aAFoB,QAEpBA,aAFoB;AAAA,MAELC,UAFK,QAELA,UAFK;AAAA,MAEOC,cAFP,QAEOA,cAFP;AAAA,SAIpB;AAAA;AAAA;AACE,cAAQJ,MADV;AAEE,aAAO,oBAAMK,IAFf;AAGE,eAASJ;AAHX;AAKE;AAAA;AAAA,QAAK,OAAO,oBAAMK,IAAlB;AACE;AACE,iBAAQ,QADV;AAEE,iBAASJ;AAFX,QADF;AAKE;AACE,iBAAQ,KADV;AAEE,iBAASC;AAFX,QALF;AASE;AACE,iBAAQ,eADV;AAEE,iBAASC;AAFX;AATF;AALF,GAJoB;AAAA,CAAtB;;kBA0BeL,a"
-}
+{"version":3,"sources":["../../../src/components/items/ModalMenuMini.jsx"],"names":["ModalMenuMini","isShow","onClose","onClickVolume","onClickATH","onClickHighLow","ROOT","PANE"],"mappings":";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,gBAAgB,SAAhBA,aAAgB;AAAA,MACpBC,MADoB,QACpBA,MADoB;AAAA,MACZC,OADY,QACZA,OADY;AAAA,MAEpBC,aAFoB,QAEpBA,aAFoB;AAAA,MAELC,UAFK,QAELA,UAFK;AAAA,MAEOC,cAFP,QAEOA,cAFP;AAAA,SAIpB;AAAA;AAAA;AACE,cAAQJ,MADV;AAEE,aAAO,oBAAMK,IAFf;AAGE,eAASJ;AAHX;AAKE;AAAA;AAAA,QAAK,OAAO,oBAAMK,IAAlB;AACE;AACE,iBAAQ,QADV;AAEE,iBAASJ;AAFX,QADF;AAKE;AACE,iBAAQ,KADV;AAEE,iBAASC;AAFX,QALF;AASE;AACE,iBAAQ,eADV;AAEE,iBAASC;AAFX;AATF;AALF,GAJoB;AAAA,CAAtB;;kBA0BeL,a","file":"ModalMenuMini.js","sourcesContent":["import React from 'react'\r\n\r\nimport ModalPopup from '../zhn-moleculs/ModalPopup'\r\nimport SubMenuItem from './SubMenuItem'\r\n\r\nimport STYLE from './ModalMenu.Style'\r\n\r\nconst ModalMenuMini = ({\r\n  isShow, onClose,\r\n  onClickVolume, onClickATH, onClickHighLow\r\n}) => (\r\n  <ModalPopup\r\n    isShow={isShow}\r\n    style={STYLE.ROOT}\r\n    onClose={onClose}\r\n  >\r\n    <div style={STYLE.PANE}>\r\n      <SubMenuItem\r\n        caption=\"Volume\"\r\n        onClick={onClickVolume}\r\n      />\r\n      <SubMenuItem\r\n        caption=\"ATH\"\r\n        onClick={onClickATH}\r\n      />\r\n      <SubMenuItem\r\n        caption=\"Daily HighLow\"\r\n        onClick={onClickHighLow}\r\n      />\r\n    </div>\r\n  </ModalPopup>\r\n);\r\n\r\nexport default ModalMenuMini\r\n"]}

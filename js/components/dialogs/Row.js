@@ -66,4 +66,4 @@ var Text = function Text(_ref2) {
 };
 
 exports.default = { Plain: Plain, Text: Text };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\Row.js.map
+//# sourceMappingURL=Row.js.map

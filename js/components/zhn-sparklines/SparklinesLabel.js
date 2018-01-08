@@ -25,4 +25,4 @@ var SparklinesLabel = function SparklinesLabel(_ref) {
 };
 
 exports.default = SparklinesLabel;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\SparklinesLabel.js.map
+//# sourceMappingURL=SparklinesLabel.js.map

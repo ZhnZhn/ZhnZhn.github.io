@@ -53,4 +53,4 @@ var Primary = function Primary(_ref3) {
 };
 
 exports.default = { Primary: Primary, Clear: Clear, Close: Close, Flat: _FlatButton2.default };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\Button.js.map
+//# sourceMappingURL=Button.js.map

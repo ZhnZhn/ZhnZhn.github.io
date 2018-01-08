@@ -23,4 +23,4 @@ var StatSweden = {
 };
 
 exports.default = StatSweden;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-sweden\StatSweden.js.map
+//# sourceMappingURL=StatSweden.js.map

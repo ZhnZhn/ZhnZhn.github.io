@@ -26,7 +26,9 @@ var createLoadOptions = function createLoadOptions() {
       fromDate = options.fromDate,
       toDate = options.toDate,
       hasSecondYAxis = options.hasSecondYAxis,
-      _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : undefined;
+      _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : one.value;
+  //: undefined
+
 
   return (0, _extends3.default)({}, dfProps, {
     value: _value,
@@ -47,4 +49,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type4.js.map
+//# sourceMappingURL=type4.js.map

@@ -263,7 +263,7 @@ var MapChartItem = function (_Component) {
   return MapChartItem;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? MapChartItem.propTypes = {
+MapChartItem.propTypes = process.env.NODE_ENV !== "production" ? {
   caption: _propTypes2.default.string,
   config: _propTypes2.default.shape({
     json: _propTypes2.default.object,
@@ -274,6 +274,6 @@ process.env.NODE_ENV !== "production" ? MapChartItem.propTypes = {
     })
   }),
   onCloseItem: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = MapChartItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\MapChartItem.js.map
+//# sourceMappingURL=MapChartItem.js.map

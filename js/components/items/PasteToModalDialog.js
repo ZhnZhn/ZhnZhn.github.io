@@ -135,4 +135,4 @@ var PasteToModalDialog = function (_Component) {
 }(_react.Component);
 
 exports.default = PasteToModalDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PasteToModalDialog.js.map
+//# sourceMappingURL=PasteToModalDialog.js.map

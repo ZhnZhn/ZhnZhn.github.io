@@ -95,4 +95,4 @@ var loadQuandlCommodityTrade = {
 };
 
 exports.loadQuandlCommodityTrade = loadQuandlCommodityTrade;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\loadQuandlCommodityTrade.js.map
+//# sourceMappingURL=loadQuandlCommodityTrade.js.map

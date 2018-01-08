@@ -188,4 +188,4 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
   return Futures3Dialog;
 }(_react.Component)) || _class) || _class);
 exports.default = Futures3Dialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\quandl-browser\Futures3Dialog.js.map
+//# sourceMappingURL=Futures3Dialog.js.map

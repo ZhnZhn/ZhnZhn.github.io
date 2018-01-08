@@ -61,10 +61,10 @@ var BrowserCaption = function BrowserCaption(_ref) {
     })
   );
 };
-process.env.NODE_ENV !== "production" ? BrowserCaption.propTypes = {
+BrowserCaption.propTypes = process.env.NODE_ENV !== "production" ? {
   caption: _propTypes2.default.string,
   onClose: _propTypes2.default.func
-} : void 0;
+} : {};
 
 exports.default = BrowserCaption;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\BrowserCaption.js.map
+//# sourceMappingURL=BrowserCaption.js.map

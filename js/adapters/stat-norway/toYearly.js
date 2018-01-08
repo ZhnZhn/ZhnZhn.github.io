@@ -54,4 +54,4 @@ var toYearly = {
 };
 
 exports.default = toYearly;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\toYearly.js.map
+//# sourceMappingURL=toYearly.js.map

@@ -54,24 +54,32 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
 }
 
 const _addSettings = (option) => {
-  switch(option.loadId){
+  const { loadId } = option;
+  let apiKey, proxy;
+  switch(loadId){
     case 'B':
-      option.apiKey = ChartStore.getBarchartKey()
+      apiKey = ChartStore.getBarchartKey()
       break;
     case 'AL': case 'AL_S': case 'AL_I':
-      option.apiKey = ChartStore.getAlphaKey()
+      apiKey = ChartStore.getAlphaKey()
+      break;
+    case 'BEA':
+      apiKey = ChartStore.getBeaKey()
       break;
     case 'FS': case 'FAO':
     case 'NST': case 'NST_2':
     case 'SWS':
-      option.proxy = ChartStore.getProxy()
+      proxy = ChartStore.getProxy()
       break;
     default:
-      option.apiKey = ChartStore.getQuandlKey()
+      apiKey = ChartStore.getQuandlKey()
   }
 
-  option.isDrawDeltaExtrems = ChartStore.isSetting('isDrawDeltaExtrems')
-  option.isNotZoomToMinMax = ChartStore.isSetting('isNotZoomToMinMax')
+  Object.assign(option, {
+    apiKey, proxy,
+    isDrawDeltaExtrems: ChartStore.isSetting('isDrawDeltaExtrems'),
+    isNotZoomToMinMax: ChartStore.isSetting('isNotZoomToMinMax')
+  })
 }
 
 const ChartActions =  Reflux.createActions({
@@ -97,7 +105,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function() {
   const arg = [].slice.call(arguments)
       , confItem = arg[0]
       , { chartType } = confItem
-      , option = arg[1]      
+      , option = arg[1]
       , key = LogicUtils.createKeyForConfig(option)
       , isDoublingLoad = this.isLoading && key === this.idLoading
       , isDoublLoadMeta = (option.isLoadMeta)
@@ -108,13 +116,20 @@ ChartActions[A.LOAD_STOCK].preEmit = function() {
   this.isShouldEmit = true;
   _addSettings(option)
 
-  if (option.loadId === 'B' && !option.apiKey){
+  const {
+          loadId, apiKey,
+          isKeyFeature, isPremium
+        } = option;
+
+  if (loadId === 'B' && !apiKey){
     this.cancelLoad(option, M.withoutApiKey('Barchart Market Data'), false);
-  } else if ( (option.loadId === 'AL' || option.loadId === 'AL_S' || option.loadId === 'AL_I' ) && !option.apiKey) {
+  } else if ( (loadId === 'AL' || loadId === 'AL_S' || loadId === 'AL_I' ) && !apiKey) {
     this.cancelLoad(option, M.withoutApiKey('Alpha Vantage'), false);
-  } else if (option.isKeyFeature && !option.apiKey){
+  } else if ( loadId === 'BEA' && !apiKey) {
+    this.cancelLoad(option, M.withoutApiKey('BEA'), false);
+  } else if (isKeyFeature && !apiKey){
     this.cancelLoad(option, M.FEATURE_WITHOUT_KEY, false);
-  } else if (option.isPremium && !option.apiKey){
+  } else if (isPremium && !apiKey){
     this.cancelLoad(option, M.PREMIUM_WITHOUT_KEY, false);
   } else if (isDoublingLoad){
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);

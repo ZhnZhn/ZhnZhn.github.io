@@ -80,4 +80,4 @@ var toArea = {
 };
 
 exports.default = toArea;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\toArea.js.map
+//# sourceMappingURL=toArea.js.map

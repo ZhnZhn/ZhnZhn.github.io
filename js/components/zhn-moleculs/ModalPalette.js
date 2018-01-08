@@ -142,4 +142,4 @@ var ModalPalette = function (_Component) {
 }(_react.Component);
 
 exports.default = ModalPalette;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\ModalPalette.js.map
+//# sourceMappingURL=ModalPalette.js.map

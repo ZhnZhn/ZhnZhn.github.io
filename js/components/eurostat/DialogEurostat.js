@@ -181,7 +181,6 @@ var DialogEurostat = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
   oneCaption: 'Item',
   oneJsonProp: 'items',
   twoCaption: 'Metric',
-  twoJsonProp: 'metrics'
-}, _temp)) || _class) || _class);
+  twoJsonProp: 'metrics' }, _temp)) || _class) || _class);
 exports.default = DialogEurostat;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogEurostat.js.map
+//# sourceMappingURL=DialogEurostat.js.map

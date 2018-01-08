@@ -28,4 +28,4 @@ var EurostatDialogs = {
 };
 
 exports.default = EurostatDialogs;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\EurostatDialogs.js.map
+//# sourceMappingURL=EurostatDialogs.js.map

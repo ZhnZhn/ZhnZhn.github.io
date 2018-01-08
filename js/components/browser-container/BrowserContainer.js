@@ -94,7 +94,7 @@ var BrowserContainer = function (_Component) {
         { className: 'hrz-container' },
         _react2.default.createElement(_QuandlBrowser2.default, {
           browserType: _Type.BrowserType.ECONOMIC,
-          caption: 'Quandl Economic',
+          caption: 'Quandl: World Economy',
           store: store,
           showAction: showBrowserAction,
           updateAction: updateBrowserAction
@@ -111,8 +111,6 @@ var BrowserContainer = function (_Component) {
   }]);
   return BrowserContainer;
 }(_react.Component);
-//import WatchBrowser from '../watch-browser/WatchBrowser';
-
 
 exports.default = BrowserContainer;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-container\BrowserContainer.js.map
+//# sourceMappingURL=BrowserContainer.js.map

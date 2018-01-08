@@ -108,3 +108,13 @@
     font-size: 0;
   }
 }
+
+.provider__note__br {
+  display: block;
+}
+
+@media screen and (max-width: 540px) {
+  .provider__note__br {
+    display: none;
+  }
+}

@@ -103,8 +103,8 @@ var RowInputText = function (_Component) {
   return RowInputText;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? RowInputText.propTypes = {
+RowInputText.propTypes = process.env.NODE_ENV !== "production" ? {
   caption: _propTypes2.default.string
-} : void 0;
+} : {};
 exports.default = RowInputText;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\RowInputText.js.map
+//# sourceMappingURL=RowInputText.js.map

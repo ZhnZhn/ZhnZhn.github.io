@@ -76,4 +76,4 @@ var CellColor = function (_Component) {
 }(_react.Component);
 
 exports.default = CellColor;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\CellColor.js.map
+//# sourceMappingURL=CellColor.js.map

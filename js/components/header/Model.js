@@ -18,9 +18,15 @@ var MODEL = {
     id: 'page_01',
     type: 'sub',
     cn: CL.BR,
+    title: 'Economics'
+  }, {
+    id: 'page_02',
+    type: 'sub',
+    cn: CL.BR,
     title: 'Statistics Agencies'
   }, {
-    id: _Type.BrowserType.STOCK_MARKETS,
+    id: 'page_03',
+    type: 'sub',
     cn: CL.BR,
     title: 'Stock Markets'
   }, {
@@ -32,38 +38,30 @@ var MODEL = {
     cn: CL.EU,
     title: 'FAOSTAT'
   }, {
-    id: _Type.BrowserType.QUANDL,
-    isQuandl: true,
-    title: 'Quandl Economic'
-  }, {
-    id: _Type.BrowserType.US_STOCKS,
-    title: 'US Stocks by Sectors'
-  }, {
-    id: _Type.BrowserType.NYSE_STOCKS,
-    title: 'US NYSE by Sectors'
-  }, {
-    id: _Type.BrowserType.NASDAQ_STOCKS,
-    title: 'US NASDAQ by Sectors'
-  }, {
-    id: _Type.BrowserType.LONDON_STOCKS,
-    title: 'LSE by Sectors'
-  }, {
     id: _Type.BrowserType.PREMIUM_SAMPLE,
     title: 'Quandl Premium Sample'
   }, {
     id: _Type.BrowserType.WATCH_LIST,
     cn: CL.W,
     title: 'Watch'
-  }
-  /*
-  ,{
-    id: 'ABOUT',
-    cn: CL.AB,
-    title: 'About'
-  }
-  */
-  ],
+    /*
+    ,{
+      id: 'ABOUT',
+      cn: CL.AB,
+      title: 'About'
+    }
+    */
+  }],
   page_01: [{
+    id: _Type.BrowserType.QUANDL,
+    isQuandl: true,
+    title: 'World Economy'
+  }, {
+    id: _Type.BrowserType.US_ECONOMY,
+    cn: CL.BR,
+    title: 'U.S. Economy'
+  }],
+  page_02: [{
     id: _Type.BrowserType.EUROSTAT,
     cn: CL.EU,
     title: 'Eurostat'
@@ -89,6 +87,23 @@ var MODEL = {
     cn: CL.EU,
     title: 'Statistics Sweden All',
     isNew: true
+  }],
+  page_03: [{
+    id: _Type.BrowserType.STOCK_MARKETS,
+    cn: CL.BR,
+    title: 'Stock Markets'
+  }, {
+    id: _Type.BrowserType.NYSE_STOCKS,
+    title: 'NYSE by Sectors'
+  }, {
+    id: _Type.BrowserType.NASDAQ_STOCKS,
+    title: 'NASDAQ by Sectors'
+  }, {
+    id: _Type.BrowserType.US_STOCKS,
+    title: '1000 Stocks by Sectors'
+  }, {
+    id: _Type.BrowserType.LONDON_STOCKS,
+    title: 'LSE by Sectors'
   }]
 };
 

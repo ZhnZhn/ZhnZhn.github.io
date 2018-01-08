@@ -62,4 +62,4 @@ var RouterBrowser = (_RouterBrowser = {
 }, (0, _defineEnumerableProperties3.default)(_RouterBrowser, _mutatorMap), _RouterBrowser);
 
 exports.default = RouterBrowser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\RouterBrowser.js.map
+//# sourceMappingURL=RouterBrowser.js.map

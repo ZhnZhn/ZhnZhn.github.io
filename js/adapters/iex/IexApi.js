@@ -20,4 +20,4 @@ var IexApi = {
 };
 
 exports.default = IexApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\IexApi.js.map
+//# sourceMappingURL=IexApi.js.map

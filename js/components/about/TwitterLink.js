@@ -67,4 +67,4 @@ var TwitterLink = function TwitterLink(_ref) {
 };
 
 exports.default = TwitterLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\TwitterLink.js.map
+//# sourceMappingURL=TwitterLink.js.map

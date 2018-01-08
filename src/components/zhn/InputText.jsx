@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 const S = {
   INPUT_TEXT : {
@@ -29,14 +29,18 @@ const C = {
 
 
 class InputText extends Component {
+  /*
   static propTypes = {
-    initValue : PropTypes.string,
-    style : PropTypes.object,
-    onEnter : PropTypes.func
+    placeholder: PropTypes.string,
+    initValue: PropTypes.string,
+    style: PropTypes.object,
+    onEnter: PropTypes.func
   }
+  */
   static defaultProps = {
-    initValue : C.BLANK
+    initValue: C.BLANK
   }
+
 
   constructor(props){
     super()
@@ -83,7 +87,7 @@ class InputText extends Component {
  }
 
   render(){
-    const { style, spellCheck } = this.props
+    const { style, spellCheck, placeholder } = this.props
         , { value } = this.state
         , _autoCorrect = spellCheck
              ? C.ON
@@ -102,6 +106,7 @@ class InputText extends Component {
         spellCheck={_spellCheck}
         translate={false}
         value={value}
+        placeholder={placeholder}
         onChange={this._handleInputChange}
         onKeyDown={this._handleKeyDown}
       />

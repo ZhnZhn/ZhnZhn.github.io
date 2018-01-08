@@ -1,16 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\Link.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\Link.js",
- "sourceRoot": "",
- "names": [
-  "Link",
-  "className",
-  "style",
-  "href",
-  "caption",
-  "LINK"
- ],
- "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,KAAd,QAAcA,KAAd;AAAA,MAAqBC,IAArB,QAAqBA,IAArB;AAAA,MAA2BC,OAA3B,QAA2BA,OAA3B;AAAA,SACX;AAAA;AAAA;AACE,iBAAWH,SADb;AAEE,wCAAY,eAAMI,IAAlB,EAA2BH,KAA3B,CAFF;AAGE,YAAMC;AAHR;AAKGC;AALH,GADW;AAAA,CAAb;;kBASeJ,I"
-}
+{"version":3,"sources":["../../../src/components/native-links/Link.js"],"names":["Link","className","style","href","caption","LINK"],"mappings":";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,KAAd,QAAcA,KAAd;AAAA,MAAqBC,IAArB,QAAqBA,IAArB;AAAA,MAA2BC,OAA3B,QAA2BA,OAA3B;AAAA,SACX;AAAA;AAAA;AACE,iBAAWH,SADb;AAEE,wCAAY,eAAMI,IAAlB,EAA2BH,KAA3B,CAFF;AAGE,YAAMC;AAHR;AAKGC;AALH,GADW;AAAA,CAAb;;kBASeJ,I","file":"Link.js","sourcesContent":["import React from 'react'\r\n\r\nimport STYLE from './Link.Style'\r\n\r\nconst Link = ({ className, style, href, caption }) =>\r\n  <a\r\n    className={className}\r\n    style={{ ...STYLE.LINK, ...style }}\r\n    href={href}\r\n  >\r\n    {caption}\r\n  </a>\r\n\r\nexport default Link\r\n"]}

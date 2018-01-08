@@ -101,7 +101,7 @@ class HeaderBar extends Component {
              className="header__bt-topics"
              rootStyle={styles.btRoot}
              caption="Topics"
-             title="Topic Data Source Browsers"
+             title="Topics Data Set Browsers Menu"
              accessKey="t"
              onClick={this._handleClickDS}
              onReg={this._onRegDS}
@@ -112,7 +112,7 @@ class HeaderBar extends Component {
             className="header__bt-quandl"
             rootStyle={styles.btRoot}
             caption="Quandl"
-            title="Quandl Economic Browser"
+            title="Quandl: World Economy Browser"
             accessKey="q"
             onClick={this._handleClickQuandl}
           />
@@ -120,7 +120,7 @@ class HeaderBar extends Component {
             className="header__bt-eurostat"
             rootStyle={styles.btRoot}
             caption="Eurostat"
-            title="European Statistics Browser"
+            title="Eurostat Statistics Browser"
             accessKey="u"
             onClick={this._handleClickDynamic.bind(null, BT.EUROSTAT)}
           />
@@ -142,7 +142,7 @@ class HeaderBar extends Component {
              className="header__bt-settins"
              rootStyle={styles.btRoot}
              caption="Settings"
-             title="Application settings"
+             title="User Settings Dialog"
              accessKey="s"
              isPrimary={true}
              onClick={this._handleDialogSettings}
@@ -151,7 +151,7 @@ class HeaderBar extends Component {
              className="header__bt-about"
              rootStyle={styles.btRoot}
              caption="About"
-             title="Description about application ERC"
+             title="About Web Application ERC"
              accessKey="a"
              onClick={ComponentActions.showAbout}
            />

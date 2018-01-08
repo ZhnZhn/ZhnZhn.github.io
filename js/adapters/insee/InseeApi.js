@@ -23,4 +23,4 @@ var InseeApi = {
 };
 
 exports.default = InseeApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\insee\InseeApi.js.map
+//# sourceMappingURL=InseeApi.js.map

@@ -239,7 +239,7 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
   return AddToWatchDialog;
 }(_react.Component)) || _class;
 
-process.env.NODE_ENV !== "production" ? AddToWatchDialog.propTypes = {
+AddToWatchDialog.propTypes = process.env.NODE_ENV !== "production" ? {
   isShow: _propTypes2.default.bool,
   data: _propTypes2.default.object,
   store: _propTypes2.default.shape({
@@ -248,6 +248,6 @@ process.env.NODE_ENV !== "production" ? AddToWatchDialog.propTypes = {
     getWatchListsByGroup: _propTypes2.default.func
   }),
   onClose: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = AddToWatchDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\AddToWatchDialog.js.map
+//# sourceMappingURL=AddToWatchDialog.js.map

@@ -52,9 +52,9 @@ var _DataProviders = require('./DataProviders');
 
 var _DataProviders2 = _interopRequireDefault(_DataProviders);
 
-var _Step = require('./Step');
+var _StepTitle = require('./StepTitle');
 
-var _Step2 = _interopRequireDefault(_Step);
+var _StepTitle2 = _interopRequireDefault(_StepTitle);
 
 var _Links = require('../links/Links');
 
@@ -73,6 +73,14 @@ var _About = require('./About.Style');
 var _About2 = _interopRequireDefault(_About);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var STEP = {
+  T1: "Choose a data source Browser from Topics [t]",
+  T2: "Choose a dataset menu item in a Browser",
+  T3: "Select params and enter query date in a draggable Dialog",
+  T4: "Click a button Load",
+  T5: "Also you can export chart to PNG, JPG, SVG, print to PDF"
+};
 
 var About = function (_Component) {
   (0, _inherits3.default)(About, _Component);
@@ -173,66 +181,21 @@ var About = function (_Component) {
             _react2.default.createElement(
               'p',
               { style: _About2.default.P_BOTTOM },
-              'With it, you can view economic free open data from WEB.'
+              'With it, you can view economic & finance open data from Web.'
             ),
             _react2.default.createElement(_DataProviders2.default, { isClose: isCloseProviders }),
             _react2.default.createElement(
               'div',
               { style: _About2.default.BLACK },
-              _react2.default.createElement(
-                'p',
-                null,
-                _react2.default.createElement(_Step2.default, { step: '1' }),
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  '\xA0Choose a data source Browser from Topics.'
-                )
-              ),
-              _react2.default.createElement(
-                'p',
-                { style: _About2.default.MARGIN_TOP },
-                _react2.default.createElement(_Step2.default, { step: '2' }),
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  '\xA0Choose a dataset menu item in a Browser.'
-                )
-              ),
-              _react2.default.createElement(
-                'p',
-                { style: _About2.default.MARGIN_TOP },
-                _react2.default.createElement(_Step2.default, { step: '3' }),
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  '\xA0Select params and enter query date in a draggable Dialog.'
-                )
-              ),
-              _react2.default.createElement(
-                'p',
-                { style: _About2.default.MARGIN_TOP },
-                _react2.default.createElement(_Step2.default, { step: '4' }),
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  '\xA0Click a button Load.'
-                )
-              ),
-              _react2.default.createElement(
-                'p',
-                { style: _About2.default.MARGIN_TOP },
-                _react2.default.createElement(_Step2.default, { step: '5' }),
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  '\xA0Also you can export chart to PNG, JPG, SVG, print to PDF.'
-                )
-              )
+              _react2.default.createElement(_StepTitle2.default, { step: '1', title: STEP.T1 }),
+              _react2.default.createElement(_StepTitle2.default, { step: '2', title: STEP.T2 }),
+              _react2.default.createElement(_StepTitle2.default, { step: '3', title: STEP.T3 }),
+              _react2.default.createElement(_StepTitle2.default, { step: '4', title: STEP.T4 }),
+              _react2.default.createElement(_StepTitle2.default, { step: '5', title: STEP.T5 })
             ),
             _react2.default.createElement(
               'p',
-              { style: Object.assign({}, _About2.default.P_BOTTOM, _About2.default.MARGIN_TOP) },
+              { style: (0, _extends3.default)({}, _About2.default.P_BOTTOM, _About2.default.MARGIN_TOP) },
               'The result will be shown in a chart in a resizebale container.'
             ),
             _react2.default.createElement(

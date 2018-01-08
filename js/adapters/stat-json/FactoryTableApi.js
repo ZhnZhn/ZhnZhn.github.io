@@ -69,4 +69,4 @@ var FactoryTableApi = function FactoryTableApi(ROOT_URL) {
 };
 
 exports.default = FactoryTableApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-json\FactoryTableApi.js.map
+//# sourceMappingURL=FactoryTableApi.js.map

@@ -57,4 +57,4 @@ var fCreateStackedAreaConfig = exports.fCreateStackedAreaConfig = function fCrea
 
   return { config: config };
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlToStackedArea.js.map
+//# sourceMappingURL=QuandlToStackedArea.js.map

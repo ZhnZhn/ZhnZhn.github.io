@@ -109,18 +109,16 @@ var ModalMenuIndicator = function (_Component) {
 
 
       if (!_this._checkIfAlreadyAdded(descr, id)) {
-        (function () {
-          var color = _this.props.onAddSma({ id: id, period: period, isPlus: isPlus, plus: plus });
-          if (color) {
-            _this.setState(function (prevState) {
-              prevState.descr.push({ id: id, color: color });
-              if (isPlus) {
-                prevState.plusSma = plus;
-              }
-              return prevState;
-            });
-          }
-        })();
+        var color = _this.props.onAddSma({ id: id, period: period, isPlus: isPlus, plus: plus });
+        if (color) {
+          _this.setState(function (prevState) {
+            prevState.descr.push({ id: id, color: color });
+            if (isPlus) {
+              prevState.plusSma = plus;
+            }
+            return prevState;
+          });
+        }
       }
     };
 
@@ -329,7 +327,7 @@ var ModalMenuIndicator = function (_Component) {
   return ModalMenuIndicator;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? ModalMenuIndicator.propTypes = {
+ModalMenuIndicator.propTypes = process.env.NODE_ENV !== "production" ? {
   rootStyle: _propTypes2.default.object,
   isMfi: _propTypes2.default.bool,
   onAddSma: _propTypes2.default.func,
@@ -338,6 +336,6 @@ process.env.NODE_ENV !== "production" ? ModalMenuIndicator.propTypes = {
   onRemoveMfi: _propTypes2.default.func,
   isMomAth: _propTypes2.default.bool,
   onAddMomAth: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = ModalMenuIndicator;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ModalMenuIndicator.js.map
+//# sourceMappingURL=ModalMenuIndicator.js.map

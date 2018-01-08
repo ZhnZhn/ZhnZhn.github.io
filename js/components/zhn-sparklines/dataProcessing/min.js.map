@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-sparklines\\dataProcessing\\min.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-sparklines\\dataProcessing\\min.js",
- "sourceRoot": "",
- "names": [
-  "Math",
-  "min",
-  "apply",
-  "data"
- ],
- "mappings": ";;;;;;kBAAe;AAAA,WACXA,KAAKC,GAAL,CAASC,KAAT,CAAeF,IAAf,EAAqBG,IAArB,CADW;AAAA,C"
-}
+{"version":3,"sources":["../../../../src/components/zhn-sparklines/dataProcessing/min.js"],"names":["Math","min","apply","data"],"mappings":";;;;;;kBAAe;AAAA,WACXA,KAAKC,GAAL,CAASC,KAAT,CAAeF,IAAf,EAAqBG,IAArB,CADW;AAAA,C","file":"min.js","sourcesContent":["export default data =>\r\n    Math.min.apply(Math, data);\r\n"]}

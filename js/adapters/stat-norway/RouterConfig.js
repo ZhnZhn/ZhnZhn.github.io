@@ -49,4 +49,4 @@ var RouterConfig = {
 };
 
 exports.default = RouterConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\RouterConfig.js.map
+//# sourceMappingURL=RouterConfig.js.map

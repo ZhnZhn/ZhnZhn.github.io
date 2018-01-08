@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { BrowserType } from '../../constants/Type';
 
 import QuandlBrowser from '../quandl-browser/QuandlBrowser';
-//import WatchBrowser from '../watch-browser/WatchBrowser';
 import DialogContainer from '../zhn-containers/DialogContainer';
 
 class BrowserContainer extends Component {
@@ -39,7 +38,6 @@ class BrowserContainer extends Component {
   render(){
     const {
             store, showBrowserAction, updateBrowserAction,
-            //updateWatchAction,
             showDialogAction, onCloseDialog
           } = this.props
         , { elBrowsers } = this.state;
@@ -48,21 +46,11 @@ class BrowserContainer extends Component {
       <div className="hrz-container">
            <QuandlBrowser
               browserType={BrowserType.ECONOMIC}
-              caption="Quandl Economic"
+              caption="Quandl: World Economy"
               store={store}
               showAction={showBrowserAction}
               updateAction={updateBrowserAction}
            />
-           {/*
-           <WatchBrowser
-              browserType={BrowserType.WATCH_LIST}
-              caption="Watch List"
-              store={store}
-              showAction={showBrowserAction}
-              updateAction={updateWatchAction}
-            />
-          */}
-           {/*elBrowsers*/}
            {this._renderBrowsers(elBrowsers)}
 
            <DialogContainer

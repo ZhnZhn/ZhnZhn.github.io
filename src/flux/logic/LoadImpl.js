@@ -7,7 +7,7 @@ const {
   Quandl, UnComtrade, FaoStat,
   EuroStat, StatNorway, StatSweden,
   AlphaVantage, Barchart,
-  Iex, Insee
+  Iex, Insee, Bea
 } = Adapter;
 
 const LoadImpl = {
@@ -34,7 +34,9 @@ const LoadImpl = {
   Insee: f({
     fnFetch: fetchTxt,
     ...Insee
-  })
+  }),
+
+  Bea: f({ ...Bea })
 };
 
 export default LoadImpl

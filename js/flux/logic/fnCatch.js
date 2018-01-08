@@ -65,4 +65,4 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
 
   onFailed(option);
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\fnCatch.js.map
+//# sourceMappingURL=fnCatch.js.map

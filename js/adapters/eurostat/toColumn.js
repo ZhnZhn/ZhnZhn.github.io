@@ -57,4 +57,4 @@ var toColumn = {
 };
 
 exports.default = toColumn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\toColumn.js.map
+//# sourceMappingURL=toColumn.js.map

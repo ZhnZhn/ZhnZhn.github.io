@@ -23,21 +23,24 @@ var createLoadOptions = function createLoadOptions() {
           linkFn = props.linkFn,
           dataSource = props.dataSource,
           dfProps = props.dfProps,
+          one = options.one,
           fromDate = options.fromDate,
           toDate = options.toDate,
-          stock = options.stock,
           transform = options.transform,
-          _value = typeof fnValue === 'function' ? fnValue(stock.value) : stock.value,
-          _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(stock.value) : undefined,
+          value = one.value,
+          caption = one.caption,
+          _value = typeof fnValue === 'function' ? fnValue(value) : value,
+          _itemCaption = typeof fnItemCaption === 'function' ? fnItemCaption(value) : undefined,
           _transform = transform ? transform.value : undefined,
           _subtitle = transform ? transform.caption : undefined;
 
       return (0, _extends3.default)({
             value: _value,
             transform: _transform,
-            title: stock.caption,
+            title: caption,
             subtitle: _subtitle,
-            stock: stock,
+            item: one,
+            oneCaption: caption,
             fromDate: fromDate,
             toDate: toDate,
             columnName: columnName,
@@ -50,4 +53,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type3.js.map
+//# sourceMappingURL=type3.js.map

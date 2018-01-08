@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\stock-markets\\AlphaDialogs.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\stock-markets\\AlphaDialogs.js",
- "sourceRoot": "",
- "names": [
-  "AlphaDialog",
-  "Indicator",
-  "Intraday",
-  "Sector"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,cAAc;AAClBC,2CADkB,EACPC,uCADO,EACGC;AADH,CAApB;;kBAIeH,W"
-}
+{"version":3,"sources":["../../../src/components/stock-markets/AlphaDialogs.js"],"names":["AlphaDialog","Indicator","Intraday","Sector"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,cAAc;AAClBC,2CADkB,EACPC,uCADO,EACGC;AADH,CAApB;;kBAIeH,W","file":"AlphaDialogs.js","sourcesContent":["\r\nimport Indicator from './AlphaIndicatorDialog'\r\nimport Intraday from './AlphaIntradayDialog'\r\nimport Sector from './AlphaSectorDialog'\r\n\r\nconst AlphaDialog = {\r\n  Indicator, Intraday, Sector\r\n};\r\n\r\nexport default AlphaDialog\r\n"]}

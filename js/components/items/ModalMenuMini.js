@@ -55,4 +55,4 @@ var ModalMenuMini = function ModalMenuMini(_ref) {
 };
 
 exports.default = ModalMenuMini;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ModalMenuMini.js.map
+//# sourceMappingURL=ModalMenuMini.js.map

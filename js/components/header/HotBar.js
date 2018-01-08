@@ -163,4 +163,4 @@ var HotBar = (_temp = _class = function (_Component) {
   maxButtons: 5
 }, _temp);
 exports.default = HotBar;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\HotBar.js.map
+//# sourceMappingURL=HotBar.js.map

@@ -37,4 +37,4 @@ var RowButtons = function RowButtons(_ref) {
 };
 
 exports.default = RowButtons;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\RowButtons.js.map
+//# sourceMappingURL=RowButtons.js.map

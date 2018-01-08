@@ -22,7 +22,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.EUROSTAT, {
   browserType: _Type.BrowserType.EUROSTAT,
   isDynamic: true,
-  caption: 'European Statistics',
+  caption: 'Eurostat Statistics',
   sourceMenuUrl: './data/eurostat/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.UN_COMTRADE, {
   browserType: _Type.BrowserType.UN_COMTRADE,
@@ -80,10 +80,15 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
     dU: './data/stat-sweden/statistics-sweden.html',
     rootUrl: 'http://api.scb.se/OV0104/v1/doris/en/ssd'
   }
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_ECONOMY, {
+  browserType: _Type.BrowserType.US_ECONOMY,
+  isDynamic: true,
+  caption: 'USA Economy',
+  sourceMenuUrl: './data/usa-economy/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_STOCKS, {
   browserType: _Type.BrowserType.US_STOCKS,
   isDynamic: true,
-  caption: 'US Stocks by Sectors',
+  caption: '1000 Stocks by Sectors',
   sourceMenuUrl: './data/us-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.US_STOCK_BY_SECTOR,
@@ -95,24 +100,24 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NYSE_STOCKS, {
   browserType: _Type.BrowserType.NYSE_STOCKS,
   isDynamic: true,
-  caption: 'US NYSE by Sectors',
+  caption: 'NYSE by Sectors',
   sourceMenuUrl: './data/nyse-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   chartContainerType: _Type.BrowserType.NYSE_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  chartContainerCaption: 'Quandl : US NYSE by Sectors',
+  chartContainerCaption: 'Quandl: NYSE by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NASDAQ_STOCKS, {
   browserType: _Type.BrowserType.NASDAQ_STOCKS,
   isDynamic: true,
-  caption: 'US NASDAQ by Sectors',
+  caption: 'NASDAQ by Sectors',
   sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   chartContainerType: _Type.BrowserType.NASDAQ_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  chartContainerCaption: 'Quandl : US NASDAQ by Sectors',
+  chartContainerCaption: 'Quandl: NASDAQ by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'

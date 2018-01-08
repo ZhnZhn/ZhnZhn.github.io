@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
@@ -44,12 +44,14 @@ const STYLE = {
 
 @withValidationLoad
 class StocksBySectorDialog extends Component {
+  /*
    static propTypes = {
      isShow  : PropTypes.bool.isRequired,
      data    : PropTypes.object.isRequired,
      store   : PropTypes.object,
      onClose : PropTypes.func.isRequired
    }
+  */ 
 
    constructor(props){
      super()
@@ -121,10 +123,8 @@ class StocksBySectorDialog extends Component {
           , _source = this._getItemSource(this.props)
           , option = {
              title : text,
-             //subtitle : subtitle,
              value : id,
-             //stock: id,
-             stock : item,
+             item: item,
              fromDate: fromDate,
              toDate: toDate,
              loadId : LoadType.WL,

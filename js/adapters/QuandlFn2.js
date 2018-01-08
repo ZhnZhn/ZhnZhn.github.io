@@ -70,7 +70,7 @@ var QuandlFn2 = {
     };
   },
   createZhConfig: function createZhConfig(option) {
-    var item = option.stock,
+    var item = option.item,
         title = option.title,
         _option$subtitle = option.subtitle,
         subtitle = _option$subtitle === undefined ? '' : _option$subtitle,
@@ -182,4 +182,4 @@ var QuandlFn2 = {
 };
 
 exports.default = QuandlFn2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlFn2.js.map
+//# sourceMappingURL=QuandlFn2.js.map

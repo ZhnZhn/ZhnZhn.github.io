@@ -23,4 +23,4 @@ exports.default = {
   Intraday: _AlphaIntradayAdapter2.default,
   Sector: _AlphaSectorAdapter2.default
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\Adapter.js.map
+//# sourceMappingURL=Adapter.js.map

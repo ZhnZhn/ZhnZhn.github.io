@@ -28,4 +28,4 @@ var FaoStatLink = function FaoStatLink(_ref) {
 };
 
 exports.default = FaoStatLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\FaoStatLink.js.map
+//# sourceMappingURL=FaoStatLink.js.map

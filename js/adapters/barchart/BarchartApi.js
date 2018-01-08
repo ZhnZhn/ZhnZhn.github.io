@@ -24,4 +24,4 @@ var BarchartApi = {
 };
 
 exports.default = BarchartApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\barchart\BarchartApi.js.map
+//# sourceMappingURL=BarchartApi.js.map

@@ -178,4 +178,4 @@ var FaoStatAdapter = {
 };
 
 exports.default = FaoStatAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\FaoStatAdapter.js.map
+//# sourceMappingURL=FaoStatAdapter.js.map

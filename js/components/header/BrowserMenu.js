@@ -176,7 +176,8 @@ var BrowserMenu = (_temp = _class = function (_Component) {
   this._addPage = function (pages, id, title) {
     var _props2 = _this2.props,
         model = _props2.model,
-        onClickDynamic = _props2.onClickDynamic;
+        onClickDynamic = _props2.onClickDynamic,
+        onClickQuandl = _props2.onClickQuandl;
     //, { pageCurrent } = this.state;
 
     pages.push(_react2.default.createElement(_MenuPage2.default, {
@@ -186,6 +187,7 @@ var BrowserMenu = (_temp = _class = function (_Component) {
       title: title,
       model: model[id],
       onClickDynamic: onClickDynamic,
+      onClickQuandl: onClickQuandl,
       onClickPrev: _this2.hPrevPage
       //onClickPrev={this.hPrevPage.bind(null, pageCurrent)}
     }));

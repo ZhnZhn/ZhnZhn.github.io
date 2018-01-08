@@ -77,4 +77,4 @@ var withDnDGroup = function withDnDGroup(DRAG, WatchActions) {
 };
 
 exports.default = withDnDGroup;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDGroup.js.map
+//# sourceMappingURL=withDnDGroup.js.map

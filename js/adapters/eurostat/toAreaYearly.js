@@ -65,4 +65,4 @@ var toAreaYearly = {
 };
 
 exports.default = toAreaYearly;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\toAreaYearly.js.map
+//# sourceMappingURL=toAreaYearly.js.map

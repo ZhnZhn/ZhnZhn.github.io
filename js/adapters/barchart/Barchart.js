@@ -22,4 +22,4 @@ var Barchart = {
 };
 
 exports.default = Barchart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\barchart\Barchart.js.map
+//# sourceMappingURL=Barchart.js.map

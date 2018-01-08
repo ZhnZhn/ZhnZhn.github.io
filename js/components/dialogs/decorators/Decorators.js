@@ -25,4 +25,4 @@ var Decorators = {
 };
 
 exports.default = Decorators;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\decorators\Decorators.js.map
+//# sourceMappingURL=Decorators.js.map

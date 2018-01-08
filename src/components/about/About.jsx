@@ -8,12 +8,20 @@ import BrowserCaption from '../zhn/BrowserCaption'
 import OpenClose from '../zhn/OpenClose'
 import TwitterLink from './TwitterLink'
 import DataProviders from './DataProviders'
-import Step from './Step';
+import StepTitle from './StepTitle'
 import Link from '../links/Links';
 import IconLogoBar from './IconLogoBar';
 
 import styles from '../styles/ContainerStyles';
 import S from './About.Style'
+
+const STEP = {
+  T1: "Choose a data source Browser from Topics [t]",
+  T2: "Choose a dataset menu item in a Browser",
+  T3: "Select params and enter query date in a draggable Dialog",
+  T4: "Click a button Load",
+  T5: "Also you can export chart to PNG, JPG, SVG, print to PDF"
+}
 
 class About extends Component {
   constructor(props){
@@ -90,42 +98,17 @@ class About extends Component {
            </span>
          </p>
          <p style={S.P_BOTTOM}>
-           With it, you can view economic free open data from WEB.
+           With it, you can view economic & finance open data from Web.
          </p>
          <DataProviders isClose={isCloseProviders} />
          <div style={S.BLACK}>
-            <p>
-              <Step step="1" />
-              <span>
-                 &nbsp;Choose a data source Browser from Topics.
-              </span>
-            </p>
-            <p style={S.MARGIN_TOP}>
-              <Step step="2" />
-              <span>
-                 &nbsp;Choose a dataset menu item in a Browser.
-              </span>
-            </p>
-            <p style={S.MARGIN_TOP}>
-              <Step step="3" />
-              <span>
-                 &nbsp;Select params and enter query date in a draggable Dialog.
-              </span>
-            </p>
-            <p style={S.MARGIN_TOP}>
-               <Step step="4" />
-               <span>
-                  &nbsp;Click a button Load.
-               </span>
-            </p>
-            <p style={S.MARGIN_TOP}>
-               <Step step="5" />
-               <span>
-                  &nbsp;Also you can export chart to PNG, JPG, SVG, print to PDF.
-               </span>
-            </p>
+            <StepTitle step="1" title={STEP.T1} />
+            <StepTitle step="2" title={STEP.T2} />
+            <StepTitle step="3" title={STEP.T3} />
+            <StepTitle step="4" title={STEP.T4} />
+            <StepTitle step="5" title={STEP.T5} />
          </div>
-          <p style={Object.assign({}, S.P_BOTTOM, S.MARGIN_TOP)}>
+          <p style={{...S.P_BOTTOM, ...S.MARGIN_TOP }}>
             The result will be shown in a chart in a resizebale container.
           </p>
           <OpenClose

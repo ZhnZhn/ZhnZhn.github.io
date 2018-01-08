@@ -27,4 +27,4 @@ var FaoStatApi = {
 };
 
 exports.default = FaoStatApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\FaoStatApi.js.map
+//# sourceMappingURL=FaoStatApi.js.map

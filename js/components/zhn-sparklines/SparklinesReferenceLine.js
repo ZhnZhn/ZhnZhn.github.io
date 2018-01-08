@@ -34,11 +34,11 @@ var SparklinesReferenceLine = function SparklinesReferenceLine(props) {
         style: style });
 };
 
-process.env.NODE_ENV !== "production" ? SparklinesReferenceLine.propTypes = {
+SparklinesReferenceLine.propTypes = process.env.NODE_ENV !== "production" ? {
     type: _propTypes2.default.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
     value: _propTypes2.default.number,
     style: _propTypes2.default.object
-} : void 0;
+} : {};
 
 SparklinesReferenceLine.defaultProps = {
     type: 'mean',
@@ -46,4 +46,4 @@ SparklinesReferenceLine.defaultProps = {
 };
 
 exports.default = SparklinesReferenceLine;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\SparklinesReferenceLine.js.map
+//# sourceMappingURL=SparklinesReferenceLine.js.map

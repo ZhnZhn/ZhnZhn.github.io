@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -41,28 +41,8 @@ var DF_TIMEOUT = 4000;
 
 var transformOptions = [{ caption: "NO EFFECT: z[t]=y[t]", value: "none" }, { caption: "ROW-ON-ROW CHANGE: z[t]=y[t]–y[t-1]", value: "diff" }, { caption: "ROW-ON-ROW % CHANGE: z[t]=(y[t]–y[t-1])/y[t-1]", value: "rdiff" }, { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" }, { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }];
 
-var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogType3, _Component);
-
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    caption: PropTypes.string,
-    itemCaption: PropTypes.string,
-    optionURI: PropTypes.string,
-    optionsJsonProp: PropTypes.string,
-    optionNames: PropTypes.string,
-    initFromDate: PropTypes.string,
-    initToDate: PropTypes.string,
-    msgOnNotValidFormat: PropTypes.func,
-    onTestDate: PropTypes.func,
-    onShow: PropTypes.func,
-      descrUrl: PropTypes.string,
-    isTransform: PropTypes.bool,
-    onClickInfo: PropTypes.func,
-    loadFn: PropTypes.func
-  }
-  */
 
   function DialogType3(props) {
     (0, _classCallCheck3.default)(this, DialogType3);
@@ -79,19 +59,19 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       _this.transform = option;
     };
 
-    _this._clearLoaded = function (stock) {
-      if (_this.isLoaded && _this.stock === stock) {
+    _this._clearLoaded = function (one) {
+      if (_this.isLoaded && _this.one === one) {
         _this.isLoaded = false;
       }
     };
 
-    _this._handleSelectStock = function (stock) {
-      if (stock && _this.stock === stock && !_this.isLoaded) {
+    _this._handleSelectStock = function (one) {
+      if (one && _this.one === one && !_this.isLoaded) {
         _this._handleLoad();
         _this.isLoaded = true;
-        setTimeout(_this._clearLoaded, DF_TIMEOUT, stock);
+        setTimeout(_this._clearLoaded, DF_TIMEOUT, one);
       } else {
-        _this.stock = stock;
+        _this.one = one;
         _this.isLoaded = false;
       }
     };
@@ -104,13 +84,13 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     _this._createValidationMessages = function () {
       var _this$props = _this.props,
           msgOnNotSelected = _this$props.msgOnNotSelected,
-          _this$props$itemCapti = _this$props.itemCaption,
-          itemCaption = _this$props$itemCapti === undefined ? 'Stock' : _this$props$itemCapti;
+          oneCaption = _this$props.oneCaption,
+          itemCaption = _this$props.itemCaption;
 
       var msg = [];
 
-      if (!_this.stock) {
-        msg.push(msgOnNotSelected(itemCaption));
+      if (!_this.one) {
+        msg.push(msgOnNotSelected(oneCaption || itemCaption));
       }
 
       if (_this.datesFragment) {
@@ -133,7 +113,7 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           toDate = _ref.toDate;
 
       return _this.props.loadFn(_this.props, {
-        stock: _this.stock,
+        one: _this.one,
         fromDate: fromDate, toDate: toDate,
         transform: _this.transform
       });
@@ -143,7 +123,7 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       _this._handleWithValidationClose();
     };
 
-    _this.stock = undefined;
+    _this.one = undefined;
     _this.transform = undefined;
     _this.isLoaded = false;
 
@@ -165,6 +145,25 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     };
     return _this;
   }
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+    itemCaption: PropTypes.string,
+    optionURI: PropTypes.string,
+    optionsJsonProp: PropTypes.string,
+    optionNames: PropTypes.string,
+    initFromDate: PropTypes.string,
+    initToDate: PropTypes.string,
+    msgOnNotValidFormat: PropTypes.func,
+    onTestDate: PropTypes.func,
+    onShow: PropTypes.func,
+      descrUrl: PropTypes.string,
+    isTransform: PropTypes.bool,
+    onClickInfo: PropTypes.func,
+    loadFn: PropTypes.func
+  }
+  */
 
   (0, _createClass3.default)(DialogType3, [{
     key: 'shouldComponentUpdate',
@@ -186,24 +185,25 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           isShow = _props.isShow,
           onShow = _props.onShow,
           onFront = _props.onFront,
+          oneURI = _props.oneURI,
           optionURI = _props.optionURI,
           optionsJsonProp = _props.optionsJsonProp,
-          _props$itemCaption = _props.itemCaption,
-          itemCaption = _props$itemCaption === undefined ? 'Stock' : _props$itemCaption,
-          _props$optionNames = _props.optionNames,
-          optionNames = _props$optionNames === undefined ? 'Stocks' : _props$optionNames,
+          oneCaption = _props.oneCaption,
+          itemCaption = _props.itemCaption,
+          optionNames = _props.optionNames,
           isWithInputStock = _props.isWithInputStock,
           noDate = _props.noDate,
           initFromDate = _props.initFromDate,
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
+          _oneCaption = oneCaption || itemCaption,
+          _oneURI = oneURI || optionURI,
           _state = this.state,
           isShowLabels = _state.isShowLabels,
           isShowTransform = _state.isShowTransform,
           isShowDate = _state.isShowDate,
           validationMessages = _state.validationMessages;
-
 
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
@@ -221,9 +221,9 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           isShowLabels: isShowLabels,
-          uri: optionURI,
+          uri: _oneURI,
           jsonProp: optionsJsonProp,
-          caption: itemCaption,
+          caption: _oneCaption,
           optionNames: optionNames,
           isWithInput: isWithInputStock,
           onSelect: this._handleSelectStock
@@ -259,6 +259,9 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
   }]);
   return DialogType3;
-}(_react.Component)) || _class) || _class);
+}(_react.Component), _class2.defaultProps = {
+  itemCaption: 'Stock',
+  optionNames: 'Stocks'
+}, _temp)) || _class) || _class);
 exports.default = DialogType3;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType3.js.map
+//# sourceMappingURL=DialogType3.js.map

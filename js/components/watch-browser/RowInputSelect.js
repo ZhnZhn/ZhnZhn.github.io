@@ -55,12 +55,12 @@ var RowInputSelect = function RowInputSelect(_ref) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? RowInputSelect.propTypes = {
+RowInputSelect.propTypes = process.env.NODE_ENV !== "production" ? {
   caption: _propTypes2.default.string,
   options: _propTypes2.default.array,
   isUpdateOptions: _propTypes2.default.bool,
   onSelect: _propTypes2.default.func
-} : void 0;
+} : {};
 
 exports.default = RowInputSelect;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\RowInputSelect.js.map
+//# sourceMappingURL=RowInputSelect.js.map

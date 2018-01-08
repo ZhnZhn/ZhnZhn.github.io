@@ -201,4 +201,4 @@ var clusterMaker = {
 };
 
 exports.default = clusterMaker;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\math\k-means.js.map
+//# sourceMappingURL=k-means.js.map

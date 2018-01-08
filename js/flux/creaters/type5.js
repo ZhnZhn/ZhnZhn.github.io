@@ -42,6 +42,21 @@ var _crDefault = function _crDefault(props, options) {
   });
 };
 
+var _crType5A = function _crType5A(props, option) {
+  var r = _crDefault(props, option),
+      one = option.one,
+      two = option.two,
+      three = option.three,
+      fnValue = props.fnValue,
+      _props$dataColumn = props.dataColumn,
+      dataColumn = _props$dataColumn === undefined ? 1 : _props$dataColumn,
+      value = typeof fnValue === 'function' ? fnValue(one.value, two.value, three.value) : undefined;
+
+
+  Object.assign(r, { dataColumn: dataColumn, value: value });
+  return r;
+};
+
 var _crTreeItem = function _crTreeItem(props, options) {
   var isPremium = props.isPremium,
       fnValue = props.fnValue,
@@ -97,7 +112,8 @@ var _crPlusTreeItem = function _crPlusTreeItem(props, options) {
 var _rFn = {
   DEFAULT: _crDefault,
   TreeItem: _crTreeItem,
-  PlusTreeItem: _crPlusTreeItem
+  PlusTreeItem: _crPlusTreeItem,
+  Type5A: _crType5A
 };
 
 var createLoadOptions = function createLoadOptions() {
@@ -114,4 +130,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type5.js.map
+//# sourceMappingURL=type5.js.map

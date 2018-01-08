@@ -91,9 +91,9 @@ var SubMenuItem = function (_Component) {
   return SubMenuItem;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? SubMenuItem.propTypes = {
+SubMenuItem.propTypes = process.env.NODE_ENV !== "production" ? {
   caption: _propTypes2.default.string,
   onClick: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = SubMenuItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\SubMenuItem.js.map
+//# sourceMappingURL=SubMenuItem.js.map

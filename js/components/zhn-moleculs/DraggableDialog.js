@@ -157,13 +157,13 @@ var DraggableDialog = function (_Component) {
   return DraggableDialog;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? DraggableDialog.propTypes = {
+DraggableDialog.propTypes = process.env.NODE_ENV !== "production" ? {
   isShow: _propTypes2.default.bool,
   caption: _propTypes2.default.string,
   children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]),
   commandButtons: _propTypes2.default.arrayOf(_propTypes2.default.element),
   onShowChart: _propTypes2.default.func,
   onClose: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = DraggableDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\DraggableDialog.js.map
+//# sourceMappingURL=DraggableDialog.js.map

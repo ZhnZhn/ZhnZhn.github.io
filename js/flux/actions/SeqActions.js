@@ -81,4 +81,4 @@ var SeqActions = function () {
 }();
 
 exports.default = SeqActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\SeqActions.js.map
+//# sourceMappingURL=SeqActions.js.map

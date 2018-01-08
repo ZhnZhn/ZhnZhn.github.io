@@ -183,4 +183,4 @@ var ListCreatePane = function (_Component) {
 //import PropTypes from "prop-types";
 
 exports.default = ListCreatePane;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ListCreatePane.js.map
+//# sourceMappingURL=ListCreatePane.js.map

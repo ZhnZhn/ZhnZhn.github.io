@@ -1,14 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\faostat\\conf.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\faostat\\conf.js",
- "sourceRoot": "",
- "names": [
-  "C",
-  "DATASET_EMPTY",
-  "ONE_BLANK",
-  "MM_DD"
- ],
- "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,iBAAe,kBADP;AAERC,aAAW,GAFH;AAGRC,SAAO;AAHC,CAAV;;kBAMeH,C"
-}
+{"version":3,"sources":["../../../src/adapters/faostat/conf.js"],"names":["C","DATASET_EMPTY","ONE_BLANK","MM_DD"],"mappings":";;;;;;AACA,IAAMA,IAAI;AACRC,iBAAe,kBADP;AAERC,aAAW,GAFH;AAGRC,SAAO;AAHC,CAAV;;kBAMeH,C","file":"conf.js","sourcesContent":["\r\nconst C = {  \r\n  DATASET_EMPTY: \"Dataset is empty\",\r\n  ONE_BLANK: \" \",\r\n  MM_DD: '-01-01'\r\n};\r\n\r\nexport default C\r\n"]}

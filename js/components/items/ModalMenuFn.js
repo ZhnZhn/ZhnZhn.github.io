@@ -57,4 +57,4 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
 };
 
 exports.default = ModalMenuFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ModalMenuFn.js.map
+//# sourceMappingURL=ModalMenuFn.js.map

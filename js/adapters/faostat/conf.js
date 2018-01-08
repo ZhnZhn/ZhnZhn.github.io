@@ -11,4 +11,4 @@ var C = {
 };
 
 exports.default = C;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\conf.js.map
+//# sourceMappingURL=conf.js.map

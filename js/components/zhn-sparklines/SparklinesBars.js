@@ -52,12 +52,12 @@ var SparklinesBars = function SparklinesBars(props) {
     );
 };
 
-process.env.NODE_ENV !== "production" ? SparklinesBars.propTypes = {
+SparklinesBars.propTypes = process.env.NODE_ENV !== "production" ? {
     points: _propTypes2.default.arrayOf(_propTypes2.default.object),
     height: _propTypes2.default.number,
     style: _propTypes2.default.object,
     barWidth: _propTypes2.default.number
-} : void 0;
+} : {};
 SparklinesBars.defaultProps = {
     style: { fill: 'slategray' },
     barStrokeColors: {
@@ -68,4 +68,4 @@ SparklinesBars.defaultProps = {
 };
 
 exports.default = SparklinesBars;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\SparklinesBars.js.map
+//# sourceMappingURL=SparklinesBars.js.map

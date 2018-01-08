@@ -46,13 +46,13 @@ var SvgClose = function SvgClose(_ref) {
   );
 };
 
-process.env.NODE_ENV !== "production" ? SvgClose.propTypes = {
+SvgClose.propTypes = process.env.NODE_ENV !== "production" ? {
   style: _propTypes2.default.object,
   onClose: _propTypes2.default.func
-} : void 0;
+} : {};
 SvgClose.defaultProps = {
   onClose: function onClose() {}
 };
 
 exports.default = SvgClose;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgClose.js.map
+//# sourceMappingURL=SvgClose.js.map

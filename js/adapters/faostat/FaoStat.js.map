@@ -1,13 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\faostat\\FaoStat.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\faostat\\FaoStat.js",
- "sourceRoot": "",
- "names": [
-  "FaoStat",
-  "api",
-  "adapter"
- ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU,EAAEC,yBAAF,EAAOC,iCAAP,EAAhB;;kBAEeF,O"
-}
+{"version":3,"sources":["../../../src/adapters/faostat/FaoStat.js"],"names":["FaoStat","api","adapter"],"mappings":";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU,EAAEC,yBAAF,EAAOC,iCAAP,EAAhB;;kBAEeF,O","file":"FaoStat.js","sourcesContent":["\r\nimport api from './FaoStatApi'\r\nimport adapter from './FaoStatAdapter'\r\n\r\nconst FaoStat = { api, adapter };\r\n\r\nexport default FaoStat\r\n"]}

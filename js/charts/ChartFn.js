@@ -114,19 +114,17 @@ var _addSeries = function _addSeries(_ref) {
   }
 
   if (Array.isArray(series)) {
-    (function () {
-      var _max = series.length - 1;
-      series.forEach(function (seria, index) {
-        if (hasSecondYAxis) {
-          seria.yAxis = label;
-        }
-        if (index !== _max) {
-          chart.addSeries(seria, false, false);
-        } else {
-          chart.addSeries(seria, true, true);
-        }
-      });
-    })();
+    var _max = series.length - 1;
+    series.forEach(function (seria, index) {
+      if (hasSecondYAxis) {
+        seria.yAxis = label;
+      }
+      if (index !== _max) {
+        chart.addSeries(seria, false, false);
+      } else {
+        chart.addSeries(seria, true, true);
+      }
+    });
   } else {
     chart.addSeries(series, true, true);
   }
@@ -380,4 +378,4 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
 });
 
 exports.default = ChartFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartFn.js.map
+//# sourceMappingURL=ChartFn.js.map

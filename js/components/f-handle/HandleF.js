@@ -46,4 +46,4 @@ var HandleF = {
 };
 
 exports.default = HandleF;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\f-handle\HandleF.js.map
+//# sourceMappingURL=HandleF.js.map

@@ -47,4 +47,4 @@ var C = {
 };
 
 exports.default = C;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\conf.js.map
+//# sourceMappingURL=conf.js.map

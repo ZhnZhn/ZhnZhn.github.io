@@ -49,7 +49,11 @@ var _getDate = function _getDate(point) {
   return Array.isArray(point) ? point[0] : point.x;
 };
 var _getValue = function _getValue(point) {
-  return Array.isArray(point) ? point[1] : point.y;
+  if (Array.isArray(point)) {
+    return point[1] != null ? point[1] : '0.0';
+  } else {
+    return point && point.y != null ? point.y : '0.0';
+  }
 };
 
 var AdapterFn = {
@@ -156,6 +160,10 @@ var AdapterFn = {
     });
   },
   valueMoving: function valueMoving(data) {
+    if (!Array.isArray(data)) {
+      return { date: data, direction: 'empty' };
+    }
+
     var len = data.length,
         _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [BLANK, 0],
         _nowValue = _getValue(_pointNow),
@@ -182,4 +190,4 @@ var AdapterFn = {
 };
 
 exports.default = AdapterFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\AdapterFn.js.map
+//# sourceMappingURL=AdapterFn.js.map

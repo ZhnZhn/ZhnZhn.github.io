@@ -22,4 +22,4 @@ var IexAdapter = {
 };
 
 exports.default = IexAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\IexAdapter.js.map
+//# sourceMappingURL=IexAdapter.js.map

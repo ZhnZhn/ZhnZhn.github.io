@@ -125,4 +125,4 @@ var ToScatter = {
 };
 
 exports.default = ToScatter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\ToScatter.js.map
+//# sourceMappingURL=ToScatter.js.map

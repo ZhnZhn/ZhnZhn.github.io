@@ -52,7 +52,7 @@ const Msg = {
      withoutApiKey: (providerName) => {
        return {
          caption : 'Without API Key',
-         descr : `For this type of request required a ${providerName} API key. Please register for a free ${providerName} account, more top button I in Dialog, and then include your API key with your requests through SETTINGS.`
+         descr : `For this type of request required a ${providerName} API key. Please register for a free ${providerName} account, more top button I in Dialog, and then include your API key with your requests through SETTINGS [s].`
        };
      },
      RUNTIME_ERROR : {

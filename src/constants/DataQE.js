@@ -198,28 +198,7 @@ const DataQE = {
       dataSource : 'Global Petroleum Prices (Code: GPP)'
     }
   },
-  QE_EIA_COAL : {
-    type : 'QE_EIA_COAL',
-    menuTitle : 'U.S. EIA Coal Mining',
-    dialogCaption : 'U.S. EIA Coal Mining',
-    chartContainerCaption : 'Quandl U.S. Energy Information Administration',
-    dialogType : 'DialogType5',
-    dialogProps : {
-      descrUrl: './data/quandl/eia.html',
-      nInitFromDate : 12,
-      oneCaption : 'Area',
-      oneURI : './data/quandl/eia-coal-areas.json',
-      oneJsonProp : 'areas',
-      twoCaption : 'Metric',
-      twoURI : './data/quandl/eia-coal-metrics.json',
-      twoJsonProp : 'metrics',
-      threeCaption : 'Frequency',
-      valueFn : 'REiaCoal',
-      fnValueType : 'PlusTreeItem',
-      loadId : 'Q',
-      dataSource : 'U.S. Energy Information Administration (Code: EIA)'
-    }
-  },
+
   QE_ROGERS_INDICES : {
     type : 'QE_ROGERS_INDICES',
     menuTitle : 'Rogers Indices',
@@ -480,25 +459,6 @@ const DataQE = {
       dataSource : 'Global Dairy Trade (Code: GDT)'
     }
   },
-  QE_BLSI : {
-    type : 'QE_BLSI',
-    menuTitle : 'U.S. BLS Inflation',
-    dialogCaption : 'U.S. BLS Inflation & Prices',
-    chartContainerCaption : 'Quandl U.S. BLS Inflation & Prices',
-    dialogProps : {
-      itemCaption : "Item:",
-      optionNames : "items",
-      nInitFromDate : 15,
-      descrUrl : './data/quandl/blsi.html',
-      optionURI : './data/quandl/blsi.json',
-      optionsJsonProp : 'tickets',
-      valueFn : "RPrefixOne",
-      valueFnPrefix : "BLSI",
-      loadId : 'Q',
-      columnName : 'Value',
-      dataSource: 'U.S. BLS Inflation & Prices (Code: BLSI)'
-    }
-  },
   QE_CHINA_FINANCE_FUTURE : {
       type : 'QE_CHINA_FINANCE_FUTURE',
       menuTitle : 'China Finance FE',
@@ -620,49 +580,7 @@ const DataQE = {
         nInitFromDate : 2,
         dataSource : 'Wiki Continuous Futures (Code: CHRIS)'
       }
-  },
-
-  QE_ZILLOW_REAL_ESTATE_2 : {
-      type : 'QE_ZILLOW_REAL_ESTATE_2',
-      menuTitle : 'Zillow Research',
-      dialogCaption : 'Zillow Real Estate Research',
-      chartContainerCaption : 'Quandl Zillow Real Estate Research',
-      dialogType : 'ZillowDialog',
-      dialogProps : {
-        descrUrl: './data/quandl/zillow-2.html',
-        nInitFromDate : 10,
-        oneCaption : 'Indicator',
-        oneURI : './data/quandl/zillow-indicators-2.json',
-        oneJsonProp : 'indicators',
-        twoCaption : 'Area Type',
-        twoURI : './data/quandl/zillow-area-2.json',
-        twoJsonProp : 'places',
-        threeCaption : 'Area Code',
-        valueFn : 'RZillow',
-        loadId : 'Q',
-        dataSource : 'Zillow Real Estate Research (Code: ZILLOW)'
-      }
-  },
-  QE_FMAC : {
-    type : 'QE_FMAC',
-    menuTitle : 'Freddie Mac',
-    dialogCaption : 'Freddie Mac',
-    chartContainerCaption : 'Quandl Freddie Mac',
-    dialogProps : {
-      itemCaption : "Item:",
-      optionNames : "items",
-      nInitFromDate : 15,
-      descrUrl : './data/quandl/fmac.html',
-      optionURI : './data/quandl/fmac.json',
-      optionsJsonProp : 'tickets',
-      valueFn : "RPrefixOne",
-      valueFnPrefix : "FMAC",
-      loadId : 'Q',
-      columnName : 'Value',
-      dataSource : 'Freddie Mac (Code: FMAC)'
-    }
-  }
-
+  }    
 };
 
 export default DataQE

@@ -28,4 +28,4 @@ var StatNorway = {
 };
 
 exports.default = StatNorway;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\StatNorway.js.map
+//# sourceMappingURL=StatNorway.js.map

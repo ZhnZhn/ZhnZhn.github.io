@@ -47,4 +47,4 @@ exports.default = function (_ref) {
         };
     });
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\dataProcessing\dataToPoints.js.map
+//# sourceMappingURL=dataToPoints.js.map

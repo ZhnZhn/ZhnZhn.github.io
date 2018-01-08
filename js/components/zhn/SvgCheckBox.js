@@ -137,11 +137,11 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
     _this2.setState({ isChecked: false });
   };
 }, _temp);
-process.env.NODE_ENV !== "production" ? SvgCheckBox.propTypes = {
+SvgCheckBox.propTypes = process.env.NODE_ENV !== "production" ? {
   value: _propTypes2.default.bool,
   chartType: _propTypes2.default.string,
   onCheck: _propTypes2.default.func,
   onUnCheck: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = SvgCheckBox;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgCheckBox.js.map
+//# sourceMappingURL=SvgCheckBox.js.map

@@ -42,4 +42,4 @@ var SparklinesMaxLabel = function SparklinesMaxLabel(props) {
 };
 
 exports.default = SparklinesMaxLabel;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\SparklinesMaxLabel.js.map
+//# sourceMappingURL=SparklinesMaxLabel.js.map

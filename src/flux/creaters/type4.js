@@ -7,7 +7,8 @@ const createLoadOptions = (props={}, options={}) => {
       , { one, two, fromDate, toDate, hasSecondYAxis } = options
       , _value = (typeof fnValue === 'function')
            ? fnValue(one.value, two.value)
-           : undefined
+           : one.value
+           //: undefined
   return {
        ...dfProps,
        value: _value,

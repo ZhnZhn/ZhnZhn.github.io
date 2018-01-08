@@ -25,4 +25,4 @@ var ModalDialogs = {
 };
 
 exports.default = ModalDialogs;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\ModalDialogs.js.map
+//# sourceMappingURL=ModalDialogs.js.map

@@ -9,4 +9,4 @@ exports.default = function (data) {
         return a + b;
     }) / data.length;
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-sparklines\dataProcessing\mean.js.map
+//# sourceMappingURL=mean.js.map

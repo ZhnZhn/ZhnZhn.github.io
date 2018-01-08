@@ -132,4 +132,4 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
   data: {}
 }, _temp);
 exports.default = DescriptionDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DescriptionDialog.js.map
+//# sourceMappingURL=DescriptionDialog.js.map

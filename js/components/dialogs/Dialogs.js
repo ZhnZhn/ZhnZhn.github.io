@@ -30,4 +30,4 @@ var Dialogs = {
 };
 
 exports.default = Dialogs;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\Dialogs.js.map
+//# sourceMappingURL=Dialogs.js.map

@@ -95,4 +95,4 @@ BrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function (option) {
 });
 
 exports.default = BrowserActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\BrowserActions.js.map
+//# sourceMappingURL=BrowserActions.js.map

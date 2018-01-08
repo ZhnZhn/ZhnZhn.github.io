@@ -183,7 +183,7 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
         title: title,
         subtitle: subtitle,
         value: caption,
-        stock: caption,
+        item: caption,
         fromDate: fromDate,
         toDate: toDate,
         loadId: _Type.LoadType.WL,
@@ -223,4 +223,4 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
 }, _temp)) || _class;
 
 exports.default = LoadItemDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\LoadItemDialog.js.map
+//# sourceMappingURL=LoadItemDialog.js.map

@@ -101,4 +101,4 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
 };
 
 exports.default = _fOnClickTable;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\factoryClickItem.js.map
+//# sourceMappingURL=factoryClickItem.js.map

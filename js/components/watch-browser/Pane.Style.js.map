@@ -1,17 +1,1 @@
-)]}
-{
- "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\watch-browser\\Pane.Style.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\watch-browser\\Pane.Style.js",
- "sourceRoot": "",
- "names": [
-  "STYLE",
-  "COMMAND_DIV",
-  "cursor",
-  "float",
-  "marginTop",
-  "marginBottom",
-  "marginRight"
- ],
- "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,gBAAc;AACXC,cAAQ,SADG;AAEXC,aAAO,OAFI;AAGXC,iBAAW,KAHA;AAIXC,oBAAc,MAJH;AAKXC,mBAAa;AALF;AADF,CAAd;;kBAUeN,K"
-}
+{"version":3,"sources":["../../../src/components/watch-browser/Pane.Style.js"],"names":["STYLE","COMMAND_DIV","cursor","float","marginTop","marginBottom","marginRight"],"mappings":";;;;;;AACA,IAAMA,QAAQ;AACZC,gBAAc;AACXC,cAAQ,SADG;AAEXC,aAAO,OAFI;AAGXC,iBAAW,KAHA;AAIXC,oBAAc,MAJH;AAKXC,mBAAa;AALF;AADF,CAAd;;kBAUeN,K","file":"Pane.Style.js","sourcesContent":["\r\nconst STYLE = {\r\n  COMMAND_DIV : {\r\n     cursor: 'default',\r\n     float: 'right',\r\n     marginTop: '8px',\r\n     marginBottom: '10px',\r\n     marginRight: '4px'\r\n  }\r\n}\r\n\r\nexport default STYLE\r\n"]}

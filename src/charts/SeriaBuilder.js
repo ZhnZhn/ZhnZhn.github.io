@@ -2,6 +2,13 @@ import Chart from './Chart'
 import ChartConfig from './ChartConfig'
 
 const C = {
+  BASE_SPLINE: {
+     type: 'spline',
+     visible: true,
+     marker: {
+       symbol: 'circle'
+     }
+  },
   BASE_AREA_RANGE: {
     type: 'arearange',
     color: '#7cb5ec',
@@ -62,10 +69,13 @@ const _addSeriesImpl = (to, series) => {
 
 const SeriaBuilder = {
 
-  initBaseSeria(){
+  initBaseSeria(option){
     this._type = 'S'
-    this.config = ChartConfig.fSeries()
+    this.config = Object.assign(ChartConfig.fSeries(), option)
     return this;
+  },
+  initSpline(option){
+    return this.initBaseSeria({ ...C.BASE_SPLINE, ...option });
   },
   _initBaseSeria(BASE, tooltip, option){
     this._type = 'S'

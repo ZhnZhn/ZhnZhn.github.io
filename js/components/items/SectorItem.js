@@ -190,4 +190,4 @@ var SectorItem = function (_Component2) {
 }(_react.Component);
 
 exports.default = SectorItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\SectorItem.js.map
+//# sourceMappingURL=SectorItem.js.map

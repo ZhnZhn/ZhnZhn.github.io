@@ -71,7 +71,8 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
         indicator: 'TIME_SERIES_INTRADAY',
         interval: _interval,
         ticket: _ticket,
-        value: _value };
+        value: _value //for label
+      };
       _this.props.onLoad(option);
     };
 
@@ -148,4 +149,4 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
 }(_react.Component)) || _class;
 
 exports.default = AlphaIntradayDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\stock-markets\AlphaIntradayDialog.js.map
+//# sourceMappingURL=AlphaIntradayDialog.js.map

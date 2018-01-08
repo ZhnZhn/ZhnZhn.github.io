@@ -10,7 +10,7 @@ const BrowserConfig = {
   [BT.EUROSTAT]: {
     browserType: BT.EUROSTAT,
     isDynamic: true,
-    caption: 'European Statistics',
+    caption: 'Eurostat Statistics',
     sourceMenuUrl: './data/eurostat/source-menu.json'
   },
   [BT.UN_COMTRADE]: {
@@ -79,11 +79,16 @@ const BrowserConfig = {
       rootUrl: 'http://api.scb.se/OV0104/v1/doris/en/ssd'
     }
   },
-
+  [BT.US_ECONOMY]: {
+    browserType: BT.US_ECONOMY,
+    isDynamic: true,
+    caption: 'USA Economy',
+    sourceMenuUrl: './data/usa-economy/source-menu.json'
+  },
   [BT.US_STOCKS]: {
     browserType: BT.US_STOCKS,
     isDynamic: true,
-    caption: 'US Stocks by Sectors',
+    caption: '1000 Stocks by Sectors',
     sourceMenuUrl: './data/us-stocks/source-menu.json',
     withoutItemCounter: true,
     modalDialogType: MD.US_STOCK_BY_SECTOR,
@@ -96,12 +101,12 @@ const BrowserConfig = {
   [BT.NYSE_STOCKS]: {
     browserType: BT.NYSE_STOCKS,
     isDynamic: true,
-    caption: 'US NYSE by Sectors',
+    caption: 'NYSE by Sectors',
     sourceMenuUrl: './data/nyse-stocks/source-menu.json',
     withoutItemCounter: true,
     modalDialogType: MD.STOCKS_BY_SECTOR,
     chartContainerType: BT.NYSE_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
-    chartContainerCaption: 'Quandl : US NYSE by Sectors',
+    chartContainerCaption: 'Quandl: NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
     descrUrl: './data/nyse-stocks/nyse-stocks.html'
@@ -109,12 +114,12 @@ const BrowserConfig = {
   [BT.NASDAQ_STOCKS]: {
     browserType: BT.NASDAQ_STOCKS,
     isDynamic: true,
-    caption: 'US NASDAQ by Sectors',
+    caption: 'NASDAQ by Sectors',
     sourceMenuUrl: './data/nasdaq-stocks/source-menu.json',
     withoutItemCounter: true,
     modalDialogType: MD.STOCKS_BY_SECTOR,
     chartContainerType: BT.NASDAQ_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
-    chartContainerCaption: 'Quandl : US NASDAQ by Sectors',
+    chartContainerCaption: 'Quandl: NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
     descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'

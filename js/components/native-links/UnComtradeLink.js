@@ -24,4 +24,4 @@ var UnComtradeLink = function UnComtradeLink(_ref) {
 };
 
 exports.default = UnComtradeLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\UnComtradeLink.js.map
+//# sourceMappingURL=UnComtradeLink.js.map

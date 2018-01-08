@@ -96,4 +96,4 @@ var MenuTitle = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuTitle;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\MenuTitle.js.map
+//# sourceMappingURL=MenuTitle.js.map

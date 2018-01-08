@@ -21,81 +21,103 @@ var S = {
     //whiteSpace: "nowrap",
     color: "#009ae5"
   },
-  BROWN: {
-    color: "#bd1010"
+  ORANGE: {
+    color: "#e05927"
+  },
+  SUNNY: {
+    color: "#ffa200"
+  },
+  WHITE: {
+    color: 'white'
   }
 };
 
 var Quandl = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.quandl.com/",
-  style: { color: "#E05927" },
+  dfStyle: S.ORANGE,
   title: "Quandl"
+})(_Link2.default);
+
+var Iex = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://iextrading.com/developer/",
+  dfStyle: S.SUNNY,
+  title: "IEX Platform"
 })(_Link2.default);
 
 var Barchart = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.barchartmarketdata.com",
-  style: S.BROWN,
+  dfStyle: S.BLUE,
   title: "Barchart Market Data"
 })(_Link2.default);
 
 var AlphaVantage = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.alphavantage.co",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Alpha Vantage"
 })(_Link2.default);
 
 var Eurostat = (0, _withProps2.default)({
   className: CL_LINK,
   href: "http://ec.europa.eu/eurostat",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Eurostat"
 })(_Link2.default);
 
 var UnComtrade = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://comtrade.un.org",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "UN Comtrade"
 })(_Link2.default);
 
 var FaoStat = (0, _withProps2.default)({
   className: CL_LINK,
   href: "http://www.fao.org/faostat/en/#data",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "FAOSTAT"
+})(_Link2.default);
+
+var Bea = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://www.bea.gov/index.htm",
+  dfStyle: S.WHITE,
+  title: "U.S. Bureau of Economic Analysis"
 })(_Link2.default);
 
 var Insee = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Insee: France Statistics"
 })(_Link2.default);
 
 var StatNorway = (0, _withProps2.default)({
   className: CL_LINK,
   href: "http://www.ssb.no/en",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Statistics Norway"
 })(_Link2.default);
 
 var StatSweden = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.scb.se/en/",
-  style: S.BLUE,
+  dfStyle: S.BLUE,
   title: "Statistics Sweden"
 })(_Link2.default);
 
 exports.default = {
   Quandl: Quandl,
+  Iex: Iex,
   Barchart: Barchart,
   AlphaVantage: AlphaVantage,
   Eurostat: Eurostat,
   UnComtrade: UnComtrade,
   FaoStat: FaoStat,
+  Bea: Bea,
   Insee: Insee,
   StatNorway: StatNorway,
   StatSweden: StatSweden

@@ -130,8 +130,8 @@ var MatchCaptcha = function (_Component) {
   return MatchCaptcha;
 }(_react.Component);
 
-process.env.NODE_ENV !== "production" ? MatchCaptcha.propTypes = {
+MatchCaptcha.propTypes = process.env.NODE_ENV !== "production" ? {
   rootStyle: _propTypes2.default.object
-} : void 0;
+} : {};
 exports.default = MatchCaptcha;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\MathCaptcha.js.map
+//# sourceMappingURL=MathCaptcha.js.map

@@ -1,7 +1,7 @@
 {
   "menu" : [
     {
-      "caption" : "Economic",
+      "caption" : "Economy",
       "items" : [
         { "id" : "ES_8_ECONOMIC" },
         { "id" : "ES_CPI" },

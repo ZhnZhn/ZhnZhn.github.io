@@ -183,7 +183,7 @@ var ModalDialog = (_temp = _class = function (_Component) {
   isNotUpdate: false,
   timeout: 450
 }, _temp);
-process.env.NODE_ENV !== "production" ? ModalDialog.propTypes = {
+ModalDialog.propTypes = process.env.NODE_ENV !== "production" ? {
   isShow: _propTypes2.default.bool,
   isWithButton: _propTypes2.default.bool,
   isNotUpdate: _propTypes2.default.bool,
@@ -193,6 +193,6 @@ process.env.NODE_ENV !== "production" ? ModalDialog.propTypes = {
   caption: _propTypes2.default.string,
   style: _propTypes2.default.object,
   onClose: _propTypes2.default.func
-} : void 0;
+} : {};
 exports.default = ModalDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-moleculs\ModalDialog.js.map
+//# sourceMappingURL=ModalDialog.js.map

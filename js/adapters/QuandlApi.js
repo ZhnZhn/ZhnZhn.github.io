@@ -69,4 +69,4 @@ var QuandlApi = {
 };
 
 exports.default = QuandlApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlApi.js.map
+//# sourceMappingURL=QuandlApi.js.map
