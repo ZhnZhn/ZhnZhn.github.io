@@ -8,6 +8,8 @@ var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
+var _IndicatorSma = require('../IndicatorSma');
+
 var _fnAdapter = require('./fnAdapter');
 
 var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
@@ -29,7 +31,9 @@ var IntrinioAdapter = {
         config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add({
       zhConfig: crZhConfig(option),
       valueMoving: crValueMoving(data),
-      info: crInfo(option)
+      info: crInfo(option),
+      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
+      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     }).toConfig();
 
 

@@ -1,5 +1,5 @@
 import Builder from '../../charts/ConfigBuilder'
-
+import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
 import fnAdapter from './fnAdapter'
 
 const {
@@ -44,6 +44,8 @@ const BeaAdapter = {
              zhConfig: crZhConfig(option),
              valueMoving: crValueMoving(data),
              info: crInfo(Results),
+             zhFnAddSeriesSma: fnAddSeriesSma,
+             zhFnRemoveSeries: fnRemoveSeries
            })
            .toConfig();
 

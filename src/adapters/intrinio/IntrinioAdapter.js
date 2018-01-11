@@ -1,4 +1,5 @@
 import Builder from '../../charts/ConfigBuilder'
+import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
 import fnAdapter from './fnAdapter'
 
 const {
@@ -22,7 +23,9 @@ const IntrinioAdapter = {
             .add({
               zhConfig: crZhConfig(option),
               valueMoving: crValueMoving(data),
-              info: crInfo(option)
+              info: crInfo(option),
+              zhFnAddSeriesSma: fnAddSeriesSma,
+              zhFnRemoveSeries: fnRemoveSeries
              })
             .toConfig();
 
