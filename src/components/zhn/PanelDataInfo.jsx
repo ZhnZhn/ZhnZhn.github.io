@@ -61,7 +61,7 @@ class PanelDataInfo extends Component {
   }
 
   _renderNativeLink = (linkFn, item) => {
-    const Comp = RouterNativeLink[linkFn]
+    const Comp = RouterNativeLink[linkFn];    
     if (typeof Comp !== 'undefined') {
       return (<Comp item={item} />);
     } else {
@@ -77,16 +77,16 @@ class PanelDataInfo extends Component {
              oldest_available_date,
              frequency,
              database_code, dataset_code,
-             description=''
+             description
            } = info
          , { item, linkFn } = zhInfo
          , styleShow = isShow
              ? styles.rootShow
              : styles.rootHide
-        , _isDescriptionClose = (description.length>200)
+         , _isDescr = description ? true : false
+         , _isDescrClose = (_isDescr && description.length>200)
                 ? true
                 : false;
-
     return (
        <div style={styleShow}>
          <ButtonTab
@@ -120,20 +120,21 @@ class PanelDataInfo extends Component {
             styleText={styles.text}
          />
          {this._renderQuandlLink(database_code, dataset_code)}
-         <OpenClose2
-             caption="Description"
-             isClose={_isDescriptionClose}
-             style={styles.description}
-         >
-           <InfoPart
-              caption=""
-              text={description}
-              isHtml={true}
-              classText={DESCR_CSS_CLASS}
-              rootStyle={styles.rootStyleDescription}
-              styleText={styles.textDescr}
-           />
-         </OpenClose2>
+         { _isDescr && <OpenClose2
+              caption="Description"
+              isClose={_isDescrClose}
+              style={styles.description}
+             >
+               <InfoPart
+                  caption=""
+                  text={description}
+                  isHtml={true}
+                  classText={DESCR_CSS_CLASS}
+                  rootStyle={styles.rootStyleDescription}
+                  styleText={styles.textDescr}
+               />
+            </OpenClose2>
+         }
          {this._renderNativeLink(linkFn, item)}
        </div>
     )

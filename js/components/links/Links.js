@@ -88,6 +88,13 @@ var Bea = (0, _withProps2.default)({
   title: "U.S. Bureau of Economic Analysis"
 })(_Link2.default);
 
+var Intrinio = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://intrinio.com",
+  dfStyle: S.WHITE,
+  title: 'Intrinio'
+})(_Link2.default);
+
 var Insee = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
@@ -118,6 +125,7 @@ exports.default = {
   UnComtrade: UnComtrade,
   FaoStat: FaoStat,
   Bea: Bea,
+  Intrinio: Intrinio,
   Insee: Insee,
   StatNorway: StatNorway,
   StatSweden: StatSweden

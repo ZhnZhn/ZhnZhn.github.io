@@ -101,7 +101,7 @@ class DialogType4 extends Component {
   }
 
   _handleClose = () => {
-    this._handleWithValidationClose()    
+    this._handleWithValidationClose()
   }
 
   _handleMode = (propName, value) => {
@@ -111,7 +111,7 @@ class DialogType4 extends Component {
   render(){
     const {
            caption, isShow, onShow, onFront,
-           oneCaption, oneURI, oneJsonProp,
+           oneCaption, oneURI, oneJsonProp, isWithOneInput,
            twoCaption, twoURI, twoJsonProp, isWithInputTwo,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
@@ -140,6 +140,7 @@ class DialogType4 extends Component {
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames="Stocks"
+               isWithInput={isWithOneInput}
                onSelect={this._handleSelectOne}
              />
 

@@ -52,6 +52,10 @@ var _Bea = require('./bea/Bea');
 
 var _Bea2 = _interopRequireDefault(_Bea);
 
+var _Intrinio = require('./intrinio/Intrinio');
+
+var _Intrinio2 = _interopRequireDefault(_Intrinio);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterAdapter = {
@@ -69,8 +73,9 @@ var RouterAdapter = {
   Barchart: _Barchart2.default,
   Iex: _Iex2.default,
   Insee: _Insee2.default,
-  Bea: _Bea2.default
+  Bea: _Bea2.default,
+  Intrinio: _Intrinio2.default
 };
 
 exports.default = RouterAdapter;
-//# sourceMappingURL=RouterAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\RouterAdapter.js.map

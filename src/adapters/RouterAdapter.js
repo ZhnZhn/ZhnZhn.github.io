@@ -12,6 +12,7 @@ import Barchart from './barchart/Barchart'
 import Iex from './iex/Iex'
 import Insee from './insee/Insee'
 import Bea from './bea/Bea'
+import Intrinio from './intrinio/Intrinio'
 
 const RouterAdapter = {
   Quandl: {
@@ -28,7 +29,8 @@ const RouterAdapter = {
   Barchart,
   Iex,
   Insee,
-  Bea
+  Bea,
+  Intrinio
 };
 
 export default RouterAdapter

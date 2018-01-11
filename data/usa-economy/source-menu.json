@@ -19,6 +19,17 @@
         { "id": "USAE_GO_3" }
       ]
     },{
+      "caption": "Intrinio: FRED",
+      "isInitClose": true,
+      "items": [
+        { "id": "USAE_INTR_1" },
+        { "id": "USAE_INTR_2" },
+        { "id": "USAE_INTR_3" },
+        { "id": "USAE_INTR_4" },
+        { "id": "USAE_INTR_5" },
+        { "id": "USAE_INTR_6" }
+      ]
+    },{
       "caption": "Inflation & Prices",
       "isInitClose": true,
       "items": [
@@ -50,6 +61,18 @@
         "loadId" : "BEA",
         "dataSource": "U.S. Bureau of Economic Analysis (Not endorsed or certified by BEA)"
       }
+    },
+    "USAE_B2": {
+      "dialogProps": {
+        "oneCaption": "Item",
+        "optionNames": "items",
+        "nInitFromDate": 12,
+        "descrUrl": "./data/usa-economy/intrinio.html",
+        "valueFn": "ROne",
+        "loadId": "INTR",
+        "linkFn": "FRED",
+        "dataSource": "Intrinio: US & Global Economic: FRED: St. Louise Fed"
+       }
     },
 
     "USAE_RGDP_1": {
@@ -272,6 +295,70 @@
         "loadId" : "Q",
         "columnName" : "Value",
         "dataSource" : "Quandl; Freddie Mac (Code: FMAC)"
+      }
+    },
+
+    "USAE_INTR_1": {
+      "type": "USAE_INTR_1",
+      "menuTitle": "GDP, R+GDP",
+      "dialogCaption": "GDP, R+GDP",
+      "chartContainerCaption" : "Intrinio: FRED GDP, R+GDP",
+      "addProps": "USAE_B2",
+      "dialogProps": {
+        "optionURI": "./data/usa-economy/intrinio-gdp.json"
+      }
+    },
+    "USAE_INTR_2": {
+      "type": "USAE_INTR_2",
+      "menuTitle": "CPI, Unemployment",
+      "dialogCaption": "CPI, Unemployment",
+      "chartContainerCaption": "Intrinio: FRED CPI, Unemployment",
+      "addProps": "USAE_B2",
+      "dialogProps": {
+        "optionURI": "./data/usa-economy/intrinio-cpi.json"
+      }
+    },
+    "USAE_INTR_3": {
+      "type": "USAE_INTR_3",
+      "menuTitle": "Index, Price, Rate",
+      "dialogCaption": "Index, Price, Rate",
+      "chartContainerCaption": "Intrinio: FREDIndex, Price, Rate",
+      "addProps": "USAE_B2",
+      "dialogProps": {
+        "optionURI": "./data/usa-economy/intrinio-rate.json"
+      }
+    },
+    "USAE_INTR_4": {
+      "type": "USAE_INTR_4",
+      "menuTitle": "Treasury, Monetary",
+      "dialogCaption": "Treasury, Monetary",
+      "chartContainerCaption": "Intrinio: FRED Treasury, Monetary",
+      "addProps": "USAE_B2",
+      "dialogProps": {
+        "optionURI": "./data/usa-economy/intrinio-treasury.json"
+      }
+    },
+    "USAE_INTR_5": {
+      "type": "USAE_INTR_5",
+      "menuTitle": "Fin. Condition Indexes (4/6)",
+      "dialogCaption": "Fin. Condition Indexes (4/6)",
+      "chartContainerCaption": "Intrinio: FRED Fin. Condition Indexes (4/6)",
+      "addProps": "USAE_B2",
+      "dialogProps": {
+        "optionURI": "./data/usa-economy/intrinio-fci.json",
+        "dfProps": {
+          "dfArticle": "https://research.stlouisfed.org/publications/economic-synopses/2017/11/03/financial-conditions-indexes/"
+        }
+      }
+    },
+    "USAE_INTR_6": {
+      "type": "USAE_INTR_6",
+      "menuTitle": "Series",
+      "dialogCaption": "Series",
+      "chartContainerCaption": "Intrinio: FRED Series",
+      "addProps": "USAE_B2",
+      "dialogProps": {
+        "optionURI": "./data/usa-economy/intrinio-series.json"
       }
     }
 

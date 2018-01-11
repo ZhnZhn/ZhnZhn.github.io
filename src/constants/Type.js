@@ -79,6 +79,7 @@ export const LoadType = {
   UN: 'UN',
   FAO: 'FAO',
   BEA: 'BEA',
+  INTR: 'INTR',
   WL: 'WL'
 }
 

@@ -19,6 +19,7 @@ var createLoadOptions = function createLoadOptions() {
       loadId = props.loadId,
       dataSource = props.dataSource,
       isPremium = props.isPremium,
+      linkFn = props.linkFn,
       _props$dfProps = props.dfProps,
       dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
       one = options.one,
@@ -41,6 +42,7 @@ var createLoadOptions = function createLoadOptions() {
     isPremium: isPremium,
     dataSource: dataSource,
     hasSecondYAxis: hasSecondYAxis,
+    linkFn: linkFn,
     oneCaption: one.caption,
     twoCaption: two.caption,
     one: one.value,
@@ -49,4 +51,4 @@ var createLoadOptions = function createLoadOptions() {
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=type4.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type4.js.map

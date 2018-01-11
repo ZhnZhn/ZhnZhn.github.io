@@ -30,7 +30,8 @@ var Quandl = _RouterAdapter2.default.Quandl,
     Barchart = _RouterAdapter2.default.Barchart,
     Iex = _RouterAdapter2.default.Iex,
     Insee = _RouterAdapter2.default.Insee,
-    Bea = _RouterAdapter2.default.Bea;
+    Bea = _RouterAdapter2.default.Bea,
+    Intrinio = _RouterAdapter2.default.Intrinio;
 
 
 var LoadImpl = {
@@ -57,8 +58,9 @@ var LoadImpl = {
     fnFetch: _fnFetch.fetchTxt
   }, Insee)),
 
-  Bea: (0, _loadItem2.default)((0, _extends3.default)({}, Bea))
+  Bea: (0, _loadItem2.default)((0, _extends3.default)({}, Bea)),
+  Intrinio: (0, _loadItem2.default)((0, _extends3.default)({}, Intrinio))
 };
 
 exports.default = LoadImpl;
-//# sourceMappingURL=LoadImpl.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadImpl.js.map

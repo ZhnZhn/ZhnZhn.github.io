@@ -13,7 +13,7 @@ const S = {
   MODAL : {
     position : 'static',
     width: '380px',
-    height: '360px',
+    height: '390px',
     margin: '70px auto 0px'
   },
   TITLE: {
@@ -22,10 +22,6 @@ const S = {
 };
 
 const SET = {
-  QUANDL_KEY: 'setQuandlKey',
-  ALPHA_KEY: 'setAlphaKey',
-  BARCHAR_KEY: 'setBarcharKey',
-  BEA_KEY: 'setBeaKey',
   PROXY: 'setProxy'
 };
 
@@ -50,10 +46,10 @@ class SettingsDialog extends Component {
     super()
     const { data } = props;
 
-    this._setQuandlKey = safeFn(data, SET.QUANDL_KEY)
-    this._setAlphaKey = safeFn(data, SET.ALPHA_KEY)
-    this._setBarcharKey = safeFn(data, SET.BARCHAR_KEY)
-    this._setBeaKey = safeFn(data, SET.BEA_KEY)
+    let i = 1;
+    for(; i<6; i++){
+      this['_setKey'+i] = safeFn(data, 'key'+i)
+    }
     this._setProxy = safeFn(data, SET.PROXY)
 
     this._commandButtons = [
@@ -75,10 +71,11 @@ class SettingsDialog extends Component {
   _handleSet = () => {
     const { onClose } = this.props;
 
-    this._setQuandlKey(this.inputComp.getValue())
-    this._setAlphaKey(this.alphaComp.getValue())
-    this._setBarcharKey(this.barcharComp.getValue())
-    this._setBeaKey(this.beaComp.getValue())
+    this._setKey1(this.iComp1.getValue())
+    this._setKey2(this.iComp2.getValue())
+    this._setKey3(this.iComp3.getValue())
+    this._setKey4(this.iComp4.getValue())
+    this._setKey5(this.iComp5.getValue())
     this._setProxy(this.proxyComp.getValue())
 
     onClose()
@@ -89,10 +86,11 @@ class SettingsDialog extends Component {
     fnMode(mode)
   }
 
-  _refBarchart = n => this.barcharComp = n
-  _refAlpha = n => this.alphaComp = n
-  _refQuandl = n => this.inputComp = n
-  _refBea = n => this.beaComp = n
+  _ref1 = n => this.iComp1 = n
+  _ref2 = n => this.iComp2 = n
+  _ref3 = n => this.iComp3 = n
+  _ref4 = n => this.iComp4 = n
+  _ref5 = n => this.iComp5 = n
   _refProxy = n => this.proxyComp = n
 
   render(){
@@ -111,33 +109,41 @@ class SettingsDialog extends Component {
             onClose={onClose}
          >
             <RowSecret
-               ref={ this._refAlpha}
+               ref={ this._ref1}
                titleStyle={S.TITLE}
                title="Alpha:"
                placeholder="Alpha Vantage API Key"
-               onEnter={this._setAlphaKey}
+               onEnter={this._setKey1}
             />
             <RowSecret
-               ref={this._refBarchart}
+               ref={this._ref2}
                titleStyle={S.TITLE}
                title="Barchar:"
                placeholder="Barchar API Key"
-               onEnter={this._setBarcharKey}
+               onEnter={this._setKey2}
             />
             <RowSecret
-               ref={this._refBea}
+               ref={this._ref3}
                titleStyle={S.TITLE}
                title="BEA:"
                placeholder="BEA API Key"
                maxLength="36"
-               onEnter={this._setBeaKey}
+               onEnter={this._setKey3}
             />
             <RowSecret
-               ref={this._refQuandl}
+               ref={this._ref4}
+               titleStyle={S.TITLE}
+               title="Intrinio:"
+               placeholder="Intrinio API Key"
+               maxLength="32"
+               onEnter={this._setKey4}
+            />
+            <RowSecret
+               ref={this._ref5}
                titleStyle={S.TITLE}
                title="Quandl:"
                placeholder="Quandl API Key"
-               onEnter={this._setQuandlKey}
+               onEnter={this._setKey5}
             />
             <RowPattern
                ref={this._refProxy}

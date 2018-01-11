@@ -5,6 +5,7 @@ import NasdaqLink from './NasdaqLink'
 import LmeLink from './LmeLink'
 import UnComtradeLink from './UnComtradeLink'
 import FaoStatLink from './FaoStatLink'
+import FredLink from './FredLink'
 
 const RouterNativeLink = {
   QUANDL: QuandlLink,
@@ -12,7 +13,8 @@ const RouterNativeLink = {
   NASDAQ: NasdaqLink,
   LME: LmeLink,
   UN_COMTRADE: UnComtradeLink,
-  FAO_STAT: FaoStatLink
+  FAO_STAT: FaoStatLink,
+  FRED: FredLink
 }
 
 export default RouterNativeLink

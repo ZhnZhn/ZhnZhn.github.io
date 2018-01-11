@@ -10,7 +10,7 @@
         { "id": "SM_UNICORN_RESEARCH" }
       ]
     },{
-      "caption": "Barchart",
+      "caption": "Barchart", "isInitClose": true,
       "items": [
         { "id": "SM_B_STOCK" }
       ]
@@ -22,13 +22,37 @@
         { "id": "SM_A_SECTOR" }
       ]
     },{
-      "caption": "IEX",
+      "caption": "IEX", "isInitClose": true,
       "items": [
         { "id": "SM_IEX_EARNINGS" }
+      ]
+    },{
+      "caption": "Intrinio: US PC Financials", "isInitClose": true,
+      "items": [
+        { "id": "SM_INTR_CALC" },
+        { "id": "SM_INTR_INCOME" },
+        { "id": "SM_INTR_BALANCE" },
+        { "id": "SM_INTR_CASH" }
       ]
     }
   ],
   "items" : {
+    "SM_BASE_INTR": {
+      "dialogProps": {
+        "descrUrl" : "./data/stock-markets/intrinio.html",
+        "oneCaption": "Stock",
+        "oneURI" : "./data/stock-markets/wiki.json",
+        "oneJsonProp" : "tickets",
+        "nInitFromDate" : 6,
+        "valueFn" : "ROne",
+        "linkFn" : "NASDAQ",
+        "loadId" : "INTR",
+        "dfProps": {
+          "dfFrequncy": "Q"
+        }
+      }
+    },
+
     "SM_EURONEXT" : {
         "type" : "SM_EURONEXT",
         "menuTitle" : "Euronext",
@@ -220,11 +244,61 @@
            "valueFnPrefix": "earnings",
            "linkFn" : "NASDAQ",
            "loadId" : "IEX",
-           "dataSource" : "Data for free by IEX",
+           "dataSource" : "IEX Platform",
            "dfProps": {
              "dfType": "earnings"
            }
          }
+     },
+
+     "SM_INTR_CALC" : {
+         "type" : "SM_INTR_CALC",
+         "menuTitle" : "Calculation & Metric",
+         "chartContainerCaption" : "Intrinio: Calculation & Metric",
+         "dialogType": "DialogType4",
+         "addProps": "SM_BASE_INTR",
+         "dialogProps" : {
+           "twoCaption": "Calc",
+           "twoURI" : "./data/stock-markets/intrinio-calc.json",
+           "dataSource" : "Intrinio: US PC Financials: Calculation & Metric"
+         }
+     },
+     "SM_INTR_INCOME" : {
+         "type" : "SM_INTR_INCOME",
+         "menuTitle" : "Income Statement",
+         "chartContainerCaption" : "Intrinio: Income Statement",
+         "dialogType": "DialogType4",
+         "addProps": "SM_BASE_INTR",
+         "dialogProps" : {
+           "twoCaption": "Income",
+           "twoURI" : "./data/stock-markets/intrinio-income.json",
+           "dataSource" : "Intrinio: US PC Financials: Income Statement"
+         }
+     },
+     "SM_INTR_BALANCE" : {
+         "type" : "SM_INTR_BALANCE",
+         "menuTitle" : "Balance Sheet",
+         "chartContainerCaption" : "Intrinio: Balance Sheet",
+         "dialogType": "DialogType4",
+         "addProps": "SM_BASE_INTR",
+         "dialogProps" : {
+           "twoCaption": "Balance",
+           "twoURI" : "./data/stock-markets/intrinio-balance.json",
+           "dataSource" : "Intrinio: US PC Financials: Balance Sheet"
+         }
+     },
+     "SM_INTR_CASH" : {
+         "type" : "SM_INTR_CASH",
+         "menuTitle" : "Cash Flow Statement",
+         "chartContainerCaption" : "Intrinio: Cash Flow Statement",
+         "dialogType": "DialogType4",
+         "addProps": "SM_BASE_INTR",
+         "dialogProps" : {
+           "twoCaption": "Cash",
+           "twoURI" : "./data/stock-markets/intrinio-cash.json",
+           "dataSource" : "Intrinio: US PC Financials: Cash Flow Statement"
+         }
      }
+
    }
 }

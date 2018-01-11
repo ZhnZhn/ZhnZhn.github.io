@@ -1,10 +1,14 @@
+import { LoadType as LT } from '../../constants/Type'
+
+const _settings = {};
+const _withProxy = [
+  LT.FS, LT.FAO,
+  LT.NST, LT.NST_2,
+  LT.SWS
+];
 
 const SettingSlice = {
   setting: {
-    quandlKey: undefined,
-    barchartKey: undefined,
-    alphaKey: undefined,
-    beaKey: undefined,
     proxy: 'https://cors-anywhere.herokuapp.com/',
     isAdminMode: false,
     isDrawDeltaExtrems: false,
@@ -13,10 +17,11 @@ const SettingSlice = {
 
   exportSettingFn(){
     return {
-      setQuandlKey: this.setSetting('quandlKey').bind(this),
-      setAlphaKey: this.setSetting('alphaKey').bind(this),
-      setBarcharKey: this.setSetting('barchartKey').bind(this),
-      setBeaKey: this.setSetting('beaKey').bind(this),
+      key1: this.fSetKey([LT.AL]),
+      key2: this.fSetKey([LT.B]),
+      key3: this.fSetKey([LT.BEA]),
+      key4: this.fSetKey([LT.INTR]),
+      key5: this.fSetKey([LT.Q]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this),
       isAdminMode: this.isAdminMode.bind(this),
@@ -25,22 +30,27 @@ const SettingSlice = {
     };
   },
 
+  fSetKey: (propName) => (value) => {
+    _settings[propName] = value
+  },
+
+  getKey(id){
+    switch(id){
+      case LT.AL_I: case LT.AL_S:
+         return _settings[LT.AL];
+      default:
+         return _settings[id];
+    }
+  },
+
   setSetting: (propName) => function (value) {
     this.setting[propName] = value
   },
-  getQuandlKey(){
-    return this.setting.quandlKey;
-  },
-  getBarchartKey(){
-    return this.setting.barchartKey;
-  },
-  getAlphaKey(){
-    return this.setting.alphaKey;
-  },
-  getBeaKey(){
-    return this.setting.beaKey;
-  },
-  getProxy(){
+
+  getProxy(loadId){
+    if (_withProxy.indexOf(loadId) === -1) {
+      return undefined;
+    }
     return this.setting.proxy;
   },
   isSetting(propName, value){

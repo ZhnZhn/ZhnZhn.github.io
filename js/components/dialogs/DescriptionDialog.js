@@ -44,10 +44,10 @@ var STYLE = {
     top: '10%',
     left: '10%',
     width: 'auto',
-    maxWidth: '80%'
+    maxWidth: '89%'
   },
   DIV: {
-    padding: 16
+    padding: '16px'
   }
 };
 
@@ -132,4 +132,4 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
   data: {}
 }, _temp);
 exports.default = DescriptionDialog;
-//# sourceMappingURL=DescriptionDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DescriptionDialog.js.map

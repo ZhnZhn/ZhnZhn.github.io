@@ -9,11 +9,11 @@ const STYLE = {
   DIALOG : {
     top: '10%',
     left: '10%',
-    width:'auto',
-    maxWidth:'80%'
+    width: 'auto',
+    maxWidth: '89%'
   },
   DIV : {
-    padding:16
+    padding: '16px'
   }
 }
 

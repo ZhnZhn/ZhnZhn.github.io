@@ -2,7 +2,7 @@
 const createLoadOptions = (props={}, options={}) => {
   const {
           fnValue, dataColumn, loadId, dataSource,
-          isPremium, dfProps={}
+          isPremium, linkFn, dfProps={}
         } = props
       , { one, two, fromDate, toDate, hasSecondYAxis } = options
       , _value = (typeof fnValue === 'function')
@@ -21,6 +21,7 @@ const createLoadOptions = (props={}, options={}) => {
        isPremium: isPremium,
        dataSource: dataSource,
        hasSecondYAxis: hasSecondYAxis,
+       linkFn: linkFn,
        oneCaption: one.caption,
        twoCaption: two.caption,
        one: one.value,

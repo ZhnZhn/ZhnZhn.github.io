@@ -21,7 +21,7 @@ const STEP = {
   T3: "Select params and enter query date in a draggable Dialog",
   T4: "Click a button Load",
   T5: "Also you can export chart to PNG, JPG, SVG, print to PDF"
-}
+};
 
 class About extends Component {
   constructor(props){

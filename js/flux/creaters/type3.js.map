@@ -1,1 +1,38 @@
-{"version":3,"sources":["../../../src/flux/creaters/type3.js"],"names":["createLoadOptions","props","options","columnName","dataColumn","seriaColumnNames","loadId","fnValue","fnItemCaption","linkFn","dataSource","dfProps","one","fromDate","toDate","transform","value","caption","_value","_itemCaption","undefined","_transform","_subtitle","title","subtitle","item","oneCaption","itemCaption"],"mappings":";;;;;;;;;;;;AACA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,UAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,UAAfC,OAAe,uEAAP,EAAO;;AAAA,UAE1CC,UAF0C,GAMxCF,KANwC,CAE1CE,UAF0C;AAAA,UAE9BC,UAF8B,GAMxCH,KANwC,CAE9BG,UAF8B;AAAA,UAElBC,gBAFkB,GAMxCJ,KANwC,CAElBI,gBAFkB;AAAA,UAEAC,MAFA,GAMxCL,KANwC,CAEAK,MAFA;AAAA,UAG1CC,OAH0C,GAMxCN,KANwC,CAG1CM,OAH0C;AAAA,UAGjCC,aAHiC,GAMxCP,KANwC,CAGjCO,aAHiC;AAAA,UAI1CC,MAJ0C,GAMxCR,KANwC,CAI1CQ,MAJ0C;AAAA,UAIlCC,UAJkC,GAMxCT,KANwC,CAIlCS,UAJkC;AAAA,UAK1CC,OAL0C,GAMxCV,KANwC,CAK1CU,OAL0C;AAAA,UAO1CC,GAP0C,GAOLV,OAPK,CAO1CU,GAP0C;AAAA,UAOrCC,QAPqC,GAOLX,OAPK,CAOrCW,QAPqC;AAAA,UAO3BC,MAP2B,GAOLZ,OAPK,CAO3BY,MAP2B;AAAA,UAOnBC,SAPmB,GAOLb,OAPK,CAOnBa,SAPmB;AAAA,UAQ1CC,KAR0C,GAQvBJ,GARuB,CAQ1CI,KAR0C;AAAA,UAQnCC,OARmC,GAQvBL,GARuB,CAQnCK,OARmC;AAAA,UAS5CC,MAT4C,GASlC,OAAOX,OAAP,KAAmB,UAApB,GACHA,QAAQS,KAAR,CADG,GAEHA,KAXsC;AAAA,UAY5CG,YAZ4C,GAY5B,OAAOX,aAAP,KAAyB,UAA1B,GACTA,cAAcQ,KAAd,CADS,GAETI,SAdsC;AAAA,UAe5CC,UAf4C,GAe9BN,SAAD,GACPA,UAAUC,KADH,GAEPI,SAjBsC;AAAA,UAkB5CE,SAlB4C,GAkB/BP,SAAD,GACNA,UAAUE,OADJ,GAENG,SApBsC;;AAqBlD;AACEJ,mBAAQE,MADV;AAEEH,uBAAWM,UAFb;AAGEE,mBAAON,OAHT;AAIEO,sBAAUF,SAJZ;AAKEG,kBAAMb,GALR;AAMEc,wBAAYT,OANd;AAOEJ,sBAAUA,QAPZ;AAQEC,oBAAQA,MARV;AASEX,wBAAaA,UATf;AAUEC,wBAAaA,UAVf;AAWEuB,yBAAcR,YAXhB;AAYEb,oBAASA,MAZX;AAaEG,oBAASA,MAbX;AAcEJ,8CAdF,EAcoBK;AAdpB,SAeKC,OAfL;AAiBD,CAtCD;;kBAwCeX,iB","file":"type3.js","sourcesContent":["\r\nconst createLoadOptions = (props={}, options={}) => {\r\n  const {\r\n          columnName, dataColumn, seriaColumnNames, loadId,\r\n          fnValue, fnItemCaption,\r\n          linkFn, dataSource,\r\n          dfProps\r\n        } = props\r\n      , { one, fromDate, toDate, transform } = options\r\n      , { value, caption } = one\r\n      , _value = (typeof fnValue === 'function')\r\n            ? fnValue(value)\r\n            : value\r\n      , _itemCaption = (typeof fnItemCaption === 'function')\r\n            ? fnItemCaption(value)\r\n            : undefined\r\n      , _transform = (transform)\r\n            ? transform.value\r\n            : undefined\r\n      , _subtitle = (transform)\r\n            ? transform.caption\r\n            : undefined;\r\n  return {\r\n    value : _value,\r\n    transform: _transform,\r\n    title: caption,\r\n    subtitle: _subtitle,\r\n    item: one,\r\n    oneCaption: caption,\r\n    fromDate: fromDate,\r\n    toDate: toDate,\r\n    columnName : columnName,\r\n    dataColumn : dataColumn,\r\n    itemCaption : _itemCaption,\r\n    loadId : loadId,\r\n    linkFn : linkFn,\r\n    seriaColumnNames, dataSource,\r\n    ...dfProps\r\n  }\r\n}\r\n\r\nexport default createLoadOptions\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\creaters\\type3.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\creaters\\type3.js",
+ "sourceRoot": "",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "columnName",
+  "dataColumn",
+  "seriaColumnNames",
+  "loadId",
+  "fnValue",
+  "fnItemCaption",
+  "linkFn",
+  "dataSource",
+  "dfProps",
+  "one",
+  "fromDate",
+  "toDate",
+  "transform",
+  "value",
+  "caption",
+  "_value",
+  "_itemCaption",
+  "undefined",
+  "_transform",
+  "_subtitle",
+  "title",
+  "subtitle",
+  "item",
+  "oneCaption",
+  "itemCaption"
+ ],
+ "mappings": ";;;;;;;;;;;;AACA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,UAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,UAAfC,OAAe,uEAAP,EAAO;;AAAA,UAE1CC,UAF0C,GAMxCF,KANwC,CAE1CE,UAF0C;AAAA,UAE9BC,UAF8B,GAMxCH,KANwC,CAE9BG,UAF8B;AAAA,UAElBC,gBAFkB,GAMxCJ,KANwC,CAElBI,gBAFkB;AAAA,UAEAC,MAFA,GAMxCL,KANwC,CAEAK,MAFA;AAAA,UAG1CC,OAH0C,GAMxCN,KANwC,CAG1CM,OAH0C;AAAA,UAGjCC,aAHiC,GAMxCP,KANwC,CAGjCO,aAHiC;AAAA,UAI1CC,MAJ0C,GAMxCR,KANwC,CAI1CQ,MAJ0C;AAAA,UAIlCC,UAJkC,GAMxCT,KANwC,CAIlCS,UAJkC;AAAA,UAK1CC,OAL0C,GAMxCV,KANwC,CAK1CU,OAL0C;AAAA,UAO1CC,GAP0C,GAOLV,OAPK,CAO1CU,GAP0C;AAAA,UAOrCC,QAPqC,GAOLX,OAPK,CAOrCW,QAPqC;AAAA,UAO3BC,MAP2B,GAOLZ,OAPK,CAO3BY,MAP2B;AAAA,UAOnBC,SAPmB,GAOLb,OAPK,CAOnBa,SAPmB;AAAA,UAQ1CC,KAR0C,GAQvBJ,GARuB,CAQ1CI,KAR0C;AAAA,UAQnCC,OARmC,GAQvBL,GARuB,CAQnCK,OARmC;AAAA,UAS5CC,MAT4C,GASlC,OAAOX,OAAP,KAAmB,UAApB,GACHA,QAAQS,KAAR,CADG,GAEHA,KAXsC;AAAA,UAY5CG,YAZ4C,GAY5B,OAAOX,aAAP,KAAyB,UAA1B,GACTA,cAAcQ,KAAd,CADS,GAETI,SAdsC;AAAA,UAe5CC,UAf4C,GAe9BN,SAAD,GACPA,UAAUC,KADH,GAEPI,SAjBsC;AAAA,UAkB5CE,SAlB4C,GAkB/BP,SAAD,GACNA,UAAUE,OADJ,GAENG,SApBsC;;AAqBlD;AACEJ,mBAAQE,MADV;AAEEH,uBAAWM,UAFb;AAGEE,mBAAON,OAHT;AAIEO,sBAAUF,SAJZ;AAKEG,kBAAMb,GALR;AAMEc,wBAAYT,OANd;AAOEJ,sBAAUA,QAPZ;AAQEC,oBAAQA,MARV;AASEX,wBAAaA,UATf;AAUEC,wBAAaA,UAVf;AAWEuB,yBAAcR,YAXhB;AAYEb,oBAASA,MAZX;AAaEG,oBAASA,MAbX;AAcEJ,8CAdF,EAcoBK;AAdpB,SAeKC,OAfL;AAiBD,CAtCD;;kBAwCeX,iB"
+}

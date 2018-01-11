@@ -7,7 +7,7 @@ const {
   Quandl, UnComtrade, FaoStat,
   EuroStat, StatNorway, StatSweden,
   AlphaVantage, Barchart,
-  Iex, Insee, Bea
+  Iex, Insee, Bea, Intrinio
 } = Adapter;
 
 const LoadImpl = {
@@ -36,7 +36,8 @@ const LoadImpl = {
     ...Insee
   }),
 
-  Bea: f({ ...Bea })
+  Bea: f({ ...Bea }),
+  Intrinio: f({ ...Intrinio })
 };
 
 export default LoadImpl

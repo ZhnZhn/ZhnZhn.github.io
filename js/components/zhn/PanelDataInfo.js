@@ -131,12 +131,12 @@ var PanelDataInfo = function (_Component) {
           frequency = info.frequency,
           database_code = info.database_code,
           dataset_code = info.dataset_code,
-          _info$description = info.description,
-          description = _info$description === undefined ? '' : _info$description,
+          description = info.description,
           item = zhInfo.item,
           linkFn = zhInfo.linkFn,
           styleShow = isShow ? styles.rootShow : styles.rootHide,
-          _isDescriptionClose = description.length > 200 ? true : false;
+          _isDescr = description ? true : false,
+          _isDescrClose = _isDescr && description.length > 200 ? true : false;
 
       return _react2.default.createElement(
         'div',
@@ -172,11 +172,11 @@ var PanelDataInfo = function (_Component) {
           styleText: styles.text
         }),
         this._renderQuandlLink(database_code, dataset_code),
-        _react2.default.createElement(
+        _isDescr && _react2.default.createElement(
           _OpenClose2.default,
           {
             caption: 'Description',
-            isClose: _isDescriptionClose,
+            isClose: _isDescrClose,
             style: styles.description
           },
           _react2.default.createElement(_InfoPart2.default, {
@@ -196,4 +196,4 @@ var PanelDataInfo = function (_Component) {
 }(_react.Component);
 
 exports.default = PanelDataInfo;
-//# sourceMappingURL=PanelDataInfo.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\PanelDataInfo.js.map

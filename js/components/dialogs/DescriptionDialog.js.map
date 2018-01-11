@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../../src/components/dialogs/DescriptionDialog.jsx"],"names":["DESCR_EMPTY","STYLE","DIALOG","top","left","width","maxWidth","DIV","padding","DescriptionDialog","props","_loadDescr","descrUrl","uri","onFetch","_setDescrHtml","json","text","setState","descrHtml","state","nextProps","isShow","data","nextState","onClose","_html","sanitize","__html","defaultProps"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AAEA;;AACA;;;;;;AAEA,IAAMA,cAAc,kEAApB;AACA,IAAMC,QAAQ;AACZC,UAAS;AACPC,SAAK,KADE;AAEPC,UAAM,KAFC;AAGPC,WAAM,MAHC;AAIPC,cAAS;AAJF,GADG;AAOZC,OAAM;AACJC,aAAQ;AADJ;AAPM,CAAd;;IAYMC,iB;;;AAKJ,6BAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UA4BlBC,UA5BkB,GA4BL,YAAmB;AAAA,UAAjBC,QAAiB,uEAAR,EAAQ;;AAC7B,UAAKA,QAAL,EAAgB;AACd,+BAAS,EAAEC,KAAKD,QAAP,EAAiBE,SAAS,MAAKC,aAA/B,EAAT;AACD,OAFD,MAEO;AACL,cAAKA,aAAL;AACD;AACH,KAlCiB;;AAAA,UAmClBA,aAnCkB,GAmCF,YAAkC;AAAA,qFAAP,EAAO;AAAA,2BAA/BC,IAA+B;AAAA,UAA1BC,IAA0B,6BAArBjB,WAAqB;;AAChD,YAAKkB,QAAL,CAAc,EAAEC,WAAWF,IAAb,EAAd;AACD,KArCiB;;AAEhB,UAAKG,KAAL,GAAa;AACXD,iBAAW;AADA,KAAb;AAFgB;AAKjB;;;;8CAEyBE,S,EAAU;AAClC,UACIA,cAAc,KAAKX,KAAnB,IACGW,UAAUC,MAAV,KAAqB,KAAKZ,KAAL,CAAWY,MADnC,IAEGD,UAAUE,IAAV,CAAeX,QAAf,KAA4B,KAAKF,KAAL,CAAWa,IAAX,CAAgBX,QAHnD,EAIE;AACA,aAAKD,UAAL,CAAgBU,UAAUE,IAAV,CAAeX,QAA/B;AACD;AACF;;;0CAEqBS,S,EAAWG,S,EAAU;AACzC,UAAIH,cAAc,KAAKX,KAAnB,IAA4BW,UAAUC,MAAV,KAAqB,KAAKZ,KAAL,CAAWY,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;wCAEkB;AACjB,WAAKX,UAAL,CAAgB,KAAKD,KAAL,CAAWa,IAAX,CAAgBX,QAAhC;AACD;;;6BAaO;AAAA,mBACsB,KAAKF,KAD3B;AAAA,UACEY,MADF,UACEA,MADF;AAAA,UACUG,OADV,UACUA,OADV;AAAA,UAEEN,SAFF,GAEgB,KAAKC,KAFrB,CAEED,SAFF;AAAA,UAGAO,KAHA,GAGQ,oBAAUC,QAAV,CAAmBR,SAAnB,CAHR;;AAIN,aACG;AAAA;AAAA;AACE,mBAAQ,4BADV;AAEE,kBAAQG,MAFV;AAGE,iBAAOrB,MAAMC,MAHf;AAIE,mBAASuB;AAJX;AAME;AACG,iBAAOxB,MAAMM,GADhB;AAEG,mCAAyB,EAAEqB,QAAQF,KAAV;AAF5B;AANF,OADH;AAcD;;;4BA7DMG,Y,GAAe;AACpBN,QAAM;AADc,C;kBAgETd,iB","file":"DescriptionDialog.js","sourcesContent":["import React, { Component } from 'react';\r\nimport DOMPurify from 'dompurify';\r\n\r\nimport { fetchTxt } from '../../utils/fnFetch';\r\nimport ModalDialog from '../zhn-moleculs/ModalDialog';\r\n\r\nconst DESCR_EMPTY = '<p class=\"descr__part\">Description Empty for this Datasource</p>';\r\nconst STYLE = {\r\n  DIALOG : {\r\n    top: '10%',\r\n    left: '10%',\r\n    width:'auto',\r\n    maxWidth:'80%'\r\n  },\r\n  DIV : {\r\n    padding:16\r\n  }\r\n}\r\n\r\nclass DescriptionDialog extends Component {\r\n  static defaultProps = {\r\n    data: {}\r\n  }\r\n\r\n  constructor(props){\r\n    super()\r\n    this.state = {\r\n      descrHtml: ''\r\n    }\r\n  }\r\n\r\n  componentWillReceiveProps(nextProps){\r\n    if (\r\n        nextProps !== this.props\r\n        && nextProps.isShow !== this.props.isShow\r\n        && nextProps.data.descrUrl !== this.props.data.descrUrl\r\n    ) {\r\n      this._loadDescr(nextProps.data.descrUrl)\r\n    }\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {\r\n      return false;\r\n    }\r\n    return true;\r\n  }\r\n\r\n  componentDidMount(){\r\n    this._loadDescr(this.props.data.descrUrl)\r\n  }\r\n\r\n  _loadDescr = ( descrUrl='' ) => {\r\n     if ( descrUrl ) {\r\n       fetchTxt({ uri: descrUrl, onFetch: this._setDescrHtml})\r\n     } else {\r\n       this._setDescrHtml();\r\n     }\r\n  }\r\n  _setDescrHtml = ({ json:text=DESCR_EMPTY }={}) => {\r\n    this.setState({ descrHtml: text })\r\n  }\r\n\r\n  render(){\r\n    const { isShow, onClose } = this.props\r\n        , { descrHtml } = this.state\r\n        , _html = DOMPurify.sanitize(descrHtml);\r\n    return (\r\n       <ModalDialog\r\n         caption=\"Description for Datasource\"\r\n         isShow={isShow}\r\n         style={STYLE.DIALOG}\r\n         onClose={onClose}\r\n       >\r\n         <div\r\n            style={STYLE.DIV}\r\n            dangerouslySetInnerHTML={{ __html: _html }}\r\n         >\r\n         </div>\r\n       </ModalDialog>\r\n    );\r\n  }\r\n}\r\n\r\nexport default DescriptionDialog\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\dialogs\\DescriptionDialog.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\dialogs\\DescriptionDialog.js",
+ "sourceRoot": "",
+ "names": [
+  "DESCR_EMPTY",
+  "STYLE",
+  "DIALOG",
+  "top",
+  "left",
+  "width",
+  "maxWidth",
+  "DIV",
+  "padding",
+  "DescriptionDialog",
+  "props",
+  "_loadDescr",
+  "descrUrl",
+  "uri",
+  "onFetch",
+  "_setDescrHtml",
+  "json",
+  "text",
+  "setState",
+  "descrHtml",
+  "state",
+  "nextProps",
+  "isShow",
+  "data",
+  "nextState",
+  "onClose",
+  "_html",
+  "sanitize",
+  "__html",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AAEA;;AACA;;;;;;AAEA,IAAMA,cAAc,kEAApB;AACA,IAAMC,QAAQ;AACZC,UAAS;AACPC,SAAK,KADE;AAEPC,UAAM,KAFC;AAGPC,WAAO,MAHA;AAIPC,cAAU;AAJH,GADG;AAOZC,OAAM;AACJC,aAAS;AADL;AAPM,CAAd;;IAYMC,iB;;;AAKJ,6BAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UA4BlBC,UA5BkB,GA4BL,YAAmB;AAAA,UAAjBC,QAAiB,uEAAR,EAAQ;;AAC7B,UAAKA,QAAL,EAAgB;AACd,+BAAS,EAAEC,KAAKD,QAAP,EAAiBE,SAAS,MAAKC,aAA/B,EAAT;AACD,OAFD,MAEO;AACL,cAAKA,aAAL;AACD;AACH,KAlCiB;;AAAA,UAmClBA,aAnCkB,GAmCF,YAAkC;AAAA,qFAAP,EAAO;AAAA,2BAA/BC,IAA+B;AAAA,UAA1BC,IAA0B,6BAArBjB,WAAqB;;AAChD,YAAKkB,QAAL,CAAc,EAAEC,WAAWF,IAAb,EAAd;AACD,KArCiB;;AAEhB,UAAKG,KAAL,GAAa;AACXD,iBAAW;AADA,KAAb;AAFgB;AAKjB;;;;8CAEyBE,S,EAAU;AAClC,UACIA,cAAc,KAAKX,KAAnB,IACGW,UAAUC,MAAV,KAAqB,KAAKZ,KAAL,CAAWY,MADnC,IAEGD,UAAUE,IAAV,CAAeX,QAAf,KAA4B,KAAKF,KAAL,CAAWa,IAAX,CAAgBX,QAHnD,EAIE;AACA,aAAKD,UAAL,CAAgBU,UAAUE,IAAV,CAAeX,QAA/B;AACD;AACF;;;0CAEqBS,S,EAAWG,S,EAAU;AACzC,UAAIH,cAAc,KAAKX,KAAnB,IAA4BW,UAAUC,MAAV,KAAqB,KAAKZ,KAAL,CAAWY,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;wCAEkB;AACjB,WAAKX,UAAL,CAAgB,KAAKD,KAAL,CAAWa,IAAX,CAAgBX,QAAhC;AACD;;;6BAaO;AAAA,mBACsB,KAAKF,KAD3B;AAAA,UACEY,MADF,UACEA,MADF;AAAA,UACUG,OADV,UACUA,OADV;AAAA,UAEEN,SAFF,GAEgB,KAAKC,KAFrB,CAEED,SAFF;AAAA,UAGAO,KAHA,GAGQ,oBAAUC,QAAV,CAAmBR,SAAnB,CAHR;;AAIN,aACG;AAAA;AAAA;AACE,mBAAQ,4BADV;AAEE,kBAAQG,MAFV;AAGE,iBAAOrB,MAAMC,MAHf;AAIE,mBAASuB;AAJX;AAME;AACG,iBAAOxB,MAAMM,GADhB;AAEG,mCAAyB,EAAEqB,QAAQF,KAAV;AAF5B;AANF,OADH;AAcD;;;4BA7DMG,Y,GAAe;AACpBN,QAAM;AADc,C;kBAgETd,iB"
+}

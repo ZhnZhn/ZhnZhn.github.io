@@ -168,6 +168,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           oneCaption = _props.oneCaption,
           oneURI = _props.oneURI,
           oneJsonProp = _props.oneJsonProp,
+          isWithOneInput = _props.isWithOneInput,
           twoCaption = _props.twoCaption,
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
@@ -203,6 +204,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           jsonProp: oneJsonProp,
           caption: oneCaption,
           optionNames: 'Stocks',
+          isWithInput: isWithOneInput,
           onSelect: this._handleSelectOne
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
@@ -248,4 +250,4 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   return DialogType4;
 }(_react.Component)) || _class) || _class);
 exports.default = DialogType4;
-//# sourceMappingURL=DialogType4.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map

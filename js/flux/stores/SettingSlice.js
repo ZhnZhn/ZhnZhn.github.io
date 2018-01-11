@@ -4,12 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _Type = require('../../constants/Type');
+
+var _settings = {};
+var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.NST, _Type.LoadType.NST_2, _Type.LoadType.SWS];
+
 var SettingSlice = {
   setting: {
-    quandlKey: undefined,
-    barchartKey: undefined,
-    alphaKey: undefined,
-    beaKey: undefined,
     proxy: 'https://cors-anywhere.herokuapp.com/',
     isAdminMode: false,
     isDrawDeltaExtrems: false,
@@ -18,10 +19,11 @@ var SettingSlice = {
 
   exportSettingFn: function exportSettingFn() {
     return {
-      setQuandlKey: this.setSetting('quandlKey').bind(this),
-      setAlphaKey: this.setSetting('alphaKey').bind(this),
-      setBarcharKey: this.setSetting('barchartKey').bind(this),
-      setBeaKey: this.setSetting('beaKey').bind(this),
+      key1: this.fSetKey([_Type.LoadType.AL]),
+      key2: this.fSetKey([_Type.LoadType.B]),
+      key3: this.fSetKey([_Type.LoadType.BEA]),
+      key4: this.fSetKey([_Type.LoadType.INTR]),
+      key5: this.fSetKey([_Type.LoadType.Q]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this),
       isAdminMode: this.isAdminMode.bind(this),
@@ -31,24 +33,32 @@ var SettingSlice = {
   },
 
 
+  fSetKey: function fSetKey(propName) {
+    return function (value) {
+      _settings[propName] = value;
+    };
+  },
+
+  getKey: function getKey(id) {
+    switch (id) {
+      case _Type.LoadType.AL_I:case _Type.LoadType.AL_S:
+        return _settings[_Type.LoadType.AL];
+      default:
+        return _settings[id];
+    }
+  },
+
+
   setSetting: function setSetting(propName) {
     return function (value) {
       this.setting[propName] = value;
     };
   },
-  getQuandlKey: function getQuandlKey() {
-    return this.setting.quandlKey;
-  },
-  getBarchartKey: function getBarchartKey() {
-    return this.setting.barchartKey;
-  },
-  getAlphaKey: function getAlphaKey() {
-    return this.setting.alphaKey;
-  },
-  getBeaKey: function getBeaKey() {
-    return this.setting.beaKey;
-  },
-  getProxy: function getProxy() {
+
+  getProxy: function getProxy(loadId) {
+    if (_withProxy.indexOf(loadId) === -1) {
+      return undefined;
+    }
     return this.setting.proxy;
   },
   isSetting: function isSetting(propName, value) {

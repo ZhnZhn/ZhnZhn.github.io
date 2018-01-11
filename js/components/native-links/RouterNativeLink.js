@@ -28,6 +28,10 @@ var _FaoStatLink = require('./FaoStatLink');
 
 var _FaoStatLink2 = _interopRequireDefault(_FaoStatLink);
 
+var _FredLink = require('./FredLink');
+
+var _FredLink2 = _interopRequireDefault(_FredLink);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterNativeLink = {
@@ -36,8 +40,9 @@ var RouterNativeLink = {
   NASDAQ: _NasdaqLink2.default,
   LME: _LmeLink2.default,
   UN_COMTRADE: _UnComtradeLink2.default,
-  FAO_STAT: _FaoStatLink2.default
+  FAO_STAT: _FaoStatLink2.default,
+  FRED: _FredLink2.default
 };
 
 exports.default = RouterNativeLink;
-//# sourceMappingURL=RouterNativeLink.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\RouterNativeLink.js.map

@@ -25,7 +25,7 @@ const createLoadOptions = (props={}, options={}) => {
     transform: _transform,
     title: caption,
     subtitle: _subtitle,
-    item: one,
+    item: one,    
     oneCaption: caption,
     fromDate: fromDate,
     toDate: toDate,

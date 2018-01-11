@@ -33,6 +33,9 @@ const ST = {
     padding: '8px 4px 4px 6px',
     lineHeight: 1.4
   },
+  MAX_WIDTH: {
+    maxWidth: '450px'
+  },
   SETTINGS: {
     color: '#607d8b'
   }
@@ -41,7 +44,7 @@ const ST = {
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 11):"
+     caption="Data Providers (All 12):"
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM}}
      childStyle={ST.ROOT_CHILD}
   >
@@ -61,10 +64,10 @@ const DataProviders = ({ isClose }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Iex />
-        </span>  
+        </span>
       </p>
       <OpenClose
-        caption="(4) Required API key:"
+        caption="(5) Required API key:"
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
         isClose={true}
@@ -86,7 +89,9 @@ const DataProviders = ({ isClose }) => (
         <span style={S.PROVIDER}>
           <Link.Bea/>
         </span>
-
+        <span style={S.PROVIDER}>
+          <Link.Intrinio/>
+        </span>
       </p>
       <div style={ST.NOTE}>
         <p>
@@ -94,6 +99,13 @@ const DataProviders = ({ isClose }) => (
           User API key from data provider required for request.&nbsp;
           <br className={CL.BR} />
           Can be set in <span style={ST.SETTINGS}>SETTINGS&nbsp;[s]</span>.
+        </p>
+      </div>
+      <div style={ST.NOTE}>
+        <p style={ST.MAX_WIDTH}>
+          <span style={S.BLACK}>Note:&nbsp;</span>
+          This product uses the Bureau of Economic Analysis (BEA)
+          Data API but is not endorsed or certified by BEA.
         </p>
       </div>
       </OpenClose>

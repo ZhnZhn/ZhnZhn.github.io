@@ -75,6 +75,13 @@ const Bea = withProps({
   title: "U.S. Bureau of Economic Analysis"
 })(BaseComponent)
 
+const Intrinio = withProps({
+  className: CL_LINK,
+  href: "https://intrinio.com",
+  dfStyle: S.WHITE,
+  title: 'Intrinio'
+})(BaseComponent)
+
 const  Insee = withProps({
   className: CL_LINK,
   href: "https://www.insee.fr/en/accueil",
@@ -106,6 +113,7 @@ export default {
   UnComtrade,
   FaoStat,
   Bea,
+  Intrinio,
   Insee,
   StatNorway,
   StatSweden

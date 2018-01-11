@@ -6,7 +6,9 @@ const NASDAQ_BASE = 'https://www.nasdaq.com/symbol/'
     , CAPTION = 'NASDAQ Link';
 
 const NasdaqLink = ({ item={}, caption=CAPTION, style }) => {
-  const { text='', value } = item
+  const { text='', value } = typeof item === 'object'
+           ? item
+           : { value: item }
       , _ticket = (value)
             ? value.trim()
             : text.split('-')[0].trim();

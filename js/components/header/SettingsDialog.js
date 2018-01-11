@@ -57,7 +57,7 @@ var S = {
   MODAL: {
     position: 'static',
     width: '380px',
-    height: '360px',
+    height: '390px',
     margin: '70px auto 0px'
   },
   TITLE: {
@@ -66,10 +66,6 @@ var S = {
 };
 
 var SET = {
-  QUANDL_KEY: 'setQuandlKey',
-  ALPHA_KEY: 'setAlphaKey',
-  BARCHAR_KEY: 'setBarcharKey',
-  BEA_KEY: 'setBeaKey',
   PROXY: 'setProxy'
 };
 
@@ -102,10 +98,10 @@ var SettingsDialog = (_temp = _class = function (_Component) {
     var data = props.data;
 
 
-    _this._setQuandlKey = (0, _safeFn2.default)(data, SET.QUANDL_KEY);
-    _this._setAlphaKey = (0, _safeFn2.default)(data, SET.ALPHA_KEY);
-    _this._setBarcharKey = (0, _safeFn2.default)(data, SET.BARCHAR_KEY);
-    _this._setBeaKey = (0, _safeFn2.default)(data, SET.BEA_KEY);
+    var i = 1;
+    for (; i < 6; i++) {
+      _this['_setKey' + i] = (0, _safeFn2.default)(data, 'key' + i);
+    }
     _this._setProxy = (0, _safeFn2.default)(data, SET.PROXY);
 
     _this._commandButtons = [_react2.default.createElement(_FlatButton2.default, {
@@ -146,33 +142,41 @@ var SettingsDialog = (_temp = _class = function (_Component) {
           onClose: onClose
         },
         _react2.default.createElement(_RowSecret2.default, {
-          ref: this._refAlpha,
+          ref: this._ref1,
           titleStyle: S.TITLE,
           title: 'Alpha:',
           placeholder: 'Alpha Vantage API Key',
-          onEnter: this._setAlphaKey
+          onEnter: this._setKey1
         }),
         _react2.default.createElement(_RowSecret2.default, {
-          ref: this._refBarchart,
+          ref: this._ref2,
           titleStyle: S.TITLE,
           title: 'Barchar:',
           placeholder: 'Barchar API Key',
-          onEnter: this._setBarcharKey
+          onEnter: this._setKey2
         }),
         _react2.default.createElement(_RowSecret2.default, {
-          ref: this._refBea,
+          ref: this._ref3,
           titleStyle: S.TITLE,
           title: 'BEA:',
           placeholder: 'BEA API Key',
           maxLength: '36',
-          onEnter: this._setBeaKey
+          onEnter: this._setKey3
         }),
         _react2.default.createElement(_RowSecret2.default, {
-          ref: this._refQuandl,
+          ref: this._ref4,
+          titleStyle: S.TITLE,
+          title: 'Intrinio:',
+          placeholder: 'Intrinio API Key',
+          maxLength: '32',
+          onEnter: this._setKey4
+        }),
+        _react2.default.createElement(_RowSecret2.default, {
+          ref: this._ref5,
           titleStyle: S.TITLE,
           title: 'Quandl:',
           placeholder: 'Quandl API Key',
-          onEnter: this._setQuandlKey
+          onEnter: this._setKey5
         }),
         _react2.default.createElement(_RowPattern2.default, {
           ref: this._refProxy,
@@ -211,10 +215,11 @@ var SettingsDialog = (_temp = _class = function (_Component) {
     var onClose = _this2.props.onClose;
 
 
-    _this2._setQuandlKey(_this2.inputComp.getValue());
-    _this2._setAlphaKey(_this2.alphaComp.getValue());
-    _this2._setBarcharKey(_this2.barcharComp.getValue());
-    _this2._setBeaKey(_this2.beaComp.getValue());
+    _this2._setKey1(_this2.iComp1.getValue());
+    _this2._setKey2(_this2.iComp2.getValue());
+    _this2._setKey3(_this2.iComp3.getValue());
+    _this2._setKey4(_this2.iComp4.getValue());
+    _this2._setKey5(_this2.iComp5.getValue());
     _this2._setProxy(_this2.proxyComp.getValue());
 
     onClose();
@@ -227,20 +232,24 @@ var SettingsDialog = (_temp = _class = function (_Component) {
     fnMode(mode);
   };
 
-  this._refBarchart = function (n) {
-    return _this2.barcharComp = n;
+  this._ref1 = function (n) {
+    return _this2.iComp1 = n;
   };
 
-  this._refAlpha = function (n) {
-    return _this2.alphaComp = n;
+  this._ref2 = function (n) {
+    return _this2.iComp2 = n;
   };
 
-  this._refQuandl = function (n) {
-    return _this2.inputComp = n;
+  this._ref3 = function (n) {
+    return _this2.iComp3 = n;
   };
 
-  this._refBea = function (n) {
-    return _this2.beaComp = n;
+  this._ref4 = function (n) {
+    return _this2.iComp4 = n;
+  };
+
+  this._ref5 = function (n) {
+    return _this2.iComp5 = n;
   };
 
   this._refProxy = function (n) {

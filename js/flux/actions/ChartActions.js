@@ -82,28 +82,9 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
 };
 
 var _addSettings = function _addSettings(option) {
-  var loadId = option.loadId;
-
-  var apiKey = void 0,
-      proxy = void 0;
-  switch (loadId) {
-    case 'B':
-      apiKey = _ChartStore2.default.getBarchartKey();
-      break;
-    case 'AL':case 'AL_S':case 'AL_I':
-      apiKey = _ChartStore2.default.getAlphaKey();
-      break;
-    case 'BEA':
-      apiKey = _ChartStore2.default.getBeaKey();
-      break;
-    case 'FS':case 'FAO':
-    case 'NST':case 'NST_2':
-    case 'SWS':
-      proxy = _ChartStore2.default.getProxy();
-      break;
-    default:
-      apiKey = _ChartStore2.default.getQuandlKey();
-  }
+  var loadId = option.loadId,
+      apiKey = _ChartStore2.default.getKey(loadId),
+      proxy = _ChartStore2.default.getProxy(loadId);
 
   Object.assign(option, {
     apiKey: apiKey, proxy: proxy,
@@ -124,11 +105,40 @@ var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 
+var _withApiKey = ['B', 'AL', 'AL_S', 'AL_I', 'BEA', 'INTR'];
+var _apiTitle = {
+  B: 'Barchart Market Data',
+  AL: 'Alpha Vantage',
+  AL_S: 'Alpha Vantage',
+  AL_I: 'Alpha Vantage',
+  BEA: 'BEA',
+  INTR: 'Intrinio'
+};
+
+var _checkMsgApiKey = function _checkMsgApiKey(option) {
+  var apiKey = option.apiKey,
+      loadId = option.loadId,
+      isKeyFeature = option.isKeyFeature,
+      isPremium = option.isPremium;
+
+  if (!apiKey) {
+    if (_withApiKey.indexOf(loadId) !== -1) {
+      return M.withoutApiKey(_apiTitle[loadId]);
+    }
+    if (isKeyFeature) {
+      return M.FEATURE_WITHOUT_KEY;
+    }
+    if (isPremium) {
+      return M.PREMIUM_WITHOUT_KEY;
+    }
+  }
+  return false;
+};
+
 ChartActions[A.LOAD_STOCK].preEmit = function () {
-  var arg = [].slice.call(arguments),
-      confItem = arg[0],
-      chartType = confItem.chartType,
-      option = arg[1],
+  var confItem = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var chartType = confItem.chartType,
       key = _LogicUtils2.default.createKeyForConfig(option),
       isDoublingLoad = this.isLoading && key === this.idLoading,
       isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
@@ -138,22 +148,9 @@ ChartActions[A.LOAD_STOCK].preEmit = function () {
   this.isShouldEmit = true;
   _addSettings(option);
 
-  var loadId = option.loadId,
-      apiKey = option.apiKey,
-      isKeyFeature = option.isKeyFeature,
-      isPremium = option.isPremium;
-
-
-  if (loadId === 'B' && !apiKey) {
-    this.cancelLoad(option, M.withoutApiKey('Barchart Market Data'), false);
-  } else if ((loadId === 'AL' || loadId === 'AL_S' || loadId === 'AL_I') && !apiKey) {
-    this.cancelLoad(option, M.withoutApiKey('Alpha Vantage'), false);
-  } else if (loadId === 'BEA' && !apiKey) {
-    this.cancelLoad(option, M.withoutApiKey('BEA'), false);
-  } else if (isKeyFeature && !apiKey) {
-    this.cancelLoad(option, M.FEATURE_WITHOUT_KEY, false);
-  } else if (isPremium && !apiKey) {
-    this.cancelLoad(option, M.PREMIUM_WITHOUT_KEY, false);
+  var _msgApiKey = _checkMsgApiKey(option);
+  if (_msgApiKey) {
+    this.cancelLoad(option, _msgApiKey, false);
   } else if (isDoublingLoad) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta) {
@@ -163,7 +160,6 @@ ChartActions[A.LOAD_STOCK].preEmit = function () {
       this.cancelLoad(option, M.ALREADY_EXIST, true);
     }
   }
-
   return undefined;
 };
 
@@ -226,4 +222,4 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
 });
 
 exports.default = ChartActions;
-//# sourceMappingURL=ChartActions.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ChartActions.js.map
