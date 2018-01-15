@@ -117,14 +117,23 @@
   color: yellow;
 }
 
-.logo-intrinio__title {
+.logo-intrinio__t {
   color: inherit;
   display: inline-block;
   position: absolute;
-  top: 7px;
   left: 58px;
-  font-size: 30px;
   font-family: "Roboto", "Arial", sans-serif;
   font-weight: normal;
+}
+
+.logo-intrinio__t-up {
+  top: 1px;
+  left: 58px;
+  font-size: 30px;
   letter-spacing: 2px;
+}
+.logo-intrinio__t-down {
+  top: 36px;
+  left: 58px;
+  font-size: 12px;
 }
