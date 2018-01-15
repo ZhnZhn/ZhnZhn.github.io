@@ -7,6 +7,7 @@ import IconHighcharts from './IconHighcharts';
 import IconEurostat from './IconEurostat';
 import IconUnComtrade from './IconUnComtrade';
 import IconFaoStat from './IconFaoStat';
+import IconIntrinio from './IconIntrinio';
 
 const S = {
   ROOT : {
@@ -29,6 +30,7 @@ const IconLogoBar = (props) => (
      <IconEurostat />
      <IconUnComtrade />
      <IconFaoStat />
+     <IconIntrinio />
   </div>
 );
 

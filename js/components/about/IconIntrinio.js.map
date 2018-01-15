@@ -1,0 +1,15 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\IconIntrinio.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconIntrinio.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "SVG",
+  "width",
+  "height",
+  "IconIntrinio"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAK;AACHC,aAAO,OADJ;AAEHC,cAAQ;AAFL;AADG,CAAV;;AAOA,IAAMC,eAAe,SAAfA,YAAe;AAAA,UACrB;AAAA;AAAA;AACG,oBAAU,eADb;AAEG,gBAAM,sBAFT;AAGG,eAAK;AAHR;AAKG;AAAA;AAAA,WAAK,SAAQ,KAAb,EAAmB,OAAM,4BAAzB;AACK,qBAAQ,cADb;AAEK,iCAAoB,eAFzB;AAGK,mBAAOJ,EAAEC;AAHd;AAKG;AAAA;AAAA;AAAA;AAAA,UALH;AAMG,iDAAM,GAAE,i5BAAR;AANH,OALH;AAaG;AAAA;AAAA,WAAM,WAAU,sBAAhB;AAAA;AAAA;AAbH,IADqB;AAAA,CAArB;;kBAmBeG,Y"
+}

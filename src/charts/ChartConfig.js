@@ -361,7 +361,7 @@ ChartConfig.theme = {
       tickWidth: 3,
       tickLenght: 5,
       gridLineColor: COLOR.X_GRID_LINE,
-      gridLineDashStyle: "Solid",
+      gridLineDashStyle: "Dot",
       //gridLineDashStyle: "ShortDashDotDot",
       gridLineWidth: 1,
       labels:{
@@ -379,7 +379,7 @@ ChartConfig.theme = {
         tickWidth: 3,
         tickLenght: 5,
         gridLineColor: COLOR.Y_GRID_LINE,
-        gridLineDashStyle: "Solid",
+        gridLineDashStyle: "Dot",
         labels: {
           style: {
             color : COLOR.Y_LABEL,

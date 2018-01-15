@@ -197,7 +197,7 @@
           "valueFn" : "ROne",
           "loadId" : "AL",
           "columnName" : "Close",
-          "dataSource" : "Alpha Vantage"
+          "dataSource" : "Alpha Vantage: Indicators"
         }
     },
     "SM_A_INTRADAY" : {
@@ -214,7 +214,7 @@
           "valueFn" : "ROne",
           "loadId" : "AL",
           "columnName" : "Close",
-          "dataSource" : "Alpha Vantage"
+          "dataSource" : "Alpha Vantage: Intraday"
         }
      },
      "SM_A_SECTOR" : {

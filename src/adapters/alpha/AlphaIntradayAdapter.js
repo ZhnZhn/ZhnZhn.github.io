@@ -39,14 +39,11 @@ const _fMarker = color => ({
 const _fMarkerColor = (date) => {
   let marker, color;
   if (date.indexOf(C.TIME_START_DAY) !== -1) {
-   marker = _fMarker(C.START_DAY)
-   color = C.START_DAY
- } else if (date.indexOf(C.TIME_END_DAY) !== -1) {
+    marker = _fMarker(C.START_DAY)
+    color = C.START_DAY
+  } else if (date.indexOf(C.TIME_END_DAY) !== -1) {
     marker = _fMarker(C.END_DAY)
     color = C.END_DAY
-  }  else {
-   marker = undefined
-   color = undefined
   }
   return { marker, color };
 }
@@ -57,11 +54,11 @@ const _createSeriaData = (json, option, config, chartId) => {
   , _value = json[_propName]
   , _dateKeys = ( _value)
        ? Object.keys(_value).sort()
-       : [];
-  let i = 0, _max = _dateKeys.length
+       : []
   , _data = []
   , _dataVolume = [], _dataVolumeColumn = []
-  , _dataHigh = [], _dataLow = [], _dataOpen = []
+  , _dataHigh = [], _dataLow = [], _dataOpen = [];
+  let i = 0, _max = _dateKeys.length
   , _minClose = Number.POSITIVE_INFINITY
   , _maxClose = Number.NEGATIVE_INFINITY
   , _dateMs
@@ -128,7 +125,7 @@ const AlphaIntradayAdapter = {
       .add('chart', { spacingTop: 25 })
       .addCaption(value, `Time Series (${interval})`)
       .addTooltip(Tooltip.fnBasePointFormatterT)
-      .add('zhConfig', _crZhConfig())
+      .add('zhConfig', _crZhConfig(_chartId))
       .add('zhFnAddSeriesSma', fnAddSeriesSma)
       .add('zhFnRemoveSeries', fnRemoveSeries)
       .toConfig();

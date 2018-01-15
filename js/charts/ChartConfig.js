@@ -386,7 +386,7 @@ ChartConfig.theme = {
     tickWidth: 3,
     tickLenght: 5,
     gridLineColor: _Color2.default.X_GRID_LINE,
-    gridLineDashStyle: "Solid",
+    gridLineDashStyle: "Dot",
     //gridLineDashStyle: "ShortDashDotDot",
     gridLineWidth: 1,
     labels: {
@@ -404,7 +404,7 @@ ChartConfig.theme = {
     tickWidth: 3,
     tickLenght: 5,
     gridLineColor: _Color2.default.Y_GRID_LINE,
-    gridLineDashStyle: "Solid",
+    gridLineDashStyle: "Dot",
     labels: {
       style: {
         color: _Color2.default.Y_LABEL,
@@ -540,4 +540,4 @@ ChartConfig.fSeries = function () {
 };
 
 exports.default = ChartConfig;
-//# sourceMappingURL=ChartConfig.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartConfig.js.map

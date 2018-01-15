@@ -36,6 +36,10 @@ var _IconFaoStat = require('./IconFaoStat');
 
 var _IconFaoStat2 = _interopRequireDefault(_IconFaoStat);
 
+var _IconIntrinio = require('./IconIntrinio');
+
+var _IconIntrinio2 = _interopRequireDefault(_IconIntrinio);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
@@ -60,9 +64,10 @@ var IconLogoBar = function IconLogoBar(props) {
     _react2.default.createElement(_IconHighcharts2.default, null),
     _react2.default.createElement(_IconEurostat2.default, null),
     _react2.default.createElement(_IconUnComtrade2.default, null),
-    _react2.default.createElement(_IconFaoStat2.default, null)
+    _react2.default.createElement(_IconFaoStat2.default, null),
+    _react2.default.createElement(_IconIntrinio2.default, null)
   );
 };
 
 exports.default = IconLogoBar;
-//# sourceMappingURL=IconLogoBar.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\IconLogoBar.js.map

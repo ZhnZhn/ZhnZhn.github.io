@@ -71,9 +71,6 @@ var _fMarkerColor = function _fMarkerColor(date) {
   } else if (date.indexOf(C.TIME_END_DAY) !== -1) {
     marker = _fMarker(C.END_DAY);
     color = C.END_DAY;
-  } else {
-    marker = undefined;
-    color = undefined;
   }
   return { marker: marker, color: color };
 };
@@ -82,16 +79,16 @@ var _createSeriaData = function _createSeriaData(json, option, config, chartId) 
   var interval = option.interval,
       _propName = 'Time Series (' + interval + ')',
       _value = json[_propName],
-      _dateKeys = _value ? Object.keys(_value).sort() : [];
-
-  var i = 0,
-      _max = _dateKeys.length,
+      _dateKeys = _value ? Object.keys(_value).sort() : [],
       _data = [],
       _dataVolume = [],
       _dataVolumeColumn = [],
       _dataHigh = [],
       _dataLow = [],
-      _dataOpen = [],
+      _dataOpen = [];
+
+  var i = 0,
+      _max = _dateKeys.length,
       _minClose = Number.POSITIVE_INFINITY,
       _maxClose = Number.NEGATIVE_INFINITY,
       _dateMs = void 0,
@@ -153,7 +150,7 @@ var AlphaIntradayAdapter = {
 
     _createSeriaData(json, option, baseConfig, _chartId);
 
-    var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(_Tooltip2.default.fnBasePointFormatterT).add('zhConfig', _crZhConfig()).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
+    var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(_Tooltip2.default.fnBasePointFormatterT).add('zhConfig', _crZhConfig(_chartId)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
 
     return {
       config: config,
@@ -167,4 +164,4 @@ var AlphaIntradayAdapter = {
 };
 
 exports.default = AlphaIntradayAdapter;
-//# sourceMappingURL=AlphaIntradayAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\AlphaIntradayAdapter.js.map
