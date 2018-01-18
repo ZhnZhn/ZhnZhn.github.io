@@ -206,8 +206,11 @@ var _addDialogPropsTo = function _addDialogPropsTo(option) {
 
 ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
   _addDialogPropsTo(option);
+  var loadId = option.loadId;
 
-  var impl = _LoadConfig2.default[option.loadId];
+  option.proxy = _ChartStore2.default.getProxy(loadId);
+
+  var impl = _LoadConfig2.default[loadId];
   if (impl) {
     var addPropsTo = impl.addPropsTo;
 

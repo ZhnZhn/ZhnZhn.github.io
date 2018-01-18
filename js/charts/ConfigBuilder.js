@@ -80,6 +80,13 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     this.config = _ChartConfig2.default.fBaseAreaConfig();
     return this;
   },
+  initBaseArea2: function initBaseArea2(title, subtitle) {
+    this.config = _ChartConfig2.default.fBaseAreaConfig();
+    this.add('chart', { spacingTop: 25 });
+    this.addCaption(title, subtitle);
+    this.clearSeries();
+    return this;
+  },
   initBaseCategories: function initBaseCategories() {
     var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
@@ -214,4 +221,4 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
 });
 
 exports.default = ConfigBuilder;
-//# sourceMappingURL=ConfigBuilder.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ConfigBuilder.js.map

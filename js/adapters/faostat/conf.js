@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 var C = {
   DATASET_EMPTY: "Dataset is empty",
   ONE_BLANK: " ",
-  MM_DD: '-01-01'
+  MM_DD: '-12-31'
 };
 
 exports.default = C;
-//# sourceMappingURL=conf.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\conf.js.map

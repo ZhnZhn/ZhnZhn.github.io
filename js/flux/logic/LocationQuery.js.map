@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/flux/logic/LocationQuery.js"],"names":["HM_S","browserType","chartType","value","columnName","fromDate","toDate","_keyToValue","hm","r","propName","HM_R","LocationQuery","toOptions","obj","options","pN","Object","assign","getToDate","title","key"],"mappings":";;;;;;AACA;;;;;;AAEA,IAAMA,OAAO;AACXC,eAAa,IADF;AAEXC,aAAW,IAFA;AAGXC,SAAO,GAHI;;AAKXC,cAAY,IALD;AAMXC,YAAU,IANC;AAOXC,UAAQ;AAPG,CAAb;;AAUA,IAAMC,cAAc,SAAdA,WAAc,CAACC,EAAD,EAAQ;AAC1B,MAAMC,IAAI,EAAV;AACA,MAAIC,iBAAJ;AACA,OAAKA,QAAL,IAAiBF,EAAjB,EAAqB;AACnBC,MAAED,GAAGE,QAAH,CAAF,IAAkBA,QAAlB;AACD;AACD,SAAOD,CAAP;AACD,CAPD;;AASA,IAAME,OAAOJ,YAAYP,IAAZ,CAAb;;AAGA,IAAMY,gBAAgB;AACpBC,aAAW,mBAACC,GAAD,EAAS;AAClB,QAAMC,UAAU,EAAhB;AACA,QAAIC,WAAJ;AACA,SAAKA,EAAL,IAAWF,GAAX,EAAgB;AACd,UAAMJ,WAAWC,KAAKK,EAAL,CAAjB;AACA,UAAIN,QAAJ,EAAc;AACZK,gBAAQL,QAAR,IAAoBI,IAAIE,EAAJ,CAApB;AACD;AACF;AACDC,WAAOC,MAAP,CAAcH,OAAd,EAAuBD,GAAvB;;AAEAC,YAAQT,MAAR,GAAiBS,QAAQT,MAAR,IACZ,oBAAUa,SAAV,EADL;AAEAJ,YAAQK,KAAR,GAAgBL,QAAQZ,KAAxB;AACAY,YAAQM,GAAR,GAAcN,QAAQZ,KAAtB;;AAEA,WAAOY,OAAP;AACD;AAlBmB,CAAtB;;kBAqBeH,a","file":"LocationQuery.js","sourcesContent":["\r\nimport DateUtils from '../../utils/DateUtils'\r\n\r\nconst HM_S = {\r\n  browserType: 'bT',\r\n  chartType: 'cT',\r\n  value: 'v',\r\n\r\n  columnName: 'cN',\r\n  fromDate: 'fD',\r\n  toDate: 'tD'\r\n};\r\n\r\nconst _keyToValue = (hm) => {\r\n  const r = {}\r\n  let propName;\r\n  for (propName in hm) {\r\n    r[hm[propName]] = propName\r\n  }\r\n  return r;\r\n}\r\n\r\nconst HM_R = _keyToValue(HM_S)\r\n\r\n\r\nconst LocationQuery = {\r\n  toOptions: (obj) => {\r\n    const options = {};\r\n    let pN;\r\n    for (pN in obj) {\r\n      const propName = HM_R[pN]\r\n      if (propName) {\r\n        options[propName] = obj[pN]\r\n      }\r\n    }\r\n    Object.assign(options, obj)\r\n\r\n    options.toDate = options.toDate\r\n      || DateUtils.getToDate()    \r\n    options.title = options.value\r\n    options.key = options.value\r\n\r\n    return options;\r\n  }\r\n}\r\n\r\nexport default LocationQuery\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\logic\\LocationQuery.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\logic\\LocationQuery.js",
+ "sourceRoot": "",
+ "names": [
+  "_renamePropName",
+  "obj",
+  "bT",
+  "cT",
+  "v",
+  "cN",
+  "fD",
+  "tD",
+  "browserType",
+  "chartType",
+  "value",
+  "columnName",
+  "fromDate",
+  "toDate",
+  "_crOptions",
+  "options",
+  "Object",
+  "assign",
+  "getToDate",
+  "title",
+  "key",
+  "LocationQuery",
+  "toOptions"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB,SAAlBA,eAAkB,CAACC,GAAD,EAAS;AAAA,MAExBC,EAFwB,GAIrBD,GAJqB,CAExBC,EAFwB;AAAA,MAEpBC,EAFoB,GAIrBF,GAJqB,CAEpBE,EAFoB;AAAA,MAEhBC,CAFgB,GAIrBH,GAJqB,CAEhBG,CAFgB;AAAA,MAGxBC,EAHwB,GAIrBJ,GAJqB,CAGxBI,EAHwB;AAAA,MAGpBC,EAHoB,GAIrBL,GAJqB,CAGpBK,EAHoB;AAAA,MAGhBC,EAHgB,GAIrBN,GAJqB,CAGhBM,EAHgB;;AAK/B,SAAO;AACLC,iBAAaN,EADR;AAELO,eAAWN,EAFN;AAGLO,WAAON,CAHF;AAILO,gBAAYN,EAJP;AAKLO,cAAUN,EALL;AAMLO,YAAQN;AANH,GAAP;AAQD,CAbD;;AAeA,IAAMO,aAAa,SAAbA,UAAa,CAACb,GAAD,EAAS;AAC1B,MAAMc,UAAUf,gBAAgBC,GAAhB,CAAhB;AAD0B,MAElBY,MAFkB,GAEAE,OAFA,CAElBF,MAFkB;AAAA,MAEVH,KAFU,GAEAK,OAFA,CAEVL,KAFU;;AAG1B,SAAOM,OAAOC,MAAP,CAAc,EAAd,EAAkBF,OAAlB,EAA2Bd,GAA3B,EAAgC;AACrCY,YAAQA,UAAU,oBAAUK,SAAV,EADmB;AAErCC,WAAOT,KAF8B;AAGrCU,SAAKV;AAHgC,GAAhC,CAAP;AAKD,CARD;;AAUA,IAAMW,gBAAgB;AACpBC,aAAW,mBAACrB,GAAD,EAAS;AAClB,QAAMc,UAAUD,WAAWb,GAAX,CAAhB;AACA,WAAOc,OAAP;AACD;AAJmB,CAAtB;;kBAOeM,a"
+}

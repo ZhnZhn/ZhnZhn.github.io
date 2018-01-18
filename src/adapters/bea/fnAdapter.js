@@ -1,11 +1,13 @@
 
 import AdapterFn from '../AdapterFn'
 
+const { crId, ymdToUTC, valueMoving, crZhFn } = AdapterFn;
+
 const _crName = (Results) => {
   const { Statistic='', UTCProductionTime='' } = Results
       , t = UTCProductionTime.replace('T', ' ');
   return `${Statistic}: ${t}`;
-}
+};
 const _crDescr = (Results) => {
   const { Notes=[] } = Results
       , arr = Notes.map(note => {
@@ -13,47 +15,67 @@ const _crDescr = (Results) => {
           return `<P>${NoteRef}: ${NoteText}</P><BR/>`;
         });
   return arr.join('');
-}
+};
+const _crInfo = (Results) => ({
+  name: _crName(Results),
+  description: _crDescr(Results)
+});
+
+const _crZhConfig = (option) => {
+  const { title, dataSource } = option
+       , id = crId();
+  return {
+    id, key: id,
+    itemCaption: title,
+    isWithoutAdd: true,
+    isWithLegend: false,
+    dataSource
+  };
+};
+
+const _crUTC = (item) => {
+  const { Frequency, Year, Quarter } = item;
+  let md = '-12-31';
+  if (Frequency === 'A') {
+    md = '-12-31';
+  } else if (Frequency === 'Q') {
+    switch(Quarter){
+      case 'I': md = '-03-31'; break;
+      case 'II': md = '-06-30'; break;
+      case 'III': md = '-09-30'; break;
+      default: md = '-12-31';
+    }
+  }
+  return ymdToUTC(Year + md);
+};
 
 const fnAdapter = {
-  crUTC: (item) => {
-    const { Frequency, Year, Quarter } = item;
-    let md = '-12-31';
-    if (Frequency === 'A') {
-      md = '-12-31';
-    } else if (Frequency === 'Q') {
-      switch(Quarter){
-        case 'I': md = '-03-31'; break;
-        case 'II': md = '-06-30'; break;
-        case 'III': md = '-09-30'; break;
-        default: md = '-12-31';
+
+  crData: (Results, option) => {
+    const { dfFilterName, two } = option
+        , d = []
+        , isFilter = dfFilterName ? true : false;
+
+    Results.Data.forEach(item => {
+      const v = parseFloat(item.DataValue)
+          , y = !Number.isNaN(v) ? v : null;
+      if ( !(isFilter && item[dfFilterName] !== two) ) {
+        d.push({
+          x: _crUTC(item),
+          y: y
+        })
       }
-    }
-    return AdapterFn.ymdToUTC(Year + md);
+    })
+
+    return d;
   },
 
-  crValueMoving: (d) => {
-    return AdapterFn.valueMoving(d);
-  },
-
-  crInfo: (Results) => {
-    return {
-      name: _crName(Results),
-      description: _crDescr(Results)
-    }
-  },
-
-  crZhConfig: (option) => {
-    const { title, dataSource } = option
-         , id = AdapterFn.crId();
-    return {
-      id, key: id,
-      itemCaption: title,
-      isWithoutAdd: true,
-      isWithLegend: false,
-      dataSource
-    };
-  }
+  crConfigOption: ({ option, Results, data }) => ({
+    zhConfig: _crZhConfig(option),
+    valueMoving: valueMoving(data),
+    info: _crInfo(Results),
+    ...crZhFn()
+  })
 
 }
 

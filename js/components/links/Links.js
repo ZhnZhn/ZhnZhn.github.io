@@ -88,6 +88,13 @@ var Bea = (0, _withProps2.default)({
   title: "U.S. Bureau of Economic Analysis"
 })(_Link2.default);
 
+var Bsl = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://www.bls.gov/home.htm",
+  dfStyle: S.WHITE,
+  title: "U.S. Bureau of Labor Statistics"
+})(_Link2.default);
+
 var Intrinio = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://intrinio.com",
@@ -128,6 +135,7 @@ exports.default = {
   Intrinio: Intrinio,
   Insee: Insee,
   StatNorway: StatNorway,
-  StatSweden: StatSweden
+  StatSweden: StatSweden,
+  Bsl: Bsl
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map

@@ -75,6 +75,14 @@ const Bea = withProps({
   title: "U.S. Bureau of Economic Analysis"
 })(BaseComponent)
 
+const Bsl = withProps({
+  className: CL_LINK,
+  href: "https://www.bls.gov/home.htm",
+  dfStyle: S.WHITE,
+  title: "U.S. Bureau of Labor Statistics"
+})(BaseComponent)
+
+
 const Intrinio = withProps({
   className: CL_LINK,
   href: "https://intrinio.com",
@@ -116,5 +124,6 @@ export default {
   Intrinio,
   Insee,
   StatNorway,
-  StatSweden
+  StatSweden,
+  Bsl
 };

@@ -12,6 +12,7 @@ import Barchart from './barchart/Barchart'
 import Iex from './iex/Iex'
 import Insee from './insee/Insee'
 import Bea from './bea/Bea'
+import Bls from './bls/Bls'
 import Intrinio from './intrinio/Intrinio'
 
 const RouterAdapter = {
@@ -30,6 +31,7 @@ const RouterAdapter = {
   Iex,
   Insee,
   Bea,
+  Bls,
   Intrinio
 };
 

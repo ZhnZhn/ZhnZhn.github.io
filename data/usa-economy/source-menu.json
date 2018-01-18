@@ -30,6 +30,12 @@
         { "id": "USAE_INTR_6" }
       ]
     },{
+      "caption": "BLS",
+      "isInitClose": true,
+      "items": [
+        { "id": "USAE_BLS_1" }
+      ]
+    },{
       "caption": "Inflation & Prices",
       "isInitClose": true,
       "items": [
@@ -212,6 +218,27 @@
       }
     },
 
+    "USAE_BLS_1": {
+      "type": "USAE_BLS_1",
+      "menuTitle" : "Consume Average Prices",
+      "dialogCaption": "Consume Average Prices",
+      "chartContainerCaption" : "BLS: Consume Average Prices",
+      "dialogType": "DialogType3",
+      "dialogProps" : {
+        "nInitFromDate" : 12,
+        "descrUrl" : "./data/usa-economy/bls.html",
+        "optionURI" : "./data/usa-economy/bls-consume-avg-prices.json",
+        "noDate": true,
+        "valueFn" : "ROne",
+        "loadId" : "BLS",
+        "isProxy": true,
+        "linkFn": "BSL",
+        "dataSource": "U.S. Bureau of Labor Statistics (BSL): Average Price Data",
+        "dfProps": {
+          "dfTitle": "Consume Average Price"
+        }
+      }
+    },
 
     "USAE_CPI_1": {
       "type": "USAE_CPI_1",

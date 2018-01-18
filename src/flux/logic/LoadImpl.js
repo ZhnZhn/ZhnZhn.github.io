@@ -6,8 +6,8 @@ import f from './loadItem'
 const {
   Quandl, UnComtrade, FaoStat,
   EuroStat, StatNorway, StatSweden,
-  AlphaVantage, Barchart,
-  Iex, Insee, Bea, Intrinio
+  AlphaVantage, Barchart, Intrinio,
+  Iex, Insee, Bea, Bls
 } = Adapter;
 
 const LoadImpl = {
@@ -29,15 +29,16 @@ const LoadImpl = {
     fnFetch: fetchJsonp,
     ...Barchart
   }),
-
   Iex: f({ ...Iex }),
+  Intrinio: f({ ...Intrinio }),
+
   Insee: f({
     fnFetch: fetchTxt,
     ...Insee
   }),
 
   Bea: f({ ...Bea }),
-  Intrinio: f({ ...Intrinio })
+  Bls: f({ ...Bls })
 };
 
 export default LoadImpl

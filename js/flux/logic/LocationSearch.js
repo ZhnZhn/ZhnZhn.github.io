@@ -16,15 +16,11 @@ var _LocationQuery2 = _interopRequireDefault(_LocationQuery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var C = {
-  SM_WIKI: 'SM_WIKI',
-  UN: 'UN',
-  QE: 'QE',
-  Q: 'Q'
-};
+var ARR_B = ['UN', 'QE', 'FAO'];
+var ARR_C = ['SM_WIKI', 'USAE_BLS_1'];
 
 var _isQuery = function _isQuery(obj) {
-  return obj && obj.cT === C.SM_WIKI || obj.bT === C.UN || obj.bT === C.QE;
+  return obj && ARR_C.indexOf(obj.cT) !== -1 || ARR_B.indexOf(obj.bT) !== -1;
 };
 
 var _trSearchToOptions = function _trSearchToOptions() {
@@ -52,4 +48,4 @@ var LocationSearch = {
 };
 
 exports.default = LocationSearch;
-//# sourceMappingURL=LocationSearch.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LocationSearch.js.map

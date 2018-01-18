@@ -134,7 +134,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
      if (ChartStore.isChartExist(chartType, key)){
        this.cancelLoad(option, M.ALREADY_EXIST, true);
      }
-  }  
+  }
   return undefined;
 }
 
@@ -177,8 +177,10 @@ const _addDialogPropsTo = option => {
 
 ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
   _addDialogPropsTo(option)
+  const { loadId } = option;
+  option.proxy = ChartStore.getProxy(loadId)
 
-  const impl = LoadConfig[option.loadId];
+  const impl = LoadConfig[loadId];
   if (impl) {
     const { addPropsTo } = impl;
     if (typeof addPropsTo === 'function'){

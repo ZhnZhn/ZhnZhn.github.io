@@ -1,51 +1,22 @@
-import Builder from '../../charts/ConfigBuilder'
-import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
-import fnAdapter from './fnAdapter'
+import Builder from '../../charts/ConfigBuilder';
 
-const {
-       crUTC,
-       crZhConfig, crValueMoving, crInfo
-     } = fnAdapter;
+import fnAdapter from './fnAdapter';
 
-const _crData = (Results, option) => {
-  const { dfFilterName, two } = option
-      , d = []
-      , isFilter = dfFilterName ? true : false;
-
-  Results.Data.forEach(item => {
-    const v = parseFloat(item.DataValue)
-        , y = !Number.isNaN(v) ? v : null;
-    if ( !(isFilter && item[dfFilterName] !== two) ) {
-      d.push({
-        x: crUTC(item),
-        y: y
-      })
-    }
-  })
-
-  return d;
-}
+const { crData, crConfigOption } = fnAdapter;
 
 const BeaAdapter = {
   toConfig(json, option){
     const Results = json.BEAAPI.Results
-        , data = _crData(Results, option)
+        , data = crData(Results, option)
         , seria = Builder()
             .initSpline({ data })
             .toConfig()
         , { title, dfTitle } = option
         , config = Builder()
-           .initBaseArea()
-           .add('chart', { spacingTop: 25 })
-           .addCaption(dfTitle, title)
-           .clearSeries()
+           .initBaseArea2(dfTitle, title)
            .addSeries(seria)
            .add({
-             zhConfig: crZhConfig(option),
-             valueMoving: crValueMoving(data),
-             info: crInfo(Results),
-             zhFnAddSeriesSma: fnAddSeriesSma,
-             zhFnRemoveSeries: fnRemoveSeries
+             ...crConfigOption({ option, data, Results })
            })
            .toConfig();
 

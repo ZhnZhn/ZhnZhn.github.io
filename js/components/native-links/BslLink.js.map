@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\BslLink.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\BslLink.js",
+ "sourceRoot": "",
+ "names": [
+  "C",
+  "URL",
+  "BslLink",
+  "item"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,OAAK;AADG,CAAV;;AAIA,IAAMC,UAAU,SAAVA,OAAU;AAAA,uBAAGC,IAAH;AAAA,MAAGA,IAAH,6BAAQ,EAAR;AAAA,SACd;AACE,eAAU,aADZ;AAEE,UAASH,EAAEC,GAAX,SAAkBE,IAFpB;AAGE,aAAQ;AAHV,IADc;AAAA,CAAhB;;kBAOeD,O"
+}

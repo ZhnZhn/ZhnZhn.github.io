@@ -28,10 +28,11 @@ var Quandl = _RouterAdapter2.default.Quandl,
     StatSweden = _RouterAdapter2.default.StatSweden,
     AlphaVantage = _RouterAdapter2.default.AlphaVantage,
     Barchart = _RouterAdapter2.default.Barchart,
+    Intrinio = _RouterAdapter2.default.Intrinio,
     Iex = _RouterAdapter2.default.Iex,
     Insee = _RouterAdapter2.default.Insee,
     Bea = _RouterAdapter2.default.Bea,
-    Intrinio = _RouterAdapter2.default.Intrinio;
+    Bls = _RouterAdapter2.default.Bls;
 
 
 var LoadImpl = {
@@ -52,14 +53,15 @@ var LoadImpl = {
   Barchart: (0, _loadItem2.default)((0, _extends3.default)({
     fnFetch: _fnFetch.fetchJsonp
   }, Barchart)),
-
   Iex: (0, _loadItem2.default)((0, _extends3.default)({}, Iex)),
+  Intrinio: (0, _loadItem2.default)((0, _extends3.default)({}, Intrinio)),
+
   Insee: (0, _loadItem2.default)((0, _extends3.default)({
     fnFetch: _fnFetch.fetchTxt
   }, Insee)),
 
   Bea: (0, _loadItem2.default)((0, _extends3.default)({}, Bea)),
-  Intrinio: (0, _loadItem2.default)((0, _extends3.default)({}, Intrinio))
+  Bls: (0, _loadItem2.default)((0, _extends3.default)({}, Bls))
 };
 
 exports.default = LoadImpl;

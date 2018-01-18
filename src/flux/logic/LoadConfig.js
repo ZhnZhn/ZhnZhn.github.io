@@ -22,6 +22,7 @@ const LoadConfig = {
   [LT.SWS]: LoadImpl.StatSweden,
 
   [LT.BEA]: LoadImpl.Bea,
+  [LT.BLS]: LoadImpl.Bls,
   [LT.INTR]: LoadImpl.Intrinio,
 
   [LT.FS]: LoadImpl.Insee,

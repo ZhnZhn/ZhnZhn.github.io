@@ -1,0 +1,20 @@
+{
+  "items": [
+    { "caption" : "Fuel Oil, per Gallon", "value": "APU000072511"},
+    { "caption" : "Gasoline, All Types", "value": "APU00007471A"},
+    { "caption" : "Gasoline, Unleaded Regular", "value": "APU000074714"},
+    { "caption" : "Bread, White", "value": "APU0000702111"},
+    { "caption" : "Ground Beef, All Types, per Pound", "value": "APU0000703111"},
+    { "caption" : "Whole Chicken, Per Pound", "value": "APU0000706111"},
+    { "caption" : "Eggs, Large, Per Dozen", "value": "APU0000708111"},
+    { "caption" : "Milk, fresh, whole, fortified, per Gallon (3.8 lit)", "value": "APU0000709112"},
+    { "caption" : "Red Delicious Apples", "value": "APU0000711111"},
+    { "caption" : "Navel Oranges", "value": "APU0000711311"},
+    { "caption" : "Bananas", "value": "APU0000711211"},
+    { "caption" : "Tomatoes", "value": "APU0000712311"},
+    { "caption" : "Orange Juice, Frozen", "value": "APU0000713111"},
+    { "caption" : "Coffee, Ground Roast, All Sizes", "value": "APU0000717311"},
+    { "caption" : "Electricity, Per KWH", "value": "APU000072610"},
+    { "caption" : "Utility (piped) gas per therm", "value": "APU000072620"}
+  ]
+}

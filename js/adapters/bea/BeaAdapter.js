@@ -4,11 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
-
-var _IndicatorSma = require('../IndicatorSma');
 
 var _fnAdapter = require('./fnAdapter');
 
@@ -16,47 +18,18 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var crUTC = _fnAdapter2.default.crUTC,
-    crZhConfig = _fnAdapter2.default.crZhConfig,
-    crValueMoving = _fnAdapter2.default.crValueMoving,
-    crInfo = _fnAdapter2.default.crInfo;
+var crData = _fnAdapter2.default.crData,
+    crConfigOption = _fnAdapter2.default.crConfigOption;
 
-
-var _crData = function _crData(Results, option) {
-  var dfFilterName = option.dfFilterName,
-      two = option.two,
-      d = [],
-      isFilter = dfFilterName ? true : false;
-
-
-  Results.Data.forEach(function (item) {
-    var v = parseFloat(item.DataValue),
-        y = !Number.isNaN(v) ? v : null;
-    if (!(isFilter && item[dfFilterName] !== two)) {
-      d.push({
-        x: crUTC(item),
-        y: y
-      });
-    }
-  });
-
-  return d;
-};
 
 var BeaAdapter = {
   toConfig: function toConfig(json, option) {
     var Results = json.BEAAPI.Results,
-        data = _crData(Results, option),
+        data = crData(Results, option),
         seria = (0, _ConfigBuilder2.default)().initSpline({ data: data }).toConfig(),
         title = option.title,
         dfTitle = option.dfTitle,
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(dfTitle, title).clearSeries().addSeries(seria).add({
-      zhConfig: crZhConfig(option),
-      valueMoving: crValueMoving(data),
-      info: crInfo(Results),
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
-    }).toConfig();
+        config = (0, _ConfigBuilder2.default)().initBaseArea2(dfTitle, title).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data, Results: Results }))).toConfig();
 
 
     return { config: config };

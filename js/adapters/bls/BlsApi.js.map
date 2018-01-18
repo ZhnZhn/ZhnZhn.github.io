@@ -1,0 +1,24 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\bls\\BlsApi.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\bls\\BlsApi.js",
+ "sourceRoot": "",
+ "names": [
+  "C",
+  "URL",
+  "BlsApi",
+  "getRequestUrl",
+  "option",
+  "proxy",
+  "value",
+  "checkResponse",
+  "json",
+  "Results",
+  "series",
+  "Array",
+  "isArray",
+  "data"
+ ],
+ "mappings": ";;;;;AAAA,IAAMA,IAAI;AACRC,OAAK;AADG,CAAV;;AAIA,IAAMC,SAAS;AACbC,eADa,yBACCC,MADD,EACQ;AAAA,wBACYA,MADZ,CACXC,KADW;AAAA,QACXA,KADW,iCACL,EADK;AAAA,wBACYD,MADZ,CACDE,KADC;AAAA,QACDA,KADC,iCACK,EADL;;AAEnB,gBAAUD,KAAV,GAAkBL,EAAEC,GAApB,SAA2BK,KAA3B;AACD,GAJY;AAKbC,eALa,yBAKCC,IALD,EAKM;AAAA,eACMA,QAAQ,EADd;AAAA,4BACTC,OADS;AAAA,QACTA,OADS,gCACD,EADC;AAAA,0BAEKA,OAFL,CAETC,MAFS;AAAA,QAETA,MAFS,mCAEF,EAFE;;AAGjB,WAAOA,OAAO,CAAP,KACFC,MAAMC,OAAN,CAAcF,OAAO,CAAP,EAAUG,IAAxB,CADL;AAED;AAVY,CAAf;;kBAaeX,M"
+}

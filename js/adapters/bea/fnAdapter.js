@@ -4,11 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var crId = _AdapterFn2.default.crId,
+    ymdToUTC = _AdapterFn2.default.ymdToUTC,
+    valueMoving = _AdapterFn2.default.valueMoving,
+    crZhFn = _AdapterFn2.default.crZhFn;
+
 
 var _crName = function _crName(Results) {
   var _Results$Statistic = Results.Statistic,
@@ -33,57 +43,85 @@ var _crDescr = function _crDescr(Results) {
 
   return arr.join('');
 };
+var _crInfo = function _crInfo(Results) {
+  return {
+    name: _crName(Results),
+    description: _crDescr(Results)
+  };
+};
+
+var _crZhConfig = function _crZhConfig(option) {
+  var title = option.title,
+      dataSource = option.dataSource,
+      id = crId();
+
+  return {
+    id: id, key: id,
+    itemCaption: title,
+    isWithoutAdd: true,
+    isWithLegend: false,
+    dataSource: dataSource
+  };
+};
+
+var _crUTC = function _crUTC(item) {
+  var Frequency = item.Frequency,
+      Year = item.Year,
+      Quarter = item.Quarter;
+
+  var md = '-12-31';
+  if (Frequency === 'A') {
+    md = '-12-31';
+  } else if (Frequency === 'Q') {
+    switch (Quarter) {
+      case 'I':
+        md = '-03-31';break;
+      case 'II':
+        md = '-06-30';break;
+      case 'III':
+        md = '-09-30';break;
+      default:
+        md = '-12-31';
+    }
+  }
+  return ymdToUTC(Year + md);
+};
 
 var fnAdapter = {
-  crUTC: function crUTC(item) {
-    var Frequency = item.Frequency,
-        Year = item.Year,
-        Quarter = item.Quarter;
 
-    var md = '-12-31';
-    if (Frequency === 'A') {
-      md = '-12-31';
-    } else if (Frequency === 'Q') {
-      switch (Quarter) {
-        case 'I':
-          md = '-03-31';break;
-        case 'II':
-          md = '-06-30';break;
-        case 'III':
-          md = '-09-30';break;
-        default:
-          md = '-12-31';
+  crData: function crData(Results, option) {
+    var dfFilterName = option.dfFilterName,
+        two = option.two,
+        d = [],
+        isFilter = dfFilterName ? true : false;
+
+
+    Results.Data.forEach(function (item) {
+      var v = parseFloat(item.DataValue),
+          y = !Number.isNaN(v) ? v : null;
+      if (!(isFilter && item[dfFilterName] !== two)) {
+        d.push({
+          x: _crUTC(item),
+          y: y
+        });
       }
-    }
-    return _AdapterFn2.default.ymdToUTC(Year + md);
+    });
+
+    return d;
   },
 
-  crValueMoving: function crValueMoving(d) {
-    return _AdapterFn2.default.valueMoving(d);
-  },
-
-  crInfo: function crInfo(Results) {
-    return {
-      name: _crName(Results),
-      description: _crDescr(Results)
-    };
-  },
-
-  crZhConfig: function crZhConfig(option) {
-    var title = option.title,
-        dataSource = option.dataSource,
-        id = _AdapterFn2.default.crId();
-
-    return {
-      id: id, key: id,
-      itemCaption: title,
-      isWithoutAdd: true,
-      isWithLegend: false,
-      dataSource: dataSource
-    };
+  crConfigOption: function crConfigOption(_ref) {
+    var option = _ref.option,
+        Results = _ref.Results,
+        data = _ref.data;
+    return (0, _extends3.default)({
+      zhConfig: _crZhConfig(option),
+      valueMoving: valueMoving(data),
+      info: _crInfo(Results)
+    }, crZhFn());
   }
 
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=fnAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\bea\fnAdapter.js.map

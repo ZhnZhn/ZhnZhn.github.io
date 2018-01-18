@@ -4,17 +4,12 @@ import queryString from 'query-string';
 import { ModalDialog } from '../../constants/Type'
 import LocationQuery from './LocationQuery'
 
-const C = {
-  SM_WIKI: 'SM_WIKI',
-  UN: 'UN',
-  QE: 'QE',
-  Q: 'Q'
-};
+const ARR_B = [ 'UN', 'QE', 'FAO' ];
+const ARR_C = [ 'SM_WIKI', 'USAE_BLS_1' ];
 
 const _isQuery = (obj) => obj &&
-    obj.cT === C.SM_WIKI ||
-    obj.bT === C.UN ||
-    obj.bT === C.QE;
+    ARR_C.indexOf(obj.cT) !== -1 ||
+    ARR_B.indexOf(obj.bT) !== -1;
 
 const _trSearchToOptions = () => {
   const search = (window.location)

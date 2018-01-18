@@ -83,6 +83,7 @@ var LoadType = exports.LoadType = {
    UN: 'UN',
    FAO: 'FAO',
    BEA: 'BEA',
+   BLS: 'BLS',
    INTR: 'INTR',
    WL: 'WL'
 };

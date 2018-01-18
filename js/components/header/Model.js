@@ -76,8 +76,7 @@ var MODEL = {
   }, {
     id: _Type.BrowserType.NORWAY_STAT_ALL,
     cn: CL.EU,
-    title: 'Statistics Norway All',
-    isNew: true
+    title: 'Statistics Norway All'
   }, {
     id: _Type.BrowserType.SWEDEN_STAT,
     cn: CL.EU,
@@ -85,8 +84,7 @@ var MODEL = {
   }, {
     id: _Type.BrowserType.SWEDEN_STAT_ALL,
     cn: CL.EU,
-    title: 'Statistics Sweden All',
-    isNew: true
+    title: 'Statistics Sweden All'
   }],
   page_03: [{
     id: _Type.BrowserType.STOCK_MARKETS,

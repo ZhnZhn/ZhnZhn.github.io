@@ -1,11 +1,7 @@
 import Builder from '../../charts/ConfigBuilder'
-import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
 import fnAdapter from './fnAdapter'
 
-const {
-        crData,
-        crZhConfig, crValueMoving, crInfo
-      } = fnAdapter;
+const { crData, crConfigOption } = fnAdapter;
 
 const IntrinioAdapter = {
   toConfig(json, option){
@@ -15,17 +11,10 @@ const IntrinioAdapter = {
             .toConfig()
         , { title, subtitle } = option
         , config = Builder()
-            .initBaseArea()
-            .add('chart', { spacingTop: 25 })
-            .addCaption(title, subtitle)
-            .clearSeries()
+            .initBaseArea2(title, subtitle)
             .addSeries(seria)
             .add({
-              zhConfig: crZhConfig(option),
-              valueMoving: crValueMoving(data),
-              info: crInfo(option),
-              zhFnAddSeriesSma: fnAddSeriesSma,
-              zhFnRemoveSeries: fnRemoveSeries
+              ...crConfigOption({ option, data })
              })
             .toConfig();
 

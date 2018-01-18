@@ -6,6 +6,7 @@ import LmeLink from './LmeLink'
 import UnComtradeLink from './UnComtradeLink'
 import FaoStatLink from './FaoStatLink'
 import FredLink from './FredLink'
+import BslLink from './BslLink'
 
 const RouterNativeLink = {
   QUANDL: QuandlLink,
@@ -14,7 +15,8 @@ const RouterNativeLink = {
   LME: LmeLink,
   UN_COMTRADE: UnComtradeLink,
   FAO_STAT: FaoStatLink,
-  FRED: FredLink
-}
+  FRED: FredLink,
+  BSL: BslLink
+};
 
 export default RouterNativeLink

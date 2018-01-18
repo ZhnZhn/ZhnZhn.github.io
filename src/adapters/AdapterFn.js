@@ -1,5 +1,5 @@
 
-import Big from 'big.js'
+import Big from 'big.js';
 
 import DateUtils from '../utils/DateUtils';
 import ChartConfig from '../charts/ChartConfig';
@@ -7,7 +7,9 @@ import { Direction } from '../constants/Type';
 
 import mathFn from '../math/mathFn';
 
-import C from '../constants/Color'
+import C from '../constants/Color';
+
+import { fnAddSeriesSma, fnRemoveSeries } from './IndicatorSma';
 
 const BLANK = '';
 
@@ -47,10 +49,12 @@ const AdapterFn = {
         , _len = _arr.length;
     if (_len === 3) {
       return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), _arr[2] );
-    } else if ( _len === 2){
-      return Date.UTC( _arr[0], (parseInt(_arr[1], 10)-1), 27 );
+    } else if ( _len === 2 && _arr[1] !== ''){
+      const _m = parseInt(_arr[1], 10)
+          , _d = (new Date(_arr[0], _m, 0)).getDate();
+      return Date.UTC( _arr[0], _m - 1, _d );
     } else if ( _len === 1) {
-      return Date.UTC( _arr[0], 11, 30 );
+      return Date.UTC( _arr[0], 11, 31 );
     }
   },
   ymdtToUTC(date) {
@@ -133,6 +137,11 @@ const AdapterFn = {
     return ChartConfig.fnNumberFormat(value);
   },
 
+  isNumberOrNull: v => {
+     return (typeof v === 'number' && !isNaN(v))
+       || v === null;
+  },
+
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
@@ -151,7 +160,7 @@ const AdapterFn = {
     if (!Array.isArray(data)) {
       return { date: data, direction: 'empty' };
     }
-    
+
     const len = data.length
           , _pointNow = len>0 && data[len-1]
                ? data[len-1]
@@ -173,8 +182,8 @@ const AdapterFn = {
                : BLANK;
 
       return  {
-        ...this.crValueMoving({ bNowValue, bPrevValue }),
-        valueTo: this.numberFormat(bPrevValue),
+        ...AdapterFn.crValueMoving({ bNowValue, bPrevValue }),
+        valueTo: AdapterFn.numberFormat(bPrevValue),
         date, dateTo
       };
   },
@@ -185,7 +194,12 @@ const AdapterFn = {
         Math.random().toString(36).substr(2, 9)
       )
       .toUpperCase();
-  }
+  },
+
+  crZhFn: () => ({
+    zhFnAddSeriesSma: fnAddSeriesSma,
+    zhFnRemoveSeries: fnRemoveSeries
+  })
 
 }
 

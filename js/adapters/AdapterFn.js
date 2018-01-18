@@ -30,6 +30,8 @@ var _Color = require('../constants/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
 
+var _IndicatorSma = require('./IndicatorSma');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BLANK = '';
@@ -62,10 +64,12 @@ var AdapterFn = {
         _len = _arr.length;
     if (_len === 3) {
       return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, _arr[2]);
-    } else if (_len === 2) {
-      return Date.UTC(_arr[0], parseInt(_arr[1], 10) - 1, 27);
+    } else if (_len === 2 && _arr[1] !== '') {
+      var _m = parseInt(_arr[1], 10),
+          _d = new Date(_arr[0], _m, 0).getDate();
+      return Date.UTC(_arr[0], _m - 1, _d);
     } else if (_len === 1) {
-      return Date.UTC(_arr[0], 11, 30);
+      return Date.UTC(_arr[0], 11, 31);
     }
   },
   ymdtToUTC: function ymdtToUTC(date) {
@@ -141,6 +145,10 @@ var AdapterFn = {
   },
 
 
+  isNumberOrNull: function isNumberOrNull(v) {
+    return typeof v === 'number' && !isNaN(v) || v === null;
+  },
+
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),
   compareByValue: _compareArrByIndex('value'),
@@ -176,8 +184,8 @@ var AdapterFn = {
         _prevDate = _getDate(_pointPrev),
         dateTo = len > 1 && _prevDate ? _DateUtils2.default.formatTo(_prevDate) : BLANK;
 
-    return (0, _extends3.default)({}, this.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
-      valueTo: this.numberFormat(bPrevValue),
+    return (0, _extends3.default)({}, AdapterFn.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
+      valueTo: AdapterFn.numberFormat(bPrevValue),
       date: date, dateTo: dateTo
     });
   },
@@ -185,9 +193,16 @@ var AdapterFn = {
 
   crId: function crId() {
     return (Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
+  },
+
+  crZhFn: function crZhFn() {
+    return {
+      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
+      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+    };
   }
 
 };
 
 exports.default = AdapterFn;
-//# sourceMappingURL=AdapterFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\AdapterFn.js.map

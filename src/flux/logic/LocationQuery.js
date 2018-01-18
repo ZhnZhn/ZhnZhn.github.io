@@ -1,45 +1,34 @@
 
 import DateUtils from '../../utils/DateUtils'
 
-const HM_S = {
-  browserType: 'bT',
-  chartType: 'cT',
-  value: 'v',
-
-  columnName: 'cN',
-  fromDate: 'fD',
-  toDate: 'tD'
-};
-
-const _keyToValue = (hm) => {
-  const r = {}
-  let propName;
-  for (propName in hm) {
-    r[hm[propName]] = propName
-  }
-  return r;
+const _renamePropName = (obj) => {
+  const {
+         bT, cT, v,
+         cN, fD, tD
+        } = obj;
+  return {
+    browserType: bT,
+    chartType: cT,
+    value: v,
+    columnName: cN,
+    fromDate: fD,
+    toDate: tD
+  };
 }
 
-const HM_R = _keyToValue(HM_S)
-
+const _crOptions = (obj) => {
+  const options = _renamePropName(obj);
+  const { toDate, value } = options;
+  return Object.assign({}, options, obj, {
+    toDate: toDate || DateUtils.getToDate(),
+    title: value,
+    key: value
+  });
+};
 
 const LocationQuery = {
   toOptions: (obj) => {
-    const options = {};
-    let pN;
-    for (pN in obj) {
-      const propName = HM_R[pN]
-      if (propName) {
-        options[propName] = obj[pN]
-      }
-    }
-    Object.assign(options, obj)
-
-    options.toDate = options.toDate
-      || DateUtils.getToDate()    
-    options.title = options.value
-    options.key = options.value
-
+    const options = _crOptions(obj);
     return options;
   }
 }

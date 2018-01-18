@@ -12,18 +12,16 @@ const qeSources = [
   'COMMODITY_PRICE',
   'WIKI_COMMODITY_PRICE',
   'LME',
-  'COMMODITY_TRADE',      
+  'COMMODITY_TRADE',
   'JODI_WORLD_GAS',
   'JODI_WORLD_OIL',
   'BP',
   'PETROLEUM_PRICES',
-  'EIA_COAL',
   'GLOBAL_INDICATOR',
   'WORLDBANK_PRICE',
   'IMF_CROSSCOUNTRY',
   'EU_COMMISSION',
   'OECD',
-  'USCENSUS_TRADE',
 
   'BANK_CANADA',
   'BANK_SWISS',
@@ -42,10 +40,7 @@ const qeSources = [
   'SHANGHAI_FUTURE',
   'LIFFE_FUTURE',
   'ICE_FUTURE',
-  'WIKI_FUTURE',
-
-  'ZILLOW_REAL_ESTATE_2',
-  'FMAC'
+  'WIKI_FUTURE'
 ];
 const Quandl = createTypeObject(qeSources, 'QE');
 

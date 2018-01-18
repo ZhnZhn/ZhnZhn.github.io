@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var _Type = require('../../constants/Type');
 
 var _settings = {};
-var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.NST, _Type.LoadType.NST_2, _Type.LoadType.SWS];
+var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.NST, _Type.LoadType.NST_2, _Type.LoadType.SWS, _Type.LoadType.BLS];
 
 var SettingSlice = {
   setting: {
@@ -56,6 +56,11 @@ var SettingSlice = {
   },
 
   getProxy: function getProxy(loadId) {
+    /*
+    const _id = id && id.loadId
+              ? id.loadId
+              : id;
+    */
     if (_withProxy.indexOf(loadId) === -1) {
       return undefined;
     }

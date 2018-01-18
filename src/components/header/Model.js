@@ -75,8 +75,7 @@ const MODEL = {
     },{
       id: BT.NORWAY_STAT_ALL,
       cn: CL.EU,
-      title: 'Statistics Norway All',
-      isNew: true
+      title: 'Statistics Norway All'
     },{
       id: BT.SWEDEN_STAT,
       cn: CL.EU,
@@ -84,8 +83,7 @@ const MODEL = {
     },{
       id: BT.SWEDEN_STAT_ALL,
       cn: CL.EU,
-      title: 'Statistics Sweden All',
-      isNew: true
+      title: 'Statistics Sweden All'
     }
   ],
   page_03: [

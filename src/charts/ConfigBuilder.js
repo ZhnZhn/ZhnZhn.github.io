@@ -53,6 +53,13 @@ ConfigBuilder.prototype = {
     this.config = ChartConfig.fBaseAreaConfig()
     return this;
   },
+  initBaseArea2(title, subtitle){
+    this.config = ChartConfig.fBaseAreaConfig()
+    this.add('chart', { spacingTop: 25 })
+    this.addCaption(title, subtitle)
+    this.clearSeries()    
+    return this;
+  },
   initBaseCategories(categories=[]){
     this.config = ChartConfig.fBaseAreaConfig()
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}

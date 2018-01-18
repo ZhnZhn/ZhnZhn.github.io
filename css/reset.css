@@ -9,6 +9,9 @@ body {
   font-family: "Roboto", "Arial", "Lato", sans-serif;
   font-weight: 300;
   background-color: gray;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
