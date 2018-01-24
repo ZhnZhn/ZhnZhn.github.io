@@ -138,7 +138,7 @@ var AdapterFn = {
     };
   },
   stockSeriesLegend: function stockSeriesLegend() {
-    return [this.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), this.legendItem(1, _Color2.default.S_HIGH, 'High'), this.legendItem(2, _Color2.default.S_LOW, 'Low'), this.legendItem(3, _Color2.default.S_OPEN, 'Open')];
+    return [AdapterFn.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color2.default.S_HIGH, 'High'), AdapterFn.legendItem(2, _Color2.default.S_LOW, 'Low'), AdapterFn.legendItem(3, _Color2.default.S_OPEN, 'Open')];
   },
   numberFormat: function numberFormat(value) {
     return _ChartConfig2.default.fnNumberFormat(value);
@@ -176,7 +176,7 @@ var AdapterFn = {
         _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [BLANK, 0],
         _nowValue = _getValue(_pointNow),
         bNowValue = (0, _big2.default)(_nowValue),
-        _pointPrev = len > 1 && data[len - 2] ? data[len - 2] : [BLANK, 0],
+        _pointPrev = len > 1 && data[len - 2] ? data[len - 2] : _pointNow,
         _prevValue = _getValue(_pointPrev),
         bPrevValue = (0, _big2.default)(_prevValue),
         _nowDate = _getDate(_pointNow),
@@ -200,7 +200,8 @@ var AdapterFn = {
       zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
       zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     };
-  }
+  },
+  fnGetConfigMfi: _IndicatorSma.fnGetConfigMfi
 
 };
 

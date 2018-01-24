@@ -20,8 +20,6 @@ var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
-var _IndicatorSma = require('../IndicatorSma');
-
 var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
@@ -30,28 +28,27 @@ var _Tooltip = require('../../charts/Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
+var _fnAdapter = require('./fnAdapter');
+
+var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ymdhmsToUTC = _AdapterFn2.default.ymdhmsToUTC,
+    volumeColumnPoint = _AdapterFn2.default.volumeColumnPoint;
+var crIntradayConfigOption = _fnAdapter2.default.crIntradayConfigOption;
+
 
 var C = {
   TIME_START_DAY: '09:30:00',
-  TIME_END_DAY: '16:00:00',
+  TIME_CLOSE_DAY: '16:00:00',
 
   START_DAY: "#90ed7d",
-  END_DAY: "#f7a35c",
+  CLOSE_DAY: "#f7a35c",
   CLOSE: "#2f7ed8",
   HIGH: "#4caf50",
   LOW: "#f44336",
   OPEN: "#90ed7d"
-};
-
-var _crZhConfig = function _crZhConfig(id) {
-  return {
-    id: id,
-    key: id,
-    isWithLegend: true,
-    legend: _AdapterFn2.default.stockSeriesLegend(),
-    dataSource: "Alpha Vantage"
-  };
 };
 
 var _fMarker = function _fMarker(color) {
@@ -68,14 +65,14 @@ var _fMarkerColor = function _fMarkerColor(date) {
   if (date.indexOf(C.TIME_START_DAY) !== -1) {
     marker = _fMarker(C.START_DAY);
     color = C.START_DAY;
-  } else if (date.indexOf(C.TIME_END_DAY) !== -1) {
-    marker = _fMarker(C.END_DAY);
-    color = C.END_DAY;
+  } else if (date.indexOf(C.TIME_CLOSE_DAY) !== -1) {
+    marker = _fMarker(C.CLOSE_DAY);
+    color = C.CLOSE_DAY;
   }
   return { marker: marker, color: color };
 };
 
-var _createSeriaData = function _createSeriaData(json, option, config, chartId) {
+var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
   var interval = option.interval,
       _propName = 'Time Series (' + interval + ')',
       _value = json[_propName],
@@ -108,7 +105,7 @@ var _createSeriaData = function _createSeriaData(json, option, config, chartId) 
     _close = parseFloat(_point['4. close']);
     _volume = parseFloat(_point['5. volume']);
 
-    _dateMs = _AdapterFn2.default.ymdhmsToUTC(_date);
+    _dateMs = ymdhmsToUTC(_date);
     _data.push((0, _extends3.default)({
       x: _dateMs, y: _close }, _fMarkerColor(_date)));
 
@@ -117,7 +114,7 @@ var _createSeriaData = function _createSeriaData(json, option, config, chartId) 
     _dataOpen.push([_dateMs, _open]);
 
     _dataVolume.push([_dateMs, _volume]);
-    _dataVolumeColumn.push(_AdapterFn2.default.volumeColumnPoint({
+    _dataVolumeColumn.push(volumeColumnPoint({
       open: _open, close: _close, volume: _volume,
       date: _dateMs,
       option: { _high: _high, _low: _low }
@@ -138,6 +135,14 @@ var _createSeriaData = function _createSeriaData(json, option, config, chartId) 
     zhVolumeConfig: _ChartConfig2.default.fIndicatorVolumeConfig(option.value, _dataVolumeColumn, _dataVolume)
   });
   config.zhVolumeConfig.series[1].tooltip = _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatterT);
+
+  return _data;
+};
+
+var _toDataDaily = function _toDataDaily(data) {
+  return data.filter(function (p) {
+    return p.color === C.CLOSE_DAY;
+  });
 };
 
 var AlphaIntradayAdapter = {
@@ -145,12 +150,15 @@ var AlphaIntradayAdapter = {
     var baseConfig = _ChartConfig2.default.fBaseAreaConfig(),
         value = option.value,
         interval = option.interval,
-        _chartId = value;
+        _chartId = value,
+        _data = _crSeriaData(json, option, baseConfig, _chartId),
+        _dataDaily = _toDataDaily(_data);
 
 
-    _createSeriaData(json, option, baseConfig, _chartId);
-
-    var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(_Tooltip2.default.fnBasePointFormatterT).add('zhConfig', _crZhConfig(_chartId)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
+    var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(_Tooltip2.default.fnBasePointFormatterT).add((0, _extends3.default)({}, crIntradayConfigOption({
+      id: _chartId,
+      data: _dataDaily
+    }))).toConfig();
 
     return {
       config: config,

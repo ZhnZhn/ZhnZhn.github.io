@@ -36,6 +36,10 @@ var _BslLink = require('./BslLink');
 
 var _BslLink2 = _interopRequireDefault(_BslLink);
 
+var _CrcLink = require('./CrcLink');
+
+var _CrcLink2 = _interopRequireDefault(_CrcLink);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterNativeLink = {
@@ -46,7 +50,8 @@ var RouterNativeLink = {
   UN_COMTRADE: _UnComtradeLink2.default,
   FAO_STAT: _FaoStatLink2.default,
   FRED: _FredLink2.default,
-  BSL: _BslLink2.default
+  BSL: _BslLink2.default,
+  CRC: _CrcLink2.default
 };
 
 exports.default = RouterNativeLink;

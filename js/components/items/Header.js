@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _SvgCheckBox = require('../zhn/SvgCheckBox');
 
 var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
@@ -64,6 +60,7 @@ var STYLE = {
     paddingLeft: '16px'
   }
 };
+//import PropTypes from "prop-types";
 
 var Header = function Header(props) {
   var isOpen = props.isOpen,
@@ -116,20 +113,25 @@ var Header = function Header(props) {
   );
 };
 
-Header.propTypes = process.env.NODE_ENV !== "production" ? {
-  isOpen: _propTypes2.default.bool.isRequired,
-  chartType: _propTypes2.default.string.isRequired,
-  onCheck: _propTypes2.default.func.isRequired,
-  onUnCheck: _propTypes2.default.func.isRequired,
-  itemCaption: _propTypes2.default.string.isRequired,
-  itemTitle: _propTypes2.default.string.isRequired,
-  itemTime: _propTypes2.default.string,
-  onToggle: _propTypes2.default.func.isRequired,
-  valueMoving: _propTypes2.default.object,
-  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
-  crValueMoving: _propTypes2.default.func,
-  onClose: _propTypes2.default.func.isRequired
-} : {};
+/*
+Header.propTypes = {
+  isOpen : PropTypes.bool.isRequired,
+  chartType : PropTypes.string.isRequired,
+  onCheck : PropTypes.func.isRequired,
+  onUnCheck : PropTypes.func.isRequired,
+  itemCaption : PropTypes.string.isRequired,
+  itemTitle : PropTypes.string.isRequired,
+  itemTime : PropTypes.string,
+  onToggle : PropTypes.func.isRequired,
+  valueMoving : PropTypes.object,
+  isAdminMode: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool
+  ]),
+  crValueMoving: PropTypes.func,
+  onClose : PropTypes.func.isRequired
+}
+*/
 
 exports.default = Header;
-//# sourceMappingURL=Header.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\Header.js.map

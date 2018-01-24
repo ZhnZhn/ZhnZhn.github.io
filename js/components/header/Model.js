@@ -38,6 +38,11 @@ var MODEL = {
     cn: CL.EU,
     title: 'FAOSTAT'
   }, {
+    id: _Type.BrowserType.BLOCKCHAIN,
+    cn: CL.BR,
+    title: 'BlockChain',
+    isNew: true
+  }, {
     id: _Type.BrowserType.PREMIUM_SAMPLE,
     title: 'Quandl Premium Sample'
   }, {

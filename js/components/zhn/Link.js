@@ -22,7 +22,8 @@ var Link = function Link(_ref) {
   var title = _ref.title,
       dfStyle = _ref.dfStyle,
       style = _ref.style,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ["title", "dfStyle", "style"]);
+      children = _ref.children,
+      rest = (0, _objectWithoutProperties3.default)(_ref, ["title", "dfStyle", "style", "children"]);
   return _react2.default.createElement(
     "a",
     (0, _extends3.default)({
@@ -30,7 +31,8 @@ var Link = function Link(_ref) {
       className: "link",
       style: (0, _extends3.default)({}, dfStyle, style)
     }, rest),
-    title
+    title,
+    children
   );
 };
 

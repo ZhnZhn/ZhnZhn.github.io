@@ -2,6 +2,13 @@ import Big from 'big.js'
 import mathFn from '../mathFn'
 import { Direction } from '../../constants/Type'
 
+const PERCENT_0 = '0.00%';
+const PERCENT_100 = '100.00%';
+
+const _fValueMoving = (nowValue, prevValue) => ({
+  nowValue, prevValue, Direction
+});
+
 describe('calcPercent', ()=>{
   const fn = mathFn.calcPercent
   test('should return str percent with Fixed 2 from Big values', ()=>{
@@ -12,48 +19,77 @@ describe('calcPercent', ()=>{
 
 describe('crValueMoving', () => {
    const fn = mathFn.crValueMoving
-   test('should return correct obj for strings values', ()=>{
-     const r = fn({ nowValue: '200.02', prevValue: '100.01', Direction })
-
-     expect(r.value).toBe('200.02')
-     expect(r.percent).toBe('100.00%')
-     expect(r.delta).toBe('100.01')
-     expect(r.direction).toBe(Direction.UP)
-   })
    test('should return correct obj for Big values', ()=>{
-     const r = fn({ nowValue: Big('200.02'), prevValue: Big('100.01'), Direction })
+     const r = fn(_fValueMoving(
+        Big('200.02'), Big('100.01')
+     ));
 
      expect(r.value).toBe('200.02')
-     expect(r.percent).toBe('100.00%')
+     expect(r.percent).toBe(PERCENT_100)
      expect(r.delta).toBe('100.01')
      expect(r.direction).toBe(Direction.UP)
    })
+   test('should return correct obj for strings values with radix', ()=>{
+     const r = fn(_fValueMoving(
+       '200.02', '100.01'
+     ));
 
-   test('should return correct obj for strings values', ()=>{
-     const r = fn({ nowValue: '0', prevValue: '100', Direction })
+     expect(r.value).toBe('200.02')
+     expect(r.percent).toBe(PERCENT_100)
+     expect(r.delta).toBe('100.01')
+     expect(r.direction).toBe(Direction.UP)
+   })
+   test('should return correct obj for strings values with nowValue="0"', ()=>{
+     const r = fn(_fValueMoving(
+       '0', '100'
+     ));
 
      expect(r.value).toBe('0')
-     expect(r.percent).toBe('100.00%')
+     expect(r.percent).toBe(PERCENT_100)
      expect(r.delta).toBe('100')
      expect(r.direction).toBe(Direction.DOWN)
    })
-   test('should return correct obj for strings values', ()=>{
-     const r = fn({ nowValue: '100', prevValue: '100', Direction })
+   test('should return correct obj for equal strings values', ()=>{
+     const r = fn(_fValueMoving(
+       '100', '100'
+     ));
 
      expect(r.value).toBe('100')
-     expect(r.percent).toBe('0.00%')
+     expect(r.percent).toBe(PERCENT_0)
      expect(r.delta).toBe('0')
      expect(r.direction).toBe(Direction.EQUAL)
+   })
+
+   test('should replace blanks in string values', ()=>{
+     const r = fn(_fValueMoving(
+       '200 000 000', '100 000 000'
+     ));
+
+     expect(r.value).toBe('200000000')
+     expect(r.percent).toBe(PERCENT_100)
+     expect(r.delta).toBe('100000000')
+     expect(r.direction).toBe(Direction.UP)
+   })
+   test('should to fixed to radix 0 value in case value bigger 1 000 000', ()=>{
+     const r = fn(_fValueMoving(
+       '200 000 000.02', '100 000 000.01'
+     ))
+
+     expect(r.value).toBe('200000000')
+     expect(r.percent).toBe(PERCENT_100)
+     expect(r.delta).toBe('100000000')
+     expect(r.direction).toBe(Direction.UP)
    })
 
    test('should use 0 values in edge cases', ()=>{
      const r = fn({ Direction })
 
      expect(r.value).toBe('0')
-     expect(r.percent).toBe('0.00%')
+     expect(r.percent).toBe(PERCENT_0)
      expect(r.delta).toBe('0')
      expect(r.direction).toBe(Direction.EQUAL)
    })
+
 
 })
 

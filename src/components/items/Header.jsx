@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import SvgCheckBox from '../zhn/SvgCheckBox';
 import SvgClose from '../zhn/SvgClose';
@@ -98,7 +98,7 @@ const Header = (props) => {
   );
 };
 
-
+/*
 Header.propTypes = {
   isOpen : PropTypes.bool.isRequired,
   chartType : PropTypes.string.isRequired,
@@ -116,6 +116,6 @@ Header.propTypes = {
   crValueMoving: PropTypes.func,
   onClose : PropTypes.func.isRequired
 }
-
+*/
 
 export default Header

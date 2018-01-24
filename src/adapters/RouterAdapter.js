@@ -14,6 +14,7 @@ import Insee from './insee/Insee'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Intrinio from './intrinio/Intrinio'
+import Crc from './crypto-compare/Crc'
 
 const RouterAdapter = {
   Quandl: {
@@ -32,7 +33,8 @@ const RouterAdapter = {
   Insee,
   Bea,
   Bls,
-  Intrinio
+  Intrinio,
+  Crc
 };
 
 export default RouterAdapter

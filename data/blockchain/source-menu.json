@@ -1,0 +1,53 @@
+{
+  "menu": [
+    {
+      "caption": "CryptoCompare",
+      "items": [
+        { "id": "BC_HD" },
+        { "id": "BC_CI" }
+      ]
+    }
+  ],
+  "items": {
+    "BC_CRC0": {
+      "dialogProps": {
+        "descrUrl" : "./data/blockchain/crypto-compare.html",
+        "oneCaption": "Coin",
+        "noDate": true,
+        "loadId" : "CRC",
+        "linkFn": "CRC"
+      }
+    },
+    "BC_HD": {
+      "type": "BC_HD",
+      "menuTitle": "Exchange Rate, Daily",
+      "dialogCaption": "Exchange Rate, Daily",
+      "chartContainerCaption": "Crypto Compare: Exchange Rate, Daily",
+      "dialogType": "DialogType3",
+      "addProps": "BC_CRC0",
+      "dialogProps": {
+        "oneURI": "./data/blockchain/crypto-compare-coins.json",
+        "dataSource": "Crypto Compare: HistoDay",
+        "dfProps": {
+          "dfSubLoadId": "HD"
+        }
+      }
+    },
+    "BC_CI": {
+      "type": "BC_CI",
+      "menuTitle": "Coin Information",
+      "dialogCaption": "Coin Information",
+      "chartContainerCaption": "Crypto Compare: Coin Information",
+      "dialogType": "DialogType3",
+      "addProps": "BC_CRC0",
+      "dialogProps": {
+        "oneURI": "./data/blockchain/crypto-compare-ids.json",
+        "isProxy": true,
+        "dataSource": "Crypto Compare: CoinSnap",
+        "dfProps": {
+          "dfSubLoadId": "CI"
+        }
+      }
+    }
+  }
+}

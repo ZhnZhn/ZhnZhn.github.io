@@ -27,17 +27,22 @@ const S = {
   }
 };
 
-const TwitterLink = ({ rootStyle, iconStyle, account='', title }) => (
-  <a
-     className="bt-twitter"
-     style={{ ...S.LINK, ...rootStyle }}
-     target="_blank"
-     href={`${TWITTER_URL}/${account}`}
-     title={title}
-  >
-    <i style={{ ...S.ICON, ...iconStyle}}></i>
-    <span>@{account}</span>
-  </a>
-)
+const TwitterLink = ({ rootStyle, iconStyle, account='', title }) => {
+  if (!account){
+    return null;
+  }
+  return (
+    <a
+       className="bt-twitter"
+       style={{ ...S.LINK, ...rootStyle }}
+       target="_blank"
+       href={`${TWITTER_URL}/${account}`}
+       title={title}
+    >
+      <i style={{ ...S.ICON, ...iconStyle}}></i>
+      <span>@{account}</span>
+    </a>
+  );
+};
 
 export default TwitterLink

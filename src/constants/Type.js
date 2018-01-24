@@ -22,6 +22,8 @@ export const BrowserType = {
 
    US_ECONOMY: 'USAE',
 
+   BLOCKCHAIN: 'BC',
+
    WATCH_LIST : 'WL'
 }
 
@@ -81,10 +83,13 @@ export const LoadType = {
   BEA: 'BEA',
   BLS: 'BLS',
   INTR: 'INTR',
+  CRC: 'CRC',
   WL: 'WL'
 }
 
 export const CompItemType = {
   CHART_AREA : 'CHART_AREA',
-  EUROSTAT_MAP : 'EUROSTAT_MAP'
+  EUROSTAT_MAP : 'EUROSTAT_MAP',
+  SECTOR: 'SECTOR',
+  COIN_INFO: 'COIN_INFO'
 }

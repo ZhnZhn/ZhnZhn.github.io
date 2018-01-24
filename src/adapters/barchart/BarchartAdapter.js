@@ -2,13 +2,15 @@
 import DateUtils from '../../utils/DateUtils'
 
 import AdapterFn from '../AdapterFn'
-import Tooltip from '../../charts/Tooltip'
+import AdapterStockFn from '../AdapterStockFn'
 import ConfigBuilder from '../../charts/ConfigBuilder'
 
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from '../IndicatorSma';
 
 const DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" +
               "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>"
+
+const { toSeriesData } = AdapterStockFn;
 
 const _crInfo = (caption) => ({
   description: DESCR,
@@ -28,78 +30,21 @@ const _crZhConfig = (id, value) => ({
   legend: AdapterFn.stockSeriesLegend()
 });
 
-const _crSeriesData = (chartId, json={}, isAllSeries=true ) => {
-  const { results=[] } = json
-      , data = []
-      , dataOpen = [], dataHigh = [], dataLow = []
-      , dataVolume = [], dataVolumeColumn = []
-      , dataATH = [], dataMfi = [];
-  let _prevClose
-    , minClose = Number.POSITIVE_INFINITY
-    , maxClose = Number.NEGATIVE_INFINITY;
-  results.forEach(item => {
-    const {
-           tradingDay='',
-           open, high, low, close, volume
-          } = item
-        , _date = AdapterFn.ymdToUTC(tradingDay);
-
-    data.push([_date, close])
-
-    if (isAllSeries) {
-      if (minClose > close) { minClose = close }
-      if (maxClose < close ) { maxClose = close }
-
-      dataOpen.push([_date, open])
-      dataHigh.push([_date, high])
-      dataLow.push([_date, low])
-      dataVolume.push([_date, volume])
-      dataVolumeColumn.push(
-          AdapterFn.volumeColumnPoint({
-             open, close, volume, date: _date,
-             option: { _high: high, _low: low }
-          })
-      )
-      dataMfi.push([tradingDay, close, high, low, close, volume])
-      if (typeof _prevClose !== 'undefined'){
-        dataATH.push(
-           AdapterFn.athPoint({
-             date: _date, prevClose: _prevClose, open
-           })
-        )
-      }
-      _prevClose = close
-     }
-  })
-
-  return {
-    data, minClose, maxClose,
-    dataOpen, dataHigh, dataLow,
-    dataVolume, dataVolumeColumn,
-    dataATH, dataMfi
-  };
-
-}
-
 const _crChartId = (option) => {
   const { value='' } = option;
   return `B/${value}`;
-}
+};
 
-const _crConfig = (json, option) => {
+const _crConfig = (json={}, option) => {
   const  { value='', title='' } = option
       , _chartId = _crChartId(option)
-      , {
-          data, minClose, maxClose,
-          dataOpen, dataHigh, dataLow,
-          dataVolume, dataVolumeColumn,
-          dataATH, dataMfi
-        } = _crSeriesData(_chartId, json)
+      , dataOption = toSeriesData(_chartId, json.results, {
+           pnDate: 'tradingDay'
+        })
+      , { data, dataMfi } = dataOption
       , config = ConfigBuilder()
-         .initBaseArea()
-         .add('chart', { spacingTop: 25 })
+         .initBaseStock(_chartId, dataOption)
          .addCaption(title)
-         .addTooltip(Tooltip.fnBasePointFormatter)
          .add({
             valueMoving: AdapterFn.valueMoving(data),
             info: _crInfo(title),
@@ -107,16 +52,12 @@ const _crConfig = (json, option) => {
             zhFnAddSeriesSma: fnAddSeriesSma,
             zhFnRemoveSeries: fnRemoveSeries
           })
-          .addZhVolumeConfig(_chartId, dataVolumeColumn, dataVolume)
-          .addZhATHConfig(_chartId, dataATH)
           .addZhPoints(dataMfi, fnGetConfigMfi)
-          .setMinMax(minClose, maxClose)
-          .setStockSerias(_chartId, data, dataHigh, dataLow, dataOpen)
           .toConfig();
   return {
-    config,
-    isDrawDeltaExtrems:false,
-    isNotZoomToMinMax:false
+    config
+    //isDrawDeltaExtrems:false,
+    //isNotZoomToMinMax:false
   };
 }
 
@@ -126,10 +67,13 @@ const BarchartAdapter = {
     return _config;
   },
 
-  toSeries(json, option) {
+  toSeries(json={}, option) {
     const { parentId } = option
         , _id = `${parentId}_${_crChartId(option)}`
-        , { data } = _crSeriesData(_id, json, false);
+        , { data } = toSeriesData(_id, json.results, {
+             isAllSeries: false,
+             pnDate: 'tradingDay'
+          });
     return ConfigBuilder()
       .initBaseSeria()
       .addPoints(_id, data)

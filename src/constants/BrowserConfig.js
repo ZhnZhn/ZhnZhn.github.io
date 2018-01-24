@@ -29,6 +29,12 @@ const BrowserConfig = {
     browserType: BT.ECONOMIC,
     isDynamic: false
   },
+  [BT.BLOCKCHAIN]: {
+    browserType: BT.BLOCKCHAIN,
+    isDynamic: true,
+    caption: 'BlockChain',
+    sourceMenuUrl: './data/blockchain/source-menu.json'
+  },
 
   [BT.PREMIUM_SAMPLE]: {
     browserType: BT.PREMIUM_SAMPLE,

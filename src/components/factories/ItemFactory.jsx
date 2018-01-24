@@ -4,11 +4,12 @@ import ChartFn from '../../charts/ChartFn';
 
 import ComponentActions from '../../flux/actions/ComponentActions';
 import ChartActions from '../../flux/actions/ChartActions';
-import { ModalDialog, CompItemType } from '../../constants/Type';
+import { ModalDialog, CompItemType as CIT } from '../../constants/Type';
 
 import AreaChartItem from '../items/AreaChartItem';
 import MapChartItem from '../items/MapChartItem';
 import SectorItem from '../items/SectorItem';
+import CoinInfoItem from '../items/CoinInfoItem';
 
 const _createAreaChartItem = function({
   store, config, index, option, props
@@ -31,7 +32,7 @@ const _createAreaChartItem = function({
 
            onCopy={ChartActions.copy}
            onPasteToDialog={ComponentActions.showModalDialog.bind(null, ModalDialog.PASTE_TO)}
-           getCopyFromChart={store.getCopyFromChart.bind(store)}           
+           getCopyFromChart={store.getCopyFromChart.bind(store)}
            ChartFn={ChartFn}
        />
      );
@@ -67,11 +68,25 @@ const _crSectorItem = ({
   );
 }
 
+const _crCoinInfoItem = ({
+  store, config, index, option, props
+}) => {
+  const { Symbol:id } = config.General;
+  return (
+    <CoinInfoItem
+      key={id}
+      config={config}
+      {...props}
+    />
+  );
+}
+
 const _rCreateItem = {
   DEFAULT : _createAreaChartItem,
 
-  [CompItemType.EUROSTAT_MAP] : _createMapChartItem,
-  SECTOR : _crSectorItem
+  [CIT.EUROSTAT_MAP] : _createMapChartItem,
+  [CIT.SECTOR] : _crSectorItem,
+  [CIT.COIN_INFO]: _crCoinInfoItem
 }
 
 const ItemFactory = {

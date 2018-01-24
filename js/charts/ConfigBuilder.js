@@ -24,6 +24,10 @@ var _ChartFactory = require('./ChartFactory');
 
 var _ChartFactory2 = _interopRequireDefault(_ChartFactory);
 
+var _Tooltip = require('./Tooltip');
+
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
+
 var _SeriaBuilder = require('./SeriaBuilder');
 
 var _SeriaBuilder2 = _interopRequireDefault(_SeriaBuilder);
@@ -81,10 +85,21 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     return this;
   },
   initBaseArea2: function initBaseArea2(title, subtitle) {
-    this.config = _ChartConfig2.default.fBaseAreaConfig();
-    this.add('chart', { spacingTop: 25 });
-    this.addCaption(title, subtitle);
-    this.clearSeries();
+    this.initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).clearSeries();
+    return this;
+  },
+  initBaseStock: function initBaseStock(id, dataOption) {
+    var dataVolumeColumn = dataOption.dataVolumeColumn,
+        dataVolume = dataOption.dataVolume,
+        dataATH = dataOption.dataATH,
+        minClose = dataOption.minClose,
+        maxClose = dataOption.maxClose,
+        data = dataOption.data,
+        dataHigh = dataOption.dataHigh,
+        dataLow = dataOption.dataLow,
+        dataOpen = dataOption.dataOpen;
+
+    this.initBaseArea().add('chart', { spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addZhVolumeConfig(id, dataVolumeColumn, dataVolume).addZhATHConfig(id, dataATH).setMinMax(minClose, maxClose).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
     return this;
   },
   initBaseCategories: function initBaseCategories() {

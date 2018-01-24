@@ -68,7 +68,7 @@ var DataProviders = function DataProviders(_ref) {
     _OpenClose2.default,
     {
       isClose: isClose,
-      caption: 'Data Providers (All 13):',
+      caption: 'Data Providers (All 14):',
       rootStyle: (0, _extends3.default)({}, _About2.default.LINE_HEIGHT, _About2.default.P_BOTTOM),
       childStyle: ST.ROOT_CHILD
     },
@@ -187,7 +187,7 @@ var DataProviders = function DataProviders(_ref) {
       _react2.default.createElement(
         _OpenClose2.default,
         {
-          caption: '(5) Required Https Proxy:',
+          caption: '(6) Required Https Proxy:',
           rootStyle: ST.OPEN_CLOSE,
           childStyle: ST.CHILD_STYLE,
           isClose: true,
@@ -220,6 +220,11 @@ var DataProviders = function DataProviders(_ref) {
             'span',
             { style: _About2.default.PROVIDER },
             _react2.default.createElement(_Links2.default.Bsl, null)
+          ),
+          _react2.default.createElement(
+            'span',
+            { style: _About2.default.PROVIDER },
+            _react2.default.createElement(_Links2.default.CryptoCompare, null)
           )
         ),
         _react2.default.createElement(

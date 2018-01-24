@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/components/about/TwitterLink.jsx"],"names":["TWITTER_URL","S","LINK","display","position","top","height","borderRadius","padding","color","outline","textDecoration","userSelect","cursor","ICON","width","background","backgroundImage","marginRight","TwitterLink","rootStyle","iconStyle","account","title"],"mappings":";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,cAAc,qBAApB;AACA,IAAMC,IAAI;AACRC,QAAM;AACJC,aAAS,cADL;AAEJC,cAAU,UAFN;AAGJC,SAAK,MAHD;AAIJC,YAAQ,MAJJ;AAKJC,kBAAc,KALV;AAMJC,aAAS,kBANL;AAOJC,WAAO,MAPH;AAQJC,aAAS,KARL;AASJC,oBAAiB,MATb;AAUJC,gBAAY,MAVR;AAWJC,YAAQ;AAXJ,GADE;AAcRC,QAAM;AACJX,aAAS,cADL;AAEJC,cAAU,UAFN;AAGJC,SAAK,KAHD;AAIJU,WAAO,MAJH;AAKJT,YAAQ,MALJ;AAMJU,gBAAY,2BANR;AAOJC,qBAAiB,0jCAPb;AAQJC,iBAAa;AART;AAdE,CAAV;;AA0BA,IAAMC,cAAc,SAAdA,WAAc;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,SAAd,QAAcA,SAAd;AAAA,0BAAyBC,OAAzB;AAAA,MAAyBA,OAAzB,gCAAiC,EAAjC;AAAA,MAAqCC,KAArC,QAAqCA,KAArC;AAAA,SAClB;AAAA;AAAA;AACG,iBAAU,YADb;AAEG,wCAAYtB,EAAEC,IAAd,EAAuBkB,SAAvB,CAFH;AAGG,cAAO,QAHV;AAIG,YAASpB,WAAT,SAAwBsB,OAJ3B;AAKG,aAAOC;AALV;AAOE,yCAAG,kCAAYtB,EAAEa,IAAd,EAAuBO,SAAvB,CAAH,GAPF;AAQE;AAAA;AAAA;AAAA;AAAQC;AAAR;AARF,GADkB;AAAA,CAApB;;kBAaeH,W","file":"TwitterLink.js","sourcesContent":["import React from 'react'\r\n\r\nconst TWITTER_URL = 'https://twitter.com';\r\nconst S = {\r\n  LINK: {\r\n    display: 'inline-block',\r\n    position: 'relative',\r\n    top: '-2px',\r\n    height: '28px',\r\n    borderRadius: '4px',\r\n    padding: '1px 10px 1px 9px',\r\n    color: '#FFF',\r\n    outline: '0px',\r\n    textDecoration : 'none',\r\n    userSelect: 'none',\r\n    cursor: 'pointer'\r\n  },\r\n  ICON: {\r\n    display: 'inline-block',\r\n    position: 'relative',\r\n    top: '4px',\r\n    width: '18px',\r\n    height: '18px',\r\n    background: 'transparent 0 0 no-repeat',\r\n    backgroundImage: \"url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2072%2072%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h72v72H0z%22%2F%3E%3Cpath%20class%3D%22icon%22%20fill%3D%22%23fff%22%20d%3D%22M68.812%2015.14c-2.348%201.04-4.87%201.744-7.52%202.06%202.704-1.62%204.78-4.186%205.757-7.243-2.53%201.5-5.33%202.592-8.314%203.176C56.35%2010.59%2052.948%209%2049.182%209c-7.23%200-13.092%205.86-13.092%2013.093%200%201.026.118%202.02.338%202.98C25.543%2024.527%2015.9%2019.318%209.44%2011.396c-1.125%201.936-1.77%204.184-1.77%206.58%200%204.543%202.312%208.552%205.824%2010.9-2.146-.07-4.165-.658-5.93-1.64-.002.056-.002.11-.002.163%200%206.345%204.513%2011.638%2010.504%2012.84-1.1.298-2.256.457-3.45.457-.845%200-1.666-.078-2.464-.23%201.667%205.2%206.5%208.985%2012.23%209.09-4.482%203.51-10.13%205.605-16.26%205.605-1.055%200-2.096-.06-3.122-.184%205.794%203.717%2012.676%205.882%2020.067%205.882%2024.083%200%2037.25-19.95%2037.25-37.25%200-.565-.013-1.133-.038-1.693%202.558-1.847%204.778-4.15%206.532-6.774z%22%2F%3E%3C%2Fsvg%3E')\",\r\n    marginRight: '8px'\r\n  }\r\n};\r\n\r\nconst TwitterLink = ({ rootStyle, iconStyle, account='', title }) => (\r\n  <a\r\n     className=\"bt-twitter\"\r\n     style={{ ...S.LINK, ...rootStyle }}\r\n     target=\"_blank\"\r\n     href={`${TWITTER_URL}/${account}`}\r\n     title={title}\r\n  >\r\n    <i style={{ ...S.ICON, ...iconStyle}}></i>\r\n    <span>@{account}</span>\r\n  </a>\r\n)\r\n\r\nexport default TwitterLink\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\TwitterLink.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\TwitterLink.js",
+ "sourceRoot": "",
+ "names": [
+  "TWITTER_URL",
+  "S",
+  "LINK",
+  "display",
+  "position",
+  "top",
+  "height",
+  "borderRadius",
+  "padding",
+  "color",
+  "outline",
+  "textDecoration",
+  "userSelect",
+  "cursor",
+  "ICON",
+  "width",
+  "background",
+  "backgroundImage",
+  "marginRight",
+  "TwitterLink",
+  "rootStyle",
+  "iconStyle",
+  "account",
+  "title"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,cAAc,qBAApB;AACA,IAAMC,IAAI;AACRC,QAAM;AACJC,aAAS,cADL;AAEJC,cAAU,UAFN;AAGJC,SAAK,MAHD;AAIJC,YAAQ,MAJJ;AAKJC,kBAAc,KALV;AAMJC,aAAS,kBANL;AAOJC,WAAO,MAPH;AAQJC,aAAS,KARL;AASJC,oBAAiB,MATb;AAUJC,gBAAY,MAVR;AAWJC,YAAQ;AAXJ,GADE;AAcRC,QAAM;AACJX,aAAS,cADL;AAEJC,cAAU,UAFN;AAGJC,SAAK,KAHD;AAIJU,WAAO,MAJH;AAKJT,YAAQ,MALJ;AAMJU,gBAAY,2BANR;AAOJC,qBAAiB,0jCAPb;AAQJC,iBAAa;AART;AAdE,CAAV;;AA0BA,IAAMC,cAAc,SAAdA,WAAc,OAAiD;AAAA,MAA9CC,SAA8C,QAA9CA,SAA8C;AAAA,MAAnCC,SAAmC,QAAnCA,SAAmC;AAAA,0BAAxBC,OAAwB;AAAA,MAAxBA,OAAwB,gCAAhB,EAAgB;AAAA,MAAZC,KAAY,QAAZA,KAAY;;AACnE,MAAI,CAACD,OAAL,EAAa;AACX,WAAO,IAAP;AACD;AACD,SACE;AAAA;AAAA;AACG,iBAAU,YADb;AAEG,wCAAYrB,EAAEC,IAAd,EAAuBkB,SAAvB,CAFH;AAGG,cAAO,QAHV;AAIG,YAASpB,WAAT,SAAwBsB,OAJ3B;AAKG,aAAOC;AALV;AAOE,yCAAG,kCAAYtB,EAAEa,IAAd,EAAuBO,SAAvB,CAAH,GAPF;AAQE;AAAA;AAAA;AAAA;AAAQC;AAAR;AARF,GADF;AAYD,CAhBD;;kBAkBeH,W"
+}

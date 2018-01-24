@@ -1,1 +1,18 @@
-{"version":3,"sources":["../../../src/adapters/iex/RouterAdapter.js"],"names":["_r","DF","earnings","RouterAdapter","getAdapter","option","dfType"],"mappings":";;;;;;AACA;;;;;;AAEA,IAAMA,KAAK;AACTC,0BADS;AAETC;AAFS,CAAX;;AAKA,IAAMC,gBAAgB;AACpBC,YADoB,sBACTC,MADS,EACF;AAAA,QACRC,MADQ,GACGD,MADH,CACRC,MADQ;;AAEhB,WAAON,GAAGM,MAAH,KAAcN,GAAGC,EAAxB;AACD;AAJmB,CAAtB;;kBAOeE,a","file":"RouterAdapter.js","sourcesContent":["\r\nimport toEarnings from './toEarnings'\r\n\r\nconst _r = {\r\n  DF: toEarnings,\r\n  earnings: toEarnings\r\n};\r\n\r\nconst RouterAdapter = {\r\n  getAdapter(option){\r\n    const { dfType } = option;        \r\n    return _r[dfType] || _r.DF;\r\n  }\r\n}\r\n\r\nexport default RouterAdapter\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\iex\\RouterAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\iex\\RouterAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "_r",
+  "DF",
+  "earnings",
+  "chart",
+  "RouterAdapter",
+  "getAdapter",
+  "option",
+  "dfType"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,KAAK;AACTC,uBADS;AAETC,gCAFS;AAGTC;AAHS,CAAX;;AAMA,IAAMC,gBAAgB;AACpBC,YADoB,sBACTC,MADS,EACF;AAAA,QACRC,MADQ,GACGD,MADH,CACRC,MADQ;;AAEhB,WAAOP,GAAGO,MAAH,KAAcP,GAAGC,EAAxB;AACD;AAJmB,CAAtB;;kBAOeG,a"
+}

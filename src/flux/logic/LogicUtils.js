@@ -28,7 +28,7 @@ const _fnCreateEuroStatKey = function(option){
 const LogicUtils = {
 
   createKeyForConfig(option){
-    const { loadId } = option;
+    const { loadId, value } = option;
     switch (loadId) {
       case LoadType.Q: case LoadType.QCT:
         return _fnCreateQuandlKey(option);
@@ -37,7 +37,7 @@ const LogicUtils = {
       case LoadType.WL:
          return option.id;
       default :
-        return 'key'
+        return value || 'key';
     }
   }
 

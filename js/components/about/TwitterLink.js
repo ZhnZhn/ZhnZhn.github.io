@@ -47,6 +47,10 @@ var TwitterLink = function TwitterLink(_ref) {
       _ref$account = _ref.account,
       account = _ref$account === undefined ? '' : _ref$account,
       title = _ref.title;
+
+  if (!account) {
+    return null;
+  }
   return _react2.default.createElement(
     'a',
     {
@@ -67,4 +71,4 @@ var TwitterLink = function TwitterLink(_ref) {
 };
 
 exports.default = TwitterLink;
-//# sourceMappingURL=TwitterLink.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\TwitterLink.js.map

@@ -1,6 +1,7 @@
 import Chart from './Chart'
 import ChartConfig from './ChartConfig'
 import Factory from './ChartFactory'
+import Tooltip from './Tooltip'
 
 import SeriaBuilder from './SeriaBuilder'
 
@@ -54,10 +55,26 @@ ConfigBuilder.prototype = {
     return this;
   },
   initBaseArea2(title, subtitle){
-    this.config = ChartConfig.fBaseAreaConfig()
-    this.add('chart', { spacingTop: 25 })
-    this.addCaption(title, subtitle)
-    this.clearSeries()    
+    this.initBaseArea()
+      .add('chart', { spacingTop: 25 })
+      .addCaption(title, subtitle)
+      .clearSeries()
+    return this;
+  },
+  initBaseStock(id, dataOption){
+    const {
+            dataVolumeColumn, dataVolume,
+            dataATH,
+            minClose, maxClose,
+            data, dataHigh, dataLow, dataOpen
+          } = dataOption;
+    this.initBaseArea()
+      .add('chart', { spacingTop: 25 })
+      .addTooltip(Tooltip.fnBasePointFormatter)
+      .addZhVolumeConfig(id, dataVolumeColumn, dataVolume)
+      .addZhATHConfig(id, dataATH)
+      .setMinMax(minClose, maxClose)
+      .setStockSerias(id, data, dataHigh, dataLow, dataOpen)
     return this;
   },
   initBaseCategories(categories=[]){

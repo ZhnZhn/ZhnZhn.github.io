@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var _Type = require('../../constants/Type');
 
 var _settings = {};
-var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.NST, _Type.LoadType.NST_2, _Type.LoadType.SWS, _Type.LoadType.BLS];
+var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.NST, _Type.LoadType.NST_2, _Type.LoadType.SWS, _Type.LoadType.BLS, _Type.LoadType.CRC];
 
 var SettingSlice = {
   setting: {

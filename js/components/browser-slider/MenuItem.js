@@ -48,7 +48,14 @@ var MenuItem = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuItem.__proto__ || Object.getPrototypeOf(MenuItem)).call.apply(_ref, [this].concat(args))), _this), _this._ref = function (n) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuItem.__proto__ || Object.getPrototypeOf(MenuItem)).call.apply(_ref, [this].concat(args))), _this), _this._hKeyPress = function (evt) {
+      evt.preventDefault();
+      var which = evt.which;
+
+      if (which === 13 || which === 32) {
+        _this.props.onClick();
+      }
+    }, _this._ref = function (n) {
       return _this._node = n;
     }, _this.focus = function () {
       if (_this._node) {
@@ -76,14 +83,7 @@ var MenuItem = function (_Component) {
           tabIndex: '0',
           role: 'menuitem',
           onClick: onClick,
-          onKeyPress: function onKeyPress(evt) {
-            evt.preventDefault();
-            var which = evt.which;
-
-            if (which === 13 || which === 32) {
-              onClick();
-            }
-          }
+          onKeyPress: this._hKeyPress
         },
         text
       );
@@ -93,4 +93,4 @@ var MenuItem = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuItem;
-//# sourceMappingURL=MenuItem.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\MenuItem.js.map

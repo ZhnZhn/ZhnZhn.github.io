@@ -17,7 +17,7 @@ import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const PREV_BUILD = '18-01-2018';
+const PREV_BUILD = '24-01-2018';
 
 class AppErc extends Component {
 

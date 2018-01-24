@@ -1,0 +1,13 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\crypto-compare\\Crc.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\crypto-compare\\Crc.js",
+ "sourceRoot": "",
+ "names": [
+  "Crc",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,uBADU,EACLC;AADK,CAAZ;;kBAIeF,G"
+}

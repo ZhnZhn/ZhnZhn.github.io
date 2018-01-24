@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/adapters/iex/IexAdapter.js"],"names":["IexAdapter","toConfig","json","option","config","getAdapter","toSeries","chart","seria","toSeria"],"mappings":";;;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,UADiB,oBACRC,IADQ,EACFC,MADE,EACK;AACpB,QAAMC,SAAS,wBACNC,UADM,CACKF,MADL,EAENF,QAFM,CAEGC,IAFH,EAESC,MAFT,CAAf;AAGA,WAAO,EAAEC,cAAF,EAAP;AACD,GANgB;AAQjBE,UARiB,oBAQRJ,IARQ,EAQFC,MARE,EAQMI,KARN,EAQY;AAC3B,QAAMC,QAAQ,wBACLH,UADK,CACMF,MADN,EAELM,OAFK,CAEGP,IAFH,EAESC,MAFT,EAEiBI,KAFjB,CAAd;AAGC,WAAOC,KAAP;AACF;AAbgB,CAAnB;;kBAiBeR,U","file":"IexAdapter.js","sourcesContent":["\r\nimport Router from './RouterAdapter'\r\n\r\nconst IexAdapter = {\r\n  toConfig(json, option){\r\n    const config = Router\r\n            .getAdapter(option)\r\n            .toConfig(json, option);    \r\n    return { config };\r\n  },\r\n\r\n  toSeries(json, option, chart){\r\n    const seria = Router\r\n            .getAdapter(option)\r\n            .toSeria(json, option, chart);\r\n     return seria;\r\n  }\r\n\r\n}\r\n\r\nexport default IexAdapter\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\iex\\IexAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\iex\\IexAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "IexAdapter",
+  "toConfig",
+  "json",
+  "option",
+  "config",
+  "getAdapter",
+  "toSeries",
+  "chart",
+  "seria"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,UADiB,oBACRC,IADQ,EACFC,MADE,EACK;AACpB,QAAMC,SAAS,wBACNC,UADM,CACKF,MADL,EAENF,QAFM,CAEGC,IAFH,EAESC,MAFT,CAAf;AAGA,WAAO,EAAEC,cAAF,EAAP;AACD,GANgB;AAQjBE,UARiB,oBAQRJ,IARQ,EAQFC,MARE,EAQMI,KARN,EAQY;AAC3B,QAAMC,QAAQ,wBACLH,UADK,CACMF,MADN,EAELG,QAFK,CAEIJ,IAFJ,EAEUC,MAFV,EAEkBI,KAFlB,CAAd;AAGC,WAAOC,KAAP;AACF;AAbgB,CAAnB;;kBAiBeR,U"
+}

@@ -41,7 +41,7 @@ const _crSeria = (json, option) => {
           } = p
         , _c = EPSSurpriseDollar < 0
                  ? C.COLOR_MINUS
-                 : C.COLOR_PLUS                 
+                 : C.COLOR_PLUS
         , _p = ChartConfig.fMarkerExDividend(_c);
     _p.dataLabels.y = 0
     data.push(
@@ -77,7 +77,7 @@ const toEarnings = {
     return config;
   },
 
-  toSeria(json, option, chart){
+  toSeries(json, option, chart){
     const seria = _crSeria(json, option)
         , y = _calcScatterY(chart);
 

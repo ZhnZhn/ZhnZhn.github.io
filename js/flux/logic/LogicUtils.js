@@ -35,7 +35,8 @@ var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
 
 var LogicUtils = {
   createKeyForConfig: function createKeyForConfig(option) {
-    var loadId = option.loadId;
+    var loadId = option.loadId,
+        value = option.value;
 
     switch (loadId) {
       case _Type.LoadType.Q:case _Type.LoadType.QCT:
@@ -45,10 +46,10 @@ var LogicUtils = {
       case _Type.LoadType.WL:
         return option.id;
       default:
-        return 'key';
+        return value || 'key';
     }
   }
 };
 
 exports.default = LogicUtils;
-//# sourceMappingURL=LogicUtils.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LogicUtils.js.map

@@ -3,32 +3,29 @@ import ChartConfig from '../../charts/ChartConfig'
 import ConfigBuilder from '../../charts/ConfigBuilder'
 import AdapterFn from '../AdapterFn'
 
-import {
-  fnAddSeriesSma, fnRemoveSeries
-} from '../IndicatorSma';
-
 import Chart from '../../charts/Chart'
 import Tooltip from '../../charts/Tooltip'
 
+import fnAdapter from './fnAdapter'
+
+const {
+        ymdhmsToUTC,
+        volumeColumnPoint,
+      } = AdapterFn;
+
+const { crIntradayConfigOption } = fnAdapter;
+
 const C = {
   TIME_START_DAY: '09:30:00',
-  TIME_END_DAY: '16:00:00',
+  TIME_CLOSE_DAY: '16:00:00',
 
   START_DAY: "#90ed7d",
-  END_DAY: "#f7a35c",
+  CLOSE_DAY: "#f7a35c",
   CLOSE: "#2f7ed8",
   HIGH: "#4caf50",
   LOW: "#f44336",
   OPEN: "#90ed7d"
 }
-
-const _crZhConfig = id => ({
-  id: id,
-  key: id,
-  isWithLegend: true,
-  legend: AdapterFn.stockSeriesLegend(),
-  dataSource: "Alpha Vantage"
-});
 
 const _fMarker = color => ({
   radius: 3,
@@ -41,14 +38,14 @@ const _fMarkerColor = (date) => {
   if (date.indexOf(C.TIME_START_DAY) !== -1) {
     marker = _fMarker(C.START_DAY)
     color = C.START_DAY
-  } else if (date.indexOf(C.TIME_END_DAY) !== -1) {
-    marker = _fMarker(C.END_DAY)
-    color = C.END_DAY
+  } else if (date.indexOf(C.TIME_CLOSE_DAY) !== -1) {
+    marker = _fMarker(C.CLOSE_DAY)
+    color = C.CLOSE_DAY
   }
   return { marker, color };
 }
 
-const _createSeriaData = (json, option, config, chartId) => {
+const _crSeriaData = (json, option, config, chartId) => {
   const { interval } = option
   , _propName = `Time Series (${interval})`
   , _value = json[_propName]
@@ -72,7 +69,7 @@ const _createSeriaData = (json, option, config, chartId) => {
     _close = parseFloat(_point['4. close'])
     _volume = parseFloat(_point['5. volume'])
 
-    _dateMs =  AdapterFn.ymdhmsToUTC(_date)
+    _dateMs = ymdhmsToUTC(_date)
     _data.push({
       x: _dateMs, y: _close, ..._fMarkerColor(_date)
     })
@@ -83,7 +80,7 @@ const _createSeriaData = (json, option, config, chartId) => {
 
     _dataVolume.push([_dateMs, _volume])
     _dataVolumeColumn.push(
-        AdapterFn.volumeColumnPoint({
+        volumeColumnPoint({
            open: _open, close: _close, volume: _volume,
            date: _dateMs,
            option: { _high: _high, _low: _low }
@@ -110,24 +107,32 @@ const _createSeriaData = (json, option, config, chartId) => {
   })
   config.zhVolumeConfig.series[1].tooltip = Chart.fTooltip(Tooltip.fnVolumePointFormatterT)
 
+  return _data;
+}
+
+const _toDataDaily = (data) => {
+  return data.filter(p => p.color === C.CLOSE_DAY);
 }
 
 const AlphaIntradayAdapter = {
   toConfig(json, option){
     const baseConfig = ChartConfig.fBaseAreaConfig()
         , { value, interval } = option
-        , _chartId = value;
-
-    _createSeriaData(json, option, baseConfig, _chartId );
+        , _chartId = value
+        , _data = _crSeriaData(json, option, baseConfig, _chartId )
+        , _dataDaily = _toDataDaily(_data);
 
     const config = ConfigBuilder()
       .init(baseConfig)
       .add('chart', { spacingTop: 25 })
       .addCaption(value, `Time Series (${interval})`)
       .addTooltip(Tooltip.fnBasePointFormatterT)
-      .add('zhConfig', _crZhConfig(_chartId))
-      .add('zhFnAddSeriesSma', fnAddSeriesSma)
-      .add('zhFnRemoveSeries', fnRemoveSeries)
+      .add({
+        ...crIntradayConfigOption({
+          id: _chartId,
+          data: _dataDaily
+        })
+      })
       .toConfig();
 
     return {

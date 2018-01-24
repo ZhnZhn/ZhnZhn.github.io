@@ -33,6 +33,11 @@ const MODEL = {
       cn: CL.EU,
       title: 'FAOSTAT',
     },{
+      id: BT.BLOCKCHAIN,
+      cn: CL.BR,
+      title: 'BlockChain',      
+      isNew: true
+    },{
       id: BT.PREMIUM_SAMPLE,
       title: 'Quandl Premium Sample'
     },{

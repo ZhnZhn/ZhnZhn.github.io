@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -24,17 +28,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _ChoroplethMap = require('../../adapters/eurostat/ChoroplethMap');
 
 var _ChoroplethMap2 = _interopRequireDefault(_ChoroplethMap);
 
-var _SvgClose = require('../zhn/SvgClose');
+var _ItemHeader = require('./ItemHeader');
 
-var _SvgClose2 = _interopRequireDefault(_SvgClose);
+var _ItemHeader2 = _interopRequireDefault(_ItemHeader);
 
 var _ButtonTab = require('../zhn/ButtonTab');
 
@@ -54,66 +54,33 @@ var _SpinnerLoading2 = _interopRequireDefault(_SpinnerLoading);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
+//import PropTypes from "prop-types";
+
+var S = {
+  ROOT_DIV: {
     position: 'relative',
     lineHeight: 1.5,
     marginBottom: '10px',
     marginRight: '25px'
   },
-  headerDiv: {
-    //backgroundColor: '#232F3B',
-    backgroundColor: '#1b2836',
-    paddingTop: '4px',
-    paddingLeft: '10px',
-    lineHeight: 1.8,
-    height: '32px',
-    width: '100%',
-    borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px'
-  },
-  checkBoxStyle: {
-    float: 'left',
-    marginRight: '10px',
-    marginLeft: '10px'
-  },
-  captionSpanOpen: {
+  TIME_SPAN: {
     display: 'inline-block',
-    color: 'rgba(164, 135, 212, 1)',
-    cursor: 'pointer',
-    width: '410px',
-    fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    float: 'left'
-  },
-  timeSpan: {
+    position: 'relative',
+    top: '-8px',
     color: 'rgb(253, 179, 22)',
     fontWeight: 'bold',
     paddingLeft: '16px'
   },
-  captionSpanClose: {
-    display: 'inline-block',
-    color: 'gray',
-    cursor: 'pointer',
-    width: '410px',
-    fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    float: 'left'
-  },
-  tabDiv: {
+  TAB_DIV: {
     position: 'relative',
     height: '30px',
     backgroundColor: 'transparent',
     zIndex: 2
   },
-  mapDiv: {
+  MAP_DIV: {
     height: '400px'
   },
-  spinnerLoading: {
+  SPINNER_LOADING: {
     position: 'relative',
     display: 'block',
     textAlign: 'middle',
@@ -122,16 +89,31 @@ var styles = {
     width: '32px',
     height: '32px'
   },
-  displayBlock: {
+  BLOCK: {
     display: 'block'
   },
-  displayNone: {
+  NONE: {
     display: 'none'
   }
 };
 
 var MapChartItem = function (_Component) {
   (0, _inherits3.default)(MapChartItem, _Component);
+
+  /*
+  static propTypes = {
+    caption: PropTypes.string,
+    config: PropTypes.shape({
+      json: PropTypes.object,
+      zhMapSlice: PropTypes.object,
+      zhDialog: PropTypes.shape({
+        subtitle: PropTypes.string,
+        time: PropTypes.string
+      })
+    }),
+    onCloseItem: PropTypes.func
+  }
+  */
 
   function MapChartItem(props) {
     (0, _classCallCheck3.default)(this, MapChartItem);
@@ -153,7 +135,7 @@ var MapChartItem = function (_Component) {
     _this._renderTabToolbar = function () {
       return _react2.default.createElement(
         'div',
-        { style: styles.tabDiv },
+        { style: S.TAB_DIV },
         _react2.default.createElement(_ButtonTab2.default, {
           caption: 'Info',
           isShow: false,
@@ -202,8 +184,6 @@ var MapChartItem = function (_Component) {
           caption = _props2.caption,
           config = _props2.config,
           onCloseItem = _props2.onCloseItem,
-          _config$json = config.json,
-          json = _config$json === undefined ? {} : _config$json,
           _config$zhDialog = config.zhDialog,
           zhDialog = _config$zhDialog === undefined ? {} : _config$zhDialog,
           _zhDialog$subtitle = zhDialog.subtitle,
@@ -213,31 +193,24 @@ var MapChartItem = function (_Component) {
           isOpen = _state.isOpen,
           isShowInfo = _state.isShowInfo,
           time = _state.time,
-          _styleCaption = isOpen ? styles.captionSpanOpen : styles.captionSpanClose,
-          _styleMap = isShowInfo ? styles.displayNone : styles.displayBlock;
+          _styleMap = isShowInfo ? S.NONE : S.BLOCK;
 
       return _react2.default.createElement(
         'div',
-        { style: styles.rootDiv },
+        { style: S.ROOT_DIV },
         _react2.default.createElement(
-          'div',
-          { style: styles.headerDiv },
+          _ItemHeader2.default,
+          {
+            isOpen: isOpen,
+            caption: subtitle,
+            onClick: this._handleToggle,
+            onClose: onCloseItem
+          },
           _react2.default.createElement(
             'span',
-            {
-              className: 'not-selected',
-              title: json.label,
-              style: _styleCaption,
-              onClick: this._handleToggle
-            },
-            subtitle
-          ),
-          _react2.default.createElement(
-            'span',
-            { style: styles.timeSpan },
+            { style: S.TIME_SPAN },
             time
-          ),
-          _react2.default.createElement(_SvgClose2.default, { onClose: onCloseItem })
+          )
         ),
         _react2.default.createElement(
           _ShowHide2.default,
@@ -247,9 +220,10 @@ var MapChartItem = function (_Component) {
             'div',
             {
               id: 'map_' + caption,
-              style: Object.assign({}, styles.mapDiv, _styleMap)
+              style: (0, _extends3.default)({}, S.MAP_DIV, _styleMap)
             },
-            isLoading && _react2.default.createElement(_SpinnerLoading2.default, { style: styles.spinnerLoading })
+            isLoading && _react2.default.createElement(_SpinnerLoading2.default, {
+              style: S.SPINNER_LOADING })
           ),
           _react2.default.createElement(_PanelDataInfo2.default, {
             isShow: isShowInfo,
@@ -263,17 +237,5 @@ var MapChartItem = function (_Component) {
   return MapChartItem;
 }(_react.Component);
 
-MapChartItem.propTypes = process.env.NODE_ENV !== "production" ? {
-  caption: _propTypes2.default.string,
-  config: _propTypes2.default.shape({
-    json: _propTypes2.default.object,
-    zhMapSlice: _propTypes2.default.object,
-    zhDialog: _propTypes2.default.shape({
-      subtitle: _propTypes2.default.string,
-      time: _propTypes2.default.string
-    })
-  }),
-  onCloseItem: _propTypes2.default.func
-} : {};
 exports.default = MapChartItem;
-//# sourceMappingURL=MapChartItem.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\MapChartItem.js.map

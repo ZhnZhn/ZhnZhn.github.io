@@ -44,6 +44,10 @@ var _SectorItem = require('../items/SectorItem');
 
 var _SectorItem2 = _interopRequireDefault(_SectorItem);
 
+var _CoinInfoItem = require('../items/CoinInfoItem');
+
+var _CoinInfoItem2 = _interopRequireDefault(_CoinInfoItem);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _createAreaChartItem = function _createAreaChartItem(_ref) {
@@ -116,18 +120,32 @@ var _crSectorItem = function _crSectorItem(_ref3) {
   });
 };
 
+var _crCoinInfoItem = function _crCoinInfoItem(_ref4) {
+  var store = _ref4.store,
+      config = _ref4.config,
+      index = _ref4.index,
+      option = _ref4.option,
+      props = _ref4.props;
+  var id = config.General.Symbol;
+
+  return _react2.default.createElement(_CoinInfoItem2.default, (0, _extends3.default)({
+    key: id,
+    config: config
+  }, props));
+};
+
 var _rCreateItem = (_rCreateItem2 = {
   DEFAULT: _createAreaChartItem
 
-}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, 'SECTOR', _crSectorItem), _rCreateItem2);
+}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.SECTOR, _crSectorItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_INFO, _crCoinInfoItem), _rCreateItem2);
 
 var ItemFactory = {
-  createItem: function createItem(_ref4) {
-    var store = _ref4.store,
-        config = _ref4.config,
-        index = _ref4.index,
-        option = _ref4.option,
-        props = _ref4.props;
+  createItem: function createItem(_ref5) {
+    var store = _ref5.store,
+        config = _ref5.config,
+        index = _ref5.index,
+        option = _ref5.option,
+        props = _ref5.props;
     var zhCompType = config.zhCompType,
         _fnCreate = zhCompType && _rCreateItem[zhCompType] ? _rCreateItem[zhCompType] : _rCreateItem.DEFAULT;
 
@@ -137,4 +155,4 @@ var ItemFactory = {
 };
 
 exports.default = ItemFactory;
-//# sourceMappingURL=ItemFactory.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\factories\ItemFactory.js.map

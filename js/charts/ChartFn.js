@@ -357,6 +357,9 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
     this._addDataToYAxis(toChart, _id, color, data, _isWithYAxis);
   },
   toNumberFormat: function toNumberFormat(value) {
+    if (typeof value === 'number' && value < 0.01) {
+      return '' + value;
+    }
     var arrSplit = (value + '').split('.'),
         decimal = arrSplit[1] ? 2 : 0;
     return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
@@ -378,4 +381,4 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
 });
 
 exports.default = ChartFn;
-//# sourceMappingURL=ChartFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartFn.js.map

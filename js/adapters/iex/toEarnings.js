@@ -94,7 +94,7 @@ var toEarnings = {
     config.series[0] = seria;
     return config;
   },
-  toSeria: function toSeria(json, option, chart) {
+  toSeries: function toSeries(json, option, chart) {
     var seria = _crSeria(json, option),
         y = _calcScatterY(chart);
 
@@ -111,4 +111,4 @@ var toEarnings = {
 };
 
 exports.default = toEarnings;
-//# sourceMappingURL=toEarnings.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\toEarnings.js.map

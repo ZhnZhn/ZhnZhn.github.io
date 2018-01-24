@@ -8,6 +8,14 @@ const CL = {
 
 class MenuItem extends Component {
 
+  _hKeyPress = (evt) => {
+    evt.preventDefault()
+    const { which } = evt;
+    if (which === 13 || which === 32 ) {
+      this.props.onClick()
+    }
+  }
+
   _ref = n => this._node = n
 
   render(){
@@ -24,13 +32,7 @@ class MenuItem extends Component {
         tabIndex="0"
         role="menuitem"
         onClick={onClick}
-        onKeyPress={(evt) => {
-          evt.preventDefault()
-          const { which } = evt;
-          if (which === 13 || which === 32 ) {
-            onClick()
-          }
-        }}
+        onKeyPress={this._hKeyPress}
      >
         {text}
       </div>

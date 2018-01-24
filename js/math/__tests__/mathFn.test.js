@@ -12,6 +12,15 @@ var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var PERCENT_0 = '0.00%';
+var PERCENT_100 = '100.00%';
+
+var _fValueMoving = function _fValueMoving(nowValue, prevValue) {
+  return {
+    nowValue: nowValue, prevValue: prevValue, Direction: _Type.Direction
+  };
+};
+
 describe('calcPercent', function () {
   var fn = _mathFn2.default.calcPercent;
   test('should return str percent with Fixed 2 from Big values', function () {
@@ -22,45 +31,61 @@ describe('calcPercent', function () {
 
 describe('crValueMoving', function () {
   var fn = _mathFn2.default.crValueMoving;
-  test('should return correct obj for strings values', function () {
-    var r = fn({ nowValue: '200.02', prevValue: '100.01', Direction: _Type.Direction });
-
-    expect(r.value).toBe('200.02');
-    expect(r.percent).toBe('100.00%');
-    expect(r.delta).toBe('100.01');
-    expect(r.direction).toBe(_Type.Direction.UP);
-  });
   test('should return correct obj for Big values', function () {
-    var r = fn({ nowValue: (0, _big2.default)('200.02'), prevValue: (0, _big2.default)('100.01'), Direction: _Type.Direction });
+    var r = fn(_fValueMoving((0, _big2.default)('200.02'), (0, _big2.default)('100.01')));
 
     expect(r.value).toBe('200.02');
-    expect(r.percent).toBe('100.00%');
+    expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100.01');
     expect(r.direction).toBe(_Type.Direction.UP);
   });
+  test('should return correct obj for strings values with radix', function () {
+    var r = fn(_fValueMoving('200.02', '100.01'));
 
-  test('should return correct obj for strings values', function () {
-    var r = fn({ nowValue: '0', prevValue: '100', Direction: _Type.Direction });
+    expect(r.value).toBe('200.02');
+    expect(r.percent).toBe(PERCENT_100);
+    expect(r.delta).toBe('100.01');
+    expect(r.direction).toBe(_Type.Direction.UP);
+  });
+  test('should return correct obj for strings values with nowValue="0"', function () {
+    var r = fn(_fValueMoving('0', '100'));
 
     expect(r.value).toBe('0');
-    expect(r.percent).toBe('100.00%');
+    expect(r.percent).toBe(PERCENT_100);
     expect(r.delta).toBe('100');
     expect(r.direction).toBe(_Type.Direction.DOWN);
   });
-  test('should return correct obj for strings values', function () {
-    var r = fn({ nowValue: '100', prevValue: '100', Direction: _Type.Direction });
+  test('should return correct obj for equal strings values', function () {
+    var r = fn(_fValueMoving('100', '100'));
 
     expect(r.value).toBe('100');
-    expect(r.percent).toBe('0.00%');
+    expect(r.percent).toBe(PERCENT_0);
     expect(r.delta).toBe('0');
     expect(r.direction).toBe(_Type.Direction.EQUAL);
+  });
+
+  test('should replace blanks in string values', function () {
+    var r = fn(_fValueMoving('200 000 000', '100 000 000'));
+
+    expect(r.value).toBe('200000000');
+    expect(r.percent).toBe(PERCENT_100);
+    expect(r.delta).toBe('100000000');
+    expect(r.direction).toBe(_Type.Direction.UP);
+  });
+  test('should to fixed to radix 0 value in case value bigger 1 000 000', function () {
+    var r = fn(_fValueMoving('200 000 000.02', '100 000 000.01'));
+
+    expect(r.value).toBe('200000000');
+    expect(r.percent).toBe(PERCENT_100);
+    expect(r.delta).toBe('100000000');
+    expect(r.direction).toBe(_Type.Direction.UP);
   });
 
   test('should use 0 values in edge cases', function () {
     var r = fn({ Direction: _Type.Direction });
 
     expect(r.value).toBe('0');
-    expect(r.percent).toBe('0.00%');
+    expect(r.percent).toBe(PERCENT_0);
     expect(r.delta).toBe('0');
     expect(r.direction).toBe(_Type.Direction.EQUAL);
   });

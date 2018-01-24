@@ -46,7 +46,7 @@ const ChartStore = Reflux.createStore({
  getConfigs(chartType){
    return this.charts[chartType];
  },
- isChartExist(chartType, key){
+ isChartExist(chartType, key){      
    if (!this.charts[chartType]){
      return false;
    }

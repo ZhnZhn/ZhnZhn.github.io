@@ -8,11 +8,16 @@ var _toEarnings = require('./toEarnings');
 
 var _toEarnings2 = _interopRequireDefault(_toEarnings);
 
+var _toChart = require('./toChart');
+
+var _toChart2 = _interopRequireDefault(_toChart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _r = {
-  DF: _toEarnings2.default,
-  earnings: _toEarnings2.default
+  DF: _toChart2.default,
+  earnings: _toEarnings2.default,
+  chart: _toChart2.default
 };
 
 var RouterAdapter = {
@@ -24,4 +29,4 @@ var RouterAdapter = {
 };
 
 exports.default = RouterAdapter;
-//# sourceMappingURL=RouterAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\RouterAdapter.js.map

@@ -1,0 +1,24 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\crypto-compare\\toInfoConfig.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\crypto-compare\\toInfoConfig.js",
+ "sourceRoot": "",
+ "names": [
+  "toInfoConfig",
+  "toConfig",
+  "json",
+  "option",
+  "value",
+  "Data",
+  "General",
+  "config",
+  "zhCompType",
+  "zhConfig",
+  "id",
+  "key",
+  "toSeries",
+  "Error"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,eAAe;AACnBC,YAAU,kBAACC,IAAD,EAAOC,MAAP,EAAkB;AACpB,QAAEC,KAAF,GAAYD,MAAZ,CAAEC,KAAF;AAAA,6BACiBF,KAAKG,IADtB,CACEC,OADF;AAAA,QACEA,OADF,sCACU,EADV;AAAA,QAEAC,MAFA,GAES;AACPD,sBADO;AAEPE,kBAAY,WAFL;AAGPC,gBAAU;AACRC,YAAIN,KADI,EACGO,KAAKP;AADR;AAHH,KAFT;;AASN,WAAO,EAAEG,cAAF,EAAP;AACD,GAZkB;;AAcnBK,YAAU,oBAAM;AACd,UAAM,IAAIC,KAAJ,CAAU,SAAV,CAAN;AACD;AAhBkB,CAArB;;kBAmBeb,Y"
+}

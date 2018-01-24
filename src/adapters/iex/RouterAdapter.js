@@ -1,14 +1,16 @@
 
 import toEarnings from './toEarnings'
+import toChart from './toChart'
 
 const _r = {
-  DF: toEarnings,
-  earnings: toEarnings
+  DF: toChart,
+  earnings: toEarnings,
+  chart: toChart
 };
 
 const RouterAdapter = {
   getAdapter(option){
-    const { dfType } = option;        
+    const { dfType } = option;
     return _r[dfType] || _r.DF;
   }
 }

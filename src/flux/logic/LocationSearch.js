@@ -5,7 +5,11 @@ import { ModalDialog } from '../../constants/Type'
 import LocationQuery from './LocationQuery'
 
 const ARR_B = [ 'UN', 'QE', 'FAO' ];
-const ARR_C = [ 'SM_WIKI', 'USAE_BLS_1' ];
+const ARR_C = [
+  'SM_WIKI', 'SM_IEX_CHART',
+  'USAE_BLS_1',
+  'BC_HD'
+];
 
 const _isQuery = (obj) => obj &&
     ARR_C.indexOf(obj.cT) !== -1 ||

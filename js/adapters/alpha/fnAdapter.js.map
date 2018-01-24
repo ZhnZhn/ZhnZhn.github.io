@@ -1,0 +1,23 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\alpha\\fnAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\alpha\\fnAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "stockSeriesLegend",
+  "valueMoving",
+  "crZhFn",
+  "_crZhConfig",
+  "id",
+  "key",
+  "isWithLegend",
+  "legend",
+  "dataSource",
+  "fnAdapter",
+  "crIntradayConfigOption",
+  "data",
+  "zhConfig"
+ ],
+ "mappings": ";;;;;;;;;;AACA;;;;;;IAGQA,iB,uBAAAA,iB;IACAC,W,uBAAAA,W;IAAaC,M,uBAAAA,M;;;AAGrB,IAAMC,cAAc,SAAdA,WAAc;AAAA,SAAO;AACzBC,QAAIA,EADqB;AAEzBC,SAAKD,EAFoB;AAGzBE,kBAAc,IAHW;AAIzBC,YAAQP,mBAJiB;AAKzBQ,gBAAY;AALa,GAAP;AAAA,CAApB;;AAQA,IAAMC,YAAY;AAChBC,0BAAwB;AAAA,QAAGN,EAAH,QAAGA,EAAH;AAAA,QAAOO,IAAP,QAAOA,IAAP;AAAA;AACtBC,gBAAUT,YAAYC,EAAZ,CADY;AAEtBH,mBAAaA,YAAYU,IAAZ;AAFS,OAGnBT,QAHmB;AAAA;AADR,CAAlB;;kBAQeO,S"
+}

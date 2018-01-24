@@ -60,6 +60,10 @@ var _Intrinio = require('./intrinio/Intrinio');
 
 var _Intrinio2 = _interopRequireDefault(_Intrinio);
 
+var _Crc = require('./crypto-compare/Crc');
+
+var _Crc2 = _interopRequireDefault(_Crc);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterAdapter = {
@@ -79,7 +83,8 @@ var RouterAdapter = {
   Insee: _Insee2.default,
   Bea: _Bea2.default,
   Bls: _Bls2.default,
-  Intrinio: _Intrinio2.default
+  Intrinio: _Intrinio2.default,
+  Crc: _Crc2.default
 };
 
 exports.default = RouterAdapter;

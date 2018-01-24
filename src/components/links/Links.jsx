@@ -1,3 +1,5 @@
+import React from 'react'
+
 import withProps from '../hoc/withProps'
 import BaseComponent from '../zhn/Link'
 
@@ -111,6 +113,16 @@ const StatSweden = withProps({
   title: "Statistics Sweden"
 })(BaseComponent)
 
+const CryptoCompare = () =>
+  <BaseComponent
+    className={CL_LINK}
+    href="https://www.cryptocompare.com/"
+    dfStyle={S.WHITE}
+    title="Crypto"
+  >
+    <span style={{color: '#49d87c'}}>Compare</span>
+  </BaseComponent>
+
 
 export default {
   Quandl,
@@ -125,5 +137,6 @@ export default {
   Insee,
   StatNorway,
   StatSweden,
-  Bsl
+  Bsl,
+  CryptoCompare
 };

@@ -26,6 +26,8 @@ var BrowserType = exports.BrowserType = {
 
    US_ECONOMY: 'USAE',
 
+   BLOCKCHAIN: 'BC',
+
    WATCH_LIST: 'WL'
 };
 
@@ -85,11 +87,14 @@ var LoadType = exports.LoadType = {
    BEA: 'BEA',
    BLS: 'BLS',
    INTR: 'INTR',
+   CRC: 'CRC',
    WL: 'WL'
 };
 
 var CompItemType = exports.CompItemType = {
    CHART_AREA: 'CHART_AREA',
-   EUROSTAT_MAP: 'EUROSTAT_MAP'
+   EUROSTAT_MAP: 'EUROSTAT_MAP',
+   SECTOR: 'SECTOR',
+   COIN_INFO: 'COIN_INFO'
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

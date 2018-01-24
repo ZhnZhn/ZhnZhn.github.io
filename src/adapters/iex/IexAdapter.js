@@ -5,14 +5,14 @@ const IexAdapter = {
   toConfig(json, option){
     const config = Router
             .getAdapter(option)
-            .toConfig(json, option);    
+            .toConfig(json, option);
     return { config };
   },
 
   toSeries(json, option, chart){
     const seria = Router
             .getAdapter(option)
-            .toSeria(json, option, chart);
+            .toSeries(json, option, chart);
      return seria;
   }
 

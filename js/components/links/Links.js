@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 var _withProps = require('../hoc/withProps');
 
 var _withProps2 = _interopRequireDefault(_withProps);
@@ -123,6 +127,23 @@ var StatSweden = (0, _withProps2.default)({
   title: "Statistics Sweden"
 })(_Link2.default);
 
+var CryptoCompare = function CryptoCompare() {
+  return _react2.default.createElement(
+    _Link2.default,
+    {
+      className: CL_LINK,
+      href: 'https://www.cryptocompare.com/',
+      dfStyle: S.WHITE,
+      title: 'Crypto'
+    },
+    _react2.default.createElement(
+      'span',
+      { style: { color: '#49d87c' } },
+      'Compare'
+    )
+  );
+};
+
 exports.default = {
   Quandl: Quandl,
   Iex: Iex,
@@ -136,6 +157,7 @@ exports.default = {
   Insee: Insee,
   StatNorway: StatNorway,
   StatSweden: StatSweden,
-  Bsl: Bsl
+  Bsl: Bsl,
+  CryptoCompare: CryptoCompare
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map

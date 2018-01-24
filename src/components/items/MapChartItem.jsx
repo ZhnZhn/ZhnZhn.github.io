@@ -1,74 +1,39 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-import SvgClose from '../zhn/SvgClose';
+import ItemHeader from './ItemHeader'
 import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
 import PanelDataInfo from '../zhn/PanelDataInfo';
 import SpinnerLoading from '../zhn/SpinnerLoading';
 
-const styles = {
-  rootDiv : {
+const S = {
+  ROOT_DIV : {
     position : 'relative',
     lineHeight : 1.5,
     marginBottom: '10px',
     marginRight: '25px',
-  },
-  headerDiv: {
-    //backgroundColor: '#232F3B',
-    backgroundColor: '#1b2836',
-    paddingTop: '4px',
-    paddingLeft: '10px',
-    lineHeight: 1.8,
-    height: '32px',
-    width : '100%',
-    borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px'
-  },
-  checkBoxStyle : {
-    float: 'left',
-    marginRight: '10px',
-    marginLeft: '10px'
-  },
-  captionSpanOpen : {
-    display : 'inline-block',
-    color: 'rgba(164, 135, 212, 1)',
-    cursor: 'pointer',
-    width: '410px',
-    fontWeight : 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow : 'ellipsis',
-    overflow : 'hidden',
-    float : 'left'
-  },
-  timeSpan : {
+  },  
+  TIME_SPAN : {
+    display: 'inline-block',
+    position: 'relative',
+    top: '-8px',
     color : 'rgb(253, 179, 22)',
     fontWeight : 'bold',
-    paddingLeft : '16px'
+    paddingLeft : '16px',
   },
-  captionSpanClose : {
-    display : 'inline-block',
-    color : 'gray',
-    cursor: 'pointer',
-    width : '410px',
-    fontWeight : 'bold',
-    whiteSpace: 'nowrap',
-    textOverflow : 'ellipsis',
-    overflow : 'hidden',
-    float : 'left'
-  },
-  tabDiv : {
+  TAB_DIV : {
     position: 'relative',
     height: '30px',
     backgroundColor: 'transparent',
     zIndex: 2
   },
-  mapDiv : {
+  MAP_DIV : {
     height : '400px'
   },
-  spinnerLoading : {
+  SPINNER_LOADING : {
     position: 'relative',
     display: 'block',
     textAlign: 'middle',
@@ -77,15 +42,16 @@ const styles = {
     width: '32px',
     height: '32px'
   },
-  displayBlock : {
+  BLOCK : {
     display : 'block'
   },
-  displayNone : {
+  NONE : {
     display : 'none'
   }
 }
 
 class MapChartItem extends Component {
+  /*
   static propTypes = {
     caption: PropTypes.string,
     config: PropTypes.shape({
@@ -98,6 +64,7 @@ class MapChartItem extends Component {
     }),
     onCloseItem: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
@@ -129,19 +96,19 @@ class MapChartItem extends Component {
   }
 
   _handleToggle = () => {
-     this.setState({ isOpen : !this.state.isOpen })
+     this.setState({ isOpen: !this.state.isOpen })
   }
 
   _handleClickInfo = () => {
-    this.setState({ isShowInfo : true });
+    this.setState({ isShowInfo: true });
   }
   _handleClickChart = () => {
-    this.setState({ isShowInfo : false });
+    this.setState({ isShowInfo: false });
   }
 
   _renderTabToolbar = () => {
      return (
-      <div style={styles.tabDiv}>
+      <div style={S.TAB_DIV}>
          <ButtonTab
             caption={'Info'}
             isShow={false}
@@ -153,39 +120,40 @@ class MapChartItem extends Component {
 
   render(){
     const { caption, config, onCloseItem } = this.props
-        , { json={}, zhDialog={} } = config
+        , { zhDialog={} } = config
         , { subtitle='' } = zhDialog
-        , { isLoading, isOpen, isShowInfo, time } = this.state
-        , _styleCaption = isOpen
-              ? styles.captionSpanOpen
-              : styles.captionSpanClose
+        , {
+            isLoading, isOpen, isShowInfo,
+            time
+          } = this.state
         , _styleMap = isShowInfo
-              ? styles.displayNone
-              : styles.displayBlock;
+              ? S.NONE
+              : S.BLOCK;
 
     return (
-      <div style={styles.rootDiv}>
-        <div style={styles.headerDiv}>
-          <span
-             className="not-selected"
-             title={json.label}
-             style={_styleCaption}
-             onClick={this._handleToggle}
-          >
-             {subtitle}
-          </span>
-          <span style={styles.timeSpan}>
+      <div style={S.ROOT_DIV}>
+
+        <ItemHeader
+          isOpen={isOpen}
+          caption={subtitle}
+          onClick={this._handleToggle}
+          onClose={onCloseItem}
+        >
+          <span style={S.TIME_SPAN}>
             {time}
           </span>
-          <SvgClose onClose={onCloseItem} />
-        </div>
+        </ItemHeader>
+
         <ShowHide isShow={isOpen}>
            {!isShowInfo && this._renderTabToolbar()}
            <div
               id={`map_${caption}`}
-              style={Object.assign({}, styles.mapDiv, _styleMap)}
+              style={{ ...S.MAP_DIV, ..._styleMap }}
            >
-             { isLoading && <SpinnerLoading style={styles.spinnerLoading} /> }
+             {
+               isLoading && <SpinnerLoading
+                  style={S.SPINNER_LOADING} />
+             }
            </div>
            <PanelDataInfo
               isShow={isShowInfo}

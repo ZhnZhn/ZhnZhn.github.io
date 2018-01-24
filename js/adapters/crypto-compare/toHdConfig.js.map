@@ -1,0 +1,33 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\crypto-compare\\toHdConfig.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\crypto-compare\\toHdConfig.js",
+ "sourceRoot": "",
+ "names": [
+  "crData",
+  "crConfigOption",
+  "_crSubtitle",
+  "json",
+  "value",
+  "ConversionType",
+  "conversionSymbol",
+  "type",
+  "toHdConfig",
+  "toConfig",
+  "option",
+  "seria",
+  "initSpline",
+  "data",
+  "title",
+  "_subtitle",
+  "config",
+  "initBaseArea2",
+  "addCaption",
+  "addSeries",
+  "add",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;IAEQA,M,uBAAAA,M;IAAQC,c,uBAAAA,c;;;AAEhB,IAAMC,cAAc,SAAdA,WAAc,CAACC,IAAD,EAAOC,KAAP,EAAiB;AAAA,6BACLD,IADK,CAC3BE,cAD2B;AAAA,MAC3BA,cAD2B,wCACZ,EADY;AAAA,MAE3BC,gBAF2B,GAEGD,cAFH,CAE3BC,gBAF2B;AAAA,6BAEGD,cAFH,CAETE,IAFS;AAAA,MAETA,IAFS,wCAEJ,EAFI;;AAGnC,SAAUH,KAAV,UAAmBE,oBAAoB,KAAvC,UAAgDC,IAAhD;AACD,CAJD;;AAMA,IAAMC,aAAa;AACjBC,YAAU,kBAACN,IAAD,EAAOO,MAAP,EAAkB;AACpB,eAAOV,OAAOG,IAAP,CAAP;AAAA,QACAQ,KADA,GACQ,+BACLC,UADK,CACM,EAAEC,UAAF,EADN,EAELJ,QAFK,EADR;AAAA,wBAIsBC,MAJtB,CAIEN,KAJF;AAAA,QAIEA,KAJF,iCAIQ,EAJR;AAAA,QAIYU,KAJZ,GAIsBJ,MAJtB,CAIYI,KAJZ;AAAA,QAKAC,SALA,GAKYb,YAAYC,IAAZ,EAAkBC,KAAlB,CALZ;AAAA,QAMAY,MANA,GAMS,+BACNC,aADM,GAENC,UAFM,CAEKJ,KAFL,EAEYC,SAFZ,EAGNI,SAHM,CAGIR,KAHJ,EAINS,GAJM,4BAKDnB,eAAe,EAAES,cAAF,EAAUG,UAAV,EAAf,CALC,GAONJ,QAPM,EANT;;AAcN,WAAO,EAAEO,cAAF,EAAP;AACD,GAjBgB;;AAmBjBK,YAAU,kBAAClB,IAAD,EAAOO,MAAP,EAAkB;AAAA,+BACPF,WAAWC,QAAX,CAAoBN,IAApB,EAA0BO,MAA1B,CADO;AAAA,QAClBM,MADkB,wBAClBA,MADkB;;AAE1B,WAAOA,OAAOM,MAAP,CAAc,CAAd,CAAP;AACD;AAtBgB,CAAnB;;kBAyBed,U"
+}

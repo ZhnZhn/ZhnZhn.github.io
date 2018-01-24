@@ -17,7 +17,7 @@ var _LocationQuery2 = _interopRequireDefault(_LocationQuery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ARR_B = ['UN', 'QE', 'FAO'];
-var ARR_C = ['SM_WIKI', 'USAE_BLS_1'];
+var ARR_C = ['SM_WIKI', 'SM_IEX_CHART', 'USAE_BLS_1', 'BC_HD'];
 
 var _isQuery = function _isQuery(obj) {
   return obj && ARR_C.indexOf(obj.cT) !== -1 || ARR_B.indexOf(obj.bT) !== -1;

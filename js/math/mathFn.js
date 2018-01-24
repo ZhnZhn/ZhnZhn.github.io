@@ -35,8 +35,8 @@ var mathFn = {
         fnFormat = _option$fnFormat === undefined ? fnEcho : _option$fnFormat;
 
 
-    var bNowValue = (0, _big2.default)(nowValue.toString().replace(' ', '')),
-        bPrevValue = (0, _big2.default)(prevValue.toString().replace(' ', ''));
+    var bNowValue = (0, _big2.default)(nowValue.toString().replace(/ /g, '')),
+        bPrevValue = (0, _big2.default)(prevValue.toString().replace(/ /g, ''));
 
     var _bDelta = bPrevValue.minus(bNowValue),
         _direction = void 0;
@@ -77,4 +77,4 @@ var mathFn = {
 };
 
 exports.default = mathFn;
-//# sourceMappingURL=mathFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\math\mathFn.js.map

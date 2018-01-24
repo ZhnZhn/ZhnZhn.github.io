@@ -1,0 +1,21 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\crypto-compare\\CrcAdapter.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\crypto-compare\\CrcAdapter.js",
+ "sourceRoot": "",
+ "names": [
+  "_rAdapter",
+  "DF",
+  "HD",
+  "CI",
+  "_getAdapter",
+  "option",
+  "dfSubLoadId",
+  "CrcAdapter",
+  "toConfig",
+  "json",
+  "toSeries"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,YAAY;AAChBC,0BADgB;AAEhBC,0BAFgB;AAGhBC;AAHgB,CAAlB;;AAMA,IAAMC,cAAc,SAAdA,WAAc,CAACC,MAAD,EAAY;AAAA,MACtBC,WADsB,GACND,MADM,CACtBC,WADsB;;AAE9B,SAAON,UAAUM,WAAV,KAA0BN,UAAUC,EAA3C;AACD,CAHD;;AAKA,IAAMM,aAAa;AACjBC,UADiB,oBACRC,IADQ,EACFJ,MADE,EACK;AACpB,WAAOD,YAAYC,MAAZ,EACJG,QADI,CACKC,IADL,EACWJ,MADX,CAAP;AAED,GAJgB;AAMjBK,UANiB,oBAMRD,IANQ,EAMFJ,MANE,EAMK;AACpB,WAAOD,YAAYC,MAAZ,EACJK,QADI,CACKD,IADL,EACWJ,MADX,CAAP;AAED;AATgB,CAAnB;;kBAYeE,U"
+}

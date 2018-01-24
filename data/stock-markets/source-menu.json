@@ -22,8 +22,9 @@
         { "id": "SM_A_SECTOR" }
       ]
     },{
-      "caption": "IEX", "isInitClose": true,
+      "caption": "IEX Platform", "isInitClose": true,
       "items": [
+        { "id": "SM_IEX_CHART", "isNew": true },
         { "id": "SM_IEX_EARNINGS" }
       ]
     },{
@@ -50,6 +51,18 @@
         "dfProps": {
           "dfFrequncy": "Q"
         }
+      }
+    },
+    "SM_BASE_IEX": {
+      "dialogProps": {
+        "descrUrl" : "./data/stock-markets/iex.html",
+        "optionURI" : "./data/stock-markets/wiki.json",
+        "optionsJsonProp" : "tickets",
+        "isWithInputStock": true,
+        "noDate": true,
+        "linkFn" : "NASDAQ",
+        "loadId" : "IEX",
+        "dataSource" : "IEX Platform"
       }
     },
 
@@ -230,21 +243,26 @@
          }
      },
 
+     "SM_IEX_CHART" : {
+         "type" : "SM_IEX_CHART",
+         "menuTitle" : "Chart 5y",
+         "chartContainerCaption" : "IEX: Chart 5y",
+         "addProps": "SM_BASE_IEX",
+         "dialogProps" : {
+           "valueFn": "ROne",
+           "dfProps": {
+             "dfType": "chart"
+           }
+         }
+     },
      "SM_IEX_EARNINGS" : {
          "type" : "SM_IEX_EARNINGS",
          "menuTitle" : "Earnings Latest 4 Q",
-         "chartContainerCaption" : "IEX: Earnings Latest 4 Quartals",
+         "chartContainerCaption" : "IEX: Earnings Latest 4 Quarters",
+         "addProps": "SM_BASE_IEX",
          "dialogProps" : {
-           "descrUrl" : "./data/stock-markets/iex.html",
-           "optionURI" : "./data/stock-markets/wiki.json",
-           "optionsJsonProp" : "tickets",
-           "isWithInputStock": true,
-           "noDate": true,
            "valueFn" : "ROneSufix",
            "valueFnPrefix": "earnings",
-           "linkFn" : "NASDAQ",
-           "loadId" : "IEX",
-           "dataSource" : "IEX Platform",
            "dfProps": {
              "dfType": "earnings"
            }

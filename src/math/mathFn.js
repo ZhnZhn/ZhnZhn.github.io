@@ -1,6 +1,6 @@
 import Big from 'big.js'
 
-const fnEcho = (value) => { return value;}
+const fnEcho = value => value;
 
 const mathFn = {
 
@@ -18,8 +18,8 @@ const mathFn = {
             fnFormat=fnEcho
           } = option;
 
-    const bNowValue = Big(nowValue.toString().replace(' ',''))
-        , bPrevValue = Big(prevValue.toString().replace(' ', ''));
+    const bNowValue = Big(nowValue.toString().replace(/ /g,''))
+        , bPrevValue = Big(prevValue.toString().replace(/ /g, ''));
 
     let _bDelta = bPrevValue.minus(bNowValue)
       , _direction;
@@ -41,12 +41,12 @@ const mathFn = {
       _bDelta = _bDelta.toFixed(0);
     }
 
-      return {
-        value : fnFormat(_bNowValue).toString(),
-        delta : fnFormat(_bDelta).toString(),
-        percent : _bPercent.toString() + '%',
-        direction : _direction
-      };
+    return {
+      value : fnFormat(_bNowValue).toString(),
+      delta : fnFormat(_bDelta).toString(),
+      percent : _bPercent.toString() + '%',
+      direction : _direction
+    };
   },
 
   toFixed : (value) => {

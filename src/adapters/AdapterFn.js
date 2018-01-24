@@ -9,7 +9,10 @@ import mathFn from '../math/mathFn';
 
 import C from '../constants/Color';
 
-import { fnAddSeriesSma, fnRemoveSeries } from './IndicatorSma';
+import {
+  fnAddSeriesSma, fnRemoveSeries,
+  fnGetConfigMfi
+       } from './IndicatorSma';
 
 const BLANK = '';
 
@@ -126,10 +129,10 @@ const AdapterFn = {
 
   stockSeriesLegend(){
     return [
-      this.legendItem(0, C.S_STOCK_CLOSE, 'Close', true),
-      this.legendItem(1, C.S_HIGH, 'High'),
-      this.legendItem(2, C.S_LOW, 'Low'),
-      this.legendItem(3, C.S_OPEN, 'Open')
+      AdapterFn.legendItem(0, C.S_STOCK_CLOSE, 'Close', true),
+      AdapterFn.legendItem(1, C.S_HIGH, 'High'),
+      AdapterFn.legendItem(2, C.S_LOW, 'Low'),
+      AdapterFn.legendItem(3, C.S_OPEN, 'Open')
     ];
   },
 
@@ -169,7 +172,7 @@ const AdapterFn = {
           , bNowValue = Big(_nowValue)
           , _pointPrev = len>1 && data[len-2]
               ? data[len-2]
-              : [ BLANK, 0 ]
+              : _pointNow
           , _prevValue = _getValue(_pointPrev)
           , bPrevValue = Big(_prevValue)
           , _nowDate = _getDate(_pointNow)
@@ -199,7 +202,8 @@ const AdapterFn = {
   crZhFn: () => ({
     zhFnAddSeriesSma: fnAddSeriesSma,
     zhFnRemoveSeries: fnRemoveSeries
-  })
+  }),
+  fnGetConfigMfi: fnGetConfigMfi
 
 }
 

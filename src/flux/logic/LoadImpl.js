@@ -6,7 +6,7 @@ import f from './loadItem'
 const {
   Quandl, UnComtrade, FaoStat,
   EuroStat, StatNorway, StatSweden,
-  AlphaVantage, Barchart, Intrinio,
+  AlphaVantage, Barchart, Intrinio, Crc,
   Iex, Insee, Bea, Bls
 } = Adapter;
 
@@ -31,6 +31,7 @@ const LoadImpl = {
   }),
   Iex: f({ ...Iex }),
   Intrinio: f({ ...Intrinio }),
+  Crc: f({ ...Crc}),
 
   Insee: f({
     fnFetch: fetchTxt,

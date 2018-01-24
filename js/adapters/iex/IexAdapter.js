@@ -16,10 +16,10 @@ var IexAdapter = {
     return { config: config };
   },
   toSeries: function toSeries(json, option, chart) {
-    var seria = _RouterAdapter2.default.getAdapter(option).toSeria(json, option, chart);
+    var seria = _RouterAdapter2.default.getAdapter(option).toSeries(json, option, chart);
     return seria;
   }
 };
 
 exports.default = IexAdapter;
-//# sourceMappingURL=IexAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\IexAdapter.js.map
