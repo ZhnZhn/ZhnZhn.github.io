@@ -21,8 +21,10 @@ class Frame extends Component {
   }
 
   loadMenu = (id) => {
-    const { dfProps, loadItems, store } = this.props
-        , proxy = store.getProxy();
+
+    const { dfProps={}, loadItems, store } = this.props
+        , { lT } = dfProps
+        , proxy = store.getProxy(lT);
     loadItems(`${dfProps.rootUrl}/${id}`, proxy)
       .then(model => {
         if (Array.isArray(model)){
@@ -35,10 +37,11 @@ class Frame extends Component {
   }
 
   _renderMenu = () => {
-    const { dfProps, pageNumber, store } = this.props
-        , proxy = store.getProxy()
-        , { model } = this.state;
-    const {
+    const { dfProps={}, pageNumber, store } = this.props
+        , { lT } = dfProps
+        , proxy = store.getProxy(lT)
+        , { model } = this.state
+        , {
             onClickNext,
             fOnClickItem,
             id:rootId

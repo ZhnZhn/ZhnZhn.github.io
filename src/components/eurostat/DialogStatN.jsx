@@ -85,7 +85,6 @@ class DialogStatN extends Component {
   _loadDims = () => {
     const { proxy, baseMeta, dims, dfProps={} } = this.props
         , { dfId } = dfProps;
-
     loadDims({ id: dfId, proxy, baseMeta, dims })
       .then(result => {
          const { configs, errMsg } = result;
@@ -221,7 +220,7 @@ class DialogStatN extends Component {
         , _spinnerStyle = !isLoadFailed
              ? S.SPINNER_LOADING
              : { ...S.SPINNER_LOADING, ...S.SPINNER_FAILED};
-        
+
     return (
       <D.DraggableDialog
            caption={caption}

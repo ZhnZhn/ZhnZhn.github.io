@@ -56,11 +56,6 @@ var SettingSlice = {
   },
 
   getProxy: function getProxy(loadId) {
-    /*
-    const _id = id && id.loadId
-              ? id.loadId
-              : id;
-    */
     if (_withProxy.indexOf(loadId) === -1) {
       return undefined;
     }

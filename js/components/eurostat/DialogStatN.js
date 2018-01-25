@@ -92,7 +92,6 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
           dfId = dfProps.dfId;
 
-
       (0, _loadDims2.default)({ id: dfId, proxy: proxy, baseMeta: baseMeta, dims: dims }).then(function (result) {
         var configs = result.configs,
             errMsg = result.errMsg;
@@ -324,4 +323,4 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   return DialogStatN;
 }(_react.Component)) || _class) || _class);
 exports.default = DialogStatN;
-//# sourceMappingURL=DialogStatN.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogStatN.js.map

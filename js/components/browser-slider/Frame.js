@@ -52,10 +52,12 @@ var Frame = function (_Component) {
 
     _this.loadMenu = function (id) {
       var _this$props = _this.props,
-          dfProps = _this$props.dfProps,
+          _this$props$dfProps = _this$props.dfProps,
+          dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
           loadItems = _this$props.loadItems,
           store = _this$props.store,
-          proxy = store.getProxy();
+          lT = dfProps.lT,
+          proxy = store.getProxy(lT);
 
       loadItems(dfProps.rootUrl + '/' + id, proxy).then(function (model) {
         if (Array.isArray(model)) {
@@ -68,12 +70,14 @@ var Frame = function (_Component) {
 
     _this._renderMenu = function () {
       var _this$props2 = _this.props,
-          dfProps = _this$props2.dfProps,
+          _this$props2$dfProps = _this$props2.dfProps,
+          dfProps = _this$props2$dfProps === undefined ? {} : _this$props2$dfProps,
           pageNumber = _this$props2.pageNumber,
           store = _this$props2.store,
-          proxy = store.getProxy(),
-          model = _this.state.model;
-      var _this$props3 = _this.props,
+          lT = dfProps.lT,
+          proxy = store.getProxy(lT),
+          model = _this.state.model,
+          _this$props3 = _this.props,
           onClickNext = _this$props3.onClickNext,
           fOnClickItem = _this$props3.fOnClickItem,
           rootId = _this$props3.id,
@@ -171,4 +175,4 @@ var Frame = function (_Component) {
 }(_react.Component);
 
 exports.default = Frame;
-//# sourceMappingURL=Frame.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\Frame.js.map

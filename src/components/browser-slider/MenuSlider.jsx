@@ -58,9 +58,9 @@ class MenuSlider extends Component {
   }
 
   _loadItems = () => {
-    //const { rootUrl } = this.props
-    const { dfProps, store } = this.props
-        , proxy = store.getProxy();
+    const { dfProps={}, store } = this.props
+        , { lT } = dfProps
+        , proxy = store.getProxy(lT);
     loadItems(dfProps.rootUrl, proxy)
       .then(model => {
          if (Array.isArray(model)) {

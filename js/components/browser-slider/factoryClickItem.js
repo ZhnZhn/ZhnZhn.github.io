@@ -90,7 +90,8 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
         mapFrequency: mapFrequency,
         dims: dims,
         descrUrl: dU,
-        dfProps: { dfId: id }
+        dfProps: { dfId: id },
+        proxy: proxy
       });
 
       _ComponentActions2.default.showDialog(bT + "_" + id, bT, _conf);
@@ -101,4 +102,4 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
 };
 
 exports.default = _fOnClickTable;
-//# sourceMappingURL=factoryClickItem.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\factoryClickItem.js.map

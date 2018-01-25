@@ -89,11 +89,12 @@ var MenuSlider = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (MenuSlider.__proto__ || Object.getPrototypeOf(MenuSlider)).call(this));
 
     _this._loadItems = function () {
-      //const { rootUrl } = this.props
       var _this$props = _this.props,
-          dfProps = _this$props.dfProps,
+          _this$props$dfProps = _this$props.dfProps,
+          dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
           store = _this$props.store,
-          proxy = store.getProxy();
+          lT = dfProps.lT,
+          proxy = store.getProxy(lT);
 
       (0, _loadItems2.default)(dfProps.rootUrl, proxy).then(function (model) {
         if (Array.isArray(model)) {
@@ -277,4 +278,4 @@ var MenuSlider = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuSlider;
-//# sourceMappingURL=MenuSlider.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\MenuSlider.js.map

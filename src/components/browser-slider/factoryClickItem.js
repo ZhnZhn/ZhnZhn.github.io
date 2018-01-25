@@ -38,7 +38,7 @@ const _getFrequencyAndDims = (json) => {
   return { mapFrequency, dims };
 }
 
-const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
+const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {   
    const _url = proxy
            ? `${proxy}${rootUrl}/${id}`
            : `${rootUrl}/${id}`;
@@ -71,7 +71,8 @@ const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
           mapFrequency: mapFrequency,
           dims: dims,
           descrUrl: dU,
-          dfProps: { dfId: id }
+          dfProps: { dfId: id },
+          proxy: proxy
         })
 
         ComponentActions.showDialog(`${bT}_${id}` , bT, _conf)
