@@ -49,6 +49,16 @@ const styles = {
   }
 }
 
+const _isWithoutLink = (item={}) => {
+  const { id='' } = item
+      , arr = id.split('/');
+
+  if (arr[0] === 'LSE') {
+    return true;
+  }
+  return false;
+};
+
 class PanelDataInfo extends Component {
 
   _renderQuandlLink = (dbCode, dsCode) => {
@@ -61,7 +71,11 @@ class PanelDataInfo extends Component {
   }
 
   _renderNativeLink = (linkFn, item) => {
-    const Comp = RouterNativeLink[linkFn];    
+    if (_isWithoutLink(item)) {
+      return null;
+    }
+
+    const Comp = RouterNativeLink[linkFn];
     if (typeof Comp !== 'undefined') {
       return (<Comp item={item} />);
     } else {

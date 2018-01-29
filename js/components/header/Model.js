@@ -40,7 +40,7 @@ var MODEL = {
   }, {
     id: _Type.BrowserType.BLOCKCHAIN,
     cn: CL.BR,
-    title: 'BlockChain',
+    title: 'Blockchain',
     isNew: true
   }, {
     id: _Type.BrowserType.PREMIUM_SAMPLE,

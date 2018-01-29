@@ -35,6 +35,14 @@ const Iex = withProps({
   title: "IEX Platform"
 })(BaseComponent)
 
+const Cmc = withProps({
+  className: CL_LINK,
+  href: "https://coinmarketcap.com/",
+  dfStyle: S.BLUE,
+  title: "CoinMarketCap"
+})(BaseComponent)
+
+
 const Barchart = withProps({
   className: CL_LINK,
   href: "https://www.barchartmarketdata.com",
@@ -138,5 +146,6 @@ export default {
   StatNorway,
   StatSweden,
   Bsl,
-  CryptoCompare
+  CryptoCompare,
+  Cmc
 };

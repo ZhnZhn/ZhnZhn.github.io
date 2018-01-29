@@ -65,11 +65,11 @@ class LoadItemDialog extends Component {
           , option = {
              title : title,
              subtitle : subtitle,
-             value : caption,             
+             value : caption,
              item: caption,
              fromDate: fromDate,
              toDate: toDate,
-             loadId : LoadType.WL,
+             loadId : LoadType.WL,             
              id,
              columnName,
              dataColumn,

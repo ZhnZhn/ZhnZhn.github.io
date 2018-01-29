@@ -64,6 +64,10 @@ var _Crc = require('./crypto-compare/Crc');
 
 var _Crc2 = _interopRequireDefault(_Crc);
 
+var _Cmc = require('./coin-market-cap/Cmc');
+
+var _Cmc2 = _interopRequireDefault(_Cmc);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterAdapter = {
@@ -84,7 +88,8 @@ var RouterAdapter = {
   Bea: _Bea2.default,
   Bls: _Bls2.default,
   Intrinio: _Intrinio2.default,
-  Crc: _Crc2.default
+  Crc: _Crc2.default,
+  Cmc: _Cmc2.default
 };
 
 exports.default = RouterAdapter;

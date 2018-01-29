@@ -119,4 +119,4 @@ var fBrowser = {
 };
 
 exports.default = fBrowser;
-//# sourceMappingURL=fBrowser.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\fBrowser.js.map

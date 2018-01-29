@@ -88,6 +88,7 @@ var LoadType = exports.LoadType = {
    BLS: 'BLS',
    INTR: 'INTR',
    CRC: 'CRC',
+   CMC: 'CMC',
    WL: 'WL'
 };
 
@@ -95,6 +96,7 @@ var CompItemType = exports.CompItemType = {
    CHART_AREA: 'CHART_AREA',
    EUROSTAT_MAP: 'EUROSTAT_MAP',
    SECTOR: 'SECTOR',
-   COIN_INFO: 'COIN_INFO'
+   COIN_INFO: 'COIN_INFO',
+   COIN_CAP: 'COIN_CAP'
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

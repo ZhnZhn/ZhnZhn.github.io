@@ -20,6 +20,8 @@ class DialogType4 extends Component {
     twoCaption: PropTypes.string,
     twoURI: PropTypes.string,
     twoJsonProp: PropTypes.string,
+    noDate: PropTypes.bool,
+    noOptions: PropTypes.bool,
 
     initFromDate: PropTypes.string,
     initToDate: PropTypes.string,
@@ -35,11 +37,16 @@ class DialogType4 extends Component {
     super();
     this.one = undefined;
     this.two = undefined;
-    this.toolbarButtons = this._createType2WithToolbar(props);
-    this.toolbarButtons.push({
-      caption: 'O', title: 'Toggle Options Input',
-      onClick: this._handleClickOptions
-    })
+    const { noDate, noOptions } = props;
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { noDate}
+    );
+    if (noOptions !== true) {
+      this.toolbarButtons.push({
+        caption: 'O', title: 'Toggle Options Input',
+        onClick: this._handleClickOptions
+      })
+    }
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ];
@@ -78,20 +85,28 @@ class DialogType4 extends Component {
     );
   }
   _createValidationMessages = () => {
-     const { oneCaption, twoCaption, msgOnNotSelected } = this.props;
+     const {
+             oneCaption,
+             twoCaption,
+             msgOnNotSelected
+           } = this.props;
      let msg = [];
 
      if (!this.one) { msg.push(msgOnNotSelected(oneCaption)); }
      if (!this.two) { msg.push(msgOnNotSelected(twoCaption)); }
 
-     const {isValid, datesMsg} = this.datesFragment.getValidation();
-     if (!isValid) { msg = msg.concat(datesMsg); }
+     if (this.datesFragment) {
+       const {isValid, datesMsg} = this.datesFragment.getValidation();
+       if (!isValid) { msg = msg.concat(datesMsg); }
+     }
 
      msg.isValid = (msg.length === 0) ? true : false;
      return msg;
   }
   _createLoadOption = () => {
-    const { fromDate, toDate } = this.datesFragment.getValues();
+    const { fromDate, toDate } = this.datesFragment
+              ? this.datesFragment.getValues()
+              : {};
     return this.props.loadFn(
       this.props, {
         one : this.one, two : this.two, fromDate, toDate,
@@ -113,7 +128,8 @@ class DialogType4 extends Component {
            caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp, isWithOneInput,
            twoCaption, twoURI, twoJsonProp, isWithInputTwo,
-           initFromDate, initToDate, msgOnNotValidFormat, onTestDate
+           initFromDate, initToDate, msgOnNotValidFormat, onTestDate,
+           noDate, noOptions
           } = this.props
         , {
             isShowLabels, isShowDate, isShowOptions,
@@ -154,25 +170,31 @@ class DialogType4 extends Component {
                isWithInput={isWithInputTwo}
                onSelect={this._handleSelectTwo}
              />
+             {
+               (noDate !== true) &&
+               <D.ShowHide isShow={isShowDate}>
+                 <D.DatesFragment
+                   ref={c => this.datesFragment = c}
+                   isShowLabels={isShowLabels}
+                   initFromDate={initFromDate}
+                   initToDate={initToDate}
+                   msgOnNotValidFormat={msgOnNotValidFormat}
+                   onTestDate={onTestDate}
+                 />
+               </D.ShowHide>
+             }
+             {
+               (noOptions !== true) &&
+               <D.ShowHide isShow={isShowOptions}>
+                 <D.RowCheckBox
+                   initValue={false}
+                   caption="Add Seria with Second YAxis"
+                   onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
+                   onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
+                 />
+               </D.ShowHide>
+             }
 
-             <D.ShowHide isShow={isShowDate}>
-               <D.DatesFragment
-                 ref={c => this.datesFragment = c}
-                 isShowLabels={isShowLabels}
-                 initFromDate={initFromDate}
-                 initToDate={initToDate}
-                 msgOnNotValidFormat={msgOnNotValidFormat}
-                 onTestDate={onTestDate}
-               />
-             </D.ShowHide>
-             <D.ShowHide isShow={isShowOptions}>
-               <D.RowCheckBox
-                 initValue={false}
-                 caption="Add Seria with Second YAxis"
-                 onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
-                 onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
-               />
-             </D.ShowHide>
              <D.ValidationMessages
                  validationMessages={validationMessages}
              />

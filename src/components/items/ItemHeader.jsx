@@ -34,6 +34,9 @@ const S = {
 };
 
 class ItemHeader extends Component {
+   static defaultProps = {
+     caption: ''
+   }
 
   _hKeyPress = (evt) => {
     evt.preventDefault()

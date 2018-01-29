@@ -84,6 +84,19 @@ var styles = {
   }
 };
 
+var _isWithoutLink = function _isWithoutLink() {
+  var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var _item$id = item.id,
+      id = _item$id === undefined ? '' : _item$id,
+      arr = id.split('/');
+
+
+  if (arr[0] === 'LSE') {
+    return true;
+  }
+  return false;
+};
+
 var PanelDataInfo = function (_Component) {
   (0, _inherits3.default)(PanelDataInfo, _Component);
 
@@ -106,6 +119,10 @@ var PanelDataInfo = function (_Component) {
         return _react2.default.createElement(Comp, { dbCode: dbCode, dsCode: dsCode });
       }
     }, _this._renderNativeLink = function (linkFn, item) {
+      if (_isWithoutLink(item)) {
+        return null;
+      }
+
       var Comp = _RouterNativeLink2.default[linkFn];
       if (typeof Comp !== 'undefined') {
         return _react2.default.createElement(Comp, { item: item });

@@ -50,6 +50,13 @@ var Iex = (0, _withProps2.default)({
   title: "IEX Platform"
 })(_Link2.default);
 
+var Cmc = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://coinmarketcap.com/",
+  dfStyle: S.BLUE,
+  title: "CoinMarketCap"
+})(_Link2.default);
+
 var Barchart = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://www.barchartmarketdata.com",
@@ -158,6 +165,7 @@ exports.default = {
   StatNorway: StatNorway,
   StatSweden: StatSweden,
   Bsl: Bsl,
-  CryptoCompare: CryptoCompare
+  CryptoCompare: CryptoCompare,
+  Cmc: Cmc
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map

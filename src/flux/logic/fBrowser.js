@@ -48,7 +48,7 @@ const _crBrowserDynamic = (Comp, option) => {
             ? _showModalDialogDescription
             : undefined
        , onShowContainer = ChartActions.showChart.bind(null, chartContainerType, browserType);
-
+   
    return React.createElement(Comp , {
      dfProps,
      key : browserType,

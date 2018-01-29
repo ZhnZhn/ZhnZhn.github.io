@@ -10,6 +10,7 @@ import AreaChartItem from '../items/AreaChartItem';
 import MapChartItem from '../items/MapChartItem';
 import SectorItem from '../items/SectorItem';
 import CoinInfoItem from '../items/CoinInfoItem';
+import CoinCapItem from '../items/CoinCapItem';
 
 const _createAreaChartItem = function({
   store, config, index, option, props
@@ -81,12 +82,27 @@ const _crCoinInfoItem = ({
   );
 }
 
+const _crCoinCapItem = ({
+  store, config, index, option, props
+}) => {
+  const { id } = config;
+  return (
+    <CoinCapItem
+      key={id}
+      config={config}
+      {...props}
+    />
+  );
+}
+
+
 const _rCreateItem = {
   DEFAULT : _createAreaChartItem,
 
   [CIT.EUROSTAT_MAP] : _createMapChartItem,
   [CIT.SECTOR] : _crSectorItem,
-  [CIT.COIN_INFO]: _crCoinInfoItem
+  [CIT.COIN_INFO]: _crCoinInfoItem,
+  [CIT.COIN_CAP]: _crCoinCapItem
 }
 
 const ItemFactory = {

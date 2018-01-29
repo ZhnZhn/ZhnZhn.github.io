@@ -56,7 +56,7 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
 const _addSettings = (option) => {
   const { loadId } = option
       , apiKey = ChartStore.getKey(loadId)
-      , proxy = ChartStore.getProxy(loadId);
+      , proxy = ChartStore.getProxy(loadId);  
   Object.assign(option, {
     apiKey, proxy,
     isDrawDeltaExtrems: ChartStore.isSetting('isDrawDeltaExtrems'),

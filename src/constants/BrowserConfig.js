@@ -32,7 +32,7 @@ const BrowserConfig = {
   [BT.BLOCKCHAIN]: {
     browserType: BT.BLOCKCHAIN,
     isDynamic: true,
-    caption: 'BlockChain',
+    caption: 'Blockchain',
     sourceMenuUrl: './data/blockchain/source-menu.json'
   },
 
@@ -141,7 +141,7 @@ const BrowserConfig = {
     chartContainerCaption: 'Quandl : London Stock Exchange by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemLse',
-    descrUrl: './data/london-stocks/lse-stocks.html'
+    descrUrl: './data/london-stocks/lse-stocks.html'    
   },
 
   [BT.WATCH_LIST]: {

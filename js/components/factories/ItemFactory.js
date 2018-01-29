@@ -48,6 +48,10 @@ var _CoinInfoItem = require('../items/CoinInfoItem');
 
 var _CoinInfoItem2 = _interopRequireDefault(_CoinInfoItem);
 
+var _CoinCapItem = require('../items/CoinCapItem');
+
+var _CoinCapItem2 = _interopRequireDefault(_CoinCapItem);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _createAreaChartItem = function _createAreaChartItem(_ref) {
@@ -134,18 +138,32 @@ var _crCoinInfoItem = function _crCoinInfoItem(_ref4) {
   }, props));
 };
 
+var _crCoinCapItem = function _crCoinCapItem(_ref5) {
+  var store = _ref5.store,
+      config = _ref5.config,
+      index = _ref5.index,
+      option = _ref5.option,
+      props = _ref5.props;
+  var id = config.id;
+
+  return _react2.default.createElement(_CoinCapItem2.default, (0, _extends3.default)({
+    key: id,
+    config: config
+  }, props));
+};
+
 var _rCreateItem = (_rCreateItem2 = {
   DEFAULT: _createAreaChartItem
 
-}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.SECTOR, _crSectorItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_INFO, _crCoinInfoItem), _rCreateItem2);
+}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.SECTOR, _crSectorItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_INFO, _crCoinInfoItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_CAP, _crCoinCapItem), _rCreateItem2);
 
 var ItemFactory = {
-  createItem: function createItem(_ref5) {
-    var store = _ref5.store,
-        config = _ref5.config,
-        index = _ref5.index,
-        option = _ref5.option,
-        props = _ref5.props;
+  createItem: function createItem(_ref6) {
+    var store = _ref6.store,
+        config = _ref6.config,
+        index = _ref6.index,
+        option = _ref6.option,
+        props = _ref6.props;
     var zhCompType = config.zhCompType,
         _fnCreate = zhCompType && _rCreateItem[zhCompType] ? _rCreateItem[zhCompType] : _rCreateItem.DEFAULT;
 

@@ -30,6 +30,7 @@ var Quandl = _RouterAdapter2.default.Quandl,
     Barchart = _RouterAdapter2.default.Barchart,
     Intrinio = _RouterAdapter2.default.Intrinio,
     Crc = _RouterAdapter2.default.Crc,
+    Cmc = _RouterAdapter2.default.Cmc,
     Iex = _RouterAdapter2.default.Iex,
     Insee = _RouterAdapter2.default.Insee,
     Bea = _RouterAdapter2.default.Bea,
@@ -56,7 +57,9 @@ var LoadImpl = {
   }, Barchart)),
   Iex: (0, _loadItem2.default)((0, _extends3.default)({}, Iex)),
   Intrinio: (0, _loadItem2.default)((0, _extends3.default)({}, Intrinio)),
+
   Crc: (0, _loadItem2.default)((0, _extends3.default)({}, Crc)),
+  Cmc: (0, _loadItem2.default)((0, _extends3.default)({}, Cmc)),
 
   Insee: (0, _loadItem2.default)((0, _extends3.default)({
     fnFetch: _fnFetch.fetchTxt

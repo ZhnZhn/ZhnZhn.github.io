@@ -39,6 +39,8 @@ const SettingSlice = {
     switch(id){
       case LT.AL_I: case LT.AL_S:
          return _settings[LT.AL];
+      case LT.WL:
+         return _settings[LT.Q];
       default:
          return _settings[id];
     }

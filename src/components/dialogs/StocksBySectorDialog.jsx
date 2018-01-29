@@ -51,7 +51,7 @@ class StocksBySectorDialog extends Component {
      store   : PropTypes.object,
      onClose : PropTypes.func.isRequired
    }
-  */ 
+  */
 
    constructor(props){
      super()
@@ -127,7 +127,7 @@ class StocksBySectorDialog extends Component {
              item: item,
              fromDate: fromDate,
              toDate: toDate,
-             loadId : LoadType.WL,
+             loadId : LoadType.WL,             
              id : id,
              linkFn : 'NASDAQ',
              columnName : 'Close',

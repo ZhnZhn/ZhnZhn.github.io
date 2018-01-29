@@ -223,4 +223,4 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
 }, _temp)) || _class;
 
 exports.default = LoadItemDialog;
-//# sourceMappingURL=LoadItemDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\LoadItemDialog.js.map

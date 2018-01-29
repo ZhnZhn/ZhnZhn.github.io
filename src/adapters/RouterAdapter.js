@@ -15,6 +15,7 @@ import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Intrinio from './intrinio/Intrinio'
 import Crc from './crypto-compare/Crc'
+import Cmc from './coin-market-cap/Cmc'
 
 const RouterAdapter = {
   Quandl: {
@@ -34,7 +35,8 @@ const RouterAdapter = {
   Bea,
   Bls,
   Intrinio,
-  Crc
+  Crc,
+  Cmc
 };
 
 export default RouterAdapter

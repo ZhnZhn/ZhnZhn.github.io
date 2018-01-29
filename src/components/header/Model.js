@@ -35,7 +35,7 @@ const MODEL = {
     },{
       id: BT.BLOCKCHAIN,
       cn: CL.BR,
-      title: 'BlockChain',      
+      title: 'Blockchain',      
       isNew: true
     },{
       id: BT.PREMIUM_SAMPLE,

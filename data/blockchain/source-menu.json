@@ -6,6 +6,11 @@
         { "id": "BC_HD" },
         { "id": "BC_CI" }
       ]
+    },{
+      "caption": "CoinMarketCap",
+      "items": [
+        { "id": "BC_CMC_T" }
+      ]
     }
   ],
   "items": {
@@ -47,6 +52,25 @@
         "dfProps": {
           "dfSubLoadId": "CI"
         }
+      }
+    },
+
+    "BC_CMC_T": {
+      "type": "BC_CMC_T",
+      "menuTitle": "Market Cap Rankings",
+      "dialogCaption": "Market Cap Rankings",
+      "chartContainerCaption": "CoinMarketCap: Market Cap Rankings",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "descrUrl" : "./data/blockchain/coinmarketcap.html",
+        "oneCaption": "Start",
+        "oneURI": "./data/blockchain/cmc-start.json",
+        "twoCaption": "Limit",
+        "twoURI": "./data/blockchain/cmc-limit.json",
+        "noDate": true,
+        "noOptions": true,
+        "loadId" : "CMC",
+        "dataSource": "CoinMarketCap"
       }
     }
   }

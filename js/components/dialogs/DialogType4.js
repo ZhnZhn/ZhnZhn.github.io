@@ -52,6 +52,8 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     twoCaption: PropTypes.string,
     twoURI: PropTypes.string,
     twoJsonProp: PropTypes.string,
+    noDate: PropTypes.bool,
+    noOptions: PropTypes.bool,
       initFromDate: PropTypes.string,
     initToDate: PropTypes.string,
     msgOnNotValidFormat: PropTypes.func,
@@ -97,12 +99,14 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         msg.push(msgOnNotSelected(twoCaption));
       }
 
-      var _this$datesFragment$g = _this.datesFragment.getValidation(),
-          isValid = _this$datesFragment$g.isValid,
-          datesMsg = _this$datesFragment$g.datesMsg;
+      if (_this.datesFragment) {
+        var _this$datesFragment$g = _this.datesFragment.getValidation(),
+            isValid = _this$datesFragment$g.isValid,
+            datesMsg = _this$datesFragment$g.datesMsg;
 
-      if (!isValid) {
-        msg = msg.concat(datesMsg);
+        if (!isValid) {
+          msg = msg.concat(datesMsg);
+        }
       }
 
       msg.isValid = msg.length === 0 ? true : false;
@@ -110,9 +114,9 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     };
 
     _this._createLoadOption = function () {
-      var _this$datesFragment$g2 = _this.datesFragment.getValues(),
-          fromDate = _this$datesFragment$g2.fromDate,
-          toDate = _this$datesFragment$g2.toDate;
+      var _ref = _this.datesFragment ? _this.datesFragment.getValues() : {},
+          fromDate = _ref.fromDate,
+          toDate = _ref.toDate;
 
       return _this.props.loadFn(_this.props, {
         one: _this.one, two: _this.two, fromDate: fromDate, toDate: toDate,
@@ -130,11 +134,16 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 
     _this.one = undefined;
     _this.two = undefined;
-    _this.toolbarButtons = _this._createType2WithToolbar(props);
-    _this.toolbarButtons.push({
-      caption: 'O', title: 'Toggle Options Input',
-      onClick: _this._handleClickOptions
-    });
+    var noDate = props.noDate,
+        noOptions = props.noOptions;
+
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: noDate });
+    if (noOptions !== true) {
+      _this.toolbarButtons.push({
+        caption: 'O', title: 'Toggle Options Input',
+        onClick: _this._handleClickOptions
+      });
+    }
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isShowLabels: true,
@@ -177,6 +186,8 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
+          noDate = _props.noDate,
+          noOptions = _props.noOptions,
           _state = this.state,
           isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
@@ -217,7 +228,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           isWithInput: isWithInputTwo,
           onSelect: this._handleSelectTwo
         }),
-        _react2.default.createElement(
+        noDate !== true && _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.DatesFragment, {
@@ -231,7 +242,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
             onTestDate: onTestDate
           })
         ),
-        _react2.default.createElement(
+        noOptions !== true && _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowOptions },
           _react2.default.createElement(_DialogCell2.default.RowCheckBox, {

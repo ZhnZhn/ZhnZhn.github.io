@@ -44,7 +44,7 @@ const ST = {
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 14):"
+     caption="Data Providers (All 15):"
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM}}
      childStyle={ST.ROOT_CHILD}
   >
@@ -64,6 +64,12 @@ const DataProviders = ({ isClose }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Iex />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.CryptoCompare/>
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Cmc />
         </span>
       </p>
       <OpenClose
@@ -134,6 +140,9 @@ const DataProviders = ({ isClose }) => (
           </span>
           <span style={S.PROVIDER}>
             <Link.CryptoCompare/>
+            <span style={S.BLACK}>
+               &nbsp;(Coin Inform.)
+            </span>
           </span>
         </p>
         <div style={ST.NOTE}>

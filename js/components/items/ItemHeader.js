@@ -24,6 +24,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp2;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -65,7 +67,7 @@ var S = {
   }
 };
 
-var ItemHeader = function (_Component) {
+var ItemHeader = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(ItemHeader, _Component);
 
   function ItemHeader() {
@@ -126,7 +128,8 @@ var ItemHeader = function (_Component) {
     }
   }]);
   return ItemHeader;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  caption: ''
+}, _temp2);
 exports.default = ItemHeader;
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ItemHeader.js.map

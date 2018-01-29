@@ -40,7 +40,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.BLOCKCHAIN, {
   browserType: _Type.BrowserType.BLOCKCHAIN,
   isDynamic: true,
-  caption: 'BlockChain',
+  caption: 'Blockchain',
   sourceMenuUrl: './data/blockchain/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.PREMIUM_SAMPLE, {
   browserType: _Type.BrowserType.PREMIUM_SAMPLE,

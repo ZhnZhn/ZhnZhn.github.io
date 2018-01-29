@@ -84,6 +84,7 @@ export const LoadType = {
   BLS: 'BLS',
   INTR: 'INTR',
   CRC: 'CRC',
+  CMC: 'CMC',
   WL: 'WL'
 }
 
@@ -91,5 +92,6 @@ export const CompItemType = {
   CHART_AREA : 'CHART_AREA',
   EUROSTAT_MAP : 'EUROSTAT_MAP',
   SECTOR: 'SECTOR',
-  COIN_INFO: 'COIN_INFO'
+  COIN_INFO: 'COIN_INFO',
+  COIN_CAP: 'COIN_CAP'
 }

@@ -43,6 +43,8 @@ var SettingSlice = {
     switch (id) {
       case _Type.LoadType.AL_I:case _Type.LoadType.AL_S:
         return _settings[_Type.LoadType.AL];
+      case _Type.LoadType.WL:
+        return _settings[_Type.LoadType.Q];
       default:
         return _settings[id];
     }
