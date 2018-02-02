@@ -101,7 +101,7 @@ var CmcAdapter = {
         valueToHref: valueToHref
       },
       rows: _toRows(HEADERS, json),
-      zhCompType: 'COIN_CAP',
+      zhCompType: 'TABLE',
       zhConfig: {
         id: _id, key: _id
       }

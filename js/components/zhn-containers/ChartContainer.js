@@ -123,14 +123,20 @@ var ChartContainer = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (ChartContainer.__proto__ || Object.getPrototypeOf(ChartContainer)).call(this));
 
+    _this._isDataForContainer = function (data) {
+      var chartType = _this.props.chartType;
+
+      return data === chartType || data && data.chartType === chartType;
+    };
+
     _this._onStore = function (actionType, data) {
-      if (isInArray(compActions, actionType)) {
-        if (data && data.chartType === _this.props.chartType) {
-          _this.spComp.scrollTop();
+      if (_this._isDataForContainer(data)) {
+        if (isInArray(compActions, actionType)) {
+          if (actionType !== _ChartActions.ChartActionTypes.CLOSE_CHART) {
+            _this.spComp.scrollTop();
+          }
           _this.setState(data);
-        }
-      } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
-        if (data === _this.props.chartType) {
+        } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
           _this._handleHide();
         }
       }
@@ -254,4 +260,4 @@ var ChartContainer = function (_Component) {
 }(_react.Component);
 
 exports.default = ChartContainer;
-//# sourceMappingURL=ChartContainer.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-containers\ChartContainer.js.map

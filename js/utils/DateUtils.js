@@ -112,7 +112,7 @@ var DateUtils = {
 
 		// STRING FORMAT yyyy-mm-dd
 
-		if (Object.prototype.toString.call(str) !== "[object String]" || !str || str.trim().length !== 10) {
+		if (typeof str !== 'string' || !str || str.trim().length !== 10) {
 			return false;
 		}
 
@@ -239,4 +239,4 @@ var DateUtils = {
 };
 
 exports.default = DateUtils;
-//# sourceMappingURL=DateUtils.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\DateUtils.js.map

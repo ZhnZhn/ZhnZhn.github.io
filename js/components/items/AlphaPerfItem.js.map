@@ -1,0 +1,20 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\items\\AlphaPerfItem.jsx",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\items\\AlphaPerfItem.js",
+ "sourceRoot": "",
+ "names": [
+  "S",
+  "TH_MORE",
+  "textAlign",
+  "paddingLeft",
+  "AlphaPerfItem",
+  "props",
+  "config",
+  "onCloseItem",
+  "m",
+  "y"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAS;AACPC,eAAW,MADJ;AAEPC,iBAAa;AAFN;AADD,CAAV;;IAOMC,a;;;;;;;;;;6BACI;AAAA,mBAC0B,KAAKC,KAD/B;AAAA,UACEC,MADF,UACEA,MADF;AAAA,UACUC,WADV,UACUA,WADV;;AAEN,aACE;AAAA;AAAA;AACE;AACE,uBAAaP,EAAEC,OADjB;AAEE,kBAAQK,OAAOE,CAFjB;AAGE,uBAAaD;AAHf,UADF;AAME;AACE,uBAAaP,EAAEC,OADjB;AAEE,kBAAQK,OAAOG,CAFjB;AAGE,uBAAaF;AAHf;AANF,OADF;AAcD;;;;;kBAGYH,a"
+}

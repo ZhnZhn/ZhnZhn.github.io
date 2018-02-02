@@ -18,21 +18,23 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SOURCE = {
-  DF: 'Unknown'
-};
+var URL_SEARCH = 'https://www.ssb.no/en/sok?sok=';
+var DF_SOURCE = 'Unknown';
 
 var _crDescr = function _crDescr(_ref, option) {
   var _ref$updated = _ref.updated,
       updated = _ref$updated === undefined ? '' : _ref$updated,
       _ref$source = _ref.source,
-      source = _ref$source === undefined ? SOURCE.DF : _ref$source;
+      source = _ref$source === undefined ? DF_SOURCE : _ref$source,
+      label = _ref.label;
   var _date = updated.replace('T', ' ').replace('Z', ''),
       _option$dfId = option.dfId,
-      dfId = _option$dfId === undefined ? '' : _option$dfId;
+      dfId = _option$dfId === undefined ? '' : _option$dfId,
+      _arr = (label || '').toString().split(','),
+      _sok = _arr[0];
 
 
-  return 'TableId: ' + dfId + ' <BR/> ' + source + ': ' + _date;
+  return 'TableId: ' + dfId + '<BR/>' + source + ': ' + _date + '<BR/><a class="native-link" href="' + URL_SEARCH + _sok + '">Statistics Norway Search</a>';
 };
 
 var _crItemCaption = function _crItemCaption(option) {
@@ -127,4 +129,4 @@ var fnAdapter = {
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=fnAdapter.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\fnAdapter.js.map

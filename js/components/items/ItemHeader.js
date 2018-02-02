@@ -53,7 +53,7 @@ var S = {
   CAPTION: {
     display: 'inline-block',
     cursor: 'pointer',
-    width: '410px',
+    width: '430px',
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',

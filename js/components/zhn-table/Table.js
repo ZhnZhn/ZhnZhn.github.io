@@ -25,16 +25,37 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _SvgMore = require('../zhn/SvgMore');
+
+var _SvgMore2 = _interopRequireDefault(_SvgMore);
+
+var _StylePopup = require('./StylePopup');
+
+var _StylePopup2 = _interopRequireDefault(_StylePopup);
+
+var _compFactory = require('./compFactory');
+
+var _compFactory2 = _interopRequireDefault(_compFactory);
+
+var _tableFn = require('./tableFn');
+
+var _tableFn2 = _interopRequireDefault(_tableFn);
+
+var _Style = require('./Style');
+
+var _Style2 = _interopRequireDefault(_Style);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import PropTypes from "prop-types";
-
 var CL_LINK = "native-link";
+var CL_GRID = "grid";
+var TOKEN_NAN = '―';
 
 var C = {
   UP: 'UP',
@@ -42,67 +63,6 @@ var C = {
 
   ASC: 'ascending',
   DESC: 'descending'
-};
-
-var S = {
-  ROOT: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    borderSpacing: 0
-  },
-  THEAD: {
-    lineHeight: 1.8
-  },
-  TH: {
-    cursor: 'pointer',
-    pointerEvents: 'auto',
-    borderTop: '3px solid transparent',
-    borderBottom: '3px solid transparent'
-  },
-  TH_UP: {
-    borderTop: '3px solid yellow'
-  },
-  TH_DOWN: {
-    borderBottom: '3px solid yellow'
-  },
-  TD: {
-    padding: '6px',
-    verticalAlign: 'middle',
-    lineHeight: 1.4,
-    whiteSpace: 'nowrap',
-    borderTop: 0
-  },
-  UP: {
-    color: '#4caf50',
-    fontWeight: 'bold'
-  },
-  DOWN: {
-    color: '#f44336',
-    fontWeight: 'bold'
-  }
-};
-
-var _crTdStyle = function _crTdStyle(v, isR) {
-  var style = void 0;
-  if (isR) {
-    style = v > 0 ? S.UP : S.DOWN;
-  }
-  return style;
-};
-
-var _fCompBy = function _fCompBy(pn) {
-  return function (a, b) {
-    if (a[pn] < b[pn]) return 1;
-    if (a[pn] > b[pn]) return -1;
-    return 0;
-  };
-};
-
-var _toFormatValue = function _toFormatValue(h, v, fn) {
-  if (h.isF && typeof fn === 'function') {
-    return fn(v);
-  }
-  return v;
 };
 
 var _crLinkEl = function _crLinkEl(id, title, fn) {
@@ -115,35 +75,6 @@ var _crLinkEl = function _crLinkEl(id, title, fn) {
     },
     title
   );
-};
-
-var _crThAriaLabel = function _crThAriaLabel(name, order) {
-  return name + ': activate to sort column ' + order;
-};
-
-var _crAppearance = function _crAppearance(_ref) {
-  var pn = _ref.pn,
-      name = _ref.name,
-      sortBy = _ref.sortBy,
-      sortTo = _ref.sortTo;
-
-  var style = void 0,
-      ariaSort = void 0,
-      ariaLabel = void 0;
-  if (pn === sortBy) {
-    if (sortTo === C.UP) {
-      style = S.TH_UP;
-      ariaSort = C.DESC;
-      ariaLabel = _crThAriaLabel(name, C.ASC);
-    } else {
-      style = S.TH_DOWN;
-      ariaSort = C.ASC;
-      ariaLabel = _crThAriaLabel(name, C.DESC);
-    }
-  } else {
-    ariaLabel = _crThAriaLabel(name, C.ASC);
-  }
-  return { style: style, ariaSort: ariaSort, ariaLabel: ariaLabel };
 };
 
 var Table = (_temp = _class = function (_Component) {
@@ -159,9 +90,17 @@ var Table = (_temp = _class = function (_Component) {
         var rows = prevState.rows,
             sortBy = prevState.sortBy,
             sortTo = prevState.sortTo,
-            _rows = pn === sortBy ? rows.reverse() : rows.sort(_fCompBy(pn)),
-            _sortTo = pn === sortBy ? sortTo === C.DOWN ? C.UP : C.DOWN : C.UP;
+            _compBy = _compFactory2.default.compBy(TOKEN_NAN, pn);
 
+        var _rows = void 0,
+            _sortTo = void 0;
+        if (pn === sortBy && sortTo === C.UP) {
+          _rows = rows.sort(_compFactory2.default.opCompBy(pn, _compBy));
+          _sortTo = C.DOWN;
+        } else {
+          _rows = rows.sort(_compBy);
+          _sortTo = C.UP;
+        }
         return {
           rows: _rows,
           sortBy: pn,
@@ -179,28 +118,48 @@ var Table = (_temp = _class = function (_Component) {
       }
     };
 
+    _this._hToggleMoreStyle = function (evt) {
+      evt.stopPropagation();
+      _this.setState(function (prevState) {
+        return {
+          isMoreStyle: !prevState.isMoreStyle
+        };
+      });
+    };
+
+    _this._hCheckGridLine = function () {
+      _this.setState({ isGridLine: true });
+    };
+
+    _this._hUnCheckGridLine = function () {
+      _this.setState({ isGridLine: false });
+    };
+
     _this._renderHeader = function () {
       var _this$props = _this.props,
           gridId = _this$props.gridId,
+          thMoreStyle = _this$props.thMoreStyle,
           headers = _this$props.headers,
           _this$state = _this.state,
           sortBy = _this$state.sortBy,
           sortTo = _this$state.sortTo;
 
-      return headers.map(function (h) {
+      return headers.map(function (h, hIndex) {
         var name = h.name,
             pn = h.pn,
-            _crAppearance2 = _crAppearance({
-          pn: pn, name: name, sortBy: sortBy, sortTo: sortTo
+            _FN$crAppearance = _tableFn2.default.crAppearance({
+          S: _Style2.default, C: C, pn: pn, name: name, sortBy: sortBy, sortTo: sortTo
         }),
-            style = _crAppearance2.style,
-            ariaSort = _crAppearance2.ariaSort,
-            ariaLabel = _crAppearance2.ariaLabel;
+            style = _FN$crAppearance.style,
+            ariaSort = _FN$crAppearance.ariaSort,
+            ariaLabel = _FN$crAppearance.ariaLabel,
+            _elMore1 = hIndex === 0 ? _react2.default.createElement(_SvgMore2.default, { svgStyle: _Style2.default.SVG_MORE, onClick: _this._hToggleMoreStyle }) : null,
+            _thStyle = hIndex === 0 ? thMoreStyle : null;
 
         return _react2.default.createElement(
           'th',
           {
-            style: (0, _extends3.default)({}, S.TH, style),
+            style: (0, _extends3.default)({}, _Style2.default.TH, _thStyle, style),
             rowSpan: '1',
             colSpan: '1',
             tabIndex: '0',
@@ -210,6 +169,7 @@ var Table = (_temp = _class = function (_Component) {
             onClick: _this._hSort.bind(null, pn),
             onKeyPress: _this._hThKeyPressed.bind(null, pn)
           },
+          _elMore1,
           name
         );
       });
@@ -231,15 +191,15 @@ var Table = (_temp = _class = function (_Component) {
               isR = h.isR,
               isHref = h.isHref,
               v = r[pn],
-              _v = _toFormatValue(h, v, numberFormat),
-              _tdStyle = _crTdStyle(v, isR),
+              _v = _tableFn2.default.toFormatValue({ TOKEN_NAN: TOKEN_NAN, h: h, v: v, fn: numberFormat }),
+              _tdStyle = _tableFn2.default.crTdStyle({ S: _Style2.default, v: v, isR: isR }),
               _elValueOrTitle = isHref ? _crLinkEl(r.id, _v, valueToHref) : _v;
 
           return _react2.default.createElement(
             'td',
             {
               key: rIndex,
-              style: (0, _extends3.default)({}, S.TD, style, _tdStyle)
+              style: (0, _extends3.default)({}, _Style2.default.TD, style, _tdStyle)
             },
             _elValueOrTitle
           );
@@ -253,15 +213,18 @@ var Table = (_temp = _class = function (_Component) {
     };
 
     _this.state = {
+      isGridLine: true,
       rows: props.rows,
       sortBy: undefined,
-      sortTo: undefined
+      sortTo: undefined,
+      isMoreStyle: false
     };
     return _this;
   }
   /*
   static propTypes = {
     gridId: PropTypes.string,
+    thMoreStyle: PropTypes.object,
     rows: PropTypes.array,
     headers: PropTypes.arrayOf(
        PropTypes.shape({
@@ -283,23 +246,38 @@ var Table = (_temp = _class = function (_Component) {
   (0, _createClass3.default)(Table, [{
     key: 'render',
     value: function render() {
-      var gridId = this.props.gridId;
+      var _props = this.props,
+          gridId = _props.gridId,
+          className = _props.className,
+          _state = this.state,
+          isGridLine = _state.isGridLine,
+          isMoreStyle = _state.isMoreStyle,
+          _className = isGridLine ? CL_GRID : '';
 
       return _react2.default.createElement(
         'table',
         {
+          className: _className + ' ' + className,
           id: gridId,
-          style: S.ROOT,
+          style: _Style2.default.ROOT,
           role: 'grid'
         },
         _react2.default.createElement(
           'thead',
-          { style: S.THEAD },
+          { style: _Style2.default.THEAD },
           _react2.default.createElement(
             'tr',
             null,
             this._renderHeader()
-          )
+          ),
+          _react2.default.createElement(_StylePopup2.default, {
+            isShow: isMoreStyle,
+            style: _Style2.default.STYLE_MORE,
+            onClose: this._hToggleMoreStyle,
+            isGridLine: isGridLine,
+            onCheck: this._hCheckGridLine,
+            onUnCheck: this._hUnCheckGridLine
+          })
         ),
         _react2.default.createElement(
           'tbody',
@@ -311,6 +289,7 @@ var Table = (_temp = _class = function (_Component) {
   }]);
   return Table;
 }(_react.Component), _class.defaultProps = {
+  className: '',
   rows: [],
   headers: [],
   tableFn: {}

@@ -14,7 +14,7 @@ const S = {
   }
 };
 
-class CoinCapItem extends Component {
+class TableItem extends Component {
   constructor(){
     super()
     this.state = {
@@ -29,10 +29,10 @@ class CoinCapItem extends Component {
   }
 
   render() {
-    const { config, onCloseItem } = this.props
+    const { thMoreStyle, config, onCloseItem } = this.props
         , { id, title, headers, rows, tableFn } = config
         , _gridId = `coins_${id}`
-        , { isOpen } = this.state;    
+        , { isOpen } = this.state;
     return (
       <div style={S.ROOT}>
         <ItemHeader
@@ -47,6 +47,7 @@ class CoinCapItem extends Component {
         >
           <Table
             gridId={_gridId}
+            thMoreStyle={thMoreStyle}
             headers={headers}
             rows={rows}
             tableFn={tableFn}
@@ -58,4 +59,4 @@ class CoinCapItem extends Component {
 
 }
 
-export default CoinCapItem
+export default TableItem

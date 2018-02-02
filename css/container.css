@@ -149,3 +149,10 @@
   content: " ";
   display: table;
 }
+
+.grid > thead > tr {
+  background-color: transparent !important;
+}
+.grid tr:nth-child(odd) {
+  background-color: #404040;
+}

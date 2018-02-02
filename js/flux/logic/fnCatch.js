@@ -30,14 +30,21 @@ var _fnAddAlert = function _fnAddAlert(option, msg) {
 
 var _crAlertDescr = function _crAlertDescr(error) {
   var errCaption = error.errCaption,
-      message = error.message;
+      _error$message = error.message,
+      message = _error$message === undefined ? '' : _error$message;
 
   if (error.errCaption) {
-    return { caption: errCaption, descr: message };
+    return {
+      caption: errCaption,
+      descr: message
+    };
   } else if (message.indexOf(M.ZH_1000.token) !== -1) {
     return M.ZH_1000;
   } else {
-    return { caption: M.RUNTIME_ERROR.caption, descr: message };
+    return {
+      caption: M.RUNTIME_ERROR.caption,
+      descr: message
+    };
   }
 };
 
@@ -65,4 +72,4 @@ var fnCatch = exports.fnCatch = function fnCatch(_ref) {
 
   onFailed(option);
 };
-//# sourceMappingURL=fnCatch.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\fnCatch.js.map

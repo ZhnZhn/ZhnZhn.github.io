@@ -67,7 +67,7 @@ const BASE_URL = 'https://coinmarketcap.com/currencies/';
 const valueToHref = (id) => `${BASE_URL}${id}`;
 
 const CmcAdapter = {
-  toConfig(json, option){    
+  toConfig(json, option){
     const { one, two } = option
         , _id = `${one}_${two}`
         , config = {
@@ -79,7 +79,7 @@ const CmcAdapter = {
             valueToHref
           },
           rows: _toRows(HEADERS, json),
-          zhCompType: 'COIN_CAP',
+          zhCompType: 'TABLE',
           zhConfig: {
             id: _id, key: _id
           }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import ChartStore from '../../flux/stores/ChartStore';
-import { ChartActionTypes } from '../../flux/actions/ChartActions';
+import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 
-import { ComponentActionTypes } from '../../flux/actions/ComponentActions';
+import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
 import BrowserCaption from '../zhn/BrowserCaption';
 import SvgHrzResize from '../zhn/SvgHrzResize';
@@ -71,9 +71,9 @@ const isInArray = function(array=[], value){
 };
 
 const compActions = [
-  ChartActionTypes.SHOW_CHART,
-  ChartActionTypes.LOAD_STOCK_COMPLETED,
-  ChartActionTypes.CLOSE_CHART
+  CHAT.SHOW_CHART,
+  CHAT.LOAD_STOCK_COMPLETED,
+  CHAT.CLOSE_CHART
 ];
 
 
@@ -96,17 +96,22 @@ class ChartContainer extends Component {
     this.unsubscribe();
   }
 
-   _onStore = (actionType, data) => {
-      if (isInArray(compActions, actionType)) {
-        if (data && data.chartType === this.props.chartType){
-          this.spComp.scrollTop()
-          this.setState(data);
-        }
-      } else if (actionType === ComponentActionTypes.CLOSE_CHART_CONTAINER_2){
-         if (data === this.props.chartType){
-           this._handleHide();
+  _isDataForContainer = (data) => {
+    const { chartType } = this.props;
+    return data === chartType ||
+       (data && data.chartType === chartType);
+  }
+  _onStore = (actionType, data) => {
+     if ( this._isDataForContainer(data) ) {
+       if (isInArray(compActions, actionType)) {
+         if (actionType !== CHAT.CLOSE_CHART) {
+           this.spComp.scrollTop()
          }
-      }
+         this.setState(data);
+       } else if (actionType === CAT.CLOSE_CHART_CONTAINER_2){
+         this._handleHide();
+       }
+     }
    }
 
    _handleHide = () => {
@@ -141,7 +146,7 @@ class ChartContainer extends Component {
           config, index,
           option: { chartType },
           props: {
-            onCloseItem : onCloseItem.bind(null, chartType, browserType, id),
+            onCloseItem : onCloseItem.bind(null, chartType, browserType, id),            
             isAdminMode : _isAdminMode
           }
        });

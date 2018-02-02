@@ -40,17 +40,17 @@ var _MapChartItem = require('../items/MapChartItem');
 
 var _MapChartItem2 = _interopRequireDefault(_MapChartItem);
 
-var _SectorItem = require('../items/SectorItem');
-
-var _SectorItem2 = _interopRequireDefault(_SectorItem);
-
 var _CoinInfoItem = require('../items/CoinInfoItem');
 
 var _CoinInfoItem2 = _interopRequireDefault(_CoinInfoItem);
 
-var _CoinCapItem = require('../items/CoinCapItem');
+var _TableItem = require('../items/TableItem');
 
-var _CoinCapItem2 = _interopRequireDefault(_CoinCapItem);
+var _TableItem2 = _interopRequireDefault(_TableItem);
+
+var _AlphaPerfItem = require('../items/AlphaPerfItem');
+
+var _AlphaPerfItem2 = _interopRequireDefault(_AlphaPerfItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -111,59 +111,48 @@ var _createMapChartItem = function _createMapChartItem(_ref2) {
   }, props));
 };
 
-var _crSectorItem = function _crSectorItem(_ref3) {
-  var store = _ref3.store,
-      config = _ref3.config,
-      index = _ref3.index,
-      option = _ref3.option,
-      props = _ref3.props;
+/*
+const _crCoinInfoItem = ({
+  store, config, index, option, props
+}) => {
+  const { Symbol:id } = config.General;
+  return (
+    <CoinInfoItem
+      key={id}
+      config={config}
+      {...props}
+    />
+  );
+}
+*/
 
-  return _react2.default.createElement(_SectorItem2.default, {
-    key: 'key',
-    config: config
-  });
-};
+var _fItem = function _fItem(Comp) {
+  return function (_ref3) {
+    var store = _ref3.store,
+        config = _ref3.config,
+        index = _ref3.index,
+        option = _ref3.option,
+        props = _ref3.props;
+    var id = config.id;
 
-var _crCoinInfoItem = function _crCoinInfoItem(_ref4) {
-  var store = _ref4.store,
-      config = _ref4.config,
-      index = _ref4.index,
-      option = _ref4.option,
-      props = _ref4.props;
-  var id = config.General.Symbol;
-
-  return _react2.default.createElement(_CoinInfoItem2.default, (0, _extends3.default)({
-    key: id,
-    config: config
-  }, props));
-};
-
-var _crCoinCapItem = function _crCoinCapItem(_ref5) {
-  var store = _ref5.store,
-      config = _ref5.config,
-      index = _ref5.index,
-      option = _ref5.option,
-      props = _ref5.props;
-  var id = config.id;
-
-  return _react2.default.createElement(_CoinCapItem2.default, (0, _extends3.default)({
-    key: id,
-    config: config
-  }, props));
+    return _react2.default.createElement(Comp, (0, _extends3.default)({
+      key: id,
+      config: config
+    }, props));
+  };
 };
 
 var _rCreateItem = (_rCreateItem2 = {
   DEFAULT: _createAreaChartItem
-
-}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.SECTOR, _crSectorItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_INFO, _crCoinInfoItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_CAP, _crCoinCapItem), _rCreateItem2);
+}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_INFO, _fItem(_CoinInfoItem2.default)), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.TABLE, _fItem(_TableItem2.default)), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.ALPHA_PERF, _fItem(_AlphaPerfItem2.default)), _rCreateItem2);
 
 var ItemFactory = {
-  createItem: function createItem(_ref6) {
-    var store = _ref6.store,
-        config = _ref6.config,
-        index = _ref6.index,
-        option = _ref6.option,
-        props = _ref6.props;
+  createItem: function createItem(_ref4) {
+    var store = _ref4.store,
+        config = _ref4.config,
+        index = _ref4.index,
+        option = _ref4.option,
+        props = _ref4.props;
     var zhCompType = config.zhCompType,
         _fnCreate = zhCompType && _rCreateItem[zhCompType] ? _rCreateItem[zhCompType] : _rCreateItem.DEFAULT;
 

@@ -48,13 +48,13 @@ var S = {
   }
 };
 
-var CoinCapItem = function (_Component) {
-  (0, _inherits3.default)(CoinCapItem, _Component);
+var TableItem = function (_Component) {
+  (0, _inherits3.default)(TableItem, _Component);
 
-  function CoinCapItem() {
-    (0, _classCallCheck3.default)(this, CoinCapItem);
+  function TableItem() {
+    (0, _classCallCheck3.default)(this, TableItem);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (CoinCapItem.__proto__ || Object.getPrototypeOf(CoinCapItem)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (TableItem.__proto__ || Object.getPrototypeOf(TableItem)).call(this));
 
     _this._hToggle = function () {
       _this.setState({
@@ -68,10 +68,11 @@ var CoinCapItem = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(CoinCapItem, [{
+  (0, _createClass3.default)(TableItem, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
+          thMoreStyle = _props.thMoreStyle,
           config = _props.config,
           onCloseItem = _props.onCloseItem,
           id = config.id,
@@ -99,6 +100,7 @@ var CoinCapItem = function (_Component) {
           },
           _react2.default.createElement(_Table2.default, {
             gridId: _gridId,
+            thMoreStyle: thMoreStyle,
             headers: headers,
             rows: rows,
             tableFn: tableFn
@@ -107,8 +109,8 @@ var CoinCapItem = function (_Component) {
       );
     }
   }]);
-  return CoinCapItem;
+  return TableItem;
 }(_react.Component);
 
-exports.default = CoinCapItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\CoinCapItem.js.map
+exports.default = TableItem;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\TableItem.js.map

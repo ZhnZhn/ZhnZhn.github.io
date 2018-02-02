@@ -40,12 +40,21 @@ const QuandlApi = {
     const { quandl_error, dataset={} } = json;
     if ( quandl_error ){
        if ( quandl_error.message ) {
-          throw { errCaption : C.REQUEST_ERROR, message : json.quandl_error.message };
+          throw {
+            errCaption : C.REQUEST_ERROR,
+            message : json.quandl_error.message
+          };
        } else {
-          throw { errCaption : C.REQUEST_ERROR, message : '' };
+          throw {
+            errCaption : C.REQUEST_ERROR,
+            message : ''
+          };
        }
     } else if ( !dataset.data || dataset.data.length === 0 ){
-        const { newest_available_date='', oldest_available_date='' } = dataset;
+        const {
+                newest_available_date='',
+                oldest_available_date=''
+              } = dataset;
         throw {
            errCaption : C.DATASET_EMPTY,
            message : `Result dataset for request is empty:

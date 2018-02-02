@@ -95,8 +95,9 @@ var LoadType = exports.LoadType = {
 var CompItemType = exports.CompItemType = {
    CHART_AREA: 'CHART_AREA',
    EUROSTAT_MAP: 'EUROSTAT_MAP',
-   SECTOR: 'SECTOR',
+   //SECTOR: 'SECTOR',
    COIN_INFO: 'COIN_INFO',
-   COIN_CAP: 'COIN_CAP'
+   TABLE: 'TABLE',
+   ALPHA_PERF: 'ALPHA_PERF'
 };
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map

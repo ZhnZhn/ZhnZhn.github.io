@@ -9,11 +9,14 @@ var toInfoConfig = {
     var value = option.value,
         _json$Data$General = json.Data.General,
         General = _json$Data$General === undefined ? {} : _json$Data$General,
+        _General$Symbol = General.Symbol,
+        id = _General$Symbol === undefined ? value : _General$Symbol,
         config = {
-      General: General,
+      id: id, General: General,
       zhCompType: 'COIN_INFO',
       zhConfig: {
-        id: value, key: value
+        //id: value, key: value
+        id: id, key: id
       }
     };
 

@@ -87,7 +87,11 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
     this.listen(_ChartActions2.default.fnOnChangeStore);
   },
   createInitConfig: function createInitConfig(chartType) {
-    return { chartType: chartType, configs: [], isShow: true };
+    return {
+      chartType: chartType,
+      configs: [],
+      isShow: true
+    };
   },
   getConfigs: function getConfigs(chartType) {
     return this.charts[chartType];
@@ -96,8 +100,10 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
     if (!this.charts[chartType]) {
       return false;
     }
-    var configs = this.charts[chartType].configs;
-    for (var i = 0, max = configs.length; i < max; i++) {
+    var configs = this.charts[chartType].configs,
+        _max = configs.length;
+    var i = 0;
+    for (; i < _max; i++) {
       if (configs[i].zhConfig.key === key) {
         return true;
       }
@@ -162,7 +168,10 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   },
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_FAILED, option);
-    option.alertItemId = option.alertItemId ? option.alertItemId : option.value;
+    var alertItemId = option.alertItemId,
+        value = option.value;
+
+    option.alertItemId = alertItemId || value;
     this.showAlertDialog(option);
     _fnLogLoadError(option);
   },

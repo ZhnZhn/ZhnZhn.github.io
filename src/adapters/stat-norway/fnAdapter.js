@@ -3,17 +3,19 @@ import JSONstat from 'jsonstat';
 
 import AdapterFn from '../AdapterFn';
 
-const SOURCE = {
-  DF: 'Unknown'
-};
+const URL_SEARCH = 'https://www.ssb.no/en/sok?sok=';
+const DF_SOURCE = 'Unknown';
 
-const _crDescr = ({ updated='', source=SOURCE.DF }, option) => {
+
+const _crDescr = ({ updated='', source=DF_SOURCE, label }, option) => {
   const _date = updated
           .replace('T', ' ')
           .replace('Z', '')
-      , { dfId='' } = option;
+      , { dfId='' } = option
+      , _arr = (label || '').toString().split(',')
+      , _sok = _arr[0];
 
-  return `TableId: ${dfId} <BR/> ${source}: ${_date}`;
+  return `TableId: ${dfId}<BR/>${source}: ${_date}<BR/><a class="native-link" href="${URL_SEARCH}${_sok}">Statistics Norway Search</a>`;
 }
 
 const _crItemCaption = (option) => {
@@ -83,7 +85,7 @@ const fnAdapter = {
     return { date: d, direction: 'empty' };
   },
 
-  crChartOption: (ds, data, option) => {    
+  crChartOption: (ds, data, option) => {
     return {
       info: fnAdapter.crInfo(ds, option),
       valueMoving: fnAdapter.crValueMoving(data),

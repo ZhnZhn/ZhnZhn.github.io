@@ -8,9 +8,10 @@ import { ModalDialog, CompItemType as CIT } from '../../constants/Type';
 
 import AreaChartItem from '../items/AreaChartItem';
 import MapChartItem from '../items/MapChartItem';
-import SectorItem from '../items/SectorItem';
 import CoinInfoItem from '../items/CoinInfoItem';
-import CoinCapItem from '../items/CoinCapItem';
+import TableItem from '../items/TableItem';
+import AlphaPerfItem from '../items/AlphaPerfItem';
+
 
 const _createAreaChartItem = function({
   store, config, index, option, props
@@ -58,17 +59,7 @@ const _createMapChartItem = function({
   )
 };
 
-const _crSectorItem = ({
-  store, config, index, option, props
-}) => {
-  return (
-    <SectorItem
-       key="key"
-       config={config}
-     />
-  );
-}
-
+/*
 const _crCoinInfoItem = ({
   store, config, index, option, props
 }) => {
@@ -81,13 +72,14 @@ const _crCoinInfoItem = ({
     />
   );
 }
+*/
 
-const _crCoinCapItem = ({
+const _fItem = (Comp) => ({
   store, config, index, option, props
 }) => {
   const { id } = config;
   return (
-    <CoinCapItem
+    <Comp
       key={id}
       config={config}
       {...props}
@@ -95,14 +87,13 @@ const _crCoinCapItem = ({
   );
 }
 
-
 const _rCreateItem = {
-  DEFAULT : _createAreaChartItem,
-
-  [CIT.EUROSTAT_MAP] : _createMapChartItem,
-  [CIT.SECTOR] : _crSectorItem,
-  [CIT.COIN_INFO]: _crCoinInfoItem,
-  [CIT.COIN_CAP]: _crCoinCapItem
+  DEFAULT: _createAreaChartItem,
+  [CIT.EUROSTAT_MAP]: _createMapChartItem,
+  //[CIT.COIN_INFO]: _crCoinInfoItem,
+  [CIT.COIN_INFO]: _fItem(CoinInfoItem),
+  [CIT.TABLE]: _fItem(TableItem),
+  [CIT.ALPHA_PERF]: _fItem(AlphaPerfItem)
 }
 
 const ItemFactory = {

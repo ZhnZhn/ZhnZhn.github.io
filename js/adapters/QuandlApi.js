@@ -49,9 +49,15 @@ var QuandlApi = {
 
     if (quandl_error) {
       if (quandl_error.message) {
-        throw { errCaption: C.REQUEST_ERROR, message: json.quandl_error.message };
+        throw {
+          errCaption: C.REQUEST_ERROR,
+          message: json.quandl_error.message
+        };
       } else {
-        throw { errCaption: C.REQUEST_ERROR, message: '' };
+        throw {
+          errCaption: C.REQUEST_ERROR,
+          message: ''
+        };
       }
     } else if (!dataset.data || dataset.data.length === 0) {
       var _dataset$newest_avail = dataset.newest_available_date,
@@ -69,4 +75,4 @@ var QuandlApi = {
 };
 
 exports.default = QuandlApi;
-//# sourceMappingURL=QuandlApi.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlApi.js.map

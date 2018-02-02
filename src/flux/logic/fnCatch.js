@@ -17,13 +17,19 @@ const _fnAddAlert = (option, msg) => {
 }
 
 const _crAlertDescr = (error)  => {
-  const { errCaption, message } = error;
+  const { errCaption, message='' } = error;
   if (error.errCaption) {
-    return { caption: errCaption, descr: message };
+    return {
+      caption: errCaption,
+      descr: message
+    };
   } else if (message.indexOf(M.ZH_1000.token) !== -1) {
     return M.ZH_1000;
   } else {
-    return { caption: M.RUNTIME_ERROR.caption, descr: message };
+    return {
+      caption: M.RUNTIME_ERROR.caption,
+      descr: message
+    };
   }
 }
 

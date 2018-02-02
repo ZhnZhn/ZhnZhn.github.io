@@ -1,13 +1,17 @@
 
 const C = {
-  ROOT: "https://marketdata.websol.barchart.com/getHistory.jsonp"
+  ROOT: "https://marketdata.websol.barchart.com/getHistory.jsonp",
+  DF_FROM_DATE: '20160627000000',
+
+  REQUEST_ERROR: 'Request Error',
+  RESPONSE_EMPTY: 'Dataset Empty'
 };
 
 const BarchartApi = {
   getRequestUrl(option) {
     const {
-            value, fromDate='20160627000000',
-            //toDate,
+            value,
+            fromDate=C.DF_FROM_DATE,
             apiKey
           } = option;
 
@@ -15,6 +19,12 @@ const BarchartApi = {
   },
 
   checkResponse(json){
+    if ( !(json && Array.isArray(json.results)) ) {
+      throw {
+        errCaption: C.REQUEST_ERROR,
+        message: C.RESPONSE_EMPTY
+      };
+    }
     return true;
   }
 };
