@@ -1,0 +1,14 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\LoadingProgressActions.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\LoadingProgressActions.js",
+ "sourceRoot": "",
+ "names": [
+  "T",
+  "LOADING",
+  "LOADING_COMPLETE",
+  "LAODING_FAILED"
+ ],
+ "mappings": ";;;;;AACO,IAAMA,gBAAI;AACfC,WAAS,iBADM;AAEfC,oBAAkB,yBAFH;AAGfC,kBAAgB;AAHD,CAAV"
+}

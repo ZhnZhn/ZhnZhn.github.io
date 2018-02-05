@@ -5,6 +5,7 @@ import Msg from '../../constants/Msg';
 import ChartStore from '../stores/ChartStore';
 import LoadConfig from '../logic/LoadConfig';
 import LogicUtils from '../logic/LogicUtils';
+import { T as LPA } from './LoadingProgressActions'
 
 const C = {
   DESR_LOADER: "Loader for this item hasn't found."
@@ -33,12 +34,11 @@ const A = ChartActionTypes;
 const M = Msg.Alert;
 
 const _fnOnChangeStore = function(actionType, data){
-   if (actionType === A.LOAD_STOCK_COMPLETED ||
-       actionType === A.LOAD_STOCK_ADDED ||
-       actionType === A.LOAD_STOCK_FAILED )
-   {
-     ChartActions[A.LOAD_STOCK].isLoading = false;
-   }
+  if (actionType === LPA.LOADING_COMPLETE ||
+      actionType === LPA.LOADING_FAILED
+  ){
+    ChartActions[A.LOAD_STOCK].isLoading = false;
+  }
 }
 
 const _fnCancelLoad = function(option, alertMsg, isWithFailed){
@@ -56,7 +56,7 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
 const _addSettings = (option) => {
   const { loadId } = option
       , apiKey = ChartStore.getKey(loadId)
-      , proxy = ChartStore.getProxy(loadId);  
+      , proxy = ChartStore.getProxy(loadId);
   Object.assign(option, {
     apiKey, proxy,
     isDrawDeltaExtrems: ChartStore.isSetting('isDrawDeltaExtrems'),

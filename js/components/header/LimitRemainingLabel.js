@@ -68,7 +68,7 @@ var LimitRemainingLabel = function (_Component) {
     value: function componentDidMount() {
       var store = this.props.store;
 
-      this.unsubscribe = store.listenWithLimitRemaining(this._onStore);
+      this.unsubscribe = store.listenLimitRemaining(this._onStore);
     }
   }, {
     key: 'componentWillUnmount',
@@ -92,4 +92,4 @@ var LimitRemainingLabel = function (_Component) {
 }(_react.Component);
 
 exports.default = LimitRemainingLabel;
-//# sourceMappingURL=LimitRemainingLabel.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\LimitRemainingLabel.js.map

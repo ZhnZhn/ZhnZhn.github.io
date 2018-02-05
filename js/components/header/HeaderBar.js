@@ -64,6 +64,8 @@ var _BrowserActions = require('../../flux/actions/BrowserActions');
 
 var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 
+var _LoadingProgressActions = require('../../flux/actions/LoadingProgressActions');
+
 var _Type = require('../../constants/Type');
 
 var _Model = require('./Model');
@@ -153,7 +155,7 @@ var HeaderBar = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'header' },
-        _react2.default.createElement(_ProgressLoading2.default, { store: store }),
+        _react2.default.createElement(_ProgressLoading2.default, { store: store, ACTIONS: _LoadingProgressActions.T }),
         _react2.default.createElement(_IconLogoErc2.default, {
           className: 'header__icon-erc',
           title: LOGO_TITLE

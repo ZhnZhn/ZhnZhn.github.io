@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import {ChartActionTypes} from '../../flux/actions/ChartActions';
 import ProgressLine from '../zhn/ProgressLine';
 
 const C = {
@@ -8,26 +7,26 @@ const C = {
   FAILED : 'rgb(237, 88, 19)'
 };
 
-
 class ProgressLoading extends Component {
   state = {
-    completed : 0,
-    color : C.LOADING
+    completed: 0,
+    color: C.LOADING
   }
 
   componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore);
+    this.unsubscribe = this.props.store
+      .listenLoadingProgress(this._onStore);
   }
   componentWillUnmount(){
     this.unsubscribe()
   }
-  _onStore = (actionType, option) => {
-      if (actionType === ChartActionTypes.LOAD_STOCK){
+  _onStore = (actionType) => {
+      const { ACTIONS } = this.props;
+      if (actionType === ACTIONS.LOADING){
         this.setState({ completed: 35, color: C.LOADING })
-      } else if (actionType === ChartActionTypes.LOAD_STOCK_COMPLETED
-                 || actionType === ChartActionTypes.LOAD_STOCK_ADDED){
+      } else if (actionType === ACTIONS.LOADING_COMPLETE){
         this.setState({ completed: 100, color: C.LOADING })
-      } else if (actionType === ChartActionTypes.LOAD_STOCK_FAILED){
+      } else if (actionType === ACTIONS.LOADING_FAILED){
         this.setState({ completed: 100, color: C.FAILED })
       }
   }

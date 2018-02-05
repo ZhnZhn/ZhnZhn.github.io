@@ -82,7 +82,6 @@ var QuandlFn2 = {
         fromDate = option.fromDate,
         seriaColumnNames = option.seriaColumnNames,
         linkFn = option.linkFn,
-        limitRemaining = option.limitRemaining,
         dataSource = option.dataSource,
         _dataSource = dataSource ? 'Quandl: ' + dataSource : 'Quandl';
 
@@ -93,7 +92,6 @@ var QuandlFn2 = {
       columnName: columnName, dataColumn: dataColumn, itemCaption: itemCaption,
       fromDate: fromDate, seriaColumnNames: seriaColumnNames,
       linkFn: linkFn,
-      limitRemaining: limitRemaining,
       dataSource: _dataSource
     };
   },
@@ -182,4 +180,4 @@ var QuandlFn2 = {
 };
 
 exports.default = QuandlFn2;
-//# sourceMappingURL=QuandlFn2.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlFn2.js.map

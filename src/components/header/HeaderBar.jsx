@@ -8,8 +8,10 @@ import ModalButton from '../zhn-m/ModalButton'
 import HotBar from './HotBar'
 import LimitRemainingLabel from './LimitRemainingLabel'
 import BrowserMenu from './BrowserMenu'
+
 import ComponentActions, { ComponentActionTypes} from '../../flux/actions/ComponentActions'
 import BrowserActions from '../../flux/actions/BrowserActions'
+import { T as LPA } from '../../flux/actions/LoadingProgressActions'
 
 import { BrowserType as BT, ModalDialog } from '../../constants/Type'
 import MODEL from './Model'
@@ -87,7 +89,7 @@ class HeaderBar extends Component {
         , { isDS } = this.state;
     return (
       <div className="header">
-         <ProgressLoading store={store} />
+         <ProgressLoading store={store} ACTIONS={LPA} />
          <IconLogoErc
             className="header__icon-erc"
             title={LOGO_TITLE}

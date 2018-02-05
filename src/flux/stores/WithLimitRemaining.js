@@ -2,14 +2,14 @@ const CHANNEL = 'WITH_LIMIT_REMAINING';
 
 const WithLimitRemaining = {
 
-  listenWithLimitRemaining(fnHandler){
+  listenLimitRemaining(fnHandler){
     this.emitter.addListener(CHANNEL, fnHandler);
     return () => {
       this.emitter.removeListener(CHANNEL, fnHandler);
     }
   },
 
-  triggerWithLimitRemaining(limitRemaining){
+  triggerLimitRemaining(limitRemaining){
     this.emitter.emit(CHANNEL, limitRemaining);
   }
 }

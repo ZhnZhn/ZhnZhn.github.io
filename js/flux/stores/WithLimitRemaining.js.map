@@ -1,1 +1,20 @@
-{"version":3,"sources":["../../../src/flux/stores/WithLimitRemaining.js"],"names":["CHANNEL","WithLimitRemaining","listenWithLimitRemaining","fnHandler","emitter","addListener","removeListener","triggerWithLimitRemaining","limitRemaining","emit"],"mappings":";;;;;AAAA,IAAMA,UAAU,sBAAhB;;AAEA,IAAMC,qBAAqB;AAEzBC,0BAFyB,oCAEAC,SAFA,EAEU;AAAA;;AACjC,SAAKC,OAAL,CAAaC,WAAb,CAAyBL,OAAzB,EAAkCG,SAAlC;AACA,WAAO,YAAM;AACX,YAAKC,OAAL,CAAaE,cAAb,CAA4BN,OAA5B,EAAqCG,SAArC;AACD,KAFD;AAGD,GAPwB;AASzBI,2BATyB,qCASCC,cATD,EASgB;AACvC,SAAKJ,OAAL,CAAaK,IAAb,CAAkBT,OAAlB,EAA2BQ,cAA3B;AACD;AAXwB,CAA3B;;kBAceP,kB","file":"WithLimitRemaining.js","sourcesContent":["const CHANNEL = 'WITH_LIMIT_REMAINING';\r\n\r\nconst WithLimitRemaining = {\r\n\r\n  listenWithLimitRemaining(fnHandler){\r\n    this.emitter.addListener(CHANNEL, fnHandler);\r\n    return () => {\r\n      this.emitter.removeListener(CHANNEL, fnHandler);\r\n    }\r\n  },\r\n\r\n  triggerWithLimitRemaining(limitRemaining){\r\n    this.emitter.emit(CHANNEL, limitRemaining);\r\n  }\r\n}\r\n\r\nexport default WithLimitRemaining\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\stores\\WithLimitRemaining.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\stores\\WithLimitRemaining.js",
+ "sourceRoot": "",
+ "names": [
+  "CHANNEL",
+  "WithLimitRemaining",
+  "listenLimitRemaining",
+  "fnHandler",
+  "emitter",
+  "addListener",
+  "removeListener",
+  "triggerLimitRemaining",
+  "limitRemaining",
+  "emit"
+ ],
+ "mappings": ";;;;;AAAA,IAAMA,UAAU,sBAAhB;;AAEA,IAAMC,qBAAqB;AAEzBC,sBAFyB,gCAEJC,SAFI,EAEM;AAAA;;AAC7B,SAAKC,OAAL,CAAaC,WAAb,CAAyBL,OAAzB,EAAkCG,SAAlC;AACA,WAAO,YAAM;AACX,YAAKC,OAAL,CAAaE,cAAb,CAA4BN,OAA5B,EAAqCG,SAArC;AACD,KAFD;AAGD,GAPwB;AASzBI,uBATyB,iCASHC,cATG,EASY;AACnC,SAAKJ,OAAL,CAAaK,IAAb,CAAkBT,OAAlB,EAA2BQ,cAA3B;AACD;AAXwB,CAA3B;;kBAceP,kB"
+}

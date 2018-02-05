@@ -17,7 +17,7 @@ class LimitRemainingLabel extends Component {
 
   componentDidMount() {
     const { store } = this.props;
-    this.unsubscribe = store.listenWithLimitRemaining(this._onStore)
+    this.unsubscribe = store.listenLimitRemaining(this._onStore)
   }
   componentWillUnmount() {
     this.unsubscribe()

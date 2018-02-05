@@ -3,6 +3,7 @@ import Reflux from 'reflux';
 import ChartActions, {ChartActionTypes as CHAT} from '../actions/ChartActions';
 import ComponentActions, {ComponentActionTypes as CAT} from '../actions/ComponentActions';
 import BrowserActions, {BrowserActionTypes as BAT} from '../actions/BrowserActions';
+import { T as LPA } from '../actions/LoadingProgressActions'
 import AnalyticActions from '../actions/AnalyticActions';
 import WatchActions from '../actions/WatchActions';
 
@@ -16,6 +17,7 @@ import SettingSlice from './SettingSlice';
 import AnalyticSlice from './AnalyticSlice';
 import WatchListSlice from '../watch-list/WatchListSlice';
 import WithLimitRemaining from './WithLimitRemaining';
+import WithLoadingProgress from './WithLoadingProgress'
 
 const EVENT_ACTION = {
   LOAD : 'Load',
@@ -30,6 +32,41 @@ const _fnLogLoadError = function({
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 }
 
+const ChartLogic = {
+  initChartSlice(slice, chartType, config){
+    const configs = config ? [ config ] : [];
+    if (!slice[chartType]) {
+      slice[chartType] = {
+        chartType, configs,
+        isShow: true
+      }
+    }
+  },
+
+  isChartExist(slice, chartType, key){
+    const chartSlice = slice[chartType];
+    if (!chartSlice){
+      return false;
+    }
+    const { configs } = chartSlice
+        , _max = configs.length;
+    let i = 0;
+    for (; i<_max; i++){
+      if (configs[i].zhConfig.key === key){
+        return true;
+      }
+    }
+    return false;
+  },
+
+  removeConfig(slice, chartType, id) {
+    const chartSlice = slice[chartType];
+    chartSlice.configs = chartSlice.configs
+      .filter(config => config.zhConfig.id !== id)
+    return chartSlice;
+  }
+};
+
 const ChartStore = Reflux.createStore({
   listenables : [
      ChartActions,
@@ -41,32 +78,15 @@ const ChartStore = Reflux.createStore({
   charts : {},
   init(){
     this.initWatchList();
-    this.listen(ChartActions.fnOnChangeStore);
+    this.listenLoadingProgress(ChartActions.fnOnChangeStore);
   },
 
- createInitConfig(chartType){
-   return {
-     chartType: chartType,
-     configs: [],
-     isShow: true
-   };
- },
  getConfigs(chartType){
    return this.charts[chartType];
  },
  isChartExist(chartType, key){
-   if (!this.charts[chartType]){
-     return false;
-   }
-   const configs = this.charts[chartType].configs
-       , _max = configs.length;
-   let i = 0;
-   for (; i<_max; i++){
-     if (configs[i].zhConfig.key === key){
-       return true;
-     }
-   }
-   return false;
+   return ChartLogic
+     .isChartExist(this.charts, chartType, key);
  },
  showAlertDialog(option={}){
    option.modalDialogType = ModalDialog.ALERT;
@@ -74,41 +94,36 @@ const ChartStore = Reflux.createStore({
  },
 
  onLoadStock(){
-   this.trigger(CHAT.LOAD_STOCK);
+   //this.trigger(CHAT.LOAD_STOCK);
+   this.triggerLoadingProgress(LPA.LOADING)
  },
  onLoadStockCompleted(option, config){
      const {
              chartType, browserType, conf,
-             zhCompType
-           } = option
-         , { zhConfig={} } = config
-         , { limitRemaining } = zhConfig;
+             zhCompType, limitRemaining
+           } = option;
      if (zhCompType){
        config.zhCompType = zhCompType;
      }
 
      this.addMenuItemCounter(chartType, browserType);
 
-     const chartCont = this.charts[chartType];
-     if (chartCont){
-       chartCont.configs.unshift(config);
-       chartCont.isShow = true;
-
-       this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartCont);
-       this.triggerWithLimitRemaining(limitRemaining);
-     } else {
-      this.charts[chartType] = this.createInitConfig(chartType);
-      this.charts[chartType].configs.unshift(config);
-
-      this.trigger(CHAT.LOAD_STOCK_COMPLETED);
-      this.trigger(CHAT.INIT_AND_SHOW_CHART,
+     const chartSlice = this.charts[chartType];
+     if (chartSlice){
+       chartSlice.configs.unshift(config);
+       chartSlice.isShow = true;
+       this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartSlice);
+     } else {       
+       ChartLogic.initChartSlice(this.charts, chartType, config)
+       //this.trigger(CHAT.LOAD_STOCK_COMPLETED);
+       this.trigger(CHAT.INIT_AND_SHOW_CHART,
          Factory.createChartContainer(
             chartType, browserType, conf
          )
-      );
-      this.triggerWithLimitRemaining(limitRemaining);
+       );
     }
-
+    this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
+    this.triggerLimitRemaining(limitRemaining);
     this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
     this.analyticSendEvent({
        eventAction : EVENT_ACTION.LOAD,
@@ -117,14 +132,16 @@ const ChartStore = Reflux.createStore({
  },
  onLoadStockAdded(option={}){
     const { chartType } = option;
-    this.trigger(CHAT.LOAD_STOCK_ADDED);
+    //this.trigger(CHAT.LOAD_STOCK_ADDED);
+    this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
     this.analyticSendEvent({
        eventAction : EVENT_ACTION.ADD,
        eventLabel : chartType
      });
  },
  onLoadStockFailed(option){
-   this.trigger(CHAT.LOAD_STOCK_FAILED, option);
+   //this.trigger(CHAT.LOAD_STOCK_FAILED, option);
+   this.triggerLoadingProgress(LPA.LOADING_FAILED)
    const { alertItemId, value } = option;
    option.alertItemId = alertItemId || value;
    this.showAlertDialog(option);
@@ -145,38 +162,42 @@ const ChartStore = Reflux.createStore({
  onShowChart(chartType, browserType, conf){
    this.setMenuItemOpen(chartType, browserType);
 
-   const chartCont = this.charts[chartType];
-   if (chartCont){
-     chartCont.isShow = true;
-     this.trigger(CHAT.SHOW_CHART, chartCont);
-     this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+   const chartSlice = this.charts[chartType];
+   if (chartSlice){
+     chartSlice.isShow = true;
+     this.trigger(CHAT.SHOW_CHART, chartSlice);
    } else {
-     this.charts[chartType] = this.createInitConfig(chartType);
+     ChartLogic.initChartSlice(this.charts, chartType)
      this.trigger(
        CHAT.INIT_AND_SHOW_CHART,
        Factory.createChartContainer(
           chartType, browserType, conf
         )
       );
-     this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
    }
+   this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
 
+ },
+
+ resetActiveChart(id){
+   if (
+     this.activeChart &&
+     this.activeChart.options.zhConfig.id === id
+   ){
+     this.activeChart = null;
+   }
  },
 
  onCloseChart(chartType, browserType, chartId){
 
+   //const chartSlice = this.charts[chartType];
+   const chartSlice = ChartLogic
+     .removeConfig(this.charts, chartType, chartId)
+
+   this.resetActiveChart(chartId)
    this.minusMenuItemCounter(chartType, browserType);
 
-   const chartCont = this.charts[chartType];
-   chartCont.configs = chartCont.configs.filter(function(config){
-     return config.zhConfig.id !== chartId;
-   });
-
-   if (this.activeChart && this.activeChart.options.zhConfig.id === chartId){
-     this.activeChart = null;
-     this.activeChart = null;
-   }
-   this.trigger(CHAT.CLOSE_CHART, chartCont);
+   this.trigger(CHAT.CLOSE_CHART, chartSlice);
    this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
  },
 
@@ -203,7 +224,8 @@ const ChartStore = Reflux.createStore({
  ...SettingSlice,
  ...AnalyticSlice,
  ...WatchListSlice,
- ...WithLimitRemaining
+ ...WithLimitRemaining,
+ ...WithLoadingProgress
 
 })
 

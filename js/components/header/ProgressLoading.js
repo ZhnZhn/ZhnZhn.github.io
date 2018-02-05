@@ -24,8 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ChartActions = require('../../flux/actions/ChartActions');
-
 var _ProgressLine = require('../zhn/ProgressLine');
 
 var _ProgressLine2 = _interopRequireDefault(_ProgressLine);
@@ -54,12 +52,14 @@ var ProgressLoading = function (_Component) {
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ProgressLoading.__proto__ || Object.getPrototypeOf(ProgressLoading)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       completed: 0,
       color: C.LOADING
-    }, _this._onStore = function (actionType, option) {
-      if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK) {
+    }, _this._onStore = function (actionType) {
+      var ACTIONS = _this.props.ACTIONS;
+
+      if (actionType === ACTIONS.LOADING) {
         _this.setState({ completed: 35, color: C.LOADING });
-      } else if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED || actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_ADDED) {
+      } else if (actionType === ACTIONS.LOADING_COMPLETE) {
         _this.setState({ completed: 100, color: C.LOADING });
-      } else if (actionType === _ChartActions.ChartActionTypes.LOAD_STOCK_FAILED) {
+      } else if (actionType === ACTIONS.LOADING_FAILED) {
         _this.setState({ completed: 100, color: C.FAILED });
       }
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
@@ -68,7 +68,7 @@ var ProgressLoading = function (_Component) {
   (0, _createClass3.default)(ProgressLoading, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.unsubscribe = this.props.store.listen(this._onStore);
+      this.unsubscribe = this.props.store.listenLoadingProgress(this._onStore);
     }
   }, {
     key: 'componentWillUnmount',
@@ -93,4 +93,4 @@ var ProgressLoading = function (_Component) {
 }(_react.Component);
 
 exports.default = ProgressLoading;
-//# sourceMappingURL=ProgressLoading.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\ProgressLoading.js.map

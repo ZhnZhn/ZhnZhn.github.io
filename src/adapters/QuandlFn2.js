@@ -47,7 +47,7 @@ const QuandlFn2 = {
             item, title, subtitle='',
             value:id, key, columnName, dataColumn,
             itemCaption, fromDate, seriaColumnNames,
-            linkFn, limitRemaining, dataSource
+            linkFn, dataSource
           } = option
         , _dataSource = dataSource
              ? `Quandl: ${dataSource}`
@@ -58,8 +58,7 @@ const QuandlFn2 = {
       id, key,
       columnName, dataColumn, itemCaption,
       fromDate, seriaColumnNames,
-      linkFn,
-      limitRemaining,
+      linkFn,      
       dataSource: _dataSource
     }
   },

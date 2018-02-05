@@ -35,6 +35,8 @@ var _LogicUtils = require('../logic/LogicUtils');
 
 var _LogicUtils2 = _interopRequireDefault(_LogicUtils);
 
+var _LoadingProgressActions = require('./LoadingProgressActions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var C = {
@@ -64,7 +66,7 @@ var A = ChartActionTypes;
 var M = _Msg2.default.Alert;
 
 var _fnOnChangeStore = function _fnOnChangeStore(actionType, data) {
-  if (actionType === A.LOAD_STOCK_COMPLETED || actionType === A.LOAD_STOCK_ADDED || actionType === A.LOAD_STOCK_FAILED) {
+  if (actionType === _LoadingProgressActions.T.LOADING_COMPLETE || actionType === _LoadingProgressActions.T.LOADING_FAILED) {
     ChartActions[A.LOAD_STOCK].isLoading = false;
   }
 };
