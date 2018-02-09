@@ -6,7 +6,8 @@ import LocationQuery from './LocationQuery'
 
 const ARR_B = [ 'UN', 'QE', 'FAO' ];
 const ARR_C = [
-  'SM_WIKI', 'SM_IEX_CHART',
+  'SM_WIKI',
+  'SM_IEX_CHART_5Y','SM_IEX_CHART_2Y',
   'USAE_BLS_1',
   'BC_HD'
 ];

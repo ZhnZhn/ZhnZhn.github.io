@@ -1,6 +1,7 @@
 
 const C = {
-  BASE_URL: 'https://api.iextrading.com/1.0/stock'
+  BASE_URL: 'https://api.iextrading.com/1.0/stock',
+  DF_PERIOD: '1y'
 };
 
 const _urlEarnings = (option) => {
@@ -9,15 +10,15 @@ const _urlEarnings = (option) => {
 };
 
 const _urlChart = (option) => {
-  const { value='' } = option;
-  return `${C.BASE_URL}/${value}/chart/5y`;
-}
+  const { value='', dfPeriod=C.DF_PERIOD } = option;  
+  return `${C.BASE_URL}/${value}/chart/${dfPeriod}`;
+};
 
 const _rUrl = {
   DF: _urlChart,
   earnings: _urlEarnings,
   chart: _urlChart
-}
+};
 
 const IexApi = {
   getRequestUrl(option){

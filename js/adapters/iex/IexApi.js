@@ -5,7 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var C = {
-  BASE_URL: 'https://api.iextrading.com/1.0/stock'
+  BASE_URL: 'https://api.iextrading.com/1.0/stock',
+  DF_PERIOD: '1y'
 };
 
 var _urlEarnings = function _urlEarnings(option) {
@@ -17,9 +18,11 @@ var _urlEarnings = function _urlEarnings(option) {
 
 var _urlChart = function _urlChart(option) {
   var _option$value2 = option.value,
-      value = _option$value2 === undefined ? '' : _option$value2;
+      value = _option$value2 === undefined ? '' : _option$value2,
+      _option$dfPeriod = option.dfPeriod,
+      dfPeriod = _option$dfPeriod === undefined ? C.DF_PERIOD : _option$dfPeriod;
 
-  return C.BASE_URL + '/' + value + '/chart/5y';
+  return C.BASE_URL + '/' + value + '/chart/' + dfPeriod;
 };
 
 var _rUrl = {

@@ -15,16 +15,17 @@
         { "id": "SM_B_STOCK" }
       ]
     },{
-      "caption": "Alpha Vantage",
+      "caption": "Alpha Vantage", "isInitClose": true,
       "items": [
         { "id": "SM_A_INDICATOR" },
         { "id": "SM_A_INTRADAY" },
         { "id": "SM_A_SECTOR" }
       ]
     },{
-      "caption": "IEX Platform", "isInitClose": true,
+      "caption": "IEX Platform",
       "items": [
-        { "id": "SM_IEX_CHART", "isNew": true },
+        { "id": "SM_IEX_CHART_5Y", "isNew": true },
+        { "id": "SM_IEX_CHART_2Y", "isNew": true },
         { "id": "SM_IEX_EARNINGS" }
       ]
     },{
@@ -243,15 +244,29 @@
          }
      },
 
-     "SM_IEX_CHART" : {
-         "type" : "SM_IEX_CHART",
-         "menuTitle" : "Chart 5y",
-         "chartContainerCaption" : "IEX: Chart 5y",
+     "SM_IEX_CHART_5Y" : {
+         "type" : "SM_IEX_CHART_5Y",
+         "menuTitle" : "Chart 5Y",
+         "chartContainerCaption" : "IEX: Chart 5Y",
          "addProps": "SM_BASE_IEX",
          "dialogProps" : {
            "valueFn": "ROne",
            "dfProps": {
-             "dfType": "chart"
+             "dfType": "chart",
+             "dfPeriod": "5y"
+           }
+         }
+     },
+     "SM_IEX_CHART_2Y" : {
+         "type" : "SM_IEX_CHART_2Y",
+         "menuTitle" : "Chart 2Y",
+         "chartContainerCaption" : "IEX: Chart 2Y",
+         "addProps": "SM_BASE_IEX",
+         "dialogProps" : {
+           "valueFn": "ROne",
+           "dfProps": {
+             "dfType": "chart",
+             "dfPeriod": "2y"
            }
          }
      },

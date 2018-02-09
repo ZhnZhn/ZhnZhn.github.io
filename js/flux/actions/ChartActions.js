@@ -196,7 +196,9 @@ var _addDialogPropsTo = function _addDialogPropsTo(option) {
       _ref = _ChartStore2.default.getSourceConfig(browserType, chartType) || {},
       dialogProps = _ref.dialogProps;
 
-  Object.assign(option, dialogProps, { subtitle: SUBTITLE });
+  Object.assign(option, dialogProps, dialogProps.dfProps, {
+    subtitle: SUBTITLE
+  });
 
   var fromDate = option.fromDate,
       nInitFromDate = option.nInitFromDate;

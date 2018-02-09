@@ -164,7 +164,10 @@ const _addDialogPropsTo = option => {
             .getSourceConfig(browserType, chartType) || {};
 
   Object.assign(option,
-    dialogProps, { subtitle: SUBTITLE }
+    dialogProps,
+    dialogProps.dfProps, {
+      subtitle: SUBTITLE
+    }
   )
 
   const { fromDate, nInitFromDate } = option;
