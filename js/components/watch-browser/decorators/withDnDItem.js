@@ -4,6 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _fnDnD = require("./fnDnD");
+
+var _fnDnD2 = _interopRequireDefault(_fnDnD);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var _crDragStartItem = function _crDragStartItem(DRAG) {
   return function (_ref, ev) {
     var groupCaption = _ref.groupCaption,
@@ -11,14 +17,11 @@ var _crDragStartItem = function _crDragStartItem(DRAG) {
         caption = _ref.caption;
 
     this.dragStartWithDnDStyle(ev, [DRAG.LIST, DRAG.ITEM]);
-    ev.dataTransfer.effectAllowed = "move";
-    ev.dataTransfer.dropEffect = "move";
-    //.setDragImage(img, 0, 0);
-    var _data = {
+    _fnDnD2.default.setTransferTo({
+      event: ev,
       dragId: groupCaption + ";" + listCaption + ";" + caption,
       xType: DRAG.ITEM
-    };
-    ev.dataTransfer.setData("text", JSON.stringify(_data));
+    });
   };
 };
 
@@ -67,14 +70,15 @@ var _handlerDragLeaveItem = function _handlerDragLeaveItem(ev) {
 
 var withDnDItem = function withDnDItem(DRAG, WatchActions) {
   return function (target) {
-    var _proto = target.prototype;
-    _proto._handlerDragStartItem = _crDragStartItem(DRAG);
-    _proto._handlerDropItem = _crDropItem(DRAG, WatchActions);
-    _proto._handlerDragEnterItem = _crDragEnterItem(DRAG);
-    _proto._handlerDragOverItem = _handlerDragOverItem;
-    _proto._handlerDragLeaveItem = _handlerDragLeaveItem;
+    Object.assign(target.prototype, {
+      _handlerDragStartItem: _crDragStartItem(DRAG),
+      _handlerDropItem: _crDropItem(DRAG, WatchActions),
+      _handlerDragEnterItem: _crDragEnterItem(DRAG),
+      _handlerDragOverItem: _handlerDragOverItem,
+      _handlerDragLeaveItem: _handlerDragLeaveItem
+    });
   };
 };
 
 exports.default = withDnDItem;
-//# sourceMappingURL=withDnDItem.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDItem.js.map

@@ -1,4 +1,8 @@
 
+import AdapterFn from '../AdapterFn'
+
+const { toUpperCaseFirst } = AdapterFn;
+
 const DATASET_EMPTY = "Dataset is empty";
 
 const _crBlackSpan = text => text ? `<span style='color:black;'>${text}</span>`: '';
@@ -12,14 +16,14 @@ const _crDescrRow = (title, value, code='') => {
 };
 
 const _toDescr = (item) => {
-  const { Area='', Domain='', Item='', Element='', Unit='' } = item
-      , _unit = Unit ? Unit[0].toUpperCase() + Unit.substr(1) : '';
+  const { Area='', Domain='', Item='', Element='', Unit } = item
+      , _Unit = toUpperCaseFirst(Unit);
   return `<div>
     ${_crDescrRow('Area', Area, item['Area Code'])}
     ${_crDescrRow('Domain', Domain, item['Domain Code'])}
     ${_crDescrRow('Item', Item, item['Item Code'])}
     ${_crDescrRow('Element', Element, item['Element Code'])}
-    ${_crDescrRow('Unit', _unit)}
+    ${_crDescrRow('Unit', _Unit)}
     <div>${item['Flag Description'] || DATASET_EMPTY}</div>
   </div>`;
 };

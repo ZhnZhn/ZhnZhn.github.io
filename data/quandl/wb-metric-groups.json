@@ -33,7 +33,9 @@
     },{
       "caption" : "Internet",  "value" : "Internet",
       "columns" : [
-       { "caption": "Secure Internet servers", "value": "IT_NET_SECR"}
+       { "caption": "Secure Internet servers", "value": "IT_NET_SECR" },
+       { "caption": "Internet users (per 100 people)", "value": "IT_NET_USER_P2" },
+       { "caption": "Fixed broadband Internet subscribes (per 100 people)", "value": "IT_NET_BBND_P2" }
       ]
     },{
       "caption" : "GDP",  "value" : "GDP",

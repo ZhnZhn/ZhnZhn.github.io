@@ -18,15 +18,19 @@ var _WatchDefault2 = _interopRequireDefault(_WatchDefault);
 
 var _Type = require('../../constants/Type');
 
-var _Msg = require('../../constants/Msg');
+var _MsgWatch = require('../../constants/MsgWatch');
 
-var _Msg2 = _interopRequireDefault(_Msg);
+var _MsgWatch2 = _interopRequireDefault(_MsgWatch);
 
 var _Logic = require('./Logic');
 
 var _Logic2 = _interopRequireDefault(_Logic);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WATCH_SAVED = _MsgWatch2.default.WATCH_SAVED,
+    WATCH_PREV = _MsgWatch2.default.WATCH_PREV;
+
 
 var STORAGE_KEY = 'WATCH_LIST_ERC',
     DIALOG_CAPTION = 'Watch List:';
@@ -93,7 +97,7 @@ var WatchListSlice = {
         _this2.isWatchEdited = false;
         _this2.onShowModalDialog(_Type.ModalDialog.INFO, {
           caption: DIALOG_CAPTION,
-          descr: _Msg2.default.WATCH_SAVED
+          descr: WATCH_SAVED
         });
       }).catch(function (error) {
         console.log(error);
@@ -101,7 +105,7 @@ var WatchListSlice = {
     } else {
       this.onShowModalDialog(_Type.ModalDialog.INFO, {
         caption: DIALOG_CAPTION,
-        descr: _Msg2.default.WATCH_PREV
+        descr: WATCH_PREV
       });
     }
   },
@@ -138,4 +142,4 @@ var WatchListSlice = {
 };
 
 exports.default = WatchListSlice;
-//# sourceMappingURL=WatchListSlice.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WatchListSlice.js.map

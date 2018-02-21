@@ -23,18 +23,19 @@ const WithStackAreaConfig = {
        tooltip : Chart.fTooltip(Tooltip.fnStackedAreaPointFormatter),
 
        xAxis: Chart.fXAxisOpposite({
-         categories:[],
+         categories: [],
+         type: "category",
          startOnTick: false,
          min: 1,
-         crosshair : Chart.fCrosshair()
+         crosshair: Chart.fCrosshair()
        }),
        yAxis: Chart.fYAxisOpposite(),
 
        plotOptions: {
           area: Chart.fPlotOptionsArea({ stacking }),
-          series : Chart.fPlotOptionsSeries()
+          series: Chart.fPlotOptionsSeries()
       },
-      legend : Chart.fLegend()
+      legend: Chart.fLegend()
     }
   },
 

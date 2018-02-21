@@ -16,9 +16,9 @@ var _mathFn = require('../math/mathFn');
 
 var _mathFn2 = _interopRequireDefault(_mathFn);
 
-var _ArrayUtil = require('../utils/ArrayUtil');
+var _fnArr = require('../utils/fnArr');
 
-var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
+var _fnArr2 = _interopRequireDefault(_fnArr);
 
 var _DateUtils = require('../utils/DateUtils');
 
@@ -44,7 +44,7 @@ var _WithAreaChartFn2 = _interopRequireDefault(_WithAreaChartFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fnFindIndex = _ArrayUtil2.default.findIndexByProp('x');
+var _fnFindIndex = _fnArr2.default.findIndexByProp('x');
 
 var C = {
   C1_SECOND_Y_AXIS: '#f45b5b',

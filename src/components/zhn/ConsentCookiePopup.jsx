@@ -2,29 +2,34 @@ import React, { Component } from 'react';
 
 const HIDE_PERIOD = 300000
     , ANIMATION_PERIOD = 1100
-    , MSG = 'Can website collect statistics, by using session cookies from Google Analytics with anonymizeIp, for better experience ?'
-    , BTN_OK_TITLE = "OK"
-    , BTN_NO_TITLE = "NO, not today.";
+    , MSG = "Can website collect statistics by using session cookies from Google Analytics with anonymizeIp ?"
+    , BT_OK = "OK"
+    , BT_NO = "NO, not today.";
 
-const STYLE = {
-  ROOT__SHOW : {
-     opacity: '0.9',
-     //top : '52px'
-     bottom : '0px'
+const CL = {
+  ROOT: "consent",
+  ROW: "consent__row",
+  MSG: "consent__msg",
+  BT: "consent__btn"
+};
+const S = {
+  SHOW: {
+    opacity: "0.9",
+    bottom: "0px"
   },
-  ROOT_HIDE : {
-     display: 'none'
+  HIDE: {
+     display: "none"
   }
-}
+};
 
-class ConsentCookiePopup extends Component{
-  constructor(props){
+class ConsentCookiePopup extends Component {
+  constructor(){
     super();
     this.timeID = undefined;
     this.hideID = undefined;
     this.state = {
-      isOpacity : true,
-      isDisplay : true
+      isOpacity: true,
+      isDisplay: true
     }
   }
 
@@ -47,7 +52,7 @@ class ConsentCookiePopup extends Component{
      this.setState({ isDisplay : false });
   }
 
-  _handleClickOk = () => {
+  _hClickOk = () => {
     if (!this.hideId) {
       clearTimeout(this.timeID);
       this.props.onAnswerYes();
@@ -55,7 +60,7 @@ class ConsentCookiePopup extends Component{
     }
   }
 
-  _handleClickNo = () => {
+  _hClickNo = () => {
     if (!this.hideId) {
       clearTimeout(this.timeID);
       this.props.onAnswerNo();
@@ -67,31 +72,31 @@ class ConsentCookiePopup extends Component{
     const { isOpacity, isDisplay } = this.state
         , _opacityStyle = (isOpacity)
                ? undefined
-               : STYLE.ROOT__SHOW
+               : S.SHOW
         , _displayStyle = (isDisplay)
                ? undefined
-               : STYLE.ROOT_HIDE;
+               : S.HIDE;
     return (
       <div
-         className="consent"
-         style={Object.assign({}, _opacityStyle, _displayStyle)}
+         className={CL.ROOT}
+         style={{ ..._opacityStyle, ..._displayStyle }}
       >
-         <p className="consent__msg">
+         <p className={CL.MSG}>
              {MSG}
          </p>
-         <div className="consent__row">
-           <span
-              className="consent__btn"
-              onClick={this._handleClickOk}
+         <div className={CL.ROW}>
+           <button
+              className={CL.BT}
+              onClick={this._hClickOk}
            >
-              {BTN_OK_TITLE}
-           </span>
-           <span
-              className="consent__btn"
-              onClick={this._handleClickNo}
+              {BT_OK}
+           </button>
+           <button
+              className={CL.BT}
+              onClick={this._hClickNo}
            >
-              {BTN_NO_TITLE}
-           </span>
+              {BT_NO}
+           </button>
          </div>
       </div>
     );

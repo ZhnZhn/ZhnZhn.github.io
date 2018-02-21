@@ -4,25 +4,27 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 const {
-       crId, crSubtitle, toDataPoints,
+       crId, crSubtitle, crTitle,
+       toDataPoints,
        crZhConfig, toInfo, crValueMoving,
        crSeriaData, checkToSeries
      } = fnAdapter;
 
 const FaoStatAdapter = {
   toConfig(json, option){
-    const { title, subtitle } = option
+    const { subtitle } = option
     , _id = crId(option)
+    , _title = crTitle(option, json)
     , _subtitle = crSubtitle(json, subtitle)
     , _points = toDataPoints(json, option)
     , config = ConfigBuilder()
        .initBaseArea()
        .add('chart', { spacingTop: 25 })
-       .addCaption(title, _subtitle)
+       .addCaption(_title, _subtitle)
        .addPoints(_id, _points)
        .addTooltip(Tooltip.fnBasePointFormatter)
        .add({
-         info: toInfo(json, title, _subtitle),
+         info: toInfo(json, _title, _subtitle),
          valueMoving: crValueMoving(_points),
          zhConfig: crZhConfig(_id, option)
        })

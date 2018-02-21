@@ -6,38 +6,39 @@ const WithStackedColumnConfig = {
 
   fBaseStackedColumnConfig({ stacking='normal' }){
     return {
-      zhSeries : {
-        count : 0
+      zhSeries: {
+        count: 0
       },
-      zhDetailCharts : []  ,
+      zhDetailCharts: [],
 
-      credits : Chart.fCreditsRightBottom(),
+      credits: Chart.fCreditsRightBottom(),
       chart: {
         type: 'column',
         spacingTop: Chart.STACKED_SPACING_TOP,
         spacingBottom: Chart.SPACING_BOTTOM,
 
-        zoomType : 'xy',
+        zoomType: 'xy',
         resetZoomButton : Chart.fResetZoomButton()
       },
 
-      title : Chart.fTitle({ y:Chart.STACKED_TITLE_Y }),
-      subtitle : Chart.fSubtitle({ y:Chart.STACKED_SUBTITLE_Y }),
-      tooltip : Chart.fTooltip(Tooltip.fnStackedAreaPointFormatter),
+      title: Chart.fTitle({ y:Chart.STACKED_TITLE_Y }),
+      subtitle: Chart.fSubtitle({ y:Chart.STACKED_SUBTITLE_Y }),
+      tooltip: Chart.fTooltip(Tooltip.fnStackedAreaPointFormatter),
 
       xAxis: Chart.fXAxisOpposite({
-        categories:[],
+        categories: [],
+        type: "category",
         startOnTick: false,
         min: 1,
-        crosshair : Chart.fCrosshair()
+        crosshair: Chart.fCrosshair()
       }),
       yAxis: Chart.fYAxisOpposite(),
 
       plotOptions: {
-           column: Chart.fPlotOptionsColumn({ stacking }),
-           series : Chart.fPlotOptionsSeries()
+         column: Chart.fPlotOptionsColumn({ stacking }),
+         series: Chart.fPlotOptionsSeries()
      },
-     legend : Chart.fLegend()
+     legend: Chart.fLegend()
    }
  },
 

@@ -1,17 +1,26 @@
 import LogicFn from './LogicFn';
 
+const {
+  crMsgItemExisted,
+
+  findGroup,
+  findList,
+  isInArraySameCaption,
+  filter
+} = LogicFn;
+
 const WithLogicItem = {
 
   addItem(watchList, item){
     const {caption, groupCaption, listCaption, config} = item
         , {zhConfig} = config
         , { title, subtitle, columnName, dataColumn, id, fromDate, seriaColumnNames } = zhConfig
-        , toGroup = LogicFn.findGroup(watchList, groupCaption)
-        , toList = LogicFn.findList(toGroup, listCaption)
+        , toGroup = findGroup(watchList, groupCaption)
+        , toList = findList(toGroup, listCaption)
         , items = toList.items;
 
-    if ( LogicFn.checkIsInArraySameCaption(items, caption) ){
-      return LogicFn.fResultItemExisted(caption, listCaption);
+    if ( isInArraySameCaption(items, caption) ){
+      return crMsgItemExisted(caption, listCaption);
     }
     if (items){
       toList.items.push({
@@ -22,14 +31,14 @@ const WithLogicItem = {
         title, subtitle, caption, columnName, dataColumn, id, fromDate, seriaColumnNames
       }];
     }
-    return {isDone : true}
+    return { isDone: true };
   },
 
   removeItem(watchList, {groupCaption, listCaption, caption}){
-    const groupFrom = LogicFn.findGroup(watchList, groupCaption)
-        , listFrom = LogicFn.findList(groupFrom, listCaption);
+    const groupFrom = findGroup(watchList, groupCaption)
+        , listFrom = findList(groupFrom, listCaption);
 
-    listFrom.items = LogicFn.filter(listFrom.items, caption);
+    listFrom.items = filter(listFrom.items, caption);
   }
 
 };

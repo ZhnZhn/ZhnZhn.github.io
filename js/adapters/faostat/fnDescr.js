@@ -4,6 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _AdapterFn = require('../AdapterFn');
+
+var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst;
+
+
 var DATASET_EMPTY = "Dataset is empty";
 
 var _crBlackSpan = function _crBlackSpan(text) {
@@ -29,11 +38,10 @@ var _toDescr = function _toDescr(item) {
       Item = _item$Item === undefined ? '' : _item$Item,
       _item$Element = item.Element,
       Element = _item$Element === undefined ? '' : _item$Element,
-      _item$Unit = item.Unit,
-      Unit = _item$Unit === undefined ? '' : _item$Unit,
-      _unit = Unit ? Unit[0].toUpperCase() + Unit.substr(1) : '';
+      Unit = item.Unit,
+      _Unit = toUpperCaseFirst(Unit);
 
-  return '<div>\n    ' + _crDescrRow('Area', Area, item['Area Code']) + '\n    ' + _crDescrRow('Domain', Domain, item['Domain Code']) + '\n    ' + _crDescrRow('Item', Item, item['Item Code']) + '\n    ' + _crDescrRow('Element', Element, item['Element Code']) + '\n    ' + _crDescrRow('Unit', _unit) + '\n    <div>' + (item['Flag Description'] || DATASET_EMPTY) + '</div>\n  </div>';
+  return '<div>\n    ' + _crDescrRow('Area', Area, item['Area Code']) + '\n    ' + _crDescrRow('Domain', Domain, item['Domain Code']) + '\n    ' + _crDescrRow('Item', Item, item['Item Code']) + '\n    ' + _crDescrRow('Element', Element, item['Element Code']) + '\n    ' + _crDescrRow('Unit', _Unit) + '\n    <div>' + (item['Flag Description'] || DATASET_EMPTY) + '</div>\n  </div>';
 };
 
 var fnDescr = {

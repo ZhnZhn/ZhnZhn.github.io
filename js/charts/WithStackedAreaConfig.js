@@ -40,6 +40,7 @@ var WithStackAreaConfig = {
 
       xAxis: _Chart2.default.fXAxisOpposite({
         categories: [],
+        type: "category",
         startOnTick: false,
         min: 1,
         crosshair: _Chart2.default.fCrosshair()
@@ -77,4 +78,4 @@ var WithStackAreaConfig = {
 };
 
 exports.default = WithStackAreaConfig;
-//# sourceMappingURL=WithStackedAreaConfig.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedAreaConfig.js.map

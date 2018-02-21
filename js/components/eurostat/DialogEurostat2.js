@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -27,9 +31,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DateUtils = require('../../utils/DateUtils');
+var _crDateConfig = require('./crDateConfig');
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
+var _crDateConfig2 = _interopRequireDefault(_crDateConfig);
 
 var _DialogCell = require('../dialogs/DialogCell');
 
@@ -45,8 +49,7 @@ var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DATE_PLACEHOLDER = 'Before Select Metric',
-    MAP_FREQUENCY_DF = 'M';
+var MAP_FREQUENCY_DF = 'M';
 
 var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat2, _Component);
@@ -81,14 +84,12 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
       _this.date = null;
       var frequency = _this.two ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
           mapDateDf = _this.props.mapDateDf,
-          config = frequency ? _DateUtils2.default.createEurostatSelect(frequency, mapDateDf) : { dateDefault: DATE_PLACEHOLDER, options: [] };
+          dateConfig = frequency ? (0, _crDateConfig2.default)(frequency, mapDateDf) : (0, _crDateConfig2.default)('EMPTY');
 
 
-      _this.setState({
-        isShowDate: true,
-        dateDefault: config.dateDefault,
-        dateOptions: config.options
-      });
+      _this.setState((0, _extends3.default)({
+        isShowDate: true
+      }, dateConfig));
     };
 
     _this._handleSelectOne = function (one) {
@@ -177,13 +178,12 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
 
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
-    _this.state = {
+    _this.state = (0, _extends3.default)({
       isShowLabels: true,
-      isShowDate: false,
-      dateDefault: DATE_PLACEHOLDER,
-      dateOptions: [],
+      isShowDate: false
+    }, (0, _crDateConfig2.default)('EMPTY'), {
       validationMessages: []
-    };
+    });
     return _this;
   }
 
@@ -283,4 +283,4 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
   twoCaption: 'Metric',
   twoJsonProp: 'metrics' }, _temp)) || _class) || _class);
 exports.default = DialogEurostat2;
-//# sourceMappingURL=DialogEurostat2.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogEurostat2.js.map

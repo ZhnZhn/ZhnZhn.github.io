@@ -28,9 +28,9 @@ var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
-var _Msg = require('../../constants/Msg');
+var _MsgWatch = require('../../constants/MsgWatch');
 
-var _Msg2 = _interopRequireDefault(_Msg);
+var _MsgWatch2 = _interopRequireDefault(_MsgWatch);
 
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
@@ -59,6 +59,17 @@ var _ListDeletePane2 = _interopRequireDefault(_ListDeletePane);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //import PropTypes from "prop-types";
+
+var createList = _WatchActions2.default.createList,
+    renameList = _WatchActions2.default.renameList,
+    deleteList = _WatchActions2.default.deleteList;
+var EDIT_WATCH_COMPLETED = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
+    EDIT_WATCH_FAILED = _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
+    CREATE_LIST = _WatchActions.WatchActionTypes.CREATE_LIST,
+    RENAME_LIST = _WatchActions.WatchActionTypes.RENAME_LIST,
+    DELETE_LIST = _WatchActions.WatchActionTypes.DELETE_LIST;
+var notSelected = _MsgWatch2.default.notSelected,
+    emptyName = _MsgWatch2.default.emptyName;
 
 var EditListDialog = function (_Component) {
   (0, _inherits3.default)(EditListDialog, _Component);
@@ -109,12 +120,12 @@ var EditListDialog = function (_Component) {
             { title: 'Create' },
             _react2.default.createElement(_ListCreatePane2.default, {
               store: store,
-              actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
-              actionFailed: _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
-              forActionType: _WatchActions.WatchActionTypes.CREATE_LIST,
-              msgOnNotSelect: _Msg2.default.NOT_SELECTED,
-              msgOnIsEmptyName: _Msg2.default.IS_EMPTY_NAME,
-              onCreate: _WatchActions2.default.createList,
+              actionCompleted: EDIT_WATCH_COMPLETED,
+              actionFailed: EDIT_WATCH_FAILED,
+              forActionType: CREATE_LIST,
+              msgOnNotSelect: notSelected,
+              msgOnIsEmptyName: emptyName,
+              onCreate: createList,
               onClose: onClose })
           ),
           _react2.default.createElement(
@@ -122,12 +133,12 @@ var EditListDialog = function (_Component) {
             { title: 'Rename' },
             _react2.default.createElement(_ListEditPane2.default, {
               store: store,
-              actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
-              actionFailed: _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
-              forActionType: _WatchActions.WatchActionTypes.RENAME_LIST,
-              msgOnNotSelect: _Msg2.default.NOT_SELECTED,
-              msgOnIsEmptyName: _Msg2.default.IS_EMPTY_NAME,
-              onRename: _WatchActions2.default.renameList,
+              actionCompleted: EDIT_WATCH_COMPLETED,
+              actionFailed: EDIT_WATCH_FAILED,
+              forActionType: RENAME_LIST,
+              msgOnNotSelect: notSelected,
+              msgOnIsEmptyName: emptyName,
+              onRename: renameList,
               onClose: onClose
             })
           ),
@@ -136,11 +147,11 @@ var EditListDialog = function (_Component) {
             { title: 'Delete' },
             _react2.default.createElement(_ListDeletePane2.default, {
               store: store,
-              actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
-              actionFailed: _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
-              forActionType: _WatchActions.WatchActionTypes.DELETE_LIST,
-              msgOnNotSelect: _Msg2.default.NOT_SELECTED,
-              onDelete: _WatchActions2.default.deleteList,
+              actionCompleted: EDIT_WATCH_COMPLETED,
+              actionFailed: EDIT_WATCH_FAILED,
+              forActionType: DELETE_LIST,
+              msgOnNotSelect: notSelected,
+              onDelete: deleteList,
               onClose: onClose
             })
           )
@@ -152,4 +163,4 @@ var EditListDialog = function (_Component) {
 }(_react.Component);
 
 exports.default = EditListDialog;
-//# sourceMappingURL=EditListDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\EditListDialog.js.map

@@ -3,18 +3,23 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _fnDnD = require("./fnDnD");
+
+var _fnDnD2 = _interopRequireDefault(_fnDnD);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var _crDragStartGroup = function _crDragStartGroup(DRAG) {
   return function (_ref, ev) {
     var caption = _ref.caption;
 
     this.dragStartWithDnDStyle(ev, [DRAG.GROUP]);
-    ev.dataTransfer.effectAllowed = "move";
-    ev.dataTransfer.dropEffect = "move";
-    var _data = {
+    _fnDnD2.default.setTransferTo({
+      event: ev,
       dragId: caption + ";",
       xType: DRAG.GROUP
-    };
-    ev.dataTransfer.setData("text", JSON.stringify(_data));
+    });
   };
 };
 
@@ -67,14 +72,15 @@ var _handlerDragLeaveGroup = function _handlerDragLeaveGroup(ev) {
 
 var withDnDGroup = function withDnDGroup(DRAG, WatchActions) {
   return function (target) {
-    var _proto = target.prototype;
-    _proto._handlerDragStartGroup = _crDragStartGroup(DRAG);
-    _proto._handlerDropGroup = _crDropGroup(DRAG, WatchActions);
-    _proto._handlerDragEnterGroup = _crDragEnterGroup(DRAG);
-    _proto._handlerDragOverGroup = _handlerDragOverGroup;
-    _proto._handlerDragLeaveGroup = _handlerDragLeaveGroup;
+    Object.assign(target.prototype, {
+      _handlerDragStartGroup: _crDragStartGroup(DRAG),
+      _handlerDropGroup: _crDropGroup(DRAG, WatchActions),
+      _handlerDragEnterGroup: _crDragEnterGroup(DRAG),
+      _handlerDragOverGroup: _handlerDragOverGroup,
+      _handlerDragLeaveGroup: _handlerDragLeaveGroup
+    });
   };
 };
 
 exports.default = withDnDGroup;
-//# sourceMappingURL=withDnDGroup.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDGroup.js.map

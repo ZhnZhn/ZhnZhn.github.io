@@ -10,7 +10,6 @@ const _crMemYear = () => {
   let i = 1980;
   for(;i<year;i++){ arr.push(i) }
   return C.MEM_YEAR = arr.join(',');
-  //return C.MEM_YEAR;
 };
 const _getMemYear = () => {
   return C.MEM_YEAR || _crMemYear();
@@ -18,11 +17,18 @@ const _getMemYear = () => {
 
 const FaoStatApi = {
   getRequestUrl(option){
-    const { proxy, one, two, three, dfElement, dfDomain='QC' } = option
+    const {
+            proxy,
+            one, two, three,
+            dfElement,
+            dfDomain='QC',
+            dfItemName='item'
+           } = option
+         //, _element = three || dfElement || dfDomain
          , _element = three || dfElement
-         , _year = _getMemYear();
+         , _year = _getMemYear()
 
-    return `${proxy}${C.BASE}/${dfDomain}?element=${_element}&area=${one}&item=${two}&year=${_year}${C.TAIL}`;
+    return `${proxy}${C.BASE}/${dfDomain}?element=${_element}&area=${one}&${dfItemName}=${two}&year=${_year}&${C.TAIL}`;
   },
 
   checkResponse(json){
@@ -35,7 +41,7 @@ const FaoStatApi = {
       one: qA,
       two: qI,
       three: qE,
-      title: 'More about data on tab Info in Description'
+      title: ''
     })
   }
 };

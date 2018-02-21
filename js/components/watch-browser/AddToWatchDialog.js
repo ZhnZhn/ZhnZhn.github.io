@@ -34,9 +34,9 @@ var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
-var _Msg = require('../../constants/Msg');
+var _MsgWatch = require('../../constants/MsgWatch');
 
-var _Msg2 = _interopRequireDefault(_Msg);
+var _MsgWatch2 = _interopRequireDefault(_MsgWatch);
 
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
@@ -64,9 +64,12 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var addItem = _WatchActions2.default.addItem;
+
 var actionCompleted = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
     actionFailed = _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
     forActionType = _WatchActions.WatchActionTypes.ADD_ITEM;
+var notSelected = _MsgWatch2.default.notSelected;
 
 var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Component) {
   (0, _inherits3.default)(AddToWatchDialog, _Component);
@@ -118,7 +121,7 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
             listCaption = _this.listCaption;
 
 
-        _WatchActions2.default.addItem({ caption: caption, groupCaption: groupCaption, listCaption: listCaption, config: config });
+        addItem({ caption: caption, groupCaption: groupCaption, listCaption: listCaption, config: config });
       } else {
         _this._updateValidationMessages(validationMessages);
       }
@@ -127,10 +130,10 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
     _this._getValidationMessages = function () {
       var msg = [];
       if (!_this.groupCaption) {
-        msg.push(_Msg2.default.NOT_SELECTED('Group'));
+        msg.push(notSelected('Group'));
       }
       if (!_this.listCaption) {
-        msg.push(_Msg2.default.NOT_SELECTED('List'));
+        msg.push(notSelected('List'));
       }
       msg.isValid = msg.length === 0 ? true : false;
       return msg;
@@ -250,4 +253,4 @@ AddToWatchDialog.propTypes = process.env.NODE_ENV !== "production" ? {
   onClose: _propTypes2.default.func
 } : {};
 exports.default = AddToWatchDialog;
-//# sourceMappingURL=AddToWatchDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\AddToWatchDialog.js.map

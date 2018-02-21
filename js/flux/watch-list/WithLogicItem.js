@@ -10,6 +10,13 @@ var _LogicFn2 = _interopRequireDefault(_LogicFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var crMsgItemExisted = _LogicFn2.default.crMsgItemExisted,
+    findGroup = _LogicFn2.default.findGroup,
+    findList = _LogicFn2.default.findList,
+    isInArraySameCaption = _LogicFn2.default.isInArraySameCaption,
+    filter = _LogicFn2.default.filter;
+
+
 var WithLogicItem = {
   addItem: function addItem(watchList, item) {
     var caption = item.caption,
@@ -24,12 +31,13 @@ var WithLogicItem = {
         id = zhConfig.id,
         fromDate = zhConfig.fromDate,
         seriaColumnNames = zhConfig.seriaColumnNames,
-        toGroup = _LogicFn2.default.findGroup(watchList, groupCaption),
-        toList = _LogicFn2.default.findList(toGroup, listCaption),
+        toGroup = findGroup(watchList, groupCaption),
+        toList = findList(toGroup, listCaption),
         items = toList.items;
 
-    if (_LogicFn2.default.checkIsInArraySameCaption(items, caption)) {
-      return _LogicFn2.default.fResultItemExisted(caption, listCaption);
+
+    if (isInArraySameCaption(items, caption)) {
+      return crMsgItemExisted(caption, listCaption);
     }
     if (items) {
       toList.items.push({
@@ -47,12 +55,12 @@ var WithLogicItem = {
         listCaption = _ref.listCaption,
         caption = _ref.caption;
 
-    var groupFrom = _LogicFn2.default.findGroup(watchList, groupCaption),
-        listFrom = _LogicFn2.default.findList(groupFrom, listCaption);
+    var groupFrom = findGroup(watchList, groupCaption),
+        listFrom = findList(groupFrom, listCaption);
 
-    listFrom.items = _LogicFn2.default.filter(listFrom.items, caption);
+    listFrom.items = filter(listFrom.items, caption);
   }
 };
 
 exports.default = WithLogicItem;
-//# sourceMappingURL=WithLogicItem.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WithLogicItem.js.map

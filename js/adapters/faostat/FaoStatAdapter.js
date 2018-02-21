@@ -20,6 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var crId = _fnAdapter2.default.crId,
     crSubtitle = _fnAdapter2.default.crSubtitle,
+    crTitle = _fnAdapter2.default.crTitle,
     toDataPoints = _fnAdapter2.default.toDataPoints,
     crZhConfig = _fnAdapter2.default.crZhConfig,
     toInfo = _fnAdapter2.default.toInfo,
@@ -30,13 +31,13 @@ var crId = _fnAdapter2.default.crId,
 
 var FaoStatAdapter = {
   toConfig: function toConfig(json, option) {
-    var title = option.title,
-        subtitle = option.subtitle,
+    var subtitle = option.subtitle,
         _id = crId(option),
+        _title = crTitle(option, json),
         _subtitle = crSubtitle(json, subtitle),
         _points = toDataPoints(json, option),
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, _subtitle).addPoints(_id, _points).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
-      info: toInfo(json, title, _subtitle),
+        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(_title, _subtitle).addPoints(_id, _points).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
+      info: toInfo(json, _title, _subtitle),
       valueMoving: crValueMoving(_points),
       zhConfig: crZhConfig(_id, option)
     }).toConfig();

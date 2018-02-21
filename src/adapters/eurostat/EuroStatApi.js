@@ -1,12 +1,14 @@
 
-import ArrayUtil from '../../utils/ArrayUtil';
+import fnArr from '../../utils/fnArr';
+
+const { isStrInArr } = fnArr;
 
 const rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
     , queryTail = "&precision=1&sinceTimePeriod=1996M01";
 
-
 const REQUEST_ERROR = 'Request Error'
     , MESSAGE_HEADER = '400 : Bad Request\n';
+
 
 const _crDetailMsg = function(option){
   const {alertGeo='', alertMetric=''} = option
@@ -25,7 +27,7 @@ const EuroStatApi = {
             seriaType
           } = option;
 
-    if (!ArrayUtil.isStrInArr(seriaType)(_categoryTypes)){
+    if (!isStrInArr(seriaType)(_categoryTypes)){
       let _param = `geo=${geo}`
         , _group;
       if (group){

@@ -8,7 +8,7 @@ var ChartFactory = {
   crColumnConfig: function crColumnConfig() {
     return {
       chart: {
-        type: 'column',
+        type: "column",
         marginTop: 60
       },
       title: {
@@ -19,6 +19,7 @@ var ChartFactory = {
       },
       xAxis: {
         categories: [],
+        type: "category",
         crosshair: true,
         gridLineWidth: 0
       },
@@ -86,4 +87,4 @@ var ChartFactory = {
 };
 
 exports.default = ChartFactory;
-//# sourceMappingURL=ChartFactory.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartFactory.js.map

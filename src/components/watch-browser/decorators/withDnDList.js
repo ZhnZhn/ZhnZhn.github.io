@@ -1,14 +1,13 @@
+import fnDnD from './fnDnD'
 
 const _crDragStartList = (DRAG) => {
   return function({ groupCaption, caption}, ev){
     this.dragStartWithDnDStyle(ev, [DRAG.GROUP, DRAG.LIST])
-    ev.dataTransfer.effectAllowed="move"
-    ev.dataTransfer.dropEffect="move"
-    const _data = {
-      dragId : `${groupCaption};${caption}`,
-      xType : DRAG.LIST
-    };
-    ev.dataTransfer.setData("text", JSON.stringify(_data))
+    fnDnD.setTransferTo({
+      event: ev,
+      dragId: `${groupCaption};${caption}`,
+      xType: DRAG.LIST
+    })
  };
 };
 
@@ -59,12 +58,13 @@ const _handlerDragLeaveList = function(ev){
 
 const withDnDList = (DRAG, WatchActions) => {
   return (target) => {
-    const _proto = target.prototype;
-    _proto._handlerDragStartList = _crDragStartList(DRAG)
-    _proto._handlerDropList = _crDropList(DRAG, WatchActions)
-    _proto._handlerDragEnterList = _crDragEnterList(DRAG)
-    _proto._handlerDragOverList = _handlerDragOverList
-    _proto._handlerDragLeaveList = _handlerDragLeaveList
+    Object.assign(target.prototype, {
+      _handlerDragStartList: _crDragStartList(DRAG),
+      _handlerDropList: _crDropList(DRAG, WatchActions),
+      _handlerDragEnterList: _crDragEnterList(DRAG),
+      _handlerDragOverList: _handlerDragOverList,
+      _handlerDragLeaveList: _handlerDragLeaveList,
+    })
   };
 }
 

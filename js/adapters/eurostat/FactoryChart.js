@@ -19,12 +19,18 @@ var FactoryChart = {
       },
       xAxis: {
         categories: [],
+        type: "category",
         crosshair: true,
         gridLineWidth: 0
       },
       yAxis: {
         min: 0,
         opposite: true,
+        lineWidth: 0,
+        tickLength: 0,
+        labels: {
+          x: 3
+        },
         title: {
           text: ''
         }
@@ -73,4 +79,4 @@ var FactoryChart = {
 };
 
 exports.default = FactoryChart;
-//# sourceMappingURL=FactoryChart.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\FactoryChart.js.map

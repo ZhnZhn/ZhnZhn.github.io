@@ -1,11 +1,13 @@
-import ObjUtil from '../ObjUtil';
+import fnObj from '../fnObj';
+
+const { findInPropArrayByProp } = fnObj;
 
 describe('findInPropArrayByProp', () => {
   test('should return obj', () => {
      const obj = {
              lists: [ {a:1}, {a:2}, {a:3} ]
            }
-         , fn = ObjUtil.findInPropArrayByProp('lists', 'a')
+         , fn = findInPropArrayByProp('lists', 'a')
 
      expect(typeof fn).toBe('function')
      expect(fn(obj, 1)).toEqual({a:1})

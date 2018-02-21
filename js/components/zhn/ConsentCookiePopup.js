@@ -1,26 +1,30 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _extends2 = require("babel-runtime/helpers/extends");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _createClass2 = require("babel-runtime/helpers/createClass");
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _possibleConstructorReturn2 = require("babel-runtime/helpers/possibleConstructorReturn");
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -28,25 +32,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var HIDE_PERIOD = 300000,
     ANIMATION_PERIOD = 1100,
-    MSG = 'Can website collect statistics, by using session cookies from Google Analytics with anonymizeIp, for better experience ?',
-    BTN_OK_TITLE = "OK",
-    BTN_NO_TITLE = "NO, not today.";
+    MSG = "Can website collect statistics by using session cookies from Google Analytics with anonymizeIp ?",
+    BT_OK = "OK",
+    BT_NO = "NO, not today.";
 
-var STYLE = {
-  ROOT__SHOW: {
-    opacity: '0.9',
-    //top : '52px'
-    bottom: '0px'
+var CL = {
+  ROOT: "consent",
+  ROW: "consent__row",
+  MSG: "consent__msg",
+  BT: "consent__btn"
+};
+var S = {
+  SHOW: {
+    opacity: "0.9",
+    bottom: "0px"
   },
-  ROOT_HIDE: {
-    display: 'none'
+  HIDE: {
+    display: "none"
   }
 };
 
 var ConsentCookiePopup = function (_Component) {
   (0, _inherits3.default)(ConsentCookiePopup, _Component);
 
-  function ConsentCookiePopup(props) {
+  function ConsentCookiePopup() {
     (0, _classCallCheck3.default)(this, ConsentCookiePopup);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (ConsentCookiePopup.__proto__ || Object.getPrototypeOf(ConsentCookiePopup)).call(this));
@@ -60,7 +69,7 @@ var ConsentCookiePopup = function (_Component) {
       _this.setState({ isDisplay: false });
     };
 
-    _this._handleClickOk = function () {
+    _this._hClickOk = function () {
       if (!_this.hideId) {
         clearTimeout(_this.timeID);
         _this.props.onAnswerYes();
@@ -68,7 +77,7 @@ var ConsentCookiePopup = function (_Component) {
       }
     };
 
-    _this._handleClickNo = function () {
+    _this._hClickNo = function () {
       if (!_this.hideId) {
         clearTimeout(_this.timeID);
         _this.props.onAnswerNo();
@@ -86,7 +95,7 @@ var ConsentCookiePopup = function (_Component) {
   }
 
   (0, _createClass3.default)(ConsentCookiePopup, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
 
@@ -100,43 +109,43 @@ var ConsentCookiePopup = function (_Component) {
       }, 500);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _state = this.state,
           isOpacity = _state.isOpacity,
           isDisplay = _state.isDisplay,
-          _opacityStyle = isOpacity ? undefined : STYLE.ROOT__SHOW,
-          _displayStyle = isDisplay ? undefined : STYLE.ROOT_HIDE;
+          _opacityStyle = isOpacity ? undefined : S.SHOW,
+          _displayStyle = isDisplay ? undefined : S.HIDE;
 
       return _react2.default.createElement(
-        'div',
+        "div",
         {
-          className: 'consent',
-          style: Object.assign({}, _opacityStyle, _displayStyle)
+          className: CL.ROOT,
+          style: (0, _extends3.default)({}, _opacityStyle, _displayStyle)
         },
         _react2.default.createElement(
-          'p',
-          { className: 'consent__msg' },
+          "p",
+          { className: CL.MSG },
           MSG
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'consent__row' },
+          "div",
+          { className: CL.ROW },
           _react2.default.createElement(
-            'span',
+            "button",
             {
-              className: 'consent__btn',
-              onClick: this._handleClickOk
+              className: CL.BT,
+              onClick: this._hClickOk
             },
-            BTN_OK_TITLE
+            BT_OK
           ),
           _react2.default.createElement(
-            'span',
+            "button",
             {
-              className: 'consent__btn',
-              onClick: this._handleClickNo
+              className: CL.BT,
+              onClick: this._hClickNo
             },
-            BTN_NO_TITLE
+            BT_NO
           )
         )
       );
@@ -146,4 +155,4 @@ var ConsentCookiePopup = function (_Component) {
 }(_react.Component);
 
 exports.default = ConsentCookiePopup;
-//# sourceMappingURL=ConsentCookiePopup.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ConsentCookiePopup.js.map

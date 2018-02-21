@@ -1,69 +1,83 @@
 import LogicFn from './LogicFn';
 
+const {
+  crAlertItemExisted,
+  crAlertListExisted,
+
+  findGroup,
+  findList,
+  findIndex,
+
+  isInArraySameCaption,
+  filter,
+  insertItemInArray
+} = LogicFn;
+
 const WithLogicDnD = {
 
   dragDropItem(watchList, {dragId, dropId}){
     const dragArr = dragId.split(';')
-        , dragGroup = LogicFn.findGroup(watchList, dragArr[0])
-        , dragList = LogicFn.findList(dragGroup, dragArr[1])
-        , dragIndex = LogicFn.findIndex(dragList.items, dragArr[2])
+        , dragGroup = findGroup(watchList, dragArr[0])
+        , dragList = findList(dragGroup, dragArr[1])
+        , dragIndex = findIndex(dragList.items, dragArr[2])
         , dragItem = dragList.items[dragIndex];
 
     const dropArr = dropId.split(';')
-        , dropGroup = LogicFn.findGroup(watchList, dropArr[0])
-        , dropList = LogicFn.findList(dropGroup, dropArr[1])
+        , dropGroup = findGroup(watchList, dropArr[0])
+        , dropList = findList(dropGroup, dropArr[1])
         , dropIndex = (dropArr[2])
-             ? LogicFn.findIndex(dropList.items, dropArr[2])
+             ? findIndex(dropList.items, dropArr[2])
              : 0;
 
+    //dragArr[3] => dragArr[2]
     if ( dragList.caption !== dropList.caption &&
-         LogicFn.checkIsInArraySameCaption(dropList.items, dragArr[3]) )
+         isInArraySameCaption(dropList.items, dragArr[2]) )
     {
-        return LogicFn.fDragDropItemExisted(dropArr[1], dragArr[2]);
+        return crAlertItemExisted(dropArr[1], dragArr[2]);
     }
 
-    dragList.items = LogicFn.filter(dragList.items, dragArr[2])
-    dropList.items = LogicFn.insertItemInArray(dragItem, dropIndex, dropList.items);
+    dragList.items = filter(dragList.items, dragArr[2])
+    dropList.items = insertItemInArray(dragItem, dropIndex, dropList.items);
 
-    return { isDone : true }
+    return { isDone: true };
   },
 
   dragDropList(watchList, {dragId, dropId}){
     const [ dragGroupCaption, dragListCaption ] = dragId.split(';')
-        , dragGroup = LogicFn.findGroup(watchList, dragGroupCaption)
-        , dragList = LogicFn.findList(dragGroup, dragListCaption);
+        , dragGroup = findGroup(watchList, dragGroupCaption)
+        , dragList = findList(dragGroup, dragListCaption);
 
     const [ dropGroupCaption, dropListCaption ] = dropId.split(';')
-        , dropGroup = LogicFn.findGroup(watchList, dropGroupCaption)
+        , dropGroup = findGroup(watchList, dropGroupCaption)
         , dropIndex = (dropListCaption)
-              ? LogicFn.findIndex(dropGroup.lists, dropListCaption)
+              ? findIndex(dropGroup.lists, dropListCaption)
               : 0;
 
     if ( dragGroup.caption !== dropGroup.caption &&
-         LogicFn.checkIsInArraySameCaption(dropGroup.lists, dragListCaption) )
+         isInArraySameCaption(dropGroup.lists, dragListCaption) )
     {
-      return LogicFn.fDragDropListExisted(dropGroupCaption, dragListCaption)
+      return crAlertListExisted(dropGroupCaption, dragListCaption)
     }
 
-    dragGroup.lists = LogicFn.filter(dragGroup.lists, dragListCaption);
-    dropGroup.lists = LogicFn.insertItemInArray(dragList, dropIndex, dropGroup.lists);
+    dragGroup.lists = filter(dragGroup.lists, dragListCaption);
+    dropGroup.lists = insertItemInArray(dragList, dropIndex, dropGroup.lists);
 
-    return { isDone : true };
+    return { isDone: true };
   },
 
   dragDropGroup(watchList, {dragId, dropId}){
      const [ dragGroupCaption ] = dragId.split(';')
-         , dragGroup = LogicFn.findGroup(watchList, dragGroupCaption)
+         , dragGroup = findGroup(watchList, dragGroupCaption)
 
          , [ dropGroupCaption ] = dropId.split(';')
          , dropIndex = (dropGroupCaption)
-               ? LogicFn.findIndex(watchList.groups, dropGroupCaption)
+               ? findIndex(watchList.groups, dropGroupCaption)
                : 0;
 
-      watchList.groups = LogicFn.filter(watchList.groups, dragGroupCaption);
-      watchList.groups = LogicFn.insertItemInArray(dragGroup, dropIndex, watchList.groups)
+      watchList.groups = filter(watchList.groups, dragGroupCaption);
+      watchList.groups = insertItemInArray(dragGroup, dropIndex, watchList.groups)
 
-      return { isDone : true };
+      return { isDone: true };
   }
 
 };

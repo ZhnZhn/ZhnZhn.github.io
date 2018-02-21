@@ -10,19 +10,28 @@ var _LogicFn2 = _interopRequireDefault(_LogicFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var crMsgGroupExisted = _LogicFn2.default.crMsgGroupExisted,
+    crMsgNotFound = _LogicFn2.default.crMsgNotFound,
+    isInArraySameCaption = _LogicFn2.default.isInArraySameCaption,
+    getArrayWithObj = _LogicFn2.default.getArrayWithObj,
+    findIndex = _LogicFn2.default.findIndex,
+    getArrayWithRename = _LogicFn2.default.getArrayWithRename,
+    filter = _LogicFn2.default.filter;
+
+
 var WithLogicGroup = {
   addGroup: function addGroup(watchList, _ref) {
     var caption = _ref.caption;
 
     var groups = watchList.groups;
 
-    if (_LogicFn2.default.checkIsInArraySameCaption(groups, caption)) {
-      return _LogicFn2.default.fResultGroupExisted(caption);
+    if (isInArraySameCaption(groups, caption)) {
+      return crMsgGroupExisted(caption);
     }
 
     var _captionObj = caption ? { caption: caption } : { caption: "Default" };
 
-    watchList.groups = _LogicFn2.default.getArrayWithObj(groups, _captionObj);
+    watchList.groups = getArrayWithObj(groups, _captionObj);
     return { isDone: true };
   },
   renameGroup: function renameGroup(watchList, _ref2) {
@@ -30,25 +39,25 @@ var WithLogicGroup = {
         captionTo = _ref2.captionTo;
 
     var groups = watchList.groups,
-        groupIndex = _LogicFn2.default.findIndex(groups, captionFrom);
+        groupIndex = findIndex(groups, captionFrom);
 
     if (groupIndex === -1) {
-      return _LogicFn2.default.fResultNotFound('group', captionFrom);
+      return crMsgNotFound('group', captionFrom);
     }
-    if (_LogicFn2.default.checkIsInArraySameCaption(groups, captionTo)) {
-      return _LogicFn2.default.fResultGroupExisted(captionTo);
+    if (isInArraySameCaption(groups, captionTo)) {
+      return crMsgGroupExisted(captionTo);
     }
 
-    watchList.groups = _LogicFn2.default.getArrayWithRename(groups, groupIndex, captionTo);
+    watchList.groups = getArrayWithRename(groups, groupIndex, captionTo);
     return { isDone: true };
   },
   deleteGroup: function deleteGroup(watchList, _ref3) {
     var caption = _ref3.caption;
 
-    watchList.groups = _LogicFn2.default.filter(watchList.groups, caption);
+    watchList.groups = filter(watchList.groups, caption);
     return { isDone: true };
   }
 };
 
 exports.default = WithLogicGroup;
-//# sourceMappingURL=WithLogicGroup.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WithLogicGroup.js.map

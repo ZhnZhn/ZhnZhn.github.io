@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 
-import WatchActions, { WatchActionTypes } from '../../flux/actions/WatchActions';
-import Msg from '../../constants/Msg';
+import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
+import Msg from '../../constants/MsgWatch';
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import Button from './Button';
@@ -12,9 +12,11 @@ import Row from '../dialogs/Row';
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
-const actionCompleted = WatchActionTypes.EDIT_WATCH_COMPLETED
-    , actionFailed =  WatchActionTypes.EDIT_WATCH_FAILED
-    , forActionType = WatchActionTypes.ADD_ITEM;
+const { addItem } = Actions;
+const actionCompleted = WAT.EDIT_WATCH_COMPLETED
+    , actionFailed =  WAT.EDIT_WATCH_FAILED
+    , forActionType = WAT.ADD_ITEM;
+const { notSelected } = Msg;
 
 @withValidationLoad
 class AddToWatchDialog extends Component {
@@ -115,15 +117,15 @@ class AddToWatchDialog extends Component {
           , { caption, config } = data
           , { groupCaption, listCaption } = this;
 
-      WatchActions.addItem({ caption, groupCaption, listCaption, config })
+      addItem({ caption, groupCaption, listCaption, config })
     } else {
       this._updateValidationMessages(validationMessages)
     }
   }
   _getValidationMessages = () => {
     const msg = [];
-    if (!this.groupCaption)  { msg.push(Msg.NOT_SELECTED('Group')) }
-    if (!this.listCaption)   { msg.push(Msg.NOT_SELECTED('List'))  }
+    if (!this.groupCaption)  { msg.push(notSelected('Group')) }
+    if (!this.listCaption)   { msg.push(notSelected('List'))  }
     msg.isValid = (msg.length === 0) ? true : false
     return msg;
   }

@@ -34,7 +34,8 @@ var _IndicatorSma = require('./IndicatorSma');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BLANK = '';
+var EMPTY = '';
+var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
 var _compareArrByIndex = function _compareArrByIndex(index) {
   return function (arrA, arrB) {
@@ -173,16 +174,16 @@ var AdapterFn = {
     }
 
     var len = data.length,
-        _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [BLANK, 0],
+        _pointNow = len > 0 && data[len - 1] ? data[len - 1] : [EMPTY, 0],
         _nowValue = _getValue(_pointNow),
         bNowValue = (0, _big2.default)(_nowValue),
         _pointPrev = len > 1 && data[len - 2] ? data[len - 2] : _pointNow,
         _prevValue = _getValue(_pointPrev),
         bPrevValue = (0, _big2.default)(_prevValue),
         _nowDate = _getDate(_pointNow),
-        date = len > 0 ? _DateUtils2.default.formatTo(_nowDate) : BLANK,
+        date = len > 0 ? _DateUtils2.default.formatTo(_nowDate) : EMPTY,
         _prevDate = _getDate(_pointPrev),
-        dateTo = len > 1 && _prevDate ? _DateUtils2.default.formatTo(_prevDate) : BLANK;
+        dateTo = len > 1 && _prevDate ? _DateUtils2.default.formatTo(_prevDate) : EMPTY;
 
     return (0, _extends3.default)({}, AdapterFn.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
       valueTo: AdapterFn.numberFormat(bPrevValue),
@@ -201,7 +202,15 @@ var AdapterFn = {
       zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     };
   },
-  fnGetConfigMfi: _IndicatorSma.fnGetConfigMfi
+  fnGetConfigMfi: _IndicatorSma.fnGetConfigMfi,
+
+  toUpperCaseFirst: function toUpperCaseFirst(str) {
+    return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
+  },
+
+  monthIndex: function monthIndex(str) {
+    return M.indexOf(String(str).toLowerCase());
+  }
 
 };
 

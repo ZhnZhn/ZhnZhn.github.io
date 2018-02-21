@@ -44,19 +44,23 @@ var _crInfo = function _crInfo(_ref) {
 
 var fnAdapter = {
   crData: function crData(json) {
-    var data = json.Results.series[0].data;
-    return data.map(function (p) {
+    var data = json.Results.series[0].data,
+        _data = [];
+    data.forEach(function (p) {
       var year = p.year,
           _p$period = p.period,
           period = _p$period === undefined ? '' : _p$period,
           value = p.value,
-          _d = year + '-' + ('' + period).replace('M', '');
+          _m = parseInt(('' + period).replace('M', ''), 10);
 
-      return {
-        x: ymdToUTC(_d),
-        y: parseFloat(value)
-      };
-    }).reverse();
+      if (typeof _m === 'number' && _m > 0 && _m < 13) {
+        _data.push({
+          x: ymdToUTC(year + '-' + _m),
+          y: parseFloat(value)
+        });
+      }
+    });
+    return _data.reverse();
   },
 
   crConfigOption: function crConfigOption(_ref2) {

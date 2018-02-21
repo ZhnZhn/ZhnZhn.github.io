@@ -4,17 +4,19 @@ import { BrowserActionTypes } from '../actions/BrowserActions';
 import { WatchActionTypes } from '../actions/WatchActions';
 import WatchDefault from '../../constants/WatchDefault';
 import { ModalDialog }  from '../../constants/Type';
-import Msg from '../../constants/Msg';
+import Msg from '../../constants/MsgWatch';
 
 import Logic from './Logic';
+
+const { WATCH_SAVED, WATCH_PREV } = Msg;
 
 const STORAGE_KEY = 'WATCH_LIST_ERC'
     , DIALOG_CAPTION ='Watch List:';
 
 const WatchListSlice = {
 
-  watchList : WatchDefault,
-  isWatchEdited : false,
+  watchList: WatchDefault,
+  isWatchEdited: false,
 
   initWatchList(){
     LocalForage.getItem(STORAGE_KEY).then((value) => {
@@ -79,17 +81,17 @@ const WatchListSlice = {
           .then(()=>{
              this.isWatchEdited = false;
              this.onShowModalDialog(ModalDialog.INFO, {
-                caption : DIALOG_CAPTION,
-                descr : Msg.WATCH_SAVED
-             })             
+                caption: DIALOG_CAPTION,
+                descr: WATCH_SAVED
+             })
           })
           .catch((error) => {
              console.log(error);
           })
     } else {
        this.onShowModalDialog(ModalDialog.INFO, {
-          caption : DIALOG_CAPTION,
-          descr : Msg.WATCH_PREV
+          caption: DIALOG_CAPTION,
+          descr: WATCH_PREV
        })
     }
   },

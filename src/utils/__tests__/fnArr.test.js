@@ -1,4 +1,10 @@
-import ArrayUtil from '../ArrayUtil';
+import fnArr from '../fnArr';
+
+const {
+  findIndexByProp,
+  isSameByProp,
+  isStrInArr
+} = fnArr;
 
 const propName = 'caption'
     , propValue1 = 'caption1'
@@ -9,7 +15,7 @@ const propName = 'caption'
     ]
 
 describe('findIndexByProp', ( )=> {
-   const fn = ArrayUtil.findIndexByProp(propName)
+   const fn = findIndexByProp(propName)
 
    test('should return function', () => {
      expect(typeof fn).toBe('function')
@@ -21,7 +27,7 @@ describe('findIndexByProp', ( )=> {
    })
 
    test('should return -1 in edge cases', () => {
-      const fnEdgeCase = ArrayUtil.findIndexByProp('notexist')
+      const fnEdgeCase = findIndexByProp('notexist')
       expect(fn(arr, 'notexist')).toBe(-1)
       expect(fnEdgeCase(arr, propValue1)).toBe(-1)
       expect(fnEdgeCase({}, propValue1)).toBe(-1)
@@ -30,7 +36,7 @@ describe('findIndexByProp', ( )=> {
 })
 
 describe('isSameByProp', () => {
-   const fn = ArrayUtil.isSameByProp(propName)
+   const fn = isSameByProp(propName)
 
    test('should return function', () => {
      expect(typeof fn).toBe('function')
@@ -43,7 +49,7 @@ describe('isSameByProp', () => {
    })
 
    test('should return false in edge cases', () => {
-      const fnEdgeCase = ArrayUtil.isSameByProp('notexist')
+      const fnEdgeCase = isSameByProp('notexist')
       expect(fn(arr, 'notexist')).toBe(false)
       expect(fnEdgeCase(arr, propValue1)).toBe(false)
       expect(fnEdgeCase({}, propValue1)).toBe(false)
@@ -52,8 +58,8 @@ describe('isSameByProp', () => {
 
 describe('isStrInArr', () => {
   const arr = [ 'test1', 'test2', 'test3' ]
-      , fnTrue = ArrayUtil.isStrInArr('test1')
-      , fnFalse = ArrayUtil.isStrInArr('test4')
+      , fnTrue = isStrInArr('test1')
+      , fnFalse = isStrInArr('test4')
 
    test('should return function', () => {
       expect(typeof fnTrue).toBe('function')

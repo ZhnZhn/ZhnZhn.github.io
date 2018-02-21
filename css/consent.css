@@ -38,9 +38,11 @@
   transition: color 400ms ease-out;
 }
 
-.consent__btn:hover {
+.consent__btn:hover,
+.consent__btn:focus {
   border-color: green;
   color: green;
+  outline: none;
 }
 
 @media only screen and (max-width: 975px) {

@@ -45,11 +45,12 @@ const dragLeaveWithDnDStyle = function(ev){
 };
 
 const withDnDStyle = (target) => {
-  const _proto = target.prototype;
-  _proto.dragStartWithDnDStyle = dragStartWithDnDStyle
-  _proto.dropWithDnDStyle = dropWithDnDStyle
-  _proto.dragEnterWithDnDStyle = dragEnterWithDnDStyle
-  _proto.dragLeaveWithDnDStyle = dragLeaveWithDnDStyle
+  Object.assign(target.prototype, {
+    dragStartWithDnDStyle: dragStartWithDnDStyle,
+    dropWithDnDStyle: dropWithDnDStyle,
+    dragEnterWithDnDStyle: dragEnterWithDnDStyle,
+    dragLeaveWithDnDStyle: dragLeaveWithDnDStyle,
+  })
 }
 
 export default withDnDStyle

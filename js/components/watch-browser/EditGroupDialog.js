@@ -28,9 +28,9 @@ var _WatchActions = require('../../flux/actions/WatchActions');
 
 var _WatchActions2 = _interopRequireDefault(_WatchActions);
 
-var _Msg = require('../../constants/Msg');
+var _MsgWatch = require('../../constants/MsgWatch');
 
-var _Msg2 = _interopRequireDefault(_Msg);
+var _MsgWatch2 = _interopRequireDefault(_MsgWatch);
 
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
@@ -59,6 +59,17 @@ var _GroupDeletePane2 = _interopRequireDefault(_GroupDeletePane);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //import PropTypes from "prop-types";
+
+var addGroup = _WatchActions2.default.addGroup,
+    renameGroup = _WatchActions2.default.renameGroup,
+    deleteGroup = _WatchActions2.default.deleteGroup;
+var EDIT_WATCH_COMPLETED = _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
+    EDIT_WATCH_FAILED = _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
+    ADD_GROUP = _WatchActions.WatchActionTypes.ADD_GROUP,
+    RENAME_GROUP = _WatchActions.WatchActionTypes.RENAME_GROUP,
+    DELETE_GROUP = _WatchActions.WatchActionTypes.DELETE_GROUP;
+var notSelected = _MsgWatch2.default.notSelected,
+    emptyName = _MsgWatch2.default.emptyName;
 
 var EditGroupDialog = function (_Component) {
   (0, _inherits3.default)(EditGroupDialog, _Component);
@@ -109,11 +120,11 @@ var EditGroupDialog = function (_Component) {
             { title: 'Create' },
             _react2.default.createElement(_GroupAddPane2.default, {
               store: store,
-              actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
-              actionFailed: _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
-              forActionType: _WatchActions.WatchActionTypes.ADD_GROUP,
-              msgOnIsEmptyName: _Msg2.default.IS_EMPTY_NAME,
-              onCreate: _WatchActions2.default.addGroup,
+              actionCompleted: EDIT_WATCH_COMPLETED,
+              actionFailed: EDIT_WATCH_FAILED,
+              forActionType: ADD_GROUP,
+              msgOnIsEmptyName: emptyName,
+              onCreate: addGroup,
               onClose: onClose
             })
           ),
@@ -122,12 +133,12 @@ var EditGroupDialog = function (_Component) {
             { title: 'Rename' },
             _react2.default.createElement(_GroupEditPane2.default, {
               store: store,
-              actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
-              actionFailed: _WatchActions.WatchActionTypes.EDIT_WATCH_FAILED,
-              forActionType: _WatchActions.WatchActionTypes.RENAME_GROUP,
-              msgOnNotSelect: _Msg2.default.NOT_SELECTED,
-              msgOnIsEmptyName: _Msg2.default.IS_EMPTY_NAME,
-              onRename: _WatchActions2.default.renameGroup,
+              actionCompleted: EDIT_WATCH_COMPLETED,
+              actionFailed: EDIT_WATCH_FAILED,
+              forActionType: RENAME_GROUP,
+              msgOnNotSelect: notSelected,
+              msgOnIsEmptyName: emptyName,
+              onRename: renameGroup,
               onClose: onClose
             })
           ),
@@ -136,10 +147,10 @@ var EditGroupDialog = function (_Component) {
             { title: 'Delete' },
             _react2.default.createElement(_GroupDeletePane2.default, {
               store: store,
-              actionCompleted: _WatchActions.WatchActionTypes.EDIT_WATCH_COMPLETED,
-              forActionType: _WatchActions.WatchActionTypes.DELETE_GROUP,
-              msgOnNotSelect: _Msg2.default.NOT_SELECTED,
-              onDelete: _WatchActions2.default.deleteGroup,
+              actionCompleted: EDIT_WATCH_COMPLETED,
+              forActionType: DELETE_GROUP,
+              msgOnNotSelect: notSelected,
+              onDelete: deleteGroup,
               onClose: onClose
             })
           )
@@ -151,4 +162,4 @@ var EditGroupDialog = function (_Component) {
 }(_react.Component);
 
 exports.default = EditGroupDialog;
-//# sourceMappingURL=EditGroupDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\EditGroupDialog.js.map

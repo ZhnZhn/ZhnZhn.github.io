@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
 var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
@@ -18,30 +22,39 @@ var _fnDescr2 = _interopRequireDefault(_fnDescr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ymdToUTC = _AdapterFn2.default.ymdToUTC,
+var toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst,
+    monthIndex = _AdapterFn2.default.monthIndex,
+    ymdToUTC = _AdapterFn2.default.ymdToUTC,
     valueMoving = _AdapterFn2.default.valueMoving;
 
 
 var C = {
-  DATASET_EMPTY: "Dataset is empty",
-  ONE_BLANK: " ",
-  MM_DD: '-12-31'
+  DATASET_EMPTY: 'Dataset is empty',
+  ENPTY: '',
+  BLANK: ' ',
+  MM_DD: '-12-31',
+  DF_TITLE: 'More about data on tab Info in Description'
 };
 
 var _crUnit = function _crUnit(json) {
   var _json$data = json.data,
       data = _json$data === undefined ? [] : _json$data,
       item = data[data.length - 1] || {},
-      _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit ? item.Unit : C.ONE_BLANK;
+      _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit ? item.Unit : C.BLANK;
 
-  return _unit[0].toUpperCase() + _unit.substr(1);
+  return toUpperCaseFirst(_unit);
 };
 
 var _crPoint = function _crPoint(_ref) {
   var Year = _ref.Year,
+      Months = _ref.Months,
       Value = _ref.Value;
+
+  var m = monthIndex(Months),
+      Tail = m !== -1 ? '-' + m : C.MM_DD;
+
   return {
-    x: ymdToUTC('' + Year + C.MM_DD),
+    x: ymdToUTC('' + Year + Tail),
     y: Value
   };
 };
@@ -93,13 +106,15 @@ var _crSeriesData = function _crSeriesData(json) {
   return _hmToPoints(_hm, _legend);
 };
 
+var _compareByX = function _compareByX(a, b) {
+  return a.x - b.x;
+};
+
 var _crSeriaData = function _crSeriaData(json, option) {
   var _json$data3 = json.data,
       data = _json$data3 === undefined ? [] : _json$data3;
 
-  return data.map(function (item) {
-    return _crPoint(item);
-  });
+  return data.map(_crPoint).sort(_compareByX);
 };
 
 var fnAdapter = {
@@ -107,7 +122,32 @@ var fnAdapter = {
     var three = _ref2.three,
         value = _ref2.value;
 
-    return three ? value + '_' + three : value;
+    var _v = value || 'faoId';
+    return three ? _v + '_' + three : _v;
+  },
+  crTitle: function crTitle(option, json) {
+    var title = option.title,
+        dfTitle = option.dfTitle;
+
+    if (title) {
+      return dfTitle ? dfTitle + ': ' + title : title;
+    }
+    var _json$data4 = json.data,
+        data = _json$data4 === undefined ? [] : _json$data4,
+        p = data[data.length - 1];
+
+    if (p && (typeof p === 'undefined' ? 'undefined' : (0, _typeof3.default)(p)) === 'object') {
+      var _p$Area = p.Area,
+          Area = _p$Area === undefined ? '' : _p$Area,
+          _p$Item = p.Item,
+          Item = _p$Item === undefined ? '' : _p$Item,
+          _p$Element = p.Element,
+          Element = _p$Element === undefined ? '' : _p$Element;
+
+      return Area + ' ' + Item + ' ' + Element;
+    } else {
+      return C.DF_TITLE;
+    }
   },
   crSubtitle: function crSubtitle(json, subtitle) {
     var _unit = _crUnit(json);

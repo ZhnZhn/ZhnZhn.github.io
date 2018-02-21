@@ -30,9 +30,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DateUtils = require('../../utils/DateUtils');
+var _crDateConfig = require('./crDateConfig');
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
+var _crDateConfig2 = _interopRequireDefault(_crDateConfig);
 
 var _DialogCell = require('../dialogs/DialogCell');
 
@@ -56,8 +56,7 @@ var _loadDims2 = _interopRequireDefault(_loadDims);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DATE_PLACEHOLDER = 'Before Select Metric',
-    MAP_FREQUENCY_DF = 'M',
+var MAP_FREQUENCY_DF = 'M',
     MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";
 
 var S = {
@@ -121,18 +120,14 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 
     _this._updateForDate = function () {
       _this.date = null;
-      var frequency = _this._items[1] ?
-      //(this.two)
-      _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
+      var frequency = _this._items[1] ? _this.props.mapFrequency ? _this.props.mapFrequency : _this.two.mapFrequency ? _this.two.mapFrequency : MAP_FREQUENCY_DF : null,
           mapDateDf = _this.props.mapDateDf,
-          config = frequency ? _DateUtils2.default.createEurostatSelect(frequency, mapDateDf) : _DateUtils2.default.createEurostatSelect('Y', mapDateDf);
-      //: { dateDefault : DATE_PLACEHOLDER , options : [] };
+          dateConfig = frequency ? (0, _crDateConfig2.default)(frequency, mapDateDf) : (0, _crDateConfig2.default)('Y', mapDateDf);
 
-      _this.setState({
-        isShowDate: true,
-        dateDefault: config.dateDefault,
-        dateOptions: config.options
-      });
+
+      _this.setState((0, _extends3.default)({
+        isShowDate: true
+      }, dateConfig));
     };
 
     _this._handleLoad = function () {
@@ -223,15 +218,14 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     _this._items = [];
     _this._selectOptions = [];
 
-    _this.state = {
+    _this.state = (0, _extends3.default)({
       isShowLabels: true,
       isLoading: true,
       isLoadFailed: false,
-      isShowDate: false,
-      dateDefault: DATE_PLACEHOLDER,
-      dateOptions: [],
+      isShowDate: false
+    }, (0, _crDateConfig2.default)('EMPTY'), {
       validationMessages: []
-    };
+    });
     return _this;
   }
 

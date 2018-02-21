@@ -41,6 +41,7 @@ var WithStackedColumnConfig = {
 
       xAxis: _Chart2.default.fXAxisOpposite({
         categories: [],
+        type: "category",
         startOnTick: false,
         min: 1,
         crosshair: _Chart2.default.fCrosshair()
@@ -95,4 +96,4 @@ var WithStackedColumnConfig = {
 };
 
 exports.default = WithStackedColumnConfig;
-//# sourceMappingURL=WithStackedColumnConfig.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedColumnConfig.js.map

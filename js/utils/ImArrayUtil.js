@@ -22,7 +22,7 @@ var ImArrayUtil = {
 
   filterByPropFn: function filterByPropFn(propName) {
     return function (arr, propValue) {
-      return arr.filter(function (obj, index) {
+      return arr.filter(function (obj) {
         return obj[propName] !== propValue;
       });
     };
@@ -32,20 +32,6 @@ var ImArrayUtil = {
     var arr = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
     return [].concat((0, _toConsumableArray3.default)(arr.slice(0, index)), [Object.assign({}, item)], (0, _toConsumableArray3.default)(arr.slice(index)));
-    /*
-    if (index !== 0){
-      return [
-          ...arr.slice(0, index),
-          Object.assign({}, item),
-          ...arr.slice(index)
-      ]
-    } else {
-       return [
-          Object.assign({}, item),
-          ...arr
-      ]
-    }
-    */
   },
 
 
@@ -58,4 +44,4 @@ var ImArrayUtil = {
 };
 
 exports.default = ImArrayUtil;
-//# sourceMappingURL=ImArrayUtil.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\ImArrayUtil.js.map

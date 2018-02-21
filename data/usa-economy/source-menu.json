@@ -33,7 +33,8 @@
       "caption": "BLS",
       "isInitClose": true,
       "items": [
-        { "id": "USAE_BLS_1" }
+        { "id": "USAE_BLS_1" },
+        { "id": "USAE_BLS_CPI" }
       ]
     },{
       "caption": "Inflation & Prices",
@@ -225,6 +226,7 @@
       "chartContainerCaption" : "BLS: Consume Average Prices",
       "dialogType": "DialogType3",
       "dialogProps" : {
+        "oneCaption": "Item",
         "nInitFromDate" : 12,
         "descrUrl" : "./data/usa-economy/bls.html",
         "optionURI" : "./data/usa-economy/bls-consume-avg-prices.json",
@@ -236,6 +238,28 @@
         "dataSource": "U.S. Bureau of Labor Statistics (BSL): Average Price Data",
         "dfProps": {
           "dfTitle": "Consume Average Price"
+        }
+      }
+    },
+    "USAE_BLS_CPI": {
+      "type": "USAE_BLS_CPI",
+      "menuTitle" : "Consume Price Index (CPI)",
+      "dialogCaption": "Consume Price Index (CPI)",
+      "chartContainerCaption" : "BLS: Consume Price Index (CPI)",
+      "dialogType": "DialogType3",
+      "dialogProps" : {
+        "nInitFromDate" : 12,
+        "descrUrl" : "./data/usa-economy/bls.html",
+        "oneCaption": "Item",
+        "optionURI" : "./data/usa-economy/bls-cpi.json",
+        "noDate": true,
+        "valueFn" : "ROne",
+        "loadId" : "BLS",
+        "isProxy": true,
+        "linkFn": "BSL",
+        "dataSource": "U.S. Bureau of Labor Statistics (BSL): Consume Price Index (CPI)",
+        "dfProps": {
+          "dfTitle": "Consume Price Index (CPI)"
         }
       }
     },

@@ -1,0 +1,16 @@
+ {
+   "items": [
+   { "caption": "All items, NSA, 1982-84=100", "value": "CUUR0000SA0"},
+   { "caption": "All Items Less Food and Energy, NSA, 1982-84=100", "value": "CUUR0000SA0L1E" },
+   { "caption": "Food and Beverages, NSA, 1982-84=100", "value": "CUUR0000SAF"},
+   { "caption": "Housing, NSA, 1982-84=100", "value": "CUUR0000SAH"},
+   { "caption": "Apparel, NSA, 1982-84=100", "value": "CUUR0000SAA"},
+   { "caption": "Transportation, NSA, 1982-84=100", "value": "CUUR0000SAT"},
+   { "caption": "Medical Care, NSA, 1982-84=100", "value": "CUUR0000SAM"},
+   { "caption": "Medical Care Services, NSA, 1982-84=100", "value": "CUUR0000SAM2"},
+   { "caption": "Recreation, NSA, December 1997=100", "value": "CUUR0000SAR"},
+   { "caption": "Education and Communication, NSA, December 1997=100", "value": "CUUR0000SAE"},
+   { "caption": "Other Goods and Services, NSA, 1982-84=100", "value": "CUUR0000SAG" },   
+   { "caption": "New vehicles, SA, 1982-84=100", "value": "CUSR0000SETA01" }
+  ]
+ }

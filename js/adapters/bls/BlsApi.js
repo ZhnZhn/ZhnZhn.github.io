@@ -8,6 +8,25 @@ var C = {
 };
 
 var BlsApi = {
+
+  /*
+  crOptionFetch(option){
+    const { value='' } = option
+    return {
+      method: 'POST',
+      headers: {
+        //'Accept': 'application/json',
+        //'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        seriesid: [ value ],
+        startyear: "2010",
+        endyear: "2018"
+      })
+      };
+  },
+  */
+
   getRequestUrl: function getRequestUrl(option) {
     var _option$proxy = option.proxy,
         proxy = _option$proxy === undefined ? '' : _option$proxy,

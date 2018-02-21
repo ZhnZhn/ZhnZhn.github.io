@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/flux/watch-list/WithLogicList.js"],"names":["WithLogicList","createList","watchList","captionGroup","captionList","groupTo","findGroup","fResultNotFound","lists","checkIsInArraySameCaption","fResultListExisted","getArrayWithObj","caption","isDone","renameList","captionListFrom","captionListTo","groupIn","listIndex","findIndex","getArrayWithRename","deleteList","groupFrom","filter"],"mappings":";;;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AAEpBC,YAFoB,sBAETC,SAFS,QAE8B;AAAA,QAA3BC,YAA2B,QAA3BA,YAA2B;AAAA,QAAbC,WAAa,QAAbA,WAAa;;AAChD,QAAMC,UAAU,kBAAQC,SAAR,CAAkBJ,SAAlB,EAA6BC,YAA7B,CAAhB;;AAEA,QAAI,CAACE,OAAL,EAAa;AACX,aAAO,kBAAQE,eAAR,CAAwB,OAAxB,EAAiCJ,YAAjC,CAAP;AACD;AACD,QAAMK,QAAQH,QAAQG,KAAtB;AACA,QAAI,kBAAQC,yBAAR,CAAkCD,KAAlC,EAAyCJ,WAAzC,CAAJ,EAA0D;AACxD,aAAO,kBAAQM,kBAAR,CAA2BN,WAA3B,EAAwCD,YAAxC,CAAP;AACD;;AAEDE,YAAQG,KAAR,GAAgB,kBAAQG,eAAR,CAAwBH,KAAxB,EAA+B,EAACI,SAASR,WAAV,EAA/B,CAAhB;AACA,WAAO,EAACS,QAAS,IAAV,EAAP;AACD,GAfmB;AAiBpBC,YAjBoB,sBAiBTZ,SAjBS,SAiBiD;AAAA,QAA9CC,YAA8C,SAA9CA,YAA8C;AAAA,QAAhCY,eAAgC,SAAhCA,eAAgC;AAAA,QAAfC,aAAe,SAAfA,aAAe;;AACnE,QAAMC,UAAU,kBAAQX,SAAR,CAAkBJ,SAAlB,EAA6BC,YAA7B,CAAhB;;AAEA,QAAI,CAACc,OAAL,EAAa;AACX,aAAO,kBAAQV,eAAR,CAAwB,OAAxB,EAAiCJ,YAAjC,CAAP;AACD;AACD,QAAMK,QAAQS,QAAQT,KAAtB;AACA,QAAMU,YAAY,kBAAQC,SAAR,CAAkBX,KAAlB,EAAyBO,eAAzB,CAAlB;AACA,QAAIG,cAAc,CAAC,CAAnB,EAAqB;AACnB,aAAO,kBAAQX,eAAR,CAAwB,MAAxB,EAAgCQ,eAAhC,CAAP;AACD;AACD,QAAK,kBAAQN,yBAAR,CAAkCD,KAAlC,EAAyCQ,aAAzC,CAAL,EAA8D;AAC5D,aAAO,kBAAQN,kBAAR,CAA2BM,aAA3B,EAA0Cb,YAA1C,CAAP;AACD;;AAEDc,YAAQT,KAAR,GAAgB,kBAAQY,kBAAR,CAA2BZ,KAA3B,EAAkCU,SAAlC,EAA6CF,aAA7C,CAAhB;AACA,WAAO,EAACH,QAAS,IAAV,EAAP;AACD,GAlCmB;AAoCpBQ,YApCoB,sBAoCTnB,SApCS,SAoC8B;AAAA,QAA3BC,YAA2B,SAA3BA,YAA2B;AAAA,QAAbC,WAAa,SAAbA,WAAa;;AAChD,QAAMkB,YAAY,kBAAQhB,SAAR,CAAkBJ,SAAlB,EAA6BC,YAA7B,CAAlB;;AAEA,QAAI,CAACmB,SAAL,EAAe;AACb,aAAO,kBAAQf,eAAR,CAAwB,OAAxB,EAAiCJ,YAAjC,CAAP;AACD;;AAEDmB,cAAUd,KAAV,GAAkB,kBAAQe,MAAR,CAAeD,UAAUd,KAAzB,EAAgCJ,WAAhC,CAAlB;AACA,WAAO,EAACS,QAAS,IAAV,EAAP;AACD;AA7CmB,CAAtB;;kBAiDeb,a","file":"WithLogicList.js","sourcesContent":["\r\nimport LogicFn from './LogicFn';\r\n\r\nconst WithLogicList = {\r\n\r\n  createList(watchList, {captionGroup, captionList}){\r\n    const groupTo = LogicFn.findGroup(watchList, captionGroup)\r\n\r\n    if (!groupTo){\r\n      return LogicFn.fResultNotFound('group', captionGroup);\r\n    }\r\n    const lists = groupTo.lists;\r\n    if (LogicFn.checkIsInArraySameCaption(lists, captionList)){\r\n      return LogicFn.fResultListExisted(captionList, captionGroup);\r\n    }\r\n\r\n    groupTo.lists = LogicFn.getArrayWithObj(lists, {caption: captionList});\r\n    return {isDone : true};\r\n  },\r\n\r\n  renameList(watchList, {captionGroup, captionListFrom, captionListTo}){\r\n    const groupIn = LogicFn.findGroup(watchList, captionGroup);\r\n\r\n    if (!groupIn){\r\n      return LogicFn.fResultNotFound('group', captionGroup);\r\n    }\r\n    const lists = groupIn.lists;\r\n    const listIndex = LogicFn.findIndex(lists, captionListFrom);\r\n    if (listIndex === -1){\r\n      return LogicFn.fResultNotFound('list', captionListFrom);\r\n    }\r\n    if ( LogicFn.checkIsInArraySameCaption(lists, captionListTo) ){\r\n      return LogicFn.fResultListExisted(captionListTo, captionGroup);\r\n    }\r\n\r\n    groupIn.lists = LogicFn.getArrayWithRename(lists, listIndex, captionListTo);\r\n    return {isDone : true}\r\n  },\r\n\r\n  deleteList(watchList, {captionGroup, captionList}){\r\n    const groupFrom = LogicFn.findGroup(watchList, captionGroup);\r\n\r\n    if (!groupFrom){\r\n      return LogicFn.fResultNotFound('group', captionGroup);\r\n    }\r\n\r\n    groupFrom.lists = LogicFn.filter(groupFrom.lists, captionList);\r\n    return {isDone : true}\r\n  }\r\n\r\n};\r\n\r\nexport default WithLogicList\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\watch-list\\WithLogicList.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\watch-list\\WithLogicList.js",
+ "sourceRoot": "",
+ "names": [
+  "crMsgNotFound",
+  "crMsgListExisted",
+  "findGroup",
+  "isInArraySameCaption",
+  "getArrayWithObj",
+  "findIndex",
+  "getArrayWithRename",
+  "filter",
+  "WithLogicList",
+  "createList",
+  "watchList",
+  "captionGroup",
+  "captionList",
+  "groupTo",
+  "lists",
+  "caption",
+  "isDone",
+  "renameList",
+  "captionListFrom",
+  "captionListTo",
+  "groupIn",
+  "listIndex",
+  "deleteList",
+  "groupFrom"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;IAGEA,a,qBAAAA,a;IACAC,gB,qBAAAA,gB;IAEAC,S,qBAAAA,S;IACAC,oB,qBAAAA,oB;IACAC,e,qBAAAA,e;IACAC,S,qBAAAA,S;IACAC,kB,qBAAAA,kB;IACAC,M,qBAAAA,M;;;AAGF,IAAMC,gBAAgB;AAEpBC,YAFoB,sBAETC,SAFS,QAE8B;AAAA,QAA3BC,YAA2B,QAA3BA,YAA2B;AAAA,QAAbC,WAAa,QAAbA,WAAa;;AAChD,QAAMC,UAAUX,UAAUQ,SAAV,EAAqBC,YAArB,CAAhB;;AAEA,QAAI,CAACE,OAAL,EAAa;AACX,aAAOb,cAAc,OAAd,EAAuBW,YAAvB,CAAP;AACD;AACD,QAAMG,QAAQD,QAAQC,KAAtB;AACA,QAAIX,qBAAqBW,KAArB,EAA4BF,WAA5B,CAAJ,EAA6C;AAC3C,aAAOX,iBAAiBW,WAAjB,EAA8BD,YAA9B,CAAP;AACD;;AAEDE,YAAQC,KAAR,GAAgBV,gBAAgBU,KAAhB,EAAuB,EAACC,SAASH,WAAV,EAAvB,CAAhB;AACA,WAAO,EAAEI,QAAQ,IAAV,EAAP;AACD,GAfmB;AAiBpBC,YAjBoB,sBAiBTP,SAjBS,SAiBiD;AAAA,QAA9CC,YAA8C,SAA9CA,YAA8C;AAAA,QAAhCO,eAAgC,SAAhCA,eAAgC;AAAA,QAAfC,aAAe,SAAfA,aAAe;;AACnE,QAAMC,UAAUlB,UAAUQ,SAAV,EAAqBC,YAArB,CAAhB;;AAEA,QAAI,CAACS,OAAL,EAAa;AACX,aAAOpB,cAAc,OAAd,EAAuBW,YAAvB,CAAP;AACD;AACD,QAAMG,QAAQM,QAAQN,KAAtB;AACA,QAAMO,YAAYhB,UAAUS,KAAV,EAAiBI,eAAjB,CAAlB;AACA,QAAIG,cAAc,CAAC,CAAnB,EAAqB;AACnB,aAAOrB,cAAc,MAAd,EAAsBkB,eAAtB,CAAP;AACD;AACD,QAAKf,qBAAqBW,KAArB,EAA4BK,aAA5B,CAAL,EAAiD;AAC/C,aAAOlB,iBAAiBkB,aAAjB,EAAgCR,YAAhC,CAAP;AACD;;AAEDS,YAAQN,KAAR,GAAgBR,mBAAmBQ,KAAnB,EAA0BO,SAA1B,EAAqCF,aAArC,CAAhB;AACA,WAAO,EAAEH,QAAQ,IAAV,EAAP;AACD,GAlCmB;AAoCpBM,YApCoB,sBAoCTZ,SApCS,SAoC8B;AAAA,QAA3BC,YAA2B,SAA3BA,YAA2B;AAAA,QAAbC,WAAa,SAAbA,WAAa;;AAChD,QAAMW,YAAYrB,UAAUQ,SAAV,EAAqBC,YAArB,CAAlB;;AAEA,QAAI,CAACY,SAAL,EAAe;AACb,aAAOvB,cAAc,OAAd,EAAuBW,YAAvB,CAAP;AACD;;AAEDY,cAAUT,KAAV,GAAkBP,OAAOgB,UAAUT,KAAjB,EAAwBF,WAAxB,CAAlB;AACA,WAAO,EAAEI,QAAQ,IAAV,EAAP;AACD;AA7CmB,CAAtB;;kBAiDeR,a"
+}

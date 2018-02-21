@@ -12,7 +12,7 @@ var ArrayUtil = {
         return -1;
       }
 
-      return arr.findIndex(function (item, index) {
+      return arr.findIndex(function (item) {
         return item[propName] === propValue;
       });
     };
@@ -24,11 +24,9 @@ var ArrayUtil = {
         return false;
       }
 
-      var index = arr.findIndex(function (item, i) {
+      return arr.findIndex(function (item) {
         return item[propName] === propValue;
-      });
-
-      return index === -1 ? false : true;
+      }) === -1 ? false : true;
     };
   },
 
@@ -50,4 +48,4 @@ var ArrayUtil = {
 };
 
 exports.default = ArrayUtil;
-//# sourceMappingURL=ArrayUtil.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\ArrayUtil.js.map

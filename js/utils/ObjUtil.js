@@ -8,7 +8,7 @@ var ObjUtil = {
 
   findInPropArrayByProp: function findInPropArrayByProp(propArrName, propName) {
     return function (obj, propValue) {
-      return obj[propArrName].find(function (item, index) {
+      return obj[propArrName].find(function (item) {
         return item[propName] === propValue;
       });
     };
@@ -17,4 +17,4 @@ var ObjUtil = {
 };
 
 exports.default = ObjUtil;
-//# sourceMappingURL=ObjUtil.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\ObjUtil.js.map

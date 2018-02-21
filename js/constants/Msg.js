@@ -13,22 +13,6 @@ var Msg = {
     option.alertDescr = descr;
   },
 
-  WATCH_SAVED: 'Watch List has been saved.',
-  WATCH_PREV: 'Watch List has not been edited\nfrom previous save.',
-
-  NOT_FOUND_ITEM: function NOT_FOUND_ITEM(itemType, captionGroup) {
-    return 'The ' + itemType + ' witn name ' + captionGroup + ' not found.';
-  },
-  GROUP_EXISTED: function GROUP_EXISTED(caption) {
-    return 'Group with name ' + caption + ' is already existed.';
-  },
-  LIST_EXISTED: function LIST_EXISTED(captionList, captionGroup) {
-    return 'List with name ' + captionList + '\n      In Group ' + captionGroup + ' is already existed.';
-  },
-  ITEM_EXISTED: function ITEM_EXISTED(caption, captionList) {
-    return 'Item with name ' + caption + '\n      In List ' + captionList + ' is already existed.';
-  },
-
   IS_EMPTY_NAME: function IS_EMPTY_NAME(item) {
     return item + ' name can not be empty.';
   },
@@ -53,14 +37,6 @@ var Msg = {
     DOUBLE_LOAD_META: {
       caption: 'Double Load Meta Error',
       descr: 'Meta data for this code already have been loaded.'
-    },
-    DRAG_DROP_ITEM: {
-      caption: 'Drag Drop Item',
-      descr: 'Item in List already has been existed.'
-    },
-    DRAG_DROP_LIST: {
-      caption: 'Drag Drop List',
-      descr: 'List in Group already has been existed.'
     },
     PREMIUM_WITHOUT_KEY: {
       caption: 'Without Key',

@@ -14,98 +14,6 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fnForMonthSelect = function _fnForMonthSelect() {
-	var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
-
-	var options = [],
-	    dNow = new Date(Date.now());
-
-	var dateDefault = void 0,
-	    y = dNow.getUTCFullYear(),
-	    m = dNow.getUTCMonth(),
-	    i = void 0;
-
-	for (i = 0; i < 10; i++) {
-		m = m - 1;
-		if (m > -1) {
-			options.push({
-				caption: y + 'M' + (m + 1 > 9 ? m + 1 : '0' + (m + 1)),
-				value: y + 'M' + (m + 1 > 9 ? m + 1 : '0' + (m + 1))
-			});
-		} else {
-			m = 11;
-			y = y - 1;
-			options.push({
-				caption: y + 'M12',
-				value: y + 'M12'
-			});
-		}
-		if (i === mapDateDf) {
-			dateDefault = y + 'M' + (m + 1 > 9 ? m + 1 : '0' + (m + 1));
-		}
-	}
-
-	return { options: options, dateDefault: dateDefault };
-};
-
-var _fnForQuarterSelect = function _fnForQuarterSelect() {
-	var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-	var delimeter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Q';
-
-	var options = [],
-	    dNow = new Date(Date.now());
-
-	var dateDefault = void 0,
-	    y = dNow.getUTCFullYear(),
-	    m = dNow.getUTCMonth(),
-	    _c = Math.floor((m + 1) / 3),
-	    qNow = _c === 4 ? 4 : _c + 1;
-
-	qNow = qNow - 1;
-	var i = void 0;
-	for (i = 0; i < 4; i++) {
-		if (qNow < 1) {
-			y = y - 1;qNow = 4;
-		}
-
-		options.push({
-			caption: '' + y + delimeter + qNow,
-			value: '' + y + delimeter + qNow
-		});
-
-		if (i === mapDateDf) {
-			dateDefault = '' + y + delimeter + qNow;
-		}
-
-		qNow = qNow - 1;
-	}
-
-	return { options: options, dateDefault: dateDefault };
-};
-
-var _fnForYearSelect = function _fnForYearSelect() {
-	var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-	var options = [],
-	    dNow = new Date(Date.now());
-
-	var dateDefault = void 0,
-	    y = dNow.getUTCFullYear(),
-	    i = void 0;
-	for (i = 0; i < 8; i++) {
-		options.push({
-			caption: '' + y,
-			value: '' + y
-		});
-		if (i === mapDateDf) {
-			dateDefault = '' + y;
-		}
-		y = y - 1;
-	}
-
-	return { options: options, dateDefault: dateDefault };
-};
-
 var DateUtils = {
 	isValidDate: function isValidDate(str) {
 		var nForecastDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -191,20 +99,6 @@ var DateUtils = {
 	formatTo: function formatTo(millisUTC) {
 		var d = new Date(millisUTC);
 		return ("0" + d.getUTCDate()).slice(-2) + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + d.getUTCFullYear();
-	},
-	createEurostatSelect: function createEurostatSelect() {
-		var frequency = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'M';
-		var mapDateDf = arguments[1];
-
-		if (frequency === 'M') {
-			return _fnForMonthSelect(mapDateDf);
-		} else if (frequency === 'Q') {
-			return _fnForQuarterSelect(mapDateDf);
-		} else if (frequency === 'K') {
-			return _fnForQuarterSelect(mapDateDf, 'K');
-		} else if (frequency === 'Y') {
-			return _fnForYearSelect(mapDateDf);
-		}
 	},
 	dmyToUTC: function dmyToUTC(str) {
 		var _str = str || '',

@@ -1,0 +1,28 @@
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\constants\\MsgWatch.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\constants\\MsgWatch.js",
+ "sourceRoot": "",
+ "names": [
+  "MsgWatch",
+  "WATCH_SAVED",
+  "WATCH_PREV",
+  "notFoundItem",
+  "itemType",
+  "captionGroup",
+  "groupExisted",
+  "caption",
+  "listExisted",
+  "captionList",
+  "itemExisted",
+  "emptyName",
+  "item",
+  "notSelected",
+  "ALERT_DND_ITEM",
+  "alertCaption",
+  "alertDescr",
+  "ALERT_DND_LIST"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,WAAW;AACfC,eAAa,4BADE;AAEfC,cAAY,qDAFG;;AAIfC,gBAAc,sBAACC,QAAD,EAAWC,YAAX;AAAA,oBAAmCD,QAAnC,mBAAyDC,YAAzD;AAAA,GAJC;AAKfC,gBAAc,sBAACC,OAAD;AAAA,gCAAgCA,OAAhC;AAAA,GALC;AAMfC,eAAa,qBAACC,WAAD,EAAcJ,YAAd;AAAA,+BAAiDI,WAAjD,yBAAgFJ,YAAhF;AAAA,GANE;AAOfK,eAAa,qBAACH,OAAD,EAAUE,WAAV;AAAA,+BAA4CF,OAA5C,wBAAsEE,WAAtE;AAAA,GAPE;;AASfE,aAAW,mBAACC,IAAD;AAAA,WAAaA,IAAb;AAAA,GATI;AAUfC,eAAa,qBAACD,IAAD;AAAA,WAAaA,IAAb;AAAA,GAVE;;AAYfE,kBAAgB;AACbC,kBAAc,gBADD;AAEbC,gBAAY;AAFC,GAZD;AAgBfC,kBAAgB;AACbF,kBAAc,gBADD;AAEbC,gBAAY;AAFC;AAhBD,CAAjB;;kBAsBehB,Q"
+}

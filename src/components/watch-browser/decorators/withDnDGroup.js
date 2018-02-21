@@ -1,13 +1,13 @@
+import fnDnD from './fnDnD';
+
 const _crDragStartGroup = (DRAG) => {
   return function({ caption}, ev){
      this.dragStartWithDnDStyle(ev, [DRAG.GROUP])
-     ev.dataTransfer.effectAllowed="move"
-     ev.dataTransfer.dropEffect="move"
-     const _data = {
-       dragId : `${caption};`,
-       xType : DRAG.GROUP
-     }
-     ev.dataTransfer.setData("text", JSON.stringify(_data))
+     fnDnD.setTransferTo({
+       event: ev,
+       dragId: `${caption};`,
+       xType: DRAG.GROUP
+     })     
   };
 };
 
@@ -57,12 +57,13 @@ const _handlerDragLeaveGroup = function(ev){
 
 const withDnDGroup = (DRAG, WatchActions) => {
   return (target) => {
-    const _proto = target.prototype;
-    _proto._handlerDragStartGroup = _crDragStartGroup(DRAG)
-    _proto._handlerDropGroup = _crDropGroup(DRAG, WatchActions)
-    _proto._handlerDragEnterGroup = _crDragEnterGroup(DRAG)
-    _proto._handlerDragOverGroup = _handlerDragOverGroup
-    _proto._handlerDragLeaveGroup = _handlerDragLeaveGroup
+    Object.assign(target.prototype, {
+      _handlerDragStartGroup: _crDragStartGroup(DRAG),
+      _handlerDropGroup: _crDropGroup(DRAG, WatchActions),
+      _handlerDragEnterGroup: _crDragEnterGroup(DRAG),
+      _handlerDragOverGroup: _handlerDragOverGroup,
+      _handlerDragLeaveGroup: _handlerDragLeaveGroup
+   })
   };
 }
 

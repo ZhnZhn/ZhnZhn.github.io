@@ -7,17 +7,17 @@ import SeriaBuilder from './SeriaBuilder'
 
 const C = {
   CATEGORIES_X_AXIS: {
-    type: 'category',
+    type: "category",
     categories: [],
     opposite: false,
     labels: {
       y: 18
     },
     crosshair: undefined,
-    tickColor: 'gray',
+    tickColor: "gray",
     tickWidth: 3,
     tickLength: 7,
-    tickPosition: 'outside',
+    tickPosition: "outside",
     gridLineWidth: 0
   },
 

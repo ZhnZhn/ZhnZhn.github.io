@@ -1,15 +1,14 @@
 
+import fnDnD from './fnDnD';
+
 const _crDragStartItem = (DRAG) => {
   return function({groupCaption, listCaption, caption}, ev){
     this.dragStartWithDnDStyle(ev, [DRAG.LIST, DRAG.ITEM])
-    ev.dataTransfer.effectAllowed="move"
-    ev.dataTransfer.dropEffect="move"
-    //.setDragImage(img, 0, 0);
-    const _data = {
-      dragId : `${groupCaption};${listCaption};${caption}`,
-      xType : DRAG.ITEM
-    };
-    ev.dataTransfer.setData("text", JSON.stringify(_data))
+    fnDnD.setTransferTo({
+      event: ev,
+      dragId: `${groupCaption};${listCaption};${caption}`,
+      xType: DRAG.ITEM
+    })
   };
 };
 
@@ -52,12 +51,13 @@ const _handlerDragLeaveItem = function(ev){
 
 const withDnDItem = (DRAG, WatchActions) => {
   return (target) => {
-    const _proto = target.prototype;
-    _proto._handlerDragStartItem = _crDragStartItem(DRAG)
-    _proto._handlerDropItem = _crDropItem(DRAG, WatchActions)
-    _proto._handlerDragEnterItem = _crDragEnterItem(DRAG)
-    _proto._handlerDragOverItem = _handlerDragOverItem
-    _proto._handlerDragLeaveItem = _handlerDragLeaveItem
+    Object.assign(target.prototype, {
+      _handlerDragStartItem: _crDragStartItem(DRAG),
+      _handlerDropItem: _crDropItem(DRAG, WatchActions),
+      _handlerDragEnterItem: _crDragEnterItem(DRAG),
+      _handlerDragOverItem: _handlerDragOverItem,
+      _handlerDragLeaveItem: _handlerDragLeaveItem,
+    })
   };
 }
 

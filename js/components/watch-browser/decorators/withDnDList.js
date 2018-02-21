@@ -4,19 +4,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _fnDnD = require("./fnDnD");
+
+var _fnDnD2 = _interopRequireDefault(_fnDnD);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var _crDragStartList = function _crDragStartList(DRAG) {
   return function (_ref, ev) {
     var groupCaption = _ref.groupCaption,
         caption = _ref.caption;
 
     this.dragStartWithDnDStyle(ev, [DRAG.GROUP, DRAG.LIST]);
-    ev.dataTransfer.effectAllowed = "move";
-    ev.dataTransfer.dropEffect = "move";
-    var _data = {
+    _fnDnD2.default.setTransferTo({
+      event: ev,
       dragId: groupCaption + ";" + caption,
       xType: DRAG.LIST
-    };
-    ev.dataTransfer.setData("text", JSON.stringify(_data));
+    });
   };
 };
 
@@ -72,14 +76,15 @@ var _handlerDragLeaveList = function _handlerDragLeaveList(ev) {
 
 var withDnDList = function withDnDList(DRAG, WatchActions) {
   return function (target) {
-    var _proto = target.prototype;
-    _proto._handlerDragStartList = _crDragStartList(DRAG);
-    _proto._handlerDropList = _crDropList(DRAG, WatchActions);
-    _proto._handlerDragEnterList = _crDragEnterList(DRAG);
-    _proto._handlerDragOverList = _handlerDragOverList;
-    _proto._handlerDragLeaveList = _handlerDragLeaveList;
+    Object.assign(target.prototype, {
+      _handlerDragStartList: _crDragStartList(DRAG),
+      _handlerDropList: _crDropList(DRAG, WatchActions),
+      _handlerDragEnterList: _crDragEnterList(DRAG),
+      _handlerDragOverList: _handlerDragOverList,
+      _handlerDragLeaveList: _handlerDragLeaveList
+    });
   };
 };
 
 exports.default = withDnDList;
-//# sourceMappingURL=withDnDList.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDList.js.map

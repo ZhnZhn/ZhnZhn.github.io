@@ -14,7 +14,13 @@ import {
   fnGetConfigMfi
        } from './IndicatorSma';
 
-const BLANK = '';
+const EMPTY = '';
+const M = ['january', 'february',
+  'march', 'april', 'may',
+  'june', 'july', 'august',
+  'september', 'october', 'november',
+  'december'
+];
 
 const _compareArrByIndex = index => (arrA, arrB) => {
   if (arrA[index] < arrB[index]) return -1;
@@ -167,7 +173,7 @@ const AdapterFn = {
     const len = data.length
           , _pointNow = len>0 && data[len-1]
                ? data[len-1]
-               : [ BLANK, 0 ]
+               : [ EMPTY, 0 ]
           , _nowValue = _getValue(_pointNow)
           , bNowValue = Big(_nowValue)
           , _pointPrev = len>1 && data[len-2]
@@ -178,11 +184,11 @@ const AdapterFn = {
           , _nowDate = _getDate(_pointNow)
           , date = len>0
                ? DateUtils.formatTo(_nowDate)
-               : BLANK
+               : EMPTY
           , _prevDate = _getDate(_pointPrev)
           , dateTo = len>1 && _prevDate
                ? DateUtils.formatTo(_prevDate)
-               : BLANK;
+               : EMPTY;
 
       return  {
         ...AdapterFn.crValueMoving({ bNowValue, bPrevValue }),
@@ -203,7 +209,19 @@ const AdapterFn = {
     zhFnAddSeriesSma: fnAddSeriesSma,
     zhFnRemoveSeries: fnRemoveSeries
   }),
-  fnGetConfigMfi: fnGetConfigMfi
+  fnGetConfigMfi: fnGetConfigMfi,
+
+  toUpperCaseFirst: (str) => {
+    return (typeof str === 'string') && str.length > 0
+         ? str[0].toUpperCase() + str.substr(1)
+         : EMPTY;
+  },
+
+  monthIndex: (str) => {
+    return M.indexOf(
+      String(str).toLowerCase()
+    );
+  }
 
 }
 

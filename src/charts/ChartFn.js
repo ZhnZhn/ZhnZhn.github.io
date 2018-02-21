@@ -2,7 +2,7 @@ import Highcharts from 'highcharts';
 
 import mathFn from '../math/mathFn'
 
-import ArrayUtil from '../utils/ArrayUtil';
+import fnArr from '../utils/fnArr';
 import DateUtils from '../utils/DateUtils';
 import safeGet from '../utils/safeGet';
 
@@ -12,7 +12,7 @@ import { Direction } from '../constants/Type';
 
 import WithAreaChartFn from './WithAreaChartFn'
 
-const _fnFindIndex = ArrayUtil.findIndexByProp('x')
+const _fnFindIndex = fnArr.findIndexByProp('x');
 
 const C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
@@ -322,7 +322,7 @@ const ChartFn = {
      )
   },
 
-  toNumberFormat(value){    
+  toNumberFormat(value){
     if (typeof value === 'number' && value < 0.01) {
       return ''+value;
     }

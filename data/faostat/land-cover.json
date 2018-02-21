@@ -1,0 +1,20 @@
+{
+  "dfColumns": [
+    { "caption": "Share in Agriculture area", "value": "7028" },
+    { "caption": "Share in Land area", "value": "7209" },
+    { "caption": "Share in Forest area", "value": "7210" }
+  ],
+  "items":[
+    { "caption": "Arable land", "value": "6621" },
+    { "caption": "Permanent crops", "value": "6650" },
+    { "caption": "Arable land and Permanent crops", "value": "6620" },
+    { "caption": "Permanent meadows and pastures", "value": "6655" },
+    { "caption": "Agriculture area actually irrigated", "value": "6611" },
+    { "caption": "Total area equipped for irrigation", "value": "6690" },
+    { "caption": "Agriculture area", "value": "6610" },
+    { "caption": "Forest", "value": "6661" },
+    { "caption": "Primary forest", "value": "6714" },
+    { "caption": "Planted forest", "value": "6716" },
+    { "caption": "Other naturally regenerated forest", "value": "6717" }
+  ]
+}

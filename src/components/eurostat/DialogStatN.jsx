@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import DateUtils from '../../utils/DateUtils';
+import crDateConfig from './crDateConfig'
 
 import D from '../dialogs/DialogCell'
 import Decor from '../dialogs/decorators/Decorators';
@@ -9,10 +9,8 @@ import SpinnerLoading from '../zhn/SpinnerLoading'
 import RouterOptions from './RouterOptions'
 import loadDims from './loadDims'
 
-const  DATE_PLACEHOLDER = 'Before Select Metric'
-     , MAP_FREQUENCY_DF = 'M'
-     , MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";
-
+const MAP_FREQUENCY_DF = 'M'
+    , MSG_DIMS_NOT_LOADED = "Dims for request haven't been loaded.\nClose, open dialog for trying load again.";
 
 const S = {
   SPINNER_LOADING : {
@@ -49,8 +47,7 @@ class DialogStatN extends Component {
       isLoading: true,
       isLoadFailed: false,
       isShowDate: false,
-      dateDefault: DATE_PLACEHOLDER,
-      dateOptions: [],
+      ...crDateConfig('EMPTY'),
       validationMessages: []
     }
   }
@@ -113,7 +110,6 @@ class DialogStatN extends Component {
   _updateForDate = () => {
     this.date = null;
     const frequency = (this._items[1])
-             //(this.two)
              ? (this.props.mapFrequency)
                   ? this.props.mapFrequency
                   : (this.two.mapFrequency)
@@ -121,15 +117,13 @@ class DialogStatN extends Component {
                        : MAP_FREQUENCY_DF
              : null
          , { mapDateDf } = this.props
-         , config = (frequency)
-             ? DateUtils.createEurostatSelect(frequency, mapDateDf)
-             : DateUtils.createEurostatSelect('Y', mapDateDf)
-             //: { dateDefault : DATE_PLACEHOLDER , options : [] };
+         , dateConfig = (frequency)
+              ? crDateConfig(frequency, mapDateDf)
+              : crDateConfig('Y', mapDateDf)
 
     this.setState({
-       isShowDate : true,
-       dateDefault : config.dateDefault,
-       dateOptions : config.options
+       isShowDate: true,
+       ...dateConfig
     });
   }
 

@@ -8,11 +8,16 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _ArrayUtil = require('../ArrayUtil');
+var _fnArr = require('../fnArr');
 
-var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
+var _fnArr2 = _interopRequireDefault(_fnArr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var findIndexByProp = _fnArr2.default.findIndexByProp,
+    isSameByProp = _fnArr2.default.isSameByProp,
+    isStrInArr = _fnArr2.default.isStrInArr;
+
 
 var propName = 'caption',
     propValue1 = 'caption1',
@@ -20,7 +25,7 @@ var propName = 'caption',
     arr = [(0, _defineProperty3.default)({}, propName, propValue1), (0, _defineProperty3.default)({}, propName, propValue2)];
 
 describe('findIndexByProp', function () {
-   var fn = _ArrayUtil2.default.findIndexByProp(propName);
+   var fn = findIndexByProp(propName);
 
    test('should return function', function () {
       expect(typeof fn === 'undefined' ? 'undefined' : (0, _typeof3.default)(fn)).toBe('function');
@@ -32,7 +37,7 @@ describe('findIndexByProp', function () {
    });
 
    test('should return -1 in edge cases', function () {
-      var fnEdgeCase = _ArrayUtil2.default.findIndexByProp('notexist');
+      var fnEdgeCase = findIndexByProp('notexist');
       expect(fn(arr, 'notexist')).toBe(-1);
       expect(fnEdgeCase(arr, propValue1)).toBe(-1);
       expect(fnEdgeCase({}, propValue1)).toBe(-1);
@@ -40,7 +45,7 @@ describe('findIndexByProp', function () {
 });
 
 describe('isSameByProp', function () {
-   var fn = _ArrayUtil2.default.isSameByProp(propName);
+   var fn = isSameByProp(propName);
 
    test('should return function', function () {
       expect(typeof fn === 'undefined' ? 'undefined' : (0, _typeof3.default)(fn)).toBe('function');
@@ -53,7 +58,7 @@ describe('isSameByProp', function () {
    });
 
    test('should return false in edge cases', function () {
-      var fnEdgeCase = _ArrayUtil2.default.isSameByProp('notexist');
+      var fnEdgeCase = isSameByProp('notexist');
       expect(fn(arr, 'notexist')).toBe(false);
       expect(fnEdgeCase(arr, propValue1)).toBe(false);
       expect(fnEdgeCase({}, propValue1)).toBe(false);
@@ -62,8 +67,8 @@ describe('isSameByProp', function () {
 
 describe('isStrInArr', function () {
    var arr = ['test1', 'test2', 'test3'],
-       fnTrue = _ArrayUtil2.default.isStrInArr('test1'),
-       fnFalse = _ArrayUtil2.default.isStrInArr('test4');
+       fnTrue = isStrInArr('test1'),
+       fnFalse = isStrInArr('test4');
 
    test('should return function', function () {
       expect(typeof fnTrue === 'undefined' ? 'undefined' : (0, _typeof3.default)(fnTrue)).toBe('function');
@@ -78,4 +83,4 @@ describe('isStrInArr', function () {
       expect(fnFalse('')).toBe(false);
    });
 });
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\__tests__\ArrayUtil.test.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\__tests__\fnArr.test.js.map

@@ -8,6 +8,12 @@
         { "id": "FAO_LIVE_ANIMAL" }
       ]
     },{
+      "caption": "Prices", "isInitClose": true,
+      "items": [
+        { "id": "FAO_CPI" },
+        { "id": "FAO_PRODUCER_PRICES" }
+      ]
+    },{
       "caption": "Inputs",
       "items": [
         { "id": "FAO_PESTICIDES" },
@@ -16,10 +22,17 @@
         { "id": "FAO_FERTILIZER_PER" }
       ]
     },{
-      "caption": "Investments",
+      "caption": "Investments", "isInitClose": true,
       "items": [
         { "id": "FAO_GOV_EXP" },
         { "id": "FAO_CREDIT_TO_AGRI" }
+      ]
+    },{
+      "caption": "Agri-Enviroment Indicators",
+      "items": [
+        { "id": "FAO_LAND_COVER" },
+        { "id": "FAO_TEMP_CHANGE" },
+        { "id": "FAO_ST_DEVIATION" }
       ]
     }
   ],
@@ -86,6 +99,43 @@
         }
       }
     },
+
+    "FAO_PRODUCER_PRICES": {
+      "type": "FAO_PRODUCER_PRICES",
+      "menuTitle": "Producer Prices (LCU/tonne)",
+      "dialogCaption": "Producer Prices",
+      "chartContainerCaption": "FAOSTAT: Producer Prices",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/crops.json",
+        "noDate": true,
+        "dfProps": {
+          "dfDomain": "PM",
+          "dfElement": "5530",
+          "dfTitle": "Producer Prices"
+        }
+      }
+    },
+    "FAO_CPI": {
+      "type": "FAO_CPI",
+      "menuTitle": "Consume Price Indices",
+      "dialogCaption": "Consume Price Indices",
+      "chartContainerCaption": "FAOSTAT: Consume Price Indeces",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/cpi.json",
+        "noDate": true,
+        "dfProps": {
+          "dfDomain": "CP",
+          "dfElement": "CP"
+        }
+      }
+    },
+
+
+
 
 
     "FAO_PESTICIDES": {
@@ -176,6 +226,59 @@
         "threeCaption": "Element",
         "dfProps": {
           "dfDomain": "IC"
+        }
+      }
+    },
+
+    "FAO_LAND_COVER": {
+      "type": "FAO_LAND_COVER",
+      "menuTitle": "Land Cover",
+      "dialogCaption": "Land Cover",
+      "chartContainerCaption": "FAOSTAT: Land Cover",
+      "dialogType": "DialogType5",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/land-cover.json",
+        "threeCaption": "Share In",
+        "noData": true,
+        "dfProps": {
+          "dfDomain": "EL"
+        }
+      }
+    },
+    "FAO_TEMP_CHANGE": {
+      "type": "FAO_TEMP_CHANGE",
+      "menuTitle": "Temp. Change (base 1951-80)",
+      "dialogCaption": "Temperature Change",
+      "chartContainerCaption": "FAOSTAT: Temperature Change",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/period.json",
+        "noDate": true,
+        "dfProps": {
+          "dfDomain": "ET",
+          "dfElement": "7271",
+          "dfItemName": "month",
+          "dfTitle": "Temperature Change"
+        }
+      }
+    },
+    "FAO_ST_DEVIATION": {
+      "type": "FAO_ST_DEVIATION",
+      "menuTitle": "Standard Deviation (Temp Ch.)",
+      "dialogCaption": "Standard Deviation",
+      "chartContainerCaption": "FAOSTAT: Standard Deviation of Temp. Change",
+      "dialogType": "DialogType4",
+      "addProps": "FAO_PRODUCTION",
+      "dialogProps": {
+        "twoURI": "./data/faostat/period.json",
+        "noDate": true,
+        "dfProps": {
+          "dfDomain": "ET",
+          "dfElement": "6078",
+          "dfItemName": "month",
+          "dfTitle": "Standard Deviation (Temp Ch.)"
         }
       }
     }

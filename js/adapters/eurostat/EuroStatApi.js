@@ -4,11 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ArrayUtil = require("../../utils/ArrayUtil");
+var _fnArr = require("../../utils/fnArr");
 
-var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
+var _fnArr2 = _interopRequireDefault(_fnArr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var isStrInArr = _fnArr2.default.isStrInArr;
+
 
 var rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/",
     queryTail = "&precision=1&sinceTimePeriod=1996M01";
@@ -37,7 +40,7 @@ var EuroStatApi = {
         seriaType = option.seriaType;
 
 
-    if (!_ArrayUtil2.default.isStrInArr(seriaType)(_categoryTypes)) {
+    if (!isStrInArr(seriaType)(_categoryTypes)) {
       var _param = "geo=" + geo,
           _group = void 0;
       if (group) {
@@ -79,4 +82,4 @@ var EuroStatApi = {
 };
 
 exports.default = EuroStatApi;
-//# sourceMappingURL=EuroStatApi.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatApi.js.map

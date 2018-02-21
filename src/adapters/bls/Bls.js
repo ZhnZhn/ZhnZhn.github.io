@@ -1,7 +1,7 @@
 import adapter from './BlsAdapter'
 import api from './BlsApi'
 
-const Bls = {
+const Bls = {  
   adapter, api
 };
 

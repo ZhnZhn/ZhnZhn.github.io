@@ -4,79 +4,91 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Msg = require('../../constants/Msg');
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _Msg2 = _interopRequireDefault(_Msg);
+var _extends3 = _interopRequireDefault(_extends2);
 
-var _ImArrayUtil = require('../../utils/ImArrayUtil');
+var _MsgWatch = require('../../constants/MsgWatch');
 
-var _ImArrayUtil2 = _interopRequireDefault(_ImArrayUtil);
+var _MsgWatch2 = _interopRequireDefault(_MsgWatch);
 
-var _ObjUtil = require('../../utils/ObjUtil');
+var _fnUtil = require('../../utils/fnUtil');
 
-var _ObjUtil2 = _interopRequireDefault(_ObjUtil);
-
-var _ArrayUtil = require('../../utils/ArrayUtil');
-
-var _ArrayUtil2 = _interopRequireDefault(_ArrayUtil);
+var _fnUtil2 = _interopRequireDefault(_fnUtil);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var notFoundItem = _MsgWatch2.default.notFoundItem,
+    groupExisted = _MsgWatch2.default.groupExisted,
+    listExisted = _MsgWatch2.default.listExisted,
+    itemExisted = _MsgWatch2.default.itemExisted,
+    ALERT_DND_LIST = _MsgWatch2.default.ALERT_DND_LIST,
+    ALERT_DND_ITEM = _MsgWatch2.default.ALERT_DND_ITEM;
+
 
 var CAPTION = 'caption',
     GROUPS = 'groups',
     LISTS = 'lists';
 
 var LogicFn = {
-  fResultNotFound: function fResultNotFound(itemType, name) {
-    return { isDone: false, message: _Msg2.default.NOT_FOUND_ITEM(itemType, name) };
-  },
-  fResultGroupExisted: function fResultGroupExisted(caption) {
-    return { isDone: false, message: _Msg2.default.GROUP_EXISTED(caption) };
-  },
-  fResultListExisted: function fResultListExisted(captionList, captionGroup) {
-    return { isDone: false, message: _Msg2.default.LIST_EXISTED(captionList, captionGroup) };
-  },
-  fResultItemExisted: function fResultItemExisted(caption, captionList) {
-    return { isDone: false, message: _Msg2.default.ITEM_EXISTED(caption, captionList) };
-  },
-
-
-  /* for DragDrop */
-  fDragDropItemExisted: function fDragDropItemExisted(dropId, dragId) {
+  crMsgNotFound: function crMsgNotFound(itemType, name) {
     return {
       isDone: false,
-      alertItemId: dropId + ':' + dragId,
-      alertCaption: _Msg2.default.Alert.DRAG_DROP_ITEM.caption,
-      alertDescr: _Msg2.default.Alert.DRAG_DROP_ITEM.descr
+      message: notFoundItem(itemType, name)
     };
   },
-  fDragDropListExisted: function fDragDropListExisted(dropGroupCaption, dragListCaption) {
+  crMsgGroupExisted: function crMsgGroupExisted(caption) {
     return {
       isDone: false,
-      alertItemId: dropGroupCaption + ':' + dragListCaption,
-      alertCaption: _Msg2.default.Alert.DRAG_DROP_LIST.caption,
-      alertDescr: _Msg2.default.Alert.DRAG_DROP_LIST.descr
+      message: groupExisted(caption)
+    };
+  },
+  crMsgListExisted: function crMsgListExisted(captionList, captionGroup) {
+    return {
+      isDone: false,
+      message: listExisted(captionList, captionGroup)
+    };
+  },
+  crMsgItemExisted: function crMsgItemExisted(caption, captionList) {
+    return {
+      isDone: false,
+      message: itemExisted(caption, captionList)
     };
   },
 
-  /* for DragDrop */
-
-  filter: _ImArrayUtil2.default.filterByPropFn(CAPTION),
-  getArrayWithObj: _ImArrayUtil2.default.push,
-
-  getArrayWithRename: _ImArrayUtil2.default.editByPropFn(CAPTION),
 
   /* for DragDrop */
-  insertItemInArray: _ImArrayUtil2.default.insertItem,
+  crAlertItemExisted: function crAlertItemExisted(dropId, dragId) {
+    return (0, _extends3.default)({
+      isDone: false,
+      alertItemId: dropId + ':' + dragId
+    }, ALERT_DND_ITEM);
+  },
+  crAlertListExisted: function crAlertListExisted(dropGroupCaption, dragListCaption) {
+    return (0, _extends3.default)({
+      isDone: false,
+      alertItemId: dropGroupCaption + ':' + dragListCaption
+    }, ALERT_DND_LIST);
+  },
+
   /* for DragDrop */
 
-  findGroup: _ObjUtil2.default.findInPropArrayByProp(GROUPS, CAPTION),
-  findList: _ObjUtil2.default.findInPropArrayByProp(LISTS, CAPTION),
+  filter: _fnUtil2.default.imArr.filterByPropFn(CAPTION),
+  getArrayWithObj: _fnUtil2.default.imArr.push,
 
-  findIndex: _ArrayUtil2.default.findIndexByProp('caption'),
-  checkIsInArraySameCaption: _ArrayUtil2.default.isSameByProp(CAPTION)
+  getArrayWithRename: _fnUtil2.default.imArr.editByPropFn(CAPTION),
+
+  /* for DragDrop */
+  insertItemInArray: _fnUtil2.default.imArr.insertItem,
+  /* for DragDrop */
+
+  findGroup: _fnUtil2.default.obj.findInPropArrayByProp(GROUPS, CAPTION),
+  findList: _fnUtil2.default.obj.findInPropArrayByProp(LISTS, CAPTION),
+
+  findIndex: _fnUtil2.default.arr.findIndexByProp('caption'),
+  isInArraySameCaption: _fnUtil2.default.arr.isSameByProp(CAPTION)
 
 };
 
 exports.default = LogicFn;
-//# sourceMappingURL=LogicFn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\LogicFn.js.map

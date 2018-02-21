@@ -1,8 +1,15 @@
-import Msg from '../../constants/Msg';
+import MsgWatch from '../../constants/MsgWatch';
 
-import ImArrayUtil from '../../utils/ImArrayUtil';
-import ObjUtil from '../../utils/ObjUtil';
-import ArrayUtil from '../../utils/ArrayUtil';
+import ut from '../../utils/fnUtil';
+
+const  {
+  notFoundItem,
+  groupExisted,
+  listExisted,
+  itemExisted,
+  ALERT_DND_LIST,
+  ALERT_DND_ITEM
+} = MsgWatch;
 
 const CAPTION = 'caption'
     , GROUPS = 'groups'
@@ -10,52 +17,62 @@ const CAPTION = 'caption'
 
 const LogicFn = {
 
-  fResultNotFound(itemType, name){
-    return {isDone : false, message : Msg.NOT_FOUND_ITEM(itemType, name)}
+  crMsgNotFound(itemType, name){
+    return {
+      isDone: false,
+      message: notFoundItem(itemType, name)
+    };
   },
-  fResultGroupExisted(caption){
-    return {isDone : false, message : Msg.GROUP_EXISTED(caption)}
+  crMsgGroupExisted(caption){
+    return {
+      isDone: false,
+      message: groupExisted(caption)
+    };
   },
-  fResultListExisted(captionList, captionGroup){
-    return {isDone : false, message : Msg.LIST_EXISTED(captionList, captionGroup)}
+  crMsgListExisted(captionList, captionGroup){
+    return {
+      isDone: false,
+      message: listExisted(captionList, captionGroup)
+    };
   },
-  fResultItemExisted(caption, captionList){
-    return {isDone : false, message : Msg.ITEM_EXISTED(caption, captionList)}
+  crMsgItemExisted(caption, captionList){
+    return {
+      isDone: false,
+      message: itemExisted(caption, captionList)
+    };
   },
 
   /* for DragDrop */
-  fDragDropItemExisted(dropId, dragId){
+  crAlertItemExisted(dropId, dragId){
     return {
       isDone : false,
       alertItemId : `${dropId}:${dragId}`,
-      alertCaption : Msg.Alert.DRAG_DROP_ITEM.caption,
-      alertDescr : Msg.Alert.DRAG_DROP_ITEM.descr
+      ...ALERT_DND_ITEM
    };
  },
- fDragDropListExisted(dropGroupCaption, dragListCaption){
+ crAlertListExisted(dropGroupCaption, dragListCaption){
    return {
       isDone : false,
       alertItemId : `${dropGroupCaption}:${dragListCaption}`,
-      alertCaption : Msg.Alert.DRAG_DROP_LIST.caption,
-      alertDescr : Msg.Alert.DRAG_DROP_LIST.descr
+      ...ALERT_DND_LIST
    }
  },
  /* for DragDrop */
 
-  filter : ImArrayUtil.filterByPropFn(CAPTION),
-  getArrayWithObj : ImArrayUtil.push,
+  filter : ut.imArr.filterByPropFn(CAPTION),
+  getArrayWithObj : ut.imArr.push,
 
-  getArrayWithRename: ImArrayUtil.editByPropFn(CAPTION),
+  getArrayWithRename: ut.imArr.editByPropFn(CAPTION),
 
   /* for DragDrop */
-  insertItemInArray : ImArrayUtil.insertItem,
+  insertItemInArray : ut.imArr.insertItem,
   /* for DragDrop */
 
-  findGroup : ObjUtil.findInPropArrayByProp(GROUPS, CAPTION),
-  findList : ObjUtil.findInPropArrayByProp(LISTS, CAPTION),
+  findGroup : ut.obj.findInPropArrayByProp(GROUPS, CAPTION),
+  findList : ut.obj.findInPropArrayByProp(LISTS, CAPTION),
 
-  findIndex : ArrayUtil.findIndexByProp('caption'),
-  checkIsInArraySameCaption : ArrayUtil.isSameByProp(CAPTION)
+  findIndex : ut.arr.findIndexByProp('caption'),
+  isInArraySameCaption : ut.arr.isSameByProp(CAPTION)
 
 };
 

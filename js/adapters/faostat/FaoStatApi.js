@@ -17,7 +17,6 @@ var _crMemYear = function _crMemYear() {
     arr.push(i);
   }
   return C.MEM_YEAR = arr.join(',');
-  //return C.MEM_YEAR;
 };
 var _getMemYear = function _getMemYear() {
   return C.MEM_YEAR || _crMemYear();
@@ -32,10 +31,12 @@ var FaoStatApi = {
         dfElement = option.dfElement,
         _option$dfDomain = option.dfDomain,
         dfDomain = _option$dfDomain === undefined ? 'QC' : _option$dfDomain,
+        _option$dfItemName = option.dfItemName,
+        dfItemName = _option$dfItemName === undefined ? 'item' : _option$dfItemName,
         _element = three || dfElement,
         _year = _getMemYear();
 
-    return '' + proxy + C.BASE + '/' + dfDomain + '?element=' + _element + '&area=' + one + '&item=' + two + '&year=' + _year + C.TAIL;
+    return '' + proxy + C.BASE + '/' + dfDomain + '?element=' + _element + '&area=' + one + '&' + dfItemName + '=' + two + '&year=' + _year + '&' + C.TAIL;
   },
   checkResponse: function checkResponse(json) {
     return json && Array.isArray(json.data);
@@ -49,7 +50,7 @@ var FaoStatApi = {
       one: qA,
       two: qI,
       three: qE,
-      title: 'More about data on tab Info in Description'
+      title: ''
     });
   }
 };

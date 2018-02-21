@@ -10,22 +10,32 @@ var _LogicFn2 = _interopRequireDefault(_LogicFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var crMsgNotFound = _LogicFn2.default.crMsgNotFound,
+    crMsgListExisted = _LogicFn2.default.crMsgListExisted,
+    findGroup = _LogicFn2.default.findGroup,
+    isInArraySameCaption = _LogicFn2.default.isInArraySameCaption,
+    getArrayWithObj = _LogicFn2.default.getArrayWithObj,
+    findIndex = _LogicFn2.default.findIndex,
+    getArrayWithRename = _LogicFn2.default.getArrayWithRename,
+    filter = _LogicFn2.default.filter;
+
+
 var WithLogicList = {
   createList: function createList(watchList, _ref) {
     var captionGroup = _ref.captionGroup,
         captionList = _ref.captionList;
 
-    var groupTo = _LogicFn2.default.findGroup(watchList, captionGroup);
+    var groupTo = findGroup(watchList, captionGroup);
 
     if (!groupTo) {
-      return _LogicFn2.default.fResultNotFound('group', captionGroup);
+      return crMsgNotFound('group', captionGroup);
     }
     var lists = groupTo.lists;
-    if (_LogicFn2.default.checkIsInArraySameCaption(lists, captionList)) {
-      return _LogicFn2.default.fResultListExisted(captionList, captionGroup);
+    if (isInArraySameCaption(lists, captionList)) {
+      return crMsgListExisted(captionList, captionGroup);
     }
 
-    groupTo.lists = _LogicFn2.default.getArrayWithObj(lists, { caption: captionList });
+    groupTo.lists = getArrayWithObj(lists, { caption: captionList });
     return { isDone: true };
   },
   renameList: function renameList(watchList, _ref2) {
@@ -33,37 +43,37 @@ var WithLogicList = {
         captionListFrom = _ref2.captionListFrom,
         captionListTo = _ref2.captionListTo;
 
-    var groupIn = _LogicFn2.default.findGroup(watchList, captionGroup);
+    var groupIn = findGroup(watchList, captionGroup);
 
     if (!groupIn) {
-      return _LogicFn2.default.fResultNotFound('group', captionGroup);
+      return crMsgNotFound('group', captionGroup);
     }
     var lists = groupIn.lists;
-    var listIndex = _LogicFn2.default.findIndex(lists, captionListFrom);
+    var listIndex = findIndex(lists, captionListFrom);
     if (listIndex === -1) {
-      return _LogicFn2.default.fResultNotFound('list', captionListFrom);
+      return crMsgNotFound('list', captionListFrom);
     }
-    if (_LogicFn2.default.checkIsInArraySameCaption(lists, captionListTo)) {
-      return _LogicFn2.default.fResultListExisted(captionListTo, captionGroup);
+    if (isInArraySameCaption(lists, captionListTo)) {
+      return crMsgListExisted(captionListTo, captionGroup);
     }
 
-    groupIn.lists = _LogicFn2.default.getArrayWithRename(lists, listIndex, captionListTo);
+    groupIn.lists = getArrayWithRename(lists, listIndex, captionListTo);
     return { isDone: true };
   },
   deleteList: function deleteList(watchList, _ref3) {
     var captionGroup = _ref3.captionGroup,
         captionList = _ref3.captionList;
 
-    var groupFrom = _LogicFn2.default.findGroup(watchList, captionGroup);
+    var groupFrom = findGroup(watchList, captionGroup);
 
     if (!groupFrom) {
-      return _LogicFn2.default.fResultNotFound('group', captionGroup);
+      return crMsgNotFound('group', captionGroup);
     }
 
-    groupFrom.lists = _LogicFn2.default.filter(groupFrom.lists, captionList);
+    groupFrom.lists = filter(groupFrom.lists, captionList);
     return { isDone: true };
   }
 };
 
 exports.default = WithLogicList;
-//# sourceMappingURL=WithLogicList.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\watch-list\WithLogicList.js.map

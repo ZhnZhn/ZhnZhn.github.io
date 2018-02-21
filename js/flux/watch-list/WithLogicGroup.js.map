@@ -1,1 +1,29 @@
-{"version":3,"sources":["../../../src/flux/watch-list/WithLogicGroup.js"],"names":["WithLogicGroup","addGroup","watchList","caption","groups","checkIsInArraySameCaption","fResultGroupExisted","_captionObj","getArrayWithObj","isDone","renameGroup","captionFrom","captionTo","groupIndex","findIndex","fResultNotFound","getArrayWithRename","deleteGroup","filter"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,iBAAiB;AAErBC,UAFqB,oBAEZC,SAFY,QAEW;AAAA,QAAVC,OAAU,QAAVA,OAAU;;AAC9B,QAAMC,SAASF,UAAUE,MAAzB;;AAEA,QAAK,kBAAQC,yBAAR,CAAkCD,MAAlC,EAA0CD,OAA1C,CAAL,EAAwD;AACtD,aAAO,kBAAQG,mBAAR,CAA4BH,OAA5B,CAAP;AACD;;AAED,QAAMI,cAAeJ,OAAD,GACT,EAAEA,gBAAF,EADS,GAET,EAAEA,SAAS,SAAX,EAFX;;AAIAD,cAAUE,MAAV,GAAmB,kBAAQI,eAAR,CAAwBJ,MAAxB,EAAgCG,WAAhC,CAAnB;AACA,WAAO,EAACE,QAAS,IAAV,EAAP;AACD,GAfoB;AAiBrBC,aAjBqB,uBAiBTR,SAjBS,SAiB2B;AAAA,QAAxBS,WAAwB,SAAxBA,WAAwB;AAAA,QAAXC,SAAW,SAAXA,SAAW;;AAC9C,QAAMR,SAASF,UAAUE,MAAzB;AAAA,QACMS,aAAa,kBAAQC,SAAR,CAAkBV,MAAlB,EAA0BO,WAA1B,CADnB;;AAGA,QAAIE,eAAe,CAAC,CAApB,EAAsB;AACpB,aAAO,kBAAQE,eAAR,CAAwB,OAAxB,EAAiCJ,WAAjC,CAAP;AACD;AACD,QAAK,kBAAQN,yBAAR,CAAkCD,MAAlC,EAA0CQ,SAA1C,CAAL,EAA2D;AACzD,aAAO,kBAAQN,mBAAR,CAA4BM,SAA5B,CAAP;AACD;;AAEDV,cAAUE,MAAV,GAAmB,kBAAQY,kBAAR,CAA2BZ,MAA3B,EAAmCS,UAAnC,EAA+CD,SAA/C,CAAnB;AACA,WAAO,EAACH,QAAS,IAAV,EAAP;AACD,GA9BoB;AAgCrBQ,aAhCqB,uBAgCTf,SAhCS,SAgCY;AAAA,QAATC,OAAS,SAATA,OAAS;;AAC/BD,cAAUE,MAAV,GAAmB,kBAAQc,MAAR,CAAehB,UAAUE,MAAzB,EAAiCD,OAAjC,CAAnB;AACA,WAAO,EAACM,QAAS,IAAV,EAAP;AACD;AAnCoB,CAAvB;;kBAuCeT,c","file":"WithLogicGroup.js","sourcesContent":["import LogicFn from './LogicFn'\r\n\r\nconst WithLogicGroup = {\r\n\r\n  addGroup(watchList, { caption }){\r\n    const groups = watchList.groups;\r\n\r\n    if ( LogicFn.checkIsInArraySameCaption(groups, caption)){\r\n      return LogicFn.fResultGroupExisted(caption);\r\n    }\r\n\r\n    const _captionObj = (caption)\r\n             ? { caption }\r\n             : { caption: \"Default\" };\r\n\r\n    watchList.groups = LogicFn.getArrayWithObj(groups, _captionObj);\r\n    return {isDone : true};\r\n  },\r\n\r\n  renameGroup(watchList, {captionFrom, captionTo}){\r\n    const groups = watchList.groups\r\n        , groupIndex = LogicFn.findIndex(groups, captionFrom);\r\n\r\n    if (groupIndex === -1){\r\n      return LogicFn.fResultNotFound('group', captionFrom);\r\n    }\r\n    if ( LogicFn.checkIsInArraySameCaption(groups, captionTo) ){\r\n      return LogicFn.fResultGroupExisted(captionTo);\r\n    }\r\n\r\n    watchList.groups = LogicFn.getArrayWithRename(groups, groupIndex, captionTo)\r\n    return {isDone : true}\r\n  },\r\n\r\n  deleteGroup(watchList, {caption}){\r\n    watchList.groups = LogicFn.filter(watchList.groups, caption);\r\n    return {isDone : true}\r\n  }\r\n\r\n};\r\n\r\nexport default WithLogicGroup\r\n"]}
+)]}
+{
+ "version": 3,
+ "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\watch-list\\WithLogicGroup.js",
+ "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\watch-list\\WithLogicGroup.js",
+ "sourceRoot": "",
+ "names": [
+  "crMsgGroupExisted",
+  "crMsgNotFound",
+  "isInArraySameCaption",
+  "getArrayWithObj",
+  "findIndex",
+  "getArrayWithRename",
+  "filter",
+  "WithLogicGroup",
+  "addGroup",
+  "watchList",
+  "caption",
+  "groups",
+  "_captionObj",
+  "isDone",
+  "renameGroup",
+  "captionFrom",
+  "captionTo",
+  "groupIndex",
+  "deleteGroup"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;IAGEA,iB,qBAAAA,iB;IACAC,a,qBAAAA,a;IAEAC,oB,qBAAAA,oB;IACAC,e,qBAAAA,e;IACAC,S,qBAAAA,S;IACAC,kB,qBAAAA,kB;IACAC,M,qBAAAA,M;;;AAGF,IAAMC,iBAAiB;AAErBC,UAFqB,oBAEZC,SAFY,QAEW;AAAA,QAAVC,OAAU,QAAVA,OAAU;;AAC9B,QAAMC,SAASF,UAAUE,MAAzB;;AAEA,QAAKT,qBAAqBS,MAArB,EAA6BD,OAA7B,CAAL,EAA2C;AACzC,aAAOV,kBAAkBU,OAAlB,CAAP;AACD;;AAED,QAAME,cAAeF,OAAD,GACT,EAAEA,gBAAF,EADS,GAET,EAAEA,SAAS,SAAX,EAFX;;AAIAD,cAAUE,MAAV,GAAmBR,gBAAgBQ,MAAhB,EAAwBC,WAAxB,CAAnB;AACA,WAAO,EAAEC,QAAQ,IAAV,EAAP;AACD,GAfoB;AAiBrBC,aAjBqB,uBAiBTL,SAjBS,SAiB2B;AAAA,QAAxBM,WAAwB,SAAxBA,WAAwB;AAAA,QAAXC,SAAW,SAAXA,SAAW;;AAC9C,QAAML,SAASF,UAAUE,MAAzB;AAAA,QACMM,aAAab,UAAUO,MAAV,EAAkBI,WAAlB,CADnB;;AAGA,QAAIE,eAAe,CAAC,CAApB,EAAsB;AACpB,aAAOhB,cAAc,OAAd,EAAuBc,WAAvB,CAAP;AACD;AACD,QAAKb,qBAAqBS,MAArB,EAA6BK,SAA7B,CAAL,EAA8C;AAC5C,aAAOhB,kBAAkBgB,SAAlB,CAAP;AACD;;AAEDP,cAAUE,MAAV,GAAmBN,mBAAmBM,MAAnB,EAA2BM,UAA3B,EAAuCD,SAAvC,CAAnB;AACA,WAAO,EAAEH,QAAQ,IAAV,EAAP;AACD,GA9BoB;AAgCrBK,aAhCqB,uBAgCTT,SAhCS,SAgCY;AAAA,QAATC,OAAS,SAATA,OAAS;;AAC/BD,cAAUE,MAAV,GAAmBL,OAAOG,UAAUE,MAAjB,EAAyBD,OAAzB,CAAnB;AACA,WAAO,EAAEG,QAAQ,IAAV,EAAP;AACD;AAnCoB,CAAvB;;kBAuCeN,c"
+}

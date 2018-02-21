@@ -53,12 +53,13 @@ var dragLeaveWithDnDStyle = function dragLeaveWithDnDStyle(ev) {
 };
 
 var withDnDStyle = function withDnDStyle(target) {
-  var _proto = target.prototype;
-  _proto.dragStartWithDnDStyle = dragStartWithDnDStyle;
-  _proto.dropWithDnDStyle = dropWithDnDStyle;
-  _proto.dragEnterWithDnDStyle = dragEnterWithDnDStyle;
-  _proto.dragLeaveWithDnDStyle = dragLeaveWithDnDStyle;
+  Object.assign(target.prototype, {
+    dragStartWithDnDStyle: dragStartWithDnDStyle,
+    dropWithDnDStyle: dropWithDnDStyle,
+    dragEnterWithDnDStyle: dragEnterWithDnDStyle,
+    dragLeaveWithDnDStyle: dragLeaveWithDnDStyle
+  });
 };
 
 exports.default = withDnDStyle;
-//# sourceMappingURL=withDnDStyle.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\decorators\withDnDStyle.js.map

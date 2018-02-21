@@ -1,10 +1,17 @@
-import ImArrayUtil from '../ImArrayUtil';
+import fnImArr from '../fnImArr';
+
+const {
+  push,
+  insertItem,
+  filterByPropFn,
+  editByPropFn
+} = fnImArr;
 
 describe('push', () => {
   test('should push obj', () => {
      const arr = [ {a:1} ]
          , obj = {b:2}
-         , result = ImArrayUtil.push(arr, obj)
+         , result = push(arr, obj)
          , maxIndex = result.length-1;
 
      expect(result).not.toBe(arr)
@@ -16,7 +23,7 @@ describe('push', () => {
 describe('filterByPropFn', ()=> {
   test('should filter by propName arr and propValue', () => {
      const arr = [ {a:1}, {a:2}, {a:3}, {a:1} ]
-         , fn = ImArrayUtil.filterByPropFn('a')
+         , fn = filterByPropFn('a')
          , result = fn(arr, 1)
 
       expect(typeof fn).toBe('function')
@@ -29,7 +36,7 @@ describe('insertItem', () => {
   const arr = [ {a:1}, {b:2}, {c:3} ]
       , obj = {d:4};
   test('should insert obj to arr, index=0', () => {
-      const result = ImArrayUtil.insertItem(obj, 0, arr);
+      const result = insertItem(obj, 0, arr);
 
       expect(result).not.toBe(arr)
       expect(result[0]).not.toBe(obj)
@@ -38,7 +45,7 @@ describe('insertItem', () => {
   })
   test('should insert obj to arr, index=length', () => {
       const index = arr.length
-          , result = ImArrayUtil.insertItem(obj, index, arr);
+          , result = insertItem(obj, index, arr);
 
       expect(result).not.toBe(arr)
       expect(result[index]).not.toBe(obj)
@@ -50,7 +57,7 @@ describe('insertItem', () => {
 describe('editByPropFn', () => {
   test('should edit obj in arr by propName and index', () => {
     const arr = [ {a:1}, {a:2}, {a:3}]
-        , fn = ImArrayUtil.editByPropFn('a')
+        , fn = editByPropFn('a')
         , result = fn(arr, 0, 4)
 
        expect(typeof fn).toBe('function')

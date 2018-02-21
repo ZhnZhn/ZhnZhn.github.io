@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import DateUtils from '../../utils/DateUtils';
+import crDateConfig from './crDateConfig'
 
 import D from '../dialogs/DialogCell'
 import Decor from '../dialogs/decorators/Decorators';
 
 import RouterOptions from './RouterOptions';
 
-const  DATE_PLACEHOLDER = 'Before Select Metric'
-     , MAP_FREQUENCY_DF = 'M';
+const  MAP_FREQUENCY_DF = 'M';
 
 @Decor.withToolbar
 @Decor.withValidationLoad
@@ -60,8 +59,7 @@ class DialogEurostat2 extends Component {
     this.state = {
       isShowLabels: true,
       isShowDate: false,
-      dateDefault: DATE_PLACEHOLDER,
-      dateOptions: [],
+      ...crDateConfig('EMPTY'),
       validationMessages: []
     }
   }
@@ -89,14 +87,13 @@ class DialogEurostat2 extends Component {
                        : MAP_FREQUENCY_DF
              : null
          , { mapDateDf } = this.props
-         , config = (frequency)
-             ? DateUtils.createEurostatSelect(frequency, mapDateDf)
-             : { dateDefault : DATE_PLACEHOLDER , options : [] };
+         , dateConfig = (frequency)
+             ? crDateConfig(frequency, mapDateDf)
+             : crDateConfig('EMPTY')
 
     this.setState({
-       isShowDate : true,
-       dateDefault : config.dateDefault,
-       dateOptions : config.options
+       isShowDate: true,
+       ...dateConfig
     });
   }
 

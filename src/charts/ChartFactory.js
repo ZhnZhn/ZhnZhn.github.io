@@ -3,7 +3,7 @@ const ChartFactory = {
   crColumnConfig() {
     return {
       chart: {
-        type: 'column',
+        type: "column",
         marginTop: 60
       },
       title: {
@@ -14,6 +14,7 @@ const ChartFactory = {
       },
       xAxis: {
         categories: [],
+        type: "category",
         crosshair: true,
         gridLineWidth : 0
       },

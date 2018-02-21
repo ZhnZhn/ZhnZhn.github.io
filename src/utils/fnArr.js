@@ -1,14 +1,14 @@
 
-const ArrayUtil = {
+const fnArr = {
 
   findIndexByProp: (propName) => (arr, propValue) => {
      if (!Array.isArray(arr)){
        return -1;
      }
 
-     return arr.findIndex((item, index) => {
-        return item[propName] === propValue;
-    })
+     return arr.findIndex(
+       item => item[propName] === propValue
+     );
   },
 
 
@@ -16,15 +16,13 @@ const ArrayUtil = {
       if (!Array.isArray(arr)){
         return false;
       }
-      
-      const index = arr.findIndex((item, i) => {
-                      return item[propName] === propValue;
-                    })
 
-      return (index === -1) ? false : true;
+      return arr.findIndex(
+         item => item[propName] === propValue
+      ) === -1 ? false : true;
   },
 
-  isStrInArr : (str) => (arr) => {
+  isStrInArr: (str) => (arr) => {
      if (!Array.isArray(arr)){
        return false;
      }
@@ -38,4 +36,4 @@ const ArrayUtil = {
   }
 };
 
-export default ArrayUtil
+export default fnArr

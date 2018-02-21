@@ -3,12 +3,19 @@ import AdapterFn from '../AdapterFn'
 
 import fnDescr from './fnDescr'
 
-const { ymdToUTC, valueMoving } = AdapterFn;
+const {
+       toUpperCaseFirst,
+       monthIndex,
+       ymdToUTC,
+       valueMoving
+     } = AdapterFn;
 
 const C = {
-  DATASET_EMPTY: "Dataset is empty",
-  ONE_BLANK: " ",
-  MM_DD: '-12-31'
+  DATASET_EMPTY: 'Dataset is empty',
+  ENPTY: '',
+  BLANK: ' ',
+  MM_DD: '-12-31',
+  DF_TITLE: 'More about data on tab Info in Description'
 };
 
 const _crUnit = (json) => {
@@ -18,15 +25,23 @@ const _crUnit = (json) => {
        ? C.DATASET_EMPTY
        : item.Unit
             ? item.Unit
-            : C.ONE_BLANK;
+            : C.BLANK;
 
-  return _unit[0].toUpperCase() + _unit.substr(1);
+  return toUpperCaseFirst(_unit);
 };
 
-const _crPoint = ({ Year, Value }) => ({
-  x: ymdToUTC('' + Year + C.MM_DD),
-  y: Value
-});
+const _crPoint = ({ Year, Months, Value }) => {
+  const m = monthIndex(Months)
+      , Tail = m !== -1
+          ? `-${m}`
+          : C.MM_DD;
+
+  return {
+    x: ymdToUTC('' + Year + Tail),
+    y: Value
+  };
+};
+
 
 const _crHm = (json) => {
   const { data=[]} = json
@@ -69,16 +84,37 @@ const _crSeriesData = (json) => {
   return _hmToPoints(_hm, _legend);
 };
 
+const _compareByX = (a, b) => a.x - b.x;
+
 const _crSeriaData = (json, option) => {
   const { data=[] } = json;
-  return data.map(item => _crPoint(item));
+  return data
+    .map(_crPoint)
+    .sort(_compareByX);
 };
 
 const fnAdapter = {
   crId: ({ three, value }) => {
+    const _v = value || 'faoId';
     return three
-      ? value + '_' + three
-      : value;
+      ? `${_v}_${three}`
+      : _v;
+  },
+  crTitle: (option, json) => {
+     const { title, dfTitle } = option;
+     if ( title ) {
+       return dfTitle
+         ? `${dfTitle}: ${title}`
+         : title;
+     }
+     const { data=[] } = json
+         , p = data[data.length-1];
+     if (p && typeof p === 'object') {
+       const { Area='', Item='', Element='' } = p;
+       return `${Area} ${Item} ${Element}`;
+     } else {
+       return C.DF_TITLE;
+     }
   },
   crSubtitle: (json, subtitle) => {
     const _unit = _crUnit(json);
