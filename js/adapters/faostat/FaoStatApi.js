@@ -22,6 +22,10 @@ var _getMemYear = function _getMemYear() {
   return C.MEM_YEAR || _crMemYear();
 };
 
+var _isTitle = function _isTitle(qT) {
+  return qT.indexOf('World') !== -1 && qT.length < 22;
+};
+
 var FaoStatApi = {
   getRequestUrl: function getRequestUrl(option) {
     var proxy = option.proxy,
@@ -44,13 +48,16 @@ var FaoStatApi = {
   addPropsTo: function addPropsTo(option) {
     var qA = option.qA,
         qI = option.qI,
-        qE = option.qE;
+        qE = option.qE,
+        _option$qT = option.qT,
+        qT = _option$qT === undefined ? '' : _option$qT;
 
+    var title = _isTitle(qT) ? qT : '';
     Object.assign(option, {
       one: qA,
       two: qI,
       three: qE,
-      title: ''
+      title: title
     });
   }
 };

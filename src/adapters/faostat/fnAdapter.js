@@ -31,8 +31,10 @@ const _crUnit = (json) => {
 };
 
 const _crPoint = ({ Year, Months, Value }) => {
-  const m = monthIndex(Months)
-      , Tail = m !== -1
+  const m = Months
+          ? monthIndex(Months) + 1
+          : 0
+      , Tail = m !== 0
           ? `-${m}`
           : C.MM_DD;
 

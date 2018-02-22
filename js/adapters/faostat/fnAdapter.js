@@ -50,8 +50,8 @@ var _crPoint = function _crPoint(_ref) {
       Months = _ref.Months,
       Value = _ref.Value;
 
-  var m = monthIndex(Months),
-      Tail = m !== -1 ? '-' + m : C.MM_DD;
+  var m = Months ? monthIndex(Months) + 1 : 0,
+      Tail = m !== 0 ? '-' + m : C.MM_DD;
 
   return {
     x: ymdToUTC('' + Year + Tail),

@@ -30,18 +30,16 @@
     "url": "https://github.com/ZhnZhn/ZhnZhn.github.io.git"
   },
   "keywords": [
-    "Quandl",
-    "Eurostat",
-    "macroeconomics",
-    "economics",
-    "trade",
-    "energy",
-    "currency",
-    "stock prices",
-    "stock indices",
-    "GDP",
-    "CPI",
-    "commodity"
+    "restful-client",
+    "data-visualization",
+    "chart-creation",
+    "open-data",
+    "opendata",
+    "economic-indicators",
+    "statistics-viewer",
+    "stock-market",
+    "cryptocurrency-prices",
+    "macroeconomics"
   ],
   "dependencies": {
     "accounting": "^0.4.1",
@@ -127,6 +125,7 @@
     "roots": [
       "<rootDir>/js/utils/",
       "<rootDir>/js/math/",
+      "<rootDir>/js/adapters/",
       "<rootDir>/js/components/zhn-sparklines/dataProcessing"
     ]
   }

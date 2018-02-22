@@ -15,6 +15,11 @@ const _getMemYear = () => {
   return C.MEM_YEAR || _crMemYear();
 };
 
+const _isTitle = (qT) => {
+  return qT.indexOf('World') !== -1
+     && qT.length < 22;
+};
+
 const FaoStatApi = {
   getRequestUrl(option){
     const {
@@ -24,9 +29,8 @@ const FaoStatApi = {
             dfDomain='QC',
             dfItemName='item'
            } = option
-         //, _element = three || dfElement || dfDomain
          , _element = three || dfElement
-         , _year = _getMemYear()
+         , _year = _getMemYear();
 
     return `${proxy}${C.BASE}/${dfDomain}?element=${_element}&area=${one}&${dfItemName}=${two}&year=${_year}&${C.TAIL}`;
   },
@@ -36,12 +40,13 @@ const FaoStatApi = {
   },
 
   addPropsTo(option){
-    const { qA, qI, qE } = option;
+    const { qA, qI, qE, qT='' } = option;
+    const title = _isTitle(qT) ? qT : '';
     Object.assign(option, {
       one: qA,
       two: qI,
       three: qE,
-      title: ''
+      title
     })
   }
 };

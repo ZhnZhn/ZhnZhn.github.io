@@ -212,7 +212,7 @@ const AdapterFn = {
   fnGetConfigMfi: fnGetConfigMfi,
 
   toUpperCaseFirst: (str) => {
-    return (typeof str === 'string') && str.length > 0
+    return (typeof str === 'string' || str instanceof String ) && str.length > 0
          ? str[0].toUpperCase() + str.substr(1)
          : EMPTY;
   },

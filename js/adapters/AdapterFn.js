@@ -205,7 +205,7 @@ var AdapterFn = {
   fnGetConfigMfi: _IndicatorSma.fnGetConfigMfi,
 
   toUpperCaseFirst: function toUpperCaseFirst(str) {
-    return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
+    return (typeof str === 'string' || str instanceof String) && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
   },
 
   monthIndex: function monthIndex(str) {
