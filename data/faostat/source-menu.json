@@ -28,7 +28,7 @@
         { "id": "FAO_CREDIT_TO_AGRI" }
       ]
     },{
-      "caption": "Agri-Enviroment Indicators",
+      "caption": "Agri-Environment Indicators",
       "items": [
         { "id": "FAO_LAND_COVER" },
         { "id": "FAO_TEMP_CHANGE" },
