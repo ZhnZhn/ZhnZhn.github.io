@@ -11,6 +11,12 @@ import NasdaqLink from '../native-links/NasdaqLink';
 
 import withValidationLoad from './decorators/withValidationLoad';
 
+const {
+  getFromDate,
+  getToDate,
+  isYmd
+} = DateUtils;
+
 const ABSENT = "Absent"
     , ABSENT_VALIDATION_MSG = "Data Source for this item Absent";
 
@@ -82,17 +88,14 @@ class StocksBySectorDialog extends Component {
          , { fromDate, initToDate, onTestDate } = data
          , _isShowLink = (this._getItemSource(props) !== ABSENT)
               ? false
-              : true
-         , _initFromDate = (fromDate) ? fromDate : DateUtils.getFromDate(2)
-         , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
-         , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
+              : true;
 
       return {
-        isShowLink : _isShowLink,
-        initFromDate : _initFromDate,
-        initToDate : _initToDate,
-        onTestDate : _onTestDate,
-        validationMessages : []
+        isShowLink: _isShowLink,
+        initFromDate: fromDate || getFromDate(2),
+        initToDate: initToDate || getToDate(),
+        onTestDate: onTestDate || isYmd,
+        validationMessages: []
       };
    }
 
@@ -127,7 +130,7 @@ class StocksBySectorDialog extends Component {
              item: item,
              fromDate: fromDate,
              toDate: toDate,
-             loadId : LoadType.WL,             
+             loadId : LoadType.WL,
              id : id,
              linkFn : 'NASDAQ',
              columnName : 'Close',

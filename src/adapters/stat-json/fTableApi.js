@@ -9,18 +9,18 @@ const _crTidTop = (v) => {
   };
 }
 
-const FactoryTableApi = (ROOT_URL) => ({
+const fTableApi = (ROOT_URL) => ({
   getRequestUrl(option){
     const { proxy, metric, dfId } = option
         , id = dfId ? dfId : metric;
-    return `${proxy}${ROOT_URL}/${id}`;    
+    return `${proxy}${ROOT_URL}/${id}`;
   },
 
   crOptionFetch(option){
-    const { items, isTop12, isTop6 } = option
+    const { items=[], isTop12, isTop6 } = option
         , arrQuery = [];
     items.forEach(item => {
-       const slice = item.slice;
+       const { slice } = item || {};
        let propName;
        for(propName in slice){
          arrQuery.push({
@@ -57,4 +57,4 @@ const FactoryTableApi = (ROOT_URL) => ({
   }
 });
 
-export default FactoryTableApi
+export default fTableApi

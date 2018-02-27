@@ -6,19 +6,21 @@ var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const d1 = "2010-01-10"
-    , d2 = "2010-10-01"
-    , d_1 = "2010-14-01"
-    , d_2 = "2010-02-32"
-*/
+var isYmd = _DateUtils2.default.isYmd,
+    isYmdOrEmpty = _DateUtils2.default.isYmdOrEmpty,
+    dmyToUTC = _DateUtils2.default.dmyToUTC,
+    formatTo = _DateUtils2.default.formatTo,
+    isDmy = _DateUtils2.default.isDmy;
 
-describe('isValidDate YYYY-MM-DD', function () {
-  var fn = _DateUtils2.default.isValidDate;
 
-  test('should return is valid data', function () {
+describe('isYmd YYYY-MM-DD', function () {
+  var fn = isYmd;
+
+  test('should return true for valid YYYY-MM-DD', function () {
     expect(fn("2010-01-10")).toBe(true);
     expect(fn("2010-10-01")).toBe(true);
+  });
+  test('should return false for not valid YYYY-MM-DD', function () {
     expect(fn("2010-14-01")).toBe(false);
     expect(fn("2010-02-32")).toBe(false);
   });
@@ -42,8 +44,8 @@ describe('isValidDate YYYY-MM-DD', function () {
   });
 });
 
-describe('isValidDateOrEmpty YYYY-MM-DD', function () {
-  var fn = _DateUtils2.default.isValidDateOrEmpty;
+describe('isYmdOrEmty YYYY-MM-DD', function () {
+  var fn = isYmdOrEmpty;
   test('should return is valid date or empty', function () {
     expect(fn('')).toBe(true);
     expect(fn("2010-01-10")).toBe(true);
@@ -59,7 +61,7 @@ describe('isValidDateOrEmpty YYYY-MM-DD', function () {
 });
 
 describe('dmyToUTC', function () {
-  var fn = _DateUtils2.default.dmyToUTC;
+  var fn = dmyToUTC;
   test('should return UTC from DD-MM-YYYY', function () {
     expect(fn("10-10-2010")).toBe(Date.UTC(2010, 9, 10));
     expect(fn("01-01-2010")).toBe(Date.UTC(2010, 0, 1));
@@ -72,8 +74,27 @@ describe('dmyToUTC', function () {
   });
 });
 
-describe('isFormatDmy', function () {
-  var fn = _DateUtils2.default.isFormatDmy;
+describe('formatTo', function () {
+  var fn = formatTo;
+  var EMPTY = '';
+  test('should format to DD-MM-YYYY from ms', function () {
+    expect(fn(1514764800000)).toBe('01-01-2018');
+    expect(fn(1515542400000)).toBe('10-01-2018');
+    expect(fn(1538352000000)).toBe('01-10-2018');
+  });
+  test('should format to empty string in edge case', function () {
+    expect(fn(null)).toBe(EMPTY);
+    expect(fn(undefined)).toBe(EMPTY);
+    expect(fn({})).toBe(EMPTY);
+    expect(fn(NaN)).toBe(EMPTY);
+    expect(fn('')).toBe(EMPTY);
+    expect(fn('abc')).toBe(EMPTY);
+    expect(fn(function () {})).toBe(EMPTY);
+  });
+});
+
+describe('isDmy', function () {
+  var fn = isDmy;
   test('should return true for str in format DD-MM-YYY', function () {
     expect(fn('10-10-2000')).toBe(true);
     expect(fn('20-01-2000')).toBe(true);

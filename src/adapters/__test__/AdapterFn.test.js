@@ -2,7 +2,8 @@ import AdapterFn from '../AdapterFn'
 
 const {
   ymdToUTC,
-  toUpperCaseFirst
+  toUpperCaseFirst,
+  isYNumber
 } = AdapterFn;
 
 const Y = [
@@ -81,4 +82,27 @@ describe('toUpperCaseFirst', ()=> {
     expect(fn(Date.now())).toBe(EMPTY)
   })
 
+})
+
+describe('isYNumber', () => {
+  const fn = isYNumber
+  test('should return true for object with property y number', () => {
+    expect(fn({y: 10})).toBe(true)
+    expect(fn({y: 1})).toBe(true)
+    expect(fn({y: 0})).toBe(true)
+    expect(fn({y: -1})).toBe(true)
+  })
+  test('should return false for object with property y not number', ()=>{
+    expect(fn({y: null})).toBe(false)
+    expect(fn({y: NaN})).toBe(false)
+    expect(fn({y: 'str'})).toBe(false)
+    expect(fn({y: undefined})).toBe(false)
+    expect(fn({y: true})).toBe(false)
+    expect(fn({y: false})).toBe(false)
+    expect(fn({y: Number.POSITIVE_INFINITY})).toBe(false)
+    expect(fn({y: Number.NEGATIVE_INFINITY})).toBe(false)
+    expect(fn({y: []})).toBe(false)
+    expect(fn({y: {}})).toBe(false)
+    expect(fn({y: ()=>{} })).toBe(false)
+  })
 })

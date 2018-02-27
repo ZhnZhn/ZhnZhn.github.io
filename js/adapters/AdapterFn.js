@@ -37,6 +37,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var EMPTY = '';
 var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
+var _fIsNumber = function _fIsNumber(pn) {
+  return function (p) {
+    return typeof p[pn] === 'number' && isFinite(p[pn]);
+  };
+};
+
 var _compareArrByIndex = function _compareArrByIndex(index) {
   return function (arrA, arrB) {
     if (arrA[index] < arrB[index]) return -1;else if (arrA[index] === arrB[index]) return 0;else return 1;
@@ -149,6 +155,8 @@ var AdapterFn = {
   isNumberOrNull: function isNumberOrNull(v) {
     return typeof v === 'number' && !isNaN(v) || v === null;
   },
+
+  isYNumber: _fIsNumber('y'),
 
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),

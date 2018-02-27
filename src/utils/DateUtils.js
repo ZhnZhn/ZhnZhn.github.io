@@ -1,25 +1,26 @@
 
 const DateUtils = {
 
-	isValidDate(str, nForecastDate=0){
-		 // STRING FORMAT yyyy-mm-dd
-
-		 if ( typeof str !== 'string' ||
-	         !str || str.trim().length !== 10 ) {
-		    return false;
+  //YYYY-MM-DD valid format
+	isYmd(str, nForecastDate=0){
+     if (typeof str !== 'string') {
+			 return false;
+		 }
+		 const _str = str.trim();
+		 if (_str.length !== 10) {
+			 return false;
 		 }
 
 		 // m[1] is year 'YYYY' * m[2] is month 'MM' * m[3] is day 'DD'
-		 let m = str.match(/(\d{4})-(\d{2})-(\d{2})/);
+		 const m = _str.match(/(\d{4})-(\d{2})-(\d{2})/);
 
 		 // STR IS NOT FIT m IS NOT OBJECT
-		 if( m === null || typeof m !== 'object') { return false; }
+		 if( m === null || typeof m !== 'object' || m.length!==4) {
+			 return false;
+		 }
 
-		 // CHECK m TYPE
-		 if (typeof m !== 'object' && m !== null && m.size!==3) { return false; }
-
-		 let thisYear = new Date().getFullYear();
-		 let minYear = 1999;
+		 const thisYear = new Date().getFullYear();
+		 const minYear = 1999;
 
 		// YEAR CHECK
 		 if( (m[1].length < 4) || m[1] < minYear || m[1] > thisYear + nForecastDate) { return false; }
@@ -31,50 +32,33 @@ const DateUtils = {
 		 return true;
 	},
 
-	isValidDateOrEmpty(str){
-		if ( str === '') {
-			return true;
-		} else {
-			return DateUtils.isValidDate(str);
-		}
+	isYmdOrEmpty(str){
+		return (str === '')
+		  ? true
+			: DateUtils.isYmd(str);
 	},
 
 	getFromDate(yearMinus=2){
-		const dateNow = new Date()
-		    , yearTo = dateNow.getUTCFullYear();
-
-		let monthTo = dateNow.getUTCMonth() + 1;
-		if ( monthTo<10 ){
-			monthTo = "0" + monthTo;
-		}
-
-		let dayTo = dateNow.getUTCDate();
-		if ( dayTo<10 ){
-			dayTo = "0" + dayTo;
-		}
-
-		return (yearTo-yearMinus) + "-" + monthTo + "-" + dayTo;
+		const dNow = new Date();
+		return (dNow.getUTCFullYear()-yearMinus)
+		   + "-" + ("0"+(dNow.getUTCMonth() + 1)).slice(-2)
+			 + "-" + ("0"+dNow.getUTCDate()).slice(-2);
 	},
 
 	getToDate(){
-		const dateNow = new Date()
-		    , yearTo = dateNow.getUTCFullYear();
-
-		let monthTo = dateNow.getUTCMonth() + 1;
-		if ( monthTo<10 ){
-			monthTo = "0" + monthTo;
-		}
-
-		let dayTo = dateNow.getUTCDate();
-		if ( dayTo<10 ){
-			dayTo = "0" + dayTo;
-		}
-
-		return yearTo + "-" + monthTo + "-" + dayTo;
+		return DateUtils.getFromDate(0);
 	},
 
-	formatTo(millisUTC){
-	  const d = new Date(millisUTC);
+	formatTo(mlsUTC){
+		if (typeof mlsUTC !== 'number'
+		    || !isFinite(mlsUTC)
+		) {
+			return '';
+		}
+		const d = new Date(mlsUTC);
+		if (d.toString() === 'Invalid Date') {
+			return '';
+		}
 	  return ("0" + d.getUTCDate()).slice(-2)
 	         + "-" + ("0" + (d.getUTCMonth() + 1) ).slice(-2)
 	         + "-" + d.getUTCFullYear() ;
@@ -83,17 +67,17 @@ const DateUtils = {
  dmyToUTC(str){
 	  const _str = str || ''
 		    , [ d=10, m=10, y=1970 ] = _str.toString().split('-');
-		if (DateUtils.isValidDate(`${y}-${m}-${d}`)){
+		if (DateUtils.isYmd(`${y}-${m}-${d}`)){
 			return Date.UTC(y, (parseInt(m, 10)-1), d)
 		} else {
 			return 0;
 		}
  },
 
- isFormatDmy(str){
+ isDmy(str){
 	 const _str = str || ''
-			 , [ d=10, m=10, y=1000 ] = _str.toString().split('-');
-		return DateUtils.isValidDate(`${y}-${m}-${d}`);
+			 , [ d=10, m=10, y=1970 ] = _str.toString().split('-');
+		return DateUtils.isYmd(`${y}-${m}-${d}`);
  }
 
 };

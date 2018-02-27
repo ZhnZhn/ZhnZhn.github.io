@@ -180,6 +180,9 @@ var _crData = function _crData(values, categories, Tid, option) {
       depth = option.depth,
       cTotal = option.cTotal;
 
+  if (!Array.isArray(values)) {
+    return [];
+  }
   return values.map(_fCrTreeMapPoint(categories, Tid)).filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth)).sort(_compareByValue).reverse();
 };
 
@@ -238,4 +241,4 @@ var toTreeMap = {
 };
 
 exports.default = toTreeMap;
-//# sourceMappingURL=toTreeMap.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\toTreeMap.js.map

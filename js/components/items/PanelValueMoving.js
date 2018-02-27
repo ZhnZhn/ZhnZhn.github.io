@@ -52,6 +52,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //import PropTypes from "prop-types";
 
+var isDmy = _DateUtils2.default.isDmy;
+
+
 var STYLE = {
   SUB_PANEL: {
     position: 'absolute',
@@ -142,7 +145,7 @@ var PanelValueMoving = function (_Component) {
               initValue: date,
               placeholder: 'DD-MM-YYYY',
               errorMsg: 'DD-MM-YYYY',
-              onTest: _DateUtils2.default.isFormatDmy,
+              onTest: isDmy,
               onEnter: _this._handleEnterDate
             })
           ),
@@ -209,4 +212,4 @@ var PanelValueMoving = function (_Component) {
 }(_react.Component);
 
 exports.default = PanelValueMoving;
-//# sourceMappingURL=PanelValueMoving.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelValueMoving.js.map

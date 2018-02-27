@@ -15,6 +15,12 @@ import Row from '../dialogs/Row'
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
+const {
+  getFromDate,
+  getToDate,
+  isYmd
+} = DateUtils;
+
 @withValidationLoad
 class LoadItemDialog extends Component {
    /*
@@ -30,21 +36,26 @@ class LoadItemDialog extends Component {
    }
    */
 
+   static defaultProps = {
+     data: {}
+   }
+
    constructor(props){
      super()
-     const { fromDate, initToDate, onTestDate } = props.data
-         , _initFromDate = (fromDate) ? fromDate : DateUtils.getFromDate(2)
-         , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
-         , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
+     const {
+             fromDate,
+             initToDate,
+             onTestDate
+           } = props.data;
 
     this._commandButtons = [
        <Button.Load onClick={this._handleLoad} />
     ]
 
     this.state = {
-       initFromDate : _initFromDate,
-       initToDate : _initToDate,
-       onTestDate : _onTestDate,
+       initFromDate: fromDate || getFromDate(2),
+       initToDate: initToDate || getToDate(),
+       onTestDate: onTestDate || isYmd,
        validationMessages : []
     }
    }
@@ -69,7 +80,7 @@ class LoadItemDialog extends Component {
              item: caption,
              fromDate: fromDate,
              toDate: toDate,
-             loadId : LoadType.WL,             
+             loadId : LoadType.WL,
              id,
              columnName,
              dataColumn,

@@ -67,9 +67,36 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var getFromDate = _DateUtils2.default.getFromDate,
+    getToDate = _DateUtils2.default.getToDate,
+    isYmd = _DateUtils2.default.isYmd;
+
 var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(LoadItemDialog, _Component);
 
+  function LoadItemDialog(props) {
+    (0, _classCallCheck3.default)(this, LoadItemDialog);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (LoadItemDialog.__proto__ || Object.getPrototypeOf(LoadItemDialog)).call(this));
+
+    _initialiseProps.call(_this);
+
+    var _props$data = props.data,
+        fromDate = _props$data.fromDate,
+        initToDate = _props$data.initToDate,
+        onTestDate = _props$data.onTestDate;
+
+
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+
+    _this.state = {
+      initFromDate: fromDate || getFromDate(2),
+      initToDate: initToDate || getToDate(),
+      onTestDate: onTestDate || isYmd,
+      validationMessages: []
+    };
+    return _this;
+  }
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -82,32 +109,6 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
     onClose: PropTypes.func
   }
   */
-
-  function LoadItemDialog(props) {
-    (0, _classCallCheck3.default)(this, LoadItemDialog);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (LoadItemDialog.__proto__ || Object.getPrototypeOf(LoadItemDialog)).call(this));
-
-    _initialiseProps.call(_this);
-
-    var _props$data = props.data,
-        fromDate = _props$data.fromDate,
-        initToDate = _props$data.initToDate,
-        onTestDate = _props$data.onTestDate,
-        _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
-        _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
-        _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
-
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
-
-    _this.state = {
-      initFromDate: _initFromDate,
-      initToDate: _initToDate,
-      onTestDate: _onTestDate,
-      validationMessages: []
-    };
-    return _this;
-  }
 
   (0, _createClass3.default)(LoadItemDialog, [{
     key: 'shouldComponentUpdate',
@@ -160,7 +161,9 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
     }
   }]);
   return LoadItemDialog;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
+}(_react.Component), _class2.defaultProps = {
+  data: {}
+}, _initialiseProps = function _initialiseProps() {
   var _this3 = this;
 
   this._handleLoad = function () {

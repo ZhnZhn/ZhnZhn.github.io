@@ -22,7 +22,8 @@ var _fnDescr2 = _interopRequireDefault(_fnDescr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst,
+var isYNumber = _AdapterFn2.default.isYNumber,
+    toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst,
     monthIndex = _AdapterFn2.default.monthIndex,
     ymdToUTC = _AdapterFn2.default.ymdToUTC,
     valueMoving = _AdapterFn2.default.valueMoving;
@@ -52,7 +53,6 @@ var _crPoint = function _crPoint(_ref) {
 
   var m = Months ? monthIndex(Months) + 1 : 0,
       Tail = m !== 0 ? '-' + m : C.MM_DD;
-
   return {
     x: ymdToUTC('' + Year + Tail),
     y: Value
@@ -90,7 +90,7 @@ var _crRefLegend = function _crRefLegend(hm) {
       Area: propName
     }));
   }
-  return legend.sort(_compareByY).reverse();
+  return legend.filter(isYNumber).sort(_compareByY).reverse();
 };
 
 var _hmToPoints = function _hmToPoints(hm, arr) {

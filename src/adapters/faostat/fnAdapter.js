@@ -4,6 +4,7 @@ import AdapterFn from '../AdapterFn'
 import fnDescr from './fnDescr'
 
 const {
+       isYNumber,
        toUpperCaseFirst,
        monthIndex,
        ymdToUTC,
@@ -37,7 +38,6 @@ const _crPoint = ({ Year, Months, Value }) => {
       , Tail = m !== 0
           ? `-${m}`
           : C.MM_DD;
-
   return {
     x: ymdToUTC('' + Year + Tail),
     y: Value
@@ -72,7 +72,10 @@ const _crRefLegend = (hm) => {
       Area: propName
     })
   }
-  return legend.sort(_compareByY).reverse();
+  return legend
+    .filter(isYNumber)
+    .sort(_compareByY)
+    .reverse();
 };
 
 const _hmToPoints = (hm, arr) => {

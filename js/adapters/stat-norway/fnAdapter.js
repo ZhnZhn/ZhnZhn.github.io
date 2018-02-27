@@ -60,6 +60,8 @@ var _crAreaMapSlice = function _crAreaMapSlice(option) {
 };
 
 var fnAdapter = {
+  isYNumber: _AdapterFn2.default.isYNumber,
+
   crDsValuesTimes: function crDsValuesTimes(json, option) {
     var mapSlice = _crAreaMapSlice(option),
         ds = (0, _jsonstat2.default)(json).Dataset(0),

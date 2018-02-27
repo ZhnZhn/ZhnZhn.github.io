@@ -7,7 +7,8 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst;
+    toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst,
+    isYNumber = _AdapterFn2.default.isYNumber;
 
 
 var Y = [{ in: '2017', r: 1514678400000, d: '31-12-2017' }, { in: '2016', r: 1483142400000, d: '31-12-2016' }, { in: '2015', r: 1451520000000, d: '31-12-2015' }, { in: '2000', r: 978220800000, d: '31-12-2000' }];
@@ -61,6 +62,29 @@ describe('toUpperCaseFirst', function () {
     expect(fn(function () {})).toBe(EMPTY);
     expect(fn(/\s/)).toBe(EMPTY);
     expect(fn(Date.now())).toBe(EMPTY);
+  });
+});
+
+describe('isYNumber', function () {
+  var fn = isYNumber;
+  test('should return true for object with property y number', function () {
+    expect(fn({ y: 10 })).toBe(true);
+    expect(fn({ y: 1 })).toBe(true);
+    expect(fn({ y: 0 })).toBe(true);
+    expect(fn({ y: -1 })).toBe(true);
+  });
+  test('should return false for object with property y not number', function () {
+    expect(fn({ y: null })).toBe(false);
+    expect(fn({ y: NaN })).toBe(false);
+    expect(fn({ y: 'str' })).toBe(false);
+    expect(fn({ y: undefined })).toBe(false);
+    expect(fn({ y: true })).toBe(false);
+    expect(fn({ y: false })).toBe(false);
+    expect(fn({ y: Number.POSITIVE_INFINITY })).toBe(false);
+    expect(fn({ y: Number.NEGATIVE_INFINITY })).toBe(false);
+    expect(fn({ y: [] })).toBe(false);
+    expect(fn({ y: {} })).toBe(false);
+    expect(fn({ y: function y() {} })).toBe(false);
   });
 });
 //# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\__test__\AdapterFn.test.js.map

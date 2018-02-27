@@ -42,7 +42,7 @@ module.exports = {
                          }]
             ],
             presets: [
-                      'env',
+                      //'env',
                       ['es2015', {modules: false}],
                       'react',
                       'stage-2'

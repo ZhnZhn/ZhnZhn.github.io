@@ -51,6 +51,11 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var getFromDate = _DateUtils2.default.getFromDate,
+    getToDate = _DateUtils2.default.getToDate,
+    isYmd = _DateUtils2.default.isYmd;
+
+
 var STYLE = {
   CAPTION_SPAN: {
     display: 'inline-block',
@@ -75,16 +80,14 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
     var _props$data = props.data,
         fromDate = _props$data.fromDate,
         initToDate = _props$data.initToDate,
-        onTestDate = _props$data.onTestDate,
-        _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
-        _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
-        _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
+        onTestDate = _props$data.onTestDate;
+
 
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_DialogCell2.default.Button.Show, { onClick: props.data.onShow })];
     _this.state = {
-      initFromDate: _initFromDate,
-      initToDate: _initToDate,
-      onTestDate: _onTestDate,
+      initFromDate: fromDate || getFromDate(2),
+      initToDate: initToDate || getToDate(),
+      onTestDate: onTestDate || isYmd,
       validationMessages: []
     };
 
@@ -225,4 +228,4 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
 }, _temp)) || _class;
 
 exports.default = UsStocksBySectorDialog;
-//# sourceMappingURL=UsStocksBySectorDialog.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map

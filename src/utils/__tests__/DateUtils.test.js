@@ -1,17 +1,21 @@
 import DateUtils from '../DateUtils'
-/*
-const d1 = "2010-01-10"
-    , d2 = "2010-10-01"
-    , d_1 = "2010-14-01"
-    , d_2 = "2010-02-32"
-*/
 
-describe('isValidDate YYYY-MM-DD', () => {
-  const fn = DateUtils.isValidDate
+const {
+  isYmd,
+  isYmdOrEmpty,
+  dmyToUTC,
+  formatTo,
+  isDmy
+} = DateUtils;
 
-  test('should return is valid data', ()=> {
+describe('isYmd YYYY-MM-DD', () => {
+  const fn = isYmd;
+
+  test('should return true for valid YYYY-MM-DD', ()=> {
     expect(fn("2010-01-10")).toBe(true)
     expect(fn("2010-10-01")).toBe(true)
+  })
+  test('should return false for not valid YYYY-MM-DD', ()=> {
     expect(fn("2010-14-01")).toBe(false)
     expect(fn("2010-02-32")).toBe(false)
   })
@@ -35,8 +39,8 @@ describe('isValidDate YYYY-MM-DD', () => {
   })
 })
 
-describe('isValidDateOrEmpty YYYY-MM-DD', () => {
-  const fn = DateUtils.isValidDateOrEmpty
+describe('isYmdOrEmty YYYY-MM-DD', () => {
+  const fn = isYmdOrEmpty
    test('should return is valid date or empty', () => {
      expect(fn('')).toBe(true)
      expect(fn("2010-01-10")).toBe(true)
@@ -52,7 +56,7 @@ describe('isValidDateOrEmpty YYYY-MM-DD', () => {
 })
 
 describe('dmyToUTC', ()=>{
-  const fn = DateUtils.dmyToUTC
+  const fn = dmyToUTC;
   test('should return UTC from DD-MM-YYYY', () => {
     expect(fn("10-10-2010")).toBe(Date.UTC(2010, 9, 10))
     expect(fn("01-01-2010")).toBe(Date.UTC(2010, 0, 1))
@@ -65,8 +69,27 @@ describe('dmyToUTC', ()=>{
   })
 })
 
-describe('isFormatDmy', () => {
-  const fn = DateUtils.isFormatDmy
+describe('formatTo', ()=>{
+  const fn = formatTo;
+  const EMPTY = '';
+  test('should format to DD-MM-YYYY from ms', ()=>{
+    expect(fn(1514764800000)).toBe('01-01-2018')
+    expect(fn(1515542400000)).toBe('10-01-2018')
+    expect(fn(1538352000000)).toBe('01-10-2018')
+  })
+  test('should format to empty string in edge case', ()=>{
+    expect(fn(null)).toBe(EMPTY)
+    expect(fn(undefined)).toBe(EMPTY)
+    expect(fn({})).toBe(EMPTY)
+    expect(fn(NaN)).toBe(EMPTY)
+    expect(fn('')).toBe(EMPTY)
+    expect(fn('abc')).toBe(EMPTY)
+    expect(fn(()=>{})).toBe(EMPTY)
+  })
+})
+
+describe('isDmy', () => {
+  const fn = isDmy;
   test('should return true for str in format DD-MM-YYY', () => {
      expect(fn('10-10-2000')).toBe(true)
      expect(fn('20-01-2000')).toBe(true)

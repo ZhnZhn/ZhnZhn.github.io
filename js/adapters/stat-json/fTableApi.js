@@ -14,7 +14,7 @@ var _crTidTop = function _crTidTop(v) {
   };
 };
 
-var FactoryTableApi = function FactoryTableApi(ROOT_URL) {
+var fTableApi = function fTableApi(ROOT_URL) {
   return {
     getRequestUrl: function getRequestUrl(option) {
       var proxy = option.proxy,
@@ -25,13 +25,16 @@ var FactoryTableApi = function FactoryTableApi(ROOT_URL) {
       return "" + proxy + ROOT_URL + "/" + id;
     },
     crOptionFetch: function crOptionFetch(option) {
-      var items = option.items,
+      var _option$items = option.items,
+          items = _option$items === undefined ? [] : _option$items,
           isTop12 = option.isTop12,
           isTop6 = option.isTop6,
           arrQuery = [];
 
       items.forEach(function (item) {
-        var slice = item.slice;
+        var _ref = item || {},
+            slice = _ref.slice;
+
         var propName = void 0;
         for (propName in slice) {
           arrQuery.push({
@@ -68,5 +71,5 @@ var FactoryTableApi = function FactoryTableApi(ROOT_URL) {
   };
 };
 
-exports.default = FactoryTableApi;
-//# sourceMappingURL=FactoryTableApi.js.map
+exports.default = fTableApi;
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-json\fTableApi.js.map

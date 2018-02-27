@@ -22,6 +22,11 @@ const M = ['january', 'february',
   'december'
 ];
 
+const _fIsNumber = (pn) => (p) => {
+  return typeof p[pn] === 'number'
+    && isFinite(p[pn]);
+}
+
 const _compareArrByIndex = index => (arrA, arrB) => {
   if (arrA[index] < arrB[index]) return -1;
   else if (arrA[index] === arrB[index]) return 0;
@@ -150,6 +155,8 @@ const AdapterFn = {
      return (typeof v === 'number' && !isNaN(v))
        || v === null;
   },
+
+  isYNumber: _fIsNumber('y'),
 
   compareByDate: _compareArrByIndex(0),
   compareByY: _compareArrByIndex('y'),

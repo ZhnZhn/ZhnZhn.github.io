@@ -15,25 +15,24 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DateUtils = {
-	isValidDate: function isValidDate(str) {
+
+	//YYYY-MM-DD valid format
+	isYmd: function isYmd(str) {
 		var nForecastDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-		// STRING FORMAT yyyy-mm-dd
-
-		if (typeof str !== 'string' || !str || str.trim().length !== 10) {
+		if (typeof str !== 'string') {
+			return false;
+		}
+		var _str = str.trim();
+		if (_str.length !== 10) {
 			return false;
 		}
 
 		// m[1] is year 'YYYY' * m[2] is month 'MM' * m[3] is day 'DD'
-		var m = str.match(/(\d{4})-(\d{2})-(\d{2})/);
+		var m = _str.match(/(\d{4})-(\d{2})-(\d{2})/);
 
 		// STR IS NOT FIT m IS NOT OBJECT
-		if (m === null || (typeof m === 'undefined' ? 'undefined' : (0, _typeof3.default)(m)) !== 'object') {
-			return false;
-		}
-
-		// CHECK m TYPE
-		if ((typeof m === 'undefined' ? 'undefined' : (0, _typeof3.default)(m)) !== 'object' && m !== null && m.size !== 3) {
+		if (m === null || (typeof m === 'undefined' ? 'undefined' : (0, _typeof3.default)(m)) !== 'object' || m.length !== 4) {
 			return false;
 		}
 
@@ -55,49 +54,26 @@ var DateUtils = {
 
 		return true;
 	},
-	isValidDateOrEmpty: function isValidDateOrEmpty(str) {
-		if (str === '') {
-			return true;
-		} else {
-			return DateUtils.isValidDate(str);
-		}
+	isYmdOrEmpty: function isYmdOrEmpty(str) {
+		return str === '' ? true : DateUtils.isYmd(str);
 	},
 	getFromDate: function getFromDate() {
 		var yearMinus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
 
-		var dateNow = new Date(),
-		    yearTo = dateNow.getUTCFullYear();
-
-		var monthTo = dateNow.getUTCMonth() + 1;
-		if (monthTo < 10) {
-			monthTo = "0" + monthTo;
-		}
-
-		var dayTo = dateNow.getUTCDate();
-		if (dayTo < 10) {
-			dayTo = "0" + dayTo;
-		}
-
-		return yearTo - yearMinus + "-" + monthTo + "-" + dayTo;
+		var dNow = new Date();
+		return dNow.getUTCFullYear() - yearMinus + "-" + ("0" + (dNow.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + dNow.getUTCDate()).slice(-2);
 	},
 	getToDate: function getToDate() {
-		var dateNow = new Date(),
-		    yearTo = dateNow.getUTCFullYear();
-
-		var monthTo = dateNow.getUTCMonth() + 1;
-		if (monthTo < 10) {
-			monthTo = "0" + monthTo;
-		}
-
-		var dayTo = dateNow.getUTCDate();
-		if (dayTo < 10) {
-			dayTo = "0" + dayTo;
-		}
-
-		return yearTo + "-" + monthTo + "-" + dayTo;
+		return DateUtils.getFromDate(0);
 	},
-	formatTo: function formatTo(millisUTC) {
-		var d = new Date(millisUTC);
+	formatTo: function formatTo(mlsUTC) {
+		if (typeof mlsUTC !== 'number' || !isFinite(mlsUTC)) {
+			return '';
+		}
+		var d = new Date(mlsUTC);
+		if (d.toString() === 'Invalid Date') {
+			return '';
+		}
 		return ("0" + d.getUTCDate()).slice(-2) + "-" + ("0" + (d.getUTCMonth() + 1)).slice(-2) + "-" + d.getUTCFullYear();
 	},
 	dmyToUTC: function dmyToUTC(str) {
@@ -111,13 +87,13 @@ var DateUtils = {
 		    _str$toString$split2$3 = _str$toString$split2[2],
 		    y = _str$toString$split2$3 === undefined ? 1970 : _str$toString$split2$3;
 
-		if (DateUtils.isValidDate(y + '-' + m + '-' + d)) {
+		if (DateUtils.isYmd(y + '-' + m + '-' + d)) {
 			return Date.UTC(y, parseInt(m, 10) - 1, d);
 		} else {
 			return 0;
 		}
 	},
-	isFormatDmy: function isFormatDmy(str) {
+	isDmy: function isDmy(str) {
 		var _str = str || '',
 		    _str$toString$split3 = _str.toString().split('-'),
 		    _str$toString$split4 = (0, _slicedToArray3.default)(_str$toString$split3, 3),
@@ -126,9 +102,9 @@ var DateUtils = {
 		    _str$toString$split4$2 = _str$toString$split4[1],
 		    m = _str$toString$split4$2 === undefined ? 10 : _str$toString$split4$2,
 		    _str$toString$split4$3 = _str$toString$split4[2],
-		    y = _str$toString$split4$3 === undefined ? 1000 : _str$toString$split4$3;
+		    y = _str$toString$split4$3 === undefined ? 1970 : _str$toString$split4$3;
 
-		return DateUtils.isValidDate(y + '-' + m + '-' + d);
+		return DateUtils.isYmd(y + '-' + m + '-' + d);
 	}
 };
 

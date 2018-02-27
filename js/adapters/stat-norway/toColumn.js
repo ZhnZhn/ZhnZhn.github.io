@@ -30,7 +30,8 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var crTid = _fnAdapter2.default.crTid,
+var isYNumber = _fnAdapter2.default.isYNumber,
+    crTid = _fnAdapter2.default.crTid,
     crChartOption = _fnAdapter2.default.crChartOption;
 
 
@@ -54,7 +55,8 @@ var _fIsCategoryPoint = function _fIsCategoryPoint(dfT) {
     if (dfT && p.c === dfT) {
       return false;
     }
-    return p.y !== null && p.y !== 0;
+    return isYNumber(p) && p.y !== 0;
+    //return p.y !== null && p.y !== 0;
   };
 };
 var _compareByY = function _compareByY(a, b) {
@@ -167,4 +169,4 @@ var toColumn = {
 };
 
 exports.default = toColumn;
-//# sourceMappingURL=toColumn.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\toColumn.js.map

@@ -23,19 +23,26 @@ import BrowserConfig from '../../constants/BrowserConfig';
 
 import ChartStore from '../stores/ChartStore';
 
+const {
+  getFromDate,
+  getToDate,
+  isYmd,
+  isYmdOrEmpty
+} = DateUtils;
+
 const onLoadChart = ChartActions.loadStock
     , onShowChart = ChartActions.showChart
-    , initFromDate = DateUtils.getFromDate(2)
-    , initToDate = DateUtils.getToDate()
-    , onTestDate = DateUtils.isValidDate
-    , onTestDateOrEmpty = DateUtils.isValidDateOrEmpty;
+    , initFromDate = getFromDate(2)
+    , initToDate = getToDate()
+    , onTestDate = isYmd
+    , onTestDateOrEmpty = isYmdOrEmpty;
 
 const _showModalDialogDescription = function(option){
   ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, option);
 }
 
 
-const createDialogComp = function (conf, browserType){   
+const createDialogComp = function (conf, browserType){
    const {
            type:itemKey,
            dialogProps={}, dialogType,
@@ -53,7 +60,7 @@ const createDialogComp = function (conf, browserType){
            isProxy
          } = dialogProps
        , _initFromDate = (nInitFromDate)
-            ? DateUtils.getFromDate(nInitFromDate)
+            ? getFromDate(nInitFromDate)
             : initFromDate
        , _fnValue = (valueFn)
             ? (valueFnPrefix )

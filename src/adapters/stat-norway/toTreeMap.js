@@ -6,7 +6,10 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 
-const { crTid, crChartOption, numberFormat } = fnAdapter;
+const {
+  crTid, crChartOption,
+  numberFormat
+} = fnAdapter;
 
 const C = {
   TITLE: 'Statisctics Norway: All Items'
@@ -142,6 +145,9 @@ const _addColor = function(data, level60, level90){
 
 const _crData = (values, categories, Tid, option) => {
   const { selectOptions, depth, cTotal } = option;
+  if (!Array.isArray(values)) {
+    return [];
+  }
   return values
     .map(_fCrTreeMapPoint(categories, Tid))
     .filter(_fIsPoint(cTotal, _toHm(selectOptions[0]), depth))

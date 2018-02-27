@@ -10,6 +10,8 @@ import SpanLabel from '../zhn-span/SpanLabel'
 import DateField from '../zhn/DateField'
 import SubPanel from './SubPanel'
 
+const { isDmy } = DateUtils
+
 const STYLE = {
   SUB_PANEL: {
     position: 'absolute',
@@ -101,7 +103,7 @@ class PanelValueMoving extends Component {
               initValue={date}
               placeholder="DD-MM-YYYY"
               errorMsg="DD-MM-YYYY"
-              onTest={DateUtils.isFormatDmy}
+              onTest={isDmy}
               onEnter={this._handleEnterDate}
             />
           </label>

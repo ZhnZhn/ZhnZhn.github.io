@@ -38,6 +38,8 @@ const _crAreaMapSlice = (option) => {
 };
 
 const fnAdapter = {
+  isYNumber: AdapterFn.isYNumber,
+  
   crDsValuesTimes: (json, option) => {
     const mapSlice = _crAreaMapSlice(option)
         , ds = JSONstat(json).Dataset(0)

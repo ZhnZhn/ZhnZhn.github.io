@@ -60,12 +60,18 @@ var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var getFromDate = _DateUtils2.default.getFromDate,
+    getToDate = _DateUtils2.default.getToDate,
+    isYmd = _DateUtils2.default.isYmd,
+    isYmdOrEmpty = _DateUtils2.default.isYmdOrEmpty;
+
+
 var onLoadChart = _ChartActions2.default.loadStock,
     onShowChart = _ChartActions2.default.showChart,
-    initFromDate = _DateUtils2.default.getFromDate(2),
-    initToDate = _DateUtils2.default.getToDate(),
-    onTestDate = _DateUtils2.default.isValidDate,
-    onTestDateOrEmpty = _DateUtils2.default.isValidDateOrEmpty;
+    initFromDate = getFromDate(2),
+    initToDate = getToDate(),
+    onTestDate = isYmd,
+    onTestDateOrEmpty = isYmdOrEmpty;
 
 var _showModalDialogDescription = function _showModalDialogDescription(option) {
   _ComponentActions2.default.showModalDialog(_Type.ModalDialog.DESCRIPTION, option);
@@ -89,7 +95,7 @@ var createDialogComp = function createDialogComp(conf, browserType) {
       isContinious = dialogProps.isContinious,
       loadId = dialogProps.loadId,
       isProxy = dialogProps.isProxy,
-      _initFromDate = nInitFromDate ? _DateUtils2.default.getFromDate(nInitFromDate) : initFromDate,
+      _initFromDate = nInitFromDate ? getFromDate(nInitFromDate) : initFromDate,
       _fnValue = valueFn ? valueFnPrefix ? _RouterFnValue2.default[valueFn].bind(null, valueFnPrefix) : _RouterFnValue2.default[valueFn] : undefined,
       onClickInfo = descrUrl ? _showModalDialogDescription : undefined,
       loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType),
@@ -183,4 +189,4 @@ var Factory = (0, _extends3.default)({}, _fBrowser2.default, {
 });
 
 exports.default = Factory;
-//# sourceMappingURL=Factory.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\Factory.js.map

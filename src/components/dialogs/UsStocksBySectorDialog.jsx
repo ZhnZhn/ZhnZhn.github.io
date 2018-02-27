@@ -10,6 +10,12 @@ import D from './DialogCell'
 
 import withValidationLoad from './decorators/withValidationLoad';
 
+const {
+  getFromDate,
+  getToDate,
+  isYmd
+} = DateUtils;
+
 const STYLE = {
   CAPTION_SPAN : {
     display: 'inline-block',
@@ -39,20 +45,22 @@ class UsStocksBySectorDialog extends Component {
      super();
      this.dataSource = undefined;
 
-     const { fromDate, initToDate, onTestDate } = props.data
-         , _initFromDate = (fromDate) ? fromDate : DateUtils.getFromDate(2)
-         , _initToDate = (initToDate) ? initToDate : DateUtils.getToDate()
-         , _onTestDate = (onTestDate) ? onTestDate : DateUtils.isValidDate;
+     const {
+       fromDate,
+       initToDate,
+       onTestDate
+     } = props.data;
+
 
      this._commandButtons = [
        <D.Button.Load onClick={this._handleLoad} />,
        <D.Button.Show onClick={props.data.onShow} />
      ]
      this.state = {
-       initFromDate : _initFromDate,
-       initToDate : _initToDate,
-       onTestDate : _onTestDate,
-       validationMessages : []
+       initFromDate: fromDate || getFromDate(2),
+       initToDate: initToDate || getToDate(),
+       onTestDate: onTestDate || isYmd,
+       validationMessages: []
      }
 
    }

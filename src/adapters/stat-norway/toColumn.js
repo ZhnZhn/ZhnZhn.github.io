@@ -6,7 +6,7 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 
-const { crTid, crChartOption } = fnAdapter;
+const { isYNumber, crTid, crChartOption } = fnAdapter;
 
 const C = {
   TITLE: 'Statisctics Norway: All Items'
@@ -30,7 +30,9 @@ const _fIsCategoryPoint = (dfT) => (p) => {
   if (dfT && p.c === dfT) {
     return false;
   }
-  return p.y !== null && p.y !== 0;
+  return isYNumber(p)
+    && p.y !== 0;
+  //return p.y !== null && p.y !== 0;
 }
 const _compareByY = (a, b) => a.y - b.y;
 
@@ -118,7 +120,7 @@ const toColumn = {
            .addCaption(C.TITLE, _subtitle)
            .addTooltip(Tooltip.category)
            .add({
-             chart: { spacingTop: 25 },             
+             chart: { spacingTop: 25 },
              ...crChartOption(_ds, Tid, option)
             })
            .toConfig()

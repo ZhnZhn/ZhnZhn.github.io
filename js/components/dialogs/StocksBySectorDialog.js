@@ -59,6 +59,11 @@ var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var getFromDate = _DateUtils2.default.getFromDate,
+    getToDate = _DateUtils2.default.getToDate,
+    isYmd = _DateUtils2.default.isYmd;
+
+
 var ABSENT = "Absent",
     ABSENT_VALIDATION_MSG = "Data Source for this item Absent";
 
@@ -221,16 +226,13 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp = _
         fromDate = data.fromDate,
         initToDate = data.initToDate,
         onTestDate = data.onTestDate,
-        _isShowLink = _this3._getItemSource(props) !== ABSENT ? false : true,
-        _initFromDate = fromDate ? fromDate : _DateUtils2.default.getFromDate(2),
-        _initToDate = initToDate ? initToDate : _DateUtils2.default.getToDate(),
-        _onTestDate = onTestDate ? onTestDate : _DateUtils2.default.isValidDate;
+        _isShowLink = _this3._getItemSource(props) !== ABSENT ? false : true;
 
     return {
       isShowLink: _isShowLink,
-      initFromDate: _initFromDate,
-      initToDate: _initToDate,
-      onTestDate: _onTestDate,
+      initFromDate: fromDate || getFromDate(2),
+      initToDate: initToDate || getToDate(),
+      onTestDate: onTestDate || isYmd,
       validationMessages: []
     };
   };
