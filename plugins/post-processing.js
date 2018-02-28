@@ -8,7 +8,7 @@ const postProcessing = prevHtml => {
     const lib = stats.lib;
     nextHtml = prevHtml.replace(
       '<!--lib-->',
-      '<script src="app/'+ lib + '" onload="preloader.done(67)" onerror="preloader.errScript()"></script>'
+      '<script src="app/'+ lib + '"></script>'
     );
   } catch(err) {
     console.log(err.message)

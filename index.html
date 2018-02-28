@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-hL4nqFTNiUubEO0hvGynw/qBAcqFhZon3jBWN5SDLwM=' 'sha256-Tv5as49hGPNUjaLz2BF5CQUPNHpo1yH0X97yIyDKDbk=' https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
   <meta name="application-name" content="ERC">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="ERC : Economic RESTful Client. It designed to help get the most out of economic statistics, uses data from various sources and displays them as charts. These can then be exported into various formats.">
@@ -63,45 +64,16 @@
          if (el) {el.style[n]=v;}
          return;
       };
-      var _setText = function(id,t){
-         var el = _getEl(id);
-         if (el) {el.textContent=t;}
-         return;
-      };
       obj = {
-        w:1, n:n, d:0,
-        done:function(p){
-          obj.w += p;
-          _setText('msg',(obj.w!==100)?'Loading '+obj.w+'%...':'Loaded 100%')
-          _setStyle('loaded', 'width', obj.w+'%');
-          if ((++obj.d) === obj.n){
-            window.preloader = undefined;
-          }
-        },
         hiding:function(){
           _setStyle('preloader','opacity',0.5);
-        },
-        errCss:function(){
-           obj.isErrCss = true;
-           _setStyle('css-missed','display','block');
-           _setStyle('msg-reload','display','block');
-        },
-        errScript:function(){
-          obj.isErrScript = true;
-          _setStyle('bundle-missed','display','block');
-          _setStyle('msg-reload','display','block');
-        },
-        stop:function(){
-          var arr = ['','-webkit-','-moz-','-o-'], i=0, len=arr.length, n='animation-play-state';
-          for(;i<len;i++){ _setStyle('circle', arr[i]+n, 'paused'); }
-          _setText('msg','Loaded '+obj.w+'%');
         }
       };
        return obj;
-    })(4);
+    })(4)
   </script>
 
-  <style>
+<style nonce="st1">
   [data-loader='circle']
   {
     width: 2.5em;
@@ -152,37 +124,22 @@
    font-size: 1em;
    font-weight: bold;
 }
+.wrapper__msg {
+  color: gray;
+}
 .wrapper__app {
   color:#80c040;
   display:block;
   padding-bottom:0.5em;
 }
-.wrapper__loaded {
-  width: 0;
-  height: 3px;
-  background-color: #80c040;
-}
-.wrapper__error {
-  display: none;
-  color: #F44336;
-  margin-top: 8px;
-}
-.wrapper__reload {
-  display: none;
-  color: black;
-  margin-top: 8px;
-}
-
 </style>
-
-  <link rel="stylesheet" href="/css/app-f086992446.min.css" onload="preloader.done(3)" onerror="preloader.errCss()">
-
+  <link rel="stylesheet" href="/css/app-f086992446.min.css">
 </head>
 <body>
 
   <!--googleoff: snippet-->
   <noscript>
-    <style type="text/css">
+    <style type="text/css" nonce="st2">
      #spinner {
        display: none;
      }
@@ -194,20 +151,8 @@
       <span class="wrapper__app">
         ERC&nbsp;
       </span>
-      <div id='msg' style="color:gray">
-        Loading 1%...
-      </div>
-      <div id="loaded" class="wrapper__loaded">
-      </div>
-      <div id="css-missed" class="wrapper__error">
-        Error on load css.
-      </div>
-      <div id="bundle-missed" class="wrapper__error">
-        Error on load bundle.
-      </div>
-      <div id="msg-reload" class="wrapper__reload">
-        *Maybe, missed in locale cache.
-        Please, reload page through browser's toolbar.
+      <div id='msg' class="wrapper__msg">
+        Loading...
       </div>
     </div>
   </div>
@@ -236,11 +181,10 @@
    </noscript>
 
  <script src="lib/system-csp-production.js"></script>
- <script src="app/lib_0766e92120abcb8f3bdf.js" onload="preloader.done(67)" onerror="preloader.errScript()"></script> 
- <script src="app/erc_77d0c1c7f96391911e74.js" onload="preloader.done(30)" onerror="preloader.errScript()"></script>
+ <script src="app/lib_0766e92120abcb8f3bdf.js"></script>
+ <script src="app/erc_09a500774b0da8a8884e.js"></script>
 
- <script>if(preloader && preloader.isErrScript){preloader.stop();}</script>
- <!-- Google Analytics -->
+ <!-- Google Analytics and Preloader-->
  <script>
   if ( window && window.location.href.indexOf("https://zhnzhn.github.io") > -1){
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

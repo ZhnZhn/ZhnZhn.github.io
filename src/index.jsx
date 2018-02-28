@@ -34,13 +34,9 @@ const _fnRenderApp = function(){
 
 const _fnLoading = function(){
   const preloader = window.preloader;
-  if (preloader) {
-    if (!preloader.isErrCss && !preloader.isErrScript){
+  if (preloader && typeof preloader.hiding === 'function') {
       preloader.hiding();
-      setTimeout( _fnRenderApp(), 100);
-    } else {
-      preloader.stop();
-    }
+      setTimeout( _fnRenderApp, 100);
   } else {
     _fnRenderApp()
   }

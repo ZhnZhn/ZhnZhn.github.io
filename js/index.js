@@ -42,13 +42,9 @@ var _fnRenderApp = function _fnRenderApp() {
 
 var _fnLoading = function _fnLoading() {
   var preloader = window.preloader;
-  if (preloader) {
-    if (!preloader.isErrCss && !preloader.isErrScript) {
-      preloader.hiding();
-      setTimeout(_fnRenderApp(), 100);
-    } else {
-      preloader.stop();
-    }
+  if (preloader && typeof preloader.hiding === 'function') {
+    preloader.hiding();
+    setTimeout(_fnRenderApp, 100);
   } else {
     _fnRenderApp();
   }
@@ -57,4 +53,4 @@ var _fnLoading = function _fnLoading() {
 _fnInitRaven();
 _ChartConfig2.default.init();
 _fnLoading();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=D:\_Dev\_React\_ERC\js\index.js.map
