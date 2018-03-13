@@ -63,6 +63,12 @@ const DataProviders = ({ isClose }) => (
           <Link.UnComtrade />
         </span>
         <span style={S.PROVIDER}>
+          <Link.StatNorway />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.StatSweden />
+        </span>
+        <span style={S.PROVIDER}>
           <Link.Iex />
         </span>
         <span style={S.PROVIDER}>
@@ -116,7 +122,7 @@ const DataProviders = ({ isClose }) => (
       </div>
       </OpenClose>
       <OpenClose
-        caption="(6) Required Https Proxy:"
+        caption="(4) Required Https Proxy:"
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
         isClose={true}
@@ -128,12 +134,6 @@ const DataProviders = ({ isClose }) => (
           </span>
           <span style={S.PROVIDER}>
             <Link.Insee/>
-          </span>
-          <span style={S.PROVIDER}>
-            <Link.StatNorway/>
-          </span>
-          <span style={S.PROVIDER}>
-            <Link.StatSweden/>
           </span>
           <span style={S.PROVIDER}>
             <Link.Bsl/>

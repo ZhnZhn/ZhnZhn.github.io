@@ -109,7 +109,7 @@ const  Insee = withProps({
 
 const StatNorway = withProps({
   className: CL_LINK,
-  href: "http://www.ssb.no/en",
+  href: "https://www.ssb.no/en",
   dfStyle: S.BLUE,
   title: "Statistics Norway"
 })(BaseComponent)

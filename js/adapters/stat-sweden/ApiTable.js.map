@@ -1,12 +1,12 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\stat-sweden\\ApiTable.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\stat-sweden\\ApiTable.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/adapters/stat-sweden/ApiTable.js"
+ ],
+ "file": "../../../src/adapters/stat-sweden/ApiTable.js",
  "names": [
   "ROOT_URL",
   "TableApi"
  ],
- "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,WAAW,0CAAjB;AACA,IAAMC,WAAW,yBAAUD,QAAV,CAAjB;;kBAEeC,Q"
+ "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,WAAW,2CAAjB;AACA,IAAMC,WAAW,yBAAUD,QAAV,CAAjB;;kBAEeC,Q"
 }

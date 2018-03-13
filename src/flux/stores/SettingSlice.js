@@ -2,9 +2,9 @@ import { LoadType as LT } from '../../constants/Type'
 
 const _settings = {};
 const _withProxy = [
-  LT.FS, LT.FAO,
-  LT.NST, LT.NST_2,
-  LT.SWS, LT.BLS,
+  LT.FS,
+  LT.FAO,
+  LT.BLS,
   LT.CRC
 ];
 
@@ -52,19 +52,19 @@ const SettingSlice = {
 
   getProxy(loadId){
     if (_withProxy.indexOf(loadId) === -1) {
-      return undefined;
+      return '';
     }
     return this.setting.proxy;
   },
   isSetting(propName, value){
-    if (typeof value == 'undefined'){
+    if (typeof value === 'undefined'){
       return this.setting[propName];
     }
     this.setting[propName] = !!value
   },
 
   isAdminMode(value){
-    if (typeof value == 'undefined'){
+    if (typeof value === 'undefined'){
       return this.setting.isAdminMode;
     }
     this.setting.isAdminMode = !!value

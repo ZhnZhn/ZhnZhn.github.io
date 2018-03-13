@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var _Type = require('../../constants/Type');
 
 var _settings = {};
-var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.NST, _Type.LoadType.NST_2, _Type.LoadType.SWS, _Type.LoadType.BLS, _Type.LoadType.CRC];
+var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.BLS, _Type.LoadType.CRC];
 
 var SettingSlice = {
   setting: {
@@ -59,18 +59,18 @@ var SettingSlice = {
 
   getProxy: function getProxy(loadId) {
     if (_withProxy.indexOf(loadId) === -1) {
-      return undefined;
+      return '';
     }
     return this.setting.proxy;
   },
   isSetting: function isSetting(propName, value) {
-    if (typeof value == 'undefined') {
+    if (typeof value === 'undefined') {
       return this.setting[propName];
     }
     this.setting[propName] = !!value;
   },
   isAdminMode: function isAdminMode(value) {
-    if (typeof value == 'undefined') {
+    if (typeof value === 'undefined') {
       return this.setting.isAdminMode;
     }
     this.setting.isAdminMode = !!value;

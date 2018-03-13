@@ -122,7 +122,7 @@ var Insee = (0, _withProps2.default)({
 
 var StatNorway = (0, _withProps2.default)({
   className: CL_LINK,
-  href: "http://www.ssb.no/en",
+  href: "https://www.ssb.no/en",
   dfStyle: S.BLUE,
   title: "Statistics Norway"
 })(_Link2.default);
@@ -168,4 +168,4 @@ exports.default = {
   CryptoCompare: CryptoCompare,
   Cmc: Cmc
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\links\Links.js.map
+//# sourceMappingURL=Links.js.map

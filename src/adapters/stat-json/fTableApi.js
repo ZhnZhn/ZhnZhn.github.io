@@ -11,7 +11,7 @@ const _crTidTop = (v) => {
 
 const fTableApi = (ROOT_URL) => ({
   getRequestUrl(option){
-    const { proxy, metric, dfId } = option
+    const { proxy='', metric, dfId } = option
         , id = dfId ? dfId : metric;
     return `${proxy}${ROOT_URL}/${id}`;
   },

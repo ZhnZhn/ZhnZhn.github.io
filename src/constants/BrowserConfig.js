@@ -46,7 +46,7 @@ const BrowserConfig = {
     browserType: BT.FRANCE_STATISTICS,
     isDynamic: true,
     caption: 'Insee: France Statistics',
-    sourceMenuUrl: './data/france-statistics/source-menu.json'
+    sourceMenuUrl: './data/statistics-france/source-menu.json'
   },
   [BT.NORWAY_STATISTICS]: {
     browserType: BT.NORWAY_STATISTICS,
@@ -63,26 +63,26 @@ const BrowserConfig = {
       lT: 'NST_2',
       sP: 'Stat. Norway',
       dU: './data/statistics-norway/statistics-norway.html',
-      rootUrl: 'http://data.ssb.no/api/v0/en/table'
+      rootUrl: 'https://data.ssb.no/api/v0/en/table'
     }
   },
   [BT.SWEDEN_STAT]: {
     browserType: BT.SWEDEN_STAT,
     isDynamic: true,
     caption: 'Statistics Sweden',
-    sourceMenuUrl: './data/stat-sweden/source-menu.json'
+    sourceMenuUrl: './data/statistics-sweden/source-menu.json'
   },
   [BT.SWEDEN_STAT_ALL]: {
     browserType: BT.SWEDEN_STAT_ALL,
     isDynamic: true,
     caption: 'Statistics Sweden All',
-    sourceMenuUrl: './data/stat-sweden/source-menu.json',
+    sourceMenuUrl: './data/statistics-sweden/source-menu.json',
     dfProps: {
       bT: BT.SWEDEN_STAT_ALL,
       lT: 'SWS',
       sP: 'Stat. Sweden',
-      dU: './data/stat-sweden/statistics-sweden.html',
-      rootUrl: 'http://api.scb.se/OV0104/v1/doris/en/ssd'
+      dU: './data/statistics-sweden/statistics-sweden.html',
+      rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
     }
   },
   [BT.US_ECONOMY]: {
@@ -141,7 +141,7 @@ const BrowserConfig = {
     chartContainerCaption: 'Quandl : London Stock Exchange by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemLse',
-    descrUrl: './data/london-stocks/lse-stocks.html'    
+    descrUrl: './data/london-stocks/lse-stocks.html'
   },
 
   [BT.WATCH_LIST]: {

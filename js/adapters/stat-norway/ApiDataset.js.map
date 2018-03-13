@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/adapters/stat-norway/ApiDataset.js"],"names":["C","ROOT_URL","DatasetApi","getRequestUrl","option","proxy","metric","dfId","id","checkResponse"],"mappings":";;;;;;AACA,IAAMA,IAAI;AACRC,YAAU;AADF,CAAV;;AAIA,IAAMC,aAAa;AACjBC,eADiB,yBACFC,MADE,EACM;AAAA,QACbC,KADa,GACWD,MADX,CACbC,KADa;AAAA,QACNC,MADM,GACWF,MADX,CACNE,MADM;AAAA,QACEC,IADF,GACWH,MADX,CACEG,IADF;AAAA,QAEfC,EAFe,GAEVD,OAAOA,IAAP,GAAcD,MAFJ;;AAGrB,gBAAUD,KAAV,GAAkBL,EAAEC,QAApB,SAAgCO,EAAhC;AACD,GALgB;AAMjBC,eANiB,2BAMF;AACb,WAAO,IAAP;AACD;AARgB,CAAnB;;kBAWeP,U","file":"ApiDataset.js","sourcesContent":["\r\nconst C = {\r\n  ROOT_URL: 'http://data.ssb.no/api/v0/dataset'\r\n};\r\n\r\nconst DatasetApi = {\r\n  getRequestUrl( option ){\r\n    const { proxy, metric, dfId } = option\r\n        , id = dfId ? dfId : metric;\r\n    return `${proxy}${C.ROOT_URL}/${id}.json?lang=en`;\r\n  },\r\n  checkResponse(){\r\n    return true;\r\n  }\r\n}\r\n\r\nexport default DatasetApi\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-norway/ApiDataset.js"
+ ],
+ "file": "../../../src/adapters/stat-norway/ApiDataset.js",
+ "names": [
+  "C",
+  "ROOT_URL",
+  "DatasetApi",
+  "getRequestUrl",
+  "option",
+  "metric",
+  "dfId",
+  "id",
+  "checkResponse"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,YAAU;AADF,CAAV;;AAIA,IAAMC,aAAa;AACjBC,eADiB,yBACFC,MADE,EACM;AAAA,QACbC,MADa,GACID,MADJ,CACbC,MADa;AAAA,QACLC,IADK,GACIF,MADJ,CACLE,IADK;AAAA,QAEfC,EAFe,GAEVD,OAAOA,IAAP,GAAcD,MAFJ;;AAGrB,WAAUL,EAAEC,QAAZ,SAAwBM,EAAxB;AACD,GALgB;AAMjBC,eANiB,2BAMF;AACb,WAAO,IAAP;AACD;AARgB,CAAnB;;kBAWeN,U"
+}

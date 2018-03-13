@@ -18,23 +18,55 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var URL_SEARCH = 'https://www.ssb.no/en/sok?sok=';
+var SEARCH = {
+  NST: {
+    url: 'https://www.ssb.no/en/sok?sok=',
+    title: 'Statistics Norway Search'
+  },
+  SWS: {
+    url: 'https://www.scb.se/en/finding-statistics/search/?query=',
+    title: 'Statistics Sweden Search'
+  }
+};
+
 var DF_SOURCE = 'Unknown';
 
-var _crDescr = function _crDescr(_ref, option) {
-  var _ref$updated = _ref.updated,
-      updated = _ref$updated === undefined ? '' : _ref$updated,
-      _ref$source = _ref.source,
-      source = _ref$source === undefined ? DF_SOURCE : _ref$source,
-      label = _ref.label;
+var _crSearchToken = function _crSearchToken(label) {
+  var _arr = (label || '').toString().split(',');
+  return _arr[0] || '';
+};
+
+var _crLink = function _crLink(token, _ref) {
+  var url = _ref.url,
+      title = _ref.title;
+  return '<a class="native-link" href="' + url + token + '">' + title + '</a>';
+};
+
+var _crSearchLink = function _crSearchLink(label, option) {
+  var _token = _crSearchToken(label);
+  switch (option.browserType) {
+    case 'NST':case 'NST_ALL':
+      return _crLink(_token, SEARCH.NST);
+    case 'SWS':case 'SWS_ALL':
+      return _crLink(_token, SEARCH.SWS);
+    default:
+      return '';
+  }
+};
+
+var _crDescr = function _crDescr(_ref2, option) {
+  var _ref2$updated = _ref2.updated,
+      updated = _ref2$updated === undefined ? '' : _ref2$updated,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === undefined ? DF_SOURCE : _ref2$source,
+      label = _ref2.label;
   var _date = updated.replace('T', ' ').replace('Z', ''),
       _option$dfId = option.dfId,
       dfId = _option$dfId === undefined ? '' : _option$dfId,
-      _arr = (label || '').toString().split(','),
-      _sok = _arr[0];
+      _elSearchLink = _crSearchLink(label, option);
 
 
-  return 'TableId: ' + dfId + '<BR/>' + source + ': ' + _date + '<BR/><a class="native-link" href="' + URL_SEARCH + _sok + '">Statistics Norway Search</a>';
+  return 'TableId: ' + dfId + '<BR/>' + source + ': ' + _date + '<BR/>' + _elSearchLink;
 };
 
 var _crItemCaption = function _crItemCaption(option) {
@@ -131,4 +163,4 @@ var fnAdapter = {
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\fnAdapter.js.map
+//# sourceMappingURL=fnAdapter.js.map

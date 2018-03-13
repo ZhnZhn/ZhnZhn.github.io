@@ -3,20 +3,47 @@ import JSONstat from 'jsonstat';
 
 import AdapterFn from '../AdapterFn';
 
-const URL_SEARCH = 'https://www.ssb.no/en/sok?sok=';
+const SEARCH = {
+  NST: {
+    url: 'https://www.ssb.no/en/sok?sok=',
+    title: 'Statistics Norway Search'
+  },
+  SWS: {
+    url: 'https://www.scb.se/en/finding-statistics/search/?query=',
+    title: 'Statistics Sweden Search'
+  }
+};
+
 const DF_SOURCE = 'Unknown';
 
+const _crSearchToken = (label) => {
+  const _arr = (label || '').toString().split(',');
+  return _arr[0] || '';
+};
+
+const _crLink = (token, {url, title}) => `<a class="native-link" href="${url}${token}">${title}</a>`;
+
+const _crSearchLink = (label, option) => {
+  const  _token = _crSearchToken(label);
+  switch(option.browserType){
+    case 'NST': case 'NST_ALL':
+      return _crLink(_token, SEARCH.NST);
+    case 'SWS': case 'SWS_ALL':
+      return _crLink(_token, SEARCH.SWS);
+    default:
+      return '';
+  }
+};
 
 const _crDescr = ({ updated='', source=DF_SOURCE, label }, option) => {
   const _date = updated
           .replace('T', ' ')
           .replace('Z', '')
       , { dfId='' } = option
-      , _arr = (label || '').toString().split(',')
-      , _sok = _arr[0];
+      , _elSearchLink = _crSearchLink(label, option);
 
-  return `TableId: ${dfId}<BR/>${source}: ${_date}<BR/><a class="native-link" href="${URL_SEARCH}${_sok}">Statistics Norway Search</a>`;
-}
+  return `TableId: ${dfId}<BR/>${source}: ${_date}<BR/>${_elSearchLink}`;
+};
 
 const _crItemCaption = (option) => {
   const { items, dfId='id'} = option
@@ -39,7 +66,7 @@ const _crAreaMapSlice = (option) => {
 
 const fnAdapter = {
   isYNumber: AdapterFn.isYNumber,
-  
+
   crDsValuesTimes: (json, option) => {
     const mapSlice = _crAreaMapSlice(option)
         , ds = JSONstat(json).Dataset(0)

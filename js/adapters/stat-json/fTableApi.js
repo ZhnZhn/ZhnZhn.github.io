@@ -17,7 +17,8 @@ var _crTidTop = function _crTidTop(v) {
 var fTableApi = function fTableApi(ROOT_URL) {
   return {
     getRequestUrl: function getRequestUrl(option) {
-      var proxy = option.proxy,
+      var _option$proxy = option.proxy,
+          proxy = _option$proxy === undefined ? '' : _option$proxy,
           metric = option.metric,
           dfId = option.dfId,
           id = dfId ? dfId : metric;
@@ -72,4 +73,4 @@ var fTableApi = function fTableApi(ROOT_URL) {
 };
 
 exports.default = fTableApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-json\fTableApi.js.map
+//# sourceMappingURL=fTableApi.js.map

@@ -51,7 +51,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   browserType: _Type.BrowserType.FRANCE_STATISTICS,
   isDynamic: true,
   caption: 'Insee: France Statistics',
-  sourceMenuUrl: './data/france-statistics/source-menu.json'
+  sourceMenuUrl: './data/statistics-france/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NORWAY_STATISTICS, {
   browserType: _Type.BrowserType.NORWAY_STATISTICS,
   isDynamic: true,
@@ -66,24 +66,24 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
     lT: 'NST_2',
     sP: 'Stat. Norway',
     dU: './data/statistics-norway/statistics-norway.html',
-    rootUrl: 'http://data.ssb.no/api/v0/en/table'
+    rootUrl: 'https://data.ssb.no/api/v0/en/table'
   }
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.SWEDEN_STAT, {
   browserType: _Type.BrowserType.SWEDEN_STAT,
   isDynamic: true,
   caption: 'Statistics Sweden',
-  sourceMenuUrl: './data/stat-sweden/source-menu.json'
+  sourceMenuUrl: './data/statistics-sweden/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.SWEDEN_STAT_ALL, {
   browserType: _Type.BrowserType.SWEDEN_STAT_ALL,
   isDynamic: true,
   caption: 'Statistics Sweden All',
-  sourceMenuUrl: './data/stat-sweden/source-menu.json',
+  sourceMenuUrl: './data/statistics-sweden/source-menu.json',
   dfProps: {
     bT: _Type.BrowserType.SWEDEN_STAT_ALL,
     lT: 'SWS',
     sP: 'Stat. Sweden',
-    dU: './data/stat-sweden/statistics-sweden.html',
-    rootUrl: 'http://api.scb.se/OV0104/v1/doris/en/ssd'
+    dU: './data/statistics-sweden/statistics-sweden.html',
+    rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
   }
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_ECONOMY, {
   browserType: _Type.BrowserType.US_ECONOMY,
@@ -145,4 +145,4 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
 }), _BrowserConfig);
 
 exports.default = BrowserConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\BrowserConfig.js.map
+//# sourceMappingURL=BrowserConfig.js.map
