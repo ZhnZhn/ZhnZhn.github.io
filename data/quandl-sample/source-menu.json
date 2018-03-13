@@ -15,9 +15,9 @@
   "items" : {
     "QPS_STOCKS" : {
       "type" : "QPS_STOCKS",
-      "menuTitle" : "Sharadar : US Core",
+      "menuTitle" : "Sharadar: US Core (SF1)",
       "dialogCaption" : "Core US Fundamentals",
-      "chartContainerCaption" : "Quandl : Sharadar : Core US Fundamentals",
+      "chartContainerCaption" : "Quandl: Sharadar: Core US Fundamentals",
       "dialogType" : "DialogType4",
       "dialogProps" : {
         "descrUrl": "./data/quandl-sample/sharadar-core.html",
@@ -40,7 +40,7 @@
       "type" : "QPS_CLSM",
       "menuTitle" : "CLS FX (Monthly)",
       "dialogCaption" : "CLS FX Volume Data (Monthly)",
-      "chartContainerCaption" : "Quandl : CLS FX Volume Data (Monthly)",
+      "chartContainerCaption" : "Quandl: CLS FX Volume Data (Monthly)",
       "dialogProps" : {
         "descrUrl" : "./data/quandl-sample/cls-fx.html",
         "optionURI" : "./data/quandl-sample/clsm-monthly.json",

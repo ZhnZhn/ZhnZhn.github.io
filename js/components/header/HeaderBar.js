@@ -74,8 +74,8 @@ var _Model2 = _interopRequireDefault(_Model);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var LOGO_TITLE = "ERC: Economic RESTful Client v0.14.0",
-    CAPTION = "ERC v0.14.0";
+var LOGO_TITLE = "ERC: Economic RESTful Client v0.15.0",
+    CAPTION = "ERC v0.15.0";
 
 var styles = {
   appLabel: {
@@ -243,4 +243,4 @@ var HeaderBar = function (_Component) {
 }(_react.Component);
 
 exports.default = HeaderBar;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\HeaderBar.js.map
+//# sourceMappingURL=HeaderBar.js.map

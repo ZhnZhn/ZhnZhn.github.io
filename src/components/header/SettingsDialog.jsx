@@ -98,8 +98,7 @@ class SettingsDialog extends Component {
         , _proxy = data.getProxy()
         , _isAdminMode = safeFn(data, MODE_ADMIN, false)()
         , _isDrawDeltaExtrems = safeFn(data, MODE_DELTA, false)()
-        , _isNotZoomToMinMax = safeFn(data, MODE_ZOOM, false)();
-
+        , _isNotZoomToMinMax = safeFn(data, MODE_ZOOM, false)();    
     return (
          <ModalDialog
             style={S.MODAL}

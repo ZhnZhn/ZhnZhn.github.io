@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\header\\HeaderBar.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\header\\HeaderBar.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/components/header/HeaderBar.js"
+ ],
+ "file": "../../../src/components/header/HeaderBar.js",
  "names": [
   "LOGO_TITLE",
   "CAPTION",

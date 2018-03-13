@@ -215,4 +215,4 @@ var ChartToolbar = function (_Component) {
 }(_react.Component);
 
 exports.default = ChartToolbar;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ChartToolBar.js.map
+//# sourceMappingURL=ChartToolBar.js.map

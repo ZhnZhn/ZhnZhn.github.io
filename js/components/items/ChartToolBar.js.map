@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\items\\ChartToolBar.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\items\\ChartToolBar.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/components/items/ChartToolBar.js"
+ ],
+ "file": "../../../src/components/items/ChartToolBar.js",
  "names": [
   "S",
   "TAB_INDICATOR",

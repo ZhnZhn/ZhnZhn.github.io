@@ -25,7 +25,7 @@ var SettingSlice = {
       key4: this.fSetKey([_Type.LoadType.INTR]),
       key5: this.fSetKey([_Type.LoadType.Q]),
       setProxy: this.setSetting('proxy').bind(this),
-      getProxy: this.getProxy.bind(this),
+      getProxy: this.getProxy.bind(this, _Type.LoadType.FAO),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),
       isNotZoomToMinMax: this.isSetting.bind(this, 'isNotZoomToMinMax')
@@ -78,4 +78,4 @@ var SettingSlice = {
 };
 
 exports.default = SettingSlice;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\SettingSlice.js.map
+//# sourceMappingURL=SettingSlice.js.map

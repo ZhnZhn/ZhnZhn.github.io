@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\AppErc.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\AppErc.js",
- "sourceRoot": "",
+ "sources": [
+  "../../src/components/AppErc.js"
+ ],
+ "file": "../../src/components/AppErc.js",
  "names": [
   "PREV_BUILD",
   "AppErc",

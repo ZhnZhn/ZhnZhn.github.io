@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 const HIDE_PERIOD = 300000
     , ANIMATION_PERIOD = 1100
-    , MSG = "Can website collect statistics by using session cookies from Google Analytics with anonymizeIp ?"
-    , BT_OK = "OK"
-    , BT_NO = "NO, not today.";
+    , MSG = "Can web app ERC collect Your general user's session statistics by applying Google Analytics with anonymizing IP address?"
+    , BT_YES = "Yes"
+    , BT_NO = "No, not today";
 
 const CL = {
   ROOT: "consent",
@@ -89,7 +89,7 @@ class ConsentCookiePopup extends Component {
               className={CL.BT}
               onClick={this._hClickOk}
            >
-              {BT_OK}
+              {BT_YES}
            </button>
            <button
               className={CL.BT}

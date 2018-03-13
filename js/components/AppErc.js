@@ -70,7 +70,7 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '28-02-2018';
+var PREV_BUILD = '13-03-2018';
 
 var AppErc = function (_Component) {
   (0, _inherits3.default)(AppErc, _Component);
@@ -138,4 +138,4 @@ var AppErc = function (_Component) {
 }(_react.Component);
 
 exports.default = AppErc;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\AppErc.js.map
+//# sourceMappingURL=AppErc.js.map

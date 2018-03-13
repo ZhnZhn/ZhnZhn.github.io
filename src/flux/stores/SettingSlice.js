@@ -24,7 +24,7 @@ const SettingSlice = {
       key4: this.fSetKey([LT.INTR]),
       key5: this.fSetKey([LT.Q]),
       setProxy: this.setSetting('proxy').bind(this),
-      getProxy: this.getProxy.bind(this),
+      getProxy: this.getProxy.bind(this, LT.FAO),
       isAdminMode: this.isAdminMode.bind(this),
       isDrawDeltaExtrems: this.isSetting.bind(this, 'isDrawDeltaExtrems'),
       isNotZoomToMinMax: this.isSetting.bind(this, 'isNotZoomToMinMax')

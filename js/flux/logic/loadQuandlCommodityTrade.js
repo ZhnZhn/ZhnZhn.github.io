@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loadQuandlCommodityTrade = undefined;
 
+var _Type = require('../../constants/Type');
+
 var _fnFetch = require('../../utils/fnFetch');
 
 var _fnCatch = require('./fnCatch');
@@ -83,7 +85,7 @@ var _loadToChart = function _loadToChart(option, onAdded, onFailed) {
 var loadQuandlCommodityTrade = {
   loadItem: function loadItem(option, onCompleted, onAdded, onFailed) {
     var parentId = _ChartStore2.default.isLoadToChart();
-    option.apiKey = _ChartStore2.default.getQuandlKey();
+    option.apiKey = _ChartStore2.default.getKey(_Type.LoadType.Q);
 
     if (!parentId) {
       _loadToChartComp(option, onCompleted, onFailed);

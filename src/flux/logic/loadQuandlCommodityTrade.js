@@ -1,4 +1,4 @@
-
+import { LoadType as LT } from '../../constants/Type'
 import { fetchJson } from '../../utils/fnFetch'
 import { fnCatch } from './fnCatch';
 import ChartStore from '../stores/ChartStore';
@@ -70,7 +70,7 @@ const _loadToChart = function(option, onAdded, onFailed){
 const loadQuandlCommodityTrade = {
   loadItem(option, onCompleted, onAdded, onFailed){
     const parentId = ChartStore.isLoadToChart();
-    option.apiKey = ChartStore.getQuandlKey()
+    option.apiKey = ChartStore.getKey(LT.Q)
 
     if (!parentId){
       _loadToChartComp(option, onCompleted, onFailed);

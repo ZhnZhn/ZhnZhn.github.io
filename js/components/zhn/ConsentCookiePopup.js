@@ -32,9 +32,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var HIDE_PERIOD = 300000,
     ANIMATION_PERIOD = 1100,
-    MSG = "Can website collect statistics by using session cookies from Google Analytics with anonymizeIp ?",
-    BT_OK = "OK",
-    BT_NO = "NO, not today.";
+    MSG = "Can web app ERC collect Your general user's session statistics by applying Google Analytics with anonymizing IP address?",
+    BT_YES = "Yes",
+    BT_NO = "No, not today";
 
 var CL = {
   ROOT: "consent",
@@ -137,7 +137,7 @@ var ConsentCookiePopup = function (_Component) {
               className: CL.BT,
               onClick: this._hClickOk
             },
-            BT_OK
+            BT_YES
           ),
           _react2.default.createElement(
             "button",
@@ -155,4 +155,4 @@ var ConsentCookiePopup = function (_Component) {
 }(_react.Component);
 
 exports.default = ConsentCookiePopup;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\ConsentCookiePopup.js.map
+//# sourceMappingURL=ConsentCookiePopup.js.map

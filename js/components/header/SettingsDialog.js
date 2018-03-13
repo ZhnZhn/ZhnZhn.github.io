@@ -257,4 +257,4 @@ var SettingsDialog = (_temp = _class = function (_Component) {
   };
 }, _temp);
 exports.default = SettingsDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\SettingsDialog.js.map
+//# sourceMappingURL=SettingsDialog.js.map
