@@ -53,7 +53,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var SHOW_POPUP = "show-popup",
     CHILD_MARGIN = 36,
     RESIZE_INIT_WIDTH = 635,
-    RESIZE_MIN_WIDTH = 540,
+    RESIZE_MIN_WIDTH = 395,
     RESIZE_MAX_WIDTH = 1200;
 
 var styles = {
@@ -260,4 +260,4 @@ var ChartContainer = function (_Component) {
 }(_react.Component);
 
 exports.default = ChartContainer;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn-containers\ChartContainer.js.map
+//# sourceMappingURL=ChartContainer.js.map

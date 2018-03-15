@@ -65,8 +65,6 @@ var S = {
   },
   TIME_SPAN: {
     display: 'inline-block',
-    position: 'relative',
-    top: '-8px',
     color: 'rgb(253, 179, 22)',
     fontWeight: 'bold',
     paddingLeft: '16px'
@@ -238,4 +236,4 @@ var MapChartItem = function (_Component) {
 }(_react.Component);
 
 exports.default = MapChartItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\MapChartItem.js.map
+//# sourceMappingURL=MapChartItem.js.map

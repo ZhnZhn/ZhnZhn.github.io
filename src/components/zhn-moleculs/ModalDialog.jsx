@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
@@ -27,6 +27,7 @@ const S = {
 };
 
 class ModalDialog extends Component {
+  /*
    static propTypes = {
      isShow: PropTypes.bool,
      isWithButton: PropTypes.bool,
@@ -38,6 +39,7 @@ class ModalDialog extends Component {
      style: PropTypes.object,
      onClose: PropTypes.func
    }
+   */
    static defaultProps = {
      isWithButton: true,
      isNotUpdate: false,
@@ -116,7 +118,10 @@ class ModalDialog extends Component {
          >
              <div style={S.CAPTION_DIV}>
                 <span style={styleCaption}>{caption}</span>
-                <SvgClose onClose={onClose} />
+                <SvgClose
+                  style={S.SVG_CLOSE}
+                  onClose={onClose}
+                />
              </div>
              <div>
                {children}

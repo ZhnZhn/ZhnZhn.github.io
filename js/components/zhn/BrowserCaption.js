@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -20,12 +16,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var STYLE = {
   ROOT: {
+    position: 'relative',
     //backgroundColor: '#232F3B',
     backgroundColor: '#1B2836',
     color: 'rgba(164, 135, 212, 1)',
     lineHeight: '1.8',
     paddingTop: '4px',
     paddingLeft: '10px',
+    paddingRight: '42px',
     marginBottom: '10px',
     borderTopLeftRadius: '4px',
     borderTopRightRadius: '4px'
@@ -36,8 +34,14 @@ var STYLE = {
     fontSize: '18px',
     fontWeight: '500',
     paddingRight: '8px'
+  },
+  SVG_CLOSE: {
+    position: 'absolute',
+    top: '6px',
+    right: 0
   }
 };
+//import PropTypes from "prop-types";
 
 var BrowserCaption = function BrowserCaption(_ref) {
   var caption = _ref.caption,
@@ -56,15 +60,17 @@ var BrowserCaption = function BrowserCaption(_ref) {
     ),
     children,
     _react2.default.createElement(_SvgClose2.default, {
-      style: { position: 'relative', top: '3px' },
+      style: STYLE.SVG_CLOSE,
       onClose: onClose
     })
   );
 };
-BrowserCaption.propTypes = process.env.NODE_ENV !== "production" ? {
-  caption: _propTypes2.default.string,
-  onClose: _propTypes2.default.func
-} : {};
+/*
+BrowserCaption.propTypes = {
+  caption: PropTypes.string,
+  onClose: PropTypes.func
+}
+*/
 
 exports.default = BrowserCaption;
 //# sourceMappingURL=BrowserCaption.js.map

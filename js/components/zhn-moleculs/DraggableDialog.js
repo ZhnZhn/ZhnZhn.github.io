@@ -28,10 +28,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -49,6 +45,8 @@ var _Dialog = require('./Dialog.Style');
 var _Dialog2 = _interopRequireDefault(_Dialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from "prop-types";
 
 var CL = {
   SHOWING: 'show-popup',
@@ -101,19 +99,34 @@ var DraggableDialog = function (_Component) {
           , onClick: onClose
         })
       );
+    }, _this._refRootDivEl = function (c) {
+      return _this.rootDivEl = c;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(DraggableDialog, [{
     key: 'componentDidMount',
+
+    /*
+    static propTypes = {
+      isShow: PropTypes.bool,
+      caption: PropTypes.string,
+      children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+      ]),
+      commandButtons: PropTypes.arrayOf(PropTypes.element),
+      onShowChart: PropTypes.func,
+      onClose: PropTypes.func
+    }
+    */
+
     value: function componentDidMount() {
       _Interact2.default.makeDragable(this.rootDivEl);
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           isShow = _props.isShow,
           caption = _props.caption,
@@ -128,9 +141,8 @@ var DraggableDialog = function (_Component) {
       return _react2.default.createElement(
         'div',
         {
-          ref: function ref(c) {
-            return _this2.rootDivEl = c;
-          },
+          ref: this._refRootDivEl,
+          role: 'dialog',
           className: _classShow,
           style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_DRAG, _styleShow),
           onClick: onFront
@@ -143,7 +155,10 @@ var DraggableDialog = function (_Component) {
             { className: CL.NOT_SELECTED },
             caption
           ),
-          _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
+          _react2.default.createElement(_SvgClose2.default, {
+            style: S.SVG_CLOSE,
+            onClose: onClose
+          })
         ),
         _react2.default.createElement(
           'div',
@@ -157,13 +172,5 @@ var DraggableDialog = function (_Component) {
   return DraggableDialog;
 }(_react.Component);
 
-DraggableDialog.propTypes = process.env.NODE_ENV !== "production" ? {
-  isShow: _propTypes2.default.bool,
-  caption: _propTypes2.default.string,
-  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]),
-  commandButtons: _propTypes2.default.arrayOf(_propTypes2.default.element),
-  onShowChart: _propTypes2.default.func,
-  onClose: _propTypes2.default.func
-} : {};
 exports.default = DraggableDialog;
 //# sourceMappingURL=DraggableDialog.js.map

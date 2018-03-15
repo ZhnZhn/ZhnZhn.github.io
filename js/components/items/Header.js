@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -22,45 +26,54 @@ var _ValueMovingBadge2 = _interopRequireDefault(_ValueMovingBadge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLE = {
+var CL = "not-selected shadow-right";
+//import PropTypes from "prop-types";
+
+var S = {
   ROOT: {
     backgroundColor: '#1b2836',
     paddingTop: '4px',
-    lineHeight: 1.8,
-    height: '32px',
+    paddingRight: '42px',
+    height: 'auto',
     width: '100%',
     borderTopRightRadius: '2px',
     borderBottomRightRadius: '2px'
   },
   CHECK_BOX: {
-    float: 'left',
+    //float: 'left',
     marginRight: '10px',
     marginLeft: '10px'
   },
   CAPTION_OPEN: {
+    textAlign: 'left',
     display: 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
     cursor: 'pointer',
     width: '125px',
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    float: 'left'
+    textOverflow: 'clip',
+    overflow: 'hidden'
+
   },
   CAPTION_CLOSE: {
     color: 'gray'
   },
   CAPTION_WIDTH: {
+    textAlign: 'left',
     width: '385px'
   },
   TIME: {
     color: 'rgb(253, 179, 22)',
     fontWeight: 'bold',
     paddingLeft: '16px'
+  },
+  CLOSE: {
+    position: 'absolute',
+    right: 0,
+    top: '4px'
   }
 };
-//import PropTypes from "prop-types";
 
 var Header = function Header(props) {
   var isOpen = props.isOpen,
@@ -75,32 +88,32 @@ var Header = function Header(props) {
       isAdminMode = props.isAdminMode,
       crValueMoving = props.crValueMoving,
       onClose = props.onClose,
-      _styleIsOpen = isOpen ? STYLE.CAPTION_OPEN : Object.assign({}, STYLE.CAPTION_OPEN, STYLE.CAPTION_CLOSE),
-      _styleCaption = valueMoving ? _styleIsOpen : Object.assign({}, _styleIsOpen, STYLE.CAPTION_WIDTH),
+      _styleIsOpen = isOpen ? S.CAPTION_OPEN : (0, _extends3.default)({}, S.CAPTION_OPEN, S.CAPTION_CLOSE),
+      _styleCaption = valueMoving ? _styleIsOpen : (0, _extends3.default)({}, _styleIsOpen, S.CAPTION_WIDTH),
       _movingBadgeEl = valueMoving ? _react2.default.createElement(_ValueMovingBadge2.default, {
     valueMoving: valueMoving,
     isAdminMode: isAdminMode,
     crValueMoving: crValueMoving
-  }) : undefined,
+  }) : null,
       _timeEl = !valueMoving && itemTime ? _react2.default.createElement(
     'span',
-    { style: STYLE.TIME },
+    { style: S.TIME },
     itemTime
-  ) : undefined;
+  ) : null;
 
   return _react2.default.createElement(
     'div',
-    { style: STYLE.ROOT },
+    { style: S.ROOT },
     _react2.default.createElement(_SvgCheckBox2.default, {
-      rootStyle: STYLE.CHECK_BOX,
+      rootStyle: S.CHECK_BOX,
       chartType: chartType,
       onCheck: onCheck,
       onUnCheck: onUnCheck
     }),
     _react2.default.createElement(
-      'span',
+      'button',
       {
-        className: 'not-selected',
+        className: CL,
         title: itemTitle,
         style: _styleCaption,
         onClick: onToggle
@@ -109,7 +122,10 @@ var Header = function Header(props) {
     ),
     _movingBadgeEl,
     _timeEl,
-    _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
+    _react2.default.createElement(_SvgClose2.default, {
+      style: S.CLOSE,
+      onClose: onClose
+    })
   );
 };
 
@@ -134,4 +150,4 @@ Header.propTypes = {
 */
 
 exports.default = Header;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\Header.js.map
+//# sourceMappingURL=Header.js.map

@@ -13,8 +13,8 @@ import ItemFactory from '../factories/ItemFactory';
 
 const SHOW_POPUP = "show-popup"
     , CHILD_MARGIN = 36
-    , RESIZE_INIT_WIDTH = 635
-    , RESIZE_MIN_WIDTH = 540
+    , RESIZE_INIT_WIDTH = 635    
+    , RESIZE_MIN_WIDTH = 395
     , RESIZE_MAX_WIDTH = 1200;
 
 const styles = {
@@ -146,7 +146,7 @@ class ChartContainer extends Component {
           config, index,
           option: { chartType },
           props: {
-            onCloseItem : onCloseItem.bind(null, chartType, browserType, id),            
+            onCloseItem : onCloseItem.bind(null, chartType, browserType, id),
             isAdminMode : _isAdminMode
           }
        });

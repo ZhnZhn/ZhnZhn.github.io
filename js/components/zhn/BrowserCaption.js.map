@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../../src/components/zhn/BrowserCaption.jsx"],"names":["STYLE","ROOT","backgroundColor","color","lineHeight","paddingTop","paddingLeft","marginBottom","borderTopLeftRadius","borderTopRightRadius","CAPTION","fontSize","fontWeight","paddingRight","BrowserCaption","caption","children","onClose","position","top","propTypes","string","func"],"mappings":";;;;;;AAAA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACL;AACAC,qBAAiB,SAFZ;AAGLC,WAAO,wBAHF;AAILC,gBAAY,KAJP;AAKLC,gBAAY,KALP;AAMLC,iBAAa,MANR;AAOLC,kBAAc,MAPT;AAQLC,yBAAqB,KARhB;AASLC,0BAAsB;AATjB,GADK;AAYZC,WAAU;AACR;AACAP,WAAO,QAFC;AAGRQ,cAAU,MAHF;AAIRC,gBAAY,KAJJ;AAKRC,kBAAc;AALN;AAZE,CAAd;;AAqBA,IAAMC,iBAAiB,SAAjBA,cAAiB;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,QAAZ,QAAYA,QAAZ;AAAA,MAAsBC,OAAtB,QAAsBA,OAAtB;AAAA,SACrB;AAAA;AAAA,MAAK,OAAOjB,MAAMC,IAAlB;AACG;AAAA;AAAA;AACG,mBAAU,cADb;AAEG,eAAOD,MAAMU;AAFhB;AAIGK;AAJH,KADH;AAOGC,YAPH;AAQE;AACE,aAAO,EAAEE,UAAU,UAAZ,EAAwBC,KAAK,KAA7B,EADT;AAEE,eAASF;AAFX;AARF,GADqB;AAAA,CAAvB;AAeAH,eAAeM,SAAf,2CAA2B;AACzBL,WAAS,oBAAUM,MADM;AAEzBJ,WAAS,oBAAUK;AAFM,CAA3B;;kBAKeR,c","file":"BrowserCaption.js","sourcesContent":["import React from 'react';\r\nimport PropTypes from \"prop-types\";\r\n\r\nimport SvgClose from './SvgClose';\r\n\r\nconst STYLE = {\r\n  ROOT : {\r\n    //backgroundColor: '#232F3B',\r\n    backgroundColor: '#1B2836',\r\n    color: 'rgba(164, 135, 212, 1)',\r\n    lineHeight: '1.8',\r\n    paddingTop: '4px',\r\n    paddingLeft: '10px',\r\n    marginBottom: '10px',\r\n    borderTopLeftRadius: '4px',\r\n    borderTopRightRadius: '4px'\r\n  },\r\n  CAPTION : {\r\n    //color: 'lightslategray',\r\n    color: 'silver',\r\n    fontSize: '18px',\r\n    fontWeight: '500',\r\n    paddingRight: '8px'\r\n  }\r\n};\r\n\r\nconst BrowserCaption = ({ caption, children, onClose }) => (\r\n  <div style={STYLE.ROOT}>\r\n     <span\r\n        className=\"not-selected\"\r\n        style={STYLE.CAPTION}\r\n     >\r\n       {caption}\r\n    </span>\r\n    {children}\r\n    <SvgClose\r\n      style={{ position: 'relative', top: '3px' }}\r\n      onClose={onClose}\r\n    />\r\n  </div>\r\n)\r\nBrowserCaption.propTypes = {\r\n  caption: PropTypes.string,\r\n  onClose: PropTypes.func\r\n}\r\n\r\nexport default BrowserCaption\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/BrowserCaption.js"
+ ],
+ "file": "../../../src/components/zhn/BrowserCaption.js",
+ "names": [
+  "STYLE",
+  "ROOT",
+  "position",
+  "backgroundColor",
+  "color",
+  "lineHeight",
+  "paddingTop",
+  "paddingLeft",
+  "paddingRight",
+  "marginBottom",
+  "borderTopLeftRadius",
+  "borderTopRightRadius",
+  "CAPTION",
+  "fontSize",
+  "fontWeight",
+  "SVG_CLOSE",
+  "top",
+  "right",
+  "BrowserCaption",
+  "caption",
+  "children",
+  "onClose"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAGA;;;;;;AAEA,IAAMA,QAAQ;AACZC,QAAO;AACLC,cAAU,UADL;AAEL;AACAC,qBAAiB,SAHZ;AAILC,WAAO,wBAJF;AAKLC,gBAAY,KALP;AAMLC,gBAAY,KANP;AAOLC,iBAAa,MAPR;AAQLC,kBAAc,MART;AASLC,kBAAc,MATT;AAULC,yBAAqB,KAVhB;AAWLC,0BAAsB;AAXjB,GADK;AAcZC,WAAU;AACR;AACAR,WAAO,QAFC;AAGRS,cAAU,MAHF;AAIRC,gBAAY,KAJJ;AAKRN,kBAAc;AALN,GAdE;AAqBZO,aAAW;AACTb,cAAU,UADD;AAETc,SAAK,KAFI;AAGTC,WAAO;AAHE;AArBC,CAAd;AAJA;;AAgCA,IAAMC,iBAAiB,SAAjBA,cAAiB;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,QAAZ,QAAYA,QAAZ;AAAA,MAAsBC,OAAtB,QAAsBA,OAAtB;AAAA,SACrB;AAAA;AAAA,MAAK,OAAOrB,MAAMC,IAAlB;AACG;AAAA;AAAA;AACG,mBAAU,cADb;AAEG,eAAOD,MAAMY;AAFhB;AAIGO;AAJH,KADH;AAOGC,YAPH;AAQE;AACE,aAAOpB,MAAMe,SADf;AAEE,eAASM;AAFX;AARF,GADqB;AAAA,CAAvB;AAeA;;;;;;;kBAOeH,c"
+}

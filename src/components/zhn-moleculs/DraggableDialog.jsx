@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
@@ -27,6 +27,7 @@ const S = {
 };
 
 class DraggableDialog extends Component {
+  /*
   static propTypes = {
     isShow: PropTypes.bool,
     caption: PropTypes.string,
@@ -38,6 +39,7 @@ class DraggableDialog extends Component {
     onShowChart: PropTypes.func,
     onClose: PropTypes.func
   }
+  */
 
   componentDidMount(){
      Interact.makeDragable(this.rootDivEl);
@@ -68,6 +70,8 @@ class DraggableDialog extends Component {
     );
   }
 
+  _refRootDivEl = c => this.rootDivEl = c
+
   render(){
     const {
            isShow, caption, children,
@@ -78,16 +82,20 @@ class DraggableDialog extends Component {
         , _classShow = isShow ? CL.SHOWING : undefined;
     return (
       <div
-           ref={c => this.rootDivEl = c}
-           className={_classShow}
-           style={{...S.ROOT_DIV, ...S.ROOT_DIV_DRAG, ..._styleShow}}
-           onClick={onFront}
-      >
+        ref={this._refRootDivEl}
+        role="dialog"
+        className={_classShow}
+        style={{...S.ROOT_DIV, ...S.ROOT_DIV_DRAG, ..._styleShow}}
+        onClick={onFront}
+       >
         <div style={S.CAPTION_DIV}>
           <span className={CL.NOT_SELECTED}>
             {caption}
           </span>
-          <SvgClose onClose={onClose} />
+          <SvgClose
+             style={S.SVG_CLOSE}
+             onClose={onClose}
+          />
         </div>
         <div style={S.CHILDREN_DIV}>
            {children}

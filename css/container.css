@@ -120,8 +120,7 @@
   width: 22px;
   height: 22px;
   padding: 2px;
-  margin-right: 10px;
-  float: right;
+  margin-right: 10px;  
   cursor: pointer;
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -ms-transition: -ms-transform 0.3s ease-out;

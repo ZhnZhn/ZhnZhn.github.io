@@ -1,1 +1,35 @@
-{"version":3,"sources":["../../../src/components/zhn-moleculs/Dialog.Style.js"],"names":["STYLE","SHOW","display","HIDE","ROOT_DIV","backgroundColor","border","borderRadius","boxShadow","CAPTION_DIV","padding","color","textAlign","fontSize","COMMAND_DIV","cursor","float","marginTop","marginBottom","marginRight","BT_ROOT"],"mappings":";;;;;;AACA,IAAMA,QAAQ;AACZC,QAAM;AACJC,aAAS;AADL,GADM;AAIZC,QAAM;AACJD,aAAS;AADL,GAJM;AAOZE,YAAU;AACRC,qBAAiB,SADT;AAERC,YAAQ,mBAFA;AAGRC,kBAAc,KAHN;AAIRC,eAAW;AAJH,GAPE;AAaZC,eAAY;AACVC,aAAS,KADC;AAEVC,WAAO,SAFG;AAGVN,qBAAiB,SAHP;AAIVO,eAAW,QAJD;AAKVC,cAAU;AALA,GAbA;AAoBZC,eAAa;AACVC,YAAQ,SADE;AAEVC,WAAO,OAFG;AAGVC,eAAW,KAHD;AAIVC,kBAAc,MAJJ;AAKVC,iBAAa;AALH,GApBD;AA2BZC,WAAS;AACPT,WAAO;AADA;AA3BG,CAAd;;kBAgCeX,K","file":"Dialog.Style.js","sourcesContent":["\r\nconst STYLE = {\r\n  SHOW: {\r\n    display: 'block'\r\n  },\r\n  HIDE: {\r\n    display: 'none'\r\n  },\r\n  ROOT_DIV: {\r\n    backgroundColor: '#4d4d4d',\r\n    border: 'solid 2px #1b2836',\r\n    borderRadius: '5px',\r\n    boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px',\r\n  },\r\n  CAPTION_DIV:{\r\n    padding: '5px',\r\n    color: '#c0c0c0',\r\n    backgroundColor: '#1b2836',\r\n    textAlign: 'center',\r\n    fontSize: '18px'\r\n  },\r\n  COMMAND_DIV: {\r\n     cursor: 'default',\r\n     float: 'right',\r\n     marginTop: '8px',\r\n     marginBottom: '10px',\r\n     marginRight: '4px'\r\n  },\r\n  BT_ROOT: {\r\n    color: '#1b2836'\r\n  }\r\n};\r\n\r\nexport default STYLE;\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-moleculs/Dialog.Style.js"
+ ],
+ "file": "../../../src/components/zhn-moleculs/Dialog.Style.js",
+ "names": [
+  "STYLE",
+  "SHOW",
+  "display",
+  "HIDE",
+  "ROOT_DIV",
+  "backgroundColor",
+  "border",
+  "borderRadius",
+  "boxShadow",
+  "CAPTION_DIV",
+  "position",
+  "padding",
+  "color",
+  "textAlign",
+  "fontSize",
+  "COMMAND_DIV",
+  "cursor",
+  "float",
+  "marginTop",
+  "marginBottom",
+  "marginRight",
+  "BT_ROOT",
+  "SVG_CLOSE",
+  "top",
+  "right"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,QAAM;AACJC,aAAS;AADL,GADM;AAIZC,QAAM;AACJD,aAAS;AADL,GAJM;AAOZE,YAAU;AACRC,qBAAiB,SADT;AAERC,YAAQ,mBAFA;AAGRC,kBAAc,KAHN;AAIRC,eAAW;AAJH,GAPE;AAaZC,eAAY;AACVC,cAAU,UADA;AAEVC,aAAS,KAFC;AAGVC,WAAO,SAHG;AAIVP,qBAAiB,SAJP;AAKVQ,eAAW,QALD;AAMVC,cAAU;AANA,GAbA;AAqBZC,eAAa;AACVC,YAAQ,SADE;AAEVC,WAAO,OAFG;AAGVC,eAAW,KAHD;AAIVC,kBAAc,MAJJ;AAKVC,iBAAa;AALH,GArBD;AA4BZC,WAAS;AACPT,WAAO;AADA,GA5BG;AA+BZU,aAAW;AACTZ,cAAU,UADD;AAETa,SAAK,KAFI;AAGTC,WAAO;AAHE;AA/BC,CAAd;;kBAsCexB,K"
+}

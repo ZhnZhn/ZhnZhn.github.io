@@ -5,44 +5,53 @@ import SvgCheckBox from '../zhn/SvgCheckBox';
 import SvgClose from '../zhn/SvgClose';
 import ValueMovingBadge from './ValueMovingBadge';
 
-const STYLE = {
-  ROOT : {
+const CL = "not-selected shadow-right";
+
+const S = {
+  ROOT: {
     backgroundColor: '#1b2836',
     paddingTop: '4px',
-    lineHeight: 1.8,
-    height: '32px',
-    width : '100%',
+    paddingRight: '42px',
+    height: 'auto',
+    width: '100%',
     borderTopRightRadius: '2px',
     borderBottomRightRadius: '2px'
   },
-  CHECK_BOX : {
-    float: 'left',
+  CHECK_BOX: {
+    //float: 'left',
     marginRight: '10px',
     marginLeft: '10px'
   },
   CAPTION_OPEN : {
+    textAlign: 'left',
     display : 'inline-block',
     color: 'rgba(164, 135, 212, 1)',
     cursor: 'pointer',
     width: '125px',
     fontWeight : 'bold',
     whiteSpace: 'nowrap',
-    textOverflow : 'ellipsis',
-    overflow : 'hidden',
-    float : 'left'
+    textOverflow: 'clip',
+    overflow: 'hidden'
+
   },
-  CAPTION_CLOSE : {
+  CAPTION_CLOSE: {
     color : 'gray'
   },
-  CAPTION_WIDTH : {
+  CAPTION_WIDTH: {
+    textAlign: 'left',
     width: '385px'
   },
-  TIME : {
+  TIME: {
     color : 'rgb(253, 179, 22)',
     fontWeight : 'bold',
     paddingLeft : '16px'
+  },
+  CLOSE: {
+    position: 'absolute',
+    right: 0,
+    top: '4px'
   }
-}
+};
 
 const Header = (props) => {
   const {
@@ -53,11 +62,11 @@ const Header = (props) => {
           onClose
         } = props
       , _styleIsOpen = isOpen
-             ? STYLE.CAPTION_OPEN
-             : Object.assign({}, STYLE.CAPTION_OPEN, STYLE.CAPTION_CLOSE)
+             ? S.CAPTION_OPEN
+             : { ...S.CAPTION_OPEN, ...S.CAPTION_CLOSE }
       , _styleCaption = (valueMoving)
               ? _styleIsOpen
-              : Object.assign({}, _styleIsOpen, STYLE.CAPTION_WIDTH)
+              : { ..._styleIsOpen, ...S.CAPTION_WIDTH }
       , _movingBadgeEl = (valueMoving)
            ? (
               <ValueMovingBadge
@@ -66,34 +75,37 @@ const Header = (props) => {
                  crValueMoving={crValueMoving}
                />
              )
-          : undefined
+          : null
       , _timeEl = (!valueMoving && itemTime)
            ? (
-               <span style={STYLE.TIME}>
+               <span style={S.TIME}>
                  {itemTime}
                </span>
              )
-           : undefined;
+           : null;
 
   return (
-    <div style={STYLE.ROOT}>
+    <div style={S.ROOT}>
       <SvgCheckBox
-         rootStyle={STYLE.CHECK_BOX}
+         rootStyle={S.CHECK_BOX}
          chartType={chartType}
          onCheck={onCheck}
          onUnCheck={onUnCheck}
       />
-      <span
-         className="not-selected"
+      <button
+         className={CL}
          title={itemTitle}
          style={_styleCaption}
          onClick={onToggle}
       >
          {itemCaption}
-      </span>
+      </button>
       {_movingBadgeEl}
       {_timeEl}
-      <SvgClose onClose={onClose} />
+      <SvgClose
+        style={S.CLOSE}
+        onClose={onClose}
+      />
     </div>
   );
 };

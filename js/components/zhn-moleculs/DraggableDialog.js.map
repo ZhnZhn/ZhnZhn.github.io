@@ -1,1 +1,45 @@
-{"version":3,"sources":["../../../src/components/zhn-moleculs/DraggableDialog.jsx"],"names":["CL","SHOWING","NOT_SELECTED","S","ROOT_DIV_DRAG","position","top","left","zIndex","CHILDREN_DIV","cursor","DraggableDialog","_renderCommandButton","commandButtons","onShowChart","onClose","COMMAND_DIV","BT_ROOT","makeDragable","rootDivEl","props","isShow","caption","children","onFront","_styleShow","SHOW","HIDE","_classShow","undefined","c","ROOT_DIV","CAPTION_DIV","propTypes","bool","string","oneOfType","arrayOf","node","element","func"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AAEA;;;;AACA;;;;AAEA;;;;AAEA;;;;;;AAEA,IAAMA,KAAK;AACTC,WAAS,YADA;AAETC,gBAAc;AAFL,CAAX;;AAKA,IAAMC;AAEJC,iBAAe;AACbC,cAAU,UADG;AAEbC,SAAK,MAFQ;AAGbC,UAAM,MAHO;AAIbC,YAAQ;AAJK,GAFX;AAQJC,gBAAc;AACZC,YAAQ;AADI;AARV,EAAN;;IAaMC,e;;;;;;;;;;;;;;sNAiBJC,oB,GAAuB,UAACC,cAAD,EAAiBC,WAAjB,EAA8BC,OAA9B,EAA0C;AAC/D,aACE;AAAA;AAAA,UAAK,OAAOZ,EAAEa,WAAd;AACGH,sBADH;AAGI,eAAOC,WAAP,KAAuB,UAAvB,IACA;AACE,qBAAWX,EAAEc,OADf;AAEE,mBAAQ,MAFV;AAGE,iBAAM;AACN;AAJF,YAKE,SAASH;AALX,UAJJ;AAYE;AACE,qBAAWX,EAAEc,OADf;AAEE,mBAAQ,OAFV;AAGE,iBAAM;AACN;AAJF,YAKE,SAASF;AALX;AAZF,OADF;AAsBD,K;;;;;wCA3BkB;AAChB,yBAASG,YAAT,CAAsB,KAAKC,SAA3B;AACF;;;6BA2BO;AAAA;;AAAA,mBAKG,KAAKC,KALR;AAAA,UAECC,MAFD,UAECA,MAFD;AAAA,UAESC,OAFT,UAESA,OAFT;AAAA,UAEkBC,QAFlB,UAEkBA,QAFlB;AAAA,UAGCV,cAHD,UAGCA,cAHD;AAAA,UAICC,WAJD,UAICA,WAJD;AAAA,UAIcU,OAJd,UAIcA,OAJd;AAAA,UAIuBT,OAJvB,UAIuBA,OAJvB;AAAA,UAMAU,UANA,GAMaJ,SAASlB,EAAEuB,IAAX,GAAkBvB,EAAEwB,IANjC;AAAA,UAOAC,UAPA,GAOaP,SAASrB,GAAGC,OAAZ,GAAsB4B,SAPnC;;AAQN,aACE;AAAA;AAAA;AACK,eAAK;AAAA,mBAAK,OAAKV,SAAL,GAAiBW,CAAtB;AAAA,WADV;AAEK,qBAAWF,UAFhB;AAGK,4CAAWzB,EAAE4B,QAAb,EAA0B5B,EAAEC,aAA5B,EAA8CqB,UAA9C,CAHL;AAIK,mBAASD;AAJd;AAME;AAAA;AAAA,YAAK,OAAOrB,EAAE6B,WAAd;AACE;AAAA;AAAA,cAAM,WAAWhC,GAAGE,YAApB;AACGoB;AADH,WADF;AAIE,8DAAU,SAASP,OAAnB;AAJF,SANF;AAYE;AAAA;AAAA,YAAK,OAAOZ,EAAEM,YAAd;AACIc;AADJ,SAZF;AAeG,aAAKX,oBAAL,CAA0BC,cAA1B,EAA0CC,WAA1C,EAAuDC,OAAvD;AAfH,OADF;AAmBD;;;;;AArEGJ,e,CACGsB,S,2CAAY;AACjBZ,UAAQ,oBAAUa,IADD;AAEjBZ,WAAS,oBAAUa,MAFF;AAGjBZ,YAAU,oBAAUa,SAAV,CAAoB,CAC5B,oBAAUC,OAAV,CAAkB,oBAAUC,IAA5B,CAD4B,EAE5B,oBAAUA,IAFkB,CAApB,CAHO;AAOjBzB,kBAAgB,oBAAUwB,OAAV,CAAkB,oBAAUE,OAA5B,CAPC;AAQjBzB,eAAa,oBAAU0B,IARN;AASjBzB,WAAS,oBAAUyB;AATF,C;kBAuEN7B,e","file":"DraggableDialog.js","sourcesContent":["import React, { Component } from 'react';\r\nimport PropTypes from \"prop-types\";\r\n\r\nimport SvgClose from '../zhn/SvgClose'\r\nimport FlatButton from '../zhn-m/FlatButton'\r\n\r\nimport Interact from '../../utils/Interact'\r\n\r\nimport STYLE from './Dialog.Style'\r\n\r\nconst CL = {\r\n  SHOWING: 'show-popup',\r\n  NOT_SELECTED: 'not-selected'\r\n};\r\n\r\nconst S = {\r\n  ...STYLE,\r\n  ROOT_DIV_DRAG: {\r\n    position: 'absolute',\r\n    top: '30px',\r\n    left: '50px',\r\n    zIndex: 10\r\n  },\r\n  CHILDREN_DIV: {\r\n    cursor: 'default'\r\n  }\r\n};\r\n\r\nclass DraggableDialog extends Component {\r\n  static propTypes = {\r\n    isShow: PropTypes.bool,\r\n    caption: PropTypes.string,\r\n    children: PropTypes.oneOfType([\r\n      PropTypes.arrayOf(PropTypes.node),\r\n      PropTypes.node\r\n    ]),\r\n    commandButtons: PropTypes.arrayOf(PropTypes.element),\r\n    onShowChart: PropTypes.func,\r\n    onClose: PropTypes.func\r\n  }\r\n\r\n  componentDidMount(){\r\n     Interact.makeDragable(this.rootDivEl);\r\n  }\r\n\r\n  _renderCommandButton = (commandButtons, onShowChart, onClose) => {\r\n    return (\r\n      <div style={S.COMMAND_DIV}>\r\n        {commandButtons}\r\n        {\r\n          typeof onShowChart === 'function' &&\r\n          <FlatButton\r\n            rootStyle={S.BT_ROOT}\r\n            caption=\"Show\"\r\n            title=\"Show Pane Container\"\r\n            //accessKey=\"s\"\r\n            onClick={onShowChart}\r\n          />\r\n        }\r\n        <FlatButton\r\n          rootStyle={S.BT_ROOT}\r\n          caption=\"Close\"\r\n          title=\"Close Draggable Dialog\"\r\n          //accessKey=\"c\"\r\n          onClick={onClose}\r\n        />\r\n      </div>\r\n    );\r\n  }\r\n\r\n  render(){\r\n    const {\r\n           isShow, caption, children,\r\n           commandButtons,\r\n           onShowChart, onFront, onClose\r\n         } = this.props\r\n        , _styleShow = isShow ? S.SHOW : S.HIDE\r\n        , _classShow = isShow ? CL.SHOWING : undefined;\r\n    return (\r\n      <div\r\n           ref={c => this.rootDivEl = c}\r\n           className={_classShow}\r\n           style={{...S.ROOT_DIV, ...S.ROOT_DIV_DRAG, ..._styleShow}}\r\n           onClick={onFront}\r\n      >\r\n        <div style={S.CAPTION_DIV}>\r\n          <span className={CL.NOT_SELECTED}>\r\n            {caption}\r\n          </span>\r\n          <SvgClose onClose={onClose} />\r\n        </div>\r\n        <div style={S.CHILDREN_DIV}>\r\n           {children}\r\n        </div>\r\n        {this._renderCommandButton(commandButtons, onShowChart, onClose)}\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default DraggableDialog\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-moleculs/DraggableDialog.js"
+ ],
+ "file": "../../../src/components/zhn-moleculs/DraggableDialog.js",
+ "names": [
+  "CL",
+  "SHOWING",
+  "NOT_SELECTED",
+  "S",
+  "ROOT_DIV_DRAG",
+  "position",
+  "top",
+  "left",
+  "zIndex",
+  "CHILDREN_DIV",
+  "cursor",
+  "DraggableDialog",
+  "_renderCommandButton",
+  "commandButtons",
+  "onShowChart",
+  "onClose",
+  "COMMAND_DIV",
+  "BT_ROOT",
+  "_refRootDivEl",
+  "rootDivEl",
+  "c",
+  "makeDragable",
+  "props",
+  "isShow",
+  "caption",
+  "children",
+  "onFront",
+  "_styleShow",
+  "SHOW",
+  "HIDE",
+  "_classShow",
+  "undefined",
+  "ROOT_DIV",
+  "CAPTION_DIV",
+  "SVG_CLOSE"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAGA;;;;AACA;;;;AAEA;;;;AAEA;;;;;;AAPA;;AASA,IAAMA,KAAK;AACTC,WAAS,YADA;AAETC,gBAAc;AAFL,CAAX;;AAKA,IAAMC;AAEJC,iBAAe;AACbC,cAAU,UADG;AAEbC,SAAK,MAFQ;AAGbC,UAAM,MAHO;AAIbC,YAAQ;AAJK,GAFX;AAQJC,gBAAc;AACZC,YAAQ;AADI;AARV,EAAN;;IAaMC,e;;;;;;;;;;;;;;sNAmBJC,oB,GAAuB,UAACC,cAAD,EAAiBC,WAAjB,EAA8BC,OAA9B,EAA0C;AAC/D,aACE;AAAA;AAAA,UAAK,OAAOZ,EAAEa,WAAd;AACGH,sBADH;AAGI,eAAOC,WAAP,KAAuB,UAAvB,IACA;AACE,qBAAWX,EAAEc,OADf;AAEE,mBAAQ,MAFV;AAGE,iBAAM;AACN;AAJF,YAKE,SAASH;AALX,UAJJ;AAYE;AACE,qBAAWX,EAAEc,OADf;AAEE,mBAAQ,OAFV;AAGE,iBAAM;AACN;AAJF,YAKE,SAASF;AALX;AAZF,OADF;AAsBD,K,QAEDG,a,GAAgB;AAAA,aAAK,MAAKC,SAAL,GAAiBC,CAAtB;AAAA,K;;;;;;AA3ChB;;;;;;;;;;;;;;wCAcmB;AAChB,yBAASC,YAAT,CAAsB,KAAKF,SAA3B;AACF;;;6BA6BO;AAAA,mBAKG,KAAKG,KALR;AAAA,UAECC,MAFD,UAECA,MAFD;AAAA,UAESC,OAFT,UAESA,OAFT;AAAA,UAEkBC,QAFlB,UAEkBA,QAFlB;AAAA,UAGCZ,cAHD,UAGCA,cAHD;AAAA,UAICC,WAJD,UAICA,WAJD;AAAA,UAIcY,OAJd,UAIcA,OAJd;AAAA,UAIuBX,OAJvB,UAIuBA,OAJvB;AAAA,UAMAY,UANA,GAMaJ,SAASpB,EAAEyB,IAAX,GAAkBzB,EAAE0B,IANjC;AAAA,UAOAC,UAPA,GAOaP,SAASvB,GAAGC,OAAZ,GAAsB8B,SAPnC;;AAQN,aACE;AAAA;AAAA;AACE,eAAK,KAAKb,aADZ;AAEE,gBAAK,QAFP;AAGE,qBAAWY,UAHb;AAIE,4CAAW3B,EAAE6B,QAAb,EAA0B7B,EAAEC,aAA5B,EAA8CuB,UAA9C,CAJF;AAKE,mBAASD;AALX;AAOE;AAAA;AAAA,YAAK,OAAOvB,EAAE8B,WAAd;AACE;AAAA;AAAA,cAAM,WAAWjC,GAAGE,YAApB;AACGsB;AADH,WADF;AAIE;AACG,mBAAOrB,EAAE+B,SADZ;AAEG,qBAASnB;AAFZ;AAJF,SAPF;AAgBE;AAAA;AAAA,YAAK,OAAOZ,EAAEM,YAAd;AACIgB;AADJ,SAhBF;AAmBG,aAAKb,oBAAL,CAA0BC,cAA1B,EAA0CC,WAA1C,EAAuDC,OAAvD;AAnBH,OADF;AAuBD;;;;;kBAGYJ,e"
+}

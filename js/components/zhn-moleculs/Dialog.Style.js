@@ -18,6 +18,7 @@ var STYLE = {
     boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 0px 6px'
   },
   CAPTION_DIV: {
+    position: 'relative',
     padding: '5px',
     color: '#c0c0c0',
     backgroundColor: '#1b2836',
@@ -33,6 +34,11 @@ var STYLE = {
   },
   BT_ROOT: {
     color: '#1b2836'
+  },
+  SVG_CLOSE: {
+    position: 'absolute',
+    top: '4px',
+    right: 0
   }
 };
 

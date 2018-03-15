@@ -16,11 +16,13 @@ const S = {
   ROOT: {
     display : 'inline-block',
     position: 'relative',
-    marginLeft : '10px',
-    cursor: 'pointer'
+    marginLeft : '10px'
+    //cursor: 'pointer'
   },
   ROW: {
-    display : 'inline-block',
+    display: 'inline-block',
+    textAlign: 'left',
+    cursor: 'pointer'
   },
   DELTA: {
     marginLeft : '5px',
@@ -66,7 +68,7 @@ class ValueMovingBadge extends Component {
     crValueMoving: PropTypes.func
   }
   */
-  
+
   static defaultProps = {
     valueMoving : {
       value : 0,
@@ -138,7 +140,7 @@ class ValueMovingBadge extends Component {
       <span
          style={S.ROOT}
       >
-         <span
+         <button
             style={S.ROW}
             onClick={this._handleClickRoot}
          >
@@ -151,7 +153,7 @@ class ValueMovingBadge extends Component {
              {delta}
            </span>
            <SpanDate style={S.DATE} date={date} />
-         </span>
+         </button>
          {
            _svgDirection !== null &&
            <ShowHide

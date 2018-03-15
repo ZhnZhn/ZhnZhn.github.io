@@ -2,34 +2,40 @@ import React, { Component } from 'react'
 
 import SvgClose from '../zhn/SvgClose';
 
-const CL = "not-selected";
+const CL = "not-selected shadow-right";
 const MAX_LENGTH = 45;
 
 const S = {
   ROOT: {
     backgroundColor: '#1b2836',
-    paddingTop: '4px',
+    paddingTop: '6px',
     paddingLeft: '10px',
-    lineHeight: 1.8,
-    height: '32px',
-    width : '100%',
+    paddingRight: '42px',
+    height: 'auto',
+    width: '100%',
     borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px'
+    borderBottomRightRadius: '2px',
+    position: 'relative'
   },
   CAPTION: {
-    display : 'inline-block',
+    display: 'inline-block',
     cursor: 'pointer',
-    width: '430px',
-    fontWeight : 'bold',
+    width: '340px',
+    fontWeight: 'bold',
     whiteSpace: 'nowrap',
-    textOverflow : 'ellipsis',
-    overflow : 'hidden'
+    textOverflow: 'clip',
+    overflow: 'inherit'
   },
   OPEN: {
     color: 'rgba(164, 135, 212, 1)',
   },
   CLOSE: {
     color : 'gray'
+  },
+  SVG_CLOSE: {
+    position: 'absolute',
+    right: 0,
+    top: '6px'
   }
 };
 
@@ -54,13 +60,12 @@ class ItemHeader extends Component {
             children,
             onClick, onClose
           } = this.props
-        , _title = title ||
-                   caption.length > MAX_LENGTH
-                      ? caption
-                      : undefined
+        , _title = title || caption.length > MAX_LENGTH
+              ? caption
+              : undefined
         , _styleCaption = isOpen
             ? { ...S.CAPTION, ...captionStyle, ...S.OPEN }
-            : { ...S.CAPTION, ...captionStyle, ...S.CLOSE }
+            : { ...S.CAPTION, ...captionStyle, ...S.CLOSE };
     return (
       <div style={{ ...S.ROOT, ...rootStyle}}>
         <span
@@ -75,7 +80,10 @@ class ItemHeader extends Component {
            {caption}
         </span>
         {children}
-        <SvgClose onClose={onClose} />
+        <SvgClose
+           style={S.SVG_CLOSE}
+           onClose={onClose}
+         />
       </div>
     );
   }

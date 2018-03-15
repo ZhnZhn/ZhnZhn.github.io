@@ -36,34 +36,40 @@ var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CL = "not-selected";
+var CL = "not-selected shadow-right";
 var MAX_LENGTH = 45;
 
 var S = {
   ROOT: {
     backgroundColor: '#1b2836',
-    paddingTop: '4px',
+    paddingTop: '6px',
     paddingLeft: '10px',
-    lineHeight: 1.8,
-    height: '32px',
+    paddingRight: '42px',
+    height: 'auto',
     width: '100%',
     borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px'
+    borderBottomRightRadius: '2px',
+    position: 'relative'
   },
   CAPTION: {
     display: 'inline-block',
     cursor: 'pointer',
-    width: '430px',
+    width: '340px',
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
+    textOverflow: 'clip',
+    overflow: 'inherit'
   },
   OPEN: {
     color: 'rgba(164, 135, 212, 1)'
   },
   CLOSE: {
     color: 'gray'
+  },
+  SVG_CLOSE: {
+    position: 'absolute',
+    right: 0,
+    top: '6px'
   }
 };
 
@@ -123,7 +129,10 @@ var ItemHeader = (_temp2 = _class = function (_Component) {
           caption
         ),
         children,
-        _react2.default.createElement(_SvgClose2.default, { onClose: onClose })
+        _react2.default.createElement(_SvgClose2.default, {
+          style: S.SVG_CLOSE,
+          onClose: onClose
+        })
       );
     }
   }]);
@@ -132,4 +141,4 @@ var ItemHeader = (_temp2 = _class = function (_Component) {
   caption: ''
 }, _temp2);
 exports.default = ItemHeader;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\ItemHeader.js.map
+//# sourceMappingURL=ItemHeader.js.map

@@ -67,11 +67,13 @@ var S = {
   ROOT: {
     display: 'inline-block',
     position: 'relative',
-    marginLeft: '10px',
-    cursor: 'pointer'
+    marginLeft: '10px'
+    //cursor: 'pointer'
   },
   ROW: {
-    display: 'inline-block'
+    display: 'inline-block',
+    textAlign: 'left',
+    cursor: 'pointer'
   },
   DELTA: {
     marginLeft: '5px',
@@ -189,7 +191,7 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
           style: S.ROOT
         },
         _react2.default.createElement(
-          'span',
+          'button',
           {
             style: S.ROW,
             onClick: this._handleClickRoot

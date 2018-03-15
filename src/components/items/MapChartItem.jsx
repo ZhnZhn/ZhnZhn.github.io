@@ -10,30 +10,28 @@ import PanelDataInfo from '../zhn/PanelDataInfo';
 import SpinnerLoading from '../zhn/SpinnerLoading';
 
 const S = {
-  ROOT_DIV : {
-    position : 'relative',
-    lineHeight : 1.5,
+  ROOT_DIV: {
+    position: 'relative',
+    lineHeight: 1.5,
     marginBottom: '10px',
     marginRight: '25px',
-  },  
-  TIME_SPAN : {
-    display: 'inline-block',
-    position: 'relative',
-    top: '-8px',
-    color : 'rgb(253, 179, 22)',
-    fontWeight : 'bold',
-    paddingLeft : '16px',
   },
-  TAB_DIV : {
+  TIME_SPAN: {
+    display: 'inline-block',
+    color: 'rgb(253, 179, 22)',
+    fontWeight: 'bold',
+    paddingLeft: '16px',
+  },
+  TAB_DIV: {
     position: 'relative',
     height: '30px',
     backgroundColor: 'transparent',
     zIndex: 2
   },
-  MAP_DIV : {
+  MAP_DIV: {
     height : '400px'
   },
-  SPINNER_LOADING : {
+  SPINNER_LOADING: {
     position: 'relative',
     display: 'block',
     textAlign: 'middle',
@@ -42,11 +40,11 @@ const S = {
     width: '32px',
     height: '32px'
   },
-  BLOCK : {
-    display : 'block'
+  BLOCK: {
+    display: 'block'
   },
-  NONE : {
-    display : 'none'
+  NONE: {
+    display: 'none'
   }
 }
 
@@ -71,8 +69,8 @@ class MapChartItem extends Component {
     this.map = undefined
     this.state = {
       isLoading: true,
-      isOpen : true,
-      isShowInfo : false,
+      isOpen: true,
+      isShowInfo: false,
       time: ''
     }
   }
