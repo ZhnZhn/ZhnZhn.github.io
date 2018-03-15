@@ -30,6 +30,8 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL = "svg-resize not-selected";
+
 var S = {
   ROOT_DIV: {
     display: 'inline-block'
@@ -77,7 +79,8 @@ var SvgHrzResize = function (_Component) {
       }
     };
 
-    _this._hStartResize = function (fnResize) {
+    _this._hStartResize = function (fnResize, evt) {
+      evt.preventDefault();
       if (_this.id !== null) {
         _this._hStopResize(false);
       }
@@ -130,7 +133,7 @@ var SvgHrzResize = function (_Component) {
         _react2.default.createElement(
           'button',
           {
-            className: 'svg-resize',
+            className: CL,
             style: S.LEFT_DIV,
             title: 'Resize container horizontal left',
             onMouseDown: this._hStartResize.bind(null, this._resizeLeft),
@@ -159,7 +162,7 @@ var SvgHrzResize = function (_Component) {
         _react2.default.createElement(
           'button',
           {
-            className: 'svg-resize',
+            className: CL,
             style: S.LEFT_DIV,
             title: 'Resize container horizontal right',
             onMouseDown: this._hStartResize.bind(null, this._resizeRight),

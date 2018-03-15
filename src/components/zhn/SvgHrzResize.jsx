@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+const CL = "svg-resize not-selected";
+
 const S = {
   ROOT_DIV: {
     display: 'inline-block'
@@ -63,7 +65,8 @@ class SvgHrzResize extends Component {
       this._increaseStepValue();
     }
   }
-  _hStartResize = (fnResize) => {
+  _hStartResize = (fnResize, evt) => {
+    evt.preventDefault()
     if (this.id !== null){
       this._hStopResize(false);
     }
@@ -84,7 +87,7 @@ class SvgHrzResize extends Component {
     return (
       <div style={S.ROOT_DIV}>
         <button
-           className="svg-resize"
+           className={CL}
            style={S.LEFT_DIV}
            title="Resize container horizontal left"
            onMouseDown={this._hStartResize.bind(null, this._resizeLeft)}
@@ -109,7 +112,7 @@ class SvgHrzResize extends Component {
           </svg>
       </button>
       <button
-         className="svg-resize"
+         className={CL}
          style={S.LEFT_DIV}
          title="Resize container horizontal right"
          onMouseDown={this._hStartResize.bind(null, this._resizeRight)}
