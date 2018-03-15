@@ -15,6 +15,7 @@ const STYLE = {
   CAPTION_DIV:{
     position: 'relative',
     padding: '5px',
+    paddingRight: '35px',
     color: '#c0c0c0',
     backgroundColor: '#1b2836',
     textAlign: 'center',
@@ -33,7 +34,8 @@ const STYLE = {
   SVG_CLOSE: {
     position: 'absolute',
     top: '4px',
-    right: 0
+    right: 0,
+    marginRight: '6px'
   }
 };
 

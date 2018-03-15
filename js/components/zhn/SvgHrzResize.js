@@ -77,14 +77,14 @@ var SvgHrzResize = function (_Component) {
       }
     };
 
-    _this._handlerStartResize = function (fnResize) {
+    _this._hStartResize = function (fnResize) {
       if (_this.id !== null) {
-        _this._handlerStopResize(false);
+        _this._hStopResize(false);
       }
       _this.id = setInterval(fnResize, 5);
     };
 
-    _this._handlerStopResize = function (isOnResizeAfter) {
+    _this._hStopResize = function (isOnResizeAfter) {
       clearInterval(_this.id);
       _this.id = null;
       _this.step = 1;
@@ -128,20 +128,21 @@ var SvgHrzResize = function (_Component) {
         'div',
         { style: S.ROOT_DIV },
         _react2.default.createElement(
-          'div',
+          'button',
           {
             className: 'svg-resize',
             style: S.LEFT_DIV,
             title: 'Resize container horizontal left',
-            onMouseDown: this._handlerStartResize.bind(null, this._resizeLeft),
-            onMouseUp: this._handlerStopResize.bind(null, true),
-            onTouchStart: this._handlerStartResize.bind(null, this._resizeLeft),
-            onTouchEnd: this._handlerStopResize.bind(null, true)
+            onMouseDown: this._hStartResize.bind(null, this._resizeLeft),
+            onMouseUp: this._hStopResize.bind(null, true),
+            onTouchStart: this._hStartResize.bind(null, this._resizeLeft),
+            onTouchEnd: this._hStopResize.bind(null, true)
           },
           _react2.default.createElement(
             'svg',
             { viewBox: '0 0 12 12', width: '100%', height: '100%',
-              preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg' },
+              preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg'
+            },
             _react2.default.createElement('path', {
               d: 'M 1,6 L 11,6',
               strokeWidth: '2',
@@ -156,20 +157,21 @@ var SvgHrzResize = function (_Component) {
           )
         ),
         _react2.default.createElement(
-          'div',
+          'button',
           {
             className: 'svg-resize',
             style: S.LEFT_DIV,
             title: 'Resize container horizontal right',
-            onMouseDown: this._handlerStartResize.bind(null, this._resizeRight),
-            onMouseUp: this._handlerStopResize.bind(null, true),
-            onTouchStart: this._handlerStartResize.bind(null, this._resizeRight),
-            onTouchEnd: this._handlerStopResize.bind(null, true)
+            onMouseDown: this._hStartResize.bind(null, this._resizeRight),
+            onMouseUp: this._hStopResize.bind(null, true),
+            onTouchStart: this._hStartResize.bind(null, this._resizeRight),
+            onTouchEnd: this._hStopResize.bind(null, true)
           },
           _react2.default.createElement(
             'svg',
             { viewBox: '0 0 12 12', width: '100%', height: '100%',
-              preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg' },
+              preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg'
+            },
             _react2.default.createElement('path', {
               d: 'M 1,6 L 11,6',
               strokeWidth: '2',

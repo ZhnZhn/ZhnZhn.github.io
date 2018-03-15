@@ -61,7 +61,7 @@ var S = {
   },
   CAPTION_WIDTH: {
     textAlign: 'left',
-    width: '385px'
+    width: '280px'
   },
   TIME: {
     color: 'rgb(253, 179, 22)',
