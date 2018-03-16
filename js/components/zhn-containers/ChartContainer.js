@@ -32,6 +32,10 @@ var _ChartActions = require('../../flux/actions/ChartActions');
 
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
+var _ChartMorePopup = require('./ChartMorePopup');
+
+var _ChartMorePopup2 = _interopRequireDefault(_ChartMorePopup);
+
 var _BrowserCaption = require('../zhn/BrowserCaption');
 
 var _BrowserCaption2 = _interopRequireDefault(_BrowserCaption);
@@ -50,39 +54,22 @@ var _ItemFactory2 = _interopRequireDefault(_ItemFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SHOW_POPUP = "show-popup",
-    CHILD_MARGIN = 36,
+var CL = {
+  ROOT: "item-container",
+  SHOW: "show-popup"
+};
+
+var CHILD_MARGIN = 36,
     RESIZE_INIT_WIDTH = 635,
     RESIZE_MIN_WIDTH = 395,
-    RESIZE_MAX_WIDTH = 1200;
+    RESIZE_MAX_WIDTH = 1200,
+    DELTA = 10;
 
-var styles = {
-  rootDiv: {
-    backgroundColor: '#4D4D4D',
-    padding: '0px 0px 3px 0px',
-    position: 'relative',
-    borderRadius: '4px',
-    width: '635px',
-    height: 'calc(100vh - 71px)',
-    minHeight: '500px',
-    marginLeft: '16px',
-    boxShadow: '1px 4px 6px 1px rgba(0,0,0,0.6)',
-    overflowY: 'hidden',
-    overflowX: 'hidden'
-  },
-  hrzResize: {
-    position: 'absolute',
-    top: '30px',
-    right: '0'
-  },
-  scrollDiv: {
+var S = {
+  SCROLL: {
     overflowY: 'auto',
     height: '92%',
     paddingRight: '10px'
-  },
-  chartDiv: {
-    overflowY: 'auto',
-    height: '680px'
   },
   /*
   transitionOption : {
@@ -91,10 +78,10 @@ var styles = {
     transitionLeave : false
   },
   */
-  inlineBlock: {
+  INLINE: {
     display: 'inline-block'
   },
-  none: {
+  NONE: {
     display: 'none'
   }
 };
@@ -103,8 +90,8 @@ var isInArray = function isInArray() {
   var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var value = arguments[1];
 
-  var i = 0,
-      len = array.length;
+  var len = array.length;
+  var i = 0;
   for (; i < len; i++) {
     if (array[i] === value) {
       return true;
@@ -114,6 +101,10 @@ var isInArray = function isInArray() {
 };
 
 var compActions = [_ChartActions.ChartActionTypes.SHOW_CHART, _ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, _ChartActions.ChartActionTypes.CLOSE_CHART];
+
+var _getWidth = function _getWidth(style) {
+  return parseInt(style.width, 10) || RESIZE_INIT_WIDTH;
+};
 
 var ChartContainer = function (_Component) {
   (0, _inherits3.default)(ChartContainer, _Component);
@@ -137,12 +128,12 @@ var ChartContainer = function (_Component) {
           }
           _this.setState(data);
         } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
-          _this._handleHide();
+          _this._hHide();
         }
       }
     };
 
-    _this._handleHide = function () {
+    _this._hHide = function () {
       var _this$props = _this.props,
           chartType = _this$props.chartType,
           browserType = _this$props.browserType,
@@ -152,16 +143,34 @@ var ChartContainer = function (_Component) {
       _this.setState({ isShow: false });
     };
 
-    _this._handleResizeAfter = function (parentWidth) {
+    _this._hResizeAfter = function (parentWidth) {
       var i = 0,
           max = _this.state.configs.length,
           _propName = void 0;
       for (; i < max; i++) {
-        _propName = 'chart' + i;
-        if (_this.refs[_propName] && typeof _this.refs[_propName].reflowChart === 'function') {
-          _this.refs[_propName].reflowChart(parentWidth - _this.childMargin);
+        _propName = _this._crChartPropName(i);
+        if (_this[_propName] && typeof _this[_propName].reflowChart === 'function') {
+          _this[_propName].reflowChart(parentWidth - _this.childMargin);
         }
       }
+    };
+
+    _this._showMore = function () {
+      if (!_this.state.isMore) {
+        _this.setState({ isMore: true });
+      }
+    };
+
+    _this._closeMore = function () {
+      _this.setState({ isMore: false });
+    };
+
+    _this._crChartPropName = function (index) {
+      return 'chart' + index;
+    };
+
+    _this._refChart = function (index, comp) {
+      return _this[_this._crChartPropName(index)] = comp;
     };
 
     _this._renderCharts = function () {
@@ -183,6 +192,7 @@ var ChartContainer = function (_Component) {
           config: config, index: index,
           option: { chartType: chartType },
           props: {
+            ref: _this._refChart.bind(null, index),
             onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
             isAdminMode: _isAdminMode
           }
@@ -190,8 +200,59 @@ var ChartContainer = function (_Component) {
       });
     };
 
+    _this._resizeTo = function (width) {
+      _this._rootNode.style.width = width + 'px';
+      _this._hResizeAfter(width);
+    };
+
+    _this._resizeToMin = function () {
+      _this._resizeTo(RESIZE_MIN_WIDTH);
+    };
+
+    _this._resizeToInit = function () {
+      _this._resizeTo(RESIZE_INIT_WIDTH);
+    };
+
+    _this._plusToWidth = function () {
+      var _this$_rootNode = _this._rootNode,
+          _rootNode = _this$_rootNode === undefined ? {} : _this$_rootNode,
+          _rootNode$style = _rootNode.style,
+          style = _rootNode$style === undefined ? {} : _rootNode$style,
+          w = _getWidth(style) + DELTA;
+
+      if (w < RESIZE_MAX_WIDTH) {
+        style.width = w + 'px';
+      }
+    };
+
+    _this._minusToWidth = function () {
+      var _this$_rootNode2 = _this._rootNode,
+          _rootNode = _this$_rootNode2 === undefined ? {} : _this$_rootNode2,
+          _rootNode$style2 = _rootNode.style,
+          style = _rootNode$style2 === undefined ? {} : _rootNode$style2,
+          w = _getWidth(style) - DELTA;
+
+      if (w > RESIZE_MIN_WIDTH) {
+        style.width = w + 'px';
+      }
+    };
+
+    _this._fitToWidth = function () {
+      _this._hResizeAfter(parseInt(_this._rootNode.style.width, 10));
+    };
+
+    _this._refRootNode = function (node) {
+      return _this._rootNode = node;
+    };
+
+    _this._refSpComp = function (node) {
+      return _this.spComp = node;
+    };
+
     _this.childMargin = CHILD_MARGIN;
-    _this.state = {};
+    _this.state = {
+      isMore: false
+    };
     return _this;
   }
 
@@ -212,40 +273,50 @@ var ChartContainer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var caption = this.props.caption,
-          isShow = this.state.isShow,
-          _styleIsShow = isShow ? styles.inlineBlock : styles.none,
-          _classIsShow = isShow ? SHOW_POPUP : undefined;
+          _state = this.state,
+          isShow = _state.isShow,
+          isMore = _state.isMore,
+          _styleIsShow = isShow ? S.INLINE : S.NONE,
+          _classIsShow = isShow ? CL.ROOT + ' ' + CL.SHOW : CL.ROOT;
 
       return _react2.default.createElement(
         'div',
         {
+          ref: this._refRootNode,
           className: _classIsShow,
-          style: Object.assign({}, styles.rootDiv, _styleIsShow)
+          style: _styleIsShow
         },
+        _react2.default.createElement(_ChartMorePopup2.default, {
+          isShow: isMore,
+          onClose: this._closeMore,
+          onResizeToMin: this._resizeToMin,
+          onResizeToInit: this._resizeToInit,
+          onPlusWidth: this._plusToWidth,
+          onMinusWidth: this._minusToWidth,
+          onFit: this._fitToWidth
+        }),
         _react2.default.createElement(
           _BrowserCaption2.default,
           {
+            isMore: true,
             caption: caption,
-            onClose: this._handleHide
+            onMore: this._showMore,
+            onClose: this._hHide
           },
           _react2.default.createElement(_SvgHrzResize2.default, {
             initWidth: RESIZE_INIT_WIDTH,
             minWidth: RESIZE_MIN_WIDTH,
             maxWidth: RESIZE_MAX_WIDTH,
             comp: this,
-            onResizeAfter: this._handleResizeAfter
+            onResizeAfter: this._hResizeAfter
           })
         ),
         _react2.default.createElement(
           _ScrollPane2.default,
           {
-            ref: function ref(node) {
-              return _this2.spComp = node;
-            },
-            style: styles.scrollDiv
+            ref: this._refSpComp,
+            style: S.SCROLL
           },
           _react2.default.createElement(
             'div',

@@ -35,8 +35,7 @@ const MODEL = {
     },{
       id: BT.BLOCKCHAIN,
       cn: CL.BR,
-      title: 'Blockchain',      
-      isNew: true
+      title: 'Blockchain'          
     },{
       id: BT.PREMIUM_SAMPLE,
       title: 'Quandl Premium Sample'

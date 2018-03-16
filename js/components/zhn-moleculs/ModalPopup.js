@@ -20,6 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ModalPopup = function ModalPopup(_ref) {
   var isShow = _ref.isShow,
+      className = _ref.className,
       style = _ref.style,
       children = _ref.children,
       onClose = _ref.onClose;
@@ -32,6 +33,7 @@ var ModalPopup = function ModalPopup(_ref) {
     _react2.default.createElement(
       _ShowHide2.default,
       {
+        className: className,
         style: style,
         isShow: isShow
       },

@@ -11,6 +11,7 @@ const S = {
     paddingTop: '6px',
     paddingLeft: '10px',
     paddingRight: '42px',
+    paddingBottom: '6px',
     height: 'auto',
     width: '100%',
     borderTopRightRadius: '2px',
@@ -35,7 +36,7 @@ const S = {
   SVG_CLOSE: {
     position: 'absolute',
     right: 0,
-    top: '6px'
+    top: '4px'
   }
 };
 

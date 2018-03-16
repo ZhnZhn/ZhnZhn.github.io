@@ -6,22 +6,16 @@ import ComponentActions from '../../flux/actions/ComponentActions';
 import ChartActions from '../../flux/actions/ChartActions';
 import { ModalDialog, CompItemType as CIT } from '../../constants/Type';
 
-import AreaChartItem from '../items/AreaChartItem';
-import MapChartItem from '../items/MapChartItem';
-import CoinInfoItem from '../items/CoinInfoItem';
-import TableItem from '../items/TableItem';
-import AlphaPerfItem from '../items/AlphaPerfItem';
+import Item from '../items/Items'
 
-
-const _createAreaChartItem = function({
+const _crAreaChart = function({
   store, config, index, option, props
 }) {
   const { zhConfig={} } = config
      ,  { id=`Id:${index}`, key=index } = zhConfig
      ,  { chartType } = option;
   return (
-       <AreaChartItem
-           ref={'chart' + index}
+       <Item.AreaChart
            key={key}
            chartType={chartType}
            caption={id}
@@ -40,7 +34,7 @@ const _createAreaChartItem = function({
      );
 };
 
-const _createMapChartItem = function({
+const _crMapChart = function({
   store, config, index, option, props
 }) {
   const { zhConfig={} } = config
@@ -48,8 +42,7 @@ const _createMapChartItem = function({
      ,  { chartType } = option;
 
   return(
-    <MapChartItem
-       ref={'chart' + index}
+    <Item.MapChart
        key={key}
        chartType={chartType}
        caption={id}
@@ -59,20 +52,6 @@ const _createMapChartItem = function({
   )
 };
 
-/*
-const _crCoinInfoItem = ({
-  store, config, index, option, props
-}) => {
-  const { Symbol:id } = config.General;
-  return (
-    <CoinInfoItem
-      key={id}
-      config={config}
-      {...props}
-    />
-  );
-}
-*/
 
 const _fItem = (Comp) => ({
   store, config, index, option, props
@@ -88,12 +67,11 @@ const _fItem = (Comp) => ({
 }
 
 const _rCreateItem = {
-  DEFAULT: _createAreaChartItem,
-  [CIT.EUROSTAT_MAP]: _createMapChartItem,
-  //[CIT.COIN_INFO]: _crCoinInfoItem,
-  [CIT.COIN_INFO]: _fItem(CoinInfoItem),
-  [CIT.TABLE]: _fItem(TableItem),
-  [CIT.ALPHA_PERF]: _fItem(AlphaPerfItem)
+  DEFAULT: _crAreaChart,
+  [CIT.EUROSTAT_MAP]: _crMapChart,
+  [CIT.COIN_INFO]: _fItem(Item.CoinInfo),
+  [CIT.TABLE]: _fItem(Item.Table),
+  [CIT.ALPHA_PERF]: _fItem(Item.AlphaPerf)
 }
 
 const ItemFactory = {

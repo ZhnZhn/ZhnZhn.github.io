@@ -155,3 +155,17 @@
 .grid tr:nth-child(odd) {
   background-color: #404040;
 }
+
+.item-container {
+    background-color: #4d4d4d;
+    padding: 0px 0px 3px 0px;
+    position: relative;
+    border-radius: 4px;
+    width: 635px;
+    height: calc(100vh - 71px);
+    min-height: 500px;
+    margin-left: 16px;
+    box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
+    overflowY: hidden;
+    overflowX: hidden;
+}

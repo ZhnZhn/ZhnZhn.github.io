@@ -1,20 +1,19 @@
 import React from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-const SHOW_POPUP = 'show-popup'
+const CL_SHOW_POPUP = 'show-popup';
 const S = {
-  SHOW : {
+  SHOW: {
     display: 'block'
   },
-  HIDE : {
-    display : 'none'
+  HIDE: {
+    display: 'none'
   }
 };
 
-const ShowHide = (props) => {
-    const {isShow, className, style, children} = props
-        , _styleShow = isShow ? S.SHOW : S.HIDE
-        , _classShow = isShow ? SHOW_POPUP : ''
+const ShowHide = ({ isShow, className, style, children }) => {
+    const _styleShow = isShow ? S.SHOW : S.HIDE
+        , _classShow = isShow ? CL_SHOW_POPUP : ''
         , _className = (className)
               ? `${className} ${_classShow}`
               : (_classShow !== '')
@@ -30,6 +29,7 @@ const ShowHide = (props) => {
     );
  }
 
+/*
 ShowHide.propTypes = {
   isShow: PropTypes.bool,
   className: PropTypes.string,
@@ -38,5 +38,6 @@ ShowHide.propTypes = {
     (PropTypes.arrayOf(PropTypes.node), PropTypes.node)
   ]
 }
+*/
 
 export default ShowHide

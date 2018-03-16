@@ -31,18 +31,10 @@
   font-size: 16px;
   font-weight: bold;
 }
-.header__panel-browser {
-  z-index: 1010;
-  position: absolute;
+.header__panel-browser {  
   top: 45px;
-  left: 156px;
-  background-color: rgba(77, 77, 77, 1);
-  border-bottom: 4px solid green;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 5px;
-  padding: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  left: 156px;  
+  z-index: 1010;  
 }
 
 .header__bt-topics {

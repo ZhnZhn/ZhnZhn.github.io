@@ -16,7 +16,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var S = {
   BT: {
-    verticalAlign: 'middle'
+    verticalAlign: 'middle',
+    paddingLeft: '6px',
+    paddingRight: '6px'
   },
   SVG: {
     fill: 'black',
@@ -39,16 +41,16 @@ var SvgMore = function SvgMore(_ref) {
       'svg',
       {
         style: (0, _extends3.default)({}, S.SVG, svgStyle),
-        width: '16px', height: '22px',
-        viewBox: '0 0 16 22',
+        width: '6px', height: '22px',
+        viewBox: '0 0 6 22',
         preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg'
       },
-      _react2.default.createElement('circle', { cx: '2', cy: '4', r: '2' }),
-      _react2.default.createElement('circle', { cx: '2', cy: '11', r: '2' }),
-      _react2.default.createElement('circle', { cx: '2', cy: '18', r: '2' })
+      _react2.default.createElement('circle', { cx: '3', cy: '4', r: '2' }),
+      _react2.default.createElement('circle', { cx: '3', cy: '11', r: '2' }),
+      _react2.default.createElement('circle', { cx: '3', cy: '18', r: '2' })
     )
   );
 };
 
 exports.default = SvgMore;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgMore.js.map
+//# sourceMappingURL=SvgMore.js.map

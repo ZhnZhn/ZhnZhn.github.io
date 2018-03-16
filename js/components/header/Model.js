@@ -40,8 +40,7 @@ var MODEL = {
   }, {
     id: _Type.BrowserType.BLOCKCHAIN,
     cn: CL.BR,
-    title: 'Blockchain',
-    isNew: true
+    title: 'Blockchain'
   }, {
     id: _Type.BrowserType.PREMIUM_SAMPLE,
     title: 'Quandl Premium Sample'
@@ -111,4 +110,4 @@ var MODEL = {
 };
 
 exports.default = MODEL;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\Model.js.map
+//# sourceMappingURL=Model.js.map

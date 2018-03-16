@@ -1,1 +1,27 @@
-{"version":3,"sources":["../../../src/components/chart-container/ComponentHrzContainer.jsx"],"names":["ComponentHrzContainer","props","_onStore","actionType","data","addAction","setState","prevState","containers","unshift","state","store","unsubscribe","listen","map","container","_renderContainers","propTypes","shape","func","string"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;;;IAEMA,qB;;;AAQJ,iCAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAelBC,QAfkB,GAeP,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAC9B,UAAID,eAAe,MAAKF,KAAL,CAAWI,SAA9B,EAAwC;AACtC,cAAKC,QAAL,CAAc,qBAAa;AACzBC,oBAAUC,UAAV,CAAqBC,OAArB,CAA6BL,IAA7B;AACA,iBAAOG,SAAP;AACD,SAHD;AAID;AACH,KAtBiB;;AAEhB,UAAKG,KAAL,GAAa;AACXF,kBAAa;AADF,KAAb;AAFgB;AAKjB;;;;wCAEkB;AAAA,UACTG,KADS,GACC,KAAKV,KADN,CACTU,KADS;;AAEjB,WAAKC,WAAL,GAAmBD,MAAME,MAAN,CAAa,KAAKX,QAAlB,CAAnB;AACD;;;2CACqB;AACpB,WAAKU,WAAL;AACD;;;sCAWiBJ,U,EAAW;AAC3B,aAAOA,WAAWM,GAAX,CAAe,qBAAa;AACjC,eAAOC,SAAP;AACD,OAFM,CAAP;AAGD;;;6BAEO;AAAA,UACEP,UADF,GACiB,KAAKE,KADtB,CACEF,UADF;;AAEN,aACG;AAAA;AAAA,UAAK,WAAU,eAAf;AACI,aAAKQ,iBAAL,CAAuBR,UAAvB;AADJ,OADH;AAKD;;;;;AA7CGR,qB,CACGiB,S,2CAAY;AACjBN,SAAO,oBAAUO,KAAV,CAAgB;AACrBL,YAAQ,oBAAUM;AADG,GAAhB,CADU;AAIjBd,aAAW,oBAAUe;AAJJ,C;kBA+CNpB,qB","file":"ComponentHrzContainer.js","sourcesContent":["import React, { Component } from 'react';\r\nimport PropTypes from 'prop-types';\r\n\r\nclass ComponentHrzContainer extends Component {\r\n  static propTypes = {\r\n    store: PropTypes.shape({\r\n      listen: PropTypes.func\r\n    }),\r\n    addAction: PropTypes.string\r\n  }\r\n\r\n  constructor(props){\r\n    super()\r\n    this.state = {\r\n      containers : []\r\n    }\r\n  }\r\n\r\n  componentDidMount(){\r\n    const { store } = this.props;\r\n    this.unsubscribe = store.listen(this._onStore)\r\n  }\r\n  componentWillUnmount(){\r\n    this.unsubscribe()\r\n  }\r\n\r\n  _onStore = (actionType, data) => {\r\n     if (actionType === this.props.addAction){       \r\n       this.setState(prevState => {\r\n         prevState.containers.unshift(data)\r\n         return prevState;\r\n       })\r\n     }\r\n  }\r\n\r\n  _renderContainers(containers){\r\n    return containers.map(container => {\r\n      return container;\r\n    });\r\n  }\r\n\r\n  render(){\r\n    const { containers } = this.state;\r\n    return (\r\n       <div className=\"hrz-container\">\r\n          {this._renderContainers(containers)}\r\n       </div>\r\n    )\r\n  }\r\n}\r\n\r\nexport default ComponentHrzContainer\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/chart-container/ComponentHrzContainer.js"
+ ],
+ "file": "../../../src/components/chart-container/ComponentHrzContainer.js",
+ "names": [
+  "ComponentHrzContainer",
+  "props",
+  "_onStore",
+  "actionType",
+  "data",
+  "addAction",
+  "setState",
+  "prevState",
+  "containers",
+  "unshift",
+  "state",
+  "store",
+  "unsubscribe",
+  "listen",
+  "map",
+  "container",
+  "_renderContainers"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;AACA;;IAEMA,qB;;;AACJ;;;;;;;;;AASA,iCAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAelBC,QAfkB,GAeP,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAC9B,UAAID,eAAe,MAAKF,KAAL,CAAWI,SAA9B,EAAwC;AACtC,cAAKC,QAAL,CAAc,qBAAa;AACzBC,oBAAUC,UAAV,CAAqBC,OAArB,CAA6BL,IAA7B;AACA,iBAAOG,SAAP;AACD,SAHD;AAID;AACH,KAtBiB;;AAEhB,UAAKG,KAAL,GAAa;AACXF,kBAAa;AADF,KAAb;AAFgB;AAKjB;;;;wCAEkB;AAAA,UACTG,KADS,GACC,KAAKV,KADN,CACTU,KADS;;AAEjB,WAAKC,WAAL,GAAmBD,MAAME,MAAN,CAAa,KAAKX,QAAlB,CAAnB;AACD;;;2CACqB;AACpB,WAAKU,WAAL;AACD;;;sCAWiBJ,U,EAAW;AAC3B,aAAOA,WAAWM,GAAX,CAAe,qBAAa;AACjC,eAAOC,SAAP;AACD,OAFM,CAAP;AAGD;;;6BAEO;AAAA,UACEP,UADF,GACiB,KAAKE,KADtB,CACEF,UADF;;AAEN,aACG;AAAA;AAAA,UAAK,WAAU,eAAf;AACI,aAAKQ,iBAAL,CAAuBR,UAAvB;AADJ,OADH;AAKD;;;;;kBAGYR,qB"
+}

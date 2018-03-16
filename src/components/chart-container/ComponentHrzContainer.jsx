@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 class ComponentHrzContainer extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func
     }),
     addAction: PropTypes.string
   }
+  */
 
   constructor(props){
     super()
@@ -25,7 +27,7 @@ class ComponentHrzContainer extends Component {
   }
 
   _onStore = (actionType, data) => {
-     if (actionType === this.props.addAction){       
+     if (actionType === this.props.addAction){
        this.setState(prevState => {
          prevState.containers.unshift(data)
          return prevState;

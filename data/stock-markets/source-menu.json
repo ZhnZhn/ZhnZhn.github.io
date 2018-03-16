@@ -24,8 +24,8 @@
     },{
       "caption": "IEX Platform",
       "items": [
-        { "id": "SM_IEX_CHART_5Y", "isNew": true },
-        { "id": "SM_IEX_CHART_2Y", "isNew": true },
+        { "id": "SM_IEX_CHART_5Y" },
+        { "id": "SM_IEX_CHART_2Y" },
         { "id": "SM_IEX_EARNINGS" }
       ]
     },{

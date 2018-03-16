@@ -32,29 +32,13 @@ var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
 var _Type = require('../../constants/Type');
 
-var _AreaChartItem = require('../items/AreaChartItem');
+var _Items = require('../items/Items');
 
-var _AreaChartItem2 = _interopRequireDefault(_AreaChartItem);
-
-var _MapChartItem = require('../items/MapChartItem');
-
-var _MapChartItem2 = _interopRequireDefault(_MapChartItem);
-
-var _CoinInfoItem = require('../items/CoinInfoItem');
-
-var _CoinInfoItem2 = _interopRequireDefault(_CoinInfoItem);
-
-var _TableItem = require('../items/TableItem');
-
-var _TableItem2 = _interopRequireDefault(_TableItem);
-
-var _AlphaPerfItem = require('../items/AlphaPerfItem');
-
-var _AlphaPerfItem2 = _interopRequireDefault(_AlphaPerfItem);
+var _Items2 = _interopRequireDefault(_Items);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _createAreaChartItem = function _createAreaChartItem(_ref) {
+var _crAreaChart = function _crAreaChart(_ref) {
   var store = _ref.store,
       config = _ref.config,
       index = _ref.index,
@@ -68,8 +52,7 @@ var _createAreaChartItem = function _createAreaChartItem(_ref) {
       key = _zhConfig$key === undefined ? index : _zhConfig$key,
       chartType = option.chartType;
 
-  return _react2.default.createElement(_AreaChartItem2.default, (0, _extends3.default)({
-    ref: 'chart' + index,
+  return _react2.default.createElement(_Items2.default.AreaChart, (0, _extends3.default)({
     key: key,
     chartType: chartType,
     caption: id,
@@ -87,7 +70,7 @@ var _createAreaChartItem = function _createAreaChartItem(_ref) {
   }));
 };
 
-var _createMapChartItem = function _createMapChartItem(_ref2) {
+var _crMapChart = function _crMapChart(_ref2) {
   var store = _ref2.store,
       config = _ref2.config,
       index = _ref2.index,
@@ -102,29 +85,13 @@ var _createMapChartItem = function _createMapChartItem(_ref2) {
       chartType = option.chartType;
 
 
-  return _react2.default.createElement(_MapChartItem2.default, (0, _extends3.default)({
-    ref: 'chart' + index,
+  return _react2.default.createElement(_Items2.default.MapChart, (0, _extends3.default)({
     key: key,
     chartType: chartType,
     caption: id,
     config: config
   }, props));
 };
-
-/*
-const _crCoinInfoItem = ({
-  store, config, index, option, props
-}) => {
-  const { Symbol:id } = config.General;
-  return (
-    <CoinInfoItem
-      key={id}
-      config={config}
-      {...props}
-    />
-  );
-}
-*/
 
 var _fItem = function _fItem(Comp) {
   return function (_ref3) {
@@ -143,8 +110,8 @@ var _fItem = function _fItem(Comp) {
 };
 
 var _rCreateItem = (_rCreateItem2 = {
-  DEFAULT: _createAreaChartItem
-}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _createMapChartItem), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_INFO, _fItem(_CoinInfoItem2.default)), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.TABLE, _fItem(_TableItem2.default)), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.ALPHA_PERF, _fItem(_AlphaPerfItem2.default)), _rCreateItem2);
+  DEFAULT: _crAreaChart
+}, (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.EUROSTAT_MAP, _crMapChart), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.COIN_INFO, _fItem(_Items2.default.CoinInfo)), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.TABLE, _fItem(_Items2.default.Table)), (0, _defineProperty3.default)(_rCreateItem2, _Type.CompItemType.ALPHA_PERF, _fItem(_Items2.default.AlphaPerf)), _rCreateItem2);
 
 var ItemFactory = {
   createItem: function createItem(_ref4) {
@@ -162,4 +129,4 @@ var ItemFactory = {
 };
 
 exports.default = ItemFactory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\factories\ItemFactory.js.map
+//# sourceMappingURL=ItemFactory.js.map

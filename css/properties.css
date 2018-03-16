@@ -1,0 +1,21 @@
+.not-selected {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome all / Safari all / Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox all */
+  -ms-user-select: none;       /* IE 10+ */
+  user-select: none;           /* Likely future */
+}
+
+.shadow-right {
+  position:relative;
+}
+.shadow-right:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255, 0) 70%, #1b2836)
+}

@@ -9,9 +9,9 @@ import HotBar from './HotBar'
 import LimitRemainingLabel from './LimitRemainingLabel'
 import BrowserMenu from './BrowserMenu'
 
-import ComponentActions, { ComponentActionTypes} from '../../flux/actions/ComponentActions'
-import BrowserActions from '../../flux/actions/BrowserActions'
-import { T as LPA } from '../../flux/actions/LoadingProgressActions'
+import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
+import BA from '../../flux/actions/BrowserActions'
+import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
 import { BrowserType as BT, ModalDialog } from '../../constants/Type'
 import MODEL from './Model'
@@ -19,67 +19,69 @@ import MODEL from './Model'
 const LOGO_TITLE = "ERC: Economic RESTful Client v0.15.0"
     , CAPTION = "ERC v0.15.0";
 
-const styles = {
-  appLabel : {
-    display: 'inline-block',
-    color:'#80c040',
-    marginTop: '8px',
-    marginLeft: '35px',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  },
-  btRoot: {
-    //color: 'rgb(35, 47, 59)'
+const CL = {
+  HEADER: "header",
+  ICON: `header__icon-erc`,
+  LABEL: "header__app-label",
+  BM: "popup-menu header__panel-browser",
+  TOPICS: "header__bt-topics",
+  ARROW: "arrow-down",
+  QUANDL: "header__bt-quandl",
+  EUROSTAT: "header__bt-eurostat",
+  WATCH: "header__bt-watch",
+  SETTINGS: "header__bt-settins",
+  ABOUT: "header__bt-about",
+};
+
+const S = {
+  BT: {
     color: '#1b2836'
   },
-  lbLimit: {
+  LIMIT: {
     float: 'right',
     paddingTop: '9px'
   }
-}
+};
 
 class HeaderBar extends Component {
 
   constructor(props){
     super()
-
     this._settingFn = props.store.exportSettingFn()
     this.state = {
       isDS: false
     }
   }
 
-  _handleClickQuandl = () => {
-    BrowserActions.showBrowser(BT.ECONOMIC)
+  _hClickQuandl = () => {
+    BA.showBrowser(BT.ECONOMIC)
     this.setState({ isDS: false })
   }
 
-  _handleClickDynamic = (browserConfig) => {
-    BrowserActions.showBrowserDynamic(browserConfig)
+  _hClickDynamic = (browserConfig) => {
+    BA.showBrowserDynamic(browserConfig)
     this.setState({ isDS: false })
   }
 
-  _handleClickAbout = () => {
-    ComponentActions.showAbout()
+  _hClickAbout = () => {
+    CA.showAbout()
     this.setState({ isDS: false })
   }
 
   _onRegDS = (dsNode) => {
     this.dsNode = dsNode
   }
-  _handleClickDS = () => {
+  _hClickDS = () => {
     this.setState({ isDS: !this.state.isDS })
   }
-  _handleCloseDS = (event) => {
+  _hCloseDS = (event) => {
     if (!this.dsNode.contains(event.target)){
       this.setState({ isDS: false })
     }
   }
 
-  _handleDialogSettings = () => {
-    ComponentActions.showModalDialog(
+  _hDialogSettings = () => {
+    CA.showModalDialog(
       ModalDialog.SETTINGS, this._settingFn
     )
   }
@@ -88,88 +90,88 @@ class HeaderBar extends Component {
     const { store } = this.props
         , { isDS } = this.state;
     return (
-      <div className="header">
-         <ProgressLoading store={store} ACTIONS={LPA} />
+      <div className={CL.HEADER}>
+         <ProgressLoading store={store} ACTIONS={LPAT} />
          <IconLogoErc
-            className="header__icon-erc"
+            className={CL.ICON}
             title={LOGO_TITLE}
          />
          <AppLabel
-            className="header__app-label"
+            className={CL.LABEL}
             caption={CAPTION}
          />
 
          <ModalButton
-             className="header__bt-topics"
-             rootStyle={styles.btRoot}
+             className={CL.TOPICS}
+             rootStyle={S.BT}
              caption="Topics"
-             title="Topics Data Set Browsers Menu"
+             title="Click to open topics menu"
              accessKey="t"
-             onClick={this._handleClickDS}
+             onClick={this._hClickDS}
              onReg={this._onRegDS}
           >
-            <span className="arrow-down"></span>
+            <span className={CL.ARROW} />
           </ModalButton>
           <FlatButton
-            className="header__bt-quandl"
-            rootStyle={styles.btRoot}
+            className={CL.QUANDL}
+            rootStyle={S.BT}
             caption="Quandl"
             title="Quandl: World Economy Browser"
             accessKey="q"
-            onClick={this._handleClickQuandl}
+            onClick={this._hClickQuandl}
           />
           <FlatButton
-            className="header__bt-eurostat"
-            rootStyle={styles.btRoot}
+            className={CL.EUROSTAT}
+            rootStyle={S.BT}
             caption="Eurostat"
             title="Eurostat Statistics Browser"
             accessKey="u"
-            onClick={this._handleClickDynamic.bind(null, BT.EUROSTAT)}
+            onClick={this._hClickDynamic.bind(null, BT.EUROSTAT)}
           />
           <FlatButton
-             className="header__bt-watch"
-             rootStyle={styles.btRoot}
+             className={CL.WATCH}
+             rootStyle={S.BT}
              caption="Watch"
              title="Watch List Browser"
              accessKey="w"
-             onClick={this._handleClickDynamic.bind(null, BT.WATCH_LIST)}
+             onClick={this._hClickDynamic.bind(null, BT.WATCH_LIST)}
           />
           <HotBar
             store={store}
-            closeDialogAction={ComponentActionTypes.CLOSE_DIALOG}
-            onShowDialog={ComponentActions.showDialog}
+            closeDialogAction={CAT.CLOSE_DIALOG}
+            onShowDialog={CA.showDialog}
           />
 
            <FlatButton
-             className="header__bt-settins"
-             rootStyle={styles.btRoot}
+             className={CL.SETTINGS}
+             rootStyle={S.BT}
+             isPrimary={true}
              caption="Settings"
              title="User Settings Dialog"
              accessKey="s"
-             isPrimary={true}
-             onClick={this._handleDialogSettings}
+             onClick={this._hDialogSettings}
            />
            <FlatButton
-             className="header__bt-about"
-             rootStyle={styles.btRoot}
+             className={CL.ABOUT}
+             rootStyle={S.BT}
              caption="About"
              title="About Web Application ERC"
              accessKey="a"
-             onClick={ComponentActions.showAbout}
+             onClick={CA.showAbout}
            />
            <LimitRemainingLabel
               store={store}
-              style={styles.lbLimit}
+              style={S.LIMIT}
            />
 
            <BrowserMenu
-              className="header__panel-browser"
+              className={CL.BM}
               isShow={isDS}
               model={MODEL}
-              onClose={this._handleCloseDS}
-              onClickQuandl={this._handleClickQuandl}
-              onClickDynamic={this._handleClickDynamic}
-              onClickAbout={this._handleClickAbout}
+              onClose={this._hCloseDS}
+              onClickQuandl={this._hClickQuandl}
+              onClickDynamic={this._hClickDynamic}
+              onClickAbout={this._hClickAbout}
            />
       </div>
     );

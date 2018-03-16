@@ -8,13 +8,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _SvgMore = require('./SvgMore');
+
+var _SvgMore2 = _interopRequireDefault(_SvgMore);
+
 var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLE = {
+//import PropTypes from "prop-types";
+
+var S = {
   ROOT: {
     position: 'relative',
     //backgroundColor: '#232F3B',
@@ -35,32 +41,41 @@ var STYLE = {
     fontWeight: '500',
     paddingRight: '8px'
   },
+  SVG_MORE: {
+    fill: 'silver',
+    stroke: 'silver'
+  },
   SVG_CLOSE: {
     position: 'absolute',
     top: '6px',
     right: 0
   }
 };
-//import PropTypes from "prop-types";
 
 var BrowserCaption = function BrowserCaption(_ref) {
-  var caption = _ref.caption,
+  var isMore = _ref.isMore,
+      caption = _ref.caption,
       children = _ref.children,
+      onMore = _ref.onMore,
       onClose = _ref.onClose;
   return _react2.default.createElement(
     'div',
-    { style: STYLE.ROOT },
+    { style: S.ROOT },
+    isMore && _react2.default.createElement(_SvgMore2.default, {
+      svgStyle: S.SVG_MORE,
+      onClick: onMore
+    }),
     _react2.default.createElement(
       'span',
       {
         className: 'not-selected',
-        style: STYLE.CAPTION
+        style: S.CAPTION
       },
       caption
     ),
     children,
     _react2.default.createElement(_SvgClose2.default, {
-      style: STYLE.SVG_CLOSE,
+      style: S.SVG_CLOSE,
       onClose: onClose
     })
   );

@@ -77,22 +77,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var LOGO_TITLE = "ERC: Economic RESTful Client v0.15.0",
     CAPTION = "ERC v0.15.0";
 
-var styles = {
-  appLabel: {
-    display: 'inline-block',
-    color: '#80c040',
-    marginTop: '8px',
-    marginLeft: '35px',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  },
-  btRoot: {
-    //color: 'rgb(35, 47, 59)'
+var CL = {
+  HEADER: "header",
+  ICON: 'header__icon-erc',
+  LABEL: "header__app-label",
+  BM: "popup-menu header__panel-browser",
+  TOPICS: "header__bt-topics",
+  ARROW: "arrow-down",
+  QUANDL: "header__bt-quandl",
+  EUROSTAT: "header__bt-eurostat",
+  WATCH: "header__bt-watch",
+  SETTINGS: "header__bt-settins",
+  ABOUT: "header__bt-about"
+};
+
+var S = {
+  BT: {
     color: '#1b2836'
   },
-  lbLimit: {
+  LIMIT: {
     float: 'right',
     paddingTop: '9px'
   }
@@ -106,17 +109,17 @@ var HeaderBar = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this));
 
-    _this._handleClickQuandl = function () {
+    _this._hClickQuandl = function () {
       _BrowserActions2.default.showBrowser(_Type.BrowserType.ECONOMIC);
       _this.setState({ isDS: false });
     };
 
-    _this._handleClickDynamic = function (browserConfig) {
+    _this._hClickDynamic = function (browserConfig) {
       _BrowserActions2.default.showBrowserDynamic(browserConfig);
       _this.setState({ isDS: false });
     };
 
-    _this._handleClickAbout = function () {
+    _this._hClickAbout = function () {
       _ComponentActions2.default.showAbout();
       _this.setState({ isDS: false });
     };
@@ -125,17 +128,17 @@ var HeaderBar = function (_Component) {
       _this.dsNode = dsNode;
     };
 
-    _this._handleClickDS = function () {
+    _this._hClickDS = function () {
       _this.setState({ isDS: !_this.state.isDS });
     };
 
-    _this._handleCloseDS = function (event) {
+    _this._hCloseDS = function (event) {
       if (!_this.dsNode.contains(event.target)) {
         _this.setState({ isDS: false });
       }
     };
 
-    _this._handleDialogSettings = function () {
+    _this._hDialogSettings = function () {
       _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, _this._settingFn);
     };
 
@@ -154,52 +157,52 @@ var HeaderBar = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'header' },
+        { className: CL.HEADER },
         _react2.default.createElement(_ProgressLoading2.default, { store: store, ACTIONS: _LoadingProgressActions.T }),
         _react2.default.createElement(_IconLogoErc2.default, {
-          className: 'header__icon-erc',
+          className: CL.ICON,
           title: LOGO_TITLE
         }),
         _react2.default.createElement(_AppLabel2.default, {
-          className: 'header__app-label',
+          className: CL.LABEL,
           caption: CAPTION
         }),
         _react2.default.createElement(
           _ModalButton2.default,
           {
-            className: 'header__bt-topics',
-            rootStyle: styles.btRoot,
+            className: CL.TOPICS,
+            rootStyle: S.BT,
             caption: 'Topics',
-            title: 'Topics Data Set Browsers Menu',
+            title: 'Click to open topics menu',
             accessKey: 't',
-            onClick: this._handleClickDS,
+            onClick: this._hClickDS,
             onReg: this._onRegDS
           },
-          _react2.default.createElement('span', { className: 'arrow-down' })
+          _react2.default.createElement('span', { className: CL.ARROW })
         ),
         _react2.default.createElement(_FlatButton2.default, {
-          className: 'header__bt-quandl',
-          rootStyle: styles.btRoot,
+          className: CL.QUANDL,
+          rootStyle: S.BT,
           caption: 'Quandl',
           title: 'Quandl: World Economy Browser',
           accessKey: 'q',
-          onClick: this._handleClickQuandl
+          onClick: this._hClickQuandl
         }),
         _react2.default.createElement(_FlatButton2.default, {
-          className: 'header__bt-eurostat',
-          rootStyle: styles.btRoot,
+          className: CL.EUROSTAT,
+          rootStyle: S.BT,
           caption: 'Eurostat',
           title: 'Eurostat Statistics Browser',
           accessKey: 'u',
-          onClick: this._handleClickDynamic.bind(null, _Type.BrowserType.EUROSTAT)
+          onClick: this._hClickDynamic.bind(null, _Type.BrowserType.EUROSTAT)
         }),
         _react2.default.createElement(_FlatButton2.default, {
-          className: 'header__bt-watch',
-          rootStyle: styles.btRoot,
+          className: CL.WATCH,
+          rootStyle: S.BT,
           caption: 'Watch',
           title: 'Watch List Browser',
           accessKey: 'w',
-          onClick: this._handleClickDynamic.bind(null, _Type.BrowserType.WATCH_LIST)
+          onClick: this._hClickDynamic.bind(null, _Type.BrowserType.WATCH_LIST)
         }),
         _react2.default.createElement(_HotBar2.default, {
           store: store,
@@ -207,17 +210,17 @@ var HeaderBar = function (_Component) {
           onShowDialog: _ComponentActions2.default.showDialog
         }),
         _react2.default.createElement(_FlatButton2.default, {
-          className: 'header__bt-settins',
-          rootStyle: styles.btRoot,
+          className: CL.SETTINGS,
+          rootStyle: S.BT,
+          isPrimary: true,
           caption: 'Settings',
           title: 'User Settings Dialog',
           accessKey: 's',
-          isPrimary: true,
-          onClick: this._handleDialogSettings
+          onClick: this._hDialogSettings
         }),
         _react2.default.createElement(_FlatButton2.default, {
-          className: 'header__bt-about',
-          rootStyle: styles.btRoot,
+          className: CL.ABOUT,
+          rootStyle: S.BT,
           caption: 'About',
           title: 'About Web Application ERC',
           accessKey: 'a',
@@ -225,16 +228,16 @@ var HeaderBar = function (_Component) {
         }),
         _react2.default.createElement(_LimitRemainingLabel2.default, {
           store: store,
-          style: styles.lbLimit
+          style: S.LIMIT
         }),
         _react2.default.createElement(_BrowserMenu2.default, {
-          className: 'header__panel-browser',
+          className: CL.BM,
           isShow: isDS,
           model: _Model2.default,
-          onClose: this._handleCloseDS,
-          onClickQuandl: this._handleClickQuandl,
-          onClickDynamic: this._handleClickDynamic,
-          onClickAbout: this._handleClickAbout
+          onClose: this._hCloseDS,
+          onClickQuandl: this._hClickQuandl,
+          onClickDynamic: this._hClickDynamic,
+          onClickAbout: this._hClickAbout
         })
       );
     }
