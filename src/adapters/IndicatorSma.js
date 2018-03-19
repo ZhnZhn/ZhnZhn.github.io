@@ -6,7 +6,15 @@ import ChartConfig from '../charts/ChartConfig';
 const C = {
   ATH_UP: 'rgba(76, 175, 80, 0.75)',
   ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
-}
+};
+
+const _addDataAsSeriaToChart = (chart, option) => {
+  const seria = Object.assign(
+    ChartConfig.fSeries(), option
+  );
+  chart.addSeries(seria, true, true)
+  return chart.options.colors[seria['_colorIndex']];
+};
 
 export const fnAddSeriesSma = function(option){
   const { chart, id, period, isPlus, plus } = option
@@ -14,11 +22,22 @@ export const fnAddSeriesSma = function(option){
       , dataSma = []
       , data = chart.series[0].data;
 
-  let bSum = Big('0.0');
-  let i=0, max=data.length, point;
-  const _period = (isPlus)
-           ? parseFloat(Big(period).plus(plus).minus(1).toFixed(0))
-           : parseFloat(Big(period).minus(1).toFixed(0));
+  const max=data.length
+      , _period = (isPlus)
+           ? parseFloat(
+                Big(period)
+                .plus(plus)
+                .minus(1)
+                .toFixed(0)
+             )
+           : parseFloat(
+               Big(period)
+               .minus(1)
+               .toFixed(0)
+             );
+  let bSum = Big('0.0')
+     , i=0
+     , point;
   for (; i<max; i++){
     point = data[i];
     if (i>_period){
@@ -30,16 +49,12 @@ export const fnAddSeriesSma = function(option){
   }
 
   if (dataSma.length>0){
-    const seria = Object.assign(
-      ChartConfig.fSeries(), {
-        zhSeriaId: parentId + '_' + id,
-        zhValueText: id,
-        lineWidth: 2,
-        data: dataSma
-      }
-    );
-    chart.addSeries(seria, true, true)
-    return chart.options.colors[seria['_colorIndex']];
+    return _addDataAsSeriaToChart(chart, {
+      zhSeriaId: parentId + '_' + id,
+      zhValueText: id,
+      lineWidth: 2,
+      data: dataSma
+    });    
   } else {
     console.log('It seems, there are not enough data for SMA(' + period + ')')
     return undefined;

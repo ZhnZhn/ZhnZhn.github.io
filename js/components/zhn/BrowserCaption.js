@@ -20,22 +20,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //import PropTypes from "prop-types";
 
+var CL = "gap-right";
+
 var S = {
   ROOT: {
     position: 'relative',
-    //backgroundColor: '#232F3B',
-    backgroundColor: '#1B2836',
-    color: 'rgba(164, 135, 212, 1)',
+    backgroundColor: '#1b2836',
+    //color: 'rgba(164, 135, 212, 1)',
     lineHeight: '1.8',
     paddingTop: '4px',
-    paddingLeft: '10px',
+    paddingLeft: '4px',
     paddingRight: '42px',
     marginBottom: '10px',
     borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px'
+    borderTopRightRadius: '4px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'clip'
   },
   CAPTION: {
-    //color: 'lightslategray',
     color: 'silver',
     fontSize: '18px',
     fontWeight: '500',
@@ -60,7 +63,7 @@ var BrowserCaption = function BrowserCaption(_ref) {
       onClose = _ref.onClose;
   return _react2.default.createElement(
     'div',
-    { style: S.ROOT },
+    { className: CL, style: S.ROOT },
     isMore && _react2.default.createElement(_SvgMore2.default, {
       svgStyle: S.SVG_MORE,
       onClick: onMore

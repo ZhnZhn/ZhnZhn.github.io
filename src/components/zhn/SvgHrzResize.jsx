@@ -65,8 +65,16 @@ class SvgHrzResize extends Component {
       this._increaseStepValue();
     }
   }
+
+  _updateDelta = () => {
+    const w = parseInt(this.domNode.style.width);
+    if (!isNaN(w)) {
+      this.delta = w - this.initWidth
+    }
+  }
   _hStartResize = (fnResize, evt) => {
     evt.preventDefault()
+    this._updateDelta()
     if (this.id !== null){
       this._hStopResize(false);
     }

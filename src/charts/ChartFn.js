@@ -288,27 +288,28 @@ const ChartFn = {
         }
       }, false, true)
   },
-  _addSeries(toChart, id, color, data){
-    toChart.addSeries({
+  _addSeria(toChart, id, color, data){
+    return toChart.addSeries({
       type: 'spline',
       yAxis: id,
       color: color,
       data: data
-    }, false)
+    }, false);
   },
   _addDataToYAxis(toChart, id, color, data, isWithYAxis){
     if (isWithYAxis) {
       this._addAxis(toChart, id, color)
     }
-    this._addSeries(toChart, id, color, data)
+    const seria = this._addSeria(toChart, id, color, data);
     toChart.redraw()
+    return seria;
   },
 
   addDataTo(toChart, color, data, withoutYAxis){
     const _id = withoutYAxis ? undefined: "pasteId";
-    this._addDataToYAxis(toChart,
+    return this._addDataToYAxis(toChart,
         _id, color, data, !withoutYAxis
-    )
+    );
   },
   addDataToYAxis(toChart, color, data, yAxisIndex=-1){
     const _id = yAxisIndex === -1

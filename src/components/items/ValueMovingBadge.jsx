@@ -19,11 +19,6 @@ const S = {
     marginLeft : '10px'
     //cursor: 'pointer'
   },
-  ROW: {
-    display: 'inline-block',
-    textAlign: 'left',
-    cursor: 'pointer'
-  },
   DELTA: {
     marginLeft : '5px',
     fontWeight : 'bold'
@@ -88,11 +83,9 @@ class ValueMovingBadge extends Component {
   }
 
   _handleClickRoot = () => {
-    this.setState(prev => {
-      return {
+    this.setState(prev => ({
         isShowPanel: !prev.isShowPanel
-      };
-    })
+    }))
   }
 
   _updateDateTo = (dateTo) => {
@@ -140,18 +133,15 @@ class ValueMovingBadge extends Component {
       <span
          style={S.ROOT}
       >
-         <button
-            style={S.ROW}
-            onClick={this._handleClickRoot}
-         >
-           <SpanValue value={value} />
-           {_svgDirection}
-           <span style={{...S.DELTA, ..._dStyle}}>
-             {percent}
-           </span>
-           <span style={{...S.DELTA, ..._dStyle}}>
-             {delta}
-           </span>
+         <SpanValue value={value} />
+         {_svgDirection}
+         <span style={{...S.DELTA, ..._dStyle}}>
+           {percent}
+         </span>
+         <span style={{...S.DELTA, ..._dStyle}}>
+           {delta}
+         </span>
+         <button onClick={this._handleClickRoot}>
            <SpanDate style={S.DATE} date={date} />
          </button>
          {

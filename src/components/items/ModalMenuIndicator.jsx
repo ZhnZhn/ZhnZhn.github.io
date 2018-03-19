@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
+
+import ChartFn from '../../charts/ChartFn'
+import seriaFn from '../../math/seriaFn'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
 
@@ -9,13 +12,24 @@ import SvgMinus from '../zhn/SvgMinus';
 
 import S from './ModalMenu.Style'
 
+const { growthRate } = seriaFn;
+
 const INIT_SMA = "50"
     , INIT_MFI = "14";
 
+const C_GROW = '#90ed7d';
+
 const STYLE = {
   PANE: {
-    width: '240px',
+    width: '220px',
     margin: '8px'
+  },
+  GR: {
+    display : 'inline-block',
+    color : 'black',
+    fontWeight : 'bold',
+    paddingRight: '8px',
+    paddingBottom: '6px',
   },
   CAPTION : {
     display : 'inline-block',
@@ -38,13 +52,32 @@ const STYLE = {
   SMA_PLUS: {
     marginLeft: '16px',
     color: 'black'
+  },
+  N2: {
+    width: '48px'
+  },
+  N3: {
+    width: '56px'
   }
 }
 
+const _isInArrObjWithId = (arrObj, id) => {
+  return !!arrObj.find(obj => obj.id === id);
+};
+
+const _crMfiDescr = (id) => ({
+  id: id,
+  color: '#90ed7d'
+});
+
+const _isSeriaInst = (s) => s && typeof s.setVisible == 'function'
+
 class ModalMenuIndicator extends Component {
+  /*
   static propTypes = {
     rootStyle: PropTypes.object,
     isMfi: PropTypes.bool,
+    getChart: PropTypes.func,
     onAddSma: PropTypes.func,
     onRemoveSma: PropTypes.func,
     onAddMfi: PropTypes.func,
@@ -52,12 +85,16 @@ class ModalMenuIndicator extends Component {
     isMomAth: PropTypes.bool,
     onAddMomAth: PropTypes.func,
   }
+  */
 
+  static defaultProps = {
+    getChart: () => {}
+  }
 
   constructor(props){
     super()
     const { isMomAth } = props;
-    this._divMomAth = isMomAth ? (
+    this._momAthEl = isMomAth ? (
       <div>
         <span style={STYLE.MOM_ATH}>MOM(1) & ATH</span>
         <SvgPlus onClick={this._handleAddMomAth.bind(this)} />
@@ -65,18 +102,36 @@ class ModalMenuIndicator extends Component {
     ) : null;
 
     this.state = {
+      isGrowRate: false,
       plusSma: 5,
-      descr : [],
-      mfiDescrs : []
+      descr: [],
+      mfiDescrs: []
     }
   }
 
-  _checkIfAlreadyAdded = (arrObj, id) => {
-    const result = arrObj.find(obj => obj.id === id);
-    if (result === undefined){
-      return false;
-    } else {
-      return true;
+  _addGrowRate = () => {
+    const { _grSeria } = this;
+    if (!this._chart) {
+      this._chart = this.props.getChart()
+    }
+    if (this._chart) {
+      if ( _isSeriaInst(_grSeria) ) {
+        _grSeria.setVisible(true)
+      } else {
+        const data = this._chart.series[0].data
+            , grData = growthRate(data);
+        this._grSeria = ChartFn.addDataTo(
+          this._chart, C_GROW, grData, false
+        )
+      }
+      this.setState({ isGrowRate: true })
+    }
+  }
+  _removeGrowRate = () => {
+    const { _grSeria } = this;
+    if ( _isSeriaInst(_grSeria) ) {
+      _grSeria.setVisible(false);
+      this.setState({ isGrowRate: false })
     }
   }
 
@@ -92,7 +147,7 @@ class ModalMenuIndicator extends Component {
              ? `SMA+(${period}) +(${plus})`
              : `SMA(${period})`;
 
-    if ( !this._checkIfAlreadyAdded(descr, id)  ){
+    if ( !_isInArrObjWithId(descr, id)  ){
        const color = this.props.onAddSma({ id, period, isPlus, plus });
        if (color){
          this.setState(prevState => {
@@ -108,18 +163,16 @@ class ModalMenuIndicator extends Component {
 
   _handleRemoveSma = (id) => {
     if (this.props.onRemoveSma(id)){
-       this.state.descr = this.state.descr.filter((descr) =>{
-         return descr.id !== id
-       });
-       this.setState({descr : this.state.descr});
+      this.setState(prevState => ({
+        descr: prevState.descr.filter(d => d.id !== id)
+      }))
     }
   }
   _handleRemoveMfi = (id) => {
     this.props.onRemoveMfi(id);
-    this.state.mfiDescrs = this.state.mfiDescrs.filter((descr) =>{
-         return descr.id !== id
-    });
-    this.setState({mfiDescrs : this.state.mfiDescrs});
+    this.setState(prevState => ({
+      mfiDescrs: prevState.mfiDescrs.filter(d => d.id !== id)
+    }))
   }
 
   _handleAddMfi = () => {
@@ -127,13 +180,10 @@ class ModalMenuIndicator extends Component {
         , _value = this.inputMfiComp.getValue()
         , _id = 'MFI(' + _value + ')';
 
-    if ( !this._checkIfAlreadyAdded(mfiDescrs, _id)  ){
-        this.props.onAddMfi(_value, _id);
-        mfiDescrs.push({
-            id : _id,
-            color : '#90ed7d'
-        });
-        this.setState({mfiDescrs : mfiDescrs});
+    if ( !_isInArrObjWithId(mfiDescrs, _id) ){
+      this.props.onAddMfi(_value, _id);
+      mfiDescrs.push(_crMfiDescr(_id))
+      this.setState({ mfiDescrs: mfiDescrs });
     }
   }
 
@@ -170,7 +220,7 @@ class ModalMenuIndicator extends Component {
           />
           <span style={STYLE.fnSpan(color)}>{id}</span>
         </div>
-      )
+      );
     });
     return (
       <div>
@@ -179,24 +229,45 @@ class ModalMenuIndicator extends Component {
     )
   }
 
- render(){
-    const { isShow, isMfi, onClose } = this.props
-        , { plusSma } = this.state;
-
-    const _mfiDom = (isMfi) ? (
+  _renderMfiPart = (isMfi) => {
+    return (isMfi) ? (
       <div>
         <div style={STYLE.ROW}>
           <span style={STYLE.CAPTION}>MFI</span>
             <InputText
-              ref={c => this.inputMfiComp = c}
+              ref={this._refMfiComp}
+              style={STYLE.N2}
               initValue={INIT_MFI}
+              type="number"
             />
             <SvgPlus onClick={this._handleAddMfi} />
         </div>
         {this._renderMfi()}
       </div>
     ) : null;
+  }
 
+_renderGrowRate = (isGrowRate) => {
+  return (
+    <div>
+      <span style={STYLE.GR}>Grow Rate</span>
+      {
+        isGrowRate
+          ? <SvgMinus onClick={this._removeGrowRate} />
+          : <SvgPlus onClick={this._addGrowRate} />
+      }
+    </div>
+  );
+}
+
+_refMfiComp = c => this.inputMfiComp = c
+_refSmaPlus = c => this.inputSmaPlus = c
+_refPlusSma = c => this.inputPlusSma = c
+_refSmaComp = c => this.inputSmaComp = c
+
+ render(){
+    const { isShow, isMfi, onClose } = this.props
+        , { isGrowRate, plusSma } = this.state;
     return (
       <ModalPopup
         style={S.ROOT}
@@ -204,32 +275,38 @@ class ModalMenuIndicator extends Component {
         onClose={onClose}
       >
         <div style={STYLE.PANE}>
+          {this._renderGrowRate(isGrowRate)}
           <div>
             <span style={STYLE.CAPTION}>SMA+</span>
             <InputText
-               ref={c => this.inputSmaPlus = c}
+               ref={this._refSmaPlus}
+               style={STYLE.N3}
                initValue={INIT_SMA}
+               type="number"
             />
             <SvgPlus onClick={this._handleAddSma.bind(null, true)} />
             <span style={STYLE.SMA_PLUS}>
               +
             </span>
             <InputText
-               ref={c => this.inputPlusSma = c}
+               ref={this._refPlusSma}
                initValue={plusSma}
+               type="number"
             />
           </div>
           <div>
             <span style={STYLE.CAPTION}>SMA</span>
             <InputText
-               ref={c => this.inputSmaComp = c}
+               ref={this._refSmaComp}
+               style={STYLE.N3}
                initValue={INIT_SMA}
+               type="number"
             />
             <SvgPlus onClick={this._handleAddSma} />
           </div>
           {this._renderIndicators()}
-          {_mfiDom}
-          {this._divMomAth}
+          {this._renderMfiPart(isMfi)}
+          {this._momAthEl}
         </div>
       </ModalPopup>
     );

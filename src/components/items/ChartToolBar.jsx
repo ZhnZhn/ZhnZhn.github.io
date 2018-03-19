@@ -55,6 +55,7 @@ class ChartToolbar extends Component {
   render(){
     const {
             style, config={},
+            getChart,
             onAddSma, onRemoveSeries, onAddMfi, onRemoveMfi,
             onAddMomAth,
             onClickLegend,
@@ -77,6 +78,7 @@ class ChartToolbar extends Component {
         caption="Indicator"
       >
         <ModalMenuIndicator
+          getChart={getChart}
           onAddSma={onAddSma}
           onRemoveSma={onRemoveSeries}
           isMfi={config.zhIsMfi}

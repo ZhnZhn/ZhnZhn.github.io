@@ -148,8 +148,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           chartType = _props.chartType,
           caption = _props.caption,
@@ -190,9 +188,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
           { isShow: isOpen, style: styles.showHide },
           isShowChart && this._createChartToolBar(config),
           _react2.default.createElement(_HighchartWrapper2.default, {
-            ref: function ref(comp) {
-              return _this2.chartComp = comp;
-            },
+            ref: this._refChartComp,
             isShow: isShowChart,
             rootStyle: styles.wrapper,
             config: config,
@@ -231,62 +227,62 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   }]);
   return AreaChartItem;
 }(_react.Component), _initialiseProps = function _initialiseProps() {
-  var _this3 = this;
+  var _this2 = this;
 
   this.setItemCaption = function (str) {
-    _this3.setState({ itemCaption: str });
+    _this2.setState({ itemCaption: str });
   };
 
   this.setDataSource = function (strDataSource) {
-    _this3._dataSourceEl = _react2.default.createElement(
+    _this2._dataSourceEl = _react2.default.createElement(
       'div',
       { style: styles.dataSource },
       strDataSource
     );
-    _this3.forceUpdate();
+    _this2.forceUpdate();
   };
 
   this.getMainChart = function () {
-    return _this3.mainChart;
+    return _this2.mainChart;
   };
 
   this._handlerLoadedMetricChart = function (metricChart) {
-    _this3.mainChart.options.zhDetailCharts.push(metricChart);
+    _this2.mainChart.options.zhDetailCharts.push(metricChart);
   };
 
   this._handlerWillUnLoadedChart = function (objChart) {
-    var charts = (0, _safeGet2.default)(_this3.mainChart, 'options.zhDetailCharts');
+    var charts = (0, _safeGet2.default)(_this2.mainChart, 'options.zhDetailCharts');
     if (Array.isArray(charts)) {
-      _this3.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
+      _this2.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
         return chart !== objChart;
       });
     }
   };
 
   this._handlerToggleOpen = function () {
-    if (_this3.state.isOpen) {
-      _this3.setState({ isOpen: false });
+    if (_this2.state.isOpen) {
+      _this2.setState({ isOpen: false });
     } else {
-      _this3.setState({ isOpen: true });
+      _this2.setState({ isOpen: true });
     }
   };
 
   this._handlerClickLegend = function () {
-    _this3.setState({ isShowLegend: !_this3.state.isShowLegend });
+    _this2.setState({ isShowLegend: !_this2.state.isShowLegend });
   };
 
   this._handlerToggleSeria = function (item) {
-    _this3.mainChart.options.zhToggleSeria(_this3.mainChart, item);
+    _this2.mainChart.options.zhToggleSeria(_this2.mainChart, item);
   };
 
   this._handlerClick2H = function () {
-    var height = _this3.is2H ? _this3.mainChart.options.chart.height / 2 : _this3.mainChart.options.chart.height * 2;
-    _this3.setChartHeight(height);
-    _this3.is2H = !_this3.is2H;
+    var height = _this2.is2H ? _this2.mainChart.options.chart.height / 2 : _this2.mainChart.options.chart.height * 2;
+    _this2.setChartHeight(height);
+    _this2.is2H = !_this2.is2H;
   };
 
   this._handlerAddToWatch = function () {
-    var _props2 = _this3.props,
+    var _props2 = _this2.props,
         caption = _props2.caption,
         config = _props2.config,
         onAddToWatch = _props2.onAddToWatch;
@@ -295,19 +291,19 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handleCopy = function () {
-    _this3.props.onCopy(_this3.mainChart);
+    _this2.props.onCopy(_this2.mainChart);
   };
 
   this._handlePasteTo = function () {
-    _this3.props.onPasteToDialog({
-      toChart: _this3.mainChart,
-      fromChart: _this3.props.getCopyFromChart(),
-      ChartFn: _this3.props.ChartFn
+    _this2.props.onPasteToDialog({
+      toChart: _this2.mainChart,
+      fromChart: _this2.props.getCopyFromChart(),
+      ChartFn: _this2.props.ChartFn
     });
   };
 
   this._handlerClickInfo = function () {
-    _this3.setState({
+    _this2.setState({
       isShowInfo: true,
       isShowChart: false,
       isShowLegend: false
@@ -315,21 +311,21 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handlerClickVolume = function () {
-    var ChartFn = _this3.props.ChartFn,
-        _state2 = _this3.state,
+    var ChartFn = _this2.props.ChartFn,
+        _state2 = _this2.state,
         isInitVolume = _state2.isInitVolume,
         isShowVolume = _state2.isShowVolume,
         chartsDescription = _state2.chartsDescription;
 
 
-    _this3.mainChart.update(ChartFn.arMetricOption(_this3.mainChart, isShowVolume));
-    _this3.chartComp.toggleAbsComp();
+    _this2.mainChart.update(ChartFn.arMetricOption(_this2.mainChart, isShowVolume));
+    _this2.chartComp.toggleAbsComp();
 
     if (isInitVolume) {
-      _this3.setState({ isShowVolume: !isShowVolume });
+      _this2.setState({ isShowVolume: !isShowVolume });
     } else {
       chartsDescription.push({ type: 'Volume' });
-      _this3.setState({
+      _this2.setState({
         chartsDescription: chartsDescription,
         isShowVolume: true, isInitVolume: true
       });
@@ -337,99 +333,99 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handlerClickATH = function () {
-    var _state3 = _this3.state,
+    var _state3 = _this2.state,
         isInitATH = _state3.isInitATH,
         isShowATH = _state3.isShowATH;
 
     if (isInitATH) {
-      _this3.setState({ isShowATH: !isShowATH });
+      _this2.setState({ isShowATH: !isShowATH });
     } else {
-      _this3.state.chartsDescription.push({ type: 'ATH' });
-      _this3.setState({
-        chartsDescription: _this3.state.chartsDescription,
+      _this2.state.chartsDescription.push({ type: 'ATH' });
+      _this2.setState({
+        chartsDescription: _this2.state.chartsDescription,
         isShowATH: true, isInitATH: true
       });
     }
   };
 
   this._handlerClickHighLow = function () {
-    var _state4 = _this3.state,
+    var _state4 = _this2.state,
         isInitHighLow = _state4.isInitHighLow,
         isShowHighLow = _state4.isShowHighLow;
 
     if (isInitHighLow) {
-      _this3.setState({ isShowHighLow: !isShowHighLow });
+      _this2.setState({ isShowHighLow: !isShowHighLow });
     } else {
-      _this3.state.chartsDescription.push({ type: 'HighLow' });
-      _this3.setState({
-        chartsDescription: _this3.state.chartsDescription,
+      _this2.state.chartsDescription.push({ type: 'HighLow' });
+      _this2.setState({
+        chartsDescription: _this2.state.chartsDescription,
         isShowHighLow: true, isInitHighLow: true
       });
     }
   };
 
   this._handlerClickChart = function () {
-    _this3.setState({ isShowChart: true, isShowInfo: false });
+    _this2.setState({ isShowChart: true, isShowInfo: false });
   };
 
   this._handlerCheckBox = function (isCheck, checkBox) {
-    _this3.props.onSetActive(isCheck, checkBox, _this3.mainChart);
+    _this2.props.onSetActive(isCheck, checkBox, _this2.mainChart);
   };
 
   this._handlerAddSma = function (option) {
-    option.chart = _this3.mainChart;
-    return _this3.mainChart.options.zhFnAddSeriesSma(option);
+    option.chart = _this2.mainChart;
+    return _this2.mainChart.options.zhFnAddSeriesSma(option);
   };
 
   this._handleRemoveSeries = function (id) {
-    return _this3.mainChart.options.zhFnRemoveSeries(_this3.mainChart, id);
+    return _this2.mainChart.options.zhFnRemoveSeries(_this2.mainChart, id);
   };
 
   this._handlerAddMfi = function (period, id) {
-    var config = _this3.mainChart.options.zhFnGetMfiConfig(_this3.mainChart, period, id);
-    _this3.state.mfiConfigs.push({ config: config, id: id });
-    _this3.setState({ mfiConfigs: _this3.state.mfiConfigs });
+    var config = _this2.mainChart.options.zhFnGetMfiConfig(_this2.mainChart, period, id);
+    _this2.state.mfiConfigs.push({ config: config, id: id });
+    _this2.setState({ mfiConfigs: _this2.state.mfiConfigs });
   };
 
   this._handlerRemoveMfi = function (id) {
-    _this3.state.mfiConfigs = _this3.state.mfiConfigs.filter(function (objConfig) {
+    _this2.state.mfiConfigs = _this2.state.mfiConfigs.filter(function (objConfig) {
       return objConfig.id !== id;
     });
-    _this3.setState({ mfiConfigs: _this3.state.mfiConfigs });
+    _this2.setState({ mfiConfigs: _this2.state.mfiConfigs });
   };
 
   this._handleAddMomAth = function () {
-    var config = _this3._crMomAthConfig(_this3.mainChart, _this3._chartId);
-    _this3.state.mfiConfigs.push({ config: config, id: 'MOM_ATH' });
-    _this3.setState({ mfiConfigs: _this3.state.mfiConfigs });
+    var config = _this2._crMomAthConfig(_this2.mainChart, _this2._chartId);
+    _this2.state.mfiConfigs.push({ config: config, id: 'MOM_ATH' });
+    _this2.setState({ mfiConfigs: _this2.state.mfiConfigs });
   };
 
   this._handleClickConfig = function () {
-    var _props3 = _this3.props,
+    var _props3 = _this2.props,
         caption = _props3.caption,
         onShowConfigDialog = _props3.onShowConfigDialog;
 
     onShowConfigDialog({
       caption: caption,
-      chart: _this3.mainChart,
-      setItemCaption: _this3.setItemCaption,
-      setDataSource: _this3.setDataSource,
-      onToggleToolbar: _this3._handleToggleToolbar
+      chart: _this2.mainChart,
+      setItemCaption: _this2.setItemCaption,
+      setDataSource: _this2.setDataSource,
+      onToggleToolbar: _this2._handleToggleToolbar
     });
   };
 
   this._crValueMoving = function (prev, dateTo) {
-    return _this3.props.crValueMoving(_this3.mainChart, prev, dateTo);
+    return _this2.props.crValueMoving(_this2.mainChart, prev, dateTo);
   };
 
   this._handleToggleToolbar = function (value) {
-    _this3.setState(function (prevState) {
+    _this2.setState(function (prevState) {
       return { isShowToolbar: !prevState.isShowToolbar };
     });
   };
 
   this._createChartToolBar = function (config) {
-    var isShowToolbar = _this3.state.isShowToolbar;
+    var isShowToolbar = _this2.state.isShowToolbar;
 
     return _react2.default.createElement(
       _ShowHide2.default,
@@ -437,28 +433,29 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       _react2.default.createElement(_ChartToolBar2.default, {
         style: styles.tabDiv,
         config: config,
-        onAddSma: _this3._handlerAddSma,
-        onRemoveSeries: _this3._handleRemoveSeries,
-        onAddMfi: _this3._handlerAddMfi,
-        onRemoveMfi: _this3._handlerRemoveMfi,
-        onAddMomAth: _this3._handleAddMomAth,
-        onClickLegend: _this3._handlerClickLegend,
-        onClick2H: _this3._handlerClick2H,
-        onAddToWatch: _this3._handlerAddToWatch,
-        onClickInfo: _this3._handlerClickInfo,
-        onClickVolume: _this3._handlerClickVolume,
-        onClickATH: _this3._handlerClickATH,
-        onClickHighLow: _this3._handlerClickHighLow,
-        onClickConfig: _this3._handleClickConfig,
-        onCopy: _this3._handleCopy,
-        onPasteTo: _this3._handlePasteTo
+        getChart: _this2.getMainChart,
+        onAddSma: _this2._handlerAddSma,
+        onRemoveSeries: _this2._handleRemoveSeries,
+        onAddMfi: _this2._handlerAddMfi,
+        onRemoveMfi: _this2._handlerRemoveMfi,
+        onAddMomAth: _this2._handleAddMomAth,
+        onClickLegend: _this2._handlerClickLegend,
+        onClick2H: _this2._handlerClick2H,
+        onAddToWatch: _this2._handlerAddToWatch,
+        onClickInfo: _this2._handlerClickInfo,
+        onClickVolume: _this2._handlerClickVolume,
+        onClickATH: _this2._handlerClickATH,
+        onClickHighLow: _this2._handlerClickHighLow,
+        onClickConfig: _this2._handleClickConfig,
+        onCopy: _this2._handleCopy,
+        onPasteTo: _this2._handlePasteTo
       })
     );
   };
 
   this._renderLegend = function () {
     var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var isShowLegend = _this3.state.isShowLegend,
+    var isShowLegend = _this2.state.isShowLegend,
         _config$zhConfig3 = config.zhConfig,
         zhConfig = _config$zhConfig3 === undefined ? {} : _config$zhConfig3,
         isWithLegend = zhConfig.isWithLegend,
@@ -469,7 +466,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       { isShow: isShowLegend },
       _react2.default.createElement(_Legend2.default, {
         legend: legend,
-        onClickItem: _this3._handlerToggleSeria
+        onClickItem: _this2._handlerToggleSeria
       })
     ) : undefined;
 
@@ -477,14 +474,14 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._renderMetricCharts = function () {
-    var chartsDescription = _this3.state.chartsDescription;
+    var chartsDescription = _this2.state.chartsDescription;
 
 
     var _metricCharts = chartsDescription.map(function (descr, index) {
       var type = descr.type,
-          _isShow = _this3.state['isShow' + type],
+          _isShow = _this2.state['isShow' + type],
           _ref = 'chart' + type,
-          _config = _this3.props.config['zh' + type + 'Config'];
+          _config = _this2.props.config['zh' + type + 'Config'];
 
 
       return _react2.default.createElement(
@@ -494,8 +491,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
           ref: _ref,
           isShow: true,
           config: _config,
-          absComp: _this3._dataSourceEl,
-          onLoaded: _this3._handlerLoadedMetricChart
+          absComp: _this2._dataSourceEl,
+          onLoaded: _this2._handlerLoadedMetricChart
         })
       );
     });
@@ -518,8 +515,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         _react2.default.createElement(_HighchartWrapper2.default, {
           isShow: true,
           config: config,
-          onLoaded: _this3._handlerLoadedMetricChart,
-          onWillUnLoaded: _this3._handlerWillUnLoadedChart
+          onLoaded: _this2._handlerLoadedMetricChart,
+          onWillUnLoaded: _this2._handlerWillUnLoadedChart
         })
       );
     });
@@ -530,8 +527,12 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     );
   };
 
+  this._refChartComp = function (comp) {
+    return _this2.chartComp = comp;
+  };
+
   this.setChartHeight = function (height) {
-    _this3.mainChart.setSize(undefined, height, true);
+    _this2.mainChart.setSize(undefined, height, true);
   };
 }, _temp);
 AreaChartItem.propTypes = process.env.NODE_ENV !== "production" ? {

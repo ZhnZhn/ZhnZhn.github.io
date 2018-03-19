@@ -31,9 +31,10 @@ const C = {
 class InputText extends Component {
   /*
   static propTypes = {
-    placeholder: PropTypes.string,
-    initValue: PropTypes.string,
     style: PropTypes.object,
+    initValue: PropTypes.string,
+    type: PropTypes.string,
+    placeholder: PropTypes.string,
     onEnter: PropTypes.func
   }
   */
@@ -47,7 +48,7 @@ class InputText extends Component {
     this.isOnEnter = (typeof props.onEnter === "function" )
             ? true : false
     this.state = {
-      value : props.initValue
+      value: props.initValue
     }
   }
 
@@ -87,7 +88,10 @@ class InputText extends Component {
  }
 
   render(){
-    const { style, spellCheck, placeholder } = this.props
+    const {
+           style, type,
+           spellCheck, placeholder
+         } = this.props
         , { value } = this.state
         , _autoCorrect = spellCheck
              ? C.ON
@@ -98,7 +102,7 @@ class InputText extends Component {
     return (
       <input
         style={{ ...S.INPUT_TEXT, ...style }}
-        type={C.TEXT}
+        type={type || C.TEXT}
         name={C.TEXT}
         autoCapitalize={C.OFF}
         autoComplete={C.OFF}

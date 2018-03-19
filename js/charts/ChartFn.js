@@ -330,8 +330,8 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
       }
     }, false, true);
   },
-  _addSeries: function _addSeries(toChart, id, color, data) {
-    toChart.addSeries({
+  _addSeria: function _addSeria(toChart, id, color, data) {
+    return toChart.addSeries({
       type: 'spline',
       yAxis: id,
       color: color,
@@ -342,12 +342,13 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
     if (isWithYAxis) {
       this._addAxis(toChart, id, color);
     }
-    this._addSeries(toChart, id, color, data);
+    var seria = this._addSeria(toChart, id, color, data);
     toChart.redraw();
+    return seria;
   },
   addDataTo: function addDataTo(toChart, color, data, withoutYAxis) {
     var _id = withoutYAxis ? undefined : "pasteId";
-    this._addDataToYAxis(toChart, _id, color, data, !withoutYAxis);
+    return this._addDataToYAxis(toChart, _id, color, data, !withoutYAxis);
   },
   addDataToYAxis: function addDataToYAxis(toChart, color, data) {
     var yAxisIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
@@ -381,4 +382,4 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
 });
 
 exports.default = ChartFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartFn.js.map
+//# sourceMappingURL=ChartFn.js.map

@@ -79,8 +79,16 @@ var SvgHrzResize = function (_Component) {
       }
     };
 
+    _this._updateDelta = function () {
+      var w = parseInt(_this.domNode.style.width);
+      if (!isNaN(w)) {
+        _this.delta = w - _this.initWidth;
+      }
+    };
+
     _this._hStartResize = function (fnResize, evt) {
       evt.preventDefault();
+      _this._updateDelta();
       if (_this.id !== null) {
         _this._hStopResize(false);
       }

@@ -4,22 +4,25 @@ import React from 'react';
 import SvgMore from './SvgMore'
 import SvgClose from './SvgClose';
 
+const CL = "gap-right";
+
 const S = {
   ROOT: {
     position: 'relative',
-    //backgroundColor: '#232F3B',
-    backgroundColor: '#1B2836',
-    color: 'rgba(164, 135, 212, 1)',
+    backgroundColor: '#1b2836',
+    //color: 'rgba(164, 135, 212, 1)',
     lineHeight: '1.8',
     paddingTop: '4px',
-    paddingLeft: '10px',
+    paddingLeft: '4px',
     paddingRight: '42px',
     marginBottom: '10px',
     borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px'
+    borderTopRightRadius: '4px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'clip'
   },
   CAPTION: {
-    //color: 'lightslategray',
     color: 'silver',
     fontSize: '18px',
     fontWeight: '500',
@@ -37,7 +40,7 @@ const S = {
 };
 
 const BrowserCaption = ({ isMore, caption, children, onMore, onClose }) => (
-  <div style={S.ROOT}>
+  <div className={CL} style={S.ROOT}>
      {
        isMore &&
        <SvgMore

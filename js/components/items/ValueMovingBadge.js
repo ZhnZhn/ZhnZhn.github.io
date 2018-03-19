@@ -70,11 +70,6 @@ var S = {
     marginLeft: '10px'
     //cursor: 'pointer'
   },
-  ROW: {
-    display: 'inline-block',
-    textAlign: 'left',
-    cursor: 'pointer'
-  },
   DELTA: {
     marginLeft: '5px',
     fontWeight: 'bold'
@@ -190,24 +185,21 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
         {
           style: S.ROOT
         },
+        _react2.default.createElement(_SpanValue2.default, { value: value }),
+        _svgDirection,
+        _react2.default.createElement(
+          'span',
+          { style: (0, _extends3.default)({}, S.DELTA, _dStyle) },
+          percent
+        ),
+        _react2.default.createElement(
+          'span',
+          { style: (0, _extends3.default)({}, S.DELTA, _dStyle) },
+          delta
+        ),
         _react2.default.createElement(
           'button',
-          {
-            style: S.ROW,
-            onClick: this._handleClickRoot
-          },
-          _react2.default.createElement(_SpanValue2.default, { value: value }),
-          _svgDirection,
-          _react2.default.createElement(
-            'span',
-            { style: (0, _extends3.default)({}, S.DELTA, _dStyle) },
-            percent
-          ),
-          _react2.default.createElement(
-            'span',
-            { style: (0, _extends3.default)({}, S.DELTA, _dStyle) },
-            delta
-          ),
+          { onClick: this._handleClickRoot },
           _react2.default.createElement(_SpanDate2.default, { style: S.DATE, date: date })
         ),
         _svgDirection !== null && _react2.default.createElement(

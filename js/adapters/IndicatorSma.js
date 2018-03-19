@@ -20,6 +20,12 @@ var C = {
   ATH_DOWN: 'rgba(244, 67, 54, 0.75)'
 };
 
+var _addDataAsSeriaToChart = function _addDataAsSeriaToChart(chart, option) {
+  var seria = Object.assign(_ChartConfig2.default.fSeries(), option);
+  chart.addSeries(seria, true, true);
+  return chart.options.colors[seria['_colorIndex']];
+};
+
 var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(option) {
   var chart = option.chart,
       id = option.id,
@@ -31,11 +37,11 @@ var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(option) {
       data = chart.series[0].data;
 
 
-  var bSum = (0, _big2.default)('0.0');
-  var i = 0,
-      max = data.length,
+  var max = data.length,
+      _period = isPlus ? parseFloat((0, _big2.default)(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big2.default)(period).minus(1).toFixed(0));
+  var bSum = (0, _big2.default)('0.0'),
+      i = 0,
       point = void 0;
-  var _period = isPlus ? parseFloat((0, _big2.default)(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big2.default)(period).minus(1).toFixed(0));
   for (; i < max; i++) {
     point = data[i];
     if (i > _period) {
@@ -47,14 +53,12 @@ var fnAddSeriesSma = exports.fnAddSeriesSma = function fnAddSeriesSma(option) {
   }
 
   if (dataSma.length > 0) {
-    var seria = Object.assign(_ChartConfig2.default.fSeries(), {
+    return _addDataAsSeriaToChart(chart, {
       zhSeriaId: parentId + '_' + id,
       zhValueText: id,
       lineWidth: 2,
       data: dataSma
     });
-    chart.addSeries(seria, true, true);
-    return chart.options.colors[seria['_colorIndex']];
   } else {
     console.log('It seems, there are not enough data for SMA(' + period + ')');
     return undefined;

@@ -106,6 +106,7 @@ var ChartToolbar = function (_Component) {
           style = _props.style,
           _props$config2 = _props.config,
           config = _props$config2 === undefined ? {} : _props$config2,
+          getChart = _props.getChart,
           onAddSma = _props.onAddSma,
           onRemoveSeries = _props.onRemoveSeries,
           onAddMfi = _props.onAddMfi,
@@ -135,6 +136,7 @@ var ChartToolbar = function (_Component) {
           caption: 'Indicator'
         },
         _react2.default.createElement(_ModalMenuIndicator2.default, {
+          getChart: getChart,
           onAddSma: onAddSma,
           onRemoveSma: onRemoveSeries,
           isMfi: config.zhIsMfi,

@@ -96,9 +96,10 @@ var InputText = (_temp = _class = function (_Component) {
   }
   /*
   static propTypes = {
-    placeholder: PropTypes.string,
-    initValue: PropTypes.string,
     style: PropTypes.object,
+    initValue: PropTypes.string,
+    type: PropTypes.string,
+    placeholder: PropTypes.string,
     onEnter: PropTypes.func
   }
   */
@@ -127,6 +128,7 @@ var InputText = (_temp = _class = function (_Component) {
     value: function render() {
       var _props = this.props,
           style = _props.style,
+          type = _props.type,
           spellCheck = _props.spellCheck,
           placeholder = _props.placeholder,
           value = this.state.value,
@@ -135,7 +137,7 @@ var InputText = (_temp = _class = function (_Component) {
 
       return _react2.default.createElement('input', {
         style: (0, _extends3.default)({}, S.INPUT_TEXT, style),
-        type: C.TEXT,
+        type: type || C.TEXT,
         name: C.TEXT,
         autoCapitalize: C.OFF,
         autoComplete: C.OFF,
@@ -164,4 +166,4 @@ var InputText = (_temp = _class = function (_Component) {
   initValue: C.BLANK
 }, _temp);
 exports.default = InputText;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\InputText.js.map
+//# sourceMappingURL=InputText.js.map

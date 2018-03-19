@@ -1,0 +1,26 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/math/seriaFn.js"
+ ],
+ "file": "../../src/math/seriaFn.js",
+ "names": [
+  "fn",
+  "growthRate",
+  "d1",
+  "d3",
+  "_max",
+  "length",
+  "pPrev",
+  "pNext",
+  "i",
+  "push",
+  "x",
+  "y",
+  "parseFloat",
+  "div",
+  "times",
+  "toFixed"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,KAAK;AACTC,cAAY,sBAAW;AAAA,QAAVC,EAAU,uEAAP,EAAO;;AACrB,QAAMC,KAAK,EAAX;AAAA,QACMC,OAAOF,GAAGG,MADhB;AAEA,QAAIC,QAAQJ,GAAG,CAAH,CAAZ;AAAA,QACIK,cADJ;AAAA,QAEIC,IAAE,CAFN;AAGA,WAAOA,IAAEJ,IAAT,EAAeI,GAAf,EAAmB;AACjBD,cAAQL,GAAGM,CAAH,CAAR;AACAL,SAAGM,IAAH,CAAQ;AACNC,WAAGH,MAAMG,CADH;AAENC,WAAGC,WACE,mBAAIL,MAAMI,CAAN,GAAUL,MAAMK,CAApB,EACCE,GADD,CACKP,MAAMK,CADX,EAECG,KAFD,CAEO,GAFP,EAGCC,OAHD,CAGS,CAHT,CADF;AAFG,OAAR;AASAT,cAAQC,KAAR;AACD;AACD,WAAOJ,EAAP;AACD;AArBQ,CAAX;;kBAwBeH,E"
+}

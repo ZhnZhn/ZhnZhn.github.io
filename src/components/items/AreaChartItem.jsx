@@ -284,6 +284,7 @@ class AreaChartItem extends Component {
            <ChartToolBar
              style={styles.tabDiv}
              config={config}
+             getChart={this.getMainChart}
              onAddSma={this._handlerAddSma}
              onRemoveSeries={this._handleRemoveSeries}
              onAddMfi={this._handlerAddMfi}
@@ -370,6 +371,8 @@ class AreaChartItem extends Component {
     );
   }
 
+  _refChartComp = comp => this.chartComp = comp
+
   render(){
     const {
             chartType, caption, config={},
@@ -402,7 +405,7 @@ class AreaChartItem extends Component {
         <ShowHide isShow={isOpen} style={styles.showHide}>
            {isShowChart && this._createChartToolBar(config)}
            <HighchartWrapper
-              ref={comp => this.chartComp = comp}
+              ref={this._refChartComp}
               isShow={isShowChart}
               rootStyle={styles.wrapper}
               config={config}
