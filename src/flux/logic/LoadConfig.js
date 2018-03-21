@@ -31,6 +31,7 @@ const LoadConfig = {
   [LT.FS]: LoadImpl.Insee,
   [LT.UN]: LoadImpl.UnComtrade,
   [LT.FAO]: LoadImpl.FaoStat,
+  [LT.WB]: LoadImpl.WorldBank,
   [ChartType.WATCH_LIST]: LoadImpl.Quandl,
   [LT.WL]: LoadImpl.Quandl
 };

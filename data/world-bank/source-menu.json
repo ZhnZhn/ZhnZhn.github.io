@@ -1,0 +1,141 @@
+{
+  "menu": [
+    {
+      "caption": "Topics",
+      "items": [
+        { "id": "WB_AGRICULTURE" },
+        { "id": "WB_ECONOMY" },
+        { "id": "WB_ENERGY" },
+        { "id": "WB_ENVIRONMENT" },
+        { "id": "WB_DEBT" },
+        { "id": "WB_FINANCE" },
+        { "id": "WB_INFRASTRUCTURE" },
+        { "id": "WB_SCIENCE" },
+        { "id": "WB_TRADE" }
+      ]
+    }
+  ],
+  "items": {
+    "WB_B1": {
+      "dialogProps": {
+        "descrUrl": "./data/world-bank/world-bank.html",
+        "nInitFromDate": 15,
+        "oneCaption": "Country",
+        "oneURI": "./data/world-bank/countries.json",
+        "twoCaption": "Indicator",
+        "noDate": true,
+        "valueFn": "ROneDashTwo",
+        "loadId": "WB"
+      }
+    },
+    "WB_AGRICULTURE": {
+      "type": "WB_AGRICULTURE",
+      "menuTitle": "Agriculture",
+      "dialogCaption": "Agriculture",
+      "chartContainerCaption": "World Bank: Agriculture",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/agriculture.json",
+        "dataSource": "World Bank: Agriculture"
+      }
+    },
+    "WB_ECONOMY": {
+      "type": "WB_ECONOMY",
+      "menuTitle": "Economy & Growth",
+      "dialogCaption": "Economy & Growth",
+      "chartContainerCaption": "World Bank: Economy & Growth",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/economy.json",
+        "dataSource": "World Bank: Economy & Growth"
+      }
+    },
+    "WB_ENERGY": {
+      "type": "WB_ENERGY",
+      "menuTitle": "Energy & Mining",
+      "dialogCaption": "Energy & Mining",
+      "chartContainerCaption": "World Bank: Energy & Mining",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/energy.json",
+        "dataSource": "World Bank: Energy & Mining"
+      }
+    },
+    "WB_ENVIRONMENT": {
+      "type": "WB_ENVIRONMENT",
+      "menuTitle": "Environment",
+      "dialogCaption": "Environment",
+      "chartContainerCaption": "World Bank: Environment",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/enviroment.json",
+        "dataSource": "World Bank: Environment"
+      }
+    },
+    "WB_DEBT": {
+      "type": "WB_DEBT",
+      "menuTitle": "External Debt",
+      "dialogCaption": "External Debt",
+      "chartContainerCaption": "World Bank: External Debt",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/external-debt.json",
+        "dataSource": "World Bank: External Debt"
+      }
+    },
+    "WB_FINANCE": {
+      "type": "WB_FINANCE",
+      "menuTitle": "Finance",
+      "dialogCaption": "Finance",
+      "chartContainerCaption": "World Bank: Finance",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/finance.json",
+        "dataSource": "World Bank: Finance"
+      }
+    },
+    "WB_INFRASTRUCTURE": {
+      "type": "WB_INFRASTRUCTURE",
+      "menuTitle": "Infrastructure",
+      "dialogCaption": "Infrastructure",
+      "chartContainerCaption": "World Bank: Infrastructure",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/infrastructure.json",
+        "dataSource": "World Bank: Infrastructure"
+      }
+    },
+    "WB_SCIENCE": {
+      "type": "WB_SCIENCE",
+      "menuTitle": "Science & Technology",
+      "dialogCaption": "Science & Technology",
+      "chartContainerCaption": "World Bank: Science & Technology",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/science.json",
+        "dataSource": "World Bank: Science & Technology"
+      }
+    },
+    "WB_TRADE": {
+      "type": "WB_TRADE",
+      "menuTitle": "Trade",
+      "dialogCaption": "Trade",
+      "chartContainerCaption": "World Bank: Trade",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/trade.json",
+        "dataSource": "World Bank: Trade"
+      }
+    }
+
+  }
+}

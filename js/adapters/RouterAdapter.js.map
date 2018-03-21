@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\RouterAdapter.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\RouterAdapter.js",
- "sourceRoot": "",
+ "sources": [
+  "../../src/adapters/RouterAdapter.js"
+ ],
+ "file": "../../src/adapters/RouterAdapter.js",
  "names": [
   "RouterAdapter",
   "Quandl",
@@ -12,6 +12,7 @@
   "EuroStat",
   "UnComtrade",
   "FaoStat",
+  "WorldBank",
   "StatNorway",
   "StatSweden",
   "AlphaVantage",
@@ -24,5 +25,5 @@
   "Crc",
   "Cmc"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AACpBC,UAAQ;AACNC,4BADM;AAENC;AAFM,GADY;;AAMpBC,8BANoB;AAOpBC,kCAPoB;AAQpBC,4BARoB;AASpBC,kCAToB;AAUpBC,kCAVoB;AAWpBC,sCAXoB;AAYpBC,8BAZoB;AAapBC,oBAboB;AAcpBC,wBAdoB;AAepBC,oBAfoB;AAgBpBC,oBAhBoB;AAiBpBC,8BAjBoB;AAkBpBC,oBAlBoB;AAmBpBC;AAnBoB,CAAtB;;kBAsBejB,a"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AACpBC,UAAQ;AACNC,4BADM;AAENC;AAFM,GADY;;AAMpBC,8BANoB;AAOpBC,kCAPoB;AAQpBC,4BARoB;AASpBC,gCAToB;AAUpBC,kCAVoB;AAWpBC,kCAXoB;AAYpBC,sCAZoB;AAapBC,8BAboB;AAcpBC,oBAdoB;AAepBC,wBAfoB;AAgBpBC,oBAhBoB;AAiBpBC,oBAjBoB;AAkBpBC,8BAlBoB;AAmBpBC,oBAnBoB;AAoBpBC;AApBoB,CAAtB;;kBAuBelB,a"
 }

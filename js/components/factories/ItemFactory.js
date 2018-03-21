@@ -44,16 +44,17 @@ var _crAreaChart = function _crAreaChart(_ref) {
       index = _ref.index,
       option = _ref.option,
       props = _ref.props;
+
   var _config$zhConfig = config.zhConfig,
       zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
       _zhConfig$id = zhConfig.id,
       id = _zhConfig$id === undefined ? 'Id:' + index : _zhConfig$id,
-      _zhConfig$key = zhConfig.key,
-      key = _zhConfig$key === undefined ? index : _zhConfig$key,
+      key = zhConfig.key,
+      _key = key || id,
       chartType = option.chartType;
 
   return _react2.default.createElement(_Items2.default.AreaChart, (0, _extends3.default)({
-    key: key,
+    key: _key,
     chartType: chartType,
     caption: id,
     config: config,
@@ -80,8 +81,8 @@ var _crMapChart = function _crMapChart(_ref2) {
       zhConfig = _config$zhConfig2 === undefined ? {} : _config$zhConfig2,
       _zhConfig$id2 = zhConfig.id,
       id = _zhConfig$id2 === undefined ? 'Id:' + index : _zhConfig$id2,
-      _zhConfig$key2 = zhConfig.key,
-      key = _zhConfig$key2 === undefined ? index : _zhConfig$key2,
+      _zhConfig$key = zhConfig.key,
+      key = _zhConfig$key === undefined ? index : _zhConfig$key,
       chartType = option.chartType;
 
 

@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/world-bank/api.js"
+ ],
+ "file": "../../../src/adapters/world-bank/api.js",
+ "names": [
+  "C",
+  "URL",
+  "api",
+  "getRequestUrl",
+  "option",
+  "one",
+  "two",
+  "checkResponse",
+  "json",
+  "Array",
+  "isArray"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,OAAK;AADG,CAAV;;AAIA,IAAMC,MAAM;AACVC,eADU,yBACIC,MADJ,EACW;AAAA,QACXC,GADW,GACED,MADF,CACXC,GADW;AAAA,QACNC,GADM,GACEF,MADF,CACNE,GADM;;AAEnB,WAAUN,EAAEC,GAAZ,mBAA6BI,GAA7B,oBAA+CC,GAA/C;AACD,GAJS;AAKVC,eALU,yBAKIC,IALJ,EAKS;AACjB,WAAOC,MAAMC,OAAN,CAAcF,IAAd,CAAP;AACD;AAPS,CAAZ;;kBAUeN,G"
+}

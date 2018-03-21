@@ -5,6 +5,7 @@ import QuandlAdapter from './QuandlAdapter'
 import EuroStat from './eurostat/EuroStat'
 import UnComtrade from './uncomtrade/UnComtrade'
 import FaoStat from './faostat/FaoStat'
+import WorldBank from './world-bank/WorldBank'
 import StatNorway from './stat-norway/StatNorway'
 import StatSweden from './stat-sweden/StatSweden'
 import AlphaVantage from './alpha/AlphaVantage'
@@ -26,6 +27,7 @@ const RouterAdapter = {
   EuroStat,
   UnComtrade,
   FaoStat,
+  WorldBank,
   StatNorway,
   StatSweden,
   AlphaVantage,

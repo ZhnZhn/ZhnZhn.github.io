@@ -5,9 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 var BrowserType = exports.BrowserType = {
    STOCK_MARKETS: 'SM',
+
    EUROSTAT: 'ES',
    UN_COMTRADE: 'UN',
    FAOSTAT: 'FAO',
+   WORLD_BANK: 'WB',
+
    FRANCE_STATISTICS: 'FS',
    NORWAY_STATISTICS: 'NST',
    NORWAY_STAT_ALL: 'NST_ALL',
@@ -84,6 +87,7 @@ var LoadType = exports.LoadType = {
    SWS: 'SWS',
    UN: 'UN',
    FAO: 'FAO',
+   WB: 'WB',
    BEA: 'BEA',
    BLS: 'BLS',
    INTR: 'INTR',
@@ -100,4 +104,4 @@ var CompItemType = exports.CompItemType = {
    TABLE: 'TABLE',
    ALPHA_PERF: 'ALPHA_PERF'
 };
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\constants\Type.js.map
+//# sourceMappingURL=Type.js.map

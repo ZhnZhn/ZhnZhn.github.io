@@ -44,7 +44,7 @@ const ST = {
 const DataProviders = ({ isClose }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 15):"
+     caption="Data Providers (All 16):"
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM}}
      childStyle={ST.ROOT_CHILD}
   >
@@ -61,6 +61,9 @@ const DataProviders = ({ isClose }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.UnComtrade />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.WorldBank />
         </span>
         <span style={S.PROVIDER}>
           <Link.StatNorway />

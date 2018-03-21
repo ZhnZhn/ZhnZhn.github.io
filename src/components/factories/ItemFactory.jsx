@@ -12,11 +12,12 @@ const _crAreaChart = function({
   store, config, index, option, props
 }) {
   const { zhConfig={} } = config
-     ,  { id=`Id:${index}`, key=index } = zhConfig
+     ,  { id=`Id:${index}`, key } = zhConfig
+     , _key = key || id
      ,  { chartType } = option;
   return (
        <Item.AreaChart
-           key={key}
+           key={_key}
            chartType={chartType}
            caption={id}
            config={config}

@@ -35,10 +35,12 @@ var BlsAdapter = {
     return { config: config };
   },
   toSeries: function toSeries(json, option) {
-    var config = BlsAdapter.toConfig(json, option);
+    var _BlsAdapter$toConfig = BlsAdapter.toConfig(json, option),
+        config = _BlsAdapter$toConfig.config;
+
     return config.series[0];
   }
 };
 
 exports.default = BlsAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\bls\BlsAdapter.js.map
+//# sourceMappingURL=BlsAdapter.js.map

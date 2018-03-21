@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\stores\\ChartStore.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\stores\\ChartStore.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/flux/stores/ChartStore.js"
+ ],
+ "file": "../../../src/flux/stores/ChartStore.js",
  "names": [
   "EVENT_ACTION",
   "LOAD",

@@ -68,7 +68,7 @@ var DataProviders = function DataProviders(_ref) {
     _OpenClose2.default,
     {
       isClose: isClose,
-      caption: 'Data Providers (All 15):',
+      caption: 'Data Providers (All 16):',
       rootStyle: (0, _extends3.default)({}, _About2.default.LINE_HEIGHT, _About2.default.P_BOTTOM),
       childStyle: ST.ROOT_CHILD
     },
@@ -97,6 +97,11 @@ var DataProviders = function DataProviders(_ref) {
           'span',
           { style: _About2.default.PROVIDER },
           _react2.default.createElement(_Links2.default.UnComtrade, null)
+        ),
+        _react2.default.createElement(
+          'span',
+          { style: _About2.default.PROVIDER },
+          _react2.default.createElement(_Links2.default.WorldBank, null)
         ),
         _react2.default.createElement(
           'span',

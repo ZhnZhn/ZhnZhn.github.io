@@ -22,7 +22,7 @@ const BlsAdapter = {
   },
 
   toSeries(json, option){
-     const config = BlsAdapter.toConfig(json, option);
+     const { config } = BlsAdapter.toConfig(json, option);
      return config.series[0];
   }
 }

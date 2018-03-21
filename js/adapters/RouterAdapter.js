@@ -24,6 +24,10 @@ var _FaoStat = require('./faostat/FaoStat');
 
 var _FaoStat2 = _interopRequireDefault(_FaoStat);
 
+var _WorldBank = require('./world-bank/WorldBank');
+
+var _WorldBank2 = _interopRequireDefault(_WorldBank);
+
 var _StatNorway = require('./stat-norway/StatNorway');
 
 var _StatNorway2 = _interopRequireDefault(_StatNorway);
@@ -79,6 +83,7 @@ var RouterAdapter = {
   EuroStat: _EuroStat2.default,
   UnComtrade: _UnComtrade2.default,
   FaoStat: _FaoStat2.default,
+  WorldBank: _WorldBank2.default,
   StatNorway: _StatNorway2.default,
   StatSweden: _StatSweden2.default,
   AlphaVantage: _AlphaVantage2.default,
@@ -93,4 +98,4 @@ var RouterAdapter = {
 };
 
 exports.default = RouterAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\RouterAdapter.js.map
+//# sourceMappingURL=RouterAdapter.js.map

@@ -25,6 +25,12 @@ const BrowserConfig = {
     caption: 'FAOSTAT',
     sourceMenuUrl: './data/faostat/source-menu.json'
   },
+  [BT.WORLD_BANK]: {
+    browserType: BT.WORLD_BANK,
+    isDynamic: true,
+    caption: 'World Bank',
+    sourceMenuUrl: './data/world-bank/source-menu.json'
+  },
   [BT.ECONOMIC]: {
     browserType: BT.ECONOMIC,
     isDynamic: false

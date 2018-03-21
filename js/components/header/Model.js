@@ -38,6 +38,10 @@ var MODEL = {
     cn: CL.EU,
     title: 'FAOSTAT'
   }, {
+    id: _Type.BrowserType.WORLD_BANK,
+    cn: CL.EU,
+    title: 'World Bank'
+  }, {
     id: _Type.BrowserType.BLOCKCHAIN,
     cn: CL.BR,
     title: 'Blockchain'

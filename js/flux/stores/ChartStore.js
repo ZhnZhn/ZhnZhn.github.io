@@ -252,4 +252,4 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
 }, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default, _WithLoadingProgress2.default));
 
 exports.default = ChartStore;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\stores\ChartStore.js.map
+//# sourceMappingURL=ChartStore.js.map

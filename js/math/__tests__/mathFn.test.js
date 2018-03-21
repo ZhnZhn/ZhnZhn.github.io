@@ -12,6 +12,11 @@ var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var calcPercent = _mathFn2.default.calcPercent,
+    crValueMoving = _mathFn2.default.crValueMoving,
+    toFixed = _mathFn2.default.toFixed;
+
+
 var PERCENT_0 = '0.00%';
 var PERCENT_100 = '100.00%';
 
@@ -22,7 +27,7 @@ var _fValueMoving = function _fValueMoving(nowValue, prevValue) {
 };
 
 describe('calcPercent', function () {
-  var fn = _mathFn2.default.calcPercent;
+  var fn = calcPercent;
   test('should return str percent with Fixed 2 from Big values', function () {
     var r = fn({ bValue: (0, _big2.default)(10), bTotal: (0, _big2.default)(100) });
     expect(r).toBe('10.00');
@@ -30,7 +35,7 @@ describe('calcPercent', function () {
 });
 
 describe('crValueMoving', function () {
-  var fn = _mathFn2.default.crValueMoving;
+  var fn = crValueMoving;
   test('should return correct obj for Big values', function () {
     var r = fn(_fValueMoving((0, _big2.default)('200.02'), (0, _big2.default)('100.01')));
 
@@ -92,7 +97,7 @@ describe('crValueMoving', function () {
 });
 
 describe('toFixed', function () {
-  var fn = _mathFn2.default.toFixed;
+  var fn = toFixed;
   test('should return fixed by 0 number for values > 10', function () {
     expect(fn(102.34)).toBe(102);
     expect(fn('102.34')).toBe(102);
@@ -108,4 +113,4 @@ describe('toFixed', function () {
     expect(fn('0.01234')).toBe(0.01);
   });
 });
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\math\__tests__\mathFn.test.js.map
+//# sourceMappingURL=mathFn.test.js.map

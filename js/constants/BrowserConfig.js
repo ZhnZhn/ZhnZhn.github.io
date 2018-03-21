@@ -34,6 +34,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   isDynamic: true,
   caption: 'FAOSTAT',
   sourceMenuUrl: './data/faostat/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.WORLD_BANK, {
+  browserType: _Type.BrowserType.WORLD_BANK,
+  isDynamic: true,
+  caption: 'World Bank',
+  sourceMenuUrl: './data/world-bank/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.ECONOMIC, {
   browserType: _Type.BrowserType.ECONOMIC,
   isDynamic: false

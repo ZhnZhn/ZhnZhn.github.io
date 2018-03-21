@@ -85,6 +85,13 @@ var UnComtrade = (0, _withProps2.default)({
   title: "UN Comtrade"
 })(_Link2.default);
 
+var WorldBank = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://data.worldbank.org/",
+  dfStyle: S.BLUE,
+  title: "World Bank"
+})(_Link2.default);
+
 var FaoStat = (0, _withProps2.default)({
   className: CL_LINK,
   href: "http://www.fao.org/faostat/en/#data",
@@ -159,6 +166,7 @@ exports.default = {
   Eurostat: Eurostat,
   UnComtrade: UnComtrade,
   FaoStat: FaoStat,
+  WorldBank: WorldBank,
   Bea: Bea,
   Intrinio: Intrinio,
   Insee: Insee,

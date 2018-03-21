@@ -183,7 +183,7 @@ ChartConfig.theme = {
     enabled: true,
     position: {
       align: 'right',
-      x: -10,
+      x: -25,
       verticalAlign: 'bottom',
       y: -5
     },
@@ -540,4 +540,4 @@ ChartConfig.fSeries = function () {
 };
 
 exports.default = ChartConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartConfig.js.map
+//# sourceMappingURL=ChartConfig.js.map

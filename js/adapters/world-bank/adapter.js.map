@@ -1,0 +1,29 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/world-bank/adapter.js"
+ ],
+ "file": "../../../src/adapters/world-bank/adapter.js",
+ "names": [
+  "crData",
+  "crConfigOptions",
+  "adapter",
+  "toConfig",
+  "json",
+  "option",
+  "title",
+  "subtitle",
+  "data",
+  "seria",
+  "initSpline",
+  "config",
+  "initBaseArea",
+  "add",
+  "spacingTop",
+  "addCaption",
+  "addSeries",
+  "toSeries",
+  "series"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AACA;;;;;;IAEQA,M,uBAAAA,M;IAAQC,e,uBAAAA,e;;;AAEhB,IAAMC,UAAU;AACdC,UADc,oBACLC,IADK,EACCC,MADD,EACQ;AAAA,QACZC,KADY,GACQD,MADR,CACZC,KADY;AAAA,QACLC,QADK,GACQF,MADR,CACLE,QADK;AAAA,QAElBC,IAFkB,GAEXR,OAAOI,KAAK,CAAL,CAAP,CAFW;AAAA,QAGlBK,KAHkB,GAGV,+BACNC,UADM,CACK,EAAEF,UAAF,EADL,EAENL,QAFM,EAHU;AAAA,QAMlBQ,MANkB,GAMT,+BACPC,YADO,GAEPC,GAFO,CAEH,OAFG,EAEM,EAAEC,YAAY,EAAd,EAFN,EAGPC,UAHO,CAGIT,KAHJ,EAGWC,QAHX,EAIPS,SAJO,CAIGP,KAJH,EAKPI,GALO,4BAMFZ,gBAAgBI,MAAhB,EAAwBG,IAAxB,CANE,GAQPL,QARO,EANS;;;AAgBpB,WAAO,EAAEQ,cAAF,EAAP;AACD,GAlBa;AAoBdM,UApBc,oBAoBLb,IApBK,EAoBCC,MApBD,EAoBQ;AAAA,4BACDH,QAAQC,QAAR,CAAiBC,IAAjB,EAAuBC,MAAvB,CADC;AAAA,QACZM,MADY,qBACZA,MADY;;AAEpB,WAAOA,OAAOO,MAAP,CAAc,CAAd,CAAP;AACD;AAvBa,CAAhB;;kBA0BehB,O"
+}

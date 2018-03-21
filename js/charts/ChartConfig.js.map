@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\charts\\ChartConfig.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\charts\\ChartConfig.js",
- "sourceRoot": "",
+ "sources": [
+  "../../src/charts/ChartConfig.js"
+ ],
+ "file": "../../src/charts/ChartConfig.js",
  "names": [
   "ChartConfig",
   "init",

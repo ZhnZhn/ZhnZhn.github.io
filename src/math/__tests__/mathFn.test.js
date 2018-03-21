@@ -2,6 +2,12 @@ import Big from 'big.js'
 import mathFn from '../mathFn'
 import { Direction } from '../../constants/Type'
 
+const {
+  calcPercent,
+  crValueMoving,
+  toFixed
+} = mathFn;
+
 const PERCENT_0 = '0.00%';
 const PERCENT_100 = '100.00%';
 
@@ -10,7 +16,7 @@ const _fValueMoving = (nowValue, prevValue) => ({
 });
 
 describe('calcPercent', ()=>{
-  const fn = mathFn.calcPercent
+  const fn = calcPercent
   test('should return str percent with Fixed 2 from Big values', ()=>{
      const r = fn({ bValue: Big(10), bTotal: Big(100)})
      expect(r).toBe('10.00')
@@ -18,7 +24,7 @@ describe('calcPercent', ()=>{
 })
 
 describe('crValueMoving', () => {
-   const fn = mathFn.crValueMoving
+   const fn = crValueMoving
    test('should return correct obj for Big values', ()=>{
      const r = fn(_fValueMoving(
         Big('200.02'), Big('100.01')
@@ -94,7 +100,7 @@ describe('crValueMoving', () => {
 })
 
 describe('toFixed', () => {
-  const fn = mathFn.toFixed;
+  const fn = toFixed;
   test('should return fixed by 0 number for values > 10', () => {
     expect(fn(102.34)).toBe(102)
     expect(fn('102.34')).toBe(102)

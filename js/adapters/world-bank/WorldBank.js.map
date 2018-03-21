@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/world-bank/WorldBank.js"
+ ],
+ "file": "../../../src/adapters/world-bank/WorldBank.js",
+ "names": [
+  "WorldBank",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,YAAY,EAAEC,kBAAF,EAAOC,0BAAP,EAAlB;;kBAEeF,S"
+}

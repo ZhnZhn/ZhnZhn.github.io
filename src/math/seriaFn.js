@@ -1,15 +1,18 @@
 import Big from 'big.js'
 
 const fn = {
-  growthRate: (d1=[]) => {
-    const d3 = []
-        , _max = d1.length;
-    let pPrev = d1[0]
+  growthRate: (d) => {
+    if (!Array.isArray(d)) {
+      return [];
+    }
+    const _d = []
+        , max = d.length;
+    let pPrev = d[0]
       , pNext
       , i=1;
-    for (; i<_max; i++){
-      pNext = d1[i];
-      d3.push({
+    for (; i<max; i++){
+      pNext = d[i];
+      _d.push({
         x: pNext.x,
         y: parseFloat(
              Big(pNext.y - pPrev.y)
@@ -20,7 +23,7 @@ const fn = {
       })
       pPrev = pNext
     }
-    return d3;
+    return _d;
   }
 };
 

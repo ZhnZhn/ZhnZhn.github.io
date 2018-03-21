@@ -71,6 +71,13 @@ const UnComtrade = withProps({
   title: "UN Comtrade"
 })(BaseComponent)
 
+const WorldBank = withProps({
+  className: CL_LINK,
+  href: "https://data.worldbank.org/",
+  dfStyle: S.BLUE,
+  title: "World Bank"
+})(BaseComponent)
+
 const FaoStat = withProps({
   className: CL_LINK,
   href: "http://www.fao.org/faostat/en/#data",
@@ -140,6 +147,7 @@ export default {
   Eurostat,
   UnComtrade,
   FaoStat,
+  WorldBank,
   Bea,
   Intrinio,
   Insee,

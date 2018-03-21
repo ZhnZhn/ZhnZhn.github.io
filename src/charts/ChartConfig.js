@@ -147,7 +147,7 @@ ChartConfig.theme = {
       enabled : true,
       position : {
           align: 'right',
-          x: -10,
+          x: -25,
           verticalAlign: 'bottom',
           y: -5
       },

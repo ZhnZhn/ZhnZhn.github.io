@@ -113,7 +113,7 @@ const ChartStore = Reflux.createStore({
        chartSlice.configs.unshift(config);
        chartSlice.isShow = true;
        this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartSlice);
-     } else {       
+     } else {
        ChartLogic.initChartSlice(this.charts, chartType, config)
        //this.trigger(CHAT.LOAD_STOCK_COMPLETED);
        this.trigger(CHAT.INIT_AND_SHOW_CHART,

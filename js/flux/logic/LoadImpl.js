@@ -23,6 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Quandl = _RouterAdapter2.default.Quandl,
     UnComtrade = _RouterAdapter2.default.UnComtrade,
     FaoStat = _RouterAdapter2.default.FaoStat,
+    WorldBank = _RouterAdapter2.default.WorldBank,
     EuroStat = _RouterAdapter2.default.EuroStat,
     StatNorway = _RouterAdapter2.default.StatNorway,
     StatSweden = _RouterAdapter2.default.StatSweden,
@@ -41,6 +42,7 @@ var LoadImpl = {
   Quandl: (0, _loadItem2.default)((0, _extends3.default)({}, Quandl)),
   UnComtrade: (0, _loadItem2.default)((0, _extends3.default)({}, UnComtrade)),
   FaoStat: (0, _loadItem2.default)((0, _extends3.default)({}, FaoStat)),
+  WorldBank: (0, _loadItem2.default)((0, _extends3.default)({}, WorldBank)),
   EuroStat: (0, _loadItem2.default)((0, _extends3.default)({}, EuroStat)),
 
   StatNorway: (0, _loadItem2.default)((0, _extends3.default)({}, StatNorway.Dataset)),
@@ -70,4 +72,4 @@ var LoadImpl = {
 };
 
 exports.default = LoadImpl;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LoadImpl.js.map
+//# sourceMappingURL=LoadImpl.js.map
