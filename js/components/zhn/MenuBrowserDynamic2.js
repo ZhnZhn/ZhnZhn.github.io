@@ -218,8 +218,8 @@ var MenuBrowserDynamic2 = function (_Component) {
           ItemOptionComp: ItemOptionComp,
           onSelect: this._handleClickItem
         })
-      ) : undefined,
-          _spinnerLoading = menuItems.length === 0 ? _react2.default.createElement(_SpinnerLoading2.default, { style: STYLE.SPINNER_LOADING }) : undefined;
+      ) : null,
+          _spinnerLoading = menuItems.length === 0 ? _react2.default.createElement(_SpinnerLoading2.default, { style: STYLE.SPINNER_LOADING }) : null;
 
       return _react2.default.createElement(
         _Browser2.default,

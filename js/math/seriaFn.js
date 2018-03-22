@@ -24,7 +24,7 @@ var fn = {
       pNext = d[i];
       _d.push({
         x: pNext.x,
-        y: parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(pPrev.y).times(100).toFixed(2))
+        y: pPrev.y !== 0 ? parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(pPrev.y).times(100).toFixed(2)) : null
       });
       pPrev = pNext;
     }

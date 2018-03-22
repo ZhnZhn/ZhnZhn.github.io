@@ -28,9 +28,17 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Transitions = {
+var CL = "progress-line";
+
+var T = {
   WIDTH: 'width 500ms ease-out',
   OPACITY: 'opacity 400ms linear'
+};
+
+var _crStyle = function _crStyle(backgroundColor, opacity, width, transition) {
+  return {
+    backgroundColor: backgroundColor, width: width, opacity: opacity, transition: transition
+  };
 };
 
 var ProgressLine = (_temp = _class = function (_Component) {
@@ -45,7 +53,6 @@ var ProgressLine = (_temp = _class = function (_Component) {
     _this.idCompleted = null;
     _this.wasOpacied = false;
     _this.idOpacied = null;
-    //this.state = {}
     return _this;
   }
 
@@ -79,28 +86,15 @@ var ProgressLine = (_temp = _class = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          color = _props.color,
-          height = _props.height;
+      var color = this.props.color;
 
       var _style = void 0;
 
       if (this.wasOpacied) {
-        _style = {
-          backgroundColor: color,
-          width: 0,
-          opacity: 1,
-          height: height
-        };
+        _style = _crStyle(color, 1, 0);
         this.wasOpacied = false;
       } else if (this.wasCompleted) {
-        _style = {
-          backgroundColor: color,
-          width: '100%',
-          opacity: 0,
-          transition: Transitions.OPACITY,
-          height: height
-        };
+        _style = _crStyle(color, 0, '100%', T.OPACITY);
         this.wasCompleted = false;
         this.wasOpacied = true;
       } else {
@@ -112,23 +106,15 @@ var ProgressLine = (_temp = _class = function (_Component) {
           completed = 100;
           this.wasCompleted = true;
         }
-
-        _style = {
-          backgroundColor: color,
-          opacity: 1,
-          width: completed + '%',
-          transition: Transitions.WIDTH,
-          height: height
-        };
+        _style = _crStyle(color, 1, completed + '%', T.WIDTH);
       }
 
-      return _react2.default.createElement('div', { className: 'progress-line', style: _style });
+      return _react2.default.createElement('div', { className: CL, style: _style });
     }
   }]);
   return ProgressLine;
 }(_react.Component), _class.defaultProps = {
-  color: '#2F7ED8',
-  height: 3
+  color: '#2f7ed8'
 }, _temp);
 exports.default = ProgressLine;
 //# sourceMappingURL=ProgressLine.js.map

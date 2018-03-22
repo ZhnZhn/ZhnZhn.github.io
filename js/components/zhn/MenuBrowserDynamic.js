@@ -46,11 +46,11 @@ var _MenuPart2 = _interopRequireDefault(_MenuPart);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Styles = {
-  browser: {
+var S = {
+  BROWSER: {
     paddingRight: '0'
   },
-  scrollDiv: {
+  SCROLL: {
     overflowY: 'auto',
     height: '92%',
     paddingRight: '10px',
@@ -148,14 +148,14 @@ var MenuBrowserDynamic = function (_Component) {
 
       return _react2.default.createElement(
         _Browser2.default,
-        { isShow: isShow, style: Styles.browser },
+        { isShow: isShow, style: S.BROWSER },
         _react2.default.createElement(_BrowserCaption2.default, {
           caption: caption,
           onClose: this._handleHide
         }),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: Styles.scrollDiv },
+          { style: S.SCROLL },
           this._renderMenuParts(menuItems),
           children
         )

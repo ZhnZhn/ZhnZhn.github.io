@@ -72,5 +72,14 @@ describe('calc seria growRate', function () {
       expect(p).toEqual(_dOut[i]);
     });
   });
+
+  test('should fill to null for zero old values', function () {
+    var _dIn = _crInArr([0, 0, 1, 1]),
+        _dOut = _crOutArr([null, null, 0]),
+        _dR = fn(_dIn);
+    _dR.forEach(function (p, i) {
+      expect(p).toEqual(_dOut[i]);
+    });
+  });
 });
 //# sourceMappingURL=seriaFn.test.js.map

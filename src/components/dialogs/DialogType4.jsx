@@ -5,6 +5,7 @@ import D from './DialogCell'
 import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+const CAPTION_YAXIS = 'Add Seria with Second YAxis';
 
 @Decor.withToolbar
 @Decor.withValidationLoad
@@ -15,9 +16,11 @@ class DialogType4 extends Component {
     caption: PropTypes.string,
 
     oneCaption: PropTypes.string,
+    oneNames: PropTypes.string,
     oneURI: PropTypes.string,
     oneJsonProp: PropTypes.string,
     twoCaption: PropTypes.string,
+    twoNames: PropTypes.string,
     twoURI: PropTypes.string,
     twoJsonProp: PropTypes.string,
     noDate: PropTypes.bool,
@@ -39,7 +42,7 @@ class DialogType4 extends Component {
     this.two = undefined;
     const { noDate, noOptions } = props;
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate}
+      props, { noDate }
     );
     if (noOptions !== true) {
       this.toolbarButtons.push({
@@ -68,7 +71,9 @@ class DialogType4 extends Component {
   }
 
   _handleClickOptions = () => {
-    this.setState({ isShowOptions: !this.state.isShowOptions })
+    this.setState(prevState => ({
+      isShowOptions: !prevState.isShowOptions
+    }))
   }
 
   _handleSelectOne = (one) => {
@@ -109,7 +114,8 @@ class DialogType4 extends Component {
               : {};
     return this.props.loadFn(
       this.props, {
-        one : this.one, two : this.two, fromDate, toDate,
+        one: this.one, two: this.two,
+        fromDate, toDate,
         hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
       }
     );
@@ -123,11 +129,13 @@ class DialogType4 extends Component {
      this[propName] = value
   }
 
+ _refDates = c => this.datesFragment = c
+
   render(){
     const {
            caption, isShow, onShow, onFront,
-           oneCaption, oneURI, oneJsonProp, isWithOneInput,
-           twoCaption, twoURI, twoJsonProp, isWithInputTwo,
+           oneCaption, oneNames, oneURI, oneJsonProp, isWithOneInput,
+           twoCaption, twoNames, twoURI, twoJsonProp, isWithInputTwo,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate,
            noDate, noOptions
           } = this.props
@@ -155,7 +163,7 @@ class DialogType4 extends Component {
                uri={oneURI}
                jsonProp={oneJsonProp}
                caption={oneCaption}
-               optionNames="Stocks"
+               optionNames={oneNames}
                isWithInput={isWithOneInput}
                onSelect={this._handleSelectOne}
              />
@@ -166,7 +174,7 @@ class DialogType4 extends Component {
                uri={twoURI}
                jsonProp={twoJsonProp}
                caption={twoCaption}
-               optionNames="Indicators"
+               optionNames={twoNames}
                isWithInput={isWithInputTwo}
                onSelect={this._handleSelectTwo}
              />
@@ -174,7 +182,7 @@ class DialogType4 extends Component {
                (noDate !== true) &&
                <D.ShowHide isShow={isShowDate}>
                  <D.DatesFragment
-                   ref={c => this.datesFragment = c}
+                   ref={this._refDates}
                    isShowLabels={isShowLabels}
                    initFromDate={initFromDate}
                    initToDate={initToDate}
@@ -188,7 +196,7 @@ class DialogType4 extends Component {
                <D.ShowHide isShow={isShowOptions}>
                  <D.RowCheckBox
                    initValue={false}
-                   caption="Add Seria with Second YAxis"
+                   caption={CAPTION_YAXIS}
                    onCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true)}
                    onUnCheck={this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)}
                  />

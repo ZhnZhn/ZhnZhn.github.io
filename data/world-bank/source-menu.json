@@ -21,8 +21,10 @@
         "descrUrl": "./data/world-bank/world-bank.html",
         "nInitFromDate": 15,
         "oneCaption": "Country",
+        "oneNames": "Countries",
         "oneURI": "./data/world-bank/countries.json",
         "twoCaption": "Indicator",
+        "twoNames": "Indicators",
         "noDate": true,
         "valueFn": "ROneDashTwo",
         "loadId": "WB"

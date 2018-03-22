@@ -140,10 +140,10 @@ class MenuBrowserDynamic2 extends Component {
                      />
                    </ShowHide>
                  )
-               : undefined
+               : null
          , _spinnerLoading = (menuItems.length === 0)
                ? (<SpinnerLoading style={STYLE.SPINNER_LOADING}/>)
-               : undefined
+               : null;
     return (
        <Browser isShow={isShow} style={STYLE.BROWSER}>
            <BrowserCaption

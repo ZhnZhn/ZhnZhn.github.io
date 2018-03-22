@@ -60,10 +60,15 @@ const ChartLogic = {
   },
 
   removeConfig(slice, chartType, id) {
-    const chartSlice = slice[chartType];
-    chartSlice.configs = chartSlice.configs
-      .filter(config => config.zhConfig.id !== id)
-    return chartSlice;
+    const chartSlice = slice[chartType]
+        , configs = chartSlice.configs
+        , _lenBefore = configs.length;
+    chartSlice.configs = configs
+      .filter(c => c.zhConfig.id !== id)
+    return {
+      chartSlice,
+      isRemoved: _lenBefore > chartSlice.configs.length
+    };
   }
 };
 
@@ -191,14 +196,16 @@ const ChartStore = Reflux.createStore({
  onCloseChart(chartType, browserType, chartId){
 
    //const chartSlice = this.charts[chartType];
-   const chartSlice = ChartLogic
+   const { chartSlice, isRemoved } = ChartLogic
      .removeConfig(this.charts, chartType, chartId)
 
-   this.resetActiveChart(chartId)
-   this.minusMenuItemCounter(chartType, browserType);
+   if (isRemoved) {
+     this.resetActiveChart(chartId)
+     this.minusMenuItemCounter(chartType, browserType);
 
-   this.trigger(CHAT.CLOSE_CHART, chartSlice);
-   this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+     this.trigger(CHAT.CLOSE_CHART, chartSlice);
+     this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+   }
  },
 
  onCloseChartContainer(chartType, browserType){

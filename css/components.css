@@ -2,10 +2,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
+  height: 6px;
   width: 0;
   background: #2f7ed8 none repeat scroll 0% 0%;
   z-index: 1000;
+}
+@media screen and (min-width: 600px) {
+  .progress-line {
+    height: 3px;
+  }
 }
 
 .ellipsis {

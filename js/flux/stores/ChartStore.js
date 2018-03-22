@@ -112,11 +112,16 @@ var ChartLogic = {
     return false;
   },
   removeConfig: function removeConfig(slice, chartType, id) {
-    var chartSlice = slice[chartType];
-    chartSlice.configs = chartSlice.configs.filter(function (config) {
-      return config.zhConfig.id !== id;
+    var chartSlice = slice[chartType],
+        configs = chartSlice.configs,
+        _lenBefore = configs.length;
+    chartSlice.configs = configs.filter(function (c) {
+      return c.zhConfig.id !== id;
     });
-    return chartSlice;
+    return {
+      chartSlice: chartSlice,
+      isRemoved: _lenBefore > chartSlice.configs.length
+    };
   }
 };
 
@@ -225,13 +230,17 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   onCloseChart: function onCloseChart(chartType, browserType, chartId) {
 
     //const chartSlice = this.charts[chartType];
-    var chartSlice = ChartLogic.removeConfig(this.charts, chartType, chartId);
+    var _ChartLogic$removeCon = ChartLogic.removeConfig(this.charts, chartType, chartId),
+        chartSlice = _ChartLogic$removeCon.chartSlice,
+        isRemoved = _ChartLogic$removeCon.isRemoved;
 
-    this.resetActiveChart(chartId);
-    this.minusMenuItemCounter(chartType, browserType);
+    if (isRemoved) {
+      this.resetActiveChart(chartId);
+      this.minusMenuItemCounter(chartType, browserType);
 
-    this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartSlice);
-    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+      this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartSlice);
+      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+    }
   },
   onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
     this.uncheckActiveCheckbox(chartType);

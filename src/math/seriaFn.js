@@ -14,12 +14,14 @@ const fn = {
       pNext = d[i];
       _d.push({
         x: pNext.x,
-        y: parseFloat(
-             Big(pNext.y - pPrev.y)
-             .div(pPrev.y)
-             .times(100)
-             .toFixed(2)
-           )
+        y: pPrev.y !== 0
+            ? parseFloat(
+                Big(pNext.y - pPrev.y)
+                .div(pPrev.y)
+                .times(100)
+                .toFixed(2)
+              )
+            : null
       })
       pPrev = pNext
     }

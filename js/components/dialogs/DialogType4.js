@@ -38,6 +38,7 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
+var CAPTION_YAXIS = 'Add Seria with Second YAxis';
 
 var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(DialogType4, _Component);
@@ -47,9 +48,11 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     isShow: PropTypes.bool,
     caption: PropTypes.string,
       oneCaption: PropTypes.string,
+    oneNames: PropTypes.string,
     oneURI: PropTypes.string,
     oneJsonProp: PropTypes.string,
     twoCaption: PropTypes.string,
+    twoNames: PropTypes.string,
     twoURI: PropTypes.string,
     twoJsonProp: PropTypes.string,
     noDate: PropTypes.bool,
@@ -69,7 +72,11 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     var _this = (0, _possibleConstructorReturn3.default)(this, (DialogType4.__proto__ || Object.getPrototypeOf(DialogType4)).call(this));
 
     _this._handleClickOptions = function () {
-      _this.setState({ isShowOptions: !_this.state.isShowOptions });
+      _this.setState(function (prevState) {
+        return {
+          isShowOptions: !prevState.isShowOptions
+        };
+      });
     };
 
     _this._handleSelectOne = function (one) {
@@ -119,7 +126,8 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           toDate = _ref.toDate;
 
       return _this.props.loadFn(_this.props, {
-        one: _this.one, two: _this.two, fromDate: fromDate, toDate: toDate,
+        one: _this.one, two: _this.two,
+        fromDate: fromDate, toDate: toDate,
         hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
       });
     };
@@ -130,6 +138,10 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 
     _this._handleMode = function (propName, value) {
       _this[propName] = value;
+    };
+
+    _this._refDates = function (c) {
+      return _this.datesFragment = c;
     };
 
     _this.one = undefined;
@@ -167,18 +179,18 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           caption = _props.caption,
           isShow = _props.isShow,
           onShow = _props.onShow,
           onFront = _props.onFront,
           oneCaption = _props.oneCaption,
+          oneNames = _props.oneNames,
           oneURI = _props.oneURI,
           oneJsonProp = _props.oneJsonProp,
           isWithOneInput = _props.isWithOneInput,
           twoCaption = _props.twoCaption,
+          twoNames = _props.twoNames,
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
           isWithInputTwo = _props.isWithInputTwo,
@@ -214,7 +226,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           uri: oneURI,
           jsonProp: oneJsonProp,
           caption: oneCaption,
-          optionNames: 'Stocks',
+          optionNames: oneNames,
           isWithInput: isWithOneInput,
           onSelect: this._handleSelectOne
         }),
@@ -224,7 +236,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           uri: twoURI,
           jsonProp: twoJsonProp,
           caption: twoCaption,
-          optionNames: 'Indicators',
+          optionNames: twoNames,
           isWithInput: isWithInputTwo,
           onSelect: this._handleSelectTwo
         }),
@@ -232,9 +244,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-            ref: function ref(c) {
-              return _this2.datesFragment = c;
-            },
+            ref: this._refDates,
             isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
@@ -247,7 +257,7 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           { isShow: isShowOptions },
           _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
             initValue: false,
-            caption: 'Add Seria with Second YAxis',
+            caption: CAPTION_YAXIS,
             onCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, true),
             onUnCheck: this._handleMode.bind(null, HAS_SECOND_Y_AXIS, false)
           })
@@ -261,4 +271,4 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   return DialogType4;
 }(_react.Component)) || _class) || _class);
 exports.default = DialogType4;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DialogType4.js.map
+//# sourceMappingURL=DialogType4.js.map

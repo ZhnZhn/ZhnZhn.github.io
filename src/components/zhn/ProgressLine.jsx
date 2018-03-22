@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 
-const Transitions = {
-  WIDTH : 'width 500ms ease-out',
-  OPACITY : 'opacity 400ms linear'
-}
+const CL = "progress-line";
+
+const T = {
+  WIDTH: 'width 500ms ease-out',
+  OPACITY: 'opacity 400ms linear'
+};
+
+const _crStyle = (backgroundColor, opacity, width, transition) => ({
+   backgroundColor, width, opacity, transition
+});
 
 class ProgressLine extends Component {
   static defaultProps = {
-    color : '#2F7ED8',
-    height : 3
+    color: '#2f7ed8'
   }
 
   constructor(props){
@@ -17,7 +22,6 @@ class ProgressLine extends Component {
     this.idCompleted = null;
     this.wasOpacied = false;
     this.idOpacied = null;
-    //this.state = {}
   }
 
   componentWillUnmount(){
@@ -44,49 +48,30 @@ class ProgressLine extends Component {
   }
 
   render(){
-    const { color, height} = this.props;
+    const { color } = this.props;
     let _style;
 
     if (this.wasOpacied) {
-      _style = {
-          backgroundColor: color,
-          width: 0,
-          opacity : 1,
-          height: height
-      };
+      _style = _crStyle(color, 1, 0)
       this.wasOpacied = false;
     } else if (this.wasCompleted) {
-      _style = {
-          backgroundColor: color,
-          width: '100%',
-          opacity : 0,
-          transition: Transitions.OPACITY,
-          height: height
-      };
+      _style = _crStyle(color, 0, '100%', T.OPACITY)
       this.wasCompleted = false;
       this.wasOpacied = true;
     } else {
-       let {completed} = this.props;
+       let { completed } = this.props;
        if (completed < 0) {
          completed = 0;
        } else if (completed >= 100) {
          completed = 100;
          this.wasCompleted = true
        }
-
-       _style = {
-         backgroundColor: color,
-         opacity: 1,
-         width: completed + '%',
-         transition: Transitions.WIDTH,
-         height: height
-       };
+       _style = _crStyle(color, 1, completed+'%', T.WIDTH)
     }
 
     return (
-      <div className="progress-line" style={_style}>
-      </div>
-    )
+      <div className={CL} style={_style} />
+    );
   }
 }
 

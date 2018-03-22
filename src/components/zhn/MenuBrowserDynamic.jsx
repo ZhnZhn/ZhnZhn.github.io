@@ -5,11 +5,11 @@ import BrowserCaption from './BrowserCaption';
 import ScrollPane from './ScrollPane';
 import MenuPart from './MenuPart';
 
-const Styles = {
-  browser : {
+const S = {
+  BROWSER: {
     paddingRight: '0'
   },
-  scrollDiv : {
+  SCROLL: {
     overflowY: 'auto',
     height: '92%',
     paddingRight: '10px',
@@ -22,7 +22,7 @@ class MenuBrowserDynamic extends Component{
     super();
     this.state = {
       isShow: props.isInitShow ? true : false,
-      isLoaded : false,
+      isLoaded: false,
       menuItems: []
     }
   }
@@ -74,12 +74,12 @@ class MenuBrowserDynamic extends Component{
         , {menuItems, isShow} = this.state;
 
     return (
-       <Browser isShow={isShow} style={Styles.browser}>
+       <Browser isShow={isShow} style={S.BROWSER}>
          <BrowserCaption
             caption={caption}
             onClose={this._handleHide}
          />
-          <ScrollPane style={Styles.scrollDiv}>
+          <ScrollPane style={S.SCROLL}>
             {this._renderMenuParts(menuItems)}
             {children}
           </ScrollPane>
