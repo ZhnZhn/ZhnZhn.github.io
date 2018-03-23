@@ -1,19 +1,40 @@
 {
   "menu": [
     {
-      "caption": "Topics",
+      "caption": "Economy & Finance", "isInitClose": true,
       "items": [
         { "id": "WB_AGRICULTURE" },
         { "id": "WB_ECONOMY" },
         { "id": "WB_ENERGY" },
-        { "id": "WB_ENVIRONMENT" },
-        { "id": "WB_DEBT" },
+        { "id": "WB_EXTERNALDEBT" },
         { "id": "WB_FINANCE" },
         { "id": "WB_INFRASTRUCTURE" },
+        { "id": "WB_MILLENIUMGOAL" },
+        { "id": "WB_PRIVATESECTOR" },
+        { "id": "WB_PUBLICSECTOR" },
         { "id": "WB_SCIENCE" },
         { "id": "WB_TRADE" }
       ]
+    },{
+      "caption": "Society",
+      "items": [
+        { "id": "WB_AIDEFFECTIVENESS" },
+        { "id": "WB_EDUCATION" },
+        { "id": "WB_GENDER" },
+        { "id": "WB_HEALTH" },
+        { "id": "WB_POVERTY" },
+        { "id": "WB_SOCIALPROTECTION" },
+        { "id": "WB_SOCIALDEVELOPMENT" },
+        { "id": "WB_URBANDEVELOPMENT" }
+      ]
+    },{
+      "caption": "Environment",
+      "items": [
+        { "id": "WB_CLIMATECHANGE" },
+        { "id": "WB_ENVIRONMENT" }
+      ]
     }
+
   ],
   "items": {
     "WB_B1": {
@@ -66,20 +87,32 @@
         "dataSource": "World Bank: Energy & Mining"
       }
     },
-    "WB_ENVIRONMENT": {
-      "type": "WB_ENVIRONMENT",
-      "menuTitle": "Environment",
-      "dialogCaption": "Environment",
-      "chartContainerCaption": "World Bank: Environment",
+    "WB_PUBLICSECTOR": {
+      "type": "WB_PUBLICSECTOR",
+      "menuTitle": "Public Sector",
+      "dialogCaption": "Public Sector",
+      "chartContainerCaption": "World Bank: Public Sector",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
-        "twoURI": "./data/world-bank/enviroment.json",
-        "dataSource": "World Bank: Environment"
+        "twoURI": "./data/world-bank/public-sector.json",
+        "dataSource": "World Bank: Public Sector"
       }
     },
-    "WB_DEBT": {
-      "type": "WB_DEBT",
+    "WB_PRIVATESECTOR": {
+      "type": "WB_PRIVATESECTOR",
+      "menuTitle": "Private Sector",
+      "dialogCaption": "Private Sector",
+      "chartContainerCaption": "World Bank: Private Sector",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/private-sector.json",
+        "dataSource": "World Bank: Private Sector"
+      }
+    },
+    "WB_EXTERNALDEBT": {
+      "type": "WB_EXTERNALDEBT",
       "menuTitle": "External Debt",
       "dialogCaption": "External Debt",
       "chartContainerCaption": "World Bank: External Debt",
@@ -136,6 +169,141 @@
       "dialogProps": {
         "twoURI": "./data/world-bank/trade.json",
         "dataSource": "World Bank: Trade"
+      }
+    },
+    "WB_MILLENIUMGOAL": {
+      "type": "WB_MILLENIUMGOAL",
+      "menuTitle": "Millenium Goals",
+      "dialogCaption": "Millenium Goals",
+      "chartContainerCaption": "World Bank: Millenium Goals",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/millenium-goal.json",
+        "dataSource": "World Bank: Millenium Goals"
+      }
+    },
+
+    "WB_AIDEFFECTIVENESS": {
+      "type": "WB_AIDEFFECTIVENESS",
+      "menuTitle": "Aid Effectiveness",
+      "dialogCaption": "Aid Effectiveness",
+      "chartContainerCaption": "World Bank: Aid Effectiveness",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/aid-effectiveness.json",
+        "dataSource": "World Bank: Aid Effectiveness"
+      }
+    },
+    "WB_EDUCATION": {
+      "type": "WB_EDUCATION",
+      "menuTitle": "Education",
+      "dialogCaption": "Education",
+      "chartContainerCaption": "World Bank: Education",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/education.json",
+        "dataSource": "World Bank: Education"
+      }
+    },
+    "WB_HEALTH": {
+      "type": "WB_HEALTH",
+      "menuTitle": "Health",
+      "dialogCaption": "Health",
+      "chartContainerCaption": "World Bank: Health",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/health.json",
+        "dataSource": "World Bank: Health"
+      }
+    },
+    "WB_SOCIALPROTECTION": {
+      "type": "WB_SOCIALPROTECTION",
+      "menuTitle": "Social Protection & Labor",
+      "dialogCaption": "Social Protection & Labor",
+      "chartContainerCaption": "World Bank: Social Protection & Labor",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/social-protection.json",
+        "dataSource": "World Bank: Social Protection & Labor"
+      }
+    },
+    "WB_SOCIALDEVELOPMENT": {
+      "type": "WB_SOCIALDEVELOPMENT",
+      "menuTitle": "Social Development",
+      "dialogCaption": "Social Development",
+      "chartContainerCaption": "World Bank: Social Development",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/social-development.json",
+        "dataSource": "World Bank: Social Development"
+      }
+    },
+    "WB_URBANDEVELOPMENT": {
+      "type": "WB_URBANDEVELOPMENT",
+      "menuTitle": "Urban Development",
+      "dialogCaption": "Urban Development",
+      "chartContainerCaption": "World Bank: Urban Development",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/urban-development.json",
+        "dataSource": "World Bank: Urban Development"
+      }
+    },
+    "WB_GENDER": {
+      "type": "WB_GENDER",
+      "menuTitle": "Gender",
+      "dialogCaption": "Gender",
+      "chartContainerCaption": "World Bank: Gender",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/gender.json",
+        "dataSource": "World Bank: Gender"
+      }
+    },
+    "WB_POVERTY": {
+      "type": "WB_POVERTY",
+      "menuTitle": "Poverty",
+      "dialogCaption": "Poverty",
+      "chartContainerCaption": "World Bank: Poverty",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/poverty.json",
+        "dataSource": "World Bank: Poverty"
+      }
+    },
+
+
+    "WB_ENVIRONMENT": {
+      "type": "WB_ENVIRONMENT",
+      "menuTitle": "Environment",
+      "dialogCaption": "Environment",
+      "chartContainerCaption": "World Bank: Environment",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/enviroment.json",
+        "dataSource": "World Bank: Environment"
+      }
+    },
+    "WB_CLIMATECHANGE": {
+      "type": "WB_CLIMATECHANGE",
+      "menuTitle": "Climate Change",
+      "dialogCaption": "Climate Change",
+      "chartContainerCaption": "World Bank: Climate Change",
+      "addProps": "WB_B1",
+      "dialogType": "DialogType4",
+      "dialogProps": {
+        "twoURI": "./data/world-bank/climate-change.json",
+        "dataSource": "World Bank: Climate Change"
       }
     }
 

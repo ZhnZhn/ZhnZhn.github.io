@@ -1,0 +1,1208 @@
+{
+    "items": [
+        {
+            "caption": "Mobile account, male (% age 15+) [w2]",
+            "value": "WP15163_4.2"
+        },
+        {
+            "caption": "Account at a financial institution, female (% age 15+) [ts]",
+            "value": "WP_time_01.3"
+        },
+        {
+            "caption": "Account at a financial institution, male (% age 15+) [ts]",
+            "value": "WP_time_01.2"
+        },
+        {
+            "caption": "Urban population, male (% of total)",
+            "value": "SP.URB.TOTL.MA.ZS"
+        },
+        {
+            "caption": "Urban population, female (% of total)",
+            "value": "SP.URB.TOTL.FE.ZS"
+        },
+        {
+            "caption": "Rural population, male (% of total)",
+            "value": "SP.RUR.TOTL.MA.ZS"
+        },
+        {
+            "caption": "Rural population, female (% of total)",
+            "value": "SP.RUR.TOTL.FE.ZS"
+        },
+        {
+            "caption": "Age population, age 05, male, interpolated",
+            "value": "SP.POP.AG05.MA.IN"
+        },
+        {
+            "caption": "Age population, age 05, female, interpolated",
+            "value": "SP.POP.AG05.FE.IN"
+        },
+        {
+            "caption": "Age population, age 04, male, interpolated",
+            "value": "SP.POP.AG04.MA.IN"
+        },
+        {
+            "caption": "Age population, age 04, female, interpolated",
+            "value": "SP.POP.AG04.FE.IN"
+        },
+        {
+            "caption": "Age population, age 03, male, interpolated",
+            "value": "SP.POP.AG03.MA.IN"
+        },
+        {
+            "caption": "Age population, age 03, female, interpolated",
+            "value": "SP.POP.AG03.FE.IN"
+        },
+        {
+            "caption": "Age population, age 02, male, interpolated",
+            "value": "SP.POP.AG02.MA.IN"
+        },
+        {
+            "caption": "Age population, age 02, female, interpolated",
+            "value": "SP.POP.AG02.FE.IN"
+        },
+        {
+            "caption": "Age population, age 01, male, interpolated",
+            "value": "SP.POP.AG01.MA.IN"
+        },
+        {
+            "caption": "Age population, age 01, female, interpolated",
+            "value": "SP.POP.AG01.FE.IN"
+        },
+        {
+            "caption": "Age population, age 0, male, interpolated",
+            "value": "SP.POP.AG00.MA.IN"
+        },
+        {
+            "caption": "Age population, age 0, female, interpolated",
+            "value": "SP.POP.AG00.FE.IN"
+        },
+        {
+            "caption": "Teenage mothers (% of women ages 15-19 who have had children or are currently pregnant)",
+            "value": "SP.MTR.1519.ZS"
+        },
+        {
+            "caption": "Female headed households (% of households with a female head)",
+            "value": "SP.HOU.FEMA.ZS"
+        },
+        {
+            "caption": "Wanted fertility rate (births per woman)",
+            "value": "SP.DYN.WFRT"
+        },
+        {
+            "caption": "Survival to age 65, male (% of cohort)",
+            "value": "SP.DYN.TO65.MA.ZS"
+        },
+        {
+            "caption": "Survival to age 65, female (% of cohort)",
+            "value": "SP.DYN.TO65.FE.ZS"
+        },
+        {
+            "caption": "Fertility rate, total (births per woman)",
+            "value": "SP.DYN.TFRT.IN"
+        },
+        {
+            "caption": "Mean age at first marriage, male",
+            "value": "SP.DYN.SMAM.MA"
+        },
+        {
+            "caption": "Mean age at first marriage, female",
+            "value": "SP.DYN.SMAM.FE"
+        },
+        {
+            "caption": "Life expectancy at age 60, male",
+            "value": "SP.DYN.LE60.MA.IN"
+        },
+        {
+            "caption": "Life expectancy at age 60, female",
+            "value": "SP.DYN.LE60.FE.IN"
+        },
+        {
+            "caption": "Life expectancy at birth, male (years)",
+            "value": "SP.DYN.LE00.MA.IN"
+        },
+        {
+            "caption": "Life expectancy at birth, female (years)",
+            "value": "SP.DYN.LE00.FE.IN"
+        },
+        {
+            "caption": "Contraceptive prevalence, any methods (% of women ages 15-49)",
+            "value": "SP.DYN.CONU.ZS"
+        },
+        {
+            "caption": "Mortality rate, adult, male (per 1,000 male adults)",
+            "value": "SP.DYN.AMRT.MA"
+        },
+        {
+            "caption": "Mortality rate, adult, female (per 1,000 female adults)",
+            "value": "SP.DYN.AMRT.FE"
+        },
+        {
+            "caption": "Adolescent fertility rate (births per 1,000 women ages 15-19)",
+            "value": "SP.ADO.TFRT"
+        },
+        {
+            "caption": "Unemployment, male (% of male labor force) (modeled ILO estimate)",
+            "value": "SL.UEM.TOTL.MA.ZS"
+        },
+        {
+            "caption": "Unemployment, female (% of female labor force) (modeled ILO estimate)",
+            "value": "SL.UEM.TOTL.FE.ZS"
+        },
+        {
+            "caption": "Unemployment with tertiary education, male (% of male unemployment)",
+            "value": "SL.UEM.TERT.MA.ZS"
+        },
+        {
+            "caption": "Unemployment with tertiary education, female (% of female unemployment)",
+            "value": "SL.UEM.TERT.FE.ZS"
+        },
+        {
+            "caption": "Unemployment with secondary education, male (% of male unemployment)",
+            "value": "SL.UEM.SECO.MA.ZS"
+        },
+        {
+            "caption": "Unemployment with secondary education, female (% of female unemployment)",
+            "value": "SL.UEM.SECO.FE.ZS"
+        },
+        {
+            "caption": "Unemployment with primary education, male (% of male unemployment)",
+            "value": "SL.UEM.PRIM.MA.ZS"
+        },
+        {
+            "caption": "Unemployment with primary education, female (% of female unemployment)",
+            "value": "SL.UEM.PRIM.FE.ZS"
+        },
+        {
+            "caption": "Long-term unemployment, male (% of male unemployment)",
+            "value": "SL.UEM.LTRM.MA.ZS"
+        },
+        {
+            "caption": "Long-term unemployment, female (% of female unemployment)",
+            "value": "SL.UEM.LTRM.FE.ZS"
+        },
+        {
+            "caption": "Unemployment, youth male (% of male labor force ages 15-24) (modeled ILO estimate)",
+            "value": "SL.UEM.1524.MA.ZS"
+        },
+        {
+            "caption": "Ratio of female to male youth unemployment rate (% ages 15-24) (modeled ILO estimate)",
+            "value": "SL.UEM.1524.FM.ZS"
+        },
+        {
+            "caption": "Ratio of female to male youth unemployment rate (% ages 15-24) (national estimate)",
+            "value": "SL.UEM.1524.FM.NE.ZS"
+        },
+        {
+            "caption": "Unemployment, youth female (% of female labor force ages 15-24) (modeled ILO estimate)",
+            "value": "SL.UEM.1524.FE.ZS"
+        },
+        {
+            "caption": "Labor force, female (% of total labor force)",
+            "value": "SL.TLF.TOTL.FE.ZS"
+        },
+        {
+            "caption": "Labor force, female",
+            "value": "SL.TLF.TOTL.FE.IN"
+        },
+        {
+            "caption": "Labor force with tertiary education, male (% of male labor force)",
+            "value": "SL.TLF.TERT.MA.ZS"
+        },
+        {
+            "caption": "Labor force with tertiary education, female (% of female labor force)",
+            "value": "SL.TLF.TERT.FE.ZS"
+        },
+        {
+            "caption": "Labor force with secondary education, male (% of male labor force)",
+            "value": "SL.TLF.SECO.MA.ZS"
+        },
+        {
+            "caption": "Labor force with secondary education, female (% of female labor force)",
+            "value": "SL.TLF.SECO.FE.ZS"
+        },
+        {
+            "caption": "Labor force with primary education, male (% of male labor force)",
+            "value": "SL.TLF.PRIM.MA.ZS"
+        },
+        {
+            "caption": "Labor force with primary education, female (% of female labor force)",
+            "value": "SL.TLF.PRIM.FE.ZS"
+        },
+        {
+            "caption": "Part time employment, female (% of total part time employment)",
+            "value": "SL.TLF.PART.TL.FE.ZS"
+        },
+        {
+            "caption": "Part time employment, male (% of total male employment)",
+            "value": "SL.TLF.PART.MA.ZS"
+        },
+        {
+            "caption": "Part time employment, female (% of total female employment)",
+            "value": "SL.TLF.PART.FE.ZS"
+        },
+        {
+            "caption": "Labor force participation rate, male (% of male population ages 15+) (modeled ILO estimate)",
+            "value": "SL.TLF.CACT.MA.ZS"
+        },
+        {
+            "caption": "Labor force participation rate, female (% of female population ages 15+) (modeled ILO estimate)",
+            "value": "SL.TLF.CACT.FE.ZS"
+        },
+        {
+            "caption": "Children in employment, work only, male (% of male children in employment, ages 7-14)",
+            "value": "SL.TLF.0714.WK.MA.ZS"
+        },
+        {
+            "caption": "Children in employment, work only, female (% of female children in employment, ages 7-14)",
+            "value": "SL.TLF.0714.WK.FE.ZS"
+        },
+        {
+            "caption": "Children in employment, study and work, male (% of male children in employment, ages 7-14)",
+            "value": "SL.TLF.0714.SW.MA.ZS"
+        },
+        {
+            "caption": "Children in employment, study and work, female (% of female children in employment, ages 7-14)",
+            "value": "SL.TLF.0714.SW.FE.ZS"
+        },
+        {
+            "caption": "Children in employment, male (% of male children ages 7-14)",
+            "value": "SL.TLF.0714.MA.ZS"
+        },
+        {
+            "caption": "Children in employment, female (% of female children ages 7-14)",
+            "value": "SL.TLF.0714.FE.ZS"
+        },
+        {
+            "caption": "Employment in services, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.SRV.EMPL.MA.ZS"
+        },
+        {
+            "caption": "Employment in services, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.SRV.EMPL.FE.ZS"
+        },
+        {
+            "caption": "Child employment in services, male (% of male economically active children ages 7-14)",
+            "value": "SL.SRV.0714.MA.ZS"
+        },
+        {
+            "caption": "Child employment in services, female (% of female economically active children ages 7-14)",
+            "value": "SL.SRV.0714.FE.ZS"
+        },
+        {
+            "caption": "Ratio of female to male wages in manufacturing (%)",
+            "value": "SL.MNF.WAGE.FM"
+        },
+        {
+            "caption": "Child employment in manufacturing, male (% of male economically active children ages 7-14)",
+            "value": "SL.MNF.0714.MA.ZS"
+        },
+        {
+            "caption": "Child employment in manufacturing, female (% of female economically active children ages 7-14)",
+            "value": "SL.MNF.0714.FE.ZS"
+        },
+        {
+            "caption": "Employment in industry, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.IND.EMPL.MA.ZS"
+        },
+        {
+            "caption": "Employment in industry, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.IND.EMPL.FE.ZS"
+        },
+        {
+            "caption": "Contributing family workers, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.FAM.WORK.MA.ZS"
+        },
+        {
+            "caption": "Contributing family workers, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.FAM.WORK.FE.ZS"
+        },
+        {
+            "caption": "Wage and salaried workers, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.EMP.WORK.MA.ZS"
+        },
+        {
+            "caption": "Wage and salaried workers, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.EMP.WORK.FE.ZS"
+        },
+        {
+            "caption": "Vulnerable employment, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.EMP.VULN.MA.ZS"
+        },
+        {
+            "caption": "Vulnerable employment, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.EMP.VULN.FE.ZS"
+        },
+        {
+            "caption": "Time-related underemployment, male (% of employment)",
+            "value": "SL.EMP.UNDR.MA.ZS"
+        },
+        {
+            "caption": "Time-related underemployment, female (% of employment)",
+            "value": "SL.EMP.UNDR.FE.ZS"
+        },
+        {
+            "caption": "Employment to population ratio, 15+, male (%) (modeled ILO estimate)",
+            "value": "SL.EMP.TOTL.SP.MA.ZS"
+        },
+        {
+            "caption": "Employment to population ratio, 15+, female (%) (modeled ILO estimate)",
+            "value": "SL.EMP.TOTL.SP.FE.ZS"
+        },
+        {
+            "caption": "Self-employed, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.EMP.SELF.MA.ZS"
+        },
+        {
+            "caption": "Self-employed, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.EMP.SELF.FE.ZS"
+        },
+        {
+            "caption": "Own-account workers, male (% of male employment)",
+            "value": "SL.EMP.OWAC.MA.ZS"
+        },
+        {
+            "caption": "Own-account workers, female (% of female employment)",
+            "value": "SL.EMP.OWAC.FE.ZS"
+        },
+        {
+            "caption": "Employers, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.EMP.MPYR.MA.ZS"
+        },
+        {
+            "caption": "Employers, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.EMP.MPYR.FE.ZS"
+        },
+        {
+            "caption": "Share of women in wage employment in the nonagricultural sector (% of total nonagricultural employment)",
+            "value": "SL.EMP.INSV.FE.ZS"
+        },
+        {
+            "caption": "Employment to population ratio, ages 15-24, male (%) (modeled ILO estimate)",
+            "value": "SL.EMP.1524.SP.MA.ZS"
+        },
+        {
+            "caption": "Employment to population ratio, ages 15-24, female (%) (modeled ILO estimate)",
+            "value": "SL.EMP.1524.SP.FE.ZS"
+        },
+        {
+            "caption": "Employment in agriculture, male (% of male employment) (modeled ILO estimate)",
+            "value": "SL.AGR.EMPL.MA.ZS"
+        },
+        {
+            "caption": "Employment in agriculture, female (% of female employment) (modeled ILO estimate)",
+            "value": "SL.AGR.EMPL.FE.ZS"
+        },
+        {
+            "caption": "Child employment in agriculture, male (% of male economically active children ages 7-14)",
+            "value": "SL.AGR.0714.MA.ZS"
+        },
+        {
+            "caption": "Child employment in agriculture, female (% of female economically active children ages 7-14)",
+            "value": "SL.AGR.0714.FE.ZS"
+        },
+        {
+            "caption": "Prevalence of obesity, male (% of male population ages 18+)",
+            "value": "SH.STA.OB18.MA.ZS"
+        },
+        {
+            "caption": "Prevalence of obesity, female (% of female population ages 18+)",
+            "value": "SH.STA.OB18.FE.ZS"
+        },
+        {
+            "caption": "Maternal mortality ratio (national estimate, per 100,000 live births)",
+            "value": "SH.STA.MMRT.NE"
+        },
+        {
+            "caption": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
+            "value": "SH.STA.MMRT"
+        },
+        {
+            "caption": "Prevalence of underweight, weight for age, male (% of children under 5)",
+            "value": "SH.STA.MALN.MA.ZS"
+        },
+        {
+            "caption": "Prevalence of underweight, weight for age, female (% of children under 5)",
+            "value": "SH.STA.MALN.FE.ZS"
+        },
+        {
+            "caption": "Births attended by skilled health staff (% of total)",
+            "value": "SH.STA.BRTC.ZS"
+        },
+        {
+            "caption": "Pregnant women receiving prenatal care (%)",
+            "value": "SH.STA.ANVC.ZS"
+        },
+        {
+            "caption": "Smoking prevalence, males (% of adults)",
+            "value": "SH.PRV.SMOK.MA"
+        },
+        {
+            "caption": "Smoking prevalence, females (% of adults)",
+            "value": "SH.PRV.SMOK.FE"
+        },
+        {
+            "caption": "Maternal leave benefits (% of wages paid)",
+            "value": "SH.MMR.WAGE.ZS"
+        },
+        {
+            "caption": "Lifetime risk of maternal death (%)",
+            "value": "SH.MMR.RISK.ZS"
+        },
+        {
+            "caption": "Lifetime risk of maternal death (1 in: rate varies by country)",
+            "value": "SH.MMR.RISK"
+        },
+        {
+            "caption": "Maternity leave (days paid)",
+            "value": "SH.MMR.LEVE"
+        },
+        {
+            "caption": "Antiretroviral therapy coverage (% of adult males living with HIV)",
+            "value": "SH.HIV.ARTC.MA.ZS"
+        },
+        {
+            "caption": "Antiretroviral therapy coverage (% of adult females living with HIV)",
+            "value": "SH.HIV.ARTC.FE.ZS"
+        },
+        {
+            "caption": "Prevalence of HIV, male (% ages 15-24)",
+            "value": "SH.HIV.1524.MA.ZS"
+        },
+        {
+            "caption": "Prevalence of HIV, female (% ages 15-24)",
+            "value": "SH.HIV.1524.FE.ZS"
+        },
+        {
+            "caption": "Demand for family planning satisfied by any methods (% of married women with demand for family planning)",
+            "value": "SH.FPL.SATI.ZS"
+        },
+        {
+            "caption": "Mortality rate, male child (per 1,000 male children age one)",
+            "value": "SH.DYN.CHLD.MA"
+        },
+        {
+            "caption": "Mortality rate, female child (per 1,000 female children age one)",
+            "value": "SH.DYN.CHLD.FE"
+        },
+        {
+            "caption": "Women's share of population ages 15+ living with HIV (%)",
+            "value": "SH.DYN.AIDS.FE.ZS"
+        },
+        {
+            "caption": "Cause of death, by non-communicable diseases, ages 35-59, male (% relevant age)",
+            "value": "SH.DTH.NCOM.3559.MA.ZS"
+        },
+        {
+            "caption": "Cause of death, by non-communicable diseases, ages 35-59, female (% relevant age)",
+            "value": "SH.DTH.NCOM.3559.FE.ZS"
+        },
+        {
+            "caption": "Cause of death, by non-communicable diseases, ages 15-34, male (% relevant age)",
+            "value": "SH.DTH.NCOM.1534.MA.ZS"
+        },
+        {
+            "caption": "Cause of death, by non-communicable diseases, ages 15-34, female (% relevant age)",
+            "value": "SH.DTH.NCOM.1534.FE.ZS"
+        },
+        {
+            "caption": "Cause of death, by injury, ages 35-59, male (% relevant age)",
+            "value": "SH.DTH.INJR.3559.MA.ZS"
+        },
+        {
+            "caption": "Cause of death, by injury, ages 35-59, female (% relevant age)",
+            "value": "SH.DTH.INJR.3559.FE.ZS"
+        },
+        {
+            "caption": "Cause of death, by injury, ages 15-34, male (% relevant age)",
+            "value": "SH.DTH.INJR.1534.MA.ZS"
+        },
+        {
+            "caption": "Cause of death, by injury, ages 15-34, female (% relevant age)",
+            "value": "SH.DTH.INJR.1534.FE.ZS"
+        },
+        {
+            "caption": "Cause of death, by communicable diseases and maternal, prenatal and nutrition conditions, ages 35-59, male (% relevant age)",
+            "value": "SH.DTH.COMM.3559.MA.ZS"
+        },
+        {
+            "caption": "Cause of death, by communicable diseases and maternal, prenatal and nutrition conditions, ages 35-59, female (% relevant age)",
+            "value": "SH.DTH.COMM.3559.FE.ZS"
+        },
+        {
+            "caption": "Cause of death, by communicable diseases and maternal, prenatal and nutrition conditions, ages 15-34, male (% relevant age)",
+            "value": "SH.DTH.COMM.1534.MA.ZS"
+        },
+        {
+            "caption": "Cause of death, by communicable diseases and maternal, prenatal and nutrition conditions, ages 15-34, female (% relevant age)",
+            "value": "SH.DTH.COMM.1534.FE.ZS"
+        },
+        {
+            "caption": "Condom use, population ages 15-24, male (% of males ages 15-24)",
+            "value": "SH.CON.1524.MA.ZS"
+        },
+        {
+            "caption": "Condom use, population ages 15-24, female (% of females ages 15-24)",
+            "value": "SH.CON.1524.FE.ZS"
+        },
+        {
+            "caption": "Women who believe a husband is justified in beating his wife when she refuses sex with him (%)",
+            "value": "SG.VAW.REFU.ZS"
+        },
+        {
+            "caption": "Women who believe a husband is justified in beating his wife (any of five reasons) (%)",
+            "value": "SG.VAW.REAS.ZS"
+        },
+        {
+            "caption": "Women who believe a husband is justified in beating his wife when she neglects the children (%)",
+            "value": "SG.VAW.NEGL.ZS"
+        },
+        {
+            "caption": "Women who believe a husband is justified in beating his wife when she goes out without telling him (%)",
+            "value": "SG.VAW.GOES.ZS"
+        },
+        {
+            "caption": "Women who believe a husband is justified in beating his wife when she burns the food (%)",
+            "value": "SG.VAW.BURN.ZS"
+        },
+        {
+            "caption": "Women who believe a husband is justified in beating his wife when she argues with him (%)",
+            "value": "SG.VAW.ARGU.ZS"
+        },
+        {
+            "caption": "Proportion of women subjected to physical and/or sexual violence in the last 12 months ( % of women age 15-49)",
+            "value": "SG.VAW.1549.ZS"
+        },
+        {
+            "caption": "Proportion of time spent on unpaid domestic and care work, male (% of 24 hour day) ",
+            "value": "SG.TIM.UWRK.MA"
+        },
+        {
+            "caption": "Proportion of time spent on unpaid domestic and care work, female (% of 24 hour day)",
+            "value": "SG.TIM.UWRK.FE"
+        },
+        {
+            "caption": "Women who believe a wife is justified refusing sex with her husband if she knows he has sexually transmitted disease (%)",
+            "value": "SG.RSX.TMDS.ZS"
+        },
+        {
+            "caption": "Women who believe a wife is justified refusing sex with her husband if she is tired or not in the mood (%)",
+            "value": "SG.RSX.TIRD.ZS"
+        },
+        {
+            "caption": "Women who believe a wife is justified refusing sex with her husband if she knows he has sex with other women (%)",
+            "value": "SG.RSX.SXOT.ZS"
+        },
+        {
+            "caption": "Women who believe a wife is justified refusing sex with her husband for all of the reasons (%)",
+            "value": "SG.RSX.REAS.ZS"
+        },
+        {
+            "caption": "Women who believe a wife is justified refusing sex with her husband for none of the reasons (%)",
+            "value": "SG.RSX.NORS.ZS"
+        },
+        {
+            "caption": "Women who believe a wife is justified refusing sex with her husband if she has recently given birth (%)",
+            "value": "SG.RSX.BRTH.ZS"
+        },
+        {
+            "caption": "Female migrants (% of international migrant stock)",
+            "value": "SG.POP.MIGR.FE.ZS"
+        },
+        {
+            "caption": "Married men and married women have equal ownership rights to property (1=yes; 0=no)",
+            "value": "SG.OWN.PRRT.MR"
+        },
+        {
+            "caption": "Married women can obtain a national ID card in the same way as married men (1=yes; 0=no)",
+            "value": "SG.OBT.IDCD.MR"
+        },
+        {
+            "caption": "Nondiscrimination clause mentions gender in the constitution (1=yes; 0=no)",
+            "value": "SG.NOD.CONS"
+        },
+        {
+            "caption": "Mothers are guaranteed an equivalent position after maternity leave (1=yes; 0=no)",
+            "value": "SG.MMR.LEVE.EP"
+        },
+        {
+            "caption": "Legislation specifically addresses sexual harassment (1=yes; 0=no)",
+            "value": "SG.LEG.SXHR"
+        },
+        {
+            "caption": "Legislation explicitly criminalizes marital rape (1=yes; 0=no)",
+            "value": "SG.LEG.MRRP"
+        },
+        {
+            "caption": "Legislation exists on domestic violence (1=yes; 0=no)",
+            "value": "SG.LEG.DVAW"
+        },
+        {
+            "caption": "Married women are required by law to obey their husbands (1=yes; 0=no)",
+            "value": "SG.LAW.OBHB.MR"
+        },
+        {
+            "caption": "Law mandates nondiscrimination based on gender in hiring (1=yes; 0=no)",
+            "value": "SG.LAW.NODC.HR"
+        },
+        {
+            "caption": "Law mandates paid or unpaid maternity leave (1=yes; 0=no)",
+            "value": "SG.LAW.LEVE.PU"
+        },
+        {
+            "caption": "Law mandates equal remuneration for females and males for work of equal value (1=yes; 0=no)",
+            "value": "SG.LAW.EQRM.WK"
+        },
+        {
+            "caption": "Law prohibits or invalidates child or early marriage (1=yes; 0=no)",
+            "value": "SG.LAW.CHMR"
+        },
+        {
+            "caption": "Nonpregnant and nonnursing women can do the same jobs as men (1=yes; 0=no)",
+            "value": "SG.JOB.NOPN.EQ"
+        },
+        {
+            "caption": "Households with water 30 minutes or longer away round trip (%)",
+            "value": "SG.H2O.TM30.HH.ZS"
+        },
+        {
+            "caption": "Households with water less than 30 minutes away round trip (%)",
+            "value": "SG.H2O.TL30.HH.ZS"
+        },
+        {
+            "caption": "Households with water on the premises (%)",
+            "value": "SG.H2O.PRMS.HH.ZS"
+        },
+        {
+            "caption": "Female professional and technical workers (% of total)",
+            "value": "SG.GEN.TECH.ZS"
+        },
+        {
+            "caption": "Proportion of seats held by women in national parliaments (%)",
+            "value": "SG.GEN.PARL.ZS"
+        },
+        {
+            "caption": "Proportion of women in ministerial level positions (%)",
+            "value": "SG.GEN.MNST.ZS"
+        },
+        {
+            "caption": "Decision maker about Visits to her family or relatives: wife and husband jointly (% of women age 15-49)",
+            "value": "SG.DMK.VISI.WH.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's visits to her family or relatives: mainly wife (% of women age 15-49)",
+            "value": "SG.DMK.VISI.WF.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's visits to her family or relatives: someone else (% of women age 15-49)",
+            "value": "SG.DMK.VISI.SE.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's visits to her family or relatives: other (% of women age 15-49)",
+            "value": "SG.DMK.VISI.OT.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's visits to her family or relatives: mainly husband (% of women age 15-49)",
+            "value": "SG.DMK.VISI.HB.ZS"
+        },
+        {
+            "caption": "Women participating in decision of visits to family, relatives, friends (% of women age 15-49)",
+            "value": "SG.DMK.VISI.FN.ZS"
+        },
+        {
+            "caption": "Women making their own informed decisions regarding sexual relations, contraceptive use and reproductive health care  (% of women age 15-49)",
+            "value": "SG.DMK.SRCR.FN.ZS"
+        },
+        {
+            "caption": "Decision maker about major household purchases: wife and husband jointly (% of women age 15-49)",
+            "value": "SG.DMK.PRCH.WH.ZS"
+        },
+        {
+            "caption": "Decision maker about major household purchases: mainly wife (% of women age 15-49)",
+            "value": "SG.DMK.PRCH.WF.ZS"
+        },
+        {
+            "caption": "Decision maker about major household purchases: someone else (% of women age 15-49)",
+            "value": "SG.DMK.PRCH.SE.ZS"
+        },
+        {
+            "caption": "Decision maker about major household purchases: other (% of women age 15-49)",
+            "value": "SG.DMK.PRCH.OT.ZS"
+        },
+        {
+            "caption": "Decision maker about major household purchases: mainly husband (% of women age 15-49)",
+            "value": "SG.DMK.PRCH.HB.ZS"
+        },
+        {
+            "caption": "Women participating in making major household purchase decisions (% of women age 15-49)",
+            "value": "SG.DMK.PRCH.FN.ZS"
+        },
+        {
+            "caption": "Women participating in none of the three decisions (own health care, major household purchases, and visiting family) (% of women age 15-49)",
+            "value": "SG.DMK.NONE.FN.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's own health care: wife and husband jointly (% of women age 15-49)",
+            "value": "SG.DMK.HLTH.WH.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's own health care: mainly wife  (% of women age 15-49)",
+            "value": "SG.DMK.HLTH.WF.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's own health care: someone else (% of women age 15-49)",
+            "value": "SG.DMK.HLTH.SE.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's own health care: other (% of women age 15-49)",
+            "value": "SG.DMK.HLTH.OT.ZS"
+        },
+        {
+            "caption": "Decision maker about a woman's own health care: mainly husband (% of women age 15-49)",
+            "value": "SG.DMK.HLTH.HB.ZS"
+        },
+        {
+            "caption": "Women participating in own health care decisions (% of women age 15-49)",
+            "value": "SG.DMK.HLTH.FN.ZS"
+        },
+        {
+            "caption": "Women participating in decision of what food to cook daily (% of women age 15-49)",
+            "value": "SG.DMK.FOOD.FN.ZS"
+        },
+        {
+            "caption": "Women participating in making daily purchase decisions (% of women age 15-49)",
+            "value": "SG.DMK.DPCH.FN.ZS"
+        },
+        {
+            "caption": "Women participating in the three decisions (own health care, major household purchases, and visiting family) (% of women age 15-49)",
+            "value": "SG.DMK.ALLD.FN.ZS"
+        },
+        {
+            "caption": "Main cooking fuel: wood (% of households)",
+            "value": "SG.COK.WOOD.ZS"
+        },
+        {
+            "caption": "Main cooking fuel: straw/shrubs/grass (% of households)",
+            "value": "SG.COK.STRW.ZS"
+        },
+        {
+            "caption": "Location of cooking: separate building (% of households)",
+            "value": "SG.COK.SBLD.ZS"
+        },
+        {
+            "caption": "Location of cooking: outdoors (% of households)",
+            "value": "SG.COK.OUTD.ZS"
+        },
+        {
+            "caption": "Location of cooking: other places (% of households)",
+            "value": "SG.COK.OTHR.ZS"
+        },
+        {
+            "caption": "Main cooking fuel: LPG/natural gas/biogas (% of households)",
+            "value": "SG.COK.LPGN.ZS"
+        },
+        {
+            "caption": "Location of cooking: inside the house (% of households)",
+            "value": "SG.COK.HOUS.ZS"
+        },
+        {
+            "caption": "Main cooking fuel: electricity  (% of households)",
+            "value": "SG.COK.ELEC.ZS"
+        },
+        {
+            "caption": "Main cooking fuel: dung (% of households)",
+            "value": "SG.COK.DUNG.ZS"
+        },
+        {
+            "caption": "Main cooking fuel: agricultural crop (% of households)",
+            "value": "SG.COK.CROP.ZS"
+        },
+        {
+            "caption": "Main cooking fuel: charcoal (% of households)",
+            "value": "SG.COK.CHCO.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed short-cycle tertiary, population 25+ years, male (%)",
+            "value": "SE.TER.HIAT.ST.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed short-cycle tertiary, population 25+ years, female (%)",
+            "value": "SE.TER.HIAT.ST.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed Master's or equivalent, population 25+ years, male (%)",
+            "value": "SE.TER.HIAT.MS.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed Master's or equivalent, population 25+ years, female (%)",
+            "value": "SE.TER.HIAT.MS.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed Doctoral or equivalent, population 25+ years, male (%)",
+            "value": "SE.TER.HIAT.DO.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed Doctoral or equivalent, population 25+ years, female (%)",
+            "value": "SE.TER.HIAT.DO.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed Bachelor's or equivalent, population 25+ years, male (%)",
+            "value": "SE.TER.HIAT.BA.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed Bachelor's or equivalent, population 25+ years, female (%)",
+            "value": "SE.TER.HIAT.BA.FE.ZS"
+        },
+        {
+            "caption": "School enrollment, tertiary, male (% gross)",
+            "value": "SE.TER.ENRR.MA"
+        },
+        {
+            "caption": "School enrollment, tertiary, female (% gross)",
+            "value": "SE.TER.ENRR.FE"
+        },
+        {
+            "caption": "Educational attainment, at least completed short-cycle tertiary, population 25+, total (%) (cumulative)",
+            "value": "SE.TER.CUAT.ST.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed short-cycle tertiary, population 25+, male (%) (cumulative)",
+            "value": "SE.TER.CUAT.ST.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed short-cycle tertiary, population 25+, female (%) (cumulative)",
+            "value": "SE.TER.CUAT.ST.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least Master's or equivalent, population 25+, total (%) (cumulative)",
+            "value": "SE.TER.CUAT.MS.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least Master's or equivalent, population 25+, male (%) (cumulative)",
+            "value": "SE.TER.CUAT.MS.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least Master's or equivalent, population 25+, female (%) (cumulative)",
+            "value": "SE.TER.CUAT.MS.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, Doctoral or equivalent, population 25+, total (%) (cumulative)",
+            "value": "SE.TER.CUAT.DO.ZS"
+        },
+        {
+            "caption": "Educational attainment, Doctoral or equivalent, population 25+, male (%) (cumulative)",
+            "value": "SE.TER.CUAT.DO.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, Doctoral or equivalent, population 25+, female (%) (cumulative)",
+            "value": "SE.TER.CUAT.DO.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least Bachelor's or equivalent, population 25+, total (%) (cumulative)",
+            "value": "SE.TER.CUAT.BA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least Bachelor's or equivalent, population 25+, male (%) (cumulative)",
+            "value": "SE.TER.CUAT.BA.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least Bachelor's or equivalent, population 25+, female (%) (cumulative)",
+            "value": "SE.TER.CUAT.BA.FE.ZS"
+        },
+        {
+            "caption": "Secondary education, teachers (% female)",
+            "value": "SE.SEC.TCHR.FE.ZS"
+        },
+        {
+            "caption": "Progression to secondary school, male (%)",
+            "value": "SE.SEC.PROG.MA.ZS"
+        },
+        {
+            "caption": "Progression to secondary school, female (%)",
+            "value": "SE.SEC.PROG.FE.ZS"
+        },
+        {
+            "caption": "School enrollment, secondary, male (% net)",
+            "value": "SE.SEC.NENR.MA"
+        },
+        {
+            "caption": "School enrollment, secondary, female (% net)",
+            "value": "SE.SEC.NENR.FE"
+        },
+        {
+            "caption": "Educational attainment, completed upper secondary, population 25+ years, male (%)",
+            "value": "SE.SEC.HIAT.UP.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed upper secondary, population 25+ years, female (%)",
+            "value": "SE.SEC.HIAT.UP.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed post-secondary, population 25+ years, male (%)",
+            "value": "SE.SEC.HIAT.PO.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed post-secondary, population 25+ years, female (%)",
+            "value": "SE.SEC.HIAT.PO.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed lower secondary, population 25+ years, male (%)",
+            "value": "SE.SEC.HIAT.LO.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed lower secondary, population 25+ years, female (%)",
+            "value": "SE.SEC.HIAT.LO.FE.ZS"
+        },
+        {
+            "caption": "School enrollment, secondary, male (% gross)",
+            "value": "SE.SEC.ENRR.MA"
+        },
+        {
+            "caption": "School enrollment, secondary, female (% gross)",
+            "value": "SE.SEC.ENRR.FE"
+        },
+        {
+            "caption": "Percentage of students in secondary vocational education who are female (%)",
+            "value": "SE.SEC.ENRL.VO.FE.ZS"
+        },
+        {
+            "caption": "Percentage of students in secondary general education who are female (%)",
+            "value": "SE.SEC.ENRL.GC.FE.ZS"
+        },
+        {
+            "caption": "Secondary education, pupils (% female)",
+            "value": "SE.SEC.ENRL.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed upper secondary, population 25+, total (%) (cumulative)",
+            "value": "SE.SEC.CUAT.UP.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed upper secondary, population 25+, male (%) (cumulative)",
+            "value": "SE.SEC.CUAT.UP.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed upper secondary, population 25+, female (%) (cumulative)",
+            "value": "SE.SEC.CUAT.UP.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed post-secondary, population 25+, total (%) (cumulative)",
+            "value": "SE.SEC.CUAT.PO.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed post-secondary, population 25+, male (%) (cumulative)",
+            "value": "SE.SEC.CUAT.PO.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed post-secondary, population 25+, female (%) (cumulative)",
+            "value": "SE.SEC.CUAT.PO.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed lower secondary, population 25+, total (%) (cumulative)",
+            "value": "SE.SEC.CUAT.LO.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed lower secondary, population 25+, male (%) (cumulative)",
+            "value": "SE.SEC.CUAT.LO.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed lower secondary, population 25+, female (%) (cumulative)",
+            "value": "SE.SEC.CUAT.LO.FE.ZS"
+        },
+        {
+            "caption": "Expected years of schooling, male",
+            "value": "SE.SCH.LIFE.MA"
+        },
+        {
+            "caption": "Expected years of schooling, female",
+            "value": "SE.SCH.LIFE.FE"
+        },
+        {
+            "caption": "Children out of school, primary, male",
+            "value": "SE.PRM.UNER.MA"
+        },
+        {
+            "caption": "Children out of school, primary, female",
+            "value": "SE.PRM.UNER.FE"
+        },
+        {
+            "caption": "Adjusted net enrollment rate, primary, male (% of primary school age children)",
+            "value": "SE.PRM.TENR.MA"
+        },
+        {
+            "caption": "Adjusted net enrollment rate, primary, female (% of primary school age children)",
+            "value": "SE.PRM.TENR.FE"
+        },
+        {
+            "caption": "Primary education, teachers (% female)",
+            "value": "SE.PRM.TCHR.FE.ZS"
+        },
+        {
+            "caption": "Percentage of male teachers in primary education who are trained, male (%)",
+            "value": "SE.PRM.TCAQ.MA.ZS"
+        },
+        {
+            "caption": "Percentage of female teachers in primary education who are trained, female (%)",
+            "value": "SE.PRM.TCAQ.FE.ZS"
+        },
+        {
+            "caption": "Percentage of repeaters in primary education, all grades, male (%)",
+            "value": "SE.PRM.REPT.MA.ZS"
+        },
+        {
+            "caption": "Percentage of repeaters in primary education, all grades, female (%)",
+            "value": "SE.PRM.REPT.FE.ZS"
+        },
+        {
+            "caption": "Persistence to last grade of primary, male (% of cohort)",
+            "value": "SE.PRM.PRSL.MA.ZS"
+        },
+        {
+            "caption": "Persistence to last grade of primary, female (% of cohort)",
+            "value": "SE.PRM.PRSL.FE.ZS"
+        },
+        {
+            "caption": "Persistence to grade 5, male (% of cohort)",
+            "value": "SE.PRM.PRS5.MA.ZS"
+        },
+        {
+            "caption": "Persistence to grade 5, female (% of cohort)",
+            "value": "SE.PRM.PRS5.FE.ZS"
+        },
+        {
+            "caption": "Net intake rate in grade 1, male (% of official school-age population)",
+            "value": "SE.PRM.NINT.MA.ZS"
+        },
+        {
+            "caption": "Net intake rate in grade 1, female (% of official school-age population)",
+            "value": "SE.PRM.NINT.FE.ZS"
+        },
+        {
+            "caption": "School enrollment, primary, male (% net)",
+            "value": "SE.PRM.NENR.MA"
+        },
+        {
+            "caption": "School enrollment, primary, female (% net)",
+            "value": "SE.PRM.NENR.FE"
+        },
+        {
+            "caption": "Educational attainment, completed primary, population 25+ years, male (%)",
+            "value": "SE.PRM.HIAT.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, completed primary, population 25+ years, female (%)",
+            "value": "SE.PRM.HIAT.FE.ZS"
+        },
+        {
+            "caption": "Gross intake ratio to Grade 1 of primary education, male (%)",
+            "value": "SE.PRM.GINT.MA.ZS"
+        },
+        {
+            "caption": "Gross intake ratio to Grade 1 of primary education, female (%)",
+            "value": "SE.PRM.GINT.FE.ZS"
+        },
+        {
+            "caption": "School enrollment, primary, male (% gross)",
+            "value": "SE.PRM.ENRR.MA"
+        },
+        {
+            "caption": "School enrollment, primary, female (% gross)",
+            "value": "SE.PRM.ENRR.FE"
+        },
+        {
+            "caption": "Primary education, pupils (% female)",
+            "value": "SE.PRM.ENRL.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed primary, population 25+ years, total (%) (cumulative)",
+            "value": "SE.PRM.CUAT.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed primary, population 25+ years, male (%) (cumulative)",
+            "value": "SE.PRM.CUAT.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, at least completed primary, population 25+ years, female (%) (cumulative)",
+            "value": "SE.PRM.CUAT.FE.ZS"
+        },
+        {
+            "caption": "Primary completion rate, male (% of relevant age group)",
+            "value": "SE.PRM.CMPT.MA.ZS"
+        },
+        {
+            "caption": "Primary completion rate, female (% of relevant age group)",
+            "value": "SE.PRM.CMPT.FE.ZS"
+        },
+        {
+            "caption": "Gross enrolment ratio, pre-primary, male (%)",
+            "value": "SE.PRE.ENRR.MA"
+        },
+        {
+            "caption": "Gross enrolment ratio, pre-primary, female (%)",
+            "value": "SE.PRE.ENRR.FE"
+        },
+        {
+            "caption": "Educational attainment, no schooling, population 25+ years, male (%)",
+            "value": "SE.NED.HIAT.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, no schooling, population 25+ years, female (%)",
+            "value": "SE.NED.HIAT.FE.ZS"
+        },
+        {
+            "caption": "Educational attainment, some primary, population 25+ years, total (%)",
+            "value": "SE.IPR.HIAT.ZS"
+        },
+        {
+            "caption": "Educational attainment, some primary, population 25+ years, male (%)",
+            "value": "SE.IPR.HIAT.MA.ZS"
+        },
+        {
+            "caption": "Educational attainment, some primary, population 25+ years, female (%)",
+            "value": "SE.IPR.HIAT.FE.ZS"
+        },
+        {
+            "caption": "School enrollment, tertiary (gross), gender parity index (GPI)",
+            "value": "SE.ENR.TERT.FM.ZS"
+        },
+        {
+            "caption": "School enrollment, secondary (gross), gender parity index (GPI)",
+            "value": "SE.ENR.SECO.FM.ZS"
+        },
+        {
+            "caption": "School enrollment, primary and secondary (gross), gender parity index (GPI)",
+            "value": "SE.ENR.PRSC.FM.ZS"
+        },
+        {
+            "caption": "School enrollment, primary (gross), gender parity index (GPI)",
+            "value": "SE.ENR.PRIM.FM.ZS"
+        },
+        {
+            "caption": "Literacy rate, adult male (% of males ages 15 and above)",
+            "value": "SE.ADT.LITR.MA.ZS"
+        },
+        {
+            "caption": "Literacy rate, adult female (% of females ages 15 and above)",
+            "value": "SE.ADT.LITR.FE.ZS"
+        },
+        {
+            "caption": "Literacy rate, youth male (% of males ages 15-24)",
+            "value": "SE.ADT.1524.LT.MA.ZS"
+        },
+        {
+            "caption": "Literacy rate, youth (ages 15-24), gender parity index (GPI)",
+            "value": "SE.ADT.1524.LT.FM.ZS"
+        },
+        {
+            "caption": "Literacy rate, youth female (% of females ages 15-24)",
+            "value": "SE.ADT.1524.LT.FE.ZS"
+        },
+        {
+            "caption": "Firms with female participation in ownership (% of firms)",
+            "value": "IC.FRM.FEMO.ZS"
+        },
+        {
+            "caption": "Firms with female top manager (% of firms)",
+            "value": "IC.FRM.FEMM.ZS"
+        }
+    ]
+}
