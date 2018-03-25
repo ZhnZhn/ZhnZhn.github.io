@@ -208,7 +208,7 @@ var _fnCreateRowEl = function _fnCreateRowEl(color, from, to, cluster, wg) {
 };
 var _fnCreateFooterEl = function _fnCreateFooterEl() {
   var el = _fnCreateEl('div');
-  el.innerHTML = '<p style="opacity:0.65;background:green;padding: 3px 6px">No Data</p>\n                  <p style="color:black;padding-top: 5px;">Source: EuroStat</p>';
+  el.innerHTML = '<p style="opacity:0.65;background:green;padding: 3px 6px">No Data</p>\n                  <p style="color:black;padding-top: 5px;">Source: Eurostat</p>';
   return el;
 };
 

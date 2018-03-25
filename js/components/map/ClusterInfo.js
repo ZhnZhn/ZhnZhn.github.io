@@ -28,10 +28,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
@@ -39,6 +35,8 @@ var _ShowHide2 = _interopRequireDefault(_ShowHide);
 var _Sparklines = require('../zhn-sparklines/Sparklines');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from 'prop-types'
 
 var COLOR_MAX = "#8bc34a";
 var COLOR_MIN = "#f44336";
@@ -124,6 +122,21 @@ var Item = function Item(_ref2) {
 var ClusterItem = function (_Component) {
   (0, _inherits3.default)(ClusterItem, _Component);
 
+  /*
+  static propTypes = {
+    point: PropTypes.shape({
+      0: PropTypes.number,
+      id: PropTypes.string,
+      seria: PropTypes.shape({
+        data: PropTypes.array
+      })
+    }),
+    color: PropTypes.string,
+    index: PropTypes.number,
+    isShowRange: PropTypes.bool
+  }
+  */
+
   function ClusterItem(props) {
     (0, _classCallCheck3.default)(this, ClusterItem);
 
@@ -194,20 +207,6 @@ var ClusterItem = function (_Component) {
   return ClusterItem;
 }(_react.Component);
 
-ClusterItem.propTypes = process.env.NODE_ENV !== "production" ? {
-  point: _propTypes2.default.shape({
-    0: _propTypes2.default.number,
-    id: _propTypes2.default.string,
-    seria: _propTypes2.default.shape({
-      data: _propTypes2.default.array
-    })
-  }),
-  color: _propTypes2.default.string,
-  index: _propTypes2.default.number,
-  isShowRange: _propTypes2.default.bool
-} : {};
-
-
 var Cluster = function Cluster(_ref3) {
   var cluster = _ref3.cluster,
       color = _ref3.color,
@@ -224,14 +223,17 @@ var Cluster = function Cluster(_ref3) {
     })
   );
 };
-Cluster.propTypes = process.env.NODE_ENV !== "production" ? {
-  cluster: _propTypes2.default.shape({
-    points: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-      id: _propTypes2.default.string
+/*
+Cluster.propTypes = {
+  cluster: PropTypes.shape({
+    points: PropTypes.arrayOf(
+        PropTypes.shape({
+           id: PropTypes.string
     }))
   }),
-  color: _propTypes2.default.string
-} : {};
+  color: PropTypes.string
+}
+*/
 
 var ClusterInfo = function (_Component2) {
   (0, _inherits3.default)(ClusterInfo, _Component2);
@@ -273,13 +275,14 @@ var ClusterInfo = function (_Component2) {
   }]);
   return ClusterInfo;
 }(_react.Component);
-
-ClusterInfo.propTypes = process.env.NODE_ENV !== "production" ? {
-  cluster: _propTypes2.default.object,
-  color: _propTypes2.default.string,
-  from: _propTypes2.default.string,
-  to: _propTypes2.default.string
-} : {};
+/*
+ClusterInfo.propTypes = {
+  cluster: PropTypes.object,
+  color: PropTypes.string,
+  from: PropTypes.string,
+  to: PropTypes.string
+}
+*/
 
 exports.default = ClusterInfo;
 //# sourceMappingURL=ClusterInfo.js.map

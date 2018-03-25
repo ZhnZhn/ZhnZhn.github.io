@@ -42,7 +42,7 @@ class DraggableDialog extends Component {
   */
 
   componentDidMount(){
-     Interact.makeDragable(this.rootDivEl);
+     Interact.makeDragable(this.rootDivEl);     
   }
 
   _renderCommandButton = (commandButtons, onShowChart, onClose) => {

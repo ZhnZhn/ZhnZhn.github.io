@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 import ShowHide from '../zhn/ShowHide'
 import {
@@ -70,6 +70,7 @@ const Item = ({ title, value, onClick }) => (
 );
 
 class ClusterItem extends Component {
+  /*
   static propTypes = {
     point: PropTypes.shape({
       0: PropTypes.number,
@@ -82,6 +83,7 @@ class ClusterItem extends Component {
     index: PropTypes.number,
     isShowRange: PropTypes.bool
   }
+  */
 
   constructor(props){
     super()
@@ -160,6 +162,7 @@ const Cluster = ({ cluster,color, isShowRange }) => {
     </div>
   );
 };
+/*
 Cluster.propTypes = {
   cluster: PropTypes.shape({
     points: PropTypes.arrayOf(
@@ -169,6 +172,7 @@ Cluster.propTypes = {
   }),
   color: PropTypes.string
 }
+*/
 
 class ClusterInfo extends Component {
   constructor(props){
@@ -183,7 +187,7 @@ class ClusterInfo extends Component {
 
   render(){
     const  { cluster, color, from, to } = this.props
-        ,  { isShowRange } = this.state;    
+        ,  { isShowRange } = this.state;
     return  (
       <div>
         <Caption {...{ color, from, to, onClick:this._handleToggleRange } } />
@@ -192,12 +196,13 @@ class ClusterInfo extends Component {
     );
   }
 }
-
+/*
 ClusterInfo.propTypes = {
   cluster: PropTypes.object,
   color: PropTypes.string,
   from: PropTypes.string,
   to: PropTypes.string
 }
+*/
 
 export default ClusterInfo

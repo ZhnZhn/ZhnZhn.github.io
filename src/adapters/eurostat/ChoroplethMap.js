@@ -162,7 +162,7 @@ const _fnCreateRowEl = function(color, from, to, cluster, wg){
 const _fnCreateFooterEl = function(){
   const el = _fnCreateEl('div');
   el.innerHTML = `<p style="opacity:0.65;background:green;padding: 3px 6px">No Data</p>
-                  <p style="color:black;padding-top: 5px;">Source: EuroStat</p>`
+                  <p style="color:black;padding-top: 5px;">Source: Eurostat</p>`
   return el;
 }
 

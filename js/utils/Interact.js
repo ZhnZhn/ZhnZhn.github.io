@@ -61,7 +61,7 @@ var Interact = {
   },
 
   makeDragable: function makeDragable(domNode) {
-    (0, _interact2.default)(domNode).draggable({
+    (0, _interact2.default)(domNode).ignoreFrom('[data-scrollable]').draggable({
       inertia: true,
 
       restrict: {

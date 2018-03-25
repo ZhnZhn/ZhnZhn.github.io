@@ -37,6 +37,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var S = {
   ROOT: {
     display: 'inline-block',
+    backgroundColor: '#949ab4',
+    width: '32px',
+    lineHeight: '2.0',
+    borderRadius: '50%',
+    textAlign: 'center',
+    verticalAlign: 'middle',
     cursor: 'pointer'
   }
 };

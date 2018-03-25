@@ -150,8 +150,8 @@ const S = {
     color: 'black',
     fontWeight: 'bold'
   },
-  FOOTER_PADDING: {
-    paddingRight: '12px',
+  FOOTER_MARGIN: {
+    marginRight: '4px'
   }
 };
 
@@ -493,12 +493,12 @@ class InputSelect extends Component {
         </span>
         <span style={S.FOOTER_BUTTONS}>
           <SpanBt
-             style={S.FOOTER_PADDING}
+             style={S.FOOTER_MARGIN}
              caption="Dn"
              onClick={this._stepDownOption}
           />
           <SpanBt
-             style={S.FOOTER_PADDING}
+             style={S.FOOTER_MARGIN}
              caption="Up"
              onClick={this._stepUpOption}
           />
@@ -510,6 +510,8 @@ class InputSelect extends Component {
       </div>
     );
   }
+
+  _refOptionsComp = c => this.optionsComp = c
 
   renderOptions = () => {
     const {
@@ -560,9 +562,12 @@ class InputSelect extends Component {
               ? this.props.options.length : 0;
 
     return (
-        <div style={{ ...S.ROOT_OPTION_DIV, ..._rootWidthStyle}}>
+        <div
+           style={{ ...S.ROOT_OPTION_DIV, ..._rootWidthStyle }}
+           data-scrollable={true}
+         >
           <div
-             ref={c => this.optionsComp = c}
+             ref={this._refOptionsComp}
              style={{ ...S.OPTION_DIV,
                       ...rootOptionsStyle,
                       ..._rootWidthStyle

@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/components/zhn-select/SpanButton.jsx"],"names":["S","ROOT","display","cursor","SpanButton","_hKeyDown","event","key","preventDefault","props","onClick","style","caption","rest"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAM;AACJC,aAAS,cADL;AAEJC,YAAQ;AAFJ;AADE,CAAV;;IAOMC,U;;;;;;;;;;;;;;4MAEJC,S,GAAY,UAACC,KAAD,EAAW;AACrB,UAAIA,MAAMC,GAAN,KAAc,OAAd,IAAyBD,MAAMC,GAAN,KAAc,GAA3C,EAAgD;AAC9CD,cAAME,cAAN;AACA,cAAKC,KAAL,CAAWC,OAAX;AACD;AACF,K;;;;;6BAEO;AAAA,mBAKI,KAAKD,KALT;AAAA,UAEEE,KAFF,UAEEA,KAFF;AAAA,kCAESC,OAFT;AAAA,UAESA,OAFT,kCAEiB,EAFjB;AAAA,UAGEF,OAHF,UAGEA,OAHF;AAAA,UAIKG,IAJL;;AAMN,aACE;AAAA;AAAA;AACG,gBAAK,QADR;AAEG,oBAAS,GAFZ;AAGG,4CAAYb,EAAEC,IAAd,EAAuBU,KAAvB,CAHH;AAIG,mBAASD,OAJZ;AAKG,qBAAW,KAAKL;AALnB,WAMOQ,IANP;AAQID;AARJ,OADF;AAYD;;;;;kBAGYR,U","file":"SpanButton.js","sourcesContent":["import React, { Component } from 'react'\r\n\r\nconst S = {\r\n  ROOT: {\r\n    display: 'inline-block',\r\n    cursor: 'pointer'\r\n  }\r\n};\r\n\r\nclass SpanButton extends Component {\r\n\r\n  _hKeyDown = (event) => {\r\n    if (event.key === 'Enter' || event.key === \" \") {\r\n      event.preventDefault()\r\n      this.props.onClick()\r\n    }\r\n  }\r\n\r\n  render(){\r\n    const {\r\n            style, caption='',\r\n            onClick,\r\n            ...rest\r\n          } = this.props;\r\n    return (\r\n      <span\r\n         role=\"button\"\r\n         tabIndex=\"0\"\r\n         style={{ ...S.ROOT, ...style }}\r\n         onClick={onClick}\r\n         onKeyDown={this._hKeyDown}\r\n         {...rest}\r\n      >\r\n         {caption}\r\n      </span>\r\n    );\r\n  }\r\n}\r\n\r\nexport default SpanButton\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-select/SpanButton.js"
+ ],
+ "file": "../../../src/components/zhn-select/SpanButton.js",
+ "names": [
+  "S",
+  "ROOT",
+  "display",
+  "backgroundColor",
+  "width",
+  "lineHeight",
+  "borderRadius",
+  "textAlign",
+  "verticalAlign",
+  "cursor",
+  "SpanButton",
+  "_hKeyDown",
+  "event",
+  "key",
+  "preventDefault",
+  "props",
+  "onClick",
+  "style",
+  "caption",
+  "rest"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAM;AACJC,aAAS,cADL;AAEJC,qBAAiB,SAFb;AAGJC,WAAO,MAHH;AAIJC,gBAAY,KAJR;AAKJC,kBAAc,KALV;AAMJC,eAAW,QANP;AAOJC,mBAAe,QAPX;AAQJC,YAAQ;AARJ;AADE,CAAV;;IAaMC,U;;;;;;;;;;;;;;4MAEJC,S,GAAY,UAACC,KAAD,EAAW;AACrB,UAAIA,MAAMC,GAAN,KAAc,OAAd,IAAyBD,MAAMC,GAAN,KAAc,GAA3C,EAAgD;AAC9CD,cAAME,cAAN;AACA,cAAKC,KAAL,CAAWC,OAAX;AACD;AACF,K;;;;;6BAEO;AAAA,mBAKI,KAAKD,KALT;AAAA,UAEEE,KAFF,UAEEA,KAFF;AAAA,kCAESC,OAFT;AAAA,UAESA,OAFT,kCAEiB,EAFjB;AAAA,UAGEF,OAHF,UAGEA,OAHF;AAAA,UAIKG,IAJL;;AAMN,aACE;AAAA;AAAA;AACG,gBAAK,QADR;AAEG,oBAAS,GAFZ;AAGG,4CAAYnB,EAAEC,IAAd,EAAuBgB,KAAvB,CAHH;AAIG,mBAASD,OAJZ;AAKG,qBAAW,KAAKL;AALnB,WAMOQ,IANP;AAQID;AARJ,OADF;AAYD;;;;;kBAGYR,U"
+}

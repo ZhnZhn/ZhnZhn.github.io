@@ -182,8 +182,8 @@ var S = {
     color: 'black',
     fontWeight: 'bold'
   },
-  FOOTER_PADDING: {
-    paddingRight: '12px'
+  FOOTER_MARGIN: {
+    marginRight: '4px'
   }
 };
 
@@ -608,12 +608,12 @@ var InputSelect = (_temp = _class = function (_Component) {
         'span',
         { style: S.FOOTER_BUTTONS },
         _react2.default.createElement(_SpanButton2.default, {
-          style: S.FOOTER_PADDING,
+          style: S.FOOTER_MARGIN,
           caption: 'Dn',
           onClick: _this3._stepDownOption
         }),
         _react2.default.createElement(_SpanButton2.default, {
-          style: S.FOOTER_PADDING,
+          style: S.FOOTER_MARGIN,
           caption: 'Up',
           onClick: _this3._stepUpOption
         }),
@@ -623,6 +623,10 @@ var InputSelect = (_temp = _class = function (_Component) {
         })
       )
     );
+  };
+
+  this._refOptionsComp = function (c) {
+    return _this3.optionsComp = c;
   };
 
   this.renderOptions = function () {
@@ -677,13 +681,14 @@ var InputSelect = (_temp = _class = function (_Component) {
 
     return _react2.default.createElement(
       'div',
-      { style: (0, _extends3.default)({}, S.ROOT_OPTION_DIV, _rootWidthStyle) },
+      {
+        style: (0, _extends3.default)({}, S.ROOT_OPTION_DIV, _rootWidthStyle),
+        'data-scrollable': true
+      },
       _react2.default.createElement(
         'div',
         {
-          ref: function ref(c) {
-            return _this3.optionsComp = c;
-          },
+          ref: _this3._refOptionsComp,
           style: (0, _extends3.default)({}, S.OPTION_DIV, rootOptionsStyle, _rootWidthStyle)
         },
         _domOptions

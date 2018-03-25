@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 const S = {
   ROOT: {
     display: 'inline-block',
+    backgroundColor: '#949ab4',
+    width: '32px',
+    lineHeight: '2.0',
+    borderRadius: '50%',
+    textAlign: 'center',
+    verticalAlign: 'middle',
     cursor: 'pointer'
   }
 };
