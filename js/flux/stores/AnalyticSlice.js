@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var LABEL = {
   ANSWER_OK: 'Answer Ok',
+  ANSWER_VIEW: 'Answer View',
   ANSWER_NO: 'Answer No',
   NO_ANSWER: 'No Answer'
 };
@@ -15,10 +16,20 @@ var Logic = {
     /* eslint-disable no-undef */
     if (window && window.ga) {
       ga('create', 'UA-85488410-1', {
-        'cookieDomain': 'zhnzhn.github.io',
-        'cookieExpires': 0
+        allowAnchor: false,
+        cookieDomain: 'zhnzhn.github.io',
+        cookieExpires: 0,
+        storeGac: false,
+        legacyHistoryImport: false
+
       });
       ga('set', 'anonymizeIp', true);
+      ga('set', 'displayFeaturesTask', null);
+      ga('set', 'screenResolution', 'none'); //sr
+      ga('set', 'viewportSize', 'none'); //vp
+      ga('set', 'screenColors', 'none'); //sc
+      ga('set', 'javaEnabled', false); //je
+      ga('set', 'title', 'ERC'); //dt
       ga('send', 'pageview');
 
       if (eventLabel) {
@@ -57,11 +68,14 @@ var AnalyticSlice = {
     this.isCanTrack = true;
     Logic.sendPageView(LABEL.ANSWER_OK);
   },
+  onAnswerView: function onAnswerView() {
+    Logic.sendPageView(LABEL.ANSWER_VIEW);
+  },
   onAnswerNo: function onAnswerNo() {
-    Logic.sendPageView(LABEL.ANSWER_NO);
+    //Logic.sendPageView(LABEL.ANSWER_NO);
   },
   onNoAnswer: function onNoAnswer() {
-    Logic.sendPageView(LABEL.NO_ANSWER);
+    //Logic.sendPageView(LABEL.NO_ANSWER);
   },
   analyticSendEvent: function analyticSendEvent(option) {
     if (this.isCanTrack) {

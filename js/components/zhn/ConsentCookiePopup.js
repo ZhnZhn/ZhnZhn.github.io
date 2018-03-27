@@ -32,9 +32,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var HIDE_PERIOD = 300000,
     ANIMATION_PERIOD = 1100,
-    MSG = "Can web app ERC collect Your general user's session statistics by applying Google Analytics with anonymizing IP address?",
+    MSG = "Can web app ERC collect Your general user's statistics for finding most popular topics by applying Google Analytics with anonymizing IP address?",
     BT_YES = "Yes",
-    BT_NO = "No, not today";
+    BT_VIEW = "Only AppView Event",
+    BT_NO = "No";
 
 var CL = {
   ROOT: "consent",
@@ -77,12 +78,24 @@ var ConsentCookiePopup = function (_Component) {
       }
     };
 
+    _this._hClickView = function () {
+      if (!_this.hideId) {
+        clearTimeout(_this.timeID);
+        _this.props.onAnswerView();
+        _this._startHidingAnimation();
+      }
+    };
+
     _this._hClickNo = function () {
       if (!_this.hideId) {
         clearTimeout(_this.timeID);
         _this.props.onAnswerNo();
         _this._startHidingAnimation();
       }
+    };
+
+    _this._refBtView = function (bt) {
+      return _this._btView = bt;
     };
 
     _this.timeID = undefined;
@@ -107,6 +120,9 @@ var ConsentCookiePopup = function (_Component) {
       setTimeout(function () {
         _this2.setState({ isOpacity: false });
       }, 500);
+      if (this._btView) {
+        this._btView.focus();
+      }
     }
   }, {
     key: "render",
@@ -138,6 +154,15 @@ var ConsentCookiePopup = function (_Component) {
               onClick: this._hClickOk
             },
             BT_YES
+          ),
+          _react2.default.createElement(
+            "button",
+            {
+              ref: this._refBtView,
+              className: CL.BT,
+              onClick: this._hClickView
+            },
+            BT_VIEW
           ),
           _react2.default.createElement(
             "button",

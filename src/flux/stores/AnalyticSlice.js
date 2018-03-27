@@ -1,8 +1,9 @@
 
 const LABEL = {
-  ANSWER_OK : 'Answer Ok',
-  ANSWER_NO : 'Answer No',
-  NO_ANSWER : 'No Answer'
+  ANSWER_OK: 'Answer Ok',
+  ANSWER_VIEW: 'Answer View',
+  ANSWER_NO: 'Answer No',
+  NO_ANSWER: 'No Answer'
 }
 
 const Logic = {
@@ -11,18 +12,28 @@ const Logic = {
     /* eslint-disable no-undef */
     if (window && window.ga){
       ga('create' , 'UA-85488410-1', {
-          'cookieDomain' : 'zhnzhn.github.io',
-          'cookieExpires' : 0
+          allowAnchor: false,
+          cookieDomain: 'zhnzhn.github.io',
+          cookieExpires: 0,
+          storeGac: false,
+          legacyHistoryImport: false,
+
       })
       ga('set', 'anonymizeIp', true);
+      ga('set', 'displayFeaturesTask', null);
+      ga('set', 'screenResolution', 'none'); //sr
+      ga('set', 'viewportSize', 'none');  //vp
+      ga('set', 'screenColors', 'none'); //sc
+      ga('set', 'javaEnabled', false);  //je
+      ga('set', 'title', 'ERC'); //dt
       ga('send', 'pageview');
 
       if (eventLabel) {
         ga('send', {
-          hitType : 'event',
-          eventCategory : 'User',
-          eventAction : 'Answer',
-          eventLabel : eventLabel
+          hitType: 'event',
+          eventCategory: 'User',
+          eventAction: 'Answer',
+          eventLabel: eventLabel
         });
       }
     }
@@ -33,11 +44,11 @@ const Logic = {
     /* eslint-disable no-undef */
     if (window && window.ga && eventLabel){
       ga('send', {
-        hitType : 'event',
-        eventCategory : 'Item',
-        eventAction : eventAction,
-        eventLabel : eventLabel,
-        eventValue : 1
+        hitType: 'event',
+        eventCategory: 'Item',
+        eventAction: eventAction,
+        eventLabel: eventLabel,
+        eventValue: 1
       })
     }
     /* eslint-enable no-undef */
@@ -45,17 +56,20 @@ const Logic = {
 }
 
 const AnalyticSlice = {
-  isCanTrack : false,
+  isCanTrack: false,
 
   onAnswerYes(){
     this.isCanTrack = true;
     Logic.sendPageView(LABEL.ANSWER_OK);
   },
+  onAnswerView(){
+    Logic.sendPageView(LABEL.ANSWER_VIEW)
+  },
   onAnswerNo(){
-    Logic.sendPageView(LABEL.ANSWER_NO);
+    //Logic.sendPageView(LABEL.ANSWER_NO);
   },
   onNoAnswer(){
-    Logic.sendPageView(LABEL.NO_ANSWER);
+    //Logic.sendPageView(LABEL.NO_ANSWER);
   },
 
   analyticSendEvent(option){

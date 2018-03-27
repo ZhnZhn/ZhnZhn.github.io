@@ -22,6 +22,7 @@
 .consent__row {
   width: 100%;
   text-align: right;
+  padding-right: 8px;
 }
 
 .consent__btn {
@@ -29,9 +30,9 @@
   color: #000;
   font-weight: bold;
   background-color: #f1d600;
-  padding: 8px 15px;
-  margin-left: 32px;
-  margin-right: 32px;
+  padding: 8px 8px;
+  margin-left: 8px;
+  margin-right: 8px;
   border: 3px solid #f1d600;
   border-radius: 5px;
   cursor: pointer;

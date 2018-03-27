@@ -17,7 +17,11 @@ import { BrowserActionTypes } from '../flux/actions/BrowserActions';
 import { ChartActionTypes } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const PREV_BUILD = '25-03-2018';
+const PREV_BUILD = '27-03-2018';
+
+const {
+  answerYes, answerView, answerNo, noAnswer
+} = AnalyticActions;
 
 class AppErc extends Component {
 
@@ -63,9 +67,10 @@ class AppErc extends Component {
        </div>
        <DialogContainer store={ChartStore} />
        <ConsentCookiePopup
-          onAnswerYes={AnalyticActions.answerYes}
-          onAnswerNo={AnalyticActions.answerNo}
-          onNoAnswer={AnalyticActions.noAnswer}
+          onAnswerYes={answerYes}
+          onAnswerView={answerView}
+          onAnswerNo={answerNo}
+          onNoAnswer={noAnswer}
        />
      </div>
    );

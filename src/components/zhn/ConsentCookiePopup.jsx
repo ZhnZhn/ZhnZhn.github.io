@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 const HIDE_PERIOD = 300000
     , ANIMATION_PERIOD = 1100
-    , MSG = "Can web app ERC collect Your general user's session statistics by applying Google Analytics with anonymizing IP address?"
+    , MSG = "Can web app ERC collect Your general user's statistics for finding most popular topics by applying Google Analytics with anonymizing IP address?"
     , BT_YES = "Yes"
-    , BT_NO = "No, not today";
+    , BT_VIEW = "Only AppView Event"
+    , BT_NO = "No";
 
 const CL = {
   ROOT: "consent",
@@ -42,6 +43,9 @@ class ConsentCookiePopup extends Component {
     setTimeout(()=>{
       this.setState({ isOpacity: false });
     }, 500);
+    if (this._btView) {
+      this._btView.focus()
+    }
   }
 
   _startHidingAnimation = () => {
@@ -60,6 +64,14 @@ class ConsentCookiePopup extends Component {
     }
   }
 
+  _hClickView = () => {
+    if (!this.hideId) {
+      clearTimeout(this.timeID);
+      this.props.onAnswerView();
+      this._startHidingAnimation();
+    }
+  }
+
   _hClickNo = () => {
     if (!this.hideId) {
       clearTimeout(this.timeID);
@@ -67,6 +79,8 @@ class ConsentCookiePopup extends Component {
       this._startHidingAnimation();
     }
   }
+
+  _refBtView = bt => this._btView = bt
 
   render(){
     const { isOpacity, isDisplay } = this.state
@@ -90,6 +104,13 @@ class ConsentCookiePopup extends Component {
               onClick={this._hClickOk}
            >
               {BT_YES}
+           </button>
+           <button
+              ref={this._refBtView}
+              className={CL.BT}
+              onClick={this._hClickView}
+           >
+              {BT_VIEW}
            </button>
            <button
               className={CL.BT}

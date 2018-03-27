@@ -19,12 +19,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var AnalyticActionTypes = exports.AnalyticActionTypes = {
   ANSWER_YES: 'answerYes',
+  ANSWER_VIEW: 'answerView',
   ANSWER_NO: 'answerNo',
   NO_ANSWER: 'noAnswer'
 };
 var A = AnalyticActionTypes;
 
-var AnalyticActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.ANSWER_YES, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.ANSWER_NO, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.NO_ANSWER, {}), _Reflux$createActions));
+var AnalyticActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.ANSWER_YES, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.ANSWER_NO, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.ANSWER_VIEW, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.NO_ANSWER, {}), _Reflux$createActions));
 
 exports.default = AnalyticActions;
 //# sourceMappingURL=AnalyticActions.js.map

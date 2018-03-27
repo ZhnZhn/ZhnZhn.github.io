@@ -70,7 +70,12 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '25-03-2018';
+var PREV_BUILD = '27-03-2018';
+
+var answerYes = _AnalyticActions2.default.answerYes,
+    answerView = _AnalyticActions2.default.answerView,
+    answerNo = _AnalyticActions2.default.answerNo,
+    noAnswer = _AnalyticActions2.default.noAnswer;
 
 var AppErc = function (_Component) {
   (0, _inherits3.default)(AppErc, _Component);
@@ -127,9 +132,10 @@ var AppErc = function (_Component) {
         ),
         _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default }),
         _react2.default.createElement(_ConsentCookiePopup2.default, {
-          onAnswerYes: _AnalyticActions2.default.answerYes,
-          onAnswerNo: _AnalyticActions2.default.answerNo,
-          onNoAnswer: _AnalyticActions2.default.noAnswer
+          onAnswerYes: answerYes,
+          onAnswerView: answerView,
+          onAnswerNo: answerNo,
+          onNoAnswer: noAnswer
         })
       );
     }
