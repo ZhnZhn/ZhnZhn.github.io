@@ -25,9 +25,9 @@ var Logic = {
       });
       ga('set', 'anonymizeIp', true);
       ga('set', 'displayFeaturesTask', null);
-      ga('set', 'screenResolution', 'none'); //sr
-      ga('set', 'viewportSize', 'none'); //vp
-      ga('set', 'screenColors', 'none'); //sc
+      ga('set', 'screenResolution', ''); //sr
+      ga('set', 'viewportSize', ''); //vp
+      ga('set', 'screenColors', ''); //sc
       ga('set', 'javaEnabled', false); //je
       ga('set', 'title', 'ERC'); //dt
       ga('send', 'pageview');
