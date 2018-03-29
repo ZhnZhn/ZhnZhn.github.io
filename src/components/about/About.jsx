@@ -91,7 +91,7 @@ class About extends Component {
          <div style={{...S.DIV_WRAPPER, ...S.GREY}}>
          <p>
            <span style={S.GREEN}>
-             ERC&nbsp;
+             Web app ERC&nbsp;
            </span>
            <span>
              is an economic RESTful client.

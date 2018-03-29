@@ -16,7 +16,7 @@ import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 import { BrowserType as BT, ModalDialog } from '../../constants/Type'
 import MODEL from './Model'
 
-const LOGO_TITLE = "ERC: Economic RESTful Client v0.15.0"
+const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
     , CAPTION = "ERC v0.15.0";
 
 const CL = {

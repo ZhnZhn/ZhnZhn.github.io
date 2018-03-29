@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\About.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\About.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/components/about/About.js"
+ ],
+ "file": "../../../src/components/about/About.js",
  "names": [
   "STEP",
   "T1",

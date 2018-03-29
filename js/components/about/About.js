@@ -170,7 +170,7 @@ var About = function (_Component) {
               _react2.default.createElement(
                 'span',
                 { style: _About2.default.GREEN },
-                'ERC\xA0'
+                'Web app ERC\xA0'
               ),
               _react2.default.createElement(
                 'span',
@@ -324,4 +324,4 @@ var About = function (_Component) {
 }(_react.Component);
 
 exports.default = About;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\About.js.map
+//# sourceMappingURL=About.js.map

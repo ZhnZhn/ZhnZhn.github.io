@@ -74,7 +74,7 @@ var _Model2 = _interopRequireDefault(_Model);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var LOGO_TITLE = "ERC: Economic RESTful Client v0.15.0",
+var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
     CAPTION = "ERC v0.15.0";
 
 var CL = {
