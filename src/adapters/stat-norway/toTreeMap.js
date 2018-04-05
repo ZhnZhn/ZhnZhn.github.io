@@ -7,13 +7,10 @@ import Tooltip from '../../charts/Tooltip'
 import fnAdapter from './fnAdapter'
 
 const {
+  crTitle,
   crTid, crChartOption,
   numberFormat
 } = fnAdapter;
-
-const C = {
-  TITLE: 'Statisctics Norway: All Items'
-};
 
 const NUMBER_STYLE = 'style="color:#333;"';
 const _crPointName = (label, value) => {
@@ -164,6 +161,7 @@ const toTreeMap = {
         , ds = JSONstat(json).Dataset(0)
         , categories = ds.Dimension(category)
         , Tid = crTid(time, ds)
+        , _title = crTitle(option)
         , _subtitle = `${items[1].caption || ''}: ${Tid}`
         , values = ds.Data({ Tid, ...itemSlice, ...dfTSlice })
         , _d1 = _crData(values, categories, Tid, option )
@@ -185,7 +183,8 @@ const toTreeMap = {
       .toConfig();
     const config = ConfigBuilder()
       .initBaseTreeMap(_c, seriaType)
-      .addCaption(C.TITLE, _subtitle)
+      //.addCaption(C.TITLE, _subtitle)
+      .addCaption(_title, _subtitle)
       .addSeries(_seria)
       .add({
         chart: {

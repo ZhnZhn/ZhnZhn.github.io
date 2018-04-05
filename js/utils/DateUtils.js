@@ -14,6 +14,8 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var MIN_YEAR = 1999;
+
 var DateUtils = {
 
 	//YYYY-MM-DD valid format
@@ -37,10 +39,9 @@ var DateUtils = {
 		}
 
 		var thisYear = new Date().getFullYear();
-		var minYear = 1999;
 
 		// YEAR CHECK
-		if (m[1].length < 4 || m[1] < minYear || m[1] > thisYear + nForecastDate) {
+		if (m[1].length < 4 || m[1] < MIN_YEAR || m[1] > thisYear + nForecastDate) {
 			return false;
 		}
 		// MONTH CHECK
@@ -109,4 +110,4 @@ var DateUtils = {
 };
 
 exports.default = DateUtils;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\DateUtils.js.map
+//# sourceMappingURL=DateUtils.js.map

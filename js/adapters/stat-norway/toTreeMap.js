@@ -30,14 +30,11 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var crTid = _fnAdapter2.default.crTid,
+var crTitle = _fnAdapter2.default.crTitle,
+    crTid = _fnAdapter2.default.crTid,
     crChartOption = _fnAdapter2.default.crChartOption,
     numberFormat = _fnAdapter2.default.numberFormat;
 
-
-var C = {
-  TITLE: 'Statisctics Norway: All Items'
-};
 
 var NUMBER_STYLE = 'style="color:#333;"';
 var _crPointName = function _crPointName(label, value) {
@@ -199,6 +196,7 @@ var toTreeMap = {
         ds = (0, _jsonstat2.default)(json).Dataset(0),
         categories = ds.Dimension(category),
         Tid = crTid(time, ds),
+        _title = crTitle(option),
         _subtitle = (items[1].caption || '') + ': ' + Tid,
         values = ds.Data((0, _extends3.default)({ Tid: Tid }, itemSlice, dfTSlice)),
         _d1 = _crData(values, categories, Tid, option),
@@ -218,7 +216,9 @@ var toTreeMap = {
       zhSeriaId: _fnAdapter2.default.crId(),
       data: _data
     }).toConfig();
-    var config = (0, _ConfigBuilder2.default)().initBaseTreeMap(_c, seriaType).addCaption(C.TITLE, _subtitle).addSeries(_seria).add((0, _extends3.default)({
+    var config = (0, _ConfigBuilder2.default)().initBaseTreeMap(_c, seriaType)
+    //.addCaption(C.TITLE, _subtitle)
+    .addCaption(_title, _subtitle).addSeries(_seria).add((0, _extends3.default)({
       chart: {
         spacingTop: 25,
         marginTop: 50,
@@ -241,4 +241,4 @@ var toTreeMap = {
 };
 
 exports.default = toTreeMap;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\toTreeMap.js.map
+//# sourceMappingURL=toTreeMap.js.map

@@ -3,6 +3,11 @@ import JSONstat from 'jsonstat';
 
 import AdapterFn from '../AdapterFn';
 
+const TITLE = {
+  NST: 'Statisctics Norway: All Items',
+  SWS: 'Statisctics Sweden: All Items'
+};
+
 const SEARCH = {
   NST: {
     url: 'https://www.ssb.no/en/sok?sok=',
@@ -66,6 +71,17 @@ const _crAreaMapSlice = (option) => {
 
 const fnAdapter = {
   isYNumber: AdapterFn.isYNumber,
+
+  crTitle: (option) => {
+    switch(option.browserType){
+      case 'NST': case 'NST_ALL':
+        return TITLE.NST;
+      case 'SWS': case 'SWS_ALL':
+        return TITLE.SWS;
+      default:
+        return '';
+    }
+  },
 
   crDsValuesTimes: (json, option) => {
     const mapSlice = _crAreaMapSlice(option)

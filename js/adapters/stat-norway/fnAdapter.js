@@ -18,6 +18,11 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TITLE = {
+  NST: 'Statisctics Norway: All Items',
+  SWS: 'Statisctics Sweden: All Items'
+};
+
 var SEARCH = {
   NST: {
     url: 'https://www.ssb.no/en/sok?sok=',
@@ -93,6 +98,17 @@ var _crAreaMapSlice = function _crAreaMapSlice(option) {
 
 var fnAdapter = {
   isYNumber: _AdapterFn2.default.isYNumber,
+
+  crTitle: function crTitle(option) {
+    switch (option.browserType) {
+      case 'NST':case 'NST_ALL':
+        return TITLE.NST;
+      case 'SWS':case 'SWS_ALL':
+        return TITLE.SWS;
+      default:
+        return '';
+    }
+  },
 
   crDsValuesTimes: function crDsValuesTimes(json, option) {
     var mapSlice = _crAreaMapSlice(option),

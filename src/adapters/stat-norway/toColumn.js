@@ -6,11 +6,10 @@ import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
 
-const { isYNumber, crTid, crChartOption } = fnAdapter;
-
-const C = {
-  TITLE: 'Statisctics Norway: All Items'
-};
+const {
+        isYNumber,
+        crTitle, crTid, crChartOption
+      } = fnAdapter;
 
 const COLORS = [
       '#9ecae1', '#6baed6',
@@ -60,7 +59,7 @@ const _crCategory = (option, by) => {
   switch(by){
     case '2':
       for (i=0; i<items.length; i++){
-        if (i!==1){
+        if (i!==1 && items[i]){
           Object.assign(itemSlice, items[i].slice)
         }
       }
@@ -112,12 +111,14 @@ const toColumn = {
         , _dimC = _ds.Dimension(category)
         , Tid = crTid(time, _ds)
         , _values = _ds.Data({ Tid, ...itemSlice, ...dfTSlice })
+        , _title = crTitle(option)
         , _subtitle = `${items[1].caption || ''}: ${Tid}`
         , data = _crData(_values, _dimC, cTotal)
         , _c = data.map(item => item.c)
         , config = ConfigBuilder()
            .initBaseColumnOrBar(_c, seriaType)
-           .addCaption(C.TITLE, _subtitle)
+           //.addCaption(C.TITLE, _subtitle)
+           .addCaption(_title, _subtitle)
            .addTooltip(Tooltip.category)
            .add({
              chart: { spacingTop: 25 },

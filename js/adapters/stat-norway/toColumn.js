@@ -31,13 +31,10 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var isYNumber = _fnAdapter2.default.isYNumber,
+    crTitle = _fnAdapter2.default.crTitle,
     crTid = _fnAdapter2.default.crTid,
     crChartOption = _fnAdapter2.default.crChartOption;
 
-
-var C = {
-  TITLE: 'Statisctics Norway: All Items'
-};
 
 var COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
@@ -94,7 +91,7 @@ var _crCategory = function _crCategory(option, by) {
   switch (by) {
     case '2':
       for (i = 0; i < items.length; i++) {
-        if (i !== 1) {
+        if (i !== 1 && items[i]) {
           Object.assign(itemSlice, items[i].slice);
         }
       }
@@ -148,12 +145,15 @@ var toColumn = {
         _dimC = _ds.Dimension(category),
         Tid = crTid(time, _ds),
         _values = _ds.Data((0, _extends3.default)({ Tid: Tid }, itemSlice, dfTSlice)),
+        _title = crTitle(option),
         _subtitle = (items[1].caption || '') + ': ' + Tid,
         data = _crData(_values, _dimC, cTotal),
         _c = data.map(function (item) {
       return item.c;
     }),
-        config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType).addCaption(C.TITLE, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
+        config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType)
+    //.addCaption(C.TITLE, _subtitle)
+    .addCaption(_title, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
       chart: { spacingTop: 25 }
     }, crChartOption(_ds, Tid, option))).toConfig();
 
@@ -169,4 +169,4 @@ var toColumn = {
 };
 
 exports.default = toColumn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\stat-norway\toColumn.js.map
+//# sourceMappingURL=toColumn.js.map

@@ -1,4 +1,6 @@
 
+const MIN_YEAR = 1999;
+
 const DateUtils = {
 
   //YYYY-MM-DD valid format
@@ -20,10 +22,9 @@ const DateUtils = {
 		 }
 
 		 const thisYear = new Date().getFullYear();
-		 const minYear = 1999;
 
 		// YEAR CHECK
-		 if( (m[1].length < 4) || m[1] < minYear || m[1] > thisYear + nForecastDate) { return false; }
+		 if( (m[1].length < 4) || m[1] < MIN_YEAR || m[1] > thisYear + nForecastDate) { return false; }
 		// MONTH CHECK
 		 if( (m[2].length < 2) || m[2] < 1 || m[2] > 12) { return false;}
 		// DAY CHECK
