@@ -92,6 +92,9 @@ const MODEL = {
       id: BT.SWEDEN_STAT_ALL,
       cn: CL.EU,
       title: 'Statistics Sweden All'
+    },{
+      id: BT.NBSC,
+      title: 'NBS China (Monthly)'
     }
   ],
   page_03: [

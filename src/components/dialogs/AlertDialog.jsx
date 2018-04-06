@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import STYLE from '../styles/DialogStyles'
@@ -37,7 +37,7 @@ const S = {
 }
 
 class AlertDialog extends Component{
-
+  /*
   static propTypes = {
     isShow: PropTypes.bool,
     data: PropTypes.shape({
@@ -50,6 +50,7 @@ class AlertDialog extends Component{
   static defaultProps = {
     data: {}
   }
+  */
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {

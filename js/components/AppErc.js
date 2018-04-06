@@ -70,7 +70,7 @@ var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '05-04-2018';
+var PREV_BUILD = '06-04-2018';
 
 var answerYes = _AnalyticActions2.default.answerYes,
     answerView = _AnalyticActions2.default.answerView,

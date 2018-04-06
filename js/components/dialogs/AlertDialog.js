@@ -20,15 +20,9 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _temp;
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
@@ -39,6 +33,8 @@ var _DialogStyles = require('../styles/DialogStyles');
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from "prop-types";
 
 var CL = {
   ELL: 'ellipsis'
@@ -72,7 +68,7 @@ var S = {
   }
 };
 
-var AlertDialog = (_temp = _class = function (_Component) {
+var AlertDialog = function (_Component) {
   (0, _inherits3.default)(AlertDialog, _Component);
 
   function AlertDialog() {
@@ -82,6 +78,22 @@ var AlertDialog = (_temp = _class = function (_Component) {
 
   (0, _createClass3.default)(AlertDialog, [{
     key: 'shouldComponentUpdate',
+
+    /*
+    static propTypes = {
+      isShow: PropTypes.bool,
+      data: PropTypes.shape({
+        alertCaption: PropTypes.string,
+        alertItemId: PropTypes.string,
+        alertDescr: PropTypes.string
+      }),
+      onClose: PropTypes.func
+    }
+    static defaultProps = {
+      data: {}
+    }
+    */
+
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
         return false;
@@ -140,17 +152,7 @@ var AlertDialog = (_temp = _class = function (_Component) {
     }
   }]);
   return AlertDialog;
-}(_react.Component), _class.defaultProps = {
-  data: {}
-}, _temp);
-AlertDialog.propTypes = process.env.NODE_ENV !== "production" ? {
-  isShow: _propTypes2.default.bool,
-  data: _propTypes2.default.shape({
-    alertCaption: _propTypes2.default.string,
-    alertItemId: _propTypes2.default.string,
-    alertDescr: _propTypes2.default.string
-  }),
-  onClose: _propTypes2.default.func
-} : {};
+}(_react.Component);
+
 exports.default = AlertDialog;
 //# sourceMappingURL=AlertDialog.js.map

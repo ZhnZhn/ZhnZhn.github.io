@@ -12,6 +12,7 @@ export const BrowserType = {
    NORWAY_STAT_ALL: 'NST_ALL',
    SWEDEN_STAT: 'SWS',
    SWEDEN_STAT_ALL: 'SWS_ALL',
+   NBSC: 'NBSC',
 
    PREMIUM_SAMPLE : 'QPS',
    ECONOMIC : 'QE',

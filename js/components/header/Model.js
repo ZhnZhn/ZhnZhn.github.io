@@ -93,6 +93,9 @@ var MODEL = {
     id: _Type.BrowserType.SWEDEN_STAT_ALL,
     cn: CL.EU,
     title: 'Statistics Sweden All'
+  }, {
+    id: _Type.BrowserType.NBSC,
+    title: 'NBS China (Monthly)'
   }],
   page_03: [{
     id: _Type.BrowserType.STOCK_MARKETS,

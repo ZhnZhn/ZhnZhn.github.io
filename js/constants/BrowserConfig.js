@@ -90,6 +90,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
     dU: './data/statistics-sweden/statistics-sweden.html',
     rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
   }
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.NBSC, {
+  browserType: _Type.BrowserType.NBSC,
+  isDynamic: true,
+  caption: 'NBS China (Monthly)',
+  sourceMenuUrl: './data/nbsc/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.US_ECONOMY, {
   browserType: _Type.BrowserType.US_ECONOMY,
   isDynamic: true,

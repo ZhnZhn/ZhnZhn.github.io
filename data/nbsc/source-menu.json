@@ -1,0 +1,118 @@
+{
+  "menu": [
+    {
+      "caption": "Price Index",
+      "items": [
+        { "id": "NBSC_CPI_M" },
+        { "id": "NBSC_RPI_M" }        
+      ]
+    },{
+      "caption": "Real Estate",
+      "items": [
+        { "id": "NBSC_FLOORSPACE_M" },
+        { "id": "NBSC_FLOORSPACE_NEW_M" }
+      ]
+    },{
+      "caption": "Transport",
+      "items": [
+        { "id": "NBSC_FREIGHT_M" },
+        { "id": "NBSC_FREIGHT_NEW_M" },
+        { "id": "NBSC_PASSENGER_M" },
+        { "id": "NBSC_PASSENGER_NEW_M" }
+      ]
+    }
+  ],
+  "items": {
+    "NBSC_B1": {
+      "dialogProps": {
+        "descrUrl" : "./data/nbsc/nbsc.html",
+        "itemCaption": "Metric",
+        "optionNames": "Metrics",
+        "valueFn" : "RPrefixOne",
+        "valueFnPrefix" : "NBSC",
+        "loadId" : "Q",
+        "dataSource" : "NBS China (Code: NBSC)"
+      }
+    },
+    "NBSC_CPI_M": {
+      "type" : "NBSC_CPI_M",
+      "menuTitle" : "CPI",
+      "dialogCaption" : "CPI",
+      "chartContainerCaption" : "Quandl: NBSC: CPI",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/cpi-m.json"
+      }
+    },
+    "NBSC_RPI_M": {
+      "type" : "NBSC_RPI_M",
+      "menuTitle" : "RPI",
+      "dialogCaption" : "RPI",
+      "chartContainerCaption" : "Quandl: NBSC: RPI",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/rpi-m.json"
+      }
+    },
+    "NBSC_FLOORSPACE_M": {
+      "type" : "NBSC_FLOORSPACE_M",
+      "menuTitle" : "Floor Space of",
+      "dialogCaption" : "Floor Space of",
+      "chartContainerCaption" : "Quandl: NBSC: Floor Space of",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/floor-space-of-m.json"
+      }
+    },
+    "NBSC_FLOORSPACE_NEW_M": {
+      "type" : "NBSC_FLOORSPACE_NEW_M",
+      "menuTitle" : "Floor Space of (New)",
+      "dialogCaption" : "Floor Space of (New)",
+      "chartContainerCaption" : "Quandl: NBSC: Floor Space of (New)",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/floor-space-of-m-new.json"
+      }
+    },
+    "NBSC_FREIGHT_M": {
+      "type" : "NBSC_FREIGHT_M",
+      "menuTitle" : "Freight",
+      "dialogCaption" : "Freight",
+      "chartContainerCaption" : "Quandl: NBSC: Freight",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/freight-m.json"
+      }
+    },
+    "NBSC_FREIGHT_NEW_M": {
+      "type" : "NBSC_FREIGHT_NEW_M",
+      "menuTitle" : "Freight (New)",
+      "dialogCaption" : "Freight (New)",
+      "chartContainerCaption" : "Quandl: NBSC: Freight (New)",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/freight-m-new.json"
+      }
+    },
+    "NBSC_PASSENGER_M": {
+      "type" : "NBSC_PASSENGER_M",
+      "menuTitle" : "Passenger",
+      "dialogCaption" : "Passenger",
+      "chartContainerCaption" : "Quandl: NBSC: Passenger",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/passenger-m.json"
+      }
+    },
+    "NBSC_PASSENGER_NEW_M": {
+      "type" : "NBSC_PASSENGER_NEW_M",
+      "menuTitle" : "Passenger (New)",
+      "dialogCaption" : "Passenger (New)",
+      "chartContainerCaption" : "Quandl: NBSC: Passenger (New)",
+      "addProps": "NBSC_B1",
+      "dialogProps" : {
+        "optionURI" : "./data/nbsc/passenger-m-new.json"
+      }
+    }
+  }
+}

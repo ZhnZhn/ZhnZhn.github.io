@@ -91,6 +91,12 @@ const BrowserConfig = {
       rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
     }
   },
+  [BT.NBSC]: {
+    browserType: BT.NBSC,
+    isDynamic: true,
+    caption: 'NBS China (Monthly)',
+    sourceMenuUrl: './data/nbsc/source-menu.json'
+  },
   [BT.US_ECONOMY]: {
     browserType: BT.US_ECONOMY,
     isDynamic: true,
