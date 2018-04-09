@@ -5,12 +5,14 @@ import STYLE from '../styles/DialogStyles'
 
 class RowSecret extends Component {
 
-  _refInput = (comp) => {
-    this.inputComp = comp
+  static defaultProps = {
+    title: ''
   }
 
+  _refInput = (comp) => this.inputComp = comp
+
   render() {
-    const { title='', titleStyle, ...rest } = this.props;
+    const { title, titleStyle, ...rest } = this.props;
     return (
       <label style={STYLE.rowDiv}>
          <span style={{...STYLE.labelSpan, ...titleStyle}}>
@@ -26,6 +28,9 @@ class RowSecret extends Component {
 
   getValue(){
     return this.inputComp.getValue();
+  }
+  clear(){
+    this.inputComp.clear()
   }
 }
 

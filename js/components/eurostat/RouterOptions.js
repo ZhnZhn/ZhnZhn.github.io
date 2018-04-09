@@ -16,6 +16,7 @@ var T = {
   T1: 't1',
   T2: 't2',
   T3: 't3',
+  T3B: 't3b',
   T3A: 't3a',
   T3A2: 't3a2',
   T4: 't4'
@@ -53,8 +54,8 @@ var _crT2 = function _crT2() {
   return [{ caption: 'Default: Area', value: V.A }, { caption: 'Yearly by Months', value: V.A_Y }];
 };
 
-var _crT3 = function _crT3(oneCaption) {
-  return [{ caption: 'Default: Spline', value: V.A }, {
+var _crT3All = function _crT3All(oneCaption) {
+  return [{
     caption: 'Column: By ' + oneCaption,
     value: V.C,
     dim: oneCaption
@@ -71,6 +72,14 @@ var _crT3 = function _crT3(oneCaption) {
     value: V.B_C,
     dim: oneCaption
   }];
+};
+
+var _crT3 = function _crT3(oneCaption) {
+  return [{ caption: 'Default: Spline', value: V.A }].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
+};
+
+var _crT3B = function _crT3B(oneCaption) {
+  return [{ caption: 'Default: Spline', value: V.A }, { caption: 'Yearly by Months', value: V.A_Y }].concat((0, _toConsumableArray3.default)(_crT3All(oneCaption)));
 };
 
 var _crT3A = function _crT3A(oneCaption) {
@@ -138,6 +147,8 @@ var RouterOptions = {
         return _crT2();
       case T.T3:
         return _crT3(_captions[0]);
+      case T.T3B:
+        return _crT3B(_captions[0]);
       case T.T3A:
         return _crT3A(_captions[0]);
       case T.T3A2:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 const STYLE = {
   ROOT : {
@@ -48,26 +48,39 @@ const STYLE = {
 };
 
 class InputPattern extends Component {
+  /*
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
      initValue: PropTypes.string,
+     isUpdateInit: PropTypes.bool,
      placeholder: PropTypes.string,
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,
      onEnter: PropTypes.func
    }
+  */
    static defaultProps = {
       onTest: () => { return true; }
    }
 
-   constructor(props){
-     super();
-     this.state = {
-       value: props.initValue ? props.initValue : '',
+   _crInitState = (props) => {
+     return {
+       value: props.initValue || '',
        errorInput: undefined,
        isValid: true
      };
+   }
+
+   constructor(props){
+     super();
+     this.state = this._crInitState(props);
+   }
+
+   componentWillReceiveProps(nextProps) {
+     if (this.props !== nextProps && nextProps.isUpdateInit) {
+        this.setState(this._crInitState(nextProps))
+     }
    }
 
   _handleChangeValue = (event) => {
@@ -75,14 +88,14 @@ class InputPattern extends Component {
          , value = event.target.value
     if (!onTest(value)){
       this.setState({
-         value : value,
-         isValid : false
+         value: value,
+         isValid: false
       })
     } else {
       this.setState({
-         value : value,
-         isValid : true,
-         errorInput : undefined
+         value: value,
+         isValid: true,
+         errorInput: undefined
       })
     }
   }
@@ -92,13 +105,13 @@ class InputPattern extends Component {
         , { value } = this.state;
     if (!onTest(value)){
       this.setState({
-        errorInput : errorMsg,
-        isValid : false
+        errorInput: errorMsg,
+        isValid: false
       })
     } else {
       this.setState({
-        errorInput : undefined,
-        isValid : true
+        errorInput: undefined,
+        isValid: true
       })
     }
   }
@@ -122,6 +135,8 @@ class InputPattern extends Component {
     }
   }
 
+  _refInput = (input) => this.inputPattern = input
+
   render(){
     const {
             rootStyle, inputStyle,
@@ -134,15 +149,15 @@ class InputPattern extends Component {
     return (
       <div style={{...STYLE.ROOT, ...rootStyle}}>
         <input
+           type="text"
            style={{...STYLE.INPUT, ...inputStyle}}
+           ref={this._refInput}
            name="text-date"
            //autoComplete="new-text-date"
            autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
            spellCheck={false}
-           ref={input => this.inputPattern = input }
-           type="text"
            placeholder={placeholder}
            value={value}
            onChange={this._handleChangeValue}

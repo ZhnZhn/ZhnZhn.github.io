@@ -238,7 +238,7 @@
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/electricity-generation.json",
         "twoJsonProp" : "metrics",
-        "chartsType": "t2"
+        "chartsType": "t3b"
       }
     },
 

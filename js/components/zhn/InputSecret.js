@@ -26,14 +26,14 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
+var S = {
+  ROOT: {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     width: '250px'
   },
-  inputText: {
+  INPUT: {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -61,32 +61,37 @@ var InputSecret = function (_Component) {
   (0, _inherits3.default)(InputSecret, _Component);
 
   function InputSecret() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     (0, _classCallCheck3.default)(this, InputSecret);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = (0, _possibleConstructorReturn3.default)(this, (InputSecret.__proto__ || Object.getPrototypeOf(InputSecret)).call(this));
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = InputSecret.__proto__ || Object.getPrototypeOf(InputSecret)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      value: ''
-    }, _this._handleChangeValue = function (event) {
+    _this._handleChangeValue = function (event) {
       _this.secret = event.target.value;
       _this.setState({ value: _maskValue(_this.secret.length) });
-    }, _this._handleKeyDown = function (event) {
+    };
+
+    _this._handleKeyDown = function (event) {
       switch (event.keyCode) {
         case 13:
           if (typeof _this.props.onEnter === 'function') {
-            _this.props.onEnter(event.target.value);
+            _this.props.onEnter(_this.secret);
           }
+          break;
+        case 27:case 46:
+          if (typeof _this.props.onEnter === 'function') {
+            _this.props.onEnter('');
+          }
+          _this.clear();
           break;
         default:
           return;
       }
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    };
+
+    _this.state = {
+      value: ''
+    };
+    return _this;
   }
 
   (0, _createClass3.default)(InputSecret, [{
@@ -100,20 +105,20 @@ var InputSecret = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: styles.rootDiv },
+        { style: S.ROOT },
         _react2.default.createElement('input', {
+          style: S.INPUT,
+          type: 'password',
           name: 'secret'
           //autoComplete="new-secret"
           , autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
           spellCheck: false,
-          type: 'password',
-          style: styles.inputText,
           translate: false,
           placeholder: placeholder,
           maxLength: maxLength,
-          defaultValue: value,
+          value: value,
           onChange: this._handleChangeValue,
           onKeyDown: this._handleKeyDown
         })
@@ -123,6 +128,12 @@ var InputSecret = function (_Component) {
     key: 'getValue',
     value: function getValue() {
       return this.secret;
+    }
+  }, {
+    key: 'clear',
+    value: function clear() {
+      this.secret = '';
+      this.setState({ value: '' });
     }
   }]);
   return InputSecret;

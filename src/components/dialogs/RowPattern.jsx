@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import InputPattern from '../zhn/InputPattern'
 import STYLE from '../styles/DialogStyles';
 
 class RowPattern extends Component {
+  /*
   static propTypes = {
+     isShowLabels: PropTypes.bool,
      title : PropTypes.string
+     titleStyle: PropTypes.object
   }
+  */
+  
+  static defaultProps = {
+    title: ''
+  }
+
+  _refInput = c => this.inputPattern = c
 
   render(){
     const {
             isShowLabels,
-            title='', titleStyle,
+            title, titleStyle,
             ...rest
           } = this.props
         , {
@@ -24,7 +34,7 @@ class RowPattern extends Component {
            {title}
         </span>
         <InputPattern
-           ref={c => this.inputPattern = c}
+           ref={this._refInput}
            {...rest}
         />
      </div>

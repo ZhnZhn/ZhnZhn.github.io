@@ -28,6 +28,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp2;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -42,7 +44,7 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var RowSecret = function (_Component) {
+var RowSecret = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(RowSecret, _Component);
 
   function RowSecret() {
@@ -57,7 +59,7 @@ var RowSecret = function (_Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RowSecret.__proto__ || Object.getPrototypeOf(RowSecret)).call.apply(_ref, [this].concat(args))), _this), _this._refInput = function (comp) {
-      _this.inputComp = comp;
+      return _this.inputComp = comp;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
@@ -65,8 +67,7 @@ var RowSecret = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          _props$title = _props.title,
-          title = _props$title === undefined ? '' : _props$title,
+          title = _props.title,
           titleStyle = _props.titleStyle,
           rest = (0, _objectWithoutProperties3.default)(_props, ['title', 'titleStyle']);
 
@@ -88,9 +89,15 @@ var RowSecret = function (_Component) {
     value: function getValue() {
       return this.inputComp.getValue();
     }
+  }, {
+    key: 'clear',
+    value: function clear() {
+      this.inputComp.clear();
+    }
   }]);
   return RowSecret;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  title: ''
+}, _temp2);
 exports.default = RowSecret;
 //# sourceMappingURL=RowSecret.js.map

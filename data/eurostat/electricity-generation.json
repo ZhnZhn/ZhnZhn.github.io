@@ -84,6 +84,48 @@
       "mapFrequency" : "M",
       "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C2",
       "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105C2" }
+    },{
+      "caption" : "Imports (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100300",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100300",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100300" }
+    },{
+      "caption" : "Imports from EU (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100320",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100320",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100320" }
+    },{
+      "caption" : "Exports (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100500",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100500",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100500" }
+    },{
+      "caption" : "Exports to EU (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100510",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100510",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100510" }
+    },{
+      "caption" : "Gross inland consumption (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100900",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100900",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100900" }
+    },{
+      "caption" : "Distribution losses (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_101400",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_101400",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_101400" }
+    },{
+      "caption" : "Available for internal market (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_107200",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_107200",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_107200" }
     }
   ]
 }

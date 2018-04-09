@@ -28,13 +28,12 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp2;
+//import PropTypes from "prop-types";
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _InputPattern = require('../zhn/InputPattern');
 
@@ -46,23 +45,38 @@ var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var RowPattern = function (_Component) {
+var RowPattern = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(RowPattern, _Component);
 
   function RowPattern() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, RowPattern);
-    return (0, _possibleConstructorReturn3.default)(this, (RowPattern.__proto__ || Object.getPrototypeOf(RowPattern)).apply(this, arguments));
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RowPattern.__proto__ || Object.getPrototypeOf(RowPattern)).call.apply(_ref, [this].concat(args))), _this), _this._refInput = function (c) {
+      return _this.inputPattern = c;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+  static propTypes = {
+     isShowLabels: PropTypes.bool,
+     title : PropTypes.string
+     titleStyle: PropTypes.object
+  }
+  */
 
   (0, _createClass3.default)(RowPattern, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           isShowLabels = _props.isShowLabels,
-          _props$title = _props.title,
-          title = _props$title === undefined ? '' : _props$title,
+          title = _props.title,
           titleStyle = _props.titleStyle,
           rest = (0, _objectWithoutProperties3.default)(_props, ['isShowLabels', 'title', 'titleStyle']),
           _STYLE$crRowLabelStyl = _DialogStyles2.default.crRowLabelStyle(isShowLabels),
@@ -78,9 +92,7 @@ var RowPattern = function (_Component) {
           title
         ),
         _react2.default.createElement(_InputPattern2.default, (0, _extends3.default)({
-          ref: function ref(c) {
-            return _this2.inputPattern = c;
-          }
+          ref: this._refInput
         }, rest))
       );
     }
@@ -96,10 +108,8 @@ var RowPattern = function (_Component) {
     }
   }]);
   return RowPattern;
-}(_react.Component);
-
-RowPattern.propTypes = process.env.NODE_ENV !== "production" ? {
-  title: _propTypes2.default.string
-} : {};
+}(_react.Component), _class.defaultProps = {
+  title: ''
+}, _temp2);
 exports.default = RowPattern;
 //# sourceMappingURL=RowPattern.js.map

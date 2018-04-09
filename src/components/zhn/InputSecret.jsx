@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-const styles = {
-  rootDiv: {
+const S = {
+  ROOT: {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     width: '250px'
   },
-  inputText: {
+  INPUT: {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -18,7 +18,7 @@ const styles = {
     fontSize: '16px',
     fontWeight: 'bold'
   }
-}
+};
 
 const _maskValue = (len=0) => {
   let i=0, str = ''
@@ -30,8 +30,11 @@ const _maskValue = (len=0) => {
 
 class InputSecret extends Component {
 
-  state = {
-    value: ''
+  constructor(){
+    super()
+    this.state = {
+      value: ''
+    }
   }
 
   _handleChangeValue = (event) => {
@@ -43,8 +46,14 @@ class InputSecret extends Component {
     switch(event.keyCode){
       case 13:
         if (typeof this.props.onEnter === 'function') {
-          this.props.onEnter(event.target.value)
+          this.props.onEnter(this.secret)
         }
+        break;
+      case 27: case 46:
+        if (typeof this.props.onEnter === 'function') {
+          this.props.onEnter('')
+        }
+        this.clear();
         break;
       default: return;
     }
@@ -54,20 +63,20 @@ class InputSecret extends Component {
     const { placeholder, maxLength="32" } = this.props
         , { value } = this.state;
     return (
-      <div style={styles.rootDiv}>
+      <div style={S.ROOT}>
         <input
+           style={S.INPUT}
+           type="password"
            name="secret"
            //autoComplete="new-secret"
            autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
            spellCheck={false}
-           type="password"
-           style={styles.inputText}
            translate={false}
            placeholder={placeholder}
            maxLength={maxLength}
-           defaultValue={value}
+           value={value}
            onChange={this._handleChangeValue}
            onKeyDown={this._handleKeyDown}
         >
@@ -78,6 +87,10 @@ class InputSecret extends Component {
 
   getValue(){
     return this.secret;
+  }
+  clear(){
+    this.secret = ''
+    this.setState({ value: '' })
   }
 }
 
