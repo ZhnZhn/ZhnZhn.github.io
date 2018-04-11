@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _ModalDialogContainer = require('../zhn-containers/ModalDialogContainer');
 
 var _ModalDialogContainer2 = _interopRequireDefault(_ModalDialogContainer);
@@ -87,17 +83,6 @@ var DialogContainer = function (_Component) {
               shows: shows, data: data, dialogs: dialogs
             });
           });
-          /*
-           dialogs.push({
-             type : type,
-             comp : RouterModalDialog[type]
-           });
-           inits[type] = true
-           this.setState({
-             isShow: true, currentDialog: type,
-             shows, data, dialogs
-           });
-           */
         }
       }
     }, _this._handleClose = function (type) {
@@ -115,7 +100,7 @@ var DialogContainer = function (_Component) {
           dialogs = _this$state2.dialogs;
 
 
-      return dialogs.map(function (dialog, index) {
+      return dialogs.map(function (dialog) {
         var type = dialog.type,
             comp = dialog.comp;
 
@@ -129,6 +114,13 @@ var DialogContainer = function (_Component) {
       });
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func
+    })
+  }
+  */
 
   (0, _createClass3.default)(DialogContainer, [{
     key: 'componentDidMount',
@@ -160,11 +152,7 @@ var DialogContainer = function (_Component) {
   }]);
   return DialogContainer;
 }(_react.Component);
+//import PropTypes from "prop-types";
 
-DialogContainer.propTypes = process.env.NODE_ENV !== "production" ? {
-  store: _propTypes2.default.shape({
-    listen: _propTypes2.default.func
-  })
-} : {};
 exports.default = DialogContainer;
 //# sourceMappingURL=DialogContainer.js.map

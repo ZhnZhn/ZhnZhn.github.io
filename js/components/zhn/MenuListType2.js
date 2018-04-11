@@ -24,13 +24,18 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Color = require('../styles/Color');
+
+var _Color2 = _interopRequireDefault(_Color);
+
 var _OpenClose = require('./OpenClose2');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var C_FILL_OPEN = "#80c040";
+var C_FILL_OPEN = _Color2.default.GREEN;
+var C_LEFT_BORDER = _Color2.default.YELLOW;
 
 var MODEL_PROP = {
   CAPTION: 'caption',
@@ -46,7 +51,8 @@ var STYLE = {
   LIST_DIV: {
     marginLeft: '8px',
     paddingLeft: '12px',
-    borderLeft: '1px solid yellow',
+    //borderLeft : '1px solid yellow',
+    borderLeft: '1px solid ' + C_LEFT_BORDER,
     lineHeight: 2
   },
   LIST_DIV_NOT_SELECTED: {
@@ -181,4 +187,4 @@ var MenuListType2 = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuListType2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\MenuListType2.js.map
+//# sourceMappingURL=MenuListType2.js.map

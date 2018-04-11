@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import { ComponentActionTypes } from '../../flux/actions/ComponentActions';
-import { ChartActionTypes } from '../../flux/actions/ChartActions';
+import withTheme from '../hoc/withTheme'
+
+import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
+import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 
 import ScrollPane from '../zhn/ScrollPane'
 import BrowserCaption from '../zhn/BrowserCaption'
@@ -12,8 +14,14 @@ import StepTitle from './StepTitle'
 import Link from '../links/Links';
 import IconLogoBar from './IconLogoBar';
 
-import styles from '../styles/ContainerStyles';
 import S from './About.Style'
+
+const TH_ID = 'ABOUT';
+
+const CL = {
+  ABOUT: 'about-container',
+  SHOW: 'show-popup'
+};
 
 const STEP = {
   T1: "Choose a data source Browser from Topics [t]",
@@ -24,11 +32,18 @@ const STEP = {
 };
 
 class About extends Component {
+  /*
+  static propsTypes = {
+     theme: PropTypes.object,
+     isShow: PropTypes.bool,
+     store: PropTypes.object
+  }
+  */
   constructor(props){
     super();
     this.state = {
       isCloseProviders: this._calcIsProviders(),
-      isShow : props.isShow
+      isShow: props.isShow
     }
   }
 
@@ -49,11 +64,11 @@ class About extends Component {
     this.unsubscribe();
   }
   _onStore = (actionType, data) => {
-    if (actionType === ComponentActionTypes.SHOW_ABOUT){
+    if (actionType === CAT.SHOW_ABOUT){
       this.setState({isShow : true});
-    } else if (actionType === ChartActionTypes.INIT_AND_SHOW_CHART){
+    } else if (actionType === CHAT.INIT_AND_SHOW_CHART){
       this.setState({isShow : false});
-    } else if (actionType === ChartActionTypes.SHOW_CHART){
+    } else if (actionType === CHAT.SHOW_CHART){
       this.setState({isShow : false});
     }
   }
@@ -63,17 +78,21 @@ class About extends Component {
   }
 
   render(){
-    const { isShow, isCloseProviders } = this.state
-        ,  _classOpen = isShow
-              ? "show-popup"
-              : null
+    const { theme } = this.props
+        , TS = theme.getStyle(TH_ID)
+        , { isShow, isCloseProviders } = this.state
+        ,  _clOpen = isShow ? CL.SHOW : ''
+        , _clRoot = `${CL.ABOUT} ${_clOpen}`
         , _styleOpen = isShow
-              ? {display: 'block'}
-              : {display: 'none'};
+              ? S.BLOCK
+              : S.NONE;
     return (
       <div
-        className={_classOpen}
-        style={Object.assign({}, styles.aboutRootDiv, _styleOpen)}
+        className={_clRoot}
+        style={{
+          //...styles.aboutRootDiv,
+          ..._styleOpen, ...TS.ROOT
+        }}
        >
          <BrowserCaption
             caption="About"
@@ -184,4 +203,4 @@ class About extends Component {
   }
 }
 
-export default About
+export default withTheme(About)

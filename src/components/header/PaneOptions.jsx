@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
-
 //import PropTypes from 'prop-types'
 
 import safeFn from '../../utils/safeFn'
 
+import withTheme from '../hoc/withTheme'
+
 import RowPattern from '../dialogs/RowPattern'
+import RowInputSelect from '../dialogs/RowInputSelect'
 import RowCheckBox from '../dialogs/RowCheckBox'
 import FlatButton from '../zhn-m/FlatButton'
 import RowButtons from './RowButtons'
+
+const UI_THEME_OPTIONS = [
+  { caption: 'Dark', value: 'GREY' },
+  { caption: 'Light', value: 'WHITE' },
+  { caption: 'Sand', value: 'SAND' }
+];
 
 const SET = {
   PROXY: 'setProxy'
@@ -42,6 +50,17 @@ class PaneOptions extends Component {
   _hSetProxy = () => {
     this._setProxy(this.proxyComp.getValue())
   }
+  _hSelectTheme = (item) => {
+    const { theme, onChangeTheme } = this.props;
+    if (
+        item &&
+        theme.getThemeName() !== item.value
+    ) {
+      theme.setThemeName(item.value)
+      onChangeTheme(item.value)
+      //this.forceUpdate()
+    }
+  }
 
  _refProxy = n => this.proxyComp = n
 
@@ -62,7 +81,12 @@ class PaneOptions extends Component {
            isUpdateInit={true}
            onEnter={this._setProxy}
         />
-
+        <RowInputSelect
+           caption="UI Theme"
+           captionStyle={titleStyle}
+           options={UI_THEME_OPTIONS}
+           onSelect={this._hSelectTheme}
+        />        
        <RowCheckBox
           initValue={_isAdminMode}
           caption="View in Admin Mode"
@@ -93,4 +117,4 @@ class PaneOptions extends Component {
   }
 }
 
-export default PaneOptions
+export default withTheme(PaneOptions)

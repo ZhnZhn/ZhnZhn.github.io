@@ -41,12 +41,12 @@ const BtMore = ({ isMore, legend, onClick }) => {
             ? C.LESS + ': ' + C.MORE_MAX
             : C.MORE + ': +' + (_len - C.MORE_MAX);
     return (
-      <span
+      <button
         style={S.BT_MORE}
         onClick={onClick}
       >
         {_caption}
-      </span>
+      </button>
     );
   } else {
     return null;
@@ -98,7 +98,9 @@ class Legend extends Component {
   }
 
   render(){
-    const { legend=[], onClickItem } = this.props
+    const {
+            legend=[], onClickItem
+          } = this.props
         , { isMore } = this.state
         , _rootStyle = isMore
              ? S.ROOT_MORE

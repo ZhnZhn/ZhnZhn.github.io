@@ -24,9 +24,15 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _Color = require('../styles/Color');
+
+var _Color2 = _interopRequireDefault(_Color);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,14 +42,13 @@ var CL = {
 };
 
 var DF = {
-  OPEN_COLOR: "yellow",
-  CLOSE_COLOR: "#4D4D4D"
+  OPEN_COLOR: _Color2.default.YELLOW,
+  CLOSE_COLOR: _Color2.default.BLANK
 };
 
 var S = {
   ROOT_DIV: {
-    lineHeight: 2,
-    backgroundColor: '#4D4D4D'
+    lineHeight: 2
   },
   ROOT_SVG: {
     display: 'inline-block',
@@ -51,10 +56,11 @@ var S = {
     height: '16px',
     marginLeft: '8px'
   },
-  LABEL_CAPTION: {
+  CAPTION: {
+    color: _Color2.default.SIREN,
     paddingLeft: '4px',
     verticalAlign: 'top',
-    color: 'rgba(164, 135, 212, 1)',
+    //color: 'rgba(164, 135, 212, 1)',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
@@ -72,7 +78,10 @@ var S = {
   }
 };
 
-var OpenClose = function (_Component) {
+var PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
+var PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
+
+var OpenClose = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(OpenClose, _Component);
 
   function OpenClose(props) {
@@ -86,19 +95,10 @@ var OpenClose = function (_Component) {
       });
     };
 
-    var isClose = props.isClose,
-        _props$openColor = props.openColor,
-        openColor = _props$openColor === undefined ? DF.OPEN_COLOR : _props$openColor,
-        _props$closeColor = props.closeColor,
-        closeColor = _props$closeColor === undefined ? DF.CLOSE_COLOR : _props$closeColor,
-        isOpen = isClose ? false : true;
+    var isClose = props.isClose;
 
     _this.state = {
-      isOpen: isOpen,
-      openColor: openColor,
-      closeColor: closeColor,
-      pathOpen: "M 2,14 L 14,14 14,2 2,14",
-      pathClose: "M 2,2 L 14,8 2,14 2,2"
+      isOpen: isClose ? false : true
     };
     return _this;
   }
@@ -109,27 +109,24 @@ var OpenClose = function (_Component) {
       var _props = this.props,
           rootStyle = _props.rootStyle,
           caption = _props.caption,
+          openColor = _props.openColor,
+          closeColor = _props.closeColor,
           CompAfter = _props.CompAfter,
           childStyle = _props.childStyle,
           children = _props.children,
-          _state = this.state,
-          isOpen = _state.isOpen,
-          pathOpen = _state.pathOpen,
-          pathClose = _state.pathClose,
-          openColor = _state.openColor,
-          closeColor = _state.closeColor;
+          isOpen = this.state.isOpen;
 
       var _pathV = void 0,
           _fillV = void 0,
           _rootChildStyle = void 0,
           _rootChildCl = void 0;
       if (isOpen) {
-        _pathV = pathOpen;
+        _pathV = PATH_OPEN;
         _fillV = openColor;
         _rootChildStyle = S.BLOCK;
         _rootChildCl = CL.SHOW_POPUP;
       } else {
-        _pathV = pathClose;
+        _pathV = PATH_CLOSE;
         _fillV = closeColor;
         _rootChildStyle = S.NONE;
         _rootChildCl = null;
@@ -167,7 +164,7 @@ var OpenClose = function (_Component) {
             ),
             _react2.default.createElement(
               'span',
-              { style: S.LABEL_CAPTION },
+              { style: S.CAPTION },
               caption
             )
           ),
@@ -185,7 +182,9 @@ var OpenClose = function (_Component) {
     }
   }]);
   return OpenClose;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  openColor: DF.OPEN_COLOR,
+  closeColor: DF.CLOSE_COLOR
+}, _temp);
 exports.default = OpenClose;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\OpenClose.js.map
+//# sourceMappingURL=OpenClose.js.map

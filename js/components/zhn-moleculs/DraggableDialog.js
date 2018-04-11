@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -46,6 +50,7 @@ var _Dialog2 = _interopRequireDefault(_Dialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TH_ID = 'DRAGGABLE_DIALOG';
 //import PropTypes from "prop-types";
 
 var CL = {
@@ -99,8 +104,8 @@ var DraggableDialog = function (_Component) {
           , onClick: onClose
         })
       );
-    }, _this._refRootDivEl = function (c) {
-      return _this.rootDivEl = c;
+    }, _this._refRootDiv = function (node) {
+      return _this.rootDiv = node;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
@@ -122,12 +127,13 @@ var DraggableDialog = function (_Component) {
     */
 
     value: function componentDidMount() {
-      _Interact2.default.makeDragable(this.rootDivEl);
+      _Interact2.default.makeDragable(this.rootDiv);
     }
   }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          theme = _props.theme,
           isShow = _props.isShow,
           caption = _props.caption,
           children = _props.children,
@@ -135,21 +141,22 @@ var DraggableDialog = function (_Component) {
           onShowChart = _props.onShowChart,
           onFront = _props.onFront,
           onClose = _props.onClose,
+          TS = theme.getStyle(TH_ID),
           _styleShow = isShow ? S.SHOW : S.HIDE,
           _classShow = isShow ? CL.SHOWING : undefined;
 
       return _react2.default.createElement(
         'div',
         {
-          ref: this._refRootDivEl,
+          ref: this._refRootDiv,
           role: 'dialog',
           className: _classShow,
-          style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_DRAG, _styleShow),
+          style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_DRAG, _styleShow, TS.ROOT, TS.EL_BORDER),
           onClick: onFront
         },
         _react2.default.createElement(
           'div',
-          { style: S.CAPTION_DIV },
+          { style: (0, _extends3.default)({}, S.CAPTION_DIV, TS.EL) },
           _react2.default.createElement(
             'span',
             { className: CL.NOT_SELECTED },
@@ -172,5 +179,5 @@ var DraggableDialog = function (_Component) {
   return DraggableDialog;
 }(_react.Component);
 
-exports.default = DraggableDialog;
+exports.default = (0, _withTheme2.default)(DraggableDialog);
 //# sourceMappingURL=DraggableDialog.js.map

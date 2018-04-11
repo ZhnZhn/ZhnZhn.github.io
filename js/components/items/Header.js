@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 var _SvgCheckBox = require('../zhn/SvgCheckBox');
 
 var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
@@ -26,8 +30,10 @@ var _ValueMovingBadge2 = _interopRequireDefault(_ValueMovingBadge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CL = "not-selected shadow-right";
 //import PropTypes from "prop-types";
+
+var TH_ID = 'ELEMENT';
+var CL = 'not-selected shadow-right';
 
 var S = {
   ROOT: {
@@ -76,7 +82,8 @@ var S = {
 };
 
 var Header = function Header(props) {
-  var isOpen = props.isOpen,
+  var theme = props.theme,
+      isOpen = props.isOpen,
       chartType = props.chartType,
       onCheck = props.onCheck,
       onUnCheck = props.onUnCheck,
@@ -88,6 +95,7 @@ var Header = function Header(props) {
       isAdminMode = props.isAdminMode,
       crValueMoving = props.crValueMoving,
       onClose = props.onClose,
+      TS = theme.getStyle(TH_ID),
       _styleIsOpen = isOpen ? S.CAPTION_OPEN : (0, _extends3.default)({}, S.CAPTION_OPEN, S.CAPTION_CLOSE),
       _styleCaption = valueMoving ? _styleIsOpen : (0, _extends3.default)({}, _styleIsOpen, S.CAPTION_WIDTH),
       _movingBadgeEl = valueMoving ? _react2.default.createElement(_ValueMovingBadge2.default, {
@@ -103,7 +111,7 @@ var Header = function Header(props) {
 
   return _react2.default.createElement(
     'div',
-    { style: S.ROOT },
+    { style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
     _react2.default.createElement(_SvgCheckBox2.default, {
       rootStyle: S.CHECK_BOX,
       chartType: chartType,
@@ -149,5 +157,5 @@ Header.propTypes = {
 }
 */
 
-exports.default = Header;
+exports.default = (0, _withTheme2.default)(Header);
 //# sourceMappingURL=Header.js.map

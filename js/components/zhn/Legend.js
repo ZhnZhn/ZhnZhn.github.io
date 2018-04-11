@@ -75,7 +75,7 @@ var BtMore = function BtMore(_ref) {
   if (_len > C.MORE_MAX) {
     var _caption = isMore ? C.LESS + ': ' + C.MORE_MAX : C.MORE + ': +' + (_len - C.MORE_MAX);
     return _react2.default.createElement(
-      'span',
+      'button',
       {
         style: S.BT_MORE,
         onClick: onClick

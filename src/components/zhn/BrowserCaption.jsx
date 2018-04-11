@@ -1,16 +1,24 @@
 import React from 'react';
 //import PropTypes from "prop-types";
 
+import withTheme from '../hoc/withTheme'
+
 import SvgMore from './SvgMore'
 import SvgClose from './SvgClose';
 
-const CL = "gap-right";
+const TH_ID = 'ELEMENT';
+
+const CL = {
+  ROOT: 'gap-right',
+  NOT_SELECTED: 'not-selected'
+};
 
 const S = {
   ROOT: {
     position: 'relative',
     backgroundColor: '#1b2836',
     //color: 'rgba(164, 135, 212, 1)',
+    //color: 'silver'
     lineHeight: '1.8',
     paddingTop: '4px',
     paddingLeft: '4px',
@@ -23,14 +31,16 @@ const S = {
     textOverflow: 'clip'
   },
   CAPTION: {
-    color: 'silver',
+    //color: 'silver',
     fontSize: '18px',
     fontWeight: '500',
     paddingRight: '8px'
   },
   SVG_MORE: {
-    fill: 'silver',
-    stroke: 'silver'
+    fill: 'inherit',
+    stroke: 'inherit'
+    //fill: 'silver',
+    //stroke: 'silver'
   },
   SVG_CLOSE: {
     position: 'absolute',
@@ -39,8 +49,10 @@ const S = {
   }
 };
 
-const BrowserCaption = ({ isMore, caption, children, onMore, onClose }) => (
-  <div className={CL} style={S.ROOT}>
+const BrowserCaption = ({ theme, isMore, caption, children, onMore, onClose }) => {
+  const TS = theme.getStyle(TH_ID)
+  return (
+  <div className={CL.ROOT} style={{...S.ROOT, ...TS.ROOT}}>
      {
        isMore &&
        <SvgMore
@@ -49,7 +61,7 @@ const BrowserCaption = ({ isMore, caption, children, onMore, onClose }) => (
        />
      }
      <span
-        className="not-selected"
+        className={CL.NOT_SELECTED}
         style={S.CAPTION}
      >
        {caption}
@@ -60,7 +72,8 @@ const BrowserCaption = ({ isMore, caption, children, onMore, onClose }) => (
       onClose={onClose}
     />
   </div>
-)
+  );
+}
 /*
 BrowserCaption.propTypes = {
   caption: PropTypes.string,
@@ -68,4 +81,4 @@ BrowserCaption.propTypes = {
 }
 */
 
-export default BrowserCaption
+export default withTheme(BrowserCaption)

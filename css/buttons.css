@@ -157,6 +157,9 @@ button::-moz-focus-inner {
   background-color: rgba(0, 0, 0, 0);
   text-align: center;
 }
+.bt-flat:hover {
+ outline: 0;
+}
 .bt-flat:focus {
   /* background-color: rgba(220,220,220, 0.2); */
   background-color: rgba(120, 120, 120, 0.2);

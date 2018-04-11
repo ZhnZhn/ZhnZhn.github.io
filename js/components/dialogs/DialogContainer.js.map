@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../src/components/dialogs/DialogContainer.jsx"],"names":["DialogContainer","state","isShow","inits","shows","data","dialogs","currentDialog","_onStore","actionType","option","SHOW_MODAL_DIALOG","modalDialogType","type","setState","getDialog","then","push","comp","_handleClose","_renderDialogs","store","props","map","dialog","index","createElement","key","onClose","bind","unsubscribe","listen","propTypes","shape","func"],"mappings":"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","file":"DialogContainer.js","sourcesContent":["import React, { Component } from 'react';\r\nimport PropTypes from \"prop-types\";\r\n\r\nimport ModalDialogContainer from '../zhn-containers/ModalDialogContainer';\r\nimport {ComponentActionTypes} from '../../flux/actions/ComponentActions';\r\n\r\nimport RouterModalDialog from './RouterModalDialog';\r\n\r\nclass DialogContainer extends Component {\r\n  static propTypes = {\r\n    store: PropTypes.shape({\r\n      listen: PropTypes.func\r\n    })\r\n  }\r\n\r\n  state = {\r\n    isShow : false,\r\n    inits : {},\r\n    shows : {},\r\n    data : {},\r\n    dialogs : [],\r\n    currentDialog : null\r\n  }\r\n\r\n  componentDidMount(){\r\n    this.unsubscribe = this.props.store.listen(this._onStore)\r\n  }\r\n  componentWillUnmount(){\r\n    this.unsubscribe()\r\n  }\r\n  _onStore = (actionType, option) => {\r\n     if (actionType === ComponentActionTypes.SHOW_MODAL_DIALOG){\r\n       const type = option.modalDialogType\r\n           , { inits, shows, data, dialogs } = this.state;\r\n\r\n       data[type] = option\r\n       shows[type] = true\r\n       if (inits[type]){\r\n         this.setState({\r\n           isShow: true, currentDialog: type,\r\n           shows, data\r\n         })\r\n       } else {\r\n         RouterModalDialog.getDialog(type)\r\n           .then(comp => {\r\n             dialogs.push({ type, comp })\r\n             inits[type] = true\r\n             this.setState({\r\n               isShow: true, currentDialog: type,\r\n               shows, data, dialogs\r\n             });\r\n           })\r\n        /*\r\n         dialogs.push({\r\n           type : type,\r\n           comp : RouterModalDialog[type]\r\n         });\r\n         inits[type] = true\r\n         this.setState({\r\n           isShow: true, currentDialog: type,\r\n           shows, data, dialogs\r\n         });\r\n         */\r\n       }\r\n     }\r\n  }\r\n\r\n  _handleClose = (type) => {\r\n    this.state.shows[type] = false;\r\n    this.setState({\r\n      isShow : false,\r\n      currentDialog: null,\r\n      shows : this.state.shows\r\n    })\r\n  }\r\n\r\n  _renderDialogs = () => {\r\n    const { store } = this.props\r\n        , { shows, data, dialogs } = this.state;\r\n\r\n    return dialogs.map((dialog, index) => {\r\n      const { type, comp } = dialog;\r\n      return React.createElement(comp, {\r\n         key: type,\r\n         isShow: shows[type],\r\n         data: data[type],\r\n         store : store,\r\n         onClose: this._handleClose.bind(null, type)\r\n      })\r\n    })\r\n  }\r\n\r\n  render(){\r\n    const {isShow, currentDialog} = this.state;\r\n\r\n    return (\r\n      <ModalDialogContainer\r\n          isShow={isShow}\r\n          onClose={this._handleClose.bind(null, currentDialog)}\r\n      >\r\n         {this._renderDialogs()}\r\n     </ModalDialogContainer>\r\n    )\r\n  }\r\n}\r\n\r\nexport default DialogContainer\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/DialogContainer.js"
+ ],
+ "file": "../../../src/components/dialogs/DialogContainer.js",
+ "names": [
+  "DialogContainer",
+  "state",
+  "isShow",
+  "inits",
+  "shows",
+  "data",
+  "dialogs",
+  "currentDialog",
+  "_onStore",
+  "actionType",
+  "option",
+  "SHOW_MODAL_DIALOG",
+  "modalDialogType",
+  "type",
+  "setState",
+  "getDialog",
+  "then",
+  "push",
+  "comp",
+  "_handleClose",
+  "_renderDialogs",
+  "store",
+  "props",
+  "map",
+  "dialog",
+  "createElement",
+  "key",
+  "onClose",
+  "bind",
+  "unsubscribe",
+  "listen"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAGA;;;;AACA;;AAEA;;;;;;IAEMA,e;;;;;;;;;;;;;;sNASJC,K,GAAQ;AACNC,cAAS,KADH;AAENC,aAAQ,EAFF;AAGNC,aAAQ,EAHF;AAINC,YAAO,EAJD;AAKNC,eAAU,EALJ;AAMNC,qBAAgB;AANV,K,QAeRC,Q,GAAW,UAACC,UAAD,EAAaC,MAAb,EAAwB;AAChC,UAAID,eAAe,uCAAIE,iBAAvB,EAAyC;AACjC,mBAAOD,OAAOE,eAAd;AAAA,0BACkC,MAAKX,KADvC;AAAA,YACEE,KADF,eACEA,KADF;AAAA,YACSC,KADT,eACSA,KADT;AAAA,YACgBC,IADhB,eACgBA,IADhB;AAAA,YACsBC,OADtB,eACsBA,OADtB;;;AAGND,aAAKQ,IAAL,IAAaH,MAAb;AACAN,cAAMS,IAAN,IAAc,IAAd;AACA,YAAIV,MAAMU,IAAN,CAAJ,EAAgB;AACd,gBAAKC,QAAL,CAAc;AACZZ,oBAAQ,IADI,EACEK,eAAeM,IADjB;AAEZT,wBAFY,EAELC;AAFK,WAAd;AAID,SALD,MAKO;AACL,sCAAkBU,SAAlB,CAA4BF,IAA5B,EACGG,IADH,CACQ,gBAAQ;AACZV,oBAAQW,IAAR,CAAa,EAAEJ,UAAF,EAAQK,UAAR,EAAb;AACAf,kBAAMU,IAAN,IAAc,IAAd;AACA,kBAAKC,QAAL,CAAc;AACZZ,sBAAQ,IADI,EACEK,eAAeM,IADjB;AAEZT,0BAFY,EAELC,UAFK,EAECC;AAFD,aAAd;AAID,WARH;AASD;AACF;AACH,K,QAEDa,Y,GAAe,UAACN,IAAD,EAAU;AACvB,YAAKZ,KAAL,CAAWG,KAAX,CAAiBS,IAAjB,IAAyB,KAAzB;AACA,YAAKC,QAAL,CAAc;AACZZ,gBAAS,KADG;AAEZK,uBAAe,IAFH;AAGZH,eAAQ,MAAKH,KAAL,CAAWG;AAHP,OAAd;AAKD,K,QAEDgB,c,GAAiB,YAAM;AACf,UAAEC,KAAF,GAAY,MAAKC,KAAjB,CAAED,KAAF;AAAA,yBAGI,MAAKpB,KAHT;AAAA,UAEEG,KAFF,gBAEEA,KAFF;AAAA,UAESC,IAFT,gBAESA,IAFT;AAAA,UAEeC,OAFf,gBAEeA,OAFf;;;AAKN,aAAOA,QACJiB,GADI,CACA,kBAAU;AAAA,YACLV,IADK,GACUW,MADV,CACLX,IADK;AAAA,YACCK,IADD,GACUM,MADV,CACCN,IADD;;AAEb,eAAO,gBAAMO,aAAN,CAAoBP,IAApB,EAA0B;AAC9BQ,eAAKb,IADyB;AAE9BX,kBAAQE,MAAMS,IAAN,CAFsB;AAG9BR,gBAAMA,KAAKQ,IAAL,CAHwB;AAI9BQ,iBAAOA,KAJuB;AAK9BM,mBAAS,MAAKR,YAAL,CAAkBS,IAAlB,CAAuB,IAAvB,EAA6Bf,IAA7B;AALqB,SAA1B,CAAP;AAOD,OAVI,CAAP;AAWD,K;;AA3ED;;;;;;;;;;wCAiBmB;AACjB,WAAKgB,WAAL,GAAmB,KAAKP,KAAL,CAAWD,KAAX,CAAiBS,MAAjB,CAAwB,KAAKtB,QAA7B,CAAnB;AACD;;;2CACqB;AACpB,WAAKqB,WAAL;AACD;;;6BAuDO;AAAA,mBAC0B,KAAK5B,KAD/B;AAAA,UACCC,MADD,UACCA,MADD;AAAA,UACSK,aADT,UACSA,aADT;;;AAGN,aACE;AAAA;AAAA;AACI,kBAAQL,MADZ;AAEI,mBAAS,KAAKiB,YAAL,CAAkBS,IAAlB,CAAuB,IAAvB,EAA6BrB,aAA7B;AAFb;AAII,aAAKa,cAAL;AAJJ,OADF;AAQD;;;;AAhGH;;kBAmGepB,e"
+}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 //import PropTypes from 'prop-types'
 
+import Actions from '../../flux/actions/ComponentActions'
+
 import ModalDialog from '../zhn-moleculs/ModalDialog'
 import TabPane from '../zhn/TabPane'
 import Tab from '../zhn/Tab'
@@ -11,11 +13,11 @@ const S = {
   MODAL: {
     position : 'static',
     width: '380px',
-    height: '390px',
+    height: '320px',
     margin: '70px auto 0px'
   },
   TITLE_API: {
-    width: '90px'
+    width: '80px'
   },
   TITLE_OPTION: {
     width: '110px'
@@ -71,6 +73,7 @@ class SettingsDialog extends Component {
                  titleStyle={S.TITLE_OPTION}
                  btStyle={S.BT}
                  data={data}
+                 onChangeTheme={Actions.changeTheme}
                  onClose={onClose}
                />
              </Tab>

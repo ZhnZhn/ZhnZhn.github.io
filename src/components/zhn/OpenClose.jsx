@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 
+import C from '../styles/Color'
+
 const CL = {
   SHOW_POPUP: 'show-popup',
   NOT_SELECTED: 'not-selected'
 };
 
 const DF = {
-  OPEN_COLOR: "yellow",
-  CLOSE_COLOR: "#4D4D4D"
+  OPEN_COLOR: C.YELLOW,
+  CLOSE_COLOR: C.BLANK
 };
 
 const S = {
   ROOT_DIV: {
-    lineHeight: 2,
-    backgroundColor: '#4D4D4D'
+    lineHeight: 2
   },
   ROOT_SVG: {
     display: 'inline-block',
@@ -21,10 +22,11 @@ const S = {
     height: '16px',
     marginLeft: '8px'
   },
-  LABEL_CAPTION: {
+  CAPTION: {
+    color: C.SIREN,
     paddingLeft: '4px',
     verticalAlign: 'top',
-    color: 'rgba(164, 135, 212, 1)',
+    //color: 'rgba(164, 135, 212, 1)',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
@@ -42,21 +44,19 @@ const S = {
   }
 };
 
+const PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
+const PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
+
 class OpenClose extends Component {
+   static defaultProps = {
+     openColor: DF.OPEN_COLOR,
+     closeColor: DF.CLOSE_COLOR
+   }
    constructor(props){
      super();
-     const {
-             isClose,
-             openColor=DF.OPEN_COLOR,
-             closeColor=DF.CLOSE_COLOR
-           } = props
-          , isOpen = isClose ? false : true;
+     const { isClose } = props;
      this.state = {
-       isOpen: isOpen,
-       openColor: openColor,
-       closeColor: closeColor,
-       pathOpen: "M 2,14 L 14,14 14,2 2,14",
-       pathClose: "M 2,2 L 14,8 2,14 2,2",
+       isOpen: isClose ? false : true
      }
    }
 
@@ -67,22 +67,19 @@ class OpenClose extends Component {
   render(){
     const {
             rootStyle, caption,
+            openColor, closeColor,
             CompAfter, childStyle, children
           } = this.props
-        , {
-            isOpen,
-            pathOpen, pathClose,
-            openColor, closeColor
-          } = this.state;
+        , { isOpen } = this.state;
     let _pathV, _fillV,
        _rootChildStyle, _rootChildCl;
     if (isOpen){
-      _pathV = pathOpen
+      _pathV = PATH_OPEN
       _fillV = openColor
       _rootChildStyle = S.BLOCK
       _rootChildCl = CL.SHOW_POPUP
     } else {
-      _pathV = pathClose
+      _pathV = PATH_CLOSE
       _fillV = closeColor
       _rootChildStyle = S.NONE
       _rootChildCl = null;
@@ -106,10 +103,10 @@ class OpenClose extends Component {
                     fill={_fillV}
                     strokeWidth="1"
                     stroke={openColor}
-                 />                 
+                 />
                </svg>
            </div>
-           <span style={S.LABEL_CAPTION} >
+           <span style={S.CAPTION} >
               {caption}
            </span>
          </div>

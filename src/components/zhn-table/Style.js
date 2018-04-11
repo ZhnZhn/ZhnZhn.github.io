@@ -16,10 +16,10 @@ const S = {
     borderBottom: '3px solid transparent'
   },
   TH_UP: {
-    borderTop: '3px solid yellow'
+    borderTop: '3px solid #f1d600'
   },
   TH_DOWN: {
-    borderBottom: '3px solid yellow'
+    borderBottom: '3px solid #f1d600'
   },
   SVG_MORE: {
     fill: '#a487d4',

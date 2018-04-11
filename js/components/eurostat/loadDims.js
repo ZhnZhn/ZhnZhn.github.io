@@ -18,7 +18,9 @@ var _jsonstat2 = _interopRequireDefault(_jsonstat);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var MSG_STILL_LOADING = "Another dims are still loading.";
+var MSG_STILL_LOADING = "Another dims are still loading";
+var MSG_403 = 'HTTP Code 403: Forbitten.\nMaybe, require API key.';
+var MSG_HTTP_CODE = 'HTTP Code';
 
 var C = {
   SELECTION_ALL: {
@@ -111,13 +113,15 @@ var loadDims = function loadDims(_ref) {
         _option = _crOption(dims);
     _markStartLoading(_url);
     return fetch(_url, _option).then(function (res) {
-      var status = res.status,
-          statusText = res.statusText;
+      var status = res.status;
 
       if (status >= 200 && status < 400) {
         return res.json();
       } else {
-        throw Error(statusText);
+        if (status === 403) {
+          throw Error(MSG_403);
+        }
+        throw Error(MSG_HTTP_CODE + ': ' + status);
       }
     }).then(function (json) {
       var _ds = (0, _jsonstat2.default)(json).Dataset(0),

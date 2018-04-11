@@ -42,6 +42,8 @@ var _ErrMsg2 = _interopRequireDefault(_ErrMsg);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var T_O_FOCUS_FIRST = 1000;
+
 var Frame = function (_Component) {
   (0, _inherits3.default)(Frame, _Component);
 
@@ -146,10 +148,7 @@ var Frame = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        {
-          //className="with-scroll"
-          style: rootStyle
-        },
+        { style: rootStyle },
         _react2.default.createElement(_MenuTitle2.default, {
           ref: this._refFirst,
           title: title,
@@ -167,7 +166,7 @@ var Frame = function (_Component) {
           pageCurrent = _props3.pageCurrent;
 
       if (pageNumber === pageCurrent) {
-        setTimeout(this.focusFirst, 1000);
+        setTimeout(this.focusFirst, T_O_FOCUS_FIRST);
       }
     }
   }]);
@@ -175,4 +174,4 @@ var Frame = function (_Component) {
 }(_react.Component);
 
 exports.default = Frame;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\Frame.js.map
+//# sourceMappingURL=Frame.js.map

@@ -40,7 +40,7 @@
 }
 
 .row__topic:nth-child(odd) {
-  background-color: #404040;
+  background-color: rgba(0,0,0, 0.1);
 }
 
 .row__topic:hover {
@@ -58,7 +58,7 @@
 }
 
 .row__pane-topic:nth-child(odd) {
-  background-color: #404040;
+    background-color: rgba(0,0,0, 0.1);
 }
 
 .row__pane-topic:hover,
@@ -78,7 +78,7 @@
 }
 
 .row__type2-topic:nth-child(odd) {
-  background-color: #404040;
+  background-color: rgba(0,0,0, 0.1);
 }
 
 .row__type2-topic:hover {
@@ -154,7 +154,7 @@
   background-color: transparent !important;
 }
 .grid tr:nth-child(odd) {
-  background-color: #404040;
+  background-color: rgba(0,0,0, 0.1);
 }
 
 .item-container {
@@ -169,4 +169,35 @@
     box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
     overflowY: hidden;
     overflowX: hidden;
+}
+
+.browser-container {
+  flexShrink: 0;
+  zIndex: 20;
+  background-color: #4d4d4d;
+  padding: 0px 3px 35px 0px;
+  position: relative;
+  height: calc(100vh - 71px);
+  min-height: 500px;
+  min-width: 270px;
+  max-width: 400px;
+  margin-left: 10px;
+  box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
+  border-radius: 4px;
+}
+
+.about-container {
+  z-index: 20;
+  background-color: #4d4d4d;
+  padding: 0px;
+  padding-bottom: 35px;
+  position: relative;
+  height: calc(100vh - 71px);
+  min-height: 500px;
+  min-width: 300px;
+  max-width: 700px;
+  margin-left: 16px;
+  margin-right: 16px;
+  box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
+  border-radius: 4px;
 }

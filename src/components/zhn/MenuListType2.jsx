@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+import C from '../styles/Color'
 import OpenClose2 from './OpenClose2'
 
-const C_FILL_OPEN = "#80c040";
+const C_FILL_OPEN = C.GREEN;
+const C_LEFT_BORDER = C.YELLOW;
 
 const MODEL_PROP = {
   CAPTION : 'caption',
@@ -18,7 +20,8 @@ const STYLE = {
   LIST_DIV : {
     marginLeft : '8px',
     paddingLeft : '12px',
-    borderLeft : '1px solid yellow',
+    //borderLeft : '1px solid yellow',
+    borderLeft : `1px solid ${C_LEFT_BORDER}`,
     lineHeight : 2
   },
   LIST_DIV_NOT_SELECTED : {
@@ -45,7 +48,7 @@ const STYLE = {
 }
 
 
-class MenuListType2 extends Component{
+class MenuListType2 extends Component {
   state = {}
 
   shouldComponentUpdate(nextProps, nextState){

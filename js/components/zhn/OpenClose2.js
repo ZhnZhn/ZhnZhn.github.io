@@ -24,41 +24,53 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Color = require('../styles/Color');
+
+var _Color2 = _interopRequireDefault(_Color);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  rootDiv: {
-    backgroundColor: '#4D4D4D',
+var CL_SHOW = 'show-popup';
+
+var DF = {
+  FILL_OPEN: _Color2.default.YELLOW,
+  FILL_CLOSE: _Color2.default.BLANK
+};
+
+var S = {
+  ROOT: {
     lineHeight: 1.5
   },
-  divSvg: {
+  DIV_SVG: {
     display: 'inline-block',
     width: '16px',
     height: '16px',
     marginLeft: '8px'
   },
-  labelCaption: {
+  SVG: {
+    display: 'inline-block'
+  },
+  CAPTION: {
+    color: _Color2.default.SIREN,
     paddingLeft: '4px',
     verticalAlign: 'top',
-    color: 'rgba(164, 135, 212, 1)',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
     cursor: 'pointer'
-  },
-  itemRow: {
-    backgroundColor: '#404040'
   }
 };
 
-var pathOpen = "M 2,14 L 14,14 14,2 2,14";
-var pathClose = "M 2,2 L 14,8 2,14 2,2";
+var PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
+var PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
-var OpenClose2 = function (_Component) {
+var OpenClose2 = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(OpenClose2, _Component);
 
   function OpenClose2(props) {
@@ -72,13 +84,10 @@ var OpenClose2 = function (_Component) {
       });
     };
 
-    var isOpen = props.isClose ? false : true,
-        fillOpen = props.fillOpen ? props.fillOpen : 'yellow',
-        fillClose = props.fillClose ? props.fillClose : '#4D4D4D';
+    var isClose = props.isClose;
+
     _this.state = {
-      isOpen: isOpen,
-      fillOpen: fillOpen,
-      fillClose: fillClose
+      isOpen: isClose ? false : true
     };
     return _this;
   }
@@ -91,6 +100,8 @@ var OpenClose2 = function (_Component) {
           styleNotSelected = _props.styleNotSelected,
           styleCaption = _props.styleCaption,
           caption = _props.caption,
+          fillOpen = _props.fillOpen,
+          fillClose = _props.fillClose,
           isDraggable = _props.isDraggable,
           option = _props.option,
           onDragStart = _props.onDragStart,
@@ -99,6 +110,7 @@ var OpenClose2 = function (_Component) {
           onDragLeave = _props.onDragLeave,
           onDrop = _props.onDrop,
           children = _props.children,
+          isOpen = this.state.isOpen,
           _dragOption = isDraggable ? {
         draggable: true,
         onDragStart: onDragStart.bind(null, option),
@@ -113,15 +125,15 @@ var OpenClose2 = function (_Component) {
           _displayDivStyle = void 0,
           _classShow = void 0,
           _styleNotSelected = void 0;
-      if (this.state.isOpen) {
-        _pathV = pathOpen;
-        _fillV = this.state.fillOpen;
+      if (isOpen) {
+        _pathV = PATH_OPEN;
+        _fillV = fillOpen;
         _displayDivStyle = 'block';
-        _classShow = 'show-popup';
+        _classShow = CL_SHOW;
         _styleNotSelected = null;
       } else {
-        _pathV = pathClose;
-        _fillV = this.state.fillClose;
+        _pathV = PATH_CLOSE;
+        _fillV = fillClose;
         _displayDivStyle = 'none';
         _classShow = null;
         _styleNotSelected = styleNotSelected;
@@ -129,7 +141,7 @@ var OpenClose2 = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: Object.assign({}, styles.rootDiv, style) },
+        { style: (0, _extends3.default)({}, S.ROOT, style) },
         _react2.default.createElement(
           'div',
           (0, _extends3.default)({
@@ -139,24 +151,23 @@ var OpenClose2 = function (_Component) {
           }, _dragOption),
           _react2.default.createElement(
             'div',
-            { style: styles.divSvg },
+            { style: S.DIV_SVG },
             _react2.default.createElement(
               'svg',
               {
                 viewBox: '0 0 16 16', width: '100%', height: '100%',
                 preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg',
-                style: { display: 'inline-block' }
+                style: S.SVG
               },
               _react2.default.createElement('path', {
-                d: _pathV,
-                fill: _fillV,
-                strokeWidth: '1', stroke: this.state.fillOpen
+                d: _pathV, fill: _fillV,
+                strokeWidth: '1', stroke: fillOpen
               })
             )
           ),
           _react2.default.createElement(
             'span',
-            { style: Object.assign({}, styles.labelCaption, styleCaption) },
+            { style: (0, _extends3.default)({}, S.CAPTION, styleCaption) },
             caption
           )
         ),
@@ -169,7 +180,9 @@ var OpenClose2 = function (_Component) {
     }
   }]);
   return OpenClose2;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  fillOpen: DF.FILL_OPEN,
+  fillClose: DF.FILL_CLOSE
+}, _temp);
 exports.default = OpenClose2;
 //# sourceMappingURL=OpenClose2.js.map

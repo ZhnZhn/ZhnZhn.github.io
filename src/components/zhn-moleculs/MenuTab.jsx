@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 
+import withTheme from '../hoc/withTheme'
+
+const TH_ID = 'ELEMENT';
+
 const CL = {
   SHOW: 'button-tab button-tab--show not-selected',
-  NOT_SHOW: 'button-tab not-selected'
+  NOT_SHOW: 'button-tab not-selected',
+  ARROW: 'arrow-down'
 };
 
 class MenuTab extends Component {
@@ -14,20 +19,28 @@ class MenuTab extends Component {
      }
   }
 
+  _refBtNode = node => this.btNode = node
+
   render() {
-    const { isShow, caption, style, children, onClick } = this.props
+    const {
+            theme,
+            isShow, caption, style,
+            children,
+            onClick
+          } = this.props
+        , TS = theme.getStyle(TH_ID)
         , _rootClass = isShow ? CL.SHOW : CL.NOT_SHOW;
     return (
       <div
         className={_rootClass}
-        style={style}
+        style={{ ...style, ...TS.BG }}
       >
          <div
-           ref = {node => this.btNode = node}
+           ref = {this._refBtNode}
            onClick={onClick}
          >
            <span>{caption}</span>
-           <span className="arrow-down"></span>
+           <span className={CL.ARROW} />
          </div>
          {children}
       </div>
@@ -35,4 +48,4 @@ class MenuTab extends Component {
   }
 }
 
-export default MenuTab
+export default withTheme(MenuTab)

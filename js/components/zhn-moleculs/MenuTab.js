@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -24,19 +28,37 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TH_ID = 'ELEMENT';
 
 var CL = {
   SHOW: 'button-tab button-tab--show not-selected',
-  NOT_SHOW: 'button-tab not-selected'
+  NOT_SHOW: 'button-tab not-selected',
+  ARROW: 'arrow-down'
 };
 
 var MenuTab = function (_Component) {
   (0, _inherits3.default)(MenuTab, _Component);
 
   function MenuTab() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, MenuTab);
-    return (0, _possibleConstructorReturn3.default)(this, (MenuTab.__proto__ || Object.getPrototypeOf(MenuTab)).apply(this, arguments));
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuTab.__proto__ || Object.getPrototypeOf(MenuTab)).call.apply(_ref, [this].concat(args))), _this), _this._refBtNode = function (node) {
+      return _this.btNode = node;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(MenuTab, [{
@@ -51,28 +73,26 @@ var MenuTab = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
+          theme = _props.theme,
           isShow = _props.isShow,
           caption = _props.caption,
           style = _props.style,
           children = _props.children,
           onClick = _props.onClick,
+          TS = theme.getStyle(TH_ID),
           _rootClass = isShow ? CL.SHOW : CL.NOT_SHOW;
 
       return _react2.default.createElement(
         'div',
         {
           className: _rootClass,
-          style: style
+          style: (0, _extends3.default)({}, style, TS.BG)
         },
         _react2.default.createElement(
           'div',
           {
-            ref: function ref(node) {
-              return _this2.btNode = node;
-            },
+            ref: this._refBtNode,
             onClick: onClick
           },
           _react2.default.createElement(
@@ -80,7 +100,7 @@ var MenuTab = function (_Component) {
             null,
             caption
           ),
-          _react2.default.createElement('span', { className: 'arrow-down' })
+          _react2.default.createElement('span', { className: CL.ARROW })
         ),
         children
       );
@@ -89,5 +109,5 @@ var MenuTab = function (_Component) {
   return MenuTab;
 }(_react.Component);
 
-exports.default = MenuTab;
+exports.default = (0, _withTheme2.default)(MenuTab);
 //# sourceMappingURL=MenuTab.js.map

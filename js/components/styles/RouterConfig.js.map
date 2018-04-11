@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/styles/RouterConfig.js"
+ ],
+ "file": "../../../src/components/styles/RouterConfig.js",
+ "names": [
+  "router",
+  "DF",
+  "HEADER_BAR",
+  "ELEMENT"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,SAAS;AACbC,6BADa;AAEb;;;;;;;;;AASAC,uCAXa;AAYb;;;;AAIAC;AAhBa,CAAf;;kBAmBeH,M"
+}

@@ -31,7 +31,8 @@ var RowInputSelect = function RowInputSelect(_ref) {
       isShowLabels = _ref$isShowLabels === undefined ? true : _ref$isShowLabels,
       _ref$caption = _ref.caption,
       caption = _ref$caption === undefined ? '' : _ref$caption,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ['isShowLabels', 'caption']);
+      captionStyle = _ref.captionStyle,
+      rest = (0, _objectWithoutProperties3.default)(_ref, ['isShowLabels', 'caption', 'captionStyle']);
   var _caption = caption.indexOf(':') === -1 && caption !== '' ? caption + ':' : caption,
       _STYLE$crRowLabelStyl = _DialogStyles2.default.crRowLabelStyle(isShowLabels),
       rowStyle = _STYLE$crRowLabelStyl.rowStyle,
@@ -44,7 +45,7 @@ var RowInputSelect = function RowInputSelect(_ref) {
     { style: rowStyle },
     _react2.default.createElement(
       'span',
-      { style: labelStyle },
+      { style: (0, _extends3.default)({}, labelStyle, captionStyle) },
       _caption
     ),
     _react2.default.createElement(_InputSelect2.default, _options)

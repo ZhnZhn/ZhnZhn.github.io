@@ -4,15 +4,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _withTheme = require('../hoc/withTheme');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _withTheme2 = _interopRequireDefault(_withTheme);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TH_ID = 'ELEMENT';
+//import PropTypes from "prop-types";
 
 var S = {
   LI: {
@@ -40,15 +47,17 @@ var S = {
 };
 
 var Tab = function Tab(_ref) {
-  var title = _ref.title,
+  var theme = _ref.theme,
+      title = _ref.title,
       isSelected = _ref.isSelected,
       onClick = _ref.onClick;
 
+  var TS = theme.getStyle(TH_ID);
   var _selectedStyle = isSelected ? S.SELECTED : null;
   return _react2.default.createElement(
     'li',
     {
-      style: Object.assign({}, S.LI, _selectedStyle),
+      style: (0, _extends3.default)({}, S.LI, TS.BG, _selectedStyle),
       onClick: onClick
     },
     _react2.default.createElement(
@@ -59,11 +68,13 @@ var Tab = function Tab(_ref) {
   );
 };
 
-Tab.propTypes = process.env.NODE_ENV !== "production" ? {
-  title: _propTypes2.default.string,
-  isSelected: _propTypes2.default.bool,
-  onClick: _propTypes2.default.func
-} : {};
+/*
+Tab.propTypes = {
+  title: PropTypes.string,
+  isSelected: PropTypes.bool,
+  onClick: PropTypes.func
+}
+*/
 
-exports.default = Tab;
+exports.default = (0, _withTheme2.default)(Tab);
 //# sourceMappingURL=Tab.js.map

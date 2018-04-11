@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -24,9 +28,25 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
+var _ButtonCircle = require('./ButtonCircle2');
+
+var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TH_ID = 'ELEMENT';
+var CL = "menu__badge";
+
 var S = {
+  /*
+  BT: {
+    backgroundColor: '#1b2836'
+  },
+  */
   BADGE_OPENED: {
     color: 'rgba(164, 135, 212, 1)'
   }
@@ -46,7 +66,7 @@ var MenuBadge = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuBadge.__proto__ || Object.getPrototypeOf(MenuBadge)).call.apply(_ref, [this].concat(args))), _this), _this._handleClickBadge = function (event) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuBadge.__proto__ || Object.getPrototypeOf(MenuBadge)).call.apply(_ref, [this].concat(args))), _this), _this._hClick = function (event) {
       event.stopPropagation();
       if (!_this.props.isOpen) {
         _this.props.onClick();
@@ -60,22 +80,22 @@ var MenuBadge = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          theme = _props.theme,
           counter = _props.counter,
-          isOpen = _props.isOpen;
+          isOpen = _props.isOpen,
+          TS = theme.getStyle(TH_ID),
+          _btStyle = isOpen ? S.BADGE_OPENED : null;
 
-      var spanStyle = isOpen ? S.BADGE_OPENED : null;
-      return _react2.default.createElement(
-        'span',
-        {
-          className: 'menu__badge',
-          style: spanStyle,
-          onClick: this._handleClickBadge },
-        counter
-      );
+      return _react2.default.createElement(_ButtonCircle2.default, {
+        className: CL,
+        style: (0, _extends3.default)({}, S.BT, _btStyle, TS.BG),
+        caption: counter,
+        onClick: this._hClick
+      });
     }
   }]);
   return MenuBadge;
 }(_react.Component);
 
-exports.default = MenuBadge;
+exports.default = (0, _withTheme2.default)(MenuBadge);
 //# sourceMappingURL=MenuBadge.js.map

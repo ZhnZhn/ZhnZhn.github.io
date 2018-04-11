@@ -25,14 +25,17 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp, _initialiseProps;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Color = require('../styles/Color');
 
-//import PropTypes from "prop-types";
+var _Color2 = _interopRequireDefault(_Color);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
   DIV: {
@@ -46,11 +49,13 @@ var S = {
   }
 };
 
+var C_GREY = "#777777";
+
 var EL_CHECKED = _react2.default.createElement('path', {
   d: 'M 2,3 L 8,14 14,3',
   strokeWidth: '2',
-  stroke: 'yellow',
-  fill: '#4D4D4D'
+  stroke: _Color2.default.YELLOW,
+  fill: _Color2.default.BLANK
 });
 
 var _isFn = function _isFn(fn) {
@@ -120,8 +125,8 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
           _react2.default.createElement('rect', {
             x: '1', y: '1',
             height: '14', width: '14',
-            strokeWidth: '2', stroke: '#777777',
-            fill: '#4D4D4D', rx: '3'
+            strokeWidth: '2', rx: '3',
+            stroke: C_GREY, fill: _Color2.default.BLANK
           }),
           _elChecked
         )
@@ -154,4 +159,4 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
   };
 }, _temp);
 exports.default = SvgCheckBox;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\SvgCheckBox.js.map
+//# sourceMappingURL=SvgCheckBox.js.map

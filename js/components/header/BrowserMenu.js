@@ -132,6 +132,7 @@ var BrowserMenu = (_temp = _class = function (_Component) {
       var _props = this.props,
           isShow = _props.isShow,
           className = _props.className,
+          style = _props.style,
           onClose = _props.onClose,
           _transform = this._crTransform(),
           _pagesStyle = (0, _extends3.default)({}, S.PAGES, _transform);
@@ -146,7 +147,7 @@ var BrowserMenu = (_temp = _class = function (_Component) {
           _ShowHide2.default,
           {
             className: className,
-            style: S.SHOW_HIDE,
+            style: (0, _extends3.default)({}, style, S.SHOW_HIDE),
             isShow: isShow
           },
           _react2.default.createElement(
@@ -255,4 +256,4 @@ var BrowserMenu = (_temp = _class = function (_Component) {
   };
 }, _temp);
 exports.default = BrowserMenu;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\header\BrowserMenu.js.map
+//# sourceMappingURL=BrowserMenu.js.map

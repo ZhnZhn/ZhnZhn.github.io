@@ -12,6 +12,6 @@
     { "caption": "October", "value": "7010" },
     { "caption": "November", "value": "7011" },
     { "caption": "December", "value": "7012" },
-    { "caption": "Meteorogical Year", "value": "7020" }
+    { "caption": "Meteorological Year", "value": "7020" }
   ]
 }

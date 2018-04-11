@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../../src/components/dialogs/RowInputSelect.jsx"],"names":["RowInputSelect","isShowLabels","caption","rest","indexOf","crRowLabelStyle","rowStyle","labelStyle","optionName","replace","_options","width","_caption"],"mappings":";;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,iBAAiB,SAAjBA,cAAiB,OAEjB;AAAA,+BADJC,YACI;AAAA,MADJA,YACI,qCADS,IACT;AAAA,0BADeC,OACf;AAAA,MADeA,OACf,gCADuB,EACvB;AAAA,MAD8BC,IAC9B;AACE,iBAAWD,QAAQE,OAAR,CAAgB,GAAhB,MAAyB,CAAC,CAA1B,IAA+BF,YAAY,EAA3C,GACHA,OADG,SAENA,OAFL;AAAA,8BAKK,uBAAMG,eAAN,CAAsBJ,YAAtB,CALL;AAAA,MAIGK,QAJH,yBAIGA,QAJH;AAAA,MAIaC,UAJb,yBAIaA,UAJb;AAAA,MAMCC,UAND,GAMcP,eACR,EADQ,GAERC,QAAQO,OAAR,CAAgB,GAAhB,EAAqB,EAArB,CARN;AAAA,MASCC,QATD,4BAScC,OAAO,KATrB,IAS+BR,IAT/B,IASqCK,sBATrC;;AAUN,SACG;AAAA;AAAA,MAAK,OAAOF,QAAZ;AACG;AAAA;AAAA,QAAM,OAAOC,UAAb;AACIK;AADJ,KADH;AAIG,yDAAiBF,QAAjB;AAJH,GADH;AAQD,CArBD;;kBAwBeV,c","file":"RowInputSelect.js","sourcesContent":["import React from 'react';\r\n\r\nimport InputSelect from '../zhn-select/InputSelect';\r\nimport STYLE from '../styles/DialogStyles';\r\n\r\nconst RowInputSelect = ({\r\n  isShowLabels=true, caption='', ...rest\r\n}) => {\r\n  const _caption = caption.indexOf(':') === -1 && caption !== ''\r\n           ? `${caption}:`\r\n           : caption\r\n       , {\r\n           rowStyle, labelStyle\r\n         } = STYLE.crRowLabelStyle(isShowLabels)\r\n       , optionName = isShowLabels\r\n            ? ''\r\n            : caption.replace(':', '')\r\n       , _options = { width: \"250\", ...rest, optionName};\r\n  return (\r\n     <div style={rowStyle}>\r\n        <span style={labelStyle}>\r\n           {_caption}\r\n        </span>\r\n        <InputSelect {..._options} />\r\n    </div>\r\n  );\r\n};\r\n\r\n\r\nexport default RowInputSelect\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/RowInputSelect.js"
+ ],
+ "file": "../../../src/components/dialogs/RowInputSelect.js",
+ "names": [
+  "RowInputSelect",
+  "isShowLabels",
+  "caption",
+  "captionStyle",
+  "rest",
+  "indexOf",
+  "crRowLabelStyle",
+  "rowStyle",
+  "labelStyle",
+  "optionName",
+  "replace",
+  "_options",
+  "width",
+  "_caption"
+ ],
+ "mappings": ";;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,iBAAiB,SAAjBA,cAAiB,OAEjB;AAAA,+BADJC,YACI;AAAA,MADJA,YACI,qCADS,IACT;AAAA,0BADeC,OACf;AAAA,MADeA,OACf,gCADuB,EACvB;AAAA,MAD2BC,YAC3B,QAD2BA,YAC3B;AAAA,MAD4CC,IAC5C;AACE,iBAAWF,QAAQG,OAAR,CAAgB,GAAhB,MAAyB,CAAC,CAA1B,IAA+BH,YAAY,EAA3C,GACHA,OADG,SAENA,OAFL;AAAA,8BAKK,uBAAMI,eAAN,CAAsBL,YAAtB,CALL;AAAA,MAIGM,QAJH,yBAIGA,QAJH;AAAA,MAIaC,UAJb,yBAIaA,UAJb;AAAA,MAMCC,UAND,GAMcR,eACR,EADQ,GAERC,QAAQQ,OAAR,CAAgB,GAAhB,EAAqB,EAArB,CARN;AAAA,MASCC,QATD,4BAScC,OAAO,KATrB,IAS+BR,IAT/B,IASqCK,sBATrC;;AAUN,SACG;AAAA;AAAA,MAAK,OAAOF,QAAZ;AACG;AAAA;AAAA,QAAM,kCAAWC,UAAX,EAA0BL,YAA1B,CAAN;AACIU;AADJ,KADH;AAIG,yDAAiBF,QAAjB;AAJH,GADH;AAQD,CArBD;;kBAwBeX,c"
+}

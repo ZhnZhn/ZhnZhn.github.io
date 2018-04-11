@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+import withTheme from '../hoc/withTheme'
+
+const TH_ID = 'MODAL_PANE';
+
 class ModalPane extends Component {
   static defaultProps = {
     onClose: () => {}
@@ -25,14 +29,17 @@ class ModalPane extends Component {
     }
   }
 
+  _refRootNode = n => this.rootNode = n
+
   render(){
-    const { children } = this.props;
+    const { theme, children } = this.props
+         , TS = theme.getStyle(TH_ID);
     return (
-      <div ref={n => this.rootNode = n}>
+      <div ref={this._refRootNode} style={TS.ROOT}>
         {children}
       </div>
     );
   }
 }
 
-export default ModalPane
+export default withTheme(ModalPane)

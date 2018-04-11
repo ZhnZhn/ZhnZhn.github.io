@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/components/zhn/MenuBadge.jsx"],"names":["S","BADGE_OPENED","color","MenuBadge","_handleClickBadge","event","stopPropagation","props","isOpen","onClick","onBadgeClose","counter","spanStyle"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;AAEA,IAAMA,IAAI;AACRC,gBAAe;AACbC,WAAO;AADM;AADP,CAAV;;IAMMC,S;;;;;;;;;;;;;;0MACJC,iB,GAAoB,UAACC,KAAD,EAAW;AAC5BA,YAAMC,eAAN;AACA,UAAI,CAAC,MAAKC,KAAL,CAAWC,MAAhB,EAAuB;AACrB,cAAKD,KAAL,CAAWE,OAAX;AACD,OAFD,MAEO;AACL,cAAKF,KAAL,CAAWG,YAAX;AACD;AACH,K;;;;;6BAEO;AAAA,mBACoB,KAAKH,KADzB;AAAA,UACCI,OADD,UACCA,OADD;AAAA,UACUH,MADV,UACUA,MADV;;AAEN,UAAMI,YAAYJ,SACPR,EAAEC,YADK,GAEP,IAFX;AAGA,aACE;AAAA;AAAA;AACG,qBAAU,aADb;AAEG,iBAAOW,SAFV;AAGG,mBAAS,KAAKR,iBAHjB;AAIIO;AAJJ,OADF;AAQD;;;;;kBAGYR,S","file":"MenuBadge.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\nconst S = {\r\n  BADGE_OPENED : {\r\n    color: 'rgba(164, 135, 212, 1)'\r\n  }\r\n}\r\n\r\nclass MenuBadge extends Component {\r\n  _handleClickBadge = (event) => {\r\n     event.stopPropagation();\r\n     if (!this.props.isOpen){\r\n       this.props.onClick();\r\n     } else {\r\n       this.props.onBadgeClose();\r\n     }\r\n  }\r\n\r\n  render(){\r\n    const {counter, isOpen} = this.props;\r\n    const spanStyle = isOpen\r\n             ? S.BADGE_OPENED\r\n             : null;\r\n    return (\r\n      <span\r\n         className=\"menu__badge\"\r\n         style={spanStyle}\r\n         onClick={this._handleClickBadge}>\r\n         {counter}\r\n      </span>\r\n    )\r\n  }\r\n}\r\n\r\nexport default MenuBadge\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/MenuBadge.js"
+ ],
+ "file": "../../../src/components/zhn/MenuBadge.js",
+ "names": [
+  "TH_ID",
+  "CL",
+  "S",
+  "BADGE_OPENED",
+  "color",
+  "MenuBadge",
+  "_hClick",
+  "event",
+  "stopPropagation",
+  "props",
+  "isOpen",
+  "onClick",
+  "onBadgeClose",
+  "theme",
+  "counter",
+  "TS",
+  "getStyle",
+  "_btStyle",
+  "BT",
+  "BG"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AAEA;;;;;;AAGA,IAAMA,QAAQ,SAAd;AACA,IAAMC,KAAK,aAAX;;AAEA,IAAMC,IAAI;AACR;;;;;AAKAC,gBAAe;AACbC,WAAO;AADM;AANP,CAAV;;IAWMC,S;;;;;;;;;;;;;;0MACJC,O,GAAU,UAACC,KAAD,EAAW;AAClBA,YAAMC,eAAN;AACA,UAAI,CAAC,MAAKC,KAAL,CAAWC,MAAhB,EAAuB;AACrB,cAAKD,KAAL,CAAWE,OAAX;AACD,OAFD,MAEO;AACL,cAAKF,KAAL,CAAWG,YAAX;AACD;AACH,K;;;;;6BAEO;AAAA,mBAC2B,KAAKH,KADhC;AAAA,UACCI,KADD,UACCA,KADD;AAAA,UACQC,OADR,UACQA,OADR;AAAA,UACiBJ,MADjB,UACiBA,MADjB;AAAA,UAEAK,EAFA,GAEKF,MAAMG,QAAN,CAAehB,KAAf,CAFL;AAAA,UAGAiB,QAHA,GAGWP,SACNR,EAAEC,YADI,GAEN,IALL;;AAMN,aACE;AACE,mBAAWF,EADb;AAEE,0CAAWC,EAAEgB,EAAb,EAAoBD,QAApB,EAAiCF,GAAGI,EAApC,CAFF;AAGE,iBAASL,OAHX;AAIE,iBAAS,KAAKR;AAJhB,QADF;AAQD;;;;;kBAIY,yBAAUD,SAAV,C"
+}

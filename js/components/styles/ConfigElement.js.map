@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/styles/ConfigElement.js"
+ ],
+ "file": "../../../src/components/styles/ConfigElement.js",
+ "names": [
+  "styleConfig",
+  "themeName",
+  "undefined",
+  "style",
+  "createStyle",
+  "CSS_RULE",
+  "ROOT",
+  "EL",
+  "BORDER",
+  "EL_BORDER",
+  "BG",
+  "EL_BG"
+ ],
+ "mappings": ";;;;;;;;;;;;AAAA,IAAMA,cAAc;AAClBC,aAAWC,SADO;AAElBC,SAAOD,SAFW;;AAIlBE,eAAa,qBAACC,QAAD,EAAc;AACzB,WAAO;AACLC,uCACKD,SAASE,EADd,CADK;AAILC,yCACKH,SAASI,SADd,CAJK;AAOLC,qCACKL,SAASM,KADd;AAPK,KAAP;AAWD;AAhBiB,CAApB;;kBAmBeX,W"
+}

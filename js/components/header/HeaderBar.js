@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 var _ProgressLoading = require('./ProgressLoading');
 
 var _ProgressLoading2 = _interopRequireDefault(_ProgressLoading);
@@ -77,6 +81,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
     CAPTION = "ERC v0.15.0";
 
+var ID = 'HEADER_BAR';
+
 var CL = {
   HEADER: "header",
   ICON: 'header__icon-erc',
@@ -89,16 +95,6 @@ var CL = {
   WATCH: "header__bt-watch",
   SETTINGS: "header__bt-settins",
   ABOUT: "header__bt-about"
-};
-
-var S = {
-  BT: {
-    color: '#1b2836'
-  },
-  LIMIT: {
-    float: 'right',
-    paddingTop: '9px'
-  }
 };
 
 var HeaderBar = function (_Component) {
@@ -152,12 +148,15 @@ var HeaderBar = function (_Component) {
   (0, _createClass3.default)(HeaderBar, [{
     key: 'render',
     value: function render() {
-      var store = this.props.store,
-          isDS = this.state.isDS;
+      var _props = this.props,
+          store = _props.store,
+          theme = _props.theme,
+          isDS = this.state.isDS,
+          S = theme.getStyle(ID);
 
       return _react2.default.createElement(
         'div',
-        { className: CL.HEADER },
+        { className: CL.HEADER, style: S.ROOT },
         _react2.default.createElement(_ProgressLoading2.default, { store: store, ACTIONS: _LoadingProgressActions.T }),
         _react2.default.createElement(_IconLogoErc2.default, {
           className: CL.ICON,
@@ -232,6 +231,7 @@ var HeaderBar = function (_Component) {
         }),
         _react2.default.createElement(_BrowserMenu2.default, {
           className: CL.BM,
+          style: S.ROOT,
           isShow: isDS,
           model: _Model2.default,
           onClose: this._hCloseDS,
@@ -245,5 +245,5 @@ var HeaderBar = function (_Component) {
   return HeaderBar;
 }(_react.Component);
 
-exports.default = HeaderBar;
+exports.default = (0, _withTheme2.default)(HeaderBar);
 //# sourceMappingURL=HeaderBar.js.map

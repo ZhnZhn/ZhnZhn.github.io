@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import withTheme from '../hoc/withTheme'
+
 import ProgressLoading from './ProgressLoading'
 import AppLabel from './AppLabel'
 import IconLogoErc from './IconLogoErc'
@@ -19,6 +21,8 @@ import MODEL from './Model'
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
     , CAPTION = "ERC v0.15.0";
 
+const ID = 'HEADER_BAR';
+
 const CL = {
   HEADER: "header",
   ICON: `header__icon-erc`,
@@ -31,16 +35,6 @@ const CL = {
   WATCH: "header__bt-watch",
   SETTINGS: "header__bt-settins",
   ABOUT: "header__bt-about",
-};
-
-const S = {
-  BT: {
-    color: '#1b2836'
-  },
-  LIMIT: {
-    float: 'right',
-    paddingTop: '9px'
-  }
 };
 
 class HeaderBar extends Component {
@@ -87,10 +81,11 @@ class HeaderBar extends Component {
   }
 
   render(){
-    const { store } = this.props
-        , { isDS } = this.state;
+    const { store, theme } = this.props
+        , { isDS } = this.state
+        , S = theme.getStyle(ID);
     return (
-      <div className={CL.HEADER}>
+      <div className={CL.HEADER} style={S.ROOT} >
          <ProgressLoading store={store} ACTIONS={LPAT} />
          <IconLogoErc
             className={CL.ICON}
@@ -166,6 +161,7 @@ class HeaderBar extends Component {
 
            <BrowserMenu
               className={CL.BM}
+              style={S.ROOT}
               isShow={isDS}
               model={MODEL}
               onClose={this._hCloseDS}
@@ -178,4 +174,4 @@ class HeaderBar extends Component {
   }
 }
 
-export default HeaderBar
+export default withTheme(HeaderBar)

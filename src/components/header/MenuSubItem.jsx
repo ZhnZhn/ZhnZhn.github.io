@@ -12,7 +12,7 @@ const S = {
     top: '0',
     right: '4px',
     color: 'inherit',
-    backgroundColor: 'inherit',
+    //backgroundColor: 'inherit',
     padding: "1px 16px 1px 0px",
     fontWeight: 'bold'
   }

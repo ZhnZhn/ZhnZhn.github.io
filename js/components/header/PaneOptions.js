@@ -21,7 +21,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp, _initialiseProps;
-
 //import PropTypes from 'prop-types'
 
 var _react = require('react');
@@ -32,9 +31,17 @@ var _safeFn = require('../../utils/safeFn');
 
 var _safeFn2 = _interopRequireDefault(_safeFn);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 var _RowPattern = require('../dialogs/RowPattern');
 
 var _RowPattern2 = _interopRequireDefault(_RowPattern);
+
+var _RowInputSelect = require('../dialogs/RowInputSelect');
+
+var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
 var _RowCheckBox = require('../dialogs/RowCheckBox');
 
@@ -49,6 +56,8 @@ var _RowButtons = require('./RowButtons');
 var _RowButtons2 = _interopRequireDefault(_RowButtons);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var UI_THEME_OPTIONS = [{ caption: 'Dark', value: 'GREY' }, { caption: 'Light', value: 'WHITE' }, { caption: 'Sand', value: 'SAND' }];
 
 var SET = {
   PROXY: 'setProxy'
@@ -109,6 +118,12 @@ var PaneOptions = (_temp = _class = function (_Component) {
           isUpdateInit: true,
           onEnter: this._setProxy
         }),
+        _react2.default.createElement(_RowInputSelect2.default, {
+          caption: 'UI Theme',
+          captionStyle: titleStyle,
+          options: UI_THEME_OPTIONS,
+          onSelect: this._hSelectTheme
+        }),
         _react2.default.createElement(_RowCheckBox2.default, {
           initValue: _isAdminMode,
           caption: 'View in Admin Mode',
@@ -154,9 +169,21 @@ var PaneOptions = (_temp = _class = function (_Component) {
     _this2._setProxy(_this2.proxyComp.getValue());
   };
 
+  this._hSelectTheme = function (item) {
+    var _props2 = _this2.props,
+        theme = _props2.theme,
+        onChangeTheme = _props2.onChangeTheme;
+
+    if (item && theme.getThemeName() !== item.value) {
+      theme.setThemeName(item.value);
+      onChangeTheme(item.value);
+      //this.forceUpdate()
+    }
+  };
+
   this._refProxy = function (n) {
     return _this2.proxyComp = n;
   };
 }, _temp);
-exports.default = PaneOptions;
+exports.default = (0, _withTheme2.default)(PaneOptions);
 //# sourceMappingURL=PaneOptions.js.map

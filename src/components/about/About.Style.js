@@ -45,8 +45,14 @@ const S = {
   },
   RED: {
     color: '#f44336'
+  },
+  BLOCK: {
+    display: 'block'
+  },
+  NONE: {
+    display: 'none'
   }
-
 };
+
 
 export default S

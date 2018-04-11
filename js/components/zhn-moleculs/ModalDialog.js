@@ -31,6 +31,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -44,6 +48,8 @@ var _Dialog = require('./Dialog.Style');
 var _Dialog2 = _interopRequireDefault(_Dialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TH_ID = 'MODAL_DIALOG';
 
 var CL = {
   SHOWING: 'show-popup',
@@ -116,6 +122,9 @@ var ModalDialog = (_temp = _class = function (_Component) {
         if (nextProps.isNotUpdate) {
           return false;
         }
+        if (!this.props.isShow && !nextProps.isShow) {
+          return false;
+        }
       }
       return true;
     }
@@ -139,13 +148,15 @@ var ModalDialog = (_temp = _class = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          theme = _props.theme,
           isShow = _props.isShow,
           isWithButton = _props.isWithButton,
           style = _props.style,
           caption = _props.caption,
           styleCaption = _props.styleCaption,
           children = _props.children,
-          onClose = _props.onClose;
+          onClose = _props.onClose,
+          TS = theme.getStyle(TH_ID);
 
 
       var _className = void 0,
@@ -161,17 +172,16 @@ var ModalDialog = (_temp = _class = function (_Component) {
           this.wasClosing = true;
         }
       }
-
       return _react2.default.createElement(
         'div',
         {
           className: _className,
-          style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style),
+          style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style, TS.ROOT, TS.EL_BORDER),
           onClick: this._handleClickDialog
         },
         _react2.default.createElement(
           'div',
-          { style: S.CAPTION_DIV },
+          { style: (0, _extends3.default)({}, S.CAPTION_DIV, TS.EL) },
           _react2.default.createElement(
             'span',
             { style: styleCaption },
@@ -197,5 +207,5 @@ var ModalDialog = (_temp = _class = function (_Component) {
   isNotUpdate: false,
   timeout: 450
 }, _temp);
-exports.default = ModalDialog;
+exports.default = (0, _withTheme2.default)(ModalDialog);
 //# sourceMappingURL=ModalDialog.js.map

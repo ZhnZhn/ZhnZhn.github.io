@@ -60,7 +60,8 @@ var C = {
     zIndex: 100
   },
   CSS_LABEL: {
-    color: 'yellow',
+    //color: 'yellow',
+    color: '#f1d600',
     fontSize: '15px'
   },
 

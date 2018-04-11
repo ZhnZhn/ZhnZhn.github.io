@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ComponentActions = require('../../flux/actions/ComponentActions');
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
 var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
@@ -46,15 +50,17 @@ var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import PropTypes from 'prop-types'
+
 var S = {
   MODAL: {
     position: 'static',
     width: '380px',
-    height: '390px',
+    height: '320px',
     margin: '70px auto 0px'
   },
   TITLE_API: {
-    width: '90px'
+    width: '80px'
   },
   TITLE_OPTION: {
     width: '110px'
@@ -63,7 +69,6 @@ var S = {
     color: '#232f3b'
   }
 };
-//import PropTypes from 'prop-types'
 
 var SettingsDialog = function (_Component) {
   (0, _inherits3.default)(SettingsDialog, _Component);
@@ -131,6 +136,7 @@ var SettingsDialog = function (_Component) {
               titleStyle: S.TITLE_OPTION,
               btStyle: S.BT,
               data: data,
+              onChangeTheme: _ComponentActions2.default.changeTheme,
               onClose: onClose
             })
           )

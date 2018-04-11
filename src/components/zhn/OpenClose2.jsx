@@ -1,43 +1,51 @@
 import React, { Component } from 'react';
 
-const styles = {
-  rootDiv: {
-    backgroundColor: '#4D4D4D',
+import C from '../styles/Color';
+
+const CL_SHOW = 'show-popup';
+
+const DF = {
+  FILL_OPEN: C.YELLOW,
+  FILL_CLOSE: C.BLANK
+};
+
+const S = {
+  ROOT: {
     lineHeight: 1.5
   },
-  divSvg : {
+  DIV_SVG : {
     display: 'inline-block',
     width: '16px',
     height: '16px',
     marginLeft: '8px'
   },
-  labelCaption: {
+  SVG: {
+    display: 'inline-block'
+  },
+  CAPTION: {
+    color: C.SIREN,
     paddingLeft: '4px',
-    verticalAlign: 'top',
-    color: 'rgba(164, 135, 212, 1)',
+    verticalAlign: 'top',    
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
     cursor: 'pointer'
-  },
-  itemRow : {
-    backgroundColor: '#404040'
   }
 };
 
-const pathOpen = "M 2,14 L 14,14 14,2 2,14";
-const pathClose = "M 2,2 L 14,8 2,14 2,2";
+const PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
+const PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
 class OpenClose2 extends Component {
+   static defaultProps = {
+     fillOpen: DF.FILL_OPEN,
+     fillClose: DF.FILL_CLOSE
+   }
    constructor(props){
      super();
-     const isOpen = (props.isClose) ? false : true
-         , fillOpen = (props.fillOpen) ? props.fillOpen : 'yellow'
-         , fillClose = (props.fillClose) ? props.fillClose : '#4D4D4D';
+     const { isClose } = props;
       this.state = {
-        isOpen: isOpen,
-        fillOpen: fillOpen,
-        fillClose: fillClose
+        isOpen: isClose ? false : true
       }
    }
 
@@ -48,9 +56,11 @@ class OpenClose2 extends Component {
   render(){
     const {
             style, styleNotSelected, styleCaption, caption,
+            fillOpen, fillClose,
             isDraggable, option, onDragStart, onDragEnter, onDragOver, onDragLeave, onDrop,
             children
           } = this.props
+        , { isOpen } = this.state
         , _dragOption = (isDraggable)
               ? {
                   draggable : true,
@@ -63,52 +73,50 @@ class OpenClose2 extends Component {
               : undefined ;
 
     let _pathV, _fillV, _displayDivStyle, _classShow, _styleNotSelected;
-    if (this.state.isOpen){
-      _pathV = pathOpen;
-      _fillV = this.state.fillOpen;
+    if (isOpen){
+      _pathV = PATH_OPEN;
+      _fillV = fillOpen;
       _displayDivStyle = 'block';
-      _classShow = 'show-popup';
+      _classShow = CL_SHOW;
       _styleNotSelected = null;
 
     } else {
-      _pathV = pathClose;
-      _fillV = this.state.fillClose;
+      _pathV = PATH_CLOSE;
+      _fillV = fillClose;
       _displayDivStyle = 'none';
       _classShow = null;
       _styleNotSelected = styleNotSelected;
     }
 
     return (
-      <div style={Object.assign({}, styles.rootDiv, style)}>
+      <div style={{...S.ROOT, ...style}}>
         <div
            className="not-selected"
            style={_styleNotSelected}
            onClick={this._handleClickOpenClose}
            {..._dragOption}
          >
-          <div style={styles.divSvg}>
+          <div style={S.DIV_SVG}>
              <svg
                 viewBox="0 0 16 16" width="100%" height="100%"
                 preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
-                style={{display: 'inline-block'}}
+                style={S.SVG}
               >
-             <path
-                d={_pathV}
-                fill={_fillV}
-                strokeWidth="1" stroke={this.state.fillOpen}
-             >
-             </path>
+               <path
+                  d={_pathV} fill={_fillV}
+                  strokeWidth="1" stroke={fillOpen}
+               />
              </svg>
          </div>
-         <span style={Object.assign({}, styles.labelCaption, styleCaption)} >
+         <span style={{...S.CAPTION, ...styleCaption}} >
             {caption}
          </span>
        </div>
-      <div className={_classShow} style={{display: _displayDivStyle}}>
-        {children}
-      </div>
+       <div className={_classShow} style={{display: _displayDivStyle}}>
+         {children}
+       </div>
      </div>
-    )
+    );
   }
 }
 

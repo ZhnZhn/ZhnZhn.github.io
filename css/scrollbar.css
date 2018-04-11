@@ -6,25 +6,33 @@
 
 .with-scroll::-webkit-scrollbar-track {
   /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
-  background-color: black;
+  /*background-color: black;*/
+  /*background-color: #1b2836;*/  
   width: 2px;
   border-radius: 2px;
-}
-
-.with-scroll::-webkit-scrollbar-track-piece {
-  width: 2px;
-  background-color: #1b2836;
-
-  /* background-color:#333333; */
 }
 
 .with-scroll::-webkit-scrollbar-thumb {
   width: 3px;
   height: 50px;
-	background-color: #8BC34A;
-	/*background-color:#909090;*/
+  background-color: #8BC34A;
+  /*background-color:#909090;*/
   border-radius: 2px;
   /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
+}
+
+.with-scroll::-webkit-scrollbar-track-piece {
+  background-color: #1b2836;  
+  width: 2px; 
+}
+.with-scroll--grey::-webkit-scrollbar-track-piece {  
+  background-color: #1b2836;  
+}
+.with-scroll--white::-webkit-scrollbar-track-piece {
+  background-color: #bcd8f5;  
+}
+.with-scroll--sand::-webkit-scrollbar-track-piece {
+  background-color: #795548;  
 }
 
 .scroll-browser-by{

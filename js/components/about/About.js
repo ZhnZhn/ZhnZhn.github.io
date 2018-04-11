@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
 var _ChartActions = require('../../flux/actions/ChartActions');
@@ -64,15 +68,18 @@ var _IconLogoBar = require('./IconLogoBar');
 
 var _IconLogoBar2 = _interopRequireDefault(_IconLogoBar);
 
-var _ContainerStyles = require('../styles/ContainerStyles');
-
-var _ContainerStyles2 = _interopRequireDefault(_ContainerStyles);
-
 var _About = require('./About.Style');
 
 var _About2 = _interopRequireDefault(_About);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TH_ID = 'ABOUT';
+
+var CL = {
+  ABOUT: 'about-container',
+  SHOW: 'show-popup'
+};
 
 var STEP = {
   T1: "Choose a data source Browser from Topics [t]",
@@ -85,6 +92,13 @@ var STEP = {
 var About = function (_Component) {
   (0, _inherits3.default)(About, _Component);
 
+  /*
+  static propsTypes = {
+     theme: PropTypes.object,
+     isShow: PropTypes.bool,
+     store: PropTypes.object
+  }
+  */
   function About(props) {
     (0, _classCallCheck3.default)(this, About);
 
@@ -134,17 +148,20 @@ var About = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _state = this.state,
+      var theme = this.props.theme,
+          TS = theme.getStyle(TH_ID),
+          _state = this.state,
           isShow = _state.isShow,
           isCloseProviders = _state.isCloseProviders,
-          _classOpen = isShow ? "show-popup" : null,
-          _styleOpen = isShow ? { display: 'block' } : { display: 'none' };
+          _clOpen = isShow ? CL.SHOW : '',
+          _clRoot = CL.ABOUT + ' ' + _clOpen,
+          _styleOpen = isShow ? _About2.default.BLOCK : _About2.default.NONE;
 
       return _react2.default.createElement(
         'div',
         {
-          className: _classOpen,
-          style: Object.assign({}, _ContainerStyles2.default.aboutRootDiv, _styleOpen)
+          className: _clRoot,
+          style: (0, _extends3.default)({}, _styleOpen, TS.ROOT)
         },
         _react2.default.createElement(
           _BrowserCaption2.default,
@@ -323,5 +340,5 @@ var About = function (_Component) {
   return About;
 }(_react.Component);
 
-exports.default = About;
+exports.default = (0, _withTheme2.default)(About);
 //# sourceMappingURL=About.js.map

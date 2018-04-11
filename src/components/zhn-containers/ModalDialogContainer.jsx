@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 
 const CL = {
@@ -9,23 +9,25 @@ const CL = {
 };
 
 const STYLE = {
-  SHOW : {
-    display : 'block'
+  SHOW: {
+    display: 'block'
   },
-  HIDE : {
-    display : 'none'
+  HIDE: {
+    display: 'none'
   },
-  HIDE_BACKGROUND : {
-    backgroundColor : 'rgba(0,0,0, 0)'
+  HIDE_BACKGROUND: {
+    backgroundColor: 'rgba(0,0,0, 0)'
   }
 }
 
 class ModalDialogContainer extends Component {
+  /*
   static propTypes = {
     isShow  : PropTypes.bool,
     timeout : PropTypes.number,
     onClose : PropTypes.func
   }
+  */
   static defaultProps = {
     timeout : 450
   }

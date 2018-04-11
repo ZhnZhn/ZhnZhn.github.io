@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import ModalDialogContainer from '../zhn-containers/ModalDialogContainer';
-import {ComponentActionTypes} from '../../flux/actions/ComponentActions';
+import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
 import RouterModalDialog from './RouterModalDialog';
 
 class DialogContainer extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func
     })
   }
+  */
 
   state = {
     isShow : false,
@@ -29,7 +31,7 @@ class DialogContainer extends Component {
     this.unsubscribe()
   }
   _onStore = (actionType, option) => {
-     if (actionType === ComponentActionTypes.SHOW_MODAL_DIALOG){
+     if (actionType === CAT.SHOW_MODAL_DIALOG){
        const type = option.modalDialogType
            , { inits, shows, data, dialogs } = this.state;
 
@@ -50,17 +52,6 @@ class DialogContainer extends Component {
                shows, data, dialogs
              });
            })
-        /*
-         dialogs.push({
-           type : type,
-           comp : RouterModalDialog[type]
-         });
-         inits[type] = true
-         this.setState({
-           isShow: true, currentDialog: type,
-           shows, data, dialogs
-         });
-         */
        }
      }
   }
@@ -76,18 +67,21 @@ class DialogContainer extends Component {
 
   _renderDialogs = () => {
     const { store } = this.props
-        , { shows, data, dialogs } = this.state;
+        , {
+            shows, data, dialogs,
+          } = this.state;
 
-    return dialogs.map((dialog, index) => {
-      const { type, comp } = dialog;
-      return React.createElement(comp, {
-         key: type,
-         isShow: shows[type],
-         data: data[type],
-         store : store,
-         onClose: this._handleClose.bind(null, type)
-      })
-    })
+    return dialogs
+      .map(dialog => {
+        const { type, comp } = dialog;
+        return React.createElement(comp, {
+           key: type,
+           isShow: shows[type],
+           data: data[type],
+           store: store,
+           onClose: this._handleClose.bind(null, type)
+        });
+      });
   }
 
   render(){

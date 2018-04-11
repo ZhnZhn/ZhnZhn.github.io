@@ -10,15 +10,6 @@
 .shadow-right {
   position:relative;
 }
-.shadow-right:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255, 0) 70%, #1b2836)
-}
 
 .gap-right:before {
    content: '';
@@ -26,6 +17,5 @@
    right: 0;
    top: 0;
    width: 38px;
-   height: 100%;
-   background: #1b2836;
+   height: 100%;   
 }

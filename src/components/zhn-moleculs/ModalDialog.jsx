@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+import withTheme from '../hoc/withTheme'
+
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
 
 import STYLE from './Dialog.Style'
+
+const TH_ID = 'MODAL_DIALOG';
 
 const CL = {
   SHOWING : 'show-popup',
@@ -56,6 +60,9 @@ class ModalDialog extends Component {
        if (nextProps.isNotUpdate){
          return false;
        }
+       if(!this.props.isShow && !nextProps.isShow){
+         return false;
+       }
      }
      return true;
    }
@@ -92,10 +99,12 @@ class ModalDialog extends Component {
 
   render(){
     const {
+            theme,
             isShow, isWithButton, style,
             caption, styleCaption,
             children, onClose
-          } = this.props;
+          } = this.props
+          , TS = theme.getStyle(TH_ID);
 
     let _className, _style;
 
@@ -109,14 +118,17 @@ class ModalDialog extends Component {
         this.wasClosing = true
       }
     }
-
     return (
          <div
              className={_className}
-             style={{ ...S.ROOT_DIV, ...S.ROOT_DIV_MODAL, ...style, ..._style}}
+             style={{
+               ...S.ROOT_DIV, ...S.ROOT_DIV_MODAL,
+               ...style, ..._style,
+               ...TS.ROOT, ...TS.EL_BORDER
+             }}
              onClick={this._handleClickDialog}
          >
-             <div style={S.CAPTION_DIV}>
+             <div style={{...S.CAPTION_DIV, ...TS.EL}}>
                 <span style={styleCaption}>{caption}</span>
                 <SvgClose
                   style={S.SVG_CLOSE}
@@ -132,4 +144,4 @@ class ModalDialog extends Component {
   }
 }
 
-export default ModalDialog
+export default withTheme(ModalDialog)

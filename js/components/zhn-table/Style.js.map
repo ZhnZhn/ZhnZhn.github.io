@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\zhn-table\\Style.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\zhn-table\\Style.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/components/zhn-table/Style.js"
+ ],
+ "file": "../../../src/components/zhn-table/Style.js",
  "names": [
   "S",
   "ROOT",

@@ -1,1 +1,30 @@
-{"version":3,"sources":["../../../src/components/zhn/Browser.jsx"],"names":["SHOW_POPUP","S","BLOCK","display","NONE","Browser","isShow","style","children","_styleOpen","_classOpen","browserRootDiv","propTypes","bool","object"],"mappings":";;;;;;;;;;AAAA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,aAAa,YAAnB;AACA,IAAMC,IAAI;AACRC,SAAQ;AACNC,aAAU;AADJ,GADA;AAIRC,QAAO;AACLD,aAAU;AADL;AAJC,CAAV;;AASA,IAAME,UAAU,SAAVA,OAAU,OAAiC;AAAA,MAA9BC,MAA8B,QAA9BA,MAA8B;AAAA,MAAtBC,KAAsB,QAAtBA,KAAsB;AAAA,MAAfC,QAAe,QAAfA,QAAe;;AAC/C,MAAMC,aAAaH,SAASL,EAAEC,KAAX,GAAmBD,EAAEG,IAAxC;AAAA,MACMM,aAAaJ,SAASN,UAAT,GAAsB,IADzC;AAEA,SACG;AAAA;AAAA;AACG,iBAAWU,UADd;AAEG,wCAAW,0BAAMC,cAAjB,EAAoCJ,KAApC,EAA8CE,UAA9C;AAFH;AAIID;AAJJ,GADH;AAQD,CAXD;;AAaAH,QAAQO,SAAR,2CAAoB;AAClBN,UAAQ,oBAAUO,IADA;AAElBN,SAAO,oBAAUO;AAFC,CAApB;;kBAKeT,O","file":"Browser.js","sourcesContent":["import React from 'react';\r\nimport PropTypes from \"prop-types\";\r\n\r\nimport STYLE from '../styles/ContainerStyles';\r\n\r\nconst SHOW_POPUP = 'show-popup';\r\nconst S = {\r\n  BLOCK : {\r\n    display : 'block'\r\n  },\r\n  NONE : {\r\n    display : 'none'\r\n  }\r\n};\r\n\r\nconst Browser = ({ isShow, style, children }) => {\r\n  const _styleOpen = isShow ? S.BLOCK : S.NONE\r\n      , _classOpen = isShow ? SHOW_POPUP : null;\r\n  return (\r\n     <div\r\n        className={_classOpen}\r\n        style={{...STYLE.browserRootDiv, ...style, ..._styleOpen}}\r\n      >\r\n        {children}\r\n     </div>\r\n  );\r\n};\r\n\r\nBrowser.propTypes = {\r\n  isShow: PropTypes.bool,\r\n  style: PropTypes.object\r\n}\r\n\r\nexport default Browser\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/Browser.js"
+ ],
+ "file": "../../../src/components/zhn/Browser.js",
+ "names": [
+  "TH_ID",
+  "CL",
+  "BROWSER",
+  "SHOW",
+  "S",
+  "BLOCK",
+  "display",
+  "NONE",
+  "Browser",
+  "props",
+  "theme",
+  "isShow",
+  "style",
+  "children",
+  "TS",
+  "getStyle",
+  "_styleOpen",
+  "_clOpen",
+  "_clRoot",
+  "ROOT"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAGA;;;;;;AAEA,IAAMA,QAAQ,SAAd;AAJA;;AAMA,IAAMC,KAAK;AACTC,WAAS,mBADA;AAETC,QAAM;AAFG,CAAX;AAIA,IAAMC,IAAI;AACRC,SAAO;AACLC,aAAS;AADJ,GADC;AAIRC,QAAM;AACJD,aAAS;AADL;AAJE,CAAV;;IASME,O;;;;;;;;;;;AACJ;;;;;;;6BAOQ;AAAA,mBAKI,KAAKC,KALT;AAAA,UAECC,KAFD,UAECA,KAFD;AAAA,UAGCC,MAHD,UAGCA,MAHD;AAAA,UAGSC,KAHT,UAGSA,KAHT;AAAA,UAICC,QAJD,UAICA,QAJD;AAAA,UAMAC,EANA,GAMKJ,MAAMK,QAAN,CAAef,KAAf,CANL;AAAA,UAOAgB,UAPA,GAOaL,SAASP,EAAEC,KAAX,GAAmBD,EAAEG,IAPlC;AAAA,UAQAU,OARA,GAQUN,SAASV,GAAGE,IAAZ,GAAmB,EAR7B;AAAA,UASAe,OATA,GASajB,GAAGC,OAThB,SAS2Be,OAT3B;;AAUN,aACE;AAAA;AAAA;AACG,qBAAWC,OADd;AAEG,4CACKN,KADL,EACeI,UADf,EAEKF,GAAGK,IAFR;AAFH;AAOIN;AAPJ,OADF;AAWD;;;;;kBAGY,yBAAUL,OAAV,C"
+}

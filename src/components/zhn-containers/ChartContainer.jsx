@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import withTheme from '../hoc/withTheme'
+
 import ChartStore from '../../flux/stores/ChartStore';
 import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 
@@ -12,6 +14,8 @@ import SvgHrzResize from '../zhn/SvgHrzResize';
 import ScrollPane from '../zhn/ScrollPane';
 
 import ItemFactory from '../factories/ItemFactory';
+
+const TH_ID = 'CHART_CONTAINER';
 
 const CL = {
   ROOT: "item-container",
@@ -195,7 +199,8 @@ class ChartContainer extends Component {
    _refSpComp = node => this.spComp = node
 
    render(){
-     const  { caption } = this.props
+     const  { caption, theme } = this.props
+          , TS = theme.getStyle(TH_ID)
           , { isShow, isMore } = this.state
           , _styleIsShow = (isShow)
                ? S.INLINE
@@ -207,7 +212,7 @@ class ChartContainer extends Component {
         <div
            ref={this._refRootNode}
            className={_classIsShow}
-           style={_styleIsShow}
+           style={{ ..._styleIsShow, ...TS.ROOT }}
         >
           <ChartMorePopup
             isShow={isMore}
@@ -245,4 +250,4 @@ class ChartContainer extends Component {
    }
 }
 
-export default ChartContainer
+export default withTheme(ChartContainer)

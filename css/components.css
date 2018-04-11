@@ -23,8 +23,9 @@
 
 .popup-menu {
   position: absolute;
-  background-color: rgba(77, 77, 77, 1);
-  border-bottom: 4px solid green;
+  //background-color: rgba(77, 77, 77, 1);
+  background-color: inherit;
+  border-bottom: 4px solid #80c040;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 5px;
 }

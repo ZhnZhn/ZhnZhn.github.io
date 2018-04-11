@@ -1,5 +1,5 @@
 
-import {ComponentActionTypes} from '../actions/ComponentActions';
+import { ComponentActionTypes as CAT } from '../actions/ComponentActions';
 import Factory from '../logic/Factory';
 
 const ItemDialogLogic = {
@@ -62,19 +62,19 @@ const CheckBoxChartLogic = {
 const ComponentSlice = {
   dialogInit : {},
   onShowAbout(){
-    this.trigger(ComponentActionTypes.SHOW_ABOUT);
+    this.trigger(CAT.SHOW_ABOUT);
   },
 
-  onShowDialog(type, browserType, conf){    
+  onShowDialog(type, browserType, conf){
     ItemDialogLogic.showItemDialog(
       this.dialogInit, { type, browserType, conf }
     ).then(r => {
-       this.trigger(ComponentActionTypes.SHOW_DIALOG, r)
+       this.trigger(CAT.SHOW_DIALOG, r)
     });
   },
 
   onCloseDialog(Comp) {
-    this.trigger(ComponentActionTypes.CLOSE_DIALOG, {
+    this.trigger(CAT.CLOSE_DIALOG, {
       type: Comp.key,
       caption: Comp.props.caption
     })
@@ -84,10 +84,10 @@ const ComponentSlice = {
     ItemDialogLogic.showOptionDialog(
       this.dialogInit, { type, data: option }
     ).then(r => {
-      this.trigger(ComponentActionTypes.SHOW_DIALOG, r)
+      this.trigger(CAT.SHOW_DIALOG, r)
     })
     .catch(err => {
-      this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, {
+      this.trigger(CAT.SHOW_MODAL_DIALOG, {
         modalDialogType: 'alert',
         alertCaption: 'Failed Load',
         alertDescr: err.message
@@ -115,7 +115,11 @@ const ComponentSlice = {
 
   onShowModalDialog(modalDialogType, option={}){
     option.modalDialogType = modalDialogType;
-    this.trigger(ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+    this.trigger(CAT.SHOW_MODAL_DIALOG, option);
+  },
+
+  onChangeTheme(themeName){
+    this.trigger(CAT.CHANGE_THEME, themeName)
   }
 }
 

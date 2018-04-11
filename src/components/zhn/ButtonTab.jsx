@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
+
+import withTheme from '../hoc/withTheme'
+
+const TH_ID = 'ELEMENT';
 
 class ButtonTab extends Component {
+  /*
   static propTypes = {
     style : PropTypes.object,
     isShow : PropTypes.bool,
     caption : PropTypes.string,
     onClick : PropTypes.func
   }
+  */
 
   constructor(props){
     super();
@@ -30,14 +36,15 @@ class ButtonTab extends Component {
   }
 
   render(){
-    const {caption, style, children} = this.props;
-    const _rootClass = (this.state.isShow)
+    const {theme, caption, style, children} = this.props
+        , TS = theme.getStyle(TH_ID)
+        , _rootClass = (this.state.isShow)
              ? 'button-tab button-tab--show not-selected'
              : 'button-tab not-selected';
     return (
       <div
         className={_rootClass}
-        style={Object.assign({}, style)}
+        style={{...style, ...TS.BG}}
         onClick={this._handleClick}
       >
          {caption}
@@ -47,4 +54,4 @@ class ButtonTab extends Component {
   }
 }
 
-export default ButtonTab
+export default withTheme(ButtonTab)

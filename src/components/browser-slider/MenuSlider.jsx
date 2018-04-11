@@ -145,10 +145,7 @@ _refFirst = n => this._firstNode = n
          })
 
    return (
-     <div
-       //className="with-scroll"
-       style={S.PAGE}
-     >
+     <div style={S.PAGE}>
        {items}
        <ErrMsg errMsg={errMsg} />
      </div>

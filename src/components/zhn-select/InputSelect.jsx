@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 //import PropTypes from 'prop-types'
 
 import ArrowCell from './ArrowCell';
-import SpanBt from './SpanButton';
+
+import BtCircle from '../zhn/ButtonCircle2'
 
 const MAX_WITHOUT_ANIMATION = 800;
 
@@ -492,17 +493,17 @@ class InputSelect extends Component {
           </span>
         </span>
         <span style={S.FOOTER_BUTTONS}>
-          <SpanBt
+          <BtCircle
              style={S.FOOTER_MARGIN}
              caption="Dn"
              onClick={this._stepDownOption}
           />
-          <SpanBt
+          <BtCircle
              style={S.FOOTER_MARGIN}
              caption="Up"
              onClick={this._stepUpOption}
           />
-          <SpanBt
+          <BtCircle
             caption="CL"
             onClick={this.clearInput}
           />
@@ -614,7 +615,7 @@ class InputSelect extends Component {
     } else if (isLoadingFailed) {
        _placeholder=`Loading ${optionNames} Failed`;
        _afterInputEl = (
-         <SpanBt
+         <BtCircle
            style={S.SPINNER_FAILED_CELL}
            data-loader="circle-failed"
            onClick={onLoadOption}

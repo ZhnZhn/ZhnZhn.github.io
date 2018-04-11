@@ -123,6 +123,9 @@ var ComponentSlice = {
 
     option.modalDialogType = modalDialogType;
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+  },
+  onChangeTheme: function onChangeTheme(themeName) {
+    this.trigger(_ComponentActions.ComponentActionTypes.CHANGE_THEME, themeName);
   }
 };
 

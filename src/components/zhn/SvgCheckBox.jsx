@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+import C from '../styles/Color';
+
 const S = {
   DIV : {
     display: 'inline-block',
@@ -13,12 +15,14 @@ const S = {
   }
 };
 
+const C_GREY = "#777777";
+
 const EL_CHECKED = (
   <path
       d="M 2,3 L 8,14 14,3"
       strokeWidth="2"
-      stroke="yellow"
-      fill="#4D4D4D"
+      stroke={C.YELLOW}
+      fill={C.BLANK}
   />
 );
 
@@ -61,7 +65,7 @@ class SvgCheckBox extends Component {
             state, props
           } = this
         , { onCheck, onUnCheck } = props
-        , { isChecked } = state;    
+        , { isChecked } = state;
     if (!isChecked && _isOnCheck){
       onCheck(this);
     } else if (_isOnUnCheck){
@@ -89,10 +93,9 @@ class SvgCheckBox extends Component {
           <rect
              x="1" y="1"
              height="14" width="14"
-             strokeWidth="2" stroke="#777777"
-             fill="#4D4D4D" rx="3"
-          >
-          </rect>
+             strokeWidth="2" rx="3"
+             stroke={C_GREY}  fill={C.BLANK}
+          />
           {_elChecked}
         </svg>
       </div>
@@ -100,7 +103,7 @@ class SvgCheckBox extends Component {
   }
 
   setUnchecked = () => {
-    this.setState({ isChecked : false });
+    this.setState({ isChecked: false });
   }
 }
 

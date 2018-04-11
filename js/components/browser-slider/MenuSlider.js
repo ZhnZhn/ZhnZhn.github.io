@@ -181,10 +181,7 @@ var MenuSlider = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        {
-          //className="with-scroll"
-          style: S.PAGE
-        },
+        { style: S.PAGE },
         items,
         _react2.default.createElement(_ErrMsg2.default, { errMsg: errMsg })
       );
@@ -278,4 +275,4 @@ var MenuSlider = function (_Component) {
 }(_react.Component);
 
 exports.default = MenuSlider;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\MenuSlider.js.map
+//# sourceMappingURL=MenuSlider.js.map

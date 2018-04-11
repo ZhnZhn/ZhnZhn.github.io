@@ -30,11 +30,17 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TH_ID = 'ELEMENT';
 
 var CL = "not-selected shadow-right";
 var MAX_LENGTH = 45;
@@ -102,6 +108,7 @@ var ItemHeader = (_temp2 = _class = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          theme = _props.theme,
           isOpen = _props.isOpen,
           rootStyle = _props.rootStyle,
           captionStyle = _props.captionStyle,
@@ -110,12 +117,13 @@ var ItemHeader = (_temp2 = _class = function (_Component) {
           children = _props.children,
           onClick = _props.onClick,
           onClose = _props.onClose,
+          TS = theme.getStyle(TH_ID),
           _title = title || caption.length > MAX_LENGTH ? caption : undefined,
           _styleCaption = isOpen ? (0, _extends3.default)({}, S.CAPTION, captionStyle, S.OPEN) : (0, _extends3.default)({}, S.CAPTION, captionStyle, S.CLOSE);
 
       return _react2.default.createElement(
         'div',
-        { style: (0, _extends3.default)({}, S.ROOT, rootStyle) },
+        { style: (0, _extends3.default)({}, S.ROOT, rootStyle, TS.ROOT) },
         _react2.default.createElement(
           'span',
           {
@@ -141,5 +149,5 @@ var ItemHeader = (_temp2 = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   caption: ''
 }, _temp2);
-exports.default = ItemHeader;
+exports.default = (0, _withTheme2.default)(ItemHeader);
 //# sourceMappingURL=ItemHeader.js.map

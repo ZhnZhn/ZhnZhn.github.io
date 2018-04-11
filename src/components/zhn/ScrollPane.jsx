@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 
+import withThemeRef from '../hoc/withThemeRef'
+
+const TH_ID = 'SCROLL_PANE'
+const CL = 'with-scroll';
+
 class ScrollPane extends Component {
+
+  _refRootNode = node => this.rootNode = node
+
   render(){
-    const { style, className="", children } = this.props;
+    const {
+            theme,
+            style, className,
+            children
+          } = this.props
+        , TS = theme.getStyle(TH_ID)
+        , _cl = `${CL} ${TS.CL_SCROLL} ${className || ''}`;
     return (
       <div
-        ref={ node => this.rootNode = node}
-        className={`with-scroll ${className}`}
+        ref={this._refRootNode}
+        className={_cl}
         style={style}
       >
          {children}
@@ -19,4 +33,4 @@ class ScrollPane extends Component {
   }
 }
 
-export default ScrollPane
+export default withThemeRef(ScrollPane)

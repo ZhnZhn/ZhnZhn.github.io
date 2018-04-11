@@ -26,11 +26,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from 'prop-types'
+
 
 var CL = {
   INIT: 'modal-root',
@@ -61,6 +60,14 @@ var ModalDialogContainer = (_temp = _class = function (_Component) {
     _this.wasClosing = true;
     return _this;
   }
+  /*
+  static propTypes = {
+    isShow  : PropTypes.bool,
+    timeout : PropTypes.number,
+    onClose : PropTypes.func
+  }
+  */
+
 
   (0, _createClass3.default)(ModalDialogContainer, [{
     key: 'componentDidUpdate',
@@ -106,10 +113,5 @@ var ModalDialogContainer = (_temp = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   timeout: 450
 }, _temp);
-ModalDialogContainer.propTypes = process.env.NODE_ENV !== "production" ? {
-  isShow: _propTypes2.default.bool,
-  timeout: _propTypes2.default.number,
-  onClose: _propTypes2.default.func
-} : {};
 exports.default = ModalDialogContainer;
 //# sourceMappingURL=ModalDialogContainer.js.map

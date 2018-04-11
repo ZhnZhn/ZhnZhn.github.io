@@ -4,6 +4,8 @@ import MenuTitle from './MenuTitle'
 import MenuItem from './MenuItem'
 import ErrMsg from './ErrMsg'
 
+const T_O_FOCUS_FIRST = 1000;
+
 class Frame extends Component {
 
   constructor(props){
@@ -78,10 +80,7 @@ class Frame extends Component {
         , { errMsg } = this.state;
 
     return (
-      <div
-        //className="with-scroll"
-        style={rootStyle}
-      >
+      <div style={rootStyle}>
         <MenuTitle
           ref={this._refFirst}
           title={title}
@@ -102,7 +101,7 @@ class Frame extends Component {
   componentDidUpdate(prevProps){
     const { pageNumber, pageCurrent } = this.props;
     if ( pageNumber === pageCurrent ) {
-      setTimeout(this.focusFirst, 1000)
+      setTimeout(this.focusFirst, T_O_FOCUS_FIRST)
     }
   }
 }

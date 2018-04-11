@@ -51,7 +51,7 @@ var MODEL = {
   }, {
     id: _Type.BrowserType.WATCH_LIST,
     cn: CL.W,
-    title: 'Watch'
+    title: 'Watch List'
     /*
     ,{
       id: 'ABOUT',

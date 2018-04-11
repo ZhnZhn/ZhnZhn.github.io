@@ -1,0 +1,21 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/styles/ConfigGeneral.js"
+ ],
+ "file": "../../../src/components/styles/ConfigGeneral.js",
+ "names": [
+  "styleConfig",
+  "themeName",
+  "undefined",
+  "style",
+  "createStyle",
+  "CSS_RULE",
+  "CL_SCROLL",
+  "ROOT",
+  "BG",
+  "EL",
+  "EL_BORDER"
+ ],
+ "mappings": ";;;;;;;;;;;;AAAA,IAAMA,cAAc;AAClBC,aAAWC,SADO;AAElBC,SAAOD,SAFW;;AAIlBE,eAAa,qBAACC,QAAD,EAAc;AACzB,WAAO;AACLC,iBAAWD,SAASC,SADf;AAELC,uCACKF,SAASG,EADd,CAFK;AAKLC,qCACKJ,SAASI,EADd,CALK;AAQLC,4CACKL,SAASK,SADd;AARK,KAAP;AAYD;AAjBiB,CAApB;;kBAoBeV,W"
+}

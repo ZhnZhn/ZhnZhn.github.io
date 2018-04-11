@@ -202,8 +202,10 @@ ChartConfig.theme = {
     spacingTop: _conf2.default.THEME_SPACING_TOP,
     spacingBottom: _conf2.default.SPACING_BOTTOM,
     marginRight: _conf2.default.MARGIN_RIGHT,
-    plotBackgroundColor: _Color2.default.PLOT,
-    backgroundColor: _Color2.default.CHART,
+    plotBackgroundColor: 'transparent',
+    backgroundColor: 'transparent',
+    //plotBackgroundColor: COLOR.PLOT,
+    //backgroundColor : COLOR.CHART,
     reflow: false,
 
     panning: true,
@@ -272,15 +274,16 @@ ChartConfig.theme = {
       x: -10,
       y: -20,
       theme: {
-        fill: _Color2.default.BG_TITLE,
+        //fill : COLOR.BG_TITLE,
+        fill: 'transparent',
         states: {
           hover: {
-            fill: _Color2.default.BG_TITLE,
+            //fill : COLOR.BG_TITLE,
             'stroke-width': 2,
             stroke: _Color2.default.HOVER
           },
           select: {
-            fill: _Color2.default.BG_TITLE,
+            //fill : COLOR.BG_TITLE,
             'stroke-width': 3,
             stroke: _Color2.default.HOVER
           }

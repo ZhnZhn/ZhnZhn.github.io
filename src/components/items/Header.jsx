@@ -1,11 +1,14 @@
 import React from 'react';
 //import PropTypes from "prop-types";
 
+import withTheme from '../hoc/withTheme'
+
 import SvgCheckBox from '../zhn/SvgCheckBox';
 import SvgClose from '../zhn/SvgClose';
 import ValueMovingBadge from './ValueMovingBadge';
 
-const CL = "not-selected shadow-right";
+const TH_ID = 'ELEMENT';
+const CL = 'not-selected shadow-right';
 
 const S = {
   ROOT: {
@@ -39,7 +42,7 @@ const S = {
   },
   CAPTION_WIDTH: {
     textAlign: 'left',
-    width: '280px'    
+    width: '280px'
   },
   TIME: {
     color : 'rgb(253, 179, 22)',
@@ -55,12 +58,14 @@ const S = {
 
 const Header = (props) => {
   const {
+          theme,
           isOpen,
           chartType, onCheck, onUnCheck,
           itemCaption, itemTitle, itemTime, onToggle,
           valueMoving, isAdminMode, crValueMoving,
           onClose
         } = props
+      , TS = theme.getStyle(TH_ID)
       , _styleIsOpen = isOpen
              ? S.CAPTION_OPEN
              : { ...S.CAPTION_OPEN, ...S.CAPTION_CLOSE }
@@ -85,7 +90,7 @@ const Header = (props) => {
            : null;
 
   return (
-    <div style={S.ROOT}>
+    <div style={{...S.ROOT, ...TS.ROOT }}>
       <SvgCheckBox
          rootStyle={S.CHECK_BOX}
          chartType={chartType}
@@ -130,4 +135,4 @@ Header.propTypes = {
 }
 */
 
-export default Header
+export default withTheme(Header)

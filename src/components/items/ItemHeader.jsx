@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 
+import withTheme from '../hoc/withTheme'
+
 import SvgClose from '../zhn/SvgClose';
+
+const TH_ID = 'ELEMENT';
 
 const CL = "not-selected shadow-right";
 const MAX_LENGTH = 45;
@@ -55,12 +59,14 @@ class ItemHeader extends Component {
 
   render(){
     const {
+            theme,
             isOpen,
             rootStyle, captionStyle,
             caption, title,
             children,
             onClick, onClose
           } = this.props
+        , TS = theme.getStyle(TH_ID)
         , _title = title || caption.length > MAX_LENGTH
               ? caption
               : undefined
@@ -68,7 +74,10 @@ class ItemHeader extends Component {
             ? { ...S.CAPTION, ...captionStyle, ...S.OPEN }
             : { ...S.CAPTION, ...captionStyle, ...S.CLOSE };
     return (
-      <div style={{ ...S.ROOT, ...rootStyle}}>
+      <div style={{
+         ...S.ROOT, ...rootStyle,
+         ...TS.ROOT
+       }}>
         <span
            className={CL}
            title={_title}
@@ -90,4 +99,4 @@ class ItemHeader extends Component {
   }
 }
 
-export default ItemHeader
+export default withTheme(ItemHeader)

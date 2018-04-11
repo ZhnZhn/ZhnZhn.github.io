@@ -4,9 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
 
 var _SvgMore = require('./SvgMore');
 
@@ -18,15 +26,20 @@ var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TH_ID = 'ELEMENT';
 //import PropTypes from "prop-types";
 
-var CL = "gap-right";
+var CL = {
+  ROOT: 'gap-right',
+  NOT_SELECTED: 'not-selected'
+};
 
 var S = {
   ROOT: {
     position: 'relative',
     backgroundColor: '#1b2836',
     //color: 'rgba(164, 135, 212, 1)',
+    //color: 'silver'
     lineHeight: '1.8',
     paddingTop: '4px',
     paddingLeft: '4px',
@@ -39,14 +52,16 @@ var S = {
     textOverflow: 'clip'
   },
   CAPTION: {
-    color: 'silver',
+    //color: 'silver',
     fontSize: '18px',
     fontWeight: '500',
     paddingRight: '8px'
   },
   SVG_MORE: {
-    fill: 'silver',
-    stroke: 'silver'
+    fill: 'inherit',
+    stroke: 'inherit'
+    //fill: 'silver',
+    //stroke: 'silver'
   },
   SVG_CLOSE: {
     position: 'absolute',
@@ -56,14 +71,17 @@ var S = {
 };
 
 var BrowserCaption = function BrowserCaption(_ref) {
-  var isMore = _ref.isMore,
+  var theme = _ref.theme,
+      isMore = _ref.isMore,
       caption = _ref.caption,
       children = _ref.children,
       onMore = _ref.onMore,
       onClose = _ref.onClose;
+
+  var TS = theme.getStyle(TH_ID);
   return _react2.default.createElement(
     'div',
-    { className: CL, style: S.ROOT },
+    { className: CL.ROOT, style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
     isMore && _react2.default.createElement(_SvgMore2.default, {
       svgStyle: S.SVG_MORE,
       onClick: onMore
@@ -71,7 +89,7 @@ var BrowserCaption = function BrowserCaption(_ref) {
     _react2.default.createElement(
       'span',
       {
-        className: 'not-selected',
+        className: CL.NOT_SELECTED,
         style: S.CAPTION
       },
       caption
@@ -90,5 +108,5 @@ BrowserCaption.propTypes = {
 }
 */
 
-exports.default = BrowserCaption;
+exports.default = (0, _withTheme2.default)(BrowserCaption);
 //# sourceMappingURL=BrowserCaption.js.map

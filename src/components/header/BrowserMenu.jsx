@@ -171,7 +171,7 @@ class BrowserMenu extends Component {
   }
 
   render(){
-    const { isShow, className, onClose } = this.props
+    const { isShow, className, style, onClose } = this.props
     , _transform = this._crTransform()
     , _pagesStyle = {
          ...S.PAGES,
@@ -185,7 +185,7 @@ class BrowserMenu extends Component {
       >
         <ShowHide
            className={className}
-           style={S.SHOW_HIDE}
+           style={{ ...style, ...S.SHOW_HIDE }}
            isShow={isShow}
         >
           <div

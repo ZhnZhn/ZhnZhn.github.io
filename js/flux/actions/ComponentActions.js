@@ -28,11 +28,13 @@ var ComponentActionTypes = exports.ComponentActionTypes = {
   CLOSE_CHART_CONTAINER_2: 'closeChartContainer2',
   SET_ACTIVE_CHECKBOX: 'setActiveCheckbox',
 
-  SHOW_MODAL_DIALOG: 'showModalDialog'
+  SHOW_MODAL_DIALOG: 'showModalDialog',
+
+  CHANGE_THEME: 'changeTheme'
 };
 var A = ComponentActionTypes;
 
-var ComponentActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_ABOUT, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_OPTION_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER_2, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SET_ACTIVE_CHECKBOX, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_MODAL_DIALOG, {}), _Reflux$createActions));
+var ComponentActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_ABOUT, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_OPTION_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART_CONTAINER_2, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SET_ACTIVE_CHECKBOX, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_MODAL_DIALOG, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CHANGE_THEME, {}), _Reflux$createActions));
 
 exports.default = ComponentActions;
 //# sourceMappingURL=ComponentActions.js.map

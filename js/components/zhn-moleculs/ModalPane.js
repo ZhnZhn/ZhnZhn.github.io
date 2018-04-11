@@ -26,7 +26,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TH_ID = 'MODAL_PANE';
 
 var ModalPane = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(ModalPane, _Component);
@@ -46,6 +52,8 @@ var ModalPane = (_temp2 = _class = function (_Component) {
       if (_this.rootNode && _this.rootNode.contains && !_this.rootNode.contains(event.target)) {
         _this.props.onClose(event);
       }
+    }, _this._refRootNode = function (n) {
+      return _this.rootNode = n;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
@@ -63,15 +71,14 @@ var ModalPane = (_temp2 = _class = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var children = this.props.children;
+      var _props = this.props,
+          theme = _props.theme,
+          children = _props.children,
+          TS = theme.getStyle(TH_ID);
 
       return _react2.default.createElement(
         'div',
-        { ref: function ref(n) {
-            return _this2.rootNode = n;
-          } },
+        { ref: this._refRootNode, style: TS.ROOT },
         children
       );
     }
@@ -80,5 +87,5 @@ var ModalPane = (_temp2 = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   onClose: function onClose() {}
 }, _temp2);
-exports.default = ModalPane;
+exports.default = (0, _withTheme2.default)(ModalPane);
 //# sourceMappingURL=ModalPane.js.map

@@ -39,9 +39,9 @@ var _ArrowCell = require('./ArrowCell');
 
 var _ArrowCell2 = _interopRequireDefault(_ArrowCell);
 
-var _SpanButton = require('./SpanButton');
+var _ButtonCircle = require('../zhn/ButtonCircle2');
 
-var _SpanButton2 = _interopRequireDefault(_SpanButton);
+var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -607,17 +607,17 @@ var InputSelect = (_temp = _class = function (_Component) {
       _react2.default.createElement(
         'span',
         { style: S.FOOTER_BUTTONS },
-        _react2.default.createElement(_SpanButton2.default, {
+        _react2.default.createElement(_ButtonCircle2.default, {
           style: S.FOOTER_MARGIN,
           caption: 'Dn',
           onClick: _this3._stepDownOption
         }),
-        _react2.default.createElement(_SpanButton2.default, {
+        _react2.default.createElement(_ButtonCircle2.default, {
           style: S.FOOTER_MARGIN,
           caption: 'Up',
           onClick: _this3._stepUpOption
         }),
-        _react2.default.createElement(_SpanButton2.default, {
+        _react2.default.createElement(_ButtonCircle2.default, {
           caption: 'CL',
           onClick: _this3.clearInput
         })
@@ -729,7 +729,7 @@ var InputSelect = (_temp = _class = function (_Component) {
       });
     } else if (isLoadingFailed) {
       _placeholder = 'Loading ' + optionNames + ' Failed';
-      _afterInputEl = _react2.default.createElement(_SpanButton2.default, {
+      _afterInputEl = _react2.default.createElement(_ButtonCircle2.default, {
         style: S.SPINNER_FAILED_CELL,
         'data-loader': 'circle-failed',
         onClick: onLoadOption

@@ -12,57 +12,87 @@ import DialogContainer from './dialogs/DialogContainer';
 
 import ConsentCookiePopup from './zhn/ConsentCookiePopup';
 
-import ComponentActions, { ComponentActionTypes } from '../flux/actions/ComponentActions';
-import { BrowserActionTypes } from '../flux/actions/BrowserActions';
-import { ChartActionTypes } from '../flux/actions/ChartActions';
+import ComponentActions, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
+import { BrowserActionTypes as BAT } from '../flux/actions/BrowserActions';
+import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 import AnalyticActions from '../flux/actions/AnalyticActions';
 
-const PREV_BUILD = '09-04-2018';
+import initTheme from './styles/theme'
+import ThemeContext from './hoc/ThemeContext'
+
+const PREV_BUILD = '11-04-2018';
 
 const {
   answerYes, answerView, answerNo, noAnswer
 } = AnalyticActions;
 
+const _checkBuild = () => {
+  fetch('./data/build.json', {cache: "no-cache"})
+    .then(res => res.json())
+    .then(json => {
+      const { build='' } = json;
+      if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
+        ComponentActions.showModalDialog(
+           "RELOAD", {
+             prevDate: PREV_BUILD,
+             nextDate: build
+           }
+        )
+      }
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+}
+
 class AppErc extends Component {
 
+  constructor(){
+    super()
+    this.state = {
+      theme: initTheme
+    }
+  }
+
   componentDidMount(){
-      LocationSearch.load(ComponentActions);
-      fetch('./data/build.json', {cache: "no-cache"})
-        .then(res => res.json())
-        .then(json => {
-          const { build='' } = json;
-          if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
-            ComponentActions.showModalDialog(
-               "RELOAD", {
-                 prevDate: PREV_BUILD,
-                 nextDate: build
-               }
-            )
-          }
-        })
-        .catch(err => {
-          console.log(err.message)
-        })
+    this.unsubsribe = ChartStore.listen(this._onStore)
+    LocationSearch.load(ComponentActions);
+    _checkBuild()
+  }
+  componentWillUnmout(){
+    this.unsubsribe()
+  }
+  _onStore = (actionType, themeName) => {
+    if (actionType === CAT.CHANGE_THEME) {
+      this.setState(({ theme }) => {
+        theme.setThemeName(themeName)
+        return {
+          theme: {...theme}
+        };
+      })
+    }
   }
 
   render(){
+    const { theme } = this.state;
     return (
+      <ThemeContext.Provider value={theme}>
       <div>
         <HeaderBar store={ChartStore} />
         <div className="component-container">
            <BrowserContainer
               store={ChartStore}
-              showBrowserAction={BrowserActionTypes.SHOW_BROWSER}
-              initBrowserAction={BrowserActionTypes.INIT_BROWSER_DYNAMIC}
-              updateBrowserAction={BrowserActionTypes.UPDATE_BROWSER_MENU}
-              //updateWatchAction={BrowserActionTypes.UPDATE_WATCH_BROWSER}
-              showDialogAction={ComponentActionTypes.SHOW_DIALOG}
+              showBrowserAction={BAT.SHOW_BROWSER}
+              initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}
+              updateBrowserAction={BAT.UPDATE_BROWSER_MENU}
+              //updateWatchAction={BAT.UPDATE_WATCH_BROWSER}
+              showDialogAction={CAT.SHOW_DIALOG}
               onCloseDialog={ComponentActions.closeDialog}
            />
            <About store={ChartStore} isShow={true} />
            <ComponentHrzContainer
               store={ChartStore}
-              addAction={ChartActionTypes.INIT_AND_SHOW_CHART}
+              addAction={CHAT.INIT_AND_SHOW_CHART}
            />
        </div>
        <DialogContainer store={ChartStore} />
@@ -73,6 +103,7 @@ class AppErc extends Component {
           onNoAnswer={noAnswer}
        />
      </div>
+     </ThemeContext.Provider>
    );
   }
 }

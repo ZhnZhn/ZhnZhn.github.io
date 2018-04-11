@@ -50,9 +50,14 @@ var S = {
   },
   RED: {
     color: '#f44336'
+  },
+  BLOCK: {
+    display: 'block'
+  },
+  NONE: {
+    display: 'none'
   }
-
 };
 
 exports.default = S;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\about\About.Style.js.map
+//# sourceMappingURL=About.Style.js.map

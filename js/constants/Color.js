@@ -31,7 +31,8 @@ var COLOR = {
   TITLE_SHOW: '#a487d4',
   ITEM: 'black',
   BG_ITEM_HOVER: '#4572a5',
-  HOVER: 'yellow',
+  HOVER: '#f1d600',
+  //HOVER : 'yellow',
 
   CHART: '#4d4d4d',
   PLOT: '#4d4d4d',

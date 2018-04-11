@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -23,6 +27,10 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _withTheme = require('../hoc/withTheme');
+
+var _withTheme2 = _interopRequireDefault(_withTheme);
 
 var _ChartStore = require('../../flux/stores/ChartStore');
 
@@ -53,6 +61,8 @@ var _ItemFactory = require('../factories/ItemFactory');
 var _ItemFactory2 = _interopRequireDefault(_ItemFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TH_ID = 'CHART_CONTAINER';
 
 var CL = {
   ROOT: "item-container",
@@ -273,7 +283,10 @@ var ChartContainer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var caption = this.props.caption,
+      var _props = this.props,
+          caption = _props.caption,
+          theme = _props.theme,
+          TS = theme.getStyle(TH_ID),
           _state = this.state,
           isShow = _state.isShow,
           isMore = _state.isMore,
@@ -285,7 +298,7 @@ var ChartContainer = function (_Component) {
         {
           ref: this._refRootNode,
           className: _classIsShow,
-          style: _styleIsShow
+          style: (0, _extends3.default)({}, _styleIsShow, TS.ROOT)
         },
         _react2.default.createElement(_ChartMorePopup2.default, {
           isShow: isMore,
@@ -330,5 +343,5 @@ var ChartContainer = function (_Component) {
   return ChartContainer;
 }(_react.Component);
 
-exports.default = ChartContainer;
+exports.default = (0, _withTheme2.default)(ChartContainer);
 //# sourceMappingURL=ChartContainer.js.map

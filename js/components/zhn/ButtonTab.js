@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -24,14 +28,26 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _withTheme = require('../hoc/withTheme');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _withTheme2 = _interopRequireDefault(_withTheme);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TH_ID = 'ELEMENT';
+//import PropTypes from "prop-types";
+
 var ButtonTab = function (_Component) {
   (0, _inherits3.default)(ButtonTab, _Component);
+
+  /*
+  static propTypes = {
+    style : PropTypes.object,
+    isShow : PropTypes.bool,
+    caption : PropTypes.string,
+    onClick : PropTypes.func
+  }
+  */
 
   function ButtonTab(props) {
     (0, _classCallCheck3.default)(this, ButtonTab);
@@ -60,16 +76,18 @@ var ButtonTab = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          theme = _props.theme,
           caption = _props.caption,
           style = _props.style,
-          children = _props.children;
+          children = _props.children,
+          TS = theme.getStyle(TH_ID),
+          _rootClass = this.state.isShow ? 'button-tab button-tab--show not-selected' : 'button-tab not-selected';
 
-      var _rootClass = this.state.isShow ? 'button-tab button-tab--show not-selected' : 'button-tab not-selected';
       return _react2.default.createElement(
         'div',
         {
           className: _rootClass,
-          style: Object.assign({}, style),
+          style: (0, _extends3.default)({}, style, TS.BG),
           onClick: this._handleClick
         },
         caption,
@@ -80,11 +98,5 @@ var ButtonTab = function (_Component) {
   return ButtonTab;
 }(_react.Component);
 
-ButtonTab.propTypes = process.env.NODE_ENV !== "production" ? {
-  style: _propTypes2.default.object,
-  isShow: _propTypes2.default.bool,
-  caption: _propTypes2.default.string,
-  onClick: _propTypes2.default.func
-} : {};
-exports.default = ButtonTab;
+exports.default = (0, _withTheme2.default)(ButtonTab);
 //# sourceMappingURL=ButtonTab.js.map

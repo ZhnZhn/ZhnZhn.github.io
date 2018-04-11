@@ -1,7 +1,9 @@
 import React from 'react'
 
+import C from '../styles/Color'
+
 import OpenClose from '../zhn/OpenClose'
-import Link from '../links/Links';
+import Link from '../links/Links'
 
 import S from './About.Style'
 
@@ -9,11 +11,11 @@ const CL = {
   BR: "provider__note__br"
 };
 
-const OPEN_COLOR_L2 = "#80c040";
+const OPEN_COLOR_L2 = C.GREEN;
 
 const ST = {
   ROOT_CHILD: {
-    borderLeft: '1px dashed yellow',
+    borderLeft: `1px dashed ${C.YELLOW}`,
     marginLeft: '-5px',
     paddingLeft: '8px'
   },
@@ -22,7 +24,7 @@ const ST = {
     lineHeight: 1.8
   },
   CHILD_STYLE: {
-    borderLeft: '1px dotted #80c040',
+    borderLeft: `1px dotted ${C.GREEN}`,
     marginLeft: '2px',
     paddingLeft: '6px'
   },
@@ -39,7 +41,7 @@ const ST = {
   SETTINGS: {
     color: '#607d8b'
   }
-}
+};
 
 const DataProviders = ({ isClose }) => (
   <OpenClose

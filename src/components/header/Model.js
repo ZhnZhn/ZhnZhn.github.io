@@ -46,7 +46,7 @@ const MODEL = {
     },{
       id: BT.WATCH_LIST,
       cn: CL.W,
-      title: 'Watch'
+      title: 'Watch List'
     }
     /*
     ,{

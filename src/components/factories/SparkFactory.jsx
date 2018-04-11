@@ -1,5 +1,7 @@
 import React from 'react';
 
+import C from '../styles/Color';
+
 import {
   Sparklines,
   SparklinesLine,
@@ -9,6 +11,21 @@ import {
   SparklinesBars
 } from '../zhn-sparklines/Sparklines';
 
+const C_YELLOW = C.YELLOW;
+
+const S = {
+  REF_LINE: {
+    stroke: 'red',
+    strokeOpacity: .75,
+    strokeDasharray: '5, 3'
+  },
+  BARS: {
+    stroke: "black",
+    strokeWidth: "1",
+    fill: C_YELLOW,
+    fillOpacity: "0.9"
+  }
+};
 
 const SparkFactory = {
   createSparklines(data, pointIndex){
@@ -20,10 +37,10 @@ const SparkFactory = {
           svgWidth={100}
           data={data}
        >
-          <SparklinesLine color="yellow" />
+          <SparklinesLine color={C_YELLOW} />
           <SparklinesReferenceLine
-               style={ {stroke: 'red', strokeOpacity: .75, strokeDasharray: '5, 3'} }
-               type="avg"
+             style={S.REF_LINE}
+             type="avg"
           />
           <SparklinesSpots />
           <SparklinesSpot pointIndex={pointIndex} />
@@ -42,7 +59,7 @@ const SparkFactory = {
          max={100}
       >
          <SparklinesBars
-            style={{ stroke: "black", strokeWidth: "1", fill: "yellow", fillOpacity: "0.9" }}
+            style={S.BARS}
             pointIndex={pointIndex}
          />
       </Sparklines>

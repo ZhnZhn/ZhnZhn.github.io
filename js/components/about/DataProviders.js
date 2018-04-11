@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Color = require('../styles/Color');
+
+var _Color2 = _interopRequireDefault(_Color);
+
 var _OpenClose = require('../zhn/OpenClose');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
@@ -30,11 +34,11 @@ var CL = {
   BR: "provider__note__br"
 };
 
-var OPEN_COLOR_L2 = "#80c040";
+var OPEN_COLOR_L2 = _Color2.default.GREEN;
 
 var ST = {
   ROOT_CHILD: {
-    borderLeft: '1px dashed yellow',
+    borderLeft: '1px dashed ' + _Color2.default.YELLOW,
     marginLeft: '-5px',
     paddingLeft: '8px'
   },
@@ -43,7 +47,7 @@ var ST = {
     lineHeight: 1.8
   },
   CHILD_STYLE: {
-    borderLeft: '1px dotted #80c040',
+    borderLeft: '1px dotted ' + _Color2.default.GREEN,
     marginLeft: '2px',
     paddingLeft: '6px'
   },

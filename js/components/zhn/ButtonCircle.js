@@ -10,7 +10,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var NOT_SELECTED = 'not-selected';
+var CL_NOT = 'not-selected';
 var S = {
   ROOT: {
     display: 'inline-block',
@@ -33,11 +33,11 @@ var ButtonCircle = function ButtonCircle(props) {
       title = props.title,
       isWithoutDefault = props.isWithoutDefault,
       onClick = props.onClick,
-      _className = className ? className + ' ' + NOT_SELECTED : NOT_SELECTED,
+      _className = className ? className + ' ' + CL_NOT : CL_NOT,
       _style = isWithoutDefault ? style : Object.assign({}, S.ROOT, style);
 
   return _react2.default.createElement(
-    'span',
+    'button',
     {
       className: _className,
       style: _style,

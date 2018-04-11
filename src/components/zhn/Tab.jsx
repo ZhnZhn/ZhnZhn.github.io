@@ -1,5 +1,9 @@
 import React from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
+
+import withTheme from '../hoc/withTheme'
+
+const TH_ID = 'ELEMENT';
 
 const S = {
   LI : {
@@ -27,11 +31,13 @@ const S = {
 }
 
 
-const Tab = ({ title, isSelected, onClick }) => {
-    const _selectedStyle = (isSelected) ? S.SELECTED : null;
+const Tab = ({ theme, title, isSelected, onClick }) => {
+    const TS = theme.getStyle(TH_ID)
+    const _selectedStyle = isSelected
+               ? S.SELECTED : null;
     return (
        <li
-          style={Object.assign({}, S.LI, _selectedStyle)}
+          style={{ ...S.LI, ...TS.BG, ..._selectedStyle }}
           onClick={onClick}
        >
           <span>{title}</span>
@@ -39,11 +45,13 @@ const Tab = ({ title, isSelected, onClick }) => {
     )
 }
 
+/*
 Tab.propTypes = {
   title: PropTypes.string,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func
 }
+*/
 
 
-export default Tab
+export default withTheme(Tab)
