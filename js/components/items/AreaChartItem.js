@@ -21,14 +21,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp, _initialiseProps;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _safeGet = require('../../utils/safeGet');
 
@@ -60,13 +57,11 @@ var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL = {
+  ROOT: 'chart-item'
+};
+
 var styles = {
-  rootDiv: {
-    lineHeight: 1.5,
-    marginBottom: '10px',
-    marginRight: '25px',
-    position: 'relative'
-  },
   tabDiv: {
     position: 'relative',
     height: '30px',
@@ -90,6 +85,28 @@ var styles = {
 
 var AreaChartItem = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(AreaChartItem, _Component);
+
+  /*
+  static propTypes = {
+    caption: PropTypes.string,
+    chartType: PropTypes.string,
+    config: PropTypes.shape({
+      zhConfig: PropTypes.shape({
+        dataSource: PropTypes.string,
+        itemCaption: PropTypes.string
+      })
+    }),
+    onAddToWatch: PropTypes.func,
+    onSetActive: PropTypes.func,
+    onShowConfigDialog: PropTypes.func,
+    onCloseItem: PropTypes.func,
+    isAdminMode: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool
+    ]),
+    crValueMoving: PropTypes.func
+  }
+  */
 
   function AreaChartItem(props) {
     (0, _classCallCheck3.default)(this, AreaChartItem);
@@ -168,7 +185,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: styles.rootDiv },
+        { className: CL.ROOT },
         _react2.default.createElement(_Header2.default, {
           isOpen: isOpen,
           chartType: chartType,
@@ -535,21 +552,5 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     _this2.mainChart.setSize(undefined, height, true);
   };
 }, _temp);
-AreaChartItem.propTypes = process.env.NODE_ENV !== "production" ? {
-  caption: _propTypes2.default.string,
-  chartType: _propTypes2.default.string,
-  config: _propTypes2.default.shape({
-    zhConfig: _propTypes2.default.shape({
-      dataSource: _propTypes2.default.string,
-      itemCaption: _propTypes2.default.string
-    })
-  }),
-  onAddToWatch: _propTypes2.default.func,
-  onSetActive: _propTypes2.default.func,
-  onShowConfigDialog: _propTypes2.default.func,
-  onCloseItem: _propTypes2.default.func,
-  isAdminMode: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.bool]),
-  crValueMoving: _propTypes2.default.func
-} : {};
 exports.default = AreaChartItem;
 //# sourceMappingURL=AreaChartItem.js.map

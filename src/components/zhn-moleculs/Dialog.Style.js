@@ -19,7 +19,8 @@ const STYLE = {
     color: '#c0c0c0',
     backgroundColor: '#1b2836',
     textAlign: 'center',
-    fontSize: '18px'
+    fontSize: '18px',
+    fontWeight: 500,
   },
   COMMAND_DIV: {
      cursor: 'default',

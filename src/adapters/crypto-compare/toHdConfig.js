@@ -4,10 +4,15 @@ import fnAdapter from './fnAdapter'
 
 const { crData, crConfigOption } = fnAdapter;
 
+const DF_PAIR = 'USD';
+const V_ON_TIME = 'Values on 00:00 GMT';
+
+const _crTitle = (title) => `${title}: ${V_ON_TIME}`;
+
 const _crSubtitle = (json, value) => {
   const { ConversionType={} } = json
       , { conversionSymbol, type='' } = ConversionType;
-  return `${value}/${conversionSymbol || 'USD'} ${type}`;
+  return `${value}/${conversionSymbol || DF_PAIR} ${type}`;
 };
 
 const toHdConfig = {
@@ -17,10 +22,11 @@ const toHdConfig = {
             .initSpline({ data })
             .toConfig()
         , { value='', title } = option
+        , _title = _crTitle(title)
         , _subtitle = _crSubtitle(json, value)
         , config = Builder()
             .initBaseArea2()
-            .addCaption(title, _subtitle)
+            .addCaption(_title, _subtitle)
             .addSeries(seria)
             .add({
                ...crConfigOption({ option, data })

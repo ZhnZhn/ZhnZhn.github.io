@@ -22,6 +22,13 @@ var crData = _fnAdapter2.default.crData,
     crConfigOption = _fnAdapter2.default.crConfigOption;
 
 
+var DF_PAIR = 'USD';
+var V_ON_TIME = 'Values on 00:00 GMT';
+
+var _crTitle = function _crTitle(title) {
+  return title + ': ' + V_ON_TIME;
+};
+
 var _crSubtitle = function _crSubtitle(json, value) {
   var _json$ConversionType = json.ConversionType,
       ConversionType = _json$ConversionType === undefined ? {} : _json$ConversionType,
@@ -29,7 +36,7 @@ var _crSubtitle = function _crSubtitle(json, value) {
       _ConversionType$type = ConversionType.type,
       type = _ConversionType$type === undefined ? '' : _ConversionType$type;
 
-  return value + '/' + (conversionSymbol || 'USD') + ' ' + type;
+  return value + '/' + (conversionSymbol || DF_PAIR) + ' ' + type;
 };
 
 var toHdConfig = {
@@ -39,8 +46,9 @@ var toHdConfig = {
         _option$value = option.value,
         value = _option$value === undefined ? '' : _option$value,
         title = option.title,
+        _title = _crTitle(title),
         _subtitle = _crSubtitle(json, value),
-        config = (0, _ConfigBuilder2.default)().initBaseArea2().addCaption(title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
+        config = (0, _ConfigBuilder2.default)().initBaseArea2().addCaption(_title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
 
     return { config: config };
   },
@@ -54,4 +62,4 @@ var toHdConfig = {
 };
 
 exports.default = toHdConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\crypto-compare\toHdConfig.js.map
+//# sourceMappingURL=toHdConfig.js.map

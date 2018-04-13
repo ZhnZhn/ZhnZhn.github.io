@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import safeGet from '../../utils/safeGet'
 
@@ -11,13 +11,11 @@ import Legend from '../zhn/Legend';
 
 import PanelDataInfo from '../zhn/PanelDataInfo';
 
+const CL = {
+  ROOT: 'chart-item'
+};
+
 const styles = {
-  rootDiv : {
-    lineHeight : 1.5,
-    marginBottom: '10px',
-    marginRight: '25px',
-    position : 'relative'
-  },
   tabDiv : {
     position: 'relative',
     height: '30px',
@@ -40,6 +38,7 @@ const styles = {
 }
 
 class AreaChartItem extends Component {
+  /*
   static propTypes = {
     caption: PropTypes.string,
     chartType: PropTypes.string,
@@ -59,6 +58,7 @@ class AreaChartItem extends Component {
     ]),
     crValueMoving: PropTypes.func
   }
+  */
 
   constructor(props){
     super()
@@ -387,7 +387,7 @@ class AreaChartItem extends Component {
         } = this.state;
 
     return (
-      <div style={styles.rootDiv}>
+      <div className={CL.ROOT}>
          <Header
             isOpen={isOpen}
             chartType={chartType}
