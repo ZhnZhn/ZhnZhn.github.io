@@ -17,7 +17,7 @@
     "BC_CRC0": {
       "dialogProps": {
         "descrUrl" : "./data/blockchain/crypto-compare.html",
-        "oneCaption": "Coin",
+        "oneCaption": "Item",
         "noDate": true,
         "loadId" : "CRC",
         "linkFn": "CRC"
@@ -40,9 +40,9 @@
     },
     "BC_CI": {
       "type": "BC_CI",
-      "menuTitle": "Coin Information",
-      "dialogCaption": "Coin Information",
-      "chartContainerCaption": "Crypto Compare: Coin Information",
+      "menuTitle": "Information",
+      "dialogCaption": "Information",
+      "chartContainerCaption": "Crypto Compare: Information",
       "dialogType": "DialogType3",
       "addProps": "BC_CRC0",
       "dialogProps": {
