@@ -47,8 +47,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MAX_WITHOUT_ANIMATION = 800;
 
+var CL_ROOT = 'zhn-select';
 var CL = {
-  ROW_ACTIVE: 'option-row__active',
+  ROOT: CL_ROOT,
+  INPUT: CL_ROOT + '__input',
+  SPINNER: CL_ROOT + '__spinner',
+  SPINNER_FAILED: CL_ROOT + '__spinner--failed',
+  INPUT_HR: CL_ROOT + '__input__hr',
+
+  OPTIONS: CL_ROOT + '__options',
+  OPTIONS_DIV: CL_ROOT + '__options__div',
+
+  OPTIONS_ROW: CL_ROOT + '__row',
+  OPTIONS_ROW_ACTIVE: CL_ROOT + '__row--active',
+
+  FOOTER: CL_ROOT + '__footer',
+  FOOTER_INDEX: CL_ROOT + '__footer__index',
+  FOOTER_BTS: CL_ROOT + '__footer__bts',
+  FOOTER_MARGIN: CL_ROOT + '__footer--margin',
+
   NOT_SELECTED: 'not-selected'
 };
 
@@ -77,113 +94,9 @@ var S = {
   NONE: {
     display: 'none'
   },
-  ROOT_DIV: {
-    position: 'relative',
-    display: 'inline-block',
-    backgroundColor: '#E1E1CB',
-    width: '160px'
-  },
-  INPUT_TEXT: {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
-    color: 'green',
-    //width: '140px',
-    width: '100%',
-    paddingRight: '40px',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  },
-  ROOT_OPTION_DIV: {
-    position: 'absolute',
-    left: 0,
-    backgroundColor: '#E1E1CB',
-    color: 'green',
-    width: '160px',
-    //height: '160px',
-    zIndex: '10',
-    borderBottomLeftRadius: '5px',
-    borderBottomRightRadius: '5px'
-  },
-  OPTION_DIV: {
-    //height: '160px',
-    minHeight: '160px',
-    //minHeight: '100px',
-    maxHeight: '200px',
-    paddingBottom: '2px',
-    overflow: 'auto'
-  },
-  SPINNER_CELL: {
-    position: 'absolute',
-    top: '6px',
-    right: '10px',
-    display: 'inline-block',
-    width: '20px',
-    height: '20px'
-  },
-  SPINNER_FAILED_CELL: {
-    position: 'absolute',
-    top: '6px',
-    right: '10px',
-    display: 'inline-block',
-    width: '20px',
-    height: '20px',
-    borderColor: '#F44336',
-    cursor: 'pointer'
-  },
+
   ARROW_SHOW: {
     borderColor: '#1B75BB transparent transparent'
-  },
-  INPUT_HR: {
-    borderWidth: 'medium medium 1px',
-    borderStyle: 'none none solid',
-    borderColor: '#1B75BB',
-    borderImage: 'none',
-    margin: 0,
-    marginLeft: '10px',
-    marginBottom: '5px',
-    marginRight: '40px'
-  },
-  ITEM_DIV: {
-    cursor: 'pointer',
-    paddingTop: '6px',
-    paddingLeft: '5px',
-    paddingBottom: '6px'
-    //lineHeight: '14px'
-  },
-  ITEM_ODD: {
-    backgroundColor: '#C3C3AC'
-  },
-  ITEM_EVEN: {
-    backgroundColor: '#D5D5BC'
-  },
-  OPTIONS_FOOTER: {
-    position: 'relative',
-    backgroundColor: 'silver',
-    borderBottomLeftRadius: '5px',
-    borderBottomRightRadius: '5px',
-    lineHeight: 1.5
-  },
-  FOOTER_INDEX: {
-    display: 'inline-block',
-    color: 'gray',
-    fontWeight: 'bold',
-    paddingLeft: '10px',
-    paddingTop: '4px',
-    paddingBottom: '4px'
-  },
-  FOOTER_BUTTONS: {
-    display: 'inline-block',
-    position: 'absolute',
-    top: '4px',
-    right: '8px',
-    color: 'black',
-    fontWeight: 'bold'
-  },
-  FOOTER_MARGIN: {
-    marginRight: '4px'
   }
 };
 
@@ -300,7 +213,10 @@ var InputSelect = (_temp = _class = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: (0, _extends3.default)({}, S.ROOT_DIV, _rootWidthStyle) },
+        {
+          className: CL.ROOT,
+          style: _rootWidthStyle
+        },
         _react2.default.createElement('input', {
           ref: function ref(c) {
             return _this2.domInputText = c;
@@ -313,12 +229,13 @@ var InputSelect = (_temp = _class = function (_Component) {
           autoCapitalize: 'off',
           spellCheck: false,
           value: value,
-          style: S.INPUT_TEXT,
-          placeholder: placeholder,
+          className: CL.INPUT
+          //style={S.INPUT_TEXT}
+          , placeholder: placeholder,
           onChange: this._handleInputChange,
           onKeyDown: this._handleInputKeyDown }),
         afterInputEl,
-        _react2.default.createElement('hr', { style: S.INPUT_HR }),
+        _react2.default.createElement('hr', { className: CL.INPUT_HR }),
         _domOptions
       );
     }
@@ -363,7 +280,7 @@ var InputSelect = (_temp = _class = function (_Component) {
 
   this._decorateActiveRowComp = function (comp) {
     if (comp) {
-      comp.classList.add(CL.ROW_ACTIVE);
+      comp.classList.add(CL.OPTIONS_ROW_ACTIVE);
     }
     if (_this3.indexNode) {
       _this3.indexNode.textContent = _this3.indexActiveOption + 1;
@@ -373,7 +290,7 @@ var InputSelect = (_temp = _class = function (_Component) {
   this._undecorateActiveRowComp = function (comp) {
     var _comp = !comp ? _this3._getActiveItemComp() : comp;
     if (_comp) {
-      _comp.classList.remove(CL.ROW_ACTIVE);
+      _comp.classList.remove(CL.OPTIONS_ROW_ACTIVE);
     }
   };
 
@@ -583,13 +500,10 @@ var InputSelect = (_temp = _class = function (_Component) {
   this._renderOptionsFooter = function (nFiltered, nAll) {
     return _react2.default.createElement(
       'div',
-      {
-        className: CL.NOT_SELECTED,
-        style: S.OPTIONS_FOOTER
-      },
+      { className: CL.FOOTER + ' ' + CL.NOT_SELECTED },
       _react2.default.createElement(
         'span',
-        { style: S.FOOTER_INDEX },
+        { className: CL.FOOTER_INDEX },
         _react2.default.createElement(
           'span',
           { ref: _this3._refIndexNode },
@@ -606,14 +520,14 @@ var InputSelect = (_temp = _class = function (_Component) {
       ),
       _react2.default.createElement(
         'span',
-        { style: S.FOOTER_BUTTONS },
+        { className: CL.FOOTER_BTS },
         _react2.default.createElement(_ButtonCircle2.default, {
-          style: S.FOOTER_MARGIN,
+          className: CL.FOOTER_MARGIN,
           caption: 'Dn',
           onClick: _this3._stepDownOption
         }),
         _react2.default.createElement(_ButtonCircle2.default, {
-          style: S.FOOTER_MARGIN,
+          className: CL.FOOTER_MARGIN,
           caption: 'Up',
           onClick: _this3._stepUpOption
         }),
@@ -644,8 +558,6 @@ var InputSelect = (_temp = _class = function (_Component) {
     if (options) {
       if (!isValidDomOptionsCache) {
         _domOptions = options.map(function (item, index) {
-          var _styleDiv = index % 2 === 0 ? S.ITEM_ODD : S.ITEM_EVEN;
-
           return _react2.default.createElement(
             'div',
             {
@@ -653,8 +565,7 @@ var InputSelect = (_temp = _class = function (_Component) {
               //aria-selected={this.indexActiveOption === index}
               //tabIndex="0"
               key: index,
-              className: 'option-row',
-              style: (0, _extends3.default)({}, S.ITEM_DIV, _styleDiv),
+              className: CL.OPTIONS_ROW,
               ref: function ref(c) {
                 return _this3['v' + index] = c;
               },
@@ -682,14 +593,16 @@ var InputSelect = (_temp = _class = function (_Component) {
     return _react2.default.createElement(
       'div',
       {
-        style: (0, _extends3.default)({}, S.ROOT_OPTION_DIV, _rootWidthStyle),
+        className: CL.OPTIONS,
+        style: _rootWidthStyle,
         'data-scrollable': true
       },
       _react2.default.createElement(
         'div',
         {
           ref: _this3._refOptionsComp,
-          style: (0, _extends3.default)({}, S.OPTION_DIV, rootOptionsStyle, _rootWidthStyle)
+          className: CL.OPTIONS_DIV,
+          style: (0, _extends3.default)({}, rootOptionsStyle, _rootWidthStyle)
         },
         _domOptions
       ),
@@ -724,13 +637,14 @@ var InputSelect = (_temp = _class = function (_Component) {
     } else if (isLoading) {
       _placeholder = 'Loading ' + optionNames + '...';
       _afterInputEl = _react2.default.createElement('span', {
-        style: S.SPINNER_CELL,
-        'data-loader': 'circle'
+        className: CL.SPINNER
+        //style={S.SPINNER_CELL}
+        , 'data-loader': 'circle'
       });
     } else if (isLoadingFailed) {
       _placeholder = 'Loading ' + optionNames + ' Failed';
       _afterInputEl = _react2.default.createElement(_ButtonCircle2.default, {
-        style: S.SPINNER_FAILED_CELL,
+        className: CL.SPINNER_FAILED,
         'data-loader': 'circle-failed',
         onClick: onLoadOption
       });

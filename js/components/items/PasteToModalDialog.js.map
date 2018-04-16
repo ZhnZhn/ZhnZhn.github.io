@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../src/components/items/PasteToModalDialog.jsx"],"names":["S","MODAL","position","width","height","margin","SCROLL_PANE","overflowY","paddingRight","PasteToModalDialog","_handlePasteTo","props","data","onClose","toChart","ChartFn","seriesPaneComp","getValues","forEach","color","conf","toYAxis","addDataToYAxis","value","_commandButtons","nextProps","nextState","isShow","fromChart","comp"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;AAGA,IAAMA,IAAI;AACRC,SAAQ;AACNC,cAAW,QADL;AAENC,WAAO,OAFD;AAGNC,YAAQ,OAHF;AAIN;AACAC,YAAQ;AALF,GADA;AAQRC,eAAa;AACXC,eAAW,MADA;AAEXH,YAAQ,OAFG;AAGXI,kBAAc;AAHH;AARL,CAAV;;IAeMC,kB;;;AACJ,gCAAa;AAAA;;AAAA;;AAAA,UAsBbC,cAtBa,GAsBI,YAAM;AAAA,wBACQ,MAAKC,KADb;AAAA,yCACbC,IADa;AAAA,UACbA,IADa,oCACR,EADQ;AAAA,UACJC,OADI,eACJA,OADI;AAAA,UAEbC,OAFa,GAEQF,IAFR,CAEbE,OAFa;AAAA,UAEJC,OAFI,GAEQH,IAFR,CAEJG,OAFI;;;AAIrB,YAAKC,cAAL,CACGC,SADH,GAEGC,OAFH,CAEW,gBAAQ;AAAA,YACLC,KADK,GACuBC,IADvB,CACLD,KADK;AAAA,4BACuBC,IADvB,CACEC,OADF;AAAA,YACEA,OADF,iCACU,EADV;AAAA,YACcT,IADd,GACuBQ,IADvB,CACcR,IADd;;AAEbG,gBAAQO,cAAR,CAAuBR,OAAvB,EAAgCK,KAAhC,EAAuCP,IAAvC,EAA6CS,QAAQE,KAArD;AACH,OALH;;AAOAV;AACD,KAlCY;;AAGX,UAAKW,eAAL,GAAuB,CACrB;AACE,eAAQ,eADV;AAEE,iBAAW,IAFb;AAGE,eAAS,MAAKd;AAHhB,MADqB,CAAvB;AAHW;AAUZ;;;;0CAEqBe,S,EAAWC,S,EAAU;AACzC,UACED,cAAc,KAAKd,KAAnB,IACGc,UAAUE,MAAV,KAAqB,KAAKhB,KAAL,CAAWgB,MAFrC,EAGE;AACA,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;6BAgBO;AAAA;;AAAA,mBAGI,KAAKhB,KAHT;AAAA,UAEEgB,MAFF,UAEEA,MAFF;AAAA,+BAEUf,IAFV;AAAA,UAEUA,IAFV,+BAEe,EAFf;AAAA,UAEmBC,OAFnB,UAEmBA,OAFnB;AAAA,UAIEe,SAJF,GAIyBhB,IAJzB,CAIEgB,SAJF;AAAA,UAIad,OAJb,GAIyBF,IAJzB,CAIaE,OAJb;;AAKN,aACE;AAAA;AAAA;AACE,iBAAOd,EAAEC,KADX;AAEE,mBAAQ,iBAFV;AAGE,kBAAQ0B,MAHV;AAIE,0BAAgB,KAAKH,eAJvB;AAKE,mBAASX;AALX;AAOE;AACG,eAAM;AAAA,mBAAQ,OAAKG,cAAL,GAAsBa,IAA9B;AAAA,WADT;AAEG,qBAAW7B,EAAEM,WAFhB;AAGG,qBAAWsB,SAHd;AAIG,mBAASd;AAJZ;AAPF,OADF;AAgBD;;;;;kBAGYL,kB","file":"PasteToModalDialog.js","sourcesContent":["import React, { Component } from 'react'\r\n\r\nimport ModalDialog from '../zhn-moleculs/ModalDialog'\r\nimport FlatButton from '../zhn-m/FlatButton'\r\n\r\nimport SeriesPane from './SeriesPane'\r\n\r\n\r\nconst S = {\r\n  MODAL : {\r\n    position : 'static',\r\n    width: '380px',\r\n    height: '340px',\r\n    //minHeight: '200px',\r\n    margin: '70px auto 0px'\r\n  },\r\n  SCROLL_PANE: {\r\n    overflowY: 'auto',\r\n    height: '250px',\r\n    paddingRight: '10px'\r\n  }\r\n}\r\n\r\nclass PasteToModalDialog extends Component {\r\n  constructor(){\r\n    super()\r\n\r\n    this._commandButtons = [\r\n      <FlatButton\r\n        caption=\"Paste & Close\"\r\n        isPrimary={true}\r\n        onClick={this._handlePasteTo}\r\n      />\r\n    ]\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (\r\n      nextProps !== this.props\r\n      && nextProps.isShow === this.props.isShow\r\n    ) {\r\n      return false;\r\n    }\r\n    return true;\r\n  }\r\n\r\n  _handlePasteTo = () => {\r\n    const { data={}, onClose } = this.props\r\n        , { toChart, ChartFn } = data;\r\n\r\n    this.seriesPaneComp\r\n      .getValues()\r\n      .forEach(conf => {\r\n          const { color, toYAxis={}, data } = conf;\r\n          ChartFn.addDataToYAxis(toChart, color, data, toYAxis.value)\r\n      })\r\n\r\n    onClose()\r\n  }\r\n\r\n  render(){\r\n    const {\r\n            isShow, data={}, onClose\r\n          } = this.props\r\n        , { fromChart, toChart } = data;\r\n    return (\r\n      <ModalDialog\r\n        style={S.MODAL}\r\n        caption=\"Paste Series To\"\r\n        isShow={isShow}\r\n        commandButtons={this._commandButtons}\r\n        onClose={onClose}\r\n      >\r\n        <SeriesPane\r\n           ref={ comp => this.seriesPaneComp = comp }\r\n           rootStyle={S.SCROLL_PANE}\r\n           fromChart={fromChart}\r\n           toChart={toChart}\r\n        />\r\n      </ModalDialog>\r\n    );\r\n  }\r\n}\r\n\r\nexport default PasteToModalDialog\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/PasteToModalDialog.js"
+ ],
+ "file": "../../../src/components/items/PasteToModalDialog.js",
+ "names": [
+  "S",
+  "MODAL",
+  "position",
+  "width",
+  "height",
+  "margin",
+  "SCROLL_PANE",
+  "overflowY",
+  "paddingRight",
+  "PasteToModalDialog",
+  "_handlePasteTo",
+  "props",
+  "data",
+  "onClose",
+  "toChart",
+  "ChartFn",
+  "seriesPaneComp",
+  "getValues",
+  "forEach",
+  "color",
+  "conf",
+  "toYAxis",
+  "addDataToYAxis",
+  "value",
+  "_refSeriesPaneComp",
+  "comp",
+  "_commandButtons",
+  "nextProps",
+  "nextState",
+  "isShow",
+  "fromChart"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AAEA;;;;;;AAGA,IAAMA,IAAI;AACRC,SAAQ;AACNC,cAAW,QADL;AAENC,WAAO,OAFD;AAGNC,YAAQ,OAHF;AAIN;AACAC,YAAQ;AALF,GADA;AAQRC,eAAa;AACXC,eAAW,MADA;AAEXH,YAAQ,OAFG;AAGXI,kBAAc;AAHH;AARL,CAAV;;IAeMC,kB;;;AACJ,gCAAa;AAAA;;AAAA;;AAAA,UAsBbC,cAtBa,GAsBI,YAAM;AAAA,wBACQ,MAAKC,KADb;AAAA,yCACbC,IADa;AAAA,UACbA,IADa,oCACR,EADQ;AAAA,UACJC,OADI,eACJA,OADI;AAAA,UAEbC,OAFa,GAEQF,IAFR,CAEbE,OAFa;AAAA,UAEJC,OAFI,GAEQH,IAFR,CAEJG,OAFI;;;AAIrB,YAAKC,cAAL,CACGC,SADH,GAEGC,OAFH,CAEW,gBAAQ;AAAA,YACLC,KADK,GACuBC,IADvB,CACLD,KADK;AAAA,4BACuBC,IADvB,CACEC,OADF;AAAA,YACEA,OADF,iCACU,EADV;AAAA,YACcT,IADd,GACuBQ,IADvB,CACcR,IADd;;AAEbG,gBAAQO,cAAR,CAAuBR,OAAvB,EAAgCK,KAAhC,EAAuCP,IAAvC,EAA6CS,QAAQE,KAArD;AACH,OALH;;AAOAV;AACD,KAlCY;;AAAA,UAoCbW,kBApCa,GAoCQ;AAAA,aAAQ,MAAKR,cAAL,GAAsBS,IAA9B;AAAA,KApCR;;AAGX,UAAKC,eAAL,GAAuB,CACrB;AACE,eAAQ,eADV;AAEE,iBAAW,IAFb;AAGE,eAAS,MAAKhB;AAHhB,MADqB,CAAvB;AAHW;AAUZ;;;;0CAEqBiB,S,EAAWC,S,EAAU;AACzC,UACED,cAAc,KAAKhB,KAAnB,IACGgB,UAAUE,MAAV,KAAqB,KAAKlB,KAAL,CAAWkB,MAFrC,EAGE;AACA,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;6BAkBO;AAAA,mBAGI,KAAKlB,KAHT;AAAA,UAEEkB,MAFF,UAEEA,MAFF;AAAA,+BAEUjB,IAFV;AAAA,UAEUA,IAFV,+BAEe,EAFf;AAAA,UAEmBC,OAFnB,UAEmBA,OAFnB;AAAA,UAIEiB,SAJF,GAIyBlB,IAJzB,CAIEkB,SAJF;AAAA,UAIahB,OAJb,GAIyBF,IAJzB,CAIaE,OAJb;;AAKN,aACE;AAAA;AAAA;AACE,iBAAOd,EAAEC,KADX;AAEE,mBAAQ,iBAFV;AAGE,kBAAQ4B,MAHV;AAIE,0BAAgB,KAAKH,eAJvB;AAKE,mBAASb;AALX;AAOE;AACG,eAAK,KAAKW,kBADb;AAEG,qBAAWxB,EAAEM,WAFhB;AAGG,qBAAWwB,SAHd;AAIG,mBAAShB;AAJZ;AAPF,OADF;AAgBD;;;;;kBAGYL,kB"
+}

@@ -30,6 +30,8 @@ var crId = _fnAdapter2.default.crId,
 
 
 var FaoStatAdapter = {
+  crKey: crId,
+
   toConfig: function toConfig(json, option) {
     var subtitle = option.subtitle,
         _id = crId(option),
@@ -63,4 +65,4 @@ var FaoStatAdapter = {
 };
 
 exports.default = FaoStatAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\FaoStatAdapter.js.map
+//# sourceMappingURL=FaoStatAdapter.js.map

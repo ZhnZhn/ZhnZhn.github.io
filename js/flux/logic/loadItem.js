@@ -114,14 +114,16 @@ var _fnLoadItem = function _fnLoadItem(objImpl, option, onCompleted, onAdded, on
 var fLoadItem = function fLoadItem(objImpl) {
   var _objImpl$fnFetch = objImpl.fnFetch,
       fnFetch = _objImpl$fnFetch === undefined ? _fnFetch.fetchJson : _objImpl$fnFetch,
-      api = objImpl.api;
+      api = objImpl.api,
+      adapter = objImpl.adapter;
 
   objImpl.fnFetch = fnFetch;
   return {
     loadItem: _fnLoadItem.bind(null, objImpl),
     fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
     fnFetchToChart: _fnFetchToChart.bind(null, objImpl),
-    addPropsTo: api.addPropsTo
+    addPropsTo: api.addPropsTo,
+    crKey: adapter.crKey
   };
 };
 

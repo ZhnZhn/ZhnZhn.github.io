@@ -7,8 +7,25 @@ import BtCircle from '../zhn/ButtonCircle2'
 
 const MAX_WITHOUT_ANIMATION = 800;
 
+const CL_ROOT = 'zhn-select';
 const CL = {
-  ROW_ACTIVE: 'option-row__active',
+  ROOT: CL_ROOT,
+  INPUT: `${CL_ROOT}__input`,
+  SPINNER: `${CL_ROOT}__spinner`,
+  SPINNER_FAILED: `${CL_ROOT}__spinner--failed`,
+  INPUT_HR: `${CL_ROOT}__input__hr`,
+
+  OPTIONS: `${CL_ROOT}__options`,
+  OPTIONS_DIV: `${CL_ROOT}__options__div`,
+
+  OPTIONS_ROW: `${CL_ROOT}__row`,
+  OPTIONS_ROW_ACTIVE: `${CL_ROOT}__row--active`,
+
+  FOOTER: `${CL_ROOT}__footer`,
+  FOOTER_INDEX: `${CL_ROOT}__footer__index`,
+  FOOTER_BTS: `${CL_ROOT}__footer__bts`,
+  FOOTER_MARGIN: `${CL_ROOT}__footer--margin`,
+
   NOT_SELECTED: 'not-selected'
 };
 
@@ -46,113 +63,9 @@ const S = {
   NONE: {
     display: 'none'
   },
-  ROOT_DIV: {
-    position: 'relative',
-    display: 'inline-block',
-    backgroundColor: '#E1E1CB',
-    width: '160px'
-  },
-  INPUT_TEXT: {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
-    color: 'green',
-    //width: '140px',
-    width: '100%',
-    paddingRight: '40px',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  },
-  ROOT_OPTION_DIV: {
-    position: 'absolute',
-    left: 0,
-    backgroundColor: '#E1E1CB',
-    color: 'green',
-    width: '160px',
-    //height: '160px',
-    zIndex: '10',
-    borderBottomLeftRadius : '5px',
-    borderBottomRightRadius : '5px'
-  },
-  OPTION_DIV: {
-    //height: '160px',
-    minHeight: '160px',
-    //minHeight: '100px',
-    maxHeight: '200px',
-    paddingBottom: '2px',
-    overflow: 'auto'
-  },
-  SPINNER_CELL: {
-    position: 'absolute',
-    top: '6px',
-    right: '10px',
-    display: 'inline-block',
-    width: '20px',
-    height: '20px'
-  },
-  SPINNER_FAILED_CELL: {
-    position: 'absolute',
-    top: '6px',
-    right: '10px',
-    display: 'inline-block',
-    width: '20px',
-    height: '20px',
-    borderColor : '#F44336',
-    cursor : 'pointer'
-  },
- ARROW_SHOW: {
+
+  ARROW_SHOW: {
     borderColor: '#1B75BB transparent transparent'
- },
- INPUT_HR: {
-   borderWidth: 'medium medium 1px',
-   borderStyle: 'none none solid',
-   borderColor: '#1B75BB',
-   borderImage: 'none',
-   margin: 0,
-   marginLeft: '10px',
-   marginBottom: '5px',
-   marginRight: '40px'
- },
-  ITEM_DIV: {
-    cursor: 'pointer',
-    paddingTop: '6px',
-    paddingLeft: '5px',
-    paddingBottom: '6px'
-    //lineHeight: '14px'
-  },
-  ITEM_ODD: {
-    backgroundColor: '#C3C3AC'
-  },
-  ITEM_EVEN: {
-    backgroundColor: '#D5D5BC'
-  },
-  OPTIONS_FOOTER: {
-    position: 'relative',
-    backgroundColor: 'silver',
-    borderBottomLeftRadius: '5px',
-    borderBottomRightRadius: '5px',
-    lineHeight: 1.5
-  },
-  FOOTER_INDEX: {
-    display: 'inline-block',
-    color: 'gray',
-    fontWeight : 'bold',
-    paddingLeft: '10px',
-    paddingTop: '4px',
-    paddingBottom : '4px'
-  },
-  FOOTER_BUTTONS: {
-    display: 'inline-block',
-    position: 'absolute',
-    top: '4px',
-    right: '8px',
-    color: 'black',
-    fontWeight: 'bold'
-  },
-  FOOTER_MARGIN: {
-    marginRight: '4px'
   }
 };
 
@@ -268,7 +181,7 @@ class InputSelect extends Component {
   }
   _decorateActiveRowComp = (comp) => {
     if (comp){
-      comp.classList.add(CL.ROW_ACTIVE);
+      comp.classList.add(CL.OPTIONS_ROW_ACTIVE);
     }
     if (this.indexNode) {
       this.indexNode.textContent = this.indexActiveOption + 1
@@ -279,7 +192,7 @@ class InputSelect extends Component {
               ? this._getActiveItemComp()
               : comp;
      if (_comp){
-      _comp.classList.remove(CL.ROW_ACTIVE);
+      _comp.classList.remove(CL.OPTIONS_ROW_ACTIVE);
      }
   }
 
@@ -480,11 +393,8 @@ class InputSelect extends Component {
 
   _renderOptionsFooter = (nFiltered, nAll) => {
     return (
-      <div
-         className={CL.NOT_SELECTED}
-         style={S.OPTIONS_FOOTER}
-      >
-        <span style={S.FOOTER_INDEX}>
+      <div className={`${CL.FOOTER} ${CL.NOT_SELECTED}`}>
+        <span className={CL.FOOTER_INDEX}>
           <span ref={this._refIndexNode} >
             {this.indexActiveOption}
           </span>
@@ -492,14 +402,14 @@ class InputSelect extends Component {
              : {nFiltered}: {nAll}
           </span>
         </span>
-        <span style={S.FOOTER_BUTTONS}>
+        <span className={CL.FOOTER_BTS}>
           <BtCircle
-             style={S.FOOTER_MARGIN}
+             className={CL.FOOTER_MARGIN}
              caption="Dn"
              onClick={this._stepDownOption}
           />
           <BtCircle
-             style={S.FOOTER_MARGIN}
+             className={CL.FOOTER_MARGIN}
              caption="Up"
              onClick={this._stepUpOption}
           />
@@ -526,17 +436,13 @@ class InputSelect extends Component {
     if (options){
       if (!isValidDomOptionsCache){
          _domOptions = options.map((item, index)=>{
-           const _styleDiv = (index % 2 === 0)
-                     ? S.ITEM_ODD : S.ITEM_EVEN;
-
            return (
              <div
                 //role="option"
                 //aria-selected={this.indexActiveOption === index}
                 //tabIndex="0"
                 key={index}
-                className="option-row"
-                style={{...S.ITEM_DIV, ..._styleDiv}}
+                className={CL.OPTIONS_ROW}
                 ref={c => this[`v${index}`] = c}
                 onClick={this._handleClickItem.bind(this, item, index)}
               >
@@ -564,15 +470,14 @@ class InputSelect extends Component {
 
     return (
         <div
-           style={{ ...S.ROOT_OPTION_DIV, ..._rootWidthStyle }}
+           className={CL.OPTIONS}
+           style={_rootWidthStyle}
            data-scrollable={true}
          >
           <div
              ref={this._refOptionsComp}
-             style={{ ...S.OPTION_DIV,
-                      ...rootOptionsStyle,
-                      ..._rootWidthStyle
-                    }}
+             className={CL.OPTIONS_DIV}
+             style={{...rootOptionsStyle, ..._rootWidthStyle}}
            >
             {_domOptions}
           </div>
@@ -607,7 +512,8 @@ class InputSelect extends Component {
       _placeholder = `Loading ${optionNames}...`;
       _afterInputEl = (
         <span
-          style={S.SPINNER_CELL}
+          className={CL.SPINNER}
+          //style={S.SPINNER_CELL}
           data-loader="circle"
         >
         </span>
@@ -616,7 +522,7 @@ class InputSelect extends Component {
        _placeholder=`Loading ${optionNames} Failed`;
        _afterInputEl = (
          <BtCircle
-           style={S.SPINNER_FAILED_CELL}
+           className={CL.SPINNER_FAILED}
            data-loader="circle-failed"
            onClick={onLoadOption}
          />
@@ -638,7 +544,10 @@ class InputSelect extends Component {
               : null;
 
     return (
-      <div style={{...S.ROOT_DIV, ..._rootWidthStyle}}>
+      <div
+        className={CL.ROOT}
+        style={_rootWidthStyle}
+      >
         <input
            ref={c => this.domInputText = c}
            type="text"
@@ -649,13 +558,14 @@ class InputSelect extends Component {
            autoCapitalize="off"
            spellCheck={false}
            value={value}
-           style={S.INPUT_TEXT}
+           className={CL.INPUT}
+           //style={S.INPUT_TEXT}
            placeholder={placeholder}
            onChange={this._handleInputChange}
            onKeyDown={this._handleInputKeyDown}>
         </input>
         {afterInputEl}
-        <hr style={S.INPUT_HR}></hr>
+        <hr className={CL.INPUT_HR} />
         {_domOptions}
       </div>
     )

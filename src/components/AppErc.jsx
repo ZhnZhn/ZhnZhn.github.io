@@ -20,13 +20,14 @@ import AnalyticActions from '../flux/actions/AnalyticActions';
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '12-04-2018';
+const PREV_BUILD = '16-04-2018';
 
 const {
   answerYes, answerView, answerNo, noAnswer
 } = AnalyticActions;
 
 const _checkBuild = () => {
+  if (window.fetch) {
   fetch('./data/build.json', {cache: "no-cache"})
     .then(res => res.json())
     .then(json => {
@@ -43,6 +44,7 @@ const _checkBuild = () => {
     .catch(err => {
       console.log(err.message)
     })
+  }
 }
 
 class AppErc extends Component {

@@ -14,7 +14,7 @@ var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CLASS_FOR_BT = "bt__watch__bar";
+var CL_BT = "bt__watch__bar";
 
 var S = {
   ROOT: {
@@ -36,14 +36,14 @@ var EditBar = function EditBar(_ref) {
       { style: S.ROOT },
       _react2.default.createElement(_ButtonCircle2.default, {
         caption: 'GROUP',
-        className: CLASS_FOR_BT,
         isWithoutDefault: true,
+        className: CL_BT,
         onClick: onClickGroup
       }),
       _react2.default.createElement(_ButtonCircle2.default, {
         caption: 'LIST',
-        className: CLASS_FOR_BT,
         isWithoutDefault: true,
+        className: CL_BT,
         style: S.BT_LIST,
         onClick: onClickList
       })

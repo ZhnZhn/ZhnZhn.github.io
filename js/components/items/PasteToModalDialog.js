@@ -41,7 +41,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var S = {
   MODAL: {
     position: 'static',
-    width: '380px',
+    width: '365px',
     height: '340px',
     //minHeight: '200px',
     margin: '70px auto 0px'
@@ -82,6 +82,10 @@ var PasteToModalDialog = function (_Component) {
       onClose();
     };
 
+    _this._refSeriesPaneComp = function (comp) {
+      return _this.seriesPaneComp = comp;
+    };
+
     _this._commandButtons = [_react2.default.createElement(_FlatButton2.default, {
       caption: 'Paste & Close',
       isPrimary: true,
@@ -101,8 +105,6 @@ var PasteToModalDialog = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           isShow = _props.isShow,
           _props$data = _props.data,
@@ -121,9 +123,7 @@ var PasteToModalDialog = function (_Component) {
           onClose: onClose
         },
         _react2.default.createElement(_SeriesPane2.default, {
-          ref: function ref(comp) {
-            return _this2.seriesPaneComp = comp;
-          },
+          ref: this._refSeriesPaneComp,
           rootStyle: S.SCROLL_PANE,
           fromChart: fromChart,
           toChart: toChart

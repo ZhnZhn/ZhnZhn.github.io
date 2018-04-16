@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\flux\\actions\\ChartActions.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\flux\\actions\\ChartActions.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/flux/actions/ChartActions.js"
+ ],
+ "file": "../../../src/flux/actions/ChartActions.js",
  "names": [
   "C",
   "DESR_LOADER",

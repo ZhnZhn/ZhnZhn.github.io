@@ -229,4 +229,4 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
 });
 
 exports.default = ChartActions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\actions\ChartActions.js.map
+//# sourceMappingURL=ChartActions.js.map

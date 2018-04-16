@@ -1,26 +1,17 @@
 import React from 'react'
 
-const S = {
-  ROOT: {
-    display: 'inline-block',
-    backgroundColor: '#949ab4',
-    width: '32px',
-    lineHeight: '2.0',
-    borderRadius: '50%',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    verticalAlign: 'middle',
-    cursor: 'pointer'
-  }
-};
+const CL = 'zhn-bt-circle2';
 
-const ButtonCircle2 = ({ style, caption='', onClick, ...rest }) =>
-  <button    
-     style={{ ...S.ROOT, ...style }}
+const ButtonCircle2 = ({ className='', style, caption='', onClick, ...rest }) =>
+  <button
+     className={`${CL} ${className}`}
+     style={style}
      onClick={onClick}
      {...rest}
   >
-     {caption}
+    <div>
+      {caption}
+    </div>
   </button>
 
 export default ButtonCircle2

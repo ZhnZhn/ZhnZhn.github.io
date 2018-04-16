@@ -9,7 +9,7 @@ import SeriesPane from './SeriesPane'
 const S = {
   MODAL : {
     position : 'static',
-    width: '380px',
+    width: '365px',
     height: '340px',
     //minHeight: '200px',
     margin: '70px auto 0px'
@@ -58,6 +58,8 @@ class PasteToModalDialog extends Component {
     onClose()
   }
 
+  _refSeriesPaneComp = comp => this.seriesPaneComp = comp
+
   render(){
     const {
             isShow, data={}, onClose
@@ -72,7 +74,7 @@ class PasteToModalDialog extends Component {
         onClose={onClose}
       >
         <SeriesPane
-           ref={ comp => this.seriesPaneComp = comp }
+           ref={this._refSeriesPaneComp}
            rootStyle={S.SCROLL_PANE}
            fromChart={fromChart}
            toChart={toChart}

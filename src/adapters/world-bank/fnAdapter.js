@@ -2,9 +2,11 @@ import AdapterFn from '../AdapterFn'
 
 const { ymdToUTC, valueMoving } = AdapterFn;
 
-const _crId = (one, two) => `${one}_${two}`;
-
 const fnAdapter = {
+  crId: (option) => {
+    const { one='', two='' } = option;
+    return `${one}_${two}`;
+  },
   crData: (arrIn) => {
     if (!Array.isArray(arrIn)) {
       return [];
@@ -24,8 +26,8 @@ const fnAdapter = {
   },
 
   crConfigOptions: (option, data) => {
-    const { one, two, title, dataSource} = option
-        , _id = _crId(one, two);
+    const { title, dataSource } = option
+        , _id = fnAdapter.crId(option);
     return {
       zhConfig: {
         key: _id,

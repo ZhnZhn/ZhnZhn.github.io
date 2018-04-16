@@ -82,7 +82,7 @@ var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '12-04-2018';
+var PREV_BUILD = '16-04-2018';
 
 var answerYes = _AnalyticActions2.default.answerYes,
     answerView = _AnalyticActions2.default.answerView,
@@ -91,21 +91,23 @@ var answerYes = _AnalyticActions2.default.answerYes,
 
 
 var _checkBuild = function _checkBuild() {
-  fetch('./data/build.json', { cache: "no-cache" }).then(function (res) {
-    return res.json();
-  }).then(function (json) {
-    var _json$build = json.build,
-        build = _json$build === undefined ? '' : _json$build;
+  if (window.fetch) {
+    fetch('./data/build.json', { cache: "no-cache" }).then(function (res) {
+      return res.json();
+    }).then(function (json) {
+      var _json$build = json.build,
+          build = _json$build === undefined ? '' : _json$build;
 
-    if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
-      _ComponentActions2.default.showModalDialog("RELOAD", {
-        prevDate: PREV_BUILD,
-        nextDate: build
-      });
-    }
-  }).catch(function (err) {
-    console.log(err.message);
-  });
+      if (build !== PREV_BUILD && document.cookie.indexOf('erc') === -1) {
+        _ComponentActions2.default.showModalDialog("RELOAD", {
+          prevDate: PREV_BUILD,
+          nextDate: build
+        });
+      }
+    }).catch(function (err) {
+      console.log(err.message);
+    });
+  }
 };
 
 var AppErc = function (_Component) {

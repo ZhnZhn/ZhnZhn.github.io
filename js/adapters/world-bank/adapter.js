@@ -18,11 +18,14 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var crData = _fnAdapter2.default.crData,
+var crId = _fnAdapter2.default.crId,
+    crData = _fnAdapter2.default.crData,
     crConfigOptions = _fnAdapter2.default.crConfigOptions;
 
 
 var adapter = {
+  crKey: crId,
+
   toConfig: function toConfig(json, option) {
     var title = option.title,
         subtitle = option.subtitle,

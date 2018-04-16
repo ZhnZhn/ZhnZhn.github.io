@@ -41,7 +41,8 @@ const S = {
   },
   ROW_CHECK_BOX: {
     display: 'inline-block',
-    verticalAlign: 'middle'
+    verticalAlign: 'middle',
+    paddingLeft: 0
   },
   SELECT: {
      verticalAlign: 'middle',

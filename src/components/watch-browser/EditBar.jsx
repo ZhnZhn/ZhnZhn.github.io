@@ -2,7 +2,7 @@ import React from 'react';
 
 import ButtonCircle from '../zhn/ButtonCircle';
 
-const CLASS_FOR_BT = "bt__watch__bar";
+const CL_BT = "bt__watch__bar";
 
 const S = {
   ROOT: {
@@ -11,7 +11,7 @@ const S = {
   BT_LIST : {
     marginLeft: '20px'
   }
-}
+};
 
 const EditBar = ({ isShow, onClickGroup, onClickList }) => {
   if (isShow) {
@@ -19,14 +19,14 @@ const EditBar = ({ isShow, onClickGroup, onClickList }) => {
       <div style={S.ROOT}>
          <ButtonCircle
            caption="GROUP"
-           className={CLASS_FOR_BT}
            isWithoutDefault={true}
+           className={CL_BT}
            onClick={onClickGroup}
         />
         <ButtonCircle
            caption="LIST"
-           className={CLASS_FOR_BT}
            isWithoutDefault={true}
+           className={CL_BT}
            style={S.BT_LIST}
            onClick={onClickList}
         />

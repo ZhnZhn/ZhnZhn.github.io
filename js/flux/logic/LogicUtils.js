@@ -6,6 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _Type = require('../../constants/Type');
 
+var _LoadConfig = require('./LoadConfig');
+
+var _LoadConfig2 = _interopRequireDefault(_LoadConfig);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
   var loadId = option.loadId,
       isLoadMeta = option.isLoadMeta,
@@ -33,10 +39,21 @@ var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
   return geo + '_' + group + '_' + _metric + '_' + seriaType + '_' + time;
 };
 
+var _crKey = function _crKey(option) {
+  var loadId = option.loadId,
+      value = option.value,
+      loadConfig = _LoadConfig2.default[loadId] || {},
+      crKey = loadConfig.crKey;
+
+  if (typeof crKey === 'function') {
+    return crKey(option);
+  }
+  return value || 'key';
+};
+
 var LogicUtils = {
   createKeyForConfig: function createKeyForConfig(option) {
-    var loadId = option.loadId,
-        value = option.value;
+    var loadId = option.loadId;
 
     switch (loadId) {
       case _Type.LoadType.Q:case _Type.LoadType.QCT:
@@ -46,10 +63,10 @@ var LogicUtils = {
       case _Type.LoadType.WL:
         return option.id;
       default:
-        return value || 'key';
+        return _crKey(option);
     }
   }
 };
 
 exports.default = LogicUtils;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\LogicUtils.js.map
+//# sourceMappingURL=LogicUtils.js.map

@@ -84,13 +84,17 @@ const _fnLoadItem = function(objImpl, option, onCompleted, onAdded, onFailed){
 };
 
 const fLoadItem = (objImpl) => {
-   const { fnFetch=fetchJson, api } = objImpl;
+   const {
+           fnFetch=fetchJson,
+           api, adapter
+         } = objImpl;
    objImpl.fnFetch = fnFetch
    return {
      loadItem: _fnLoadItem.bind(null, objImpl),
      fnFetchToChartComp: _fnFetchToChartComp.bind(null, objImpl),
      fnFetchToChart: _fnFetchToChart.bind(null, objImpl),
      addPropsTo: api.addPropsTo,
+     crKey: adapter.crKey
    };
 }
 

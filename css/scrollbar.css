@@ -1,4 +1,11 @@
 
+.with-scroll {
+  overscroll-behavior: contain;
+
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
 .with-scroll::-webkit-scrollbar {
   /* background-color:black; */
   width: 5px;

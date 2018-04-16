@@ -10,9 +10,11 @@ import MapFactory from '../../components/factories/MapFactory'
 
 /*eslint-disable no-undef */
 if ( process.env.NODE_ENV !== 'development'){
-  window.System.config({
-    baseURL: "/"
-  });
+  if (window.System && window.System.config) {
+    window.System.config({
+      baseURL: "/"
+    });
+  }
 }
 /*eslint-enable no-undef */
 

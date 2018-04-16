@@ -18,33 +18,28 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var S = {
-  ROOT: {
-    display: 'inline-block',
-    backgroundColor: '#949ab4',
-    width: '32px',
-    lineHeight: '2.0',
-    borderRadius: '50%',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    verticalAlign: 'middle',
-    cursor: 'pointer'
-  }
-};
+var CL = 'zhn-bt-circle2';
 
 var ButtonCircle2 = function ButtonCircle2(_ref) {
-  var style = _ref.style,
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      style = _ref.style,
       _ref$caption = _ref.caption,
       caption = _ref$caption === undefined ? '' : _ref$caption,
       onClick = _ref.onClick,
-      rest = (0, _objectWithoutProperties3.default)(_ref, ['style', 'caption', 'onClick']);
+      rest = (0, _objectWithoutProperties3.default)(_ref, ['className', 'style', 'caption', 'onClick']);
   return _react2.default.createElement(
     'button',
     (0, _extends3.default)({
-      style: (0, _extends3.default)({}, S.ROOT, style),
+      className: CL + ' ' + className,
+      style: style,
       onClick: onClick
     }, rest),
-    caption
+    _react2.default.createElement(
+      'div',
+      null,
+      caption
+    )
   );
 };
 

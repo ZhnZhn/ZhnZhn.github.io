@@ -14,11 +14,15 @@ var ymdToUTC = _AdapterFn2.default.ymdToUTC,
     valueMoving = _AdapterFn2.default.valueMoving;
 
 
-var _crId = function _crId(one, two) {
-  return one + '_' + two;
-};
-
 var fnAdapter = {
+  crId: function crId(option) {
+    var _option$one = option.one,
+        one = _option$one === undefined ? '' : _option$one,
+        _option$two = option.two,
+        two = _option$two === undefined ? '' : _option$two;
+
+    return one + '_' + two;
+  },
   crData: function crData(arrIn) {
     if (!Array.isArray(arrIn)) {
       return [];
@@ -40,11 +44,9 @@ var fnAdapter = {
   },
 
   crConfigOptions: function crConfigOptions(option, data) {
-    var one = option.one,
-        two = option.two,
-        title = option.title,
+    var title = option.title,
         dataSource = option.dataSource,
-        _id = _crId(one, two);
+        _id = fnAdapter.crId(option);
 
     return {
       zhConfig: {

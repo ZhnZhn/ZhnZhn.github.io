@@ -1,40 +1,30 @@
 import React from 'react';
 
-const CL_NOT = 'not-selected';
-const S = {
-  ROOT: {
-    display: 'inline-block',
-    color: '#80c040',
-    border: '2px solid #80c040',
-    borderRadius: '50%',
-    lineHeight: '24px',
-    width: '26px',
-    height: '26px',
-    textAlign: 'center',
-    cursor: 'pointer'
-  }
+const CL = {
+  ROOT: 'zhn-bt-circle',
+  NOT: 'not-selected'
 };
 
 const ButtonCircle = (props) => {
     const {
-           className, style,
+           className='', style,
            caption='', title,
-           isWithoutDefault, onClick
+           isWithoutDefault,
+           onClick
          } = props
-        , _className = (className)
-             ? `${className} ${CL_NOT}`
-             : CL_NOT
-        , _style = (isWithoutDefault)
-             ? style
-             : Object.assign({}, S.ROOT, style);
+        , _className = (isWithoutDefault)
+            ? `${className} ${CL.NOT}`
+            : `${CL.ROOT} ${className} ${CL.NOT}`;
     return (
       <button
          className={_className}
-         style={_style}
+         style={style}
          title={title}
          onClick={onClick}
       >
-         {caption}
+        <div>
+          {caption}
+        </div>
       </button>
     );
 }

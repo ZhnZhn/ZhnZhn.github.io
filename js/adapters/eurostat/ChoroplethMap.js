@@ -38,9 +38,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /*eslint-disable no-undef */
 if (process.env.NODE_ENV !== 'development') {
-  window.System.config({
-    baseURL: "/"
-  });
+  if (window.System && window.System.config) {
+    window.System.config({
+      baseURL: "/"
+    });
+  }
 }
 /*eslint-enable no-undef */
 

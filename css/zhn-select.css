@@ -1,0 +1,123 @@
+
+.zhn-select {
+  position: relative;
+  display: inline-block;
+  background-color: #e1e1cb;
+  width: 160px;
+}
+
+.zhn-select__input {
+  background: transparent none repeat scroll 0 0;
+  border: medium none;
+  outline: medium none;
+  height: 30px;
+  padding-left: 10px;
+  color: green;
+  //width: 140px;
+  width: 100%;
+  padding-right: 40px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.zhn-select__spinner {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.zhn-select__spinner--failed {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-color: #f44336;
+  cursor: pointer;
+}
+
+.zhn-select__input__hr {
+  border-width: medium medium 1px;
+  border-style: none none solid;
+  border-color: #1b75bb;
+  border-image: none;
+  margin: 0;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  margin-right: 40px;
+}
+
+.zhn-select__options {
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  background-color: #e1e1cb;
+  color: green;
+  width: 160px;
+  //height: 160px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;  
+}
+
+.zhn-select__options__div {
+  min-height: 160px;
+  max-height: 200px;
+  padding-bottom: 2px;
+  overflow: auto;
+
+  overscroll-behavior: contain;
+
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+
+.zhn-select__row {  
+  background-color: #d5d5bc;
+  padding-top: 6px;
+  padding-left: 5px;
+  padding-bottom: 6px;
+  cursor: pointer;
+}
+.zhn-select__row:nth-child(odd) {
+  background-color: #c3c3ac;
+}
+
+.zhn-select__row:hover {
+  border-bottom: solid 2px #1b75bb;
+  font-weight: bolder;
+}
+.zhn-select__row--active {
+  border-bottom: solid 2px #1b75bb;
+  font-weight: bolder;
+}
+
+.zhn-select__footer {
+  position: relative;
+  background-color: silver;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  line-height: 1.5;
+}
+.zhn-select__footer__index {
+  display: inline-block;
+  color: gray;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.zhn-select__footer__bts {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  color: black;
+  font-weight: bold;
+}
+.zhn-select__footer--margin {
+  margin-right: 4px;
+}

@@ -1,1 +1,24 @@
-{"version":3,"sources":["../../../src/adapters/uncomtrade/UnComtradeAdapter.js"],"names":["UnComtradeAdapter","toConfig","json","option","config","isDrawDeltaExtrems","isNotZoomToMinMax","toSeries","seria","fSeries","Object","assign","zhSeriaId","zhValueText"],"mappings":";;;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,oBAAoB;AACxBC,UADwB,oBACfC,IADe,EACTC,MADS,EACF;AACpB,QAAMC,SAAS,oBAAUH,QAAV,CAAmBC,IAAnB,EAAyBC,MAAzB,CAAf;AACA,WAAO;AACJC,oBADI;AAEJC,0BAAoB,KAFhB;AAGJC,yBAAmB;AAHf,KAAP;AAKD,GARuB;AAUxBC,UAVwB,oBAUfL,IAVe,EAUTC,MAVS,EAUF;AACpB,QAAMK,QAAQ,sBAAYC,OAAZ,EAAd;AACAC,WAAOC,MAAP,CAAcH,KAAd,EAAqB;AACnBI,iBAAW,aADQ;AAEnBC,mBAAa;AAFM,KAArB;AAIA,WAAOL,KAAP;AACD;AAjBuB,CAA1B;;kBAoBeR,iB","file":"UnComtradeAdapter.js","sourcesContent":["\r\nimport ChartConfig from '../../charts/ChartConfig'\r\n\r\nimport fnAdapter from './fnAdapter'\r\n\r\nconst UnComtradeAdapter = {\r\n  toConfig(json, option){\r\n    const config = fnAdapter.toConfig(json, option);    \r\n    return {\r\n       config,\r\n       isDrawDeltaExtrems: false,\r\n       isNotZoomToMinMax: false\r\n    };\r\n  },\r\n\r\n  toSeries(json, option){\r\n    const seria = ChartConfig.fSeries()\r\n    Object.assign(seria, {\r\n      zhSeriaId: 'Empty_Seria',\r\n      zhValueText: 'Empty Seria'\r\n    })\r\n    return seria;\r\n  }\r\n};\r\n\r\nexport default UnComtradeAdapter\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/UnComtradeAdapter.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/UnComtradeAdapter.js",
+ "names": [
+  "UnComtradeAdapter",
+  "crKey",
+  "crChartId",
+  "toConfig",
+  "json",
+  "option",
+  "config",
+  "toSeries",
+  "seria",
+  "fSeries",
+  "Object",
+  "assign",
+  "zhSeriaId",
+  "zhValueText"
+ ],
+ "mappings": ";;;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,oBAAoB;AACxBC,SAAO,oBAAUC,SADO;;AAGxBC,UAHwB,oBAGfC,IAHe,EAGTC,MAHS,EAGF;AACpB,QAAMC,SAAS,oBAAUH,QAAV,CAAmBC,IAAnB,EAAyBC,MAAzB,CAAf;;AAEA,WAAO;AACJC;AACA;AACA;AAHI,KAAP;AAKD,GAXuB;AAaxBC,UAbwB,oBAafH,IAbe,EAaTC,MAbS,EAaF;AACpB,QAAMG,QAAQ,sBAAYC,OAAZ,EAAd;AACAC,WAAOC,MAAP,CAAcH,KAAd,EAAqB;AACnBI,iBAAW,aADQ;AAEnBC,mBAAa;AAFM,KAArB;AAIA,WAAOL,KAAP;AACD;AApBuB,CAA1B;;kBAuBeR,iB"
+}

@@ -4,12 +4,15 @@ import ChartConfig from '../../charts/ChartConfig'
 import fnAdapter from './fnAdapter'
 
 const UnComtradeAdapter = {
+  crKey: fnAdapter.crChartId,
+
   toConfig(json, option){
-    const config = fnAdapter.toConfig(json, option);    
+    const config = fnAdapter.toConfig(json, option);
+
     return {
-       config,
-       isDrawDeltaExtrems: false,
-       isNotZoomToMinMax: false
+       config
+       //isDrawDeltaExtrems: false,
+       //isNotZoomToMinMax: false
     };
   },
 

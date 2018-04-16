@@ -1,0 +1,61 @@
+
+.zhn-bt-circle {
+  display: inline-block;
+  color: #80c040;
+  border: 2px solid #80c040;
+  border-radius: 50%;
+  line-height: 24px;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  cursor: pointer;
+}
+.zhn-bt-circle:hover,
+.zhn-bt-circle:focus {
+  outline: 0;
+}
+
+.zhn-bt-circle > div {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;  
+  background-color: transparent;
+  transition: background-color 200ms ease-out; 
+}
+
+.zhn-bt-circle:hover > div,
+.zhn-bt-circle:focus > div {
+  background-color: rgba(0, 0, 0, 0.3);  
+}
+
+
+
+.zhn-bt-circle2 {
+  display: inline-block;
+  background-color: #949ab4;
+  width: 32px;
+  line-height: 2.0;
+  border-radius: 50%;  
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.zhn-bt-circle2:hover,
+.zhn-bt-circle2:focus {
+  outline: 0;
+}
+
+.zhn-bt-circle2 > div {
+  display: inline-block;
+  width: 100%;
+  height: 100%;  
+  border-radius: inherit;  
+  background-color: transparent;
+  transition: background-color 200ms ease-out; 
+}
+.zhn-bt-circle2:hover > div,
+.zhn-bt-circle2:hover > div {
+  background-color: rgba(0, 0, 0, 0.3);
+}

@@ -1,9 +1,11 @@
 import Builder from '../../charts/ConfigBuilder'
 import fnAdapter from './fnAdapter'
 
-const { crData, crConfigOptions } = fnAdapter;
+const { crId, crData, crConfigOptions } = fnAdapter;
 
 const adapter = {
+  crKey: crId,
+  
   toConfig(json, option){
     const { title, subtitle } = option
     , data = crData(json[1])

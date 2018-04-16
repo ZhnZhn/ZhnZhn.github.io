@@ -130,7 +130,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta){
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
-  } else if (!ChartStore.isLoadToChart()){
+  } else if (!ChartStore.isLoadToChart()){     
      if (ChartStore.isChartExist(chartType, key)){
        this.cancelLoad(option, M.ALREADY_EXIST, true);
      }

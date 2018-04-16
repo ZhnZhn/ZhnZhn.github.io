@@ -20,7 +20,11 @@ var IconHighcharts = function IconHighcharts(props) {
     },
     _react2.default.createElement(
       "svg",
-      { viewBox: "0 0 425.197 141.732", xmlns: "http://www.w3.org/2000/svg", "fill-rule": "evenodd", "clip-rule": "evenodd", "stroke-linejoin": "round", "stroke-miterlimit": "1.414" },
+      { viewBox: "0 0 425.197 141.732", xmlns: "http://www.w3.org/2000/svg",
+        fillRule: "evenodd", clipRule: "evenodd",
+        strokeLinejoin: "round",
+        strokeMiterlimit: "1.414"
+      },
       _react2.default.createElement(
         "title",
         null,
