@@ -1,20 +1,16 @@
 
 .with-scroll {
-  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
 
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
 }
 
 .with-scroll::-webkit-scrollbar {
-  /* background-color:black; */
   width: 5px;
 }
 
 .with-scroll::-webkit-scrollbar-track {
-  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
-  /*background-color: black;*/
-  /*background-color: #1b2836;*/  
   width: 2px;
   border-radius: 2px;
 }
@@ -23,9 +19,7 @@
   width: 3px;
   height: 50px;
   background-color: #8BC34A;
-  /*background-color:#909090;*/
-  border-radius: 2px;
-  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
+  border-radius: 2px; 
 }
 
 .with-scroll::-webkit-scrollbar-track-piece {
@@ -43,16 +37,14 @@
 }
 
 .scroll-browser-by{
-	overflow-y: auto;
-	height: 80%;
-	/*height: calc(100vh - 180px);*/
-	height: calc(100% - 85px);
-	padding-right: 10px;
+  overflow-y: auto;
+  height: 80%;
+  height: calc(100% - 85px);
+  padding-right: 10px;
 }
 .scroll-browser-by--search {
-	overflow-y: auto;
-	height: 80%;
-	/*height: calc(100vh - 215px);*/
-	height: calc(100% - 120px);
-	padding-right: 10px;
+  overflow-y: auto;
+  height: 80%;
+  height: calc(100% - 120px);
+  padding-right: 10px;
 }
