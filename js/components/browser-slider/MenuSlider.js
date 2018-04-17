@@ -66,12 +66,6 @@ var S = {
   },
   PAGE: {
     width: '300px'
-    /*
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px',
-    paddingBottom: '4px'
-    */
   }
 };
 

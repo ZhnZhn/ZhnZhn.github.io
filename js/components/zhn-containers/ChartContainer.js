@@ -66,6 +66,7 @@ var TH_ID = 'CHART_CONTAINER';
 
 var CL = {
   ROOT: "item-container",
+  SCROLL: 'scroll-container-y',
   SHOW: "show-popup"
 };
 
@@ -76,11 +77,6 @@ var CHILD_MARGIN = 36,
     DELTA = 10;
 
 var S = {
-  SCROLL: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px'
-  },
   /*
   transitionOption : {
     transitionName : "scaleY",
@@ -329,7 +325,8 @@ var ChartContainer = function (_Component) {
           _ScrollPane2.default,
           {
             ref: this._refSpComp,
-            style: S.SCROLL
+            className: CL.SCROLL
+            //style={S.SCROLL}
           },
           _react2.default.createElement(
             'div',

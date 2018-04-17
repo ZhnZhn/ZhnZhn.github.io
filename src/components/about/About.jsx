@@ -20,6 +20,7 @@ const TH_ID = 'ABOUT';
 
 const CL = {
   ABOUT: 'about-container',
+  SCROLL: 'scroll-container-y',
   SHOW: 'show-popup'
 };
 
@@ -105,7 +106,10 @@ class About extends Component {
            />
          </BrowserCaption>
 
-         <ScrollPane style={S.SCROLL_DIV}>
+         <ScrollPane
+             className={CL.SCROLL}
+             style={S.SCROLL_DIV}
+          >
 
          <div style={{...S.DIV_WRAPPER, ...S.GREY}}>
          <p>

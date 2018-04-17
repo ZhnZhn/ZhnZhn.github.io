@@ -42,15 +42,14 @@ var _MenuSlider2 = _interopRequireDefault(_MenuSlider);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL_SCROLL = 'scroll-container-y';
+
 var S = {
   BROWSER: {
     paddingRight: '0'
   },
   SCROLL_DIV: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px',
-    paddingBottom: '4px'
+    height: '92%'
   }
 };
 
@@ -119,7 +118,10 @@ var BrowserSlider = function (_Component) {
         }),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: S.SCROLL_DIV },
+          {
+            className: CL_SCROLL,
+            style: S.SCROLL_DIV
+          },
           _react2.default.createElement(_MenuSlider2.default, this.props)
         )
       );

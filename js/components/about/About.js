@@ -78,6 +78,7 @@ var TH_ID = 'ABOUT';
 
 var CL = {
   ABOUT: 'about-container',
+  SCROLL: 'scroll-container-y',
   SHOW: 'show-popup'
 };
 
@@ -177,7 +178,10 @@ var About = function (_Component) {
         ),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: _About2.default.SCROLL_DIV },
+          {
+            className: CL.SCROLL,
+            style: _About2.default.SCROLL_DIV
+          },
           _react2.default.createElement(
             'div',
             { style: (0, _extends3.default)({}, _About2.default.DIV_WRAPPER, _About2.default.GREY) },

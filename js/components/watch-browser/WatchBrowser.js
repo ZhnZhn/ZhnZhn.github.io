@@ -79,6 +79,8 @@ var DRAG = {
   ITEM: 'ITEM'
 };
 
+var CL_SCROLL = 'scroll-container-y';
+
 var S = {
   BROWSER: {
     paddingRight: '0px'
@@ -89,10 +91,9 @@ var S = {
     top: '-2px'
   },
   SCROLL_DIV: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px'
+    height: '87%'
   },
+
   GROUP_DIV: {
     lineHeight: 2
   },
@@ -319,7 +320,10 @@ var WatchBrowser = (_dec = _Decorators2.default.withDnDStyle, _dec2 = _Decorator
         }),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: S.SCROLL_DIV },
+          {
+            className: CL_SCROLL,
+            style: S.SCROLL_DIV
+          },
           watchList && this._renderWatchList(watchList)
         )
       );

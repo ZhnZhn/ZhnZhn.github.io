@@ -39,12 +39,18 @@
 .scroll-browser-by{
   overflow-y: auto;
   height: 80%;
-  height: calc(100% - 85px);
+  height: calc(100% - 95px);
   padding-right: 10px;
 }
 .scroll-browser-by--search {
   overflow-y: auto;
   height: 80%;
-  height: calc(100% - 120px);
+  height: calc(100% - 140px);
+  padding-right: 10px;
+}
+
+.scroll-container-y {
+  overflow-y: auto;
+  height: 90%;
   padding-right: 10px;
 }

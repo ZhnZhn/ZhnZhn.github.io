@@ -6,17 +6,20 @@ const TH_ID = 'SCROLL_PANE'
 const CL = 'with-scroll';
 
 class ScrollPane extends Component {
+  static defaultProps = {
+    className: ''
+  }
 
   _refRootNode = node => this.rootNode = node
 
   render(){
     const {
             theme,
-            style, className,
+            className, style,
             children
           } = this.props
         , TS = theme.getStyle(TH_ID)
-        , _cl = `${CL} ${TS.CL_SCROLL} ${className || ''}`;
+        , _cl = `${CL} ${TS.CL_SCROLL} ${className}`;
     return (
       <div
         ref={this._refRootNode}

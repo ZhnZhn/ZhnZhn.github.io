@@ -20,6 +20,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp2;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -33,7 +35,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var TH_ID = 'SCROLL_PANE';
 var CL = 'with-scroll';
 
-var ScrollPane = function (_Component) {
+var ScrollPane = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(ScrollPane, _Component);
 
   function ScrollPane() {
@@ -57,11 +59,11 @@ var ScrollPane = function (_Component) {
     value: function render() {
       var _props = this.props,
           theme = _props.theme,
-          style = _props.style,
           className = _props.className,
+          style = _props.style,
           children = _props.children,
           TS = theme.getStyle(TH_ID),
-          _cl = CL + ' ' + TS.CL_SCROLL + ' ' + (className || '');
+          _cl = CL + ' ' + TS.CL_SCROLL + ' ' + className;
 
       return _react2.default.createElement(
         'div',
@@ -80,7 +82,8 @@ var ScrollPane = function (_Component) {
     }
   }]);
   return ScrollPane;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  className: ''
+}, _temp2);
 exports.default = (0, _withThemeRef2.default)(ScrollPane);
 //# sourceMappingURL=ScrollPane.js.map

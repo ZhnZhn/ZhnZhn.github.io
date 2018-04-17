@@ -1,1 +1,35 @@
-{"version":3,"sources":["../../../src/components/browser-slider/BrowserSlider.jsx"],"names":["S","BROWSER","paddingRight","SCROLL_DIV","overflowY","height","paddingBottom","BrowserSlider","props","_onStore","actionType","data","browserType","showAction","_handleShow","_handleHide","setState","isShow","state","isInitShow","unsubscribe","store","listen","nextProps","nextState","caption"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAU;AACRC,kBAAc;AADN,GADF;AAIRC,cAAa;AACXC,eAAW,MADA;AAEXC,YAAQ,KAFG;AAGXH,kBAAc,MAHH;AAIXI,mBAAe;AAJJ;AAJL,CAAV;;IAaMC,a;;;AACJ,yBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAsBlBC,QAtBkB,GAsBP,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAAA,wBACM,MAAKH,KADX;AAAA,UACvBI,WADuB,eACvBA,WADuB;AAAA,UACVC,UADU,eACVA,UADU;;AAE/B,UAAIH,eAAeG,UAAf,IAA6BF,SAASC,WAA1C,EAAsD;AACpD,cAAKE,WAAL;AACD;AACF,KA3BiB;;AAAA,UA6BlBC,WA7BkB,GA6BJ,YAAM;AAClB,YAAKC,QAAL,CAAc,EAAEC,QAAS,KAAX,EAAd;AACD,KA/BiB;;AAAA,UAgClBH,WAhCkB,GAgCJ,YAAM;AAClB,YAAKE,QAAL,CAAc,EAAEC,QAAS,IAAX,EAAd;AACD,KAlCiB;;AAEhB,UAAKC,KAAL,GAAa;AACXD,cAAQT,MAAMW,UAAN,GAAmB,IAAnB,GAA0B;AADvB,KAAb;AAFgB;AAKjB;;;;wCAEkB;AACjB,WAAKC,WAAL,GAAmB,KAAKZ,KAAL,CAAWa,KAAX,CAAiBC,MAAjB,CAAwB,KAAKb,QAA7B,CAAnB;AACD;;;0CAEqBc,S,EAAWC,S,EAAU;AACzC,UAAI,KAAKN,KAAL,CAAWD,MAAX,KAAsBO,UAAUP,MAApC,EAA2C;AACzC,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;2CAEqB;AACpB,WAAKG,WAAL;AACD;;;6BAgBO;AACA,UAAEK,OAAF,GAAc,KAAKjB,KAAnB,CAAEiB,OAAF;AAAA,UACER,MADF,GACa,KAAKC,KADlB,CACED,MADF;;AAEN,aACE;AAAA;AAAA,UAAS,QAAQA,MAAjB,EAAyB,OAAOjB,EAAEC,OAAlC;AACE;AACG,mBAASwB,OADZ;AAEG,mBAAS,KAAKV;AAFjB,UADF;AAKG;AAAA;AAAA,YAAY,OAAOf,EAAEG,UAArB;AACE,8DAAgB,KAAKK,KAArB;AADF;AALH,OADF;AAWD;;;;;kBAGYD,a","file":"BrowserSlider.js","sourcesContent":["import React, { Component } from 'react'\r\n\r\nimport Browser from '../zhn/Browser';\r\nimport BrowserCaption from '../zhn/BrowserCaption';\r\nimport ScrollPane from '../zhn/ScrollPane';\r\n\r\nimport MenuSlider from './MenuSlider'\r\n\r\nconst S = {\r\n  BROWSER : {\r\n    paddingRight: '0'\r\n  },\r\n  SCROLL_DIV : {\r\n    overflowY: 'auto',\r\n    height: '92%',\r\n    paddingRight: '10px',\r\n    paddingBottom: '4px'\r\n  }\r\n};\r\n\r\n\r\nclass BrowserSlider extends Component {\r\n  constructor(props){\r\n    super();\r\n    this.state = {\r\n      isShow: props.isInitShow ? true : false,\r\n    }\r\n  }\r\n\r\n  componentDidMount(){\r\n    this.unsubscribe = this.props.store.listen(this._onStore)\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (this.state.isShow === nextState.isShow){\r\n      return false;\r\n    }\r\n    return true;\r\n  }\r\n\r\n  componentWillUnmount(){\r\n    this.unsubscribe();\r\n  }\r\n\r\n  _onStore = (actionType, data) => {\r\n    const { browserType, showAction  } = this.props;\r\n    if (actionType === showAction && data === browserType){\r\n      this._handleShow();\r\n    }\r\n  }\r\n\r\n  _handleHide = () => {\r\n    this.setState({ isShow : false });\r\n  }\r\n  _handleShow = () => {\r\n    this.setState({ isShow : true });\r\n  }\r\n\r\n  render(){\r\n    const { caption } = this.props\r\n        , { isShow } = this.state;\r\n    return (\r\n      <Browser isShow={isShow} style={S.BROWSER}>\r\n        <BrowserCaption\r\n           caption={caption}\r\n           onClose={this._handleHide}\r\n        />\r\n         <ScrollPane style={S.SCROLL_DIV}>\r\n           <MenuSlider {...this.props} />\r\n         </ScrollPane>\r\n      </Browser>\r\n    );\r\n  }\r\n}\r\n\r\nexport default BrowserSlider\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/BrowserSlider.js"
+ ],
+ "file": "../../../src/components/browser-slider/BrowserSlider.js",
+ "names": [
+  "CL_SCROLL",
+  "S",
+  "BROWSER",
+  "paddingRight",
+  "SCROLL_DIV",
+  "height",
+  "BrowserSlider",
+  "props",
+  "_onStore",
+  "actionType",
+  "data",
+  "browserType",
+  "showAction",
+  "_handleShow",
+  "_handleHide",
+  "setState",
+  "isShow",
+  "state",
+  "isInitShow",
+  "unsubscribe",
+  "store",
+  "listen",
+  "nextProps",
+  "nextState",
+  "caption"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,YAAY,oBAAlB;;AAEA,IAAMC,IAAI;AACRC,WAAS;AACPC,kBAAc;AADP,GADD;AAIRC,cAAY;AACVC,YAAQ;AADE;AAJJ,CAAV;;IASMC,a;;;AACJ,yBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAsBlBC,QAtBkB,GAsBP,UAACC,UAAD,EAAaC,IAAb,EAAsB;AAAA,wBACM,MAAKH,KADX;AAAA,UACvBI,WADuB,eACvBA,WADuB;AAAA,UACVC,UADU,eACVA,UADU;;AAE/B,UAAIH,eAAeG,UAAf,IAA6BF,SAASC,WAA1C,EAAsD;AACpD,cAAKE,WAAL;AACD;AACF,KA3BiB;;AAAA,UA6BlBC,WA7BkB,GA6BJ,YAAM;AAClB,YAAKC,QAAL,CAAc,EAAEC,QAAS,KAAX,EAAd;AACD,KA/BiB;;AAAA,UAgClBH,WAhCkB,GAgCJ,YAAM;AAClB,YAAKE,QAAL,CAAc,EAAEC,QAAS,IAAX,EAAd;AACD,KAlCiB;;AAEhB,UAAKC,KAAL,GAAa;AACXD,cAAQT,MAAMW,UAAN,GAAmB,IAAnB,GAA0B;AADvB,KAAb;AAFgB;AAKjB;;;;wCAEkB;AACjB,WAAKC,WAAL,GAAmB,KAAKZ,KAAL,CAAWa,KAAX,CAAiBC,MAAjB,CAAwB,KAAKb,QAA7B,CAAnB;AACD;;;0CAEqBc,S,EAAWC,S,EAAU;AACzC,UAAI,KAAKN,KAAL,CAAWD,MAAX,KAAsBO,UAAUP,MAApC,EAA2C;AACzC,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;2CAEqB;AACpB,WAAKG,WAAL;AACD;;;6BAgBO;AACA,UAAEK,OAAF,GAAc,KAAKjB,KAAnB,CAAEiB,OAAF;AAAA,UACER,MADF,GACa,KAAKC,KADlB,CACED,MADF;;AAEN,aACE;AAAA;AAAA,UAAS,QAAQA,MAAjB,EAAyB,OAAOf,EAAEC,OAAlC;AACE;AACG,mBAASsB,OADZ;AAEG,mBAAS,KAAKV;AAFjB,UADF;AAKG;AAAA;AAAA;AACE,uBAAWd,SADb;AAEE,mBAAOC,EAAEG;AAFX;AAIE,8DAAgB,KAAKG,KAArB;AAJF;AALH,OADF;AAcD;;;;;kBAGYD,a"
+}

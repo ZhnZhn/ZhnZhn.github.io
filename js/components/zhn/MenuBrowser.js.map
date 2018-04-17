@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../../src/components/zhn/MenuBrowser.jsx"],"names":["S","BROWSER","paddingRight","SCROLL_DIV","overflowY","height","paddingBottom","MenuBrowser","props","store","browserType","isShow","state","menuItems","getBrowserMenu","unsubscribe","listen","_onStore","caption","children","_handleHide","_renderMenuParts","actionType","data","showAction","updateAction","_handleShow","setState","map","menuPart","index"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAU;AACRC,kBAAc;AADN,GADF;AAIRC,cAAa;AACXC,eAAW,MADA;AAEXC,YAAQ,KAFG;AAGXH,kBAAc,MAHH;AAIXI,mBAAe;AAJJ;AAJL,CAAV;;IAYMC,W;;;AACJ,uBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA;;AAAA,QAERC,KAFQ,GAEuBD,KAFvB,CAERC,KAFQ;AAAA,QAEDC,WAFC,GAEuBF,KAFvB,CAEDE,WAFC;AAAA,QAEYC,MAFZ,GAEuBH,KAFvB,CAEYG,MAFZ;;AAGhB,UAAKC,KAAL,GAAa;AACXD,cAAQA,SAAS,IAAT,GAAgB,KADb;AAEXE,iBAAWJ,MAAMK,cAAN,CAAqBJ,WAArB;AAFA,KAAb;AAHgB;AAOjB;;;;wCAEkB;AACjB,WAAKK,WAAL,GAAmB,KAAKP,KAAL,CAAWC,KAAX,CAAiBO,MAAjB,CAAwB,KAAKC,QAA7B,CAAnB;AACD;;;2CACqB;AACpB,WAAKF,WAAL;AACD;;;6BAwBO;AAAA,mBACwB,KAAKP,KAD7B;AAAA,UACEU,OADF,UACEA,OADF;AAAA,UACWC,QADX,UACWA,QADX;AAAA,mBAEwB,KAAKP,KAF7B;AAAA,UAEEC,SAFF,UAEEA,SAFF;AAAA,UAEaF,MAFb,UAEaA,MAFb;;AAGN,aACG;AAAA;AAAA,UAAS,QAAQA,MAAjB,EAAyB,OAAOX,EAAEC,OAAlC;AACG;AACG,mBAASiB,OADZ;AAEG,mBAAS,KAAKE;AAFjB,UADH;AAKG;AAAA;AAAA,YAAY,OAAOpB,EAAEG,UAArB;AACG,eAAKkB,gBAAL,CAAsBR,SAAtB,CADH;AAEGM;AAFH;AALH,OADH;AAYD;;;;;;OArCDF,Q,GAAW,UAACK,UAAD,EAAaC,IAAb,EAAsB;AAAA,kBAC2B,OAAKf,KADhC;AAAA,QACtBE,WADsB,WACtBA,WADsB;AAAA,QACTD,KADS,WACTA,KADS;AAAA,QACFe,UADE,WACFA,UADE;AAAA,QACUC,YADV,WACUA,YADV;;AAE9B,QAAIH,eAAeE,UAAf,IAA6BD,SAASb,WAA1C,EAAuD;AACtD,aAAKgB,WAAL;AACA,KAFD,MAEO,IAAIJ,eAAeG,YAAf,IAA+BF,SAASb,WAA5C,EAAwD;AAC9D,aAAKiB,QAAL,CAAc,EAAEd,WAAWJ,MAAMK,cAAN,CAAqBJ,WAArB,CAAb,EAAd;AACA;AACH,G;;OAEDU,W,GAAc,YAAM;AAClB,WAAKO,QAAL,CAAc,EAAEhB,QAAS,KAAX,EAAd;AACD,G;;OACDe,W,GAAc,YAAM;AAClB,WAAKC,QAAL,CAAc,EAAEhB,QAAS,IAAX,EAAd;AACD,G;;OAEDU,gB,GAAmB,UAACR,SAAD,EAAe;AAChC,WAAOA,UAAUe,GAAV,CAAc,UAACC,QAAD,EAAWC,KAAX,EAAqB;AACxC,aAAQ,2EAAU,KAAKA,KAAf,IAA0BD,QAA1B,EAAR;AACD,KAFM,CAAP;AAGD,G;;kBAoBYtB,W","file":"MenuBrowser.js","sourcesContent":["import React, { Component } from 'react';\r\n\r\nimport Browser from './Browser';\r\nimport BrowserCaption from './BrowserCaption';\r\nimport ScrollPane from './ScrollPane';\r\nimport MenuPart from './MenuPart';\r\n\r\nconst S = {\r\n  BROWSER : {\r\n    paddingRight: '0px'\r\n  },\r\n  SCROLL_DIV : {\r\n    overflowY: 'auto',\r\n    height: '92%',\r\n    paddingRight: '10px',\r\n    paddingBottom: '4px'\r\n  }\r\n};\r\n\r\nclass MenuBrowser extends Component {\r\n  constructor(props){\r\n    super()\r\n    const { store, browserType, isShow } = props;\r\n    this.state = {\r\n      isShow: isShow ? true : false,\r\n      menuItems: store.getBrowserMenu(browserType)\r\n    }\r\n  }\r\n\r\n  componentDidMount(){\r\n    this.unsubscribe = this.props.store.listen(this._onStore)\r\n  }\r\n  componentWillUnmount(){\r\n    this.unsubscribe()\r\n  }\r\n\r\n  _onStore = (actionType, data) => {\r\n     const { browserType, store, showAction, updateAction } = this.props;\r\n     if (actionType === showAction && data === browserType ){\r\n      this._handleShow()\r\n     } else if (actionType === updateAction && data === browserType){\r\n      this.setState({ menuItems: store.getBrowserMenu(browserType) })\r\n     }\r\n  }\r\n\r\n  _handleHide = () => {\r\n    this.setState({ isShow : false })\r\n  }\r\n  _handleShow = () => {\r\n    this.setState({ isShow : true })\r\n  }\r\n\r\n  _renderMenuParts = (menuItems) => {\r\n    return menuItems.map((menuPart, index) => {\r\n      return (<MenuPart key={index} {...menuPart} />);\r\n    });\r\n  }\r\n\r\n  render(){\r\n    const { caption, children } = this.props\r\n        , { menuItems, isShow } = this.state;\r\n    return (\r\n       <Browser isShow={isShow} style={S.BROWSER}>\r\n          <BrowserCaption\r\n             caption={caption}\r\n             onClose={this._handleHide}\r\n          />\r\n          <ScrollPane style={S.SCROLL_DIV}>\r\n            {this._renderMenuParts(menuItems)}\r\n            {children}\r\n          </ScrollPane>\r\n       </Browser>\r\n    );\r\n  }\r\n}\r\n\r\nexport default MenuBrowser\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/MenuBrowser.js"
+ ],
+ "file": "../../../src/components/zhn/MenuBrowser.js",
+ "names": [
+  "CL_SCROLL",
+  "S",
+  "BROWSER",
+  "paddingRight",
+  "SCROLL_DIV",
+  "height",
+  "MenuBrowser",
+  "props",
+  "store",
+  "browserType",
+  "isShow",
+  "state",
+  "menuItems",
+  "getBrowserMenu",
+  "unsubscribe",
+  "listen",
+  "_onStore",
+  "caption",
+  "children",
+  "_handleHide",
+  "_renderMenuParts",
+  "actionType",
+  "data",
+  "showAction",
+  "updateAction",
+  "_handleShow",
+  "setState",
+  "map",
+  "menuPart",
+  "index"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,YAAY,oBAAlB;;AAEA,IAAMC,IAAI;AACRC,WAAS;AACPC,kBAAc;AADP,GADD;AAIRC,cAAY;AACVC,YAAQ;AADE;AAJJ,CAAV;;IASMC,W;;;AACJ,uBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA;;AAAA,QAERC,KAFQ,GAEuBD,KAFvB,CAERC,KAFQ;AAAA,QAEDC,WAFC,GAEuBF,KAFvB,CAEDE,WAFC;AAAA,QAEYC,MAFZ,GAEuBH,KAFvB,CAEYG,MAFZ;;AAGhB,UAAKC,KAAL,GAAa;AACXD,cAAQA,SAAS,IAAT,GAAgB,KADb;AAEXE,iBAAWJ,MAAMK,cAAN,CAAqBJ,WAArB;AAFA,KAAb;AAHgB;AAOjB;;;;wCAEkB;AACjB,WAAKK,WAAL,GAAmB,KAAKP,KAAL,CAAWC,KAAX,CAAiBO,MAAjB,CAAwB,KAAKC,QAA7B,CAAnB;AACD;;;2CACqB;AACpB,WAAKF,WAAL;AACD;;;6BAwBO;AAAA,mBACwB,KAAKP,KAD7B;AAAA,UACEU,OADF,UACEA,OADF;AAAA,UACWC,QADX,UACWA,QADX;AAAA,mBAEwB,KAAKP,KAF7B;AAAA,UAEEC,SAFF,UAEEA,SAFF;AAAA,UAEaF,MAFb,UAEaA,MAFb;;AAGN,aACG;AAAA;AAAA,UAAS,QAAQA,MAAjB,EAAyB,OAAOT,EAAEC,OAAlC;AACG;AACG,mBAASe,OADZ;AAEG,mBAAS,KAAKE;AAFjB,UADH;AAKG;AAAA;AAAA;AACG,uBAAWnB,SADd;AAEG,mBAAOC,EAAEG;AAFZ;AAIG,eAAKgB,gBAAL,CAAsBR,SAAtB,CAJH;AAKGM;AALH;AALH,OADH;AAeD;;;;;;OAxCDF,Q,GAAW,UAACK,UAAD,EAAaC,IAAb,EAAsB;AAAA,kBAC2B,OAAKf,KADhC;AAAA,QACtBE,WADsB,WACtBA,WADsB;AAAA,QACTD,KADS,WACTA,KADS;AAAA,QACFe,UADE,WACFA,UADE;AAAA,QACUC,YADV,WACUA,YADV;;AAE9B,QAAIH,eAAeE,UAAf,IAA6BD,SAASb,WAA1C,EAAuD;AACtD,aAAKgB,WAAL;AACA,KAFD,MAEO,IAAIJ,eAAeG,YAAf,IAA+BF,SAASb,WAA5C,EAAwD;AAC9D,aAAKiB,QAAL,CAAc,EAAEd,WAAWJ,MAAMK,cAAN,CAAqBJ,WAArB,CAAb,EAAd;AACA;AACH,G;;OAEDU,W,GAAc,YAAM;AAClB,WAAKO,QAAL,CAAc,EAAEhB,QAAS,KAAX,EAAd;AACD,G;;OACDe,W,GAAc,YAAM;AAClB,WAAKC,QAAL,CAAc,EAAEhB,QAAS,IAAX,EAAd;AACD,G;;OAEDU,gB,GAAmB,UAACR,SAAD,EAAe;AAChC,WAAOA,UAAUe,GAAV,CAAc,UAACC,QAAD,EAAWC,KAAX,EAAqB;AACxC,aAAQ,2EAAU,KAAKA,KAAf,IAA0BD,QAA1B,EAAR;AACD,KAFM,CAAP;AAGD,G;;kBAuBYtB,W"
+}

@@ -17,11 +17,14 @@ import Decor from './decorators/Decorators';
 const C_FILL_OPEN = '#80c040';
 const CL_WATCH_ITEM = 'row__type2-topic not-selected';
 
+
 const DRAG = {
   GROUP : 'GROUP',
   LIST : 'LIST',
   ITEM : 'ITEM'
 };
+
+const CL_SCROLL = 'scroll-container-y';
 
 const S = {
   BROWSER: {
@@ -32,11 +35,10 @@ const S = {
     position: 'relative',
     top: '-2px'
   },
-  SCROLL_DIV: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px'
+  SCROLL_DIV: {    
+    height: '87%'
   },
+
   GROUP_DIV: {
     lineHeight : 2
   },
@@ -228,7 +230,10 @@ class WatchBrowser extends Component {
             onClickGroup={this._handlerEditGroup}
             onClickList={this._handlerEditList}
          />
-         <ScrollPane style={S.SCROLL_DIV}>
+         <ScrollPane
+           className={CL_SCROLL}
+           style={S.SCROLL_DIV}
+          >
            {watchList && this._renderWatchList(watchList)}
          </ScrollPane>
       </Browser>

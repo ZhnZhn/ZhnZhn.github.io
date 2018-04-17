@@ -6,18 +6,16 @@ import ScrollPane from '../zhn/ScrollPane';
 
 import MenuSlider from './MenuSlider'
 
+const CL_SCROLL = 'scroll-container-y';
+
 const S = {
-  BROWSER : {
+  BROWSER: {
     paddingRight: '0'
   },
-  SCROLL_DIV : {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px',
-    paddingBottom: '4px'
+  SCROLL_DIV: {
+    height: '92%'
   }
 };
-
 
 class BrowserSlider extends Component {
   constructor(props){
@@ -65,7 +63,10 @@ class BrowserSlider extends Component {
            caption={caption}
            onClose={this._handleHide}
         />
-         <ScrollPane style={S.SCROLL_DIV}>
+         <ScrollPane
+           className={CL_SCROLL}
+           style={S.SCROLL_DIV}
+         >
            <MenuSlider {...this.props} />
          </ScrollPane>
       </Browser>

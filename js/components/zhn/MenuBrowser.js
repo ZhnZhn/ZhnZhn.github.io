@@ -48,15 +48,14 @@ var _MenuPart2 = _interopRequireDefault(_MenuPart);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL_SCROLL = 'scroll-container-y';
+
 var S = {
   BROWSER: {
     paddingRight: '0px'
   },
   SCROLL_DIV: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px',
-    paddingBottom: '4px'
+    height: '94%'
   }
 };
 
@@ -110,7 +109,10 @@ var MenuBrowser = (_temp = _class = function (_Component) {
         }),
         _react2.default.createElement(
           _ScrollPane2.default,
-          { style: S.SCROLL_DIV },
+          {
+            className: CL_SCROLL,
+            style: S.SCROLL_DIV
+          },
           this._renderMenuParts(menuItems),
           children
         )

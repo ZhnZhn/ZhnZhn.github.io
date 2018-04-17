@@ -1,9 +1,9 @@
 const S = {
+
   SCROLL_DIV: {
-    overflowY: 'auto',
-    height: '92%',
-    paddingRight: '10px'
+    height: '94%'
   },
+
   DIV_WRAPPER : {
     paddingLeft: '12px',
     paddingRight: '5px',
