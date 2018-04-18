@@ -9,7 +9,7 @@ const _withProxy = [
 ];
 
 const SettingSlice = {
-  setting: {
+  setting: {    
     proxy: 'https://cors-anywhere.herokuapp.com/',
     isAdminMode: false,
     isDrawDeltaExtrems: false,

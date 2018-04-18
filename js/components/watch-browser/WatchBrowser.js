@@ -70,16 +70,18 @@ var _Decorators2 = _interopRequireDefault(_Decorators);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL = {
+  SCROLL: 'scroll-container-y scroll-watch',
+  WATCH_ITEM: 'row__type2-topic not-selected'
+};
+
 var C_FILL_OPEN = '#80c040';
-var CL_WATCH_ITEM = 'row__type2-topic not-selected';
 
 var DRAG = {
   GROUP: 'GROUP',
   LIST: 'LIST',
   ITEM: 'ITEM'
 };
-
-var CL_SCROLL = 'scroll-container-y';
 
 var S = {
   BROWSER: {
@@ -90,10 +92,6 @@ var S = {
     position: 'relative',
     top: '-2px'
   },
-  SCROLL_DIV: {
-    height: '87%'
-  },
-
   GROUP_DIV: {
     lineHeight: 2
   },
@@ -207,7 +205,7 @@ var WatchBrowser = (_dec = _Decorators2.default.withDnDStyle, _dec2 = _Decorator
 
         return _react2.default.createElement(_WatchItem2.default, {
           key: id,
-          className: CL_WATCH_ITEM,
+          className: CL.WATCH_ITEM,
           isModeEdit: isModeEdit,
           item: item,
           option: { groupCaption: groupCaption, listCaption: listCaption, caption: caption },
@@ -320,10 +318,7 @@ var WatchBrowser = (_dec = _Decorators2.default.withDnDStyle, _dec2 = _Decorator
         }),
         _react2.default.createElement(
           _ScrollPane2.default,
-          {
-            className: CL_SCROLL,
-            style: S.SCROLL_DIV
-          },
+          { className: CL.SCROLL },
           watchList && this._renderWatchList(watchList)
         )
       );

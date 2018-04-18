@@ -66,7 +66,7 @@ var TH_ID = 'CHART_CONTAINER';
 
 var CL = {
   ROOT: "item-container",
-  SCROLL: 'scroll-container-y',
+  SCROLL: 'scroll-container-y scroll-items',
   SHOW: "show-popup"
 };
 
@@ -326,7 +326,6 @@ var ChartContainer = function (_Component) {
           {
             ref: this._refSpComp,
             className: CL.SCROLL
-            //style={S.SCROLL}
           },
           _react2.default.createElement(
             'div',

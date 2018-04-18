@@ -19,7 +19,7 @@ const TH_ID = 'CHART_CONTAINER';
 
 const CL = {
   ROOT: "item-container",
-  SCROLL: 'scroll-container-y',
+  SCROLL: 'scroll-container-y scroll-items',
   SHOW: "show-popup"
 };
 
@@ -29,7 +29,7 @@ const CHILD_MARGIN = 36
     , RESIZE_MAX_WIDTH = 1200
     , DELTA = 10;
 
-const S = {  
+const S = {
   /*
   transitionOption : {
     transitionName : "scaleY",
@@ -235,8 +235,7 @@ class ChartContainer extends Component {
           </BrowserCaption>
           <ScrollPane
              ref={this._refSpComp}
-             className={CL.SCROLL}
-             //style={S.SCROLL}
+             className={CL.SCROLL}             
           >
             <div>
               { this._renderCharts() }

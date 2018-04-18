@@ -159,26 +159,30 @@
 
 .item-container {
     background-color: #4d4d4d;
-    padding: 0px 0px 3px 0px;
+    padding: 0;
+    //padding: 0px 0px 3px 0px;
     position: relative;
     border-radius: 4px;
     width: 635px;
-    height: calc(100vh - 71px);
-    min-height: 500px;
+    height: calc(100vh - 87px);
+    min-height: 200px;
     margin-left: 16px;
     box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
-    overflowY: hidden;
-    overflowX: hidden;
+    //overflow-y: hidden;
+    //overflow-x: hidden;
+}
+.item-container:last-child {
+  margin-right: 8px;
 }
 
 .browser-container {
-  flexShrink: 0;
-  zIndex: 20;
+  //flexShrink: 0;
+  //zIndex: 20;
   background-color: #4d4d4d;
   padding: 0px 3px 35px 0px;
   position: relative;
-  height: calc(100vh - 71px);
-  min-height: 500px;
+  height: calc(100vh - 87px);
+  min-height: 200px;
   min-width: 270px;
   max-width: 400px;
   margin-left: 10px;
@@ -192,8 +196,8 @@
   padding: 0px;
   padding-bottom: 35px;
   position: relative;
-  height: calc(100vh - 71px);
-  min-height: 500px;
+  height: calc(100vh - 87px);
+  min-height: 200px;
   min-width: 300px;
   max-width: 700px;
   margin-left: 16px;

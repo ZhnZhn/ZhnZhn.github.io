@@ -87,8 +87,11 @@
   }
 }
 
+
 @media screen and (max-width: 600px) {
   body::after {
+    position: absolute;
+    top: 0;
     content: "W600";
     font-size: 0;
   }
@@ -96,10 +99,13 @@
 
 @media screen and (max-width: 500px) {
   body::after {
+    position: absolute;
+    top: 0;
     content: "W500";
     font-size: 0;
   }
 }
+
 
 .provider__note__br {
   display: block;

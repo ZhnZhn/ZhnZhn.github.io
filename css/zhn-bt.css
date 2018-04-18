@@ -8,11 +8,13 @@
   width: 26px;
   height: 26px;
   text-align: center;
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
   cursor: pointer;
 }
 .zhn-bt-circle:hover,
 .zhn-bt-circle:focus {
   outline: 0;
+  box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3), 0 4px 15px 0 rgba(0,0,0,0.2);
 }
 
 .zhn-bt-circle > div {
@@ -40,11 +42,13 @@
   text-align: center;
   font-weight: bold;
   vertical-align: middle;
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
   cursor: pointer;
 }
 .zhn-bt-circle2:hover,
 .zhn-bt-circle2:focus {
-  outline: 0;
+  outline: 0;  
+  box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3), 0 4px 15px 0 rgba(0,0,0,0.2);
 }
 
 .zhn-bt-circle2 > div {

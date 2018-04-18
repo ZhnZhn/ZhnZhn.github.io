@@ -5,14 +5,11 @@ import BrowserCaption from './BrowserCaption';
 import ScrollPane from './ScrollPane';
 import MenuPart from './MenuPart';
 
-const CL_SCROLL = 'scroll-container-y';
+const CL_SCROLL = 'scroll-container-y scroll-menu';
 
 const S = {
   BROWSER: {
     paddingRight: '0'
-  },
-  SCROLL: {
-    height: '94%'
   }
 };
 
@@ -78,10 +75,7 @@ class MenuBrowserDynamic extends Component{
             caption={caption}
             onClose={this._handleHide}
          />
-          <ScrollPane
-            className={CL_SCROLL}
-            style={S.SCROLL}
-          >
+          <ScrollPane className={CL_SCROLL}>
             {this._renderMenuParts(menuItems)}
             {children}
           </ScrollPane>

@@ -15,8 +15,7 @@ const CL = {
 };
 const S = {
   SHOW: {
-    opacity: "0.9",
-    bottom: "0px"
+    opacity: "0.9"    
   },
   HIDE: {
      display: "none"

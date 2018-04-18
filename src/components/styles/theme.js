@@ -22,7 +22,8 @@ const P_WHITE = {
   C_HEADER: '#4d4d4d'
 };
 const P_SAND = {
-  BG_BODY: '#ddd',
+  //BG_BODY: '#ddd',
+  BG_BODY: '#9e9e9e',
   BG: '#e8e0cb',
 
   EL_BG: '#795548',

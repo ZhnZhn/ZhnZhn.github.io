@@ -54,3 +54,16 @@
   height: 90%;
   padding-right: 10px;
 }
+
+.scroll-items {
+  height: 85%;
+  height: calc(100% - 50px);
+}
+.scroll-menu {
+  height: 94%;
+  height: calc(100% - 20px); 
+}
+.scroll-watch {
+  height: 70%;
+  height: calc(100% - 65px);
+}

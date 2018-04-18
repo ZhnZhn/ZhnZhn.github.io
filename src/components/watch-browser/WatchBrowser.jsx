@@ -14,9 +14,12 @@ import WatchItem from './WatchItem';
 
 import Decor from './decorators/Decorators';
 
-const C_FILL_OPEN = '#80c040';
-const CL_WATCH_ITEM = 'row__type2-topic not-selected';
+const CL = {
+  SCROLL: 'scroll-container-y scroll-watch',
+  WATCH_ITEM: 'row__type2-topic not-selected'
+};
 
+const C_FILL_OPEN = '#80c040';
 
 const DRAG = {
   GROUP : 'GROUP',
@@ -24,7 +27,6 @@ const DRAG = {
   ITEM : 'ITEM'
 };
 
-const CL_SCROLL = 'scroll-container-y';
 
 const S = {
   BROWSER: {
@@ -35,10 +37,6 @@ const S = {
     position: 'relative',
     top: '-2px'
   },
-  SCROLL_DIV: {    
-    height: '87%'
-  },
-
   GROUP_DIV: {
     lineHeight : 2
   },
@@ -186,7 +184,7 @@ class WatchBrowser extends Component {
         return (
             <WatchItem
                key={id}
-               className={CL_WATCH_ITEM}
+               className={CL.WATCH_ITEM}
                isModeEdit={isModeEdit}
                item={item}
                option={{ groupCaption, listCaption, caption }}
@@ -230,10 +228,7 @@ class WatchBrowser extends Component {
             onClickGroup={this._handlerEditGroup}
             onClickList={this._handlerEditList}
          />
-         <ScrollPane
-           className={CL_SCROLL}
-           style={S.SCROLL_DIV}
-          >
+         <ScrollPane className={CL.SCROLL}>
            {watchList && this._renderWatchList(watchList)}
          </ScrollPane>
       </Browser>

@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 125px;
+  padding-bottom: 16px;
   background-color: #222;
   border-top: 2px solid #f1d600;
   opacity: 0;
@@ -46,23 +46,7 @@
   outline: none;
 }
 
-@media only screen and (max-width: 975px) {
-  .consent {
-    height: 150px;
-  }
-}
-
-@media only screen and (max-width: 525px) {
-  .consent {
-    height: 200px;
-  }
-}
-
-@media only screen and (max-width: 330px) {
-  .consent {
-    height: 230px;
-  }
-
+@media only screen and (max-width: 330px) {  
   .consent__btn {
     margin-left: 16px;
     margin-right: 16px;
