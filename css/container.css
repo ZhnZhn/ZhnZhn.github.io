@@ -205,3 +205,11 @@
   box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
   border-radius: 4px;
 }
+
+@media (max-device-width: 768px) {
+   .item-container,
+   .browser-container,
+   .about-container {
+      height: calc(100vh - 65px);
+   }   
+}
