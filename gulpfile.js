@@ -7,7 +7,18 @@ var gulp = require('gulp')
   , rev = require('gulp-rev')
   , inject = require('gulp-inject')
   , replace = require('gulp-replace')
-  , rename = require('gulp-rename');
+  , rename = require('gulp-rename')
+  , sass = require('gulp-sass');;
+
+
+var inputSass = './scss/*.scss';
+var outputCss = './css';
+
+gulp.task('sass', function(){
+  return gulp.src(inputSass)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(outputCss));  
+});
 
 
 

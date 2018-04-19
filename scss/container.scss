@@ -1,0 +1,48 @@
+
+
+@import 'container-all';
+
+@mixin base-cont {
+  position: relative;
+  background-color: #4d4d4d;
+  border-radius: 4px;
+  box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.6);
+  min-height: 200px;
+  height: calc(100vh + 36px);
+}
+
+.item-container {
+    @include base-cont();
+    padding: 0;
+    width: 635px;
+    margin-left: 16px;
+}
+.item-container:last-child {
+  margin-right: 8px;
+}
+
+.browser-container {
+  @include base-cont();
+  padding: 0px 3px 35px 0px;
+  min-width: 270px;
+  max-width: 400px;
+  margin-left: 10px;
+}
+
+.about-container {
+  @include base-cont();
+  padding: 0px;
+  padding-bottom: 35px;
+  min-width: 300px;
+  max-width: 700px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media (min-height: 540px) {
+   .item-container,
+   .browser-container,
+   .about-container {
+      height: calc(100vh - 87px);
+   }
+}

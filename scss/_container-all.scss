@@ -2,12 +2,14 @@
   display: flex;
   flex-direction: row;
   margin-top: 8px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+}
 
 .hrz-container {
   display: flex;
   flex-direction: row;
-  flex-shrink: 0; }
+  flex-shrink: 0;
+}
 
 .modal-root {
   z-index: 1050;
@@ -21,7 +23,8 @@
   overflow-y: auto;
   opacity: 1;
   background: rgba(0, 0, 0, 0.35) none repeat scroll 0% 0%;
-  outline: 0 none; }
+  outline: 0 none;
+}
 
 .row__topic {
   line-height: 2;
@@ -31,13 +34,16 @@
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 12px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .row__topic:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1); }
+  background-color: rgba(0,0,0, 0.1);
+}
 
 .row__topic:hover {
-  border-bottom: 1px solid #1b75bb; }
+  border-bottom: 1px solid #1b75bb;
+}
 
 .row__pane-topic {
   line-height: 2.2;
@@ -46,14 +52,17 @@
   font-weight: bold;
   padding: 1px 16px;
   outline: none;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .row__pane-topic:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1); }
+    background-color: rgba(0,0,0, 0.1);
+}
 
 .row__pane-topic:hover,
 .row__pane-topic:focus {
-  border-bottom: 1px solid #1b75bb; }
+  border-bottom: 1px solid #1b75bb;
+}
 
 .row__type2-topic {
   line-height: 2;
@@ -63,38 +72,46 @@
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 4px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .row__type2-topic:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1); }
+  background-color: rgba(0,0,0, 0.1);
+}
 
 .row__type2-topic:hover {
-  border-bottom: 1px solid #1b75bb; }
+  border-bottom: 1px solid #1b75bb;
+}
 
 .item__browser {
-  color: #a487d4; }
-
+  color: #a487d4;
+}
 .item__quandl {
-  color: #e05927; }
-
+  color: #e05927;
+}
 .item__eurostat {
-  color: #009ae5; }
-
+  color: #009ae5;
+}
 .item__watch {
-  color: #80c040; }
-
+  color: #80c040;
+}
 .item__about {
-  color: #1b2836; }
+  color: #1b2836;
+}
 
 .menu__badge {
   display: inline-block;
   color: black;
   background-color: #1b2836;
   float: right;
-  border-radius: 30%; }
+  //padding-right: 5px;
+  //padding-left: 5px;
+  border-radius: 30%;
+}
 
 .menu__badge:hover {
-  color: #1b75bb; }
+  color: #1b75bb;
+}
 
 .svg-close {
   display: inline-block;
@@ -109,71 +126,31 @@
   -webkit-transform-origin: center center;
   -ms-transform-origin: center center;
   transform-origin: center center;
-  will-change: transform; }
+  will-change: transform;
+}
 
 .svg-close:hover {
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
-  transform: rotate(90deg) scale(1.3, 1.3) translateY(-3px); }
+  transform: rotate(90deg) scale(1.3, 1.3) translateY(-3px);
+}
+
 
 /* TabPane */
 .tabpane__tabs::before {
   content: " ";
-  display: table; }
+  display: table;
+}
 
 .tabpane__tabs::after {
   clear: both;
   content: " ";
-  display: table; }
+  display: table;
+}
 
 .grid > thead > tr {
-  background-color: transparent !important; }
-
+  background-color: transparent !important;
+}
 .grid tr:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1); }
-
-.item-container {
-  position: relative;
-  background-color: #4d4d4d;
-  border-radius: 4px;
-  box-shadow: 1px 4px 6px 1px rgba(0, 0, 0, 0.6);
-  min-height: 200px;
-  height: calc(100vh + 36px);
-  padding: 0;
-  width: 635px;
-  margin-left: 16px; }
-
-.item-container:last-child {
-  margin-right: 8px; }
-
-.browser-container {
-  position: relative;
-  background-color: #4d4d4d;
-  border-radius: 4px;
-  box-shadow: 1px 4px 6px 1px rgba(0, 0, 0, 0.6);
-  min-height: 200px;
-  height: calc(100vh + 36px);
-  padding: 0px 3px 35px 0px;
-  min-width: 270px;
-  max-width: 400px;
-  margin-left: 10px; }
-
-.about-container {
-  position: relative;
-  background-color: #4d4d4d;
-  border-radius: 4px;
-  box-shadow: 1px 4px 6px 1px rgba(0, 0, 0, 0.6);
-  min-height: 200px;
-  height: calc(100vh + 36px);
-  padding: 0px;
-  padding-bottom: 35px;
-  min-width: 300px;
-  max-width: 700px;
-  margin-left: 16px;
-  margin-right: 16px; }
-
-@media (min-height: 540px) {
-  .item-container,
-  .browser-container,
-  .about-container {
-    height: calc(100vh - 87px); } }
+  background-color: rgba(0,0,0, 0.1);
+}
