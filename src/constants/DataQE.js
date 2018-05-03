@@ -38,7 +38,7 @@ const DataQE = {
       type : 'QE_COMMODITY_PRICE',
       menuTitle : 'Commodity Prices',
       dialogCaption : 'Commodity Price',
-      chartContainerCaption : 'Quandl Commodity Prices',
+      chartContainerCaption : 'Quandl: Commodity Prices',
       dialogType : 'DialogType4A',
       dialogProps : {
         descrUrl: './data/quandl/commodity-price.html',
@@ -57,7 +57,7 @@ const DataQE = {
       type : 'QE_WIKI_COMMODITY_PRICE',
       menuTitle : 'Wiki Commodity Prices',
       dialogCaption : 'Wiki Commodity Price',
-      chartContainerCaption : 'Quandl Wiki Commodity Prices',
+      chartContainerCaption : 'Quandl: Wiki Commodity Prices',
       dialogType : 'DialogType4A',
       dialogProps : {
         descrUrl: './data/quandl/wiki-commodity-price.html',
@@ -77,7 +77,7 @@ const DataQE = {
       type : 'QE_LME',
       menuTitle : 'London Metal Exchange',
       dialogCaption : 'London Metal Exchange',
-      chartContainerCaption : 'Quandl London Metal Exchange',
+      chartContainerCaption : 'Quandl: London Metal Exchange',
       dialogProps : {
         descrUrl : './data/quandl/lme.html',
         isTransform: true,
@@ -96,7 +96,7 @@ const DataQE = {
       type : 'QE_COMMODITY_TRADE',
       menuTitle : 'UN Commodity Trade',
       dialogCaption : 'United Nations Commodity Trade',
-      chartContainerCaption : 'Quandl United Nations Commodity Trade',
+      chartContainerCaption : 'Quandl: United Nations Commodity Trade',
       dialogType : 'UNCommodityTradeDialog',
       dialogProps : {
         descrUrl: './data/quandl/un-commodity-trade.html',
@@ -116,7 +116,7 @@ const DataQE = {
     type : 'QE_JODI_WORLD_GAS',
     menuTitle : 'JODI World Gas',
     dialogCaption : 'JODI World Gas',
-    chartContainerCaption : 'Quandl JODI World Gas',
+    chartContainerCaption : 'Quandl: JODI World Gas',
     dialogType : 'DialogType5',
     dialogProps : {
       descrUrl: './data/quandl/jodi.html',
@@ -139,7 +139,7 @@ const DataQE = {
     type : 'QE_JODI_WORLD_OIL',
     menuTitle : 'JODI World Oil',
     dialogCaption : 'JODI World Oil',
-    chartContainerCaption : 'Quandl JODI World Oil',
+    chartContainerCaption : 'Quandl: JODI World Oil',
     dialogType : 'JodiWorldOilDialog',
     dialogProps : {
       descrUrl: './data/quandl/jodi.html',
@@ -161,7 +161,7 @@ const DataQE = {
     type : 'QE_BP',
     menuTitle : 'British Petroleum',
     dialogCaption : 'British Petroleum',
-    chartContainerCaption : 'Quandl British Petroleum',
+    chartContainerCaption : 'Quandl: British Petroleum',
     dialogType: 'DialogType4',
     dialogProps : {
       descrUrl: './data/quandl/bp.html',
@@ -203,7 +203,7 @@ const DataQE = {
     type : 'QE_ROGERS_INDICES',
     menuTitle : 'Rogers Indices',
     dialogCaption : 'Rogers International Indices',
-    chartContainerCaption : 'Quandl Rogers International Commodity Indices',
+    chartContainerCaption : 'Quandl: Rogers International Commodity Indices',
     dialogProps : {
       descrUrl : './data/quandl/rogers-indices.html',
       optionURI : './data/quandl/rogers-indices.json',
@@ -218,7 +218,7 @@ const DataQE = {
     type : 'QE_BALTIC_INDICES',
     menuTitle: 'Baltic Indices',
     dialogCaption : 'Baltic Indices',
-    chartContainerCaption : 'Quandl Baltic Indices',
+    chartContainerCaption : 'Quandl: Baltic Indices',
     dialogProps : {
       descrUrl : './data/quandl/lloyds.html',
       optionURI : './data/quandl/lloyds-indices.json',
@@ -237,7 +237,7 @@ const DataQE = {
       type : 'QE_GLOBAL_INDICATOR',
       menuTitle : 'UN Global Indicator',
       dialogCaption : 'United Nations Global Indicator',
-      chartContainerCaption : 'Quandl United Nations Global Indicator',
+      chartContainerCaption : 'Quandl: United Nations Global Indicator',
       dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/un-global-indicator.html',
@@ -260,7 +260,7 @@ const DataQE = {
       type : 'QE_CURRENCY_HISTORY',
       menuTitle : 'Currency History',
       dialogCaption : 'Currency History',
-      chartContainerCaption : 'Quandl Currency History',
+      chartContainerCaption : 'Quandl: Currency History',
       dialogType : 'DialogType4A',
       dialogProps : {
         descrUrl: './data/quandl/currency-history.html',
@@ -278,7 +278,7 @@ const DataQE = {
       type : 'QE_WORLDBANK_PRICE',
       menuTitle : 'WB Economic Metric',
       dialogCaption : 'WorlBank Economic Metric',
-      chartContainerCaption : 'Quandl World Bank Economic Metric',
+      chartContainerCaption : 'Quandl: World Bank Economic Metric',
       dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/wb-development-indicator.html',
@@ -302,7 +302,7 @@ const DataQE = {
       type : 'QE_IMF_CROSSCOUNTRY',
       menuTitle : 'IMF Cross Country Metric',
       dialogCaption : 'IMF Cross Country Metric',
-      chartContainerCaption : 'Quandl IMF Cross Country Metric',
+      chartContainerCaption : 'Quandl: IMF Cross Country Metric',
       dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/imf-crosscountry-metric.html',
@@ -327,7 +327,7 @@ const DataQE = {
       type : 'QE_EU_COMMISSION',
       menuTitle : 'EU Commission Annual',
       dialogCaption : 'EU Commission Annual',
-      chartContainerCaption : 'Quandl EU Commission Annual',
+      chartContainerCaption : 'Quandl: EU Commission Annual',
       dialogType : 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/ameco.html',
@@ -351,7 +351,7 @@ const DataQE = {
       type : 'QE_OECD',
       menuTitle : 'OECD Index & Indicators',
       dialogCaption : 'OECD Index & Indicators',
-      chartContainerCaption : 'Quandl OECD Index & Indicators',
+      chartContainerCaption : 'Quandl: OECD Index & Indicators',
       //dialogType : 'DialogType4',
       dialogType: 'DialogType5',
       dialogProps : {
@@ -377,7 +377,7 @@ const DataQE = {
       type : 'QE_OECD_CPI',
       menuTitle : 'OECD CPI & HCPI',
       dialogCaption : 'OECD Consumer Price Index',
-      chartContainerCaption : 'Quandl OECD Consumer Price Index',
+      chartContainerCaption : 'Quandl: OECD Consumer Price Index',
       dialogType: 'DialogType5',
       dialogProps : {
         descrUrl: './data/quandl/oecd.html',
@@ -400,7 +400,7 @@ const DataQE = {
     type : 'QE_RATE_INFLATION',
     menuTitle : 'Rate Inflation',
     dialogCaption : 'Rate Inflation',
-    chartContainerCaption : 'Quandl Rate Inflation',
+    chartContainerCaption : 'Quandl: Rate Inflation',
     dialogType: 'DialogType4',
     dialogProps : {
       descrUrl: './data/quandl/rate-cpi-inflation.html',
@@ -421,7 +421,7 @@ const DataQE = {
       type : 'QE_BIG_MAC',
       menuTitle : 'Big Mac Index',
       dialogCaption : 'Economist Big Mac Index',
-      chartContainerCaption : 'Quandl Economist Big Mac Index',
+      chartContainerCaption : 'Quandl: Economist Big Mac Index',
       dialogType : 'DialogType4',
       dialogProps : {
         descrUrl : './data/quandl/big-mac-index.html',
@@ -444,7 +444,7 @@ const DataQE = {
     type : 'QE_GDT',
     menuTitle : 'Global Dairy Trade',
     dialogCaption : 'Global Dairy Trade',
-    chartContainerCaption : 'Quandl Global Dairy Trade',
+    chartContainerCaption : 'Quandl: Global Dairy Trade',
     dialogProps : {
       itemCaption : "Item:",
       optionNames : "items",
@@ -463,7 +463,7 @@ const DataQE = {
       type : 'QE_CHINA_FINANCE_FUTURE',
       menuTitle : 'China Finance FE',
       dialogCaption : 'China Finance FE',
-      chartContainerCaption : 'Quandl China Finance Futures Exchange',
+      chartContainerCaption : 'Quandl: China Finance Futures Exchange',
       dialogType : 'Futures3Dialog',
       dialogProps : {
         descrUrl : './data/quandl/china-finance-futures.html',
@@ -480,7 +480,7 @@ const DataQE = {
       type : 'QE_DCE_FUTURE',
       menuTitle : 'Dalian CE',
       dialogCaption : 'Dalian CE Futures',
-      chartContainerCaption : 'Quandl Dalian Commodities Exchange Futures',
+      chartContainerCaption : 'Quandl: Dalian Commodities Exchange Futures',
       dialogType : 'Futures3Dialog',
       dialogProps : {
         descrUrl : './data/quandl/dce-futures.html',
@@ -497,7 +497,7 @@ const DataQE = {
       type : 'QE_ZCE_FUTURE',
       menuTitle : 'Zhengzhou CE',
       dialogCaption : 'Zhengzhou CE Futures',
-      chartContainerCaption : 'Quandl Zhengzhou Commodities Exchange Futures',
+      chartContainerCaption : 'Quandl: Zhengzhou Commodities Exchange Futures',
       dialogType : 'Futures3Dialog',
       dialogProps : {
         descrUrl : './data/quandl/zce-futures.html',
@@ -514,7 +514,7 @@ const DataQE = {
       type : 'QE_SHANGHAI_FUTURE',
       menuTitle : 'Shanghai FE',
       dialogCaption : 'Shanghai FE',
-      chartContainerCaption : 'Quandl Shanghai Futures Exchange',
+      chartContainerCaption : 'Quandl: Shanghai Futures Exchange',
       dialogType : 'Futures3Dialog',
       dialogProps : {
         descrUrl : './data/quandl/shanghai-futures.html',
@@ -531,7 +531,7 @@ const DataQE = {
       type : 'QE_LIFFE_FUTURE',
       menuTitle : 'LIFFE FD',
       dialogCaption : 'LIFFE FD',
-      chartContainerCaption : 'Quandl LIFFE FD',
+      chartContainerCaption : 'Quandl: LIFFE FD',
       dialogType : 'Futures3Dialog',
       dialogProps : {
         descrUrl : './data/quandl/liffe-futures.html',
@@ -548,7 +548,7 @@ const DataQE = {
       type : 'QE_ICE_FUTURE',
       menuTitle : 'Intercontinental FE',
       dialogCaption : 'Intercontinental FE',
-      chartContainerCaption : 'Quandl Intercontinental Futures Exchange',
+      chartContainerCaption : 'Quandl: Intercontinental Futures Exchange',
       dialogType : 'Futures3Dialog',
       dialogProps : {
         descrUrl : './data/quandl/ice-futures.html',
@@ -567,7 +567,7 @@ const DataQE = {
       type : 'QE_WIKI_FUTURE',
       menuTitle : 'Wiki Continuous',
       dialogCaption : 'Wiki Continuous Futures',
-      chartContainerCaption : 'Quandl Wiki Continuous Futures',
+      chartContainerCaption : 'Quandl: Wiki Continuous Futures',
       dialogType : 'FuturesWikiDialog',
       dialogProps : {
         descrUrl : './data/quandl/wiki-futures.html',
@@ -580,7 +580,7 @@ const DataQE = {
         nInitFromDate : 2,
         dataSource : 'Wiki Continuous Futures (Code: CHRIS)'
       }
-  }    
+  }
 };
 
 export default DataQE

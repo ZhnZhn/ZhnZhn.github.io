@@ -7,7 +7,8 @@ import { ChartActionTypes as CHAT } from '../../flux/actions/ChartActions';
 
 import { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions';
 
-import ChartMorePopup from './ChartMorePopup'
+import ModalSlider from '../zhn-modal-slider/ModalSlider'
+import crModelMore from './ModelMore'
 
 import BrowserCaption from '../zhn/BrowserCaption';
 import SvgHrzResize from '../zhn/SvgHrzResize';
@@ -20,7 +21,9 @@ const TH_ID = 'CHART_CONTAINER';
 const CL = {
   ROOT: "item-container",
   SCROLL: 'scroll-container-y scroll-items',
-  SHOW: "show-popup"
+  SHOW: "show-popup",
+
+  MENU_MORE: "popup-menu charts__menu-more"
 };
 
 const CHILD_MARGIN = 36
@@ -71,7 +74,18 @@ class ChartContainer extends Component {
 
   constructor(props){
     super();
+    const { chartType } = props;
     this.childMargin = CHILD_MARGIN;
+
+    this._MODEL = crModelMore({
+      chartType,
+      onMinWidth: this._resizeTo.bind(this, RESIZE_MIN_WIDTH),
+      onInitWidth: this._resizeTo.bind(this, RESIZE_INIT_WIDTH),
+      onPlusWidth: this._plusToWidth,
+      onMinusWidth: this._minusToWidth,
+      onFit: this._fitToWidth,
+    })
+
     this.state = {
       isMore: false
     };
@@ -125,12 +139,12 @@ class ChartContainer extends Component {
    }
 
    _showMore = () => {
-     if (!this.state.isMore) {
-       this.setState({ isMore: true })
-     }
+      this.setState({ isMore: true })     
    }
-   _closeMore = () => {
-     this.setState({ isMore: false })
+   _hToggleMore = () => {
+     this.setState(prevState => ({
+       isMore: !prevState.isMore
+     }))
    }
 
   _crChartPropName = (index) => 'chart' + index
@@ -161,12 +175,6 @@ class ChartContainer extends Component {
    _resizeTo = (width) => {
      this._rootNode.style.width = width + 'px';
      this._hResizeAfter(width)
-   }
-   _resizeToMin = () => {
-     this._resizeTo(RESIZE_MIN_WIDTH)
-   }
-   _resizeToInit = () => {
-     this._resizeTo(RESIZE_INIT_WIDTH)
    }
 
    _plusToWidth = () => {
@@ -210,14 +218,14 @@ class ChartContainer extends Component {
            className={_classIsShow}
            style={{ ..._styleIsShow, ...TS.ROOT }}
         >
-          <ChartMorePopup
+          <ModalSlider
             isShow={isMore}
-            onClose={this._closeMore}
-            onResizeToMin={this._resizeToMin}
-            onResizeToInit={this._resizeToInit}
-            onPlusWidth={this._plusToWidth}
-            onMinusWidth={this._minusToWidth}
-            onFit={this._fitToWidth}
+            className={CL.MENU_MORE}
+            style={TS.EL_BORDER}
+            pageWidth={180}
+            maxPages={2}
+            model={this._MODEL}
+            onClose={this._hToggleMore}
           />
           <BrowserCaption
              isMore={true}
@@ -235,7 +243,7 @@ class ChartContainer extends Component {
           </BrowserCaption>
           <ScrollPane
              ref={this._refSpComp}
-             className={CL.SCROLL}             
+             className={CL.SCROLL}
           >
             <div>
               { this._renderCharts() }

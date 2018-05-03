@@ -18,8 +18,8 @@ const mathFn = {
             fnFormat=fnEcho
           } = option;
 
-    const bNowValue = Big(nowValue.toString().replace(/ /g,''))
-        , bPrevValue = Big(prevValue.toString().replace(/ /g, ''));
+    const bNowValue = Big(nowValue.toString().replace(/\s/g,''))
+        , bPrevValue = Big(prevValue.toString().replace(/\s/g, ''));
 
     let _bDelta = bPrevValue.minus(bNowValue)
       , _direction;
@@ -31,7 +31,7 @@ const mathFn = {
       _direction = Direction.EQUAL;
     }
 
-    _bDelta = _bDelta.abs().round(4);
+    const _bDeltaAbs = _bDelta.abs().round(4);
 
     const _bPercent = mathFn.calcPercent({ bValue:_bDelta, bTotal: bPrevValue });
 
@@ -42,10 +42,13 @@ const mathFn = {
     }
 
     return {
-      value : fnFormat(_bNowValue).toString(),
-      delta : fnFormat(_bDelta).toString(),
-      percent : _bPercent.toString() + '%',
-      direction : _direction
+      value: fnFormat(_bNowValue).toString(),
+      _value: _bNowValue.toString(),
+      delta: fnFormat(_bDeltaAbs).toString(),
+      _deltaAbs: _bDeltaAbs.toString(),
+      percent: _bPercent.toString() + '%',
+      _percentAbs: _bPercent.toString(),
+      direction: _direction
     };
   },
 

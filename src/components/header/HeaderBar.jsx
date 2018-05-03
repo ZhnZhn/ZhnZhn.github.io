@@ -9,14 +9,15 @@ import FlatButton from '../zhn-m/FlatButton'
 import ModalButton from '../zhn-m/ModalButton'
 import HotBar from './HotBar'
 import LimitRemainingLabel from './LimitRemainingLabel'
-import BrowserMenu from './BrowserMenu'
+
+import ModalSlider from '../zhn-modal-slider/ModalSlider'
+import crBrowserModel from './BrowserModel'
 
 import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentActions'
 import BA from '../../flux/actions/BrowserActions'
 import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
 import { BrowserType as BT, ModalDialog } from '../../constants/Type'
-import MODEL from './Model'
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
     , CAPTION = "ERC v0.15.0";
@@ -35,31 +36,25 @@ const CL = {
   WATCH: "header__bt-watch",
   SETTINGS: "header__bt-settins",
   ABOUT: "header__bt-about",
+
+  BROWSER_MENU: "popup-menu header__panel-browser"
 };
+
+const MODEL = crBrowserModel();
 
 class HeaderBar extends Component {
 
   constructor(props){
     super()
     this._settingFn = props.store.exportSettingFn()
+
+    this._hShowEconomic = BA.showBrowser.bind(null, BT.ECONOMIC)
+    this._hShowEurostat = BA.showBrowserDynamic.bind(null, BT.EUROSTAT)
+    this._hShowWatch = BA.showBrowserDynamic.bind(null, BT.WATCH_LIST)
+
     this.state = {
       isDS: false
     }
-  }
-
-  _hClickQuandl = () => {
-    BA.showBrowser(BT.ECONOMIC)
-    this.setState({ isDS: false })
-  }
-
-  _hClickDynamic = (browserConfig) => {
-    BA.showBrowserDynamic(browserConfig)
-    this.setState({ isDS: false })
-  }
-
-  _hClickAbout = () => {
-    CA.showAbout()
-    this.setState({ isDS: false })
   }
 
   _onRegDS = (dsNode) => {
@@ -72,6 +67,12 @@ class HeaderBar extends Component {
     if (!this.dsNode.contains(event.target)){
       this.setState({ isDS: false })
     }
+  }
+
+  _hToggleDS = () => {
+    this.setState(prevState => ({
+      isDS: !prevState.isDS
+    }))
   }
 
   _hDialogSettings = () => {
@@ -113,7 +114,7 @@ class HeaderBar extends Component {
             caption="Quandl"
             title="Quandl: World Economy Browser"
             accessKey="q"
-            onClick={this._hClickQuandl}
+            onClick={this._hShowEconomic}
           />
           <FlatButton
             className={CL.EUROSTAT}
@@ -121,7 +122,7 @@ class HeaderBar extends Component {
             caption="Eurostat"
             title="Eurostat Statistics Browser"
             accessKey="u"
-            onClick={this._hClickDynamic.bind(null, BT.EUROSTAT)}
+            onClick={this._hShowEurostat}
           />
           <FlatButton
              className={CL.WATCH}
@@ -129,7 +130,7 @@ class HeaderBar extends Component {
              caption="Watch"
              title="Watch List Browser"
              accessKey="w"
-             onClick={this._hClickDynamic.bind(null, BT.WATCH_LIST)}
+             onClick={this._hShowWatch}
           />
           <HotBar
             store={store}
@@ -159,16 +160,16 @@ class HeaderBar extends Component {
               style={S.LIMIT}
            />
 
-           <BrowserMenu
-              className={CL.BM}
-              style={S.ROOT}
-              isShow={isDS}
-              model={MODEL}
-              onClose={this._hCloseDS}
-              onClickQuandl={this._hClickQuandl}
-              onClickDynamic={this._hClickDynamic}
-              onClickAbout={this._hClickAbout}
+           <ModalSlider
+             isShow={isDS}
+             className={CL.BROWSER_MENU}
+             INIT_ID="page_0"
+             pageWidth={235}
+             maxPages={2}
+             model={MODEL}
+             onClose={this._hToggleDS}
            />
+
       </div>
     );
   }

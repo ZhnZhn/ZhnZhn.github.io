@@ -24,6 +24,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp, _initialiseProps;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -40,9 +42,13 @@ var _ChartActions = require('../../flux/actions/ChartActions');
 
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
-var _ChartMorePopup = require('./ChartMorePopup');
+var _ModalSlider = require('../zhn-modal-slider/ModalSlider');
 
-var _ChartMorePopup2 = _interopRequireDefault(_ChartMorePopup);
+var _ModalSlider2 = _interopRequireDefault(_ModalSlider);
+
+var _ModelMore = require('./ModelMore');
+
+var _ModelMore2 = _interopRequireDefault(_ModelMore);
 
 var _BrowserCaption = require('../zhn/BrowserCaption');
 
@@ -67,7 +73,9 @@ var TH_ID = 'CHART_CONTAINER';
 var CL = {
   ROOT: "item-container",
   SCROLL: 'scroll-container-y scroll-items',
-  SHOW: "show-popup"
+  SHOW: "show-popup",
+
+  MENU_MORE: "popup-menu charts__menu-more"
 };
 
 var CHILD_MARGIN = 36,
@@ -112,7 +120,7 @@ var _getWidth = function _getWidth(style) {
   return parseInt(style.width, 10) || RESIZE_INIT_WIDTH;
 };
 
-var ChartContainer = function (_Component) {
+var ChartContainer = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(ChartContainer, _Component);
 
   function ChartContainer(props) {
@@ -120,142 +128,21 @@ var ChartContainer = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (ChartContainer.__proto__ || Object.getPrototypeOf(ChartContainer)).call(this));
 
-    _this._isDataForContainer = function (data) {
-      var chartType = _this.props.chartType;
+    _initialiseProps.call(_this);
 
-      return data === chartType || data && data.chartType === chartType;
-    };
-
-    _this._onStore = function (actionType, data) {
-      if (_this._isDataForContainer(data)) {
-        if (isInArray(compActions, actionType)) {
-          if (actionType !== _ChartActions.ChartActionTypes.CLOSE_CHART) {
-            _this.spComp.scrollTop();
-          }
-          _this.setState(data);
-        } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
-          _this._hHide();
-        }
-      }
-    };
-
-    _this._hHide = function () {
-      var _this$props = _this.props,
-          chartType = _this$props.chartType,
-          browserType = _this$props.browserType,
-          onCloseContainer = _this$props.onCloseContainer;
-
-      onCloseContainer(chartType, browserType);
-      _this.setState({ isShow: false });
-    };
-
-    _this._hResizeAfter = function (parentWidth) {
-      var i = 0,
-          max = _this.state.configs.length,
-          _propName = void 0;
-      for (; i < max; i++) {
-        _propName = _this._crChartPropName(i);
-        if (_this[_propName] && typeof _this[_propName].reflowChart === 'function') {
-          _this[_propName].reflowChart(parentWidth - _this.childMargin);
-        }
-      }
-    };
-
-    _this._showMore = function () {
-      if (!_this.state.isMore) {
-        _this.setState({ isMore: true });
-      }
-    };
-
-    _this._closeMore = function () {
-      _this.setState({ isMore: false });
-    };
-
-    _this._crChartPropName = function (index) {
-      return 'chart' + index;
-    };
-
-    _this._refChart = function (index, comp) {
-      return _this[_this._crChartPropName(index)] = comp;
-    };
-
-    _this._renderCharts = function () {
-      var _this$props2 = _this.props,
-          chartType = _this$props2.chartType,
-          browserType = _this$props2.browserType,
-          onCloseItem = _this$props2.onCloseItem,
-          _this$state$configs = _this.state.configs,
-          configs = _this$state$configs === undefined ? [] : _this$state$configs,
-          _isAdminMode = typeof _ChartStore2.default.isAdminMode == 'function' ? _ChartStore2.default.isAdminMode.bind(_ChartStore2.default) : false;
-
-      return configs.map(function (config, index) {
-        var _config$zhConfig = config.zhConfig,
-            zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
-            id = zhConfig.id;
-
-        return _ItemFactory2.default.createItem({
-          store: _ChartStore2.default,
-          config: config, index: index,
-          option: { chartType: chartType },
-          props: {
-            ref: _this._refChart.bind(null, index),
-            onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
-            isAdminMode: _isAdminMode
-          }
-        });
-      });
-    };
-
-    _this._resizeTo = function (width) {
-      _this._rootNode.style.width = width + 'px';
-      _this._hResizeAfter(width);
-    };
-
-    _this._resizeToMin = function () {
-      _this._resizeTo(RESIZE_MIN_WIDTH);
-    };
-
-    _this._resizeToInit = function () {
-      _this._resizeTo(RESIZE_INIT_WIDTH);
-    };
-
-    _this._plusToWidth = function () {
-      var _this$_rootNode = _this._rootNode,
-          _rootNode = _this$_rootNode === undefined ? {} : _this$_rootNode,
-          _rootNode$style = _rootNode.style,
-          style = _rootNode$style === undefined ? {} : _rootNode$style,
-          w = _getWidth(style) + DELTA;
-
-      if (w < RESIZE_MAX_WIDTH) {
-        style.width = w + 'px';
-      }
-    };
-
-    _this._minusToWidth = function () {
-      var _this$_rootNode2 = _this._rootNode,
-          _rootNode = _this$_rootNode2 === undefined ? {} : _this$_rootNode2,
-          _rootNode$style2 = _rootNode.style,
-          style = _rootNode$style2 === undefined ? {} : _rootNode$style2,
-          w = _getWidth(style) - DELTA;
-
-      if (w > RESIZE_MIN_WIDTH) {
-        style.width = w + 'px';
-      }
-    };
-
-    _this._fitToWidth = function () {
-      _this._hResizeAfter(parseInt(_this._rootNode.style.width, 10));
-    };
-
-    _this._refRootNode = function (node) {
-      return _this._rootNode = node;
-    };
-
-    _this._refSpComp = function (node) {
-      return _this.spComp = node;
-    };
+    var chartType = props.chartType;
 
     _this.childMargin = CHILD_MARGIN;
+
+    _this._MODEL = (0, _ModelMore2.default)({
+      chartType: chartType,
+      onMinWidth: _this._resizeTo.bind(_this, RESIZE_MIN_WIDTH),
+      onInitWidth: _this._resizeTo.bind(_this, RESIZE_INIT_WIDTH),
+      onPlusWidth: _this._plusToWidth,
+      onMinusWidth: _this._minusToWidth,
+      onFit: _this._fitToWidth
+    });
+
     _this.state = {
       isMore: false
     };
@@ -296,14 +183,14 @@ var ChartContainer = function (_Component) {
           className: _classIsShow,
           style: (0, _extends3.default)({}, _styleIsShow, TS.ROOT)
         },
-        _react2.default.createElement(_ChartMorePopup2.default, {
+        _react2.default.createElement(_ModalSlider2.default, {
           isShow: isMore,
-          onClose: this._closeMore,
-          onResizeToMin: this._resizeToMin,
-          onResizeToInit: this._resizeToInit,
-          onPlusWidth: this._plusToWidth,
-          onMinusWidth: this._minusToWidth,
-          onFit: this._fitToWidth
+          className: CL.MENU_MORE,
+          style: TS.EL_BORDER,
+          pageWidth: 180,
+          maxPages: 2,
+          model: this._MODEL,
+          onClose: this._hToggleMore
         }),
         _react2.default.createElement(
           _BrowserCaption2.default,
@@ -337,7 +224,137 @@ var ChartContainer = function (_Component) {
     }
   }]);
   return ChartContainer;
-}(_react.Component);
+}(_react.Component), _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
 
+  this._isDataForContainer = function (data) {
+    var chartType = _this2.props.chartType;
+
+    return data === chartType || data && data.chartType === chartType;
+  };
+
+  this._onStore = function (actionType, data) {
+    if (_this2._isDataForContainer(data)) {
+      if (isInArray(compActions, actionType)) {
+        if (actionType !== _ChartActions.ChartActionTypes.CLOSE_CHART) {
+          _this2.spComp.scrollTop();
+        }
+        _this2.setState(data);
+      } else if (actionType === _ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2) {
+        _this2._hHide();
+      }
+    }
+  };
+
+  this._hHide = function () {
+    var _props2 = _this2.props,
+        chartType = _props2.chartType,
+        browserType = _props2.browserType,
+        onCloseContainer = _props2.onCloseContainer;
+
+    onCloseContainer(chartType, browserType);
+    _this2.setState({ isShow: false });
+  };
+
+  this._hResizeAfter = function (parentWidth) {
+    var i = 0,
+        max = _this2.state.configs.length,
+        _propName = void 0;
+    for (; i < max; i++) {
+      _propName = _this2._crChartPropName(i);
+      if (_this2[_propName] && typeof _this2[_propName].reflowChart === 'function') {
+        _this2[_propName].reflowChart(parentWidth - _this2.childMargin);
+      }
+    }
+  };
+
+  this._showMore = function () {
+    _this2.setState({ isMore: true });
+  };
+
+  this._hToggleMore = function () {
+    _this2.setState(function (prevState) {
+      return {
+        isMore: !prevState.isMore
+      };
+    });
+  };
+
+  this._crChartPropName = function (index) {
+    return 'chart' + index;
+  };
+
+  this._refChart = function (index, comp) {
+    return _this2[_this2._crChartPropName(index)] = comp;
+  };
+
+  this._renderCharts = function () {
+    var _props3 = _this2.props,
+        chartType = _props3.chartType,
+        browserType = _props3.browserType,
+        onCloseItem = _props3.onCloseItem,
+        _state$configs = _this2.state.configs,
+        configs = _state$configs === undefined ? [] : _state$configs,
+        _isAdminMode = typeof _ChartStore2.default.isAdminMode == 'function' ? _ChartStore2.default.isAdminMode.bind(_ChartStore2.default) : false;
+
+    return configs.map(function (config, index) {
+      var _config$zhConfig = config.zhConfig,
+          zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
+          id = zhConfig.id;
+
+      return _ItemFactory2.default.createItem({
+        store: _ChartStore2.default,
+        config: config, index: index,
+        option: { chartType: chartType },
+        props: {
+          ref: _this2._refChart.bind(null, index),
+          onCloseItem: onCloseItem.bind(null, chartType, browserType, id),
+          isAdminMode: _isAdminMode
+        }
+      });
+    });
+  };
+
+  this._resizeTo = function (width) {
+    _this2._rootNode.style.width = width + 'px';
+    _this2._hResizeAfter(width);
+  };
+
+  this._plusToWidth = function () {
+    var _rootNode2 = _this2._rootNode,
+        _rootNode = _rootNode2 === undefined ? {} : _rootNode2,
+        _rootNode$style = _rootNode.style,
+        style = _rootNode$style === undefined ? {} : _rootNode$style,
+        w = _getWidth(style) + DELTA;
+
+    if (w < RESIZE_MAX_WIDTH) {
+      style.width = w + 'px';
+    }
+  };
+
+  this._minusToWidth = function () {
+    var _rootNode3 = _this2._rootNode,
+        _rootNode = _rootNode3 === undefined ? {} : _rootNode3,
+        _rootNode$style2 = _rootNode.style,
+        style = _rootNode$style2 === undefined ? {} : _rootNode$style2,
+        w = _getWidth(style) - DELTA;
+
+    if (w > RESIZE_MIN_WIDTH) {
+      style.width = w + 'px';
+    }
+  };
+
+  this._fitToWidth = function () {
+    _this2._hResizeAfter(parseInt(_this2._rootNode.style.width, 10));
+  };
+
+  this._refRootNode = function (node) {
+    return _this2._rootNode = node;
+  };
+
+  this._refSpComp = function (node) {
+    return _this2.spComp = node;
+  };
+}, _temp);
 exports.default = (0, _withTheme2.default)(ChartContainer);
 //# sourceMappingURL=ChartContainer.js.map

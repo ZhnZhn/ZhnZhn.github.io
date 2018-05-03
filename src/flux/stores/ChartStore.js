@@ -11,6 +11,8 @@ import { ModalDialog } from '../../constants/Type';
 
 import Factory from '../logic/Factory';
 
+import ChartLogic from './ChartLogic'
+
 import BrowserSlice from './BrowserSlice';
 import ComponentSlice from './ComponentSlice';
 import SettingSlice from './SettingSlice';
@@ -32,45 +34,10 @@ const _fnLogLoadError = function({
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 }
 
-const ChartLogic = {
-  initChartSlice(slice, chartType, config){
-    const configs = config ? [ config ] : [];
-    if (!slice[chartType]) {
-      slice[chartType] = {
-        chartType, configs,
-        isShow: true
-      }
-    }
-  },
-
-  isChartExist(slice, chartType, key){
-    const chartSlice = slice[chartType];
-    if (!chartSlice){
-      return false;
-    }
-    const { configs } = chartSlice
-        , _max = configs.length;
-    let i = 0;
-    for (; i<_max; i++){
-      if (configs[i].zhConfig.key === key){
-        return true;
-      }
-    }
-    return false;
-  },
-
-  removeConfig(slice, chartType, id) {
-    const chartSlice = slice[chartType]
-        , configs = chartSlice.configs
-        , _lenBefore = configs.length;
-    chartSlice.configs = configs
-      .filter(c => c.zhConfig.id !== id)
-    return {
-      chartSlice,
-      isRemoved: _lenBefore > chartSlice.configs.length
-    };
-  }
-};
+const {
+  initChartSlice, isChartExist, removeConfig,
+  sortBy, reverseConfigs
+} = ChartLogic;
 
 const ChartStore = Reflux.createStore({
   listenables : [
@@ -90,8 +57,7 @@ const ChartStore = Reflux.createStore({
    return this.charts[chartType];
  },
  isChartExist(chartType, key){
-   return ChartLogic
-     .isChartExist(this.charts, chartType, key);
+   return isChartExist(this.charts, chartType, key);
  },
  showAlertDialog(option={}){
    option.modalDialogType = ModalDialog.ALERT;
@@ -119,7 +85,7 @@ const ChartStore = Reflux.createStore({
        chartSlice.isShow = true;
        this.trigger(CHAT.LOAD_STOCK_COMPLETED, chartSlice);
      } else {
-       ChartLogic.initChartSlice(this.charts, chartType, config)
+       initChartSlice(this.charts, chartType, config)
        //this.trigger(CHAT.LOAD_STOCK_COMPLETED);
        this.trigger(CHAT.INIT_AND_SHOW_CHART,
          Factory.createChartContainer(
@@ -172,7 +138,7 @@ const ChartStore = Reflux.createStore({
      chartSlice.isShow = true;
      this.trigger(CHAT.SHOW_CHART, chartSlice);
    } else {
-     ChartLogic.initChartSlice(this.charts, chartType)
+     initChartSlice(this.charts, chartType)
      this.trigger(
        CHAT.INIT_AND_SHOW_CHART,
        Factory.createChartContainer(
@@ -194,10 +160,9 @@ const ChartStore = Reflux.createStore({
  },
 
  onCloseChart(chartType, browserType, chartId){
-
-   //const chartSlice = this.charts[chartType];
-   const { chartSlice, isRemoved } = ChartLogic
-     .removeConfig(this.charts, chartType, chartId)
+   const {
+           chartSlice, isRemoved
+         } = removeConfig(this.charts, chartType, chartId)
 
    if (isRemoved) {
      this.resetActiveChart(chartId)
@@ -224,6 +189,15 @@ const ChartStore = Reflux.createStore({
  },
  getCopyFromChart(){
    return this.fromChart;
+ },
+
+ onSortBy(chartType, by){
+   const chartSlice = sortBy(this.charts, chartType, by)
+   this.trigger(CHAT.SHOW_CHART, chartSlice);   
+ },
+ onReverseCharts(chartType){
+   const chartSlice = reverseConfigs(this.charts, chartType)
+   this.trigger(CHAT.SHOW_CHART, chartSlice);
  },
 
  ...BrowserSlice,

@@ -60,7 +60,10 @@ var ChartActionTypes = exports.ChartActionTypes = {
   SHOW_CHART: 'showChart',
   CLOSE_CHART: 'closeChart',
 
-  COPY: 'copy'
+  COPY: 'copy',
+
+  SORT_BY: 'sortBy',
+  REVERSE_CHARTS: 'reverseCharts'
 };
 var A = ChartActionTypes;
 var M = _Msg2.default.Alert;
@@ -103,7 +106,7 @@ var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (
   cancelLoad: _fnCancelLoad
 }), (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_STOCK_BY_QUERY, {
   children: ['completed', 'failed']
-}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.PASTE_TO, {}), _Reflux$createActions));
+}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.PASTE_TO, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SORT_BY, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.REVERSE_CHARTS, {}), _Reflux$createActions));
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 

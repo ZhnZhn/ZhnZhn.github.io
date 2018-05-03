@@ -35,8 +35,8 @@ var mathFn = {
         fnFormat = _option$fnFormat === undefined ? fnEcho : _option$fnFormat;
 
 
-    var bNowValue = (0, _big2.default)(nowValue.toString().replace(/ /g, '')),
-        bPrevValue = (0, _big2.default)(prevValue.toString().replace(/ /g, ''));
+    var bNowValue = (0, _big2.default)(nowValue.toString().replace(/\s/g, '')),
+        bPrevValue = (0, _big2.default)(prevValue.toString().replace(/\s/g, ''));
 
     var _bDelta = bPrevValue.minus(bNowValue),
         _direction = void 0;
@@ -48,7 +48,7 @@ var mathFn = {
       _direction = Direction.EQUAL;
     }
 
-    _bDelta = _bDelta.abs().round(4);
+    var _bDeltaAbs = _bDelta.abs().round(4);
 
     var _bPercent = mathFn.calcPercent({ bValue: _bDelta, bTotal: bPrevValue });
 
@@ -60,8 +60,11 @@ var mathFn = {
 
     return {
       value: fnFormat(_bNowValue).toString(),
-      delta: fnFormat(_bDelta).toString(),
+      _value: _bNowValue.toString(),
+      delta: fnFormat(_bDeltaAbs).toString(),
+      _deltaAbs: _bDeltaAbs.toString(),
       percent: _bPercent.toString() + '%',
+      _percentAbs: _bPercent.toString(),
       direction: _direction
     };
   },
@@ -77,4 +80,4 @@ var mathFn = {
 };
 
 exports.default = mathFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\math\mathFn.js.map
+//# sourceMappingURL=mathFn.js.map

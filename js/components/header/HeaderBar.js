@@ -56,9 +56,13 @@ var _LimitRemainingLabel = require('./LimitRemainingLabel');
 
 var _LimitRemainingLabel2 = _interopRequireDefault(_LimitRemainingLabel);
 
-var _BrowserMenu = require('./BrowserMenu');
+var _ModalSlider = require('../zhn-modal-slider/ModalSlider');
 
-var _BrowserMenu2 = _interopRequireDefault(_BrowserMenu);
+var _ModalSlider2 = _interopRequireDefault(_ModalSlider);
+
+var _BrowserModel = require('./BrowserModel');
+
+var _BrowserModel2 = _interopRequireDefault(_BrowserModel);
 
 var _ComponentActions = require('../../flux/actions/ComponentActions');
 
@@ -71,10 +75,6 @@ var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
 var _LoadingProgressActions = require('../../flux/actions/LoadingProgressActions');
 
 var _Type = require('../../constants/Type');
-
-var _Model = require('./Model');
-
-var _Model2 = _interopRequireDefault(_Model);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -94,8 +94,12 @@ var CL = {
   EUROSTAT: "header__bt-eurostat",
   WATCH: "header__bt-watch",
   SETTINGS: "header__bt-settins",
-  ABOUT: "header__bt-about"
+  ABOUT: "header__bt-about",
+
+  BROWSER_MENU: "popup-menu header__panel-browser"
 };
+
+var MODEL = (0, _BrowserModel2.default)();
 
 var HeaderBar = function (_Component) {
   (0, _inherits3.default)(HeaderBar, _Component);
@@ -104,21 +108,6 @@ var HeaderBar = function (_Component) {
     (0, _classCallCheck3.default)(this, HeaderBar);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this));
-
-    _this._hClickQuandl = function () {
-      _BrowserActions2.default.showBrowser(_Type.BrowserType.ECONOMIC);
-      _this.setState({ isDS: false });
-    };
-
-    _this._hClickDynamic = function (browserConfig) {
-      _BrowserActions2.default.showBrowserDynamic(browserConfig);
-      _this.setState({ isDS: false });
-    };
-
-    _this._hClickAbout = function () {
-      _ComponentActions2.default.showAbout();
-      _this.setState({ isDS: false });
-    };
 
     _this._onRegDS = function (dsNode) {
       _this.dsNode = dsNode;
@@ -134,11 +123,24 @@ var HeaderBar = function (_Component) {
       }
     };
 
+    _this._hToggleDS = function () {
+      _this.setState(function (prevState) {
+        return {
+          isDS: !prevState.isDS
+        };
+      });
+    };
+
     _this._hDialogSettings = function () {
       _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, _this._settingFn);
     };
 
     _this._settingFn = props.store.exportSettingFn();
+
+    _this._hShowEconomic = _BrowserActions2.default.showBrowser.bind(null, _Type.BrowserType.ECONOMIC);
+    _this._hShowEurostat = _BrowserActions2.default.showBrowserDynamic.bind(null, _Type.BrowserType.EUROSTAT);
+    _this._hShowWatch = _BrowserActions2.default.showBrowserDynamic.bind(null, _Type.BrowserType.WATCH_LIST);
+
     _this.state = {
       isDS: false
     };
@@ -185,7 +187,7 @@ var HeaderBar = function (_Component) {
           caption: 'Quandl',
           title: 'Quandl: World Economy Browser',
           accessKey: 'q',
-          onClick: this._hClickQuandl
+          onClick: this._hShowEconomic
         }),
         _react2.default.createElement(_FlatButton2.default, {
           className: CL.EUROSTAT,
@@ -193,7 +195,7 @@ var HeaderBar = function (_Component) {
           caption: 'Eurostat',
           title: 'Eurostat Statistics Browser',
           accessKey: 'u',
-          onClick: this._hClickDynamic.bind(null, _Type.BrowserType.EUROSTAT)
+          onClick: this._hShowEurostat
         }),
         _react2.default.createElement(_FlatButton2.default, {
           className: CL.WATCH,
@@ -201,7 +203,7 @@ var HeaderBar = function (_Component) {
           caption: 'Watch',
           title: 'Watch List Browser',
           accessKey: 'w',
-          onClick: this._hClickDynamic.bind(null, _Type.BrowserType.WATCH_LIST)
+          onClick: this._hShowWatch
         }),
         _react2.default.createElement(_HotBar2.default, {
           store: store,
@@ -229,15 +231,14 @@ var HeaderBar = function (_Component) {
           store: store,
           style: S.LIMIT
         }),
-        _react2.default.createElement(_BrowserMenu2.default, {
-          className: CL.BM,
-          style: S.ROOT,
+        _react2.default.createElement(_ModalSlider2.default, {
           isShow: isDS,
-          model: _Model2.default,
-          onClose: this._hCloseDS,
-          onClickQuandl: this._hClickQuandl,
-          onClickDynamic: this._hClickDynamic,
-          onClickAbout: this._hClickAbout
+          className: CL.BROWSER_MENU,
+          INIT_ID: 'page_0',
+          pageWidth: 235,
+          maxPages: 2,
+          model: MODEL,
+          onClose: this._hToggleDS
         })
       );
     }

@@ -40,6 +40,10 @@ var _Factory = require('../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
 
+var _ChartLogic = require('./ChartLogic');
+
+var _ChartLogic2 = _interopRequireDefault(_ChartLogic);
+
 var _BrowserSlice = require('./BrowserSlice');
 
 var _BrowserSlice2 = _interopRequireDefault(_BrowserSlice);
@@ -85,45 +89,12 @@ var _fnLogLoadError = function _fnLogLoadError(_ref) {
   console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
 };
 
-var ChartLogic = {
-  initChartSlice: function initChartSlice(slice, chartType, config) {
-    var configs = config ? [config] : [];
-    if (!slice[chartType]) {
-      slice[chartType] = {
-        chartType: chartType, configs: configs,
-        isShow: true
-      };
-    }
-  },
-  isChartExist: function isChartExist(slice, chartType, key) {
-    var chartSlice = slice[chartType];
-    if (!chartSlice) {
-      return false;
-    }
-    var configs = chartSlice.configs,
-        _max = configs.length;
+var initChartSlice = _ChartLogic2.default.initChartSlice,
+    _isChartExist = _ChartLogic2.default.isChartExist,
+    removeConfig = _ChartLogic2.default.removeConfig,
+    sortBy = _ChartLogic2.default.sortBy,
+    reverseConfigs = _ChartLogic2.default.reverseConfigs;
 
-    var i = 0;
-    for (; i < _max; i++) {
-      if (configs[i].zhConfig.key === key) {
-        return true;
-      }
-    }
-    return false;
-  },
-  removeConfig: function removeConfig(slice, chartType, id) {
-    var chartSlice = slice[chartType],
-        configs = chartSlice.configs,
-        _lenBefore = configs.length;
-    chartSlice.configs = configs.filter(function (c) {
-      return c.zhConfig.id !== id;
-    });
-    return {
-      chartSlice: chartSlice,
-      isRemoved: _lenBefore > chartSlice.configs.length
-    };
-  }
-};
 
 var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   listenables: [_ChartActions2.default, _ComponentActions2.default, _BrowserActions2.default, _AnalyticActions2.default, _WatchActions2.default],
@@ -136,7 +107,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
     return this.charts[chartType];
   },
   isChartExist: function isChartExist(chartType, key) {
-    return ChartLogic.isChartExist(this.charts, chartType, key);
+    return _isChartExist(this.charts, chartType, key);
   },
   showAlertDialog: function showAlertDialog() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -167,7 +138,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
       chartSlice.isShow = true;
       this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, chartSlice);
     } else {
-      ChartLogic.initChartSlice(this.charts, chartType, config);
+      initChartSlice(this.charts, chartType, config);
       //this.trigger(CHAT.LOAD_STOCK_COMPLETED);
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType, conf));
     }
@@ -217,7 +188,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
       chartSlice.isShow = true;
       this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
     } else {
-      ChartLogic.initChartSlice(this.charts, chartType);
+      initChartSlice(this.charts, chartType);
       this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType, conf));
     }
     this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
@@ -228,11 +199,9 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
     }
   },
   onCloseChart: function onCloseChart(chartType, browserType, chartId) {
-
-    //const chartSlice = this.charts[chartType];
-    var _ChartLogic$removeCon = ChartLogic.removeConfig(this.charts, chartType, chartId),
-        chartSlice = _ChartLogic$removeCon.chartSlice,
-        isRemoved = _ChartLogic$removeCon.isRemoved;
+    var _removeConfig = removeConfig(this.charts, chartType, chartId),
+        chartSlice = _removeConfig.chartSlice,
+        isRemoved = _removeConfig.isRemoved;
 
     if (isRemoved) {
       this.resetActiveChart(chartId);
@@ -257,6 +226,14 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
   },
   getCopyFromChart: function getCopyFromChart() {
     return this.fromChart;
+  },
+  onSortBy: function onSortBy(chartType, by) {
+    var chartSlice = sortBy(this.charts, chartType, by);
+    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
+  },
+  onReverseCharts: function onReverseCharts(chartType) {
+    var chartSlice = reverseConfigs(this.charts, chartType);
+    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
   }
 }, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default, _WithLoadingProgress2.default));
 

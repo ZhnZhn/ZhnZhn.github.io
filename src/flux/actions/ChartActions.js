@@ -28,7 +28,10 @@ export const ChartActionTypes = {
   SHOW_CHART : 'showChart',
   CLOSE_CHART : 'closeChart',
 
-  COPY: 'copy'
+  COPY: 'copy',
+
+  SORT_BY: 'sortBy',
+  REVERSE_CHARTS: 'reverseCharts'
 };
 const A = ChartActionTypes;
 const M = Msg.Alert;
@@ -78,7 +81,10 @@ const ChartActions =  Reflux.createActions({
       [A.SHOW_CHART] : {},
       [A.CLOSE_CHART] : {},
       [A.COPY]: {},
-      [A.PASTE_TO]: {}
+      [A.PASTE_TO]: {},
+
+      [A.SORT_BY]: {},
+      [A.REVERSE_CHARTS]: {}
 });
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore
@@ -130,7 +136,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
     this.cancelLoad(option, M.LOADING_IN_PROGRESS, false);
   } else if (isDoublLoadMeta){
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
-  } else if (!ChartStore.isLoadToChart()){     
+  } else if (!ChartStore.isLoadToChart()){
      if (ChartStore.isChartExist(chartType, key)){
        this.cancelLoad(option, M.ALREADY_EXIST, true);
      }

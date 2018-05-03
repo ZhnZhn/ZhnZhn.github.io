@@ -87,7 +87,7 @@
     },
     "SM_TOKYO" : {
         "type" : "SM_TOKYO",
-        "menuTitle" : "Tokyo",
+        "menuTitle" : "Tokyo (Not Updated)",
         "dialogCaption" : "Tokyo Stock Prices",
         "chartContainerCaption" : "Quandl: Tokyo Stock Prices",
         "dialogProps" : {
@@ -104,9 +104,9 @@
     },
     "SM_WIKI" : {
         "type" : "SM_WIKI",
-        "menuTitle" : "Wiki: Nasdaq, Nyse",
-        "dialogCaption" : "Wiki Stock Prices",
-        "chartContainerCaption" : "Quandl: Wiki Stock Prices",
+        "menuTitle" : "Wiki EOD (Not Updated)",
+        "dialogCaption" : "Wiki EOD",
+        "chartContainerCaption" : "Quandl: Wiki EOD",
         "dialogProps" : {
           "descrUrl" : "./data/stock-markets/wiki.html",
           "isTransform" : true,

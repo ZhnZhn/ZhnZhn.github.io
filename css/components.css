@@ -29,3 +29,10 @@
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 5px;
 }
+
+.charts__menu-more {
+  top: 36px;
+  left: 8px;
+  z-index: 2000;
+  //border: 2px solid rgb(27, 40, 54);
+}
