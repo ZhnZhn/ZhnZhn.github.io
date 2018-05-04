@@ -1,1 +1,45 @@
-{"version":3,"sources":["../../../src/components/zhn/HighchartWrapper.jsx"],"names":["STYLE","ROOT_DIV_SHOW","position","display","zIndex","ROOT_DIV_HIDE","HighchartWrapper","renderChart","config","Error","chartConfig","chart","renderTo","chartEl","state","isShowAbsComp","props","onLoaded","onWillUnLoaded","destroy","err","process","env","NODE_ENV","console","log","isShow","rootStyle","absComp","_absComp","_rootDivStyle","c","setState","prevState"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,QAAQ;AACZC,iBAAgB;AACdC,cAAW,UADG;AAEdC,aAAU,OAFI;AAGdC,YAAS;AAHK,GADJ;AAMZC,iBAAgB;AACdH,cAAW,UADG;AAEdC,aAAU;AAFI;AANJ,CAAd;;IAYMG,gB;;;AACJ,8BAAa;AAAA;;AAAA;;AAAA,UAiCbC,WAjCa,GAiCC,UAACC,MAAD,EAAY;AACxB,UAAI,CAACA,MAAL,EAAY;AACV,cAAM,IAAIC,KAAJ,CAAU,8CAAV,CAAN;AACD;AACD,UAAMC,cAAeF,OAAOG,KAA5B;AACA,YAAKA,KAAL,GAAa,IAAI,qBAAW,OAAX,CAAJ,4BACRH,MADQ;AAEXG,0CACKD,WADL;AAEEE,oBAAU,MAAKC;AAFjB;AAFW,SAAb;AAOD,KA7CY;;AAEX,UAAKC,KAAL,GAAa;AACXC,qBAAe;AADJ,KAAb;AAFW;AAKZ;;;;wCAEkB;AAAA,mBACY,KAAKC,KADjB;AAAA,UACTR,MADS,UACTA,MADS;AAAA,UACDS,QADC,UACDA,QADC;;AAEjB,WAAKV,WAAL,CAAiBC,MAAjB;AACA,UAAK,OAAOS,QAAP,KAAoB,UAAzB,EAAqC;AACnCA,iBAAS,KAAKN,KAAd;AACD;AACF;;;2CAEqB;AAAA,UACZO,cADY,GACO,KAAKF,KADZ,CACZE,cADY;;AAEpB,UAAK,OAAOA,cAAP,KAA0B,UAA/B,EAA2C;AACzCA,uBAAe,KAAKP,KAApB;AACD;;AAED,UAAI;AACF,aAAKA,KAAL,CAAWQ,OAAX;AACD,OAFD,CAEE,OAAMC,GAAN,EAAW;AACX;AACA,YAAKC,QAAQC,GAAR,CAAYC,QAAZ,KAAyB,aAA9B,EAA6C;AAC3CC,kBAAQC,GAAR,CAAY,gCAAZ;AACAD,kBAAQC,GAAR,CAAYL,GAAZ;AACD;AACD;AACD;AACF;;;6BAgBQ;AAAA;;AAAA,oBACgC,KAAKJ,KADrC;AAAA,UACCU,MADD,WACCA,MADD;AAAA,UACSC,SADT,WACSA,SADT;AAAA,UACoBC,OADpB,WACoBA,OADpB;AAAA,UAECb,aAFD,GAEmB,KAAKD,KAFxB,CAECC,aAFD;AAAA,UAGDc,QAHC,GAGUd,gBACNa,OADM,GAEN,IALJ;AAAA,UAMDE,aANC,GAMeJ,SACX1B,MAAMC,aADK,GAEXD,MAAMK,aARV;;AASP,aACG;AAAA;AAAA;AACE,4CAAWsB,SAAX,EAAyBG,aAAzB;AADF;AAGG,+CAAK,KAAM;AAAA,mBAAK,OAAKjB,OAAL,GAAekB,CAApB;AAAA,WAAX,GAHH;AAKIF;AALJ,OADH;AASD;;;+BAEU;AACT,UAAG,CAAC,KAAKlB,KAAT,EAAe;AACb,cAAM,IAAIF,KAAJ,CAAU,0EAAV,CAAN;AACD;AACD,aAAO,KAAKE,KAAZ;AACD;;;oCAEe;AACd,WAAKqB,QAAL,CAAc,qBAAa;AACzB,eAAO;AACLjB,yBAAe,CAACkB,UAAUlB;AADrB,SAAP;AAGD,OAJD;AAKD;;;;;kBAGYT,gB","file":"HighchartWrapper.js","sourcesContent":["import React, { Component } from 'react';\r\nimport Highcharts from 'highcharts';\r\n\r\nconst STYLE = {\r\n  ROOT_DIV_SHOW : {\r\n    position : 'relative',\r\n    display : 'block',\r\n    zIndex : 1\r\n  },\r\n  ROOT_DIV_HIDE : {\r\n    position : 'relative',\r\n    display : 'none'\r\n  }\r\n};\r\n\r\nclass HighchartWrapper extends Component {\r\n  constructor(){\r\n    super()\r\n    this.state = {\r\n      isShowAbsComp: true\r\n    }\r\n  }\r\n\r\n  componentDidMount(){\r\n    const { config, onLoaded } = this.props;\r\n    this.renderChart(config);\r\n    if ( typeof onLoaded === 'function' ){\r\n      onLoaded(this.chart);\r\n    }\r\n  }\r\n\r\n  componentWillUnmount(){\r\n    const { onWillUnLoaded } = this.props;\r\n    if ( typeof onWillUnLoaded === 'function' ){\r\n      onWillUnLoaded(this.chart);\r\n    }\r\n\r\n    try {\r\n      this.chart.destroy()\r\n    } catch(err) {\r\n      /*eslint-disable no-undef */\r\n      if ( process.env.NODE_ENV === 'development') {\r\n        console.log('Exception during destroy chart')\r\n        console.log(err)\r\n      }\r\n      /*eslint-enable no-undef */\r\n    }\r\n  }\r\n\r\n  renderChart = (config) => {\r\n    if (!config){\r\n      throw new Error('Config must be specified for the ZhHighchart');\r\n    }\r\n    const chartConfig =  config.chart;\r\n    this.chart = new Highcharts['Chart']({\r\n      ...config,\r\n      chart: {\r\n        ...chartConfig,\r\n        renderTo: this.chartEl\r\n      }\r\n    });\r\n  }\r\n\r\n  render() {\r\n    const { isShow, rootStyle, absComp } = this.props\r\n        , { isShowAbsComp } = this.state\r\n        , _absComp = isShowAbsComp\r\n             ? absComp\r\n             : null\r\n        , _rootDivStyle = isShow\r\n             ? STYLE.ROOT_DIV_SHOW\r\n             : STYLE.ROOT_DIV_HIDE;\r\n    return (\r\n       <div\r\n         style={{...rootStyle, ..._rootDivStyle}}\r\n       >\r\n          <div ref={ c => this.chartEl = c }>\r\n          </div>\r\n          {_absComp}\r\n        </div>\r\n     );\r\n  }\r\n\r\n  getChart() {\r\n    if(!this.chart){\r\n      throw new Error('getChart() should not called before the ZhHighchart component is mounted');\r\n    }\r\n    return this.chart;\r\n  }\r\n\r\n  toggleAbsComp() {\r\n    this.setState(prevState => {\r\n      return {\r\n        isShowAbsComp: !prevState.isShowAbsComp\r\n      };\r\n    })\r\n  }\r\n}\r\n\r\nexport default HighchartWrapper\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/HighchartWrapper.js"
+ ],
+ "file": "../../../src/components/zhn/HighchartWrapper.js",
+ "names": [
+  "STYLE",
+  "ROOT_DIV_SHOW",
+  "position",
+  "display",
+  "zIndex",
+  "ROOT_DIV_HIDE",
+  "HighchartWrapper",
+  "state",
+  "isShowAbsComp",
+  "renderChart",
+  "config",
+  "Error",
+  "chartConfig",
+  "chart",
+  "renderTo",
+  "chartEl",
+  "_refChartEl",
+  "n",
+  "props",
+  "onLoaded",
+  "onWillUnLoaded",
+  "destroy",
+  "err",
+  "process",
+  "env",
+  "NODE_ENV",
+  "console",
+  "log",
+  "isShow",
+  "rootStyle",
+  "absComp",
+  "_absComp",
+  "_rootDivStyle",
+  "setState",
+  "prevState"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,QAAQ;AACZC,iBAAgB;AACdC,cAAW,UADG;AAEdC,aAAU,OAFI;AAGdC,YAAS;AAHK,GADJ;AAMZC,iBAAgB;AACdH,cAAW,UADG;AAEdC,aAAU;AAFI;AANJ,CAAd;;IAYMG,gB;;;;;;;;;;;;;;wNACJC,K,GAAQ;AACNC,qBAAe;AADT,K,QA8BRC,W,GAAc,UAACC,MAAD,EAAY;AACxB,UAAI,CAACA,MAAL,EAAY;AACV,cAAM,IAAIC,KAAJ,CAAU,8CAAV,CAAN;AACD;AACD,UAAMC,cAAeF,OAAOG,KAA5B;AACA,YAAKA,KAAL,GAAa,IAAI,qBAAW,OAAX,CAAJ,4BACRH,MADQ;AAEXG,0CACKD,WADL;AAEEE,oBAAU,MAAKC;AAFjB;AAFW,SAAb;AAOD,K,QAEDC,W,GAAc;AAAA,aAAK,MAAKD,OAAL,GAAeE,CAApB;AAAA,K;;;;;wCAxCK;AAAA,mBACY,KAAKC,KADjB;AAAA,UACTR,MADS,UACTA,MADS;AAAA,UACDS,QADC,UACDA,QADC;;AAEjB,WAAKV,WAAL,CAAiBC,MAAjB;AACA,UAAK,OAAOS,QAAP,KAAoB,UAAzB,EAAqC;AACnCA,iBAAS,KAAKN,KAAd;AACD;AACF;;;2CAEqB;AAAA,UACZO,cADY,GACO,KAAKF,KADZ,CACZE,cADY;;AAEpB,UAAK,OAAOA,cAAP,KAA0B,UAA/B,EAA2C;AACzCA,uBAAe,KAAKP,KAApB;AACD;;AAED,UAAI;AACF,aAAKA,KAAL,CAAWQ,OAAX;AACD,OAFD,CAEE,OAAMC,GAAN,EAAW;AACX;AACA,YAAKC,QAAQC,GAAR,CAAYC,QAAZ,KAAyB,aAA9B,EAA6C;AAC3CC,kBAAQC,GAAR,CAAY,gCAAZ;AACAD,kBAAQC,GAAR,CAAYL,GAAZ;AACD;AACD;AACD;AACF;;;6BAkBQ;AAAA,oBACgC,KAAKJ,KADrC;AAAA,UACCU,MADD,WACCA,MADD;AAAA,UACSC,SADT,WACSA,SADT;AAAA,UACoBC,OADpB,WACoBA,OADpB;AAAA,UAECtB,aAFD,GAEmB,KAAKD,KAFxB,CAECC,aAFD;AAAA,UAGDuB,QAHC,GAGUvB,gBACNsB,OADM,GAEN,IALJ;AAAA,UAMDE,aANC,GAMeJ,SACX5B,MAAMC,aADK,GAEXD,MAAMK,aARV;;AASP,aACG;AAAA;AAAA;AACE,4CAAWwB,SAAX,EAAyBG,aAAzB;AADF;AAGG,+CAAK,KAAK,KAAKhB,WAAf,GAHH;AAIIe;AAJJ,OADH;AAQD;;;+BAEU;AACT,UAAG,CAAC,KAAKlB,KAAT,EAAe;AACb,cAAM,IAAIF,KAAJ,CAAU,0EAAV,CAAN;AACD;AACD,aAAO,KAAKE,KAAZ;AACD;;;oCAEe;AACd,WAAKoB,QAAL,CAAc;AAAA,eAAc;AAC1BzB,yBAAe,CAAC0B,UAAU1B;AADA,SAAd;AAAA,OAAd;AAGD;;;;;kBAGYF,gB"
+}

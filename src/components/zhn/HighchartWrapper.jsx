@@ -14,13 +14,10 @@ const STYLE = {
 };
 
 class HighchartWrapper extends Component {
-  constructor(){
-    super()
-    this.state = {
-      isShowAbsComp: true
-    }
+  state = {
+    isShowAbsComp: true
   }
-
+  
   componentDidMount(){
     const { config, onLoaded } = this.props;
     this.renderChart(config);
@@ -61,6 +58,8 @@ class HighchartWrapper extends Component {
     });
   }
 
+  _refChartEl = n => this.chartEl = n
+
   render() {
     const { isShow, rootStyle, absComp } = this.props
         , { isShowAbsComp } = this.state
@@ -74,8 +73,7 @@ class HighchartWrapper extends Component {
        <div
          style={{...rootStyle, ..._rootDivStyle}}
        >
-          <div ref={ c => this.chartEl = c }>
-          </div>
+          <div ref={this._refChartEl} />
           {_absComp}
         </div>
      );
@@ -89,11 +87,9 @@ class HighchartWrapper extends Component {
   }
 
   toggleAbsComp() {
-    this.setState(prevState => {
-      return {
-        isShowAbsComp: !prevState.isShowAbsComp
-      };
-    })
+    this.setState(prevState => ({
+      isShowAbsComp: !prevState.isShowAbsComp
+    }))
   }
 }
 

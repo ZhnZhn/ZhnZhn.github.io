@@ -12,6 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var CL_ROW = 'row__pane-topic not-selected';
 
+var sortBy = _ChartActions2.default.sortBy;
+
+
 var crModelMore = function crModelMore(_ref) {
   var chartType = _ref.chartType,
       onMinWidth = _ref.onMinWidth,
@@ -57,22 +60,22 @@ var crModelMore = function crModelMore(_ref) {
     p2: [{
       cn: CL_ROW,
       name: 'Value',
-      onClick: _ChartActions2.default.sortBy.bind(null, chartType, '_value'),
+      onClick: sortBy.bind(null, chartType, '_value'),
       isClose: true
     }, {
       cn: CL_ROW,
       name: 'Abs Delta',
-      onClick: _ChartActions2.default.sortBy.bind(null, chartType, '_deltaAbs'),
+      onClick: sortBy.bind(null, chartType, '_deltaAbs'),
       isClose: true
     }, {
       cn: CL_ROW,
       name: 'Abs Percent',
-      onClick: _ChartActions2.default.sortBy.bind(null, chartType, '_percentAbs'),
+      onClick: sortBy.bind(null, chartType, '_percentAbs'),
       isClose: true
     }, {
       cn: CL_ROW,
       name: 'Reverse',
-      onClick: _ChartActions2.default.reverseCharts.bind(null, chartType),
+      onClick: sortBy.bind(null, chartType),
       isClose: true
     }]
   };

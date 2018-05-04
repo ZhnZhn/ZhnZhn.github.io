@@ -281,7 +281,7 @@
         "valueFnPrefix" : "BLSI",
         "loadId" : "Q",
         "columnName" : "Value",
-        "dataSource": "Quandl: U.S. BLS Inflation & Prices (Code: BLSI)"
+        "dataSource": "U.S. BLS Inflation & Prices (Code: BLSI)"
       }
     },
 
@@ -304,7 +304,7 @@
         "valueFn" : "REiaCoal",
         "fnValueType" : "PlusTreeItem",
         "loadId" : "Q",
-        "dataSource" : "Quandl: U.S. Energy Information Administration (Code: EIA)"
+        "dataSource" : "U.S. Energy Information Administration (Code: EIA)"
       }
     },
 
@@ -326,7 +326,7 @@
         "threeCaption" : "Area Code",
         "valueFn" : "RZillow",
         "loadId" : "Q",
-        "dataSource" : "Quandl: Zillow Real Estate Research (Code: ZILLOW)"
+        "dataSource" : "Zillow Real Estate Research (Code: ZILLOW)"
       }
     },
     "USAE_RE_2": {
@@ -345,7 +345,7 @@
         "valueFnPrefix" : "FMAC",
         "loadId" : "Q",
         "columnName" : "Value",
-        "dataSource" : "Quandl; Freddie Mac (Code: FMAC)"
+        "dataSource" : "Freddie Mac (Code: FMAC)"
       }
     },
 

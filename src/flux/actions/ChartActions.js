@@ -15,23 +15,22 @@ const META = '_Meta';
 const _fnNoop = () => {};
 
 export const ChartActionTypes = {
-  INIT_AND_SHOW_CHART : 'initAndShowChart',
-  LOAD_STOCK : 'loadStock',
-  LOAD_STOCK_COMPLETED : 'loadStockCompleted',
-  LOAD_STOCK_ADDED : 'loadStockAdded',
-  LOAD_STOCK_FAILED : 'loadStockFailed',
+  INIT_AND_SHOW_CHART: 'initAndShowChart',
+  SHOW_CHART: 'showChart',
+  CLOSE_CHART: 'closeChart',
+
+  LOAD_STOCK: 'loadStock',
+  LOAD_STOCK_COMPLETED: 'loadStockCompleted',
+  LOAD_STOCK_ADDED: 'loadStockAdded',
+  LOAD_STOCK_FAILED: 'loadStockFailed',
 
   LOAD_STOCK_BY_QUERY: 'loadStockByQuery',
   LOAD_STOCK_BY_QUERY_C: 'loadStockByQueryC',
   LOAD_STOCK_BY_QUERY_F: 'loadStockByQueryF',
 
-  SHOW_CHART : 'showChart',
-  CLOSE_CHART : 'closeChart',
-
   COPY: 'copy',
 
   SORT_BY: 'sortBy',
-  REVERSE_CHARTS: 'reverseCharts'
 };
 const A = ChartActionTypes;
 const M = Msg.Alert;
@@ -83,8 +82,7 @@ const ChartActions =  Reflux.createActions({
       [A.COPY]: {},
       [A.PASTE_TO]: {},
 
-      [A.SORT_BY]: {},
-      [A.REVERSE_CHARTS]: {}
+      [A.SORT_BY]: {},      
 });
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore

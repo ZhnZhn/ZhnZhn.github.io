@@ -2,6 +2,8 @@ import CA from '../../flux/actions/ChartActions';
 
 const CL_ROW = 'row__pane-topic not-selected';
 
+const { sortBy } = CA;
+
 const crModelMore = ({
   chartType,
   onMinWidth, onInitWidth,
@@ -50,22 +52,22 @@ const crModelMore = ({
       {
         cn: CL_ROW,
         name: 'Value',
-        onClick: CA.sortBy.bind(null, chartType, '_value'),
+        onClick: sortBy.bind(null, chartType, '_value'),
         isClose: true
       },{
         cn: CL_ROW,
         name: 'Abs Delta',
-        onClick: CA.sortBy.bind(null, chartType, '_deltaAbs'),
+        onClick: sortBy.bind(null, chartType, '_deltaAbs'),
         isClose: true
       },{
         cn: CL_ROW,
         name: 'Abs Percent',
-        onClick: CA.sortBy.bind(null, chartType, '_percentAbs'),
+        onClick: sortBy.bind(null, chartType, '_percentAbs'),
         isClose: true
       },{
         cn: CL_ROW,
         name: 'Reverse',
-        onClick: CA.reverseCharts.bind(null, chartType),
+        onClick: sortBy.bind(null, chartType),
         isClose: true
       }
     ]

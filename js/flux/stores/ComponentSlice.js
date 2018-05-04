@@ -6,9 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _ComponentActions = require('../actions/ComponentActions');
 
+var _BrowserActions = require('../actions/BrowserActions');
+
 var _Factory = require('../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
+
+var _Type = require('../../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73,6 +77,13 @@ var CheckBoxChartLogic = {
 
 var ComponentSlice = {
   dialogInit: {},
+
+  showAlertDialog: function showAlertDialog() {
+    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    option.modalDialogType = _Type.ModalDialog.ALERT;
+    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
+  },
   onShowAbout: function onShowAbout() {
     this.trigger(_ComponentActions.ComponentActionTypes.SHOW_ABOUT);
   },
@@ -101,6 +112,16 @@ var ComponentSlice = {
         alertDescr: err.message
       });
     });
+  },
+  onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
+    this.uncheckActiveCheckbox(chartType);
+    if (this.isWithItemCounter(browserType)) {
+      this.setMenuItemClose(chartType, browserType);
+      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
+    }
+  },
+  onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
+    this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
   },
   isLoadToChart: function isLoadToChart() {
     if (this.activeChart) {

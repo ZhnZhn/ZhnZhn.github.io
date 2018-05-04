@@ -184,6 +184,7 @@
         "dialogCaption" : "Barchart Stock Prices",
         "chartContainerCaption" : "Barchart Stock Prices",
         "dialogProps" : {
+          "nInitFromDate" : 1,
           "descrUrl" : "./data/stock-markets/barchart.html",
           "optionURI" : "./data/stock-markets/wiki.json",
           "optionsJsonProp" : "tickets",

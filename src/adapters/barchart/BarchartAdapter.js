@@ -17,7 +17,7 @@ const _crInfo = (caption) => ({
   frequency: "Daily",
   name: caption,
   newest_available_date: DateUtils.getFromDate(0),
-  oldest_available_date: DateUtils.getFromDate(2)
+  oldest_available_date: DateUtils.getFromDate(1)
 });
 
 const _crZhConfig = (id, value) => ({

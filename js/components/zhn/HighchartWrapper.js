@@ -50,11 +50,19 @@ var HighchartWrapper = function (_Component) {
   (0, _inherits3.default)(HighchartWrapper, _Component);
 
   function HighchartWrapper() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, HighchartWrapper);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.renderChart = function (config) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      isShowAbsComp: true
+    }, _this.renderChart = function (config) {
       if (!config) {
         throw new Error('Config must be specified for the ZhHighchart');
       }
@@ -64,12 +72,9 @@ var HighchartWrapper = function (_Component) {
           renderTo: _this.chartEl
         })
       }));
-    };
-
-    _this.state = {
-      isShowAbsComp: true
-    };
-    return _this;
+    }, _this._refChartEl = function (n) {
+      return _this.chartEl = n;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(HighchartWrapper, [{
@@ -107,8 +112,6 @@ var HighchartWrapper = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props2 = this.props,
           isShow = _props2.isShow,
           rootStyle = _props2.rootStyle,
@@ -122,9 +125,7 @@ var HighchartWrapper = function (_Component) {
         {
           style: (0, _extends3.default)({}, rootStyle, _rootDivStyle)
         },
-        _react2.default.createElement('div', { ref: function ref(c) {
-            return _this2.chartEl = c;
-          } }),
+        _react2.default.createElement('div', { ref: this._refChartEl }),
         _absComp
       );
     }

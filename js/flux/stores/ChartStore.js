@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
@@ -12,37 +16,17 @@ var _reflux = require('reflux');
 
 var _reflux2 = _interopRequireDefault(_reflux);
 
+var _Actions = require('../actions/Actions');
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
 var _ChartActions = require('../actions/ChartActions');
 
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
-var _ComponentActions = require('../actions/ComponentActions');
+var _ChartSlice = require('./ChartSlice');
 
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-var _BrowserActions = require('../actions/BrowserActions');
-
-var _BrowserActions2 = _interopRequireDefault(_BrowserActions);
-
-var _LoadingProgressActions = require('../actions/LoadingProgressActions');
-
-var _AnalyticActions = require('../actions/AnalyticActions');
-
-var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
-
-var _WatchActions = require('../actions/WatchActions');
-
-var _WatchActions2 = _interopRequireDefault(_WatchActions);
-
-var _Type = require('../../constants/Type');
-
-var _Factory = require('../logic/Factory');
-
-var _Factory2 = _interopRequireDefault(_Factory);
-
-var _ChartLogic = require('./ChartLogic');
-
-var _ChartLogic2 = _interopRequireDefault(_ChartLogic);
+var _ChartSlice2 = _interopRequireDefault(_ChartSlice);
 
 var _BrowserSlice = require('./BrowserSlice');
 
@@ -74,168 +58,14 @@ var _WithLoadingProgress2 = _interopRequireDefault(_WithLoadingProgress);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EVENT_ACTION = {
-  LOAD: 'Load',
-  ADD: 'Add'
-};
-
-var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
-var _fnLogLoadError = function _fnLogLoadError(_ref) {
-  var alertCaption = _ref.alertCaption,
-      alertDescr = _ref.alertDescr,
-      alertItemId = _ref.alertItemId;
-
-  console.log('%c' + alertCaption + ':' + alertItemId, CONSOLE_LOG_STYLE);
-  console.log('%c' + alertDescr, CONSOLE_LOG_STYLE);
-};
-
-var initChartSlice = _ChartLogic2.default.initChartSlice,
-    _isChartExist = _ChartLogic2.default.isChartExist,
-    removeConfig = _ChartLogic2.default.removeConfig,
-    sortBy = _ChartLogic2.default.sortBy,
-    reverseConfigs = _ChartLogic2.default.reverseConfigs;
-
-
 var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
-  listenables: [_ChartActions2.default, _ComponentActions2.default, _BrowserActions2.default, _AnalyticActions2.default, _WatchActions2.default],
-  charts: {},
+  listenables: [].concat((0, _toConsumableArray3.default)(_Actions2.default)),
+
   init: function init() {
     this.initWatchList();
     this.listenLoadingProgress(_ChartActions2.default.fnOnChangeStore);
-  },
-  getConfigs: function getConfigs(chartType) {
-    return this.charts[chartType];
-  },
-  isChartExist: function isChartExist(chartType, key) {
-    return _isChartExist(this.charts, chartType, key);
-  },
-  showAlertDialog: function showAlertDialog() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    option.modalDialogType = _Type.ModalDialog.ALERT;
-    this.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, option);
-  },
-  onLoadStock: function onLoadStock() {
-    //this.trigger(CHAT.LOAD_STOCK);
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING);
-  },
-  onLoadStockCompleted: function onLoadStockCompleted(option, config) {
-    var chartType = option.chartType,
-        browserType = option.browserType,
-        conf = option.conf,
-        zhCompType = option.zhCompType,
-        limitRemaining = option.limitRemaining;
-
-    if (zhCompType) {
-      config.zhCompType = zhCompType;
-    }
-
-    this.addMenuItemCounter(chartType, browserType);
-
-    var chartSlice = this.charts[chartType];
-    if (chartSlice) {
-      chartSlice.configs.unshift(config);
-      chartSlice.isShow = true;
-      this.trigger(_ChartActions.ChartActionTypes.LOAD_STOCK_COMPLETED, chartSlice);
-    } else {
-      initChartSlice(this.charts, chartType, config);
-      //this.trigger(CHAT.LOAD_STOCK_COMPLETED);
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType, conf));
-    }
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
-    this.triggerLimitRemaining(limitRemaining);
-    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
-    this.analyticSendEvent({
-      eventAction: EVENT_ACTION.LOAD,
-      eventLabel: chartType
-    });
-  },
-  onLoadStockAdded: function onLoadStockAdded() {
-    var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var chartType = option.chartType;
-    //this.trigger(CHAT.LOAD_STOCK_ADDED);
-
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
-    this.analyticSendEvent({
-      eventAction: EVENT_ACTION.ADD,
-      eventLabel: chartType
-    });
-  },
-  onLoadStockFailed: function onLoadStockFailed(option) {
-    //this.trigger(CHAT.LOAD_STOCK_FAILED, option);
-    this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_FAILED);
-    var alertItemId = option.alertItemId,
-        value = option.value;
-
-    option.alertItemId = alertItemId || value;
-    this.showAlertDialog(option);
-    _fnLogLoadError(option);
-  },
-  onLoadStockByQuery: function onLoadStockByQuery() {
-    this.onLoadStock();
-  },
-  onLoadStockByQueryCompleted: function onLoadStockByQueryCompleted(option, config) {
-    this.onLoadStockCompleted(option, config);
-  },
-  onLoadStockByQueryFailed: function onLoadStockByQueryFailed(option) {
-    this.onLoadStockFailed(option);
-  },
-  onShowChart: function onShowChart(chartType, browserType, conf) {
-    this.setMenuItemOpen(chartType, browserType);
-
-    var chartSlice = this.charts[chartType];
-    if (chartSlice) {
-      chartSlice.isShow = true;
-      this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
-    } else {
-      initChartSlice(this.charts, chartType);
-      this.trigger(_ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART, _Factory2.default.createChartContainer(chartType, browserType, conf));
-    }
-    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
-  },
-  resetActiveChart: function resetActiveChart(id) {
-    if (this.activeChart && this.activeChart.options.zhConfig.id === id) {
-      this.activeChart = null;
-    }
-  },
-  onCloseChart: function onCloseChart(chartType, browserType, chartId) {
-    var _removeConfig = removeConfig(this.charts, chartType, chartId),
-        chartSlice = _removeConfig.chartSlice,
-        isRemoved = _removeConfig.isRemoved;
-
-    if (isRemoved) {
-      this.resetActiveChart(chartId);
-      this.minusMenuItemCounter(chartType, browserType);
-
-      this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartSlice);
-      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
-    }
-  },
-  onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
-    this.uncheckActiveCheckbox(chartType);
-    if (this.isWithItemCounter(browserType)) {
-      this.setMenuItemClose(chartType, browserType);
-      this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
-    }
-  },
-  onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
-    this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
-  },
-  onCopy: function onCopy(chart) {
-    this.fromChart = chart;
-  },
-  getCopyFromChart: function getCopyFromChart() {
-    return this.fromChart;
-  },
-  onSortBy: function onSortBy(chartType, by) {
-    var chartSlice = sortBy(this.charts, chartType, by);
-    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
-  },
-  onReverseCharts: function onReverseCharts(chartType) {
-    var chartSlice = reverseConfigs(this.charts, chartType);
-    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
   }
-}, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default, _WithLoadingProgress2.default));
+}, _ChartSlice2.default, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default, _WithLoadingProgress2.default));
 
 exports.default = ChartStore;
 //# sourceMappingURL=ChartStore.js.map

@@ -1,6 +1,9 @@
 
 import { ComponentActionTypes as CAT } from '../actions/ComponentActions';
+import { BrowserActionTypes as BAT } from '../actions/BrowserActions';
 import Factory from '../logic/Factory';
+
+import { ModalDialog } from '../../constants/Type';
 
 const ItemDialogLogic = {
 
@@ -61,6 +64,12 @@ const CheckBoxChartLogic = {
 
 const ComponentSlice = {
   dialogInit : {},
+
+  showAlertDialog(option={}){
+    option.modalDialogType = ModalDialog.ALERT;
+    this.trigger(CAT.SHOW_MODAL_DIALOG, option);
+  },
+
   onShowAbout(){
     this.trigger(CAT.SHOW_ABOUT);
   },
@@ -93,6 +102,17 @@ const ComponentSlice = {
         alertDescr: err.message
       })
     });
+  },
+
+  onCloseChartContainer(chartType, browserType){
+    this.uncheckActiveCheckbox(chartType);
+    if(this.isWithItemCounter(browserType)){
+      this.setMenuItemClose(chartType, browserType);
+      this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
+    }
+  },
+  onCloseChartContainer2(chartType, browserType){
+    this.trigger(CAT.CLOSE_CHART_CONTAINER_2, chartType);
   },
 
 

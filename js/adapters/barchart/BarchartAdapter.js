@@ -35,7 +35,7 @@ var _crInfo = function _crInfo(caption) {
     frequency: "Daily",
     name: caption,
     newest_available_date: _DateUtils2.default.getFromDate(0),
-    oldest_available_date: _DateUtils2.default.getFromDate(2)
+    oldest_available_date: _DateUtils2.default.getFromDate(1)
   };
 };
 
@@ -108,4 +108,4 @@ var BarchartAdapter = {
 };
 
 exports.default = BarchartAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\barchart\BarchartAdapter.js.map
+//# sourceMappingURL=BarchartAdapter.js.map
