@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/flux/creaters/eurostatN.js"],"names":["COUNTRY_CAPTION_DF","AREA","createLoadOptions","props","options","loadId","group","dataSource","dfProps","items","chartType","date","dateDefault","selectOptions","value","chartTypeValue","_countryValue","_countryCaption","caption","_zhCompType","undefined","_time","compType","geo","metric","itemCaption","title","subtitle","alertGeo","seriaType","zhCompType","time"],"mappings":";;;;;;;;;;;;AACA,IAAMA,qBAAqB,IAA3B;AAAA,IACMC,OAAO,MADb;;AAGA,IAAMC,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;;AAAA,MAC1CC,MAD0C,GACHF,KADG,CAC1CE,MAD0C;AAAA,MAClCC,KADkC,GACHH,KADG,CAClCG,KADkC;AAAA,MAC3BC,UAD2B,GACHJ,KADG,CAC3BI,UAD2B;AAAA,MACfC,OADe,GACHL,KADG,CACfK,OADe;AAAA,MAG1CC,KAH0C,GAOxCL,OAPwC,CAG1CK,KAH0C;AAAA,2BAOxCL,OAPwC,CAI1CM,SAJ0C;AAAA,MAI1CA,SAJ0C,sCAIhC,EAJgC;AAAA,MAK1CC,IAL0C,GAOxCP,OAPwC,CAK1CO,IAL0C;AAAA,MAKpCC,WALoC,GAOxCR,OAPwC,CAKpCQ,WALoC;AAAA,MAM1CC,aAN0C,GAOxCT,OAPwC,CAM1CS,aAN0C;AAAA,yBAQVH,SARU,CAQ1CI,KAR0C;AAAA,MAQpCC,cARoC,oCAQrB,MARqB;AAAA,MAS5CC,aAT4C,GAS5BP,MAAM,CAAN,IACZA,MAAM,CAAN,EAASK,KADG,GAEZd,kBAXwC;AAAA,MAY5CiB,eAZ4C,GAY1BR,MAAM,CAAN,IACdA,MAAM,CAAN,EAASS,OADK,GAEdlB,kBAdwC;;AAiBlD,MAAImB,cAAcC,SAAlB;AAAA,MACKC,QAAQD,SADb;;AAGA,MAAIV,aAAaA,UAAUI,KAAV,KAAoBb,IAArC,EAA0C;AACxCkB,kBAAcT,UAAUY,QAAxB;AACAD,YAASV,IAAD,GAASA,KAAKG,KAAd,GAAsBF,WAA9B;AACD;;AAED,oCACKJ,OADL;AAEEe,SAAMP,aAFR;AAGEV,WAAQA,KAHV;AAIEkB,YAASf,MAAM,CAAN,IAAWA,MAAM,CAAN,EAASK,KAApB,GAA2BM,SAJtC;AAKEf,YAASA,MALX;AAMEoB,iBAAaR,eANf;AAOES,WAAQT,eAPV;AAQEU,cAAWlB,MAAM,CAAN,IAAWA,MAAM,CAAN,EAASS,OAApB,GAA6BE,SAR1C;AASEQ,cAAWX,eATb;AAUEY,eAAYd,cAVd;AAWEe,gBAAaX,WAXf;AAYEY,UAAOV,KAZT;AAaEd,0BAbF;AAcEE,gBAdF;AAeEI;AAfF;AAiBD,CA1CD;;kBA4CeX,iB","file":"eurostatN.js","sourcesContent":["\r\nconst COUNTRY_CAPTION_DF = 'EU'\r\n    , AREA = 'AREA';\r\n\r\nconst createLoadOptions = (props={}, options={}) => {\r\n  const { loadId, group, dataSource, dfProps } = props\r\n      , {\r\n          items,\r\n          chartType={},\r\n          date, dateDefault,\r\n          selectOptions\r\n        } = options\r\n      , { value:chartTypeValue='AREA' } = chartType\r\n      , _countryValue = items[0]\r\n          ? items[0].value\r\n          : COUNTRY_CAPTION_DF\r\n      , _countryCaption = items[0]\r\n          ? items[0].caption\r\n          : COUNTRY_CAPTION_DF;\r\n\r\n\r\n  let _zhCompType = undefined\r\n     , _time = undefined;\r\n\r\n  if (chartType && chartType.value !== AREA){\r\n    _zhCompType = chartType.compType;\r\n    _time = (date) ? date.value : dateDefault;\r\n  }\r\n\r\n  return {\r\n    ...dfProps,\r\n    geo : _countryValue,\r\n    group : group,\r\n    metric : items[1] ? items[1].value: undefined,\r\n    loadId : loadId,\r\n    itemCaption: _countryCaption,\r\n    title : _countryCaption,\r\n    subtitle : items[1] ? items[1].caption: undefined,\r\n    alertGeo : _countryCaption,\r\n    seriaType : chartTypeValue,\r\n    zhCompType : _zhCompType,\r\n    time : _time,\r\n    dataSource,\r\n    items,\r\n    selectOptions\r\n  }\r\n};\r\n\r\nexport default createLoadOptions\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/creaters/eurostatN.js"
+ ],
+ "file": "../../../src/flux/creaters/eurostatN.js",
+ "names": [
+  "COUNTRY_CAPTION_DF",
+  "AREA",
+  "createLoadOptions",
+  "props",
+  "options",
+  "loadId",
+  "group",
+  "dataSource",
+  "dfProps",
+  "items",
+  "chartType",
+  "date",
+  "dateDefault",
+  "selectOptions",
+  "value",
+  "chartTypeValue",
+  "_countryValue",
+  "_countryCaption",
+  "caption",
+  "_zhCompType",
+  "_time",
+  "compType",
+  "geo",
+  "metric",
+  "undefined",
+  "itemCaption",
+  "title",
+  "subtitle",
+  "alertGeo",
+  "seriaType",
+  "zhCompType",
+  "time"
+ ],
+ "mappings": ";;;;;;;;;;;;AACA,IAAMA,qBAAqB,IAA3B;AAAA,IACMC,OAAO,MADb;;AAGA,IAAMC,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;;AAAA,MAC1CC,MAD0C,GACHF,KADG,CAC1CE,MAD0C;AAAA,MAClCC,KADkC,GACHH,KADG,CAClCG,KADkC;AAAA,MAC3BC,UAD2B,GACHJ,KADG,CAC3BI,UAD2B;AAAA,MACfC,OADe,GACHL,KADG,CACfK,OADe;AAAA,MAG1CC,KAH0C,GAOxCL,OAPwC,CAG1CK,KAH0C;AAAA,2BAOxCL,OAPwC,CAI1CM,SAJ0C;AAAA,MAI1CA,SAJ0C,sCAIhC,EAJgC;AAAA,MAK1CC,IAL0C,GAOxCP,OAPwC,CAK1CO,IAL0C;AAAA,MAKpCC,WALoC,GAOxCR,OAPwC,CAKpCQ,WALoC;AAAA,MAM1CC,aAN0C,GAOxCT,OAPwC,CAM1CS,aAN0C;AAAA,yBAQVH,SARU,CAQ1CI,KAR0C;AAAA,MAQpCC,cARoC,oCAQrB,MARqB;AAAA,MAS5CC,aAT4C,GAS5BP,MAAM,CAAN,IACZA,MAAM,CAAN,EAASK,KADG,GAEZd,kBAXwC;AAAA,MAY5CiB,eAZ4C,GAY1BR,MAAM,CAAN,IACdA,MAAM,CAAN,EAASS,OADK,GAEdlB,kBAdwC;;AAiBlD,MAAImB,oBAAJ;AAAA,MAAiBC,cAAjB;;AAEA,MAAIV,aAAaA,UAAUI,KAAV,KAAoBb,IAArC,EAA0C;AACxCkB,kBAAcT,UAAUW,QAAxB;AACAD,YAAST,IAAD,GAASA,KAAKG,KAAd,GAAsBF,WAA9B;AACD;;AAED,oCACKJ,OADL;AAEEc,SAAMN,aAFR;AAGEV,WAAQA,KAHV;AAIEiB,YAASd,MAAM,CAAN,IAAWA,MAAM,CAAN,EAASK,KAApB,GAA2BU,SAJtC;AAKEnB,YAASA,MALX;AAMEoB,iBAAaR,eANf;AAOES,WAAQT,eAPV;AAQEU,cAAWlB,MAAM,CAAN,IAAWA,MAAM,CAAN,EAASS,OAApB,GAA6BM,SAR1C;AASEI,cAAWX,eATb;AAUEY,eAAYd,cAVd;AAWEe,gBAAaX,WAXf;AAYEY,UAAOX,KAZT;AAaEb,0BAbF;AAcEE,gBAdF;AAeEI;AAfF;AAiBD,CAzCD;;kBA2CeX,iB"
+}

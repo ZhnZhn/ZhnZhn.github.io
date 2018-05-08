@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { ChartType } from '../../constants/Type';
 
 import D from './DialogCell'
+import crMenuMore from './MenuMore'
 import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
@@ -20,6 +21,11 @@ class  DialogType5 extends Component {
 
   constructor(props){
     super()
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(props)
     this.toolbarButtons.push({
       caption: 'O', title: 'Toggle Options Input',
@@ -29,6 +35,7 @@ class  DialogType5 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowDate : false,
       isShowOptions: false,
@@ -110,21 +117,24 @@ class  DialogType5 extends Component {
            isChartType
           } = this.props
         , {
+            isToolbar,
             isShowLabels, isShowDate, isShowOptions,
             validationMessages
           } = this.state;
 
     return(
         <D.DraggableDialog
-             caption={caption}
              isShow={isShow}
+             caption={caption}
+             menuModel={this._menuMore}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <D.ToolbarButtonCircle
-                buttons={this.toolbarButtons}
+             <D.Toolbar
+               isShow={isToolbar}
+               buttons={this.toolbarButtons}
              />
              <D.SelectWithLoad
                isShow={isShow}

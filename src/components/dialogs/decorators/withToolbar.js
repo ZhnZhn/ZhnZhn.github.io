@@ -25,23 +25,30 @@ const _createType2WithToolbar = function(
   return buttons;
 }
 
+const _toggleWithToolbar = function(){
+  this.setState(prevState => ({
+    isToolbar: !prevState.isToolbar
+  }))
+}
+
 const _clickInfoWithToolbar = function(){
   const { descrUrl, onClickInfo } = this.props;
   onClickInfo({ descrUrl })
 }
 const _clickLabelWithToolbar = function(){
-  this.setState({
-     isShowLabels: !this.state.isShowLabels
-  })
+  this.setState(prevState => ({
+     isShowLabels: !prevState.isShowLabels
+  }))
 }
 const _clickDateWithToolbar = function(){
-  this.setState({
-     isShowDate: !this.state.isShowDate
-  })
+  this.setState(prevState => ({
+     isShowDate: !prevState.isShowDate
+  }))
 }
 
 const withToolbar = (target) => {
   Object.assign(target.prototype, {
+    _toggleWithToolbar,
     _createType2WithToolbar,
     _clickInfoWithToolbar,
     _clickLabelWithToolbar,

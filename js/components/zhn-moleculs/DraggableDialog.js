@@ -32,6 +32,14 @@ var _withTheme = require('../hoc/withTheme');
 
 var _withTheme2 = _interopRequireDefault(_withTheme);
 
+var _ModalSlider = require('../zhn-modal-slider/ModalSlider');
+
+var _ModalSlider2 = _interopRequireDefault(_ModalSlider);
+
+var _SvgMore = require('../zhn/SvgMore');
+
+var _SvgMore2 = _interopRequireDefault(_SvgMore);
+
 var _SvgClose = require('../zhn/SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
@@ -55,7 +63,8 @@ var TH_ID = 'DRAGGABLE_DIALOG';
 
 var CL = {
   SHOWING: 'show-popup',
-  NOT_SELECTED: 'not-selected'
+  NOT_SELECTED: 'not-selected',
+  MENU_MORE: 'popup-menu dialog__menu-more'
 };
 
 var S = (0, _extends3.default)({}, _Dialog2.default, {
@@ -64,6 +73,14 @@ var S = (0, _extends3.default)({}, _Dialog2.default, {
     top: '30px',
     left: '50px',
     zIndex: 10
+  },
+  BT_MORE: {
+    position: 'absolute',
+    left: 0
+  },
+  BT_MORE_SVG: {
+    stroke: 'inherit',
+    fill: 'inherit'
   },
   CHILDREN_DIV: {
     cursor: 'default'
@@ -84,7 +101,29 @@ var DraggableDialog = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DraggableDialog.__proto__ || Object.getPrototypeOf(DraggableDialog)).call.apply(_ref, [this].concat(args))), _this), _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DraggableDialog.__proto__ || Object.getPrototypeOf(DraggableDialog)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      isMore: false
+    }, _this._toggleMore = function () {
+      _this.setState(function (prevState) {
+        return {
+          isMore: !prevState.isMore
+        };
+      });
+    }, _this._renderMenuMore = function (menuModel, isMore, TS) {
+      return menuModel && _react2.default.createElement(_ModalSlider2.default, {
+        isShow: isMore,
+        className: CL.MENU_MORE,
+        style: TS.EL_BORDER,
+        model: menuModel,
+        onClose: _this._toggleMore
+      });
+    }, _this._renderBtMore = function (menuModel) {
+      return menuModel && _react2.default.createElement(_SvgMore2.default, {
+        style: S.BT_MORE,
+        svgStyle: S.BT_MORE_SVG,
+        onClick: _this._toggleMore
+      });
+    }, _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
       return _react2.default.createElement(
         'div',
         { style: S.COMMAND_DIV },
@@ -108,24 +147,22 @@ var DraggableDialog = function (_Component) {
       return _this.rootDiv = node;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ]),
+    commandButtons: PropTypes.arrayOf(PropTypes.element),
+    onShowChart: PropTypes.func,
+    onClose: PropTypes.func
+  }
+  */
 
   (0, _createClass3.default)(DraggableDialog, [{
     key: 'componentDidMount',
-
-    /*
-    static propTypes = {
-      isShow: PropTypes.bool,
-      caption: PropTypes.string,
-      children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-      ]),
-      commandButtons: PropTypes.arrayOf(PropTypes.element),
-      onShowChart: PropTypes.func,
-      onClose: PropTypes.func
-    }
-    */
-
     value: function componentDidMount() {
       _Interact2.default.makeDragable(this.rootDiv);
     }
@@ -134,6 +171,7 @@ var DraggableDialog = function (_Component) {
     value: function render() {
       var _props = this.props,
           theme = _props.theme,
+          menuModel = _props.menuModel,
           isShow = _props.isShow,
           caption = _props.caption,
           children = _props.children,
@@ -142,6 +180,7 @@ var DraggableDialog = function (_Component) {
           onFront = _props.onFront,
           onClose = _props.onClose,
           TS = theme.getStyle(TH_ID),
+          isMore = this.state.isMore,
           _styleShow = isShow ? S.SHOW : S.HIDE,
           _classShow = isShow ? CL.SHOWING : undefined;
 
@@ -157,6 +196,8 @@ var DraggableDialog = function (_Component) {
         _react2.default.createElement(
           'div',
           { style: (0, _extends3.default)({}, S.CAPTION_DIV, TS.EL) },
+          this._renderMenuMore(menuModel, isMore, TS),
+          this._renderBtMore(menuModel),
           _react2.default.createElement(
             'span',
             { className: CL.NOT_SELECTED },

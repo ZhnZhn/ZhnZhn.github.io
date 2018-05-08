@@ -47,9 +47,9 @@ class ModalSlider extends Component {
 
   static defaultProps = {
     INIT_ID: 'p0',
-    pageWidth: 100,
-    maxPages: 2,
     model: {
+      pageWidth: 100,
+      maxPages: 2,
       p0: []
     }
   }
@@ -62,14 +62,16 @@ class ModalSlider extends Component {
             model,
             onClose
           } = props
+          , _pW = model.pageWidth || pageWidth
+          , _maxP = model.maxPages || maxPages
           , pages = [];
 
-    this._PAGE_WIDTH = pageWidth
+    this._PAGE_WIDTH = _pW
     this._pagesStyle = {
-      width: `${maxPages*pageWidth}px`
+      width: `${_maxP*_pW}px`
     }
     this._pageStyle = {
-      width: `${pageWidth}px`,
+      width: `${_pW}px`,
     }
 
     pages.push(

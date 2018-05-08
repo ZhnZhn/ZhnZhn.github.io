@@ -12,6 +12,8 @@ const crModelMore = ({
 }) => {
   return {
     baseTitleCl: CL_ROW,
+    pageWidth: 180,
+    maxPages: 2,
     p0: [
       {
         id: 'p1',

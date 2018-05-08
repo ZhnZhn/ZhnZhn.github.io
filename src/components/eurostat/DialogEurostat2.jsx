@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import crDateConfig from './crDateConfig'
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators';
 
 import RouterOptions from './RouterOptions';
@@ -13,13 +14,6 @@ const  MAP_FREQUENCY_DF = 'M';
 @Decor.withToolbar
 @Decor.withValidationLoad
 class DialogEurostat2 extends Component {
-  static defaultProps = {
-    oneCaption: 'Item',
-    oneJsonProp: 'items',
-    twoCaption: 'Metric',
-    twoJsonProp: 'metrics',
-  }
-
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -41,12 +35,25 @@ class DialogEurostat2 extends Component {
     loadFn: PropTypes.func
   }
  */
+
+  static defaultProps = {
+    oneCaption: 'Item',
+    oneJsonProp: 'items',
+    twoCaption: 'Metric',
+    twoJsonProp: 'metrics',
+  }
+
   constructor(props){
     super();
     this.one = undefined;
     this.two = undefined;
     this.date = undefined;
     this.chartType = undefined;
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
 
     this.toolbarButtons = this._createType2WithToolbar(props)
 
@@ -57,6 +64,7 @@ class DialogEurostat2 extends Component {
     this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
@@ -174,6 +182,7 @@ class DialogEurostat2 extends Component {
            twoCaption, twoURI, twoJsonProp
           } = this.props
         , {
+            isToolbar,
             isShowLabels, isShowDate,
             dateDefault, dateOptions,
             validationMessages
@@ -181,14 +190,16 @@ class DialogEurostat2 extends Component {
 
     return(
         <D.DraggableDialog
-             caption={caption}
              isShow={isShow}
+             caption={caption}
+             menuModel={this._menuMore}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handleClose}
-         >
-             <D.ToolbarButtonCircle
+         >             
+             <D.Toolbar
+               isShow={isToolbar}
                buttons={this.toolbarButtons}
              />
              <D.SelectWithLoad

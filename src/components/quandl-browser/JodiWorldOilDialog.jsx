@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 const unitOptions = [
@@ -28,6 +29,11 @@ class JodiWorldOilDialog extends Component {
      this.units = null
      this.chartType = undefined
 
+     this._menuMore = crMenuMore(this, {
+       toggleToolBar: this._toggleWithToolbar,
+       onAbout: this._clickInfoWithToolbar
+     })
+
      this.toolbarButtons = this._createType2WithToolbar(props)
      this.toolbarButtons.push({
        caption: 'O', title: 'Toggle Options Input',
@@ -38,6 +44,7 @@ class JodiWorldOilDialog extends Component {
        <D.Button.Load onClick={this._handleLoad} />
      ]
      this.state = {
+       isToolbar: true,
        isShowLabels: true,
        isShowDate: false,
        isShowOptions: false,
@@ -108,8 +115,11 @@ class JodiWorldOilDialog extends Component {
       };
    }
    _handleClose = () => {
-     this._handleWithValidationClose()     
+     this._handleWithValidationClose()
    }
+
+   _refProductFlow = c => this.productFlow = c
+   _refDates = c => this.datesFragment = c
 
    render(){
      const {
@@ -119,6 +129,7 @@ class JodiWorldOilDialog extends Component {
              initFromDate, initToDate, msgOnNotValidFormat, onTestDate
            } = this.props
          , {
+             isToolbar,
              isShowLabels,
              isShowDate, isShowOptions,
              validationMessages
@@ -126,14 +137,16 @@ class JodiWorldOilDialog extends Component {
 
      return (
        <D.DraggableDialog
-         caption={caption}
          isShow={isShow}
+         caption={caption}
+         menuModel={this._menuMore}
          commandButtons={this._commandButtons}
          onShowChart={onShow}
          onFront={onFront}
          onClose={this._handleClose}
        >
-          <D.ToolbarButtonCircle
+          <D.Toolbar
+            isShow={isToolbar}
             buttons={this.toolbarButtons}
           />
 
@@ -147,7 +160,7 @@ class JodiWorldOilDialog extends Component {
              onSelect={this._hSelectCountry}
           />
           <D.SelectParentChild
-             ref={c => this.productFlow = c}
+             ref={this._refProductFlow}
              isShow={isShow}
              isShowLabels={isShowLabels}
              uri={parentChildURI}
@@ -166,7 +179,7 @@ class JodiWorldOilDialog extends Component {
 
           <D.ShowHide isShow={isShowDate}>
             <D.DatesFragment
-              ref={c => this.datesFragment = c}
+              ref={this._refDates}
               isShowLabels={isShowLabels}
               initFromDate={initFromDate}
               initToDate={initToDate}

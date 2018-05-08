@@ -23,6 +23,8 @@ const _fB = (id) => () => {
 const crBrowserModel = () => {
   return {
     baseTitleCl: CL.BR,
+    pageWidth: 235,
+    maxPages: 2,
     page_0: [
       {
         id: 'page_01',

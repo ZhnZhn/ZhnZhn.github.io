@@ -38,6 +38,10 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
+var _MenuMore = require('../dialogs/MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
 var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
@@ -212,6 +216,11 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       });
     };
 
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
+
     _this.toolbarButtons = _this._createType2WithToolbar(props);
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
@@ -219,6 +228,7 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     _this._selectOptions = [];
 
     _this.state = (0, _extends3.default)({
+      isToolbar: true,
       isShowLabels: true,
       isLoading: true,
       isLoadFailed: false,
@@ -264,6 +274,7 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           onShow = _props.onShow,
           onFront = _props.onFront,
           _state = this.state,
+          isToolbar = _state.isToolbar,
           isShowLabels = _state.isShowLabels,
           isLoading = _state.isLoading,
           isLoadFailed = _state.isLoadFailed,
@@ -276,14 +287,16 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: caption,
           isShow: isShow,
+          caption: caption,
+          menuModel: this._menuMore,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
         (isLoading || isLoadFailed) && _react2.default.createElement(_SpinnerLoading2.default, {
@@ -317,4 +330,4 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   return DialogStatN;
 }(_react.Component)) || _class) || _class);
 exports.default = DialogStatN;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogStatN.js.map
+//# sourceMappingURL=DialogStatN.js.map

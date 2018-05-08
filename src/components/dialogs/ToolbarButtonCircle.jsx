@@ -44,7 +44,7 @@ class ToolbarButtonCircle extends Component {
       <Row.Plain style={STYLE.ROW}>
         {this._renderButtons(buttons)}
       </Row.Plain>
-    )
+    );
   }
 
 }

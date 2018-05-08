@@ -10,36 +10,22 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var S = {
-  COLOR: '#4caf50',
-  ROOT: {
-    display: 'inline-block',
-    width: '14px',
-    height: '14px',
-    marginLeft: '5px'
-  },
-  SVG: {
-    paddingTop: '3px',
-    paddingLeft: '2px',
-    paddingRight: '2px'
-  }
+var CL = {
+  ROOT: 'svg-move',
+  SVG: 'svg-move__svg svg-up'
 };
 
 var SvgUp = function SvgUp() {
   return _react2.default.createElement(
     'span',
-    { style: S.ROOT },
+    { className: CL.ROOT },
     _react2.default.createElement(
       'svg',
       { viewBox: '0 0 12 12', width: '100%', height: '100%',
-        style: S.SVG, preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg'
+        className: CL.SVG,
+        preserveAspectRatio: 'none', xmlns: 'http://www.w3.org/2000/svg'
       },
-      _react2.default.createElement('path', { d: 'M 0,12 L 11,12 6,0 0,12',
-        strokeWidth: '1',
-        stroke: S.COLOR,
-        fill: S.COLOR,
-        strokeLinejoin: 'miter'
-      })
+      _react2.default.createElement('path', { d: 'M 0,12 L 6,8 11,12 6,0 0,12' })
     )
   );
 };

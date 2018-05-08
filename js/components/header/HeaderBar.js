@@ -235,8 +235,6 @@ var HeaderBar = function (_Component) {
           isShow: isDS,
           className: CL.BROWSER_MENU,
           INIT_ID: 'page_0',
-          pageWidth: 235,
-          maxPages: 2,
           model: MODEL,
           onClose: this._hToggleDS
         })

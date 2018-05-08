@@ -25,6 +25,8 @@ var crModelMore = function crModelMore(_ref) {
 
   return {
     baseTitleCl: CL_ROW,
+    pageWidth: 180,
+    maxPages: 2,
     p0: [{
       id: 'p1',
       type: 'sub',

@@ -34,6 +34,10 @@ var _withToolbar = require('../dialogs/decorators/withToolbar');
 
 var _withToolbar2 = _interopRequireDefault(_withToolbar);
 
+var _MenuMore = require('../dialogs/MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
@@ -67,8 +71,17 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       _this.props.onClose();
     };
 
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
+
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, noLabels: true });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+
+    _this.state = {
+      isToolbar: true
+    };
     return _this;
   }
 
@@ -89,20 +102,23 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           isShow = _props.isShow,
           caption = _props.caption,
           onShow = _props.onShow,
-          onFront = _props.onFront;
+          onFront = _props.onFront,
+          isToolbar = this.state.isToolbar;
 
 
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: caption,
           isShow: isShow,
+          caption: caption,
+          menuModel: this._menuMore,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
         _react2.default.createElement(_DialogCell2.default.Row.Text, {

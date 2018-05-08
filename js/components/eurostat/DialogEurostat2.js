@@ -39,6 +39,10 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
+var _MenuMore = require('../dialogs/MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
 var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
@@ -54,23 +58,6 @@ var MAP_FREQUENCY_DF = 'M';
 var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat2, _Component);
 
-  /*
-  static propTypes = {
-    isShow: PropTypes.bool,
-    caption: PropTypes.string,
-      oneCaption: PropTypes.string,
-    oneURI: PropTypes.string,
-    oneJsonProp: PropTypes.string,
-      twoCaption: PropTypes.string,
-    twoURI: PropTypes.string,
-    twoJsonProp: PropTypes.string,
-      mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
-    mapDateDf: PropTypes.number,
-      msgOnNotSelected: PropTypes.func,
-    onShow: PropTypes.func,
-    loadFn: PropTypes.func
-  }
-  */
   function DialogEurostat2(props) {
     (0, _classCallCheck3.default)(this, DialogEurostat2);
 
@@ -172,6 +159,11 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     _this.date = undefined;
     _this.chartType = undefined;
 
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
+
     _this.toolbarButtons = _this._createType2WithToolbar(props);
 
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
@@ -179,6 +171,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
     _this.state = (0, _extends3.default)({
+      isToolbar: true,
       isShowLabels: true,
       isShowDate: false
     }, (0, _crDateConfig2.default)('EMPTY'), {
@@ -186,6 +179,23 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     });
     return _this;
   }
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+      oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+      twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+      mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
+    mapDateDf: PropTypes.number,
+      msgOnNotSelected: PropTypes.func,
+    onShow: PropTypes.func,
+    loadFn: PropTypes.func
+  }
+  */
 
   (0, _createClass3.default)(DialogEurostat2, [{
     key: 'shouldComponentUpdate',
@@ -212,6 +222,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
           _state = this.state,
+          isToolbar = _state.isToolbar,
           isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           dateDefault = _state.dateDefault,
@@ -222,14 +233,16 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: caption,
           isShow: isShow,
+          caption: caption,
+          menuModel: this._menuMore,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
@@ -281,6 +294,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
   oneCaption: 'Item',
   oneJsonProp: 'items',
   twoCaption: 'Metric',
-  twoJsonProp: 'metrics' }, _temp)) || _class) || _class);
+  twoJsonProp: 'metrics'
+}, _temp)) || _class) || _class);
 exports.default = DialogEurostat2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\DialogEurostat2.js.map
+//# sourceMappingURL=DialogEurostat2.js.map

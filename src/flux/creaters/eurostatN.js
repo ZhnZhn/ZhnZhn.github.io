@@ -19,8 +19,7 @@ const createLoadOptions = (props={}, options={}) => {
           : COUNTRY_CAPTION_DF;
 
 
-  let _zhCompType = undefined
-     , _time = undefined;
+  let _zhCompType, _time;
 
   if (chartType && chartType.value !== AREA){
     _zhCompType = chartType.compType;

@@ -30,6 +30,10 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
+var _MenuMore = require('../dialogs/MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
 var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
@@ -96,10 +100,25 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
       _this._handleWithValidationClose();
     };
 
+    _this._refItemMonth = function (c) {
+      return _this.itemMonth = c;
+    };
+
+    _this._refFromDate = function (c) {
+      return _this.fromDate = c;
+    };
+
     _this.year = undefined;
+
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
+
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isToolbar: true,
       isShowLabels: true,
       validationMessages: []
     };
@@ -119,8 +138,6 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           isShow = _props.isShow,
           caption = _props.caption,
@@ -133,6 +150,7 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
           onTestDateOrEmpty = _props.onTestDateOrEmpty,
           msgTestDateOrEmpty = _props.msgTestDateOrEmpty,
           _state = this.state,
+          isToolbar = _state.isToolbar,
           isShowLabels = _state.isShowLabels,
           validationMessages = _state.validationMessages;
 
@@ -140,20 +158,20 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: caption,
           isShow: isShow,
+          caption: caption,
+          menuModel: this._menuMore,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
         _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
-          ref: function ref(c) {
-            return _this2.itemMonth = c;
-          },
+          ref: this._refItemMonth,
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: futuresURI,
@@ -170,9 +188,7 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
           onSelect: this._handleSelectYear
         }),
         isContinious && _react2.default.createElement(_DialogCell2.default.RowDate, {
-          ref: function ref(c) {
-            return _this2.fromDate = c;
-          },
+          ref: this._refFromDate,
           isShowLabels: isShowLabels,
           labelTitle: 'From Date:',
           initValue: initFromDate,

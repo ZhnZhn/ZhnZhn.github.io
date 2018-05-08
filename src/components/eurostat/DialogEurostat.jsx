@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 @Decor.withToolbar
 @Decor.withValidationLoad
-class DialogEurostat extends Component {
-  static defaultProps = {
-    oneCaption: 'Item',
-    oneJsonProp: 'items',
-    twoCaption: 'Metric',
-    twoJsonProp: 'metrics',
-  }
-
+class DialogEurostat extends Component {  
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -33,10 +27,23 @@ class DialogEurostat extends Component {
   }
   */
 
+  static defaultProps = {
+    oneCaption: 'Item',
+    oneJsonProp: 'items',
+    twoCaption: 'Metric',
+    twoJsonProp: 'metrics',
+  }
+
   constructor(props){
     super();
     this.one = undefined;
     this.two = undefined;
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
@@ -44,6 +51,7 @@ class DialogEurostat extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       validationMessages: []
     }
@@ -99,6 +107,7 @@ class DialogEurostat extends Component {
            twoCaption, twoURI, twoJsonProp
           } = this.props
         , {
+            isToolbar,
             isShowLabels,
             validationMessages
           } = this.state;
@@ -107,12 +116,14 @@ class DialogEurostat extends Component {
         <D.DraggableDialog
              caption={caption}
              isShow={isShow}
+             menuModel={this._menuMore}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <D.ToolbarButtonCircle
+             <D.Toolbar
+               isShow={isToolbar}
                buttons={this.toolbarButtons}
              />
              <D.SelectWithLoad

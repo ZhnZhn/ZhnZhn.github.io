@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { ChartType } from '../../constants/Type';
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 const S = {
@@ -58,6 +59,11 @@ class UNCommodityTradeDialog extends Component {
     this.optionTrades = null
     this.chartType = null
 
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
@@ -84,6 +90,7 @@ class UNCommodityTradeDialog extends Component {
       <D.Button.Load onClick={this._handlerLoadData} />
     ]
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowFilter : false,
       isShowDate : true,
@@ -292,6 +299,8 @@ class UNCommodityTradeDialog extends Component {
     this._handleWithValidationClose()
   }
 
+  _refDates = c => this.datesFragment = c
+
   render(){
     const {
            isShow, onShow, onFront,
@@ -300,6 +309,7 @@ class UNCommodityTradeDialog extends Component {
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
+           isToolbar,
            isShowLabels,
            isShowFilter, isShowDate, isShowChartType,
            isLoadingTrade, isLoadingTradeFailed, optionTrades, placeholderTrade,
@@ -308,14 +318,16 @@ class UNCommodityTradeDialog extends Component {
 
     return(
         <D.DraggableDialog
-             caption="United Nations Commodity Trade"
              isShow={isShow}
+             caption="United Nations Commodity Trade"
+             menuModel={this._menuMore}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handlerClose}
          >
-             <D.ToolbarButtonCircle
+             <D.Toolbar
+               isShow={isToolbar}
                buttons={this.toolbarButtons}
              />
 
@@ -360,7 +372,7 @@ class UNCommodityTradeDialog extends Component {
              />
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
-                   ref={c => this.datesFragment = c}
+                   ref={this._refDates}
                    isShowLabels={isShowLabels}
                    initFromDate={initFromDate}
                    initToDate={initToDate}

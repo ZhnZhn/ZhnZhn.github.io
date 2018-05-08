@@ -21,19 +21,20 @@ const _rToSeria = {
 
 const EuroStatAdapter = {
   toConfig(json, option){
-    const { seriaType='AREA' } = option
+    const { seriaType='AREA', zhCompType } = option
          , fnToConfig = _rToConfig[seriaType]
-         , config = (typeof fnToConfig !== 'undefined')
+         , config = fnToConfig
              ? fnToConfig(json, option)
              : {} ;
 
-       return { config };
+    config.zhCompType = zhCompType
+    return { config };
  },
 
   toSeries(json, option, chart){
     const { seriaType='AREA' } = option
          , fnToSeria = _rToSeria[seriaType]
-         , seria = (typeof fnToSeria !== 'undefined')
+         , seria = fnToSeria
              ? fnToSeria(json, option, chart)
              : undefined ;
 

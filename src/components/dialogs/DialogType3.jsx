@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import D from './DialogCell'
+import crMenuMore from './MenuMore'
 import Decor from './decorators/Decorators'
+
 
 const DF_TIMEOUT = 4000;
 
@@ -13,6 +15,7 @@ const transformOptions = [
   { caption: "LATEST VALUE AS % INCREMENT: z[t]=(y[latest]–y[t])/y[t]", value: "rdiff_from" },
   { caption: "SCALE SERIES TO START AT 100: z[t]=y[t]÷y[0]*100", value: "normalize" }
 ];
+
 
 @Decor.withToolbar
 @Decor.withValidationLoad
@@ -50,6 +53,11 @@ class DialogType3 extends Component {
     this.transform = undefined
     this.isLoaded = false
 
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     const { noDate, isTransform } = props;
     this.toolbarButtons = this._createType2WithToolbar(
        props, { noDate }
@@ -63,6 +71,7 @@ class DialogType3 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+       isToolbar: true,
        isShowLabels: true,
        isShowDate: true,
        isShowTransform: false,
@@ -167,6 +176,7 @@ class DialogType3 extends Component {
         , _oneCaption = oneCaption || itemCaption
         , _oneURI = oneURI || optionURI
         , {
+            isToolbar,
             isShowLabels, isShowTransform, isShowDate,
             validationMessages
           } = this.state;
@@ -174,15 +184,17 @@ class DialogType3 extends Component {
     return (
        <D.DraggableDialog
            isShow={isShow}
+           menuModel={this._menuMore}
            caption={caption}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
            onFront={onFront}
            onClose={this._handleClose}
        >
-         <D.ToolbarButtonCircle
+         <D.Toolbar
+           isShow={isToolbar}
            buttons={this.toolbarButtons}
-         />
+         />         
          <D.SelectWithLoad
            isShow={isShow}
            isShowLabels={isShowLabels}

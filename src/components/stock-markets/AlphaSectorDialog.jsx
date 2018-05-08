@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
 import withToolbar from '../dialogs/decorators/withToolbar'
+import crMenuMore from '../dialogs/MenuMore'
 
 const S = {
   ROW_TEXT: {
@@ -14,12 +15,22 @@ class AlphaIndicatorDialog extends Component {
 
   constructor(props){
     super()
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true, noLabels: true }
     )
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ];
+
+    this.state = {
+      isToolbar: true
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -49,18 +60,21 @@ class AlphaIndicatorDialog extends Component {
     const {
             isShow, caption,
             onShow, onFront
-          } = this.props;
+          } = this.props
+        , { isToolbar } = this.state;
 
     return (
       <D.DraggableDialog
-           caption={caption}
            isShow={isShow}
+           caption={caption}
+           menuModel={this._menuMore}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
            onFront={onFront}
            onClose={this._handleClose}
        >
-           <D.ToolbarButtonCircle
+           <D.Toolbar
+              isShow={isToolbar}
               buttons={this.toolbarButtons}
            />
            <D.Row.Text

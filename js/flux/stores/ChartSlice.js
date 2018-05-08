@@ -53,12 +53,8 @@ var ChartSlice = {
   onLoadStockCompleted: function onLoadStockCompleted(option, config) {
     var chartType = option.chartType,
         browserType = option.browserType,
-        zhCompType = option.zhCompType,
         limitRemaining = option.limitRemaining;
 
-    if (zhCompType) {
-      config.zhCompType = zhCompType;
-    }
 
     this.addMenuItemCounter(chartType, browserType);
 

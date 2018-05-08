@@ -21,14 +21,11 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _WatchActions = require('../../flux/actions/WatchActions');
 
@@ -73,6 +70,19 @@ var notSelected = _MsgWatch2.default.notSelected;
 
 var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Component) {
   (0, _inherits3.default)(AddToWatchDialog, _Component);
+
+  /*
+  static propTypes = {
+    isShow  : PropTypes.bool,
+    data    : PropTypes.object,
+    store   : PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchGroups: PropTypes.func,
+      getWatchListsByGroup: PropTypes.func
+    }),
+    onClose : PropTypes.func
+  }
+  */
 
   function AddToWatchDialog(props) {
     (0, _classCallCheck3.default)(this, AddToWatchDialog);
@@ -242,15 +252,5 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
   return AddToWatchDialog;
 }(_react.Component)) || _class;
 
-AddToWatchDialog.propTypes = process.env.NODE_ENV !== "production" ? {
-  isShow: _propTypes2.default.bool,
-  data: _propTypes2.default.object,
-  store: _propTypes2.default.shape({
-    listen: _propTypes2.default.func,
-    getWatchGroups: _propTypes2.default.func,
-    getWatchListsByGroup: _propTypes2.default.func
-  }),
-  onClose: _propTypes2.default.func
-} : {};
 exports.default = AddToWatchDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\AddToWatchDialog.js.map
+//# sourceMappingURL=AddToWatchDialog.js.map

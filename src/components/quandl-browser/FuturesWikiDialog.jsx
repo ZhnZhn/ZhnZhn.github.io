@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 const typeOptions = [
@@ -17,6 +18,12 @@ class FuturesWikiDialog extends Component {
   constructor(props){
     super()
     this.type = undefined
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
@@ -24,6 +31,7 @@ class FuturesWikiDialog extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       validationMessages : []
     }
@@ -80,29 +88,38 @@ class FuturesWikiDialog extends Component {
     this._handleWithValidationClose()
   }
 
+  _refExchangeItem = c => this.exchangeItem = c
+  _refFromDate = c => this.fromDate = c
+
   render(){
     const {
             isShow, caption, onShow, onFront,
             futuresURI, msgOnNotSelected,
             isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
           } = this.props
-        , { isShowLabels, validationMessages } = this.state;
+        , {
+            isToolbar,
+            isShowLabels,
+            validationMessages
+          } = this.state;
 
     return (
       <D.DraggableDialog
-         caption={caption}
          isShow={isShow}
+         caption={caption}
+         menuModel={this._menuMore}
          commandButtons={this._commandButtons}
          onShowChart={onShow}
          onFront={onFront}
          onClose={this._handleClose}
        >
-           <D.ToolbarButtonCircle
+           <D.Toolbar
+              isShow={isToolbar}
               buttons={this.toolbarButtons}
            />
 
            <D.SelectParentChild
-               ref={c => this.exchangeItem = c}
+               ref={this._refExchangeItem}
                isShow={isShow}
                isShowLabels={isShowLabels}
                uri={futuresURI}
@@ -121,7 +138,7 @@ class FuturesWikiDialog extends Component {
            {
              isContinious &&
              <D.RowDate
-                ref={ c => this.fromDate = c}
+                ref={this._refFromDate}
                 isShowLabels={isShowLabels}
                 labelTitle="From Date:"
                 initValue={initFromDate}

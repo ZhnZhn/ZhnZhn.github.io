@@ -40,6 +40,8 @@ var _fB = function _fB(id) {
 var crBrowserModel = function crBrowserModel() {
   return {
     baseTitleCl: CL.BR,
+    pageWidth: 235,
+    maxPages: 2,
     page_0: [{
       id: 'page_01',
       type: 'sub',

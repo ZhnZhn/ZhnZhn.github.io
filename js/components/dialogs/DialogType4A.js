@@ -30,6 +30,10 @@ var _DialogCell = require('./DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
+var _MenuMore = require('./MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
 var _Decorators = require('./decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
@@ -99,6 +103,11 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
       _this[propName] = value;
     };
 
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
+
     _this.toolbarButtons = _this._createType2WithToolbar(props);
     _this.toolbarButtons.push({
       caption: 'O', title: 'Toggle Options Input',
@@ -107,6 +116,7 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     _this[HAS_SECOND_Y_AXIS] = false;
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowDate: true,
       isShowOptions: false,
@@ -145,6 +155,7 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isToolbar = _state.isToolbar,
           isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           isShowOptions = _state.isShowOptions,
@@ -154,14 +165,16 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: caption,
           isShow: isShow,
+          caption: caption,
+          menuModel: this._menuMore,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
         _react2.default.createElement(_DialogCell2.default.SelectParentChild, {

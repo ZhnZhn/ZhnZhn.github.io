@@ -81,15 +81,16 @@ var ModalSlider = (_temp = _class = function (_Component) {
         maxPages = props.maxPages,
         model = props.model,
         onClose = props.onClose,
+        _pW = model.pageWidth || pageWidth,
+        _maxP = model.maxPages || maxPages,
         pages = [];
 
-
-    _this._PAGE_WIDTH = pageWidth;
+    _this._PAGE_WIDTH = _pW;
     _this._pagesStyle = {
-      width: maxPages * pageWidth + 'px'
+      width: _maxP * _pW + 'px'
     };
     _this._pageStyle = {
-      width: pageWidth + 'px'
+      width: _pW + 'px'
     };
 
     pages.push(_react2.default.createElement(_MenuPage2.default, {
@@ -162,9 +163,9 @@ var ModalSlider = (_temp = _class = function (_Component) {
   return ModalSlider;
 }(_react.Component), _class.defaultProps = {
   INIT_ID: 'p0',
-  pageWidth: 100,
-  maxPages: 2,
   model: {
+    pageWidth: 100,
+    maxPages: 2,
     p0: []
   }
 }, _initialiseProps = function _initialiseProps() {

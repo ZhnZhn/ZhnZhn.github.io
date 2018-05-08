@@ -122,7 +122,7 @@ var ItemFactory = {
         option = _ref4.option,
         props = _ref4.props;
     var zhCompType = config.zhCompType,
-        _fnCreate = zhCompType && _rCreateItem[zhCompType] ? _rCreateItem[zhCompType] : _rCreateItem.DEFAULT;
+        _fnCreate = _rCreateItem[zhCompType] || _rCreateItem.DEFAULT;
 
 
     return _fnCreate({ store: store, config: config, index: index, option: option, props: props });

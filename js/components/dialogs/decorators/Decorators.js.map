@@ -1,1 +1,14 @@
-{"version":3,"sources":["../../../../src/components/dialogs/decorators/Decorators.js"],"names":["Decorators","withLoadOptions","withToolbar","withValidationLoad"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,oCAFiB;AAGjBC;AAHiB,CAAnB;;kBAMeH,U","file":"Decorators.js","sourcesContent":["\r\nimport withLoadOptions from './withLoadOptions'\r\nimport withToolbar from './withToolbar'\r\nimport withValidationLoad from './withValidationLoad'\r\n\r\nconst Decorators = {\r\n  withLoadOptions,\r\n  withToolbar,\r\n  withValidationLoad\r\n};\r\n\r\nexport default Decorators\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/decorators/Decorators.js"
+ ],
+ "file": "../../../../src/components/dialogs/decorators/Decorators.js",
+ "names": [
+  "Decorators",
+  "withLoadOptions",
+  "withToolbar",
+  "withValidationLoad"
+ ],
+ "mappings": ";;;;;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,oCAFiB;AAGjBC;AAHiB,CAAnB;;kBAMeH,U"
+}

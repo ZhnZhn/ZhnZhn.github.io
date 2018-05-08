@@ -24,6 +24,10 @@ var _ToolbarButtonCircle = require('./ToolbarButtonCircle');
 
 var _ToolbarButtonCircle2 = _interopRequireDefault(_ToolbarButtonCircle);
 
+var _Toolbar = require('./Toolbar');
+
+var _Toolbar2 = _interopRequireDefault(_Toolbar);
+
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -65,6 +69,7 @@ var DialogCell = {
   ValidationMessages: _ValidationMessages2.default,
 
   ToolbarButtonCircle: _ToolbarButtonCircle2.default,
+  Toolbar: _Toolbar2.default,
   RowInputSelect: _RowInputSelect2.default,
   SelectWithLoad: _SelectWithLoad2.default,
   SelectParentChild: _SelectParentChild2.default,

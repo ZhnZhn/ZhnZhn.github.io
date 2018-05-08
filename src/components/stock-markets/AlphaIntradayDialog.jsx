@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
 import withToolbar from '../dialogs/decorators/withToolbar'
+import crMenuMore from '../dialogs/MenuMore'
 
 const DF = {
   INTERVAL: '15min',
@@ -28,6 +29,12 @@ class AlphaIntradayDialog extends Component {
 
   constructor(props){
     super()
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
@@ -35,6 +42,7 @@ class AlphaIntradayDialog extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isToolbar: true,
       isShowLabels: true
     }
   }
@@ -87,18 +95,23 @@ class AlphaIntradayDialog extends Component {
             isShow, caption,
             onShow, onFront
           } = this.props
-        , { isShowLabels } = this.state ;
+        , {
+            isToolbar,
+            isShowLabels
+          } = this.state ;
 
     return (
       <D.DraggableDialog
-           caption={caption}
            isShow={isShow}
+           caption={caption}
+           menuModel={this._menuMore}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
            onFront={onFront}
            onClose={this._handleClose}
        >
-           <D.ToolbarButtonCircle
+           <D.Toolbar
+              isShow={isToolbar}
               buttons={this.toolbarButtons}
            />
           <D.RowPattern

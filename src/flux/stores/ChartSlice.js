@@ -40,11 +40,8 @@ const ChartSlice = {
   onLoadStockCompleted(option, config){
       const {
               chartType, browserType,
-              zhCompType, limitRemaining
+              limitRemaining
             } = option;
-      if (zhCompType){
-        config.zhCompType = zhCompType;
-      }
 
       this.addMenuItemCounter(chartType, browserType);
 

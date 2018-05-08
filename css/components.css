@@ -36,3 +36,10 @@
   z-index: 2000;
   //border: 2px solid rgb(27, 40, 54);
 }
+
+.dialog__menu-more {
+  top: 30px;
+  left: 4px;
+  z-index: 10;
+  text-align: left;
+}

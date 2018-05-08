@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 @Decor.withToolbar
@@ -31,6 +32,12 @@ class DialogEurostat3 extends Component {
   constructor(props){
     super()
     this.one = undefined
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
@@ -38,6 +45,7 @@ class DialogEurostat3 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       validationMessages: []
     }
@@ -94,18 +102,24 @@ class DialogEurostat3 extends Component {
            twoCaption, twoURI, twoJsonProp,
            threeCaption, msgOnNotSelected
           } = this.props
-        , { isShowLabels, validationMessages } = this.state;
+        , {
+            isToolbar,
+            isShowLabels,
+            validationMessages
+          } = this.state;
 
     return(
         <D.DraggableDialog
-             caption={caption}
              isShow={isShow}
+             caption={caption}
+             menuModel={this._menuMore}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <D.ToolbarButtonCircle
+             <D.Toolbar
+                isShow={isToolbar}
                 buttons={this.toolbarButtons}
              />
              <D.SelectWithLoad

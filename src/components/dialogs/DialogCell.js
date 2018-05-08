@@ -5,6 +5,7 @@ import ShowHide from '../zhn/ShowHide';
 import ValidationMessages from '../zhn/ValidationMessages'
 
 import ToolbarButtonCircle from './ToolbarButtonCircle'
+import Toolbar from './Toolbar'
 import RowInputSelect from './RowInputSelect'
 import SelectWithLoad from './SelectWithLoad'
 import SelectParentChild from './SelectParentChild'
@@ -21,6 +22,7 @@ const DialogCell = {
   ValidationMessages,
 
   ToolbarButtonCircle,
+  Toolbar,
   RowInputSelect,
   SelectWithLoad,
   SelectParentChild,

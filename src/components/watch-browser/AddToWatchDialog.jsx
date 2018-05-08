@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import Actions, { WatchActionTypes as WAT } from '../../flux/actions/WatchActions';
 import Msg from '../../constants/MsgWatch';
@@ -20,6 +20,7 @@ const { notSelected } = Msg;
 
 @withValidationLoad
 class AddToWatchDialog extends Component {
+  /*
   static propTypes = {
     isShow  : PropTypes.bool,
     data    : PropTypes.object,
@@ -30,6 +31,7 @@ class AddToWatchDialog extends Component {
     }),
     onClose : PropTypes.func
   }
+  */
 
   constructor(props){
     super()

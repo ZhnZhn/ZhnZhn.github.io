@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import crDateConfig from './crDateConfig'
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators';
 import SpinnerLoading from '../zhn/SpinnerLoading'
 
@@ -34,6 +35,11 @@ class DialogStatN extends Component {
   constructor(props){
     super()
 
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(props)
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
@@ -43,6 +49,7 @@ class DialogStatN extends Component {
     this._selectOptions = []
 
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isLoading: true,
       isLoadFailed: false,
@@ -206,6 +213,7 @@ class DialogStatN extends Component {
             caption, isShow, onShow, onFront,
           } = this.props
         , {
+            isToolbar,
             isShowLabels,
             isLoading, isLoadFailed,
             isShowDate, dateDefault, dateOptions,
@@ -217,14 +225,16 @@ class DialogStatN extends Component {
 
     return (
       <D.DraggableDialog
-           caption={caption}
            isShow={isShow}
+           caption={caption}
+           menuModel={this._menuMore}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
            onFront={onFront}
            onClose={this._handleClose}
        >
-         <D.ToolbarButtonCircle
+         <D.Toolbar
+           isShow={isToolbar}
            buttons={this.toolbarButtons}
          />
          {

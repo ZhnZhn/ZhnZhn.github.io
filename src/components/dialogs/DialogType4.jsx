@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 import D from './DialogCell'
+import crMenuMore from './MenuMore'
 import Decor from './decorators/Decorators'
 
 const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
@@ -40,6 +41,12 @@ class DialogType4 extends Component {
     super();
     this.one = undefined;
     this.two = undefined;
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     const { noDate, noOptions } = props;
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate }
@@ -54,6 +61,7 @@ class DialogType4 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowDate : true,
       isShowOptions: false,
@@ -140,24 +148,26 @@ class DialogType4 extends Component {
            noDate, noOptions
           } = this.props
         , {
+            isToolbar,
             isShowLabels, isShowDate, isShowOptions,
             validationMessages
           } = this.state;
 
     return(
         <D.DraggableDialog
-           caption={caption}
            isShow={isShow}
+           caption={caption}
+           menuModel={this._menuMore}
            commandButtons={this._commandButtons}
            onShowChart={onShow}
            onFront={onFront}
            onClose={this._handleClose}
          >
-             <D.ToolbarButtonCircle
-                buttons={this.toolbarButtons}
-             />
-
-             <D.SelectWithLoad
+            <D.Toolbar
+              isShow={isToolbar}
+              buttons={this.toolbarButtons}
+            />
+            <D.SelectWithLoad
                isShow={isShow}
                isShowLabels={isShowLabels}
                uri={oneURI}

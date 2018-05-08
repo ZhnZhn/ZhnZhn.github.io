@@ -32,8 +32,8 @@ var createLoadOptions = function createLoadOptions() {
       _countryValue = items[0] ? items[0].value : COUNTRY_CAPTION_DF,
       _countryCaption = items[0] ? items[0].caption : COUNTRY_CAPTION_DF;
 
-  var _zhCompType = undefined,
-      _time = undefined;
+  var _zhCompType = void 0,
+      _time = void 0;
 
   if (chartType && chartType.value !== AREA) {
     _zhCompType = chartType.compType;

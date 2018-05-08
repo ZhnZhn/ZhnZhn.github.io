@@ -78,9 +78,7 @@ const _rCreateItem = {
 const ItemFactory = {
   createItem({ store, config, index, option, props }){
     const { zhCompType } = config
-        , _fnCreate = (zhCompType && _rCreateItem[zhCompType])
-               ? _rCreateItem[zhCompType]
-               : _rCreateItem.DEFAULT;
+        , _fnCreate = _rCreateItem[zhCompType] || _rCreateItem.DEFAULT;
 
     return _fnCreate({ store, config, index, option, props });
   }

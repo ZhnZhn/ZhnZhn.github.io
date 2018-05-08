@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/MenuMore.js"
+ ],
+ "file": "../../../src/components/dialogs/MenuMore.js",
+ "names": [
+  "CL_ROW",
+  "_addItemTo",
+  "arr",
+  "comp",
+  "name",
+  "onClick",
+  "isClose",
+  "push",
+  "cn",
+  "bind",
+  "crMenuMore",
+  "toggleToolBar",
+  "onAbout",
+  "p0",
+  "baseTitleCl",
+  "pageWidth",
+  "maxPages"
+ ],
+ "mappings": ";;;;;AAAA,IAAMA,SAAS,8BAAf;;AAEA,IAAMC,aAAa,SAAbA,UAAa,CAACC,GAAD,EAAMC,IAAN,QAA2C;AAAA,MAA7BC,IAA6B,QAA7BA,IAA6B;AAAA,MAAvBC,OAAuB,QAAvBA,OAAuB;AAAA,MAAdC,OAAc,QAAdA,OAAc;;AAC5D,MAAID,OAAJ,EAAa;AACXH,QAAIK,IAAJ,CAAS;AACPC,UAAIR,MADG;AAEPK,eAASA,QAAQI,IAAR,CAAaN,IAAb,CAFF;AAGPC,gBAHO,EAGDE;AAHC,KAAT;AAKD;AACF,CARD;;AAUA,IAAMI,aAAa,SAAbA,UAAa,CAACP,IAAD,SAGb;AAAA,MAFJQ,aAEI,SAFJA,aAEI;AAAA,MADJC,OACI,SADJA,OACI;;AACJ,MAAMC,KAAK,EAAX;AACAZ,aAAWY,EAAX,EAAeV,IAAf,EAAqB;AACnBC,UAAM,gBADa;AAEnBC,aAASM,aAFU;AAGnBL,aAAS;AAHU,GAArB;AAKAL,aAAWY,EAAX,EAAeV,IAAf,EAAqB;AACnBC,UAAM,OADa;AAEnBC,aAASO,OAFU;AAGnBN,aAAS;AAHU,GAArB;;AAMA,SAAO;AACHQ,iBAAad,MADV;AAEHe,eAAW,GAFR;AAGHC,cAAU,CAHP;AAIHH,QAAIA;AAJD,GAAP;AAMC,CAtBH;;kBAwBeH,U"
+}

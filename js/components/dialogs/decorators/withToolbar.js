@@ -32,6 +32,14 @@ var _createType2WithToolbar = function _createType2WithToolbar(props) {
   return buttons;
 };
 
+var _toggleWithToolbar = function _toggleWithToolbar() {
+  this.setState(function (prevState) {
+    return {
+      isToolbar: !prevState.isToolbar
+    };
+  });
+};
+
 var _clickInfoWithToolbar = function _clickInfoWithToolbar() {
   var _props = this.props,
       descrUrl = _props.descrUrl,
@@ -40,18 +48,23 @@ var _clickInfoWithToolbar = function _clickInfoWithToolbar() {
   onClickInfo({ descrUrl: descrUrl });
 };
 var _clickLabelWithToolbar = function _clickLabelWithToolbar() {
-  this.setState({
-    isShowLabels: !this.state.isShowLabels
+  this.setState(function (prevState) {
+    return {
+      isShowLabels: !prevState.isShowLabels
+    };
   });
 };
 var _clickDateWithToolbar = function _clickDateWithToolbar() {
-  this.setState({
-    isShowDate: !this.state.isShowDate
+  this.setState(function (prevState) {
+    return {
+      isShowDate: !prevState.isShowDate
+    };
   });
 };
 
 var withToolbar = function withToolbar(target) {
   Object.assign(target.prototype, {
+    _toggleWithToolbar: _toggleWithToolbar,
     _createType2WithToolbar: _createType2WithToolbar,
     _clickInfoWithToolbar: _clickInfoWithToolbar,
     _clickLabelWithToolbar: _clickLabelWithToolbar,

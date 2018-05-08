@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 const S = {
@@ -47,11 +48,18 @@ class  ZillowDialog extends Component {
 
   constructor(props){
     super()
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(props)
     this._commandButtons = [
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowDate : true,
       isShowPattern : false,
@@ -123,6 +131,10 @@ class  ZillowDialog extends Component {
     this._handleWithValidationClose()
   }
 
+  _refItems = c => this.parentChild = c
+  _refZip = n => this.inputZipCode = n
+  _refDates = c => this.datesFragment = c
+
   render(){
     const {
            caption, isShow, onShow, onFront,
@@ -131,20 +143,23 @@ class  ZillowDialog extends Component {
            initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
+            isToolbar,
             isShowLabels, isShowDate, isShowPattern,
             validationMessages
           } = this.state;
 
     return(
         <D.DraggableDialog
-             caption={caption}
              isShow={isShow}
+             caption={caption}
+             menuModel={this._menuMore}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <D.ToolbarButtonCircle
+             <D.Toolbar
+                isShow={isToolbar}
                 buttons={this.toolbarButtons}
              />
              <D.SelectWithLoad
@@ -158,7 +173,7 @@ class  ZillowDialog extends Component {
              />
 
              <D.SelectParentChild
-                 ref={c => this.parentChild = c}
+                 ref={this._refItems}
                  isShow={isShow}
                  isShowLabels={isShowLabels}
                  uri={twoURI}
@@ -171,7 +186,7 @@ class  ZillowDialog extends Component {
              />
              <D.ShowHide isShow={isShowPattern}>
                 <D.RowPattern
-                  ref={n => this.inputZipCode = n}
+                  ref={this._refZip}
                   isShowLabels={isShowLabels}
                   title="Zip Code*"
                   placeholder="Zip Code, 5 Digit"
@@ -181,7 +196,7 @@ class  ZillowDialog extends Component {
              </D.ShowHide>
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
-                 ref={c => this.datesFragment = c}
+                 ref={this._refDates}
                  isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}

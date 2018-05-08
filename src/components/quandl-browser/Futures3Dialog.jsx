@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import D from '../dialogs/DialogCell'
+import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 const yearOptions = [
@@ -19,6 +20,12 @@ class Futures3Dialog extends Component {
   constructor(props){
     super()
     this.year = undefined
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true}
     )
@@ -26,6 +33,7 @@ class Futures3Dialog extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ];
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       validationMessages : []
     }
@@ -84,6 +92,9 @@ class Futures3Dialog extends Component {
     this._handleWithValidationClose()
   }
 
+  _refItemMonth = c => this.itemMonth = c
+  _refFromDate  = c => this.fromDate = c
+
   render(){
     const {
             isShow, caption, onShow, onFront,
@@ -91,24 +102,27 @@ class Futures3Dialog extends Component {
             isContinious, initFromDate, onTestDateOrEmpty, msgTestDateOrEmpty
           } = this.props
         , {
+            isToolbar,
             isShowLabels,
             validationMessages
           } = this.state;
 
     return (
       <D.DraggableDialog
-         caption={caption}
          isShow={isShow}
+         caption={caption}
+         menuModel={this._menuMore}
          commandButtons={this._commandButtons}
          onShowChart={onShow}
          onFront={onFront}
          onClose={this._handleClose}
        >
-           <D.ToolbarButtonCircle
+           <D.Toolbar
+              isShow={isToolbar}
               buttons={this.toolbarButtons}
            />
            <D.SelectParentChild
-               ref={c => this.itemMonth = c}
+               ref={this._refItemMonth}
                isShow={isShow}
                isShowLabels={isShowLabels}
                uri={futuresURI}
@@ -127,7 +141,7 @@ class Futures3Dialog extends Component {
            {
               isContinious &&
               <D.RowDate
-                 ref={ c => this.fromDate = c}
+                 ref={this._refFromDate}
                  isShowLabels={isShowLabels}
                  labelTitle="From Date:"
                  initValue={initFromDate}

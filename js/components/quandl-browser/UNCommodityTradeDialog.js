@@ -32,6 +32,10 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
+var _MenuMore = require('../dialogs/MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
 var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
@@ -293,12 +297,21 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
       _this._handleWithValidationClose();
     };
 
+    _this._refDates = function (c) {
+      return _this.datesFragment = c;
+    };
+
     _this.country = null;
     _this.chapter = null;
     _this.tradeFilter = null;
     _this.subheading = null;
     _this.optionTrades = null;
     _this.chartType = null;
+
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
 
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this.toolbarButtons.push({
@@ -321,6 +334,7 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
       onClick: _this._handlerLoadMeta
     }), _react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handlerLoadData })];
     _this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowFilter: false,
       isShowDate: true,
@@ -347,8 +361,6 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           isShow = _props.isShow,
           onShow = _props.onShow,
@@ -362,6 +374,7 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
           onTestDate = _props.onTestDate,
           _state = this.state,
+          isToolbar = _state.isToolbar,
           isShowLabels = _state.isShowLabels,
           isShowFilter = _state.isShowFilter,
           isShowDate = _state.isShowDate,
@@ -376,14 +389,16 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: 'United Nations Commodity Trade',
           isShow: isShow,
+          caption: 'United Nations Commodity Trade',
+          menuModel: this._menuMore,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
           onClose: this._handlerClose
         },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
@@ -430,9 +445,7 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-            ref: function ref(c) {
-              return _this2.datesFragment = c;
-            },
+            ref: this._refDates,
             isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,

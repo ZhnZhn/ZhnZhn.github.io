@@ -1,1 +1,40 @@
-{"version":3,"sources":["../../../src/components/stock-markets/AlphaSectorDialog.jsx"],"names":["S","ROW_TEXT","paddingRight","AlphaIndicatorDialog","props","_handleLoad","loadId","onLoad","option","indicator","_handleClose","onClose","toolbarButtons","_createType2WithToolbar","noDate","noLabels","_commandButtons","nextProps","nextState","isShow","caption","onShow","onFront"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,YAAU;AACRC,kBAAc;AADN;AADF,CAAV;;IAOMC,oB;;;AAEJ,gCAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UAmBlBC,WAnBkB,GAmBJ,YAAM;AAAA,wBACS,MAAKD,KADd;AAAA,UACVE,MADU,eACVA,MADU;AAAA,UACFC,MADE,eACFA,MADE;;AAElB,UAAMC,SAAS;AACbF,gBAAQA,MADK;AAEbG,mBAAW;AACX;AAHa,OAAf;AAKAF,aAAOC,MAAP;AACD,KA3BiB;;AAAA,UA6BlBE,YA7BkB,GA6BH,YAAM;AACnB,YAAKN,KAAL,CAAWO,OAAX;AACD,KA/BiB;;AAEhB,UAAKC,cAAL,GAAsB,MAAKC,uBAAL,CACpBT,KADoB,EACb,EAAEU,QAAQ,IAAV,EAAgBC,UAAU,IAA1B,EADa,CAAtB;AAGA,UAAKC,eAAL,GAAuB,CACrB,mDAAG,MAAH,CAAU,IAAV,IAAe,SAAS,MAAKX,WAA7B,GADqB,CAAvB;AALgB;AAQjB;;;;0CAEqBY,S,EAAWC,S,EAAU;AACzC,UAAI,KAAKd,KAAL,KAAea,SAAnB,EAA6B;AAC1B,YAAI,KAAKb,KAAL,CAAWe,MAAX,KAAsBF,UAAUE,MAApC,EAA2C;AACxC,iBAAO,KAAP;AACF;AACH;AACD,aAAO,IAAP;AACD;;;6BAgBQ;AAAA,mBAIG,KAAKf,KAJR;AAAA,UAECe,MAFD,UAECA,MAFD;AAAA,UAESC,OAFT,UAESA,OAFT;AAAA,UAGCC,MAHD,UAGCA,MAHD;AAAA,UAGSC,OAHT,UAGSA,OAHT;;;AAMP,aACE;AAAA,6BAAG,eAAH;AAAA;AACK,mBAASF,OADd;AAEK,kBAAQD,MAFb;AAGK,0BAAgB,KAAKH,eAH1B;AAIK,uBAAaK,MAJlB;AAKK,mBAASC,OALd;AAMK,mBAAS,KAAKZ;AANnB;AAQK,2DAAG,mBAAH;AACG,mBAAS,KAAKE;AADjB,UARL;AAWK,2DAAG,GAAH,CAAO,IAAP;AACE,qBAAWZ,EAAEC,QADf;AAEE,mBAAQ,QAFV;AAGE,gBAAK;AAHP;AAXL,OADF;AAmBD;;;;;kBAGYE,oB","file":"AlphaSectorDialog.js","sourcesContent":["import React, { Component } from 'react'\r\n\r\nimport D from '../dialogs/DialogCell'\r\nimport withToolbar from '../dialogs/decorators/withToolbar'\r\n\r\nconst S = {\r\n  ROW_TEXT: {\r\n    paddingRight: '16px'\r\n  }\r\n};\r\n\r\n@withToolbar\r\nclass AlphaIndicatorDialog extends Component {\r\n\r\n  constructor(props){\r\n    super()\r\n    this.toolbarButtons = this._createType2WithToolbar(\r\n      props, { noDate: true, noLabels: true }\r\n    )\r\n    this._commandButtons = [\r\n      <D.Button.Load onClick={this._handleLoad} />\r\n    ];\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (this.props !== nextProps){\r\n       if (this.props.isShow === nextProps.isShow){\r\n          return false;\r\n       }\r\n    }\r\n    return true;\r\n  }\r\n\r\n  _handleLoad = () => {\r\n    const { loadId, onLoad } = this.props;\r\n    const option = {\r\n      loadId: loadId,\r\n      indicator: 'SECTOR',\r\n      //value: _value, //for label\r\n    };\r\n    onLoad(option)\r\n  }\r\n\r\n  _handleClose = () => {\r\n    this.props.onClose()\r\n  }\r\n\r\n  render() {\r\n    const {\r\n            isShow, caption,\r\n            onShow, onFront\r\n          } = this.props;\r\n\r\n    return (\r\n      <D.DraggableDialog\r\n           caption={caption}\r\n           isShow={isShow}\r\n           commandButtons={this._commandButtons}\r\n           onShowChart={onShow}\r\n           onFront={onFront}\r\n           onClose={this._handleClose}\r\n       >\r\n           <D.ToolbarButtonCircle\r\n              buttons={this.toolbarButtons}\r\n           />\r\n           <D.Row.Text\r\n             styleRoot={S.ROW_TEXT}\r\n             caption=\"Alpha:\"\r\n             text=\"Performance by Sector\"\r\n           />\r\n      </D.DraggableDialog>\r\n    );\r\n  }\r\n}\r\n\r\nexport default AlphaIndicatorDialog\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stock-markets/AlphaSectorDialog.js"
+ ],
+ "file": "../../../src/components/stock-markets/AlphaSectorDialog.js",
+ "names": [
+  "S",
+  "ROW_TEXT",
+  "paddingRight",
+  "AlphaIndicatorDialog",
+  "props",
+  "_handleLoad",
+  "loadId",
+  "onLoad",
+  "option",
+  "indicator",
+  "_handleClose",
+  "onClose",
+  "_menuMore",
+  "toggleToolBar",
+  "_toggleWithToolbar",
+  "onAbout",
+  "_clickInfoWithToolbar",
+  "toolbarButtons",
+  "_createType2WithToolbar",
+  "noDate",
+  "noLabels",
+  "_commandButtons",
+  "state",
+  "isToolbar",
+  "nextProps",
+  "nextState",
+  "isShow",
+  "caption",
+  "onShow",
+  "onFront"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,YAAU;AACRC,kBAAc;AADN;AADF,CAAV;;IAOMC,oB;;;AAEJ,gCAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAAA,UA6BlBC,WA7BkB,GA6BJ,YAAM;AAAA,wBACS,MAAKD,KADd;AAAA,UACVE,MADU,eACVA,MADU;AAAA,UACFC,MADE,eACFA,MADE;;AAElB,UAAMC,SAAS;AACbF,gBAAQA,MADK;AAEbG,mBAAW;AACX;AAHa,OAAf;AAKAF,aAAOC,MAAP;AACD,KArCiB;;AAAA,UAuClBE,YAvCkB,GAuCH,YAAM;AACnB,YAAKN,KAAL,CAAWO,OAAX;AACD,KAzCiB;;AAGhB,UAAKC,SAAL,GAAiB,+BAAiB;AAChCC,qBAAe,MAAKC,kBADY;AAEhCC,eAAS,MAAKC;AAFkB,KAAjB,CAAjB;;AAKA,UAAKC,cAAL,GAAsB,MAAKC,uBAAL,CACpBd,KADoB,EACb,EAAEe,QAAQ,IAAV,EAAgBC,UAAU,IAA1B,EADa,CAAtB;AAGA,UAAKC,eAAL,GAAuB,CACrB,mDAAG,MAAH,CAAU,IAAV,IAAe,SAAS,MAAKhB,WAA7B,GADqB,CAAvB;;AAIA,UAAKiB,KAAL,GAAa;AACXC,iBAAW;AADA,KAAb;AAfgB;AAkBjB;;;;0CAEqBC,S,EAAWC,S,EAAU;AACzC,UAAI,KAAKrB,KAAL,KAAeoB,SAAnB,EAA6B;AAC1B,YAAI,KAAKpB,KAAL,CAAWsB,MAAX,KAAsBF,UAAUE,MAApC,EAA2C;AACxC,iBAAO,KAAP;AACF;AACH;AACD,aAAO,IAAP;AACD;;;6BAgBQ;AAAA,mBAIG,KAAKtB,KAJR;AAAA,UAECsB,MAFD,UAECA,MAFD;AAAA,UAESC,OAFT,UAESA,OAFT;AAAA,UAGCC,MAHD,UAGCA,MAHD;AAAA,UAGSC,OAHT,UAGSA,OAHT;AAAA,UAKCN,SALD,GAKe,KAAKD,KALpB,CAKCC,SALD;;;AAOP,aACE;AAAA,6BAAG,eAAH;AAAA;AACK,kBAAQG,MADb;AAEK,mBAASC,OAFd;AAGK,qBAAW,KAAKf,SAHrB;AAIK,0BAAgB,KAAKS,eAJ1B;AAKK,uBAAaO,MALlB;AAMK,mBAASC,OANd;AAOK,mBAAS,KAAKnB;AAPnB;AASK,2DAAG,OAAH;AACG,kBAAQa,SADX;AAEG,mBAAS,KAAKN;AAFjB,UATL;AAaK,2DAAG,GAAH,CAAO,IAAP;AACE,qBAAWjB,EAAEC,QADf;AAEE,mBAAQ,QAFV;AAGE,gBAAK;AAHP;AAbL,OADF;AAqBD;;;;;kBAGYE,oB"
+}

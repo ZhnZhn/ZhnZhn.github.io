@@ -187,8 +187,6 @@ var ChartContainer = (_temp = _class = function (_Component) {
           isShow: isMore,
           className: CL.MENU_MORE,
           style: TS.EL_BORDER,
-          pageWidth: 180,
-          maxPages: 2,
           model: this._MODEL,
           onClose: this._hToggleMore
         }),

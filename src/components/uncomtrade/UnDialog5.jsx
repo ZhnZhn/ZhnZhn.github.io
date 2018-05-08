@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import D from '../dialogs/DialogCell'
 import Decor from '../dialogs/decorators/Decorators'
+import crMenuMore from '../dialogs/MenuMore'
 
 const TRADE_FLOW = [
   { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
@@ -18,6 +19,12 @@ class  UnDialog5 extends Component {
 
   constructor(props){
     super()
+
+    this._menuMore = crMenuMore(this, {
+      toggleToolBar: this._toggleWithToolbar,
+      onAbout: this._clickInfoWithToolbar
+    })
+
     this.toolbarButtons = this._createType2WithToolbar(props)
     this.toolbarButtons.push({
       caption: 'O', title: 'Toggle Options Input',
@@ -27,6 +34,7 @@ class  UnDialog5 extends Component {
       <D.Button.Load onClick={this._handleLoad} />
     ]
     this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowDate: false,
       isShowOptions: false,
@@ -96,6 +104,9 @@ class  UnDialog5 extends Component {
      this[propName] = value
   }
 
+  _refItems = c => this.parentChild = c
+  _refDates = c => this.datesFragment = c
+
   render(){
     const {
            caption, isShow, onShow, onFront,
@@ -104,6 +115,7 @@ class  UnDialog5 extends Component {
            initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
           } = this.props
         , {
+            isToolbar,
             isShowLabels,
             isShowDate, isShowOptions,
             validationMessages
@@ -111,14 +123,16 @@ class  UnDialog5 extends Component {
 
     return(
         <D.DraggableDialog
-             caption={caption}
              isShow={isShow}
+             caption={caption}
+             menuModel={this._menuMore}
              commandButtons={this._commandButtons}
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handleClose}
          >
-             <D.ToolbarButtonCircle
+             <D.Toolbar
+                isShow={isToolbar}
                 buttons={this.toolbarButtons}
              />
              <D.SelectWithLoad
@@ -132,7 +146,7 @@ class  UnDialog5 extends Component {
              />
 
              <D.SelectParentChild
-                 ref={c => this.parentChild = c}
+                 ref={this._refItems}
                  isShow={isShow}
                  isShowLabels={isShowLabels}
                  uri={twoURI}
@@ -145,7 +159,7 @@ class  UnDialog5 extends Component {
 
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
-                 ref={c => this.datesFragment = c}
+                 ref={this._refDates}
                  isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}

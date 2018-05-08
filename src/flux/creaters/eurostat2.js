@@ -19,8 +19,7 @@ const createLoadOptions = (props={}, options={}) => {
           ? one.caption
           : COUNTRY_CAPTION_DF;
 
-  let _zhCompType = undefined
-     , _time = undefined
+  let _zhCompType, _time
      , _mapValue = two.mapValue
      , _mapSlice = two.mapSlice;
 
@@ -28,8 +27,12 @@ const createLoadOptions = (props={}, options={}) => {
     _zhCompType = chartType.compType;
     _time = (date) ? date.value : dateDefault;
 
-    if (!_mapValue) { _mapValue = EuroStatFn.createMapValue(props, two); }
-    if (!_mapSlice) { _mapSlice = EuroStatFn.createMapSlice(props, two); }
+    if (!_mapValue) {
+      _mapValue = EuroStatFn.createMapValue(props, two);
+    }
+    if (!_mapSlice) {
+      _mapSlice = EuroStatFn.createMapSlice(props, two);
+    }
   }
 
   return {

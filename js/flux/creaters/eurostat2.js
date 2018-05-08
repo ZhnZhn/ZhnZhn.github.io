@@ -38,8 +38,8 @@ var createLoadOptions = function createLoadOptions() {
       _countryValue = one ? one.value : COUNTRY_CAPTION_DF,
       _countryCaption = one ? one.caption : COUNTRY_CAPTION_DF;
 
-  var _zhCompType = undefined,
-      _time = undefined,
+  var _zhCompType = void 0,
+      _time = void 0,
       _mapValue = two.mapValue,
       _mapSlice = two.mapSlice;
 

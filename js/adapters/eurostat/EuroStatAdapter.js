@@ -44,17 +44,19 @@ var EuroStatAdapter = {
   toConfig: function toConfig(json, option) {
     var _option$seriaType = option.seriaType,
         seriaType = _option$seriaType === undefined ? 'AREA' : _option$seriaType,
+        zhCompType = option.zhCompType,
         fnToConfig = _rToConfig[seriaType],
-        config = typeof fnToConfig !== 'undefined' ? fnToConfig(json, option) : {};
+        config = fnToConfig ? fnToConfig(json, option) : {};
 
 
+    config.zhCompType = zhCompType;
     return { config: config };
   },
   toSeries: function toSeries(json, option, chart) {
     var _option$seriaType2 = option.seriaType,
         seriaType = _option$seriaType2 === undefined ? 'AREA' : _option$seriaType2,
         fnToSeria = _rToSeria[seriaType],
-        seria = typeof fnToSeria !== 'undefined' ? fnToSeria(json, option, chart) : undefined;
+        seria = fnToSeria ? fnToSeria(json, option, chart) : undefined;
 
 
     return seria;

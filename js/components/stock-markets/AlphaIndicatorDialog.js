@@ -34,6 +34,10 @@ var _withToolbar = require('../dialogs/decorators/withToolbar');
 
 var _withToolbar2 = _interopRequireDefault(_withToolbar);
 
+var _MenuMore = require('../dialogs/MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DF = {
@@ -133,6 +137,11 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       _this[propName] = value;
     };
 
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
+
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
     _this.toolbarButtons.push({
       caption: 'O', title: 'Toggle Options Input',
@@ -140,6 +149,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
     });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
+      isToolbar: true,
       isShowLabels: true,
       isShowOptions: false
     };
@@ -168,6 +178,7 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
           onShow = _props.onShow,
           onFront = _props.onFront,
           _state = this.state,
+          isToolbar = _state.isToolbar,
           isShowLabels = _state.isShowLabels,
           isShowOptions = _state.isShowOptions;
 
@@ -175,14 +186,16 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       return _react2.default.createElement(
         _DialogCell2.default.DraggableDialog,
         {
-          caption: caption,
           isShow: isShow,
+          caption: caption,
+          menuModel: this._menuMore,
           commandButtons: this._commandButtons,
           onShowChart: onShow,
           onFront: onFront,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {

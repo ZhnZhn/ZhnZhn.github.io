@@ -15,6 +15,7 @@ const STYLE = {
   CAPTION_DIV:{
     position: 'relative',
     padding: '5px',
+    paddingLeft: '16px',
     paddingRight: '35px',
     color: '#c0c0c0',
     backgroundColor: '#1b2836',

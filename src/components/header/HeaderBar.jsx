@@ -163,9 +163,7 @@ class HeaderBar extends Component {
            <ModalSlider
              isShow={isDS}
              className={CL.BROWSER_MENU}
-             INIT_ID="page_0"
-             pageWidth={235}
-             maxPages={2}
+             INIT_ID="page_0"             
              model={MODEL}
              onClose={this._hToggleDS}
            />

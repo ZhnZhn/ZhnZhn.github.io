@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 
 import withTheme from '../hoc/withTheme'
 
+import ModalSlider from '../zhn-modal-slider/ModalSlider'
+import SvgMore from '../zhn/SvgMore'
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
 
@@ -14,7 +16,8 @@ const TH_ID = 'DRAGGABLE_DIALOG';
 
 const CL = {
   SHOWING: 'show-popup',
-  NOT_SELECTED: 'not-selected'
+  NOT_SELECTED: 'not-selected',
+  MENU_MORE: 'popup-menu dialog__menu-more'
 };
 
 const S = {
@@ -24,6 +27,14 @@ const S = {
     top: '30px',
     left: '50px',
     zIndex: 10
+  },
+  BT_MORE: {
+    position: 'absolute',
+    left: 0
+  },
+  BT_MORE_SVG: {
+    stroke: 'inherit',
+    fill: 'inherit'
   },
   CHILDREN_DIV: {
     cursor: 'default'
@@ -45,8 +56,35 @@ class DraggableDialog extends Component {
   }
   */
 
+  state = {
+    isMore: false
+  }
+
   componentDidMount(){
      Interact.makeDragable(this.rootDiv);
+  }
+
+  _toggleMore = () => {
+    this.setState(prevState => ({
+      isMore: !prevState.isMore
+    }))
+  }
+
+  _renderMenuMore = (menuModel, isMore, TS) => {
+    return menuModel && <ModalSlider
+      isShow={isMore}
+      className={CL.MENU_MORE}
+      style={TS.EL_BORDER}
+      model={menuModel}
+      onClose={this._toggleMore}
+    />
+  }
+  _renderBtMore = (menuModel) => {
+    return menuModel && <SvgMore
+      style={S.BT_MORE}
+      svgStyle={S.BT_MORE_SVG}
+      onClick={this._toggleMore}
+    />
   }
 
   _renderCommandButton = (commandButtons, onShowChart, onClose) => {
@@ -79,11 +117,13 @@ class DraggableDialog extends Component {
   render(){
     const {
            theme,
+           menuModel,
            isShow, caption, children,
            commandButtons,
            onShowChart, onFront, onClose
          } = this.props
         , TS = theme.getStyle(TH_ID)
+        , { isMore } = this.state
         , _styleShow = isShow ? S.SHOW : S.HIDE
         , _classShow = isShow ? CL.SHOWING : undefined;
     return (
@@ -99,6 +139,8 @@ class DraggableDialog extends Component {
         onClick={onFront}
        >
         <div style={{...S.CAPTION_DIV, ...TS.EL}}>
+          { this._renderMenuMore(menuModel, isMore, TS) }
+          { this._renderBtMore(menuModel) }
           <span className={CL.NOT_SELECTED}>
             {caption}
           </span>

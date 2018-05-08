@@ -139,7 +139,7 @@ class ChartContainer extends Component {
    }
 
    _showMore = () => {
-      this.setState({ isMore: true })     
+      this.setState({ isMore: true })
    }
    _hToggleMore = () => {
      this.setState(prevState => ({
@@ -221,9 +221,7 @@ class ChartContainer extends Component {
           <ModalSlider
             isShow={isMore}
             className={CL.MENU_MORE}
-            style={TS.EL_BORDER}
-            pageWidth={180}
-            maxPages={2}
+            style={TS.EL_BORDER}            
             model={this._MODEL}
             onClose={this._hToggleMore}
           />
