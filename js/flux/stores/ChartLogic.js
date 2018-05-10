@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _Factory = require('../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
@@ -14,14 +18,34 @@ var _fCompareBy2 = _interopRequireDefault(_fCompareBy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _get = {
-  sliceConfigs: function sliceConfigs(slice, chartType) {
-    var chartSlice = slice[chartType],
-        _ref = chartSlice || {},
-        configs = _ref.configs;
-
-    return { chartSlice: chartSlice, configs: configs };
+/*
+const _get = {
+  sliceConfigs(slice, chartType ){
+    const chartSlice = slice[chartType]
+       , { configs } = chartSlice || {};
+    return { chartSlice, configs };
   }
+};
+*/
+
+var _getSlice = function _getSlice(slice, chartType) {
+  var chartSlice = slice[chartType],
+      _ref = chartSlice || {},
+      configs = _ref.configs;
+
+  return { chartSlice: chartSlice, configs: configs };
+};
+
+//const _fNot = fn => (v) => !fn(v);
+var _notConfById = function _notConfById(id) {
+  return function (c) {
+    return c.zhConfig.id !== id;
+  };
+};
+var _confById = function _confById(id) {
+  return function (c) {
+    return c.zhConfig.id === id;
+  };
 };
 
 var _crChartContainer = function _crChartContainer(chartType, option) {
@@ -42,9 +66,9 @@ var ChartLogic = {
     }
   },
   isChartExist: function isChartExist(slice, chartType, key) {
-    var _get$sliceConfigs = _get.sliceConfigs(slice, chartType),
-        chartSlice = _get$sliceConfigs.chartSlice,
-        configs = _get$sliceConfigs.configs;
+    var _getSlice2 = _getSlice(slice, chartType),
+        chartSlice = _getSlice2.chartSlice,
+        configs = _getSlice2.configs;
 
     if (!chartSlice) {
       return false;
@@ -60,9 +84,9 @@ var ChartLogic = {
   },
   loadConfig: function loadConfig(slice, config, option) {
     var chartType = option.chartType,
-        _get$sliceConfigs2 = _get.sliceConfigs(slice, chartType),
-        chartSlice = _get$sliceConfigs2.chartSlice,
-        configs = _get$sliceConfigs2.configs;
+        _getSlice3 = _getSlice(slice, chartType),
+        chartSlice = _getSlice3.chartSlice,
+        configs = _getSlice3.configs;
 
     if (chartSlice) {
       configs.unshift(config);
@@ -76,8 +100,8 @@ var ChartLogic = {
     }
   },
   showChart: function showChart(slice, chartType, browserType, conf) {
-    var _get$sliceConfigs3 = _get.sliceConfigs(slice, chartType),
-        chartSlice = _get$sliceConfigs3.chartSlice;
+    var _getSlice4 = _getSlice(slice, chartType),
+        chartSlice = _getSlice4.chartSlice;
 
     if (chartSlice) {
       chartSlice.isShow = true;
@@ -90,23 +114,35 @@ var ChartLogic = {
     }
   },
   removeConfig: function removeConfig(slice, chartType, id) {
-    var _get$sliceConfigs4 = _get.sliceConfigs(slice, chartType),
-        chartSlice = _get$sliceConfigs4.chartSlice,
-        configs = _get$sliceConfigs4.configs,
+    var _getSlice5 = _getSlice(slice, chartType),
+        chartSlice = _getSlice5.chartSlice,
+        configs = _getSlice5.configs,
         _lenBefore = configs.length;
 
-    chartSlice.configs = configs.filter(function (c) {
-      return c.zhConfig.id !== id;
-    });
+    chartSlice.configs = configs.filter(_notConfById(id));
+
     return {
       chartSlice: chartSlice,
       isRemoved: _lenBefore > chartSlice.configs.length
     };
   },
+  toTop: function toTop(slice, chartType, id) {
+    var _getSlice6 = _getSlice(slice, chartType),
+        chartSlice = _getSlice6.chartSlice,
+        configs = _getSlice6.configs,
+        _conf = configs.find(_confById(id));
+
+    if (_conf) {
+      var withoutArr = configs.filter(_notConfById(id));
+      chartSlice.configs = [_conf].concat((0, _toConsumableArray3.default)(withoutArr));
+    }
+
+    return chartSlice;
+  },
   sortBy: function sortBy(slice, chartType, by) {
-    var _get$sliceConfigs5 = _get.sliceConfigs(slice, chartType),
-        chartSlice = _get$sliceConfigs5.chartSlice,
-        configs = _get$sliceConfigs5.configs;
+    var _getSlice7 = _getSlice(slice, chartType),
+        chartSlice = _getSlice7.chartSlice,
+        configs = _getSlice7.configs;
 
     if (by) {
       configs.sort((0, _fCompareBy2.default)(by));

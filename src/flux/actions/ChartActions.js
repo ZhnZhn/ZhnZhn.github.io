@@ -28,6 +28,8 @@ export const ChartActionTypes = {
   LOAD_STOCK_BY_QUERY_C: 'loadStockByQueryC',
   LOAD_STOCK_BY_QUERY_F: 'loadStockByQueryF',
 
+  TO_TOP: 'toTop',
+
   COPY: 'copy',
 
   SORT_BY: 'sortBy',
@@ -79,10 +81,13 @@ const ChartActions =  Reflux.createActions({
       },
       [A.SHOW_CHART] : {},
       [A.CLOSE_CHART] : {},
+
+      [A.TO_TOP]: {},
+      
       [A.COPY]: {},
       [A.PASTE_TO]: {},
 
-      [A.SORT_BY]: {},      
+      [A.SORT_BY]: {},
 });
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore

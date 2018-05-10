@@ -4,11 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _lodash = require('lodash.merge');
+var _highcharts = require('highcharts');
 
-var _lodash2 = _interopRequireDefault(_lodash);
+var _highcharts2 = _interopRequireDefault(_highcharts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var merge = _highcharts2.default.merge; //import merge from 'lodash.merge';
+
 
 var ChartExportConfig = {
 
@@ -80,17 +83,19 @@ var ChartExportConfig = {
     }
   },
 
+  merge: merge,
+
   fDefault: function fDefault() {
     return this.DEFAULT;
   },
   fBlackAxis: function fBlackAxis() {
-    return (0, _lodash2.default)({}, this.BLACK_AXIS);
+    return merge(false, {}, this.BLACK_AXIS);
   },
   fBlackAxisTitle: function fBlackAxisTitle() {
-    return (0, _lodash2.default)({}, this.BLACK_AXIS, this.BLACK_TITLE);
+    return merge(false, {}, this.BLACK_AXIS, this.BLACK_TITLE);
   },
   fBlackAll: function fBlackAll() {
-    return (0, _lodash2.default)({}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
+    return merge(false, {}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
   },
   createOptionStyles: function createOptionStyles() {
     return [{ caption: 'Default', value: {} }, {

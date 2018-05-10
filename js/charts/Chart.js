@@ -8,10 +8,6 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _lodash = require('lodash.merge');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
@@ -25,6 +21,10 @@ var _Tooltip = require('./Tooltip');
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var merge = _highcharts2.default.merge;
+//import merge from 'lodash.merge';
+
 
 var S = {
   TITLE_BASE: {
@@ -104,7 +104,7 @@ var Chart = {
   fCreditsRightBottom: function fCreditsRightBottom() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       enabled: true,
       position: {
         align: 'right',
@@ -117,7 +117,7 @@ var Chart = {
   fResetZoomButton: function fResetZoomButton() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       position: {
         align: 'right',
         verticalAlign: 'top',
@@ -153,7 +153,7 @@ var Chart = {
   fTitle: function fTitle() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       text: '',
       floating: true,
       align: 'left',
@@ -168,7 +168,7 @@ var Chart = {
   fSubtitle: function fSubtitle() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       text: '',
       floating: true,
       align: 'left',
@@ -222,6 +222,7 @@ var Chart = {
         crosshair: Chart.fCrosshair()
       },
       yAxis: {
+        crosshair: Chart.fCrosshair(),
         endOnTick: false,
         maxPadding: 0.15,
         startOnTick: false,
@@ -264,6 +265,7 @@ var Chart = {
       color: _Color2.default.CROSSHAIR,
       width: 1,
       zIndex: 2
+      //zIndex : 100
     };
   },
   fPlotLine: function fPlotLine(color, text) {
@@ -288,7 +290,7 @@ var Chart = {
   fXAxisOpposite: function fXAxisOpposite() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       opposite: true,
       tickLength: 0,
       tickPosition: 'inside',
@@ -300,7 +302,7 @@ var Chart = {
   fYAxisOpposite: function fYAxisOpposite() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       opposite: true,
       title: {
         text: ''
@@ -346,7 +348,7 @@ var Chart = {
   fPlotOptionsArea: function fPlotOptionsArea() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       lineColor: _Color2.default.AREA_HOVER_LINE,
       lineWidth: 0,
       marker: {
@@ -364,7 +366,7 @@ var Chart = {
   fPlotOptionsColumn: function fPlotOptionsColumn() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       lineColor: _Color2.default.COLUMN_HOVER_LINE,
       lineWidth: 0,
       marker: {
@@ -382,7 +384,7 @@ var Chart = {
   fPlotOptionsSeries: function fPlotOptionsSeries() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       states: {
         hover: {
           halo: {
@@ -399,7 +401,7 @@ var Chart = {
   fLegend: function fLegend() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    return (0, _lodash2.default)({
+    return merge(false, {
       symbolHeight: 14,
       symbolWidth: 14,
       symbolRadius: 7,

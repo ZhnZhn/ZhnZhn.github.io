@@ -34,6 +34,7 @@ const _getTranslateX = (node) => {
 class ModalSlider extends Component {
   /*
   static propTypes = {
+    rootStyle: PropTypes.object,
     className: PropTypes.string,
     style: PropTypes.object,
 
@@ -180,7 +181,7 @@ class ModalSlider extends Component {
 
   render(){
     const { _pagesStyle, _pageStyle } = this
-        , { isShow, className, style, onClose } = this.props
+        , { isShow, className, rootStyle, style, onClose } = this.props
         , _transform = this._crTransform()
         , _showHideStyle = {
             ...style,
@@ -195,6 +196,7 @@ class ModalSlider extends Component {
     return (
       <ModalPane
         isShow={isShow}
+        style={rootStyle}
         onClose={onClose}
       >
         <ShowHide

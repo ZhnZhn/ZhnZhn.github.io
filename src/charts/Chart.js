@@ -1,9 +1,11 @@
 
-import merge from 'lodash.merge';
+//import merge from 'lodash.merge';
 import Highcharts from 'highcharts';
 
 import COLOR from '../constants/Color';
 import Tooltip from './Tooltip';
+
+const merge = Highcharts.merge;
 
 const S = {
   TITLE_BASE: {
@@ -65,7 +67,7 @@ const Chart = {
 
 
   _monoColors : _fMonoColors(),
-  
+
   fCreateMonoColor(base=COLOR.MONO_BASE1, deltaColor=0, opacity=0.75){
     return Highcharts.Color(base)
        .brighten( (this.COLOR_LOW_LEVEL) + deltaColor)
@@ -79,7 +81,7 @@ const Chart = {
   },
 
   fCreditsRightBottom(option={}){
-    return merge({
+    return merge(false, {
        enabled : true,
        position : {
            align: 'right',
@@ -91,7 +93,7 @@ const Chart = {
   },
 
   fResetZoomButton(option={}){
-    return merge({
+    return merge(false, {
        position: {
           align: 'right',
           verticalAlign: 'top',
@@ -127,7 +129,7 @@ const Chart = {
   },
 
   fTitle(option={}){
-    return merge({
+    return merge(false, {
        text: '',
        floating: true,
        align: 'left',
@@ -141,7 +143,7 @@ const Chart = {
     }, option)
   },
   fSubtitle(option={}){
-    return merge({
+    return merge(false, {
       text: '',
       floating: true,
       align: 'left',
@@ -199,6 +201,7 @@ fBaseConfig(){
       crosshair : Chart.fCrosshair()
     },
     yAxis: {
+      crosshair : Chart.fCrosshair(),
       endOnTick : false,
       maxPadding : 0.15,
       startOnTick : false,
@@ -244,6 +247,7 @@ fCrosshair(){
       color : COLOR.CROSSHAIR,
       width : 1,
       zIndex : 2
+      //zIndex : 100
     }
   },
 
@@ -268,7 +272,7 @@ fCrosshair(){
  },
 
  fXAxisOpposite(option={}){
-    return merge({
+    return merge(false, {
       opposite : true,
       tickLength : 0,
       tickPosition : 'inside',
@@ -279,7 +283,7 @@ fCrosshair(){
   },
 
   fYAxisOpposite(option={}){
-    return merge({
+    return merge(false, {
        opposite: true,
        title: {
           text: ''
@@ -323,7 +327,7 @@ fCrosshair(){
   },
 
   fPlotOptionsArea(option={}){
-    return merge({
+    return merge(false, {
       lineColor: COLOR.AREA_HOVER_LINE,
       lineWidth: 0,
       marker: {
@@ -340,7 +344,7 @@ fCrosshair(){
   },
 
   fPlotOptionsColumn(option={}){
-    return merge({
+    return merge(false, {
         lineColor: COLOR.COLUMN_HOVER_LINE,
         lineWidth: 0,
         marker: {
@@ -357,7 +361,7 @@ fCrosshair(){
   },
 
   fPlotOptionsSeries(option={}){
-    return merge({
+    return merge(false, {
       states : {
         hover : {
           halo : {
@@ -373,7 +377,7 @@ fCrosshair(){
   },
 
   fLegend(option={}){
-    return merge({
+    return merge(false, {
        symbolHeight: 14,
        symbolWidth: 14,
        symbolRadius: 7,

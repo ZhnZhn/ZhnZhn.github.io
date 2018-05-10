@@ -20,6 +20,7 @@ var _isChartExist = _ChartLogic2.default.isChartExist,
     loadConfig = _ChartLogic2.default.loadConfig,
     showChart = _ChartLogic2.default.showChart,
     removeConfig = _ChartLogic2.default.removeConfig,
+    toTop = _ChartLogic2.default.toTop,
     sortBy = _ChartLogic2.default.sortBy;
 
 
@@ -134,6 +135,10 @@ var ChartSlice = {
       this.trigger(_ChartActions.ChartActionTypes.CLOSE_CHART, chartSlice);
       this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
     }
+  },
+  onToTop: function onToTop(chartType, id) {
+    var chartSlice = toTop(this.charts, chartType, id);
+    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
   },
   onCopy: function onCopy(chart) {
     this.fromChart = chart;

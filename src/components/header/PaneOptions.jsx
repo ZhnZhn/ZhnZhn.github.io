@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Highcharts from 'highcharts'
 //import PropTypes from 'prop-types'
 
 import safeFn from '../../utils/safeFn'
@@ -24,6 +25,18 @@ const SET = {
 const MODE_ADMIN = 'isAdminMode';
 const MODE_DELTA = 'isDrawDeltaExtrems';
 const MODE_ZOOM = 'isNotZoomToMinMax';
+
+const _crHaloOption = (is=false) => ({
+  plotOptions: {
+    series: {
+      states: {
+        hover: {
+          enabled: is
+        }
+      }
+    }
+  }
+});
 
 class PaneOptions extends Component {
   /*
@@ -62,6 +75,11 @@ class PaneOptions extends Component {
     }
   }
 
+  _setHalo = (is) => {
+    Highcharts.setOptions(_crHaloOption(is))
+  }
+
+
  _refProxy = n => this.proxyComp = n
 
   render(){
@@ -86,7 +104,7 @@ class PaneOptions extends Component {
            captionStyle={titleStyle}
            options={UI_THEME_OPTIONS}
            onSelect={this._hSelectTheme}
-        />        
+        />
        <RowCheckBox
           initValue={_isAdminMode}
           caption="View in Admin Mode"
@@ -104,6 +122,12 @@ class PaneOptions extends Component {
           caption="Not Zoom to Min-Max"
           onCheck={this._hMode.bind(null, MODE_ZOOM, true)}
           onUnCheck={this._hMode.bind(null, MODE_ZOOM, false)}
+       />
+       <RowCheckBox
+          initValue={false}
+          caption="Without Points Halo"
+          onCheck={this._setHalo.bind(null, false)}
+          onUnCheck={this._setHalo.bind(null, true)}
        />
        <RowButtons btStyle={btStyle} onClose={onClose}>
          <FlatButton

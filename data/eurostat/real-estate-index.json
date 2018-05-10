@@ -1,12 +1,6 @@
 {
   "indicators" : [
     {
-      "caption" : "House Price Index (2010=100), quarterly" ,
-      "value" : "teicp270?indic=TOTAL&unit=I2010_NSA",
-      "mapFrequency" : "Q",
-      "mapValue" : "teicp270?indic=TOTAL&unit=I2010_NSA",
-      "mapSlice" : { "indic" : "TOTAL", "unit": "I2010_NSA" }
-    },{
       "caption" : "House Price Index (2010=100), deflated, quarterly" ,
        "value" : "tipsho30?unit=INX_Q",
        "mapFrequency" : "Q",
@@ -35,7 +29,7 @@
        "value" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2010_SCA",
        "mapFrequency" : "M",
        "mapValue" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2010_SCA",
-       "mapSlice" : { "indic_bt" : "PSQM", "nace_r2" : "F_CC1", "unit" : "I2010_SCA" } 
+       "mapSlice" : { "indic_bt" : "PSQM", "nace_r2" : "F_CC1", "unit" : "I2010_SCA" }
      }
   ]
 }

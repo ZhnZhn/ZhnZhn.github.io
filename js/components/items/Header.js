@@ -8,6 +8,22 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -15,6 +31,14 @@ var _react2 = _interopRequireDefault(_react);
 var _withTheme = require('../hoc/withTheme');
 
 var _withTheme2 = _interopRequireDefault(_withTheme);
+
+var _SvgMore = require('../zhn/SvgMore');
+
+var _SvgMore2 = _interopRequireDefault(_SvgMore);
+
+var _ModalSlider = require('../zhn-modal-slider/ModalSlider');
+
+var _ModalSlider2 = _interopRequireDefault(_ModalSlider);
 
 var _SvgCheckBox = require('../zhn/SvgCheckBox');
 
@@ -35,6 +59,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var TH_ID = 'ELEMENT';
 var CL = 'not-selected shadow-right';
 
+var CL_MORE = "popup-menu charts__menu-more";
+
 var S = {
   ROOT: {
     backgroundColor: '#1b2836',
@@ -45,6 +71,13 @@ var S = {
     borderTopRightRadius: '2px',
     borderBottomRightRadius: '2px',
     'box-shadow': '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)'
+  },
+  SVG_MORE: {
+    stroke: '#777777',
+    fill: '#777777'
+  },
+  ROOT_MORE: {
+    display: 'inline-block'
   },
   CHECK_BOX: {
     //float: 'left',
@@ -82,66 +115,129 @@ var S = {
   }
 };
 
-var Header = function Header(props) {
-  var theme = props.theme,
-      isOpen = props.isOpen,
-      chartType = props.chartType,
-      onCheck = props.onCheck,
-      onUnCheck = props.onUnCheck,
-      itemCaption = props.itemCaption,
-      itemTitle = props.itemTitle,
-      itemTime = props.itemTime,
-      onToggle = props.onToggle,
-      valueMoving = props.valueMoving,
-      isAdminMode = props.isAdminMode,
-      crValueMoving = props.crValueMoving,
-      onClose = props.onClose,
-      TS = theme.getStyle(TH_ID),
-      _styleIsOpen = isOpen ? S.CAPTION_OPEN : (0, _extends3.default)({}, S.CAPTION_OPEN, S.CAPTION_CLOSE),
-      _styleCaption = valueMoving ? _styleIsOpen : (0, _extends3.default)({}, _styleIsOpen, S.CAPTION_WIDTH),
-      _movingBadgeEl = valueMoving ? _react2.default.createElement(_ValueMovingBadge2.default, {
-    valueMoving: valueMoving,
-    isAdminMode: isAdminMode,
-    crValueMoving: crValueMoving
-  }) : null,
-      _timeEl = !valueMoving && itemTime ? _react2.default.createElement(
+var ItemTime = function ItemTime(_ref) {
+  var itemTime = _ref.itemTime;
+
+  if (!itemTime) return null;
+  return _react2.default.createElement(
     'span',
     { style: S.TIME },
     itemTime
-  ) : null;
-
-  return _react2.default.createElement(
-    'div',
-    { style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
-    _react2.default.createElement(_SvgCheckBox2.default, {
-      rootStyle: S.CHECK_BOX,
-      chartType: chartType,
-      onCheck: onCheck,
-      onUnCheck: onUnCheck
-    }),
-    _react2.default.createElement(
-      'button',
-      {
-        className: CL,
-        title: itemTitle,
-        style: _styleCaption,
-        onClick: onToggle
-      },
-      itemCaption
-    ),
-    _movingBadgeEl,
-    _timeEl,
-    _react2.default.createElement(_SvgClose2.default, {
-      style: S.CLOSE,
-      onClose: onClose
-    })
   );
 };
+
+//const _isFn = fn => typeof fn === 'function';
+
+var Header = function (_Component) {
+  (0, _inherits3.default)(Header, _Component);
+
+  function Header() {
+    var _ref2;
+
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, Header);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = Header.__proto__ || Object.getPrototypeOf(Header)).call.apply(_ref2, [this].concat(args))), _this), _this.state = {
+      isMore: false
+    }, _this._toggleMore = function () {
+      _this.setState(function (prevState) {
+        return {
+          isMore: !prevState.isMore
+        };
+      });
+    }, _this._renderMore = function (moreModel, TS) {
+      if (!moreModel) return null;
+      var isMore = _this.state.isMore;
+
+      return _react2.default.createElement(
+        _react.Fragment,
+        null,
+        _react2.default.createElement(_SvgMore2.default
+        //style={{ display: 'inline-block' }}
+        , { svgStyle: S.SVG_MORE,
+          onClick: _this._toggleMore
+        }),
+        _react2.default.createElement(_ModalSlider2.default, {
+          isShow: isMore,
+          rootStyle: S.ROOT_MORE,
+          className: CL_MORE,
+          style: TS.BORDER,
+          model: moreModel,
+          onClose: _this._toggleMore
+        })
+      );
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+
+  (0, _createClass3.default)(Header, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          theme = _props.theme,
+          isOpen = _props.isOpen,
+          chartType = _props.chartType,
+          onCheck = _props.onCheck,
+          onUnCheck = _props.onUnCheck,
+          itemCaption = _props.itemCaption,
+          itemTitle = _props.itemTitle,
+          itemTime = _props.itemTime,
+          onToggle = _props.onToggle,
+          valueMoving = _props.valueMoving,
+          isAdminMode = _props.isAdminMode,
+          crValueMoving = _props.crValueMoving,
+          moreModel = _props.moreModel,
+          onClose = _props.onClose,
+          TS = theme.getStyle(TH_ID),
+          _openStyle = isOpen ? S.CAPTION_OPEN : (0, _extends3.default)({}, S.CAPTION_OPEN, S.CAPTION_CLOSE),
+          _captionStyle = valueMoving ? _openStyle : (0, _extends3.default)({}, _openStyle, S.CAPTION_WIDTH);
+
+      return _react2.default.createElement(
+        'div',
+        { style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
+        this._renderMore(moreModel, TS),
+        _react2.default.createElement(_SvgCheckBox2.default, {
+          rootStyle: S.CHECK_BOX,
+          chartType: chartType,
+          onCheck: onCheck,
+          onUnCheck: onUnCheck
+        }),
+        _react2.default.createElement(
+          'button',
+          {
+            className: CL,
+            title: itemTitle,
+            style: _captionStyle,
+            onClick: onToggle
+          },
+          itemCaption
+        ),
+        valueMoving ? _react2.default.createElement(_ValueMovingBadge2.default, {
+          valueMoving: valueMoving,
+          isAdminMode: isAdminMode,
+          crValueMoving: crValueMoving
+        }) : _react2.default.createElement(ItemTime, {
+          itemType: itemTime
+        }),
+        _react2.default.createElement(_SvgClose2.default, {
+          style: S.CLOSE,
+          onClose: onClose
+        })
+      );
+    }
+  }]);
+  return Header;
+}(_react.Component);
 
 /*
 Header.propTypes = {
   isOpen : PropTypes.bool.isRequired,
   chartType : PropTypes.string.isRequired,
+  moreModel: PropTypes.object,
   onCheck : PropTypes.func.isRequired,
   onUnCheck : PropTypes.func.isRequired,
   itemCaption : PropTypes.string.isRequired,

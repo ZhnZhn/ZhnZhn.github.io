@@ -1,4 +1,7 @@
-import merge from 'lodash.merge';
+//import merge from 'lodash.merge';
+import Highcharts from 'highcharts';
+
+const merge = Highcharts.merge;
 
 const ChartExportConfig = {
 
@@ -70,20 +73,31 @@ const ChartExportConfig = {
    }
  },
 
+ merge: merge,
+
  fDefault(){
    return this.DEFAULT;
  },
 
  fBlackAxis(){
-   return merge({}, this.BLACK_AXIS);
+   return merge(false, {},
+     this.BLACK_AXIS
+   );
  },
 
  fBlackAxisTitle(){
-   return merge({}, this.BLACK_AXIS, this.BLACK_TITLE);
+   return merge(false, {},
+     this.BLACK_AXIS,
+     this.BLACK_TITLE
+   );
  },
 
  fBlackAll(){
-   return merge({}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);
+   return merge(false, {},
+     this.BLACK_AXIS,
+     this.BLACK_TITLE,
+     this.BLACK_SERIES
+   );
  },
 
  createOptionStyles(){

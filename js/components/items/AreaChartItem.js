@@ -31,6 +31,10 @@ var _safeGet = require('../../utils/safeGet');
 
 var _safeGet2 = _interopRequireDefault(_safeGet);
 
+var _AreaMore = require('./AreaMore');
+
+var _AreaMore2 = _interopRequireDefault(_AreaMore);
+
 var _Header = require('./Header');
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -115,6 +119,11 @@ var AreaChartItem = (_temp = _class = function (_Component) {
 
     _initialiseProps.call(_this);
 
+    _this._moreModel = (0, _AreaMore2.default)(_this, {
+      onToggle: _this._handleToggleToolbar,
+      onToTop: props.onToTop
+    });
+
     _this.is2H = false;
     _this._fnOnCheck = _this._handlerCheckBox.bind(_this, true);
     _this._fnOnUnCheck = _this._handlerCheckBox.bind(_this, false);
@@ -189,6 +198,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         _react2.default.createElement(_Header2.default, {
           isOpen: isOpen,
           chartType: chartType,
+          moreModel: this._moreModel,
           onCheck: this._fnOnCheck,
           onUnCheck: this._fnOnUnCheck,
           itemCaption: itemCaption,
@@ -437,7 +447,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
 
   this._handleToggleToolbar = function (value) {
     _this2.setState(function (prevState) {
-      return { isShowToolbar: !prevState.isShowToolbar };
+      return {
+        isShowToolbar: !prevState.isShowToolbar
+      };
     });
   };
 

@@ -10,10 +10,6 @@ var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2
 
 var _reactDom = require('react-dom');
 
-var _lodash = require('lodash.merge');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _JsonStatFn = require('./JsonStatFn');
 
 var _JsonStatFn2 = _interopRequireDefault(_JsonStatFn);
@@ -30,6 +26,10 @@ var _safeGet = require('../../utils/safeGet');
 
 var _safeGet2 = _interopRequireDefault(_safeGet);
 
+var _merge = require('../../utils/merge');
+
+var _merge2 = _interopRequireDefault(_merge);
+
 var _MapFactory = require('../../components/factories/MapFactory');
 
 var _MapFactory2 = _interopRequireDefault(_MapFactory);
@@ -37,6 +37,9 @@ var _MapFactory2 = _interopRequireDefault(_MapFactory);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*eslint-disable no-undef */
+
+//import merge from 'lodash.merge'
+
 if (process.env.NODE_ENV !== 'development') {
   if (window.System && window.System.config) {
     window.System.config({
@@ -300,7 +303,7 @@ var _createChoroplethMap = function _createChoroplethMap(option) {
 };
 
 var _crGeoJson = function _crGeoJson(geoJson) {
-  var _geoJson = (0, _lodash2.default)({}, geoJson);
+  var _geoJson = (0, _merge2.default)(true, {}, geoJson);
   _geoJson.features.forEach(function (feature) {
     feature.properties.value = null;
   });

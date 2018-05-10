@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../src/charts/ChartExportConfig.js"],"names":["ChartExportConfig","DEFAULT","chart","plotBackgroundColor","backgroundColor","plotOptions","area","fillColor","arearange","xAxis","lineWidth","lineColor","gridLineColor","yAxis","BLACK_AXIS","labels","style","color","tickColor","BLACK_TITLE","title","BLACK_SERIES","spline","line","fDefault","fBlackAxis","fBlackAxisTitle","fBlackAll","createOptionStyles","caption","value"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAMA,oBAAoB;;AAExBC,WAAU;AACRC,WAAQ;AACNC,2BAAqB,OADf;AAENC,uBAAkB;AAFZ,KADA;AAKRC,iBAAa;AACXC,YAAM;AACJC,mBAAW;AADP,OADK;AAIXC,iBAAW;AACTD,mBAAW;AADF;AAJA,KALL;AAaRE,WAAQ;AACNC,iBAAW,CADL;AAENC,iBAAW,OAFL;AAGNC,qBAAe;AAHT,KAbA;AAkBRC,WAAQ;AACNH,iBAAW,CADL;AAENC,iBAAW,OAFL;AAGNC,qBAAe;AAHT;AAlBA,GAFc;;AA2BxBE,cAAa;AACXL,WAAO;AACJM,cAAQ;AACNC,eAAO;AACNC,iBAAO;AADD;AADD;AADJ,KADI;AAQZJ,WAAO;AACJK,iBAAW,OADP;AAEJH,cAAQ;AACNC,eAAO;AACLC,iBAAO;AADF;AADD;AAFJ;AARK,GA3BW;;AA6CzBE,eAAc;AACZC,WAAQ;AACNJ,aAAQ;AACNC,eAAQ;AADF;AADF;AADI,GA7CW;;AAqDzBI,gBAAe;AACbhB,iBAAa;AACXC,YAAM;AACJW,eAAO;AADH,OADK;AAIXT,iBAAW;AACTS,eAAO;AADE,OAJA;AAOXK,cAAQ;AACNL,eAAO;AADD,OAPG;AAUXM,YAAM;AACJN,eAAO;AADH;AAVK;AADA,GArDU;;AAsEzBO,UAtEyB,sBAsEf;AACR,WAAO,KAAKvB,OAAZ;AACD,GAxEwB;AA0EzBwB,YA1EyB,wBA0Eb;AACV,WAAO,sBAAM,EAAN,EAAU,KAAKX,UAAf,CAAP;AACD,GA5EwB;AA8EzBY,iBA9EyB,6BA8ER;AACf,WAAO,sBAAM,EAAN,EAAU,KAAKZ,UAAf,EAA2B,KAAKK,WAAhC,CAAP;AACD,GAhFwB;AAkFzBQ,WAlFyB,uBAkFd;AACT,WAAO,sBAAM,EAAN,EAAU,KAAKb,UAAf,EAA2B,KAAKK,WAAhC,EAA6C,KAAKE,YAAlD,CAAP;AACD,GApFwB;AAsFzBO,oBAtFyB,gCAsFL;AAClB,WAAO,CACL,EAAEC,SAAS,SAAX,EAAuBC,OAAQ,EAA/B,EADK,EAEL;AACGD,eAAS,sBADZ;AAEGC,aAAQ,KAAKL,UAAL,EAFX,EAFK,EAKL;AACGI,eAAS,oCADZ;AAEGC,aAAQ,KAAKJ,eAAL;AAFX,KALK,EASL,EAAEG,SAAS,WAAX,EAAyBC,OAAO,KAAKH,SAAL,EAAhC,EATK,CAAP;AAWD;AAlGwB,CAA1B;;kBAsGe3B,iB","file":"ChartExportConfig.js","sourcesContent":["import merge from 'lodash.merge';\r\n\r\nconst ChartExportConfig = {\r\n\r\n  DEFAULT : {\r\n    chart : {\r\n      plotBackgroundColor: 'white',\r\n      backgroundColor : 'white'\r\n    },\r\n    plotOptions: {\r\n      area: {\r\n        fillColor: 'white'\r\n      },\r\n      arearange: {\r\n        fillColor: 'white'\r\n      }\r\n    },\r\n    xAxis : {\r\n      lineWidth: 2,\r\n      lineColor: 'black',\r\n      gridLineColor: 'gray'\r\n    },\r\n    yAxis : {\r\n      lineWidth: 2,\r\n      lineColor: 'black',\r\n      gridLineColor: 'gray'\r\n    }\r\n  },\r\n\r\n  BLACK_AXIS : {\r\n    xAxis: {\r\n       labels: {\r\n         style: {\r\n          color: 'black'\r\n         }\r\n      }\r\n   },\r\n   yAxis: {\r\n      tickColor: 'black',\r\n      labels: {\r\n        style: {\r\n          color: 'black'\r\n        }\r\n     }\r\n   }\r\n },\r\n\r\n BLACK_TITLE : {\r\n   title : {\r\n     style : {\r\n       color : 'black'\r\n     }\r\n   }\r\n },\r\n\r\n BLACK_SERIES : {\r\n   plotOptions: {\r\n     area: {\r\n       color: 'black'\r\n     },\r\n     arearange: {\r\n       color: 'black'\r\n     },\r\n     spline: {\r\n       color: 'black'\r\n     },\r\n     line: {\r\n       color: 'black'\r\n     }\r\n   }\r\n },\r\n\r\n fDefault(){\r\n   return this.DEFAULT;\r\n },\r\n\r\n fBlackAxis(){\r\n   return merge({}, this.BLACK_AXIS);\r\n },\r\n\r\n fBlackAxisTitle(){\r\n   return merge({}, this.BLACK_AXIS, this.BLACK_TITLE);\r\n },\r\n\r\n fBlackAll(){\r\n   return merge({}, this.BLACK_AXIS, this.BLACK_TITLE, this.BLACK_SERIES);\r\n },\r\n\r\n createOptionStyles(){\r\n   return [\r\n     { caption: 'Default' , value : {} },\r\n     {\r\n        caption: 'Default + Black Axis' ,\r\n        value : this.fBlackAxis() },\r\n     {\r\n        caption: 'Default + Black Axis + Black Title',\r\n        value : this.fBlackAxisTitle()\r\n     },\r\n     { caption: 'All Black' , value: this.fBlackAll() }\r\n   ];\r\n }\r\n\r\n};\r\n\r\nexport default ChartExportConfig\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../src/charts/ChartExportConfig.js"
+ ],
+ "file": "../../src/charts/ChartExportConfig.js",
+ "names": [
+  "merge",
+  "ChartExportConfig",
+  "DEFAULT",
+  "chart",
+  "plotBackgroundColor",
+  "backgroundColor",
+  "plotOptions",
+  "area",
+  "fillColor",
+  "arearange",
+  "xAxis",
+  "lineWidth",
+  "lineColor",
+  "gridLineColor",
+  "yAxis",
+  "BLACK_AXIS",
+  "labels",
+  "style",
+  "color",
+  "tickColor",
+  "BLACK_TITLE",
+  "title",
+  "BLACK_SERIES",
+  "spline",
+  "line",
+  "fDefault",
+  "fBlackAxis",
+  "fBlackAxisTitle",
+  "fBlackAll",
+  "createOptionStyles",
+  "caption",
+  "value"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,QAAQ,qBAAWA,KAAzB,C,CAHA;;;AAKA,IAAMC,oBAAoB;;AAExBC,WAAU;AACRC,WAAQ;AACNC,2BAAqB,OADf;AAENC,uBAAkB;AAFZ,KADA;AAKRC,iBAAa;AACXC,YAAM;AACJC,mBAAW;AADP,OADK;AAIXC,iBAAW;AACTD,mBAAW;AADF;AAJA,KALL;AAaRE,WAAQ;AACNC,iBAAW,CADL;AAENC,iBAAW,OAFL;AAGNC,qBAAe;AAHT,KAbA;AAkBRC,WAAQ;AACNH,iBAAW,CADL;AAENC,iBAAW,OAFL;AAGNC,qBAAe;AAHT;AAlBA,GAFc;;AA2BxBE,cAAa;AACXL,WAAO;AACJM,cAAQ;AACNC,eAAO;AACNC,iBAAO;AADD;AADD;AADJ,KADI;AAQZJ,WAAO;AACJK,iBAAW,OADP;AAEJH,cAAQ;AACNC,eAAO;AACLC,iBAAO;AADF;AADD;AAFJ;AARK,GA3BW;;AA6CzBE,eAAc;AACZC,WAAQ;AACNJ,aAAQ;AACNC,eAAQ;AADF;AADF;AADI,GA7CW;;AAqDzBI,gBAAe;AACbhB,iBAAa;AACXC,YAAM;AACJW,eAAO;AADH,OADK;AAIXT,iBAAW;AACTS,eAAO;AADE,OAJA;AAOXK,cAAQ;AACNL,eAAO;AADD,OAPG;AAUXM,YAAM;AACJN,eAAO;AADH;AAVK;AADA,GArDU;;AAsEzBlB,SAAOA,KAtEkB;;AAwEzByB,UAxEyB,sBAwEf;AACR,WAAO,KAAKvB,OAAZ;AACD,GA1EwB;AA4EzBwB,YA5EyB,wBA4Eb;AACV,WAAO1B,MAAM,KAAN,EAAa,EAAb,EACL,KAAKe,UADA,CAAP;AAGD,GAhFwB;AAkFzBY,iBAlFyB,6BAkFR;AACf,WAAO3B,MAAM,KAAN,EAAa,EAAb,EACL,KAAKe,UADA,EAEL,KAAKK,WAFA,CAAP;AAID,GAvFwB;AAyFzBQ,WAzFyB,uBAyFd;AACT,WAAO5B,MAAM,KAAN,EAAa,EAAb,EACL,KAAKe,UADA,EAEL,KAAKK,WAFA,EAGL,KAAKE,YAHA,CAAP;AAKD,GA/FwB;AAiGzBO,oBAjGyB,gCAiGL;AAClB,WAAO,CACL,EAAEC,SAAS,SAAX,EAAuBC,OAAQ,EAA/B,EADK,EAEL;AACGD,eAAS,sBADZ;AAEGC,aAAQ,KAAKL,UAAL,EAFX,EAFK,EAKL;AACGI,eAAS,oCADZ;AAEGC,aAAQ,KAAKJ,eAAL;AAFX,KALK,EASL,EAAEG,SAAS,WAAX,EAAyBC,OAAO,KAAKH,SAAL,EAAhC,EATK,CAAP;AAWD;AA7GwB,CAA1B;;kBAiHe3B,iB"
+}

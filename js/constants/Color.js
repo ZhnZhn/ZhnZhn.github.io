@@ -4,12 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var PALETTE = {
+var P = {
   HIGH: '#4CAF50',
   LOW: '#F44336',
   GREE: '#4da54c',
   ORANGE: '#e77f32',
-  PURPLE: '#9f588e'
+  PURPLE: '#9f588e',
+  YELLOW: '#f1d600'
 };
 
 var COLOR = {
@@ -31,8 +32,7 @@ var COLOR = {
   TITLE_SHOW: '#a487d4',
   ITEM: 'black',
   BG_ITEM_HOVER: '#4572a5',
-  HOVER: '#f1d600',
-  //HOVER : 'yellow',
+  HOVER: P.YELLOW,
 
   CHART: '#4d4d4d',
   PLOT: '#4d4d4d',
@@ -55,25 +55,25 @@ var COLOR = {
   TOOLTIP: 'rgba(0,0,0, 0.5)',
 
   //HIGH : '#4caf50',
-  HIGH: PALETTE.HIGH,
+  HIGH: P.HIGH,
   //LOW  : '#ed5813',
   //LOW : '#f44336',
-  LOW: PALETTE.LOW,
+  LOW: P.LOW,
 
   //EX_DIVIDEND : '#4caf50',
-  EX_DIVIDEND: PALETTE.HIGH,
+  EX_DIVIDEND: P.HIGH,
   SPLIT_RATIO: '#f7a35c',
 
   MONO_BASE1: '#7cb5ec',
   MONO_BASE2: '#90ed7d',
 
-  MARKER_HOVER: 'yellow',
-  CROSSHAIR: 'yellow',
-  HALO_BASE: 'yellow',
+  MARKER_HOVER: P.YELLOW,
+  CROSSHAIR: P.YELLOW,
+  HALO_BASE: P.YELLOW,
 
-  AREA_HOVER_LINE: 'yellow',
+  AREA_HOVER_LINE: P.YELLOW,
   AREA_MARKER_LINE: '#a487d4',
-  COLUMN_HOVER_LINE: 'yellow',
+  COLUMN_HOVER_LINE: P.YELLOW,
   COLUMN_MARKER_LINE: '#a487d4',
 
   LEGEND_ITEM: 'black',
@@ -85,10 +85,10 @@ var COLOR = {
 
   S_OPEN: '#90ed7d',
   //S_HIGH : '#4caf50',
-  S_HIGH: PALETTE.HIGH,
+  S_HIGH: P.HIGH,
   //S_LOW  : '#ed5813',
   //S_LOW : '#f44336',
-  S_LOW: PALETTE.LOW,
+  S_LOW: P.LOW,
   S_VOLUME: '#f7a35c',
   S_ADJ_CLOSE: '#f15c80',
   S_OPEN_INTEREST: '#8085e9',
@@ -98,9 +98,9 @@ var COLOR = {
   //S_STOCK_CLOSE: '#2f7ed8',
   S_STOCK_CLOSE: '#7cb5ec',
   S_TRADES: 'black',
-  S_BALANCE: PALETTE.PURPLE,
-  S_IMPORTS: PALETTE.GREEN,
-  S_EXPORTS: PALETTE.ORANGE
+  S_BALANCE: P.PURPLE,
+  S_IMPORTS: P.GREEN,
+  S_EXPORTS: P.ORANGE
 
 };
 

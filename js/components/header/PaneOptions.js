@@ -27,6 +27,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _highcharts = require('highcharts');
+
+var _highcharts2 = _interopRequireDefault(_highcharts);
+
 var _safeFn = require('../../utils/safeFn');
 
 var _safeFn2 = _interopRequireDefault(_safeFn);
@@ -66,6 +70,21 @@ var SET = {
 var MODE_ADMIN = 'isAdminMode';
 var MODE_DELTA = 'isDrawDeltaExtrems';
 var MODE_ZOOM = 'isNotZoomToMinMax';
+
+var _crHaloOption = function _crHaloOption() {
+  var is = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  return {
+    plotOptions: {
+      series: {
+        states: {
+          hover: {
+            enabled: is
+          }
+        }
+      }
+    }
+  };
+};
 
 var PaneOptions = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(PaneOptions, _Component);
@@ -142,6 +161,12 @@ var PaneOptions = (_temp = _class = function (_Component) {
           onCheck: this._hMode.bind(null, MODE_ZOOM, true),
           onUnCheck: this._hMode.bind(null, MODE_ZOOM, false)
         }),
+        _react2.default.createElement(_RowCheckBox2.default, {
+          initValue: false,
+          caption: 'Without Points Halo',
+          onCheck: this._setHalo.bind(null, false),
+          onUnCheck: this._setHalo.bind(null, true)
+        }),
         _react2.default.createElement(
           _RowButtons2.default,
           { btStyle: btStyle, onClose: onClose },
@@ -179,6 +204,10 @@ var PaneOptions = (_temp = _class = function (_Component) {
       onChangeTheme(item.value);
       //this.forceUpdate()
     }
+  };
+
+  this._setHalo = function (is) {
+    _highcharts2.default.setOptions(_crHaloOption(is));
   };
 
   this._refProxy = function (n) {

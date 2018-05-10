@@ -162,7 +162,7 @@ var crBrowserModel = function crBrowserModel() {
       isClose: true
     }, {
       cn: CL.Q,
-      name: 'LSE by Sectors',
+      name: 'LSE (Not Updated)',
       onClick: _fBD(_Type.BrowserType.LONDON_STOCKS),
       isClose: true
     }]

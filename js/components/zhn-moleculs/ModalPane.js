@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -21,6 +25,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp2;
+//import PropTypes from 'prop-types'
 
 var _react = require('react');
 
@@ -48,7 +53,7 @@ var ModalPane = (_temp2 = _class = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ModalPane.__proto__ || Object.getPrototypeOf(ModalPane)).call.apply(_ref, [this].concat(args))), _this), _this._handleClickOutside = function (event) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ModalPane.__proto__ || Object.getPrototypeOf(ModalPane)).call.apply(_ref, [this].concat(args))), _this), _this._hClickOutside = function (event) {
       if (_this.rootNode && _this.rootNode.contains && !_this.rootNode.contains(event.target)) {
         _this.props.onClose(event);
       }
@@ -56,15 +61,22 @@ var ModalPane = (_temp2 = _class = function (_Component) {
       return _this.rootNode = n;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+  static propTypes = {
+    theme: PropTypes.object,
+      style: PropTypes.object,
+    onClose: PropTypes.func
+  }
+  */
 
   (0, _createClass3.default)(ModalPane, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps) {
       if (this.props !== nextProps) {
         if (nextProps.isShow) {
-          document.addEventListener('click', this._handleClickOutside, true);
+          document.addEventListener('click', this._hClickOutside, true);
         } else {
-          document.removeEventListener('click', this._handleClickOutside, true);
+          document.removeEventListener('click', this._hClickOutside, true);
         }
       }
     }
@@ -73,12 +85,16 @@ var ModalPane = (_temp2 = _class = function (_Component) {
     value: function render() {
       var _props = this.props,
           theme = _props.theme,
+          style = _props.style,
           children = _props.children,
           TS = theme.getStyle(TH_ID);
 
       return _react2.default.createElement(
         'div',
-        { ref: this._refRootNode, style: TS.ROOT },
+        {
+          ref: this._refRootNode,
+          style: (0, _extends3.default)({}, style, TS.ROOT)
+        },
         children
       );
     }

@@ -8,6 +8,7 @@ const {
   isChartExist,
   loadConfig, showChart,
   removeConfig,
+  toTop,
   sortBy
 } = ChartLogic;
 
@@ -121,6 +122,11 @@ const ChartSlice = {
       this.trigger(CHAT.CLOSE_CHART, chartSlice);
       this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
     }
+  },
+
+  onToTop(chartType, id){
+    const chartSlice = toTop(this.charts, chartType, id)
+    this.trigger(CHAT.SHOW_CHART, chartSlice);
   },
 
   onCopy(chart){

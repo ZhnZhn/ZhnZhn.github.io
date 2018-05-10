@@ -64,6 +64,7 @@ var _crAreaChart = function _crAreaChart(_ref) {
   }, props, {
     crValueMoving: _ChartFn2.default.crValueMoving,
 
+    onToTop: _ChartActions2.default.toTop.bind(null, chartType, id),
     onCopy: _ChartActions2.default.copy,
     onPasteToDialog: _ComponentActions2.default.showModalDialog.bind(null, _Type.ModalDialog.PASTE_TO),
     getCopyFromChart: store.getCopyFromChart.bind(store),

@@ -3,6 +3,7 @@ import Factory from '../logic/Factory';
 
 import fCompareBy from './fCompareBy'
 
+/*
 const _get = {
   sliceConfigs(slice, chartType ){
     const chartSlice = slice[chartType]
@@ -10,6 +11,17 @@ const _get = {
     return { chartSlice, configs };
   }
 };
+*/
+
+const _getSlice = (slice, chartType) => {
+  const chartSlice = slice[chartType]
+     , { configs } = chartSlice || {};
+  return { chartSlice, configs };
+}
+
+//const _fNot = fn => (v) => !fn(v);
+const _notConfById = id => c => c.zhConfig.id !== id
+const _confById = id => c => c.zhConfig.id === id
 
 const _crChartContainer = (chartType, option) => {
   const {
@@ -34,7 +46,7 @@ const ChartLogic = {
   isChartExist(slice, chartType, key){
     const {
             chartSlice, configs
-          } = _get.sliceConfigs(slice, chartType)
+          } = _getSlice(slice, chartType)
     if (!chartSlice){
       return false;
     }
@@ -52,7 +64,7 @@ const ChartLogic = {
     const { chartType } = option
         , {
             chartSlice, configs
-          } = _get.sliceConfigs(slice, chartType);
+          } = _getSlice(slice, chartType);
     if (chartSlice){
       configs.unshift(config);
       chartSlice.isShow = true;
@@ -65,7 +77,7 @@ const ChartLogic = {
     }
  },
  showChart(slice, chartType, browserType, conf){
-   const { chartSlice } = _get.sliceConfigs(slice, chartType);
+   const { chartSlice } = _getSlice(slice, chartType);
    if (chartSlice){
      chartSlice.isShow = true;
      return { chartSlice };
@@ -80,20 +92,35 @@ const ChartLogic = {
   removeConfig(slice, chartType, id) {
     const {
             chartSlice, configs
-          } = _get.sliceConfigs(slice, chartType)
+          } = _getSlice(slice, chartType)
         , _lenBefore = configs.length;
+
     chartSlice.configs = configs
-      .filter(c => c.zhConfig.id !== id)
+       .filter(_notConfById(id))
+
     return {
       chartSlice,
       isRemoved: _lenBefore > chartSlice.configs.length
     };
   },
 
+  toTop(slice, chartType, id){
+    const {
+            chartSlice, configs
+          } = _getSlice(slice, chartType)
+        , _conf = configs.find(_confById(id));
+    if (_conf) {
+      const withoutArr = configs.filter(_notConfById(id));
+      chartSlice.configs = [ _conf, ...withoutArr]
+    }
+
+    return chartSlice;
+  },
+
   sortBy(slice, chartType, by){
     const {
             chartSlice, configs
-          } = _get.sliceConfigs(slice, chartType);
+          } = _getSlice(slice, chartType);          
     if (by) {
       configs.sort(fCompareBy(by))
     } else {

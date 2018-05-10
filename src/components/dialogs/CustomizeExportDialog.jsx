@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import merge from 'lodash.merge';
+//import merge from 'lodash.merge';
 
 import ChartExportConfig from '../../charts/ChartExportConfig';
 
@@ -107,7 +107,10 @@ class CustomizeExportDialog extends Component {
         text : this.inputSubtitle.getValue()
       }
     }
-    const _customOption = merge(_inputOption, this.exportStyle);
+    //const _customOption = merge(_inputOption, this.exportStyle);
+    const _customOption = ChartExportConfig.merge(
+      true, _inputOption, this.exportStyle
+    );
 
     fn.apply(chart, [null, _customOption]);
     onClose();

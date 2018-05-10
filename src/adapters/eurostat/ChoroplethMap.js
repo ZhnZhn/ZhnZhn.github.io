@@ -1,10 +1,11 @@
 import { render } from 'react-dom'
-import merge from 'lodash.merge'
+//import merge from 'lodash.merge'
 
 import JsonStatFn from './JsonStatFn'
 import clusterMaker from '../../math/k-means'
 import mathFn from '../../math/mathFn'
 import safeGet from '../../utils/safeGet'
+import merge from '../../utils/merge'
 
 import MapFactory from '../../components/factories/MapFactory'
 
@@ -245,7 +246,7 @@ const _createChoroplethMap = function(option){
 }
 
 const _crGeoJson = (geoJson) => {
-  const _geoJson = merge({}, geoJson)
+  const _geoJson = merge(true, {}, geoJson)
   _geoJson.features.forEach(feature => {
      feature.properties.value = null
   });
@@ -274,8 +275,8 @@ const ChoroplethMap = {
        return Promise.resolve(_crGeoJson(geoJson));
      } else {
        return fetch(url)
-               .then( (response) => { return response.json(); })
-               .then( (geoJson ) => { return this.hmUrlGeoJson[url] = geoJson; })
+         .then(response => response.json())
+         .then(geoJson => this.hmUrlGeoJson[url] = geoJson)
      }
   },
 

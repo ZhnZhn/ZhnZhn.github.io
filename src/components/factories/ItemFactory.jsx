@@ -2,8 +2,8 @@ import React from 'react';
 
 import ChartFn from '../../charts/ChartFn';
 
-import ComponentActions from '../../flux/actions/ComponentActions';
-import ChartActions from '../../flux/actions/ChartActions';
+import CA from '../../flux/actions/ComponentActions';
+import CHA from '../../flux/actions/ChartActions';
 import { ModalDialog, CompItemType as CIT } from '../../constants/Type';
 
 import Item from '../items/Items'
@@ -21,14 +21,15 @@ const _crAreaChart = function({
            chartType={chartType}
            caption={id}
            config={config}
-           onSetActive={ComponentActions.setActiveCheckbox}
-           onShowConfigDialog={ComponentActions.showOptionDialog.bind(null, 'ChartConfigDialog')}
-           onAddToWatch={ComponentActions.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
+           onSetActive={CA.setActiveCheckbox}
+           onShowConfigDialog={CA.showOptionDialog.bind(null, 'ChartConfigDialog')}
+           onAddToWatch={CA.showModalDialog.bind(null, ModalDialog.ADD_TO_WATCH)}
            {...props}
            crValueMoving={ChartFn.crValueMoving}
 
-           onCopy={ChartActions.copy}
-           onPasteToDialog={ComponentActions.showModalDialog.bind(null, ModalDialog.PASTE_TO)}
+           onToTop={CHA.toTop.bind(null, chartType, id)}
+           onCopy={CHA.copy}
+           onPasteToDialog={CA.showModalDialog.bind(null, ModalDialog.PASTE_TO)}
            getCopyFromChart={store.getCopyFromChart.bind(store)}
            ChartFn={ChartFn}
        />

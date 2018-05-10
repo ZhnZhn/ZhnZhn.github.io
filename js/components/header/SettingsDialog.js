@@ -56,7 +56,7 @@ var S = {
   MODAL: {
     position: 'static',
     width: '380px',
-    height: '320px',
+    height: '325px',
     margin: '70px auto 0px'
   },
   TITLE_API: {

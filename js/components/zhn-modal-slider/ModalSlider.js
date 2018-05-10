@@ -112,6 +112,7 @@ var ModalSlider = (_temp = _class = function (_Component) {
   }
   /*
   static propTypes = {
+    rootStyle: PropTypes.object,
     className: PropTypes.string,
     style: PropTypes.object,
       pageWidth: PropTypes.number,
@@ -129,6 +130,7 @@ var ModalSlider = (_temp = _class = function (_Component) {
           _props = this.props,
           isShow = _props.isShow,
           className = _props.className,
+          rootStyle = _props.rootStyle,
           style = _props.style,
           onClose = _props.onClose,
           _transform = this._crTransform(),
@@ -139,6 +141,7 @@ var ModalSlider = (_temp = _class = function (_Component) {
         _ModalPane2.default,
         {
           isShow: isShow,
+          style: rootStyle,
           onClose: onClose
         },
         _react2.default.createElement(

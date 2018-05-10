@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import safeGet from '../../utils/safeGet'
 
+import crModelMore from './AreaMore'
 import Header from './Header';
 import ChartToolBar from './ChartToolBar';
 import ShowHide from '../zhn/ShowHide';
@@ -62,6 +63,12 @@ class AreaChartItem extends Component {
 
   constructor(props){
     super()
+
+    this._moreModel = crModelMore(this, {
+      onToggle: this._handleToggleToolbar,
+      onToTop: props.onToTop
+    })
+
     this.is2H = false
     this._fnOnCheck = this._handlerCheckBox.bind(this, true)
     this._fnOnUnCheck = this._handlerCheckBox.bind(this, false)
@@ -272,9 +279,9 @@ class AreaChartItem extends Component {
   }
 
   _handleToggleToolbar = (value) => {
-    this.setState(prevState => {
-      return { isShowToolbar: !prevState.isShowToolbar};
-    })
+    this.setState(prevState => ({
+      isShowToolbar: !prevState.isShowToolbar
+    }))
   }
 
  _createChartToolBar = (config) => {
@@ -391,6 +398,7 @@ class AreaChartItem extends Component {
          <Header
             isOpen={isOpen}
             chartType={chartType}
+            moreModel={this._moreModel}
             onCheck={this._fnOnCheck}
             onUnCheck={this._fnOnUnCheck}
             itemCaption={itemCaption}

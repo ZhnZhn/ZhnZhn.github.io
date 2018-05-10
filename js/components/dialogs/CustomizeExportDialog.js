@@ -28,10 +28,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash.merge');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _ChartExportConfig = require('../../charts/ChartExportConfig');
 
 var _ChartExportConfig2 = _interopRequireDefault(_ChartExportConfig);
@@ -65,6 +61,8 @@ var _InputSelect = require('../zhn-select/InputSelect');
 var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import merge from 'lodash.merge';
 
 var S = {
   GAP_BETWEEN_GROUP: {
@@ -141,8 +139,8 @@ var CustomizeExportDialog = function (_Component) {
         subtitle: {
           text: _this.inputSubtitle.getValue()
         }
-      };
-      var _customOption = (0, _lodash2.default)(_inputOption, _this.exportStyle);
+        //const _customOption = merge(_inputOption, this.exportStyle);
+      };var _customOption = _ChartExportConfig2.default.merge(true, _inputOption, _this.exportStyle);
 
       fn.apply(chart, [null, _customOption]);
       onClose();
