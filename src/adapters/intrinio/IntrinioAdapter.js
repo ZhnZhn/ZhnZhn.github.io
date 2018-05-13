@@ -1,7 +1,9 @@
 import Builder from '../../charts/ConfigBuilder'
 import fnAdapter from './fnAdapter'
 
-const { crData, crConfigOption } = fnAdapter;
+const {
+  crSubtitle, crData, crConfigOption
+} = fnAdapter;
 
 const IntrinioAdapter = {
   toConfig(json, option){
@@ -9,9 +11,10 @@ const IntrinioAdapter = {
         , seria = Builder()
             .initSpline({ data })
             .toConfig()
-        , { title, subtitle } = option
+        , _subtitle = crSubtitle(option)
+        , { title } = option
         , config = Builder()
-            .initBaseArea2(title, subtitle)
+            .initBaseArea2(title, _subtitle)
             .addSeries(seria)
             .add({
               ...crConfigOption({ option, data })

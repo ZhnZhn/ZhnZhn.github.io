@@ -5,7 +5,7 @@ const _withProxy = [
   LT.FS,
   LT.FAO,
   LT.BLS,
-  LT.CRC
+  LT.CRC  
 ];
 
 const SettingSlice = {

@@ -1,5 +1,8 @@
 import Highcharts from 'highcharts'
 
+//import ChartFn from './ChartFn'
+import handleMouserOver from './handleMouseOver'
+
 import COLOR from '../constants/Color';
 import C from './conf';
 
@@ -151,6 +154,18 @@ const ChartTheme = {
              [0, COLOR.PLOT_G1],
              [1, COLOR.PLOT_G2]
           ]
+      },
+      point: {
+        events: {
+          mouseOver: handleMouserOver
+        }
+      }
+    },
+    spline: {
+      point: {
+        events: {
+          mouseOver: handleMouserOver
+        }
       }
     },
     column: {

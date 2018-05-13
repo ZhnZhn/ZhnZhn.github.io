@@ -16,6 +16,14 @@ var _mathFn = require('../math/mathFn');
 
 var _mathFn2 = _interopRequireDefault(_mathFn);
 
+var _formatNumber = require('../utils/formatNumber');
+
+var _formatNumber2 = _interopRequireDefault(_formatNumber);
+
+var _formatAllNumber = require('../utils/formatAllNumber');
+
+var _formatAllNumber2 = _interopRequireDefault(_formatAllNumber);
+
 var _fnArr = require('../utils/fnArr');
 
 var _fnArr2 = _interopRequireDefault(_fnArr);
@@ -42,6 +50,10 @@ var _WithAreaChartFn = require('./WithAreaChartFn');
 
 var _WithAreaChartFn2 = _interopRequireDefault(_WithAreaChartFn);
 
+var _calcDeltaYAxis = require('./calcDeltaYAxis');
+
+var _calcDeltaYAxis2 = _interopRequireDefault(_calcDeltaYAxis);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _fnFindIndex = _fnArr2.default.findIndexByProp('x');
@@ -54,23 +66,7 @@ var C = {
   SERIA_LABEL_X_DELTA: 145,
   SERIA_LABEL_Y_DELTA: 95,
   SERIA_LABEL_WIDTH: 125,
-  SERIA_LABEL_HEIGHT: 20,
-  DATE_PATTERN: '%d-%m-%Y',
-  ATTR_LABEL: {
-    zIndex: 100
-  },
-  CSS_LABEL: {
-    //color: 'yellow',
-    color: '#f1d600',
-    fontSize: '15px'
-  },
-
-  CL_DY: 4,
-
-  DX_CATEGORY: 40,
-  DY_CATEGORY: 32,
-
-  DX_DELTA_Y_AXIS: 10
+  SERIA_LABEL_HEIGHT: 20
 };
 
 var _fnNoop = function _fnNoop() {};
@@ -169,32 +165,9 @@ var _updateYAxisMin = function _updateYAxisMin(_ref3) {
   }
 };
 
-var _crCrossParam = function _crCrossParam(point, chart) {
-  return {
-    y: point.y,
-    date: _highcharts2.default.dateFormat(C.DATE_PATTERN, point.x),
-    dX: chart.options.chart.xDeltaCrossLabel,
-    dY: chart.options.chart.yDeltaCrossLabel
-  };
-};
-
-var _crCategoryCrossParam = function _crCategoryCrossParam(point, chart) {
-  return {
-    y: ChartFn.toNumberFormat(point.y),
-    date: point.x,
-    dX: chart.options.chart.xDeltaCrossLabel - C.DX_CATEGORY,
-    dY: chart.options.chart.yDeltaCrossLabel - C.DY_CATEGORY
-  };
-};
-
-var _crYCrossLabelX = function _crYCrossLabelX(chart, dX) {
-  return chart.yAxis[0].width + chart.plotLeft + dX;
-};
-var _crYCrossLabelY = function _crYCrossLabelY(chart, plotY) {
-  return plotY + chart.plotTop + C.CL_DY;
-};
-
 var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
+  arCalcDeltaYAxis: _calcDeltaYAxis2.default,
+
   addSeriaWithRenderLabel: function addSeriaWithRenderLabel(props) {
     var chart = props.chart,
         series = props.series,
@@ -214,33 +187,6 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
     options.zhSeries.titleEls.push(textEl);
 
     _updateYAxisMin({ hasSecondYAxis: hasSecondYAxis, series: series, options: options, chart: chart });
-  },
-  handlerMouserOverPoint: function handlerMouserOverPoint(event) {
-    var isCategory = this.isCategory,
-        c = this.c,
-        plotX = this.plotX,
-        plotY = this.plotY,
-        series = this.series,
-        chart = series.chart,
-        xCrossLabel = chart.xCrossLabel,
-        yCrossLabel = chart.yCrossLabel,
-        _ref4 = !isCategory || c ? _crCrossParam(this, chart) : _crCategoryCrossParam(this, chart),
-        y = _ref4.y,
-        date = _ref4.date,
-        dX = _ref4.dX,
-        dY = _ref4.dY,
-        deltaYAxis = ChartFn.arCalcDeltaYAxis(chart),
-        xLX = deltaYAxis ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS : plotX,
-        xLY = _crYCrossLabelX(chart, dX),
-        yLY = _crYCrossLabelY(chart, plotY);
-
-    if (xCrossLabel) {
-      xCrossLabel.attr({ x: xLX, text: date });
-      yCrossLabel.attr({ x: xLY, y: yLY, text: y });
-    } else {
-      chart.xCrossLabel = chart.renderer.text(date, xLX, chart.plotTop - dY).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
-      chart.yCrossLabel = chart.renderer.text(y, xLY, yLY).attr(C.ATTR_LABEL).css(C.CSS_LABEL).add();
-    }
   },
   toggleSeria: function toggleSeria(chart, item) {
     var name = item.name,
@@ -358,20 +304,10 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
         _isWithYAxis = yAxisIndex === -1;
     this._addDataToYAxis(toChart, _id, color, data, _isWithYAxis);
   },
-  toNumberFormat: function toNumberFormat(value) {
-    if (typeof value === 'number' && value < 0.01) {
-      return '' + value;
-    }
-    var arrSplit = (value + '').split('.'),
-        decimal = arrSplit[1] ? 2 : 0;
-    return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
-  },
-  toNumberFormatAll: function toNumberFormatAll(value) {
-    var arrSplit = (value + '').split('.'),
-        decimal = arrSplit[1] ? arrSplit[1].length : 0;
-    return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
-  },
 
+
+  toNumberFormat: _formatNumber2.default,
+  toNumberFormatAll: _formatAllNumber2.default,
 
   crTpId: function crTpId() {
     return ('TP_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();

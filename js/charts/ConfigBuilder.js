@@ -81,6 +81,9 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     return this;
   },
   initBaseArea: function initBaseArea() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        type = _ref.type;
+
     this.config = _ChartConfig2.default.fBaseAreaConfig();
     return this;
   },
@@ -236,4 +239,4 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
 });
 
 exports.default = ConfigBuilder;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ConfigBuilder.js.map
+//# sourceMappingURL=ConfigBuilder.js.map

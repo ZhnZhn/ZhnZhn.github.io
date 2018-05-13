@@ -1,6 +1,8 @@
 import Highcharts from 'highcharts';
 
 import mathFn from '../math/mathFn'
+import formatNumber from '../utils/formatNumber'
+import formatAllNumber from '../utils/formatAllNumber'
 
 import fnArr from '../utils/fnArr';
 import DateUtils from '../utils/DateUtils';
@@ -10,7 +12,10 @@ import Chart from './Chart';
 import ChartConfig from './ChartConfig';
 import { Direction } from '../constants/Type';
 
+
 import WithAreaChartFn from './WithAreaChartFn'
+import calcDeltaYAxis from './calcDeltaYAxis'
+
 
 const _fnFindIndex = fnArr.findIndexByProp('x');
 
@@ -22,24 +27,8 @@ const C = {
   SERIA_LABEL_X_DELTA : 145,
   SERIA_LABEL_Y_DELTA : 95,
   SERIA_LABEL_WIDTH : 125,
-  SERIA_LABEL_HEIGHT : 20,
-  DATE_PATTERN : '%d-%m-%Y',
-  ATTR_LABEL : {
-    zIndex : 100
-  },
-  CSS_LABEL : {
-    //color: 'yellow',
-    color: '#f1d600',
-    fontSize: '15px'
-  },
-
-  CL_DY: 4,
-
-  DX_CATEGORY: 40,
-  DY_CATEGORY: 32,
-
-  DX_DELTA_Y_AXIS: 10
-}
+  SERIA_LABEL_HEIGHT : 20
+};
 
 const _fnNoop = () => {};
 
@@ -122,33 +111,10 @@ const _updateYAxisMin = ({ hasSecondYAxis, series, options={}, chart }) => {
   }
 };
 
-const _crCrossParam = (point, chart) => {
-  return {
-    y: point.y,
-    date: Highcharts.dateFormat(C.DATE_PATTERN, point.x),
-    dX: chart.options.chart.xDeltaCrossLabel,
-    dY: chart.options.chart.yDeltaCrossLabel
-  };
-};
-
-const _crCategoryCrossParam = (point, chart) => {
-  return {
-    y: ChartFn.toNumberFormat(point.y),
-    date: point.x,
-    dX: chart.options.chart.xDeltaCrossLabel - C.DX_CATEGORY,
-    dY: chart.options.chart.yDeltaCrossLabel - C.DY_CATEGORY
-  };
-};
-
-const _crYCrossLabelX = (chart, dX) => {
-  return chart.yAxis[0].width + chart.plotLeft + dX;
-};
-const _crYCrossLabelY = (chart, plotY) => {
-  return plotY + chart.plotTop + C.CL_DY;
-};
 
 const ChartFn = {
   ...WithAreaChartFn,
+  arCalcDeltaYAxis: calcDeltaYAxis,
 
   addSeriaWithRenderLabel(props){
     const {
@@ -167,37 +133,6 @@ const ChartFn = {
     options.zhSeries.titleEls.push(textEl)
 
     _updateYAxisMin({ hasSecondYAxis, series, options, chart })
-  },
-
-  handlerMouserOverPoint(event){
-     const { isCategory, c, plotX, plotY, series } = this
-         , chart = series.chart
-         , { xCrossLabel, yCrossLabel } = chart
-         , { y, date, dX, dY } = (!isCategory || c)
-                ? _crCrossParam(this, chart)
-                : _crCategoryCrossParam(this, chart)
-         , deltaYAxis = ChartFn.arCalcDeltaYAxis(chart)
-         , xLX = deltaYAxis
-             ? plotX + deltaYAxis - C.DX_DELTA_Y_AXIS
-             : plotX
-         , xLY = _crYCrossLabelX(chart, dX)
-         , yLY = _crYCrossLabelY(chart, plotY);
-
-     if (xCrossLabel) {
-       xCrossLabel.attr({ x: xLX, text: date });
-       yCrossLabel.attr({ x: xLY, y: yLY, text: y });
-     } else {
-       chart.xCrossLabel = chart.renderer
-         .text(date, xLX, chart.plotTop - dY)
-         .attr(C.ATTR_LABEL)
-         .css(C.CSS_LABEL)
-         .add();
-       chart.yCrossLabel = chart.renderer
-         .text(y, xLY, yLY)
-         .attr(C.ATTR_LABEL)
-         .css(C.CSS_LABEL)
-         .add();
-     }
   },
 
   toggleSeria(chart, item){
@@ -324,23 +259,8 @@ const ChartFn = {
      )
   },
 
-  toNumberFormat(value){
-    if (typeof value === 'number' && value < 0.01) {
-      return ''+value;
-    }
-    const arrSplit = (value+'').split('.')
-        , decimal = (arrSplit[1]) ? 2 : 0;
-    return Highcharts
-      .numberFormat(value, decimal, '.', ' ');
-  },
-  toNumberFormatAll(value){
-    const arrSplit = (value+'').split('.')
-        , decimal = arrSplit[1]
-            ? arrSplit[1].length
-            : 0;
-    return Highcharts
-      .numberFormat(value, decimal, '.', ' ');
-  },
+  toNumberFormat: formatNumber,
+  toNumberFormatAll: formatAllNumber,  
 
   crTpId: () => {
     return (

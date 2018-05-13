@@ -45,6 +45,8 @@
         "oneCaption": "Stock",
         "oneURI" : "./data/stock-markets/wiki.json",
         "oneJsonProp" : "tickets",
+        "threeCaption": "Period",
+        "threeURI" : "./data/stock-markets/intrinio-period-type.json",
         "nInitFromDate" : 6,
         "valueFn" : "ROne",
         "linkFn" : "NASDAQ",
@@ -318,6 +320,7 @@
          "dialogProps" : {
            "twoCaption": "Balance",
            "twoURI" : "./data/stock-markets/intrinio-balance.json",
+           "threeURI" : "",           
            "dataSource" : "Intrinio: US PC Financials: Balance Sheet"
          }
      },

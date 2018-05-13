@@ -4,9 +4,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _isEmpty = require('../../utils/isEmpty');
+
+var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var C = {
   ROOT: 'https://www.alphavantage.co/query',
-  REQUEST_ERROR: 'Request Error'
+
+  ERR_PROP: 'Error Message',
+  REQ_ERROR: 'Request Error',
+  RES_EMPTY: 'Response Empty',
+  MSG_EMPTY: 'Empty response from data provider'
+};
+
+var _crError = function _crError(errCaption, message) {
+  return {
+    errCaption: errCaption, message: message
+  };
 };
 
 var AlphaApi = {
@@ -34,11 +50,13 @@ var AlphaApi = {
     }
   },
   checkResponse: function checkResponse(json) {
-    if (!json['Error Message']) return true;else {
-      throw {
-        errCaption: C.REQUEST_ERROR,
-        message: json['Error Message']
-      };
+    if ((0, _isEmpty2.default)(json)) {
+      throw _crError(C.RES_EMPTY, C.MSG_EMPTY);
+    }
+    if (!json[C.ERR_PROP]) {
+      return true;
+    } else {
+      throw _crError(C.REQ_ERROR, json[C.ERR_PROP]);
     }
   }
 };

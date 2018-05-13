@@ -35,11 +35,17 @@ var IntrinioApi = {
         _option$item = option.item,
         item = _option$item === undefined ? {} : _option$item,
         one = option.one,
-        two = option.two;
+        two = option.two,
+        three = option.three;
 
+
+    if (two && three) {
+      return C.URL + '?identifier=' + one + '&item=' + two + '&start_date=' + fromDate + '&end_date=' + toDate + '&type=' + three;
+    }
 
     if (two) {
-      return C.URL + '?identifier=' + one + '&item=' + two + '&start_date=' + fromDate + '&end_date=' + toDate + '&frequency=quarterly';
+      //return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&frequency=quarterly`;
+      return C.URL + '?identifier=' + one + '&item=' + two + '&start_date=' + fromDate + '&end_date=' + toDate + '&type=QTR';
     }
 
     var _frq = FRQ[item.frq] || FRQ.DF;
@@ -51,4 +57,4 @@ var IntrinioApi = {
 };
 
 exports.default = IntrinioApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\intrinio\IntrinioApi.js.map
+//# sourceMappingURL=IntrinioApi.js.map

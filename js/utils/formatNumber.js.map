@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/formatNumber.js"
+ ],
+ "file": "../../src/utils/formatNumber.js",
+ "names": [
+  "formatNumber",
+  "value",
+  "arrSplit",
+  "split",
+  "decimal",
+  "numberFormat"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,eAAe,SAAfA,YAAe,CAASC,KAAT,EAAe;AAClC,MAAI,OAAOA,KAAP,KAAiB,QAAjB,IAA6BA,QAAQ,IAAzC,EAA+C;AAC7C,WAAO,KAAGA,KAAV;AACD;AACD,MAAMC,WAAW,CAACD,QAAM,EAAP,EAAWE,KAAX,CAAiB,GAAjB,CAAjB;AAAA,MACMC,UAAWF,SAAS,CAAT,CAAD,GAAgB,CAAhB,GAAoB,CADpC;AAEA,SAAO,qBACJG,YADI,CACSJ,KADT,EACgBG,OADhB,EACyB,GADzB,EAC8B,GAD9B,CAAP;AAED,CARD;;kBAUeJ,Y"
+}

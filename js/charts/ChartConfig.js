@@ -48,6 +48,10 @@ var _ChartTheme = require('./ChartTheme');
 
 var _ChartTheme2 = _interopRequireDefault(_ChartTheme);
 
+var _handleMouseOver = require('./handleMouseOver');
+
+var _handleMouseOver2 = _interopRequireDefault(_handleMouseOver);
+
 var _WithIndicatorConfig = require('./WithIndicatorConfig');
 
 var _WithIndicatorConfig2 = _interopRequireDefault(_WithIndicatorConfig);
@@ -76,14 +80,14 @@ var _Type = require('../constants/Type');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var merge = _highcharts2.default.merge;
+
 //import HighchartsMore from 'highcharts/lib/highcharts-more';
 //import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
 //import merge from 'lodash.merge';
-
-var merge = _highcharts2.default.merge;
 
 var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default, {
   init: function init() {
@@ -146,7 +150,7 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
       lineWidth: 1
     }, options);
 
-    config.series[index].point = _Chart2.default.fEventsMouseOver(_ChartFn2.default.handlerMouserOverPoint);
+    config.series[index].point = _Chart2.default.fEventsMouseOver(_handleMouseOver2.default);
   },
   _zhSeriaId: function _zhSeriaId(id) {
     return { zhSeriaId: id };
@@ -173,7 +177,7 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
     });
   },
   getColor: function getColor(seriaIndex) {
-    var colors = ChartConfig.theme.colors;
+    var colors = _ChartTheme2.default.colors;
     return colors[seriaIndex % colors.length];
   }
 });
@@ -216,8 +220,6 @@ ChartConfig.fBaseAreaConfig = function (option) {
   });
 
   config.yAxis.plotLines = [_Chart2.default.fPlotLine(_Color2.default.HIGH, 'max'), _Chart2.default.fPlotLine(_Color2.default.LOW, 'min')];
-
-  config.series[0].point = _Chart2.default.fEventsMouseOver(_ChartFn2.default.handlerMouserOverPoint);
 
   return config;
 };

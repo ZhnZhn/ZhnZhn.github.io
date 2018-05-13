@@ -1,10 +1,11 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\intrinio\\IntrinioAdapter.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\intrinio\\IntrinioAdapter.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/adapters/intrinio/IntrinioAdapter.js"
+ ],
+ "file": "../../../src/adapters/intrinio/IntrinioAdapter.js",
  "names": [
+  "crSubtitle",
   "crData",
   "crConfigOption",
   "IntrinioAdapter",
@@ -14,8 +15,8 @@
   "seria",
   "initSpline",
   "data",
+  "_subtitle",
   "title",
-  "subtitle",
   "config",
   "initBaseArea2",
   "addSeries",
@@ -23,5 +24,5 @@
   "toSeries",
   "series"
  ],
- "mappings": ";;;;;;;;;;AAAA;;;;AACA;;;;;;IAEQA,M,uBAAAA,M;IAAQC,c,uBAAAA,c;;;AAEhB,IAAMC,kBAAkB;AACtBC,UADsB,oBACbC,IADa,EACPC,MADO,EACA;AACd,eAAOL,OAAOI,IAAP,EAAaC,MAAb,CAAP;AAAA,QACAC,KADA,GACQ,+BACLC,UADK,CACM,EAAEC,UAAF,EADN,EAELL,QAFK,EADR;AAAA,QAIEM,KAJF,GAIsBJ,MAJtB,CAIEI,KAJF;AAAA,QAISC,QAJT,GAIsBL,MAJtB,CAISK,QAJT;AAAA,QAKAC,MALA,GAKS,+BACNC,aADM,CACQH,KADR,EACeC,QADf,EAENG,SAFM,CAEIP,KAFJ,EAGNQ,GAHM,4BAIFb,eAAe,EAAEI,cAAF,EAAUG,UAAV,EAAf,CAJE,GAMNL,QANM,EALT;;;AAaN,WAAO,EAAEQ,cAAF,EAAP;AACD,GAhBqB;AAkBtBI,UAlBsB,oBAkBbX,IAlBa,EAkBPC,MAlBO,EAkBA;AAAA,gCACDH,gBAAgBC,QAAhB,CAAyBC,IAAzB,EAA+BC,MAA/B,CADC;AAAA,QACZM,MADY,yBACZA,MADY;;AAEpB,WAAOA,OAAOK,MAAP,CAAc,CAAd,CAAP;AACD;AArBqB,CAAxB;;kBAwBed,e"
+ "mappings": ";;;;;;;;;;AAAA;;;;AACA;;;;;;IAGEA,U,uBAAAA,U;IAAYC,M,uBAAAA,M;IAAQC,c,uBAAAA,c;;;AAGtB,IAAMC,kBAAkB;AACtBC,UADsB,oBACbC,IADa,EACPC,MADO,EACA;AACd,eAAOL,OAAOI,IAAP,EAAaC,MAAb,CAAP;AAAA,QACAC,KADA,GACQ,+BACLC,UADK,CACM,EAAEC,UAAF,EADN,EAELL,QAFK,EADR;AAAA,QAIAM,SAJA,GAIYV,WAAWM,MAAX,CAJZ;AAAA,QAKEK,KALF,GAKYL,MALZ,CAKEK,KALF;AAAA,QAMAC,MANA,GAMS,+BACNC,aADM,CACQF,KADR,EACeD,SADf,EAENI,SAFM,CAEIP,KAFJ,EAGNQ,GAHM,4BAIFb,eAAe,EAAEI,cAAF,EAAUG,UAAV,EAAf,CAJE,GAMNL,QANM,EANT;;;AAcN,WAAO,EAAEQ,cAAF,EAAP;AACD,GAjBqB;AAmBtBI,UAnBsB,oBAmBbX,IAnBa,EAmBPC,MAnBO,EAmBA;AAAA,gCACDH,gBAAgBC,QAAhB,CAAyBC,IAAzB,EAA+BC,MAA/B,CADC;AAAA,QACZM,MADY,yBACZA,MADY;;AAEpB,WAAOA,OAAOK,MAAP,CAAc,CAAd,CAAP;AACD;AAtBqB,CAAxB;;kBAyBed,e"
 }

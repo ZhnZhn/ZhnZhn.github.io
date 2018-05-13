@@ -18,7 +18,8 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var crData = _fnAdapter2.default.crData,
+var crSubtitle = _fnAdapter2.default.crSubtitle,
+    crData = _fnAdapter2.default.crData,
     crConfigOption = _fnAdapter2.default.crConfigOption;
 
 
@@ -26,9 +27,9 @@ var IntrinioAdapter = {
   toConfig: function toConfig(json, option) {
     var data = crData(json, option),
         seria = (0, _ConfigBuilder2.default)().initSpline({ data: data }).toConfig(),
+        _subtitle = crSubtitle(option),
         title = option.title,
-        subtitle = option.subtitle,
-        config = (0, _ConfigBuilder2.default)().initBaseArea2(title, subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
+        config = (0, _ConfigBuilder2.default)().initBaseArea2(title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
 
 
     return { config: config };
@@ -42,4 +43,4 @@ var IntrinioAdapter = {
 };
 
 exports.default = IntrinioAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\intrinio\IntrinioAdapter.js.map
+//# sourceMappingURL=IntrinioAdapter.js.map

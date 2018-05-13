@@ -311,6 +311,7 @@ var Chart = {
   },
   fSecondYAxis: function fSecondYAxis(name, color) {
     return {
+      //crosshair : Chart.fCrosshair(),
       id: name,
 
       gridLineWidth: 0,

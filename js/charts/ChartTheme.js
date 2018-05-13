@@ -8,6 +8,10 @@ var _highcharts = require('highcharts');
 
 var _highcharts2 = _interopRequireDefault(_highcharts);
 
+var _handleMouseOver = require('./handleMouseOver');
+
+var _handleMouseOver2 = _interopRequireDefault(_handleMouseOver);
+
 var _Color = require('../constants/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
@@ -156,6 +160,18 @@ var ChartTheme = {
       fillColor: {
         linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
         stops: [[0, _Color2.default.PLOT_G1], [1, _Color2.default.PLOT_G2]]
+      },
+      point: {
+        events: {
+          mouseOver: _handleMouseOver2.default
+        }
+      }
+    },
+    spline: {
+      point: {
+        events: {
+          mouseOver: _handleMouseOver2.default
+        }
       }
     },
     column: {
@@ -258,5 +274,6 @@ var ChartTheme = {
   }
 };
 
+//import ChartFn from './ChartFn'
 exports.default = ChartTheme;
 //# sourceMappingURL=ChartTheme.js.map

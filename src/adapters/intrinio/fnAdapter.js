@@ -7,8 +7,12 @@ const {
 
 const FRED = 'FRED';
 
-const _crId = (value, two) =>
-   two ? `${value}_${two}` : value;
+const _crId = (option) => {
+   const { value, two, three='' } = option;
+   return two
+      ? `${value}_${two}_${three}`
+      : value;
+}
 const _crLinkItem= (option) => {
   const { linkFn, value='' } = option;
   if ( linkFn === FRED ){
@@ -20,9 +24,12 @@ const _crLinkItem= (option) => {
   return value;
 };
 const _crZhConfig = (option) => {
-  const { value, title='', dataSource, linkFn, two } = option
+  const {
+          title='',
+          dataSource, linkFn,
+        } = option
       , item = _crLinkItem(option)
-      , id = _crId(value, two);
+      , id = _crId(option);
   return {
     id: id, key: id,
     itemCaption: title,
@@ -37,6 +44,12 @@ const _crInfo = ({ title='' }) => ({
 });
 
 const fnAdapter = {
+  crSubtitle: ({ subtitle='', threeCaption }) => {
+    return threeCaption
+      ? `${subtitle}, ${threeCaption}`
+      : subtitle;
+  },
+
   crData: (json) => {
     const d = [];
     json.data.forEach(p => {

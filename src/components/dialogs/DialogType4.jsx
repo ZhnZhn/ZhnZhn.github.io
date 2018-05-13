@@ -20,10 +20,12 @@ class DialogType4 extends Component {
     oneNames: PropTypes.string,
     oneURI: PropTypes.string,
     oneJsonProp: PropTypes.string,
+
     twoCaption: PropTypes.string,
     twoNames: PropTypes.string,
     twoURI: PropTypes.string,
     twoJsonProp: PropTypes.string,
+
     noDate: PropTypes.bool,
     noOptions: PropTypes.bool,
 
@@ -90,6 +92,9 @@ class DialogType4 extends Component {
   _handleSelectTwo = (two) => {
     this.two = two;
   }
+  _handleSelectThree = (three) => {
+    this.three = three;
+  }
 
   _handleLoad = () => {
     this._handleWithValidationLoad(
@@ -101,12 +106,20 @@ class DialogType4 extends Component {
      const {
              oneCaption,
              twoCaption,
+             threeURI, threeCaption,
              msgOnNotSelected
            } = this.props;
      let msg = [];
 
-     if (!this.one) { msg.push(msgOnNotSelected(oneCaption)); }
-     if (!this.two) { msg.push(msgOnNotSelected(twoCaption)); }
+     if (!this.one) {
+       msg.push(msgOnNotSelected(oneCaption));
+     }
+     if (!this.two) {
+       msg.push(msgOnNotSelected(twoCaption));
+     }
+     if (threeURI && !this.three){
+       msg.push(msgOnNotSelected(threeCaption));
+     }
 
      if (this.datesFragment) {
        const {isValid, datesMsg} = this.datesFragment.getValidation();
@@ -122,7 +135,9 @@ class DialogType4 extends Component {
               : {};
     return this.props.loadFn(
       this.props, {
-        one: this.one, two: this.two,
+        one: this.one,
+        two: this.two,
+        three: this.three,
         fromDate, toDate,
         hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
       }
@@ -144,6 +159,7 @@ class DialogType4 extends Component {
            caption, isShow, onShow, onFront,
            oneCaption, oneNames, oneURI, oneJsonProp, isWithOneInput,
            twoCaption, twoNames, twoURI, twoJsonProp, isWithInputTwo,
+           threeCaption, threeNames, threeURI, threeJsonProp, isWithInputThree,
            initFromDate, initToDate, msgOnNotValidFormat, onTestDate,
            noDate, noOptions
           } = this.props
@@ -177,7 +193,6 @@ class DialogType4 extends Component {
                isWithInput={isWithOneInput}
                onSelect={this._handleSelectOne}
              />
-
              <D.SelectWithLoad
                isShow={isShow}
                isShowLabels={isShowLabels}
@@ -188,6 +203,18 @@ class DialogType4 extends Component {
                isWithInput={isWithInputTwo}
                onSelect={this._handleSelectTwo}
              />
+             { threeURI &&
+               <D.SelectWithLoad
+                 isShow={isShow}
+                 isShowLabels={isShowLabels}
+                 uri={threeURI}
+                 jsonProp={threeJsonProp}
+                 caption={threeCaption}
+                 optionNames={threeNames}
+                 isWithInput={isWithInputThree}
+                 onSelect={this._handleSelectThree}
+               />
+             }
              {
                (noDate !== true) &&
                <D.ShowHide isShow={isShowDate}>

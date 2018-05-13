@@ -1,0 +1,6 @@
+{
+  "items":[
+    {"caption": "Quarterly (QTR)", "value": "QTR" },
+    {"caption": "Trailing Twelve Months (TTM)", "value": "TTM" }
+  ]
+}

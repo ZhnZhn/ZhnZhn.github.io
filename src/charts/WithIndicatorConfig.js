@@ -1,6 +1,7 @@
 import Tooltip from './Tooltip'
-import ChartFn from './ChartFn'
 import Chart from './Chart'
+
+import handleMouseOver from './handleMouseOver'
 
 import COLOR from '../constants/Color'
 
@@ -105,7 +106,9 @@ const WithIndicatorConfig = {
       name: "MFI",
       type: "spline",
       color: C.MFI,
-      point: Chart.fEventsMouseOver(ChartFn.handlerMouserOverPoint)
+      point: Chart.fEventsMouseOver(
+         handleMouseOver
+       )
     })
     return config;
   },
@@ -126,7 +129,9 @@ const WithIndicatorConfig = {
       zhValueText: "Volume",
       data: data,
       name: "Spline",
-      point: Chart.fEventsMouseOver(ChartFn.handlerMouserOverPoint)
+      point: Chart.fEventsMouseOver(
+        handleMouseOver
+      )
     })
     config.series.push({
       zhSeriaId: chartId + '_VolumeColumn',

@@ -22,8 +22,13 @@ var isNumberOrNull = _AdapterFn2.default.isNumberOrNull,
 
 var FRED = 'FRED';
 
-var _crId = function _crId(value, two) {
-  return two ? value + '_' + two : value;
+var _crId = function _crId(option) {
+  var value = option.value,
+      two = option.two,
+      _option$three = option.three,
+      three = _option$three === undefined ? '' : _option$three;
+
+  return two ? value + '_' + two + '_' + three : value;
 };
 var _crLinkItem = function _crLinkItem(option) {
   var linkFn = option.linkFn,
@@ -39,14 +44,12 @@ var _crLinkItem = function _crLinkItem(option) {
   return value;
 };
 var _crZhConfig = function _crZhConfig(option) {
-  var value = option.value,
-      _option$title = option.title,
+  var _option$title = option.title,
       title = _option$title === undefined ? '' : _option$title,
       dataSource = option.dataSource,
       linkFn = option.linkFn,
-      two = option.two,
       item = _crLinkItem(option),
-      id = _crId(value, two);
+      id = _crId(option);
 
   return {
     id: id, key: id,
@@ -66,6 +69,14 @@ var _crInfo = function _crInfo(_ref) {
 };
 
 var fnAdapter = {
+  crSubtitle: function crSubtitle(_ref2) {
+    var _ref2$subtitle = _ref2.subtitle,
+        subtitle = _ref2$subtitle === undefined ? '' : _ref2$subtitle,
+        threeCaption = _ref2.threeCaption;
+
+    return threeCaption ? subtitle + ', ' + threeCaption : subtitle;
+  },
+
   crData: function crData(json) {
     var d = [];
     json.data.forEach(function (p) {
@@ -82,9 +93,9 @@ var fnAdapter = {
     return d.reverse();
   },
 
-  crConfigOption: function crConfigOption(_ref2) {
-    var option = _ref2.option,
-        data = _ref2.data;
+  crConfigOption: function crConfigOption(_ref3) {
+    var option = _ref3.option,
+        data = _ref3.data;
     return (0, _extends3.default)({
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),
@@ -95,4 +106,4 @@ var fnAdapter = {
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\intrinio\fnAdapter.js.map
+//# sourceMappingURL=fnAdapter.js.map

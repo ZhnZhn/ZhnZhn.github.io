@@ -8,13 +8,13 @@ var _Tooltip = require('./Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
-var _ChartFn = require('./ChartFn');
-
-var _ChartFn2 = _interopRequireDefault(_ChartFn);
-
 var _Chart = require('./Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
+
+var _handleMouseOver = require('./handleMouseOver');
+
+var _handleMouseOver2 = _interopRequireDefault(_handleMouseOver);
 
 var _Color = require('../constants/Color');
 
@@ -124,7 +124,7 @@ var WithIndicatorConfig = {
       name: "MFI",
       type: "spline",
       color: C.MFI,
-      point: _Chart2.default.fEventsMouseOver(_ChartFn2.default.handlerMouserOverPoint)
+      point: _Chart2.default.fEventsMouseOver(_handleMouseOver2.default)
     });
     return config;
   },
@@ -144,7 +144,7 @@ var WithIndicatorConfig = {
       zhValueText: "Volume",
       data: data,
       name: "Spline",
-      point: _Chart2.default.fEventsMouseOver(_ChartFn2.default.handlerMouserOverPoint)
+      point: _Chart2.default.fEventsMouseOver(_handleMouseOver2.default)
     });
     config.series.push({
       zhSeriaId: chartId + '_VolumeColumn',

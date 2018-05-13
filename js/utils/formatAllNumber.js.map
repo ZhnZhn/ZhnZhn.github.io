@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/formatAllNumber.js"
+ ],
+ "file": "../../src/utils/formatAllNumber.js",
+ "names": [
+  "formatAllNumber",
+  "value",
+  "arrSplit",
+  "split",
+  "decimal",
+  "length",
+  "numberFormat"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,kBAAkB,SAAlBA,eAAkB,CAASC,KAAT,EAAgB;AACtC,QAAMC,WAAW,CAACD,QAAM,EAAP,EAAWE,KAAX,CAAiB,GAAjB,CAAjB;AAAA,QACMC,UAAUF,SAAS,CAAT,IACNA,SAAS,CAAT,EAAYG,MADN,GAEN,CAHV;AAIA,WAAO,qBACJC,YADI,CACSL,KADT,EACgBG,OADhB,EACyB,GADzB,EAC8B,GAD9B,CAAP;AAED,CAPD;;kBASeJ,e"
+}

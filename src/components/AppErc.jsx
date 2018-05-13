@@ -20,7 +20,7 @@ import AnalyticActions from '../flux/actions/AnalyticActions';
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '10-05-2018';
+const PREV_BUILD = '13-05-2018';
 
 const {
   answerYes, answerView, answerNo, noAnswer

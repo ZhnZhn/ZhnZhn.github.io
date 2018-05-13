@@ -12,7 +12,7 @@ const {
 
 const FaoStatAdapter = {
   crKey: crId,
-  
+
   toConfig(json, option){
     const { subtitle } = option
     , _id = crId(option)

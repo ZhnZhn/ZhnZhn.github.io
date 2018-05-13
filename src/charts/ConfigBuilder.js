@@ -33,8 +33,7 @@ const C = {
       x: 3
     }
   }
-}
-
+};
 
 const ConfigBuilder = function(config={}) {
   if (!(this instanceof ConfigBuilder)){
@@ -50,8 +49,8 @@ ConfigBuilder.prototype = {
     this.config = config
     return this;
   },
-  initBaseArea(){
-    this.config = ChartConfig.fBaseAreaConfig()
+  initBaseArea({ type }={}){
+    this.config = ChartConfig.fBaseAreaConfig();
     return this;
   },
   initBaseArea2(title, subtitle){

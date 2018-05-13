@@ -17,6 +17,7 @@ import ChartFn from './ChartFn';
 import Tooltip from './Tooltip';
 
 import ChartTheme from './ChartTheme'
+import handleMouseOver from './handleMouseOver'
 
 import WithIndicator from './WithIndicatorConfig';
 import WithPie from './WithPieConfig';
@@ -99,7 +100,7 @@ const ChartConfig = {
     }, options)
 
     config.series[index].point = Chart.fEventsMouseOver(
-      ChartFn.handlerMouserOverPoint
+      handleMouseOver
     )
   },
 
@@ -139,7 +140,7 @@ const ChartConfig = {
   },
 
   getColor(seriaIndex) {
-    const colors = ChartConfig.theme.colors;
+    const colors = ChartTheme.colors;
     return colors[seriaIndex % colors.length];
   }
 
@@ -189,9 +190,7 @@ ChartConfig.fBaseAreaConfig = function(option) {
     Chart.fPlotLine(COLOR.HIGH, 'max'),
     Chart.fPlotLine(COLOR.LOW, 'min')
   ]
-
-  config.series[0].point = Chart.fEventsMouseOver(ChartFn.handlerMouserOverPoint);
-
+  
   return config;
 };
 

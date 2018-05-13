@@ -55,11 +55,11 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     oneNames: PropTypes.string,
     oneURI: PropTypes.string,
     oneJsonProp: PropTypes.string,
-    twoCaption: PropTypes.string,
+      twoCaption: PropTypes.string,
     twoNames: PropTypes.string,
     twoURI: PropTypes.string,
     twoJsonProp: PropTypes.string,
-    noDate: PropTypes.bool,
+      noDate: PropTypes.bool,
     noOptions: PropTypes.bool,
       initFromDate: PropTypes.string,
     initToDate: PropTypes.string,
@@ -91,6 +91,10 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       _this.two = two;
     };
 
+    _this._handleSelectThree = function (three) {
+      _this.three = three;
+    };
+
     _this._handleLoad = function () {
       _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
     };
@@ -99,6 +103,8 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       var _this$props = _this.props,
           oneCaption = _this$props.oneCaption,
           twoCaption = _this$props.twoCaption,
+          threeURI = _this$props.threeURI,
+          threeCaption = _this$props.threeCaption,
           msgOnNotSelected = _this$props.msgOnNotSelected;
 
       var msg = [];
@@ -108,6 +114,9 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       }
       if (!_this.two) {
         msg.push(msgOnNotSelected(twoCaption));
+      }
+      if (threeURI && !_this.three) {
+        msg.push(msgOnNotSelected(threeCaption));
       }
 
       if (_this.datesFragment) {
@@ -130,7 +139,9 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           toDate = _ref.toDate;
 
       return _this.props.loadFn(_this.props, {
-        one: _this.one, two: _this.two,
+        one: _this.one,
+        two: _this.two,
+        three: _this.three,
         fromDate: fromDate, toDate: toDate,
         hasSecondYAxis: _this[HAS_SECOND_Y_AXIS]
       });
@@ -205,6 +216,11 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           twoURI = _props.twoURI,
           twoJsonProp = _props.twoJsonProp,
           isWithInputTwo = _props.isWithInputTwo,
+          threeCaption = _props.threeCaption,
+          threeNames = _props.threeNames,
+          threeURI = _props.threeURI,
+          threeJsonProp = _props.threeJsonProp,
+          isWithInputThree = _props.isWithInputThree,
           initFromDate = _props.initFromDate,
           initToDate = _props.initToDate,
           msgOnNotValidFormat = _props.msgOnNotValidFormat,
@@ -253,6 +269,16 @@ var DialogType4 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           optionNames: twoNames,
           isWithInput: isWithInputTwo,
           onSelect: this._handleSelectTwo
+        }),
+        threeURI && _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+          isShow: isShow,
+          isShowLabels: isShowLabels,
+          uri: threeURI,
+          jsonProp: threeJsonProp,
+          caption: threeCaption,
+          optionNames: threeNames,
+          isWithInput: isWithInputThree,
+          onSelect: this._handleSelectThree
         }),
         noDate !== true && _react2.default.createElement(
           _DialogCell2.default.ShowHide,

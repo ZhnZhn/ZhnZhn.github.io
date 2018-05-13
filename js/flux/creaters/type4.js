@@ -24,12 +24,12 @@ var createLoadOptions = function createLoadOptions() {
       dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
       one = options.one,
       two = options.two,
+      _options$three = options.three,
+      three = _options$three === undefined ? {} : _options$three,
       fromDate = options.fromDate,
       toDate = options.toDate,
       hasSecondYAxis = options.hasSecondYAxis,
       _value = typeof fnValue === 'function' ? fnValue(one.value, two.value) : one.value;
-  //: undefined
-
 
   return (0, _extends3.default)({}, dfProps, {
     value: _value,
@@ -45,10 +45,12 @@ var createLoadOptions = function createLoadOptions() {
     linkFn: linkFn,
     oneCaption: one.caption,
     twoCaption: two.caption,
+    threeCaption: three.caption,
     one: one.value,
-    two: two.value
+    two: two.value,
+    three: three.value
   });
 };
 
 exports.default = createLoadOptions;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\creaters\type4.js.map
+//# sourceMappingURL=type4.js.map

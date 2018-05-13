@@ -26,11 +26,16 @@ const IntrinioApi = {
   getRequestUrl(option){
     const {
              value, fromDate, toDate, item={},
-             one, two
+             one, two, three
            } = option;
 
+    if (two && three) {
+      return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=${three}`;
+    }
+
     if (two) {
-      return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&frequency=quarterly`;
+      //return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&frequency=quarterly`;
+      return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=QTR`;
     }
 
     const _frq = FRQ[item.frq] || FRQ.DF;
@@ -40,7 +45,7 @@ const IntrinioApi = {
   checkResponse(json){
     return json
       && json.data
-      && Array.isArray(json.data);          
+      && Array.isArray(json.data);
   }
 };
 

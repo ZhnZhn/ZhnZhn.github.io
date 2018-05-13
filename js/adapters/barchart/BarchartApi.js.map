@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\barchart\\BarchartApi.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\barchart\\BarchartApi.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/adapters/barchart/BarchartApi.js"
+ ],
+ "file": "../../../src/adapters/barchart/BarchartApi.js",
  "names": [
   "C",
   "ROOT",

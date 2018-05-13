@@ -291,8 +291,9 @@ fCrosshair(){
     }, option)
   },
 
-  fSecondYAxis(name, color){
+  fSecondYAxis(name, color){    
     return {
+      //crosshair : Chart.fCrosshair(),
       id: name,
 
       gridLineWidth: 0,

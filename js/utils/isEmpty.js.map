@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/isEmpty.js"
+ ],
+ "file": "../../src/utils/isEmpty.js",
+ "names": [
+  "isEmpty",
+  "obj",
+  "Object",
+  "keys",
+  "length"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,UAAU,SAAVA,OAAU,CAACC,GAAD;AAAA,SACdA,OAAO,IAAP,IAAeC,OAAOC,IAAP,CAAYF,GAAZ,EAAiBG,MAAjB,KAA4B,CAD7B;AAAA,CAAhB;;kBAGeJ,O"
+}
