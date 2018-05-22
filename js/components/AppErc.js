@@ -56,10 +56,6 @@ var _DialogContainer = require('./dialogs/DialogContainer');
 
 var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
 
-var _ConsentCookiePopup = require('./zhn/ConsentCookiePopup');
-
-var _ConsentCookiePopup2 = _interopRequireDefault(_ConsentCookiePopup);
-
 var _ComponentActions = require('../flux/actions/ComponentActions');
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
@@ -67,10 +63,6 @@ var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 var _BrowserActions = require('../flux/actions/BrowserActions');
 
 var _ChartActions = require('../flux/actions/ChartActions');
-
-var _AnalyticActions = require('../flux/actions/AnalyticActions');
-
-var _AnalyticActions2 = _interopRequireDefault(_AnalyticActions);
 
 var _theme = require('./styles/theme');
 
@@ -82,13 +74,7 @@ var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '13-05-2018';
-
-var answerYes = _AnalyticActions2.default.answerYes,
-    answerView = _AnalyticActions2.default.answerView,
-    answerNo = _AnalyticActions2.default.answerNo,
-    noAnswer = _AnalyticActions2.default.noAnswer;
-
+var PREV_BUILD = '22-05-2018';
 
 var _checkBuild = function _checkBuild() {
   if (window.fetch) {
@@ -179,13 +165,7 @@ var AppErc = function (_Component) {
               addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
             })
           ),
-          _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default }),
-          _react2.default.createElement(_ConsentCookiePopup2.default, {
-            onAnswerYes: answerYes,
-            onAnswerView: answerView,
-            onAnswerNo: answerNo,
-            onNoAnswer: noAnswer
-          })
+          _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default })
         )
       );
     }

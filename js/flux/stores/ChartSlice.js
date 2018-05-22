@@ -24,11 +24,6 @@ var _isChartExist = _ChartLogic2.default.isChartExist,
     sortBy = _ChartLogic2.default.sortBy;
 
 
-var EVENT_ACTION = {
-  LOAD: 'Load',
-  ADD: 'Add'
-};
-
 var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 var _fnLogLoadError = function _fnLogLoadError(_ref) {
   var alertCaption = _ref.alertCaption,
@@ -71,20 +66,11 @@ var ChartSlice = {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
     this.triggerLimitRemaining(limitRemaining);
     this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
-    this.analyticSendEvent({
-      eventAction: EVENT_ACTION.LOAD,
-      eventLabel: chartType
-    });
   },
   onLoadStockAdded: function onLoadStockAdded() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var chartType = option.chartType;
 
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
-    this.analyticSendEvent({
-      eventAction: EVENT_ACTION.ADD,
-      eventLabel: chartType
-    });
   },
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_FAILED);

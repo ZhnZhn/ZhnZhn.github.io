@@ -12,11 +12,6 @@ const {
   sortBy
 } = ChartLogic;
 
-const EVENT_ACTION = {
-  LOAD : 'Load',
-  ADD  : 'Add'
-};
-
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
 const _fnLogLoadError = function({
   alertCaption, alertDescr, alertItemId
@@ -57,18 +52,9 @@ const ChartSlice = {
       this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
       this.triggerLimitRemaining(limitRemaining);
       this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
-      this.analyticSendEvent({
-        eventAction : EVENT_ACTION.LOAD,
-        eventLabel : chartType
-      });
   },
   onLoadStockAdded(option={}){
-     const { chartType } = option;
      this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
-     this.analyticSendEvent({
-        eventAction : EVENT_ACTION.ADD,
-        eventLabel : chartType
-      });
   },
   onLoadStockFailed(option){
     this.triggerLoadingProgress(LPA.LOADING_FAILED)

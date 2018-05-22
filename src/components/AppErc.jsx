@@ -10,21 +10,14 @@ import About from './about/About';
 import ComponentHrzContainer from './chart-container/ComponentHrzContainer';
 import DialogContainer from './dialogs/DialogContainer';
 
-import ConsentCookiePopup from './zhn/ConsentCookiePopup';
-
 import ComponentActions, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
 import { BrowserActionTypes as BAT } from '../flux/actions/BrowserActions';
 import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
-import AnalyticActions from '../flux/actions/AnalyticActions';
 
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '13-05-2018';
-
-const {
-  answerYes, answerView, answerNo, noAnswer
-} = AnalyticActions;
+const PREV_BUILD = '22-05-2018';
 
 const _checkBuild = () => {
   if (window.fetch) {
@@ -98,12 +91,6 @@ class AppErc extends Component {
            />
        </div>
        <DialogContainer store={ChartStore} />
-       <ConsentCookiePopup
-          onAnswerYes={answerYes}
-          onAnswerView={answerView}
-          onAnswerNo={answerNo}
-          onNoAnswer={noAnswer}
-       />
      </div>
      </ThemeContext.Provider>
    );

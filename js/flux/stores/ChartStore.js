@@ -40,10 +40,6 @@ var _SettingSlice = require('./SettingSlice');
 
 var _SettingSlice2 = _interopRequireDefault(_SettingSlice);
 
-var _AnalyticSlice = require('./AnalyticSlice');
-
-var _AnalyticSlice2 = _interopRequireDefault(_AnalyticSlice);
-
 var _WatchListSlice = require('../watch-list/WatchListSlice');
 
 var _WatchListSlice2 = _interopRequireDefault(_WatchListSlice);
@@ -65,7 +61,7 @@ var ChartStore = _reflux2.default.createStore((0, _extends3.default)({
     this.initWatchList();
     this.listenLoadingProgress(_ChartActions2.default.fnOnChangeStore);
   }
-}, _ChartSlice2.default, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _AnalyticSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default, _WithLoadingProgress2.default));
+}, _ChartSlice2.default, _BrowserSlice2.default, _ComponentSlice2.default, _SettingSlice2.default, _WatchListSlice2.default, _WithLimitRemaining2.default, _WithLoadingProgress2.default));
 
 exports.default = ChartStore;
 //# sourceMappingURL=ChartStore.js.map
