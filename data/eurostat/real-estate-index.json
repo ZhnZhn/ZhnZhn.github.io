@@ -1,7 +1,7 @@
 {
   "indicators" : [
     {
-      "caption" : "House Price Index (2010=100), deflated, quarterly" ,
+      "caption" : "House Price Index (2015=100), deflated, quarterly" ,
        "value" : "tipsho30?unit=INX_Q",
        "mapFrequency" : "Q",
        "mapValue" : "tipsho30?unit=INX_Q",
