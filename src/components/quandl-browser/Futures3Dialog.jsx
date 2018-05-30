@@ -5,6 +5,7 @@ import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
 
 const yearOptions = [
+  { caption: '2018', value: 2018 },
   { caption: '2017', value: 2017 },
   { caption: '2016', value: 2016 },
   { caption: '2015', value: 2015 },

@@ -44,6 +44,17 @@
       "items" : [
         { "id" : "ES_RE_INDIC" }
       ]
+    },{
+      "caption": "Extra Trade", "isInitClose": true,
+      "items": [
+        { "id": "ES_TR_BYPARTNER" },
+        { "id": "ES_TR_FOOD" },
+        { "id": "ES_TR_RAWMATERIALS" },
+        { "id": "ES_TR_MINERALFUELS" },
+        { "id": "ES_TR_CHEMICALS" },
+        { "id": "ES_TR_GOODS" },
+        { "id": "ES_TR_MACHINERY" }
+      ]
     }
   ],
   "items" : {
@@ -55,6 +66,18 @@
         "oneJsonProp" : "countries",
         "loadId" : "EU_STAT",
         "dataSource": "Eurostat"
+      }
+    },
+    "ES_TR_BASE": {
+      "dialogProps": {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption" : "Partner",
+        "oneURI" : "./data/eurostat/trade-partner.json",
+        "twoCaption" : "Indicator",
+        "twoURI" : "./data/eurostat/trade-indicator.json",
+        "twoJsonProp" : "items",
+        "chartsType": "t1",
+        "loadId" : "EU_STAT"
       }
     },
 
@@ -357,6 +380,120 @@
         "twoURI" : "./data/eurostat/real-estate-index.json",
         "twoJsonProp" : "indicators"
       }
+    },
+
+    "ES_TR_BYPARTNER": {
+      "type" : "ES_TR_BYPARTNER",
+      "menuTitle" : "Total By Partner",
+      "dialogCaption" : "Total by Partner",
+      "chartContainerCaption" : "Eurostat: Extra EU Trade Total By Partner",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_TR_BASE",
+      "dialogProps": {
+        "dataSource": "Eurostat (ext_lt_maineu)",
+        "dfProps": {
+          "dfTable": "ext_lt_maineu",
+          "dfParams": [ "partner",  "indic_et"],
+          "dfTail": "precision=1&sitc06=TOTAL"
+        }
+      }
+    },
+    "ES_TR_RAWMATERIALS": {
+      "type" : "ES_TR_RAWMATERIALS",
+      "menuTitle" : "Raw Materials (SITC 2+4)",
+      "dialogCaption" : "Raw Materials",
+      "chartContainerCaption" : "Eurostat: Extra EU Trade of Raw Materials (SITC 2+4) By Partner",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_TR_BASE",
+      "dialogProps": {
+        "dataSource": "Eurostat (ext_lt_mainrawm)",
+        "dfProps": {
+          "dfTable": "ext_lt_mainrawm",
+          "dfParams": [ "partner",  "indic_et"],
+          "dfTail": "precision=1&sitc06=SITC2_4"
+        }
+      }
+    },
+    "ES_TR_FOOD": {
+      "type" : "ES_TR_FOOD",
+      "menuTitle" : "Food, Drink, Tobacco (SITC 0+1)",
+      "dialogCaption" : "Food, Drink, Tobacco",
+      "chartContainerCaption" : "Eurostat: Extra EU Trade of Food, Drink, Tobacco (SITC 0+1) By Partner",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_TR_BASE",
+      "dialogProps": {
+        "dataSource": "Eurostat (ext_lt_mainagri)",
+        "dfProps": {
+          "dfTable": "ext_lt_mainagri",
+          "dfParams": [ "partner",  "indic_et"],
+          "dfTail": "precision=1&sitc06=SITC0_1"
+        }
+      }
+    },
+    "ES_TR_MINERALFUELS": {
+      "type" : "ES_TR_MINERALFUELS",
+      "menuTitle" : "Mineral Fuels (SITC 3)",
+      "dialogCaption" : "Mineral Fuels",
+      "chartContainerCaption" : "Eurostat: Extra EU Trade of Mineral Fuels (SITC 3) By Partner",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_TR_BASE",
+      "dialogProps": {
+        "dataSource": "Eurostat (ext_lt_mainmine)",
+        "dfProps": {
+          "dfTable": "ext_lt_mainmine",
+          "dfParams": [ "partner",  "indic_et"],
+          "dfTail": "precision=1&sitc06=SITC3"
+        }
+      }
+    },
+    "ES_TR_CHEMICALS": {
+      "type" : "ES_TR_CHEMICALS",
+      "menuTitle" : "Chemicals (SITC 5)",
+      "dialogCaption" : "Chemicals",
+      "chartContainerCaption" : "Eurostat: Extra EU Trade of Chemicals (SITC 5) By Partner",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_TR_BASE",
+      "dialogProps": {
+        "dataSource": "Eurostat (ext_lt_mainchem)",
+        "dfProps": {
+          "dfTable": "ext_lt_mainchem",
+          "dfParams": [ "partner",  "indic_et"],
+          "dfTail": "precision=1&sitc06=SITC5"
+        }
+      }
+    },
+    "ES_TR_GOODS": {
+      "type" : "ES_TR_GOODS",
+      "menuTitle" : "Manufactured Goods (SITC 6+8)",
+      "dialogCaption" : "Manufactured Goods",
+      "chartContainerCaption" : "Eurostat: Extra EU Trade of Manufactured Goods (SITC 6+8) By Partner",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_TR_BASE",
+      "dialogProps": {
+        "dataSource": "Eurostat (ext_lt_mainmanu)",
+        "dfProps": {
+          "dfTable": "ext_lt_mainmanu",
+          "dfParams": [ "partner",  "indic_et"],
+          "dfTail": "precision=1&sitc06=SITC6_8"
+        }
+      }
+    },
+    "ES_TR_MACHINERY": {
+      "type" : "ES_TR_MACHINERY",
+      "menuTitle" : "Machinery & Transport (SITC 7)",
+      "dialogCaption" : "Machinery & Transport",
+      "chartContainerCaption" : "Eurostat: Extra EU Trade of Machinery & Transport (SITC 7) By Partner",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_TR_BASE",
+      "dialogProps": {
+        "dataSource": "Eurostat (ext_lt_mainmach)",
+        "dfProps": {
+          "dfTable": "ext_lt_mainmach",
+          "dfParams": [ "partner",  "indic_et"],
+          "dfTail": "precision=1&sitc06=SITC7"
+        }
+      }
     }
+
   }
 }

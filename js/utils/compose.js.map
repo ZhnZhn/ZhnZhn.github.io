@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/utils/compose.js"
+ ],
+ "file": "../../src/utils/compose.js",
+ "names": [
+  "compose",
+  "fns",
+  "length",
+  "arg",
+  "reduce",
+  "a",
+  "b"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;;;;;;;AAYA,IAAMA,UAAU,SAAVA,OAAU,GAAY;AAAA,oCAARC,GAAQ;AAARA,OAAQ;AAAA;;AAC1B,MAAIA,IAAIC,MAAJ,KAAe,CAAnB,EAAsB;AACpB,WAAO;AAAA,aAAOC,GAAP;AAAA,KAAP;AACD;AACD,MAAIF,IAAIC,MAAJ,KAAe,CAAnB,EAAsB;AACpB,WAAOD,IAAI,CAAJ,CAAP;AACD;;AAED,SAAOA,IAAIG,MAAJ,CAAW,UAACC,CAAD,EAAIC,CAAJ;AAAA,WAAU;AAAA,aAAaD,EAAEC,6BAAF,CAAb;AAAA,KAAV;AAAA,GAAX,CAAP;AACD,CATD;;kBAWeN,O"
+}

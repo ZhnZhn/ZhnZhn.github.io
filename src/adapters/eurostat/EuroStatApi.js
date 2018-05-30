@@ -17,6 +17,24 @@ const _crDetailMsg = function(option){
 
 const _categoryTypes = [ 'MAP', 'COLUMN', 'BAR' ];
 
+const _toQuery = (params, items) => {
+  let _query = '', i = 0;
+  for (;i<params.length; i++) {
+    const _str = `${params[i]}=${items[i].value}`;
+    _query = _query
+       ? _query + '&' + _str
+       : _str;
+  }
+  return _query;
+}
+
+const _crUrlWithParams = (option) => {
+  const { dfParams, dfTable, dfTail, items } = option
+      , _query = _toQuery(dfParams, items)
+      , _tail = dfTail ? '&' + dfTail : '';
+
+  return `${rootUrl}${dfTable}?${_query}${_tail}`;
+}
 
 const EuroStatApi = {
 
@@ -24,8 +42,15 @@ const EuroStatApi = {
     const {
             group, metric, geo,
             mapValue, time,
-            seriaType
+            seriaType,
+            dfParams
           } = option;
+
+    if (dfParams) {
+      return _crUrlWithParams(option);
+    }
+
+
 
     if (!isStrInArr(seriaType)(_categoryTypes)){
       let _param = `geo=${geo}`

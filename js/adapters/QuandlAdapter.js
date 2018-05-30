@@ -9,14 +9,16 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _rToConfig2, _rToSeria2;
+//import flow from 'lodash.flow';
 
-var _lodash = require('lodash.flow');
-
-var _lodash2 = _interopRequireDefault(_lodash);
 
 var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
+
+var _pipe = require('../utils/pipe');
+
+var _pipe2 = _interopRequireDefault(_pipe);
 
 var _Type = require('../constants/Type');
 
@@ -325,7 +327,8 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) 
   }
 
   return {
-    fnPointsFlow: (0, _lodash2.default)(fnStep),
+    //fnPointsFlow : flow(fnStep),
+    fnPointsFlow: _pipe2.default.apply(undefined, fnStep),
     result: result
   };
 };
@@ -557,7 +560,8 @@ var fnConfigAxes = function fnConfigAxes(result) {
   return result;
 };
 
-var fnQuandlFlow = (0, _lodash2.default)(fnGetSeries, fnConfigAxes);
+//const fnQuandlFlow = flow(fnGetSeries, fnConfigAxes);
+var fnQuandlFlow = (0, _pipe2.default)(fnGetSeries, fnConfigAxes);
 
 var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   var config = _ChartConfig2.default.fBaseAreaConfig(),

@@ -1,6 +1,8 @@
 
-import flow from 'lodash.flow';
+//import flow from 'lodash.flow';
 import Big from 'big.js';
+
+import pipe from '../utils/pipe'
 
 import {ChartType} from '../constants/Type';
 import Chart from '../charts/Chart';
@@ -247,7 +249,8 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
   }
 
   return {
-    fnPointsFlow : flow(fnStep),
+    //fnPointsFlow : flow(fnStep),
+    fnPointsFlow : pipe(...fnStep),
     result : result
   };
 }
@@ -472,7 +475,8 @@ const fnConfigAxes = function(result){
   return result;
 }
 
-const fnQuandlFlow = flow(fnGetSeries, fnConfigAxes);
+//const fnQuandlFlow = flow(fnGetSeries, fnConfigAxes);
+const fnQuandlFlow = pipe(fnGetSeries, fnConfigAxes);
 
 const _fCreateAreaConfig = function(json, option){
   const config = ChartConfig.fBaseAreaConfig()

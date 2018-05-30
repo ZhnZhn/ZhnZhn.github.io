@@ -30,6 +30,27 @@ var _crDetailMsg = function _crDetailMsg(option) {
 
 var _categoryTypes = ['MAP', 'COLUMN', 'BAR'];
 
+var _toQuery = function _toQuery(params, items) {
+  var _query = '',
+      i = 0;
+  for (; i < params.length; i++) {
+    var _str = params[i] + "=" + items[i].value;
+    _query = _query ? _query + '&' + _str : _str;
+  }
+  return _query;
+};
+
+var _crUrlWithParams = function _crUrlWithParams(option) {
+  var dfParams = option.dfParams,
+      dfTable = option.dfTable,
+      dfTail = option.dfTail,
+      items = option.items,
+      _query = _toQuery(dfParams, items),
+      _tail = dfTail ? '&' + dfTail : '';
+
+  return "" + rootUrl + dfTable + "?" + _query + _tail;
+};
+
 var EuroStatApi = {
   getRequestUrl: function getRequestUrl(option) {
     var group = option.group,
@@ -37,8 +58,13 @@ var EuroStatApi = {
         geo = option.geo,
         mapValue = option.mapValue,
         time = option.time,
-        seriaType = option.seriaType;
+        seriaType = option.seriaType,
+        dfParams = option.dfParams;
 
+
+    if (dfParams) {
+      return _crUrlWithParams(option);
+    }
 
     if (!isStrInArr(seriaType)(_categoryTypes)) {
       var _param = "geo=" + geo,
@@ -82,4 +108,4 @@ var EuroStatApi = {
 };
 
 exports.default = EuroStatApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\EuroStatApi.js.map
+//# sourceMappingURL=EuroStatApi.js.map
