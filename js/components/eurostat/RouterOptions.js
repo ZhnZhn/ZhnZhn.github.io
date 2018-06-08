@@ -19,7 +19,8 @@ var T = {
   T3B: 't3b',
   T3A: 't3a',
   T3A2: 't3a2',
-  T4: 't4'
+  T4: 't4',
+  DF3: 'df3'
 };
 
 var V = {
@@ -44,6 +45,10 @@ var C = {
 
 var _crDF = function _crDF() {
   return [{ caption: 'Default: Area', value: V.A }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Bar: All Countries', value: V.B }];
+};
+
+var _crDF3 = function _crDF3() {
+  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Bar: All Countries', value: V.B }];
 };
 
 var _crT1 = function _crT1() {
@@ -155,6 +160,8 @@ var RouterOptions = {
         return _crT3A2(_captions[0]);
       case T.T4:
         return _crT4(_captions[0], _captions[1]);
+      case T.DF3:
+        return _crDF3();
       default:
         return _crDF();
     }

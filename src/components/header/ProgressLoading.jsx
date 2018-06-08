@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import ProgressLine from '../zhn/ProgressLine';
 
 const C = {
-  LOADING : '#2F7ED8',
-  FAILED : 'rgb(237, 88, 19)'
+  LOADING : '#2f7ed8',
+  FAILED : '#ed5813'
 };
 
 class ProgressLoading extends Component {
@@ -29,6 +29,13 @@ class ProgressLoading extends Component {
       } else if (actionType === ACTIONS.LOADING_FAILED){
         this.setState({ completed: 100, color: C.FAILED })
       }
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.state.completed === nextState.completed) {
+      return false;
+    }
+    return true;
   }
 
   render(){

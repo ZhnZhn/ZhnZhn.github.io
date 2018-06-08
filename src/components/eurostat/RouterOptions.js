@@ -8,7 +8,8 @@ const T = {
   T3B: 't3b',
   T3A: 't3a',
   T3A2: 't3a2',
-  T4: 't4'
+  T4: 't4',
+  DF3: 'df3'
 };
 
 const V = {
@@ -35,6 +36,14 @@ const _crDF = () => {
   return [
     { caption : 'Default: Area', value: V.A },
     { caption : 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
+    { caption : 'Column: All Countries', value: V.C },
+    { caption : 'Bar: All Countries', value: V.B }
+  ];
+}
+
+const _crDF3 = () => {
+  return [
+    { caption : 'Default: Area', value: V.A },
     { caption : 'Column: All Countries', value: V.C },
     { caption : 'Bar: All Countries', value: V.B }
   ];
@@ -165,6 +174,7 @@ const RouterOptions = {
        case T.T3A: return _crT3A(_captions[0]);
        case T.T3A2: return _crT3A2(_captions[0]);
        case T.T4: return _crT4(_captions[0], _captions[1]);
+       case T.DF3: return _crDF3();
        default: return _crDF();
      }
   },

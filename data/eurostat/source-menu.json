@@ -32,7 +32,8 @@
         { "id" : "ES_AGRI_PRICES" },
         { "id" : "ES_AGRI_MILK" },
         { "id" : "ES_AGRI_MEAT" },
-        { "id" : "ES_AGRI_ENVI" }
+        { "id" : "ES_AGRI_ENVI" },
+        { "id" : "ES_AGRI_CROP" }
       ]
     },{
       "caption" : "High-Tech Industry", "isInitClose" : true,
@@ -351,6 +352,30 @@
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/agri-envi.json",
         "twoJsonProp" : "indicators"
+      }
+    },
+    "ES_AGRI_CROP": {
+      "type" : "ES_AGRI_CROP",
+      "menuTitle" : "Crops Production",
+      "dialogCaption" : "Crops Production",
+      "chartContainerCaption" : "Eurostat: Crops Production",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Crop",
+        "twoURI" : "./data/eurostat/crop-production.json",
+        "threeCaption" : "Structure",
+        "threeURI" : "./data/eurostat/crop-structure.json",
+        "chartsType": "df3",
+        "dataSource": "Eurostat (apro_cpsh1)",
+        "dfProps": {
+          "dfTable": "apro_cpsh1",
+          "dfParams": [ "geo", "crops", "strucpro"],
+          "dfTail": "precision=1",
+          "mapType" : "I",
+          "mapFrequency" : "Y",
+          "mapDateDf" : 1
+        }
       }
     },
 

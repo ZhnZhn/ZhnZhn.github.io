@@ -1,1 +1,16 @@
-{"version":3,"sources":["../../../src/components/eurostat/EurostatDialogs.js"],"names":["EurostatDialogs","Eurostat","Eurostat2","Eurostat3","StatN"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB;AACtBC,oCADsB,EACZC,mCADY,EACDC,mCADC;AAEtBC;AAFsB,CAAxB;;kBAKeJ,e","file":"EurostatDialogs.js","sourcesContent":["\r\nimport Eurostat from './DialogEurostat'\r\nimport Eurostat2 from './DialogEurostat2'\r\nimport Eurostat3 from './DialogEurostat3'\r\nimport StatN from './DialogStatN'\r\n\r\nconst EurostatDialogs = {\r\n  Eurostat, Eurostat2, Eurostat3,\r\n  StatN\r\n};\r\n\r\nexport default EurostatDialogs\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/eurostat/EurostatDialogs.js"
+ ],
+ "file": "../../../src/components/eurostat/EurostatDialogs.js",
+ "names": [
+  "EurostatDialogs",
+  "Eurostat",
+  "Eurostat2",
+  "Eurostat3",
+  "Eurostat3A",
+  "StatN"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB;AACtBC,oCADsB,EACZC,mCADY,EACDC,mCADC;AAEtBC,wCAFsB;AAGtBC;AAHsB,CAAxB;;kBAMeL,e"
+}

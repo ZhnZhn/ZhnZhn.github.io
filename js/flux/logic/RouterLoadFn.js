@@ -69,6 +69,7 @@ var _r = {
   DialogEurostat: _eurostat2.default,
   DialogEurostat2: _eurostat4.default,
   DialogEurostat3: _eurostat6.default,
+  DialogEurostat3A: _eurostat6.default,
   DialogStatN: _eurostatN2.default,
 
   UnDialog5: _un2.default

@@ -17,23 +17,49 @@ const _crDetailMsg = function(option){
 
 const _categoryTypes = [ 'MAP', 'COLUMN', 'BAR' ];
 
+const _addParamTo = (q, p) => q ? q + '&' + p : p;
+
 const _toQuery = (params, items) => {
-  let _query = '', i = 0;
+  let _q = '', i = 0;
   for (;i<params.length; i++) {
-    const _str = `${params[i]}=${items[i].value}`;
-    _query = _query
-       ? _query + '&' + _str
-       : _str;
+    _q = _addParamTo(_q, `${params[i]}=${items[i].value}`)
   }
-  return _query;
+  return _q;
+}
+
+const _toMapSlice = (params, items, time ) => {
+  const zhMapSlice = { time }
+      , _max=params.length;
+  let queryMap='', i;
+  for (i=1 ;i<_max; i++){
+    queryMap = _addParamTo(queryMap, `${params[i]}=${items[i].value}`)
+    zhMapSlice[params[i]] = items[i].value
+  }
+  return {
+    queryMap, zhMapSlice
+  };
+
 }
 
 const _crUrlWithParams = (option) => {
-  const { dfParams, dfTable, dfTail, items } = option
-      , _query = _toQuery(dfParams, items)
-      , _tail = dfTail ? '&' + dfTail : '';
+  const {
+          seriaType,
+          dfParams, dfTable, dfTail,
+          items,
+          time
+        } = option;
 
-  return `${rootUrl}${dfTable}?${_query}${_tail}`;
+  if (!isStrInArr(seriaType)(_categoryTypes)){
+    const _query = _toQuery(dfParams, items)
+         , _tail = dfTail ? '&' + dfTail : '';
+    return `${rootUrl}${dfTable}?${_query}${_tail}`;
+  } else {
+    const {
+            queryMap, zhMapSlice
+          } = _toMapSlice(dfParams, items, time);
+    option.zhMapSlice = zhMapSlice
+    return `${rootUrl}${dfTable}?${queryMap}&time=${time}`;
+  }
 }
 
 const EuroStatApi = {
@@ -49,8 +75,6 @@ const EuroStatApi = {
     if (dfParams) {
       return _crUrlWithParams(option);
     }
-
-
 
     if (!isStrInArr(seriaType)(_categoryTypes)){
       let _param = `geo=${geo}`
@@ -68,27 +92,28 @@ const EuroStatApi = {
       }
 
       return `${rootUrl}${_group}${_param}${queryTail}`;
-  } else if (seriaType === 'COLUMN') {
-    return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
-  } else if (seriaType === 'MAP') {
-     return `${rootUrl}${mapValue}`;
-  } else {
-    //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
-    return `${rootUrl}${mapValue}&time=${time}`;
-    //return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
-  }
+    } else if (seriaType === 'COLUMN') {
+      return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
+    } else if (seriaType === 'MAP') {
+       return `${rootUrl}${mapValue}`;
+    } else {
+      return `${rootUrl}${mapValue}&time=${time}`;
+    }
   },
 
   checkResponse(json, option) {
-    const { error } = json
+    const { error } = json;
     if (error){
        if (error.label) {
           throw {
-            errCaption : REQUEST_ERROR,
-            message : MESSAGE_HEADER + error.label + _crDetailMsg(option)
+            errCaption: REQUEST_ERROR,
+            message: MESSAGE_HEADER + error.label + _crDetailMsg(option)
           };
        } else {
-          throw { errCaption : REQUEST_ERROR, message : '' };
+          throw {
+            errCaption: REQUEST_ERROR,
+            message: ''
+          };
        }
     }
     return true;

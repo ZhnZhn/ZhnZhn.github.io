@@ -131,6 +131,11 @@ var _router = {
       return D.Eurostat3;
     });
   },
+  get DialogEurostat3A() {
+    return this.ES.then(function (D) {
+      return D.Eurostat3A;
+    });
+  },
   get DialogStatN() {
     var ES = this.ES || this._loadES();
     return ES.then(function (D) {

@@ -34,6 +34,7 @@ const _r = {
   DialogEurostat: fnEuroStat,
   DialogEurostat2: fnEuroStat2,
   DialogEurostat3: fnEuroStat3,
+  DialogEurostat3A: fnEuroStat3,
   DialogStatN: fnEuroStatN,
 
   UnDialog5: fnUn5

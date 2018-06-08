@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/flux/creaters/eurostat3.js"],"names":["createLoadOptions","props","options","loadId","dataSource","dfProps","one","group","metric","caption","oneC","oneV","value","groupC","groupV","metricC","metricV","geo","itemCaption","title","subtitle","alertItemId","alertGeo","alertMetric","items"],"mappings":";;;;;;;;;;;;AACA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;AAAA,MAC1CC,MAD0C,GACVF,KADU,CAC1CE,MAD0C;AAAA,MAClCC,UADkC,GACVH,KADU,CAClCG,UADkC;AAAA,MACtBC,OADsB,GACVJ,KADU,CACtBI,OADsB;AAAA,qBAEXH,OAFW,CAE1CI,GAF0C;AAAA,MAE1CA,GAF0C,gCAEtC,EAFsC;AAAA,uBAEXJ,OAFW,CAElCK,KAFkC;AAAA,MAElCA,KAFkC,kCAE5B,EAF4B;AAAA,wBAEXL,OAFW,CAExBM,MAFwB;AAAA,MAExBA,MAFwB,mCAEjB,EAFiB;AAAA,qBAGVF,GAHU,CAG1CG,OAH0C;AAAA,MAGlCC,IAHkC,gCAG7B,EAH6B;AAAA,MAGnBC,IAHmB,GAGVL,GAHU,CAGzBM,KAHyB;AAAA,uBAINL,KAJM,CAI1CE,OAJ0C;AAAA,MAIlCI,MAJkC,kCAI3B,EAJ2B;AAAA,MAIjBC,MAJiB,GAINP,KAJM,CAIvBK,KAJuB;AAAA,wBAKJJ,MALI,CAK1CC,OAL0C;AAAA,MAKlCM,OALkC,mCAK1B,EAL0B;AAAA,MAKhBC,OALgB,GAKJR,MALI,CAKtBI,KALsB;;AAMlD,oCACKP,OADL;AAEEY,SAAMN,IAFR;AAGEJ,WAAQO,MAHV;AAIEN,YAASQ,OAJX;AAKEb,YAASA,MALX;AAMEe,iBAAaR,IANf;AAOES,WAAQT,IAPV;AAQEU,cAAcP,MAAd,SAAwBE,OAR1B;AASEM,iBAAiBX,IAAjB,SAAyBK,OAT3B;AAUEO,cAAWZ,IAVb;AAWEa,iBAAcR,OAXhB;AAYEX,0BAZF;AAaEoB,WAAO,CAAElB,GAAF,EAAOC,KAAP,EAAcC,MAAd;AAbT;AAeD,CArBD;;kBAuBeR,iB","file":"eurostat3.js","sourcesContent":["\r\nconst createLoadOptions = (props={}, options={}) => {\r\n  const { loadId, dataSource, dfProps } = props\r\n      , { one={}, group={}, metric={}} = options\r\n      , { caption:oneC='', value:oneV } = one\r\n      , { caption:groupC='', value:groupV } = group\r\n      , { caption:metricC='', value:metricV } = metric\r\n  return {\r\n    ...dfProps,\r\n    geo : oneV,\r\n    group : groupV,\r\n    metric : metricV,\r\n    loadId : loadId,\r\n    itemCaption: oneC,\r\n    title : oneC,\r\n    subtitle : `${groupC}:${metricC}`,\r\n    alertItemId : `${oneC}:${metricC}`,\r\n    alertGeo : oneC,\r\n    alertMetric : metricC,\r\n    dataSource,\r\n    items: [ one, group, metric ]\r\n  }\r\n};\r\n\r\nexport default createLoadOptions\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/creaters/eurostat3.js"
+ ],
+ "file": "../../../src/flux/creaters/eurostat3.js",
+ "names": [
+  "createLoadOptions",
+  "props",
+  "options",
+  "loadId",
+  "dataSource",
+  "dfProps",
+  "one",
+  "group",
+  "metric",
+  "chartType",
+  "date",
+  "dateDefault",
+  "caption",
+  "oneC",
+  "oneV",
+  "value",
+  "groupC",
+  "groupV",
+  "metricC",
+  "metricV",
+  "chartTypeValue",
+  "_time",
+  "geo",
+  "time",
+  "itemCaption",
+  "title",
+  "subtitle",
+  "alertItemId",
+  "alertGeo",
+  "alertMetric",
+  "seriaType",
+  "items"
+ ],
+ "mappings": ";;;;;;;;;;;;AACA,IAAMA,oBAAoB,SAApBA,iBAAoB,GAA0B;AAAA,MAAzBC,KAAyB,uEAAnB,EAAmB;AAAA,MAAfC,OAAe,uEAAP,EAAO;;AAAA,MAC1CC,MAD0C,GACVF,KADU,CAC1CE,MAD0C;AAAA,MAClCC,UADkC,GACVH,KADU,CAClCG,UADkC;AAAA,MACtBC,OADsB,GACVJ,KADU,CACtBI,OADsB;AAAA,qBAMxCH,OANwC,CAG1CI,GAH0C;AAAA,MAG1CA,GAH0C,gCAGtC,EAHsC;AAAA,uBAMxCJ,OANwC,CAGlCK,KAHkC;AAAA,MAGlCA,KAHkC,kCAG5B,EAH4B;AAAA,wBAMxCL,OANwC,CAGxBM,MAHwB;AAAA,MAGxBA,MAHwB,mCAGjB,EAHiB;AAAA,2BAMxCN,OANwC,CAI1CO,SAJ0C;AAAA,MAI1CA,SAJ0C,sCAIhC,EAJgC;AAAA,sBAMxCP,OANwC,CAK1CQ,IAL0C;AAAA,MAK1CA,IAL0C,iCAKrC,EALqC;AAAA,6BAMxCR,OANwC,CAKjCS,WALiC;AAAA,MAKjCA,WALiC,wCAKrB,EALqB;AAAA,qBAOVL,GAPU,CAO1CM,OAP0C;AAAA,MAOlCC,IAPkC,gCAO7B,EAP6B;AAAA,MAOnBC,IAPmB,GAOVR,GAPU,CAOzBS,KAPyB;AAAA,uBAQNR,KARM,CAQ1CK,OAR0C;AAAA,MAQlCI,MARkC,kCAQ3B,EAR2B;AAAA,MAQjBC,MARiB,GAQNV,KARM,CAQvBQ,KARuB;AAAA,wBASJP,MATI,CAS1CI,OAT0C;AAAA,MASlCM,OATkC,mCAS1B,EAT0B;AAAA,MAShBC,OATgB,GASJX,MATI,CAStBO,KATsB;AAAA,yBAUVN,SAVU,CAU1CM,KAV0C;AAAA,MAUpCK,cAVoC,oCAUrB,MAVqB;AAAA,MAW5CC,KAX4C,GAWpCX,KAAKK,KAAL,IAAcJ,WAXsB;;AAYlD,oCACKN,OADL;AAEEiB,SAAMR,IAFR;AAGEP,WAAQU,MAHV;AAIET,YAASW,OAJX;AAKEI,UAAMF,KALR;AAMElB,YAASA,MANX;AAOEqB,iBAAaX,IAPf;AAQEY,WAAQZ,IARV;AASEa,cAAcV,MAAd,SAAwBE,OAT1B;AAUES,iBAAiBd,IAAjB,SAAyBK,OAV3B;AAWEU,cAAWf,IAXb;AAYEgB,iBAAcX,OAZhB;AAaEY,eAAYV,cAbd;AAcEhB,0BAdF;AAeE2B,WAAO,CAAEzB,GAAF,EAAOC,KAAP,EAAcC,MAAd;AAfT;AAiBD,CA7BD;;kBA+BeR,iB"
+}

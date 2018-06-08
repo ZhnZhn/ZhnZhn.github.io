@@ -1,0 +1,333 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _dec, _dec2, _class, _class2, _temp;
+//import PropTypes from "prop-types";
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _crDateConfig = require('./crDateConfig');
+
+var _crDateConfig2 = _interopRequireDefault(_crDateConfig);
+
+var _DialogCell = require('../dialogs/DialogCell');
+
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
+
+var _MenuMore = require('../dialogs/MenuMore');
+
+var _MenuMore2 = _interopRequireDefault(_MenuMore);
+
+var _Decorators = require('../dialogs/decorators/Decorators');
+
+var _Decorators2 = _interopRequireDefault(_Decorators);
+
+var _RouterOptions = require('./RouterOptions');
+
+var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MAP_FREQUENCY_DF = 'M';
+
+var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
+  (0, _inherits3.default)(DialogEurostat3A, _Component);
+
+  function DialogEurostat3A(props) {
+    (0, _classCallCheck3.default)(this, DialogEurostat3A);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DialogEurostat3A.__proto__ || Object.getPrototypeOf(DialogEurostat3A)).call(this));
+
+    _this._isCategory = function () {
+      return _RouterOptions2.default.isCategory(_this.chartType);
+    };
+
+    _this._updateForDate = function () {
+      _this.date = undefined;
+      var _this$props$dfProps = _this.props.dfProps,
+          dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
+          mapFrequency = dfProps.mapFrequency,
+          mapDateDf = dfProps.mapDateDf;
+
+      var _frequency = _this.two ? mapFrequency : MAP_FREQUENCY_DF,
+          dateConfig = _frequency ? (0, _crDateConfig2.default)(_frequency, mapDateDf) : (0, _crDateConfig2.default)('EMPTY');
+
+      _this.setState((0, _extends3.default)({
+        isShowDate: true
+      }, dateConfig));
+    };
+
+    _this._handleSelectOne = function (one) {
+      _this.one = one;
+    };
+
+    _this._handleSelectTwo = function (two) {
+      _this.two = two;
+      if (_this._isCategory()) {
+        _this._updateForDate();
+      }
+    };
+
+    _this._handleSelectThree = function (three) {
+      _this.three = three;
+    };
+
+    _this._handleSelectChartType = function (chartType) {
+      _this.chartType = chartType;
+      if (_this._isCategory()) {
+        _this._updateForDate();
+      } else {
+        _this.setState({ isShowDate: false });
+      }
+    };
+
+    _this._handleSelectDate = function (date) {
+      _this.date = date;
+    };
+
+    _this._handleLoad = function () {
+      _this._handleWithValidationLoad(_this._createValidationMessages(), _this._createLoadOption);
+    };
+
+    _this._createValidationMessages = function () {
+      var _this$props = _this.props,
+          oneCaption = _this$props.oneCaption,
+          twoCaption = _this$props.twoCaption,
+          threeCaption = _this$props.threeCaption,
+          msgOnNotSelected = _this$props.msgOnNotSelected;
+
+      var msg = [];
+
+      if (!_this._isCategory() && !_this.one) {
+        msg.push(msgOnNotSelected(oneCaption));
+      }
+      if (!_this.two) {
+        msg.push(msgOnNotSelected(twoCaption));
+      }
+      if (!_this.three) {
+        msg.push(msgOnNotSelected(threeCaption));
+      }
+
+      msg.isValid = msg.length === 0 ? true : false;
+      return msg;
+    };
+
+    _this._createLoadOption = function () {
+      var one = _this.one,
+          two = _this.two,
+          three = _this.three,
+          chartType = _this.chartType,
+          date = _this.date,
+          compSelect1 = _this.compSelect1,
+          compSelect2 = _this.compSelect2,
+          dateDefault = _this.state.dateDefault;
+
+      return _this.props.loadFn(_this.props, {
+        one: one,
+        group: two,
+        metric: three,
+        chartType: chartType, date: date, dateDefault: dateDefault,
+
+        selectOptions: [compSelect1.getOptions(), compSelect2.getOptions()]
+      });
+    };
+
+    _this._handleClose = function () {
+      _this._handleWithValidationClose();
+    };
+
+    _this._refSelect1 = function (comp) {
+      _this.compSelect1 = comp;
+    };
+
+    _this._refSelect2 = function (comp) {
+      _this.compSelect2 = comp;
+    };
+
+    _this.one = undefined;
+    _this.two = undefined;
+    _this.three = undefined;
+    _this.date = undefined;
+    _this.chartType = undefined;
+
+    _this._menuMore = (0, _MenuMore2.default)(_this, {
+      toggleToolBar: _this._toggleWithToolbar,
+      onAbout: _this._clickInfoWithToolbar
+    });
+
+    _this.toolbarButtons = _this._createType2WithToolbar(props);
+
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+
+    _this._chartOptions = _RouterOptions2.default.crOptions(props);
+
+    _this.state = (0, _extends3.default)({
+      isToolbar: true,
+      isShowLabels: true,
+      isShowDate: false
+    }, (0, _crDateConfig2.default)('EMPTY'), {
+      validationMessages: []
+    });
+    return _this;
+  }
+  /*
+  static propTypes = {
+    isShow: PropTypes.bool,
+    caption: PropTypes.string,
+      oneCaption: PropTypes.string,
+    oneURI: PropTypes.string,
+    oneJsonProp: PropTypes.string,
+      twoCaption: PropTypes.string,
+    twoURI: PropTypes.string,
+    twoJsonProp: PropTypes.string,
+      threeCaption: PropTypes.string,
+    threeURI: PropTypes.string,
+    threeJsonProp: PropTypes.string,
+      mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
+    mapDateDf: PropTypes.number,
+      msgOnNotSelected: PropTypes.func,
+    onShow: PropTypes.func,
+    loadFn: PropTypes.func
+  }
+  */
+
+  (0, _createClass3.default)(DialogEurostat3A, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props !== nextProps) {
+        if (this.props.isShow === nextProps.isShow) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          caption = _props.caption,
+          isShow = _props.isShow,
+          onShow = _props.onShow,
+          onFront = _props.onFront,
+          oneCaption = _props.oneCaption,
+          oneURI = _props.oneURI,
+          oneJsonProp = _props.oneJsonProp,
+          twoCaption = _props.twoCaption,
+          twoURI = _props.twoURI,
+          twoJsonProp = _props.twoJsonProp,
+          threeCaption = _props.threeCaption,
+          threeURI = _props.threeURI,
+          threeJsonProp = _props.threeJsonProp,
+          _state = this.state,
+          isToolbar = _state.isToolbar,
+          isShowLabels = _state.isShowLabels,
+          isShowDate = _state.isShowDate,
+          dateDefault = _state.dateDefault,
+          dateOptions = _state.dateOptions,
+          validationMessages = _state.validationMessages;
+
+      return _react2.default.createElement(
+        _DialogCell2.default.DraggableDialog,
+        {
+          isShow: isShow,
+          caption: caption,
+          menuModel: this._menuMore,
+          commandButtons: this._commandButtons,
+          onShowChart: onShow,
+          onFront: onFront,
+          onClose: this._handleClose
+        },
+        _react2.default.createElement(_DialogCell2.default.Toolbar, {
+          isShow: isToolbar,
+          buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+          ref: this._refSelect1,
+          isShow: isShow,
+          isShowLabels: isShowLabels,
+          uri: oneURI,
+          jsonProp: oneJsonProp,
+          caption: oneCaption,
+          optionNames: 'Countries',
+          onSelect: this._handleSelectOne
+        }),
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+          ref: this._refSelect2,
+          isShow: isShow,
+          isShowLabels: isShowLabels,
+          uri: twoURI,
+          jsonProp: twoJsonProp,
+          caption: twoCaption,
+          optionNames: 'Items',
+          onSelect: this._handleSelectTwo
+        }),
+        _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+          //ref={this._refSelect2}
+          isShow: isShow,
+          isShowLabels: isShowLabels,
+          uri: threeURI,
+          jsonProp: threeJsonProp,
+          caption: threeCaption,
+          optionNames: 'Metrics',
+          onSelect: this._handleSelectThree
+        }),
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
+          caption: 'Chart',
+          placeholder: 'Default: Area',
+          options: this._chartOptions,
+          onSelect: this._handleSelectChartType
+        }),
+        _react2.default.createElement(
+          _DialogCell2.default.ShowHide,
+          { isShow: isShowDate },
+          _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+            isShowLabels: isShowLabels,
+            caption: 'For Date',
+            placeholder: dateDefault,
+            options: dateOptions,
+            onSelect: this._handleSelectDate
+          })
+        ),
+        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
+          validationMessages: validationMessages
+        })
+      );
+    }
+  }]);
+  return DialogEurostat3A;
+}(_react.Component), _class2.defaultProps = {
+  oneCaption: 'Country',
+  oneJsonProp: 'countries',
+  twoCaption: 'Item',
+  twoJsonProp: 'items',
+  threeCaption: 'Metric',
+  threeJsonProp: 'items'
+}, _temp)) || _class) || _class);
+exports.default = DialogEurostat3A;
+//# sourceMappingURL=DialogEurostat3A.js.map

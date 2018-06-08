@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "caption": "Area (cultivation/harvested/production) (1000 ha)", "value": "AR" },
+    { "caption": "EU standard humidity (%)", "value": "HU_EU" },
+    { "caption": "Harvested production in EU standard humidity (1000 t)","YI_HU_EU":"Yield in EU standard humidity (tonne/ha)", "value": "PR_HU_EU" }
+  ]
+}

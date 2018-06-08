@@ -30,25 +30,54 @@ var _crDetailMsg = function _crDetailMsg(option) {
 
 var _categoryTypes = ['MAP', 'COLUMN', 'BAR'];
 
+var _addParamTo = function _addParamTo(q, p) {
+  return q ? q + '&' + p : p;
+};
+
 var _toQuery = function _toQuery(params, items) {
-  var _query = '',
+  var _q = '',
       i = 0;
   for (; i < params.length; i++) {
-    var _str = params[i] + "=" + items[i].value;
-    _query = _query ? _query + '&' + _str : _str;
+    _q = _addParamTo(_q, params[i] + "=" + items[i].value);
   }
-  return _query;
+  return _q;
+};
+
+var _toMapSlice = function _toMapSlice(params, items, time) {
+  var zhMapSlice = { time: time },
+      _max = params.length;
+  var queryMap = '',
+      i = void 0;
+  for (i = 1; i < _max; i++) {
+    queryMap = _addParamTo(queryMap, params[i] + "=" + items[i].value);
+    zhMapSlice[params[i]] = items[i].value;
+  }
+  return {
+    queryMap: queryMap, zhMapSlice: zhMapSlice
+  };
 };
 
 var _crUrlWithParams = function _crUrlWithParams(option) {
-  var dfParams = option.dfParams,
+  var seriaType = option.seriaType,
+      dfParams = option.dfParams,
       dfTable = option.dfTable,
       dfTail = option.dfTail,
       items = option.items,
-      _query = _toQuery(dfParams, items),
-      _tail = dfTail ? '&' + dfTail : '';
+      time = option.time;
 
-  return "" + rootUrl + dfTable + "?" + _query + _tail;
+
+  if (!isStrInArr(seriaType)(_categoryTypes)) {
+    var _query = _toQuery(dfParams, items),
+        _tail = dfTail ? '&' + dfTail : '';
+    return "" + rootUrl + dfTable + "?" + _query + _tail;
+  } else {
+    var _toMapSlice2 = _toMapSlice(dfParams, items, time),
+        queryMap = _toMapSlice2.queryMap,
+        zhMapSlice = _toMapSlice2.zhMapSlice;
+
+    option.zhMapSlice = zhMapSlice;
+    return "" + rootUrl + dfTable + "?" + queryMap + "&time=" + time;
+  }
 };
 
 var EuroStatApi = {
@@ -85,9 +114,7 @@ var EuroStatApi = {
     } else if (seriaType === 'MAP') {
       return "" + rootUrl + mapValue;
     } else {
-      //return `${rootUrl}ei_lmhr_m?precision=1&lastTimePeriod=1&s_adj=NSA&time=2016M08`;
       return "" + rootUrl + mapValue + "&time=" + time;
-      //return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
     }
   },
   checkResponse: function checkResponse(json, option) {
@@ -100,7 +127,10 @@ var EuroStatApi = {
           message: MESSAGE_HEADER + error.label + _crDetailMsg(option)
         };
       } else {
-        throw { errCaption: REQUEST_ERROR, message: '' };
+        throw {
+          errCaption: REQUEST_ERROR,
+          message: ''
+        };
       }
     }
     return true;
