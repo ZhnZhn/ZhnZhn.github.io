@@ -102,7 +102,13 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
         dataLow = dataOption.dataLow,
         dataOpen = dataOption.dataOpen;
 
-    this.initBaseArea().add('chart', { spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addZhVolumeConfig(id, dataVolumeColumn, dataVolume).addZhATHConfig(id, dataATH).setMinMax(minClose, maxClose).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
+    this.initBaseArea().add('chart', { spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addMiniVolume({
+      id: id,
+      dColumn: dataVolumeColumn,
+      dVolume: dataVolume
+    }).addMiniATH({
+      id: id, data: dataATH
+    }).setMinMax(minClose, maxClose).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
     return this;
   },
   initBaseCategories: function initBaseCategories() {
@@ -198,13 +204,29 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     }
     return this;
   },
-  addZhVolumeConfig: function addZhVolumeConfig(id, dColumn, dVolume) {
-    this.add('zhVolumeConfig', _ChartConfig2.default.fIndicatorVolumeConfig(id, dColumn, dVolume));
+  addZhMiniConfig: function addZhMiniConfig(config) {
+    var _configs = this.config.zhMiniConfigs;
+    if (_configs) {
+      _configs.push(config);
+    } else {
+      this.config.zhMiniConfigs = [config];
+    }
     return this;
   },
-  addZhATHConfig: function addZhATHConfig(id, data) {
-    this.add('zhATHConfig', _ChartConfig2.default.fIndicatorATHConfig(id, data));
-    return this;
+  addMiniVolume: function addMiniVolume(option) {
+    var dVolume = option.dVolume;
+
+    return dVolume && dVolume.length > 0 ? this.addZhMiniConfig(_ChartConfig2.default.fMiniVolumeConfig(option)) : this;
+  },
+  addMiniATH: function addMiniATH(option) {
+    var data = option.data;
+
+    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig2.default.fMiniATHConfig(option)) : this;
+  },
+  addMiniHL: function addMiniHL(option) {
+    var data = option.data;
+
+    return data && data.length > 0 ? this.addZhMiniConfig(_ChartConfig2.default.fMiniHLConfig(option)) : this;
   },
   addZhPoints: function addZhPoints(data, fn) {
     this.add({

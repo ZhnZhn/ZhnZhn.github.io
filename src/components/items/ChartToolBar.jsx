@@ -55,6 +55,7 @@ class ChartToolbar extends Component {
   render(){
     const {
             style, config={},
+            onMiniChart,
             getChart,
             onAddSma, onRemoveSeries, onAddMfi, onRemoveMfi,
             onAddMomAth,
@@ -64,12 +65,9 @@ class ChartToolbar extends Component {
             onCopy,
             onPasteTo,
             onClickInfo,
-            onClickVolume,
-            onClickATH,
-            onClickHighLow,
             //onClickConfig
           } = this.props
-        , { zhConfig={}, info } = config
+        , { zhConfig={}, info, zhMiniConfigs } = config
         , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
 
     const _btTabIndicator = !isWithoutIndicator ? (
@@ -113,17 +111,15 @@ class ChartToolbar extends Component {
       />
     ) : null;
 
-   const { zhVolumeConfig, zhATHConfig, zhHighLowConfig } = config;
-   const _btTabMini = ( zhVolumeConfig || zhATHConfig || zhHighLowConfig)
-     ? (
+  const _btTabMini = zhMiniConfigs && zhMiniConfigs.length
+      ? (
        <MenuTabItem
          style= {S.TAB_MINI}
          caption="Mini"
        >
          <ModalMenuMini
-           onClickVolume={zhVolumeConfig ? onClickVolume : null}
-           onClickATH={zhATHConfig ? onClickATH : null}
-           onClickHighLow={zhHighLowConfig ? onClickHighLow : null}
+           configs={zhMiniConfigs}
+           onClickItem={onMiniChart}
          />
        </MenuTabItem>
      ) : null;

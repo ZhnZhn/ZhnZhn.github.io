@@ -8,6 +8,8 @@ import {ChartType} from '../constants/Type';
 import Chart from '../charts/Chart';
 import ChartConfig from '../charts/ChartConfig';
 import ChartLegend from '../charts/ChartLegend';
+import ConfigBuilder from '../charts/ConfigBuilder';
+
 
 import {
   fnAddSeriesSma, fnRemoveSeries,
@@ -401,28 +403,36 @@ const fnGetSeries = function(config, json, option){
    _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
    _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
-   Object.assign(config, {
-     valueMoving: AdapterFn.valueMoving(seria),
-     zhFnAddSeriesSma: fnAddSeriesSma,
-     zhFnRemoveSeries: fnRemoveSeries,
-     zhVolumeConfig: dataVolume.length>0
-        ? ChartConfig.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume)
-        : undefined,
-     zhATHConfig: dataATH.length>0
-        ? ChartConfig.fIndicatorATHConfig(chartId, dataATH)
-        : undefined,
-    zhHighLowConfig: dataHighLow.length>0
-        ? ChartConfig.fIndicatorHighLowConfig(chartId, dataHighLow)
-        : undefined
-   })
-
+   config = ConfigBuilder()
+     .init(config)
+     .add({
+       valueMoving: AdapterFn.valueMoving(seria),
+       zhFnAddSeriesSma: fnAddSeriesSma,
+       zhFnRemoveSeries: fnRemoveSeries
+     })
+     .addMiniVolume({
+       id: chartId,
+       dColumn: dataVolumeColumn,
+       dVolume: dataVolume
+     })
+     .addMiniATH({
+       id: chartId,
+       data: dataATH
+     })
+     .addMiniHL({
+       id: chartId,
+       data: dataHighLow
+     })
+     .toConfig();
+   
     if (legendSeries){
       _fnSetLegendSeriesToConfig(legendSeries, config, chartId)
       config.zhConfig.isWithLegend = true
     }
 
    return {
-     config, minPoint, maxPoint, minY,
+     config,
+     minPoint, maxPoint, minY,
      isDrawDeltaExtrems, isNotZoomToMinMax
    };
 }

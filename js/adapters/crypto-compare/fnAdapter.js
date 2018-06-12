@@ -15,7 +15,8 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var valueMoving = _AdapterFn2.default.valueMoving,
-    crZhFn = _AdapterFn2.default.crZhFn;
+    crZhFn = _AdapterFn2.default.crZhFn,
+    volumeColumnPoint = _AdapterFn2.default.volumeColumnPoint;
 
 
 var _crZhConfig = function _crZhConfig(option) {
@@ -41,14 +42,71 @@ var _crInfo = function _crInfo(_ref) {
   };
 };
 
+var _isNumber = function _isNumber(v) {
+  return typeof v === 'number';
+};
+
+var _isHLOC = function _isHLOC(p) {
+  return _isNumber(p.open) && _isNumber(p.high) && _isNumber(p.low) && _isNumber(p.close);
+};
+
+var _addPointTo = function _addPointTo(arr, d, value) {
+  if (_isNumber(value)) {
+    arr.push({ x: d, y: value });
+  }
+};
+var _addColumnPointTo = function _addColumnPointTo(arr, d, p, volume) {
+  if (_isNumber(volume)) {
+    arr.push(volumeColumnPoint({
+      date: d,
+      open: p.open,
+      close: p.close,
+      volume: volume,
+      option: {
+        _high: p.high,
+        _low: p.low
+      }
+    }));
+  }
+};
+var _addHLPointTo = function _addHLPointTo(arr, d, p) {
+  arr.push({
+    x: d,
+    high: parseFloat((p.high - p.close).toFixed(2)),
+    low: parseFloat((p.low - p.close).toFixed(2)),
+    open: p.open,
+    dayHigh: p.high,
+    dayLow: p.low,
+    close: p.close
+  });
+};
+
 var fnAdapter = {
   crData: function crData(json) {
-    return json.Data.map(function (p) {
-      return {
-        x: p.time * 1000,
-        y: p.close
-      };
+    var data = [],
+        dVolume = [],
+        dColumn = [],
+        dToVolume = [],
+        dHL = [];
+    json.Data.forEach(function (p) {
+      if (_isNumber(p.time)) {
+        var _date = p.time * 1000;
+        _addPointTo(data, _date, p.close);
+        _addPointTo(dVolume, _date, p.volumefrom);
+        _addPointTo(dToVolume, _date, p.volumeto);
+
+        if (_isHLOC(p)) {
+          _addColumnPointTo(dColumn, _date, p, p.volumefrom);
+          _addHLPointTo(dHL, _date, p);
+        }
+      }
     });
+    return {
+      data: data,
+      dVolume: dVolume, dColumn: dColumn,
+      dToVolume: dToVolume,
+      dHL: dHL
+    };
   },
 
   crConfigOption: function crConfigOption(_ref2) {
@@ -63,4 +121,4 @@ var fnAdapter = {
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\crypto-compare\fnAdapter.js.map
+//# sourceMappingURL=fnAdapter.js.map

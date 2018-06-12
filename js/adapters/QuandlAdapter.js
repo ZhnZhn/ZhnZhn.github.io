@@ -34,6 +34,10 @@ var _ChartLegend = require('../charts/ChartLegend');
 
 var _ChartLegend2 = _interopRequireDefault(_ChartLegend);
 
+var _ConfigBuilder = require('../charts/ConfigBuilder');
+
+var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
+
 var _IndicatorSma = require('./IndicatorSma');
 
 var _QuandlFn = require('./QuandlFn2');
@@ -497,14 +501,21 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnAddSeriesExDivident(config, dataExDividend, chartId, minY);
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
-  Object.assign(config, {
+  config = (0, _ConfigBuilder2.default)().init(config).add({
     valueMoving: _AdapterFn2.default.valueMoving(seria),
     zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-    zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries,
-    zhVolumeConfig: dataVolume.length > 0 ? _ChartConfig2.default.fIndicatorVolumeConfig(chartId, dataVolumeColumn, dataVolume) : undefined,
-    zhATHConfig: dataATH.length > 0 ? _ChartConfig2.default.fIndicatorATHConfig(chartId, dataATH) : undefined,
-    zhHighLowConfig: dataHighLow.length > 0 ? _ChartConfig2.default.fIndicatorHighLowConfig(chartId, dataHighLow) : undefined
-  });
+    zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+  }).addMiniVolume({
+    id: chartId,
+    dColumn: dataVolumeColumn,
+    dVolume: dataVolume
+  }).addMiniATH({
+    id: chartId,
+    data: dataATH
+  }).addMiniHL({
+    id: chartId,
+    data: dataHighLow
+  }).toConfig();
 
   if (legendSeries) {
     _fnSetLegendSeriesToConfig(legendSeries, config, chartId);
@@ -512,7 +523,8 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   }
 
   return {
-    config: config, minPoint: minPoint, maxPoint: maxPoint, minY: minY,
+    config: config,
+    minPoint: minPoint, maxPoint: maxPoint, minY: minY,
     isDrawDeltaExtrems: isDrawDeltaExtrems, isNotZoomToMinMax: isNotZoomToMinMax
   };
 };

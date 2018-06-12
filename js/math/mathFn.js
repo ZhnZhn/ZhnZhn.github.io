@@ -14,6 +14,8 @@ var fnEcho = function fnEcho(value) {
   return value;
 };
 
+var MAX_TO_ROUND = '1000000';
+
 var mathFn = {
 
   calcPercent: function calcPercent(_ref) {
@@ -48,14 +50,15 @@ var mathFn = {
       _direction = Direction.EQUAL;
     }
 
-    var _bDeltaAbs = _bDelta.abs().round(4);
-
     var _bPercent = mathFn.calcPercent({ bValue: _bDelta, bTotal: bPrevValue });
 
     var _bNowValue = (0, _big2.default)(bNowValue).round(4);
-    if (_bNowValue.gt('1000000')) {
+    if (_bNowValue.gt(MAX_TO_ROUND)) {
       _bNowValue = bNowValue.toFixed(0);
-      _bDelta = _bDelta.toFixed(0);
+    }
+    var _bDeltaAbs = _bDelta.abs().round(4);
+    if (_bDeltaAbs.gt(MAX_TO_ROUND)) {
+      _bDeltaAbs = _bDelta.abs().round(0);
     }
 
     return {

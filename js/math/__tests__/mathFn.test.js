@@ -85,7 +85,7 @@ describe('crValueMoving', function () {
     expect(r.delta).toBe('100000000');
     expect(r.direction).toBe(_Type.Direction.UP);
   });
-  test('should to fixed to radix 0 value in case value bigger 1 000 000', function () {
+  test('should to fixed to radix 0 value and round delta in case value or delta bigger 1 000 000', function () {
     var r = fn(_fValueMoving('200 000 000.02', '100 000 000.01'));
 
     expect(r.value).toBe('200000000');

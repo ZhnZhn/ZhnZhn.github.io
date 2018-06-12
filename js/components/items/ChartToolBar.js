@@ -106,6 +106,7 @@ var ChartToolbar = function (_Component) {
           style = _props.style,
           _props$config2 = _props.config,
           config = _props$config2 === undefined ? {} : _props$config2,
+          onMiniChart = _props.onMiniChart,
           getChart = _props.getChart,
           onAddSma = _props.onAddSma,
           onRemoveSeries = _props.onRemoveSeries,
@@ -118,12 +119,10 @@ var ChartToolbar = function (_Component) {
           onCopy = _props.onCopy,
           onPasteTo = _props.onPasteTo,
           onClickInfo = _props.onClickInfo,
-          onClickVolume = _props.onClickVolume,
-          onClickATH = _props.onClickATH,
-          onClickHighLow = _props.onClickHighLow,
           _config$zhConfig = config.zhConfig,
           zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
           info = config.info,
+          zhMiniConfigs = config.zhMiniConfigs,
           isWithoutIndicator = zhConfig.isWithoutIndicator,
           isWithLegend = zhConfig.isWithLegend,
           isWithoutAdd = zhConfig.isWithoutAdd;
@@ -164,20 +163,15 @@ var ChartToolbar = function (_Component) {
         onClick: onClickInfo
       }) : null;
 
-      var zhVolumeConfig = config.zhVolumeConfig,
-          zhATHConfig = config.zhATHConfig,
-          zhHighLowConfig = config.zhHighLowConfig;
-
-      var _btTabMini = zhVolumeConfig || zhATHConfig || zhHighLowConfig ? _react2.default.createElement(
+      var _btTabMini = zhMiniConfigs && zhMiniConfigs.length ? _react2.default.createElement(
         _MenuTabItem2.default,
         {
           style: S.TAB_MINI,
           caption: 'Mini'
         },
         _react2.default.createElement(_ModalMenuMini2.default, {
-          onClickVolume: zhVolumeConfig ? onClickVolume : null,
-          onClickATH: zhATHConfig ? onClickATH : null,
-          onClickHighLow: zhHighLowConfig ? onClickHighLow : null
+          configs: zhMiniConfigs,
+          onClickItem: onMiniChart
         })
       ) : null;
 

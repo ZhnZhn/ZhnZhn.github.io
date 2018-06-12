@@ -24,6 +24,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp2;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -34,19 +36,19 @@ var _highcharts2 = _interopRequireDefault(_highcharts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var STYLE = {
-  ROOT_DIV_SHOW: {
+var S = {
+  SHOW: {
     position: 'relative',
     display: 'block',
     zIndex: 1
   },
-  ROOT_DIV_HIDE: {
+  HIDE: {
     position: 'relative',
     display: 'none'
   }
 };
 
-var HighchartWrapper = function (_Component) {
+var HighchartWrapper = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(HighchartWrapper, _Component);
 
   function HighchartWrapper() {
@@ -60,9 +62,7 @@ var HighchartWrapper = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      isShowAbsComp: true
-    }, _this.renderChart = function (config) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.renderChart = function (config) {
       if (!config) {
         throw new Error('Config must be specified for the ZhHighchart');
       }
@@ -115,10 +115,9 @@ var HighchartWrapper = function (_Component) {
       var _props2 = this.props,
           isShow = _props2.isShow,
           rootStyle = _props2.rootStyle,
+          isShowAbs = _props2.isShowAbs,
           absComp = _props2.absComp,
-          isShowAbsComp = this.state.isShowAbsComp,
-          _absComp = isShowAbsComp ? absComp : null,
-          _rootDivStyle = isShow ? STYLE.ROOT_DIV_SHOW : STYLE.ROOT_DIV_HIDE;
+          _rootDivStyle = isShow ? S.SHOW : S.HIDE;
 
       return _react2.default.createElement(
         'div',
@@ -126,7 +125,7 @@ var HighchartWrapper = function (_Component) {
           style: (0, _extends3.default)({}, rootStyle, _rootDivStyle)
         },
         _react2.default.createElement('div', { ref: this._refChartEl }),
-        _absComp
+        isShowAbs && absComp
       );
     }
   }, {
@@ -137,18 +136,10 @@ var HighchartWrapper = function (_Component) {
       }
       return this.chart;
     }
-  }, {
-    key: 'toggleAbsComp',
-    value: function toggleAbsComp() {
-      this.setState(function (prevState) {
-        return {
-          isShowAbsComp: !prevState.isShowAbsComp
-        };
-      });
-    }
   }]);
   return HighchartWrapper;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  isShowAbs: true
+}, _temp2);
 exports.default = HighchartWrapper;
 //# sourceMappingURL=HighchartWrapper.js.map

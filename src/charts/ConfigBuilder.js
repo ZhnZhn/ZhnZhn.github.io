@@ -70,8 +70,14 @@ ConfigBuilder.prototype = {
     this.initBaseArea()
       .add('chart', { spacingTop: 25 })
       .addTooltip(Tooltip.fnBasePointFormatter)
-      .addZhVolumeConfig(id, dataVolumeColumn, dataVolume)
-      .addZhATHConfig(id, dataATH)
+      .addMiniVolume({
+        id,
+        dColumn: dataVolumeColumn,
+        dVolume: dataVolume
+      })
+      .addMiniATH({
+        id, data: dataATH
+      })
       .setMinMax(minClose, maxClose)
       .setStockSerias(id, data, dataHigh, dataLow, dataOpen)
     return this;
@@ -172,18 +178,40 @@ ConfigBuilder.prototype = {
     return this;
   },
 
-  addZhVolumeConfig(id, dColumn, dVolume){
-    this.add('zhVolumeConfig',
-       ChartConfig.fIndicatorVolumeConfig(id, dColumn, dVolume)
-    )
+  addZhMiniConfig(config){
+    const _configs = this.config.zhMiniConfigs;
+    if (_configs){
+      _configs.push(config)
+    } else {
+      this.config.zhMiniConfigs = [config]
+    }
     return this;
   },
-  addZhATHConfig(id, data){
-    this.add('zhATHConfig',
-       ChartConfig.fIndicatorATHConfig(id, data)
-    )
-    return this;
+  addMiniVolume(option){
+    const { dVolume } = option;
+    return dVolume && dVolume.length > 0
+      ? this.addZhMiniConfig(
+          ChartConfig.fMiniVolumeConfig(option)
+        )
+      :this;
   },
+  addMiniATH(option){
+    const { data } = option;
+    return data && data.length>0
+      ? this.addZhMiniConfig(
+          ChartConfig.fMiniATHConfig(option)
+        )
+      : this;
+  },
+  addMiniHL(option){
+    const { data } = option;
+    return data && data.length>0
+     ? this.addZhMiniConfig(
+         ChartConfig.fMiniHLConfig(option)
+       )
+     : this;
+  },
+  
   addZhPoints(data, fn){
     this.add({
       zhPoints: data,

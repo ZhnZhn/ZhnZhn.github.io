@@ -2,6 +2,8 @@ import Big from 'big.js'
 
 const fnEcho = value => value;
 
+const MAX_TO_ROUND = '1000000';
+
 const mathFn = {
 
   calcPercent: ({ bValue=Big('0.0'), bTotal=Big('0.0') }) => {
@@ -31,14 +33,15 @@ const mathFn = {
       _direction = Direction.EQUAL;
     }
 
-    const _bDeltaAbs = _bDelta.abs().round(4);
-
     const _bPercent = mathFn.calcPercent({ bValue:_bDelta, bTotal: bPrevValue });
 
     let _bNowValue = Big(bNowValue).round(4);
-    if ( _bNowValue.gt('1000000') ){
+    if ( _bNowValue.gt(MAX_TO_ROUND) ){
       _bNowValue = bNowValue.toFixed(0);
-      _bDelta = _bDelta.toFixed(0);
+    }
+    let _bDeltaAbs = _bDelta.abs().round(4);
+    if (_bDeltaAbs.gt(MAX_TO_ROUND)) {
+      _bDeltaAbs = _bDelta.abs().round(0)
     }
 
     return {

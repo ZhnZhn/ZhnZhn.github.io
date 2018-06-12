@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import Highcharts from 'highcharts';
 
-const STYLE = {
-  ROOT_DIV_SHOW : {
-    position : 'relative',
-    display : 'block',
-    zIndex : 1
+const S = {
+  SHOW: {
+    position: 'relative',
+    display: 'block',
+    zIndex: 1
   },
-  ROOT_DIV_HIDE : {
-    position : 'relative',
-    display : 'none'
+  HIDE: {
+    position: 'relative',
+    display: 'none'
   }
 };
 
 class HighchartWrapper extends Component {
-  state = {
-    isShowAbsComp: true
+  static defaultProps = {
+    isShowAbs: true
   }
-  
   componentDidMount(){
     const { config, onLoaded } = this.props;
     this.renderChart(config);
@@ -61,20 +60,19 @@ class HighchartWrapper extends Component {
   _refChartEl = n => this.chartEl = n
 
   render() {
-    const { isShow, rootStyle, absComp } = this.props
-        , { isShowAbsComp } = this.state
-        , _absComp = isShowAbsComp
-             ? absComp
-             : null
+    const {
+            isShow, rootStyle,
+            isShowAbs, absComp
+          } = this.props
         , _rootDivStyle = isShow
-             ? STYLE.ROOT_DIV_SHOW
-             : STYLE.ROOT_DIV_HIDE;
+             ? S.SHOW
+             : S.HIDE;
     return (
        <div
          style={{...rootStyle, ..._rootDivStyle}}
        >
           <div ref={this._refChartEl} />
-          {_absComp}
+          {isShowAbs && absComp}
         </div>
      );
   }
@@ -84,12 +82,6 @@ class HighchartWrapper extends Component {
       throw new Error('getChart() should not called before the ZhHighchart component is mounted');
     }
     return this.chart;
-  }
-
-  toggleAbsComp() {
-    this.setState(prevState => ({
-      isShowAbsComp: !prevState.isShowAbsComp
-    }))
   }
 }
 

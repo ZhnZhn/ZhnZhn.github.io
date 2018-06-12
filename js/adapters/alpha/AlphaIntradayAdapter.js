@@ -131,12 +131,11 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
   _ChartConfig2.default.setStockSerias(config, _data, _dataHigh, _dataLow, _dataOpen, chartId);
   _ChartConfig2.default.setMinMax(config, _minClose, _maxClose);
 
-  Object.assign(config, {
-    zhVolumeConfig: _ChartConfig2.default.fIndicatorVolumeConfig(option.value, _dataVolumeColumn, _dataVolume)
-  });
-  config.zhVolumeConfig.series[1].tooltip = _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatterT);
-
-  return _data;
+  return {
+    data: _data,
+    dVolume: _dataVolume,
+    dColumn: _dataVolumeColumn
+  };
 };
 
 var _toDataDaily = function _toDataDaily(data) {
@@ -151,14 +150,21 @@ var AlphaIntradayAdapter = {
         value = option.value,
         interval = option.interval,
         _chartId = value,
-        _data = _crSeriaData(json, option, baseConfig, _chartId),
-        _dataDaily = _toDataDaily(_data);
+        _crSeriaData2 = _crSeriaData(json, option, baseConfig, _chartId),
+        data = _crSeriaData2.data,
+        dColumn = _crSeriaData2.dColumn,
+        dVolume = _crSeriaData2.dVolume,
+        _dataDaily = _toDataDaily(data);
 
 
     var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(_Tooltip2.default.fnBasePointFormatterT).add((0, _extends3.default)({}, crIntradayConfigOption({
       id: _chartId,
       data: _dataDaily
-    }))).toConfig();
+    }))).addMiniVolume({
+      id: _chartId,
+      dVolume: dVolume, dColumn: dColumn,
+      tooltipColumn: _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatterT)
+    }).toConfig();
 
     return {
       config: config,
@@ -172,4 +178,4 @@ var AlphaIntradayAdapter = {
 };
 
 exports.default = AlphaIntradayAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\alpha\AlphaIntradayAdapter.js.map
+//# sourceMappingURL=AlphaIntradayAdapter.js.map

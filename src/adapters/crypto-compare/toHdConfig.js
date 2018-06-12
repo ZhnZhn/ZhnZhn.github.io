@@ -15,22 +15,46 @@ const _crSubtitle = (json, value) => {
   return `${value}/${conversionSymbol || DF_PAIR} ${type}`;
 };
 
+const _crBtTitleTo = (json) => {
+  const { ConversionType={} } = json
+      , { conversionSymbol } = ConversionType;
+  return `${conversionSymbol || DF_PAIR}`;
+}
+
 const toHdConfig = {
   toConfig: (json, option) => {
-    const data = crData(json)
+    const {
+           data,
+           dVolume, dColumn,
+           dToVolume,
+           dHL
+         } = crData(json)
         , seria = Builder()
             .initSpline({ data })
             .toConfig()
         , { value='', title } = option
         , _title = _crTitle(title)
         , _subtitle = _crSubtitle(json, value)
+        , _btTitleTo = _crBtTitleTo(json)
         , config = Builder()
             .initBaseArea2()
             .addCaption(_title, _subtitle)
             .addSeries(seria)
             .add({
                ...crConfigOption({ option, data })
+            })            
+            .addMiniVolume({
+              btTitle: 'Volume ' + value,
+              title: value,
+              dColumn, dVolume
             })
+            .addMiniVolume({
+              btTitle: 'Volume ' + _btTitleTo,
+              title: _btTitleTo,
+              dVolume: dToVolume,
+              dColumn: []
+            })
+            .addMiniHL({ data: dHL })
             .toConfig();
     return { config };
   },

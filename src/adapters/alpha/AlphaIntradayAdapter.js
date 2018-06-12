@@ -99,15 +99,13 @@ const _crSeriaData = (json, option, config, chartId) => {
     config, _data, _dataHigh, _dataLow, _dataOpen, chartId
   )
   ChartConfig.setMinMax(config, _minClose, _maxClose)
+  
+  return {
+    data: _data,
+    dVolume: _dataVolume,
+    dColumn: _dataVolumeColumn
+  };
 
-  Object.assign(config, {
-    zhVolumeConfig: ChartConfig.fIndicatorVolumeConfig(
-      option.value, _dataVolumeColumn, _dataVolume
-    )
-  })
-  config.zhVolumeConfig.series[1].tooltip = Chart.fTooltip(Tooltip.fnVolumePointFormatterT)
-
-  return _data;
 }
 
 const _toDataDaily = (data) => {
@@ -119,8 +117,11 @@ const AlphaIntradayAdapter = {
     const baseConfig = ChartConfig.fBaseAreaConfig()
         , { value, interval } = option
         , _chartId = value
-        , _data = _crSeriaData(json, option, baseConfig, _chartId )
-        , _dataDaily = _toDataDaily(_data);
+        , {
+            data,
+            dColumn, dVolume
+          } = _crSeriaData(json, option, baseConfig, _chartId )
+        , _dataDaily = _toDataDaily(data);
 
     const config = ConfigBuilder()
       .init(baseConfig)
@@ -133,6 +134,12 @@ const AlphaIntradayAdapter = {
           data: _dataDaily
         })
       })
+      .addMiniVolume({
+        id: _chartId,
+        dVolume, dColumn,
+        tooltipColumn: Chart.fTooltip(Tooltip.fnVolumePointFormatterT)
+      })
+
       .toConfig();
 
     return {

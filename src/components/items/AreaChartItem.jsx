@@ -6,6 +6,7 @@ import safeGet from '../../utils/safeGet'
 import crModelMore from './AreaMore'
 import Header from './Header';
 import ChartToolBar from './ChartToolBar';
+import MiniCharts from './MiniCharts';
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
 import Legend from '../zhn/Legend';
@@ -70,13 +71,14 @@ class AreaChartItem extends Component {
     })
 
     this.is2H = false
-    this._fnOnCheck = this._handlerCheckBox.bind(this, true)
-    this._fnOnUnCheck = this._handlerCheckBox.bind(this, false)
+    this._fnOnCheck = this._handleCheckBox.bind(this, true)
+    this._fnOnUnCheck = this._handleCheckBox.bind(this, false)
 
     const { config={}, caption='' } = props
         , { zhConfig={} } = config
         , { dataSource='', itemCaption, id } = zhConfig
-        , _itemCaption = (itemCaption) ? itemCaption : caption;
+        , _itemCaption = itemCaption
+              ? itemCaption : caption;
 
     this._chartId = id
     this._crMomAthConfig = config.zhFnMomAthConfig
@@ -89,17 +91,15 @@ class AreaChartItem extends Component {
     this.state = {
       isOpen: true,
       isShowToolbar: true,
-      isShowChart : true,
-      isShowLegend : false,
-      isShowInfo : false,
-
-      isInitVolume : false, isShowVolume : false,
-      isATHVolume : false, isShowATH : false,
-      isInitHighLow : false, isShowHighLow : false,
+      isShowChart: true,
+      isShowLegend: false,
+      isShowInfo: false,
 
       itemCaption: _itemCaption,
-      chartsDescription : [],
-      mfiConfigs : []
+      mfiConfigs: [],
+
+      isShowAbs: true,
+      miniTitles: []
     }
   }
 
@@ -123,10 +123,10 @@ class AreaChartItem extends Component {
     return this.mainChart;
   }
 
-  _handlerLoadedMetricChart = (metricChart) => {
+  _handleLoadedMetricChart = (metricChart) => {
      this.mainChart.options.zhDetailCharts.push(metricChart);
   }
-  _handlerWillUnLoadedChart = (objChart) => {
+  _handleWillUnLoadedChart = (objChart) => {
     const charts = safeGet(this.mainChart, 'options.zhDetailCharts')
     if (Array.isArray(charts)){
       this.mainChart.options.zhDetailCharts = charts.filter((chart) => {
@@ -135,22 +135,22 @@ class AreaChartItem extends Component {
     }
   }
 
-  _handlerToggleOpen = () => {
-    if (this.state.isOpen){
-      this.setState({ isOpen : false })
-    } else {
-      this.setState({ isOpen : true })
-    }
+  _handleToggleOpen = () => {
+    this.setState(prevState =>({
+      isOpen: !prevState.isOpen
+    }))
   }
 
-  _handlerClickLegend = () => {
-    this.setState({ isShowLegend : !this.state.isShowLegend })
+  _handleClickLegend = () => {
+    this.setState(prevState =>({
+      isShowLegend: !prevState.isShowLegend
+    }))
   }
-  _handlerToggleSeria = (item) => {
+  _handleToggleSeria = (item) => {
     this.mainChart.options.zhToggleSeria(this.mainChart, item)
   }
 
-  _handlerClick2H = () => {
+  _handleClick2H = () => {
     const height = (this.is2H)
            ? this.mainChart.options.chart.height/2
            : this.mainChart.options.chart.height*2;
@@ -158,7 +158,7 @@ class AreaChartItem extends Component {
     this.is2H = !this.is2H;
   }
 
-  _handlerAddToWatch = () => {
+  _handleAddToWatch = () => {
     const { caption, config, onAddToWatch } = this.props;
     onAddToWatch( {caption, config} )
   }
@@ -174,7 +174,7 @@ class AreaChartItem extends Component {
     })
   }
 
-  _handlerClickInfo = () => {
+  _handleClickInfo = () => {
     this.setState({
       isShowInfo: true,
       isShowChart: false,
@@ -182,85 +182,44 @@ class AreaChartItem extends Component {
     });
   }
 
-  _handlerClickVolume = () => {
-
-    const { ChartFn } = this.props
-        , {
-            isInitVolume, isShowVolume,
-            chartsDescription
-          } = this.state;
-
-    this.mainChart.update(
-      ChartFn.arMetricOption(this.mainChart, isShowVolume)
-    )
-    this.chartComp.toggleAbsComp()
-
-    if (isInitVolume){
-      this.setState({ isShowVolume: !isShowVolume })
-    } else {
-      chartsDescription.push({ type: 'Volume' })
-      this.setState({
-        chartsDescription,
-        isShowVolume: true, isInitVolume: true
-      })
-    }
-  }
-  _handlerClickATH = () => {
-    const { isInitATH, isShowATH } = this.state;
-    if (isInitATH){
-      this.setState({ isShowATH: !isShowATH })
-    } else {
-      this.state.chartsDescription.push({ type: 'ATH' })
-      this.setState({
-        chartsDescription : this.state.chartsDescription,
-        isShowATH: true, isInitATH: true
-      })
-    }
-  }
-  _handlerClickHighLow = () => {
-    const {isInitHighLow, isShowHighLow} = this.state;
-    if (isInitHighLow){
-      this.setState({isShowHighLow: !isShowHighLow});
-    } else {
-      this.state.chartsDescription.push({type: 'HighLow'});
-      this.setState({
-        chartsDescription : this.state.chartsDescription,
-        isShowHighLow: true, isInitHighLow: true
-      });
-    }
+  _handleClickChart = () => {
+    this.setState({
+       isShowChart: true,
+       isShowInfo: false
+     });
   }
 
-
-  _handlerClickChart = () => {
-    this.setState({ isShowChart: true, isShowInfo: false });
-  }
-
-  _handlerCheckBox = (isCheck, checkBox) => {
+  _handleCheckBox = (isCheck, checkBox) => {
     this.props.onSetActive(isCheck, checkBox, this.mainChart)
   }
 
-  _handlerAddSma = (option) => {
+  _handleAddSma = (option) => {
     option.chart = this.mainChart
     return this.mainChart.options.zhFnAddSeriesSma(option);
   }
   _handleRemoveSeries = (id) => {
     return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);
   }
-  _handlerAddMfi = (period, id) => {
-    const config = this.mainChart.options.zhFnGetMfiConfig(this.mainChart, period, id);
-    this.state.mfiConfigs.push({config, id})
-    this.setState({ mfiConfigs: this.state.mfiConfigs })
-  }
-  _handlerRemoveMfi = (id) => {
-    this.state.mfiConfigs = this.state.mfiConfigs.filter((objConfig) => {
-      return objConfig.id !== id;
+  _handleAddMfi = (period, id) => {
+    this.setState(prevState => {
+      const config = this.mainChart.options.zhFnGetMfiConfig(this.mainChart, period, id);
+      prevState.mfiConfigs.push({ config, id })
+      return prevState;
     })
-    this.setState({mfiConfigs: this.state.mfiConfigs})
+  }
+  _handleRemoveMfi = (id) => {
+    this.setState(prevState => {
+      prevState.mfiConfigs = prevState.mfiConfigs
+         .filter(c => c.id !== id)
+      return prevState;
+    })
   }
   _handleAddMomAth = () => {
-     const config = this._crMomAthConfig(this.mainChart, this._chartId);
-     this.state.mfiConfigs.push({config, id: 'MOM_ATH'})
-     this.setState({ mfiConfigs: this.state.mfiConfigs })
+     this.setState(prevState => {
+       const config = this._crMomAthConfig(this.mainChart, this._chartId);
+       prevState.mfiConfigs.push({ config, id: 'MOM_ATH' })
+       return prevState;
+     })
   }
 
   _handleClickConfig = () => {
@@ -284,6 +243,26 @@ class AreaChartItem extends Component {
     }))
   }
 
+
+ _handleMiniChart = (btTitle) => {
+   const { ChartFn } = this.props;
+   this.setState(prevState => {
+     const _titles = prevState.miniTitles
+         , _t = _titles.find(t => t === btTitle);
+     prevState.miniTitles = _t
+       ? _titles.filter(t => t !== btTitle)
+       : [btTitle, ..._titles]
+     prevState.isShowAbs = prevState.miniTitles.length === 0
+       ? true : false;
+     this.mainChart.update(
+       ChartFn.arMetricOption(
+         this.mainChart, prevState.isShowAbs
+       )
+     )
+     return prevState;
+   })
+ }
+
  _createChartToolBar = (config) => {
    const { isShowToolbar } = this.state;
    return (
@@ -291,19 +270,17 @@ class AreaChartItem extends Component {
            <ChartToolBar
              style={styles.tabDiv}
              config={config}
+             onMiniChart={this._handleMiniChart}
              getChart={this.getMainChart}
-             onAddSma={this._handlerAddSma}
+             onAddSma={this._handleAddSma}
              onRemoveSeries={this._handleRemoveSeries}
-             onAddMfi={this._handlerAddMfi}
-             onRemoveMfi={this._handlerRemoveMfi}
+             onAddMfi={this._handleAddMfi}
+             onRemoveMfi={this._handleRemoveMfi}
              onAddMomAth={this._handleAddMomAth}
-             onClickLegend={this._handlerClickLegend}
-             onClick2H={this._handlerClick2H}
-             onAddToWatch={this._handlerAddToWatch}
-             onClickInfo={this._handlerClickInfo}
-             onClickVolume={this._handlerClickVolume}
-             onClickATH={this._handlerClickATH}
-             onClickHighLow={this._handlerClickHighLow}
+             onClickLegend={this._handleClickLegend}
+             onClick2H={this._handleClick2H}
+             onAddToWatch={this._handleAddToWatch}
+             onClickInfo={this._handleClickInfo}
              onClickConfig={this._handleClickConfig}
              onCopy={this._handleCopy}
              onPasteTo={this._handlePasteTo}
@@ -315,46 +292,17 @@ class AreaChartItem extends Component {
   _renderLegend = (config={}) => {
     const { isShowLegend } = this.state
         , { zhConfig={} } = config
-        , { isWithLegend, legend } = zhConfig
+        , { isWithLegend, legend } = zhConfig;
     const _compLegend = isWithLegend ? (
       <ShowHide isShow={isShowLegend}>
         <Legend
            legend={legend}
-           onClickItem={this._handlerToggleSeria}
+           onClickItem={this._handleToggleSeria}
         />
       </ShowHide>
-    ) : undefined
+    ) : null;
 
     return _compLegend;
-  }
-
-  _renderMetricCharts = () => {
-    const { chartsDescription } = this.state;
-
-    const _metricCharts = chartsDescription.map((descr, index) => {
-      const { type } = descr
-          , _isShow = this.state['isShow' + type]
-          , _ref = 'chart' + type
-          , _config = this.props.config['zh' + type + 'Config'];
-
-      return (
-        <ShowHide isShow={_isShow} key={index}>
-          <HighchartWrapper
-              ref={_ref}
-              isShow={true}
-              config={_config}
-              absComp={this._dataSourceEl}
-              onLoaded={this._handlerLoadedMetricChart}
-          />
-        </ShowHide>
-      );
-    })
-
-    return (
-      <div>
-        {_metricCharts}
-      </div>
-    );
   }
 
   _renderIndicatorCharts = (arrConfigs) => {
@@ -365,8 +313,8 @@ class AreaChartItem extends Component {
           <HighchartWrapper
               isShow={true}
               config={config}
-              onLoaded={this._handlerLoadedMetricChart}
-              onWillUnLoaded={this._handlerWillUnLoadedChart}
+              onLoaded={this._handleLoadedMetricChart}
+              onWillUnLoaded={this._handleWillUnLoadedChart}
           />
         </ShowHide>
       );
@@ -385,12 +333,14 @@ class AreaChartItem extends Component {
             chartType, caption, config={},
             onCloseItem, isAdminMode
           } = this.props
-        , { zhConfig={} } = config
+        , { zhConfig={}, zhMiniConfigs } = config
         , { itemTime } = zhConfig
         , {
             isOpen, isShowChart, isShowInfo,
             itemCaption,
-            mfiConfigs
+            mfiConfigs,
+            isShowAbs,
+            miniTitles
         } = this.state;
 
     return (
@@ -404,7 +354,7 @@ class AreaChartItem extends Component {
             itemCaption={itemCaption}
             itemTitle={caption}
             itemTime={itemTime}
-            onToggle={this._handlerToggleOpen}
+            onToggle={this._handleToggleOpen}
             valueMoving={config.valueMoving}
             onClose={onCloseItem}
             isAdminMode={isAdminMode}
@@ -417,17 +367,25 @@ class AreaChartItem extends Component {
               isShow={isShowChart}
               rootStyle={styles.wrapper}
               config={config}
+              isShowAbs={isShowAbs}
               absComp={this._dataSourceEl}
            />
            <PanelDataInfo
               isShow={isShowInfo}
               info={config.info}
               zhInfo={config.zhConfig}
-              onClickChart={this._handlerClickChart}
+              onClickChart={this._handleClickChart}
            />
           {this._renderLegend(config)}
           {this._renderIndicatorCharts(mfiConfigs)}
-          {this._renderMetricCharts()}
+
+          <MiniCharts
+            titles={miniTitles}
+            configs={zhMiniConfigs}
+            absComp={this._dataSourceEl}
+            onLoaded={this._handleLoadedMetricChart}
+            onWillUnLoaded={this._handleWillUnLoadedChart}
+          />
         </ShowHide>
       </div>
     )

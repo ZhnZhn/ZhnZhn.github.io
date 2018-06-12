@@ -22,12 +22,22 @@ var _ModalMenu2 = _interopRequireDefault(_ModalMenu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _renderItems = function _renderItems(configs, onClickItem) {
+  return configs.map(function (c) {
+    var btTitle = c.btTitle;
+
+    return _react2.default.createElement(_SubMenuItem2.default, {
+      caption: btTitle,
+      onClick: onClickItem.bind(null, btTitle)
+    });
+  });
+};
+
 var ModalMenuMini = function ModalMenuMini(_ref) {
   var isShow = _ref.isShow,
       onClose = _ref.onClose,
-      onClickVolume = _ref.onClickVolume,
-      onClickATH = _ref.onClickATH,
-      onClickHighLow = _ref.onClickHighLow;
+      configs = _ref.configs,
+      onClickItem = _ref.onClickItem;
   return _react2.default.createElement(
     _ModalPopup2.default,
     {
@@ -38,18 +48,7 @@ var ModalMenuMini = function ModalMenuMini(_ref) {
     _react2.default.createElement(
       'div',
       { style: _ModalMenu2.default.PANE },
-      _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'Volume',
-        onClick: onClickVolume
-      }),
-      _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'ATH',
-        onClick: onClickATH
-      }),
-      _react2.default.createElement(_SubMenuItem2.default, {
-        caption: 'Daily HighLow',
-        onClick: onClickHighLow
-      })
+      configs && _renderItems(configs, onClickItem)
     )
   );
 };

@@ -128,10 +128,21 @@ var WithIndicatorConfig = {
     });
     return config;
   },
-  fIndicatorVolumeConfig: function fIndicatorVolumeConfig(chartId, dataColumn, data) {
+  fMiniVolumeConfig: function fMiniVolumeConfig(_ref) {
+    var _ref$btTitle = _ref.btTitle,
+        btTitle = _ref$btTitle === undefined ? 'Volume' : _ref$btTitle,
+        _ref$id = _ref.id,
+        id = _ref$id === undefined ? 'id' : _ref$id,
+        _ref$dColumn = _ref.dColumn,
+        dColumn = _ref$dColumn === undefined ? [] : _ref$dColumn,
+        dVolume = _ref.dVolume,
+        _ref$title = _ref.title,
+        title = _ref$title === undefined ? '' : _ref$title,
+        tooltipColumn = _ref.tooltipColumn;
+
     var config = this.fBaseIndicatorConfig();
     Object.assign(config, {
-      title: _Chart2.default.fTitleIndicator('Volume:'),
+      title: _Chart2.default.fTitleIndicator('Volume: ' + title),
       legend: _legendVolume
     });
     _configCrossLabel(config.chart);
@@ -140,40 +151,49 @@ var WithIndicatorConfig = {
       tickPixelInterval: 40
     });
     Object.assign(config.series[0], {
-      zhSeriaId: chartId + '_VolumeArea',
+      zhSeriaId: id + '_VolumeArea',
       zhValueText: "Volume",
-      data: data,
+      data: dVolume,
       name: "Spline",
       point: _Chart2.default.fEventsMouseOver(_handleMouseOver2.default)
     });
-    config.series.push({
-      zhSeriaId: chartId + '_VolumeColumn',
-      zhValueText: "Volume",
-      turboThreshold: 20000,
-      type: "column",
-      name: "Column",
-      data: dataColumn,
-      visible: false,
-      borderWidth: 0,
-      pointPlacement: 'on',
-      groupPadding: 0.1,
-      states: {
-        hover: {
-          enabled: true,
-          brightness: 0.07
-        }
-      },
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatter)
-    });
+    if (dColumn.length !== 0) {
+      config.series.push({
+        zhSeriaId: id + '_VolumeColumn',
+        zhValueText: "Volume",
+        turboThreshold: 20000,
+        type: "column",
+        name: "Column",
+        data: dColumn,
+        visible: false,
+        borderWidth: 0,
+        pointPlacement: 'on',
+        groupPadding: 0.1,
+        states: {
+          hover: {
+            enabled: true,
+            brightness: 0.07
+          }
+        },
+        tooltip: tooltipColumn || _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatter)
+      });
+    }
 
-    return config;
+    return {
+      btTitle: btTitle, config: config
+    };
   },
-  fIndicatorATHConfig: function fIndicatorATHConfig(chartId, data) {
+  fMiniATHConfig: function fMiniATHConfig(_ref2) {
+    var _ref2$btTitle = _ref2.btTitle,
+        btTitle = _ref2$btTitle === undefined ? "ATH" : _ref2$btTitle,
+        id = _ref2.id,
+        data = _ref2.data;
+
     var config = this.fBaseIndicatorConfig();
     config.title = _Chart2.default.fTitleIndicator('ATH');
 
     _addColumnSeria(config, {
-      zhSeriaId: chartId + "_ATH",
+      zhSeriaId: id + "_ATH",
       name: "ATH",
       borderWidth: 0,
       pointPlacement: 'on',
@@ -183,7 +203,7 @@ var WithIndicatorConfig = {
       tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnATHPointFormatter)
     });
 
-    return config;
+    return { btTitle: btTitle, config: config };
   },
   fnMomAthConfig: function fnMomAthConfig(dataMom, dataAth, dataSum, id) {
     var config = this.fBaseIndicatorConfig();
@@ -231,12 +251,18 @@ var WithIndicatorConfig = {
     });
     return config;
   },
-  fIndicatorHighLowConfig: function fIndicatorHighLowConfig(chartId, data) {
+  fMiniHLConfig: function fMiniHLConfig(_ref3) {
+    var _ref3$btTitle = _ref3.btTitle,
+        btTitle = _ref3$btTitle === undefined ? "Daily HighLow" : _ref3$btTitle,
+        _ref3$id = _ref3.id,
+        id = _ref3$id === undefined ? 'id' : _ref3$id,
+        data = _ref3.data;
+
     var config = this.fBaseIndicatorConfig();
     config.title = _Chart2.default.fTitleIndicator('HighLow');
 
     Object.assign(config.series[0], {
-      zhSeriaId: chartId + '_HL',
+      zhSeriaId: id + '_HL',
       name: "HL",
       visible: true,
       type: "arearange",
@@ -245,7 +271,7 @@ var WithIndicatorConfig = {
       tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnHighLowPointFormatter)
     });
 
-    return config;
+    return { btTitle: btTitle, config: config };
   }
 };
 

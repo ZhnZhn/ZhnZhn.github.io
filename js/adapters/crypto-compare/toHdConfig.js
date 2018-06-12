@@ -39,16 +39,39 @@ var _crSubtitle = function _crSubtitle(json, value) {
   return value + '/' + (conversionSymbol || DF_PAIR) + ' ' + type;
 };
 
+var _crBtTitleTo = function _crBtTitleTo(json) {
+  var _json$ConversionType2 = json.ConversionType,
+      ConversionType = _json$ConversionType2 === undefined ? {} : _json$ConversionType2,
+      conversionSymbol = ConversionType.conversionSymbol;
+
+  return '' + (conversionSymbol || DF_PAIR);
+};
+
 var toHdConfig = {
   toConfig: function toConfig(json, option) {
-    var data = crData(json),
+    var _crData = crData(json),
+        data = _crData.data,
+        dVolume = _crData.dVolume,
+        dColumn = _crData.dColumn,
+        dToVolume = _crData.dToVolume,
+        dHL = _crData.dHL,
         seria = (0, _ConfigBuilder2.default)().initSpline({ data: data }).toConfig(),
         _option$value = option.value,
         value = _option$value === undefined ? '' : _option$value,
         title = option.title,
         _title = _crTitle(title),
         _subtitle = _crSubtitle(json, value),
-        config = (0, _ConfigBuilder2.default)().initBaseArea2().addCaption(_title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
+        _btTitleTo = _crBtTitleTo(json),
+        config = (0, _ConfigBuilder2.default)().initBaseArea2().addCaption(_title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).addMiniVolume({
+      btTitle: 'Volume ' + value,
+      title: value,
+      dColumn: dColumn, dVolume: dVolume
+    }).addMiniVolume({
+      btTitle: 'Volume ' + _btTitleTo,
+      title: _btTitleTo,
+      dVolume: dToVolume,
+      dColumn: []
+    }).addMiniHL({ data: dHL }).toConfig();
 
     return { config: config };
   },

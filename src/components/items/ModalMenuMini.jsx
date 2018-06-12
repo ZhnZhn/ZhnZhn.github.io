@@ -5,9 +5,21 @@ import SubMenuItem from './SubMenuItem'
 
 import STYLE from './ModalMenu.Style'
 
+const _renderItems = (configs, onClickItem) => {
+  return configs.map(c => {
+    const { btTitle } = c;
+    return (
+      <SubMenuItem
+        caption={btTitle}
+        onClick={onClickItem.bind(null, btTitle)}
+      />
+    );
+  })
+};
+
 const ModalMenuMini = ({
   isShow, onClose,
-  onClickVolume, onClickATH, onClickHighLow
+  configs, onClickItem
 }) => (
   <ModalPopup
     isShow={isShow}
@@ -15,18 +27,7 @@ const ModalMenuMini = ({
     onClose={onClose}
   >
     <div style={STYLE.PANE}>
-      <SubMenuItem
-        caption="Volume"
-        onClick={onClickVolume}
-      />
-      <SubMenuItem
-        caption="ATH"
-        onClick={onClickATH}
-      />
-      <SubMenuItem
-        caption="Daily HighLow"
-        onClick={onClickHighLow}
-      />
+      {configs && _renderItems(configs, onClickItem)}
     </div>
   </ModalPopup>
 );

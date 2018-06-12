@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -42,6 +46,10 @@ var _Header2 = _interopRequireDefault(_Header);
 var _ChartToolBar = require('./ChartToolBar');
 
 var _ChartToolBar2 = _interopRequireDefault(_ChartToolBar);
+
+var _MiniCharts = require('./MiniCharts');
+
+var _MiniCharts2 = _interopRequireDefault(_MiniCharts);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -125,8 +133,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     });
 
     _this.is2H = false;
-    _this._fnOnCheck = _this._handlerCheckBox.bind(_this, true);
-    _this._fnOnUnCheck = _this._handlerCheckBox.bind(_this, false);
+    _this._fnOnCheck = _this._handleCheckBox.bind(_this, true);
+    _this._fnOnUnCheck = _this._handleCheckBox.bind(_this, false);
 
     var _props$config = props.config,
         config = _props$config === undefined ? {} : _props$config,
@@ -155,13 +163,11 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       isShowLegend: false,
       isShowInfo: false,
 
-      isInitVolume: false, isShowVolume: false,
-      isATHVolume: false, isShowATH: false,
-      isInitHighLow: false, isShowHighLow: false,
-
       itemCaption: _itemCaption,
-      chartsDescription: [],
-      mfiConfigs: []
+      mfiConfigs: [],
+
+      isShowAbs: true,
+      miniTitles: []
     };
     return _this;
   }
@@ -183,13 +189,16 @@ var AreaChartItem = (_temp = _class = function (_Component) {
           isAdminMode = _props.isAdminMode,
           _config$zhConfig2 = config.zhConfig,
           zhConfig = _config$zhConfig2 === undefined ? {} : _config$zhConfig2,
+          zhMiniConfigs = config.zhMiniConfigs,
           itemTime = zhConfig.itemTime,
           _state = this.state,
           isOpen = _state.isOpen,
           isShowChart = _state.isShowChart,
           isShowInfo = _state.isShowInfo,
           itemCaption = _state.itemCaption,
-          mfiConfigs = _state.mfiConfigs;
+          mfiConfigs = _state.mfiConfigs,
+          isShowAbs = _state.isShowAbs,
+          miniTitles = _state.miniTitles;
 
 
       return _react2.default.createElement(
@@ -204,7 +213,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
           itemCaption: itemCaption,
           itemTitle: caption,
           itemTime: itemTime,
-          onToggle: this._handlerToggleOpen,
+          onToggle: this._handleToggleOpen,
           valueMoving: config.valueMoving,
           onClose: onCloseItem,
           isAdminMode: isAdminMode,
@@ -219,17 +228,24 @@ var AreaChartItem = (_temp = _class = function (_Component) {
             isShow: isShowChart,
             rootStyle: styles.wrapper,
             config: config,
+            isShowAbs: isShowAbs,
             absComp: this._dataSourceEl
           }),
           _react2.default.createElement(_PanelDataInfo2.default, {
             isShow: isShowInfo,
             info: config.info,
             zhInfo: config.zhConfig,
-            onClickChart: this._handlerClickChart
+            onClickChart: this._handleClickChart
           }),
           this._renderLegend(config),
           this._renderIndicatorCharts(mfiConfigs),
-          this._renderMetricCharts()
+          _react2.default.createElement(_MiniCharts2.default, {
+            titles: miniTitles,
+            configs: zhMiniConfigs,
+            absComp: this._dataSourceEl,
+            onLoaded: this._handleLoadedMetricChart,
+            onWillUnLoaded: this._handleWillUnLoadedChart
+          })
         )
       );
     }
@@ -273,11 +289,11 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     return _this2.mainChart;
   };
 
-  this._handlerLoadedMetricChart = function (metricChart) {
+  this._handleLoadedMetricChart = function (metricChart) {
     _this2.mainChart.options.zhDetailCharts.push(metricChart);
   };
 
-  this._handlerWillUnLoadedChart = function (objChart) {
+  this._handleWillUnLoadedChart = function (objChart) {
     var charts = (0, _safeGet2.default)(_this2.mainChart, 'options.zhDetailCharts');
     if (Array.isArray(charts)) {
       _this2.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
@@ -286,29 +302,33 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     }
   };
 
-  this._handlerToggleOpen = function () {
-    if (_this2.state.isOpen) {
-      _this2.setState({ isOpen: false });
-    } else {
-      _this2.setState({ isOpen: true });
-    }
+  this._handleToggleOpen = function () {
+    _this2.setState(function (prevState) {
+      return {
+        isOpen: !prevState.isOpen
+      };
+    });
   };
 
-  this._handlerClickLegend = function () {
-    _this2.setState({ isShowLegend: !_this2.state.isShowLegend });
+  this._handleClickLegend = function () {
+    _this2.setState(function (prevState) {
+      return {
+        isShowLegend: !prevState.isShowLegend
+      };
+    });
   };
 
-  this._handlerToggleSeria = function (item) {
+  this._handleToggleSeria = function (item) {
     _this2.mainChart.options.zhToggleSeria(_this2.mainChart, item);
   };
 
-  this._handlerClick2H = function () {
+  this._handleClick2H = function () {
     var height = _this2.is2H ? _this2.mainChart.options.chart.height / 2 : _this2.mainChart.options.chart.height * 2;
     _this2.setChartHeight(height);
     _this2.is2H = !_this2.is2H;
   };
 
-  this._handlerAddToWatch = function () {
+  this._handleAddToWatch = function () {
     var _props2 = _this2.props,
         caption = _props2.caption,
         config = _props2.config,
@@ -329,7 +349,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     });
   };
 
-  this._handlerClickInfo = function () {
+  this._handleClickInfo = function () {
     _this2.setState({
       isShowInfo: true,
       isShowChart: false,
@@ -337,69 +357,18 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     });
   };
 
-  this._handlerClickVolume = function () {
-    var ChartFn = _this2.props.ChartFn,
-        _state2 = _this2.state,
-        isInitVolume = _state2.isInitVolume,
-        isShowVolume = _state2.isShowVolume,
-        chartsDescription = _state2.chartsDescription;
-
-
-    _this2.mainChart.update(ChartFn.arMetricOption(_this2.mainChart, isShowVolume));
-    _this2.chartComp.toggleAbsComp();
-
-    if (isInitVolume) {
-      _this2.setState({ isShowVolume: !isShowVolume });
-    } else {
-      chartsDescription.push({ type: 'Volume' });
-      _this2.setState({
-        chartsDescription: chartsDescription,
-        isShowVolume: true, isInitVolume: true
-      });
-    }
+  this._handleClickChart = function () {
+    _this2.setState({
+      isShowChart: true,
+      isShowInfo: false
+    });
   };
 
-  this._handlerClickATH = function () {
-    var _state3 = _this2.state,
-        isInitATH = _state3.isInitATH,
-        isShowATH = _state3.isShowATH;
-
-    if (isInitATH) {
-      _this2.setState({ isShowATH: !isShowATH });
-    } else {
-      _this2.state.chartsDescription.push({ type: 'ATH' });
-      _this2.setState({
-        chartsDescription: _this2.state.chartsDescription,
-        isShowATH: true, isInitATH: true
-      });
-    }
-  };
-
-  this._handlerClickHighLow = function () {
-    var _state4 = _this2.state,
-        isInitHighLow = _state4.isInitHighLow,
-        isShowHighLow = _state4.isShowHighLow;
-
-    if (isInitHighLow) {
-      _this2.setState({ isShowHighLow: !isShowHighLow });
-    } else {
-      _this2.state.chartsDescription.push({ type: 'HighLow' });
-      _this2.setState({
-        chartsDescription: _this2.state.chartsDescription,
-        isShowHighLow: true, isInitHighLow: true
-      });
-    }
-  };
-
-  this._handlerClickChart = function () {
-    _this2.setState({ isShowChart: true, isShowInfo: false });
-  };
-
-  this._handlerCheckBox = function (isCheck, checkBox) {
+  this._handleCheckBox = function (isCheck, checkBox) {
     _this2.props.onSetActive(isCheck, checkBox, _this2.mainChart);
   };
 
-  this._handlerAddSma = function (option) {
+  this._handleAddSma = function (option) {
     option.chart = _this2.mainChart;
     return _this2.mainChart.options.zhFnAddSeriesSma(option);
   };
@@ -408,23 +377,29 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     return _this2.mainChart.options.zhFnRemoveSeries(_this2.mainChart, id);
   };
 
-  this._handlerAddMfi = function (period, id) {
-    var config = _this2.mainChart.options.zhFnGetMfiConfig(_this2.mainChart, period, id);
-    _this2.state.mfiConfigs.push({ config: config, id: id });
-    _this2.setState({ mfiConfigs: _this2.state.mfiConfigs });
+  this._handleAddMfi = function (period, id) {
+    _this2.setState(function (prevState) {
+      var config = _this2.mainChart.options.zhFnGetMfiConfig(_this2.mainChart, period, id);
+      prevState.mfiConfigs.push({ config: config, id: id });
+      return prevState;
+    });
   };
 
-  this._handlerRemoveMfi = function (id) {
-    _this2.state.mfiConfigs = _this2.state.mfiConfigs.filter(function (objConfig) {
-      return objConfig.id !== id;
+  this._handleRemoveMfi = function (id) {
+    _this2.setState(function (prevState) {
+      prevState.mfiConfigs = prevState.mfiConfigs.filter(function (c) {
+        return c.id !== id;
+      });
+      return prevState;
     });
-    _this2.setState({ mfiConfigs: _this2.state.mfiConfigs });
   };
 
   this._handleAddMomAth = function () {
-    var config = _this2._crMomAthConfig(_this2.mainChart, _this2._chartId);
-    _this2.state.mfiConfigs.push({ config: config, id: 'MOM_ATH' });
-    _this2.setState({ mfiConfigs: _this2.state.mfiConfigs });
+    _this2.setState(function (prevState) {
+      var config = _this2._crMomAthConfig(_this2.mainChart, _this2._chartId);
+      prevState.mfiConfigs.push({ config: config, id: 'MOM_ATH' });
+      return prevState;
+    });
   };
 
   this._handleClickConfig = function () {
@@ -453,6 +428,23 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     });
   };
 
+  this._handleMiniChart = function (btTitle) {
+    var ChartFn = _this2.props.ChartFn;
+
+    _this2.setState(function (prevState) {
+      var _titles = prevState.miniTitles,
+          _t = _titles.find(function (t) {
+        return t === btTitle;
+      });
+      prevState.miniTitles = _t ? _titles.filter(function (t) {
+        return t !== btTitle;
+      }) : [btTitle].concat((0, _toConsumableArray3.default)(_titles));
+      prevState.isShowAbs = prevState.miniTitles.length === 0 ? true : false;
+      _this2.mainChart.update(ChartFn.arMetricOption(_this2.mainChart, prevState.isShowAbs));
+      return prevState;
+    });
+  };
+
   this._createChartToolBar = function (config) {
     var isShowToolbar = _this2.state.isShowToolbar;
 
@@ -462,19 +454,17 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       _react2.default.createElement(_ChartToolBar2.default, {
         style: styles.tabDiv,
         config: config,
+        onMiniChart: _this2._handleMiniChart,
         getChart: _this2.getMainChart,
-        onAddSma: _this2._handlerAddSma,
+        onAddSma: _this2._handleAddSma,
         onRemoveSeries: _this2._handleRemoveSeries,
-        onAddMfi: _this2._handlerAddMfi,
-        onRemoveMfi: _this2._handlerRemoveMfi,
+        onAddMfi: _this2._handleAddMfi,
+        onRemoveMfi: _this2._handleRemoveMfi,
         onAddMomAth: _this2._handleAddMomAth,
-        onClickLegend: _this2._handlerClickLegend,
-        onClick2H: _this2._handlerClick2H,
-        onAddToWatch: _this2._handlerAddToWatch,
-        onClickInfo: _this2._handlerClickInfo,
-        onClickVolume: _this2._handlerClickVolume,
-        onClickATH: _this2._handlerClickATH,
-        onClickHighLow: _this2._handlerClickHighLow,
+        onClickLegend: _this2._handleClickLegend,
+        onClick2H: _this2._handleClick2H,
+        onAddToWatch: _this2._handleAddToWatch,
+        onClickInfo: _this2._handleClickInfo,
         onClickConfig: _this2._handleClickConfig,
         onCopy: _this2._handleCopy,
         onPasteTo: _this2._handlePasteTo
@@ -495,42 +485,11 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       { isShow: isShowLegend },
       _react2.default.createElement(_Legend2.default, {
         legend: legend,
-        onClickItem: _this2._handlerToggleSeria
+        onClickItem: _this2._handleToggleSeria
       })
-    ) : undefined;
+    ) : null;
 
     return _compLegend;
-  };
-
-  this._renderMetricCharts = function () {
-    var chartsDescription = _this2.state.chartsDescription;
-
-
-    var _metricCharts = chartsDescription.map(function (descr, index) {
-      var type = descr.type,
-          _isShow = _this2.state['isShow' + type],
-          _ref = 'chart' + type,
-          _config = _this2.props.config['zh' + type + 'Config'];
-
-
-      return _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: _isShow, key: index },
-        _react2.default.createElement(_HighchartWrapper2.default, {
-          ref: _ref,
-          isShow: true,
-          config: _config,
-          absComp: _this2._dataSourceEl,
-          onLoaded: _this2._handlerLoadedMetricChart
-        })
-      );
-    });
-
-    return _react2.default.createElement(
-      'div',
-      null,
-      _metricCharts
-    );
   };
 
   this._renderIndicatorCharts = function (arrConfigs) {
@@ -544,8 +503,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         _react2.default.createElement(_HighchartWrapper2.default, {
           isShow: true,
           config: config,
-          onLoaded: _this2._handlerLoadedMetricChart,
-          onWillUnLoaded: _this2._handlerWillUnLoadedChart
+          onLoaded: _this2._handleLoadedMetricChart,
+          onWillUnLoaded: _this2._handleWillUnLoadedChart
         })
       );
     });
