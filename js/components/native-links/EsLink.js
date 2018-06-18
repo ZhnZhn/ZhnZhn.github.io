@@ -1,0 +1,34 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Link = require('./Link');
+
+var _Link2 = _interopRequireDefault(_Link);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CL = "native-link";
+var URL = 'http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=';
+
+var EsLink = function EsLink(_ref) {
+  var item = _ref.item;
+
+  if (!item || !item.dataset) {
+    return null;
+  }
+  return _react2.default.createElement(_Link2.default, {
+    className: CL,
+    caption: 'Eurostat Dataset Viewer (Http)',
+    href: '' + URL + item.dataset
+  });
+};
+
+exports.default = EsLink;
+//# sourceMappingURL=EsLink.js.map

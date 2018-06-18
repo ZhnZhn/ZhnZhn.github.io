@@ -172,14 +172,18 @@ const EuroStatFn = {
   },
 
   createZhConfig(option){
-    const { key, itemCaption, dataSource } = option
+    const { key, itemCaption, dataSource, dfTable } = option
+        , _nativeLink = dfTable
+             ? { linkFn: 'ES', item: { dataset: dfTable } }
+             : undefined;
     return {
       id : key,
       key : key,
       itemCaption : itemCaption,
       isWithoutIndicator : true,
       isWithoutAdd : true,
-      dataSource
+      dataSource,
+      ..._nativeLink
     }
   },
 
@@ -202,11 +206,11 @@ const EuroStatFn = {
     _descr = _descr + _crDataSourceLink(json);
 
     return {
-      name : json.label,
-      description : _descr,
-      newest_available_date : json.updated,
-      oldest_available_date : '1996-01-30',
-      frequency : _frequency
+      name: json.label,
+      description: _descr,
+      newest_available_date: json.updated,
+      oldest_available_date: '1996-01-30',
+      frequency: _frequency
     }
   },
 

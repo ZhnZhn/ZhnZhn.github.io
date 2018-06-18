@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/EsLink.js"
+ ],
+ "file": "../../../src/components/native-links/EsLink.js",
+ "names": [
+  "CL",
+  "URL",
+  "EsLink",
+  "item",
+  "dataset"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,KAAK,aAAX;AACA,IAAMC,MAAM,kEAAZ;;AAEA,IAAMC,SAAS,SAATA,MAAS,OAAc;AAAA,MAAXC,IAAW,QAAXA,IAAW;;AAC3B,MAAI,CAACA,IAAD,IAAS,CAACA,KAAKC,OAAnB,EAA4B;AAC1B,WAAO,IAAP;AACD;AACD,SACE;AACE,eAAWJ,EADb;AAEE,6CAFF;AAGE,eAASC,GAAT,GAAeE,KAAKC;AAHtB,IADF;AAOD,CAXD;;kBAaeF,M"
+}

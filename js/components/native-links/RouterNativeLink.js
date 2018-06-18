@@ -40,6 +40,10 @@ var _CrcLink = require('./CrcLink');
 
 var _CrcLink2 = _interopRequireDefault(_CrcLink);
 
+var _EsLink = require('./EsLink');
+
+var _EsLink2 = _interopRequireDefault(_EsLink);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterNativeLink = {
@@ -51,8 +55,9 @@ var RouterNativeLink = {
   FAO_STAT: _FaoStatLink2.default,
   FRED: _FredLink2.default,
   BSL: _BslLink2.default,
-  CRC: _CrcLink2.default
+  CRC: _CrcLink2.default,
+  ES: _EsLink2.default
 };
 
 exports.default = RouterNativeLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\RouterNativeLink.js.map
+//# sourceMappingURL=RouterNativeLink.js.map

@@ -214,16 +214,18 @@ var EuroStatFn = (0, _extends3.default)({
   createZhConfig: function createZhConfig(option) {
     var key = option.key,
         itemCaption = option.itemCaption,
-        dataSource = option.dataSource;
+        dataSource = option.dataSource,
+        dfTable = option.dfTable,
+        _nativeLink = dfTable ? { linkFn: 'ES', item: { dataset: dfTable } } : undefined;
 
-    return {
+    return (0, _extends3.default)({
       id: key,
       key: key,
       itemCaption: itemCaption,
       isWithoutIndicator: true,
       isWithoutAdd: true,
       dataSource: dataSource
-    };
+    }, _nativeLink);
   },
   createDatasetInfo: function createDatasetInfo(json, option) {
     var _option$group = option.group,
