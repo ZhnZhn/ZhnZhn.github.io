@@ -25,23 +25,10 @@ const C = {
   ]
 };
 
-const SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
-
 const _rFrequency = {
   default : '',
   m : 'Monthly',
   q : 'Quarterly'
-}
-
-const _crDataSourceLink = function(json){
-  const { href } = json
-  return (href)
-            ? `<a href=${href}>Eurostat Data Link</a>`
-            : '';
-}
-
-const _crSubTitle = function(subTitle){
-  return `<span style="color:black;font-weight:bold;">${subTitle}</span>`;
 }
 
 const _is = (value) => (element) => element === value;
@@ -98,7 +85,7 @@ const EuroStatFn = {
     const { title, subtitle, seriaType='AREA' } = option;
     Chart.setDefaultTitle(config, title, subtitle);
 
-    config.zhConfig = this.createZhConfig(option);
+    config.zhConfig = this.createZhConfig(json, option);
     config.info = this.createDatasetInfo(json, option);
 
     if (seriaType && seriaType.toUpperCase() === 'AREA'){
@@ -171,11 +158,16 @@ const EuroStatFn = {
 
   },
 
-  createZhConfig(option){
-    const { key, itemCaption, dataSource, dfTable } = option
-        , _nativeLink = dfTable
-             ? { linkFn: 'ES', item: { dataset: dfTable } }
-             : undefined;
+  createZhConfig(json, option){
+    const { href } = json
+        , _href = href && href.replace
+            ? href.replace('http', 'https')
+            : href
+        , {
+            key, itemCaption,
+            dataSource,
+            dfTable
+          } = option;
     return {
       id : key,
       key : key,
@@ -183,7 +175,11 @@ const EuroStatFn = {
       isWithoutIndicator : true,
       isWithoutAdd : true,
       dataSource,
-      ..._nativeLink
+      linkFn: 'ES',
+      item: {
+        dataset: dfTable,
+        href: _href
+      }
     }
   },
 
@@ -192,22 +188,10 @@ const EuroStatFn = {
         ,  arr = group.split('_')
         , _frequency = (_rFrequency[arr[arr.length-1]])
               ? _rFrequency[arr[arr.length-1]]
-              : _rFrequency.default
-        , { extension={} } = json
-        , { description, subTitle } = extension;
-
-    let _descr = '';
-    if (subTitle){
-      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br>';
-    }
-    if (description) {
-      _descr = _descr + description + '<br>';
-    }
-    _descr = _descr + _crDataSourceLink(json);
-
+              : _rFrequency.default;
     return {
       name: json.label,
-      description: _descr,
+      //description: _descr,
       newest_available_date: json.updated,
       oldest_available_date: '1996-01-30',
       frequency: _frequency

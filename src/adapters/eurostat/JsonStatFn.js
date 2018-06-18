@@ -89,14 +89,13 @@ const JsonStatFn = {
         time = ds.Dimension("time").id[maxIndex-1];
         _sGeo = ds.Data({...configSlice, ...{ time } })
       }
-    } else {
-      time = configSlice.time
+    } else if (configSlice) {
+       time = configSlice.time
     }
 
     return {
-      dGeo : getFromNullable(ds.Dimension("geo"), { id : []}),
-      //sGeo : getFromNullable(ds.Data(configSlice), [])
-      sGeo : getFromNullable(_sGeo, []),
+      dGeo: getFromNullable(ds.Dimension("geo"), { id : []}),
+      sGeo: getFromNullable(_sGeo, []),
       time
     };
   },
@@ -113,7 +112,7 @@ const JsonStatFn = {
   },
 
   trJsonToCategory : (json, configSlice) => {
-    const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);    
+    const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return _fnFetchHmIdCountry().then(() => {
        return Box( _combineToArr(dGeo.id, sGeo) )
                .map(arr => arr.sort(AdapterFn.compareByValueId))

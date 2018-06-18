@@ -108,13 +108,12 @@ var JsonStatFn = {
         time = ds.Dimension("time").id[maxIndex - 1];
         _sGeo = ds.Data((0, _extends3.default)({}, configSlice, { time: time }));
       }
-    } else {
+    } else if (configSlice) {
       time = configSlice.time;
     }
 
     return {
       dGeo: (0, _fnStyle.getFromNullable)(ds.Dimension("geo"), { id: [] }),
-      //sGeo : getFromNullable(ds.Data(configSlice), [])
       sGeo: (0, _fnStyle.getFromNullable)(_sGeo, []),
       time: time
     };

@@ -45,22 +45,10 @@ var C = {
   EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
 };
 
-var SPAN_UNIT = '<span style="color:#1b75bb;font-weight:bold;">Unit: </span>';
-
 var _rFrequency = {
   default: '',
   m: 'Monthly',
   q: 'Quarterly'
-};
-
-var _crDataSourceLink = function _crDataSourceLink(json) {
-  var href = json.href;
-
-  return href ? '<a href=' + href + '>Eurostat Data Link</a>' : '';
-};
-
-var _crSubTitle = function _crSubTitle(subTitle) {
-  return '<span style="color:black;font-weight:bold;">' + subTitle + '</span>';
 };
 
 var _is = function _is(value) {
@@ -126,7 +114,7 @@ var EuroStatFn = (0, _extends3.default)({
 
     _Chart2.default.setDefaultTitle(config, title, subtitle);
 
-    config.zhConfig = this.createZhConfig(option);
+    config.zhConfig = this.createZhConfig(json, option);
     config.info = this.createDatasetInfo(json, option);
 
     if (seriaType && seriaType.toUpperCase() === 'AREA') {
@@ -211,44 +199,37 @@ var EuroStatFn = (0, _extends3.default)({
       config.yAxis.min = _Chart2.default.calcMinY({ maxPoint: max, minPoint: min });
     }
   },
-  createZhConfig: function createZhConfig(option) {
-    var key = option.key,
+  createZhConfig: function createZhConfig(json, option) {
+    var href = json.href,
+        _href = href && href.replace ? href.replace('http', 'https') : href,
+        key = option.key,
         itemCaption = option.itemCaption,
         dataSource = option.dataSource,
-        dfTable = option.dfTable,
-        _nativeLink = dfTable ? { linkFn: 'ES', item: { dataset: dfTable } } : undefined;
+        dfTable = option.dfTable;
 
-    return (0, _extends3.default)({
+    return {
       id: key,
       key: key,
       itemCaption: itemCaption,
       isWithoutIndicator: true,
       isWithoutAdd: true,
-      dataSource: dataSource
-    }, _nativeLink);
+      dataSource: dataSource,
+      linkFn: 'ES',
+      item: {
+        dataset: dfTable,
+        href: _href
+      }
+    };
   },
   createDatasetInfo: function createDatasetInfo(json, option) {
     var _option$group = option.group,
         group = _option$group === undefined ? '' : _option$group,
         arr = group.split('_'),
-        _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default,
-        _json$extension = json.extension,
-        extension = _json$extension === undefined ? {} : _json$extension,
-        description = extension.description,
-        subTitle = extension.subTitle;
-
-    var _descr = '';
-    if (subTitle) {
-      _descr = SPAN_UNIT + _crSubTitle(subTitle) + '<br>';
-    }
-    if (description) {
-      _descr = _descr + description + '<br>';
-    }
-    _descr = _descr + _crDataSourceLink(json);
+        _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default;
 
     return {
       name: json.label,
-      description: _descr,
+      //description: _descr,
       newest_available_date: json.updated,
       oldest_available_date: '1996-01-30',
       frequency: _frequency
