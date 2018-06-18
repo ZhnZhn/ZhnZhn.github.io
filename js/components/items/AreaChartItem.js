@@ -8,6 +8,10 @@ var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -73,20 +77,20 @@ var CL = {
   ROOT: 'chart-item'
 };
 
-var styles = {
-  tabDiv: {
+var S = {
+  TAB_DIV: {
     position: 'relative',
     height: '30px',
     backgroundColor: 'transparent',
     zIndex: 2
   },
-  showHide: {
+  SHOW_HIDE: {
     marginLeft: '8px'
   },
-  wrapper: {
+  WRAPPER: {
     marginTop: '6px'
   },
-  dataSource: {
+  DATA_SOURCE: {
     position: 'absolute',
     left: '5px',
     bottom: '0px',
@@ -106,7 +110,12 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       zhConfig: PropTypes.shape({
         dataSource: PropTypes.string,
         itemCaption: PropTypes.string
-      })
+      }),
+      zhMiniConfigs: PropTypes.arrayOf(
+        PropTypes.shape({
+          btTitle: PropTypes.string,
+          config: PropTypes.object
+      }))
     }),
     onAddToWatch: PropTypes.func,
     onSetActive: PropTypes.func,
@@ -126,6 +135,10 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (AreaChartItem.__proto__ || Object.getPrototypeOf(AreaChartItem)).call(this));
 
     _initialiseProps.call(_this);
+
+    _this._handleToggleOpen = _this._toggle.bind(_this, 'isOpen');
+    _this._handleClickLegend = _this._toggle.bind(_this, 'isShowLegend');
+    _this._handleToggleToolbar = _this._toggle.bind(_this, 'isShowToolbar');
 
     _this._moreModel = (0, _AreaMore2.default)(_this, {
       onToggle: _this._handleToggleToolbar,
@@ -153,14 +166,15 @@ var AreaChartItem = (_temp = _class = function (_Component) {
 
     _this._dataSourceEl = _react2.default.createElement(
       'div',
-      { style: styles.dataSource },
+      { style: S.DATA_SOURCE },
       dataSource
     );
     _this.state = {
       isOpen: true,
       isShowToolbar: true,
-      isShowChart: true,
       isShowLegend: false,
+
+      isShowChart: true,
       isShowInfo: false,
 
       itemCaption: _itemCaption,
@@ -221,12 +235,12 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         }),
         _react2.default.createElement(
           _ShowHide2.default,
-          { isShow: isOpen, style: styles.showHide },
+          { isShow: isOpen, style: S.SHOW_HIDE },
           isShowChart && this._createChartToolBar(config),
           _react2.default.createElement(_HighchartWrapper2.default, {
             ref: this._refChartComp,
             isShow: isShowChart,
-            rootStyle: styles.wrapper,
+            rootStyle: S.WRAPPER,
             config: config,
             isShowAbs: isShowAbs,
             absComp: this._dataSourceEl
@@ -238,13 +252,19 @@ var AreaChartItem = (_temp = _class = function (_Component) {
             onClickChart: this._handleClickChart
           }),
           this._renderLegend(config),
-          this._renderIndicatorCharts(mfiConfigs),
           _react2.default.createElement(_MiniCharts2.default, {
-            titles: miniTitles,
-            configs: zhMiniConfigs,
+            configs: mfiConfigs,
             absComp: this._dataSourceEl,
-            onLoaded: this._handleLoadedMetricChart,
-            onWillUnLoaded: this._handleWillUnLoadedChart
+            onLoaded: this._handleLoadedMiniChart,
+            onWillUnLoaded: this._handleUnLoadedMiniChart
+          }),
+          _react2.default.createElement(_MiniCharts2.default, {
+            configs: zhMiniConfigs,
+            idPropName: 'btTitle',
+            ids: miniTitles,
+            absComp: this._dataSourceEl,
+            onLoaded: this._handleLoadedMiniChart,
+            onWillUnLoaded: this._handleUnLoadedMiniChart
           })
         )
       );
@@ -279,7 +299,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   this.setDataSource = function (strDataSource) {
     _this2._dataSourceEl = _react2.default.createElement(
       'div',
-      { style: styles.dataSource },
+      { style: S.DATA_SOURCE },
       strDataSource
     );
     _this2.forceUpdate();
@@ -289,11 +309,11 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     return _this2.mainChart;
   };
 
-  this._handleLoadedMetricChart = function (metricChart) {
+  this._handleLoadedMiniChart = function (metricChart) {
     _this2.mainChart.options.zhDetailCharts.push(metricChart);
   };
 
-  this._handleWillUnLoadedChart = function (objChart) {
+  this._handleUnLoadedMiniChart = function (objChart) {
     var charts = (0, _safeGet2.default)(_this2.mainChart, 'options.zhDetailCharts');
     if (Array.isArray(charts)) {
       _this2.mainChart.options.zhDetailCharts = charts.filter(function (chart) {
@@ -302,19 +322,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     }
   };
 
-  this._handleToggleOpen = function () {
+  this._toggle = function (propName) {
     _this2.setState(function (prevState) {
-      return {
-        isOpen: !prevState.isOpen
-      };
-    });
-  };
-
-  this._handleClickLegend = function () {
-    _this2.setState(function (prevState) {
-      return {
-        isShowLegend: !prevState.isShowLegend
-      };
+      return (0, _defineProperty3.default)({}, propName, !prevState[propName]);
     });
   };
 
@@ -420,14 +430,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     return _this2.props.crValueMoving(_this2.mainChart, prev, dateTo);
   };
 
-  this._handleToggleToolbar = function (value) {
-    _this2.setState(function (prevState) {
-      return {
-        isShowToolbar: !prevState.isShowToolbar
-      };
-    });
-  };
-
   this._handleMiniChart = function (btTitle) {
     var ChartFn = _this2.props.ChartFn;
 
@@ -452,7 +454,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       _ShowHide2.default,
       { isShow: isShowToolbar },
       _react2.default.createElement(_ChartToolBar2.default, {
-        style: styles.tabDiv,
+        style: S.TAB_DIV,
         config: config,
         onMiniChart: _this2._handleMiniChart,
         getChart: _this2.getMainChart,
@@ -490,29 +492,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     ) : null;
 
     return _compLegend;
-  };
-
-  this._renderIndicatorCharts = function (arrConfigs) {
-    var _indicatorCharts = arrConfigs.map(function (objConfig) {
-      var config = objConfig.config,
-          id = objConfig.id;
-
-      return _react2.default.createElement(
-        _ShowHide2.default,
-        { isShow: true, key: id },
-        _react2.default.createElement(_HighchartWrapper2.default, {
-          isShow: true,
-          config: config,
-          onLoaded: _this2._handleLoadedMetricChart,
-          onWillUnLoaded: _this2._handleWillUnLoadedChart
-        })
-      );
-    });
-    return _react2.default.createElement(
-      'div',
-      null,
-      _indicatorCharts
-    );
   };
 
   this._refChartComp = function (comp) {

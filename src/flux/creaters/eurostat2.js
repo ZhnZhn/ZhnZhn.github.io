@@ -5,7 +5,7 @@ const COUNTRY_CAPTION_DF = 'EU'
     , AREA = 'AREA'
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, group, dataSource, dfProps } = props
+  const { loadId, group, dataSource, mapType, dfProps } = props
       , {
           one, two={}, chartType={},
           date, dateDefault,
@@ -49,6 +49,7 @@ const createLoadOptions = (props={}, options={}) => {
     alertMetric : two.caption,
     seriaType : chartTypeValue,
     zhCompType : _zhCompType,
+    mapType: mapType,
     mapValue : _mapValue,
     zhMapSlice : { ..._mapSlice, time : _time },
     time : _time,

@@ -46,6 +46,7 @@ const _crUrlWithParams = (option) => {
           seriaType,
           dfParams, dfTable, dfTail,
           items,
+          mapType,
           time
         } = option;
 
@@ -57,7 +58,9 @@ const _crUrlWithParams = (option) => {
     const {
             queryMap, zhMapSlice
           } = _toMapSlice(dfParams, items, time);
-    option.zhMapSlice = zhMapSlice
+    if (!mapType) {
+      option.zhMapSlice = zhMapSlice
+    }
     return `${rootUrl}${dfTable}?${queryMap}&time=${time}`;
   }
 }

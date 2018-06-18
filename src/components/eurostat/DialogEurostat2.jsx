@@ -86,7 +86,7 @@ class DialogEurostat2 extends Component {
   }
 
   _updateForDate = () => {
-    this.date = null;
+    this.date = null;    
     const frequency = (this.two)
              ? (this.props.mapFrequency)
                   ? this.props.mapFrequency
@@ -197,7 +197,7 @@ class DialogEurostat2 extends Component {
              onShowChart={onShow}
              onFront={onFront}
              onClose={this._handleClose}
-         >             
+         >
              <D.Toolbar
                isShow={isToolbar}
                buttons={this.toolbarButtons}

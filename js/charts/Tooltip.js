@@ -282,10 +282,16 @@ var _fHide = function _fHide(id, point) {
     point.series.chart.zhTooltip.hide();
   };
 };
+var _addHideHandler = function _addHideHandler(id, point) {
+  var _n = document.getElementById(id);
+  if (_n) {
+    _n.addEventListener('click', _fHide(id, point));
+  }
+};
 
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
-    document.getElementById(id).addEventListener('click', _fHide(id, point));
+    _addHideHandler(id, point);
   }, 1);
 };
 
@@ -314,7 +320,7 @@ var _crSparkData = function _crSparkData(point) {
 
 var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(id, point) {
   setTimeout(function () {
-    document.getElementById(id).addEventListener('click', _fHide(id, point));
+    _addHideHandler(id.point);
 
     var _crSparkData2 = _crSparkData(point),
         sparkLinesData = _crSparkData2.sparkLinesData,

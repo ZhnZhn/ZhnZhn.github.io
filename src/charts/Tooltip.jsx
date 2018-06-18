@@ -242,11 +242,16 @@ const _fHide = (id, point) => function _fnHide() {
           .removeEventListener('click', _fnHide);
   point.series.chart.zhTooltip.hide();
 }
+const _addHideHandler = (id, point) => {
+  const _n = document.getElementById(id);
+  if (_n){
+    _n.addEventListener('click', _fHide(id, point))
+  }
+}
 
 const _fnAddHandlerClose = function(id, point){
   setTimeout( function(){
-    document.getElementById(id)
-            .addEventListener('click', _fHide(id, point))
+    _addHideHandler(id, point)
   }, 1);
 }
 
@@ -276,9 +281,7 @@ const _crSparkData = (point) => {
 
 const _fnAddHandlerCloseAndSparklines = function(id, point){
   setTimeout( function(){
-          document.getElementById(id)
-             .addEventListener('click', _fHide(id,point))
-
+          _addHideHandler(id. point)          
           const {
                   sparkLinesData, sparkBarsData,
                   pointIndex
@@ -362,7 +365,7 @@ const Tooltip = {
     fnTemplate: _fnVolumeTooltip, isWithValue: true
   }),
   fnVolumePointFormatterT: _fnBasePointFormatter({
-    fnTemplate: _fnVolumeTooltip,    
+    fnTemplate: _fnVolumeTooltip,
     fnDateFormat: toDateFormatDMYT,
     isWithValue: true
   }),

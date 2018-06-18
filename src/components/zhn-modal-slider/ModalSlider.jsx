@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
 
+import throttle from '../../utils/throttle'
+
 import ModalPane from '../zhn-moleculs/ModalPane'
 import ShowHide from '../zhn/ShowHide'
 
 import MenuPage from './MenuPage'
 
+const PERIOD_MS = 750;
+const THROTTLE_MS = 800;
 const S = {
   SHOW_HIDE: {
     position: 'absolute',
-    //top: '26px',
-    //backgroundColor: '#4d4d4d',
-    //padding: 0,
     overflow: 'hidden'
   },
   PAGES: {
-    overflowX: 'hidden',
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
-    transition: 'all 750ms ease-out'
+    overflowX: 'hidden',
+    transition: `all ${PERIOD_MS}ms ease-out`
   }
 };
 
@@ -67,6 +68,17 @@ class ModalSlider extends Component {
           , _maxP = model.maxPages || maxPages
           , pages = [];
 
+    this.hNextPage = throttle(
+      this.hNextPage.bind(this),
+      THROTTLE_MS,
+      { trailing: false }
+    )
+    this.hPrevPage = throttle(
+      this.hPrevPage.bind(this),
+      THROTTLE_MS,
+      { trailing: false }
+    )
+
     this._PAGE_WIDTH = _pW
     this._pagesStyle = {
       width: `${_maxP*_pW}px`
@@ -113,9 +125,7 @@ class ModalSlider extends Component {
     pages.push((
       <MenuPage
         key={id}
-        //style={S.PAGE}
         style={this._pageStyle}
-        //CL={CL}
         title={title}
         items={model[id]}
         baseTitleCl={model.baseTitleCl}

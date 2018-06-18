@@ -63,6 +63,7 @@ var _crUrlWithParams = function _crUrlWithParams(option) {
       dfTable = option.dfTable,
       dfTail = option.dfTail,
       items = option.items,
+      mapType = option.mapType,
       time = option.time;
 
 
@@ -75,7 +76,9 @@ var _crUrlWithParams = function _crUrlWithParams(option) {
         queryMap = _toMapSlice2.queryMap,
         zhMapSlice = _toMapSlice2.zhMapSlice;
 
-    option.zhMapSlice = zhMapSlice;
+    if (!mapType) {
+      option.zhMapSlice = zhMapSlice;
+    }
     return "" + rootUrl + dfTable + "?" + queryMap + "&time=" + time;
   }
 };

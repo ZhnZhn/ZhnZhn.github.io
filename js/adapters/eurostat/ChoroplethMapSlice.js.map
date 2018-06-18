@@ -1,1 +1,26 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/ChoroplethMapSlice.js"],"names":["_typeI","createMapValue","props","item","group","value","createMapSlice","mapSlice","indic","_typeZ","_rMapValue","_rMapSlice","ChoroplethMapSlice","mapType","_fnCreate","undefined"],"mappings":";;;;;;;;;;;;AACA,IAAMA,SAAS;AACbC,gBADa,0BACEC,KADF,EACSC,IADT,EACc;AACnB,QAAEC,KAAF,GAAYF,KAAZ,CAAEE,KAAF;AAAA,QACEC,KADF,GACYF,IADZ,CACEE,KADF;;AAEN,WAAUD,KAAV,eAAyBC,KAAzB;AACD,GALY;AAMbC,gBANa,0BAMEJ,KANF,EAMSC,IANT,EAMc;AACnB,QAAEI,QAAF,GAAeL,KAAf,CAAEK,QAAF;AAAA,QACEF,KADF,GACYF,IADZ,CACEE,KADF;;AAEN,sCAAYE,QAAZ,IAAsBC,OAAQH,KAA9B;AACD;AAVY,CAAf;AAYA,IAAMI,SAAS;AACbR,gBADa,0BACEC,KADF,EACSC,IADT,EACc;AAAA,QACjBE,KADiB,GACPF,IADO,CACjBE,KADiB;;AAEzB,WAAUA,KAAV;AACD,GAJY;AAKbC,gBALa,4BAKG;AACd,WAAO,EAAP;AACD;AAPY,CAAf;;AAWA,IAAMI,aAAa;AACjB,OAAMV,OAAOC,cADI;AAEjB,OAAMQ,OAAOR;AAFI,CAAnB;AAIA,IAAMU,aAAa;AACjB,OAAMX,OAAOM,cADI;AAEjB,OAAMG,OAAOH;AAFI,CAAnB;;AAMA,IAAMM,qBAAqB;AACzBX,gBADyB,0BACVC,KADU,EACHC,IADG,EACE;AAClB,QAAEU,OAAF,GAAcX,KAAd,CAAEW,OAAF;AAAA,QACAC,SADA,GACYJ,WAAWG,OAAX,CADZ;;;AAGN,QAAIC,SAAJ,EAAe;AAAE,aAAOA,UAAUZ,KAAV,EAAiBC,IAAjB,CAAP;AAAgC,KAAjD,MACK;AAAE,aAAOY,SAAP;AAAmB;AAC5B,GAPwB;AAQzBT,gBARyB,0BAQVJ,KARU,EAQHC,IARG,EAQE;AACnB,QAAEU,OAAF,GAAcX,KAAd,CAAEW,OAAF;AAAA,QACAC,SADA,GACYH,WAAWE,OAAX,CADZ;;;AAGN,QAAIC,SAAJ,EAAe;AAAE,aAAOA,UAAUZ,KAAV,EAAiBC,IAAjB,CAAP;AAAgC,KAAjD,MACK;AAAE,aAAOY,SAAP;AAAmB;AAC3B;AAdwB,CAA3B;;kBAiBeH,kB","file":"ChoroplethMapSlice.js","sourcesContent":["\r\nconst _typeI = {\r\n  createMapValue(props, item){\r\n    const { group } = props\r\n        , { value } = item\r\n    return `${group}?indic=${value}`;\r\n  },\r\n  createMapSlice(props, item){\r\n    const { mapSlice } = props\r\n        , { value } = item\r\n    return { ...mapSlice, indic : value };\r\n  }\r\n};\r\nconst _typeZ = {\r\n  createMapValue(props, item){\r\n    const { value } = item\r\n    return `${value}?`;\r\n  },\r\n  createMapSlice(){\r\n    return { };\r\n  }\r\n}\r\n\r\n\r\nconst _rMapValue = {\r\n  \"I\" : _typeI.createMapValue,\r\n  \"Z\" : _typeZ.createMapValue\r\n};\r\nconst _rMapSlice = {\r\n  \"I\" : _typeI.createMapSlice,\r\n  \"Z\" : _typeZ.createMapSlice\r\n}\r\n\r\n\r\nconst ChoroplethMapSlice = {\r\n  createMapValue(props, item){\r\n     const { mapType } = props\r\n         , _fnCreate = _rMapValue[mapType];\r\n\r\n     if (_fnCreate) { return _fnCreate(props, item); }\r\n     else { return undefined; }\r\n  },\r\n  createMapSlice(props, item){\r\n    const { mapType } = props\r\n        , _fnCreate = _rMapSlice[mapType];\r\n\r\n    if (_fnCreate) { return _fnCreate(props, item); }\r\n    else { return undefined; }\r\n  }\r\n};\r\n\r\nexport default ChoroplethMapSlice\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/ChoroplethMapSlice.js"
+ ],
+ "file": "../../../src/adapters/eurostat/ChoroplethMapSlice.js",
+ "names": [
+  "_typeI",
+  "createMapValue",
+  "props",
+  "item",
+  "group",
+  "mapPropName",
+  "value",
+  "createMapSlice",
+  "mapSlice",
+  "_typeZ",
+  "_rMapValue",
+  "_rMapSlice",
+  "ChoroplethMapSlice",
+  "mapType",
+  "_fnCreate",
+  "undefined"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;AACA,IAAMA,SAAS;AACbC,gBADa,0BACEC,KADF,EACSC,IADT,EACc;AAAA,QACjBC,KADiB,GACcF,KADd,CACjBE,KADiB;AAAA,6BACcF,KADd,CACVG,WADU;AAAA,QACVA,WADU,sCACE,OADF;;AAEzB,WAAUD,KAAV,SAAmBC,WAAnB,SAAkCF,KAAKG,KAAvC;AACD,GAJY;AAKbC,gBALa,0BAKEL,KALF,EAKSC,IALT,EAKc;AAAA,QACjBK,QADiB,GACiBN,KADjB,CACjBM,QADiB;AAAA,8BACiBN,KADjB,CACPG,WADO;AAAA,QACPA,WADO,uCACK,OADL;;AAEzB,sCACKG,QADL,oCAEGH,WAFH,EAEiBF,KAAKG,KAFtB;AAID;AAXY,CAAf;AAaA,IAAMG,SAAS;AACbR,gBADa,0BACEC,KADF,EACSC,IADT,EACc;AACzB,WAAUA,KAAKG,KAAf;AACD,GAHY;AAIbC,gBAJa,4BAIG;AACd,WAAO,EAAP;AACD;AANY,CAAf;;AAUA,IAAMG,aAAa;AACjB,OAAMV,OAAOC,cADI;AAEjB,OAAMQ,OAAOR;AAFI,CAAnB;AAIA,IAAMU,aAAa;AACjB,OAAMX,OAAOO,cADI;AAEjB,OAAME,OAAOF;AAFI,CAAnB;;AAKA,IAAMK,qBAAqB;AACzBX,gBADyB,0BACVC,KADU,EACHC,IADG,EACE;AAClB,QAAEU,OAAF,GAAcX,KAAd,CAAEW,OAAF;AAAA,QACAC,SADA,GACYJ,WAAWG,OAAX,CADZ;;AAEN,WAAOC,YACHA,UAAUZ,KAAV,EAAiBC,IAAjB,CADG,GAEHY,SAFJ;AAGF,GAPwB;AAQzBR,gBARyB,0BAQVL,KARU,EAQHC,IARG,EAQE;AACnB,QAAEU,OAAF,GAAcX,KAAd,CAAEW,OAAF;AAAA,QACAC,SADA,GACYH,WAAWE,OAAX,CADZ;;AAEN,WAAQC,YACJA,UAAUZ,KAAV,EAAiBC,IAAjB,CADI,GAEJY,SAFJ;AAGD;AAdwB,CAA3B;;kBAiBeH,kB"
+}

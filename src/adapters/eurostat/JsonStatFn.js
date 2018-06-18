@@ -44,7 +44,7 @@ const _splitForConfig = (arr) => {
    arr.forEach((item) => {
      const { id, value } = item
          , country = _fnIdToCountry(id);
-     categories.push(country);     
+     categories.push(country);
      data.push({ y: value, c: country })
      if (value>=max) { max = value; }
      if (value<=min) { min = value; }
@@ -83,7 +83,6 @@ const JsonStatFn = {
     const  ds = JSONstat(json).Dataset(0);
     let _sGeo = ds.Data(configSlice)
        , time ;
-
     if (!_sGeo || _sGeo.length === 0){
       const maxIndex = getFromNullable(ds.Dimension("time").id, []).length;
       if (maxIndex>0) {
@@ -114,8 +113,7 @@ const JsonStatFn = {
   },
 
   trJsonToCategory : (json, configSlice) => {
-    const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
-
+    const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);    
     return _fnFetchHmIdCountry().then(() => {
        return Box( _combineToArr(dGeo.id, sGeo) )
                .map(arr => arr.sort(AdapterFn.compareByValueId))

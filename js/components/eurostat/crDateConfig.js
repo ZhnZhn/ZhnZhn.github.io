@@ -129,4 +129,4 @@ var crDateConfig = function crDateConfig() {
 };
 
 exports.default = crDateConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\eurostat\crDateConfig.js.map
+//# sourceMappingURL=crDateConfig.js.map

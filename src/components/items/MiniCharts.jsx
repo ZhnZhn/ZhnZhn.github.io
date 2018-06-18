@@ -3,50 +3,73 @@ import React from 'react'
 import ShowHide from '../zhn/ShowHide'
 import HighchartWrapper from '../zhn/HighchartWrapper';
 
-const _fIsBtTitle = title => c => c.btTitle === title;
+const _fIsTitle = (title, idPropName) => c => c[idPropName] === title;
+
+const _arrangeBy = (titles, configs, idPropName) => {
+  const _configs = [];
+  if (!titles || !titles.length) {
+    return _configs;
+  }
+  titles.forEach(title => {
+    const _isTitle = _fIsTitle(title, idPropName)
+        , _c = configs.find(_isTitle);
+    if (_c) {
+      _configs.push(_c)
+    }
+  })  
+  return _configs;
+};
 
 const MiniCharts = ({
-  titles, configs,
+  configs, idPropName,
+  ids,
   absComp,
   onLoaded,
   onWillUnLoaded
 }) => {
-  if (!titles || !titles.length
-      || !configs || !configs.length
-  ) {
+  if (!configs || !configs.length) {
     return null;
   }
+
+  const _configs = Array.isArray(ids)
+    ? _arrangeBy(ids, configs, idPropName)
+    : configs;
+  if (_configs.length === 0) {
+    return null;
+  }
+
   return (
     <div>
-      {
-        titles.map(title => {
-          const _isBtTitle = _fIsBtTitle(title)
-              , _c = configs.find(_isBtTitle);
-          return _c ? (
-            <ShowHide isShow={true} key={title}>
+        { _configs.map(c => {
+          return (
+            <ShowHide isShow={true} key={c[idPropName]}>
               <HighchartWrapper
                   isShow={true}
-                  config={_c.config}
+                  config={c.config}
                   absComp={absComp}
                   onLoaded={onLoaded}
                   onWillUnLoaded={onWillUnLoaded}
               />
            </ShowHide>
-          ) : null;
+         );
         })
       }
     </div>
   );
 }
 
+MiniCharts.defaultProps = {
+  idPropName: 'id'
+}
+
 /*
 MiniCharts.propTypes = {
-  titles: PropTypes.arrayOf(PropTypes.string),
   configs: PropTypes.arrayOf(
     PropTypes.shape({
-      btTitle: PropTypes.string,
       config: PropTypes.object
   })),
+  idPropName: PropTypes.string,
+  ids: PropTypes.arrayOf(PropTypes.string),
   absComp: PropTypes.node,
   onLoaded: PropTypes.func,
   onWillUnLoaded: PropTypes.func

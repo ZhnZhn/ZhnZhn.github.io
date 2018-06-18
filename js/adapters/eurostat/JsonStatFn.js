@@ -102,7 +102,6 @@ var JsonStatFn = {
     var ds = (0, _jsonstat2.default)(json).Dataset(0);
     var _sGeo = ds.Data(configSlice),
         time = void 0;
-
     if (!_sGeo || _sGeo.length === 0) {
       var maxIndex = (0, _fnStyle.getFromNullable)(ds.Dimension("time").id, []).length;
       if (maxIndex > 0) {

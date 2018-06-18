@@ -1,0 +1,16 @@
+{
+  "items": [
+    { "caption": "Exports of goods and services", "value": "P6" },
+    { "caption": "Imports of goods and services", "value": "P7" },
+    { "caption": "Exports of goods and services to the European Union", "value": "P6_S21" },
+    { "caption": "Exports of goods and services to members of the Monetary Union", "value": "P6_S2111" },
+    { "caption": "Exports of goods and services to non-members of the Monetary Union", "value": "P6_S2112" },
+    { "caption": "Exports of goods and services to the institutions of the EU", "value": "P6_S212" },
+    { "caption": "Exports of goods and services to third countries and international organisations", "value": "P6_S22" },
+    { "caption": "Imports of goods and services from the European Union", "value": "P7_S21" },
+    { "caption": "Imports of goods and services from members of the Monetary Union", "value": "P7_S2111" },
+    { "caption": "Imports of goods and services from non-members of the Monetary Union", "value": "P7_S2112" },
+    { "caption": "Imports of goods and services from the institutions of the EU", "value": "P7_S212" },
+    { "caption": "Imports of goods and services from third countries and international organisations", "value": "P7_S22" }
+  ]
+}

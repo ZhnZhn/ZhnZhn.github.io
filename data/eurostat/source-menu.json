@@ -46,7 +46,7 @@
         { "id" : "ES_RE_INDIC" }
       ]
     },{
-      "caption": "Extra Trade", "isInitClose": true,
+      "caption": "Trade", "isInitClose": true,
       "items": [
         { "id": "ES_TR_BYPARTNER" },
         { "id": "ES_TR_FOOD" },
@@ -54,7 +54,8 @@
         { "id": "ES_TR_MINERALFUELS" },
         { "id": "ES_TR_CHEMICALS" },
         { "id": "ES_TR_GOODS" },
-        { "id": "ES_TR_MACHINERY" }
+        { "id": "ES_TR_MACHINERY" },
+        { "id": "ES_TR_BYCOUNTRY" }
       ]
     }
   ],
@@ -518,7 +519,37 @@
           "dfTail": "precision=1&sitc06=SITC7"
         }
       }
+    },
+    "ES_TR_BYCOUNTRY": {
+      "type": "ES_TR_BYCOUNTRY",
+      "menuTitle": "By Country, Annual, M EUR",
+      "dialogCaption": "By Country, Annual, M EUR",
+      "chartContainerCaption": "Eurostat: Trade By Country, Annual, in M EUR",
+      "dialogType": "DialogEurostat2",
+      "dialogProps": {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "oneCaption": "Country",
+        "oneURI": "./data/eurostat/countries.json",
+        "oneJsonProp": "countries",
+        "twoCaption": "Flow",
+        "twoURI": "./data/eurostat/trade-flow.json",
+        "twoJsonProp": "items",
+        "loadId": "EU_STAT",
+        "chartsType": "df3",
+        "dataSource": "Eurostat (nama_10_exi)",
+        "mapType": "I",
+        "mapPropName": "na_item",
+        "mapSlice": {
+           "unit": "CP_MEUR"
+        },
+        "mapFrequency": "Y",
+        "mapDateDf": 1,
+        "dfProps": {
+          "dfTable": "nama_10_exi",
+          "dfParams": [ "geo",  "na_item" ],
+          "dfTail": "precision=1&unit=CP_MEUR"
+        }
+      }
     }
-
   }
 }

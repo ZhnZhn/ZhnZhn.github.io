@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/toBar.js"],"names":["toBar","createConfig","json","option","configSlice","zhMapSlice","time","subtitle","trJsonToCategory","then","categories","data","min","config","createBarConfig","setDataAndInfo","setCategories","colorEU"],"mappings":";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,QAAQ;AACZC,gBAAe,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AAAA,QACZC,WADY,GAC0BD,MAD1B,CACvBE,UADuB;AAAA,uBAC0BF,MAD1B,CACCG,IADD;AAAA,QACCA,IADD,gCACM,EADN;AAAA,2BAC0BH,MAD1B,CACUI,QADV;AAAA,QACUA,QADV,oCACmB,EADnB;;AAE/B,WAAO,qBAAWC,gBAAX,CAA4BN,IAA5B,EAAkCE,WAAlC,EACJK,IADI,CACC,gBAA+B;AAAA,UAA5BC,UAA4B,QAA5BA,UAA4B;AAAA,UAAhBC,IAAgB,QAAhBA,IAAgB;AAAA,UAAVC,GAAU,QAAVA,GAAU;;AACjC,UAAMC,SAAS,uBAAaC,eAAb,EAAf;AACA,2BAAWC,cAAX,CAA0B,EAAEF,cAAF,EAAUF,UAAV,EAAgBT,UAAhB,EAAsBC,cAAtB,EAA1B;AACA,2BAAWa,aAAX,CAAyB,EAAEH,cAAF,EAAUH,sBAAV,EAAsBE,QAAtB,EAA2BN,UAA3B,EAAiCC,kBAAjC,EAAzB;AACA,2BAAWU,OAAX,CAAmB,EAAEJ,cAAF,EAAUH,sBAAV,EAAnB;AACA,aAAOG,MAAP;AACJ,KAPK,CAAP;AAQD;AAXW,CAAd;;kBAceb,K","file":"toBar.js","sourcesContent":["import FactoryChart from './FactoryChart';\r\nimport JsonStatFn from './JsonStatFn';\r\nimport EuroStatFn from './EuroStatFn';\r\n\r\nconst toBar = {\r\n  createConfig : (json, option) => {\r\n    const { zhMapSlice:configSlice, time='', subtitle='' } = option\r\n    return JsonStatFn.trJsonToCategory(json, configSlice)\r\n      .then(({ categories, data, min }) => {\r\n          const config = FactoryChart.createBarConfig()\r\n          EuroStatFn.setDataAndInfo({ config, data, json, option })\r\n          EuroStatFn.setCategories({ config, categories, min, time, subtitle })\r\n          EuroStatFn.colorEU({ config, categories })\r\n          return config;\r\n     });\r\n  }\r\n};\r\n\r\nexport default toBar\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/toBar.js"
+ ],
+ "file": "../../../src/adapters/eurostat/toBar.js",
+ "names": [
+  "toBar",
+  "createConfig",
+  "json",
+  "option",
+  "configSlice",
+  "zhMapSlice",
+  "time",
+  "subtitle",
+  "trJsonToCategory",
+  "then",
+  "categories",
+  "data",
+  "min",
+  "config",
+  "createBarConfig",
+  "setDataAndInfo",
+  "setCategories",
+  "colorEU"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,QAAQ;AACZC,gBAAe,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AAAA,QACZC,WADY,GAC0BD,MAD1B,CACvBE,UADuB;AAAA,uBAC0BF,MAD1B,CACCG,IADD;AAAA,QACCA,IADD,gCACM,EADN;AAAA,2BAC0BH,MAD1B,CACUI,QADV;AAAA,QACUA,QADV,oCACmB,EADnB;;AAE/B,WAAO,qBAAWC,gBAAX,CAA4BN,IAA5B,EAAkCE,WAAlC,EACJK,IADI,CACC,gBAA+B;AAAA,UAA5BC,UAA4B,QAA5BA,UAA4B;AAAA,UAAhBC,IAAgB,QAAhBA,IAAgB;AAAA,UAAVC,GAAU,QAAVA,GAAU;;AACjC,UAAMC,SAAS,uBAAaC,eAAb,EAAf;AACA,2BAAWC,cAAX,CAA0B,EAAEF,cAAF,EAAUF,UAAV,EAAgBT,UAAhB,EAAsBC,cAAtB,EAA1B;AACA,2BAAWa,aAAX,CAAyB,EAAEH,cAAF,EAAUH,sBAAV,EAAsBE,QAAtB,EAA2BN,UAA3B,EAAiCC,kBAAjC,EAAzB;AACA,2BAAWU,OAAX,CAAmB,EAAEJ,cAAF,EAAUH,sBAAV,EAAnB;AACA,aAAOG,MAAP;AACJ,KAPK,CAAP;AAQD;AAXW,CAAd;;kBAceb,K"
+}

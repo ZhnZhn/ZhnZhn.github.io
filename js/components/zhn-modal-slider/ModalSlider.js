@@ -30,6 +30,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _throttle = require('../../utils/throttle');
+
+var _throttle2 = _interopRequireDefault(_throttle);
+
 var _ModalPane = require('../zhn-moleculs/ModalPane');
 
 var _ModalPane2 = _interopRequireDefault(_ModalPane);
@@ -44,20 +48,19 @@ var _MenuPage2 = _interopRequireDefault(_MenuPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var PERIOD_MS = 750;
+var THROTTLE_MS = 800;
 var S = {
   SHOW_HIDE: {
     position: 'absolute',
-    //top: '26px',
-    //backgroundColor: '#4d4d4d',
-    //padding: 0,
     overflow: 'hidden'
   },
   PAGES: {
-    overflowX: 'hidden',
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'flex-start',
-    transition: 'all 750ms ease-out'
+    overflowX: 'hidden',
+    transition: 'all ' + PERIOD_MS + 'ms ease-out'
   }
 };
 
@@ -84,6 +87,9 @@ var ModalSlider = (_temp = _class = function (_Component) {
         _pW = model.pageWidth || pageWidth,
         _maxP = model.maxPages || maxPages,
         pages = [];
+
+    _this.hNextPage = (0, _throttle2.default)(_this.hNextPage.bind(_this), THROTTLE_MS, { trailing: false });
+    _this.hPrevPage = (0, _throttle2.default)(_this.hPrevPage.bind(_this), THROTTLE_MS, { trailing: false });
 
     _this._PAGE_WIDTH = _pW;
     _this._pagesStyle = {
@@ -188,11 +194,9 @@ var ModalSlider = (_temp = _class = function (_Component) {
         onClose = _props2.onClose;
 
     pages.push(_react2.default.createElement(_MenuPage2.default, {
-      key: id
-      //style={S.PAGE}
-      , style: _this2._pageStyle
-      //CL={CL}
-      , title: title,
+      key: id,
+      style: _this2._pageStyle,
+      title: title,
       items: model[id],
       baseTitleCl: model.baseTitleCl,
       onPrevPage: _this2.hPrevPage,

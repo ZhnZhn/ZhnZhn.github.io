@@ -31,6 +31,7 @@
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 12px;
+  user-select: none;
   cursor: pointer; }
 
 .row__topic:nth-child(odd) {
@@ -46,6 +47,7 @@
   font-weight: bold;
   padding: 1px 16px;
   outline: none;
+  user-select: none;
   cursor: pointer; }
 
 .row__pane-topic:nth-child(odd) {
@@ -63,6 +65,7 @@
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 4px;
+  user-select: none;
   cursor: pointer; }
 
 .row__type2-topic:nth-child(odd) {

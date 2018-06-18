@@ -17,27 +17,27 @@ const CL = {
   ROOT: 'chart-item'
 };
 
-const styles = {
-  tabDiv : {
+const S = {
+  TAB_DIV: {
     position: 'relative',
     height: '30px',
     backgroundColor: 'transparent',
     zIndex: 2
   },
-  showHide : {
+  SHOW_HIDE: {
     marginLeft: '8px'
   },
-  wrapper: {
+  WRAPPER: {
     marginTop: '6px'
   },
-  dataSource: {
+  DATA_SOURCE: {
     position: 'absolute',
     left: '5px',
     bottom: '0px',
     color: '#909090',
     fontSize: '11px'
   }
-}
+};
 
 class AreaChartItem extends Component {
   /*
@@ -48,7 +48,12 @@ class AreaChartItem extends Component {
       zhConfig: PropTypes.shape({
         dataSource: PropTypes.string,
         itemCaption: PropTypes.string
-      })
+      }),
+      zhMiniConfigs: PropTypes.arrayOf(
+        PropTypes.shape({
+          btTitle: PropTypes.string,
+          config: PropTypes.object
+      }))
     }),
     onAddToWatch: PropTypes.func,
     onSetActive: PropTypes.func,
@@ -64,6 +69,11 @@ class AreaChartItem extends Component {
 
   constructor(props){
     super()
+
+
+    this._handleToggleOpen = this._toggle.bind(this, 'isOpen')
+    this._handleClickLegend = this._toggle.bind(this, 'isShowLegend')
+    this._handleToggleToolbar = this._toggle.bind(this, 'isShowToolbar')
 
     this._moreModel = crModelMore(this, {
       onToggle: this._handleToggleToolbar,
@@ -84,15 +94,16 @@ class AreaChartItem extends Component {
     this._crMomAthConfig = config.zhFnMomAthConfig
 
     this._dataSourceEl = (
-       <div style={styles.dataSource}>
+       <div style={S.DATA_SOURCE}>
          {dataSource}
        </div>
     )
     this.state = {
       isOpen: true,
       isShowToolbar: true,
-      isShowChart: true,
       isShowLegend: false,
+
+      isShowChart: true,
       isShowInfo: false,
 
       itemCaption: _itemCaption,
@@ -108,7 +119,7 @@ class AreaChartItem extends Component {
   }
   setDataSource = (strDataSource) => {
     this._dataSourceEl = (
-       <div style={styles.dataSource}>
+       <div style={S.DATA_SOURCE}>
          {strDataSource}
        </div>
     )
@@ -123,10 +134,10 @@ class AreaChartItem extends Component {
     return this.mainChart;
   }
 
-  _handleLoadedMetricChart = (metricChart) => {
+  _handleLoadedMiniChart = (metricChart) => {
      this.mainChart.options.zhDetailCharts.push(metricChart);
   }
-  _handleWillUnLoadedChart = (objChart) => {
+  _handleUnLoadedMiniChart = (objChart) => {
     const charts = safeGet(this.mainChart, 'options.zhDetailCharts')
     if (Array.isArray(charts)){
       this.mainChart.options.zhDetailCharts = charts.filter((chart) => {
@@ -135,17 +146,12 @@ class AreaChartItem extends Component {
     }
   }
 
-  _handleToggleOpen = () => {
+  _toggle = (propName) => {
     this.setState(prevState =>({
-      isOpen: !prevState.isOpen
+      [propName]: !prevState[propName]
     }))
   }
 
-  _handleClickLegend = () => {
-    this.setState(prevState =>({
-      isShowLegend: !prevState.isShowLegend
-    }))
-  }
   _handleToggleSeria = (item) => {
     this.mainChart.options.zhToggleSeria(this.mainChart, item)
   }
@@ -237,13 +243,6 @@ class AreaChartItem extends Component {
      return this.props.crValueMoving(this.mainChart, prev, dateTo);
   }
 
-  _handleToggleToolbar = (value) => {
-    this.setState(prevState => ({
-      isShowToolbar: !prevState.isShowToolbar
-    }))
-  }
-
-
  _handleMiniChart = (btTitle) => {
    const { ChartFn } = this.props;
    this.setState(prevState => {
@@ -268,7 +267,7 @@ class AreaChartItem extends Component {
    return (
          <ShowHide isShow={isShowToolbar}>
            <ChartToolBar
-             style={styles.tabDiv}
+             style={S.TAB_DIV}
              config={config}
              onMiniChart={this._handleMiniChart}
              getChart={this.getMainChart}
@@ -305,27 +304,6 @@ class AreaChartItem extends Component {
     return _compLegend;
   }
 
-  _renderIndicatorCharts = (arrConfigs) => {
-    const _indicatorCharts = arrConfigs.map(objConfig => {
-      const { config, id } = objConfig;
-      return (
-        <ShowHide isShow={true} key={id}>
-          <HighchartWrapper
-              isShow={true}
-              config={config}
-              onLoaded={this._handleLoadedMetricChart}
-              onWillUnLoaded={this._handleWillUnLoadedChart}
-          />
-        </ShowHide>
-      );
-    })
-    return (
-      <div>
-        {_indicatorCharts}
-      </div>
-    );
-  }
-
   _refChartComp = comp => this.chartComp = comp
 
   render(){
@@ -360,12 +338,12 @@ class AreaChartItem extends Component {
             isAdminMode={isAdminMode}
             crValueMoving={this._crValueMoving}
          />
-        <ShowHide isShow={isOpen} style={styles.showHide}>
+        <ShowHide isShow={isOpen} style={S.SHOW_HIDE}>
            {isShowChart && this._createChartToolBar(config)}
            <HighchartWrapper
               ref={this._refChartComp}
               isShow={isShowChart}
-              rootStyle={styles.wrapper}
+              rootStyle={S.WRAPPER}
               config={config}
               isShowAbs={isShowAbs}
               absComp={this._dataSourceEl}
@@ -377,14 +355,19 @@ class AreaChartItem extends Component {
               onClickChart={this._handleClickChart}
            />
           {this._renderLegend(config)}
-          {this._renderIndicatorCharts(mfiConfigs)}
-
           <MiniCharts
-            titles={miniTitles}
-            configs={zhMiniConfigs}
+            configs={mfiConfigs}
             absComp={this._dataSourceEl}
-            onLoaded={this._handleLoadedMetricChart}
-            onWillUnLoaded={this._handleWillUnLoadedChart}
+            onLoaded={this._handleLoadedMiniChart}
+            onWillUnLoaded={this._handleUnLoadedMiniChart}
+          />
+          <MiniCharts
+            configs={zhMiniConfigs}
+            idPropName="btTitle"
+            ids={miniTitles}
+            absComp={this._dataSourceEl}
+            onLoaded={this._handleLoadedMiniChart}
+            onWillUnLoaded={this._handleUnLoadedMiniChart}
           />
         </ShowHide>
       </div>

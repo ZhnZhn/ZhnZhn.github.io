@@ -18,56 +18,79 @@ var _HighchartWrapper2 = _interopRequireDefault(_HighchartWrapper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fIsBtTitle = function _fIsBtTitle(title) {
+var _fIsTitle = function _fIsTitle(title, idPropName) {
   return function (c) {
-    return c.btTitle === title;
+    return c[idPropName] === title;
   };
 };
 
+var _arrangeBy = function _arrangeBy(titles, configs, idPropName) {
+  var _configs = [];
+  if (!titles || !titles.length) {
+    return _configs;
+  }
+  titles.forEach(function (title) {
+    var _isTitle = _fIsTitle(title, idPropName),
+        _c = configs.find(_isTitle);
+    if (_c) {
+      _configs.push(_c);
+    }
+  });
+  return _configs;
+};
+
 var MiniCharts = function MiniCharts(_ref) {
-  var titles = _ref.titles,
-      configs = _ref.configs,
+  var configs = _ref.configs,
+      idPropName = _ref.idPropName,
+      ids = _ref.ids,
       absComp = _ref.absComp,
       onLoaded = _ref.onLoaded,
       onWillUnLoaded = _ref.onWillUnLoaded;
 
-  if (!titles || !titles.length || !configs || !configs.length) {
+  if (!configs || !configs.length) {
     return null;
   }
+
+  var _configs = Array.isArray(ids) ? _arrangeBy(ids, configs, idPropName) : configs;
+  if (_configs.length === 0) {
+    return null;
+  }
+
   return _react2.default.createElement(
     'div',
     null,
-    titles.map(function (title) {
-      var _isBtTitle = _fIsBtTitle(title),
-          _c = configs.find(_isBtTitle);
-      return _c ? _react2.default.createElement(
+    _configs.map(function (c) {
+      return _react2.default.createElement(
         _ShowHide2.default,
-        { isShow: true, key: title },
+        { isShow: true, key: c[idPropName] },
         _react2.default.createElement(_HighchartWrapper2.default, {
           isShow: true,
-          config: _c.config,
+          config: c.config,
           absComp: absComp,
           onLoaded: onLoaded,
           onWillUnLoaded: onWillUnLoaded
         })
-      ) : null;
+      );
     })
   );
 };
 
-/*
-MiniCharts.propTypes = {
-  titles: PropTypes.arrayOf(PropTypes.string),
-  configs: PropTypes.arrayOf(
-    PropTypes.shape({
-      btTitle: PropTypes.string,
-      config: PropTypes.object
-  })),
-  absComp: PropTypes.node,
-  onLoaded: PropTypes.func,
-  onWillUnLoaded: PropTypes.func
-}
-*/
+MiniCharts.defaultProps = {
+  idPropName: 'id'
 
-exports.default = MiniCharts;
+  /*
+  MiniCharts.propTypes = {
+    configs: PropTypes.arrayOf(
+      PropTypes.shape({
+        config: PropTypes.object
+    })),
+    idPropName: PropTypes.string,
+    ids: PropTypes.arrayOf(PropTypes.string),
+    absComp: PropTypes.node,
+    onLoaded: PropTypes.func,
+    onWillUnLoaded: PropTypes.func
+  }
+  */
+
+};exports.default = MiniCharts;
 //# sourceMappingURL=MiniCharts.js.map
