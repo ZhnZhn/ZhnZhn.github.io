@@ -28,57 +28,57 @@ var _RouterNativeLink = require('../native-links/RouterNativeLink');
 
 var _RouterNativeLink2 = _interopRequireDefault(_RouterNativeLink);
 
-var _ButtonTab = require('./ButtonTab');
+var _ButtonTab = require('../zhn/ButtonTab');
 
 var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
 
-var _InfoPart = require('./InfoPart');
+var _InfoPart = require('../zhn/InfoPart');
 
 var _InfoPart2 = _interopRequireDefault(_InfoPart);
 
-var _OpenClose = require('./OpenClose2');
+var _OpenClose = require('../zhn/OpenClose2');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DESCR_CSS_CLASS = 'info__descr';
+var CL_DESCR = 'info__descr';
 
-var styles = {
-  rootShow: {
+var S = {
+  ROOT_SHOW: {
     position: 'relative',
     display: 'block',
     paddingTop: '34px',
     paddingRight: '20px',
     paddingLeft: '8px'
   },
-  rootHide: {
+  ROOT_HIDE: {
     position: 'relative',
     display: 'none'
   },
-  rootStyle: {
+  INFO_ROOT: {
     marginTop: '4px'
   },
-  rootStyleDescription: {
-    marginTop: '10px'
-  },
-  label: {
+  INFO_CAPTION: {
     display: 'inline-block',
-    color: '#1B75BB',
+    color: '#1b75bb',
     width: '110px',
     textAlign: 'right',
     paddingRight: '5px',
     fontWeight: 'bold'
   },
-  text: {
+  INFO_TEXT: {
     fontWeight: 'bold',
     color: 'black',
     textTransform: 'capitalize'
   },
-  description: {
+  DESCR_OC: {
     paddingTop: '12px'
   },
-  textDescr: {
+  DESCR_ROOT: {
+    marginTop: '10px'
+  },
+  DESCR_TEXT: {
     color: 'gray',
     fontWeight: 'bold'
   }
@@ -151,42 +151,40 @@ var PanelDataInfo = function (_Component) {
           description = info.description,
           item = zhInfo.item,
           linkFn = zhInfo.linkFn,
-          styleShow = isShow ? styles.rootShow : styles.rootHide,
+          _rootStyle = isShow ? S.ROOT_SHOW : S.ROOT_HIDE,
           _isDescr = description ? true : false,
           _isDescrClose = _isDescr && description.length > 200 ? true : false;
 
       return _react2.default.createElement(
         'div',
-        { style: styleShow },
+        { style: _rootStyle },
         _react2.default.createElement(_ButtonTab2.default, {
           caption: 'Chart',
           isShow: false,
           onClick: onClickChart
         }),
         _react2.default.createElement(_InfoPart2.default, {
-          caption: '',
           text: name,
-          styleCaption: { display: 'none' },
-          styleText: styles.text
+          styleText: S.INFO_TEXT
         }),
         _react2.default.createElement(_InfoPart2.default, {
-          caption: 'Newest Date: ',
+          caption: 'Newest Date:',
           text: newest_available_date,
-          rootStyle: styles.rootStyle,
-          styleCaption: styles.label,
-          styleText: styles.text
+          rootStyle: S.INFO_ROOT,
+          styleCaption: S.INFO_CAPTION,
+          styleText: S.INFO_TEXT
         }),
         _react2.default.createElement(_InfoPart2.default, {
-          caption: 'Oldest Date: ',
+          caption: 'Oldest Date:',
           text: oldest_available_date,
-          styleCaption: styles.label,
-          styleText: styles.text
+          styleCaption: S.INFO_CAPTION,
+          styleText: S.INFO_TEXT
         }),
         _react2.default.createElement(_InfoPart2.default, {
-          caption: 'Frequency: ',
+          caption: 'Frequency:',
           text: frequency,
-          styleCaption: styles.label,
-          styleText: styles.text
+          styleCaption: S.INFO_CAPTION,
+          styleText: S.INFO_TEXT
         }),
         this._renderQuandlLink(database_code, dataset_code),
         _isDescr && _react2.default.createElement(
@@ -194,15 +192,14 @@ var PanelDataInfo = function (_Component) {
           {
             caption: 'Description',
             isClose: _isDescrClose,
-            style: styles.description
+            style: S.DESCR_OC
           },
           _react2.default.createElement(_InfoPart2.default, {
-            caption: '',
             text: description,
             isHtml: true,
-            classText: DESCR_CSS_CLASS,
-            rootStyle: styles.rootStyleDescription,
-            styleText: styles.textDescr
+            classText: CL_DESCR,
+            rootStyle: S.DESCR_ROOT,
+            styleText: S.DESCR_TEXT
           })
         ),
         this._renderNativeLink(linkFn, item)
@@ -213,4 +210,4 @@ var PanelDataInfo = function (_Component) {
 }(_react.Component);
 
 exports.default = PanelDataInfo;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\zhn\PanelDataInfo.js.map
+//# sourceMappingURL=PanelDataInfo.js.map

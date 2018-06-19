@@ -39,6 +39,18 @@ var _safeGet = require('../../utils/safeGet');
 
 var _safeGet2 = _interopRequireDefault(_safeGet);
 
+var _ShowHide = require('../zhn/ShowHide');
+
+var _ShowHide2 = _interopRequireDefault(_ShowHide);
+
+var _HighchartWrapper = require('../zhn/HighchartWrapper');
+
+var _HighchartWrapper2 = _interopRequireDefault(_HighchartWrapper);
+
+var _Legend = require('../zhn/Legend');
+
+var _Legend2 = _interopRequireDefault(_Legend);
+
 var _AreaMore = require('./AreaMore');
 
 var _AreaMore2 = _interopRequireDefault(_AreaMore);
@@ -55,19 +67,7 @@ var _MiniCharts = require('./MiniCharts');
 
 var _MiniCharts2 = _interopRequireDefault(_MiniCharts);
 
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
-var _HighchartWrapper = require('../zhn/HighchartWrapper');
-
-var _HighchartWrapper2 = _interopRequireDefault(_HighchartWrapper);
-
-var _Legend = require('../zhn/Legend');
-
-var _Legend2 = _interopRequireDefault(_Legend);
-
-var _PanelDataInfo = require('../zhn/PanelDataInfo');
+var _PanelDataInfo = require('./PanelDataInfo');
 
 var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
 

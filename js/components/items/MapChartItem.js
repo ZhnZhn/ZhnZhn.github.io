@@ -32,10 +32,6 @@ var _ChoroplethMap = require('../../adapters/eurostat/ChoroplethMap');
 
 var _ChoroplethMap2 = _interopRequireDefault(_ChoroplethMap);
 
-var _ItemHeader = require('./ItemHeader');
-
-var _ItemHeader2 = _interopRequireDefault(_ItemHeader);
-
 var _ButtonTab = require('../zhn/ButtonTab');
 
 var _ButtonTab2 = _interopRequireDefault(_ButtonTab);
@@ -44,13 +40,17 @@ var _ShowHide = require('../zhn/ShowHide');
 
 var _ShowHide2 = _interopRequireDefault(_ShowHide);
 
-var _PanelDataInfo = require('../zhn/PanelDataInfo');
-
-var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
-
 var _SpinnerLoading = require('../zhn/SpinnerLoading');
 
 var _SpinnerLoading2 = _interopRequireDefault(_SpinnerLoading);
+
+var _ItemHeader = require('./ItemHeader');
+
+var _ItemHeader2 = _interopRequireDefault(_ItemHeader);
+
+var _PanelDataInfo = require('./PanelDataInfo');
+
+var _PanelDataInfo2 = _interopRequireDefault(_PanelDataInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -15,10 +15,10 @@
       "caption" : "Energy", "isInitClose" : true,
       "items" : [
         { "id" : "ES_E_INDIC" },
-        { "id" : "ES_E_STAT_Q" },
-        { "id" : "ES_E_STAT_PR" },
         { "id" : "ES_I_ENERGY" },
-        { "id" : "ES_I_ELECTRICITY_GENERATION" }
+        { "id" : "ES_E_STAT_Q" },
+        { "id" : "ES_I_ELECTRICITY_GENERATION" },
+        { "id" : "ES_E_STAT_PR" }
       ]
     },{
       "caption" : "Finance", "isInitClose" : true,
@@ -85,19 +85,15 @@
 
     "ES_8_ECONOMIC": {
       "type": "ES_8_ECONOMIC",
-      "menuTitle" : "8 Economic Indicators",
-      "dialogCaption" : "8 Economic Indicators",
+      "menuTitle" : "8 Indicators",
+      "dialogCaption" : "8 Indicators",
       "chartContainerCaption" : "Eurostat 8 Economic Indicators",
       "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "descrUrl": "./data/eurostat/eurostat-economic-trends-app.html",
-        "oneCaption" : "Country",
-        "oneURI" : "./data/eurostat/countries.json",
-        "oneJsonProp" : "countries",
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/8-economic-indicators.json",
-        "twoJsonProp" : "indicators",
-        "loadId" : "EU_STAT"
+        "twoJsonProp" : "indicators"
       }
     },
     "ES_CPI" : {
@@ -164,9 +160,9 @@
     },
     "ES_UNEMP" : {
       "type" : "ES_UNEMP",
-      "menuTitle" : "Unemployment (unadjusted)",
-      "dialogCaption" : "Unemployment (unadjusted)",
-      "chartContainerCaption" : "Eurostat Unemployment (unadjusted)",
+      "menuTitle" : "Unemployment",
+      "dialogCaption" : "Unemployment",
+      "chartContainerCaption" : "Eurostat Unemployment",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -183,7 +179,7 @@
     },
     "ES_INDIC" : {
         "type" : "ES_INDIC",
-        "menuTitle" : "Indicators",
+        "menuTitle" : "Economic Indicators",
         "dialogCaption" : "Economic Indicators",
         "chartContainerCaption" : "Eurostat Economic Indicators",
         "dialogType" : "DialogEurostat3",
@@ -198,9 +194,9 @@
 
     "ES_E_INDIC" : {
         "type" : "ES_E_INDIC",
-        "menuTitle" : "Main Indicators",
-        "dialogCaption" : "Energy Main Indicators",
-        "chartContainerCaption" : "Eurostat Energy Main Indicators",
+        "menuTitle" : "Indicators",
+        "dialogCaption" : "Energy Indicators",
+        "chartContainerCaption" : "Eurostat Energy Indicators",
         "dialogType" : "DialogEurostat2",
         "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
@@ -226,9 +222,9 @@
     },
     "ES_E_STAT_PR" : {
         "type" : "ES_E_STAT_PR",
-        "menuTitle" : "Statistics Prices",
-        "dialogCaption" : "Energy Statistics Prices",
-        "chartContainerCaption" : "Eurostat Energy Statistics Prices",
+        "menuTitle" : "Electricity, Gas Prices",
+        "dialogCaption" : "Electricity, Gas Prices",
+        "chartContainerCaption" : "Eurostat Energy Electricity, Gas Prices",
         "dialogType" : "DialogEurostat2",
         "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
@@ -239,9 +235,9 @@
     },
     "ES_I_ENERGY" : {
       "type" : "ES_I_ENERGY",
-      "menuTitle" : "Industry Energy",
-      "dialogCaption" : "Industry Energy",
-      "chartContainerCaption" : "Eurostat Industry Energy",
+      "menuTitle" : "Industry",
+      "dialogCaption" : "Energy Industry",
+      "chartContainerCaption" : "Eurostat Energy Industry",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -263,7 +259,11 @@
         "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/electricity-generation.json",
         "twoJsonProp" : "metrics",
-        "chartsType": "t3b"
+        "chartsType": "t3b",
+        "dataSource": "Eurostat (nrg_105m)",
+        "dfProps": {
+          "dfTable": "nrg_105m"
+        }
       }
     },
 
@@ -328,9 +328,9 @@
     },
     "ES_AGRI_MEAT" : {
       "type" : "ES_AGRI_MEAT",
-      "menuTitle" : "Meat Production & Livestock",
-      "dialogCaption" : "Meat Production & Livestock",
-      "chartContainerCaption" : "Eurostat Meat Production & Livestock",
+      "menuTitle" : "Livestock",
+      "dialogCaption" : "Livestock",
+      "chartContainerCaption" : "Eurostat Agriculture Livestock",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -344,15 +344,29 @@
     },
     "ES_AGRI_ENVI" : {
       "type" : "ES_AGRI_ENVI",
-      "menuTitle" : "Enviroment Indicators",
-      "dialogCaption" : "Agri-Enviroment Indicators",
-      "chartContainerCaption" : "Eurostat Agri-Enviroment Indicators",
-      "dialogType" : "DialogEurostat",
+      "menuTitle" : "Sales Of Pesticides",
+      "dialogCaption" : "Sales Of Pesticides",
+      "chartContainerCaption" : "Eurostat Agriculture Sales Of Pesticides",
+      "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
-      "dialogProps" : {
-        "twoCaption" : "Indicator",
-        "twoURI" : "./data/eurostat/agri-envi.json",
-        "twoJsonProp" : "indicators"
+      "dialogProps": {
+        "twoCaption": "Pesticide",
+        "twoURI": "./data/eurostat/pesticides.json",
+        "twoJsonProp": "items",
+        "chartsType": "df3",
+        "dataSource": "Eurostat (tai02)",
+        "mapType": "I",
+        "mapPropName": "pesticid",
+        "mapSlice": {
+           "unit": "KG"
+        },
+        "mapFrequency": "Y",
+        "mapDateDf": 2,
+        "dfProps": {
+          "dfTable": "tai02",
+          "dfParams": [ "geo",  "pesticid" ],
+          "dfTail": "precision=1&unit=KG"
+        }
       }
     },
     "ES_AGRI_CROP": {
@@ -526,15 +540,11 @@
       "dialogCaption": "By Country, Annual, M EUR",
       "chartContainerCaption": "Eurostat: Trade By Country, Annual, in M EUR",
       "dialogType": "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
       "dialogProps": {
-        "descrUrl": "./data/eurostat/eurostat.html",
-        "oneCaption": "Country",
-        "oneURI": "./data/eurostat/countries.json",
-        "oneJsonProp": "countries",
         "twoCaption": "Flow",
         "twoURI": "./data/eurostat/trade-flow.json",
         "twoJsonProp": "items",
-        "loadId": "EU_STAT",
         "chartsType": "df3",
         "dataSource": "Eurostat (nama_10_exi)",
         "mapType": "I",

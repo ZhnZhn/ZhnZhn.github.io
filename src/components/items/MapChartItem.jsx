@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 
 import ChoroplethMap from '../../adapters/eurostat/ChoroplethMap';
 
-import ItemHeader from './ItemHeader'
 import ButtonTab from '../zhn/ButtonTab';
 import ShowHide from '../zhn/ShowHide';
-import PanelDataInfo from '../zhn/PanelDataInfo';
 import SpinnerLoading from '../zhn/SpinnerLoading';
+import ItemHeader from './ItemHeader'
+import PanelDataInfo from './PanelDataInfo';
 
 const S = {
   ROOT_DIV: {

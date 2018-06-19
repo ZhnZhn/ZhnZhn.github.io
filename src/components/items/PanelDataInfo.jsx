@@ -3,51 +3,51 @@ import React, { Component } from 'react';
 
 import RouterNativeLink from '../native-links/RouterNativeLink';
 
-import ButtonTab from './ButtonTab';
-import InfoPart from './InfoPart';
-import OpenClose2 from './OpenClose2';
+import ButtonTab from '../zhn/ButtonTab';
+import InfoPart from '../zhn/InfoPart';
+import OpenClose2 from '../zhn/OpenClose2';
 
-const DESCR_CSS_CLASS = 'info__descr'
+const CL_DESCR = 'info__descr';
 
-const styles = {
-  rootShow : {
+const S = {
+  ROOT_SHOW: {
     position: 'relative',
     display: 'block',
     paddingTop : '34px',
     paddingRight : '20px',
     paddingLeft : '8px'
   },
-  rootHide : {
+  ROOT_HIDE: {
     position: 'relative',
     display: 'none'
   },
-  rootStyle : {
+  INFO_ROOT: {
     marginTop: '4px'
   },
-  rootStyleDescription : {
-    marginTop: '10px'
-  },
-  label : {
+  INFO_CAPTION: {
     display : 'inline-block',
-    color : '#1B75BB',
+    color : '#1b75bb',
     width : '110px',
     textAlign : 'right',
     paddingRight : '5px',
     fontWeight : 'bold'
   },
-  text : {
-    fontWeight : 'bold',
-    color : 'black',
+  INFO_TEXT: {
+    fontWeight: 'bold',
+    color: 'black',
     textTransform: 'capitalize'
   },
-  description : {
+  DESCR_OC: {
     paddingTop : '12px'
   },
-  textDescr : {
+  DESCR_ROOT: {
+    marginTop: '10px'
+  },
+  DESCR_TEXT: {
     color : 'gray',
     fontWeight : 'bold'
   }
-}
+};
 
 const _isWithoutLink = (item={}) => {
   const { id='' } = item
@@ -94,58 +94,55 @@ class PanelDataInfo extends Component {
              description
            } = info
          , { item, linkFn } = zhInfo
-         , styleShow = isShow
-             ? styles.rootShow
-             : styles.rootHide
+         , _rootStyle = isShow
+             ? S.ROOT_SHOW
+             : S.ROOT_HIDE
          , _isDescr = description ? true : false
          , _isDescrClose = (_isDescr && description.length>200)
                 ? true
                 : false;
     return (
-       <div style={styleShow}>
+       <div style={_rootStyle}>
          <ButtonTab
            caption="Chart"
            isShow={false}
            onClick={onClickChart}
          />
          <InfoPart
-            caption=""
             text={name}
-            styleCaption={{ display: 'none' }}
-            styleText={styles.text}
+            styleText={S.INFO_TEXT}
          />
          <InfoPart
-            caption="Newest Date: "
+            caption="Newest Date:"
             text={newest_available_date}
-            rootStyle={styles.rootStyle}
-            styleCaption={styles.label}
-            styleText={styles.text}
+            rootStyle={S.INFO_ROOT}
+            styleCaption={S.INFO_CAPTION}
+            styleText={S.INFO_TEXT}
          />
          <InfoPart
-            caption="Oldest Date: "
+            caption="Oldest Date:"
             text={oldest_available_date}
-            styleCaption={styles.label}
-            styleText={styles.text}
+            styleCaption={S.INFO_CAPTION}
+            styleText={S.INFO_TEXT}
          />
          <InfoPart
-            caption="Frequency: "
+            caption="Frequency:"
             text={frequency}
-            styleCaption={styles.label}
-            styleText={styles.text}
+            styleCaption={S.INFO_CAPTION}
+            styleText={S.INFO_TEXT}
          />
          {this._renderQuandlLink(database_code, dataset_code)}
          { _isDescr && <OpenClose2
               caption="Description"
               isClose={_isDescrClose}
-              style={styles.description}
+              style={S.DESCR_OC}
              >
                <InfoPart
-                  caption=""
                   text={description}
                   isHtml={true}
-                  classText={DESCR_CSS_CLASS}
-                  rootStyle={styles.rootStyleDescription}
-                  styleText={styles.textDescr}
+                  classText={CL_DESCR}
+                  rootStyle={S.DESCR_ROOT}
+                  styleText={S.DESCR_TEXT}
                />
             </OpenClose2>
          }

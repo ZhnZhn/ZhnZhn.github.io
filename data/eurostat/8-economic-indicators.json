@@ -19,13 +19,13 @@
       "mapValue" : "teiis080?precision=1&nace_r2=B-D&unit=I2010_SCA",
       "mapSlice" : { "nace_r2" : "B-D" , "unit" : "I2010_SCA"  }
     },{
-      "caption" : "Government deficit/surplus, annual, % of GDP",
+      "caption" : "Government deficit/surplus, % of GDP, annual",
       "value" : "teina200?unit=PC_GDP",
       "mapFrequency" : "Y",
       "mapValue" : "teina200?precision=1&unit=PC_GDP",
       "mapSlice" :  { "unit" : "PC_GDP" }
     },{
-      "caption" : "Government gross debt, annual, % of GDP",
+      "caption" : "Government gross debt, % of GDP, annual",
       "value" : "teina225?unit=PC_GDP",
       "mapFrequency" : "Y",
       "mapValue" : "teina225?unit=PC_GDP",
@@ -55,11 +55,11 @@
       "mapValue" : "teina011?unit=PCH_Q4_NSA",
       "mapSlice" : { "unit" : "PCH_Q4_NSA" }
     },{
-      "caption" : "GDP per inhabitant, euro",
-      "value" : "tsdec100?unit=CLV10_EUR_HAB",
+      "caption" : "Main GDP Aggregates Per Capita",
+      "value" : "nama_10_pc?na_item=B1GQ&unit=CP_EUR_HAB",
       "mapFrequency" : "Y",
-      "mapValue" : "tsdec100?unit=CLV10_EUR_HAB",
-      "mapSlice" : { "unit" : "CLV10_EUR_HAB" }
+      "mapValue" : "nama_10_pc?na_item=B1GQ&unit=CP_EUR_HAB",
+      "mapSlice" : { "na_item": "B1GQ", "unit": "CP_EUR_HAB" }
     }
   ]
 }

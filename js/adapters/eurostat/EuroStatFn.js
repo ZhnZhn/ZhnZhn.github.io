@@ -225,11 +225,18 @@ var EuroStatFn = (0, _extends3.default)({
     var _option$group = option.group,
         group = _option$group === undefined ? '' : _option$group,
         arr = group.split('_'),
-        _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default;
+        _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default,
+        _ext = json.extension || {},
+        datasetId = _ext.datasetId,
+        subTitle = _ext.subTitle,
+        _id = datasetId ? 'DatasetId: ' + datasetId + '.' : '',
+        _sub = subTitle ? 'Metric: ' + subTitle + '.' : '',
+        _d = _ext.description || '',
+        _descr = (_d + ' ' + _id + ' ' + _sub).trim();
 
     return {
       name: json.label,
-      //description: _descr,
+      description: _descr,
       newest_available_date: json.updated,
       oldest_available_date: '1996-01-30',
       frequency: _frequency

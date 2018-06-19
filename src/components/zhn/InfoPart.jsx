@@ -25,18 +25,23 @@ const _renderText = (text, classText, styleText, isHtml) => {
 
 const InfoPart = (props) => {
     const {
-            caption, text, classText,
-            rootStyle, styleCaption, styleText, isHtml
-          } = props;          
+            rootStyle,
+            caption, styleCaption,
+            text, classText,
+            styleText, isHtml
+          } = props;
     if (!text) { return null; }
     return (
       <div style={rootStyle}>
-        <span style={styleCaption}>
-           {caption}
-        </span>
+        { caption &&
+          <span style={styleCaption}>
+            {caption}
+          </span>
+        }
         {_renderText(text, classText, styleText, isHtml)}
       </div>
     );
 }
+
 
 export default InfoPart

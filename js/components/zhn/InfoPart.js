@@ -30,11 +30,11 @@ var _renderText = function _renderText(text, classText, styleText, isHtml) {
 };
 
 var InfoPart = function InfoPart(props) {
-  var caption = props.caption,
+  var rootStyle = props.rootStyle,
+      caption = props.caption,
+      styleCaption = props.styleCaption,
       text = props.text,
       classText = props.classText,
-      rootStyle = props.rootStyle,
-      styleCaption = props.styleCaption,
       styleText = props.styleText,
       isHtml = props.isHtml;
 
@@ -44,7 +44,7 @@ var InfoPart = function InfoPart(props) {
   return _react2.default.createElement(
     'div',
     { style: rootStyle },
-    _react2.default.createElement(
+    caption && _react2.default.createElement(
       'span',
       { style: styleCaption },
       caption

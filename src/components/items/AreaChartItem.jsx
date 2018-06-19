@@ -3,15 +3,14 @@ import React, { Component } from 'react';
 
 import safeGet from '../../utils/safeGet'
 
+import ShowHide from '../zhn/ShowHide';
+import HighchartWrapper from '../zhn/HighchartWrapper';
+import Legend from '../zhn/Legend';
 import crModelMore from './AreaMore'
 import Header from './Header';
 import ChartToolBar from './ChartToolBar';
 import MiniCharts from './MiniCharts';
-import ShowHide from '../zhn/ShowHide';
-import HighchartWrapper from '../zhn/HighchartWrapper';
-import Legend from '../zhn/Legend';
-
-import PanelDataInfo from '../zhn/PanelDataInfo';
+import PanelDataInfo from './PanelDataInfo';
 
 const CL = {
   ROOT: 'chart-item'

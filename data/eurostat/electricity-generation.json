@@ -1,6 +1,36 @@
 {
   "metrics" : [
     {
+      "caption" : "Net electricity generation - Total (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107100B",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107100B",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107100B" }
+    },{
+      "caption" : "Exports (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100500",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100500",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100500" }
+    },{
+      "caption" : "Exports to EU (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100510",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100510",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100510" }
+    },{
+      "caption" : "Imports (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100300",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100300",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100300" }
+    },{
+      "caption" : "Imports from EU (Gwh)" ,
+      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100320",
+      "mapFrequency" : "M",
+      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100320",
+      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100320" }
+    },{
       "caption" : "Gross electricity generation - Total (Gwh)" ,
       "value" : "nrg_105m?indic=16_107100B&indic_nrg=15_107000",
       "mapFrequency" : "M",
@@ -43,12 +73,6 @@
       "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=15_107006",
       "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "15_107006" }
     },{
-      "caption" : "Net electricity generation - Total (Gwh)" ,
-      "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107100B",
-      "mapFrequency" : "M",
-      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107100B",
-      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107100B" }
-    },        {
       "caption" : "Net electricity generation - Wind - Total (Gwh)" ,
       "value" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105",
       "mapFrequency" : "M",
@@ -84,30 +108,6 @@
       "mapFrequency" : "M",
       "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=16_107105C2",
       "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "16_107105C2" }
-    },{
-      "caption" : "Imports (Gwh)" ,
-      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100300",
-      "mapFrequency" : "M",
-      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100300",
-      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100300" }
-    },{
-      "caption" : "Imports from EU (Gwh)" ,
-      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100320",
-      "mapFrequency" : "M",
-      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100320",
-      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100320" }
-    },{
-      "caption" : "Exports (Gwh)" ,
-      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100500",
-      "mapFrequency" : "M",
-      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100500",
-      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100500" }
-    },{
-      "caption" : "Exports to EU (Gwh)" ,
-      "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100510",
-      "mapFrequency" : "M",
-      "mapValue" : "nrg_105m?indic=16_107100B&indic_nrg=B_100510",
-      "mapSlice" : { "indic" : "16_107100B", "indic_nrg": "B_100510" }
     },{
       "caption" : "Gross inland consumption (Gwh)" ,
       "value" : "nrg_105m?indic=16_107100B&indic_nrg=B_100900",

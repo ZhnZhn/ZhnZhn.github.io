@@ -188,10 +188,21 @@ const EuroStatFn = {
         ,  arr = group.split('_')
         , _frequency = (_rFrequency[arr[arr.length-1]])
               ? _rFrequency[arr[arr.length-1]]
-              : _rFrequency.default;
+              : _rFrequency.default
+        , _ext = json.extension || {}
+        , { datasetId, subTitle} = _ext
+        , _id = datasetId
+            ? `DatasetId: ${datasetId}.`
+            : ''
+        , _sub = subTitle
+            ? `Metric: ${subTitle}.`
+            : ''
+        , _d = _ext.description || ''
+        , _descr = (`${_d} ${_id} ${_sub}`).trim();
+
     return {
       name: json.label,
-      //description: _descr,
+      description: _descr,
       newest_available_date: json.updated,
       oldest_available_date: '1996-01-30',
       frequency: _frequency
