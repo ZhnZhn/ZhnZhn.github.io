@@ -60,7 +60,9 @@ var _crRow = function _crRow() {
   return '<div>' + _crSpan(t, v, option) + '</div>';
 };
 
-var _crHeader = function _crHeader(date, id) {
+var _crHeader = function _crHeader() {
+  var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '&nbsp;';
+  var id = arguments[1];
   var cssClass = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   return '<div id="' + id + '" class="tp__header not-selected ' + cssClass + '">\n    <span class="tp__header__caption">' + date + '</span>\n    <span class="tp__header__close">X</span>\n  </div>';

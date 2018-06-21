@@ -41,7 +41,7 @@ const _crRow = (t='', v='', option) => {
   return `<div>${_crSpan(t, v, option)}</div>`;
 }
 
-const _crHeader = (date, id, cssClass='') => {
+const _crHeader = (date='&nbsp;', id, cssClass='') => {
   return `<div id="${id}" class="tp__header not-selected ${cssClass}">
     <span class="tp__header__caption">${date}</span>
     <span class="tp__header__close">X</span>
@@ -281,7 +281,7 @@ const _crSparkData = (point) => {
 
 const _fnAddHandlerCloseAndSparklines = function(id, point){
   setTimeout( function(){
-          _addHideHandler(id. point)          
+          _addHideHandler(id. point)
           const {
                   sparkLinesData, sparkBarsData,
                   pointIndex

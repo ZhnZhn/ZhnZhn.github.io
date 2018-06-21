@@ -118,7 +118,7 @@ const JsonStatFn = {
        });
   },
   trJsonToSeria : (json, configSlice, categories) => {
-    const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
+    const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);    
     return Box(_combineToHm(dGeo.id, sGeo))
       .fold((hm) => _trHmToData(hm, categories));
   }

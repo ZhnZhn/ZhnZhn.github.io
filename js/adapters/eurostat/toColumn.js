@@ -41,10 +41,11 @@ var toColumn = {
 
   createSeria: function createSeria(json, option, chart) {
     var categories = chart.options.xAxis[0].categories;
-    var configSlice = option.zhMapSlice,
+
+    var _option$zhMapSlice = option.zhMapSlice,
+        configSlice = _option$zhMapSlice === undefined ? {} : _option$zhMapSlice,
         time = configSlice.time,
         data = _JsonStatFn2.default.trJsonToSeria(json, configSlice, categories);
-
 
     return {
       zhSeriaId: 'optionKey',

@@ -18,9 +18,9 @@ const toColumn = {
 
   createSeria : (json, option, chart) => {
     const categories = chart.options.xAxis[0].categories;
-    const { zhMapSlice:configSlice } = option
+    const { zhMapSlice:configSlice={} } = option
         , { time } = configSlice
-        , data = JsonStatFn.trJsonToSeria(json, configSlice, categories)
+        , data = JsonStatFn.trJsonToSeria(json, configSlice, categories);
 
     return {
       zhSeriaId : 'optionKey',
