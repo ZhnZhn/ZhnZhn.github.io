@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _ChartConfig = require('../../charts/ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
@@ -28,10 +24,6 @@ var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
-var _ChoroplethMapSlice = require('./ChoroplethMapSlice');
-
-var _ChoroplethMapSlice2 = _interopRequireDefault(_ChoroplethMapSlice);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var COLOR = {
@@ -45,10 +37,15 @@ var C = {
   EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
 };
 
-var _rFrequency = {
-  default: '',
-  m: 'Monthly',
-  q: 'Quarterly'
+var _crDescr = function _crDescr(extension) {
+  var _ext = extension || {},
+      datasetId = _ext.datasetId,
+      subTitle = _ext.subTitle,
+      _id = datasetId ? 'DatasetId: ' + datasetId + '.' : '',
+      _sub = subTitle ? 'Metric: ' + subTitle + '.' : '',
+      _d = _ext.description || '';
+
+  return (_d + ' ' + _id + ' ' + _sub).trim();
 };
 
 var _is = function _is(value) {
@@ -67,7 +64,11 @@ var _colorSeria = function _colorSeria(config, categories, codes, color) {
   });
 };
 
-var EuroStatFn = (0, _extends3.default)({
+var _isDataDes = function _isDataDes(d) {
+  return d.length > 0 && d[0][0] > d[d.length - 1][0];
+};
+
+var EuroStatFn = {
   createData: function createData(timeIndex, value) {
     var _this = this;
 
@@ -89,7 +90,10 @@ var EuroStatFn = (0, _extends3.default)({
       }
     });
 
-    return { data: data, max: max, min: min };
+    return {
+      data: _isDataDes(data) ? data.reverse() : data,
+      max: max, min: min
+    };
   },
   toPointArr: function toPointArr(timeIndex, value) {
     var data = [];
@@ -115,7 +119,7 @@ var EuroStatFn = (0, _extends3.default)({
     _Chart2.default.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(json, option);
-    config.info = this.createDatasetInfo(json, option);
+    config.info = this.createDatasetInfo(json);
 
     if (seriaType && seriaType.toUpperCase() === 'AREA') {
       config.valueMoving = _AdapterFn2.default.valueMoving(data);
@@ -129,7 +133,7 @@ var EuroStatFn = (0, _extends3.default)({
         json = _ref2.json,
         option = _ref2.option;
 
-    config.info = this.createDatasetInfo(json, option);
+    config.info = this.createDatasetInfo(json);
   },
   setCategories: function setCategories(_ref3) {
     var config = _ref3.config,
@@ -172,8 +176,10 @@ var EuroStatFn = (0, _extends3.default)({
     } else if (str.indexOf('Q') !== -1) {
       var _arrDate = str.split('Q'),
           _month2 = parseInt(_arrDate[1], 10) * 3 - 1;
-
       return Date.UTC(_arrDate[0], _month2, 30);
+    } else if (str.indexOf('S' !== -1)) {
+      var _arrS = str.split('S');
+      return _arrS[1] === '1' ? Date.UTC(_arrS[0], 5, 30) : Date.UTC(_arrS[0], 11, 31);
     } else {
       return Date.UTC(str, 11, 31);
     }
@@ -205,7 +211,8 @@ var EuroStatFn = (0, _extends3.default)({
         key = option.key,
         itemCaption = option.itemCaption,
         dataSource = option.dataSource,
-        dfTable = option.dfTable;
+        dfTable = option.dfTable,
+        _dataSource = dfTable ? dataSource + ' (' + dfTable + ')' : dataSource;
 
     return {
       id: key,
@@ -213,7 +220,7 @@ var EuroStatFn = (0, _extends3.default)({
       itemCaption: itemCaption,
       isWithoutIndicator: true,
       isWithoutAdd: true,
-      dataSource: dataSource,
+      dataSource: _dataSource,
       linkFn: 'ES',
       item: {
         dataset: dfTable,
@@ -221,31 +228,23 @@ var EuroStatFn = (0, _extends3.default)({
       }
     };
   },
-  createDatasetInfo: function createDatasetInfo(json, option) {
-    var _option$group = option.group,
-        group = _option$group === undefined ? '' : _option$group,
-        arr = group.split('_'),
-        _frequency = _rFrequency[arr[arr.length - 1]] ? _rFrequency[arr[arr.length - 1]] : _rFrequency.default,
-        _ext = json.extension || {},
-        datasetId = _ext.datasetId,
-        subTitle = _ext.subTitle,
-        _id = datasetId ? 'DatasetId: ' + datasetId + '.' : '',
-        _sub = subTitle ? 'Metric: ' + subTitle + '.' : '',
-        _d = _ext.description || '',
-        _descr = (_d + ' ' + _id + ' ' + _sub).trim();
+  createDatasetInfo: function createDatasetInfo(json) {
+    var label = json.label,
+        updated = json.updated,
+        extension = json.extension,
+        _descr = _crDescr(extension);
 
     return {
-      name: json.label,
+      name: label,
       description: _descr,
-      newest_available_date: json.updated,
-      oldest_available_date: '1996-01-30',
-      frequency: _frequency
+      newest_available_date: updated,
+      oldest_available_date: '1996-01-30'
     };
   },
   findMinY: function findMinY(data) {
     return _QuandlFn2.default.findMinY(data);
   }
-}, _ChoroplethMapSlice2.default);
+};
 
 exports.default = EuroStatFn;
 //# sourceMappingURL=EuroStatFn.js.map

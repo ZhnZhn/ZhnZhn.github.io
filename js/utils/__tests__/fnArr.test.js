@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var findIndexByProp = _fnArr2.default.findIndexByProp,
     isSameByProp = _fnArr2.default.isSameByProp,
-    isStrInArr = _fnArr2.default.isStrInArr;
+    isInArrStr = _fnArr2.default.isInArrStr;
 
 
 var propName = 'caption',
@@ -65,22 +65,47 @@ describe('isSameByProp', function () {
    });
 });
 
-describe('isStrInArr', function () {
+describe('isInArrStr', function () {
    var arr = ['test1', 'test2', 'test3'],
-       fnTrue = isStrInArr('test1'),
-       fnFalse = isStrInArr('test4');
+       isTest = isInArrStr(arr);
 
    test('should return function', function () {
-      expect(typeof fnTrue === 'undefined' ? 'undefined' : (0, _typeof3.default)(fnTrue)).toBe('function');
-      expect(typeof fnFalse === 'undefined' ? 'undefined' : (0, _typeof3.default)(fnFalse)).toBe('function');
+      expect(typeof isTest === 'undefined' ? 'undefined' : (0, _typeof3.default)(isTest)).toBe('function');
    });
-   test('should return bool is str in array', function () {
-      expect(fnTrue(arr)).toBe(true);
-      expect(fnFalse(arr)).toBe(false);
+   test('should return true if str in array', function () {
+      expect(isTest('test1')).toBe(true);
+      expect(isTest('test3')).toBe(true);
+   });
+   test('should return false if str not in array', function () {
+      expect(isTest('test5')).toBe(false);
+      expect(isTest('7')).toBe(false);
    });
    test('should return false in edge case', function () {
-      expect(fnTrue({})).toBe(false);
-      expect(fnFalse('')).toBe(false);
+      var _isTest1 = isInArrStr(),
+          _isTest2 = isInArrStr({});
+      expect(_isTest1('test1')).toBe(false);
+      expect(_isTest2('test1')).toBe(false);
    });
 });
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\__tests__\fnArr.test.js.map
+
+/*
+describe('isStrInArr', () => {
+  const arr = [ 'test1', 'test2', 'test3' ]
+      , fnTrue = isStrInArr('test1')
+      , fnFalse = isStrInArr('test4')
+
+   test('should return function', () => {
+      expect(typeof fnTrue).toBe('function')
+      expect(typeof fnFalse).toBe('function')
+   })
+   test('should return bool is str in array', ()=> {
+     expect(fnTrue(arr)).toBe(true)
+     expect(fnFalse(arr)).toBe(false)
+   })
+   test('should return false in edge case', () => {
+      expect(fnTrue({})).toBe(false)
+      expect(fnFalse('')).toBe(false)
+   })
+})
+*/
+//# sourceMappingURL=fnArr.test.js.map

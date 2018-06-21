@@ -1,57 +1,41 @@
 
-import EuroStatFn from '../../adapters/eurostat/EuroStatFn';
-
-const COUNTRY_CAPTION_DF = 'EU'
-    , AREA = 'AREA'
+const DF_CAPTION = 'EU'
+    , AREA = 'AREA';
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, group, dataSource, mapType, dfProps } = props
+  const {
+          loadId, dataSource,
+          dfProps
+        } = props
       , {
           one, two={}, chartType={},
           date, dateDefault,
           selectOptions
         } = options
-      , { value:chartTypeValue='AREA' } = chartType
-      , _countryValue = (one)
-          ? one.value
-          : COUNTRY_CAPTION_DF
-      , _countryCaption = (one)
-          ? one.caption
-          : COUNTRY_CAPTION_DF;
+      , { value:_seriaType=AREA } = chartType
+      , _oneV = one ? one.value : DF_CAPTION
+      , _oneC = one ? one.caption : DF_CAPTION;
 
-  let _zhCompType, _time
-     , _mapValue = two.mapValue
-     , _mapSlice = two.mapSlice;
-
-  if (chartType && chartType.value !== AREA){
+  let _zhCompType, _time;
+  if (_seriaType !== AREA){
     _zhCompType = chartType.compType;
     _time = (date) ? date.value : dateDefault;
-
-    if (!_mapValue) {
-      _mapValue = EuroStatFn.createMapValue(props, two);
-    }
-    if (!_mapSlice) {
-      _mapSlice = EuroStatFn.createMapSlice(props, two);
-    }
   }
 
   return {
     ...dfProps,
-    geo : _countryValue,
-    group : group,
+    itemMap: two,
+    geo : _oneV,
     metric : two.value,
     loadId : loadId,
-    itemCaption: _countryCaption,
-    title : _countryCaption,
+    itemCaption: _oneC,
+    title : _oneC,
     subtitle : two.caption,
-    alertItemId : `${_countryCaption}:${two.caption}`,
-    alertGeo : _countryCaption,
+    alertItemId : `${_oneC}:${two.caption}`,
+    alertGeo : _oneC,
     alertMetric : two.caption,
-    seriaType : chartTypeValue,
+    seriaType : _seriaType,
     zhCompType : _zhCompType,
-    mapType: mapType,
-    mapValue : _mapValue,
-    zhMapSlice : { ..._mapSlice, time : _time },
     time : _time,
     dataSource,
     items: [ one, two ],

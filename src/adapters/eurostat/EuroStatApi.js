@@ -1,127 +1,107 @@
 
 import fnArr from '../../utils/fnArr';
 
-const { isStrInArr } = fnArr;
+import mapFn from './mapFn'
 
-const rootUrl = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
-    , queryTail = "&precision=1&sinceTimePeriod=1996M01";
+const { isInArrStr } = fnArr;
+const {
+        toQuery, toMapSlice,
+        createMapValue, createMapSlice
+      } = mapFn;
+
+const URL = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
+    , QUERY_TAIL = "&precision=1&sinceTimePeriod=1996M01"
+    , DF_TAIL = "precision=1";
 
 const REQUEST_ERROR = 'Request Error'
-    , MESSAGE_HEADER = '400 : Bad Request\n';
+    , MESSAGE_HEADER = '400: Bad Request\n';
 
+const _crDetailMsg = function(label, option){
+  const { alertGeo='', alertMetric='' } = option;
+  return MESSAGE_HEADER + label + `\n\nIt seems country-dataset doesn't exsist.\n${alertGeo}:${alertMetric}\n\nIf you use For Date input field in Dialog\ntry to use more late date.`;
+};
 
-const _crDetailMsg = function(option){
-  const {alertGeo='', alertMetric=''} = option
-  return `\n\nIt seems country-dataset doesn't exsist.\n${alertGeo}:${alertMetric}\n\nIf you use For Date input field in Dialog\ntry to use more late date.`
-}
+const _crErr = (errCaption, message) => ({
+  errCaption, message
+});
 
-const _categoryTypes = [ 'MAP', 'COLUMN', 'BAR' ];
-
-const _addParamTo = (q, p) => q ? q + '&' + p : p;
-
-const _toQuery = (params, items) => {
-  let _q = '', i = 0;
-  for (;i<params.length; i++) {
-    _q = _addParamTo(_q, `${params[i]}=${items[i].value}`)
-  }
-  return _q;
-}
-
-const _toMapSlice = (params, items, time ) => {
-  const zhMapSlice = { time }
-      , _max=params.length;
-  let queryMap='', i;
-  for (i=1 ;i<_max; i++){
-    queryMap = _addParamTo(queryMap, `${params[i]}=${items[i].value}`)
-    zhMapSlice[params[i]] = items[i].value
-  }
-  return {
-    queryMap, zhMapSlice
-  };
-
-}
+const CATEGORY_TYPES = [ 'MAP', 'COLUMN', 'BAR' ];
+const _isCategory = isInArrStr(CATEGORY_TYPES);
 
 const _crUrlWithParams = (option) => {
   const {
+          seriaType, dfTable, time
+        } = option;
+
+  if (!_isCategory(seriaType)){
+    const _q = toQuery(option);
+    return `${URL}${dfTable}?${_q}&${DF_TAIL}`;
+  }
+
+  const {
+          query, zhMapSlice
+        } = toMapSlice(DF_TAIL, option)
+     , _url = `${URL}${dfTable}?${query}`;
+   if (seriaType === 'MAP') {
+       option.zhMapSlice = zhMapSlice
+     return _url;
+   } else {
+     return `${_url}&time=${time}`;
+   }
+};
+
+const _crUrl = (option) => {
+  const {
           seriaType,
-          dfParams, dfTable, dfTail,
-          items,
-          mapType,
+          metric, geo,
+          itemMap,
           time
         } = option;
 
-  if (!isStrInArr(seriaType)(_categoryTypes)){
-    const _query = _toQuery(dfParams, items)
-         , _tail = dfTail ? '&' + dfTail : '';
-    return `${rootUrl}${dfTable}?${_query}${_tail}`;
-  } else {
-    const {
-            queryMap, zhMapSlice
-          } = _toMapSlice(dfParams, items, time);
-    if (!mapType) {
-      option.zhMapSlice = zhMapSlice
-    }
-    return `${rootUrl}${dfTable}?${queryMap}&time=${time}`;
+  if (!_isCategory(seriaType)){
+    const _geo = `geo=${geo}`
+        , _metric = (metric.indexOf('?') === -1)
+            ? `${metric}?`
+            : metric;
+
+      return `${URL}${_metric}&${_geo}${QUERY_TAIL}`;
   }
-}
+
+  const { mapValue, mapSlice } = itemMap
+      , _mapValue = mapValue || createMapValue(option, itemMap);
+
+  if (seriaType === 'MAP') {
+    option.zhMapSlice = mapSlice
+      ? { ...mapSlice, time }
+      : { ...createMapSlice(option, itemMap), time };
+    return `${URL}${_mapValue}`;
+  } else {
+    return `${URL}${_mapValue}&time=${time}`;
+  }
+};
 
 const EuroStatApi = {
 
   getRequestUrl(option){
-    const {
-            group, metric, geo,
-            mapValue, time,
-            seriaType,
-            dfParams
-          } = option;
-
-    if (dfParams) {
-      return _crUrlWithParams(option);
-    }
-
-    if (!isStrInArr(seriaType)(_categoryTypes)){
-      let _param = `geo=${geo}`
-        , _group;
-      if (group){
-        _group = `${group}?`;
-        if (metric){
-          _param = `${_param}&indic=${metric}`;
-        }
-      } else {
-        _group = (metric.indexOf('?') === -1)
-           ? `${metric}?`
-           : metric ;
-        _param = `&${_param}`;
-      }
-
-      return `${rootUrl}${_group}${_param}${queryTail}`;
-    } else if (seriaType === 'COLUMN') {
-      return `${rootUrl}${mapValue}&sinceTimePeriod=${time}`;
-    } else if (seriaType === 'MAP') {
-       return `${rootUrl}${mapValue}`;
-    } else {
-      return `${rootUrl}${mapValue}&time=${time}`;
-    }
+    const { dfParams } = option;
+    return dfParams
+      ? _crUrlWithParams(option)
+      : _crUrl(option);
   },
 
   checkResponse(json, option) {
     const { error } = json;
     if (error){
-       if (error.label) {
-          throw {
-            errCaption: REQUEST_ERROR,
-            message: MESSAGE_HEADER + error.label + _crDetailMsg(option)
-          };
-       } else {
-          throw {
-            errCaption: REQUEST_ERROR,
-            message: ''
-          };
-       }
+      const { label } = error;
+      if (label) {
+        throw _crErr( REQUEST_ERROR, _crDetailMsg(label, option));
+      } else {
+        throw _crErr( REQUEST_ERROR, '');
+      }
     }
     return true;
   }
 
-}
+};
 
 export default EuroStatApi

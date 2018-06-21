@@ -16,8 +16,8 @@
       "caption" : "Industrial production excluding construction, 2010=100, % change",
       "value" : "teiis080?nace_r2=B-D&unit=I2010_SCA",
       "mapFrequency" : "M",
-      "mapValue" : "teiis080?precision=1&nace_r2=B-D&unit=I2010_SCA",
-      "mapSlice" : { "nace_r2" : "B-D" , "unit" : "I2010_SCA"  }
+      "mapValue" : "teiis080?precision=1&indic_bt=PROD&nace_r2=B-D&unit=I2010_SCA",
+      "mapSlice" : { "indic_bt": "PROD", "nace_r2" : "B-D" , "unit" : "I2010_SCA"  }
     },{
       "caption" : "Government deficit/surplus, % of GDP, annual",
       "value" : "teina200?unit=PC_GDP",

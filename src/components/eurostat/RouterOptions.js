@@ -34,20 +34,20 @@ const C = {
 
 const _crDF = () => {
   return [
-    { caption : 'Default: Area', value: V.A },
-    { caption : 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
-    { caption : 'Column: All Countries', value: V.C },
-    { caption : 'Bar: All Countries', value: V.B }
+    { caption: 'Default: Area', value: V.A },
+    { caption: 'Bar: All Countries', value: V.B },
+    { caption: 'Column: All Countries', value: V.C },
+    { caption: 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
   ];
-}
+};
 
 const _crDF3 = () => {
   return [
     { caption : 'Default: Area', value: V.A },
-    { caption : 'Column: All Countries', value: V.C },
-    { caption : 'Bar: All Countries', value: V.B }
+    { caption : 'Bar: All Countries', value: V.B },
+    { caption : 'Column: All Countries', value: V.C }
   ];
-}
+};
 
 const _crT1 = () => {
   return [

@@ -44,11 +44,11 @@ var C = {
 };
 
 var _crDF = function _crDF() {
-  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Bar: All Countries', value: V.B }];
+  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
 };
 
 var _crDF3 = function _crDF3() {
-  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Bar: All Countries', value: V.B }];
+  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }];
 };
 
 var _crT1 = function _crT1() {

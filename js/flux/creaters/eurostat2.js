@@ -8,13 +8,9 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _EuroStatFn = require('../../adapters/eurostat/EuroStatFn');
-
-var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var COUNTRY_CAPTION_DF = 'EU',
+var DF_CAPTION = 'EU',
     AREA = 'AREA';
 
 var createLoadOptions = function createLoadOptions() {
@@ -22,9 +18,7 @@ var createLoadOptions = function createLoadOptions() {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   var loadId = props.loadId,
-      group = props.group,
       dataSource = props.dataSource,
-      mapType = props.mapType,
       dfProps = props.dfProps,
       one = options.one,
       _options$two = options.two,
@@ -35,43 +29,30 @@ var createLoadOptions = function createLoadOptions() {
       dateDefault = options.dateDefault,
       selectOptions = options.selectOptions,
       _chartType$value = chartType.value,
-      chartTypeValue = _chartType$value === undefined ? 'AREA' : _chartType$value,
-      _countryValue = one ? one.value : COUNTRY_CAPTION_DF,
-      _countryCaption = one ? one.caption : COUNTRY_CAPTION_DF;
+      _seriaType = _chartType$value === undefined ? AREA : _chartType$value,
+      _oneV = one ? one.value : DF_CAPTION,
+      _oneC = one ? one.caption : DF_CAPTION;
 
   var _zhCompType = void 0,
-      _time = void 0,
-      _mapValue = two.mapValue,
-      _mapSlice = two.mapSlice;
-
-  if (chartType && chartType.value !== AREA) {
+      _time = void 0;
+  if (_seriaType !== AREA) {
     _zhCompType = chartType.compType;
     _time = date ? date.value : dateDefault;
-
-    if (!_mapValue) {
-      _mapValue = _EuroStatFn2.default.createMapValue(props, two);
-    }
-    if (!_mapSlice) {
-      _mapSlice = _EuroStatFn2.default.createMapSlice(props, two);
-    }
   }
 
   return (0, _extends3.default)({}, dfProps, {
-    geo: _countryValue,
-    group: group,
+    itemMap: two,
+    geo: _oneV,
     metric: two.value,
     loadId: loadId,
-    itemCaption: _countryCaption,
-    title: _countryCaption,
+    itemCaption: _oneC,
+    title: _oneC,
     subtitle: two.caption,
-    alertItemId: _countryCaption + ':' + two.caption,
-    alertGeo: _countryCaption,
+    alertItemId: _oneC + ':' + two.caption,
+    alertGeo: _oneC,
     alertMetric: two.caption,
-    seriaType: chartTypeValue,
+    seriaType: _seriaType,
     zhCompType: _zhCompType,
-    mapType: mapType,
-    mapValue: _mapValue,
-    zhMapSlice: (0, _extends3.default)({}, _mapSlice, { time: _time }),
     time: _time,
     dataSource: dataSource,
     items: [one, two],

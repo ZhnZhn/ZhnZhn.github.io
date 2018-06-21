@@ -24,14 +24,17 @@
       "caption" : "Finance", "isInitClose" : true,
       "items" : [
         { "id" : "ES_F_PUBLIC" },
-        { "id" : "ES_F_INTEREST" }
+        { "id" : "ES_F_LRATE" },
+        { "id" : "ES_F_SRATE" }
       ]
     },{
       "caption" : "Agriculture", "isInitClose" : true,
       "items" : [
+        { "id" : "ES_AGRI_ORGANIC" },
         { "id" : "ES_AGRI_PRICES" },
         { "id" : "ES_AGRI_MILK" },
-        { "id" : "ES_AGRI_MEAT" },
+        { "id" : "ES_AGRI_LIVESTOCK" },
+        { "id" : "ES_AGRI_FERT" },
         { "id" : "ES_AGRI_ENVI" },
         { "id" : "ES_AGRI_CROP" }
       ]
@@ -98,19 +101,22 @@
     },
     "ES_CPI" : {
       "type" : "ES_CPI",
-      "menuTitle" : "HCPI (2015=100)",
-      "dialogCaption" : "HCPI (2015=100)",
-      "chartContainerCaption" : "Eurostat Harmonised Consume Price Index",
+      "menuTitle" : "HCPI (2015=100) (NSA)",
+      "dialogCaption" : "HCPI (2015=100) (NSA)",
+      "chartContainerCaption" : "Eurostat Harmonised Consume Price Index (NSA)",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
         "twoCaption" : "HCPI",
         "twoURI" : "./data/eurostat/cpi.json",
-        "twoJsonProp" : "cpis",
-        "group" : "ei_cphi_m",
-        "mapType" : "I",
-        "mapSlice" : {
-           "unit" : "HICP2015"
+        "dfProps": {
+          "dfTable": "ei_cphi_m",
+          "dfParams": [ "geo", "indic" ],
+          "dfTail": "unit=HICP2015&s_adj=NSA",
+          "dfSlice" : {
+             "unit" : "HICP2015",
+             "s_adj": "NSA"
+          }
         }
       }
     },
@@ -122,11 +128,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
-        "twoURI" : "./data/eurostat/labour.json",
-        "twoJsonProp" : "metrics",
-        "mapType" : "Z",
-        "mapFrequency" : "Y"
+        "twoURI" : "./data/eurostat/labour.json",        
+        "dfProps": {
+          "mapType" : "Z"
+        }
       }
     },
     "ES_SOCIAL" : {
@@ -137,12 +142,12 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/social-protection.json",
-        "twoJsonProp" : "metrics",
-        "mapType" : "Z",
         "mapFrequency" : "Y",
-        "mapDateDf" : 2
+        "mapDateDf" : 3,
+        "dfProps": {
+          "mapType" : "Z"
+        }
       }
     },
     "ES_GDP" : {
@@ -153,27 +158,27 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
-        "twoURI" : "./data/eurostat/gdp.json",
-        "twoJsonProp" : "metrics"
+        "twoURI" : "./data/eurostat/gdp.json"
       }
     },
     "ES_UNEMP" : {
       "type" : "ES_UNEMP",
-      "menuTitle" : "Unemployment",
-      "dialogCaption" : "Unemployment",
-      "chartContainerCaption" : "Eurostat Unemployment",
+      "menuTitle" : "Unemployment (NSA)",
+      "dialogCaption" : "Unemployment (NSA)",
+      "chartContainerCaption" : "Eurostat Unemployment (NSA)",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/unemployment.json",
-        "twoJsonProp" : "metrics",
-        "group" : "ei_lmhr_m",
         "mapFrequency" : "M",
-        "mapType" : "I",
-        "mapSlice" : {
-           "s_adj" : "NSA"
+        "dfProps": {
+          "dfTable": "ei_lmhr_m",
+          "dfParams": [ "geo", "indic" ],
+          "dfTail": "unit=PC_ACT&s_adj=NSA",
+          "dfSlice" : {
+             "unit" : "PC_ACT",
+             "s_adj" : "NSA"
+          }
         }
       }
     },
@@ -182,13 +187,11 @@
         "menuTitle" : "Economic Indicators",
         "dialogCaption" : "Economic Indicators",
         "chartContainerCaption" : "Eurostat Economic Indicators",
-        "dialogType" : "DialogEurostat3",
+        "dialogType" : "DialogEurostat2",
         "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
-          "twoCaption" : "Group",
-          "twoURI" : "./data/eurostat/group-metric.json",
-          "twoJsonProp" : "groups",
-          "threeCaption" : "Metric"
+          "twoCaption" : "Indicator",
+          "twoURI" : "./data/eurostat/economic-indicators.json"
         }
     },
 
@@ -215,7 +218,7 @@
         "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
           "twoCaption" : "Group",
-          "twoURI" : "./data/eurostat/energy-statistics-quantities.json",
+          "twoURI" : "./data/eurostat/energy-quantities.json",
           "twoJsonProp" : "groups",
           "threeCaption" : "Metric"
         }
@@ -229,7 +232,7 @@
         "addProps": "ES_COUNTRIES_BASE",
         "dialogProps" : {
           "twoCaption" : "Item",
-          "twoURI" : "./data/eurostat/energy-statistic-prices.json",
+          "twoURI" : "./data/eurostat/energy-prices.json",
           "twoJsonProp" : "items"
         }
     },
@@ -241,11 +244,16 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/industry-energy.json",
-        "twoJsonProp" : "metrics",
-        "group" : "ei_isen_m",
-        "chartsType": "t2"
+        "mapFrequency" : "M",
+        "dfProps": {
+          "dfTable": "ei_isen_m",
+          "dfParams": [ "geo", "indic" ],
+          "dfTail": "s_adj=NSA",
+          "dfSlice" : {
+             "s_adj" : "NSA"
+          }
+        }
       }
     },
    "ES_I_ELECTRICITY_GENERATION" : {
@@ -256,11 +264,8 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/electricity-generation.json",
-        "twoJsonProp" : "metrics",
         "chartsType": "t3b",
-        "dataSource": "Eurostat (nrg_105m)",
         "dfProps": {
           "dfTable": "nrg_105m"
         }
@@ -280,17 +285,33 @@
         "twoJsonProp" : "metrics"
       }
     },
-    "ES_F_INTEREST" : {
-      "type" : "ES_F_INTEREST",
-      "menuTitle" : "Interest Rates",
-      "dialogCaption" : "Interest Rates",
-      "chartContainerCaption" : "Eurostat Finance Interest Rates",
+    "ES_F_LRATE" : {
+      "type" : "ES_F_LRATE",
+      "menuTitle" : "Long-Term Rates",
+      "dialogCaption" : "Long-Term Rates",
+      "chartContainerCaption" : "Eurostat Finance Long-Term Interest Rates",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
-        "twoURI" : "./data/eurostat/interest-rates.json",
-        "twoJsonProp" : "metrics"
+        "twoURI" : "./data/eurostat/finance-long-rates.json"
+      }
+    },
+    "ES_F_SRATE" : {
+      "type" : "ES_F_SRATE",
+      "menuTitle" : "Short-Term Rate",
+      "dialogCaption" : "Short-Term Rate",
+      "chartContainerCaption" : "Eurostat Finance Short-Term Interest Rate",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption": "Rate",
+        "twoURI" : "./data/eurostat/finance-short-rates.json",
+        "twoJsonProp": "rates",
+        "mapFrequency" : "M",
+        "dfProps": {
+          "dfTable": "irt_st_m",
+          "dfParams": [ "geo" , "intrt" ]
+        }
       }
     },
 
@@ -305,9 +326,10 @@
         "twoCaption" : "Price",
         "twoURI" : "./data/eurostat/agri-prices.json",
         "twoJsonProp" : "prices",
-        "mapType" : "Z",
         "mapFrequency" : "Y",
-        "mapDateDf" : 1
+        "dfProps": {
+          "mapType" : "Z"
+        }
       }
     },
     "ES_AGRI_MILK" : {
@@ -318,33 +340,70 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
         "twoURI" : "./data/eurostat/agri-milk.json",
-        "twoJsonProp" : "metrics",
-        "mapType" : "Z",
         "mapFrequency" : "Y",
-        "mapDateDf" : 1
+        "dfProps": {
+          "mapType" : "Z"
+        }
       }
     },
-    "ES_AGRI_MEAT" : {
-      "type" : "ES_AGRI_MEAT",
+    "ES_AGRI_LIVESTOCK" : {
+      "type" : "ES_AGRI_LIVESTOCK",
       "menuTitle" : "Livestock",
       "dialogCaption" : "Livestock",
       "chartContainerCaption" : "Eurostat Agriculture Livestock",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Metric",
-        "twoURI" : "./data/eurostat/agri-meat.json",
-        "twoJsonProp" : "metrics",
-        "mapType" : "Z",
+        "twoURI" : "./data/eurostat/agri-livestock.json",
         "mapFrequency" : "Y",
-        "mapDateDf" : 1
+        "dfProps": {
+          "mapType" : "Z"
+        }
+      }
+    },
+    "ES_AGRI_ORGANIC" : {
+      "type" : "ES_AGRI_ORGANIC",
+      "menuTitle" : "Organic Farming",
+      "dialogCaption" : "Organic Farming",
+      "chartContainerCaption" : "Eurostat Agriculture Organic Farming",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/agri-organic.json",
+        "mapFrequency" : "Y",
+        "mapDateDf" : 2,
+        "dfProps": {
+          "mapType" : "Z"
+        }
+      }
+    },
+    "ES_AGRI_FERT" : {
+      "type" : "ES_AGRI_FERT",
+      "menuTitle" : "Sales Of Fertilisers, T",
+      "dialogCaption" : "Sales Of Fertilisers",
+      "chartContainerCaption" : "Eurostat Agriculture Sales Of Fertilisers",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption": "Fertilisers",
+        "twoURI": "./data/eurostat/fertilisers.json",
+        "twoJsonProp": "items",
+        "mapFrequency": "Y",
+        "mapDateDf": 2,
+        "dfProps": {
+          "dfTable": "tai01",
+          "dfParams": [ "geo",  "nutrient" ],
+          "dfTail": "unit=T",
+          "dfSlice": {
+             "unit": "T"
+          }
+        }
       }
     },
     "ES_AGRI_ENVI" : {
       "type" : "ES_AGRI_ENVI",
-      "menuTitle" : "Sales Of Pesticides",
+      "menuTitle" : "Sales Of Pesticides, Kg",
       "dialogCaption" : "Sales Of Pesticides",
       "chartContainerCaption" : "Eurostat Agriculture Sales Of Pesticides",
       "dialogType" : "DialogEurostat2",
@@ -353,19 +412,15 @@
         "twoCaption": "Pesticide",
         "twoURI": "./data/eurostat/pesticides.json",
         "twoJsonProp": "items",
-        "chartsType": "df3",
-        "dataSource": "Eurostat (tai02)",
-        "mapType": "I",
-        "mapPropName": "pesticid",
-        "mapSlice": {
-           "unit": "KG"
-        },
         "mapFrequency": "Y",
         "mapDateDf": 2,
         "dfProps": {
           "dfTable": "tai02",
           "dfParams": [ "geo",  "pesticid" ],
-          "dfTail": "precision=1&unit=KG"
+          "dfTail": "unit=KG",
+          "dfSlice": {
+             "unit": "KG"
+          }
         }
       }
     },
@@ -382,14 +437,10 @@
         "threeCaption" : "Structure",
         "threeURI" : "./data/eurostat/crop-structure.json",
         "chartsType": "df3",
-        "dataSource": "Eurostat (apro_cpsh1)",
         "dfProps": {
           "dfTable": "apro_cpsh1",
           "dfParams": [ "geo", "crops", "strucpro"],
-          "dfTail": "precision=1",
-          "mapType" : "I",
-          "mapFrequency" : "Y",
-          "mapDateDf" : 1
+          "mapFrequency" : "Y"
         }
       }
     },
@@ -430,11 +481,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
-        "dataSource": "Eurostat (ext_lt_maineu)",
         "dfProps": {
           "dfTable": "ext_lt_maineu",
           "dfParams": [ "partner",  "indic_et"],
-          "dfTail": "precision=1&sitc06=TOTAL"
+          "dfTail": "sitc06=TOTAL"
         }
       }
     },
@@ -446,11 +496,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
-        "dataSource": "Eurostat (ext_lt_mainrawm)",
         "dfProps": {
           "dfTable": "ext_lt_mainrawm",
           "dfParams": [ "partner",  "indic_et"],
-          "dfTail": "precision=1&sitc06=SITC2_4"
+          "dfTail": "sitc06=SITC2_4"
         }
       }
     },
@@ -462,11 +511,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
-        "dataSource": "Eurostat (ext_lt_mainagri)",
         "dfProps": {
           "dfTable": "ext_lt_mainagri",
           "dfParams": [ "partner",  "indic_et"],
-          "dfTail": "precision=1&sitc06=SITC0_1"
+          "dfTail": "sitc06=SITC0_1"
         }
       }
     },
@@ -478,11 +526,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
-        "dataSource": "Eurostat (ext_lt_mainmine)",
         "dfProps": {
           "dfTable": "ext_lt_mainmine",
           "dfParams": [ "partner",  "indic_et"],
-          "dfTail": "precision=1&sitc06=SITC3"
+          "dfTail": "sitc06=SITC3"
         }
       }
     },
@@ -494,11 +541,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
-        "dataSource": "Eurostat (ext_lt_mainchem)",
         "dfProps": {
           "dfTable": "ext_lt_mainchem",
           "dfParams": [ "partner",  "indic_et"],
-          "dfTail": "precision=1&sitc06=SITC5"
+          "dfTail": "sitc06=SITC5"
         }
       }
     },
@@ -510,11 +556,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
-        "dataSource": "Eurostat (ext_lt_mainmanu)",
         "dfProps": {
           "dfTable": "ext_lt_mainmanu",
           "dfParams": [ "partner",  "indic_et"],
-          "dfTail": "precision=1&sitc06=SITC6_8"
+          "dfTail": "sitc06=SITC6_8"
         }
       }
     },
@@ -526,11 +571,10 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
-        "dataSource": "Eurostat (ext_lt_mainmach)",
         "dfProps": {
           "dfTable": "ext_lt_mainmach",
           "dfParams": [ "partner",  "indic_et"],
-          "dfTail": "precision=1&sitc06=SITC7"
+          "dfTail": "sitc06=SITC7"
         }
       }
     },
@@ -546,20 +590,17 @@
         "twoURI": "./data/eurostat/trade-flow.json",
         "twoJsonProp": "items",
         "chartsType": "df3",
-        "dataSource": "Eurostat (nama_10_exi)",
-        "mapType": "I",
-        "mapPropName": "na_item",
-        "mapSlice": {
-           "unit": "CP_MEUR"
-        },
         "mapFrequency": "Y",
-        "mapDateDf": 1,
         "dfProps": {
           "dfTable": "nama_10_exi",
           "dfParams": [ "geo",  "na_item" ],
-          "dfTail": "precision=1&unit=CP_MEUR"
+          "dfTail": "unit=CP_MEUR",
+          "dfSlice": {
+             "unit": "CP_MEUR"
+          }
         }
       }
     }
+
   }
 }

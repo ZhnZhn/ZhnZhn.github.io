@@ -14,7 +14,6 @@ var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var loadId = props.loadId,
-      group = props.group,
       dataSource = props.dataSource,
       dfProps = props.dfProps,
       one = options.one,
@@ -30,7 +29,6 @@ var createLoadOptions = function createLoadOptions() {
   return (0, _extends3.default)({}, dfProps, {
     seriaType: 'AREA',
     geo: oneValue,
-    group: group,
     metric: twoValue,
     loadId: loadId,
     itemCaption: oneCaption,

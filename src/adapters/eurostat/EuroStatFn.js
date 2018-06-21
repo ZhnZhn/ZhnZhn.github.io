@@ -5,8 +5,6 @@ import Tooltip from '../../charts/Tooltip';
 import QuandlFn2 from '../QuandlFn2';
 import AdapterFn from '../AdapterFn';
 
-import ChoroplethMapSlice from './ChoroplethMapSlice';
-
 const COLOR = {
   EU: "#0088FF",
   EA: "#FF5800",
@@ -25,11 +23,14 @@ const C = {
   ]
 };
 
-const _rFrequency = {
-  default : '',
-  m : 'Monthly',
-  q : 'Quarterly'
-}
+const _crDescr = (extension) => {
+  const _ext = extension || {}
+    , { datasetId, subTitle } = _ext
+    , _id = datasetId ? `DatasetId: ${datasetId}.` : ''
+    , _sub = subTitle ? `Metric: ${subTitle}.` : ''
+    , _d = _ext.description || '';
+   return (`${_d} ${_id} ${_sub}`).trim();
+};
 
 const _is = (value) => (element) => element === value;
 
@@ -42,6 +43,8 @@ const _colorSeria = (config, categories, codes, color) => {
     }
   })
 }
+
+const _isDataDes = (d) => d.length>0 && d[0][0]>d[d.length-1][0]
 
 const EuroStatFn = {
 
@@ -62,8 +65,13 @@ const EuroStatFn = {
           if (pointValue<=min) { min = pointValue; }
        }
     })
-
-    return { data, max, min };
+    
+    return {
+      data: _isDataDes(data)
+         ? data.reverse()
+         : data,
+      max, min
+    };
   },
 
   toPointArr(timeIndex, value){
@@ -86,7 +94,7 @@ const EuroStatFn = {
     Chart.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(json, option);
-    config.info = this.createDatasetInfo(json, option);
+    config.info = this.createDatasetInfo(json);
 
     if (seriaType && seriaType.toUpperCase() === 'AREA'){
       config.valueMoving = AdapterFn.valueMoving(data)
@@ -97,7 +105,7 @@ const EuroStatFn = {
   },
 
   setInfo({ config, json, option }){
-    config.info = this.createDatasetInfo(json, option);
+    config.info = this.createDatasetInfo(json);
   },
 
   setCategories({
@@ -133,8 +141,12 @@ const EuroStatFn = {
     } else if (str.indexOf('Q') !== -1){
       const arrDate = str.split('Q')
           , _month = (parseInt(arrDate[1], 10)*3) - 1
-
       return Date.UTC(arrDate[0], _month, 30);
+    } else if (str.indexOf('S' !== -1)) {
+      const _arrS = str.split('S')
+      return _arrS[1] === '1'
+        ? Date.UTC(_arrS[0], 5, 30)
+        : Date.UTC(_arrS[0], 11, 31);
     } else {
       return Date.UTC(str, 11, 31);
     }
@@ -167,14 +179,17 @@ const EuroStatFn = {
             key, itemCaption,
             dataSource,
             dfTable
-          } = option;
+          } = option
+        , _dataSource = dfTable
+             ? `${dataSource} (${dfTable})`
+             : dataSource;
     return {
-      id : key,
-      key : key,
-      itemCaption : itemCaption,
-      isWithoutIndicator : true,
-      isWithoutAdd : true,
-      dataSource,
+      id: key,
+      key: key,
+      itemCaption: itemCaption,
+      isWithoutIndicator: true,
+      isWithoutAdd: true,
+      dataSource: _dataSource,
       linkFn: 'ES',
       item: {
         dataset: dfTable,
@@ -183,37 +198,20 @@ const EuroStatFn = {
     }
   },
 
-  createDatasetInfo(json, option){
-    const  { group='' } = option
-        ,  arr = group.split('_')
-        , _frequency = (_rFrequency[arr[arr.length-1]])
-              ? _rFrequency[arr[arr.length-1]]
-              : _rFrequency.default
-        , _ext = json.extension || {}
-        , { datasetId, subTitle} = _ext
-        , _id = datasetId
-            ? `DatasetId: ${datasetId}.`
-            : ''
-        , _sub = subTitle
-            ? `Metric: ${subTitle}.`
-            : ''
-        , _d = _ext.description || ''
-        , _descr = (`${_d} ${_id} ${_sub}`).trim();
-
+  createDatasetInfo(json){
+    const { label, updated, extension } = json
+        , _descr = _crDescr(extension);
     return {
-      name: json.label,
+      name: label,
       description: _descr,
-      newest_available_date: json.updated,
+      newest_available_date: updated,
       oldest_available_date: '1996-01-30',
-      frequency: _frequency
     }
   },
 
   findMinY(data){
     return QuandlFn2.findMinY(data);
-  },
-
-  ...ChoroplethMapSlice
+  }
 }
 
 export default EuroStatFn

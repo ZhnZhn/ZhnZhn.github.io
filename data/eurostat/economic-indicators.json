@@ -1,0 +1,17 @@
+{
+  "metrics" : [
+    {
+      "caption" : "Economic sentiment indicator (ESI) (SA)",
+      "value" : "teibs010?indic=BS-ESI-I&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapValue" : "teibs010?indic=BS-ESI-I&s_adj=SA",
+      "mapSlice" :  { "indic" : "BS-ESI-I", "s_adj": "SA" }
+    },{
+      "caption" : "Index of deflated turnover (2015=100)",
+      "value" : "teiis240?indic_bt=TOVV&nace_r2=G47&unit=I2015_SCA",
+      "mapFrequency" : "M",
+      "mapValue" : "teiis240?indic_bt=TOVV&nace_r2=G47&unit=I2015_SCA",
+      "mapSlice": { "indic_bt": "TOVV", "nace_r2": "G47", "unit": "I2015_SCA" }
+    }
+  ]
+}

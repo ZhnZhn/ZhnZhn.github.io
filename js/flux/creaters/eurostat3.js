@@ -16,7 +16,8 @@ var createLoadOptions = function createLoadOptions() {
 
   var loadId = props.loadId,
       dataSource = props.dataSource,
-      dfProps = props.dfProps,
+      _props$dfProps = props.dfProps,
+      dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
       _options$one = options.one,
       one = _options$one === undefined ? {} : _options$one,
       _options$group = options.group,
@@ -39,13 +40,23 @@ var createLoadOptions = function createLoadOptions() {
       metricC = _metric$caption === undefined ? '' : _metric$caption,
       metricV = metric.value,
       _chartType$value = chartType.value,
-      chartTypeValue = _chartType$value === undefined ? 'AREA' : _chartType$value,
+      seriaType = _chartType$value === undefined ? 'AREA' : _chartType$value,
       _time = date.value || dateDefault;
+
+  if (!dfProps.dfParams) {
+    Object.assign(dfProps, {
+      dfParams: ["geo"],
+      dfTable: groupV,
+      dfTail: metricV
+    });
+  }
 
   return (0, _extends3.default)({}, dfProps, {
     geo: oneV,
     group: groupV,
     metric: metricV,
+    seriaType: seriaType,
+    items: [one, group, metric],
     time: _time,
     loadId: loadId,
     itemCaption: oneC,
@@ -54,9 +65,7 @@ var createLoadOptions = function createLoadOptions() {
     alertItemId: oneC + ':' + metricC,
     alertGeo: oneC,
     alertMetric: metricC,
-    seriaType: chartTypeValue,
-    dataSource: dataSource,
-    items: [one, group, metric]
+    dataSource: dataSource
   });
 };
 

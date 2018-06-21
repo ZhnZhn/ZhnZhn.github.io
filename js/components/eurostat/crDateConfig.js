@@ -35,12 +35,9 @@ var _addYearMonthsTo = function _addYearMonthsTo(dateOptions, y) {
 };
 
 var _addYearQuartesTo = function _addYearQuartesTo(dateOptions, y, delimeter) {
-
   var m = _nowDate().getUTCMonth(),
       _c = Math.floor((m + 1) / 3);
   var qNow = _c === 4 ? 3 : _c;
-  //let qNow = ( _c === 4 ) ? 4 : _c + 1;
-  //qNow = qNow - 1;
 
   var i = void 0;
   for (i = 0; i < 4; i++) {
@@ -82,6 +79,22 @@ var _yearQuarterConfig = function _yearQuarterConfig() {
   return { dateOptions: dateOptions, dateDefault: dateDefault };
 };
 
+var _yearBiAnnualConfig = function _yearBiAnnualConfig() {
+  var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3;
+
+  var dateOptions = [];
+  var y = _nowDate().getUTCFullYear(),
+      i = 0;
+  for (; i < 4; i++) {
+    dateOptions.push({ caption: y + 'S2', value: y + 'S2' }, { caption: y + 'S1', value: y + 'S1' });
+    y = y - 1;
+  }
+  return {
+    dateOptions: dateOptions,
+    dateDefault: _getDfDate(dateOptions, mapDateDf)
+  };
+};
+
 var _yearConfig = function _yearConfig() {
   var mapDateDf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
@@ -119,6 +132,8 @@ var crDateConfig = function crDateConfig() {
       return _yearMonthConfig(mapDateDf);
     case 'Q':case 'K':
       return _yearQuarterConfig(mapDateDf, frequency);
+    case 'S':
+      return _yearBiAnnualConfig();
     case 'Y':
       return _yearConfig(mapDateDf);
     case 'EMPTY':

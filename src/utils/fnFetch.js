@@ -10,7 +10,7 @@ const _isFn = fn => typeof fn === 'function';
 
 const _fnMsg400 = (option) => {
   if (option.loadId === "EU_STAT"){
-    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try request with older date.';
+    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try to request this data set with older date or another country.';
   } else {
     return '400: Bad request.';
   }
@@ -43,7 +43,7 @@ const _fFetch = (propName, type) => function({
           : fetchJsonpImpl;
   _fnFetch(uri, optionFetch)
     .then(response => {
-      const { status, statusText, headers={}, ok } = response;      
+      const { status, statusText, headers={}, ok } = response;
       if ((status>=200 && status<400) || ok) {
           if (_isFn(headers.get)){
             return Promise.all([

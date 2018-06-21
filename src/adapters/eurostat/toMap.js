@@ -9,13 +9,14 @@ const toMap = {
         , value = json.value
         , { data } = EuroStatFn.createData(timeIndex, value)
         , config = ChartConfig.fBaseAreaConfig();
-     
-     EuroStatFn.setDataAndInfo({ config, data, json, option });
 
-     config.zhDialog = option
+     EuroStatFn.setDataAndInfo({ config, data, json, option });
+     Object.assign(config, {
+       zhDialog: option,
+       json: json,
+       zhMapSlice: option.zhMapSlice
+     })
      config.zhDialog.apiKey = ''
-     config.json = json
-     config.zhMapSlice = option.zhMapSlice
 
      return config;
   }

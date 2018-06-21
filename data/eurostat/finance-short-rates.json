@@ -1,0 +1,9 @@
+{
+  "rates": [
+    { "caption": "Day-to-day rates", "value": "MAT_ON" },
+    { "caption": "1-month rates", "value": "MAT_M01" },
+    { "caption": "3-month rates", "value": "MAT_M03" },
+    { "caption": "6-month rates", "value": "MAT_M06" },
+    { "caption": "12-month rates", "value": "MAT_M12" }
+  ]
+}

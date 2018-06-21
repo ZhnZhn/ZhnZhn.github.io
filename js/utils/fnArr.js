@@ -30,14 +30,13 @@ var fnArr = {
     };
   },
 
-  isStrInArr: function isStrInArr(str) {
-    return function (arr) {
+  isInArrStr: function isInArrStr(arr) {
+    return function (str) {
       if (!Array.isArray(arr)) {
         return false;
       }
-      var i = void 0,
-          len = arr.length;
-      for (i = 0; i < len; i++) {
+      var i = void 0;
+      for (i = 0; i < arr.length; i++) {
         if (str === arr[i]) {
           return true;
         }
@@ -45,7 +44,21 @@ var fnArr = {
       return false;
     };
   }
+  /*
+  isStrInArr: (str) => (arr) => {
+     if (!Array.isArray(arr)){
+       return false;
+     }
+     let i;
+     for(i=0;i<arr.length;i++){
+       if (str === arr[i]){
+         return true;
+       }
+     }
+     return false;
+  }
+  */
 };
 
 exports.default = fnArr;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\fnArr.js.map
+//# sourceMappingURL=fnArr.js.map

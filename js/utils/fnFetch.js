@@ -27,7 +27,7 @@ var _isFn = function _isFn(fn) {
 
 var _fnMsg400 = function _fnMsg400(option) {
   if (option.loadId === "EU_STAT") {
-    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try request with older date.';
+    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try to request this data set with older date or another country.';
   } else {
     return '400: Bad request.';
   }

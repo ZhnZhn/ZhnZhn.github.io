@@ -25,8 +25,8 @@ var URL_ID_COUNTRY = './data/eurostat/id-country.json';
 var hmIdCountry = {};
 var isHmFetched = false;
 var _fnFetchHmIdCountry = function _fnFetchHmIdCountry() {
-  return !isHmFetched ? fetch(URL_ID_COUNTRY).then(function (response) {
-    return response.json();
+  return !isHmFetched ? fetch(URL_ID_COUNTRY).then(function (res) {
+    return res.json();
   }).then(function (json) {
     hmIdCountry = json.hm;
     isHmFetched = true;

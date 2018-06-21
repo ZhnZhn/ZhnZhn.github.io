@@ -21,19 +21,33 @@ const fnArr = {
          item => item[propName] === propValue
       ) === -1 ? false : true;
   },
-
+  
+  isInArrStr: (arr) => (str) => {
+    if (!Array.isArray(arr)) {
+      return false;
+    }
+    let i;
+    for(i=0;i<arr.length;i++){
+      if (str === arr[i]){
+        return true;
+      }
+    }
+    return false;
+  },
+  /*
   isStrInArr: (str) => (arr) => {
      if (!Array.isArray(arr)){
        return false;
      }
-     let i, len=arr.length;
-     for(i=0;i<len;i++){
+     let i;
+     for(i=0;i<arr.length;i++){
        if (str === arr[i]){
          return true;
        }
      }
      return false;
   }
+  */
 };
 
 export default fnArr

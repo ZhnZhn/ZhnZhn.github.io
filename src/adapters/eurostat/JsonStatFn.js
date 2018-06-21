@@ -10,10 +10,8 @@ let isHmFetched = false;
 const _fnFetchHmIdCountry = () => {
    return (!isHmFetched)
       ? fetch(URL_ID_COUNTRY)
-          .then((response) => {
-            return response.json();
-          })
-          .then((json) => {
+          .then(res => res.json())
+          .then(json => {
              hmIdCountry = json.hm;
              isHmFetched = true;
              return hmIdCountry;
@@ -48,7 +46,7 @@ const _splitForConfig = (arr) => {
      data.push({ y: value, c: country })
      if (value>=max) { max = value; }
      if (value<=min) { min = value; }
-   })
+    })
    return { categories, data, min, max };
 }
 
@@ -82,7 +80,7 @@ const JsonStatFn = {
   createGeoSlice : (json, configSlice) => {
     const  ds = JSONstat(json).Dataset(0);
     let _sGeo = ds.Data(configSlice)
-       , time ;
+       , time;
     if (!_sGeo || _sGeo.length === 0){
       const maxIndex = getFromNullable(ds.Dimension("time").id, []).length;
       if (maxIndex>0) {
@@ -103,8 +101,8 @@ const JsonStatFn = {
   crGeoSeria: (json, configSlice) => {
     const ds = JSONstat(json).Dataset(0)
         , data = getFromNullable(ds.Data(configSlice), [])
-                     .map( obj => obj.value )
-                     .filter(value => value !== null);
+            .map(obj => obj.value)
+            .filter(value => value !== null);
     return {
       date: getFromNullable(ds.Dimension("time")),
       data: data
@@ -115,14 +113,14 @@ const JsonStatFn = {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return _fnFetchHmIdCountry().then(() => {
        return Box( _combineToArr(dGeo.id, sGeo) )
-               .map(arr => arr.sort(AdapterFn.compareByValueId))
-               .fold(_splitForConfig);
+         .map(arr => arr.sort(AdapterFn.compareByValueId))
+         .fold(_splitForConfig);
        });
   },
   trJsonToSeria : (json, configSlice, categories) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return Box(_combineToHm(dGeo.id, sGeo))
-             .fold((hm) => _trHmToData(hm, categories));
+      .fold((hm) => _trHmToData(hm, categories));
   }
 }
 

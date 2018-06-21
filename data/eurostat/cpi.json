@@ -1,5 +1,5 @@
 {
-  "cpis" : [
+  "metrics" : [
     { "caption" : "All items" , "value" : "CP-HI00" },
     { "caption" : "All items excluding energy" , "value" : "CP-HI00XE" },
     { "caption" : "All items excluding energy, food, alcohol and tobacco" , "value" : "CP-HI00XEF" },
