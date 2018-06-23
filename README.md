@@ -1,42 +1,36 @@
-# [ERC](https://zhnzhn.github.io)
-ERC is an economic RESTful client.
-With it, you can view economic free open data from WEB.  
-Data providers: [Quandl](https://www.quandl.com), [Eurostat](http://ec.europa.eu/eurostat/web/main/home), [UnComtrade](https://comtrade.un.org), [FAOSTAT](http://www.fao.org/faostat/en/#data/), [Barchart Market Data](https://www.barchartmarketdata.com), [Alpha Vantage](https://www.alphavantage.co), [Insee: France Statistics](https://www.insee.fr/en/accueil), [Statistics Norway](http://www.ssb.no/en), [Statistics Sweden](https://www.scb.se/en) and more.   
+# [ERC (Economic RESTful Client)](https://zhnzhn.github.io)
+ERC (Economic RESTful Client) is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers. Some examples of data visualization and news about web app ERC can be found on Twitter's page [@webapperc](https://twitter.com/webapperc).   
+
+Data providers: [Quandl](https://www.quandl.com), [Eurostat](http://ec.europa.eu/eurostat/web/main/home), [UnComtrade](https://comtrade.un.org), [FAOSTAT](http://www.fao.org/faostat/en/#data/), [World Bank](https://data.worldbank.org/), [Statistics Norway](http://www.ssb.no/en), [Statistics Sweden](https://www.scb.se/en), [Insee: France Statistics](https://www.insee.fr/en/accueil), [Barchart Market Data](https://www.barchartmarketdata.com), [IEX Platform](https://iextrading.com/developer/), [Alpha Vantage](https://www.alphavantage.co) and more (All 16).   
 
 ![alt text](screencast/erc-currency-example.png?raw=true "Currency History")
 
-**1.** **Choose a data source Browser from the header bar.**  
-**2.** **Choose a dataset menu item in a Browser.**   
-**3.** **Select params and enter query date in a draggable Dialog.**   
+**1.** **Please, choose a topic data source Browser from the header bar.**  
+**2.** **Next, choose a dataset menu item in the opended up Browser.**   
+**3.** **Select params and enter query date in the opened up draggable Dialog.**   
 **4.** **Click a button Load.**   
-**5.** **Also, you can export chart to PNG, JPG, SVG, print to PDF.**  
-The result will be shown in a Chart in a Chart container.  
 
-After clicking a button Show in a Dialog will be opened Chart container with Charts or empty.   
-After closing a Chart container all Charts remains. In one time max three Dalogs can be opened.
+**The result will be visualized in a chart in a resizable Chart container.**  
+**Also it is posible to export the chart to PNG, JPG, SVG, print to PDF.**  
 
-In that case of loading data from [Quandl](https://www.quandl.com) data provider,   
-for access without API Key exists some restriction on frequency and amount queries (50 per day/1 at a time).
+After clicking a **button Show** in a **Dialog** will be an opened up **Chart container** with charts or empty.   
+After closing a **Chart container** all charts remains. In one time max three **Dialogs** can be opened.
 
-According to Quandl, anonymous requests can be deprecated soon. With API Key  
-you will be have (50 000 per day/1 at a time). It's free of charge to receive.
+Some open and private data providers require user's API Key.   
 
-A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.  
-Settings save in browser's memory only for a current WEB session.  
-Premium Free Sample Data can be requested only with Quandl API Key.
+For example, for loading data from Quandl without API Key exists some restriction on frequency and amount of queries (50 per day/1 at a time) and can be deprecated, according to Quandl.
+With API Key it is possible to make (50 000 per day/1 at a time). It's free of charge to receive. Quandl premium free sample data can be requested only with user's API Key.  
 
-For loading data from [Eurostat](http://ec.europa.eu/eurostat/web/main/home) does not exist any restrictions.  
+Data providers API Keys can be set on the **tab ApiKeys, dialog Settings**. Also for loading data from data providers with HTTP protocol required HTTPS proxy server, by default settled in the **dialog Settings**. There is three UI theme in web app ERC: **Dark**, **Light**, and **Sand** can be set on **tab Options, dialog Settings**. All user's settings keep in browser's memory only for a current web session.  
+
+More details and requirements about data providers can be found in [web app ERC](https://zhnzhn.github.io) About pane and provider's websites.  
 
 ### Attention
-For one item from Dialog can be only one Chart in a container. 
-If you want change query parameters for it, close the chart in the container and load data again.
-The value of currency is not always USD as shows in a chart tooltip.
-Sometimes more details about data can be look at tab Info on a Chart.
+For one item from **Dialog** can be only one **Chart item** in a container. 
+If you want to change query parameters for it, close the chart in the container and load data again.
+More information about data can be found **tab Info** on a **Chart item**.
 
 ## License
 This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016-present, Yevhenii Molodyi.
-
-
-
 
 
