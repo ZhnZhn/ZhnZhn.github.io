@@ -1,0 +1,42 @@
+{
+  "name": "ERC (Economic RESTful Client)",
+  "short_name": "ERC",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#808080",
+  "theme_color": "#808080",
+  "description": "The web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers.",
+  "icons": [{
+    "src": "css/favicon.png",
+    "sizes": "32x32",
+    "type": "image/png"
+  },{
+    "src": "css/logo-48.png",
+    "sizes": "48x48",
+    "type": "image/png"
+  },{
+    "src": "css/logo-72.png",
+    "sizes": "72x72",
+    "type": "image/png"
+  },{
+    "src": "css/logo-96.png",
+    "sizes": "96x96",
+    "type": "image/png"
+  },{
+    "src": "css/logo-128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  },{
+    "src": "css/logo-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },{
+    "src": "css/logo-256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  },{
+    "src": "css/logo-512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
