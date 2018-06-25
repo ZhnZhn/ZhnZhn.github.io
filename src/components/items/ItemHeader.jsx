@@ -30,7 +30,8 @@ const S = {
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',
-    overflow: 'inherit'
+    //overflow: 'inherit'
+    overflow: 'hidden'
   },
   OPEN: {
     color: 'rgba(164, 135, 212, 1)',

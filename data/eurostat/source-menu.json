@@ -41,7 +41,8 @@
     },{
       "caption" : "High-Tech Industry", "isInitClose" : true,
       "items" : [
-        { "id" : "ES_HT_INDIC" }
+        { "id" : "ES_HT_INDIC" },
+        { "id" : "ES_HT_RD" }
       ]
     },{
       "caption" : "Real Estate", "isInitClose" : true,
@@ -51,14 +52,14 @@
     },{
       "caption": "Trade", "isInitClose": true,
       "items": [
+        { "id": "ES_TR_BYCOUNTRY" },
         { "id": "ES_TR_BYPARTNER" },
         { "id": "ES_TR_FOOD" },
         { "id": "ES_TR_RAWMATERIALS" },
         { "id": "ES_TR_MINERALFUELS" },
         { "id": "ES_TR_CHEMICALS" },
         { "id": "ES_TR_GOODS" },
-        { "id": "ES_TR_MACHINERY" },
-        { "id": "ES_TR_BYCOUNTRY" }
+        { "id": "ES_TR_MACHINERY" }
       ]
     }
   ],
@@ -128,7 +129,7 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/labour.json",        
+        "twoURI" : "./data/eurostat/labour.json",
         "dfProps": {
           "mapType" : "Z"
         }
@@ -458,6 +459,29 @@
         "twoJsonProp" : "indicators"
       }
     },
+    "ES_HT_RD" : {
+      "type" : "ES_HT_RD",
+      "menuTitle" : "Expedinture on R&D",
+      "dialogCaption" : "Expedinture on R&D",
+      "chartContainerCaption" : "Expedinture on R&D",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption" : "Unit",
+        "twoURI" : "./data/eurostat/high-tech-r&d.json",
+        "twoJsonProp" : "units",
+        "mapFrequency": "Y",
+        "mapDateDf": 2,
+        "dfProps": {
+          "dfTable": "tipsst10",
+          "dfParams": [ "geo",  "unit" ],
+          "dfTail": "sectperf=TOTAL",
+          "dfSlice": {
+             "sectperf": "TOTAL"
+          }
+        }
+      }
+    },
 
     "ES_RE_INDIC" : {
       "type" : "ES_RE_INDIC",
@@ -475,8 +499,8 @@
 
     "ES_TR_BYPARTNER": {
       "type" : "ES_TR_BYPARTNER",
-      "menuTitle" : "Total By Partner",
-      "dialogCaption" : "Total by Partner",
+      "menuTitle" : "Total in Goods By Partner",
+      "dialogCaption" : "Total in Goods by Partner",
       "chartContainerCaption" : "Eurostat: Extra EU Trade Total By Partner",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",

@@ -23,7 +23,7 @@ With API Key it is possible to make (50 000 per day/1 at a time). It's free of c
 
 Data providers API Keys can be set on the **tab ApiKeys, dialog Settings**. Also for loading data from data providers with HTTP protocol required HTTPS proxy server, by default settled in the **dialog Settings**. There is three UI theme in web app ERC: **Dark**, **Light**, and **Sand** can be set on **tab Options, dialog Settings**. All user's settings keep in browser's memory only for a current web session.  
 
-More details and requirements about data providers can be found in [web app ERC](https://zhnzhn.github.io) About pane and provider's websites.  
+More details and requirements about data providers can be found in [web app ERC](https://zhnzhn.github.io) **pane About** and provider's websites.  
 
 ### Attention
 For one item from **Dialog** can be only one **Chart item** in a container. 

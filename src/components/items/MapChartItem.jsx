@@ -12,11 +12,12 @@ import PanelDataInfo from './PanelDataInfo';
 const S = {
   ROOT_DIV: {
     position: 'relative',
-    lineHeight: 1.5,
+    //lineHeight: 1.5,
     marginBottom: '10px',
     marginRight: '25px',
   },
   TIME_SPAN: {
+    position: 'absolute',
     display: 'inline-block',
     color: 'rgb(253, 179, 22)',
     fontWeight: 'bold',

@@ -86,9 +86,9 @@
     },
     "FAO_LIVE_ANIMAL": {
       "type": "FAO_LIVE_ANIMAL",
-      "menuTitle": "Live Animal",
-      "dialogCaption": "Live Animal",
-      "chartContainerCaption": "FAOSTAT: Production Live Animal",
+      "menuTitle": "Live Animals",
+      "dialogCaption": "Live Animals",
+      "chartContainerCaption": "FAOSTAT: Production Live Animals",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {

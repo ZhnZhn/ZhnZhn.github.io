@@ -37,14 +37,37 @@ var _typeZ = {
     return {};
   }
 };
+var _typeV = {
+  createMapValue: function createMapValue(props, item) {
+    return item.value;
+  },
+  createMapSlice: function createMapSlice(props, item) {
+    var value = item.value,
+        mapSlice = {};
+
+    if (typeof value !== 'string' || value.indexOf('?') === -1) {
+      return mapSlice;
+    }
+    value.substr(value.indexOf('?')).split('&').forEach(function (pStr) {
+      var _arr = pStr.split('=');
+      if (_arr[0] && _arr[1]) {
+        mapSlice[_arr[0]] = _arr[1];
+      }
+    });
+
+    return mapSlice;
+  }
+};
 
 var R_MAP_VALUE = {
   "I": _typeI.createMapValue,
-  "Z": _typeZ.createMapValue
+  "Z": _typeZ.createMapValue,
+  "V": _typeV.createMapValue
 };
 var R_MAP_SLICE = {
   "I": _typeI.createMapSlice,
-  "Z": _typeZ.createMapSlice
+  "Z": _typeZ.createMapSlice,
+  "V": _typeV.createMapSlice
 };
 
 var _addParamTo = function _addParamTo(q, p) {
@@ -89,15 +112,13 @@ var mapFn = {
   },
 
   createMapValue: function createMapValue(props, item) {
-    var mapType = props.mapType,
-        _fnCreate = R_MAP_VALUE[mapType];
-
+    var _mapType = props.mapType || item.mapType,
+        _fnCreate = R_MAP_VALUE[_mapType];
     return _fnCreate ? _fnCreate(props, item) : undefined;
   },
   createMapSlice: function createMapSlice(props, item) {
-    var mapType = props.mapType,
-        _fnCreate = R_MAP_SLICE[mapType];
-
+    var _mapType = props.mapType || item.mapType,
+        _fnCreate = R_MAP_SLICE[_mapType];
     return _fnCreate ? _fnCreate(props, item) : undefined;
   }
 };

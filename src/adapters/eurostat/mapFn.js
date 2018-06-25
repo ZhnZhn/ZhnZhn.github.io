@@ -20,14 +20,39 @@ const _typeZ = {
     return { };
   }
 };
+const _typeV = {
+  createMapValue(props, item){
+    return item.value;
+  },
+  createMapSlice(props, item){
+    const { value } = item
+        , mapSlice = {};
+    if (typeof value !== 'string'
+        || value.indexOf('?') === -1) {
+      return mapSlice;
+    }
+    value.substr(value.indexOf('?'))
+      .split('&')
+      .forEach(pStr => {
+        const _arr = pStr.split('=');
+        if (_arr[0] && _arr[1]) {
+          mapSlice[_arr[0]] = _arr[1]
+        }
+      })
+
+    return mapSlice;
+  }
+};
 
 const R_MAP_VALUE = {
-  "I" : _typeI.createMapValue,
-  "Z" : _typeZ.createMapValue
+  "I": _typeI.createMapValue,
+  "Z": _typeZ.createMapValue,
+  "V": _typeV.createMapValue
 };
 const R_MAP_SLICE = {
-  "I" : _typeI.createMapSlice,
-  "Z" : _typeZ.createMapSlice
+  "I": _typeI.createMapSlice,
+  "Z": _typeZ.createMapSlice,
+  "V": _typeV.createMapSlice,
 };
 
 const _addParamTo = (q, p) => q ? q + '&' + p : p;
@@ -65,15 +90,15 @@ const mapFn = {
   },
 
   createMapValue: (props, item) => {
-     const { mapType } = props
-         , _fnCreate = R_MAP_VALUE[mapType];
+     const _mapType = props.mapType || item.mapType
+         , _fnCreate = R_MAP_VALUE[_mapType];
      return _fnCreate
        ? _fnCreate(props, item)
        : undefined;
   },
   createMapSlice: (props, item) => {
-    const { mapType } = props
-        , _fnCreate = R_MAP_SLICE[mapType];
+    const _mapType = props.mapType || item.mapType
+        , _fnCreate = R_MAP_SLICE[_mapType];
     return  _fnCreate
       ? _fnCreate(props, item)
       : undefined;

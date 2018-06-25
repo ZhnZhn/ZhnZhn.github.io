@@ -69,11 +69,10 @@ const _crUrl = (option) => {
 
   const { mapValue, mapSlice } = itemMap
       , _mapValue = mapValue || createMapValue(option, itemMap);
-
   if (seriaType === 'MAP') {
     option.zhMapSlice = mapSlice
       ? { ...mapSlice, time }
-      : { ...createMapSlice(option, itemMap), time };
+      : { ...createMapSlice(option, itemMap), time };  
     return `${URL}${_mapValue}`;
   } else {
     return `${URL}${_mapValue}&time=${time}`;

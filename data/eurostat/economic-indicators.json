@@ -1,17 +1,80 @@
 {
   "metrics" : [
     {
-      "caption" : "Economic sentiment indicator (ESI) (SA)",
-      "value" : "teibs010?indic=BS-ESI-I&s_adj=SA",
-      "mapFrequency" : "M",
-      "mapValue" : "teibs010?indic=BS-ESI-I&s_adj=SA",
-      "mapSlice" :  { "indic" : "BS-ESI-I", "s_adj": "SA" }
-    },{
-      "caption" : "Index of deflated turnover (2015=100)",
+      "caption" : "Index of deflated turnover (2015=100) (Short Period) (SCA)",
       "value" : "teiis240?indic_bt=TOVV&nace_r2=G47&unit=I2015_SCA",
       "mapFrequency" : "M",
-      "mapValue" : "teiis240?indic_bt=TOVV&nace_r2=G47&unit=I2015_SCA",
-      "mapSlice": { "indic_bt": "TOVV", "nace_r2": "G47", "unit": "I2015_SCA" }
+      "mapType": "V"
+    },{
+      "caption" : "Index of deflated turnover (2015=100) (Long Period) (SCA), Retail trade, except motor vehicles and motorcycles",
+      "value" : "sts_trtu_m?indic_bt=TOVV&nace_r2=G47&unit=I15&s_adj=SCA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Index of deflated turnover (2015=100) (Long Period) (SCA), Wholesale and retail trade; repair of motor vehicles and motorcycles",
+      "value" : "sts_trtu_m?indic_bt=TOVV&nace_r2=G&unit=I15&s_adj=SCA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Economic sentiment indicator (ESI) (SA) (Short Period)",
+      "value" : "teibs010?indic=BS-ESI-I&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Economic sentiment indicator (ESI) (SA) (Long Period)",
+      "value" : "ei_bssi_m_r2?indic=BS-ESI-I&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Industrial confidence indicator (40% to ESI) (SA)",
+      "value" : "ei_bssi_m_r2?indic=BS-ICI-BAL&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Services confidence indicator (30% to ESI) (SA)",
+      "value" : "ei_bssi_m_r2?indic=BS-SCI-BAL&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Consumer confidence indicator (20% to ESI) (SA)",
+      "value" : "ei_bssi_m_r2?indic=BS-CSMCI-BAL&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Retail confidence indicator (5% to ESI) (SA)",
+      "value" : "ei_bssi_m_r2?indic=BS-RCI-BAL&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Construction confidence indicator (5% to ESI) (SA)",
+      "value" : "ei_bssi_m_r2?indic=BS-CCI-BAL&s_adj=SA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Industrial confidence indicator (NSA)",
+      "value" : "ei_bssi_m_r2?indic=BS-ICI-BAL&s_adj=NSA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Services confidence indicator (NSA)",
+      "value" : "ei_bssi_m_r2?indic=BS-SCI-BAL&s_adj=NSA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Consumer confidence indicator (NSA)",
+      "value" : "ei_bssi_m_r2?indic=BS-CSMCI-BAL&s_adj=NSA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Retail confidence indicator (NSA)",
+      "value" : "ei_bssi_m_r2?indic=BS-RCI-BAL&s_adj=NSA",
+      "mapFrequency" : "M",
+      "mapType": "V"
+    },{
+      "caption" : "Construction confidence indicator (NSA)",
+      "value" : "ei_bssi_m_r2?indic=BS-CCI-BAL&s_adj=NSA",
+      "mapFrequency" : "M",
+      "mapType": "V"
     }
   ]
 }

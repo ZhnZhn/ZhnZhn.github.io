@@ -30,6 +30,12 @@
        "mapFrequency" : "M",
        "mapValue" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2010_SCA",
        "mapSlice" : { "indic_bt" : "PSQM", "nace_r2" : "F_CC1", "unit" : "I2010_SCA" }
+      },{
+       "caption" : "Building Permits (2015=100), monthly" ,
+       "value" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2015_SCA",
+       "mapFrequency" : "M",
+       "mapValue" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2015_SCA",
+       "mapSlice" : { "indic_bt" : "PSQM", "nace_r2" : "F_CC1", "unit" : "I2015_SCA" }
      }
   ]
 }
