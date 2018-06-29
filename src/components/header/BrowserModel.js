@@ -61,12 +61,7 @@ const crBrowserModel = () => {
         name: 'Blockchain',
         onClick: _fBD(BT.BLOCKCHAIN),
         isClose: true
-      },/*{
-        name: 'Quandl Premium Sample',
-        cn: CL.Q,
-        onClick: _fBD(BT.PREMIUM_SAMPLE),
-        isClose: true
-      },*/{
+      },{
         cn: CL.W,
         name: 'Watch List',
         onClick: _fBD(BT.WATCH_LIST),

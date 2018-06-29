@@ -281,7 +281,7 @@ const _crSparkData = (point) => {
 
 const _fnAddHandlerCloseAndSparklines = function(id, point){
   setTimeout( function(){
-          _addHideHandler(id. point)
+          _addHideHandler(id, point)
           const {
                   sparkLinesData, sparkBarsData,
                   pointIndex

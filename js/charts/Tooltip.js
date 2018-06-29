@@ -322,7 +322,7 @@ var _crSparkData = function _crSparkData(point) {
 
 var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(id, point) {
   setTimeout(function () {
-    _addHideHandler(id.point);
+    _addHideHandler(id, point);
 
     var _crSparkData2 = _crSparkData(point),
         sparkLinesData = _crSparkData2.sparkLinesData,
