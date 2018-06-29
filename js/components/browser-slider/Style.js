@@ -29,7 +29,8 @@ var Style = {
     left: '16px'
   },
   ITEM_L: {
-    color: '#a487d4',
+    //color: '#a487d4',
+    color: '#1b2836',
     fontFamily: 'Roboto, "Arial Unicode MS", Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',

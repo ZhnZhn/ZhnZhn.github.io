@@ -42,7 +42,8 @@ var CL = {
 };
 
 var DF = {
-  OPEN_COLOR: _Color2.default.YELLOW,
+  //OPEN_COLOR: C.YELLOW,
+  OPEN_COLOR: _Color2.default.TITLE,
   CLOSE_COLOR: _Color2.default.BLANK
 };
 
@@ -57,7 +58,8 @@ var S = {
     marginLeft: '8px'
   },
   CAPTION: {
-    color: _Color2.default.SIREN,
+    //color: C.SIREN,
+    color: _Color2.default.TITLE,
     paddingLeft: '4px',
     verticalAlign: 'top',
     //color: 'rgba(164, 135, 212, 1)',
@@ -109,6 +111,7 @@ var OpenClose = (_temp = _class = function (_Component) {
       var _props = this.props,
           rootStyle = _props.rootStyle,
           caption = _props.caption,
+          captionStyle = _props.captionStyle,
           openColor = _props.openColor,
           closeColor = _props.closeColor,
           CompAfter = _props.CompAfter,
@@ -164,7 +167,7 @@ var OpenClose = (_temp = _class = function (_Component) {
             ),
             _react2.default.createElement(
               'span',
-              { style: S.CAPTION },
+              { style: (0, _extends3.default)({}, S.CAPTION, captionStyle) },
               caption
             )
           ),

@@ -30,6 +30,9 @@ var S = {
   P_BOTTOM: {
     marginBottom: '0.8em'
   },
+  M_B_4: {
+    marginBottom: '4px'
+  },
   MARGIN_TOP: {
     marginTop: '8px'
   },

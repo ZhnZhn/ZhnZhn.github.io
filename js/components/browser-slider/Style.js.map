@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/components/browser-slider/Style.js"],"names":["Style","MSG_ERR","paddingLeft","color","fontFamily","fontWeight","fontSize","TITLE","position","paddingTop","paddingBottom","cursor","TITLE_ARROW","top","left","ITEM_L","padding","ITEM_T"],"mappings":";;;;;;AACA,IAAMA,QAAQ;AACZC,WAAS;AACPC,iBAAa,MADN;AAEPC,WAAO,SAFA;AAGPC,gBAAY,+CAHL;AAIPC,gBAAY,MAJL;AAKPC,cAAU;AALH,GADG;AAQZC,SAAO;AACLC,cAAU,UADL;AAELL,WAAO,QAFF;AAGLD,iBAAa,MAHR;AAILO,gBAAY,KAJP;AAKLC,mBAAe,KALV;AAMLN,gBAAY,+CANP;AAOLC,gBAAY,MAPP;AAQLC,cAAU,MARL;AASLK,YAAQ;AATH,GARK;AAmBZC,eAAa;AACXJ,cAAU,UADC;AAEXK,SAAK,KAFM;AAGXC,UAAM;AAHK,GAnBD;AAwBZC,UAAQ;AACNZ,WAAO,SADD;AAENC,gBAAY,+CAFN;AAGNC,gBAAY,MAHN;AAINC,cAAU,MAJJ;AAKNU,aAAS,KALH;AAMNd,iBAAa,MANP;AAONS,YAAQ;AAPF,GAxBI;AAiCZM,UAAQ;AACNd,WAAO,OADD;AAENC,gBAAY,+CAFN;AAGNC,gBAAY,MAHN;AAINC,cAAU,MAJJ;AAKNU,aAAS,KALH;AAMNL,YAAQ;AANF;AAjCI,CAAd;;kBA2CeX,K","file":"Style.js","sourcesContent":["\r\nconst Style = {\r\n  MSG_ERR: {\r\n    paddingLeft: '12px',\r\n    color: '#f44336',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px'\r\n  },\r\n  TITLE: {\r\n    position: 'relative',\r\n    color: 'silver',\r\n    paddingLeft: '32px',\r\n    paddingTop: '8px',\r\n    paddingBottom: '4px',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px',\r\n    cursor: 'pointer'\r\n  },\r\n  TITLE_ARROW: {\r\n    position: 'absolute',\r\n    top: '8px',\r\n    left: '16px'\r\n  },\r\n  ITEM_L: {\r\n    color: '#a487d4',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px',\r\n    padding: '8px',\r\n    paddingLeft: '12px',\r\n    cursor: 'pointer'\r\n  },\r\n  ITEM_T: {\r\n    color: 'black',\r\n    fontFamily: 'Roboto, \"Arial Unicode MS\", Arial, sans-serif',\r\n    fontWeight: 'bold',\r\n    fontSize: '16px',\r\n    padding: '8px',\r\n    cursor: 'pointer'\r\n  }\r\n}\r\n\r\nexport default Style\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/browser-slider/Style.js"
+ ],
+ "file": "../../../src/components/browser-slider/Style.js",
+ "names": [
+  "Style",
+  "MSG_ERR",
+  "paddingLeft",
+  "color",
+  "fontFamily",
+  "fontWeight",
+  "fontSize",
+  "TITLE",
+  "position",
+  "paddingTop",
+  "paddingBottom",
+  "cursor",
+  "TITLE_ARROW",
+  "top",
+  "left",
+  "ITEM_L",
+  "padding",
+  "ITEM_T"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,QAAQ;AACZC,WAAS;AACPC,iBAAa,MADN;AAEPC,WAAO,SAFA;AAGPC,gBAAY,+CAHL;AAIPC,gBAAY,MAJL;AAKPC,cAAU;AALH,GADG;AAQZC,SAAO;AACLC,cAAU,UADL;AAELL,WAAO,QAFF;AAGLD,iBAAa,MAHR;AAILO,gBAAY,KAJP;AAKLC,mBAAe,KALV;AAMLN,gBAAY,+CANP;AAOLC,gBAAY,MAPP;AAQLC,cAAU,MARL;AASLK,YAAQ;AATH,GARK;AAmBZC,eAAa;AACXJ,cAAU,UADC;AAEXK,SAAK,KAFM;AAGXC,UAAM;AAHK,GAnBD;AAwBZC,UAAQ;AACN;AACAZ,WAAO,SAFD;AAGNC,gBAAY,+CAHN;AAINC,gBAAY,MAJN;AAKNC,cAAU,MALJ;AAMNU,aAAS,KANH;AAONd,iBAAa,MAPP;AAQNS,YAAQ;AARF,GAxBI;AAkCZM,UAAQ;AACNd,WAAO,OADD;AAENC,gBAAY,+CAFN;AAGNC,gBAAY,MAHN;AAINC,cAAU,MAJJ;AAKNU,aAAS,KALH;AAMNL,YAAQ;AANF;AAlCI,CAAd;;kBA4CeX,K"
+}

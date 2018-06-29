@@ -68,6 +68,10 @@ var _IconLogoBar = require('./IconLogoBar');
 
 var _IconLogoBar2 = _interopRequireDefault(_IconLogoBar);
 
+var _Color = require('../styles/Color');
+
+var _Color2 = _interopRequireDefault(_Color);
+
 var _About = require('./About.Style');
 
 var _About2 = _interopRequireDefault(_About);
@@ -83,11 +87,15 @@ var CL = {
 };
 
 var STEP = {
-  T1: "Choose a data source Browser from Topics [t]",
-  T2: "Choose a dataset menu item in a Browser",
-  T3: "Select params and enter query date in a draggable Dialog",
+  T1: "Please, choose a data source Browser from Topics [t]",
+  T2: "Next, choose a dataset menu item in the the opended up Browser",
+  T3: "Select params and enter query date in the opened up draggable Dialog",
   T4: "Click a button Load",
   T5: "Also you can export chart to PNG, JPG, SVG, print to PDF"
+};
+
+var OC_CAPTION_STYLE = {
+  color: _Color2.default.TITLE
 };
 
 var About = function (_Component) {
@@ -187,73 +195,126 @@ var About = function (_Component) {
             { style: (0, _extends3.default)({}, _About2.default.DIV_WRAPPER, _About2.default.GREY) },
             _react2.default.createElement(
               'p',
-              null,
+              { style: _About2.default.M_B_4 },
               _react2.default.createElement(
                 'span',
                 { style: _About2.default.GREEN },
-                'Web app ERC\xA0'
+                'ERC (Economic RESTful Client)\xA0'
               ),
               _react2.default.createElement(
                 'span',
                 null,
-                'is an economic RESTful client.'
+                'is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers.'
               )
             ),
-            _react2.default.createElement(
-              'p',
-              { style: _About2.default.P_BOTTOM },
-              'With it, you can view economic & finance open data from Web.'
-            ),
-            _react2.default.createElement(_DataProviders2.default, { isClose: isCloseProviders }),
+            _react2.default.createElement(_DataProviders2.default, {
+              isClose: isCloseProviders,
+              ocCaptionStyle: OC_CAPTION_STYLE
+            }),
             _react2.default.createElement(
               'div',
               { style: _About2.default.BLACK },
               _react2.default.createElement(_StepTitle2.default, { step: '1', title: STEP.T1 }),
               _react2.default.createElement(_StepTitle2.default, { step: '2', title: STEP.T2 }),
               _react2.default.createElement(_StepTitle2.default, { step: '3', title: STEP.T3 }),
-              _react2.default.createElement(_StepTitle2.default, { step: '4', title: STEP.T4 }),
-              _react2.default.createElement(_StepTitle2.default, { step: '5', title: STEP.T5 })
+              _react2.default.createElement(_StepTitle2.default, { step: '4', title: STEP.T4 })
             ),
             _react2.default.createElement(
               'p',
-              { style: (0, _extends3.default)({}, _About2.default.P_BOTTOM, _About2.default.MARGIN_TOP) },
+              { style: _About2.default.MARGIN_TOP },
               'The result will be shown in a chart in a resizebale container.'
+            ),
+            _react2.default.createElement(
+              'p',
+              { style: _About2.default.P_BOTTOM },
+              'Also you can export chart to PNG, JPG, SVG, print to PDF.'
+            ),
+            _react2.default.createElement(
+              'p',
+              { style: _About2.default.P_BOTTOM },
+              _react2.default.createElement(
+                'span',
+                { style: _About2.default.RED },
+                'Attention:\xA0'
+              ),
+              _react2.default.createElement(
+                'span',
+                null,
+                'For one item from ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'Dialog'
+                ),
+                ' can be only one ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'Chart item'
+                ),
+                ' in a container. If you want to change a date period, please, use ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'Highcharts zoom option'
+                ),
+                ' or close the chart in the container and load data again. More information about data can be found on a ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'tab Info, Chart item'
+                ),
+                '.'
+              )
             ),
             _react2.default.createElement(
               _OpenClose2.default,
               {
                 isClose: true,
                 caption: 'More...',
-                rootStyle: _About2.default.MORE
+                captionStyle: OC_CAPTION_STYLE,
+                rootStyle: _About2.default.MORE,
+                openColor: _Color2.default.YELLOW
               },
               _react2.default.createElement(
                 'p',
-                null,
-                'After clicking a button Show in a Dialog will be opened Chart container with Charts or empty. After closing a Chart container all Charts remains.'
-              ),
-              _react2.default.createElement(
-                'p',
                 { style: _About2.default.P_BOTTOM },
-                'In one time max three Dialogs can be opened.'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
+                'After clicking a ',
                 _react2.default.createElement(
                   'span',
-                  { style: _About2.default.RED },
-                  'Attention:\xA0'
+                  { style: _About2.default.BLACK },
+                  'button Show'
                 ),
+                ' in a Dialog will be an opened up ',
                 _react2.default.createElement(
                   'span',
-                  null,
-                  'For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it, close the chart in the container and load data again.'
-                )
+                  { style: _About2.default.BLACK },
+                  'Chart container'
+                ),
+                ' with charts or empty. After closing a ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'Chart container'
+                ),
+                ' all charts remains. In one time max three ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'Dialogs'
+                ),
+                ' can be opened.'
               ),
               _react2.default.createElement(
                 'p',
                 { style: _About2.default.P_BOTTOM },
-                'The value of currency is not always USD as shows in a chart tooltip. Sometimes more details about data can be look at tab Info on a Chart.'
+                'Some open and private data providers require user\'s ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'API Key'
+                ),
+                '.'
               ),
               _react2.default.createElement(
                 'p',
@@ -261,37 +322,25 @@ var About = function (_Component) {
                 _react2.default.createElement(
                   'span',
                   null,
-                  'In that case of data loading from\xA0'
+                  'For example, for loading data from\xA0'
                 ),
                 _react2.default.createElement(_Links2.default.Quandl, null),
                 _react2.default.createElement(
                   'span',
                   null,
-                  '\xA0data provider, for accessing without API Key, exists some restriction on frequency and amount queries (',
+                  '\xA0without API Key exists some restriction on frequency and amount of queries (',
                   _react2.default.createElement(
                     'span',
                     { style: _About2.default.BLUE_DARK },
                     '50 per day/1 at a time'
                   ),
+                  ') and can be deprecated, according to Quandl. With ',
                   _react2.default.createElement(
                     'span',
-                    { style: _About2.default.GREY },
-                    ').'
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'According to Quandl, anonymous requests can be deprecated soon. With API Key'
-              ),
-              _react2.default.createElement(
-                'p',
-                { style: _About2.default.P_BOTTOM },
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  'you will be have (',
+                    { style: _About2.default.BLACK },
+                    'API Key'
+                  ),
+                  ' it is possible to make (',
                   _react2.default.createElement(
                     'span',
                     { style: _About2.default.BLUE_DARK },
@@ -302,28 +351,48 @@ var About = function (_Component) {
               ),
               _react2.default.createElement(
                 'p',
-                null,
-                'A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings. Settings save in browser\'s memory only for a current WEB session.'
+                { style: _About2.default.P_BOTTOM },
+                'Data providers API Keys can be set on the ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'tab ApiKeys, dialog Settings [s]'
+                ),
+                '.'
               ),
               _react2.default.createElement(
                 'p',
                 { style: _About2.default.P_BOTTOM },
-                'Premium Free Sample Data can be requested only with Quandl API Key.'
+                'Also for loading data from data providers with HTTP protocol required ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'HTTPS proxy server'
+                ),
+                ', by default settled in the ',
+                _react2.default.createElement(
+                  'span',
+                  { style: _About2.default.BLACK },
+                  'tab Options, dialog Settings [s]'
+                ),
+                '.'
               ),
               _react2.default.createElement(
                 'p',
-                null,
+                { style: _About2.default.P_BOTTOM },
+                'There is three UI theme in the web app ERC: ',
                 _react2.default.createElement(
                   'span',
-                  null,
-                  'For loading data from\xA0'
+                  { style: _About2.default.BLACK },
+                  'Dark, Light, and Sand'
                 ),
-                _react2.default.createElement(_Links2.default.Eurostat, null),
+                ' can be set on ',
                 _react2.default.createElement(
                   'span',
-                  null,
-                  '\xA0does not exist any restrictions.'
-                )
+                  { style: _About2.default.BLACK },
+                  'tab Options, dialog Settings [s]'
+                ),
+                '. All user\'s settings keep in browser\'s memory only for a current web session.'
               )
             ),
             _react2.default.createElement(_IconLogoBar2.default, null),

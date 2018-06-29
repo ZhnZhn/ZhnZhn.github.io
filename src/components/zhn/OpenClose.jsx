@@ -8,7 +8,8 @@ const CL = {
 };
 
 const DF = {
-  OPEN_COLOR: C.YELLOW,
+  //OPEN_COLOR: C.YELLOW,
+  OPEN_COLOR: C.TITLE,
   CLOSE_COLOR: C.BLANK
 };
 
@@ -23,7 +24,8 @@ const S = {
     marginLeft: '8px'
   },
   CAPTION: {
-    color: C.SIREN,
+    //color: C.SIREN,
+    color: C.TITLE,
     paddingLeft: '4px',
     verticalAlign: 'top',
     //color: 'rgba(164, 135, 212, 1)',
@@ -66,7 +68,8 @@ class OpenClose extends Component {
 
   render(){
     const {
-            rootStyle, caption,
+            rootStyle,
+            caption, captionStyle,
             openColor, closeColor,
             CompAfter, childStyle, children
           } = this.props
@@ -106,7 +109,7 @@ class OpenClose extends Component {
                  />
                </svg>
            </div>
-           <span style={S.CAPTION} >
+           <span style={{...S.CAPTION, ...captionStyle}} >
               {caption}
            </span>
          </div>

@@ -21,14 +21,16 @@ Some open and private data providers require user's API Key.
 For example, for loading data from Quandl without API Key exists some restriction on frequency and amount of queries (50 per day/1 at a time) and can be deprecated, according to Quandl.
 With API Key it is possible to make (50 000 per day/1 at a time). It's free of charge to receive. Quandl premium free sample data can be requested only with user's API Key.  
 
-Data providers API Keys can be set on the **tab ApiKeys, dialog Settings**. Also for loading data from data providers with HTTP protocol required HTTPS proxy server, by default settled in the **dialog Settings**. There is three UI theme in web app ERC: **Dark**, **Light**, and **Sand** can be set on **tab Options, dialog Settings**. All user's settings keep in browser's memory only for a current web session.  
+Data providers API Keys can be set on the **tab ApiKeys, dialog Settings**. Also for loading data from data providers with HTTP protocol required **HTTPS proxy server**, by default settled in the **dialog Settings**.  
 
-More details and requirements about data providers can be found in [web app ERC](https://zhnzhn.github.io) **pane About** and provider's websites.  
+There is three UI theme in the web app ERC: **Dark**, **Light**, and **Sand** can be set on **tab Options, dialog Settings**. All user's settings keep in browser's memory only for a current web session.  
+
+More details and requirements about data providers can be found in the [web app ERC](https://zhnzhn.github.io) **pane About** and provider's websites.  
 
 ### Attention
 For one item from **Dialog** can be only one **Chart item** in a container. 
-If you want to change query parameters for it, close the chart in the container and load data again.
-More information about data can be found **tab Info** on a **Chart item**.
+If you want to change a date period, please, use **Highcharts zoom option** or close the chart in the container and load data again.
+More information about data can be found a **tab Info, Chart item**.
 
 ## License
 This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016-present, Yevhenii Molodyi.

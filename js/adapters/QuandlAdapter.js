@@ -66,6 +66,10 @@ var _ToScatter2 = _interopRequireDefault(_ToScatter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var getData = _QuandlFn2.default.getData,
+    getColumnNames = _QuandlFn2.default.getColumnNames;
+
+
 var C = {
   OPEN: "Open",
   CLOSE: "Close",
@@ -273,7 +277,7 @@ var _fnCreatePointFlow = function _fnCreatePointFlow(json, yPointIndex, option) 
   var fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria],
       _json$dataset = json.dataset,
       dataset = _json$dataset === undefined ? {} : _json$dataset,
-      column_names = dataset.column_names,
+      column_names = getColumnNames(json),
       result = {
     yPointIndex: yPointIndex,
     minPoint: Number.POSITIVE_INFINITY,
@@ -341,10 +345,7 @@ var _fnSeriesPipe = function _fnSeriesPipe(json, yPointIndex, option) {
   var _fnCreatePointFlow2 = _fnCreatePointFlow(json, yPointIndex, option),
       fnPointsFlow = _fnCreatePointFlow2.fnPointsFlow,
       result = _fnCreatePointFlow2.result,
-      _json$dataset2 = json.dataset,
-      dataset = _json$dataset2 === undefined ? {} : _json$dataset2,
-      _dataset$data = dataset.data,
-      data = _dataset$data === undefined ? [] : _dataset$data,
+      data = getData(json),
       points = data.sort(_AdapterFn2.default.compareByDate);
 
   var i = 0,
@@ -386,7 +387,8 @@ var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chart
 };
 
 var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
-  var names = json.dataset.column_names;
+  //const names= json.dataset.column_names;
+  var names = getColumnNames(json);
   if (names[2] === C.HIGH && names[3] === C.LOW && names[4] === C.CLOSE && names[5] === C.VOLUME) {
     Object.assign(config, {
       zhPoints: zhPoints,
@@ -396,7 +398,8 @@ var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
   }
 };
 var _fnCheckIsMomAth = function _fnCheckIsMomAth(config, json, zhPoints) {
-  var names = json.dataset.column_names;
+  //const names= json.dataset.column_names;
+  var names = getColumnNames(json);
   if (names[1] === C.OPEN && names[4] === C.CLOSE) {
     Object.assign(config, {
       zhPoints: zhPoints,
@@ -561,7 +564,7 @@ var fnConfigAxes = function fnConfigAxes(result) {
       plotLines = config.yAxis.plotLines,
       _data = config.series[0].data,
       _maxIndex = _data.length - 1,
-      _recentValue = _data[_maxIndex][1];
+      _recentValue = _maxIndex > -1 ? _data[_maxIndex][1] : 0;
 
   _setPlotLinesExtremValues(plotLines, minPoint, maxPoint, _recentValue, isDrawDeltaExtrems);
 
@@ -588,23 +591,15 @@ var _fCreateAreaConfig = function _fCreateAreaConfig(json, option) {
   return fnQuandlFlow(config, json, option);
 };
 
-var _getData = function _getData(json) {
-  var _json$dataset3 = json.dataset,
-      dataset = _json$dataset3 === undefined ? {} : _json$dataset3,
-      _dataset$data2 = dataset.data,
-      data = _dataset$data2 === undefined ? [] : _dataset$data2;
-
-  return data;
-};
 var _fToConfig = function _fToConfig(builder) {
   return function (json, option) {
-    var data = _getData(json);
+    var data = getData(json);
     return { config: builder.toConfig(data, option) };
   };
 };
 var _fToSeria = function _fToSeria(builder) {
   return function (json, option, chart) {
-    var data = _getData(json);
+    var data = getData(json);
     return builder.toSeria(data, option, chart);
   };
 };
@@ -621,7 +616,7 @@ var _toSeria = function _toSeria(json, option) {
   var chartId = option.value,
       parentId = option.parentId,
       yPointIndex = _QuandlFn2.default.getDataColumnIndex(json, option),
-      data = _crSeriaData(_getData(json), yPointIndex),
+      data = _crSeriaData(getData(json), yPointIndex),
       seria = Object.assign(_ChartConfig2.default.fSeries(), {
     zhSeriaId: parentId + '_' + chartId,
     zhValueText: chartId.substring(0, 12),

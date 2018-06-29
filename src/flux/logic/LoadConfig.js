@@ -8,6 +8,7 @@ import LoadImpl from './LoadImpl'
 
 const LoadConfig = {
   [LT.Q]: LoadImpl.Quandl,
+  [LT.Q_T]: LoadImpl.Quandl,
   [LT.QCT]: loadQuandlCommodityTrade,
 
   [LT.B]: LoadImpl.Barchart,

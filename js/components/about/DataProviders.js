@@ -67,14 +67,17 @@ var ST = {
 };
 
 var DataProviders = function DataProviders(_ref) {
-  var isClose = _ref.isClose;
+  var isClose = _ref.isClose,
+      ocCaptionStyle = _ref.ocCaptionStyle;
   return _react2.default.createElement(
     _OpenClose2.default,
     {
       isClose: isClose,
       caption: 'Data Providers (All 16):',
+      captionStyle: ocCaptionStyle,
       rootStyle: (0, _extends3.default)({}, _About2.default.LINE_HEIGHT, _About2.default.P_BOTTOM),
-      childStyle: ST.ROOT_CHILD
+      childStyle: ST.ROOT_CHILD,
+      openColor: _Color2.default.YELLOW
     },
     _react2.default.createElement(
       'div',
@@ -137,6 +140,7 @@ var DataProviders = function DataProviders(_ref) {
         _OpenClose2.default,
         {
           caption: '(5) Required API key:',
+          captionStyle: ocCaptionStyle,
           rootStyle: ST.OPEN_CLOSE,
           childStyle: ST.CHILD_STYLE,
           isClose: true,
@@ -217,6 +221,7 @@ var DataProviders = function DataProviders(_ref) {
         _OpenClose2.default,
         {
           caption: '(4) Required Https Proxy:',
+          captionStyle: ocCaptionStyle,
           rootStyle: ST.OPEN_CLOSE,
           childStyle: ST.CHILD_STYLE,
           isClose: true,

@@ -29,6 +29,30 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var QuandlFn2 = {
+  getData: function getData(json) {
+    var _json$dataset = json.dataset,
+        dataset = _json$dataset === undefined ? {} : _json$dataset,
+        _json$datatable = json.datatable,
+        datatable = _json$datatable === undefined ? {} : _json$datatable;
+
+    return dataset.data || datatable.data || [];
+  },
+
+  getColumnNames: function getColumnNames(json) {
+    var dataset = json.dataset,
+        datatable = json.datatable;
+
+    if (dataset) {
+      return dataset.column_names || [];
+    }
+    if (datatable && Array.isArray(datatable.columns)) {
+      return datatable.columns.map(function (c) {
+        return c.name;
+      });
+    }
+    return [];
+  },
+
   isPrevDateAfter: function isPrevDateAfter(arr, checkedDate, predicate) {
     var length = arr.length;
     if (length === 0) {
@@ -42,8 +66,8 @@ var QuandlFn2 = {
     }
   },
   createDatasetInfo: function createDatasetInfo(json) {
-    var _json$dataset = json.dataset,
-        dataset = _json$dataset === undefined ? {} : _json$dataset,
+    var _json$dataset2 = json.dataset,
+        dataset = _json$dataset2 === undefined ? {} : _json$dataset2,
         _dataset$name = dataset.name,
         name = _dataset$name === undefined ? '' : _dataset$name,
         _dataset$description = dataset.description,
@@ -120,8 +144,8 @@ var QuandlFn2 = {
     var seria = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var json = arguments[1];
     var len = seria.length,
-        _json$dataset2 = json.dataset,
-        dataset = _json$dataset2 === undefined ? {} : _json$dataset2,
+        _json$dataset3 = json.dataset,
+        dataset = _json$dataset3 === undefined ? {} : _json$dataset3,
         _dataset$frequency2 = dataset.frequency,
         frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2,
         millisUTC = len > 0 && seria[len - 1][0] && typeof seria[len - 1][0] === 'number' ? seria[len - 1][0] : '',
@@ -141,12 +165,18 @@ var QuandlFn2 = {
   findColumnIndex: function findColumnIndex(obj) {
     var columnName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    var column_names = Array.isArray(obj) ? obj : obj.dataset.column_names ? obj.dataset.column_names : [],
+    var column_names = Array.isArray(obj) ? obj : QuandlFn2.getColumnNames(obj)
+    /*
+    : obj.dataset.column_names
+         ? obj.dataset.column_names
+         : []
+     */
+    ,
         _columnName = columnName.toLowerCase();
 
     if (columnName && column_names) {
       for (var i = 0, max = column_names.length; i < max; i++) {
-        if (column_names[i].toLowerCase() === _columnName) {
+        if (typeof column_names[i] === 'string' && column_names[i].toLowerCase() === _columnName) {
           return i;
         }
       }
@@ -180,4 +210,4 @@ var QuandlFn2 = {
 };
 
 exports.default = QuandlFn2;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\QuandlFn2.js.map
+//# sourceMappingURL=QuandlFn2.js.map

@@ -36,10 +36,14 @@ var _Color2 = _interopRequireDefault(_Color);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CL_SHOW = 'show-popup';
+var CL = {
+  SHOW: 'show-popup',
+  NOT_SELECTED: 'not-selected'
+};
 
 var DF = {
   FILL_OPEN: _Color2.default.YELLOW,
+  //FILL_OPEN: C.TITLE,
   FILL_CLOSE: _Color2.default.BLANK
 };
 
@@ -57,7 +61,8 @@ var S = {
     display: 'inline-block'
   },
   CAPTION: {
-    color: _Color2.default.SIREN,
+    //color: C.SIREN,
+    color: _Color2.default.TITLE,
     paddingLeft: '4px',
     verticalAlign: 'top',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
@@ -129,7 +134,7 @@ var OpenClose2 = (_temp = _class = function (_Component) {
         _pathV = PATH_OPEN;
         _fillV = fillOpen;
         _displayDivStyle = 'block';
-        _classShow = CL_SHOW;
+        _classShow = CL.SHOW;
         _styleNotSelected = null;
       } else {
         _pathV = PATH_CLOSE;
@@ -145,7 +150,7 @@ var OpenClose2 = (_temp = _class = function (_Component) {
         _react2.default.createElement(
           'div',
           (0, _extends3.default)({
-            className: 'not-selected',
+            className: CL.NOT_SELECTED,
             style: _styleNotSelected,
             onClick: this._handleClickOpenClose
           }, _dragOption),

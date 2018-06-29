@@ -26,6 +26,8 @@ import {fCreateTreeMapConfig} from './QuandlToTreeMap';
 import ToYearly from './ToYearly'
 import ToScatter from './ToScatter'
 
+const { getData, getColumnNames } = QuandlFn2;
+
 const C = {
   OPEN : "Open",
   CLOSE : "Close",
@@ -194,7 +196,8 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
 
   const fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
       , { dataset={} } = json
-      , column_names = dataset.column_names
+      //, column_names = dataset.column_names
+      , column_names = getColumnNames(json)
       , result = {
          yPointIndex : yPointIndex,
          minPoint : Number.POSITIVE_INFINITY,
@@ -260,8 +263,9 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
 
 const _fnSeriesPipe = function(json, yPointIndex, option){
   const { fnPointsFlow, result } = _fnCreatePointFlow(json, yPointIndex, option)
-      , { dataset={} } = json
-      , { data=[] } = dataset
+      , data = getData(json)
+      //, { dataset={} } = json
+      //, { data=[] } = dataset
       , points = data.sort(AdapterFn.compareByDate);
 
   let i=0, _max=points.length;
@@ -301,7 +305,8 @@ const _fnAddSeriesSplitRatio = function(config, data, chartId, y){
 };
 
 const _fnCheckIsMfi = function(config, json, zhPoints){
-  const names= json.dataset.column_names;
+  //const names= json.dataset.column_names;
+  const names = getColumnNames(json);
   if ( names[2] === C.HIGH && names[3] === C.LOW  &&
        names[4] === C.CLOSE && names[5] === C.VOLUME) {
     Object.assign(config, {
@@ -312,7 +317,8 @@ const _fnCheckIsMfi = function(config, json, zhPoints){
   }
 };
 const _fnCheckIsMomAth = function(config, json, zhPoints) {
-  const names= json.dataset.column_names;
+  //const names= json.dataset.column_names;
+  const names = getColumnNames(json)
   if ( names[1] === C.OPEN && names[4] === C.CLOSE) {
     Object.assign(config, {
       zhPoints: zhPoints,
@@ -424,7 +430,7 @@ const fnGetSeries = function(config, json, option){
        data: dataHighLow
      })
      .toConfig();
-   
+
     if (legendSeries){
       _fnSetLegendSeriesToConfig(legendSeries, config, chartId)
       config.zhConfig.isWithLegend = true
@@ -471,8 +477,10 @@ const fnConfigAxes = function(result){
       , plotLines = config.yAxis.plotLines
       , _data = config.series[0].data
       , _maxIndex = _data.length - 1
-      , _recentValue = _data[_maxIndex][1];
-
+      , _recentValue = _maxIndex > -1
+           ? _data[_maxIndex][1]
+           : 0;
+           
   _setPlotLinesExtremValues(
     plotLines, minPoint, maxPoint,
     _recentValue, isDrawDeltaExtrems
@@ -500,17 +508,12 @@ const _fCreateAreaConfig = function(json, option){
   return fnQuandlFlow(config, json, option);
 }
 
-const _getData = (json) => {
-  const { dataset={} } = json
-      , { data=[] } = dataset;
-  return data;
-}
 const _fToConfig = builder => (json, option) => {
-  const data = _getData(json);
+  const data = getData(json);
   return { config: builder.toConfig(data, option) };
 }
 const _fToSeria = builder => (json, option, chart) => {
-  const data = _getData(json);
+  const data = getData(json);
   return builder.toSeria(data, option, chart);
 }
 
@@ -537,7 +540,7 @@ const _crSeriaData = (data, yIndex) => {
 const _toSeria = (json, option) => {
   const { value:chartId, parentId } = option
       , yPointIndex = QuandlFn2.getDataColumnIndex(json, option)
-      , data = _crSeriaData(_getData(json), yPointIndex)
+      , data = _crSeriaData(getData(json), yPointIndex)
       , seria = Object.assign(
            ChartConfig.fSeries(), {
              zhSeriaId: parentId + '_' + chartId,

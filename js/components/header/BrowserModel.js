@@ -77,12 +77,12 @@ var crBrowserModel = function crBrowserModel() {
       name: 'Blockchain',
       onClick: _fBD(_Type.BrowserType.BLOCKCHAIN),
       isClose: true
-    }, {
-      name: 'Quandl Premium Sample',
-      cn: CL.Q,
-      onClick: _fBD(_Type.BrowserType.PREMIUM_SAMPLE),
-      isClose: true
-    }, {
+    }, /*{
+       name: 'Quandl Premium Sample',
+       cn: CL.Q,
+       onClick: _fBD(BT.PREMIUM_SAMPLE),
+       isClose: true
+       },*/{
       cn: CL.W,
       name: 'Watch List',
       onClick: _fBD(_Type.BrowserType.WATCH_LIST),
@@ -164,7 +164,12 @@ var crBrowserModel = function crBrowserModel() {
       cn: CL.Q,
       name: 'LSE (Not Updated)',
       onClick: _fBD(_Type.BrowserType.LONDON_STOCKS),
-      isClose: true
+      isClose: true /*,{
+                     name: 'Quandl Premium Sample',
+                     cn: CL.Q,
+                     onClick: _fBD(BT.PREMIUM_SAMPLE),
+                     isClose: true
+                    }*/
     }]
   };
 };

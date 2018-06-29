@@ -14,7 +14,9 @@ import StepTitle from './StepTitle'
 import Link from '../links/Links';
 import IconLogoBar from './IconLogoBar';
 
+import C from '../styles/Color'
 import S from './About.Style'
+
 
 const TH_ID = 'ABOUT';
 
@@ -25,12 +27,16 @@ const CL = {
 };
 
 const STEP = {
-  T1: "Choose a data source Browser from Topics [t]",
-  T2: "Choose a dataset menu item in a Browser",
-  T3: "Select params and enter query date in a draggable Dialog",
+  T1: "Please, choose a data source Browser from Topics [t]",
+  T2: "Next, choose a dataset menu item in the the opended up Browser",
+  T3: "Select params and enter query date in the opened up draggable Dialog",
   T4: "Click a button Load",
   T5: "Also you can export chart to PNG, JPG, SVG, print to PDF"
 };
+
+const OC_CAPTION_STYLE = {
+  color: C.TITLE
+}
 
 class About extends Component {
   /*
@@ -112,87 +118,74 @@ class About extends Component {
           >
 
          <div style={{...S.DIV_WRAPPER, ...S.GREY}}>
-         <p>
+         <p style={S.M_B_4}>
            <span style={S.GREEN}>
-             Web app ERC&nbsp;
+             ERC (Economic RESTful Client)&nbsp;
            </span>
            <span>
-             is an economic RESTful client.
+             is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers.
            </span>
          </p>
-         <p style={S.P_BOTTOM}>
-           With it, you can view economic & finance open data from Web.
-         </p>
-         <DataProviders isClose={isCloseProviders} />
+         <DataProviders
+           isClose={isCloseProviders}
+           ocCaptionStyle={OC_CAPTION_STYLE}
+         />
          <div style={S.BLACK}>
             <StepTitle step="1" title={STEP.T1} />
             <StepTitle step="2" title={STEP.T2} />
             <StepTitle step="3" title={STEP.T3} />
             <StepTitle step="4" title={STEP.T4} />
-            <StepTitle step="5" title={STEP.T5} />
          </div>
-          <p style={{...S.P_BOTTOM, ...S.MARGIN_TOP }}>
+          <p style={S.MARGIN_TOP}>
             The result will be shown in a chart in a resizebale container.
           </p>
+          <p style={S.P_BOTTOM}>
+            Also you can export chart to PNG, JPG, SVG, print to PDF.
+          </p>
+          <p style={S.P_BOTTOM}>
+            <span style={S.RED}>
+               Attention:&nbsp;
+            </span>
+            <span>
+              For one item from <span style={S.BLACK}>Dialog</span> can be only one <span style={S.BLACK}>Chart item</span> in a container.
+              If you want to change a date period, please, use <span style={S.BLACK}>Highcharts zoom option</span> or close the chart in the container and load data again.
+              More information about data can be found on a <span style={S.BLACK}>tab Info, Chart item</span>.
+            </span>
+         </p>
           <OpenClose
             isClose={true}
             caption="More..."
+            captionStyle={OC_CAPTION_STYLE}
             rootStyle={S.MORE}
+            openColor={C.YELLOW}
           >
-            <p>
-               After clicking a button Show in a Dialog will be opened Chart container with Charts
-               or empty. After closing a Chart container all Charts remains.
+            <p style={S.P_BOTTOM}>
+              After clicking a <span style={S.BLACK}>button Show</span> in a Dialog will be an opened up <span style={S.BLACK}>Chart container</span> with charts or empty.
+              After closing a <span style={S.BLACK}>Chart container</span> all charts remains. In one time max three <span style={S.BLACK}>Dialogs</span> can be opened.
             </p>
             <p style={S.P_BOTTOM}>
-               In one time max three Dialogs can be opened.
+              Some open and private data providers require user's <span style={S.BLACK}>API Key</span>.
             </p>
-            <p>
-              <span style={S.RED}>
-                 Attention:&nbsp;
-              </span>
+            <p style={S.P_BOTTOM}>
+              <span>For example, for loading data from&nbsp;</span>
+              <Link.Quandl/>
               <span>
-                For one item from Dialog can be only one Chart in a container. If you want to change query parameters for it,
-                close the chart in the container and load data again.
+              &nbsp;without API Key exists some restriction
+              on frequency and amount of queries (<span style={S.BLUE_DARK}>50 per day/1 at a time</span>) and can be deprecated,
+              according to Quandl. With <span style={S.BLACK}>API Key</span> it is possible to make (<span style={S.BLUE_DARK}>50 000 per day/1 at a time</span>).
+              It's free of charge to receive.
               </span>
-           </p>
-           <p style={S.P_BOTTOM}>
-               The value of currency is not always USD as shows in a chart tooltip.
-               Sometimes more details about data can be look at tab Info on a Chart.
-           </p>
-           <p style={S.P_BOTTOM}>
-             <span>
-               In that case of data loading from&nbsp;
-             </span>
-             <Link.Quandl/>
-             <span>
-                &nbsp;data provider, for accessing without API Key, exists some restriction on frequency
-                and amount queries (<span style={S.BLUE_DARK}>50 per day/1 at a time</span><span style={S.GREY}>).</span>
-             </span>
-           </p>
-           <p>
-              According to Quandl, anonymous requests can be deprecated soon. With API Key
-           </p>
-           <p style={S.P_BOTTOM}>
-             <span>
-               you will be have (<span style={S.BLUE_DARK}>50 000 per day/1 at a time</span>). It's free of charge to receive.
-             </span>
-           </p>
-           <p>
-               A Quandl API Key, for using with ERC, can be set in dialog Settings/User Settings.
-               Settings save in browser's memory only for a current WEB session.
-           </p>
-           <p style={S.P_BOTTOM}>
-              Premium Free Sample Data can be requested only with Quandl API Key.
-           </p>
-           <p>
-             <span>
-               For loading data from&nbsp;
-             </span>
-             <Link.Eurostat/>
-             <span>
-               &nbsp;does not exist any restrictions.
-             </span>
-           </p>
+            </p>
+            <p style={S.P_BOTTOM}>
+              Data providers API Keys can be set on the <span style={S.BLACK}>tab ApiKeys, dialog Settings [s]</span>.
+            </p>
+            <p style={S.P_BOTTOM}>
+              Also for loading data from data providers with HTTP protocol required <span style={S.BLACK}>HTTPS proxy server</span>,
+              by default settled in the <span style={S.BLACK}>tab Options, dialog Settings [s]</span>.
+            </p>
+            <p style={S.P_BOTTOM}>
+              There is three UI theme in the web app ERC: <span style={S.BLACK}>Dark, Light, and Sand</span> can be set on <span style={S.BLACK}>tab Options, dialog Settings [s]</span>. All user's settings keep in browser's memory only for a current web session.
+            </p>
          </OpenClose>
          <IconLogoBar />
          <p>

@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 import C from '../styles/Color';
 
-const CL_SHOW = 'show-popup';
+const CL = {
+  SHOW: 'show-popup',
+  NOT_SELECTED: 'not-selected'
+};
 
 const DF = {
   FILL_OPEN: C.YELLOW,
+  //FILL_OPEN: C.TITLE,
   FILL_CLOSE: C.BLANK
 };
 
@@ -23,9 +27,10 @@ const S = {
     display: 'inline-block'
   },
   CAPTION: {
-    color: C.SIREN,
+    //color: C.SIREN,
+    color: C.TITLE,
     paddingLeft: '4px',
-    verticalAlign: 'top',    
+    verticalAlign: 'top',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
@@ -77,7 +82,7 @@ class OpenClose2 extends Component {
       _pathV = PATH_OPEN;
       _fillV = fillOpen;
       _displayDivStyle = 'block';
-      _classShow = CL_SHOW;
+      _classShow = CL.SHOW;
       _styleNotSelected = null;
 
     } else {
@@ -91,7 +96,7 @@ class OpenClose2 extends Component {
     return (
       <div style={{...S.ROOT, ...style}}>
         <div
-           className="not-selected"
+           className={CL.NOT_SELECTED}
            style={_styleNotSelected}
            onClick={this._handleClickOpenClose}
            {..._dragOption}

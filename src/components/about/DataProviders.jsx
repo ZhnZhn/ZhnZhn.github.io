@@ -13,7 +13,7 @@ const CL = {
 
 const OPEN_COLOR_L2 = C.GREEN;
 
-const ST = {
+const ST = {  
   ROOT_CHILD: {
     borderLeft: `1px dashed ${C.YELLOW}`,
     marginLeft: '-5px',
@@ -43,12 +43,14 @@ const ST = {
   }
 };
 
-const DataProviders = ({ isClose }) => (
+const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
      caption="Data Providers (All 16):"
-     rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM}}
+     captionStyle={ocCaptionStyle}
+     rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
      childStyle={ST.ROOT_CHILD}
+     openColor={C.YELLOW}
   >
     <div>
       <p>
@@ -85,6 +87,7 @@ const DataProviders = ({ isClose }) => (
       </p>
       <OpenClose
         caption="(5) Required API key:"
+        captionStyle={ocCaptionStyle}
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
         isClose={true}
@@ -128,6 +131,7 @@ const DataProviders = ({ isClose }) => (
       </OpenClose>
       <OpenClose
         caption="(4) Required Https Proxy:"
+        captionStyle={ocCaptionStyle}
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
         isClose={true}

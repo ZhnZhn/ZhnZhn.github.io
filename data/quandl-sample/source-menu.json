@@ -5,11 +5,6 @@
       "items" : [
         { "id" : "QPS_STOCKS" }
       ]
-    },{
-      "caption" : "Currency Trade",
-      "items" : [
-        { "id" : "QPS_CLSM" }
-      ]
     }
   ],
   "items" : {
@@ -23,35 +18,24 @@
         "descrUrl": "./data/quandl-sample/sharadar-core.html",
         "nInitFromDate" : 10,
         "oneCaption" : "Stock",
-        "oneURI" : "./data/quandl-sample/sharadar-core-stocks.json",
-        "oneJsonProp" : "stocks",
+        "oneURI" : "./data/stock-markets/wiki.json",
+        "oneJsonProp" : "tickets",
         "twoCaption" : "Indicator",
         "twoURI" : "./data/quandl-sample/sharadar-core-indicators.json",
         "twoJsonProp" : "indicators",
-        "valueFn" : "RPrefixOneTwo",
-        "valueFnPrefix" : "SF1",
-        "loadId" : "Q",
+        "valueFn" : "TOneTwo",        
+        "loadId" : "Q_T",
         "dataColumn" : 1,
         "isPremium" : true,
-        "dataSource" : "Sharadar: US Core Fundamentals (Code: SF1)"
+        "dataSource" : "Sharadar: Core US Fundamentals (Code: SF1)",
+        "dfProps": {
+          "dfIsTable": true,
+          "dfTable": "SHARADAR/SF1", 
+          "dfTail": "dimension=MRY",
+          "dfColumn": "calendardate" 
+        }
       }
-    },
-    "QPS_CLSM" : {
-      "type" : "QPS_CLSM",
-      "menuTitle" : "CLS FX (Monthly)",
-      "dialogCaption" : "CLS FX Volume Data (Monthly)",
-      "chartContainerCaption" : "Quandl: CLS FX Volume Data (Monthly)",
-      "dialogProps" : {
-        "descrUrl" : "./data/quandl-sample/cls-fx.html",
-        "optionURI" : "./data/quandl-sample/clsm-monthly.json",
-        "optionsJsonProp" : "items",
-        "loadId" : "Q",
-        "columnName" : "Volume",
-        "seriaColumnNames" : [ "Trades"],
-        "isPremium" : true,
-        "dataSource" : "CLS FX Volume (Monthly) (Code: CLSM)"
-      }
-
     }
+    
   }
 }

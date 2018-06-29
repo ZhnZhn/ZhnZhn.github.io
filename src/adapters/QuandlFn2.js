@@ -7,7 +7,23 @@ import DateUtils from '../utils/DateUtils';
 import { Direction } from '../constants/Type';
 import ChartConfig from '../charts/ChartConfig';
 
+
 const QuandlFn2 = {
+  getData: (json) => {
+    const { dataset={}, datatable={} } = json;
+    return dataset.data || datatable.data || [];
+  },
+
+  getColumnNames: (json) => {
+    const { dataset, datatable } = json;
+    if (dataset) {
+      return dataset.column_names || [];
+    }
+    if (datatable && Array.isArray(datatable.columns)) {
+      return datatable.columns.map(c => c.name);
+    }
+    return [];
+  },
 
   isPrevDateAfter(arr, checkedDate, predicate){
      const length = arr.length;
@@ -58,7 +74,7 @@ const QuandlFn2 = {
       id, key,
       columnName, dataColumn, itemCaption,
       fromDate, seriaColumnNames,
-      linkFn,      
+      linkFn,
       dataSource: _dataSource
     }
   },
@@ -100,14 +116,18 @@ const QuandlFn2 = {
   findColumnIndex(obj, columnName=''){
      const column_names = Array.isArray(obj)
              ? obj
+             : QuandlFn2.getColumnNames(obj)
+             /*
              : obj.dataset.column_names
                   ? obj.dataset.column_names
                   : []
+              */
          , _columnName = columnName.toLowerCase();
 
      if ( columnName && column_names ) {
         for (let i=0, max=column_names.length; i<max; i++){
-          if (column_names[i].toLowerCase() === _columnName){
+          if (typeof column_names[i] === 'string'
+              && column_names[i].toLowerCase() === _columnName) {
             return i;
           }
         }

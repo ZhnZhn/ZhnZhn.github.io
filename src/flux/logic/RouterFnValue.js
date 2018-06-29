@@ -9,12 +9,13 @@ const RouterFnValue = {
   ROneSufix: (sufix, one) => `${one}/${sufix}`,
   RPrefixDashOne : (prefix, one) => `${prefix}_${one}`,
   RPrefixOneTwo : (prefix, one, two) => `${prefix}/${one}_${two}`,
+  TOneTwo: (one, two) => ({ one, two }),
   RPrefixOneTwoA : (prefix, one, two) => `${prefix}/${one}_${two}_MRY`,
   RPrefixOneEmptyTwo : (prefix, one, two) => `${prefix}/${two}`,
   RPrefixOneTwoWithoutDash : (prefix, one, two) => `${prefix}/${one}${two}`,
   RPrefixTwoOne : (prefix, one, two) => `${prefix}/${two}_${one}`,
 
-  RPrefixSlashDash: (prefix, ...arr) => `${prefix}/${arr.join('_')}`,    
+  RPrefixSlashDash: (prefix, ...arr) => `${prefix}/${arr.join('_')}`,
 
   ROecd: (one, two, three) => {
     if (three) {
