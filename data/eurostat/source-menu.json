@@ -1,7 +1,7 @@
 {
   "menu" : [
     {
-      "caption" : "Economy",
+      "caption" : "Economy", 
       "items" : [
         { "id" : "ES_8_ECONOMIC" },
         { "id" : "ES_CPI" },
@@ -12,7 +12,7 @@
         { "id" : "ES_INDIC"}
       ]
     },{
-      "caption" : "Energy", "isInitClose" : true,
+      "caption" : "Energy",
       "items" : [
         { "id" : "ES_E_INDIC" },
         { "id" : "ES_I_ENERGY" },
@@ -21,14 +21,14 @@
         { "id" : "ES_E_STAT_PR" }
       ]
     },{
-      "caption" : "Finance", "isInitClose" : true,
+      "caption" : "Finance",
       "items" : [
         { "id" : "ES_F_PUBLIC" },
         { "id" : "ES_F_LRATE" },
         { "id" : "ES_F_SRATE" }
       ]
     },{
-      "caption" : "Agriculture", "isInitClose" : true,
+      "caption" : "Agriculture",
       "items" : [
         { "id" : "ES_AGRI_ORGANIC" },
         { "id" : "ES_AGRI_PRICES" },
@@ -39,18 +39,23 @@
         { "id" : "ES_AGRI_CROP" }
       ]
     },{
-      "caption" : "High-Tech Industry", "isInitClose" : true,
+      "caption": "Fishery",
+      "items": [
+        { "id": "ES_FISH_CATCH" }
+      ]
+    },{
+      "caption" : "High-Tech Industry",
       "items" : [
         { "id" : "ES_HT_INDIC" },
         { "id" : "ES_HT_RD" }
       ]
     },{
-      "caption" : "Real Estate", "isInitClose" : true,
+      "caption" : "Real Estate",
       "items" : [
         { "id" : "ES_RE_INDIC" }
       ]
     },{
-      "caption": "Trade", "isInitClose": true,
+      "caption": "Trade",
       "items": [
         { "id": "ES_TR_BYCOUNTRY" },
         { "id": "ES_TR_BYPARTNER" },
@@ -105,17 +110,21 @@
       "menuTitle" : "HCPI (2015=100) (NSA)",
       "dialogCaption" : "HCPI (2015=100) (NSA)",
       "chartContainerCaption" : "Eurostat Harmonised Consume Price Index (NSA)",
-      "dialogType" : "DialogEurostat2",
+      "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
         "twoCaption" : "HCPI",
         "twoURI" : "./data/eurostat/cpi.json",
+        "twoJsonProp": "metrics",
+        "threeCaption": "Unit",
+        "threeURI": "./data/eurostat/cpi-units.json",
         "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 1,
           "dfTable": "ei_cphi_m",
-          "dfParams": [ "geo", "indic" ],
-          "dfTail": "unit=HICP2015&s_adj=NSA",
+          "dfParams": [ "geo", "indic", "unit" ],
+          "dfTail": "s_adj=NSA",
           "dfSlice" : {
-             "unit" : "HICP2015",
              "s_adj": "NSA"
           }
         }
@@ -194,6 +203,24 @@
           "twoCaption" : "Indicator",
           "twoURI" : "./data/eurostat/economic-indicators.json"
         }
+    },
+    "ES_G20_CPI" : {
+      "type" : "ES_G20_CPI",
+      "menuTitle" : "G20 CPI All Items",
+      "dialogCaption" : "G20 CPI All Items",
+      "chartContainerCaption" : "Eurostat G20 CPI All Items",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "oneURI": "./data/eurostat/g20-countries.json",
+        "twoURI" : "./data/eurostat/g20-cpi-units.json",
+        "twoCaption": "Unit",
+        "twoJsonProp": "items",
+        "dfProps": {
+          "dfTable": "prc_ipc_g20",
+          "dfParams": [ "geo", "unit" ]
+        }
+      }
     },
 
     "ES_E_INDIC" : {
@@ -446,6 +473,31 @@
       }
     },
 
+    "ES_FISH_CATCH" : {
+      "type" : "ES_FISH_CATCH",
+      "menuTitle" : "Catches by Species, T",
+      "dialogCaption" : "Catches by Species",
+      "chartContainerCaption" : "Eurostat Fishery Catches by Species in T Live Weight",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption": "Species",
+        "twoURI" : "./data/eurostat/fish-species.json",
+        "twoJsonProp": "items",
+        "mapFrequency" : "Y",
+        "mapDateDf" : 2,
+        "dfProps": {
+          "dfTable": "fish_ca_main",
+          "dfParams": [ "geo",  "species" ],
+          "dfTail": "fishreg=0&unit=TLW",
+          "dfSlice": {
+             "fishreg": "0",
+             "unit": "TLW"
+          }
+        }
+      }
+    },
+
     "ES_HT_INDIC" : {
       "type" : "ES_HT_INDIC",
       "menuTitle" : "High-Tech Indicators",
@@ -624,7 +676,7 @@
           }
         }
       }
-    }
+    }    
 
   }
 }

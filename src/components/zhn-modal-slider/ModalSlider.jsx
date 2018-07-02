@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import throttle from '../../utils/throttle'
+import throttleOnce from '../../utils/throttleOnce'
 
 import ModalPane from '../zhn-moleculs/ModalPane'
 import ShowHide from '../zhn/ShowHide'
@@ -8,7 +8,7 @@ import ShowHide from '../zhn/ShowHide'
 import MenuPage from './MenuPage'
 
 const PERIOD_MS = 750;
-const THROTTLE_MS = 800;
+//const THROTTLE_MS = 800;
 const S = {
   SHOW_HIDE: {
     position: 'absolute',
@@ -68,15 +68,11 @@ class ModalSlider extends Component {
           , _maxP = model.maxPages || maxPages
           , pages = [];
 
-    this.hNextPage = throttle(
-      this.hNextPage.bind(this),
-      THROTTLE_MS,
-      { trailing: false }
+    this.hNextPage = throttleOnce(
+      this.hNextPage.bind(this)
     )
-    this.hPrevPage = throttle(
-      this.hPrevPage.bind(this),
-      THROTTLE_MS,
-      { trailing: false }
+    this.hPrevPage = throttleOnce(
+      this.hPrevPage.bind(this)
     )
 
     this._PAGE_WIDTH = _pW

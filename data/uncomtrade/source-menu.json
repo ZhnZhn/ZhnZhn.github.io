@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "caption": "01-05 Animals Products", "isInitClose" : true,
+      "caption": "01-05 Animals Products",
       "items": [
         { "id": "UN_01" },
         { "id": "UN_02" },
@@ -10,7 +10,7 @@
         { "id": "UN_05" }
       ]
     },{
-      "caption": "06-15 Vegetable Products", "isInitClose" : true,
+      "caption": "06-15 Vegetable Products",
       "items": [
         { "id": "UN_06" },
         { "id": "UN_07" },
@@ -24,7 +24,7 @@
         { "id": "UN_15" }
       ]
     },{
-      "caption": "16-24 Footstuffs", "isInitClose" : true,
+      "caption": "16-24 Footstuffs",
       "items": [
         { "id": "UN_16" },
         { "id": "UN_17" },
@@ -37,14 +37,14 @@
         { "id": "UN_24" }
       ]
     },{
-      "caption": "25-27 Mineral Products", "isInitClose" : true,
+      "caption": "25-27 Mineral Products",
       "items": [
         { "id": "UN_25" },
         { "id": "UN_26" },
         { "id": "UN_27" }
       ]
     },{
-      "caption": "28-38 Chemicals Allied Ind.", "isInitClose" : true,
+      "caption": "28-38 Chemicals Allied Ind.",
       "items": [
         { "id": "UN_28" },
         { "id": "UN_29" },
@@ -59,13 +59,13 @@
         { "id": "UN_38" }
       ]
     },{
-      "caption": "39-40 Plastics, Rubbers", "isInitClose" : true,
+      "caption": "39-40 Plastics, Rubbers",
       "items": [
         { "id": "UN_39" },
         { "id": "UN_40" }
       ]
     },{
-      "caption": "40-43 Raw Hides, Skins, Leather", "isInitClose" : true,
+      "caption": "40-43 Raw Hides, Skins, Leather",
       "items": [
         { "id": "UN_40" },
         { "id": "UN_41" },
@@ -73,7 +73,7 @@
         { "id": "UN_43" }
       ]
     },{
-      "caption": "44-49 Wood & Products", "isInitClose" : true,
+      "caption": "44-49 Wood & Products",
       "items": [
         { "id": "UN_44" },
         { "id": "UN_45" },
@@ -83,7 +83,7 @@
         { "id": "UN_49" }
       ]
     },{
-      "caption": "50-63 Textiles", "isInitClose" : true,
+      "caption": "50-63 Textiles",
       "items": [
         { "id": "UN_50" },
         { "id": "UN_51" },
@@ -101,7 +101,7 @@
         { "id": "UN_63" }
       ]
     },{
-      "caption": "64-67 Footwear, Headgear", "isInitClose" : true,
+      "caption": "64-67 Footwear, Headgear",
       "items": [
         { "id": "UN_64" },
         { "id": "UN_65" },
@@ -109,7 +109,7 @@
         { "id": "UN_67" }
       ]
     },{
-      "caption": "68-71 Stone, Glass", "isInitClose" : true,
+      "caption": "68-71 Stone, Glass",
       "items": [
         { "id": "UN_68" },
         { "id": "UN_69" },
@@ -117,7 +117,7 @@
         { "id": "UN_71" }
       ]
     },{
-      "caption": "72-83 Metals", "isInitClose" : true,
+      "caption": "72-83 Metals",
       "items": [
         { "id": "UN_72" },
         { "id": "UN_73" },
@@ -132,13 +132,13 @@
         { "id": "UN_83" }
       ]
     },{
-      "caption": "84-85 Machinery, Electrical", "isInitClose" : true,
+      "caption": "84-85 Machinery, Electrical",
       "items": [
         { "id": "UN_84" },
         { "id": "UN_85" }
       ]
     },{
-      "caption": "86-89 Transportation", "isInitClose" : true,
+      "caption": "86-89 Transportation",
       "items": [
         { "id": "UN_86" },
         { "id": "UN_87" },
@@ -146,7 +146,7 @@
         { "id": "UN_89" }
       ]
     },{
-      "caption": "90-97 Miscellaneous", "isInitClose" : true,
+      "caption": "90-97 Miscellaneous",
       "items": [
         { "id": "UN_90" },
         { "id": "UN_91" },

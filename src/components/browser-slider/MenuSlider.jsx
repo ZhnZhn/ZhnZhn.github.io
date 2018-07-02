@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import throttleOnce from '../../utils/throttleOnce'
+
 import fOnClickItem from './factoryClickItem'
 import loadItems from './loadItems'
 
@@ -39,6 +41,12 @@ class MenuSlider extends Component {
 
   constructor(props){
     super()
+    this.hNextPage = throttleOnce(
+      this.hNextPage.bind(this)
+    )
+    this.hPrevPage = throttleOnce(
+      this.hPrevPage.bind(this)
+    )
     this._direction = 0
     this.state = {
       model: [],
@@ -170,7 +178,7 @@ _refFirst = n => this._firstNode = n
      this._direction = 0
    } else if (this._direction === 0 && this._menuNode) {
      dX = _getTranslateX(this._menuNode);
-   }
+   }   
 
    return { transform: `translateX(${dX}px)` };
  }

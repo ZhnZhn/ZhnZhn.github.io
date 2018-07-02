@@ -6,7 +6,7 @@
         { "id" : "FS_GDP_BALANCE" }
       ]
     },{
-      "caption" : "Foreign Trade Of", "isInitClose" : true,
+      "caption" : "Foreign Trade Of",
       "items" : [
         { "id" : "FS_TRADE_PRODUCT_A17" },
         { "id" : "FS_TRADE_PRODUCT_A38" },

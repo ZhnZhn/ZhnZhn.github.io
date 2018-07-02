@@ -28,8 +28,7 @@ const qeSources = [
 
   'OECD_CPI',
   'RATE_INFLATION',
-  'BIG_MAC',
-  'GDT',
+  'BIG_MAC',  
   'BLSI',
   'ROGERS_INDICES',
   'BALTIC_INDICES',

@@ -34,9 +34,14 @@ var _Color = require('../styles/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
 
+var _isKeyEnter = require('./isKeyEnter');
+
+var _isKeyEnter2 = _interopRequireDefault(_isKeyEnter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CL = {
+  ROOT: 'zhn-oc',
   SHOW_POPUP: 'show-popup',
   NOT_SELECTED: 'not-selected'
 };
@@ -97,6 +102,12 @@ var OpenClose = (_temp = _class = function (_Component) {
       });
     };
 
+    _this._handleKeyDown = function (event) {
+      if ((0, _isKeyEnter2.default)(event)) {
+        _this._handleClick();
+      }
+    };
+
     var isClose = props.isClose;
 
     _this.state = {
@@ -144,8 +155,11 @@ var OpenClose = (_temp = _class = function (_Component) {
           _react2.default.createElement(
             'div',
             {
-              style: S.INLINE_BLOCK,
-              onClick: this._handleClick
+              className: CL.ROOT,
+              onClick: this._handleClick,
+              tabIndex: '0',
+              role: 'menuitem',
+              onKeyDown: this._handleKeyDown
             },
             _react2.default.createElement(
               'div',

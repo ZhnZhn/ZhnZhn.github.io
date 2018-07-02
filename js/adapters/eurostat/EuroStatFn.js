@@ -16,15 +16,16 @@ var _Tooltip = require('../../charts/Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
-var _QuandlFn = require('../QuandlFn2');
-
-var _QuandlFn2 = _interopRequireDefault(_QuandlFn);
-
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var DF_SLICE_TITLE = 'EU';
+
+//import QuandlFn2 from '../quandl/QuandlFn2';
+
 
 var COLOR = {
   EU: "#0088FF",
@@ -139,17 +140,17 @@ var EuroStatFn = {
     var config = _ref3.config,
         categories = _ref3.categories,
         min = _ref3.min,
-        time = _ref3.time,
-        subtitle = _ref3.subtitle,
         _ref3$tooltip = _ref3.tooltip,
-        tooltip = _ref3$tooltip === undefined ? _Tooltip2.default.category : _ref3$tooltip;
+        tooltip = _ref3$tooltip === undefined ? _Tooltip2.default.category : _ref3$tooltip,
+        option = _ref3.option;
+    var time = option.time;
 
     config.xAxis.categories = categories;
     config.yAxis.min = min;
     config.series[0].name = time;
     config.tooltip = _Chart2.default.fTooltip(tooltip);
 
-    config.zhConfig.itemCaption = 'EU: ' + subtitle;
+    config.zhConfig.itemCaption = EuroStatFn.crItemCaption(option);
     config.zhConfig.itemTime = time;
   },
   colorEU: function colorEU(_ref4) {
@@ -171,18 +172,18 @@ var EuroStatFn = {
       var arrDate = str.split('M'),
           _month = parseInt(arrDate[1], 10) - 1,
           _day = _month === 1 ? 28 : 30;
-
       return Date.UTC(arrDate[0], _month, _day);
-    } else if (str.indexOf('Q') !== -1) {
+    }
+    if (str.indexOf('Q') !== -1) {
       var _arrDate = str.split('Q'),
           _month2 = parseInt(_arrDate[1], 10) * 3 - 1;
       return Date.UTC(_arrDate[0], _month2, 30);
-    } else if (str.indexOf('S' !== -1)) {
+    }
+    if (str.indexOf('S' !== -1)) {
       var _arrS = str.split('S');
       return _arrS[1] === '1' ? Date.UTC(_arrS[0], 5, 30) : Date.UTC(_arrS[0], 11, 31);
-    } else {
-      return Date.UTC(str, 11, 31);
     }
+    return Date.UTC(str, 11, 31);
   },
   setLineExtrems: function setLineExtrems(_ref6) {
     var config = _ref6.config,
@@ -205,6 +206,16 @@ var EuroStatFn = {
       config.yAxis.min = _Chart2.default.calcMinY({ maxPoint: max, minPoint: min });
     }
   },
+
+
+  crItemCaption: function crItemCaption(_ref7) {
+    var subtitle = _ref7.subtitle,
+        dfSliceTitle = _ref7.dfSliceTitle;
+
+    var _pre = dfSliceTitle || DF_SLICE_TITLE;
+    return _pre + ': ' + (subtitle || '');
+  },
+
   createZhConfig: function createZhConfig(json, option) {
     var href = json.href,
         _href = href && href.replace ? href.replace('http', 'https') : href,
@@ -242,7 +253,8 @@ var EuroStatFn = {
     };
   },
   findMinY: function findMinY(data) {
-    return _QuandlFn2.default.findMinY(data);
+    return _AdapterFn2.default.findMinY(data);
+    //return QuandlFn2.findMinY(data);
   }
 };
 

@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _throttleOnce = require('../../utils/throttleOnce');
+
+var _throttleOnce2 = _interopRequireDefault(_throttleOnce);
+
 var _factoryClickItem = require('./factoryClickItem');
 
 var _factoryClickItem2 = _interopRequireDefault(_factoryClickItem);
@@ -221,6 +225,8 @@ var MenuSlider = function (_Component) {
       }
     };
 
+    _this.hNextPage = (0, _throttleOnce2.default)(_this.hNextPage.bind(_this));
+    _this.hPrevPage = (0, _throttleOnce2.default)(_this.hPrevPage.bind(_this));
     _this._direction = 0;
     _this.state = {
       model: [],

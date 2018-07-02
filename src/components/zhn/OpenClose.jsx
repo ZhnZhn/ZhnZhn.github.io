@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 
 import C from '../styles/Color'
 
+import isKeyEnter from './isKeyEnter'
+
 const CL = {
+  ROOT: 'zhn-oc',
   SHOW_POPUP: 'show-popup',
   NOT_SELECTED: 'not-selected'
 };
@@ -66,6 +69,12 @@ class OpenClose extends Component {
     this.setState(prev => ({ isOpen: !prev.isOpen }));
   }
 
+  _handleKeyDown = (event) => {
+    if (isKeyEnter(event)){
+      this._handleClick()
+    }
+  }
+
   render(){
     const {
             rootStyle,
@@ -92,8 +101,11 @@ class OpenClose extends Component {
       <div style={{...S.ROOT_DIV, ...rootStyle}}>
         <div className={CL.NOT_SELECTED}>
           <div
-            style={S.INLINE_BLOCK}
+            className={CL.ROOT}
             onClick={this._handleClick}
+            tabIndex="0"
+            role="menuitem"
+            onKeyDown={this._handleKeyDown}
           >
             <div style={S.ROOT_SVG}>
                <svg

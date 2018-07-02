@@ -19,7 +19,7 @@ After closing a **Chart container** all charts remains. In one time max three **
 Some open and private data providers require user's API Key.   
 
 For example, for loading data from Quandl without API Key exists some restriction on frequency and amount of queries (50 per day/1 at a time) and can be deprecated, according to Quandl.
-With API Key it is possible to make (50 000 per day/1 at a time). It's free of charge to receive. Quandl premium free sample data can be requested only with user's API Key.  
+With API Key it is possible to make (50 000 per day/1 at a time). It's free of charge to receive.  
 
 Data providers API Keys can be set on the **tab ApiKeys, dialog Settings**. Also for loading data from data providers with HTTP protocol required **HTTPS proxy server**, by default settled in the **dialog Settings**.  
 

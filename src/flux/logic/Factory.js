@@ -140,40 +140,42 @@ const createChartContainerComp = function(conf={}, browserType){
              : BrowserConfig[browserType].chartContainerCaption;
 
   return React.createElement(Comp, {
-            key : _type,
-            caption : _caption,
-            chartType : _type,
-            browserType : browserType,
-            onCloseContainer : fnCloseChartContainer(_type, browserType),
-            onCloseItem
+    key: _type,
+    caption: _caption,
+    chartType: _type,
+    browserType: browserType,
+    onCloseContainer: fnCloseChartContainer(_type, browserType),
+    onCloseItem
   });
 }
 
 
-const _getDialogConf = function(dialogType){
+const _getDialogConf = function(conf, dialogType){
+  if (conf && conf.dialogConf) {
+    return conf;
+  }
   const _browserId = dialogType.split('_')[0];
   return ChartStore.getSourceConfig(_browserId, dialogType);
-}
+};
 
 const Factory = {
   ...fBrowser,
 
   createDialog(dialogType, browserType, conf){
-    const _conf = !conf.dialogConf
-            ? _getDialogConf(dialogType)
-            : conf;
-    return createDialogComp(_conf, browserType);
+    return createDialogComp(
+      _getDialogConf(conf, dialogType),
+      browserType
+    );
  },
  createOptionDialog(option){
    return _createOptionDialog(option)
  },
 
  createChartContainer(dialogType, browserType, conf){
-   const _conf = conf && conf.dialogConf
-            ? conf
-            : _getDialogConf(dialogType);
-   return createChartContainerComp(_conf, browserType);
-   //return createChartContainerComp(_getDialogConf(dialogType), browserType);
+   return createChartContainerComp(
+     _getDialogConf(conf, dialogType),
+     browserType
+   );
  }
 
 }

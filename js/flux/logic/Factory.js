@@ -168,25 +168,25 @@ var createChartContainerComp = function createChartContainerComp() {
   });
 };
 
-var _getDialogConf = function _getDialogConf(dialogType) {
+var _getDialogConf = function _getDialogConf(conf, dialogType) {
+  if (conf && conf.dialogConf) {
+    return conf;
+  }
   var _browserId = dialogType.split('_')[0];
   return _ChartStore2.default.getSourceConfig(_browserId, dialogType);
 };
 
 var Factory = (0, _extends3.default)({}, _fBrowser2.default, {
   createDialog: function createDialog(dialogType, browserType, conf) {
-    var _conf = !conf.dialogConf ? _getDialogConf(dialogType) : conf;
-    return createDialogComp(_conf, browserType);
+    return createDialogComp(_getDialogConf(conf, dialogType), browserType);
   },
   createOptionDialog: function createOptionDialog(option) {
     return _createOptionDialog(option);
   },
   createChartContainer: function createChartContainer(dialogType, browserType, conf) {
-    var _conf = conf && conf.dialogConf ? conf : _getDialogConf(dialogType);
-    return createChartContainerComp(_conf, browserType);
-    //return createChartContainerComp(_getDialogConf(dialogType), browserType);
+    return createChartContainerComp(_getDialogConf(conf, dialogType), browserType);
   }
 });
 
 exports.default = Factory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\Factory.js.map
+//# sourceMappingURL=Factory.js.map

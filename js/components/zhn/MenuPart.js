@@ -24,6 +24,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _isKeyEnter = require('./isKeyEnter');
+
+var _isKeyEnter2 = _interopRequireDefault(_isKeyEnter);
+
 var _LabelNew = require('./LabelNew');
 
 var _LabelNew2 = _interopRequireDefault(_LabelNew);
@@ -37,6 +41,10 @@ var _OpenClose = require('./OpenClose');
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from 'prop-types'
+
+var CL_ROW = "row__topic not-selected";
 
 var MenuPart = function (_Component) {
   (0, _inherits3.default)(MenuPart, _Component);
@@ -52,41 +60,72 @@ var MenuPart = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuPart.__proto__ || Object.getPrototypeOf(MenuPart)).call.apply(_ref, [this].concat(args))), _this), _this._renderMenuItems = function (items) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuPart.__proto__ || Object.getPrototypeOf(MenuPart)).call.apply(_ref, [this].concat(args))), _this), _this.hKeyDown = function (onClick, event) {
+      if ((0, _isKeyEnter2.default)(event)) {
+        onClick();
+      }
+    }, _this._renderMenuItems = function (items) {
       return items.map(function (item, index) {
-        var menuBadgeEl = item.counter !== 0 ? _react2.default.createElement(_MenuBadge2.default, {
-          counter: item.counter,
-          isOpen: item.isOpen,
-          onClick: item.onBadgeClick,
-          onBadgeClose: item.onBadgeClose
-        }) : null;
-        var labelNewEl = item.isNew ? _react2.default.createElement(_LabelNew2.default, null) : null;
+        var title = item.title,
+            counter = item.counter,
+            isNew = item.isNew,
+            onClick = item.onClick;
+
         return _react2.default.createElement(
           'div',
           {
             key: index,
-            className: 'row__topic not-selected',
-            onClick: item.onClick
+            className: CL_ROW,
+            onClick: onClick,
+            tabIndex: '0',
+            role: 'menuitem',
+            onKeyDown: _this.hKeyDown.bind(null, onClick)
           },
-          item.title,
-          menuBadgeEl,
-          labelNewEl
+          title,
+          counter !== 0 ? _react2.default.createElement(_MenuBadge2.default, {
+            counter: counter,
+            isOpen: item.isOpen,
+            onClick: item.onBadgeClick,
+            onBadgeClose: item.onBadgeClose
+          }) : null,
+          isNew ? _react2.default.createElement(_LabelNew2.default, null) : null
         );
       });
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+  static propTypes = {
+    caption: PropTypes.string,
+    isOpen: PropTypes.bool,
+    items: PropTypes.arrayOf(
+       PropTypes.shape({
+         isOpen: PropTypes.bool,
+         title: PropTypes.string,
+         counter: PropTypes.number,
+         isNew: PropTypes.bool,
+         onClick: PropTypes.func,
+         onBadgeClick: PropTypes.func,
+         onBadgeClose: PropTypes.func
+       })
+    )
+  }
+  */
 
   (0, _createClass3.default)(MenuPart, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
           caption = _props.caption,
-          isInitClose = _props.isInitClose,
-          items = _props.items;
+          isInitOpen = _props.isInitOpen,
+          items = _props.items,
+          _isClose = isInitOpen === true ? false : true;
 
       return _react2.default.createElement(
         _OpenClose2.default,
-        { caption: caption, isClose: isInitClose },
+        {
+          caption: caption,
+          isClose: _isClose
+        },
         this._renderMenuItems(items)
       );
     }

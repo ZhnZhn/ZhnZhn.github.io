@@ -18,7 +18,7 @@ const fnBadgeClose = function(chartType){
 
 const fnCreateMenu = function(menu=[], data, browserType){
   return menu.map((menuPart) => {
-     const { caption, isInitClose, items=[] } = menuPart
+     const { caption, isInitOpen, items=[] } = menuPart
          , _items = items.map((item, index) =>{
                const { id, isNew=false } = item
                return {
@@ -34,7 +34,7 @@ const fnCreateMenu = function(menu=[], data, browserType){
      });
      return {
         caption: caption,
-        isInitClose: isInitClose,
+        isInitOpen: isInitOpen,
         items: _items
      }
   })
@@ -42,7 +42,7 @@ const fnCreateMenu = function(menu=[], data, browserType){
 
 const menuQuandl = [
   {
-     caption : 'Economy',
+     caption : 'Economy', isInitOpen: true,
      items : [
        { id : Quandl.CURRENCY_HISTORY },
        { id : Quandl.GLOBAL_INDICATOR },
@@ -52,7 +52,7 @@ const menuQuandl = [
        { id:  Quandl.OECD }
      ]
   },{
-    caption: 'Central Banks', isInitClose: true,
+    caption: 'Central Banks',
     items: [
       { id : Quandl.BANK_CANADA },
       { id : Quandl.BANK_SWISS }
@@ -62,11 +62,10 @@ const menuQuandl = [
     items : [
       { id : Quandl.OECD_CPI },
       { id : Quandl.RATE_INFLATION },
-      { id : Quandl.GDT },
       { id : Quandl.BIG_MAC }
     ]
   },{
-     caption : 'Commodity', isInitClose : true,
+     caption : 'Commodity',
      items : [
        { id : Quandl.COMMODITY_TRADE },
        { id : Quandl.COMMODITY_PRICE },
@@ -80,7 +79,7 @@ const menuQuandl = [
        { id : Quandl.BALTIC_INDICES }
      ]
   },{
-    caption : 'Futures', isInitClose : true,
+    caption : 'Futures',
     items : [
       { id : Quandl.CHINA_FINANCE_FUTURE},
       { id : Quandl.DCE_FUTURE },

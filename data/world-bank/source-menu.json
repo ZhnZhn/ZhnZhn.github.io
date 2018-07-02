@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "caption": "Economy & Finance", "isInitClose": true,
+      "caption": "Economy & Finance",
       "items": [
         { "id": "WB_AGRICULTURE" },
         { "id": "WB_ECONOMY" },

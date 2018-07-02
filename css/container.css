@@ -34,10 +34,12 @@
   user-select: none;
   cursor: pointer; }
 
-.row__topic:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1); }
-
 .row__topic:hover {
+  border-bottom: 1px solid #1b75bb; }
+
+.row__topic:focus,
+.row__topic:active {
+  outline: none;
   border-bottom: 1px solid #1b75bb; }
 
 .row__pane-topic {
@@ -50,10 +52,6 @@
   user-select: none;
   cursor: pointer; }
 
-.row__pane-topic:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.1); }
-
-.row__pane-topic:hover,
 .row__pane-topic:focus {
   border-bottom: 1px solid #1b75bb; }
 

@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/Quandl.js"
+ ],
+ "file": "../../../src/adapters/quandl/Quandl.js",
+ "names": [
+  "Quandl",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,0BADa,EACRC;AADQ,CAAf;;kBAIeF,M"
+}

@@ -1,7 +1,4 @@
 
-import QuandlApi from './QuandlApi'
-import QuandlAdapter from './QuandlAdapter'
-
 import EuroStat from './eurostat/EuroStat'
 import UnComtrade from './uncomtrade/UnComtrade'
 import FaoStat from './faostat/FaoStat'
@@ -15,15 +12,12 @@ import Insee from './insee/Insee'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
 import Intrinio from './intrinio/Intrinio'
+import Quandl from './quandl/Quandl'
 import Crc from './crypto-compare/Crc'
 import Cmc from './coin-market-cap/Cmc'
 
 const RouterAdapter = {
-  Quandl: {
-    api: QuandlApi,
-    adapter: QuandlAdapter
-  },
-
+  Quandl,
   EuroStat,
   UnComtrade,
   FaoStat,

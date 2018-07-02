@@ -15,7 +15,7 @@ var _ChartStore = require('../stores/ChartStore');
 
 var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
-var _QuandlApi = require('../../adapters/QuandlApi');
+var _QuandlApi = require('../../adapters/quandl/QuandlApi');
 
 var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
 

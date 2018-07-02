@@ -20,11 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var toBar = {
   createConfig: function createConfig(json, option) {
-    var configSlice = option.zhMapSlice,
-        _option$time = option.time,
-        time = _option$time === undefined ? '' : _option$time,
-        _option$subtitle = option.subtitle,
-        subtitle = _option$subtitle === undefined ? '' : _option$subtitle;
+    var configSlice = option.zhMapSlice;
 
     return _JsonStatFn2.default.trJsonToCategory(json, configSlice).then(function (_ref) {
       var categories = _ref.categories,
@@ -33,7 +29,7 @@ var toBar = {
 
       var config = _FactoryChart2.default.createBarConfig();
       _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
-      _EuroStatFn2.default.setCategories({ config: config, categories: categories, min: min, time: time, subtitle: subtitle });
+      _EuroStatFn2.default.setCategories({ config: config, categories: categories, min: min, option: option });
       _EuroStatFn2.default.colorEU({ config: config, categories: categories });
       return config;
     });

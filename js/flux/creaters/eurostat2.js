@@ -31,7 +31,7 @@ var createLoadOptions = function createLoadOptions() {
       _chartType$value = chartType.value,
       _seriaType = _chartType$value === undefined ? AREA : _chartType$value,
       _oneV = one ? one.value : DF_CAPTION,
-      _oneC = one ? one.caption : DF_CAPTION;
+      _oneC = one ? one.caption : dfProps.dfSliceTitle || DF_CAPTION;
 
   var _zhCompType = void 0,
       _time = void 0;

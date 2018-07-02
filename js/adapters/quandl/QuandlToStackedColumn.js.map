@@ -1,0 +1,43 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/quandl/QuandlToStackedColumn.js"
+ ],
+ "file": "../../../src/adapters/quandl/QuandlToStackedColumn.js",
+ "names": [
+  "fCreateStackedColumnConfig",
+  "json",
+  "option",
+  "chartType",
+  "seriaType",
+  "stacking",
+  "STACKED_COLUMN_PERCENT",
+  "PERCENT",
+  "config",
+  "fBaseStackedColumnConfig",
+  "sliceItems",
+  "items100",
+  "value",
+  "zhSeriaId",
+  "jsonData",
+  "dataset",
+  "data",
+  "bNowTotal",
+  "date",
+  "bPrevTotal",
+  "dateTo",
+  "series",
+  "categories",
+  "xAxis",
+  "chart",
+  "height",
+  "STACKED_HEIGHT",
+  "title",
+  "setTitleToConfig",
+  "valueMoving",
+  "zhConfig",
+  "info",
+  "createDatasetInfo"
+ ],
+ "mappings": ";;;;;;;AACA;;AACA;;;;AACA;;;;AAEA;;AAKA;;;;;;AAEO,IAAMA,kEAA6B,SAA7BA,0BAA6B,CAASC,IAAT,EAAeC,MAAf,EAAsB;AACvD,OAAYC,SAAZ,GAA0BD,MAA1B,CAAEE,SAAF;AAAA,OACAC,QADA,GACYF,cAAc,gBAAUG,sBAAzB,GAAmD,SAAnD,GAA+D,QAD1E;AAAA,OAEAC,OAFA,GAEYF,aAAa,SAAf,GAA6B,UAA7B,GAA0C,EAFpD;AAAA,OAGAG,MAHA,GAGS,sBAAYC,wBAAZ,CAAqC,EAAEJ,kBAAF,EAArC,CAHT;AAAA,4BAIqCH,MAJrC,CAICQ,UAJD;AAAA,OAIYC,QAJZ,sCAIqB,EAJrB;AAAA,uBAIqCT,MAJrC,CAIyBU,KAJzB;AAAA,OAIyBA,KAJzB,iCAI+B,EAJ/B;AAAA,OAKAC,SALA,GAKeD,KALf,SAKwBT,SALxB;AAAA,OAMAW,QANA,GAMYb,KAAKc,OAAL,IAAgBd,KAAKc,OAAL,CAAaC,IAA9B,GAAsCf,KAAKc,OAAL,CAAaC,IAAnD,GAA0D,EANrE;AAAA,+BAQG,sCAAsB,EAACF,kBAAD,EAAWH,kBAAX,EAAqBE,oBAArB,EAAgCV,oBAAhC,EAA2CE,kBAA3C,EAAtB,CARH;AAAA,OAOCY,SAPD,yBAOCA,SAPD;AAAA,OAOYC,IAPZ,yBAOYA,IAPZ;AAAA,OAOkBC,UAPlB,yBAOkBA,UAPlB;AAAA,OAO8BC,MAP9B,yBAO8BA,MAP9B;AAAA,OAOsCC,MAPtC,yBAOsCA,MAPtC;AAAA,OAO8CC,UAP9C,yBAO8CA,UAP9C;;;AAUNd,UAAOa,MAAP,GAAgBA,MAAhB;AACAb,UAAOe,KAAP,CAAaD,UAAb,GAA0BA,UAA1B;AACAd,UAAOgB,KAAP,CAAaC,MAAb,GAAsB,gBAAMC,cAA5B;;AAEAxB,UAAOyB,KAAP,QAAkBzB,OAAOyB,KAAzB,GAAiCpB,OAAjC;AACA,sBAAUqB,gBAAV,CAA2BpB,MAA3B,EAAmCN,MAAnC;;AAEAM,UAAOqB,WAAP,GAAqB,8BAAcZ,SAAd,EAAyBC,IAAzB,EAA+BC,UAA/B,EAA2CC,MAA3C,CAArB;AACAZ,UAAOsB,QAAP,GAAkB,2BAAW5B,MAAX,EAAmBW,SAAnB,CAAlB;;AAEAL,UAAOuB,IAAP,GAAc,mBAAUC,iBAAV,CAA4B/B,IAA5B,CAAd;;AAEA,UAAO,EAACO,cAAD,EAAP;AACF,CAxBM"
+}

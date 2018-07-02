@@ -228,6 +228,18 @@ const AdapterFn = {
     return M.indexOf(
       String(str).toLowerCase()
     );
+  },
+
+  findMinY: (data=[]) => {    
+    let minY = Number.POSITIVE_INFINITY;
+    for (let i=0, max=data.length; i<max; i++){
+      if ( data[i][1]<minY ) {
+        minY = data[i][1]
+      }
+    }
+    return minY !== Number.POSITIVE_INFINITY
+      ? minY
+      : undefined;
   }
 
 }

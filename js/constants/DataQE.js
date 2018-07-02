@@ -445,25 +445,6 @@ var DataQE = {
       dataSource: 'The Economist - Big Mac Index (Code: ECONOMIST)'
     }
   },
-  QE_GDT: {
-    type: 'QE_GDT',
-    menuTitle: 'Global Dairy Trade',
-    dialogCaption: 'Global Dairy Trade',
-    chartContainerCaption: 'Quandl: Global Dairy Trade',
-    dialogProps: {
-      itemCaption: "Item:",
-      optionNames: "items",
-      nInitFromDate: 7,
-      descrUrl: './data/quandl/gdt.html',
-      optionURI: './data/quandl/gdt.json',
-      optionsJsonProp: 'tickets',
-      valueFn: "RPrefixOne",
-      valueFnPrefix: "GDT",
-      loadId: 'Q',
-      columnName: 'Value',
-      dataSource: 'Global Dairy Trade (Code: GDT)'
-    }
-  },
   QE_CHINA_FINANCE_FUTURE: {
     type: 'QE_CHINA_FINANCE_FUTURE',
     menuTitle: 'China Finance FE',

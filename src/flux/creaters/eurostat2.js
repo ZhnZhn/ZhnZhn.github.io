@@ -13,8 +13,12 @@ const createLoadOptions = (props={}, options={}) => {
           selectOptions
         } = options
       , { value:_seriaType=AREA } = chartType
-      , _oneV = one ? one.value : DF_CAPTION
-      , _oneC = one ? one.caption : DF_CAPTION;
+      , _oneV = one
+           ? one.value
+           : DF_CAPTION
+      , _oneC = one
+           ? one.caption
+           : dfProps.dfSliceTitle || DF_CAPTION;
 
   let _zhCompType, _time;
   if (_seriaType !== AREA){

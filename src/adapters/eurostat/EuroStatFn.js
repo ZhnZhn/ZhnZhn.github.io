@@ -2,8 +2,10 @@ import ChartConfig from '../../charts/ChartConfig';
 import Chart from '../../charts/Chart';
 import Tooltip from '../../charts/Tooltip';
 
-import QuandlFn2 from '../QuandlFn2';
+//import QuandlFn2 from '../quandl/QuandlFn2';
 import AdapterFn from '../AdapterFn';
+
+const DF_SLICE_TITLE = 'EU';
 
 const COLOR = {
   EU: "#0088FF",
@@ -65,7 +67,7 @@ const EuroStatFn = {
           if (pointValue<=min) { min = pointValue; }
        }
     })
-    
+
     return {
       data: _isDataDes(data)
          ? data.reverse()
@@ -109,15 +111,17 @@ const EuroStatFn = {
   },
 
   setCategories({
-    config, categories, min, time, subtitle,
-    tooltip=Tooltip.category
+    config, categories, min,
+    tooltip=Tooltip.category,
+    option
   }){
+    const { time } = option;
     config.xAxis.categories = categories
     config.yAxis.min = min
     config.series[0].name = time
     config.tooltip = Chart.fTooltip(tooltip)
 
-    config.zhConfig.itemCaption = `EU: ${subtitle}`
+    config.zhConfig.itemCaption = EuroStatFn.crItemCaption(option)
     config.zhConfig.itemTime = time
   },
 
@@ -135,21 +139,21 @@ const EuroStatFn = {
     if (str.indexOf('M') !== -1) {
       const arrDate = str.split('M')
           , _month = parseInt(arrDate[1], 10)-1
-          , _day = (_month === 1) ? 28 : 30
-
+          , _day = (_month === 1) ? 28 : 30;
       return Date.UTC(arrDate[0], _month, _day);
-    } else if (str.indexOf('Q') !== -1){
+    }
+    if (str.indexOf('Q') !== -1){
       const arrDate = str.split('Q')
-          , _month = (parseInt(arrDate[1], 10)*3) - 1
+          , _month = (parseInt(arrDate[1], 10)*3) - 1;
       return Date.UTC(arrDate[0], _month, 30);
-    } else if (str.indexOf('S' !== -1)) {
-      const _arrS = str.split('S')
+    }
+    if (str.indexOf('S' !== -1)) {
+      const _arrS = str.split('S');
       return _arrS[1] === '1'
         ? Date.UTC(_arrS[0], 5, 30)
         : Date.UTC(_arrS[0], 11, 31);
-    } else {
-      return Date.UTC(str, 11, 31);
     }
+    return Date.UTC(str, 11, 31);
   },
 
   setLineExtrems({ config, max, min, isNotZoomToMinMax }){
@@ -168,6 +172,11 @@ const EuroStatFn = {
       config.yAxis.min = Chart.calcMinY({ maxPoint: max, minPoint: min });
     }
 
+  },
+
+  crItemCaption: ({ subtitle, dfSliceTitle }) => {
+    const _pre = dfSliceTitle || DF_SLICE_TITLE;
+    return `${_pre}: ${subtitle || ''}`;
   },
 
   createZhConfig(json, option){
@@ -210,7 +219,8 @@ const EuroStatFn = {
   },
 
   findMinY(data){
-    return QuandlFn2.findMinY(data);
+    return AdapterFn.findMinY(data);
+    //return QuandlFn2.findMinY(data);
   }
 }
 

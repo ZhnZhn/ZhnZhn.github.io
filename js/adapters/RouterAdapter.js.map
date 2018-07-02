@@ -7,8 +7,6 @@
  "names": [
   "RouterAdapter",
   "Quandl",
-  "api",
-  "adapter",
   "EuroStat",
   "UnComtrade",
   "FaoStat",
@@ -25,5 +23,5 @@
   "Crc",
   "Cmc"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AACpBC,UAAQ;AACNC,4BADM;AAENC;AAFM,GADY;;AAMpBC,8BANoB;AAOpBC,kCAPoB;AAQpBC,4BARoB;AASpBC,gCAToB;AAUpBC,kCAVoB;AAWpBC,kCAXoB;AAYpBC,sCAZoB;AAapBC,8BAboB;AAcpBC,oBAdoB;AAepBC,wBAfoB;AAgBpBC,oBAhBoB;AAiBpBC,oBAjBoB;AAkBpBC,8BAlBoB;AAmBpBC,oBAnBoB;AAoBpBC;AApBoB,CAAtB;;kBAuBelB,a"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AACpBC,0BADoB;AAEpBC,8BAFoB;AAGpBC,kCAHoB;AAIpBC,4BAJoB;AAKpBC,gCALoB;AAMpBC,kCANoB;AAOpBC,kCAPoB;AAQpBC,sCARoB;AASpBC,8BAToB;AAUpBC,oBAVoB;AAWpBC,wBAXoB;AAYpBC,oBAZoB;AAapBC,oBAboB;AAcpBC,8BAdoB;AAepBC,oBAfoB;AAgBpBC;AAhBoB,CAAtB;;kBAmBehB,a"
 }

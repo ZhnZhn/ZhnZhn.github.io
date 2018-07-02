@@ -22,7 +22,7 @@ const throttle = function(func, wait, options={}) {
     previous = options.leading === false
        ? 0 : _fnNow();
     timeout = null;
-    result = func.apply(context, args);
+    result = func.apply(context, args);    
     if (!timeout) context = args = null;
   };
 

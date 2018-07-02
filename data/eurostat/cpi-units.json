@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "caption": "Harmonized consumer price index (HCPI) (2015=100)", "value": "HICP2015" },
+    { "caption": "Growth rate on previous period (t/t-1) (MoM)", "value": "RT1" },
+    { "caption": "Growth rate (t/t-12) (YoY)", "value": "RT12" }
+  ]
+}

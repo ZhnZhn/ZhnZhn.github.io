@@ -218,9 +218,21 @@ var AdapterFn = {
 
   monthIndex: function monthIndex(str) {
     return M.indexOf(String(str).toLowerCase());
+  },
+
+  findMinY: function findMinY() {
+    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    var minY = Number.POSITIVE_INFINITY;
+    for (var i = 0, max = data.length; i < max; i++) {
+      if (data[i][1] < minY) {
+        minY = data[i][1];
+      }
+    }
+    return minY !== Number.POSITIVE_INFINITY ? minY : undefined;
   }
 
 };
 
 exports.default = AdapterFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\AdapterFn.js.map
+//# sourceMappingURL=AdapterFn.js.map

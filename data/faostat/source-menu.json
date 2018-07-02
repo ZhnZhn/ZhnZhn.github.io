@@ -8,7 +8,7 @@
         { "id": "FAO_LIVE_ANIMAL" }
       ]
     },{
-      "caption": "Prices", "isInitClose": true,
+      "caption": "Prices",
       "items": [
         { "id": "FAO_CPI" },
         { "id": "FAO_PRODUCER_PRICES" }
@@ -22,7 +22,7 @@
         { "id": "FAO_FERTILIZER_PER" }
       ]
     },{
-      "caption": "Investments", "isInitClose": true,
+      "caption": "Investments",
       "items": [
         { "id": "FAO_GOV_EXP" },
         { "id": "FAO_CREDIT_TO_AGRI" }

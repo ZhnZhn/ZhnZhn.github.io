@@ -4,14 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _QuandlApi = require('./QuandlApi');
-
-var _QuandlApi2 = _interopRequireDefault(_QuandlApi);
-
-var _QuandlAdapter = require('./QuandlAdapter');
-
-var _QuandlAdapter2 = _interopRequireDefault(_QuandlAdapter);
-
 var _EuroStat = require('./eurostat/EuroStat');
 
 var _EuroStat2 = _interopRequireDefault(_EuroStat);
@@ -64,6 +56,10 @@ var _Intrinio = require('./intrinio/Intrinio');
 
 var _Intrinio2 = _interopRequireDefault(_Intrinio);
 
+var _Quandl = require('./quandl/Quandl');
+
+var _Quandl2 = _interopRequireDefault(_Quandl);
+
 var _Crc = require('./crypto-compare/Crc');
 
 var _Crc2 = _interopRequireDefault(_Crc);
@@ -75,11 +71,7 @@ var _Cmc2 = _interopRequireDefault(_Cmc);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterAdapter = {
-  Quandl: {
-    api: _QuandlApi2.default,
-    adapter: _QuandlAdapter2.default
-  },
-
+  Quandl: _Quandl2.default,
   EuroStat: _EuroStat2.default,
   UnComtrade: _UnComtrade2.default,
   FaoStat: _FaoStat2.default,
