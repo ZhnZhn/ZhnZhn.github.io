@@ -14,14 +14,6 @@ var _Dialogs = require('../../components/dialogs/Dialogs');
 
 var _Dialogs2 = _interopRequireDefault(_Dialogs);
 
-var _Dialogs3 = require('../../components/quandl-browser/Dialogs');
-
-var _Dialogs4 = _interopRequireDefault(_Dialogs3);
-
-var _UnDialog = require('../../components/uncomtrade/UnDialog5');
-
-var _UnDialog2 = _interopRequireDefault(_UnDialog);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MSG_OFFLINE = 'It seems you are offline';
@@ -33,14 +25,6 @@ var _router = {
   DialogType4: _Dialogs2.default.Type4,
   DialogType4A: _Dialogs2.default.Type4A,
   DialogType5: _Dialogs2.default.Type5,
-
-  UNCommodityTradeDialog: _Dialogs4.default.UNCommodityTrade,
-  Futures3Dialog: _Dialogs4.default.Futures3,
-  FuturesWikiDialog: _Dialogs4.default.FuturesWiki,
-  JodiWorldOilDialog: _Dialogs4.default.JodiWorldOil,
-  ZillowDialog: _Dialogs4.default.Zillow,
-
-  UnDialog5: _UnDialog2.default,
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */
@@ -58,25 +42,51 @@ var _router = {
     });
   },
 
-  _loadSM: function _loadSM() {
+  _loadUN: function _loadUN() {
     /*eslint-disable no-undef */
     if (process.env.NODE_ENV === 'development') {
-      this.SM = System.import("js/components/stock-markets/AlphaDialogs.js").then(function (module) {
+      return this.UN = System.import("js/components/uncomtrade/UnDialogs.js").then(function (module) {
         return module.default;
       }).catch(function (err) {
         return console.log(MSG_OFFLINE);
       });
       /*eslint-enable no-undef */
-    } else {
-      this.SM = System.import(
-      /* webpackChunkName: "alpha-dialogs" */
-      /* webpackMode: "lazy" */
-      "../../components/stock-markets/AlphaDialogs").then(function (module) {
+    }
+    return this.UN = System.import(
+    /* webpackChunkName: "un-dialogs" */
+    /* webpackMode: "lazy" */
+    "../../components/uncomtrade/UnDialogs").then(function (module) {
+      return module.default;
+    }).catch(function (err) {
+      return console.log(MSG_OFFLINE);
+    });
+  },
+
+
+  get UnDialog5() {
+    return this.UN.then(function (D) {
+      return D.UnDialog5;
+    });
+  },
+
+  _loadSM: function _loadSM() {
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === 'development') {
+      return this.SM = System.import("js/components/stock-markets/AlphaDialogs.js").then(function (module) {
         return module.default;
       }).catch(function (err) {
         return console.log(MSG_OFFLINE);
       });
+      /*eslint-enable no-undef */
     }
+    return this.SM = System.import(
+    /* webpackChunkName: "alpha-dialogs" */
+    /* webpackMode: "lazy" */
+    "../../components/stock-markets/AlphaDialogs").then(function (module) {
+      return module.default;
+    }).catch(function (err) {
+      return console.log(MSG_OFFLINE);
+    });
   },
 
   get AlphaIndicatorDialog() {
@@ -104,16 +114,15 @@ var _router = {
         return console.log(MSG_OFFLINE);
       });
       /*eslint-enable no-undef */
-    } else {
-      return this.ES = System.import(
-      /* webpackChunkName: "eurostat-dialogs" */
-      /* webpackMode: "lazy" */
-      "../../components/eurostat/EurostatDialogs").then(function (module) {
-        return module.default;
-      }).catch(function (err) {
-        return console.log(MSG_OFFLINE);
-      });
     }
+    return this.ES = System.import(
+    /* webpackChunkName: "eurostat-dialogs" */
+    /* webpackMode: "lazy" */
+    "../../components/eurostat/EurostatDialogs").then(function (module) {
+      return module.default;
+    }).catch(function (err) {
+      return console.log(MSG_OFFLINE);
+    });
   },
 
   get DialogEurostat() {
@@ -143,6 +152,76 @@ var _router = {
     });
   },
 
+  _loadUSAE: function _loadUSAE() {
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === 'development') {
+      return this.USAE = System.import("js/components/usa-economy/UsaeDialogs.js").then(function (module) {
+        return module.default;
+      }).catch(function (err) {
+        return console.log(MSG_OFFLINE);
+      });
+      /*eslint-enable no-undef */
+    }
+    return this.USAE = System.import(
+    /* webpackChunkName: "usa-economy-dialogs" */
+    /* webpackMode: "lazy" */
+    "../../components/usa-economy/UsaeDialogs").then(function (module) {
+      return module.default;
+    }).catch(function (err) {
+      return console.log(MSG_OFFLINE);
+    });
+  },
+
+
+  get ZillowDialog() {
+    var _USAE = this.USAE || this._loadUSAE();
+    return _USAE.then(function (D) {
+      return D.Zillow;
+    });
+  },
+
+  _loadQE: function _loadQE() {
+    /*eslint-disable no-undef */
+    if (process.env.NODE_ENV === 'development') {
+      return this.QE = System.import("js/components/quandl/QuandlDialogs.js").then(function (module) {
+        return module.default;
+      }).catch(function (err) {
+        return console.log(MSG_OFFLINE);
+      });
+      /*eslint-enable no-undef */
+    }
+    return this.QE = System.import(
+    /* webpackChunkName: "quandl-dialogs" */
+    /* webpackMode: "lazy" */
+    "../../components/quandl/QuandlDialogs").then(function (module) {
+      return module.default;
+    }).catch(function (err) {
+      return console.log(MSG_OFFLINE);
+    });
+  },
+
+
+  get UNCommodityTradeDialog() {
+    return this.QE.then(function (D) {
+      return D.UNCommodityTrade;
+    });
+  },
+  get Futures3Dialog() {
+    return this.QE.then(function (D) {
+      return D.Futures3;
+    });
+  },
+  get FuturesWikiDialog() {
+    return this.QE.then(function (D) {
+      return D.FuturesWiki;
+    });
+  },
+  get JodiWorldOilDialog() {
+    return this.QE.then(function (D) {
+      return D.JodiWorldOil;
+    });
+  },
+
   loadDialogs: function loadDialogs(browserType) {
     switch (browserType) {
       case _Type.BrowserType.STOCK_MARKETS:
@@ -151,6 +230,10 @@ var _router = {
       case _Type.BrowserType.NORWAY_STATISTICS:
       case _Type.BrowserType.SWEDEN_STAT:
         this._loadES();break;
+      case _Type.BrowserType.ECONOMIC:
+        this._loadQE();break;
+      case _Type.BrowserType.UN_COMTRADE:
+        this._loadUN();break;
       default:
         return undefined;
     }

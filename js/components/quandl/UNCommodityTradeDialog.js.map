@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/quandl-browser/UNCommodityTradeDialog.js"
+  "../../../src/components/quandl/UNCommodityTradeDialog.js"
  ],
- "file": "../../../src/components/quandl-browser/UNCommodityTradeDialog.js",
+ "file": "../../../src/components/quandl/UNCommodityTradeDialog.js",
  "names": [
   "S",
   "BT_ROOT",

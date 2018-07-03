@@ -20,19 +20,14 @@ var _JodiWorldOilDialog = require('./JodiWorldOilDialog');
 
 var _JodiWorldOilDialog2 = _interopRequireDefault(_JodiWorldOilDialog);
 
-var _ZillowDialog = require('./ZillowDialog');
-
-var _ZillowDialog2 = _interopRequireDefault(_ZillowDialog);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Dialogs = {
   UNCommodityTrade: _UNCommodityTradeDialog2.default,
   Futures3: _Futures3Dialog2.default,
   FuturesWiki: _FuturesWikiDialog2.default,
-  JodiWorldOil: _JodiWorldOilDialog2.default,
-  Zillow: _ZillowDialog2.default
+  JodiWorldOil: _JodiWorldOilDialog2.default
 };
 
 exports.default = Dialogs;
-//# sourceMappingURL=Dialogs.js.map
+//# sourceMappingURL=QuandlDialogs.js.map

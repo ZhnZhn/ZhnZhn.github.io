@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/quandl-browser/Futures3Dialog.js"
+  "../../../src/components/quandl/Futures3Dialog.js"
  ],
- "file": "../../../src/components/quandl-browser/Futures3Dialog.js",
+ "file": "../../../src/components/quandl/Futures3Dialog.js",
  "names": [
   "yearOptions",
   "caption",

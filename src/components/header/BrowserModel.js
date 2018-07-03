@@ -79,7 +79,7 @@ const crBrowserModel = () => {
         isClose: true
       },{
         cn: CL.BR,
-        name: 'U.S. Economy',
+        name: 'USA Economy',
         onClick: _fBD(BT.US_ECONOMY),
         isClose: true
       }

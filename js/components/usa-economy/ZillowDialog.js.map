@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/quandl-browser/ZillowDialog.js"
+  "../../../src/components/usa-economy/ZillowDialog.js"
  ],
- "file": "../../../src/components/quandl-browser/ZillowDialog.js",
+ "file": "../../../src/components/usa-economy/ZillowDialog.js",
  "names": [
   "S",
   "TIP",

@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/quandl-browser/JodiWorldOilDialog.js"
+  "../../../src/components/quandl/JodiWorldOilDialog.js"
  ],
- "file": "../../../src/components/quandl-browser/JodiWorldOilDialog.js",
+ "file": "../../../src/components/quandl/JodiWorldOilDialog.js",
  "names": [
   "unitOptions",
   "chartTypes",

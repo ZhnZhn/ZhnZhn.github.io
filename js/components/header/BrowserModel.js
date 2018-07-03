@@ -91,7 +91,7 @@ var crBrowserModel = function crBrowserModel() {
       isClose: true
     }, {
       cn: CL.BR,
-      name: 'U.S. Economy',
+      name: 'USA Economy',
       onClick: _fBD(_Type.BrowserType.US_ECONOMY),
       isClose: true
     }],

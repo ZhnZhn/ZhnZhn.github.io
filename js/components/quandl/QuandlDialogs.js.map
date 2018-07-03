@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/quandl/QuandlDialogs.js"
+ ],
+ "file": "../../../src/components/quandl/QuandlDialogs.js",
+ "names": [
+  "Dialogs",
+  "UNCommodityTrade",
+  "Futures3",
+  "FuturesWiki",
+  "JodiWorldOil"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU;AACdC,oDADc;AAEdC,oCAFc;AAGdC,0CAHc;AAIdC;AAJc,CAAhB;;kBAOeJ,O"
+}

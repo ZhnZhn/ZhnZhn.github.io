@@ -1,9 +1,9 @@
 {
  "version": 3,
  "sources": [
-  "../../../src/components/quandl-browser/FuturesWikiDialog.js"
+  "../../../src/components/quandl/FuturesWikiDialog.js"
  ],
- "file": "../../../src/components/quandl-browser/FuturesWikiDialog.js",
+ "file": "../../../src/components/quandl/FuturesWikiDialog.js",
  "names": [
   "typeOptions",
   "caption",

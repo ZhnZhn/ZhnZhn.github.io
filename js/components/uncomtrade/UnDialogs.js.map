@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/uncomtrade/UnDialogs.js"
+ ],
+ "file": "../../../src/components/uncomtrade/UnDialogs.js",
+ "names": [
+  "Dialogs",
+  "UnDialog5"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,UAAU;AACdC;AADc,CAAhB;;kBAIeD,O"
+}
