@@ -20,10 +20,6 @@ var _Factory2 = _interopRequireDefault(_Factory);
 
 var _BrowserActions = require('../actions/BrowserActions');
 
-var _DataQE = require('../../constants/DataQE');
-
-var _DataQE2 = _interopRequireDefault(_DataQE);
-
 var _DataWL = require('../../constants/DataWL');
 
 var _DataWL2 = _interopRequireDefault(_DataWL);
@@ -77,7 +73,6 @@ var _addDialogProps = function _addDialogProps(items) {
 var BrowserSlice = {
   browserMenu: _BrowserMenu2.default,
   routeDialog: {
-    QE: _DataQE2.default,
     WL: _DataWL2.default
   },
 
@@ -119,9 +114,6 @@ var BrowserSlice = {
     }
     var _r = this.routeDialog[browserId];
     return _r ? _r[sourceId] : undefined;
-  },
-  onShowBrowser: function onShowBrowser(browserType) {
-    this.trigger(_BrowserActions.BrowserActionTypes.SHOW_BROWSER, browserType);
   },
   onShowBrowserDynamicCompleted: function onShowBrowserDynamicCompleted(option) {
     var _this = this;

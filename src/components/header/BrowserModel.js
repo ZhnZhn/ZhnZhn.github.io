@@ -16,9 +16,6 @@ const CL = {
 const _fBD = (id) => () => {
   BA.showBrowserDynamic(id)
 };
-const _fB = (id) => () => {
-  BA.showBrowser(id)
-};
 
 const crBrowserModel = () => {
   return {
@@ -77,7 +74,8 @@ const crBrowserModel = () => {
       {
         cn: CL.Q,
         name: 'World Economy',
-        onClick: _fB(BT.ECONOMIC),
+        //onClick: _fB(BT.ECONOMIC),
+        onClick: _fBD(BT.ECONOMIC),
         isClose: true
       },{
         cn: CL.BR,

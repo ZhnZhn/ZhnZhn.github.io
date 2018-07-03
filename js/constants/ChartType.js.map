@@ -1,1 +1,13 @@
-{"version":3,"sources":["../../src/constants/ChartType.js"],"names":["addCharts","obj","dialogType","prefix","prop","createTypeObject","ChartType"],"mappings":";;;;;;AAAA;;AAEA,IAAMA,YAAY,SAAZA,SAAY,CAASC,GAAT,EAAcC,UAAd,EAA0BC,MAA1B,EAAiC;AAC/C,OAAI,IAAIC,IAAR,IAAgBF,UAAhB,EAA2B;AACtBD,QAAIE,SAASC,IAAb,IAAqBF,WAAWE,IAAX,CAArB;AACJ;AACJ,CAJD;;AAMA,IAAMC,mBAAmB,SAAnBA,gBAAmB,GAAU;AACjC,MAAIJ,MAAM,EAAV;AACAD,YAAUC,GAAV,sBAAuB,SAAvB;AACAA,MAAI,YAAJ,IAAoB,eAApB;;AAEA,SAAOA,GAAP;AACD,CAND;;AAQA,IAAMK,YAAYD,kBAAlB;;kBAEeC,S","file":"ChartType.js","sourcesContent":["import { Quandl } from './DialogType'\r\n\r\nconst addCharts = function(obj, dialogType, prefix){\r\n    for(let prop in dialogType){\r\n         obj[prefix + prop] = dialogType[prop];\r\n    }\r\n}\r\n\r\nconst createTypeObject = function(){\r\n  let obj = {};\r\n  addCharts(obj, Quandl, 'QUANDL_');\r\n  obj['WATCH_LIST'] = 'WL_WATCH_LIST';\r\n\r\n  return obj;\r\n}\r\n\r\nconst ChartType = createTypeObject();\r\n\r\nexport default ChartType\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../src/constants/ChartType.js"
+ ],
+ "file": "../../src/constants/ChartType.js",
+ "names": [
+  "_crChartType",
+  "WATCH_LIST",
+  "ChartType"
+ ],
+ "mappings": ";;;;;AAAA,IAAMA,eAAe,SAAfA,YAAe,GAAU;AAC7B,SAAO;AACLC,gBAAY;AADP,GAAP;AAGD,CAJD;;AAMA,IAAMC,YAAYF,cAAlB;;kBAEeE,S"
+}

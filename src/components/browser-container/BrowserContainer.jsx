@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
-import { BrowserType } from '../../constants/Type';
-
-import QuandlBrowser from '../quandl-browser/QuandlBrowser';
 import DialogContainer from '../zhn-containers/DialogContainer';
+
+const CL_ROOT = "hrz-container";
 
 class BrowserContainer extends Component {
   constructor(props){
@@ -37,28 +36,23 @@ class BrowserContainer extends Component {
 
   render(){
     const {
-            store, showBrowserAction, updateBrowserAction,
-            showDialogAction, onCloseDialog
+            store,
+            showDialogAction,
+            onCloseDialog
           } = this.props
-        , { elBrowsers } = this.state;
+        , {
+            elBrowsers
+          } = this.state;
 
     return (
-      <div className="hrz-container">
-           <QuandlBrowser
-              browserType={BrowserType.ECONOMIC}
-              caption="Quandl: World Economy"
-              store={store}
-              showAction={showBrowserAction}
-              updateAction={updateBrowserAction}
-           />
-           {this._renderBrowsers(elBrowsers)}
-
-           <DialogContainer
-              maxDialog={3}
-              store={store}
-              showAction={showDialogAction}
-              onCloseDialog={onCloseDialog}
-           />
+      <div className={CL_ROOT}>
+         {this._renderBrowsers(elBrowsers)}
+         <DialogContainer
+            maxDialog={3}
+            store={store}
+            showAction={showDialogAction}
+            onCloseDialog={onCloseDialog}
+         />
       </div>
     );
   }

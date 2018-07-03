@@ -1,1 +1,21 @@
-{"version":3,"sources":["../../../src/flux/actions/FactoryAction.js"],"names":["_crLoadQueryStatic","browserType","option","action","showBrowser","args","loadStockByQuery","_crLoadQueryDynamic","showBrowserDynamic","type","typeFail","FactoryAction","crLoadQuery","chartType","getSourceConfig","dialogProps"],"mappings":";;;;;;AACA;;;;AAEA;;;;AACA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,qBAAqB,SAArBA,kBAAqB,SAAU;AAAA,MAC3BC,WAD2B,GACXC,MADW,CAC3BD,WAD2B;;AAEnC,SAAO,2BAAiB,CACpB;AACEE,YAAQ,yBAAeC,WADzB;AAEEC,UAAM,CAAEJ,WAAF;AAFR,GADoB,EAIlB;AACAE,YAAQ,uBAAaG,gBADrB;AAEAD,UAAM,CAAEH,MAAF;AAFN,GAJkB,CAAjB,CAAP;AASD,CAXD;;AAaA,IAAMK,sBAAsB,SAAtBA,mBAAsB,SAAU;AAAA,MAC5BN,WAD4B,GACZC,MADY,CAC5BD,WAD4B;;AAEpC,SAAO,yBAAe,CACpB;AACEE,YAAQ,yBAAeK,kBADzB;AAEEC,UAAM,6BAFR;AAGEC,cAAU,0BAHZ;AAIEL,UAAM,CAAEJ,WAAF;AAJR,GADoB,EAMlB;AACAE,YAAQ,uBAAaG,gBADrB;AAEAG,UAAM,oBAFN;AAGAJ,UAAM,CAAEH,MAAF;AAHN,GANkB,CAAf,CAAP;AAYD,CAdD;;AAgBA,IAAMS,gBAAgB;AACnBC,eAAa,qBAACV,MAAD,EAAY;AAAA,QACfD,WADe,GACYC,MADZ,CACfD,WADe;AAAA,QACFY,SADE,GACYX,MADZ,CACFW,SADE;AAAA,eAEC,qBACbC,eADa,CACGb,WADH,EACgBY,SADhB,KAC8B,EAH/B;AAAA,QAEfE,WAFe,QAEfA,WAFe;;AAIvB,QAAIA,WAAJ,EAAiB;AACf,aAAOf,mBAAmBE,MAAnB,CAAP;AACD,KAFD,MAEO;AACL,aAAOK,oBAAoBL,MAApB,CAAP;AACD;AACF;AAVkB,CAAtB;;kBAaeS,a","file":"FactoryAction.js","sourcesContent":["\r\nimport ChartStore from '../stores/ChartStore'\r\n\r\nimport SeqActions from './SeqActions'\r\nimport BatchActions from './BatchActions'\r\n\r\nimport BrowserActions from './BrowserActions'\r\nimport ChartActions from './ChartActions'\r\n\r\nconst _crLoadQueryStatic = option => {\r\n  const { browserType } = option;\r\n  return new BatchActions([\r\n      {\r\n        action: BrowserActions.showBrowser,\r\n        args: [ browserType ]\r\n      },{\r\n        action: ChartActions.loadStockByQuery,\r\n        args: [ option ]\r\n      }\r\n    ]);\r\n};\r\n\r\nconst _crLoadQueryDynamic = option => {\r\n  const { browserType } = option;\r\n  return new SeqActions([\r\n    {\r\n      action: BrowserActions.showBrowserDynamic,\r\n      type: 'loadBrowserDynamicCompleted',\r\n      typeFail: 'showBrowserDynamicFailed',\r\n      args: [ browserType ]\r\n    },{\r\n      action: ChartActions.loadStockByQuery,\r\n      type: 'loadStockCompleted',\r\n      args: [ option ]\r\n    }\r\n  ]);\r\n};\r\n\r\nconst FactoryAction = {\r\n   crLoadQuery: (option) => {\r\n     const { browserType, chartType } = option\r\n         , { dialogProps } = ChartStore\r\n               .getSourceConfig(browserType, chartType) || {};\r\n     if (dialogProps) {       \r\n       return _crLoadQueryStatic(option);\r\n     } else {\r\n       return _crLoadQueryDynamic(option);\r\n     }\r\n   }\r\n}\r\n\r\nexport default FactoryAction\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/actions/FactoryAction.js"
+ ],
+ "file": "../../../src/flux/actions/FactoryAction.js",
+ "names": [
+  "_crLoadQueryDynamic",
+  "browserType",
+  "option",
+  "action",
+  "showBrowserDynamic",
+  "type",
+  "typeFail",
+  "args",
+  "loadStockByQuery",
+  "FactoryAction",
+  "crLoadQuery"
+ ],
+ "mappings": ";;;;;;AACA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,sBAAsB,SAAtBA,mBAAsB,SAAU;AAAA,MAC5BC,WAD4B,GACZC,MADY,CAC5BD,WAD4B;;AAEpC,SAAO,yBAAe,CACpB;AACEE,YAAQ,yBAAeC,kBADzB;AAEEC,UAAM,6BAFR;AAGEC,cAAU,0BAHZ;AAIEC,UAAM,CAAEN,WAAF;AAJR,GADoB,EAMlB;AACAE,YAAQ,uBAAaK,gBADrB;AAEAH,UAAM,oBAFN;AAGAE,UAAM,CAAEL,MAAF;AAHN,GANkB,CAAf,CAAP;AAYD,CAdD;;AAgBA,IAAMO,gBAAgB;AACnBC,eAAa,qBAACR,MAAD,EAAY;AACvB,WAAOF,oBAAoBE,MAApB,CAAP;AACD;AAHkB,CAAtB;;kBAMeO,a"
+}

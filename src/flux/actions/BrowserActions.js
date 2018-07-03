@@ -9,9 +9,6 @@ import { fetchJson } from '../../utils/fnFetch'
 import { fnCatch } from '../logic/fnCatch';
 
 export const BrowserActionTypes = {
-  SHOW_BROWSER: 'showBrowser',
-  UPDATE_BROWSER_MENU: 'updateBrowserMenu',
-
   SHOW_BROWSER_DYNAMIC: 'showBrowserDynamic',
 
   INIT_BROWSER_DYNAMIC: 'initBrowserDynamic',
@@ -19,13 +16,10 @@ export const BrowserActionTypes = {
   LOAD_BROWSER_DYNAMIC_COMPLETED: 'loadBrowserDynamicCompleted',
 
   UPDATE_WATCH_BROWSER: 'updateWatchBrowser'
-}
+};
 const A = BrowserActionTypes;
 
-const BrowserActions = Reflux.createActions({
-  [A.SHOW_BROWSER] : {},
-  [A.UPDATE_BROWSER_MENU] : {},
-
+const BrowserActions = Reflux.createActions({  
   [A.SHOW_BROWSER_DYNAMIC]: {
     children: ['completed', 'failed']
   },

@@ -1,1 +1,41 @@
-{"version":3,"sources":["../../../src/flux/actions/BrowserActions.js"],"names":["BrowserActionTypes","SHOW_BROWSER","UPDATE_BROWSER_MENU","SHOW_BROWSER_DYNAMIC","INIT_BROWSER_DYNAMIC","LOAD_BROWSER_DYNAMIC","LOAD_BROWSER_DYNAMIC_COMPLETED","UPDATE_WATCH_BROWSER","A","BrowserActions","createActions","children","_fnFetchSourceMenu","json","option","onCompleted","browserType","listen","bT","_option","config","loadDialogs","completed","failed","Object","assign","alertDescr","alertItemId","sourceMenuUrl","uri","onFetch","onCatch","onFailed"],"mappings":";;;;;;;;;;;;;AAAA;;;;AAEA;;;;AAEA;;;;AACA;;;;AAEA;;AACA;;;;AAEO,IAAMA,kDAAqB;AAChCC,gBAAc,aADkB;AAEhCC,uBAAqB,mBAFW;;AAIhCC,wBAAsB,oBAJU;;AAMhCC,wBAAsB,oBANU;AAOhCC,wBAAsB,oBAPU;AAQhCC,kCAAgC,6BARA;;AAUhCC,wBAAsB;AAVU,CAA3B;AAYP,IAAMC,IAAIR,kBAAV;;AAEA,IAAMS,iBAAiB,iBAAOC,aAAP,mFACpBF,EAAEP,YADkB,EACF,EADE,wDAEpBO,EAAEN,mBAFkB,EAEK,EAFL,wDAIpBM,EAAEL,oBAJkB,EAIK;AACxBQ,YAAU,CAAC,WAAD,EAAc,QAAd;AADc,CAJL,wDAOpBH,EAAEJ,oBAPkB,EAOM,EAPN,wDAQpBI,EAAEH,oBARkB,EAQM;AACzBM,YAAW,CAAC,WAAD,EAAc,QAAd;AADc,CARN,wDAYpBH,EAAED,oBAZkB,EAYM,EAZN,0BAAvB;;AAeA,IAAMK,qBAAqB,SAArBA,kBAAqB,OAAuC;AAAA,MAA5BC,IAA4B,QAA5BA,IAA4B;AAAA,MAAtBC,MAAsB,QAAtBA,MAAsB;AAAA,MAAdC,WAAc,QAAdA,WAAc;AAAA,MACxDC,WADwD,GACxCF,MADwC,CACxDE,WADwD;;AAEhED,cAAY,EAAEF,UAAF,EAAQG,wBAAR,EAAZ;AACD,CAHD;;AAKAP,eAAeD,EAAEL,oBAAjB,EAAuCc,MAAvC,CAA8C,YAAmB;AAAA,MAAVH,MAAU,uEAAH,EAAG;AACzD,gBAAU,OAAOA,MAAP,KAAkB,QAAlB,GACL,EAAEE,aAAaF,MAAf,EADK,GAELA,MAFL;AAAA,MAGcI,EAHd,GAGqBC,OAHrB,CAGEH,WAHF;AAAA,MAIAI,MAJA,GAIS,wBAAcF,EAAd,CAJT;;AAKN,MAAIA,MAAME,MAAV,EAAkB;AAChB,gCAAkBC,WAAlB,CAA8BH,EAA9B;AACA,2BAAaG,WAAb,CAAyBH,EAAzB;AACA,SAAKI,SAAL,CAAeF,MAAf;AACD,GAJD,MAIO;AACL,SAAKG,MAAL,CAAYC,OAAOC,MAAP,CAAcN,OAAd,EAAuB;AACjCO,kBAAY,uBADqB;AAEjCC,mBAAa;AAFoB,KAAvB,CAAZ;AAID;AACF,CAhBD;;AAkBAlB,eAAeD,EAAEH,oBAAjB,EAAuCY,MAAvC,CAA8C,UAASH,MAAT,EAAgB;AAAA,MACnDc,aADmD,GACjCd,MADiC,CACnDc,aADmD;AAE3D;;AACA,0BAAU;AACRC,SAAKD,aADG;AAERd,YAAQA,MAFA;AAGRgB,aAASlB,kBAHD;AAIRG,iBAAa,KAAKO,SAJV;AAKRS,6BALQ;AAMRC,cAAU,KAAKT;AANP,GAAV;AAQF,CAXD;;kBAced,c","file":"BrowserActions.js","sourcesContent":["import Reflux from 'reflux';\r\n\r\nimport BrowserConfig from '../../constants/BrowserConfig'\r\n\r\nimport RouterModalDialog from '../../components/dialogs/RouterModalDialog'\r\nimport RouterDialog from '../logic/RouterDialog'\r\n\r\nimport { fetchJson } from '../../utils/fnFetch'\r\nimport { fnCatch } from '../logic/fnCatch';\r\n\r\nexport const BrowserActionTypes = {\r\n  SHOW_BROWSER: 'showBrowser',\r\n  UPDATE_BROWSER_MENU: 'updateBrowserMenu',\r\n\r\n  SHOW_BROWSER_DYNAMIC: 'showBrowserDynamic',\r\n\r\n  INIT_BROWSER_DYNAMIC: 'initBrowserDynamic',\r\n  LOAD_BROWSER_DYNAMIC: 'loadBrowserDynamic',\r\n  LOAD_BROWSER_DYNAMIC_COMPLETED: 'loadBrowserDynamicCompleted',\r\n\r\n  UPDATE_WATCH_BROWSER: 'updateWatchBrowser'\r\n}\r\nconst A = BrowserActionTypes;\r\n\r\nconst BrowserActions = Reflux.createActions({\r\n  [A.SHOW_BROWSER] : {},\r\n  [A.UPDATE_BROWSER_MENU] : {},\r\n\r\n  [A.SHOW_BROWSER_DYNAMIC]: {\r\n    children: ['completed', 'failed']\r\n  },\r\n  [A.INIT_BROWSER_DYNAMIC] : {},\r\n  [A.LOAD_BROWSER_DYNAMIC] : {\r\n    children : ['completed', 'failed']\r\n  },\r\n\r\n  [A.UPDATE_WATCH_BROWSER] : {}\r\n});\r\n\r\nconst _fnFetchSourceMenu = function({ json, option, onCompleted }){\r\n  const { browserType } = option;\r\n  onCompleted({ json, browserType });\r\n}\r\n\r\nBrowserActions[A.SHOW_BROWSER_DYNAMIC].listen(function(option={}){\r\n  const _option = typeof option === 'string'\r\n           ? { browserType: option }\r\n           : option\r\n      , { browserType:bT } = _option\r\n      , config = BrowserConfig[bT];\r\n  if (bT && config) {\r\n    RouterModalDialog.loadDialogs(bT)\r\n    RouterDialog.loadDialogs(bT)\r\n    this.completed(config)\r\n  } else {\r\n    this.failed(Object.assign(_option, {\r\n      alertDescr: \"Browser hasn't found.\",\r\n      alertItemId: \"Browser\"\r\n    }))\r\n  }\r\n})\r\n\r\nBrowserActions[A.LOAD_BROWSER_DYNAMIC].listen(function(option){\r\n   const { sourceMenuUrl } = option;\r\n   //RouterDialog.loadDialogs(dialogsId)\r\n   fetchJson({\r\n     uri: sourceMenuUrl,\r\n     option: option,\r\n     onFetch: _fnFetchSourceMenu,\r\n     onCompleted: this.completed,\r\n     onCatch: fnCatch,\r\n     onFailed: this.failed\r\n   })\r\n})\r\n\r\n\r\nexport default BrowserActions\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/flux/actions/BrowserActions.js"
+ ],
+ "file": "../../../src/flux/actions/BrowserActions.js",
+ "names": [
+  "BrowserActionTypes",
+  "SHOW_BROWSER_DYNAMIC",
+  "INIT_BROWSER_DYNAMIC",
+  "LOAD_BROWSER_DYNAMIC",
+  "LOAD_BROWSER_DYNAMIC_COMPLETED",
+  "UPDATE_WATCH_BROWSER",
+  "A",
+  "BrowserActions",
+  "createActions",
+  "children",
+  "_fnFetchSourceMenu",
+  "json",
+  "option",
+  "onCompleted",
+  "browserType",
+  "listen",
+  "bT",
+  "_option",
+  "config",
+  "loadDialogs",
+  "completed",
+  "failed",
+  "Object",
+  "assign",
+  "alertDescr",
+  "alertItemId",
+  "sourceMenuUrl",
+  "uri",
+  "onFetch",
+  "onCatch",
+  "onFailed"
+ ],
+ "mappings": ";;;;;;;;;;;;;AAAA;;;;AAEA;;;;AAEA;;;;AACA;;;;AAEA;;AACA;;;;AAEO,IAAMA,kDAAqB;AAChCC,wBAAsB,oBADU;;AAGhCC,wBAAsB,oBAHU;AAIhCC,wBAAsB,oBAJU;AAKhCC,kCAAgC,6BALA;;AAOhCC,wBAAsB;AAPU,CAA3B;AASP,IAAMC,IAAIN,kBAAV;;AAEA,IAAMO,iBAAiB,iBAAOC,aAAP,mFACpBF,EAAEL,oBADkB,EACK;AACxBQ,YAAU,CAAC,WAAD,EAAc,QAAd;AADc,CADL,wDAIpBH,EAAEJ,oBAJkB,EAIM,EAJN,wDAKpBI,EAAEH,oBALkB,EAKM;AACzBM,YAAW,CAAC,WAAD,EAAc,QAAd;AADc,CALN,wDASpBH,EAAED,oBATkB,EASM,EATN,0BAAvB;;AAYA,IAAMK,qBAAqB,SAArBA,kBAAqB,OAAuC;AAAA,MAA5BC,IAA4B,QAA5BA,IAA4B;AAAA,MAAtBC,MAAsB,QAAtBA,MAAsB;AAAA,MAAdC,WAAc,QAAdA,WAAc;AAAA,MACxDC,WADwD,GACxCF,MADwC,CACxDE,WADwD;;AAEhED,cAAY,EAAEF,UAAF,EAAQG,wBAAR,EAAZ;AACD,CAHD;;AAKAP,eAAeD,EAAEL,oBAAjB,EAAuCc,MAAvC,CAA8C,YAAmB;AAAA,MAAVH,MAAU,uEAAH,EAAG;AACzD,gBAAU,OAAOA,MAAP,KAAkB,QAAlB,GACL,EAAEE,aAAaF,MAAf,EADK,GAELA,MAFL;AAAA,MAGcI,EAHd,GAGqBC,OAHrB,CAGEH,WAHF;AAAA,MAIAI,MAJA,GAIS,wBAAcF,EAAd,CAJT;;AAKN,MAAIA,MAAME,MAAV,EAAkB;AAChB,gCAAkBC,WAAlB,CAA8BH,EAA9B;AACA,2BAAaG,WAAb,CAAyBH,EAAzB;AACA,SAAKI,SAAL,CAAeF,MAAf;AACD,GAJD,MAIO;AACL,SAAKG,MAAL,CAAYC,OAAOC,MAAP,CAAcN,OAAd,EAAuB;AACjCO,kBAAY,uBADqB;AAEjCC,mBAAa;AAFoB,KAAvB,CAAZ;AAID;AACF,CAhBD;;AAkBAlB,eAAeD,EAAEH,oBAAjB,EAAuCY,MAAvC,CAA8C,UAASH,MAAT,EAAgB;AAAA,MACnDc,aADmD,GACjCd,MADiC,CACnDc,aADmD;AAE3D;;AACA,0BAAU;AACRC,SAAKD,aADG;AAERd,YAAQA,MAFA;AAGRgB,aAASlB,kBAHD;AAIRG,iBAAa,KAAKO,SAJV;AAKRS,6BALQ;AAMRC,cAAU,KAAKT;AANP,GAAV;AAQF,CAXD;;kBAced,c"
+}

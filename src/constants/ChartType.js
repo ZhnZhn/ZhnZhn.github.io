@@ -1,19 +1,9 @@
-import { Quandl } from './DialogType'
+const _crChartType = function(){
+  return {
+    WATCH_LIST: 'WL_WATCH_LIST'
+  };
+};
 
-const addCharts = function(obj, dialogType, prefix){
-    for(let prop in dialogType){
-         obj[prefix + prop] = dialogType[prop];
-    }
-}
-
-const createTypeObject = function(){
-  let obj = {};
-  addCharts(obj, Quandl, 'QUANDL_');
-  obj['WATCH_LIST'] = 'WL_WATCH_LIST';
-
-  return obj;
-}
-
-const ChartType = createTypeObject();
+const ChartType = _crChartType();
 
 export default ChartType

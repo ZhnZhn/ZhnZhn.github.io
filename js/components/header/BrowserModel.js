@@ -31,11 +31,6 @@ var _fBD = function _fBD(id) {
     _BrowserActions2.default.showBrowserDynamic(id);
   };
 };
-var _fB = function _fB(id) {
-  return function () {
-    _BrowserActions2.default.showBrowser(id);
-  };
-};
 
 var crBrowserModel = function crBrowserModel() {
   return {
@@ -91,7 +86,8 @@ var crBrowserModel = function crBrowserModel() {
     page_01: [{
       cn: CL.Q,
       name: 'World Economy',
-      onClick: _fB(_Type.BrowserType.ECONOMIC),
+      //onClick: _fB(BT.ECONOMIC),
+      onClick: _fBD(_Type.BrowserType.ECONOMIC),
       isClose: true
     }, {
       cn: CL.BR,

@@ -17,7 +17,7 @@ import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '02-07-2018';
+const PREV_BUILD = '03-07-2018';
 
 const _checkBuild = () => {
   if (window.fetch) {
@@ -77,10 +77,7 @@ class AppErc extends Component {
         <div className="component-container">
            <BrowserContainer
               store={ChartStore}
-              showBrowserAction={BAT.SHOW_BROWSER}
               initBrowserAction={BAT.INIT_BROWSER_DYNAMIC}
-              updateBrowserAction={BAT.UPDATE_BROWSER_MENU}
-              //updateWatchAction={BAT.UPDATE_WATCH_BROWSER}
               showDialogAction={CAT.SHOW_DIALOG}
               onCloseDialog={ComponentActions.closeDialog}
            />

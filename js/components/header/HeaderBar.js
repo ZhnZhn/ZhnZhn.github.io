@@ -137,7 +137,7 @@ var HeaderBar = function (_Component) {
 
     _this._settingFn = props.store.exportSettingFn();
 
-    _this._hShowEconomic = _BrowserActions2.default.showBrowser.bind(null, _Type.BrowserType.ECONOMIC);
+    _this._hShowEconomic = _BrowserActions2.default.showBrowserDynamic.bind(null, _Type.BrowserType.ECONOMIC);
     _this._hShowEurostat = _BrowserActions2.default.showBrowserDynamic.bind(null, _Type.BrowserType.EUROSTAT);
     _this._hShowWatch = _BrowserActions2.default.showBrowserDynamic.bind(null, _Type.BrowserType.WATCH_LIST);
 

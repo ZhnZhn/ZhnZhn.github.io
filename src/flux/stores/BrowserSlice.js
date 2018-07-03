@@ -6,7 +6,6 @@ import { BrowserType } from '../../constants/Type';
 import Factory from '../logic/Factory';
 import { BrowserActionTypes as BA } from '../actions/BrowserActions';
 
-import DataQE from '../../constants/DataQE';
 import DataWL from '../../constants/DataWL';
 
 const C = {
@@ -58,10 +57,9 @@ const _addDialogProps = (items) => {
 }
 
 const BrowserSlice = {
-  browserMenu : BrowserMenu,
-  routeDialog : {
-    QE : DataQE,
-    WL : DataWL
+  browserMenu: BrowserMenu,
+  routeDialog: {
+    WL: DataWL
   },
 
   getBrowserMenu(browserType){
@@ -103,10 +101,6 @@ const BrowserSlice = {
     }
     const _r = this.routeDialog[browserId];
     return _r ? _r[sourceId] : undefined;
-  },
-
-  onShowBrowser(browserType){
-    this.trigger(BA.SHOW_BROWSER, browserType);
   },
 
   onShowBrowserDynamicCompleted(option){

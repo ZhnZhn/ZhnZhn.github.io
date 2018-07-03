@@ -34,9 +34,6 @@ var _fnCatch = require('../logic/fnCatch');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BrowserActionTypes = exports.BrowserActionTypes = {
-  SHOW_BROWSER: 'showBrowser',
-  UPDATE_BROWSER_MENU: 'updateBrowserMenu',
-
   SHOW_BROWSER_DYNAMIC: 'showBrowserDynamic',
 
   INIT_BROWSER_DYNAMIC: 'initBrowserDynamic',
@@ -47,7 +44,7 @@ var BrowserActionTypes = exports.BrowserActionTypes = {
 };
 var A = BrowserActionTypes;
 
-var BrowserActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_BROWSER, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.UPDATE_BROWSER_MENU, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_BROWSER_DYNAMIC, {
+var BrowserActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_BROWSER_DYNAMIC, {
   children: ['completed', 'failed']
 }), (0, _defineProperty3.default)(_Reflux$createActions, A.INIT_BROWSER_DYNAMIC, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_BROWSER_DYNAMIC, {
   children: ['completed', 'failed']

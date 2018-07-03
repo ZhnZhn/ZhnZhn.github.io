@@ -24,17 +24,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Type = require('../../constants/Type');
-
-var _QuandlBrowser = require('../quandl-browser/QuandlBrowser');
-
-var _QuandlBrowser2 = _interopRequireDefault(_QuandlBrowser);
-
 var _DialogContainer = require('../zhn-containers/DialogContainer');
 
 var _DialogContainer2 = _interopRequireDefault(_DialogContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CL_ROOT = "hrz-container";
 
 var BrowserContainer = function (_Component) {
   (0, _inherits3.default)(BrowserContainer, _Component);
@@ -82,8 +78,6 @@ var BrowserContainer = function (_Component) {
     value: function render() {
       var _props = this.props,
           store = _props.store,
-          showBrowserAction = _props.showBrowserAction,
-          updateBrowserAction = _props.updateBrowserAction,
           showDialogAction = _props.showDialogAction,
           onCloseDialog = _props.onCloseDialog,
           elBrowsers = this.state.elBrowsers;
@@ -91,14 +85,7 @@ var BrowserContainer = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'hrz-container' },
-        _react2.default.createElement(_QuandlBrowser2.default, {
-          browserType: _Type.BrowserType.ECONOMIC,
-          caption: 'Quandl: World Economy',
-          store: store,
-          showAction: showBrowserAction,
-          updateAction: updateBrowserAction
-        }),
+        { className: CL_ROOT },
         this._renderBrowsers(elBrowsers),
         _react2.default.createElement(_DialogContainer2.default, {
           maxDialog: 3,

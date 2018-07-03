@@ -47,8 +47,8 @@ class HeaderBar extends Component {
   constructor(props){
     super()
     this._settingFn = props.store.exportSettingFn()
-
-    this._hShowEconomic = BA.showBrowser.bind(null, BT.ECONOMIC)
+    
+    this._hShowEconomic = BA.showBrowserDynamic.bind(null, BT.ECONOMIC)
     this._hShowEurostat = BA.showBrowserDynamic.bind(null, BT.EUROSTAT)
     this._hShowWatch = BA.showBrowserDynamic.bind(null, BT.WATCH_LIST)
 
@@ -163,7 +163,7 @@ class HeaderBar extends Component {
            <ModalSlider
              isShow={isDS}
              className={CL.BROWSER_MENU}
-             INIT_ID="page_0"             
+             INIT_ID="page_0"
              model={MODEL}
              onClose={this._hToggleDS}
            />

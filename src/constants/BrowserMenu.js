@@ -1,6 +1,3 @@
-import {BrowserType} from './Type';
-import { Quandl } from './DialogType';
-import DataQE from './DataQE';
 import ComponentActions from '../flux/actions/ComponentActions';
 import ChartActions from '../flux/actions/ChartActions';
 
@@ -38,65 +35,10 @@ const fnCreateMenu = function(menu=[], data, browserType){
         items: _items
      }
   })
-}
-
-const menuQuandl = [
-  {
-     caption : 'Economy', isInitOpen: true,
-     items : [
-       { id : Quandl.CURRENCY_HISTORY },
-       { id : Quandl.GLOBAL_INDICATOR },
-       { id : Quandl.WORLDBANK_PRICE },
-       { id : Quandl.IMF_CROSSCOUNTRY },
-       { id : Quandl.EU_COMMISSION },
-       { id:  Quandl.OECD }
-     ]
-  },{
-    caption: 'Central Banks',
-    items: [
-      { id : Quandl.BANK_CANADA },
-      { id : Quandl.BANK_SWISS }
-    ]
-  },{
-    caption : 'Inflation & Prices',
-    items : [
-      { id : Quandl.OECD_CPI },
-      { id : Quandl.RATE_INFLATION },
-      { id : Quandl.BIG_MAC }
-    ]
-  },{
-     caption : 'Commodity',
-     items : [
-       { id : Quandl.COMMODITY_TRADE },
-       { id : Quandl.COMMODITY_PRICE },
-       { id : Quandl.WIKI_COMMODITY_PRICE },
-       { id : Quandl.LME },
-       { id : Quandl.PETROLEUM_PRICES },
-       { id : Quandl.JODI_WORLD_GAS },
-       { id : Quandl.JODI_WORLD_OIL },
-       { id:  Quandl.BP },
-       { id : Quandl.ROGERS_INDICES },
-       { id : Quandl.BALTIC_INDICES }
-     ]
-  },{
-    caption : 'Futures',
-    items : [
-      { id : Quandl.CHINA_FINANCE_FUTURE},
-      { id : Quandl.DCE_FUTURE },
-      { id : Quandl.ZCE_FUTURE },
-      { id : Quandl.SHANGHAI_FUTURE },
-      { id : Quandl.LIFFE_FUTURE },
-      { id : Quandl.ICE_FUTURE },
-      { id : Quandl.WIKI_FUTURE }
-    ]
-  }
-];
+};
 
 const BrowserMenu = {
-  //[BrowserType.QUANDL] : fnCreateMenu(menuQuandl, DataQE, BrowserType.QUANDL),
-  [BrowserType.ECONOMIC] : fnCreateMenu(menuQuandl, DataQE, BrowserType.ECONOMIC),
-
-  createMenu : fnCreateMenu
-}
+  createMenu: fnCreateMenu
+};
 
 export default BrowserMenu

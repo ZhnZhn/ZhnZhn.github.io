@@ -16,6 +16,7 @@ const { growthRate } = seriaFn;
 
 const INIT_SMA = "50"
     , INIT_MFI = "14";
+    //, INIT_RT = "1";
 
 const C_GROW = '#90ed7d';
 
@@ -119,6 +120,7 @@ class ModalMenuIndicator extends Component {
         _grSeria.setVisible(true)
       } else {
         const data = this._chart.series[0].data
+            //, rt = this.inputRt.getValue()
             , grData = growthRate(data);
         this._grSeria = ChartFn.addDataTo(
           this._chart, C_GROW, grData, false
@@ -250,7 +252,14 @@ class ModalMenuIndicator extends Component {
 _renderGrowRate = (isGrowRate) => {
   return (
     <div>
-      <span style={STYLE.GR}>Grow Rate</span>
+      <span style={STYLE.GR}>Growth Rate</span>
+      {/*<InputText
+         ref={this._refRt}
+         style={STYLE.N3}
+         initValue={INIT_RT}
+         type="number"
+      />
+      */}
       {
         isGrowRate
           ? <SvgMinus onClick={this._removeGrowRate} />
@@ -264,6 +273,7 @@ _refMfiComp = c => this.inputMfiComp = c
 _refSmaPlus = c => this.inputSmaPlus = c
 _refPlusSma = c => this.inputPlusSma = c
 _refSmaComp = c => this.inputSmaComp = c
+//_refRt = c => this.inputRt = c
 
  render(){
     const { isShow, isMfi, onClose } = this.props

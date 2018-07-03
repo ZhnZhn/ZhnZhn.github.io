@@ -62,6 +62,7 @@ var growthRate = _seriaFn2.default.growthRate;
 
 var INIT_SMA = "50",
     INIT_MFI = "14";
+//, INIT_RT = "1";
 
 var C_GROW = '#90ed7d';
 
@@ -142,7 +143,9 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         if (_isSeriaInst(_grSeria)) {
           _grSeria.setVisible(true);
         } else {
-          var data = _this._chart.series[0].data,
+          var data = _this._chart.series[0].data
+          //, rt = this.inputRt.getValue()
+          ,
               grData = growthRate(data);
           _this._grSeria = _ChartFn2.default.addDataTo(_this._chart, C_GROW, grData, false);
         }
@@ -301,7 +304,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         _react2.default.createElement(
           'span',
           { style: STYLE.GR },
-          'Grow Rate'
+          'Growth Rate'
         ),
         isGrowRate ? _react2.default.createElement(_SvgMinus2.default, { onClick: _this._removeGrowRate }) : _react2.default.createElement(_SvgPlus2.default, { onClick: _this._addGrowRate })
       );
@@ -360,6 +363,9 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
 
   (0, _createClass3.default)(ModalMenuIndicator, [{
     key: 'render',
+
+    //_refRt = c => this.inputRt = c
+
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,

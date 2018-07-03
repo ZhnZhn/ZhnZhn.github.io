@@ -74,7 +74,7 @@ var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '02-07-2018';
+var PREV_BUILD = '03-07-2018';
 
 var _checkBuild = function _checkBuild() {
   if (window.fetch) {
@@ -152,11 +152,8 @@ var AppErc = function (_Component) {
             { className: 'component-container' },
             _react2.default.createElement(_BrowserContainer2.default, {
               store: _ChartStore2.default,
-              showBrowserAction: _BrowserActions.BrowserActionTypes.SHOW_BROWSER,
               initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
-              updateBrowserAction: _BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU
-              //updateWatchAction={BAT.UPDATE_WATCH_BROWSER}
-              , showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+              showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
               onCloseDialog: _ComponentActions2.default.closeDialog
             }),
             _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),

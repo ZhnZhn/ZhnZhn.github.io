@@ -3,24 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _DialogType = require('./DialogType');
-
-var addCharts = function addCharts(obj, dialogType, prefix) {
-  for (var prop in dialogType) {
-    obj[prefix + prop] = dialogType[prop];
-  }
+var _crChartType = function _crChartType() {
+  return {
+    WATCH_LIST: 'WL_WATCH_LIST'
+  };
 };
 
-var createTypeObject = function createTypeObject() {
-  var obj = {};
-  addCharts(obj, _DialogType.Quandl, 'QUANDL_');
-  obj['WATCH_LIST'] = 'WL_WATCH_LIST';
-
-  return obj;
-};
-
-var ChartType = createTypeObject();
+var ChartType = _crChartType();
 
 exports.default = ChartType;
 //# sourceMappingURL=ChartType.js.map
