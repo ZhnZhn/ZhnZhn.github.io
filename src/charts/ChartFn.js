@@ -24,7 +24,7 @@ const C = {
   C2_SECOND_Y_AXIS: '#f7a35c',
   SERIA_LABEL_CHARS : 12,
   SERIA_LABELS_IN_ROW : 3,
-  SERIA_LABEL_X_DELTA : 145,
+  SERIA_LABEL_X_DELTA : 120,
   SERIA_LABEL_Y_DELTA : 95,
   SERIA_LABEL_WIDTH : 125,
   SERIA_LABEL_HEIGHT : 20
@@ -81,25 +81,28 @@ const _addSeries = ({ chart, series, label, hasSecondYAxis }) => {
   return _color;
 }
 
+const _calcXyForLabel = (options) => {
+  const seriesCount = options.zhSeries.count
+  , row = Math.floor(seriesCount/C.SERIA_LABELS_IN_ROW)
+  , x = C.SERIA_LABEL_X_DELTA
+        + C.SERIA_LABEL_WIDTH*seriesCount
+        - row*(C.SERIA_LABEL_WIDTH*C.SERIA_LABELS_IN_ROW)
+  , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
+  return { x, y };
+}
 const _renderSeriesLabel = ({chart, options, series, label='', color }) => {
   const seriesText = (label.length>C.SERIA_LABEL_CHARS)
             ? label.substring(0, C.SERIA_LABEL_CHARS)
             : label
-      , seriesCount = options.zhSeries.count
-      , row = Math.floor(seriesCount/C.SERIA_LABELS_IN_ROW)
-      , x = C.SERIA_LABEL_X_DELTA
-            + C.SERIA_LABEL_WIDTH*seriesCount
-            - row*(C.SERIA_LABEL_WIDTH*C.SERIA_LABELS_IN_ROW)
-      , y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT*row;
+      , { x, y } = _calcXyForLabel(options);
 
-  const textEl = chart.renderer.text(seriesText, x, y)
-                  .css({
-                    color: (color) ? color : options.colors[series._colorIndex],
-                    'font-size': '16px'
-                  })
-                  .add();
-  return textEl;
-}
+  return chart.renderer.text(seriesText, x, y)
+    .css({
+      color: color || options.colors[series._colorIndex],
+      'font-size': '16px'
+    })
+    .add();
+};
 
 const _updateYAxisMin = ({ hasSecondYAxis, series, options={}, chart }) => {
   const minY = series.minY
@@ -260,7 +263,7 @@ const ChartFn = {
   },
 
   toNumberFormat: formatNumber,
-  toNumberFormatAll: formatAllNumber,  
+  toNumberFormatAll: formatAllNumber,
 
   crTpId: () => {
     return (

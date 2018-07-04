@@ -26,6 +26,7 @@ var T = {
 var V = {
   A: 'AREA',
   A_Y: 'AREA_YEARLY',
+  S: 'SPLINE',
   M: 'MAP',
   C: 'COLUMN',
   C_C: 'COLUMN_CLUSTER',
@@ -44,7 +45,7 @@ var C = {
 };
 
 var _crDF = function _crDF() {
-  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
+  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Spline', value: V.S }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
 };
 
 var _crDF3 = function _crDF3() {

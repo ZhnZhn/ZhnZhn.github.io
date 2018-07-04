@@ -1,1 +1,44 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/toArea.js"],"names":["_crTimeIndexAndValue","json","dimension","value","time","category","index","timeIndex","toArea","createConfig","option","isNotZoomToMinMax","createData","data","max","min","config","fBaseAreaConfig","setDataAndInfo","setLineExtrems","createSeria","valueText","itemCaption","seria","fSeries","Object","assign","zhSeriaId","key","zhValueText","minY","findMinY"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,uBAAuB,SAAvBA,oBAAuB,OAAQ;AAAA,wBACAC,IADA,CAC3BC,SAD2B;AAAA,MAC3BA,SAD2B,mCACjB,EADiB;AAAA,oBACAD,IADA,CACbE,KADa;AAAA,MACbA,KADa,+BACP,EADO;AAAA,wBAEfD,SAFe,CAE3BE,IAF2B;AAAA,MAE3BA,IAF2B,mCAEtB,EAFsB;AAAA,uBAGXA,IAHW,CAG3BC,QAH2B;AAAA,MAG3BA,QAH2B,kCAGlB,EAHkB;AAAA,wBAILA,QAJK,CAI3BC,KAJ2B;AAAA,MAIrBC,SAJqB,mCAIX,CAJW;;AAKnC,SAAO,EAAEA,oBAAF,EAAaJ,YAAb,EAAP;AACD,CAND;;AAQA,IAAMK,SAAS;AACZC,gBAAc,sBAACR,IAAD,EAAOS,MAAP,EAAkB;AAAA,gCACDV,qBAAqBC,IAArB,CADC;AAAA,QACtBM,SADsB,yBACtBA,SADsB;AAAA,QACXJ,KADW,yBACXA,KADW;AAAA,QAEtBQ,iBAFsB,GAEAD,MAFA,CAEtBC,iBAFsB;AAAA,gCAGH,qBAAWC,UAAX,CAAsBL,SAAtB,EAAiCJ,KAAjC,CAHG;AAAA,QAGtBU,IAHsB,yBAGtBA,IAHsB;AAAA,QAGhBC,GAHgB,yBAGhBA,GAHgB;AAAA,QAGXC,GAHW,yBAGXA,GAHW;AAAA,QAIxBC,MAJwB,GAIf,sBAAYC,eAAZ,EAJe;;AAM7B,yBAAWC,cAAX,CAA0B,EAAEF,cAAF,EAAUH,UAAV,EAAgBZ,UAAhB,EAAsBS,cAAtB,EAA1B;AACA,yBAAWS,cAAX,CAA0B,EAAEH,cAAF,EAAUF,QAAV,EAAeC,QAAf,EAAoBJ,oCAApB,EAA1B;;AAEA,WAAOK,MAAP;AACF,GAXW;;AAaZI,eAAa,qBAACnB,IAAD,EAAOS,MAAP,EAAkB;AAAA,gCACAV,qBAAqBC,IAArB,CADA;AAAA,QACrBM,SADqB,yBACrBA,SADqB;AAAA,QACVJ,KADU,yBACVA,KADU;AAAA,QAEvBkB,SAFuB,GAEXX,OAAOY,WAFI;AAAA,QAGvBC,KAHuB,GAGf,sBAAYC,OAAZ,EAHe;AAAA,iCAIZ,qBAAWZ,UAAX,CAAsBL,SAAtB,EAAiCJ,KAAjC,CAJY;AAAA,QAIrBU,IAJqB,0BAIrBA,IAJqB;;AAM7B,WAAOY,OAAOC,MAAP,CAAcH,KAAd,EAAqB;AAC1BI,iBAAWjB,OAAOkB,GADQ;AAE1BC,mBAAaR,SAFa;AAG1BR,YAAMA,IAHoB;AAI1BiB,YAAM,qBAAWC,QAAX,CAAoBlB,IAApB;AAJoB,KAArB,CAAP;AAMD;AAzBW,CAAf;;kBA4BeL,M","file":"toArea.js","sourcesContent":["import ChartConfig from '../../charts/ChartConfig';\r\n\r\nimport EuroStatFn from './EuroStatFn';\r\n\r\nconst _crTimeIndexAndValue = json => {\r\n  const { dimension={}, value=[] } = json\r\n      , { time={} } = dimension\r\n      , { category={} } = time\r\n      , { index:timeIndex=0 } = category;\r\n  return { timeIndex, value };\r\n}\r\n\r\nconst toArea = {\r\n   createConfig: (json, option) => {\r\n     const { timeIndex, value } = _crTimeIndexAndValue(json)\r\n         , { isNotZoomToMinMax } = option\r\n         , { data, max, min } = EuroStatFn.createData(timeIndex, value)\r\n         , config = ChartConfig.fBaseAreaConfig();\r\n\r\n      EuroStatFn.setDataAndInfo({ config, data, json, option });\r\n      EuroStatFn.setLineExtrems({ config, max, min, isNotZoomToMinMax });\r\n\r\n      return config;\r\n   },\r\n\r\n   createSeria: (json, option) => {\r\n     const { timeIndex, value } = _crTimeIndexAndValue(json)\r\n         , valueText = option.itemCaption\r\n         , seria = ChartConfig.fSeries()\r\n         , { data } = EuroStatFn.createData(timeIndex, value);\r\n\r\n     return Object.assign(seria, {\r\n       zhSeriaId: option.key,\r\n       zhValueText: valueText,\r\n       data: data,\r\n       minY: EuroStatFn.findMinY(data)\r\n     });\r\n   }\r\n};\r\n\r\nexport default toArea\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/toArea.js"
+ ],
+ "file": "../../../src/adapters/eurostat/toArea.js",
+ "names": [
+  "_crTimeIndexAndValue",
+  "json",
+  "dimension",
+  "value",
+  "time",
+  "category",
+  "index",
+  "timeIndex",
+  "toArea",
+  "createConfig",
+  "option",
+  "isNotZoomToMinMax",
+  "seriaType",
+  "createData",
+  "data",
+  "max",
+  "min",
+  "config",
+  "fBaseAreaConfig",
+  "toLowerCase",
+  "setDataAndInfo",
+  "setLineExtrems",
+  "createSeria",
+  "valueText",
+  "itemCaption",
+  "seria",
+  "fSeries",
+  "Object",
+  "assign",
+  "zhSeriaId",
+  "key",
+  "zhValueText",
+  "minY",
+  "findMinY"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,uBAAuB,SAAvBA,oBAAuB,OAAQ;AAAA,wBACAC,IADA,CAC3BC,SAD2B;AAAA,MAC3BA,SAD2B,mCACjB,EADiB;AAAA,oBACAD,IADA,CACbE,KADa;AAAA,MACbA,KADa,+BACP,EADO;AAAA,wBAEfD,SAFe,CAE3BE,IAF2B;AAAA,MAE3BA,IAF2B,mCAEtB,EAFsB;AAAA,uBAGXA,IAHW,CAG3BC,QAH2B;AAAA,MAG3BA,QAH2B,kCAGlB,EAHkB;AAAA,wBAILA,QAJK,CAI3BC,KAJ2B;AAAA,MAIrBC,SAJqB,mCAIX,CAJW;;AAKnC,SAAO,EAAEA,oBAAF,EAAaJ,YAAb,EAAP;AACD,CAND;;AAQA,IAAMK,SAAS;AACZC,gBAAc,sBAACR,IAAD,EAAOS,MAAP,EAAkB;AAAA,gCACDV,qBAAqBC,IAArB,CADC;AAAA,QACtBM,SADsB,yBACtBA,SADsB;AAAA,QACXJ,KADW,yBACXA,KADW;AAAA,QAEtBQ,iBAFsB,GAEWD,MAFX,CAEtBC,iBAFsB;AAAA,QAEHC,SAFG,GAEWF,MAFX,CAEHE,SAFG;AAAA,gCAGH,qBAAWC,UAAX,CAAsBN,SAAtB,EAAiCJ,KAAjC,CAHG;AAAA,QAGtBW,IAHsB,yBAGtBA,IAHsB;AAAA,QAGhBC,GAHgB,yBAGhBA,GAHgB;AAAA,QAGXC,GAHW,yBAGXA,GAHW;AAAA,QAIxBC,MAJwB,GAIf,sBAAYC,eAAZ,CACPN,UAAUO,WAAV,EADO,CAJe;;AAQ7B,yBAAWC,cAAX,CAA0B,EAAEH,cAAF,EAAUH,UAAV,EAAgBb,UAAhB,EAAsBS,cAAtB,EAA1B;AACA,yBAAWW,cAAX,CAA0B,EAAEJ,cAAF,EAAUF,QAAV,EAAeC,QAAf,EAAoBL,oCAApB,EAA1B;;AAEA,WAAOM,MAAP;AACF,GAbW;;AAeZK,eAAa,qBAACrB,IAAD,EAAOS,MAAP,EAAkB;AAAA,gCACAV,qBAAqBC,IAArB,CADA;AAAA,QACrBM,SADqB,yBACrBA,SADqB;AAAA,QACVJ,KADU,yBACVA,KADU;AAAA,QAEvBoB,SAFuB,GAEXb,OAAOc,WAFI;AAAA,QAGvBC,KAHuB,GAGf,sBAAYC,OAAZ,EAHe;AAAA,iCAIZ,qBAAWb,UAAX,CAAsBN,SAAtB,EAAiCJ,KAAjC,CAJY;AAAA,QAIrBW,IAJqB,0BAIrBA,IAJqB;;AAM7B,WAAOa,OAAOC,MAAP,CAAcH,KAAd,EAAqB;AAC1BI,iBAAWnB,OAAOoB,GADQ;AAE1BC,mBAAaR,SAFa;AAG1BT,YAAMA,IAHoB;AAI1BkB,YAAM,qBAAWC,QAAX,CAAoBnB,IAApB;AAJoB,KAArB,CAAP;AAMD;AA3BW,CAAf;;kBA8BeN,M"
+}

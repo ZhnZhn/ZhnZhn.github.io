@@ -35,11 +35,12 @@ var toArea = {
         timeIndex = _crTimeIndexAndValue2.timeIndex,
         value = _crTimeIndexAndValue2.value,
         isNotZoomToMinMax = option.isNotZoomToMinMax,
+        seriaType = option.seriaType,
         _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
         data = _EuroStatFn$createDat.data,
         max = _EuroStatFn$createDat.max,
         min = _EuroStatFn$createDat.min,
-        config = _ChartConfig2.default.fBaseAreaConfig();
+        config = _ChartConfig2.default.fBaseAreaConfig(seriaType.toLowerCase());
 
     _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
     _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min, isNotZoomToMinMax: isNotZoomToMinMax });

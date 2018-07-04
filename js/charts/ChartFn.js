@@ -63,7 +63,7 @@ var C = {
   C2_SECOND_Y_AXIS: '#f7a35c',
   SERIA_LABEL_CHARS: 12,
   SERIA_LABELS_IN_ROW: 3,
-  SERIA_LABEL_X_DELTA: 145,
+  SERIA_LABEL_X_DELTA: 120,
   SERIA_LABEL_Y_DELTA: 95,
   SERIA_LABEL_WIDTH: 125,
   SERIA_LABEL_HEIGHT: 20
@@ -128,6 +128,13 @@ var _addSeries = function _addSeries(_ref) {
   return _color;
 };
 
+var _calcXyForLabel = function _calcXyForLabel(options) {
+  var seriesCount = options.zhSeries.count,
+      row = Math.floor(seriesCount / C.SERIA_LABELS_IN_ROW),
+      x = C.SERIA_LABEL_X_DELTA + C.SERIA_LABEL_WIDTH * seriesCount - row * (C.SERIA_LABEL_WIDTH * C.SERIA_LABELS_IN_ROW),
+      y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT * row;
+  return { x: x, y: y };
+};
 var _renderSeriesLabel = function _renderSeriesLabel(_ref2) {
   var chart = _ref2.chart,
       options = _ref2.options,
@@ -135,18 +142,16 @@ var _renderSeriesLabel = function _renderSeriesLabel(_ref2) {
       _ref2$label = _ref2.label,
       label = _ref2$label === undefined ? '' : _ref2$label,
       color = _ref2.color;
-
   var seriesText = label.length > C.SERIA_LABEL_CHARS ? label.substring(0, C.SERIA_LABEL_CHARS) : label,
-      seriesCount = options.zhSeries.count,
-      row = Math.floor(seriesCount / C.SERIA_LABELS_IN_ROW),
-      x = C.SERIA_LABEL_X_DELTA + C.SERIA_LABEL_WIDTH * seriesCount - row * (C.SERIA_LABEL_WIDTH * C.SERIA_LABELS_IN_ROW),
-      y = C.SERIA_LABEL_Y_DELTA + C.SERIA_LABEL_HEIGHT * row;
+      _calcXyForLabel2 = _calcXyForLabel(options),
+      x = _calcXyForLabel2.x,
+      y = _calcXyForLabel2.y;
 
-  var textEl = chart.renderer.text(seriesText, x, y).css({
-    color: color ? color : options.colors[series._colorIndex],
+
+  return chart.renderer.text(seriesText, x, y).css({
+    color: color || options.colors[series._colorIndex],
     'font-size': '16px'
   }).add();
-  return textEl;
 };
 
 var _updateYAxisMin = function _updateYAxisMin(_ref3) {

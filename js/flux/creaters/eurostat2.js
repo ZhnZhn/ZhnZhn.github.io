@@ -19,7 +19,8 @@ var createLoadOptions = function createLoadOptions() {
 
   var loadId = props.loadId,
       dataSource = props.dataSource,
-      dfProps = props.dfProps,
+      _props$dfProps = props.dfProps,
+      dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
       one = options.one,
       _options$two = options.two,
       two = _options$two === undefined ? {} : _options$two,

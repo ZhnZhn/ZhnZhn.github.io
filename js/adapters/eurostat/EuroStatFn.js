@@ -69,6 +69,10 @@ var _isDataDes = function _isDataDes(d) {
   return d.length > 0 && d[0][0] > d[d.length - 1][0];
 };
 
+var _isLineSeria = function _isLineSeria(type) {
+  return type && (type === 'AREA' || type === 'SPLINE');
+};
+
 var EuroStatFn = {
   createData: function createData(timeIndex, value) {
     var _this = this;
@@ -114,15 +118,14 @@ var EuroStatFn = {
         option = _ref.option;
     var title = option.title,
         subtitle = option.subtitle,
-        _option$seriaType = option.seriaType,
-        seriaType = _option$seriaType === undefined ? 'AREA' : _option$seriaType;
+        seriaType = option.seriaType;
 
     _Chart2.default.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(json, option);
     config.info = this.createDatasetInfo(json);
 
-    if (seriaType && seriaType.toUpperCase() === 'AREA') {
+    if (_isLineSeria(seriaType)) {
       config.valueMoving = _AdapterFn2.default.valueMoving(data);
     }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import PropTypes from 'prop-types'
 
 import C from '../styles/Color'
 
@@ -53,6 +54,21 @@ const PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
 const PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
 class OpenClose extends Component {
+   /*
+   static propTypes = {
+     isClose: PropTypes.bool,
+
+     rootStyle: PropTypes.object,
+     ocStyle: PropTypes.object,
+     caption: PropTypes.string,
+     captionStyle: PropTypes.object,
+     openColor: PropTypes.string,
+     closeColor: PropTypes.string,
+     CompAfter: PropTypes.node,
+     childStyle: PropTypes.object
+   }
+   */
+
    static defaultProps = {
      openColor: DF.OPEN_COLOR,
      closeColor: DF.CLOSE_COLOR
@@ -77,7 +93,7 @@ class OpenClose extends Component {
 
   render(){
     const {
-            rootStyle,
+            rootStyle, ocStyle,
             caption, captionStyle,
             openColor, closeColor,
             CompAfter, childStyle, children
@@ -102,6 +118,7 @@ class OpenClose extends Component {
         <div className={CL.NOT_SELECTED}>
           <div
             className={CL.ROOT}
+            style={ocStyle}
             onClick={this._handleClick}
             tabIndex="0"
             role="menuitem"

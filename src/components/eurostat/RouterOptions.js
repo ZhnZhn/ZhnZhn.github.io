@@ -15,6 +15,7 @@ const T = {
 const V = {
   A: 'AREA',
   A_Y: 'AREA_YEARLY',
+  S: 'SPLINE',
   M: 'MAP',
   C: 'COLUMN',
   C_C: 'COLUMN_CLUSTER' ,
@@ -35,6 +36,7 @@ const C = {
 const _crDF = () => {
   return [
     { caption: 'Default: Area', value: V.A },
+    { caption: 'Spline', value: V.S },
     { caption: 'Bar: All Countries', value: V.B },
     { caption: 'Column: All Countries', value: V.C },
     { caption: 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },

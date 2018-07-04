@@ -189,8 +189,8 @@ ChartConfig.fnNumberFormat = function (value) {
   return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
 };
 
-ChartConfig.fBaseAreaConfig = function (option) {
-  var config = Object.assign(_Chart2.default.fBaseConfig(), {
+ChartConfig.fBaseAreaConfig = function (seriaType) {
+  var config = Object.assign(_Chart2.default.fBaseConfig(seriaType), {
     chart: {
       zoomType: 'xy',
       resetZoomButton: _Chart2.default.fResetZoomButton({ position: { x: -10 } }),
@@ -199,7 +199,7 @@ ChartConfig.fBaseAreaConfig = function (option) {
     },
     zhDetailCharts: [],
     zhToggleSeria: _ChartFn2.default.toggleSeria
-  }, option);
+  });
 
   config.xAxis = Object.assign(_Chart2.default.fXAxisOpposite(config.xAxis), {
     events: {

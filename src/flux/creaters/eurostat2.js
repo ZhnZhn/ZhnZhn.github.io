@@ -5,7 +5,7 @@ const DF_CAPTION = 'EU'
 const createLoadOptions = (props={}, options={}) => {
   const {
           loadId, dataSource,
-          dfProps
+          dfProps={}
         } = props
       , {
           one, two={}, chartType={},

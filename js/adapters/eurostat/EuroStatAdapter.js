@@ -26,8 +26,10 @@ var _toMap2 = _interopRequireDefault(_toMap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var DF_TYPE = 'AREA';
 var _rToConfig = {
   AREA: _toArea2.default.createConfig,
+  SPLINE: _toArea2.default.createConfig,
   AREA_YEARLY: _toAreaYearly2.default.createConfig,
   MAP: _toMap2.default.createConfig,
   COLUMN: _toColumn2.default.createConfig,
@@ -36,14 +38,23 @@ var _rToConfig = {
 
 var _rToSeria = {
   AREA: _toArea2.default.createSeria,
+  SPLINE: _toArea2.default.createSeria,
   COLUMN: _toColumn2.default.createSeria,
   BAR: _toColumn2.default.createSeria
 };
 
+var _checkSeriaType = function _checkSeriaType(router, option) {
+  var dfType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DF_TYPE;
+
+  if (!router[option.seriaType]) {
+    option.seriaType = dfType;
+  }
+};
+
 var EuroStatAdapter = {
   toConfig: function toConfig(json, option) {
-    var _option$seriaType = option.seriaType,
-        seriaType = _option$seriaType === undefined ? 'AREA' : _option$seriaType,
+    _checkSeriaType(_rToConfig, option);
+    var seriaType = option.seriaType,
         zhCompType = option.zhCompType,
         fnToConfig = _rToConfig[seriaType],
         config = fnToConfig ? fnToConfig(json, option) : {};
@@ -53,11 +64,10 @@ var EuroStatAdapter = {
     return { config: config };
   },
   toSeries: function toSeries(json, option, chart) {
-    var _option$seriaType2 = option.seriaType,
-        seriaType = _option$seriaType2 === undefined ? 'AREA' : _option$seriaType2,
+    _checkSeriaType(_rToConfig, option);
+    var seriaType = option.seriaType,
         fnToSeria = _rToSeria[seriaType],
         seria = fnToSeria ? fnToSeria(json, option, chart) : undefined;
-
 
     return seria;
   }

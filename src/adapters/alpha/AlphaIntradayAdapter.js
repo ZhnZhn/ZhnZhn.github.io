@@ -99,13 +99,12 @@ const _crSeriaData = (json, option, config, chartId) => {
     config, _data, _dataHigh, _dataLow, _dataOpen, chartId
   )
   ChartConfig.setMinMax(config, _minClose, _maxClose)
-  
+
   return {
     data: _data,
     dVolume: _dataVolume,
     dColumn: _dataVolumeColumn
   };
-
 }
 
 const _toDataDaily = (data) => {
@@ -139,7 +138,6 @@ const AlphaIntradayAdapter = {
         dVolume, dColumn,
         tooltipColumn: Chart.fTooltip(Tooltip.fnVolumePointFormatterT)
       })
-
       .toConfig();
 
     return {

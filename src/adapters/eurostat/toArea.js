@@ -13,9 +13,11 @@ const _crTimeIndexAndValue = json => {
 const toArea = {
    createConfig: (json, option) => {
      const { timeIndex, value } = _crTimeIndexAndValue(json)
-         , { isNotZoomToMinMax } = option
+         , { isNotZoomToMinMax, seriaType } = option
          , { data, max, min } = EuroStatFn.createData(timeIndex, value)
-         , config = ChartConfig.fBaseAreaConfig();
+         , config = ChartConfig.fBaseAreaConfig(
+             seriaType.toLowerCase()
+           );
 
       EuroStatFn.setDataAndInfo({ config, data, json, option });
       EuroStatFn.setLineExtrems({ config, max, min, isNotZoomToMinMax });

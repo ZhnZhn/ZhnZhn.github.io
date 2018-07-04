@@ -181,7 +181,7 @@ const Chart = {
    }
  },
 
-fBaseConfig(){
+fBaseConfig(seriaType='area'){
   return {
     zhSeries : {
       count : 0
@@ -215,7 +215,7 @@ fBaseConfig(){
     series: [{
       zhValueText : 'Value',
       turboThreshold : 20000,
-      type: 'area',
+      type: seriaType,
       tooltip : Chart.fTooltip(Tooltip.fnBasePointFormatter),
       lineWidth : 1,
       states: {
@@ -291,7 +291,7 @@ fCrosshair(){
     }, option)
   },
 
-  fSecondYAxis(name, color){    
+  fSecondYAxis(name, color){
     return {
       //crosshair : Chart.fCrosshair(),
       id: name,

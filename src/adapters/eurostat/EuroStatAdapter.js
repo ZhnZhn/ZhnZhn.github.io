@@ -4,24 +4,33 @@ import toColumn from './toColumn';
 import toBar from './toBar';
 import toMap from './toMap';
 
-
+const DF_TYPE = 'AREA';
 const _rToConfig = {
-  AREA : toArea.createConfig,
+  AREA: toArea.createConfig,
+  SPLINE: toArea.createConfig,
   AREA_YEARLY: toAreaYearly.createConfig,
-  MAP : toMap.createConfig,
-  COLUMN : toColumn.createConfig,
-  BAR : toBar.createConfig
-}
+  MAP: toMap.createConfig,
+  COLUMN: toColumn.createConfig,
+  BAR: toBar.createConfig
+};
 
 const _rToSeria = {
-  AREA : toArea.createSeria,
-  COLUMN : toColumn.createSeria,
-  BAR : toColumn.createSeria
-}
+  AREA: toArea.createSeria,
+  SPLINE: toArea.createSeria,
+  COLUMN: toColumn.createSeria,
+  BAR: toColumn.createSeria
+};
+
+const _checkSeriaType = (router, option, dfType=DF_TYPE) => {
+  if (!router[option.seriaType]) {
+    option.seriaType = dfType
+  }
+};
 
 const EuroStatAdapter = {
   toConfig(json, option){
-    const { seriaType='AREA', zhCompType } = option
+    _checkSeriaType(_rToConfig, option)
+    const { seriaType, zhCompType } = option
          , fnToConfig = _rToConfig[seriaType]
          , config = fnToConfig
              ? fnToConfig(json, option)
@@ -32,12 +41,12 @@ const EuroStatAdapter = {
  },
 
   toSeries(json, option, chart){
-    const { seriaType='AREA' } = option
+    _checkSeriaType(_rToConfig, option)
+    const { seriaType } = option
          , fnToSeria = _rToSeria[seriaType]
          , seria = fnToSeria
              ? fnToSeria(json, option, chart)
              : undefined ;
-
     return seria;
   }
 }

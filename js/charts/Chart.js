@@ -203,6 +203,8 @@ var Chart = {
     };
   },
   fBaseConfig: function fBaseConfig() {
+    var seriaType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'area';
+
     return {
       zhSeries: {
         count: 0
@@ -236,7 +238,7 @@ var Chart = {
       series: [{
         zhValueText: 'Value',
         turboThreshold: 20000,
-        type: 'area',
+        type: seriaType,
         tooltip: Chart.fTooltip(_Tooltip2.default.fnBasePointFormatter),
         lineWidth: 1,
         states: {

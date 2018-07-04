@@ -25,6 +25,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp;
+//import PropTypes from 'prop-types'
 
 var _react = require('react');
 
@@ -115,12 +116,26 @@ var OpenClose = (_temp = _class = function (_Component) {
     };
     return _this;
   }
+  /*
+  static propTypes = {
+    isClose: PropTypes.bool,
+      rootStyle: PropTypes.object,
+    ocStyle: PropTypes.object,
+    caption: PropTypes.string,
+    captionStyle: PropTypes.object,
+    openColor: PropTypes.string,
+    closeColor: PropTypes.string,
+    CompAfter: PropTypes.node,
+    childStyle: PropTypes.object
+  }
+  */
 
   (0, _createClass3.default)(OpenClose, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
           rootStyle = _props.rootStyle,
+          ocStyle = _props.ocStyle,
           caption = _props.caption,
           captionStyle = _props.captionStyle,
           openColor = _props.openColor,
@@ -156,6 +171,7 @@ var OpenClose = (_temp = _class = function (_Component) {
             'div',
             {
               className: CL.ROOT,
+              style: ocStyle,
               onClick: this._handleClick,
               tabIndex: '0',
               role: 'menuitem',

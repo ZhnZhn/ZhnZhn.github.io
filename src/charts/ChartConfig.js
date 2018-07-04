@@ -155,8 +155,8 @@ ChartConfig.fnNumberFormat = function(value){
   return Highcharts.numberFormat(value, decimal, '.', ' ');
 }
 
-ChartConfig.fBaseAreaConfig = function(option) {
-  const config = Object.assign( Chart.fBaseConfig(), {
+ChartConfig.fBaseAreaConfig = function(seriaType) {
+  const config = Object.assign( Chart.fBaseConfig(seriaType), {
     chart: {
       zoomType: 'xy',
       resetZoomButton: Chart.fResetZoomButton({ position: {x: -10} }),
@@ -165,7 +165,7 @@ ChartConfig.fBaseAreaConfig = function(option) {
     },
     zhDetailCharts: [],
     zhToggleSeria: ChartFn.toggleSeria
-  }, option);
+  });
 
   config.xAxis = Object.assign( Chart.fXAxisOpposite(config.xAxis), {
     events: {
@@ -190,7 +190,7 @@ ChartConfig.fBaseAreaConfig = function(option) {
     Chart.fPlotLine(COLOR.HIGH, 'max'),
     Chart.fPlotLine(COLOR.LOW, 'min')
   ]
-  
+
   return config;
 };
 

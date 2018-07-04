@@ -46,7 +46,9 @@ const _colorSeria = (config, categories, codes, color) => {
   })
 }
 
-const _isDataDes = (d) => d.length>0 && d[0][0]>d[d.length-1][0]
+const _isDataDes = (d) => d.length>0 && d[0][0]>d[d.length-1][0];
+
+const _isLineSeria = type => type && (type === 'AREA' || type === 'SPLINE');
 
 const EuroStatFn = {
 
@@ -92,13 +94,13 @@ const EuroStatFn = {
   },
 
   setDataAndInfo({ config, data, json, option }){
-    const { title, subtitle, seriaType='AREA' } = option;
+    const { title, subtitle, seriaType } = option;
     Chart.setDefaultTitle(config, title, subtitle);
 
     config.zhConfig = this.createZhConfig(json, option);
     config.info = this.createDatasetInfo(json);
 
-    if (seriaType && seriaType.toUpperCase() === 'AREA'){
+    if (_isLineSeria(seriaType)){
       config.valueMoving = AdapterFn.valueMoving(data)
     }
 
