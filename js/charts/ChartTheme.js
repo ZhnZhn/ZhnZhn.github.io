@@ -118,16 +118,13 @@ var ChartTheme = {
       x: -10,
       y: -20,
       theme: {
-        //fill : COLOR.BG_TITLE,
         fill: 'transparent',
         states: {
           hover: {
-            //fill : COLOR.BG_TITLE,
             'stroke-width': 2,
             stroke: _Color2.default.HOVER
           },
           select: {
-            //fill : COLOR.BG_TITLE,
             'stroke-width': 3,
             stroke: _Color2.default.HOVER
           }

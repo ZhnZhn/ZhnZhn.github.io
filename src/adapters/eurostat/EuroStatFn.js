@@ -8,9 +8,9 @@ import AdapterFn from '../AdapterFn';
 const DF_SLICE_TITLE = 'EU';
 
 const COLOR = {
-  EU: "#0088FF",
-  EA: "#FF5800",
-  EU_MEMBER: "#7CB5EC"
+  EU: "#0088ff",
+  EA: "#ff5800",
+  NOT_EU_MEMBER: '#8085e9',
 };
 const C = {
   EU_CODES: ["EU", "EU27", "EU28"],
@@ -34,17 +34,23 @@ const _crDescr = (extension) => {
    return (`${_d} ${_id} ${_sub}`).trim();
 };
 
-const _is = (value) => (element) => element === value;
-
-const _colorSeria = (config, categories, codes, color) => {
+const _colorSeriaIn = (config, codes, color) => {
   const data = config.series[0].data;
-  codes.forEach(code => {
-    const _index = categories.findIndex(_is(code))
-    if (_index !== -1) {
-      data[_index].color = color
-    }
+  data.forEach(p => {
+     if (codes.indexOf(p.c) !== -1 && !p.color) {
+       p.color = color
+     }
   })
-}
+};
+const _colorSeriaNotIn = (config, codes, color) => {
+  const data = config.series[0].data;
+  data.forEach(p => {
+     if (codes.indexOf(p.c) === -1 && !p.color) {
+       p.color = color
+     }
+  })
+};
+
 
 const _isDataDes = (d) => d.length>0 && d[0][0]>d[d.length-1][0];
 
@@ -127,10 +133,10 @@ const EuroStatFn = {
     config.zhConfig.itemTime = time
   },
 
-  colorEU({ config, categories }){
-    _colorSeria(config, categories, C.EU_CODES, COLOR.EU)
-    _colorSeria(config, categories, C.EA_CODES, COLOR.EA)
-    _colorSeria(config, categories, C.EU_MEMBER, COLOR.EU_MEMBER)
+  colorSeries(config){
+    _colorSeriaIn(config, C.EU_CODES, COLOR.EU)
+    _colorSeriaIn(config, C.EA_CODES, COLOR.EA)
+    _colorSeriaNotIn(config, C.EU_MEMBER, COLOR.NOT_EU_MEMBER)
   },
 
   setTooltip({ config, tooltip }) {

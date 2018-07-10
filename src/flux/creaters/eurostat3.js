@@ -3,13 +3,13 @@ const createLoadOptions = (props={}, options={}) => {
   const { loadId, dataSource, dfProps={} } = props
       , {
           one={}, group={}, metric={},
-          chartType={},
+          chartType={}, seriaColor,
           date={}, dateDefault=''
         } = options
       , { caption:oneC='', value:oneV } = one
       , { caption:groupC='', value:groupV } = group
       , { caption:metricC='', value:metricV } = metric
-      , { value:seriaType='AREA' } = chartType
+      , { value:seriaType } = chartType
       , _time = date.value || dateDefault;
 
   if (!dfProps.dfParams) {
@@ -26,6 +26,7 @@ const createLoadOptions = (props={}, options={}) => {
     group : groupV,
     metric : metricV,
     seriaType : seriaType,
+    seriaColor : seriaColor,
     items: [ one, group, metric ],
     time: _time,
     loadId : loadId,

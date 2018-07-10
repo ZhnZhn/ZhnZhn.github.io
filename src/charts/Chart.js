@@ -181,7 +181,10 @@ const Chart = {
    }
  },
 
-fBaseConfig(seriaType='area'){
+fBaseConfig({
+  seriaType='area',
+  seriaColor
+}={}){
   return {
     zhSeries : {
       count : 0
@@ -216,6 +219,7 @@ fBaseConfig(seriaType='area'){
       zhValueText : 'Value',
       turboThreshold : 20000,
       type: seriaType,
+      color: seriaColor,
       tooltip : Chart.fTooltip(Tooltip.fnBasePointFormatter),
       lineWidth : 1,
       states: {

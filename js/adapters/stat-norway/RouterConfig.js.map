@@ -1,1 +1,33 @@
-{"version":3,"sources":["../../../src/adapters/stat-norway/RouterConfig.js"],"names":["_r","DF","crConfig","AREA","AREA_YEARLY","COLUMN","fCrConfig","BAR","COLUMN_CLUSTER","isCluster","seriaType","BAR_CLUSTER","COLUMN_BY_2","by","BAR_BY_2","TREE_MAP","TREE_MAP_CLUSTER","TREE_MAP_2","depth","TREE_MAP_2_CLUSTER","RouterConfig","getCrConfig"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,KAAK;AACTC,MAAI,iBAAIC,QADC;AAETC,QAAO,iBAAID,QAFF;AAGTE,eAAa,mBAAIF,QAHR;AAITG,UAAQ,mBAAIC,SAAJ,EAJC;AAKTC,OAAK,mBAAID,SAAJ,EALI;AAMTE,kBAAgB,mBAAIF,SAAJ,CAAc;AAC5BG,eAAW,IADiB,EACXC,WAAW;AADA,GAAd,CANP;AASTC,eAAa,mBAAIL,SAAJ,CAAc;AACzBG,eAAW,IADc,EACRC,WAAW;AADH,GAAd,CATJ;AAYTE,eAAa,mBAAIN,SAAJ,CACX,EAAEI,WAAW,QAAb,EADW,EACc,EAAEG,IAAI,GAAN,EADd,CAZJ;AAeTC,YAAU,mBAAIR,SAAJ,CACR,EAAEI,WAAW,KAAb,EADQ,EACc,EAAEG,IAAI,GAAN,EADd,CAfD;AAkBTE,YAAU,oBAAIT,SAAJ,EAlBD;AAmBTU,oBAAkB,oBAAIV,SAAJ,CAChB,EAAEG,WAAW,IAAb,EADgB,CAnBT;AAsBTQ,cAAY,oBAAIX,SAAJ,CACV,EADU,EACN,EAAEY,OAAO,IAAT,EADM,CAtBH;AAyBTC,sBAAoB,oBAAIb,SAAJ,CAClB,EAAEG,WAAW,IAAb,EADkB,EACG,EAAES,OAAO,IAAT,EADH;AAzBX,CAAX;;AA8BA,IAAME,eAAe;AACnBC,aADmB,uBACPX,SADO,EACI;AACrB,WAAOV,GAAGU,SAAH,KAAiBV,GAAGC,EAA3B;AACD;AAHkB,CAArB;;kBAMemB,Y","file":"RouterConfig.js","sourcesContent":["\r\nimport toA from './toArea'\r\nimport toY from './toYearly'\r\nimport toC from './toColumn'\r\nimport toT from './toTreeMap'\r\n\r\nconst _r = {\r\n  DF: toA.crConfig,\r\n  AREA : toA.crConfig,\r\n  AREA_YEARLY: toY.crConfig,\r\n  COLUMN: toC.fCrConfig(),\r\n  BAR: toC.fCrConfig(),\r\n  COLUMN_CLUSTER: toC.fCrConfig({\r\n    isCluster: true, seriaType: 'COLUMN'\r\n  }),\r\n  BAR_CLUSTER: toC.fCrConfig({\r\n    isCluster: true, seriaType: 'BAR'\r\n  }),\r\n  COLUMN_BY_2: toC.fCrConfig(\r\n    { seriaType: 'COLUMN' }, { by: '2' }\r\n  ),\r\n  BAR_BY_2: toC.fCrConfig(\r\n    { seriaType: 'BAR' }, { by: '2' }\r\n  ),\r\n  TREE_MAP: toT.fCrConfig(),\r\n  TREE_MAP_CLUSTER: toT.fCrConfig(\r\n    { isCluster: true }\r\n  ),\r\n  TREE_MAP_2: toT.fCrConfig(\r\n    {}, { depth: \"d2\" }\r\n  ),\r\n  TREE_MAP_2_CLUSTER: toT.fCrConfig(\r\n    { isCluster: true }, { depth: \"d2\" }\r\n  ),\r\n}\r\n\r\nconst RouterConfig = {\r\n  getCrConfig(seriaType) {    \r\n    return _r[seriaType] || _r.DF;\r\n  }\r\n}\r\n\r\nexport default RouterConfig\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-norway/RouterConfig.js"
+ ],
+ "file": "../../../src/adapters/stat-norway/RouterConfig.js",
+ "names": [
+  "_r",
+  "DF",
+  "crConfig",
+  "AREA",
+  "SPLINE",
+  "AREA_YEARLY",
+  "COLUMN",
+  "fCrConfig",
+  "BAR",
+  "COLUMN_CLUSTER",
+  "isCluster",
+  "seriaType",
+  "BAR_CLUSTER",
+  "COLUMN_BY_2",
+  "by",
+  "BAR_BY_2",
+  "TREE_MAP",
+  "TREE_MAP_CLUSTER",
+  "TREE_MAP_2",
+  "depth",
+  "TREE_MAP_2_CLUSTER",
+  "RouterConfig",
+  "getCrConfig"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,KAAK;AACTC,MAAI,mBAASC,QADJ;AAETC,QAAO,mBAASD,QAFP;AAGTE,UAAQ,mBAASF,QAHR;AAITG,eAAa,mBAAIH,QAJR;AAKTI,UAAQ,mBAAIC,SAAJ,EALC;AAMTC,OAAK,mBAAID,SAAJ,EANI;AAOTE,kBAAgB,mBAAIF,SAAJ,CAAc;AAC5BG,eAAW,IADiB,EACXC,WAAW;AADA,GAAd,CAPP;AAUTC,eAAa,mBAAIL,SAAJ,CAAc;AACzBG,eAAW,IADc,EACRC,WAAW;AADH,GAAd,CAVJ;AAaTE,eAAa,mBAAIN,SAAJ,CACX,EAAEI,WAAW,QAAb,EADW,EACc,EAAEG,IAAI,GAAN,EADd,CAbJ;AAgBTC,YAAU,mBAAIR,SAAJ,CACR,EAAEI,WAAW,KAAb,EADQ,EACc,EAAEG,IAAI,GAAN,EADd,CAhBD;AAmBTE,YAAU,oBAAIT,SAAJ,EAnBD;AAoBTU,oBAAkB,oBAAIV,SAAJ,CAChB,EAAEG,WAAW,IAAb,EADgB,CApBT;AAuBTQ,cAAY,oBAAIX,SAAJ,CACV,EADU,EACN,EAAEY,OAAO,IAAT,EADM,CAvBH;AA0BTC,sBAAoB,oBAAIb,SAAJ,CAClB,EAAEG,WAAW,IAAb,EADkB,EACG,EAAES,OAAO,IAAT,EADH;AA1BX,CAAX;;AA+BA,IAAME,eAAe;AACnBC,aADmB,uBACPX,SADO,EACI;AACrB,WAAOX,GAAGW,SAAH,KAAiBX,GAAGC,EAA3B;AACD;AAHkB,CAArB;;kBAMeoB,Y"
+}

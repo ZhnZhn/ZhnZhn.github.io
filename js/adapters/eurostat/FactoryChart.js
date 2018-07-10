@@ -4,8 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var DF_COLOR = '#7cb5ec';
 var FactoryChart = {
   createColumnConfig: function createColumnConfig() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$seriaColor = _ref.seriaColor,
+        seriaColor = _ref$seriaColor === undefined ? DF_COLOR : _ref$seriaColor;
+
     return {
       chart: {
         type: 'column',
@@ -45,8 +50,9 @@ var FactoryChart = {
       },
       plotOptions: {
         column: {
-          color: '#8085e9',
+          color: seriaColor,
           minPointLength: 5,
+          pointPlacement: 0,
           pointWidth: 6,
           pointPadding: 0,
           borderWidth: 0,
@@ -54,7 +60,7 @@ var FactoryChart = {
           shadow: false
         },
         bar: {
-          color: '#8085e9',
+          color: seriaColor,
           minPointLength: 5,
           pointWidth: 4,
           pointPadding: 0,
@@ -66,8 +72,8 @@ var FactoryChart = {
       series: [{ name: 'Column' }]
     };
   },
-  createBarConfig: function createBarConfig() {
-    var config = FactoryChart.createColumnConfig();
+  createBarConfig: function createBarConfig(option) {
+    var config = FactoryChart.createColumnConfig(option);
     Object.assign(config.chart, {
       type: 'bar',
       marginTop: 75,
@@ -79,4 +85,4 @@ var FactoryChart = {
 };
 
 exports.default = FactoryChart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\eurostat\FactoryChart.js.map
+//# sourceMappingURL=FactoryChart.js.map

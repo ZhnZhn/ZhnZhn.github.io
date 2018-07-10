@@ -1,6 +1,9 @@
 
+const DF_COLOR = '#8085e9';
+
 const ChartFactory = {
-  crColumnConfig() {
+  crColumnConfig({ seriaColor }={}) {
+    const _color = seriaColor || DF_COLOR;
     return {
       chart: {
         type: "column",
@@ -41,7 +44,7 @@ const ChartFactory = {
       },
       plotOptions: {
         column : {
-          color: '#8085e9',
+          color: _color,
           minPointLength : 5,
           pointWidth : 6,
           pointPadding : 0,
@@ -50,7 +53,7 @@ const ChartFactory = {
           shadow : false
         },
         bar : {
-          color: '#8085e9',
+          color: _color,
           minPointLength : 5,
           pointWidth : 4,
           pointPadding : 0,
@@ -63,8 +66,8 @@ const ChartFactory = {
     }
   },
 
-  crBarConfig() {
-    const config = this.crColumnConfig();
+  crBarConfig(option) {
+    const config = this.crColumnConfig(option);
     Object.assign(config.chart, {
       type: 'bar',
       //marginTop: 75,

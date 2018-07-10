@@ -25,15 +25,17 @@ const _toData = (values, times ) => {
 }
 
 const _crSplineSeria = (data, option={}) => {
+  const { seriaColor } = option;
   return Object.assign(ChartConfig.fSeries(), {
      type: 'spline',
+     color: seriaColor,
      visible: true,
      data: data,
      marker: {
        symbol: 'circle'
      },
      zhSeriaId: fnAdapter.crId()
-  }, option);
+  });
 }
 
 
@@ -55,7 +57,7 @@ const toArea = {
            zhFnRemoveSeries: fnRemoveSeries
          })
          .toConfig()
-       
+
        return config;
    }
 }

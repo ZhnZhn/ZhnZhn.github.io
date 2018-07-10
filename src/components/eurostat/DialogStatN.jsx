@@ -137,13 +137,21 @@ class DialogStatN extends Component {
   _handleLoad = () => {
     const validationMessages = this._crValidationMessages();
     if (validationMessages.length === 0){
-      const { _items, chartType, date } = this
+      const {
+             _items,
+             chartType, colorComp,
+             date
+            } = this
+          , seriaColor = colorComp
+              ? colorComp.getColor()
+              : undefined
           , { dateDefault } = this.state;
 
       const loadOpt = this.props.loadFn(
         this.props, {
           //one, two, chartType, date, dateDefault,
-          chartType, date, dateDefault,
+          chartType, seriaColor,
+          date, dateDefault,
           items: _items,
           selectOptions: this._selectOptions
         }
@@ -180,6 +188,9 @@ class DialogStatN extends Component {
     } else {
       this.setState({ isShowDate : false });
     }
+  }
+  _onRegColor = (comp) => {
+    this.colorComp = comp
   }
 
 
@@ -249,6 +260,13 @@ class DialogStatN extends Component {
            this._renderSelectInputs()
          }
 
+         <D.RowChart
+           isShowLabels={isShowLabels}
+           options={this._chartOptions}
+           onSelectChart={this._hSelectChartType}
+           onRegColor={this._onRegColor}
+         />
+         {/*
          <D.RowInputSelect
            isShowLabels={isShowLabels}
            caption="Chart"
@@ -256,6 +274,7 @@ class DialogStatN extends Component {
            options={this._chartOptions}
            onSelect={this._hSelectChartType}
          />
+         */}
          <D.ShowHide isShow={isShowDate}>
            <D.RowInputSelect
               isShowLabels={isShowLabels}

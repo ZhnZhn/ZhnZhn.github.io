@@ -32,6 +32,10 @@ var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
+var _RowChart = require('./RowChart');
+
+var _RowChart2 = _interopRequireDefault(_RowChart);
+
 var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
@@ -71,6 +75,7 @@ var DialogCell = {
   ToolbarButtonCircle: _ToolbarButtonCircle2.default,
   Toolbar: _Toolbar2.default,
   RowInputSelect: _RowInputSelect2.default,
+  RowChart: _RowChart2.default,
   SelectWithLoad: _SelectWithLoad2.default,
   SelectParentChild: _SelectParentChild2.default,
   RowPattern: _RowPattern2.default,

@@ -139,13 +139,16 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       if (validationMessages.length === 0) {
         var _items = _this._items,
             chartType = _this.chartType,
+            colorComp = _this.colorComp,
             date = _this.date,
+            seriaColor = colorComp ? colorComp.getColor() : undefined,
             dateDefault = _this.state.dateDefault;
 
 
         var loadOpt = _this.props.loadFn(_this.props, {
           //one, two, chartType, date, dateDefault,
-          chartType: chartType, date: date, dateDefault: dateDefault,
+          chartType: chartType, seriaColor: seriaColor,
+          date: date, dateDefault: dateDefault,
           items: _items,
           selectOptions: _this._selectOptions
         });
@@ -185,6 +188,10 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       } else {
         _this.setState({ isShowDate: false });
       }
+    };
+
+    _this._onRegColor = function (comp) {
+      _this.colorComp = comp;
     };
 
     _this._fSelect = function (index) {
@@ -303,12 +310,11 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           style: _spinnerStyle
         }),
         !isLoading && !isLoadFailed && this._renderSelectInputs(),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+        _react2.default.createElement(_DialogCell2.default.RowChart, {
           isShowLabels: isShowLabels,
-          caption: 'Chart',
-          placeholder: 'Default: Area',
           options: this._chartOptions,
-          onSelect: this._hSelectChartType
+          onSelectChart: this._hSelectChartType,
+          onRegColor: this._onRegColor
         }),
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,

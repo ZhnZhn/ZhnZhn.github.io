@@ -10,8 +10,6 @@ var _RouterConfig2 = _interopRequireDefault(_RouterConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AREA = 'AREA';
-
 var StatNorwayAdapter = {
   toConfig: function toConfig(json, option) {
     var seriaType = option.seriaType,
@@ -22,10 +20,10 @@ var StatNorwayAdapter = {
     return { config: config };
   },
   toSeries: function toSeries(json, option) {
-    var _option$seriaType = option.seriaType,
-        seriaType = _option$seriaType === undefined ? AREA : _option$seriaType,
+    var seriaType = option.seriaType,
         crConfig = _RouterConfig2.default.getCrConfig(seriaType),
         config = crConfig(json, option);
+
 
     return config.series[0];
   }

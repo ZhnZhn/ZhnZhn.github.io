@@ -1,16 +1,16 @@
 
-const COUNTRY_CAPTION_DF = 'EU'
-    , AREA = 'AREA';
+const COUNTRY_CAPTION_DF = 'EU';
+  //  , AREA = 'AREA';
 
 const createLoadOptions = (props={}, options={}) => {
   const { loadId, group, dataSource, dfProps } = props
       , {
           items,
-          chartType={},
+          chartType={}, seriaColor,
           date, dateDefault,
           selectOptions
         } = options
-      , { value:chartTypeValue='AREA' } = chartType
+      , { value:chartTypeValue } = chartType
       , _countryValue = items[0]
           ? items[0].value
           : COUNTRY_CAPTION_DF
@@ -19,12 +19,15 @@ const createLoadOptions = (props={}, options={}) => {
           : COUNTRY_CAPTION_DF;
 
 
-  let _zhCompType, _time;
+  const _zhCompType = chartType.compType
+     , _time = (date) ? date.value : dateDefault;
 
+  /*
   if (chartType && chartType.value !== AREA){
     _zhCompType = chartType.compType;
     _time = (date) ? date.value : dateDefault;
   }
+  */
 
   return {
     ...dfProps,
@@ -37,6 +40,7 @@ const createLoadOptions = (props={}, options={}) => {
     subtitle : items[1] ? items[1].caption: undefined,
     alertGeo : _countryCaption,
     seriaType : chartTypeValue,
+    seriaColor : seriaColor,
     zhCompType : _zhCompType,
     time : _time,
     dataSource,

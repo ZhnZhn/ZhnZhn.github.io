@@ -5,28 +5,32 @@ import EuroStatFn from './EuroStatFn';
 
 const toColumn = {
   createConfig : (json, option) => {
-    const { zhMapSlice:configSlice } = option;
+    const { zhMapSlice:configSlice, seriaColor } = option;
     return JsonStatFn.trJsonToCategory(json, configSlice)
        .then(({ categories, data, min }) => {
-          const config = FactoryChart.createColumnConfig()
+          const config = FactoryChart.createColumnConfig({ seriaColor })
           EuroStatFn.setDataAndInfo({ config, data, json, option })
           EuroStatFn.setCategories({ config, categories, min, option })
-          EuroStatFn.colorEU({ config, categories })
+          EuroStatFn.colorSeries(config)          
           return config;
        });
   },
 
   createSeria : (json, option, chart) => {
     const categories = chart.options.xAxis[0].categories;
-    const { zhMapSlice:configSlice={} } = option
-        , { time } = configSlice
+    const {
+            zhMapSlice:configSlice={},
+            time,
+            seriaColor
+          } = option
+        , _name = configSlice.time || time
         , data = JsonStatFn.trJsonToSeria(json, configSlice, categories);
-
     return {
       zhSeriaId : 'optionKey',
       zhValueText : 'Value',
       minY : EuroStatFn.findMinY(data),
-      name: time,
+      name: _name,
+      color: seriaColor,
       data : data
     };
   }

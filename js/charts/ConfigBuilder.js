@@ -120,29 +120,30 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     this.add('yAxis', C.CATEGORIES_Y_AXIS);
     return this;
   },
-  initBaseColumn: function initBaseColumn() {
+  initColumn: function initColumn() {
     var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var option = arguments[1];
 
-    this.config = _ChartFactory2.default.crColumnConfig();
+    this.config = _ChartFactory2.default.crColumnConfig(option);
     this.add('xAxis', { categories: categories });
     return this;
   },
-  initBaseBar: function initBaseBar() {
+  initBar: function initBar() {
     var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var option = arguments[1];
 
-    this.config = _ChartFactory2.default.crBarConfig();
+    this.config = _ChartFactory2.default.crBarConfig(option);
     this.add('xAxis', { categories: categories });
     return this;
   },
-  initBaseColumnOrBar: function initBaseColumnOrBar() {
-    var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var type = arguments[1];
+  initBarOrColumn: function initBarOrColumn(type) {
+    var categories = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+    var option = arguments[2];
 
     if (type === 'BAR') {
-      return this.initBaseBar(categories);
-    } else {
-      return this.initBaseColumn(categories);
+      return this.initBar(categories, option);
     }
+    return this.initColumn(categories, option);
   },
   initBaseTreeMap: function initBaseTreeMap() {
     this.config = _ChartConfig2.default.fBaseTreeMapConfig();

@@ -22,7 +22,7 @@ const _fnFindIndex = fnArr.findIndexByProp('x');
 const C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
   C2_SECOND_Y_AXIS: '#f7a35c',
-  SERIA_LABEL_CHARS : 12,
+  SERIA_LABEL_CHARS : 14,
   SERIA_LABELS_IN_ROW : 3,
   SERIA_LABEL_X_DELTA : 120,
   SERIA_LABEL_Y_DELTA : 95,
@@ -95,11 +95,12 @@ const _renderSeriesLabel = ({chart, options, series, label='', color }) => {
             ? label.substring(0, C.SERIA_LABEL_CHARS)
             : label
       , { x, y } = _calcXyForLabel(options);
-
+  
   return chart.renderer.text(seriesText, x, y)
     .css({
       color: color || options.colors[series._colorIndex],
-      'font-size': '16px'
+      'font-size': '16px',
+      'font-weight': 800
     })
     .add();
 };
@@ -131,7 +132,6 @@ const ChartFn = {
             chart, options, series, label,
             color: color || _color
           });
-
     options.zhSeries.count +=1
     options.zhSeries.titleEls.push(textEl)
 

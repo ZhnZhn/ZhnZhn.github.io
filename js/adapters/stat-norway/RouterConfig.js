@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toArea = require('./toArea');
+var _toSpline = require('./toSpline');
 
-var _toArea2 = _interopRequireDefault(_toArea);
+var _toSpline2 = _interopRequireDefault(_toSpline);
 
 var _toYearly = require('./toYearly');
 
@@ -23,8 +23,9 @@ var _toTreeMap2 = _interopRequireDefault(_toTreeMap);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _r = {
-  DF: _toArea2.default.crConfig,
-  AREA: _toArea2.default.crConfig,
+  DF: _toSpline2.default.crConfig,
+  AREA: _toSpline2.default.crConfig,
+  SPLINE: _toSpline2.default.crConfig,
   AREA_YEARLY: _toYearly2.default.crConfig,
   COLUMN: _toColumn2.default.fCrConfig(),
   BAR: _toColumn2.default.fCrConfig(),

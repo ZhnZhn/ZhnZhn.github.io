@@ -34,8 +34,11 @@ var HandleF = {
     };
   },
   toggleModalTo: function toggleModalTo(propName1, propName2) {
-    return function (event) {
-      if (event.target === this[propName2]) {
+    return function () {
+      var _ref;
+
+      var event = (_ref = arguments.length - 1, arguments.length <= _ref ? undefined : arguments[_ref]);
+      if (event && event.target === this[propName2]) {
         this.setState(function (prevState) {
           return (0, _defineProperty3.default)({}, propName1, !prevState[propName1]);
         });

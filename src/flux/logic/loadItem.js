@@ -62,12 +62,12 @@ const _fnFetchToChart = function(objImpl, { json, option, onCompleted }){
       , { itemCaption, value, hasSecondYAxis } = option
       , chart = ChartStore.getActiveChart()
       , series = adapter.toSeries(json, option, chart)
-      , { zhItemCaption, zhColor } = series || {};
+      , { zhItemCaption, color, zhColor } = series || {};
 
   ChartFn.addSeriaWithRenderLabel({
     chart, series,
     label: zhItemCaption || itemCaption || value,
-    color: zhColor,
+    color: color || zhColor,
     hasSecondYAxis: !!hasSecondYAxis
   })
   onCompleted(option)

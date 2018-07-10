@@ -45,7 +45,7 @@ var C = {
 };
 
 var _crDF = function _crDF() {
-  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Spline', value: V.S }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
+  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Area', value: V.A }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
 };
 
 var _crDF3 = function _crDF3() {
@@ -53,11 +53,11 @@ var _crDF3 = function _crDF3() {
 };
 
 var _crT1 = function _crT1() {
-  return [{ caption: 'Area', value: V.A }];
+  return [{ caption: 'Default: Spline', value: V.S }];
 };
 
 var _crT2 = function _crT2() {
-  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Yearly by Months', value: V.A_Y }];
+  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Yearly by Months', value: V.A_Y }];
 };
 
 var _crT3All = function _crT3All(oneCaption) {

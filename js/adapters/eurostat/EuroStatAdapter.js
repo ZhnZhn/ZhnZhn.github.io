@@ -26,7 +26,7 @@ var _toMap2 = _interopRequireDefault(_toMap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DF_TYPE = 'AREA';
+var DF_TYPE = 'SPLINE';
 var _rToConfig = {
   AREA: _toArea2.default.createConfig,
   SPLINE: _toArea2.default.createConfig,
@@ -46,7 +46,7 @@ var _rToSeria = {
 var _checkSeriaType = function _checkSeriaType(router, option) {
   var dfType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DF_TYPE;
 
-  if (!router[option.seriaType]) {
+  if (!option.seriaType || !router[option.seriaType]) {
     option.seriaType = dfType;
   }
 };

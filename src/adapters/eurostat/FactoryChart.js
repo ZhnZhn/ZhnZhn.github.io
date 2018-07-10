@@ -1,6 +1,7 @@
 
+const DF_COLOR = '#7cb5ec';
 const FactoryChart = {
-  createColumnConfig : () => {
+  createColumnConfig : ({ seriaColor=DF_COLOR }={}) => {
     return {
       chart: {
         type: 'column',
@@ -40,8 +41,9 @@ const FactoryChart = {
       },
       plotOptions: {
         column : {
-          color: '#8085e9',
+          color: seriaColor,
           minPointLength : 5,
+          pointPlacement: 0,
           pointWidth : 6,
           pointPadding : 0,
           borderWidth : 0,
@@ -49,7 +51,7 @@ const FactoryChart = {
           shadow : false
         },
         bar : {
-          color: '#8085e9',
+          color: seriaColor,
           minPointLength : 5,
           pointWidth : 4,
           pointPadding : 0,
@@ -61,8 +63,8 @@ const FactoryChart = {
       series: [{ name: 'Column'}]
     }
   },
-  createBarConfig : () => {
-    const config = FactoryChart.createColumnConfig();
+  createBarConfig : (option) => {
+    const config = FactoryChart.createColumnConfig(option);
     Object.assign(config.chart, {
       type: 'bar',
       marginTop: 75,

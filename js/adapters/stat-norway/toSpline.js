@@ -47,16 +47,18 @@ var _toData = function _toData(values, times) {
 
 var _crSplineSeria = function _crSplineSeria(data) {
   var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var seriaColor = option.seriaColor;
 
   return Object.assign(_ChartConfig2.default.fSeries(), {
     type: 'spline',
+    color: seriaColor,
     visible: true,
     data: data,
     marker: {
       symbol: 'circle'
     },
     zhSeriaId: _fnAdapter2.default.crId()
-  }, option);
+  });
 };
 
 var toArea = {
@@ -80,4 +82,4 @@ var toArea = {
 };
 
 exports.default = toArea;
-//# sourceMappingURL=toArea.js.map
+//# sourceMappingURL=toSpline.js.map

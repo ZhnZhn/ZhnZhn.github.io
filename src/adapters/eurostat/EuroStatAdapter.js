@@ -4,7 +4,7 @@ import toColumn from './toColumn';
 import toBar from './toBar';
 import toMap from './toMap';
 
-const DF_TYPE = 'AREA';
+const DF_TYPE = 'SPLINE';
 const _rToConfig = {
   AREA: toArea.createConfig,
   SPLINE: toArea.createConfig,
@@ -22,7 +22,7 @@ const _rToSeria = {
 };
 
 const _checkSeriaType = (router, option, dfType=DF_TYPE) => {
-  if (!router[option.seriaType]) {
+  if (!option.seriaType || !router[option.seriaType]) {
     option.seriaType = dfType
   }
 };

@@ -4,8 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var DF_COLOR = '#8085e9';
+
 var ChartFactory = {
   crColumnConfig: function crColumnConfig() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        seriaColor = _ref.seriaColor;
+
+    var _color = seriaColor || DF_COLOR;
     return {
       chart: {
         type: "column",
@@ -46,7 +52,7 @@ var ChartFactory = {
       },
       plotOptions: {
         column: {
-          color: '#8085e9',
+          color: _color,
           minPointLength: 5,
           pointWidth: 6,
           pointPadding: 0,
@@ -55,7 +61,7 @@ var ChartFactory = {
           shadow: false
         },
         bar: {
-          color: '#8085e9',
+          color: _color,
           minPointLength: 5,
           pointWidth: 4,
           pointPadding: 0,
@@ -67,8 +73,8 @@ var ChartFactory = {
       series: [{ name: 'Column' }]
     };
   },
-  crBarConfig: function crBarConfig() {
-    var config = this.crColumnConfig();
+  crBarConfig: function crBarConfig(option) {
+    var config = this.crColumnConfig(option);
     Object.assign(config.chart, {
       type: 'bar',
       //marginTop: 75,
@@ -87,4 +93,4 @@ var ChartFactory = {
 };
 
 exports.default = ChartFactory;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\ChartFactory.js.map
+//# sourceMappingURL=ChartFactory.js.map

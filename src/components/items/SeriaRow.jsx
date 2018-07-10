@@ -59,21 +59,28 @@ class SeriaRow extends Component {
 
     this.isChecked = false
     this._hCheck = HandleF
-      .set('isChecked', true).bind(this)
+      .set('isChecked', true)
+      .bind(this)
     this._hUnCheck = HandleF
-      .set('isChecked', false).bind(this)
+      .set('isChecked', false)
+      .bind(this)
 
     this._hSelectYAxis = HandleF
-      .reg('toYAxis').bind(this)
+      .reg('toYAxis')
+      .bind(this)
 
-    this._hRegCellColor = HandleF.
-      reg('cellColorNode').bind(this)
-    this._hEnterColor = HandleF.
-      enterTo('colorEntered').bind(this)
-    this._hClosePalette = HandleF.
-      closeTo('isShowPallete').bind(this)
-    this._hClickPallete = HandleF.
-      toggleModalTo('isShowPallete', 'cellColorNode').bind(this)
+    this._hRegCellColor = HandleF
+      .reg('cellColorNode')
+      .bind(this)
+    this._hEnterColor = HandleF
+      .enterTo('colorEntered')
+      .bind(this)
+    this._hClosePalette = HandleF
+      .closeTo('isShowPallete')
+      .bind(this)
+    this._hClickPallete = HandleF
+      .toggleModalTo('isShowPallete', 'cellColorNode')
+      .bind(this)
 
     this.state = {
       isShowPallete: false,

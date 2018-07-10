@@ -1,6 +1,7 @@
 
-const DF_CAPTION = 'EU'
-    , AREA = 'AREA';
+const DF_CAPTION = 'EU';
+    //, AREA = 'AREA';
+
 
 const createLoadOptions = (props={}, options={}) => {
   const {
@@ -9,10 +10,11 @@ const createLoadOptions = (props={}, options={}) => {
         } = props
       , {
           one, two={}, chartType={},
+          seriaColor,
           date, dateDefault,
           selectOptions
         } = options
-      , { value:_seriaType=AREA } = chartType
+      , { value:_seriaType } = chartType
       , _oneV = one
            ? one.value
            : DF_CAPTION
@@ -20,11 +22,15 @@ const createLoadOptions = (props={}, options={}) => {
            ? one.caption
            : dfProps.dfSliceTitle || DF_CAPTION;
 
-  let _zhCompType, _time;
+  const _zhCompType = chartType.compType
+  , _time = (date) ? date.value : dateDefault;
+
+  /*
   if (_seriaType !== AREA){
     _zhCompType = chartType.compType;
     _time = (date) ? date.value : dateDefault;
   }
+  */  
 
   return {
     ...dfProps,
@@ -39,6 +45,7 @@ const createLoadOptions = (props={}, options={}) => {
     alertGeo : _oneC,
     alertMetric : two.caption,
     seriaType : _seriaType,
+    seriaColor: seriaColor,
     zhCompType : _zhCompType,
     time : _time,
     dataSource,

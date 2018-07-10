@@ -63,6 +63,7 @@ class DialogEurostat2 extends Component {
 
     this._chartOptions = RouterOptions.crOptions(props)
 
+
     this.state = {
       isToolbar: true,
       isShowLabels: true,
@@ -86,7 +87,7 @@ class DialogEurostat2 extends Component {
   }
 
   _updateForDate = () => {
-    this.date = null;    
+    this.date = null;
     const frequency = (this.two)
              ? (this.props.mapFrequency)
                   ? this.props.mapFrequency
@@ -124,6 +125,9 @@ class DialogEurostat2 extends Component {
       this.setState({ isShowDate : false });
     }
   }
+  _onRegColor = (comp) => {
+    this.colorComp = comp
+  }
 
   _handleSelectDate = (date) => {
     this.date = date;
@@ -149,13 +153,20 @@ class DialogEurostat2 extends Component {
   }
   _createLoadOption = () => {
     const {
-            one, two, chartType, date,
+            one, two,
+            chartType, colorComp,
+            date,
             compSelect1, compSelect2
           } = this
+        , seriaColor = colorComp
+            ? colorComp.getColor()
+            : undefined
         , { dateDefault } = this.state;
     return this.props.loadFn(
       this.props, {
-        one, two, chartType, date, dateDefault,
+        one, two,
+        chartType, seriaColor,
+        date, dateDefault,
         selectOptions: [
           compSelect1.getOptions(),
           compSelect2.getOptions()
@@ -222,12 +233,11 @@ class DialogEurostat2 extends Component {
                optionNames="Metrics"
                onSelect={this._handleSelectTwo}
              />
-             <D.RowInputSelect
-               isShowLabels={isShowLabels}
-               caption="Chart"
-               placeholder="Default: Area"
+             <D.RowChart
+               isShowLabels={isShowLabels}               
                options={this._chartOptions}
-               onSelect={this._handleSelectChartType}
+               onSelectChart={this._handleSelectChartType}
+               onRegColor={this._onRegColor}
              />
              <D.ShowHide isShow={isShowDate}>
                <D.RowInputSelect

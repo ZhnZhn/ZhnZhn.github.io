@@ -10,8 +10,8 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var COUNTRY_CAPTION_DF = 'EU',
-    AREA = 'AREA';
+var COUNTRY_CAPTION_DF = 'EU';
+//  , AREA = 'AREA';
 
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -24,21 +24,23 @@ var createLoadOptions = function createLoadOptions() {
       items = options.items,
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
+      seriaColor = options.seriaColor,
       date = options.date,
       dateDefault = options.dateDefault,
       selectOptions = options.selectOptions,
-      _chartType$value = chartType.value,
-      chartTypeValue = _chartType$value === undefined ? 'AREA' : _chartType$value,
+      chartTypeValue = chartType.value,
       _countryValue = items[0] ? items[0].value : COUNTRY_CAPTION_DF,
       _countryCaption = items[0] ? items[0].caption : COUNTRY_CAPTION_DF;
 
-  var _zhCompType = void 0,
-      _time = void 0;
+  var _zhCompType = chartType.compType,
+      _time = date ? date.value : dateDefault;
 
-  if (chartType && chartType.value !== AREA) {
+  /*
+  if (chartType && chartType.value !== AREA){
     _zhCompType = chartType.compType;
-    _time = date ? date.value : dateDefault;
+    _time = (date) ? date.value : dateDefault;
   }
+  */
 
   return (0, _extends3.default)({}, dfProps, {
     geo: _countryValue,
@@ -50,6 +52,7 @@ var createLoadOptions = function createLoadOptions() {
     subtitle: items[1] ? items[1].caption : undefined,
     alertGeo: _countryCaption,
     seriaType: chartTypeValue,
+    seriaColor: seriaColor,
     zhCompType: _zhCompType,
     time: _time,
     dataSource: dataSource,

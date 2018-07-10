@@ -137,6 +137,7 @@ var toColumn = {
         time = option.time,
         dfTSlice = option.dfTSlice,
         seriaType = option.seriaType,
+        seriaColor = option.seriaColor,
         isCluster = option.isCluster,
         _option$items2 = option.items,
         items = _option$items2 === undefined ? [] : _option$items2,
@@ -151,9 +152,7 @@ var toColumn = {
         _c = data.map(function (item) {
       return item.c;
     }),
-        config = (0, _ConfigBuilder2.default)().initBaseColumnOrBar(_c, seriaType)
-    //.addCaption(C.TITLE, _subtitle)
-    .addCaption(_title, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
+        config = (0, _ConfigBuilder2.default)().initBarOrColumn(seriaType, _c, { seriaColor: seriaColor }).addCaption(_title, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
       chart: { spacingTop: 25 }
     }, crChartOption(_ds, Tid, option))).toConfig();
 
@@ -162,7 +161,6 @@ var toColumn = {
     }
 
     config.series[0].data = data;
-
     return config;
   }
 

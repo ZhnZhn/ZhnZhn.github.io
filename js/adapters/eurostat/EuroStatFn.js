@@ -28,9 +28,9 @@ var DF_SLICE_TITLE = 'EU';
 
 
 var COLOR = {
-  EU: "#0088FF",
-  EA: "#FF5800",
-  EU_MEMBER: "#7CB5EC"
+  EU: "#0088ff",
+  EA: "#ff5800",
+  NOT_EU_MEMBER: '#8085e9'
 };
 var C = {
   EU_CODES: ["EU", "EU27", "EU28"],
@@ -49,18 +49,19 @@ var _crDescr = function _crDescr(extension) {
   return (_d + ' ' + _id + ' ' + _sub).trim();
 };
 
-var _is = function _is(value) {
-  return function (element) {
-    return element === value;
-  };
-};
-
-var _colorSeria = function _colorSeria(config, categories, codes, color) {
+var _colorSeriaIn = function _colorSeriaIn(config, codes, color) {
   var data = config.series[0].data;
-  codes.forEach(function (code) {
-    var _index = categories.findIndex(_is(code));
-    if (_index !== -1) {
-      data[_index].color = color;
+  data.forEach(function (p) {
+    if (codes.indexOf(p.c) !== -1 && !p.color) {
+      p.color = color;
+    }
+  });
+};
+var _colorSeriaNotIn = function _colorSeriaNotIn(config, codes, color) {
+  var data = config.series[0].data;
+  data.forEach(function (p) {
+    if (codes.indexOf(p.c) === -1 && !p.color) {
+      p.color = color;
     }
   });
 };
@@ -156,17 +157,14 @@ var EuroStatFn = {
     config.zhConfig.itemCaption = EuroStatFn.crItemCaption(option);
     config.zhConfig.itemTime = time;
   },
-  colorEU: function colorEU(_ref4) {
-    var config = _ref4.config,
-        categories = _ref4.categories;
-
-    _colorSeria(config, categories, C.EU_CODES, COLOR.EU);
-    _colorSeria(config, categories, C.EA_CODES, COLOR.EA);
-    _colorSeria(config, categories, C.EU_MEMBER, COLOR.EU_MEMBER);
+  colorSeries: function colorSeries(config) {
+    _colorSeriaIn(config, C.EU_CODES, COLOR.EU);
+    _colorSeriaIn(config, C.EA_CODES, COLOR.EA);
+    _colorSeriaNotIn(config, C.EU_MEMBER, COLOR.NOT_EU_MEMBER);
   },
-  setTooltip: function setTooltip(_ref5) {
-    var config = _ref5.config,
-        tooltip = _ref5.tooltip;
+  setTooltip: function setTooltip(_ref4) {
+    var config = _ref4.config,
+        tooltip = _ref4.tooltip;
 
     config.tooltip = _Chart2.default.fTooltip(tooltip);
   },
@@ -188,11 +186,11 @@ var EuroStatFn = {
     }
     return Date.UTC(str, 11, 31);
   },
-  setLineExtrems: function setLineExtrems(_ref6) {
-    var config = _ref6.config,
-        max = _ref6.max,
-        min = _ref6.min,
-        isNotZoomToMinMax = _ref6.isNotZoomToMinMax;
+  setLineExtrems: function setLineExtrems(_ref5) {
+    var config = _ref5.config,
+        max = _ref5.max,
+        min = _ref5.min,
+        isNotZoomToMinMax = _ref5.isNotZoomToMinMax;
 
     var plotLines = config.yAxis.plotLines;
 
@@ -211,9 +209,9 @@ var EuroStatFn = {
   },
 
 
-  crItemCaption: function crItemCaption(_ref7) {
-    var subtitle = _ref7.subtitle,
-        dfSliceTitle = _ref7.dfSliceTitle;
+  crItemCaption: function crItemCaption(_ref6) {
+    var subtitle = _ref6.subtitle,
+        dfSliceTitle = _ref6.dfSliceTitle;
 
     var _pre = dfSliceTitle || DF_SLICE_TITLE;
     return _pre + ': ' + (subtitle || '');

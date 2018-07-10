@@ -13,11 +13,15 @@ const _crTimeIndexAndValue = json => {
 const toArea = {
    createConfig: (json, option) => {
      const { timeIndex, value } = _crTimeIndexAndValue(json)
-         , { isNotZoomToMinMax, seriaType } = option
+         , {
+             isNotZoomToMinMax,
+             seriaType, seriaColor
+            } = option
          , { data, max, min } = EuroStatFn.createData(timeIndex, value)
-         , config = ChartConfig.fBaseAreaConfig(
-             seriaType.toLowerCase()
-           );
+         , config = ChartConfig.fBaseAreaConfig({
+             seriaType: seriaType.toLowerCase(),
+             seriaColor
+           });
 
       EuroStatFn.setDataAndInfo({ config, data, json, option });
       EuroStatFn.setLineExtrems({ config, max, min, isNotZoomToMinMax });
@@ -27,13 +31,14 @@ const toArea = {
 
    createSeria: (json, option) => {
      const { timeIndex, value } = _crTimeIndexAndValue(json)
-         , valueText = option.itemCaption
+         , { itemCaption, seriaColor } = option
          , seria = ChartConfig.fSeries()
          , { data } = EuroStatFn.createData(timeIndex, value);
 
      return Object.assign(seria, {
        zhSeriaId: option.key,
-       zhValueText: valueText,
+       zhValueText: itemCaption,
+       color: seriaColor,
        data: data,
        minY: EuroStatFn.findMinY(data)
      });

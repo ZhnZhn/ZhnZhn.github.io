@@ -104,7 +104,8 @@ const toColumn = {
   crConfig: (json, option) => {
     const {
             category, itemSlice, time, dfTSlice,
-            seriaType, isCluster,
+            seriaType, seriaColor,
+            isCluster,
             items=[], cTotal
           } = option
         , _ds = JSONstat(json).Dataset(0)
@@ -116,8 +117,7 @@ const toColumn = {
         , data = _crData(_values, _dimC, cTotal)
         , _c = data.map(item => item.c)
         , config = ConfigBuilder()
-           .initBaseColumnOrBar(_c, seriaType)
-           //.addCaption(C.TITLE, _subtitle)
+           .initBarOrColumn(seriaType, _c, { seriaColor })
            .addCaption(_title, _subtitle)
            .addTooltip(Tooltip.category)
            .add({
@@ -130,8 +130,7 @@ const toColumn = {
       _setClusters(data)
     }
 
-    config.series[0].data = data
-
+    config.series[0].data = data    
     return config;
   }
 

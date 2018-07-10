@@ -89,22 +89,21 @@ ConfigBuilder.prototype = {
     this.add('yAxis', C.CATEGORIES_Y_AXIS)
     return this;
   },
-  initBaseColumn(categories=[]){
-    this.config = Factory.crColumnConfig()
+  initColumn(categories=[], option){
+    this.config = Factory.crColumnConfig(option)
     this.add('xAxis', { categories })
     return this;
   },
-  initBaseBar(categories=[]){
-    this.config = Factory.crBarConfig()
+  initBar(categories=[], option){
+    this.config = Factory.crBarConfig(option)
     this.add('xAxis', { categories })
     return this;
   },
-  initBaseColumnOrBar(categories=[], type){
+  initBarOrColumn(type, categories=[], option){
     if (type === 'BAR') {
-      return this.initBaseBar(categories);
-    } else {
-      return this.initBaseColumn(categories);
+      return this.initBar(categories, option);
     }
+    return this.initColumn(categories, option);
   },
   initBaseTreeMap(){
     this.config = ChartConfig.fBaseTreeMapConfig()
@@ -211,7 +210,7 @@ ConfigBuilder.prototype = {
        )
      : this;
   },
-  
+
   addZhPoints(data, fn){
     this.add({
       zhPoints: data,

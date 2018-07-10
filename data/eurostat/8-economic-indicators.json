@@ -13,11 +13,15 @@
       "mapValue" : "ei_cphi_m?precision=1&indic=CP-HI00",
       "mapSlice" : { "s_adj": "NSA", "unit": "HICP2015", "indic" : "CP-HI00" }
     },{
-      "caption" : "Industrial production excluding construction, 2010=100, % change",
-      "value" : "teiis080?nace_r2=B-D&unit=I2010_SCA",
+      "caption" : "Industrial production index excluding construction (2010=100)",
+      "value" : "teiis080?nace_r2=B-D&indic_bt=PROD&unit=I2010_SCA",
       "mapFrequency" : "M",
-      "mapValue" : "teiis080?precision=1&indic_bt=PROD&nace_r2=B-D&unit=I2010_SCA",
-      "mapSlice" : { "indic_bt": "PROD", "nace_r2" : "B-D" , "unit" : "I2010_SCA"  }
+      "mapType": "V"
+    },{
+      "caption" : "Industrial production index excluding construction (2015=100) ",
+      "value" : "teiis080?nace_r2=B-D&indic_bt=PROD&unit=I2015_SCA",
+      "mapFrequency" : "M",
+      "mapType": "V"
     },{
       "caption" : "Government deficit/surplus, % of GDP, annual",
       "value" : "teina200?unit=PC_GDP",

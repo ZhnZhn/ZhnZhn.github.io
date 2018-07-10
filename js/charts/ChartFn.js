@@ -61,7 +61,7 @@ var _fnFindIndex = _fnArr2.default.findIndexByProp('x');
 var C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
   C2_SECOND_Y_AXIS: '#f7a35c',
-  SERIA_LABEL_CHARS: 12,
+  SERIA_LABEL_CHARS: 14,
   SERIA_LABELS_IN_ROW: 3,
   SERIA_LABEL_X_DELTA: 120,
   SERIA_LABEL_Y_DELTA: 95,
@@ -150,7 +150,8 @@ var _renderSeriesLabel = function _renderSeriesLabel(_ref2) {
 
   return chart.renderer.text(seriesText, x, y).css({
     color: color || options.colors[series._colorIndex],
-    'font-size': '16px'
+    'font-size': '16px',
+    'font-weight': 800
   }).add();
 };
 

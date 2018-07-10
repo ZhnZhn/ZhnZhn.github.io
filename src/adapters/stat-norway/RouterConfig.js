@@ -1,12 +1,13 @@
 
-import toA from './toArea'
+import toSpline from './toSpline'
 import toY from './toYearly'
 import toC from './toColumn'
 import toT from './toTreeMap'
 
 const _r = {
-  DF: toA.crConfig,
-  AREA : toA.crConfig,
+  DF: toSpline.crConfig,
+  AREA : toSpline.crConfig,
+  SPLINE: toSpline.crConfig,
   AREA_YEARLY: toY.crConfig,
   COLUMN: toC.fCrConfig(),
   BAR: toC.fCrConfig(),
@@ -35,7 +36,7 @@ const _r = {
 }
 
 const RouterConfig = {
-  getCrConfig(seriaType) {    
+  getCrConfig(seriaType) {
     return _r[seriaType] || _r.DF;
   }
 }

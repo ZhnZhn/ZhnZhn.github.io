@@ -109,16 +109,13 @@ const ChartTheme = {
       x: -10,
       y: -20,
       theme : {
-        //fill : COLOR.BG_TITLE,
         fill : 'transparent',
         states : {
           hover : {
-            //fill : COLOR.BG_TITLE,
             'stroke-width' : 2,
             stroke : COLOR.HOVER
           },
-          select : {
-            //fill : COLOR.BG_TITLE,
+          select : {          
             'stroke-width' : 3,
             stroke : COLOR.HOVER
           }

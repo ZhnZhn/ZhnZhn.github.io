@@ -189,8 +189,8 @@ ChartConfig.fnNumberFormat = function (value) {
   return _highcharts2.default.numberFormat(value, decimal, '.', ' ');
 };
 
-ChartConfig.fBaseAreaConfig = function (seriaType) {
-  var config = Object.assign(_Chart2.default.fBaseConfig(seriaType), {
+ChartConfig.fBaseAreaConfig = function (options) {
+  var config = Object.assign(_Chart2.default.fBaseConfig(options), {
     chart: {
       zoomType: 'xy',
       resetZoomButton: _Chart2.default.fResetZoomButton({ position: { x: -10 } }),

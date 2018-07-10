@@ -99,6 +99,10 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
       }
     };
 
+    _this._onRegColor = function (comp) {
+      _this.colorComp = comp;
+    };
+
     _this._handleSelectDate = function (date) {
       _this.date = date;
     };
@@ -131,13 +135,17 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
       var one = _this.one,
           two = _this.two,
           chartType = _this.chartType,
+          colorComp = _this.colorComp,
           date = _this.date,
           compSelect1 = _this.compSelect1,
           compSelect2 = _this.compSelect2,
+          seriaColor = colorComp ? colorComp.getColor() : undefined,
           dateDefault = _this.state.dateDefault;
 
       return _this.props.loadFn(_this.props, {
-        one: one, two: two, chartType: chartType, date: date, dateDefault: dateDefault,
+        one: one, two: two,
+        chartType: chartType, seriaColor: seriaColor,
+        date: date, dateDefault: dateDefault,
         selectOptions: [compSelect1.getOptions(), compSelect2.getOptions()]
       });
     };
@@ -265,12 +273,11 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           optionNames: 'Metrics',
           onSelect: this._handleSelectTwo
         }),
-        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+        _react2.default.createElement(_DialogCell2.default.RowChart, {
           isShowLabels: isShowLabels,
-          caption: 'Chart',
-          placeholder: 'Default: Area',
           options: this._chartOptions,
-          onSelect: this._handleSelectChartType
+          onSelectChart: this._handleSelectChartType,
+          onRegColor: this._onRegColor
         }),
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,

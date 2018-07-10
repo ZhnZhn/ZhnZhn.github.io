@@ -11,7 +11,7 @@ const HandleF = {
       this[propName] = node
     };
   },
-  
+
   enterTo: (propName) => {
     return function(value) {
       this.setState({ [propName]: value })
@@ -23,8 +23,9 @@ const HandleF = {
     }
   },
   toggleModalTo: (propName1, propName2) => {
-    return function (event) {
-      if (event.target === this[propName2]) {
+    return function (...args) {
+      const event = args[args.length-1];
+      if (event && event.target === this[propName2]) {
         this.setState((prevState) => ({
           [propName1]: !prevState[propName1]
         }))

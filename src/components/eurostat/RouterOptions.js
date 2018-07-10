@@ -35,8 +35,8 @@ const C = {
 
 const _crDF = () => {
   return [
-    { caption: 'Default: Area', value: V.A },
-    { caption: 'Spline', value: V.S },
+    { caption: 'Default: Spline', value: V.S },
+    { caption: 'Area', value: V.A },
     { caption: 'Bar: All Countries', value: V.B },
     { caption: 'Column: All Countries', value: V.C },
     { caption: 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
@@ -53,13 +53,13 @@ const _crDF3 = () => {
 
 const _crT1 = () => {
   return [
-    { caption : 'Area', value: V.A },
+    { caption : 'Default: Spline', value: V.S },
   ];
 }
 
 const _crT2 = () => {
   return [
-    { caption : 'Default: Area', value: V.A },
+    { caption : 'Default: Spline', value: V.S },
     { caption : 'Yearly by Months' , value: V.A_Y }
   ];
 }

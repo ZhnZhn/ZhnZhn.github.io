@@ -10,6 +10,13 @@ const S = {
     marginLeft: '5px',
     marginBottom: '5px'
   },
+  ROW_OC: {
+    lineHeight: 'unset',
+    marginRight: '5px',
+    marginTop: '5px',
+    marginLeft: '5px',
+    marginBottom: '-4px'
+  },
   ROW_SHORT: {
     marginLeft: '12px',
     marginRight: '12px'
@@ -39,6 +46,16 @@ const DialogStyles = {
     const rowStyle = isShowLabels
              ? { ...S.ROW }
              : { ...S.ROW, ...S.ROW_SHORT }
+         , labelStyle = isShowLabels
+             ? { ...S.LABEL }
+             : { ...S.LABEL, ...S.NONE };
+    return { rowStyle, labelStyle };
+  },
+
+  crRowOcSelectStyle: (isShowLabels=true) => {
+    const rowStyle = isShowLabels
+             ? { ...S.ROW_OC }
+             : { ...S.ROW_OC, ...S.ROW_SHORT }
          , labelStyle = isShowLabels
              ? { ...S.LABEL }
              : { ...S.LABEL, ...S.NONE };

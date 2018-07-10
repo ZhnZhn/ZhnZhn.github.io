@@ -26,6 +26,7 @@ var createLoadOptions = function createLoadOptions() {
       metric = _options$metric === undefined ? {} : _options$metric,
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
+      seriaColor = options.seriaColor,
       _options$date = options.date,
       date = _options$date === undefined ? {} : _options$date,
       _options$dateDefault = options.dateDefault,
@@ -39,8 +40,7 @@ var createLoadOptions = function createLoadOptions() {
       _metric$caption = metric.caption,
       metricC = _metric$caption === undefined ? '' : _metric$caption,
       metricV = metric.value,
-      _chartType$value = chartType.value,
-      seriaType = _chartType$value === undefined ? 'AREA' : _chartType$value,
+      seriaType = chartType.value,
       _time = date.value || dateDefault;
 
   if (!dfProps.dfParams) {
@@ -56,6 +56,7 @@ var createLoadOptions = function createLoadOptions() {
     group: groupV,
     metric: metricV,
     seriaType: seriaType,
+    seriaColor: seriaColor,
     items: [one, group, metric],
     time: _time,
     loadId: loadId,

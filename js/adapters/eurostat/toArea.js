@@ -36,11 +36,15 @@ var toArea = {
         value = _crTimeIndexAndValue2.value,
         isNotZoomToMinMax = option.isNotZoomToMinMax,
         seriaType = option.seriaType,
+        seriaColor = option.seriaColor,
         _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
         data = _EuroStatFn$createDat.data,
         max = _EuroStatFn$createDat.max,
         min = _EuroStatFn$createDat.min,
-        config = _ChartConfig2.default.fBaseAreaConfig(seriaType.toLowerCase());
+        config = _ChartConfig2.default.fBaseAreaConfig({
+      seriaType: seriaType.toLowerCase(),
+      seriaColor: seriaColor
+    });
 
     _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
     _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min, isNotZoomToMinMax: isNotZoomToMinMax });
@@ -52,14 +56,16 @@ var toArea = {
     var _crTimeIndexAndValue3 = _crTimeIndexAndValue(json),
         timeIndex = _crTimeIndexAndValue3.timeIndex,
         value = _crTimeIndexAndValue3.value,
-        valueText = option.itemCaption,
+        itemCaption = option.itemCaption,
+        seriaColor = option.seriaColor,
         seria = _ChartConfig2.default.fSeries(),
         _EuroStatFn$createDat2 = _EuroStatFn2.default.createData(timeIndex, value),
         data = _EuroStatFn$createDat2.data;
 
     return Object.assign(seria, {
       zhSeriaId: option.key,
-      zhValueText: valueText,
+      zhValueText: itemCaption,
+      color: seriaColor,
       data: data,
       minY: _EuroStatFn2.default.findMinY(data)
     });

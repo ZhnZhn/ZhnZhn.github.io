@@ -203,7 +203,10 @@ var Chart = {
     };
   },
   fBaseConfig: function fBaseConfig() {
-    var seriaType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'area';
+    var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref2$seriaType = _ref2.seriaType,
+        seriaType = _ref2$seriaType === undefined ? 'area' : _ref2$seriaType,
+        seriaColor = _ref2.seriaColor;
 
     return {
       zhSeries: {
@@ -239,6 +242,7 @@ var Chart = {
         zhValueText: 'Value',
         turboThreshold: 20000,
         type: seriaType,
+        color: seriaColor,
         tooltip: Chart.fTooltip(_Tooltip2.default.fnBasePointFormatter),
         lineWidth: 1,
         states: {
@@ -338,9 +342,9 @@ var Chart = {
       }
     };
   },
-  calcMinY: function calcMinY(_ref2) {
-    var minPoint = _ref2.minPoint,
-        maxPoint = _ref2.maxPoint;
+  calcMinY: function calcMinY(_ref3) {
+    var minPoint = _ref3.minPoint,
+        maxPoint = _ref3.maxPoint;
 
     if (maxPoint > Number.NEGATIVE_INFINITY && minPoint < Number.POSITIVE_INFINITY) {
       return minPoint - (maxPoint - minPoint) * 1 / 6;
@@ -419,9 +423,9 @@ var Chart = {
       }
     }, option);
   },
-  fSeriaMarker: function fSeriaMarker(_ref3) {
-    var color = _ref3.color,
-        symbol = _ref3.symbol;
+  fSeriaMarker: function fSeriaMarker(_ref4) {
+    var color = _ref4.color,
+        symbol = _ref4.symbol;
 
     return {
       radius: 4,

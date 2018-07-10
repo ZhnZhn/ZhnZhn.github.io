@@ -13,6 +13,7 @@
   "ToolbarButtonCircle",
   "Toolbar",
   "RowInputSelect",
+  "RowChart",
   "SelectWithLoad",
   "SelectParentChild",
   "RowPattern",
@@ -21,5 +22,5 @@
   "RowDate",
   "Button"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,wCAFiB;AAGjBC,8BAHiB;AAIjBC,kDAJiB;;AAMjBC,oDANiB;AAOjBC,4BAPiB;AAQjBC,0CARiB;AASjBC,0CATiB;AAUjBC,gDAViB;AAWjBC,kCAXiB;AAYjBC,oCAZiB;AAajBC,oBAbiB;AAcjBC,4BAdiB;AAejBC;AAfiB,CAAnB;;kBAkBed,U"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,wCAFiB;AAGjBC,8BAHiB;AAIjBC,kDAJiB;;AAMjBC,oDANiB;AAOjBC,4BAPiB;AAQjBC,0CARiB;AASjBC,8BATiB;AAUjBC,0CAViB;AAWjBC,gDAXiB;AAYjBC,kCAZiB;AAajBC,oCAbiB;AAcjBC,oBAdiB;AAejBC,4BAfiB;AAgBjBC;AAhBiB,CAAnB;;kBAmBef,U"
 }

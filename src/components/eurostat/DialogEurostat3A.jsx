@@ -130,6 +130,9 @@ class DialogEurostat3A extends Component {
       this.setState({ isShowDate : false });
     }
   }
+  _onRegColor = (comp) => {
+    this.colorComp = comp
+  }
 
   _handleSelectDate = (date) => {
     this.date = date;
@@ -164,17 +167,22 @@ class DialogEurostat3A extends Component {
   }
   _createLoadOption = () => {
     const {
-            one, two, three, chartType, date,
+            one, two, three,
+            chartType, colorComp,
+            date,
             compSelect1, compSelect2
           } = this
+        , seriaColor = colorComp
+            ? colorComp.getColor()
+            : undefined
         , { dateDefault } = this.state;
     return this.props.loadFn(
       this.props, {
         one: one,
         group: two,
         metric: three,
-        chartType, date, dateDefault,
-
+        chartType, seriaColor,
+        date, dateDefault,
         selectOptions: [
           compSelect1.getOptions(),
           compSelect2.getOptions()
@@ -251,6 +259,13 @@ class DialogEurostat3A extends Component {
                optionNames="Metrics"
                onSelect={this._handleSelectThree}
              />
+             <D.RowChart
+               isShowLabels={isShowLabels}
+               options={this._chartOptions}
+               onSelectChart={this._handleSelectChartType}
+               onRegColor={this._onRegColor}
+             />
+             {/*
              <D.RowInputSelect
                isShowLabels={isShowLabels}
                caption="Chart"
@@ -258,6 +273,7 @@ class DialogEurostat3A extends Component {
                options={this._chartOptions}
                onSelect={this._handleSelectChartType}
              />
+             */}
              <D.ShowHide isShow={isShowDate}>
                <D.RowInputSelect
                   isShowLabels={isShowLabels}

@@ -10,8 +10,9 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DF_CAPTION = 'EU',
-    AREA = 'AREA';
+var DF_CAPTION = 'EU';
+//, AREA = 'AREA';
+
 
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -26,20 +27,23 @@ var createLoadOptions = function createLoadOptions() {
       two = _options$two === undefined ? {} : _options$two,
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
+      seriaColor = options.seriaColor,
       date = options.date,
       dateDefault = options.dateDefault,
       selectOptions = options.selectOptions,
-      _chartType$value = chartType.value,
-      _seriaType = _chartType$value === undefined ? AREA : _chartType$value,
+      _seriaType = chartType.value,
       _oneV = one ? one.value : DF_CAPTION,
       _oneC = one ? one.caption : dfProps.dfSliceTitle || DF_CAPTION;
 
-  var _zhCompType = void 0,
-      _time = void 0;
-  if (_seriaType !== AREA) {
+  var _zhCompType = chartType.compType,
+      _time = date ? date.value : dateDefault;
+
+  /*
+  if (_seriaType !== AREA){
     _zhCompType = chartType.compType;
-    _time = date ? date.value : dateDefault;
+    _time = (date) ? date.value : dateDefault;
   }
+  */
 
   return (0, _extends3.default)({}, dfProps, {
     itemMap: two,
@@ -53,6 +57,7 @@ var createLoadOptions = function createLoadOptions() {
     alertGeo: _oneC,
     alertMetric: two.caption,
     seriaType: _seriaType,
+    seriaColor: seriaColor,
     zhCompType: _zhCompType,
     time: _time,
     dataSource: dataSource,

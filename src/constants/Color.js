@@ -35,7 +35,8 @@ const COLOR = {
   PLOT_G1 : "rgba(69, 114, 167, 1)",
   PLOT_G2 : "rgba(2, 0, 0, 0)",
 
-  CHART_TITLE : '#a487d4',
+  //CHART_TITLE : '#a487d4',
+  CHART_TITLE : 'black',
   CHART_SUBTITLE : 'black',
   METRIC_TITLE : '#a487d4',
 
