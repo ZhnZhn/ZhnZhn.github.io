@@ -91,7 +91,8 @@
         "twoURI" : "./data/eurostat/trade-indicator.json",
         "twoJsonProp" : "items",
         "chartsType": "t1",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "dataSource": "Eurostat"
       }
     },
     "ES_TRADEBY_BASE": {
@@ -104,7 +105,8 @@
         "threeCaption": "Flow",
         "threeURI": "./data/eurostat/trade-flow-by.json",
         "chartsType": "t1",
-        "loadId" : "EU_STAT"
+        "loadId" : "EU_STAT",
+        "dataSource": "Eurostat"
       }
     },
 
