@@ -4,38 +4,42 @@
       "caption" : "House Price Index (2015=100), deflated, quarterly" ,
        "value" : "tipsho30?unit=INX_Q",
        "mapFrequency" : "Q",
-       "mapValue" : "tipsho30?unit=INX_Q",
-       "mapSlice" : { "unit" : "INX_Q" }
+       "mapType": "V"
+    },{
+      "caption" : "House Price Index, annual rate of change, deflated, quarterly" ,
+       "value" : "tipsho30?unit=RCH_A",
+       "mapFrequency" : "Q",
+       "mapType": "V"
+    },{
+      "caption" : "House Price Index, quarterly rate of change, deflated, quarterly" ,
+       "value" : "tipsho30?unit=RCH_Q",
+       "mapFrequency" : "Q",
+       "mapType": "V"
     },{
       "caption" : "Residential construction, % of GDP, annual" ,
       "value" : "tipsna50?asset=N111G&unit=PC_GDP",
       "mapFrequency" : "Y",
-      "mapValue" : "tipsna50?asset=N111G&unit=PC_GDP",
-      "mapSlice" : { "asset" : "N111G", "unit" : "PC_GDP" }
+      "mapType": "V"
     },{
       "caption" : "Final consumption expenditure of households and non-profit institutions serving households, M, quarterly" ,
        "value" : "tipsho41?unit=CP_MNAC&s_adj=NSA&na_item=P31_S14_S15",
        "mapFrequency" : "Q",
-       "mapValue" : "tipsho41?unit=CP_MNAC&s_adj=NSA&na_item=P31_S14_S15",
-       "mapSlice" : { "unit" : "CP_MNAC", "s_adj": "NSA", "na_item" : "P31_S14_S15" }
+       "mapType": "V"
      },{
        "caption" : "Final consumption expenditure of households and non-profit institutions serving households, % of GDP, quarterly" ,
        "value" : "tipsho41?unit=PC_GDP&s_adj=NSA&na_item=P31_S14_S15",
        "mapFrequency" : "Q",
-       "mapValue" : "tipsho41?unit=PC_GDP&s_adj=NSA&na_item=P31_S14_S15",
-       "mapSlice" : { "unit" : "PC_GDP", "s_adj" : "NSA", "na_item" : "P31_S14_S15" }
+       "mapType": "V"
      },{
        "caption" : "Building Permits (2010=100), monthly" ,
        "value" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2010_SCA",
        "mapFrequency" : "M",
-       "mapValue" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2010_SCA",
-       "mapSlice" : { "indic_bt" : "PSQM", "nace_r2" : "F_CC1", "unit" : "I2010_SCA" }
+       "mapType": "V"
       },{
        "caption" : "Building Permits (2015=100), monthly" ,
        "value" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2015_SCA",
        "mapFrequency" : "M",
-       "mapValue" : "teiis550?indic_bt=PSQM&nace_r2=F_CC1&unit=I2015_SCA",
-       "mapSlice" : { "indic_bt" : "PSQM", "nace_r2" : "F_CC1", "unit" : "I2015_SCA" }
+       "mapType": "V"
      }
   ]
 }

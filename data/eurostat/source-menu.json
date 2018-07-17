@@ -1,7 +1,7 @@
 {
   "menu" : [
     {
-      "caption" : "Economy", 
+      "caption" : "Economy",
       "items" : [
         { "id" : "ES_8_ECONOMIC" },
         { "id" : "ES_CPI" },
@@ -58,6 +58,9 @@
       "caption": "Trade",
       "items": [
         { "id": "ES_TR_BYCOUNTRY" },
+        { "id": "ES_TR_TOTALGOODS" },
+        { "id": "ES_TR_EABYPARTNER" },
+        { "id": "ES_TR_EUBYPARTNER"},
         { "id": "ES_TR_BYPARTNER" },
         { "id": "ES_TR_FOOD" },
         { "id": "ES_TR_RAWMATERIALS" },
@@ -87,6 +90,19 @@
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/trade-indicator.json",
         "twoJsonProp" : "items",
+        "chartsType": "t1",
+        "loadId" : "EU_STAT"
+      }
+    },
+    "ES_TRADEBY_BASE": {
+      "dialogProps": {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "twoCaption": "Partner",
+        "oneCaption": "Group",
+        "oneURI": "./data/eurostat/trade-sitc6.json",
+        "oneJsonProp": "items",
+        "threeCaption": "Flow",
+        "threeURI": "./data/eurostat/trade-flow-by.json",
         "chartsType": "t1",
         "loadId" : "EU_STAT"
       }
@@ -551,9 +567,9 @@
 
     "ES_TR_BYPARTNER": {
       "type" : "ES_TR_BYPARTNER",
-      "menuTitle" : "Total in Goods By Partner",
-      "dialogCaption" : "Total in Goods by Partner",
-      "chartContainerCaption" : "Eurostat: Extra EU Trade Total By Partner",
+      "menuTitle" : "EU28 Total Goods, Annual",
+      "dialogCaption" : "EU28 Total Goods, Annual",
+      "chartContainerCaption" : "Eurostat: Trade EU28 Total Goods by Partner, Annual",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
       "dialogProps": {
@@ -654,11 +670,71 @@
         }
       }
     },
+    "ES_TR_EABYPARTNER": {
+      "type": "ES_TR_EABYPARTNER",
+      "menuTitle": "EA19 Goods, Monthly",
+      "dialogCaption": "EA19 Goods, Monthly",
+      "chartContainerCaption": "Eurostat: Trade EA19 Goods By Partner, Monthly, M EUR",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_TRADEBY_BASE",
+      "dialogProps": {
+        "twoURI": "./data/eurostat/trade-partner-by.json",
+        "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 2,
+          "dfTable": "ext_st_ea19sitc",
+          "dfParams": [ "sitc06", "partner", "stk_flow" ],
+          "dfTail": "geo=EA19&indic_et=TRD_VAL",
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_TR_EUBYPARTNER": {
+      "type": "ES_TR_EUBYPARTNER",
+      "menuTitle": "EU28 Goods, Monthly",
+      "dialogCaption": "EU28 Goods, Monthly",
+      "chartContainerCaption": "Eurostat: Trade EU28 Goods By Partner, Monthly, M EUR",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_TRADEBY_BASE",
+      "dialogProps": {
+        "twoURI": "./data/eurostat/trade-partner-by2.json",
+        "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 2,
+          "dfTable": "ext_st_eu28sitc",
+          "dfParams": [ "sitc06", "partner", "stk_flow" ],
+          "dfTail": "geo=EU28&indic_et=TRD_VAL",
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_TR_TOTALGOODS": {
+      "type": "ES_TR_TOTALGOODS",
+      "menuTitle": "Total Goods, Monthly",
+      "dialogCaption": "Total Goods, Monthly",
+      "chartContainerCaption": "Eurostat: Total Goods, Monthly, M EUR",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption": "Partner",
+        "twoURI": "./data/eurostat/trade-partner-by3.json",
+        "threeCaption": "Flow",
+        "threeURI": "./data/eurostat/trade-flow-by.json",
+        "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 2,
+          "dfTable": "ext_st_28msbec",
+          "dfParams": [ "geo", "partner", "stk_flow" ],
+          "dfTail": "indic_et=TRD_VAL&bclas_bec=TOTAL",
+          "mapType": "V"
+        }
+      }
+    },
     "ES_TR_BYCOUNTRY": {
       "type": "ES_TR_BYCOUNTRY",
-      "menuTitle": "By Country, Annual, M EUR",
-      "dialogCaption": "By Country, Annual, M EUR",
-      "chartContainerCaption": "Eurostat: Trade By Country, Annual, in M EUR",
+      "menuTitle": "Goods & Services, Annual",
+      "dialogCaption": "Goods & Services, Annual",
+      "chartContainerCaption": "Eurostat: Trade of Goods & Services by Member State, Annual, in M EUR",
       "dialogType": "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps": {
@@ -676,7 +752,7 @@
           }
         }
       }
-    }    
+    }
 
   }
 }

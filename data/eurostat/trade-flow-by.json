@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "caption": "Import", "value": "IMP" },
+    { "caption": "Export", "value": "EXP" },
+    { "caption": "Balance", "value": "BAL_RT" }
+  ]
+}
