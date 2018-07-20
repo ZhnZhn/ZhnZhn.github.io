@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "caption": "Construction", "value": "F" },
+    { "caption": "Buildings", "value": "F_CC1" },
+    { "caption": "Civil engineering work", "value": "F_CC2" }
+  ]
+}

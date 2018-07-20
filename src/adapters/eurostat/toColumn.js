@@ -11,7 +11,7 @@ const toColumn = {
           const config = FactoryChart.createColumnConfig({ seriaColor })
           EuroStatFn.setDataAndInfo({ config, data, json, option })
           EuroStatFn.setCategories({ config, categories, min, option })
-          EuroStatFn.colorSeries(config)          
+          EuroStatFn.colorSeries(config)                    
           return config;
        });
   },

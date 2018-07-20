@@ -110,8 +110,8 @@
     },
     "QE_WIKI_COMMODITY_PRICE": {
         "type": "QE_WIKI_COMMODITY_PRICE",
-        "menuTitle": "Wiki Commodity Prices",
-        "dialogCaption": "Wiki Commodity Price",
+        "menuTitle": "Wiki Commodity (unt. 09-2018)",
+        "dialogCaption": "Wiki Commodity",
         "chartContainerCaption": "Quandl: Wiki Commodity Prices",
         "dialogType": "DialogType4A",
         "dialogProps": {

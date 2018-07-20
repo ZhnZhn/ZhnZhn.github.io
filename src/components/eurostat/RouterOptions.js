@@ -45,7 +45,7 @@ const _crDF = () => {
 
 const _crDF3 = () => {
   return [
-    { caption : 'Default: Area', value: V.A },
+    { caption : 'Default: Spline', value: V.S },
     { caption : 'Bar: All Countries', value: V.B },
     { caption : 'Column: All Countries', value: V.C }
   ];

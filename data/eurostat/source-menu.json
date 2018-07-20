@@ -9,7 +9,8 @@
         { "id" : "ES_SOCIAL" },
         { "id" : "ES_GDP" },
         { "id" : "ES_UNEMP" },
-        { "id" : "ES_INDIC"}
+        { "id" : "ES_INDIC"},
+        { "id" : "ES_PRODUCTION" }
       ]
     },{
       "caption" : "Energy",
@@ -23,7 +24,6 @@
     },{
       "caption" : "Finance",
       "items" : [
-        { "id" : "ES_F_PUBLIC" },
         { "id" : "ES_F_LRATE" },
         { "id" : "ES_F_SRATE" }
       ]
@@ -68,6 +68,13 @@
         { "id": "ES_TR_CHEMICALS" },
         { "id": "ES_TR_GOODS" },
         { "id": "ES_TR_MACHINERY" }
+      ]
+    },{
+      "caption": "Government Finance",
+      "items": [
+        { "id": "ES_GF_EXPENDITURE" },
+        { "id": "ES_GF_TAXAGGREGATE" },
+        { "id": "ES_GF_PUBLIC" }
       ]
     }
   ],
@@ -222,6 +229,28 @@
           "twoURI" : "./data/eurostat/economic-indicators.json"
         }
     },
+    "ES_PRODUCTION": {
+      "type": "ES_PRODUCTION",
+      "menuTitle": "Production in Construction",
+      "dialogCaption": "Production in Construction",
+      "chartContainerCaption": "Eurostat: Production in Construction (SCA), Monthly",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption": "Activity",
+        "twoURI": "./data/eurostat/prod-activity.json",
+        "threeCaption": "Unit",
+        "threeURI": "./data/eurostat/prod-unit.json",
+        "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 2,
+          "dfTable": "sts_copr_m",
+          "dfParams": [ "geo", "nace_r2", "unit" ],
+          "dfTail": "indic_bt=PROD&s_adj=SCA",
+          "mapType": "V"
+        }
+      }
+    },
     "ES_G20_CPI" : {
       "type" : "ES_G20_CPI",
       "menuTitle" : "G20 CPI All Items",
@@ -317,20 +346,7 @@
         }
       }
     },
-
-    "ES_F_PUBLIC" : {
-      "type" : "ES_F_PUBLIC",
-      "menuTitle" : "Government Public",
-      "dialogCaption" : "Government Public",
-      "chartContainerCaption" : "Eurostat Finance Government Public",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
-      "dialogProps" : {
-        "twoCaption" : "Metric",
-        "twoURI" : "./data/eurostat/finance-public.json",
-        "twoJsonProp" : "metrics"
-      }
-    },
+    
     "ES_F_LRATE" : {
       "type" : "ES_F_LRATE",
       "menuTitle" : "Long-Term Rates",
@@ -753,6 +769,66 @@
              "unit": "CP_MEUR"
           }
         }
+      }
+    },
+
+    "ES_GF_EXPENDITURE": {
+      "type" : "ES_GF_EXPENDITURE",
+      "menuTitle" : "Expenditure (COFOG)*",
+      "dialogCaption" : "Expenditure (COFOG)",
+      "chartContainerCaption" : "Eurostat: Expenditure (COFOG)",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Function",
+        "twoURI" : "./data/eurostat/gf-cofog99.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/gf-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "gov_10a_exp",
+          "dfParams": [ "geo", "cofog99", "unit"],
+          "dfTail": "na_item=TE&sector=S13",
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_GF_TAXAGGREGATE": {
+      "type" : "ES_GF_TAXAGGREGATE",
+      "menuTitle" : "Tax aggregates",
+      "dialogCaption" : "Tax aggregates",
+      "chartContainerCaption" : "Eurostat: Tax aggregates",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Tax",
+        "twoURI" : "./data/eurostat/gf-tax.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/gf-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "gov_10a_taxag",
+          "dfParams": [ "geo", "na_item", "unit"],
+          "dfTail": "sector=S13",
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_GF_PUBLIC" : {
+      "type" : "ES_GF_PUBLIC",
+      "menuTitle" : "Government Public",
+      "dialogCaption" : "Government Public",
+      "chartContainerCaption" : "Eurostat Finance Government Public",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption" : "Metric",
+        "twoURI" : "./data/eurostat/finance-public.json",
+        "twoJsonProp" : "metrics"
       }
     }
 

@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "caption": "BEA: GDP+R by Industry",      
+      "caption": "BEA: GDP+R by Industry",
       "items": [
         { "id": "USAE_RGDP_1" },
         { "id": "USAE_RGDP_2" },
@@ -30,7 +30,10 @@
       "caption": "BLS",
       "items": [
         { "id": "USAE_BLS_1" },
-        { "id": "USAE_BLS_CPI" }
+        { "id": "USAE_BLS_CPI" },
+        { "id": "USAE_BLS_PPIINDUSTRY" },
+        { "id": "USAE_BLS_PPICOMMODITY" },
+        { "id": "USAE_BLS_EXPIMPPRICE" }
       ]
     },{
       "caption": "Inflation & Prices",
@@ -73,6 +76,19 @@
         "linkFn": "FRED",
         "dataSource": "Intrinio: US & Global Economic: FRED: St. Louise Fed"
        }
+    },
+    "USAE_BLS": {
+      "dialogProps" : {
+        "nInitFromDate" : 12,
+        "descrUrl" : "./data/usa-economy/bls.html",
+        "oneCaption": "Item",
+        "noDate": true,
+        "valueFn" : "ROne",
+        "loadId" : "BLS",
+        "isProxy": true,
+        "linkFn": "BSL",
+        "dataSource": "U.S. Bureau of Labor Statistics (BSL)"
+      }
     },
 
     "USAE_RGDP_1": {
@@ -218,17 +234,9 @@
       "dialogCaption": "Consume Average Prices",
       "chartContainerCaption" : "BLS: Consume Average Prices",
       "dialogType": "DialogType3",
+      "addProps": "USAE_BLS",
       "dialogProps" : {
-        "oneCaption": "Item",
-        "nInitFromDate" : 12,
-        "descrUrl" : "./data/usa-economy/bls.html",
         "optionURI" : "./data/usa-economy/bls-consume-avg-prices.json",
-        "noDate": true,
-        "valueFn" : "ROne",
-        "loadId" : "BLS",
-        "isProxy": true,
-        "linkFn": "BSL",
-        "dataSource": "U.S. Bureau of Labor Statistics (BSL): Average Price Data",
         "dfProps": {
           "dfTitle": "Consume Average Price"
         }
@@ -240,19 +248,53 @@
       "dialogCaption": "Consume Price Index (CPI)",
       "chartContainerCaption" : "BLS: Consume Price Index (CPI)",
       "dialogType": "DialogType3",
+      "addProps": "USAE_BLS",
       "dialogProps" : {
-        "nInitFromDate" : 12,
-        "descrUrl" : "./data/usa-economy/bls.html",
-        "oneCaption": "Item",
         "optionURI" : "./data/usa-economy/bls-cpi.json",
-        "noDate": true,
-        "valueFn" : "ROne",
-        "loadId" : "BLS",
-        "isProxy": true,
-        "linkFn": "BSL",
-        "dataSource": "U.S. Bureau of Labor Statistics (BSL): Consume Price Index (CPI)",
         "dfProps": {
           "dfTitle": "Consume Price Index (CPI)"
+        }
+      }
+    },
+    "USAE_BLS_PPIINDUSTRY": {
+      "type": "USAE_BLS_PPIINDUSTRY",
+      "menuTitle" : "PPI Industry",
+      "dialogCaption": "PPI Industry",
+      "chartContainerCaption" : "BLS: PPI Industry",
+      "dialogType": "DialogType3",
+      "addProps": "USAE_BLS",
+      "dialogProps" : {
+        "optionURI" : "./data/usa-economy/bls-ppi-industry.json",
+        "dfProps": {
+          "dfTitle": "PPI Industry"
+        }
+      }
+    },
+    "USAE_BLS_PPICOMMODITY": {
+      "type": "USAE_BLS_PPICOMMODITY",
+      "menuTitle" : "PPI Commodity",
+      "dialogCaption": "PPI Commodity",
+      "chartContainerCaption" : "BLS: PPI Commodity",
+      "dialogType": "DialogType3",
+      "addProps": "USAE_BLS",
+      "dialogProps" : {
+        "optionURI" : "./data/usa-economy/bls-ppi-commodity.json",
+        "dfProps": {
+          "dfTitle": "PPI Commodity"
+        }
+      }
+    },
+    "USAE_BLS_EXPIMPPRICE": {
+      "type": "USAE_BLS_EXPIMPPRICE",
+      "menuTitle" : "Export-Import Indexes",
+      "dialogCaption": "Export-Import Indexes",
+      "chartContainerCaption" : "BLS: Export-Import Price Indexes",
+      "dialogType": "DialogType3",
+      "addProps": "USAE_BLS",
+      "dialogProps" : {
+        "optionURI" : "./data/usa-economy/bls-export-import-prices.json",
+        "dfProps": {
+          "dfTitle": "Export-Import Indexes"
         }
       }
     },

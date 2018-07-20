@@ -22,6 +22,8 @@ var valueMoving = _AdapterFn2.default.valueMoving,
 var _crZhConfig = function _crZhConfig(option) {
   var title = option.title,
       dataSource = option.dataSource,
+      _option$dfTitle = option.dfTitle,
+      dfTitle = _option$dfTitle === undefined ? '' : _option$dfTitle,
       value = option.value,
       linkFn = option.linkFn;
 
@@ -31,7 +33,7 @@ var _crZhConfig = function _crZhConfig(option) {
     isWithoutAdd: true,
     isWithLegend: false,
     linkFn: linkFn, item: value,
-    dataSource: dataSource
+    dataSource: dataSource + ': ' + dfTitle
   };
 };
 
@@ -77,4 +79,4 @@ var fnAdapter = {
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\bls\fnAdapter.js.map
+//# sourceMappingURL=fnAdapter.js.map

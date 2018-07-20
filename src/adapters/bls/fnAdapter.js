@@ -4,14 +4,18 @@ import AdapterFn from '../AdapterFn'
 const { valueMoving, ymdToUTC, crZhFn } = AdapterFn;
 
 const _crZhConfig = (option) => {
-  const { title, dataSource, value, linkFn } = option
+  const {
+          title,
+          dataSource, dfTitle='',
+          value, linkFn
+        } = option
   return {
     id: value, key: value,
     itemCaption: title,
     isWithoutAdd: true,
     isWithLegend: false,
     linkFn, item: value,
-    dataSource
+    dataSource: `${dataSource}: ${dfTitle}`
   };
 };
 

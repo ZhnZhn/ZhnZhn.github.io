@@ -49,7 +49,7 @@ var _crDF = function _crDF() {
 };
 
 var _crDF3 = function _crDF3() {
-  return [{ caption: 'Default: Area', value: V.A }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }];
+  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }];
 };
 
 var _crT1 = function _crT1() {

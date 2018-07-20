@@ -1,0 +1,30 @@
+{
+ "items": [
+ { "caption": "Imports - All Commodities", "value": "EIUIR"},
+ { "caption": "Imports - Petroleum and Petroleum Products", "value": "EIUIR100"},
+ { "caption": "All Imports Excluding Petroleum", "value": "EIUIREXPET"},
+ { "caption": "All Imports Excluding Fuels", "value": "EIUIREXFUELS"},
+ { "caption": "Exports - All Commodities", "value": "EIUIQ"},
+ { "caption": "Exports - Agricultural Commodities", "value": "EIUIQAG"},
+ { "caption": "Exports - Nonagricultural Commodities", "value": "EIUIQEXAG"},
+ { "caption": "Locality of Origin - Industrialized Countries - All Commodities", "value": "EIUCOINDUSTOT"},
+ { "caption": "Locality of Origin - Other Countries - All Commodities", "value": "EIUCOOTHERTOT"},
+ { "caption": "Locality of Origin - Canada - All Commodities", "value": "EIUCOCANTOT"},
+ { "caption": "Locality of Origin - European Union - All Commodities", "value": "EIUCOEECTOT"},
+ { "caption": "Locality of Origin - France - All Commodities", "value": "EIUCOFRNTOT"},
+ { "caption": "Locality of Origin - Germany - All Commodities", "value": "EIUCOGERTOT"},
+ { "caption": "Locality of Origin - United Kingdom - All Commodities", "value": "EIUCOUKTOT"},
+ { "caption": "Locality of Origin - Latin America - All Commodities", "value": "EIUCOLATTOT"},
+ { "caption": "Locality of Origin - Mexico - All Commodities", "value": "EIUCOMEXTOT"},
+ { "caption": "Locality of Origin - Pacific Rim - All Commodities", "value": "EIUCOPRIMTOT"},
+ { "caption": "Locality of Origin - China - All Commodities", "value": "EIUCOCHNTOT"},
+ { "caption": "Locality of Origin - Japan - All Commodities", "value": "EIUCOJPNTOT"},
+ { "caption": "Locality of Origin - Asian Newly Industrialized Countries - All Commodities", "value": "EIUCOOASTOT"},
+ { "caption": "Locality of Origin - Association of Southeast Asian Nations - All Commodities", "value": "EIUCOASEANTOT"},
+ { "caption": "Locality of Origin - Asia Near East Countries - All Commodities", "value": "EIUCOASNRETOT"},
+ { "caption": "Import Air Passenger Fares", "value": "EIUIV142"},
+ { "caption": "Export Air Passenger Fares", "value": "EIUIH142"},
+ { "caption": "Import Air Freight", "value": "EIUIV131"},
+ { "caption": "Export Air Freight", "value": "EIUIH231"}
+  ]
+}
