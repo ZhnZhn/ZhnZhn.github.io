@@ -74,7 +74,8 @@
       "items": [
         { "id": "ES_GF_EXPENDITURE" },
         { "id": "ES_GF_TAXAGGREGATE" },
-        { "id": "ES_GF_PUBLIC" }
+        { "id": "ES_GF_DEBT" },
+        { "id": "ES_GF_PENSIONS" }
       ]
     }
   ],
@@ -346,7 +347,7 @@
         }
       }
     },
-    
+
     "ES_F_LRATE" : {
       "type" : "ES_F_LRATE",
       "menuTitle" : "Long-Term Rates",
@@ -360,9 +361,9 @@
     },
     "ES_F_SRATE" : {
       "type" : "ES_F_SRATE",
-      "menuTitle" : "Short-Term Rate",
-      "dialogCaption" : "Short-Term Rate",
-      "chartContainerCaption" : "Eurostat Finance Short-Term Interest Rate",
+      "menuTitle" : "Short-Term Rates",
+      "dialogCaption" : "Short-Term Rates",
+      "chartContainerCaption" : "Eurostat: Finance Short-Term Interest Rates",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -818,17 +819,40 @@
         }
       }
     },
-    "ES_GF_PUBLIC" : {
-      "type" : "ES_GF_PUBLIC",
-      "menuTitle" : "Government Public",
-      "dialogCaption" : "Government Public",
-      "chartContainerCaption" : "Eurostat Finance Government Public",
+    "ES_GF_DEBT" : {
+      "type" : "ES_GF_DEBT",
+      "menuTitle" : "Deficit/Surplus, Debt",
+      "dialogCaption" : "Deficit/Surplus, Debt",
+      "chartContainerCaption" : "Eurostat: Government Finance: Deficit/Surplus, Debt",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
         "twoCaption" : "Metric",
-        "twoURI" : "./data/eurostat/finance-public.json",
+        "twoURI" : "./data/eurostat/gf-debt.json",
         "twoJsonProp" : "metrics"
+      }
+    },
+    "ES_GF_PENSIONS": {
+      "type" : "ES_GF_PENSIONS",
+      "menuTitle" : "Pensions Expenditure",
+      "dialogCaption" : "Pensions Expenditure",
+      "chartContainerCaption" : "Eurostat: Pensions Expenditure",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Type",
+        "twoURI" : "./data/eurostat/gf-pension-type.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/gf-pension-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 3,
+          "dfTable": "spr_exp_pens",
+          "dfParams": [ "geo", "spdepb", "unit"],
+          "dfTail": "spdepm=TOTAL",
+          "mapType": "V"
+        }
       }
     }
 

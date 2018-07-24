@@ -1,0 +1,10 @@
+{
+  "items": [
+  { "value":"MIO_EUR","caption":"Million euro"},
+	{ "value":"EUR_HAB_KP10","caption":"Euro per inhabitant (at constant 2010 prices)"},
+	{ "value":"MIO_NAC","caption":"Million units of national currency"},
+	{ "value":"MIO_PPS","caption":"Million purchasing power standards (PPS)"},
+	{ "value":"PPS_HAB","caption":"Purchasing power standard (PPS) per inhabitant"},
+	{ "value":"PC_GDP","caption":"Percentage of gross domestic product (GDP)"}
+  ]
+}
