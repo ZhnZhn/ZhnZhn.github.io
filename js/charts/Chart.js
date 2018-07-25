@@ -62,6 +62,10 @@ var _fMonoColors = function _fMonoColors() {
   return colors;
 };
 
+var _isCrosshair = function _isCrosshair(is) {
+  return is ? Chart.fCrosshair() : undefined;
+};
+
 var Chart = {
   COLOR_PERIOD: 4 / 7,
   COLOR_LOW_LEVEL: -3 / 7,
@@ -206,14 +210,18 @@ var Chart = {
     var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref2$seriaType = _ref2.seriaType,
         seriaType = _ref2$seriaType === undefined ? 'area' : _ref2$seriaType,
-        seriaColor = _ref2.seriaColor;
+        seriaColor = _ref2.seriaColor,
+        spacingTop = _ref2.spacingTop,
+        _ref2$isCrosshair = _ref2.isCrosshair,
+        isCrosshair = _ref2$isCrosshair === undefined ? true : _ref2$isCrosshair;
 
     return {
       zhSeries: {
         count: 0
       },
       chart: {
-        marginRight: Chart.MARGIN_RIGHT
+        marginRight: Chart.MARGIN_RIGHT,
+        spacingTop: spacingTop
       },
       title: {
         text: ''
@@ -224,10 +232,10 @@ var Chart = {
       xAxis: {
         type: 'datetime',
         labels: {},
-        crosshair: Chart.fCrosshair()
+        crosshair: _isCrosshair(isCrosshair)
       },
       yAxis: {
-        crosshair: Chart.fCrosshair(),
+        crosshair: _isCrosshair(isCrosshair),
         endOnTick: false,
         maxPadding: 0.15,
         startOnTick: false,

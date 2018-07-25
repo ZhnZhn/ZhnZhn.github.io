@@ -82,7 +82,7 @@ const ChartFactory = {
     })
 
     return config;
-  }
+  }  
 };
 
 export default ChartFactory

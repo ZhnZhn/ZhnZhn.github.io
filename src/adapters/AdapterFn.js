@@ -223,6 +223,15 @@ const AdapterFn = {
          ? str[0].toUpperCase() + str.substr(1)
          : EMPTY;
   },
+  appendWithColon: (...args) => {
+    let str='';
+    args.forEach(s => {
+      if (s) {
+        str = str ? `${str}: ${s}`: s
+      }
+    })
+    return str;
+  },
 
   monthIndex: (str) => {
     return M.indexOf(
@@ -230,7 +239,7 @@ const AdapterFn = {
     );
   },
 
-  findMinY: (data=[]) => {    
+  findMinY: (data=[]) => {
     let minY = Number.POSITIVE_INFINITY;
     for (let i=0, max=data.length; i<max; i++){
       if ( data[i][1]<minY ) {

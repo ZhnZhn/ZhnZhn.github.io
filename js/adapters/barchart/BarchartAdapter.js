@@ -26,6 +26,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" + "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>";
 
+var TITLE = "Source: Barchart";
+
 var toSeriesData = _AdapterStockFn2.default.toSeriesData;
 
 
@@ -72,7 +74,7 @@ var _crConfig = function _crConfig() {
   }),
       data = dataOption.data,
       dataMfi = dataOption.dataMfi,
-      config = (0, _ConfigBuilder2.default)().initBaseStock(_chartId, dataOption).addCaption(title).add({
+      config = (0, _ConfigBuilder2.default)().initBaseStock(_chartId, dataOption).addCaption(TITLE, title).add({
     valueMoving: _AdapterFn2.default.valueMoving(data),
     info: _crInfo(title),
     zhConfig: _crZhConfig(_chartId, value),

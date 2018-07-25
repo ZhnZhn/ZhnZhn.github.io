@@ -156,10 +156,13 @@ ChartConfig.fnNumberFormat = function(value){
 }
 
 ChartConfig.fBaseAreaConfig = function(options) {
-  const config = Object.assign( Chart.fBaseConfig(options), {
+  const config = Highcharts.merge(
+    Chart.fBaseConfig(options), {
     chart: {
       zoomType: 'xy',
-      resetZoomButton: Chart.fResetZoomButton({ position: {x: -10} }),
+      resetZoomButton: Chart.fResetZoomButton({
+        position: {x: -10}
+      }),
       xDeltaCrossLabel: 4,
       yDeltaCrossLabel: 20
     },
@@ -194,7 +197,10 @@ ChartConfig.fBaseAreaConfig = function(options) {
   return config;
 };
 
-ChartConfig.fMarkerExDividend = function(color=COLOR.EX_DIVIDEND){
+ChartConfig.fMarkerExDividend = function(
+  color=COLOR.EX_DIVIDEND,
+  dataLabelsY=32
+){
   return {
     y: 0,
     exValue: 0.5,
@@ -222,15 +228,13 @@ ChartConfig.fMarkerExDividend = function(color=COLOR.EX_DIVIDEND){
         stroke: color,
         color: color,
         fontSize: '12px',
-        //fontSize: '11px',
-        //fontWeight: 'bold',
         fontWeight: 'normal',
         textShadow: 'none',
         textOutline: '0px transparent'
       },
       crop: false,
       overflow: 'none',
-      y: 32,
+      y: dataLabelsY,
       formatter : function(){
         return this.point.exValue;
       }

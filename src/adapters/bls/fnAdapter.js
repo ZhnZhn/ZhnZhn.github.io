@@ -1,21 +1,25 @@
 
 import AdapterFn from '../AdapterFn'
 
-const { valueMoving, ymdToUTC, crZhFn } = AdapterFn;
+const {
+  valueMoving,
+  ymdToUTC, crZhFn,
+  appendWithColon
+} = AdapterFn;
 
 const _crZhConfig = (option) => {
   const {
           title,
-          dataSource, dfTitle='',
+          dataSource, dfTitle,
           value, linkFn
         } = option
   return {
-    id: value, key: value,
+    id: value, key: value, item: value,    
     itemCaption: title,
     isWithoutAdd: true,
     isWithLegend: false,
-    linkFn, item: value,
-    dataSource: `${dataSource}: ${dfTitle}`
+    dataSource: appendWithColon(dataSource, dfTitle),
+    linkFn
   };
 };
 

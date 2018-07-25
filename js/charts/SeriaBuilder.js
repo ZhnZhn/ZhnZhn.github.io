@@ -23,14 +23,14 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var C = {
-  BASE_SPLINE: {
+  SPLINE: {
     type: 'spline',
     visible: true,
     marker: {
       symbol: 'circle'
     }
   },
-  BASE_AREA_RANGE: {
+  AREA_RANGE: {
     type: 'arearange',
     color: '#7cb5ec',
     fillColor: {
@@ -41,7 +41,7 @@ var C = {
       radius: 0
     }
   },
-  BASE_TREE_MAP: {
+  TREE_MAP: {
     //zhSeriaId : zhSeriaId,
     type: 'treemap',
     layoutAlgorithm: 'squarified',
@@ -65,6 +65,9 @@ var C = {
         brightness: 0
       }
     }
+  },
+  SCATTER: {
+    type: 'scatter'
   }
 };
 
@@ -103,7 +106,7 @@ var SeriaBuilder = {
     return this;
   },
   initSpline: function initSpline(option) {
-    return this.initBaseSeria((0, _extends3.default)({}, C.BASE_SPLINE, option));
+    return this.initBaseSeria((0, _extends3.default)({}, C.SPLINE, option));
   },
   _initBaseSeria: function _initBaseSeria(BASE, tooltip, option) {
     this._type = 'S';
@@ -112,10 +115,13 @@ var SeriaBuilder = {
     return this;
   },
   initAreaRange: function initAreaRange(tooltip, option) {
-    return this._initBaseSeria(C.BASE_AREA_RANGE, tooltip, option);
+    return this._initBaseSeria(C.AREA_RANGE, tooltip, option);
   },
   initTreeMap: function initTreeMap(tooltip, option) {
-    return this._initBaseSeria(C.BASE_TREE_MAP, tooltip, option);
+    return this._initBaseSeria(C.TREE_MAP, tooltip, option);
+  },
+  scatterSeria: function scatterSeria(tooltip, option) {
+    return this._initBaseSeria(C.SCATTER, tooltip, option);
   },
   addLegend: function addLegend(legend) {
     return this.add('zhConfig', {
@@ -128,6 +134,10 @@ var SeriaBuilder = {
     } else {
       this.config.series.push(obj);
     }
+    return this;
+  },
+  addSeriaTo: function addSeriaTo(index, seria) {
+    this.config.series[index] = seria;
     return this;
   },
   addSeriaPoints: function addSeriaPoints(id, points) {
@@ -202,6 +212,9 @@ var SeriaBuilder = {
       _to[0] = series;
     }
     return this;
+  },
+  toSeria: function toSeria() {
+    return this.config;
   }
 };
 

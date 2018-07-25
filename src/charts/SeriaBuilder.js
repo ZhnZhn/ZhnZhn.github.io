@@ -2,14 +2,14 @@ import Chart from './Chart'
 import ChartConfig from './ChartConfig'
 
 const C = {
-  BASE_SPLINE: {
+  SPLINE: {
      type: 'spline',
      visible: true,
      marker: {
        symbol: 'circle'
      }
   },
-  BASE_AREA_RANGE: {
+  AREA_RANGE: {
     type: 'arearange',
     color: '#7cb5ec',
     fillColor: {
@@ -23,7 +23,7 @@ const C = {
       radius: 0
     }
   },
-  BASE_TREE_MAP: {
+  TREE_MAP: {
         //zhSeriaId : zhSeriaId,
         type : 'treemap',
         layoutAlgorithm: 'squarified',
@@ -47,6 +47,9 @@ const C = {
             brightness: 0
           }
         }
+    },
+    SCATTER: {
+      type: 'scatter'
     }
 };
 
@@ -75,7 +78,7 @@ const SeriaBuilder = {
     return this;
   },
   initSpline(option){
-    return this.initBaseSeria({ ...C.BASE_SPLINE, ...option });
+    return this.initBaseSeria({ ...C.SPLINE, ...option });
   },
   _initBaseSeria(BASE, tooltip, option){
     this._type = 'S'
@@ -84,10 +87,13 @@ const SeriaBuilder = {
     return this;
   },
   initAreaRange(tooltip, option){
-    return this._initBaseSeria(C.BASE_AREA_RANGE, tooltip, option);
+    return this._initBaseSeria(C.AREA_RANGE, tooltip, option);
   },
   initTreeMap(tooltip, option){
-    return this._initBaseSeria(C.BASE_TREE_MAP, tooltip, option);
+    return this._initBaseSeria(C.TREE_MAP, tooltip, option);
+  },
+  scatterSeria(tooltip, option){
+    return this._initBaseSeria(C.SCATTER, tooltip, option);
   },
 
   addLegend(legend){
@@ -102,6 +108,10 @@ const SeriaBuilder = {
     } else {
       this.config.series.push(obj)
     }
+    return this;
+  },
+  addSeriaTo(index, seria) {
+    this.config.series[index] = seria
     return this;
   },
 
@@ -176,6 +186,10 @@ const SeriaBuilder = {
       _to[0] = series
     }
     return this;
+  },
+
+  toSeria(){
+    return this.config;
   }
 
 }

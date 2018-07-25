@@ -1,0 +1,39 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/iex/toDividendsImpl.js"
+ ],
+ "file": "../../../src/adapters/iex/toDividendsImpl.js",
+ "names": [
+  "C",
+  "CAPTION",
+  "COLOR",
+  "toDividendsImpl",
+  "caption",
+  "color",
+  "crSubtitle",
+  "value",
+  "dfPeriod",
+  "crSeria",
+  "json",
+  "option",
+  "data",
+  "Array",
+  "isArray",
+  "reverse",
+  "forEach",
+  "push",
+  "Object",
+  "assign",
+  "fMarkerExDividend",
+  "x",
+  "ymdToUTC",
+  "p",
+  "paymentDate",
+  "exValue",
+  "amount",
+  "scatterSeria",
+  "toSeria"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,WAAS,WADD;AAERC,SAAO;AAFC,CAAV;;AAKA,IAAMC,kBAAkB;AACtBC,WAASJ,EAAEC,OADW;AAEtBI,SAAOL,EAAEE,KAFa;;AAItBI,cAAY,0BAAyB;AAAA,QAAtBC,KAAsB,QAAtBA,KAAsB;AAAA,QAAfC,QAAe,QAAfA,QAAe;;AACnC,WAAUD,KAAV,mBAA6BC,QAA7B;AACD,GANqB;;AAQtBC,WAAS,iBAACC,IAAD,EAAOC,MAAP,EAAkB;AACzB,QAAMC,OAAO,EAAb;AACA,QAAIC,MAAMC,OAAN,CAAcJ,IAAd,CAAJ,EAAyB;AACvBA,WAAKK,OAAL,GACGC,OADH,CACW,aAAK;AACZJ,aAAKK,IAAL,CAAUC,OAAOC,MAAP,CACR,sBAAYC,iBAAZ,CAA8BpB,EAAEE,KAAhC,EAAuC,CAAvC,CADQ,EACmC;AAC3CmB,aAAG,oBAAUC,QAAV,CAAmBC,EAAEC,WAArB,CADwC;AAE3CC,mBAASF,EAAEG;AAFgC,SADnC,CAAV;AAKD,OAPH;AAQD;AACD,WAAO,+BACJC,YADI,CACS,kBAAQF,OADjB,EAC0B,EAAEb,UAAF,EAD1B,EAEJgB,OAFI,EAAP;AAGD;AAvBqB,CAAxB;;kBA0BezB,e"
+}

@@ -1,18 +1,19 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\iex\\RouterAdapter.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\iex\\RouterAdapter.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/adapters/iex/RouterAdapter.js"
+ ],
+ "file": "../../../src/adapters/iex/RouterAdapter.js",
  "names": [
   "_r",
   "DF",
   "earnings",
+  "dividends",
   "chart",
   "RouterAdapter",
   "getAdapter",
   "option",
   "dfType"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,KAAK;AACTC,uBADS;AAETC,gCAFS;AAGTC;AAHS,CAAX;;AAMA,IAAMC,gBAAgB;AACpBC,YADoB,sBACTC,MADS,EACF;AAAA,QACRC,MADQ,GACGD,MADH,CACRC,MADQ;;AAEhB,WAAOP,GAAGO,MAAH,KAAcP,GAAGC,EAAxB;AACD;AAJmB,CAAtB;;kBAOeG,a"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,KAAK;AACTC,uBADS;AAETC,YAAU,gDAFD;AAGTC,aAAW,iDAHF;AAITC;AAJS,CAAX;;AAOA,IAAMC,gBAAgB;AACpBC,YADoB,sBACTC,MADS,EACF;AAAA,QACRC,MADQ,GACGD,MADH,CACRC,MADQ;;AAEhB,WAAOR,GAAGQ,MAAH,KAAcR,GAAGC,EAAxB;AACD;AAJmB,CAAtB;;kBAOeI,a"
 }

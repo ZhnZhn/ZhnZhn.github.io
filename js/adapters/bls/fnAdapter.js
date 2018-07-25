@@ -16,24 +16,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var valueMoving = _AdapterFn2.default.valueMoving,
     ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    crZhFn = _AdapterFn2.default.crZhFn;
+    crZhFn = _AdapterFn2.default.crZhFn,
+    appendWithColon = _AdapterFn2.default.appendWithColon;
 
 
 var _crZhConfig = function _crZhConfig(option) {
   var title = option.title,
       dataSource = option.dataSource,
-      _option$dfTitle = option.dfTitle,
-      dfTitle = _option$dfTitle === undefined ? '' : _option$dfTitle,
+      dfTitle = option.dfTitle,
       value = option.value,
       linkFn = option.linkFn;
 
   return {
-    id: value, key: value,
+    id: value, key: value, item: value,
     itemCaption: title,
     isWithoutAdd: true,
     isWithLegend: false,
-    linkFn: linkFn, item: value,
-    dataSource: dataSource + ': ' + dfTitle
+    dataSource: appendWithColon(dataSource, dfTitle),
+    linkFn: linkFn
   };
 };
 

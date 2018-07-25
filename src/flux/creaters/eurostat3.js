@@ -32,8 +32,8 @@ const createLoadOptions = (props={}, options={}) => {
     loadId : loadId,
     itemCaption: oneC,
     title : oneC,
-    subtitle : `${groupC}:${metricC}`,
-    alertItemId : `${oneC}:${metricC}`,
+    subtitle : `${groupC}: ${metricC}`,
+    alertItemId : `${oneC}: ${metricC}`,
     alertGeo : oneC,
     alertMetric : metricC,
     dataSource

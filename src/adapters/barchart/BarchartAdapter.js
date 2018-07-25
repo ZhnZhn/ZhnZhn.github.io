@@ -3,12 +3,14 @@ import DateUtils from '../../utils/DateUtils'
 
 import AdapterFn from '../AdapterFn'
 import AdapterStockFn from '../AdapterStockFn'
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 
 import { fnAddSeriesSma, fnRemoveSeries, fnGetConfigMfi } from '../IndicatorSma';
 
 const DESCR = "Copyright © 2017. All <a href='https://www.barchartmarketdata.com'>market data</a> provided by Barchart Market Data Solutions.<br><br>" +
               "BATS market data is at least 15-minutes delayed. Forex market data is at least 10-minutes delayed. AMEX, NASDAQ, NYSE and futures market data (CBOT, CME, COMEX and NYMEX) is end-of-day. Information is provided 'as is' and solely for informational purposes, not for trading purposes or advice, and is delayed. To see all exchange delays and terms of use, please see our <a href='https://www.barchart.com/agreement.php'>disclaimer.</a>"
+
+const TITLE = "Source: Barchart";
 
 const { toSeriesData } = AdapterStockFn;
 
@@ -42,9 +44,9 @@ const _crConfig = (json={}, option) => {
            pnDate: 'tradingDay'
         })
       , { data, dataMfi } = dataOption
-      , config = ConfigBuilder()
+      , config = Builder()
          .initBaseStock(_chartId, dataOption)
-         .addCaption(title)
+         .addCaption(TITLE, title)
          .add({
             valueMoving: AdapterFn.valueMoving(data),
             info: _crInfo(title),
@@ -74,7 +76,7 @@ const BarchartAdapter = {
              isAllSeries: false,
              pnDate: 'tradingDay'
           });
-    return ConfigBuilder()
+    return Builder()
       .initBaseSeria()
       .addPoints(_id, data)
       .toConfig();

@@ -9,14 +9,20 @@ const _urlEarnings = (option) => {
   return `${C.BASE_URL}/${value}`;
 };
 
+const _urlDividends = (option) => {
+  const { value='', dfPeriod } = option;
+  return `${C.BASE_URL}/${value}/dividends/${dfPeriod}`;
+};
+
 const _urlChart = (option) => {
-  const { value='', dfPeriod=C.DF_PERIOD } = option;  
+  const { value='', dfPeriod=C.DF_PERIOD } = option;
   return `${C.BASE_URL}/${value}/chart/${dfPeriod}`;
 };
 
 const _rUrl = {
   DF: _urlChart,
   earnings: _urlEarnings,
+  dividends: _urlDividends,
   chart: _urlChart
 };
 

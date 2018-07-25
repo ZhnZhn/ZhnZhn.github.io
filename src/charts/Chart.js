@@ -39,6 +39,8 @@ const _fMonoColors = function({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }
   return colors;
 }
 
+const _isCrosshair = (is) => is ? Chart.fCrosshair() : undefined;
+
 const Chart = {
   COLOR_PERIOD : 4/7,
   COLOR_LOW_LEVEL : -3/7,
@@ -183,14 +185,17 @@ const Chart = {
 
 fBaseConfig({
   seriaType='area',
-  seriaColor
-}={}){
+  seriaColor,
+  spacingTop,
+  isCrosshair=true
+}={}){  
   return {
     zhSeries : {
       count : 0
     },
     chart : {
-      marginRight: Chart.MARGIN_RIGHT
+      marginRight: Chart.MARGIN_RIGHT,
+      spacingTop: spacingTop
     },
     title: {
       text: ''
@@ -201,10 +206,10 @@ fBaseConfig({
     xAxis: {
       type: 'datetime',
       labels : {},
-      crosshair : Chart.fCrosshair()
+      crosshair : _isCrosshair(isCrosshair)
     },
     yAxis: {
-      crosshair : Chart.fCrosshair(),
+      crosshair : _isCrosshair(isCrosshair),
       endOnTick : false,
       maxPadding : 0.15,
       startOnTick : false,

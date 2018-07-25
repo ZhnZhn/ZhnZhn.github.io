@@ -2,8 +2,13 @@ import ChartConfig from '../../charts/ChartConfig';
 import Chart from '../../charts/Chart';
 import Tooltip from '../../charts/Tooltip';
 
-//import QuandlFn2 from '../quandl/QuandlFn2';
+
 import AdapterFn from '../AdapterFn';
+
+const {
+  valueMoving, findMinY,
+  appendWithColon
+} = AdapterFn;
 
 const DF_SLICE_TITLE = 'EU';
 
@@ -28,8 +33,8 @@ const C = {
 const _crDescr = (extension) => {
   const _ext = extension || {}
     , { datasetId, subTitle } = _ext
-    , _id = datasetId ? `DatasetId: ${datasetId}.` : ''
-    , _sub = subTitle ? `Metric: ${subTitle}.` : ''
+    , _id = appendWithColon('DatasetId', datasetId)
+    , _sub = appendWithColon('Metric', subTitle)
     , _d = _ext.description || '';
    return (`${_d} ${_id} ${_sub}`).trim();
 };
@@ -77,9 +82,7 @@ const EuroStatFn = {
     })
 
     return {
-      data: _isDataDes(data)
-         ? data.reverse()
-         : data,
+      data: _isDataDes(data) ? data.reverse() : data,
       max, min
     };
   },
@@ -107,7 +110,7 @@ const EuroStatFn = {
     config.info = this.createDatasetInfo(json);
 
     if (_isLineSeria(seriaType)){
-      config.valueMoving = AdapterFn.valueMoving(data)
+      config.valueMoving = valueMoving(data)
     }
 
     config.series[0].zhSeriaId = option.key;
@@ -177,14 +180,19 @@ const EuroStatFn = {
     }
 
     if (!isNotZoomToMinMax){
-      config.yAxis.min = Chart.calcMinY({ maxPoint: max, minPoint: min });
+      config.yAxis.min = Chart.calcMinY({
+        maxPoint: max,
+        minPoint: min
+      });
     }
 
   },
 
   crItemCaption: ({ subtitle, dfSliceTitle }) => {
-    const _pre = dfSliceTitle || DF_SLICE_TITLE;
-    return `${_pre}: ${subtitle || ''}`;
+    return appendWithColon(
+      dfSliceTitle || DF_SLICE_TITLE,
+      subtitle
+    );
   },
 
   createZhConfig(json, option){
@@ -216,20 +224,20 @@ const EuroStatFn = {
   },
 
   createDatasetInfo(json){
-    const { label, updated, extension } = json
-        , _descr = _crDescr(extension);
+    const {
+      label,
+      updated,
+      extension
+    } = json;
     return {
       name: label,
-      description: _descr,
+      description: _crDescr(extension),
       newest_available_date: updated,
       oldest_available_date: '1996-01-30',
     }
   },
 
-  findMinY(data){
-    return AdapterFn.findMinY(data);
-    //return QuandlFn2.findMinY(data);
-  }
+  findMinY: findMinY
 }
 
 export default EuroStatFn

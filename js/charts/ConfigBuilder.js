@@ -73,22 +73,19 @@ var ConfigBuilder = function ConfigBuilder() {
   this.config = config;
 };
 
-ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
+ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.default)({}, _SeriaBuilder2.default, {
   init: function init() {
     var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     this.config = config;
     return this;
   },
-  initBaseArea: function initBaseArea() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        type = _ref.type;
-
-    this.config = _ChartConfig2.default.fBaseAreaConfig();
+  initBaseArea: function initBaseArea(option) {
+    this.config = _ChartConfig2.default.fBaseAreaConfig(option);
     return this;
   },
   initBaseArea2: function initBaseArea2(title, subtitle) {
-    this.initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).clearSeries();
+    this.initBaseArea({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries();
     return this;
   },
   initBaseStock: function initBaseStock(id, dataOption) {
@@ -102,7 +99,7 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
         dataLow = dataOption.dataLow,
         dataOpen = dataOption.dataOpen;
 
-    this.initBaseArea().add('chart', { spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addMiniVolume({
+    this.initBaseArea({ spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addMiniVolume({
       id: id,
       dColumn: dataVolumeColumn,
       dVolume: dataVolume
@@ -244,7 +241,10 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
     plotLines[1].value = minValue;
     plotLines[1].label.text = '' + _ChartConfig2.default.fnNumberFormat(minValue);
     this.add('yAxis', {
-      min: _Chart2.default.calcMinY({ minPoint: minValue, maxPoint: maxValue }),
+      min: _Chart2.default.calcMinY({
+        minPoint: minValue,
+        maxPoint: maxValue
+      }),
       maxPadding: 0.15,
       minPadding: 0.15,
       endOnTick: false,
@@ -259,7 +259,7 @@ ConfigBuilder.prototype = (0, _extends3.default)({}, _SeriaBuilder2.default, {
   toConfig: function toConfig() {
     return this.config;
   }
-});
+}));
 
 exports.default = ConfigBuilder;
 //# sourceMappingURL=ConfigBuilder.js.map

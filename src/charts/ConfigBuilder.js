@@ -40,22 +40,21 @@ const ConfigBuilder = function(config={}) {
     return (new ConfigBuilder(config));
   }
   this.config = config;
-}
+};
 
-ConfigBuilder.prototype = {
+ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
   ...SeriaBuilder,
 
   init(config={}) {
     this.config = config
     return this;
   },
-  initBaseArea({ type }={}){
-    this.config = ChartConfig.fBaseAreaConfig();
+  initBaseArea(option){
+    this.config = ChartConfig.fBaseAreaConfig(option);
     return this;
   },
   initBaseArea2(title, subtitle){
-    this.initBaseArea()
-      .add('chart', { spacingTop: 25 })
+    this.initBaseArea({ spacingTop: 25 })
       .addCaption(title, subtitle)
       .clearSeries()
     return this;
@@ -67,8 +66,7 @@ ConfigBuilder.prototype = {
             minClose, maxClose,
             data, dataHigh, dataLow, dataOpen
           } = dataOption;
-    this.initBaseArea()
-      .add('chart', { spacingTop: 25 })
+    this.initBaseArea({ spacingTop: 25 })
       .addTooltip(Tooltip.fnBasePointFormatter)
       .addMiniVolume({
         id,
@@ -228,7 +226,10 @@ ConfigBuilder.prototype = {
     plotLines[1].value = minValue;
     plotLines[1].label.text = `${ChartConfig.fnNumberFormat(minValue)}`;
     this.add('yAxis', {
-      min: Chart.calcMinY({ minPoint: minValue, maxPoint: maxValue}),
+      min: Chart.calcMinY({
+        minPoint: minValue,
+        maxPoint: maxValue
+      }),
       maxPadding: 0.15,
       minPadding: 0.15,
       endOnTick: false,
@@ -246,6 +247,6 @@ ConfigBuilder.prototype = {
   toConfig(){
     return this.config;
   }
-}
+})
 
 export default ConfigBuilder

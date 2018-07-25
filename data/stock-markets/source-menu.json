@@ -26,7 +26,9 @@
       "items": [
         { "id": "SM_IEX_CHART_5Y" },
         { "id": "SM_IEX_CHART_2Y" },
-        { "id": "SM_IEX_EARNINGS" }
+        { "id": "SM_IEX_EARNINGS_4Q" },
+        { "id": "SM_IEX_DIVIDENDS_5Y"},
+        { "id": "SM_IEX_DIVIDENDS_2Y"}
       ]
     },{
       "caption": "Intrinio: US PC Financials", "isInitClose": true,
@@ -273,16 +275,42 @@
            }
          }
      },
-     "SM_IEX_EARNINGS" : {
-         "type" : "SM_IEX_EARNINGS",
-         "menuTitle" : "Earnings Latest 4 Q",
-         "chartContainerCaption" : "IEX: Earnings Latest 4 Quarters",
+     "SM_IEX_EARNINGS_4Q" : {
+         "type" : "SM_IEX_EARNINGS_4Q",
+         "menuTitle" : "Earnings 4Q (Scatter)",
+         "chartContainerCaption" : "IEX: Earnings 4 Quarters",
          "addProps": "SM_BASE_IEX",
          "dialogProps" : {
            "valueFn" : "ROneSufix",
            "valueFnPrefix": "earnings",
            "dfProps": {
              "dfType": "earnings"
+           }
+         }
+     },
+     "SM_IEX_DIVIDENDS_5Y" : {
+         "type" : "SM_IEX_DIVIDENDS_5Y",
+         "menuTitle" : "Dividends 5Y (Scatter)",
+         "chartContainerCaption" : "IEX: Dividends Latest 5 Years",
+         "addProps": "SM_BASE_IEX",
+         "dialogProps" : {
+           "valueFn" : "ROne",
+           "dfProps": {
+             "dfType": "dividends",
+             "dfPeriod": "5y"
+           }
+         }
+     },
+     "SM_IEX_DIVIDENDS_2Y" : {
+         "type" : "SM_IEX_DIVIDENDS_2Y",
+         "menuTitle" : "Dividends 2Y (Scatter)",
+         "chartContainerCaption" : "IEX: Dividends Latest 2 Years",
+         "addProps": "SM_BASE_IEX",
+         "dialogProps" : {
+           "valueFn" : "ROne",
+           "dfProps": {
+             "dfType": "dividends",
+             "dfPeriod": "2y"
            }
          }
      },
@@ -320,7 +348,7 @@
          "dialogProps" : {
            "twoCaption": "Balance",
            "twoURI" : "./data/stock-markets/intrinio-balance.json",
-           "threeURI" : "",           
+           "threeURI" : "",
            "dataSource" : "Intrinio: US PC Financials: Balance Sheet"
          }
      },

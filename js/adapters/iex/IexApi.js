@@ -16,9 +16,17 @@ var _urlEarnings = function _urlEarnings(option) {
   return C.BASE_URL + '/' + value;
 };
 
-var _urlChart = function _urlChart(option) {
+var _urlDividends = function _urlDividends(option) {
   var _option$value2 = option.value,
       value = _option$value2 === undefined ? '' : _option$value2,
+      dfPeriod = option.dfPeriod;
+
+  return C.BASE_URL + '/' + value + '/dividends/' + dfPeriod;
+};
+
+var _urlChart = function _urlChart(option) {
+  var _option$value3 = option.value,
+      value = _option$value3 === undefined ? '' : _option$value3,
       _option$dfPeriod = option.dfPeriod,
       dfPeriod = _option$dfPeriod === undefined ? C.DF_PERIOD : _option$dfPeriod;
 
@@ -28,6 +36,7 @@ var _urlChart = function _urlChart(option) {
 var _rUrl = {
   DF: _urlChart,
   earnings: _urlEarnings,
+  dividends: _urlDividends,
   chart: _urlChart
 };
 
@@ -44,4 +53,4 @@ var IexApi = {
 };
 
 exports.default = IexApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\IexApi.js.map
+//# sourceMappingURL=IexApi.js.map

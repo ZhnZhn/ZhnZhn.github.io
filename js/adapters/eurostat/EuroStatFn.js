@@ -22,10 +22,12 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var valueMoving = _AdapterFn2.default.valueMoving,
+    findMinY = _AdapterFn2.default.findMinY,
+    appendWithColon = _AdapterFn2.default.appendWithColon;
+
+
 var DF_SLICE_TITLE = 'EU';
-
-//import QuandlFn2 from '../quandl/QuandlFn2';
-
 
 var COLOR = {
   EU: "#0088ff",
@@ -42,8 +44,8 @@ var _crDescr = function _crDescr(extension) {
   var _ext = extension || {},
       datasetId = _ext.datasetId,
       subTitle = _ext.subTitle,
-      _id = datasetId ? 'DatasetId: ' + datasetId + '.' : '',
-      _sub = subTitle ? 'Metric: ' + subTitle + '.' : '',
+      _id = appendWithColon('DatasetId', datasetId),
+      _sub = appendWithColon('Metric', subTitle),
       _d = _ext.description || '';
 
   return (_d + ' ' + _id + ' ' + _sub).trim();
@@ -127,7 +129,7 @@ var EuroStatFn = {
     config.info = this.createDatasetInfo(json);
 
     if (_isLineSeria(seriaType)) {
-      config.valueMoving = _AdapterFn2.default.valueMoving(data);
+      config.valueMoving = valueMoving(data);
     }
 
     config.series[0].zhSeriaId = option.key;
@@ -204,7 +206,10 @@ var EuroStatFn = {
     }
 
     if (!isNotZoomToMinMax) {
-      config.yAxis.min = _Chart2.default.calcMinY({ maxPoint: max, minPoint: min });
+      config.yAxis.min = _Chart2.default.calcMinY({
+        maxPoint: max,
+        minPoint: min
+      });
     }
   },
 
@@ -213,8 +218,7 @@ var EuroStatFn = {
     var subtitle = _ref6.subtitle,
         dfSliceTitle = _ref6.dfSliceTitle;
 
-    var _pre = dfSliceTitle || DF_SLICE_TITLE;
-    return _pre + ': ' + (subtitle || '');
+    return appendWithColon(dfSliceTitle || DF_SLICE_TITLE, subtitle);
   },
 
   createZhConfig: function createZhConfig(json, option) {
@@ -243,20 +247,18 @@ var EuroStatFn = {
   createDatasetInfo: function createDatasetInfo(json) {
     var label = json.label,
         updated = json.updated,
-        extension = json.extension,
-        _descr = _crDescr(extension);
+        extension = json.extension;
 
     return {
       name: label,
-      description: _descr,
+      description: _crDescr(extension),
       newest_available_date: updated,
       oldest_available_date: '1996-01-30'
     };
   },
-  findMinY: function findMinY(data) {
-    return _AdapterFn2.default.findMinY(data);
-    //return QuandlFn2.findMinY(data);
-  }
+
+
+  findMinY: findMinY
 };
 
 exports.default = EuroStatFn;

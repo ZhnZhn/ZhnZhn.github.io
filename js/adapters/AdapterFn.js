@@ -215,6 +215,19 @@ var AdapterFn = {
   toUpperCaseFirst: function toUpperCaseFirst(str) {
     return (typeof str === 'string' || str instanceof String) && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
   },
+  appendWithColon: function appendWithColon() {
+    for (var _len2 = arguments.length, args = Array(_len2), _key = 0; _key < _len2; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var str = '';
+    args.forEach(function (s) {
+      if (s) {
+        str = str ? str + ': ' + s : s;
+      }
+    });
+    return str;
+  },
 
   monthIndex: function monthIndex(str) {
     return M.indexOf(String(str).toLowerCase());

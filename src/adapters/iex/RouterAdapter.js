@@ -1,10 +1,13 @@
 
-import toEarnings from './toEarnings'
+import Scatter from './Scatter'
+import toEarnings from './toEarningsImpl'
+import toDividends from './toDividendsImpl'
 import toChart from './toChart'
 
 const _r = {
   DF: toChart,
-  earnings: toEarnings,
+  earnings: Scatter(toEarnings),
+  dividends: Scatter(toDividends),
   chart: toChart
 };
 
@@ -13,6 +16,6 @@ const RouterAdapter = {
     const { dfType } = option;
     return _r[dfType] || _r.DF;
   }
-}
+};
 
 export default RouterAdapter

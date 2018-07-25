@@ -4,9 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toEarnings = require('./toEarnings');
+var _Scatter = require('./Scatter');
 
-var _toEarnings2 = _interopRequireDefault(_toEarnings);
+var _Scatter2 = _interopRequireDefault(_Scatter);
+
+var _toEarningsImpl = require('./toEarningsImpl');
+
+var _toEarningsImpl2 = _interopRequireDefault(_toEarningsImpl);
+
+var _toDividendsImpl = require('./toDividendsImpl');
+
+var _toDividendsImpl2 = _interopRequireDefault(_toDividendsImpl);
 
 var _toChart = require('./toChart');
 
@@ -16,7 +24,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _r = {
   DF: _toChart2.default,
-  earnings: _toEarnings2.default,
+  earnings: (0, _Scatter2.default)(_toEarningsImpl2.default),
+  dividends: (0, _Scatter2.default)(_toDividendsImpl2.default),
   chart: _toChart2.default
 };
 
@@ -29,4 +38,4 @@ var RouterAdapter = {
 };
 
 exports.default = RouterAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\RouterAdapter.js.map
+//# sourceMappingURL=RouterAdapter.js.map
