@@ -5,6 +5,7 @@
       "items" : [
         { "id" : "ES_8_ECONOMIC" },
         { "id" : "ES_CPI" },
+        { "id" : "ES_HCPI_ITEMS" },
         { "id" : "ES_LABOUR" },
         { "id" : "ES_SOCIAL" },
         { "id" : "ES_GDP" },
@@ -156,6 +157,30 @@
         }
       }
     },
+    "ES_HCPI_ITEMS" : {
+      "type" : "ES_HCPI_ITEMS",
+      "menuTitle" : "HCPI Rates",
+      "dialogCaption" : "HCPI Rates",
+      "chartContainerCaption" : "Eurostat Harmonised Consume Price Index",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption" : "Item",
+        "twoURI" : "./data/eurostat/hcpi-items.json",
+        "threeCaption": "Unit",
+        "threeURI": "./data/eurostat/hcpi-units.json",
+        "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 1,
+          "dfTable": "prc_hicp_fp",
+          "dfParams": [ "geo", "coicop", "unit" ],
+          "dfTail": "release=FIN",
+          "dfSlice" : {
+             "release": "FIN"
+          }
+        }
+      }
+    },
     "ES_LABOUR" : {
       "type" : "ES_LABOUR",
       "menuTitle" : "Labour Cost",
@@ -270,7 +295,7 @@
         }
       }
     },
-
+    
     "ES_E_INDIC" : {
         "type" : "ES_E_INDIC",
         "menuTitle" : "Indicators",
