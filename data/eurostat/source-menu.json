@@ -332,7 +332,7 @@
     "ES_PPP" : {
       "type" : "ES_PPP",
       "menuTitle" : "PPP, Price Indices, Expend.",
-      "dialogCaption" : "PPP, Price Indices, Expenditures",
+      "dialogCaption" : "PPP, Price Indices, Expend.",
       "chartContainerCaption" : "Eurostat PPP, Price Indices, Expenditures",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
