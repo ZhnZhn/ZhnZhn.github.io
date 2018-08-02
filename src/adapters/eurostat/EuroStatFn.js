@@ -21,7 +21,7 @@ const C = {
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
   EU_MEMBER: [
     "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus",
-    "Czech Republic", "Denmark", "Estonia", "Finland", "France",
+    "Czechia", "Denmark", "Estonia", "Finland", "France",
     "Germany", "Greece", "Hungary", "Ireland", "Italy",
     "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands",
     "Poland", "Portugal", "Romania", "Slovakia", "Slovenia",
