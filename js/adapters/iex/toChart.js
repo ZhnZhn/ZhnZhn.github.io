@@ -63,7 +63,7 @@ var toChart = {
         dataOption = toSeriesData(_id, json),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
-        config = (0, _ConfigBuilder2.default)().initBaseStock(_id, dataOption).addCaption(title).add((0, _extends3.default)({
+        config = (0, _ConfigBuilder2.default)().stockConfig(_id, dataOption).addCaption(title).add((0, _extends3.default)({
       valueMoving: valueMoving(data),
       info: _crInfo(title),
       zhConfig: _crZhConfig(_id, option)
@@ -79,9 +79,9 @@ var toChart = {
     }),
         data = _toSeriesData.data;
 
-    return (0, _ConfigBuilder2.default)().initBaseSeria().addPoints(_id, data).toConfig();
+    return (0, _ConfigBuilder2.default)().initSeria().addPoints(_id, data).toSeria();
   }
 };
 
 exports.default = toChart;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\iex\toChart.js.map
+//# sourceMappingURL=toChart.js.map

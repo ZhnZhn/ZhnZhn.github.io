@@ -5,6 +5,7 @@ import calcDeltaYAxis from './calcDeltaYAxis'
 
 const C = {
   DATE_PATTERN : '%d-%m-%Y',
+  DATE_EMPTY: '01-01-1970',
 
   ATTR_LABEL : {
     zIndex : 100
@@ -25,9 +26,10 @@ const C = {
 };
 
 const _crCrossParam = (point, chart) => {
+  const _d = Highcharts.dateFormat(C.DATE_PATTERN, point.x);  
   return {
     y: point.y,
-    date: Highcharts.dateFormat(C.DATE_PATTERN, point.x),
+    date: _d !== C.DATE_EMPTY ? _d : '',
     dX: chart.options.chart.xDeltaCrossLabel,
     dY: chart.options.chart.yDeltaCrossLabel
   };

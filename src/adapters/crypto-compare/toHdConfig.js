@@ -30,19 +30,18 @@ const toHdConfig = {
            dHL
          } = crData(json)
         , seria = Builder()
-            .initSpline({ data })
-            .toConfig()
+            .splineSeria({ data })
+            .toSeria()
         , { value='', title } = option
         , _title = _crTitle(title)
         , _subtitle = _crSubtitle(json, value)
         , _btTitleTo = _crBtTitleTo(json)
         , config = Builder()
-            .initBaseArea2()
-            .addCaption(_title, _subtitle)
+            .area2Config(_title, _subtitle)
             .addSeries(seria)
             .add({
                ...crConfigOption({ option, data })
-            })            
+            })
             .addMiniVolume({
               btTitle: 'Volume ' + value,
               title: value,

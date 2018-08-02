@@ -25,23 +25,27 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp, _initialiseProps;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _InputStyle = require('./InputStyle');
+
+var _InputStyle2 = _interopRequireDefault(_InputStyle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import PropTypes from "prop-types";
-
-var STYLE = {
-  ROOT: {
+/*
+const STYLE = {
+  ROOT : {
     position: 'relative',
     display: 'inline-block',
     backgroundColor: '#E1E1CB',
     width: '250px'
   },
-  INPUT: {
+  INPUT : {
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
@@ -52,7 +56,7 @@ var STYLE = {
     fontSize: '16px',
     fontWeight: 'bold'
   },
-  HR: {
+  HR : {
     borderWidth: 'medium medium 1px',
     borderStyle: 'none none solid',
     borderColor: 'red',
@@ -65,13 +69,13 @@ var STYLE = {
     //width: '90%'
     //width: '230px'
   },
-  HR_VALID: {
-    borderColor: '#1B75BB'
+  HR_VALID : {
+     borderColor: '#1B75BB'
   },
-  HR_NOT_VALID: {
-    borderColor: '#F44336'
+  HR_NOT_VALID : {
+     borderColor: '#F44336'
   },
-  ERR_MSG: {
+  ERR_MSG : {
     color: '#F44336',
     paddingLeft: '10px',
     paddingBottom: '5px',
@@ -79,6 +83,7 @@ var STYLE = {
     fontWeight: 'bold'
   }
 };
+*/
 
 var InputPattern = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(InputPattern, _Component);
@@ -125,14 +130,14 @@ var InputPattern = (_temp = _class = function (_Component) {
           value = _state.value,
           errorInput = _state.errorInput,
           isValid = _state.isValid,
-          _styleHr = isValid ? STYLE.HR_VALID : STYLE.HR_NOT_VALID;
+          _styleHr = isValid ? _InputStyle2.default.HR_VALID : _InputStyle2.default.HR_NOT_VALID;
 
       return _react2.default.createElement(
         'div',
-        { style: (0, _extends3.default)({}, STYLE.ROOT, rootStyle) },
+        { style: (0, _extends3.default)({}, _InputStyle2.default.ROOT, rootStyle) },
         _react2.default.createElement('input', {
           type: 'text',
-          style: (0, _extends3.default)({}, STYLE.INPUT, inputStyle),
+          style: (0, _extends3.default)({}, _InputStyle2.default.INPUT, inputStyle),
           ref: this._refInput,
           name: 'text-date'
           //autoComplete="new-text-date"
@@ -146,10 +151,10 @@ var InputPattern = (_temp = _class = function (_Component) {
           onBlur: this._handleBlurValue,
           onKeyDown: this._handleKeyDown
         }),
-        _react2.default.createElement('hr', { style: (0, _extends3.default)({}, STYLE.HR, _styleHr) }),
+        _react2.default.createElement('hr', { style: (0, _extends3.default)({}, _InputStyle2.default.HR, _styleHr) }),
         _react2.default.createElement(
           'div',
-          { style: STYLE.ERR_MSG },
+          { style: _InputStyle2.default.ERR_MSG },
           errorInput
         )
       );

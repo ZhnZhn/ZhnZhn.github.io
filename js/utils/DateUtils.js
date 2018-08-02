@@ -106,7 +106,14 @@ var DateUtils = {
 		    y = _str$toString$split4$3 === undefined ? 1970 : _str$toString$split4$3;
 
 		return DateUtils.isYmd(y + '-' + m + '-' + d);
+	},
+
+
+	ymdToUTC: function ymdToUTC(str) {
+		var arrDate = str.split('-');
+		return Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]);
 	}
+
 };
 
 exports.default = DateUtils;

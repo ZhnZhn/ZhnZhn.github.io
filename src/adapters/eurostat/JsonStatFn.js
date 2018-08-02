@@ -116,7 +116,7 @@ const JsonStatFn = {
          .map(arr => arr.sort(AdapterFn.compareByValueId))
          .fold(_splitForConfig);
        });
-  },
+  },  
   trJsonToSeria : (json, configSlice, categories) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return Box(_combineToHm(dGeo.id, sGeo))

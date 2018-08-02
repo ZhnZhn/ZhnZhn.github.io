@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+import STYLE from './InputStyle';
+
+/*
 const STYLE = {
   ROOT : {
     position: 'relative',
@@ -46,6 +49,7 @@ const STYLE = {
     fontWeight: 'bold'
   }
 };
+*/
 
 class InputPattern extends Component {
   /*

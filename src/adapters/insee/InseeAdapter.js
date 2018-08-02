@@ -1,6 +1,6 @@
 import AdapterFn from '../AdapterFn'
 
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 
 import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
 import fnDescr from './fnDescr'
@@ -63,9 +63,8 @@ const InseeAdapter = {
   toConfig(str, option) {
     const { value, title, subtitle } = option
         , { data, info, minClose, maxClose } = _toData(str)
-        , config = ConfigBuilder()
-            .initBaseArea()
-            .add('chart', { spacingTop: 25 })
+        , config = Builder()
+            .areaConfig({ spacingTop: 25 })            
             .addCaption(title, subtitle)
             .addPoints(value, data)
             .setMinMax(minClose, maxClose)
@@ -85,10 +84,10 @@ const InseeAdapter = {
      const { value, title, subtitle } = option
          , _text = subtitle ? subtitle : title
          , { data } = _toData(str);
-      return ConfigBuilder()
-        .initBaseSeria()
+      return Builder()
+        .initSeria()
         .addPoints(value, data, _text)
-        .toConfig();
+        .toSeria();
   }
 }
 

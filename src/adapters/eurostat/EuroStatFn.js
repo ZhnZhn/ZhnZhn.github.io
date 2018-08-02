@@ -2,7 +2,6 @@ import ChartConfig from '../../charts/ChartConfig';
 import Chart from '../../charts/Chart';
 import Tooltip from '../../charts/Tooltip';
 
-
 import AdapterFn from '../AdapterFn';
 
 const {
@@ -18,7 +17,7 @@ const COLOR = {
   NOT_EU_MEMBER: '#8085e9',
 };
 const C = {
-  EU_CODES: ["EU", "EU15", "EU25", "EU27", "EU28", "EU27_2019" ],
+  EU_CODES: ["EU", "EU15", "EU25", "EU27", "EU28", "EU27_2019", "G20", "Group of Twenty" ],
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
   EU_MEMBER: [
     "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus",
@@ -237,7 +236,15 @@ const EuroStatFn = {
     }
   },
 
-  findMinY: findMinY
+  findMinY: findMinY,
+
+  crTimeIndexAndValue: (json) => {
+    const { dimension={}, value=[] } = json
+        , { time={} } = dimension
+        , { category={} } = time
+        , { index:timeIndex=0 } = category;
+    return { timeIndex, value };
+  }
 }
 
 export default EuroStatFn

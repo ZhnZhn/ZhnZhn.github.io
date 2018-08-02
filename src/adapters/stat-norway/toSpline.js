@@ -1,6 +1,6 @@
 
 import ChartConfig from '../../charts/ChartConfig'
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 
 import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
 
@@ -45,9 +45,8 @@ const toArea = {
       , { ds, values, times } = crDsValuesTimes(json, option)
       , data = _toData(values, times)
       , seria = _crSplineSeria(data, option)
-      , config = ConfigBuilder()
-         .initBaseArea()
-         .add('chart', { spacingTop: 25 })
+      , config = Builder()
+         .areaConfig({ spacingTop: 25 })         
          .addCaption(title, subtitle)
          .clearSeries()
          .addSeries(seria)

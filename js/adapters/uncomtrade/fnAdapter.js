@@ -166,7 +166,7 @@ var fnAdapter = {
     var title = option.title,
         subtitle = option.subtitle;
 
-    return (0, _ConfigBuilder2.default)().initBaseArea().add('chart', _conf2.default.CHART).addCaption(title, subtitle).add('xAxis', _conf2.default.X_AXIS).add('yAxis', _conf2.default.Y_AXIS).addTooltip(_Tooltip2.default.fnBasePointFormatterC).add('info', this.crInfo(json)).add('zhConfig', this.crZhConfig(option)).toConfig();
+    return (0, _ConfigBuilder2.default)().areaConfig().add('chart', _conf2.default.CHART).addCaption(title, subtitle).add('xAxis', _conf2.default.X_AXIS).add('yAxis', _conf2.default.Y_AXIS).addTooltip(_Tooltip2.default.fnBasePointFormatterC).add('info', this.crInfo(json)).add('zhConfig', this.crZhConfig(option)).toConfig();
   },
   toConfig: function toConfig(json, option) {
     var config = this.crBaseConfig(json, option);

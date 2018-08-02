@@ -3,7 +3,7 @@ import { ChartType as CT } from '../../constants/Type'
 
 import ChartConfig from '../../charts/ChartConfig'
 import Tooltip from '../../charts/Tooltip'
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 
 import AdapterFn from '../AdapterFn'
 
@@ -83,11 +83,9 @@ const ToScatter = {
 
   toConfig: (data, option) => {
     const seria = _crSeria(data, option)
-        , config = ConfigBuilder()
-           .initBaseArea()
-           .add({
-              zhConfig: _crZhConfig(option)
-            })
+        , config = Builder()
+           .areaConfig()
+           .add({ zhConfig: _crZhConfig(option) })
            .toConfig();
     config.series[0] = seria
     return config;

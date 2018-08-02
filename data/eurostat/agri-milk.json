@@ -1,9 +1,1 @@
-{
-  "metrics" : [
-    { "caption" : "Collection of cow's milk, 1000t", "value" : "tag00037" },
-    { "caption" : "Production of butter, 1000t", "value" : "tag00038" },
-    { "caption" : "Production of milk powder, 1000t", "value" : "tag00039" },
-    { "caption" : "Production of cheese, 1000t", "value" : "tag00040" },
-    { "caption" : "Production and utilisation of milk on the farm, 1000t", "value" : "tag00041" }
-  ]
-}
+{"metrics":[{"caption":"Collection of cow's milk, 1000t","value":"tag00037"},{"caption":"Production of butter, 1000t","value":"tag00038"},{"caption":"Production of milk powder, 1000t","value":"tag00039"},{"caption":"Production of cheese, 1000t","value":"tag00040"},{"caption":"Production and utilisation of milk on the farm, 1000t","value":"tag00041"}]}

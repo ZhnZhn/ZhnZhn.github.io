@@ -152,7 +152,7 @@ var toColumn = {
         _c = data.map(function (item) {
       return item.c;
     }),
-        config = (0, _ConfigBuilder2.default)().initBarOrColumn(seriaType, _c, { seriaColor: seriaColor }).addCaption(_title, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
+        config = (0, _ConfigBuilder2.default)().barOrColumnConfig(seriaType, _c, { seriaColor: seriaColor }).addCaption(_title, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
       chart: { spacingTop: 25 }
     }, crChartOption(_ds, Tid, option))).toConfig();
 

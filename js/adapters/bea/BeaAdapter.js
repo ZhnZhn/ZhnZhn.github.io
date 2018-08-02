@@ -26,10 +26,10 @@ var BeaAdapter = {
   toConfig: function toConfig(json, option) {
     var Results = json.BEAAPI.Results,
         data = crData(Results, option),
-        seria = (0, _ConfigBuilder2.default)().initSpline({ data: data }).toConfig(),
+        seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
         title = option.title,
         dfTitle = option.dfTitle,
-        config = (0, _ConfigBuilder2.default)().initBaseArea2(dfTitle, title).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data, Results: Results }))).toConfig();
+        config = (0, _ConfigBuilder2.default)().area2Config(dfTitle, title).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data, Results: Results }))).toConfig();
 
 
     return { config: config };
@@ -43,4 +43,4 @@ var BeaAdapter = {
 };
 
 exports.default = BeaAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\bea\BeaAdapter.js.map
+//# sourceMappingURL=BeaAdapter.js.map

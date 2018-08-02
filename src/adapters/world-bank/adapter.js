@@ -5,16 +5,15 @@ const { crId, crData, crConfigOptions } = fnAdapter;
 
 const adapter = {
   crKey: crId,
-  
+
   toConfig(json, option){
     const { title, subtitle } = option
     , data = crData(json[1])
     , seria = Builder()
-       .initSpline({ data })
-       .toConfig()
+       .splineSeria({ data })
+       .toSeria()
     , config = Builder()
-       .initBaseArea()
-       .add('chart', { spacingTop: 25 })
+       .areaConfig({ spacingTop: 25 })       
        .addCaption(title, subtitle)
        .addSeries(seria)
        .add({

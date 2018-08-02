@@ -30,8 +30,8 @@ var adapter = {
     var title = option.title,
         subtitle = option.subtitle,
         data = crData(json[1]),
-        seria = (0, _ConfigBuilder2.default)().initSpline({ data: data }).toConfig(),
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOptions(option, data))).toConfig();
+        seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOptions(option, data))).toConfig();
 
 
     return { config: config };

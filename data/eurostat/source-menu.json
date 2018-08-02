@@ -4,14 +4,22 @@
       "caption" : "Economy",
       "items" : [
         { "id" : "ES_8_ECONOMIC" },
-        { "id" : "ES_CPI" },
-        { "id" : "ES_HCPI_ITEMS" },
         { "id" : "ES_LABOUR" },
         { "id" : "ES_SOCIAL" },
         { "id" : "ES_GDP" },
         { "id" : "ES_UNEMP" },
         { "id" : "ES_INDIC"},
         { "id" : "ES_PRODUCTION" }
+      ]
+    },{
+      "caption": "HCPI",
+      "items": [
+        { "id" : "ES_HCPI_NSA" },
+        { "id" : "ES_HCPI" },
+        { "id" : "ES_HCPI_FLASH" },
+        { "id" : "ES_HCPI_CONST" },
+        { "id" : "ES_PPP" },
+        { "id" : "ES_CPI_G20" }
       ]
     },{
       "caption" : "Energy",
@@ -132,55 +140,6 @@
         "twoJsonProp" : "indicators"
       }
     },
-    "ES_CPI" : {
-      "type" : "ES_CPI",
-      "menuTitle" : "HCPI (2015=100) (NSA)",
-      "dialogCaption" : "HCPI (2015=100) (NSA)",
-      "chartContainerCaption" : "Eurostat Harmonised Consume Price Index (NSA)",
-      "dialogType" : "DialogEurostat3A",
-      "addProps": "ES_COUNTRIES_BASE",
-      "dialogProps" : {
-        "twoCaption" : "HCPI",
-        "twoURI" : "./data/eurostat/cpi.json",
-        "twoJsonProp": "metrics",
-        "threeCaption": "Unit",
-        "threeURI": "./data/eurostat/cpi-units.json",
-        "dfProps": {
-          "mapFrequency" : "M",
-          "mapDateDf" : 1,
-          "dfTable": "ei_cphi_m",
-          "dfParams": [ "geo", "indic", "unit" ],
-          "dfTail": "s_adj=NSA",
-          "dfSlice" : {
-             "s_adj": "NSA"
-          }
-        }
-      }
-    },
-    "ES_HCPI_ITEMS" : {
-      "type" : "ES_HCPI_ITEMS",
-      "menuTitle" : "HCPI Rates",
-      "dialogCaption" : "HCPI Rates",
-      "chartContainerCaption" : "Eurostat Harmonised Consume Price Index",
-      "dialogType" : "DialogEurostat3A",
-      "addProps": "ES_COUNTRIES_BASE",
-      "dialogProps" : {
-        "twoCaption" : "Item",
-        "twoURI" : "./data/eurostat/hcpi-items.json",
-        "threeCaption": "Unit",
-        "threeURI": "./data/eurostat/hcpi-units.json",
-        "dfProps": {
-          "mapFrequency" : "M",
-          "mapDateDf" : 1,
-          "dfTable": "prc_hicp_fp",
-          "dfParams": [ "geo", "coicop", "unit" ],
-          "dfTail": "release=FIN",
-          "dfSlice" : {
-             "release": "FIN"
-          }
-        }
-      }
-    },
     "ES_LABOUR" : {
       "type" : "ES_LABOUR",
       "menuTitle" : "Labour Cost",
@@ -277,16 +236,131 @@
         }
       }
     },
-    "ES_G20_CPI" : {
-      "type" : "ES_G20_CPI",
-      "menuTitle" : "G20 CPI All Items",
-      "dialogCaption" : "G20 CPI All Items",
-      "chartContainerCaption" : "Eurostat G20 CPI All Items",
+
+    "ES_HCPI_NSA" : {
+      "type" : "ES_HCPI_NSA",
+      "menuTitle" : "HCPI (2015=100) (NSA)",
+      "dialogCaption" : "HCPI (2015=100) (NSA)",
+      "chartContainerCaption" : "Eurostat Harmonised Consume Price Index (NSA)",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption" : "HCPI",
+        "twoURI" : "./data/eurostat/cpi.json",
+        "twoJsonProp": "metrics",
+        "threeCaption": "Unit",
+        "threeURI": "./data/eurostat/cpi-units.json",
+        "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 1,
+          "dfTable": "ei_cphi_m",
+          "dfParams": [ "geo", "indic", "unit" ],
+          "dfTail": "s_adj=NSA",
+          "dfSlice" : {
+             "s_adj": "NSA"
+          }
+        }
+      }
+    },
+    "ES_HCPI" : {
+      "type" : "ES_HCPI",
+      "menuTitle" : "HCPI (2015=100)",
+      "dialogCaption" : "HCPI (2015=100)",
+      "chartContainerCaption" : "Eurostat HCPI (2015=100) Monthly",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/hcpi-items.json",
+        "twoCaption": "Item",
+        "threeURI": "./data/eurostat/hcpi-units-t.json",
+        "threeCaption": "Unit",
+        "dfProps": {
+          "dfT" : "three",
+          "dfParams": [ "geo", "coicop" ],
+          "mapType" : "V",
+          "mapFrequency" : "M",
+          "mapDateDf" : 1
+        }
+      }
+    },
+    "ES_HCPI_FLASH" : {
+      "type" : "ES_HCPI_FLASH",
+      "menuTitle" : "HCPI (Flash Release)",
+      "dialogCaption" : "HCPI (Flash Release)",
+      "chartContainerCaption" : "Eurostat HCPI (Flash Release)",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption" : "Item",
+        "twoURI" : "./data/eurostat/hcpi-items.json",
+        "threeCaption": "Unit",
+        "threeURI": "./data/eurostat/hcpi-units.json",
+        "dfProps": {
+          "mapFrequency" : "M",
+          "mapDateDf" : 1,
+          "dfTable": "prc_hicp_fp",
+          "dfParams": [ "geo", "coicop", "unit" ],
+          "dfTail": "release=FLS",
+          "dfSlice" : {
+             "release": "FLS"
+          }
+        }
+      }
+    },
+    "ES_HCPI_CONST" : {
+      "type" : "ES_HCPI_CONST",
+      "menuTitle" : "HCPI at Constant Taxes",
+      "dialogCaption" : "HCPI at Constant Taxes",
+      "chartContainerCaption" : "Eurostat HCPI at Constant Taxes",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/hcpi-items.json",
+        "twoCaption": "Item",
+        "twoJsonProp": "items",
+        "threeURI": "./data/eurostat/hcpi-units-const-t.json",
+        "threeCaption": "Unit",
+        "dfProps": {
+          "dfT": "three",
+          "dfParams": [ "geo", "coicop" ],
+          "mapType" : "V",
+          "mapFrequency" : "M",
+          "mapDateDf" : 1
+        }
+      }
+    },
+    "ES_PPP" : {
+      "type" : "ES_PPP",
+      "menuTitle" : "PPP, Price Indices, Expend.",
+      "dialogCaption" : "PPP, Price Indices, Expenditures",
+      "chartContainerCaption" : "Eurostat PPP, Price Indices, Expenditures",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/ppp-aggregators.json",
+        "twoCaption": "Aggregator",
+        "twoJsonProp": "items",
+        "threeURI": "./data/eurostat/ppp-items.json",
+        "threeCaption": "Item",
+        "dfProps": {
+          "dfTable": "prc_ppp_ind",
+          "dfParams": [ "geo", "aggreg", "na_item" ],
+          "mapType" : "V",
+          "mapFrequency" : "Y",
+          "mapDateDf" : 1
+        }
+      }
+    },
+    "ES_CPI_G20" : {
+      "type" : "ES_CPI_G20",
+      "menuTitle" : "CPI G20 All Items",
+      "dialogCaption" : "CPI G20 All Items",
+      "chartContainerCaption" : "Eurostat CPI G20 All Items",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "oneURI": "./data/eurostat/g20-countries.json",
-        "twoURI" : "./data/eurostat/g20-cpi-units.json",
+        "oneURI": "./data/eurostat/hcpi-g20-countries.json",
+        "twoURI" : "./data/eurostat/hcpi-g20-units.json",
         "twoCaption": "Unit",
         "twoJsonProp": "items",
         "dfProps": {
@@ -295,7 +369,7 @@
         }
       }
     },
-    
+
     "ES_E_INDIC" : {
         "type" : "ES_E_INDIC",
         "menuTitle" : "Indicators",
@@ -611,8 +685,8 @@
 
     "ES_TR_BYPARTNER": {
       "type" : "ES_TR_BYPARTNER",
-      "menuTitle" : "EU28 Total Goods, Annual",
-      "dialogCaption" : "EU28 Total Goods, Annual",
+      "menuTitle" : "EU28 Total Goods, A",
+      "dialogCaption" : "EU28 Total Goods, A",
       "chartContainerCaption" : "Eurostat: Trade EU28 Total Goods by Partner, Annual",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
@@ -716,8 +790,8 @@
     },
     "ES_TR_EABYPARTNER": {
       "type": "ES_TR_EABYPARTNER",
-      "menuTitle": "EA19 Goods, Monthly",
-      "dialogCaption": "EA19 Goods, Monthly",
+      "menuTitle": "EA19 Goods, M",
+      "dialogCaption": "EA19 Goods, M",
       "chartContainerCaption": "Eurostat: Trade EA19 Goods By Partner, Monthly, M EUR",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_TRADEBY_BASE",
@@ -735,8 +809,8 @@
     },
     "ES_TR_EUBYPARTNER": {
       "type": "ES_TR_EUBYPARTNER",
-      "menuTitle": "EU28 Goods, Monthly",
-      "dialogCaption": "EU28 Goods, Monthly",
+      "menuTitle": "EU28 Goods, M",
+      "dialogCaption": "EU28 Goods, M",
       "chartContainerCaption": "Eurostat: Trade EU28 Goods By Partner, Monthly, M EUR",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_TRADEBY_BASE",
@@ -754,8 +828,8 @@
     },
     "ES_TR_TOTALGOODS": {
       "type": "ES_TR_TOTALGOODS",
-      "menuTitle": "Total Goods, Monthly",
-      "dialogCaption": "Total Goods, Monthly",
+      "menuTitle": "Total Goods, M",
+      "dialogCaption": "Total Goods, M",
       "chartContainerCaption": "Eurostat: Total Goods, Monthly, M EUR",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -776,8 +850,8 @@
     },
     "ES_TR_BYCOUNTRY": {
       "type": "ES_TR_BYCOUNTRY",
-      "menuTitle": "Goods & Services, Annual",
-      "dialogCaption": "Goods & Services, Annual",
+      "menuTitle": "Goods & Services, A",
+      "dialogCaption": "Goods & Services, A",
       "chartContainerCaption": "Eurostat: Trade of Goods & Services by Member State, Annual, in M EUR",
       "dialogType": "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",

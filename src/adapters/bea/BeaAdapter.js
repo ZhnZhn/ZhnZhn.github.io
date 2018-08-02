@@ -9,11 +9,11 @@ const BeaAdapter = {
     const Results = json.BEAAPI.Results
         , data = crData(Results, option)
         , seria = Builder()
-            .initSpline({ data })
-            .toConfig()
+            .splineSeria({ data })
+            .toSeria()
         , { title, dfTitle } = option
         , config = Builder()
-           .initBaseArea2(dfTitle, title)
+           .area2Config(dfTitle, title)
            .addSeries(seria)
            .add({
              ...crConfigOption({ option, data, Results })

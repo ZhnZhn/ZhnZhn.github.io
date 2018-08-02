@@ -1,12 +1,1 @@
-{
-  "items": [
-  { "value": "TOTAL","caption":"Total"},
-	{ "value": "SCPOLDPEN","caption":"Old age pension"},
-	{ "value": "SCPANTPEN","caption":"Anticipated old age pension"},
-	{ "value": "SCPPARPEN","caption":"Partial pension"},
-	{ "value": "SCPDISPEN","caption":"Disability pension"},
-	{ "value": "SCPEARLYRED","caption":"Early retirement benefit due to reduced capacity to work"},
-	{ "value": "SCPSURVPEN","caption":"Survivors pension"},
-	{ "value": "SCPEARLYMARK","caption":"Early retirement benefit for labour market reasons"}
-  ]
-}
+{"items":[{"value":"TOTAL","caption":"Total"},{"value":"SCPOLDPEN","caption":"Old age pension"},{"value":"SCPANTPEN","caption":"Anticipated old age pension"},{"value":"SCPPARPEN","caption":"Partial pension"},{"value":"SCPDISPEN","caption":"Disability pension"},{"value":"SCPEARLYRED","caption":"Early retirement benefit due to reduced capacity to work"},{"value":"SCPSURVPEN","caption":"Survivors pension"},{"value":"SCPEARLYMARK","caption":"Early retirement benefit for labour market reasons"}]}

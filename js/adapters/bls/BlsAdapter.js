@@ -29,8 +29,8 @@ var BlsAdapter = {
         title = option.title,
         _dfTitle = dfTitle || subtitle,
         data = crData(json),
-        seria = (0, _ConfigBuilder2.default)().initSpline({ data: data }).toConfig(),
-        config = (0, _ConfigBuilder2.default)().initBaseArea2(_dfTitle, title).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
+        seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
+        config = (0, _ConfigBuilder2.default)().area2Config(_dfTitle, title).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
 
     return { config: config };
   },

@@ -49,24 +49,24 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     this.config = config
     return this;
   },
-  initBaseArea(option){
+  areaConfig(option){
     this.config = ChartConfig.fBaseAreaConfig(option);
     return this;
   },
-  initBaseArea2(title, subtitle){
-    this.initBaseArea({ spacingTop: 25 })
+  area2Config(title, subtitle){
+    this.areaConfig({ spacingTop: 25 })
       .addCaption(title, subtitle)
       .clearSeries()
     return this;
   },
-  initBaseStock(id, dataOption){
+  stockConfig(id, dataOption){
     const {
             dataVolumeColumn, dataVolume,
             dataATH,
             minClose, maxClose,
             data, dataHigh, dataLow, dataOpen
           } = dataOption;
-    this.initBaseArea({ spacingTop: 25 })
+    this.areaConfig({ spacingTop: 25 })
       .addTooltip(Tooltip.fnBasePointFormatter)
       .addMiniVolume({
         id,
@@ -80,30 +80,30 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
       .setStockSerias(id, data, dataHigh, dataLow, dataOpen)
     return this;
   },
-  initBaseCategories(categories=[]){
+  categoryConfig(categories=[]){
     this.config = ChartConfig.fBaseAreaConfig()
     const xAxis = {...C.CATEGORIES_X_AXIS, ...{ categories }}
     this.add('xAxis', xAxis)
     this.add('yAxis', C.CATEGORIES_Y_AXIS)
     return this;
   },
-  initColumn(categories=[], option){
+  _columnConfig(categories=[], option){
     this.config = Factory.crColumnConfig(option)
     this.add('xAxis', { categories })
     return this;
   },
-  initBar(categories=[], option){
+  _barConfig(categories=[], option){
     this.config = Factory.crBarConfig(option)
     this.add('xAxis', { categories })
     return this;
   },
-  initBarOrColumn(type, categories=[], option){
+  barOrColumnConfig(type, categories=[], option){
     if (type === 'BAR') {
-      return this.initBar(categories, option);
+      return this._barConfig(categories, option);
     }
-    return this.initColumn(categories, option);
+    return this._columnConfig(categories, option);
   },
-  initBaseTreeMap(){
+  treeMapConfig(){
     this.config = ChartConfig.fBaseTreeMapConfig()
     return this;
   },
@@ -218,6 +218,11 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     return this;
   },
 
+  addLegend(legend){
+    return this.add('zhConfig', {
+      legend, isWithLegend: true,
+    });
+  },
 
   setMinMax(minValue, maxValue){
     const plotLines = this.config.yAxis.plotLines;

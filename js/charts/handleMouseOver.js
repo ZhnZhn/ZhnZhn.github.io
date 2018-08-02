@@ -20,6 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var C = {
   DATE_PATTERN: '%d-%m-%Y',
+  DATE_EMPTY: '01-01-1970',
 
   ATTR_LABEL: {
     zIndex: 100
@@ -40,9 +41,10 @@ var C = {
 };
 
 var _crCrossParam = function _crCrossParam(point, chart) {
+  var _d = _highcharts2.default.dateFormat(C.DATE_PATTERN, point.x);
   return {
     y: point.y,
-    date: _highcharts2.default.dateFormat(C.DATE_PATTERN, point.x),
+    date: _d !== C.DATE_EMPTY ? _d : '',
     dX: chart.options.chart.xDeltaCrossLabel,
     dY: chart.options.chart.yDeltaCrossLabel
   };

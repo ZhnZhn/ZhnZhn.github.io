@@ -36,7 +36,7 @@ const toChart = {
     , dataOption = toSeriesData(_id, json)
     , { data, dataMfi } = dataOption
     , config = Builder()
-        .initBaseStock(_id, dataOption)
+        .stockConfig(_id, dataOption)
         .addCaption(title)
         .add({
            valueMoving: valueMoving(data),
@@ -56,9 +56,9 @@ const toChart = {
              isAllSeries: false,
           });
     return Builder()
-      .initBaseSeria()
+      .initSeria()
       .addPoints(_id, data)
-      .toConfig();
+      .toSeria();
   }
 }
 

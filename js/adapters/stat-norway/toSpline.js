@@ -72,7 +72,7 @@ var toArea = {
         times = _crDsValuesTimes.times,
         data = _toData(values, times),
         seria = _crSplineSeria(data, option),
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add((0, _extends3.default)({}, crChartOption(ds, data, option), {
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add((0, _extends3.default)({}, crChartOption(ds, data, option), {
       zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
       zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
     })).toConfig();

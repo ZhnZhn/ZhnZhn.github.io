@@ -22,3 +22,4 @@ _codemods
 src/components/chart-config
 js/components/chart-config
 app/config-dialog*.js
+package-lock.json

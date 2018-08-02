@@ -1,17 +1,1 @@
-{
-  "indicators" : [
-    {
-      "caption" : "Market share of the largest generator in the electricity market",
-      "value" : "ten00119?unit=PC&product=9000&indic_en=119500",
-      "mapFrequency" : "Y",
-      "mapValue" : "ten00119?unit=PC&product=9000&indic_en=119500",
-      "mapSlice" : { "unit" : "PC", "product" : "9000", "indic_en": "119500" }
-    },{
-      "caption" : "Share of renewable energy in gross final energy consumption",
-      "value" : "t2020_31?unit=PC&indic_eu=T2020_31",
-      "mapFrequency" : "Y",
-      "mapValue" : "t2020_31?unit=PC&indic_eu=T2020_31",
-      "mapSlice" : { "unit" : "PC", "indic_eu" : "T2020_31" }
-    }
-  ]
-}
+{"indicators":[{"caption":"Market share of the largest generator in the electricity market","value":"ten00119?unit=PC&product=9000&indic_en=119500","mapFrequency":"Y","mapValue":"ten00119?unit=PC&product=9000&indic_en=119500","mapSlice":{"unit":"PC","product":"9000","indic_en":"119500"}},{"caption":"Share of renewable energy in gross final energy consumption","value":"t2020_31?unit=PC&indic_eu=T2020_31","mapFrequency":"Y","mapValue":"t2020_31?unit=PC&indic_eu=T2020_31","mapSlice":{"unit":"PC","indic_eu":"T2020_31"}}]}

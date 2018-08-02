@@ -9,10 +9,10 @@ const BlsAdapter = {
     , _dfTitle = dfTitle || subtitle
     , data = crData(json)
     , seria = Builder()
-        .initSpline({ data })
-        .toConfig()
+        .splineSeria({ data })
+        .toSeria()
     , config = Builder()
-        .initBaseArea2(_dfTitle, title)
+        .area2Config(_dfTitle, title)
         .addSeries(seria)
         .add({
           ...crConfigOption({ json, option, data })

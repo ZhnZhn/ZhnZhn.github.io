@@ -38,7 +38,7 @@ var FaoStatAdapter = {
         _title = crTitle(option, json),
         _subtitle = crSubtitle(json, subtitle),
         _points = toDataPoints(json, option),
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(_title, _subtitle).addPoints(_id, _points).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(_title, _subtitle).addPoints(_id, _points).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
       info: toInfo(json, _title, _subtitle),
       valueMoving: crValueMoving(_points),
       zhConfig: crZhConfig(_id, option)
@@ -55,12 +55,12 @@ var FaoStatAdapter = {
         parentId = option.parentId,
         oneCaption = option.oneCaption;
 
-    return (0, _ConfigBuilder2.default)().initBaseSeria().add({
+    return (0, _ConfigBuilder2.default)().initSeria().add({
       data: _data,
       zhSeriaId: parentId + '_' + _id,
       zhValueText: oneCaption,
       zhItemCaption: oneCaption
-    }).toConfig();
+    }).toSeria();
   }
 };
 

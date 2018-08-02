@@ -1,7 +1,7 @@
 import JSONstat from 'jsonstat';
 
 import Chart from '../../charts/Chart'
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
@@ -173,16 +173,15 @@ const toTreeMap = {
     _addColor(_data, index1, index2)
   }
 
-   const _seria = ConfigBuilder()
-     .initTreeMap(
+   const _seria = Builder()
+     .treeMapSeria(
         Tooltip.treeMap, {
           zhSeriaId: fnAdapter.crId(),
           data: _data
-        }
-      )
-      .toConfig();
-    const config = ConfigBuilder()
-      .initBaseTreeMap(_c, seriaType)
+      })
+      .toSeria();
+    const config = Builder()
+      .treeMapConfig(_c, seriaType)
       //.addCaption(C.TITLE, _subtitle)
       .addCaption(_title, _subtitle)
       .addSeries(_seria)

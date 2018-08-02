@@ -26,10 +26,10 @@ var crSubtitle = _fnAdapter2.default.crSubtitle,
 var IntrinioAdapter = {
   toConfig: function toConfig(json, option) {
     var data = crData(json, option),
-        seria = (0, _ConfigBuilder2.default)().initSpline({ data: data }).toConfig(),
+        seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
         _subtitle = crSubtitle(option),
         title = option.title,
-        config = (0, _ConfigBuilder2.default)().initBaseArea2(title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
+        config = (0, _ConfigBuilder2.default)().area2Config(title, _subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOption({ option: option, data: data }))).toConfig();
 
 
     return { config: config };

@@ -1,5 +1,5 @@
 import ChartConfig from '../../charts/ChartConfig'
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import AdapterFn from '../AdapterFn'
@@ -41,7 +41,7 @@ const fnAdapter = {
         , _id = this.crChartId(option);
     return {
       id: _id,
-      key: _id,      
+      key: _id,
       isWithoutAdd: true,
       isWithLegend: true,
       legend: [],
@@ -124,8 +124,8 @@ const fnAdapter = {
 
   crBaseConfig(json, option) {
     const { title, subtitle } = option;
-    return ConfigBuilder()
-      .initBaseArea()
+    return Builder()
+      .areaConfig()
       .add('chart', C.CHART)
       .addCaption(title, subtitle)
       .add('xAxis', C.X_AXIS)

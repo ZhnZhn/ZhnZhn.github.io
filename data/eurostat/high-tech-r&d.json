@@ -1,6 +1,1 @@
-{
-  "units": [
-    { "caption": "Million units of national currency", "value": "MIO_NAC" },
-    { "caption": "Percentage of GDP", "value": "PC_GDP" }
-  ]
-}
+{"units":[{"caption":"Million units of national currency","value":"MIO_NAC"},{"caption":"Percentage of GDP","value":"PC_GDP"}]}

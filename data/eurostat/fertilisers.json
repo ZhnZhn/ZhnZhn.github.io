@@ -1,7 +1,1 @@
-{
-  "items": [
-    { "caption": "Potassium", "value": "K" },
-    { "caption": "Nitrogen", "value": "N" },
-    { "caption": "Phosphorus", "value": "P" }
-  ]
-}
+{"items":[{"caption":"Potassium","value":"K"},{"caption":"Nitrogen","value":"N"},{"caption":"Phosphorus","value":"P"}]}

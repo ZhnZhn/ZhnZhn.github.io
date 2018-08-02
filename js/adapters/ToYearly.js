@@ -204,11 +204,11 @@ var _crRangeSeria = function _crRangeSeria(data) {
 
 
   return {
-    rangeSeria: (0, _ConfigBuilder2.default)().initAreaRange(_Tooltip2.default.categoryRHLY, {
+    rangeSeria: (0, _ConfigBuilder2.default)().areaRangeSeria(_Tooltip2.default.categoryRHLY, {
       data: _data,
       name: name,
       point: {}
-    }).toConfig(),
+    }).toSeria(),
     rangeItem: _crItem(name, C.RANGE)
   };
 };
@@ -314,7 +314,7 @@ var ToYearly = {
         avgSeria = _crAvgSeria2.avgSeria,
         avgItem = _crAvgSeria2.avgItem,
         legend = [nowItem, prevItem, rangeItem, avgItem],
-        config = (0, _ConfigBuilder2.default)().initBaseCategories(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip2.default.category).add({
+        config = (0, _ConfigBuilder2.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip2.default.category).add({
       chart: { spacingTop: 25, marginTop: 45 },
       zhConfig: _crZhConfig(option, { legend: legend }),
       valueMoving: _crValueMoving(nowSeria, prevSeria)

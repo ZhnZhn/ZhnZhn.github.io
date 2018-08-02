@@ -1,5 +1,5 @@
 
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 import fns from './toFns'
 
 const TITLE = "Source: IEX Platform";
@@ -14,8 +14,8 @@ const Scatter = function(impl) {
 Scatter.prototype = Object.assign(Scatter.prototype, {
   toConfig(json, option){
     const { crSubtitle, crSeria } = this.impl;
-    return ConfigBuilder()
-      .initBaseArea({ spacingTop: 25, isCrosshair: false })
+    return Builder()
+      .areaConfig({ spacingTop: 25, isCrosshair: false })
       .addCaption(TITLE, crSubtitle(option))
       .addSeriaTo(0, crSeria(json, option))
       .add({ zhConfig: fns.crZhConfig(option) })

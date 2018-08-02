@@ -1,7 +1,8 @@
 import ChartConfig from '../../charts/ChartConfig';
 
-import EuroStatFn from './EuroStatFn';
+import fn from './EuroStatFn';
 
+/*
 const _crTimeIndexAndValue = json => {
   const { dimension={}, value=[] } = json
       , { time={} } = dimension
@@ -9,38 +10,39 @@ const _crTimeIndexAndValue = json => {
       , { index:timeIndex=0 } = category;
   return { timeIndex, value };
 }
+*/
 
 const toArea = {
    createConfig: (json, option) => {
-     const { timeIndex, value } = _crTimeIndexAndValue(json)
+     const { timeIndex, value } = fn.crTimeIndexAndValue(json)
          , {
              isNotZoomToMinMax,
              seriaType, seriaColor
             } = option
-         , { data, max, min } = EuroStatFn.createData(timeIndex, value)
+         , { data, max, min } = fn.createData(timeIndex, value)
          , config = ChartConfig.fBaseAreaConfig({
              seriaType: seriaType.toLowerCase(),
              seriaColor
            });
 
-      EuroStatFn.setDataAndInfo({ config, data, json, option });
-      EuroStatFn.setLineExtrems({ config, max, min, isNotZoomToMinMax });
+      fn.setDataAndInfo({ config, data, json, option });
+      fn.setLineExtrems({ config, max, min, isNotZoomToMinMax });
 
       return config;
    },
 
    createSeria: (json, option) => {
-     const { timeIndex, value } = _crTimeIndexAndValue(json)
+     const { timeIndex, value } = fn.crTimeIndexAndValue(json)
          , { itemCaption, seriaColor } = option
          , seria = ChartConfig.fSeries()
-         , { data } = EuroStatFn.createData(timeIndex, value);
+         , { data } = fn.createData(timeIndex, value);
 
      return Object.assign(seria, {
        zhSeriaId: option.key,
        zhValueText: itemCaption,
        color: seriaColor,
        data: data,
-       minY: EuroStatFn.findMinY(data)
+       minY: fn.findMinY(data)
      });
    }
 };

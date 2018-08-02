@@ -212,11 +212,11 @@ var toTreeMap = {
       _addColor(_data, index1, index2);
     }
 
-    var _seria = (0, _ConfigBuilder2.default)().initTreeMap(_Tooltip2.default.treeMap, {
+    var _seria = (0, _ConfigBuilder2.default)().treeMapSeria(_Tooltip2.default.treeMap, {
       zhSeriaId: _fnAdapter2.default.crId(),
       data: _data
-    }).toConfig();
-    var config = (0, _ConfigBuilder2.default)().initBaseTreeMap(_c, seriaType)
+    }).toSeria();
+    var config = (0, _ConfigBuilder2.default)().treeMapConfig(_c, seriaType)
     //.addCaption(C.TITLE, _subtitle)
     .addCaption(_title, _subtitle).addSeries(_seria).add((0, _extends3.default)({
       chart: {

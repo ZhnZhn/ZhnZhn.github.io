@@ -1,1 +1,34 @@
-{"version":3,"sources":["../../../src/adapters/eurostat/toAreaYearly.js"],"names":["_crTimeIndexAndValue","json","dimension","value","time","category","index","timeIndex","toAreaYearly","createConfig","option","data","toPointArr","title","subtitle","dataSource","config","toConfig","reverse","itemCaption","setInfo","createSeria","seria","fSeries","Object","assign","zhSeriaId","zhValueText"],"mappings":";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,uBAAuB,SAAvBA,oBAAuB,OAAQ;AAAA,wBACAC,IADA,CAC3BC,SAD2B;AAAA,MAC3BA,SAD2B,mCACjB,EADiB;AAAA,oBACAD,IADA,CACbE,KADa;AAAA,MACbA,KADa,+BACP,EADO;AAAA,wBAEfD,SAFe,CAE3BE,IAF2B;AAAA,MAE3BA,IAF2B,mCAEtB,EAFsB;AAAA,uBAGXA,IAHW,CAG3BC,QAH2B;AAAA,MAG3BA,QAH2B,kCAGlB,EAHkB;AAAA,wBAILA,QAJK,CAI3BC,KAJ2B;AAAA,MAIrBC,SAJqB,mCAIX,CAJW;;AAKnC,SAAO,EAAEA,oBAAF,EAAaJ,YAAb,EAAP;AACD,CAND;;AAQA,IAAMK,eAAe;AAClBC,gBAAc,sBAACR,IAAD,EAAOS,MAAP,EAAkB;AAAA,gCACDV,qBAAqBC,IAArB,CADC;AAAA,QACtBM,SADsB,yBACtBA,SADsB;AAAA,QACXJ,KADW,yBACXA,KADW;AAAA,QAExBQ,IAFwB,GAEjB,qBAAWC,UAAX,CAAsBL,SAAtB,EAAiCJ,KAAjC,CAFiB;AAAA,QAGtBU,KAHsB,GAGUH,MAHV,CAGtBG,KAHsB;AAAA,QAGfC,QAHe,GAGUJ,MAHV,CAGfI,QAHe;AAAA,QAGLC,UAHK,GAGUL,MAHV,CAGLK,UAHK;AAAA,QAIxBC,MAJwB,GAIf,mBAASC,QAAT,CACPN,KAAKO,OAAL,EADO,EACS;AAChBL,kBADgB,EACTC,kBADS;AAEhBK,mBAAaN,QAAQ,IAAR,GAAeC,QAFZ;AAGhBX,aAAOU,QAAQ,GAAR,GAAcC,QAHL;AAIhBC;AAJgB,KADT,CAJe;;AAY7B,yBAAWK,OAAX,CAAmB,EAAEJ,cAAF,EAAUf,UAAV,EAAgBS,cAAhB,EAAnB;AACA,WAAOM,MAAP;AACF,GAfiB;;AAiBlBK,eAAa,qBAACpB,IAAD,EAAOS,MAAP,EAAkB;AAC7B,QAAMY,QAAQ,sBAAYC,OAAZ,EAAd;AACAC,WAAOC,MAAP,CAAcH,KAAd,EAAqB;AACnBI,iBAAW,aADQ;AAEnBC,mBAAa;AAFM,KAArB;AAIA,WAAOL,KAAP;AACD;;AAxBiB,CAArB;;kBA4Bed,Y","file":"toAreaYearly.js","sourcesContent":["import ChartConfig from '../../charts/ChartConfig'\r\nimport EuroStatFn from './EuroStatFn';\r\nimport ToYearly from '../ToYearly'\r\n\r\nconst _crTimeIndexAndValue = json => {\r\n  const { dimension={}, value=[] } = json\r\n      , { time={} } = dimension\r\n      , { category={} } = time\r\n      , { index:timeIndex=0 } = category;\r\n  return { timeIndex, value };\r\n}\r\n\r\nconst toAreaYearly = {\r\n   createConfig: (json, option) => {\r\n     const { timeIndex, value } = _crTimeIndexAndValue(json)\r\n         , data = EuroStatFn.toPointArr(timeIndex, value)\r\n         , { title, subtitle, dataSource } = option\r\n         , config = ToYearly.toConfig(\r\n             data.reverse(), {\r\n             title, subtitle,\r\n             itemCaption: title + ': ' + subtitle,\r\n             value: title + '_' + subtitle,\r\n             dataSource\r\n           })\r\n\r\n      EuroStatFn.setInfo({ config, json, option });\r\n      return config;\r\n   },\r\n   \r\n   createSeria: (json, option) => {\r\n     const seria = ChartConfig.fSeries()\r\n     Object.assign(seria, {\r\n       zhSeriaId: 'Empty_Seria',\r\n       zhValueText: 'Empty Seria'\r\n     })\r\n     return seria;\r\n   }\r\n\r\n};\r\n\r\nexport default toAreaYearly\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eurostat/toAreaYearly.js"
+ ],
+ "file": "../../../src/adapters/eurostat/toAreaYearly.js",
+ "names": [
+  "toAreaYearly",
+  "createConfig",
+  "json",
+  "option",
+  "crTimeIndexAndValue",
+  "timeIndex",
+  "value",
+  "data",
+  "toPointArr",
+  "title",
+  "subtitle",
+  "dataSource",
+  "config",
+  "toConfig",
+  "reverse",
+  "itemCaption",
+  "setInfo",
+  "createSeria",
+  "seria",
+  "fSeries",
+  "Object",
+  "assign",
+  "zhSeriaId",
+  "zhValueText"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;;;AAEA;;;;;;;;;;AAUA,IAAMA,eAAe;AAClBC,gBAAc,sBAACC,IAAD,EAAOC,MAAP,EAAkB;AAAA,gCACD,qBAAGC,mBAAH,CAAuBF,IAAvB,CADC;AAAA,QACtBG,SADsB,yBACtBA,SADsB;AAAA,QACXC,KADW,yBACXA,KADW;AAAA,QAExBC,IAFwB,GAEjB,qBAAGC,UAAH,CAAcH,SAAd,EAAyBC,KAAzB,CAFiB;AAAA,QAGtBG,KAHsB,GAGUN,MAHV,CAGtBM,KAHsB;AAAA,QAGfC,QAHe,GAGUP,MAHV,CAGfO,QAHe;AAAA,QAGLC,UAHK,GAGUR,MAHV,CAGLQ,UAHK;AAAA,QAIxBC,MAJwB,GAIf,mBAASC,QAAT,CACPN,KAAKO,OAAL,EADO,EACS;AAChBL,kBADgB,EACTC,kBADS;AAEhBK,mBAAaN,QAAQ,IAAR,GAAeC,QAFZ;AAGhBJ,aAAOG,QAAQ,GAAR,GAAcC,QAHL;AAIhBC;AAJgB,KADT,CAJe;;AAY7B,yBAAGK,OAAH,CAAW,EAAEJ,cAAF,EAAUV,UAAV,EAAgBC,cAAhB,EAAX;AACA,WAAOS,MAAP;AACF,GAfiB;;AAiBlBK,eAAa,qBAACf,IAAD,EAAOC,MAAP,EAAkB;AAC7B,QAAMe,QAAQ,sBAAYC,OAAZ,EAAd;AACAC,WAAOC,MAAP,CAAcH,KAAd,EAAqB;AACnBI,iBAAW,aADQ;AAEnBC,mBAAa;AAFM,KAArB;AAIA,WAAOL,KAAP;AACD;;AAxBiB,CAArB;;kBA4BelB,Y"
+}

@@ -109,9 +109,7 @@ var ToScatter = {
 
   toConfig: function toConfig(data, option) {
     var seria = _crSeria(data, option),
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add({
-      zhConfig: _crZhConfig(option)
-    }).toConfig();
+        config = (0, _ConfigBuilder2.default)().areaConfig().add({ zhConfig: _crZhConfig(option) }).toConfig();
     config.series[0] = seria;
     return config;
   },

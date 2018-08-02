@@ -228,7 +228,11 @@ var AlphaAdapter = {
         _chartId = ticket + '-' + value,
         _title = ticket + ': ' + value,
         _series = this.toSeries(json, option),
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(_title).clearSeries().addSeries(_series).add('zhConfig', _crZhConfig(_chartId)).add('zhFnAddSeriesSma', _IndicatorSma.fnAddSeriesSma).add('zhFnRemoveSeries', _IndicatorSma.fnRemoveSeries).toConfig();
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(_title).clearSeries().addSeries(_series).add({
+      zhConfig: _crZhConfig(_chartId),
+      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
+      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+    }).toConfig();
 
     return {
       config: config,

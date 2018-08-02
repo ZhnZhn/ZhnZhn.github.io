@@ -1,8 +1,1 @@
-{
- "items": [
-{ "caption": "Index, 2010=100", "value": "I10" },
-{ "caption": "Index, 2015=100", "value": "I15" },
-{ "caption": "Percentage change compared to same period in previous year (YoY)", "value": "PCH_SM" },
-{ "caption": "Percentage change on previous period (MoM)", "value": "PCH_PRE" }
-  ]
-}
+{"items":[{"caption":"Index, 2010=100","value":"I10"},{"caption":"Index, 2015=100","value":"I15"},{"caption":"Percentage change compared to same period in previous year (YoY)","value":"PCH_SM"},{"caption":"Percentage change on previous period (MoM)","value":"PCH_PRE"}]}

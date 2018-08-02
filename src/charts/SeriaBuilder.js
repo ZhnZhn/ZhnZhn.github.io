@@ -72,34 +72,28 @@ const _addSeriesImpl = (to, series) => {
 
 const SeriaBuilder = {
 
-  initBaseSeria(option){
+  initSeria(option){
     this._type = 'S'
     this.config = Object.assign(ChartConfig.fSeries(), option)
     return this;
   },
-  initSpline(option){
-    return this.initBaseSeria({ ...C.SPLINE, ...option });
+  splineSeria(option){
+    return this.initSeria({ ...C.SPLINE, ...option });
   },
-  _initBaseSeria(BASE, tooltip, option){
+  _seria(CONFIG, tooltip, option){
     this._type = 'S'
-    this.config = { ...BASE, ...option }
+    this.config = { ...CONFIG, ...option }
     this.add('tooltip', Chart.fTooltip(tooltip))
     return this;
   },
-  initAreaRange(tooltip, option){
-    return this._initBaseSeria(C.AREA_RANGE, tooltip, option);
+  areaRangeSeria(tooltip, option){
+    return this._seria(C.AREA_RANGE, tooltip, option);
   },
-  initTreeMap(tooltip, option){
-    return this._initBaseSeria(C.TREE_MAP, tooltip, option);
+  treeMapSeria(tooltip, option){
+    return this._seria(C.TREE_MAP, tooltip, option);
   },
   scatterSeria(tooltip, option){
-    return this._initBaseSeria(C.SCATTER, tooltip, option);
-  },
-
-  addLegend(legend){
-    return this.add('zhConfig', {
-      legend, isWithLegend: true,
-    });
+    return this._seria(C.SCATTER, tooltip, option);
   },
 
   addSeriaBy(index, obj) {

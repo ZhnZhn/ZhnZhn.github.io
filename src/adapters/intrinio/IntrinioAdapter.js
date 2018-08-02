@@ -9,12 +9,12 @@ const IntrinioAdapter = {
   toConfig(json, option){
     const data = crData(json, option)
         , seria = Builder()
-            .initSpline({ data })
-            .toConfig()
+            .splineSeria({ data })
+            .toSeria()
         , _subtitle = crSubtitle(option)
         , { title } = option
         , config = Builder()
-            .initBaseArea2(title, _subtitle)
+            .area2Config(title, _subtitle)
             .addSeries(seria)
             .add({
               ...crConfigOption({ option, data })

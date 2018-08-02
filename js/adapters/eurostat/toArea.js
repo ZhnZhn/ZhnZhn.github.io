@@ -14,33 +14,28 @@ var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _crTimeIndexAndValue = function _crTimeIndexAndValue(json) {
-  var _json$dimension = json.dimension,
-      dimension = _json$dimension === undefined ? {} : _json$dimension,
-      _json$value = json.value,
-      value = _json$value === undefined ? [] : _json$value,
-      _dimension$time = dimension.time,
-      time = _dimension$time === undefined ? {} : _dimension$time,
-      _time$category = time.category,
-      category = _time$category === undefined ? {} : _time$category,
-      _category$index = category.index,
-      timeIndex = _category$index === undefined ? 0 : _category$index;
-
-  return { timeIndex: timeIndex, value: value };
-};
+/*
+const _crTimeIndexAndValue = json => {
+  const { dimension={}, value=[] } = json
+      , { time={} } = dimension
+      , { category={} } = time
+      , { index:timeIndex=0 } = category;
+  return { timeIndex, value };
+}
+*/
 
 var toArea = {
   createConfig: function createConfig(json, option) {
-    var _crTimeIndexAndValue2 = _crTimeIndexAndValue(json),
-        timeIndex = _crTimeIndexAndValue2.timeIndex,
-        value = _crTimeIndexAndValue2.value,
+    var _fn$crTimeIndexAndVal = _EuroStatFn2.default.crTimeIndexAndValue(json),
+        timeIndex = _fn$crTimeIndexAndVal.timeIndex,
+        value = _fn$crTimeIndexAndVal.value,
         isNotZoomToMinMax = option.isNotZoomToMinMax,
         seriaType = option.seriaType,
         seriaColor = option.seriaColor,
-        _EuroStatFn$createDat = _EuroStatFn2.default.createData(timeIndex, value),
-        data = _EuroStatFn$createDat.data,
-        max = _EuroStatFn$createDat.max,
-        min = _EuroStatFn$createDat.min,
+        _fn$createData = _EuroStatFn2.default.createData(timeIndex, value),
+        data = _fn$createData.data,
+        max = _fn$createData.max,
+        min = _fn$createData.min,
         config = _ChartConfig2.default.fBaseAreaConfig({
       seriaType: seriaType.toLowerCase(),
       seriaColor: seriaColor
@@ -53,14 +48,14 @@ var toArea = {
   },
 
   createSeria: function createSeria(json, option) {
-    var _crTimeIndexAndValue3 = _crTimeIndexAndValue(json),
-        timeIndex = _crTimeIndexAndValue3.timeIndex,
-        value = _crTimeIndexAndValue3.value,
+    var _fn$crTimeIndexAndVal2 = _EuroStatFn2.default.crTimeIndexAndValue(json),
+        timeIndex = _fn$crTimeIndexAndVal2.timeIndex,
+        value = _fn$crTimeIndexAndVal2.value,
         itemCaption = option.itemCaption,
         seriaColor = option.seriaColor,
         seria = _ChartConfig2.default.fSeries(),
-        _EuroStatFn$createDat2 = _EuroStatFn2.default.createData(timeIndex, value),
-        data = _EuroStatFn$createDat2.data;
+        _fn$createData2 = _EuroStatFn2.default.createData(timeIndex, value),
+        data = _fn$createData2.data;
 
     return Object.assign(seria, {
       zhSeriaId: option.key,

@@ -22,7 +22,7 @@ const ChartFactory = {
         gridLineWidth : 0
       },
       yAxis: {
-        min: 0,
+        //min: 0,
         opposite: true,
         lineWidth: 0,
         tickLength: 0,
@@ -82,7 +82,7 @@ const ChartFactory = {
     })
 
     return config;
-  }  
+  }
 };
 
 export default ChartFactory

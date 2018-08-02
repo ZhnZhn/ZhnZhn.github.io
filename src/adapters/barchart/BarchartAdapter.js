@@ -45,7 +45,7 @@ const _crConfig = (json={}, option) => {
         })
       , { data, dataMfi } = dataOption
       , config = Builder()
-         .initBaseStock(_chartId, dataOption)
+         .stockConfig(_chartId, dataOption)
          .addCaption(TITLE, title)
          .add({
             valueMoving: AdapterFn.valueMoving(data),
@@ -77,9 +77,9 @@ const BarchartAdapter = {
              pnDate: 'tradingDay'
           });
     return Builder()
-      .initBaseSeria()
+      .initSeria()
       .addPoints(_id, data)
-      .toConfig();
+      .toSeria();
   }
 }
 

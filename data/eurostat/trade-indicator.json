@@ -1,9 +1,1 @@
-{
-  "items": [
-    { "caption": "Trade balance in million ECU/EURO", "value": "MIO_BAL_VAL" },
-    { "caption": "Exports in million of ECU/EURO", "value": "MIO_EXP_VAL" },
-    { "caption": "Imports in million of ECU/EURO", "value": "MIO_IMP_VAL" },
-    { "caption": "Share of exports by partner (%)", "value": "PC_EXP_PART" },
-    { "caption": "Share of imports by partner (%)", "value": "PC_IMP_PART" }
-  ]
-}
+{"items":[{"caption":"Trade balance in million ECU/EURO","value":"MIO_BAL_VAL"},{"caption":"Exports in million of ECU/EURO","value":"MIO_EXP_VAL"},{"caption":"Imports in million of ECU/EURO","value":"MIO_IMP_VAL"},{"caption":"Share of exports by partner (%)","value":"PC_EXP_PART"},{"caption":"Share of imports by partner (%)","value":"PC_IMP_PART"}]}

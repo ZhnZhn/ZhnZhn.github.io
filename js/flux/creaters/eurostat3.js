@@ -10,6 +10,27 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _isThreeTable = function _isThreeTable(dfProps, _items, metric) {
+  if (dfProps.dfT !== 'three') {
+    _items.push(metric);
+  } else {
+    Object.assign(dfProps, {
+      dfTable: metric.value,
+      dfTail: metric.dfTail
+    });
+  }
+};
+
+var _isDfParams = function _isDfParams(dfProps, groupV, metricV) {
+  if (!dfProps.dfParams) {
+    Object.assign(dfProps, {
+      dfParams: ["geo"],
+      dfTable: groupV,
+      dfTail: metricV
+    });
+  }
+};
+
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -41,15 +62,11 @@ var createLoadOptions = function createLoadOptions() {
       metricC = _metric$caption === undefined ? '' : _metric$caption,
       metricV = metric.value,
       seriaType = chartType.value,
-      _time = date.value || dateDefault;
+      _time = date.value || dateDefault,
+      _items = [one, group];
 
-  if (!dfProps.dfParams) {
-    Object.assign(dfProps, {
-      dfParams: ["geo"],
-      dfTable: groupV,
-      dfTail: metricV
-    });
-  }
+  _isThreeTable(dfProps, _items, metric);
+  _isDfParams(dfProps, groupV, metricV);
 
   return (0, _extends3.default)({}, dfProps, {
     geo: oneV,
@@ -57,7 +74,8 @@ var createLoadOptions = function createLoadOptions() {
     metric: metricV,
     seriaType: seriaType,
     seriaColor: seriaColor,
-    items: [one, group, metric],
+    //items: [ one, group, metric ],
+    items: _items,
     time: _time,
     loadId: loadId,
     itemCaption: oneC,

@@ -35,7 +35,7 @@ var COLOR = {
   NOT_EU_MEMBER: '#8085e9'
 };
 var C = {
-  EU_CODES: ["EU", "EU15", "EU25", "EU27", "EU28", "EU27_2019"],
+  EU_CODES: ["EU", "EU15", "EU25", "EU27", "EU28", "EU27_2019", "G20", "Group of Twenty"],
   EA_CODES: ["EA", "EA11", "EA12", "EA13", "EA15", "EA16", "EA17", "EA18", "EA19"],
   EU_MEMBER: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom"]
 };
@@ -258,7 +258,22 @@ var EuroStatFn = {
   },
 
 
-  findMinY: findMinY
+  findMinY: findMinY,
+
+  crTimeIndexAndValue: function crTimeIndexAndValue(json) {
+    var _json$dimension = json.dimension,
+        dimension = _json$dimension === undefined ? {} : _json$dimension,
+        _json$value = json.value,
+        value = _json$value === undefined ? [] : _json$value,
+        _dimension$time = dimension.time,
+        time = _dimension$time === undefined ? {} : _dimension$time,
+        _time$category = time.category,
+        category = _time$category === undefined ? {} : _time$category,
+        _category$index = category.index,
+        timeIndex = _category$index === undefined ? 0 : _category$index;
+
+    return { timeIndex: timeIndex, value: value };
+  }
 };
 
 exports.default = EuroStatFn;

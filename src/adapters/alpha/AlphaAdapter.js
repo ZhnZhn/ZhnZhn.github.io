@@ -1,7 +1,7 @@
 
 import AdapterFn from '../AdapterFn'
 import ChartConfig from '../../charts/ChartConfig'
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 
 import {
   fnAddSeriesSma, fnRemoveSeries
@@ -197,15 +197,16 @@ const AlphaAdapter = {
         , _chartId = `${ticket}-${value}`
         , _title = `${ticket}: ${value}`
         , _series = this.toSeries(json, option)
-        , config = ConfigBuilder()
-            .initBaseArea()
-            .add('chart', { spacingTop: 25 })
+        , config = Builder()
+            .areaConfig({ spacingTop: 25 })
             .addCaption(_title)
             .clearSeries()
             .addSeries(_series)
-            .add('zhConfig', _crZhConfig(_chartId))
-            .add('zhFnAddSeriesSma', fnAddSeriesSma)
-            .add('zhFnRemoveSeries', fnRemoveSeries)
+            .add({
+              zhConfig: _crZhConfig(_chartId),
+              zhFnAddSeriesSma: fnAddSeriesSma,
+              zhFnRemoveSeries: fnRemoveSeries
+            })
             .toConfig();
     return {
       config,

@@ -87,7 +87,7 @@ var InseeAdapter = {
         info = _toData2.info,
         minClose = _toData2.minClose,
         maxClose = _toData2.maxClose,
-        config = (0, _ConfigBuilder2.default)().initBaseArea().add('chart', { spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).setMinMax(minClose, maxClose).add({
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).setMinMax(minClose, maxClose).add({
       info: _fnDescr2.default.toInfo(info, title),
       valueMoving: _AdapterFn2.default.valueMoving(data),
       zhConfig: _crZhConfig(value),
@@ -105,7 +105,7 @@ var InseeAdapter = {
         _toData3 = _toData(str),
         data = _toData3.data;
 
-    return (0, _ConfigBuilder2.default)().initBaseSeria().addPoints(value, data, _text).toConfig();
+    return (0, _ConfigBuilder2.default)().initSeria().addPoints(value, data, _text).toSeria();
   }
 };
 

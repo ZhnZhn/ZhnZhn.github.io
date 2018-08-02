@@ -1,4 +1,4 @@
-import ConfigBuilder from '../charts/ConfigBuilder'
+import Builder from '../charts/ConfigBuilder'
 import Tooltip from '../charts/Tooltip'
 
 import Fn from './AdapterFn'
@@ -173,14 +173,14 @@ const _crRangeSeria = (data) => {
       , _data = _hmToSeriaData(hm, _crHighLowPoint);
 
   return {
-    rangeSeria: ConfigBuilder()
-      .initAreaRange(
+    rangeSeria: Builder()
+      .areaRangeSeria(
          Tooltip.categoryRHLY, {
            data: _data,
            name: name,
            point: {}
          }
-       ).toConfig(),
+       ).toSeria(),
     rangeItem: _crItem(name, C.RANGE)
   };
 }
@@ -274,8 +274,8 @@ const ToYearly = {
     , { rangeSeria, rangeItem } = _crRangeSeria(data)
     , { avgSeria, avgItem } = _crAvgSeria(data)
     , legend = [ nowItem, prevItem, rangeItem, avgItem ]
-    , config = ConfigBuilder()
-       .initBaseCategories(CATEGORIES)       
+    , config = Builder()
+       .categoryConfig(CATEGORIES)
        .addCaption(title, subtitle)
        .addSeriaBy(0, rangeSeria)
        .addSeriaBy(1, avgSeria)

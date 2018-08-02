@@ -1,5 +1,5 @@
 
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
@@ -19,9 +19,8 @@ const FaoStatAdapter = {
     , _title = crTitle(option, json)
     , _subtitle = crSubtitle(json, subtitle)
     , _points = toDataPoints(json, option)
-    , config = ConfigBuilder()
-       .initBaseArea()
-       .add('chart', { spacingTop: 25 })
+    , config = Builder()
+       .areaConfig({ spacingTop: 25 })       
        .addCaption(_title, _subtitle)
        .addPoints(_id, _points)
        .addTooltip(Tooltip.fnBasePointFormatter)
@@ -41,15 +40,15 @@ const FaoStatAdapter = {
     const _data = crSeriaData(json, option)
         , _id = crId(option)
         , { parentId, oneCaption } = option;
-    return ConfigBuilder()
-      .initBaseSeria()
+    return Builder()
+      .initSeria()
       .add({
         data: _data,
         zhSeriaId: parentId + '_' + _id,
         zhValueText: oneCaption,
         zhItemCaption: oneCaption
       })
-      .toConfig();
+      .toSeria();
   }
 };
 

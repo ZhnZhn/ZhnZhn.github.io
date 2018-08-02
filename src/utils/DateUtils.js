@@ -79,7 +79,13 @@ const DateUtils = {
 	 const _str = str || ''
 			 , [ d=10, m=10, y=1970 ] = _str.toString().split('-');
 		return DateUtils.isYmd(`${y}-${m}-${d}`);
+ },
+
+ ymdToUTC: (str) => {	  
+    const arrDate = str.split('-');
+    return  Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
  }
+
 
 };
 

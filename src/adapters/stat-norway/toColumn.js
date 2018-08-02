@@ -1,7 +1,7 @@
 import JSONstat from 'jsonstat';
 import clusterMaker from '../../math/k-means'
 
-import ConfigBuilder from '../../charts/ConfigBuilder'
+import Builder from '../../charts/ConfigBuilder'
 import Tooltip from '../../charts/Tooltip'
 
 import fnAdapter from './fnAdapter'
@@ -116,8 +116,8 @@ const toColumn = {
         , _subtitle = `${items[1].caption || ''}: ${Tid}`
         , data = _crData(_values, _dimC, cTotal)
         , _c = data.map(item => item.c)
-        , config = ConfigBuilder()
-           .initBarOrColumn(seriaType, _c, { seriaColor })
+        , config = Builder()
+           .barOrColumnConfig(seriaType, _c, { seriaColor })
            .addCaption(_title, _subtitle)
            .addTooltip(Tooltip.category)
            .add({
@@ -125,12 +125,12 @@ const toColumn = {
              ...crChartOption(_ds, Tid, option)
             })
            .toConfig()
-
+    
     if (isCluster) {
       _setClusters(data)
     }
 
-    config.series[0].data = data    
+    config.series[0].data = data
     return config;
   }
 

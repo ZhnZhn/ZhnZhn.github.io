@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
+import STYLE from './InputStyle';
+
+/*
 const STYLE = {
   ROOT : {
     position: 'relative',
@@ -46,8 +49,10 @@ const STYLE = {
     fontWeight: 'bold'
   }
 };
+*/
 
 class DateField extends Component {
+  /*
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
@@ -58,6 +63,7 @@ class DateField extends Component {
      onTest: PropTypes.func,
      onEnter: PropTypes.func
    }
+   */
    static defaultProps = {
       onTest: () => { return true; }
    }

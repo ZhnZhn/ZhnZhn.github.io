@@ -29,7 +29,7 @@ Scatter.prototype = Object.assign(Scatter.prototype, {
         crSubtitle = _impl.crSubtitle,
         crSeria = _impl.crSeria;
 
-    return (0, _ConfigBuilder2.default)().initBaseArea({ spacingTop: 25, isCrosshair: false }).addCaption(TITLE, crSubtitle(option)).addSeriaTo(0, crSeria(json, option)).add({ zhConfig: _toFns2.default.crZhConfig(option) }).toConfig();
+    return (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25, isCrosshair: false }).addCaption(TITLE, crSubtitle(option)).addSeriaTo(0, crSeria(json, option)).add({ zhConfig: _toFns2.default.crZhConfig(option) }).toConfig();
   },
   toSeries: function toSeries(json, option, chart) {
     var _impl2 = this.impl,

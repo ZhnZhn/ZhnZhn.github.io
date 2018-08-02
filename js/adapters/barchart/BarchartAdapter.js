@@ -74,7 +74,7 @@ var _crConfig = function _crConfig() {
   }),
       data = dataOption.data,
       dataMfi = dataOption.dataMfi,
-      config = (0, _ConfigBuilder2.default)().initBaseStock(_chartId, dataOption).addCaption(TITLE, title).add({
+      config = (0, _ConfigBuilder2.default)().stockConfig(_chartId, dataOption).addCaption(TITLE, title).add({
     valueMoving: _AdapterFn2.default.valueMoving(data),
     info: _crInfo(title),
     zhConfig: _crZhConfig(_chartId, value),
@@ -105,7 +105,7 @@ var BarchartAdapter = {
     }),
         data = _toSeriesData.data;
 
-    return (0, _ConfigBuilder2.default)().initBaseSeria().addPoints(_id, data).toConfig();
+    return (0, _ConfigBuilder2.default)().initSeria().addPoints(_id, data).toSeria();
   }
 };
 

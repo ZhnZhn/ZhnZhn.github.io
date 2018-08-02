@@ -1,10 +1,1 @@
-{
-  "metrics" : [
-    { "caption" : "Expenditure on social protection, % of GDP" , "value" : "tps00098" },
-    { "caption" : "Expenditure on social protection per inhabitant", "value" : "tps00100" },
-    { "caption" : "Expenditure on social benefits, % of total exp.", "value" : "tps00102" },
-    { "caption" : "Expenditure on administration costs, % of total exp.", "value" : "tps00104" },
-    { "caption" : "Other expenditure on social protection, % of total exp.", "value" : "tps00105" },
-    { "caption" : "Expenditure on pensions, % of GDP", "value" : "tps00103" }
-  ]
-}
+{"metrics":[{"caption":"Expenditure on social protection, % of GDP","value":"tps00098"},{"caption":"Expenditure on social protection per inhabitant","value":"tps00100"},{"caption":"Expenditure on social benefits, % of total exp.","value":"tps00102"},{"caption":"Expenditure on administration costs, % of total exp.","value":"tps00104"},{"caption":"Other expenditure on social protection, % of total exp.","value":"tps00105"},{"caption":"Expenditure on pensions, % of GDP","value":"tps00103"}]}

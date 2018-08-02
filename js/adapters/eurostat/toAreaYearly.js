@@ -18,26 +18,21 @@ var _ToYearly2 = _interopRequireDefault(_ToYearly);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _crTimeIndexAndValue = function _crTimeIndexAndValue(json) {
-  var _json$dimension = json.dimension,
-      dimension = _json$dimension === undefined ? {} : _json$dimension,
-      _json$value = json.value,
-      value = _json$value === undefined ? [] : _json$value,
-      _dimension$time = dimension.time,
-      time = _dimension$time === undefined ? {} : _dimension$time,
-      _time$category = time.category,
-      category = _time$category === undefined ? {} : _time$category,
-      _category$index = category.index,
-      timeIndex = _category$index === undefined ? 0 : _category$index;
-
-  return { timeIndex: timeIndex, value: value };
-};
+/*
+const _crTimeIndexAndValue = json => {
+  const { dimension={}, value=[] } = json
+      , { time={} } = dimension
+      , { category={} } = time
+      , { index:timeIndex=0 } = category;
+  return { timeIndex, value };
+}
+*/
 
 var toAreaYearly = {
   createConfig: function createConfig(json, option) {
-    var _crTimeIndexAndValue2 = _crTimeIndexAndValue(json),
-        timeIndex = _crTimeIndexAndValue2.timeIndex,
-        value = _crTimeIndexAndValue2.value,
+    var _fn$crTimeIndexAndVal = _EuroStatFn2.default.crTimeIndexAndValue(json),
+        timeIndex = _fn$crTimeIndexAndVal.timeIndex,
+        value = _fn$crTimeIndexAndVal.value,
         data = _EuroStatFn2.default.toPointArr(timeIndex, value),
         title = option.title,
         subtitle = option.subtitle,

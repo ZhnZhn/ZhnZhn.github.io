@@ -100,33 +100,28 @@ var _addSeriesImpl = function _addSeriesImpl(to, series) {
 };
 
 var SeriaBuilder = {
-  initBaseSeria: function initBaseSeria(option) {
+  initSeria: function initSeria(option) {
     this._type = 'S';
     this.config = Object.assign(_ChartConfig2.default.fSeries(), option);
     return this;
   },
-  initSpline: function initSpline(option) {
-    return this.initBaseSeria((0, _extends3.default)({}, C.SPLINE, option));
+  splineSeria: function splineSeria(option) {
+    return this.initSeria((0, _extends3.default)({}, C.SPLINE, option));
   },
-  _initBaseSeria: function _initBaseSeria(BASE, tooltip, option) {
+  _seria: function _seria(CONFIG, tooltip, option) {
     this._type = 'S';
-    this.config = (0, _extends3.default)({}, BASE, option);
+    this.config = (0, _extends3.default)({}, CONFIG, option);
     this.add('tooltip', _Chart2.default.fTooltip(tooltip));
     return this;
   },
-  initAreaRange: function initAreaRange(tooltip, option) {
-    return this._initBaseSeria(C.AREA_RANGE, tooltip, option);
+  areaRangeSeria: function areaRangeSeria(tooltip, option) {
+    return this._seria(C.AREA_RANGE, tooltip, option);
   },
-  initTreeMap: function initTreeMap(tooltip, option) {
-    return this._initBaseSeria(C.TREE_MAP, tooltip, option);
+  treeMapSeria: function treeMapSeria(tooltip, option) {
+    return this._seria(C.TREE_MAP, tooltip, option);
   },
   scatterSeria: function scatterSeria(tooltip, option) {
-    return this._initBaseSeria(C.SCATTER, tooltip, option);
-  },
-  addLegend: function addLegend(legend) {
-    return this.add('zhConfig', {
-      legend: legend, isWithLegend: true
-    });
+    return this._seria(C.SCATTER, tooltip, option);
   },
   addSeriaBy: function addSeriaBy(index, obj) {
     if (this.config.series[index]) {

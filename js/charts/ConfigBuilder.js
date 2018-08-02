@@ -80,15 +80,15 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     this.config = config;
     return this;
   },
-  initBaseArea: function initBaseArea(option) {
+  areaConfig: function areaConfig(option) {
     this.config = _ChartConfig2.default.fBaseAreaConfig(option);
     return this;
   },
-  initBaseArea2: function initBaseArea2(title, subtitle) {
-    this.initBaseArea({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries();
+  area2Config: function area2Config(title, subtitle) {
+    this.areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries();
     return this;
   },
-  initBaseStock: function initBaseStock(id, dataOption) {
+  stockConfig: function stockConfig(id, dataOption) {
     var dataVolumeColumn = dataOption.dataVolumeColumn,
         dataVolume = dataOption.dataVolume,
         dataATH = dataOption.dataATH,
@@ -99,7 +99,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
         dataLow = dataOption.dataLow,
         dataOpen = dataOption.dataOpen;
 
-    this.initBaseArea({ spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addMiniVolume({
+    this.areaConfig({ spacingTop: 25 }).addTooltip(_Tooltip2.default.fnBasePointFormatter).addMiniVolume({
       id: id,
       dColumn: dataVolumeColumn,
       dVolume: dataVolume
@@ -108,7 +108,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     }).setMinMax(minClose, maxClose).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
     return this;
   },
-  initBaseCategories: function initBaseCategories() {
+  categoryConfig: function categoryConfig() {
     var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
     this.config = _ChartConfig2.default.fBaseAreaConfig();
@@ -117,7 +117,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     this.add('yAxis', C.CATEGORIES_Y_AXIS);
     return this;
   },
-  initColumn: function initColumn() {
+  _columnConfig: function _columnConfig() {
     var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var option = arguments[1];
 
@@ -125,7 +125,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     this.add('xAxis', { categories: categories });
     return this;
   },
-  initBar: function initBar() {
+  _barConfig: function _barConfig() {
     var categories = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var option = arguments[1];
 
@@ -133,16 +133,16 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     this.add('xAxis', { categories: categories });
     return this;
   },
-  initBarOrColumn: function initBarOrColumn(type) {
+  barOrColumnConfig: function barOrColumnConfig(type) {
     var categories = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var option = arguments[2];
 
     if (type === 'BAR') {
-      return this.initBar(categories, option);
+      return this._barConfig(categories, option);
     }
-    return this.initColumn(categories, option);
+    return this._columnConfig(categories, option);
   },
-  initBaseTreeMap: function initBaseTreeMap() {
+  treeMapConfig: function treeMapConfig() {
     this.config = _ChartConfig2.default.fBaseTreeMapConfig();
     return this;
   },
@@ -233,6 +233,11 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
       zhFnGetMfiConfig: fn
     });
     return this;
+  },
+  addLegend: function addLegend(legend) {
+    return this.add('zhConfig', {
+      legend: legend, isWithLegend: true
+    });
   },
   setMinMax: function setMinMax(minValue, maxValue) {
     var plotLines = this.config.yAxis.plotLines;

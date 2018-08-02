@@ -1,4 +1,25 @@
 
+const _isThreeTable = (dfProps, _items, metric) => {
+  if (dfProps.dfT !== 'three') {
+    _items.push(metric)
+  } else {
+    Object.assign(dfProps, {
+      dfTable: metric.value,
+      dfTail: metric.dfTail
+    })    
+  }
+};
+
+const _isDfParams = (dfProps, groupV, metricV) => {
+  if (!dfProps.dfParams) {
+    Object.assign(dfProps, {
+      dfParams: [ "geo" ],
+      dfTable: groupV,
+      dfTail: metricV
+    })
+  }
+};
+
 const createLoadOptions = (props={}, options={}) => {
   const { loadId, dataSource, dfProps={} } = props
       , {
@@ -10,15 +31,12 @@ const createLoadOptions = (props={}, options={}) => {
       , { caption:groupC='', value:groupV } = group
       , { caption:metricC='', value:metricV } = metric
       , { value:seriaType } = chartType
-      , _time = date.value || dateDefault;
+      , _time = date.value || dateDefault
+      , _items = [ one, group ];
 
-  if (!dfProps.dfParams) {
-    Object.assign(dfProps, {
-      dfParams: [ "geo" ],
-      dfTable: groupV,
-      dfTail: metricV
-    })
-  }
+  _isThreeTable(dfProps, _items, metric)
+  _isDfParams(dfProps, groupV, metricV)
+
 
   return {
     ...dfProps,
@@ -27,7 +45,8 @@ const createLoadOptions = (props={}, options={}) => {
     metric : metricV,
     seriaType : seriaType,
     seriaColor : seriaColor,
-    items: [ one, group, metric ],
+    //items: [ one, group, metric ],
+    items: _items,
     time: _time,
     loadId : loadId,
     itemCaption: oneC,
