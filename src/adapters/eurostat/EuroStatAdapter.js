@@ -8,17 +8,19 @@ const DF_TYPE = 'SPLINE';
 const _rToConfig = {
   AREA: toArea.createConfig,
   SPLINE: toArea.createConfig,
+  COLUMN: toArea.createConfig,
   AREA_YEARLY: toAreaYearly.createConfig,
   MAP: toMap.createConfig,
-  COLUMN: toColumn.createConfig,
-  BAR: toBar.createConfig
+  COLUMN_SET: toColumn.createConfig,
+  BAR_SET: toBar.createConfig
 };
 
 const _rToSeria = {
   AREA: toArea.createSeria,
   SPLINE: toArea.createSeria,
-  COLUMN: toColumn.createSeria,
-  BAR: toColumn.createSeria
+  COLUMN: toArea.createSeria,
+  COLUMN_SET: toColumn.createSeria,
+  BAR_SET: toColumn.createSeria
 };
 
 const _checkSeriaType = (router, option, dfType=DF_TYPE) => {

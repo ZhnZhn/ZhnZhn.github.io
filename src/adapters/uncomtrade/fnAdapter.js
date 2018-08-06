@@ -129,8 +129,8 @@ const fnAdapter = {
       .add('chart', C.CHART)
       .addCaption(title, subtitle)
       .add('xAxis', C.X_AXIS)
-      .add('yAxis', C.Y_AXIS)
-      .addTooltip(Tooltip.fnBasePointFormatterC)
+      .add('yAxis', C.Y_AXIS)      
+      .addTooltip(Tooltip.categorySimple)
       .add('info', this.crInfo(json))
       .add('zhConfig', this.crZhConfig(option))
       .toConfig();

@@ -175,7 +175,7 @@ var WithIndicatorConfig = {
             brightness: 0.07
           }
         },
-        tooltip: tooltipColumn || _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatter)
+        tooltip: tooltipColumn || _Chart2.default.fTooltip(_Tooltip2.default.volume)
       });
     }
 
@@ -200,7 +200,7 @@ var WithIndicatorConfig = {
       minPointLength: 4,
       groupPadding: 0.1,
       data: data,
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnATHPointFormatter)
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.ath)
     });
 
     return { btTitle: btTitle, config: config };
@@ -268,7 +268,7 @@ var WithIndicatorConfig = {
       type: "arearange",
       color: C.HIGH_LOW,
       data: data,
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnHighLowPointFormatter)
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.hl)
     });
 
     return { btTitle: btTitle, config: config };

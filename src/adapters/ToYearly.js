@@ -281,7 +281,7 @@ const ToYearly = {
        .addSeriaBy(1, avgSeria)
        .addSeriaBy(2, prevSeria)
        .addSeriaBy(3, nowSeria)
-       .addTooltip(Tooltip.category)
+       .addTooltip(Tooltip.categorySimple)
        .add({
          chart: { spacingTop: 25, marginTop: 45 },
          zhConfig: _crZhConfig(option, { legend }),

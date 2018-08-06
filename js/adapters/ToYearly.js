@@ -314,7 +314,7 @@ var ToYearly = {
         avgSeria = _crAvgSeria2.avgSeria,
         avgItem = _crAvgSeria2.avgItem,
         legend = [nowItem, prevItem, rangeItem, avgItem],
-        config = (0, _ConfigBuilder2.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip2.default.category).add({
+        config = (0, _ConfigBuilder2.default)().categoryConfig(CATEGORIES).addCaption(title, subtitle).addSeriaBy(0, rangeSeria).addSeriaBy(1, avgSeria).addSeriaBy(2, prevSeria).addSeriaBy(3, nowSeria).addTooltip(_Tooltip2.default.categorySimple).add({
       chart: { spacingTop: 25, marginTop: 45 },
       zhConfig: _crZhConfig(option, { legend: legend }),
       valueMoving: _crValueMoving(nowSeria, prevSeria)

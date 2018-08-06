@@ -6,11 +6,12 @@ import toT from './toTreeMap'
 
 const _r = {
   DF: toSpline.crConfig,
-  AREA : toSpline.crConfig,
+  AREA: toSpline.crConfig,
   SPLINE: toSpline.crConfig,
+  COLUMN: toSpline.crConfig,
   AREA_YEARLY: toY.crConfig,
-  COLUMN: toC.fCrConfig(),
-  BAR: toC.fCrConfig(),
+  COLUMN_SET: toC.fCrConfig({ seriaType: 'COLUMN'}),
+  BAR_SET: toC.fCrConfig({ seriaType: 'BAR'}),
   COLUMN_CLUSTER: toC.fCrConfig({
     isCluster: true, seriaType: 'COLUMN'
   }),

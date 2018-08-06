@@ -89,7 +89,7 @@ var WithPieConfig = {
         distance: -5
       },
 
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnPiePointFormatter)
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.donut)
 
     };
   }

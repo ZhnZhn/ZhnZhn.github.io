@@ -4,6 +4,9 @@ import HighchartsTreemap from 'highcharts/modules/treemap';
 import HighchartsExporting from 'highcharts/modules/exporting';
 import HighchartsOfflineExporting from 'highcharts/modules/offline-exporting';
 
+import HighchartsZhn from './plugin/zhn-highcharts'
+import HighchartsFix from './plugin/fix-highcharts'
+
 //import HighchartsMore from 'highcharts/lib/highcharts-more';
 //import HighchartsTreemap from 'highcharts/lib/modules/treemap';
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
@@ -25,9 +28,6 @@ import WithStackedArea from './WithStackedAreaConfig';
 import WithStackedColumn from './WithStackedColumnConfig';
 import WithTreeMap from './WithTreeMapConfig';
 
-import ComponentActions from '../flux/actions/ComponentActions';
-import { ModalDialog } from '../constants/Type';
-
 const merge = Highcharts.merge;
 
 const ChartConfig = {
@@ -42,43 +42,11 @@ const ChartConfig = {
     HighchartsTreemap(Highcharts);
     HighchartsExporting(Highcharts);
     HighchartsOfflineExporting(Highcharts);
+
+    HighchartsZhn(Highcharts)
+    HighchartsFix(Highcharts)
+
     Highcharts.setOptions(ChartTheme);
-
-    /*
-       Drop-in fix for arearange destroy exception:
-       "isSVG of undefined": 5.0.14: issues/7021
-    */
-    Highcharts.wrap(
-      Highcharts.seriesTypes.arearange.prototype.pointClass.prototype,
-      'setState',
-      function(proceed) {
-        proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-        if (this.series.stateMarkerGraphic) {
-          this.series.lowerStateMarkerGraphic = undefined;
-        }
-      }
-    );
-
-    Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (next, credits) {
-       next.call(this, credits);
-       if (credits.enabled) {
-         this.credits.element.onclick = function(){
-           var link = document.createElement('a');
-           link.rel = "noopener noreferrer";
-           link.target = credits.targer;
-           link.href = credits.href;
-           link.click();
-         }
-       }
-    });
-
-    Highcharts.wrap(Highcharts.Chart.prototype, 'exportChartLocal', function (fn, ...args) {
-       if (args.length === 0) {
-         ComponentActions.showModalDialog(ModalDialog.CUSTOMIZE_EXPORT, { fn: fn, chart: this });
-       } else {
-         fn.apply(this, args);
-       }
-    });
   },
 
   seriaOption(color, option) {
@@ -260,7 +228,7 @@ const _fScatterSeria = function(color, pointFormatter, data, zhSeriaId){
 ChartConfig.fExDividendSeria = function(data, chartId){
   return _fScatterSeria(
     COLOR.EX_DIVIDEND,
-    Tooltip.fnExDividendPointFormatter,
+    Tooltip.exDividend,
     data,
     chartId + '_ExDivident'
   );
@@ -268,16 +236,21 @@ ChartConfig.fExDividendSeria = function(data, chartId){
 ChartConfig.fSplitRatioSeria = function(data, chartId){
   return _fScatterSeria(
     COLOR.SPLIT_RATIO,
-    Tooltip.fnSplitRatioPointFormatter,
+    Tooltip.splitRatio,
     data,
     chartId + '_SplitRatio'
   );
 }
 
 ChartConfig.fSeries = function(option={}){
+  const { seriaType } = option
+  , _type = typeof seriaType === 'string'
+      ? seriaType.toLowerCase()
+      : 'spline';
   return merge(
     false, {
-      type: 'spline',
+      type: _type,
+      //type: 'spline',
       lineWidth: 1,
       tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter)
     }, option

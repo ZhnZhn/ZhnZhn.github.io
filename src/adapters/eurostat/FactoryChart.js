@@ -5,7 +5,9 @@ const FactoryChart = {
     return {
       chart: {
         type: 'column',
-        marginTop: 60
+        marginTop: 60,
+        panKey: undefined,
+        panning: false
       },
       title: {
         text: ''

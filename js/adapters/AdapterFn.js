@@ -16,9 +16,9 @@ var _DateUtils = require('../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
-var _ChartConfig = require('../charts/ChartConfig');
+var _formatAllNumber = require('../utils/formatAllNumber');
 
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
+var _formatAllNumber2 = _interopRequireDefault(_formatAllNumber);
 
 var _Type = require('../constants/Type');
 
@@ -34,6 +34,7 @@ var _IndicatorSma = require('./IndicatorSma');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import ChartConfig from '../charts/ChartConfig';
 var EMPTY = '';
 var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
@@ -147,10 +148,15 @@ var AdapterFn = {
   stockSeriesLegend: function stockSeriesLegend() {
     return [AdapterFn.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color2.default.S_HIGH, 'High'), AdapterFn.legendItem(2, _Color2.default.S_LOW, 'Low'), AdapterFn.legendItem(3, _Color2.default.S_OPEN, 'Open')];
   },
-  numberFormat: function numberFormat(value) {
-    return _ChartConfig2.default.fnNumberFormat(value);
-  },
 
+
+  formatAllNumber: _formatAllNumber2.default,
+  numberFormat: _formatAllNumber2.default,
+  /*
+  numberFormat(value){
+    return ChartConfig.fnNumberFormat(value);
+  },
+  */
 
   isNumberOrNull: function isNumberOrNull(v) {
     return typeof v === 'number' && !isNaN(v) || v === null;
@@ -173,7 +179,8 @@ var AdapterFn = {
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: _Type.Direction,
-      fnFormat: _ChartConfig2.default.fnNumberFormat
+      fnFormat: _formatAllNumber2.default
+      //fnFormat: ChartConfig.fnNumberFormat
     });
   },
   valueMoving: function valueMoving(data) {

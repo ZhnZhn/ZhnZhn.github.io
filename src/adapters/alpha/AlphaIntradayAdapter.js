@@ -136,7 +136,7 @@ const AlphaIntradayAdapter = {
       .addMiniVolume({
         id: _chartId,
         dVolume, dColumn,
-        tooltipColumn: Chart.fTooltip(Tooltip.fnVolumePointFormatterT)
+        tooltipColumn: Chart.fTooltip(Tooltip.volumeDmyt)
       })
       .toConfig();
 

@@ -2,7 +2,9 @@
 import Big from 'big.js';
 
 import DateUtils from '../utils/DateUtils';
-import ChartConfig from '../charts/ChartConfig';
+import formatAllNumber from '../utils/formatAllNumber'
+
+//import ChartConfig from '../charts/ChartConfig';
 import { Direction } from '../constants/Type';
 
 import mathFn from '../math/mathFn';
@@ -147,9 +149,13 @@ const AdapterFn = {
     ];
   },
 
+  formatAllNumber: formatAllNumber,
+  numberFormat: formatAllNumber,
+  /*
   numberFormat(value){
     return ChartConfig.fnNumberFormat(value);
   },
+  */
 
   isNumberOrNull: v => {
      return (typeof v === 'number' && !isNaN(v))
@@ -168,7 +174,8 @@ const AdapterFn = {
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: Direction,
-      fnFormat: ChartConfig.fnNumberFormat
+      fnFormat: formatAllNumber
+      //fnFormat: ChartConfig.fnNumberFormat
     })
   },
 

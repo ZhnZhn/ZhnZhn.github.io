@@ -72,7 +72,7 @@ fInnerPieSeria({center, year, bTotal}){
        distance : -5
      },
 
-     tooltip : Chart.fTooltip(Tooltip.fnPiePointFormatter)
+     tooltip : Chart.fTooltip(Tooltip.donut)
 
   }
 }

@@ -155,7 +155,7 @@ const WithIndicatorConfig = {
             brightness: 0.07
           }
         },
-        tooltip: tooltipColumn || Chart.fTooltip(Tooltip.fnVolumePointFormatter)
+        tooltip: tooltipColumn || Chart.fTooltip(Tooltip.volume)
       });
     }
 
@@ -176,7 +176,7 @@ const WithIndicatorConfig = {
        minPointLength: 4,
        groupPadding: 0.1,
        data: data,
-       tooltip: Chart.fTooltip(Tooltip.fnATHPointFormatter)
+       tooltip: Chart.fTooltip(Tooltip.ath)
     })
 
     return { btTitle, config };
@@ -240,7 +240,7 @@ const WithIndicatorConfig = {
       type: "arearange",
       color: C.HIGH_LOW,
       data: data,
-      tooltip: Chart.fTooltip(Tooltip.fnHighLowPointFormatter)
+      tooltip: Chart.fTooltip(Tooltip.hl)
     })
 
     return { btTitle, config };

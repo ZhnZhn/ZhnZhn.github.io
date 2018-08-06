@@ -12,6 +12,8 @@ const {
   crDsValuesTimes, crChartOption
 } = fnAdapter;
 
+const DF_TYPE = 'spline';
+
 const _toData = (values, times ) => {
   const _values = Array.isArray(values)
            ? values
@@ -25,9 +27,12 @@ const _toData = (values, times ) => {
 }
 
 const _crSplineSeria = (data, option={}) => {
-  const { seriaColor } = option;
+  const { seriaType, seriaColor } = option
+      , _type = typeof seriaType === 'string'
+          ? seriaType.toLowerCase()
+          : DF_TYPE;
   return Object.assign(ChartConfig.fSeries(), {
-     type: 'spline',
+     type: _type,
      color: seriaColor,
      visible: true,
      data: data,
@@ -46,7 +51,7 @@ const toArea = {
       , data = _toData(values, times)
       , seria = _crSplineSeria(data, option)
       , config = Builder()
-         .areaConfig({ spacingTop: 25 })         
+         .areaConfig({ spacingTop: 25 })
          .addCaption(title, subtitle)
          .clearSeries()
          .addSeries(seria)

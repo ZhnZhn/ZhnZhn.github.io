@@ -36,7 +36,7 @@ var WithStackAreaConfig = {
       },
       title: _Chart2.default.fTitle({ y: _Chart2.default.STACKED_TITLE_Y }),
       subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.STACKED_SUBTITLE_Y }),
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnStackedAreaPointFormatter),
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.sparkStackedArea),
 
       xAxis: _Chart2.default.fXAxisOpposite({
         categories: [],
@@ -78,4 +78,4 @@ var WithStackAreaConfig = {
 };
 
 exports.default = WithStackAreaConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedAreaConfig.js.map
+//# sourceMappingURL=WithStackedAreaConfig.js.map

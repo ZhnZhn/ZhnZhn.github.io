@@ -37,7 +37,7 @@ var WithStackedColumnConfig = {
 
       title: _Chart2.default.fTitle({ y: _Chart2.default.STACKED_TITLE_Y }),
       subtitle: _Chart2.default.fSubtitle({ y: _Chart2.default.STACKED_SUBTITLE_Y }),
-      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnStackedAreaPointFormatter),
+      tooltip: _Chart2.default.fTooltip(_Tooltip2.default.sparkStackedArea),
 
       xAxis: _Chart2.default.fXAxisOpposite({
         categories: [],
@@ -96,4 +96,4 @@ var WithStackedColumnConfig = {
 };
 
 exports.default = WithStackedColumnConfig;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\charts\WithStackedColumnConfig.js.map
+//# sourceMappingURL=WithStackedColumnConfig.js.map

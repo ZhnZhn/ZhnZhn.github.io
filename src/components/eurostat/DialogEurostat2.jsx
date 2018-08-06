@@ -234,7 +234,7 @@ class DialogEurostat2 extends Component {
                onSelect={this._handleSelectTwo}
              />
              <D.RowChart
-               isShowLabels={isShowLabels}               
+               isShowLabels={isShowLabels}
                options={this._chartOptions}
                onSelectChart={this._handleSelectChartType}
                onRegColor={this._onRegColor}

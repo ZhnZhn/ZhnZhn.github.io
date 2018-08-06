@@ -26,9 +26,10 @@ var _r = {
   DF: _toSpline2.default.crConfig,
   AREA: _toSpline2.default.crConfig,
   SPLINE: _toSpline2.default.crConfig,
+  COLUMN: _toSpline2.default.crConfig,
   AREA_YEARLY: _toYearly2.default.crConfig,
-  COLUMN: _toColumn2.default.fCrConfig(),
-  BAR: _toColumn2.default.fCrConfig(),
+  COLUMN_SET: _toColumn2.default.fCrConfig({ seriaType: 'COLUMN' }),
+  BAR_SET: _toColumn2.default.fCrConfig({ seriaType: 'BAR' }),
   COLUMN_CLUSTER: _toColumn2.default.fCrConfig({
     isCluster: true, seriaType: 'COLUMN'
   }),

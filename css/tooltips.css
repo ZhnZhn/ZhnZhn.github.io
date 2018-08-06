@@ -1,7 +1,7 @@
 
 .tp__header {
   position: relative;
-  padding-bottom: 5px;
+  //padding-bottom: 5px;
   padding-right: 20px;
   font-size: 16px;
   font-weight: bold;
@@ -10,7 +10,12 @@
 }
 
 .tp__header__caption {
+  display: inline-block;
   color: #fdb316;
+  max-width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
 }
 
 .tp__header__close {
@@ -36,17 +41,17 @@
   padding-bottom: 5px;
 }
 
-/*
-.tp__body__title {
-  color: #a487d4;
+.tp__bt {
+  display: inline-block;
+  color: #4caf50;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  pointer-events: visible;
 }
-.tp__body__year {
-  color: #fdb316;
+.tp__bt:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
-.tp__body__value {
-  color: #2f7ed8;
-}
-.tp__body__value_exdividend {
-  color: green;
-}
-*/
+
+

@@ -4,284 +4,55 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactDom = require('react-dom');
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _ChartFn = require('./ChartFn');
 
 var _ChartFn2 = _interopRequireDefault(_ChartFn);
 
-var _SparkFactory = require('../components/factories/SparkFactory');
+var _tpSpline = require('./tp/tpSpline');
 
-var _SparkFactory2 = _interopRequireDefault(_SparkFactory);
+var _tpSpline2 = _interopRequireDefault(_tpSpline);
+
+var _tpCategory = require('./tp/tpCategory');
+
+var _tpCategory2 = _interopRequireDefault(_tpCategory);
+
+var _tpScatter = require('./tp/tpScatter');
+
+var _tpScatter2 = _interopRequireDefault(_tpScatter);
+
+var _tpStock = require('./tp/tpStock');
+
+var _tpStock2 = _interopRequireDefault(_tpStock);
+
+var _tpSpark = require('./tp/tpSpark');
+
+var _tpSpark2 = _interopRequireDefault(_tpSpark);
+
+var _tpTreeMap = require('./tp/tpTreeMap');
+
+var _tpTreeMap2 = _interopRequireDefault(_tpTreeMap);
+
+var _tpDonut = require('./tp/tpDonut');
+
+var _tpDonut2 = _interopRequireDefault(_tpDonut);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SPARKLINES_SUFFIX_ID = 'sparklines',
-    SPARKLINES_BAR_SUFFIX_ID = 'sparklines_bar',
-    WIDTH_CHAR = 10,
-    WIDTH_VALUE = 54,
-    WIDTH_TOTAL = 50,
-    WIDTH_SPARK = 20 + 80 + 16;
-
-var C = {
-  TITLE_C: '#a487d4',
-  YEAR_C: '#fdb316',
-  VALUE_C: '#2f7ed8',
-  EX_DIVIDEND_C: 'green'
-};
-var TITLE_STYLE = 'style="color:' + C.TITLE_C + ';"';
-var FONT_STYLE = 'font-size:16px;font-weight:bold';
-
 var crTpId = _ChartFn2.default.crTpId,
     toNumberFormat = _ChartFn2.default.toNumberFormat,
-    toNumberFormatAll = _ChartFn2.default.toNumberFormatAll,
-    toDateFormatDMY = _ChartFn2.default.toDateFormatDMY,
-    toDateFormatDMYT = _ChartFn2.default.toDateFormatDMYT;
+    toDateFormatDMY = _ChartFn2.default.toDateFormatDMY;
 
-
-var _crSpan = function _crSpan() {
-  var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var v = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-  var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-      _ref$color = _ref.color,
-      color = _ref$color === undefined ? C.VALUE_C : _ref$color;
-
-  var _vStyle = 'style="color:' + color + ';' + FONT_STYLE + '"',
-      _t = t ? t + ': ' : '',
-      _v = v !== null ? v : '';
-  return '\n  <span ' + TITLE_STYLE + '>' + _t + '</span>\n  <span ' + _vStyle + '>' + _v + '</span>';
-};
-var _crRow = function _crRow() {
-  var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var v = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var option = arguments[2];
-
-  return '<div>' + _crSpan(t, v, option) + '</div>';
-};
-
-var _crHeader = function _crHeader() {
-  var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '&nbsp;';
-  var id = arguments[1];
-  var cssClass = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-  return '<div id="' + id + '" class="tp__header not-selected ' + cssClass + '">\n    <span class="tp__header__caption">' + date + '</span>\n    <span class="tp__header__close">X</span>\n  </div>';
-};
-
-var _fnTooltipSparkType4 = function _fnTooltipSparkType4(_ref2) {
-  var fullWidth = _ref2.fullWidth,
-      width = _ref2.width,
-      year = _ref2.year,
-      value = _ref2.value,
-      total = _ref2.total,
-      percent = _ref2.percent,
-      id = _ref2.id;
-
-  var _style = 'style="float:left;padding-right:10px;width:' + width + 'px;"';
-  return '<div class="tp__body">\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div ' + _style + '>\n      ' + _crRow('Year', year, { color: C.YEAR_C }) + '\n      ' + _crRow('Value', value) + '\n    </div>\n    <div id="' + id + '_' + SPARKLINES_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>\n  <div class="tp__body__part1" style="width:' + fullWidth + 'px;" >\n    <div ' + _style + '>\n      ' + _crRow('Total', total) + '\n      ' + _crRow('Percent', percent) + '\n    </div>\n    <div id="' + id + '_' + SPARKLINES_BAR_SUFFIX_ID + '" class="tp__body__sparklines">\n    </div>\n  </div>';
-};
-
-var _fnBaseTooltip = function _fnBaseTooltip(_ref3) {
-  var date = _ref3.date,
-      id = _ref3.id,
-      color = _ref3.color,
-      _ref3$valueText = _ref3.valueText,
-      valueText = _ref3$valueText === undefined ? 'Value' : _ref3$valueText,
-      value = _ref3.value;
-
-  return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow(valueText, value, { color: color }) + '\n  </div>';
-};
-
-var _fnExDividend = function _fnExDividend(_ref4) {
-  var date = _ref4.date,
-      id = _ref4.id,
-      valueText = _ref4.valueText,
-      value = _ref4.value,
-      point = _ref4.point;
-  var exValue = point.exValue,
-      price = point.price;
-
-  return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Ex-Dividend', exValue, { color: '#90ed7d' }) + '\n    ' + _crRow('Close', price) + '\n  </div>';
-};
-
-var _fnSplitRatio = function _fnSplitRatio(_ref5) {
-  var date = _ref5.date,
-      id = _ref5.id,
-      valueText = _ref5.valueText,
-      value = _ref5.value,
-      point = _ref5.point;
-  var splitRatio = point.splitRatio,
-      price = point.price;
-
-  return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Split Ratio', splitRatio, { color: '#ED5813' }) + '\n    ' + _crRow('Close', price) + '\n  </div>';
-};
-
-var _fnExValue = function _fnExValue(_ref6) {
-  var date = _ref6.date,
-      id = _ref6.id,
-      point = _ref6.point;
-  var exValue = point.exValue;
-
-  return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', exValue) + '\n  </div>';
-};
-var _fnEPS = function _fnEPS(_ref7) {
-  var date = _ref7.date,
-      id = _ref7.id,
-      point = _ref7.point;
-  var announceTime = point.announceTime,
-      fiscalPeriod = point.fiscalPeriod,
-      fiscalEndDate = point.fiscalEndDate,
-      actualEPS = point.actualEPS,
-      estimatedEPS = point.estimatedEPS,
-      numberOfEstimates = point.numberOfEstimates,
-      EPSSurpriseDollar = point.EPSSurpriseDollar;
-
-  return _crHeader(date, id) + '\n  <div class="tp_body">\n    <div>\n      ' + _crSpan('', announceTime, { color: C.YEAR_C }) + '\n      ' + _crSpan('', fiscalPeriod) + '\n      ' + _crSpan('', fiscalEndDate) + '\n    </div>\n    <div style=' + FONT_STYLE + '>\n      ' + _crSpan('EPS', actualEPS) + '\n      ' + _crSpan('Est.', estimatedEPS) + '\n    </div>\n    <div style=' + FONT_STYLE + '>\n      ' + _crSpan('Supr.', EPSSurpriseDollar) + '\n      ' + _crSpan('NumbEst.', numberOfEstimates) + '\n    </div>\n  </div>';
-};
-
-var _fnVolumeTooltip = function _fnVolumeTooltip(_ref8) {
-  var date = _ref8.date,
-      id = _ref8.id,
-      value = _ref8.value,
-      point = _ref8.point;
-
-  var _point$_open = point._open,
-      _open = _point$_open === undefined ? 'NoData' : _point$_open,
-      _point$_close = point._close,
-      _close = _point$_close === undefined ? '' : _point$_close,
-      _point$_low = point._low,
-      _low = _point$_low === undefined ? '' : _point$_low,
-      _point$_high = point._high,
-      _high = _point$_high === undefined ? '' : _point$_high;
-
-  return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Volume', value) + '\n    <div>\n      ' + _crSpan('Open', _open) + '\n      ' + _crSpan('Close', _close) + '\n    </div>\n    <div>\n      ' + _crSpan('Low', _low) + '\n      ' + _crSpan('High', _high) + '\n    </div>\n  </div>';
-};
-
-var _fnATHTooltip = function _fnATHTooltip(_ref9) {
-  var date = _ref9.date,
-      id = _ref9.id,
-      value = _ref9.value,
-      point = _ref9.point;
-  var color = point.color,
-      y = point.y,
-      close = point.close,
-      open = point.open;
-
-  return _crHeader(date, id) + '\n    <div class="tp__body">\n      ' + _crRow('ATH', y + '%', { color: color }) + '\n      ' + _crRow('Prev Close', close) + '\n      ' + _crRow('Next Open', open) + '\n    </div>';
-};
-
-var _fnHighLowTooltip = function _fnHighLowTooltip(_ref10) {
-  var date = _ref10.date,
-      id = _ref10.id,
-      value = _ref10.value,
-      point = _ref10.point;
-  var open = point.open,
-      dayHigh = point.dayHigh,
-      dayLow = point.dayLow,
-      close = point.close;
-
-  return _crHeader(date, id) + '\n  <div class="tp__body">\n    ' + _crRow('Open', open) + '\n    ' + _crRow('High', dayHigh) + '\n    ' + _crRow('Low', dayLow) + '\n    ' + _crRow('Close', close) + '\n  </div>';
-};
-var _fnCategoryRHLY = function _fnCategoryRHLY(_ref11) {
-  var id = _ref11.id,
-      point = _ref11.point;
-  var high = point.high,
-      yHigh = point.yHigh,
-      low = point.low,
-      yLow = point.yLow,
-      c = point.c;
-
-  return _crHeader(c, id) + '\n  <div class="tp__body">\n    <div>\n      ' + _crSpan('High', high) + '\n      ' + _crSpan('', yHigh, { color: C.YEAR_C }) + '\n    </div>\n    <div>\n      ' + _crSpan('&nbsp;Low', low) + '\n      ' + _crSpan('', yLow, { color: C.YEAR_C }) + '\n    </div>\n  </div>';
-};
-
-var _fnCategory = function _fnCategory(_ref12) {
-  var id = _ref12.id,
-      point = _ref12.point;
-  var y = point.y,
-      c = point.c;
-
-  return _crHeader(c, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', toNumberFormatAll(y)) + '\n  </div>';
-};
-
-var _fnTreeMap = function _fnTreeMap(_ref13) {
-  var id = _ref13.id,
-      point = _ref13.point;
-
-  var title = point.title,
-      label = point.label,
-      value = point.value,
-      _point$percent = point.percent,
-      percent = _point$percent === undefined ? '' : _point$percent,
-      _percent = percent ? '(' + percent + '%)' : '',
-      _value = toNumberFormatAll(value) + ' ' + _percent;
-
-  return _crHeader(title, id) + '\n  <div class="tp_body">\n    ' + _crRow('', label) + '\n    ' + _crRow('', _value, { color: C.YEAR_C }) + '\n  </div>\n  ';
-};
-
-var _fnPieTooltip = function _fnPieTooltip(_ref14) {
-  var id = _ref14.id,
-      value = _ref14.value,
-      point = _ref14.point;
-
-  return _crHeader(point.nameFull, id) + '\n  <div class="tp__body">\n    ' + _crRow('Value', value) + '\n  </div>';
-};
-
-var _fnCalcWidthSparkType4 = function _fnCalcWidthSparkType4(value, total) {
-  var _width1 = WIDTH_VALUE + value.length * WIDTH_CHAR,
-      _width2 = WIDTH_TOTAL + total.length * WIDTH_CHAR,
-      width = _width1 > _width2 ? _width1 : _width2,
-      fullWidth = width + WIDTH_SPARK;
-  return { fullWidth: fullWidth, width: width };
-};
-
-var _fnStackedAreaTooltip = function _fnStackedAreaTooltip(_ref15) {
-  var id = _ref15.id,
-      value = _ref15.value,
-      point = _ref15.point;
-
-  var nameFull = point.nameFull,
-      category = point.category,
-      _point$percent2 = point.percent,
-      percent = _point$percent2 === undefined ? '0.0' : _point$percent2,
-      _point$total = point.total,
-      total = _point$total === undefined ? 0 : _point$total,
-      _total = toNumberFormat(total),
-      _fnCalcWidthSparkType = _fnCalcWidthSparkType4(value, _total),
-      fullWidth = _fnCalcWidthSparkType.fullWidth,
-      width = _fnCalcWidthSparkType.width;
-
-  return _crHeader(nameFull, id) + _fnTooltipSparkType4({
-    fullWidth: fullWidth, width: width, year: category, value: value, total: _total, percent: percent, id: id
-  });
-};
-
-var _fnTreeMapTooltip = function _fnTreeMapTooltip(_ref16) {
-  var id = _ref16.id,
-      point = _ref16.point;
-
-  var nameFull = point.nameFull,
-      year = point.year,
-      _point$value = point.value,
-      value = _point$value === undefined ? '0.0' : _point$value,
-      _point$percent3 = point.percent,
-      percent = _point$percent3 === undefined ? '0.0' : _point$percent3,
-      _point$total2 = point.total,
-      total = _point$total2 === undefined ? 0 : _point$total2,
-      _value = toNumberFormat(value),
-      _total = toNumberFormat(total),
-      _fnCalcWidthSparkType2 = _fnCalcWidthSparkType4(_value, _total),
-      fullWidth = _fnCalcWidthSparkType2.fullWidth,
-      width = _fnCalcWidthSparkType2.width;
-
-  return _crHeader(nameFull, id) + _fnTooltipSparkType4({
-    fullWidth: fullWidth, width: width, year: year, value: _value, total: _total, percent: percent, id: id
-  });
-};
 
 var _fHide = function _fHide(id, point) {
   return function _fnHide() {
     document.getElementById(id).removeEventListener('click', _fnHide);
-    point.series.chart.zhTooltip.hide();
+    if (point.series) {
+      point.series.chart.zhTooltip.hide();
+    }
   };
 };
 var _addHideHandler = function _addHideHandler(id, point) {
@@ -290,57 +61,13 @@ var _addHideHandler = function _addHideHandler(id, point) {
     _n.addEventListener('click', _fHide(id, point));
   }
 };
-
 var _fnAddHandlerClose = function _fnAddHandlerClose(id, point) {
   setTimeout(function () {
     _addHideHandler(id, point);
   }, 1);
 };
 
-var _crSparkData = function _crSparkData(point) {
-  var sparkvalues = point.sparkvalues,
-      sparkpercent = point.sparkpercent;
-
-  var sparkLinesData = [],
-      sparkBarsData = [],
-      pointIndex = void 0;
-
-  if (sparkvalues) {
-    sparkLinesData = sparkvalues;
-    sparkBarsData = sparkpercent;
-    pointIndex = sparkvalues.length !== 0 ? sparkvalues.length - 1 : 0;
-  } else {
-    var seriesData = point.series.data;
-    seriesData.forEach(function (item, itemIndex) {
-      sparkLinesData.push(item.y);
-      sparkBarsData.push(item.percentage);
-    });
-    pointIndex = point.index;
-  }
-  return { sparkLinesData: sparkLinesData, sparkBarsData: sparkBarsData, pointIndex: pointIndex };
-};
-
-var _fnAddHandlerCloseAndSparklines = function _fnAddHandlerCloseAndSparklines(id, point) {
-  setTimeout(function () {
-    _addHideHandler(id, point);
-
-    var _crSparkData2 = _crSparkData(point),
-        sparkLinesData = _crSparkData2.sparkLinesData,
-        sparkBarsData = _crSparkData2.sparkBarsData,
-        pointIndex = _crSparkData2.pointIndex,
-        sparklines = _SparkFactory2.default.createSparklines(sparkLinesData, pointIndex),
-        sparkbars = _SparkFactory2.default.createSparkbars(sparkBarsData, pointIndex);
-
-    (0, _reactDom.render)(sparklines, document.getElementById(id + '_' + SPARKLINES_SUFFIX_ID));
-    (0, _reactDom.render)(sparkbars, document.getElementById(id + '_' + SPARKLINES_BAR_SUFFIX_ID));
-  }, 1);
-};
-
-var _fnFormatCategory = function _fnFormatCategory(x) {
-  return x;
-};
-
-var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
+var _fFormatter = function _fFormatter(option) {
   return function () {
     var fnTemplate = option.fnTemplate,
         _option$onAfterRender = option.onAfterRender,
@@ -369,71 +96,29 @@ var _fnBasePointFormatter = function _fnBasePointFormatter(option) {
 };
 
 var Tooltip = {
-  fnBasePointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnBaseTooltip,
-    isWithColor: true, isWithValueText: true, isWithValue: true
-  }),
-  fnBasePointFormatterT: _fnBasePointFormatter({
-    fnTemplate: _fnBaseTooltip,
-    fnDateFormat: toDateFormatDMYT,
-    isWithColor: true, isWithValueText: true, isWithValue: true
-  }),
-  fnBasePointFormatterC: _fnBasePointFormatter({
-    fnTemplate: _fnBaseTooltip,
-    fnDateFormat: _fnFormatCategory,
-    isWithColor: true, isWithValueText: true, isWithValue: true
-  }),
-  category: _fnBasePointFormatter({
-    fnTemplate: _fnCategory
-  }),
-  categoryRHLY: _fnBasePointFormatter({
-    fnTemplate: _fnCategoryRHLY
-  }),
+  fnBasePointFormatter: _fFormatter((0, _extends3.default)({}, _tpSpline2.default.value)),
+  fnBasePointFormatterT: _fFormatter((0, _extends3.default)({}, _tpSpline2.default.valueDmyt)),
 
-  fnExDividendPointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnExDividend
-  }),
-  fnSplitRatioPointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnSplitRatio
-  }),
-  exValue: _fnBasePointFormatter({
-    fnTemplate: _fnExValue
-  }),
-  eps: _fnBasePointFormatter({
-    fnTemplate: _fnEPS
-  }),
+  categorySimple: _fFormatter((0, _extends3.default)({}, _tpCategory2.default.simple)),
+  category: _fFormatter((0, _extends3.default)({}, _tpCategory2.default.remove)),
+  categoryRHLY: _fFormatter((0, _extends3.default)({}, _tpCategory2.default.rhly)),
 
-  fnVolumePointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnVolumeTooltip, isWithValue: true
-  }),
-  fnVolumePointFormatterT: _fnBasePointFormatter({
-    fnTemplate: _fnVolumeTooltip,
-    fnDateFormat: toDateFormatDMYT,
-    isWithValue: true
-  }),
+  exDividend: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.exDividend)),
+  splitRatio: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.splitRatio)),
+  exValue: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.exValue)),
+  eps: _fFormatter((0, _extends3.default)({}, _tpScatter2.default.eps)),
 
-  fnATHPointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnATHTooltip
-  }),
-  fnHighLowPointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnHighLowTooltip
-  }),
-  fnPiePointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnPieTooltip, isWithValue: true
-  }),
-  fnStackedAreaPointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnStackedAreaTooltip,
-    onAfterRender: _fnAddHandlerCloseAndSparklines,
-    isWithValue: true
-  }),
-  fnTreeMapPointFormatter: _fnBasePointFormatter({
-    fnTemplate: _fnTreeMapTooltip,
-    onAfterRender: _fnAddHandlerCloseAndSparklines,
-    isWithValue: true
-  }),
-  treeMap: _fnBasePointFormatter({
-    fnTemplate: _fnTreeMap
-  })
+  volume: _fFormatter((0, _extends3.default)({}, _tpStock2.default.volume)),
+  volumeDmyt: _fFormatter((0, _extends3.default)({}, _tpStock2.default.volumeDmyt)),
+  ath: _fFormatter((0, _extends3.default)({}, _tpStock2.default.ath)),
+  hl: _fFormatter((0, _extends3.default)({}, _tpStock2.default.hl)),
+
+  donut: _fFormatter((0, _extends3.default)({}, _tpDonut2.default.value)),
+
+  sparkStackedArea: _fFormatter((0, _extends3.default)({}, _tpSpark2.default.stackedArea)),
+  sparkTreeMap: _fFormatter((0, _extends3.default)({}, _tpSpark2.default.treeMap)),
+
+  treeMap: _fFormatter((0, _extends3.default)({}, _tpTreeMap2.default.value))
 };
 
 exports.default = Tooltip;

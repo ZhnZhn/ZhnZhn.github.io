@@ -1,4 +1,3 @@
-import ChartConfig from '../../charts/ChartConfig';
 import Chart from '../../charts/Chart';
 import Tooltip from '../../charts/Tooltip';
 
@@ -6,7 +5,8 @@ import AdapterFn from '../AdapterFn';
 
 const {
   valueMoving, findMinY,
-  appendWithColon
+  appendWithColon,
+  formatAllNumber
 } = AdapterFn;
 
 const DF_SLICE_TITLE = 'EU';
@@ -171,11 +171,11 @@ const EuroStatFn = {
 
     if ( max>Number.NEGATIVE_INFINITY ){
       plotLines[0].value = max;
-      plotLines[0].label.text = ChartConfig.fnNumberFormat(max);
+      plotLines[0].label.text = formatAllNumber(max);
     }
     if ( min<Number.POSITIVE_INFINITY ){
       plotLines[1].value = min;
-      plotLines[1].label.text = ChartConfig.fnNumberFormat(min);
+      plotLines[1].label.text = formatAllNumber(min);
     }
 
     if (!isNotZoomToMinMax){

@@ -163,7 +163,7 @@ var AlphaIntradayAdapter = {
     }))).addMiniVolume({
       id: _chartId,
       dVolume: dVolume, dColumn: dColumn,
-      tooltipColumn: _Chart2.default.fTooltip(_Tooltip2.default.fnVolumePointFormatterT)
+      tooltipColumn: _Chart2.default.fTooltip(_Tooltip2.default.volumeDmyt)
     }).toConfig();
 
     return {

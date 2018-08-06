@@ -101,9 +101,11 @@ var fnAdapter = {
 
   crTitle: function crTitle(option) {
     switch (option.browserType) {
-      case 'NST':case 'NST_ALL':
+      case 'NST':
+      case 'NST_ALL':
         return TITLE.NST;
-      case 'SWS':case 'SWS_ALL':
+      case 'SWS':
+      case 'SWS_ALL':
         return TITLE.SWS;
       default:
         return '';

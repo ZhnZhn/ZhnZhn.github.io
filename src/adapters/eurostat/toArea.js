@@ -2,15 +2,6 @@ import ChartConfig from '../../charts/ChartConfig';
 
 import fn from './EuroStatFn';
 
-/*
-const _crTimeIndexAndValue = json => {
-  const { dimension={}, value=[] } = json
-      , { time={} } = dimension
-      , { category={} } = time
-      , { index:timeIndex=0 } = category;
-  return { timeIndex, value };
-}
-*/
 
 const toArea = {
    createConfig: (json, option) => {
@@ -20,8 +11,11 @@ const toArea = {
              seriaType, seriaColor
             } = option
          , { data, max, min } = fn.createData(timeIndex, value)
+         , _type = typeof seriaType === 'string'
+             ? seriaType.toLowerCase()
+             : 'spline'
          , config = ChartConfig.fBaseAreaConfig({
-             seriaType: seriaType.toLowerCase(),
+             seriaType: _type,
              seriaColor
            });
 
@@ -33,8 +27,8 @@ const toArea = {
 
    createSeria: (json, option) => {
      const { timeIndex, value } = fn.crTimeIndexAndValue(json)
-         , { itemCaption, seriaColor } = option
-         , seria = ChartConfig.fSeries()
+         , { itemCaption, seriaType, seriaColor } = option
+         , seria = ChartConfig.fSeries({ seriaType })
          , { data } = fn.createData(timeIndex, value);
 
      return Object.assign(seria, {

@@ -47,7 +47,7 @@ var _crErr = function _crErr(errCaption, message) {
   };
 };
 
-var CATEGORY_TYPES = ['MAP', 'COLUMN', 'BAR'];
+var CATEGORY_TYPES = ['MAP', 'COLUMN_SET', 'BAR_SET'];
 var _isCategory = isInArrStr(CATEGORY_TYPES);
 
 var _crUrlWithParams = function _crUrlWithParams(option) {

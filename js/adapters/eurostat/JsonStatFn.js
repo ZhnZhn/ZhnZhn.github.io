@@ -61,7 +61,7 @@ var _splitForConfig = function _splitForConfig(arr) {
         country = _fnIdToCountry(id);
 
     categories.push(country);
-    data.push({ y: value, c: country });
+    data.push({ y: value, c: country, id: country });
     if (value >= max) {
       max = value;
     }

@@ -23,7 +23,7 @@ const WithStackedColumnConfig = {
 
       title: Chart.fTitle({ y:Chart.STACKED_TITLE_Y }),
       subtitle: Chart.fSubtitle({ y:Chart.STACKED_SUBTITLE_Y }),
-      tooltip: Chart.fTooltip(Tooltip.fnStackedAreaPointFormatter),
+      tooltip: Chart.fTooltip(Tooltip.sparkStackedArea),
 
       xAxis: Chart.fXAxisOpposite({
         categories: [],

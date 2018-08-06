@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/tp/tpConfig.js"
+ ],
+ "file": "../../../src/charts/tp/tpConfig.js",
+ "names": [
+  "C",
+  "TITLE_C",
+  "YEAR_C",
+  "VALUE_C",
+  "EX_DIVIDEND_C"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,WAAS,SADD;AAERC,UAAQ,SAFA;AAGRC,WAAS,SAHD;AAIRC,iBAAe;AAJP,CAAV;;kBAOeJ,C"
+}

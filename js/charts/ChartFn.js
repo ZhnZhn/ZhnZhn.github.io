@@ -40,10 +40,6 @@ var _Chart = require('./Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
-var _ChartConfig = require('./ChartConfig');
-
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
 var _Type = require('../constants/Type');
 
 var _WithAreaChartFn = require('./WithAreaChartFn');
@@ -57,6 +53,8 @@ var _calcDeltaYAxis2 = _interopRequireDefault(_calcDeltaYAxis);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _fnFindIndex = _fnArr2.default.findIndexByProp('x');
+//import ChartConfig from './ChartConfig';
+
 
 var C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
@@ -259,7 +257,8 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
         nowValue: prev.value,
         prevValue: valueTo,
         Direction: _Type.Direction,
-        fnFormat: _ChartConfig2.default.fnNumberFormat
+        fnFormat: _formatAllNumber2.default
+        //fnFormat: ChartConfig.fnNumberFormat
       }), { valueTo: valueTo, dateTo: dateTo });
       return valueMoving;
     } else {

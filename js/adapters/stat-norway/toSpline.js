@@ -33,6 +33,8 @@ var crDsValuesTimes = _fnAdapter2.default.crDsValuesTimes,
     crChartOption = _fnAdapter2.default.crChartOption;
 
 
+var DF_TYPE = 'spline';
+
 var _toData = function _toData(values, times) {
   var _values = Array.isArray(values) ? values : [values];
   var data = times.map(function (time, i) {
@@ -47,10 +49,13 @@ var _toData = function _toData(values, times) {
 
 var _crSplineSeria = function _crSplineSeria(data) {
   var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var seriaColor = option.seriaColor;
+
+  var seriaType = option.seriaType,
+      seriaColor = option.seriaColor,
+      _type = typeof seriaType === 'string' ? seriaType.toLowerCase() : DF_TYPE;
 
   return Object.assign(_ChartConfig2.default.fSeries(), {
-    type: 'spline',
+    type: _type,
     color: seriaColor,
     visible: true,
     data: data,

@@ -32,8 +32,6 @@ const ChartTheme = {
     marginRight: C.MARGIN_RIGHT,
     plotBackgroundColor: 'transparent',
     backgroundColor: 'transparent',
-    //plotBackgroundColor: COLOR.PLOT,
-    //backgroundColor : COLOR.CHART,
     reflow: false,
 
     panning: true,
@@ -115,7 +113,7 @@ const ChartTheme = {
             'stroke-width' : 2,
             stroke : COLOR.HOVER
           },
-          select : {          
+          select : {
             'stroke-width' : 3,
             stroke : COLOR.HOVER
           }
@@ -169,7 +167,7 @@ const ChartTheme = {
       borderWidth: 0,
       //pointWidth: 4,
       groupPadding: 0.1,
-      pointPlacement: 'between'
+      pointPlacement: 0
     },
     series : {
       marker: {
@@ -187,6 +185,7 @@ const ChartTheme = {
 
       states : {
         hover : {
+          //lineWidthPlus: 1,
           halo : {
             opacity : 0.35,
             //opacity : 0.05,

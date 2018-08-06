@@ -16,11 +16,12 @@ const V = {
   A: 'AREA',
   A_Y: 'AREA_YEARLY',
   S: 'SPLINE',
+  S_C: 'COLUMN',
   M: 'MAP',
-  C: 'COLUMN',
+  C: 'COLUMN_SET',
   C_C: 'COLUMN_CLUSTER' ,
   C_2: 'COLUMN_BY_2',
-  B: 'BAR',
+  B: 'BAR_SET',
   B_C: 'BAR_CLUSTER',
   B_2: 'BAR_BY_2',
   TM: 'TREE_MAP',
@@ -37,6 +38,7 @@ const _crDF = () => {
   return [
     { caption: 'Default: Spline', value: V.S },
     { caption: 'Area', value: V.A },
+    { caption: 'Column', value: V.S_C },
     { caption: 'Bar: All Countries', value: V.B },
     { caption: 'Column: All Countries', value: V.C },
     { caption: 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
@@ -45,21 +47,23 @@ const _crDF = () => {
 
 const _crDF3 = () => {
   return [
-    { caption : 'Default: Spline', value: V.S },
-    { caption : 'Bar: All Countries', value: V.B },
-    { caption : 'Column: All Countries', value: V.C }
+    { caption : 'Default: Spline', value : V.S },
+    { caption : 'Column', value : V.S_C },
+    { caption : 'Bar: All Countries', value : V.B },
+    { caption : 'Column: All Countries', value : V.C }
   ];
 };
 
 const _crT1 = () => {
   return [
-    { caption : 'Default: Spline', value: V.S },
+    { caption : 'Default: Spline', value: V.S }
   ];
 }
 
 const _crT2 = () => {
   return [
     { caption : 'Default: Spline', value: V.S },
+    { caption : 'Column', value: V.S_C },
     { caption : 'Yearly by Months' , value: V.A_Y }
   ];
 }

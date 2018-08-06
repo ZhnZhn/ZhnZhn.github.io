@@ -9,7 +9,7 @@ import DateUtils from '../utils/DateUtils';
 import safeGet from '../utils/safeGet';
 
 import Chart from './Chart';
-import ChartConfig from './ChartConfig';
+//import ChartConfig from './ChartConfig';
 import { Direction } from '../constants/Type';
 
 
@@ -95,7 +95,7 @@ const _renderSeriesLabel = ({chart, options, series, label='', color }) => {
             ? label.substring(0, C.SERIA_LABEL_CHARS)
             : label
       , { x, y } = _calcXyForLabel(options);
-  
+
   return chart.renderer.text(seriesText, x, y)
     .css({
       color: color || options.colors[series._colorIndex],
@@ -200,7 +200,8 @@ const ChartFn = {
           nowValue: prev.value,
           prevValue: valueTo,
           Direction: Direction,
-          fnFormat: ChartConfig.fnNumberFormat
+          fnFormat: formatAllNumber
+          //fnFormat: ChartConfig.fnNumberFormat
         }),
         { valueTo, dateTo }
       )

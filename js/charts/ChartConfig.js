@@ -28,6 +28,14 @@ var _offlineExporting = require('highcharts/modules/offline-exporting');
 
 var _offlineExporting2 = _interopRequireDefault(_offlineExporting);
 
+var _zhnHighcharts = require('./plugin/zhn-highcharts');
+
+var _zhnHighcharts2 = _interopRequireDefault(_zhnHighcharts);
+
+var _fixHighcharts = require('./plugin/fix-highcharts');
+
+var _fixHighcharts2 = _interopRequireDefault(_fixHighcharts);
+
 var _Color = require('../constants/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
@@ -72,12 +80,6 @@ var _WithTreeMapConfig = require('./WithTreeMapConfig');
 
 var _WithTreeMapConfig2 = _interopRequireDefault(_WithTreeMapConfig);
 
-var _ComponentActions = require('../flux/actions/ComponentActions');
-
-var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
-
-var _Type = require('../constants/Type');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var merge = _highcharts2.default.merge;
@@ -95,43 +97,11 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
     (0, _treemap2.default)(_highcharts2.default);
     (0, _exporting2.default)(_highcharts2.default);
     (0, _offlineExporting2.default)(_highcharts2.default);
+
+    (0, _zhnHighcharts2.default)(_highcharts2.default);
+    (0, _fixHighcharts2.default)(_highcharts2.default);
+
     _highcharts2.default.setOptions(_ChartTheme2.default);
-
-    /*
-       Drop-in fix for arearange destroy exception:
-       "isSVG of undefined": 5.0.14: issues/7021
-    */
-    _highcharts2.default.wrap(_highcharts2.default.seriesTypes.arearange.prototype.pointClass.prototype, 'setState', function (proceed) {
-      proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-      if (this.series.stateMarkerGraphic) {
-        this.series.lowerStateMarkerGraphic = undefined;
-      }
-    });
-
-    _highcharts2.default.wrap(_highcharts2.default.Chart.prototype, 'showCredits', function (next, credits) {
-      next.call(this, credits);
-      if (credits.enabled) {
-        this.credits.element.onclick = function () {
-          var link = document.createElement('a');
-          link.rel = "noopener noreferrer";
-          link.target = credits.targer;
-          link.href = credits.href;
-          link.click();
-        };
-      }
-    });
-
-    _highcharts2.default.wrap(_highcharts2.default.Chart.prototype, 'exportChartLocal', function (fn) {
-      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      if (args.length === 0) {
-        _ComponentActions2.default.showModalDialog(_Type.ModalDialog.CUSTOMIZE_EXPORT, { fn: fn, chart: this });
-      } else {
-        fn.apply(this, args);
-      }
-    });
   },
   seriaOption: function seriaOption(color, option) {
     return Object.assign({
@@ -289,17 +259,20 @@ var _fScatterSeria = function _fScatterSeria(color, pointFormatter, data, zhSeri
   };
 };
 ChartConfig.fExDividendSeria = function (data, chartId) {
-  return _fScatterSeria(_Color2.default.EX_DIVIDEND, _Tooltip2.default.fnExDividendPointFormatter, data, chartId + '_ExDivident');
+  return _fScatterSeria(_Color2.default.EX_DIVIDEND, _Tooltip2.default.exDividend, data, chartId + '_ExDivident');
 };
 ChartConfig.fSplitRatioSeria = function (data, chartId) {
-  return _fScatterSeria(_Color2.default.SPLIT_RATIO, _Tooltip2.default.fnSplitRatioPointFormatter, data, chartId + '_SplitRatio');
+  return _fScatterSeria(_Color2.default.SPLIT_RATIO, _Tooltip2.default.splitRatio, data, chartId + '_SplitRatio');
 };
 
 ChartConfig.fSeries = function () {
   var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var seriaType = option.seriaType,
+      _type = typeof seriaType === 'string' ? seriaType.toLowerCase() : 'spline';
 
   return merge(false, {
-    type: 'spline',
+    type: _type,
+    //type: 'spline',
     lineWidth: 1,
     tooltip: _Chart2.default.fTooltip(_Tooltip2.default.fnBasePointFormatter)
   }, option);

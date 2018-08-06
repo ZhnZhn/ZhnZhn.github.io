@@ -25,7 +25,7 @@ const _crErr = (errCaption, message) => ({
   errCaption, message
 });
 
-const CATEGORY_TYPES = [ 'MAP', 'COLUMN', 'BAR' ];
+const CATEGORY_TYPES = [ 'MAP', 'COLUMN_SET', 'BAR_SET' ];
 const _isCategory = isInArrStr(CATEGORY_TYPES);
 
 const _crUrlWithParams = (option) => {
@@ -72,7 +72,7 @@ const _crUrl = (option) => {
   if (seriaType === 'MAP') {
     option.zhMapSlice = mapSlice
       ? { ...mapSlice, time }
-      : { ...createMapSlice(option, itemMap), time };  
+      : { ...createMapSlice(option, itemMap), time };
     return `${URL}${_mapValue}`;
   } else {
     return `${URL}${_mapValue}&time=${time}`;

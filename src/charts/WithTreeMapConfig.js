@@ -17,7 +17,7 @@ const WithTreeMapConfig = {
        },
        title : Chart.fTitle({ y:Chart.TREEMAP_TITLE_Y }),
        subtitle : Chart.fSubtitle({ y:Chart.TREEMAP_SUBTITLE_Y }),
-       tooltip: Chart.fTooltip(Tooltip.fnTreeMapPointFormatter),
+       tooltip: Chart.fTooltip(Tooltip.sparkTreeMap),
        navigation : Chart.fNavigation()
      }
    },

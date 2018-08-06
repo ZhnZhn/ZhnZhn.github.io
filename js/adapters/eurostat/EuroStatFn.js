@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ChartConfig = require('../../charts/ChartConfig');
-
-var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
-
 var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
@@ -24,7 +20,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var valueMoving = _AdapterFn2.default.valueMoving,
     findMinY = _AdapterFn2.default.findMinY,
-    appendWithColon = _AdapterFn2.default.appendWithColon;
+    appendWithColon = _AdapterFn2.default.appendWithColon,
+    formatAllNumber = _AdapterFn2.default.formatAllNumber;
 
 
 var DF_SLICE_TITLE = 'EU';
@@ -198,11 +195,11 @@ var EuroStatFn = {
 
     if (max > Number.NEGATIVE_INFINITY) {
       plotLines[0].value = max;
-      plotLines[0].label.text = _ChartConfig2.default.fnNumberFormat(max);
+      plotLines[0].label.text = formatAllNumber(max);
     }
     if (min < Number.POSITIVE_INFINITY) {
       plotLines[1].value = min;
-      plotLines[1].label.text = _ChartConfig2.default.fnNumberFormat(min);
+      plotLines[1].label.text = formatAllNumber(min);
     }
 
     if (!isNotZoomToMinMax) {

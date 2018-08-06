@@ -30,17 +30,19 @@ var DF_TYPE = 'SPLINE';
 var _rToConfig = {
   AREA: _toArea2.default.createConfig,
   SPLINE: _toArea2.default.createConfig,
+  COLUMN: _toArea2.default.createConfig,
   AREA_YEARLY: _toAreaYearly2.default.createConfig,
   MAP: _toMap2.default.createConfig,
-  COLUMN: _toColumn2.default.createConfig,
-  BAR: _toBar2.default.createConfig
+  COLUMN_SET: _toColumn2.default.createConfig,
+  BAR_SET: _toBar2.default.createConfig
 };
 
 var _rToSeria = {
   AREA: _toArea2.default.createSeria,
   SPLINE: _toArea2.default.createSeria,
-  COLUMN: _toColumn2.default.createSeria,
-  BAR: _toColumn2.default.createSeria
+  COLUMN: _toArea2.default.createSeria,
+  COLUMN_SET: _toColumn2.default.createSeria,
+  BAR_SET: _toColumn2.default.createSeria
 };
 
 var _checkSeriaType = function _checkSeriaType(router, option) {

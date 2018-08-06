@@ -43,7 +43,7 @@ const _splitForConfig = (arr) => {
      const { id, value } = item
          , country = _fnIdToCountry(id);
      categories.push(country);
-     data.push({ y: value, c: country })
+     data.push({ y: value, c: country, id: country })
      if (value>=max) { max = value; }
      if (value<=min) { min = value; }
     })
@@ -116,7 +116,7 @@ const JsonStatFn = {
          .map(arr => arr.sort(AdapterFn.compareByValueId))
          .fold(_splitForConfig);
        });
-  },  
+  },
   trJsonToSeria : (json, configSlice, categories) => {
     const { dGeo, sGeo } = JsonStatFn.createGeoSlice(json, configSlice);
     return Box(_combineToHm(dGeo.id, sGeo))
