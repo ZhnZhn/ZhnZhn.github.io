@@ -53,7 +53,7 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
         return p.c !== id && p.name !== id && p.id !== id;
       });
       if (_newC.length < _c.length) {
-        if (typeof this.yAxis[0].min !== 'undefined') {
+        if (!this.yAxis[0].userOptions.zhNotZoomToMinMax) {
           var _len = _newData.length,
               _getExtremes2 = _getExtremes(_newData[0].y, _newData[_len - 1].y),
               min = _getExtremes2.min,

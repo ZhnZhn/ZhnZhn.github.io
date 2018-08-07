@@ -1,12 +1,16 @@
 
 .tp__header {
-  position: relative;
-  //padding-bottom: 5px;
-  padding-right: 20px;
+  position: relative; 
+  padding-left: 5px;
+  padding-right: 25px;
+  height: 26px;
   font-size: 16px;
   font-weight: bold;
   pointer-events: visible;
   cursor: pointer;
+}
+.tp__header:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .tp__header__caption {
@@ -21,11 +25,12 @@
 .tp__header__close {
   display: inline-block;
   position: absolute;
-  right: 0;
+  right: 5px;
   color: #ed5813;
 }
 
 .tp__body {
+  padding-left: 5px;
   font-size: 16px;
   font-weight: bold;
 }
@@ -44,6 +49,7 @@
 .tp__bt {
   display: inline-block;
   color: #4caf50;
+  margin-left: -3px;
   padding-left: 8px;
   padding-right: 8px;
   border-radius: 2px;

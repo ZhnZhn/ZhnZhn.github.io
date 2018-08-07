@@ -125,9 +125,13 @@ const EuroStatFn = {
     tooltip=Tooltip.category,
     option
   }){
-    const { time } = option;
+    const { time, isNotZoomToMinMax } = option;
     config.xAxis.categories = categories
-    config.yAxis.min = min
+    if (isNotZoomToMinMax) {      
+      config.yAxis.zhNotZoomToMinMax = true
+    } else {
+      config.yAxis.min = min
+    }
     config.series[0].name = time
     config.tooltip = Chart.fTooltip(tooltip)
 

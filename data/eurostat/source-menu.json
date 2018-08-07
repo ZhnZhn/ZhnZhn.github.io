@@ -28,7 +28,12 @@
         { "id" : "ES_I_ENERGY" },
         { "id" : "ES_E_STAT_Q" },
         { "id" : "ES_I_ELECTRICITY_GENERATION" },
-        { "id" : "ES_E_STAT_PR" }
+        { "id" : "ES_E_STC_ELECTRICITY" },
+        { "id" : "ES_E_STAT_PR" },
+        { "id" : "ES_E_HOUSEHOLD_ELECTRICITY" },
+        { "id" : "ES_E_NONHOUSEHOLD_ELECTRICITY" },
+        { "id" : "ES_E_CHD_DAYS_M" },
+        { "id" : "ES_E_CHD_DAYS_A" }
       ]
     },{
       "caption" : "Finance",
@@ -411,6 +416,48 @@
           "twoJsonProp" : "items"
         }
     },
+    "ES_E_CHD_DAYS_M" : {
+        "type" : "ES_E_CHD_DAYS_M",
+        "menuTitle" : "Cooling, Heating Days, M",
+        "dialogCaption" : "Cooling, Heating Days, M",
+        "chartContainerCaption" : "Eurostat Cooling, Heating Degree Days, Monthly",
+        "dialogType" : "DialogEurostat2",
+        "addProps": "ES_COUNTRIES_BASE",
+        "dialogProps" : {
+          "twoCaption" : "Item",
+          "twoURI" : "./data/eurostat/cooling-heating-days.json",
+          "twoJsonProp" : "items",
+          "mapFrequency": "M",
+          "mapDateDf": 12,
+          "dfProps": {
+            "dfTable": "nrg_chdd_m",
+            "dfParams": [ "geo", "indic_nrg" ],
+            "dfTail": "unit=NR",
+            "mapType": "V"
+          }
+        }
+    },
+    "ES_E_CHD_DAYS_A" : {
+        "type" : "ES_E_CHD_DAYS_A",
+        "menuTitle" : "Cooling, Heating Days, A",
+        "dialogCaption" : "Cooling, Heating Days, A",
+        "chartContainerCaption" : "Eurostat Cooling, Heating Degree Days, Annual",
+        "dialogType" : "DialogEurostat2",
+        "addProps": "ES_COUNTRIES_BASE",
+        "dialogProps" : {
+          "twoCaption" : "Item",
+          "twoURI" : "./data/eurostat/cooling-heating-days.json",
+          "twoJsonProp" : "items",
+          "mapFrequency": "Y",
+          "mapDateDf": 1,
+          "dfProps": {
+            "dfTable": "nrg_chdd_a",
+            "dfParams": [ "geo", "indic_nrg" ],
+            "dfTail": "unit=NR",
+            "mapType": "V"
+          }
+        }
+    },
     "ES_I_ENERGY" : {
       "type" : "ES_I_ENERGY",
       "menuTitle" : "Industry",
@@ -433,16 +480,91 @@
     },
    "ES_I_ELECTRICITY_GENERATION" : {
       "type" : "ES_I_ELECTRICITY_GENERATION",
-      "menuTitle" : "Supply of Electricity",
-      "dialogCaption" : "Supply of Electricity",
-      "chartContainerCaption" : "Eurostat Supply of Electricity",
+      "menuTitle" : "Supply Electricity, GWh, M",
+      "dialogCaption" : "Supply of Electricity, GWh, M",
+      "chartContainerCaption" : "Eurostat: Supply of Electricity, GWh, Monthly",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/electricity-generation.json",
+        "twoURI" : "./data/eurostat/supply-of-electricity.json",
+        "twoCaption": "Supply",
+        "twoJsonProp": "items",
         "chartsType": "t3b",
         "dfProps": {
-          "dfTable": "nrg_105m"
+          "dfTable": "nrg_105m",
+          "dfParams": [ "geo", "indic_nrg" ],
+          "dfTail": "product=6000&unit=GWH",
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_E_STC_ELECTRICITY" : {
+      "type" : "ES_E_STC_ELECTRICITY",
+      "menuTitle" : "Industry Electricity, A",
+      "dialogCaption" : "Industry Electricity, A",
+      "chartContainerCaption" : "Eurostat: Industry Electricity, Annual",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/industry-electricity.json",
+        "twoCaption": "Item",
+        "twoJsonProp": "items",
+        "threeURI": "./data/eurostat/electricity-units.json",
+        "threeCaption": "Unit",
+        "chartsType": "t3b",
+        "dfProps": {
+          "dfTable": "nrg_105a",
+          "dfParams": [ "geo", "indic_nrg", "unit" ],
+          "dfTail": "product=6000",
+          "mapType": "V",
+          "mapFrequency" : "Y",
+          "mapDateDf": 2
+        }
+      }
+    },
+    "ES_E_HOUSEHOLD_ELECTRICITY" : {
+      "type" : "ES_E_HOUSEHOLD_ELECTRICITY",
+      "menuTitle" : "Electr. House Prices",
+      "dialogCaption" : "Electr. House Prices",
+      "chartContainerCaption" : "Eurostat: Electricity Household Prices, Annual",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/electricity-household-components.json",
+        "twoCaption": "Item",
+        "twoJsonProp": "items",
+        "threeURI": "./data/eurostat/electricity-household.json",
+        "threeCaption": "Band",
+        "dfProps": {
+          "dfTable": "nrg_pc_204_c",
+          "dfParams": [ "geo", "nrg_prc", "nrg_cons" ],
+          "dfTail": "currency=EUR",
+          "mapType": "V",
+          "mapFrequency" : "Y",
+          "mapDateDf": 1
+        }
+      }
+    },
+    "ES_E_NONHOUSEHOLD_ELECTRICITY" : {
+      "type" : "ES_E_NONHOUSEHOLD_ELECTRICITY",
+      "menuTitle" : "Electr. Non-House Prices",
+      "dialogCaption" : "Electr. Non-Household Prices",
+      "chartContainerCaption" : "Eurostat: Electricity Non-Household Prices, Annual",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/electricity-non-household-components.json",
+        "twoCaption": "Item",
+        "twoJsonProp": "items",
+        "threeURI": "./data/eurostat/electricity-non-household.json",
+        "threeCaption": "Band",
+        "dfProps": {
+          "dfTable": "nrg_pc_205_c",
+          "dfParams": [ "geo", "nrg_prc", "nrg_cons" ],
+          "dfTail": "currency=EUR",
+          "mapType": "V",
+          "mapFrequency" : "Y",
+          "mapDateDf": 1
         }
       }
     },
@@ -637,12 +759,17 @@
       "menuTitle" : "High-Tech Indicators",
       "dialogCaption" : "High-Tech Indicators",
       "chartContainerCaption" : "High-Tech Indicators",
-      "dialogType" : "DialogEurostat",
+      "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/high-tech-indicators.json",
-        "twoJsonProp" : "indicators"
+        "twoJsonProp" : "indicators",
+        "mapFrequency": "Y",
+        "mapDateDf": 2,
+        "dfProps": {
+          "mapType" : "V"
+        }
       }
     },
     "ES_HT_RD" : {

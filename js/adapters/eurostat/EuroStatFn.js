@@ -146,10 +146,15 @@ var EuroStatFn = {
         _ref3$tooltip = _ref3.tooltip,
         tooltip = _ref3$tooltip === undefined ? _Tooltip2.default.category : _ref3$tooltip,
         option = _ref3.option;
-    var time = option.time;
+    var time = option.time,
+        isNotZoomToMinMax = option.isNotZoomToMinMax;
 
     config.xAxis.categories = categories;
-    config.yAxis.min = min;
+    if (isNotZoomToMinMax) {
+      config.yAxis.zhNotZoomToMinMax = true;
+    } else {
+      config.yAxis.min = min;
+    }
     config.series[0].name = time;
     config.tooltip = _Chart2.default.fTooltip(tooltip);
 
