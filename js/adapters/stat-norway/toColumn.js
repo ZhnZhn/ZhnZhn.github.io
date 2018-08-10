@@ -152,15 +152,17 @@ var toColumn = {
         _c = data.map(function (item) {
       return item.c;
     }),
-        config = (0, _ConfigBuilder2.default)().barOrColumnConfig(seriaType, _c, { seriaColor: seriaColor }).addCaption(_title, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
+        config = (0, _ConfigBuilder2.default)().barOrColumnConfig(seriaType, _c).addCaption(_title, _subtitle).addTooltip(_Tooltip2.default.category).add((0, _extends3.default)({
       chart: { spacingTop: 25 }
     }, crChartOption(_ds, Tid, option))).toConfig();
 
     if (isCluster) {
       _setClusters(data);
     }
-
-    config.series[0].data = data;
+    Object.assign(config.series[0], {
+      color: seriaColor,
+      data: data
+    });
     return config;
   }
 

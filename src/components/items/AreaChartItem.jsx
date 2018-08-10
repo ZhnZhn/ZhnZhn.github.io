@@ -195,7 +195,9 @@ class AreaChartItem extends Component {
   }
 
   _handleCheckBox = (isCheck, checkBox) => {
-    this.props.onSetActive(isCheck, checkBox, this.mainChart)
+    const { chartType, onSetActive } = this.props;
+    checkBox.chartType = chartType
+    onSetActive(isCheck, checkBox, this.mainChart)
   }
 
   _handleAddSma = (option) => {

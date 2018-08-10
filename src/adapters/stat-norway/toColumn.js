@@ -117,7 +117,7 @@ const toColumn = {
         , data = _crData(_values, _dimC, cTotal)
         , _c = data.map(item => item.c)
         , config = Builder()
-           .barOrColumnConfig(seriaType, _c, { seriaColor })
+           .barOrColumnConfig(seriaType, _c)
            .addCaption(_title, _subtitle)
            .addTooltip(Tooltip.category)
            .add({
@@ -125,12 +125,14 @@ const toColumn = {
              ...crChartOption(_ds, Tid, option)
             })
            .toConfig()
-    
+
     if (isCluster) {
       _setClusters(data)
     }
-
-    config.series[0].data = data
+    Object.assign(config.series[0], {
+      color: seriaColor,
+      data: data
+    })    
     return config;
   }
 

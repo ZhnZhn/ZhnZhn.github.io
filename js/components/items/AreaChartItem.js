@@ -375,7 +375,12 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handleCheckBox = function (isCheck, checkBox) {
-    _this2.props.onSetActive(isCheck, checkBox, _this2.mainChart);
+    var _props3 = _this2.props,
+        chartType = _props3.chartType,
+        onSetActive = _props3.onSetActive;
+
+    checkBox.chartType = chartType;
+    onSetActive(isCheck, checkBox, _this2.mainChart);
   };
 
   this._handleAddSma = function (option) {
@@ -413,9 +418,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handleClickConfig = function () {
-    var _props3 = _this2.props,
-        caption = _props3.caption,
-        onShowConfigDialog = _props3.onShowConfigDialog;
+    var _props4 = _this2.props,
+        caption = _props4.caption,
+        onShowConfigDialog = _props4.onShowConfigDialog;
 
     onShowConfigDialog({
       caption: caption,
