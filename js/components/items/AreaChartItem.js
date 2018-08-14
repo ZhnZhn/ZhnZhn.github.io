@@ -195,7 +195,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          chartType = _props.chartType,
           caption = _props.caption,
           _props$config2 = _props.config,
           config = _props$config2 === undefined ? {} : _props$config2,
@@ -219,9 +218,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         'div',
         { className: CL.ROOT },
         _react2.default.createElement(_Header2.default, {
-          isOpen: isOpen,
-          chartType: chartType,
-          moreModel: this._moreModel,
+          isOpen: isOpen
+          //chartType={chartType}
+          , moreModel: this._moreModel,
           onCheck: this._fnOnCheck,
           onUnCheck: this._fnOnUnCheck,
           itemCaption: itemCaption,

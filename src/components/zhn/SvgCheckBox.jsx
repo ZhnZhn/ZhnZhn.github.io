@@ -15,6 +15,12 @@ const S = {
   }
 };
 
+const E = {
+  KEY: " ",
+  KEY_CODE: 32
+};
+
+
 const C_GREY = "#777777";
 
 const EL_CHECKED = (
@@ -32,7 +38,6 @@ class SvgCheckBox extends Component {
   /*
   static propTypes = {
     value: PropTypes.bool,
-    //chartType: PropTypes.string,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func
   }
@@ -44,7 +49,6 @@ class SvgCheckBox extends Component {
     const { value, onCheck, onUnCheck } = props;
     this._isOnCheck = _isFn(onCheck)
     this._isOnUnCheck = _isFn(onUnCheck)
-    //this.chartType = (chartType) ? chartType : 'Unknown';
 
     this.state = {
         isChecked: !!value,
@@ -74,6 +78,13 @@ class SvgCheckBox extends Component {
     this.setState({ isChecked: !isChecked });
   }
 
+  _hKeyDown = (evt) => {
+    if (evt.key === E.KEY || evt.keyCode === E.KEY_CODE) {
+      evt.preventDefault()
+      this._hClick()
+    }
+  }
+
   render(){
     const { rootStyle } = this.props
         , { isChecked } = this.state
@@ -82,8 +93,13 @@ class SvgCheckBox extends Component {
             : null;
     return (
       <div
+         role="checkbox"
+         tabIndex="0"
+         aria-checked={isChecked}
+         //aria-labelledby
          style={{ ...S.DIV, ...rootStyle }}
          onClick={this._hClick}
+         onKeyDown={this._hKeyDown}
       >
         <svg
             viewBox="0 0 16 16" width="100%" height="100%"

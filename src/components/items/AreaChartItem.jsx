@@ -309,7 +309,8 @@ class AreaChartItem extends Component {
 
   render(){
     const {
-            chartType, caption, config={},
+            //chartType,
+            caption, config={},
             onCloseItem, isAdminMode
           } = this.props
         , { zhConfig={}, zhMiniConfigs } = config
@@ -326,7 +327,7 @@ class AreaChartItem extends Component {
       <div className={CL.ROOT}>
          <Header
             isOpen={isOpen}
-            chartType={chartType}
+            //chartType={chartType}
             moreModel={this._moreModel}
             onCheck={this._fnOnCheck}
             onUnCheck={this._fnOnUnCheck}

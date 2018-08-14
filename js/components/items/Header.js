@@ -126,8 +126,6 @@ var ItemTime = function ItemTime(_ref) {
   );
 };
 
-//const _isFn = fn => typeof fn === 'function';
-
 var Header = function (_Component) {
   (0, _inherits3.default)(Header, _Component);
 
@@ -157,9 +155,8 @@ var Header = function (_Component) {
       return _react2.default.createElement(
         _react.Fragment,
         null,
-        _react2.default.createElement(_SvgMore2.default
-        //style={{ display: 'inline-block' }}
-        , { svgStyle: S.SVG_MORE,
+        _react2.default.createElement(_SvgMore2.default, {
+          svgStyle: S.SVG_MORE,
           onClick: _this._toggleMore
         }),
         _react2.default.createElement(_ModalSlider2.default, {
@@ -180,7 +177,6 @@ var Header = function (_Component) {
       var _props = this.props,
           theme = _props.theme,
           isOpen = _props.isOpen,
-          chartType = _props.chartType,
           onCheck = _props.onCheck,
           onUnCheck = _props.onUnCheck,
           itemCaption = _props.itemCaption,
@@ -201,9 +197,9 @@ var Header = function (_Component) {
         { style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
         this._renderMore(moreModel, TS),
         _react2.default.createElement(_SvgCheckBox2.default, {
-          rootStyle: S.CHECK_BOX,
-          chartType: chartType,
-          onCheck: onCheck,
+          rootStyle: S.CHECK_BOX
+          //chartType={chartType}
+          , onCheck: onCheck,
           onUnCheck: onUnCheck
         }),
         _react2.default.createElement(

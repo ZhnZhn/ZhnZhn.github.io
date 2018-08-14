@@ -78,7 +78,6 @@ const ItemTime = ({ itemTime }) => {
   );
 };
 
-//const _isFn = fn => typeof fn === 'function';
 
 class Header extends Component {
   state = {
@@ -96,8 +95,7 @@ class Header extends Component {
     const { isMore } = this.state;
     return (
       <Fragment>
-        <SvgMore
-          //style={{ display: 'inline-block' }}
+        <SvgMore          
           svgStyle={S.SVG_MORE}
           onClick={this._toggleMore}
         />
@@ -117,7 +115,8 @@ class Header extends Component {
     const {
             theme,
             isOpen,
-            chartType, onCheck, onUnCheck,
+            //chartType,
+            onCheck, onUnCheck,
             itemCaption, itemTitle, itemTime, onToggle,
             valueMoving, isAdminMode, crValueMoving,
             moreModel,
@@ -136,7 +135,7 @@ class Header extends Component {
         { this._renderMore(moreModel, TS) }
         <SvgCheckBox
            rootStyle={S.CHECK_BOX}
-           chartType={chartType}
+           //chartType={chartType}
            onCheck={onCheck}
            onUnCheck={onUnCheck}
         />

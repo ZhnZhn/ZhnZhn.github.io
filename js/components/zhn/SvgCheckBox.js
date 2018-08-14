@@ -49,6 +49,11 @@ var S = {
   }
 };
 
+var E = {
+  KEY: " ",
+  KEY_CODE: 32
+};
+
 var C_GREY = "#777777";
 
 var EL_CHECKED = _react2.default.createElement('path', {
@@ -68,7 +73,6 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
   /*
   static propTypes = {
     value: PropTypes.bool,
-    //chartType: PropTypes.string,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func
   }
@@ -87,7 +91,6 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
 
     _this._isOnCheck = _isFn(onCheck);
     _this._isOnUnCheck = _isFn(onUnCheck);
-    //this.chartType = (chartType) ? chartType : 'Unknown';
 
     _this.state = {
       isChecked: !!value
@@ -112,8 +115,13 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
       return _react2.default.createElement(
         'div',
         {
-          style: (0, _extends3.default)({}, S.DIV, rootStyle),
-          onClick: this._hClick
+          role: 'checkbox',
+          tabIndex: '0',
+          'aria-checked': isChecked
+          //aria-labelledby
+          , style: (0, _extends3.default)({}, S.DIV, rootStyle),
+          onClick: this._hClick,
+          onKeyDown: this._hKeyDown
         },
         _react2.default.createElement(
           'svg',
@@ -152,6 +160,13 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
       onUnCheck(_this2);
     }
     _this2.setState({ isChecked: !isChecked });
+  };
+
+  this._hKeyDown = function (evt) {
+    if (evt.key === E.KEY || evt.keyCode === E.KEY_CODE) {
+      evt.preventDefault();
+      _this2._hClick();
+    }
   };
 
   this.setUnchecked = function () {

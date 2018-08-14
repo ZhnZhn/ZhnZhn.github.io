@@ -5,7 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var C = {
-  URL: 'https://www.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
+  //URL: 'https://www.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
+  URL: 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
+};
+
+var DF_ERR_MSG = 'No data exist for selected criteria.';
+
+var _crErr = function _crErr(errCaption, message) {
+  return {
+    errCaption: errCaption,
+    message: message
+  };
 };
 
 var BeaApi = {
@@ -25,14 +35,20 @@ var BeaApi = {
     var _json$BEAAPI = json.BEAAPI,
         BEAAPI = _json$BEAAPI === undefined ? {} : _json$BEAAPI,
         _BEAAPI$Results = BEAAPI.Results,
-        Results = _BEAAPI$Results === undefined ? {} : _BEAAPI$Results;
+        Results = _BEAAPI$Results === undefined ? {} : _BEAAPI$Results,
+        ResError = BEAAPI.Error;
 
+    if (ResError) {
+      var ErrorDetail = ResError.ErrorDetail;
+
+      throw _crErr(ResError.APIErrorCode || '', ErrorDetail.Description || ResError.APIErrorDescription || DF_ERR_MSG);
+    }
     if (Results.Error || !Array.isArray(Results.Data)) {
-      return false;
+      return _crErr('', DF_ERR_MSG);
     }
     return true;
   }
 };
 
 exports.default = BeaApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\bea\BeaApi.js.map
+//# sourceMappingURL=BeaApi.js.map

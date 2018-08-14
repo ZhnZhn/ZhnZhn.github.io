@@ -1,7 +1,15 @@
 
 const C = {
-  URL: 'https://www.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
+  //URL: 'https://www.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
+  URL: 'https://apps.bea.gov/api/data/?Year=ALL&ResultFormat=JSON&method=GETDATA&UserID'
 };
+
+const DF_ERR_MSG = 'No data exist for selected criteria.';
+
+const _crErr = (errCaption, message) => ({
+  errCaption,
+  message
+});
 
 const BeaApi = {
   getRequestUrl(option){
@@ -19,9 +27,18 @@ const BeaApi = {
 
   checkResponse(json){
     const { BEAAPI={} } = json
-        , { Results={} } = BEAAPI;
+        , { Results={}, Error:ResError } = BEAAPI;
+    if (ResError) {
+      const { ErrorDetail } = ResError;
+      throw _crErr(
+        ResError.APIErrorCode || '',
+        ErrorDetail.Description
+          || ResError.APIErrorDescription
+          || DF_ERR_MSG
+      );
+    }
     if ( Results.Error || !Array.isArray(Results.Data) ) {
-      return false;
+      return _crErr('', DF_ERR_MSG);
     }
     return true;
   }
