@@ -1,6 +1,6 @@
 import ChartConfig from '../../charts/ChartConfig'
 import fn from './EuroStatFn';
-import ToYearly from '../ToYearly'
+import toYearly from '../toYearly'
 
 /*
 const _crTimeIndexAndValue = json => {
@@ -17,7 +17,7 @@ const toAreaYearly = {
      const { timeIndex, value } = fn.crTimeIndexAndValue(json)
          , data = fn.toPointArr(timeIndex, value)
          , { title, subtitle, dataSource } = option
-         , config = ToYearly.toConfig(
+         , config = toYearly.toConfig(
              data.reverse(), {
              title, subtitle,
              itemCaption: title + ': ' + subtitle,

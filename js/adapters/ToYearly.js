@@ -298,7 +298,7 @@ var _crValueMoving = function _crValueMoving(nowSeria, prevSeria) {
   });
 };
 
-var ToYearly = {
+var toYearly = {
   toConfig: function toConfig(data, option) {
     var title = option.title,
         subtitle = option.subtitle,
@@ -324,5 +324,5 @@ var ToYearly = {
   }
 };
 
-exports.default = ToYearly;
-//# sourceMappingURL=ToYearly.js.map
+exports.default = toYearly;
+//# sourceMappingURL=toYearly.js.map

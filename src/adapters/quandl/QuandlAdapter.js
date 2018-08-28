@@ -24,7 +24,7 @@ import {fCreatePieConfig} from './QuandlToPie';
 import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
 import {fCreateStackedColumnConfig} from './QuandlToStackedColumn';
 import {fCreateTreeMapConfig} from './QuandlToTreeMap';
-import ToYearly from '../ToYearly'
+import toYearly from '../toYearly'
 import ToScatter from './ToScatter'
 
 const { getData, getColumnNames } = QuandlFn2;
@@ -526,7 +526,7 @@ const _rToConfig = {
   [ChartType.STACKED_COLUMN] : fCreateStackedColumnConfig,
   [ChartType.STACKED_COLUMN_PERCENT] : fCreateStackedColumnConfig,
   [ChartType.TREE_MAP] : fCreateTreeMapConfig,
-  [ChartType.YEARLY]: _fToConfig(ToYearly),
+  [ChartType.YEARLY]: _fToConfig(toYearly),
   [ChartType.SCATTER]: _fToConfig(ToScatter),
   [ChartType.SCATTER_UP]: _fToConfig(ToScatter),
   [ChartType.SCATTER_DOWN]: _fToConfig(ToScatter)

@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlatButton Snap should renders correctly with isPrimary false 1`] = `
+<button
+  accessKey="l"
+  className="bt-flat"
+  onClick={[Function]}
+  tabIndex={0}
+  title="Click to load [l]"
+  type="button"
+>
+  <div
+    className="bt-flat__div"
+  >
+    <span
+      className="bt-flat__span"
+    >
+      <span>
+        
+      </span>
+      <span
+        style={
+          Object {
+            "textDecoration": "underline",
+          }
+        }
+      >
+        L
+      </span>
+      <span>
+        oad
+      </span>
+    </span>
+  </div>
+</button>
+`;
+
+exports[`FlatButton Snap should renders correctly with isPrimary true 1`] = `
+<button
+  accessKey="l"
+  className="bt-flat"
+  onClick={[Function]}
+  style={
+    Object {
+      "color": "#607d8b",
+    }
+  }
+  tabIndex={0}
+  title="Click to load [l]"
+  type="button"
+>
+  <div
+    className="bt-flat__div"
+  >
+    <span
+      className="bt-flat__span"
+    >
+      <span>
+        
+      </span>
+      <span
+        style={
+          Object {
+            "textDecoration": "underline",
+          }
+        }
+      >
+        L
+      </span>
+      <span>
+        oad
+      </span>
+    </span>
+  </div>
+</button>
+`;

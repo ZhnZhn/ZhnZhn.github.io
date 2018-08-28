@@ -10,17 +10,18 @@
     "bundle": "jspm bundle js/**/* - [js/**/*] dependency-bundle.js",
     "bundle-sfx": "jspm bundle-sfx --minify --skip-source-maps js/index bundle.min.js",
     "transpile": "babel ./src --out-dir ./js --source-maps --ignore test.js",
+    "lint": "eslint -c .eslintrc-build.json ./src > lint.txt",
+    "css:sass": "gulp sass",
+    "css": "gulp",
     "build": "webpack --colors --progress",
     "build:jsx": "webpack --colors --progress --config webpack.config-jsx.js",
     "build:dll": "webpack --colors --progress --config webpack.dll.js",
     "build:dll-jsx": "webpack --colors --progress --config webpack.config-dll-jsx.js",
+    "build:all": "npm run lint && npm run css:sass && npm run css && npm run build:dll-jsx", 
     "stats": "npm run stats:json && npm run stats:report",
     "stats:json": "webpack --profile --json > stats.json",
     "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static",
-    "stats:help": "webpack-bundle-analyzer --help > out.txt",
-    "sass": "gulp sass",
-    "gulp": "gulp",
-    "lint": "eslint src",
+    "stats:help": "webpack-bundle-analyzer --help > out.txt",    
     "start": "http-server -c-1",
     "start:emitter": "chokidar-socket-emitter"
   },
@@ -116,10 +117,11 @@
     "gulp-sass": "^4.0.1",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-processing-plugin": "^0.1.2",
-    "jest": "^23.1.0",
+    "jest": "^23.5.0",
     "jspm": "^0.16.53",
-    "stylelint": "^7.12.0",
-    "stylelint-config-standard": "^16.0.0",
+    "react-test-renderer": "^16.4.2",
+    "stylelint": "^9.4.0",
+    "stylelint-config-standard": "^18.2.0",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.2.1"
   },
@@ -129,7 +131,8 @@
       "<rootDir>/js/math/",
       "<rootDir>/js/adapters/",
       "<rootDir>/js/components/",
-      "<rootDir>/js/components/zhn-sparklines/dataProcessing"
+      "<rootDir>/js/components/zhn-sparklines/dataProcessing", 
+      "<rootDir>/js/components/zhn-m"
     ]
   }
 }

@@ -56,9 +56,9 @@ var _QuandlToStackedColumn = require('./QuandlToStackedColumn');
 
 var _QuandlToTreeMap = require('./QuandlToTreeMap');
 
-var _ToYearly = require('../ToYearly');
+var _toYearly = require('../toYearly');
 
-var _ToYearly2 = _interopRequireDefault(_ToYearly);
+var _toYearly2 = _interopRequireDefault(_toYearly);
 
 var _ToScatter = require('./ToScatter');
 
@@ -604,7 +604,7 @@ var _fToSeria = function _fToSeria(builder) {
   };
 };
 
-var _rToConfig = (_rToConfig2 = {}, (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.YEARLY, _fToConfig(_ToYearly2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER, _fToConfig(_ToScatter2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER_UP, _fToConfig(_ToScatter2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER_DOWN, _fToConfig(_ToScatter2.default)), _rToConfig2);
+var _rToConfig = (_rToConfig2 = {}, (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.AREA, _fCreateAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SEMI_DONUT, _QuandlToPie.fCreatePieConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_AREA_PERCENT, _QuandlToStackedArea.fCreateStackedAreaConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.STACKED_COLUMN_PERCENT, _QuandlToStackedColumn.fCreateStackedColumnConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.TREE_MAP, _QuandlToTreeMap.fCreateTreeMapConfig), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.YEARLY, _fToConfig(_toYearly2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER, _fToConfig(_ToScatter2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER_UP, _fToConfig(_ToScatter2.default)), (0, _defineProperty3.default)(_rToConfig2, _Type.ChartType.SCATTER_DOWN, _fToConfig(_ToScatter2.default)), _rToConfig2);
 
 var _crSeriaData = function _crSeriaData(data, yIndex) {
   return data.map(function (p) {

@@ -1,9 +1,9 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\about\\IconLogoBar.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\about\\IconLogoBar.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/components/about/IconLogoBar.js"
+ ],
+ "file": "../../../src/components/about/IconLogoBar.js",
  "names": [
   "S",
   "ROOT",
@@ -13,5 +13,5 @@
   "IconLogoBar",
   "props"
  ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAO;AACLC,eAAY,QADP;AAELC,gBAAY,MAFP;AAGLC,mBAAe;AAHV;AADC,CAAV;;AAQA,IAAMC,cAAc,SAAdA,WAAc,CAACC,KAAD;AAAA,SAClB;AAAA;AAAA,MAAK,OAAON,EAAEC,IAAd;AACG,6DADH;AAEG;AACG,iBAAU,cADb;AAEG,aAAM,YAFT;AAGG,WAAI;AAHP,MAFH;AAOG,4DAPH;AAQG,iEARH;AASG,+DATH;AAUG,iEAVH;AAWG,8DAXH;AAYG;AAZH,GADkB;AAAA,CAApB;;kBAiBeI,W"
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,QAAO;AACLC,eAAY,QADP;AAELC,gBAAY,MAFP;AAGLC,mBAAe;AAHV;AADC,CAAV;;AAQA,IAAMC,cAAc,SAAdA,WAAc,CAACC,KAAD;AAAA,SAClB;AAAA;AAAA,MAAK,OAAON,EAAEC,IAAd;AACG,kCAAC,oBAAD,OADH;AAEG,kCAAC,oBAAD;AACG,iBAAU,cADb;AAEG,aAAM,YAFT;AAGG,WAAI;AAHP,MAFH;AAOG,kCAAC,mBAAD,OAPH;AAQG,kCAAC,wBAAD,OARH;AASG,kCAAC,sBAAD,OATH;AAUG,kCAAC,wBAAD,OAVH;AAWG,kCAAC,qBAAD;AAXH,GADkB;AAAA,CAApB;;kBAgBeI,W"
 }

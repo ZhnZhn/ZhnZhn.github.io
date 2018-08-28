@@ -264,7 +264,7 @@ const _crValueMoving = (nowSeria, prevSeria) => {
 };
 
 
-const ToYearly = {
+const toYearly = {
   toConfig(data, option) {
     const { title, subtitle } = option
     , {
@@ -293,4 +293,4 @@ const ToYearly = {
   }
 }
 
-export default ToYearly
+export default toYearly

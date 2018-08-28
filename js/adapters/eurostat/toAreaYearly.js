@@ -12,9 +12,9 @@ var _EuroStatFn = require('./EuroStatFn');
 
 var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
 
-var _ToYearly = require('../ToYearly');
+var _toYearly = require('../toYearly');
 
-var _ToYearly2 = _interopRequireDefault(_ToYearly);
+var _toYearly2 = _interopRequireDefault(_toYearly);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,7 +37,7 @@ var toAreaYearly = {
         title = option.title,
         subtitle = option.subtitle,
         dataSource = option.dataSource,
-        config = _ToYearly2.default.toConfig(data.reverse(), {
+        config = _toYearly2.default.toConfig(data.reverse(), {
       title: title, subtitle: subtitle,
       itemCaption: title + ': ' + subtitle,
       value: title + '_' + subtitle,
