@@ -13,7 +13,7 @@ const CL = {
 
 const OPEN_COLOR_L2 = C.GREEN;
 
-const ST = {  
+const ST = {
   ROOT_CHILD: {
     borderLeft: `1px dashed ${C.YELLOW}`,
     marginLeft: '-5px',
@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 16):"
+     caption="Data Providers (All 17):"
      captionStyle={ocCaptionStyle}
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
      childStyle={ST.ROOT_CHILD}
@@ -86,7 +86,7 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
       </p>
       <OpenClose
-        caption="(5) Required API key:"
+        caption="(6) Required API key:"
         captionStyle={ocCaptionStyle}
         rootStyle={ST.OPEN_CLOSE}
         childStyle={ST.CHILD_STYLE}
@@ -108,6 +108,9 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.Bea/>
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.Eia/>
         </span>
         <span style={S.PROVIDER}>
           <Link.Intrinio/>

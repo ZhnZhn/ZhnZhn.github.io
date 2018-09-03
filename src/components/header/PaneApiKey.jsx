@@ -22,7 +22,7 @@ class PaneApiKey extends Component {
     const { data } = props;
 
     let i = 1;
-    for(; i<6; i++){
+    for(; i<7; i++){
       this['_setKey'+i] = safeFn(data, 'key'+i)
     }
   }
@@ -35,6 +35,7 @@ class PaneApiKey extends Component {
     this._setKey3(this.iComp3.getValue())
     this._setKey4(this.iComp4.getValue())
     this._setKey5(this.iComp5.getValue())
+    this._setKey6(this.iComp6.getValue())
 
     onClose()
   }
@@ -45,12 +46,14 @@ class PaneApiKey extends Component {
     this._setKey3('')
     this._setKey4('')
     this._setKey5('')
+    this._setKey6('')
 
     this.iComp1.clear()
     this.iComp2.clear()
     this.iComp3.clear()
     this.iComp4.clear()
     this.iComp5.clear()
+    this.iComp6.clear()
   }
 
   _ref1 = n => this.iComp1 = n
@@ -58,6 +61,7 @@ class PaneApiKey extends Component {
   _ref3 = n => this.iComp3 = n
   _ref4 = n => this.iComp4 = n
   _ref5 = n => this.iComp5 = n
+  _ref6 = n => this.iComp6 = n
 
   render(){
     const { titleStyle, btStyle, onClose } = this.props;
@@ -99,6 +103,14 @@ class PaneApiKey extends Component {
            title="Quandl:"
            placeholder="Quandl API Key"
            onEnter={this._setKey5}
+        />
+        <RowSecret
+           ref={this._ref6}
+           titleStyle={titleStyle}
+           title="EIA:"
+           placeholder="EIA API Key"
+           maxLength="32"
+           onEnter={this._setKey6}
         />
         <RowButtons btStyle={btStyle} onClose={onClose}>
           <FlatButton

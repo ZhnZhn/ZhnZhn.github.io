@@ -60,7 +60,8 @@ var S = (0, _extends3.default)({}, _Dialog2.default, {
   ROOT_DIV_MODAL: {
     position: 'absolute',
     top: '20%',
-    left: '40%',
+    left: '30%',
+    width: 380,
     display: 'block',
     zIndex: 10
   },

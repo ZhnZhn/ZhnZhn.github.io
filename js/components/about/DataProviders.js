@@ -73,7 +73,7 @@ var DataProviders = function DataProviders(_ref) {
     _OpenClose2.default,
     {
       isClose: isClose,
-      caption: 'Data Providers (All 16):',
+      caption: 'Data Providers (All 17):',
       captionStyle: ocCaptionStyle,
       rootStyle: (0, _extends3.default)({}, _About2.default.LINE_HEIGHT, _About2.default.P_BOTTOM),
       childStyle: ST.ROOT_CHILD,
@@ -139,7 +139,7 @@ var DataProviders = function DataProviders(_ref) {
       _react2.default.createElement(
         _OpenClose2.default,
         {
-          caption: '(5) Required API key:',
+          caption: '(6) Required API key:',
           captionStyle: ocCaptionStyle,
           rootStyle: ST.OPEN_CLOSE,
           childStyle: ST.CHILD_STYLE,
@@ -173,6 +173,11 @@ var DataProviders = function DataProviders(_ref) {
             'span',
             { style: _About2.default.PROVIDER },
             _react2.default.createElement(_Links2.default.Bea, null)
+          ),
+          _react2.default.createElement(
+            'span',
+            { style: _About2.default.PROVIDER },
+            _react2.default.createElement(_Links2.default.Eia, null)
           ),
           _react2.default.createElement(
             'span',

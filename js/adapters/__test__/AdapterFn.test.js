@@ -8,7 +8,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ymdToUTC = _AdapterFn2.default.ymdToUTC,
     toUpperCaseFirst = _AdapterFn2.default.toUpperCaseFirst,
-    isYNumber = _AdapterFn2.default.isYNumber;
+    isYNumber = _AdapterFn2.default.isYNumber,
+    findMinY = _AdapterFn2.default.findMinY,
+    findMaxY = _AdapterFn2.default.findMaxY;
 
 
 var Y = [{ in: '2017', r: 1514678400000, d: '31-12-2017' }, { in: '2016', r: 1483142400000, d: '31-12-2016' }, { in: '2015', r: 1451520000000, d: '31-12-2015' }, { in: '2000', r: 978220800000, d: '31-12-2000' }];
@@ -87,4 +89,39 @@ describe('isYNumber', function () {
     expect(fn({ y: function y() {} })).toBe(false);
   });
 });
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\__test__\AdapterFn.test.js.map
+
+var DATA_ARR = [[0, 0.3], [0, 0.31], [0, 0.29]];
+var DATA_POINT = [{ x: 0, y: 0.3 }, { x: 0, y: 0.31 }, { x: 0, y: 0.29 }];
+
+describe('findMinY', function () {
+  var fn = findMinY;
+  test('should return minY for points arrays', function () {
+    expect(fn(DATA_ARR)).toBe(0.29);
+  });
+  test('should return minY for points object', function () {
+    expect(fn(DATA_POINT)).toBe(0.29);
+  });
+  test('should return undefined in edge case', function () {
+    expect(fn()).toBe(undefined);
+    expect(fn([])).toBe(undefined);
+    expect(fn([[0]])).toBe(undefined);
+    expect(fn([{ x: 0 }])).toBe(undefined);
+  });
+});
+
+describe('findMaxY', function () {
+  var fn = findMaxY;
+  test('should return maxY for points arrays', function () {
+    expect(fn(DATA_ARR)).toBe(0.31);
+  });
+  test('should return maxY for points object', function () {
+    expect(fn(DATA_POINT)).toBe(0.31);
+  });
+  test('should return undefined in edge case', function () {
+    expect(fn()).toBe(undefined);
+    expect(fn([])).toBe(undefined);
+    expect(fn([[0]])).toBe(undefined);
+    expect(fn([{ x: 0 }])).toBe(undefined);
+  });
+});
+//# sourceMappingURL=AdapterFn.test.js.map

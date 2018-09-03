@@ -17,6 +17,11 @@
         { "id": "USAE_GO_3" }
       ]
     },{
+      "caption": "EIA: Electricity: All Sectors",
+      "items": [
+        { "id": "USAE_EIA_NET_GENER" }
+      ]
+    },{
       "caption": "Intrinio: FRED",
       "items": [
         { "id": "USAE_INTR_1" },
@@ -63,6 +68,16 @@
         "noDate": true,
         "loadId" : "BEA",
         "dataSource": "U.S. Bureau of Economic Analysis (Not endorsed or certified by BEA)"
+      }
+    },
+    "USAE_B_EIA": {
+      "dialogProps": {
+        "descrUrl" : "./data/usa-economy/eia.html",
+        "oneCaption": "State",
+        "oneURI": "./data/usa-economy/eia-states.json",
+        "noDate": true,
+        "loadId" : "EIA",
+        "dataSource": "U.S. EIA (Not endorsed or certified by EIA)"
       }
     },
     "USAE_B2": {
@@ -224,6 +239,25 @@
           "ValueName": "Industry",
           "dfTitle": "Shares of Gross Output by, in $B",
           "dfFilterName": "IndustrYDescription"
+        }
+      }
+    },
+
+    "USAE_EIA_NET_GENER": {
+      "type": "USAE_EIA_NET_GENER",
+      "menuTitle": "Net Generation, M",
+      "dialogCaption": "Net Generation, M",
+      "chartContainerCaption" : "EIA: All Sectors: Electricity Net Generation, Monthly",
+      "dialogType": "DialogType4",
+      "addProps": "USAE_B_EIA",
+      "dialogProps": {
+        "twoCaption": "Fuel",
+        "twoURI": "./data/usa-economy/eia-fuels.json",
+        "dfProps": {
+          "cId": "1",
+          "prefix": "ELEC.GEN.ALL-",
+          "sufix": "-99.M",
+          "dfTitle": "Electricity Net Generation, Gwh"
         }
       }
     },

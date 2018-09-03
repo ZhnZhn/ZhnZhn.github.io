@@ -92,6 +92,7 @@ var LoadType = exports.LoadType = {
    WB: 'WB',
    BEA: 'BEA',
    BLS: 'BLS',
+   EIA: 'EIA',
    INTR: 'INTR',
    CRC: 'CRC',
    CMC: 'CMC',

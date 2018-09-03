@@ -9,7 +9,8 @@ const {
   EuroStat, StatNorway, StatSweden,
   AlphaVantage, Barchart, Intrinio,
   Crc, Cmc,
-  Iex, Insee, Bea, Bls
+  Iex, Insee,
+  Bea, Bls, Eia
 } = Adapter;
 
 const LoadImpl = {
@@ -45,7 +46,8 @@ const LoadImpl = {
   }),
 
   Bea: f({ ...Bea }),
-  Bls: f({ ...Bls })
+  Bls: f({ ...Bls }),
+  Eia: f({ ...Eia })
 };
 
 export default LoadImpl

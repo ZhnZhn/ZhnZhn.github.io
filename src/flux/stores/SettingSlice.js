@@ -1,12 +1,28 @@
 import { LoadType as LT } from '../../constants/Type'
 
 const _settings = {};
+const _withApiKey = [
+  LT.B, LT.AL, LT.AL_S, LT.AL_I,
+  LT.BEA, LT.EIA, LT.INTR
+];
 const _withProxy = [
   LT.FS,
   LT.FAO,
   LT.BLS,
-  LT.CRC
+  LT.CRC,
+  LT.Q_T
 ];
+const _apiTitle = {
+  DF: 'API',
+  [LT.B]: 'Barchart Market Data',
+  [LT.AL]: 'Alpha Vantage',
+  [LT.AL_S]: 'Alpha Vantage',
+  [LT.AL_I]: 'Alpha Vantage',
+  [LT.BEA]: 'BEA',
+  [LT.EIA]: 'EIA',
+  [LT.INTR]: 'Intrinio'
+};
+
 
 const SettingSlice = {
   setting: {
@@ -23,6 +39,7 @@ const SettingSlice = {
       key3: this.fSetKey([LT.BEA]),
       key4: this.fSetKey([LT.INTR]),
       key5: this.fSetKey([LT.Q]),
+      key6: this.fSetKey([LT.EIA]),
       setProxy: this.setSetting('proxy').bind(this),
       getProxy: this.getProxy.bind(this, LT.FAO),
       isAdminMode: this.isAdminMode.bind(this),
@@ -39,7 +56,9 @@ const SettingSlice = {
     switch(id){
       case LT.AL_I: case LT.AL_S:
          return _settings[LT.AL];
-      case LT.WL:
+      case LT.EIA:
+         return _settings[LT.EIA];
+      case LT.WL:      
          return _settings[LT.Q];
       default:
          return _settings[id];
@@ -68,6 +87,15 @@ const SettingSlice = {
       return this.setting.isAdminMode;
     }
     this.setting.isAdminMode = !!value
+  },
+
+  isApiKeyRequired(loadId){
+    return _withApiKey.indexOf(loadId) !== -1
+      ? true
+      : false;
+  },
+  getApiTitle(loadId){
+    return _apiTitle[loadId] || _apiTitle.DF;
   }
 }
 

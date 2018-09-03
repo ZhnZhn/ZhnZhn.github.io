@@ -35,7 +35,8 @@ var Quandl = _RouterAdapter2.default.Quandl,
     Iex = _RouterAdapter2.default.Iex,
     Insee = _RouterAdapter2.default.Insee,
     Bea = _RouterAdapter2.default.Bea,
-    Bls = _RouterAdapter2.default.Bls;
+    Bls = _RouterAdapter2.default.Bls,
+    Eia = _RouterAdapter2.default.Eia;
 
 
 var LoadImpl = {
@@ -68,7 +69,8 @@ var LoadImpl = {
   }, Insee)),
 
   Bea: (0, _loadItem2.default)((0, _extends3.default)({}, Bea)),
-  Bls: (0, _loadItem2.default)((0, _extends3.default)({}, Bls))
+  Bls: (0, _loadItem2.default)((0, _extends3.default)({}, Bls)),
+  Eia: (0, _loadItem2.default)((0, _extends3.default)({}, Eia))
 };
 
 exports.default = LoadImpl;

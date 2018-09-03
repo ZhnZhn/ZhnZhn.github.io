@@ -52,6 +52,10 @@ var _Bls = require('./bls/Bls');
 
 var _Bls2 = _interopRequireDefault(_Bls);
 
+var _Eia = require('./eia/Eia');
+
+var _Eia2 = _interopRequireDefault(_Eia);
+
 var _Intrinio = require('./intrinio/Intrinio');
 
 var _Intrinio2 = _interopRequireDefault(_Intrinio);
@@ -84,6 +88,7 @@ var RouterAdapter = {
   Insee: _Insee2.default,
   Bea: _Bea2.default,
   Bls: _Bls2.default,
+  Eia: _Eia2.default,
   Intrinio: _Intrinio2.default,
   Crc: _Crc2.default,
   Cmc: _Cmc2.default

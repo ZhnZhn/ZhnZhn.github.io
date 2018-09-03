@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/eia/Eia.js"
+ ],
+ "file": "../../../src/adapters/eia/Eia.js",
+ "names": [
+  "Eia",
+  "api",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,uBADU,EACLC;AADK,CAAZ;;kBAIeF,G"
+}

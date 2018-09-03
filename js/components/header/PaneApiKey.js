@@ -70,6 +70,7 @@ var PaneApiKey = function (_Component) {
       _this._setKey3(_this.iComp3.getValue());
       _this._setKey4(_this.iComp4.getValue());
       _this._setKey5(_this.iComp5.getValue());
+      _this._setKey6(_this.iComp6.getValue());
 
       onClose();
     };
@@ -80,12 +81,14 @@ var PaneApiKey = function (_Component) {
       _this._setKey3('');
       _this._setKey4('');
       _this._setKey5('');
+      _this._setKey6('');
 
       _this.iComp1.clear();
       _this.iComp2.clear();
       _this.iComp3.clear();
       _this.iComp4.clear();
       _this.iComp5.clear();
+      _this.iComp6.clear();
     };
 
     _this._ref1 = function (n) {
@@ -108,11 +111,15 @@ var PaneApiKey = function (_Component) {
       return _this.iComp5 = n;
     };
 
+    _this._ref6 = function (n) {
+      return _this.iComp6 = n;
+    };
+
     var data = props.data;
 
 
     var i = 1;
-    for (; i < 6; i++) {
+    for (; i < 7; i++) {
       _this['_setKey' + i] = (0, _safeFn2.default)(data, 'key' + i);
     }
     return _this;
@@ -165,6 +172,14 @@ var PaneApiKey = function (_Component) {
           title: 'Quandl:',
           placeholder: 'Quandl API Key',
           onEnter: this._setKey5
+        }),
+        _react2.default.createElement(_RowSecret2.default, {
+          ref: this._ref6,
+          titleStyle: titleStyle,
+          title: 'EIA:',
+          placeholder: 'EIA API Key',
+          maxLength: '32',
+          onEnter: this._setKey6
         }),
         _react2.default.createElement(
           _RowButtons2.default,

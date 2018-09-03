@@ -11,6 +11,7 @@ import Iex from './iex/Iex'
 import Insee from './insee/Insee'
 import Bea from './bea/Bea'
 import Bls from './bls/Bls'
+import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
 import Quandl from './quandl/Quandl'
 import Crc from './crypto-compare/Crc'
@@ -30,6 +31,7 @@ const RouterAdapter = {
   Insee,
   Bea,
   Bls,
+  Eia,
   Intrinio,
   Crc,
   Cmc

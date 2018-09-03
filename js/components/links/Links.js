@@ -113,6 +113,13 @@ var Bsl = (0, _withProps2.default)({
   title: "U.S. Bureau of Labor Statistics"
 })(_Link2.default);
 
+var Eia = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://www.eia.gov/",
+  dfStyle: S.WHITE,
+  title: "U.S. EIA"
+})(_Link2.default);
+
 var Intrinio = (0, _withProps2.default)({
   className: CL_LINK,
   href: "https://intrinio.com",
@@ -168,11 +175,12 @@ exports.default = {
   FaoStat: FaoStat,
   WorldBank: WorldBank,
   Bea: Bea,
+  Eia: Eia,
+  Bsl: Bsl,
   Intrinio: Intrinio,
   Insee: Insee,
   StatNorway: StatNorway,
   StatSweden: StatSweden,
-  Bsl: Bsl,
   CryptoCompare: CryptoCompare,
   Cmc: Cmc
 };

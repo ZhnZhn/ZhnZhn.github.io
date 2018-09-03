@@ -240,16 +240,35 @@ var AdapterFn = {
     return M.indexOf(String(str).toLowerCase());
   },
 
-  findMinY: function findMinY() {
-    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
+  findMinY: function findMinY(data) {
+    if (!Array.isArray(data) || data.length < 1) {
+      return undefined;
+    }
     var minY = Number.POSITIVE_INFINITY;
+    var _fn = typeof data[0].y === 'number' ? function (p, min) {
+      return p.y < min ? p.y : min;
+    } : function (arr, min) {
+      return arr[1] < min ? arr[1] : min;
+    };
     for (var i = 0, max = data.length; i < max; i++) {
-      if (data[i][1] < minY) {
-        minY = data[i][1];
-      }
+      minY = _fn(data[i], minY);
     }
     return minY !== Number.POSITIVE_INFINITY ? minY : undefined;
+  },
+  findMaxY: function findMaxY(data) {
+    if (!Array.isArray(data) || data.length < 1) {
+      return undefined;
+    }
+    var maxY = Number.NEGATIVE_INFINITY;
+    var _fn = typeof data[0].y === 'number' ? function (p, max) {
+      return p.y > max ? p.y : max;
+    } : function (arr, max) {
+      return arr[1] > max ? arr[1] : max;
+    };
+    for (var i = 0, max = data.length; i < max; i++) {
+      maxY = _fn(data[i], maxY);
+    }
+    return maxY !== Number.NEGATIVE_INFINITY ? maxY : undefined;
   }
 
 };

@@ -3,6 +3,7 @@ import Reflux from 'reflux';
 import DU from '../../utils/DateUtils';
 import Msg from '../../constants/Msg';
 import ChartStore from '../stores/ChartStore';
+import SettingSlice from '../stores/SettingSlice';
 import LoadConfig from '../logic/LoadConfig';
 import LogicUtils from '../logic/LogicUtils';
 import { T as LPA } from './LoadingProgressActions'
@@ -83,7 +84,7 @@ const ChartActions =  Reflux.createActions({
       [A.CLOSE_CHART] : {},
 
       [A.TO_TOP]: {},
-      
+
       [A.COPY]: {},
       [A.PASTE_TO]: {},
 
@@ -92,22 +93,20 @@ const ChartActions =  Reflux.createActions({
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore
 
-const _withApiKey = ['B', 'AL', 'AL_S', 'AL_I', 'BEA', 'INTR']
-const _apiTitle = {
-  B: 'Barchart Market Data',
-  AL: 'Alpha Vantage',
-  AL_S: 'Alpha Vantage',
-  AL_I: 'Alpha Vantage',
-  BEA: 'BEA',
-  INTR: 'Intrinio'
-};
+const {
+  isApiKeyRequired,
+  getApiTitle
+} = SettingSlice;
 
 const _checkMsgApiKey = (option) => {
-  const { apiKey, loadId, isKeyFeature, isPremium } = option;
+  const {
+    apiKey, loadId,
+    isKeyFeature, isPremium
+  } = option;
   if (!apiKey){
-    if (_withApiKey.indexOf(loadId) !== -1) {
+    if ( isApiKeyRequired(loadId) ) {
       return M.withoutApiKey(
-        _apiTitle[loadId]
+        getApiTitle(loadId)
       );
     }
     if (isKeyFeature) {

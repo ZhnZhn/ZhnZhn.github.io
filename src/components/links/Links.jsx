@@ -99,6 +99,13 @@ const Bsl = withProps({
   title: "U.S. Bureau of Labor Statistics"
 })(BaseComponent)
 
+const Eia = withProps({
+  className: CL_LINK,
+  href: "https://www.eia.gov/",
+  dfStyle: S.WHITE,
+  title: "U.S. EIA"
+})(BaseComponent)
+
 
 const Intrinio = withProps({
   className: CL_LINK,
@@ -149,11 +156,12 @@ export default {
   FaoStat,
   WorldBank,
   Bea,
+  Eia,
+  Bsl,
   Intrinio,
   Insee,
   StatNorway,
-  StatSweden,
-  Bsl,
+  StatSweden,  
   CryptoCompare,
   Cmc
 };

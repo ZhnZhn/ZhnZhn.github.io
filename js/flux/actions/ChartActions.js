@@ -27,6 +27,10 @@ var _ChartStore = require('../stores/ChartStore');
 
 var _ChartStore2 = _interopRequireDefault(_ChartStore);
 
+var _SettingSlice = require('../stores/SettingSlice');
+
+var _SettingSlice2 = _interopRequireDefault(_SettingSlice);
+
 var _LoadConfig = require('../logic/LoadConfig');
 
 var _LoadConfig2 = _interopRequireDefault(_LoadConfig);
@@ -111,15 +115,9 @@ var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 
-var _withApiKey = ['B', 'AL', 'AL_S', 'AL_I', 'BEA', 'INTR'];
-var _apiTitle = {
-  B: 'Barchart Market Data',
-  AL: 'Alpha Vantage',
-  AL_S: 'Alpha Vantage',
-  AL_I: 'Alpha Vantage',
-  BEA: 'BEA',
-  INTR: 'Intrinio'
-};
+var isApiKeyRequired = _SettingSlice2.default.isApiKeyRequired,
+    getApiTitle = _SettingSlice2.default.getApiTitle;
+
 
 var _checkMsgApiKey = function _checkMsgApiKey(option) {
   var apiKey = option.apiKey,
@@ -128,8 +126,8 @@ var _checkMsgApiKey = function _checkMsgApiKey(option) {
       isPremium = option.isPremium;
 
   if (!apiKey) {
-    if (_withApiKey.indexOf(loadId) !== -1) {
-      return M.withoutApiKey(_apiTitle[loadId]);
+    if (isApiKeyRequired(loadId)) {
+      return M.withoutApiKey(getApiTitle(loadId));
     }
     if (isKeyFeature) {
       return M.FEATURE_WITHOUT_KEY;
