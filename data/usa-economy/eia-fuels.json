@@ -19,6 +19,6 @@
     { "caption": "Hydro-Electric Pumped Storage", "value": "ELEC.GEN.HPS-", "cId": 19},
     { "caption": "Other", "value": "ELEC.GEN.OTH-", "cId": 20},
     { "caption": "All Solar", "value": "ELEC.GEN.TSN-", "cId": 1718408},
-    { "caption": "Small-Scale Solar Photovoltaic (≤1MW)", "value": "ELEC.GEN.DPV-", "cId": 1718409}
+    { "caption": "Small-Scale Solar Photovoltaic (<1MW)", "value": "ELEC.GEN.DPV-", "cId": 1718409}
   ]
 }
