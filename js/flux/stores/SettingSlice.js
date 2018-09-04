@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _settings = {};
 var _withApiKey = [_Type.LoadType.B, _Type.LoadType.AL, _Type.LoadType.AL_S, _Type.LoadType.AL_I, _Type.LoadType.BEA, _Type.LoadType.EIA, _Type.LoadType.INTR];
-var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.BLS, _Type.LoadType.CRC, _Type.LoadType.Q_T];
+var _withProxy = [_Type.LoadType.FS, _Type.LoadType.FAO, _Type.LoadType.BLS, _Type.LoadType.CRC];
 var _apiTitle = (_apiTitle2 = {
   DF: 'API'
 }, (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.B, 'Barchart Market Data'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_S, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_I, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.BEA, 'BEA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.EIA, 'EIA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.INTR, 'Intrinio'), _apiTitle2);

@@ -55,10 +55,31 @@ const _crInfo = (json) => {
   };
 }
 
+const _getCaption = (obj) => {
+  return obj && obj.caption
+    ? obj.caption
+    : '';
+};
+
 const fnAdapter = {
   /*
   [ ["201806", 1000], ... ]
   */
+  crTitle: (option) => {
+    const {
+      items=[],
+      dfTitle
+    } = option
+    , _s1 = _getCaption(items[0])
+    , _s2 = _getCaption(items[1])
+    , _s3 = _getCaption(items[2])
+    , _subtitle = `${_s2}${_s3 ? ':' : ''} ${_s3}`;
+
+    return {
+      title: `${_s1}: ${dfTitle}`,
+      subtitle: _subtitle
+    };
+  },
   crData(json) {
     return json.series[0].data.map(arr => ({
       x: _toUTC(arr[0]),

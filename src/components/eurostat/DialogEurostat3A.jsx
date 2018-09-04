@@ -31,6 +31,8 @@ class DialogEurostat3A extends Component {
     threeURI: PropTypes.string,
     threeJsonProp: PropTypes.string,
 
+    noDate: PropTypes.string,
+
     mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
     mapDateDf: PropTypes.number,
 
@@ -207,7 +209,8 @@ class DialogEurostat3A extends Component {
            caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp,
-           threeCaption, threeURI, threeJsonProp
+           threeCaption, threeURI, threeJsonProp,
+           noDate
           } = this.props
         , {
             isToolbar,
@@ -250,7 +253,6 @@ class DialogEurostat3A extends Component {
                onSelect={this._handleSelectTwo}
              />
              <D.SelectWithLoad
-               //ref={this._refSelect2}
                isShow={isShow}
                isShowLabels={isShowLabels}
                uri={threeURI}
@@ -265,24 +267,18 @@ class DialogEurostat3A extends Component {
                onSelectChart={this._handleSelectChartType}
                onRegColor={this._onRegColor}
              />
-             {/*
-             <D.RowInputSelect
-               isShowLabels={isShowLabels}
-               caption="Chart"
-               placeholder="Default: Area"
-               options={this._chartOptions}
-               onSelect={this._handleSelectChartType}
-             />
-             */}
-             <D.ShowHide isShow={isShowDate}>
-               <D.RowInputSelect
-                  isShowLabels={isShowLabels}
-                  caption="For Date"
-                  placeholder={dateDefault}
-                  options={dateOptions}
-                  onSelect={this._handleSelectDate}
-               />
-             </D.ShowHide>
+             {
+               !noDate &&
+               <D.ShowHide isShow={isShowDate}>
+                 <D.RowInputSelect
+                    isShowLabels={isShowLabels}
+                    caption="For Date"
+                    placeholder={dateDefault}
+                    options={dateOptions}
+                    onSelect={this._handleSelectDate}
+                 />
+               </D.ShowHide>
+             }
              <D.ValidationMessages
                  validationMessages={validationMessages}
              />

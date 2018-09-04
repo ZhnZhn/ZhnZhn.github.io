@@ -22,7 +22,7 @@ var _createType2WithToolbar = function _createType2WithToolbar(props) {
       onClick: this._clickLabelWithToolbar.bind(this)
     });
   }
-  if (!noDate) {
+  if (!props.noDate && !noDate) {
     buttons.push({
       caption: 'D', title: 'Toggle Date Input',
       onClick: this._clickDateWithToolbar.bind(this)

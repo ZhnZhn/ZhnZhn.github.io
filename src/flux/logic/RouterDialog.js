@@ -91,21 +91,28 @@ const _router = {
       .then(module => module.default )
       .catch(err => console.log(MSG_OFFLINE));
   },
+  getES() {
+    return this.ES || this._loadES();
+  },
   get DialogEurostat() {
-    return this.ES.then(D => D.Eurostat);
+    return this.getES()
+      .then(D => D.Eurostat);
   },
   get DialogEurostat2() {
-    return this.ES.then(D => D.Eurostat2);
+    return this.getES()
+      .then(D => D.Eurostat2);
   },
   get DialogEurostat3() {
-    return this.ES.then(D => D.Eurostat3);
+    return this.getES()
+      .then(D => D.Eurostat3);
   },
   get DialogEurostat3A() {
-    return this.ES.then(D => D.Eurostat3A);
+    return this.getES()
+      .then(D => D.Eurostat3A);
   },
   get DialogStatN() {
-    const ES = this.ES || this._loadES()
-    return ES.then( D => D.StatN );
+    return this.getES()
+      .then(D => D.StatN);
   },
 
   _loadUSAE() {

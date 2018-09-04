@@ -67,10 +67,28 @@ var _crInfo = function _crInfo(json) {
   };
 };
 
+var _getCaption = function _getCaption(obj) {
+  return obj && obj.caption ? obj.caption : '';
+};
+
 var fnAdapter = {
   /*
   [ ["201806", 1000], ... ]
   */
+  crTitle: function crTitle(option) {
+    var _option$items = option.items,
+        items = _option$items === undefined ? [] : _option$items,
+        dfTitle = option.dfTitle,
+        _s1 = _getCaption(items[0]),
+        _s2 = _getCaption(items[1]),
+        _s3 = _getCaption(items[2]),
+        _subtitle = '' + _s2 + (_s3 ? ':' : '') + ' ' + _s3;
+
+    return {
+      title: _s1 + ': ' + dfTitle,
+      subtitle: _subtitle
+    };
+  },
   crData: function crData(json) {
     return json.series[0].data.map(function (arr) {
       return {

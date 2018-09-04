@@ -48,7 +48,8 @@ var createLoadOptions = function createLoadOptions() {
     threeCaption: three.caption,
     one: one.value,
     two: two.value,
-    three: three.value
+    three: three.value,
+    items: [one, two, three]
   });
 };
 

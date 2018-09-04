@@ -214,6 +214,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
       threeCaption: PropTypes.string,
     threeURI: PropTypes.string,
     threeJsonProp: PropTypes.string,
+      noDate: PropTypes.string,
       mapFrequency: PropTypes.oneOf(['M', 'Q', 'Y']),
     mapDateDf: PropTypes.number,
       msgOnNotSelected: PropTypes.func,
@@ -249,6 +250,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
           threeCaption = _props.threeCaption,
           threeURI = _props.threeURI,
           threeJsonProp = _props.threeJsonProp,
+          noDate = _props.noDate,
           _state = this.state,
           isToolbar = _state.isToolbar,
           isShowLabels = _state.isShowLabels,
@@ -293,7 +295,6 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
           onSelect: this._handleSelectTwo
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
-          //ref={this._refSelect2}
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: threeURI,
@@ -308,7 +309,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
           onSelectChart: this._handleSelectChartType,
           onRegColor: this._onRegColor
         }),
-        _react2.default.createElement(
+        !noDate && _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {

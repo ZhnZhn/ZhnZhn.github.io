@@ -124,30 +124,32 @@ var _router = {
       return console.log(MSG_OFFLINE);
     });
   },
+  getES: function getES() {
+    return this.ES || this._loadES();
+  },
 
   get DialogEurostat() {
-    return this.ES.then(function (D) {
+    return this.getES().then(function (D) {
       return D.Eurostat;
     });
   },
   get DialogEurostat2() {
-    return this.ES.then(function (D) {
+    return this.getES().then(function (D) {
       return D.Eurostat2;
     });
   },
   get DialogEurostat3() {
-    return this.ES.then(function (D) {
+    return this.getES().then(function (D) {
       return D.Eurostat3;
     });
   },
   get DialogEurostat3A() {
-    return this.ES.then(function (D) {
+    return this.getES().then(function (D) {
       return D.Eurostat3A;
     });
   },
   get DialogStatN() {
-    var ES = this.ES || this._loadES();
-    return ES.then(function (D) {
+    return this.getES().then(function (D) {
       return D.StatN;
     });
   },

@@ -21,11 +21,14 @@ const EiaApi = {
       //cId,
       sufix,
       apiKey,
-      one,
-      two,
-    } = option;
+      items=[]
+    } = option
+    , _one = items[0] ? items[0].value : ''
+    , _two = items[1] ? items[1].value : ''
+    , _three = items[2] ? items[2].value : ''
+    , _sufix = _three || sufix;
 
-    return `${C.S_URL}?api_key=${apiKey}&series_id=${two}${one}${sufix}`;
+    return `${C.S_URL}?api_key=${apiKey}&series_id=${_two}${_one}${_sufix}`;
   },
 
   checkResponse(json){

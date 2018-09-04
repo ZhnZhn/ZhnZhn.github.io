@@ -31,7 +31,8 @@ const createLoadOptions = (props={}, options={}) => {
        threeCaption: three.caption,
        one: one.value,
        two: two.value,
-       three: three.value
+       three: three.value,
+       items: [ one, two, three ]
     }
 }
 

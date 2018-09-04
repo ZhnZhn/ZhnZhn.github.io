@@ -15,7 +15,7 @@ const _createType2WithToolbar = function(
       onClick: this._clickLabelWithToolbar.bind(this)
     })
   }
-  if (!noDate) {
+  if (!props.noDate && !noDate) {
     buttons.push({
       caption: 'D', title: 'Toggle Date Input',
       onClick: this._clickDateWithToolbar.bind(this)

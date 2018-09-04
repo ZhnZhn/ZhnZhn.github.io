@@ -18,7 +18,8 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var crData = _fnAdapter2.default.crData,
+var crTitle = _fnAdapter2.default.crTitle,
+    crData = _fnAdapter2.default.crData,
     findMaxY = _fnAdapter2.default.findMaxY,
     findMinY = _fnAdapter2.default.findMinY,
     crConfigOption = _fnAdapter2.default.crConfigOption;
@@ -26,14 +27,16 @@ var crData = _fnAdapter2.default.crData,
 
 var EiaAdapter = {
   toConfig: function toConfig(json, option) {
-    var _option$oneCaption = option.oneCaption,
-        oneCaption = _option$oneCaption === undefined ? '' : _option$oneCaption,
-        _option$twoCaption = option.twoCaption,
-        twoCaption = _option$twoCaption === undefined ? '' : _option$twoCaption,
-        dfTitle = option.dfTitle,
+    var seriaColor = option.seriaColor,
+        _crTitle = crTitle(option),
+        title = _crTitle.title,
+        subtitle = _crTitle.subtitle,
         data = crData(json),
-        seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
-        config = (0, _ConfigBuilder2.default)().area2Config(dfTitle, oneCaption + ': ' + twoCaption).addSeries(seria).setMinMax(findMinY(data), findMaxY(data)).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
+        seria = (0, _ConfigBuilder2.default)().splineSeria({
+      color: seriaColor,
+      data: data
+    }).toSeria(),
+        config = (0, _ConfigBuilder2.default)().area2Config(title, subtitle).addSeries(seria).setMinMax(findMinY(data), findMaxY(data)).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
 
 
     return { config: config };

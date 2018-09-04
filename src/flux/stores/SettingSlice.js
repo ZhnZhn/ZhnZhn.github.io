@@ -9,8 +9,7 @@ const _withProxy = [
   LT.FS,
   LT.FAO,
   LT.BLS,
-  LT.CRC,
-  LT.Q_T
+  LT.CRC
 ];
 const _apiTitle = {
   DF: 'API',
@@ -58,7 +57,7 @@ const SettingSlice = {
          return _settings[LT.AL];
       case LT.EIA:
          return _settings[LT.EIA];
-      case LT.WL:      
+      case LT.WL:
          return _settings[LT.Q];
       default:
          return _settings[id];

@@ -17,9 +17,9 @@
         { "id": "USAE_GO_3" }
       ]
     },{
-      "caption": "EIA: Electricity: All Sectors",
+      "caption": "EIA: Electricity",
       "items": [
-        { "id": "USAE_EIA_NET_GENER" }
+        { "id": "USAE_EIA_NET_GENER" }        
       ]
     },{
       "caption": "Intrinio: FRED",
@@ -75,6 +75,7 @@
         "descrUrl" : "./data/usa-economy/eia.html",
         "oneCaption": "State",
         "oneURI": "./data/usa-economy/eia-states.json",
+        "oneJsonProp": "items",
         "noDate": true,
         "loadId" : "EIA",
         "dataSource": "U.S. EIA (Not endorsed or certified by EIA)"
@@ -248,15 +249,18 @@
       "menuTitle": "Net Generation, M",
       "dialogCaption": "Net Generation, M",
       "chartContainerCaption" : "EIA: All Sectors: Electricity Net Generation, Monthly",
-      "dialogType": "DialogType4",
+      "dialogType": "DialogEurostat3A",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
         "twoCaption": "Fuel",
         "twoURI": "./data/usa-economy/eia-fuels.json",
+        "twoJsonProp": "items",
+        "threeCaption": "Sector",
+        "threeURI": "./data/usa-economy/eia-electricity-sectors.json",
+        "threeJsonProp": "items",
+        "chartsType": "t1",
         "dfProps": {
           "cId": "1",
-          "prefix": "ELEC.GEN.ALL-",
-          "sufix": "-99.M",
           "dfTitle": "Electricity Net Generation, Gwh"
         }
       }
