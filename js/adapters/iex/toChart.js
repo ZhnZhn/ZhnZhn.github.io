@@ -59,8 +59,11 @@ var _crId = function _crId(_ref) {
 var toChart = {
   toConfig: function toConfig(json, option) {
     var title = option.title,
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
         _id = _crId(option),
-        dataOption = toSeriesData(_id, json),
+        dataOption = toSeriesData(_id, json, {
+      isNotZoomToMinMax: isNotZoomToMinMax
+    }),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
         config = (0, _ConfigBuilder2.default)().stockConfig(_id, dataOption).addCaption(title).add((0, _extends3.default)({
@@ -68,7 +71,6 @@ var toChart = {
       info: _crInfo(title),
       zhConfig: _crZhConfig(_id, option)
     }, crZhFn())).addZhPoints(dataMfi, fnGetConfigMfi).toConfig();
-
 
     return config;
   },

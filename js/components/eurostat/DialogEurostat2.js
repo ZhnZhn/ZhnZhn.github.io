@@ -219,6 +219,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     key: 'render',
     value: function render() {
       var _props = this.props,
+          noDate = _props.noDate,
           caption = _props.caption,
           isShow = _props.isShow,
           onShow = _props.onShow,
@@ -279,7 +280,7 @@ var DialogEurostat2 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           onSelectChart: this._handleSelectChartType,
           onRegColor: this._onRegColor
         }),
-        _react2.default.createElement(
+        !noDate && _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.RowInputSelect, {

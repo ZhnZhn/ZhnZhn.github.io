@@ -188,6 +188,7 @@ class DialogEurostat2 extends Component {
 
   render(){
     const {
+           noDate,
            caption, isShow, onShow, onFront,
            oneCaption, oneURI, oneJsonProp,
            twoCaption, twoURI, twoJsonProp
@@ -239,15 +240,18 @@ class DialogEurostat2 extends Component {
                onSelectChart={this._handleSelectChartType}
                onRegColor={this._onRegColor}
              />
-             <D.ShowHide isShow={isShowDate}>
-               <D.RowInputSelect
-                  isShowLabels={isShowLabels}
-                  caption="For Date"
-                  placeholder={dateDefault}
-                  options={dateOptions}
-                  onSelect={this._handleSelectDate}
-               />
-             </D.ShowHide>
+             {
+               !noDate &&
+               <D.ShowHide isShow={isShowDate}>
+                 <D.RowInputSelect
+                    isShowLabels={isShowLabels}
+                    caption="For Date"
+                    placeholder={dateDefault}
+                    options={dateOptions}
+                    onSelect={this._handleSelectDate}
+                 />
+               </D.ShowHide>
+           }
              <D.ValidationMessages
                  validationMessages={validationMessages}
              />

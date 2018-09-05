@@ -98,10 +98,12 @@ const _crSeriaData = (json, option, config, chartId) => {
   ChartConfig.setStockSerias(
     config, _data, _dataHigh, _dataLow, _dataOpen, chartId
   )
-  ChartConfig.setMinMax(config, _minClose, _maxClose)
+
 
   return {
     data: _data,
+    minClose: _minClose,
+    maxClose: _maxClose,
     dVolume: _dataVolume,
     dColumn: _dataVolumeColumn
   };
@@ -117,7 +119,7 @@ const AlphaIntradayAdapter = {
         , { value, interval } = option
         , _chartId = value
         , {
-            data,
+            data, minClose, maxClose,
             dColumn, dVolume
           } = _crSeriaData(json, option, baseConfig, _chartId )
         , _dataDaily = _toDataDaily(data);
@@ -133,6 +135,7 @@ const AlphaIntradayAdapter = {
           data: _dataDaily
         })
       })
+      .setMinMax(minClose, maxClose)
       .addMiniVolume({
         id: _chartId,
         dVolume, dColumn,

@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "caption": "All Sectors", "value": "-ALL.M" },
+    { "caption": "Residential", "value": "-RES.M" },
+    { "caption": "Commercial", "value": "-COM.M" },
+    { "caption": "Industrial", "value": "-IND.M" },
+    { "caption": "Transportation", "value": "-TRA.M" },
+    { "caption": "Other", "value": "-OTH.M" }
+  ]
+}

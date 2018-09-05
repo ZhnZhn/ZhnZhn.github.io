@@ -31,9 +31,11 @@ const _crId = ({ value }) => value;
 
 const toChart = {
   toConfig(json, option){
-    const { title } = option
+    const { title, isNotZoomToMinMax } = option
     , _id = _crId(option)
-    , dataOption = toSeriesData(_id, json)
+    , dataOption = toSeriesData(_id, json, {
+        isNotZoomToMinMax
+      })
     , { data, dataMfi } = dataOption
     , config = Builder()
         .stockConfig(_id, dataOption)

@@ -17,9 +17,12 @@
         { "id": "USAE_GO_3" }
       ]
     },{
-      "caption": "EIA: Electricity",
+      "caption": "EIA: Electricity, M",
       "items": [
-        { "id": "USAE_EIA_NET_GENER" }        
+        { "id": "USAE_EIA_NET_GENER" },
+        { "id": "USAE_EIA_AVG_PRICE" },
+        { "id": "USAE_EIA_RETAIL_SALES" },
+        { "id": "USAE_EIA_RETAIL_REVENUE" }
       ]
     },{
       "caption": "Intrinio: FRED",
@@ -246,9 +249,9 @@
 
     "USAE_EIA_NET_GENER": {
       "type": "USAE_EIA_NET_GENER",
-      "menuTitle": "Net Generation, M",
-      "dialogCaption": "Net Generation, M",
-      "chartContainerCaption" : "EIA: All Sectors: Electricity Net Generation, Monthly",
+      "menuTitle": "Net Generation",
+      "dialogCaption": "Net Generation",
+      "chartContainerCaption" : "EIA: Electricity: Net Generation, Monthly",
       "dialogType": "DialogEurostat3A",
       "addProps": "USAE_B_EIA",
       "dialogProps": {
@@ -262,6 +265,63 @@
         "dfProps": {
           "cId": "1",
           "dfTitle": "Electricity Net Generation, Gwh"
+        }
+      }
+    },
+    "USAE_EIA_AVG_PRICE": {
+      "type": "USAE_EIA_AVG_PRICE",
+      "menuTitle": "Average Retail Price",
+      "dialogCaption": "Average Retail Price",
+      "chartContainerCaption" : "EIA: Electricity: Average Retail Price, Monthly",
+      "dialogType": "DialogEurostat2",
+      "addProps": "USAE_B_EIA",
+      "dialogProps": {
+        "twoCaption": "Sector",
+        "twoURI": "./data/usa-economy/eia-retail-sectors.json",
+        "twoJsonProp": "items",
+        "chartsType": "t1",
+        "dfProps": {
+          "dfSeriaType": "pi2",
+          "prefix": "ELEC.PRICE.",
+          "dfTitle": "Average Retail Price (cents per Kwh)"
+        }
+      }
+    },
+    "USAE_EIA_RETAIL_SALES": {
+      "type": "USAE_EIA_RETAIL_SALES",
+      "menuTitle": "Retail Sales",
+      "dialogCaption": "Retail Sales",
+      "chartContainerCaption" : "EIA: Electricity: Retail Sales, Monthly",
+      "dialogType": "DialogEurostat2",
+      "addProps": "USAE_B_EIA",
+      "dialogProps": {
+        "twoCaption": "Sector",
+        "twoURI": "./data/usa-economy/eia-retail-sectors.json",
+        "twoJsonProp": "items",
+        "chartsType": "t1",
+        "dfProps": {
+          "dfSeriaType": "pi2",
+          "prefix": "ELEC.SALES.",
+          "dfTitle": "Retail Sales of Electricity, Gwh"
+        }
+      }
+    },
+    "USAE_EIA_RETAIL_REVENUE": {
+      "type": "USAE_EIA_RETAIL_REVENUE",
+      "menuTitle": "Revenue from Retail Sales",
+      "dialogCaption": "Revenue from Retail Sales",
+      "chartContainerCaption" : "EIA: Electricity: Revenue from Retail Sales, Monthly",
+      "dialogType": "DialogEurostat2",
+      "addProps": "USAE_B_EIA",
+      "dialogProps": {
+        "twoCaption": "Sector",
+        "twoURI": "./data/usa-economy/eia-retail-sectors.json",
+        "twoJsonProp": "items",
+        "chartsType": "t1",
+        "dfProps": {
+          "dfSeriaType": "pi2",
+          "prefix": "ELEC.REV.",
+          "dfTitle": "Revenue from Retail Sales of Electricity, M$"
         }
       }
     },

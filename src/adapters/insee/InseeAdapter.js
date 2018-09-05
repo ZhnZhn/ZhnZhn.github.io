@@ -61,13 +61,13 @@ const _toData = (str) => {
 
 const InseeAdapter = {
   toConfig(str, option) {
-    const { value, title, subtitle } = option
+    const { value, title, subtitle, isNotZoomToMinMax } = option
         , { data, info, minClose, maxClose } = _toData(str)
         , config = Builder()
-            .areaConfig({ spacingTop: 25 })            
+            .areaConfig({ spacingTop: 25 })
             .addCaption(title, subtitle)
             .addPoints(value, data)
-            .setMinMax(minClose, maxClose)
+            .setMinMax(minClose, maxClose, isNotZoomToMinMax)
             .add({
               info: fnDescr.toInfo(info, title),
               valueMoving: AdapterFn.valueMoving(data),

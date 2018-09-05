@@ -82,12 +82,13 @@ var InseeAdapter = {
     var value = option.value,
         title = option.title,
         subtitle = option.subtitle,
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
         _toData2 = _toData(str),
         data = _toData2.data,
         info = _toData2.info,
         minClose = _toData2.minClose,
         maxClose = _toData2.maxClose,
-        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).setMinMax(minClose, maxClose).add({
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).setMinMax(minClose, maxClose, isNotZoomToMinMax).add({
       info: _fnDescr2.default.toInfo(info, title),
       valueMoving: _AdapterFn2.default.valueMoving(data),
       zhConfig: _crZhConfig(value),

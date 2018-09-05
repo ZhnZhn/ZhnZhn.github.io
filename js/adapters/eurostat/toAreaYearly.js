@@ -18,16 +18,6 @@ var _toYearly2 = _interopRequireDefault(_toYearly);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const _crTimeIndexAndValue = json => {
-  const { dimension={}, value=[] } = json
-      , { time={} } = dimension
-      , { category={} } = time
-      , { index:timeIndex=0 } = category;
-  return { timeIndex, value };
-}
-*/
-
 var toAreaYearly = {
   createConfig: function createConfig(json, option) {
     var _fn$crTimeIndexAndVal = _EuroStatFn2.default.crTimeIndexAndValue(json),

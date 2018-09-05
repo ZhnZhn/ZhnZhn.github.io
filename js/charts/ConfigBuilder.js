@@ -94,6 +94,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
         dataATH = dataOption.dataATH,
         minClose = dataOption.minClose,
         maxClose = dataOption.maxClose,
+        isNotZoomToMinMax = dataOption.isNotZoomToMinMax,
         data = dataOption.data,
         dataHigh = dataOption.dataHigh,
         dataLow = dataOption.dataLow,
@@ -105,7 +106,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
       dVolume: dataVolume
     }).addMiniATH({
       id: id, data: dataATH
-    }).setMinMax(minClose, maxClose).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
+    }).setMinMax(minClose, maxClose, isNotZoomToMinMax).setStockSerias(id, data, dataHigh, dataLow, dataOpen);
     return this;
   },
   categoryConfig: function categoryConfig() {
@@ -239,22 +240,25 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
       legend: legend, isWithLegend: true
     });
   },
-  setMinMax: function setMinMax(minValue, maxValue) {
+  setMinMax: function setMinMax(minValue, maxValue, noZoom) {
     var plotLines = this.config.yAxis.plotLines;
     plotLines[0].value = maxValue;
     plotLines[0].label.text = '' + _ChartConfig2.default.fnNumberFormat(maxValue);
     plotLines[1].value = minValue;
     plotLines[1].label.text = '' + _ChartConfig2.default.fnNumberFormat(minValue);
+
+    var _min = noZoom && minValue > 0 ? 0 : _Chart2.default.calcMinY({
+      minPoint: minValue,
+      maxPoint: maxValue
+    });
     this.add('yAxis', {
-      min: _Chart2.default.calcMinY({
-        minPoint: minValue,
-        maxPoint: maxValue
-      }),
+      min: _min,
       maxPadding: 0.15,
       minPadding: 0.15,
       endOnTick: false,
       startOnTick: false
     });
+
     return this;
   },
   setStockSerias: function setStockSerias(id, d, dH, dL, dO) {

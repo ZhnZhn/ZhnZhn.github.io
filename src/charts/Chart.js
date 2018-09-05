@@ -188,7 +188,7 @@ fBaseConfig({
   seriaColor,
   spacingTop,
   isCrosshair=true
-}={}){  
+}={}){
   return {
     zhSeries : {
       count : 0

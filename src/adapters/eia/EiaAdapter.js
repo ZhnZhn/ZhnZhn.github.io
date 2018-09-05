@@ -13,7 +13,8 @@ const {
 const EiaAdapter = {
   toConfig(json, option){
     const {
-      seriaColor
+      seriaColor,
+      isNotZoomToMinMax
     } = option
     , { title, subtitle } = crTitle(option)
     , data = crData(json)
@@ -28,7 +29,8 @@ const EiaAdapter = {
        .addSeries(seria)
        .setMinMax(
          findMinY(data),
-         findMaxY(data)
+         findMaxY(data),
+         isNotZoomToMinMax
        )
        .add({
         ...crConfigOption({ json, option, data })

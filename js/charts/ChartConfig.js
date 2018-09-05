@@ -131,21 +131,6 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
     this.setSerieData(config, dLow, 2, 'Low', this.seriaOption(_Color2.default.S_LOW, this._zhSeriaId(id + 'L')));
     this.setSerieData(config, dOpen, 3, 'Open', this.seriaOption(_Color2.default.S_OPEN, this._zhSeriaId(id + 'O')));
   },
-  setMinMax: function setMinMax(config, minValue, maxValue) {
-    var plotLines = config.yAxis.plotLines;
-    plotLines[0].value = maxValue;
-    plotLines[0].label.text = '' + ChartConfig.fnNumberFormat(maxValue);
-    plotLines[1].value = minValue;
-    plotLines[1].label.text = '' + ChartConfig.fnNumberFormat(minValue);
-
-    Object.assign(config.yAxis, {
-      min: _Chart2.default.calcMinY({ minPoint: minValue, maxPoint: maxValue }),
-      maxPadding: 0.15,
-      minPadding: 0.15,
-      endOnTick: false,
-      startOnTick: false
-    });
-  },
   getColor: function getColor(seriaIndex) {
     var colors = _ChartTheme2.default.colors;
     return colors[seriaIndex % colors.length];

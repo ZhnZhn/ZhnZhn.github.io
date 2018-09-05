@@ -57,29 +57,60 @@ var ModalPane = (_temp2 = _class = function (_Component) {
       if (_this.rootNode && _this.rootNode.contains && !_this.rootNode.contains(event.target)) {
         _this.props.onClose(event);
       }
+    }, _this._addOutsideListener = function () {
+      document.addEventListener('click', _this._hClickOutside, true);
+    }, _this._removeOutsideListener = function () {
+      document.removeEventListener('click', _this._hClickOutside, true);
     }, _this._refRootNode = function (n) {
       return _this.rootNode = n;
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
   /*
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     theme: PropTypes.object,
-      style: PropTypes.object,
+    isShow: PropTypes.bool,
     onClose: PropTypes.func
   }
   */
 
   (0, _createClass3.default)(ModalPane, [{
-    key: 'componentWillUpdate',
-    value: function componentWillUpdate(nextProps) {
-      if (this.props !== nextProps) {
-        if (nextProps.isShow) {
-          document.addEventListener('click', this._hClickOutside, true);
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.isShow) {
+        this._addOutsideListener();
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._removeOutsideListener();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props !== prevProps) {
+        if (this.props.isShow) {
+          this._addOutsideListener();
         } else {
-          document.removeEventListener('click', this._hClickOutside, true);
+          this._removeOutsideListener();
         }
       }
     }
+
+    /*
+    componentWillUpdate(nextProps){
+      if (this.props !== nextProps ){
+        if (nextProps.isShow){
+          document.addEventListener('click', this._hClickOutside, true)
+        } else {
+          document.removeEventListener('click', this._hClickOutside, true)
+        }
+      }
+    }
+    */
+
   }, {
     key: 'render',
     value: function render() {

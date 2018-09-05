@@ -28,6 +28,7 @@ var crTitle = _fnAdapter2.default.crTitle,
 var EiaAdapter = {
   toConfig: function toConfig(json, option) {
     var seriaColor = option.seriaColor,
+        isNotZoomToMinMax = option.isNotZoomToMinMax,
         _crTitle = crTitle(option),
         title = _crTitle.title,
         subtitle = _crTitle.subtitle,
@@ -36,8 +37,7 @@ var EiaAdapter = {
       color: seriaColor,
       data: data
     }).toSeria(),
-        config = (0, _ConfigBuilder2.default)().area2Config(title, subtitle).addSeries(seria).setMinMax(findMinY(data), findMaxY(data)).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
-
+        config = (0, _ConfigBuilder2.default)().area2Config(title, subtitle).addSeries(seria).setMinMax(findMinY(data), findMaxY(data), isNotZoomToMinMax).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
 
     return { config: config };
   },

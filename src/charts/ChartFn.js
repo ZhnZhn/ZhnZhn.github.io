@@ -176,7 +176,7 @@ const ChartFn = {
       })
     }
   },
-  afterSetExtremesYAxis(event){
+  afterSetExtremesYAxis(event){    
     const { trigger, userMax, userMin } = event;
     if (trigger === 'zoom' && userMax) {
       this.setExtremes(

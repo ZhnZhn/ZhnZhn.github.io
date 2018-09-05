@@ -90,23 +90,7 @@ const ChartConfig = {
       this.seriaOption(COLOR.S_OPEN, this._zhSeriaId(id+'O'))
     )
   },
-
-  setMinMax(config, minValue, maxValue) {
-    const plotLines = config.yAxis.plotLines;
-    plotLines[0].value = maxValue;
-    plotLines[0].label.text = `${ChartConfig.fnNumberFormat(maxValue)}`;
-    plotLines[1].value = minValue;
-    plotLines[1].label.text = `${ChartConfig.fnNumberFormat(minValue)}`;
-
-    Object.assign(config.yAxis, {
-      min: Chart.calcMinY({ minPoint: minValue, maxPoint: maxValue}),
-      maxPadding: 0.15,
-      minPadding: 0.15,
-      endOnTick: false,
-      startOnTick: false
-    })
-  },
-
+  
   getColor(seriaIndex) {
     const colors = ChartTheme.colors;
     return colors[seriaIndex % colors.length];

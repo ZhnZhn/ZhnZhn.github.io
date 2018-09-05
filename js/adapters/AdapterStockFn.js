@@ -24,7 +24,8 @@ var AdapterStockFn = {
         _ref$isAllSeries = _ref.isAllSeries,
         isAllSeries = _ref$isAllSeries === undefined ? true : _ref$isAllSeries,
         _ref$pnDate = _ref.pnDate,
-        pnDate = _ref$pnDate === undefined ? 'date' : _ref$pnDate;
+        pnDate = _ref$pnDate === undefined ? 'date' : _ref$pnDate,
+        isNotZoomToMinMax = _ref.isNotZoomToMinMax;
 
     var data = [],
         dataOpen = [],
@@ -75,7 +76,8 @@ var AdapterStockFn = {
     });
 
     return {
-      data: data, minClose: minClose, maxClose: maxClose,
+      data: data,
+      minClose: minClose, maxClose: maxClose, isNotZoomToMinMax: isNotZoomToMinMax,
       dataOpen: dataOpen, dataHigh: dataHigh, dataLow: dataLow,
       dataVolume: dataVolume, dataVolumeColumn: dataVolumeColumn,
       dataATH: dataATH, dataMfi: dataMfi
@@ -84,4 +86,4 @@ var AdapterStockFn = {
 };
 
 exports.default = AdapterStockFn;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\AdapterStockFn.js.map
+//# sourceMappingURL=AdapterStockFn.js.map

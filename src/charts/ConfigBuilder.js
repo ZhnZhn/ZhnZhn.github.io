@@ -63,7 +63,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     const {
             dataVolumeColumn, dataVolume,
             dataATH,
-            minClose, maxClose,
+            minClose, maxClose, isNotZoomToMinMax,
             data, dataHigh, dataLow, dataOpen
           } = dataOption;
     this.areaConfig({ spacingTop: 25 })
@@ -76,7 +76,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
       .addMiniATH({
         id, data: dataATH
       })
-      .setMinMax(minClose, maxClose)
+      .setMinMax(minClose, maxClose, isNotZoomToMinMax)
       .setStockSerias(id, data, dataHigh, dataLow, dataOpen)
     return this;
   },
@@ -224,22 +224,27 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     });
   },
 
-  setMinMax(minValue, maxValue){
+  setMinMax(minValue, maxValue, noZoom){
     const plotLines = this.config.yAxis.plotLines;
     plotLines[0].value = maxValue;
     plotLines[0].label.text = `${ChartConfig.fnNumberFormat(maxValue)}`;
     plotLines[1].value = minValue;
     plotLines[1].label.text = `${ChartConfig.fnNumberFormat(minValue)}`;
+
+    const _min = noZoom && minValue > 0
+      ? 0
+      : Chart.calcMinY({
+          minPoint: minValue,
+          maxPoint: maxValue
+        })
     this.add('yAxis', {
-      min: Chart.calcMinY({
-        minPoint: minValue,
-        maxPoint: maxValue
-      }),
+      min: _min,
       maxPadding: 0.15,
       minPadding: 0.15,
       endOnTick: false,
       startOnTick: false
     })
+
     return this;
   },
   setStockSerias(id, d, dH, dL, dO){

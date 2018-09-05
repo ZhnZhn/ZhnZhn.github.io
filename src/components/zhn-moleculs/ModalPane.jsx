@@ -8,9 +8,10 @@ const TH_ID = 'MODAL_PANE';
 class ModalPane extends Component {
   /*
   static propTypes = {
-    theme: PropTypes.object,
-
+    className: PropTypes.string,
     style: PropTypes.object,
+    theme: PropTypes.object,
+    isShow: PropTypes.bool,
     onClose: PropTypes.func
   }
   */
@@ -18,7 +19,43 @@ class ModalPane extends Component {
   static defaultProps = {
     onClose: () => {}
   }
-  
+
+  _hClickOutside = (event) => {
+    if (this.rootNode
+      && this.rootNode.contains
+      && !this.rootNode.contains(event.target)
+    ){
+      this.props.onClose(event)
+    }
+  }
+
+  _addOutsideListener = () => {
+    document.addEventListener('click', this._hClickOutside, true)
+  }
+  _removeOutsideListener = () => {
+    document.removeEventListener('click', this._hClickOutside, true)
+  }
+
+  componentDidMount() {
+    if (this.props.isShow) {
+      this._addOutsideListener()
+    }
+  }
+  componentWillUnmount() {
+    this._removeOutsideListener()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps ){
+      if (this.props.isShow){
+        this._addOutsideListener()
+      } else {
+        this._removeOutsideListener()
+      }
+    }
+  }
+
+  /*
   componentWillUpdate(nextProps){
     if (this.props !== nextProps ){
       if (nextProps.isShow){
@@ -28,22 +65,17 @@ class ModalPane extends Component {
       }
     }
   }
-
-  _hClickOutside = (event) => {
-    if (
-        this.rootNode &&
-        this.rootNode.contains &&
-        !this.rootNode.contains(event.target)
-    ){
-      this.props.onClose(event)
-    }
-  }
-
+  */
+  
   _refRootNode = n => this.rootNode = n
 
   render(){
-    const { theme, style, children } = this.props
-         , TS = theme.getStyle(TH_ID);
+    const {
+      theme,
+      style,
+      children
+    } = this.props
+    , TS = theme.getStyle(TH_ID);
     return (
       <div
          ref={this._refRootNode}

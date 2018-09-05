@@ -8,7 +8,8 @@ const AdapterStockFn = {
   toSeriesData: (id, arr=[], option) => {
     const {
             isAllSeries=true,
-            pnDate='date'
+            pnDate='date',
+            isNotZoomToMinMax
           } = option || {};
     const data = []
         , dataOpen = [], dataHigh = [], dataLow = []
@@ -54,7 +55,8 @@ const AdapterStockFn = {
     })
 
     return {
-      data, minClose, maxClose,
+      data,
+      minClose, maxClose, isNotZoomToMinMax,
       dataOpen, dataHigh, dataLow,
       dataVolume, dataVolumeColumn,
       dataATH, dataMfi

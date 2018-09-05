@@ -2,6 +2,7 @@
 .zhn-oc {
   display: inline-block;
   width: 100%;
+  cursor: pointer;
 }
 .zhn-oc:focus,
 .zhn-oc:active {

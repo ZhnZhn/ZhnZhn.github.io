@@ -322,7 +322,7 @@ class AreaChartItem extends Component {
             isShowAbs,
             miniTitles
         } = this.state;
-
+    
     return (
       <div className={CL.ROOT}>
          <Header

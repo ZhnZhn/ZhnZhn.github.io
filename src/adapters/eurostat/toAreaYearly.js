@@ -2,16 +2,6 @@ import ChartConfig from '../../charts/ChartConfig'
 import fn from './EuroStatFn';
 import toYearly from '../toYearly'
 
-/*
-const _crTimeIndexAndValue = json => {
-  const { dimension={}, value=[] } = json
-      , { time={} } = dimension
-      , { category={} } = time
-      , { index:timeIndex=0 } = category;
-  return { timeIndex, value };
-}
-*/
-
 const toAreaYearly = {
    createConfig: (json, option) => {
      const { timeIndex, value } = fn.crTimeIndexAndValue(json)
