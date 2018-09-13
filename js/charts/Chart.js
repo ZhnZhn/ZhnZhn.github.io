@@ -151,8 +151,14 @@ var Chart = {
   },
   setDefaultTitle: function setDefaultTitle(config, title, subtitle) {
     config.chart.spacingTop = this.STACKED_SPACING_TOP;
-    config.title = this.fTitle({ text: title, y: this.STACKED_TITLE_Y });
-    config.subtitle = this.fSubtitle({ text: subtitle, y: this.STACKED_SUBTITLE_Y });
+    config.title = this.fTitle({
+      text: title,
+      y: this.STACKED_TITLE_Y
+    });
+    config.subtitle = this.fSubtitle({
+      text: subtitle,
+      y: this.STACKED_SUBTITLE_Y
+    });
   },
   fTitle: function fTitle() {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -279,7 +285,6 @@ var Chart = {
       color: _Color2.default.CROSSHAIR,
       width: 1,
       zIndex: 2
-      //zIndex : 100
     };
   },
   fPlotLine: function fPlotLine(color, text) {

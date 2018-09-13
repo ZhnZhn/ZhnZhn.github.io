@@ -102,20 +102,20 @@ const Chart = {
           x: 0,
           y: 0
        },
-       theme : {
-         fill : COLOR.BG_TITLE,
-         stroke : COLOR.BG_TITLE,
-         r : 4,
-         style : {
-           color : COLOR.TITLE_SHOW
+       theme: {
+         fill: COLOR.BG_TITLE,
+         stroke: COLOR.BG_TITLE,
+         r: 4,
+         style: {
+           color: COLOR.TITLE_SHOW
          },
-         states : {
-           hover : {
-             fill : COLOR.BG_TITLE,
-             stroke : COLOR.HOVER,
-             'stroke-width' : 2,
-             style : {
-               color : COLOR.HOVER
+         states: {
+           hover: {
+             fill: COLOR.BG_TITLE,
+             stroke: COLOR.HOVER,
+             'stroke-width': 2,
+             style: {
+               color: COLOR.HOVER
              }
            }
          }
@@ -126,8 +126,14 @@ const Chart = {
 
   setDefaultTitle(config, title, subtitle){
     config.chart.spacingTop = this.STACKED_SPACING_TOP;
-    config.title = this.fTitle({ text : title, y: this.STACKED_TITLE_Y });
-    config.subtitle = this.fSubtitle({ text : subtitle, y : this.STACKED_SUBTITLE_Y });
+    config.title = this.fTitle({
+      text: title,
+      y: this.STACKED_TITLE_Y
+    });
+    config.subtitle = this.fSubtitle({
+      text: subtitle,
+      y: this.STACKED_SUBTITLE_Y
+    });
   },
 
   fTitle(option={}){
@@ -161,13 +167,13 @@ const Chart = {
 
  fTitleIndicator(text){
    return {
-     text : text,
-     style : {
+     text: text,
+     style: {
        color: COLOR.METRIC_TITLE,
-       fontSize : '16px',
-       fontWeight : 'bold'
+       fontSize: '16px',
+       fontWeight: 'bold'
      },
-     floating : true,
+     floating: true,
      align: 'left',
      verticalAlign: 'top',
      x: 8,
@@ -177,8 +183,8 @@ const Chart = {
 
  fNavigation(){
    return {
-     buttonOptions : {
-       y : 5
+     buttonOptions: {
+       y: 5
      }
    }
  },
@@ -190,10 +196,10 @@ fBaseConfig({
   isCrosshair=true
 }={}){
   return {
-    zhSeries : {
-      count : 0
+    zhSeries: {
+      count: 0
     },
-    chart : {
+    chart: {
       marginRight: Chart.MARGIN_RIGHT,
       spacingTop: spacingTop
     },
@@ -205,31 +211,31 @@ fBaseConfig({
     },
     xAxis: {
       type: 'datetime',
-      labels : {},
-      crosshair : _isCrosshair(isCrosshair)
+      labels: {},
+      crosshair: _isCrosshair(isCrosshair)
     },
     yAxis: {
-      crosshair : _isCrosshair(isCrosshair),
-      endOnTick : false,
-      maxPadding : 0.15,
-      startOnTick : false,
-      minPadding : 0.15,
-      opposite : true,
-      showEmpty : true,
+      crosshair: _isCrosshair(isCrosshair),
+      endOnTick: false,
+      maxPadding: 0.15,
+      startOnTick: false,
+      minPadding: 0.15,
+      opposite: true,
+      showEmpty: true,
       title: {
         text: ''
       }
     },
     series: [{
-      zhValueText : 'Value',
-      turboThreshold : 20000,
+      zhValueText: 'Value',
+      turboThreshold: 20000,
       type: seriaType,
       color: seriaColor,
-      tooltip : Chart.fTooltip(Tooltip.fnBasePointFormatter),
-      lineWidth : 1,
+      tooltip: Chart.fTooltip(Tooltip.fnBasePointFormatter),
+      lineWidth: 1,
       states: {
         hover: {
-          lineWidth : 1
+          lineWidth: 1
         }
      }
     }]
@@ -238,25 +244,24 @@ fBaseConfig({
 
 fEventsMouseOver(fn){
   return {
-    events : {
-      mouseOver : fn
+    events: {
+      mouseOver: fn
    }
   }
 },
 
 fTooltip(fnPointFormatter){
   return {
-    pointFormatter : fnPointFormatter,
-    headerFormat : ''
+    pointFormatter: fnPointFormatter,
+    headerFormat: ''
   }
 },
 
 fCrosshair(){
     return {
-      color : COLOR.CROSSHAIR,
-      width : 1,
-      zIndex : 2
-      //zIndex : 100
+      color: COLOR.CROSSHAIR,
+      width: 1,
+      zIndex: 2
     }
   },
 
@@ -282,11 +287,11 @@ fCrosshair(){
 
  fXAxisOpposite(option={}){
     return merge(false, {
-      opposite : true,
-      tickLength : 0,
-      tickPosition : 'inside',
-      labels : {
-        y : -5
+      opposite: true,
+      tickLength: 0,
+      tickPosition: 'inside',
+      labels: {
+        y: -5
       }
     }, option)
   },
@@ -307,10 +312,10 @@ fCrosshair(){
 
       gridLineWidth: 0,
 
-      endOnTick : false,
-      maxPadding : 0.15,
-      startOnTick : false,
-      minPadding : 0.15,
+      endOnTick: false,
+      maxPadding: 0.15,
+      startOnTick: false,
+      minPadding: 0.15,
 
       title: {
           text: ''
@@ -320,7 +325,7 @@ fCrosshair(){
       tickColor: color,
       labels: {
         style: {
-          color : color,
+          color: color,
           fontWeight: "bold",
           fontSize: "14px"
         }
@@ -341,13 +346,13 @@ fCrosshair(){
       lineColor: COLOR.AREA_HOVER_LINE,
       lineWidth: 0,
       marker: {
-          enabled : false,
+          enabled: false,
           lineWidth: 1,
           lineColor: COLOR.AREA_MARKER_LINE
       },
-      state : {
-        hover : {
-          lineWidth : 2
+      state: {
+        hover: {
+          lineWidth: 2
         }
       }
     }, option);
@@ -362,9 +367,9 @@ fCrosshair(){
             lineWidth: 1,
             lineColor: COLOR.COLUMN_MARKER_LINE
         },
-        state : {
-          hover : {
-            lineWidth : 2
+        state: {
+          hover: {
+            lineWidth: 2
           }
         }
     }, option)
@@ -372,14 +377,14 @@ fCrosshair(){
 
   fPlotOptionsSeries(option={}){
     return merge(false, {
-      states : {
-        hover : {
-          halo : {
-            attributes : {
-              fill : COLOR.HALO_BASE
+      states: {
+        hover: {
+          halo: {
+            attributes: {
+              fill: COLOR.HALO_BASE
             },
-            opacity : 0.35,
-            size : 16
+            opacity: 0.35,
+            size: 16
           }
         }
       }
@@ -392,13 +397,13 @@ fCrosshair(){
        symbolWidth: 14,
        symbolRadius: 7,
        useHTML: true,
-       itemStyle : {
+       itemStyle: {
          color: COLOR.LEGEND_ITEM,
          cursor: 'pointer',
          fontSize: '16px',
          fontFamily: '"Roboto", "Arial", "Lato", sans-serif',
          fontWeight: 'bold',
-         lineHeight : 1.5
+         lineHeight: 1.5
        }
     }, option)
   },
@@ -406,10 +411,10 @@ fCrosshair(){
 
  fSeriaMarker({ color, symbol }){
     return {
-      radius : 4,
-      symbol : symbol,
-      states : {
-        hover : {
+      radius: 4,
+      symbol: symbol,
+      states: {
+        hover: {
           fillColor: COLOR.MARKER_HOVER_FILL,
           lineColor: COLOR.MARKER_HOVER_LINE,
           lineWidth: 1,

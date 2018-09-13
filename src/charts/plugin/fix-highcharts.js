@@ -14,6 +14,17 @@ const HighchartsFix = (Highcharts) => {
       }
     }
   );
+
+  /*
+    Fast regression fix to Array
+   "plotLine labels does not render
+    in browser that support Array.prototype.flat
+    ": 5.0.14: issues/8477
+    fixed from 6.1
+  */
+  if (Array && Array.prototype.flat) {
+    Array.prototype.flat = undefined
+  }
 }
 
 export default HighchartsFix
