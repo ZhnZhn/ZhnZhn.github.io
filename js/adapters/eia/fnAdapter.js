@@ -31,6 +31,9 @@ var _toUTC = function _toUTC(str) {
         _day = _month === 1 ? 28 : 30;
     return Date.UTC(_year, _month, _day);
   }
+  if (str.length === 4) {
+    return Date.UTC(str, 11, 31);
+  }
 };
 
 var _crZhConfig = function _crZhConfig(json, option) {

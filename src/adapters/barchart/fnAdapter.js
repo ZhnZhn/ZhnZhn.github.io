@@ -36,7 +36,7 @@ const _crZhConfig = (id, value) => ({
 });
 
 const fnAdapter = {
-  fhGetConfigMfi: fnGetConfigMfi,
+  fnGetConfigMfi: fnGetConfigMfi,
   toSeriesData: toSeriesData,
 
   crTitle: (option) => ({

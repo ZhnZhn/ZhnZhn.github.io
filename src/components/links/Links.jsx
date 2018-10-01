@@ -18,6 +18,9 @@ const S = {
   },
   WHITE: {
     color: 'white'
+  },
+  DBNOMICS: {
+    color: '#abd9bf'
   }
 };
 
@@ -26,6 +29,13 @@ const Quandl = withProps({
   href: "https://www.quandl.com/",
   dfStyle: S.ORANGE,
   title: "Quandl"
+})(BaseComponent)
+
+const DbNomics = withProps({
+  className: CL_LINK,
+  href: "https://db.nomics.world/",
+  dfStyle: S.DBNOMICS,
+  title: "DB NOMICS"
 })(BaseComponent)
 
 const Iex = withProps({
@@ -148,6 +158,7 @@ const CryptoCompare = () =>
 
 export default {
   Quandl,
+  DbNomics,
   Iex,
   Barchart,
   AlphaVantage,
@@ -161,7 +172,7 @@ export default {
   Intrinio,
   Insee,
   StatNorway,
-  StatSweden,  
+  StatSweden,
   CryptoCompare,
   Cmc
 };

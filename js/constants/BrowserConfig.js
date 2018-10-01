@@ -44,6 +44,11 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   isDynamic: true,
   caption: 'Quandl: World Economy',
   sourceMenuUrl: './data/quandl/source-menu.json'
+}), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.DB_NOMICS, {
+  browserType: _Type.BrowserType.DB_NOMICS,
+  isDynamic: true,
+  caption: 'DB Nomics',
+  sourceMenuUrl: './data/db-nomics/source-menu.json'
 }), (0, _defineProperty3.default)(_BrowserConfig, _Type.BrowserType.BLOCKCHAIN, {
   browserType: _Type.BrowserType.BLOCKCHAIN,
   isDynamic: true,

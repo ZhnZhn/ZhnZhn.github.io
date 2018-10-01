@@ -1,0 +1,65 @@
+{
+  "menu": [
+    {
+      "caption": "ECB",
+      "items": [
+        { "id": "DBN_ECB_CURRENCY" }
+      ]
+    }, {
+      "caption": "OECD",
+      "items": [
+        { "id": "DBN_OECD_SHORTINDICATOR" }
+      ]
+    }
+  ],
+  "items": {
+    "DBN_B1": {
+      "dialogProps": {
+        "noDate": true,
+        "descrUrl" : "./data/db-nomics/db-nomics.html",
+        "loadId" : "DBN"
+      }
+    },
+    "DBN_ECB_CURRENCY": {
+      "type" : "DBN_ECB_CURRENCY",
+      "menuTitle" : "Exchange Rates",
+      "dialogCaption" : "Exchange Rates",
+      "chartContainerCaption" : "DB Nomics: ECB: Exchange Rates",
+      "addProps": "DBN_B1",
+      "dialogProps" : {
+        "oneCaption": "Rate",
+        "optionURI" : "./data/db-nomics/ecb-exchange-rates.json",
+        "optionsJsonProp" : "items",
+        "dataSource" : "DB Nomics: ECB: Exchange Rates",
+        "dfProps": {
+          "dfProvider": "ECB",
+          "dfCode": "EXR"
+        }
+      }
+    },
+    "DBN_OECD_SHORTINDICATOR": {
+      "type" : "DBN_OECD_SHORTINDICATOR",
+      "menuTitle" : "Short Key Indicators",
+      "dialogCaption" : "Short Key Indicators",
+      "chartContainerCaption" : "DB Nomics: OECD: Short Key Indicators",
+      "dialogType": "DialogEurostat2",
+      "addProps": "DBN_B1",
+      "dialogProps": {
+        "oneCaption": "Country",
+        "oneURI": "./data/db-nomics/oecd-countries.json",
+        "oneJsonProp": "items",
+        "twoCaption": "Indicator",
+        "twoURI": "./data/db-nomics/oecd-short-key-indicators.json",
+        "twoJsonProp": "items",
+        "chartsType": "t1",
+        "dataSource" : "DB Nomics: OECD: Short Key Indicators",
+        "dfProps": {
+          "dfProvider": "OECD",
+          "dfCode": "KEI",
+          "dfSufix": "ST.M",
+          "dfFnUrl": "s21"
+        }
+      }
+    }
+  }
+}

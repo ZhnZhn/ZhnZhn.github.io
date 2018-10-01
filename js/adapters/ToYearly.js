@@ -203,6 +203,24 @@ var _crRangeSeria = function _crRangeSeria(data) {
       _data = _hmToSeriaData(hm, _crHighLowPoint);
 
 
+  try {
+    var _b = new _ConfigBuilder2.default();
+    console.log(_b);
+    /*
+    const _seria = _b
+      .areaRangeSeria(
+         Tooltip.categoryRHLY, {
+           data: _data,
+           name: name,
+           point: {}
+         }
+       ).toSeria()
+    */
+    //console.log(_seria)
+  } catch (e) {
+    console.log(e);
+  }
+
   return {
     rangeSeria: (0, _ConfigBuilder2.default)().areaRangeSeria(_Tooltip2.default.categoryRHLY, {
       data: _data,

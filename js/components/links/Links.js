@@ -33,6 +33,9 @@ var S = {
   },
   WHITE: {
     color: 'white'
+  },
+  DBNOMICS: {
+    color: '#abd9bf'
   }
 };
 
@@ -41,6 +44,13 @@ var Quandl = (0, _withProps2.default)({
   href: "https://www.quandl.com/",
   dfStyle: S.ORANGE,
   title: "Quandl"
+})(_Link2.default);
+
+var DbNomics = (0, _withProps2.default)({
+  className: CL_LINK,
+  href: "https://db.nomics.world/",
+  dfStyle: S.DBNOMICS,
+  title: "DB NOMICS"
 })(_Link2.default);
 
 var Iex = (0, _withProps2.default)({
@@ -167,6 +177,7 @@ var CryptoCompare = function CryptoCompare() {
 
 exports.default = {
   Quandl: Quandl,
+  DbNomics: DbNomics,
   Iex: Iex,
   Barchart: Barchart,
   AlphaVantage: AlphaVantage,

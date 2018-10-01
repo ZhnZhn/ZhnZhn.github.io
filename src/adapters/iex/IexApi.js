@@ -1,4 +1,6 @@
 
+import CT from './ChartType'
+
 const C = {
   BASE_URL: 'https://api.iextrading.com/1.0/stock',
   DF_PERIOD: '1y'
@@ -10,20 +12,26 @@ const _urlEarnings = (option) => {
 };
 
 const _urlDividends = (option) => {
-  const { value='', dfPeriod } = option;
+  const {
+    value='',
+    dfPeriod
+  } = option;
   return `${C.BASE_URL}/${value}/dividends/${dfPeriod}`;
 };
 
 const _urlChart = (option) => {
-  const { value='', dfPeriod=C.DF_PERIOD } = option;
+  const {
+    value='',
+    dfPeriod=C.DF_PERIOD
+  } = option;
   return `${C.BASE_URL}/${value}/chart/${dfPeriod}`;
 };
 
 const _rUrl = {
   DF: _urlChart,
-  earnings: _urlEarnings,
-  dividends: _urlDividends,
-  chart: _urlChart
+  [CT.ERN]: _urlEarnings,
+  [CT.DIV]: _urlDividends,
+  [CT.CHART]: _urlChart
 };
 
 const IexApi = {

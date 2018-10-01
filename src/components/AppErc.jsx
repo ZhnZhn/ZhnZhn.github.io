@@ -17,7 +17,7 @@ import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '13-09-2018';
+const PREV_BUILD = '01-10-2018';
 
 const _checkBuild = () => {
   if (window.fetch) {
@@ -41,12 +41,8 @@ const _checkBuild = () => {
 }
 
 class AppErc extends Component {
-
-  constructor(){
-    super()
-    this.state = {
-      theme: initTheme
-    }
+  state = {
+    theme: initTheme
   }
 
   componentDidMount(){
@@ -72,7 +68,6 @@ class AppErc extends Component {
     const { theme } = this.state;
     return (
       <ThemeContext.Provider value={theme}>
-      <div>
         <HeaderBar store={ChartStore} />
         <div className="component-container">
            <BrowserContainer
@@ -88,7 +83,6 @@ class AppErc extends Component {
            />
        </div>
        <DialogContainer store={ChartStore} />
-     </div>
      </ThemeContext.Provider>
    );
   }

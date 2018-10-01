@@ -4,6 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _r2;
+
 var _Scatter = require('./Scatter');
 
 var _Scatter2 = _interopRequireDefault(_Scatter);
@@ -20,14 +26,15 @@ var _toChart = require('./toChart');
 
 var _toChart2 = _interopRequireDefault(_toChart);
 
+var _ChartType = require('./ChartType');
+
+var _ChartType2 = _interopRequireDefault(_ChartType);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _r = {
-  DF: _toChart2.default,
-  earnings: (0, _Scatter2.default)(_toEarningsImpl2.default),
-  dividends: (0, _Scatter2.default)(_toDividendsImpl2.default),
-  chart: _toChart2.default
-};
+var _r = (_r2 = {
+  DF: _toChart2.default
+}, (0, _defineProperty3.default)(_r2, _ChartType2.default.ERN, (0, _Scatter2.default)(_toEarningsImpl2.default)), (0, _defineProperty3.default)(_r2, _ChartType2.default.DIV, (0, _Scatter2.default)(_toDividendsImpl2.default)), (0, _defineProperty3.default)(_r2, _ChartType2.default.CHART, _toChart2.default), _r2);
 
 var RouterAdapter = {
   getAdapter: function getAdapter(option) {

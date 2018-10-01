@@ -4,6 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _rUrl2;
+
+var _ChartType = require('./ChartType');
+
+var _ChartType2 = _interopRequireDefault(_ChartType);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var C = {
   BASE_URL: 'https://api.iextrading.com/1.0/stock',
   DF_PERIOD: '1y'
@@ -33,12 +45,9 @@ var _urlChart = function _urlChart(option) {
   return C.BASE_URL + '/' + value + '/chart/' + dfPeriod;
 };
 
-var _rUrl = {
-  DF: _urlChart,
-  earnings: _urlEarnings,
-  dividends: _urlDividends,
-  chart: _urlChart
-};
+var _rUrl = (_rUrl2 = {
+  DF: _urlChart
+}, (0, _defineProperty3.default)(_rUrl2, _ChartType2.default.ERN, _urlEarnings), (0, _defineProperty3.default)(_rUrl2, _ChartType2.default.DIV, _urlDividends), (0, _defineProperty3.default)(_rUrl2, _ChartType2.default.CHART, _urlChart), _rUrl2);
 
 var IexApi = {
   getRequestUrl: function getRequestUrl(option) {

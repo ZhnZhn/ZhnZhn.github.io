@@ -14,11 +14,13 @@ import Bls from './bls/Bls'
 import Eia from './eia/Eia'
 import Intrinio from './intrinio/Intrinio'
 import Quandl from './quandl/Quandl'
+import DbNomics from './db-nomics/DbNomics'
 import Crc from './crypto-compare/Crc'
 import Cmc from './coin-market-cap/Cmc'
 
 const RouterAdapter = {
   Quandl,
+  DbNomics,
   EuroStat,
   UnComtrade,
   FaoStat,

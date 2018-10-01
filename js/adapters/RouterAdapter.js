@@ -64,6 +64,10 @@ var _Quandl = require('./quandl/Quandl');
 
 var _Quandl2 = _interopRequireDefault(_Quandl);
 
+var _DbNomics = require('./db-nomics/DbNomics');
+
+var _DbNomics2 = _interopRequireDefault(_DbNomics);
+
 var _Crc = require('./crypto-compare/Crc');
 
 var _Crc2 = _interopRequireDefault(_Crc);
@@ -76,6 +80,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var RouterAdapter = {
   Quandl: _Quandl2.default,
+  DbNomics: _DbNomics2.default,
   EuroStat: _EuroStat2.default,
   UnComtrade: _UnComtrade2.default,
   FaoStat: _FaoStat2.default,

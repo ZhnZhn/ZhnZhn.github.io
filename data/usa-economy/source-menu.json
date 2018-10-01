@@ -25,6 +25,11 @@
         { "id": "USAE_EIA_RETAIL_REVENUE" }
       ]
     },{
+      "caption": "EIA: Environment, A",
+      "items": [
+        { "id": "USAE_EIA_ENV_CO2" }
+      ]
+    },{
       "caption": "Intrinio: FRED",
       "items": [
         { "id": "USAE_INTR_1" },
@@ -322,6 +327,50 @@
           "dfSeriaType": "pi2",
           "prefix": "ELEC.REV.",
           "dfTitle": "Revenue from Retail Sales of Electricity, M$"
+        }
+      }
+    },
+
+    "USAE_EIA_ENV_CO2": {
+      "type": "USAE_EIA_ENV_CO2",
+      "menuTitle": "CO2 Emissions",
+      "dialogCaption": "CO2 Emissions",
+      "chartContainerCaption" : "EIA: CO2 Emissions, Annual, Ml Tonnes",
+      "dialogType": "DialogEurostat3A",
+      "addProps": "USAE_B_EIA",
+      "dialogProps": {
+        "twoCaption": "Fuel",
+        "twoURI": "./data/usa-economy/eia-co2-emission-fuel.json",
+        "twoJsonProp": "items",
+        "threeCaption": "Sector",
+        "threeURI": "./data/usa-economy/eia-co2-emission-sectors.json",
+        "threeJsonProp": "items",
+        "chartsType": "t1",
+        "dfProps": {
+          "dfSeriaType": "pi231s",
+          "prefix": "EMISS.CO2-TOTV-",
+          "sufix": ".A",
+          "dfTitle": "CO2 Emissions (million metric tonnes)"
+        }
+      }
+    },
+    "USAE_EIA_CO2_NGAS": {
+      "type": "USAE_EIA_CO2_NGAS",
+      "menuTitle": "By Natural Gas",
+      "dialogCaption": "CO2 by Natural Gas",
+      "chartContainerCaption" : "EIA: CO2 Emission by Natural Gas, Ml Tonnes",
+      "dialogType": "DialogEurostat2",
+      "addProps": "USAE_B_EIA",
+      "dialogProps": {
+        "twoCaption": "Sector",
+        "twoURI": "./data/usa-economy/eia-co2-by-coal.json",
+        "twoJsonProp": "items",
+        "chartsType": "t1",
+        "dfProps": {
+          "dfSeriaType": "pi2s",
+          "prefix": "EMISS.CO2-TOTV-",
+          "sufix": ".A",
+          "dfTitle": "CO2 Emission by Natural Gas (million metric tonnes)"
         }
       }
     },

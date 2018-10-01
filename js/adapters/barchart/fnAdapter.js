@@ -50,7 +50,7 @@ var _crZhConfig = function _crZhConfig(id, value) {
 };
 
 var fnAdapter = {
-  fhGetConfigMfi: _IndicatorSma.fnGetConfigMfi,
+  fnGetConfigMfi: _IndicatorSma.fnGetConfigMfi,
   toSeriesData: toSeriesData,
 
   crTitle: function crTitle(option) {

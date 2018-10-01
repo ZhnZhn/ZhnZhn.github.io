@@ -36,14 +36,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var withTheme = function withTheme(Wrapper) {
   return function (_Component) {
-    (0, _inherits3.default)(_class, _Component);
+    (0, _inherits3.default)(WithUiTheme, _Component);
 
-    function _class() {
-      (0, _classCallCheck3.default)(this, _class);
-      return (0, _possibleConstructorReturn3.default)(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    function WithUiTheme() {
+      (0, _classCallCheck3.default)(this, WithUiTheme);
+      return (0, _possibleConstructorReturn3.default)(this, (WithUiTheme.__proto__ || Object.getPrototypeOf(WithUiTheme)).apply(this, arguments));
     }
 
-    (0, _createClass3.default)(_class, [{
+    (0, _createClass3.default)(WithUiTheme, [{
       key: 'render',
       value: function render() {
         var _this2 = this;
@@ -57,7 +57,7 @@ var withTheme = function withTheme(Wrapper) {
         );
       }
     }]);
-    return _class;
+    return WithUiTheme;
   }(_react.Component);
 };
 

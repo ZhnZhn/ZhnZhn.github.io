@@ -21,6 +21,7 @@ var _loadItem2 = _interopRequireDefault(_loadItem);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Quandl = _RouterAdapter2.default.Quandl,
+    DbNomics = _RouterAdapter2.default.DbNomics,
     UnComtrade = _RouterAdapter2.default.UnComtrade,
     FaoStat = _RouterAdapter2.default.FaoStat,
     WorldBank = _RouterAdapter2.default.WorldBank,
@@ -41,6 +42,7 @@ var Quandl = _RouterAdapter2.default.Quandl,
 
 var LoadImpl = {
   Quandl: (0, _loadItem2.default)((0, _extends3.default)({}, Quandl)),
+  DbNomics: (0, _loadItem2.default)((0, _extends3.default)({}, DbNomics)),
   UnComtrade: (0, _loadItem2.default)((0, _extends3.default)({}, UnComtrade)),
   FaoStat: (0, _loadItem2.default)((0, _extends3.default)({}, FaoStat)),
   WorldBank: (0, _loadItem2.default)((0, _extends3.default)({}, WorldBank)),

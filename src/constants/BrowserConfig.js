@@ -32,10 +32,16 @@ const BrowserConfig = {
     sourceMenuUrl: './data/world-bank/source-menu.json'
   },
   [BT.ECONOMIC]: {
-    browserType: BT.ECONOMIC,    
+    browserType: BT.ECONOMIC,
     isDynamic: true,
     caption: 'Quandl: World Economy',
     sourceMenuUrl: './data/quandl/source-menu.json'
+  },
+  [BT.DB_NOMICS]: {
+    browserType: BT.DB_NOMICS,
+    isDynamic: true,
+    caption: 'DB Nomics',
+    sourceMenuUrl: './data/db-nomics/source-menu.json'
   },
   [BT.BLOCKCHAIN]: {
     browserType: BT.BLOCKCHAIN,

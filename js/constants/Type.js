@@ -28,6 +28,7 @@ var BrowserType = exports.BrowserType = {
 
    STOCKS_BY_SECTORS: 'STOCKS_BY_SECTORS',
 
+   DB_NOMICS: 'DBN',
    US_ECONOMY: 'USAE',
 
    BLOCKCHAIN: 'BC',
@@ -82,6 +83,7 @@ var LoadType = exports.LoadType = {
    AL_I: 'AL_I',
    IEX: 'IEX',
    QCT: 'QCT',
+   DBN: 'DBN',
    EU_STAT: 'EU_STAT',
    FS: 'FS',
    NST: 'NST',

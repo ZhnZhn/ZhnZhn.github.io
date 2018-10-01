@@ -3,12 +3,14 @@ import Scatter from './Scatter'
 import toEarnings from './toEarningsImpl'
 import toDividends from './toDividendsImpl'
 import toChart from './toChart'
+import CT from './ChartType'
+
 
 const _r = {
   DF: toChart,
-  earnings: Scatter(toEarnings),
-  dividends: Scatter(toDividends),
-  chart: toChart
+  [CT.ERN]: Scatter(toEarnings),
+  [CT.DIV]: Scatter(toDividends),
+  [CT.CHART]: toChart
 };
 
 const RouterAdapter = {

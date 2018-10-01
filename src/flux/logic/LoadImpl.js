@@ -5,6 +5,7 @@ import f from './loadItem'
 
 const {
   Quandl,
+  DbNomics,
   UnComtrade, FaoStat, WorldBank,
   EuroStat, StatNorway, StatSweden,
   AlphaVantage, Barchart, Intrinio,
@@ -15,6 +16,7 @@ const {
 
 const LoadImpl = {
   Quandl: f({ ...Quandl }),
+  DbNomics: f({ ...DbNomics }),
   UnComtrade: f({ ...UnComtrade }),
   FaoStat: f({ ...FaoStat }),
   WorldBank: f({ ...WorldBank}),

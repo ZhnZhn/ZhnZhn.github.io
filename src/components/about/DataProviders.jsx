@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 17):"
+     caption="Data Providers (All 18):"
      captionStyle={ocCaptionStyle}
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
      childStyle={ST.ROOT_CHILD}
@@ -55,10 +55,13 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
     <div>
       <p>
         <span style={S.PROVIDER}>
-          <Link.Quandl/>
+          <Link.Quandl />
           <span style={S.BLACK}>
             &nbsp;(50 per day)
           </span>
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.DbNomics />
         </span>
         <span style={S.PROVIDER}>
           <Link.Eurostat />

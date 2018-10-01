@@ -74,7 +74,7 @@ var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '13-09-2018';
+var PREV_BUILD = '01-10-2018';
 
 var _checkBuild = function _checkBuild() {
   if (window.fetch) {
@@ -100,14 +100,22 @@ var AppErc = function (_Component) {
   (0, _inherits3.default)(AppErc, _Component);
 
   function AppErc() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, AppErc);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AppErc.__proto__ || Object.getPrototypeOf(AppErc)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._onStore = function (actionType, themeName) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = AppErc.__proto__ || Object.getPrototypeOf(AppErc)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      theme: _theme2.default
+    }, _this._onStore = function (actionType, themeName) {
       if (actionType === _ComponentActions.ComponentActionTypes.CHANGE_THEME) {
-        _this.setState(function (_ref) {
-          var theme = _ref.theme;
+        _this.setState(function (_ref2) {
+          var theme = _ref2.theme;
 
           theme.setThemeName(themeName);
           return {
@@ -115,12 +123,7 @@ var AppErc = function (_Component) {
           };
         });
       }
-    };
-
-    _this.state = {
-      theme: _theme2.default
-    };
-    return _this;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(AppErc, [{
@@ -143,27 +146,23 @@ var AppErc = function (_Component) {
       return _react2.default.createElement(
         _ThemeContext2.default.Provider,
         { value: theme },
+        _react2.default.createElement(_HeaderBar2.default, { store: _ChartStore2.default }),
         _react2.default.createElement(
           'div',
-          null,
-          _react2.default.createElement(_HeaderBar2.default, { store: _ChartStore2.default }),
-          _react2.default.createElement(
-            'div',
-            { className: 'component-container' },
-            _react2.default.createElement(_BrowserContainer2.default, {
-              store: _ChartStore2.default,
-              initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
-              showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
-              onCloseDialog: _ComponentActions2.default.closeDialog
-            }),
-            _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
-            _react2.default.createElement(_ComponentHrzContainer2.default, {
-              store: _ChartStore2.default,
-              addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
-            })
-          ),
-          _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default })
-        )
+          { className: 'component-container' },
+          _react2.default.createElement(_BrowserContainer2.default, {
+            store: _ChartStore2.default,
+            initBrowserAction: _BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC,
+            showDialogAction: _ComponentActions.ComponentActionTypes.SHOW_DIALOG,
+            onCloseDialog: _ComponentActions2.default.closeDialog
+          }),
+          _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
+          _react2.default.createElement(_ComponentHrzContainer2.default, {
+            store: _ChartStore2.default,
+            addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
+          })
+        ),
+        _react2.default.createElement(_DialogContainer2.default, { store: _ChartStore2.default })
       );
     }
   }]);

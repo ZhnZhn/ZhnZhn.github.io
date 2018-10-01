@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ThemeContext from './ThemeContext'
 
-const withTheme = (Wrapper) => class extends Component {
+const withTheme = (Wrapper) => class WithUiTheme extends Component {
   render(){
     return (
       <ThemeContext.Consumer>

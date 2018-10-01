@@ -40,7 +40,7 @@ const toEarningsImpl = {
              ...p
           }))
       })
-    }
+    }    
     return Builder()
       .scatterSeria(Tooltip.eps, { data })
       .toSeria();

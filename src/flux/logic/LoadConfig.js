@@ -11,6 +11,8 @@ const LoadConfig = {
   [LT.Q_T]: LoadImpl.Quandl,
   [LT.QCT]: loadQuandlCommodityTrade,
 
+  [LT.DBN]: LoadImpl.DbNomics,
+
   [LT.B]: LoadImpl.Barchart,
   [LT.AL]: LoadImpl.AlphaIndicator,
   [LT.AL_S]: LoadImpl.AlphaSector,

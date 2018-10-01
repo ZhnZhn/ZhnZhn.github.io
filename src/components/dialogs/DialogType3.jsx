@@ -194,7 +194,7 @@ class DialogType3 extends Component {
          <D.Toolbar
            isShow={isToolbar}
            buttons={this.toolbarButtons}
-         />         
+         />
          <D.SelectWithLoad
            isShow={isShow}
            isShowLabels={isShowLabels}

@@ -46,10 +46,22 @@ var _crSeriaPI2 = function _crSeriaPI2(option) {
 
   return "" + prefix + _one + _two;
 };
+var _crSeriaPI321S = function _crSeriaPI321S(option) {
+  var prefix = option.prefix,
+      _option$items3 = option.items,
+      items = _option$items3 === undefined ? [] : _option$items3,
+      sufix = option.sufix,
+      _one = _getValue(items[0]),
+      _two = _getValue(items[1]),
+      _three = _getValue(items[2]);
+
+  return "" + prefix + _three + "-" + _two + "-" + _one + sufix;
+};
 
 var _rSeriaId = {
   DF: _crSeriaDf,
-  pi2: _crSeriaPI2
+  pi2: _crSeriaPI2,
+  pi231s: _crSeriaPI321S
 };
 
 var _crSeriaId = function _crSeriaId(option) {

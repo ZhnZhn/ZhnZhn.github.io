@@ -6,7 +6,8 @@
  "file": "../../../src/components/hoc/ThemeContext.js",
  "names": [
   "ThemeContext",
+  "React",
   "createContext"
  ],
- "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,eAAe,gBAAMC,aAAN,EAArB;;kBAEeD,Y"
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,eAAeC,gBAAMC,aAAN,EAArB;;kBAEeF,Y"
 }

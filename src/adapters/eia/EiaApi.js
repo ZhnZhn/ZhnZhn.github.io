@@ -43,10 +43,22 @@ const _crSeriaPI2 = (option) => {
   , _two = _getValue(items[1])
   return `${prefix}${_one}${_two}`;
 };
+const _crSeriaPI321S = (option) => {
+  const {
+    prefix,
+    items=[],
+    sufix
+  } = option
+  , _one = _getValue(items[0])
+  , _two = _getValue(items[1])
+  , _three = _getValue(items[2])
+  return `${prefix}${_three}-${_two}-${_one}${sufix}`;
+};
 
 const _rSeriaId = {
   DF: _crSeriaDf,
-  pi2: _crSeriaPI2
+  pi2: _crSeriaPI2,
+  pi231s: _crSeriaPI321S
 };
 
 const _crSeriaId = (option) => {
@@ -59,7 +71,7 @@ const EiaApi = {
   getRequestUrl(option){
     const { apiKey } = option
     , _seria_id = _crSeriaId(option);
-        
+
     return `${C.S_URL}?api_key=${apiKey}&series_id=${_seria_id}`;
   },
 

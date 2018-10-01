@@ -1,10 +1,13 @@
 import AdapterFn from '../AdapterFn'
+import CT from './ChartType'
 
-const _calcScatterY = (chart) => {
+const _calcScatterY = (chart, isMin) => {
   const { max, min } = chart.yAxis[0]
       , all = max - min
       , one = all/100;
-  return (max - 7*one);
+  return isMin
+    ? (min + one)
+    : (max - 7*one);
 };
 
 const toFns = {
@@ -20,8 +23,11 @@ const toFns = {
     };
   },
 
-  crToSeria: (chart, seria, caption, color) => {
-    const y = _calcScatterY(chart);
+  crToSeria: ({ chart, seria, caption, color, option }) => {
+    const { dfType } = option;
+    const y = (dfType === CT.ERN)
+      ? _calcScatterY(chart)
+      : _calcScatterY(chart, true);
     seria.data.forEach(p => p.y = y)
     Object.assign(seria, {
       zhItemCaption: caption,

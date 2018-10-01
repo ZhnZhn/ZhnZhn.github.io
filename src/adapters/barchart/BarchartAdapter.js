@@ -28,7 +28,7 @@ const BarchartAdapter = {
             })
             .addZhPoints(dataMfi, fnGetConfigMfi)
             .toConfig();
-
+      
       return { config };
   },
 

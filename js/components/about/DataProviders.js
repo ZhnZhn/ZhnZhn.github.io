@@ -73,7 +73,7 @@ var DataProviders = function DataProviders(_ref) {
     _OpenClose2.default,
     {
       isClose: isClose,
-      caption: 'Data Providers (All 17):',
+      caption: 'Data Providers (All 18):',
       captionStyle: ocCaptionStyle,
       rootStyle: (0, _extends3.default)({}, _About2.default.LINE_HEIGHT, _About2.default.P_BOTTOM),
       childStyle: ST.ROOT_CHILD,
@@ -94,6 +94,11 @@ var DataProviders = function DataProviders(_ref) {
             { style: _About2.default.BLACK },
             '\xA0(50 per day)'
           )
+        ),
+        _react2.default.createElement(
+          'span',
+          { style: _About2.default.PROVIDER },
+          _react2.default.createElement(_Links2.default.DbNomics, null)
         ),
         _react2.default.createElement(
           'span',

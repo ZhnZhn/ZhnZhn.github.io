@@ -258,7 +258,7 @@ const AdapterFn = {
       minY = _fn(data[i], minY)
     }
     return minY !== Number.POSITIVE_INFINITY
-      ? minY
+      ? minY.toFixed(4)
       : undefined;
   },
   findMaxY: (data) => {
@@ -273,7 +273,7 @@ const AdapterFn = {
       maxY = _fn(data[i], maxY)
     }
     return maxY !== Number.NEGATIVE_INFINITY
-      ? maxY
+      ? maxY.toFixed(4)
       : undefined;
   }
 

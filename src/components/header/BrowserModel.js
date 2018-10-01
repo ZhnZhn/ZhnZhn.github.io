@@ -8,6 +8,7 @@ const CL_ROW = 'row__pane-topic';
 const CL = {
   BR: `${CL_ROW} item__browser`,
   Q: `${CL_ROW} item__quandl`,
+  DBN: `${CL_ROW} item__dbnomics`,
   EU: `${CL_ROW} item__eurostat`,
   W: `${CL_ROW} item__watch`,
   AB: `${CL_ROW} item__about`
@@ -76,6 +77,11 @@ const crBrowserModel = () => {
         name: 'World Economy',
         //onClick: _fB(BT.ECONOMIC),
         onClick: _fBD(BT.ECONOMIC),
+        isClose: true
+      },{
+        cn: CL.DBN,
+        name: 'DB Nomics',
+        onClick: _fBD(BT.DB_NOMICS),
         isClose: true
       },{
         cn: CL.BR,
