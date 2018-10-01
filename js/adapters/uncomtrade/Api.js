@@ -5,16 +5,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var C = {
+  PERIOD: 5,
   ALL: 'all',
   BU_ALL_PARAMS: 'p=0&max=3000',
   NU_ALL_PARAMS: 'p=0',
   //rg=2 Export
-  BU_PREFIX: 'https://comtrade.un.org/api/get?fmt=JSON&head=M&freq=A&px=H4&ps=recent',
-  //BASE_URL: 'https://comtrade.un.org/api/get?fmt=JSON&r=68&freq=A&px=H4&cc=100850&rg=2&ps=2010'
+  BU_PREFIX: 'https://comtrade.un.org/api/get?fmt=JSON&head=M&freq=A&px=H4',
   NU_PREFIX: 'https://comtrade.un.org/db/dqBasicQueryResults.aspx?px=H4&y=2016&so=1001',
 
   DF_RG: 2,
   DF_MEASURE: 'NetWeight'
+};
+
+var _crPeriod = function _crPeriod(period) {
+  var yearNow = new Date().getUTCFullYear(),
+      arr = [];
+  for (var i = 1; i <= period; i++) {
+    arr.push(yearNow - i);
+  }
+  return arr.reverse().join(',');
 };
 
 var UnComtradeApi = {
@@ -23,14 +32,15 @@ var UnComtradeApi = {
         one = _option$one === undefined ? C.ALL : _option$one,
         two = option.two,
         _option$rg = option.rg,
-        rg = _option$rg === undefined ? 2 : _option$rg;
+        rg = _option$rg === undefined ? 2 : _option$rg,
+        _ps = _crPeriod(C.PERIOD);
 
     if (one !== C.ALL) {
       option.nativeHref = C.NU_PREFIX + '&r=' + one + '&cc=' + two;
-      return C.BU_PREFIX + '&rg=' + rg + '&r=' + one + '&cc=' + two;
+      return C.BU_PREFIX + '&rg=' + rg + '&r=' + one + '&cc=' + two + '&ps=' + _ps;
     } else {
       option.nativeHref = C.NU_PREFIX + '&' + C.NU_ALL_PARAMS + '&r=' + one + '&cc=' + two;
-      return C.BU_PREFIX + '&' + C.BU_ALL_PARAMS + '&rg=' + rg + '&r=' + one + '&cc=' + two;
+      return C.BU_PREFIX + '&' + C.BU_ALL_PARAMS + '&rg=' + rg + '&r=' + one + '&cc=' + two + '&ps=' + _ps;
     }
   },
   checkResponse: function checkResponse(json) {
