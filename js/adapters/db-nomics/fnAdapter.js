@@ -29,7 +29,9 @@ var _crDescr = function _crDescr(_ref) {
   var dfProvider = _ref.dfProvider,
       dfCode = _ref.dfCode,
       seriaId = _ref.seriaId;
-  return '\n  <p>SeriaId: ' + dfProvider + '/' + dfCode + '/' + seriaId + '</p>\n  <p><a href="' + C.CHART_URL + '/' + dfProvider + '/' + dfCode + '/' + seriaId + '" style="padding-top: 4px;">DB Nomics Chart</a></p>\n  ';
+
+  var _id = seriaId.indexOf(dfProvider) === -1 ? dfProvider + '/' + dfCode + '/' + seriaId : seriaId;
+  return '\n   <p>SeriaId: ' + _id + '</p>\n   <p><a href="' + C.CHART_URL + '/' + _id + '" style="padding-top: 4px;">DB Nomics Chart</a></p>\n  ';
 };
 
 var _crZhConfig = function _crZhConfig(json, option) {

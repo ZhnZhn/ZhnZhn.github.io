@@ -12,10 +12,15 @@ const C = {
   CHART_URL: 'https://db.nomics.world'
 };
 
-const _crDescr = ({ dfProvider, dfCode, seriaId }) => `
-  <p>SeriaId: ${dfProvider}/${dfCode}/${seriaId}</p>
-  <p><a href="${C.CHART_URL}/${dfProvider}/${dfCode}/${seriaId}" style="padding-top: 4px;">DB Nomics Chart</a></p>
+const _crDescr = ({ dfProvider, dfCode, seriaId }) => {
+  const _id = seriaId.indexOf(dfProvider) === -1
+    ? `${dfProvider}/${dfCode}/${seriaId}`
+    : seriaId;
+  return`
+   <p>SeriaId: ${_id}</p>
+   <p><a href="${C.CHART_URL}/${_id}" style="padding-top: 4px;">DB Nomics Chart</a></p>
   `;
+};
 
 const _crZhConfig = (json, option) => {
   const { dataSource, seriaId } = option
