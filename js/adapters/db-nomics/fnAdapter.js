@@ -29,7 +29,7 @@ var _crDescr = function _crDescr(_ref) {
   var dfProvider = _ref.dfProvider,
       dfCode = _ref.dfCode,
       seriaId = _ref.seriaId;
-  return '\n  <p>Provider: ' + dfProvider + '/' + dfCode + '</p>\n  <p>SeriaId: ' + seriaId + '</p>\n  <p><a href="' + C.CHART_URL + '/' + dfProvider + '/' + dfCode + '/' + seriaId + '" style="padding-top: 4px;">DB Nomics Chart</a></p>\n  ';
+  return '\n  <p>SeriaId: ' + dfProvider + '/' + dfCode + '/' + seriaId + '</p>\n  <p><a href="' + C.CHART_URL + '/' + dfProvider + '/' + dfCode + '/' + seriaId + '" style="padding-top: 4px;">DB Nomics Chart</a></p>\n  ';
 };
 
 var _crZhConfig = function _crZhConfig(json, option) {

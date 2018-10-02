@@ -12,7 +12,7 @@ class RowPattern extends Component {
      titleStyle: PropTypes.object
   }
   */
-  
+
   static defaultProps = {
     title: ''
   }
@@ -25,13 +25,16 @@ class RowPattern extends Component {
             title, titleStyle,
             ...rest
           } = this.props
+        , _title = title.indexOf(':') === -1
+             ? `${title}:`
+             : title
         , {
             rowStyle, labelStyle
           } = STYLE.crRowLabelStyle(isShowLabels);
     return (
       <div style={rowStyle}>
-        <span style={{ ...labelStyle, ...titleStyle}}>
-           {title}
+        <span style={{...labelStyle, ...titleStyle}}>
+           {_title}
         </span>
         <InputPattern
            ref={this._refInput}

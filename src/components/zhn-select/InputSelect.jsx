@@ -29,10 +29,13 @@ const CL = {
   NOT_SELECTED: 'not-selected'
 };
 
+
+const INPUT_PREFIX = 'From input:';
 const _fnNoItem = (propCaption, inputValue, isWithInput) => {
-  const _inputValue = String(inputValue).trim()
-      , _caption = (isWithInput)
-           ? `From input: ${_inputValue}`
+  const _inputValue = String(inputValue)
+    .replace(INPUT_PREFIX,'').trim()
+    , _caption = (isWithInput)
+           ? `${INPUT_PREFIX} ${_inputValue}`
            : 'No results found';
   return {
     [propCaption]: _caption,
@@ -93,6 +96,8 @@ class InputSelect extends Component {
      optionNames: PropTypes.string,
      isUpdateOptions: PropTypes.bool,
      placeholder: PropTypes.string,
+     isWithInput: PropTypes.bool,
+     prefixInput: PropTypes.string
 
      isLoading: PropTypes.bool,
      isLoadingFailed: PropTypes.bool,
@@ -110,28 +115,23 @@ class InputSelect extends Component {
     optionNames: '',
     isUpdateOptions: false,
     isWithInput: false,
+    //prefixInput: 'From Input:',
     onSelect: () => {},
     onLoadOption: () => {}
   }
 
   constructor(props){
-    super()
+    super(props)
     this.domOptionsCache = null
     this.indexActiveOption = 0
     this.propCaption = props.propCaption
 
-    const { optionName, optionNames } = props
-        , _optionNames = (optionNames)
-              ? optionNames
-              : (optionName)
-                   ? optionName
-                   : '';
-
+    const { optionName, optionNames, options } = props;
     this.state = {
       value: '',
       isShowOption: false,
-      options: props.options,
-      optionNames : _optionNames,
+      options: options,
+      optionNames: optionNames || optionName || '',
       isValidDomOptionsCache: false,
       isLocalMode: false
     }

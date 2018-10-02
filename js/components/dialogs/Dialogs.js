@@ -20,13 +20,18 @@ var _DialogType5 = require('./DialogType5');
 
 var _DialogType6 = _interopRequireDefault(_DialogType5);
 
+var _DialogQuery = require('./DialogQuery');
+
+var _DialogQuery2 = _interopRequireDefault(_DialogQuery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Dialogs = {
   Type3: _DialogType2.default,
   Type4: _DialogType4.default,
   Type4A: _DialogType4A2.default,
-  Type5: _DialogType6.default
+  Type5: _DialogType6.default,
+  Query: _DialogQuery2.default
 };
 
 exports.default = Dialogs;

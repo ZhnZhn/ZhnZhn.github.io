@@ -2,7 +2,11 @@ const C = {
   URL: 'https://api.db.nomics.world/v21/series',
   TAIL: 'format=json&orientation=column',
 
-  MSG_EMPTY: 'Dataset is empty'
+  MSG_EMPTY: 'Dataset is empty',
+
+  DF_PROVIDER: 'ECB',
+  DF_CODE: 'EXR',
+  DF_SERIA_ID: 'A.USD.EUR.SP00.A'
 };
 
 const _crErr = (caption, message) => ({
@@ -27,6 +31,25 @@ const _dfFnUrl = (option) => {
   return _crUrl(_seriaId, option);
 };
 
+const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
+  Object.assign(option, {
+    seriaId: option.value,
+    dfProvider, dfCode
+  })
+  return `${C.URL}?provider_code=${dfProvider}&dataset_code=${dfCode}&series_code=${seriaId}&${C.TAIL}`;
+};
+const _idFnUrl = (option) => {
+  const { value } = option
+  , arr = value.split('/');
+  if (arr.length !== 3) {
+    return _crIdUrl(option,
+      C.DF_PROVIDER, C.DF_CODE, C.DF_SERIA_ID
+    );
+  }
+  return _crIdUrl(option,
+    arr[0], arr[1], arr[2]
+  );
+};
 
 const _s21FnUrl = (option) => {
   const { dfSufix, items } = option
@@ -35,10 +58,19 @@ const _s21FnUrl = (option) => {
   , _seriaId = `${_two}.${_one}.${dfSufix}`;
   return _crUrl(_seriaId, option)
 };
+const _s12FnUrl = (option) => {
+  const { dfSufix, items } = option
+  , _one = _getValue(items[0])
+  , _two = _getValue(items[1])
+  , _seriaId = `${_one}.${_two}.${dfSufix}`;
+  return _crUrl(_seriaId, option)
+};
 
 const _rFnUrl = {
   DF: _dfFnUrl,
-  s21: _s21FnUrl
+  id: _idFnUrl,
+  s12: _s12FnUrl,
+  s21: _s21FnUrl,  
 };
 
 const DbNomicsApi = {

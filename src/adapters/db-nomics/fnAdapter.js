@@ -13,8 +13,7 @@ const C = {
 };
 
 const _crDescr = ({ dfProvider, dfCode, seriaId }) => `
-  <p>Provider: ${dfProvider}/${dfCode}</p>
-  <p>SeriaId: ${seriaId}</p>
+  <p>SeriaId: ${dfProvider}/${dfCode}/${seriaId}</p>
   <p><a href="${C.CHART_URL}/${dfProvider}/${dfCode}/${seriaId}" style="padding-top: 4px;">DB Nomics Chart</a></p>
   `;
 
@@ -53,7 +52,7 @@ const fnAdapter = {
     const { series } = json
     , { period, value } = series
     , data = [];
-    period.forEach((p, i) => {      
+    period.forEach((p, i) => {
       data.push({
         x: ymdToUTC(p),
         y: value[i]

@@ -7,7 +7,11 @@ var C = {
   URL: 'https://api.db.nomics.world/v21/series',
   TAIL: 'format=json&orientation=column',
 
-  MSG_EMPTY: 'Dataset is empty'
+  MSG_EMPTY: 'Dataset is empty',
+
+  DF_PROVIDER: 'ECB',
+  DF_CODE: 'EXR',
+  DF_SERIA_ID: 'A.USD.EUR.SP00.A'
 };
 
 var _crErr = function _crErr(caption, message) {
@@ -35,6 +39,23 @@ var _dfFnUrl = function _dfFnUrl(option) {
   return _crUrl(_seriaId, option);
 };
 
+var _crIdUrl = function _crIdUrl(option, dfProvider, dfCode, seriaId) {
+  Object.assign(option, {
+    seriaId: option.value,
+    dfProvider: dfProvider, dfCode: dfCode
+  });
+  return C.URL + '?provider_code=' + dfProvider + '&dataset_code=' + dfCode + '&series_code=' + seriaId + '&' + C.TAIL;
+};
+var _idFnUrl = function _idFnUrl(option) {
+  var value = option.value,
+      arr = value.split('/');
+
+  if (arr.length !== 3) {
+    return _crIdUrl(option, C.DF_PROVIDER, C.DF_CODE, C.DF_SERIA_ID);
+  }
+  return _crIdUrl(option, arr[0], arr[1], arr[2]);
+};
+
 var _s21FnUrl = function _s21FnUrl(option) {
   var dfSufix = option.dfSufix,
       items = option.items,
@@ -44,9 +65,20 @@ var _s21FnUrl = function _s21FnUrl(option) {
 
   return _crUrl(_seriaId, option);
 };
+var _s12FnUrl = function _s12FnUrl(option) {
+  var dfSufix = option.dfSufix,
+      items = option.items,
+      _one = _getValue(items[0]),
+      _two = _getValue(items[1]),
+      _seriaId = _one + '.' + _two + '.' + dfSufix;
+
+  return _crUrl(_seriaId, option);
+};
 
 var _rFnUrl = {
   DF: _dfFnUrl,
+  id: _idFnUrl,
+  s12: _s12FnUrl,
   s21: _s21FnUrl
 };
 

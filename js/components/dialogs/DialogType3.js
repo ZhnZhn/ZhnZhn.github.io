@@ -201,6 +201,7 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           oneCaption = _props.oneCaption,
           itemCaption = _props.itemCaption,
           optionNames = _props.optionNames,
+          onePlaceholder = _props.onePlaceholder,
           isWithInputStock = _props.isWithInputStock,
           noDate = _props.noDate,
           initFromDate = _props.initFromDate,
@@ -234,6 +235,7 @@ var DialogType3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,
           isShowLabels: isShowLabels,
+          placeholder: onePlaceholder,
           uri: _oneURI,
           jsonProp: optionsJsonProp,
           caption: _oneCaption,

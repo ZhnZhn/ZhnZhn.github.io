@@ -12,6 +12,7 @@ const _router = {
   DialogType4: D.Type4,
   DialogType4A: D.Type4A,
   DialogType5: D.Type5,
+  DialogQuery: D.Query,
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */

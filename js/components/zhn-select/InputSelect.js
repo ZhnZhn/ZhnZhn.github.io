@@ -69,11 +69,12 @@ var CL = {
   NOT_SELECTED: 'not-selected'
 };
 
+var INPUT_PREFIX = 'From input:';
 var _fnNoItem = function _fnNoItem(propCaption, inputValue, isWithInput) {
   var _ref;
 
-  var _inputValue = String(inputValue).trim(),
-      _caption = isWithInput ? 'From input: ' + _inputValue : 'No results found';
+  var _inputValue = String(inputValue).replace(INPUT_PREFIX, '').trim(),
+      _caption = isWithInput ? INPUT_PREFIX + ' ' + _inputValue : 'No results found';
   return _ref = {}, (0, _defineProperty3.default)(_ref, propCaption, _caption), (0, _defineProperty3.default)(_ref, 'value', 'noresult'), (0, _defineProperty3.default)(_ref, 'inputValue', _inputValue), _ref;
 };
 
@@ -116,7 +117,7 @@ var InputSelect = (_temp = _class = function (_Component) {
   function InputSelect(props) {
     (0, _classCallCheck3.default)(this, InputSelect);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (InputSelect.__proto__ || Object.getPrototypeOf(InputSelect)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (InputSelect.__proto__ || Object.getPrototypeOf(InputSelect)).call(this, props));
 
     _initialiseProps.call(_this);
 
@@ -126,13 +127,13 @@ var InputSelect = (_temp = _class = function (_Component) {
 
     var optionName = props.optionName,
         optionNames = props.optionNames,
-        _optionNames = optionNames ? optionNames : optionName ? optionName : '';
+        options = props.options;
 
     _this.state = {
       value: '',
       isShowOption: false,
-      options: props.options,
-      optionNames: _optionNames,
+      options: options,
+      optionNames: optionNames || optionName || '',
       isValidDomOptionsCache: false,
       isLocalMode: false
     };
@@ -155,6 +156,8 @@ var InputSelect = (_temp = _class = function (_Component) {
      optionNames: PropTypes.string,
      isUpdateOptions: PropTypes.bool,
      placeholder: PropTypes.string,
+     isWithInput: PropTypes.bool,
+     prefixInput: PropTypes.string
        isLoading: PropTypes.bool,
      isLoadingFailed: PropTypes.bool,
        onSelect: PropTypes.func,
@@ -259,6 +262,7 @@ var InputSelect = (_temp = _class = function (_Component) {
   optionNames: '',
   isUpdateOptions: false,
   isWithInput: false,
+  //prefixInput: 'From Input:',
   onSelect: function onSelect() {},
   onLoadOption: function onLoadOption() {}
 }, _initialiseProps = function _initialiseProps() {

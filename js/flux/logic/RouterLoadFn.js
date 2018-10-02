@@ -60,6 +60,7 @@ var _r = {
   DialogType4: _type4.default,
   DialogType4A: _type4.default,
   DialogType5: _type6.default,
+  DialogQuery: _type2.default,
 
   DialogType5A: _type6.default,
 

@@ -25,6 +25,7 @@ const _r = {
   DialogType4: fnType4,
   DialogType4A: fnType4,
   DialogType5: fnType5,
+  DialogQuery: fnType3,
 
   DialogType5A: fnType5,
 

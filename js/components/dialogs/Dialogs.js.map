@@ -9,7 +9,8 @@
   "Type3",
   "Type4",
   "Type4A",
-  "Type5"
+  "Type5",
+  "Query"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU;AACdC,6BADc;AAEdC,6BAFc;AAGdC,gCAHc;AAIdC;AAJc,CAAhB;;kBAOeJ,O"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,UAAU;AACdC,6BADc;AAEdC,6BAFc;AAGdC,gCAHc;AAIdC,6BAJc;AAKdC;AALc,CAAhB;;kBAQeL,O"
 }

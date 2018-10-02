@@ -168,6 +168,7 @@ class DialogType3 extends Component {
             caption, isShow, onShow, onFront,
             oneURI, optionURI, optionsJsonProp,
             oneCaption, itemCaption, optionNames,
+            onePlaceholder,
             isWithInputStock,
             noDate,
             initFromDate, initToDate,
@@ -198,6 +199,7 @@ class DialogType3 extends Component {
          <D.SelectWithLoad
            isShow={isShow}
            isShowLabels={isShowLabels}
+           placeholder={onePlaceholder}
            uri={_oneURI}
            jsonProp={optionsJsonProp}
            caption={_oneCaption}

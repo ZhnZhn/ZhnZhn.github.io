@@ -25,6 +25,7 @@ var _router = {
   DialogType4: _Dialogs2.default.Type4,
   DialogType4A: _Dialogs2.default.Type4A,
   DialogType5: _Dialogs2.default.Type5,
+  DialogQuery: _Dialogs2.default.Query,
 
   get ChartConfigDialog() {
     /*eslint-disable no-undef */

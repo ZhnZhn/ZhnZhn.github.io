@@ -3,12 +3,20 @@
     {
       "caption": "ECB",
       "items": [
-        { "id": "DBN_ECB_CURRENCY" }
+        { "id": "DBN_ECB_CURRENCY" },
+        { "id": "DBN_ECB_EQUITYINDEX" },
+        { "id": "DBN_ECB_TRADE" }
       ]
-    }, {
+    },{
       "caption": "OECD",
       "items": [
-        { "id": "DBN_OECD_SHORTINDICATOR" }
+        { "id": "DBN_OECD_SHORTINDICATOR" },
+        { "id": "DBN_OECD_PRODUCERPRICES" }
+      ]
+    },{
+      "caption": "DB NOMICS",
+      "items": [
+        { "id": "DBN_QUERY" }
       ]
     }
   ],
@@ -17,47 +25,118 @@
       "dialogProps": {
         "noDate": true,
         "descrUrl" : "./data/db-nomics/db-nomics.html",
-        "loadId" : "DBN"
+        "loadId" : "DBN",
+        "optionsJsonProp" : "items"
+      }
+    },
+    "DBN_B2": {
+      "dialogProps": {
+        "noDate": true,
+        "descrUrl" : "./data/db-nomics/db-nomics.html",
+        "loadId" : "DBN",
+        "oneCaption": "Country",
+        "oneURI": "./data/db-nomics/oecd-countries.json",
+        "oneJsonProp": "items",
+        "twoJsonProp": "items",
+        "chartsType": "t1"
       }
     },
     "DBN_ECB_CURRENCY": {
       "type" : "DBN_ECB_CURRENCY",
-      "menuTitle" : "Exchange Rates",
-      "dialogCaption" : "Exchange Rates",
-      "chartContainerCaption" : "DB Nomics: ECB: Exchange Rates",
+      "menuTitle" : "Exchange Rates, D",
+      "chartContainerCaption" : "DB Nomics: ECB: Exchange Rates, Daily",
       "addProps": "DBN_B1",
       "dialogProps" : {
         "oneCaption": "Rate",
         "optionURI" : "./data/db-nomics/ecb-exchange-rates.json",
-        "optionsJsonProp" : "items",
-        "dataSource" : "DB Nomics: ECB: Exchange Rates",
+        "dataSource" : "DB Nomics: ECB: Exchange Rates, D",
         "dfProps": {
           "dfProvider": "ECB",
           "dfCode": "EXR"
         }
       }
     },
+    "DBN_ECB_EQUITYINDEX": {
+      "type" : "DBN_ECB_EQUITYINDEX",
+      "menuTitle" : "Equity Index, M",
+      "chartContainerCaption" : "DB Nomics: ECB: Equity Index, Monthly",
+      "addProps": "DBN_B1",
+      "dialogProps" : {
+        "oneCaption": "Index",
+        "optionURI" : "./data/db-nomics/ecb-equity-index.json",
+        "dataSource" : "DB Nomics: ECB: Equity Index, M",
+        "dfProps": {
+          "dfProvider": "ECB",
+          "dfCode": "RTD"
+        }
+      }
+    },
+    "DBN_ECB_TRADE": {
+      "type" : "DBN_ECB_TRADE",
+      "menuTitle" : "EA Trade, SA, M",
+      "chartContainerCaption" : "DB Nomics: ECB: EA Trade, SA, Monthly",
+      "addProps": "DBN_B1",
+      "dialogProps" : {
+        "oneCaption": "Index",
+        "optionURI" : "./data/db-nomics/ecb-trade.json",
+        "dataSource" : "DB Nomics: ECB: EA Trade, SA, M",
+        "dfProps": {
+          "dfProvider": "ECB",
+          "dfCode": "RTD"
+        }
+      }
+    },
+
     "DBN_OECD_SHORTINDICATOR": {
       "type" : "DBN_OECD_SHORTINDICATOR",
-      "menuTitle" : "Short Key Indicators",
-      "dialogCaption" : "Short Key Indicators",
-      "chartContainerCaption" : "DB Nomics: OECD: Short Key Indicators",
+      "menuTitle" : "Short Key Indicators, M",
+      "chartContainerCaption" : "DB Nomics: OECD: Short Key Indicators, Monthly",
       "dialogType": "DialogEurostat2",
-      "addProps": "DBN_B1",
+      "addProps": "DBN_B2",
       "dialogProps": {
-        "oneCaption": "Country",
-        "oneURI": "./data/db-nomics/oecd-countries.json",
-        "oneJsonProp": "items",
         "twoCaption": "Indicator",
         "twoURI": "./data/db-nomics/oecd-short-key-indicators.json",
-        "twoJsonProp": "items",
-        "chartsType": "t1",
-        "dataSource" : "DB Nomics: OECD: Short Key Indicators",
+        "dataSource" : "DB Nomics: OECD: Short Key Indicators, M",
         "dfProps": {
           "dfProvider": "OECD",
           "dfCode": "KEI",
           "dfSufix": "ST.M",
           "dfFnUrl": "s21"
+        }
+      }
+    },
+    "DBN_OECD_PRODUCERPRICES": {
+      "type" : "DBN_OECD_PRODUCERPRICES",
+      "menuTitle" : "Producer Prices Index, A",
+      "chartContainerCaption" : "DB Nomics: OECD: Producer Prices Index, Annual",
+      "dialogType": "DialogEurostat2",
+      "addProps": "DBN_B2",
+      "dialogProps": {
+        "twoCaption": "Indicator",
+        "twoURI": "./data/db-nomics/oecd-producer-prices-index.json",
+        "dataSource" : "DB Nomics: OECD: Producer Prices Index, A",
+        "dfProps": {
+          "dfProvider": "OECD",
+          "dfCode": "MEI",
+          "dfSufix": "IXOB.A",
+          "dfFnUrl": "s12"
+        }
+      }
+    },
+
+    "DBN_QUERY": {
+      "type" : "DBN_QUERY",
+      "menuTitle" : "Query by Id",
+      "chartContainerCaption" : "DB Nomics: Query by Id",
+      "dialogType": "DialogQuery",
+      "addProps": "DBN_B1",
+      "dialogProps" : {
+        "oneCaption": "Id",
+        "onePlaceholder": "PROVIDER/CODE/SERIES.ID",
+        "isWithInputStock": true,
+        "dataSource" : "DB Nomics",
+        "dfProps": {
+          "dfFnUrl": "id"
         }
       }
     }

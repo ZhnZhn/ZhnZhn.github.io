@@ -79,6 +79,7 @@ var RowPattern = (_temp2 = _class = function (_Component) {
           title = _props.title,
           titleStyle = _props.titleStyle,
           rest = (0, _objectWithoutProperties3.default)(_props, ['isShowLabels', 'title', 'titleStyle']),
+          _title = title.indexOf(':') === -1 ? title + ':' : title,
           _STYLE$crRowLabelStyl = _DialogStyles2.default.crRowLabelStyle(isShowLabels),
           rowStyle = _STYLE$crRowLabelStyl.rowStyle,
           labelStyle = _STYLE$crRowLabelStyl.labelStyle;
@@ -89,7 +90,7 @@ var RowPattern = (_temp2 = _class = function (_Component) {
         _react2.default.createElement(
           'span',
           { style: (0, _extends3.default)({}, labelStyle, titleStyle) },
-          title
+          _title
         ),
         _react2.default.createElement(_InputPattern2.default, (0, _extends3.default)({
           ref: this._refInput
