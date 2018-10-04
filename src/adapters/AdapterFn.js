@@ -4,7 +4,6 @@ import Big from 'big.js';
 import DateUtils from '../utils/DateUtils';
 import formatAllNumber from '../utils/formatAllNumber'
 
-//import ChartConfig from '../charts/ChartConfig';
 import { Direction } from '../constants/Type';
 
 import mathFn from '../math/mathFn';
@@ -258,7 +257,7 @@ const AdapterFn = {
       minY = _fn(data[i], minY)
     }
     return minY !== Number.POSITIVE_INFINITY
-      ? minY.toFixed(4)
+      ? mathFn.toFixed(minY)
       : undefined;
   },
   findMaxY: (data) => {
@@ -273,7 +272,7 @@ const AdapterFn = {
       maxY = _fn(data[i], maxY)
     }
     return maxY !== Number.NEGATIVE_INFINITY
-      ? maxY.toFixed(4)
+      ? mathFn.toFixed(maxY)
       : undefined;
   }
 

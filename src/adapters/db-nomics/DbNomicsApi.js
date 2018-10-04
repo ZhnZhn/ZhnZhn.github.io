@@ -55,14 +55,18 @@ const _s21FnUrl = (option) => {
   const { dfSufix, items } = option
   , _one = _getValue(items[0])
   , _two = _getValue(items[1])
-  , _seriaId = `${_two}.${_one}.${dfSufix}`;
+  , _seriaId = dfSufix
+      ? `${_two}.${_one}.${dfSufix}`
+      : `${_two}.${_one}`;
   return _crUrl(_seriaId, option)
 };
 const _s12FnUrl = (option) => {
   const { dfSufix, items } = option
   , _one = _getValue(items[0])
   , _two = _getValue(items[1])
-  , _seriaId = `${_one}.${_two}.${dfSufix}`;
+  , _seriaId = dfSufix
+      ? `${_one}.${_two}.${dfSufix}`
+      : `${_one}.${_two}`;
   return _crUrl(_seriaId, option)
 };
 
@@ -70,7 +74,7 @@ const _rFnUrl = {
   DF: _dfFnUrl,
   id: _idFnUrl,
   s12: _s12FnUrl,
-  s21: _s21FnUrl,  
+  s21: _s21FnUrl,
 };
 
 const DbNomicsApi = {

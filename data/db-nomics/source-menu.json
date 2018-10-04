@@ -14,6 +14,12 @@
         { "id": "DBN_OECD_PRODUCERPRICES" }
       ]
     },{
+      "caption": "WTO",
+      "items": [
+        { "id": "DBN_WTO_GOODSTRADE" },
+        { "id": "DBN_WTO_SERVICETRADE" }
+      ]
+    },{
       "caption": "DB NOMICS",
       "items": [
         { "id": "DBN_QUERY" }
@@ -120,6 +126,47 @@
           "dfCode": "MEI",
           "dfSufix": "IXOB.A",
           "dfFnUrl": "s12"
+        }
+      }
+    },
+
+    "DBN_WTO_GOODSTRADE": {
+      "type" : "DBN_WTO_GOODSTRADE",
+      "menuTitle" : "Merchandise Trade Value, M",
+      "chartContainerCaption" : "DB Nomics: WTO: Merchandise Trade Value, Monthly",
+      "dialogType": "DialogEurostat2",
+      "addProps": "DBN_B1",
+      "dialogProps": {
+        "oneCaption": "Country",
+        "oneURI": "./data/db-nomics/wto-countries.json",
+        "twoCaption": "Flow",
+        "twoURI": "./data/db-nomics/wto-flow.json",
+        "twoJsonProp": "items",
+        "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, M",
+        "dfProps": {
+          "dfProvider": "WTO",
+          "dfCode": "m1",
+          "dfFnUrl": "s21"
+        }
+      }
+    },
+    "DBN_WTO_SERVICETRADE": {
+      "type" : "DBN_WTO_SERVICETRADE",
+      "menuTitle" : "Services Trade Value, M",
+      "chartContainerCaption" : "DB Nomics: WTO: Commercial Services Trade Value, Monthly",
+      "dialogType": "DialogEurostat2",
+      "addProps": "DBN_B1",
+      "dialogProps": {
+        "oneCaption": "Country",
+        "oneURI": "./data/db-nomics/wto-countries-services.json",
+        "twoCaption": "Flow",
+        "twoURI": "./data/db-nomics/wto-flow.json",
+        "twoJsonProp": "items",
+        "dataSource" : "DB Nomics: WTO: Commercial Services Trade Value in $Ml, M",
+        "dfProps": {
+          "dfProvider": "WTO",
+          "dfCode": "m2",
+          "dfFnUrl": "s21"
         }
       }
     },

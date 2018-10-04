@@ -40,6 +40,9 @@ const _crInfo = (json, option) => {
   };
 };
 
+const _isNumber = n => typeof n === 'number'
+ && !Number.isNaN(n);
+
 const fnAdapter = {
   findMaxY: findMaxY,
   findMinY: findMinY,
@@ -58,10 +61,12 @@ const fnAdapter = {
     , { period, value } = series
     , data = [];
     period.forEach((p, i) => {
-      data.push({
-        x: ymdToUTC(p),
-        y: value[i]
-      })
+      if (_isNumber(value[i])) {
+        data.push({
+          x: ymdToUTC(p),
+          y: value[i]
+        })
+      }
     })
     return data;
   },

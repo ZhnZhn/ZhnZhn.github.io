@@ -54,6 +54,10 @@ var _crInfo = function _crInfo(json, option) {
   };
 };
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && !Number.isNaN(n);
+};
+
 var fnAdapter = {
   findMaxY: findMaxY,
   findMinY: findMinY,
@@ -73,10 +77,12 @@ var fnAdapter = {
         data = [];
 
     period.forEach(function (p, i) {
-      data.push({
-        x: ymdToUTC(p),
-        y: value[i]
-      });
+      if (_isNumber(value[i])) {
+        data.push({
+          x: ymdToUTC(p),
+          y: value[i]
+        });
+      }
     });
     return data;
   },

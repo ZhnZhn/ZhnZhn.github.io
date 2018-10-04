@@ -34,7 +34,6 @@ var _IndicatorSma = require('./IndicatorSma');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import ChartConfig from '../charts/ChartConfig';
 var EMPTY = '';
 var M = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
@@ -253,7 +252,7 @@ var AdapterFn = {
     for (var i = 0, max = data.length; i < max; i++) {
       minY = _fn(data[i], minY);
     }
-    return minY !== Number.POSITIVE_INFINITY ? minY.toFixed(4) : undefined;
+    return minY !== Number.POSITIVE_INFINITY ? _mathFn2.default.toFixed(minY) : undefined;
   },
   findMaxY: function findMaxY(data) {
     if (!Array.isArray(data) || data.length < 1) {
@@ -268,7 +267,7 @@ var AdapterFn = {
     for (var i = 0, max = data.length; i < max; i++) {
       maxY = _fn(data[i], maxY);
     }
-    return maxY !== Number.NEGATIVE_INFINITY ? maxY.toFixed(4) : undefined;
+    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn2.default.toFixed(maxY) : undefined;
   }
 
 };

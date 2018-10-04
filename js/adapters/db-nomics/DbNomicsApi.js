@@ -61,7 +61,7 @@ var _s21FnUrl = function _s21FnUrl(option) {
       items = option.items,
       _one = _getValue(items[0]),
       _two = _getValue(items[1]),
-      _seriaId = _two + '.' + _one + '.' + dfSufix;
+      _seriaId = dfSufix ? _two + '.' + _one + '.' + dfSufix : _two + '.' + _one;
 
   return _crUrl(_seriaId, option);
 };
@@ -70,7 +70,7 @@ var _s12FnUrl = function _s12FnUrl(option) {
       items = option.items,
       _one = _getValue(items[0]),
       _two = _getValue(items[1]),
-      _seriaId = _one + '.' + _two + '.' + dfSufix;
+      _seriaId = dfSufix ? _one + '.' + _two + '.' + dfSufix : _one + '.' + _two;
 
   return _crUrl(_seriaId, option);
 };
