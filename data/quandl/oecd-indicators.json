@@ -20,6 +20,7 @@
     },{
       "value" : "MEI_REAL_PRMNTO01", "caption" : "Manufactoring Production, 2010=100%",
       "columns" : [
+        { "caption" : "Monthly", "value" : "M" },
         { "caption" : "Quarterly", "value" : "Q" },
         { "caption" : "Annual", "value" : "A" }
       ]

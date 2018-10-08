@@ -1,9 +1,11 @@
 
-const C = {  
+const C = {
   MAX_SHOW: 6,
 
   WORLD: 'World',
   ALL: 'all',
+
+  NET_WEIGHT: 'NetWeight',  
 
   DESCR_EMPTY: 'Dataset is empty.',
 

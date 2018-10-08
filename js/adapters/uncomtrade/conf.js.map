@@ -1,1 +1,45 @@
-{"version":3,"sources":["../../../src/adapters/uncomtrade/conf.js"],"names":["C","MAX_SHOW","WORLD","ALL","DESCR_EMPTY","MM_DD","AVG_PRICE","WORLD_COLOR","CHART","spacingTop","marginTop","marginBottom","SPLINE","type","SPLINE_NOT_VISIBLE","visible","X_AXIS","opposite","labels","y","crosshair","tickColor","tickWidth","tickLength","tickPosition","gridLineWidth","Y_AXIS","lineWidth","startOnTick","endOnTick","minPadding","maxPadding","plotLines","x"],"mappings":";;;;;;AACA,IAAMA,IAAI;AACRC,YAAU,CADF;;AAGRC,SAAO,OAHC;AAIRC,OAAK,KAJG;;AAMRC,eAAa,mBANL;;AAQRC,SAAO,QARC;AASRC,aAAW,UATH;AAURC,eAAa,SAVL;;AAYRC,SAAO;AACLC,gBAAY,EADP;AAELC,eAAW,EAFN;AAGLC,kBAAc;AAHT,GAZC;AAiBRC,UAAQ;AACNC,UAAM;AADA,GAjBA;AAoBRC,sBAAoB;AAClBD,UAAM,QADY,EACFE,SAAS;AADP,GApBZ;AAuBRC,UAAQ;AACNH,UAAM,UADA;AAENI,cAAU,KAFJ;AAGNC,YAAQ;AACNC,SAAG;AADG,KAHF;AAMNC,eAAW,IANL;AAONC,eAAW,MAPL;AAQNC,eAAW,CARL;AASNC,gBAAY,CATN;AAUNC,kBAAc,SAVR;AAWN;AACAC,mBAAe;AAZT,GAvBA;AAqCRC,UAAQ;AACNC,eAAW,CADL;AAENJ,gBAAY,CAFN;AAGNK,iBAAa,IAHP;AAINC,eAAW,IAJL;AAKNC,gBAAY,IALN;AAMNC,gBAAY,IANN;AAONC,eAAW,IAPL;AAQNd,YAAQ;AACNe,SAAG;AADG;AARF;;AArCA,CAAV;;kBAoDejC,C","file":"conf.js","sourcesContent":["\r\nconst C = {  \r\n  MAX_SHOW: 6,\r\n\r\n  WORLD: 'World',\r\n  ALL: 'all',\r\n\r\n  DESCR_EMPTY: 'Dataset is empty.',\r\n\r\n  MM_DD: '-12-31',\r\n  AVG_PRICE: 'avgPrice',\r\n  WORLD_COLOR: '#7cb5ec',\r\n\r\n  CHART: {\r\n    spacingTop: 24,\r\n    marginTop: 42,\r\n    marginBottom: 38\r\n  },\r\n  SPLINE: {\r\n    type: 'spline'\r\n  },\r\n  SPLINE_NOT_VISIBLE: {\r\n    type: 'spline', visible: false\r\n  },\r\n  X_AXIS: {\r\n    type: 'category',\r\n    opposite: false,\r\n    labels: {\r\n      y: 18\r\n    },\r\n    crosshair: null,\r\n    tickColor: 'gray',\r\n    tickWidth: 3,\r\n    tickLength: 7,\r\n    tickPosition: 'outside',\r\n    //tickPosition: 'inside',\r\n    gridLineWidth: 0\r\n  },\r\n  Y_AXIS: {\r\n    lineWidth: 0,\r\n    tickLength: 0,\r\n    startOnTick: true,\r\n    endOnTick: true,\r\n    minPadding: 0.05,\r\n    maxPadding: 0.05,\r\n    plotLines: null,\r\n    labels: {\r\n      x: 3\r\n    }\r\n  }\r\n\r\n};\r\n\r\nexport default C\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/uncomtrade/conf.js"
+ ],
+ "file": "../../../src/adapters/uncomtrade/conf.js",
+ "names": [
+  "C",
+  "MAX_SHOW",
+  "WORLD",
+  "ALL",
+  "NET_WEIGHT",
+  "DESCR_EMPTY",
+  "MM_DD",
+  "AVG_PRICE",
+  "WORLD_COLOR",
+  "CHART",
+  "spacingTop",
+  "marginTop",
+  "marginBottom",
+  "SPLINE",
+  "type",
+  "SPLINE_NOT_VISIBLE",
+  "visible",
+  "X_AXIS",
+  "opposite",
+  "labels",
+  "y",
+  "crosshair",
+  "tickColor",
+  "tickWidth",
+  "tickLength",
+  "tickPosition",
+  "gridLineWidth",
+  "Y_AXIS",
+  "lineWidth",
+  "startOnTick",
+  "endOnTick",
+  "minPadding",
+  "maxPadding",
+  "plotLines",
+  "x"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,YAAU,CADF;;AAGRC,SAAO,OAHC;AAIRC,OAAK,KAJG;;AAMRC,cAAY,WANJ;;AAQRC,eAAa,mBARL;;AAURC,SAAO,QAVC;AAWRC,aAAW,UAXH;AAYRC,eAAa,SAZL;;AAcRC,SAAO;AACLC,gBAAY,EADP;AAELC,eAAW,EAFN;AAGLC,kBAAc;AAHT,GAdC;AAmBRC,UAAQ;AACNC,UAAM;AADA,GAnBA;AAsBRC,sBAAoB;AAClBD,UAAM,QADY,EACFE,SAAS;AADP,GAtBZ;AAyBRC,UAAQ;AACNH,UAAM,UADA;AAENI,cAAU,KAFJ;AAGNC,YAAQ;AACNC,SAAG;AADG,KAHF;AAMNC,eAAW,IANL;AAONC,eAAW,MAPL;AAQNC,eAAW,CARL;AASNC,gBAAY,CATN;AAUNC,kBAAc,SAVR;AAWN;AACAC,mBAAe;AAZT,GAzBA;AAuCRC,UAAQ;AACNC,eAAW,CADL;AAENJ,gBAAY,CAFN;AAGNK,iBAAa,IAHP;AAINC,eAAW,IAJL;AAKNC,gBAAY,IALN;AAMNC,gBAAY,IANN;AAONC,eAAW,IAPL;AAQNd,YAAQ;AACNe,SAAG;AADG;AARF;;AAvCA,CAAV;;kBAsDelC,C"
+}

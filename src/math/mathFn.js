@@ -4,6 +4,8 @@ const fnEcho = value => value;
 
 const MAX_TO_ROUND = '1000000';
 
+const _isNumber = n => typeof n === 'number' && !Number.isNaN(n)
+
 const mathFn = {
 
   calcPercent: ({ bValue=Big('0.0'), bTotal=Big('0.0') }) => {
@@ -55,13 +57,20 @@ const mathFn = {
     };
   },
 
-  toFixed : (value) => {
+  toFixed: (value) => {
     const bValue = Big(value);
     if (bValue.gt('10')) {
       return parseInt(bValue.toFixed(0), 10);
     } else {
       return parseFloat(bValue.toFixed(2));
     }
+  },
+
+  toNumberFixed2: (value, n=2) => {
+    if ( !_isNumber(value) || !_isNumber(n)) {
+      return value;
+    }
+    return Number(value.toFixed(n));
   }
 }
 

@@ -10,6 +10,8 @@ var C = {
   WORLD: 'World',
   ALL: 'all',
 
+  NET_WEIGHT: 'NetWeight',
+
   DESCR_EMPTY: 'Dataset is empty.',
 
   MM_DD: '-12-31',

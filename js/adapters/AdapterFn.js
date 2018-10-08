@@ -252,7 +252,7 @@ var AdapterFn = {
     for (var i = 0, max = data.length; i < max; i++) {
       minY = _fn(data[i], minY);
     }
-    return minY !== Number.POSITIVE_INFINITY ? _mathFn2.default.toFixed(minY) : undefined;
+    return minY !== Number.POSITIVE_INFINITY ? _mathFn2.default.toNumberFixed2(minY) : undefined;
   },
   findMaxY: function findMaxY(data) {
     if (!Array.isArray(data) || data.length < 1) {
@@ -267,7 +267,7 @@ var AdapterFn = {
     for (var i = 0, max = data.length; i < max; i++) {
       maxY = _fn(data[i], maxY);
     }
-    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn2.default.toFixed(maxY) : undefined;
+    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn2.default.toNumberFixed2(maxY) : undefined;
   }
 
 };

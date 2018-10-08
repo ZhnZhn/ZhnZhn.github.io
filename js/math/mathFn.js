@@ -16,6 +16,10 @@ var fnEcho = function fnEcho(value) {
 
 var MAX_TO_ROUND = '1000000';
 
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && !Number.isNaN(n);
+};
+
 var mathFn = {
 
   calcPercent: function calcPercent(_ref) {
@@ -79,6 +83,15 @@ var mathFn = {
     } else {
       return parseFloat(bValue.toFixed(2));
     }
+  },
+
+  toNumberFixed2: function toNumberFixed2(value) {
+    var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+
+    if (!_isNumber(value) || !_isNumber(n)) {
+      return value;
+    }
+    return Number(value.toFixed(n));
   }
 };
 

@@ -6,10 +6,10 @@ import crMenuMore from '../dialogs/MenuMore'
 
 const TRADE_FLOW = [
   { caption: "Export Value", value: { rg: 2, measure: "TradeValue" } },
-  { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } },
+  { caption: "Export Weight or Quantity", value: { rg: 2, measure: "NetWeight" } },
   { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } },
   { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } },
-  { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } },
+  { caption: "Import Weight or Quantity", value: { rg: 1, measure: "NetWeight" } },
   { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }
 ];
 

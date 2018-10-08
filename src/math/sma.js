@@ -1,5 +1,8 @@
 import Big from 'big.js';
 
+const _isNumber = v => typeof v === 'number'
+  && !Number.isNaN(v);
+
 const _crPointGetter = (data) => {
   const getX = data[0].x
     ? p => p.x
@@ -16,25 +19,26 @@ const sma = (data, period, plus) => {
     return dataSma;
   }
 
-  const max=data.length
-     , _period = (plus)
+  const _period = (plus)
          ? parseFloat(
-              Big(period)
+            Big(period)
               .plus(plus)
               .minus(1)
               .toFixed(0)
            )
          : parseFloat(
-             Big(period)
-             .minus(1)
-             .toFixed(0)
+            Big(period)
+              .minus(1)
+              .toFixed(0)
            );
-  const { getX, getY } = _crPointGetter(data);
+  const { getX, getY } = _crPointGetter(data)
+  , _data = data.filter(p => _isNumber(getY(p)))
+  , max=_data.length;
   let bSum = Big('0.0')
    , i=0
    , point;
   for (; i<max; i++){
-    point = data[i];
+    point = data[i]
     if (i>_period){
        bSum = bSum.plus(getY(point)).minus(getY(data[i-period]));
        dataSma.push([

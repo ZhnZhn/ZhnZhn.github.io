@@ -40,7 +40,7 @@ var _MenuMore2 = _interopRequireDefault(_MenuMore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TRADE_FLOW = [{ caption: "Export Value", value: { rg: 2, measure: "TradeValue" } }, { caption: "Export Weight", value: { rg: 2, measure: "NetWeight" } }, { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } }, { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } }, { caption: "Import Weight", value: { rg: 1, measure: "NetWeight" } }, { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }];
+var TRADE_FLOW = [{ caption: "Export Value", value: { rg: 2, measure: "TradeValue" } }, { caption: "Export Weight or Quantity", value: { rg: 2, measure: "NetWeight" } }, { caption: "Export Average Price", value: { rg: 2, measure: "avgPrice" } }, { caption: "Import Value", value: { rg: 1, measure: "TradeValue" } }, { caption: "Import Weight or Quantity", value: { rg: 1, measure: "NetWeight" } }, { caption: "Import Average Price", value: { rg: 1, measure: "avgPrice" } }];
 
 var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(UnDialog5, _Component);

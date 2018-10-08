@@ -10,6 +10,10 @@ var _big2 = _interopRequireDefault(_big);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _isNumber = function _isNumber(v) {
+  return typeof v === 'number' && !Number.isNaN(v);
+};
+
 var _crPointGetter = function _crPointGetter(data) {
   var getX = data[0].x ? function (p) {
     return p.x;
@@ -30,12 +34,15 @@ var sma = function sma(data, period, plus) {
     return dataSma;
   }
 
-  var max = data.length,
-      _period = plus ? parseFloat((0, _big2.default)(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big2.default)(period).minus(1).toFixed(0));
+  var _period = plus ? parseFloat((0, _big2.default)(period).plus(plus).minus(1).toFixed(0)) : parseFloat((0, _big2.default)(period).minus(1).toFixed(0));
 
   var _crPointGetter2 = _crPointGetter(data),
       getX = _crPointGetter2.getX,
-      getY = _crPointGetter2.getY;
+      getY = _crPointGetter2.getY,
+      _data = data.filter(function (p) {
+    return _isNumber(getY(p));
+  }),
+      max = _data.length;
 
   var bSum = (0, _big2.default)('0.0'),
       i = 0,

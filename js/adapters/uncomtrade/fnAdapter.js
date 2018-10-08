@@ -123,7 +123,7 @@ var fnAdapter = {
 
     var i = fromIndex;
 
-    _fnHm2.default.toSeriaNames(hm).forEach(function (item) {
+    _fnHm2.default.toSeriaNames(hm, _AdapterFn2.default.compareByValue).forEach(function (item) {
       var name = item.name,
           _isShow = i < _conf2.default.MAX_SHOW ? true : false;
       _this.addSeriaTo({ config: config, hm: hm, name: name, i: i, isShow: _isShow });
