@@ -42,7 +42,9 @@ var _fCrValuePoint = function _fCrValuePoint(pnValue) {
 };
 
 var _crNetWeightPoint = function _crNetWeightPoint(item) {
-  return _crPoint(item.NetWeight || item.TradeQuantity);
+  var _w = item.NetWeight || item.TradeQuantity,
+      _y = _w !== 0 ? _w : item.TradeValue ? undefined : 0;
+  return _crPoint(_y);
 };
 
 var _crAvgPricePoint = function _crAvgPricePoint(item) {
@@ -71,7 +73,7 @@ var _fPoint = function _fPoint(pnValue) {
 
 var _getRecentValueForSort = function _getRecentValueForSort(points) {
   var len = points && points.length;
-  return len > 1 ? points[len - 1].forSort || points[len - 2].forSort : len === 1 ? points[len - 1].forSort : undefined;
+  return len && len > 0 ? points[len - 1].forSort : undefined;
 };
 
 var fnHm = {
@@ -101,12 +103,17 @@ var fnHm = {
         _category = Object.create(null),
         _crPoint = _fPoint(pnValue);
 
+    var _point = void 0;
     dataset.forEach(function (item) {
       var ptTitle = item[pnCountry];
       if (_hm[ptTitle] === undefined) {
         _hm[ptTitle] = [];
       }
-      _hm[ptTitle].push(_crPoint(item));
+
+      _point = _crPoint(item);
+      if (_point.y != null) {
+        _hm[ptTitle].push(_point);
+      }
 
       var period = item.period;
       if (_category[period] === undefined) {

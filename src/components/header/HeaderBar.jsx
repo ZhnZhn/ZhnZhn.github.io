@@ -20,7 +20,7 @@ import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 import { BrowserType as BT, ModalDialog } from '../../constants/Type'
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
-    , CAPTION = "ERC v0.15.0";
+    , CAPTION = "ERC v0.16.0";
 
 const ID = 'HEADER_BAR';
 
@@ -47,7 +47,7 @@ class HeaderBar extends Component {
   constructor(props){
     super()
     this._settingFn = props.store.exportSettingFn()
-    
+
     this._hShowEconomic = BA.showBrowserDynamic.bind(null, BT.ECONOMIC)
     this._hShowEurostat = BA.showBrowserDynamic.bind(null, BT.EUROSTAT)
     this._hShowWatch = BA.showBrowserDynamic.bind(null, BT.WATCH_LIST)

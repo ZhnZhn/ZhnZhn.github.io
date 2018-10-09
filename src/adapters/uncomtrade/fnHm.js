@@ -18,9 +18,12 @@ const _crPoint = (y, forSort) => ({
 const _fCrValuePoint = pnValue =>
    item => _crPoint(item[pnValue]);
 
-const _crNetWeightPoint = item => _crPoint(
-  item.NetWeight || item.TradeQuantity
-);
+const _crNetWeightPoint = item => {
+  const _w = item.NetWeight || item.TradeQuantity
+  , _y = _w !== 0 ? _w
+    : item.TradeValue ? undefined : 0 ;
+  return _crPoint(_y);
+};
 
 const _crAvgPricePoint = item => {
   const {
@@ -55,9 +58,9 @@ const _fPoint = pnValue => {
 
 const _getRecentValueForSort = points => {
    const len = points && points.length;
-   return len > 1
-     ? points[len-1].forSort || points[len-2].forSort
-     : len === 1 ? points[len-1].forSort : undefined;
+   return len && len > 0
+     ? points[len-1].forSort
+     : undefined;  
 };
 
 const fnHm = {
@@ -87,12 +90,17 @@ const fnHm = {
     , _category = Object.create(null)
     , _crPoint = _fPoint(pnValue);
 
+    let _point
     dataset.forEach(item => {
       const ptTitle = item[pnCountry];
       if (_hm[ptTitle] === undefined) {
         _hm[ptTitle] = []
       }
-      _hm[ptTitle].push(_crPoint(item))
+
+      _point = _crPoint(item)
+      if (_point.y != null) {
+        _hm[ptTitle].push(_point)
+      }
 
       const period = item.period;
       if (_category[period] === undefined) {
