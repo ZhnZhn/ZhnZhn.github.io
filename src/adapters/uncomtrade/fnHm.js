@@ -60,7 +60,7 @@ const _getRecentValueForSort = points => {
    const len = points && points.length;
    return len && len > 0
      ? points[len-1].forSort
-     : undefined;  
+     : undefined;
 };
 
 const fnHm = {
@@ -91,20 +91,20 @@ const fnHm = {
     , _crPoint = _fPoint(pnValue);
 
     let _point
-    dataset.forEach(item => {
-      const ptTitle = item[pnCountry];
-      if (_hm[ptTitle] === undefined) {
-        _hm[ptTitle] = []
-      }
-
+    dataset.forEach(item => {      
       _point = _crPoint(item)
       if (_point.y != null) {
-        _hm[ptTitle].push(_point)
-      }
+        const ptTitle = item[pnCountry];
 
-      const period = item.period;
-      if (_category[period] === undefined) {
-        _category[period] = period
+        if (_hm[ptTitle] === undefined) {
+          _hm[ptTitle] = []
+        }
+        _hm[ptTitle].push(_point)
+
+        const period = item.period;
+        if (_category[period] === undefined) {
+          _category[period] = period
+        }
       }
     })
     return {

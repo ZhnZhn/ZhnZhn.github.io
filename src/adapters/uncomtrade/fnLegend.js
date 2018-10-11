@@ -24,7 +24,7 @@ const fnLegend = {
            && key.indexOf(C.WORLD) === -1
       ) {
         const points = hm[key];
-        sum += points[points.length-1].y
+        sum += points[points.length-1].y        
       }
     }
     return sum;

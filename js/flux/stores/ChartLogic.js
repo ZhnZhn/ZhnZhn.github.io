@@ -18,16 +18,6 @@ var _fCompareBy2 = _interopRequireDefault(_fCompareBy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const _get = {
-  sliceConfigs(slice, chartType ){
-    const chartSlice = slice[chartType]
-       , { configs } = chartSlice || {};
-    return { chartSlice, configs };
-  }
-};
-*/
-
 var _getSlice = function _getSlice(slice, chartType) {
   var chartSlice = slice[chartType],
       _ref = chartSlice || {},
@@ -36,7 +26,6 @@ var _getSlice = function _getSlice(slice, chartType) {
   return { chartSlice: chartSlice, configs: configs };
 };
 
-//const _fNot = fn => (v) => !fn(v);
 var _notConfById = function _notConfById(id) {
   return function (c) {
     return c.zhConfig.id !== id;

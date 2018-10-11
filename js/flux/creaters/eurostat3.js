@@ -62,6 +62,7 @@ var createLoadOptions = function createLoadOptions() {
       metricC = _metric$caption === undefined ? '' : _metric$caption,
       metricV = metric.value,
       seriaType = chartType.value,
+      compType = chartType.compType,
       _time = date.value || dateDefault,
       _items = [one, group];
 
@@ -74,6 +75,7 @@ var createLoadOptions = function createLoadOptions() {
     metric: metricV,
     seriaType: seriaType,
     seriaColor: seriaColor,
+    zhCompType: compType,
     //items: [ one, group, metric ],
     items: _items,
     time: _time,

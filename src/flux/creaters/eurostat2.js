@@ -1,7 +1,5 @@
 
 const DF_CAPTION = 'EU';
-    //, AREA = 'AREA';
-
 
 const createLoadOptions = (props={}, options={}) => {
   const {
@@ -25,29 +23,22 @@ const createLoadOptions = (props={}, options={}) => {
   const _zhCompType = chartType.compType
   , _time = (date) ? date.value : dateDefault;
 
-  /*
-  if (_seriaType !== AREA){
-    _zhCompType = chartType.compType;
-    _time = (date) ? date.value : dateDefault;
-  }
-  */  
-
   return {
     ...dfProps,
     itemMap: two,
-    geo : _oneV,
-    metric : two.value,
-    loadId : loadId,
+    geo: _oneV,
+    metric: two.value,
+    loadId: loadId,
     itemCaption: _oneC,
-    title : _oneC,
-    subtitle : two.caption,
-    alertItemId : `${_oneC}:${two.caption}`,
-    alertGeo : _oneC,
-    alertMetric : two.caption,
-    seriaType : _seriaType,
+    title: _oneC,
+    subtitle: two.caption,
+    alertItemId: `${_oneC}:${two.caption}`,
+    alertGeo: _oneC,
+    alertMetric: two.caption,
+    seriaType: _seriaType,
     seriaColor: seriaColor,
-    zhCompType : _zhCompType,
-    time : _time,
+    zhCompType: _zhCompType,
+    time: _time,
     dataSource,
     items: [ one, two ],
     selectOptions

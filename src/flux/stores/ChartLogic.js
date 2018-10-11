@@ -3,23 +3,12 @@ import Factory from '../logic/Factory';
 
 import fCompareBy from './fCompareBy'
 
-/*
-const _get = {
-  sliceConfigs(slice, chartType ){
-    const chartSlice = slice[chartType]
-       , { configs } = chartSlice || {};
-    return { chartSlice, configs };
-  }
-};
-*/
-
 const _getSlice = (slice, chartType) => {
   const chartSlice = slice[chartType]
      , { configs } = chartSlice || {};
   return { chartSlice, configs };
-}
+};
 
-//const _fNot = fn => (v) => !fn(v);
 const _notConfById = id => c => c.zhConfig.id !== id
 const _confById = id => c => c.zhConfig.id === id
 
@@ -120,7 +109,7 @@ const ChartLogic = {
   sortBy(slice, chartType, by){
     const {
             chartSlice, configs
-          } = _getSlice(slice, chartType);          
+          } = _getSlice(slice, chartType);
     if (by) {
       configs.sort(fCompareBy(by))
     } else {

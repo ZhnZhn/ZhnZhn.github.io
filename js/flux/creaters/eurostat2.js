@@ -11,8 +11,6 @@ var _extends3 = _interopRequireDefault(_extends2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DF_CAPTION = 'EU';
-//, AREA = 'AREA';
-
 
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -37,13 +35,6 @@ var createLoadOptions = function createLoadOptions() {
 
   var _zhCompType = chartType.compType,
       _time = date ? date.value : dateDefault;
-
-  /*
-  if (_seriaType !== AREA){
-    _zhCompType = chartType.compType;
-    _time = (date) ? date.value : dateDefault;
-  }
-  */
 
   return (0, _extends3.default)({}, dfProps, {
     itemMap: two,

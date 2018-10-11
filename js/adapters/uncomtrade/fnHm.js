@@ -105,19 +105,19 @@ var fnHm = {
 
     var _point = void 0;
     dataset.forEach(function (item) {
-      var ptTitle = item[pnCountry];
-      if (_hm[ptTitle] === undefined) {
-        _hm[ptTitle] = [];
-      }
-
       _point = _crPoint(item);
       if (_point.y != null) {
-        _hm[ptTitle].push(_point);
-      }
+        var ptTitle = item[pnCountry];
 
-      var period = item.period;
-      if (_category[period] === undefined) {
-        _category[period] = period;
+        if (_hm[ptTitle] === undefined) {
+          _hm[ptTitle] = [];
+        }
+        _hm[ptTitle].push(_point);
+
+        var period = item.period;
+        if (_category[period] === undefined) {
+          _category[period] = period;
+        }
       }
     });
     return {

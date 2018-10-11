@@ -6,7 +6,7 @@ const _isThreeTable = (dfProps, _items, metric) => {
     Object.assign(dfProps, {
       dfTable: metric.value,
       dfTail: metric.dfTail
-    })    
+    })
   }
 };
 
@@ -30,7 +30,7 @@ const createLoadOptions = (props={}, options={}) => {
       , { caption:oneC='', value:oneV } = one
       , { caption:groupC='', value:groupV } = group
       , { caption:metricC='', value:metricV } = metric
-      , { value:seriaType } = chartType
+      , { value:seriaType, compType } = chartType
       , _time = date.value || dateDefault
       , _items = [ one, group ];
 
@@ -40,21 +40,22 @@ const createLoadOptions = (props={}, options={}) => {
 
   return {
     ...dfProps,
-    geo : oneV,
-    group : groupV,
-    metric : metricV,
-    seriaType : seriaType,
-    seriaColor : seriaColor,
+    geo: oneV,
+    group: groupV,
+    metric: metricV,
+    seriaType: seriaType,
+    seriaColor: seriaColor,
+    zhCompType: compType,
     //items: [ one, group, metric ],
     items: _items,
     time: _time,
-    loadId : loadId,
+    loadId: loadId,
     itemCaption: oneC,
-    title : oneC,
-    subtitle : `${groupC}: ${metricC}`,
-    alertItemId : `${oneC}: ${metricC}`,
-    alertGeo : oneC,
-    alertMetric : metricC,
+    title: oneC,
+    subtitle: `${groupC}: ${metricC}`,
+    alertItemId: `${oneC}: ${metricC}`,
+    alertGeo: oneC,
+    alertMetric: metricC,
     dataSource
   }
 };
