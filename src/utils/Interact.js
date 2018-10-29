@@ -1,5 +1,5 @@
 
-import interact from 'interact.js'
+import interact from 'interactjs'
 
 const Interact = {
   dragMoveListener: function(event){
@@ -48,8 +48,9 @@ const Interact = {
 
   makeDragable: function(domNode){
     interact(domNode)
-     .ignoreFrom('[data-scrollable]')
+     //.ignoreFrom('[data-scrollable]')
      .draggable({
+        ignoreFrom: '[data-scrollable]',
         inertia: true,
 
         restrict: {

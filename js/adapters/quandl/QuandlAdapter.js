@@ -9,8 +9,6 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _rToConfig2, _rToSeria2;
-//import flow from 'lodash.flow';
-
 
 var _big = require('big.js');
 
