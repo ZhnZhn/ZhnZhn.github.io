@@ -31,7 +31,7 @@ var adapter = {
         subtitle = option.subtitle,
         data = crData(json[1]),
         seria = (0, _ConfigBuilder2.default)().splineSeria({ data: data }).toSeria(),
-        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addSeries(seria).add((0, _extends3.default)({}, crConfigOptions(option, data))).toConfig();
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends3.default)({}, crConfigOptions(option, data))).toConfig();
 
 
     return { config: config };

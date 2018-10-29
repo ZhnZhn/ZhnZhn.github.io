@@ -7,6 +7,7 @@ import formatAllNumber from '../utils/formatAllNumber'
 import { Direction } from '../constants/Type';
 
 import mathFn from '../math/mathFn';
+import seriaFns from '../math/seriaFn'
 
 import C from '../constants/Color';
 
@@ -245,37 +246,9 @@ const AdapterFn = {
     );
   },
 
-  findMinY: (data) => {
-    if (!Array.isArray(data) || data.length<1 ) {
-      return undefined;
-    }
-    let minY = Number.POSITIVE_INFINITY;
-    const _fn = typeof data[0].y === 'number'
-      ? (p, min) => p.y<min ? p.y : min
-      : (arr, min) => arr[1]<min ? arr[1] : min;
-    for (let i=0, max=data.length; i<max; i++){
-      minY = _fn(data[i], minY)
-    }
-    return minY !== Number.POSITIVE_INFINITY
-      ? mathFn.toNumberFixed2(minY)
-      : undefined;
-  },
-  findMaxY: (data) => {
-    if (!Array.isArray(data) || data.length<1 ) {
-      return undefined;
-    }
-    let maxY = Number.NEGATIVE_INFINITY;
-    const _fn = typeof data[0].y === 'number'
-      ? (p, max) => p.y>max ? p.y : max
-      : (arr, max) => arr[1]>max ? arr[1] : max;
-    for (let i=0, max=data.length; i<max; i++){
-      maxY = _fn(data[i], maxY)
-    }
-    return maxY !== Number.NEGATIVE_INFINITY
-      ? mathFn.toNumberFixed2(maxY)
-      : undefined;
-  }
-
+  findMinY: seriaFns.findMinY,
+  findMaxY: seriaFns.findMaxY
+  
 }
 
 export default AdapterFn

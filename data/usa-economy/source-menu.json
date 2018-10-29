@@ -109,8 +109,7 @@
         "noDate": true,
         "valueFn" : "ROne",
         "loadId" : "BLS",
-        "isProxy": true,
-        "linkFn": "BSL",
+        "isProxy": true,        
         "dataSource": "U.S. Bureau of Labor Statistics (BSL)"
       }
     },

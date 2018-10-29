@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _DfLink = require('./DfLink');
+
+var _DfLink2 = _interopRequireDefault(_DfLink);
+
 var _QuandlLink = require('./QuandlLink');
 
 var _QuandlLink2 = _interopRequireDefault(_QuandlLink);
@@ -32,10 +36,6 @@ var _FredLink = require('./FredLink');
 
 var _FredLink2 = _interopRequireDefault(_FredLink);
 
-var _BslLink = require('./BslLink');
-
-var _BslLink2 = _interopRequireDefault(_BslLink);
-
 var _CrcLink = require('./CrcLink');
 
 var _CrcLink2 = _interopRequireDefault(_CrcLink);
@@ -47,6 +47,7 @@ var _EsLink2 = _interopRequireDefault(_EsLink);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RouterNativeLink = {
+  DF: _DfLink2.default,
   QUANDL: _QuandlLink2.default,
   EURONEXT: _EuronextLink2.default,
   NASDAQ: _NasdaqLink2.default,
@@ -54,7 +55,6 @@ var RouterNativeLink = {
   UN_COMTRADE: _UnComtradeLink2.default,
   FAO_STAT: _FaoStatLink2.default,
   FRED: _FredLink2.default,
-  BSL: _BslLink2.default,
   CRC: _CrcLink2.default,
   ES: _EsLink2.default
 };

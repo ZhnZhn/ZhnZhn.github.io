@@ -2,12 +2,10 @@ import React from 'react'
 
 import Link from './Link'
 
-const CL = "native-link";
 const URL = 'https://www.cryptocompare.com/coins/';
 
 const CrcLink = ({ item, style }) =>
-<Link
-  className={CL}
+<Link  
   style={style}
   caption={`CryptoCompare Overview (${item})`}
   href={`${URL}${item}/overview`}

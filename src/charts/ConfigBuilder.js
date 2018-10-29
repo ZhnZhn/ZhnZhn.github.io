@@ -1,9 +1,13 @@
+import seriaFns from '../math/seriaFn'
+
 import Chart from './Chart'
 import ChartConfig from './ChartConfig'
 import Factory from './ChartFactory'
 import Tooltip from './Tooltip'
 
 import SeriaBuilder from './SeriaBuilder'
+
+const { findMinY, findMaxY } = seriaFns;
 
 const C = {
   CATEGORIES_X_AXIS: {
@@ -213,7 +217,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     this.add({
       zhPoints: data,
       zhIsMfi: true,
-      zhFnGetMfiConfig: fn      
+      zhFnGetMfiConfig: fn
     })
     return this;
   },
@@ -222,6 +226,14 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     return this.add('zhConfig', {
       legend, isWithLegend: true,
     });
+  },
+
+  addMinMax(data, option){
+    return this.setMinMax(
+      findMinY(data),
+      findMaxY(data),
+      option.isNotZoomToMinMax
+    );
   },
 
   setMinMax(minValue, maxValue, noZoom){

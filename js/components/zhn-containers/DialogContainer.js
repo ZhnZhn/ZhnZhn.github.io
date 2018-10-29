@@ -43,9 +43,7 @@ var S = {
 };
 
 var _findCompIndex = function _findCompIndex(arr, key) {
-  var _max = arr.length;
-  var i = 0;
-  for (; i < _max; i++) {
+  for (var i = 0; i < arr.length; i++) {
     if (arr[i].key === key) {
       return i;
     }
@@ -55,7 +53,6 @@ var _findCompIndex = function _findCompIndex(arr, key) {
 
 var _doVisible = function _doVisible(arr, keyValue) {
   var _index = _findCompIndex(arr, keyValue) || 0;
-
   return [].concat((0, _toConsumableArray3.default)(arr.slice(0, _index)), (0, _toConsumableArray3.default)(arr.slice(_index + 1)), [arr[_index]]);
 };
 
@@ -77,7 +74,7 @@ var _updateVisible = function _updateVisible(state, key, maxDialog) {
 
 var _findCompByKey = function _findCompByKey(comps, key) {
   var index = _findCompIndex(comps, key);
-  return index !== undefined ? comps[index] : undefined;
+  return typeof index !== 'undefined' ? comps[index] : undefined;
 };
 
 var DialogContainer = (_temp = _class = function (_Component) {
@@ -98,6 +95,9 @@ var DialogContainer = (_temp = _class = function (_Component) {
               data = option.data,
               maxDialog = _this.props.maxDialog;
 
+          if (Comp && typeof _findCompIndex(prevState.compDialogs, key) !== 'undefined') {
+            return null;
+          }
           _updateVisible(prevState, key, maxDialog);
           if (!Comp) {
             prevState.compDialogs = _doVisible(prevState.compDialogs, key);
@@ -195,9 +195,7 @@ var DialogContainer = (_temp = _class = function (_Component) {
     key: 'componentDidCatch',
     value: function componentDidCatch(error, info) {
       /*
-      console.log('error:')
       console.log(error)
-      console.log('info:')
       console.log(info)
       */
     }

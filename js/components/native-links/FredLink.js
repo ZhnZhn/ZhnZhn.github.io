@@ -14,8 +14,6 @@ var _Link2 = _interopRequireDefault(_Link);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CL = "native-link";
-
 var ROOT = 'https://fred.stlouisfed.org/';
 var C = {
   URL_SEARCH: ROOT + 'search?st=',
@@ -48,19 +46,16 @@ var FredLink = function FredLink(_ref) {
     _react.Fragment,
     null,
     _react2.default.createElement(_Link2.default, {
-      className: CL,
       caption: 'FRED Search',
       href: C.URL_SEARCH + id
     }),
     _react2.default.createElement(Delimeter, null),
     _react2.default.createElement(_Link2.default, {
-      className: CL,
       caption: 'FRED Graph',
       href: C.URL_GRAPH + id
     }),
     _react2.default.createElement(Delimeter, null),
     article && _react2.default.createElement(_Link2.default, {
-      className: CL,
       caption: 'FRED Article',
       href: article
     })
@@ -68,4 +63,4 @@ var FredLink = function FredLink(_ref) {
 };
 
 exports.default = FredLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\FredLink.js.map
+//# sourceMappingURL=FredLink.js.map

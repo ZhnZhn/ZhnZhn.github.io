@@ -85,13 +85,26 @@ var mathFn = {
     }
   },
 
-  toNumberFixed2: function toNumberFixed2(value) {
-    var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-
-    if (!_isNumber(value) || !_isNumber(n)) {
+  /*
+  toNumberFixed2: (value, n=2) => {
+    if ( !_isNumber(value) || !_isNumber(n)) {
       return value;
     }
     return Number(value.toFixed(n));
+  },
+  */
+
+  toFixedNumber: function toFixedNumber(value) {
+    if (!_isNumber(value)) {
+      return value;
+    }
+    if (value < 10) {
+      return Number(value.toFixed(4));
+    } else if (value < 10000) {
+      return Number(value.toFixed(2));
+    } else {
+      return Number(value.toFixed(0));
+    }
   }
 };
 

@@ -4,7 +4,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var C = {
-  URL: 'https://api.bls.gov/publicAPI/v1/timeseries/data'
+  URL: 'https://api.bls.gov/publicAPI/v1/timeseries/data',
+  NATIVE_URL: 'https://data.bls.gov/timeseries'
+};
+
+var _addNativeLinkTo = function _addNativeLinkTo(option) {
+  var value = option.value;
+
+  Object.assign(option, {
+    linkItem: {
+      caption: 'BSL Data Link',
+      href: C.NATIVE_URL + '/' + value
+    }
+  });
 };
 
 var BlsApi = {
@@ -33,6 +45,7 @@ var BlsApi = {
         _option$value = option.value,
         value = _option$value === undefined ? '' : _option$value;
 
+    _addNativeLinkTo(option);
     return '' + proxy + C.URL + '/' + value;
   },
   checkResponse: function checkResponse(json) {
@@ -47,4 +60,4 @@ var BlsApi = {
 };
 
 exports.default = BlsApi;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\bls\BlsApi.js.map
+//# sourceMappingURL=BlsApi.js.map

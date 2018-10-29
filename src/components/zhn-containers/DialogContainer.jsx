@@ -11,21 +11,22 @@ const S = {
 };
 
 const _findCompIndex = (arr, key) => {
-  const _max = arr.length;
-  let  i=0;
-  for (; i<_max; i++){
+  for (let i=0; i<arr.length; i++){
     if (arr[i].key === key){
       return i;
     }
   }
   return undefined;
-}
+};
 
 const _doVisible = function(arr, keyValue){
   const _index = _findCompIndex(arr, keyValue) || 0;
-
-  return [ ...arr.slice(0, _index), ...arr.slice(_index+1), arr[_index] ];
-}
+  return [
+    ...arr.slice(0, _index),
+    ...arr.slice(_index+1),
+    arr[_index]
+  ];
+};
 
 const _updateVisible = (state, key, maxDialog) => {
   const { hmIs, visibleDialogs } = state
@@ -39,14 +40,14 @@ const _updateVisible = (state, key, maxDialog) => {
     hmIs[visibleDialogs[0]] = false
     visibleDialogs.splice(0, 1)
   }
-}
+};
 
 const _findCompByKey = (comps, key) => {
   const index = _findCompIndex(comps, key);
-  return index !== undefined
+  return typeof index !== 'undefined'
      ? comps[index]
      : undefined;
-}
+};
 
 class DialogContainer extends Component {
   static defaultProps = {
@@ -58,8 +59,8 @@ class DialogContainer extends Component {
     this.elHtml = document.getElementsByTagName('html')[0]
     this.state = {
       hmIs: {},
-      compDialogs : [],
-      hmData : {},
+      compDialogs: [],
+      hmData: {},
       visibleDialogs: []
     }
   }
@@ -74,9 +75,7 @@ class DialogContainer extends Component {
 
    componentDidCatch(error, info){
      /*
-     console.log('error:')
      console.log(error)
-     console.log('info:')
      console.log(info)
      */
    }
@@ -88,6 +87,9 @@ class DialogContainer extends Component {
          this.setState(prevState => {
            const { key, Comp, data } = option
                , { maxDialog } = this.props;
+            if (Comp && typeof _findCompIndex(prevState.compDialogs, key) !== 'undefined') {
+              return null;
+            }
            _updateVisible(prevState, key, maxDialog)
            if (!Comp){
               prevState.compDialogs = _doVisible(prevState.compDialogs, key)
@@ -151,7 +153,7 @@ class DialogContainer extends Component {
     });
   }
 
-  render() {    
+  render() {
     return (
       <div style={S.ROOT}>
         {this._renderDialogs()}

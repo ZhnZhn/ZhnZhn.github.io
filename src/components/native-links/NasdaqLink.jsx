@@ -13,8 +13,7 @@ const NasdaqLink = ({ item={}, caption=CAPTION, style }) => {
             ? value.trim()
             : text.split('-')[0].trim();
   return (
-    <Link
-      className="native-link"
+    <Link      
       style={style}
       href={`${NASDAQ_BASE}${_ticket}`}
       caption={`${caption} ${_ticket}`}

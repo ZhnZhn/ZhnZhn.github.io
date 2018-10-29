@@ -5,16 +5,13 @@ import fnAdapter from './fnAdapter';
 const {
   crTitle,
   crData,
-  findMaxY,
-  findMinY,
   crConfigOption
 } = fnAdapter;
 
 const EiaAdapter = {
   toConfig(json, option){
     const {
-      seriaColor,
-      isNotZoomToMinMax
+      seriaColor
     } = option
     , { title, subtitle } = crTitle(option)
     , data = crData(json)
@@ -27,16 +24,12 @@ const EiaAdapter = {
     , config = Builder()
        .area2Config(title, subtitle)
        .addSeries(seria)
-       .setMinMax(
-         findMinY(data),
-         findMaxY(data),
-         isNotZoomToMinMax
-       )
+       .addMinMax(data, option)       
        .add({
         ...crConfigOption({ json, option, data })
        })
        .toConfig();
-    
+
     return { config };
   },
 

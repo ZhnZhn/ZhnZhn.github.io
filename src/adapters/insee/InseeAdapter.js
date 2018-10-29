@@ -20,9 +20,9 @@ const _toData = (str) => {
   const xml = _parser.parseFromString(str, 'text/xml')
       , series = xml.getElementsByTagName('Series')
       , data = [], info = [];
-  let i=0, max = series.length, _seria, _v
-    , minClose = Number.POSITIVE_INFINITY
-    , maxClose = Number.NEGATIVE_INFINITY;
+  let i=0, max = series.length
+  , _seria, _v;
+
   for(i; i<max; i++){
     _seria = series[i]
     info.push({
@@ -41,33 +41,25 @@ const _toData = (str) => {
           AdapterFn.ymdToUTC(node.getAttribute('TIME_PERIOD')),
           _v
         ])
-
-        if (minClose > _v) {
-          minClose = _v
-        }
-        if (maxClose < _v ) {
-          maxClose = _v
-        }
       }
     })
   }
 
   return {
     data: data.sort(AdapterFn.compareByDate),
-    info: info,
-    minClose, maxClose
+    info: info
   };
 }
 
 const InseeAdapter = {
   toConfig(str, option) {
-    const { value, title, subtitle, isNotZoomToMinMax } = option
-        , { data, info, minClose, maxClose } = _toData(str)
+    const { value, title, subtitle } = option
+        , { data, info } = _toData(str)
         , config = Builder()
             .areaConfig({ spacingTop: 25 })
             .addCaption(title, subtitle)
             .addPoints(value, data)
-            .setMinMax(minClose, maxClose, isNotZoomToMinMax)
+            .addMinMax(data, option)
             .add({
               info: fnDescr.toInfo(info, title),
               valueMoving: AdapterFn.valueMoving(data),

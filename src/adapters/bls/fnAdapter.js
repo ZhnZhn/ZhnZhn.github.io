@@ -11,15 +11,17 @@ const _crZhConfig = (option) => {
   const {
           title,
           dataSource, dfTitle,
-          value, linkFn
-        } = option
+          value,
+          linkItem
+        } = option;
   return {
-    id: value, key: value, item: value,    
+    id: value, key: value,
+    item: { ...linkItem },
+    linkFn: 'DF',    
     itemCaption: title,
     isWithoutAdd: true,
     isWithLegend: false,
-    dataSource: appendWithColon(dataSource, dfTitle),
-    linkFn
+    dataSource: appendWithColon(dataSource, dfTitle)
   };
 };
 

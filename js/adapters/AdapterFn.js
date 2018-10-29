@@ -26,6 +26,10 @@ var _mathFn = require('../math/mathFn');
 
 var _mathFn2 = _interopRequireDefault(_mathFn);
 
+var _seriaFn = require('../math/seriaFn');
+
+var _seriaFn2 = _interopRequireDefault(_seriaFn);
+
 var _Color = require('../constants/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
@@ -239,36 +243,8 @@ var AdapterFn = {
     return M.indexOf(String(str).toLowerCase());
   },
 
-  findMinY: function findMinY(data) {
-    if (!Array.isArray(data) || data.length < 1) {
-      return undefined;
-    }
-    var minY = Number.POSITIVE_INFINITY;
-    var _fn = typeof data[0].y === 'number' ? function (p, min) {
-      return p.y < min ? p.y : min;
-    } : function (arr, min) {
-      return arr[1] < min ? arr[1] : min;
-    };
-    for (var i = 0, max = data.length; i < max; i++) {
-      minY = _fn(data[i], minY);
-    }
-    return minY !== Number.POSITIVE_INFINITY ? _mathFn2.default.toNumberFixed2(minY) : undefined;
-  },
-  findMaxY: function findMaxY(data) {
-    if (!Array.isArray(data) || data.length < 1) {
-      return undefined;
-    }
-    var maxY = Number.NEGATIVE_INFINITY;
-    var _fn = typeof data[0].y === 'number' ? function (p, max) {
-      return p.y > max ? p.y : max;
-    } : function (arr, max) {
-      return arr[1] > max ? arr[1] : max;
-    };
-    for (var i = 0, max = data.length; i < max; i++) {
-      maxY = _fn(data[i], maxY);
-    }
-    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn2.default.toNumberFixed2(maxY) : undefined;
-  }
+  findMinY: _seriaFn2.default.findMinY,
+  findMaxY: _seriaFn2.default.findMaxY
 
 };
 

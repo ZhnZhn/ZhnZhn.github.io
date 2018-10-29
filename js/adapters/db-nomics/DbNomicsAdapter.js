@@ -20,15 +20,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var crData = _fnAdapter2.default.crData,
     crTitle = _fnAdapter2.default.crTitle,
-    findMaxY = _fnAdapter2.default.findMaxY,
-    findMinY = _fnAdapter2.default.findMinY,
     crConfigOption = _fnAdapter2.default.crConfigOption;
 
 
 var DbNomicsAdapter = {
   toConfig: function toConfig(json, option) {
     var seriaColor = option.seriaColor,
-        isNotZoomToMinMax = option.isNotZoomToMinMax,
         _crTitle = crTitle(option, json),
         title = _crTitle.title,
         subtitle = _crTitle.subtitle,
@@ -37,7 +34,8 @@ var DbNomicsAdapter = {
       color: seriaColor,
       data: data
     }).toSeria(),
-        config = (0, _ConfigBuilder2.default)().area2Config(title, subtitle).addSeries(seria).setMinMax(findMinY(data), findMaxY(data), isNotZoomToMinMax).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
+        config = (0, _ConfigBuilder2.default)().area2Config(title, subtitle).addSeries(seria).addMinMax(data, option).add((0, _extends3.default)({}, crConfigOption({ json: json, option: option, data: data }))).toConfig();
+
 
     if (data.length > 1000) {
       config.plotOptions = Object.assign(config.plotOptions || {}, {

@@ -1,1 +1,17 @@
-{"version":3,"sources":["../../../src/components/native-links/Link.js"],"names":["Link","className","style","href","caption","LINK"],"mappings":";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO;AAAA,MAAGC,SAAH,QAAGA,SAAH;AAAA,MAAcC,KAAd,QAAcA,KAAd;AAAA,MAAqBC,IAArB,QAAqBA,IAArB;AAAA,MAA2BC,OAA3B,QAA2BA,OAA3B;AAAA,SACX;AAAA;AAAA;AACE,iBAAWH,SADb;AAEE,wCAAY,eAAMI,IAAlB,EAA2BH,KAA3B,CAFF;AAGE,YAAMC;AAHR;AAKGC;AALH,GADW;AAAA,CAAb;;kBASeJ,I","file":"Link.js","sourcesContent":["import React from 'react'\r\n\r\nimport STYLE from './Link.Style'\r\n\r\nconst Link = ({ className, style, href, caption }) =>\r\n  <a\r\n    className={className}\r\n    style={{ ...STYLE.LINK, ...style }}\r\n    href={href}\r\n  >\r\n    {caption}\r\n  </a>\r\n\r\nexport default Link\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/Link.js"
+ ],
+ "file": "../../../src/components/native-links/Link.js",
+ "names": [
+  "Link",
+  "className",
+  "style",
+  "href",
+  "caption",
+  "STYLE",
+  "LINK"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,OAAO,SAAPA,IAAO,OAKP;AAAA,4BAJJC,SAII;AAAA,MAJJA,SAII,kCAJM,aAIN;AAAA,MAHJC,KAGI,QAHJA,KAGI;AAAA,MAFJC,IAEI,QAFJA,IAEI;AAAA,0BADJC,OACI;AAAA,MADJA,OACI,gCADI,aACJ;;AACJ,MAAI,CAACD,IAAL,EAAW;AACT,WAAO,IAAP;AACD;;AAED,SACE;AAAA;AAAA;AACE,iBAAWF,SADb;AAEE,wCAAYI,eAAMC,IAAlB,EAA2BJ,KAA3B,CAFF;AAGE,YAAMC;AAHR;AAKGC;AALH,GADF;AASD,CAnBD;;kBAqBeJ,I"
+}

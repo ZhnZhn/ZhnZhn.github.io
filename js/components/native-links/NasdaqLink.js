@@ -35,7 +35,6 @@ var NasdaqLink = function NasdaqLink(_ref) {
       _ticket = value ? value.trim() : text.split('-')[0].trim();
 
   return _react2.default.createElement(_Link2.default, {
-    className: 'native-link',
     style: style,
     href: '' + NASDAQ_BASE + _ticket,
     caption: caption + ' ' + _ticket
@@ -43,4 +42,4 @@ var NasdaqLink = function NasdaqLink(_ref) {
 };
 
 exports.default = NasdaqLink;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\native-links\NasdaqLink.js.map
+//# sourceMappingURL=NasdaqLink.js.map

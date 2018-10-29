@@ -41,9 +41,8 @@ var _toData = function _toData(str) {
   var i = 0,
       max = series.length,
       _seria = void 0,
-      _v = void 0,
-      minClose = Number.POSITIVE_INFINITY,
-      maxClose = Number.NEGATIVE_INFINITY;
+      _v = void 0;
+
   for (i; i < max; i++) {
     _seria = series[i];
     info.push({
@@ -59,21 +58,13 @@ var _toData = function _toData(str) {
       _v = parseFloat(node.getAttribute('OBS_VALUE'));
       if (!Number.isNaN(_v)) {
         data.push([_AdapterFn2.default.ymdToUTC(node.getAttribute('TIME_PERIOD')), _v]);
-
-        if (minClose > _v) {
-          minClose = _v;
-        }
-        if (maxClose < _v) {
-          maxClose = _v;
-        }
       }
     });
   }
 
   return {
     data: data.sort(_AdapterFn2.default.compareByDate),
-    info: info,
-    minClose: minClose, maxClose: maxClose
+    info: info
   };
 };
 
@@ -82,13 +73,10 @@ var InseeAdapter = {
     var value = option.value,
         title = option.title,
         subtitle = option.subtitle,
-        isNotZoomToMinMax = option.isNotZoomToMinMax,
         _toData2 = _toData(str),
         data = _toData2.data,
         info = _toData2.info,
-        minClose = _toData2.minClose,
-        maxClose = _toData2.maxClose,
-        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).setMinMax(minClose, maxClose, isNotZoomToMinMax).add({
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).addMinMax(data, option).add({
       info: _fnDescr2.default.toInfo(info, title),
       valueMoving: _AdapterFn2.default.valueMoving(data),
       zhConfig: _crZhConfig(value),

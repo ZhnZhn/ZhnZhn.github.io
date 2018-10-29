@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Link = require('./Link.Style');
+var _Link = require('./Link');
 
 var _Link2 = _interopRequireDefault(_Link);
 
@@ -22,15 +22,10 @@ var EuronextLink = function EuronextLink(_ref) {
       item = _ref$item === undefined ? {} : _ref$item,
       _ref$caption = _ref.caption,
       caption = _ref$caption === undefined ? CAPTION : _ref$caption;
-  return _react2.default.createElement(
-    'a',
-    {
-      className: 'native-link',
-      style: _Link2.default.LINK,
-      href: '' + EURONEXT_BASE + item.isin + '-' + item.market
-    },
-    caption + ' ' + item.caption
-  );
+  return _react2.default.createElement(_Link2.default, {
+    caption: caption + ' ' + item.caption,
+    href: '' + EURONEXT_BASE + item.isin + '-' + item.market
+  });
 };
 
 exports.default = EuronextLink;

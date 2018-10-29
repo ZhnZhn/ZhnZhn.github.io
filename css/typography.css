@@ -12,11 +12,13 @@
 .native-link {
   color: #0b8fff;
   font-weight: bold;
-  border-bottom: thin solid;
+  border-bottom: 1px solid;
   text-decoration: none;
+  margin-bottom: 2px;
 }
 .native-link:hover {
-  border-bottom-width: medium;
+  border-bottom-width: 3px;
+  margin-bottom: 0;
 }
 
 .descr-datasource h1 {

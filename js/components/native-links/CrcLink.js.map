@@ -1,15 +1,14 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\components\\native-links\\CrcLink.jsx",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\components\\native-links\\CrcLink.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/components/native-links/CrcLink.js"
+ ],
+ "file": "../../../src/components/native-links/CrcLink.js",
  "names": [
-  "CL",
   "URL",
   "CrcLink",
   "item",
   "style"
  ],
- "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,KAAK,aAAX;AACA,IAAMC,MAAM,sCAAZ;;AAEA,IAAMC,UAAU,SAAVA,OAAU;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SAChB;AACE,eAAWJ,EADb;AAEE,WAAOI,KAFT;AAGE,0CAAoCD,IAApC,MAHF;AAIE,eAASF,GAAT,GAAeE,IAAf;AAJF,IADgB;AAAA,CAAhB;;kBAQeD,O"
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,MAAM,sCAAZ;;AAEA,IAAMC,UAAU,SAAVA,OAAU;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,SAChB,8BAAC,cAAD;AACE,WAAOA,KADT;AAEE,0CAAoCD,IAApC,MAFF;AAGE,eAASF,GAAT,GAAeE,IAAf;AAHF,IADgB;AAAA,CAAhB;;kBAOeD,O"
 }

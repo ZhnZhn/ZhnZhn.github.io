@@ -26,7 +26,6 @@ var LmeLink = function LmeLink(_ref) {
       _path = String(caption).toLowerCase().replace(' ', '-');
 
   return _react2.default.createElement(_Link2.default, {
-    className: 'native-link',
     caption: LME + caption,
     href: BASE_URL + _path
   });

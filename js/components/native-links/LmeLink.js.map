@@ -1,1 +1,19 @@
-{"version":3,"sources":["../../../src/components/native-links/LmeLink.jsx"],"names":["BASE_URL","LME","LmeLink","item","caption","_path","String","toLowerCase","replace"],"mappings":";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,WAAW,yCAAjB;AACA,IAAMC,MAAM,yBAAZ;;AAEA,IAAMC,UAAU,SAAVA,OAAU,OAAiB;AAAA,uBAAdC,IAAc;AAAA,MAAdA,IAAc,6BAAT,EAAS;;AAAA,sBACRA,IADQ,CACvBC,OADuB;AAAA,MACvBA,OADuB,iCACf,EADe;AAAA,MAEzBC,KAFyB,GAEjBC,OAAOF,OAAP,EACIG,WADJ,GAEIC,OAFJ,CAEY,GAFZ,EAEiB,GAFjB,CAFiB;;AAK/B,SACI;AACE,eAAU,aADZ;AAEE,aAASP,MAAMG,OAFjB;AAGE,UAAMJ,WAASK;AAHjB,IADJ;AAOD,CAZD;;kBAceH,O","file":"LmeLink.js","sourcesContent":["import React from 'react'\r\n\r\nimport Link from './Link'\r\n\r\nconst BASE_URL = 'https://www.lme.com/metals/non-ferrous/';\r\nconst LME = 'London Metal Exchange: '\r\n\r\nconst LmeLink = ({ item={} }) => {\r\n  const { caption='' } = item\r\n      , _path = String(caption)\r\n                   .toLowerCase()\r\n                   .replace(' ', '-');\r\n  return (\r\n      <Link\r\n        className=\"native-link\"\r\n        caption={LME + caption}\r\n        href={BASE_URL+_path}\r\n      />\r\n  );\r\n}\r\n\r\nexport default LmeLink\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/native-links/LmeLink.js"
+ ],
+ "file": "../../../src/components/native-links/LmeLink.js",
+ "names": [
+  "BASE_URL",
+  "LME",
+  "LmeLink",
+  "item",
+  "caption",
+  "_path",
+  "String",
+  "toLowerCase",
+  "replace"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,WAAW,yCAAjB;AACA,IAAMC,MAAM,yBAAZ;;AAEA,IAAMC,UAAU,SAAVA,OAAU,OAAiB;AAAA,uBAAdC,IAAc;AAAA,MAAdA,IAAc,6BAAT,EAAS;;AAAA,sBACRA,IADQ,CACvBC,OADuB;AAAA,MACvBA,OADuB,iCACf,EADe;AAAA,MAEzBC,KAFyB,GAEjBC,OAAOF,OAAP,EACIG,WADJ,GAEIC,OAFJ,CAEY,GAFZ,EAEiB,GAFjB,CAFiB;;AAK/B,SACI,8BAAC,cAAD;AACE,aAASP,MAAMG,OADjB;AAEE,UAAMJ,WAASK;AAFjB,IADJ;AAMD,CAXD;;kBAaeH,O"
+}

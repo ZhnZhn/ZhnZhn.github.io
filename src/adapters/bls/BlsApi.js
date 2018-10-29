@@ -1,6 +1,17 @@
 const C = {
-  URL: 'https://api.bls.gov/publicAPI/v1/timeseries/data'
+  URL: 'https://api.bls.gov/publicAPI/v1/timeseries/data',
+  NATIVE_URL: 'https://data.bls.gov/timeseries'
 };
+
+const _addNativeLinkTo = (option) => {
+  const { value } = option;
+  Object.assign(option, {
+    linkItem: {
+      caption: 'BSL Data Link',
+      href: `${C.NATIVE_URL}/${value}`
+    }
+  })
+}
 
 const BlsApi = {
 
@@ -28,7 +39,8 @@ const BlsApi = {
     const {
            proxy='',
            value=''
-         } = option
+         } = option;
+    _addNativeLinkTo(option)     
     return `${proxy}${C.URL}/${value}`;
   },
   checkResponse(json){

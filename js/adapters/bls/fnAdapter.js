@@ -25,15 +25,16 @@ var _crZhConfig = function _crZhConfig(option) {
       dataSource = option.dataSource,
       dfTitle = option.dfTitle,
       value = option.value,
-      linkFn = option.linkFn;
+      linkItem = option.linkItem;
 
   return {
-    id: value, key: value, item: value,
+    id: value, key: value,
+    item: (0, _extends3.default)({}, linkItem),
+    linkFn: 'DF',
     itemCaption: title,
     isWithoutAdd: true,
     isWithLegend: false,
-    dataSource: appendWithColon(dataSource, dfTitle),
-    linkFn: linkFn
+    dataSource: appendWithColon(dataSource, dfTitle)
   };
 };
 

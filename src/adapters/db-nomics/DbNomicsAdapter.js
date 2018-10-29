@@ -5,16 +5,13 @@ import fnAdapter from './fnAdapter';
 const {
   crData,
   crTitle,
-  findMaxY,
-  findMinY,
   crConfigOption
 } = fnAdapter;
 
 const DbNomicsAdapter = {
   toConfig(json, option){
     const {
-      seriaColor,
-      isNotZoomToMinMax
+      seriaColor
     } = option
     , { title, subtitle } = crTitle(option, json)
     , data = crData(json)
@@ -27,11 +24,7 @@ const DbNomicsAdapter = {
     , config = Builder()
        .area2Config(title, subtitle)
        .addSeries(seria)
-       .setMinMax(
-         findMinY(data),
-         findMaxY(data),
-         isNotZoomToMinMax
-       )
+       .addMinMax(data, option)       
        .add({
         ...crConfigOption({ json, option, data })
        })
@@ -45,7 +38,7 @@ const DbNomicsAdapter = {
           }
         }
       )
-    }    
+    }
     return { config };
   },
 

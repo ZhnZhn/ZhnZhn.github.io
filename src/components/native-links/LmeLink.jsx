@@ -11,8 +11,7 @@ const LmeLink = ({ item={} }) => {
                    .toLowerCase()
                    .replace(' ', '-');
   return (
-      <Link
-        className="native-link"
+      <Link        
         caption={LME + caption}
         href={BASE_URL+_path}
       />

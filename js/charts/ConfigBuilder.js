@@ -12,6 +12,10 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _seriaFn = require('../math/seriaFn');
+
+var _seriaFn2 = _interopRequireDefault(_seriaFn);
+
 var _Chart = require('./Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
@@ -33,6 +37,10 @@ var _SeriaBuilder = require('./SeriaBuilder');
 var _SeriaBuilder2 = _interopRequireDefault(_SeriaBuilder);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var findMinY = _seriaFn2.default.findMinY,
+    findMaxY = _seriaFn2.default.findMaxY;
+
 
 var C = {
   CATEGORIES_X_AXIS: {
@@ -239,6 +247,9 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     return this.add('zhConfig', {
       legend: legend, isWithLegend: true
     });
+  },
+  addMinMax: function addMinMax(data, option) {
+    return this.setMinMax(findMinY(data), findMaxY(data), option.isNotZoomToMinMax);
   },
   setMinMax: function setMinMax(minValue, maxValue, noZoom) {
     var plotLines = this.config.yAxis.plotLines;

@@ -15,8 +15,6 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    findMaxY = _AdapterFn2.default.findMaxY,
-    findMinY = _AdapterFn2.default.findMinY,
     crZhFn = _AdapterFn2.default.crZhFn,
     valueMoving = _AdapterFn2.default.valueMoving;
 
@@ -59,9 +57,6 @@ var _isNumber = function _isNumber(n) {
 };
 
 var fnAdapter = {
-  findMaxY: findMaxY,
-  findMinY: findMinY,
-
   crTitle: function crTitle(option, json) {
     var title = json.series.name || '',
         subtitle = '';

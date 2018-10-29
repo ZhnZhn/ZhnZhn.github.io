@@ -8,6 +8,10 @@ var _big = require('big.js');
 
 var _big2 = _interopRequireDefault(_big);
 
+var _mathFn = require('./mathFn');
+
+var _mathFn2 = _interopRequireDefault(_mathFn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _calcY = function _calcY(pPrev, pNext) {
@@ -37,6 +41,37 @@ var fn = {
       pPrev = pNext;
     }
     return _d;
+  },
+
+  findMinY: function findMinY(data) {
+    if (!Array.isArray(data) || data.length < 1) {
+      return undefined;
+    }
+    var minY = Number.POSITIVE_INFINITY;
+    var _fn = typeof data[0].y === 'number' ? function (p, min) {
+      return p.y < min ? p.y : min;
+    } : function (arr, min) {
+      return arr[1] < min ? arr[1] : min;
+    };
+    for (var i = 0, max = data.length; i < max; i++) {
+      minY = _fn(data[i], minY);
+    }
+    return minY !== Number.POSITIVE_INFINITY ? _mathFn2.default.toFixedNumber(minY) : undefined;
+  },
+  findMaxY: function findMaxY(data) {
+    if (!Array.isArray(data) || data.length < 1) {
+      return undefined;
+    }
+    var maxY = Number.NEGATIVE_INFINITY;
+    var _fn = typeof data[0].y === 'number' ? function (p, max) {
+      return p.y > max ? p.y : max;
+    } : function (arr, max) {
+      return arr[1] > max ? arr[1] : max;
+    };
+    for (var i = 0, max = data.length; i < max; i++) {
+      maxY = _fn(data[i], maxY);
+    }
+    return maxY !== Number.NEGATIVE_INFINITY ? _mathFn2.default.toFixedNumber(maxY) : undefined;
   }
 };
 

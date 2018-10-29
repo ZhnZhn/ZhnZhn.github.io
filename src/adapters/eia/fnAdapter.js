@@ -2,9 +2,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   crZhFn,
-  valueMoving,
-  findMaxY,
-  findMinY
+  valueMoving
 } = AdapterFn;
 
 const C = {
@@ -89,9 +87,7 @@ const fnAdapter = {
       y: arr[1]
     }))
     .reverse();
-  },
-  findMaxY: findMaxY,
-  findMinY: findMinY,
+  },  
 
   crConfigOption: ({ json, option, data }) => ({
     zhConfig: _crZhConfig(json, option),

@@ -2,8 +2,6 @@ import AdapterFn from '../AdapterFn'
 
 const {
   ymdToUTC,
-  findMaxY,
-  findMinY,
   crZhFn,
   valueMoving
 } = AdapterFn;
@@ -44,9 +42,7 @@ const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
 const fnAdapter = {
-  findMaxY: findMaxY,
-  findMinY: findMinY,
-
+    
   crTitle(option, json){
     const title = json.series.name || ''
     , subtitle = '';

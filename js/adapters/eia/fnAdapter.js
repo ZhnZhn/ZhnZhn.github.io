@@ -15,9 +15,7 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var crZhFn = _AdapterFn2.default.crZhFn,
-    valueMoving = _AdapterFn2.default.valueMoving,
-    findMaxY = _AdapterFn2.default.findMaxY,
-    findMinY = _AdapterFn2.default.findMinY;
+    valueMoving = _AdapterFn2.default.valueMoving;
 
 
 var C = {
@@ -101,8 +99,6 @@ var fnAdapter = {
     }).reverse();
   },
 
-  findMaxY: findMaxY,
-  findMinY: findMinY,
 
   crConfigOption: function crConfigOption(_ref) {
     var json = _ref.json,

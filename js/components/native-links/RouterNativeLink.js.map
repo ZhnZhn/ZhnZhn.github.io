@@ -6,16 +6,26 @@
  "file": "../../../src/components/native-links/RouterNativeLink.js",
  "names": [
   "RouterNativeLink",
+  "DF",
+  "DfLink",
   "QUANDL",
+  "QuandlLink",
   "EURONEXT",
+  "EuronextLink",
   "NASDAQ",
+  "NasdaqLink",
   "LME",
+  "LmeLink",
   "UN_COMTRADE",
+  "UnComtradeLink",
   "FAO_STAT",
+  "FaoStatLink",
   "FRED",
-  "BSL",
+  "FredLink",
   "CRC",
-  "ES"
+  "CrcLink",
+  "ES",
+  "EsLink"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB;AACvBC,8BADuB;AAEvBC,kCAFuB;AAGvBC,8BAHuB;AAIvBC,wBAJuB;AAKvBC,uCALuB;AAMvBC,iCANuB;AAOvBC,0BAPuB;AAQvBC,wBARuB;AASvBC,wBATuB;AAUvBC;AAVuB,CAAzB;;kBAaeV,gB"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB;AACvBC,MAAIC,gBADmB;AAEvBC,UAAQC,oBAFe;AAGvBC,YAAUC,sBAHa;AAIvBC,UAAQC,oBAJe;AAKvBC,OAAKC,iBALkB;AAMvBC,eAAaC,wBANU;AAOvBC,YAAUC,qBAPa;AAQvBC,QAAMC,kBARiB;AASvBC,OAAKC,iBATkB;AAUvBC,MAAIC;AAVmB,CAAzB;;kBAaepB,gB"
 }

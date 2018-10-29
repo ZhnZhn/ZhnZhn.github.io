@@ -14,7 +14,6 @@ var _Link2 = _interopRequireDefault(_Link);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CL = "native-link";
 var URL = 'http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=';
 
 var S = {
@@ -36,7 +35,6 @@ var EsLink = function EsLink(_ref) {
       'li',
       null,
       _react2.default.createElement(_Link2.default, {
-        className: CL,
         caption: 'Eurostat Raw Data Link',
         href: item.href
       })
@@ -45,7 +43,6 @@ var EsLink = function EsLink(_ref) {
       'li',
       null,
       _react2.default.createElement(_Link2.default, {
-        className: CL,
         caption: 'Eurostat Dataset Viewer (Http)',
         href: '' + URL + item.dataset
       })

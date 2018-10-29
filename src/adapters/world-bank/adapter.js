@@ -7,15 +7,18 @@ const adapter = {
   crKey: crId,
 
   toConfig(json, option){
-    const { title, subtitle } = option
+    const {
+      title, subtitle
+    } = option
     , data = crData(json[1])
     , seria = Builder()
        .splineSeria({ data })
        .toSeria()
     , config = Builder()
-       .areaConfig({ spacingTop: 25 })       
+       .areaConfig({ spacingTop: 25 })
        .addCaption(title, subtitle)
        .addSeries(seria)
+       .addMinMax(data, option)
        .add({
           ...crConfigOptions(option, data)
        })
