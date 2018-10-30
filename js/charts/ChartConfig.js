@@ -89,8 +89,6 @@ var merge = _highcharts2.default.merge;
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
-//import merge from 'lodash.merge';
-
 var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default, {
   init: function init() {
     (0, _highchartsMore2.default)(_highcharts2.default);

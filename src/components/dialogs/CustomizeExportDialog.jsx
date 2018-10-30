@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import merge from 'lodash.merge';
 
 import ChartExportConfig from '../../charts/ChartExportConfig';
 

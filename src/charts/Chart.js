@@ -1,5 +1,4 @@
 
-//import merge from 'lodash.merge';
 import Highcharts from 'highcharts';
 
 import COLOR from '../constants/Color';

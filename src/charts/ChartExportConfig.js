@@ -1,4 +1,3 @@
-//import merge from 'lodash.merge';
 import Highcharts from 'highcharts';
 
 const merge = Highcharts.merge;

@@ -36,35 +36,18 @@ var _MapFactory2 = _interopRequireDefault(_MapFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*eslint-disable no-undef */
-
-//import merge from 'lodash.merge'
-
-if (process.env.NODE_ENV !== 'development') {
-  if (window.System && window.System.config) {
-    window.System.config({
-      baseURL: "/"
-    });
-  }
-}
-/*eslint-enable no-undef */
-
-var URL_LEAFLET = 'lib/leaflet.js',
-    URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
+var URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json',
     NUMBER_OF_CLUSTERS = 6,
     NUMBER_OF_ITERATION = 100,
     COLORS = ['#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b', '#74c476'];
 
-var _findFeature = function _findFeature() {
-  var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var value = arguments[1];
-
-  var i = 0,
-      len = arr.length;
-  for (; i < len; i++) {
-    var feature = arr[i];
-    if (feature.properties.id === value) {
-      return feature;
+var _findFeature = function _findFeature(features, value) {
+  if (!Array.isArray(features)) {
+    return undefined;
+  }
+  for (var i = 0; i < features.length; i++) {
+    if (features[i] && features[i].properties && features[i].properties.id === value) {
+      return features[i];
     }
   }
   return undefined;
@@ -323,7 +306,10 @@ var ChoroplethMap = {
     if (this.L) {
       return Promise.resolve(this.L);
     } else {
-      return window.System.import(URL_LEAFLET).then(function (L) {
+      return System.import(
+      /* webpackChunkName: "leaflet" */
+      /* webpackMode: "lazy" */
+      'leaflet').then(function (L) {
         return _this.L = L;
       });
     }
@@ -357,11 +343,13 @@ var ChoroplethMap = {
       */
 
       L.tileLayer('', {
-        //id: 'addis',
         id: id + '_tile'
       }).addTo(map);
 
-      return { jsonCube: jsonCube, zhMapSlice: zhMapSlice, L: L, map: map, mapId: id };
+      return {
+        jsonCube: jsonCube, zhMapSlice: zhMapSlice,
+        L: L, map: map, mapId: id
+      };
     }).then(function (option) {
       return _this3.getGeoJson(URL_EU_GEOJSON).then(function (geoJson) {
         option.geoJson = geoJson;

@@ -62,8 +62,6 @@ var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import merge from 'lodash.merge';
-
 var S = {
   GAP_BETWEEN_GROUP: {
     marginTop: '10px'

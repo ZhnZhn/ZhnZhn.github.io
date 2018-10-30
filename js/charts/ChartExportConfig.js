@@ -10,8 +10,7 @@ var _highcharts2 = _interopRequireDefault(_highcharts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var merge = _highcharts2.default.merge; //import merge from 'lodash.merge';
-
+var merge = _highcharts2.default.merge;
 
 var ChartExportConfig = {
 

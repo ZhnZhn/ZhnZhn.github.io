@@ -1,5 +1,4 @@
 import { render } from 'react-dom'
-//import merge from 'lodash.merge'
 
 import JsonStatFn from './JsonStatFn'
 import clusterMaker from '../../math/k-means'
@@ -9,34 +8,25 @@ import merge from '../../utils/merge'
 
 import MapFactory from '../../components/factories/MapFactory'
 
-/*eslint-disable no-undef */
-if ( process.env.NODE_ENV !== 'development'){
-  if (window.System && window.System.config) {
-    window.System.config({
-      baseURL: "/"
-    });
+const URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
+, NUMBER_OF_CLUSTERS = 6
+, NUMBER_OF_ITERATION = 100
+, COLORS = [
+   '#9ecae1', '#6baed6',
+   '#4292c6', '#2171b5',
+   '#08519c', '#08306b',
+   '#74c476'
+  ];
+
+const _findFeature = function(features, value){
+  if (!Array.isArray(features)) {
+    return undefined;
   }
-}
-/*eslint-enable no-undef */
-
-const URL_LEAFLET = 'lib/leaflet.js'
-    , URL_EU_GEOJSON = 'data/geo/eu-stat.geo.json'
-    , NUMBER_OF_CLUSTERS = 6
-    , NUMBER_OF_ITERATION = 100
-    , COLORS = [
-          '#9ecae1', '#6baed6',
-          '#4292c6', '#2171b5',
-          '#08519c', '#08306b',
-          '#74c476'
-      ];
-
-const _findFeature = function(arr=[], value){
-  let i=0, len=arr.length;
-  for(; i<len; i++){
-     const feature = arr[i]
-     if (feature.properties.id === value){
-       return feature;
-     }
+  for(let i=0; i<features.length; i++){
+    if (features[i] && features[i].properties 
+      && features[i].properties.id === value){
+      return features[i];
+    }
   }
   return undefined;
 };
@@ -200,8 +190,8 @@ const  _fnOnMouseOut = function(infoControl, e){
 }
 const _fnOnEachFeature = function(infoControl, feature, layer){
    layer.on({
-     mouseover : _fnOnMouseOver.bind(null, infoControl),
-     mouseout : _fnOnMouseOut.bind(null, infoControl)
+     mouseover: _fnOnMouseOver.bind(null, infoControl),
+     mouseout: _fnOnMouseOut.bind(null, infoControl)
    })
 }
 
@@ -254,8 +244,8 @@ const _crGeoJson = (geoJson) => {
 }
 
 const ChoroplethMap = {
-  hmUrlGeoJson : {},
-  L : undefined,
+  hmUrlGeoJson: {},
+  L: undefined,
   mapOption: {
     doubleClickZoom: false
   },
@@ -264,8 +254,13 @@ const ChoroplethMap = {
     if (this.L){
       return Promise.resolve(this.L);
     } else {
-      return window.System.import(URL_LEAFLET)
-                .then( L => { return this.L = L; })
+      return import(
+        /* webpackChunkName: "leaflet" */
+        /* webpackMode: "lazy" */
+        'leaflet'
+      ).then(L => {
+        return this.L = L;
+      });
     }
   },
 
@@ -282,35 +277,37 @@ const ChoroplethMap = {
 
   draw(id, jsonCube, zhMapSlice){
     return this.getLeaflet()
-             .then( (L) => {
-                const map = L.map(id, this.mapOption)
-                             .setView([58.00, 10.00], 3);
+       .then( (L) => {
+          const map = L.map(id, this.mapOption)
+            .setView([58.00, 10.00], 3);
 
-                /*
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                     id: 'addis',
-                     attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                     errorTileUrl: ''
-                }).addTo(map);
-                */
+          /*
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+               id: 'addis',
+               attribution: '&copy; <a  href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+               errorTileUrl: ''
+          }).addTo(map);
+          */
 
-                L.tileLayer('', {
-                     //id: 'addis',
-                     id: id + '_tile'
-                }).addTo(map);
+          L.tileLayer('', {
+               id: id + '_tile'
+          }).addTo(map);
 
-                return { jsonCube, zhMapSlice, L, map, mapId: id };
-             })
-             .then ( (option) => {
-                 return this.getGeoJson(URL_EU_GEOJSON)
-                           .then( (geoJson) => {
-                              option.geoJson = geoJson;
-                              return option;
-                           });
-            })
-            .then( (option) => {
-                return Promise.resolve(_createChoroplethMap(option));
-            });
+          return {
+            jsonCube, zhMapSlice,
+            L, map, mapId: id
+          };
+       })
+       .then(option => {
+          return this.getGeoJson(URL_EU_GEOJSON)
+           .then( (geoJson) => {
+              option.geoJson = geoJson;
+              return option;
+           });
+       })
+       .then(option => Promise.resolve(
+         _createChoroplethMap(option)
+       ));
   }
 };
 

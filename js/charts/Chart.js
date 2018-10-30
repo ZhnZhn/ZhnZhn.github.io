@@ -23,8 +23,6 @@ var _Tooltip2 = _interopRequireDefault(_Tooltip);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var merge = _highcharts2.default.merge;
-//import merge from 'lodash.merge';
-
 
 var S = {
   TITLE_BASE: {

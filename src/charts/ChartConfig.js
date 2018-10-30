@@ -12,8 +12,6 @@ import HighchartsFix from './plugin/fix-highcharts'
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
-//import merge from 'lodash.merge';
-
 import COLOR from '../constants/Color';
 import Chart from './Chart';
 import ChartFn from './ChartFn';
@@ -90,7 +88,7 @@ const ChartConfig = {
       this.seriaOption(COLOR.S_OPEN, this._zhSeriaId(id+'O'))
     )
   },
-  
+
   getColor(seriaIndex) {
     const colors = ChartTheme.colors;
     return colors[seriaIndex % colors.length];
