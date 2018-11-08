@@ -56,8 +56,8 @@
     "localforage": "^1.5.0",
     "query-string": "^4.3.4",
     "raven-js": "^3.14.2",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
     "reflux": "^5.0.4"
   },
   "jspm": {
@@ -75,8 +75,8 @@
       "prop-types": "npm:prop-types@^15.6.0",
       "query-string": "npm:query-string@4.3.4",
       "raven-js": "github:getsentry/raven-js@^3.14.2",
-      "react": "npm:react@16.6.0",
-      "react-dom": "npm:react-dom@16.6.0",
+      "react": "npm:react@^16.6.1",
+      "react-dom": "npm:react-dom@^16.6.1",
       "react-test-renderer": "npm:react-test-renderer@16.4.2",
       "reflux": "npm:reflux@^5.0.4",
       "systemjs": "npm:systemjs@^0.19.41"
