@@ -18,35 +18,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var C = {
   LIMIT_REMAINING: 'X-RateLimit-Remaining',
   REQ_ERR: 'Request Error',
-  RESP_ERR: 'Response Error'
+  RESP_ERR: 'Response Error',
+
+  MSG_400: '400: Bad request.',
+  MSG_404: '404: Resource is not existed.',
+  MSG_429: '429: Too many request in a given amount of time (rate limiting).',
+  MSG_503: '503: Back-end server is at capacity.'
 };
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var _fnMsg400 = function _fnMsg400(option) {
-  if (option.loadId === "EU_STAT") {
-    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try to request this data set with older date or another country.';
-  } else {
-    return '400: Bad request.';
-  }
-};
-
-var _fnMsg404 = function _fnMsg404() {
-  return '404: Resource is not existed.';
-};
-var _fnMsg429 = function _fnMsg429() {
-  return '429: Too many request in a given amount of time (rate limiting).';
-};
-var _fnMsg503 = function _fnMsg503() {
-  return '503: Back-end server is at capacity.';
+var _isInArrValue = function _isInArrValue(arr, value) {
+  return Array.isArray(arr) && arr.indexOf(value) !== -1;
 };
 
 var _crErr = function _crErr(message) {
   var errCaption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : C.REQ_ERR;
+  return {
+    errCaption: errCaption,
+    message: message
+  };
+};
 
-  return { errCaption: errCaption, message: message };
+var _throwIfNotStatus = function _throwIfNotStatus(errStatus, status, msg) {
+  if (!_isInArrValue(errStatus, status)) {
+    throw _crErr(msg);
+  }
+};
+
+var _promiseAll = function _promiseAll(res, propName, status) {
+  var headers = res.headers,
+      _limitRemaining = headers && _isFn(headers.get) ? headers.get(C.LIMIT_REMAINING) : undefined;
+  return Promise.all([Promise.resolve(_limitRemaining), res[propName](), Promise.resolve(status)]);
 };
 
 var _fFetch = function _fFetch(propName, type) {
@@ -65,38 +70,36 @@ var _fFetch = function _fFetch(propName, type) {
     _fnFetch(uri, optionFetch).then(function (response) {
       var status = response.status,
           statusText = response.statusText,
-          _response$headers = response.headers,
-          headers = _response$headers === undefined ? {} : _response$headers,
-          ok = response.ok;
+          ok = response.ok,
+          resErrStatus = option.resErrStatus;
 
       if (status >= 200 && status < 400 || ok) {
-        if (_isFn(headers.get)) {
-          return Promise.all([Promise.resolve(headers.get(C.LIMIT_REMAINING)), response[propName]()]);
-        } else {
-          return Promise.all([Promise.resolve(undefined), response[propName]()]);
-        }
+        return _promiseAll(response, propName);
       } else if (status === 400) {
-        throw _crErr(_fnMsg400(option));
+        _throwIfNotStatus(resErrStatus, status, C.MSG_400);
+        return _promiseAll(response, propName, status);
       } else if (status === 404) {
-        throw _crErr(_fnMsg404(option));
+        throw _crErr(C.MSG_404);
       } else if (status === 429) {
-        throw _crErr(_fnMsg429(option));
+        throw _crErr(C.MSG_429);
       } else if (status > 400 && status < 500) {
-        throw _crErr(status + ': ' + statusText);
+        _throwIfNotStatus(resErrStatus, status, status + ': ' + statusText);
+        return _promiseAll(response, propName, status);
       } else if (status === 503) {
-        throw _crErr(_fnMsg503(option));
+        throw _crErr(C.MSG_503);
       } else if (status >= 500 && status < 600) {
         throw _crErr(status + ': ' + statusText, C.RESP_ERR);
       } else {
-        return [undefined, {}];
+        return [undefined, {}, status];
       }
     }).then(function (_ref2) {
-      var _ref3 = (0, _slicedToArray3.default)(_ref2, 2),
+      var _ref3 = (0, _slicedToArray3.default)(_ref2, 3),
           limitRemaining = _ref3[0],
-          json = _ref3[1];
+          json = _ref3[1],
+          status = _ref3[2];
 
       if (_isFn(onCheckResponse)) {
-        if (onCheckResponse(json, option)) {
+        if (onCheckResponse(json, option, status)) {
           option.limitRemaining = limitRemaining;
           onFetch({ json: json, option: option, onCompleted: onCompleted });
         }

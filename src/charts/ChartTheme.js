@@ -17,12 +17,10 @@ const ChartTheme = {
     },
     style : {
       fontSize: '11px',
-      //color: '#0b8fff',
-      //fill: '#0b8fff',
+      color: C.CREDITS_COLOR,
+      fill: C.CREDITS_COLOR,
       textDecoration: 'underline'
-    },
-    target : '_blank',
-    href : 'http://www.highcharts.com'
+    }    
   },
   chart : {
     alignTicks: false,
@@ -40,6 +38,9 @@ const ChartTheme = {
     events : {
       load : function(){
         this.zhTooltip = new Highcharts.Tooltip(this, this.options.tooltip);
+        this.credits.element.onclick = function() {
+           window.open(C.CREDITS_URL, '_blank');
+        }
       }
     }
   },

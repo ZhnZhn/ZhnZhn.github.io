@@ -23,6 +23,9 @@ const C = {
   SPACING_BOTTOM: 20,
   MARGIN_RIGHT: 50,
 
+  CREDITS_COLOR: '#909090',
+  CREDITS_URL: 'https://highcharts.com',
+
   fMonoPieColors: ({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}) => {
     const colors = [];
     _addMonoColorsTo(colors, base1)

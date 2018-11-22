@@ -33,12 +33,10 @@ var ChartTheme = {
     },
     style: {
       fontSize: '11px',
-      //color: '#0b8fff',
-      //fill: '#0b8fff',
+      color: _conf2.default.CREDITS_COLOR,
+      fill: _conf2.default.CREDITS_COLOR,
       textDecoration: 'underline'
-    },
-    target: '_blank',
-    href: 'http://www.highcharts.com'
+    }
   },
   chart: {
     alignTicks: false,
@@ -56,6 +54,9 @@ var ChartTheme = {
     events: {
       load: function load() {
         this.zhTooltip = new _highcharts2.default.Tooltip(this, this.options.tooltip);
+        this.credits.element.onclick = function () {
+          window.open(_conf2.default.CREDITS_URL, '_blank');
+        };
       }
     }
   },

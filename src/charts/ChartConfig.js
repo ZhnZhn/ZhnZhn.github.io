@@ -5,7 +5,6 @@ import HighchartsExporting from 'highcharts/modules/exporting';
 import HighchartsOfflineExporting from 'highcharts/modules/offline-exporting';
 
 import HighchartsZhn from './plugin/zhn-highcharts'
-import HighchartsFix from './plugin/fix-highcharts'
 
 //import HighchartsMore from 'highcharts/lib/highcharts-more';
 //import HighchartsTreemap from 'highcharts/lib/modules/treemap';
@@ -42,7 +41,6 @@ const ChartConfig = {
     HighchartsOfflineExporting(Highcharts);
 
     HighchartsZhn(Highcharts)
-    HighchartsFix(Highcharts)
 
     Highcharts.setOptions(ChartTheme);
   },

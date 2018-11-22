@@ -1,1 +1,32 @@
-{"version":3,"sources":["../../src/charts/conf.js"],"names":["_addMonoColorsTo","colors","base","i","push","Color","brighten","get","C","HEIGHT","THEME_SPACING_TOP","SPACING_BOTTOM","MARGIN_RIGHT","fMonoPieColors","base1","MONO_BASE1","base2","MONO_BASE2"],"mappings":";;;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,mBAAmB,SAAnBA,gBAAmB,GAAqB;AAAA,MAApBC,MAAoB,uEAAb,EAAa;AAAA,MAATC,IAAS;;AAC5C,MAAIC,UAAJ;AACA;AACA;AACA,OAAKA,IAAE,CAAP,EAAUA,IAAE,CAAZ,EAAeA,GAAf,EAAoB;AAClBF,WAAOG,IAAP,CACG,qBAAWC,KAAX,CAAiBH,IAAjB,EACCI,QADD,CACU,CAACH,IAAI,CAAL,IAAU,CADpB,EAECI,GAFD,EADH;AAKD;AACF,CAXD;;AAcA,IAAMC,IAAI;AACRC,UAAQ,GADA;AAERC,qBAAmB,CAFX;AAGRC,kBAAgB,EAHR;AAIRC,gBAAc,EAJN;;AAMRC,kBAAgB,0BAA2D;AAAA,mFAAP,EAAO;AAAA,yBAAxDC,KAAwD;AAAA,QAAxDA,KAAwD,6BAAlD,gBAAMC,UAA4C;AAAA,0BAAhCC,KAAgC;AAAA,QAAhCA,KAAgC,8BAA1B,gBAAMC,UAAoB;;AACzE,QAAMhB,SAAS,EAAf;AACAD,qBAAiBC,MAAjB,EAAyBa,KAAzB;AACAd,qBAAiBC,MAAjB,EAAyBe,KAAzB;AACA,WAAOf,MAAP;AACD;AAXO,CAAV;;kBAceO,C","file":"conf.js","sourcesContent":["\r\nimport Highcharts from 'highcharts';\r\n\r\nimport COLOR from '../constants/Color';\r\n\r\nconst _addMonoColorsTo = (colors=[], base) => {\r\n  let i;\r\n  // Start out with a darkened base color (negative brighten), and end\r\n  // up with a much brighter color\r\n  for (i=0; i<4; i++) {\r\n    colors.push(\r\n       Highcharts.Color(base)\r\n       .brighten((i - 3) / 7)\r\n       .get()\r\n     );\r\n  }\r\n}\r\n\r\n\r\nconst C = {\r\n  HEIGHT: 300,\r\n  THEME_SPACING_TOP: 5,\r\n  SPACING_BOTTOM: 20,\r\n  MARGIN_RIGHT: 50,\r\n\r\n  fMonoPieColors: ({ base1=COLOR.MONO_BASE1, base2=COLOR.MONO_BASE2 }={}) => {\r\n    const colors = [];\r\n    _addMonoColorsTo(colors, base1)\r\n    _addMonoColorsTo(colors, base2)\r\n    return colors;\r\n  }\r\n}\r\n\r\nexport default C\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../src/charts/conf.js"
+ ],
+ "file": "../../src/charts/conf.js",
+ "names": [
+  "_addMonoColorsTo",
+  "colors",
+  "base",
+  "i",
+  "push",
+  "Highcharts",
+  "Color",
+  "brighten",
+  "get",
+  "C",
+  "HEIGHT",
+  "THEME_SPACING_TOP",
+  "SPACING_BOTTOM",
+  "MARGIN_RIGHT",
+  "CREDITS_COLOR",
+  "CREDITS_URL",
+  "fMonoPieColors",
+  "base1",
+  "COLOR",
+  "MONO_BASE1",
+  "base2",
+  "MONO_BASE2"
+ ],
+ "mappings": ";;;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,mBAAmB,SAAnBA,gBAAmB,GAAqB;AAAA,MAApBC,MAAoB,uEAAb,EAAa;AAAA,MAATC,IAAS;;AAC5C,MAAIC,UAAJ;AACA;AACA;AACA,OAAKA,IAAE,CAAP,EAAUA,IAAE,CAAZ,EAAeA,GAAf,EAAoB;AAClBF,WAAOG,IAAP,CACGC,qBAAWC,KAAX,CAAiBJ,IAAjB,EACCK,QADD,CACU,CAACJ,IAAI,CAAL,IAAU,CADpB,EAECK,GAFD,EADH;AAKD;AACF,CAXD;;AAcA,IAAMC,IAAI;AACRC,UAAQ,GADA;AAERC,qBAAmB,CAFX;AAGRC,kBAAgB,EAHR;AAIRC,gBAAc,EAJN;;AAMRC,iBAAe,SANP;AAORC,eAAa,wBAPL;;AASRC,kBAAgB,0BAA2D;AAAA,mFAAP,EAAO;AAAA,yBAAxDC,KAAwD;AAAA,QAAxDA,KAAwD,6BAAlDC,gBAAMC,UAA4C;AAAA,0BAAhCC,KAAgC;AAAA,QAAhCA,KAAgC,8BAA1BF,gBAAMG,UAAoB;;AACzE,QAAMpB,SAAS,EAAf;AACAD,qBAAiBC,MAAjB,EAAyBgB,KAAzB;AACAjB,qBAAiBC,MAAjB,EAAyBmB,KAAzB;AACA,WAAOnB,MAAP;AACD;AAdO,CAAV;;kBAiBeQ,C"
+}

@@ -3,32 +3,40 @@ import fetchJsonpImpl from 'fetch-jsonp'
 const C = {
   LIMIT_REMAINING: 'X-RateLimit-Remaining',
   REQ_ERR: 'Request Error',
-  RESP_ERR: 'Response Error'
-}
+  RESP_ERR: 'Response Error',
+
+  MSG_400: '400: Bad request.',
+  MSG_404: '404: Resource is not existed.',
+  MSG_429: '429: Too many request in a given amount of time (rate limiting).',
+  MSG_503: '503: Back-end server is at capacity.'
+};
 
 const _isFn = fn => typeof fn === 'function';
 
-const _fnMsg400 = (option) => {
-  if (option.loadId === "EU_STAT"){
-    return '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try to request this data set with older date or another country.';
-  } else {
-    return '400: Bad request.';
+const _isInArrValue = (arr, value) => Array.isArray(arr)
+  && arr.indexOf(value) !== -1;
+
+const _crErr = (message, errCaption=C.REQ_ERR) => ({
+  errCaption,
+  message
+});
+
+const _throwIfNotStatus = (errStatus, status, msg) => {
+  if (!_isInArrValue(errStatus, status)) {
+    throw _crErr(msg);
   }
 };
 
-const _fnMsg404 = () => {
-  return '404: Resource is not existed.';
-};
-const _fnMsg429 = () => {
-  return '429: Too many request in a given amount of time (rate limiting).';
-};
-const _fnMsg503 = () => {
-  return '503: Back-end server is at capacity.'
-}
-
-
-const _crErr = (message, errCaption=C.REQ_ERR) => {
-  return { errCaption, message };
+const _promiseAll = (res, propName, status) => {
+  const headers = res.headers
+  , _limitRemaining = headers && _isFn(headers.get)
+      ? headers.get(C.LIMIT_REMAINING)
+      : undefined;
+  return Promise.all([
+    Promise.resolve(_limitRemaining),
+    res[propName](),
+    Promise.resolve(status)
+  ]);
 };
 
 const _fFetch = (propName, type) => function({
@@ -43,38 +51,31 @@ const _fFetch = (propName, type) => function({
           : fetchJsonpImpl;
   _fnFetch(uri, optionFetch)
     .then(response => {
-      const { status, statusText, headers={}, ok } = response;
+      const { status, statusText, ok } = response
+          , { resErrStatus} = option;
       if ((status>=200 && status<400) || ok) {
-          if (_isFn(headers.get)){
-            return Promise.all([
-               Promise.resolve(headers.get(C.LIMIT_REMAINING)),
-               response[propName]()
-            ]);
-          } else {
-            return Promise.all([
-               Promise.resolve(undefined),
-               response[propName]()
-            ]);
-          }
+         return _promiseAll(response, propName);
       } else if (status === 400) {
-         throw _crErr(_fnMsg400(option));
+         _throwIfNotStatus(resErrStatus, status, C.MSG_400)
+         return _promiseAll(response, propName, status);
       } else if (status === 404) {
-         throw _crErr(_fnMsg404(option));
+         throw _crErr(C.MSG_404);
       } else if (status === 429) {
-         throw _crErr(_fnMsg429(option));
+         throw _crErr(C.MSG_429);
       } else if (status>400 && status<500){
-         throw _crErr(`${status}: ${statusText}`);
+         _throwIfNotStatus(resErrStatus, status, `${status}: ${statusText}`)
+         return _promiseAll(response, propName, status);
       } else if (status === 503) {
-         throw _crErr(_fnMsg503(option));
+         throw _crErr(C.MSG_503);
       } else if (status>=500 && status<600){
          throw _crErr(`${status}: ${statusText}`, C.RESP_ERR);
       } else {
-        return [undefined, {}];
+        return [undefined, {}, status];
       }
     })
-    .then(([limitRemaining, json]) => {
+    .then(([limitRemaining, json, status]) => {
        if (_isFn(onCheckResponse)){
-         if (onCheckResponse(json, option)) {
+         if (onCheckResponse(json, option, status)) {
            option.limitRemaining = limitRemaining;
            onFetch({ json, option, onCompleted });
          }

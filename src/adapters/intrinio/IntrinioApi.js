@@ -1,7 +1,9 @@
 
 const C = {
   URL: 'https://api.intrinio.com/historical_data',
-  TAIL: 'item=level'
+  TAIL: 'item=level',
+  RES_ERR_STATUS: [ 401 ],
+  MSG_ERR_SUFIX: ' (Intrinio)'
 };
 
 const FRQ = {
@@ -12,6 +14,17 @@ const FRQ = {
   M: 'monthly',
   DF: 'monthly'
 };
+
+const _getErr = (json) => json
+  && Array.isArray(json.errors)
+  && json.errors[0]
+   ? json.errors[0]
+   : undefined;
+
+const _crErr = (caption='', message='') => ({
+  errCaption: caption,
+  message: message + C.MSG_ERR_SUFIX
+});
 
 const IntrinioApi = {
   crOptionFetch(option){
@@ -25,9 +38,10 @@ const IntrinioApi = {
 
   getRequestUrl(option){
     const {
-             value, fromDate, toDate, item={},
-             one, two, three
-           } = option;
+      value, fromDate, toDate, item={},
+      one, two, three
+    } = option;
+    option.resErrStatus = C.RES_ERR_STATUS
 
     if (two && three) {
       return `${C.URL}?identifier=${one}&item=${two}&start_date=${fromDate}&end_date=${toDate}&type=${three}`;
@@ -43,8 +57,11 @@ const IntrinioApi = {
   },
 
   checkResponse(json){
-    return json
-      && json.data
+    const _err = _getErr(json);
+    if (_err) {
+     throw _crErr(_err.human, _err.message);
+    }
+    return json      
       && Array.isArray(json.data);
   }
 };

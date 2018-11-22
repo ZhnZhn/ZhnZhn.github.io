@@ -32,10 +32,6 @@ var _zhnHighcharts = require('./plugin/zhn-highcharts');
 
 var _zhnHighcharts2 = _interopRequireDefault(_zhnHighcharts);
 
-var _fixHighcharts = require('./plugin/fix-highcharts');
-
-var _fixHighcharts2 = _interopRequireDefault(_fixHighcharts);
-
 var _Color = require('../constants/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
@@ -97,7 +93,6 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
     (0, _offlineExporting2.default)(_highcharts2.default);
 
     (0, _zhnHighcharts2.default)(_highcharts2.default);
-    (0, _fixHighcharts2.default)(_highcharts2.default);
 
     _highcharts2.default.setOptions(_ChartTheme2.default);
   },

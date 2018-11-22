@@ -3,6 +3,8 @@ import fnArr from '../../utils/fnArr';
 
 import mapFn from './mapFn'
 
+
+
 const { isInArrStr } = fnArr;
 const {
         toQuery, toMapSlice,
@@ -14,7 +16,9 @@ const URL = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
     , DF_TAIL = "precision=1";
 
 const REQUEST_ERROR = 'Request Error'
-    , MESSAGE_HEADER = '400: Bad Request\n';
+    , MESSAGE_HEADER = '400: Bad Request\n'
+    , RES_ERR_STATUS = [ 400 ]
+    , MSG_400 = '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try to request this data set with older date or another country.';
 
 const _crDetailMsg = function(label, option){
   const { alertGeo='', alertMetric='' } = option;
@@ -22,7 +26,8 @@ const _crDetailMsg = function(label, option){
 };
 
 const _crErr = (errCaption, message) => ({
-  errCaption, message
+  errCaption,
+  message
 });
 
 const CATEGORY_TYPES = [ 'MAP', 'COLUMN_SET', 'BAR_SET' ];
@@ -79,16 +84,24 @@ const _crUrl = (option) => {
   }
 };
 
+const _addPropTo = (option) => {
+  option.resErrStatus = [...RES_ERR_STATUS]
+};
+
 const EuroStatApi = {
 
   getRequestUrl(option){
     const { dfParams } = option;
+    _addPropTo(option)
     return dfParams
       ? _crUrlWithParams(option)
       : _crUrl(option);
   },
 
-  checkResponse(json, option) {
+  checkResponse(json, option, status) {
+    if (status === 400) {
+      throw _crErr(REQUEST_ERROR, MSG_400);
+    }
     const { error } = json;
     if (error){
       const { label } = error;

@@ -32,6 +32,9 @@ var C = {
   SPACING_BOTTOM: 20,
   MARGIN_RIGHT: 50,
 
+  CREDITS_COLOR: '#909090',
+  CREDITS_URL: 'https://highcharts.com',
+
   fMonoPieColors: function fMonoPieColors() {
     var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$base = _ref.base1,

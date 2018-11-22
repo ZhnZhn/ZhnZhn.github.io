@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var C = {
   URL: 'https://api.intrinio.com/historical_data',
-  TAIL: 'item=level'
+  TAIL: 'item=level',
+  RES_ERR_STATUS: [401],
+  MSG_ERR_SUFIX: ' (Intrinio)'
 };
 
 var FRQ = {
@@ -16,6 +18,19 @@ var FRQ = {
   D: 'daily',
   M: 'monthly',
   DF: 'monthly'
+};
+
+var _getErr = function _getErr(json) {
+  return json && Array.isArray(json.errors) && json.errors[0] ? json.errors[0] : undefined;
+};
+
+var _crErr = function _crErr() {
+  var caption = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  return {
+    errCaption: caption,
+    message: message + C.MSG_ERR_SUFIX
+  };
 };
 
 var IntrinioApi = {
@@ -38,6 +53,7 @@ var IntrinioApi = {
         two = option.two,
         three = option.three;
 
+    option.resErrStatus = C.RES_ERR_STATUS;
 
     if (two && three) {
       return C.URL + '?identifier=' + one + '&item=' + two + '&start_date=' + fromDate + '&end_date=' + toDate + '&type=' + three;
@@ -52,7 +68,11 @@ var IntrinioApi = {
     return C.URL + '?identifier=' + value + '&start_date=' + fromDate + '&end_date=' + toDate + '&frequency=' + _frq + '&' + C.TAIL;
   },
   checkResponse: function checkResponse(json) {
-    return json && json.data && Array.isArray(json.data);
+    var _err = _getErr(json);
+    if (_err) {
+      throw _crErr(_err.human, _err.message);
+    }
+    return json && Array.isArray(json.data);
   }
 };
 

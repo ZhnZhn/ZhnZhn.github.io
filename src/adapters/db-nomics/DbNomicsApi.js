@@ -86,10 +86,10 @@ const DbNomicsApi = {
 
   checkResponse(json){
     if (!json || !json.series
-      || !Array.isArray(json.series.period)
-      || !Array.isArray(json.series.value)) {
-    throw _crErr('', C.MSG_EMPTY);
-  }
+       || !Array.isArray(json.series.period)
+       || !Array.isArray(json.series.value)) {
+      throw _crErr('', C.MSG_EMPTY);
+    }
     return true;
   }
 };
