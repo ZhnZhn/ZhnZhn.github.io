@@ -91,6 +91,13 @@
         { "id": "ES_GF_DEBT" },
         { "id": "ES_GF_PENSIONS" }
       ]
+    },{
+      "caption": "Healthcare",
+      "items": [
+        { "id": "ES_HC_PROVIDER" },
+        { "id": "ES_HC_FINSCHEME" },
+        { "id": "ES_HC_FUNCTION" }
+      ]
     }
   ],
   "items" : {
@@ -1077,6 +1084,73 @@
           "dfTable": "spr_exp_pens",
           "dfParams": [ "geo", "spdepb", "unit"],
           "dfTail": "spdepm=TOTAL",
+          "mapType": "V"
+        }
+      }
+    },
+
+    "ES_HC_PROVIDER": {
+      "type" : "ES_HC_PROVIDER",
+      "menuTitle" : "Expenditure by Provider",
+      "dialogCaption" : "Expenditure by Provider",
+      "chartContainerCaption" : "Eurostat: Healthcare Expenditure by Provider",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Provider",
+        "twoURI" : "./data/eurostat/healthcare-provider.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/healthcare-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "hlth_sha11_hp",
+          "dfParams": [ "geo", "icha11_hp", "unit"],
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_HC_FINSCHEME": {
+      "type" : "ES_HC_FINSCHEME",
+      "menuTitle" : "Expenditure by Fin. Scheme",
+      "dialogCaption" : "Expenditure by Fin. Scheme",
+      "chartContainerCaption" : "Eurostat: Healthcare Expenditure by Financing Scheme",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Financing Scheme",
+        "twoURI" : "./data/eurostat/healthcare-financing-scheme.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/healthcare-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "hlth_sha11_hf",
+          "dfParams": [ "geo", "icha11_hf", "unit"],
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_HC_FUNCTION": {
+      "type" : "ES_HC_FUNCTION",
+      "menuTitle" : "Expenditure by Function",
+      "dialogCaption" : "Expenditure by Function",
+      "chartContainerCaption" : "Eurostat: Healthcare Expenditure by Function",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Function",
+        "twoURI" : "./data/eurostat/healthcare-function.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/healthcare-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "hlth_sha11_hc",
+          "dfParams": [ "geo", "icha11_hc", "unit"],
           "mapType": "V"
         }
       }
