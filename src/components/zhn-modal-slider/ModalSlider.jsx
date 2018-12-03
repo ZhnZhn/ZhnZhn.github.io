@@ -8,7 +8,7 @@ import ShowHide from '../zhn/ShowHide'
 import MenuPage from './MenuPage'
 
 const PERIOD_MS = 750;
-//const THROTTLE_MS = 800;
+
 const S = {
   SHOW_HIDE: {
     position: 'absolute',
@@ -25,11 +25,11 @@ const S = {
 
 const _getTranslateX = (node) => {
   const _prevStr = node
-           .style.transform
-           .substr(11)
-           .replace('px', '')
-           .replace(')', '');
-   return parseInt(_prevStr, 10);
+    .style.transform
+    .substr(11)
+    .replace('px', '')
+    .replace(')', '');
+  return parseInt(_prevStr, 10);
 }
 
 class ModalSlider extends Component {
@@ -83,18 +83,17 @@ class ModalSlider extends Component {
       width: `${_pW}px`,
     }
 
-    pages.push(
-     (
-       <MenuPage
-         key={INIT_ID}
-         style={this._pageStyle}
-         items={model[INIT_ID]}
-         baseTitleCl={model.baseTitleCl}
-         onNextPage={this.hNextPage}
-         onClose={onClose}
-       />
-     )
-    )
+    pages.push((
+      <MenuPage
+        key={INIT_ID}
+        style={this._pageStyle}
+        items={model[INIT_ID]}
+        baseTitleCl={model.baseTitleCl}
+        itemCl={model.itemCl}
+        onNextPage={this.hNextPage}
+        onClose={onClose}
+      />
+    ))
 
     this._direction = 0
 
@@ -125,6 +124,7 @@ class ModalSlider extends Component {
         title={title}
         items={model[id]}
         baseTitleCl={model.baseTitleCl}
+        itemCl={model.itemCl}
         onPrevPage={this.hPrevPage}
         onClose={onClose}
       />

@@ -148,6 +148,7 @@ var CustomizeExportDialog = function (_Component) {
     _this.toolbarButtons = [{ caption: 'D', onClick: _this._handleClickDimension }, { caption: 'T', onClick: _this._handleClickTitle }, { caption: 'S', onClick: _this._handleClickStyle }];
     _this.optionStyles = _ChartExportConfig2.default.createOptionStyles();
     _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+      key: 'export',
       caption: 'Export'
       //accessKey="x"
       , isPrimary: true,

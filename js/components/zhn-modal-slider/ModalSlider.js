@@ -49,7 +49,7 @@ var _MenuPage2 = _interopRequireDefault(_MenuPage);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PERIOD_MS = 750;
-//const THROTTLE_MS = 800;
+
 var S = {
   SHOW_HIDE: {
     position: 'absolute',
@@ -104,6 +104,7 @@ var ModalSlider = (_temp = _class = function (_Component) {
       style: _this._pageStyle,
       items: model[INIT_ID],
       baseTitleCl: model.baseTitleCl,
+      itemCl: model.itemCl,
       onNextPage: _this.hNextPage,
       onClose: onClose
     }));
@@ -199,6 +200,7 @@ var ModalSlider = (_temp = _class = function (_Component) {
       title: title,
       items: model[id],
       baseTitleCl: model.baseTitleCl,
+      itemCl: model.itemCl,
       onPrevPage: _this2.hPrevPage,
       onClose: onClose
     }));

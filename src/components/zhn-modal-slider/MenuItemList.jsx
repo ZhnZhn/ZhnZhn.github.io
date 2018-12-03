@@ -49,28 +49,22 @@ class MenuItemList extends Component {
 
   _renderItems = () => {
     const {
-            items, pageNumber,
-            onNextPage, onReg,
-            onClose
-          } = this.props;
+      items, itemCl, pageNumber,
+      onNextPage, onReg,
+      onClose
+    } = this.props;
     return items.map((item, index) => {
       const { cn, name, type, id, isClose, onClick } = item
           , _onClick = type === SUB_MENU
                ? onNextPage.bind(null, id, name, pageNumber)
                : _fClick({ isClose, onClick, onClose })
-               /*
-               : typeof onClick === 'function'
-                   ? onClick
-                   : void 0
-               */
           , _onReg = index === 0
                ? onReg
                : void 0;
-
       return (
         <MenuAriaItem
           key={name}
-          className={cn}
+          className={cn || itemCl}
           style={S.ITEM}
           onClick={_onClick}
           onReg={_onReg}

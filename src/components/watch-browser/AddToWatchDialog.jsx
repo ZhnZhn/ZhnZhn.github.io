@@ -37,13 +37,14 @@ class AddToWatchDialog extends Component {
     super()
     this.groupCaption = null
     this.listCaption = null
-    this._commandButtons =[
-         <Button.Flat
-           caption="Add"
-           title="Add Item To Watch List"
-           isPrimary={true}
-           onClick={this._handleAdd}
-          />
+    this._commandButtons = [
+       <Button.Flat
+         key="add"
+         caption="Add"
+         title="Add Item To Watch List"
+         isPrimary={true}
+         onClick={this._handleAdd}
+        />
     ];
     this.state = {
       groupOptions : props.store.getWatchGroups(),

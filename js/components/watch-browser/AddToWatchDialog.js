@@ -159,6 +159,7 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
     _this.groupCaption = null;
     _this.listCaption = null;
     _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
+      key: 'add',
       caption: 'Add',
       title: 'Add Item To Watch List',
       isPrimary: true,

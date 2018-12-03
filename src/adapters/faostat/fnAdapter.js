@@ -24,20 +24,18 @@ const _crUnit = (json) => {
   , item = data[data.length-1] || {}
   , _unit = item.Unit === undefined
        ? C.DATASET_EMPTY
-       : item.Unit
-            ? item.Unit
-            : C.BLANK;
+       : item.Unit || C.BLANK;
 
   return toUpperCaseFirst(_unit);
 };
 
 const _crPoint = ({ Year, Months, Value }) => {
   const m = Months
-          ? monthIndex(Months) + 1
-          : 0
-      , Tail = m !== 0
-          ? `-${m}`
-          : C.MM_DD;
+     ? monthIndex(Months) + 1
+     : 0
+  , Tail = m !== 0
+     ? `-${m}`
+     : C.MM_DD;
   return {
     x: ymdToUTC('' + Year + Tail),
     y: Value
@@ -105,9 +103,15 @@ const fnAdapter = {
       ? `${_v}_${three}`
       : _v;
   },
-  crTitle: (option, json) => {
-     const { title, dfTitle } = option;
-     if ( title ) {
+  crTitle: (json, option) => {
+     const {
+       title, dfTitle,
+       dfSubtitle, subtitle
+     } = option;
+     if (dfSubtitle) {
+       return `${subtitle} ${_crUnit(json)}: ${title}`;
+     }
+     if (title) {
        return dfTitle
          ? `${dfTitle}: ${title}`
          : title;
@@ -121,9 +125,11 @@ const fnAdapter = {
        return C.DF_TITLE;
      }
   },
-  crSubtitle: (json, subtitle) => {
-    const _unit = _crUnit(json);
-    return subtitle + ': ' + _unit;
+  crSubtitle: (json, option) => {
+    const { dfSubtitle, subtitle } = option;
+    return dfSubtitle
+      ? dfSubtitle
+      : `${subtitle}: ${_crUnit(json)}`;
   },
   crSeriaData: _crSeriaData,
   toDataPoints: (json, option) => {

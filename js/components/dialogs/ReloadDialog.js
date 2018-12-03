@@ -66,15 +66,15 @@ var ReloadDialog = function (_Component) {
 
     _this._handleReload = _this._handleReload.bind(_this);
     _this._commandButtons = [_react2.default.createElement(_Button2.default.Flat, {
-      caption: 'Yes, Reload'
-      //accessKey="r"
-      , isPrimary: true,
+      key: 'reload',
+      caption: 'Yes, Reload',
+      isPrimary: true,
       onClick: _this._handleReload
     }), _react2.default.createElement(_Button2.default.Flat, {
+      key: 'no',
       rootStyle: S.CLOSE,
-      caption: 'No'
-      //accessKey="n"
-      , onClick: props.onClose
+      caption: 'No',
+      onClick: props.onClose
     })];
     return _this;
   }

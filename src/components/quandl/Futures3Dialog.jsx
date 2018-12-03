@@ -16,6 +16,7 @@ const yearOptions = [
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withLoad
 class Futures3Dialog extends Component {
 
   constructor(props){
@@ -28,11 +29,10 @@ class Futures3Dialog extends Component {
     })
 
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true}
+      props, { noDate: true }
     )
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ];
+    this._commandButtons = this._crCommandsWithLoad(this)
+
     this.state = {
       isToolbar: true,
       isShowLabels: true,

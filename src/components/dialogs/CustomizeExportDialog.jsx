@@ -56,6 +56,7 @@ class CustomizeExportDialog extends Component {
     this.optionStyles = ChartExportConfig.createOptionStyles()
     this._commandButtons = [
          <Button.Flat
+            key="export"
             caption="Export"
             //accessKey="x"
             isPrimary={true}

@@ -83,7 +83,14 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
         onTestDate = _props$data.onTestDate;
 
 
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad }), _react2.default.createElement(_DialogCell2.default.Button.Show, { onClick: props.data.onShow })];
+    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, {
+      key: 'load',
+      onClick: _this._handleLoad
+    }), _react2.default.createElement(_DialogCell2.default.Button.Show, {
+      key: 'show',
+      onClick: props.data.onShow
+    })];
+
     _this.state = {
       initFromDate: fromDate || getFromDate(2),
       initToDate: initToDate || getToDate(),
@@ -228,4 +235,4 @@ var UsStocksBySectorDialog = (0, _withValidationLoad2.default)(_class = (_temp =
 }, _temp)) || _class;
 
 exports.default = UsStocksBySectorDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\UsStocksBySectorDialog.js.map
+//# sourceMappingURL=UsStocksBySectorDialog.js.map

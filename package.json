@@ -18,6 +18,8 @@
     "build:dll": "webpack --colors --progress --config webpack.dll.js",
     "build:dll-jsx": "webpack --colors --progress --config webpack.dll-jsx.js",
     "build:all": "npm run lint && npm run css:sass && npm run css && npm run build:dll-jsx",
+    "build:dev:dll": "webpack --colors --progress --config webpack.dev.dll.js",
+    "build:dev:dll-jsx": "webpack --colors --progress --config webpack.dev.dll-jsx.js", 
     "stats": "npm run stats:json && npm run stats:report",
     "stats:json": "webpack --profile --json > stats.json",
     "stats:report": "webpack-bundle-analyzer stats.json --no-open --mode static",

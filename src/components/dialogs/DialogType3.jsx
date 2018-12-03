@@ -19,6 +19,7 @@ const transformOptions = [
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withLoad
 class DialogType3 extends Component {
   /*
   static propTypes = {
@@ -67,9 +68,8 @@ class DialogType3 extends Component {
         caption: 'T', onClick: this._handleClickTransform
       })
     }
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ]
+    this._commandButtons = this._crCommandsWithLoad(this)
+    
     this.state = {
        isToolbar: true,
        isShowLabels: true,

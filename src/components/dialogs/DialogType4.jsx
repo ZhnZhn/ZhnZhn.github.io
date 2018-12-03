@@ -10,6 +10,7 @@ const CAPTION_YAXIS = 'Add Seria with Second YAxis';
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withLoad
 class DialogType4 extends Component {
   /*
   static propTypes = {
@@ -59,9 +60,8 @@ class DialogType4 extends Component {
         onClick: this._handleClickOptions
       })
     }
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ];
+    this._commandButtons = this._crCommandsWithLoad(this)
+    
     this.state = {
       isToolbar: true,
       isShowLabels: true,

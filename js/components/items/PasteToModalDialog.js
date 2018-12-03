@@ -87,6 +87,7 @@ var PasteToModalDialog = function (_Component) {
     };
 
     _this._commandButtons = [_react2.default.createElement(_FlatButton2.default, {
+      key: 'paste',
       caption: 'Paste & Close',
       isPrimary: true,
       onClick: _this._handlePasteTo

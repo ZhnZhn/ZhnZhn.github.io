@@ -328,11 +328,15 @@ var UNCommodityTradeDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _
       onClick: _this._handlerClickChartType
     });
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Flat, {
+      key: 'meta',
       rootStyle: S.BT_ROOT,
       caption: 'Load Meta',
       title: 'First Load Meta, then Load Item',
       onClick: _this._handlerLoadMeta
-    }), _react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handlerLoadData })];
+    }), _react2.default.createElement(_DialogCell2.default.Button.Load, {
+      key: 'load',
+      onClick: _this._handlerLoadData
+    })];
     _this.state = {
       isToolbar: true,
       isShowLabels: true,

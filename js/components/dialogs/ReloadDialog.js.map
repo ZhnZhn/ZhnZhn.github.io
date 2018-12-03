@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/components/dialogs/ReloadDialog.jsx"],"names":["S","MODAL","position","width","height","margin","ROOT","color","paddingTop","paddingLeft","fontWeight","lineHeight","DATE","CLOSE","ReloadDialog","props","_handleReload","bind","_commandButtons","onClose","document","cookie","window","location","reload","nextProps","nextState","isShow","data","prevDate","nextDate"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,SAAO;AACLC,cAAU,QADL;AAELC,WAAO,OAFF;AAGLC,YAAQ,OAHH;AAILC,YAAQ;AAJH,GADC;AAORC,QAAM;AACJC,WAAO,MADH;AAEJC,gBAAY,MAFR;AAGJC,iBAAa,MAHT;AAIJC,gBAAY,MAJR;AAKJC,gBAAY;AALR,GAPE;AAcRC,QAAM;AACJL,WAAO;AADH,GAdE;AAiBRM,SAAO;AACLN,WAAO;AADF;AAjBC,CAAV;;IAsBMO,Y;;;AAEJ,wBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAEhB,UAAKC,aAAL,GAAqB,MAAKA,aAAL,CAAmBC,IAAnB,OAArB;AACA,UAAKC,eAAL,GAAuB,CACrB,+CAAQ,IAAR;AACE,eAAQ;AACR;AAFF,QAGE,WAAW,IAHb;AAIE,eAAS,MAAKF;AAJhB,MADqB,EAOrB,+CAAQ,IAAR;AACE,iBAAWhB,EAAEa,KADf;AAEE,eAAQ;AACR;AAHF,QAIE,SAASE,MAAMI;AAJjB,MAPqB,CAAvB;AAHgB;AAiBjB;;;;oCAEc;AACbC,eAASC,MAAT,GAAgB,OAAhB;AACAC,aAAOC,QAAP,CAAgBC,MAAhB,CAAuB,IAAvB;AACD;;;0CAEqBC,S,EAAWC,S,EAAU;AACzC,UAAID,cAAc,KAAKV,KAAnB,IAA4BU,UAAUE,MAAV,KAAqB,KAAKZ,KAAL,CAAWY,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;6BAEO;AAAA,mBAC4B,KAAKZ,KADjC;AAAA,UACEY,MADF,UACEA,MADF;AAAA,UACUR,OADV,UACUA,OADV;AAAA,UACmBS,IADnB,UACmBA,IADnB;AAAA,UAEEC,QAFF,GAEwBD,IAFxB,CAEEC,QAFF;AAAA,UAEYC,QAFZ,GAEwBF,IAFxB,CAEYE,QAFZ;;AAGN,aACE;AAAA;AAAA;AACE,iBAAO9B,EAAEC,KADX;AAEE,mBAAQ,QAFV;AAGE,kBAAQ0B,MAHV;AAIE,0BAAgB,KAAKT,eAJvB;AAKE,wBAAc,IALhB;AAME,mBAASC;AANX;AAQE;AAAA;AAAA,YAAK,OAAOnB,EAAEM,IAAd;AACE;AAAA;AAAA;AAAA;AAAA,WADF;AAIE;AAAA;AAAA,cAAG,OAAON,EAAEY,IAAZ;AACGiB;AADH,WAJF;AAOE;AAAA;AAAA;AAAA;AAAA,WAPF;AAUE;AAAA;AAAA,cAAG,OAAO7B,EAAEY,IAAZ;AACGkB;AADH;AAVF;AARF,OADF;AAyBD;;;;;kBAGYhB,Y","file":"ReloadDialog.js","sourcesContent":["import React, { Component } from 'react'\r\n\r\nimport Button from './Button'\r\nimport ModalDialog from '../zhn-moleculs/ModalDialog';\r\n\r\nconst S = {\r\n  MODAL: {\r\n    position: 'static',\r\n    width: '350px',\r\n    height: '190px',\r\n    margin: '70px auto'\r\n  },\r\n  ROOT: {\r\n    color: 'gray',\r\n    paddingTop: '16px',\r\n    paddingLeft: '16px',\r\n    fontWeight: 'bold',\r\n    lineHeight: 1.4\r\n  },\r\n  DATE: {\r\n    color: '#80c040'\r\n  },\r\n  CLOSE: {\r\n    color: 'rgb(35, 47, 59)'\r\n  }\r\n}\r\n\r\nclass ReloadDialog extends Component {\r\n\r\n  constructor(props){\r\n    super()\r\n    this._handleReload = this._handleReload.bind(this)\r\n    this._commandButtons = [\r\n      <Button.Flat\r\n        caption=\"Yes, Reload\"\r\n        //accessKey=\"r\"\r\n        isPrimary={true}\r\n        onClick={this._handleReload}\r\n      />,\r\n      <Button.Flat\r\n        rootStyle={S.CLOSE}\r\n        caption=\"No\"\r\n        //accessKey=\"n\"\r\n        onClick={props.onClose}\r\n      />\r\n    ]\r\n  }\r\n\r\n  _handleReload(){\r\n    document.cookie=\"erc=1\"\r\n    window.location.reload(true)\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps, nextState){\r\n    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {\r\n      return false;\r\n    }\r\n    return true;\r\n  }\r\n\r\n  render(){\r\n    const { isShow, onClose, data } = this.props\r\n        , { prevDate, nextDate} = data;\r\n    return (\r\n      <ModalDialog\r\n        style={S.MODAL}\r\n        caption=\"Reload\"\r\n        isShow={isShow}\r\n        commandButtons={this._commandButtons}\r\n        withoutClose={true}\r\n        onClose={onClose}\r\n      >\r\n        <div style={S.ROOT}>\r\n          <p>\r\n            You browser open ERC from a cache.\r\n          </p>\r\n          <p style={S.DATE}>\r\n            {prevDate}\r\n          </p>\r\n          <p>\r\n            A new build exists. Is Reload App?\r\n          </p>\r\n          <p style={S.DATE}>\r\n            {nextDate}\r\n          </p>\r\n        </div>\r\n      </ModalDialog>\r\n    );\r\n  }\r\n}\r\n\r\nexport default ReloadDialog\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/dialogs/ReloadDialog.js"
+ ],
+ "file": "../../../src/components/dialogs/ReloadDialog.js",
+ "names": [
+  "S",
+  "MODAL",
+  "position",
+  "width",
+  "height",
+  "margin",
+  "ROOT",
+  "color",
+  "paddingTop",
+  "paddingLeft",
+  "fontWeight",
+  "lineHeight",
+  "DATE",
+  "CLOSE",
+  "ReloadDialog",
+  "props",
+  "_handleReload",
+  "bind",
+  "_commandButtons",
+  "onClose",
+  "document",
+  "cookie",
+  "window",
+  "location",
+  "reload",
+  "nextProps",
+  "nextState",
+  "isShow",
+  "data",
+  "prevDate",
+  "nextDate",
+  "Component"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,IAAI;AACRC,SAAO;AACLC,cAAU,QADL;AAELC,WAAO,OAFF;AAGLC,YAAQ,OAHH;AAILC,YAAQ;AAJH,GADC;AAORC,QAAM;AACJC,WAAO,MADH;AAEJC,gBAAY,MAFR;AAGJC,iBAAa,MAHT;AAIJC,gBAAY,MAJR;AAKJC,gBAAY;AALR,GAPE;AAcRC,QAAM;AACJL,WAAO;AADH,GAdE;AAiBRM,SAAO;AACLN,WAAO;AADF;AAjBC,CAAV;;IAsBMO,Y;;;AAEJ,wBAAYC,KAAZ,EAAkB;AAAA;;AAAA;;AAEhB,UAAKC,aAAL,GAAqB,MAAKA,aAAL,CAAmBC,IAAnB,OAArB;AACA,UAAKC,eAAL,GAAuB,CACrB,8BAAC,gBAAD,CAAQ,IAAR;AACE,WAAI,QADN;AAEE,eAAQ,aAFV;AAGE,iBAAW,IAHb;AAIE,eAAS,MAAKF;AAJhB,MADqB,EAOrB,8BAAC,gBAAD,CAAQ,IAAR;AACE,WAAI,IADN;AAEE,iBAAWhB,EAAEa,KAFf;AAGE,eAAQ,IAHV;AAIE,eAASE,MAAMI;AAJjB,MAPqB,CAAvB;AAHgB;AAiBjB;;;;oCAEc;AACbC,eAASC,MAAT,GAAgB,OAAhB;AACAC,aAAOC,QAAP,CAAgBC,MAAhB,CAAuB,IAAvB;AACD;;;0CAEqBC,S,EAAWC,S,EAAU;AACzC,UAAID,cAAc,KAAKV,KAAnB,IAA4BU,UAAUE,MAAV,KAAqB,KAAKZ,KAAL,CAAWY,MAAhE,EAAwE;AACtE,eAAO,KAAP;AACD;AACD,aAAO,IAAP;AACD;;;6BAEO;AAAA,mBAC4B,KAAKZ,KADjC;AAAA,UACEY,MADF,UACEA,MADF;AAAA,UACUR,OADV,UACUA,OADV;AAAA,UACmBS,IADnB,UACmBA,IADnB;AAAA,UAEEC,QAFF,GAEwBD,IAFxB,CAEEC,QAFF;AAAA,UAEYC,QAFZ,GAEwBF,IAFxB,CAEYE,QAFZ;;AAGN,aACE;AAAC,6BAAD;AAAA;AACE,iBAAO9B,EAAEC,KADX;AAEE,mBAAQ,QAFV;AAGE,kBAAQ0B,MAHV;AAIE,0BAAgB,KAAKT,eAJvB;AAKE,wBAAc,IALhB;AAME,mBAASC;AANX;AAQE;AAAA;AAAA,YAAK,OAAOnB,EAAEM,IAAd;AACE;AAAA;AAAA;AAAA;AAAA,WADF;AAIE;AAAA;AAAA,cAAG,OAAON,EAAEY,IAAZ;AACGiB;AADH,WAJF;AAOE;AAAA;AAAA;AAAA;AAAA,WAPF;AAUE;AAAA;AAAA,cAAG,OAAO7B,EAAEY,IAAZ;AACGkB;AADH;AAVF;AARF,OADF;AAyBD;;;EA7DwBC,gB;;kBAgEZjB,Y"
+}

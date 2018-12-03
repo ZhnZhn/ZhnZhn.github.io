@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
-import withToolbar from '../dialogs/decorators/withToolbar'
+import Decor from '../dialogs/decorators/Decorators'
 import crMenuMore from '../dialogs/MenuMore'
 
 const DF = {
@@ -42,7 +42,8 @@ const _crValue = (indicator, period) => {
   }
 }
 
-@withToolbar
+@Decor.withToolbar
+@Decor.withLoad
 class AlphaIndicatorDialog extends Component {
 
   constructor(props){
@@ -60,9 +61,8 @@ class AlphaIndicatorDialog extends Component {
       caption: 'O', title: 'Toggle Options Input',
       onClick: this._handleClickOptions
     })
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ];
+    this._commandButtons = this._crCommandsWithLoad(this)
+    
     this.state = {
       isToolbar: true,
       isShowLabels: true,

@@ -27,6 +27,7 @@ class PasteToModalDialog extends Component {
 
     this._commandButtons = [
       <FlatButton
+        key="paste"
         caption="Paste & Close"
         isPrimary={true}
         onClick={this._handlePasteTo}

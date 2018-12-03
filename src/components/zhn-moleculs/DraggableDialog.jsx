@@ -94,6 +94,7 @@ class DraggableDialog extends Component {
         {
           typeof onShowChart === 'function' &&
           <FlatButton
+            key="show"
             rootStyle={S.BT_ROOT}
             caption="Show"
             title="Show Pane Container"
@@ -102,6 +103,7 @@ class DraggableDialog extends Component {
           />
         }
         <FlatButton
+          key="close"
           rootStyle={S.BT_ROOT}
           caption="Close"
           title="Close Draggable Dialog"

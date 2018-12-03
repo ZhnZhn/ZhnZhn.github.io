@@ -41,7 +41,7 @@ var _crUnit = function _crUnit(json) {
   var _json$data = json.data,
       data = _json$data === undefined ? [] : _json$data,
       item = data[data.length - 1] || {},
-      _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit ? item.Unit : C.BLANK;
+      _unit = item.Unit === undefined ? C.DATASET_EMPTY : item.Unit || C.BLANK;
 
   return toUpperCaseFirst(_unit);
 };
@@ -125,10 +125,15 @@ var fnAdapter = {
     var _v = value || 'faoId';
     return three ? _v + '_' + three : _v;
   },
-  crTitle: function crTitle(option, json) {
+  crTitle: function crTitle(json, option) {
     var title = option.title,
-        dfTitle = option.dfTitle;
+        dfTitle = option.dfTitle,
+        dfSubtitle = option.dfSubtitle,
+        subtitle = option.subtitle;
 
+    if (dfSubtitle) {
+      return subtitle + ' ' + _crUnit(json) + ': ' + title;
+    }
     if (title) {
       return dfTitle ? dfTitle + ': ' + title : title;
     }
@@ -149,9 +154,11 @@ var fnAdapter = {
       return C.DF_TITLE;
     }
   },
-  crSubtitle: function crSubtitle(json, subtitle) {
-    var _unit = _crUnit(json);
-    return subtitle + ': ' + _unit;
+  crSubtitle: function crSubtitle(json, option) {
+    var dfSubtitle = option.dfSubtitle,
+        subtitle = option.subtitle;
+
+    return dfSubtitle ? dfSubtitle : subtitle + ': ' + _crUnit(json);
   },
   crSeriaData: _crSeriaData,
   toDataPoints: function toDataPoints(json, option) {
@@ -185,4 +192,4 @@ var fnAdapter = {
 };
 
 exports.default = fnAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\faostat\fnAdapter.js.map
+//# sourceMappingURL=fnAdapter.js.map

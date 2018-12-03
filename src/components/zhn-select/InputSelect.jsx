@@ -495,7 +495,7 @@ class InputSelect extends Component {
 
     let _placeholder, _afterInputEl
     if (!isLoading && !isLoadingFailed){
-       const _styleArrow = isShowOption
+       const _arrowStyle = isShowOption
                 ? S.ARROW_SHOW
                 : null;
       _placeholder = (placeholder)
@@ -504,7 +504,7 @@ class InputSelect extends Component {
       _afterInputEl = (
          <ArrowCell
            ref={ (c) => this.arrowCell = c}
-           styleArrow={_styleArrow}
+           arrowStyle={_arrowStyle}
            onClick={this._handleToggleOptions}
          />
       );

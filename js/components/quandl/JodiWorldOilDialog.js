@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _dec3, _class;
 
 var _react = require('react');
 
@@ -44,7 +44,7 @@ var unitOptions = [{ "caption": "Thousand Barrels per day (kb/d)", "value": "KD"
 
 var chartTypes = [{ caption: "AreaSpline", value: "AREA" }, { caption: "Yearly by Month", value: "YEARLY" }];
 
-var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(JodiWorldOilDialog, _Component);
 
   function JodiWorldOilDialog(props) {
@@ -157,8 +157,8 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._hClickOptions
     });
+    _this._commandButtons = _this._crCommandsWithLoad(_this);
 
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
     _this.state = {
       isToolbar: true,
       isShowLabels: true,
@@ -278,6 +278,6 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
     }
   }]);
   return JodiWorldOilDialog;
-}(_react.Component)) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class);
 exports.default = JodiWorldOilDialog;
 //# sourceMappingURL=JodiWorldOilDialog.js.map

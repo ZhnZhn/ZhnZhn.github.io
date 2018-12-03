@@ -7,7 +7,8 @@ import Decor from '../dialogs/decorators/Decorators'
 
 @Decor.withToolbar
 @Decor.withValidationLoad
-class DialogEurostat extends Component {  
+@Decor.withLoad
+class DialogEurostat extends Component {
   /*
   static propTypes = {
     isShow: PropTypes.bool,
@@ -47,9 +48,8 @@ class DialogEurostat extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ];
+    this._commandButtons = this._crCommandsWithLoad(this)
+
     this.state = {
       isToolbar: true,
       isShowLabels: true,

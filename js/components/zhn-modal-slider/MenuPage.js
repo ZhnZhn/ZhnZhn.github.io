@@ -103,6 +103,7 @@ var MenuPage = (_temp2 = _class = function (_Component) {
           title = _props.title,
           items = _props.items,
           baseTitleCl = _props.baseTitleCl,
+          itemCl = _props.itemCl,
           pageNumber = _props.pageNumber,
           onNextPage = _props.onNextPage,
           onPrevPage = _props.onPrevPage,
@@ -121,6 +122,7 @@ var MenuPage = (_temp2 = _class = function (_Component) {
         }),
         _react2.default.createElement(_MenuItemList2.default, {
           items: items,
+          itemCl: itemCl || baseTitleCl,
           pageNumber: pageNumber,
           onNextPage: onNextPage,
           onReg: this._onRegFirst,

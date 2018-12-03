@@ -49,7 +49,10 @@ class LoadItemDialog extends Component {
            } = props.data;
 
     this._commandButtons = [
-       <Button.Load onClick={this._handleLoad} />
+       <Button.Load
+         key="load"
+         onClick={this._handleLoad}
+       />
     ]
 
     this.state = {

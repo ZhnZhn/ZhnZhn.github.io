@@ -65,8 +65,14 @@ class StocksBySectorDialog extends Component {
        { caption: 'L', onClick: this._handleClickLink }
      ]
      this._commandButtons = [
-       <D.Button.Load onClick={this._handleLoad} />,
-       <D.Button.Show onClick={props.data.onShow} />
+       <D.Button.Load
+         key="load"
+         onClick={this._handleLoad}
+       />,
+       <D.Button.Show
+         key="show"
+         onClick={props.data.onShow}
+       />
      ]
      this.state = this._createInitialState(props)
    }

@@ -1,6 +1,5 @@
 import Highcharts from 'highcharts'
 
-//import ChartFn from './ChartFn'
 import handleMouserOver from './handleMouseOver'
 
 import COLOR from '../constants/Color';
@@ -20,7 +19,7 @@ const ChartTheme = {
       color: C.CREDITS_COLOR,
       fill: C.CREDITS_COLOR,
       textDecoration: 'underline'
-    }    
+    }
   },
   chart : {
     alignTicks: false,
@@ -42,6 +41,12 @@ const ChartTheme = {
            window.open(C.CREDITS_URL, '_blank');
         }
       }
+    }
+  },
+  title: {
+    style: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   },
   colors: [
@@ -210,7 +215,6 @@ const ChartTheme = {
       }
     },
     pie : {
-      //colors : Chart.fMonoPieColors()
       colors: C.fMonoPieColors()
     }
   },

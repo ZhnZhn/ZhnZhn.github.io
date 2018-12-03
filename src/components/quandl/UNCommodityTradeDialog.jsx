@@ -82,12 +82,16 @@ class UNCommodityTradeDialog extends Component {
       })
     this._commandButtons = [
       <D.Button.Flat
+        key="meta"
         rootStyle={S.BT_ROOT}
         caption="Load Meta"
         title="First Load Meta, then Load Item"
         onClick={this._handlerLoadMeta}
       />,
-      <D.Button.Load onClick={this._handlerLoadData} />
+      <D.Button.Load
+         key="load"
+         onClick={this._handlerLoadData}
+       />
     ]
     this.state = {
       isToolbar: true,

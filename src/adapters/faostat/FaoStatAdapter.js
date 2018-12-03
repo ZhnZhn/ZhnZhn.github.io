@@ -14,13 +14,12 @@ const FaoStatAdapter = {
   crKey: crId,
 
   toConfig(json, option){
-    const { subtitle } = option
-    , _id = crId(option)
-    , _title = crTitle(option, json)
-    , _subtitle = crSubtitle(json, subtitle)
+    const _id = crId(option)
+    , _title = crTitle(json, option)
+    , _subtitle = crSubtitle(json, option)
     , _points = toDataPoints(json, option)
     , config = Builder()
-       .areaConfig({ spacingTop: 25 })       
+       .areaConfig({ spacingTop: 25 })
        .addCaption(_title, _subtitle)
        .addPoints(_id, _points)
        .addTooltip(Tooltip.fnBasePointFormatter)

@@ -51,11 +51,17 @@ class UsStocksBySectorDialog extends Component {
        onTestDate
      } = props.data;
 
-
      this._commandButtons = [
-       <D.Button.Load onClick={this._handleLoad} />,
-       <D.Button.Show onClick={props.data.onShow} />
+       <D.Button.Load
+         key="load"
+         onClick={this._handleLoad}
+       />,
+       <D.Button.Show
+         key="show"
+         onClick={props.data.onShow}
+       />
      ]
+     
      this.state = {
        initFromDate: fromDate || getFromDate(2),
        initToDate: initToDate || getToDate(),

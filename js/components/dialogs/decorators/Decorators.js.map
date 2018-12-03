@@ -8,7 +8,8 @@
   "Decorators",
   "withLoadOptions",
   "withToolbar",
-  "withValidationLoad"
+  "withValidationLoad",
+  "withLoad"
  ],
- "mappings": ";;;;;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,oCAFiB;AAGjBC;AAHiB,CAAnB;;kBAMeH,U"
+ "mappings": ";;;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,oCAFiB;AAGjBC,kDAHiB;AAIjBC;AAJiB,CAAnB;;kBAOeJ,U"
 }

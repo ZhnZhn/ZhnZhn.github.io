@@ -17,6 +17,7 @@ const CHART_TYPE_OPTIONS = [
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withLoad
 class  DialogType5 extends Component {
 
   constructor(props){
@@ -31,9 +32,8 @@ class  DialogType5 extends Component {
       caption: 'O', title: 'Toggle Options Input',
       onClick: this._handleClickOptions
     })
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ]
+    this._commandButtons = this._crCommandsWithLoad(this)
+    
     this.state = {
       isToolbar: true,
       isShowLabels: true,

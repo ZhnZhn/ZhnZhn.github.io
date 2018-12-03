@@ -21,7 +21,7 @@ const S = {
     position: 'absolute',
     top: '20%',
     left: '30%',
-    width: 380,    
+    width: 380,
     display: 'block',
     zIndex: 10
   },
@@ -88,6 +88,7 @@ class ModalDialog extends Component {
         {commandButtons}
         { !withoutClose &&
             <FlatButton
+              key="close"
               rootStyle={S.BT_ROOT}
               caption="Close"
               title="Close Modal Dialog"

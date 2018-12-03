@@ -32,15 +32,15 @@ class ReloadDialog extends Component {
     this._handleReload = this._handleReload.bind(this)
     this._commandButtons = [
       <Button.Flat
-        caption="Yes, Reload"
-        //accessKey="r"
+        key="reload"
+        caption="Yes, Reload"        
         isPrimary={true}
         onClick={this._handleReload}
       />,
       <Button.Flat
+        key="no"
         rootStyle={S.CLOSE}
         caption="No"
-        //accessKey="n"
         onClick={props.onClose}
       />
     ]

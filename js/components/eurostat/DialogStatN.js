@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _dec3, _class;
 
 var _react = require('react');
 
@@ -78,7 +78,7 @@ var S = {
   }
 };
 
-var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(DialogStatN, _Component);
 
   function DialogStatN(props) {
@@ -229,7 +229,7 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     });
 
     _this.toolbarButtons = _this._createType2WithToolbar(props);
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = _this._crCommandsWithLoad(_this);
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
     _this._items = [];
     _this._selectOptions = [];
@@ -334,6 +334,6 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
   }]);
   return DialogStatN;
-}(_react.Component)) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class);
 exports.default = DialogStatN;
 //# sourceMappingURL=DialogStatN.js.map

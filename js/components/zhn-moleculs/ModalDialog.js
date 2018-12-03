@@ -90,6 +90,7 @@ var ModalDialog = (_temp = _class = function (_Component) {
         { style: S.COMMAND_DIV },
         commandButtons,
         !withoutClose && _react2.default.createElement(_FlatButton2.default, {
+          key: 'close',
           rootStyle: S.BT_ROOT,
           caption: 'Close',
           title: 'Close Modal Dialog',

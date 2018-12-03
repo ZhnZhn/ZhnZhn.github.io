@@ -129,6 +129,7 @@ var DraggableDialog = function (_Component) {
         { style: S.COMMAND_DIV },
         commandButtons,
         typeof onShowChart === 'function' && _react2.default.createElement(_FlatButton2.default, {
+          key: 'show',
           rootStyle: S.BT_ROOT,
           caption: 'Show',
           title: 'Show Pane Container'
@@ -136,6 +137,7 @@ var DraggableDialog = function (_Component) {
           , onClick: onShowChart
         }),
         _react2.default.createElement(_FlatButton2.default, {
+          key: 'close',
           rootStyle: S.BT_ROOT,
           caption: 'Close',
           title: 'Close Draggable Dialog'

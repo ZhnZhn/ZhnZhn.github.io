@@ -629,13 +629,13 @@ var InputSelect = (_temp = _class = function (_Component) {
     var _placeholder = void 0,
         _afterInputEl = void 0;
     if (!isLoading && !isLoadingFailed) {
-      var _styleArrow = isShowOption ? S.ARROW_SHOW : null;
+      var _arrowStyle = isShowOption ? S.ARROW_SHOW : null;
       _placeholder = placeholder ? placeholder : 'Select ' + optionName + '...';
       _afterInputEl = _react2.default.createElement(_ArrowCell2.default, {
         ref: function ref(c) {
           return _this3.arrowCell = c;
         },
-        styleArrow: _styleArrow,
+        arrowStyle: _arrowStyle,
         onClick: _this3._handleToggleOptions
       });
     } else if (isLoading) {

@@ -8,6 +8,7 @@ const HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withLoad
 class DialogType4A extends Component {
 
   constructor(props){
@@ -23,9 +24,8 @@ class DialogType4A extends Component {
       onClick: this._handleClickOptions
     })
     this[HAS_SECOND_Y_AXIS] = false
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ];
+    this._commandButtons = this._crCommandsWithLoad(this)
+
     this.state = {
       isToolbar: true,
       isShowLabels: true,
@@ -111,7 +111,7 @@ class DialogType4A extends Component {
              <D.Toolbar
                isShow={isToolbar}
                buttons={this.toolbarButtons}
-             />                      
+             />
              <D.SelectParentChild
                  ref={c => this.parentChild = c}
                  isShow={isShow}

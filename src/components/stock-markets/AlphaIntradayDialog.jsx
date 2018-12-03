@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import D from '../dialogs/DialogCell'
-import withToolbar from '../dialogs/decorators/withToolbar'
+import Decor from '../dialogs/decorators/Decorators'
 import crMenuMore from '../dialogs/MenuMore'
 
 const DF = {
@@ -24,7 +24,8 @@ const _intervalOptions = [
   { caption: '60 min', value: '60min' }
 ]
 
-@withToolbar
+@Decor.withToolbar
+@Decor.withLoad
 class AlphaIntradayDialog extends Component {
 
   constructor(props){
@@ -38,9 +39,8 @@ class AlphaIntradayDialog extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
       props, { noDate: true }
     )
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ];
+    this._commandButtons = this._crCommandsWithLoad(this)
+
     this.state = {
       isToolbar: true,
       isShowLabels: true

@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
@@ -30,9 +30,9 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _withToolbar = require('../dialogs/decorators/withToolbar');
+var _Decorators = require('../dialogs/decorators/Decorators');
 
-var _withToolbar2 = _interopRequireDefault(_withToolbar);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 var _MenuMore = require('../dialogs/MenuMore');
 
@@ -83,7 +83,7 @@ var _crValue = function _crValue(indicator, period) {
   }
 };
 
-var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Component) {
+var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(AlphaIndicatorDialog, _Component);
 
   function AlphaIndicatorDialog(props) {
@@ -147,7 +147,8 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = _this._crCommandsWithLoad(_this);
+
     _this.state = {
       isToolbar: true,
       isShowLabels: true,
@@ -245,7 +246,6 @@ var AlphaIndicatorDialog = (0, _withToolbar2.default)(_class = function (_Compon
     }
   }]);
   return AlphaIndicatorDialog;
-}(_react.Component)) || _class;
-
+}(_react.Component)) || _class) || _class);
 exports.default = AlphaIndicatorDialog;
 //# sourceMappingURL=AlphaIndicatorDialog.js.map

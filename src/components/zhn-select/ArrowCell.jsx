@@ -31,16 +31,18 @@ const C = {
 
 
 class ArrowCell extends Component {
+  _refArrowCell = (n) => this.arrowCell = n
+  _refArrow = (n) => this.arrow = n
   render(){
-    const { styleArrow, onClick } = this.props
+    const { arrowStyle, onClick } = this.props
     return (
       <span
-         ref={ (c) => this.arrowCell = c }
+         ref={this._refArrowCell}
          style={STYLE.ARROW_CELL}
          onClick={onClick}>
         <span
-           ref={ (c) => this.arrow = c }
-           style={Object.assign({}, STYLE.ARROW, styleArrow)}
+           ref={this._refArrow}
+           style={{ ...STYLE.ARROW, ...arrowStyle}}
         >
         </span>
       </span>

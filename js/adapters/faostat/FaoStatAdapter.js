@@ -33,17 +33,15 @@ var FaoStatAdapter = {
   crKey: crId,
 
   toConfig: function toConfig(json, option) {
-    var subtitle = option.subtitle,
-        _id = crId(option),
-        _title = crTitle(option, json),
-        _subtitle = crSubtitle(json, subtitle),
+    var _id = crId(option),
+        _title = crTitle(json, option),
+        _subtitle = crSubtitle(json, option),
         _points = toDataPoints(json, option),
         config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(_title, _subtitle).addPoints(_id, _points).addTooltip(_Tooltip2.default.fnBasePointFormatter).add({
       info: toInfo(json, _title, _subtitle),
       valueMoving: crValueMoving(_points),
       zhConfig: crZhConfig(_id, option)
     }).toConfig();
-
     return { config: config };
   },
   toSeries: function toSeries(json, option) {

@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
+var _dec, _dec2, _class;
 
 var _react = require('react');
 
@@ -30,9 +30,9 @@ var _DialogCell = require('../dialogs/DialogCell');
 
 var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
-var _withToolbar = require('../dialogs/decorators/withToolbar');
+var _Decorators = require('../dialogs/decorators/Decorators');
 
-var _withToolbar2 = _interopRequireDefault(_withToolbar);
+var _Decorators2 = _interopRequireDefault(_Decorators);
 
 var _MenuMore = require('../dialogs/MenuMore');
 
@@ -54,7 +54,7 @@ var _testTicket = function _testTicket(value) {
 
 var _intervalOptions = [{ caption: '1 min', value: '1min' }, { caption: '5 min', value: '5min' }, { caption: '15 min', value: '15min' }, { caption: '30 min', value: '30min' }, { caption: '60 min', value: '60min' }];
 
-var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Component) {
+var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = function (_Component) {
   (0, _inherits3.default)(AlphaIntradayDialog, _Component);
 
   function AlphaIntradayDialog(props) {
@@ -95,7 +95,8 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
     });
 
     _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = _this._crCommandsWithLoad(_this);
+
     _this.state = {
       isToolbar: true,
       isShowLabels: true
@@ -160,7 +161,6 @@ var AlphaIntradayDialog = (0, _withToolbar2.default)(_class = function (_Compone
     }
   }]);
   return AlphaIntradayDialog;
-}(_react.Component)) || _class;
-
+}(_react.Component)) || _class) || _class);
 exports.default = AlphaIntradayDialog;
 //# sourceMappingURL=AlphaIntradayDialog.js.map

@@ -248,7 +248,7 @@
     },
     "FAO_TEMP_CHANGE": {
       "type": "FAO_TEMP_CHANGE",
-      "menuTitle": "Temp. Change (base 1951-80)",
+      "menuTitle": "Temp. Change (1951-80)",
       "dialogCaption": "Temperature Change",
       "chartContainerCaption": "FAOSTAT: Temperature Change",
       "dialogType": "DialogType4",
@@ -260,15 +260,15 @@
           "dfDomain": "ET",
           "dfElement": "7271",
           "dfItemName": "month",
-          "dfTitle": "Temperature Change"
+          "dfSubtitle": "Temperature Change with respect to baseline period, 1951-80"
         }
       }
     },
     "FAO_ST_DEVIATION": {
       "type": "FAO_ST_DEVIATION",
-      "menuTitle": "Standard Deviation (Temp Ch.)",
+      "menuTitle": "Standard Deviation (Temp. Ch.)",
       "dialogCaption": "Standard Deviation",
-      "chartContainerCaption": "FAOSTAT: Standard Deviation of Temp. Change",
+      "chartContainerCaption": "FAOSTAT: Standard Deviation of Temp. Change (1951-80)",
       "dialogType": "DialogType4",
       "addProps": "FAO_PRODUCTION",
       "dialogProps": {
@@ -278,7 +278,7 @@
           "dfDomain": "ET",
           "dfElement": "6078",
           "dfItemName": "month",
-          "dfTitle": "Standard Deviation (Temp Ch.)"
+          "dfSubtitle": "Standard Deviation of Temperature Change (1951-80)"
         }
       }
     }

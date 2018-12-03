@@ -19,6 +19,7 @@ const chartTypes = [
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withLoad
 class JodiWorldOilDialog extends Component {
 
    constructor(props){
@@ -39,10 +40,8 @@ class JodiWorldOilDialog extends Component {
        caption: 'O', title: 'Toggle Options Input',
        onClick: this._hClickOptions
      })
+     this._commandButtons = this._crCommandsWithLoad(this)
 
-     this._commandButtons = [
-       <D.Button.Load onClick={this._handleLoad} />
-     ]
      this.state = {
        isToolbar: true,
        isShowLabels: true,

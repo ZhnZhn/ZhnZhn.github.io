@@ -86,6 +86,7 @@ var MenuItemList = function (_Component) {
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref3 = MenuItemList.__proto__ || Object.getPrototypeOf(MenuItemList)).call.apply(_ref3, [this].concat(args))), _this), _this._renderItems = function () {
       var _this$props = _this.props,
           items = _this$props.items,
+          itemCl = _this$props.itemCl,
           pageNumber = _this$props.pageNumber,
           onNextPage = _this$props.onNextPage,
           onReg = _this$props.onReg,
@@ -105,7 +106,7 @@ var MenuItemList = function (_Component) {
           _MenuAriaItem2.default,
           {
             key: name,
-            className: cn,
+            className: cn || itemCl,
             style: S.ITEM,
             onClick: _onClick,
             onReg: _onReg

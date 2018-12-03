@@ -1,0 +1,18 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/decorators/withLoad.js"
+ ],
+ "file": "../../../../src/components/dialogs/decorators/withLoad.js",
+ "names": [
+  "_crCommandsWithLoad",
+  "comp",
+  "_handleLoad",
+  "withLoad",
+  "target",
+  "Object",
+  "assign",
+  "prototype"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,sBAAsB,SAAtBA,mBAAsB,CAASC,IAAT,EAAe;AACzC,SAAO,CACL,8BAAC,oBAAD,CAAG,MAAH,CAAU,IAAV,IAAe,KAAI,MAAnB,EAA0B,SAASA,KAAKC,WAAxC,GADK,CAAP;AAGD,CAJD;;AAMA,IAAMC,WAAW,SAAXA,QAAW,CAACC,MAAD,EAAY;AAC3BC,SAAOC,MAAP,CAAcF,OAAOG,SAArB,EAAgC;AAC9BP;AAD8B,GAAhC;AAGD,CAJD;;kBAMeG,Q"
+}

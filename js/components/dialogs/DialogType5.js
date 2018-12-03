@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _dec3, _class;
 
 var _react = require('react');
 
@@ -46,7 +46,7 @@ var HAS_SECOND_Y_AXIS = 'hasSecondYAxis';
 
 var CHART_TYPE_OPTIONS = [{ caption: 'Default: Area', value: _Type.ChartType.AREA }, { caption: 'Scatter: Label Up', value: _Type.ChartType.SCATTER_UP }, { caption: 'Scatter: Label Down', value: _Type.ChartType.SCATTER_DOWN }];
 
-var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(DialogType5, _Component);
 
   function DialogType5(props) {
@@ -133,7 +133,8 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
       caption: 'O', title: 'Toggle Options Input',
       onClick: _this._handleClickOptions
     });
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = _this._crCommandsWithLoad(_this);
+
     _this.state = {
       isToolbar: true,
       isShowLabels: true,
@@ -261,6 +262,6 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     }
   }]);
   return DialogType5;
-}(_react.Component)) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class);
 exports.default = DialogType5;
 //# sourceMappingURL=DialogType5.js.map

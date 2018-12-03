@@ -35,13 +35,15 @@ class MenuPage extends Component {
 
   render(){
     const {
-             style,
-             title,
-             items, baseTitleCl,
-             pageNumber, onNextPage, onPrevPage,
-             onClose,
-             children
-           } = this.props;
+       style,
+       title,
+       items,
+       baseTitleCl, itemCl,
+       pageNumber,
+       onNextPage, onPrevPage,
+       onClose,
+       children
+     } = this.props;
     return(
       <div style={style}>
         <MenuTitle
@@ -53,6 +55,7 @@ class MenuPage extends Component {
         />
         <MenuItemList
           items={items}
+          itemCl={itemCl || baseTitleCl}
           pageNumber={pageNumber}
           onNextPage={onNextPage}
           onReg={this._onRegFirst}

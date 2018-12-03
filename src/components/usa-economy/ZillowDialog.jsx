@@ -44,6 +44,7 @@ const _isZipCode = (value) => {
 
 @Decor.withToolbar
 @Decor.withValidationLoad
+@Decor.withLoad
 class  ZillowDialog extends Component {
 
   constructor(props){
@@ -55,9 +56,8 @@ class  ZillowDialog extends Component {
     })
 
     this.toolbarButtons = this._createType2WithToolbar(props)
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ]
+    this._commandButtons = this._crCommandsWithLoad(this)
+
     this.state = {
       isToolbar: true,
       isShowLabels: true,

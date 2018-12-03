@@ -17,6 +17,7 @@ const _testId = (value) => {
 };
 
 @Decor.withToolbar
+@Decor.withLoad
 class DialogQuery extends Component {
   constructor(props){
     super(props)
@@ -29,9 +30,7 @@ class DialogQuery extends Component {
     this.toolbarButtons = this._createType2WithToolbar(
        props, { noDate }
     )
-    this._commandButtons = [
-      <D.Button.Load onClick={this._handleLoad} />
-    ]
+    this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
        isToolbar: true,

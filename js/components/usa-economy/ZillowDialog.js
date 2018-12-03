@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class;
+var _dec, _dec2, _dec3, _class;
 
 var _react = require('react');
 
@@ -81,7 +81,7 @@ var _isZipCode = function _isZipCode(value) {
   return _reZipCode.test(value);
 };
 
-var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = function (_Component) {
+var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(ZillowDialog, _Component);
 
   function ZillowDialog(props) {
@@ -177,7 +177,8 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     });
 
     _this.toolbarButtons = _this._createType2WithToolbar(props);
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = _this._crCommandsWithLoad(_this);
+
     _this.state = {
       isToolbar: true,
       isShowLabels: true,
@@ -304,6 +305,6 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     }
   }]);
   return ZillowDialog;
-}(_react.Component)) || _class) || _class);
+}(_react.Component)) || _class) || _class) || _class);
 exports.default = ZillowDialog;
 //# sourceMappingURL=ZillowDialog.js.map

@@ -60,6 +60,12 @@ var ChartTheme = {
       }
     }
   },
+  title: {
+    style: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  },
   colors: ['#7cb5ec', '#8abb5d', //'#90ed7d'
   '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'],
   labels: {
@@ -216,7 +222,6 @@ var ChartTheme = {
       }
     },
     pie: {
-      //colors : Chart.fMonoPieColors()
       colors: _conf2.default.fMonoPieColors()
     }
   },
@@ -271,6 +276,5 @@ var ChartTheme = {
   }
 };
 
-//import ChartFn from './ChartFn'
 exports.default = ChartTheme;
 //# sourceMappingURL=ChartTheme.js.map

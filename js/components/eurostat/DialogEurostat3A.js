@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _dec, _dec2, _class, _class2, _temp;
+var _dec, _dec2, _dec3, _class, _class2, _temp;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -55,7 +55,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MAP_FREQUENCY_DF = 'M';
 
-var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec(_class = _dec2(_class = (_temp = _class2 = function (_Component) {
+var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat3A, _Component);
 
   function DialogEurostat3A(props) {
@@ -187,9 +187,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
     });
 
     _this.toolbarButtons = _this._createType2WithToolbar(props);
-
-    _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, { onClick: _this._handleLoad })];
-
+    _this._commandButtons = _this._crCommandsWithLoad(_this);
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
     _this.state = (0, _extends3.default)({
@@ -334,6 +332,6 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
   twoJsonProp: 'items',
   threeCaption: 'Metric',
   threeJsonProp: 'items'
-}, _temp)) || _class) || _class);
+}, _temp)) || _class) || _class) || _class);
 exports.default = DialogEurostat3A;
 //# sourceMappingURL=DialogEurostat3A.js.map

@@ -87,7 +87,10 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
         onTestDate = _props$data.onTestDate;
 
 
-    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, { onClick: _this._handleLoad })];
+    _this._commandButtons = [_react2.default.createElement(_Button2.default.Load, {
+      key: 'load',
+      onClick: _this._handleLoad
+    })];
 
     _this.state = {
       initFromDate: fromDate || getFromDate(2),
@@ -226,4 +229,4 @@ var LoadItemDialog = (0, _withValidationLoad2.default)(_class = (_temp = _class2
 }, _temp)) || _class;
 
 exports.default = LoadItemDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\watch-browser\LoadItemDialog.js.map
+//# sourceMappingURL=LoadItemDialog.js.map
