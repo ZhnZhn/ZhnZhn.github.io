@@ -66,7 +66,8 @@
     },{
       "caption" : "Real Estate",
       "items" : [
-        { "id" : "ES_RE_INDIC" }
+        { "id" : "ES_RE_INDIC" },
+        { "id" : "ES_RE_OVERCROWDING" }
       ]
     },{
       "caption": "Trade",
@@ -142,7 +143,6 @@
     "ES_8_ECONOMIC": {
       "type": "ES_8_ECONOMIC",
       "menuTitle" : "8 Indicators",
-      "dialogCaption" : "8 Indicators",
       "chartContainerCaption" : "Eurostat 8 Economic Indicators",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -155,7 +155,6 @@
     "ES_LABOUR" : {
       "type" : "ES_LABOUR",
       "menuTitle" : "Labour Cost",
-      "dialogCaption" : "Labour Cost",
       "chartContainerCaption" : "Eurostat Labour Cost",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -169,7 +168,6 @@
     "ES_SOCIAL" : {
       "type" : "ES_SOCIAL",
       "menuTitle" : "Social Protection",
-      "dialogCaption" : "Social Protection",
       "chartContainerCaption" : "Eurostat Social Protection",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -196,7 +194,6 @@
     "ES_UNEMP" : {
       "type" : "ES_UNEMP",
       "menuTitle" : "Unemployment (NSA)",
-      "dialogCaption" : "Unemployment (NSA)",
       "chartContainerCaption" : "Eurostat Unemployment (NSA)",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -217,7 +214,6 @@
     "ES_INDIC" : {
         "type" : "ES_INDIC",
         "menuTitle" : "Economic Indicators",
-        "dialogCaption" : "Economic Indicators",
         "chartContainerCaption" : "Eurostat Economic Indicators",
         "dialogType" : "DialogEurostat2",
         "addProps": "ES_COUNTRIES_BASE",
@@ -229,7 +225,6 @@
     "ES_PRODUCTION": {
       "type": "ES_PRODUCTION",
       "menuTitle": "Production in Construction",
-      "dialogCaption": "Production in Construction",
       "chartContainerCaption": "Eurostat: Production in Construction (SCA), Monthly",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -252,7 +247,6 @@
     "ES_HCPI_NSA" : {
       "type" : "ES_HCPI_NSA",
       "menuTitle" : "HCPI (2015=100) (NSA)",
-      "dialogCaption" : "HCPI (2015=100) (NSA)",
       "chartContainerCaption" : "Eurostat Harmonised Consume Price Index (NSA)",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -277,7 +271,6 @@
     "ES_HCPI" : {
       "type" : "ES_HCPI",
       "menuTitle" : "HCPI (2015=100)",
-      "dialogCaption" : "HCPI (2015=100)",
       "chartContainerCaption" : "Eurostat HCPI (2015=100) Monthly",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -298,7 +291,6 @@
     "ES_HCPI_FLASH" : {
       "type" : "ES_HCPI_FLASH",
       "menuTitle" : "HCPI (Flash Release)",
-      "dialogCaption" : "HCPI (Flash Release)",
       "chartContainerCaption" : "Eurostat HCPI (Flash Release)",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -322,7 +314,6 @@
     "ES_HCPI_CONST" : {
       "type" : "ES_HCPI_CONST",
       "menuTitle" : "HCPI at Constant Taxes",
-      "dialogCaption" : "HCPI at Constant Taxes",
       "chartContainerCaption" : "Eurostat HCPI at Constant Taxes",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -344,7 +335,6 @@
     "ES_PPP" : {
       "type" : "ES_PPP",
       "menuTitle" : "PPP, Price Indices, Expend.",
-      "dialogCaption" : "PPP, Price Indices, Expend.",
       "chartContainerCaption" : "Eurostat PPP, Price Indices, Expenditures",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -366,7 +356,6 @@
     "ES_CPI_G20" : {
       "type" : "ES_CPI_G20",
       "menuTitle" : "CPI G20 All Items",
-      "dialogCaption" : "CPI G20 All Items",
       "chartContainerCaption" : "Eurostat CPI G20 All Items",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -413,7 +402,6 @@
     "ES_E_STAT_PR" : {
         "type" : "ES_E_STAT_PR",
         "menuTitle" : "Electricity, Gas Prices",
-        "dialogCaption" : "Electricity, Gas Prices",
         "chartContainerCaption" : "Eurostat Energy Electricity, Gas Prices",
         "dialogType" : "DialogEurostat2",
         "addProps": "ES_COUNTRIES_BASE",
@@ -426,7 +414,6 @@
     "ES_E_CHD_DAYS_M" : {
         "type" : "ES_E_CHD_DAYS_M",
         "menuTitle" : "Cooling, Heating Days, M",
-        "dialogCaption" : "Cooling, Heating Days, M",
         "chartContainerCaption" : "Eurostat Cooling, Heating Degree Days, Monthly",
         "dialogType" : "DialogEurostat2",
         "addProps": "ES_COUNTRIES_BASE",
@@ -447,7 +434,6 @@
     "ES_E_CHD_DAYS_A" : {
         "type" : "ES_E_CHD_DAYS_A",
         "menuTitle" : "Cooling, Heating Days, A",
-        "dialogCaption" : "Cooling, Heating Days, A",
         "chartContainerCaption" : "Eurostat Cooling, Heating Degree Days, Annual",
         "dialogType" : "DialogEurostat2",
         "addProps": "ES_COUNTRIES_BASE",
@@ -488,7 +474,6 @@
    "ES_I_ELECTRICITY_GENERATION" : {
       "type" : "ES_I_ELECTRICITY_GENERATION",
       "menuTitle" : "Supply Electricity, GWh, M",
-      "dialogCaption" : "Supply of Electricity, GWh, M",
       "chartContainerCaption" : "Eurostat: Supply of Electricity, GWh, Monthly",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -508,7 +493,6 @@
     "ES_E_STC_ELECTRICITY" : {
       "type" : "ES_E_STC_ELECTRICITY",
       "menuTitle" : "Industry Electricity, A",
-      "dialogCaption" : "Industry Electricity, A",
       "chartContainerCaption" : "Eurostat: Industry Electricity, Annual",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -532,7 +516,6 @@
     "ES_E_HOUSEHOLD_ELECTRICITY" : {
       "type" : "ES_E_HOUSEHOLD_ELECTRICITY",
       "menuTitle" : "Electr. House Prices",
-      "dialogCaption" : "Electr. House Prices",
       "chartContainerCaption" : "Eurostat: Electricity Household Prices, Annual",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -555,7 +538,6 @@
     "ES_E_NONHOUSEHOLD_ELECTRICITY" : {
       "type" : "ES_E_NONHOUSEHOLD_ELECTRICITY",
       "menuTitle" : "Electr. Non-House Prices",
-      "dialogCaption" : "Electr. Non-Household Prices",
       "chartContainerCaption" : "Eurostat: Electricity Non-Household Prices, Annual",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -579,7 +561,6 @@
     "ES_F_LRATE" : {
       "type" : "ES_F_LRATE",
       "menuTitle" : "Long-Term Rates",
-      "dialogCaption" : "Long-Term Rates",
       "chartContainerCaption" : "Eurostat Finance Long-Term Interest Rates",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -590,7 +571,6 @@
     "ES_F_SRATE" : {
       "type" : "ES_F_SRATE",
       "menuTitle" : "Short-Term Rates",
-      "dialogCaption" : "Short-Term Rates",
       "chartContainerCaption" : "Eurostat: Finance Short-Term Interest Rates",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -641,7 +621,6 @@
     "ES_AGRI_LIVESTOCK" : {
       "type" : "ES_AGRI_LIVESTOCK",
       "menuTitle" : "Livestock",
-      "dialogCaption" : "Livestock",
       "chartContainerCaption" : "Eurostat Agriculture Livestock",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -656,7 +635,6 @@
     "ES_AGRI_ORGANIC" : {
       "type" : "ES_AGRI_ORGANIC",
       "menuTitle" : "Organic Farming",
-      "dialogCaption" : "Organic Farming",
       "chartContainerCaption" : "Eurostat Agriculture Organic Farming",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -718,7 +696,6 @@
     "ES_AGRI_CROP": {
       "type" : "ES_AGRI_CROP",
       "menuTitle" : "Crops Production",
-      "dialogCaption" : "Crops Production",
       "chartContainerCaption" : "Eurostat: Crops Production",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -764,7 +741,6 @@
     "ES_HT_INDIC" : {
       "type" : "ES_HT_INDIC",
       "menuTitle" : "High-Tech Indicators",
-      "dialogCaption" : "High-Tech Indicators",
       "chartContainerCaption" : "High-Tech Indicators",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -782,7 +758,6 @@
     "ES_HT_RD" : {
       "type" : "ES_HT_RD",
       "menuTitle" : "Expedinture on R&D",
-      "dialogCaption" : "Expedinture on R&D",
       "chartContainerCaption" : "Expedinture on R&D",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -806,7 +781,6 @@
     "ES_RE_INDIC" : {
       "type" : "ES_RE_INDIC",
       "menuTitle" : "House Price Indicators",
-      "dialogCaption" : "House Price Indicators",
       "chartContainerCaption" : "Eurostat House Indicators",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -816,11 +790,31 @@
         "twoJsonProp" : "indicators"
       }
     },
+    "ES_RE_OVERCROWDING": {
+      "type": "ES_RE_OVERCROWDING",
+      "menuTitle": "Overcrowding Rate By",
+      "chartContainerCaption": "Eurostat: Overcrowding rate in %, EU-SILC Survey",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption": "By Age",
+        "twoURI": "./data/eurostat/real-estate-overcrowding-by-age.json",
+        "threeCaption": "By Metric",
+        "threeURI": "./data/eurostat/real-estate-overcrowding-metric.json",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf" : 2,
+          "dfTable": "ilc_lvho05a",
+          "dfParams": [ "geo", "age", "incgrp" ],
+          "dfTail": "sex=T&unit=PC",
+          "mapType": "V"
+        }
+      }
+    },
 
     "ES_TR_BYPARTNER": {
       "type" : "ES_TR_BYPARTNER",
       "menuTitle" : "EU28 Total Goods, A",
-      "dialogCaption" : "EU28 Total Goods, A",
       "chartContainerCaption" : "Eurostat: Trade EU28 Total Goods by Partner, Annual",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_TR_BASE",
@@ -925,7 +919,6 @@
     "ES_TR_EABYPARTNER": {
       "type": "ES_TR_EABYPARTNER",
       "menuTitle": "EA19 Goods, M",
-      "dialogCaption": "EA19 Goods, M",
       "chartContainerCaption": "Eurostat: Trade EA19 Goods By Partner, Monthly, M EUR",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_TRADEBY_BASE",
@@ -944,7 +937,6 @@
     "ES_TR_EUBYPARTNER": {
       "type": "ES_TR_EUBYPARTNER",
       "menuTitle": "EU28 Goods, M",
-      "dialogCaption": "EU28 Goods, M",
       "chartContainerCaption": "Eurostat: Trade EU28 Goods By Partner, Monthly, M EUR",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_TRADEBY_BASE",
@@ -963,7 +955,6 @@
     "ES_TR_TOTALGOODS": {
       "type": "ES_TR_TOTALGOODS",
       "menuTitle": "Total Goods, M",
-      "dialogCaption": "Total Goods, M",
       "chartContainerCaption": "Eurostat: Total Goods, Monthly, M EUR",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -985,7 +976,6 @@
     "ES_TR_BYCOUNTRY": {
       "type": "ES_TR_BYCOUNTRY",
       "menuTitle": "Goods & Services, A",
-      "dialogCaption": "Goods & Services, A",
       "chartContainerCaption": "Eurostat: Trade of Goods & Services by Member State, Annual, in M EUR",
       "dialogType": "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -1032,7 +1022,6 @@
     "ES_GF_TAXAGGREGATE": {
       "type" : "ES_GF_TAXAGGREGATE",
       "menuTitle" : "Tax aggregates",
-      "dialogCaption" : "Tax aggregates",
       "chartContainerCaption" : "Eurostat: Tax aggregates",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -1055,7 +1044,6 @@
     "ES_GF_DEBT" : {
       "type" : "ES_GF_DEBT",
       "menuTitle" : "Deficit/Surplus, Debt",
-      "dialogCaption" : "Deficit/Surplus, Debt",
       "chartContainerCaption" : "Eurostat: Government Finance: Deficit/Surplus, Debt",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
@@ -1068,7 +1056,6 @@
     "ES_GF_PENSIONS": {
       "type" : "ES_GF_PENSIONS",
       "menuTitle" : "Pensions Expenditure",
-      "dialogCaption" : "Pensions Expenditure",
       "chartContainerCaption" : "Eurostat: Pensions Expenditure",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -1092,7 +1079,6 @@
     "ES_HC_PROVIDER": {
       "type" : "ES_HC_PROVIDER",
       "menuTitle" : "Expenditure by Provider",
-      "dialogCaption" : "Expenditure by Provider",
       "chartContainerCaption" : "Eurostat: Healthcare Expenditure by Provider",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -1114,7 +1100,6 @@
     "ES_HC_FINSCHEME": {
       "type" : "ES_HC_FINSCHEME",
       "menuTitle" : "Expenditure by Fin. Scheme",
-      "dialogCaption" : "Expenditure by Fin. Scheme",
       "chartContainerCaption" : "Eurostat: Healthcare Expenditure by Financing Scheme",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
@@ -1136,7 +1121,6 @@
     "ES_HC_FUNCTION": {
       "type" : "ES_HC_FUNCTION",
       "menuTitle" : "Expenditure by Function",
-      "dialogCaption" : "Expenditure by Function",
       "chartContainerCaption" : "Eurostat: Healthcare Expenditure by Function",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
