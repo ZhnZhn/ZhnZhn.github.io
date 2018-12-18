@@ -12,8 +12,8 @@ import PaneOptions from './PaneOptions'
 const S = {
   MODAL: {
     position : 'static',
-    width: '380px',
-    height: '345px',
+    width: 380,
+    height: 345,
     margin: '70px auto 0px'
   },
   TITLE_API: {
@@ -26,6 +26,8 @@ const S = {
     color: '#232f3b'
   }
 };
+
+const _isFn = fn => typeof fn === 'function';
 
 class SettingsDialog extends Component {
   /*
@@ -49,15 +51,26 @@ class SettingsDialog extends Component {
     return true;
   }
 
+  _hClose = () => {
+    this.props.onClose()
+    if (this._modal
+        && _isFn(this._modal.focusPrev) ) {
+      this._modal.focusPrev()
+    }
+  }
+
+  _refModal = n => this._modal = n
+
   render(){
-    const { isShow, data, onClose } = this.props;
+    const { isShow, data } = this.props;
     return (
          <ModalDialog
+            ref={this._refModal}
             caption="User Settings"
             style={S.MODAL}
             isWithButton={false}
             isShow={isShow}
-            onClose={onClose}
+            onClose={this._hClose}
          >
            <TabPane isUpdateInit={true}>
              <Tab title="ApiKeys">
@@ -65,7 +78,7 @@ class SettingsDialog extends Component {
                   titleStyle={S.TITLE_API}
                   btStyle={S.BT}
                   data={data}
-                  onClose={onClose}
+                  onClose={this._hClose}
                 />
              </Tab>
              <Tab title="Options">
@@ -74,7 +87,7 @@ class SettingsDialog extends Component {
                  btStyle={S.BT}
                  data={data}
                  onChangeTheme={Actions.changeTheme}
-                 onClose={onClose}
+                 onClose={this._hClose}
                />
              </Tab>
            </TabPane>

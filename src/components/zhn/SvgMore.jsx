@@ -1,5 +1,7 @@
 import React from 'react'
 
+const CL = 'focusable'
+
 const S = {
   BT: {
     verticalAlign: 'middle',
@@ -12,9 +14,15 @@ const S = {
   }
 };
 
-const SvgMore = ({ style, svgStyle, onClick }) => {
+const SvgMore = ({
+  style, svgStyle,
+  btRef,
+  onClick
+}) => {
   return (
     <button
+      ref={btRef}
+      className={CL}
       style={{...S.BT, ...style }}
       onClick={onClick}
     >

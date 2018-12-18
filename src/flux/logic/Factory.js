@@ -10,10 +10,7 @@ import fBrowser from './fBrowser'
 import ChartContainer from '../../components/zhn-containers/ChartContainer';
 
 import Msg from '../../constants/Msg';
-import {
-  ModalDialog,
-  LoadType
-} from '../../constants/Type';
+import {  LoadType } from '../../constants/Type';
 
 import ComponentActions from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
@@ -33,22 +30,49 @@ const {
 const onLoadChart = ChartActions.loadStock
     , onShowChart = ChartActions.showChart
     , initFromDate = getFromDate(2)
-    , initToDate = getToDate()
-    , onTestDate = isYmd
-    , onTestDateOrEmpty = isYmdOrEmpty;
+    , initToDate = getToDate();
 
-const _showModalDialogDescription = function(option){
-  ComponentActions.showModalDialog(ModalDialog.DESCRIPTION, option);
-}
+const _getDialogConf = function(conf, dialogType){
+  if (conf && conf.dialogConf) {
+    return conf;
+  }
+  const _browserId = dialogType.split('_')[0];
+  return ChartStore.getSourceConfig(_browserId, dialogType);
+};
 
+const _crFnValue = (valueFn, valueFnPrefix) => {
+  return valueFn
+    ? valueFnPrefix
+       ? RouterFnValue[valueFn].bind(null, valueFnPrefix)
+       : RouterFnValue[valueFn]
+    : undefined;
+};
 
-const createDialogComp = function (conf, browserType){
+const _crDateProps = (nInitFromDate, isContinious) => {
+  const _props = isContinious
+    ? {
+        msgTestDateOrEmpty: Msg.TEST_DATE_OR_EMPTY,
+        onTestDateOrEmpty: isYmdOrEmpty
+      }
+    : undefined;
+  return {
+    initFromDate: nInitFromDate
+      ? getFromDate(nInitFromDate)
+      : initFromDate,
+    initToDate,
+    onTestDate: isYmd,
+    ..._props
+  }
+};
+
+const _crDialogComp = function (dType, browserType, dConf){
+   const conf = _getDialogConf(dConf, dType);
    const {
            type:itemKey,
            dialogProps={}, dialogType,
            dialogCaption, menuTitle,
            optionURI, optionsJsonProp,
-           dataColumn,
+           dataColumn
          } = conf
        , {
            nInitFromDate,
@@ -59,33 +83,28 @@ const createDialogComp = function (conf, browserType){
            loadId,
            isProxy
          } = dialogProps
-       , _initFromDate = (nInitFromDate)
-            ? getFromDate(nInitFromDate)
-            : initFromDate
+      /*
        , _fnValue = (valueFn)
             ? (valueFnPrefix )
                  ? RouterFnValue[valueFn].bind(null, valueFnPrefix)
                  : RouterFnValue[valueFn]
             : undefined
+      */
        , onClickInfo = (descrUrl)
-            ? _showModalDialogDescription
+            ? ComponentActions.showDescription
             : undefined
        , loadFn = RouterLoadFn.getFn(loadFnType, dialogType)
        , proxy = isProxy
             ? ChartStore.getProxy()
             : undefined
-       , onLoad = onLoadChart.bind(null, {
-            chartType: itemKey,
-            browserType, conf
+       , onLoad = onLoadChart
+          .bind(null, {
+             chartType: itemKey,
+             browserType, conf
           })
-       , onShow = onShowChart.bind(null, itemKey, browserType, conf);
+       , onShow = onShowChart
+           .bind(null, itemKey, browserType, conf);
 
-       if (isContinious) {
-         Object.assign(dialogProps, {
-           msgTestDateOrEmpty: Msg.TEST_DATE_OR_EMPTY,
-           onTestDateOrEmpty: onTestDateOrEmpty
-         })
-       }
        if (!loadId){
          dialogProps.loadId = LoadType.Q;
        }
@@ -100,10 +119,11 @@ const createDialogComp = function (conf, browserType){
               dataColumn : dataColumn,
               msgOnNotSelected : Msg.NOT_SELECTED,
               msgOnNotValidFormat : Msg.NOT_VALID_FORMAT,
+              fnValue : _crFnValue(valueFn, valueFnPrefix),
+              //initFromDate, initToDate, onTestDate,
+              //msgTestDateOrEmpty, onTestDateOrEmpty
+              ..._crDateProps(nInitFromDate, isContinious),
               onLoad, onShow,
-              fnValue : _fnValue,
-              initFromDate : _initFromDate,
-              initToDate, onTestDate,
               onClickInfo,
               loadFn,
               proxy,
@@ -113,7 +133,7 @@ const createDialogComp = function (conf, browserType){
 }
 
 
-const _createOptionDialog = function(option) {
+const _crOptionDialogComp = function(option) {
   const { dialogType } = option
   return RouterDialog.getDialog(dialogType)
      .then(Comp => {
@@ -123,61 +143,52 @@ const _createOptionDialog = function(option) {
      });
 }
 
+const _crContCaption = (conf, browserType) => {
+  let _caption = conf.chartContainerCaption
+    || conf.contFullCaption
+    || BrowserConfig[browserType].contFullCaption;
+  if (_caption) {
+    return _caption;
+  }
 
-const onCloseItem = ChartActions.closeChart;
-const fnCloseChartContainer = function(chartType, browserType){
-  return ComponentActions.closeChartContainer.bind(null, chartType, browserType);
-}
-const createChartContainerComp = function(conf={}, browserType){
-  const Comp = (conf.chartContainerComp)
-                 ? conf.chartContainerComp
-                 : ChartContainer
-      , _type = (conf.type)
-             ? conf.type
-             : BrowserConfig[browserType].chartContainerType
-      , _caption = (conf.chartContainerCaption)
-             ? conf.chartContainerCaption
-             : BrowserConfig[browserType].chartContainerCaption;
+  const { dataSource='' } = conf.dialogProps || {};
+  _caption = conf.contCaption
+     || conf.dialogCaption
+     || conf.menuTitle
+     || 'Chart Container'
+  return dataSource && dataSource.length>0
+     ? `${dataSource}: ${_caption}`
+     : _caption;
+};
+
+const _crChartContainerComp = function(dType, browserType, dConf){
+  const conf = _getDialogConf(dConf, dType) || {};
+  const Comp = conf.chartContainerComp
+    || ChartContainer
+  , _type = conf.type
+    || BrowserConfig[browserType].chartContainerType
+  , _caption = _crContCaption(conf, browserType);
 
   return React.createElement(Comp, {
     key: _type,
     caption: _caption,
     chartType: _type,
     browserType: browserType,
-    onCloseContainer: fnCloseChartContainer(_type, browserType),
-    onCloseItem
+    onCloseContainer: ComponentActions.closeChartContainer
+      .bind(null, _type, browserType),
+    onCloseItem: ChartActions.closeChart
   });
 }
-
-
-const _getDialogConf = function(conf, dialogType){
-  if (conf && conf.dialogConf) {
-    return conf;
-  }
-  const _browserId = dialogType.split('_')[0];
-  return ChartStore.getSourceConfig(_browserId, dialogType);
-};
 
 const Factory = {
   ...fBrowser,
 
-  createDialog(dialogType, browserType, conf){
-    return createDialogComp(
-      _getDialogConf(conf, dialogType),
-      browserType
-    );
- },
- createOptionDialog(option){
-   return _createOptionDialog(option)
- },
-
- createChartContainer(dialogType, browserType, conf){
-   return createChartContainerComp(
-     _getDialogConf(conf, dialogType),
-     browserType
-   );
- }
-
+  //dialogType, browserType, conf
+  createDialog: _crDialogComp,
+  //option
+  createOptionDialog: _crOptionDialogComp,
+  //dialogType, browserType, conf
+  createChartContainer: _crChartContainerComp
 }
 
 export default Factory

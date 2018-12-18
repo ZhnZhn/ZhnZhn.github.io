@@ -17,7 +17,7 @@ import CA, { ComponentActionTypes as CAT } from '../../flux/actions/ComponentAct
 import BA from '../../flux/actions/BrowserActions'
 import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 
-import { BrowserType as BT, ModalDialog } from '../../constants/Type'
+import { BrowserType as BT } from '../../constants/Type'
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
     , CAPTION = "ERC v0.16.0";
@@ -45,12 +45,15 @@ const MODEL = crBrowserModel();
 class HeaderBar extends Component {
 
   constructor(props){
-    super()
+    super(props)
     this._settingFn = props.store.exportSettingFn()
 
-    this._hShowEconomic = BA.showBrowserDynamic.bind(null, BT.ECONOMIC)
-    this._hShowEurostat = BA.showBrowserDynamic.bind(null, BT.EUROSTAT)
-    this._hShowWatch = BA.showBrowserDynamic.bind(null, BT.WATCH_LIST)
+    this._hShowEconomic = BA.showBrowserDynamic
+      .bind(null, BT.ECONOMIC)
+    this._hShowEurostat = BA.showBrowserDynamic
+      .bind(null, BT.EUROSTAT)
+    this._hShowWatch = BA.showBrowserDynamic
+      .bind(null, BT.WATCH_LIST)
 
     this.state = {
       isDS: false
@@ -60,15 +63,7 @@ class HeaderBar extends Component {
   _onRegDS = (dsNode) => {
     this.dsNode = dsNode
   }
-  _hClickDS = () => {
-    this.setState({ isDS: !this.state.isDS })
-  }
-  _hCloseDS = (event) => {
-    if (!this.dsNode.contains(event.target)){
-      this.setState({ isDS: false })
-    }
-  }
-
+  
   _hToggleDS = () => {
     this.setState(prevState => ({
       isDS: !prevState.isDS
@@ -76,9 +71,7 @@ class HeaderBar extends Component {
   }
 
   _hDialogSettings = () => {
-    CA.showModalDialog(
-      ModalDialog.SETTINGS, this._settingFn
-    )
+    CA.showSettings(this._settingFn)
   }
 
   render(){
@@ -103,7 +96,7 @@ class HeaderBar extends Component {
              caption="Topics"
              title="Click to open topics menu"
              accessKey="t"
-             onClick={this._hClickDS}
+             onClick={this._hToggleDS}
              onReg={this._onRegDS}
           >
             <span className={CL.ARROW} />
@@ -167,7 +160,6 @@ class HeaderBar extends Component {
              model={MODEL}
              onClose={this._hToggleDS}
            />
-
       </div>
     );
   }

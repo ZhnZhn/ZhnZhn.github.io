@@ -61,16 +61,28 @@ var InputSecret = function (_Component) {
   (0, _inherits3.default)(InputSecret, _Component);
 
   function InputSecret() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, InputSecret);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (InputSecret.__proto__ || Object.getPrototypeOf(InputSecret)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._handleChangeValue = function (event) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = InputSecret.__proto__ || Object.getPrototypeOf(InputSecret)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: ''
+    }, _this._handleChangeValue = function (event) {
       _this.secret = event.target.value;
-      _this.setState({ value: _maskValue(_this.secret.length) });
-    };
-
-    _this._handleKeyDown = function (event) {
+      _this.setState(function (prevState) {
+        prevState.value = _maskValue(_this.secret.length);
+        return prevState;
+      });
+    }, _this._handleKeyDown = function (event) {
+      if (event.keyCode !== 27) {
+        event.stopPropagation();
+      }
       switch (event.keyCode) {
         case 13:
           if (typeof _this.props.onEnter === 'function') {
@@ -86,12 +98,7 @@ var InputSecret = function (_Component) {
         default:
           return;
       }
-    };
-
-    _this.state = {
-      value: ''
-    };
-    return _this;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(InputSecret, [{

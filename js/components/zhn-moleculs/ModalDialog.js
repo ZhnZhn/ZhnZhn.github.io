@@ -31,9 +31,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _withTheme = require('../hoc/withTheme');
+var _withThemeRef = require('../hoc/withThemeRef');
 
-var _withTheme2 = _interopRequireDefault(_withTheme);
+var _withThemeRef2 = _interopRequireDefault(_withThemeRef);
+
+var _utils = require('../zhn-utils/utils');
 
 var _SvgClose = require('../zhn/SvgClose');
 
@@ -52,6 +54,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var TH_ID = 'MODAL_DIALOG';
 
 var CL = {
+  MD: 'modal-dialog',
   SHOWING: 'show-popup',
   HIDING: 'hide-popup'
 };
@@ -74,16 +77,30 @@ var S = (0, _extends3.default)({}, _Dialog2.default, {
 var ModalDialog = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(ModalDialog, _Component);
 
+  /*
+   static propTypes = {
+     isShow: PropTypes.bool,
+     isWithButton: PropTypes.bool,
+     isNotUpdate: PropTypes.bool,
+     withoutClose: PropTypes.bool,
+     style: PropTypes.object,
+     caption: PropTypes.string,
+     timeout: PropTypes.number,
+     commandButtons: PropTypes.arrayOf(PropTypes.element),
+     onClose: PropTypes.func
+   }
+   */
   function ModalDialog(props) {
     (0, _classCallCheck3.default)(this, ModalDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalDialog.__proto__ || Object.getPrototypeOf(ModalDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalDialog.__proto__ || Object.getPrototypeOf(ModalDialog)).call(this, props));
+
+    _this.wasClosing = false;
 
     _this._renderCommandButton = function () {
       var _this$props = _this.props,
           commandButtons = _this$props.commandButtons,
-          withoutClose = _this$props.withoutClose,
-          onClose = _this$props.onClose;
+          withoutClose = _this$props.withoutClose;
 
       return _react2.default.createElement(
         'div',
@@ -94,41 +111,45 @@ var ModalDialog = (_temp = _class = function (_Component) {
           rootStyle: S.BT_ROOT,
           caption: 'Close',
           title: 'Close Modal Dialog',
-          onClick: onClose
+          onClick: _this._hClose
         })
       );
     };
 
     _this.wasClosing = false;
+
+    _this._rootNode = null;
+    _this._refRootNode = _this._refRootNode.bind(_this);
+
+    _this._hKeyDown = _this._hKeyDown.bind(_this);
+    _this._hClose = _this._hClose.bind(_this);
     return _this;
   }
-  /*
-   static propTypes = {
-     isShow: PropTypes.bool,
-     isWithButton: PropTypes.bool,
-     isNotUpdate: PropTypes.bool,
-     withoutClose: PropTypes.bool,
-     commandButtons: PropTypes.arrayOf(PropTypes.element),
-     timeout: PropTypes.number,
-     caption: PropTypes.string,
-     style: PropTypes.object,
-     onClose: PropTypes.func
-   }
-   */
-
 
   (0, _createClass3.default)(ModalDialog, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.focus();
+    }
+  }, {
+    key: '_hasHiddenStill',
+    value: function _hasHiddenStill(nextProps) {
+      return !this.props.isShow && !nextProps.isShow;
+    }
+  }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props) {
-        if (nextProps.isNotUpdate) {
-          return false;
-        }
-        if (!this.props.isShow && !nextProps.isShow) {
+        if (nextProps.isNotUpdate || this._hasHiddenStill(nextProps)) {
           return false;
         }
       }
       return true;
+    }
+  }, {
+    key: '_hasShowed',
+    value: function _hasShowed(prevProps) {
+      return !prevProps.isShow && this.props.isShow;
     }
   }, {
     key: 'componentDidUpdate',
@@ -139,12 +160,34 @@ var ModalDialog = (_temp = _class = function (_Component) {
         setTimeout(function () {
           _this2.setState({});
         }, this.props.timeout);
+      } else if (this._hasShowed(prevProps)) {
+        this.focus();
       }
     }
   }, {
-    key: '_handleClickDialog',
-    value: function _handleClickDialog(event) {
+    key: '_hClick',
+    value: function _hClick(event) {
       event.stopPropagation();
+    }
+  }, {
+    key: '_hKeyDown',
+    value: function _hKeyDown(evt) {
+      if ((0, _utils.isKeyEscape)(evt)) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        this._hClose();
+      }
+    }
+  }, {
+    key: '_hClose',
+    value: function _hClose() {
+      this.props.onClose();
+      this.focusPrev();
+    }
+  }, {
+    key: '_refRootNode',
+    value: function _refRootNode(n) {
+      this._rootNode = n;
     }
   }, {
     key: 'render',
@@ -157,7 +200,6 @@ var ModalDialog = (_temp = _class = function (_Component) {
           caption = _props.caption,
           styleCaption = _props.styleCaption,
           children = _props.children,
-          onClose = _props.onClose,
           TS = theme.getStyle(TH_ID);
 
 
@@ -174,40 +216,62 @@ var ModalDialog = (_temp = _class = function (_Component) {
           this.wasClosing = true;
         }
       }
-      return _react2.default.createElement(
-        'div',
-        {
-          className: _className,
-          style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style, TS.ROOT, TS.EL_BORDER),
-          onClick: this._handleClickDialog
-        },
+      return (
+        /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
         _react2.default.createElement(
           'div',
-          { style: (0, _extends3.default)({}, S.CAPTION_DIV, TS.EL) },
+          {
+            ref: this._refRootNode,
+            role: 'dialog',
+            tabIndex: '-1',
+            'aria-label': caption,
+            'aria-hidden': !isShow,
+            className: CL.MD + ' ' + _className,
+            style: (0, _extends3.default)({}, S.ROOT_DIV, S.ROOT_DIV_MODAL, style, _style, TS.ROOT, TS.EL_BORDER),
+            onClick: this._hClick,
+            onKeyDown: this._hKeyDown
+          },
           _react2.default.createElement(
-            'span',
-            { style: styleCaption },
-            caption
+            'div',
+            { style: (0, _extends3.default)({}, S.CAPTION_DIV, TS.EL) },
+            _react2.default.createElement(
+              'span',
+              { style: styleCaption },
+              caption
+            ),
+            _react2.default.createElement(_SvgClose2.default, {
+              style: S.SVG_CLOSE,
+              onClose: this._hClose
+            })
           ),
-          _react2.default.createElement(_SvgClose2.default, {
-            style: S.SVG_CLOSE,
-            onClose: onClose
-          })
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          children
-        ),
-        isWithButton && this._renderCommandButton()
+          _react2.default.createElement(
+            'div',
+            null,
+            children
+          ),
+          isWithButton && this._renderCommandButton()
+        )
       );
+    }
+  }, {
+    key: 'focus',
+    value: function focus() {
+      this._prevFocused = document.activeElement;
+      (0, _utils.focusNode)(this._rootNode);
+    }
+  }, {
+    key: 'focusPrev',
+    value: function focusPrev() {
+      (0, _utils.focusNode)(this._prevFocused);
+      this._prevFocused = null;
     }
   }]);
   return ModalDialog;
 }(_react.Component), _class.defaultProps = {
   isWithButton: true,
   isNotUpdate: false,
-  timeout: 450
+  timeout: 450,
+  onClose: function onClose() {}
 }, _temp);
-exports.default = (0, _withTheme2.default)(ModalDialog);
+exports.default = (0, _withThemeRef2.default)(ModalDialog);
 //# sourceMappingURL=ModalDialog.js.map

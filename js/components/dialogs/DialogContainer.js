@@ -57,47 +57,45 @@ var DialogContainer = function (_Component) {
       data: {},
       dialogs: [],
       currentDialog: null
+    }, _this._setTypeTo = function (prevState, type, option) {
+      prevState.shows[type] = true;
+      prevState.data[type] = option;
+      prevState.isShow = true;
+      prevState.currentDialog = type;
+      return prevState;
     }, _this._onStore = function (actionType, option) {
       if (actionType === _ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG) {
         var type = option.modalDialogType,
-            _this$state = _this.state,
-            inits = _this$state.inits,
-            shows = _this$state.shows,
-            data = _this$state.data,
-            dialogs = _this$state.dialogs;
+            inits = _this.state.inits;
 
 
-        data[type] = option;
-        shows[type] = true;
         if (inits[type]) {
-          _this.setState({
-            isShow: true, currentDialog: type,
-            shows: shows, data: data
+          _this.setState(function (prevState) {
+            return _this._setTypeTo(prevState, type, option);
           });
         } else {
           _RouterModalDialog2.default.getDialog(type).then(function (comp) {
-            dialogs.push({ type: type, comp: comp });
-            inits[type] = true;
-            _this.setState({
-              isShow: true, currentDialog: type,
-              shows: shows, data: data, dialogs: dialogs
+            return _this.setState(function (prevState) {
+              prevState.dialogs.push({ type: type, comp: comp });
+              prevState.inits[type] = true;
+              return _this._setTypeTo(prevState, type, option);
             });
           });
         }
       }
     }, _this._handleClose = function (type) {
-      _this.state.shows[type] = false;
-      _this.setState({
-        isShow: false,
-        currentDialog: null,
-        shows: _this.state.shows
+      _this.setState(function (prevState) {
+        prevState.shows[type] = false;
+        prevState.isShow = false;
+        prevState.currentDialog = null;
+        return prevState;
       });
     }, _this._renderDialogs = function () {
       var store = _this.props.store,
-          _this$state2 = _this.state,
-          shows = _this$state2.shows,
-          data = _this$state2.data,
-          dialogs = _this$state2.dialogs;
+          _this$state = _this.state,
+          shows = _this$state.shows,
+          data = _this$state.data,
+          dialogs = _this$state.dialogs;
 
 
       return dialogs.map(function (dialog) {
@@ -138,7 +136,6 @@ var DialogContainer = function (_Component) {
       var _state = this.state,
           isShow = _state.isShow,
           currentDialog = _state.currentDialog;
-
 
       return _react2.default.createElement(
         _ModalDialogContainer2.default,

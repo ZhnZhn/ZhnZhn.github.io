@@ -14,6 +14,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var CL = 'focusable';
+
 var S = {
   BT: {
     verticalAlign: 'middle',
@@ -29,11 +31,14 @@ var S = {
 var SvgMore = function SvgMore(_ref) {
   var style = _ref.style,
       svgStyle = _ref.svgStyle,
+      btRef = _ref.btRef,
       onClick = _ref.onClick;
 
   return _react2.default.createElement(
     'button',
     {
+      ref: btRef,
+      className: CL,
       style: (0, _extends3.default)({}, S.BT, style),
       onClick: onClick
     },

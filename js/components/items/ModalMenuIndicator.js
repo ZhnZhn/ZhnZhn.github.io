@@ -108,6 +108,15 @@ var STYLE = {
   }
 };
 
+var FN = {
+  REMOVE_SERIA: 'zhFnRemoveSeries',
+  ADD_SMA: 'zhFnAddSeriesSma'
+};
+
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var _isInArrObjWithId = function _isInArrObjWithId(arrObj, id) {
   return !!arrObj.find(function (obj) {
     return obj.id === id;
@@ -122,7 +131,17 @@ var _crMfiDescr = function _crMfiDescr(id) {
 };
 
 var _isSeriaInst = function _isSeriaInst(s) {
-  return s && typeof s.setVisible == 'function';
+  return s && _isFn(s.setVisible);
+};
+
+var _callIfChartFn = function _callIfChartFn(propName, chart) {
+  for (var _len = arguments.length, arg = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    arg[_key - 2] = arguments[_key];
+  }
+
+  var _chart$options;
+
+  return chart && chart.options && _isFn(chart.options[propName]) && (_chart$options = chart.options)[propName].apply(_chart$options, arg);
 };
 
 var ModalMenuIndicator = (_temp = _class = function (_Component) {
@@ -143,9 +162,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         if (_isSeriaInst(_grSeria)) {
           _grSeria.setVisible(true);
         } else {
-          var data = _this._chart.series[0].data
-          //, rt = this.inputRt.getValue()
-          ,
+          var data = _this._chart.series[0].data,
               grData = growthRate(data);
           _this._grSeria = _ChartFn2.default.addDataTo(_this._chart, C_GROW, grData, false);
         }
@@ -170,7 +187,10 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
 
 
       if (!_isInArrObjWithId(descr, id)) {
-        var color = _this.props.onAddSma({ id: id, period: period, isPlus: isPlus, plus: plus });
+        var chart = _this.props.getChart(),
+            color = _callIfChartFn(FN.ADD_SMA, chart, {
+          chart: chart, id: id, period: period, isPlus: isPlus, plus: plus
+        });
         if (color) {
           _this.setState(function (prevState) {
             prevState.descr.push({ id: id, color: color });
@@ -184,7 +204,8 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
     };
 
     _this._handleRemoveSma = function (id) {
-      if (_this.props.onRemoveSma(id)) {
+      var chart = _this.props.getChart();
+      if (_callIfChartFn(FN.REMOVE_SERIA, chart, chart, id)) {
         _this.setState(function (prevState) {
           return {
             descr: prevState.descr.filter(function (d) {
@@ -352,8 +373,6 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
     rootStyle: PropTypes.object,
     isMfi: PropTypes.bool,
     getChart: PropTypes.func,
-    onAddSma: PropTypes.func,
-    onRemoveSma: PropTypes.func,
     onAddMfi: PropTypes.func,
     onRemoveMfi: PropTypes.func,
     isMomAth: PropTypes.bool,
@@ -363,9 +382,6 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
 
   (0, _createClass3.default)(ModalMenuIndicator, [{
     key: 'render',
-
-    //_refRt = c => this.inputRt = c
-
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,

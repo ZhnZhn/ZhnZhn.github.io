@@ -20,3 +20,8 @@
    height: 100%;   
    background: inherit;
 }
+
+.focusable:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}

@@ -1,5 +1,7 @@
 import Reflux from 'reflux';
 
+import { ModalDialog as MD } from '../../constants/Type'
+
 export const ComponentActionTypes = {
   SHOW_ABOUT: 'showAbout',
 
@@ -31,6 +33,23 @@ const ComponentActions = Reflux.createActions({
 
   [A.CHANGE_THEME]: {}
 });
+
+ComponentActions.showDescription = ComponentActions
+  .showModalDialog
+  .bind(null, MD.DESCRIPTION)
+ComponentActions.showSettings = ComponentActions
+  .showModalDialog
+  .bind(null, MD.SETTINGS)
+ComponentActions.showPasteTo = ComponentActions
+  .showModalDialog
+  .bind(null, MD.PASTE_TO)
+ComponentActions.showAddToWatch = ComponentActions
+  .showModalDialog
+  .bind(null, MD.ADD_TO_WATCH)
+
+ComponentActions.showConfigChart = ComponentActions
+  .showOptionDialog
+  .bind(null, 'ChartConfigDialog')
 
 
 export default ComponentActions

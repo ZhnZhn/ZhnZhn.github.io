@@ -200,13 +200,6 @@ class AreaChartItem extends Component {
     onSetActive(isCheck, checkBox, this.mainChart)
   }
 
-  _handleAddSma = (option) => {
-    option.chart = this.mainChart
-    return this.mainChart.options.zhFnAddSeriesSma(option);
-  }
-  _handleRemoveSeries = (id) => {
-    return this.mainChart.options.zhFnRemoveSeries(this.mainChart, id);
-  }
   _handleAddMfi = (period, id) => {
     this.setState(prevState => {
       const config = this.mainChart.options.zhFnGetMfiConfig(this.mainChart, period, id);
@@ -272,8 +265,6 @@ class AreaChartItem extends Component {
              config={config}
              onMiniChart={this._handleMiniChart}
              getChart={this.getMainChart}
-             onAddSma={this._handleAddSma}
-             onRemoveSeries={this._handleRemoveSeries}
              onAddMfi={this._handleAddMfi}
              onRemoveMfi={this._handleRemoveMfi}
              onAddMomAth={this._handleAddMomAth}
@@ -322,7 +313,7 @@ class AreaChartItem extends Component {
             isShowAbs,
             miniTitles
         } = this.state;
-    
+
     return (
       <div className={CL.ROOT}>
          <Header

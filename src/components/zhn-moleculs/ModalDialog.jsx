@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import withTheme from '../hoc/withTheme'
+import withThemeRef from '../hoc/withThemeRef'
+
+import {
+  isKeyEscape,
+  focusNode
+} from '../zhn-utils/utils'
 
 import SvgClose from '../zhn/SvgClose'
 import FlatButton from '../zhn-m/FlatButton'
@@ -11,8 +16,9 @@ import STYLE from './Dialog.Style'
 const TH_ID = 'MODAL_DIALOG';
 
 const CL = {
-  SHOWING : 'show-popup',
-  HIDING : 'hide-popup'
+  MD: 'modal-dialog',
+  SHOWING: 'show-popup',
+  HIDING: 'hide-popup'
 };
 
 const S = {
@@ -38,35 +44,58 @@ class ModalDialog extends Component {
      isWithButton: PropTypes.bool,
      isNotUpdate: PropTypes.bool,
      withoutClose: PropTypes.bool,
-     commandButtons: PropTypes.arrayOf(PropTypes.element),
-     timeout: PropTypes.number,
-     caption: PropTypes.string,
      style: PropTypes.object,
+     caption: PropTypes.string,
+     timeout: PropTypes.number,
+     commandButtons: PropTypes.arrayOf(PropTypes.element),
      onClose: PropTypes.func
    }
    */
    static defaultProps = {
      isWithButton: true,
      isNotUpdate: false,
-     timeout: 450
+     timeout: 450,
+     onClose: () => {}
    }
 
+   wasClosing = false
+
    constructor(props){
-     super()
+     super(props)
+
      this.wasClosing = false
+
+     this._rootNode = null
+     this._refRootNode = this._refRootNode.bind(this)
+
+     this._hKeyDown = this._hKeyDown.bind(this)
+     this._hClose = this._hClose.bind(this)
+   }
+
+   componentDidMount(){
+     this.focus()
+   }
+
+
+   _hasHiddenStill(nextProps) {
+     return !this.props.isShow
+       && !nextProps.isShow
    }
 
    shouldComponentUpdate(nextProps, nextState){
      if (nextProps !== this.props){
-       if (nextProps.isNotUpdate){
-         return false;
-       }
-       if(!this.props.isShow && !nextProps.isShow){
+       if (nextProps.isNotUpdate
+          || this._hasHiddenStill(nextProps) ){
          return false;
        }
      }
      return true;
    }
+
+   _hasShowed(prevProps){
+      return !prevProps.isShow
+        && this.props.isShow;
+    }
 
    componentDidUpdate(prevProps, prevState){
      if (this.wasClosing){
@@ -74,15 +103,33 @@ class ModalDialog extends Component {
          () => { this.setState({}) },
          this.props.timeout
        )
+     } else if (this._hasShowed(prevProps)) {
+       this.focus()
      }
    }
 
-  _handleClickDialog(event) {
+  _hClick(event) {
     event.stopPropagation()
    }
 
+  _hKeyDown(evt) {
+    if ( isKeyEscape(evt) ) {
+      evt.preventDefault()
+      evt.stopPropagation()
+      this._hClose()
+    }
+  }
+
+  _hClose() {
+     this.props.onClose()
+     this.focusPrev()
+  }
+
   _renderCommandButton = () => {
-    const { commandButtons, withoutClose, onClose } = this.props;
+    const {
+      commandButtons,
+      withoutClose
+    } = this.props;
     return (
       <div style={S.COMMAND_DIV}>
         {commandButtons}
@@ -92,21 +139,25 @@ class ModalDialog extends Component {
               rootStyle={S.BT_ROOT}
               caption="Close"
               title="Close Modal Dialog"
-              onClick={onClose}
+              onClick={this._hClose}
             />
         }
       </div>
     );
   }
 
+  _refRootNode(n) {
+    this._rootNode = n
+  }
+
   render(){
     const {
-            theme,
-            isShow, isWithButton, style,
-            caption, styleCaption,
-            children, onClose
-          } = this.props
-          , TS = theme.getStyle(TH_ID);
+      theme,
+      isShow, isWithButton, style,
+      caption, styleCaption,
+      children
+    } = this.props
+    , TS = theme.getStyle(TH_ID);
 
     let _className, _style;
 
@@ -121,29 +172,47 @@ class ModalDialog extends Component {
       }
     }
     return (
-         <div
-             className={_className}
-             style={{
-               ...S.ROOT_DIV, ...S.ROOT_DIV_MODAL,
-               ...style, ..._style,
-               ...TS.ROOT, ...TS.EL_BORDER
-             }}
-             onClick={this._handleClickDialog}
-         >
-             <div style={{...S.CAPTION_DIV, ...TS.EL}}>
-                <span style={styleCaption}>{caption}</span>
-                <SvgClose
-                  style={S.SVG_CLOSE}
-                  onClose={onClose}
-                />
-             </div>
-             <div>
-               {children}
-             </div>
-            {isWithButton && this._renderCommandButton()}
-        </div>
+      /*eslint-disable jsx-a11y/no-noninteractive-element-interactions*/
+       <div
+          ref={this._refRootNode}
+          role="dialog"
+          tabIndex="-1"
+          aria-label={caption}
+          aria-hidden={!isShow}
+          className={`${CL.MD} ${_className}`}
+          style={{
+            ...S.ROOT_DIV, ...S.ROOT_DIV_MODAL,
+            ...style, ..._style,
+            ...TS.ROOT, ...TS.EL_BORDER
+          }}
+          onClick={this._hClick}
+          onKeyDown={this._hKeyDown}
+       >
+      {/*eslint-enable jsx-a11y/no-noninteractive-element-interactions*/}        
+           <div style={{...S.CAPTION_DIV, ...TS.EL}}>
+              <span style={styleCaption}>{caption}</span>
+              <SvgClose
+                style={S.SVG_CLOSE}
+                onClose={this._hClose}
+              />
+           </div>
+           <div>
+             {children}
+           </div>
+          {isWithButton && this._renderCommandButton()}
+      </div>
     );
+  }
+
+  focus() {
+    this._prevFocused = document.activeElement
+    focusNode(this._rootNode)
+  }
+
+  focusPrev() {
+    focusNode(this._prevFocused)
+    this._prevFocused = null
   }
 }
 
-export default withTheme(ModalDialog)
+export default withThemeRef(ModalDialog)

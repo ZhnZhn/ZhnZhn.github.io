@@ -16,12 +16,12 @@ class DialogContainer extends Component {
   */
 
   state = {
-    isShow : false,
-    inits : {},
-    shows : {},
-    data : {},
-    dialogs : [],
-    currentDialog : null
+    isShow: false,
+    inits: {},
+    shows: {},
+    data: {},
+    dialogs: [],
+    currentDialog: null
   }
 
   componentDidMount(){
@@ -30,38 +30,43 @@ class DialogContainer extends Component {
   componentWillUnmount(){
     this.unsubscribe()
   }
+
+  _setTypeTo = (prevState, type, option) => {
+      prevState.shows[type] = true
+      prevState.data[type] = option
+      prevState.isShow = true
+      prevState.currentDialog = type
+      return prevState;
+  }
   _onStore = (actionType, option) => {
      if (actionType === CAT.SHOW_MODAL_DIALOG){
        const type = option.modalDialogType
-           , { inits, shows, data, dialogs } = this.state;
+          , { inits } = this.state;
 
-       data[type] = option
-       shows[type] = true
        if (inits[type]){
-         this.setState({
-           isShow: true, currentDialog: type,
-           shows, data
-         })
+         this.setState(prevState => this._setTypeTo(
+           prevState, type, option
+         ))
        } else {
          RouterModalDialog.getDialog(type)
-           .then(comp => {
-             dialogs.push({ type, comp })
-             inits[type] = true
-             this.setState({
-               isShow: true, currentDialog: type,
-               shows, data, dialogs
-             });
-           })
+           .then(comp => this.setState(prevState => {
+               prevState.dialogs.push({ type, comp })
+               prevState.inits[type] = true
+               return this._setTypeTo(
+                 prevState, type, option
+               );
+             })
+           )
        }
      }
   }
 
   _handleClose = (type) => {
-    this.state.shows[type] = false;
-    this.setState({
-      isShow : false,
-      currentDialog: null,
-      shows : this.state.shows
+    this.setState(prevState => {
+      prevState.shows[type] = false
+      prevState.isShow = false
+      prevState.currentDialog = null
+      return prevState;
     })
   }
 
@@ -85,12 +90,11 @@ class DialogContainer extends Component {
   }
 
   render(){
-    const {isShow, currentDialog} = this.state;
-
+    const { isShow, currentDialog } = this.state;
     return (
       <ModalDialogContainer
-          isShow={isShow}
-          onClose={this._handleClose.bind(null, currentDialog)}
+         isShow={isShow}
+         onClose={this._handleClose.bind(null, currentDialog)}
       >
          {this._renderDialogs()}
      </ModalDialogContainer>

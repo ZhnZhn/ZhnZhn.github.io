@@ -43,3 +43,8 @@
   z-index: 10;
   text-align: left;
 }
+
+.modal-dialog:focus,
+.draggable-dialog:focus {
+  outline: 0;
+}

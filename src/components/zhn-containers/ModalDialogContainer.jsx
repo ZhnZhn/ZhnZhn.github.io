@@ -32,10 +32,7 @@ class ModalDialogContainer extends Component {
     timeout : 450
   }
 
-  constructor(props){
-    super();
-    this.wasClosing = true;
-  }
+  wasClosing = true
 
   componentDidUpdate(prevProps, prevState){
     if (this.wasClosing){
@@ -65,7 +62,7 @@ class ModalDialogContainer extends Component {
       <div className={_className} style={_style} onClick={onClose}>
         {children}
       </div>
-    )
+    );
   }
 }
 

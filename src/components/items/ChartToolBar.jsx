@@ -30,7 +30,9 @@ const S = {
   BT_CONF: {
     left: '430px'
   }
-}
+};
+
+const _isFn = fn => typeof fn === 'function';
 
 class ChartToolbar extends Component {
   /*
@@ -44,11 +46,11 @@ class ChartToolbar extends Component {
     super()
     const { config={} } = props
         , { zhFnMomAthConfig } = config;
-    this._isMomAthConfig = (typeof zhFnMomAthConfig == 'function')
-            ? true : false
+    this._isMomAthConfig = _isFn(zhFnMomAthConfig)
+      ? true : false
   }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(){
     return false;
   }
 
@@ -57,7 +59,7 @@ class ChartToolbar extends Component {
             style, config={},
             onMiniChart,
             getChart,
-            onAddSma, onRemoveSeries, onAddMfi, onRemoveMfi,
+            onAddMfi, onRemoveMfi,
             onAddMomAth,
             onClickLegend,
             onClick2H,
@@ -77,8 +79,6 @@ class ChartToolbar extends Component {
       >
         <ModalMenuIndicator
           getChart={getChart}
-          onAddSma={onAddSma}
-          onRemoveSma={onRemoveSeries}
           isMfi={config.zhIsMfi}
           onAddMfi={onAddMfi}
           onRemoveMfi={onRemoveMfi}

@@ -55,8 +55,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var S = {
   MODAL: {
     position: 'static',
-    width: '380px',
-    height: '345px',
+    width: 380,
+    height: 345,
     margin: '70px auto 0px'
   },
   TITLE_API: {
@@ -70,12 +70,32 @@ var S = {
   }
 };
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var SettingsDialog = function (_Component) {
   (0, _inherits3.default)(SettingsDialog, _Component);
 
   function SettingsDialog() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, SettingsDialog);
-    return (0, _possibleConstructorReturn3.default)(this, (SettingsDialog.__proto__ || Object.getPrototypeOf(SettingsDialog)).apply(this, arguments));
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = SettingsDialog.__proto__ || Object.getPrototypeOf(SettingsDialog)).call.apply(_ref, [this].concat(args))), _this), _this._hClose = function () {
+      _this.props.onClose();
+      if (_this._modal && _isFn(_this._modal.focusPrev)) {
+        _this._modal.focusPrev();
+      }
+    }, _this._refModal = function (n) {
+      return _this._modal = n;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(SettingsDialog, [{
@@ -104,17 +124,17 @@ var SettingsDialog = function (_Component) {
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,
-          data = _props.data,
-          onClose = _props.onClose;
+          data = _props.data;
 
       return _react2.default.createElement(
         _ModalDialog2.default,
         {
+          ref: this._refModal,
           caption: 'User Settings',
           style: S.MODAL,
           isWithButton: false,
           isShow: isShow,
-          onClose: onClose
+          onClose: this._hClose
         },
         _react2.default.createElement(
           _TabPane2.default,
@@ -126,7 +146,7 @@ var SettingsDialog = function (_Component) {
               titleStyle: S.TITLE_API,
               btStyle: S.BT,
               data: data,
-              onClose: onClose
+              onClose: this._hClose
             })
           ),
           _react2.default.createElement(
@@ -137,7 +157,7 @@ var SettingsDialog = function (_Component) {
               btStyle: S.BT,
               data: data,
               onChangeTheme: _ComponentActions2.default.changeTheme,
-              onClose: onClose
+              onClose: this._hClose
             })
           )
         )

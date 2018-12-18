@@ -62,6 +62,13 @@ const STYLE = {
   }
 }
 
+const FN = {
+  REMOVE_SERIA: 'zhFnRemoveSeries',
+  ADD_SMA: 'zhFnAddSeriesSma',
+};
+
+const _isFn = fn => typeof fn === 'function';
+
 const _isInArrObjWithId = (arrObj, id) => {
   return !!arrObj.find(obj => obj.id === id);
 };
@@ -71,7 +78,12 @@ const _crMfiDescr = (id) => ({
   color: '#90ed7d'
 });
 
-const _isSeriaInst = (s) => s && typeof s.setVisible == 'function'
+const _isSeriaInst = (s) => s && _isFn(s.setVisible);
+
+const _callIfChartFn = (propName, chart, ...arg) => chart
+  && chart.options
+  && _isFn(chart.options[propName])
+  && chart.options[propName](...arg);
 
 class ModalMenuIndicator extends Component {
   /*
@@ -79,8 +91,6 @@ class ModalMenuIndicator extends Component {
     rootStyle: PropTypes.object,
     isMfi: PropTypes.bool,
     getChart: PropTypes.func,
-    onAddSma: PropTypes.func,
-    onRemoveSma: PropTypes.func,
     onAddMfi: PropTypes.func,
     onRemoveMfi: PropTypes.func,
     isMomAth: PropTypes.bool,
@@ -120,7 +130,6 @@ class ModalMenuIndicator extends Component {
         _grSeria.setVisible(true)
       } else {
         const data = this._chart.series[0].data
-            //, rt = this.inputRt.getValue()
             , grData = growthRate(data);
         this._grSeria = ChartFn.addDataTo(
           this._chart, C_GROW, grData, false
@@ -150,7 +159,10 @@ class ModalMenuIndicator extends Component {
              : `SMA(${period})`;
 
     if ( !_isInArrObjWithId(descr, id)  ){
-       const color = this.props.onAddSma({ id, period, isPlus, plus });
+       const chart = this.props.getChart()
+       , color = _callIfChartFn(FN.ADD_SMA, chart, {
+           chart, id, period, isPlus, plus
+         });
        if (color){
          this.setState(prevState => {
             prevState.descr.push({ id, color })
@@ -164,7 +176,8 @@ class ModalMenuIndicator extends Component {
   }
 
   _handleRemoveSma = (id) => {
-    if (this.props.onRemoveSma(id)){
+    const chart = this.props.getChart();
+    if ( _callIfChartFn(FN.REMOVE_SERIA, chart, chart, id) ){
       this.setState(prevState => ({
         descr: prevState.descr.filter(d => d.id !== id)
       }))
@@ -253,13 +266,6 @@ _renderGrowRate = (isGrowRate) => {
   return (
     <div>
       <span style={STYLE.GR}>Growth Rate</span>
-      {/*<InputText
-         ref={this._refRt}
-         style={STYLE.N3}
-         initValue={INIT_RT}
-         type="number"
-      />
-      */}
       {
         isGrowRate
           ? <SvgMinus onClick={this._removeGrowRate} />
@@ -273,7 +279,6 @@ _refMfiComp = c => this.inputMfiComp = c
 _refSmaPlus = c => this.inputSmaPlus = c
 _refPlusSma = c => this.inputPlusSma = c
 _refSmaComp = c => this.inputSmaComp = c
-//_refRt = c => this.inputRt = c
 
  render(){
     const { isShow, isMfi, onClose } = this.props

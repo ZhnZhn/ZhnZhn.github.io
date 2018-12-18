@@ -25,6 +25,7 @@ class ModalPane extends Component {
       && this.rootNode.contains
       && !this.rootNode.contains(event.target)
     ){
+      event.stopPropagation()
       this.props.onClose(event)
     }
   }
@@ -55,18 +56,6 @@ class ModalPane extends Component {
     }
   }
 
-  /*
-  componentWillUpdate(nextProps){
-    if (this.props !== nextProps ){
-      if (nextProps.isShow){
-        document.addEventListener('click', this._hClickOutside, true)
-      } else {
-        document.removeEventListener('click', this._hClickOutside, true)
-      }
-    }
-  }
-  */
-  
   _refRootNode = n => this.rootNode = n
 
   render(){

@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _temp;
+var _class, _temp2;
 
 var _react = require('react');
 
@@ -49,16 +49,21 @@ var STYLE = {
   }
 };
 
-var ModalDialogContainer = (_temp = _class = function (_Component) {
+var ModalDialogContainer = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(ModalDialogContainer, _Component);
 
-  function ModalDialogContainer(props) {
+  function ModalDialogContainer() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, ModalDialogContainer);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalDialogContainer.__proto__ || Object.getPrototypeOf(ModalDialogContainer)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.wasClosing = true;
-    return _this;
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ModalDialogContainer.__proto__ || Object.getPrototypeOf(ModalDialogContainer)).call.apply(_ref, [this].concat(args))), _this), _this.wasClosing = true, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
   /*
   static propTypes = {
@@ -112,6 +117,6 @@ var ModalDialogContainer = (_temp = _class = function (_Component) {
   return ModalDialogContainer;
 }(_react.Component), _class.defaultProps = {
   timeout: 450
-}, _temp);
+}, _temp2);
 exports.default = ModalDialogContainer;
 //# sourceMappingURL=ModalDialogContainer.js.map

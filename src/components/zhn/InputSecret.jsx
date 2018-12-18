@@ -30,19 +30,23 @@ const _maskValue = (len=0) => {
 
 class InputSecret extends Component {
 
-  constructor(){
-    super()
-    this.state = {
-      value: ''
-    }
+  state = {
+    value: ''
   }
+
 
   _handleChangeValue = (event) => {
     this.secret = event.target.value;
-    this.setState({ value: _maskValue(this.secret.length) });
+    this.setState(prevState => {
+      prevState.value = _maskValue(this.secret.length)
+      return prevState;
+    });
   }
 
   _handleKeyDown = (event) => {
+    if (event.keyCode !== 27) {
+      event.stopPropagation()
+    }
     switch(event.keyCode){
       case 13:
         if (typeof this.props.onEnter === 'function') {

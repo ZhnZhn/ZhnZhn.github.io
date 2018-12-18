@@ -115,7 +115,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.US_STOCK_BY_SECTOR,
   chartContainerType: _Type.BrowserType.US_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  chartContainerCaption: 'Quandl : Stocks by Sectors',
+  contFullCaption: 'Quandl: Stocks by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'Item',
   descrUrl: './data/us-stocks/description.html'
@@ -127,7 +127,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   chartContainerType: _Type.BrowserType.NYSE_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  chartContainerCaption: 'Quandl: NYSE by Sectors',
+  contFullCaption: 'Quandl: NYSE by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
@@ -139,7 +139,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   chartContainerType: _Type.BrowserType.NASDAQ_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  chartContainerCaption: 'Quandl: NASDAQ by Sectors',
+  contFullCaption: 'Quandl: NASDAQ by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
@@ -151,7 +151,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   chartContainerType: _Type.BrowserType.LONDON_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  chartContainerCaption: 'Quandl : London Stock Exchange by Sectors',
+  contFullCaption: 'Quandl: London Stock Exchange by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemLse',
   descrUrl: './data/london-stocks/lse-stocks.html'

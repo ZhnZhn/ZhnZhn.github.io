@@ -382,15 +382,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     onSetActive(isCheck, checkBox, _this2.mainChart);
   };
 
-  this._handleAddSma = function (option) {
-    option.chart = _this2.mainChart;
-    return _this2.mainChart.options.zhFnAddSeriesSma(option);
-  };
-
-  this._handleRemoveSeries = function (id) {
-    return _this2.mainChart.options.zhFnRemoveSeries(_this2.mainChart, id);
-  };
-
   this._handleAddMfi = function (period, id) {
     _this2.setState(function (prevState) {
       var config = _this2.mainChart.options.zhFnGetMfiConfig(_this2.mainChart, period, id);
@@ -462,8 +453,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         config: config,
         onMiniChart: _this2._handleMiniChart,
         getChart: _this2.getMainChart,
-        onAddSma: _this2._handleAddSma,
-        onRemoveSeries: _this2._handleRemoveSeries,
         onAddMfi: _this2._handleAddMfi,
         onRemoveMfi: _this2._handleRemoveMfi,
         onAddMomAth: _this2._handleAddMomAth,

@@ -107,20 +107,10 @@ var HeaderBar = function (_Component) {
   function HeaderBar(props) {
     (0, _classCallCheck3.default)(this, HeaderBar);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this, props));
 
     _this._onRegDS = function (dsNode) {
       _this.dsNode = dsNode;
-    };
-
-    _this._hClickDS = function () {
-      _this.setState({ isDS: !_this.state.isDS });
-    };
-
-    _this._hCloseDS = function (event) {
-      if (!_this.dsNode.contains(event.target)) {
-        _this.setState({ isDS: false });
-      }
     };
 
     _this._hToggleDS = function () {
@@ -132,7 +122,7 @@ var HeaderBar = function (_Component) {
     };
 
     _this._hDialogSettings = function () {
-      _ComponentActions2.default.showModalDialog(_Type.ModalDialog.SETTINGS, _this._settingFn);
+      _ComponentActions2.default.showSettings(_this._settingFn);
     };
 
     _this._settingFn = props.store.exportSettingFn();
@@ -176,7 +166,7 @@ var HeaderBar = function (_Component) {
             caption: 'Topics',
             title: 'Click to open topics menu',
             accessKey: 't',
-            onClick: this._hClickDS,
+            onClick: this._hToggleDS,
             onReg: this._onRegDS
           },
           _react2.default.createElement('span', { className: CL.ARROW })

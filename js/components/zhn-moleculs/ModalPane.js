@@ -55,6 +55,7 @@ var ModalPane = (_temp2 = _class = function (_Component) {
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ModalPane.__proto__ || Object.getPrototypeOf(ModalPane)).call.apply(_ref, [this].concat(args))), _this), _this._hClickOutside = function (event) {
       if (_this.rootNode && _this.rootNode.contains && !_this.rootNode.contains(event.target)) {
+        event.stopPropagation();
         _this.props.onClose(event);
       }
     }, _this._addOutsideListener = function () {
@@ -98,19 +99,6 @@ var ModalPane = (_temp2 = _class = function (_Component) {
         }
       }
     }
-
-    /*
-    componentWillUpdate(nextProps){
-      if (this.props !== nextProps ){
-        if (nextProps.isShow){
-          document.addEventListener('click', this._hClickOutside, true)
-        } else {
-          document.removeEventListener('click', this._hClickOutside, true)
-        }
-      }
-    }
-    */
-
   }, {
     key: 'render',
     value: function render() {

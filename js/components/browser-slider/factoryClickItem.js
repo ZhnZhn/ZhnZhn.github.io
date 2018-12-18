@@ -81,7 +81,7 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
           _conf = Object.assign({}, conf, {
         type: bT + "_" + id,
         menuTitle: title.substr(0, 27),
-        chartContainerCaption: sP + ": " + _title
+        contFullCaption: sP + ": " + _title
       });
 
       Object.assign(_conf.dialogProps, {
@@ -102,4 +102,4 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
 };
 
 exports.default = _fOnClickTable;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\browser-slider\factoryClickItem.js.map
+//# sourceMappingURL=factoryClickItem.js.map

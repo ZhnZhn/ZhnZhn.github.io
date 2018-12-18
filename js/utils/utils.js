@@ -5,10 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 var isValueInObject = exports.isValueInObject = function isValueInObject(value, obj) {
   for (var prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
-      if (obj[prop] === value) {
-        return true;
-      }
+    if (obj.hasOwnProperty(prop) && obj[prop] === value) {
+      return true;
     }
   }
   return false;

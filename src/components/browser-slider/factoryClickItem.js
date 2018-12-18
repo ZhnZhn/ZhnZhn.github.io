@@ -38,7 +38,7 @@ const _getFrequencyAndDims = (json) => {
   return { mapFrequency, dims };
 }
 
-const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {   
+const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
    const _url = proxy
            ? `${proxy}${rootUrl}/${id}`
            : `${rootUrl}/${id}`;
@@ -62,7 +62,7 @@ const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
             , _conf = Object.assign({}, conf, {
                 type: `${bT}_${id}`,
                 menuTitle: title.substr(0, 27),
-                chartContainerCaption: `${sP}: ${_title}`
+                contFullCaption: `${sP}: ${_title}`
               });
 
         Object.assign(_conf.dialogProps, {

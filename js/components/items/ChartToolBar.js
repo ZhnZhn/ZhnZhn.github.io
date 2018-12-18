@@ -71,6 +71,10 @@ var S = {
 };
 //import PropTypes from "prop-types";
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var ChartToolbar = function (_Component) {
   (0, _inherits3.default)(ChartToolbar, _Component);
 
@@ -90,13 +94,13 @@ var ChartToolbar = function (_Component) {
         config = _props$config === undefined ? {} : _props$config,
         zhFnMomAthConfig = config.zhFnMomAthConfig;
 
-    _this._isMomAthConfig = typeof zhFnMomAthConfig == 'function' ? true : false;
+    _this._isMomAthConfig = _isFn(zhFnMomAthConfig) ? true : false;
     return _this;
   }
 
   (0, _createClass3.default)(ChartToolbar, [{
     key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
+    value: function shouldComponentUpdate() {
       return false;
     }
   }, {
@@ -108,8 +112,6 @@ var ChartToolbar = function (_Component) {
           config = _props$config2 === undefined ? {} : _props$config2,
           onMiniChart = _props.onMiniChart,
           getChart = _props.getChart,
-          onAddSma = _props.onAddSma,
-          onRemoveSeries = _props.onRemoveSeries,
           onAddMfi = _props.onAddMfi,
           onRemoveMfi = _props.onRemoveMfi,
           onAddMomAth = _props.onAddMomAth,
@@ -136,8 +138,6 @@ var ChartToolbar = function (_Component) {
         },
         _react2.default.createElement(_ModalMenuIndicator2.default, {
           getChart: getChart,
-          onAddSma: onAddSma,
-          onRemoveSma: onRemoveSeries,
           isMfi: config.zhIsMfi,
           onAddMfi: onAddMfi,
           onRemoveMfi: onRemoveMfi,
