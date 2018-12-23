@@ -241,7 +241,7 @@
     "ES_PEEI": {
       "type": "ES_PEEI",
       "menuTitle" : "PEEIs",
-      "contCaption": "Principle European Economic Indicators",
+      "contCaption": "Principal European Economic Indicators",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
