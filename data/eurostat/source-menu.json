@@ -9,7 +9,8 @@
         { "id" : "ES_GDP" },
         { "id" : "ES_UNEMP" },
         { "id" : "ES_INDIC"},
-        { "id" : "ES_PRODUCTION" }
+        { "id" : "ES_PRODUCTION" },
+        { "id" : "ES_PEEI", "isNew": true }
       ]
     },{
       "caption": "HCPI",
@@ -235,6 +236,18 @@
           "dfTail": "indic_bt=PROD&s_adj=SCA",
           "mapType": "V"
         }
+      }
+    },
+    "ES_PEEI": {
+      "type": "ES_PEEI",
+      "menuTitle" : "PEEIs",
+      "contCaption": "Principle European Economic Indicators",
+      "dialogType" : "DialogEurostat2",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoCaption" : "Indicator",
+        "twoURI" : "./data/eurostat/peei.json",
+        "twoJsonProp" : "indicators"
       }
     },
 
