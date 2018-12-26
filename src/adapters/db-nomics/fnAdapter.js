@@ -1,8 +1,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  ymdToUTC,
-  crZhFn,
+  ymdToUTC,  
   valueMoving
 } = AdapterFn;
 
@@ -42,7 +41,7 @@ const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
 const fnAdapter = {
-    
+
   crTitle(option, json){
     const title = json.series.name || ''
     , subtitle = '';
@@ -71,8 +70,7 @@ const fnAdapter = {
     return {
       zhConfig: _crZhConfig(json, option),
       valueMoving: valueMoving(data),
-      info: _crInfo(json, option),
-      ...crZhFn()
+      info: _crInfo(json, option)
     };
   }
 };

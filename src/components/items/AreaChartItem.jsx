@@ -89,8 +89,7 @@ class AreaChartItem extends Component {
         , _itemCaption = itemCaption
               ? itemCaption : caption;
 
-    this._chartId = id
-    this._crMomAthConfig = config.zhFnMomAthConfig
+    this._chartId = id    
 
     this._dataSourceEl = (
        <div style={S.DATA_SOURCE}>
@@ -200,26 +199,18 @@ class AreaChartItem extends Component {
     onSetActive(isCheck, checkBox, this.mainChart)
   }
 
-  _handleAddMfi = (period, id) => {
+  _addMfi = (config, id) => {
     this.setState(prevState => {
-      const config = this.mainChart.options.zhFnGetMfiConfig(this.mainChart, period, id);
       prevState.mfiConfigs.push({ config, id })
       return prevState;
     })
   }
-  _handleRemoveMfi = (id) => {
+  _removeMfi = (id) => {
     this.setState(prevState => {
       prevState.mfiConfigs = prevState.mfiConfigs
          .filter(c => c.id !== id)
       return prevState;
     })
-  }
-  _handleAddMomAth = () => {
-     this.setState(prevState => {
-       const config = this._crMomAthConfig(this.mainChart, this._chartId);
-       prevState.mfiConfigs.push({ config, id: 'MOM_ATH' })
-       return prevState;
-     })
   }
 
   _handleClickConfig = () => {
@@ -262,12 +253,12 @@ class AreaChartItem extends Component {
          <ShowHide isShow={isShowToolbar}>
            <ChartToolBar
              style={S.TAB_DIV}
+             chartId={this._chartId}
              config={config}
              onMiniChart={this._handleMiniChart}
              getChart={this.getMainChart}
-             onAddMfi={this._handleAddMfi}
-             onRemoveMfi={this._handleRemoveMfi}
-             onAddMomAth={this._handleAddMomAth}
+             onAddMfi={this._addMfi}
+             onRemoveMfi={this._removeMfi}
              onClickLegend={this._handleClickLegend}
              onClick2H={this._handleClick2H}
              onAddToWatch={this._handleAddToWatch}

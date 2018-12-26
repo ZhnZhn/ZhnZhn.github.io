@@ -36,8 +36,6 @@ var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
-var _IndicatorSma = require('../IndicatorSma');
-
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
@@ -385,23 +383,20 @@ var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chart
 };
 
 var _fnCheckIsMfi = function _fnCheckIsMfi(config, json, zhPoints) {
-  //const names= json.dataset.column_names;
   var names = getColumnNames(json);
   if (names[2] === C.HIGH && names[3] === C.LOW && names[4] === C.CLOSE && names[5] === C.VOLUME) {
     Object.assign(config, {
       zhPoints: zhPoints,
-      zhIsMfi: true,
-      zhFnGetMfiConfig: _IndicatorSma.fnGetConfigMfi
+      zhIsMfi: true
     });
   }
 };
 var _fnCheckIsMomAth = function _fnCheckIsMomAth(config, json, zhPoints) {
-  //const names= json.dataset.column_names;
   var names = getColumnNames(json);
   if (names[1] === C.OPEN && names[4] === C.CLOSE) {
     Object.assign(config, {
       zhPoints: zhPoints,
-      zhFnMomAthConfig: _IndicatorSma.fnMomAthConfig
+      zhIsMomAth: true
     });
   }
 };
@@ -503,9 +498,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
   config = (0, _ConfigBuilder2.default)().init(config).add({
-    valueMoving: _AdapterFn2.default.valueMoving(seria),
-    zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-    zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+    valueMoving: _AdapterFn2.default.valueMoving(seria)
   }).addMiniVolume({
     id: chartId,
     dColumn: dataVolumeColumn,

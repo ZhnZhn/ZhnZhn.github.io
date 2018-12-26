@@ -1,0 +1,26 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/eurostat/api/crUrlWithParams.js"
+ ],
+ "file": "../../../../src/adapters/eurostat/api/crUrlWithParams.js",
+ "names": [
+  "URL",
+  "apiFn",
+  "DF_TAIL",
+  "isCategory",
+  "toQuery",
+  "mapFn",
+  "toMapSlice",
+  "crUrlWithParams",
+  "option",
+  "seriaType",
+  "dfTable",
+  "time",
+  "_q",
+  "query",
+  "zhMapSlice",
+  "_url"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;IAEQA,G,GAA6BC,e,CAA7BD,G;IAAKE,O,GAAwBD,e,CAAxBC,O;IAASC,U,GAAeF,e,CAAfE,U;IACdC,O,GAAwBC,e,CAAxBD,O;IAASE,U,GAAeD,e,CAAfC,U;;;AAEjB,IAAMC,kBAAkB,SAAlBA,eAAkB,CAACC,MAAD,EAAY;AAAA,MAEhCC,SAFgC,GAG9BD,MAH8B,CAEhCC,SAFgC;AAAA,MAErBC,OAFqB,GAG9BF,MAH8B,CAErBE,OAFqB;AAAA,MAEZC,IAFY,GAG9BH,MAH8B,CAEZG,IAFY;;;AAKlC,MAAI,CAACR,WAAWM,SAAX,CAAL,EAA2B;AACxB,QAAMG,KAAKR,QAAQI,MAAR,CAAX;AACA,gBAAUR,GAAV,GAAgBU,OAAhB,SAA2BE,EAA3B,SAAiCV,OAAjC;AACF;;AARiC,oBAY7BI,WAAWJ,OAAX,EAAoBM,MAApB,CAZ6B;AAAA,MAW/BK,KAX+B,eAW/BA,KAX+B;AAAA,MAWxBC,UAXwB,eAWxBA,UAXwB;AAAA,MAa/BC,IAb+B,QAarBf,GAbqB,GAafU,OAbe,SAaJG,KAbI;;AAclC,MAAIJ,cAAc,KAAlB,EAAyB;AACtBD,WAAOM,UAAP,GAAoBA,UAApB;AACA,WAAOC,IAAP;AACF,GAHD,MAGO;AACJ,WAAUA,IAAV,cAAuBJ,IAAvB;AACF;AACF,CApBD;;kBAsBeJ,e"
+}

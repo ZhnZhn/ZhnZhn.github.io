@@ -10,7 +10,8 @@
   "Eurostat2",
   "Eurostat3",
   "Eurostat3A",
+  "SelectN",
   "StatN"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB;AACtBC,oCADsB,EACZC,mCADY,EACDC,mCADC;AAEtBC,wCAFsB;AAGtBC;AAHsB,CAAxB;;kBAMeL,e"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB;AACtBC,oCADsB,EACZC,mCADY,EACDC,mCADC;AAEtBC,wCAFsB;AAGtBC,kCAHsB;AAItBC;AAJsB,CAAxB;;kBAOeN,e"
 }

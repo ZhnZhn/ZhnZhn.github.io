@@ -12,8 +12,6 @@ var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
-var _IndicatorSma = require('../IndicatorSma');
-
 var _fnDescr = require('./fnDescr');
 
 var _fnDescr2 = _interopRequireDefault(_fnDescr);
@@ -79,9 +77,7 @@ var InseeAdapter = {
         config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).addPoints(value, data).addMinMax(data, option).add({
       info: _fnDescr2.default.toInfo(info, title),
       valueMoving: _AdapterFn2.default.valueMoving(data),
-      zhConfig: _crZhConfig(value),
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+      zhConfig: _crZhConfig(value)
     }).toConfig();
 
     return { config: config };

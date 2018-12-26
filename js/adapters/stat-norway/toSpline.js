@@ -16,8 +16,6 @@ var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
-var _IndicatorSma = require('../IndicatorSma');
-
 var _fnUtil = require('./fnUtil');
 
 var _fnUtil2 = _interopRequireDefault(_fnUtil);
@@ -77,10 +75,7 @@ var toArea = {
         times = _crDsValuesTimes.times,
         data = _toData(values, times),
         seria = _crSplineSeria(data, option),
-        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add((0, _extends3.default)({}, crChartOption(ds, data, option), {
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
-    })).toConfig();
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add((0, _extends3.default)({}, crChartOption(ds, data, option))).toConfig();
 
     return config;
   }

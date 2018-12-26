@@ -2,7 +2,7 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  valueMoving, crZhFn,
+  valueMoving,  
   volumeColumnPoint
 } = AdapterFn;
 
@@ -99,8 +99,7 @@ const fnAdapter = {
   crConfigOption: ({ option, data }) => ({
     zhConfig: _crZhConfig(option),
     valueMoving: valueMoving(data),
-    info: _crInfo(option),
-    ...crZhFn()
+    info: _crInfo(option)
   })
 };
 

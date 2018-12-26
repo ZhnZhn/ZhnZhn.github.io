@@ -22,8 +22,6 @@ var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
 
-var _IndicatorSma = require('../IndicatorSma');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var C = {
@@ -228,11 +226,7 @@ var AlphaAdapter = {
         _chartId = ticket + '-' + value,
         _title = ticket + ': ' + value,
         _series = this.toSeries(json, option),
-        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(_title).clearSeries().addSeries(_series).add({
-      zhConfig: _crZhConfig(_chartId),
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
-    }).toConfig();
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(_title).clearSeries().addSeries(_series).add({ zhConfig: _crZhConfig(_chartId) }).toConfig();
 
     return {
       config: config,

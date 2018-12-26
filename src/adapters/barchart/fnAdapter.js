@@ -4,12 +4,6 @@ import DateUtils from '../../utils/DateUtils'
 import AdapterFn from '../AdapterFn'
 import AdapterStockFn from '../AdapterStockFn'
 
-import {
-  fnAddSeriesSma,
-  fnRemoveSeries,
-  fnGetConfigMfi
-} from '../IndicatorSma';
-
 const { valueMoving } =AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
@@ -35,8 +29,7 @@ const _crZhConfig = (id, value) => ({
   legend: AdapterFn.stockSeriesLegend()
 });
 
-const fnAdapter = {
-  fnGetConfigMfi: fnGetConfigMfi,
+const fnAdapter = {  
   toSeriesData: toSeriesData,
 
   crTitle: (option) => ({
@@ -63,9 +56,7 @@ const fnAdapter = {
     return {
       valueMoving: valueMoving(data),
       info: _crInfo(title),
-      zhConfig: _crZhConfig(chartId, value),
-      zhFnAddSeriesSma: fnAddSeriesSma,
-      zhFnRemoveSeries: fnRemoveSeries
+      zhConfig: _crZhConfig(chartId, value)
     };
   }
 }

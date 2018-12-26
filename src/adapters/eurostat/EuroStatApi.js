@@ -1,19 +1,5 @@
 
-import fnArr from '../../utils/fnArr';
-
-import mapFn from './mapFn'
-
-
-
-const { isInArrStr } = fnArr;
-const {
-        toQuery, toMapSlice,
-        createMapValue, createMapSlice
-      } = mapFn;
-
-const URL = "https://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/"
-    , QUERY_TAIL = "&precision=1&sinceTimePeriod=1996M01"
-    , DF_TAIL = "precision=1";
+import api from './api/api'
 
 const REQUEST_ERROR = 'Request Error'
     , MESSAGE_HEADER = '400: Bad Request\n'
@@ -30,72 +16,25 @@ const _crErr = (errCaption, message) => ({
   message
 });
 
-const CATEGORY_TYPES = [ 'MAP', 'COLUMN_SET', 'BAR_SET' ];
-const _isCategory = isInArrStr(CATEGORY_TYPES);
-
-const _crUrlWithParams = (option) => {
-  const {
-          seriaType, dfTable, time
-        } = option;
-
-  if (!_isCategory(seriaType)){
-    const _q = toQuery(option);
-    return `${URL}${dfTable}?${_q}&${DF_TAIL}`;
-  }
-
-  const {
-          query, zhMapSlice
-        } = toMapSlice(DF_TAIL, option)
-     , _url = `${URL}${dfTable}?${query}`;
-   if (seriaType === 'MAP') {
-       option.zhMapSlice = zhMapSlice
-     return _url;
-   } else {
-     return `${_url}&time=${time}`;
-   }
-};
-
-const _crUrl = (option) => {
-  const {
-          seriaType,
-          metric, geo,
-          itemMap,
-          time
-        } = option;
-
-  if (!_isCategory(seriaType)){
-    const _geo = `geo=${geo}`
-        , _metric = (metric.indexOf('?') === -1)
-            ? `${metric}?`
-            : metric;
-
-      return `${URL}${_metric}&${_geo}${QUERY_TAIL}`;
-  }
-
-  const { mapValue, mapSlice } = itemMap
-      , _mapValue = mapValue || createMapValue(option, itemMap);
-  if (seriaType === 'MAP') {
-    option.zhMapSlice = mapSlice
-      ? { ...mapSlice, time }
-      : { ...createMapSlice(option, itemMap), time };
-    return `${URL}${_mapValue}`;
-  } else {
-    return `${URL}${_mapValue}&time=${time}`;
-  }
-};
-
 const _addPropTo = (option) => {
   option.resErrStatus = [...RES_ERR_STATUS]
 };
 
+const _isRouteUrlN = (items) => Array.isArray(items)
+  && items[1]
+  && items[1].id;
+
 const EuroStatApi = {
 
   getRequestUrl(option){
-    const { dfParams } = option;
+    const { dfParams, items } = option;
     _addPropTo(option)
-    return dfParams
-      ? _crUrlWithParams(option)
-      : _crUrl(option);
+
+    return _isRouteUrlN(items)
+      ? api.crUrlN(option)
+      : dfParams          
+          ? api.crUrlWithParams(option)
+          : api.crUrl(option);
   },
 
   checkResponse(json, option, status) {

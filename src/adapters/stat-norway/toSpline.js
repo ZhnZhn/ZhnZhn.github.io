@@ -2,8 +2,6 @@
 import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
 
-import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
-
 import fnUtil from './fnUtil'
 import fnAdapter from './fnAdapter'
 
@@ -55,11 +53,7 @@ const toArea = {
          .addCaption(title, subtitle)
          .clearSeries()
          .addSeries(seria)
-         .add({
-           ...crChartOption(ds, data, option),
-           zhFnAddSeriesSma: fnAddSeriesSma,
-           zhFnRemoveSeries: fnRemoveSeries
-         })
+         .add({ ...crChartOption(ds, data, option) })
          .toConfig()
 
        return config;

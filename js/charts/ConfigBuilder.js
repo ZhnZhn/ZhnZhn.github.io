@@ -238,8 +238,8 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
   addZhPoints: function addZhPoints(data, fn) {
     this.add({
       zhPoints: data,
-      zhIsMfi: true,
-      zhFnGetMfiConfig: fn
+      zhIsMfi: true
+      //zhFnGetMfiConfig: fn
     });
     return this;
   },

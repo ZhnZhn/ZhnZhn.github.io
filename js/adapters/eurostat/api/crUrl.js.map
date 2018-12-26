@@ -1,0 +1,31 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/eurostat/api/crUrl.js"
+ ],
+ "file": "../../../../src/adapters/eurostat/api/crUrl.js",
+ "names": [
+  "URL",
+  "apiFn",
+  "QUERY_TAIL",
+  "isCategory",
+  "createMapValue",
+  "mapFn",
+  "createMapSlice",
+  "crUrl",
+  "option",
+  "seriaType",
+  "metric",
+  "geo",
+  "itemMap",
+  "time",
+  "_geo",
+  "_metric",
+  "indexOf",
+  "mapValue",
+  "mapSlice",
+  "_mapValue",
+  "zhMapSlice"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AACA;;;;;;IAEQA,G,GAAgCC,e,CAAhCD,G;IAAKE,U,GAA2BD,e,CAA3BC,U;IAAYC,U,GAAeF,e,CAAfE,U;IACjBC,c,GAAmCC,e,CAAnCD,c;IAAgBE,c,GAAmBD,e,CAAnBC,c;;;AAExB,IAAMC,QAAQ,SAARA,KAAQ,CAACC,MAAD,EAAY;AAAA,MAEtBC,SAFsB,GAMpBD,MANoB,CAEtBC,SAFsB;AAAA,MAGtBC,MAHsB,GAMpBF,MANoB,CAGtBE,MAHsB;AAAA,MAGdC,GAHc,GAMpBH,MANoB,CAGdG,GAHc;AAAA,MAItBC,OAJsB,GAMpBJ,MANoB,CAItBI,OAJsB;AAAA,MAKtBC,IALsB,GAMpBL,MANoB,CAKtBK,IALsB;;;AAQxB,MAAI,CAACV,WAAWM,SAAX,CAAL,EAA2B;AACzB,QAAMK,gBAAcH,GAApB;AAAA,QACEI,UAAWL,OAAOM,OAAP,CAAe,GAAf,MAAwB,CAAC,CAA1B,GACHN,MADG,SAENA,MAHN;;AAKA,gBAAUV,GAAV,GAAgBe,OAAhB,SAA2BD,IAA3B,GAAkCZ,UAAlC;AACD;;AAfuB,MAiBhBe,QAjBgB,GAiBOL,OAjBP,CAiBhBK,QAjBgB;AAAA,MAiBNC,QAjBM,GAiBON,OAjBP,CAiBNM,QAjBM;AAAA,MAkBlBC,SAlBkB,GAkBNF,YAAYb,eAAeI,MAAf,EAAuBI,OAAvB,CAlBN;;AAmBxB,MAAIH,cAAc,KAAlB,EAAyB;AACvBD,WAAOY,UAAP,GAAoBF,sCACXA,QADW,IACDL,UADC,iCAEXP,eAAeE,MAAf,EAAuBI,OAAvB,CAFW,IAEsBC,UAFtB,GAApB;AAGA,gBAAUb,GAAV,GAAgBmB,SAAhB;AACD,GALD,MAKO;AACL,gBAAUnB,GAAV,GAAgBmB,SAAhB,cAAkCN,IAAlC;AACD;AACF,CA3BD;;kBA6BeN,K"
+}

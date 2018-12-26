@@ -5,7 +5,6 @@ import AdapterStockFn from '../AdapterStockFn'
 const {
         valueMoving,
         stockSeriesLegend,
-        crZhFn, fnGetConfigMfi
       } = AdapterFn;
 const { toSeriesData } = AdapterStockFn;
 
@@ -43,10 +42,9 @@ const toChart = {
         .add({
            valueMoving: valueMoving(data),
            info: _crInfo(title),
-           zhConfig: _crZhConfig(_id, option),
-           ...crZhFn()
+           zhConfig: _crZhConfig(_id, option)           
          })
-         .addZhPoints(dataMfi, fnGetConfigMfi)
+         .addZhPoints(dataMfi)
          .toConfig();
 
     return config;

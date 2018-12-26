@@ -3,7 +3,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
   valueMoving,
-  ymdToUTC, crZhFn,
+  ymdToUTC,  
   appendWithColon
 } = AdapterFn;
 
@@ -17,7 +17,7 @@ const _crZhConfig = (option) => {
   return {
     id: value, key: value,
     item: { ...linkItem },
-    linkFn: 'DF',    
+    linkFn: 'DF',
     itemCaption: title,
     isWithoutAdd: true,
     isWithLegend: false,
@@ -49,8 +49,7 @@ const fnAdapter = {
   crConfigOption: ({ json, option, data }) => ({
     zhConfig: _crZhConfig(option),
     valueMoving: valueMoving(data),
-    info: _crInfo(option),
-    ...crZhFn()
+    info: _crInfo(option)
   })
 
 };

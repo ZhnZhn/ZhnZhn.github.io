@@ -43,6 +43,23 @@ var fn = {
     return _d;
   },
 
+  normalize: function normalize(d) {
+    if (!Array.isArray(d) || d.length === 0) {
+      return [];
+    }
+    var _d = [],
+        _max = d.length,
+        _y0 = d[0].y;
+    for (var i = 0; i < _max; i++) {
+      _d.push({
+        x: d[i].x,
+        y: parseFloat((0, _big2.default)(d[i].y / _y0).times(100).toFixed(2))
+      });
+    }
+
+    return _d;
+  },
+
   findMinY: function findMinY(data) {
     if (!Array.isArray(data) || data.length < 1) {
       return undefined;

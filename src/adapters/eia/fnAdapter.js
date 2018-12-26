@@ -1,7 +1,6 @@
 import AdapterFn from '../AdapterFn'
 
 const {
-  crZhFn,
   valueMoving
 } = AdapterFn;
 
@@ -87,13 +86,12 @@ const fnAdapter = {
       y: arr[1]
     }))
     .reverse();
-  },  
+  },
 
   crConfigOption: ({ json, option, data }) => ({
     zhConfig: _crZhConfig(json, option),
     valueMoving: valueMoving(data),
-    info: _crInfo(json),
-    ...crZhFn()
+    info: _crInfo(json)    
   })
 }
 

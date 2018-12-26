@@ -102,7 +102,7 @@ const _emptyConfig = () => ({
   dateOptions: []
 });
 
-const crDateConfig = (frequency='M', mapDateDf) => {
+const crDateConfig = (frequency='M', mapDateDf) => {   
    switch (frequency){
      case 'M':
        return _yearMonthConfig(mapDateDf);

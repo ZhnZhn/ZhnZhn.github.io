@@ -2,6 +2,7 @@
 import fnEuroStat from '../creaters/eurostat'
 import fnEuroStat2 from '../creaters/eurostat2'
 import fnEuroStat3 from '../creaters/eurostat3'
+import fnSelectN from '../creaters/selectN'
 import fnEuroStatN from '../creaters/eurostatN'
 
 import fnType3 from '../creaters/type3'
@@ -36,6 +37,7 @@ const _r = {
   DialogEurostat2: fnEuroStat2,
   DialogEurostat3: fnEuroStat3,
   DialogEurostat3A: fnEuroStat3,
+  DialogSelectN: fnSelectN,
   DialogStatN: fnEuroStatN,
 
   UnDialog5: fnUn5

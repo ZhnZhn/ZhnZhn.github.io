@@ -71,35 +71,24 @@ var S = {
 };
 //import PropTypes from "prop-types";
 
-var _isFn = function _isFn(fn) {
-  return typeof fn === 'function';
-};
-
 var ChartToolbar = function (_Component) {
   (0, _inherits3.default)(ChartToolbar, _Component);
 
-  /*
-  static propTypes = {
-    style: PropTypes.object,
-    config: PropTypes.object
-  }
-  */
-
-  function ChartToolbar(props) {
+  function ChartToolbar() {
     (0, _classCallCheck3.default)(this, ChartToolbar);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ChartToolbar.__proto__ || Object.getPrototypeOf(ChartToolbar)).call(this));
-
-    var _props$config = props.config,
-        config = _props$config === undefined ? {} : _props$config,
-        zhFnMomAthConfig = config.zhFnMomAthConfig;
-
-    _this._isMomAthConfig = _isFn(zhFnMomAthConfig) ? true : false;
-    return _this;
+    return (0, _possibleConstructorReturn3.default)(this, (ChartToolbar.__proto__ || Object.getPrototypeOf(ChartToolbar)).apply(this, arguments));
   }
 
   (0, _createClass3.default)(ChartToolbar, [{
     key: 'shouldComponentUpdate',
+
+    /*
+    static propTypes = {
+      style: PropTypes.object,
+      config: PropTypes.object
+    }
+    */
+
     value: function shouldComponentUpdate() {
       return false;
     }
@@ -108,13 +97,13 @@ var ChartToolbar = function (_Component) {
     value: function render() {
       var _props = this.props,
           style = _props.style,
-          _props$config2 = _props.config,
-          config = _props$config2 === undefined ? {} : _props$config2,
+          _props$config = _props.config,
+          config = _props$config === undefined ? {} : _props$config,
+          chartId = _props.chartId,
           onMiniChart = _props.onMiniChart,
           getChart = _props.getChart,
           onAddMfi = _props.onAddMfi,
           onRemoveMfi = _props.onRemoveMfi,
-          onAddMomAth = _props.onAddMomAth,
           onClickLegend = _props.onClickLegend,
           onClick2H = _props.onClick2H,
           onAddToWatch = _props.onAddToWatch,
@@ -137,12 +126,11 @@ var ChartToolbar = function (_Component) {
           caption: 'Indicator'
         },
         _react2.default.createElement(_ModalMenuIndicator2.default, {
+          chartId: chartId,
+          config: config,
           getChart: getChart,
-          isMfi: config.zhIsMfi,
           onAddMfi: onAddMfi,
-          onRemoveMfi: onRemoveMfi,
-          isMomAth: this._isMomAthConfig,
-          onAddMomAth: onAddMomAth
+          onRemoveMfi: onRemoveMfi
         })
       ) : null;
 

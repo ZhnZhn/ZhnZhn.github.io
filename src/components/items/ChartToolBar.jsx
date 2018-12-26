@@ -32,8 +32,6 @@ const S = {
   }
 };
 
-const _isFn = fn => typeof fn === 'function';
-
 class ChartToolbar extends Component {
   /*
   static propTypes = {
@@ -42,14 +40,6 @@ class ChartToolbar extends Component {
   }
   */
 
-  constructor(props){
-    super()
-    const { config={} } = props
-        , { zhFnMomAthConfig } = config;
-    this._isMomAthConfig = _isFn(zhFnMomAthConfig)
-      ? true : false
-  }
-
   shouldComponentUpdate(){
     return false;
   }
@@ -57,10 +47,10 @@ class ChartToolbar extends Component {
   render(){
     const {
             style, config={},
+            chartId,
             onMiniChart,
             getChart,
             onAddMfi, onRemoveMfi,
-            onAddMomAth,
             onClickLegend,
             onClick2H,
             onAddToWatch,
@@ -78,12 +68,11 @@ class ChartToolbar extends Component {
         caption="Indicator"
       >
         <ModalMenuIndicator
+          chartId={chartId}
+          config={config}
           getChart={getChart}
-          isMfi={config.zhIsMfi}
           onAddMfi={onAddMfi}
           onRemoveMfi={onRemoveMfi}
-          isMomAth={this._isMomAthConfig}
-          onAddMomAth={onAddMomAth}
         />
       </MenuTabItem>
     ) : null;

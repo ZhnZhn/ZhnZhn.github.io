@@ -39,7 +39,7 @@ const FactoryChart = {
         verticalAlign: 'top',
         layout: 'horizontal',
         x:  0,
-        y: -25
+        y: -42        
       },
       plotOptions: {
         column : {

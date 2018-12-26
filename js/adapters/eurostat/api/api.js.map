@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/eurostat/api/api.js"
+ ],
+ "file": "../../../../src/adapters/eurostat/api/api.js",
+ "names": [
+  "api",
+  "crUrlN",
+  "crUrlWithParams",
+  "crUrl"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,MAAM;AACVC,0BADU;AAEVC,4CAFU;AAGVC;AAHU,CAAZ;;kBAMeH,G"
+}

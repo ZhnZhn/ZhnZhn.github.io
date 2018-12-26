@@ -1,5 +1,6 @@
 const C = {
   URL: 'https://api.db.nomics.world/v21/series',
+  //URL: 'https://api.db.nomics.world/v22/series',
   TAIL: 'format=json&orientation=column',
 
   MSG_EMPTY: 'Dataset is empty',
@@ -23,6 +24,8 @@ const _crUrl = (seriaId, option) => {
   const { dfProvider, dfCode } = option;
   option.seriaId = seriaId
   return `${C.URL}?provider_code=${dfProvider}&dataset_code=${dfCode}&series_code=${seriaId}&${C.TAIL}`;
+  //const series_ids = encodeURIComponent(`${dfProvider}/${dfCode}/${seriaId}`)
+  //return `${C.URL}?series_ids=${series_ids}&${C.TAIL}`;
 };
 
 const _dfFnUrl = (option) => {
@@ -37,6 +40,9 @@ const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
     dfProvider, dfCode
   })
   return `${C.URL}?provider_code=${dfProvider}&dataset_code=${dfCode}&series_code=${seriaId}&${C.TAIL}`;
+  //const series_ids = encodeURIComponent(`${dfProvider}/${dfCode}/${seriaId}`)
+  //return `${C.URL}?series_ids=${series_ids}&${C.TAIL}`;
+  //return `${C.URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${C.TAIL}`;
 };
 const _idFnUrl = (option) => {
   const { value } = option

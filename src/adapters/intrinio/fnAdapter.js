@@ -2,7 +2,7 @@ import AdapterFn from '../AdapterFn'
 
 const {
         isNumberOrNull, ymdToUTC,
-        valueMoving, crZhFn
+        valueMoving
       } = AdapterFn;
 
 const FRED = 'FRED';
@@ -68,8 +68,7 @@ const fnAdapter = {
   crConfigOption: ({ option, data }) => ({
     zhConfig: _crZhConfig(option),
     valueMoving: valueMoving(data),
-    info: _crInfo(option),
-    ...crZhFn()
+    info: _crInfo(option)    
   })
 
 };

@@ -1,13 +1,13 @@
-)]}
 {
  "version": 3,
- "sources": "D:\\_Dev\\_React\\_ERC\\src\\adapters\\alpha\\fnAdapter.js",
- "file": "D:\\_Dev\\_React\\_ERC\\js\\adapters\\alpha\\fnAdapter.js",
- "sourceRoot": "",
+ "sources": [
+  "../../../src/adapters/alpha/fnAdapter.js"
+ ],
+ "file": "../../../src/adapters/alpha/fnAdapter.js",
  "names": [
   "stockSeriesLegend",
+  "AdapterFn",
   "valueMoving",
-  "crZhFn",
   "_crZhConfig",
   "id",
   "key",
@@ -19,5 +19,5 @@
   "data",
   "zhConfig"
  ],
- "mappings": ";;;;;;;;;;AACA;;;;;;IAGQA,iB,uBAAAA,iB;IACAC,W,uBAAAA,W;IAAaC,M,uBAAAA,M;;;AAGrB,IAAMC,cAAc,SAAdA,WAAc;AAAA,SAAO;AACzBC,QAAIA,EADqB;AAEzBC,SAAKD,EAFoB;AAGzBE,kBAAc,IAHW;AAIzBC,YAAQP,mBAJiB;AAKzBQ,gBAAY;AALa,GAAP;AAAA,CAApB;;AAQA,IAAMC,YAAY;AAChBC,0BAAwB;AAAA,QAAGN,EAAH,QAAGA,EAAH;AAAA,QAAOO,IAAP,QAAOA,IAAP;AAAA;AACtBC,gBAAUT,YAAYC,EAAZ,CADY;AAEtBH,mBAAaA,YAAYU,IAAZ;AAFS,OAGnBT,QAHmB;AAAA;AADR,CAAlB;;kBAQeO,S"
+ "mappings": ";;;;;;AACA;;;;;;IAGEA,iB,GAEEC,mB,CAFFD,iB;IACAE,W,GACED,mB,CADFC,W;;;AAGF,IAAMC,cAAc,SAAdA,WAAc;AAAA,SAAO;AACzBC,QAAIA,EADqB;AAEzBC,SAAKD,EAFoB;AAGzBE,kBAAc,IAHW;AAIzBC,YAAQP,mBAJiB;AAKzBQ,gBAAY;AALa,GAAP;AAAA,CAApB;;AAQA,IAAMC,YAAY;AAChBC,0BAAwB;AAAA,QAAGN,EAAH,QAAGA,EAAH;AAAA,QAAOO,IAAP,QAAOA,IAAP;AAAA,WAAmB;AACzCC,gBAAUT,YAAYC,EAAZ,CAD+B;AAEzCF,mBAAaA,YAAYS,IAAZ;AAF4B,KAAnB;AAAA;AADR,CAAlB;;kBAOeF,S"
 }

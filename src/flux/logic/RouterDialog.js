@@ -111,6 +111,10 @@ const _router = {
     return this.getES()
       .then(D => D.Eurostat3A);
   },
+  get DialogSelectN() {
+    return this.getES()
+      .then(D => D.SelectN);
+  },
   get DialogStatN() {
     return this.getES()
       .then(D => D.StatN);

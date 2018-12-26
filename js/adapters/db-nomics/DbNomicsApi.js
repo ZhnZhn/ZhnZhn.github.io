@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var C = {
   URL: 'https://api.db.nomics.world/v21/series',
+  //URL: 'https://api.db.nomics.world/v22/series',
   TAIL: 'format=json&orientation=column',
 
   MSG_EMPTY: 'Dataset is empty',
@@ -30,6 +31,8 @@ var _crUrl = function _crUrl(seriaId, option) {
 
   option.seriaId = seriaId;
   return C.URL + '?provider_code=' + dfProvider + '&dataset_code=' + dfCode + '&series_code=' + seriaId + '&' + C.TAIL;
+  //const series_ids = encodeURIComponent(`${dfProvider}/${dfCode}/${seriaId}`)
+  //return `${C.URL}?series_ids=${series_ids}&${C.TAIL}`;
 };
 
 var _dfFnUrl = function _dfFnUrl(option) {
@@ -45,6 +48,9 @@ var _crIdUrl = function _crIdUrl(option, dfProvider, dfCode, seriaId) {
     dfProvider: dfProvider, dfCode: dfCode
   });
   return C.URL + '?provider_code=' + dfProvider + '&dataset_code=' + dfCode + '&series_code=' + seriaId + '&' + C.TAIL;
+  //const series_ids = encodeURIComponent(`${dfProvider}/${dfCode}/${seriaId}`)
+  //return `${C.URL}?series_ids=${series_ids}&${C.TAIL}`;
+  //return `${C.URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${C.TAIL}`;
 };
 var _idFnUrl = function _idFnUrl(option) {
   var value = option.value,

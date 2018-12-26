@@ -149,6 +149,11 @@ var _router = {
       return D.Eurostat3A;
     });
   },
+  get DialogSelectN() {
+    return this.getES().then(function (D) {
+      return D.SelectN;
+    });
+  },
   get DialogStatN() {
     return this.getES().then(function (D) {
       return D.StatN;

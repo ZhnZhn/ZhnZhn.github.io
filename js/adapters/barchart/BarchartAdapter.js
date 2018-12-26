@@ -22,7 +22,6 @@ var crTitle = _fnAdapter2.default.crTitle,
     crChartId = _fnAdapter2.default.crChartId,
     crData = _fnAdapter2.default.crData,
     crConfigOption = _fnAdapter2.default.crConfigOption,
-    fnGetConfigMfi = _fnAdapter2.default.fnGetConfigMfi,
     toSeriesData = _fnAdapter2.default.toSeriesData;
 
 
@@ -37,7 +36,7 @@ var BarchartAdapter = {
         dataMfi = dataOption.dataMfi,
         config = (0, _ConfigBuilder2.default)().stockConfig(chartId, dataOption).addCaption(title, subtitle).add((0, _extends3.default)({}, crConfigOption({
       chartId: chartId, option: option, data: data
-    }))).addZhPoints(dataMfi, fnGetConfigMfi).toConfig();
+    }))).addZhPoints(dataMfi).toConfig();
 
 
     return { config: config };

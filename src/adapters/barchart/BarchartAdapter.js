@@ -7,8 +7,7 @@ const {
   crTitle,
   crChartId,
   crData,
-  crConfigOption,
-  fnGetConfigMfi,
+  crConfigOption,  
   toSeriesData
 } = fnAdapter;
 
@@ -26,9 +25,9 @@ const BarchartAdapter = {
                 chartId, option, data
              })
             })
-            .addZhPoints(dataMfi, fnGetConfigMfi)
+            .addZhPoints(dataMfi)
             .toConfig();
-      
+
       return { config };
   },
 

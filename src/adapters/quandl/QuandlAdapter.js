@@ -9,15 +9,8 @@ import ChartConfig from '../../charts/ChartConfig';
 import ChartLegend from '../../charts/ChartLegend';
 import ConfigBuilder from '../../charts/ConfigBuilder';
 
-
-import {
-  fnAddSeriesSma, fnRemoveSeries,
-  fnGetConfigMfi, fnMomAthConfig
-} from '../IndicatorSma';
-
 import AdapterFn from '../AdapterFn';
 import QuandlFn2 from './QuandlFn2';
-
 
 import {fCreatePieConfig} from './QuandlToPie';
 import {fCreateStackedAreaConfig} from './QuandlToStackedArea';
@@ -196,7 +189,6 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
 
   const fnStep = [_fnConvertToUTC, _fnCheckExtrems, _fnAddToSeria]
       , { dataset={} } = json
-      //, column_names = dataset.column_names
       , column_names = getColumnNames(json)
       , result = {
          yPointIndex : yPointIndex,
@@ -264,8 +256,6 @@ const _fnCreatePointFlow = function(json, yPointIndex, option){
 const _fnSeriesPipe = function(json, yPointIndex, option){
   const { fnPointsFlow, result } = _fnCreatePointFlow(json, yPointIndex, option)
       , data = getData(json)
-      //, { dataset={} } = json
-      //, { data=[] } = dataset
       , points = data.sort(AdapterFn.compareByDate);
 
   let i=0, _max=points.length;
@@ -305,24 +295,21 @@ const _fnAddSeriesSplitRatio = function(config, data, chartId, y){
 };
 
 const _fnCheckIsMfi = function(config, json, zhPoints){
-  //const names= json.dataset.column_names;
   const names = getColumnNames(json);
   if ( names[2] === C.HIGH && names[3] === C.LOW  &&
        names[4] === C.CLOSE && names[5] === C.VOLUME) {
     Object.assign(config, {
       zhPoints: zhPoints,
-      zhIsMfi: true,
-      zhFnGetMfiConfig: fnGetConfigMfi
+      zhIsMfi: true
     })
   }
 };
 const _fnCheckIsMomAth = function(config, json, zhPoints) {
-  //const names= json.dataset.column_names;
   const names = getColumnNames(json)
   if ( names[1] === C.OPEN && names[4] === C.CLOSE) {
     Object.assign(config, {
       zhPoints: zhPoints,
-      zhFnMomAthConfig: fnMomAthConfig
+      zhIsMomAth: true
     })
   }
 }
@@ -412,9 +399,7 @@ const fnGetSeries = function(config, json, option){
    config = ConfigBuilder()
      .init(config)
      .add({
-       valueMoving: AdapterFn.valueMoving(seria),
-       zhFnAddSeriesSma: fnAddSeriesSma,
-       zhFnRemoveSeries: fnRemoveSeries
+       valueMoving: AdapterFn.valueMoving(seria)
      })
      .addMiniVolume({
        id: chartId,

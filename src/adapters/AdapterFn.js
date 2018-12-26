@@ -11,11 +11,6 @@ import seriaFns from '../math/seriaFn'
 
 import C from '../constants/Color';
 
-import {
-  fnAddSeriesSma, fnRemoveSeries,
-  fnGetConfigMfi
-       } from './IndicatorSma';
-
 const EMPTY = '';
 const M = ['january', 'february',
   'march', 'april', 'may',
@@ -151,11 +146,6 @@ const AdapterFn = {
 
   formatAllNumber: formatAllNumber,
   numberFormat: formatAllNumber,
-  /*
-  numberFormat(value){
-    return ChartConfig.fnNumberFormat(value);
-  },
-  */
 
   isNumberOrNull: v => {
      return (typeof v === 'number' && !isNaN(v))
@@ -218,13 +208,7 @@ const AdapterFn = {
       )
       .toUpperCase();
   },
-
-  crZhFn: () => ({
-    zhFnAddSeriesSma: fnAddSeriesSma,
-    zhFnRemoveSeries: fnRemoveSeries
-  }),
-  fnGetConfigMfi: fnGetConfigMfi,
-
+  
   toUpperCaseFirst: (str) => {
     return (typeof str === 'string' || str instanceof String ) && str.length > 0
          ? str[0].toUpperCase() + str.substr(1)
@@ -248,7 +232,7 @@ const AdapterFn = {
 
   findMinY: seriaFns.findMinY,
   findMaxY: seriaFns.findMaxY
-  
+
 }
 
 export default AdapterFn

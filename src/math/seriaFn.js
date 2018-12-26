@@ -35,6 +35,27 @@ const fn = {
     return _d;
   },
 
+  normalize: (d) => {
+    if (!Array.isArray(d) || d.length === 0 ) {
+      return [];
+    }
+    const _d = []
+    , _max = d.length
+    , _y0 = d[0].y
+    for(let i=0; i<_max; i++) {
+      _d.push({
+        x: d[i].x,
+        y: parseFloat(
+             Big(d[i].y/_y0)
+              .times(100)
+              .toFixed(2)
+           )
+      })
+    }
+
+    return _d;
+  },
+
   findMinY: (data) => {
     if (!Array.isArray(data) || data.length<1 ) {
       return undefined;

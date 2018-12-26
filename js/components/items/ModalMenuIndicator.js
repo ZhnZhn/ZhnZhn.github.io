@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -20,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _temp;
+var _class, _temp, _initialiseProps;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -34,6 +38,10 @@ var _ChartFn2 = _interopRequireDefault(_ChartFn);
 var _seriaFn = require('../../math/seriaFn');
 
 var _seriaFn2 = _interopRequireDefault(_seriaFn);
+
+var _IndicatorBuilder = require('../../charts/IndicatorBuilder');
+
+var _IndicatorBuilder2 = _interopRequireDefault(_IndicatorBuilder);
 
 var _ModalPopup = require('../zhn-moleculs/ModalPopup');
 
@@ -57,12 +65,16 @@ var _ModalMenu2 = _interopRequireDefault(_ModalMenu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var growthRate = _seriaFn2.default.growthRate;
+var growthRate = _seriaFn2.default.growthRate,
+    normalize = _seriaFn2.default.normalize;
+var removeSeriaFrom = _IndicatorBuilder2.default.removeSeriaFrom,
+    addSmaTo = _IndicatorBuilder2.default.addSmaTo,
+    crMfiConfig = _IndicatorBuilder2.default.crMfiConfig,
+    crMomAthConfig = _IndicatorBuilder2.default.crMomAthConfig;
 
 
 var INIT_SMA = "50",
     INIT_MFI = "14";
-//, INIT_RT = "1";
 
 var C_GROW = '#90ed7d';
 
@@ -108,11 +120,6 @@ var STYLE = {
   }
 };
 
-var FN = {
-  REMOVE_SERIA: 'zhFnRemoveSeries',
-  ADD_SMA: 'zhFnAddSeriesSma'
-};
-
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
@@ -134,14 +141,44 @@ var _isSeriaInst = function _isSeriaInst(s) {
   return s && _isFn(s.setVisible);
 };
 
-var _callIfChartFn = function _callIfChartFn(propName, chart) {
-  for (var _len = arguments.length, arg = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    arg[_key - 2] = arguments[_key];
-  }
+var FNS = {
+  GR: ['_grSeria', 'isGrowRate', C_GROW, growthRate],
+  NORM: ['_normSeria', 'isNormalize', C_GROW, normalize]
+};
 
-  var _chart$options;
+var NORM_CAPTION_EL = _react2.default.createElement(
+  _react.Fragment,
+  null,
+  'Normalize (100*y',
+  _react2.default.createElement(
+    'sub',
+    null,
+    't'
+  ),
+  '/y',
+  _react2.default.createElement(
+    'sub',
+    null,
+    '0'
+  ),
+  ')'
+);
 
-  return chart && chart.options && _isFn(chart.options[propName]) && (_chart$options = chart.options)[propName].apply(_chart$options, arg);
+var RowMinusPlus = function RowMinusPlus(_ref) {
+  var is = _ref.is,
+      caption = _ref.caption,
+      onMinus = _ref.onMinus,
+      onPlus = _ref.onPlus;
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'span',
+      { style: STYLE.GR },
+      caption
+    ),
+    is ? _react2.default.createElement(_SvgMinus2.default, { onClick: onMinus }) : _react2.default.createElement(_SvgPlus2.default, { onClick: onPlus })
+  );
 };
 
 var ModalMenuIndicator = (_temp = _class = function (_Component) {
@@ -150,206 +187,14 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
   function ModalMenuIndicator(props) {
     (0, _classCallCheck3.default)(this, ModalMenuIndicator);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalMenuIndicator.__proto__ || Object.getPrototypeOf(ModalMenuIndicator)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ModalMenuIndicator.__proto__ || Object.getPrototypeOf(ModalMenuIndicator)).call(this, props));
 
-    _this._addGrowRate = function () {
-      var _grSeria = _this._grSeria;
+    _initialiseProps.call(_this);
 
-      if (!_this._chart) {
-        _this._chart = _this.props.getChart();
-      }
-      if (_this._chart) {
-        if (_isSeriaInst(_grSeria)) {
-          _grSeria.setVisible(true);
-        } else {
-          var data = _this._chart.series[0].data,
-              grData = growthRate(data);
-          _this._grSeria = _ChartFn2.default.addDataTo(_this._chart, C_GROW, grData, false);
-        }
-        _this.setState({ isGrowRate: true });
-      }
-    };
+    var config = props.config;
 
-    _this._removeGrowRate = function () {
-      var _grSeria = _this._grSeria;
-
-      if (_isSeriaInst(_grSeria)) {
-        _grSeria.setVisible(false);
-        _this.setState({ isGrowRate: false });
-      }
-    };
-
-    _this._handleAddSma = function (ev, isPlus) {
-      var period = isPlus ? _this.inputSmaPlus.getValue() : _this.inputSmaComp.getValue(),
-          plus = isPlus ? _this.inputPlusSma.getValue() : undefined,
-          descr = _this.state.descr,
-          id = isPlus ? 'SMA+(' + period + ') +(' + plus + ')' : 'SMA(' + period + ')';
-
-
-      if (!_isInArrObjWithId(descr, id)) {
-        var chart = _this.props.getChart(),
-            color = _callIfChartFn(FN.ADD_SMA, chart, {
-          chart: chart, id: id, period: period, isPlus: isPlus, plus: plus
-        });
-        if (color) {
-          _this.setState(function (prevState) {
-            prevState.descr.push({ id: id, color: color });
-            if (isPlus) {
-              prevState.plusSma = plus;
-            }
-            return prevState;
-          });
-        }
-      }
-    };
-
-    _this._handleRemoveSma = function (id) {
-      var chart = _this.props.getChart();
-      if (_callIfChartFn(FN.REMOVE_SERIA, chart, chart, id)) {
-        _this.setState(function (prevState) {
-          return {
-            descr: prevState.descr.filter(function (d) {
-              return d.id !== id;
-            })
-          };
-        });
-      }
-    };
-
-    _this._handleRemoveMfi = function (id) {
-      _this.props.onRemoveMfi(id);
-      _this.setState(function (prevState) {
-        return {
-          mfiDescrs: prevState.mfiDescrs.filter(function (d) {
-            return d.id !== id;
-          })
-        };
-      });
-    };
-
-    _this._handleAddMfi = function () {
-      var mfiDescrs = _this.state.mfiDescrs,
-          _value = _this.inputMfiComp.getValue(),
-          _id = 'MFI(' + _value + ')';
-
-
-      if (!_isInArrObjWithId(mfiDescrs, _id)) {
-        _this.props.onAddMfi(_value, _id);
-        mfiDescrs.push(_crMfiDescr(_id));
-        _this.setState({ mfiDescrs: mfiDescrs });
-      }
-    };
-
-    _this._handleAddMomAth = function () {
-      _this.props.onAddMomAth();
-    };
-
-    _this._renderIndicators = function () {
-      var _descr = _this.state.descr.map(function (descr, index) {
-        var id = descr.id,
-            color = descr.color;
-
-        return _react2.default.createElement(
-          'div',
-          { key: id, style: STYLE.ROW },
-          _react2.default.createElement(_SvgMinus2.default, {
-            onClick: _this._handleRemoveSma.bind(null, id)
-          }),
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.fnSpan(color) },
-            id
-          )
-        );
-      });
-      return _react2.default.createElement(
-        'div',
-        null,
-        _descr
-      );
-    };
-
-    _this._renderMfi = function () {
-      var _descr = _this.state.mfiDescrs.map(function (descr, index) {
-        var id = descr.id,
-            color = descr.color;
-
-        return _react2.default.createElement(
-          'div',
-          { key: id, style: STYLE.ROW },
-          _react2.default.createElement(_SvgMinus2.default, {
-            onClick: _this._handleRemoveMfi.bind(null, id)
-          }),
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.fnSpan(color) },
-            id
-          )
-        );
-      });
-      return _react2.default.createElement(
-        'div',
-        null,
-        _descr
-      );
-    };
-
-    _this._renderMfiPart = function (isMfi) {
-      return isMfi ? _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'div',
-          { style: STYLE.ROW },
-          _react2.default.createElement(
-            'span',
-            { style: STYLE.CAPTION },
-            'MFI'
-          ),
-          _react2.default.createElement(_InputText2.default, {
-            ref: _this._refMfiComp,
-            style: STYLE.N2,
-            initValue: INIT_MFI,
-            type: 'number'
-          }),
-          _react2.default.createElement(_SvgPlus2.default, { onClick: _this._handleAddMfi })
-        ),
-        _this._renderMfi()
-      ) : null;
-    };
-
-    _this._renderGrowRate = function (isGrowRate) {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'span',
-          { style: STYLE.GR },
-          'Growth Rate'
-        ),
-        isGrowRate ? _react2.default.createElement(_SvgMinus2.default, { onClick: _this._removeGrowRate }) : _react2.default.createElement(_SvgPlus2.default, { onClick: _this._addGrowRate })
-      );
-    };
-
-    _this._refMfiComp = function (c) {
-      return _this.inputMfiComp = c;
-    };
-
-    _this._refSmaPlus = function (c) {
-      return _this.inputSmaPlus = c;
-    };
-
-    _this._refPlusSma = function (c) {
-      return _this.inputPlusSma = c;
-    };
-
-    _this._refSmaComp = function (c) {
-      return _this.inputSmaComp = c;
-    };
-
-    var isMomAth = props.isMomAth;
-
-    _this._momAthEl = isMomAth ? _react2.default.createElement(
+    _this._isMfi = !!config.zhIsMfi;
+    _this._momAthEl = config.zhIsMomAth ? _react2.default.createElement(
       'div',
       null,
       _react2.default.createElement(
@@ -360,8 +205,15 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
       _react2.default.createElement(_SvgPlus2.default, { onClick: _this._handleAddMomAth.bind(_this) })
     ) : null;
 
+    _this._addGrowRate = _this._addSeriaBy.bind(_this, FNS.GR);
+    _this._removeGrowRate = _this._hideSeriaBy.bind(_this, FNS.GR);
+
+    _this._addNormalize = _this._addSeriaBy.bind(_this, FNS.NORM);
+    _this._removeNormalize = _this._hideSeriaBy.bind(_this, FNS.NORM);
+
     _this.state = {
       isGrowRate: false,
+      isNormalize: false,
       plusSma: 5,
       descr: [],
       mfiDescrs: []
@@ -371,24 +223,57 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
   /*
   static propTypes = {
     rootStyle: PropTypes.object,
-    isMfi: PropTypes.bool,
+    chartId: PropTypes.string,
+    config: PropTypes.object,
     getChart: PropTypes.func,
     onAddMfi: PropTypes.func,
     onRemoveMfi: PropTypes.func,
-    isMomAth: PropTypes.bool,
-    onAddMomAth: PropTypes.func,
   }
   */
 
   (0, _createClass3.default)(ModalMenuIndicator, [{
+    key: '_addSeriaBy',
+    value: function _addSeriaBy(arr) {
+      var seriaPropName = arr[0],
+          statePropName = arr[1],
+          color = arr[2],
+          fn = arr[3];
+
+      var _seria = this[seriaPropName];
+      if (!this._chart) {
+        this._chart = this.props.getChart();
+      }
+      if (this._chart) {
+        if (_isSeriaInst(_seria)) {
+          _seria.setVisible(true);
+        } else {
+          var data = this._chart.series[0].data,
+              seriaData = fn(data);
+          this[seriaPropName] = _ChartFn2.default.addDataTo(this._chart, color, seriaData, false);
+        }
+        this.setState((0, _defineProperty3.default)({}, statePropName, true));
+      }
+    }
+  }, {
+    key: '_hideSeriaBy',
+    value: function _hideSeriaBy(arr) {
+      var seriaPropName = arr[0],
+          statePropName = arr[1];
+      var _seria = this[seriaPropName];
+      if (_isSeriaInst(_seria)) {
+        _seria.setVisible(false);
+        this.setState((0, _defineProperty3.default)({}, statePropName, false));
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,
-          isMfi = _props.isMfi,
           onClose = _props.onClose,
           _state = this.state,
           isGrowRate = _state.isGrowRate,
+          isNormalize = _state.isNormalize,
           plusSma = _state.plusSma;
 
       return _react2.default.createElement(
@@ -401,7 +286,18 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         _react2.default.createElement(
           'div',
           { style: STYLE.PANE },
-          this._renderGrowRate(isGrowRate),
+          _react2.default.createElement(RowMinusPlus, {
+            is: isGrowRate,
+            caption: 'Growth Rate',
+            onMinus: this._removeGrowRate,
+            onPlus: this._addGrowRate
+          }),
+          _react2.default.createElement(RowMinusPlus, {
+            is: isNormalize,
+            caption: NORM_CAPTION_EL,
+            onMinus: this._removeNormalize,
+            onPlus: this._addNormalize
+          }),
           _react2.default.createElement(
             'div',
             null,
@@ -445,7 +341,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
             _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma })
           ),
           this._renderIndicators(),
-          this._renderMfiPart(isMfi),
+          this._renderMfiPart(this._isMfi),
           this._momAthEl
         )
       );
@@ -454,6 +350,171 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
   return ModalMenuIndicator;
 }(_react.Component), _class.defaultProps = {
   getChart: function getChart() {}
+}, _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this._handleAddSma = function (ev, isPlus) {
+    var period = isPlus ? _this2.inputSmaPlus.getValue() : _this2.inputSmaComp.getValue(),
+        plus = isPlus ? _this2.inputPlusSma.getValue() : undefined,
+        descr = _this2.state.descr,
+        id = isPlus ? 'SMA+(' + period + ') +(' + plus + ')' : 'SMA(' + period + ')';
+
+
+    if (!_isInArrObjWithId(descr, id)) {
+      var chart = _this2.props.getChart(),
+          color = addSmaTo(chart, {
+        id: id, period: period, isPlus: isPlus, plus: plus
+      });
+      if (color) {
+        _this2.setState(function (prevState) {
+          prevState.descr.push({ id: id, color: color });
+          if (isPlus) {
+            prevState.plusSma = plus;
+          }
+          return prevState;
+        });
+      }
+    }
+  };
+
+  this._handleRemoveSma = function (id) {
+    var chart = _this2.props.getChart();
+    if (removeSeriaFrom(chart, id)) {
+      _this2.setState(function (prevState) {
+        return {
+          descr: prevState.descr.filter(function (d) {
+            return d.id !== id;
+          })
+        };
+      });
+    }
+  };
+
+  this._handleRemoveMfi = function (id) {
+    _this2.props.onRemoveMfi(id);
+    _this2.setState(function (prevState) {
+      return {
+        mfiDescrs: prevState.mfiDescrs.filter(function (d) {
+          return d.id !== id;
+        })
+      };
+    });
+  };
+
+  this._handleAddMfi = function () {
+    var mfiDescrs = _this2.state.mfiDescrs,
+        _value = _this2.inputMfiComp.getValue(),
+        _id = 'MFI(' + _value + ')';
+
+
+    if (!_isInArrObjWithId(mfiDescrs, _id)) {
+      var chart = _this2.props.getChart(),
+          config = crMfiConfig(chart, _value, _id);
+      if (config) {
+        _this2.props.onAddMfi(config, _id);
+        mfiDescrs.push(_crMfiDescr(_id));
+        _this2.setState({ mfiDescrs: mfiDescrs });
+      }
+    }
+  };
+
+  this._handleAddMomAth = function () {
+    var chart = _this2.props.getChart(),
+        config = crMomAthConfig(chart, _this2.props.chartId);
+    if (config) {
+      _this2.props.onAddMfi(config, 'MOM_ATH');
+    }
+  };
+
+  this._renderIndicators = function () {
+    var _descr = _this2.state.descr.map(function (descr) {
+      var id = descr.id,
+          color = descr.color;
+
+      return _react2.default.createElement(
+        'div',
+        { key: id, style: STYLE.ROW },
+        _react2.default.createElement(_SvgMinus2.default, {
+          onClick: _this2._handleRemoveSma.bind(null, id)
+        }),
+        _react2.default.createElement(
+          'span',
+          { style: STYLE.fnSpan(color) },
+          id
+        )
+      );
+    });
+    return _react2.default.createElement(
+      'div',
+      null,
+      _descr
+    );
+  };
+
+  this._renderMfi = function () {
+    var _descr = _this2.state.mfiDescrs.map(function (descr) {
+      var id = descr.id,
+          color = descr.color;
+
+      return _react2.default.createElement(
+        'div',
+        { key: id, style: STYLE.ROW },
+        _react2.default.createElement(_SvgMinus2.default, {
+          onClick: _this2._handleRemoveMfi.bind(null, id)
+        }),
+        _react2.default.createElement(
+          'span',
+          { style: STYLE.fnSpan(color) },
+          id
+        )
+      );
+    });
+    return _react2.default.createElement(
+      'div',
+      null,
+      _descr
+    );
+  };
+
+  this._renderMfiPart = function (isMfi) {
+    return isMfi ? _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'div',
+        { style: STYLE.ROW },
+        _react2.default.createElement(
+          'span',
+          { style: STYLE.CAPTION },
+          'MFI'
+        ),
+        _react2.default.createElement(_InputText2.default, {
+          ref: _this2._refMfiComp,
+          style: STYLE.N2,
+          initValue: INIT_MFI,
+          type: 'number'
+        }),
+        _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddMfi })
+      ),
+      _this2._renderMfi()
+    ) : null;
+  };
+
+  this._refMfiComp = function (c) {
+    return _this2.inputMfiComp = c;
+  };
+
+  this._refSmaPlus = function (c) {
+    return _this2.inputSmaPlus = c;
+  };
+
+  this._refPlusSma = function (c) {
+    return _this2.inputPlusSma = c;
+  };
+
+  this._refSmaComp = function (c) {
+    return _this2.inputSmaComp = c;
+  };
 }, _temp);
 exports.default = ModalMenuIndicator;
 //# sourceMappingURL=ModalMenuIndicator.js.map

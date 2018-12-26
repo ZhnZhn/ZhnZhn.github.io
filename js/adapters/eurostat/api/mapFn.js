@@ -81,9 +81,13 @@ var mapFn = {
         dfTail = _ref.dfTail;
 
     var _q = '',
-        i = 0;
+        i = 0,
+        _v = void 0;
     for (; i < dfParams.length; i++) {
-      _q = _addParamTo(_q, dfParams[i] + "=" + items[i].value);
+      _v = items[i] && items[i].value || '';
+      if (_v) {
+        _q = _addParamTo(_q, dfParams[i] + "=" + _v);
+      }
     }
     return dfTail ? _addParamTo(_q, dfTail) : _q;
   },

@@ -1,7 +1,9 @@
 
 import AdapterFn from '../AdapterFn'
 
-const { crId, ymdToUTC, valueMoving, crZhFn } = AdapterFn;
+const {
+  crId, ymdToUTC, valueMoving
+} = AdapterFn;
 
 const _crName = (Results) => {
   const { Statistic='', UTCProductionTime='' } = Results
@@ -73,8 +75,7 @@ const fnAdapter = {
   crConfigOption: ({ option, Results, data }) => ({
     zhConfig: _crZhConfig(option),
     valueMoving: valueMoving(data),
-    info: _crInfo(Results),
-    ...crZhFn()
+    info: _crInfo(Results)    
   })
 
 }

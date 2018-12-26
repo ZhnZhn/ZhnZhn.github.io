@@ -3,11 +3,6 @@ import AdapterFn from '../AdapterFn'
 import ChartConfig from '../../charts/ChartConfig'
 import Builder from '../../charts/ConfigBuilder'
 
-import {
-  fnAddSeriesSma, fnRemoveSeries
-} from '../IndicatorSma'
-
-
 const C = {
   TWO_YEARS_DAYS: 501,
   TA: 'Technical Analysis:',
@@ -202,11 +197,7 @@ const AlphaAdapter = {
             .addCaption(_title)
             .clearSeries()
             .addSeries(_series)
-            .add({
-              zhConfig: _crZhConfig(_chartId),
-              zhFnAddSeriesSma: fnAddSeriesSma,
-              zhFnRemoveSeries: fnRemoveSeries
-            })
+            .add({ zhConfig: _crZhConfig(_chartId) })
             .toConfig();
     return {
       config,

@@ -1,8 +1,5 @@
 import AdapterFn from '../AdapterFn'
-
 import Builder from '../../charts/ConfigBuilder'
-
-import { fnAddSeriesSma, fnRemoveSeries } from '../IndicatorSma'
 import fnDescr from './fnDescr'
 
 const _parser = new window.DOMParser();
@@ -63,9 +60,7 @@ const InseeAdapter = {
             .add({
               info: fnDescr.toInfo(info, title),
               valueMoving: AdapterFn.valueMoving(data),
-              zhConfig: _crZhConfig(value),
-              zhFnAddSeriesSma: fnAddSeriesSma,
-              zhFnRemoveSeries: fnRemoveSeries
+              zhConfig: _crZhConfig(value)
             })
             .toConfig();
 

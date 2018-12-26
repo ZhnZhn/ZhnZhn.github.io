@@ -162,7 +162,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         _itemCaption = itemCaption ? itemCaption : caption;
 
     _this._chartId = id;
-    _this._crMomAthConfig = config.zhFnMomAthConfig;
 
     _this._dataSourceEl = _react2.default.createElement(
       'div',
@@ -382,27 +381,18 @@ var AreaChartItem = (_temp = _class = function (_Component) {
     onSetActive(isCheck, checkBox, _this2.mainChart);
   };
 
-  this._handleAddMfi = function (period, id) {
+  this._addMfi = function (config, id) {
     _this2.setState(function (prevState) {
-      var config = _this2.mainChart.options.zhFnGetMfiConfig(_this2.mainChart, period, id);
       prevState.mfiConfigs.push({ config: config, id: id });
       return prevState;
     });
   };
 
-  this._handleRemoveMfi = function (id) {
+  this._removeMfi = function (id) {
     _this2.setState(function (prevState) {
       prevState.mfiConfigs = prevState.mfiConfigs.filter(function (c) {
         return c.id !== id;
       });
-      return prevState;
-    });
-  };
-
-  this._handleAddMomAth = function () {
-    _this2.setState(function (prevState) {
-      var config = _this2._crMomAthConfig(_this2.mainChart, _this2._chartId);
-      prevState.mfiConfigs.push({ config: config, id: 'MOM_ATH' });
       return prevState;
     });
   };
@@ -450,12 +440,12 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       { isShow: isShowToolbar },
       _react2.default.createElement(_ChartToolBar2.default, {
         style: S.TAB_DIV,
+        chartId: _this2._chartId,
         config: config,
         onMiniChart: _this2._handleMiniChart,
         getChart: _this2.getMainChart,
-        onAddMfi: _this2._handleAddMfi,
-        onRemoveMfi: _this2._handleRemoveMfi,
-        onAddMomAth: _this2._handleAddMomAth,
+        onAddMfi: _this2._addMfi,
+        onRemoveMfi: _this2._removeMfi,
         onClickLegend: _this2._handleClickLegend,
         onClick2H: _this2._handleClick2H,
         onAddToWatch: _this2._handleAddToWatch,

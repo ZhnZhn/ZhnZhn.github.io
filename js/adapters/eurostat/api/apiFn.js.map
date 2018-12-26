@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/adapters/eurostat/api/apiFn.js"
+ ],
+ "file": "../../../../src/adapters/eurostat/api/apiFn.js",
+ "names": [
+  "isInArrStr",
+  "fnArr",
+  "C",
+  "URL",
+  "QUERY_TAIL",
+  "DF_TAIL",
+  "CATEGORY_TYPES",
+  "apiFn",
+  "isCategory",
+  "crUrl",
+  "table",
+  "q"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;IAEQA,U,GAAeC,e,CAAfD,U;;;AAER,IAAME,IAAI;AACRC,OAAK,4DADG;AAERC,cAAY,sCAFJ;AAGRC,WAAS;AAHD,CAAV;;AAMA,IAAMC,iBAAiB,CACrB,KADqB,EACd,YADc,EACA,SADA,CAAvB;;AAIA,IAAMC,QAAQ;AACZJ,OAAKD,EAAEC,GADK;AAEZC,cAAYF,EAAEE,UAFF;AAGZC,WAASH,EAAEG,OAHC;;AAKZG,cAAYR,WAAWM,cAAX,CALA;AAMZG,SAAO,eAACC,KAAD,EAAQC,CAAR;AAAA,gBAAiBT,EAAEC,GAAnB,GAAyBO,KAAzB,SAAkCC,CAAlC,GAAsCT,EAAEE,UAAxC;AAAA;AANK,CAAd;;kBASeG,K"
+}

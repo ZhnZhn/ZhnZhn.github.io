@@ -16,8 +16,6 @@ var _AdapterStockFn = require('../AdapterStockFn');
 
 var _AdapterStockFn2 = _interopRequireDefault(_AdapterStockFn);
 
-var _IndicatorSma = require('../IndicatorSma');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var valueMoving = _AdapterFn2.default.valueMoving;
@@ -50,7 +48,6 @@ var _crZhConfig = function _crZhConfig(id, value) {
 };
 
 var fnAdapter = {
-  fnGetConfigMfi: _IndicatorSma.fnGetConfigMfi,
   toSeriesData: toSeriesData,
 
   crTitle: function crTitle(option) {
@@ -89,9 +86,7 @@ var fnAdapter = {
     return {
       valueMoving: valueMoving(data),
       info: _crInfo(title),
-      zhConfig: _crZhConfig(chartId, value),
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
+      zhConfig: _crZhConfig(chartId, value)
     };
   }
 };

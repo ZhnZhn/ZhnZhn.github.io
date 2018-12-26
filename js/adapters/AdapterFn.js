@@ -34,8 +34,6 @@ var _Color = require('../constants/Color');
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _IndicatorSma = require('./IndicatorSma');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var EMPTY = '';
@@ -155,11 +153,6 @@ var AdapterFn = {
 
   formatAllNumber: _formatAllNumber2.default,
   numberFormat: _formatAllNumber2.default,
-  /*
-  numberFormat(value){
-    return ChartConfig.fnNumberFormat(value);
-  },
-  */
 
   isNumberOrNull: function isNumberOrNull(v) {
     return typeof v === 'number' && !isNaN(v) || v === null;
@@ -213,14 +206,6 @@ var AdapterFn = {
   crId: function crId() {
     return (Date.now().toString(36) + Math.random().toString(36).substr(2, 9)).toUpperCase();
   },
-
-  crZhFn: function crZhFn() {
-    return {
-      zhFnAddSeriesSma: _IndicatorSma.fnAddSeriesSma,
-      zhFnRemoveSeries: _IndicatorSma.fnRemoveSeries
-    };
-  },
-  fnGetConfigMfi: _IndicatorSma.fnGetConfigMfi,
 
   toUpperCaseFirst: function toUpperCaseFirst(str) {
     return (typeof str === 'string' || str instanceof String) && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;

@@ -16,7 +16,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var valueMoving = _AdapterFn2.default.valueMoving,
     ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    crZhFn = _AdapterFn2.default.crZhFn,
     appendWithColon = _AdapterFn2.default.appendWithColon;
 
 
@@ -70,11 +69,11 @@ var fnAdapter = {
     var json = _ref2.json,
         option = _ref2.option,
         data = _ref2.data;
-    return (0, _extends3.default)({
+    return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),
       info: _crInfo(option)
-    }, crZhFn());
+    };
   }
 
 };

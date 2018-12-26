@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _ConfigBuilder = require('../../charts/ConfigBuilder');
 
 var _ConfigBuilder2 = _interopRequireDefault(_ConfigBuilder);
@@ -23,9 +19,7 @@ var _AdapterStockFn2 = _interopRequireDefault(_AdapterStockFn);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var valueMoving = _AdapterFn2.default.valueMoving,
-    stockSeriesLegend = _AdapterFn2.default.stockSeriesLegend,
-    crZhFn = _AdapterFn2.default.crZhFn,
-    fnGetConfigMfi = _AdapterFn2.default.fnGetConfigMfi;
+    stockSeriesLegend = _AdapterFn2.default.stockSeriesLegend;
 var toSeriesData = _AdapterStockFn2.default.toSeriesData;
 
 
@@ -66,11 +60,11 @@ var toChart = {
     }),
         data = dataOption.data,
         dataMfi = dataOption.dataMfi,
-        config = (0, _ConfigBuilder2.default)().stockConfig(_id, dataOption).addCaption(title).add((0, _extends3.default)({
+        config = (0, _ConfigBuilder2.default)().stockConfig(_id, dataOption).addCaption(title).add({
       valueMoving: valueMoving(data),
       info: _crInfo(title),
       zhConfig: _crZhConfig(_id, option)
-    }, crZhFn())).addZhPoints(dataMfi, fnGetConfigMfi).toConfig();
+    }).addZhPoints(dataMfi).toConfig();
 
     return config;
   },

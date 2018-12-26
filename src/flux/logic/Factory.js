@@ -82,14 +82,7 @@ const _crDialogComp = function (dType, browserType, dConf){
            isContinious,
            loadId,
            isProxy
-         } = dialogProps
-      /*
-       , _fnValue = (valueFn)
-            ? (valueFnPrefix )
-                 ? RouterFnValue[valueFn].bind(null, valueFnPrefix)
-                 : RouterFnValue[valueFn]
-            : undefined
-      */
+         } = dialogProps      
        , onClickInfo = (descrUrl)
             ? ComponentActions.showDescription
             : undefined

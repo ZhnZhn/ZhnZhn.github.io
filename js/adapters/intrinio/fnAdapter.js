@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
@@ -16,8 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var isNumberOrNull = _AdapterFn2.default.isNumberOrNull,
     ymdToUTC = _AdapterFn2.default.ymdToUTC,
-    valueMoving = _AdapterFn2.default.valueMoving,
-    crZhFn = _AdapterFn2.default.crZhFn;
+    valueMoving = _AdapterFn2.default.valueMoving;
 
 
 var FRED = 'FRED';
@@ -96,11 +91,11 @@ var fnAdapter = {
   crConfigOption: function crConfigOption(_ref3) {
     var option = _ref3.option,
         data = _ref3.data;
-    return (0, _extends3.default)({
+    return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),
       info: _crInfo(option)
-    }, crZhFn());
+    };
   }
 
 };

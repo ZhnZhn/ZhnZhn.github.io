@@ -7,6 +7,7 @@
         { "id" : "ES_LABOUR" },
         { "id" : "ES_SOCIAL" },
         { "id" : "ES_GDP" },
+        { "id" : "ES_GDP_MAIN", "isNew": true },
         { "id" : "ES_UNEMP" },
         { "id" : "ES_INDIC"},
         { "id" : "ES_PRODUCTION" },
@@ -103,6 +104,13 @@
     }
   ],
   "items" : {
+    "ES_BASE_SN": {
+      "dialogProps": {
+        "descrUrl": "./data/eurostat/eurostat.html",
+        "loadId" : "EU_STAT",
+        "dataSource": "Eurostat"
+      }
+    },
     "ES_COUNTRIES_BASE": {
       "dialogProps": {
         "descrUrl": "./data/eurostat/eurostat.html",
@@ -188,6 +196,38 @@
         "twoURI" : "./data/eurostat/gdp.json"
       }
     },
+    "ES_GDP_MAIN" : {
+      "type" : "ES_GDP_MAIN",
+      "menuTitle" : "GDP & Main Components",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+            "id": "geo",
+            "caption": "Country",
+            "jsonProp": "countries",
+            "uri": "./data/eurostat/countries.json"
+          },{
+             "id": "na_item",
+             "caption": "Item",
+             "uri": "./data/eurostat/gdp-main-components.json"
+          },{
+              "id": "unit",
+              "caption": "Unit",
+              "uri": "./data/eurostat/gdp-main-components-unit.json"
+          },{
+              "id": "s_adj",
+              "caption": "Adjust",
+              "uri": "./data/eurostat/seria-adjust.json"
+           }
+        ],
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Q",
+          "dfTable": "namq_10_gdp"
+        }
+      }
+    },
     "ES_UNEMP" : {
       "type" : "ES_UNEMP",
       "menuTitle" : "Unemployment (NSA)",
@@ -247,7 +287,10 @@
       "dialogProps" : {
         "twoCaption" : "Indicator",
         "twoURI" : "./data/eurostat/peei.json",
-        "twoJsonProp" : "indicators"
+        "twoJsonProp" : "indicators",
+        "dfProps": {
+          "mapType" : "V"
+        }
       }
     },
 
