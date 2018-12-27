@@ -47,6 +47,10 @@ var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
 
+var _withForDate = require('./withForDate');
+
+var _withForDate2 = _interopRequireDefault(_withForDate);
+
 var _RouterOptions = require('./RouterOptions');
 
 var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
@@ -55,7 +59,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MAP_FREQUENCY_DF = 'M';
 
-var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (_temp = _class2 = function (_Component) {
+var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (0, _withForDate2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogEurostat3A, _Component);
 
   function DialogEurostat3A(props) {
@@ -147,18 +151,17 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
           three = _this.three,
           chartType = _this.chartType,
           colorComp = _this.colorComp,
-          date = _this.date,
           compSelect1 = _this.compSelect1,
           compSelect2 = _this.compSelect2,
           seriaColor = colorComp ? colorComp.getColor() : undefined,
-          dateDefault = _this.state.dateDefault;
+          date = _this._getDateWithForDate();
 
       return _this.props.loadFn(_this.props, {
         one: one,
         group: two,
         metric: three,
         chartType: chartType, seriaColor: seriaColor,
-        date: date, dateDefault: dateDefault,
+        date: date,
         selectOptions: [compSelect1.getOptions(), compSelect2.getOptions()]
       });
     };
@@ -332,6 +335,6 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
   twoJsonProp: 'items',
   threeCaption: 'Metric',
   threeJsonProp: 'items'
-}, _temp)) || _class) || _class) || _class);
+}, _temp)) || _class) || _class) || _class) || _class);
 exports.default = DialogEurostat3A;
 //# sourceMappingURL=DialogEurostat3A.js.map

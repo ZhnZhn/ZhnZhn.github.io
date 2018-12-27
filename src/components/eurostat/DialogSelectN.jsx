@@ -6,6 +6,7 @@ import crDateConfig from './crDateConfig'
 import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators';
+import withForDate from './withForDate'
 
 import RouterOptions from './RouterOptions';
 
@@ -14,6 +15,7 @@ const  DF_MAP_FREQUENCY = 'M';
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@withForDate
 class DialogSelectN extends Component {
   /*
   static propTypes = {
@@ -148,30 +150,21 @@ class DialogSelectN extends Component {
     return msg;
   }
 
-  _isDateOptionsNotEmpty = () => {
-     const { dateOptions } = this.state;
-     return Array.isArray(dateOptions)
-       && dateOptions.length !== 0;
-  }
-
   _createLoadOption = () => {
     const {
       chartType,
       colorComp,
-      date,
     } = this
     , seriaColor = colorComp
         ? colorComp.getColor()
         : undefined
-    , dateDefault = this._isDateOptionsNotEmpty()
-        ? this.state.dateDefault
-        : '';
+    , date = this._getDateWithForDate();
 
     return this.props.loadFn(
       this.props, {
         items: this._items,
         chartType, seriaColor,
-        date, dateDefault
+        date
         /*
         selectOptions: [
           compSelect1.getOptions(),

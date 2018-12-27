@@ -23,10 +23,7 @@ var createLoadOptions = function createLoadOptions() {
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
-      _options$date = options.date,
-      date = _options$date === undefined ? {} : _options$date,
-      _options$dateDefault = options.dateDefault,
-      dateDefault = _options$dateDefault === undefined ? '' : _options$dateDefault,
+      date = options.date,
       _ref = items[0] || {},
       _ref$caption = _ref.caption,
       oneC = _ref$caption === undefined ? '' : _ref$caption,
@@ -37,15 +34,14 @@ var createLoadOptions = function createLoadOptions() {
       _ref3$caption = _ref3.caption,
       threeC = _ref3$caption === undefined ? '' : _ref3$caption,
       seriaType = chartType.value,
-      compType = chartType.compType,
-      _time = date.value || dateDefault;
+      compType = chartType.compType;
 
   return (0, _extends3.default)({}, dfProps, {
     seriaType: seriaType,
     seriaColor: seriaColor,
     zhCompType: compType,
     items: items,
-    time: _time,
+    time: date,
     loadId: loadId,
     itemCaption: oneC,
     title: oneC,

@@ -6,6 +6,7 @@ import crDateConfig from './crDateConfig'
 import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators';
+import withForDate from './withForDate'
 
 import RouterOptions from './RouterOptions';
 
@@ -14,6 +15,7 @@ const  MAP_FREQUENCY_DF = 'M';
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
+@withForDate
 class DialogEurostat3A extends Component {
   /*
   static propTypes = {
@@ -168,20 +170,20 @@ class DialogEurostat3A extends Component {
     const {
             one, two, three,
             chartType, colorComp,
-            date,
             compSelect1, compSelect2
           } = this
         , seriaColor = colorComp
             ? colorComp.getColor()
             : undefined
-        , { dateDefault } = this.state;
+        , date = this._getDateWithForDate()
+
     return this.props.loadFn(
       this.props, {
         one: one,
         group: two,
         metric: three,
         chartType, seriaColor,
-        date, dateDefault,
+        date,
         selectOptions: [
           compSelect1.getOptions(),
           compSelect2.getOptions()

@@ -27,14 +27,11 @@ var createLoadOptions = function createLoadOptions() {
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
       date = options.date,
-      dateDefault = options.dateDefault,
       selectOptions = options.selectOptions,
       _seriaType = chartType.value,
+      _zhCompType = chartType.compType,
       _oneV = one ? one.value : DF_CAPTION,
       _oneC = one ? one.caption : dfProps.dfSliceTitle || DF_CAPTION;
-
-  var _zhCompType = chartType.compType,
-      _time = date ? date.value : dateDefault;
 
   return (0, _extends3.default)({}, dfProps, {
     itemMap: two,
@@ -50,7 +47,7 @@ var createLoadOptions = function createLoadOptions() {
     seriaType: _seriaType,
     seriaColor: seriaColor,
     zhCompType: _zhCompType,
-    time: _time,
+    time: date,
     dataSource: dataSource,
     items: [one, two],
     selectOptions: selectOptions

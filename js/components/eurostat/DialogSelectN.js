@@ -47,6 +47,10 @@ var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
 
+var _withForDate = require('./withForDate');
+
+var _withForDate2 = _interopRequireDefault(_withForDate);
+
 var _RouterOptions = require('./RouterOptions');
 
 var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
@@ -55,7 +59,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DF_MAP_FREQUENCY = 'M';
 
-var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (_temp = _class2 = function (_Component) {
+var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (0, _withForDate2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogSelectN, _Component);
 
   function DialogSelectN(props) {
@@ -122,24 +126,16 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
       return msg;
     };
 
-    _this._isDateOptionsNotEmpty = function () {
-      var dateOptions = _this.state.dateOptions;
-
-      return Array.isArray(dateOptions) && dateOptions.length !== 0;
-    };
-
     _this._createLoadOption = function () {
       var chartType = _this.chartType,
           colorComp = _this.colorComp,
-          date = _this.date,
           seriaColor = colorComp ? colorComp.getColor() : undefined,
-          dateDefault = _this._isDateOptionsNotEmpty() ? _this.state.dateDefault : '';
-
+          date = _this._getDateWithForDate();
 
       return _this.props.loadFn(_this.props, {
         items: _this._items,
         chartType: chartType, seriaColor: seriaColor,
-        date: date, dateDefault: dateDefault
+        date: date
         /*
         selectOptions: [
           compSelect1.getOptions(),
@@ -307,6 +303,6 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
   return DialogSelectN;
 }(_react.Component), _class2.defaultProps = {
   selectProps: []
-}, _temp)) || _class) || _class) || _class);
+}, _temp)) || _class) || _class) || _class) || _class);
 exports.default = DialogSelectN;
 //# sourceMappingURL=DialogSelectN.js.map

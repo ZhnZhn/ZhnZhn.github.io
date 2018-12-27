@@ -5,21 +5,20 @@ const createLoadOptions = (props={}, options={}) => {
           items=[],
           chartType={},
           seriaColor,
-          date={}, dateDefault=''
+          date          
         } = options
       , { caption:oneC='' } = items[0] || {}
       , { caption:twoC='' } = items[1] || {}
       , { caption:threeC='' } = items[2] || {}
-      , { value:seriaType, compType } = chartType
-      ,  _time = date.value || dateDefault;
-  
+      , { value:seriaType, compType } = chartType;
+
   return {
     ...dfProps,
     seriaType: seriaType,
     seriaColor: seriaColor,
     zhCompType: compType,
     items: items,
-    time: _time,
+    time: date,
     loadId: loadId,
     itemCaption: oneC,
     title: oneC,

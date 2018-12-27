@@ -34,7 +34,6 @@ var _isDfParams = function _isDfParams(dfProps, groupV, metricV) {
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
   var loadId = props.loadId,
       dataSource = props.dataSource,
       _props$dfProps = props.dfProps,
@@ -48,10 +47,7 @@ var createLoadOptions = function createLoadOptions() {
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
-      _options$date = options.date,
-      date = _options$date === undefined ? {} : _options$date,
-      _options$dateDefault = options.dateDefault,
-      dateDefault = _options$dateDefault === undefined ? '' : _options$dateDefault,
+      date = options.date,
       _one$caption = one.caption,
       oneC = _one$caption === undefined ? '' : _one$caption,
       oneV = one.value,
@@ -63,8 +59,8 @@ var createLoadOptions = function createLoadOptions() {
       metricV = metric.value,
       seriaType = chartType.value,
       compType = chartType.compType,
-      _time = date.value || dateDefault,
       _items = [one, group];
+
 
   _isThreeTable(dfProps, _items, metric);
   _isDfParams(dfProps, groupV, metricV);
@@ -78,7 +74,7 @@ var createLoadOptions = function createLoadOptions() {
     zhCompType: compType,
     //items: [ one, group, metric ],
     items: _items,
-    time: _time,
+    time: date,
     loadId: loadId,
     itemCaption: oneC,
     title: oneC,

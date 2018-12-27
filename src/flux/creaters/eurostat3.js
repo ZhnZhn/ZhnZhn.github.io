@@ -25,13 +25,12 @@ const createLoadOptions = (props={}, options={}) => {
       , {
           one={}, group={}, metric={},
           chartType={}, seriaColor,
-          date={}, dateDefault=''
+          date
         } = options
       , { caption:oneC='', value:oneV } = one
       , { caption:groupC='', value:groupV } = group
       , { caption:metricC='', value:metricV } = metric
       , { value:seriaType, compType } = chartType
-      , _time = date.value || dateDefault
       , _items = [ one, group ];
 
   _isThreeTable(dfProps, _items, metric)
@@ -48,7 +47,7 @@ const createLoadOptions = (props={}, options={}) => {
     zhCompType: compType,
     //items: [ one, group, metric ],
     items: _items,
-    time: _time,
+    time: date,
     loadId: loadId,
     itemCaption: oneC,
     title: oneC,
