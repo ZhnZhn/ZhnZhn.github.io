@@ -1,6 +1,9 @@
 import apiFn from './apiFn'
 
-const { isCategory, crUrl } = apiFn;
+const {
+  DF_TAIL,
+  isCategory, crUrl
+} = apiFn;
 
 const _crMapSlice = (items) => {
   const mapSlice = {};
@@ -11,7 +14,7 @@ const _crMapSlice = (items) => {
 };
 
 const _crItems = ({ seriaType, items, time }) => isCategory(seriaType)
-  ? [ {id: time, value: time}, ...items.slice(1)]
+  ? [ ...items.filter(Boolean), {id: 'time', value: time} ]
   : items;
 
 const _crQuery = (items) => items
@@ -24,7 +27,7 @@ const _updateOptionsIf = (seriaType, items, options) => {
   }
 };
 
-const crUrlN = (options) => {  
+const crUrlN = (options) => {
   const {
     seriaType,
     dfTable
@@ -34,7 +37,9 @@ const crUrlN = (options) => {
 
   _updateOptionsIf(seriaType, _items, options)
 
-  return crUrl(dfTable, _q);
+  return isCategory(seriaType)
+    ? crUrl(dfTable, _q, `&${DF_TAIL}`)
+    : crUrl(dfTable, _q);
 };
 
 export default crUrlN

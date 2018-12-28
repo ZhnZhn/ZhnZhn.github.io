@@ -19,7 +19,7 @@ const apiFn = {
   DF_TAIL: C.DF_TAIL,
 
   isCategory: isInArrStr(CATEGORY_TYPES),
-  crUrl: (table, q) => `${C.URL}${table}?${q}${C.QUERY_TAIL}`
+  crUrl: (table, q, tail=C.QUERY_TAIL) => `${C.URL}${table}?${q}${tail}`
 };
 
 export default apiFn

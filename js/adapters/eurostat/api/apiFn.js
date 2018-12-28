@@ -28,7 +28,8 @@ var apiFn = {
 
   isCategory: isInArrStr(CATEGORY_TYPES),
   crUrl: function crUrl(table, q) {
-    return "" + C.URL + table + "?" + q + C.QUERY_TAIL;
+    var tail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : C.QUERY_TAIL;
+    return "" + C.URL + table + "?" + q + tail;
   }
 };
 

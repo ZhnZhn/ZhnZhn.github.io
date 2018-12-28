@@ -14,7 +14,8 @@ var _apiFn2 = _interopRequireDefault(_apiFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var isCategory = _apiFn2.default.isCategory,
+var DF_TAIL = _apiFn2.default.DF_TAIL,
+    isCategory = _apiFn2.default.isCategory,
     crUrl = _apiFn2.default.crUrl;
 
 
@@ -30,7 +31,7 @@ var _crItems = function _crItems(_ref) {
   var seriaType = _ref.seriaType,
       items = _ref.items,
       time = _ref.time;
-  return isCategory(seriaType) ? [{ id: time, value: time }].concat((0, _toConsumableArray3.default)(items.slice(1))) : items;
+  return isCategory(seriaType) ? [].concat((0, _toConsumableArray3.default)(items.filter(Boolean)), [{ id: 'time', value: time }]) : items;
 };
 
 var _crQuery = function _crQuery(items) {
@@ -53,7 +54,7 @@ var crUrlN = function crUrlN(options) {
 
   _updateOptionsIf(seriaType, _items, options);
 
-  return crUrl(dfTable, _q);
+  return isCategory(seriaType) ? crUrl(dfTable, _q, '&' + DF_TAIL) : crUrl(dfTable, _q);
 };
 
 exports.default = crUrlN;

@@ -101,6 +101,11 @@
         { "id": "ES_HC_FINSCHEME" },
         { "id": "ES_HC_FUNCTION" }
       ]
+    },{
+      "caption": "Education",
+      "items": [
+        { "id": "ES_EDU_LEVEL", "isNew": true }
+      ]
     }
   ],
   "items" : {
@@ -1171,6 +1176,39 @@
           "dfTable": "hlth_sha11_hc",
           "dfParams": [ "geo", "icha11_hc", "unit"],
           "mapType": "V"
+        }
+      }
+    },
+
+    "ES_EDU_LEVEL" : {
+      "type" : "ES_EDU_LEVEL",
+      "menuTitle" : "Attainment Level By, %",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+            "id": "geo",
+            "caption": "Country",
+            "jsonProp": "countries",
+            "uri": "./data/eurostat/countries.json"
+          },{
+             "id": "isced11",
+             "caption": "Level",
+             "uri": "./data/eurostat/education-by-level.json"
+          },{
+              "id": "age",
+              "caption": "Age",
+              "uri": "./data/eurostat/education-by-age.json"
+          },{
+              "id": "sex",
+              "caption": "Sex",
+              "uri": "./data/eurostat/by-sex.json"
+           }
+        ],
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "dfTable": "edat_lfse_03"
         }
       }
     }

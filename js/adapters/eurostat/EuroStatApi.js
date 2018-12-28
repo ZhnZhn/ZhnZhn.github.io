@@ -36,7 +36,7 @@ var _addPropTo = function _addPropTo(option) {
 };
 
 var _isRouteUrlN = function _isRouteUrlN(items) {
-  return Array.isArray(items) && items[1] && items[1].id;
+  return Array.isArray(items) && items[1] && Boolean(items[1].id);
 };
 
 var EuroStatApi = {

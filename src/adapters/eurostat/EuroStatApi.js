@@ -22,17 +22,17 @@ const _addPropTo = (option) => {
 
 const _isRouteUrlN = (items) => Array.isArray(items)
   && items[1]
-  && items[1].id;
+  && Boolean(items[1].id);
 
 const EuroStatApi = {
 
   getRequestUrl(option){
     const { dfParams, items } = option;
     _addPropTo(option)
-
+    
     return _isRouteUrlN(items)
       ? api.crUrlN(option)
-      : dfParams          
+      : dfParams
           ? api.crUrlWithParams(option)
           : api.crUrl(option);
   },
