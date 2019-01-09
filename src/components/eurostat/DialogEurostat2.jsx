@@ -9,6 +9,7 @@ import Decor from '../dialogs/decorators/Decorators';
 import withForDate from './withForDate'
 
 import RouterOptions from './RouterOptions';
+import PaneOptions from './PaneOptions'
 
 const  MAP_FREQUENCY_DF = 'M';
 
@@ -58,12 +59,15 @@ class DialogEurostat2 extends Component {
       onAbout: this._clickInfoWithToolbar
     })
 
-    this.toolbarButtons = this._createType2WithToolbar(props)
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { isOptions: true }
+    )
     this._commandButtons = this._crCommandsWithLoad(this)
     this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
       isToolbar: true,
+      isOptions: false,
       isShowLabels: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
@@ -151,7 +155,7 @@ class DialogEurostat2 extends Component {
   }
   _createLoadOption = () => {
     const {
-            one, two,
+            one, two, dialogOptions,
             chartType, colorComp,
             compSelect1, compSelect2
           } = this
@@ -162,7 +166,7 @@ class DialogEurostat2 extends Component {
 
     return this.props.loadFn(
       this.props, {
-        one, two,
+        one, two, dialogOptions,
         chartType, seriaColor,
         date,
         selectOptions: [
@@ -192,7 +196,7 @@ class DialogEurostat2 extends Component {
            twoCaption, twoURI, twoJsonProp
           } = this.props
         , {
-            isToolbar,
+            isToolbar, isOptions,
             isShowLabels, isShowDate,
             dateDefault, dateOptions,
             validationMessages
@@ -211,6 +215,11 @@ class DialogEurostat2 extends Component {
              <D.Toolbar
                isShow={isToolbar}
                buttons={this.toolbarButtons}
+             />
+             <PaneOptions
+               isShow={isOptions}
+               toggleOption={this._toggleOptionWithToolbar}
+               onClose={this._hideOptionsWithToolbar}
              />
              <D.SelectWithLoad
                ref={this._refSelect1}

@@ -695,9 +695,9 @@
     },
     "ES_AGRI_FERT" : {
       "type" : "ES_AGRI_FERT",
-      "menuTitle" : "Sales Of Fertilisers, T",
-      "dialogCaption" : "Sales Of Fertilisers",
-      "contCaption" : "Agriculture Sales Of Fertilisers, in Tonnes",
+      "menuTitle" : "Sales of Fertilisers, T",
+      "dialogCaption" : "Sales of Fertilisers",
+      "contCaption" : "Agriculture Sales of Fertilisers, in Tonnes",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps": {
@@ -718,9 +718,9 @@
     },
     "ES_AGRI_ENVI" : {
       "type" : "ES_AGRI_ENVI",
-      "menuTitle" : "Sales Of Pesticides, Kg",
-      "dialogCaption" : "Sales Of Pesticides",
-      "contCaption" : "Agriculture Sales Of Pesticides, in Kg",
+      "menuTitle" : "Sales of Pesticides, Kg",
+      "dialogCaption" : "Sales of Pesticides",
+      "contCaption" : "Agriculture Sales of Pesticides, in Kg",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps": {

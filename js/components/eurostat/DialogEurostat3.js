@@ -39,6 +39,10 @@ var _Decorators = require('../dialogs/decorators/Decorators');
 
 var _Decorators2 = _interopRequireDefault(_Decorators);
 
+var _PaneOptions = require('./PaneOptions');
+
+var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
@@ -96,11 +100,17 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
     };
 
     _this._createLoadOption = function () {
-      var _this$parentChild$get2 = _this.parentChild.getValues(),
-          group = _this$parentChild$get2.parent,
-          metric = _this$parentChild$get2.child;
+      var one = _this.one,
+          dialogOptions = _this.dialogOptions,
+          parentChild = _this.parentChild,
+          _parentChild$getValue = parentChild.getValues(),
+          group = _parentChild$getValue.parent,
+          metric = _parentChild$getValue.child;
 
-      return _this.props.loadFn(_this.props, { one: _this.one, group: group, metric: metric });
+      return _this.props.loadFn(_this.props, {
+        one: one, dialogOptions: dialogOptions,
+        group: group, metric: metric
+      });
     };
 
     _this._handleClose = function () {
@@ -114,11 +124,13 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
       onAbout: _this._clickInfoWithToolbar
     });
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, isOptions: true });
+
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
     _this.state = {
       isToolbar: true,
+      isOptions: false,
       isShowLabels: true,
       validationMessages: []
     };
@@ -155,6 +167,7 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
           msgOnNotSelected = _props.msgOnNotSelected,
           _state = this.state,
           isToolbar = _state.isToolbar,
+          isOptions = _state.isOptions,
           isShowLabels = _state.isShowLabels,
           validationMessages = _state.validationMessages;
 
@@ -173,6 +186,11 @@ var DialogEurostat3 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorat
         _react2.default.createElement(_DialogCell2.default.Toolbar, {
           isShow: isToolbar,
           buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_PaneOptions2.default, {
+          isShow: isOptions,
+          toggleOption: this._toggleOptionWithToolbar,
+          onClose: this._hideOptionsWithToolbar
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           isShow: isShow,

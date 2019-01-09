@@ -48,6 +48,7 @@ var createLoadOptions = function createLoadOptions() {
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
       date = options.date,
+      dialogOptions = options.dialogOptions,
       _one$caption = one.caption,
       oneC = _one$caption === undefined ? '' : _one$caption,
       oneV = one.value,
@@ -65,7 +66,7 @@ var createLoadOptions = function createLoadOptions() {
   _isThreeTable(dfProps, _items, metric);
   _isDfParams(dfProps, groupV, metricV);
 
-  return (0, _extends3.default)({}, dfProps, {
+  return (0, _extends3.default)({}, dfProps, dialogOptions, {
     geo: oneV,
     group: groupV,
     metric: metricV,

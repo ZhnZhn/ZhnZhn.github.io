@@ -55,7 +55,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var isDmy = _DateUtils2.default.isDmy;
 
 
-var STYLE = {
+var S = {
   SUB_PANEL: {
     position: 'absolute',
     top: '32px',
@@ -86,12 +86,80 @@ var STYLE = {
     color: '#f44336',
     fontWeight: 'bold'
   }
+};
 
+var RowValueDate = function RowValueDate(_ref) {
+  var value = _ref.value,
+      date = _ref.date;
+  return _react2.default.createElement(
+    'div',
+    { style: S.ROW },
+    _react2.default.createElement(_SpanValue2.default, { value: value }),
+    _react2.default.createElement(_SpanDate2.default, { date: date, style: S.DATE })
+  );
 };
 
 var PanelValueMoving = function (_Component) {
   (0, _inherits3.default)(PanelValueMoving, _Component);
 
+  function PanelValueMoving() {
+    var _ref2;
+
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, PanelValueMoving);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref2 = PanelValueMoving.__proto__ || Object.getPrototypeOf(PanelValueMoving)).call.apply(_ref2, [this].concat(args))), _this), _this.state = {
+      msgDateTo: ''
+    }, _this._handleEnterDate = function (dateTo) {
+      if (_this.dateToComp.isValid()) {
+        var isUpdated = _this.props.updateDateTo(dateTo);
+        if (isUpdated) {
+          _this.setState({ msgDateTo: '' });
+        } else {
+          _this.setState({ msgDateTo: 'No data for ' + dateTo });
+        }
+      }
+    }, _this._refDateToComp = function (comp) {
+      return _this.dateToComp = comp;
+    }, _this._renderAdmin = function (isAdminMode, date, msgDateTo, isDenyToChange) {
+      if (!isAdminMode || isDenyToChange) {
+        return null;
+      } else {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'label',
+            { style: S.ROW_INPUT },
+            _react2.default.createElement(_SpanLabel2.default, { label: 'CompareTo:' }),
+            _react2.default.createElement(_DateField2.default, {
+              ref: _this._refDateToComp,
+              rootStyle: S.DATE_FIELD,
+              initValue: date,
+              placeholder: 'DD-MM-YYYY',
+              errorMsg: 'DD-MM-YYYY',
+              onTest: isDmy,
+              onEnter: _this._handleEnterDate
+            })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'span',
+              { style: S.MSG },
+              msgDateTo
+            )
+          )
+        );
+      }
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
   /*
   static propTypes = {
     valueMoving: PropTypes.shape({
@@ -110,68 +178,11 @@ var PanelValueMoving = function (_Component) {
   }
   */
 
-  function PanelValueMoving(props) {
-    (0, _classCallCheck3.default)(this, PanelValueMoving);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (PanelValueMoving.__proto__ || Object.getPrototypeOf(PanelValueMoving)).call(this));
-
-    _this._handleEnterDate = function (dateTo) {
-      if (_this.dateToComp.isValid()) {
-        var isUpdated = _this.props.updateDateTo(dateTo);
-        if (isUpdated) {
-          _this.setState({ msgDateTo: '' });
-        } else {
-          _this.setState({ msgDateTo: 'No data for ' + dateTo });
-        }
-      }
-    };
-
-    _this._renderAdmin = function (isAdminMode, date, msgDateTo, isDenyToChange) {
-      if (!isAdminMode || isDenyToChange) {
-        return null;
-      } else {
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'label',
-            { style: STYLE.ROW_INPUT },
-            _react2.default.createElement(_SpanLabel2.default, { label: 'CompareTo:' }),
-            _react2.default.createElement(_DateField2.default, {
-              ref: function ref(comp) {
-                return _this.dateToComp = comp;
-              },
-              rootStyle: STYLE.DATE_FIELD,
-              initValue: date,
-              placeholder: 'DD-MM-YYYY',
-              errorMsg: 'DD-MM-YYYY',
-              onTest: isDmy,
-              onEnter: _this._handleEnterDate
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'span',
-              { style: STYLE.MSG },
-              msgDateTo
-            )
-          )
-        );
-      }
-    };
-
-    _this.state = {
-      msgDateTo: ''
-    };
-    return _this;
-  }
 
   (0, _createClass3.default)(PanelValueMoving, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (this.props !== nextProps) {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props !== prevProps) {
         this.setState({ msgDateTo: '' });
       }
     }
@@ -191,19 +202,9 @@ var PanelValueMoving = function (_Component) {
 
       return _react2.default.createElement(
         _SubPanel2.default,
-        { style: STYLE.SUB_PANEL },
-        _react2.default.createElement(
-          'div',
-          { style: STYLE.ROW },
-          _react2.default.createElement(_SpanValue2.default, { value: value }),
-          _react2.default.createElement(_SpanDate2.default, { date: date, style: STYLE.DATE })
-        ),
-        _react2.default.createElement(
-          'div',
-          { style: STYLE.ROW },
-          _react2.default.createElement(_SpanValue2.default, { value: valueTo }),
-          _react2.default.createElement(_SpanDate2.default, { date: dateTo, style: STYLE.DATE })
-        ),
+        { style: S.SUB_PANEL },
+        _react2.default.createElement(RowValueDate, { value: value, date: date }),
+        _react2.default.createElement(RowValueDate, { value: valueTo, date: dateTo }),
         this._renderAdmin(_isAdminMode, date, msgDateTo, isDenyToChange)
       );
     }
@@ -212,4 +213,4 @@ var PanelValueMoving = function (_Component) {
 }(_react.Component);
 
 exports.default = PanelValueMoving;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\PanelValueMoving.js.map
+//# sourceMappingURL=PanelValueMoving.js.map

@@ -37,40 +37,47 @@ var _InputStyle2 = _interopRequireDefault(_InputStyle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === "function";
+};
+
+var _getInitStateFrom = function _getInitStateFrom(_ref) {
+  var initValue = _ref.initValue;
+  return {
+    initValue: initValue,
+    value: initValue || '',
+    errorInput: undefined,
+    isValid: true
+  };
+};
+
 var InputPattern = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(InputPattern, _Component);
 
+  function InputPattern(props) {
+    (0, _classCallCheck3.default)(this, InputPattern);
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (InputPattern.__proto__ || Object.getPrototypeOf(InputPattern)).call(this, props));
+
+    _initialiseProps.call(_this);
+
+    _this.state = _getInitStateFrom(props);
+    return _this;
+  }
   /*
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
-     initValue: PropTypes.string,
-     isUpdateInit: PropTypes.bool,
+     initValue: PropTypes.string,     
      placeholder: PropTypes.string,
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,
      onEnter: PropTypes.func
    }
   */
-  function InputPattern(props) {
-    (0, _classCallCheck3.default)(this, InputPattern);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (InputPattern.__proto__ || Object.getPrototypeOf(InputPattern)).call(this));
-
-    _initialiseProps.call(_this);
-
-    _this.state = _this._crInitState(props);
-    return _this;
-  }
 
   (0, _createClass3.default)(InputPattern, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (this.props !== nextProps && nextProps.isUpdateInit) {
-        this.setState(this._crInitState(nextProps));
-      }
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -126,6 +133,11 @@ var InputPattern = (_temp = _class = function (_Component) {
     value: function focusInput() {
       this.inputPattern.focus();
     }
+  }], [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(props, state) {
+      return props.initValue !== state.initValue ? _getInitStateFrom(props) : null;
+    }
   }]);
   return InputPattern;
 }(_react.Component), _class.defaultProps = {
@@ -134,14 +146,6 @@ var InputPattern = (_temp = _class = function (_Component) {
   }
 }, _initialiseProps = function _initialiseProps() {
   var _this2 = this;
-
-  this._crInitState = function (props) {
-    return {
-      value: props.initValue || '',
-      errorInput: undefined,
-      isValid: true
-    };
-  };
 
   this._handleChangeValue = function (event) {
     var onTest = _this2.props.onTest,
@@ -183,16 +187,14 @@ var InputPattern = (_temp = _class = function (_Component) {
   this._handleKeyDown = function (event) {
     switch (event.keyCode) {
       case 13:
-        if (typeof _this2.props.onEnter === 'function') {
+        if (_isFn(_this2.props.onEnter)) {
           _this2.props.onEnter(event.target.value);
         }
         break;
       case 27:case 46:
         event.preventDefault();
-        _this2.setState({
-          value: _this2.props.initValue || '',
-          errorInput: undefined,
-          isValid: true
+        _this2.setState(function (prevState, props) {
+          return _getInitStateFrom(props);
         });
         break;
       default:

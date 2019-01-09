@@ -62,35 +62,29 @@ var ListCreatePane = function (_Component) {
           store = _this$props.store;
 
       if (actionType === actionCompleted) {
-        var isUpdateGroup = true;
         if (data.forActionType === forActionType) {
           _this._handleClear();
-          isUpdateGroup = false;
         }
         _this.setState({
-          groupOptions: store.getWatchGroups(),
-          isUpdateGroup: isUpdateGroup
+          groupOptions: store.getWatchGroups()
         });
       } else if (actionType === actionFailed && data.forActionType === forActionType) {
         _this.setState({
-          validationMessages: data.messages,
-          isUpdateGroup: false
+          validationMessages: data.messages
         });
       }
     };
 
     _this._handleSelectGroup = function (item) {
-      if (item && item.caption) {
-        _this.captionGroup = item.caption;
-      } else {
-        _this.captionGroup = null;
-      }
+      _this.captionGroup = item && item.caption || null;
     };
 
     _this._handleClear = function () {
       _this.inputText.setValue('');
       if (_this.state.validationMessages.length > 0) {
-        _this.setState({ validationMessages: [], isUpdateGroup: false });
+        _this.setState({
+          validationMessages: []
+        });
       }
     };
 
@@ -114,8 +108,14 @@ var ListCreatePane = function (_Component) {
         if (!captionList) {
           msg.push(msgOnIsEmptyName('List'));
         }
-        _this.setState({ validationMessages: msg, isUpdateGroup: false });
+        _this.setState({
+          validationMessages: msg
+        });
       }
+    };
+
+    _this._refInputText = function (c) {
+      return _this.inputText = c;
     };
 
     _this.captionGroup = null;
@@ -126,7 +126,6 @@ var ListCreatePane = function (_Component) {
     });
     _this.state = {
       groupOptions: props.store.getWatchGroups(),
-      isUpdateGroup: false,
       validationMessages: []
     };
     return _this;
@@ -145,8 +144,6 @@ var ListCreatePane = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var onClose = this.props.onClose,
           _state = this.state,
           groupOptions = _state.groupOptions,
@@ -157,14 +154,11 @@ var ListCreatePane = function (_Component) {
         null,
         _react2.default.createElement(_Atoms2.default.RowInputSelect, {
           caption: 'In Group:',
-          options: groupOptions
-          //isUpdateOptions={isUpdateGroup}
-          , onSelect: this._handleSelectGroup
+          options: groupOptions,
+          onSelect: this._handleSelectGroup
         }),
         _react2.default.createElement(_Atoms2.default.RowInputText, {
-          ref: function ref(c) {
-            return _this2.inputText = c;
-          },
+          ref: this._refInputText,
           caption: 'List:'
         }),
         _react2.default.createElement(_Atoms2.default.ValidationMessages, {

@@ -55,10 +55,24 @@ const _colorSeriaNotIn = (config, codes, color) => {
   })
 };
 
+const _isDataDes = d => d.length>0
+  && d[0][0]>d[d.length-1][0];
 
-const _isDataDes = (d) => d.length>0 && d[0][0]>d[d.length-1][0];
+const _isLineSeria = type => type
+  && (type === 'AREA' || type === 'SPLINE');
 
-const _isLineSeria = type => type && (type === 'AREA' || type === 'SPLINE');
+const _filterZeroCategories = (data, categories) => {
+  const _data = [], _arrC = [];
+  data.forEach(p => {
+    if (p.y !== 0) { _data.push(p) }
+    else { _arrC.push(p.c) }
+  })
+  if (_arrC.length !== 0) {
+    categories = categories
+       .filter(c => _arrC.indexOf(c) === -1)
+  }
+  return { data: _data, categories };
+};
 
 const EuroStatFn = {
 
@@ -127,7 +141,7 @@ const EuroStatFn = {
   }){
     const { time, isNotZoomToMinMax } = option;
     config.xAxis.categories = categories
-    if (isNotZoomToMinMax) {      
+    if (isNotZoomToMinMax) {
       config.yAxis.zhNotZoomToMinMax = true
     } else {
       config.yAxis.min = min
@@ -143,6 +157,17 @@ const EuroStatFn = {
     _colorSeriaIn(config, C.EU_CODES, COLOR.EU)
     _colorSeriaIn(config, C.EA_CODES, COLOR.EA)
     _colorSeriaNotIn(config, C.EU_MEMBER, COLOR.NOT_EU_MEMBER)
+  },
+
+  addToCategoryConfig(config, { json, option, data, categories, min }){
+    if (option.isFilterZero) {
+      const _r = _filterZeroCategories(data, categories);
+      data = _r.data
+      categories = _r.categories
+    }
+    EuroStatFn.setDataAndInfo({ config, data, json, option })
+    EuroStatFn.setCategories({ config, categories, min, option })
+    EuroStatFn.colorSeries(config)
   },
 
   setTooltip({ config, tooltip }) {

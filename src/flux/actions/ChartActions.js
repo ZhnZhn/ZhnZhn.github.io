@@ -58,16 +58,22 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
   }
 }
 
-const _addSettings = (option) => {
-  const { loadId } = option
-      , apiKey = ChartStore.getKey(loadId)
-      , proxy = ChartStore.getProxy(loadId);
-  Object.assign(option, {
-    apiKey, proxy,
-    isDrawDeltaExtrems: ChartStore.isSetting('isDrawDeltaExtrems'),
-    isNotZoomToMinMax: ChartStore.isSetting('isNotZoomToMinMax')
-  })
+const _addBoolOptionTo = (options, propName) => {
+  if (typeof options[propName] === 'undefined') {
+    options[propName] = ChartStore.isSetting(propName)
+  }
 }
+
+const _addSettings = (options) => {
+  const { loadId } = options;
+  Object.assign(options, {
+    apiKey: ChartStore.getKey(loadId),
+    proxy: ChartStore.getProxy(loadId)
+  })
+  _addBoolOptionTo(options, 'isDrawDeltaExtrems')
+  _addBoolOptionTo(options, 'isNotZoomToMinMax')
+}
+
 
 const ChartActions =  Reflux.createActions({
       [A.LOAD_STOCK] : {
@@ -90,6 +96,9 @@ const ChartActions =  Reflux.createActions({
 
       [A.SORT_BY]: {},
 });
+
+
+
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore
 

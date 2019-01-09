@@ -67,11 +67,7 @@ var GroupDeletePane = function (_Component) {
     };
 
     _this._handleSelectGroup = function (item) {
-      if (item && item.caption) {
-        _this.caption = item.caption;
-      } else {
-        _this.caption = null;
-      }
+      _this.caption = item && item.caption || null;
     };
 
     _this._handleClear = function () {
@@ -88,7 +84,9 @@ var GroupDeletePane = function (_Component) {
       if (_this.caption) {
         onDelete({ caption: _this.caption });
       } else {
-        _this.setState({ validationMessages: [msgOnNotSelect('Group')] });
+        _this.setState({
+          validationMessages: [msgOnNotSelect('Group')]
+        });
       }
     };
 

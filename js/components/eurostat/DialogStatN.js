@@ -78,6 +78,10 @@ var S = {
   }
 };
 
+var _isOpenAndPrevLoadFailed = function _isOpenAndPrevLoadFailed(prevProps, props, state) {
+  return props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
+};
+
 var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(DialogStatN, _Component);
 
@@ -247,17 +251,6 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   }
 
   (0, _createClass3.default)(DialogStatN, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (this.props !== nextProps && !this.props.isShow && nextProps.isShow && this.state.isLoadFailed) {
-        this.setState({
-          isLoading: true,
-          isLoadFailed: false
-        });
-        this._loadDims();
-      }
-    }
-  }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (this.props !== nextProps) {
@@ -271,6 +264,17 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     key: 'componentDidMount',
     value: function componentDidMount() {
       this._loadDims();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (_isOpenAndPrevLoadFailed(prevProps, this.props, this.state)) {
+        this.setState({
+          isLoading: true,
+          isLoadFailed: false
+        });
+        this._loadDims();
+      }
     }
   }, {
     key: 'render',

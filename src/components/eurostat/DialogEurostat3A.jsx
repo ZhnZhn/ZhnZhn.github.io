@@ -9,6 +9,7 @@ import Decor from '../dialogs/decorators/Decorators';
 import withForDate from './withForDate'
 
 import RouterOptions from './RouterOptions';
+import PaneOptions from './PaneOptions'
 
 const  MAP_FREQUENCY_DF = 'M';
 
@@ -67,12 +68,15 @@ class DialogEurostat3A extends Component {
       onAbout: this._clickInfoWithToolbar
     })
 
-    this.toolbarButtons = this._createType2WithToolbar(props)
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { isOptions: true }
+    )
     this._commandButtons = this._crCommandsWithLoad(this)
     this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
       isToolbar: true,
+      isOptions: false,
       isShowLabels: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
@@ -168,20 +172,21 @@ class DialogEurostat3A extends Component {
   }
   _createLoadOption = () => {
     const {
-            one, two, three,
-            chartType, colorComp,
-            compSelect1, compSelect2
-          } = this
-        , seriaColor = colorComp
-            ? colorComp.getColor()
-            : undefined
-        , date = this._getDateWithForDate()
+      one, two, three, dialogOptions,
+      chartType, colorComp,
+      compSelect1, compSelect2
+    } = this
+    , seriaColor = colorComp
+        ? colorComp.getColor()
+        : undefined
+    , date = this._getDateWithForDate();
 
     return this.props.loadFn(
       this.props, {
         one: one,
         group: two,
         metric: three,
+        dialogOptions,
         chartType, seriaColor,
         date,
         selectOptions: [
@@ -212,7 +217,7 @@ class DialogEurostat3A extends Component {
            noDate
           } = this.props
         , {
-            isToolbar,
+            isToolbar, isOptions,
             isShowLabels, isShowDate,
             dateDefault, dateOptions,
             validationMessages
@@ -230,6 +235,11 @@ class DialogEurostat3A extends Component {
              <D.Toolbar
                isShow={isToolbar}
                buttons={this.toolbarButtons}
+             />
+             <PaneOptions
+               isShow={isOptions}
+               toggleOption={this._toggleOptionWithToolbar}
+               onClose={this._hideOptionsWithToolbar}
              />
              <D.SelectWithLoad
                ref={this._refSelect1}

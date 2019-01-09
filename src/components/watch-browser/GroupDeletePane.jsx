@@ -22,18 +22,19 @@ class GroupDeletePane extends Component {
     super()
     this.caption = null
     this._primaryBt = <A.Button.Primary
-                         caption="Delete"
-                         title="Delete Group"
-                         onClick={this._handleDeleteGroup}
-                      />
+       caption="Delete"
+       title="Delete Group"
+       onClick={this._handleDeleteGroup}
+    />
     this.state = {
-      groupOptions : props.store.getWatchGroups(),
-      validationMessages : []
+      groupOptions: props.store.getWatchGroups(),
+      validationMessages: []
     }
   }
 
   componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
+    this.unsubscribe = this.props.store
+      .listen(this._onStore)
   }
   componentWillUnmount(){
     this.unsubscribe()
@@ -49,11 +50,7 @@ class GroupDeletePane extends Component {
   }
 
   _handleSelectGroup = (item) => {
-     if (item && item.caption){
-       this.caption = item.caption
-     } else {
-       this.caption = null
-     }
+     this.caption = (item && item.caption) || null;
   }
 
   _handleClear = () => {
@@ -67,7 +64,9 @@ class GroupDeletePane extends Component {
      if (this.caption){
        onDelete({ caption:this.caption })
      } else {
-       this.setState({ validationMessages:[msgOnNotSelect('Group')] })
+       this.setState({
+         validationMessages: [msgOnNotSelect('Group')]
+       })
      }
   }
 

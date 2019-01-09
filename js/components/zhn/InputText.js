@@ -24,8 +24,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _temp;
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -60,13 +58,35 @@ var C = {
   OFF: 'off'
 };
 
-var InputText = (_temp = _class = function (_Component) {
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
+var _getInitStateFrom = function _getInitStateFrom(_ref) {
+  var initValue = _ref.initValue;
+  return {
+    initValue: initValue,
+    value: initValue != null ? initValue : C.BLANK
+  };
+};
+
+var InputText = function (_Component) {
   (0, _inherits3.default)(InputText, _Component);
+
+  /*
+  static propTypes = {
+    style: PropTypes.object,
+    initValue: PropTypes.string,
+    type: PropTypes.string,
+    placeholder: PropTypes.string,
+    onEnter: PropTypes.func
+  }
+  */
 
   function InputText(props) {
     (0, _classCallCheck3.default)(this, InputText);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (InputText.__proto__ || Object.getPrototypeOf(InputText)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (InputText.__proto__ || Object.getPrototypeOf(InputText)).call(this, props));
 
     _this._handleInputChange = function (event) {
       _this.setState({ value: event.target.value });
@@ -88,39 +108,19 @@ var InputText = (_temp = _class = function (_Component) {
       }
     };
 
-    _this.isOnEnter = typeof props.onEnter === "function" ? true : false;
-    _this.state = {
-      value: props.initValue
-    };
+    _this.isOnEnter = _isFn(props.onEnter) ? true : false;
+
+    _this.state = _getInitStateFrom(props);
     return _this;
   }
-  /*
-  static propTypes = {
-    style: PropTypes.object,
-    initValue: PropTypes.string,
-    type: PropTypes.string,
-    placeholder: PropTypes.string,
-    onEnter: PropTypes.func
-  }
-  */
-
 
   (0, _createClass3.default)(InputText, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var onReg = this.props.onReg;
 
-      if (typeof onReg === 'function') {
+      if (_isFn(onReg)) {
         onReg(this);
-      }
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (nextProps !== this.props) {
-        this.setState({
-          value: nextProps.initValue != null ? nextProps.initValue : C.BLANK
-        });
       }
     }
   }, {
@@ -160,10 +160,14 @@ var InputText = (_temp = _class = function (_Component) {
     value: function setValue(value) {
       this.setState({ value: value });
     }
+  }], [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(props, state) {
+      return props.initValue !== state.initValue ? _getInitStateFrom(props) : null;
+    }
   }]);
   return InputText;
-}(_react.Component), _class.defaultProps = {
-  initValue: C.BLANK
-}, _temp);
+}(_react.Component);
+
 exports.default = InputText;
 //# sourceMappingURL=InputText.js.map

@@ -3,13 +3,21 @@ import React, { Component } from 'react';
 
 import STYLE from './InputStyle';
 
+const _isFn = fn => typeof fn === "function";
+
+const _getInitStateFrom = ({ initValue }) => ({
+  initValue: initValue,
+  value: initValue || '',
+  errorInput: undefined,
+  isValid: true
+});
+
 class InputPattern extends Component {
   /*
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
-     initValue: PropTypes.string,
-     isUpdateInit: PropTypes.bool,
+     initValue: PropTypes.string,     
      placeholder: PropTypes.string,
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,
@@ -20,23 +28,15 @@ class InputPattern extends Component {
       onTest: () => { return true; }
    }
 
-   _crInitState = (props) => {
-     return {
-       value: props.initValue || '',
-       errorInput: undefined,
-       isValid: true
-     };
-   }
-
    constructor(props){
-     super();
-     this.state = this._crInitState(props);
+     super(props);
+     this.state = _getInitStateFrom(props);
    }
 
-   componentWillReceiveProps(nextProps) {
-     if (this.props !== nextProps && nextProps.isUpdateInit) {
-        this.setState(this._crInitState(nextProps))
-     }
+   static getDerivedStateFromProps(props, state) {
+     return props.initValue !== state.initValue
+       ? _getInitStateFrom(props)
+       : null;
    }
 
   _handleChangeValue = (event) => {
@@ -75,17 +75,15 @@ class InputPattern extends Component {
   _handleKeyDown = (event) => {
     switch(event.keyCode){
       case 13:
-        if (typeof this.props.onEnter === 'function') {
+        if ( _isFn(this.props.onEnter) ) {
           this.props.onEnter(event.target.value)
         }
         break;
       case 27: case 46:
         event.preventDefault()
-        this.setState({
-          value: this.props.initValue || '' ,
-          errorInput: undefined,
-          isValid: true
-        })
+        this.setState(
+          (prevState, props) => _getInitStateFrom(props)
+        )
         break;
       default: return;
     }

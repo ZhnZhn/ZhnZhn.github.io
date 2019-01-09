@@ -27,6 +27,12 @@ const C = {
   OFF: 'off'
 }
 
+const _isFn = fn => typeof fn === 'function';
+
+const _getInitStateFrom = ({ initValue }) => ({
+  initValue: initValue,
+  value: initValue != null ? initValue : C.BLANK
+});
 
 class InputText extends Component {
   /*
@@ -38,37 +44,29 @@ class InputText extends Component {
     onEnter: PropTypes.func
   }
   */
-  static defaultProps = {
-    initValue: C.BLANK
-  }
-
 
   constructor(props){
-    super()
-    this.isOnEnter = (typeof props.onEnter === "function" )
-            ? true : false
-    this.state = {
-      value: props.initValue
-    }
+    super(props);
+
+    this.isOnEnter = _isFn(props.onEnter)
+       ? true : false
+
+    this.state = _getInitStateFrom(props)
   }
 
   componentDidMount(){
     const { onReg } = this.props;
-    if (typeof onReg === 'function'){
+    if ( _isFn(onReg) ){
       onReg(this)
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps !== this.props){
-      this.setState({
-        value: nextProps.initValue != null
-           ? nextProps.initValue
-           : C.BLANK
-      })
-    }
+  static getDerivedStateFromProps(props, state) {
+    return props.initValue !== state.initValue
+      ? _getInitStateFrom(props)
+      : null;
   }
-
+  
   _handleInputChange = (event) => {
     this.setState({ value: event.target.value })
   }

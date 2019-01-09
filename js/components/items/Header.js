@@ -197,9 +197,8 @@ var Header = function (_Component) {
         { style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
         this._renderMore(moreModel, TS),
         _react2.default.createElement(_SvgCheckBox2.default, {
-          rootStyle: S.CHECK_BOX
-          //chartType={chartType}
-          , onCheck: onCheck,
+          style: S.CHECK_BOX,
+          onCheck: onCheck,
           onUnCheck: onUnCheck
         }),
         _react2.default.createElement(

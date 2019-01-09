@@ -12,7 +12,7 @@ import SubPanel from './SubPanel'
 
 const { isDmy } = DateUtils
 
-const STYLE = {
+const S = {
   SUB_PANEL: {
     position: 'absolute',
     top: '32px',
@@ -43,8 +43,14 @@ const STYLE = {
     color: '#f44336',
     fontWeight: 'bold'
   }
+};
 
-}
+const RowValueDate = ({ value, date }) => (
+  <div style={S.ROW}>
+    <SpanValue value={value} />
+    <SpanDate date={date} style={S.DATE} />
+  </div>
+);
 
 class PanelValueMoving extends Component {
   /*
@@ -64,16 +70,12 @@ class PanelValueMoving extends Component {
     updateDateTo: PropTypes.func
   }
   */
-
-  constructor(props){
-    super()
-    this.state = {
-      msgDateTo: ''
-    }
+  state = {
+    msgDateTo: ''
   }
-
-  componentWillReceiveProps(nextProps){
-    if (this.props !== nextProps){
+  
+  componentDidUpdate(prevProps){
+    if (this.props !== prevProps) {
       this.setState({ msgDateTo: '' })
     }
   }
@@ -89,17 +91,19 @@ class PanelValueMoving extends Component {
     }
   }
 
+  _refDateToComp = comp => this.dateToComp = comp
+
   _renderAdmin = (isAdminMode, date, msgDateTo, isDenyToChange)  => {
     if (!isAdminMode || isDenyToChange) {
       return null;
     } else {
       return (
         <div>
-          <label style={STYLE.ROW_INPUT}>
+          <label style={S.ROW_INPUT}>
             <SpanLabel label="CompareTo:" />
             <DateField
-              ref={comp => this.dateToComp = comp }
-              rootStyle={STYLE.DATE_FIELD}
+              ref={this._refDateToComp}
+              rootStyle={S.DATE_FIELD}
               initValue={date}
               placeholder="DD-MM-YYYY"
               errorMsg="DD-MM-YYYY"
@@ -108,7 +112,7 @@ class PanelValueMoving extends Component {
             />
           </label>
           <div>
-            <span style={STYLE.MSG}>
+            <span style={S.MSG}>
               {msgDateTo}
             </span>
           </div>
@@ -127,15 +131,9 @@ class PanelValueMoving extends Component {
                    : false
        , { msgDateTo } = this.state;
     return (
-      <SubPanel style={STYLE.SUB_PANEL}>
-         <div style={STYLE.ROW}>
-           <SpanValue value={value} />
-           <SpanDate date={date} style={STYLE.DATE} />
-        </div>
-        <div style={STYLE.ROW}>
-           <SpanValue value={valueTo} />
-           <SpanDate date={dateTo} style={STYLE.DATE} />
-        </div>
+      <SubPanel style={S.SUB_PANEL}>
+        <RowValueDate value={value} date={date} />
+        <RowValueDate value={valueTo} date={dateTo} />
         { this._renderAdmin(_isAdminMode, date, msgDateTo, isDenyToChange)}
       </SubPanel>
     );

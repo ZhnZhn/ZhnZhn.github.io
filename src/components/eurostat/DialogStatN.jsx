@@ -28,6 +28,13 @@ const S = {
   }
 };
 
+const _isOpenAndPrevLoadFailed = (
+  prevProps, props, state
+) => props !== prevProps
+  && !prevProps.isShow
+  && props.isShow
+  && state.isLoadFailed;
+
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
@@ -58,20 +65,6 @@ class DialogStatN extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if (this.props !== nextProps &&
-        !this.props.isShow &&
-        nextProps.isShow &&
-        this.state.isLoadFailed
-    ){
-      this.setState({
-        isLoading: true,
-        isLoadFailed: false
-      })
-      this._loadDims()
-    }
-  }
-
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
        if (this.props.isShow === nextProps.isShow){
@@ -85,7 +78,19 @@ class DialogStatN extends Component {
     this._loadDims()
   }
 
-  _loadDims = () => {
+  componentDidUpdate(prevProps) {
+    if ( _isOpenAndPrevLoadFailed(
+      prevProps, this.props, this.state
+    )) {
+      this.setState({
+        isLoading: true,
+        isLoadFailed: false
+      })
+      this._loadDims()
+    }
+  }
+
+ _loadDims = () => {
     const { proxy, baseMeta, dims, dfProps={} } = this.props
         , { dfId } = dfProps;
     loadDims({ id: dfId, proxy, baseMeta, dims })
@@ -288,7 +293,7 @@ class DialogStatN extends Component {
          />
       </D.DraggableDialog>
     );
-  }
+  }  
 }
 
 export default DialogStatN

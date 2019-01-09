@@ -25,7 +25,7 @@ const createLoadOptions = (props={}, options={}) => {
       , {
           one={}, group={}, metric={},
           chartType={}, seriaColor,
-          date
+          date, dialogOptions
         } = options
       , { caption:oneC='', value:oneV } = one
       , { caption:groupC='', value:groupV } = group
@@ -39,6 +39,7 @@ const createLoadOptions = (props={}, options={}) => {
 
   return {
     ...dfProps,
+    ...dialogOptions,
     geo: oneV,
     group: groupV,
     metric: metricV,
@@ -55,7 +56,7 @@ const createLoadOptions = (props={}, options={}) => {
     alertItemId: `${oneC}: ${metricC}`,
     alertGeo: oneC,
     alertMetric: metricC,
-    dataSource
+    dataSource    
   }
 };
 

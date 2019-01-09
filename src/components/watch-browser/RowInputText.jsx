@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import InputText from '../zhn/InputText';
 import STYLE from '../styles/DialogStyles';
@@ -21,9 +21,12 @@ const S = {
 }
 
 class RowInputText extends Component {
+  /*
   static propTypes = {
     caption: PropTypes.string
   }
+  */
+  _refInputText = c => this.inputText = c
 
   render(){
     const { caption } = this.props;
@@ -33,7 +36,7 @@ class RowInputText extends Component {
            {caption}
          </span>
          <InputText
-            ref={c => this.inputText = c}
+            ref={this._refInputText}
             style={S.INPUT_TEXT}
          />
       </div>

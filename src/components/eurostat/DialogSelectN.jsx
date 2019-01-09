@@ -9,6 +9,7 @@ import Decor from '../dialogs/decorators/Decorators';
 import withForDate from './withForDate'
 
 import RouterOptions from './RouterOptions';
+import PaneOptions from './PaneOptions'
 
 const  DF_MAP_FREQUENCY = 'M';
 
@@ -68,12 +69,15 @@ class DialogSelectN extends Component {
       onAbout: this._clickInfoWithToolbar
     })
 
-    this.toolbarButtons = this._createType2WithToolbar(props)
+    this.toolbarButtons = this._createType2WithToolbar(
+      props, { isOptions: true }
+    )
     this._commandButtons = this._crCommandsWithLoad(this)
     this._chartOptions = RouterOptions.crOptions(props)
 
     this.state = {
       isToolbar: true,
+      isOptions: false,
       isShowLabels: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
@@ -154,6 +158,7 @@ class DialogSelectN extends Component {
     const {
       chartType,
       colorComp,
+      dialogOptions
     } = this
     , seriaColor = colorComp
         ? colorComp.getColor()
@@ -163,6 +168,7 @@ class DialogSelectN extends Component {
     return this.props.loadFn(
       this.props, {
         items: this._items,
+        dialogOptions,
         chartType, seriaColor,
         date
         /*
@@ -214,7 +220,7 @@ class DialogSelectN extends Component {
       noDate
     } = this.props
     , {
-      isToolbar,
+      isToolbar, isOptions,
       isShowLabels, isShowDate,
       dateDefault, dateOptions,
       validationMessages
@@ -233,6 +239,11 @@ class DialogSelectN extends Component {
            <D.Toolbar
              isShow={isToolbar}
              buttons={this.toolbarButtons}
+           />
+           <PaneOptions
+             isShow={isOptions}
+             toggleOption={this._toggleOptionWithToolbar}
+             onClose={this._hideOptionsWithToolbar}
            />
            {this._renderSelects(selectProps, isShow, isShowLabels)}
            <D.RowChart

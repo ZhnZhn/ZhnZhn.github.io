@@ -54,6 +54,10 @@ var STYLE = {
 };
 //import PropTypes from "prop-types";
 
+var _isFn = function _isFn(fn) {
+  return typeof fn == 'function';
+};
+
 var RowCheckBox = function (_Component) {
   (0, _inherits3.default)(RowCheckBox, _Component);
 
@@ -63,7 +67,8 @@ var RowCheckBox = function (_Component) {
     caption: PropTypes.string,
     initValue: PropTypes.bool,
     onCheck: PropTypes.func,
-    onUnCheck: PropTypes.func
+    onUnCheck: PropTypes.func,
+    onToggle: PropTypes.func
   }
   */
 
@@ -73,19 +78,27 @@ var RowCheckBox = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (RowCheckBox.__proto__ || Object.getPrototypeOf(RowCheckBox)).call(this));
 
     _this._handleCheck = function () {
-      var onCheck = _this.props.onCheck;
+      var _this$props = _this.props,
+          onCheck = _this$props.onCheck,
+          onToggle = _this$props.onToggle;
 
-      if (typeof onCheck == 'function') {
+      if (_isFn(onCheck)) {
         onCheck();
+      } else if (_isFn(onToggle)) {
+        onToggle();
       }
       _this.setState({ isChecked: true });
     };
 
     _this._handleUnCheck = function () {
-      var onUnCheck = _this.props.onUnCheck;
+      var _this$props2 = _this.props,
+          onUnCheck = _this$props2.onUnCheck,
+          onToggle = _this$props2.onToggle;
 
-      if (typeof onUnCheck == 'function') {
+      if (_isFn(onUnCheck)) {
         onUnCheck();
+      } else if (_isFn(onToggle)) {
+        onToggle();
       }
       _this.setState({ isChecked: false });
     };
@@ -138,4 +151,4 @@ var RowCheckBox = function (_Component) {
 }(_react.Component);
 
 exports.default = RowCheckBox;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\RowCheckBox.js.map
+//# sourceMappingURL=RowCheckBox.js.map

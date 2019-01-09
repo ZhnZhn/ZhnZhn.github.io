@@ -7,7 +7,8 @@ const createLoadOptions = (props={}, options={}) => {
           dfProps={}
         } = props
       , {
-          one, two={}, chartType={},
+          one, two={}, dialogOptions,
+          chartType={},
           seriaColor,
           date,
           selectOptions
@@ -25,6 +26,7 @@ const createLoadOptions = (props={}, options={}) => {
 
   return {
     ...dfProps,
+    ...dialogOptions,
     itemMap: two,
     geo: _oneV,
     metric: two.value,

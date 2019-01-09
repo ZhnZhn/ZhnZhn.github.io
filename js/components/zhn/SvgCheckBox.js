@@ -67,12 +67,23 @@ var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
+var _getInitStateFrom = function _getInitStateFrom(_ref) {
+  var initValue = _ref.initValue,
+      value = _ref.value;
+  return {
+    initValue: initValue,
+    isChecked: !!value
+  };
+};
+
 var SvgCheckBox = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(SvgCheckBox, _Component);
 
   /*
   static propTypes = {
+    initValue: PropTypes.bool,
     value: PropTypes.bool,
+    style: PropTypes.object,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func
   }
@@ -81,45 +92,37 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
   function SvgCheckBox(props) {
     (0, _classCallCheck3.default)(this, SvgCheckBox);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (SvgCheckBox.__proto__ || Object.getPrototypeOf(SvgCheckBox)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (SvgCheckBox.__proto__ || Object.getPrototypeOf(SvgCheckBox)).call(this, props));
 
     _initialiseProps.call(_this);
 
-    var value = props.value,
-        onCheck = props.onCheck,
+    var onCheck = props.onCheck,
         onUnCheck = props.onUnCheck;
 
     _this._isOnCheck = _isFn(onCheck);
     _this._isOnUnCheck = _isFn(onUnCheck);
 
-    _this.state = {
-      isChecked: !!value
-    };
+    _this.state = _getInitStateFrom(props);
     return _this;
   }
 
   (0, _createClass3.default)(SvgCheckBox, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (this.props !== nextProps && typeof nextProps.value !== 'undefined') {
-        this.setState({ isChecked: !!nextProps.value });
-      }
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var rootStyle = this.props.rootStyle,
-          isChecked = this.state.isChecked,
-          _elChecked = isChecked ? EL_CHECKED : null;
+      var _props = this.props,
+          style = _props.style,
+          _props$value = _props.value,
+          value = _props$value === undefined ? this.state.isChecked : _props$value,
+          _elChecked = value ? EL_CHECKED : null;
 
       return _react2.default.createElement(
         'div',
         {
           role: 'checkbox',
           tabIndex: '0',
-          'aria-checked': isChecked
+          'aria-checked': value
           //aria-labelledby
-          , style: (0, _extends3.default)({}, S.DIV, rootStyle),
+          , style: (0, _extends3.default)({}, S.DIV, style),
           onClick: this._hClick,
           onKeyDown: this._hKeyDown
         },
@@ -140,6 +143,11 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
         )
       );
     }
+  }], [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(props, state) {
+      return props.initValue !== state.initValue ? _getInitStateFrom(props) : null;
+    }
   }]);
   return SvgCheckBox;
 }(_react.Component), _initialiseProps = function _initialiseProps() {
@@ -154,11 +162,13 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
         onUnCheck = props.onUnCheck,
         isChecked = state.isChecked;
 
+
     if (!isChecked && _isOnCheck) {
       onCheck(_this2);
     } else if (_isOnUnCheck) {
       onUnCheck(_this2);
     }
+
     _this2.setState({ isChecked: !isChecked });
   };
 

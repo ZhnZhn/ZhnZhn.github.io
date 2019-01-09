@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -36,6 +32,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var FragmentSelectGroupList = function (_Component) {
   (0, _inherits3.default)(FragmentSelectGroupList, _Component);
+
+  /*
+  static propTypes = {
+    store: PropTypes.shape({
+      listen: PropTypes.func,
+      getWatchListsByGroup: PropTypes.func
+    }),
+    groupCaption: PropTypes.string,
+    groupOptions: PropTypes.array,
+    listCaption: PropTypes.string
+  }
+  */
 
   function FragmentSelectGroupList(props) {
     (0, _classCallCheck3.default)(this, FragmentSelectGroupList);
@@ -56,7 +64,7 @@ var FragmentSelectGroupList = function (_Component) {
     };
 
     _this._handleSelectList = function (item) {
-      _this.listCaption = item && item.caption ? item.caption : null;
+      _this.listCaption = item && item.caption || null;
     };
 
     _this.groupCaption = null;
@@ -126,15 +134,7 @@ var FragmentSelectGroupList = function (_Component) {
   }]);
   return FragmentSelectGroupList;
 }(_react.Component);
+//import PropTypes from "prop-types";
 
-FragmentSelectGroupList.propTypes = process.env.NODE_ENV !== "production" ? {
-  store: _propTypes2.default.shape({
-    listen: _propTypes2.default.func,
-    getWatchListsByGroup: _propTypes2.default.func
-  }),
-  groupCaption: _propTypes2.default.string,
-  groupOptions: _propTypes2.default.array,
-  listCaption: _propTypes2.default.string
-} : {};
 exports.default = FragmentSelectGroupList;
 //# sourceMappingURL=FragmentSelectGroupList.js.map

@@ -28,10 +28,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _InputText = require('../zhn/InputText');
 
 var _InputText2 = _interopRequireDefault(_InputText);
@@ -41,6 +37,8 @@ var _DialogStyles = require('../styles/DialogStyles');
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from "prop-types";
 
 var S = {
   ROOT: {
@@ -62,15 +60,30 @@ var RowInputText = function (_Component) {
   (0, _inherits3.default)(RowInputText, _Component);
 
   function RowInputText() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, RowInputText);
-    return (0, _possibleConstructorReturn3.default)(this, (RowInputText.__proto__ || Object.getPrototypeOf(RowInputText)).apply(this, arguments));
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RowInputText.__proto__ || Object.getPrototypeOf(RowInputText)).call.apply(_ref, [this].concat(args))), _this), _this._refInputText = function (c) {
+      return _this.inputText = c;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+  static propTypes = {
+    caption: PropTypes.string
+  }
+  */
+
 
   (0, _createClass3.default)(RowInputText, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var caption = this.props.caption;
 
       return _react2.default.createElement(
@@ -82,9 +95,7 @@ var RowInputText = function (_Component) {
           caption
         ),
         _react2.default.createElement(_InputText2.default, {
-          ref: function ref(c) {
-            return _this2.inputText = c;
-          },
+          ref: this._refInputText,
           style: S.INPUT_TEXT
         })
       );
@@ -103,8 +114,5 @@ var RowInputText = function (_Component) {
   return RowInputText;
 }(_react.Component);
 
-RowInputText.propTypes = process.env.NODE_ENV !== "production" ? {
-  caption: _propTypes2.default.string
-} : {};
 exports.default = RowInputText;
 //# sourceMappingURL=RowInputText.js.map

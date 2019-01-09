@@ -17,30 +17,24 @@ const STYLE = {
   }
 }
 
+const _isUpdateDescr = (
+  prevProps, props
+) => prevProps !== props
+  && prevProps.isShow !== props.isShow
+  && prevProps.data.descrUrl !== props.data.descrUrl;
+
 class DescriptionDialog extends Component {
   static defaultProps = {
     data: {}
   }
 
-  constructor(props){
-    super()
-    this.state = {
-      descrHtml: ''
-    }
-  }
-
-  componentWillReceiveProps(nextProps){
-    if (
-        nextProps !== this.props
-        && nextProps.isShow !== this.props.isShow
-        && nextProps.data.descrUrl !== this.props.data.descrUrl
-    ) {
-      this._loadDescr(nextProps.data.descrUrl)
-    }
+  state = {
+    descrHtml: ''
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
+    if (nextProps !== this.props
+      && nextProps.isShow === this.props.isShow) {
       return false;
     }
     return true;
@@ -48,6 +42,12 @@ class DescriptionDialog extends Component {
 
   componentDidMount(){
     this._loadDescr(this.props.data.descrUrl)
+  }
+
+  componentDidUpdate(prevProps) {
+    if ( _isUpdateDescr(prevProps, this.props) ) {
+      this._loadDescr(this.props.data.descrUrl)
+    }
   }
 
   _loadDescr = ( descrUrl='' ) => {
@@ -73,10 +73,9 @@ class DescriptionDialog extends Component {
          onClose={onClose}
        >
          <div
-            style={STYLE.DIV}
-            dangerouslySetInnerHTML={{ __html: _html }}
-         >
-         </div>
+           style={STYLE.DIV}
+           dangerouslySetInnerHTML={{ __html: _html }}
+         />
        </ModalDialog>
     );
   }

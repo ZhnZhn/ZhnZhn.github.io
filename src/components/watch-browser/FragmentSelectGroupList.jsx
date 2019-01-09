@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import RowInputSelect from './RowInputSelect';
 
 class FragmentSelectGroupList extends Component {
+  /*
   static propTypes = {
     store: PropTypes.shape({
       listen: PropTypes.func,
@@ -13,6 +14,7 @@ class FragmentSelectGroupList extends Component {
     groupOptions: PropTypes.array,
     listCaption: PropTypes.string
   }
+  */
 
   constructor(props){
     super()
@@ -20,7 +22,7 @@ class FragmentSelectGroupList extends Component {
     this.listCaption = null
 
     this.state = {
-      listOptions : []
+      listOptions: []
     }
   }
 
@@ -45,9 +47,9 @@ class FragmentSelectGroupList extends Component {
     if (item && item.caption){
       this.groupCaption = item.caption;
       if (item.lists){
-        this.setState({ listOptions : item.lists })
+        this.setState({ listOptions: item.lists })
       }  else {
-        this.setState({ listOptions : [] })
+        this.setState({ listOptions: [] })
       }
     } else {
       this.groupCaption = null
@@ -55,7 +57,7 @@ class FragmentSelectGroupList extends Component {
   }
 
   _handleSelectList = (item) => {
-     this.listCaption = (item && item.caption) ? item.caption : null
+     this.listCaption = (item && item.caption) || null;
   }
 
   render(){

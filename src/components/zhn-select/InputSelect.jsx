@@ -42,22 +42,20 @@ const _fnNoItem = (propCaption, inputValue, isWithInput) => {
     value: 'noresult',
     inputValue: _inputValue
   };
-}
+};
 
-const _toItem = (item, propCaption) => {
-  return {
-    [propCaption]: 'From Input',
-    value: item.inputValue
-  }
-}
+const _toItem = (item, propCaption) => ({
+  [propCaption]: 'From Input',
+  value: item.inputValue
+});
 
 const _crWidth = (width, style) => {
   return (width)
-           ? ((''+width).indexOf('%') !== -1)
-                ? { ...style, width: width }
-                : { ...style, width: width + 'px'}
-           : null;
-}
+    ? ((''+width).indexOf('%') !== -1)
+        ? { ...style, width: width }
+        : { ...style, width: width + 'px'}
+    : null;
+};
 
 const S = {
   BLOCK: {
@@ -94,7 +92,6 @@ class InputSelect extends Component {
      })),
      optionName: PropTypes.string,
      optionNames: PropTypes.string,
-     isUpdateOptions: PropTypes.bool,
      placeholder: PropTypes.string,
      isWithInput: PropTypes.bool,
      prefixInput: PropTypes.string
@@ -113,7 +110,6 @@ class InputSelect extends Component {
     options: [],
     optionName: '',
     optionNames: '',
-    isUpdateOptions: false,
     isWithInput: false,
     //prefixInput: 'From Input:',
     onSelect: () => {},
@@ -139,8 +135,7 @@ class InputSelect extends Component {
 
   componentWillReceiveProps(nextProps){
     if (this.props !== nextProps){
-      if (this.props.options !== nextProps.options
-          || nextProps.isUpdateOptions){
+      if (this.props.options !== nextProps.options){
         //New options come from Parent - Clear domCache, Init State
         this._setStateToInit(nextProps.options);
       }
@@ -148,7 +143,7 @@ class InputSelect extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (this.props !== nextProps || nextProps.isUpdateOptions) {
+    if (this.props !== nextProps) {
       nextState.isLocalMode = false;
     } else {
       nextState.isLocalMode = true;
@@ -414,8 +409,8 @@ class InputSelect extends Component {
              onClick={this._stepUpOption}
           />
           <BtCircle
-            caption="CL"
-            onClick={this.clearInput}
+             caption="CL"
+             onClick={this.clearInput}
           />
         </span>
       </div>
@@ -486,6 +481,8 @@ class InputSelect extends Component {
     );
   }
 
+  _refArrowCell = c => this.arrowCell = c
+
   _crAfterInputEl = () => {
     const {
            isLoading, isLoadingFailed,
@@ -503,7 +500,7 @@ class InputSelect extends Component {
           : `Select ${optionName}...`;
       _afterInputEl = (
          <ArrowCell
-           ref={ (c) => this.arrowCell = c}
+           ref={this._refArrowCell}
            arrowStyle={_arrowStyle}
            onClick={this._handleToggleOptions}
          />
@@ -534,6 +531,8 @@ class InputSelect extends Component {
     };
   }
 
+  _refDomInputText = c => this.domInputText = c
+
   render(){
     const { rootStyle, width } = this.props
         , { value, isLocalMode, isShowOption } = this.state
@@ -542,14 +541,13 @@ class InputSelect extends Component {
         , _domOptions = (isLocalMode || isShowOption)
               ? this.renderOptions()
               : null;
-
     return (
       <div
         className={CL.ROOT}
         style={_rootWidthStyle}
       >
         <input
-           ref={c => this.domInputText = c}
+           ref={this._refDomInputText}
            type="text"
            name="select"
            //autoComplete="new-select"
@@ -559,7 +557,6 @@ class InputSelect extends Component {
            spellCheck={false}
            value={value}
            className={CL.INPUT}
-           //style={S.INPUT_TEXT}
            placeholder={placeholder}
            onChange={this._handleInputChange}
            onKeyDown={this._handleInputKeyDown}>

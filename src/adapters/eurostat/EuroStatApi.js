@@ -4,7 +4,7 @@ import api from './api/api'
 const REQUEST_ERROR = 'Request Error'
     , MESSAGE_HEADER = '400: Bad Request\n'
     , RES_ERR_STATUS = [ 400 ]
-    , MSG_400 = '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably invalid.\nMaybe try to request this data set with older date or another country.';
+    , MSG_400 = '400: Bad request.\nDataset contains no data. One or more filtering elements (query parameters) are probably not valid.\nMaybe try to request this data set with older date or another country.';
 
 const _crDetailMsg = function(label, option){
   const { alertGeo='', alertMetric='' } = option;
@@ -29,7 +29,7 @@ const EuroStatApi = {
   getRequestUrl(option){
     const { dfParams, items } = option;
     _addPropTo(option)
-    
+
     return _isRouteUrlN(items)
       ? api.crUrlN(option)
       : dfParams

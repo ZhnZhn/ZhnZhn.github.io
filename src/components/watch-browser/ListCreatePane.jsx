@@ -24,19 +24,19 @@ class ListCreatePane extends Component {
     super()
     this.captionGroup = null
     this._primaryBt = <A.Button.Primary
-                         caption="Create"
-                         title="Create New List"
-                         onClick={this._handleCreate}
-                      />
+       caption="Create"
+       title="Create New List"
+       onClick={this._handleCreate}
+    />
     this.state = {
-      groupOptions : props.store.getWatchGroups(),
-      isUpdateGroup : false,
-      validationMessages : []
+      groupOptions: props.store.getWatchGroups(),
+      validationMessages: []
     }
   }
 
   componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
+    this.unsubscribe = this.props.store
+      .listen(this._onStore)
   }
   componentWillUnmount(){
     this.unsubscribe()
@@ -44,35 +44,29 @@ class ListCreatePane extends Component {
   _onStore = (actionType, data) => {
     const { actionCompleted, actionFailed, forActionType, store } = this.props;
     if (actionType === actionCompleted){
-        let isUpdateGroup = true;
         if (data.forActionType === forActionType){
           this._handleClear()
-          isUpdateGroup = false
         }
         this.setState({
-           groupOptions: store.getWatchGroups(),
-           isUpdateGroup
+           groupOptions: store.getWatchGroups()
         });
     } else if (actionType === actionFailed && data.forActionType === forActionType){
       this.setState({
-        validationMessages: data.messages,
-        isUpdateGroup:false
+        validationMessages: data.messages
       })
     }
   }
 
   _handleSelectGroup = (item) => {
-    if (item && item.caption){
-      this.captionGroup = item.caption
-    } else {
-      this.captionGroup = null
-    }
+    this.captionGroup = (item && item.caption) || null;
   }
 
   _handleClear = () => {
      this.inputText.setValue('')
      if (this.state.validationMessages.length>0){
-       this.setState({ validationMessages: [], isUpdateGroup:false })
+       this.setState({
+         validationMessages: []
+       })
      }
   }
 
@@ -81,16 +75,20 @@ class ListCreatePane extends Component {
          , captionList = this.inputText.getValue();
      if (this.captionGroup && captionList){
        onCreate({
-          captionGroup : this.captionGroup,
-          captionList : captionList
+          captionGroup: this.captionGroup,
+          captionList: captionList
        });
      } else {
        const msg = [];
        if (!this.captionGroup) { msg.push(msgOnNotSelect('In Group')); }
        if (!captionList)       { msg.push(msgOnIsEmptyName('List')); }
-       this.setState({ validationMessages:msg, isUpdateGroup:false });
+       this.setState({
+         validationMessages: msg
+       });
      }
   }
+
+  _refInputText = c => this.inputText = c
 
   render(){
     const { onClose } = this.props
@@ -100,11 +98,10 @@ class ListCreatePane extends Component {
         <A.RowInputSelect
            caption="In Group:"
            options={groupOptions}
-           //isUpdateOptions={isUpdateGroup}
            onSelect={this._handleSelectGroup}
         />
         <A.RowInputText
-           ref={c => this.inputText = c}
+           ref={this._refInputText}
            caption="List:"
         />
         <A.ValidationMessages

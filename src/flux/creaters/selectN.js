@@ -3,9 +3,10 @@ const createLoadOptions = (props={}, options={}) => {
   const { loadId, dataSource, dfProps={} } = props
       , {
           items=[],
+          dialogOptions,
           chartType={},
           seriaColor,
-          date          
+          date
         } = options
       , { caption:oneC='' } = items[0] || {}
       , { caption:twoC='' } = items[1] || {}
@@ -14,6 +15,7 @@ const createLoadOptions = (props={}, options={}) => {
 
   return {
     ...dfProps,
+    ...dialogOptions,
     seriaType: seriaType,
     seriaColor: seriaColor,
     zhCompType: compType,
@@ -26,7 +28,7 @@ const createLoadOptions = (props={}, options={}) => {
     alertItemId: `${oneC}: ${threeC}`,
     alertGeo: oneC,
     alertMetric: threeC,
-    dataSource
+    dataSource    
   }
 };
 

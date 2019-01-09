@@ -29,9 +29,9 @@ var toColumn = {
           min = _ref.min;
 
       var config = _FactoryChart2.default.createColumnConfig({ seriaColor: seriaColor });
-      _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
-      _EuroStatFn2.default.setCategories({ config: config, categories: categories, min: min, option: option });
-      _EuroStatFn2.default.colorSeries(config);
+      _EuroStatFn2.default.addToCategoryConfig(config, {
+        json: json, option: option, data: data, categories: categories, min: min
+      });
       return config;
     });
   },

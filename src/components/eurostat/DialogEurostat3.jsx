@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import D from '../dialogs/DialogCell'
 import crMenuMore from '../dialogs/MenuMore'
 import Decor from '../dialogs/decorators/Decorators'
+import PaneOptions from './PaneOptions'
 
 
 @Decor.withToolbar
@@ -41,16 +42,18 @@ class DialogEurostat3 extends Component {
     })
 
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true }
+      props, { noDate: true, isOptions: true }
     )
+
     this._commandButtons = this._crCommandsWithLoad(this)
 
     this.state = {
       isToolbar: true,
+      isOptions: false,
       isShowLabels: true,
       validationMessages: []
     }
-  }
+  }  
 
   shouldComponentUpdate(nextProps, nextState){
     if (this.props !== nextProps){
@@ -84,12 +87,14 @@ class DialogEurostat3 extends Component {
      return msg;
   }
   _createLoadOption = () => {
-    const { parent:group, child:metric } = this.parentChild.getValues();
+    const { one, dialogOptions, parentChild } = this
+    , { parent:group, child:metric } = parentChild.getValues();
 
     return this.props.loadFn(
-      this.props,
-      { one : this.one, group, metric }
-    );
+      this.props, {
+        one, dialogOptions,
+        group, metric
+      });
   }
 
   _handleClose = () => {
@@ -105,6 +110,7 @@ class DialogEurostat3 extends Component {
           } = this.props
         , {
             isToolbar,
+            isOptions,
             isShowLabels,
             validationMessages
           } = this.state;
@@ -122,6 +128,11 @@ class DialogEurostat3 extends Component {
              <D.Toolbar
                 isShow={isToolbar}
                 buttons={this.toolbarButtons}
+             />
+             <PaneOptions
+               isShow={isOptions}
+               toggleOption={this._toggleOptionWithToolbar}
+               onClose={this._hideOptionsWithToolbar}
              />
              <D.SelectWithLoad
                isShow={isShow}

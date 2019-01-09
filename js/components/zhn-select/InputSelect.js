@@ -154,7 +154,6 @@ var InputSelect = (_temp = _class = function (_Component) {
      })),
      optionName: PropTypes.string,
      optionNames: PropTypes.string,
-     isUpdateOptions: PropTypes.bool,
      placeholder: PropTypes.string,
      isWithInput: PropTypes.bool,
      prefixInput: PropTypes.string
@@ -169,7 +168,7 @@ var InputSelect = (_temp = _class = function (_Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (this.props !== nextProps) {
-        if (this.props.options !== nextProps.options || nextProps.isUpdateOptions) {
+        if (this.props.options !== nextProps.options) {
           //New options come from Parent - Clear domCache, Init State
           this._setStateToInit(nextProps.options);
         }
@@ -178,7 +177,7 @@ var InputSelect = (_temp = _class = function (_Component) {
   }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props !== nextProps || nextProps.isUpdateOptions) {
+      if (this.props !== nextProps) {
         nextState.isLocalMode = false;
       } else {
         nextState.isLocalMode = true;
@@ -199,8 +198,6 @@ var InputSelect = (_temp = _class = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           rootStyle = _props.rootStyle,
           width = _props.width,
@@ -221,9 +218,7 @@ var InputSelect = (_temp = _class = function (_Component) {
           style: _rootWidthStyle
         },
         _react2.default.createElement('input', {
-          ref: function ref(c) {
-            return _this2.domInputText = c;
-          },
+          ref: this._refDomInputText,
           type: 'text',
           name: 'select'
           //autoComplete="new-select"
@@ -232,9 +227,8 @@ var InputSelect = (_temp = _class = function (_Component) {
           autoCapitalize: 'off',
           spellCheck: false,
           value: value,
-          className: CL.INPUT
-          //style={S.INPUT_TEXT}
-          , placeholder: placeholder,
+          className: CL.INPUT,
+          placeholder: placeholder,
           onChange: this._handleInputChange,
           onKeyDown: this._handleInputKeyDown }),
         afterInputEl,
@@ -260,17 +254,16 @@ var InputSelect = (_temp = _class = function (_Component) {
   options: [],
   optionName: '',
   optionNames: '',
-  isUpdateOptions: false,
   isWithInput: false,
   //prefixInput: 'From Input:',
   onSelect: function onSelect() {},
   onLoadOption: function onLoadOption() {}
 }, _initialiseProps = function _initialiseProps() {
-  var _this3 = this;
+  var _this2 = this;
 
   this._setStateToInit = function (options) {
-    _this3.indexActiveOption = 0;
-    _this3.setState({
+    _this2.indexActiveOption = 0;
+    _this2.setState({
       value: '',
       isShowOption: false,
       options: options,
@@ -279,20 +272,20 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 
   this._getActiveItemComp = function () {
-    return _this3['v' + _this3.indexActiveOption];
+    return _this2['v' + _this2.indexActiveOption];
   };
 
   this._decorateActiveRowComp = function (comp) {
     if (comp) {
       comp.classList.add(CL.OPTIONS_ROW_ACTIVE);
     }
-    if (_this3.indexNode) {
-      _this3.indexNode.textContent = _this3.indexActiveOption + 1;
+    if (_this2.indexNode) {
+      _this2.indexNode.textContent = _this2.indexActiveOption + 1;
     }
   };
 
   this._undecorateActiveRowComp = function (comp) {
-    var _comp = !comp ? _this3._getActiveItemComp() : comp;
+    var _comp = !comp ? _this2._getActiveItemComp() : comp;
     if (_comp) {
       _comp.classList.remove(CL.OPTIONS_ROW_ACTIVE);
     }
@@ -301,19 +294,19 @@ var InputSelect = (_temp = _class = function (_Component) {
   this._makeVisibleActiveRowComp = function (comp) {
     if (comp) {
       var offsetTop = comp.offsetTop;
-      var scrollTop = _this3.optionsComp.scrollTop;
+      var scrollTop = _this2.optionsComp.scrollTop;
       if (offsetTop - scrollTop > 70) {
-        _this3.optionsComp.scrollTop += offsetTop - scrollTop - 70;
+        _this2.optionsComp.scrollTop += offsetTop - scrollTop - 70;
       }
       if (offsetTop - scrollTop < 0) {
-        _this3.optionsComp.scrollTop = 0;
+        _this2.optionsComp.scrollTop = 0;
       }
     }
   };
 
   this._filterOptions = function (options, value) {
     var valueFor = value.toLowerCase(),
-        _caption = _this3.propCaption;
+        _caption = _this2.propCaption;
     return options.filter(function (option, i) {
       return option[_caption].toLowerCase().indexOf(valueFor) !== -1;
     });
@@ -322,22 +315,22 @@ var InputSelect = (_temp = _class = function (_Component) {
   this._handleInputChange = function (event) {
     var token = event.target.value,
         tokenLn = token.length,
-        value = _this3.state.value,
+        value = _this2.state.value,
         valueLn = value.length;
 
     var arr = [];
     if (tokenLn !== valueLn) {
       if (tokenLn > valueLn) {
-        arr = _this3._filterOptions(_this3.state.options, token);
+        arr = _this2._filterOptions(_this2.state.options, token);
       } else if (tokenLn < valueLn) {
-        arr = _this3._filterOptions(_this3.props.options, token);
+        arr = _this2._filterOptions(_this2.props.options, token);
       }
       if (arr.length === 0) {
-        arr.push(_fnNoItem(_this3.propCaption, token, _this3.props.isWithInput));
+        arr.push(_fnNoItem(_this2.propCaption, token, _this2.props.isWithInput));
       }
-      _this3._undecorateActiveRowComp();
-      _this3.indexActiveOption = 0;
-      _this3.setState({
+      _this2._undecorateActiveRowComp();
+      _this2.indexActiveOption = 0;
+      _this2.setState({
         value: token,
         isShowOption: true,
         isValidDomOptionsCache: false,
@@ -347,72 +340,72 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 
   this._startAfterInputAnimation = function () {
-    if (_this3.state.options.length > MAX_WITHOUT_ANIMATION) {
-      _this3.arrowCell.startAnimation();
+    if (_this2.state.options.length > MAX_WITHOUT_ANIMATION) {
+      _this2.arrowCell.startAnimation();
     }
   };
 
   this._stopAfterInputAnimation = function () {
-    _this3.arrowCell.stopAnimation();
+    _this2.arrowCell.stopAnimation();
   };
 
   this._setShowOptions = function () {
-    _this3.setState({ isShowOption: true }, _this3._stopAfterInputAnimation);
+    _this2.setState({ isShowOption: true }, _this2._stopAfterInputAnimation);
   };
 
   this._showOptions = function (ms) {
-    if (_this3.props.isShowOptionAnim) {
-      _this3._startAfterInputAnimation();
-      setTimeout(_this3._setShowOptions, ms);
+    if (_this2.props.isShowOptionAnim) {
+      _this2._startAfterInputAnimation();
+      setTimeout(_this2._setShowOptions, ms);
     } else {
-      _this3.setState({ isShowOption: true });
+      _this2.setState({ isShowOption: true });
     }
   };
 
   this._stepDownOption = function () {
-    var prevComp = _this3._getActiveItemComp();
+    var prevComp = _this2._getActiveItemComp();
 
     if (prevComp) {
-      _this3._undecorateActiveRowComp(prevComp);
+      _this2._undecorateActiveRowComp(prevComp);
 
-      _this3.indexActiveOption += 1;
-      if (_this3.indexActiveOption >= _this3.state.options.length) {
-        _this3.indexActiveOption = 0;
-        _this3.optionsComp.scrollTop = 0;
+      _this2.indexActiveOption += 1;
+      if (_this2.indexActiveOption >= _this2.state.options.length) {
+        _this2.indexActiveOption = 0;
+        _this2.optionsComp.scrollTop = 0;
       }
 
-      var nextComp = _this3._getActiveItemComp();
-      _this3._decorateActiveRowComp(nextComp);
+      var nextComp = _this2._getActiveItemComp();
+      _this2._decorateActiveRowComp(nextComp);
       //this.indexNode.innerHTML = this.indexActiveOption
 
       var offsetTop = nextComp.offsetTop;
-      var scrollTop = _this3.optionsComp.scrollTop;
+      var scrollTop = _this2.optionsComp.scrollTop;
       if (offsetTop - scrollTop > 70) {
-        _this3.optionsComp.scrollTop += offsetTop - scrollTop - 70;
+        _this2.optionsComp.scrollTop += offsetTop - scrollTop - 70;
       }
     }
   };
 
   this._stepUpOption = function () {
-    var prevComp = _this3._getActiveItemComp();
+    var prevComp = _this2._getActiveItemComp();
     if (prevComp) {
-      _this3._undecorateActiveRowComp(prevComp);
+      _this2._undecorateActiveRowComp(prevComp);
 
-      _this3.indexActiveOption -= 1;
-      if (_this3.indexActiveOption < 0) {
-        _this3.indexActiveOption = _this3.state.options.length - 1;
-        var bottomComp = _this3._getActiveItemComp();
-        _this3.optionsComp.scrollTop = bottomComp.offsetTop;
+      _this2.indexActiveOption -= 1;
+      if (_this2.indexActiveOption < 0) {
+        _this2.indexActiveOption = _this2.state.options.length - 1;
+        var bottomComp = _this2._getActiveItemComp();
+        _this2.optionsComp.scrollTop = bottomComp.offsetTop;
       }
 
-      var nextComp = _this3._getActiveItemComp();
-      _this3._decorateActiveRowComp(nextComp);
+      var nextComp = _this2._getActiveItemComp();
+      _this2._decorateActiveRowComp(nextComp);
       //this.indexNode.innerHTML = this.indexActiveOption
 
       var offsetTop = nextComp.offsetTop;
-      var scrollTop = _this3.optionsComp.scrollTop;
+      var scrollTop = _this2.optionsComp.scrollTop;
       if (offsetTop - scrollTop < 70) {
-        _this3.optionsComp.scrollTop -= 70 - (offsetTop - scrollTop);
+        _this2.optionsComp.scrollTop -= 70 - (offsetTop - scrollTop);
       }
     }
   };
@@ -422,22 +415,22 @@ var InputSelect = (_temp = _class = function (_Component) {
       // enter
       case 13:
         {
-          var item = _this3.state.options[_this3.indexActiveOption];
+          var item = _this2.state.options[_this2.indexActiveOption];
 
-          if (item && item[_this3.propCaption]) {
-            _this3.setState({
-              value: item[_this3.propCaption],
+          if (item && item[_this2.propCaption]) {
+            _this2.setState({
+              value: item[_this2.propCaption],
               isShowOption: false,
               isValidDomOptionsCache: true
             });
 
             if (item.value !== 'noresult') {
-              _this3.props.onSelect(item);
+              _this2.props.onSelect(item);
             } else {
-              if (!_this3.props.isWithInput) {
-                _this3.props.onSelect(undefined);
+              if (!_this2.props.isWithInput) {
+                _this2.props.onSelect(undefined);
               } else {
-                _this3.props.onSelect(_toItem(item, _this3.propCaption));
+                _this2.props.onSelect(_toItem(item, _this2.propCaption));
               }
             }
           }
@@ -447,30 +440,30 @@ var InputSelect = (_temp = _class = function (_Component) {
       case 27:case 46:
         {
           event.preventDefault();
-          if (_this3.state.isShowOption) {
-            _this3.setState({ isShowOption: false });
+          if (_this2.state.isShowOption) {
+            _this2.setState({ isShowOption: false });
           } else {
-            _this3._undecorateActiveRowComp();
-            _this3._setStateToInit(_this3.props.options);
-            _this3.props.onSelect(undefined);
+            _this2._undecorateActiveRowComp();
+            _this2._setStateToInit(_this2.props.options);
+            _this2.props.onSelect(undefined);
           }
           break;
         }
       case 40:
         //down
-        if (!_this3.state.isShowOption) {
-          _this3._showOptions(0);
+        if (!_this2.state.isShowOption) {
+          _this2._showOptions(0);
           //this.setState({ isShowOption : true });
         } else {
           event.preventDefault();
-          _this3._stepDownOption();
+          _this2._stepDownOption();
         }
         break;
       case 38:
         //up
-        if (_this3.state.isShowOption) {
+        if (_this2.state.isShowOption) {
           event.preventDefault();
-          _this3._stepUpOption();
+          _this2._stepUpOption();
         }
         break;
       default:
@@ -480,25 +473,25 @@ var InputSelect = (_temp = _class = function (_Component) {
 
   this._handleToggleOptions = function () {
     //this.setState({ isShowOption: !this.state.isShowOption });
-    if (_this3.state.isShowOption) {
-      _this3.setState({ isShowOption: false });
+    if (_this2.state.isShowOption) {
+      _this2.setState({ isShowOption: false });
     } else {
-      _this3._showOptions(1);
+      _this2._showOptions(1);
     }
   };
 
   this._handleClickItem = function (item, index, event) {
-    _this3._undecorateActiveRowComp();
-    _this3.indexActiveOption = index;
-    _this3.setState({
-      value: item[_this3.propCaption],
+    _this2._undecorateActiveRowComp();
+    _this2.indexActiveOption = index;
+    _this2.setState({
+      value: item[_this2.propCaption],
       isShowOption: false
     });
-    _this3.props.onSelect(item);
+    _this2.props.onSelect(item);
   };
 
   this._refIndexNode = function (n) {
-    return _this3.indexNode = n;
+    return _this2.indexNode = n;
   };
 
   this._renderOptionsFooter = function (nFiltered, nAll) {
@@ -510,8 +503,8 @@ var InputSelect = (_temp = _class = function (_Component) {
         { className: CL.FOOTER_INDEX },
         _react2.default.createElement(
           'span',
-          { ref: _this3._refIndexNode },
-          _this3.indexActiveOption
+          { ref: _this2._refIndexNode },
+          _this2.indexActiveOption
         ),
         _react2.default.createElement(
           'span',
@@ -528,34 +521,34 @@ var InputSelect = (_temp = _class = function (_Component) {
         _react2.default.createElement(_ButtonCircle2.default, {
           className: CL.FOOTER_MARGIN,
           caption: 'Dn',
-          onClick: _this3._stepDownOption
+          onClick: _this2._stepDownOption
         }),
         _react2.default.createElement(_ButtonCircle2.default, {
           className: CL.FOOTER_MARGIN,
           caption: 'Up',
-          onClick: _this3._stepUpOption
+          onClick: _this2._stepUpOption
         }),
         _react2.default.createElement(_ButtonCircle2.default, {
           caption: 'CL',
-          onClick: _this3.clearInput
+          onClick: _this2.clearInput
         })
       )
     );
   };
 
   this._refOptionsComp = function (c) {
-    return _this3.optionsComp = c;
+    return _this2.optionsComp = c;
   };
 
   this.renderOptions = function () {
-    var _props2 = _this3.props,
+    var _props2 = _this2.props,
         rootOptionsStyle = _props2.rootOptionsStyle,
         ItemOptionComp = _props2.ItemOptionComp,
-        _state2 = _this3.state,
+        _state2 = _this2.state,
         isShowOption = _state2.isShowOption,
         options = _state2.options,
         isValidDomOptionsCache = _state2.isValidDomOptionsCache,
-        _propCaption = _this3.propCaption;
+        _propCaption = _this2.propCaption;
 
 
     var _domOptions = void 0;
@@ -571,9 +564,9 @@ var InputSelect = (_temp = _class = function (_Component) {
               key: index,
               className: CL.OPTIONS_ROW,
               ref: function ref(c) {
-                return _this3['v' + index] = c;
+                return _this2['v' + index] = c;
               },
-              onClick: _this3._handleClickItem.bind(_this3, item, index)
+              onClick: _this2._handleClickItem.bind(_this2, item, index)
             },
             _react2.default.createElement(ItemOptionComp, {
               item: item,
@@ -581,17 +574,17 @@ var InputSelect = (_temp = _class = function (_Component) {
             })
           );
         });
-        _this3.domOptionsCache = _domOptions;
+        _this2.domOptionsCache = _domOptions;
       } else {
-        _domOptions = _this3.domOptionsCache;
+        _domOptions = _this2.domOptionsCache;
       }
     }
 
-    var width = _this3.props.width,
+    var width = _this2.props.width,
         _styleOptions = isShowOption ? S.BLOCK : S.NONE,
         _rootWidthStyle = _crWidth(width, _styleOptions),
         _nFiltered = options[0] && options[0].value !== 'noresult' ? options.length : 0,
-        _nAll = _this3.props.options ? _this3.props.options.length : 0;
+        _nAll = _this2.props.options ? _this2.props.options.length : 0;
 
 
     return _react2.default.createElement(
@@ -604,24 +597,28 @@ var InputSelect = (_temp = _class = function (_Component) {
       _react2.default.createElement(
         'div',
         {
-          ref: _this3._refOptionsComp,
+          ref: _this2._refOptionsComp,
           className: CL.OPTIONS_DIV,
           style: (0, _extends3.default)({}, rootOptionsStyle, _rootWidthStyle)
         },
         _domOptions
       ),
-      _this3._renderOptionsFooter(_nFiltered, _nAll)
+      _this2._renderOptionsFooter(_nFiltered, _nAll)
     );
   };
 
+  this._refArrowCell = function (c) {
+    return _this2.arrowCell = c;
+  };
+
   this._crAfterInputEl = function () {
-    var _props3 = _this3.props,
+    var _props3 = _this2.props,
         isLoading = _props3.isLoading,
         isLoadingFailed = _props3.isLoadingFailed,
         placeholder = _props3.placeholder,
         optionName = _props3.optionName,
         onLoadOption = _props3.onLoadOption,
-        _state3 = _this3.state,
+        _state3 = _this2.state,
         isShowOption = _state3.isShowOption,
         optionNames = _state3.optionNames;
 
@@ -632,11 +629,9 @@ var InputSelect = (_temp = _class = function (_Component) {
       var _arrowStyle = isShowOption ? S.ARROW_SHOW : null;
       _placeholder = placeholder ? placeholder : 'Select ' + optionName + '...';
       _afterInputEl = _react2.default.createElement(_ArrowCell2.default, {
-        ref: function ref(c) {
-          return _this3.arrowCell = c;
-        },
+        ref: _this2._refArrowCell,
         arrowStyle: _arrowStyle,
-        onClick: _this3._handleToggleOptions
+        onClick: _this2._handleToggleOptions
       });
     } else if (isLoading) {
       _placeholder = 'Loading ' + optionNames + '...';
@@ -659,15 +654,19 @@ var InputSelect = (_temp = _class = function (_Component) {
     };
   };
 
+  this._refDomInputText = function (c) {
+    return _this2.domInputText = c;
+  };
+
   this.clearInput = function () {
-    var _props4 = _this3.props,
+    var _props4 = _this2.props,
         options = _props4.options,
         onSelect = _props4.onSelect;
 
-    _this3._undecorateActiveRowComp();
+    _this2._undecorateActiveRowComp();
     onSelect(undefined);
-    _this3._setStateToInit(options);
-    _this3.setState({ isShowOption: false });
+    _this2._setStateToInit(options);
+    _this2.setState({ isShowOption: false });
   };
 }, _temp);
 exports.default = InputSelect;

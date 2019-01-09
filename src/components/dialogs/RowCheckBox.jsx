@@ -20,7 +20,9 @@ const STYLE = {
   CHECKED : {
     color: 'black'
   }
-}
+};
+
+const _isFn = fn => typeof fn == 'function';
 
 class RowCheckBox extends Component {
   /*
@@ -29,7 +31,8 @@ class RowCheckBox extends Component {
     caption: PropTypes.string,
     initValue: PropTypes.bool,
     onCheck: PropTypes.func,
-    onUnCheck: PropTypes.func
+    onUnCheck: PropTypes.func,
+    onToggle: PropTypes.func
   }
   */
 
@@ -41,16 +44,20 @@ class RowCheckBox extends Component {
   }
 
   _handleCheck = () => {
-    const { onCheck } = this.props;
-    if (typeof onCheck == 'function'){
+    const { onCheck, onToggle } = this.props;
+    if (_isFn(onCheck)){
       onCheck()
+    } else if (_isFn(onToggle)) {
+      onToggle()
     }
     this.setState({ isChecked: true })
   }
   _handleUnCheck = () => {
-    const { onUnCheck } = this.props;
-    if (typeof onUnCheck == 'function'){
+    const { onUnCheck, onToggle } = this.props;
+    if (_isFn(onUnCheck)){
       onUnCheck()
+    } else if (_isFn(onToggle)) {
+      onToggle()
     }
     this.setState({ isChecked: false })
   }

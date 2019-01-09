@@ -73,6 +73,24 @@ var _isLineSeria = function _isLineSeria(type) {
   return type && (type === 'AREA' || type === 'SPLINE');
 };
 
+var _filterZeroCategories = function _filterZeroCategories(data, categories) {
+  var _data = [],
+      _arrC = [];
+  data.forEach(function (p) {
+    if (p.y !== 0) {
+      _data.push(p);
+    } else {
+      _arrC.push(p.c);
+    }
+  });
+  if (_arrC.length !== 0) {
+    categories = categories.filter(function (c) {
+      return _arrC.indexOf(c) === -1;
+    });
+  }
+  return { data: _data, categories: categories };
+};
+
 var EuroStatFn = {
   createData: function createData(timeIndex, value) {
     var _this = this;
@@ -166,9 +184,25 @@ var EuroStatFn = {
     _colorSeriaIn(config, C.EA_CODES, COLOR.EA);
     _colorSeriaNotIn(config, C.EU_MEMBER, COLOR.NOT_EU_MEMBER);
   },
-  setTooltip: function setTooltip(_ref4) {
-    var config = _ref4.config,
-        tooltip = _ref4.tooltip;
+  addToCategoryConfig: function addToCategoryConfig(config, _ref4) {
+    var json = _ref4.json,
+        option = _ref4.option,
+        data = _ref4.data,
+        categories = _ref4.categories,
+        min = _ref4.min;
+
+    if (option.isFilterZero) {
+      var _r = _filterZeroCategories(data, categories);
+      data = _r.data;
+      categories = _r.categories;
+    }
+    EuroStatFn.setDataAndInfo({ config: config, data: data, json: json, option: option });
+    EuroStatFn.setCategories({ config: config, categories: categories, min: min, option: option });
+    EuroStatFn.colorSeries(config);
+  },
+  setTooltip: function setTooltip(_ref5) {
+    var config = _ref5.config,
+        tooltip = _ref5.tooltip;
 
     config.tooltip = _Chart2.default.fTooltip(tooltip);
   },
@@ -190,11 +224,11 @@ var EuroStatFn = {
     }
     return Date.UTC(str, 11, 31);
   },
-  setLineExtrems: function setLineExtrems(_ref5) {
-    var config = _ref5.config,
-        max = _ref5.max,
-        min = _ref5.min,
-        isNotZoomToMinMax = _ref5.isNotZoomToMinMax;
+  setLineExtrems: function setLineExtrems(_ref6) {
+    var config = _ref6.config,
+        max = _ref6.max,
+        min = _ref6.min,
+        isNotZoomToMinMax = _ref6.isNotZoomToMinMax;
 
     var plotLines = config.yAxis.plotLines;
 
@@ -216,9 +250,9 @@ var EuroStatFn = {
   },
 
 
-  crItemCaption: function crItemCaption(_ref6) {
-    var subtitle = _ref6.subtitle,
-        dfSliceTitle = _ref6.dfSliceTitle;
+  crItemCaption: function crItemCaption(_ref7) {
+    var subtitle = _ref7.subtitle,
+        dfSliceTitle = _ref7.dfSliceTitle;
 
     return appendWithColon(dfSliceTitle || DF_SLICE_TITLE, subtitle);
   },

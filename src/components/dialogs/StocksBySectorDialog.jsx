@@ -48,14 +48,44 @@ const STYLE = {
   }
 }
 
+const _getItemSource = (props) => {
+  const { data={} } = props
+      , { item={} } = data
+      , { id='' } = item
+      , arr = id.split('/');
+  return arr.length<2 ? ABSENT : arr[0];
+};
+
+const _getItemId = (props) => props
+  && props.data
+  && props.data.item
+  && props.data.item.id;
+
+const _createInitialState = (props) => {
+   const itemId = _getItemId(props)
+   , { data={} } = props
+   , { fromDate, initToDate, onTestDate } = data
+   , _isShowLink = (_getItemSource(props) !== ABSENT)
+       ? false
+       : true;
+    return {
+      itemId: itemId,
+      isShowLink: _isShowLink,
+      initFromDate: fromDate || getFromDate(2),
+      initToDate: initToDate || getToDate(),
+      onTestDate: onTestDate || isYmd,
+      validationMessages: []
+    };
+};
+
 @withValidationLoad
 class StocksBySectorDialog extends Component {
   /*
    static propTypes = {
-     isShow  : PropTypes.bool.isRequired,
-     data    : PropTypes.object.isRequired,
-     store   : PropTypes.object,
-     onClose : PropTypes.func.isRequired
+     isShow: PropTypes.bool.isRequired,
+     data: PropTypes.object.isRequired,
+     store: PropTypes.object,
+     onClose: PropTypes.func.isRequired
    }
   */
 
@@ -74,41 +104,14 @@ class StocksBySectorDialog extends Component {
          onClick={props.data.onShow}
        />
      ]
-     this.state = this._createInitialState(props)
+     this.state = _createInitialState(props)
    }
 
-   _getItemSource = (props) => {
-     const { data={} } = props
-         , { item={} } = data
-         , { id='' } = item
-         , arr = id.split('/');
-      if (arr.length<2){
-        return ABSENT;
-      } else {
-        return arr[0];
-      }
-   }
-
-   _createInitialState = (props) => {
-     const { data={} } = props
-         , { fromDate, initToDate, onTestDate } = data
-         , _isShowLink = (this._getItemSource(props) !== ABSENT)
-              ? false
-              : true;
-
-      return {
-        isShowLink: _isShowLink,
-        initFromDate: fromDate || getFromDate(2),
-        initToDate: initToDate || getToDate(),
-        onTestDate: onTestDate || isYmd,
-        validationMessages: []
-      };
-   }
-
-   componentWillReceiveProps(nextProps){
-     if ( this.props.data !== nextProps.data) {
-       this.setState(this._createInitialState(nextProps))
+   static getDerivedStateFromProps(nextProps, prevState) {
+     if ( _getItemId(nextProps) !== prevState.itemId ) {
+       return _createInitialState(nextProps);
      }
+     return null;
    }
 
    shouldComponentUpdate(nextProps, nextState){
@@ -119,7 +122,9 @@ class StocksBySectorDialog extends Component {
    }
 
   _handleClickLink = () => {
-     this.setState({ isShowLink: !this.state.isShowLink })
+     this.setState({
+       isShowLink: !this.state.isShowLink
+     })
   }
 
   _handleLoad = () => {
@@ -129,7 +134,7 @@ class StocksBySectorDialog extends Component {
           , { item={}, browserType, chartContainerType, dialogProps } = data
           , { id, text } = item
           , { fromDate, toDate } = this.datesFragment.getValues()
-          , _source = this._getItemSource(this.props)
+          , _source = _getItemSource(this.props)
           , option = {
              title : text,
              value : id,
@@ -157,7 +162,7 @@ class StocksBySectorDialog extends Component {
   _getValidationMessages = () => {
     let  msg = [];
 
-    if (this._getItemSource(this.props) === ABSENT) {
+    if (_getItemSource(this.props) === ABSENT) {
       msg.push(ABSENT_VALIDATION_MSG)
     }
 
@@ -169,10 +174,14 @@ class StocksBySectorDialog extends Component {
 
   _handleClose = () => {
     if (this.state.validationMessages.length > 0){
-      this.setState({ validationMessages : this._getValidationMessages() })
+      this.setState({
+        validationMessages: this._getValidationMessages()
+      })
     }
     this.props.onClose()
   }
+
+  _refDatesFragment = c => this.datesFragment = c
 
   render(){
     const { isShow, data={} } = this.props
@@ -183,7 +192,7 @@ class StocksBySectorDialog extends Component {
             initFromDate, initToDate, onTestDate,
             validationMessages
           } = this.state
-        , _source = this._getItemSource(this.props);
+        , _source = _getItemSource(this.props);
 
     return (
       <ModalDialog
@@ -210,7 +219,7 @@ class StocksBySectorDialog extends Component {
           </D.Row.Plain>
         </D.ShowHide>
         <D.DatesFragment
-            ref={c => this.datesFragment = c}
+            ref={this._refDatesFragment}
             initFromDate={initFromDate}
             initToDate={initToDate}
             onTestDate={onTestDate}

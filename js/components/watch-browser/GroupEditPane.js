@@ -65,18 +65,18 @@ var GroupEditPane = function (_Component) {
         if (data.forActionType === forActionType) {
           _this._handleClear();
         }
-        _this.setState({ groupOptions: store.getWatchGroups() });
+        _this.setState({
+          groupOptions: store.getWatchGroups()
+        });
       } else if (actionType === actionFailed && data.forActionType === forActionType) {
-        _this.setState({ validationMessages: data.messages });
+        _this.setState({
+          validationMessages: data.messages
+        });
       }
     };
 
     _this._handleSelectGroup = function (item) {
-      if (item && item.caption) {
-        _this.captionFrom = item.caption;
-      } else {
-        _this.captionFrom = null;
-      }
+      _this.captionFrom = item && item.caption || null;
     };
 
     _this._handleClear = function () {
@@ -107,6 +107,10 @@ var GroupEditPane = function (_Component) {
       }
     };
 
+    _this._refInputText = function (c) {
+      return _this.inputText = c;
+    };
+
     _this.captionFrom = null;
     _this._primaryBt = _react2.default.createElement(_Atoms2.default.Button.Primary, {
       caption: 'Edit',
@@ -133,8 +137,6 @@ var GroupEditPane = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var onClose = this.props.onClose,
           _state = this.state,
           groupOptions = _state.groupOptions,
@@ -150,9 +152,7 @@ var GroupEditPane = function (_Component) {
           onSelect: this._handleSelectGroup
         }),
         _react2.default.createElement(_Atoms2.default.RowInputText, {
-          ref: function ref(c) {
-            return _this2.inputText = c;
-          },
+          ref: this._refInputText,
           caption: 'Group To:'
         }),
         _react2.default.createElement(_Atoms2.default.ValidationMessages, {

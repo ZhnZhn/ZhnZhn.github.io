@@ -20,7 +20,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _temp;
+var _class, _temp2;
 
 var _react = require('react');
 
@@ -51,15 +51,27 @@ var STYLE = {
   }
 };
 
-var DescriptionDialog = (_temp = _class = function (_Component) {
+var _isUpdateDescr = function _isUpdateDescr(prevProps, props) {
+  return prevProps !== props && prevProps.isShow !== props.isShow && prevProps.data.descrUrl !== props.data.descrUrl;
+};
+
+var DescriptionDialog = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(DescriptionDialog, _Component);
 
-  function DescriptionDialog(props) {
+  function DescriptionDialog() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, DescriptionDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DescriptionDialog.__proto__ || Object.getPrototypeOf(DescriptionDialog)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._loadDescr = function () {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DescriptionDialog.__proto__ || Object.getPrototypeOf(DescriptionDialog)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      descrHtml: ''
+    }, _this._loadDescr = function () {
       var descrUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
       if (descrUrl) {
@@ -67,30 +79,16 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
       } else {
         _this._setDescrHtml();
       }
-    };
-
-    _this._setDescrHtml = function () {
-      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          _ref$json = _ref.json,
-          text = _ref$json === undefined ? DESCR_EMPTY : _ref$json;
+    }, _this._setDescrHtml = function () {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          _ref2$json = _ref2.json,
+          text = _ref2$json === undefined ? DESCR_EMPTY : _ref2$json;
 
       _this.setState({ descrHtml: text });
-    };
-
-    _this.state = {
-      descrHtml: ''
-    };
-    return _this;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(DescriptionDialog, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (nextProps !== this.props && nextProps.isShow !== this.props.isShow && nextProps.data.descrUrl !== this.props.data.descrUrl) {
-        this._loadDescr(nextProps.data.descrUrl);
-      }
-    }
-  }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       if (nextProps !== this.props && nextProps.isShow === this.props.isShow) {
@@ -102,6 +100,13 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this._loadDescr(this.props.data.descrUrl);
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (_isUpdateDescr(prevProps, this.props)) {
+        this._loadDescr(this.props.data.descrUrl);
+      }
     }
   }, {
     key: 'render',
@@ -130,6 +135,6 @@ var DescriptionDialog = (_temp = _class = function (_Component) {
   return DescriptionDialog;
 }(_react.Component), _class.defaultProps = {
   data: {}
-}, _temp);
+}, _temp2);
 exports.default = DescriptionDialog;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\dialogs\DescriptionDialog.js.map
+//# sourceMappingURL=DescriptionDialog.js.map

@@ -20,6 +20,7 @@ var createLoadOptions = function createLoadOptions() {
       dfProps = _props$dfProps === undefined ? {} : _props$dfProps,
       _options$items = options.items,
       items = _options$items === undefined ? [] : _options$items,
+      dialogOptions = options.dialogOptions,
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
@@ -36,7 +37,7 @@ var createLoadOptions = function createLoadOptions() {
       seriaType = chartType.value,
       compType = chartType.compType;
 
-  return (0, _extends3.default)({}, dfProps, {
+  return (0, _extends3.default)({}, dfProps, dialogOptions, {
     seriaType: seriaType,
     seriaColor: seriaColor,
     zhCompType: compType,

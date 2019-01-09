@@ -23,6 +23,7 @@ var createLoadOptions = function createLoadOptions() {
       one = options.one,
       _options$two = options.two,
       two = _options$two === undefined ? {} : _options$two,
+      dialogOptions = options.dialogOptions,
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
@@ -33,7 +34,7 @@ var createLoadOptions = function createLoadOptions() {
       _oneV = one ? one.value : DF_CAPTION,
       _oneC = one ? one.caption : dfProps.dfSliceTitle || DF_CAPTION;
 
-  return (0, _extends3.default)({}, dfProps, {
+  return (0, _extends3.default)({}, dfProps, dialogOptions, {
     itemMap: two,
     geo: _oneV,
     metric: two.value,

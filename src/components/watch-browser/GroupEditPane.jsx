@@ -24,18 +24,19 @@ class GroupEditPane extends Component {
     super()
     this.captionFrom = null
     this._primaryBt = <A.Button.Primary
-                         caption="Edit"
-                         title="Edit Group Name"
-                         onClick={this._handleRename}
-                      />
+       caption="Edit"
+       title="Edit Group Name"
+       onClick={this._handleRename}
+    />
     this.state = {
-      groupOptions : props.store.getWatchGroups(),
-      validationMessages : []
+      groupOptions: props.store.getWatchGroups(),
+      validationMessages: []
     }
   }
 
   componentDidMount(){
-    this.unsubscribe = this.props.store.listen(this._onStore)
+    this.unsubscribe = this.props.store
+      .listen(this._onStore)
   }
   componentWillUnmount(){
     this.unsubscribe()
@@ -46,24 +47,24 @@ class GroupEditPane extends Component {
       if (data.forActionType === forActionType){
         this._handleClear()
       }
-      this.setState({ groupOptions : store.getWatchGroups() })
+      this.setState({
+        groupOptions: store.getWatchGroups()
+      })
     } else if (actionType === actionFailed && data.forActionType === forActionType){
-      this.setState({ validationMessages: data.messages })
+      this.setState({
+        validationMessages: data.messages
+      })
     }
   }
 
   _handleSelectGroup = (item) => {
-     if (item && item.caption){
-       this.captionFrom = item.caption
-     } else {
-       this.captionFrom = null
-     }
+     this.captionFrom = (item && item.caption) || null;
   }
 
   _handleClear = () => {
     this.inputText.setValue('')
     if (this.state.validationMessages.length>0){
-      this.setState({ validationMessages:[] })
+      this.setState({ validationMessages: [] })
     }
   }
   _handleRename = () => {
@@ -79,9 +80,11 @@ class GroupEditPane extends Component {
        if (!captionTo){
          msg.push(msgOnIsEmptyName('Group To'))
        }
-       this.setState({ validationMessages:msg })
+       this.setState({ validationMessages: msg })
      }
   }
+
+  _refInputText = c => this.inputText = c
 
   render(){
     const { onClose } = this.props
@@ -97,11 +100,11 @@ class GroupEditPane extends Component {
              onSelect={this._handleSelectGroup}
           />
          <A.RowInputText
-           ref={c => this.inputText = c}
-           caption="Group To:"
+            ref={this._refInputText}
+            caption="Group To:"
          />
          <A.ValidationMessages
-           validationMessages={validationMessages}
+            validationMessages={validationMessages}
          />
          <A.RowButtons
             Primary={this._primaryBt}

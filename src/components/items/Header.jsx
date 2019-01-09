@@ -95,7 +95,7 @@ class Header extends Component {
     const { isMore } = this.state;
     return (
       <Fragment>
-        <SvgMore          
+        <SvgMore
           svgStyle={S.SVG_MORE}
           onClick={this._toggleMore}
         />
@@ -134,8 +134,7 @@ class Header extends Component {
       <div style={{...S.ROOT, ...TS.ROOT }}>
         { this._renderMore(moreModel, TS) }
         <SvgCheckBox
-           rootStyle={S.CHECK_BOX}
-           //chartType={chartType}
+           style={S.CHECK_BOX}           
            onCheck={onCheck}
            onUnCheck={onUnCheck}
         />

@@ -4,13 +4,13 @@ import React, { Component } from 'react';
 import C from '../styles/Color';
 
 const S = {
-  DIV : {
+  DIV: {
     display: 'inline-block',
     width: '16px',
     height: '16px',
     cursor: 'pointer'
   },
-  SVG : {
+  SVG: {
     display: 'inline-block'
   }
 };
@@ -34,47 +34,52 @@ const EL_CHECKED = (
 
 const _isFn = fn => typeof fn === 'function';
 
+const _getInitStateFrom = ({ initValue, value }) => ({
+  initValue: initValue,
+  isChecked: !!value
+});
+
 class SvgCheckBox extends Component {
   /*
   static propTypes = {
+    initValue: PropTypes.bool,
     value: PropTypes.bool,
+    style: PropTypes.object,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func
   }
   */
 
   constructor(props){
-    super();
+    super(props);
 
-    const { value, onCheck, onUnCheck } = props;
+    const { onCheck, onUnCheck } = props;
     this._isOnCheck = _isFn(onCheck)
     this._isOnUnCheck = _isFn(onUnCheck)
 
-    this.state = {
-        isChecked: !!value,
-    }
+    this.state = _getInitStateFrom(props)
   }
 
-  componentWillReceiveProps(nextProps){
-    if (this.props !== nextProps
-        && typeof nextProps.value !== 'undefined')
-    {
-      this.setState({ isChecked: !!nextProps.value })
-    }
+  static getDerivedStateFromProps(props, state) {
+    return props.initValue !== state.initValue
+      ? _getInitStateFrom(props)
+      : null;
   }
 
   _hClick = () => {
     const {
-           _isOnCheck, _isOnUnCheck,
-            state, props
-          } = this
-        , { onCheck, onUnCheck } = props
-        , { isChecked } = state;
+       _isOnCheck, _isOnUnCheck,
+        state, props
+      } = this
+    , { onCheck, onUnCheck } = props
+    , { isChecked } = state;
+
     if (!isChecked && _isOnCheck){
       onCheck(this);
     } else if (_isOnUnCheck){
       onUnCheck(this);
     }
+
     this.setState({ isChecked: !isChecked });
   }
 
@@ -86,25 +91,27 @@ class SvgCheckBox extends Component {
   }
 
   render(){
-    const { rootStyle } = this.props
-        , { isChecked } = this.state
-        , _elChecked = (isChecked)
-            ? EL_CHECKED
-            : null;
+    const {
+      style,
+      value=this.state.isChecked
+    } = this.props
+    , _elChecked = (value)
+        ? EL_CHECKED
+        : null;
     return (
       <div
          role="checkbox"
          tabIndex="0"
-         aria-checked={isChecked}
+         aria-checked={value}
          //aria-labelledby
-         style={{ ...S.DIV, ...rootStyle }}
+         style={{ ...S.DIV, ...style }}
          onClick={this._hClick}
          onKeyDown={this._hKeyDown}
       >
         <svg
-            viewBox="0 0 16 16" width="100%" height="100%"
-            preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
-            style={S.SVG}
+          viewBox="0 0 16 16" width="100%" height="100%"
+          preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+          style={S.SVG}
         >
           <rect
              x="1" y="1"

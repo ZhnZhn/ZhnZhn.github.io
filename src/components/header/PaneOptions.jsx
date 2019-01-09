@@ -96,7 +96,6 @@ class PaneOptions extends Component {
            title="Https Proxy:"
            placeholder="Https Proxy for CORS"
            initValue={_proxy}
-           isUpdateInit={true}
            onEnter={this._setProxy}
         />
         <RowInputSelect

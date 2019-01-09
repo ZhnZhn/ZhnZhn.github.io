@@ -55,6 +55,10 @@ var _RouterOptions = require('./RouterOptions');
 
 var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
 
+var _PaneOptions = require('./PaneOptions');
+
+var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MAP_FREQUENCY_DF = 'M';
@@ -149,6 +153,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
       var one = _this.one,
           two = _this.two,
           three = _this.three,
+          dialogOptions = _this.dialogOptions,
           chartType = _this.chartType,
           colorComp = _this.colorComp,
           compSelect1 = _this.compSelect1,
@@ -160,6 +165,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
         one: one,
         group: two,
         metric: three,
+        dialogOptions: dialogOptions,
         chartType: chartType, seriaColor: seriaColor,
         date: date,
         selectOptions: [compSelect1.getOptions(), compSelect2.getOptions()]
@@ -189,12 +195,13 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
       onAbout: _this._clickInfoWithToolbar
     });
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { isOptions: true });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
     _this.state = (0, _extends3.default)({
       isToolbar: true,
+      isOptions: false,
       isShowLabels: true,
       isShowDate: false
     }, (0, _crDateConfig2.default)('EMPTY'), {
@@ -254,6 +261,7 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
           noDate = _props.noDate,
           _state = this.state,
           isToolbar = _state.isToolbar,
+          isOptions = _state.isOptions,
           isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           dateDefault = _state.dateDefault,
@@ -274,6 +282,11 @@ var DialogEurostat3A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decora
         _react2.default.createElement(_DialogCell2.default.Toolbar, {
           isShow: isToolbar,
           buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_PaneOptions2.default, {
+          isShow: isOptions,
+          toggleOption: this._toggleOptionWithToolbar,
+          onClose: this._hideOptionsWithToolbar
         }),
         _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
           ref: this._refSelect1,

@@ -8,9 +8,9 @@ const toBar = {
     return JsonStatFn.trJsonToCategory(json, configSlice)
       .then(({ categories, data, min }) => {
           const config = FactoryChart.createBarConfig({ seriaColor })
-          EuroStatFn.setDataAndInfo({ config, data, json, option })
-          EuroStatFn.setCategories({ config, categories, min, option })
-          EuroStatFn.colorSeries(config)
+          EuroStatFn.addToCategoryConfig(config, {
+            json, option, data, categories, min
+          })          
           return config;
      });
   }

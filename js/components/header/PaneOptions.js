@@ -134,7 +134,6 @@ var PaneOptions = (_temp = _class = function (_Component) {
           title: 'Https Proxy:',
           placeholder: 'Https Proxy for CORS',
           initValue: _proxy,
-          isUpdateInit: true,
           onEnter: this._setProxy
         }),
         _react2.default.createElement(_RowInputSelect2.default, {

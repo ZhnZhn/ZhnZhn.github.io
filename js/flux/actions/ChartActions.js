@@ -91,16 +91,21 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
   }
 };
 
-var _addSettings = function _addSettings(option) {
-  var loadId = option.loadId,
-      apiKey = _ChartStore2.default.getKey(loadId),
-      proxy = _ChartStore2.default.getProxy(loadId);
+var _addBoolOptionTo = function _addBoolOptionTo(options, propName) {
+  if (typeof options[propName] === 'undefined') {
+    options[propName] = _ChartStore2.default.isSetting(propName);
+  }
+};
 
-  Object.assign(option, {
-    apiKey: apiKey, proxy: proxy,
-    isDrawDeltaExtrems: _ChartStore2.default.isSetting('isDrawDeltaExtrems'),
-    isNotZoomToMinMax: _ChartStore2.default.isSetting('isNotZoomToMinMax')
+var _addSettings = function _addSettings(options) {
+  var loadId = options.loadId;
+
+  Object.assign(options, {
+    apiKey: _ChartStore2.default.getKey(loadId),
+    proxy: _ChartStore2.default.getProxy(loadId)
   });
+  _addBoolOptionTo(options, 'isDrawDeltaExtrems');
+  _addBoolOptionTo(options, 'isNotZoomToMinMax');
 };
 
 var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_STOCK, {

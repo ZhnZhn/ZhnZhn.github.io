@@ -55,6 +55,10 @@ var _RouterOptions = require('./RouterOptions');
 
 var _RouterOptions2 = _interopRequireDefault(_RouterOptions);
 
+var _PaneOptions = require('./PaneOptions');
+
+var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DF_MAP_FREQUENCY = 'M';
@@ -129,11 +133,13 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
     _this._createLoadOption = function () {
       var chartType = _this.chartType,
           colorComp = _this.colorComp,
+          dialogOptions = _this.dialogOptions,
           seriaColor = colorComp ? colorComp.getColor() : undefined,
           date = _this._getDateWithForDate();
 
       return _this.props.loadFn(_this.props, {
         items: _this._items,
+        dialogOptions: dialogOptions,
         chartType: chartType, seriaColor: seriaColor,
         date: date
         /*
@@ -190,12 +196,13 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
       onAbout: _this._clickInfoWithToolbar
     });
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props);
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { isOptions: true });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
     _this.state = (0, _extends3.default)({
       isToolbar: true,
+      isOptions: false,
       isShowLabels: true,
       isShowDate: false
     }, (0, _crDateConfig2.default)('EMPTY'), {
@@ -254,6 +261,7 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
           noDate = _props.noDate,
           _state = this.state,
           isToolbar = _state.isToolbar,
+          isOptions = _state.isOptions,
           isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           dateDefault = _state.dateDefault,
@@ -275,6 +283,11 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
         _react2.default.createElement(_DialogCell2.default.Toolbar, {
           isShow: isToolbar,
           buttons: this.toolbarButtons
+        }),
+        _react2.default.createElement(_PaneOptions2.default, {
+          isShow: isOptions,
+          toggleOption: this._toggleOptionWithToolbar,
+          onClose: this._hideOptionsWithToolbar
         }),
         this._renderSelects(selectProps, isShow, isShowLabels),
         _react2.default.createElement(_DialogCell2.default.RowChart, {
