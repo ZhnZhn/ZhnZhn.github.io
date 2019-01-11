@@ -802,7 +802,7 @@
     },
     "ES_HT_RD" : {
       "type" : "ES_HT_RD",
-      "menuTitle" : "Expedinture on R&D",
+      "menuTitle" : "Expendinture on R&D",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
