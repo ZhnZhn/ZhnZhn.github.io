@@ -52,20 +52,25 @@ var TableItem = function (_Component) {
   (0, _inherits3.default)(TableItem, _Component);
 
   function TableItem() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, TableItem);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (TableItem.__proto__ || Object.getPrototypeOf(TableItem)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._hToggle = function () {
-      _this.setState({
-        isOpen: !_this.state.isOpen
-      });
-    };
-
-    _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = TableItem.__proto__ || Object.getPrototypeOf(TableItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       isOpen: true
-    };
-    return _this;
+    }, _this._hToggle = function () {
+      _this.setState(function (prevState) {
+        return {
+          isOpen: !prevState.isOpen
+        };
+      });
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(TableItem, [{
@@ -113,4 +118,4 @@ var TableItem = function (_Component) {
 }(_react.Component);
 
 exports.default = TableItem;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\components\items\TableItem.js.map
+//# sourceMappingURL=TableItem.js.map

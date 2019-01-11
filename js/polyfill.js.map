@@ -1,0 +1,24 @@
+{
+ "version": 3,
+ "sources": [
+  "../src/polyfill.js"
+ ],
+ "file": "../src/polyfill.js",
+ "names": [
+  "polyfill",
+  "Array",
+  "isArray",
+  "arg",
+  "Object",
+  "prototype",
+  "toString",
+  "call",
+  "Number",
+  "isInteger",
+  "value",
+  "isFinite",
+  "Math",
+  "floor"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,WAAW,SAAXA,QAAW,GAAM;AACrB,MAAI,CAACC,MAAMC,OAAX,EAAoB;AAClBD,UAAMC,OAAN,GAAgB,UAASC,GAAT,EAAc;AAC3B,aAAOC,OAAOC,SAAP,CAAiBC,QAAjB,CAA0BC,IAA1B,CAA+BJ,GAA/B,MAAwC,gBAA/C;AACF,KAFD;AAGD;AACD;AACA,MAAI,CAACK,OAAOC,SAAZ,EAAuB;AACrBD,WAAOC,SAAP,GAAmB,UAASC,KAAT,EAAgB;AACjC,aAAO,OAAOA,KAAP,KAAiB,QAAjB,IACFC,SAASD,KAAT,CADE,IAEFE,KAAKC,KAAL,CAAWH,KAAX,MAAsBA,KAF3B;AAGD,KAJD;AAKD;AACF,CAdD;;kBAgBeV,Q"
+}

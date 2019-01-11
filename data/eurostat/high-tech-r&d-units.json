@@ -1,0 +1,11 @@
+{
+  "items": [
+  {"value":"MIO_EUR","caption":"Million euro"},
+	{"value":"EUR_HAB","caption":"Euro per inhabitant"},
+	{"value":"MIO_NAC","caption":"Million units of national currency"},
+	{"value":"MIO_PPS","caption":"Million purchasing power standards (PPS)"},
+	{"value":"MIO_PPS_KP05","caption":"Million purchasing power standards (PPS) at 2005 prices"},
+	{"value":"PPS_HAB_KP05","caption":"Purchasing power standard (PPS) per inhabitant at constant 2005 prices"},
+	{"value":"PC_GDP","caption":"Percentage of gross domestic product (GDP)"}
+  ]
+}

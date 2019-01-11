@@ -34,6 +34,8 @@ var toArea = {
 
         _EuroStatFn2.default.setDataAndInfo({ config: config, data: data, json: json, option: option });
         _EuroStatFn2.default.setLineExtrems({ config: config, max: max, min: min, isNotZoomToMinMax: isNotZoomToMinMax });
+        config.zhConfig.isWithoutIndicator = false;
+        config.zhConfig.isWithoutSma = true;
 
         return config;
     },

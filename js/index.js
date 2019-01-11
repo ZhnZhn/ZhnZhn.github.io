@@ -6,6 +6,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _polyfill = require('./polyfill');
+
+var _polyfill2 = _interopRequireDefault(_polyfill);
+
 var _ravenJs = require('raven-js');
 
 var _ravenJs2 = _interopRequireDefault(_ravenJs);
@@ -50,6 +54,7 @@ var _fnLoading = function _fnLoading() {
   }
 };
 
+(0, _polyfill2.default)();
 _fnInitRaven();
 _ChartConfig2.default.init();
 _fnLoading();

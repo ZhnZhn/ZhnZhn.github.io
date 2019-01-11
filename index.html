@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-ZgMuIw75803Oh07GdsweCD6+McMARkIap2g9AV4jCmI=' https://marketdata.websol.barchart.com; style-src 'self' 'unsafe-inline'; img-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-LqCPZVeLofTP+4EXJFZsDfkQ0BKRNfI1DOtqgW5vyfo=' https://marketdata.websol.barchart.com; style-src 'self' 'unsafe-inline'; img-src 'self';">
   <meta name="application-name" content="webapperc">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="Web app ERC (Economic RESTful Client) designed to help get the most out of economic statistics, uses data from various sources and displays them as charts. These can then be exported into various formats.">
@@ -45,11 +45,6 @@
       }
       if (!window.fetch){
         polyfill.add('lib/fetch.min.js')
-      }
-      if (!Array.isArray) {
-        Array.isArray = function(arg) {
-           return Object.prototype.toString.call(arg) === '[object Array]';
-        };
       }
     })()
 
@@ -182,7 +177,7 @@
    </noscript>
 
  <script src="app/lib_c4df6806be4636a00ba2.js"></script>
- <script src="app/erc_4b1c0df6e392e15b5b9a.js"></script>
+ <script src="app/erc_4ee655c6857445fff89f.js"></script>
 
 </body>
 </html>

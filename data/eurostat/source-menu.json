@@ -803,21 +803,19 @@
     "ES_HT_RD" : {
       "type" : "ES_HT_RD",
       "menuTitle" : "Expedinture on R&D",
-      "dialogType" : "DialogEurostat2",
+      "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "Unit",
-        "twoURI" : "./data/eurostat/high-tech-r&d.json",
-        "twoJsonProp" : "units",
-        "mapFrequency": "Y",
-        "mapDateDf": 2,
+        "twoURI" : "./data/eurostat/high-tech-r&d-sectors.json",
+        "twoCaption": "Sector",
+        "threeURI": "./data/eurostat/high-tech-r&d-units.json",
+        "threeCaption": "Unit",
         "dfProps": {
-          "dfTable": "tipsst10",
-          "dfParams": [ "geo",  "unit" ],
-          "dfTail": "sectperf=TOTAL",
-          "dfSlice": {
-             "sectperf": "TOTAL"
-          }
+          "dfTable": "rd_e_gerdtot",
+          "dfParams": [ "geo", "sectperf", "unit" ],
+          "mapType" : "V",
+          "mapFrequency" : "Y",
+          "mapDateDf" : 1
         }
       }
     },

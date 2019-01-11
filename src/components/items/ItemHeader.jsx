@@ -26,7 +26,7 @@ const S = {
   CAPTION: {
     display: 'inline-block',
     cursor: 'pointer',
-    width: '340px',
+    width: '380px',
     fontWeight: 'bold',
     whiteSpace: 'nowrap',
     textOverflow: 'clip',

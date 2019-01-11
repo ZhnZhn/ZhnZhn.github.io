@@ -260,6 +260,39 @@ class ModalMenuIndicator extends Component {
     }
   }
 
+  _renderSma = (plusSma) => (
+    <Fragment>
+      <div>
+        <span style={STYLE.CAPTION}>SMA+</span>
+        <InputText
+           ref={this._refSmaPlus}
+           style={STYLE.N3}
+           initValue={INIT_SMA}
+           type="number"
+        />
+        <SvgPlus onClick={this._handleAddSma.bind(null, true)} />
+        <span style={STYLE.SMA_PLUS}>
+          +
+        </span>
+        <InputText
+           ref={this._refPlusSma}
+           initValue={plusSma}
+           type="number"
+        />
+      </div>
+      <div>
+        <span style={STYLE.CAPTION}>SMA</span>
+        <InputText
+           ref={this._refSmaComp}
+           style={STYLE.N3}
+           initValue={INIT_SMA}
+           type="number"
+        />
+        <SvgPlus onClick={this._handleAddSma} />
+      </div>
+    </Fragment>
+  );
+
   _renderIndicators = () => {
     const _descr = this.state.descr.map(descr => {
       const {id, color} = descr;
@@ -322,7 +355,9 @@ _refPlusSma = c => this.inputPlusSma = c
 _refSmaComp = c => this.inputSmaComp = c
 
  render(){
-    const { isShow, onClose } = this.props
+    const { isShow, config, onClose } = this.props
+    , { zhConfig={} } = config
+    , { isWithoutSma } = zhConfig
     , {
       isGrowRate, isNormalize,
       plusSma
@@ -346,34 +381,7 @@ _refSmaComp = c => this.inputSmaComp = c
             onMinus={this._removeNormalize}
             onPlus={this._addNormalize}
           />
-          <div>
-            <span style={STYLE.CAPTION}>SMA+</span>
-            <InputText
-               ref={this._refSmaPlus}
-               style={STYLE.N3}
-               initValue={INIT_SMA}
-               type="number"
-            />
-            <SvgPlus onClick={this._handleAddSma.bind(null, true)} />
-            <span style={STYLE.SMA_PLUS}>
-              +
-            </span>
-            <InputText
-               ref={this._refPlusSma}
-               initValue={plusSma}
-               type="number"
-            />
-          </div>
-          <div>
-            <span style={STYLE.CAPTION}>SMA</span>
-            <InputText
-               ref={this._refSmaComp}
-               style={STYLE.N3}
-               initValue={INIT_SMA}
-               type="number"
-            />
-            <SvgPlus onClick={this._handleAddSma} />
-          </div>
+          {!isWithoutSma && this._renderSma(plusSma)}
           {this._renderIndicators()}
           {this._renderMfiPart(this._isMfi)}
           {this._momAthEl}

@@ -2,6 +2,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 
+import polyfill from './polyfill'
 import Raven from 'raven-js';
 
 import AppErc from './components/AppErc';
@@ -42,6 +43,7 @@ const _fnLoading = function(){
   }
 }
 
+polyfill();
 _fnInitRaven();
 ChartConfig.init();
 _fnLoading();

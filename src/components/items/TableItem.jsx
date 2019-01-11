@@ -15,17 +15,14 @@ const S = {
 };
 
 class TableItem extends Component {
-  constructor(){
-    super()
-    this.state = {
-      isOpen: true
-    }
+  state = {
+    isOpen: true
   }
 
   _hToggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }))
   }
 
   render() {

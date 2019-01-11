@@ -48,8 +48,12 @@ var HEADERS = [{
   name: '24h Vol.',
   pn: '24h_volume_usd',
   isToN: true,
+  isToFixed: true,
   isR: true,
-  isF: true
+  isF: true,
+  style: {
+    textAlign: 'right'
+  }
 }, {
   name: '7d %',
   pn: 'percent_change_7d',
@@ -57,29 +61,54 @@ var HEADERS = [{
   isR: true
 }];
 
+var _getCellValue = function _getCellValue(r, h) {
+  var pn = h.pn,
+      isToN = h.isToN,
+      isToFixed = h.isToFixed;
+
+  return isToN ? isToFixed ? parseFloat(parseFloat(r[pn]).toFixed(0)) : parseFloat(r[pn]) : r[pn];
+};
+
 var _toRows = function _toRows() {
   var headers = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var rows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
   var _rows = [].concat((0, _toConsumableArray3.default)(rows)).map(function (r) {
     headers.forEach(function (h) {
-      var pn = h.pn,
-          isToN = h.isToN;
-
-      r[pn] = isToN ? parseFloat(r[pn]) : r[pn];
+      r[h.pn] = _getCellValue(r, h);
     });
     return r;
   });
   return _rows;
 };
 
-var _crTitle = function _crTitle(_ref) {
+var _getUTCTime = function _getUTCTime(ms) {
+  if (!Number.isInteger(ms)) {
+    return '';
+  }
+  var _d = new Date(ms);
+  return _d.getUTCHours() + ':' + _d.getUTCMinutes();
+};
+
+var _crUpdatedTime = function _crUpdatedTime(json) {
+  var _seconds = json.map(function (coin) {
+    return coin.last_updated;
+  }),
+      _minMs = Math.max.apply(Math, _seconds) * 1000,
+      _maxMs = Math.min.apply(Math, _seconds) * 1000,
+      _fromTime = _getUTCTime(_minMs),
+      _toTime = _getUTCTime(_maxMs);
+  return _fromTime !== _toTime ? _fromTime + ' - ' + _toTime : _fromTime;
+};
+
+var _crTitle = function _crTitle(_ref, json) {
   var one = _ref.one,
       two = _ref.two;
 
   var _two = parseFloat(two) - 1,
-      _one = parseFloat(one) + 1;
-  return _one + ' - ' + (_one + _two) + ': Values in USD';
+      _one = parseFloat(one) + 1,
+      _updatedTime = _crUpdatedTime(json);
+  return _one + ' - ' + (_one + _two) + ': Values in USD: Updated ' + _updatedTime + ' UTC';
 };
 
 var BASE_URL = 'https://coinmarketcap.com/currencies/';
@@ -94,7 +123,7 @@ var CmcAdapter = {
         _id = one + '_' + two,
         config = {
       id: _id,
-      title: _crTitle(option),
+      title: _crTitle(option, json),
       headers: HEADERS,
       tableFn: {
         numberFormat: numberFormat,
@@ -115,4 +144,4 @@ var CmcAdapter = {
 };
 
 exports.default = CmcAdapter;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\adapters\coin-market-cap\CmcAdapter.js.map
+//# sourceMappingURL=CmcAdapter.js.map

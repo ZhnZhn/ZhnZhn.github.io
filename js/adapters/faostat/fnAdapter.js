@@ -173,7 +173,7 @@ var fnAdapter = {
     return {
       id: id,
       key: id,
-      isWithoutIndicator: true,
+      isWithoutSma: true,
       isWithoutAdd: true,
       dataSource: "FAOSTAT",
       linkFn: "FAO_STAT",

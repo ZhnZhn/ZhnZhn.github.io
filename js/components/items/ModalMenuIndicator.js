@@ -270,7 +270,11 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,
+          config = _props.config,
           onClose = _props.onClose,
+          _config$zhConfig = config.zhConfig,
+          zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
+          isWithoutSma = zhConfig.isWithoutSma,
           _state = this.state,
           isGrowRate = _state.isGrowRate,
           isNormalize = _state.isNormalize,
@@ -298,48 +302,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
             onMinus: this._removeNormalize,
             onPlus: this._addNormalize
           }),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'span',
-              { style: STYLE.CAPTION },
-              'SMA+'
-            ),
-            _react2.default.createElement(_InputText2.default, {
-              ref: this._refSmaPlus,
-              style: STYLE.N3,
-              initValue: INIT_SMA,
-              type: 'number'
-            }),
-            _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma.bind(null, true) }),
-            _react2.default.createElement(
-              'span',
-              { style: STYLE.SMA_PLUS },
-              '+'
-            ),
-            _react2.default.createElement(_InputText2.default, {
-              ref: this._refPlusSma,
-              initValue: plusSma,
-              type: 'number'
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'span',
-              { style: STYLE.CAPTION },
-              'SMA'
-            ),
-            _react2.default.createElement(_InputText2.default, {
-              ref: this._refSmaComp,
-              style: STYLE.N3,
-              initValue: INIT_SMA,
-              type: 'number'
-            }),
-            _react2.default.createElement(_SvgPlus2.default, { onClick: this._handleAddSma })
-          ),
+          !isWithoutSma && this._renderSma(plusSma),
           this._renderIndicators(),
           this._renderMfiPart(this._isMfi),
           this._momAthEl
@@ -424,6 +387,55 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
     if (config) {
       _this2.props.onAddMfi(config, 'MOM_ATH');
     }
+  };
+
+  this._renderSma = function (plusSma) {
+    return _react2.default.createElement(
+      _react.Fragment,
+      null,
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'span',
+          { style: STYLE.CAPTION },
+          'SMA+'
+        ),
+        _react2.default.createElement(_InputText2.default, {
+          ref: _this2._refSmaPlus,
+          style: STYLE.N3,
+          initValue: INIT_SMA,
+          type: 'number'
+        }),
+        _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddSma.bind(null, true) }),
+        _react2.default.createElement(
+          'span',
+          { style: STYLE.SMA_PLUS },
+          '+'
+        ),
+        _react2.default.createElement(_InputText2.default, {
+          ref: _this2._refPlusSma,
+          initValue: plusSma,
+          type: 'number'
+        })
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'span',
+          { style: STYLE.CAPTION },
+          'SMA'
+        ),
+        _react2.default.createElement(_InputText2.default, {
+          ref: _this2._refSmaComp,
+          style: STYLE.N3,
+          initValue: INIT_SMA,
+          type: 'number'
+        }),
+        _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddSma })
+      )
+    );
   };
 
   this._renderIndicators = function () {
