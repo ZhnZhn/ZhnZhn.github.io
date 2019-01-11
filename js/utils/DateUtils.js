@@ -16,6 +16,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MIN_YEAR = 1999;
 
+var _pad2 = function _pad2(n) {
+	return n < 10 ? '0' + n : '' + n;
+};
+
 var DateUtils = {
 
 	//YYYY-MM-DD valid format
@@ -112,6 +116,14 @@ var DateUtils = {
 	ymdToUTC: function ymdToUTC(str) {
 		var arrDate = str.split('-');
 		return Date.UTC(arrDate[0], parseInt(arrDate[1], 10) - 1, arrDate[2]);
+	},
+
+	getUTCTime: function getUTCTime(ms) {
+		if (!Number.isInteger(ms)) {
+			return '';
+		}
+		var _d = new Date(ms);
+		return _pad2(_d.getUTCHours()) + ':' + _pad2(_d.getUTCMinutes());
 	}
 
 };

@@ -1,6 +1,8 @@
 
 const MIN_YEAR = 1999;
 
+const _pad2 = n => n<10 ? '0'+n : ''+n;
+
 const DateUtils = {
 
   //YYYY-MM-DD valid format
@@ -81,11 +83,18 @@ const DateUtils = {
 		return DateUtils.isYmd(`${y}-${m}-${d}`);
  },
 
- ymdToUTC: (str) => {	  
+ ymdToUTC: (str) => {
     const arrDate = str.split('-');
     return  Date.UTC(arrDate[0], (parseInt(arrDate[1], 10)-1), arrDate[2]);
- }
+ },
 
+ getUTCTime: (ms) => {
+	 if (!Number.isInteger(ms)) {
+     return '';
+   }
+   const _d = new Date(ms);
+   return `${_pad2(_d.getUTCHours())}:${_pad2(_d.getUTCMinutes())}`;
+ }
 
 };
 

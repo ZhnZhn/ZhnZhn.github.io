@@ -1,6 +1,8 @@
 
+import DateUtils from '../../utils/DateUtils'
 import AdapterFn from '../AdapterFn'
 
+const { getUTCTime } = DateUtils;
 const { numberFormat } = AdapterFn;
 
 const HEADERS = [{
@@ -67,20 +69,12 @@ const _toRows = ( headers=[], rows=[] ) => {
   return _rows;
 }
 
-const _getUTCTime = (ms) =>{
-  if (!Number.isInteger(ms)) {
-    return '';
-  }
-  const _d = new Date(ms);
-  return `${_d.getUTCHours()}:${_d.getUTCMinutes()}`;
-};
-
 const _crUpdatedTime = (json) => {
   const _seconds = json.map(coin => coin.last_updated)
   , _minMs = Math.max.apply(Math, _seconds)*1000
   , _maxMs = Math.min.apply(Math, _seconds)*1000
-  , _fromTime = _getUTCTime(_minMs)
-  , _toTime = _getUTCTime(_maxMs);
+  , _fromTime = getUTCTime(_minMs)
+  , _toTime = getUTCTime(_maxMs);
   return _fromTime !== _toTime
     ? `${_fromTime} - ${_toTime}`
     : _fromTime;

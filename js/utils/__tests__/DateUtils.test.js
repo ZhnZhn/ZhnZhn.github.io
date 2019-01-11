@@ -10,7 +10,8 @@ var isYmd = _DateUtils2.default.isYmd,
     isYmdOrEmpty = _DateUtils2.default.isYmdOrEmpty,
     dmyToUTC = _DateUtils2.default.dmyToUTC,
     formatTo = _DateUtils2.default.formatTo,
-    isDmy = _DateUtils2.default.isDmy;
+    isDmy = _DateUtils2.default.isDmy,
+    getUTCTime = _DateUtils2.default.getUTCTime;
 
 
 describe('isYmd YYYY-MM-DD', function () {
@@ -115,4 +116,19 @@ describe('isDmy', function () {
     expect(fn(fn)).toBe(false);
   });
 });
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\utils\__tests__\DateUtils.test.js.map
+
+describe('getUTCTime', function () {
+  var fn = getUTCTime;
+  test('should return correct str from ms', function () {
+    expect(fn(1547205009808)).toBe('11:10');
+    expect(fn(1547204900008)).toBe('11:08');
+  });
+  test('should return empty string in edge case', function () {
+    expect(fn(undefined)).toBe('');
+    expect(fn(null)).toBe('');
+    expect(fn('str')).toBe('');
+    expect(fn(NaN)).toBe('');
+    expect(fn({})).toBe('');
+  });
+});
+//# sourceMappingURL=DateUtils.test.js.map

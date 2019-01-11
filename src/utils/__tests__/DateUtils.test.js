@@ -5,7 +5,8 @@ const {
   isYmdOrEmpty,
   dmyToUTC,
   formatTo,
-  isDmy
+  isDmy,
+  getUTCTime
 } = DateUtils;
 
 describe('isYmd YYYY-MM-DD', () => {
@@ -108,5 +109,20 @@ describe('isDmy', () => {
     expect(fn({})).toBe(false)
     expect(fn(()=>{})).toBe(false)
     expect(fn(fn)).toBe(false)
+  })
+})
+
+describe('getUTCTime', ()=>{
+  const fn = getUTCTime;
+  test('should return correct str from ms', ()=>{
+    expect(fn(1547205009808)).toBe('11:10')
+    expect(fn(1547204900008)).toBe('11:08')
+  })
+  test('should return empty string in edge case', ()=>{
+    expect(fn(undefined)).toBe('')
+    expect(fn(null)).toBe('')
+    expect(fn('str')).toBe('')
+    expect(fn(NaN)).toBe('')
+    expect(fn({})).toBe('')
   })
 })

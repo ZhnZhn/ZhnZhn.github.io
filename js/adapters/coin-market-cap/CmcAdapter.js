@@ -8,12 +8,17 @@ var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
+var _DateUtils = require('../../utils/DateUtils');
+
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
+
 var _AdapterFn = require('../AdapterFn');
 
 var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var getUTCTime = _DateUtils2.default.getUTCTime;
 var numberFormat = _AdapterFn2.default.numberFormat;
 
 
@@ -82,22 +87,14 @@ var _toRows = function _toRows() {
   return _rows;
 };
 
-var _getUTCTime = function _getUTCTime(ms) {
-  if (!Number.isInteger(ms)) {
-    return '';
-  }
-  var _d = new Date(ms);
-  return _d.getUTCHours() + ':' + _d.getUTCMinutes();
-};
-
 var _crUpdatedTime = function _crUpdatedTime(json) {
   var _seconds = json.map(function (coin) {
     return coin.last_updated;
   }),
       _minMs = Math.max.apply(Math, _seconds) * 1000,
       _maxMs = Math.min.apply(Math, _seconds) * 1000,
-      _fromTime = _getUTCTime(_minMs),
-      _toTime = _getUTCTime(_maxMs);
+      _fromTime = getUTCTime(_minMs),
+      _toTime = getUTCTime(_maxMs);
   return _fromTime !== _toTime ? _fromTime + ' - ' + _toTime : _fromTime;
 };
 
