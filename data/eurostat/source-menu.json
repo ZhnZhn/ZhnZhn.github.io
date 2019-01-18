@@ -7,11 +7,11 @@
         { "id" : "ES_LABOUR" },
         { "id" : "ES_SOCIAL" },
         { "id" : "ES_GDP" },
-        { "id" : "ES_GDP_MAIN", "isNew": true },
+        { "id" : "ES_GDP_MAIN" },
         { "id" : "ES_UNEMP" },
         { "id" : "ES_INDIC"},
         { "id" : "ES_PRODUCTION" },
-        { "id" : "ES_PEEI", "isNew": true }
+        { "id" : "ES_PEEI" }
       ]
     },{
       "caption": "HCPI",
@@ -99,12 +99,14 @@
       "items": [
         { "id": "ES_HC_PROVIDER" },
         { "id": "ES_HC_FINSCHEME" },
-        { "id": "ES_HC_FUNCTION" }
+        { "id": "ES_HC_FUNCTION" },
+        { "id": "ES_HC_PHYSICIANS" },
+        { "id": "ES_HC_NURSING" }
       ]
     },{
       "caption": "Education",
       "items": [
-        { "id": "ES_EDU_LEVEL", "isNew": true }
+        { "id": "ES_EDU_LEVEL" }
       ]
     }
   ],
@@ -1174,6 +1176,61 @@
           "dfTable": "hlth_sha11_hc",
           "dfParams": [ "geo", "icha11_hc", "unit"],
           "mapType": "V"
+        }
+      }
+    },
+    "ES_HC_PHYSICIANS": {
+      "type" : "ES_HC_PHYSICIANS",
+      "menuTitle" : "Physicians",
+      "contCaption" : "Healthcare: Physicians by Medical Speciality",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Speciality",
+        "twoURI" : "./data/eurostat/healthcare-ph-speciality.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/healthcare-ph-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 3,
+          "dfTable": "hlth_rs_spec",
+          "dfParams": [ "geo", "med_spec", "unit"],
+          "mapType": "V"
+        }
+      }
+    },
+    "ES_HC_NURSING" : {
+      "type" : "ES_HC_NURSING",
+      "menuTitle" : "Nursing & Caring",
+      "contCaption" : "Healthcare: Nursing & Caring Professionals",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+            "id": "geo",
+            "caption": "Country",
+            "jsonProp": "countries",
+            "uri": "./data/eurostat/countries.json"
+          },{
+             "id": "isco08",
+             "caption": "Nurse",
+             "uri": "./data/eurostat/healthcare-nurse.json"
+          },{
+              "id": "wstatus",
+              "caption": "Status",
+              "uri": "./data/eurostat/healthcare-nurse-status.json"
+          },{
+              "id": "unit",
+              "caption": "Unit",
+              "uri": "./data/eurostat/healthcare-ph-unit.json"
+           }
+        ],
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 3,
+          "dfTable": "hlth_rs_prsns"
         }
       }
     },

@@ -20,6 +20,12 @@
         { "id": "DBN_WTO_SERVICETRADE" }
       ]
     },{
+      "caption": "National Bank of Belguim",
+      "items": [
+        { "id": "DBN_NBB_HICP" },
+        { "id": "DBN_NBB_MARKETS" }        
+      ]
+    },{
       "caption": "DB NOMICS",
       "items": [
         { "id": "DBN_QUERY" }
@@ -167,6 +173,37 @@
           "dfProvider": "WTO",
           "dfCode": "m2",
           "dfFnUrl": "s21"
+        }
+      }
+    },
+
+    "DBN_NBB_HICP": {
+      "type" : "DBN_NBB_HICP",
+      "menuTitle" : "Inflation & HICP, M",
+      "chartContainerCaption" : "DB Nomics: NBB: Inflation & HICP, Monthly",
+      "addProps": "DBN_B1",
+      "dialogProps" : {
+        "oneCaption": "Item",
+        "optionURI" : "./data/db-nomics/nbb-hicp.json",
+        "dataSource" : "DB Nomics: NBB: Inflation & HICP, M",
+        "dfProps": {
+          "dfProvider": "NBB",
+          "dfCode": "HICP"
+        }
+      }
+    },
+    "DBN_NBB_MARKETS": {
+      "type" : "DBN_NBB_MARKETS",
+      "menuTitle" : "Stocks & Commodities, D",
+      "chartContainerCaption" : "DB Nomics: NBB: Stocks & Commodities Market, Daily",
+      "addProps": "DBN_B1",
+      "dialogProps" : {
+        "oneCaption": "Item",
+        "optionURI" : "./data/db-nomics/nbb-stocks-commodities.json",
+        "dataSource" : "DB Nomics: NBB: Stocks & Commodities Market, D",
+        "dfProps": {
+          "dfProvider": "NBB",
+          "dfCode": "STOCCOM"
         }
       }
     },
