@@ -46,13 +46,15 @@
     },{
       "caption" : "Agriculture",
       "items" : [
-        { "id" : "ES_AGRI_ORGANIC" },
-        { "id" : "ES_AGRI_PRICES" },
+        { "id" : "ES_AGRI_ORGANIC-AREA" },
+        { "id" : "ES_AGRI_ORGANIC-PROD" },
         { "id" : "ES_AGRI_MILK" },
+        { "id" : "ES_AGRI_MILKS-DAIRY" },
         { "id" : "ES_AGRI_LIVESTOCK" },
         { "id" : "ES_AGRI_FERT" },
         { "id" : "ES_AGRI_ENVI" },
-        { "id" : "ES_AGRI_CROP" }
+        { "id" : "ES_AGRI_CROP" },
+        { "id" : "ES_AGRI_PRICES" }
       ]
     },{
       "caption": "Fishery",
@@ -654,8 +656,8 @@
     },
     "ES_AGRI_MILK" : {
       "type" : "ES_AGRI_MILK",
-      "menuTitle" : "Milk Production",
-      "dialogCaption" : "Agriculture Milk Production",
+      "menuTitle" : "Milk & Milk Products",
+      "dialogCaption" : "Agriculture: Milk & Milk Products",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -663,6 +665,26 @@
         "mapFrequency" : "Y",
         "dfProps": {
           "mapType" : "Z"
+        }
+      }
+    },
+    "ES_AGRI_MILKS-DAIRY": {
+      "type" : "ES_AGRI_MILKS-DAIRY",
+      "menuTitle" : "All Milks & Dairy Products",
+      "contCaption" : "Agriculture: All Milks & Dairy Products",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Product",
+        "twoURI" : "./data/eurostat/agri-dairy-products.json",
+        "threeCaption" : "Item",
+        "threeURI" : "./data/eurostat/agri-dairy-items.json",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "apro_mk_pobta",
+          "dfParams": [ "geo", "dairyprod", "milkitem"],
+          "mapType": "Z"
         }
       }
     },
@@ -680,18 +702,59 @@
         }
       }
     },
-    "ES_AGRI_ORGANIC" : {
-      "type" : "ES_AGRI_ORGANIC",
-      "menuTitle" : "Organic Farming",
-      "contCaption" : "Agriculture Organic Farming",
+    "ES_AGRI_ORGANIC-AREA" : {
+      "type" : "ES_AGRI_ORGANIC-AREA",
+      "menuTitle" : "Organic Area",
+      "contCaption" : "Agriculture: Organic Crop Area",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+            "id": "geo",
+            "caption": "Country",
+            "jsonProp": "countries",
+            "uri": "./data/eurostat/countries.json"
+          },{
+             "id": "crops",
+             "caption": "Crop",
+             "uri": "./data/eurostat/agri-organic-crop.json"
+          },{
+              "id": "agprdmet",
+              "caption": "Method",
+              "uri": "./data/eurostat/agri-organic-method.json"
+          },{
+              "id": "unit",
+              "caption": "Unit",
+              "uri": "./data/eurostat/agri-organic-unit.json"
+           }
+        ],
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf" : 2,
+          "dfTable": "org_cropar"
+        }
+      }
+    },
+    "ES_AGRI_ORGANIC-PROD" : {
+      "type" : "ES_AGRI_ORGANIC-PROD",
+      "menuTitle" : "Organic Production, T",
+      "contCaption" : "Agriculture: Organic Crop Production, T",
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
-      "dialogProps" : {
-        "twoURI" : "./data/eurostat/agri-organic.json",
-        "mapFrequency" : "Y",
-        "mapDateDf" : 2,
+      "dialogProps": {
+        "twoCaption": "Crop",
+        "twoURI": "./data/eurostat/agri-organic-crop.json",
+        "twoJsonProp": "items",
+        "mapFrequency": "Y",
+        "mapDateDf": 2,
         "dfProps": {
-          "mapType" : "Z"
+          "dfTable": "org_croppro",
+          "dfParams": [ "geo",  "crops" ],
+          "dfTail": "unit=T",
+          "dfSlice": {
+             "unit": "T"
+          }
         }
       }
     },
