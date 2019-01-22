@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/decorators/withSet.js"
+ ],
+ "file": "../../../../src/components/dialogs/decorators/withSet.js",
+ "names": [
+  "_setStateByWithSet",
+  "propName",
+  "value",
+  "setState",
+  "withSet",
+  "target",
+  "prototype",
+  "Object",
+  "assign"
+ ],
+ "mappings": ";;;;;;;;;;;;AACA,IAAMA,qBAAqB,SAArBA,kBAAqB,CAASC,QAAT,EAAmBC,KAAnB,EAA0B;AACnD,OAAKC,QAAL,mCAAiBF,QAAjB,EAA4BC,KAA5B;AACD,CAFD;;AAIA,IAAME,UAAU,SAAVA,OAAU,SAAU;AACxB,MAAI,CAACC,OAAOC,SAAP,CAAiBN,kBAAtB,EAA0C;AACxCO,WAAOC,MAAP,CAAcH,OAAOC,SAArB,EAAgC;AAC9BN;AAD8B,KAAhC;AAGD;AACF,CAND;;kBAQeI,O"
+}

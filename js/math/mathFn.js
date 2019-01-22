@@ -20,6 +20,19 @@ var _isNumber = function _isNumber(n) {
   return typeof n === 'number' && !Number.isNaN(n);
 };
 
+var _formatedToBig = function _formatedToBig() {
+  var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '0.0';
+  return (0, _big2.default)(v.toString().replace(/\s/g, ''));
+};
+
+var _roundBig = function _roundBig(bValue) {
+  var _bValue = bValue.round(4);
+  if (_bValue.gt(MAX_TO_ROUND)) {
+    _bValue = bValue.toFixed(0);
+  }
+  return _bValue;
+};
+
 var mathFn = {
 
   calcPercent: function calcPercent(_ref) {
@@ -32,38 +45,33 @@ var mathFn = {
   },
 
   crValueMoving: function crValueMoving(option) {
-    var _option$nowValue = option.nowValue,
-        nowValue = _option$nowValue === undefined ? '0.0' : _option$nowValue,
-        _option$prevValue = option.prevValue,
-        prevValue = _option$prevValue === undefined ? '0.0' : _option$prevValue,
-        Direction = option.Direction,
+    var nowValue = option.nowValue,
+        prevValue = option.prevValue,
+        _option$Direction = option.Direction,
+        D = _option$Direction === undefined ? {} : _option$Direction,
         _option$fnFormat = option.fnFormat,
-        fnFormat = _option$fnFormat === undefined ? fnEcho : _option$fnFormat;
+        fnFormat = _option$fnFormat === undefined ? fnEcho : _option$fnFormat,
+        bNowValue = _formatedToBig(nowValue),
+        bPrevValue = _formatedToBig(prevValue),
+        _bDelta = bPrevValue.minus(bNowValue),
+        _direction = _bDelta.gt(0.0) ? D.DOWN : _bDelta.lt(0.0) ? D.UP : D.EQUAL;
 
+    var _bPercent = mathFn.calcPercent({
+      bValue: _bDelta, bTotal: bPrevValue
+    });
 
-    var bNowValue = (0, _big2.default)(nowValue.toString().replace(/\s/g, '')),
-        bPrevValue = (0, _big2.default)(prevValue.toString().replace(/\s/g, ''));
-
-    var _bDelta = bPrevValue.minus(bNowValue),
-        _direction = void 0;
-    if (_bDelta.gt(0.0)) {
-      _direction = Direction.DOWN;
-    } else if (!_bDelta.gte(0.0)) {
-      _direction = Direction.UP;
-    } else {
-      _direction = Direction.EQUAL;
-    }
-
-    var _bPercent = mathFn.calcPercent({ bValue: _bDelta, bTotal: bPrevValue });
-
-    var _bNowValue = (0, _big2.default)(bNowValue).round(4);
-    if (_bNowValue.gt(MAX_TO_ROUND)) {
+    var _bNowValue = _roundBig(bNowValue),
+        _bDeltaAbs = _roundBig(_bDelta.abs());
+    /*
+    let _bNowValue = Big(bNowValue).round(4);
+    if ( _bNowValue.gt(MAX_TO_ROUND) ){
       _bNowValue = bNowValue.toFixed(0);
     }
-    var _bDeltaAbs = _bDelta.abs().round(4);
+    let _bDeltaAbs = _bDelta.abs().round(4);
     if (_bDeltaAbs.gt(MAX_TO_ROUND)) {
-      _bDeltaAbs = _bDelta.abs().round(0);
+      _bDeltaAbs = _bDelta.abs().round(0)
     }
+    */
 
     return {
       value: fnFormat(_bNowValue).toString(),
@@ -78,21 +86,8 @@ var mathFn = {
 
   toFixed: function toFixed(value) {
     var bValue = (0, _big2.default)(value);
-    if (bValue.gt('10')) {
-      return parseInt(bValue.toFixed(0), 10);
-    } else {
-      return parseFloat(bValue.toFixed(2));
-    }
+    return bValue.gt('10') ? parseInt(bValue.toFixed(0), 10) : parseFloat(bValue.toFixed(2));
   },
-
-  /*
-  toNumberFixed2: (value, n=2) => {
-    if ( !_isNumber(value) || !_isNumber(n)) {
-      return value;
-    }
-    return Number(value.toFixed(n));
-  },
-  */
 
   toFixedNumber: function toFixedNumber(value) {
     if (!_isNumber(value)) {

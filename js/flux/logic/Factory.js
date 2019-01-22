@@ -182,6 +182,7 @@ var _crChartContainerComp = function _crChartContainerComp(dType, browserType, d
     caption: _caption,
     chartType: _type,
     browserType: browserType,
+    onSetActive: _ComponentActions2.default.setActiveContainer,
     onCloseContainer: _ComponentActions2.default.closeChartContainer.bind(null, _type, browserType),
     onCloseItem: _ChartActions2.default.closeChart
   });

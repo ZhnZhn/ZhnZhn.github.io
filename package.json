@@ -131,7 +131,8 @@
       "<rootDir>/js/adapters/",
       "<rootDir>/js/components/",
       "<rootDir>/js/components/zhn-sparklines/dataProcessing",
-      "<rootDir>/js/components/zhn-m"
+      "<rootDir>/js/components/zhn-m",
+      "<rootDir>/js/flux/stores/"
     ]
   }
 }

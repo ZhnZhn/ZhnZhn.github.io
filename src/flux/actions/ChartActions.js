@@ -14,6 +14,8 @@ const C = {
 
 const META = '_Meta';
 const _fnNoop = () => {};
+const _isFn = fn => typeof fn === 'function';
+
 
 export const ChartActionTypes = {
   INIT_AND_SHOW_CHART: 'initAndShowChart',
@@ -51,9 +53,9 @@ const _fnCancelLoad = function(option, alertMsg, isWithFailed){
   this.failed(option);
   this.isShouldEmit = false;
 
-  if (typeof option.onCancel === 'function'){
+  if ( _isFn(option.onCancel) ){
     option.onCancel();
-  } else if (isWithFailed && typeof option.onFailed === 'function'){
+  } else if (isWithFailed && _isFn(option.onFailed)){
     option.onFailed();
   }
 }
@@ -64,9 +66,9 @@ const _addBoolOptionTo = (options, propName) => {
   }
 }
 
-const _addSettings = (options) => {
+const _addSettingsTo = (options, ...args) => {
   const { loadId } = options;
-  Object.assign(options, {
+  Object.assign(options, ...args, {
     apiKey: ChartStore.getKey(loadId),
     proxy: ChartStore.getProxy(loadId)
   })
@@ -129,16 +131,15 @@ const _checkMsgApiKey = (option) => {
 }
 
 ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
-  const { chartType } = confItem
-      , key = LogicUtils.createKeyForConfig(option)
-      , isDoublingLoad = this.isLoading && key === this.idLoading
-      , isDoublLoadMeta = (option.isLoadMeta)
-          ? (key + META === this.idLoading)
-          : false;
+  const key = LogicUtils.createKeyForConfig(option)
+  , isDoublingLoad = this.isLoading && key === this.idLoading
+  , isDoublLoadMeta = (option.isLoadMeta)
+      ? (key + META === this.idLoading)
+      : false;
 
-  option.key = key;
   this.isShouldEmit = true;
-  _addSettings(option)
+  //{ chartType, browserType, conf } = confItem
+  _addSettingsTo(option, confItem, { key })
 
   const _msgApiKey = _checkMsgApiKey(option);
   if (_msgApiKey) {
@@ -148,9 +149,9 @@ ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
   } else if (isDoublLoadMeta){
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
   } else if (!ChartStore.isLoadToChart()){
-     if (ChartStore.isChartExist(chartType, key)){
-       this.cancelLoad(option, M.ALREADY_EXIST, true);
-     }
+    if (ChartStore.isChartExist(option)){
+      this.cancelLoad(option, M.ALREADY_EXIST, true);
+    }
   }
   return undefined;
 }
@@ -159,19 +160,12 @@ ChartActions[A.LOAD_STOCK].shouldEmit = function(){
   return this.isShouldEmit;
 }
 ChartActions[A.LOAD_STOCK].listen(function(confItem, option){
-  const { chartType, browserType, conf } = confItem;
-  option.conf = conf
-
+  const { key, isLoadMeta, loadId='Q' } = option;
   this.isLoading = true;
-  this.idLoading = option.key;
-  if (option.isLoadMeta){
-    this.idLoading = this.idLoading + META;
-  }
-
-  const { loadId='Q' } = option;
-  option.chartType = chartType;
-  option.browserType = browserType;
-  LoadConfig[loadId].loadItem(option, this.completed, this.added, this.failed);
+  this.idLoading = isLoadMeta ? key + META : key;
+  LoadConfig[loadId].loadItem(
+    option, this.completed, this.added, this.failed
+  );
 })
 
 const SUBTITLE = 'Loaded from URL Query';
@@ -203,7 +197,7 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function(option){
   const impl = LoadConfig[loadId];
   if (impl) {
     const { addPropsTo } = impl;
-    if (typeof addPropsTo === 'function'){
+    if (_isFn(addPropsTo)){
       addPropsTo(option)
     }
     impl.loadItem(option, this.completed, _fnNoop, this.failed)

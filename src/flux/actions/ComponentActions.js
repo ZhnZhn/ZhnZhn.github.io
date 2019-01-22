@@ -11,6 +11,7 @@ export const ComponentActionTypes = {
 
   CLOSE_CHART_CONTAINER: 'closeChartContainer',
   CLOSE_CHART_CONTAINER_2: 'closeChartContainer2',
+  SET_ACTIVE_CONTAINER: 'setActiveContainer',
   SET_ACTIVE_CHECKBOX: 'setActiveCheckbox',
 
   SHOW_MODAL_DIALOG: 'showModalDialog',
@@ -27,6 +28,7 @@ const ComponentActions = Reflux.createActions({
   [A.SHOW_OPTION_DIALOG]: {},
   [A.CLOSE_CHART_CONTAINER]: {},
   [A.CLOSE_CHART_CONTAINER_2]: {},
+  [A.SET_ACTIVE_CONTAINER]: {},
   [A.SET_ACTIVE_CHECKBOX]: {},
 
   [A.SHOW_MODAL_DIALOG]: {},

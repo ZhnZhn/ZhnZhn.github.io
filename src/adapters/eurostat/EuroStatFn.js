@@ -1,12 +1,14 @@
 import Chart from '../../charts/Chart';
+import ChartFn from '../../charts/ChartFn';
 import Tooltip from '../../charts/Tooltip';
 
 import AdapterFn from '../AdapterFn';
 
+const { setPlotLinesMinMax } = ChartFn;
+
 const {
   valueMoving, findMinY,
-  appendWithColon,
-  formatAllNumber
+  appendWithColon
 } = AdapterFn;
 
 const DF_SLICE_TITLE = 'EU';
@@ -197,15 +199,7 @@ const EuroStatFn = {
 
   setLineExtrems({ config, max, min, isNotZoomToMinMax }){
     const plotLines = config.yAxis.plotLines;
-
-    if ( max>Number.NEGATIVE_INFINITY ){
-      plotLines[0].value = max;
-      plotLines[0].label.text = formatAllNumber(max);
-    }
-    if ( min<Number.POSITIVE_INFINITY ){
-      plotLines[1].value = min;
-      plotLines[1].label.text = formatAllNumber(min);
-    }
+    setPlotLinesMinMax({ plotLines, min, max })
 
     if (!isNotZoomToMinMax){
       config.yAxis.min = Chart.calcMinY({
@@ -213,7 +207,6 @@ const EuroStatFn = {
         minPoint: min
       });
     }
-
   },
 
   crItemCaption: ({ subtitle, dfSliceTitle }) => {

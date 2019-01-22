@@ -20,6 +20,10 @@ var _Chart = require('./Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
+var _ChartFn = require('./ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
 var _ChartConfig = require('./ChartConfig');
 
 var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
@@ -40,6 +44,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var findMinY = _seriaFn2.default.findMinY,
     findMaxY = _seriaFn2.default.findMaxY;
+var setPlotLinesMinMax = _ChartFn2.default.setPlotLinesMinMax;
 
 
 var C = {
@@ -251,16 +256,13 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
   addMinMax: function addMinMax(data, option) {
     return this.setMinMax(findMinY(data), findMaxY(data), option.isNotZoomToMinMax);
   },
-  setMinMax: function setMinMax(minValue, maxValue, noZoom) {
+  setMinMax: function setMinMax(min, max, noZoom) {
     var plotLines = this.config.yAxis.plotLines;
-    plotLines[0].value = maxValue;
-    plotLines[0].label.text = '' + _ChartConfig2.default.fnNumberFormat(maxValue);
-    plotLines[1].value = minValue;
-    plotLines[1].label.text = '' + _ChartConfig2.default.fnNumberFormat(minValue);
+    setPlotLinesMinMax({ plotLines: plotLines, min: min, max: max });
 
-    var _min = noZoom && minValue > 0 ? 0 : _Chart2.default.calcMinY({
-      minPoint: minValue,
-      maxPoint: maxValue
+    var _min = noZoom && min > 0 ? 0 : _Chart2.default.calcMinY({
+      minPoint: min,
+      maxPoint: max
     });
     this.add('yAxis', {
       min: _min,

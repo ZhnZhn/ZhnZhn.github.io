@@ -1,9 +1,10 @@
 import React from 'react';
 //import PropTypes from "prop-types";
 
-import withTheme from '../hoc/withTheme'
+import withTheme from '../hoc/withTheme';
 
-import SvgMore from './SvgMore'
+import SvgMore from './SvgMore';
+import SvgCheckBox from './SvgCheckBox';
 import SvgClose from './SvgClose';
 
 const TH_ID = 'ELEMENT';
@@ -42,6 +43,10 @@ const S = {
     //fill: 'silver',
     //stroke: 'silver'
   },
+  CHECK_BOX: {
+    marginLeft: 10,
+    marginRight: 10
+  },
   SVG_CLOSE: {
     position: 'absolute',
     top: '6px',
@@ -49,16 +54,32 @@ const S = {
   }
 };
 
-const BrowserCaption = ({ theme, isMore, caption, children, onMore, onClose }) => {
-  const TS = theme.getStyle(TH_ID)
+const _isFn = fn => typeof fn === 'function';
+
+const BrowserCaption = ({
+  theme,
+  onMore,
+  onCheck, onUnCheck,
+  caption, children,
+  onClose
+}) => {
+  const TS = theme.getStyle(TH_ID);
   return (
   <div className={CL.ROOT} style={{...S.ROOT, ...TS.ROOT}}>
      {
-       isMore &&
+       _isFn(onMore) &&
        <SvgMore
-         svgStyle={S.SVG_MORE}
-         onClick={onMore}
+          svgStyle={S.SVG_MORE}
+          onClick={onMore}
        />
+     }
+     {
+        (_isFn(onCheck) && _isFn(onUnCheck)) &&
+        <SvgCheckBox
+           style={S.CHECK_BOX}
+           onCheck={onCheck}
+           onUnCheck={onUnCheck}
+        />
      }
      <span
         className={CL.NOT_SELECTED}
@@ -76,6 +97,9 @@ const BrowserCaption = ({ theme, isMore, caption, children, onMore, onClose }) =
 }
 /*
 BrowserCaption.propTypes = {
+  onMore: PropTypes.func,
+  onCheck: PropTypes.func,
+  onUnCheck: PropTypes.func,
   caption: PropTypes.string,
   onClose: PropTypes.func
 }

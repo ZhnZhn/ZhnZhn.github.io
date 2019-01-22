@@ -1,0 +1,19 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/decorators/withToggle.js"
+ ],
+ "file": "../../../../src/components/dialogs/decorators/withToggle.js",
+ "names": [
+  "_toggleStateByWithToggle",
+  "propName",
+  "setState",
+  "prevState",
+  "withToggle",
+  "target",
+  "prototype",
+  "Object",
+  "assign"
+ ],
+ "mappings": ";;;;;;;;;;;;AACA,IAAMA,2BAA2B,SAA3BA,wBAA2B,CAASC,QAAT,EAAkB;AACjD,OAAKC,QAAL,CAAc;AAAA,6CACXD,QADW,EACA,CAACE,UAAUF,QAAV,CADD;AAAA,GAAd;AAGD,CAJD;;AAMA,IAAMG,aAAa,SAAbA,UAAa,SAAU;AAC3B,MAAI,CAACC,OAAOC,SAAP,CAAiBN,wBAAtB,EAAgD;AAC9CO,WAAOC,MAAP,CAAcH,OAAOC,SAArB,EAAgC;AAC9BN;AAD8B,KAAhC;AAGD;AACF,CAND;;kBAQeI,U"
+}

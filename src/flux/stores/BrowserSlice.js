@@ -85,6 +85,8 @@ const BrowserSlice = {
     }
   },
   addMenuItemCounter(chartType, browserType){
+    //const { chartType, browserType } = this.activeContChb
+    // || { chartType: cT, browserType: bT };
     if (this.isWithItemCounter(browserType)){
       fnAddCounter(chartType, browserType, this.browserMenu, 1);
     }

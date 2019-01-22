@@ -60,7 +60,34 @@ const CheckBoxChartLogic = {
        slice.activeChart = null
     }
   }
-}
+};
+
+const ChbContLogic = {
+  _check(slice, checkBox) {
+    if (slice.activeContChb) {
+      slice.activeContChb.setUnchecked()
+    }
+    slice.activeContChb = checkBox
+  },
+  _uncheck(slice) {
+    slice.activeContChb.setUnchecked()
+    slice.activeContChb = null
+  },
+
+  toggle(slice, { isCheck, checkBox }){
+    if (isCheck) {
+      this._check(slice, checkBox)
+    } else {
+      this._uncheck(slice)
+    }
+  },
+
+  uncheckActive(slice, chartType) {
+    if (slice.activeContChb) {
+      this._uncheck(slice)
+    }
+  }
+};
 
 const ComponentSlice = {
   dialogInit : {},
@@ -105,6 +132,7 @@ const ComponentSlice = {
   },
 
   onCloseChartContainer(chartType, browserType){
+    this.uncheckActiveContChb(chartType);
     this.uncheckActiveCheckbox(chartType);
     if(this.isWithItemCounter(browserType)){
       this.setMenuItemClose(chartType, browserType);
@@ -114,7 +142,12 @@ const ComponentSlice = {
   onCloseChartContainer2(chartType, browserType){
     this.trigger(CAT.CLOSE_CHART_CONTAINER_2, chartType);
   },
-
+  onSetActiveContainer(isCheck, checkBox){
+    ChbContLogic.toggle(this, { isCheck, checkBox })
+  },
+  uncheckActiveContChb(chartType){
+    ChbContLogic.uncheckActive(this, chartType)
+  },
 
   isLoadToChart(){
     if (this.activeChart){

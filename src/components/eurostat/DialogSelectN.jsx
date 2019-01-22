@@ -10,8 +10,19 @@ import withForDate from './withForDate'
 
 import RouterOptions from './RouterOptions';
 import PaneOptions from './PaneOptions'
+import PaneToggle from './PaneToggle'
 
 const  DF_MAP_FREQUENCY = 'M';
+
+const _crIsId = id => `is${id}Select`;
+
+const _crIsToggleInit = (selectProps) => {
+  let _isToggleInit = {};
+  selectProps.forEach(item => {
+    _isToggleInit[_crIsId(item.id)] = true
+  })
+  return _isToggleInit;
+};
 
 @Decor.withToolbar
 @Decor.withValidationLoad
@@ -70,7 +81,7 @@ class DialogSelectN extends Component {
     })
 
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { isOptions: true }
+      props, { noDate: true, isOptions: true, isToggle: true }
     )
     this._commandButtons = this._crCommandsWithLoad(this)
     this._chartOptions = RouterOptions.crOptions(props)
@@ -78,10 +89,12 @@ class DialogSelectN extends Component {
     this.state = {
       isToolbar: true,
       isOptions: false,
+      isToggle: false,
       isShowLabels: true,
       isShowDate: false,
       ...crDateConfig('EMPTY'),
-      validationMessages: []
+      validationMessages: [],
+      ..._crIsToggleInit(props.selectProps)
     }
   }
 
@@ -92,6 +105,12 @@ class DialogSelectN extends Component {
        }
     }
     return true;
+  }
+
+  _toggleStateBy = (propName) => {
+    this.setState(prevState => ({
+      [propName]: !prevState[propName]
+    }))
   }
 
   _isCategory = () => {
@@ -170,6 +189,7 @@ class DialogSelectN extends Component {
         items: this._items,
         dialogOptions,
         chartType, seriaColor,
+        isCategory: RouterOptions.isCategory(chartType),
         date
         /*
         selectOptions: [
@@ -197,17 +217,19 @@ class DialogSelectN extends Component {
   _renderSelects = (selectProps, isShow, isShowLabels) => {
       return selectProps.map((item, index) => {
         const { id, uri, jsonProp, caption } = item;
+        const _isShow = this.state[_crIsId(id)];
         return (
-          <D.SelectWithLoad
-            key={id}
-            ref={this._refSelect.bind(null, id)}
-            isShow={isShow}
-            isShowLabels={isShowLabels}
-            caption={caption}
-            uri={uri}
-            jsonProp={jsonProp}
-            onSelect={this._hSelect.bind(null, id, index)}
-          />
+          <D.ShowHide key={id} isShow={_isShow}>
+            <D.SelectWithLoad
+              ref={this._refSelect.bind(null, id)}
+              isShow={isShow}
+              isShowLabels={isShowLabels}
+              caption={caption}
+              uri={uri}
+              jsonProp={jsonProp}
+              onSelect={this._hSelect.bind(null, id, index)}
+            />
+          </D.ShowHide>
         );
       });
   }
@@ -220,7 +242,7 @@ class DialogSelectN extends Component {
       noDate
     } = this.props
     , {
-      isToolbar, isOptions,
+      isToolbar, isOptions, isToggle,
       isShowLabels, isShowDate,
       dateDefault, dateOptions,
       validationMessages
@@ -244,6 +266,14 @@ class DialogSelectN extends Component {
              isShow={isOptions}
              toggleOption={this._toggleOptionWithToolbar}
              onClose={this._hideOptionsWithToolbar}
+           />
+           <PaneToggle
+             isShow={isToggle}
+             selectProps={selectProps}
+             isShowDate={isShowDate}
+             crIsId={_crIsId}
+             onToggle={this._toggleStateBy}
+             onClose={this._hideToggleWithToolbar}
            />
            {this._renderSelects(selectProps, isShow, isShowLabels)}
            <D.RowChart

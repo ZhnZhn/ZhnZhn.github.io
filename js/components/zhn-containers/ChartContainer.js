@@ -126,7 +126,7 @@ var ChartContainer = (_temp = _class = function (_Component) {
   function ChartContainer(props) {
     (0, _classCallCheck3.default)(this, ChartContainer);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ChartContainer.__proto__ || Object.getPrototypeOf(ChartContainer)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ChartContainer.__proto__ || Object.getPrototypeOf(ChartContainer)).call(this, props));
 
     _initialiseProps.call(_this);
 
@@ -142,6 +142,9 @@ var ChartContainer = (_temp = _class = function (_Component) {
       onMinusWidth: _this._minusToWidth,
       onFit: _this._fitToWidth
     });
+
+    _this._hSetActive = _this._toggleChb.bind(_this, true);
+    _this._hSetNotActive = _this._toggleChb.bind(_this, false);
 
     _this.state = {
       isMore: false
@@ -167,8 +170,8 @@ var ChartContainer = (_temp = _class = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          caption = _props.caption,
           theme = _props.theme,
+          caption = _props.caption,
           TS = theme.getStyle(TH_ID),
           _state = this.state,
           isShow = _state.isShow,
@@ -193,9 +196,10 @@ var ChartContainer = (_temp = _class = function (_Component) {
         _react2.default.createElement(
           _BrowserCaption2.default,
           {
-            isMore: true,
-            caption: caption,
             onMore: this._showMore,
+            onCheck: this._hSetActive,
+            onUnCheck: this._hSetNotActive,
+            caption: caption,
             onClose: this._hHide
           },
           _react2.default.createElement(_SvgHrzResize2.default, {
@@ -222,7 +226,9 @@ var ChartContainer = (_temp = _class = function (_Component) {
     }
   }]);
   return ChartContainer;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
+}(_react.Component), _class.defaultProps = {
+  onSetActive: function onSetActive() {}
+}, _initialiseProps = function _initialiseProps() {
   var _this2 = this;
 
   this._isDataForContainer = function (data) {
@@ -244,11 +250,22 @@ var ChartContainer = (_temp = _class = function (_Component) {
     }
   };
 
-  this._hHide = function () {
+  this._toggleChb = function (isCheck, checkBox) {
     var _props2 = _this2.props,
+        onSetActive = _props2.onSetActive,
         chartType = _props2.chartType,
-        browserType = _props2.browserType,
-        onCloseContainer = _props2.onCloseContainer;
+        browserType = _props2.browserType;
+
+    checkBox.chartType = chartType;
+    checkBox.browserType = browserType;
+    onSetActive(isCheck, checkBox);
+  };
+
+  this._hHide = function () {
+    var _props3 = _this2.props,
+        chartType = _props3.chartType,
+        browserType = _props3.browserType,
+        onCloseContainer = _props3.onCloseContainer;
 
     onCloseContainer(chartType, browserType);
     _this2.setState({ isShow: false });
@@ -287,10 +304,10 @@ var ChartContainer = (_temp = _class = function (_Component) {
   };
 
   this._renderCharts = function () {
-    var _props3 = _this2.props,
-        chartType = _props3.chartType,
-        browserType = _props3.browserType,
-        onCloseItem = _props3.onCloseItem,
+    var _props4 = _this2.props,
+        chartType = _props4.chartType,
+        browserType = _props4.browserType,
+        onCloseItem = _props4.onCloseItem,
         _state$configs = _this2.state.configs,
         configs = _state$configs === undefined ? [] : _state$configs,
         _isAdminMode = typeof _ChartStore2.default.isAdminMode == 'function' ? _ChartStore2.default.isAdminMode.bind(_ChartStore2.default) : false;

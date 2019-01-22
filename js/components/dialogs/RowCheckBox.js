@@ -57,6 +57,9 @@ var STYLE = {
 var _isFn = function _isFn(fn) {
   return typeof fn == 'function';
 };
+var _isUndefined = function _isUndefined(v) {
+  return typeof v === 'undefined';
+};
 
 var RowCheckBox = function (_Component) {
   (0, _inherits3.default)(RowCheckBox, _Component);
@@ -66,6 +69,7 @@ var RowCheckBox = function (_Component) {
     rootStyle : PropTypes.object,
     caption: PropTypes.string,
     initValue: PropTypes.bool,
+    value: PropTypes.bool,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func,
     onToggle: PropTypes.func
@@ -75,7 +79,7 @@ var RowCheckBox = function (_Component) {
   function RowCheckBox(props) {
     (0, _classCallCheck3.default)(this, RowCheckBox);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (RowCheckBox.__proto__ || Object.getPrototypeOf(RowCheckBox)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (RowCheckBox.__proto__ || Object.getPrototypeOf(RowCheckBox)).call(this, props));
 
     _this._handleCheck = function () {
       var _this$props = _this.props,
@@ -87,7 +91,9 @@ var RowCheckBox = function (_Component) {
       } else if (_isFn(onToggle)) {
         onToggle();
       }
-      _this.setState({ isChecked: true });
+      if (_this.state) {
+        _this.setState({ isChecked: true });
+      }
     };
 
     _this._handleUnCheck = function () {
@@ -100,22 +106,26 @@ var RowCheckBox = function (_Component) {
       } else if (_isFn(onToggle)) {
         onToggle();
       }
-      _this.setState({ isChecked: false });
+      if (_this.state) {
+        _this.setState({ isChecked: false });
+      }
     };
 
     _this._handleToggle = function () {
-      var isChecked = _this.state.isChecked;
-
-      if (isChecked) {
+      var _is = _this.state ? _this.state.isChecked : _this.props.value;
+      //const { isChecked } = this.state;
+      if (_is) {
         _this._handleUnCheck();
       } else {
         _this._handleCheck();
       }
     };
 
-    _this.state = {
-      isChecked: !!props.initValue
-    };
+    if (_isUndefined(props.value)) {
+      _this.state = {
+        isChecked: !!props.initValue
+      };
+    }
     return _this;
   }
 
@@ -125,14 +135,16 @@ var RowCheckBox = function (_Component) {
       var _props = this.props,
           rootStyle = _props.rootStyle,
           caption = _props.caption,
-          isChecked = this.state.isChecked,
-          _style = isChecked ? STYLE.CHECKED : null;
+          value = _props.value,
+          _value = this.state ? this.state.isChecked : value,
+          _style = _value ? STYLE.CHECKED : null;
 
       return _react2.default.createElement(
         'div',
         { style: (0, _extends3.default)({}, STYLE.ROOT, rootStyle) },
-        _react2.default.createElement(_SvgCheckBox2.default, {
-          value: isChecked,
+        _react2.default.createElement(_SvgCheckBox2.default
+        //value={isChecked}
+        , { value: _value,
           onCheck: this._handleCheck,
           onUnCheck: this._handleUnCheck
         }),

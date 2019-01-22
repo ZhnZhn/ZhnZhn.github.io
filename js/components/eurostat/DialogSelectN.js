@@ -8,6 +8,10 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -59,9 +63,25 @@ var _PaneOptions = require('./PaneOptions');
 
 var _PaneOptions2 = _interopRequireDefault(_PaneOptions);
 
+var _PaneToggle = require('./PaneToggle');
+
+var _PaneToggle2 = _interopRequireDefault(_PaneToggle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DF_MAP_FREQUENCY = 'M';
+
+var _crIsId = function _crIsId(id) {
+  return 'is' + id + 'Select';
+};
+
+var _crIsToggleInit = function _crIsToggleInit(selectProps) {
+  var _isToggleInit = {};
+  selectProps.forEach(function (item) {
+    _isToggleInit[_crIsId(item.id)] = true;
+  });
+  return _isToggleInit;
+};
 
 var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = (0, _withForDate2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(DialogSelectN, _Component);
@@ -70,6 +90,12 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
     (0, _classCallCheck3.default)(this, DialogSelectN);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (DialogSelectN.__proto__ || Object.getPrototypeOf(DialogSelectN)).call(this, props));
+
+    _this._toggleStateBy = function (propName) {
+      _this.setState(function (prevState) {
+        return (0, _defineProperty3.default)({}, propName, !prevState[propName]);
+      });
+    };
 
     _this._isCategory = function () {
       return _RouterOptions2.default.isCategory(_this.chartType);
@@ -141,6 +167,7 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
         items: _this._items,
         dialogOptions: dialogOptions,
         chartType: chartType, seriaColor: seriaColor,
+        isCategory: _RouterOptions2.default.isCategory(chartType),
         date: date
         /*
         selectOptions: [
@@ -173,16 +200,20 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
             jsonProp = item.jsonProp,
             caption = item.caption;
 
-        return _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
-          key: id,
-          ref: _this._refSelect.bind(null, id),
-          isShow: isShow,
-          isShowLabels: isShowLabels,
-          caption: caption,
-          uri: uri,
-          jsonProp: jsonProp,
-          onSelect: _this._hSelect.bind(null, id, index)
-        });
+        var _isShow = _this.state[_crIsId(id)];
+        return _react2.default.createElement(
+          _DialogCell2.default.ShowHide,
+          { key: id, isShow: _isShow },
+          _react2.default.createElement(_DialogCell2.default.SelectWithLoad, {
+            ref: _this._refSelect.bind(null, id),
+            isShow: isShow,
+            isShowLabels: isShowLabels,
+            caption: caption,
+            uri: uri,
+            jsonProp: jsonProp,
+            onSelect: _this._hSelect.bind(null, id, index)
+          })
+        );
       });
     };
 
@@ -196,18 +227,19 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
       onAbout: _this._clickInfoWithToolbar
     });
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props, { isOptions: true });
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, isOptions: true, isToggle: true });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
     _this._chartOptions = _RouterOptions2.default.crOptions(props);
 
     _this.state = (0, _extends3.default)({
       isToolbar: true,
       isOptions: false,
+      isToggle: false,
       isShowLabels: true,
       isShowDate: false
     }, (0, _crDateConfig2.default)('EMPTY'), {
       validationMessages: []
-    });
+    }, _crIsToggleInit(props.selectProps));
     return _this;
   }
   /*
@@ -262,6 +294,7 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
           _state = this.state,
           isToolbar = _state.isToolbar,
           isOptions = _state.isOptions,
+          isToggle = _state.isToggle,
           isShowLabels = _state.isShowLabels,
           isShowDate = _state.isShowDate,
           dateDefault = _state.dateDefault,
@@ -288,6 +321,14 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
           isShow: isOptions,
           toggleOption: this._toggleOptionWithToolbar,
           onClose: this._hideOptionsWithToolbar
+        }),
+        _react2.default.createElement(_PaneToggle2.default, {
+          isShow: isToggle,
+          selectProps: selectProps,
+          isShowDate: isShowDate,
+          crIsId: _crIsId,
+          onToggle: this._toggleStateBy,
+          onClose: this._hideToggleWithToolbar
         }),
         this._renderSelects(selectProps, isShow, isShowLabels),
         _react2.default.createElement(_DialogCell2.default.RowChart, {

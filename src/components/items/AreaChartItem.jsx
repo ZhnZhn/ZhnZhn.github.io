@@ -89,7 +89,7 @@ class AreaChartItem extends Component {
         , _itemCaption = itemCaption
               ? itemCaption : caption;
 
-    this._chartId = id    
+    this._chartId = id
 
     this._dataSourceEl = (
        <div style={S.DATA_SOURCE}>

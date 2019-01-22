@@ -52,9 +52,11 @@ var _calcDeltaYAxis2 = _interopRequireDefault(_calcDeltaYAxis);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fnFindIndex = _fnArr2.default.findIndexByProp('x');
-//import ChartConfig from './ChartConfig';
+var _crValueMoving = _mathFn2.default.crValueMoving,
+    toFixedNumber = _mathFn2.default.toFixedNumber;
 
+
+var _fnFindIndex = _fnArr2.default.findIndexByProp('x');
 
 var C = {
   C1_SECOND_Y_AXIS: '#f45b5b',
@@ -169,6 +171,11 @@ var _updateYAxisMin = function _updateYAxisMin(_ref3) {
   }
 };
 
+var _setPlotLine = function _setPlotLine(plotLine, value) {
+  plotLine.value = value;
+  plotLine.label.text = (0, _formatAllNumber2.default)(toFixedNumber(value));
+};
+
 var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
   arCalcDeltaYAxis: _calcDeltaYAxis2.default,
 
@@ -248,22 +255,15 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
   crValueMoving: function crValueMoving(chart, prev, dateTo) {
     var points = chart.series[0].data,
         millisUTC = _DateUtils2.default.dmyToUTC(dateTo),
-        index = _fnFindIndex(points, millisUTC);
+        index = _fnFindIndex(points, millisUTC),
+        valueTo = index !== -1 ? points[index].y : undefined;
 
-    var valueTo = void 0;
-    if (index !== -1) {
-      valueTo = points[index].y;
-      var valueMoving = Object.assign({}, prev, _mathFn2.default.crValueMoving({
-        nowValue: prev.value,
-        prevValue: valueTo,
-        Direction: _Type.Direction,
-        fnFormat: _formatAllNumber2.default
-        //fnFormat: ChartConfig.fnNumberFormat
-      }), { valueTo: valueTo, dateTo: dateTo });
-      return valueMoving;
-    } else {
-      return undefined;
-    }
+    return valueTo !== undefined ? Object.assign({}, prev, _crValueMoving({
+      nowValue: prev.value,
+      prevValue: valueTo,
+      Direction: _Type.Direction,
+      fnFormat: _formatAllNumber2.default
+    }), { valueTo: valueTo, dateTo: dateTo }) : undefined;
   },
   _addAxis: function _addAxis(toChart, id, color) {
     toChart.addAxis({
@@ -319,7 +319,20 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
   },
 
   toDateFormatDMY: _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y'),
-  toDateFormatDMYT: _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M')
+  toDateFormatDMYT: _highcharts2.default.dateFormat.bind(null, '%A, %b %d, %Y, %H:%M'),
+
+  setPlotLinesMinMax: function setPlotLinesMinMax(_ref4) {
+    var plotLines = _ref4.plotLines,
+        min = _ref4.min,
+        max = _ref4.max;
+
+    if (max > Number.NEGATIVE_INFINITY) {
+      _setPlotLine(plotLines[0], max);
+    }
+    if (min < Number.POSITIVE_INFINITY) {
+      _setPlotLine(plotLines[1], min);
+    }
+  }
 
 });
 

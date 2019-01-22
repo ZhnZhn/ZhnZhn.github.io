@@ -21,7 +21,8 @@ var _isChartExist = _ChartLogic2.default.isChartExist,
     showChart = _ChartLogic2.default.showChart,
     removeConfig = _ChartLogic2.default.removeConfig,
     toTop = _ChartLogic2.default.toTop,
-    sortBy = _ChartLogic2.default.sortBy;
+    sortBy = _ChartLogic2.default.sortBy,
+    checkBrowserChartTypes = _ChartLogic2.default.checkBrowserChartTypes;
 
 
 var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
@@ -40,7 +41,11 @@ var ChartSlice = {
   getConfigs: function getConfigs(chartType) {
     return this.charts[chartType];
   },
-  isChartExist: function isChartExist(chartType, key) {
+  isChartExist: function isChartExist(option) {
+    checkBrowserChartTypes(this, option);
+    var chartType = option.chartType,
+        key = option.key;
+
     return _isChartExist(this.charts, chartType, key);
   },
   onLoadStock: function onLoadStock() {

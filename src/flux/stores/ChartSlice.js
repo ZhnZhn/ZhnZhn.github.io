@@ -9,7 +9,8 @@ const {
   loadConfig, showChart,
   removeConfig,
   toTop,
-  sortBy
+  sortBy,
+  checkBrowserChartTypes
 } = ChartLogic;
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
@@ -26,18 +27,20 @@ const ChartSlice = {
   getConfigs(chartType){
     return this.charts[chartType];
   },
-  isChartExist(chartType, key){
+  isChartExist(option){
+    checkBrowserChartTypes(this, option)
+    const { chartType, key } = option;
     return isChartExist(this.charts, chartType, key);
   },
 
   onLoadStock(){
     this.triggerLoadingProgress(LPA.LOADING)
   },
-  onLoadStockCompleted(option, config){
+  onLoadStockCompleted(option, config){      
       const {
-              chartType, browserType,
-              limitRemaining
-            } = option;
+        chartType, browserType,
+        limitRemaining
+      } = option;
 
       this.addMenuItemCounter(chartType, browserType);
 

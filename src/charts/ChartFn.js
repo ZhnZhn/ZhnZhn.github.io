@@ -9,13 +9,14 @@ import DateUtils from '../utils/DateUtils';
 import safeGet from '../utils/safeGet';
 
 import Chart from './Chart';
-//import ChartConfig from './ChartConfig';
+
 import { Direction } from '../constants/Type';
 
 
 import WithAreaChartFn from './WithAreaChartFn'
 import calcDeltaYAxis from './calcDeltaYAxis'
 
+const { crValueMoving, toFixedNumber } = mathFn;
 
 const _fnFindIndex = fnArr.findIndexByProp('x');
 
@@ -115,6 +116,12 @@ const _updateYAxisMin = ({ hasSecondYAxis, series, options={}, chart }) => {
   }
 };
 
+const _setPlotLine = (plotLine, value) => {
+  plotLine.value = value;
+  plotLine.label.text = formatAllNumber(
+    toFixedNumber(value)
+  );
+};
 
 const ChartFn = {
   ...WithAreaChartFn,
@@ -176,7 +183,7 @@ const ChartFn = {
       })
     }
   },
-  afterSetExtremesYAxis(event){    
+  afterSetExtremesYAxis(event){
     const { trigger, userMax, userMin } = event;
     if (trigger === 'zoom' && userMax) {
       this.setExtremes(
@@ -189,26 +196,22 @@ const ChartFn = {
   crValueMoving(chart, prev, dateTo){
     const points = chart.series[0].data
         , millisUTC = DateUtils.dmyToUTC(dateTo)
-        , index = _fnFindIndex(points, millisUTC);
+        , index = _fnFindIndex(points, millisUTC)
+        , valueTo = index !== -1
+            ? points[index].y
+            : undefined;
 
-    let valueTo;
-    if (index !== -1) {
-      valueTo = points[index].y
-      const valueMoving = Object.assign(
-        {}, prev,
-        mathFn.crValueMoving({
-          nowValue: prev.value,
-          prevValue: valueTo,
-          Direction: Direction,
-          fnFormat: formatAllNumber
-          //fnFormat: ChartConfig.fnNumberFormat
-        }),
-        { valueTo, dateTo }
-      )
-      return valueMoving;
-    } else {
-      return undefined;
-    }
+    return valueTo !== undefined
+      ? Object.assign({}, prev,
+          crValueMoving({
+            nowValue: prev.value,
+            prevValue: valueTo,
+            Direction: Direction,
+            fnFormat: formatAllNumber
+          }),
+          { valueTo, dateTo }
+        )
+     : undefined;
   },
 
   _addAxis(toChart, id, color){
@@ -278,7 +281,16 @@ const ChartFn = {
   toDateFormatDMY: Highcharts
      .dateFormat.bind(null, '%A, %b %d, %Y'),
   toDateFormatDMYT: Highcharts
-     .dateFormat.bind(null, '%A, %b %d, %Y, %H:%M')
+     .dateFormat.bind(null, '%A, %b %d, %Y, %H:%M'),
+
+  setPlotLinesMinMax: ({ plotLines, min, max }) => {
+    if ( max>Number.NEGATIVE_INFINITY ){
+      _setPlotLine(plotLines[0], max)
+    }
+    if ( min<Number.POSITIVE_INFINITY ){
+      _setPlotLine(plotLines[1], min)
+    }
+  }
 
 }
 

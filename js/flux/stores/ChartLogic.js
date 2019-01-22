@@ -19,7 +19,9 @@ var _fCompareBy2 = _interopRequireDefault(_fCompareBy);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _getSlice = function _getSlice(slice, chartType) {
-  var chartSlice = slice[chartType],
+  var activeContChb = slice.activeContChb,
+      _cT = activeContChb ? activeContChb.chartType || chartType : chartType,
+      chartSlice = slice[_cT],
       _ref = chartSlice || {},
       configs = _ref.configs;
 
@@ -139,6 +141,14 @@ var ChartLogic = {
       configs.reverse();
     }
     return chartSlice;
+  },
+  checkBrowserChartTypes: function checkBrowserChartTypes(slice, option) {
+    var chb = slice.activeContChb;
+
+    if (chb) {
+      option.chartType = chb.chartType;
+      option.browserType = chb.browserType;
+    }
   }
 };
 

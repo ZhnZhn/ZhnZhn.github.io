@@ -7,7 +7,7 @@ import HeaderBar from './header/HeaderBar';
 
 import BrowserContainer from './browser-container/BrowserContainer';
 import About from './about/About';
-import ComponentHrzContainer from './chart-container/ComponentHrzContainer';
+import CompContainer from './zhn-containers/CompContainer';
 import DialogContainer from './dialogs/DialogContainer';
 
 import ComponentActions, { ComponentActionTypes as CAT } from '../flux/actions/ComponentActions';
@@ -17,7 +17,7 @@ import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '11-01-2019';
+const PREV_BUILD = '22-01-2019';
 
 const _checkBuild = () => {
   if (window.fetch) {
@@ -77,9 +77,9 @@ class AppErc extends Component {
               onCloseDialog={ComponentActions.closeDialog}
            />
            <About store={ChartStore} isShow={true} />
-           <ComponentHrzContainer
-              store={ChartStore}
-              addAction={CHAT.INIT_AND_SHOW_CHART}
+           <CompContainer
+             store={ChartStore}
+             addAction={CHAT.INIT_AND_SHOW_CHART}
            />
        </div>
        <DialogContainer store={ChartStore} />

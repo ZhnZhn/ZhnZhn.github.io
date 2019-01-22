@@ -48,9 +48,9 @@ var _About = require('./about/About');
 
 var _About2 = _interopRequireDefault(_About);
 
-var _ComponentHrzContainer = require('./chart-container/ComponentHrzContainer');
+var _CompContainer = require('./zhn-containers/CompContainer');
 
-var _ComponentHrzContainer2 = _interopRequireDefault(_ComponentHrzContainer);
+var _CompContainer2 = _interopRequireDefault(_CompContainer);
 
 var _DialogContainer = require('./dialogs/DialogContainer');
 
@@ -74,7 +74,7 @@ var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '11-01-2019';
+var PREV_BUILD = '22-01-2019';
 
 var _checkBuild = function _checkBuild() {
   if (window.fetch) {
@@ -157,7 +157,7 @@ var AppErc = function (_Component) {
             onCloseDialog: _ComponentActions2.default.closeDialog
           }),
           _react2.default.createElement(_About2.default, { store: _ChartStore2.default, isShow: true }),
-          _react2.default.createElement(_ComponentHrzContainer2.default, {
+          _react2.default.createElement(_CompContainer2.default, {
             store: _ChartStore2.default,
             addAction: _ChartActions.ChartActionTypes.INIT_AND_SHOW_CHART
           })

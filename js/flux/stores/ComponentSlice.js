@@ -75,6 +75,34 @@ var CheckBoxChartLogic = {
   }
 };
 
+var ChbContLogic = {
+  _check: function _check(slice, checkBox) {
+    if (slice.activeContChb) {
+      slice.activeContChb.setUnchecked();
+    }
+    slice.activeContChb = checkBox;
+  },
+  _uncheck: function _uncheck(slice) {
+    slice.activeContChb.setUnchecked();
+    slice.activeContChb = null;
+  },
+  toggle: function toggle(slice, _ref) {
+    var isCheck = _ref.isCheck,
+        checkBox = _ref.checkBox;
+
+    if (isCheck) {
+      this._check(slice, checkBox);
+    } else {
+      this._uncheck(slice);
+    }
+  },
+  uncheckActive: function uncheckActive(slice, chartType) {
+    if (slice.activeContChb) {
+      this._uncheck(slice);
+    }
+  }
+};
+
 var ComponentSlice = {
   dialogInit: {},
 
@@ -114,6 +142,7 @@ var ComponentSlice = {
     });
   },
   onCloseChartContainer: function onCloseChartContainer(chartType, browserType) {
+    this.uncheckActiveContChb(chartType);
     this.uncheckActiveCheckbox(chartType);
     if (this.isWithItemCounter(browserType)) {
       this.setMenuItemClose(chartType, browserType);
@@ -122,6 +151,12 @@ var ComponentSlice = {
   },
   onCloseChartContainer2: function onCloseChartContainer2(chartType, browserType) {
     this.trigger(_ComponentActions.ComponentActionTypes.CLOSE_CHART_CONTAINER_2, chartType);
+  },
+  onSetActiveContainer: function onSetActiveContainer(isCheck, checkBox) {
+    ChbContLogic.toggle(this, { isCheck: isCheck, checkBox: checkBox });
+  },
+  uncheckActiveContChb: function uncheckActiveContChb(chartType) {
+    ChbContLogic.uncheckActive(this, chartType);
   },
   isLoadToChart: function isLoadToChart() {
     if (this.activeChart) {

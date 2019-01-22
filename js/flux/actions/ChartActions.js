@@ -49,6 +49,9 @@ var C = {
 
 var META = '_Meta';
 var _fnNoop = function _fnNoop() {};
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
 
 var ChartActionTypes = exports.ChartActionTypes = {
   INIT_AND_SHOW_CHART: 'initAndShowChart',
@@ -84,9 +87,9 @@ var _fnCancelLoad = function _fnCancelLoad(option, alertMsg, isWithFailed) {
   this.failed(option);
   this.isShouldEmit = false;
 
-  if (typeof option.onCancel === 'function') {
+  if (_isFn(option.onCancel)) {
     option.onCancel();
-  } else if (isWithFailed && typeof option.onFailed === 'function') {
+  } else if (isWithFailed && _isFn(option.onFailed)) {
     option.onFailed();
   }
 };
@@ -97,13 +100,17 @@ var _addBoolOptionTo = function _addBoolOptionTo(options, propName) {
   }
 };
 
-var _addSettings = function _addSettings(options) {
+var _addSettingsTo = function _addSettingsTo(options) {
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
   var loadId = options.loadId;
 
-  Object.assign(options, {
+  Object.assign.apply(Object, [options].concat(args, [{
     apiKey: _ChartStore2.default.getKey(loadId),
     proxy: _ChartStore2.default.getProxy(loadId)
-  });
+  }]));
   _addBoolOptionTo(options, 'isDrawDeltaExtrems');
   _addBoolOptionTo(options, 'isNotZoomToMinMax');
 };
@@ -147,15 +154,14 @@ var _checkMsgApiKey = function _checkMsgApiKey(option) {
 ChartActions[A.LOAD_STOCK].preEmit = function () {
   var confItem = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var chartType = confItem.chartType,
-      key = _LogicUtils2.default.createKeyForConfig(option),
+
+  var key = _LogicUtils2.default.createKeyForConfig(option),
       isDoublingLoad = this.isLoading && key === this.idLoading,
       isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
 
-
-  option.key = key;
   this.isShouldEmit = true;
-  _addSettings(option);
+  //{ chartType, browserType, conf } = confItem
+  _addSettingsTo(option, confItem, { key: key });
 
   var _msgApiKey = _checkMsgApiKey(option);
   if (_msgApiKey) {
@@ -165,7 +171,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function () {
   } else if (isDoublLoadMeta) {
     this.cancelLoad(option, M.DOUBLE_LOAD_META, false);
   } else if (!_ChartStore2.default.isLoadToChart()) {
-    if (_ChartStore2.default.isChartExist(chartType, key)) {
+    if (_ChartStore2.default.isChartExist(option)) {
       this.cancelLoad(option, M.ALREADY_EXIST, true);
     }
   }
@@ -176,23 +182,13 @@ ChartActions[A.LOAD_STOCK].shouldEmit = function () {
   return this.isShouldEmit;
 };
 ChartActions[A.LOAD_STOCK].listen(function (confItem, option) {
-  var chartType = confItem.chartType,
-      browserType = confItem.browserType,
-      conf = confItem.conf;
-
-  option.conf = conf;
-
-  this.isLoading = true;
-  this.idLoading = option.key;
-  if (option.isLoadMeta) {
-    this.idLoading = this.idLoading + META;
-  }
-
-  var _option$loadId = option.loadId,
+  var key = option.key,
+      isLoadMeta = option.isLoadMeta,
+      _option$loadId = option.loadId,
       loadId = _option$loadId === undefined ? 'Q' : _option$loadId;
 
-  option.chartType = chartType;
-  option.browserType = browserType;
+  this.isLoading = true;
+  this.idLoading = isLoadMeta ? key + META : key;
   _LoadConfig2.default[loadId].loadItem(option, this.completed, this.added, this.failed);
 });
 
@@ -225,7 +221,7 @@ ChartActions[A.LOAD_STOCK_BY_QUERY].listen(function (option) {
   if (impl) {
     var addPropsTo = impl.addPropsTo;
 
-    if (typeof addPropsTo === 'function') {
+    if (_isFn(addPropsTo)) {
       addPropsTo(option);
     }
     impl.loadItem(option, this.completed, _fnNoop, this.failed);

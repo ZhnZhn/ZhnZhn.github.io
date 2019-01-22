@@ -20,14 +20,19 @@ var _SvgMore = require('./SvgMore');
 
 var _SvgMore2 = _interopRequireDefault(_SvgMore);
 
+var _SvgCheckBox = require('./SvgCheckBox');
+
+var _SvgCheckBox2 = _interopRequireDefault(_SvgCheckBox);
+
 var _SvgClose = require('./SvgClose');
 
 var _SvgClose2 = _interopRequireDefault(_SvgClose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TH_ID = 'ELEMENT';
 //import PropTypes from "prop-types";
+
+var TH_ID = 'ELEMENT';
 
 var CL = {
   ROOT: 'gap-right',
@@ -63,6 +68,10 @@ var S = {
     //fill: 'silver',
     //stroke: 'silver'
   },
+  CHECK_BOX: {
+    marginLeft: 10,
+    marginRight: 10
+  },
   SVG_CLOSE: {
     position: 'absolute',
     top: '6px',
@@ -70,21 +79,31 @@ var S = {
   }
 };
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
 var BrowserCaption = function BrowserCaption(_ref) {
   var theme = _ref.theme,
-      isMore = _ref.isMore,
+      onMore = _ref.onMore,
+      onCheck = _ref.onCheck,
+      onUnCheck = _ref.onUnCheck,
       caption = _ref.caption,
       children = _ref.children,
-      onMore = _ref.onMore,
       onClose = _ref.onClose;
 
   var TS = theme.getStyle(TH_ID);
   return _react2.default.createElement(
     'div',
     { className: CL.ROOT, style: (0, _extends3.default)({}, S.ROOT, TS.ROOT) },
-    isMore && _react2.default.createElement(_SvgMore2.default, {
+    _isFn(onMore) && _react2.default.createElement(_SvgMore2.default, {
       svgStyle: S.SVG_MORE,
       onClick: onMore
+    }),
+    _isFn(onCheck) && _isFn(onUnCheck) && _react2.default.createElement(_SvgCheckBox2.default, {
+      style: S.CHECK_BOX,
+      onCheck: onCheck,
+      onUnCheck: onUnCheck
     }),
     _react2.default.createElement(
       'span',
@@ -103,6 +122,9 @@ var BrowserCaption = function BrowserCaption(_ref) {
 };
 /*
 BrowserCaption.propTypes = {
+  onMore: PropTypes.func,
+  onCheck: PropTypes.func,
+  onUnCheck: PropTypes.func,
   caption: PropTypes.string,
   onClose: PropTypes.func
 }

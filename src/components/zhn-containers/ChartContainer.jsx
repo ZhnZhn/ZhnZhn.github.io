@@ -65,15 +65,18 @@ const compActions = [
   CHAT.CLOSE_CHART
 ];
 
-const _getWidth = (style) => {
-  return parseInt(style.width, 10)
-    || RESIZE_INIT_WIDTH;
-}
+const _getWidth = style => parseInt(style.width, 10)
+  || RESIZE_INIT_WIDTH;
+
 
 class ChartContainer extends Component {
 
+  static defaultProps = {
+    onSetActive: () => {}
+  }
+
   constructor(props){
-    super();
+    super(props);
     const { chartType } = props;
     this.childMargin = CHILD_MARGIN;
 
@@ -85,6 +88,9 @@ class ChartContainer extends Component {
       onMinusWidth: this._minusToWidth,
       onFit: this._fitToWidth,
     })
+
+    this._hSetActive = this._toggleChb.bind(this, true)
+    this._hSetNotActive = this._toggleChb.bind(this, false)
 
     this.state = {
       isMore: false
@@ -118,6 +124,16 @@ class ChartContainer extends Component {
          this._hHide();
        }
      }
+   }
+
+   _toggleChb = (isCheck, checkBox) => {
+      const {
+        onSetActive,
+        chartType, browserType
+      } = this.props;
+      checkBox.chartType = chartType
+      checkBox.browserType = browserType
+      onSetActive(isCheck, checkBox)
    }
 
    _hHide = () => {
@@ -203,15 +219,17 @@ class ChartContainer extends Component {
    _refSpComp = node => this.spComp = node
 
    render(){
-     const  { caption, theme } = this.props
-          , TS = theme.getStyle(TH_ID)
-          , { isShow, isMore } = this.state
-          , _styleIsShow = (isShow)
-               ? S.INLINE
-               : S.NONE
-         , _classIsShow = (isShow)
-               ? `${CL.ROOT} ${CL.SHOW}`
-               : CL.ROOT;
+     const  {
+       theme, caption
+     } = this.props
+     , TS = theme.getStyle(TH_ID)
+     , { isShow, isMore } = this.state
+     , _styleIsShow = (isShow)
+          ? S.INLINE
+          : S.NONE
+     , _classIsShow = (isShow)
+          ? `${CL.ROOT} ${CL.SHOW}`
+          : CL.ROOT;
      return(
         <div
            ref={this._refRootNode}
@@ -221,14 +239,15 @@ class ChartContainer extends Component {
           <ModalSlider
             isShow={isMore}
             className={CL.MENU_MORE}
-            style={TS.EL_BORDER}            
+            style={TS.EL_BORDER}
             model={this._MODEL}
             onClose={this._hToggleMore}
           />
           <BrowserCaption
-             isMore={true}
-             caption={caption}
              onMore={this._showMore}
+             onCheck={this._hSetActive}
+             onUnCheck={this._hSetNotActive}
+             caption={caption}
              onClose={this._hHide}
           >
              <SvgHrzResize

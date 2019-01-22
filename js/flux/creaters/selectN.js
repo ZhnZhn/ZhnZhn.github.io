@@ -10,6 +10,10 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _getCaption = function _getCaption(item) {
+  return item && item.caption || '';
+};
+
 var createLoadOptions = function createLoadOptions() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -24,18 +28,16 @@ var createLoadOptions = function createLoadOptions() {
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
+      isCategory = options.isCategory,
       date = options.date,
-      _ref = items[0] || {},
-      _ref$caption = _ref.caption,
-      oneC = _ref$caption === undefined ? '' : _ref$caption,
-      _ref2 = items[1] || {},
-      _ref2$caption = _ref2.caption,
-      twoC = _ref2$caption === undefined ? '' : _ref2$caption,
-      _ref3 = items[2] || {},
-      _ref3$caption = _ref3.caption,
-      threeC = _ref3$caption === undefined ? '' : _ref3$caption,
+      oneC = _getCaption(items[0]),
+      twoC = _getCaption(items[1]),
+      threeC = _getCaption(items[2]),
+      fourC = _getCaption(items[3]),
       seriaType = chartType.value,
-      compType = chartType.compType;
+      compType = chartType.compType,
+      _title = isCategory ? twoC : oneC,
+      _subtitle = isCategory ? threeC + ': ' + fourC : twoC + ': ' + threeC;
 
   return (0, _extends3.default)({}, dfProps, dialogOptions, {
     seriaType: seriaType,
@@ -45,8 +47,8 @@ var createLoadOptions = function createLoadOptions() {
     time: date,
     loadId: loadId,
     itemCaption: oneC,
-    title: oneC,
-    subtitle: twoC + ': ' + threeC,
+    title: _title,
+    subtitle: _subtitle,
     alertItemId: oneC + ': ' + threeC,
     alertGeo: oneC,
     alertMetric: threeC,

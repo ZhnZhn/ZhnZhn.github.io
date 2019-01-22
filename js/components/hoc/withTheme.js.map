@@ -6,10 +6,8 @@
  "file": "../../../src/components/hoc/withTheme.js",
  "names": [
   "withTheme",
-  "Wrapper",
   "props",
-  "theme",
-  "Component"
+  "theme"
  ],
- "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,YAAY,SAAZA,SAAY,CAACC,OAAD;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA,+BACR;AAAA;;AACN,eACE;AAAC,gCAAD,CAAc,QAAd;AAAA;AACI;AAAA,mBAAS,8BAAC,OAAD,6BAAa,OAAKC,KAAlB,IAAyB,OAAOC,KAAhC,IAAT;AAAA;AADJ,SADF;AAKD;AAPe;AAAA;AAAA,IAAuCC,gBAAvC;AAAA,CAAlB;;kBAUeJ,S"
+ "mappings": ";;;;;;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,YAAY,SAAZA,SAAY;AAAA,SAAW;AAAA,WAC3B;AAAC,4BAAD,CAAc,QAAd;AAAA;AACI;AAAA,eAAS,8BAAC,OAAD,6BAAaC,KAAb,IAAoB,OAAOC,KAA3B,IAAT;AAAA;AADJ,KAD2B;AAAA,GAAX;AAAA,CAAlB;;kBAMeF,S"
 }

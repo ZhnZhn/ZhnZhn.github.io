@@ -12,7 +12,7 @@ import ChartContainer from '../../components/zhn-containers/ChartContainer';
 import Msg from '../../constants/Msg';
 import {  LoadType } from '../../constants/Type';
 
-import ComponentActions from '../actions/ComponentActions';
+import CA from '../actions/ComponentActions';
 import ChartActions from '../actions/ChartActions';
 import DateUtils from '../../utils/DateUtils';
 
@@ -82,9 +82,9 @@ const _crDialogComp = function (dType, browserType, dConf){
            isContinious,
            loadId,
            isProxy
-         } = dialogProps      
+         } = dialogProps
        , onClickInfo = (descrUrl)
-            ? ComponentActions.showDescription
+            ? CA.showDescription
             : undefined
        , loadFn = RouterLoadFn.getFn(loadFnType, dialogType)
        , proxy = isProxy
@@ -167,7 +167,8 @@ const _crChartContainerComp = function(dType, browserType, dConf){
     caption: _caption,
     chartType: _type,
     browserType: browserType,
-    onCloseContainer: ComponentActions.closeChartContainer
+    onSetActive: CA.setActiveContainer,
+    onCloseContainer: CA.closeChartContainer
       .bind(null, _type, browserType),
     onCloseItem: ChartActions.closeChart
   });

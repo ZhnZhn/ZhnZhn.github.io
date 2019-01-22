@@ -8,6 +8,10 @@ var _Chart = require('../../charts/Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
+var _ChartFn = require('../../charts/ChartFn');
+
+var _ChartFn2 = _interopRequireDefault(_ChartFn);
+
 var _Tooltip = require('../../charts/Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
@@ -18,10 +22,10 @@ var _AdapterFn2 = _interopRequireDefault(_AdapterFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var setPlotLinesMinMax = _ChartFn2.default.setPlotLinesMinMax;
 var valueMoving = _AdapterFn2.default.valueMoving,
     findMinY = _AdapterFn2.default.findMinY,
-    appendWithColon = _AdapterFn2.default.appendWithColon,
-    formatAllNumber = _AdapterFn2.default.formatAllNumber;
+    appendWithColon = _AdapterFn2.default.appendWithColon;
 
 
 var DF_SLICE_TITLE = 'EU';
@@ -231,15 +235,7 @@ var EuroStatFn = {
         isNotZoomToMinMax = _ref6.isNotZoomToMinMax;
 
     var plotLines = config.yAxis.plotLines;
-
-    if (max > Number.NEGATIVE_INFINITY) {
-      plotLines[0].value = max;
-      plotLines[0].label.text = formatAllNumber(max);
-    }
-    if (min < Number.POSITIVE_INFINITY) {
-      plotLines[1].value = min;
-      plotLines[1].label.text = formatAllNumber(min);
-    }
+    setPlotLinesMinMax({ plotLines: plotLines, min: min, max: max });
 
     if (!isNotZoomToMinMax) {
       config.yAxis.min = _Chart2.default.calcMinY({

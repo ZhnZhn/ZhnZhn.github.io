@@ -4,8 +4,12 @@ import Factory from '../logic/Factory';
 import fCompareBy from './fCompareBy'
 
 const _getSlice = (slice, chartType) => {
-  const chartSlice = slice[chartType]
-     , { configs } = chartSlice || {};
+  const { activeContChb } = slice
+  , _cT = activeContChb
+     ? activeContChb.chartType || chartType
+     : chartType
+  , chartSlice = slice[_cT]
+  , { configs } = chartSlice || {};
   return { chartSlice, configs };
 };
 
@@ -116,7 +120,15 @@ const ChartLogic = {
       configs.reverse()
     }
     return chartSlice;
-  }
+  },
+
+  checkBrowserChartTypes(slice, option){
+    const { activeContChb:chb } = slice;
+    if (chb) {
+      option.chartType = chb.chartType
+      option.browserType = chb.browserType
+    }    
+  },
 };
 
 export default ChartLogic

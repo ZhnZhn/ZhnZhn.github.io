@@ -23,6 +23,7 @@ const STYLE = {
 };
 
 const _isFn = fn => typeof fn == 'function';
+const _isUndefined = v => typeof v === 'undefined';
 
 class RowCheckBox extends Component {
   /*
@@ -30,6 +31,7 @@ class RowCheckBox extends Component {
     rootStyle : PropTypes.object,
     caption: PropTypes.string,
     initValue: PropTypes.bool,
+    value: PropTypes.bool,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func,
     onToggle: PropTypes.func
@@ -37,9 +39,11 @@ class RowCheckBox extends Component {
   */
 
   constructor(props){
-    super()
-    this.state = {
-      isChecked: !!props.initValue
+    super(props)
+    if ( _isUndefined(props.value) ) {
+      this.state = {
+        isChecked: !!props.initValue
+      }
     }
   }
 
@@ -50,7 +54,9 @@ class RowCheckBox extends Component {
     } else if (_isFn(onToggle)) {
       onToggle()
     }
-    this.setState({ isChecked: true })
+    if (this.state) {
+      this.setState({ isChecked: true })
+    }
   }
   _handleUnCheck = () => {
     const { onUnCheck, onToggle } = this.props;
@@ -59,11 +65,16 @@ class RowCheckBox extends Component {
     } else if (_isFn(onToggle)) {
       onToggle()
     }
-    this.setState({ isChecked: false })
+    if (this.state) {
+      this.setState({ isChecked: false })
+    }
   }
   _handleToggle = () => {
-    const { isChecked } = this.state;
-    if (isChecked) {
+    const _is = this.state
+      ? this.state.isChecked
+      : this.props.value
+    //const { isChecked } = this.state;
+    if (_is) {
       this._handleUnCheck()
     } else {
       this._handleCheck()
@@ -71,13 +82,16 @@ class RowCheckBox extends Component {
   }
 
   render(){
-    const { rootStyle, caption } = this.props
-        , { isChecked } = this.state
-        , _style = isChecked ? STYLE.CHECKED : null;
+    const { rootStyle, caption, value } = this.props
+        , _value = this.state
+             ? this.state.isChecked
+             : value
+        , _style = _value ? STYLE.CHECKED : null;
     return (
       <div style={{...STYLE.ROOT, ...rootStyle}}>
         <SvgCheckBox
-          value={isChecked}
+          //value={isChecked}
+          value={_value}
           onCheck={this._handleCheck}
           onUnCheck={this._handleUnCheck}
         />

@@ -1,6 +1,7 @@
 import seriaFns from '../math/seriaFn'
 
 import Chart from './Chart'
+import ChartFn from './ChartFn'
 import ChartConfig from './ChartConfig'
 import Factory from './ChartFactory'
 import Tooltip from './Tooltip'
@@ -8,6 +9,7 @@ import Tooltip from './Tooltip'
 import SeriaBuilder from './SeriaBuilder'
 
 const { findMinY, findMaxY } = seriaFns;
+const { setPlotLinesMinMax } = ChartFn;
 
 const C = {
   CATEGORIES_X_AXIS: {
@@ -236,19 +238,16 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     );
   },
 
-  setMinMax(minValue, maxValue, noZoom){
+  setMinMax(min, max, noZoom){
     const plotLines = this.config.yAxis.plotLines;
-    plotLines[0].value = maxValue;
-    plotLines[0].label.text = `${ChartConfig.fnNumberFormat(maxValue)}`;
-    plotLines[1].value = minValue;
-    plotLines[1].label.text = `${ChartConfig.fnNumberFormat(minValue)}`;
+    setPlotLinesMinMax({ plotLines, min, max })
 
-    const _min = noZoom && minValue > 0
+    const _min = noZoom && min > 0
       ? 0
       : Chart.calcMinY({
-          minPoint: minValue,
-          maxPoint: maxValue
-        })
+          minPoint: min,
+          maxPoint: max
+        });
     this.add('yAxis', {
       min: _min,
       maxPadding: 0.15,
