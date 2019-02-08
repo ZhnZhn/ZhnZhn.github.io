@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/db-nomics/fnSelector.js"
+ ],
+ "file": "../../../src/adapters/db-nomics/fnSelector.js",
+ "names": [
+  "fnSelector",
+  "_getDocs",
+  "json",
+  "series",
+  "docs",
+  "_getPropBy",
+  "propName",
+  "getPeriodAndValue",
+  "period",
+  "value",
+  "getTitle",
+  "getSubtitle"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,aAAa;AACjBC,YAAU;AAAA,WAAQC,KAAKC,MAAL,CAAYC,IAApB;AAAA,GADO;AAEjBC,cAAY,oBAACH,IAAD,EAAOI,QAAP;AAAA,WAAoBN,WAC5BC,QAD4B,CACnBC,IADmB,EACb,CADa,EACVI,QADU,KACG,EADvB;AAAA,GAFK;;AAKjBC,qBAAmB,iCAAQ;AACzB,QAAMH,OAAOJ,WAAWC,QAAX,CAAoBC,IAApB,CAAb;AACA,WAAO;AACLM,cAAQJ,KAAK,CAAL,EAAQI,MADX;AAELC,aAAOL,KAAK,CAAL,EAAQK;AAFV,KAAP;AAID,GAXgB;;AAajBC,YAAU;AAAA,WAAQV,WACfK,UADe,CACJH,IADI,EACE,cADF,CAAR;AAAA,GAbO;AAejBS,eAAa;AAAA,WAAQX,WAClBK,UADkB,CACPH,IADO,EACD,aADC,CAAR;AAAA;AAfI,CAAnB;;kBAmBeF,U"
+}

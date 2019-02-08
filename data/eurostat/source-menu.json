@@ -26,6 +26,7 @@
     },{
       "caption" : "Energy",
       "items" : [
+        { "id" : "ES_E_EFFICIENCY" },
         { "id" : "ES_E_INDIC" },
         { "id" : "ES_I_ENERGY" },
         { "id" : "ES_E_STAT_Q" },
@@ -427,6 +428,26 @@
       }
     },
 
+    "ES_E_EFFICIENCY" : {
+      "type" : "ES_E_EFFICIENCY",
+      "menuTitle" : "Effeciency",
+      "contCaption" : "Energy Effeciency",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps" : {
+        "twoURI" : "./data/eurostat/energy-balance.json",
+        "twoCaption": "Balance",
+        "threeURI": "./data/eurostat/energy-units.json",
+        "threeCaption": "Unit",
+        "chartsType": "df3",
+        "dfProps": {
+          "dfTable": "nrg_ind_eff",
+          "dfParams": [ "geo", "ngr_bal", "unit" ],
+          "mapFrequency" : "Y",
+          "mapDateDf" : 2
+        }
+      }
+    },
     "ES_E_INDIC" : {
         "type" : "ES_E_INDIC",
         "menuTitle" : "Indicators",

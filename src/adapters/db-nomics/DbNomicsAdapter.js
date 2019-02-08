@@ -24,21 +24,13 @@ const DbNomicsAdapter = {
     , config = Builder()
        .area2Config(title, subtitle)
        .addSeries(seria)
-       .addMinMax(data, option)       
+       .checkThreshold()
+       .addMinMax(data, option)
        .add({
         ...crConfigOption({ json, option, data })
        })
        .toConfig();
 
-    if (data.length > 1000) {
-      config.plotOptions = Object.assign(
-        config.plotOptions || {}, {
-          series: {
-            turboThreshold: 0
-          }
-        }
-      )
-    }
     return { config };
   },
 

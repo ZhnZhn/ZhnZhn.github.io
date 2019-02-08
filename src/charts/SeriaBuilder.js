@@ -74,9 +74,9 @@ const SeriaBuilder = {
 
   initSeria(option){
     this._type = 'S'
-    this.config = Object.assign(ChartConfig.fSeries(), option)    
+    this.config = Object.assign(ChartConfig.fSeries(), option)
     return this;
-  },
+  },  
   splineSeria(option){
     return this.initSeria({ ...C.SPLINE, ...option });
   },

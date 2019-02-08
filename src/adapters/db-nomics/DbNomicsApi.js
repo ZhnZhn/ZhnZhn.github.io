@@ -1,60 +1,45 @@
 const C = {
-  URL: 'https://api.db.nomics.world/v21/series',
-  //URL: 'https://api.db.nomics.world/v22/series',
-  TAIL: 'format=json&orientation=column',
-
-  MSG_EMPTY: 'Dataset is empty',
-
-  DF_PROVIDER: 'ECB',
-  DF_CODE: 'EXR',
-  DF_SERIA_ID: 'A.USD.EUR.SP00.A'
+  URL: 'https://api.db.nomics.world/v22/series',
+  TAIL: 'observations=1&format=json',
+  DF_ID: 'ECB/EXR/A.USD.EUR.SP00.A',
+  ERR_CAPTION: 'Server Response',
+  MSG_EMPTY: 'Dataset is empty'
 };
 
-const _crErr = (caption, message) => ({
-    errCaption: caption,
-    message: message
+const _crErr = message => ({
+    errCaption: C.ERR_CAPTION,
+    message: message || ''
 });
-const _getValue = (obj) => {
-  return obj && obj.value
+const _getValue = obj => obj && obj.value
    ? obj.value
    : '';
+
+const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
+ if (!dfProvider || !dfCode || !seriaId) {
+   return `${C.URL}?series_ids=${C.DF_ID}${C.TAIL}`;
+ }
+ return `${C.URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${C.TAIL}`;
 };
 
 const _crUrl = (seriaId, option) => {
   const { dfProvider, dfCode } = option;
   option.seriaId = seriaId
-  return `${C.URL}?provider_code=${dfProvider}&dataset_code=${dfCode}&series_code=${seriaId}&${C.TAIL}`;
-  //const series_ids = encodeURIComponent(`${dfProvider}/${dfCode}/${seriaId}`)
-  //return `${C.URL}?series_ids=${series_ids}&${C.TAIL}`;
+  return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
-const _dfFnUrl = (option) => {
-  const { value } = option
-  , _seriaId = value;
-  return _crUrl(_seriaId, option);
-};
+const _dfFnUrl = option => _crUrl(option.value, option);
 
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
   Object.assign(option, {
     seriaId: option.value,
     dfProvider, dfCode
   })
-  return `${C.URL}?provider_code=${dfProvider}&dataset_code=${dfCode}&series_code=${seriaId}&${C.TAIL}`;
-  //const series_ids = encodeURIComponent(`${dfProvider}/${dfCode}/${seriaId}`)
-  //return `${C.URL}?series_ids=${series_ids}&${C.TAIL}`;
-  //return `${C.URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${C.TAIL}`;
+  return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 const _idFnUrl = (option) => {
-  const { value } = option
+  const { value } = option || ''
   , arr = value.split('/');
-  if (arr.length !== 3) {
-    return _crIdUrl(option,
-      C.DF_PROVIDER, C.DF_CODE, C.DF_SERIA_ID
-    );
-  }
-  return _crIdUrl(option,
-    arr[0], arr[1], arr[2]
-  );
+  return _crIdUrl(option, arr[0], arr[1], arr[2]);
 };
 
 const _s21FnUrl = (option) => {
@@ -91,10 +76,14 @@ const DbNomicsApi = {
   },
 
   checkResponse(json){
-    if (!json || !json.series
-       || !Array.isArray(json.series.period)
-       || !Array.isArray(json.series.value)) {
-      throw _crErr('', C.MSG_EMPTY);
+    if (json && Array.isArray(json.errors)) {
+      throw _crErr(json.errors[0].message);
+    }
+    const docs = json && json.series && json.series.docs;
+    if (!Array.isArray(docs) || !docs[0]
+      || !Array.isArray(docs[0].period)
+      || !Array.isArray(docs[0].value)) {
+      throw _crErr(C.MSG_EMPTY);
     }
     return true;
   }

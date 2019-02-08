@@ -278,6 +278,20 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
     _ChartConfig2.default.setStockSerias(this.config, d, dH, d, dO, id);
     return this;
   },
+  checkThreshold: function checkThreshold() {
+    var seriaIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    var config = this.config,
+        data = config.series[seriaIndex].data;
+    if (data.length > 1000) {
+      config.plotOptions = Object.assign(config.plotOptions || {}, {
+        series: {
+          turboThreshold: 0
+        }
+      });
+    }
+    return this;
+  },
   toConfig: function toConfig() {
     return this.config;
   }

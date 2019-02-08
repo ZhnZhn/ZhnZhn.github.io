@@ -1,60 +1,59 @@
 import AdapterFn from '../AdapterFn'
+import fnSelector from './fnSelector'
 
 const {
-  ymdToUTC,  
+  ymdToUTC,
   valueMoving
 } = AdapterFn;
+const {
+  getPeriodAndValue,
+  getTitle,
+  getSubtitle
+ } = fnSelector;
 
 const C = {
   CHART_URL: 'https://db.nomics.world'
 };
 
-const _crDescr = ({ dfProvider, dfCode, seriaId }) => {
-  const _id = seriaId.indexOf(dfProvider) === -1
-    ? `${dfProvider}/${dfCode}/${seriaId}`
-    : seriaId;
+const _isNotId = id => id.indexOf('/') === -1;
+const _getId = ({ dfProvider, dfCode, seriaId }) => _isNotId(seriaId)
+  ? `${dfProvider}/${dfCode}/${seriaId}`
+  : seriaId;
+
+const _crDescr = (option) => {
+  const _id = _getId(option);
   return`
    <p>SeriaId: ${_id}</p>
    <p><a href="${C.CHART_URL}/${_id}" style="padding-top: 4px;">DB Nomics Chart</a></p>
   `;
 };
 
-const _crZhConfig = (json, option) => {
-  const { dataSource, seriaId } = option
-  , id = seriaId;
-  return {
-    id, key: id,
-    //itemCaption: title,
-    isWithoutAdd: true,
-    dataSource
-  };
-};
-const _crInfo = (json, option) => {
-  const name = json.series.name || ''
-  return {
-    name: name,
-    description: _crDescr(option)
-  };
-};
+const _crZhConfig = ({ dataSource, seriaId }) => ({
+  id: seriaId,
+  key: seriaId,
+  //itemCaption: title,
+  isWithoutAdd: true,
+  dataSource
+});
+const _crInfo = (json, option) => ({
+  name: getSubtitle(json),
+  description: _crDescr(option)
+})
 
 const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
+
 const fnAdapter = {
 
-  crTitle(option, json){
-    const title = json.series.name || ''
-    , subtitle = '';
-    return {
-      title,
-      subtitle
-    };
-  },
+  crTitle: (option, json) => ({
+    title: getTitle(json),
+    subtitle: getSubtitle(json)
+  }),
 
-  crData(json){
-    const { series } = json
-    , { period, value } = series
-    , data = [];
+  crData: (json) => {
+    const data = []
+    , { period, value } = getPeriodAndValue(json);
     period.forEach((p, i) => {
       if (_isNumber(value[i])) {
         data.push({
@@ -66,13 +65,11 @@ const fnAdapter = {
     return data;
   },
 
-  crConfigOption({ json, option, data }){
-    return {
-      zhConfig: _crZhConfig(json, option),
-      valueMoving: valueMoving(data),
-      info: _crInfo(json, option)
-    };
-  }
+  crConfigOption: ({ json, option, data }) => ({
+    zhConfig: _crZhConfig(option),
+    valueMoving: valueMoving(data),
+    info: _crInfo(json, option)
+  })
 };
 
 export default fnAdapter
