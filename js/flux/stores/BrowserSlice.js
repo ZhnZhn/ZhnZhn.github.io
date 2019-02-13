@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _BrowserMenu = require('../../constants/BrowserMenu');
 
 var _BrowserMenu2 = _interopRequireDefault(_BrowserMenu);
@@ -30,33 +34,89 @@ var C = {
   FAILED: 'Failed'
 };
 
-var fnFindObj = function fnFindObj(menu, chartType) {
-  if (!menu) {
-    return undefined;
+var _isArray = Array.isArray;
+
+var _findItem = function _findItem(menu, chartType) {
+  if (!_isArray(menu)) {
+    return;
   }
 
-  for (var i = 0, maxPart = menu.length; i < maxPart; i++) {
-    for (var j = 0, maxItem = menu[i].items.length; j < maxItem; j++) {
-      if (menu[i].items[j].id === chartType) {
-        return menu[i].items[j];
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = menu[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var topics = _step.value;
+
+      var items = topics.items;
+      if (_isArray(items)) {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var item = _step2.value;
+
+            if (item.id === chartType) {
+              return item;
+            }
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
       }
     }
   }
 };
 
-var fnSetIsOpen = function fnSetIsOpen(chartType, browserMenu, browserType, value) {
-  var obj = fnFindObj(browserMenu[browserType], chartType);
-  if (obj) {
-    obj.isOpen = value;
+var _setIsOpen = function _setIsOpen(value, menu, chartType) {
+  var item = _findItem(menu, chartType);
+  if (item) {
+    item.isOpen = value;
   }
-};
+},
+    _setItemOpen = _setIsOpen.bind(null, true),
+    _setItemClose = _setIsOpen.bind(null, false);
 
-var fnAddCounter = function fnAddCounter(chartType, browserType, browserMenu, value) {
-  var obj = fnFindObj(browserMenu[browserType], chartType);
-  if (obj) {
-    obj.counter += value;
-    obj.isOpen = true;
+var _plusCounter = function _plusCounter(value, menu, chartType) {
+  var item = _findItem(menu, chartType);
+  if (item) {
+    item.counter += value;
+    item.isOpen = true;
   }
+},
+    _addCounter = _plusCounter.bind(null, 1),
+    _minusCounter = _plusCounter.bind(null, -1);
+
+var _crSelectProps = function _crSelectProps(selectProps, obj) {
+  var arr = [].concat((0, _toConsumableArray3.default)(selectProps), (0, _toConsumableArray3.default)(obj.selectProps || []));
+  return arr.length > 0 ? { selectProps: arr } : undefined;
 };
 
 var _addDialogProps = function _addDialogProps(items) {
@@ -64,8 +124,12 @@ var _addDialogProps = function _addDialogProps(items) {
     var item = items[propName],
         addProps = item.addProps;
     if (addProps !== undefined) {
-      //Object.assign(item.dialogProps, items[addProps].dialogProps)
-      item.dialogProps = Object.assign({}, items[addProps].dialogProps, item.dialogProps);
+      var dialogProps = item.dialogProps,
+          baseProps = items[addProps].dialogProps,
+          selectProps = baseProps.selectProps,
+          _selectProps = _isArray(selectProps) ? _crSelectProps(selectProps, dialogProps) : undefined;
+
+      item.dialogProps = Object.assign({}, baseProps, dialogProps, _selectProps);
     }
   });
 };
@@ -81,33 +145,26 @@ var BrowserSlice = {
   },
   isWithItemCounter: function isWithItemCounter(browserType) {
     var _config = _BrowserConfig2.default[browserType];
-    if (typeof _config === 'undefined') {
-      return false;
-    } else {
-      return !_config.withoutItemCounter;
-    }
-    //return !BrowserConfig[browserType].withoutItemCounter;
+    return typeof _config === 'undefined' ? false : !_config.withoutItemCounter;
   },
-  setMenuItemOpen: function setMenuItemOpen(chartType, browserType) {
-    if (this.isWithItemCounter(browserType)) {
-      fnSetIsOpen(chartType, this.browserMenu, browserType, true);
+  setMenuItemOpen: function setMenuItemOpen(cT, bT) {
+    if (this.isWithItemCounter(bT)) {
+      _setItemOpen(this.getBrowserMenu(bT), cT);
     }
   },
-  setMenuItemClose: function setMenuItemClose(chartType, browserType) {
-    if (this.isWithItemCounter(browserType)) {
-      fnSetIsOpen(chartType, this.browserMenu, browserType, false);
+  setMenuItemClose: function setMenuItemClose(cT, bT) {
+    if (this.isWithItemCounter(bT)) {
+      _setItemClose(this.getBrowserMenu(bT), cT);
     }
   },
-  addMenuItemCounter: function addMenuItemCounter(chartType, browserType) {
-    //const { chartType, browserType } = this.activeContChb
-    // || { chartType: cT, browserType: bT };
-    if (this.isWithItemCounter(browserType)) {
-      fnAddCounter(chartType, browserType, this.browserMenu, 1);
+  addMenuItemCounter: function addMenuItemCounter(cT, bT) {
+    if (this.isWithItemCounter(bT)) {
+      _addCounter(this.getBrowserMenu(bT), cT);
     }
   },
-  minusMenuItemCounter: function minusMenuItemCounter(chartType, browserType) {
-    if (this.isWithItemCounter(browserType)) {
-      fnAddCounter(chartType, browserType, this.browserMenu, -1);
+  minusMenuItemCounter: function minusMenuItemCounter(cT, bT) {
+    if (this.isWithItemCounter(bT)) {
+      _minusCounter(this.getBrowserMenu(bT), cT);
     }
   },
   getSourceConfig: function getSourceConfig(browserId, sourceId) {
@@ -122,7 +179,7 @@ var BrowserSlice = {
 
     var browserType = option.browserType;
 
-    if (!this.browserMenu[browserType]) {
+    if (!this.getBrowserMenu(browserType)) {
       _Factory2.default.crAsyncBrowser(option).then(function (elBrowser) {
         _this.browserMenu[browserType] = [];
         _this.trigger(_BrowserActions.BrowserActionTypes.INIT_BROWSER_DYNAMIC, elBrowser);
@@ -152,7 +209,8 @@ var BrowserSlice = {
       this.routeDialog[browserType] = items;
       this.browserMenu[browserType] = elMenu;
       this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-        menuItems: elMenu, browserType: browserType
+        menuItems: elMenu,
+        browserType: browserType
       });
     } else {
       this.trigger(_BrowserActions.BrowserActionTypes.LOAD_BROWSER_DYNAMIC_COMPLETED, {

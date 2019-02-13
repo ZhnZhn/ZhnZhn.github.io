@@ -6,7 +6,7 @@ const C = {
   NU_ALL_PARAMS: 'p=0',
   //rg=2 Export
   BU_PREFIX: 'https://comtrade.un.org/api/get?fmt=JSON&head=M&freq=A&px=H4',
-  NU_PREFIX: 'https://comtrade.un.org/db/dqBasicQueryResults.aspx?px=H4&y=2016&so=1001',
+  NU_PREFIX: 'https://comtrade.un.org/db/dqBasicQueryResults.aspx?px=H4&y=2017&so=1001',
 
   DF_RG: 2,
   DF_MEASURE: 'NetWeight'

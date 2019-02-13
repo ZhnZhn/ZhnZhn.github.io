@@ -12,34 +12,47 @@ const C = {
   FAILED: 'Failed'
 };
 
-const fnFindObj = function(menu, chartType){
-  if (!menu) {
-    return undefined;
-  }
+const _isArray = Array.isArray;
 
-  for (var i=0, maxPart=menu.length; i<maxPart; i++){
-    for(var j=0, maxItem=menu[i].items.length; j<maxItem; j++){
-      if (menu[i].items[j].id === chartType){
-        return menu[i].items[j];
+const _findItem = (menu, chartType) => {
+  if (!_isArray(menu)) { return;}
+
+  for (const topics of menu){
+    const items = topics.items;
+    if (_isArray(items)) {
+      for(const item of items){
+        if (item.id === chartType){
+          return item;
+        }
       }
     }
   }
-
 };
 
-const fnSetIsOpen = function(chartType, browserMenu, browserType, value){
-  const obj = fnFindObj(browserMenu[browserType], chartType);
-  if (obj) {
-    obj.isOpen = value;
+const _setIsOpen = (value, menu, chartType) => {
+  const item = _findItem(menu, chartType);
+  if (item) {
+    item.isOpen = value;
   }
-};
+}
+, _setItemOpen = _setIsOpen.bind(null, true)
+, _setItemClose = _setIsOpen.bind(null, false);
 
-const fnAddCounter = function(chartType, browserType, browserMenu, value){
-  const obj = fnFindObj(browserMenu[browserType], chartType);
-  if (obj){
-    obj.counter += value;
-    obj.isOpen = true;
+const _plusCounter = (value, menu, chartType) => {
+  const item = _findItem(menu, chartType);
+  if (item){
+    item.counter += value;
+    item.isOpen = true;
   }
+}
+, _addCounter = _plusCounter.bind(null, 1)
+, _minusCounter = _plusCounter.bind(null, -1);
+
+const _crSelectProps = (selectProps, obj) => {
+  const arr = [...selectProps, ...(obj.selectProps || [])];
+  return arr.length > 0
+    ? { selectProps: arr }
+    : undefined;
 };
 
 const _addDialogProps = (items) => {
@@ -47,14 +60,18 @@ const _addDialogProps = (items) => {
     const item = items[propName]
         , addProps = item.addProps;
     if (addProps !== undefined) {
-      //Object.assign(item.dialogProps, items[addProps].dialogProps)
+      const dialogProps = item.dialogProps
+      , baseProps = items[addProps].dialogProps
+      , { selectProps } = baseProps
+      , _selectProps = _isArray(selectProps)
+          ? _crSelectProps(selectProps, dialogProps)
+          : undefined;
       item.dialogProps = Object.assign({},
-        items[addProps].dialogProps,
-        item.dialogProps
+        baseProps, dialogProps, _selectProps
       )
     }
   })
-}
+};
 
 const BrowserSlice = {
   browserMenu: BrowserMenu,
@@ -66,34 +83,29 @@ const BrowserSlice = {
      return this.browserMenu[browserType];
   },
   isWithItemCounter(browserType){
-    const _config = BrowserConfig[browserType]
-    if (typeof _config === 'undefined'){
-      return false;
-    } else {
-      return !_config.withoutItemCounter;
-    }
-    //return !BrowserConfig[browserType].withoutItemCounter;
+    const _config = BrowserConfig[browserType];
+    return typeof _config === 'undefined'
+      ? false
+      : !_config.withoutItemCounter;
   },
-  setMenuItemOpen(chartType, browserType){
-    if (this.isWithItemCounter(browserType)){
-       fnSetIsOpen(chartType, this.browserMenu, browserType, true);
+  setMenuItemOpen(cT, bT){
+    if (this.isWithItemCounter(bT)){
+      _setItemOpen(this.getBrowserMenu(bT), cT);
     }
   },
-  setMenuItemClose(chartType, browserType){
-    if (this.isWithItemCounter(browserType)){
-      fnSetIsOpen(chartType, this.browserMenu, browserType, false);
+  setMenuItemClose(cT, bT){
+    if (this.isWithItemCounter(bT)){
+      _setItemClose(this.getBrowserMenu(bT), cT);
     }
   },
-  addMenuItemCounter(chartType, browserType){
-    //const { chartType, browserType } = this.activeContChb
-    // || { chartType: cT, browserType: bT };
-    if (this.isWithItemCounter(browserType)){
-      fnAddCounter(chartType, browserType, this.browserMenu, 1);
+  addMenuItemCounter(cT, bT){
+    if (this.isWithItemCounter(bT)){
+      _addCounter(this.getBrowserMenu(bT), cT);
     }
   },
-  minusMenuItemCounter(chartType, browserType){
-    if (this.isWithItemCounter(browserType)){
-      fnAddCounter(chartType, browserType, this.browserMenu, -1);
+  minusMenuItemCounter(cT, bT){
+    if (this.isWithItemCounter(bT)){
+      _minusCounter(this.getBrowserMenu(bT), cT);
     }
   },
 
@@ -107,7 +119,7 @@ const BrowserSlice = {
 
   onShowBrowserDynamicCompleted(option){
     const { browserType } = option;
-    if (!this.browserMenu[browserType]) {
+    if ( !this.getBrowserMenu(browserType) ) {
       Factory.crAsyncBrowser(option)
         .then(elBrowser => {
            this.browserMenu[browserType] = [];
@@ -139,11 +151,12 @@ const BrowserSlice = {
       this.routeDialog[browserType] = items;
       this.browserMenu[browserType] = elMenu;
       this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-         menuItems : elMenu, browserType: browserType
+         menuItems: elMenu,
+         browserType: browserType
       })
     } else {
       this.trigger(BA.LOAD_BROWSER_DYNAMIC_COMPLETED, {
-               json, browserType
+         json, browserType
       })
     }
   },

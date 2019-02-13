@@ -16,9 +16,9 @@
     },{
       "caption": "HCPI",
       "items": [
-        { "id" : "ES_HCPI_NSA" },
-        { "id" : "ES_HCPI" },
         { "id" : "ES_HCPI_FLASH" },
+        { "id" : "ES_HCPI" },
+        { "id" : "ES_HCPI_NSA" },
         { "id" : "ES_HCPI_CONST" },
         { "id" : "ES_PPP" },
         { "id" : "ES_CPI_G20" }
@@ -27,6 +27,7 @@
       "caption" : "Energy",
       "items" : [
         { "id" : "ES_E_EFFICIENCY" },
+        { "id" : "ES_E_RENEWABLE_SHARE" },
         { "id" : "ES_E_INDIC" },
         { "id" : "ES_I_ENERGY" },
         { "id" : "ES_E_STAT_Q" },
@@ -94,6 +95,7 @@
       "items": [
         { "id": "ES_GF_EXPENDITURE" },
         { "id": "ES_GF_TAXAGGREGATE" },
+        { "id": "ES_GF_ENVTAX" },
         { "id": "ES_GF_DEBT" },
         { "id": "ES_GF_PENSIONS" }
       ]
@@ -116,6 +118,13 @@
   "items" : {
     "ES_BASE_SN": {
       "dialogProps": {
+        "selectProps": [{
+           "id": "geo",
+           "caption": "Country",
+           "jsonProp": "countries",
+           "uri": "./data/eurostat/countries.json"
+        }],
+        "chartsType": "df3",
         "descrUrl": "./data/eurostat/eurostat.html",
         "loadId" : "EU_STAT",
         "dataSource": "Eurostat"
@@ -213,11 +222,6 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [{
-            "id": "geo",
-            "caption": "Country",
-            "jsonProp": "countries",
-            "uri": "./data/eurostat/countries.json"
-          },{
              "id": "na_item",
              "caption": "Item",
              "uri": "./data/eurostat/gdp-main-components.json"
@@ -229,9 +233,8 @@
               "id": "s_adj",
               "caption": "Adjust",
               "uri": "./data/eurostat/seria-adjust.json"
-           }
+          }
         ],
-        "chartsType": "df3",
         "dfProps": {
           "mapFrequency" : "Q",
           "dfTable": "namq_10_gdp"
@@ -240,19 +243,27 @@
     },
     "ES_UNEMP" : {
       "type" : "ES_UNEMP",
-      "menuTitle" : "Unemployment (NSA)",
-      "dialogType" : "DialogEurostat2",
-      "addProps": "ES_COUNTRIES_BASE",
+      "menuTitle" : "Unemployment (ILO Def.)",
+      "contCaption": "Unemployment (ILO Definition)",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/unemployment.json",
-        "mapFrequency" : "M",
+        "selectProps":[{
+          "id": "indic",
+          "caption": "Metric",
+          "uri": "./data/eurostat/unemployment.json"
+          },{
+            "id": "s_adj",
+            "caption": "Adjust",
+            "uri": "./data/eurostat/adjust.json"
+          }
+        ],
         "dfProps": {
+          "mapFrequency" : "M",
           "dfTable": "ei_lmhr_m",
-          "dfParams": [ "geo", "indic" ],
-          "dfTail": "unit=PC_ACT&s_adj=NSA",
+          "dfTail": "unit=PC_ACT",
           "dfSlice" : {
-             "unit" : "PC_ACT",
-             "s_adj" : "NSA"
+             "unit" : "PC_ACT"
           }
         }
       }
@@ -306,8 +317,8 @@
 
     "ES_HCPI_NSA" : {
       "type" : "ES_HCPI_NSA",
-      "menuTitle" : "HCPI (2015=100) (NSA)",
-      "contCaption" : "Harmonised Consume Price Index (NSA)",
+      "menuTitle" : "HCPI (2015=100), NSA",
+      "contCaption" : "Harmonised Consume Price Index, NSA",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -350,23 +361,28 @@
     },
     "ES_HCPI_FLASH" : {
       "type" : "ES_HCPI_FLASH",
-      "menuTitle" : "HCPI (Flash Release)",
-      "dialogType" : "DialogEurostat3A",
-      "addProps": "ES_COUNTRIES_BASE",
+      "menuTitle" : "HCPI (First Published)",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "twoCaption" : "Item",
-        "twoURI" : "./data/eurostat/hcpi-items.json",
-        "threeCaption": "Unit",
-        "threeURI": "./data/eurostat/hcpi-units.json",
+        "selectProps":[{
+           "id":"coicop",
+           "caption": "Item",
+           "uri": "./data/eurostat/hcpi-items.json"
+         },{
+          "id":"release",
+          "caption": "Release",
+          "uri": "./data/eurostat/hcpi-release.json"
+         },{
+          "id":"unit",
+          "caption": "Unit",
+          "uri": "./data/eurostat/hcpi-units.json"
+          }
+        ],
         "dfProps": {
           "mapFrequency" : "M",
           "mapDateDf" : 1,
-          "dfTable": "prc_hicp_fp",
-          "dfParams": [ "geo", "coicop", "unit" ],
-          "dfTail": "release=FLS",
-          "dfSlice" : {
-             "release": "FLS"
-          }
+          "dfTable": "prc_hicp_fp"
         }
       }
     },
@@ -430,8 +446,8 @@
 
     "ES_E_EFFICIENCY" : {
       "type" : "ES_E_EFFICIENCY",
-      "menuTitle" : "Effeciency",
-      "contCaption" : "Energy Effeciency",
+      "menuTitle" : "Consumption",
+      "contCaption" : "Energy Consumption",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -447,6 +463,27 @@
           "mapDateDf" : 2
         }
       }
+    },
+    "ES_E_RENEWABLE_SHARE" : {
+        "type" : "ES_E_RENEWABLE_SHARE",
+        "menuTitle" : "Renewable Shares, %",
+        "contCaption": "Renewable Shares in %, Annually",
+        "dialogType" : "DialogSelectN",
+        "addProps": "ES_BASE_SN",
+        "dialogProps" : {
+          "selectProps": [{
+              "id": "nrg_bal",
+              "caption": "Share",
+              "uri": "./data/eurostat/energy-renewable-shares.json"
+            }
+          ],
+          "dfProps": {
+            "mapFrequency" : "Y",
+            "mapDateDf": 2,
+            "dfTable": "nrg_ind_ren",
+            "dfTail": "unit=PC"
+          }
+        }
     },
     "ES_E_INDIC" : {
         "type" : "ES_E_INDIC",
@@ -731,11 +768,6 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [{
-            "id": "geo",
-            "caption": "Country",
-            "jsonProp": "countries",
-            "uri": "./data/eurostat/countries.json"
-          },{
              "id": "crops",
              "caption": "Crop",
              "uri": "./data/eurostat/agri-organic-crop.json"
@@ -747,9 +779,8 @@
               "id": "unit",
               "caption": "Unit",
               "uri": "./data/eurostat/agri-organic-unit.json"
-           }
+          }
         ],
-        "chartsType": "df3",
         "dfProps": {
           "mapFrequency" : "Y",
           "mapDateDf" : 2,
@@ -1166,6 +1197,26 @@
         }
       }
     },
+    "ES_GF_ENVTAX": {
+      "type" : "ES_GF_ENVTAX",
+      "menuTitle" : "Environment taxes",
+      "dialogType" : "DialogEurostat3A",
+      "addProps": "ES_COUNTRIES_BASE",
+      "dialogProps": {
+        "twoCaption" : "Tax",
+        "twoURI" : "./data/eurostat/gf-env-tax.json",
+        "threeCaption" : "Unit",
+        "threeURI" : "./data/eurostat/gf-env-unit.json",
+        "chartsType": "df3",
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "env_ac_tax",
+          "dfParams": [ "geo", "tax", "unit"],
+          "mapType": "V"
+        }
+      }
+    },
     "ES_GF_DEBT" : {
       "type" : "ES_GF_DEBT",
       "menuTitle" : "Deficit/Surplus, Debt",
@@ -1292,11 +1343,6 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [{
-            "id": "geo",
-            "caption": "Country",
-            "jsonProp": "countries",
-            "uri": "./data/eurostat/countries.json"
-          },{
              "id": "isco08",
              "caption": "Nurse",
              "uri": "./data/eurostat/healthcare-nurse.json"
@@ -1310,7 +1356,6 @@
               "uri": "./data/eurostat/healthcare-ph-unit.json"
            }
         ],
-        "chartsType": "df3",
         "dfProps": {
           "mapFrequency" : "Y",
           "mapDateDf": 3,
@@ -1326,11 +1371,6 @@
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps": [{
-            "id": "geo",
-            "caption": "Country",
-            "jsonProp": "countries",
-            "uri": "./data/eurostat/countries.json"
-          },{
              "id": "isced11",
              "caption": "Level",
              "uri": "./data/eurostat/education-by-level.json"
@@ -1344,7 +1384,6 @@
               "uri": "./data/eurostat/by-sex.json"
            }
         ],
-        "chartsType": "df3",
         "dfProps": {
           "mapFrequency" : "Y",
           "dfTable": "edat_lfse_03"
