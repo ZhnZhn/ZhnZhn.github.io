@@ -25,3 +25,4 @@ app/config-dialog*.js
 webpack.dev.dll.js
 webpack.dev.dll-jsx.js
 app/*_dev_*.js
+data/quandl-sample/*.*

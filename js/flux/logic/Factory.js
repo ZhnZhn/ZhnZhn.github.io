@@ -171,11 +171,15 @@ var _crContCaption = function _crContCaption(conf, browserType) {
   return dataSource && dataSource.length > 0 ? dataSource + ': ' + _caption : _caption;
 };
 
-var _crChartContainerComp = function _crChartContainerComp(dType, browserType, dConf) {
-  var conf = _getDialogConf(dConf, dType) || {};
-  var Comp = conf.chartContainerComp || _ChartContainer2.default,
-      _type = conf.type || _BrowserConfig2.default[browserType].chartContainerType,
-      _caption = _crContCaption(conf, browserType);
+var _crChartContainerComp = function _crChartContainerComp(_ref2) {
+  var chartType = _ref2.chartType,
+      browserType = _ref2.browserType,
+      conf = _ref2.conf;
+
+  var _conf = _getDialogConf(conf, chartType) || {};
+  var Comp = _conf.chartContainerComp || _ChartContainer2.default,
+      _type = _conf.type || _BrowserConfig2.default[browserType].chartContainerType,
+      _caption = _crContCaption(_conf, browserType);
 
   return _react2.default.createElement(Comp, {
     key: _type,

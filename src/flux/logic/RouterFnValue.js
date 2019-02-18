@@ -17,13 +17,9 @@ const RouterFnValue = {
 
   RPrefixSlashDash: (prefix, ...arr) => `${prefix}/${arr.join('_')}`,
 
-  ROecd: (one, two, three) => {
-    if (three) {
-      return `OECD/${two}_${one}_${three}`;
-    } else {
-      return `OECD/${two}_${one}`;
-    }
-  },
+  ROecd: (one, two, three) => three
+    ? `OECD/${two}_${one}_${three}`
+    : `OECD/${two}_${one}`,
 
   RZillow : (one, two, three) => `ZILLOW/${two}${three}_${one}`,
 

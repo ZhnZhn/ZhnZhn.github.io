@@ -71,6 +71,12 @@ var S = {
 };
 //import PropTypes from "prop-types";
 
+var INDICATOR_TAB_TYPES = ['area', 'spline', 'line'];
+var _isIndicatorTab = function _isIndicatorTab(_ref, isWithoutIndicator) {
+  var series = _ref.series;
+  return !isWithoutIndicator && Array.isArray(series) && series[0] && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
+};
+
 var ChartToolbar = function (_Component) {
   (0, _inherits3.default)(ChartToolbar, _Component);
 
@@ -119,7 +125,7 @@ var ChartToolbar = function (_Component) {
           isWithoutAdd = zhConfig.isWithoutAdd;
 
 
-      var _btTabIndicator = !isWithoutIndicator ? _react2.default.createElement(
+      var _btTabIndicator = _isIndicatorTab(config, isWithoutIndicator) ? _react2.default.createElement(
         _MenuTabItem2.default,
         {
           style: S.TAB_INDICATOR,
@@ -163,15 +169,6 @@ var ChartToolbar = function (_Component) {
         })
       ) : null;
 
-      /*
-         const _btConf = (
-           <ButtonTab
-             style={S.BT_CONF}
-             caption="Conf"
-             onClick={onClickConfig}
-           />
-         );
-      */
       return _react2.default.createElement(
         'div',
         { style: style },

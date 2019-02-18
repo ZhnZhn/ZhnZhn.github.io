@@ -18,6 +18,9 @@ var _fCompareBy2 = _interopRequireDefault(_fCompareBy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var createChartContainer = _Factory2.default.createChartContainer;
+
+
 var _getSlice = function _getSlice(slice, chartType) {
   var activeContChb = slice.activeContChb,
       _cT = activeContChb ? activeContChb.chartType || chartType : chartType,
@@ -39,19 +42,12 @@ var _confById = function _confById(id) {
   };
 };
 
-var _crChartContainer = function _crChartContainer(chartType, option) {
-  var browserType = option.browserType,
-      conf = option.conf;
-
-  return _Factory2.default.createChartContainer(chartType, browserType, conf);
-};
-
 var ChartLogic = {
   _initChartSlice: function _initChartSlice(slice, chartType, config) {
-    var configs = config ? [config] : [];
     if (!slice[chartType]) {
       slice[chartType] = {
-        chartType: chartType, configs: configs,
+        chartType: chartType,
+        configs: config ? [config] : [],
         isShow: true
       };
     }
@@ -86,7 +82,7 @@ var ChartLogic = {
     } else {
       ChartLogic._initChartSlice(slice, chartType, config);
       return {
-        Comp: _crChartContainer(chartType, option)
+        Comp: createChartContainer(option)
       };
     }
   },
@@ -100,7 +96,7 @@ var ChartLogic = {
     } else {
       ChartLogic._initChartSlice(slice, chartType);
       return {
-        Comp: _crChartContainer(chartType, { browserType: browserType, conf: conf })
+        Comp: createChartContainer({ chartType: chartType, browserType: browserType, conf: conf })
       };
     }
   },

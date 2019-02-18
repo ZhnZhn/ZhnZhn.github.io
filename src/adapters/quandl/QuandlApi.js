@@ -30,7 +30,7 @@ const _crSetUrl = (option) => {
 };
 
 
-const _crTableUrl = (option) => {
+const _crTableUrl = (option) => {  
   const {
           proxy,
           dfTable,
@@ -39,7 +39,7 @@ const _crTableUrl = (option) => {
           apiKey
         } = option
       , { one, two } = value;
-  option.key = option.value = `${one}_${two}`;
+  option.key = (option.value = `${one}_${two}`);
   return `${proxy}${C.TABLE_URL}${dfTable}.json?ticker=${one}&api_key=${apiKey}&${dfTail}&qopts.columns=${dfColumn},${two}`;
 };
 

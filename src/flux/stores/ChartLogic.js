@@ -3,6 +3,8 @@ import Factory from '../logic/Factory';
 
 import fCompareBy from './fCompareBy'
 
+const { createChartContainer } = Factory;
+
 const _getSlice = (slice, chartType) => {
   const { activeContChb } = slice
   , _cT = activeContChb
@@ -16,21 +18,12 @@ const _getSlice = (slice, chartType) => {
 const _notConfById = id => c => c.zhConfig.id !== id
 const _confById = id => c => c.zhConfig.id === id
 
-const _crChartContainer = (chartType, option) => {
-  const {
-          browserType, conf
-        } = option;
-  return Factory.createChartContainer(
-     chartType, browserType, conf
-  );
-}
-
 const ChartLogic = {
   _initChartSlice(slice, chartType, config){
-    const configs = config ? [ config ] : [];
     if (!slice[chartType]) {
       slice[chartType] = {
-        chartType, configs,
+        chartType,
+        configs: config ? [config] : [],
         isShow: true
       }
     }
@@ -65,7 +58,7 @@ const ChartLogic = {
     } else {
       ChartLogic._initChartSlice(slice, chartType, config)
       return {
-        Comp: _crChartContainer(chartType, option)
+        Comp: createChartContainer(option)
       };
     }
  },
@@ -77,7 +70,7 @@ const ChartLogic = {
    } else {
      ChartLogic._initChartSlice(slice, chartType)
      return {
-       Comp: _crChartContainer(chartType, { browserType, conf })
+       Comp: createChartContainer({ chartType, browserType, conf })
      };
    }
  },
@@ -127,7 +120,7 @@ const ChartLogic = {
     if (chb) {
       option.chartType = chb.chartType
       option.browserType = chb.browserType
-    }    
+    }
   },
 };
 

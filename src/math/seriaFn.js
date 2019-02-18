@@ -2,6 +2,13 @@ import Big from 'big.js'
 
 import mathFn from './mathFn'
 
+const _isNumber = n => {
+  if (typeof n === 'number') {
+    return (n - n === 0);
+  }
+  return false;
+};
+
 const _calcY = (pPrev, pNext) => pPrev.y !== 0
   ? parseFloat(
       Big(pNext.y - pPrev.y)
@@ -36,12 +43,15 @@ const fn = {
   },
 
   normalize: (d) => {
-    if (!Array.isArray(d) || d.length === 0 ) {
+    if (!Array.isArray(d)) {
       return [];
     }
     const _d = []
     , _max = d.length
-    , _y0 = d[0].y
+    , _y0 = d[0].y;
+    if (!_isNumber(_y0) || _y0 === 0 || _max === 0) {
+      return [];
+    }
     for(let i=0; i<_max; i++) {
       _d.push({
         x: d[i].x,

@@ -154,13 +154,13 @@ const _crContCaption = (conf, browserType) => {
      : _caption;
 };
 
-const _crChartContainerComp = function(dType, browserType, dConf){
-  const conf = _getDialogConf(dConf, dType) || {};
-  const Comp = conf.chartContainerComp
+const _crChartContainerComp = function({ chartType, browserType, conf }){
+  const _conf = _getDialogConf(conf, chartType) || {};
+  const Comp = _conf.chartContainerComp
     || ChartContainer
-  , _type = conf.type
+  , _type = _conf.type
     || BrowserConfig[browserType].chartContainerType
-  , _caption = _crContCaption(conf, browserType);
+  , _caption = _crContCaption(_conf, browserType);
 
   return React.createElement(Comp, {
     key: _type,
@@ -173,6 +173,7 @@ const _crChartContainerComp = function(dType, browserType, dConf){
     onCloseItem: ChartActions.closeChart
   });
 }
+
 
 const Factory = {
   ...fBrowser,

@@ -1,28 +1,31 @@
 
+const _isFn = fn => typeof fn === 'function';
+const _crTitle = (one, two) => `${one.caption}: ${two.caption}`;
+
 const _crDefault = (props, options) => {
   const {
          isPremium, fnValue, loadId,
-         dataSource, dfProps={}
+         dataSource, dfProps
        } = props
       , {
           one, two, three,
           fromDate, toDate,
           hasSecondYAxis, seriaType
         } = options
-      , _value = (typeof fnValue === 'function')
+      , _value = _isFn(fnValue)
            ? fnValue(one.value, two.value)
            : undefined;
   return {
     ...dfProps,
     value : _value,
-    title: `${one.caption}: ${two.caption}`,
+    title: _crTitle(one, two),
     subtitle: three.caption,
     oneCaption: one.caption,
     one: one.value,
     two: two.value,
     three: three.value,
     fromDate, toDate,
-    dataColumn: (three) ? three.value : 1,
+    dataColumn: three ? three.value : 1,
     loadId,
     dataSource, isPremium,
     hasSecondYAxis, seriaType
@@ -33,7 +36,7 @@ const _crType5A = (props, option) => {
   const r = _crDefault(props, option)
      , { one, two, three } = option
      , { fnValue, dataColumn=1 } = props
-     , value = (typeof fnValue === 'function')
+     , value = _isFn(fnValue)
           ? fnValue(one.value, two.value, three.value)
           : undefined;
 
@@ -42,18 +45,23 @@ const _crType5A = (props, option) => {
 }
 
 const _crTreeItem = (props, options) => {
-  const { isPremium, fnValue, dataColumn, loadId, dataSource } = props
-      , {
-          one, two, three,
-          fromDate, toDate,
-          hasSecondYAxis, seriaType
-        } = options
-      , _value = (typeof fnValue === 'function')
-           ? fnValue(one.value, three.value)
-           : undefined
+  const {
+    isPremium, fnValue,
+    dataColumn, loadId, dataSource,
+    dfProps
+  } = props
+  , {
+      one, two, three,
+      fromDate, toDate,
+      hasSecondYAxis, seriaType
+    } = options
+  , _value = _isFn(fnValue)
+       ? fnValue(one.value, three.value)
+       : undefined;
   return {
+    ...dfProps,
     value : _value,
-    title : `${one.caption}:${two.caption}`,
+    title : _crTitle(one, two),
     subtitle : three.caption,
     fromDate, toDate,
     dataColumn, loadId,
@@ -69,12 +77,12 @@ const _crPlusTreeItem = (props, options) => {
           fromDate, toDate,
           hasSecondYAxis, seriaType
         } = options
-      , _value = (typeof fnValue === 'function')
+      , _value = _isFn(fnValue)
            ? fnValue(one.value, two.value, three.value)
            : undefined
   return {
     value : _value,
-    title : `${two.caption} : ${three.caption}`,
+    title : _crTitle(two, three),
     subtitle : one.caption,
     fromDate, toDate,
     dataColumn, loadId,
@@ -84,7 +92,7 @@ const _crPlusTreeItem = (props, options) => {
 };
 
 const _rFn = {
-  DEFAULT : _crDefault,
+  DF : _crDefault,
   TreeItem : _crTreeItem,
   PlusTreeItem : _crPlusTreeItem,
   Type5A: _crType5A
@@ -92,12 +100,10 @@ const _rFn = {
 
 const createLoadOptions = (props={}, options={}) => {
   const { fnValueType } = props
-      , _createLoadOption = _rFn[fnValueType]
-  if (typeof _createLoadOption === 'function'){
-    return _createLoadOption(props, options);
-  } else {
-    return _rFn.DEFAULT(props, options);
-  }
+      , _createLoadOption = _rFn[fnValueType];
+  return _isFn(_createLoadOption)
+    ? _createLoadOption(props, options)
+    : _rFn.DF(props, options);
 };
 
 export default createLoadOptions

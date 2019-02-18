@@ -55,11 +55,7 @@ var RouterFnValue = {
   },
 
   ROecd: function ROecd(one, two, three) {
-    if (three) {
-      return 'OECD/' + two + '_' + one + '_' + three;
-    } else {
-      return 'OECD/' + two + '_' + one;
-    }
+    return three ? 'OECD/' + two + '_' + one + '_' + three : 'OECD/' + two + '_' + one;
   },
 
   RZillow: function RZillow(one, two, three) {

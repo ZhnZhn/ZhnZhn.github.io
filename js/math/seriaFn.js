@@ -14,6 +14,13 @@ var _mathFn2 = _interopRequireDefault(_mathFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _isNumber = function _isNumber(n) {
+  if (typeof n === 'number') {
+    return n - n === 0;
+  }
+  return false;
+};
+
 var _calcY = function _calcY(pPrev, pNext) {
   return pPrev.y !== 0 ? parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(pPrev.y).times(100).toFixed(2)) : null;
 };
@@ -44,12 +51,15 @@ var fn = {
   },
 
   normalize: function normalize(d) {
-    if (!Array.isArray(d) || d.length === 0) {
+    if (!Array.isArray(d)) {
       return [];
     }
     var _d = [],
         _max = d.length,
         _y0 = d[0].y;
+    if (!_isNumber(_y0) || _y0 === 0 || _max === 0) {
+      return [];
+    }
     for (var i = 0; i < _max; i++) {
       _d.push({
         x: d[i].x,

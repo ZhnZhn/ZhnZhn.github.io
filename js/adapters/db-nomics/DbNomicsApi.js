@@ -73,12 +73,24 @@ var _s12FnUrl = function _s12FnUrl(option) {
 
   return _crUrl(_seriaId, option);
 };
+var _s123AFnUrl = function _s123AFnUrl(option) {
+  var items = option.items,
+      _option$df3Prefix = option.df3Prefix,
+      df3Prefix = _option$df3Prefix === undefined ? '' : _option$df3Prefix,
+      _one = _getValue(items[0]),
+      _two = _getValue(items[1]),
+      _three = _getValue(items[2]),
+      _seriaId = _one + '.' + _two + '.' + df3Prefix + '.' + _three;
+
+  return _crUrl(_seriaId, option);
+};
 
 var _rFnUrl = {
   DF: _dfFnUrl,
   id: _idFnUrl,
   s12: _s12FnUrl,
-  s21: _s21FnUrl
+  s21: _s21FnUrl,
+  s123A: _s123AFnUrl
 };
 
 var DbNomicsApi = {

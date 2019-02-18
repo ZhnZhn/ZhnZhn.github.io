@@ -32,6 +32,12 @@ const S = {
   }
 };
 
+const INDICATOR_TAB_TYPES = [ 'area', 'spline', 'line' ];
+const _isIndicatorTab = ({ series }, isWithoutIndicator) => !isWithoutIndicator
+  && Array.isArray(series)
+  && series[0]
+  && INDICATOR_TAB_TYPES.indexOf(series[0].type) !== -1;
+
 class ChartToolbar extends Component {
   /*
   static propTypes = {
@@ -56,13 +62,12 @@ class ChartToolbar extends Component {
             onAddToWatch,
             onCopy,
             onPasteTo,
-            onClickInfo,
-            //onClickConfig
+            onClickInfo            
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
         , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
 
-    const _btTabIndicator = !isWithoutIndicator ? (
+    const _btTabIndicator = _isIndicatorTab(config, isWithoutIndicator) ? (
       <MenuTabItem
         style= {S.TAB_INDICATOR}
         caption="Indicator"
@@ -75,7 +80,7 @@ class ChartToolbar extends Component {
           onRemoveMfi={onRemoveMfi}
         />
       </MenuTabItem>
-    ) : null;
+     ) : null;
 
     const _btLegend = isWithLegend ? (
       <ButtonTab
@@ -113,15 +118,6 @@ class ChartToolbar extends Component {
        </MenuTabItem>
      ) : null;
 
-/*
-   const _btConf = (
-     <ButtonTab
-       style={S.BT_CONF}
-       caption="Conf"
-       onClick={onClickConfig}
-     />
-   );
-*/
     return (
       <div style={style}>
          {_btTabIndicator}
@@ -139,7 +135,6 @@ class ChartToolbar extends Component {
          {_btAdd}
          {_btInfo}
          {_btTabMini}
-         {/*_btConf*/}
       </div>
     );
   }
