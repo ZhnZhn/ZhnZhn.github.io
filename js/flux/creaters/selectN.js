@@ -10,8 +10,28 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TYPE = 'selectN';
 var _getCaption = function _getCaption(item) {
   return item && item.caption || '';
+};
+
+var _crC = function _crC(title, subtitle) {
+  return {
+    title: title, subtitle: subtitle
+  };
+};
+var _crCaption = function _crCaption(oneC, twoC, threeC, fourC) {
+  if (fourC) return _crC(oneC + ': ' + twoC, threeC + ': ' + fourC);
+  if (threeC) return _crC(oneC, twoC + ': ' + threeC);
+  if (twoC) return _crC(oneC, twoC);
+  return _crC(oneC);
+};
+
+var _crItemKey = function _crItemKey(items, seriaType, date) {
+  var _prefix = items.filter(Boolean).map(function (item) {
+    return item.value;
+  }).join('_');
+  return _prefix + '_' + seriaType + '_' + date;
 };
 
 var createLoadOptions = function createLoadOptions() {
@@ -28,7 +48,6 @@ var createLoadOptions = function createLoadOptions() {
       _options$chartType = options.chartType,
       chartType = _options$chartType === undefined ? {} : _options$chartType,
       seriaColor = options.seriaColor,
-      isCategory = options.isCategory,
       date = options.date,
       oneC = _getCaption(items[0]),
       twoC = _getCaption(items[1]),
@@ -36,10 +55,14 @@ var createLoadOptions = function createLoadOptions() {
       fourC = _getCaption(items[3]),
       seriaType = chartType.value,
       compType = chartType.compType,
-      _title = isCategory ? twoC : oneC,
-      _subtitle = isCategory ? threeC + ': ' + fourC : twoC + ': ' + threeC;
+      _crCaption2 = _crCaption(oneC, twoC, threeC, fourC),
+      title = _crCaption2.title,
+      subtitle = _crCaption2.subtitle,
+      _itemKey = _crItemKey(items, seriaType, date);
 
   return (0, _extends3.default)({}, dfProps, dialogOptions, {
+    _type: TYPE,
+    _itemKey: _itemKey,
     seriaType: seriaType,
     seriaColor: seriaColor,
     zhCompType: compType,
@@ -47,8 +70,8 @@ var createLoadOptions = function createLoadOptions() {
     time: date,
     loadId: loadId,
     itemCaption: oneC,
-    title: _title,
-    subtitle: _subtitle,
+    title: title,
+    subtitle: subtitle,
     alertItemId: oneC + ': ' + threeC,
     alertGeo: oneC,
     alertMetric: threeC,

@@ -18,24 +18,12 @@ const _fnCreateQuandlKey = function(option){
               : value;
 }
 
-const _isSelectN = items => Array.isArray(items)
-  && items[1]
-  && items[1].id;
-
-const _fnCreateEuroStatKey = function(option){  
+const _fnCreateEuroStatKey = function(option){
   const {
           geo='', group='', metric='',
           seriaType='AREA', time='',
-          items
          } = option
-      , _metric = metric.replace('?', '_');
-  if (_isSelectN(items)) {
-    const _prefix = items
-      .filter(Boolean)
-      .map(item => item.value)
-      .join('_');
-    return `${_prefix}_${seriaType}_${time}`;
-  }
+      , _metric = metric.replace('?', '_');   
   return `${geo}_${group}_${_metric}_${seriaType}_${time}`;
 }
 

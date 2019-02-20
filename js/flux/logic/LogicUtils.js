@@ -23,10 +23,6 @@ var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
   return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + '_' + _Type.ChartType.AREA + '_' + dataColumn : value + '_' + seriaType : viewKey ? viewKey : value;
 };
 
-var _isSelectN = function _isSelectN(items) {
-  return Array.isArray(items) && items[1] && items[1].id;
-};
-
 var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
   var _option$geo = option.geo,
       geo = _option$geo === undefined ? '' : _option$geo,
@@ -38,15 +34,8 @@ var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
       seriaType = _option$seriaType === undefined ? 'AREA' : _option$seriaType,
       _option$time = option.time,
       time = _option$time === undefined ? '' : _option$time,
-      items = option.items,
       _metric = metric.replace('?', '_');
 
-  if (_isSelectN(items)) {
-    var _prefix = items.filter(Boolean).map(function (item) {
-      return item.value;
-    }).join('_');
-    return _prefix + '_' + seriaType + '_' + time;
-  }
   return geo + '_' + group + '_' + _metric + '_' + seriaType + '_' + time;
 };
 

@@ -35,18 +35,15 @@ var _addPropTo = function _addPropTo(option) {
   option.resErrStatus = [].concat(RES_ERR_STATUS);
 };
 
-var _isRouteUrlN = function _isRouteUrlN(items) {
-  return Array.isArray(items) && items[1] && Boolean(items[1].id);
+var _isRouteUrlN = function _isRouteUrlN(_ref) {
+  var _type = _ref._type;
+  return _type === 'selectN';
 };
 
 var EuroStatApi = {
   getRequestUrl: function getRequestUrl(option) {
-    var dfParams = option.dfParams,
-        items = option.items;
-
     _addPropTo(option);
-
-    return _isRouteUrlN(items) ? _api2.default.crUrlN(option) : dfParams ? _api2.default.crUrlWithParams(option) : _api2.default.crUrl(option);
+    return _isRouteUrlN(option) ? _api2.default.crUrlN(option) : option.dfParams ? _api2.default.crUrlWithParams(option) : _api2.default.crUrl(option);
   },
   checkResponse: function checkResponse(json, option, status) {
     if (status === 400) {

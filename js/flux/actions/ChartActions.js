@@ -155,7 +155,7 @@ ChartActions[A.LOAD_STOCK].preEmit = function () {
   var confItem = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  var key = _LogicUtils2.default.createKeyForConfig(option),
+  var key = option._itemKey || _LogicUtils2.default.createKeyForConfig(option),
       isDoublingLoad = this.isLoading && key === this.idLoading,
       isDoublLoadMeta = option.isLoadMeta ? key + META === this.idLoading : false;
 

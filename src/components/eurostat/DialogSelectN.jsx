@@ -182,14 +182,18 @@ class DialogSelectN extends Component {
     , seriaColor = colorComp
         ? colorComp.getColor()
         : undefined
-    , date = this._getDateWithForDate();
+    , date = this._getDateWithForDate()
+    , isCategory = RouterOptions.isCategory(chartType)
+    , items = isCategory
+        ? this._items.slice(1)
+        : this._items;
 
     return this.props.loadFn(
       this.props, {
-        items: this._items,
+        items,
         dialogOptions,
         chartType, seriaColor,
-        isCategory: RouterOptions.isCategory(chartType),
+        isCategory,
         date
         /*
         selectOptions: [

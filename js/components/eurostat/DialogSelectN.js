@@ -161,13 +161,15 @@ var DialogSelectN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorator
           colorComp = _this.colorComp,
           dialogOptions = _this.dialogOptions,
           seriaColor = colorComp ? colorComp.getColor() : undefined,
-          date = _this._getDateWithForDate();
+          date = _this._getDateWithForDate(),
+          isCategory = _RouterOptions2.default.isCategory(chartType),
+          items = isCategory ? _this._items.slice(1) : _this._items;
 
       return _this.props.loadFn(_this.props, {
-        items: _this._items,
+        items: items,
         dialogOptions: dialogOptions,
         chartType: chartType, seriaColor: seriaColor,
-        isCategory: _RouterOptions2.default.isCategory(chartType),
+        isCategory: isCategory,
         date: date
         /*
         selectOptions: [

@@ -131,7 +131,7 @@ const _checkMsgApiKey = (option) => {
 }
 
 ChartActions[A.LOAD_STOCK].preEmit = function(confItem={}, option={}) {
-  const key = LogicUtils.createKeyForConfig(option)
+  const key = option._itemKey || LogicUtils.createKeyForConfig(option)
   , isDoublingLoad = this.isLoading && key === this.idLoading
   , isDoublLoadMeta = (option.isLoadMeta)
       ? (key + META === this.idLoading)

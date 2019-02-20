@@ -73,7 +73,8 @@
       "caption" : "Real Estate",
       "items" : [
         { "id" : "ES_RE_INDIC" },
-        { "id" : "ES_RE_OVERCROWDING" }
+        { "id" : "ES_RE_OVERCROWDING" },
+        { "id" : "ES_RE_LEAKINGROOF" }
       ]
     },{
       "caption": "Trade",
@@ -112,6 +113,15 @@
       "caption": "Education",
       "items": [
         { "id": "ES_EDU_LEVEL" }
+      ]
+    },{
+      "caption": "Transport",
+      "items": [
+        { "id": "ES_TR_CARS" },
+        { "id": "ES_TR_CARS_MOTOR" },
+        { "id": "ES_TR_CARS_AGE" },
+        { "id": "ES_TR_CARS_INH" },
+        { "id": "ES_TR_CARS_AFFORD" }
       ]
     }
   ],
@@ -969,6 +979,28 @@
         }
       }
     },
+    "ES_RE_LEAKINGROOF" : {
+      "type" : "ES_RE_LEAKINGROOF",
+      "menuTitle" : "Needs a Repair, % of Popul.",
+      "contCaption": "Dwelling: Leaking Roof, Damp Walls etc. % Of Population",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+              "id": "incgrp",
+              "caption": "Income",
+              "uri": "./data/eurostat/income-group.json"
+          }
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "sdg_01_60",
+          "dfTail": "hhtyp=TOTAL&sex=T&unit=PC&age=TOTAL"
+        }
+      }
+    },
+
 
     "ES_TR_BYPARTNER": {
       "type" : "ES_TR_BYPARTNER",
@@ -1387,6 +1419,110 @@
         "dfProps": {
           "mapFrequency" : "Y",
           "dfTable": "edat_lfse_03"
+        }
+      }
+    },
+
+    "ES_TR_CARS" : {
+      "type" : "ES_TR_CARS",
+      "menuTitle" : "Passenger Cars by Type",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+             "id": "mot_nrg",
+             "caption": "Type",
+             "uri": "./data/eurostat/transport-motor-energy.json"
+          }
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 3,
+          "dfTable": "road_eqs_carpda",
+          "dfTail": "unit=NR"
+        }
+      }
+    },
+    "ES_TR_CARS_MOTOR" : {
+      "type" : "ES_TR_CARS_MOTOR",
+      "menuTitle" : "Passenger Cars by Motor",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+            "id": "mot_nrg",
+            "caption": "Type",
+            "uri": "./data/eurostat/transport-motor-type.json"
+          },{
+            "id": "engine",
+            "caption": "Volume",
+            "uri": "./data/eurostat/transport-motor-volume.json"
+          }
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 3,
+          "dfTable": "road_eqs_carmot",
+          "dfTail": "unit=NR"
+        }
+      }
+    },
+    "ES_TR_CARS_AGE" : {
+      "type" : "ES_TR_CARS_AGE",
+      "menuTitle" : "Passenger Cars by Age",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+            "id": "age",
+            "caption": "Age",
+            "uri": "./data/eurostat/transport-car-age.json"
+          }
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 3,
+          "dfTable": "road_eqs_carage",
+          "dfTail": "unit=NR"
+        }
+      }
+    },
+    "ES_TR_CARS_INH" : {
+      "type" : "ES_TR_CARS_INH",
+      "menuTitle" : "Passenger Cars per 1000",
+      "contCaption": "Passenger Cars per 1000 Inhabitants",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 3,
+          "dfTable": "road_eqs_carhab",
+          "dfTail": "unit=THS"
+        }
+      }
+    },
+    "ES_TR_CARS_AFFORD" : {
+      "type" : "ES_TR_CARS_AFFORD",
+      "menuTitle" : "Car Affordability: Survey",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [{
+            "id": "hhtyp",
+            "caption": "Type",
+            "uri": "./data/eurostat/household-type.json"
+          },{
+              "id": "incgrp",
+              "caption": "Income",
+              "uri": "./data/eurostat/income-group.json"
+          }
+        ],
+        "dfProps": {
+          "mapFrequency" : "Y",
+          "mapDateDf": 2,
+          "dfTable": "ilc_mddu05",
+          "dfTail": "unit=PC"
         }
       }
     }

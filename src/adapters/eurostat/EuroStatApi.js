@@ -20,19 +20,15 @@ const _addPropTo = (option) => {
   option.resErrStatus = [...RES_ERR_STATUS]
 };
 
-const _isRouteUrlN = (items) => Array.isArray(items)
-  && items[1]
-  && Boolean(items[1].id);
+const _isRouteUrlN = ({ _type }) => _type === 'selectN';
 
 const EuroStatApi = {
 
   getRequestUrl(option){
-    const { dfParams, items } = option;
     _addPropTo(option)
-
-    return _isRouteUrlN(items)
+    return _isRouteUrlN(option)
       ? api.crUrlN(option)
-      : dfParams
+      : option.dfParams
           ? api.crUrlWithParams(option)
           : api.crUrl(option);
   },
