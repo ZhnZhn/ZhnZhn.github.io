@@ -929,7 +929,7 @@
     },
     "ES_HT_RD" : {
       "type" : "ES_HT_RD",
-      "menuTitle" : "Expendinture on R&D",
+      "menuTitle" : "Expenditure on R&D",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
