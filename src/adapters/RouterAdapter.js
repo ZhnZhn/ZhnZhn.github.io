@@ -5,6 +5,7 @@ import FaoStat from './faostat/FaoStat'
 import WorldBank from './world-bank/WorldBank'
 import StatNorway from './stat-norway/StatNorway'
 import StatSweden from './stat-sweden/StatSweden'
+import StatFinland from './stat-finland/StatFinland'
 import AlphaVantage from './alpha/AlphaVantage'
 import Barchart from './barchart/Barchart'
 import Iex from './iex/Iex'
@@ -27,6 +28,7 @@ const RouterAdapter = {
   WorldBank,
   StatNorway,
   StatSweden,
+  StatFinland,
   AlphaVantage,
   Barchart,
   Iex,

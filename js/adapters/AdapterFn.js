@@ -138,14 +138,16 @@ var AdapterFn = {
       color: _color
     };
   },
+
+
   legendItem: function legendItem(index, color, name) {
     var is = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
     return {
       index: index, color: color, name: name,
       isVisible: is
     };
   },
+
   stockSeriesLegend: function stockSeriesLegend() {
     return [AdapterFn.legendItem(0, _Color2.default.S_STOCK_CLOSE, 'Close', true), AdapterFn.legendItem(1, _Color2.default.S_HIGH, 'High'), AdapterFn.legendItem(2, _Color2.default.S_LOW, 'Low'), AdapterFn.legendItem(3, _Color2.default.S_OPEN, 'Open')];
   },
@@ -176,7 +178,6 @@ var AdapterFn = {
       prevValue: bPrevValue,
       Direction: _Type.Direction,
       fnFormat: _formatAllNumber2.default
-      //fnFormat: ChartConfig.fnNumberFormat
     });
   },
   valueMoving: function valueMoving(data) {
@@ -208,8 +209,9 @@ var AdapterFn = {
   },
 
   toUpperCaseFirst: function toUpperCaseFirst(str) {
-    return (typeof str === 'string' || str instanceof String) && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
+    return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.substr(1) : EMPTY;
   },
+
   appendWithColon: function appendWithColon() {
     for (var _len2 = arguments.length, args = Array(_len2), _key = 0; _key < _len2; _key++) {
       args[_key] = arguments[_key];

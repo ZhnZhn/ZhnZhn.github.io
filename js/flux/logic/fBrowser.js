@@ -108,6 +108,7 @@ var fBrowser = {
 
       case _Type.BrowserType.SWEDEN_STAT_ALL:
       case _Type.BrowserType.NORWAY_STAT_ALL:
+      case _Type.BrowserType.FINLAND_STAT_ALL:
         return _RouterBrowser2.default.STAT_ALL.then(function (Comp) {
           return _crBrowserDynamic(Comp, option);
         });
@@ -119,4 +120,4 @@ var fBrowser = {
 };
 
 exports.default = fBrowser;
-//# sourceMappingURL=D:\_Dev\_React\_ERC\js\flux\logic\fBrowser.js.map
+//# sourceMappingURL=fBrowser.js.map

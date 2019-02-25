@@ -15,6 +15,8 @@ var URL = _apiFn2.default.URL,
     DF_TAIL = _apiFn2.default.DF_TAIL;
 
 
+var TYPE = 'selectN';
+
 describe('getRequestUrl', function () {
   var DF_TABLE = 'table_1';
   var ITEMS = [{ id: 'n1', value: 'v1' }, { id: 'n2', value: 'v2' }];
@@ -22,6 +24,7 @@ describe('getRequestUrl', function () {
 
   test('should return valid url for crUrlN spline', function () {
     var options = {
+      _type: TYPE,
       dfTable: DF_TABLE,
       items: [].concat(ITEMS)
     },
@@ -31,6 +34,7 @@ describe('getRequestUrl', function () {
   test('should return valid url for crUrlN category chart', function () {
     var time = 2017;
     var options = {
+      _type: TYPE,
       dfTable: DF_TABLE,
       items: [undefined].concat(ITEMS),
       seriaType: COLUMN_SET,

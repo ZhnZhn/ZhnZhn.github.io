@@ -11,7 +11,7 @@ import OpenClose from '../zhn/OpenClose'
 import TwitterLink from './TwitterLink'
 import DataProviders from './DataProviders'
 import StepTitle from './StepTitle'
-import Link from '../links/Links';
+import Link from '../links/ProviderLinks';
 import IconLogoBar from './IconLogoBar';
 
 import C from '../styles/Color'

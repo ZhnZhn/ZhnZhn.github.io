@@ -2,14 +2,15 @@ import Big from 'big.js';
 
 const _isNumber = v => typeof v === 'number'
   && !Number.isNaN(v);
+const _isUndef = v => typeof v === 'undefined';
 
 const _crPointGetter = (data) => {
-  const getX = data[0].x
-    ? p => p.x
-    : p => p[0]
-  , getY = data[0].y
-     ? p => p.y
-     : p => p[1]
+  const getX = _isUndef(data[0].x)
+    ? p => p[0]
+    : p => p.x
+  , getY = _isUndef(data[0].y)
+     ? p => p[1]
+     : p => p.y;
   return { getX, getY };
 }
 
@@ -35,12 +36,11 @@ const sma = (data, period, plus) => {
   , _data = data.filter(p => _isNumber(getY(p)))
   , max=_data.length;
   let bSum = Big('0.0')
-   , i=0
-   , point;
-  for (; i<max; i++){
-    point = data[i]
+  , point;
+  for (let i=0; i<max; i++){
+    point = _data[i]
     if (i>_period){
-       bSum = bSum.plus(getY(point)).minus(getY(data[i-period]));
+       bSum = bSum.plus(getY(point)).minus(getY(_data[i-period]));
        dataSma.push([
          getX(point),
          parseFloat(bSum.div(period).toFixed(2))
@@ -48,7 +48,7 @@ const sma = (data, period, plus) => {
     } else {
       bSum = bSum.plus(getY(point));
     }
-  }
+  }  
   return dataSma;
 };
 

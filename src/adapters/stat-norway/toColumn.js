@@ -29,9 +29,7 @@ const _fIsCategoryPoint = (dfT) => (p) => {
   if (dfT && p.c === dfT) {
     return false;
   }
-  return isYNumber(p)
-    && p.y !== 0;
-  //return p.y !== null && p.y !== 0;
+  return isYNumber(p) && p.y !== 0;
 }
 const _compareByY = (a, b) => a.y - b.y;
 
@@ -76,7 +74,6 @@ const _crCategory = (option, by) => {
         category: dfC,
         cTotal: dfT,
         itemSlice
-        //itemSlice: items[1].slice
       };
   }
 }
@@ -113,7 +110,8 @@ const toColumn = {
         , Tid = crTid(time, _ds)
         , _values = _ds.Data({ Tid, ...itemSlice, ...dfTSlice })
         , _title = crTitle(option)
-        , _subtitle = `${items[1].caption || ''}: ${Tid}`
+        , _twoC = (items[1]||{}).caption || ''
+        , _subtitle = `${_twoC}: ${Tid}`
         , data = _crData(_values, _dimC, cTotal)
         , _c = data.map(item => item.c)
         , config = Builder()
@@ -132,7 +130,7 @@ const toColumn = {
     Object.assign(config.series[0], {
       color: seriaColor,
       data: data
-    })    
+    })
     return config;
   }
 

@@ -266,7 +266,7 @@ var EuroStatFn = {
       id: key,
       key: key,
       itemCaption: itemCaption,
-      isWithoutIndicator: true,
+      //isWithoutIndicator: true,
       isWithoutAdd: true,
       dataSource: _dataSource,
       linkFn: 'ES',

@@ -60,9 +60,9 @@ var _StepTitle = require('./StepTitle');
 
 var _StepTitle2 = _interopRequireDefault(_StepTitle);
 
-var _Links = require('../links/Links');
+var _ProviderLinks = require('../links/ProviderLinks');
 
-var _Links2 = _interopRequireDefault(_Links);
+var _ProviderLinks2 = _interopRequireDefault(_ProviderLinks);
 
 var _IconLogoBar = require('./IconLogoBar');
 
@@ -324,7 +324,7 @@ var About = function (_Component) {
                   null,
                   'For example, for loading data from\xA0'
                 ),
-                _react2.default.createElement(_Links2.default.Quandl, null),
+                _react2.default.createElement(_ProviderLinks2.default.Quandl, null),
                 _react2.default.createElement(
                   'span',
                   null,

@@ -32,11 +32,13 @@ const _crSelectDim = (code) => {
   return { code, ...C.SELECTION_ALL };
 }
 
-const _crOption = (dims) => {
+const _crOption = (dims, noTime) => {
   const arrQuery = dims
     .map(dim => _crSelectDim(dim.v));
 
-  arrQuery.push(C.TID_DIM);
+  if (!noTime) {
+   arrQuery.push(C.TID_DIM);
+  }
 
   return  {
     method: 'POST',
@@ -85,10 +87,10 @@ const _markStopLoading = () => {
   clearTimeout(ID_TIMEOUT)
 }
 
-const loadDims = ({ proxy, baseMeta, id, dims }) => {
+const loadDims = ({ proxy, baseMeta, id, dims, noTime }) => {
   if (!IS_LOADING) {
     const _url = _crUrl(proxy, baseMeta, id)
-        , _option = _crOption(dims);
+        , _option = _crOption(dims, noTime);
     _markStartLoading(_url)
     return fetch(_url, _option)
       .then(res => {

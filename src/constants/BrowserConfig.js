@@ -77,6 +77,7 @@ const BrowserConfig = {
       lT: 'NST_2',
       sP: 'Stat. Norway',
       dU: './data/statistics-norway/statistics-norway.html',
+      dS: 'Statistics Norway',
       rootUrl: 'https://data.ssb.no/api/v0/en/table'
     }
   },
@@ -90,13 +91,27 @@ const BrowserConfig = {
     browserType: BT.SWEDEN_STAT_ALL,
     isDynamic: true,
     caption: 'Statistics Sweden All',
-    sourceMenuUrl: './data/statistics-sweden/source-menu.json',
     dfProps: {
       bT: BT.SWEDEN_STAT_ALL,
       lT: 'SWS',
       sP: 'Stat. Sweden',
       dU: './data/statistics-sweden/statistics-sweden.html',
+      dS: 'Statistics Sweden',
       rootUrl: 'https://api.scb.se/OV0104/v1/doris/en/ssd'
+    }
+  },
+  [BT.FINLAND_STAT_ALL]: {
+    browserType: BT.FINLAND_STAT_ALL,
+    isDynamic: true,
+    caption: 'Statistics Finland All',
+    dfProps: {
+      bT: BT.FINLAND_STAT_ALL,
+      lT: 'SFL',
+      sP: 'Stat. Finland',
+      dU: './data/statistics-finland/statistics-finland.html',
+      dS: 'Statistics Finland',
+      noTime: true,
+      rootUrl: 'https://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
     }
   },
   [BT.NBSC]: {

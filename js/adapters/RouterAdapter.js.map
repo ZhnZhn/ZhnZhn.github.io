@@ -14,6 +14,7 @@
   "WorldBank",
   "StatNorway",
   "StatSweden",
+  "StatFinland",
   "AlphaVantage",
   "Barchart",
   "Iex",
@@ -25,5 +26,5 @@
   "Crc",
   "Cmc"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AACpBC,0BADoB;AAEpBC,8BAFoB;AAGpBC,8BAHoB;AAIpBC,kCAJoB;AAKpBC,4BALoB;AAMpBC,gCANoB;AAOpBC,kCAPoB;AAQpBC,kCARoB;AASpBC,sCAToB;AAUpBC,8BAVoB;AAWpBC,oBAXoB;AAYpBC,wBAZoB;AAapBC,oBAboB;AAcpBC,oBAdoB;AAepBC,oBAfoB;AAgBpBC,8BAhBoB;AAiBpBC,oBAjBoB;AAkBpBC;AAlBoB,CAAtB;;kBAqBelB,a"
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB;AACpBC,0BADoB;AAEpBC,8BAFoB;AAGpBC,8BAHoB;AAIpBC,kCAJoB;AAKpBC,4BALoB;AAMpBC,gCANoB;AAOpBC,kCAPoB;AAQpBC,kCARoB;AASpBC,oCAToB;AAUpBC,sCAVoB;AAWpBC,8BAXoB;AAYpBC,oBAZoB;AAapBC,wBAboB;AAcpBC,oBAdoB;AAepBC,oBAfoB;AAgBpBC,oBAhBoB;AAiBpBC,8BAjBoB;AAkBpBC,oBAlBoB;AAmBpBC;AAnBoB,CAAtB;;kBAsBenB,a"
 }

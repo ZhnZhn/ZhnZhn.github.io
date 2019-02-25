@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/addDialogPropsTo.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/addDialogPropsTo.js",
+ "names": [
+  "addDialogPropsTo",
+  "Object",
+  "keys",
+  "items",
+  "forEach",
+  "item",
+  "propName",
+  "addProps",
+  "undefined",
+  "dialogProps",
+  "baseProps",
+  "_selectProps",
+  "assign"
+ ],
+ "mappings": ";;;;;;AACA;;;;;;AAEA,IAAMA,mBAAmB,SAAnBA,gBAAmB,QAAS;AAChCC,SAAOC,IAAP,CAAYC,KAAZ,EAAmBC,OAAnB,CAA2B,oBAAY;AACrC,QAAMC,OAAOF,MAAMG,QAAN,CAAb;AAAA,QACMC,WAAWF,KAAKE,QADtB;AAEA,QAAIA,aAAaC,SAAjB,EAA4B;AAC1B,UAAMC,cAAcJ,KAAKI,WAAzB;AAAA,UACEC,YAAYP,MAAMI,QAAN,EAAgBE,WAD9B;AAAA,UAEEE,eAAe,6BAAcD,SAAd,EAAyBD,WAAzB,CAFjB;AAGAJ,WAAKI,WAAL,GAAmBR,OAAOW,MAAP,CAAc,EAAd,EACjBF,SADiB,EACND,WADM,EACOE,YADP,CAAnB;AAGD;AACF,GAXD;AAYD,CAbD;;kBAeeX,gB"
+}

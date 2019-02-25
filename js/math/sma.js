@@ -13,17 +13,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _isNumber = function _isNumber(v) {
   return typeof v === 'number' && !Number.isNaN(v);
 };
+var _isUndef = function _isUndef(v) {
+  return typeof v === 'undefined';
+};
 
 var _crPointGetter = function _crPointGetter(data) {
-  var getX = data[0].x ? function (p) {
-    return p.x;
-  } : function (p) {
+  var getX = _isUndef(data[0].x) ? function (p) {
     return p[0];
-  },
-      getY = data[0].y ? function (p) {
-    return p.y;
   } : function (p) {
+    return p.x;
+  },
+      getY = _isUndef(data[0].y) ? function (p) {
     return p[1];
+  } : function (p) {
+    return p.y;
   };
   return { getX: getX, getY: getY };
 };
@@ -45,12 +48,11 @@ var sma = function sma(data, period, plus) {
       max = _data.length;
 
   var bSum = (0, _big2.default)('0.0'),
-      i = 0,
       point = void 0;
-  for (; i < max; i++) {
-    point = data[i];
+  for (var i = 0; i < max; i++) {
+    point = _data[i];
     if (i > _period) {
-      bSum = bSum.plus(getY(point)).minus(getY(data[i - period]));
+      bSum = bSum.plus(getY(point)).minus(getY(_data[i - period]));
       dataSma.push([getX(point), parseFloat(bSum.div(period).toFixed(2))]);
     } else {
       bSum = bSum.plus(getY(point));

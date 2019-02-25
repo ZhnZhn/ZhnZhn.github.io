@@ -27,11 +27,12 @@ class MenuBrowserDynamic extends Component{
     this.unsubscribe = this.props.store.listen(this._onStore)
     this._loadMenu()
   }
-  componentWillUpdate(nextProps, nextState){
-     if (!nextState.isLoaded && nextState.isShow){
-       this._loadMenu();
-     }
-  }
+  componentDidUpdate(){
+    const {isLoaded, isShow} = this.state;
+    if (!isLoaded && isShow) {
+      this._loadMenu()
+    }
+  }  
   componentWillUnmount(){
     this.unsubscribe();
   }

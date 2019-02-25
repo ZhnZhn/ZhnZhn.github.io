@@ -73,8 +73,8 @@ var removeSeriaFrom = _IndicatorBuilder2.default.removeSeriaFrom,
     crMomAthConfig = _IndicatorBuilder2.default.crMomAthConfig;
 
 
-var INIT_SMA = "50",
-    INIT_MFI = "14";
+var INIT_MFI = "14",
+    SMA = { MONTH: '12', YEAR: '50' };
 
 var C_GROW = '#90ed7d';
 
@@ -120,6 +120,7 @@ var STYLE = {
   }
 };
 
+var _isArray = Array.isArray;
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
@@ -144,6 +145,11 @@ var _isSeriaInst = function _isSeriaInst(s) {
 var FNS = {
   GR: ['_grSeria', 'isGrowRate', C_GROW, growthRate],
   NORM: ['_normSeria', 'isNormalize', C_GROW, normalize]
+};
+
+var _findInitSma = function _findInitSma(config) {
+  var _d = (((config || {}).series || [])[0] || {}).data;
+  return !_isArray(_d) ? '0' : _d.length > 150 ? SMA.YEAR : SMA.MONTH;
 };
 
 var NORM_CAPTION_EL = _react2.default.createElement(
@@ -193,6 +199,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
 
     var config = props.config;
 
+    _this._INIT_SMA = _findInitSma(config);
     _this._isMfi = !!config.zhIsMfi;
     _this._momAthEl = config.zhIsMomAth ? _react2.default.createElement(
       'div',
@@ -393,7 +400,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
     return _react2.default.createElement(
       _react.Fragment,
       null,
-      _react2.default.createElement(
+      _this2._INIT_SMA === SMA.YEAR && _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
@@ -404,7 +411,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         _react2.default.createElement(_InputText2.default, {
           ref: _this2._refSmaPlus,
           style: STYLE.N3,
-          initValue: INIT_SMA,
+          initValue: _this2._INIT_SMA,
           type: 'number'
         }),
         _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddSma.bind(null, true) }),
@@ -430,7 +437,7 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         _react2.default.createElement(_InputText2.default, {
           ref: _this2._refSmaComp,
           style: STYLE.N3,
-          initValue: INIT_SMA,
+          initValue: _this2._INIT_SMA,
           type: 'number'
         }),
         _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddSma })

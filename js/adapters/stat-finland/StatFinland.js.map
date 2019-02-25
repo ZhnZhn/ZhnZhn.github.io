@@ -1,0 +1,17 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-finland/StatFinland.js"
+ ],
+ "file": "../../../src/adapters/stat-finland/StatFinland.js",
+ "names": [
+  "StatFinland",
+  "Table",
+  "api",
+  "tableApi",
+  "optionFetch",
+  "crOptionFetch",
+  "adapter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,cAAc;AAClBC,SAAO;AACLC,SAAKC,kBADA;AAELC,iBAAaD,mBAASE,aAFjB;AAGLC;AAHK;AADW,CAApB;;kBAQeN,W"
+}

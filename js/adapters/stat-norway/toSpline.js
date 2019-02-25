@@ -33,16 +33,20 @@ var crDsValuesTimes = _fnAdapter2.default.crDsValuesTimes,
 
 var DF_TYPE = 'spline';
 
+var _checkOrder = function _checkOrder(data) {
+  var _isReverse = data.length > 2 && data[0].x > data[1].x;
+  return _isReverse ? data.reverse() : data;
+};
+
 var _toData = function _toData(values, times) {
   var _values = Array.isArray(values) ? values : [values];
   var data = times.map(function (time, i) {
     return {
       x: _toUTC(time),
-      y: _values[i].value
+      y: _values[i] ? _values[i].value : null
     };
   });
-
-  return data;
+  return _checkOrder(data);
 };
 
 var _crSplineSeria = function _crSplineSeria(data) {
@@ -75,7 +79,7 @@ var toArea = {
         times = _crDsValuesTimes.times,
         data = _toData(values, times),
         seria = _crSplineSeria(data, option),
-        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).add((0, _extends3.default)({}, crChartOption(ds, data, option))).toConfig();
+        config = (0, _ConfigBuilder2.default)().areaConfig({ spacingTop: 25 }).addCaption(title, subtitle).clearSeries().addSeries(seria).addMinMax(data, option).add((0, _extends3.default)({}, crChartOption(ds, data, option))).toConfig();
 
     return config;
   }

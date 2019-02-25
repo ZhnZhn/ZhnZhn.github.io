@@ -128,12 +128,10 @@
   "items" : {
     "ES_BASE_SN": {
       "dialogProps": {
-        "selectProps": [{
-           "id": "geo",
-           "caption": "Country",
-           "jsonProp": "countries",
-           "uri": "./data/eurostat/countries.json"
-        }],
+        "rootUri": "./data/eurostat/",
+        "selectProps": [
+          [ "geo","Country","countries.json","countries" ]
+        ],
         "chartsType": "df3",
         "descrUrl": "./data/eurostat/eurostat.html",
         "loadId" : "EU_STAT",
@@ -231,19 +229,10 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-             "id": "na_item",
-             "caption": "Item",
-             "uri": "./data/eurostat/gdp-main-components.json"
-          },{
-              "id": "unit",
-              "caption": "Unit",
-              "uri": "./data/eurostat/gdp-main-components-unit.json"
-          },{
-              "id": "s_adj",
-              "caption": "Adjust",
-              "uri": "./data/eurostat/seria-adjust.json"
-          }
+        "selectProps": [
+          [ "na_item","Item","gdp-main-components.json" ],
+          [ "unit","Unit","gdp-main-components-unit.json" ],
+          [ "s_adj","Adjust","seria-adjust.json" ]
         ],
         "dfProps": {
           "mapFrequency" : "Q",
@@ -258,15 +247,9 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps":[{
-          "id": "indic",
-          "caption": "Metric",
-          "uri": "./data/eurostat/unemployment.json"
-          },{
-            "id": "s_adj",
-            "caption": "Adjust",
-            "uri": "./data/eurostat/adjust.json"
-          }
+        "selectProps":[
+          [ "indic","Metric","unemployment.json" ],
+          [ "s_adj","Adjust","adjust.json" ]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -375,19 +358,10 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps":[{
-           "id":"coicop",
-           "caption": "Item",
-           "uri": "./data/eurostat/hcpi-items.json"
-         },{
-          "id":"release",
-          "caption": "Release",
-          "uri": "./data/eurostat/hcpi-release.json"
-         },{
-          "id":"unit",
-          "caption": "Unit",
-          "uri": "./data/eurostat/hcpi-units.json"
-          }
+        "selectProps":[
+          [ "coicop","Item","hcpi-items.json"],
+          [ "release","Release","hcpi-release.json"],
+          [ "unit","Unit","hcpi-units.json"]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -481,11 +455,8 @@
         "dialogType" : "DialogSelectN",
         "addProps": "ES_BASE_SN",
         "dialogProps" : {
-          "selectProps": [{
-              "id": "nrg_bal",
-              "caption": "Share",
-              "uri": "./data/eurostat/energy-renewable-shares.json"
-            }
+          "selectProps": [
+            ["nrg_bal","Share","energy-renewable-shares.json"]
           ],
           "dfProps": {
             "mapFrequency" : "Y",
@@ -777,19 +748,10 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-             "id": "crops",
-             "caption": "Crop",
-             "uri": "./data/eurostat/agri-organic-crop.json"
-          },{
-              "id": "agprdmet",
-              "caption": "Method",
-              "uri": "./data/eurostat/agri-organic-method.json"
-          },{
-              "id": "unit",
-              "caption": "Unit",
-              "uri": "./data/eurostat/agri-organic-unit.json"
-          }
+        "selectProps": [
+          [ "crops","Crop","agri-organic-crop.json"],
+          [ "agprdmet","Method","agri-organic-method.json"],
+          [ "unit","Unit","agri-organic-unit.json"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -986,11 +948,8 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-              "id": "incgrp",
-              "caption": "Income",
-              "uri": "./data/eurostat/income-group.json"
-          }
+        "selectProps": [
+          [ "incgrp","Income","income-group.json" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1374,19 +1333,10 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-             "id": "isco08",
-             "caption": "Nurse",
-             "uri": "./data/eurostat/healthcare-nurse.json"
-          },{
-              "id": "wstatus",
-              "caption": "Status",
-              "uri": "./data/eurostat/healthcare-nurse-status.json"
-          },{
-              "id": "unit",
-              "caption": "Unit",
-              "uri": "./data/eurostat/healthcare-ph-unit.json"
-           }
+        "selectProps": [
+          [ "isco08", "Nurse", "healthcare-nurse.json" ],
+          [ "wstatus", "Status", "healthcare-nurse-status.json" ],
+          [ "unit", "Unit", "healthcare-ph-unit.json" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1402,19 +1352,10 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-             "id": "isced11",
-             "caption": "Level",
-             "uri": "./data/eurostat/education-by-level.json"
-          },{
-              "id": "age",
-              "caption": "Age",
-              "uri": "./data/eurostat/education-by-age.json"
-          },{
-              "id": "sex",
-              "caption": "Sex",
-              "uri": "./data/eurostat/by-sex.json"
-           }
+        "selectProps": [
+          [ "isced11", "Level", "education-by-level.json" ],
+          [ "age", "Age", "education-by-age.json"],
+          [ "sex", "Sex", "by-sex.json"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1429,11 +1370,8 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-             "id": "mot_nrg",
-             "caption": "Type",
-             "uri": "./data/eurostat/transport-motor-energy.json"
-          }
+        "selectProps": [
+          ["mot_nrg","Type","transport-motor-energy.json"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1449,15 +1387,9 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-            "id": "mot_nrg",
-            "caption": "Type",
-            "uri": "./data/eurostat/transport-motor-type.json"
-          },{
-            "id": "engine",
-            "caption": "Volume",
-            "uri": "./data/eurostat/transport-motor-volume.json"
-          }
+        "selectProps": [
+          ["mot_nrg","Type","transport-motor-type.json"],
+          ["engine","Volume","transport-motor-volume.json"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1473,11 +1405,8 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-            "id": "age",
-            "caption": "Age",
-            "uri": "./data/eurostat/transport-car-age.json"
-          }
+        "selectProps": [
+          ["age","Age","transport-car-age.json"]
         ],
         "dfProps": {
           "mapFrequency" : "Y",
@@ -1508,15 +1437,9 @@
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
-        "selectProps": [{
-            "id": "hhtyp",
-            "caption": "Type",
-            "uri": "./data/eurostat/household-type.json"
-          },{
-              "id": "incgrp",
-              "caption": "Income",
-              "uri": "./data/eurostat/income-group.json"
-          }
+        "selectProps": [
+          [ "hhtyp","Status","household-type.json" ],
+          [ "incgrp","Income","income-group.json" ]
         ],
         "dfProps": {
           "mapFrequency" : "Y",

@@ -10,7 +10,7 @@ var _ChartActions = require('../actions/ChartActions');
 
 var _BrowserActions = require('../actions/BrowserActions');
 
-var _ChartLogic = require('./ChartLogic');
+var _ChartLogic = require('./chart/ChartLogic');
 
 var _ChartLogic2 = _interopRequireDefault(_ChartLogic);
 

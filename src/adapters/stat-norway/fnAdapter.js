@@ -1,7 +1,11 @@
-import Highcharts from 'highcharts';
 import JSONstat from 'jsonstat';
 
 import AdapterFn from '../AdapterFn';
+
+const {
+  isYNumber, numberFormat, crId,
+  valueMoving  
+} = AdapterFn;
 
 const TITLE = {
   NST: 'Statisctics Norway: All Items',
@@ -16,6 +20,10 @@ const SEARCH = {
   SWS: {
     url: 'https://www.scb.se/en/finding-statistics/search/?query=',
     title: 'Statistics Sweden Search'
+  },
+  SFL: {
+    url: 'http://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/',
+    title: "Statistics Finland's PX-Web"
   }
 };
 
@@ -28,6 +36,13 @@ const _crSearchToken = (label) => {
 
 const _crLink = (token, {url, title}) => `<a class="native-link" href="${url}${token}">${title}</a>`;
 
+const _crToken = ({ dfId }) => {
+  const arr = (''+dfId).split('/')
+  , id = arr.pop()
+  , prefix = arr.join('__');
+  return prefix && id ? `StatFin__${prefix}/${id}` : '';
+}
+
 const _crSearchLink = (label, option) => {
   const  _token = _crSearchToken(label);
   switch(option.browserType){
@@ -35,6 +50,8 @@ const _crSearchLink = (label, option) => {
       return _crLink(_token, SEARCH.NST);
     case 'SWS': case 'SWS_ALL':
       return _crLink(_token, SEARCH.SWS);
+    case 'SFL':
+      return _crLink(_crToken(option), SEARCH.SFL);
     default:
       return '';
   }
@@ -42,10 +59,10 @@ const _crSearchLink = (label, option) => {
 
 const _crDescr = ({ updated='', source=DF_SOURCE, label }, option) => {
   const _date = updated
-          .replace('T', ' ')
-          .replace('Z', '')
-      , { dfId='' } = option
-      , _elSearchLink = _crSearchLink(label, option);
+    .replace('T', ' ')
+    .replace('Z', '')
+  , { dfId='' } = option
+  , _elSearchLink = _crSearchLink(label, option);
 
   return `TableId: ${dfId}<BR/>${source}: ${_date}<BR/>${_elSearchLink}`;
 };
@@ -69,8 +86,29 @@ const _crAreaMapSlice = (option) => {
   return Object.assign(mapSlice, dfTSlice)
 };
 
+
+const _getDimensionWithouTime = (ds) => {
+  const _dim = ds.Dimension("Year")
+   || ds.Dimension("Vuosi")
+   || ds.Dimension("Vuosineljännes")
+   || ds.Dimension("Month");
+  return _dim && _dim.id
+    ? [_dim.id[0]]
+    : ["2019"];
+};
+
+const _getTimeDimension = (ds, timeId) => {
+  const _dimTimeId = timeId && ds.Dimension(timeId)
+  , _dim = _dimTimeId || ds.Dimension("Tid")
+  , times = _dim && _dim.id
+     || _getDimensionWithouTime(ds);
+
+  return times;
+}
+
 const fnAdapter = {
-  isYNumber: AdapterFn.isYNumber,
+  isYNumber, numberFormat, crId,
+  crValueMoving: valueMoving,
 
   crTitle: (option) => {
     switch(option.browserType){
@@ -89,35 +127,29 @@ const fnAdapter = {
     const mapSlice = _crAreaMapSlice(option)
         , ds = JSONstat(json).Dataset(0)
         , values = ds.Data(mapSlice)
-        , times = ds.Dimension("Tid").id;
-
+        , times = _getTimeDimension(ds, option.timeId);
     return { ds, values, times };
   },
-
-  crId: () => AdapterFn.crId(),
 
   crTid: (time, ds) => {
     if (time) {
       return time;
     }
-    const tidIds = ds.Dimension("Tid").id;
+    const tidIds = _getTimeDimension(ds);
     return tidIds[tidIds.length-1];
   },
 
-  crInfo: (ds, option) => {
-    const { label='' } = ds;
-    return {
-      name: label,
-      description: _crDescr(ds, option)
-    }
-  },
+  crInfo: (ds, option) => ({
+    name: ds.label || '',
+    description: _crDescr(ds, option)
+  }),
 
   crZhConfig: (option) => {
-    const { dataSource } = option
-        , id = fnAdapter.crId()
+    const { dataSource, _itemKey } = option
+        , key = _itemKey || crId()
         , itemCaption = _crItemCaption(option);
     return {
-      id, key: id,
+      id: key, key,
       itemCaption,
       isWithoutAdd: true,
       isWithLegend: false,
@@ -125,30 +157,11 @@ const fnAdapter = {
     };
   },
 
-  crValueMoving: (d) => {
-    if (Array.isArray(d)) {
-      return AdapterFn.valueMoving(d);
-    }
-    return { date: d, direction: 'empty' };
-  },
-
-  crChartOption: (ds, data, option) => {
-    return {
-      info: fnAdapter.crInfo(ds, option),
-      valueMoving: fnAdapter.crValueMoving(data),
-      zhConfig: fnAdapter.crZhConfig(option)
-    };
-  },
-
-  numberFormat: (value) => {
-    const arrSplit = (value+'').split('.')
-        , decimal = arrSplit[1]
-            ? arrSplit[1].length
-            : 0;
-     return Highcharts
-       .numberFormat(value, decimal, '.', ' ');
-  }
-
+  crChartOption: (ds, data, option) => ({
+    info: fnAdapter.crInfo(ds, option),
+    valueMoving: fnAdapter.crValueMoving(data),
+    zhConfig: fnAdapter.crZhConfig(option)
+  })
 }
 
 export default fnAdapter

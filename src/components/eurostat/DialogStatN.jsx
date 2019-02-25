@@ -35,6 +35,22 @@ const _isOpenAndPrevLoadFailed = (
   && props.isShow
   && state.isLoadFailed;
 
+//const _isArr = Array.isArray;
+
+const _fNotTimeDimension = timeId => config => config.id !== timeId;
+
+/*
+const _notTimeDimension = config => {
+  console.log(config)
+  if ( config.caption === 'Month'
+    && _isArr(config.options)
+    && config.options.length > 12
+  ) { return false; }
+  return config.caption.indexOf('Year') === -1
+     &&  config.caption.indexOf('Vuosi') === -1;
+};
+*/
+
 @Decor.withToolbar
 @Decor.withValidationLoad
 @Decor.withLoad
@@ -91,18 +107,23 @@ class DialogStatN extends Component {
   }
 
  _loadDims = () => {
-    const { proxy, baseMeta, dims, dfProps={} } = this.props
-        , { dfId } = dfProps;
-    loadDims({ id: dfId, proxy, baseMeta, dims })
+    const {
+      proxy, baseMeta,
+      dims, timeId, dfProps={}, noTime
+    } = this.props
+    , { dfId } = dfProps;
+    loadDims({ id: dfId, proxy, baseMeta, dims, noTime, timeId })
       .then(result => {
          const { configs, errMsg } = result;
          if (configs) {
-           this._selectOptions = configs
+           //id
+           const _configs = configs.filter(_fNotTimeDimension(timeId));
+           this._selectOptions = _configs
              .map(config => config.options)
            this.setState({
               isLoading: false,
               isLoadFailed: false,
-              configs: configs
+              configs: _configs
             })
         } else {
           this.setState({
@@ -270,15 +291,6 @@ class DialogStatN extends Component {
            onSelectChart={this._hSelectChartType}
            onRegColor={this._onRegColor}
          />
-         {/*
-         <D.RowInputSelect
-           isShowLabels={isShowLabels}
-           caption="Chart"
-           placeholder="Default: Area"
-           options={this._chartOptions}
-           onSelect={this._hSelectChartType}
-         />
-         */}
          <D.ShowHide isShow={isShowDate}>
            <D.RowInputSelect
               isShowLabels={isShowLabels}
@@ -293,7 +305,7 @@ class DialogStatN extends Component {
          />
       </D.DraggableDialog>
     );
-  }  
+  }
 }
 
 export default DialogStatN

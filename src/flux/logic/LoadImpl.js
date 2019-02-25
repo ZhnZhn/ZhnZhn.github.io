@@ -7,7 +7,7 @@ const {
   Quandl,
   DbNomics,
   UnComtrade, FaoStat, WorldBank,
-  EuroStat, StatNorway, StatSweden,
+  EuroStat, StatNorway, StatSweden, StatFinland,
   AlphaVantage, Barchart, Intrinio,
   Crc, Cmc,
   Iex, Insee,
@@ -26,6 +26,7 @@ const LoadImpl = {
   StatNorway2: f({ ...StatNorway.Table }),
 
   StatSweden: f({ ...StatSweden.Table }),
+  StatFinland: f({ ...StatFinland.Table }),
 
   AlphaIndicator: f({ ...AlphaVantage.Indicator }),
   AlphaIntraday: f({ ...AlphaVantage.Intraday }),

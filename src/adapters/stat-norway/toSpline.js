@@ -12,17 +12,22 @@ const {
 
 const DF_TYPE = 'spline';
 
+const _checkOrder = data => {
+  const _isReverse = data.length > 2
+    && data[0].x > data[1].x
+  return _isReverse ? data.reverse() : data;
+};
+
 const _toData = (values, times ) => {
   const _values = Array.isArray(values)
            ? values
            : [ values ];
   const data = times.map((time, i) => ({
     x: _toUTC(time),
-    y: _values[i].value
+    y: _values[i] ? _values[i].value : null
   }))
-
-  return data;
-}
+  return _checkOrder(data);
+};
 
 const _crSplineSeria = (data, option={}) => {
   const { seriaType, seriaColor } = option
@@ -53,6 +58,7 @@ const toArea = {
          .addCaption(title, subtitle)
          .clearSeries()
          .addSeries(seria)
+         .addMinMax(data, option)
          .add({ ...crChartOption(ds, data, option) })
          .toConfig()
 

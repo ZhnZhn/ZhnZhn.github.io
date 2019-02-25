@@ -20,8 +20,10 @@ const _getFrequencyAndDims = (json) => {
   const dims = []
       , { variables=[] } = json;
   let mapFrequency = 'Y'
+  let timeId
   variables.forEach(item => {
-    const { code, text } = item;
+    const { code, text, time } = item;
+    if (time) { timeId = code }
     if (code !== 'Tid') {
      dims.push({
        c: _toFirstUpperCase(text),
@@ -35,13 +37,17 @@ const _getFrequencyAndDims = (json) => {
      }
    }
   })
-  return { mapFrequency, dims };
+  return { mapFrequency, dims, timeId };
 }
 
-const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
-   const _url = proxy
-           ? `${proxy}${rootUrl}/${id}`
-           : `${rootUrl}/${id}`;
+const _fOnClickTable = (dfProps) => () => {
+   const {
+     rootUrl, id, proxy,
+     bT, lT, sP, dU,
+     noTime, dS
+   } = dfProps
+   , _href = `${rootUrl}/${id}`
+   , _url = proxy ? `${proxy}${_href}` : _href;
    fetch(_url)
       .then(res => {
         const { status, statusText } = res;
@@ -53,7 +59,7 @@ const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
       })
       .then(json => {
         const {
-                mapFrequency, dims
+                mapFrequency, dims, timeId
               } = _getFrequencyAndDims(json)
             , { title='' } = json
             , _title = title.length>35
@@ -70,8 +76,11 @@ const _fOnClickTable = ({ rootUrl, id, bT, lT, sP, dU, proxy }) => () => {
           loadId: lT,
           mapFrequency: mapFrequency,
           dims: dims,
+          timeId: timeId,
           descrUrl: dU,
+          dataSource: dS,
           dfProps: { dfId: id },
+          noTime: noTime,
           proxy: proxy
         })
 

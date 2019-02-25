@@ -49,12 +49,14 @@ var _crSelectDim = function _crSelectDim(code) {
   return (0, _extends3.default)({ code: code }, C.SELECTION_ALL);
 };
 
-var _crOption = function _crOption(dims) {
+var _crOption = function _crOption(dims, noTime) {
   var arrQuery = dims.map(function (dim) {
     return _crSelectDim(dim.v);
   });
 
-  arrQuery.push(C.TID_DIM);
+  if (!noTime) {
+    arrQuery.push(C.TID_DIM);
+  }
 
   return {
     method: 'POST',
@@ -106,11 +108,12 @@ var loadDims = function loadDims(_ref) {
   var proxy = _ref.proxy,
       baseMeta = _ref.baseMeta,
       id = _ref.id,
-      dims = _ref.dims;
+      dims = _ref.dims,
+      noTime = _ref.noTime;
 
   if (!IS_LOADING) {
     var _url = _crUrl(proxy, baseMeta, id),
-        _option = _crOption(dims);
+        _option = _crOption(dims, noTime);
     _markStartLoading(_url);
     return fetch(_url, _option).then(function (res) {
       var status = res.status;

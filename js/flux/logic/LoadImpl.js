@@ -28,6 +28,7 @@ var Quandl = _RouterAdapter2.default.Quandl,
     EuroStat = _RouterAdapter2.default.EuroStat,
     StatNorway = _RouterAdapter2.default.StatNorway,
     StatSweden = _RouterAdapter2.default.StatSweden,
+    StatFinland = _RouterAdapter2.default.StatFinland,
     AlphaVantage = _RouterAdapter2.default.AlphaVantage,
     Barchart = _RouterAdapter2.default.Barchart,
     Intrinio = _RouterAdapter2.default.Intrinio,
@@ -52,6 +53,7 @@ var LoadImpl = {
   StatNorway2: (0, _loadItem2.default)((0, _extends3.default)({}, StatNorway.Table)),
 
   StatSweden: (0, _loadItem2.default)((0, _extends3.default)({}, StatSweden.Table)),
+  StatFinland: (0, _loadItem2.default)((0, _extends3.default)({}, StatFinland.Table)),
 
   AlphaIndicator: (0, _loadItem2.default)((0, _extends3.default)({}, AlphaVantage.Indicator)),
   AlphaIntraday: (0, _loadItem2.default)((0, _extends3.default)({}, AlphaVantage.Intraday)),

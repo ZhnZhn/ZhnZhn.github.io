@@ -17,7 +17,7 @@ import { ChartActionTypes as CHAT } from '../flux/actions/ChartActions';
 import initTheme from './styles/theme'
 import ThemeContext from './hoc/ThemeContext'
 
-const PREV_BUILD = '20-02-2019';
+const PREV_BUILD = '25-02-2019';
 
 const _checkBuild = () => {
   if (window.fetch) {

@@ -1,0 +1,39 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/crMenu.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/crMenu.js",
+ "names": [
+  "_crItemHandlers",
+  "dT",
+  "bT",
+  "onClick",
+  "CA",
+  "showDialog",
+  "bind",
+  "onBadgeClick",
+  "CHA",
+  "showChart",
+  "onBadgeClose",
+  "closeChartContainer2",
+  "crMenu",
+  "menu",
+  "menuItems",
+  "browserType",
+  "map",
+  "caption",
+  "menuPart",
+  "isInitOpen",
+  "items",
+  "_items",
+  "id",
+  "item",
+  "isNew",
+  "title",
+  "menuTitle",
+  "counter",
+  "isOpen"
+ ],
+ "mappings": ";;;;;;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB,SAAlBA,eAAkB,CAACC,EAAD,EAAKC,EAAL;AAAA,SAAa;AACnCC,aAASC,2BAAGC,UAAH,CAAcC,IAAd,CAAmB,IAAnB,EAAyBL,EAAzB,EAA6BC,EAA7B,CAD0B;AAEnCK,kBAAcC,uBAAIC,SAAJ,CAAcH,IAAd,CAAmB,IAAnB,EAAyBL,EAAzB,EAA6BC,EAA7B,CAFqB;AAGnCQ,kBAAcN,2BAAGO,oBAAH,CAAwBL,IAAxB,CAA6B,IAA7B,EAAmCL,EAAnC;AAHqB,GAAb;AAAA,CAAxB;;AAMA,IAAMW,SAAS,SAATA,MAAS,GAAqC;AAAA,MAApCC,IAAoC,uEAA/B,EAA+B;AAAA,MAA3BC,SAA2B;AAAA,MAAhBC,WAAgB;;AAClD,SAAOF,KAAKG,GAAL,CAAS,oBAAY;AAAA,QACjBC,OADiB,GACiBC,QADjB,CACjBD,OADiB;AAAA,QACRE,UADQ,GACiBD,QADjB,CACRC,UADQ;AAAA,0BACiBD,QADjB,CACIE,KADJ;AAAA,QACIA,KADJ,mCACU,EADV;AAAA,QAEvBC,MAFuB,GAEdD,MAAMJ,GAAN,CAAU,gBAAQ;AAAA,UAChBM,EADgB,GACIC,IADJ,CAChBD,EADgB;AAAA,wBACIC,IADJ,CACZC,KADY;AAAA,UACZA,KADY,+BACN,KADM;;AAExB;AACEF,YAAIA,EADN;AAEEG,eAAOX,UAAUQ,EAAV,EAAcI,SAFvB;AAGEF,eAAOA,KAHT;AAIEG,iBAAS,CAJX;AAKEC,gBAAQ;AALV,SAMK5B,gBAAgBsB,EAAhB,EAAoBP,WAApB,CANL;AAQJ,KAVU,CAFc;;AAazB,WAAO;AACJE,sBADI,EACKE,sBADL;AAEJC,aAAOC;AAFH,KAAP;AAIF,GAjBM,CAAP;AAkBD,CAnBD;;kBAqBeT,M"
+}

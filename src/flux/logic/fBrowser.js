@@ -48,7 +48,7 @@ const _crBrowserDynamic = (Comp, option) => {
             ? _showModalDialogDescription
             : undefined
        , onShowContainer = ChartActions.showChart.bind(null, chartContainerType, browserType);
-   
+
    return React.createElement(Comp , {
      dfProps,
      key : browserType,
@@ -86,6 +86,7 @@ const fBrowser = {
 
       case BT.SWEDEN_STAT_ALL:
       case BT.NORWAY_STAT_ALL:
+      case BT.FINLAND_STAT_ALL:
         return RouterBrowser.STAT_ALL
           .then(Comp => _crBrowserDynamic(Comp, option));
 

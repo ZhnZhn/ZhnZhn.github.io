@@ -1,0 +1,35 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/BrowserLogic.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/BrowserLogic.js",
+ "names": [
+  "BrowserLogic",
+  "crMenu",
+  "isWithItemCounter",
+  "browserType",
+  "_config",
+  "BrowserConfig",
+  "withoutItemCounter",
+  "initBrowseMenu",
+  "slice",
+  "option",
+  "json",
+  "menu",
+  "items",
+  "elMenu",
+  "routeDialog",
+  "browserMenu",
+  "setIsOpen",
+  "value",
+  "appMenu",
+  "bT",
+  "cT",
+  "item",
+  "isOpen",
+  "plusCounter",
+  "counter"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,eAAe;AACnBC,UAAQA,gBADW;;AAGnBC,qBAAmB,2BAACC,WAAD,EAAiB;AAClC,QAAMC,UAAUC,wBAAcF,WAAd,CAAhB;AACA,WAAO,OAAOC,OAAP,KAAmB,WAAnB,GACH,KADG,GAEH,CAACA,QAAQE,kBAFb;AAGD,GARkB;;AAUnBC,kBAAgB,wBAACC,KAAD,EAAQC,MAAR,EAAmB;AAAA,QACzBC,IADyB,GACHD,MADG,CACzBC,IADyB;AAAA,QACnBP,WADmB,GACHM,MADG,CACnBN,WADmB;AAAA,QAEzBQ,IAFyB,GAETD,IAFS,CAEzBC,IAFyB;AAAA,QAEnBC,KAFmB,GAETF,IAFS,CAEnBE,KAFmB;AAAA,QAG3BC,MAH2B,GAGlB,sBAAOF,IAAP,EAAaC,KAAb,EAAoBT,WAApB,CAHkB;;AAIjC,oCAAiBS,KAAjB;AACAJ,UAAMM,WAAN,CAAkBX,WAAlB,IAAiCS,KAAjC;AACAJ,UAAMO,WAAN,CAAkBZ,WAAlB,IAAiCU,MAAjC;AACA,WAAOA,MAAP;AACD,GAlBkB;;AAoBnBG,aAAW,mBAACC,KAAD,EAAQC,OAAR,EAAiBC,EAAjB,EAAqBC,EAArB,EAA4B;AACrC,QAAIpB,aAAaE,iBAAb,CAA+BiB,EAA/B,CAAJ,EAAwC;AACtC,UAAME,OAAO,wBAASH,QAAQC,EAAR,CAAT,EAAsBC,EAAtB,CAAb;AACA,UAAIC,IAAJ,EAAU;AACRA,aAAKC,MAAL,GAAcL,KAAd;AACD;AACF;AACF,GA3BkB;AA4BnBM,eAAa,qBAACN,KAAD,EAAQC,OAAR,EAAiBC,EAAjB,EAAqBC,EAArB,EAA4B;AACvC,QAAIpB,aAAaE,iBAAb,CAA+BiB,EAA/B,CAAJ,EAAwC;AACtC,UAAME,OAAO,wBAASH,QAAQC,EAAR,CAAT,EAAsBC,EAAtB,CAAb;AACA,UAAIC,IAAJ,EAAS;AACPA,aAAKG,OAAL,IAAgBP,KAAhB;AACAI,aAAKC,MAAL,GAAc,IAAd;AACD;AACF;AACF;AApCkB,CAArB;;kBAuCetB,Y"
+}

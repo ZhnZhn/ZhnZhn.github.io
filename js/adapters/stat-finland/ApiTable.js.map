@@ -1,0 +1,12 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/stat-finland/ApiTable.js"
+ ],
+ "file": "../../../src/adapters/stat-finland/ApiTable.js",
+ "names": [
+  "ROOT_URL",
+  "TableApi"
+ ],
+ "mappings": ";;;;;;AAAA;;;;;;AAEA,IAAMA,WAAW,gDAAjB;AACA,IAAMC,WAAW,yBAAUD,QAAV,CAAjB;;kBAEeC,Q"
+}

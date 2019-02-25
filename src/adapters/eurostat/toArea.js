@@ -21,8 +21,7 @@ const toArea = {
 
       fn.setDataAndInfo({ config, data, json, option });
       fn.setLineExtrems({ config, max, min, isNotZoomToMinMax });
-      config.zhConfig.isWithoutIndicator = false
-      config.zhConfig.isWithoutSma = true
+      //config.zhConfig.isWithoutIndicator = false      
 
       return config;
    },

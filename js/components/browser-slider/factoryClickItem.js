@@ -32,10 +32,15 @@ var _getFrequencyAndDims = function _getFrequencyAndDims(json) {
       variables = _json$variables === undefined ? [] : _json$variables;
 
   var mapFrequency = 'Y';
+  var timeId = void 0;
   variables.forEach(function (item) {
     var code = item.code,
-        text = item.text;
+        text = item.text,
+        time = item.time;
 
+    if (time) {
+      timeId = code;
+    }
     if (code !== 'Tid') {
       dims.push({
         c: _toFirstUpperCase(text),
@@ -49,19 +54,23 @@ var _getFrequencyAndDims = function _getFrequencyAndDims(json) {
       }
     }
   });
-  return { mapFrequency: mapFrequency, dims: dims };
+  return { mapFrequency: mapFrequency, dims: dims, timeId: timeId };
 };
 
-var _fOnClickTable = function _fOnClickTable(_ref) {
-  var rootUrl = _ref.rootUrl,
-      id = _ref.id,
-      bT = _ref.bT,
-      lT = _ref.lT,
-      sP = _ref.sP,
-      dU = _ref.dU,
-      proxy = _ref.proxy;
+var _fOnClickTable = function _fOnClickTable(dfProps) {
   return function () {
-    var _url = proxy ? "" + proxy + rootUrl + "/" + id : rootUrl + "/" + id;
+    var rootUrl = dfProps.rootUrl,
+        id = dfProps.id,
+        proxy = dfProps.proxy,
+        bT = dfProps.bT,
+        lT = dfProps.lT,
+        sP = dfProps.sP,
+        dU = dfProps.dU,
+        noTime = dfProps.noTime,
+        dS = dfProps.dS,
+        _href = rootUrl + "/" + id,
+        _url = proxy ? "" + proxy + _href : _href;
+
     fetch(_url).then(function (res) {
       var status = res.status,
           statusText = res.statusText;
@@ -75,6 +84,7 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
       var _getFrequencyAndDims2 = _getFrequencyAndDims(json),
           mapFrequency = _getFrequencyAndDims2.mapFrequency,
           dims = _getFrequencyAndDims2.dims,
+          timeId = _getFrequencyAndDims2.timeId,
           _json$title = json.title,
           title = _json$title === undefined ? '' : _json$title,
           _title = title.length > 35 ? title.substr(0, 35) + '...' : title,
@@ -89,8 +99,11 @@ var _fOnClickTable = function _fOnClickTable(_ref) {
         loadId: lT,
         mapFrequency: mapFrequency,
         dims: dims,
+        timeId: timeId,
         descrUrl: dU,
+        dataSource: dS,
         dfProps: { dfId: id },
+        noTime: noTime,
         proxy: proxy
       });
 

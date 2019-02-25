@@ -128,12 +128,10 @@ const AdapterFn = {
     };
   },
 
-  legendItem(index, color, name, is=false){
-    return {
-      index, color, name,
-      isVisible: is
-    };
-  },
+  legendItem: (index, color, name, is=false) => ({
+    index, color, name,
+    isVisible: is
+  }),
 
   stockSeriesLegend(){
     return [
@@ -147,10 +145,9 @@ const AdapterFn = {
   formatAllNumber: formatAllNumber,
   numberFormat: formatAllNumber,
 
-  isNumberOrNull: v => {
-     return (typeof v === 'number' && !isNaN(v))
-       || v === null;
-  },
+  isNumberOrNull: v => (typeof v === 'number' && !isNaN(v))
+     || v === null
+  ,
 
   isYNumber: _fIsNumber('y'),
 
@@ -165,7 +162,6 @@ const AdapterFn = {
       prevValue: bPrevValue,
       Direction: Direction,
       fnFormat: formatAllNumber
-      //fnFormat: ChartConfig.fnNumberFormat
     })
   },
 
@@ -208,12 +204,12 @@ const AdapterFn = {
       )
       .toUpperCase();
   },
-  
-  toUpperCaseFirst: (str) => {
-    return (typeof str === 'string' || str instanceof String ) && str.length > 0
-         ? str[0].toUpperCase() + str.substr(1)
-         : EMPTY;
-  },
+
+  toUpperCaseFirst: (str) => typeof str === 'string'
+    && str.length > 0
+      ? str[0].toUpperCase() + str.substr(1)
+      : EMPTY
+  ,
   appendWithColon: (...args) => {
     let str='';
     args.forEach(s => {
@@ -224,11 +220,9 @@ const AdapterFn = {
     return str;
   },
 
-  monthIndex: (str) => {
-    return M.indexOf(
-      String(str).toLowerCase()
-    );
-  },
+  monthIndex: str => M.indexOf(
+    String(str).toLowerCase()
+  ),
 
   findMinY: seriaFns.findMinY,
   findMaxY: seriaFns.findMaxY

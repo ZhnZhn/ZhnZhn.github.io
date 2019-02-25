@@ -20,9 +20,9 @@ var _OpenClose = require('../zhn/OpenClose');
 
 var _OpenClose2 = _interopRequireDefault(_OpenClose);
 
-var _Links = require('../links/Links');
+var _ProviderLinks = require('../links/ProviderLinks');
 
-var _Links2 = _interopRequireDefault(_Links);
+var _ProviderLinks2 = _interopRequireDefault(_ProviderLinks);
 
 var _About = require('./About.Style');
 
@@ -73,7 +73,7 @@ var DataProviders = function DataProviders(_ref) {
     _OpenClose2.default,
     {
       isClose: isClose,
-      caption: 'Data Providers (All 18):',
+      caption: 'Data Providers (All 19):',
       captionStyle: ocCaptionStyle,
       rootStyle: (0, _extends3.default)({}, _About2.default.LINE_HEIGHT, _About2.default.P_BOTTOM),
       childStyle: ST.ROOT_CHILD,
@@ -88,7 +88,7 @@ var DataProviders = function DataProviders(_ref) {
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.Quandl, null),
+          _react2.default.createElement(_ProviderLinks2.default.Quandl, null),
           _react2.default.createElement(
             'span',
             { style: _About2.default.BLACK },
@@ -98,47 +98,52 @@ var DataProviders = function DataProviders(_ref) {
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.DbNomics, null)
+          _react2.default.createElement(_ProviderLinks2.default.DbNomics, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.Eurostat, null)
+          _react2.default.createElement(_ProviderLinks2.default.Eurostat, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.UnComtrade, null)
+          _react2.default.createElement(_ProviderLinks2.default.UnComtrade, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.WorldBank, null)
+          _react2.default.createElement(_ProviderLinks2.default.WorldBank, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.StatNorway, null)
+          _react2.default.createElement(_ProviderLinks2.default.StatNorway, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.StatSweden, null)
+          _react2.default.createElement(_ProviderLinks2.default.StatSweden, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.Iex, null)
+          _react2.default.createElement(_ProviderLinks2.default.StatFinland, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.CryptoCompare, null)
+          _react2.default.createElement(_ProviderLinks2.default.Iex, null)
         ),
         _react2.default.createElement(
           'span',
           { style: _About2.default.PROVIDER },
-          _react2.default.createElement(_Links2.default.Cmc, null)
+          _react2.default.createElement(_ProviderLinks2.default.CryptoCompare, null)
+        ),
+        _react2.default.createElement(
+          'span',
+          { style: _About2.default.PROVIDER },
+          _react2.default.createElement(_ProviderLinks2.default.Cmc, null)
         )
       ),
       _react2.default.createElement(
@@ -157,7 +162,7 @@ var DataProviders = function DataProviders(_ref) {
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.Quandl, null),
+            _react2.default.createElement(_ProviderLinks2.default.Quandl, null),
             _react2.default.createElement(
               'span',
               { style: _About2.default.BLACK },
@@ -167,27 +172,27 @@ var DataProviders = function DataProviders(_ref) {
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.Barchart, null)
+            _react2.default.createElement(_ProviderLinks2.default.Barchart, null)
           ),
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.AlphaVantage, null)
+            _react2.default.createElement(_ProviderLinks2.default.AlphaVantage, null)
           ),
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.Bea, null)
+            _react2.default.createElement(_ProviderLinks2.default.Bea, null)
           ),
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.Eia, null)
+            _react2.default.createElement(_ProviderLinks2.default.Eia, null)
           ),
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.Intrinio, null)
+            _react2.default.createElement(_ProviderLinks2.default.Intrinio, null)
           )
         ),
         _react2.default.createElement(
@@ -243,22 +248,22 @@ var DataProviders = function DataProviders(_ref) {
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.FaoStat, null)
+            _react2.default.createElement(_ProviderLinks2.default.FaoStat, null)
           ),
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.Insee, null)
+            _react2.default.createElement(_ProviderLinks2.default.Insee, null)
           ),
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.Bsl, null)
+            _react2.default.createElement(_ProviderLinks2.default.Bsl, null)
           ),
           _react2.default.createElement(
             'span',
             { style: _About2.default.PROVIDER },
-            _react2.default.createElement(_Links2.default.CryptoCompare, null),
+            _react2.default.createElement(_ProviderLinks2.default.CryptoCompare, null),
             _react2.default.createElement(
               'span',
               { style: _About2.default.BLACK },

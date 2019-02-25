@@ -53,7 +53,6 @@ var _fIsCategoryPoint = function _fIsCategoryPoint(dfT) {
       return false;
     }
     return isYNumber(p) && p.y !== 0;
-    //return p.y !== null && p.y !== 0;
   };
 };
 var _compareByY = function _compareByY(a, b) {
@@ -108,7 +107,6 @@ var _crCategory = function _crCategory(option, by) {
         category: dfC,
         cTotal: dfT,
         itemSlice: itemSlice
-        //itemSlice: items[1].slice
       };
   }
 };
@@ -147,7 +145,8 @@ var toColumn = {
         Tid = crTid(time, _ds),
         _values = _ds.Data((0, _extends3.default)({ Tid: Tid }, itemSlice, dfTSlice)),
         _title = crTitle(option),
-        _subtitle = (items[1].caption || '') + ': ' + Tid,
+        _twoC = (items[1] || {}).caption || '',
+        _subtitle = _twoC + ': ' + Tid,
         data = _crData(_values, _dimC, cTotal),
         _c = data.map(function (item) {
       return item.c;

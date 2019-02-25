@@ -120,9 +120,13 @@ var MenuBrowserDynamic = function (_Component) {
       this._loadMenu();
     }
   }, {
-    key: 'componentWillUpdate',
-    value: function componentWillUpdate(nextProps, nextState) {
-      if (!nextState.isLoaded && nextState.isShow) {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var _state = this.state,
+          isLoaded = _state.isLoaded,
+          isShow = _state.isShow;
+
+      if (!isLoaded && isShow) {
         this._loadMenu();
       }
     }
@@ -137,9 +141,9 @@ var MenuBrowserDynamic = function (_Component) {
       var _props = this.props,
           caption = _props.caption,
           children = _props.children,
-          _state = this.state,
-          menuItems = _state.menuItems,
-          isShow = _state.isShow;
+          _state2 = this.state,
+          menuItems = _state2.menuItems,
+          isShow = _state2.isShow;
 
 
       return _react2.default.createElement(

@@ -1,48 +1,50 @@
+import fns from './createrFns'
+
+const { crCaption, crItemKey } = fns;
 
 const COUNTRY_CAPTION_DF = 'EU';
-  //  , AREA = 'AREA';
+
+const _toIds = ({ dfId }, items) => {
+  const _arr = [dfId];  
+  items.forEach(({ slice }) => {
+    if (slice) {
+      _arr.push(slice[Object.keys(slice)[0]])
+    }
+  })
+  return _arr;
+};
 
 const createLoadOptions = (props={}, options={}) => {
-  const { loadId, group, dataSource, dfProps } = props
+  const { loadId, group, dataSource, dfProps, timeId } = props
       , {
-          items,
+          items=[],
           chartType={}, seriaColor,
           date, dateDefault,
           selectOptions
         } = options
-      , { value:chartTypeValue } = chartType
+      , { value:seriaType, compType: zhCompType } = chartType
       , _countryValue = items[0]
           ? items[0].value
           : COUNTRY_CAPTION_DF
-      , _countryCaption = items[0]
-          ? items[0].caption
-          : COUNTRY_CAPTION_DF;
-
-
-  const _zhCompType = chartType.compType
-     , _time = (date) ? date.value : dateDefault;
-
-  /*
-  if (chartType && chartType.value !== AREA){
-    _zhCompType = chartType.compType;
-    _time = (date) ? date.value : dateDefault;
-  }
-  */
+      , twoV = items[1] ? items[1].value: undefined
+      , { oneC, title, subtitle } = crCaption(items)
+      , time = date ? date.value : dateDefault
+      , _items = _toIds(dfProps, items)
+      , _itemKey = crItemKey(_items, seriaType, time);
 
   return {
     ...dfProps,
+    _itemKey,
     geo : _countryValue,
     group : group,
-    metric : items[1] ? items[1].value: undefined,
-    loadId : loadId,
-    itemCaption: _countryCaption,
-    title : _countryCaption,
-    subtitle : items[1] ? items[1].caption: undefined,
-    alertGeo : _countryCaption,
-    seriaType : chartTypeValue,
-    seriaColor : seriaColor,
-    zhCompType : _zhCompType,
-    time : _time,
+    metric : twoV,
+    itemCaption: oneC,
+    alertGeo : oneC,
+    loadId,
+    title, subtitle,
+    seriaType, seriaColor,
+    zhCompType,
+    time, timeId,
     dataSource,
     items,
     selectOptions

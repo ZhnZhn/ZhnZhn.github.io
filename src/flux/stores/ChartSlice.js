@@ -2,7 +2,7 @@ import { T as LPA } from '../actions/LoadingProgressActions'
 import { ChartActionTypes as CHAT } from '../actions/ChartActions';
 import { BrowserActionTypes as BAT } from '../actions/BrowserActions';
 
-import ChartLogic from './ChartLogic'
+import ChartLogic from './chart/ChartLogic'
 
 const {
   isChartExist,
@@ -36,7 +36,7 @@ const ChartSlice = {
   onLoadStock(){
     this.triggerLoadingProgress(LPA.LOADING)
   },
-  onLoadStockCompleted(option, config){      
+  onLoadStockCompleted(option, config){
       const {
         chartType, browserType,
         limitRemaining

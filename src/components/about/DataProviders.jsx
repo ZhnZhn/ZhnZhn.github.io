@@ -3,7 +3,7 @@ import React from 'react'
 import C from '../styles/Color'
 
 import OpenClose from '../zhn/OpenClose'
-import Link from '../links/Links'
+import Link from '../links/ProviderLinks'
 
 import S from './About.Style'
 
@@ -46,7 +46,7 @@ const ST = {
 const DataProviders = ({ isClose, ocCaptionStyle }) => (
   <OpenClose
      isClose={isClose}
-     caption="Data Providers (All 18):"
+     caption="Data Providers (All 19):"
      captionStyle={ocCaptionStyle}
      rootStyle={{ ...S.LINE_HEIGHT, ...S.P_BOTTOM }}
      childStyle={ST.ROOT_CHILD}
@@ -77,6 +77,9 @@ const DataProviders = ({ isClose, ocCaptionStyle }) => (
         </span>
         <span style={S.PROVIDER}>
           <Link.StatSweden />
+        </span>
+        <span style={S.PROVIDER}>
+          <Link.StatFinland />
         </span>
         <span style={S.PROVIDER}>
           <Link.Iex />

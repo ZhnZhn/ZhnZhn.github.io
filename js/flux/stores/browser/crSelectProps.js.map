@@ -1,0 +1,34 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/flux/stores/browser/crSelectProps.js"
+ ],
+ "file": "../../../../src/flux/stores/browser/crSelectProps.js",
+ "names": [
+  "_isArray",
+  "Array",
+  "isArray",
+  "_mergeSelectProps",
+  "selectProps",
+  "obj",
+  "arr",
+  "length",
+  "undefined",
+  "_crSelectProps",
+  "items",
+  "rootUri",
+  "_rootUri",
+  "forEach",
+  "item",
+  "push",
+  "id",
+  "caption",
+  "uri",
+  "jsonProp",
+  "crSelectProps",
+  "baseProps",
+  "dialogProps",
+  "_selectItems"
+ ],
+ "mappings": ";;;;;;;;;;;;AACA,IAAMA,WAAWC,MAAMC,OAAvB;;AAEA,IAAMC,oBAAoB,SAApBA,iBAAoB,CAACC,WAAD,EAAcC,GAAd,EAAsB;AAC9C,MAAMC,iDAAUF,WAAV,oCAA2BC,IAAID,WAAJ,IAAmB,EAA9C,EAAN;AACA,SAAOE,IAAIC,MAAJ,GAAa,CAAb,GACHD,GADG,GAEHE,SAFJ;AAGD,CALD;AAMA,IAAMC,iBAAiB,SAAjBA,cAAiB,CAACC,KAAD,EAAQC,OAAR,EAAoB;AACzC,MAAI,CAACX,SAASU,KAAT,CAAL,EAAsB;AACpB;AACD;AACD,MAAME,WAAWD,UAAUA,OAAV,GAAoB,EAArC;AAAA,MACEP,cAAc,EADhB;AAEAM,QAAMG,OAAN,CAAc,gBAAQ;AACpB,QAAIb,SAASc,IAAT,CAAJ,EAAoB;AAClBV,kBAAYW,IAAZ,CAAiB;AACfC,YAAIF,KAAK,CAAL,CADW;AAEfG,iBAASH,KAAK,CAAL,CAFM;AAGfI,kBAAQN,QAAR,GAAmBE,KAAK,CAAL,CAHJ;AAIfK,kBAAUL,KAAK,CAAL;AAJK,OAAjB;AAMD;AACF,GATD;AAUA,SAAO,EAAEV,wBAAF,EAAP;AACD,CAjBD;;AAmBA,IAAMgB,gBAAgB,SAAhBA,aAAgB,CAACC,SAAD,EAAYC,WAAZ,EAA4B;AAC1C,MAAElB,WAAF,GAAkBiB,SAAlB,CAAEjB,WAAF;AAAA,MACJmB,YADI,GACWvB,SAASI,WAAT,IACXD,kBAAkBC,WAAlB,EAA+BkB,WAA/B,CADW,GAEXA,YAAYlB,WAHZ;AAAA,MAIJQ,QAJI,GAIOS,UAAUV,OAAV,IAAqBW,YAAYX,OAJxC;;AAKN,SAAOF,eAAec,YAAf,EAA6BX,QAA7B,CAAP;AACD,CAPD;;kBASeQ,a"
+}

@@ -16,6 +16,7 @@ var BrowserType = exports.BrowserType = {
    NORWAY_STAT_ALL: 'NST_ALL',
    SWEDEN_STAT: 'SWS',
    SWEDEN_STAT_ALL: 'SWS_ALL',
+   FINLAND_STAT_ALL: 'SFL',
    NBSC: 'NBSC',
 
    PREMIUM_SAMPLE: 'QPS',
@@ -89,6 +90,7 @@ var LoadType = exports.LoadType = {
    NST: 'NST',
    NST_2: 'NST_2',
    SWS: 'SWS',
+   SFL: 'SFL',
    UN: 'UN',
    FAO: 'FAO',
    WB: 'WB',

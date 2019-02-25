@@ -82,6 +82,26 @@ var _isOpenAndPrevLoadFailed = function _isOpenAndPrevLoadFailed(prevProps, prop
   return props !== prevProps && !prevProps.isShow && props.isShow && state.isLoadFailed;
 };
 
+//const _isArr = Array.isArray;
+
+var _fNotTimeDimension = function _fNotTimeDimension(timeId) {
+  return function (config) {
+    return config.id !== timeId;
+  };
+};
+
+/*
+const _notTimeDimension = config => {
+  console.log(config)
+  if ( config.caption === 'Month'
+    && _isArr(config.options)
+    && config.options.length > 12
+  ) { return false; }
+  return config.caption.indexOf('Year') === -1
+     &&  config.caption.indexOf('Vuosi') === -1;
+};
+*/
+
 var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
   (0, _inherits3.default)(DialogStatN, _Component);
 
@@ -95,22 +115,26 @@ var DialogStatN = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           proxy = _this$props.proxy,
           baseMeta = _this$props.baseMeta,
           dims = _this$props.dims,
+          timeId = _this$props.timeId,
           _this$props$dfProps = _this$props.dfProps,
           dfProps = _this$props$dfProps === undefined ? {} : _this$props$dfProps,
+          noTime = _this$props.noTime,
           dfId = dfProps.dfId;
 
-      (0, _loadDims2.default)({ id: dfId, proxy: proxy, baseMeta: baseMeta, dims: dims }).then(function (result) {
+      (0, _loadDims2.default)({ id: dfId, proxy: proxy, baseMeta: baseMeta, dims: dims, noTime: noTime, timeId: timeId }).then(function (result) {
         var configs = result.configs,
             errMsg = result.errMsg;
 
         if (configs) {
-          _this._selectOptions = configs.map(function (config) {
+          //id
+          var _configs = configs.filter(_fNotTimeDimension(timeId));
+          _this._selectOptions = _configs.map(function (config) {
             return config.options;
           });
           _this.setState({
             isLoading: false,
             isLoadFailed: false,
-            configs: configs
+            configs: _configs
           });
         } else {
           _this.setState({
