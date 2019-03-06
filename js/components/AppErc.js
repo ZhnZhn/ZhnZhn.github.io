@@ -74,7 +74,7 @@ var _ThemeContext2 = _interopRequireDefault(_ThemeContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PREV_BUILD = '25-02-2019';
+var PREV_BUILD = '06-03-2019';
 
 var _checkBuild = function _checkBuild() {
   if (window.fetch) {

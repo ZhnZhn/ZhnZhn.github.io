@@ -125,13 +125,13 @@
     },
     "WB_FINANCE": {
       "type": "WB_FINANCE",
-      "menuTitle": "Finance",
-      "dialogCaption": "Finance",
-      "chartContainerCaption": "World Bank: Finance",
+      "menuTitle": "Financial Sector",
+      "dialogCaption": "Financial Sector",
+      "chartContainerCaption": "World Bank: Financial Sector",
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
-        "twoURI": "./data/world-bank/finance.json",
+        "twoURI": "./data/world-bank/financial-sector.json",
         "dataSource": "World Bank: Finance"
       }
     },
@@ -290,7 +290,7 @@
       "addProps": "WB_B1",
       "dialogType": "DialogType4",
       "dialogProps": {
-        "twoURI": "./data/world-bank/enviroment.json",
+        "twoURI": "./data/world-bank/environment.json",
         "dataSource": "World Bank: Environment"
       }
     },

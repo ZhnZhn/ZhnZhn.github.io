@@ -24,6 +24,7 @@ const V = {
   B: 'BAR_SET',
   B_C: 'BAR_CLUSTER',
   B_2: 'BAR_BY_2',
+  D: 'DOT_SET',
   TM: 'TREE_MAP',
   TM_C: 'TREE_MAP_CLUSTER',
   TM_2: 'TREE_MAP_2',
@@ -34,139 +35,121 @@ const C = {
   EMPTY: ''
 };
 
-const _crDF = () => {
-  return [
-    { caption: 'Default: Spline', value: V.S },
-    { caption: 'Area', value: V.A },
-    { caption: 'Column', value: V.S_C },
-    { caption: 'Bar: All Countries', value: V.B },
-    { caption: 'Column: All Countries', value: V.C },
-    { caption: 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
-  ];
-};
+const _crDF = () => ([
+  { caption: 'Default: Spline', value: V.S },
+  { caption: 'Area', value: V.A },
+  { caption: 'Column', value: V.S_C },
+  { caption: 'Bar: All Countries', value: V.B },
+  { caption: 'Column: All Countries', value: V.C },
+  { caption: 'Dots: All Countries', value: V.D },
+  { caption: 'Map: All Countries' , value: V.M, compType : CompItemType.EUROSTAT_MAP },
+]);
 
-const _crDF3 = () => {
-  return [
-    { caption : 'Default: Spline', value : V.S },
-    { caption : 'Column', value : V.S_C },
-    { caption : 'Bar: All Countries', value : V.B },
-    { caption : 'Column: All Countries', value : V.C }
-  ];
-};
+const _crDF3 = () => ([
+  { caption: 'Default: Spline', value: V.S },
+  { caption: 'Column', value: V.S_C },
+  { caption: 'Bar: All Countries', value: V.B },
+  { caption: 'Column: All Countries', value: V.C },
+  { caption: 'Dots: All Countries', value: V.D }
+]);
 
-const _crT1 = () => {
-  return [
-    { caption : 'Default: Spline', value: V.S }
-  ];
-}
-
-const _crT2 = () => {
-  return [
-    { caption : 'Default: Spline', value: V.S },
-    { caption : 'Column', value: V.S_C },
-    { caption : 'Yearly by Months' , value: V.A_Y }
-  ];
-}
-
-const _crT3All = (oneCaption) => {
-  return [
-    {
-      caption : `Column: By ${oneCaption}`,
-      value: V.C,
-      dim: oneCaption
-    },{
-      caption : `Column: By ${oneCaption}: Cluster`,
-      value: V.C_C,
-      dim: oneCaption
-    },{
-      caption : `Bar: By ${oneCaption}`,
-      value: V.B,
-      dim: oneCaption
-    },{
-      caption : `Bar: By ${oneCaption}: Cluster`,
-      value: V.B_C,
-      dim: oneCaption
-    }
-  ];
-}
-
-const _crT3 = (oneCaption) => {
-  return [
-    { caption : 'Default: Spline', value: V.A },
-    ..._crT3All(oneCaption)
-  ];
-}
-
-const _crT3B = (oneCaption) => {
-  return [
-    { caption : 'Default: Spline', value: V.A },
-    { caption : 'Yearly by Months' , value: V.A_Y },
-    ..._crT3All(oneCaption)
-  ];
-}
-
-const _crT3A = (oneCaption) => {
-  return [
-    ..._crT3(oneCaption),
-    {
-      caption : `TreeMap: By ${oneCaption}`,
-      value: V.TM,
-      dim: oneCaption
-    },{
-      caption : `TreeMap: By ${oneCaption}: Cluster`,
-      value: V.TM_C,
-      dim: oneCaption
-    }
-  ];
-}
-const _crT3A2 = (oneCaption) => {
-  return [
-    ..._crT3A(oneCaption),
-    {
-      caption : `TreeMap: By ${oneCaption}: Depth 2`,
-      value: V.TM_2,
-      dim: oneCaption
-    },{
-      caption : `TreeMap: By ${oneCaption}: Depth 2: Cluster`,
-      value: V.TM_2_C,
-      dim: oneCaption
-    }
-  ];
-}
+const _crT1 = () => ([
+  { caption : 'Default: Spline', value: V.S }
+]);
 
 
-const _crT4 = (oneCaption, twoCaption) => {
-  return [
-    ..._crT3(oneCaption),
-    {
-      caption : `Column: By ${twoCaption}`,
-      value: V.C_2,
-      dim: twoCaption
-    },{
-      caption : `Bar: By ${twoCaption}`,
-      value: V.B_2,
-      dim: twoCaption
-    }
-  ]
-}
+const _crT2 = () => ([
+  { caption : 'Default: Spline', value: V.S },
+  { caption : 'Column', value: V.S_C },
+  { caption : 'Yearly by Months' , value: V.A_Y }
+]);
+
+
+const _crT3All = (oneCaption) => ([
+  {
+    caption : `Column: By ${oneCaption}`,
+    value: V.C,
+    dim: oneCaption
+  },{
+    caption : `Column: By ${oneCaption}: Cluster`,
+    value: V.C_C,
+    dim: oneCaption
+  },{
+    caption : `Bar: By ${oneCaption}`,
+    value: V.B,
+    dim: oneCaption
+  },{
+    caption : `Bar: By ${oneCaption}: Cluster`,
+    value: V.B_C,
+    dim: oneCaption
+  }
+]);
+
+const _crT3 = (oneCaption) => ([
+  { caption : 'Default: Spline', value: V.A },
+  ..._crT3All(oneCaption)
+]);
+
+const _crT3B = (oneCaption) => ([
+  { caption : 'Default: Spline', value: V.A },
+  { caption : 'Yearly by Months' , value: V.A_Y },
+  ..._crT3All(oneCaption)
+]);
+
+
+const _crT3A = (oneCaption) => ([
+  ..._crT3(oneCaption),
+  {
+    caption : `TreeMap: By ${oneCaption}`,
+    value: V.TM,
+    dim: oneCaption
+  },{
+    caption : `TreeMap: By ${oneCaption}: Cluster`,
+    value: V.TM_C,
+    dim: oneCaption
+  }
+]);
+
+const _crT3A2 = (oneCaption) => ([
+  ..._crT3A(oneCaption),
+  {
+    caption : `TreeMap: By ${oneCaption}: Depth 2`,
+    value: V.TM_2,
+    dim: oneCaption
+  },{
+    caption : `TreeMap: By ${oneCaption}: Depth 2: Cluster`,
+    value: V.TM_2_C,
+    dim: oneCaption
+  }
+]);
+
+const _crT4 = (oneCaption, twoCaption) => ([
+  ..._crT3(oneCaption),
+  {
+    caption : `Column: By ${twoCaption}`,
+    value: V.C_2,
+    dim: twoCaption
+  },{
+    caption : `Bar: By ${twoCaption}`,
+    value: V.B_2,
+    dim: twoCaption
+  }
+]);
 
 const CATEGORY_TYPES = [
   V.M,
   V.C, V.C_C, V.C_2,
   V.B, V.B_C, V.B_2,
+  V.D,
   V.TM, V.TM_C, V.TM_2, V.TM_2_C
 ];
 
 const _crCaptions = ({
     dims,
     oneCaption=C.EMPTY, twoCaption=C.EMPTY
-  }) => {
-  if (Array.isArray(dims)){
-    return dims.map(dim => dim.c || C.EMPTY);
-  } else {
-    return [ oneCaption, twoCaption ];
-  }
-}
+}) => Array.isArray(dims)
+   ? dims.map(dim => dim.c || C.EMPTY)
+   : [ oneCaption, twoCaption ];
 
 const RouterOptions = {
   crOptions(option){

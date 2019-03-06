@@ -10,7 +10,7 @@ const C = {
 };
 
 const CATEGORY_TYPES = [
-  'MAP', 'COLUMN_SET', 'BAR_SET'
+  'MAP', 'COLUMN_SET', 'BAR_SET', 'DOT_SET' 
 ];
 
 const apiFn = {

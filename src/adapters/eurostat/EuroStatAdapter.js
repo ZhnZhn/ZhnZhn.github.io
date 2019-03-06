@@ -1,7 +1,6 @@
 import toArea from './toArea';
 import toAreaYearly from './toAreaYearly'
-import toColumn from './toColumn';
-import toBar from './toBar';
+import toCategory from './toCategory'
 import toMap from './toMap';
 
 const DF_TYPE = 'SPLINE';
@@ -11,16 +10,18 @@ const _rToConfig = {
   COLUMN: toArea.createConfig,
   AREA_YEARLY: toAreaYearly.createConfig,
   MAP: toMap.createConfig,
-  COLUMN_SET: toColumn.createConfig,
-  BAR_SET: toBar.createConfig
+  COLUMN_SET: toCategory.createConfig,
+  BAR_SET: toCategory.createConfig,
+  DOT_SET: toCategory.createConfig
 };
 
 const _rToSeria = {
   AREA: toArea.createSeria,
   SPLINE: toArea.createSeria,
   COLUMN: toArea.createSeria,
-  COLUMN_SET: toColumn.createSeria,
-  BAR_SET: toColumn.createSeria
+  COLUMN_SET: toCategory.createSeria,
+  BAR_SET: toCategory.createSeria,
+  DOT_SET: toCategory.createSeria  
 };
 
 const _checkSeriaType = (router, option, dfType=DF_TYPE) => {

@@ -12,13 +12,9 @@ var _toAreaYearly = require('./toAreaYearly');
 
 var _toAreaYearly2 = _interopRequireDefault(_toAreaYearly);
 
-var _toColumn = require('./toColumn');
+var _toCategory = require('./toCategory');
 
-var _toColumn2 = _interopRequireDefault(_toColumn);
-
-var _toBar = require('./toBar');
-
-var _toBar2 = _interopRequireDefault(_toBar);
+var _toCategory2 = _interopRequireDefault(_toCategory);
 
 var _toMap = require('./toMap');
 
@@ -33,16 +29,18 @@ var _rToConfig = {
   COLUMN: _toArea2.default.createConfig,
   AREA_YEARLY: _toAreaYearly2.default.createConfig,
   MAP: _toMap2.default.createConfig,
-  COLUMN_SET: _toColumn2.default.createConfig,
-  BAR_SET: _toBar2.default.createConfig
+  COLUMN_SET: _toCategory2.default.createConfig,
+  BAR_SET: _toCategory2.default.createConfig,
+  DOT_SET: _toCategory2.default.createConfig
 };
 
 var _rToSeria = {
   AREA: _toArea2.default.createSeria,
   SPLINE: _toArea2.default.createSeria,
   COLUMN: _toArea2.default.createSeria,
-  COLUMN_SET: _toColumn2.default.createSeria,
-  BAR_SET: _toColumn2.default.createSeria
+  COLUMN_SET: _toCategory2.default.createSeria,
+  BAR_SET: _toCategory2.default.createSeria,
+  DOT_SET: _toCategory2.default.createSeria
 };
 
 var _checkSeriaType = function _checkSeriaType(router, option) {

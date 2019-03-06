@@ -2,12 +2,10 @@ import Big from 'big.js'
 
 import mathFn from './mathFn'
 
-const _isNumber = n => {
-  if (typeof n === 'number') {
-    return (n - n === 0);
-  }
-  return false;
-};
+const _isArr = Array.isArray;
+const _isNumber = n => typeof n === 'number'
+  ? (n - n === 0)
+  : false;
 
 const _calcY = (pPrev, pNext) => pPrev.y !== 0
   ? parseFloat(
@@ -21,8 +19,7 @@ const _calcY = (pPrev, pNext) => pPrev.y !== 0
 const fn = {
   growthRate: (d, rt=1) => {
     const _rt = parseInt(rt, 10);
-    if (!Array.isArray(d)
-        || typeof _rt !== 'number' ) {
+    if (!_isArr(d) || _isNumber(_rt)) {
       return [];
     }
 
@@ -43,7 +40,7 @@ const fn = {
   },
 
   normalize: (d) => {
-    if (!Array.isArray(d)) {
+    if (!_isArr(d)) {
       return [];
     }
     const _d = []
@@ -67,13 +64,13 @@ const fn = {
   },
 
   findMinY: (data) => {
-    if (!Array.isArray(data) || data.length<1 ) {
+    if (!_isArr(data) || data.length<1 ) {
       return undefined;
     }
     let minY = Number.POSITIVE_INFINITY;
-    const _fn = typeof data[0].y === 'number'
-      ? (p, min) => p.y<min ? p.y : min
-      : (arr, min) => arr[1]<min ? arr[1] : min;
+    const _fn = _isNumber(data[0].y)
+      ? (p, min) => _isNumber(p.y) && p.y<min ? p.y : min
+      : (arr, min) => _isNumber(arr[1]) && arr[1]<min ? arr[1] : min;
     for (let i=0, max=data.length; i<max; i++){
       minY = _fn(data[i], minY)
     }
@@ -82,13 +79,13 @@ const fn = {
       : undefined;
   },
   findMaxY: (data) => {
-    if (!Array.isArray(data) || data.length<1 ) {
+    if (!_isArr(data) || data.length<1 ) {
       return undefined;
     }
     let maxY = Number.NEGATIVE_INFINITY;
-    const _fn = typeof data[0].y === 'number'
-      ? (p, max) => p.y>max ? p.y : max
-      : (arr, max) => arr[1]>max ? arr[1] : max;
+    const _fn = _isNumber(data[0].y)
+      ? (p, max) => _isNumber(p.y) && p.y>max ? p.y : max
+      : (arr, max) => _isNumber(arr[1]) && arr[1]>max ? arr[1] : max;
     for (let i=0, max=data.length; i<max; i++){
       maxY = _fn(data[i], maxY)
     }

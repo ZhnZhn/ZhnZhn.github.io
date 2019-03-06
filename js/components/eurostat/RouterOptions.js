@@ -35,6 +35,7 @@ var V = {
   B: 'BAR_SET',
   B_C: 'BAR_CLUSTER',
   B_2: 'BAR_BY_2',
+  D: 'DOT_SET',
   TM: 'TREE_MAP',
   TM_C: 'TREE_MAP_CLUSTER',
   TM_2: 'TREE_MAP_2',
@@ -46,11 +47,11 @@ var C = {
 };
 
 var _crDF = function _crDF() {
-  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Area', value: V.A }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
+  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Area', value: V.A }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Dots: All Countries', value: V.D }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
 };
 
 var _crDF3 = function _crDF3() {
-  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }];
+  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Dots: All Countries', value: V.D }];
 };
 
 var _crT1 = function _crT1() {
@@ -100,6 +101,7 @@ var _crT3A = function _crT3A(oneCaption) {
     dim: oneCaption
   }]);
 };
+
 var _crT3A2 = function _crT3A2(oneCaption) {
   return [].concat((0, _toConsumableArray3.default)(_crT3A(oneCaption)), [{
     caption: 'TreeMap: By ' + oneCaption + ': Depth 2',
@@ -124,7 +126,7 @@ var _crT4 = function _crT4(oneCaption, twoCaption) {
   }]);
 };
 
-var CATEGORY_TYPES = [V.M, V.C, V.C_C, V.C_2, V.B, V.B_C, V.B_2, V.TM, V.TM_C, V.TM_2, V.TM_2_C];
+var CATEGORY_TYPES = [V.M, V.C, V.C_C, V.C_2, V.B, V.B_C, V.B_2, V.D, V.TM, V.TM_C, V.TM_2, V.TM_2_C];
 
 var _crCaptions = function _crCaptions(_ref) {
   var dims = _ref.dims,
@@ -132,14 +134,9 @@ var _crCaptions = function _crCaptions(_ref) {
       oneCaption = _ref$oneCaption === undefined ? C.EMPTY : _ref$oneCaption,
       _ref$twoCaption = _ref.twoCaption,
       twoCaption = _ref$twoCaption === undefined ? C.EMPTY : _ref$twoCaption;
-
-  if (Array.isArray(dims)) {
-    return dims.map(function (dim) {
-      return dim.c || C.EMPTY;
-    });
-  } else {
-    return [oneCaption, twoCaption];
-  }
+  return Array.isArray(dims) ? dims.map(function (dim) {
+    return dim.c || C.EMPTY;
+  }) : [oneCaption, twoCaption];
 };
 
 var RouterOptions = {

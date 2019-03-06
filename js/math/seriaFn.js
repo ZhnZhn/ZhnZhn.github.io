@@ -14,11 +14,9 @@ var _mathFn2 = _interopRequireDefault(_mathFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _isArr = Array.isArray;
 var _isNumber = function _isNumber(n) {
-  if (typeof n === 'number') {
-    return n - n === 0;
-  }
-  return false;
+  return typeof n === 'number' ? n - n === 0 : false;
 };
 
 var _calcY = function _calcY(pPrev, pNext) {
@@ -30,7 +28,7 @@ var fn = {
     var rt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
     var _rt = parseInt(rt, 10);
-    if (!Array.isArray(d) || typeof _rt !== 'number') {
+    if (!_isArr(d) || _isNumber(_rt)) {
       return [];
     }
 
@@ -51,7 +49,7 @@ var fn = {
   },
 
   normalize: function normalize(d) {
-    if (!Array.isArray(d)) {
+    if (!_isArr(d)) {
       return [];
     }
     var _d = [],
@@ -71,14 +69,14 @@ var fn = {
   },
 
   findMinY: function findMinY(data) {
-    if (!Array.isArray(data) || data.length < 1) {
+    if (!_isArr(data) || data.length < 1) {
       return undefined;
     }
     var minY = Number.POSITIVE_INFINITY;
-    var _fn = typeof data[0].y === 'number' ? function (p, min) {
-      return p.y < min ? p.y : min;
+    var _fn = _isNumber(data[0].y) ? function (p, min) {
+      return _isNumber(p.y) && p.y < min ? p.y : min;
     } : function (arr, min) {
-      return arr[1] < min ? arr[1] : min;
+      return _isNumber(arr[1]) && arr[1] < min ? arr[1] : min;
     };
     for (var i = 0, max = data.length; i < max; i++) {
       minY = _fn(data[i], minY);
@@ -86,14 +84,14 @@ var fn = {
     return minY !== Number.POSITIVE_INFINITY ? _mathFn2.default.toFixedNumber(minY) : undefined;
   },
   findMaxY: function findMaxY(data) {
-    if (!Array.isArray(data) || data.length < 1) {
+    if (!_isArr(data) || data.length < 1) {
       return undefined;
     }
     var maxY = Number.NEGATIVE_INFINITY;
-    var _fn = typeof data[0].y === 'number' ? function (p, max) {
-      return p.y > max ? p.y : max;
+    var _fn = _isNumber(data[0].y) ? function (p, max) {
+      return _isNumber(p.y) && p.y > max ? p.y : max;
     } : function (arr, max) {
-      return arr[1] > max ? arr[1] : max;
+      return _isNumber(arr[1]) && arr[1] > max ? arr[1] : max;
     };
     for (var i = 0, max = data.length; i < max; i++) {
       maxY = _fn(data[i], maxY);

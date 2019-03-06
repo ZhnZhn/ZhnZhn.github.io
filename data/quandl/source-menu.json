@@ -49,8 +49,7 @@
             { "id": "QE_DCE_FUTURE" },
             { "id": "QE_ZCE_FUTURE" },
             { "id": "QE_SHANGHAI_FUTURE" },
-            { "id": "QE_LIFFE_FUTURE" },
-            { "id": "QE_ICE_FUTURE" },
+            { "id": "QE_LIFFE_FUTURE" },            
             { "id": "QE_WIKI_FUTURE" }
         ]
     }
@@ -627,31 +626,6 @@
                 "Prev. Day Open Interest"
             ],
             "dataSource": "LIFFE Futures Data (Code: LIFFE)"
-        }
-    },
-    "QE_ICE_FUTURE": {
-        "type": "QE_ICE_FUTURE",
-        "menuTitle": "Intercontinental FE",
-        "dialogCaption": "Intercontinental FE",
-        "chartContainerCaption": "Quandl: Intercontinental Futures Exchange",
-        "dialogType": "Futures3Dialog",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/ice-futures.html",
-            "futuresURI": "./data/quandl/ice-futures.json",
-            "valueFn": "RFutures",
-            "valueFnPrefix": "ICE",
-            "loadId": "Q",
-            "columnName": "Settle",
-            "seriaColumnNames": [
-                "Open",
-                "High",
-                "Low",
-                "Volume",
-                "Prev. Day Open Interest"
-            ],
-            "isContinious": true,
-            "nInitFromDate": 2,
-            "dataSource": "Intercontinental Exchange Futures (Code: ICE)"
         }
     },
     "QE_WIKI_FUTURE": {
