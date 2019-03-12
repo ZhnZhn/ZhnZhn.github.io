@@ -1,0 +1,26 @@
+{
+ "version": 3,
+ "sources": [
+  "../../src/charts/seriaFns.js"
+ ],
+ "file": "../../src/charts/seriaFns.js",
+ "names": [
+  "fns",
+  "columnRange",
+  "d1",
+  "d2",
+  "d3",
+  "forEach",
+  "p1",
+  "index",
+  "p2",
+  "Boolean",
+  "y",
+  "push",
+  "name",
+  "category",
+  "low",
+  "high"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,MAAM;AACVC,eAAa,qBAACC,EAAD,EAAKC,EAAL,EAAY;AACvB,QAAMC,KAAK,EAAX;AACAF,OAAGG,OAAH,CAAW,UAACC,EAAD,EAAKC,KAAL,EAAe;AACxB,UAAMC,KAAKL,GAAGI,KAAH,CAAX;AACA,UAAKE,QAAQH,GAAGI,CAAX,KAAiBD,QAAQD,GAAGE,CAAX,CAAtB,EAAsC;AACpCN,WAAGO,IAAH,CAAQ;AACNC,gBAAMN,GAAGO,QADH;AAENC,eAAKR,GAAGI,CAAH,IAAQF,GAAGE,CAAX,GAAeJ,GAAGI,CAAlB,GAAsBF,GAAGE,CAFxB;AAGNK,gBAAMT,GAAGI,CAAH,IAAQF,GAAGE,CAAX,GAAeJ,GAAGI,CAAlB,GAAsBF,GAAGE;AAHzB,SAAR;AAKD;AACF,KATD;AAUA,WAAON,EAAP;AACD;AAdS,CAAZ;;kBAiBeJ,G"
+}

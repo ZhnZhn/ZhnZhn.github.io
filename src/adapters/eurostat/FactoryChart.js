@@ -60,13 +60,6 @@ const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
       borderWidth : 0,
       groupPadding : 0.2,
       shadow : false
-    },
-    scatter: {
-      color: seriaColor,
-      marker: {
-        radius: 5,
-        symbol: 'circle'
-      }
     }
   },
   series: [{ name: 'Column'}]
@@ -81,6 +74,7 @@ const _crBarConfig = (option) => {
   return config;
 };
 const _crDotConfig = (option) => {
+  const { seriaColor } = option;
   const config = _crColumnConfig(option);
   _assign(config.chart, {
     type: 'scatter',
@@ -92,10 +86,9 @@ const _crDotConfig = (option) => {
     gridLineDashStyle: "Dot",
     gridLineWidth: 1
   })
-  _assign(config.yAxis, {
-    gridLineWidth: 0
-  })
   _assign(config.series[0], {
+    //color: hexToRgba(seriaColor),
+    color: seriaColor,
     marker: {
       symbol: 'circle',
       radius: 5

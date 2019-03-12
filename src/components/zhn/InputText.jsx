@@ -44,6 +44,9 @@ class InputText extends Component {
     onEnter: PropTypes.func
   }
   */
+  static defaultProps = {
+    maxLenght: 125
+  }
 
   constructor(props){
     super(props);
@@ -66,9 +69,13 @@ class InputText extends Component {
       ? _getInitStateFrom(props)
       : null;
   }
-  
+
   _handleInputChange = (event) => {
-    this.setState({ value: event.target.value })
+    const value = event.target.value
+    , { maxLenght } = this.props;
+    if (value.length <= maxLenght) {
+      this.setState({ value })
+    }
   }
  _handleKeyDown = (event) => {
     switch(event.keyCode){
@@ -88,7 +95,8 @@ class InputText extends Component {
   render(){
     const {
            style, type,
-           spellCheck, placeholder
+           spellCheck, placeholder,
+           maxLenght
          } = this.props
         , { value } = this.state
         , _autoCorrect = spellCheck
@@ -109,6 +117,7 @@ class InputText extends Component {
         translate={false}
         value={value}
         placeholder={placeholder}
+        maxLength={maxLenght}
         onChange={this._handleInputChange}
         onKeyDown={this._handleKeyDown}
       />

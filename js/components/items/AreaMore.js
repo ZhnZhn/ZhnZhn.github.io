@@ -7,7 +7,8 @@ var CL_ROW = 'row__pane-topic not-selected';
 
 var crModel = function crModel(comp, _ref) {
   var onToggle = _ref.onToggle,
-      onToTop = _ref.onToTop;
+      onToTop = _ref.onToTop,
+      onHideCaption = _ref.onHideCaption;
   return {
     baseTitleCl: CL_ROW,
     pageWidth: 150,
@@ -19,6 +20,10 @@ var crModel = function crModel(comp, _ref) {
     }, {
       name: 'Toggle Toolbar',
       onClick: onToggle.bind(comp),
+      isClose: true
+    }, {
+      name: 'Hide Caption',
+      onClick: onHideCaption.bind(comp),
       isClose: true
     }]
   };

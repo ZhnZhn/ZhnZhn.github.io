@@ -16,6 +16,10 @@ const _calcY = (pPrev, pNext) => pPrev.y !== 0
     )
   : null;
 
+const _isDataArr = data => _isArr(data)
+  && data.length > 1
+  && _isArr(data[0]);
+
 const fn = {
   growthRate: (d, rt=1) => {
     const _rt = parseInt(rt, 10);
@@ -92,6 +96,40 @@ const fn = {
     return maxY !== Number.NEGATIVE_INFINITY
       ? mathFn.toFixedNumber(maxY)
       : undefined;
+  },
+
+  mean: (data) => {
+    if ( !_isDataArr(data) ) {
+      return [];
+    }
+    let _sum = Big(0);
+    for (const p of data) {
+      _sum = _sum.add(p[1])
+    }
+    const _max = data.length - 1;
+    const _avg = parseInt(_sum.div(_max).toFixed(0), 10);
+    return [
+      [data[0][0], _avg],
+      [data[_max][0], _avg]
+    ];
+  },
+
+  median: (data) => {
+    if ( !_isDataArr(data) ) {
+      return [];
+    }
+    const _d = data
+      .map(arrP => arrP[1])
+      .sort((a, b) => a-b)
+    , _len = data.length
+    , _half = _len/2
+    , _median = _half % 2 === 0
+       ? Math.round((_d[_half-1] + _d[_half])/2)
+       : _d[Math.round(_half) - 1];
+    return [
+      [data[0][0], _median],
+      [data[_len-1][0], _median],
+    ];
   }
 };
 

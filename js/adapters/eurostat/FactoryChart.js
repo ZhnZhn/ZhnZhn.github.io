@@ -68,13 +68,6 @@ var _crColumnConfig = function _crColumnConfig(_ref) {
         borderWidth: 0,
         groupPadding: 0.2,
         shadow: false
-      },
-      scatter: {
-        color: seriaColor,
-        marker: {
-          radius: 5,
-          symbol: 'circle'
-        }
       }
     },
     series: [{ name: 'Column' }]
@@ -90,6 +83,8 @@ var _crBarConfig = function _crBarConfig(option) {
   return config;
 };
 var _crDotConfig = function _crDotConfig(option) {
+  var seriaColor = option.seriaColor;
+
   var config = _crColumnConfig(option);
   _assign(config.chart, {
     type: 'scatter',
@@ -101,10 +96,9 @@ var _crDotConfig = function _crDotConfig(option) {
     gridLineDashStyle: "Dot",
     gridLineWidth: 1
   });
-  _assign(config.yAxis, {
-    gridLineWidth: 0
-  });
   _assign(config.series[0], {
+    //color: hexToRgba(seriaColor),
+    color: seriaColor,
     marker: {
       symbol: 'circle',
       radius: 5

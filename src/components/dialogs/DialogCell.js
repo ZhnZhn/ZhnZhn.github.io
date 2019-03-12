@@ -6,6 +6,8 @@ import ValidationMessages from '../zhn/ValidationMessages'
 
 import ToolbarButtonCircle from './ToolbarButtonCircle'
 import Toolbar from './Toolbar'
+import RowInputText from './RowInputText'
+import RowInputColor from './RowInputColor'
 import RowInputSelect from './RowInputSelect'
 import RowChart from './RowChart'
 import SelectWithLoad from './SelectWithLoad'
@@ -24,6 +26,8 @@ const DialogCell = {
 
   ToolbarButtonCircle,
   Toolbar,
+  RowInputText,
+  RowInputColor,
   RowInputSelect,
   RowChart,
   SelectWithLoad,

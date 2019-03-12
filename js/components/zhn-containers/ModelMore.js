@@ -21,7 +21,8 @@ var crModelMore = function crModelMore(_ref) {
       onInitWidth = _ref.onInitWidth,
       onPlusWidth = _ref.onPlusWidth,
       onMinusWidth = _ref.onMinusWidth,
-      onFit = _ref.onFit;
+      onFit = _ref.onFit,
+      onShowCaptions = _ref.onShowCaptions;
 
   return {
     baseTitleCl: CL_ROW,
@@ -37,6 +38,10 @@ var crModelMore = function crModelMore(_ref) {
       type: 'sub',
       cn: CL_ROW,
       name: 'Sort By, ASC'
+    }, {
+      cn: CL_ROW,
+      name: 'Show Captions',
+      onClick: onShowCaptions
     }],
     p1: [{
       cn: CL_ROW,

@@ -1,9 +1,13 @@
+import { ModalDialog as MD } from '../../../constants/Type'
 
+import { ComponentActionTypes as CAT } from '../../actions/ComponentActions';
 import Factory from '../../logic/Factory';
 
 import fCompareBy from './fCompareBy'
 
 const { createChartContainer } = Factory;
+
+const _isArr = Array.isArray;
 
 const _getSlice = (slice, chartType) => {
   const { activeContChb } = slice
@@ -17,6 +21,11 @@ const _getSlice = (slice, chartType) => {
 
 const _notConfById = id => c => c.zhConfig.id !== id
 const _confById = id => c => c.zhConfig.id === id
+
+const _isSecondDotCase = (series, { seriaType }) => seriaType === 'DOT_SET'
+  && _isArr(series)
+  && series[0].type === 'scatter'
+  && series.length === 2;
 
 const ChartLogic = {
   _initChartSlice(slice, chartType, config){
@@ -79,7 +88,7 @@ const ChartLogic = {
     const {
         chartSlice, configs
     } = _getSlice(slice, chartType);
-    
+
     chartSlice.configs = configs
        .filter(_notConfById(id))
 
@@ -121,6 +130,16 @@ const ChartLogic = {
       option.browserType = chb.browserType
     }
   },
+
+  scanPostAdded(store, option) {
+    const chart = store.getActiveChart();
+    if (chart && _isSecondDotCase(chart.series, option)) {
+      store.trigger(CAT.SHOW_MODAL_DIALOG, {
+        modalDialogType: MD.COLUMN_RANGE,
+        chart
+      });
+    }
+  }
 };
 
 export default ChartLogic

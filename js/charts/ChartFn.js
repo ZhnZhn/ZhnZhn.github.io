@@ -282,25 +282,25 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
       }
     }, false, true);
   },
-  _addSeria: function _addSeria(toChart, id, color, data) {
-    return toChart.addSeries({
+  _addSeria: function _addSeria(toChart, id, color, data, seriaOptions) {
+    return toChart.addSeries((0, _extends3.default)({
       type: 'spline',
       yAxis: id,
       color: color,
       data: data
-    }, false);
+    }, seriaOptions), false);
   },
-  _addDataToYAxis: function _addDataToYAxis(toChart, id, color, data, isWithYAxis) {
+  _addDataToYAxis: function _addDataToYAxis(toChart, id, color, data, isWithYAxis, seriaOptions) {
     if (isWithYAxis) {
       this._addAxis(toChart, id, color);
     }
-    var seria = this._addSeria(toChart, id, color, data);
+    var seria = this._addSeria(toChart, id, color, data, seriaOptions);
     toChart.redraw();
     return seria;
   },
-  addDataTo: function addDataTo(toChart, color, data, withoutYAxis) {
+  addDataTo: function addDataTo(toChart, color, data, withoutYAxis, seriaOptions) {
     var _id = withoutYAxis ? undefined : "pasteId";
-    return this._addDataToYAxis(toChart, _id, color, data, !withoutYAxis);
+    return this._addDataToYAxis(toChart, _id, color, data, !withoutYAxis, seriaOptions);
   },
   addDataToYAxis: function addDataToYAxis(toChart, color, data) {
     var yAxisIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;

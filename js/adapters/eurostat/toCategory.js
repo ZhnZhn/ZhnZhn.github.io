@@ -22,12 +22,15 @@ var _EuroStatFn2 = _interopRequireDefault(_EuroStatFn);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SCATTER_SERIA_PROPS = {
-  type: 'scatter',
-  marker: {
-    radius: 5,
-    symbol: 'circle'
-  }
+var _crScatterProps = function _crScatterProps(seriaColor) {
+  return {
+    type: 'scatter',
+    marker: {
+      fillColor: seriaColor,
+      radius: 5,
+      symbol: 'circle'
+    }
+  };
 };
 
 var toCategory = {
@@ -57,7 +60,7 @@ var toCategory = {
         seriaType = option.seriaType,
         _name = configSlice.time || time,
         data = _JsonStatFn2.default.trJsonToSeria(json, configSlice, categories),
-        _seriaProps = seriaType === 'DOT_SET' ? SCATTER_SERIA_PROPS : undefined;
+        _seriaProps = seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : undefined;
 
     return (0, _extends3.default)({
       zhSeriaId: 'optionKey',
@@ -65,7 +68,8 @@ var toCategory = {
       minY: _EuroStatFn2.default.findMinY(data),
       name: _name,
       color: seriaColor,
-      data: data
+      data: data,
+      tooltip: _EuroStatFn2.default.crCategoryTooltip()
     }, _seriaProps);
   }
 };

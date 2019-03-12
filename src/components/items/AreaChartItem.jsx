@@ -76,7 +76,8 @@ class AreaChartItem extends Component {
 
     this._moreModel = crModelMore(this, {
       onToggle: this._handleToggleToolbar,
-      onToTop: props.onToTop
+      onToTop: props.onToTop,
+      onHideCaption: this.hideCaption
     })
 
     this.is2H = false
@@ -108,7 +109,26 @@ class AreaChartItem extends Component {
       mfiConfigs: [],
 
       isShowAbs: true,
-      miniTitles: []
+      miniTitles: [],
+
+      isCaption: true
+    }
+  }
+
+  hideCaption = () => {    
+    this.mainChart.zhHideCaption()
+    this.setState({
+      isShowToolbar: false,
+      isCaption: false
+    })
+  }
+  showCaption = () => {
+    if (!this.state.isCaption) {
+      this.mainChart.zhShowCaption()
+      this.setState({
+        isShowToolbar: true,
+        isCaption: true
+      })
     }
   }
 
@@ -302,12 +322,13 @@ class AreaChartItem extends Component {
             itemCaption,
             mfiConfigs,
             isShowAbs,
-            miniTitles
+            miniTitles,
+            isCaption
         } = this.state;
 
     return (
       <div className={CL.ROOT}>
-         <Header
+         { isCaption && <Header
             isOpen={isOpen}
             //chartType={chartType}
             moreModel={this._moreModel}
@@ -322,6 +343,7 @@ class AreaChartItem extends Component {
             isAdminMode={isAdminMode}
             crValueMoving={this._crValueMoving}
          />
+        }
         <ShowHide isShow={isOpen} style={S.SHOW_HIDE}>
            {isShowChart && this._createChartToolBar(config)}
            <HighchartWrapper

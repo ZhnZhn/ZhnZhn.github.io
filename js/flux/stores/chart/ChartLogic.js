@@ -8,6 +8,10 @@ var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
+var _Type = require('../../../constants/Type');
+
+var _ComponentActions = require('../../actions/ComponentActions');
+
 var _Factory = require('../../logic/Factory');
 
 var _Factory2 = _interopRequireDefault(_Factory);
@@ -20,6 +24,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var createChartContainer = _Factory2.default.createChartContainer;
 
+
+var _isArr = Array.isArray;
 
 var _getSlice = function _getSlice(slice, chartType) {
   var activeContChb = slice.activeContChb,
@@ -40,6 +46,11 @@ var _confById = function _confById(id) {
   return function (c) {
     return c.zhConfig.id === id;
   };
+};
+
+var _isSecondDotCase = function _isSecondDotCase(series, _ref2) {
+  var seriaType = _ref2.seriaType;
+  return seriaType === 'DOT_SET' && _isArr(series) && series[0].type === 'scatter' && series.length === 2;
 };
 
 var ChartLogic = {
@@ -143,6 +154,15 @@ var ChartLogic = {
     if (chb) {
       option.chartType = chb.chartType;
       option.browserType = chb.browserType;
+    }
+  },
+  scanPostAdded: function scanPostAdded(store, option) {
+    var chart = store.getActiveChart();
+    if (chart && _isSecondDotCase(chart.series, option)) {
+      store.trigger(_ComponentActions.ComponentActionTypes.SHOW_MODAL_DIALOG, {
+        modalDialogType: _Type.ModalDialog.COLUMN_RANGE,
+        chart: chart
+      });
     }
   }
 };

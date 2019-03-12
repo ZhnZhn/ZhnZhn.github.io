@@ -87,6 +87,7 @@ class ChartContainer extends Component {
       onPlusWidth: this._plusToWidth,
       onMinusWidth: this._minusToWidth,
       onFit: this._fitToWidth,
+      onShowCaptions: this._onShowCaptions
     })
 
     this._hSetActive = this._toggleChb.bind(this, true)
@@ -150,6 +151,18 @@ class ChartContainer extends Component {
         _propName = this._crChartPropName(i)
         if (this[_propName] && typeof this[_propName].reflowChart === 'function'){
           this[_propName].reflowChart(parentWidth - this.childMargin)
+        }
+     }
+   }
+
+   _onShowCaptions = (parentWidth) => {
+     let i=0
+       , max = this.state.configs.length
+       , _propName;
+     for (; i<max; i++) {
+        _propName = this._crChartPropName(i)
+        if (this[_propName] && typeof this[_propName].showCaption === 'function'){
+          this[_propName].showCaption()
         }
      }
    }

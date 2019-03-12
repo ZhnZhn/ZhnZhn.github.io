@@ -1,7 +1,7 @@
 const CL_ROW = 'row__pane-topic not-selected';
 
 const crModel = (comp, {
-  onToggle, onToTop
+  onToggle, onToTop, onHideCaption
 }) => ({
     baseTitleCl: CL_ROW,
     pageWidth: 150,
@@ -10,9 +10,13 @@ const crModel = (comp, {
       name: 'Move to Top',
       onClick: onToTop,
       isClose: true
-    },{      
+    },{
       name: 'Toggle Toolbar',
       onClick: onToggle.bind(comp),
+      isClose: true
+    },{
+      name: 'Hide Caption',
+      onClick: onHideCaption.bind(comp),
       isClose: true
     }]
 });

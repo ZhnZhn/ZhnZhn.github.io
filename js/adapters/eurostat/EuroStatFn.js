@@ -210,6 +210,12 @@ var EuroStatFn = {
 
     config.tooltip = _Chart2.default.fTooltip(tooltip);
   },
+
+
+  crCategoryTooltip: function crCategoryTooltip() {
+    return _Chart2.default.fTooltip(_Tooltip2.default.categorySimple);
+  },
+
   convertToUTC: function convertToUTC(str) {
     if (str.indexOf('M') !== -1) {
       var arrDate = str.split('M'),

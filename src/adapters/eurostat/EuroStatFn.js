@@ -176,6 +176,11 @@ const EuroStatFn = {
     config.tooltip = Chart.fTooltip(tooltip)
   },
 
+  crCategoryTooltip: () => {
+    return Chart.fTooltip(Tooltip.categorySimple);
+  },
+
+
   convertToUTC(str){
     if (str.indexOf('M') !== -1) {
       const arrDate = str.split('M')

@@ -25,8 +25,9 @@ const C_GREY = "#777777";
 
 const EL_CHECKED = (
   <path
-      d="M 2,3 L 8,14 14,3"
+      d="M 2,5 L 8,14 14,1"
       strokeWidth="2"
+      strokeLinecap="round"
       stroke={C.YELLOW}
       fill={C.BLANK}
   />

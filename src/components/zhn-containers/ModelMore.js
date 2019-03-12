@@ -9,6 +9,7 @@ const crModelMore = ({
   onMinWidth, onInitWidth,
   onPlusWidth, onMinusWidth,
   onFit,
+  onShowCaptions
 }) => {
   return {
     baseTitleCl: CL_ROW,
@@ -25,6 +26,10 @@ const crModelMore = ({
         type: 'sub',
         cn: CL_ROW,
         name: 'Sort By, ASC'
+      },{
+        cn: CL_ROW,
+        name: 'Show Captions',
+        onClick: onShowCaptions
       }
     ],
     p1: [

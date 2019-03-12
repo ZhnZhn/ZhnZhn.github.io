@@ -231,27 +231,28 @@ const ChartFn = {
         }
       }, false, true)
   },
-  _addSeria(toChart, id, color, data){
+  _addSeria(toChart, id, color, data, seriaOptions){
     return toChart.addSeries({
       type: 'spline',
       yAxis: id,
       color: color,
-      data: data
+      data: data,
+      ...seriaOptions
     }, false);
   },
-  _addDataToYAxis(toChart, id, color, data, isWithYAxis){
+  _addDataToYAxis(toChart, id, color, data, isWithYAxis, seriaOptions){
     if (isWithYAxis) {
       this._addAxis(toChart, id, color)
     }
-    const seria = this._addSeria(toChart, id, color, data);
+    const seria = this._addSeria(toChart, id, color, data, seriaOptions);
     toChart.redraw()
     return seria;
   },
 
-  addDataTo(toChart, color, data, withoutYAxis){
+  addDataTo(toChart, color, data, withoutYAxis, seriaOptions){
     const _id = withoutYAxis ? undefined: "pasteId";
     return this._addDataToYAxis(toChart,
-        _id, color, data, !withoutYAxis
+        _id, color, data, !withoutYAxis, seriaOptions
     );
   },
   addDataToYAxis(toChart, color, data, yAxisIndex=-1){

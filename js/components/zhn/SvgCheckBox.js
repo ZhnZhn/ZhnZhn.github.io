@@ -57,8 +57,9 @@ var E = {
 var C_GREY = "#777777";
 
 var EL_CHECKED = _react2.default.createElement('path', {
-  d: 'M 2,3 L 8,14 14,3',
+  d: 'M 2,5 L 8,14 14,1',
   strokeWidth: '2',
+  strokeLinecap: 'round',
   stroke: _Color2.default.YELLOW,
   fill: _Color2.default.BLANK
 });

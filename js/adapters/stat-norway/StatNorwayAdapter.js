@@ -24,7 +24,6 @@ var StatNorwayAdapter = {
         crConfig = _RouterConfig2.default.getCrConfig(seriaType),
         config = crConfig(json, option);
 
-
     return config.series[0];
   }
 };

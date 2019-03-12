@@ -10,17 +10,19 @@ const {
 
 
  const _crSimple = function({ id, point }){
-   const { y, category, c} = point;
+   const { y, category, c, series={}} = point
+   , { name, color } = series;
    return `${crHeader(category || c, id)}
    <div class="tp__body">
      ${crRow('Value', toNumberFormatAll(y))}
+     ${crRow('Seria', name, { color })}
    </div>`;
  };
 
 //style='cursor:pointer;pointer-events:visible;color:cadetblue;'
 const _crRemove = function({ id, point }){
-  const { y, c } = point;
-  return `${crHeader(c, id)}
+  const { y, c, category } = point;
+  return `${crHeader(c || category, id)}
   <div class="tp__body">
     ${crRow('Value', toNumberFormatAll(y))}
     <div class='tp__bt' id=${id+'_R'}>

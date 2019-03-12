@@ -28,6 +28,14 @@ var _Toolbar = require('./Toolbar');
 
 var _Toolbar2 = _interopRequireDefault(_Toolbar);
 
+var _RowInputText = require('./RowInputText');
+
+var _RowInputText2 = _interopRequireDefault(_RowInputText);
+
+var _RowInputColor = require('./RowInputColor');
+
+var _RowInputColor2 = _interopRequireDefault(_RowInputColor);
+
 var _RowInputSelect = require('./RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
@@ -74,6 +82,8 @@ var DialogCell = {
 
   ToolbarButtonCircle: _ToolbarButtonCircle2.default,
   Toolbar: _Toolbar2.default,
+  RowInputText: _RowInputText2.default,
+  RowInputColor: _RowInputColor2.default,
   RowInputSelect: _RowInputSelect2.default,
   RowChart: _RowChart2.default,
   SelectWithLoad: _SelectWithLoad2.default,

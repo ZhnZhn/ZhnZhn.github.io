@@ -142,7 +142,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
 
     _this._moreModel = (0, _AreaMore2.default)(_this, {
       onToggle: _this._handleToggleToolbar,
-      onToTop: props.onToTop
+      onToTop: props.onToTop,
+      onHideCaption: _this.hideCaption
     });
 
     _this.is2H = false;
@@ -180,7 +181,9 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       mfiConfigs: [],
 
       isShowAbs: true,
-      miniTitles: []
+      miniTitles: [],
+
+      isCaption: true
     };
     return _this;
   }
@@ -210,13 +213,14 @@ var AreaChartItem = (_temp = _class = function (_Component) {
           itemCaption = _state.itemCaption,
           mfiConfigs = _state.mfiConfigs,
           isShowAbs = _state.isShowAbs,
-          miniTitles = _state.miniTitles;
+          miniTitles = _state.miniTitles,
+          isCaption = _state.isCaption;
 
 
       return _react2.default.createElement(
         'div',
         { className: CL.ROOT },
-        _react2.default.createElement(_Header2.default, {
+        isCaption && _react2.default.createElement(_Header2.default, {
           isOpen: isOpen
           //chartType={chartType}
           , moreModel: this._moreModel,
@@ -289,6 +293,24 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   return AreaChartItem;
 }(_react.Component), _initialiseProps = function _initialiseProps() {
   var _this2 = this;
+
+  this.hideCaption = function () {
+    _this2.mainChart.zhHideCaption();
+    _this2.setState({
+      isShowToolbar: false,
+      isCaption: false
+    });
+  };
+
+  this.showCaption = function () {
+    if (!_this2.state.isCaption) {
+      _this2.mainChart.zhShowCaption();
+      _this2.setState({
+        isShowToolbar: true,
+        isCaption: true
+      });
+    }
+  };
 
   this.setItemCaption = function (str) {
     _this2.setState({ itemCaption: str });

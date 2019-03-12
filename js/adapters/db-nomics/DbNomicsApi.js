@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var C = {
   URL: 'https://api.db.nomics.world/v22/series',
-  TAIL: 'observations=1&format=json',
+  TAIL: 'observations=1&format=json&metadata=false',
   DF_ID: 'ECB/EXR/A.USD.EUR.SP00.A',
   ERR_CAPTION: 'Server Response',
   MSG_EMPTY: 'Dataset is empty'

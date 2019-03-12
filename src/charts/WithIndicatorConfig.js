@@ -1,9 +1,12 @@
 import Tooltip from './Tooltip'
 import Chart from './Chart'
+import seriaFn from '../math/seriaFn'
 
 import handleMouseOver from './handleMouseOver'
 
 import COLOR from '../constants/Color'
+
+const { median, mean } = seriaFn;
 
 const C = {
   MFI: "#90ed7d",
@@ -11,7 +14,10 @@ const C = {
   MOM: '#f7a35c',
   CLOSE_OPEN: 'rgba(144, 237, 125, 0.75)',
 
-  HIGH_LOW: '#2D7474'
+  HIGH_LOW: '#2D7474',
+
+  MEDIAN: 'darkcyan',
+  MEAN: '#f7a35c'
 }
 
 const _configCrossLabel = (chart, option) => {
@@ -25,7 +31,8 @@ const _legendVolume = {
    enabled: true,
    align: 'left',
    verticalAlign: 'top',
-   x: 124,
+   //x: 124,
+   x: 84,
    y: -8,
    floating: true,
 
@@ -58,6 +65,20 @@ const _addColumnSeria = (config, option) => {
     series.push(_seria)
   }
 }
+
+const _crLineSeria = (id, name, color, data) => ({
+  zhSeriaId: id + '_' + name,
+  zhValueText: name,
+  type: "line",
+  color: color,
+  lineWidth: 2,
+  data: data,
+  name: name,
+  visible: false,
+  marker: {
+    enabled: false
+  }
+});
 
 const WithIndicatorConfig = {
 
@@ -115,12 +136,14 @@ const WithIndicatorConfig = {
 
   fMiniVolumeConfig({
       btTitle='Volume',
-      id='id', dColumn=[], dVolume, title='',
+      id='id', dColumn=[], dVolume,
       tooltipColumn
     }){
-    const config = this.fBaseIndicatorConfig();
+    const config = this.fBaseIndicatorConfig()
+    , { series } = config
+    , _hasColumn = dColumn.length !== 0;
     Object.assign(config, {
-      title: Chart.fTitleIndicator('Volume: ' + title),
+      title: Chart.fTitleIndicator('Volume:'),
       legend: _legendVolume
     })
     _configCrossLabel(config.chart)
@@ -128,24 +151,24 @@ const WithIndicatorConfig = {
       endOnTick: false,
       tickPixelInterval: 40,
     })
-    Object.assign(config.series[0], {
+    Object.assign(series[0], {
       zhSeriaId: id + '_VolumeArea',
       zhValueText: "Volume",
       data: dVolume,
+      visible: !_hasColumn,
       name: "Spline",
       point: Chart.fEventsMouseOver(
         handleMouseOver
       )
     })
-    if (dColumn.length !== 0) {
-      config.series.push({
+    if (_hasColumn) {
+      series.push({
         zhSeriaId: id + '_VolumeColumn',
         zhValueText: "Volume",
         turboThreshold: 20000,
         type: "column",
         name: "Column",
         data: dColumn,
-        visible: false,
         borderWidth: 0,
         pointPlacement: 'on',
         groupPadding: 0.1,
@@ -157,6 +180,12 @@ const WithIndicatorConfig = {
         },
         tooltip: tooltipColumn || Chart.fTooltip(Tooltip.volume)
       });
+      series.push(_crLineSeria(
+        id, 'Median', C.MEDIAN, median(dVolume)
+      ))
+      series.push(_crLineSeria(
+        id, 'Mean', C.MEAN, mean(dVolume)
+      ))
     }
 
     return {

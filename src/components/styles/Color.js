@@ -1,4 +1,4 @@
-const COLOR = {
+const COLOR = {  
   YELLOW: '#f1d600',
   GREEN: '#80c040',
   SIREN: '#a487d4',

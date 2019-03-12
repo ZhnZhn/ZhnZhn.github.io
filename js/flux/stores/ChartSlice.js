@@ -22,7 +22,8 @@ var _isChartExist = _ChartLogic2.default.isChartExist,
     removeConfig = _ChartLogic2.default.removeConfig,
     toTop = _ChartLogic2.default.toTop,
     sortBy = _ChartLogic2.default.sortBy,
-    checkBrowserChartTypes = _ChartLogic2.default.checkBrowserChartTypes;
+    checkBrowserChartTypes = _ChartLogic2.default.checkBrowserChartTypes,
+    scanPostAdded = _ChartLogic2.default.scanPostAdded;
 
 
 var CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
@@ -76,6 +77,7 @@ var ChartSlice = {
     var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_COMPLETE);
+    scanPostAdded(this, option);
   },
   onLoadStockFailed: function onLoadStockFailed(option) {
     this.triggerLoadingProgress(_LoadingProgressActions.T.LOADING_FAILED);

@@ -10,7 +10,8 @@ const {
   removeConfig,
   toTop,
   sortBy,
-  checkBrowserChartTypes
+  checkBrowserChartTypes,
+  scanPostAdded
 } = ChartLogic;
 
 const CONSOLE_LOG_STYLE = 'color:rgb(237, 88, 19);';
@@ -58,6 +59,7 @@ const ChartSlice = {
   },
   onLoadStockAdded(option={}){
      this.triggerLoadingProgress(LPA.LOADING_COMPLETE)
+     scanPostAdded(this, option)
   },
   onLoadStockFailed(option){
     this.triggerLoadingProgress(LPA.LOADING_FAILED)

@@ -24,6 +24,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _class, _temp;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -70,18 +72,8 @@ var _getInitStateFrom = function _getInitStateFrom(_ref) {
   };
 };
 
-var InputText = function (_Component) {
+var InputText = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(InputText, _Component);
-
-  /*
-  static propTypes = {
-    style: PropTypes.object,
-    initValue: PropTypes.string,
-    type: PropTypes.string,
-    placeholder: PropTypes.string,
-    onEnter: PropTypes.func
-  }
-  */
 
   function InputText(props) {
     (0, _classCallCheck3.default)(this, InputText);
@@ -89,7 +81,12 @@ var InputText = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (InputText.__proto__ || Object.getPrototypeOf(InputText)).call(this, props));
 
     _this._handleInputChange = function (event) {
-      _this.setState({ value: event.target.value });
+      var value = event.target.value,
+          maxLenght = _this.props.maxLenght;
+
+      if (value.length <= maxLenght) {
+        _this.setState({ value: value });
+      }
     };
 
     _this._handleKeyDown = function (event) {
@@ -113,6 +110,16 @@ var InputText = function (_Component) {
     _this.state = _getInitStateFrom(props);
     return _this;
   }
+  /*
+  static propTypes = {
+    style: PropTypes.object,
+    initValue: PropTypes.string,
+    type: PropTypes.string,
+    placeholder: PropTypes.string,
+    onEnter: PropTypes.func
+  }
+  */
+
 
   (0, _createClass3.default)(InputText, [{
     key: 'componentDidMount',
@@ -131,6 +138,7 @@ var InputText = function (_Component) {
           type = _props.type,
           spellCheck = _props.spellCheck,
           placeholder = _props.placeholder,
+          maxLenght = _props.maxLenght,
           value = this.state.value,
           _autoCorrect = spellCheck ? C.ON : C.OFF,
           _spellCheck = spellCheck ? true : false;
@@ -146,6 +154,7 @@ var InputText = function (_Component) {
         translate: false,
         value: value,
         placeholder: placeholder,
+        maxLength: maxLenght,
         onChange: this._handleInputChange,
         onKeyDown: this._handleKeyDown
       });
@@ -167,7 +176,8 @@ var InputText = function (_Component) {
     }
   }]);
   return InputText;
-}(_react.Component);
-
+}(_react.Component), _class.defaultProps = {
+  maxLenght: 125
+}, _temp);
 exports.default = InputText;
 //# sourceMappingURL=InputText.js.map

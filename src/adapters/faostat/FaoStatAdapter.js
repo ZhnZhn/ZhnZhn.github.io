@@ -22,6 +22,7 @@ const FaoStatAdapter = {
        .areaConfig({ spacingTop: 25 })
        .addCaption(_title, _subtitle)
        .addPoints(_id, _points)
+       .addMinMax(_points, option)
        .addTooltip(Tooltip.fnBasePointFormatter)
        .add({
          info: toInfo(json, _title, _subtitle),

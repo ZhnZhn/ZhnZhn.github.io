@@ -59,7 +59,8 @@
     "react/wrap-multilines": [1, {"declaration": false, "assignment": false}],
 
 
-      "jsx-a11y/no-access-key": 0 
+    "jsx-a11y/no-access-key": 0, 
+    "jsx-a11y/label-has-for": 0 
 
     }
 

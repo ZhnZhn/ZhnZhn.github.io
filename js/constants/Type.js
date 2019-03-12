@@ -52,6 +52,7 @@ var ModalDialog = exports.ModalDialog = {
    DESCRIPTION: 'DESCRIPTION',
    SETTINGS: 'settings',
    CUSTOMIZE_EXPORT: 'CUSTOMIZE_EXPORT',
+   COLUMN_RANGE: 'COLUMN_RANGE',
    ADD_TO_WATCH: 'addToWatch',
    LOAD_ITEM: 'loadItem',
    US_STOCK_BY_SECTOR: 'US_STOCK_BY_SECTOR',

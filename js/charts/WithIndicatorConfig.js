@@ -12,6 +12,10 @@ var _Chart = require('./Chart');
 
 var _Chart2 = _interopRequireDefault(_Chart);
 
+var _seriaFn = require('../math/seriaFn');
+
+var _seriaFn2 = _interopRequireDefault(_seriaFn);
+
 var _handleMouseOver = require('./handleMouseOver');
 
 var _handleMouseOver2 = _interopRequireDefault(_handleMouseOver);
@@ -22,13 +26,20 @@ var _Color2 = _interopRequireDefault(_Color);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var median = _seriaFn2.default.median,
+    mean = _seriaFn2.default.mean;
+
+
 var C = {
   MFI: "#90ed7d",
 
   MOM: '#f7a35c',
   CLOSE_OPEN: 'rgba(144, 237, 125, 0.75)',
 
-  HIGH_LOW: '#2D7474'
+  HIGH_LOW: '#2D7474',
+
+  MEDIAN: 'darkcyan',
+  MEAN: '#f7a35c'
 };
 
 var _configCrossLabel = function _configCrossLabel(chart, option) {
@@ -42,7 +53,8 @@ var _legendVolume = {
   enabled: true,
   align: 'left',
   verticalAlign: 'top',
-  x: 124,
+  //x: 124,
+  x: 84,
   y: -8,
   floating: true,
 
@@ -75,6 +87,22 @@ var _addColumnSeria = function _addColumnSeria(config, option) {
   } else {
     series.push(_seria);
   }
+};
+
+var _crLineSeria = function _crLineSeria(id, name, color, data) {
+  return {
+    zhSeriaId: id + '_' + name,
+    zhValueText: name,
+    type: "line",
+    color: color,
+    lineWidth: 2,
+    data: data,
+    name: name,
+    visible: false,
+    marker: {
+      enabled: false
+    }
+  };
 };
 
 var WithIndicatorConfig = {
@@ -136,13 +164,13 @@ var WithIndicatorConfig = {
         _ref$dColumn = _ref.dColumn,
         dColumn = _ref$dColumn === undefined ? [] : _ref$dColumn,
         dVolume = _ref.dVolume,
-        _ref$title = _ref.title,
-        title = _ref$title === undefined ? '' : _ref$title,
         tooltipColumn = _ref.tooltipColumn;
+    var config = this.fBaseIndicatorConfig(),
+        series = config.series,
+        _hasColumn = dColumn.length !== 0;
 
-    var config = this.fBaseIndicatorConfig();
     Object.assign(config, {
-      title: _Chart2.default.fTitleIndicator('Volume: ' + title),
+      title: _Chart2.default.fTitleIndicator('Volume:'),
       legend: _legendVolume
     });
     _configCrossLabel(config.chart);
@@ -150,22 +178,22 @@ var WithIndicatorConfig = {
       endOnTick: false,
       tickPixelInterval: 40
     });
-    Object.assign(config.series[0], {
+    Object.assign(series[0], {
       zhSeriaId: id + '_VolumeArea',
       zhValueText: "Volume",
       data: dVolume,
+      visible: !_hasColumn,
       name: "Spline",
       point: _Chart2.default.fEventsMouseOver(_handleMouseOver2.default)
     });
-    if (dColumn.length !== 0) {
-      config.series.push({
+    if (_hasColumn) {
+      series.push({
         zhSeriaId: id + '_VolumeColumn',
         zhValueText: "Volume",
         turboThreshold: 20000,
         type: "column",
         name: "Column",
         data: dColumn,
-        visible: false,
         borderWidth: 0,
         pointPlacement: 'on',
         groupPadding: 0.1,
@@ -177,6 +205,8 @@ var WithIndicatorConfig = {
         },
         tooltip: tooltipColumn || _Chart2.default.fTooltip(_Tooltip2.default.volume)
       });
+      series.push(_crLineSeria(id, 'Median', C.MEDIAN, median(dVolume)));
+      series.push(_crLineSeria(id, 'Mean', C.MEAN, mean(dVolume)));
     }
 
     return {

@@ -140,7 +140,8 @@ var ChartContainer = (_temp = _class = function (_Component) {
       onInitWidth: _this._resizeTo.bind(_this, RESIZE_INIT_WIDTH),
       onPlusWidth: _this._plusToWidth,
       onMinusWidth: _this._minusToWidth,
-      onFit: _this._fitToWidth
+      onFit: _this._fitToWidth,
+      onShowCaptions: _this._onShowCaptions
     });
 
     _this._hSetActive = _this._toggleChb.bind(_this, true);
@@ -279,6 +280,18 @@ var ChartContainer = (_temp = _class = function (_Component) {
       _propName = _this2._crChartPropName(i);
       if (_this2[_propName] && typeof _this2[_propName].reflowChart === 'function') {
         _this2[_propName].reflowChart(parentWidth - _this2.childMargin);
+      }
+    }
+  };
+
+  this._onShowCaptions = function (parentWidth) {
+    var i = 0,
+        max = _this2.state.configs.length,
+        _propName = void 0;
+    for (; i < max; i++) {
+      _propName = _this2._crChartPropName(i);
+      if (_this2[_propName] && typeof _this2[_propName].showCaption === 'function') {
+        _this2[_propName].showCaption();
       }
     }
   };

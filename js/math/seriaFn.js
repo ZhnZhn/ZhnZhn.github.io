@@ -23,6 +23,10 @@ var _calcY = function _calcY(pPrev, pNext) {
   return pPrev.y !== 0 ? parseFloat((0, _big2.default)(pNext.y - pPrev.y).div(pPrev.y).times(100).toFixed(2)) : null;
 };
 
+var _isDataArr = function _isDataArr(data) {
+  return _isArr(data) && data.length > 1 && _isArr(data[0]);
+};
+
 var fn = {
   growthRate: function growthRate(d) {
     var rt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
@@ -97,6 +101,56 @@ var fn = {
       maxY = _fn(data[i], maxY);
     }
     return maxY !== Number.NEGATIVE_INFINITY ? _mathFn2.default.toFixedNumber(maxY) : undefined;
+  },
+
+  mean: function mean(data) {
+    if (!_isDataArr(data)) {
+      return [];
+    }
+    var _sum = (0, _big2.default)(0);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var p = _step.value;
+
+        _sum = _sum.add(p[1]);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    var _max = data.length - 1;
+    var _avg = parseInt(_sum.div(_max).toFixed(0), 10);
+    return [[data[0][0], _avg], [data[_max][0], _avg]];
+  },
+
+  median: function median(data) {
+    if (!_isDataArr(data)) {
+      return [];
+    }
+    var _d = data.map(function (arrP) {
+      return arrP[1];
+    }).sort(function (a, b) {
+      return a - b;
+    }),
+        _len = data.length,
+        _half = _len / 2,
+        _median = _half % 2 === 0 ? Math.round((_d[_half - 1] + _d[_half]) / 2) : _d[Math.round(_half) - 1];
+    return [[data[0][0], _median], [data[_len - 1][0], _median]];
   }
 };
 

@@ -26,9 +26,13 @@ var _crSimple = function _crSimple(_ref) {
       point = _ref.point;
   var y = point.y,
       category = point.category,
-      c = point.c;
+      c = point.c,
+      _point$series = point.series,
+      series = _point$series === undefined ? {} : _point$series,
+      name = series.name,
+      color = series.color;
 
-  return crHeader(category || c, id) + '\n   <div class="tp__body">\n     ' + crRow('Value', toNumberFormatAll(y)) + '\n   </div>';
+  return crHeader(category || c, id) + '\n   <div class="tp__body">\n     ' + crRow('Value', toNumberFormatAll(y)) + '\n     ' + crRow('Seria', name, { color: color }) + '\n   </div>';
 };
 
 //style='cursor:pointer;pointer-events:visible;color:cadetblue;'
@@ -36,9 +40,10 @@ var _crRemove = function _crRemove(_ref2) {
   var id = _ref2.id,
       point = _ref2.point;
   var y = point.y,
-      c = point.c;
+      c = point.c,
+      category = point.category;
 
-  return crHeader(c, id) + '\n  <div class="tp__body">\n    ' + crRow('Value', toNumberFormatAll(y)) + '\n    <div class=\'tp__bt\' id=' + (id + '_R') + '>\n         Remove\n    </div>\n  </div>';
+  return crHeader(c || category, id) + '\n  <div class="tp__body">\n    ' + crRow('Value', toNumberFormatAll(y)) + '\n    <div class=\'tp__bt\' id=' + (id + '_R') + '>\n         Remove\n    </div>\n  </div>';
 };
 
 var _addCategoryHandlersImpl = function _addCategoryHandlersImpl(id, point) {

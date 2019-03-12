@@ -203,7 +203,7 @@ const ChartTheme = {
 
       stickyTracking : false,
       events : {
-        click : function(event) {
+        click : function(event) {          
           const tooltip = this.chart.zhTooltip;
 
           tooltip.options.enabled = true

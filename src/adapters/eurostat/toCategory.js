@@ -3,13 +3,14 @@ import FactoryChart from './FactoryChart';
 import JsonStatFn from './JsonStatFn';
 import EuroStatFn from './EuroStatFn';
 
-const SCATTER_SERIA_PROPS = {
+const _crScatterProps = (seriaColor)  => ({
   type: 'scatter',
   marker: {
+    fillColor: seriaColor,
     radius: 5,
     symbol: 'circle'
   }
-};
+});
 
 const toCategory = {
   createConfig: (json, option) => {
@@ -35,7 +36,7 @@ const toCategory = {
         , _name = configSlice.time || time
         , data = JsonStatFn.trJsonToSeria(json, configSlice, categories)
         , _seriaProps = seriaType === 'DOT_SET'
-            ? SCATTER_SERIA_PROPS
+            ? _crScatterProps(seriaColor)
             : undefined;
     return {
       zhSeriaId: 'optionKey',
@@ -44,6 +45,7 @@ const toCategory = {
       name: _name,
       color: seriaColor,
       data: data,
+      tooltip: EuroStatFn.crCategoryTooltip(),
       ..._seriaProps
     };
   }
