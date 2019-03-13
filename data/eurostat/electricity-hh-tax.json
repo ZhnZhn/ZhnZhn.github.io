@@ -1,0 +1,5 @@
+{"items":[
+{"value":"X_TAX","caption":"Excluding taxes and levies"},
+{"value":"X_VAT","caption":"Excluding VAT and other recoverable taxes and levies"},
+{"value":"I_TAX","caption":"All taxes and levies included"}
+]}

@@ -34,6 +34,7 @@
         { "id" : "ES_I_ELECTRICITY_GENERATION" },
         { "id" : "ES_E_STC_ELECTRICITY" },
         { "id" : "ES_E_STAT_PR" },
+        { "id" : "ES_E_ELECTRICITY_HOUSEHOLD" },
         { "id" : "ES_E_HOUSEHOLD_ELECTRICITY" },
         { "id" : "ES_E_NONHOUSEHOLD_ELECTRICITY" },
         { "id" : "ES_E_CHD_DAYS_M" },
@@ -606,8 +607,8 @@
     },
     "ES_E_HOUSEHOLD_ELECTRICITY" : {
       "type" : "ES_E_HOUSEHOLD_ELECTRICITY",
-      "menuTitle" : "Electr. House Prices",
-      "contCaption" : "Electricity Household Prices, Annual",
+      "menuTitle" : "Electr. Household Comp.",
+      "contCaption" : "Electricity Prices Component for Household, Annual",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
@@ -623,6 +624,25 @@
           "mapType": "V",
           "mapFrequency" : "Y",
           "mapDateDf": 1
+        }
+      }
+    },
+    "ES_E_ELECTRICITY_HOUSEHOLD" : {
+      "type" : "ES_E_ELECTRICITY_HOUSEHOLD",
+      "menuTitle" : "Electr. Household Prices",
+      "contCaption" : "Electricity Household Prices, Bi-Annual",
+      "dialogType" : "DialogSelectN",
+      "addProps": "ES_BASE_SN",
+      "dialogProps" : {
+        "selectProps": [
+          [ "consom","Band","electricity-hh-band.json" ],
+          [ "tax","Tax","electricity-hh-tax.json" ],
+          [ "currency","Currency","currency.json" ]
+        ],
+        "dfProps": {
+          "mapFrequency" : "S",
+          "dfTable": "nrg_pc_204",
+          "dfTail": "unit=KWH&product=6000"
         }
       }
     },

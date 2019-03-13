@@ -1,0 +1,7 @@
+{"items":[
+{"value":"4161901","caption":"Consumption < 1 000 kWh (DA)"},
+{"value":"4161902","caption":"1 000 kWh < Consumption < 2 500 kWh (DB)"},
+{"value":"4161903","caption":"2 500 kWh < Consumption < 5 000 kWh (DC)"},
+{"value":"4161904","caption":"5 000 kWh < Consumption < 15 000 kWh (DD)"},
+{"value":"4161905","caption":"Consumption > 15 000 kWh (DE)"}
+]}
