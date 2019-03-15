@@ -21,10 +21,10 @@ const _toUTC = (str) => {
 };
 
 const _crZhConfig = (json, option) => {
-  const { dataSource } = option
+  const { dataSource, key } = option
   , id = json.series[0].series_id;
   return {
-    id, key: id,
+    id, key,
     //itemCaption: title,
     isWithoutAdd: true,
     dataSource
@@ -91,7 +91,7 @@ const fnAdapter = {
   crConfigOption: ({ json, option, data }) => ({
     zhConfig: _crZhConfig(json, option),
     valueMoving: valueMoving(data),
-    info: _crInfo(json)    
+    info: _crInfo(json)
   })
 }
 

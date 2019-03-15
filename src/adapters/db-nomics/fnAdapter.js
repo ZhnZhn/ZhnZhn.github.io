@@ -15,10 +15,10 @@ const C = {
   CHART_URL: 'https://db.nomics.world'
 };
 
-const _isNotId = id => id.indexOf('/') === -1;
-const _getId = ({ dfProvider, dfCode, seriaId }) => _isNotId(seriaId)
-  ? `${dfProvider}/${dfCode}/${seriaId}`
-  : seriaId;
+const _isId = id => id && id.indexOf('/') !== -1;
+const _getId = ({ dfProvider, dfCode, seriaId }) => _isId(seriaId)
+  ? seriaId
+  : `${dfProvider}/${dfCode}/${seriaId}`;
 
 const _crDescr = (option) => {
   const _id = _getId(option);
@@ -28,9 +28,9 @@ const _crDescr = (option) => {
   `;
 };
 
-const _crZhConfig = ({ dataSource, seriaId }) => ({
-  id: seriaId,
-  key: seriaId,
+const _crZhConfig = ({ dataSource, _itemKey, seriaId }) => ({
+  id: _itemKey || seriaId,
+  key: _itemKey || seriaId,
   //itemCaption: title,
   isWithoutAdd: true,
   dataSource
@@ -40,7 +40,7 @@ const _crInfo = (json, option) => ({
   description: _crDescr(option)
 })
 
-const _isNumber = n => typeof n === 'number'
+const _isNumber = n => typeof(n) === 'number'
  && !Number.isNaN(n);
 
 
@@ -56,10 +56,7 @@ const fnAdapter = {
     , { period, value } = getPeriodAndValue(json);
     period.forEach((p, i) => {
       if (_isNumber(value[i])) {
-        data.push({
-          x: ymdToUTC(p),
-          y: value[i]
-        })
+        data.push([ ymdToUTC(p), value[i] ])
       }
     })
     return data;

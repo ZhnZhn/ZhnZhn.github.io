@@ -35,12 +35,17 @@ var createrFns = {
         threeC = _getCaption(items[2]),
         fourC = _getCaption(items[3]);
 
-    if (fourC) return _crC(oneC + ': ' + twoC, threeC + ': ' + fourC);
-    if (threeC) return _crC(oneC, twoC + ': ' + threeC);
-    if (twoC) return _crC(oneC, twoC);
+    var _caption = _crC(oneC);
+    if (fourC) {
+      _caption = _crC(oneC + ': ' + twoC, threeC + ': ' + fourC);
+    } else if (threeC) {
+      _caption = _crC(oneC, twoC + ': ' + threeC);
+    } else if (twoC) {
+      _caption = _crC(oneC, twoC);
+    }
     return (0, _extends3.default)({
       oneC: oneC, twoC: twoC, threeC: threeC, fourC: fourC
-    }, _crC(oneC));
+    }, _caption);
   },
 
   crAlertConf: function crAlertConf(alertItemId, alertGeo, alertMetric) {

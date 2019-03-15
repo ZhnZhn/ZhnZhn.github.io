@@ -12,7 +12,7 @@ var _LoadConfig2 = _interopRequireDefault(_LoadConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
+var _crQuandlKey = function _crQuandlKey(option) {
   var loadId = option.loadId,
       isLoadMeta = option.isLoadMeta,
       value = option.value,
@@ -23,7 +23,7 @@ var _fnCreateQuandlKey = function _fnCreateQuandlKey(option) {
   return loadId === _Type.LoadType.QCT && !isLoadMeta ? seriaType === _Type.ChartType.AREA ? value + '_' + _Type.ChartType.AREA + '_' + dataColumn : value + '_' + seriaType : viewKey ? viewKey : value;
 };
 
-var _fnCreateEuroStatKey = function _fnCreateEuroStatKey(option) {
+var _crEurostatKey = function _crEurostatKey(option) {
   var _option$geo = option.geo,
       geo = _option$geo === undefined ? '' : _option$geo,
       _option$group = option.group,
@@ -45,10 +45,7 @@ var _crKey = function _crKey(option) {
       loadConfig = _LoadConfig2.default[loadId] || {},
       crKey = loadConfig.crKey;
 
-  if (typeof crKey === 'function') {
-    return crKey(option);
-  }
-  return value || 'key';
+  return typeof crKey === 'function' ? crKey(option) : value || 'key';
 };
 
 var LogicUtils = {
@@ -57,9 +54,9 @@ var LogicUtils = {
 
     switch (loadId) {
       case _Type.LoadType.Q:case _Type.LoadType.QCT:
-        return _fnCreateQuandlKey(option);
-      case _Type.LoadType.EU_STAT:
-        return _fnCreateEuroStatKey(option);
+        return _crQuandlKey(option);
+      case _Type.LoadType.EU_STAT:case _Type.LoadType.EIA:
+        return _crEurostatKey(option);
       case _Type.LoadType.WL:
         return option.id;
       default:

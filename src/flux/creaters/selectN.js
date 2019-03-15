@@ -16,7 +16,7 @@ const createLoadOptions = (props={}, options={}) => {
       , { oneC, threeC, title, subtitle } = crCaption(items)
       , { value:seriaType, compType } = chartType
       , _itemKey = crItemKey(items, seriaType, date);
-
+  
   return {
     ...dfProps,
     ...dialogOptions,

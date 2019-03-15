@@ -1,7 +1,7 @@
 # [ERC (Economic RESTful Client)](https://zhnzhn.github.io)
 ERC (Economic RESTful Client) is a web app that gives the ability to explore, visualize and compose economic and financial data mostly to charts from open and private data providers. Some examples of data visualization and news about web app ERC can be found on Twitter's page [@webapperc](https://twitter.com/webapperc).   
 
-Data providers: [Quandl](https://www.quandl.com), [DB NOMICS](https://db.nomics.world/), [Eurostat](http://ec.europa.eu/eurostat/web/main/home), [UnComtrade](https://comtrade.un.org), [FAOSTAT](http://www.fao.org/faostat/en/#data/), [World Bank](https://data.worldbank.org/), [Statistics Norway](http://www.ssb.no/en), [Statistics Sweden](https://www.scb.se/en), [Insee: France Statistics](https://www.insee.fr/en/accueil), [Barchart Market Data](https://www.barchartmarketdata.com), [IEX Platform](https://iextrading.com/developer/), [Alpha Vantage](https://www.alphavantage.co) and more (All 18).   
+Data providers: [Quandl](https://www.quandl.com), [DB NOMICS](https://db.nomics.world/), [Eurostat](http://ec.europa.eu/eurostat/web/main/home), [UnComtrade](https://comtrade.un.org), [FAOSTAT](http://www.fao.org/faostat/en/#data/), [World Bank](https://data.worldbank.org/), [Statistics Norway](http://www.ssb.no/en), [Statistics Sweden](https://www.scb.se/en), [Insee: France Statistics](https://www.insee.fr/en/accueil), [Barchart Market Data](https://www.barchartmarketdata.com), [IEX Platform](https://iextrading.com/developer/), [Alpha Vantage](https://www.alphavantage.co) and more (All 19).   
 
 ![alt text](screencast/erc-currency-example.png?raw=true "Currency History")
 
@@ -28,11 +28,9 @@ There is three UI theme in the web app ERC: **Dark**, **Light**, and **Sand** ca
 More details and requirements about data providers can be found in the [web app ERC](https://zhnzhn.github.io) **pane About** and provider's websites.  
 
 ### Attention
-For one item from **Dialog** can be only one **Chart item** in a container. 
+For one item from **Dialog** can be only one **Chart item** in a container.
 If you want to change a date period, please, use **Highcharts zoom option** or close the chart in the container and load data again.
 More information about data can be found a **tab Info, Chart item**.
 
 ## License
 This project is licensed under [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause). Copyright (c) 2016-present, Yevhenii Molodyi.
-
-

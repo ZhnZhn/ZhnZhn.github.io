@@ -25,14 +25,14 @@ var C = {
   CHART_URL: 'https://db.nomics.world'
 };
 
-var _isNotId = function _isNotId(id) {
-  return id.indexOf('/') === -1;
+var _isId = function _isId(id) {
+  return id && id.indexOf('/') !== -1;
 };
 var _getId = function _getId(_ref) {
   var dfProvider = _ref.dfProvider,
       dfCode = _ref.dfCode,
       seriaId = _ref.seriaId;
-  return _isNotId(seriaId) ? dfProvider + '/' + dfCode + '/' + seriaId : seriaId;
+  return _isId(seriaId) ? seriaId : dfProvider + '/' + dfCode + '/' + seriaId;
 };
 
 var _crDescr = function _crDescr(option) {
@@ -42,10 +42,11 @@ var _crDescr = function _crDescr(option) {
 
 var _crZhConfig = function _crZhConfig(_ref2) {
   var dataSource = _ref2.dataSource,
+      _itemKey = _ref2._itemKey,
       seriaId = _ref2.seriaId;
   return {
-    id: seriaId,
-    key: seriaId,
+    id: _itemKey || seriaId,
+    key: _itemKey || seriaId,
     //itemCaption: title,
     isWithoutAdd: true,
     dataSource: dataSource
@@ -79,10 +80,7 @@ var fnAdapter = {
 
     period.forEach(function (p, i) {
       if (_isNumber(value[i])) {
-        data.push({
-          x: ymdToUTC(p),
-          y: value[i]
-        });
+        data.push([ymdToUTC(p), value[i]]);
       }
     });
     return data;

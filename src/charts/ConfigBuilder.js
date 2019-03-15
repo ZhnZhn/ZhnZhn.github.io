@@ -264,10 +264,10 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     )
     return this;
   },
-  
+
   checkThreshold(seriaIndex=0){
     const config = this.config
-    , data = config.series[seriaIndex].data;
+    , data = config.series[seriaIndex].data;    
     if (data.length > 1000) {
       config.plotOptions = Object.assign(
         config.plotOptions || {}, {

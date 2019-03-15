@@ -6,6 +6,8 @@ const C = {
   MSG_EMPTY: 'Dataset is empty'
 };
 
+const _isArr = Array.isArray;
+
 const _crErr = message => ({
     errCaption: C.ERR_CAPTION,
     message: message || ''
@@ -16,7 +18,7 @@ const _getValue = obj => obj && obj.value
 
 const _crUrlImpl = (dfProvider, dfCode, seriaId) => {
  if (!dfProvider || !dfCode || !seriaId) {
-   return `${C.URL}?series_ids=${C.DF_ID}${C.TAIL}`;
+   return `${C.URL}?series_ids=${C.DF_ID}&${C.TAIL}`;
  }
  return `${C.URL}?series_ids=${dfProvider}/${dfCode}/${seriaId}&${C.TAIL}`;
 };
@@ -27,7 +29,9 @@ const _crUrl = (seriaId, option) => {
   return _crUrlImpl(dfProvider, dfCode, seriaId);
 };
 
-const _dfFnUrl = option => _crUrl(option.value, option);
+const _dfFnUrl = option => _isArr(option.items)
+  ? _crUrl(_getValue(option.items[0]), option)
+  : _crUrl('', option);
 
 const _crIdUrl = (option, dfProvider, dfCode, seriaId) => {
   Object.assign(option, {
@@ -42,31 +46,56 @@ const _idFnUrl = (option) => {
   return _crIdUrl(option, arr[0], arr[1], arr[2]);
 };
 
+const _crSeriaId = ({ dfPrefix, dfSufix }, ...args) => [
+    dfPrefix, ...args, dfSufix
+  ].filter(Boolean)
+   .join('.');
+
 const _s21FnUrl = (option) => {
-  const { dfSufix, items } = option
-  , _one = _getValue(items[0])
-  , _two = _getValue(items[1])
-  , _seriaId = dfSufix
-      ? `${_two}.${_one}.${dfSufix}`
-      : `${_two}.${_one}`;
+  const { items } = option
+  , _seriaId = _crSeriaId(option,
+    _getValue(items[1]),
+    _getValue(items[0]),
+  );
   return _crUrl(_seriaId, option);
 };
 const _s12FnUrl = (option) => {
-  const { dfSufix, items } = option
-  , _one = _getValue(items[0])
-  , _two = _getValue(items[1])
-  , _seriaId = dfSufix
-      ? `${_one}.${_two}.${dfSufix}`
-      : `${_one}.${_two}`;
+  const { items } = option
+  , _seriaId = _crSeriaId(option,
+    _getValue(items[0]),
+    _getValue(items[1]),
+  );
   return _crUrl(_seriaId, option);
 };
 const _s123AFnUrl = (option) => {
-  const { items, df3Prefix='' } = option
-  , _one = _getValue(items[0])
-  , _two = _getValue(items[1])
-  , _three = _getValue(items[2])
-  , _seriaId = `${_one}.${_two}.${df3Prefix}.${_three}`;
+  const { items, df3Prefix } = option
+  , _seriaId = _crSeriaId(option,
+    _getValue(items[0]),
+    _getValue(items[1]),
+    df3Prefix,
+    _getValue(items[2])
+  );
   return _crUrl(_seriaId, option);
+};
+const _s123BFnUrl = (option) => {
+  const { items, df2Prefix } = option
+  , _seriaId = _crSeriaId(option,
+    _getValue(items[0]),
+    df2Prefix,
+    _getValue(items[1]),
+    _getValue(items[2])
+  );
+  return _crUrl(_seriaId, option);
+};
+
+const _s123FnUrl = (option) => {
+  const { items } = option
+  , _seriaId = _crSeriaId(option,
+    _getValue(items[0]),
+    _getValue(items[1]),
+    _getValue(items[2])
+    )
+    return _crUrl(_seriaId, option);
 };
 
 const _rFnUrl = {
@@ -74,7 +103,9 @@ const _rFnUrl = {
   id: _idFnUrl,
   s12: _s12FnUrl,
   s21: _s21FnUrl,
-  s123A: _s123AFnUrl
+  s123A: _s123AFnUrl,
+  s123B: _s123BFnUrl,
+  s123: _s123FnUrl
 };
 
 const DbNomicsApi = {
@@ -85,13 +116,13 @@ const DbNomicsApi = {
   },
 
   checkResponse(json){
-    if (json && Array.isArray(json.errors)) {
+    if (json && _isArr(json.errors)) {
       throw _crErr(json.errors[0].message);
     }
     const docs = json && json.series && json.series.docs;
-    if (!Array.isArray(docs) || !docs[0]
-      || !Array.isArray(docs[0].period)
-      || !Array.isArray(docs[0].value)) {
+    if (!_isArr(docs) || !docs[0]
+      || !_isArr(docs[0].period)
+      || !_isArr(docs[0].value)) {
       throw _crErr(C.MSG_EMPTY);
     }
     return true;

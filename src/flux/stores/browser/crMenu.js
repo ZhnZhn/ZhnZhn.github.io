@@ -11,7 +11,7 @@ const crMenu = (menu=[], menuItems, browserType) => {
   return menu.map(menuPart => {
      const { caption, isInitOpen, items=[] } = menuPart
      , _items = items.map(item => {
-          const { id, isNew=false } = item;
+          const { id, isNew=false } = item;          
           return {
             id: id,
             title: menuItems[id].menuTitle,

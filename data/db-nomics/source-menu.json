@@ -8,6 +8,13 @@
         { "id": "DBN_ECB_TRADE" }
       ]
     },{
+      "caption": "IMF",
+      "items": [
+        { "id": "DBN_IMF_CPI" },
+        { "id": "DBN_IMF_TRADE" },
+        { "id": "DBN_IMF_COFOG" }
+      ]
+    },{
       "caption": "OECD",
       "items": [
         { "id": "DBN_OECD_SHORTINDICATOR" },
@@ -34,34 +41,58 @@
     }
   ],
   "items": {
-    "DBN_B1": {
+    "DBN_B": {
       "dialogProps": {
         "noDate": true,
         "descrUrl" : "./data/db-nomics/db-nomics.html",
-        "loadId" : "DBN",
-        "optionsJsonProp" : "items"
+        "loadId" : "DBN"
       }
     },
-    "DBN_B2": {
+    "DBN_B_S": {
       "dialogProps": {
         "noDate": true,
         "descrUrl" : "./data/db-nomics/db-nomics.html",
         "loadId" : "DBN",
-        "oneCaption": "Country",
-        "oneURI": "./data/db-nomics/oecd-countries.json",
-        "oneJsonProp": "items",
-        "twoJsonProp": "items",
+        "rootUri": "./data/db-nomics/",
+        "spT": "id",
         "chartsType": "t1"
+      }
+    },
+    "DBN_B_OECD": {
+      "extends": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country","oecd-countries" ]
+        ]
+      }
+    },
+    "DBN_B_IMF": {
+      "extends": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country","imf-countries" ]
+        ]
+      }
+    },
+    "DBN_B_WTO": {
+      "extends": "DBN_B_S",
+      "dialogProps": {
+        "selectProps": [
+          [ "Country", "wto-countries" ],
+          [ "Flow", "wto-flow" ]
+        ]
       }
     },
     "DBN_ECB_CURRENCY": {
       "type" : "DBN_ECB_CURRENCY",
       "menuTitle" : "Exchange Rates, D",
       "chartContainerCaption" : "DB Nomics: ECB: Exchange Rates, Daily",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
       "dialogProps" : {
-        "oneCaption": "Rate",
-        "optionURI" : "./data/db-nomics/ecb-exchange-rates.json",
+        "selectProps": [
+          [ "Rate", "ecb-exchange-rates" ]
+        ],
         "dataSource" : "DB Nomics: ECB: Exchange Rates, D",
         "dfProps": {
           "dfProvider": "ECB",
@@ -73,10 +104,12 @@
       "type" : "DBN_ECB_EQUITYINDEX",
       "menuTitle" : "Equity Index, M",
       "chartContainerCaption" : "DB Nomics: ECB: Equity Index, Monthly",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
       "dialogProps" : {
-        "oneCaption": "Index",
-        "optionURI" : "./data/db-nomics/ecb-equity-index.json",
+        "selectProps": [
+          [ "Index", "ecb-equity-index" ]
+        ],
         "dataSource" : "DB Nomics: ECB: Equity Index, M",
         "dfProps": {
           "dfProvider": "ECB",
@@ -88,10 +121,12 @@
       "type" : "DBN_ECB_TRADE",
       "menuTitle" : "EA Trade, SA, M",
       "chartContainerCaption" : "DB Nomics: ECB: EA Trade, SA, Monthly",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
       "dialogProps" : {
-        "oneCaption": "Index",
-        "optionURI" : "./data/db-nomics/ecb-trade.json",
+        "selectProps": [
+          [ "Index", "ecb-trade" ]
+        ],
         "dataSource" : "DB Nomics: ECB: EA Trade, SA, M",
         "dfProps": {
           "dfProvider": "ECB",
@@ -100,15 +135,77 @@
       }
     },
 
+    "DBN_IMF_CPI": {
+      "type" : "DBN_IMF_CPI",
+      "menuTitle" : "CPI, M",
+      "chartContainerCaption" : "DB Nomics: IMF: CPI, Monthly",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_IMF",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Index", "imf-cpi" ]
+        ],
+        "dataSource" : "DB Nomics: IMF: CPI, M",
+        "dfProps": {
+          "dfProvider": "IMF",
+          "dfCode": "CPI",
+          "dfFnUrl": "s12",
+          "dfPrefix": "M"
+        }
+      }
+    },
+    "DBN_IMF_TRADE": {
+      "type" : "DBN_IMF_TRADE",
+      "menuTitle" : "Trade Goods (DOTS), M",
+      "chartContainerCaption" : "DB Nomics: IMF: Direction of Trade Goods Statistics, M",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_IMF",
+      "dialogProps": {
+        "selectProps": [
+          ["Metric", "imf-trade-metrics"],
+          ["Partner", "imf-countries" ]
+        ],
+        "dataSource" : "DB Nomics: IMF: Direction of Trade Goods Statistics, M",
+        "dfProps": {
+          "dfProvider": "IMF",
+          "dfCode": "DOT",
+          "dfFnUrl": "s123",
+          "dfPrefix": "M"
+        }
+      }
+    },
+    "DBN_IMF_COFOG": {
+      "type" : "DBN_IMF_COFOG",
+      "menuTitle" : "Expenditure (COFOG), A",
+      "chartContainerCaption" : "DB Nomics: IMF: Expenditure (COFOG), Annual",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_IMF",
+      "dialogProps": {
+        "selectProps": [
+          [ "Metric", "imf-expenditure-metrics" ],
+          [ "Function", "imf-expenditure-fns" ]
+        ],
+        "dataSource" : "DB Nomics: IMF: Expenditure (COFOG), A",
+        "dfProps": {
+          "dfProvider": "IMF",
+          "dfCode": "GFSCOFOG",
+          "dfFnUrl": "s123B",
+          "dfPrefix": "A",
+          "df2Prefix": "S13"
+        }
+      }
+    },
+
     "DBN_OECD_SHORTINDICATOR": {
       "type" : "DBN_OECD_SHORTINDICATOR",
       "menuTitle" : "Short Key Indicators, M",
       "chartContainerCaption" : "DB Nomics: OECD: Short Key Indicators, Monthly",
-      "dialogType": "DialogEurostat2",
-      "addProps": "DBN_B2",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_OECD",
       "dialogProps": {
-        "twoCaption": "Indicator",
-        "twoURI": "./data/db-nomics/oecd-short-key-indicators.json",
+        "selectProps": [
+          [ "Indicator", "oecd-short-key-indicators" ]
+        ],
         "dataSource" : "DB Nomics: OECD: Short Key Indicators, M",
         "dfProps": {
           "dfProvider": "OECD",
@@ -122,11 +219,12 @@
       "type" : "DBN_OECD_PRODUCERPRICES",
       "menuTitle" : "Producer Prices Index, A",
       "chartContainerCaption" : "DB Nomics: OECD: Producer Prices Index, Annual",
-      "dialogType": "DialogEurostat2",
-      "addProps": "DBN_B2",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_OECD",
       "dialogProps": {
-        "twoCaption": "Indicator",
-        "twoURI": "./data/db-nomics/oecd-producer-prices-index.json",
+        "selectProps": [
+          [ "Indicator", "oecd-producer-prices-index" ]
+        ],
         "dataSource" : "DB Nomics: OECD: Producer Prices Index, A",
         "dfProps": {
           "dfProvider": "OECD",
@@ -141,17 +239,12 @@
       "type" : "DBN_WTO_GOODSTRADE_A",
       "menuTitle" : "Merchandise Trade Value, A",
       "chartContainerCaption" : "DB Nomics: WTO: Merchandise Trade Value, Annual",
-      "dialogType": "DialogEurostat3A",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_WTO",
       "dialogProps": {
-        "oneCaption": "Country",
-        "oneURI": "./data/db-nomics/wto-countries.json",
-        "oneJsonProp": "items",
-        "twoCaption": "Flow",
-        "twoURI": "./data/db-nomics/wto-flow.json",
-        "twoJsonProp": "items",
-        "threeCaption": "Goods",
-        "threeURI": "./data/db-nomics/wto-goods.json",
+        "selectProps": [
+          [ "Goods", "wto-goods" ]
+        ],
         "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, A",
         "chartsType": "t1",
         "dfProps": {
@@ -166,14 +259,9 @@
       "type" : "DBN_WTO_GOODSTRADE",
       "menuTitle" : "Merchandise Trade Value, M",
       "chartContainerCaption" : "DB Nomics: WTO: Merchandise Trade Value, Monthly",
-      "dialogType": "DialogEurostat2",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_WTO",
       "dialogProps": {
-        "oneCaption": "Country",
-        "oneURI": "./data/db-nomics/wto-countries.json",
-        "twoCaption": "Flow",
-        "twoURI": "./data/db-nomics/wto-flow.json",
-        "twoJsonProp": "items",
         "dataSource" : "DB Nomics: WTO: Merchandise Trade Value in $Ml, M",
         "chartsType": "t1",
         "dfProps": {
@@ -187,14 +275,9 @@
       "type" : "DBN_WTO_SERVICETRADE",
       "menuTitle" : "Services Trade Value, M",
       "chartContainerCaption" : "DB Nomics: WTO: Commercial Services Trade Value, Monthly",
-      "dialogType": "DialogEurostat2",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_WTO",
       "dialogProps": {
-        "oneCaption": "Country",
-        "oneURI": "./data/db-nomics/wto-countries-services.json",
-        "twoCaption": "Flow",
-        "twoURI": "./data/db-nomics/wto-flow.json",
-        "twoJsonProp": "items",
         "dataSource" : "DB Nomics: WTO: Commercial Services Trade Value in $Ml, M",
         "chartsType": "t1",
         "dfProps": {
@@ -209,10 +292,12 @@
       "type" : "DBN_NBB_HICP",
       "menuTitle" : "Inflation & HICP, M",
       "chartContainerCaption" : "DB Nomics: NBB: Inflation & HICP, Monthly",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
       "dialogProps" : {
-        "oneCaption": "Item",
-        "optionURI" : "./data/db-nomics/nbb-hicp.json",
+        "selectProps": [
+          [ "Item", "nbb-hicp" ]
+        ],
         "dataSource" : "DB Nomics: NBB: Inflation & HICP, M",
         "dfProps": {
           "dfProvider": "NBB",
@@ -224,10 +309,12 @@
       "type" : "DBN_NBB_MARKETS",
       "menuTitle" : "Stocks & Commodities, D",
       "chartContainerCaption" : "DB Nomics: NBB: Stocks & Commodities Market, Daily",
-      "addProps": "DBN_B1",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
       "dialogProps" : {
-        "oneCaption": "Item",
-        "optionURI" : "./data/db-nomics/nbb-stocks-commodities.json",
+        "selectProps": [
+          [ "Item", "nbb-stocks-commodities" ]
+        ],
         "dataSource" : "DB Nomics: NBB: Stocks & Commodities Market, D",
         "dfProps": {
           "dfProvider": "NBB",
@@ -241,7 +328,7 @@
       "menuTitle" : "Query by Id",
       "chartContainerCaption" : "DB Nomics: Query by Id",
       "dialogType": "DialogQuery",
-      "addProps": "DBN_B1",
+      "addProps": "DBN_B",
       "dialogProps" : {
         "oneCaption": "Id",
         "onePlaceholder": "PROVIDER/CODE/SERIES.ID",

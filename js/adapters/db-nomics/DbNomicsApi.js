@@ -11,6 +11,8 @@ var C = {
   MSG_EMPTY: 'Dataset is empty'
 };
 
+var _isArr = Array.isArray;
+
 var _crErr = function _crErr(message) {
   return {
     errCaption: C.ERR_CAPTION,
@@ -23,7 +25,7 @@ var _getValue = function _getValue(obj) {
 
 var _crUrlImpl = function _crUrlImpl(dfProvider, dfCode, seriaId) {
   if (!dfProvider || !dfCode || !seriaId) {
-    return C.URL + '?series_ids=' + C.DF_ID + C.TAIL;
+    return C.URL + '?series_ids=' + C.DF_ID + '&' + C.TAIL;
   }
   return C.URL + '?series_ids=' + dfProvider + '/' + dfCode + '/' + seriaId + '&' + C.TAIL;
 };
@@ -37,7 +39,7 @@ var _crUrl = function _crUrl(seriaId, option) {
 };
 
 var _dfFnUrl = function _dfFnUrl(option) {
-  return _crUrl(option.value, option);
+  return _isArr(option.items) ? _crUrl(_getValue(option.items[0]), option) : _crUrl('', option);
 };
 
 var _crIdUrl = function _crIdUrl(option, dfProvider, dfCode, seriaId) {
@@ -55,32 +57,46 @@ var _idFnUrl = function _idFnUrl(option) {
   return _crIdUrl(option, arr[0], arr[1], arr[2]);
 };
 
+var _crSeriaId = function _crSeriaId(_ref2) {
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  var dfPrefix = _ref2.dfPrefix,
+      dfSufix = _ref2.dfSufix;
+  return [dfPrefix].concat(args, [dfSufix]).filter(Boolean).join('.');
+};
+
 var _s21FnUrl = function _s21FnUrl(option) {
-  var dfSufix = option.dfSufix,
-      items = option.items,
-      _one = _getValue(items[0]),
-      _two = _getValue(items[1]),
-      _seriaId = dfSufix ? _two + '.' + _one + '.' + dfSufix : _two + '.' + _one;
+  var items = option.items,
+      _seriaId = _crSeriaId(option, _getValue(items[1]), _getValue(items[0]));
 
   return _crUrl(_seriaId, option);
 };
 var _s12FnUrl = function _s12FnUrl(option) {
-  var dfSufix = option.dfSufix,
-      items = option.items,
-      _one = _getValue(items[0]),
-      _two = _getValue(items[1]),
-      _seriaId = dfSufix ? _one + '.' + _two + '.' + dfSufix : _one + '.' + _two;
+  var items = option.items,
+      _seriaId = _crSeriaId(option, _getValue(items[0]), _getValue(items[1]));
 
   return _crUrl(_seriaId, option);
 };
 var _s123AFnUrl = function _s123AFnUrl(option) {
   var items = option.items,
-      _option$df3Prefix = option.df3Prefix,
-      df3Prefix = _option$df3Prefix === undefined ? '' : _option$df3Prefix,
-      _one = _getValue(items[0]),
-      _two = _getValue(items[1]),
-      _three = _getValue(items[2]),
-      _seriaId = _one + '.' + _two + '.' + df3Prefix + '.' + _three;
+      df3Prefix = option.df3Prefix,
+      _seriaId = _crSeriaId(option, _getValue(items[0]), _getValue(items[1]), df3Prefix, _getValue(items[2]));
+
+  return _crUrl(_seriaId, option);
+};
+var _s123BFnUrl = function _s123BFnUrl(option) {
+  var items = option.items,
+      df2Prefix = option.df2Prefix,
+      _seriaId = _crSeriaId(option, _getValue(items[0]), df2Prefix, _getValue(items[1]), _getValue(items[2]));
+
+  return _crUrl(_seriaId, option);
+};
+
+var _s123FnUrl = function _s123FnUrl(option) {
+  var items = option.items,
+      _seriaId = _crSeriaId(option, _getValue(items[0]), _getValue(items[1]), _getValue(items[2]));
 
   return _crUrl(_seriaId, option);
 };
@@ -90,7 +106,9 @@ var _rFnUrl = {
   id: _idFnUrl,
   s12: _s12FnUrl,
   s21: _s21FnUrl,
-  s123A: _s123AFnUrl
+  s123A: _s123AFnUrl,
+  s123B: _s123BFnUrl,
+  s123: _s123FnUrl
 };
 
 var DbNomicsApi = {
@@ -101,11 +119,11 @@ var DbNomicsApi = {
     return _crUrl(option);
   },
   checkResponse: function checkResponse(json) {
-    if (json && Array.isArray(json.errors)) {
+    if (json && _isArr(json.errors)) {
       throw _crErr(json.errors[0].message);
     }
     var docs = json && json.series && json.series.docs;
-    if (!Array.isArray(docs) || !docs[0] || !Array.isArray(docs[0].period) || !Array.isArray(docs[0].value)) {
+    if (!_isArr(docs) || !docs[0] || !_isArr(docs[0].period) || !_isArr(docs[0].value)) {
       throw _crErr(C.MSG_EMPTY);
     }
     return true;

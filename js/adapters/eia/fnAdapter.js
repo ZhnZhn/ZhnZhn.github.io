@@ -31,10 +31,11 @@ var _toUTC = function _toUTC(str) {
 
 var _crZhConfig = function _crZhConfig(json, option) {
   var dataSource = option.dataSource,
+      key = option.key,
       id = json.series[0].series_id;
 
   return {
-    id: id, key: id,
+    id: id, key: key,
     //itemCaption: title,
     isWithoutAdd: true,
     dataSource: dataSource
