@@ -1,11 +1,10 @@
 {
   "menu": [
      {
-        "caption": "Economy",
+        "caption": "Exchange Rates",
         "isInitOpen": true,
         "items": [
-            { "id": "QE_CURRENCY_HISTORY" },
-            { "id": "QE_OECD" }
+            { "id": "QE_CURRENCY_HISTORY" }
         ]
     },
     {
@@ -16,22 +15,21 @@
         ]
     },
     {
-        "caption": "Inflation & Prices",
+        "caption": "Indicators & Index",
         "items": [
             { "id": "QE_RATE_INFLATION" },
-            { "id": "QE_BIG_MAC" }
+            { "id": "QE_OECD" }
         ]
     },
     {
         "caption": "Commodity",
         "items": [
-            { "id": "QE_COMMODITY_TRADE" },
             { "id": "QE_COMMODITY_PRICE" },
-            { "id": "QE_WIKI_COMMODITY_PRICE" },
-            { "id": "QE_PETROLEUM_PRICES" },
+            { "id": "QE_COMMODITY_TRADE" },
             { "id": "QE_JODI_WORLD_GAS" },
             { "id": "QE_JODI_WORLD_OIL" },
             { "id": "QE_BP" },
+            { "id": "QE_PETROLEUM_PRICES" },
             { "id": "QE_ROGERS_INDICES" }
         ]
     },
@@ -40,11 +38,16 @@
         "items": [
             { "id": "QE_CHINA_FINANCE_FUTURE" },
             { "id": "QE_DCE_FUTURE" },
-            { "id": "QE_ZCE_FUTURE" },
             { "id": "QE_SHANGHAI_FUTURE" },
-            { "id": "QE_LIFFE_FUTURE" },
+            { "id": "QE_ZCE_FUTURE" },
             { "id": "QE_WIKI_FUTURE" }
         ]
+    },{
+      "caption": "Miscellaneous",
+      "items": [
+        { "id": "QE_WIKI_COMMODITY_PRICE" },
+        { "id": "QE_BIG_MAC" }
+      ]
     }
   ],
   "items": {
@@ -265,9 +268,9 @@
 
     "QE_OECD": {
         "type": "QE_OECD",
-        "menuTitle": "OECD Index & Indicators",
-        "dialogCaption": "OECD Index & Indicators",
-        "chartContainerCaption": "Quandl: OECD Index & Indicators",
+        "menuTitle": "OECD Indicators & Index",
+        "dialogCaption": "OECD Indicators & Index",
+        "chartContainerCaption": "Quandl: OECD Indicators & Index",
         "dialogType": "DialogType5",
         "dialogProps": {
             "descrUrl": "./data/quandl/oecd.html",
@@ -431,29 +434,6 @@
                 "O.I."
             ],
             "dataSource": "Shanghai Futures Exchange (Code: SHFE)"
-        }
-    },
-    "QE_LIFFE_FUTURE": {
-        "type": "QE_LIFFE_FUTURE",
-        "menuTitle": "LIFFE FD",
-        "dialogCaption": "LIFFE FD",
-        "chartContainerCaption": "Quandl: LIFFE FD",
-        "dialogType": "Futures3Dialog",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/liffe-futures.html",
-            "futuresURI": "./data/quandl/liffe-futures.json",
-            "valueFn": "RFutures",
-            "valueFnPrefix": "LIFFE",
-            "loadId": "Q",
-            "columnName": "Settle",
-            "seriaColumnNames": [
-                "Open",
-                "High",
-                "Low",
-                "Volume",
-                "Prev. Day Open Interest"
-            ],
-            "dataSource": "LIFFE Futures Data (Code: LIFFE)"
         }
     },
     "QE_WIKI_FUTURE": {
