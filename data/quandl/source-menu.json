@@ -5,10 +5,6 @@
         "isInitOpen": true,
         "items": [
             { "id": "QE_CURRENCY_HISTORY" },
-            { "id": "QE_GLOBAL_INDICATOR" },
-            { "id": "QE_WORLDBANK_PRICE" },
-            { "id": "QE_IMF_CROSSCOUNTRY" },
-            { "id": "QE_EU_COMMISSION" },
             { "id": "QE_OECD" }
         ]
     },
@@ -22,7 +18,6 @@
     {
         "caption": "Inflation & Prices",
         "items": [
-            { "id": "QE_OECD_CPI" },
             { "id": "QE_RATE_INFLATION" },
             { "id": "QE_BIG_MAC" }
         ]
@@ -33,13 +28,11 @@
             { "id": "QE_COMMODITY_TRADE" },
             { "id": "QE_COMMODITY_PRICE" },
             { "id": "QE_WIKI_COMMODITY_PRICE" },
-            { "id": "QE_LME" },
             { "id": "QE_PETROLEUM_PRICES" },
             { "id": "QE_JODI_WORLD_GAS" },
             { "id": "QE_JODI_WORLD_OIL" },
             { "id": "QE_BP" },
-            { "id": "QE_ROGERS_INDICES" },
-            { "id": "QE_BALTIC_INDICES" }
+            { "id": "QE_ROGERS_INDICES" }
         ]
     },
     {
@@ -49,7 +42,7 @@
             { "id": "QE_DCE_FUTURE" },
             { "id": "QE_ZCE_FUTURE" },
             { "id": "QE_SHANGHAI_FUTURE" },
-            { "id": "QE_LIFFE_FUTURE" },            
+            { "id": "QE_LIFFE_FUTURE" },
             { "id": "QE_WIKI_FUTURE" }
         ]
     }
@@ -126,35 +119,6 @@
             "dataSource": "Wiki Commodity Prices (Code: COM)"
         },
         "dataColumn": 1
-    },
-    "QE_LME": {
-        "type": "QE_LME",
-        "menuTitle": "London Metal Exchange",
-        "dialogCaption": "London Metal Exchange",
-        "chartContainerCaption": "Quandl: London Metal Exchange",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/lme.html",
-            "isTransform": true,
-            "optionURI": "./data/quandl/lme.json",
-            "optionsJsonProp": "metals",
-            "valueFn": "RPrefixOne",
-            "valueFnPrefix": "LME",
-            "linkFn": "LME",
-            "loadId": "Q",
-            "columnName": "CASH BUYER",
-            "seriaColumnNames": [
-                "CASH SELLER & SETTLEMENT",
-                "3-MONTHS BUYER",
-                "3-MONTHS SELLER",
-                "DEC 1 BUYER",
-                "DEC 1 SELLER",
-                " DEC 2 BUYER",
-                "DEC 2 SELLER",
-                "DEC 3 BUYER",
-                "DEC 3 SELLER"
-            ],
-            "dataSource": "London Metal Exchange (Code: LME)"
-        }
     },
     "QE_COMMODITY_TRADE": {
         "type": "QE_COMMODITY_TRADE",
@@ -244,8 +208,8 @@
     },
     "QE_PETROLEUM_PRICES": {
         "type": "QE_PETROLEUM_PRICES",
-        "menuTitle": "Petroleum Prices",
-        "dialogCaption": "Petroleum Prices",
+        "menuTitle": "Petroleum Price Changes",
+        "dialogCaption": "Petroleum Prices Changes",
         "chartContainerCaption": "Global Petroleum Prices",
         "dialogProps": {
             "descrUrl": "./data/quandl/gpp.html",
@@ -279,48 +243,7 @@
             "dataSource": "Rogers International Commodity Indices (Code: RICI)"
         }
     },
-    "QE_BALTIC_INDICES": {
-        "type": "QE_BALTIC_INDICES",
-        "menuTitle": "Baltic Indices",
-        "dialogCaption": "Baltic Indices",
-        "chartContainerCaption": "Quandl: Baltic Indices",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/lloyds.html",
-            "optionURI": "./data/quandl/lloyds-indices.json",
-            "optionsJsonProp": "indices",
-            "itemCaption": "Index:",
-            "optionNames": "indices",
-            "nInitFromDate": 5,
-            "valueFn": "RPrefixOne",
-            "valueFnPrefix": "LLOYDS",
-            "loadId": "Q",
-            "columnName": "Index",
-            "dataSource": "Lloyd's List (Code: LLOYDS)"
-        }
-    },
-    "QE_GLOBAL_INDICATOR": {
-        "type": "QE_GLOBAL_INDICATOR",
-        "menuTitle": "UN Global Indicator",
-        "dialogCaption": "United Nations Global Indicator",
-        "chartContainerCaption": "Quandl: United Nations Global Indicator",
-        "dialogType": "DialogType5",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/un-global-indicator.html",
-            "nInitFromDate": 10,
-            "oneCaption": "Country",
-            "oneURI": "./data/quandl/country-area.json",
-            "oneJsonProp": "countries",
-            "twoCaption": "Indicators",
-            "twoURI": "./data/quandl/un-global-indicators.json",
-            "twoJsonProp": "indicators",
-            "threeCaption": "Metric",
-            "valueFn": "RPrefixTwoOne",
-            "valueFnPrefix": "UGID",
-            "loadId": "Q",
-            "dataSource": "UN Global Indicators (Code: UGID)"
-        },
-        "dataColumn": 1
-    },
+
     "QE_CURRENCY_HISTORY": {
         "type": "QE_CURRENCY_HISTORY",
         "menuTitle": "Currency History",
@@ -339,79 +262,7 @@
             "dataSource": "Combined collection (Codes: BOE, ECB, FRED)"
         }
     },
-    "QE_WORLDBANK_PRICE": {
-        "type": "QE_WORLDBANK_PRICE",
-        "menuTitle": "WB Economic Metric",
-        "dialogCaption": "WorlBank Economic Metric",
-        "chartContainerCaption": "Quandl: World Bank Economic Metric",
-        "dialogType": "DialogType5",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/wb-development-indicator.html",
-            "nInitFromDate": 7,
-            "oneCaption": "Country",
-            "oneURI": "./data/quandl/iso3-countries.json",
-            "oneJsonProp": "countries",
-            "twoCaption": "Group",
-            "twoURI": "./data/quandl/wb-metric-groups.json",
-            "twoJsonProp": "groups",
-            "threeCaption": "Metric",
-            "fnValueType": "TreeItem",
-            "valueFn": "RPrefixOneTwo",
-            "valueFnPrefix": "WWDI",
-            "loadId": "Q",
-            "dataSource": "WB World Development Indicators (Code: WWDI)"
-        },
-        "dataColumn": 1
-    },
-    "QE_IMF_CROSSCOUNTRY": {
-        "type": "QE_IMF_CROSSCOUNTRY",
-        "menuTitle": "IMF Cross Country Metric",
-        "dialogCaption": "IMF Cross Country Metric",
-        "chartContainerCaption": "Quandl: IMF Cross Country Metric",
-        "dialogType": "DialogType5",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/imf-crosscountry-metric.html",
-            "nInitFromDate": 7,
-            "nForecastDate": 5,
-            "oneCaption": "Country",
-            "oneURI": "./data/quandl/iso3-countries.json",
-            "oneJsonProp": "countries",
-            "twoCaption": "Group",
-            "twoURI": "./data/quandl/imf-metric-groups.json",
-            "twoJsonProp": "groups",
-            "threeCaption": "Metric",
-            "fnValueType": "TreeItem",
-            "valueFn": "RPrefixOneTwo",
-            "valueFnPrefix": "ODA",
-            "loadId": "Q",
-            "dataSource": "IMF Cross Country Macro-Economic Statistics (Code: ODA)"
-        },
-        "dataColumn": 1
-    },
-    "QE_EU_COMMISSION": {
-        "type": "QE_EU_COMMISSION",
-        "menuTitle": "EU Commission Annual",
-        "dialogCaption": "EU Commission Annual",
-        "chartContainerCaption": "Quandl: EU Commission Annual",
-        "dialogType": "DialogType5",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/ameco.html",
-            "nInitFromDate": 20,
-            "oneCaption": "Country",
-            "oneURI": "./data/quandl/ameco-countries.json",
-            "oneJsonProp": "countries",
-            "twoCaption": "Group",
-            "twoURI": "./data/quandl/ameco-indicators.json",
-            "twoJsonProp": "groups",
-            "threeCaption": "Metric",
-            "fnValueType": "TreeItem",
-            "valueFn": "RPrefixOneTwo",
-            "valueFnPrefix": "AMECO",
-            "loadId": "Q",
-            "dataSource": "EU Commission Annual Macro-Economic (Code: AMECO)"
-        },
-        "dataColumn": 1
-    },
+
     "QE_OECD": {
         "type": "QE_OECD",
         "menuTitle": "OECD Index & Indicators",
@@ -435,34 +286,11 @@
             "dataColumn": 1
         }
     },
-    "QE_OECD_CPI": {
-        "type": "QE_OECD_CPI",
-        "menuTitle": "OECD CPI & HCPI",
-        "dialogCaption": "OECD Consumer Price Index",
-        "chartContainerCaption": "Quandl: OECD Consumer Price Index",
-        "dialogType": "DialogType5",
-        "dialogProps": {
-            "descrUrl": "./data/quandl/oecd.html",
-            "nInitFromDate": 10,
-            "oneCaption": "Country",
-            "oneURI": "./data/quandl/oecd-countries.json",
-            "oneJsonProp": "countries",
-            "twoCaption": "Index",
-            "twoURI": "./data/quandl/oecd-cpi.json",
-            "twoJsonProp": "index",
-            "threeCaption": "Frequency",
-            "valueFn": "ROecd",
-            "fnValueType": "PlusTreeItem",
-            "loadId": "Q",
-            "dataSource": "Organisation for Economic Co-Operation and Development and  (Code: OECD)",
-            "dataColumn": 1
-        }
-    },
     "QE_RATE_INFLATION": {
         "type": "QE_RATE_INFLATION",
-        "menuTitle": "Rate Inflation",
-        "dialogCaption": "Rate Inflation",
-        "chartContainerCaption": "Quandl: Rate Inflation",
+        "menuTitle": "CPI & Inflation",
+        "dialogCaption": "CPI & Inflation",
+        "chartContainerCaption": "Quandl: CPI & Inflation",
         "dialogType": "DialogType4",
         "dialogProps": {
             "descrUrl": "./data/quandl/rate-cpi-inflation.html",

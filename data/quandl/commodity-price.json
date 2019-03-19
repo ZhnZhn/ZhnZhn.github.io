@@ -4,11 +4,6 @@
       "caption": "Precious Metal", "value": "a-metal",
       "columns" : [
         { "caption": "Gold, World Gold Council", "value": "WGC/GOLD_DAILY_USD"},
-        { "caption": "Gold, Bundesbank", "value": "BUNDESBANK/BBK01_WT5511"},
-        { "caption": "Gold, Shanghai Gold Futures 2016", "value": "SHFE/AUV2016"},
-        { "caption": "Gold, World Bank", "value": "WORLDBANK/WLD_GOLD"},
-        { "caption": "Silver, Shanghai Silver Futures 2016", "value": "SHFE/AGV2016"},
-        { "caption": "Silver, World Bank", "value": "WORLDBANK/WLD_SILVER"},
         { "caption": "Platinum, Johnson Mathey London", "value": "JOHNMATT/PLAT"},
         { "caption": "Palladium, Johnson Mathey London", "value": "JOHNMATT/PALL"},
         { "caption": "Iridium", "value": "JOHNMATT/IRID"},
@@ -16,47 +11,10 @@
         { "caption": "Ruthenium", "value": "JOHNMATT/RUTH"}
       ]
     },{
-       "caption": " Industrial Metal", "value": "metal",
-       "columns" : [
-  		   { "caption": "Aluminum, ODA", "value": "ODA/PALUM_USD"},
-  		   { "caption": "Shanghai Aluminum Futures 2016", "value": "SHFE/ALV2016"},
-  		   { "caption": "Copper, ODA", "value": "ODA/PCOPP_USD"},
-  		   { "caption": "Shanghai Copper Futures 2016", "value": "SHFE/CUV2016"},
-  		   { "caption": "Iron Ore, Tianjin (ODA)", "value": "ODA/PIORECR_USD"},
-  		   { "caption": "Lead, ODA", "value": "ODA/PLEAD_USD"},
-  		   { "caption": "Shanghai Lead Futures 2016", "value": "SHFE/PBV2016"},
-  		   { "caption": "Nickel, ODA ", "value": "ODA/PNICK_USD"},
-  		   { "caption": "Steel Wire", "value": "WORLDBANK/WLD_STL_JP_WIROD"},
-  		   { "caption": "Shanghai Steel Rebar Futures 2016", "value": "SHFE/RBV2016"},
-  		   { "caption": "Shanghai Steel Wire Futures 2016", "value": "SHFE/WRV2016"},
-  		   { "caption": "Tin, ODA", "value": "ODA/PTIN_USD"},
-  		   { "caption": "Zinc, ODA", "value": "ODA/PZINC_USD"},
-  		   { "caption": "Shanghai Zinc Futures 2016", "value": "SHFE/ZNV2016"}
-       ]
-    },{
       "caption": "Grain", "value": "grain",
       "columns" : [
- 		   { "caption": "Barley, Western Canada (ODA)", "value": "ODA/PBARL_USD"},
- 		   { "caption": "Barley, Western Canada (WB)", "value": "WORLDBANK/WLD_BARLEY"},
- 		   { "caption": "Corn, Top Flight Grain Co-op", "value": "TFGRAIN/CORN"},
- 		   { "caption": "Corn, U.S. Gulf Imports", "value": "WORLDBANK/WLD_MAIZE"},
- 		   { "caption": "Rice, Thailand (ODA)", "value": "ODA/PRICENPQ_USD"},
- 		   { "caption": "Rice, Top Flight Grain Co-op", "value": "TFGRAIN/SOYBEANS"},
- 		   { "caption": "Wheat, Soybean Oil", "value": "WORLDBANK/WLD_SOYBEAN_OIL"},
- 		   { "caption": "Wheat, Gulf of Mexico", "value": "ODA/PWHEAMT_USD"}
-      ]
-    },{
-      "caption": "Farms & Fishery", "value": "farm",
-      "columns" : [
-        { "caption": "Cattle, Beef (ODA)", "value": "ODA/PBEEF_USD"},
-        { "caption": "Cattle, Hides, Chicago (ODA)", "value": "ODA/PHIDE_USD"},
-        { "caption": "Poulty, Chicken, Georgia (ODA)", "value": "ODA/PPOULT_USD"},
-        { "caption": "Pork, Pork, Chicago (ODA)", "value": "ODA/PPORK_USD"},
-        { "caption": "Fats, Lamb", "value": "ODA/PLAMB_USD"},
-        { "caption": "Wool", "value": "ODA/PWOOLC_USD"},
-        { "caption": "Salmon", "value": "ODA/PSALM_USD"},
-        { "caption": "Shrimp", "value": "ODA/PSHRI_USD"},
-        { "caption": "Fishmeal", "value": "ODA/PFISH_USD"}
+       { "caption": "Corn, Top Flight Grain Co-op", "value": "TFGRAIN/CORN"},
+ 		   { "caption": "Soybeans, Top Flight Grain Co-op", "value": "TFGRAIN/SOYBEANS"}
       ]
     },{
       "caption": "Cruide Oil", "value": "cruide",
@@ -67,17 +25,11 @@
  		   { "caption": "Europe Brent Crude Oil Spot FOB, Daily", "value": "EIA/PET_RBRTE_D"},
  		   { "caption": "U.S. FOB Costs of Non-OPEC Countries Crude Oil, Monthly", "value": "EIA/PET_I070000004_M"},
  		   { "caption": "U.S. FOB Costs of OPEC Countries Crude Oil, Monthly", "value": "EIA/PET_I060000004_M"},
- 		   { "caption": "Crude Oils from 1861", "value": "BRP/CRUDE_OIL_PRICES"},
- 		   { "caption": "OPEC Reference Basket", "value": "OPEC/ORB"},
- 		   { "caption": "Dubai Crude Oil", "value": "ODA/POILDUB_USD"},
- 		   { "caption": "Blended Crude Oil", "value": "ODA/POILAPSP_USD"},
- 		   { "caption": "WTI Crude Oil", "value": "ODA/POILWTI_USD"},
- 		   { "caption": "Brent Crude Oil", "value": "ODA/POILBRE_USD"}
+ 		   { "caption": "OPEC Reference Basket", "value": "OPEC/ORB"}
       ]
     },{
       "caption": "Gasoline", "value": "gasoline",
       "columns" : [
-       { "caption": "EU & Central Asia : Pump for gasoline (US$ per liter)", "value": "WORLDBANK/ECS_EP_PMP_SGAS_CD"},
  		   { "caption": "US Midgrade Conventional Gas", "value": "FRED/GASMIDCOVW"},
  		   { "caption": "Conventional Gasolines: New York Harbor, Regular", "value": "FRED/DGASNYH"},
  		   { "caption": "US Regular Conventional Gas", "value": "FRED/GASREGCOVW"},
@@ -88,96 +40,12 @@
     },{
       "caption": "Natural Gas", "value": "gas",
       "columns" : [
-        { "caption": "Natural Gass (vs. Crude)", "value": "BRP/GAS_PRICES"},
-        { "caption": "Germany Natural Gas", "value": "ODA/PNGASEU_USD"},
-        { "caption": "Henry Hub Natural Gas", "value": "ODA/PNGASUS_USD"},
-        { "caption": "Japan Natural Gas", "value": "ODA/PNGASJP_USD"},
-        { "caption": "Natural Gas: Henry Hub, LA", "value": "FRED/GASPRICE"},
         { "caption": "Import (End Use): Gas-natural", "value": "FRED/IR10110"}
       ]
     },{
       "caption": "Coal", "value": "coal",
       "columns" : [
-       { "caption": "U.S. Coals, 1949-2005", "value": "EPI/152"},
- 		   { "caption": "US Coals by Region", "value": "EIA/COAL"},
- 		   { "caption": "Coals, BRP", "value": "BRP/COAL_PRICES"},
- 		   { "caption": "Coal, South African export Monthly", "value": "INDEXMUNDI/COMMODITY_COALSOUTHAFRICANEXPORTPRICE"},
- 		   { "caption": "Coal, ODA", "value": "ODA/PCOALAU_USD"},
- 		   { "caption": "Coal, Australia", "value": "WORLDBANK/WLD_COAL_AUS"},
- 		   { "caption": "Coal Exports, for Great Britain", "value": "FRED/M04111GBM318NNBR"},
- 		   { "caption": "Wholesale of Coal for Essen, Germany", "value": "FRED/M04I1ADE00ESSM372NNBR"}
-      ]
-    },{
-      "caption": "Agriculture Soft", "value": "soft",
-      "columns" : [
-       { "caption": "Arabica Coffee", "value": "ODA/PCOFFOTM_USD"},
- 		   { "caption": "Robusta Coffee", "value": "ODA/PCOFFROB_USD"},
- 		   { "caption": "Cocoa beans", "value": "ODA/PCOCO_USD"},
- 		   { "caption": "Tobacco", "value": "WORLDBANK/WLD_TOBAC_US"},
- 		   { "caption": "Tea", "value": "ODA/PTEA_USD"},
- 		   { "caption": "Tea, Mombasa auctions", "value": "WORLDBANK/WLD_TEA_MOMBASA"},
- 		   { "caption": "US Imports Sugar", "value": "ODA/PSUGAUSA_USD"}
-      ]
-    },{
-      "caption": "Fruits & Nuts", "value": "fruit",
-      "columns" : [
-        { "caption": "Groundnuts (Peanuts)", "value": "ODA/PGNUTS_USD"},
-  		  { "caption": "Oranges", "value": "ODA/PORANG_USD"},
-  			{ "caption": "Bananas", "value": "ODA/PBANSOP_USD"},
-  			{ "caption": "Bananas, US", "value": "WORLDBANK/WLD_BANANA_US"}
-      ]
-    },{
-      "caption": "Vegetable Oil", "value": "oil",
-      "columns" : [
- 		   { "caption": "Rapeseed Oil", "value": "ODA/PROIL_USD"},
- 		   { "caption": "Sunflower Oil", "value": "ODA/PSUNO_USD"},
- 		   { "caption": "Olive Oil", "value": "ODA/POLVOIL_USD"},
- 		   { "caption": "Palm Oil", "value": "ODA/PPOIL_USD"},
- 		   { "caption": "Palmkernal oil", "value": "WORLDBANK/WLD_PLMKRNL_OIL"},
- 		   { "caption": "Groundnut oil", "value": "WORLDBANK/WLD_GRNUT_OIL"}
-      ]
-    },{
-      "caption": "Foresty", "value": "foresty",
-      "columns" : [
-        { "caption": "Hard Logs", "value": "ODA/PLOGSK_USD"},
-        { "caption": "Soft Logs", "value": "ODA/PLOGORE_USD"},
-        { "caption": "Copra", "value": "WORLDBANK/WLD_COPRA"},
-        { "caption": "Soft Sawnwood", "value": "ODA/PSAWORE_USD"},
-        { "caption": "Hard Sawnwood", "value": "ODA/PSAWMAL_USD"},
-        { "caption": "Woodpulp", "value": "WORLDBANK/WLD_WOODPULP"},
-        { "caption": "Plywood", "value": "WORLDBANK/WLD_PLYWOOD"},
-        { "caption": "Rubber", "value": "ODA/PRUBB_USD"}
-      ]
-    },{
-      "caption": "Textile & Fibres", "value": "textile",
-      "columns" : [
-        { "caption": "Cotton", "value": "ODA/PCOTTIND_USD"}
-      ]
-    },{
-      "caption": "Fertilizers & Chemicals", "value": "chemical",
-      "columns" : [
-        { "caption": "Urea, E. Europe, bulk", "value": "WORLDBANK/WLD_UREA_EE_BULK"},
-        { "caption": "Phosphate rock Pric", "value": "WORLDBANK/WLD_PHOSROCK"},
-        { "caption": "Potash (Potassium Chloride)", "value": "WORLDBANK/WLD_POTASH"},
-        { "caption": "TSP", "value": "WORLDBANK/WLD_TSP"},
-        { "caption": "DAP", "value": "WORLDBANK/WLD_DAP"}
-      ]
-    },{
-      "caption": "Commodity Indexes", "value": "indexe",
-      "columns" : [
-        { "caption": "Fertilizers Index, 2000=100" ,"value": "WORLDBANK/WLD_IFERTILIZERS"},
-        { "caption": "Food Index, 2000=100", "value": "WORLDBANK/WLD_IFOOD"},
-        { "caption": "1 Timber Index, 2000=100", "value": "WORLDBANK/WLD_ITIMBER"},
-        { "caption": "Metals and minerals Index, 2000=100", "value": "WORLDBANK/WLD_IMETMIN"},
-        { "caption": "Beverages Index, 2000=100", "value": "WORLDBANK/WLD_IBEVERAGES"},
-        { "caption": "Energy Index, 2000=100", "value": "WORLDBANK/WLD_IENERGY"},
-        { "caption": "Non-energy commodities Index, 2000=100", "value": "WORLDBANK/WLD_INONFUEL"},
-        { "caption": "Fats and oils Index, 2000=100", "value": "WORLDBANK/WLD_IFATS_OILS"},
-        { "caption": "Agriculture Index, 2000=100", "value":"WORLDBANK/WLD_IAGRICULTURE"},
-        { "caption": "Grains Index, 2000=100", "value": "WORLDBANK/WLD_IGRAINS"},
-        { "caption": "Raw materials Index, 2000=100", "value":"WORLDBANK/WLD_IRAW_MATERIAL"},
-        { "caption": "2 Oth raw materials Index, 2000=100", "value": "WORLDBANK/WLD_IOTHERRAWMAT"},
-        { "caption": "Other food Index, 2000=100", "value": "WORLDBANK/WLD_IOTHERFOOD"}
+ 		   { "caption": "US Coals by Region", "value": "EIA/COAL"}
       ]
     }
   ]
