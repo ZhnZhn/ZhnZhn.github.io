@@ -37,53 +37,9 @@ var _InputStyle2 = _interopRequireDefault(_InputStyle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const STYLE = {
-  ROOT : {
-    position: 'relative',
-    display: 'inline-block',
-    backgroundColor: '#E1E1CB',
-    width: '250px'
-  },
-  INPUT : {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
-    color: 'green',
-    width: '100%',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  },
-  HR : {
-    borderWidth: 'medium medium 1px',
-    borderStyle: 'none none solid',
-    borderColor: 'red',
-    borderImage: 'none',
-    margin: 0,
-    marginLeft: '10px',
-    marginRight: '10px',
-    marginBottom: '5px',
-    width: 'auto'
-    //width: '90%'
-    //width: '230px'
-  },
-  HR_VALID : {
-     borderColor: '#1B75BB'
-  },
-  HR_NOT_VALID : {
-     borderColor: '#F44336'
-  },
-  ERR_MSG : {
-    color: '#F44336',
-    paddingLeft: '10px',
-    paddingBottom: '5px',
-    fontSize: '12px',
-    fontWeight: 'bold'
-  }
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
 };
-*/
 
 var DateField = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(DateField, _Component);
@@ -91,7 +47,7 @@ var DateField = (_temp = _class = function (_Component) {
   function DateField(props) {
     (0, _classCallCheck3.default)(this, DateField);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DateField.__proto__ || Object.getPrototypeOf(DateField)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DateField.__proto__ || Object.getPrototypeOf(DateField)).call(this, props));
 
     _this._handleChangeValue = function (event) {
       var _this$props = _this.props,
@@ -165,7 +121,7 @@ var DateField = (_temp = _class = function (_Component) {
       _this.inputDate.focus();
     };
 
-    _this.isOnEnter = typeof props.onEnter == 'function' ? true : false;
+    _this.isOnEnter = _isFn(props.onEnter);
     _this.state = {
       value: props.initValue || '',
       errorInput: undefined,

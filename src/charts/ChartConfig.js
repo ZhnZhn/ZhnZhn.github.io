@@ -114,8 +114,7 @@ ChartConfig.fBaseAreaConfig = function(options) {
       xDeltaCrossLabel: 4,
       yDeltaCrossLabel: 20
     },
-    zhDetailCharts: [],
-    zhToggleSeria: ChartFn.toggleSeria
+    zhDetailCharts: []    
   });
 
   config.xAxis = Object.assign( Chart.fXAxisOpposite(config.xAxis), {

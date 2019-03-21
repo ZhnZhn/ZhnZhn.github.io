@@ -1,1 +1,42 @@
-{"version":3,"sources":["../../../src/components/zhn-moleculs/DatesFragment.jsx"],"names":["FORMAT_ERR_MSG","NEAR_ERR_MSG","DatesFragment","getValues","fromDate","getValue","toDate","getValidation","msgOnNotValidFormat","props","datesMsg","isValid","push","trim","length","focusInput","focusNotValidInput","isShowLabels","initFromDate","initToDate","nForecastDate","onTestDate","crRowLabelStyle","rowStyle","labelStyle","c","defaultProps","item"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;AACA;;AADA;;;;AAGA;;;;AACA;;;;;;AAEA,IAAMA,iBAAiB,2BAAvB;AACA,IAAMC,eAAe,gCAArB;;IAEMC,a;;;;;;;;;;;;;;kNAwDJC,S,GAAY,YAAM;AAChB,aAAO;AACLC,kBAAU,MAAKA,QAAL,CAAcC,QAAd,EADL;AAELC,gBAAQ,MAAKA,MAAL,CAAYD,QAAZ;AAFH,OAAP;AAID,K,QAEDE,a,GAAgB,YAAM;AACd,UAAEC,mBAAF,GAA0B,MAAKC,KAA/B,CAAED,mBAAF;AAAA,UACAE,QADA,GACW,EADX;;AAEN,UAAI,CAAC,MAAKN,QAAL,CAAcO,OAAd,EAAL,EAA8B;AAAED,iBAASE,IAAT,CAAcJ,oBAAoB,WAApB,CAAd;AAAkD;AAClF,UAAI,CAAC,MAAKF,MAAL,CAAYK,OAAZ,EAAL,EAA8B;AAAED,iBAASE,IAAT,CAAcJ,oBAAoB,SAApB,CAAd;AAAgD;;AAEhF,UAAI,MAAKJ,QAAL,CAAcC,QAAd,GAAyBQ,IAAzB,KAAkC,MAAKP,MAAL,CAAYD,QAAZ,GAAuBQ,IAAvB,EAAtC,EAAsE;AACpEH,iBAASE,IAAT,CAAcX,YAAd;AACD;;AAED,UAAIS,SAASI,MAAT,GAAgB,CAApB,EAAsB;AACpB,eAAO,EAAEH,SAAS,KAAX,EAAkBD,kBAAlB,EAAP;AACD;AACD,aAAO,EAAEC,SAAU,IAAZ,EAAP;AACD,K,QAEDI,U,GAAa,YAAM;AACjB,YAAKX,QAAL,CAAcW,UAAd;AACD,K,QAEDC,kB,GAAqB,YAAM;AACzB,UAAI,CAAC,MAAKZ,QAAL,CAAcO,OAAd,EAAL,EAA6B;AAC1B,cAAKP,QAAL,CAAcW,UAAd;AACA,eAAO,IAAP;AACF;AACD,UAAI,CAAC,MAAKT,MAAL,CAAYK,OAAZ,EAAL,EAA2B;AACzB,cAAKL,MAAL,CAAYS,UAAZ;AACA,eAAO,IAAP;AACD;AACD,aAAO,KAAP;AACD,K;;AA5FD;;;;;;;;;;;;;6BAgBQ;AAAA;;AAAA,mBAKI,KAAKN,KALT;AAAA,UAEEQ,YAFF,UAEEA,YAFF;AAAA,UAGEC,YAHF,UAGEA,YAHF;AAAA,UAGgBC,UAHhB,UAGgBA,UAHhB;AAAA,UAIEC,aAJF,UAIEA,aAJF;AAAA,UAIiBC,UAJjB,UAIiBA,UAJjB;AAAA,kCAQI,uBAAMC,eAAN,CAAsBL,YAAtB,CARJ;AAAA,UAOEM,QAPF,yBAOEA,QAPF;AAAA,UAOYC,UAPZ,yBAOYA,UAPZ;;AAUN,aACI;AAAA;AAAA;AACE;AAAA;AAAA,YAAK,OAAOD,QAAZ;AACE;AAAA;AAAA,cAAM,OAAOC,UAAb;AAAA;AAAA,WADF;AAIE;AACG,iBAAK;AAAA,qBAAK,OAAKpB,QAAL,GAAgBqB,CAArB;AAAA,aADR;AAEG,uBAAWP,YAFd;AAGG,sBAAUlB,cAHb;AAIG,oBAAQqB;AAJX;AAJF,SADF;AAYC;AAAA;AAAA,YAAK,OAAOE,QAAZ;AACG;AAAA;AAAA,cAAM,OAAOC,UAAb;AAAA;AAAA,WADH;AAIG;AACK,iBAAK;AAAA,qBAAK,OAAKlB,MAAL,GAAcmB,CAAnB;AAAA,aADV;AAEK,uBAAWN,UAFhB;AAGK,2BAAeC,aAHpB;AAIK,sBAAUpB,cAJf;AAKK,oBAAQqB;AALb;AAJH;AAZD,OADJ;AA2BD;;;4BA1CMK,Y,GAAe;AACpBT,gBAAc,IADM;AAEpBT,uBAAqB;AAAA,QAACmB,IAAD,uEAAM,MAAN;AAAA,WAAoBA,IAApB;AAAA;AAFD,C;kBAoFTzB,a","file":"DatesFragment.js","sourcesContent":["import React, { Component } from 'react';\r\n//import PropTypes from \"prop-types\";\r\n\r\nimport DateField from '../zhn/DateField';\r\nimport STYLE from '../styles/DialogStyles';\r\n\r\nconst FORMAT_ERR_MSG = \"YYYY-MM-DD format must be\";\r\nconst NEAR_ERR_MSG = \"From Date is near that To Date\";\r\n\r\nclass DatesFragment extends Component {\r\n  /*\r\n  static propTypes = {\r\n    isShowLabels: PropTypes.bool,\r\n    initFromDate: PropTypes.string,\r\n    initToDate: PropTypes.string,\r\n    nForecastDate: PropTypes.number,\r\n    onTestDate: PropTypes.func,\r\n    msgOnNotValidFormat: PropTypes.func\r\n  }\r\n  */\r\n\r\n  static defaultProps = {\r\n    isShowLabels: true,\r\n    msgOnNotValidFormat: (item='Date') => `${item} is not in valid format`\r\n  }\r\n\r\n  render(){\r\n    const {\r\n            isShowLabels,\r\n            initFromDate, initToDate,\r\n            nForecastDate, onTestDate\r\n          } = this.props\r\n        , {\r\n            rowStyle, labelStyle\r\n          } = STYLE.crRowLabelStyle(isShowLabels);\r\n\r\n    return (\r\n        <div>\r\n          <div style={rowStyle}>\r\n            <span style={labelStyle}>\r\n               From Date:\r\n            </span>\r\n            <DateField\r\n               ref={c => this.fromDate = c}\r\n               initValue={initFromDate}\r\n               errorMsg={FORMAT_ERR_MSG}\r\n               onTest={onTestDate}\r\n            />\r\n         </div>\r\n         <div style={rowStyle}>\r\n            <span style={labelStyle}>\r\n              To Date:\r\n            </span>\r\n            <DateField\r\n                 ref={c => this.toDate = c}\r\n                 initValue={initToDate}\r\n                 nForecastDate={nForecastDate}\r\n                 errorMsg={FORMAT_ERR_MSG}\r\n                 onTest={onTestDate}\r\n            />\r\n         </div>\r\n       </div>\r\n    );\r\n  }\r\n\r\n  getValues = () => {\r\n    return {\r\n      fromDate: this.fromDate.getValue(),\r\n      toDate: this.toDate.getValue()\r\n    }\r\n  }\r\n\r\n  getValidation = () => {\r\n    const { msgOnNotValidFormat } = this.props\r\n        , datesMsg = [];\r\n    if (!this.fromDate.isValid()) { datesMsg.push(msgOnNotValidFormat('From Date')); }\r\n    if (!this.toDate.isValid())   { datesMsg.push(msgOnNotValidFormat('To Date')); }\r\n\r\n    if (this.fromDate.getValue().trim() > this.toDate.getValue().trim() ) {\r\n      datesMsg.push(NEAR_ERR_MSG);\r\n    }\r\n\r\n    if (datesMsg.length>0){\r\n      return { isValid: false, datesMsg }\r\n    }\r\n    return { isValid : true}\r\n  }\r\n\r\n  focusInput = () => {\r\n    this.fromDate.focusInput();\r\n  }\r\n\r\n  focusNotValidInput = () => {\r\n    if (!this.fromDate.isValid()){\r\n       this.fromDate.focusInput();\r\n       return true;\r\n    }\r\n    if (!this.toDate.isValid()){\r\n      this.toDate.focusInput();\r\n      return true;\r\n    }\r\n    return false;\r\n  }\r\n}\r\n\r\nexport default DatesFragment\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-moleculs/DatesFragment.js"
+ ],
+ "file": "../../../src/components/zhn-moleculs/DatesFragment.js",
+ "names": [
+  "FORMAT_ERR_MSG",
+  "NEAR_ERR_MSG",
+  "DatesFragment",
+  "_refFromDate",
+  "fromDate",
+  "c",
+  "_refToDate",
+  "toDate",
+  "getValues",
+  "getValue",
+  "getValidation",
+  "msgOnNotValidFormat",
+  "props",
+  "datesMsg",
+  "isValid",
+  "push",
+  "trim",
+  "length",
+  "focusInput",
+  "focusNotValidInput",
+  "isShowLabels",
+  "initFromDate",
+  "initToDate",
+  "nForecastDate",
+  "onTestDate",
+  "STYLE",
+  "crRowLabelStyle",
+  "rowStyle",
+  "labelStyle",
+  "Component",
+  "defaultProps",
+  "item"
+ ],
+ "mappings": "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"
+}

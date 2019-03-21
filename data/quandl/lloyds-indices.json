@@ -1,8 +1,0 @@
-{
-  "indices":[
-    { "caption": "Baltic Dry Index", "value": "BDI"},
-    { "caption": "Baltic Capesize Index", "value": "BCI"},
-    { "caption": "Baltic Panamax Index", "value": "BPI"},
-    { "caption": "Baltic Supramax Index", "value": "BSI"}
-  ]
-}

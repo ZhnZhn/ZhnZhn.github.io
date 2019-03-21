@@ -67,15 +67,24 @@ var _crSeriaId = function _crSeriaId(_ref2) {
   return [dfPrefix].concat(args, [dfSufix]).filter(Boolean).join('.');
 };
 
+var _s1FnUrl = function _s1FnUrl(option) {
+  var items = option.items,
+      _seriaId = _crSeriaId(option, _getValue(items[0]));
+
+  return _crUrl(_seriaId, option);
+};
+
 var _s21FnUrl = function _s21FnUrl(option) {
   var items = option.items,
-      _seriaId = _crSeriaId(option, _getValue(items[1]), _getValue(items[0]));
+      df2Prefix = option.df2Prefix,
+      _seriaId = _crSeriaId(option, _getValue(items[1]), df2Prefix, _getValue(items[0]));
 
   return _crUrl(_seriaId, option);
 };
 var _s12FnUrl = function _s12FnUrl(option) {
   var items = option.items,
-      _seriaId = _crSeriaId(option, _getValue(items[0]), _getValue(items[1]));
+      df2Prefix = option.df2Prefix,
+      _seriaId = _crSeriaId(option, _getValue(items[0]), df2Prefix, _getValue(items[1]));
 
   return _crUrl(_seriaId, option);
 };
@@ -104,6 +113,7 @@ var _s123FnUrl = function _s123FnUrl(option) {
 var _rFnUrl = {
   DF: _dfFnUrl,
   id: _idFnUrl,
+  s1: _s1FnUrl,
   s12: _s12FnUrl,
   s21: _s21FnUrl,
   s123A: _s123AFnUrl,

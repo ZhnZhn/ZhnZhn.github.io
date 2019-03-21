@@ -4,8 +4,8 @@
       "caption": "ECB",
       "items": [
         { "id": "DBN_ECB_CURRENCY" },
-        { "id": "DBN_ECB_EQUITYINDEX" },
-        { "id": "DBN_ECB_TRADE" }
+        { "id": "DBN_ECB_FMINDEX" },
+        { "id": "DBN_ECB_CARREG" }
       ]
     },{
       "caption": "IMF",
@@ -18,7 +18,8 @@
       "caption": "OECD",
       "items": [
         { "id": "DBN_OECD_SHORTINDICATOR" },
-        { "id": "DBN_OECD_PRODUCERPRICES" }
+        { "id": "DBN_OECD_PRODUCERPRICES" },
+        { "id": "DBN_OECD_RATES" }
       ]
     },{
       "caption": "WTO",
@@ -100,37 +101,45 @@
         }
       }
     },
-    "DBN_ECB_EQUITYINDEX": {
-      "type" : "DBN_ECB_EQUITYINDEX",
-      "menuTitle" : "Equity Index, M",
-      "chartContainerCaption" : "DB Nomics: ECB: Equity Index, Monthly",
+    "DBN_ECB_FMINDEX": {
+      "type" : "DBN_ECB_FMINDEX",
+      "menuTitle" : "Financial Market Index, M",
+      "chartContainerCaption" : "DB Nomics: ECB: Financial Market Index (FM), Monthly",
       "dialogType": "DialogSelectN",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
-          [ "Index", "ecb-equity-index" ]
+          [ "Index", "ecb-fm-index" ]
         ],
-        "dataSource" : "DB Nomics: ECB: Equity Index, M",
+        "dataSource" : "DB Nomics: ECB: Financial Market Index (FM), M",
         "dfProps": {
           "dfProvider": "ECB",
-          "dfCode": "RTD"
+          "dfCode": "FM",
+          "dfFnUrl": "s1",
+          "dfPrefix": "M.U2.EUR.DS.EI",
+          "dfSufix": "HSTA"
         }
       }
     },
-    "DBN_ECB_TRADE": {
-      "type" : "DBN_ECB_TRADE",
-      "menuTitle" : "EA Trade, SA, M",
-      "chartContainerCaption" : "DB Nomics: ECB: EA Trade, SA, Monthly",
+    "DBN_ECB_CARREG": {
+      "type" : "DBN_ECB_CARREG",
+      "menuTitle" : "Car registration, WSA, M",
+      "chartContainerCaption" : "DB Nomics: ECB: Car registration (STS), WSA, Monthly",
       "dialogType": "DialogSelectN",
       "addProps": "DBN_B_S",
       "dialogProps" : {
         "selectProps": [
-          [ "Index", "ecb-trade" ]
+          [ "Country", "ecb-countries"],
+          [ "Index", "ecb-car-registration" ]
         ],
-        "dataSource" : "DB Nomics: ECB: EA Trade, SA, M",
+        "dataSource" : "DB Nomics: ECB: Car registration (STS), WSA, M",
         "dfProps": {
           "dfProvider": "ECB",
-          "dfCode": "RTD"
+          "dfCode": "STS",
+          "dfFnUrl": "s12",
+          "dfPrefix": "M",
+          "df2Prefix": "Y.CREG",
+          "dfSufix": "3.ABS"
         }
       }
     },
@@ -231,6 +240,25 @@
           "dfCode": "MEI",
           "dfSufix": "IXOB.A",
           "dfFnUrl": "s12"
+        }
+      }
+    },
+    "DBN_OECD_RATES": {
+      "type" : "DBN_OECD_RATES",
+      "menuTitle" : "Interest Rates, M",
+      "chartContainerCaption" : "DB Nomics: OECD: Interest Rates, Monthly",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_OECD",
+      "dialogProps": {
+        "selectProps": [
+          ["Rate", "oecd-rates"]
+        ],
+        "dataSource" : "DB Nomics: OECD: Interest Rates, M",
+        "dfProps": {
+          "dfProvider": "OECD",
+          "dfCode": "MEI",
+          "dfFnUrl": "s12",
+          "dfSufix": "ST.M"
         }
       }
     },

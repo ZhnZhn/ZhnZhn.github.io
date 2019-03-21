@@ -24,15 +24,18 @@ class DatesFragment extends Component {
     msgOnNotValidFormat: (item='Date') => `${item} is not in valid format`
   }
 
+  _refFromDate = c => this.fromDate = c
+  _refToDate = c => this.toDate = c
+
   render(){
     const {
-            isShowLabels,
-            initFromDate, initToDate,
-            nForecastDate, onTestDate
-          } = this.props
-        , {
-            rowStyle, labelStyle
-          } = STYLE.crRowLabelStyle(isShowLabels);
+        isShowLabels,
+        initFromDate, initToDate,
+        nForecastDate, onTestDate
+      } = this.props
+    , {
+        rowStyle, labelStyle
+      } = STYLE.crRowLabelStyle(isShowLabels);
 
     return (
         <div>
@@ -41,7 +44,7 @@ class DatesFragment extends Component {
                From Date:
             </span>
             <DateField
-               ref={c => this.fromDate = c}
+               ref={this._refFromDate}
                initValue={initFromDate}
                errorMsg={FORMAT_ERR_MSG}
                onTest={onTestDate}
@@ -52,7 +55,7 @@ class DatesFragment extends Component {
               To Date:
             </span>
             <DateField
-                 ref={c => this.toDate = c}
+                 ref={this._refToDate}
                  initValue={initToDate}
                  nForecastDate={nForecastDate}
                  errorMsg={FORMAT_ERR_MSG}

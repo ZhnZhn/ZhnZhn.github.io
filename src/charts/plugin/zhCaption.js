@@ -59,9 +59,9 @@ const _hideEl = (chart, propName) => {
   }
 };
 
-const wrapZhCaption = (wrap, Chart) => {
-  wrap(Chart.prototype, 'zhHideCaption', function(){
-    try{
+const zhCaption = (Chart) => {
+  Chart.prototype.zhHideCaption = function(){
+    try {
       const _height = this.chartHeight - 40;
       this.update(C.HIDE, false)
       this.setSize(null, _height, true)
@@ -69,23 +69,23 @@ const wrapZhCaption = (wrap, Chart) => {
       const _ = this.options
       _renderTextTo(this, _.title, 40, 70, PN.TITLE)
       _renderTextTo(this, _.subtitle, 40, 90, PN.SUBTITLE)
-    }catch(err) {
+    } catch(err) {
       console.log(err.msg)
     }
-  })
+  }
 
-  wrap(Chart.prototype, 'zhShowCaption', function(){
-    try{
+  Chart.prototype.zhShowCaption = function(){
+    try {
       const _height = this.chartHeight + 40;
       this.update(C.SHOW, false)
       this.setSize(null, _height, true)
 
       _hideEl(this, PN.TITLE)
       _hideEl(this, PN.SUBTITLE)
-    }catch(err){
+    } catch(err) {
       console.log(err.msg)
     }
-  })
+  }
 };
 
-export default wrapZhCaption
+export default zhCaption

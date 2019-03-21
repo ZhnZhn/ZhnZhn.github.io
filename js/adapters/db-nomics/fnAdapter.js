@@ -22,7 +22,8 @@ var getPeriodAndValue = _fnSelector2.default.getPeriodAndValue,
 
 
 var C = {
-  CHART_URL: 'https://db.nomics.world'
+  CHART_URL: 'https://db.nomics.world',
+  SUBT_MAX: 60
 };
 
 var _isId = function _isId(id) {
@@ -65,10 +66,15 @@ var _isNumber = function _isNumber(n) {
 
 var fnAdapter = {
 
-  crTitle: function crTitle(option, json) {
+  crTitle: function crTitle(_ref3, json) {
+    var title = _ref3.title,
+        subtitle = _ref3.subtitle;
+
+    var _ = getSubtitle(json),
+        _subtitle = _.length > C.SUBT_MAX ? (title || '') + ': ' + (subtitle || '') : _;
     return {
       title: getTitle(json),
-      subtitle: getSubtitle(json)
+      subtitle: _subtitle
     };
   },
 
@@ -86,10 +92,10 @@ var fnAdapter = {
     return data;
   },
 
-  crConfigOption: function crConfigOption(_ref3) {
-    var json = _ref3.json,
-        option = _ref3.option,
-        data = _ref3.data;
+  crConfigOption: function crConfigOption(_ref4) {
+    var json = _ref4.json,
+        option = _ref4.option,
+        data = _ref4.data;
     return {
       zhConfig: _crZhConfig(option),
       valueMoving: valueMoving(data),

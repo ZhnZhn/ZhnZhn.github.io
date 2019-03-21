@@ -51,18 +51,28 @@ const _crSeriaId = ({ dfPrefix, dfSufix }, ...args) => [
   ].filter(Boolean)
    .join('.');
 
-const _s21FnUrl = (option) => {
+const _s1FnUrl = (option) => {
   const { items } = option
   , _seriaId = _crSeriaId(option,
+    _getValue(items[0]),
+  );
+  return _crUrl(_seriaId, option);
+};
+
+const _s21FnUrl = (option) => {
+  const { items, df2Prefix } = option
+  , _seriaId = _crSeriaId(option,
     _getValue(items[1]),
+    df2Prefix,
     _getValue(items[0]),
   );
   return _crUrl(_seriaId, option);
 };
 const _s12FnUrl = (option) => {
-  const { items } = option
+  const { items, df2Prefix } = option
   , _seriaId = _crSeriaId(option,
     _getValue(items[0]),
+    df2Prefix,
     _getValue(items[1]),
   );
   return _crUrl(_seriaId, option);
@@ -101,6 +111,7 @@ const _s123FnUrl = (option) => {
 const _rFnUrl = {
   DF: _dfFnUrl,
   id: _idFnUrl,
+  s1: _s1FnUrl,
   s12: _s12FnUrl,
   s21: _s21FnUrl,
   s123A: _s123AFnUrl,

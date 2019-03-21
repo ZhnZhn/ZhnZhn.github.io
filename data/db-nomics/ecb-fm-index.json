@@ -1,0 +1,14 @@
+{"items":[
+{"value":"DJES50I","caption":"Dow Jones Euro Stoxx 50 Price Index"},
+{"value":"S1ESBME","caption":"Dow Jones Euro Stoxx Basic Materials E Index"},
+{"value":"S1ESCGE","caption":"Dow Jones Euro Stoxx Consumer Goods Index"},
+{"value":"S1ESCSE","caption":"Dow Jones Euro Stoxx Consumer Services Index"},
+{"value":"S1ESFNE","caption":"Dow Jones Euro Stoxx Financials Index"},
+{"value":"S1ESH1E","caption":"Dow Jones Euro Stoxx Healthcare Index"},
+{"value":"S1ESIDE","caption":"Dow Jones Euro Stoxx Industrials Index"},
+{"value":"S1ESO1E","caption":"Dow Jones Euro Stoxx Oil and Gas Energy Index"},
+{"value":"DJEURST","caption":"Dow Jones Euro Stoxx Price Index"},
+{"value":"S1ESG1E","caption":"Dow Jones Euro Stoxx Technology E Index"},
+{"value":"S1EST1E","caption":"Dow Jones Euro Stoxx Telecommunications Index"},
+{"value":"S1ESU1E","caption":"Dow Jones Euro Stoxx Utilities E Index"}
+]}

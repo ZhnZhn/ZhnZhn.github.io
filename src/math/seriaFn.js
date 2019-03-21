@@ -104,7 +104,9 @@ const fn = {
     }
     let _sum = Big(0);
     for (const p of data) {
-      _sum = _sum.add(p[1])
+      if (_isNumber(p[1])) {
+        _sum = _sum.add(p[1])
+      }
     }
     const _max = data.length - 1;
     const _avg = parseInt(_sum.div(_max).toFixed(0), 10);

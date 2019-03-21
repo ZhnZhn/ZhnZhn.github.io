@@ -1,0 +1,23 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/charts/plugin/zhToggleSeria.js"
+ ],
+ "file": "../../../src/charts/plugin/zhToggleSeria.js",
+ "names": [
+  "zhToggleSeria",
+  "Chart",
+  "prototype",
+  "index",
+  "seria",
+  "series",
+  "visible",
+  "hide",
+  "show",
+  "err",
+  "console",
+  "log",
+  "message"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,gBAAgB,SAAhBA,aAAgB,CAACC,KAAD,EAAW;AAC/BA,QAAMC,SAAN,CAAgBF,aAAhB,GAAgC,UAASG,KAAT,EAAgB;AAC9C,QAAG;AACD,UAAMC,QAAQ,KAAKC,MAAL,CAAYF,KAAZ,CAAd;AACA,UAAIC,KAAJ,EAAW;AACT,YAAIA,MAAME,OAAV,EAAkB;AAChBF,gBAAMG,IAAN;AACD,SAFD,MAEO;AACLH,gBAAMI,IAAN;AACD;AACF;AACF,KATD,CASE,OAAMC,GAAN,EAAW;AACXC,cAAQC,GAAR,CAAYF,IAAIG,OAAhB;AACD;AACF,GAbD;AAcD,CAfD;;kBAiBeZ,a"
+}

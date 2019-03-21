@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -24,6 +20,10 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _class, _temp, _initialiseProps;
 
 var _react = require('react');
@@ -33,10 +33,6 @@ var _react2 = _interopRequireDefault(_react);
 var _seriaFns = require('../../charts/seriaFns');
 
 var _seriaFns2 = _interopRequireDefault(_seriaFns);
-
-var _ChartFn = require('../../charts/ChartFn');
-
-var _ChartFn2 = _interopRequireDefault(_ChartFn);
 
 var _ModalDialog = require('../zhn-moleculs/ModalDialog');
 
@@ -107,6 +103,10 @@ var _fHeValue = function _fHeValue(propName, min, max) {
       this[propName] = v;
     }
   };
+};
+
+var _crSeriaOptions = function _crSeriaOptions(pointWidth) {
+  return (0, _extends3.default)({}, SERIA_OPTION, { pointWidth: pointWidth });
 };
 
 var ColumnRangeDialog = (_temp = _class = function (_Component) {
@@ -252,9 +252,12 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
     _setRadius(_this2._r1, _s1);
     _setRadius(_this2._r2, _s2);
 
-    _ChartFn2.default.addDataTo(chart, _this2._color, _d, true, (0, _extends3.default)({}, SERIA_OPTION, {
-      pointWidth: _this2._pointWidth
-    }));
+    chart.zhAddSeriaToYAxis({
+      data: _d,
+      color: _this2._color,
+      index: 0
+    }, _crSeriaOptions(_this2._pointWidth));
+
     onClose();
   };
 

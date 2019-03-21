@@ -12,7 +12,8 @@ const {
  } = fnSelector;
 
 const C = {
-  CHART_URL: 'https://db.nomics.world'
+  CHART_URL: 'https://db.nomics.world',
+  SUBT_MAX: 60
 };
 
 const _isId = id => id && id.indexOf('/') !== -1;
@@ -46,10 +47,16 @@ const _isNumber = n => typeof(n) === 'number'
 
 const fnAdapter = {
 
-  crTitle: (option, json) => ({
-    title: getTitle(json),
-    subtitle: getSubtitle(json)
-  }),
+  crTitle: ({ title, subtitle }, json) => {
+    const _ = getSubtitle(json)
+    , _subtitle = _.length > C.SUBT_MAX
+         ? `${title || ''}: ${subtitle || ''}`
+         : _;
+    return {
+      title: getTitle(json),
+      subtitle: _subtitle
+    };
+  },
 
   crData: (json) => {
     const data = []

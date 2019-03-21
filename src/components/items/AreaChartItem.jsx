@@ -115,7 +115,7 @@ class AreaChartItem extends Component {
     }
   }
 
-  hideCaption = () => {    
+  hideCaption = () => {
     this.mainChart.zhHideCaption()
     this.setState({
       isShowToolbar: false,
@@ -171,7 +171,7 @@ class AreaChartItem extends Component {
   }
 
   _handleToggleSeria = (item) => {
-    this.mainChart.options.zhToggleSeria(this.mainChart, item)
+    this.mainChart.zhToggleSeria(item.index)
   }
 
   _handleClick2H = () => {
@@ -193,8 +193,7 @@ class AreaChartItem extends Component {
   _handlePasteTo = () => {
     this.props.onPasteToDialog({
       toChart: this.mainChart,
-      fromChart: this.props.getCopyFromChart(),
-      ChartFn: this.props.ChartFn
+      fromChart: this.props.getCopyFromChart()
     })
   }
 

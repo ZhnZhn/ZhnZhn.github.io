@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import fn from '../../charts/seriaFns'
-import ChartFn from '../../charts/ChartFn'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import Button from './Button'
@@ -65,6 +64,10 @@ const _fHeValue = (propName, min, max) => function(v) {
   }
 }
 
+const _crSeriaOptions = (pointWidth) => ({
+  ...SERIA_OPTION,
+  ...{ pointWidth }
+});
 
 class ColumnRangeDialog extends Component {
 
@@ -115,14 +118,12 @@ class ColumnRangeDialog extends Component {
      _setRadius(this._r1, _s1)
      _setRadius(this._r2, _s2)
 
-     ChartFn.addDataTo(
-       chart, this._color, _d,
-       true, {
-         ...SERIA_OPTION, ...{
-          pointWidth: this._pointWidth
-         }
-      }
-     )
+     chart.zhAddSeriaToYAxis({
+       data: _d,
+       color: this._color,
+       index: 0
+     }, _crSeriaOptions(this._pointWidth))
+
      onClose()
   }
 

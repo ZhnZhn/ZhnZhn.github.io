@@ -14,7 +14,7 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var MIN_YEAR = 1999;
+var MIN_YEAR = 1990;
 
 var _pad2 = function _pad2(n) {
 	return n < 10 ? '0' + n : '' + n;

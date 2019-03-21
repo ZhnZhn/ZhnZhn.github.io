@@ -92,10 +92,7 @@ const ChartActions =  Reflux.createActions({
       [A.CLOSE_CHART] : {},
 
       [A.TO_TOP]: {},
-
-      [A.COPY]: {},
-      [A.PASTE_TO]: {},
-
+      [A.COPY]: {},      
       [A.SORT_BY]: {},
 });
 
@@ -162,7 +159,7 @@ ChartActions[A.LOAD_STOCK].shouldEmit = function(){
 ChartActions[A.LOAD_STOCK].listen(function(confItem, option){
   const { key, isLoadMeta, loadId='Q' } = option;
   this.isLoading = true;
-  this.idLoading = isLoadMeta ? key + META : key;  
+  this.idLoading = isLoadMeta ? key + META : key;
   LoadConfig[loadId].loadItem(
     option, this.completed, this.added, this.failed
   );

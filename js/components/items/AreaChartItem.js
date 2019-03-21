@@ -349,7 +349,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handleToggleSeria = function (item) {
-    _this2.mainChart.options.zhToggleSeria(_this2.mainChart, item);
+    _this2.mainChart.zhToggleSeria(item.index);
   };
 
   this._handleClick2H = function () {
@@ -374,8 +374,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   this._handlePasteTo = function () {
     _this2.props.onPasteToDialog({
       toChart: _this2.mainChart,
-      fromChart: _this2.props.getCopyFromChart(),
-      ChartFn: _this2.props.ChartFn
+      fromChart: _this2.props.getCopyFromChart()
     });
   };
 

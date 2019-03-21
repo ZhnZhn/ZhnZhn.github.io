@@ -3,53 +3,7 @@ import React, { Component } from 'react';
 
 import STYLE from './InputStyle';
 
-/*
-const STYLE = {
-  ROOT : {
-    position: 'relative',
-    display: 'inline-block',
-    backgroundColor: '#E1E1CB',
-    width: '250px'
-  },
-  INPUT : {
-    background: 'transparent none repeat scroll 0 0',
-    border: 'medium none',
-    outline: 'medium none',
-    height: '30px',
-    paddingLeft: '10px',
-    color: 'green',
-    width: '100%',
-    fontSize: '16px',
-    fontWeight: 'bold'
-  },
-  HR : {
-    borderWidth: 'medium medium 1px',
-    borderStyle: 'none none solid',
-    borderColor: 'red',
-    borderImage: 'none',
-    margin: 0,
-    marginLeft: '10px',
-    marginRight: '10px',
-    marginBottom: '5px',
-    width: 'auto'
-    //width: '90%'
-    //width: '230px'
-  },
-  HR_VALID : {
-     borderColor: '#1B75BB'
-  },
-  HR_NOT_VALID : {
-     borderColor: '#F44336'
-  },
-  ERR_MSG : {
-    color: '#F44336',
-    paddingLeft: '10px',
-    paddingBottom: '5px',
-    fontSize: '12px',
-    fontWeight: 'bold'
-  }
-};
-*/
+const _isFn = fn => typeof(fn) === 'function';
 
 class DateField extends Component {
   /*
@@ -69,10 +23,8 @@ class DateField extends Component {
    }
 
    constructor(props){
-     super();
-     this.isOnEnter = (typeof props.onEnter == 'function')
-            ? true
-            : false;
+     super(props)
+     this.isOnEnter = _isFn(props.onEnter)
      this.state = {
        value: props.initValue || '',
        errorInput: undefined,
@@ -82,7 +34,7 @@ class DateField extends Component {
 
   _handleChangeValue = (event) => {
     const { onTest, nForecastDate } = this.props
-         , value = event.target.value
+         , value = event.target.value;
     if (!onTest(value, nForecastDate)){
       this.setState({
          value : value,
@@ -99,7 +51,7 @@ class DateField extends Component {
 
   _handleBlurValue = () => {
     const { onTest, nForecastDate, errorMsg } = this.props
-        , { value } = this.state
+        , { value } = this.state;
     if (!onTest(value, nForecastDate)){
       this.setState({
         errorInput : errorMsg,

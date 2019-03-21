@@ -123,7 +123,7 @@ var ChartActions = _reflux2.default.createActions((_Reflux$createActions = {}, (
   cancelLoad: _fnCancelLoad
 }), (0, _defineProperty3.default)(_Reflux$createActions, A.LOAD_STOCK_BY_QUERY, {
   children: ['completed', 'failed']
-}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.TO_TOP, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.PASTE_TO, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SORT_BY, {}), _Reflux$createActions));
+}), (0, _defineProperty3.default)(_Reflux$createActions, A.SHOW_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.CLOSE_CHART, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.TO_TOP, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.COPY, {}), (0, _defineProperty3.default)(_Reflux$createActions, A.SORT_BY, {}), _Reflux$createActions));
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore;
 

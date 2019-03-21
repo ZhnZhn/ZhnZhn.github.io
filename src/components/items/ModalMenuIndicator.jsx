@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 //import PropTypes from "prop-types";
 
-import ChartFn from '../../charts/ChartFn'
 import seriaFn from '../../math/seriaFn'
 import IndicatorBuilder from '../../charts/IndicatorBuilder'
 
@@ -180,9 +179,11 @@ class ModalMenuIndicator extends Component {
       } else {
         const data = this._chart.series[0].data
             , seriaData = fn(data);
-        this[seriaPropName] = ChartFn.addDataTo(
-          this._chart, color, seriaData, false
-        )
+        this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
+          data: seriaData,
+          color: color,
+          index: -1
+        })
       }
       this.setState({ [statePropName]: true })
     }

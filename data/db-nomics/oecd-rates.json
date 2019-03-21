@@ -1,0 +1,7 @@
+{
+  "items":[
+  {"value":"IRLTLT01","caption":"Bond yields, 10-year"},
+  {"value":"IR3TIB01","caption":"Interbank rates, 3-month or 90 days"},
+  {"value":"IRSTCI01","caption":"Immediate rates, (<24hrs)"}    
+  ]
+}

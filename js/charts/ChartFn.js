@@ -199,33 +199,6 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
 
     _updateYAxisMin({ hasSecondYAxis: hasSecondYAxis, series: series, options: options, chart: chart });
   },
-  toggleSeria: function toggleSeria(chart, item) {
-    var name = item.name,
-        color = item.color,
-        index = item.index,
-        isSecondAxes = item.isSecondAxes,
-        seria = item.seria;
-
-
-    if (isSecondAxes) {
-      if (!seria.visible) {
-        chart.addAxis(_Chart2.default.fSecondYAxis(name, color));
-        seria.yAxis = name;
-        seria.visible = true;
-        chart.addSeries(seria);
-      } else {
-        seria.visible = false;
-        chart.get(name).remove();
-      }
-    } else {
-      var _seria = chart.series[index];
-      if (_seria.visible) {
-        _seria.hide();
-      } else {
-        _seria.show();
-      }
-    }
-  },
   zoomIndicatorCharts: function zoomIndicatorCharts(event) {
     var zhDetailCharts = this.chart.options.zhDetailCharts,
         userMin = event.userMin,
@@ -264,50 +237,6 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
       Direction: _Type.Direction,
       fnFormat: _formatAllNumber2.default
     }), { valueTo: valueTo, dateTo: dateTo }) : undefined;
-  },
-  _addAxis: function _addAxis(toChart, id, color) {
-    toChart.addAxis({
-      id: id,
-      opossite: true,
-      title: {
-        text: ''
-      },
-      lineColor: color,
-      tickColor: color,
-      gridLineWidth: 0,
-      labels: {
-        style: {
-          color: color
-        }
-      }
-    }, false, true);
-  },
-  _addSeria: function _addSeria(toChart, id, color, data, seriaOptions) {
-    return toChart.addSeries((0, _extends3.default)({
-      type: 'spline',
-      yAxis: id,
-      color: color,
-      data: data
-    }, seriaOptions), false);
-  },
-  _addDataToYAxis: function _addDataToYAxis(toChart, id, color, data, isWithYAxis, seriaOptions) {
-    if (isWithYAxis) {
-      this._addAxis(toChart, id, color);
-    }
-    var seria = this._addSeria(toChart, id, color, data, seriaOptions);
-    toChart.redraw();
-    return seria;
-  },
-  addDataTo: function addDataTo(toChart, color, data, withoutYAxis, seriaOptions) {
-    var _id = withoutYAxis ? undefined : "pasteId";
-    return this._addDataToYAxis(toChart, _id, color, data, !withoutYAxis, seriaOptions);
-  },
-  addDataToYAxis: function addDataToYAxis(toChart, color, data) {
-    var yAxisIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
-
-    var _id = yAxisIndex === -1 ? 'yAxis' + toChart.yAxis.length : yAxisIndex === 0 ? undefined : 'yAxis' + yAxisIndex,
-        _isWithYAxis = yAxisIndex === -1;
-    this._addDataToYAxis(toChart, _id, color, data, _isWithYAxis);
   },
 
 

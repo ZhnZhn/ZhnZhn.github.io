@@ -54,7 +54,11 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DatesFragment.__proto__ || Object.getPrototypeOf(DatesFragment)).call.apply(_ref, [this].concat(args))), _this), _this.getValues = function () {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DatesFragment.__proto__ || Object.getPrototypeOf(DatesFragment)).call.apply(_ref, [this].concat(args))), _this), _this._refFromDate = function (c) {
+      return _this.fromDate = c;
+    }, _this._refToDate = function (c) {
+      return _this.toDate = c;
+    }, _this.getValues = function () {
       return {
         fromDate: _this.fromDate.getValue(),
         toDate: _this.toDate.getValue()
@@ -106,8 +110,6 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
   (0, _createClass3.default)(DatesFragment, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           isShowLabels = _props.isShowLabels,
           initFromDate = _props.initFromDate,
@@ -130,9 +132,7 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
             'From Date:'
           ),
           _react2.default.createElement(_DateField2.default, {
-            ref: function ref(c) {
-              return _this2.fromDate = c;
-            },
+            ref: this._refFromDate,
             initValue: initFromDate,
             errorMsg: FORMAT_ERR_MSG,
             onTest: onTestDate
@@ -147,9 +147,7 @@ var DatesFragment = (_temp2 = _class = function (_Component) {
             'To Date:'
           ),
           _react2.default.createElement(_DateField2.default, {
-            ref: function ref(c) {
-              return _this2.toDate = c;
-            },
+            ref: this._refToDate,
             initValue: initToDate,
             nForecastDate: nForecastDate,
             errorMsg: FORMAT_ERR_MSG,

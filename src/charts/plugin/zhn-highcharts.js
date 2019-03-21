@@ -1,13 +1,17 @@
 import wrapExportChartLocal from './wrapExportChartLocal'
-import wrapZhRemoveCategory from './wrapZhRemoveCategory'
-import wrapZhCaption from './wrapZhCaption'
+import zhRemoveCategory from './zhRemoveCategory'
+import zhCaption from './zhCaption'
+import zhAddSeriaToYAxis from './zhAddSeriaToYAxis'
+import zhToggleSeria from './zhToggleSeria'
 
 
 const HighchartsZhn = (Highcharts) => {
   const { wrap, Chart } = Highcharts;
   wrapExportChartLocal(wrap, Chart)
-  wrapZhRemoveCategory(wrap, Chart)
-  wrapZhCaption(wrap, Chart)  
+  zhRemoveCategory(Chart)
+  zhCaption(Chart)
+  zhAddSeriaToYAxis(Chart)
+  zhToggleSeria(Chart)
 };
 
 export default HighchartsZhn

@@ -63,12 +63,10 @@ var PasteToModalDialog = function (_Component) {
 
     _this._handlePasteTo = function () {
       var _this$props = _this.props,
-          _this$props$data = _this$props.data,
-          data = _this$props$data === undefined ? {} : _this$props$data,
+          dData = _this$props.data,
           onClose = _this$props.onClose,
-          toChart = data.toChart,
-          ChartFn = data.ChartFn;
-
+          _ref = dData || {},
+          toChart = _ref.toChart;
 
       _this.seriesPaneComp.getValues().forEach(function (conf) {
         var color = conf.color,
@@ -76,7 +74,9 @@ var PasteToModalDialog = function (_Component) {
             toYAxis = _conf$toYAxis === undefined ? {} : _conf$toYAxis,
             data = conf.data;
 
-        ChartFn.addDataToYAxis(toChart, color, data, toYAxis.value);
+        toChart.zhAddSeriaToYAxis({
+          data: data, color: color, index: toYAxis.value
+        });
       });
 
       onClose();

@@ -1,5 +1,5 @@
 
-const MIN_YEAR = 1999;
+const MIN_YEAR = 1990;
 
 const _pad2 = n => n<10 ? '0'+n : ''+n;
 

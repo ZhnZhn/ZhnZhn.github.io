@@ -145,31 +145,6 @@ const ChartFn = {
     _updateYAxisMin({ hasSecondYAxis, series, options, chart })
   },
 
-  toggleSeria(chart, item){
-    const { name, color, index, isSecondAxes, seria } = item;
-
-    if (isSecondAxes){
-      if (!seria.visible){
-        chart.addAxis(
-          Chart.fSecondYAxis(name, color)
-        );
-        seria.yAxis = name;
-        seria.visible = true;
-        chart.addSeries(seria);
-      } else {
-        seria.visible = false;
-        chart.get(name).remove();
-      }
-    } else {
-      const seria = chart.series[index];
-      if (seria.visible){
-        seria.hide()
-      }  else {
-        seria.show();
-      }
-    }
-  },
-
   zoomIndicatorCharts(event){
     const zhDetailCharts = this.chart.options.zhDetailCharts
        , { userMin, userMax, min, max } = event;
@@ -212,59 +187,6 @@ const ChartFn = {
           { valueTo, dateTo }
         )
      : undefined;
-  },
-
-  _addAxis(toChart, id, color){
-    toChart.addAxis({
-        id: id,
-        opossite: true,
-        title: {
-          text: ''
-        },
-        lineColor: color,
-        tickColor: color,
-        gridLineWidth: 0,
-        labels: {
-          style: {
-            color: color
-          }
-        }
-      }, false, true)
-  },
-  _addSeria(toChart, id, color, data, seriaOptions){
-    return toChart.addSeries({
-      type: 'spline',
-      yAxis: id,
-      color: color,
-      data: data,
-      ...seriaOptions
-    }, false);
-  },
-  _addDataToYAxis(toChart, id, color, data, isWithYAxis, seriaOptions){
-    if (isWithYAxis) {
-      this._addAxis(toChart, id, color)
-    }
-    const seria = this._addSeria(toChart, id, color, data, seriaOptions);
-    toChart.redraw()
-    return seria;
-  },
-
-  addDataTo(toChart, color, data, withoutYAxis, seriaOptions){
-    const _id = withoutYAxis ? undefined: "pasteId";
-    return this._addDataToYAxis(toChart,
-        _id, color, data, !withoutYAxis, seriaOptions
-    );
-  },
-  addDataToYAxis(toChart, color, data, yAxisIndex=-1){
-    const _id = yAxisIndex === -1
-              ? 'yAxis' + toChart.yAxis.length
-              : yAxisIndex === 0
-                   ? undefined
-                   : 'yAxis' + yAxisIndex
-        , _isWithYAxis = yAxisIndex === -1;
-     this._addDataToYAxis(toChart,
-         _id, color, data, _isWithYAxis
-     )
   },
 
   toNumberFormat: formatNumber,

@@ -71,8 +71,8 @@ var _hideEl = function _hideEl(chart, propName) {
   }
 };
 
-var wrapZhCaption = function wrapZhCaption(wrap, Chart) {
-  wrap(Chart.prototype, 'zhHideCaption', function () {
+var zhCaption = function zhCaption(Chart) {
+  Chart.prototype.zhHideCaption = function () {
     try {
       var _height = this.chartHeight - 40;
       this.update(C.HIDE, false);
@@ -84,9 +84,9 @@ var wrapZhCaption = function wrapZhCaption(wrap, Chart) {
     } catch (err) {
       console.log(err.msg);
     }
-  });
+  };
 
-  wrap(Chart.prototype, 'zhShowCaption', function () {
+  Chart.prototype.zhShowCaption = function () {
     try {
       var _height = this.chartHeight + 40;
       this.update(C.SHOW, false);
@@ -97,8 +97,8 @@ var wrapZhCaption = function wrapZhCaption(wrap, Chart) {
     } catch (err) {
       console.log(err.msg);
     }
-  });
+  };
 };
 
-exports.default = wrapZhCaption;
-//# sourceMappingURL=wrapZhCaption.js.map
+exports.default = zhCaption;
+//# sourceMappingURL=zhCaption.js.map

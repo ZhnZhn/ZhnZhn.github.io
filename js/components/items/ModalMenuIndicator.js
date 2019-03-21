@@ -31,10 +31,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ChartFn = require('../../charts/ChartFn');
-
-var _ChartFn2 = _interopRequireDefault(_ChartFn);
-
 var _seriaFn = require('../../math/seriaFn');
 
 var _seriaFn2 = _interopRequireDefault(_seriaFn);
@@ -256,7 +252,11 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         } else {
           var data = this._chart.series[0].data,
               seriaData = fn(data);
-          this[seriaPropName] = _ChartFn2.default.addDataTo(this._chart, color, seriaData, false);
+          this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
+            data: seriaData,
+            color: color,
+            index: -1
+          });
         }
         this.setState((0, _defineProperty3.default)({}, statePropName, true));
       }

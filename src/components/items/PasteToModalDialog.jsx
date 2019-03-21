@@ -36,8 +36,7 @@ class PasteToModalDialog extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (
-      nextProps !== this.props
+    if ( nextProps !== this.props
       && nextProps.isShow === this.props.isShow
     ) {
       return false;
@@ -46,14 +45,16 @@ class PasteToModalDialog extends Component {
   }
 
   _handlePasteTo = () => {
-    const { data={}, onClose } = this.props
-        , { toChart, ChartFn } = data;
+    const { data:dData, onClose } = this.props
+    , { toChart } = dData || {};
 
     this.seriesPaneComp
       .getValues()
       .forEach(conf => {
-          const { color, toYAxis={}, data } = conf;
-          ChartFn.addDataToYAxis(toChart, color, data, toYAxis.value)
+         const { color, toYAxis={}, data } = conf;
+         toChart.zhAddSeriaToYAxis({
+             data, color, index: toYAxis.value
+         })
       })
 
     onClose()
@@ -63,9 +64,9 @@ class PasteToModalDialog extends Component {
 
   render(){
     const {
-            isShow, data={}, onClose
-          } = this.props
-        , { fromChart, toChart } = data;
+        isShow, data={}, onClose
+      } = this.props
+    , { fromChart, toChart } = data;
     return (
       <ModalDialog
         style={S.MODAL}

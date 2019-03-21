@@ -116,7 +116,9 @@ var fn = {
       for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var p = _step.value;
 
-        _sum = _sum.add(p[1]);
+        if (_isNumber(p[1])) {
+          _sum = _sum.add(p[1]);
+        }
       }
     } catch (err) {
       _didIteratorError = true;
