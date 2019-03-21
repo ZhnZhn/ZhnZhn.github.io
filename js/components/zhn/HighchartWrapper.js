@@ -24,7 +24,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _temp2;
+var _class, _temp;
 
 var _react = require('react');
 
@@ -48,33 +48,27 @@ var S = {
   }
 };
 
-var HighchartWrapper = (_temp2 = _class = function (_Component) {
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
+var HighchartWrapper = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(HighchartWrapper, _Component);
 
-  function HighchartWrapper() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function HighchartWrapper(props) {
     (0, _classCallCheck3.default)(this, HighchartWrapper);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = (0, _possibleConstructorReturn3.default)(this, (HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call(this, props));
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = HighchartWrapper.__proto__ || Object.getPrototypeOf(HighchartWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.renderChart = function (config) {
+    _this._renderChart = function (config) {
       if (!config) {
         throw new Error('Config must be specified for the ZhHighchart');
       }
-      var chartConfig = config.chart;
-      _this.chart = new _highcharts2.default['Chart']((0, _extends3.default)({}, config, {
-        chart: (0, _extends3.default)({}, chartConfig, {
-          renderTo: _this.chartEl
-        })
-      }));
-    }, _this._refChartEl = function (n) {
-      return _this.chartEl = n;
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+      _this.chart = new _highcharts2.default['Chart'](_this._refChart.current, config);
+    };
+
+    _this._refChart = _react2.default.createRef();
+    return _this;
   }
 
   (0, _createClass3.default)(HighchartWrapper, [{
@@ -84,22 +78,22 @@ var HighchartWrapper = (_temp2 = _class = function (_Component) {
           config = _props.config,
           onLoaded = _props.onLoaded;
 
-      this.renderChart(config);
-      if (typeof onLoaded === 'function') {
+      this._renderChart(config);
+      if (this.chart && _isFn(onLoaded)) {
         onLoaded(this.chart);
       }
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      var onWillUnLoaded = this.props.onWillUnLoaded;
-
-      if (typeof onWillUnLoaded === 'function') {
-        onWillUnLoaded(this.chart);
-      }
-
       try {
+        var onWillUnLoaded = this.props.onWillUnLoaded;
+
+        if (_isFn(onWillUnLoaded)) {
+          onWillUnLoaded(this.chart);
+        }
         this.chart.destroy();
+        this.chart = null;
       } catch (err) {
         /*eslint-disable no-undef */
         if (process.env.NODE_ENV === 'development') {
@@ -124,7 +118,7 @@ var HighchartWrapper = (_temp2 = _class = function (_Component) {
         {
           style: (0, _extends3.default)({}, rootStyle, _rootDivStyle)
         },
-        _react2.default.createElement('div', { ref: this._refChartEl }),
+        _react2.default.createElement('div', { ref: this._refChart }),
         isShowAbs && absComp
       );
     }
@@ -140,6 +134,6 @@ var HighchartWrapper = (_temp2 = _class = function (_Component) {
   return HighchartWrapper;
 }(_react.Component), _class.defaultProps = {
   isShowAbs: true
-}, _temp2);
+}, _temp);
 exports.default = HighchartWrapper;
 //# sourceMappingURL=HighchartWrapper.js.map

@@ -13,26 +13,34 @@ const S = {
   }
 };
 
+const _isFn = fn => typeof(fn) === 'function';
+
 class HighchartWrapper extends Component {
   static defaultProps = {
     isShowAbs: true
   }
+
+  constructor(props){
+    super(props)
+    this._refChart = React.createRef()
+  }
+
   componentDidMount(){
     const { config, onLoaded } = this.props;
-    this.renderChart(config);
-    if ( typeof onLoaded === 'function' ){
+    this._renderChart(config);
+    if ( this.chart && _isFn(onLoaded) ){
       onLoaded(this.chart);
     }
   }
 
   componentWillUnmount(){
-    const { onWillUnLoaded } = this.props;
-    if ( typeof onWillUnLoaded === 'function' ){
-      onWillUnLoaded(this.chart);
-    }
-
     try {
+      const { onWillUnLoaded } = this.props;
+      if ( _isFn(onWillUnLoaded) ){
+        onWillUnLoaded(this.chart);
+      }
       this.chart.destroy()
+      this.chart = null
     } catch(err) {
       /*eslint-disable no-undef */
       if ( process.env.NODE_ENV === 'development') {
@@ -43,35 +51,28 @@ class HighchartWrapper extends Component {
     }
   }
 
-  renderChart = (config) => {
+  _renderChart = (config) => {
     if (!config){
       throw new Error('Config must be specified for the ZhHighchart');
     }
-    const chartConfig =  config.chart;
-    this.chart = new Highcharts['Chart']({
-      ...config,
-      chart: {
-        ...chartConfig,
-        renderTo: this.chartEl
-      }
-    });
+    this.chart = new Highcharts['Chart'](
+      this._refChart.current, config
+    );
   }
-
-  _refChartEl = n => this.chartEl = n
 
   render() {
     const {
-            isShow, rootStyle,
-            isShowAbs, absComp
-          } = this.props
-        , _rootDivStyle = isShow
-             ? S.SHOW
-             : S.HIDE;
+      isShow, rootStyle,
+      isShowAbs, absComp
+    } = this.props
+   , _rootDivStyle = isShow
+        ? S.SHOW
+        : S.HIDE;
     return (
        <div
          style={{...rootStyle, ..._rootDivStyle}}
        >
-          <div ref={this._refChartEl} />
+          <div ref={this._refChart} />
           {isShowAbs && absComp}
         </div>
      );
