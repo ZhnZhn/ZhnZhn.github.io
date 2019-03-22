@@ -14,12 +14,12 @@
         { "id" : "ES_PEEI" }
       ]
     },{
-      "caption": "HCPI",
+      "caption": "HICP",
       "items": [
-        { "id" : "ES_HCPI_FLASH" },
-        { "id" : "ES_HCPI" },
-        { "id" : "ES_HCPI_NSA" },
-        { "id" : "ES_HCPI_CONST" },
+        { "id" : "ES_HICP_FLASH" },
+        { "id" : "ES_HICP" },
+        { "id" : "ES_HICP_NSA" },
+        { "id" : "ES_HICP_CONST" },
         { "id" : "ES_PPP" },
         { "id" : "ES_CPI_G20" }
       ]
@@ -309,14 +309,14 @@
       }
     },
 
-    "ES_HCPI_NSA" : {
-      "type" : "ES_HCPI_NSA",
-      "menuTitle" : "HCPI (2015=100), NSA",
-      "contCaption" : "Harmonised Consume Price Index, NSA",
+    "ES_HICP_NSA" : {
+      "type" : "ES_HICP_NSA",
+      "menuTitle" : "HICP (2015=100), NSA",
+      "contCaption" : "Harmonised Index of Consumer Prices, NSA",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoCaption" : "HCPI",
+        "twoCaption" : "HICP",
         "twoURI" : "./data/eurostat/cpi.json",
         "twoJsonProp": "metrics",
         "threeCaption": "Unit",
@@ -333,16 +333,16 @@
         }
       }
     },
-    "ES_HCPI" : {
-      "type" : "ES_HCPI",
-      "menuTitle" : "HCPI (2015=100)",
-      "contCaption" : "HCPI (2015=100), Monthly",
+    "ES_HICP" : {
+      "type" : "ES_HICP",
+      "menuTitle" : "HICP (2015=100)",
+      "contCaption" : "HICP (2015=100), Monthly",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/hcpi-items.json",
+        "twoURI" : "./data/eurostat/hicp-items.json",
         "twoCaption": "Item",
-        "threeURI": "./data/eurostat/hcpi-units-t.json",
+        "threeURI": "./data/eurostat/hicp-units-t.json",
         "threeCaption": "Unit",
         "dfProps": {
           "dfT" : "three",
@@ -353,16 +353,16 @@
         }
       }
     },
-    "ES_HCPI_FLASH" : {
-      "type" : "ES_HCPI_FLASH",
-      "menuTitle" : "HCPI (First Published)",
+    "ES_HICP_FLASH" : {
+      "type" : "ES_HICP_FLASH",
+      "menuTitle" : "HICP (First Published)",
       "dialogType" : "DialogSelectN",
       "addProps": "ES_BASE_SN",
       "dialogProps" : {
         "selectProps":[
-          [ "coicop","Item","hcpi-items.json"],
-          [ "release","Release","hcpi-release.json"],
-          [ "unit","Unit","hcpi-units.json"]
+          [ "coicop","Item","hicp-items.json"],
+          [ "release","Release","hicp-release.json"],
+          [ "unit","Unit","hicp-units.json"]
         ],
         "dfProps": {
           "mapFrequency" : "M",
@@ -371,16 +371,16 @@
         }
       }
     },
-    "ES_HCPI_CONST" : {
-      "type" : "ES_HCPI_CONST",
-      "menuTitle" : "HCPI at Constant Taxes",
+    "ES_HICP_CONST" : {
+      "type" : "ES_HICP_CONST",
+      "menuTitle" : "HICP at Constant Taxes",
       "dialogType" : "DialogEurostat3A",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "twoURI" : "./data/eurostat/hcpi-items.json",
+        "twoURI" : "./data/eurostat/hicp-items.json",
         "twoCaption": "Item",
         "twoJsonProp": "items",
-        "threeURI": "./data/eurostat/hcpi-units-const-t.json",
+        "threeURI": "./data/eurostat/hicp-units-const-t.json",
         "threeCaption": "Unit",
         "dfProps": {
           "dfT": "three",
@@ -418,8 +418,8 @@
       "dialogType" : "DialogEurostat2",
       "addProps": "ES_COUNTRIES_BASE",
       "dialogProps" : {
-        "oneURI": "./data/eurostat/hcpi-g20-countries.json",
-        "twoURI" : "./data/eurostat/hcpi-g20-units.json",
+        "oneURI": "./data/eurostat/cpi-g20-countries.json",
+        "twoURI" : "./data/eurostat/cpi-g20-units.json",
         "twoCaption": "Unit",
         "twoJsonProp": "items",
         "dfProps": {

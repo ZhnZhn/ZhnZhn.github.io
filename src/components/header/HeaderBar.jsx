@@ -20,7 +20,7 @@ import { T as LPAT } from '../../flux/actions/LoadingProgressActions'
 import { BrowserType as BT } from '../../constants/Type'
 
 const LOGO_TITLE = "Web app ERC (Economic RESTful Client)"
-    , CAPTION = "ERC v0.16.0";
+    , CAPTION = "ERC v0.17.0";
 
 const ID = 'HEADER_BAR';
 
@@ -63,7 +63,7 @@ class HeaderBar extends Component {
   _onRegDS = (dsNode) => {
     this.dsNode = dsNode
   }
-  
+
   _hToggleDS = () => {
     this.setState(prevState => ({
       isDS: !prevState.isDS

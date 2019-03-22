@@ -79,7 +79,7 @@ var _Type = require('../../constants/Type');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LOGO_TITLE = "Web app ERC (Economic RESTful Client)",
-    CAPTION = "ERC v0.16.0";
+    CAPTION = "ERC v0.17.0";
 
 var ID = 'HEADER_BAR';
 

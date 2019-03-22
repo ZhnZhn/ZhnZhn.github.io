@@ -21,6 +21,10 @@ var _apiTitle = (_apiTitle2 = {
   DF: 'API'
 }, (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.B, 'Barchart Market Data'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_S, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.AL_I, 'Alpha Vantage'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.BEA, 'BEA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.EIA, 'EIA'), (0, _defineProperty3.default)(_apiTitle2, _Type.LoadType.INTR, 'Intrinio'), _apiTitle2);
 
+var _isUndef = function _isUndef(v) {
+  return typeof v === 'undefined';
+};
+
 var SettingSlice = {
   setting: {
     proxy: 'https://cors-anywhere.herokuapp.com/',
@@ -79,13 +83,13 @@ var SettingSlice = {
     return this.setting.proxy;
   },
   isSetting: function isSetting(propName, value) {
-    if (typeof value === 'undefined') {
+    if (_isUndef(value)) {
       return this.setting[propName];
     }
     this.setting[propName] = !!value;
   },
   isAdminMode: function isAdminMode(value) {
-    if (typeof value === 'undefined') {
+    if (_isUndef(value)) {
       return this.setting.isAdminMode;
     }
     this.setting.isAdminMode = !!value;

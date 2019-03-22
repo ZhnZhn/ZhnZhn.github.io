@@ -22,6 +22,7 @@ const _apiTitle = {
   [LT.INTR]: 'Intrinio'
 };
 
+const _isUndef = v => typeof(v) === 'undefined';
 
 const SettingSlice = {
   setting: {
@@ -75,14 +76,14 @@ const SettingSlice = {
     return this.setting.proxy;
   },
   isSetting(propName, value){
-    if (typeof value === 'undefined'){
+    if ( _isUndef(value) ){
       return this.setting[propName];
     }
     this.setting[propName] = !!value
   },
 
   isAdminMode(value){
-    if (typeof value === 'undefined'){
+    if ( _isUndef(value) ){
       return this.setting.isAdminMode;
     }
     this.setting.isAdminMode = !!value
