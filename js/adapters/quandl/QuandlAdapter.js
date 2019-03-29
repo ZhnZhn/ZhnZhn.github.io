@@ -467,7 +467,8 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   var yPointIndex = option.dataColumn,
       chartId = option.value,
       isDrawDeltaExtrems = option.isDrawDeltaExtrems,
-      isNotZoomToMinMax = option.isNotZoomToMinMax;
+      isNotZoomToMinMax = option.isNotZoomToMinMax,
+      dfR = option.dfR;
 
 
   _fnSetChartTitle(config, option);
@@ -498,7 +499,7 @@ var fnGetSeries = function fnGetSeries(config, json, option) {
   _fnAddSeriesSplitRatio(config, dataSplitRatio, chartId, minY);
 
   config = (0, _ConfigBuilder2.default)().init(config).add({
-    valueMoving: _AdapterFn2.default.valueMoving(seria)
+    valueMoving: _AdapterFn2.default.valueMoving(seria, dfR)
   }).addMiniVolume({
     id: chartId,
     dColumn: dataVolumeColumn,

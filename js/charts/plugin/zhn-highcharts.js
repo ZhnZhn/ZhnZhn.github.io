@@ -24,6 +24,14 @@ var _zhToggleSeria = require('./zhToggleSeria');
 
 var _zhToggleSeria2 = _interopRequireDefault(_zhToggleSeria);
 
+var _zhTogglePlotLines = require('./zhTogglePlotLines');
+
+var _zhTogglePlotLines2 = _interopRequireDefault(_zhTogglePlotLines);
+
+var _zhToggle2H = require('./zhToggle2H');
+
+var _zhToggle2H2 = _interopRequireDefault(_zhToggle2H);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HighchartsZhn = function HighchartsZhn(Highcharts) {
@@ -35,6 +43,8 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
   (0, _zhCaption2.default)(Chart);
   (0, _zhAddSeriaToYAxis2.default)(Chart);
   (0, _zhToggleSeria2.default)(Chart);
+  (0, _zhTogglePlotLines2.default)(Chart);
+  (0, _zhToggle2H2.default)(Chart);
 };
 
 exports.default = HighchartsZhn;

@@ -14,9 +14,10 @@ const C = {
 
 const {
   isWithItemCounter,
-  initBrowseMenu,  
+  initBrowseMenu,
   setIsOpen,
-  plusCounter
+  plusCounter,
+  resetCounter
 } = BrowserLogic;
 
 const _setItemOpen = setIsOpen.bind(null, true)
@@ -45,6 +46,9 @@ const BrowserSlice = {
   },
   minusMenuItemCounter(cT, bT){
     _minusCounter(this.browserMenu, bT, cT);
+  },
+  resetMenuItemCounter(cT, bT){
+    resetCounter(this.browserMenu, bT, cT)
   },
   getSourceConfig(browserId, sourceId){
     if (sourceId.indexOf(BrowserType.STOCKS_BY_SECTORS) > 0){

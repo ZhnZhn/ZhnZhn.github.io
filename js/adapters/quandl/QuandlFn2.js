@@ -28,6 +28,25 @@ var _ChartConfig2 = _interopRequireDefault(_ChartConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _isArr = Array.isArray;
+var _isStr = function _isStr(str) {
+  return typeof str === 'string';
+};
+var _isNumber = function _isNumber(n) {
+  return typeof n === 'number' && !Number.isNaN(n);
+};
+
+var _crItemCaption = function _crItemCaption(_ref) {
+  var dfItemCaption = _ref.dfItemCaption,
+      items = _ref.items,
+      itemCaption = _ref.itemCaption;
+  return _isNumber(dfItemCaption) && _isArr(items) && items[dfItemCaption - 1] ? items[dfItemCaption - 1].caption || itemCaption : itemCaption;
+};
+
+var _isStrEqTo = function _isStrEqTo(str, strTo) {
+  return _isStr(str) && str.toLowerCase() === strTo;
+};
+
 var QuandlFn2 = {
   getData: function getData(json) {
     var _json$dataset = json.dataset,
@@ -45,7 +64,7 @@ var QuandlFn2 = {
     if (dataset) {
       return dataset.column_names || [];
     }
-    if (datatable && Array.isArray(datatable.columns)) {
+    if (datatable && _isArr(datatable.columns)) {
       return datatable.columns.map(function (c) {
         return c.name;
       });
@@ -102,36 +121,37 @@ var QuandlFn2 = {
         key = option.key,
         columnName = option.columnName,
         dataColumn = option.dataColumn,
-        itemCaption = option.itemCaption,
         fromDate = option.fromDate,
         seriaColumnNames = option.seriaColumnNames,
         linkFn = option.linkFn,
         dataSource = option.dataSource,
-        _dataSource = dataSource ? 'Quandl: ' + dataSource : 'Quandl';
+        _dataSource = dataSource ? 'Quandl: ' + dataSource : 'Quandl',
+        _itemCaption = _crItemCaption(option);
 
     return {
       item: item,
       title: title, subtitle: subtitle,
       id: id, key: key,
-      columnName: columnName, dataColumn: dataColumn, itemCaption: itemCaption,
+      columnName: columnName, dataColumn: dataColumn,
       fromDate: fromDate, seriaColumnNames: seriaColumnNames,
       linkFn: linkFn,
+      itemCaption: _itemCaption,
       dataSource: _dataSource
     };
   },
-  createPercent: function createPercent(_ref) {
-    var _ref$bValue = _ref.bValue,
-        bValue = _ref$bValue === undefined ? (0, _big2.default)('0.0') : _ref$bValue,
-        _ref$bTotal = _ref.bTotal,
-        bTotal = _ref$bTotal === undefined ? (0, _big2.default)('0.0') : _ref$bTotal;
+  createPercent: function createPercent(_ref2) {
+    var _ref2$bValue = _ref2.bValue,
+        bValue = _ref2$bValue === undefined ? (0, _big2.default)('0.0') : _ref2$bValue,
+        _ref2$bTotal = _ref2.bTotal,
+        bTotal = _ref2$bTotal === undefined ? (0, _big2.default)('0.0') : _ref2$bTotal;
 
     return _mathFn2.default.calcPercent({ bValue: bValue, bTotal: bTotal });
   },
-  createValueMoving: function createValueMoving(_ref2) {
-    var _ref2$bNowValue = _ref2.bNowValue,
-        bNowValue = _ref2$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref2$bNowValue,
-        _ref2$bPrevValue = _ref2.bPrevValue,
-        bPrevValue = _ref2$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref2$bPrevValue;
+  createValueMoving: function createValueMoving(_ref3) {
+    var _ref3$bNowValue = _ref3.bNowValue,
+        bNowValue = _ref3$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref3$bNowValue,
+        _ref3$bPrevValue = _ref3.bPrevValue,
+        bPrevValue = _ref3$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref3$bPrevValue;
 
     return _mathFn2.default.crValueMoving({
       nowValue: bNowValue,
@@ -148,35 +168,28 @@ var QuandlFn2 = {
         dataset = _json$dataset3 === undefined ? {} : _json$dataset3,
         _dataset$frequency2 = dataset.frequency,
         frequency = _dataset$frequency2 === undefined ? '' : _dataset$frequency2,
-        millisUTC = len > 0 && seria[len - 1][0] && typeof seria[len - 1][0] === 'number' ? seria[len - 1][0] : '',
+        millisUTC = len > 0 && seria[len - 1][0] && _isNumber(seria[len - 1][0]) ? seria[len - 1][0] : '',
         d = millisUTC ? frequency.toLowerCase() === 'annual' ? new Date(millisUTC).getUTCFullYear() : _DateUtils2.default.formatTo(millisUTC) : '';
 
     return d;
   },
-  setTitleToConfig: function setTitleToConfig() {
-    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  setTitleToConfig: function setTitleToConfig(config) {
     var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var title = option.title,
         subtitle = option.subtitle;
 
-    config.title.text = title ? title : '';
+    config.title.text = title || '';
     config.subtitle.text = subtitle ? subtitle + ':' : '';
   },
   findColumnIndex: function findColumnIndex(obj) {
     var columnName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    var column_names = Array.isArray(obj) ? obj : QuandlFn2.getColumnNames(obj)
-    /*
-    : obj.dataset.column_names
-         ? obj.dataset.column_names
-         : []
-     */
-    ,
+    var column_names = _isArr(obj) ? obj : QuandlFn2.getColumnNames(obj),
         _columnName = columnName.toLowerCase();
 
-    if (columnName && column_names) {
+    if (_columnName && column_names) {
       for (var i = 0, max = column_names.length; i < max; i++) {
-        if (typeof column_names[i] === 'string' && column_names[i].toLowerCase() === _columnName) {
+        if (_isStrEqTo(column_names[i], _columnName)) {
           return i;
         }
       }
@@ -186,10 +199,9 @@ var QuandlFn2 = {
   getDataColumnIndex: function getDataColumnIndex(json, option) {
     var columnName = option.columnName,
         dataColumn = option.dataColumn,
-        _dataColumn = this.findColumnIndex(json, columnName),
-        _columnIndex = _dataColumn ? _dataColumn : dataColumn ? dataColumn : 1;
+        _dataColumn = QuandlFn2.findColumnIndex(json, columnName);
 
-    return _columnIndex;
+    return _dataColumn || dataColumn || 1;
   }
 };
 

@@ -67,8 +67,7 @@ class AreaChartItem extends Component {
   */
 
   constructor(props){
-    super()
-
+    super(props)
 
     this._handleToggleOpen = this._toggle.bind(this, 'isOpen')
     this._handleClickLegend = this._toggle.bind(this, 'isShowLegend')
@@ -80,15 +79,13 @@ class AreaChartItem extends Component {
       onHideCaption: this.hideCaption
     })
 
-    this.is2H = false
     this._fnOnCheck = this._handleCheckBox.bind(this, true)
     this._fnOnUnCheck = this._handleCheckBox.bind(this, false)
 
     const { config={}, caption='' } = props
-        , { zhConfig={} } = config
-        , { dataSource='', itemCaption, id } = zhConfig
-        , _itemCaption = itemCaption
-              ? itemCaption : caption;
+    , { zhConfig={} } = config
+    , { dataSource='', itemCaption, id } = zhConfig
+    , _itemCaption = itemCaption || caption;
 
     this._chartId = id
 
@@ -175,11 +172,7 @@ class AreaChartItem extends Component {
   }
 
   _handleClick2H = () => {
-    const height = (this.is2H)
-           ? this.mainChart.options.chart.height/2
-           : this.mainChart.options.chart.height*2;
-    this.setChartHeight(height);
-    this.is2H = !this.is2H;
+    this.mainChart.zhToggle2H()
   }
 
   _handleAddToWatch = () => {
@@ -195,6 +188,9 @@ class AreaChartItem extends Component {
       toChart: this.mainChart,
       fromChart: this.props.getCopyFromChart()
     })
+  }
+  _toggleMinMax = () => {
+    this.mainChart.zhToggleMinMaxLines()
   }
 
   _handleClickInfo = () => {
@@ -285,6 +281,7 @@ class AreaChartItem extends Component {
              onClickConfig={this._handleClickConfig}
              onCopy={this._handleCopy}
              onPasteTo={this._handlePasteTo}
+             onMinMax={this._toggleMinMax}
             />
          </ShowHide>
       );
@@ -395,9 +392,6 @@ class AreaChartItem extends Component {
     }
   }
 
-  setChartHeight = (height) => {
-    this.mainChart.setSize(undefined, height, true)
-  }
 }
 
 export default AreaChartItem

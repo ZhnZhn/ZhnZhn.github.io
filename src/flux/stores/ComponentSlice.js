@@ -54,7 +54,8 @@ const CheckBoxChartLogic = {
 
   uncheckActive(slice, chartType){
     const activeCheckbox = slice.activeCheckbox;
-    if ( activeCheckbox && activeCheckbox.chartType === chartType ){
+    if ( activeCheckbox &&
+     (!chartType || activeCheckbox.chartType === chartType) ){
        activeCheckbox.setUnchecked()
        slice.activeCheckbox = null
        slice.activeChart = null

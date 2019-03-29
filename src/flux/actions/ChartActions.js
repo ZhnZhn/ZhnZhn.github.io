@@ -36,6 +36,7 @@ export const ChartActionTypes = {
   COPY: 'copy',
 
   SORT_BY: 'sortBy',
+  REMOVE_ALL:'removeAll'
 };
 const A = ChartActionTypes;
 const M = Msg.Alert;
@@ -92,12 +93,10 @@ const ChartActions =  Reflux.createActions({
       [A.CLOSE_CHART] : {},
 
       [A.TO_TOP]: {},
-      [A.COPY]: {},      
+      [A.COPY]: {},
       [A.SORT_BY]: {},
+      [A.REMOVE_ALL]: {}
 });
-
-
-
 
 ChartActions.fnOnChangeStore = _fnOnChangeStore
 

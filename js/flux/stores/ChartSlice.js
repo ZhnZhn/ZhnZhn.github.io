@@ -22,6 +22,7 @@ var _isChartExist = _ChartLogic2.default.isChartExist,
     removeConfig = _ChartLogic2.default.removeConfig,
     toTop = _ChartLogic2.default.toTop,
     sortBy = _ChartLogic2.default.sortBy,
+    removeAll = _ChartLogic2.default.removeAll,
     checkBrowserChartTypes = _ChartLogic2.default.checkBrowserChartTypes,
     scanPostAdded = _ChartLogic2.default.scanPostAdded;
 
@@ -142,6 +143,13 @@ var ChartSlice = {
   onSortBy: function onSortBy(chartType, by) {
     var chartSlice = sortBy(this.charts, chartType, by);
     this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
+  },
+  onRemoveAll: function onRemoveAll(chartType, browserType) {
+    var chartSlice = removeAll(this.charts, chartType);
+    this.resetMenuItemCounter(chartType, browserType);
+    this.uncheckActiveCheckbox();
+    this.trigger(_ChartActions.ChartActionTypes.SHOW_CHART, chartSlice);
+    this.trigger(_BrowserActions.BrowserActionTypes.UPDATE_BROWSER_MENU, browserType);
   }
 };
 

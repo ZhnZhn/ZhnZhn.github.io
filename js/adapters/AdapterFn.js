@@ -171,16 +171,18 @@ var AdapterFn = {
     var _ref3$bNowValue = _ref3.bNowValue,
         bNowValue = _ref3$bNowValue === undefined ? (0, _big2.default)('0.0') : _ref3$bNowValue,
         _ref3$bPrevValue = _ref3.bPrevValue,
-        bPrevValue = _ref3$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref3$bPrevValue;
+        bPrevValue = _ref3$bPrevValue === undefined ? (0, _big2.default)('0.0') : _ref3$bPrevValue,
+        dfR = _ref3.dfR;
 
     return _mathFn2.default.crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: _Type.Direction,
-      fnFormat: _formatAllNumber2.default
+      fnFormat: _formatAllNumber2.default,
+      dfR: dfR
     });
   },
-  valueMoving: function valueMoving(data) {
+  valueMoving: function valueMoving(data, dfR) {
     if (!Array.isArray(data)) {
       return { date: data, direction: 'empty' };
     }
@@ -197,7 +199,7 @@ var AdapterFn = {
         _prevDate = _getDate(_pointPrev),
         dateTo = len > 1 && _prevDate ? _DateUtils2.default.formatTo(_prevDate) : EMPTY;
 
-    return (0, _extends3.default)({}, AdapterFn.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue }), {
+    return (0, _extends3.default)({}, AdapterFn.crValueMoving({ bNowValue: bNowValue, bPrevValue: bPrevValue, dfR: dfR }), {
       valueTo: AdapterFn.numberFormat(bPrevValue),
       date: date, dateTo: dateTo
     });

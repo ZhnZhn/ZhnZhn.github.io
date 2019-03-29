@@ -30,7 +30,8 @@ var C = {
 var isWithItemCounter = _BrowserLogic2.default.isWithItemCounter,
     initBrowseMenu = _BrowserLogic2.default.initBrowseMenu,
     setIsOpen = _BrowserLogic2.default.setIsOpen,
-    plusCounter = _BrowserLogic2.default.plusCounter;
+    plusCounter = _BrowserLogic2.default.plusCounter,
+    resetCounter = _BrowserLogic2.default.resetCounter;
 
 
 var _setItemOpen = setIsOpen.bind(null, true),
@@ -59,6 +60,9 @@ var BrowserSlice = {
   },
   minusMenuItemCounter: function minusMenuItemCounter(cT, bT) {
     _minusCounter(this.browserMenu, bT, cT);
+  },
+  resetMenuItemCounter: function resetMenuItemCounter(cT, bT) {
+    resetCounter(this.browserMenu, bT, cT);
   },
   getSourceConfig: function getSourceConfig(browserId, sourceId) {
     if (sourceId.indexOf(_Type.BrowserType.STOCKS_BY_SECTORS) > 0) {

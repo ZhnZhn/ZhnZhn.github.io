@@ -7,6 +7,18 @@ import DateUtils from '../../utils/DateUtils';
 import { Direction } from '../../constants/Type';
 import ChartConfig from '../../charts/ChartConfig';
 
+const _isArr = Array.isArray;
+const _isStr = str => typeof(str) === 'string';
+const _isNumber = n => typeof(n) === 'number'
+  && !Number.isNaN(n);
+
+const _crItemCaption = ({ dfItemCaption, items, itemCaption }) => _isNumber(dfItemCaption)
+  && _isArr(items) && items[dfItemCaption-1]
+      ? items[dfItemCaption-1].caption || itemCaption
+      : itemCaption;
+
+const _isStrEqTo = (str, strTo) => _isStr(str)
+ && str.toLowerCase() === strTo;
 
 const QuandlFn2 = {
   getData: (json) => {
@@ -19,7 +31,7 @@ const QuandlFn2 = {
     if (dataset) {
       return dataset.column_names || [];
     }
-    if (datatable && Array.isArray(datatable.columns)) {
+    if (datatable && _isArr(datatable.columns)) {
       return datatable.columns.map(c => c.name);
     }
     return [];
@@ -62,19 +74,21 @@ const QuandlFn2 = {
     const {
             item, title, subtitle='',
             value:id, key, columnName, dataColumn,
-            itemCaption, fromDate, seriaColumnNames,
+            fromDate, seriaColumnNames,
             linkFn, dataSource
           } = option
         , _dataSource = dataSource
              ? `Quandl: ${dataSource}`
-             : 'Quandl';
+             : 'Quandl'
+        , _itemCaption = _crItemCaption(option);
     return {
       item,
       title, subtitle,
       id, key,
-      columnName, dataColumn, itemCaption,
+      columnName, dataColumn,
       fromDate, seriaColumnNames,
       linkFn,
+      itemCaption: _itemCaption,
       dataSource: _dataSource
     }
   },
@@ -96,7 +110,7 @@ const QuandlFn2 = {
      const len = seria.length
          , { dataset={} } = json
          , { frequency='' } = dataset
-         , millisUTC = (len>0 && seria[len-1][0] && typeof seria[len-1][0]==='number')
+         , millisUTC = (len>0 && seria[len-1][0] && _isNumber(seria[len-1][0]) )
               ? seria[len-1][0]
               : ''
          , d = (millisUTC)
@@ -107,42 +121,32 @@ const QuandlFn2 = {
       return d
   },
 
-  setTitleToConfig(config={}, option={}){
-    const {title, subtitle} = option;
-    config.title.text = (title) ? title : '';
-    config.subtitle.text = (subtitle) ? `${subtitle}:` : '';
+  setTitleToConfig(config, option={}){
+    const { title, subtitle } = option;
+    config.title.text = title || '';
+    config.subtitle.text = subtitle ? `${subtitle}:` : '';
   },
 
   findColumnIndex(obj, columnName=''){
-     const column_names = Array.isArray(obj)
-             ? obj
-             : QuandlFn2.getColumnNames(obj)
-             /*
-             : obj.dataset.column_names
-                  ? obj.dataset.column_names
-                  : []
-              */
-         , _columnName = columnName.toLowerCase();
+     const column_names = _isArr(obj)
+       ? obj
+       : QuandlFn2.getColumnNames(obj)
+     , _columnName = columnName.toLowerCase();
 
-     if ( columnName && column_names ) {
-        for (let i=0, max=column_names.length; i<max; i++){
-          if (typeof column_names[i] === 'string'
-              && column_names[i].toLowerCase() === _columnName) {
-            return i;
-          }
-        }
+     if ( _columnName && column_names ) {
+      for (let i=0, max=column_names.length; i<max; i++){
+       if ( _isStrEqTo(column_names[i], _columnName) ) {
+         return i;
+       }
+      }
      }
      return undefined;
   },
 
   getDataColumnIndex(json, option){
     const { columnName, dataColumn } = option
-        , _dataColumn = this.findColumnIndex(json, columnName)
-        , _columnIndex = (_dataColumn)
-              ? _dataColumn
-              : (dataColumn) ? dataColumn : 1;
-
-     return _columnIndex;
+    , _dataColumn = QuandlFn2.findColumnIndex(json, columnName);
+    return _dataColumn || dataColumn || 1;
   }
 
 };

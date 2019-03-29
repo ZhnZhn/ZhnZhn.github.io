@@ -10,6 +10,7 @@ const {
   removeConfig,
   toTop,
   sortBy,
+  removeAll,
   checkBrowserChartTypes,
   scanPostAdded
 } = ChartLogic;
@@ -30,7 +31,7 @@ const ChartSlice = {
   },
   isChartExist(option){
     checkBrowserChartTypes(this, option)
-    const { chartType, key } = option;    
+    const { chartType, key } = option;
     return isChartExist(this.charts, chartType, key);
   },
 
@@ -128,8 +129,15 @@ const ChartSlice = {
   },
 
   onSortBy(chartType, by){
-    const chartSlice = sortBy(this.charts, chartType, by)
+    const chartSlice = sortBy(this.charts, chartType, by);
     this.trigger(CHAT.SHOW_CHART, chartSlice);
+  },
+  onRemoveAll(chartType, browserType){
+    const chartSlice = removeAll(this.charts, chartType);
+    this.resetMenuItemCounter(chartType, browserType)
+    this.uncheckActiveCheckbox()
+    this.trigger(CHAT.SHOW_CHART, chartSlice);
+    this.trigger(BAT.UPDATE_BROWSER_MENU, browserType);
   }
 
 };

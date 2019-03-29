@@ -1,1 +1,31 @@
-{"version":3,"sources":["../../../src/components/items/SubMenuItem.jsx"],"names":["STYLE","ACTIVE","color","fontWeight","SubMenuItem","state","isActive","_handleClick","props","onClick","setState","prev","caption","isNotActive","_style","propTypes","string","func"],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;;;AAEA,IAAMA,QAAQ;AACZC,UAAS;AACPC,WAAO,SADA;AAEPC,gBAAY;AAFL;AADG,CAAd;;IAOMC,W;;;;;;;;;;;;;;8MAMJC,K,GAAQ;AACNC,gBAAU;AADJ,K,QAIRC,Y,GAAe,YAAM;AACnB,YAAKC,KAAL,CAAWC,OAAX;AACA,YAAKC,QAAL,CAAc,gBAAQ;AACpB,eAAO,EAAEJ,UAAU,CAACK,KAAKL,QAAlB,EAAP;AACD,OAFD;AAGD,K;;;;;6BAEO;AAAA,mBACqC,KAAKE,KAD1C;AAAA,UACEI,OADF,UACEA,OADF;AAAA,UACWC,WADX,UACWA,WADX;AAAA,UACwBJ,OADxB,UACwBA,OADxB;;AAEN,UAAI,OAAOA,OAAP,KAAmB,UAAvB,EAAkC;AAChC,eAAO,IAAP;AACD;;AAEK,UAAEH,QAAF,GAAe,KAAKD,KAApB,CAAEC,QAAF;AAAA,UACAQ,MADA,GACUR,YAAY,CAACO,WAAd,GACLb,MAAMC,MADD,GAEL,IAHJ;;;AAKN,aACE;AAAA;AAAA;AACE,qBAAU,aADZ;AAEE,iBAAOa,MAFT;AAGE,mBAAS,KAAKP;AAHhB;AAKGK;AALH,OADF;AASD;;;;;AArCGR,W,CACGW,S,2CAAY;AACjBH,WAAS,oBAAUI,MADF;AAEjBP,WAAS,oBAAUQ;AAFF,C;kBAuCNb,W","file":"SubMenuItem.js","sourcesContent":["import React, { Component } from 'react';\r\nimport PropTypes from \"prop-types\";\r\n\r\nconst STYLE = {\r\n  ACTIVE : {\r\n    color: '#a487d4',\r\n    fontWeight: 'bold'\r\n  }\r\n}\r\n\r\nclass SubMenuItem extends Component{\r\n  static propTypes = {\r\n    caption: PropTypes.string,\r\n    onClick: PropTypes.func\r\n  }\r\n\r\n  state = {\r\n    isActive: false\r\n  }\r\n\r\n  _handleClick = () => {\r\n    this.props.onClick()\r\n    this.setState(prev => {\r\n      return { isActive: !prev.isActive}\r\n    })\r\n  }\r\n\r\n  render(){\r\n    const { caption, isNotActive, onClick  } = this.props;\r\n    if (typeof onClick !== 'function'){\r\n      return null;\r\n    }\r\n\r\n    const { isActive } = this.state\r\n        , _style = (isActive && !isNotActive)\r\n            ? STYLE.ACTIVE\r\n            : null;\r\n\r\n    return(\r\n      <div\r\n        className=\"bt-sub-item\"\r\n        style={_style}\r\n        onClick={this._handleClick}\r\n      >\r\n        {caption}\r\n      </div>\r\n    )\r\n  }\r\n}\r\n\r\nexport default SubMenuItem\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/items/SubMenuItem.js"
+ ],
+ "file": "../../../src/components/items/SubMenuItem.js",
+ "names": [
+  "CL",
+  "STYLE",
+  "ACTIVE",
+  "color",
+  "fontWeight",
+  "_isFn",
+  "fn",
+  "SubMenuItem",
+  "props",
+  "_handleClick",
+  "onClick",
+  "setState",
+  "isActive",
+  "prev",
+  "state",
+  "initialIsActive",
+  "caption",
+  "isNotActive",
+  "_style",
+  "Component",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;AACA;;AAEA,IAAMA,KAAK,aAAX;;AAEA,IAAMC,QAAQ;AACZC,UAAS;AACPC,WAAO,SADA;AAEPC,gBAAY;AAFL;AADG,CAAd;;AAOA,IAAMC,QAAQ,SAARA,KAAQ;AAAA,SAAM,OAAOC,EAAP,KAAc,UAApB;AAAA,CAAd;;IAEMC,W;;;AAaJ,uBAAYC,KAAZ,EAAkB;AAAA;;AAAA,wIACVA,KADU;;AAAA,UAOlBC,YAPkB,GAOH,YAAM;AACnB,YAAKD,KAAL,CAAWE,OAAX;AACA,YAAKC,QAAL,CAAc;AAAA,eAAS;AACrBC,oBAAU,CAACC,KAAKD;AADK,SAAT;AAAA,OAAd;AAGD,KAZiB;;AAEhB,UAAKE,KAAL,GAAa;AACXF,gBAAUJ,MAAMO;AADL,KAAb;AAFgB;AAKjB;AAjBD;;;;;;;;;;;;6BA0BQ;AAAA,mBACqC,KAAKP,KAD1C;AAAA,UACEQ,OADF,UACEA,OADF;AAAA,UACWC,WADX,UACWA,WADX;AAAA,UACwBP,OADxB,UACwBA,OADxB;;AAEN,UAAK,CAACL,MAAMK,OAAN,CAAN,EAAsB;AACpB,eAAO,IAAP;AACD;;AAEK,UAAEE,QAAF,GAAe,KAAKE,KAApB,CAAEF,QAAF;AAAA,UACJM,MADI,GACMN,YAAY,CAACK,WAAd,GACLhB,MAAMC,MADD,GAEL,IAHA;;;AAKN,aACE;AAAA;AAAA;AACE,qBAAWF,EADb;AAEE,iBAAOkB,MAFT;AAGE,mBAAS,KAAKT;AAHhB;AAKGO;AALH,OADF;AASD;;;EA/CuBG,gB,UASjBC,Y,GAAe;AACpBL,mBAAiB;AADG,C;kBAyCTR,W"
+}

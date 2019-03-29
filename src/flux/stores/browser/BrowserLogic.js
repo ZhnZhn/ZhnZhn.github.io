@@ -4,6 +4,11 @@ import crMenu from './crMenu'
 import addDialogPropsTo from './addDialogPropsTo'
 import findItem from './findItem'
 
+const _findItemCounter = (appMenu, bT, cT) => BrowserLogic
+ .isWithItemCounter(bT)
+   ? findItem(appMenu[bT], cT)
+   : void 0;
+
 const BrowserLogic = {
   crMenu: crMenu,
 
@@ -33,12 +38,16 @@ const BrowserLogic = {
     }
   },
   plusCounter: (value, appMenu, bT, cT) => {
-    if (BrowserLogic.isWithItemCounter(bT)) {
-      const item = findItem(appMenu[bT], cT);
-      if (item){
-        item.counter += value;
-        item.isOpen = true;
-      }
+    const item = _findItemCounter(appMenu, bT, cT);
+    if (item){
+      item.counter += value;
+      item.isOpen = true;
+    }
+  },
+  resetCounter: (appMenu, bT, cT) => {
+    const item = _findItemCounter(appMenu, bT, cT);
+    if (item) {
+      item.counter = 0
     }
   }
 };

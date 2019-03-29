@@ -14,6 +14,12 @@ var _crTidTop = function _crTidTop(v) {
   };
 };
 
+var _checkTop = function _checkTop(isTop, strN, arr) {
+  if (isTop) {
+    arr.push(_crTidTop(strN));
+  }
+};
+
 var fTableApi = function fTableApi(ROOT_URL) {
   return {
     getRequestUrl: function getRequestUrl(option) {
@@ -21,7 +27,7 @@ var fTableApi = function fTableApi(ROOT_URL) {
           proxy = _option$proxy === undefined ? '' : _option$proxy,
           metric = option.metric,
           dfId = option.dfId,
-          id = dfId ? dfId : metric;
+          id = dfId || metric;
 
       return "" + proxy + ROOT_URL + "/" + id;
     },
@@ -36,26 +42,23 @@ var fTableApi = function fTableApi(ROOT_URL) {
         var _ref = item || {},
             slice = _ref.slice;
 
-        var propName = void 0;
-        for (propName in slice) {
+        for (var propName in slice) {
           arrQuery.push({
             code: propName,
             selection: {
-              filter: 'all',
-              values: ['*']
+              filter: 'item',
+              values: [slice[propName]]
+              //filter: 'all',
+              //values: ['*']
             }
           });
         }
       });
 
-      if (isTop12) {
-        arrQuery.push(_crTidTop("12"));
-      }
-      if (isTop6) {
-        arrQuery.push(_crTidTop("6"));
-      }
+      _checkTop(isTop12, '12', arrQuery);
+      _checkTop(isTop6, '6', arrQuery);
 
-      var r = {
+      return {
         method: 'POST',
         body: JSON.stringify({
           query: arrQuery,
@@ -64,7 +67,6 @@ var fTableApi = function fTableApi(ROOT_URL) {
           }
         })
       };
-      return r;
     },
     checkResponse: function checkResponse() {
       return true;

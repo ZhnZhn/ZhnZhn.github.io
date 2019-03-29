@@ -22,7 +22,10 @@ var _isNumber = function _isNumber(n) {
 
 var _formatedToBig = function _formatedToBig() {
   var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '0.0';
-  return (0, _big2.default)(v.toString().replace(/\s/g, ''));
+  var dfR = arguments[1];
+
+  var _b = (0, _big2.default)(v.toString().replace(/\s/g, ''));
+  return _isNumber(dfR) ? _b.round(dfR) : _b;
 };
 
 var _roundBig = function _roundBig(bValue) {
@@ -51,8 +54,9 @@ var mathFn = {
         D = _option$Direction === undefined ? {} : _option$Direction,
         _option$fnFormat = option.fnFormat,
         fnFormat = _option$fnFormat === undefined ? fnEcho : _option$fnFormat,
-        bNowValue = _formatedToBig(nowValue),
-        bPrevValue = _formatedToBig(prevValue),
+        dfR = option.dfR,
+        bNowValue = _formatedToBig(nowValue, dfR),
+        bPrevValue = _formatedToBig(prevValue, dfR),
         _bDelta = bPrevValue.minus(bNowValue),
         _direction = _bDelta.gt(0.0) ? D.DOWN : _bDelta.lt(0.0) ? D.UP : D.EQUAL;
 
@@ -62,16 +66,6 @@ var mathFn = {
 
     var _bNowValue = _roundBig(bNowValue),
         _bDeltaAbs = _roundBig(_bDelta.abs());
-    /*
-    let _bNowValue = Big(bNowValue).round(4);
-    if ( _bNowValue.gt(MAX_TO_ROUND) ){
-      _bNowValue = bNowValue.toFixed(0);
-    }
-    let _bDeltaAbs = _bDelta.abs().round(4);
-    if (_bDeltaAbs.gt(MAX_TO_ROUND)) {
-      _bDeltaAbs = _bDelta.abs().round(0)
-    }
-    */
 
     return {
       value: fnFormat(_bNowValue).toString(),

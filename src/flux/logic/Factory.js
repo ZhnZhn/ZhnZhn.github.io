@@ -13,7 +13,7 @@ import Msg from '../../constants/Msg';
 import {  LoadType } from '../../constants/Type';
 
 import CA from '../actions/ComponentActions';
-import ChartActions from '../actions/ChartActions';
+import CHA from '../actions/ChartActions';
 import DateUtils from '../../utils/DateUtils';
 
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -27,8 +27,8 @@ const {
   isYmdOrEmpty
 } = DateUtils;
 
-const onLoadChart = ChartActions.loadStock
-    , onShowChart = ChartActions.showChart
+const onLoadChart = CHA.loadStock
+    , onShowChart = CHA.showChart
     , initFromDate = getFromDate(2)
     , initToDate = getToDate();
 
@@ -170,7 +170,8 @@ const _crChartContainerComp = function({ chartType, browserType, conf }){
     onSetActive: CA.setActiveContainer,
     onCloseContainer: CA.closeChartContainer
       .bind(null, _type, browserType),
-    onCloseItem: ChartActions.closeChart
+    onCloseItem: CHA.closeChart,
+    onRemoveAll: CHA.removeAll.bind(null, _type, browserType)
   });
 }
 

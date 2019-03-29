@@ -26,6 +26,7 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
   var isShow = _ref.isShow,
       onClose = _ref.onClose,
       onX2H = _ref.onX2H,
+      onMinMax = _ref.onMinMax,
       onCopy = _ref.onCopy,
       onPasteTo = _ref.onPasteTo;
   return _react2.default.createElement(
@@ -41,6 +42,11 @@ var ModalMenuFn = function ModalMenuFn(_ref) {
       _react2.default.createElement(_SubMenuItem2.default, {
         caption: 'x2H',
         onClick: onX2H
+      }),
+      _react2.default.createElement(_SubMenuItem2.default, {
+        caption: 'MinMax',
+        initialIsActive: true,
+        onClick: onMinMax
       }),
       _react2.default.createElement(_SubMenuItem2.default, {
         caption: 'Copy',

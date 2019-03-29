@@ -156,16 +156,17 @@ const AdapterFn = {
   compareByValue: _compareArrByIndex('value'),
   compareByValueId: _compareByTwoProp('value', 'id'),
 
-  crValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0') }){
+  crValueMoving({ bNowValue=Big('0.0'), bPrevValue=Big('0.0'), dfR }){
     return mathFn.crValueMoving({
       nowValue: bNowValue,
       prevValue: bPrevValue,
       Direction: Direction,
-      fnFormat: formatAllNumber
+      fnFormat: formatAllNumber,
+      dfR: dfR
     })
   },
 
-  valueMoving(data){
+  valueMoving(data, dfR){
     if (!Array.isArray(data)) {
       return { date: data, direction: 'empty' };
     }
@@ -191,7 +192,7 @@ const AdapterFn = {
                : EMPTY;
 
       return  {
-        ...AdapterFn.crValueMoving({ bNowValue, bPrevValue }),
+        ...AdapterFn.crValueMoving({ bNowValue, bPrevValue, dfR }),
         valueTo: AdapterFn.numberFormat(bPrevValue),
         date, dateTo
       };

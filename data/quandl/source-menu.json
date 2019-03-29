@@ -206,7 +206,11 @@
             "valueFn": "RPrefixTwoOne",
             "valueFnPrefix": "BP",
             "loadId": "Q",
-            "dataSource": "British Petroleum (Code: BP)"
+            "dataSource": "British Petroleum (Code: BP)",
+            "dfProps": {
+              "dfItemCaption": 1,
+              "dfR": 0
+            }
         }
     },
     "QE_PETROLEUM_PRICES": {

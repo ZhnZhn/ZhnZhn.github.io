@@ -112,6 +112,7 @@ var ChartToolbar = function (_Component) {
           onRemoveMfi = _props.onRemoveMfi,
           onClickLegend = _props.onClickLegend,
           onClick2H = _props.onClick2H,
+          onMinMax = _props.onMinMax,
           onAddToWatch = _props.onAddToWatch,
           onCopy = _props.onCopy,
           onPasteTo = _props.onPasteTo,
@@ -182,6 +183,7 @@ var ChartToolbar = function (_Component) {
           },
           _react2.default.createElement(_ModalMenuFn2.default, {
             onX2H: onClick2H,
+            onMinMax: onMinMax,
             onCopy: onCopy,
             onPasteTo: onPasteTo
           })

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
+
+const CL = "bt-sub-item";
 
 const STYLE = {
   ACTIVE : {
@@ -8,37 +10,49 @@ const STYLE = {
   }
 }
 
+const _isFn = fn => typeof fn === 'function';
+
 class SubMenuItem extends Component{
+  /*
   static propTypes = {
     caption: PropTypes.string,
+    initialIsActive: PropTypes.bool,
+    isNotActive: PropTypes.bool,
     onClick: PropTypes.func
   }
+  */
+  static defaultProps = {
+    initialIsActive: false
+  }
 
-  state = {
-    isActive: false
+  constructor(props){
+    super(props)
+    this.state = {
+      isActive: props.initialIsActive
+    }
   }
 
   _handleClick = () => {
     this.props.onClick()
-    this.setState(prev => {
-      return { isActive: !prev.isActive}
-    })
+    this.setState(prev => ({
+      isActive: !prev.isActive
+    }))
   }
 
   render(){
     const { caption, isNotActive, onClick  } = this.props;
-    if (typeof onClick !== 'function'){
+    if ( !_isFn(onClick) ){
       return null;
     }
 
     const { isActive } = this.state
-        , _style = (isActive && !isNotActive)
-            ? STYLE.ACTIVE
-            : null;
+    , _style = (isActive && !isNotActive)
+        ? STYLE.ACTIVE
+        : null;
 
     return(
       <div
-        className="bt-sub-item"
+        className={CL}
         style={_style}
         onClick={this._handleClick}
       >

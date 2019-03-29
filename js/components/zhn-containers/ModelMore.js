@@ -22,7 +22,8 @@ var crModelMore = function crModelMore(_ref) {
       onPlusWidth = _ref.onPlusWidth,
       onMinusWidth = _ref.onMinusWidth,
       onFit = _ref.onFit,
-      onShowCaptions = _ref.onShowCaptions;
+      onShowCaptions = _ref.onShowCaptions,
+      onRemoveAll = _ref.onRemoveAll;
 
   return {
     baseTitleCl: CL_ROW,
@@ -42,6 +43,11 @@ var crModelMore = function crModelMore(_ref) {
       cn: CL_ROW,
       name: 'Show Captions',
       onClick: onShowCaptions
+    }, {
+      cn: CL_ROW,
+      name: 'Remove All Items',
+      onClick: onRemoveAll,
+      isClose: true
     }],
     p1: [{
       cn: CL_ROW,

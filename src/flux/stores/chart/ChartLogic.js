@@ -38,7 +38,7 @@ const ChartLogic = {
     }
   },
 
-  isChartExist(slice, chartType, key){    
+  isChartExist(slice, chartType, key){
     const {
             chartSlice, configs
           } = _getSlice(slice, chartType)
@@ -121,6 +121,11 @@ const ChartLogic = {
       configs.reverse()
     }
     return chartSlice;
+  },
+  removeAll(slice, chartType){
+    const _slice = slice[chartType] || {}
+    _slice.configs = []
+    return _slice;
   },
 
   checkBrowserChartTypes(slice, option){

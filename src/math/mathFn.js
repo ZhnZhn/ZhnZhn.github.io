@@ -7,9 +7,12 @@ const MAX_TO_ROUND = '1000000';
 const _isNumber = n => typeof n === 'number'
  && !Number.isNaN(n);
 
-const _formatedToBig = (v='0.0') => Big(
-  v.toString().replace(/\s/g,'')
-);
+const _formatedToBig = (v='0.0', dfR) => {
+  const _b = Big(v.toString().replace(/\s/g,''));
+  return _isNumber(dfR)
+    ? _b.round(dfR)
+    : _b;
+}
 
 const _roundBig = (bValue) => {
   let _bValue = bValue.round(4);
@@ -32,10 +35,11 @@ const mathFn = {
       nowValue,
       prevValue,
       Direction:D={},
-      fnFormat=fnEcho
+      fnFormat=fnEcho,
+      dfR
     } = option
-    , bNowValue = _formatedToBig(nowValue)
-    , bPrevValue = _formatedToBig(prevValue)
+    , bNowValue = _formatedToBig(nowValue, dfR)
+    , bPrevValue = _formatedToBig(prevValue, dfR)
     , _bDelta = bPrevValue.minus(bNowValue)
     , _direction = _bDelta.gt(0.0)
          ? D.DOWN
@@ -49,16 +53,7 @@ const mathFn = {
 
     const _bNowValue = _roundBig(bNowValue)
     , _bDeltaAbs = _roundBig(_bDelta.abs());
-    /*
-    let _bNowValue = Big(bNowValue).round(4);
-    if ( _bNowValue.gt(MAX_TO_ROUND) ){
-      _bNowValue = bNowValue.toFixed(0);
-    }
-    let _bDeltaAbs = _bDelta.abs().round(4);
-    if (_bDeltaAbs.gt(MAX_TO_ROUND)) {
-      _bDeltaAbs = _bDelta.abs().round(0)
-    }
-    */
+
 
     return {
       value: fnFormat(_bNowValue).toString(),

@@ -67,7 +67,7 @@ var CheckBoxChartLogic = {
   },
   uncheckActive: function uncheckActive(slice, chartType) {
     var activeCheckbox = slice.activeCheckbox;
-    if (activeCheckbox && activeCheckbox.chartType === chartType) {
+    if (activeCheckbox && (!chartType || activeCheckbox.chartType === chartType)) {
       activeCheckbox.setUnchecked();
       slice.activeCheckbox = null;
       slice.activeChart = null;

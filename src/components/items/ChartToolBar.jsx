@@ -59,10 +59,11 @@ class ChartToolbar extends Component {
             onAddMfi, onRemoveMfi,
             onClickLegend,
             onClick2H,
+            onMinMax,
             onAddToWatch,
             onCopy,
             onPasteTo,
-            onClickInfo            
+            onClickInfo
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
         , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
@@ -128,6 +129,7 @@ class ChartToolbar extends Component {
          >
            <ModalMenuFn
              onX2H={onClick2H}
+             onMinMax={onMinMax}
              onCopy={onCopy}
              onPasteTo={onPasteTo}
            />

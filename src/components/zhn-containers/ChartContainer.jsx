@@ -77,7 +77,7 @@ class ChartContainer extends Component {
 
   constructor(props){
     super(props);
-    const { chartType } = props;
+    const { chartType, onRemoveAll } = props;
     this.childMargin = CHILD_MARGIN;
 
     this._MODEL = crModelMore({
@@ -87,7 +87,8 @@ class ChartContainer extends Component {
       onPlusWidth: this._plusToWidth,
       onMinusWidth: this._minusToWidth,
       onFit: this._fitToWidth,
-      onShowCaptions: this._onShowCaptions
+      onShowCaptions: this._onShowCaptions,
+      onRemoveAll
     })
 
     this._hSetActive = this._toggleChb.bind(this, true)

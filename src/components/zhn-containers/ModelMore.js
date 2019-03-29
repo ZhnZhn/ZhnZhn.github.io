@@ -9,7 +9,8 @@ const crModelMore = ({
   onMinWidth, onInitWidth,
   onPlusWidth, onMinusWidth,
   onFit,
-  onShowCaptions
+  onShowCaptions,
+  onRemoveAll
 }) => {
   return {
     baseTitleCl: CL_ROW,
@@ -30,6 +31,11 @@ const crModelMore = ({
         cn: CL_ROW,
         name: 'Show Captions',
         onClick: onShowCaptions
+      },{
+        cn: CL_ROW,
+        name: 'Remove All Items',
+        onClick: onRemoveAll,
+        isClose: true
       }
     ],
     p1: [

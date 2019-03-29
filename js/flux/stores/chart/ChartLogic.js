@@ -148,6 +148,11 @@ var ChartLogic = {
     }
     return chartSlice;
   },
+  removeAll: function removeAll(slice, chartType) {
+    var _slice = slice[chartType] || {};
+    _slice.configs = [];
+    return _slice;
+  },
   checkBrowserChartTypes: function checkBrowserChartTypes(slice, option) {
     var chb = slice.activeContChb;
 

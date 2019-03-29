@@ -22,6 +22,10 @@ var _findItem2 = _interopRequireDefault(_findItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _findItemCounter = function _findItemCounter(appMenu, bT, cT) {
+  return BrowserLogic.isWithItemCounter(bT) ? (0, _findItem2.default)(appMenu[bT], cT) : void 0;
+};
+
 var BrowserLogic = {
   crMenu: _crMenu2.default,
 
@@ -52,12 +56,16 @@ var BrowserLogic = {
     }
   },
   plusCounter: function plusCounter(value, appMenu, bT, cT) {
-    if (BrowserLogic.isWithItemCounter(bT)) {
-      var item = (0, _findItem2.default)(appMenu[bT], cT);
-      if (item) {
-        item.counter += value;
-        item.isOpen = true;
-      }
+    var item = _findItemCounter(appMenu, bT, cT);
+    if (item) {
+      item.counter += value;
+      item.isOpen = true;
+    }
+  },
+  resetCounter: function resetCounter(appMenu, bT, cT) {
+    var item = _findItemCounter(appMenu, bT, cT);
+    if (item) {
+      item.counter = 0;
     }
   }
 };

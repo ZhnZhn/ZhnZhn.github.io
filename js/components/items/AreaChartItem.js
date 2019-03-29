@@ -132,7 +132,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   function AreaChartItem(props) {
     (0, _classCallCheck3.default)(this, AreaChartItem);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AreaChartItem.__proto__ || Object.getPrototypeOf(AreaChartItem)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AreaChartItem.__proto__ || Object.getPrototypeOf(AreaChartItem)).call(this, props));
 
     _initialiseProps.call(_this);
 
@@ -146,7 +146,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       onHideCaption: _this.hideCaption
     });
 
-    _this.is2H = false;
     _this._fnOnCheck = _this._handleCheckBox.bind(_this, true);
     _this._fnOnUnCheck = _this._handleCheckBox.bind(_this, false);
 
@@ -160,7 +159,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         dataSource = _zhConfig$dataSource === undefined ? '' : _zhConfig$dataSource,
         itemCaption = zhConfig.itemCaption,
         id = zhConfig.id,
-        _itemCaption = itemCaption ? itemCaption : caption;
+        _itemCaption = itemCaption || caption;
 
     _this._chartId = id;
 
@@ -353,9 +352,7 @@ var AreaChartItem = (_temp = _class = function (_Component) {
   };
 
   this._handleClick2H = function () {
-    var height = _this2.is2H ? _this2.mainChart.options.chart.height / 2 : _this2.mainChart.options.chart.height * 2;
-    _this2.setChartHeight(height);
-    _this2.is2H = !_this2.is2H;
+    _this2.mainChart.zhToggle2H();
   };
 
   this._handleAddToWatch = function () {
@@ -376,6 +373,10 @@ var AreaChartItem = (_temp = _class = function (_Component) {
       toChart: _this2.mainChart,
       fromChart: _this2.props.getCopyFromChart()
     });
+  };
+
+  this._toggleMinMax = function () {
+    _this2.mainChart.zhToggleMinMaxLines();
   };
 
   this._handleClickInfo = function () {
@@ -473,7 +474,8 @@ var AreaChartItem = (_temp = _class = function (_Component) {
         onClickInfo: _this2._handleClickInfo,
         onClickConfig: _this2._handleClickConfig,
         onCopy: _this2._handleCopy,
-        onPasteTo: _this2._handlePasteTo
+        onPasteTo: _this2._handlePasteTo,
+        onMinMax: _this2._toggleMinMax
       })
     );
   };
@@ -500,10 +502,6 @@ var AreaChartItem = (_temp = _class = function (_Component) {
 
   this._refChartComp = function (comp) {
     return _this2.chartComp = comp;
-  };
-
-  this.setChartHeight = function (height) {
-    _this2.mainChart.setSize(undefined, height, true);
   };
 }, _temp);
 exports.default = AreaChartItem;

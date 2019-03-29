@@ -7,7 +7,7 @@ import STYLE from './ModalMenu.Style'
 
 const ModalMenuFn = ({
   isShow, onClose,
-  onX2H,
+  onX2H, onMinMax,
   onCopy, onPasteTo
 }) => (
   <ModalPopup
@@ -19,6 +19,11 @@ const ModalMenuFn = ({
       <SubMenuItem
         caption="x2H"
         onClick={onX2H}
+      />
+      <SubMenuItem
+        caption="MinMax"
+        initialIsActive={true}
+        onClick={onMinMax}
       />
       <SubMenuItem
         caption="Copy"

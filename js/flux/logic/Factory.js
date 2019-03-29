@@ -188,7 +188,8 @@ var _crChartContainerComp = function _crChartContainerComp(_ref2) {
     browserType: browserType,
     onSetActive: _ComponentActions2.default.setActiveContainer,
     onCloseContainer: _ComponentActions2.default.closeChartContainer.bind(null, _type, browserType),
-    onCloseItem: _ChartActions2.default.closeChart
+    onCloseItem: _ChartActions2.default.closeChart,
+    onRemoveAll: _ChartActions2.default.removeAll.bind(null, _type, browserType)
   });
 };
 

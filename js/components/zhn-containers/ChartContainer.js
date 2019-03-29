@@ -130,7 +130,8 @@ var ChartContainer = (_temp = _class = function (_Component) {
 
     _initialiseProps.call(_this);
 
-    var chartType = props.chartType;
+    var chartType = props.chartType,
+        onRemoveAll = props.onRemoveAll;
 
     _this.childMargin = CHILD_MARGIN;
 
@@ -141,7 +142,8 @@ var ChartContainer = (_temp = _class = function (_Component) {
       onPlusWidth: _this._plusToWidth,
       onMinusWidth: _this._minusToWidth,
       onFit: _this._fitToWidth,
-      onShowCaptions: _this._onShowCaptions
+      onShowCaptions: _this._onShowCaptions,
+      onRemoveAll: onRemoveAll
     });
 
     _this._hSetActive = _this._toggleChb.bind(_this, true);

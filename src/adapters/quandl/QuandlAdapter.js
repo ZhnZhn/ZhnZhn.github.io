@@ -372,7 +372,8 @@ const fnGetSeries = function(config, json, option){
    const {
            dataColumn:yPointIndex,
            value:chartId,
-           isDrawDeltaExtrems, isNotZoomToMinMax
+           isDrawDeltaExtrems, isNotZoomToMinMax,
+           dfR
          } = option;
 
    _fnSetChartTitle(config, option);
@@ -399,7 +400,7 @@ const fnGetSeries = function(config, json, option){
    config = ConfigBuilder()
      .init(config)
      .add({
-       valueMoving: AdapterFn.valueMoving(seria)
+       valueMoving: AdapterFn.valueMoving(seria, dfR)
      })
      .addMiniVolume({
        id: chartId,
