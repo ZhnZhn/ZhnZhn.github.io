@@ -117,7 +117,6 @@ var ChartToolbar = function (_Component) {
           onPasteTo = _props.onPasteTo,
           onMinMax = _props.onMinMax,
           onClickInfo = _props.onClickInfo,
-          onClickConfig = _props.onClickConfig,
           _config$zhConfig = config.zhConfig,
           zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
           info = config.info,
@@ -171,12 +170,6 @@ var ChartToolbar = function (_Component) {
         })
       ) : null;
 
-      var _btConf = _react2.default.createElement(_ButtonTab2.default, {
-        style: S.BT_CONF,
-        caption: 'Conf',
-        onClick: onClickConfig
-      });
-
       return _react2.default.createElement(
         'div',
         { style: style },
@@ -198,8 +191,7 @@ var ChartToolbar = function (_Component) {
         ),
         _btAdd,
         _btInfo,
-        _btTabMini,
-        _btConf
+        _btTabMini
       );
     }
   }]);

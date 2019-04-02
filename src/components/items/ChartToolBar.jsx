@@ -63,8 +63,7 @@ class ChartToolbar extends Component {
             onCopy,
             onPasteTo,
             onMinMax,
-            onClickInfo,
-            onClickConfig
+            onClickInfo
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
         , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
@@ -121,14 +120,6 @@ class ChartToolbar extends Component {
      ) : null;
 
 
-   const _btConf = (
-     <ButtonTab
-       style={S.BT_CONF}
-       caption="Conf"
-       onClick={onClickConfig}
-     />
-   );
-
     return (
       <div style={style}>
          {_btTabIndicator}
@@ -148,7 +139,6 @@ class ChartToolbar extends Component {
          {_btAdd}
          {_btInfo}
          {_btTabMini}
-         {_btConf}
       </div>
     );
   }
