@@ -59,11 +59,12 @@ class ChartToolbar extends Component {
             onAddMfi, onRemoveMfi,
             onClickLegend,
             onClick2H,
-            onMinMax,
             onAddToWatch,
             onCopy,
             onPasteTo,
-            onClickInfo
+            onMinMax,
+            onClickInfo,
+            onClickConfig
           } = this.props
         , { zhConfig={}, info, zhMiniConfigs } = config
         , { isWithoutIndicator, isWithLegend, isWithoutAdd } = zhConfig;
@@ -119,6 +120,15 @@ class ChartToolbar extends Component {
        </MenuTabItem>
      ) : null;
 
+
+   const _btConf = (
+     <ButtonTab
+       style={S.BT_CONF}
+       caption="Conf"
+       onClick={onClickConfig}
+     />
+   );
+
     return (
       <div style={style}>
          {_btTabIndicator}
@@ -128,6 +138,7 @@ class ChartToolbar extends Component {
            caption="Fn"
          >
            <ModalMenuFn
+             config={config}
              onX2H={onClick2H}
              onMinMax={onMinMax}
              onCopy={onCopy}
@@ -137,6 +148,7 @@ class ChartToolbar extends Component {
          {_btAdd}
          {_btInfo}
          {_btTabMini}
+         {_btConf}
       </div>
     );
   }

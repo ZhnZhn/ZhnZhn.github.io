@@ -32,9 +32,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var CL = "bt-sub-item";
 
-var STYLE = {
+var S = {
   ACTIVE: {
-    color: '#a487d4',
     fontWeight: 'bold'
   }
 };
@@ -51,7 +50,7 @@ var SubMenuItem = (_temp = _class = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (SubMenuItem.__proto__ || Object.getPrototypeOf(SubMenuItem)).call(this, props));
 
-    _this._handleClick = function () {
+    _this._hClick = function () {
       _this.props.onClick();
       _this.setState(function (prev) {
         return {
@@ -88,15 +87,15 @@ var SubMenuItem = (_temp = _class = function (_Component) {
       }
 
       var isActive = this.state.isActive,
-          _style = isActive && !isNotActive ? STYLE.ACTIVE : null;
+          _style = isActive && !isNotActive ? S.ACTIVE : null;
 
 
       return _react2.default.createElement(
-        'div',
+        'button',
         {
           className: CL,
           style: _style,
-          onClick: this._handleClick
+          onClick: this._hClick
         },
         caption
       );

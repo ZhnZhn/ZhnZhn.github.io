@@ -294,9 +294,10 @@ class ModalMenuIndicator extends Component {
         <span style={STYLE.CAPTION}>SMA</span>
         <InputText
            ref={this._refSmaComp}
+           type="number"
            style={STYLE.N3}
            initValue={this._INIT_SMA}
-           type="number"
+           onEnter={this._handleAddSma}
         />
         <SvgPlus onClick={this._handleAddSma} />
       </div>

@@ -5,8 +5,16 @@ import SubMenuItem from './SubMenuItem'
 
 import STYLE from './ModalMenu.Style'
 
+const _isMinMax = config => config.yAxis
+ && config.yAxis.plotLines
+ && config.yAxis.plotLines.length > 0
+   ? true
+   : false;
+
+
 const ModalMenuFn = ({
   isShow, onClose,
+  config,
   onX2H, onMinMax,
   onCopy, onPasteTo
 }) => (
@@ -20,11 +28,12 @@ const ModalMenuFn = ({
         caption="x2H"
         onClick={onX2H}
       />
-      <SubMenuItem
-        caption="MinMax"
-        initialIsActive={true}
-        onClick={onMinMax}
-      />
+      { _isMinMax(config) && <SubMenuItem
+           caption="MinMax"
+           initialIsActive={true}
+           onClick={onMinMax}
+         />
+      }
       <SubMenuItem
         caption="Copy"
         isNotActive={true}

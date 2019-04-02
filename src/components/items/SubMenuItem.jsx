@@ -3,12 +3,11 @@ import React, { Component } from 'react';
 
 const CL = "bt-sub-item";
 
-const STYLE = {
-  ACTIVE : {
-    color: '#a487d4',
+const S = {
+  ACTIVE: {
     fontWeight: 'bold'
   }
-}
+};
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -32,7 +31,7 @@ class SubMenuItem extends Component{
     }
   }
 
-  _handleClick = () => {
+  _hClick = () => {
     this.props.onClick()
     this.setState(prev => ({
       isActive: !prev.isActive
@@ -47,17 +46,17 @@ class SubMenuItem extends Component{
 
     const { isActive } = this.state
     , _style = (isActive && !isNotActive)
-        ? STYLE.ACTIVE
+        ? S.ACTIVE
         : null;
 
     return(
-      <div
+      <button
         className={CL}
         style={_style}
-        onClick={this._handleClick}
+        onClick={this._hClick}
       >
         {caption}
-      </div>
+      </button>
     )
   }
 }

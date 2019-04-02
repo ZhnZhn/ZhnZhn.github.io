@@ -436,9 +436,10 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         ),
         _react2.default.createElement(_InputText2.default, {
           ref: _this2._refSmaComp,
+          type: 'number',
           style: STYLE.N3,
           initValue: _this2._INIT_SMA,
-          type: 'number'
+          onEnter: _this2._handleAddSma
         }),
         _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddSma })
       )
