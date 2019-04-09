@@ -8,6 +8,19 @@
         { "id": "DBN_ECB_CARREG" }
       ]
     },{
+      "caption": "FED",
+      "items": [
+        { "id": "DBN_FED_H15" },
+        { "id": "DBN_FED_CPRATES" },
+        { "id": "DBN_FED_IPMAJOR" }
+      ]
+    },{
+      "caption": "NBB",
+      "items": [
+        { "id": "DBN_NBB_HICP" },
+        { "id": "DBN_NBB_MARKETS" }
+      ]
+    },{
       "caption": "IMF",
       "items": [
         { "id": "DBN_IMF_CPI" },
@@ -27,12 +40,6 @@
         { "id": "DBN_WTO_GOODSTRADE_A" },
         { "id": "DBN_WTO_GOODSTRADE" },
         { "id": "DBN_WTO_SERVICETRADE" }
-      ]
-    },{
-      "caption": "National Bank of Belguim",
-      "items": [
-        { "id": "DBN_NBB_HICP" },
-        { "id": "DBN_NBB_MARKETS" }
       ]
     },{
       "caption": "DB NOMICS",
@@ -312,6 +319,67 @@
           "dfProvider": "WTO",
           "dfCode": "m2",
           "dfFnUrl": "s21"
+        }
+      }
+    },
+
+    "DBN_FED_H15": {
+      "type": "DBN_FED_H15",
+      "menuTitle" : "Selected Interest Rates, H.15",
+      "chartContainerCaption" : "DB Nomics: The Fed: Selected Interest Rates",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Frequency", "fed-h15-freq" ],
+          [ "Instrument", "fed-h15-instrument" ],
+          [ "Maturity", "fed-h15-maturity" ]
+        ],
+        "dataSource" : "DB Nomics: The Fed: Selected Interest Rates, H.15",
+        "dfProps": {
+          "dfProvider": "FED",
+          "dfCode": "H15",
+          "dfFnUrl": "s123"
+        }
+      }
+    },
+    "DBN_FED_CPRATES": {
+      "type": "DBN_FED_CPRATES",
+      "menuTitle" : "Commercial Paper Rates",
+      "chartContainerCaption" : "DB Nomics: The Fed: Commercial Paper Rates",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Rate Type", "fed-cprates-type" ],
+          [ "Maturity", "fed-cprates-maturity" ]
+        ],
+        "dataSource" : "DB Nomics: The Fed: Commercial Paper Rates",
+        "dfProps": {
+          "dfProvider": "FED",
+          "dfCode": "CP_RATES",
+          "dfFnUrl": "s12",
+          "dfPrefix": "9"
+        }
+      }
+    },
+    "DBN_FED_IPMAJOR": {
+      "type": "DBN_FED_IPMAJOR",
+      "menuTitle" : "Industrial Production",
+      "chartContainerCaption" : "DB Nomics: The Fed: Industrial Production",
+      "dialogType": "DialogSelectN",
+      "addProps": "DBN_B_S",
+      "dialogProps" : {
+        "selectProps": [
+          [ "Frequency", "fed-freq" ],
+          [ "Industry", "fed-industry-major" ],
+          [ "Adjustment", "fed-adjustment" ]
+        ],
+        "dataSource" : "DB Nomics: The Fed: Industrial Production",
+        "dfProps": {
+          "dfProvider": "FED",
+          "dfCode": "G17_IP_MAJOR_INDUSTRY_GROUPS",
+          "dfFnUrl": "s123"
         }
       }
     },
