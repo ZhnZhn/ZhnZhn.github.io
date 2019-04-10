@@ -45,6 +45,18 @@ var AlphaApi = {
 
           return C.ROOT + '?function=' + indicator + '&interval=' + interval + '&symbol=' + ticket + '&apikey=' + apiKey;
         }
+      case 'TIME_SERIES_DAILY':
+        {
+          var outputsize = option.outputsize;
+
+          return C.ROOT + '?function=' + indicator + '&outputsize=' + outputsize + '&symbol=' + ticket + '&apikey=' + apiKey;
+        }
+      case 'TIME_SERIES_DAILY_ADJUSTED':
+        {
+          var _outputsize = option.outputsize;
+
+          return C.ROOT + '?function=' + indicator + '&outputsize=' + _outputsize + '&symbol=' + ticket + '&apikey=' + apiKey;
+        }
       default:
         return C.ROOT + '?function=' + indicator + '&symbol=' + ticket + '&interval=daily&time_period=' + period + '&series_type=close&apikey=' + apiKey;
     }

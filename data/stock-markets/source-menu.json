@@ -19,6 +19,8 @@
       "items": [
         { "id": "SM_A_INDICATOR" },
         { "id": "SM_A_INTRADAY" },
+        { "id": "SM_A_DAILY" },
+        { "id": "SM_A_DAILYADJUSTED" },
         { "id": "SM_A_SECTOR" }
       ]
     },{
@@ -222,20 +224,45 @@
     "SM_A_INTRADAY" : {
         "type" : "SM_A_INTRADAY",
         "menuTitle" : "Intraday",
-        "dialogCaption" : "Alpha Intraday",
+        "dialogCaption" : "Alpha Vantage: Intraday",
         "chartContainerCaption" : "Alpha Vantage: Intraday",
         "dialogType" : "AlphaIntradayDialog",
         "dialogProps" : {
           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
-          "oneURI" : "./data/stock-markets/alpha-indicators.json",
-          "oneJsonProp" : "indicators",
-          "oneCaption" : "Indicators",
           "valueFn" : "ROne",
           "loadId" : "AL",
-          "columnName" : "Close",
-          "dataSource" : "Alpha Vantage: Intraday"
+          "dataSource" : "Alpha Vantage: Intraday",
+          "dfT": "INTRADAY"
         }
      },
+     "SM_A_DAILY" : {
+         "type" : "SM_A_DAILY",
+         "menuTitle" : "Daily",
+         "dialogCaption" : "Alpha Vantage: Daily",
+         "chartContainerCaption" : "Alpha Vantage: Daily",
+         "dialogType" : "AlphaIntradayDialog",
+         "dialogProps" : {
+           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
+           "valueFn" : "ROne",
+           "loadId" : "AL",
+           "dataSource" : "Alpha Vantage: Daily",
+           "dfT": "DAILY"
+         }
+      },
+      "SM_A_DAILYADJUSTED" : {
+          "type" : "SM_A_DAILYADJUSTED",
+          "menuTitle" : "Daily Adjusted",
+          "dialogCaption" : "Alpha Vantage: Daily Adjusted",
+          "chartContainerCaption" : "Alpha Vantage: Daily Adjusted",
+          "dialogType" : "AlphaIntradayDialog",
+          "dialogProps" : {
+            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
+            "valueFn" : "ROne",
+            "loadId" : "AL",
+            "dataSource" : "Alpha Vantage: Daily Adjusted",
+            "dfT": "DAILY_ADJUSTED"
+          }
+       },
      "SM_A_SECTOR" : {
          "type" : "SM_A_SECTOR",
          "menuTitle" : "Performance by Sector",

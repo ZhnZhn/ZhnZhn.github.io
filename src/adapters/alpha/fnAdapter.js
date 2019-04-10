@@ -6,17 +6,17 @@ const {
   valueMoving
 } = AdapterFn;
 
-const _crZhConfig = id => ({
+const _crZhConfig = (id, dataSource) => ({
   id: id,
   key: id,
   isWithLegend: true,
   legend: stockSeriesLegend(),
-  dataSource: "Alpha Vantage"
+  dataSource: dataSource || "Alpha Vantage"
 });
 
 const fnAdapter = {
-  crIntradayConfigOption: ({ id, data }) => ({
-    zhConfig: _crZhConfig(id),
+  crIntradayConfigOption: ({ id, data, dataSource }) => ({
+    zhConfig: _crZhConfig(id, dataSource),
     valueMoving: valueMoving(data)
   })
 }

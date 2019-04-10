@@ -11,7 +11,6 @@ const _isMinMax = config => config.yAxis
    ? true
    : false;
 
-
 const ModalMenuFn = ({
   isShow, onClose,
   config,

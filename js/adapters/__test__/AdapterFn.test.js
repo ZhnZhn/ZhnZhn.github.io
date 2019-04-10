@@ -48,10 +48,11 @@ describe('toUpperCaseFirst', function () {
     expect(fn('abc')).toBe('Abc');
     expect(fn('aBc')).toBe('ABc');
     expect(fn('aBC')).toBe('ABC');
-
-    expect(fn(new String('abc'))).toBe('Abc');
-    expect(fn(new String('aBc'))).toBe('ABc');
-    expect(fn(new String('aBC'))).toBe('ABC');
+  });
+  test('should retunr empty string for instance of String', function () {
+    expect(fn(new String('abc'))).toBe('');
+    expect(fn(new String('aBc'))).toBe('');
+    expect(fn(new String('aBC'))).toBe('');
   });
   test('should return empty string in edge case', function () {
     expect(fn('')).toBe(EMPTY);

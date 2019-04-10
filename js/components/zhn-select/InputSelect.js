@@ -230,7 +230,8 @@ var InputSelect = (_temp = _class = function (_Component) {
           className: CL.INPUT,
           placeholder: placeholder,
           onChange: this._handleInputChange,
-          onKeyDown: this._handleInputKeyDown }),
+          onKeyDown: this._handleInputKeyDown
+        }),
         afterInputEl,
         _react2.default.createElement('hr', { className: CL.INPUT_HR }),
         _domOptions
@@ -376,7 +377,6 @@ var InputSelect = (_temp = _class = function (_Component) {
 
       var nextComp = _this2._getActiveItemComp();
       _this2._decorateActiveRowComp(nextComp);
-      //this.indexNode.innerHTML = this.indexActiveOption
 
       var offsetTop = nextComp.offsetTop;
       var scrollTop = _this2.optionsComp.scrollTop;
@@ -411,6 +411,11 @@ var InputSelect = (_temp = _class = function (_Component) {
   };
 
   this._handleInputKeyDown = function (event) {
+    //tab && isShowOptions
+    if (event.keyCode === 9 && _this2.state.isShowOption) {
+      event.preventDefault();
+      return;
+    }
     switch (event.keyCode) {
       // enter
       case 13:
@@ -453,7 +458,6 @@ var InputSelect = (_temp = _class = function (_Component) {
         //down
         if (!_this2.state.isShowOption) {
           _this2._showOptions(0);
-          //this.setState({ isShowOption : true });
         } else {
           event.preventDefault();
           _this2._stepDownOption();
@@ -607,10 +611,6 @@ var InputSelect = (_temp = _class = function (_Component) {
     );
   };
 
-  this._refArrowCell = function (c) {
-    return _this2.arrowCell = c;
-  };
-
   this._crAfterInputEl = function () {
     var _props3 = _this2.props,
         isLoading = _props3.isLoading,
@@ -629,16 +629,14 @@ var InputSelect = (_temp = _class = function (_Component) {
       var _arrowStyle = isShowOption ? S.ARROW_SHOW : null;
       _placeholder = placeholder ? placeholder : 'Select ' + optionName + '...';
       _afterInputEl = _react2.default.createElement(_ArrowCell2.default, {
-        ref: _this2._refArrowCell,
         arrowStyle: _arrowStyle,
         onClick: _this2._handleToggleOptions
       });
     } else if (isLoading) {
       _placeholder = 'Loading ' + optionNames + '...';
       _afterInputEl = _react2.default.createElement('span', {
-        className: CL.SPINNER
-        //style={S.SPINNER_CELL}
-        , 'data-loader': 'circle'
+        className: CL.SPINNER,
+        'data-loader': 'circle'
       });
     } else if (isLoadingFailed) {
       _placeholder = 'Loading ' + optionNames + ' Failed';

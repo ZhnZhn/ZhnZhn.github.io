@@ -14,22 +14,23 @@ var stockSeriesLegend = _AdapterFn2.default.stockSeriesLegend,
     valueMoving = _AdapterFn2.default.valueMoving;
 
 
-var _crZhConfig = function _crZhConfig(id) {
+var _crZhConfig = function _crZhConfig(id, dataSource) {
   return {
     id: id,
     key: id,
     isWithLegend: true,
     legend: stockSeriesLegend(),
-    dataSource: "Alpha Vantage"
+    dataSource: dataSource || "Alpha Vantage"
   };
 };
 
 var fnAdapter = {
   crIntradayConfigOption: function crIntradayConfigOption(_ref) {
     var id = _ref.id,
-        data = _ref.data;
+        data = _ref.data,
+        dataSource = _ref.dataSource;
     return {
-      zhConfig: _crZhConfig(id),
+      zhConfig: _crZhConfig(id, dataSource),
       valueMoving: valueMoving(data)
     };
   }

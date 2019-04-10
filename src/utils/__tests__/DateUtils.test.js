@@ -20,9 +20,9 @@ describe('isYmd YYYY-MM-DD', () => {
     expect(fn("2010-14-01")).toBe(false)
     expect(fn("2010-02-32")).toBe(false)
   })
-  test('min valid value is 1999-01-01', () => {
-    expect(fn('1999-01-01')).toBe(true)
-    expect(fn('1998-12-30')).toBe(false)
+  test('min valid value is 1990-01-01', () => {
+    expect(fn('1990-01-01')).toBe(true)
+    expect(fn('1989-12-30')).toBe(false)
   })
   test('should year be not future', () => {
     expect(fn('2030-01-01')).toBe(false)

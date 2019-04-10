@@ -9,11 +9,16 @@ import Tooltip from '../../charts/Tooltip'
 import fnAdapter from './fnAdapter'
 
 const {
-        ymdhmsToUTC,
-        volumeColumnPoint,
-      } = AdapterFn;
+   ymdToUTC,
+   ymdhmsToUTC,
+   volumeColumnPoint,
+} = AdapterFn;
 
 const { crIntradayConfigOption } = fnAdapter;
+
+//const DAILY = 'Daily';
+const INTRADAY = 'INTRADAY'
+const DAILY_ADJUSTED = 'DAILY_ADJUSTED'
 
 const C = {
   TIME_START_DAY: '09:30:00',
@@ -45,8 +50,24 @@ const _fMarkerColor = (date) => {
   return { marker, color };
 }
 
+const _crSeriaOptions = dfT => {
+  const _isIntraday = dfT === INTRADAY;
+  const _isAdjusted = dfT === DAILY_ADJUSTED;
+  return {
+    toUTC: _isIntraday
+      ? ymdhmsToUTC
+      : ymdToUTC,
+    pnClose: _isAdjusted
+      ? '5. adjusted close'
+      : '4. close',
+    pnVolume: _isAdjusted
+      ? '6. volume'
+      : '5. volume'
+  };
+};
+
 const _crSeriaData = (json, option, config, chartId) => {
-  const { interval } = option
+  const { interval, dfT } = option
   , _propName = `Time Series (${interval})`
   , _value = json[_propName]
   , _dateKeys = ( _value)
@@ -54,22 +75,26 @@ const _crSeriaData = (json, option, config, chartId) => {
        : []
   , _data = []
   , _dataVolume = [], _dataVolumeColumn = []
-  , _dataHigh = [], _dataLow = [], _dataOpen = [];
+  , _dataHigh = [], _dataLow = [], _dataOpen = []
+  , { toUTC, pnClose, pnVolume } = _crSeriaOptions(dfT);
+
   let i = 0, _max = _dateKeys.length
   , _minClose = Number.POSITIVE_INFINITY
   , _maxClose = Number.NEGATIVE_INFINITY
   , _dateMs
-  , _date, _point, _open, _high, _low, _close, _volume ;
+  , _date, _point
+  , _open, _high, _low, _closeV, _close, _volume ;
   for (i; i<_max; i++) {
     _date = _dateKeys[i]
     _point = _value[_date]
     _open = parseFloat(_point['1. open'])
     _high = parseFloat(_point['2. high'])
     _low = parseFloat(_point['3. low'])
-    _close = parseFloat(_point['4. close'])
-    _volume = parseFloat(_point['5. volume'])
+    _closeV = parseFloat(_point['4. close'])
+    _close = parseFloat(_point[pnClose])
+    _volume = parseFloat(_point[pnVolume])
 
-    _dateMs = ymdhmsToUTC(_date)
+    _dateMs = toUTC(_date)
     _data.push({
       x: _dateMs, y: _close, ..._fMarkerColor(_date)
     })
@@ -81,7 +106,9 @@ const _crSeriaData = (json, option, config, chartId) => {
     _dataVolume.push([_dateMs, _volume])
     _dataVolumeColumn.push(
         volumeColumnPoint({
-           open: _open, close: _close, volume: _volume,
+           open: _open,
+           close: _closeV,
+           volume: _volume,
            date: _dateMs,
            option: { _high: _high, _low: _low }
         })
@@ -94,6 +121,7 @@ const _crSeriaData = (json, option, config, chartId) => {
       _maxClose = _close
     }
   }
+
 
   ChartConfig.setStockSerias(
     config, _data, _dataHigh, _dataLow, _dataOpen, chartId
@@ -113,33 +141,53 @@ const _toDataDaily = (data) => {
   return data.filter(p => p.color === C.CLOSE_DAY);
 }
 
+const _crChartOptions = (dfT, data) => {
+  const _isIntraday = dfT === INTRADAY;
+  return {
+    dataDaily: _isIntraday
+       ? _toDataDaily(data)
+       : data,
+    seriaTooltip: _isIntraday
+      ? Tooltip.fnBasePointFormatterT
+      : Tooltip.fnBasePointFormatter,
+    volumeTooltip: _isIntraday
+      ? Tooltip.volumeDmyt
+      : Tooltip.volume
+  };
+};
+
 const AlphaIntradayAdapter = {
   toConfig(json, option){
     const baseConfig = ChartConfig.fBaseAreaConfig()
-        , { value, interval } = option
-        , _chartId = value
-        , {
-            data, minClose, maxClose,
-            dColumn, dVolume
-          } = _crSeriaData(json, option, baseConfig, _chartId )
-        , _dataDaily = _toDataDaily(data);
-
+    , { value, interval, dfT, dataSource } = option
+    , _chartId = value
+    , {
+        data, minClose, maxClose,
+        dColumn, dVolume
+      } = _crSeriaData(json, option, baseConfig, _chartId )
+    , {
+        dataDaily,
+        seriaTooltip, volumeTooltip
+      } = _crChartOptions(dfT, data);
+    
     const config = ConfigBuilder()
       .init(baseConfig)
       .add('chart', { spacingTop: 25 })
       .addCaption(value, `Time Series (${interval})`)
-      .addTooltip(Tooltip.fnBasePointFormatterT)
+      .addTooltip(seriaTooltip)
       .add({
         ...crIntradayConfigOption({
           id: _chartId,
-          data: _dataDaily
+          data: dataDaily,
+          dataSource
         })
       })
+      .checkThreshold()
       .setMinMax(minClose, maxClose)
       .addMiniVolume({
         id: _chartId,
         dVolume, dColumn,
-        tooltipColumn: Chart.fTooltip(Tooltip.volumeDmyt)
+        tooltipColumn: Chart.fTooltip(volumeTooltip)
       })
       .toConfig();
 

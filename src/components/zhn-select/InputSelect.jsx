@@ -277,7 +277,6 @@ class InputSelect extends Component {
 
        const nextComp = this._getActiveItemComp();
        this._decorateActiveRowComp(nextComp)
-       //this.indexNode.innerHTML = this.indexActiveOption
 
        const offsetTop = nextComp.offsetTop
        const scrollTop = this.optionsComp.scrollTop;
@@ -312,6 +311,11 @@ class InputSelect extends Component {
   }
 
   _handleInputKeyDown = (event) => {
+    //tab && isShowOptions
+    if (event.keyCode === 9 && this.state.isShowOption) {
+      event.preventDefault()
+      return;
+    }
     switch(event.keyCode){
       // enter
       case 13:{
@@ -349,7 +353,6 @@ class InputSelect extends Component {
       case 40: //down
         if (!this.state.isShowOption){
           this._showOptions(0)
-          //this.setState({ isShowOption : true });
         } else {
           event.preventDefault()
           this._stepDownOption()
@@ -481,7 +484,6 @@ class InputSelect extends Component {
     );
   }
 
-  _refArrowCell = c => this.arrowCell = c
 
   _crAfterInputEl = () => {
     const {
@@ -500,7 +502,6 @@ class InputSelect extends Component {
           : `Select ${optionName}...`;
       _afterInputEl = (
          <ArrowCell
-           ref={this._refArrowCell}
            arrowStyle={_arrowStyle}
            onClick={this._handleToggleOptions}
          />
@@ -510,10 +511,8 @@ class InputSelect extends Component {
       _afterInputEl = (
         <span
           className={CL.SPINNER}
-          //style={S.SPINNER_CELL}
           data-loader="circle"
-        >
-        </span>
+        />
       );
     } else if (isLoadingFailed) {
        _placeholder=`Loading ${optionNames} Failed`;
@@ -559,8 +558,8 @@ class InputSelect extends Component {
            className={CL.INPUT}
            placeholder={placeholder}
            onChange={this._handleInputChange}
-           onKeyDown={this._handleInputKeyDown}>
-        </input>
+           onKeyDown={this._handleInputKeyDown}
+        />
         {afterInputEl}
         <hr className={CL.INPUT_HR} />
         {_domOptions}

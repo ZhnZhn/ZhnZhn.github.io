@@ -6,15 +6,10 @@ import crMenuMore from '../dialogs/MenuMore'
 
 const DF = {
   INTERVAL: '15min',
+  PERIOD: 'compact'
 };
 
-const _testTicket = (value) => {
-  if (String(value).trim() === '') {
-    return false;
-  } else {
-    return true;
-  }
-}
+const _testTicket = value => Boolean((''+value).trim());
 
 const _intervalOptions = [
   { caption: '1 min', value: '1min' },
@@ -23,6 +18,59 @@ const _intervalOptions = [
   { caption: '30 min', value: '30min' },
   { caption: '60 min', value: '60min' }
 ]
+
+const _periodOptions = [
+  { caption: 'compact (100 days)', value: 'compact' },
+  { caption: 'full (of 20+ years, about 1MB)', value: 'full' },
+];
+
+const _r = {
+  INTRADAY: {
+    caption: "Interval",
+    placeholder: "Default: 15min",
+    options: _intervalOptions
+  },
+  DAILY: {
+    caption: "Period",
+    placeholder: "Default: Compact",
+    options: _periodOptions
+  }
+}
+
+const _rDaily = {
+  DAILY: {
+    indicator: 'TIME_SERIES_DAILY',
+    interval: 'Daily'
+  },
+  DAILY_ADJUSTED: {
+    indicator: 'TIME_SERIES_DAILY_ADJUSTED',
+    interval: 'Daily'
+    //interval: 'Daily Adjusted'
+  }
+};
+
+const _getConf = (key) => _r[key] || _r['DAILY'];
+
+
+const _getInterval = (input, df) => input
+  ? input.value
+  : df;
+const _crLoadOptions = (key, input) => {
+  if (key === 'INTRADAY') {
+   return {
+     indicator: 'TIME_SERIES_INTRADAY',
+     interval: _getInterval(input, DF.INTERVAL),
+     dfT: key
+    };
+  }
+  const _conf = _rDaily[key] || _rDaily.DAILY;
+  return {
+     ..._conf,
+     outputsize: _getInterval(input, DF.PERIOD),
+     dfT: key,
+   };
+}
+
 
 @Decor.withToolbar
 @Decor.withLoad
@@ -61,27 +109,23 @@ class AlphaIntradayDialog extends Component {
   }
 
   _handleLoad = () => {
-    const
+    const { dfT, dataSource } = this.props
+    , _ticket = this.ticketComp.isValid()
+        ? this.ticketComp.getValue()
+        : undefined
+    , _options = _crLoadOptions(dfT, this.interval)
+    , _value = `${_ticket || ''} (${_options.interval})`;
 
-         _ticket = (this.ticketComp.isValid())
-             ? this.ticketComp.getValue()
-             : undefined
-        , _interval = (this.interval)
-             ? this.interval.value
-             : DF.INTERVAL
-        , _value = `${_ticket} (${_interval})`;
-    const option = {
+    this.props.onLoad({
       loadId: 'AL_I',
-      indicator: 'TIME_SERIES_INTRADAY',
-      interval: _interval,
+      ..._options,
       ticket: _ticket,
       value: _value, //for label
-    }
-    this.props.onLoad(option)
+      dataSource
+    })
   }
 
   _handleClose = () => {
-    //this._handleWithValidationClose(this._createValidationMessages);
     this.props.onClose();
   }
 
@@ -92,13 +136,14 @@ class AlphaIntradayDialog extends Component {
 
   render() {
     const {
-            isShow, caption,
-            onShow, onFront
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels
-          } = this.state ;
+      isShow, caption,
+      onShow, onFront,
+      dfT
+    } = this.props
+    , {
+      isToolbar,
+      isShowLabels
+    } = this.state;
 
     return (
       <D.DraggableDialog
@@ -124,9 +169,10 @@ class AlphaIntradayDialog extends Component {
           />
           <D.RowInputSelect
             isShowLabels={isShowLabels}
-            caption="Interval"
-            placeholder="Default: 15min"
-            options={_intervalOptions}
+            { ..._getConf(dfT)}
+            //caption="Interval"
+            //placeholder="Default: 15min"
+            //options={_intervalOptions}
             onSelect={this._handleSelectInterval}
           />
       </D.DraggableDialog>

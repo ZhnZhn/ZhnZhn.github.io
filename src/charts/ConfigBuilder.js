@@ -142,7 +142,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     )
     return this;
   },
-  addCaption(title='', subtitle=''){
+  addCaption(title='', subtitle=''){    
     return this
       .addTitle(title)
       .addSubtitle(subtitle);
@@ -267,7 +267,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
 
   checkThreshold(seriaIndex=0){
     const config = this.config
-    , data = config.series[seriaIndex].data;    
+    , data = config.series[seriaIndex].data;
     if (data.length > 1000) {
       config.plotOptions = Object.assign(
         config.plotOptions || {}, {

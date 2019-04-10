@@ -17,6 +17,7 @@ module.exports = {
             "highcharts/modules/exporting", "highcharts/modules/offline-exporting",
             "accounting",
             "jsonstat",
+            "memoize-one", 
             "babel-runtime/helpers/classCallCheck",
             "babel-runtime/helpers/createClass",
             "babel-runtime/helpers/possibleConstructorReturn",

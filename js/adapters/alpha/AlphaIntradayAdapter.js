@@ -34,10 +34,15 @@ var _fnAdapter2 = _interopRequireDefault(_fnAdapter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ymdhmsToUTC = _AdapterFn2.default.ymdhmsToUTC,
+var ymdToUTC = _AdapterFn2.default.ymdToUTC,
+    ymdhmsToUTC = _AdapterFn2.default.ymdhmsToUTC,
     volumeColumnPoint = _AdapterFn2.default.volumeColumnPoint;
 var crIntradayConfigOption = _fnAdapter2.default.crIntradayConfigOption;
 
+//const DAILY = 'Daily';
+
+var INTRADAY = 'INTRADAY';
+var DAILY_ADJUSTED = 'DAILY_ADJUSTED';
 
 var C = {
   TIME_START_DAY: '09:30:00',
@@ -72,8 +77,19 @@ var _fMarkerColor = function _fMarkerColor(date) {
   return { marker: marker, color: color };
 };
 
+var _crSeriaOptions = function _crSeriaOptions(dfT) {
+  var _isIntraday = dfT === INTRADAY;
+  var _isAdjusted = dfT === DAILY_ADJUSTED;
+  return {
+    toUTC: _isIntraday ? ymdhmsToUTC : ymdToUTC,
+    pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
+    pnVolume: _isAdjusted ? '6. volume' : '5. volume'
+  };
+};
+
 var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
   var interval = option.interval,
+      dfT = option.dfT,
       _propName = 'Time Series (' + interval + ')',
       _value = json[_propName],
       _dateKeys = _value ? Object.keys(_value).sort() : [],
@@ -82,7 +98,11 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
       _dataVolumeColumn = [],
       _dataHigh = [],
       _dataLow = [],
-      _dataOpen = [];
+      _dataOpen = [],
+      _crSeriaOptions2 = _crSeriaOptions(dfT),
+      toUTC = _crSeriaOptions2.toUTC,
+      pnClose = _crSeriaOptions2.pnClose,
+      pnVolume = _crSeriaOptions2.pnVolume;
 
   var i = 0,
       _max = _dateKeys.length,
@@ -94,6 +114,7 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
       _open = void 0,
       _high = void 0,
       _low = void 0,
+      _closeV = void 0,
       _close = void 0,
       _volume = void 0;
   for (i; i < _max; i++) {
@@ -102,10 +123,11 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
     _open = parseFloat(_point['1. open']);
     _high = parseFloat(_point['2. high']);
     _low = parseFloat(_point['3. low']);
-    _close = parseFloat(_point['4. close']);
-    _volume = parseFloat(_point['5. volume']);
+    _closeV = parseFloat(_point['4. close']);
+    _close = parseFloat(_point[pnClose]);
+    _volume = parseFloat(_point[pnVolume]);
 
-    _dateMs = ymdhmsToUTC(_date);
+    _dateMs = toUTC(_date);
     _data.push((0, _extends3.default)({
       x: _dateMs, y: _close }, _fMarkerColor(_date)));
 
@@ -115,7 +137,9 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
 
     _dataVolume.push([_dateMs, _volume]);
     _dataVolumeColumn.push(volumeColumnPoint({
-      open: _open, close: _close, volume: _volume,
+      open: _open,
+      close: _closeV,
+      volume: _volume,
       date: _dateMs,
       option: { _high: _high, _low: _low }
     }));
@@ -145,11 +169,22 @@ var _toDataDaily = function _toDataDaily(data) {
   });
 };
 
+var _crChartOptions = function _crChartOptions(dfT, data) {
+  var _isIntraday = dfT === INTRADAY;
+  return {
+    dataDaily: _isIntraday ? _toDataDaily(data) : data,
+    seriaTooltip: _isIntraday ? _Tooltip2.default.fnBasePointFormatterT : _Tooltip2.default.fnBasePointFormatter,
+    volumeTooltip: _isIntraday ? _Tooltip2.default.volumeDmyt : _Tooltip2.default.volume
+  };
+};
+
 var AlphaIntradayAdapter = {
   toConfig: function toConfig(json, option) {
     var baseConfig = _ChartConfig2.default.fBaseAreaConfig(),
         value = option.value,
         interval = option.interval,
+        dfT = option.dfT,
+        dataSource = option.dataSource,
         _chartId = value,
         _crSeriaData2 = _crSeriaData(json, option, baseConfig, _chartId),
         data = _crSeriaData2.data,
@@ -157,16 +192,20 @@ var AlphaIntradayAdapter = {
         maxClose = _crSeriaData2.maxClose,
         dColumn = _crSeriaData2.dColumn,
         dVolume = _crSeriaData2.dVolume,
-        _dataDaily = _toDataDaily(data);
+        _crChartOptions2 = _crChartOptions(dfT, data),
+        dataDaily = _crChartOptions2.dataDaily,
+        seriaTooltip = _crChartOptions2.seriaTooltip,
+        volumeTooltip = _crChartOptions2.volumeTooltip;
 
 
-    var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(_Tooltip2.default.fnBasePointFormatterT).add((0, _extends3.default)({}, crIntradayConfigOption({
+    var config = (0, _ConfigBuilder2.default)().init(baseConfig).add('chart', { spacingTop: 25 }).addCaption(value, 'Time Series (' + interval + ')').addTooltip(seriaTooltip).add((0, _extends3.default)({}, crIntradayConfigOption({
       id: _chartId,
-      data: _dataDaily
-    }))).setMinMax(minClose, maxClose).addMiniVolume({
+      data: dataDaily,
+      dataSource: dataSource
+    }))).checkThreshold().setMinMax(minClose, maxClose).addMiniVolume({
       id: _chartId,
       dVolume: dVolume, dColumn: dColumn,
-      tooltipColumn: _Chart2.default.fTooltip(_Tooltip2.default.volumeDmyt)
+      tooltipColumn: _Chart2.default.fTooltip(volumeTooltip)
     }).toConfig();
 
     return {
