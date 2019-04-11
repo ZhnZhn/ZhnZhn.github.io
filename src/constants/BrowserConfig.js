@@ -147,7 +147,7 @@ const BrowserConfig = {
     withoutItemCounter: true,
     modalDialogType: MD.STOCKS_BY_SECTOR,
     chartContainerType: BT.NYSE_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
-    contFullCaption: 'Quandl: NYSE by Sectors',
+    contFullCaption: 'NYSE by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
     descrUrl: './data/nyse-stocks/nyse-stocks.html'
@@ -160,7 +160,7 @@ const BrowserConfig = {
     withoutItemCounter: true,
     modalDialogType: MD.STOCKS_BY_SECTOR,
     chartContainerType: BT.NASDAQ_STOCKS + '_' + BT.STOCKS_BY_SECTORS,
-    contFullCaption: 'Quandl: NASDAQ by Sectors',
+    contFullCaption: 'NASDAQ by Sectors',
     itemOptionType: 'ItemTopicOption',
     itemType: 'ItemWithCap',
     descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'

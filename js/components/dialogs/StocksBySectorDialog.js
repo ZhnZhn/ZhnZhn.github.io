@@ -24,22 +24,13 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class;
-//import PropTypes from "prop-types";
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _DateUtils = require('../../utils/DateUtils');
-
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
-
 var _ChartActions = require('../../flux/actions/ChartActions');
 
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
-
-var _Type = require('../../constants/Type');
 
 var _DialogCell = require('./DialogCell');
 
@@ -53,58 +44,64 @@ var _NasdaqLink = require('../native-links/NasdaqLink');
 
 var _NasdaqLink2 = _interopRequireDefault(_NasdaqLink);
 
-var _withValidationLoad = require('./decorators/withValidationLoad');
-
-var _withValidationLoad2 = _interopRequireDefault(_withValidationLoad);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var getFromDate = _DateUtils2.default.getFromDate,
-    getToDate = _DateUtils2.default.getToDate,
-    isYmd = _DateUtils2.default.isYmd;
+//import PropTypes from "prop-types";
 
-
-var ABSENT = "Absent",
-    ABSENT_VALIDATION_MSG = "Data Source for this item Absent";
-
-var STYLE = {
+var S = {
+  ROOT_NOT_LABELS: {
+    width: 280
+  },
   CAPTION_SPAN: {
     display: 'inline-block',
-    maxWidth: '295px'
+    maxWidth: 295
   },
   SOURCE_ROOT: {
     lineHeight: 1.5,
-    marginBottom: '0px'
+    marginBottom: 0
   },
   LINK_SHOW_HIDE: {
-    marginBottom: '10px'
+    marginBottom: 10
   },
   LINK_ROOT: {
-    marginTop: '0px',
-    marginBottom: '0px',
+    marginTop: 0,
+    marginBottom: 0,
     lineHeight: 1.5,
     fontWeight: 'bold'
   },
   LINK_CAPTION: {
-    color: '#1B75BB',
+    color: '#1b75bb',
     display: 'inline-block',
     textAlign: 'right',
-    width: '100px',
-    paddingRight: '5px',
+    width: 100,
+    paddingRight: 5,
     fontSize: '16px'
+  },
+  LINK_NOT_LABELS: {
+    marginLeft: 8
   }
 };
 
-var _getItemSource = function _getItemSource(props) {
-  var _props$data = props.data,
-      data = _props$data === undefined ? {} : _props$data,
-      _data$item = data.item,
-      item = _data$item === undefined ? {} : _data$item,
-      _item$id = item.id,
-      id = _item$id === undefined ? '' : _item$id,
-      arr = id.split('/');
+var SOURCE_OPTIONS = [{
+  caption: 'Alpha Vantage: Daily (100)',
+  value: 'AL_I',
+  dfProps: {
+    indicator: 'TIME_SERIES_DAILY',
+    interval: 'Daily',
+    outputsize: 'compact'
+  }
+}, {
+  caption: 'Barchart: 6 Months', value: 'B'
+}, {
+  caption: 'IEX Platform: 2 Years', value: 'IEX',
+  dfProps: {
+    dfType: "chart",
+    dfPeriod: "2y"
+  }
+}];
 
-  return arr.length < 2 ? ABSENT : arr[0];
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
 };
 
 var _getItemId = function _getItemId(props) {
@@ -112,124 +109,112 @@ var _getItemId = function _getItemId(props) {
 };
 
 var _createInitialState = function _createInitialState(props) {
-  var itemId = _getItemId(props),
-      _props$data2 = props.data,
-      data = _props$data2 === undefined ? {} : _props$data2,
-      fromDate = data.fromDate,
-      initToDate = data.initToDate,
-      onTestDate = data.onTestDate,
-      _isShowLink = _getItemSource(props) !== ABSENT ? false : true;
-
+  var itemId = _getItemId(props);
   return {
     itemId: itemId,
-    isShowLink: _isShowLink,
-    initFromDate: fromDate || getFromDate(2),
-    initToDate: initToDate || getToDate(),
-    onTestDate: onTestDate || isYmd,
-    validationMessages: []
+    isShowLink: false
   };
 };
 
-var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = function (_Component) {
+var StocksBySectorDialog = function (_Component) {
   (0, _inherits3.default)(StocksBySectorDialog, _Component);
 
   /*
    static propTypes = {
-     isShow: PropTypes.bool.isRequired,
-     data: PropTypes.object.isRequired,
+     isShow: PropTypes.bool,
+     data: PropTypes.object,
      store: PropTypes.object,
-     onClose: PropTypes.func.isRequired
+     onClose: PropTypes.func
    }
   */
 
   function StocksBySectorDialog(props) {
     (0, _classCallCheck3.default)(this, StocksBySectorDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (StocksBySectorDialog.__proto__ || Object.getPrototypeOf(StocksBySectorDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (StocksBySectorDialog.__proto__ || Object.getPrototypeOf(StocksBySectorDialog)).call(this, props));
 
-    _this._handleClickLink = function () {
-      _this.setState({
-        isShowLink: !_this.state.isShowLink
+    _this._hClickLabels = function () {
+      _this.setState(function (prevState) {
+        return {
+          isShowLabels: !prevState.isShowLabels
+        };
       });
     };
 
-    _this._handleLoad = function () {
-      var validationMessages = _this._getValidationMessages();
-      if (validationMessages.isValid) {
-        var _this$props = _this.props,
-            data = _this$props.data,
-            onClose = _this$props.onClose,
-            _data$item2 = data.item,
-            item = _data$item2 === undefined ? {} : _data$item2,
-            browserType = data.browserType,
-            chartContainerType = data.chartContainerType,
-            dialogProps = data.dialogProps,
-            id = item.id,
-            text = item.text,
-            _this$datesFragment$g = _this.datesFragment.getValues(),
-            fromDate = _this$datesFragment$g.fromDate,
-            toDate = _this$datesFragment$g.toDate,
-            _source = _getItemSource(_this.props),
-            option = (0, _extends3.default)({
-          title: text,
-          value: id,
-          item: item,
-          fromDate: fromDate,
-          toDate: toDate,
-          loadId: _Type.LoadType.WL,
-          id: id,
-          linkFn: 'NASDAQ',
-          columnName: 'Close',
-          seriaColumnNames: ['Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close'],
-          dataSource: '(Code: ' + _source + ')'
-        }, dialogProps);
-
-        _ChartActions2.default.loadStock({ chartType: chartContainerType, browserType: browserType }, option);
-        onClose();
-      }
-      _this._updateValidationMessages(validationMessages);
+    _this._hClickLink = function () {
+      _this.setState(function (prevState) {
+        return {
+          isShowLink: !prevState.isShowLink
+        };
+      });
     };
 
-    _this._getValidationMessages = function () {
-      var msg = [];
+    _this._hShow = function () {
+      var data = _this.props.data;
 
-      if (_getItemSource(_this.props) === ABSENT) {
-        msg.push(ABSENT_VALIDATION_MSG);
+      if (data && _isFn(data.onShow)) {
+        data.onShow();
       }
-
-      var _this$datesFragment$g2 = _this.datesFragment.getValidation(),
-          isValid = _this$datesFragment$g2.isValid,
-          datesMsg = _this$datesFragment$g2.datesMsg;
-
-      if (!isValid) {
-        msg = msg.concat(datesMsg);
-      }
-      msg.isValid = msg.length === 0 ? true : false;
-      return msg;
     };
 
-    _this._handleClose = function () {
-      if (_this.state.validationMessages.length > 0) {
-        _this.setState({
-          validationMessages: _this._getValidationMessages()
-        });
-      }
-      _this.props.onClose();
+    _this._hSelectDataSource = function (item) {
+      _this._dataSource = item;
     };
 
-    _this._refDatesFragment = function (c) {
-      return _this.datesFragment = c;
+    _this._getDataSource = function () {
+      return _this._dataSource || SOURCE_OPTIONS[2];
     };
 
-    _this.toolbarButtons = [{ caption: 'L', onClick: _this._handleClickLink }];
+    _this._hLoad = function () {
+      var _this$props = _this.props,
+          data = _this$props.data,
+          onClose = _this$props.onClose,
+          _data$item = data.item,
+          item = _data$item === undefined ? {} : _data$item,
+          browserType = data.browserType,
+          chartContainerType = data.chartContainerType,
+          dialogProps = data.dialogProps,
+          id = item.id,
+          text = item.text,
+          _this$_getDataSource = _this._getDataSource(),
+          caption = _this$_getDataSource.caption,
+          value = _this$_getDataSource.value,
+          dfProps = _this$_getDataSource.dfProps;
+
+      _ChartActions2.default.loadStock({
+        chartType: chartContainerType, browserType: browserType
+      }, (0, _extends3.default)({
+        title: text,
+        value: id,
+        ticket: id,
+        item: item,
+        loadId: value,
+        id: id,
+        linkFn: 'NASDAQ',
+        dataSource: caption
+      }, dialogProps, dfProps));
+      onClose();
+    };
+
+    _this.toolbarButtons = [{
+      caption: 'L',
+      title: 'Click to toggle labels',
+      onClick: _this._hClickLabels
+    }, {
+      caption: 'O',
+      title: 'Click to toggle options',
+      onClick: _this._hClickLink
+    }];
     _this._commandButtons = [_react2.default.createElement(_DialogCell2.default.Button.Load, {
       key: 'load',
-      onClick: _this._handleLoad
+      onClick: _this._hLoad
     }), _react2.default.createElement(_DialogCell2.default.Button.Show, {
       key: 'show',
-      onClick: props.data.onShow
+      onClick: _this._hShow
     })];
-    _this.state = _createInitialState(props);
+    _this.state = (0, _extends3.default)({}, _createInitialState(props), {
+      isShowLabels: true
+    });
     return _this;
   }
 
@@ -246,59 +231,56 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = function (
     value: function render() {
       var _props = this.props,
           isShow = _props.isShow,
-          _props$data3 = _props.data,
-          data = _props$data3 === undefined ? {} : _props$data3,
-          _data$item3 = data.item,
-          item = _data$item3 === undefined ? {} : _data$item3,
+          _props$data = _props.data,
+          data = _props$data === undefined ? {} : _props$data,
+          onClose = _props.onClose,
+          _data$item2 = data.item,
+          item = _data$item2 === undefined ? {} : _data$item2,
           text = item.text,
           _state = this.state,
+          isShowLabels = _state.isShowLabels,
           isShowLink = _state.isShowLink,
-          initFromDate = _state.initFromDate,
-          initToDate = _state.initToDate,
-          onTestDate = _state.onTestDate,
-          validationMessages = _state.validationMessages,
-          _source = _getItemSource(this.props);
+          _style = isShowLabels ? null : S.ROOT_NOT_LABELS,
+          _linkStyle = isShowLabels ? null : S.LINK_NOT_LABELS;
 
       return _react2.default.createElement(
         _ModalDialog2.default,
         {
           caption: text,
-          styleCaption: STYLE.CAPTION_SPAN,
+          style: _style,
+          styleCaption: S.CAPTION_SPAN,
           isShow: isShow,
           commandButtons: this._commandButtons,
-          onClose: this._handleClose
+          onClose: onClose
         },
         _react2.default.createElement(_DialogCell2.default.ToolbarButtonCircle, {
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_DialogCell2.default.Row.Text, {
-          styleRoot: STYLE.SOURCE_ROOT,
-          caption: 'Source:',
-          text: _source
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
+          isShowLabels: isShowLabels,
+          caption: 'Source',
+          placeholder: 'IEX Platform: 2 Years',
+          options: SOURCE_OPTIONS,
+          onSelect: this._hSelectDataSource
         }),
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,
-          { isShow: isShowLink, style: STYLE.LINK_SHOW_HIDE },
+          { isShow: isShowLink, style: S.LINK_SHOW_HIDE },
           _react2.default.createElement(
             _DialogCell2.default.Row.Plain,
-            { style: STYLE.LINK_ROOT },
-            _react2.default.createElement(
+            { style: S.LINK_ROOT },
+            isShowLabels && _react2.default.createElement(
               'span',
-              { style: STYLE.LINK_CAPTION },
+              { style: S.LINK_CAPTION },
               'Link:'
             ),
-            _react2.default.createElement(_NasdaqLink2.default, { item: item, caption: 'NASDAQ' })
+            _react2.default.createElement(_NasdaqLink2.default, {
+              style: _linkStyle,
+              item: item,
+              caption: 'NASDAQ'
+            })
           )
-        ),
-        _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-          ref: this._refDatesFragment,
-          initFromDate: initFromDate,
-          initToDate: initToDate,
-          onTestDate: onTestDate
-        }),
-        _react2.default.createElement(_DialogCell2.default.ValidationMessages, {
-          validationMessages: validationMessages
-        })
+        )
       );
     }
   }], [{
@@ -311,7 +293,7 @@ var StocksBySectorDialog = (0, _withValidationLoad2.default)(_class = function (
     }
   }]);
   return StocksBySectorDialog;
-}(_react.Component)) || _class;
+}(_react.Component);
 
 exports.default = StocksBySectorDialog;
 //# sourceMappingURL=StocksBySectorDialog.js.map

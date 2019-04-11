@@ -75,7 +75,6 @@ const crBrowserModel = () => {
       {
         cn: CL.Q,
         name: 'World Economy',
-        //onClick: _fB(BT.ECONOMIC),
         onClick: _fBD(BT.ECONOMIC),
         isClose: true
       },{
@@ -140,31 +139,16 @@ const crBrowserModel = () => {
          onClick: _fBD(BT.STOCK_MARKETS),
          isClose: true
       },{
-        cn: CL.Q,
+        cn: CL.BR,
         name: 'NYSE by Sectors',
         onClick: _fBD(BT.NYSE_STOCKS),
         isClose: true
       },{
-        cn: CL.Q,
+        cn: CL.BR,
         name: 'NASDAQ by Sectors',
         onClick: _fBD(BT.NASDAQ_STOCKS),
         isClose: true
-      },{
-        cn: CL.Q,
-        name: '1000 Stocks by Sectors',
-        onClick: _fBD(BT.US_STOCKS),
-        isClose: true
-      },{
-        cn: CL.Q,
-        name: 'LSE (Not Updated)',
-        onClick: _fBD(BT.LONDON_STOCKS),
-        isClose: true
-      }/*,{
-        name: 'Quandl Premium Sample',
-        cn: CL.Q,
-        onClick: _fBD(BT.PREMIUM_SAMPLE),
-        isClose: true
-      }*/
+      }
     ]
   };
 }

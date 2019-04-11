@@ -66,7 +66,7 @@ const _crSeriaOptions = dfT => {
   };
 };
 
-const _crSeriaData = (json, option, config, chartId) => {
+const _crSeriaData = (json, option, config, chartId) => {  
   const { interval, dfT } = option
   , _propName = `Time Series (${interval})`
   , _value = json[_propName]
@@ -169,7 +169,7 @@ const AlphaIntradayAdapter = {
         dataDaily,
         seriaTooltip, volumeTooltip
       } = _crChartOptions(dfT, data);
-    
+
     const config = ConfigBuilder()
       .init(baseConfig)
       .add('chart', { spacingTop: 25 })

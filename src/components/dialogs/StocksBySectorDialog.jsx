@@ -1,60 +1,67 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import DateUtils from '../../utils/DateUtils';
 import ChartActions from '../../flux/actions/ChartActions';
-import { LoadType } from '../../constants/Type';
 
 import D from './DialogCell'
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import NasdaqLink from '../native-links/NasdaqLink';
 
-import withValidationLoad from './decorators/withValidationLoad';
-
-const {
-  getFromDate,
-  getToDate,
-  isYmd
-} = DateUtils;
-
-const ABSENT = "Absent"
-    , ABSENT_VALIDATION_MSG = "Data Source for this item Absent";
-
-const STYLE = {
+const S = {
+  ROOT_NOT_LABELS: {
+    width: 280
+  },
   CAPTION_SPAN : {
     display: 'inline-block',
-    maxWidth: '295px'
+    maxWidth: 295
   },
   SOURCE_ROOT : {
     lineHeight: 1.5,
-    marginBottom: '0px'
+    marginBottom: 0
   },
   LINK_SHOW_HIDE : {
-    marginBottom: '10px'
+    marginBottom: 10
   },
   LINK_ROOT: {
-    marginTop: '0px',
-    marginBottom : '0px',
+    marginTop: 0,
+    marginBottom : 0,
     lineHeight: 1.5,
     fontWeight: 'bold'
   },
   LINK_CAPTION : {
-    color: '#1B75BB',
+    color: '#1b75bb',
     display: 'inline-block',
     textAlign: 'right',
-    width: '100px',
-    paddingRight: '5px',
+    width: 100,
+    paddingRight: 5,
     fontSize: '16px'
+  },
+  LINK_NOT_LABELS: {
+    marginLeft: 8
   }
-}
-
-const _getItemSource = (props) => {
-  const { data={} } = props
-      , { item={} } = data
-      , { id='' } = item
-      , arr = id.split('/');
-  return arr.length<2 ? ABSENT : arr[0];
 };
+
+const SOURCE_OPTIONS = [
+  {
+    caption: 'Alpha Vantage: Daily (100)' ,
+    value: 'AL_I',
+    dfProps: {
+      indicator: 'TIME_SERIES_DAILY',
+      interval: 'Daily',
+      outputsize: 'compact'
+    }
+  },{
+    caption: 'Barchart: 6 Months' , value: 'B'
+  },{
+    caption: 'IEX Platform: 2 Years' , value: 'IEX',
+    dfProps: {
+      dfType: "chart",
+      dfPeriod: "2y"
+    }
+  }
+];
+
+const _isFn = fn => typeof fn === 'function';
 
 const _getItemId = (props) => props
   && props.data
@@ -62,49 +69,51 @@ const _getItemId = (props) => props
   && props.data.item.id;
 
 const _createInitialState = (props) => {
-   const itemId = _getItemId(props)
-   , { data={} } = props
-   , { fromDate, initToDate, onTestDate } = data
-   , _isShowLink = (_getItemSource(props) !== ABSENT)
-       ? false
-       : true;
+   const itemId = _getItemId(props);
     return {
       itemId: itemId,
-      isShowLink: _isShowLink,
-      initFromDate: fromDate || getFromDate(2),
-      initToDate: initToDate || getToDate(),
-      onTestDate: onTestDate || isYmd,
-      validationMessages: []
+      isShowLink: false,
     };
 };
 
-@withValidationLoad
 class StocksBySectorDialog extends Component {
   /*
    static propTypes = {
-     isShow: PropTypes.bool.isRequired,
-     data: PropTypes.object.isRequired,
+     isShow: PropTypes.bool,
+     data: PropTypes.object,
      store: PropTypes.object,
-     onClose: PropTypes.func.isRequired
+     onClose: PropTypes.func
    }
   */
 
    constructor(props){
-     super()
+     super(props)
+
      this.toolbarButtons =  [
-       { caption: 'L', onClick: this._handleClickLink }
+        {
+          caption: 'L',
+          title: 'Click to toggle labels',
+          onClick: this._hClickLabels
+        },{
+         caption: 'O',
+         title: 'Click to toggle options',
+         onClick: this._hClickLink
+       }
      ]
      this._commandButtons = [
        <D.Button.Load
          key="load"
-         onClick={this._handleLoad}
+         onClick={this._hLoad}
        />,
        <D.Button.Show
          key="show"
-         onClick={props.data.onShow}
+         onClick={this._hShow}
        />
      ]
-     this.state = _createInitialState(props)
+     this.state = {
+       ..._createInitialState(props),
+       isShowLabels: true
+     }
    }
 
    static getDerivedStateFromProps(nextProps, prevState) {
@@ -121,112 +130,102 @@ class StocksBySectorDialog extends Component {
      return true;
    }
 
-  _handleClickLink = () => {
-     this.setState({
-       isShowLink: !this.state.isShowLink
-     })
+   _hClickLabels = () => {
+     this.setState(prevState => ({
+      isShowLabels: !prevState.isShowLabels
+     }))
+   }
+  _hClickLink = () => {
+    this.setState(prevState => ({
+      isShowLink: !prevState.isShowLink
+    }))
   }
 
-  _handleLoad = () => {
-    const validationMessages = this._getValidationMessages();
-    if (validationMessages.isValid){
-      const { data, onClose } = this.props
-          , { item={}, browserType, chartContainerType, dialogProps } = data
-          , { id, text } = item
-          , { fromDate, toDate } = this.datesFragment.getValues()
-          , _source = _getItemSource(this.props)
-          , option = {
-             title : text,
-             value : id,
-             item: item,
-             fromDate: fromDate,
-             toDate: toDate,
-             loadId : LoadType.WL,
-             id : id,
-             linkFn : 'NASDAQ',
-             columnName : 'Close',
-             seriaColumnNames : [ 'Open', 'High', 'Low', 'Volume', 'Adjusted Close', 'Adj. Close' ],
-             dataSource : `(Code: ${_source})`,
-             ...dialogProps
-           };
-
-      ChartActions.loadStock(
-        { chartType: chartContainerType, browserType },
-        option
-      )
-      onClose()
+  _hShow = () => {
+    const { data } = this.props;
+    if (data && _isFn(data.onShow)) {
+      data.onShow()
     }
-    this._updateValidationMessages(validationMessages)
   }
 
-  _getValidationMessages = () => {
-    let  msg = [];
-
-    if (_getItemSource(this.props) === ABSENT) {
-      msg.push(ABSENT_VALIDATION_MSG)
-    }
-
-    const { isValid, datesMsg } = this.datesFragment.getValidation();
-    if (!isValid) { msg = msg.concat(datesMsg) }
-    msg.isValid = (msg.length === 0) ? true : false
-    return msg;
+  _hSelectDataSource = (item) => {
+    this._dataSource = item
   }
+  _getDataSource = () => this._dataSource || SOURCE_OPTIONS[2]
 
-  _handleClose = () => {
-    if (this.state.validationMessages.length > 0){
-      this.setState({
-        validationMessages: this._getValidationMessages()
-      })
-    }
-    this.props.onClose()
+  _hLoad = () => {
+    const { data, onClose } = this.props
+    , { item={}, browserType, chartContainerType, dialogProps } = data
+    , { id, text } = item
+    , { caption, value, dfProps } = this._getDataSource();
+
+    ChartActions.loadStock(
+      {
+        chartType: chartContainerType, browserType
+      },{
+         title: text,
+         value: id,
+         ticket: id,
+         item: item,
+         loadId: value,
+         id: id,
+         linkFn: 'NASDAQ',
+         dataSource: caption,
+         ...dialogProps,
+         ...dfProps
+       }
+    )
+    onClose()
   }
-
-  _refDatesFragment = c => this.datesFragment = c
 
   render(){
-    const { isShow, data={} } = this.props
-        , { item={} } = data
-        , { text } = item
-        , {
-            isShowLink,
-            initFromDate, initToDate, onTestDate,
-            validationMessages
-          } = this.state
-        , _source = _getItemSource(this.props);
+    const { isShow, data={}, onClose } = this.props
+    , { item={} } = data
+    , { text } = item
+    , {
+        isShowLabels,
+        isShowLink,
+      } = this.state
+    , _style = isShowLabels
+         ? null
+         : S.ROOT_NOT_LABELS
+    , _linkStyle = isShowLabels
+         ? null
+         : S.LINK_NOT_LABELS;
 
     return (
       <ModalDialog
          caption={text}
-         styleCaption={STYLE.CAPTION_SPAN}
+         style={_style}
+         styleCaption={S.CAPTION_SPAN}
          isShow={isShow}
          commandButtons={this._commandButtons}
-         onClose={this._handleClose}
+         onClose={onClose}
       >
         <D.ToolbarButtonCircle
           buttons={this.toolbarButtons}
         />
-        <D.Row.Text
-          styleRoot={STYLE.SOURCE_ROOT}
-          caption="Source:"
-          text={_source}
+        <D.RowInputSelect
+           isShowLabels={isShowLabels}
+           caption="Source"
+           placeholder="IEX Platform: 2 Years"
+           options={SOURCE_OPTIONS}
+           onSelect={this._hSelectDataSource}
         />
-        <D.ShowHide isShow={isShowLink} style={STYLE.LINK_SHOW_HIDE}>
-          <D.Row.Plain style={STYLE.LINK_ROOT}>
-            <span style={STYLE.LINK_CAPTION}>
-              Link:
-            </span>
-            <NasdaqLink item={item} caption="NASDAQ" />
+        <D.ShowHide isShow={isShowLink} style={S.LINK_SHOW_HIDE}>
+          <D.Row.Plain style={S.LINK_ROOT}>
+            {
+              isShowLabels && <span style={S.LINK_CAPTION}>
+                Link:
+              </span>
+            }
+            <NasdaqLink
+               style={_linkStyle}
+               item={item}
+               caption="NASDAQ"
+             />
           </D.Row.Plain>
         </D.ShowHide>
-        <D.DatesFragment
-            ref={this._refDatesFragment}
-            initFromDate={initFromDate}
-            initToDate={initToDate}
-            onTestDate={onTestDate}
-        />
-        <D.ValidationMessages
-            validationMessages={validationMessages}
-        />
       </ModalDialog>
     );
   }

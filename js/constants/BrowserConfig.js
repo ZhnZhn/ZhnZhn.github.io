@@ -141,7 +141,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   chartContainerType: _Type.BrowserType.NYSE_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  contFullCaption: 'Quandl: NYSE by Sectors',
+  contFullCaption: 'NYSE by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nyse-stocks/nyse-stocks.html'
@@ -153,7 +153,7 @@ var BrowserConfig = (_BrowserConfig = {}, (0, _defineProperty3.default)(_Browser
   withoutItemCounter: true,
   modalDialogType: _Type.ModalDialog.STOCKS_BY_SECTOR,
   chartContainerType: _Type.BrowserType.NASDAQ_STOCKS + '_' + _Type.BrowserType.STOCKS_BY_SECTORS,
-  contFullCaption: 'Quandl: NASDAQ by Sectors',
+  contFullCaption: 'NASDAQ by Sectors',
   itemOptionType: 'ItemTopicOption',
   itemType: 'ItemWithCap',
   descrUrl: './data/nasdaq-stocks/nasdaq-stocks.html'
