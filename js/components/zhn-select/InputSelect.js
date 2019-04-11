@@ -611,6 +611,10 @@ var InputSelect = (_temp = _class = function (_Component) {
     );
   };
 
+  this._refArrowCell = function (c) {
+    return _this2.arrowCell = c;
+  };
+
   this._crAfterInputEl = function () {
     var _props3 = _this2.props,
         isLoading = _props3.isLoading,
@@ -629,6 +633,7 @@ var InputSelect = (_temp = _class = function (_Component) {
       var _arrowStyle = isShowOption ? S.ARROW_SHOW : null;
       _placeholder = placeholder ? placeholder : 'Select ' + optionName + '...';
       _afterInputEl = _react2.default.createElement(_ArrowCell2.default, {
+        ref: _this2._refArrowCell,
         arrowStyle: _arrowStyle,
         onClick: _this2._handleToggleOptions
       });

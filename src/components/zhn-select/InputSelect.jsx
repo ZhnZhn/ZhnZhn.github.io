@@ -484,6 +484,7 @@ class InputSelect extends Component {
     );
   }
 
+  _refArrowCell = c => this.arrowCell = c
 
   _crAfterInputEl = () => {
     const {
@@ -502,6 +503,7 @@ class InputSelect extends Component {
           : `Select ${optionName}...`;
       _afterInputEl = (
          <ArrowCell
+           ref={this._refArrowCell}
            arrowStyle={_arrowStyle}
            onClick={this._handleToggleOptions}
          />
