@@ -42,22 +42,26 @@ const DialogStyles = {
   rowDiv: { ...S.ROW },
   labelSpan : { ...S.LABEL },
 
-  crRowLabelStyle: (isShowLabels=true) => {
+  crRowCaption: (caption) => caption.indexOf(':') === -1
+    && caption !== ''
+      ? `${caption}:`
+      : caption,
+  crRowLabelStyle: (isShowLabels=true, captionStyle) => {
     const rowStyle = isShowLabels
              ? { ...S.ROW }
              : { ...S.ROW, ...S.ROW_SHORT }
          , labelStyle = isShowLabels
-             ? { ...S.LABEL }
+             ? { ...S.LABEL, ...captionStyle }
              : { ...S.LABEL, ...S.NONE };
     return { rowStyle, labelStyle };
   },
 
-  crRowOcSelectStyle: (isShowLabels=true) => {
+  crRowOcSelectStyle: (isShowLabels=true, captionStyle) => {
     const rowStyle = isShowLabels
              ? { ...S.ROW_OC }
              : { ...S.ROW_OC, ...S.ROW_SHORT }
          , labelStyle = isShowLabels
-             ? { ...S.LABEL }
+             ? { ...S.LABEL, ...captionStyle }
              : { ...S.LABEL, ...S.NONE };
     return { rowStyle, labelStyle };
   },

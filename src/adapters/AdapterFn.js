@@ -226,8 +226,7 @@ const AdapterFn = {
   ),
 
   findMinY: seriaFns.findMinY,
-  findMaxY: seriaFns.findMaxY
-
+  findMaxY: seriaFns.findMaxY  
 }
 
 export default AdapterFn

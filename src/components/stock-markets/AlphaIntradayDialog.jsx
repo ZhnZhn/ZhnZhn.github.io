@@ -4,6 +4,11 @@ import D from '../dialogs/DialogCell'
 import Decor from '../dialogs/decorators/Decorators'
 import crMenuMore from '../dialogs/MenuMore'
 
+
+const D_ADJ = 'DAILY_ADJUSTED';
+
+const _isDailyAdj = dfT => dfT === D_ADJ;
+
 const DF = {
   INTERVAL: '15min',
   PERIOD: 'compact'
@@ -77,7 +82,10 @@ const _crLoadOptions = (key, input) => {
 class AlphaIntradayDialog extends Component {
 
   constructor(props){
-    super()
+    super(props)
+
+    this._isDailyAdj = _isDailyAdj(props.dfT)
+    this._hasDividend = false
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -85,13 +93,15 @@ class AlphaIntradayDialog extends Component {
     })
 
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true }
+      props, { noDate: true, isOptions: this._isDailyAdj }
     )
     this._commandButtons = this._crCommandsWithLoad(this)
 
+
     this.state = {
       isToolbar: true,
-      isShowLabels: true
+      isShowLabels: true,
+      isOptions: false
     }
   }
 
@@ -109,7 +119,7 @@ class AlphaIntradayDialog extends Component {
   }
 
   _handleLoad = () => {
-    const { dfT, dataSource } = this.props
+    const { dfT, dataSource, loadId } = this.props
     , _ticket = this.ticketComp.isValid()
         ? this.ticketComp.getValue()
         : undefined
@@ -117,12 +127,18 @@ class AlphaIntradayDialog extends Component {
     , _value = `${_ticket || ''} (${_options.interval})`;
 
     this.props.onLoad({
-      loadId: 'AL_I',
+      //loadId: 'AL_I',
+      loadId,
       ..._options,
       ticket: _ticket,
       value: _value, //for label
+      hasDividend: this._hasDividend,
       dataSource
     })
+  }
+
+  _toggleDividend = () => {
+    this._hasDividend = !this._hasDividend
   }
 
   _handleClose = () => {
@@ -142,7 +158,8 @@ class AlphaIntradayDialog extends Component {
     } = this.props
     , {
       isToolbar,
-      isShowLabels
+      isShowLabels,
+      isOptions
     } = this.state;
 
     return (
@@ -162,7 +179,7 @@ class AlphaIntradayDialog extends Component {
           <D.RowPattern
             ref={this._refTicket}
             isShowLabels={isShowLabels}
-            title="Ticket"
+            caption="Ticket"
             placeholder="Nyse or Nasdaq Ticket"
             onTest={_testTicket}
             errorMsg="Not Empty"
@@ -175,6 +192,14 @@ class AlphaIntradayDialog extends Component {
             //options={_intervalOptions}
             onSelect={this._handleSelectInterval}
           />
+          {this._isDailyAdj && <D.ShowHide isShow={isOptions}>
+              <D.RowCheckBox
+                initValue={false}
+                caption={"With Dividend History"}
+                onToggle={this._toggleDividend}
+              />
+           </D.ShowHide>
+         }
       </D.DraggableDialog>
     );
   }

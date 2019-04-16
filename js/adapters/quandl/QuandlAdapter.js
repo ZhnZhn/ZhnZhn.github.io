@@ -64,6 +64,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var getData = _QuandlFn2.default.getData,
     getColumnNames = _QuandlFn2.default.getColumnNames;
+var crDividendSeria = _ChartConfig2.default.crDividendSeria,
+    crSplitRatioSeria = _ChartConfig2.default.crSplitRatioSeria;
 
 
 var C = {
@@ -369,7 +371,7 @@ var _fnSetYForPoints = function _fnSetYForPoints(data, y) {
 var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, chartId, y) {
   if (data.length > 0) {
     _fnSetYForPoints(data, y);
-    config.series.push(_ChartConfig2.default.fExDividendSeria(data, chartId));
+    config.series.push(crDividendSeria(data, chartId));
     config.chart.spacingBottom = 40;
   }
 };
@@ -377,7 +379,7 @@ var _fnAddSeriesExDivident = function _fnAddSeriesExDivident(config, data, chart
 var _fnAddSeriesSplitRatio = function _fnAddSeriesSplitRatio(config, data, chartId, y) {
   if (data.length > 0) {
     _fnSetYForPoints(data, y);
-    config.series.push(_ChartConfig2.default.fSplitRatioSeria(data, chartId));
+    config.series.push(crSplitRatioSeria(data, chartId));
     config.chart.spacingBottom = 40;
   }
 };

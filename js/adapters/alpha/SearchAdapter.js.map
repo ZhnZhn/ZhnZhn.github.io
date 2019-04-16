@@ -1,0 +1,29 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/alpha/SearchAdapter.js"
+ ],
+ "file": "../../../src/adapters/alpha/SearchAdapter.js",
+ "names": [
+  "C",
+  "URL",
+  "FN_SEARCH",
+  "SearchAdapter",
+  "crUrl",
+  "value",
+  "apiKey",
+  "crOptions",
+  "json",
+  "Array",
+  "isArray",
+  "bestMatches",
+  "Error",
+  "map",
+  "item",
+  "name",
+  "type",
+  "region",
+  "currency"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,IAAI;AACRC,OAAK,0CADG;AAERC,aAAW;AAFH,CAAV;;AAKA,IAAMC,gBAAgB;AACpBC,SAAO,eAACC,KAAD;AAAA,2BAAUC,MAAV;AAAA,QAAUA,MAAV,+BAAiB,EAAjB;AAAA,WAA6BN,EAAEC,GAA/B,SAAsCD,EAAEE,SAAxC,kBAA8DG,KAA9D,gBAA8EC,MAA9E;AAAA,GADa;AAEpBC,aAAW,yBAAQ;AACjB,QAAI,CAACC,IAAD,IAAS,CAACC,MAAMC,OAAN,CAAcF,KAAKG,WAAnB,CAAd,EAA+C;AAC7C,YAAM,IAAIC,KAAJ,CAAU,8BAAV,CAAN;AACD;AACD,WAAOJ,KAAKG,WAAL,CAAiBE,GAAjB,CAAqB;AAAA,aAAS;AACnCR,eAAOS,KAAK,WAAL,CAD4B;AAEnCC,cAAMD,KAAK,SAAL,CAF6B;AAGnCE,cAAMF,KAAK,SAAL,CAH6B;AAInCG,gBAAQH,KAAK,WAAL,CAJ2B;AAKnCI,kBAAUJ,KAAK,aAAL;AALyB,OAAT;AAAA,KAArB,CAAP;AAOD;AAbmB,CAAtB;;kBAgBeX,a"
+}

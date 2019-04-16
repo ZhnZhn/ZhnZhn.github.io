@@ -1,0 +1,14 @@
+
+const enumSearch = {
+  LOADING: 'LOADING',
+  LOADING_FAILED: 'LOADING_FAILED',
+  LOADED: 'LOADED',
+
+  SET_TICKET: 'SET_TICKET',
+
+  SHOW_OPTIONS: 'SHOW_OPTIONS',
+  HIDE_OPTIONS: 'HIDE_OPTIONS',
+  TOGGLE_OPTIONS: 'TOGGLE_OPTIONS'
+};
+
+export default Object.freeze(enumSearch)

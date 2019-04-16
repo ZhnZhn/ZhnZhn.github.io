@@ -21,7 +21,8 @@
         { "id": "SM_A_INTRADAY" },
         { "id": "SM_A_DAILY" },
         { "id": "SM_A_DAILYADJUSTED" },
-        { "id": "SM_A_SECTOR" }
+        { "id": "SM_A_SECTOR" },
+        { "id": "SM_A_SEARCH" }
       ]
     },{
       "caption": "IEX Platform",
@@ -230,7 +231,7 @@
         "dialogProps" : {
           "descrUrl" : "./data/stock-markets/alpha-vantage.html",
           "valueFn" : "ROne",
-          "loadId" : "AL",
+          "loadId" : "AL_I",
           "dataSource" : "Alpha Vantage: Intraday",
           "dfT": "INTRADAY"
         }
@@ -239,12 +240,12 @@
          "type" : "SM_A_DAILY",
          "menuTitle" : "Daily",
          "dialogCaption" : "Alpha Vantage: Daily",
-         "chartContainerCaption" : "Alpha Vantage: Daily",
+         "chartContainerCaption": "Alpha Vantage: Daily",
          "dialogType" : "AlphaIntradayDialog",
          "dialogProps" : {
            "descrUrl" : "./data/stock-markets/alpha-vantage.html",
            "valueFn" : "ROne",
-           "loadId" : "AL",
+           "loadId" : "AL_I",
            "dataSource" : "Alpha Vantage: Daily",
            "dfT": "DAILY"
          }
@@ -258,11 +259,25 @@
           "dialogProps" : {
             "descrUrl" : "./data/stock-markets/alpha-vantage.html",
             "valueFn" : "ROne",
-            "loadId" : "AL",
+            "loadId" : "AL_I",
             "dataSource" : "Alpha Vantage: Daily Adjusted",
             "dfT": "DAILY_ADJUSTED"
           }
        },
+       "SM_A_SEARCH" : {
+           "type" : "SM_A_SEARCH",
+           "menuTitle" : "Search",
+           "dialogCaption" : "Alpha Vantage: Search",
+           "dialogType" : "AlphaSearchDialog",
+           "dialogProps" : {
+             "descrUrl" : "./data/stock-markets/alpha-vantage.html",
+             "valueFn" : "ROne",
+             "loadId" : "AL_I",
+             "dataSource" : "Alpha Vantage: Search",
+             "dfT": "SEARCH",
+             "isGetKey": true
+           }
+        },
      "SM_A_SECTOR" : {
          "type" : "SM_A_SECTOR",
          "menuTitle" : "Performance by Sector",

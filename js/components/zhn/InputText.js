@@ -82,10 +82,15 @@ var InputText = (_temp = _class = function (_Component) {
 
     _this._handleInputChange = function (event) {
       var value = event.target.value,
-          maxLenght = _this.props.maxLenght;
+          _this$props = _this.props,
+          maxLenght = _this$props.maxLenght,
+          onInputChange = _this$props.onInputChange;
 
       if (value.length <= maxLenght) {
         _this.setState({ value: value });
+        if (_isFn(onInputChange)) {
+          onInputChange(value);
+        }
       }
     };
 
@@ -105,8 +110,8 @@ var InputText = (_temp = _class = function (_Component) {
       }
     };
 
+    _this._refInput = _react2.default.createRef();
     _this.isOnEnter = _isFn(props.onEnter) ? true : false;
-
     _this.state = _getInitStateFrom(props);
     return _this;
   }
@@ -144,6 +149,7 @@ var InputText = (_temp = _class = function (_Component) {
           _spellCheck = spellCheck ? true : false;
 
       return _react2.default.createElement('input', {
+        ref: this._refInput,
         style: (0, _extends3.default)({}, S.INPUT_TEXT, style),
         type: type || C.TEXT,
         name: C.TEXT,
@@ -168,6 +174,15 @@ var InputText = (_temp = _class = function (_Component) {
     key: 'setValue',
     value: function setValue(value) {
       this.setState({ value: value });
+    }
+  }, {
+    key: 'focus',
+    value: function focus() {
+      var current = this._refInput.current;
+
+      if (current) {
+        current.focus();
+      }
     }
   }], [{
     key: 'getDerivedStateFromProps',

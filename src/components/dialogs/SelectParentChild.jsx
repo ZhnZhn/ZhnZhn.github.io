@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
-import RowInputSelect from './RowInputSelect';
+import RowInputSelect from './rows/RowInputSelect';
 import withLoadOptions from './decorators/withLoadOptions';
-
-//const defaultChildOptions = [];
-
 
 @withLoadOptions
 class SelectParentChild extends Component {

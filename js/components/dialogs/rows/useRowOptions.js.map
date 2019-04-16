@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/useRowOptions.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/useRowOptions.js",
+ "names": [
+  "useRowOptions",
+  "isOc",
+  "isShowLabels",
+  "caption",
+  "captionStyle",
+  "rest",
+  "options",
+  "width",
+  "optionName",
+  "replace"
+ ],
+ "mappings": ";;;;;;;;;;;;;;AACA;;;;;;AAEA,IAAMA,gBAAgB,SAAhBA,aAAgB;AAAA,kFAKV,EALU;AAAA,MAKjBC,IALiB,SAKjBA,IALiB;;AAAA,MACpBC,YADoB,QACpBA,YADoB;AAAA,MAEpBC,OAFoB,QAEpBA,OAFoB;AAAA,MAGpBC,YAHoB,QAGpBA,YAHoB;AAAA,MAIjBC,IAJiB;AAAA,oCAMjB,sBAAO,EAAEH,0BAAF,EAAgBC,gBAAhB,EAAyBC,0BAAzB,EAAP,EAAgDH,IAAhD,CANiB;AAOpBK;AACEC,aAAO;AADT,OAEKF,IAFL;AAGEG,kBAAYN,eACR,EADQ,GAERC,QAAQM,OAAR,CAAgB,GAAhB,EAAqB,EAArB;AALN;AAPoB;AAAA,CAAtB;;kBAgBeT,a"
+}

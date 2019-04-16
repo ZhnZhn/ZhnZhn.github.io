@@ -53,19 +53,24 @@ var DialogStyles = {
   rowDiv: (0, _extends3.default)({}, S.ROW),
   labelSpan: (0, _extends3.default)({}, S.LABEL),
 
+  crRowCaption: function crRowCaption(caption) {
+    return caption.indexOf(':') === -1 && caption !== '' ? caption + ':' : caption;
+  },
   crRowLabelStyle: function crRowLabelStyle() {
     var isShowLabels = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+    var captionStyle = arguments[1];
 
     var rowStyle = isShowLabels ? (0, _extends3.default)({}, S.ROW) : (0, _extends3.default)({}, S.ROW, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL) : (0, _extends3.default)({}, S.LABEL, S.NONE);
+        labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL, captionStyle) : (0, _extends3.default)({}, S.LABEL, S.NONE);
     return { rowStyle: rowStyle, labelStyle: labelStyle };
   },
 
   crRowOcSelectStyle: function crRowOcSelectStyle() {
     var isShowLabels = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+    var captionStyle = arguments[1];
 
     var rowStyle = isShowLabels ? (0, _extends3.default)({}, S.ROW_OC) : (0, _extends3.default)({}, S.ROW_OC, S.ROW_SHORT),
-        labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL) : (0, _extends3.default)({}, S.LABEL, S.NONE);
+        labelStyle = isShowLabels ? (0, _extends3.default)({}, S.LABEL, captionStyle) : (0, _extends3.default)({}, S.LABEL, S.NONE);
     return { rowStyle: rowStyle, labelStyle: labelStyle };
   },
 

@@ -46,6 +46,8 @@ var _ChartActions = require('../actions/ChartActions');
 
 var _ChartActions2 = _interopRequireDefault(_ChartActions);
 
+var _AppAction = require('../actions/AppAction');
+
 var _DateUtils = require('../../utils/DateUtils');
 
 var _DateUtils2 = _interopRequireDefault(_DateUtils);
@@ -115,9 +117,12 @@ var _crDialogComp = function _crDialogComp(dType, browserType, dConf) {
       isContinious = dialogProps.isContinious,
       loadId = dialogProps.loadId,
       isProxy = dialogProps.isProxy,
-      onClickInfo = descrUrl ? _ComponentActions2.default.showDescription : undefined,
+      isGetKey = dialogProps.isGetKey,
+      onClickInfo = descrUrl ? _ComponentActions2.default.showDescription : void 0,
       loadFn = _RouterLoadFn2.default.getFn(loadFnType, dialogType),
-      proxy = isProxy ? _ChartStore2.default.getProxy() : undefined,
+      proxy = isProxy ? _ChartStore2.default.getProxy() : void 0,
+      getKey = isGetKey && _ChartStore2.default.getKey,
+      onError = isGetKey && _AppAction.showErrDialog,
       onLoad = onLoadChart.bind(null, {
     chartType: itemKey,
     browserType: browserType, conf: conf
@@ -142,7 +147,9 @@ var _crDialogComp = function _crDialogComp(dType, browserType, dConf) {
       onLoad: onLoad, onShow: onShow,
       onClickInfo: onClickInfo,
       loadFn: loadFn,
-      proxy: proxy
+      proxy: proxy,
+      getKey: getKey,
+      onError: onError
     }, dialogProps));
   });
 };

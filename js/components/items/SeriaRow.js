@@ -48,11 +48,13 @@ var _InputSelect = require('../zhn-select/InputSelect');
 
 var _InputSelect2 = _interopRequireDefault(_InputSelect);
 
-var _RowCheckBox = require('../dialogs/RowCheckBox');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import RowCheckBox from '../dialogs/RowCheckBox'
 
 var DF = {
   COLOR: '#7cb5ec'
@@ -169,7 +171,7 @@ var SeriaRow = function (_Component) {
       return _react2.default.createElement(
         'div',
         { style: S.ROOT },
-        _react2.default.createElement(_RowCheckBox2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           rootStyle: S.ROW_CHECK_BOX,
           caption: '',
           onCheck: this._hCheck,

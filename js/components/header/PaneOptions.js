@@ -39,17 +39,9 @@ var _withTheme = require('../hoc/withTheme');
 
 var _withTheme2 = _interopRequireDefault(_withTheme);
 
-var _RowPattern = require('../dialogs/RowPattern');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _RowPattern2 = _interopRequireDefault(_RowPattern);
-
-var _RowInputSelect = require('../dialogs/RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _RowCheckBox = require('../dialogs/RowCheckBox');
-
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _FlatButton = require('../zhn-m/FlatButton');
 
@@ -128,39 +120,39 @@ var PaneOptions = (_temp = _class = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_RowPattern2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowPattern, {
           ref: this._refProxy,
-          titleStyle: titleStyle,
-          title: 'Https Proxy:',
+          captionStyle: titleStyle,
+          caption: 'Https Proxy:',
           placeholder: 'Https Proxy for CORS',
           initValue: _proxy,
           onEnter: this._setProxy
         }),
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           caption: 'UI Theme',
           captionStyle: titleStyle,
           options: UI_THEME_OPTIONS,
           onSelect: this._hSelectTheme
         }),
-        _react2.default.createElement(_RowCheckBox2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           initValue: _isAdminMode,
           caption: 'View in Admin Mode',
           onCheck: this._hMode.bind(null, MODE_ADMIN, true),
           onUnCheck: this._hMode.bind(null, MODE_ADMIN, false)
         }),
-        _react2.default.createElement(_RowCheckBox2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           initValue: _isDrawDeltaExtrems,
           caption: 'Draw Delta Extrems',
           onCheck: this._hMode.bind(null, MODE_DELTA, true),
           onUnCheck: this._hMode.bind(null, MODE_DELTA, false)
         }),
-        _react2.default.createElement(_RowCheckBox2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           initValue: _isNotZoomToMinMax,
           caption: 'Not Zoom to Min-Max',
           onCheck: this._hMode.bind(null, MODE_ZOOM, true),
           onUnCheck: this._hMode.bind(null, MODE_ZOOM, false)
         }),
-        _react2.default.createElement(_RowCheckBox2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
           initValue: false,
           caption: 'Without Points Halo',
           onCheck: this._setHalo.bind(null, false),

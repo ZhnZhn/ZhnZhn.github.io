@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
-import RowCheckBox from '../dialogs/RowCheckBox'
+import D from '../dialogs/DialogCell'
 
 const CL = 'popup-menu';
 
@@ -35,13 +35,13 @@ const PaneOptions = ({
     onClose={onClose}
   >
     <div>
-      <RowCheckBox
+      <D.RowCheckBox
         initValue={false}
         rootStyle={S.ROW_CB}
         caption="Not Zoom to Min-Max"
         onToggle={_toggleZoomMinMax}
       />
-      <RowCheckBox
+      <D.RowCheckBox
         initValue={false}
         rootStyle={S.ROW_CB}
         caption="Filter Zero Values"

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ModalPopup from '../zhn-moleculs/ModalPopup'
-import RowCheckBox from '../dialogs/RowCheckBox'
+import D from '../dialogs/DialogCell'
 
 const CL = 'popup-menu';
 
@@ -20,7 +20,7 @@ const CheckBoxList = ({
   selectProps, crIsId, onToggle
 }) => selectProps
  .map(item => (
-    <RowCheckBox
+    <D.RowCheckBox
       key={item.id}
       initValue={false}
       rootStyle={S.ROW_CB}
@@ -47,7 +47,7 @@ const PaneToggle = ({
         crIsId={crIsId}
         onToggle={onToggle}
       />
-      <RowCheckBox
+      <D.RowCheckBox
         key="isForDate"
         value={isShowDate}
         rootStyle={S.ROW_CB}

@@ -24,7 +24,7 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _class, _temp;
+var _class, _temp2;
 //import PropTypes from "prop-types";
 
 var _react = require('react');
@@ -92,24 +92,58 @@ var S = (0, _extends3.default)({}, _Dialog2.default, {
   }
 });
 
-var DraggableDialog = (_temp = _class = function (_Component) {
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+
+var DraggableDialog = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(DraggableDialog, _Component);
 
-  function DraggableDialog(props) {
+  function DraggableDialog() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, DraggableDialog);
 
-    //this.rootDiv = null
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DraggableDialog.__proto__ || Object.getPrototypeOf(DraggableDialog)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._toggleMore = function () {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DraggableDialog.__proto__ || Object.getPrototypeOf(DraggableDialog)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      isMore: false
+
+      /*
+      constructor(props){
+        super(props)
+          //this.rootDiv = null
+        //this._refRootDiv = this._refRootDiv.bind(this)
+        //this.btMore = null
+        //this._refBtMore = this._refBtMore.bind(this)
+          //this._hKeyDown = this._hKeyDown.bind(this)
+        //this._hClose = this._hClose.bind(this)
+          this.state = {
+          isMore: false
+        }
+      }
+      */
+
+    }, _this._hKeyDown = function (evt) {
+      if ((0, _utils.isKeyEscape)(evt)) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        _this._hClose();
+      }
+    }, _this._hClose = function () {
+      _this.props.onClose();
+      _this.focusPrev();
+    }, _this._toggleMore = function () {
       _this.setState(function (prevState) {
         return {
           isMore: !prevState.isMore
         };
       });
-    };
-
-    _this._renderMenuMore = function (menuModel, isMore, TS) {
+    }, _this._renderMenuMore = function (menuModel, isMore, TS) {
       return menuModel && _react2.default.createElement(_ModalSlider2.default, {
         isShow: isMore,
         className: CL.MENU_MORE,
@@ -117,23 +151,19 @@ var DraggableDialog = (_temp = _class = function (_Component) {
         model: menuModel,
         onClose: _this._toggleMore
       });
-    };
-
-    _this._renderBtMore = function (menuModel) {
+    }, _this._renderBtMore = function (menuModel) {
       return menuModel && _react2.default.createElement(_SvgMore2.default, {
         btRef: _this._refBtMore,
         style: S.BT_MORE,
         svgStyle: S.BT_MORE_SVG,
         onClick: _this._toggleMore
       });
-    };
-
-    _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
+    }, _this._renderCommandButton = function (commandButtons, onShowChart, onClose) {
       return _react2.default.createElement(
         'div',
         { style: S.COMMAND_DIV },
         commandButtons,
-        typeof onShowChart === 'function' && _react2.default.createElement(_FlatButton2.default, {
+        _isFn(onShowChart) && _react2.default.createElement(_FlatButton2.default, {
           key: 'show',
           rootStyle: S.BT_ROOT,
           caption: 'Show',
@@ -150,19 +180,11 @@ var DraggableDialog = (_temp = _class = function (_Component) {
           , onClick: onClose
         })
       );
-    };
-
-    _this._refRootDiv = _this._refRootDiv.bind(_this);
-    //this.btMore = null
-    _this._refBtMore = _this._refBtMore.bind(_this);
-
-    _this._hKeyDown = _this._hKeyDown.bind(_this);
-    _this._hClose = _this._hClose.bind(_this);
-
-    _this.state = {
-      isMore: false
-    };
-    return _this;
+    }, _this._refBtMore = function (node) {
+      return _this.btMore = node;
+    }, _this._refRootDiv = function (node) {
+      return _this.rootDiv = node;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
   /*
   static propTypes = {
@@ -196,31 +218,6 @@ var DraggableDialog = (_temp = _class = function (_Component) {
       if (this._hasShowed(prevProps)) {
         this.focus();
       }
-    }
-  }, {
-    key: '_hKeyDown',
-    value: function _hKeyDown(evt) {
-      if ((0, _utils.isKeyEscape)(evt)) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        this._hClose();
-      }
-    }
-  }, {
-    key: '_hClose',
-    value: function _hClose() {
-      this.props.onClose();
-      this.focusPrev();
-    }
-  }, {
-    key: '_refBtMore',
-    value: function _refBtMore(node) {
-      this.btMore = node;
-    }
-  }, {
-    key: '_refRootDiv',
-    value: function _refRootDiv(node) {
-      this.rootDiv = node;
     }
   }, {
     key: 'render',
@@ -295,6 +292,6 @@ var DraggableDialog = (_temp = _class = function (_Component) {
   return DraggableDialog;
 }(_react.Component), _class.defaultProps = {
   onClose: function onClose() {}
-}, _temp);
+}, _temp2);
 exports.default = (0, _withTheme2.default)(DraggableDialog);
 //# sourceMappingURL=DraggableDialog.js.map

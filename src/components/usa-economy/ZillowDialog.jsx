@@ -188,7 +188,7 @@ class  ZillowDialog extends Component {
                 <D.RowPattern
                   ref={this._refZip}
                   isShowLabels={isShowLabels}
-                  title="Zip Code*"
+                  caption="Zip Code*"
                   placeholder="Zip Code, 5 Digit"
                   onTest={_isZipCode}
                   errorMsg="5 digit format must be"

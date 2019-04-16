@@ -72,6 +72,9 @@ const _router = {
   get AlphaSectorDialog() {
     return this.SM.then(D => D.Sector);
   },
+  get AlphaSearchDialog() {
+    return this.SM.then(D => D.Search);
+  },
   get AlphaIntradayDialog() {
     return this.SM.then(D => D.Intraday);
   },

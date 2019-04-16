@@ -92,7 +92,7 @@ class DialogQuery extends Component {
           isShow={isShow}
           isShowLabels={isShowLabels}
           placeholder={onePlaceholder}
-          title={oneCaption}
+          caption={oneCaption}
           onTest={_testId}
           errorMsg={ERR_MSG}
         />

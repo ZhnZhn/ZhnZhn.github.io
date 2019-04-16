@@ -211,7 +211,7 @@ var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _De
         _react2.default.createElement(_DialogCell2.default.RowPattern, {
           ref: this._refTicket,
           isShowLabels: isShowLabels,
-          title: 'Ticket',
+          caption: 'Ticket',
           placeholder: 'Nyse or Nasdaq Ticket',
           onTest: _testTicket,
           errorMsg: 'Not Empty'
@@ -222,7 +222,7 @@ var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _De
           _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refPeriod,
             isShowLabels: isShowLabels,
-            title: 'Period',
+            caption: 'Period',
             placeholder: 'Default: ' + DF.PERIOD,
             onTest: _testPeriod,
             errorMsg: 'Number in range 1-200'
@@ -230,7 +230,7 @@ var AlphaIndicatorDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _De
           _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refForDays,
             isShowLabels: isShowLabels,
-            title: 'For Days',
+            caption: 'For Days',
             placeholder: 'Default: ' + DF.FOR_DAYS + ' (2 Years)',
             onTest: _testForDays,
             errorMsg: 'Number in range 250-2500'

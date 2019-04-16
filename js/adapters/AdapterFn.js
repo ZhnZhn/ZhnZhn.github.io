@@ -234,7 +234,6 @@ var AdapterFn = {
 
   findMinY: _seriaFn2.default.findMinY,
   findMaxY: _seriaFn2.default.findMaxY
-
 };
 
 exports.default = AdapterFn;

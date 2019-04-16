@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import RowInputSelect from './RowInputSelect'
+import RowInputSelect from './rows/RowInputSelect'
 
 import withLoadOptions from './decorators/withLoadOptions';
 
@@ -9,7 +9,7 @@ class SelectWithLoad extends Component {
     static defaultProps = {
        isShow: true,
        optionNames: 'Items',
-       jsonProp: 'items'                              
+       jsonProp: 'items'
      }
 
     state = {

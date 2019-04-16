@@ -7,8 +7,7 @@ import Msg from '../../constants/MsgWatch';
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import Button from './Button';
 import ValidationMessages from '../zhn/ValidationMessages';
-import RowInputSelect from '../dialogs/RowInputSelect';
-import Row from '../dialogs/Row';
+import D from '../dialogs/DialogCell'
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad';
 
@@ -155,17 +154,17 @@ class AddToWatchDialog extends Component {
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
-        <RowInputSelect
+        <D.RowInputSelect
           caption="Group:"
           options={groupOptions}
           onSelect={this._handleSelectGroup}
         />
-        <RowInputSelect
+        <D.RowInputSelect
           caption="List:"
           onSelect={this._handleSelectList}
           options={listOptions}
         />
-        <Row.Text
+        <D.Row.Text
           caption="Item:"
           text={caption}
         />

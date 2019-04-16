@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import Row from './Row';
+//import Row from './Row';
+import D from './DialogCell'
 import ButtonCircle from '../zhn/ButtonCircle';
 
 const STYLE = {
@@ -41,9 +42,9 @@ class ToolbarButtonCircle extends Component {
   render(){
     const { buttons } = this.props;
     return (
-      <Row.Plain style={STYLE.ROW}>
+      <D.Row.Plain style={STYLE.ROW}>
         {this._renderButtons(buttons)}
-      </Row.Plain>
+      </D.Row.Plain>
     );
   }
 

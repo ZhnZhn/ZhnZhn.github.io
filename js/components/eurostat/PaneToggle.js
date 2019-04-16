@@ -16,9 +16,9 @@ var _ModalPopup = require('../zhn-moleculs/ModalPopup');
 
 var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
 
-var _RowCheckBox = require('../dialogs/RowCheckBox');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,7 +40,7 @@ var CheckBoxList = function CheckBoxList(_ref) {
       crIsId = _ref.crIsId,
       _onToggle = _ref.onToggle;
   return selectProps.map(function (item) {
-    return _react2.default.createElement(_RowCheckBox2.default, {
+    return _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
       key: item.id,
       initValue: false,
       rootStyle: S.ROW_CB,
@@ -79,7 +79,7 @@ var PaneToggle = function PaneToggle(_ref2) {
         crIsId: crIsId,
         onToggle: _onToggle2
       }),
-      _react2.default.createElement(_RowCheckBox2.default, {
+      _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
         key: 'isForDate',
         value: isShowDate,
         rootStyle: S.ROW_CB,

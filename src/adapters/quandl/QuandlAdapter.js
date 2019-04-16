@@ -21,6 +21,11 @@ import ToScatter from './ToScatter'
 
 const { getData, getColumnNames } = QuandlFn2;
 
+const {
+  crDividendSeria,
+  crSplitRatioSeria
+} = ChartConfig;
+
 const C = {
   OPEN : "Open",
   CLOSE : "Close",
@@ -281,7 +286,7 @@ const _fnSetYForPoints = function(data, y){
 const _fnAddSeriesExDivident = function(config, data, chartId, y){
   if (data.length>0){
     _fnSetYForPoints(data, y);
-    config.series.push(ChartConfig.fExDividendSeria(data, chartId));
+    config.series.push(crDividendSeria(data, chartId));
     config.chart.spacingBottom = 40;
   }
 }
@@ -289,7 +294,7 @@ const _fnAddSeriesExDivident = function(config, data, chartId, y){
 const _fnAddSeriesSplitRatio = function(config, data, chartId, y){
   if (data.length>0){
     _fnSetYForPoints(data, y);
-    config.series.push(ChartConfig.fSplitRatioSeria(data, chartId));
+    config.series.push(crSplitRatioSeria(data, chartId));
     config.chart.spacingBottom = 40;
   }
 };

@@ -151,7 +151,7 @@ var DialogQuery = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           isShow: isShow,
           isShowLabels: isShowLabels,
           placeholder: onePlaceholder,
-          title: oneCaption,
+          caption: oneCaption,
           onTest: _testId,
           errorMsg: ERR_MSG
         }),

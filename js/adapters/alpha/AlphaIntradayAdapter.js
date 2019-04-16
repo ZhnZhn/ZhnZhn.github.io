@@ -77,32 +77,51 @@ var _fMarkerColor = function _fMarkerColor(date) {
   return { marker: marker, color: color };
 };
 
-var _crSeriaOptions = function _crSeriaOptions(dfT) {
+var _crSeriaOptions = function _crSeriaOptions(_ref) {
+  var dfT = _ref.dfT,
+      hasDividend = _ref.hasDividend;
+
   var _isIntraday = dfT === INTRADAY;
   var _isAdjusted = dfT === DAILY_ADJUSTED;
   return {
+    isDividend: _isAdjusted && hasDividend,
     toUTC: _isIntraday ? ymdhmsToUTC : ymdToUTC,
     pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
     pnVolume: _isAdjusted ? '6. volume' : '5. volume'
   };
 };
 
+var PN_DIVIDENT = '7. dividend amount';
+var PN_ADJ_CLOSE = '5. adjusted close';
+var _addDividendPointTo = function _addDividendPointTo(arr, dateMs, p) {
+  var _exValue = p[PN_DIVIDENT] && parseFloat(p[PN_DIVIDENT]);
+  if (_exValue) {
+    arr.push((0, _extends3.default)({}, _ChartConfig2.default.fMarkerExDividend(), {
+      x: dateMs,
+      exValue: _exValue,
+      price: parseFloat(p[PN_ADJ_CLOSE])
+    }));
+  }
+};
+
 var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
   var interval = option.interval,
-      dfT = option.dfT,
       _propName = 'Time Series (' + interval + ')',
       _value = json[_propName],
       _dateKeys = _value ? Object.keys(_value).sort() : [],
       _data = [],
+      _dataDividend = [],
       _dataVolume = [],
       _dataVolumeColumn = [],
       _dataHigh = [],
       _dataLow = [],
       _dataOpen = [],
-      _crSeriaOptions2 = _crSeriaOptions(dfT),
+      _crSeriaOptions2 = _crSeriaOptions(option),
+      isDividend = _crSeriaOptions2.isDividend,
       toUTC = _crSeriaOptions2.toUTC,
       pnClose = _crSeriaOptions2.pnClose,
       pnVolume = _crSeriaOptions2.pnVolume;
+
 
   var i = 0,
       _max = _dateKeys.length,
@@ -143,6 +162,9 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
       date: _dateMs,
       option: { _high: _high, _low: _low }
     }));
+    if (isDividend) {
+      _addDividendPointTo(_dataDividend, _dateMs, _point);
+    }
 
     if (_minClose > _close) {
       _minClose = _close;
@@ -156,6 +178,7 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
 
   return {
     data: _data,
+    dataDividend: _dataDividend,
     minClose: _minClose,
     maxClose: _maxClose,
     dVolume: _dataVolume,
@@ -190,6 +213,7 @@ var AlphaIntradayAdapter = {
         data = _crSeriaData2.data,
         minClose = _crSeriaData2.minClose,
         maxClose = _crSeriaData2.maxClose,
+        dataDividend = _crSeriaData2.dataDividend,
         dColumn = _crSeriaData2.dColumn,
         dVolume = _crSeriaData2.dVolume,
         _crChartOptions2 = _crChartOptions(dfT, data),
@@ -202,7 +226,7 @@ var AlphaIntradayAdapter = {
       id: _chartId,
       data: dataDaily,
       dataSource: dataSource
-    }))).checkThreshold().setMinMax(minClose, maxClose).addMiniVolume({
+    }))).checkThreshold().setMinMax(minClose, maxClose).addDividend({ dataDividend: dataDividend, minClose: minClose, maxClose: maxClose }).addMiniVolume({
       id: _chartId,
       dVolume: dVolume, dColumn: dColumn,
       tooltipColumn: _Chart2.default.fTooltip(volumeTooltip)

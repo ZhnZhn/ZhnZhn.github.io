@@ -47,13 +47,9 @@ var _ValidationMessages = require('../zhn/ValidationMessages');
 
 var _ValidationMessages2 = _interopRequireDefault(_ValidationMessages);
 
-var _RowInputSelect = require('../dialogs/RowInputSelect');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _Row = require('../dialogs/Row');
-
-var _Row2 = _interopRequireDefault(_Row);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _withValidationLoad = require('../dialogs/decorators/withValidationLoad');
 
@@ -230,17 +226,17 @@ var AddToWatchDialog = (0, _withValidationLoad2.default)(_class = function (_Com
           commandButtons: this._commandButtons,
           onClose: this._handleClose
         },
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           caption: 'Group:',
           options: groupOptions,
           onSelect: this._handleSelectGroup
         }),
-        _react2.default.createElement(_RowInputSelect2.default, {
+        _react2.default.createElement(_DialogCell2.default.RowInputSelect, {
           caption: 'List:',
           onSelect: this._handleSelectList,
           options: listOptions
         }),
-        _react2.default.createElement(_Row2.default.Text, {
+        _react2.default.createElement(_DialogCell2.default.Row.Text, {
           caption: 'Item:',
           text: caption
         }),

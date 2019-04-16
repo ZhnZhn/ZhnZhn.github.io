@@ -14,6 +14,7 @@ import {  LoadType } from '../../constants/Type';
 
 import CA from '../actions/ComponentActions';
 import CHA from '../actions/ChartActions';
+import { showErrDialog } from '../actions/AppAction'
 import DateUtils from '../../utils/DateUtils';
 
 import BrowserConfig from '../../constants/BrowserConfig';
@@ -81,15 +82,19 @@ const _crDialogComp = function (dType, browserType, dConf){
            loadFnType,
            isContinious,
            loadId,
-           isProxy
+           isProxy,
+           isGetKey
          } = dialogProps
        , onClickInfo = (descrUrl)
             ? CA.showDescription
-            : undefined
+            : void 0
        , loadFn = RouterLoadFn.getFn(loadFnType, dialogType)
        , proxy = isProxy
             ? ChartStore.getProxy()
-            : undefined
+            : void 0
+       , getKey = isGetKey && ChartStore.getKey                        
+       , onError = isGetKey && showErrDialog
+
        , onLoad = onLoadChart
           .bind(null, {
              chartType: itemKey,
@@ -120,6 +125,8 @@ const _crDialogComp = function (dType, browserType, dConf){
               onClickInfo,
               loadFn,
               proxy,
+              getKey,
+              onError,
               ...dialogProps
            });
          })

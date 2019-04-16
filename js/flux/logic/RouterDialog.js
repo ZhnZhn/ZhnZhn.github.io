@@ -100,6 +100,11 @@ var _router = {
       return D.Sector;
     });
   },
+  get AlphaSearchDialog() {
+    return this.SM.then(function (D) {
+      return D.Search;
+    });
+  },
   get AlphaIntradayDialog() {
     return this.SM.then(function (D) {
       return D.Intraday;

@@ -1,1 +1,18 @@
-{"version":3,"sources":["../../../src/adapters/alpha/Adapter.js"],"names":["Indicator","Intraday","Sector"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,mCADa;AAEbC,0CAFa;AAGbC;AAHa,C","file":"Adapter.js","sourcesContent":["\r\nimport AlphaAdapter from './AlphaAdapter'\r\nimport AlphaIntradayAdapter from './AlphaIntradayAdapter'\r\nimport AlphaSectorAdapter from './AlphaSectorAdapter'\r\n\r\nexport default {\r\n  Indicator: AlphaAdapter,\r\n  Intraday: AlphaIntradayAdapter,\r\n  Sector: AlphaSectorAdapter\r\n}\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/adapters/alpha/Adapter.js"
+ ],
+ "file": "../../../src/adapters/alpha/Adapter.js",
+ "names": [
+  "Indicator",
+  "AlphaAdapter",
+  "Intraday",
+  "AlphaIntradayAdapter",
+  "Sector",
+  "AlphaSectorAdapter",
+  "Search",
+  "SearchAdapter"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;kBAEe;AACbA,aAAWC,sBADE;AAEbC,YAAUC,8BAFG;AAGbC,UAAQC,4BAHK;AAIbC,UAAQC;AAJK,C"
+}

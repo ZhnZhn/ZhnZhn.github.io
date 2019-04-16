@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn-search/flux/initialState.js"
+ ],
+ "file": "../../../../src/components/zhn-search/flux/initialState.js",
+ "names": [
+  "initialState",
+  "isLoadingFailed",
+  "isLoading",
+  "isOptions",
+  "ticket",
+  "options"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,eAAe;AACnBC,mBAAiB,KADE;AAEnBC,aAAW,KAFQ;AAGnBC,aAAW,KAHQ;AAInBC,UAAQ,EAJW;AAKnBC,WAAS;AALU,CAArB;;kBAQeL,Y"
+}

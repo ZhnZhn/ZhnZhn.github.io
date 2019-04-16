@@ -46,10 +46,7 @@ class AlertDialog extends Component{
       alertDescr: PropTypes.string
     }),
     onClose: PropTypes.func
-  }
-  static defaultProps = {
-    data: {}
-  }
+  }  
   */
 
   shouldComponentUpdate(nextProps, nextState){
@@ -61,8 +58,8 @@ class AlertDialog extends Component{
 
   render(){
     const { isShow, data, onClose } = this.props
-        , { alertCaption='Item', alertItemId='', alertDescr } = data
-        , _caption = alertCaption + ': ';
+    , { alertCaption='Item', alertItemId='', alertDescr } = data
+    , _caption = alertCaption + ': ';
     return (
       <ModalDialog
         caption="Alert"

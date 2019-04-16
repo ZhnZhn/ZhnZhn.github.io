@@ -16,9 +16,9 @@ var _ModalPopup = require('../zhn-moleculs/ModalPopup');
 
 var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
 
-var _RowCheckBox = require('../dialogs/RowCheckBox');
+var _DialogCell = require('../dialogs/DialogCell');
 
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56,13 +56,13 @@ var PaneOptions = function PaneOptions(_ref) {
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(_RowCheckBox2.default, {
+      _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
         initValue: false,
         rootStyle: S.ROW_CB,
         caption: 'Not Zoom to Min-Max',
         onToggle: _toggleZoomMinMax
       }),
-      _react2.default.createElement(_RowCheckBox2.default, {
+      _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
         initValue: false,
         rootStyle: S.ROW_CB,
         caption: 'Filter Zero Values',

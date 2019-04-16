@@ -270,7 +270,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refZip,
             isShowLabels: isShowLabels,
-            title: 'Zip Code*',
+            caption: 'Zip Code*',
             placeholder: 'Zip Code, 5 Digit',
             onTest: _isZipCode,
             errorMsg: '5 digit format must be'

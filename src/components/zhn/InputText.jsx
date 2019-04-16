@@ -50,10 +50,9 @@ class InputText extends Component {
 
   constructor(props){
     super(props);
-
+    this._refInput = React.createRef()
     this.isOnEnter = _isFn(props.onEnter)
        ? true : false
-
     this.state = _getInitStateFrom(props)
   }
 
@@ -72,9 +71,12 @@ class InputText extends Component {
 
   _handleInputChange = (event) => {
     const value = event.target.value
-    , { maxLenght } = this.props;
+    , { maxLenght, onInputChange } = this.props;
     if (value.length <= maxLenght) {
       this.setState({ value })
+      if ( _isFn(onInputChange)) {
+        onInputChange(value)
+      }
     }
   }
  _handleKeyDown = (event) => {
@@ -107,6 +109,7 @@ class InputText extends Component {
              : false;
     return (
       <input
+        ref={this._refInput}
         style={{ ...S.INPUT_TEXT, ...style }}
         type={type || C.TEXT}
         name={C.TEXT}
@@ -129,6 +132,12 @@ class InputText extends Component {
   }
   setValue(value) {
     this.setState({ value })
+  }
+  focus(){
+    const { current } = this._refInput;
+    if (current) {
+      current.focus()
+    }
   }
 }
 

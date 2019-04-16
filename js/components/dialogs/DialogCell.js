@@ -4,13 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _Rows = require('./rows/Rows');
+
+var _Rows2 = _interopRequireDefault(_Rows);
+
 var _DraggableDialog = require('../zhn-moleculs/DraggableDialog');
 
 var _DraggableDialog2 = _interopRequireDefault(_DraggableDialog);
-
-var _DatesFragment = require('../zhn-moleculs/DatesFragment');
-
-var _DatesFragment2 = _interopRequireDefault(_DatesFragment);
 
 var _ShowHide = require('../zhn/ShowHide');
 
@@ -36,14 +40,6 @@ var _RowInputColor = require('./RowInputColor');
 
 var _RowInputColor2 = _interopRequireDefault(_RowInputColor);
 
-var _RowInputSelect = require('./RowInputSelect');
-
-var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
-
-var _RowChart = require('./RowChart');
-
-var _RowChart2 = _interopRequireDefault(_RowChart);
-
 var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
@@ -52,31 +48,14 @@ var _SelectParentChild = require('./SelectParentChild');
 
 var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
 
-var _RowPattern = require('./RowPattern');
-
-var _RowPattern2 = _interopRequireDefault(_RowPattern);
-
-var _RowCheckBox = require('./RowCheckBox');
-
-var _RowCheckBox2 = _interopRequireDefault(_RowCheckBox);
-
-var _Row = require('./Row');
-
-var _Row2 = _interopRequireDefault(_Row);
-
-var _RowDate = require('./RowDate');
-
-var _RowDate2 = _interopRequireDefault(_RowDate);
-
 var _Button = require('./Button');
 
 var _Button2 = _interopRequireDefault(_Button);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DialogCell = {
+var DialogCell = (0, _extends3.default)({
   DraggableDialog: _DraggableDialog2.default,
-  DatesFragment: _DatesFragment2.default,
   ShowHide: _ShowHide2.default,
   ValidationMessages: _ValidationMessages2.default,
 
@@ -84,16 +63,10 @@ var DialogCell = {
   Toolbar: _Toolbar2.default,
   RowInputText: _RowInputText2.default,
   RowInputColor: _RowInputColor2.default,
-  RowInputSelect: _RowInputSelect2.default,
-  RowChart: _RowChart2.default,
   SelectWithLoad: _SelectWithLoad2.default,
   SelectParentChild: _SelectParentChild2.default,
-  RowPattern: _RowPattern2.default,
-  RowCheckBox: _RowCheckBox2.default,
-  Row: _Row2.default,
-  RowDate: _RowDate2.default,
   Button: _Button2.default
-};
+}, _Rows2.default);
 
 exports.default = DialogCell;
 //# sourceMappingURL=DialogCell.js.map

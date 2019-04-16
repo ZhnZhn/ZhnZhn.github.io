@@ -88,10 +88,7 @@ var AlertDialog = function (_Component) {
         alertDescr: PropTypes.string
       }),
       onClose: PropTypes.func
-    }
-    static defaultProps = {
-      data: {}
-    }
+    }  
     */
 
     value: function shouldComponentUpdate(nextProps, nextState) {

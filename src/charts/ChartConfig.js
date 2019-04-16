@@ -27,6 +27,14 @@ import WithTreeMap from './WithTreeMapConfig';
 
 const merge = Highcharts.merge;
 
+const _crScatterSeria = (color, pointFormatter, data, zhSeriaId) => ({
+  type: 'scatter',
+  color: color,
+  tooltip: Chart.fTooltip(pointFormatter),
+  data: data,
+  zhSeriaId: zhSeriaId
+});
+
 const ChartConfig = {
   ...WithIndicator,
   ...WithPie,
@@ -90,7 +98,21 @@ const ChartConfig = {
   getColor(seriaIndex) {
     const colors = ChartTheme.colors;
     return colors[seriaIndex % colors.length];
-  }
+  },
+
+  crDividendSeria: (data, chartId) => _crScatterSeria(
+    COLOR.EX_DIVIDEND,
+    Tooltip.exDividend,
+    data,
+    chartId + '_ExDivident'
+  ),
+
+  crSplitRatioSeria: (data, chartId) => _crScatterSeria(
+    COLOR.SPLIT_RATIO,
+    Tooltip.splitRatio,
+    data,
+    chartId + '_SplitRatio'
+  )
 
 };
 
@@ -114,7 +136,7 @@ ChartConfig.fBaseAreaConfig = function(options) {
       xDeltaCrossLabel: 4,
       yDeltaCrossLabel: 20
     },
-    zhDetailCharts: []    
+    zhDetailCharts: []
   });
 
   config.xAxis = Object.assign( Chart.fXAxisOpposite(config.xAxis), {
@@ -195,6 +217,7 @@ ChartConfig.fMarkerSplitRatio = function(){
   return point;
 }
 
+/*
 const _fScatterSeria = function(color, pointFormatter, data, zhSeriaId){
   return {
     type: 'scatter',
@@ -204,6 +227,8 @@ const _fScatterSeria = function(color, pointFormatter, data, zhSeriaId){
     zhSeriaId : zhSeriaId
   }
 }
+*/
+/*
 ChartConfig.fExDividendSeria = function(data, chartId){
   return _fScatterSeria(
     COLOR.EX_DIVIDEND,
@@ -220,6 +245,7 @@ ChartConfig.fSplitRatioSeria = function(data, chartId){
     chartId + '_SplitRatio'
   );
 }
+*/
 
 ChartConfig.fSeries = function(option={}){
   const { seriaType } = option

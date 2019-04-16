@@ -11,7 +11,7 @@ import fnAdapter from './fnAdapter'
 const {
    ymdToUTC,
    ymdhmsToUTC,
-   volumeColumnPoint,
+   volumeColumnPoint
 } = AdapterFn;
 
 const { crIntradayConfigOption } = fnAdapter;
@@ -50,10 +50,11 @@ const _fMarkerColor = (date) => {
   return { marker, color };
 }
 
-const _crSeriaOptions = dfT => {
+const _crSeriaOptions = ({ dfT, hasDividend }) => {
   const _isIntraday = dfT === INTRADAY;
   const _isAdjusted = dfT === DAILY_ADJUSTED;
   return {
+    isDividend: _isAdjusted && hasDividend,
     toUTC: _isIntraday
       ? ymdhmsToUTC
       : ymdToUTC,
@@ -66,17 +67,36 @@ const _crSeriaOptions = dfT => {
   };
 };
 
-const _crSeriaData = (json, option, config, chartId) => {  
-  const { interval, dfT } = option
+const PN_DIVIDENT = '7. dividend amount';
+const PN_ADJ_CLOSE = '5. adjusted close';
+const _addDividendPointTo = (arr, dateMs, p) => {
+  const _exValue = p[PN_DIVIDENT]
+    && parseFloat(p[PN_DIVIDENT]);
+  if (_exValue) {
+    arr.push({
+      ...ChartConfig.fMarkerExDividend(), ...{
+         x: dateMs,
+         exValue: _exValue,
+         price: parseFloat(p[PN_ADJ_CLOSE])
+      }
+    })
+  }
+};
+
+const _crSeriaData = (json, option, config, chartId) => {
+  const { interval } = option
   , _propName = `Time Series (${interval})`
   , _value = json[_propName]
   , _dateKeys = ( _value)
        ? Object.keys(_value).sort()
        : []
-  , _data = []
+  , _data = [], _dataDividend = []
   , _dataVolume = [], _dataVolumeColumn = []
   , _dataHigh = [], _dataLow = [], _dataOpen = []
-  , { toUTC, pnClose, pnVolume } = _crSeriaOptions(dfT);
+  , {
+    isDividend,
+    toUTC, pnClose, pnVolume
+  } = _crSeriaOptions(option);
 
   let i = 0, _max = _dateKeys.length
   , _minClose = Number.POSITIVE_INFINITY
@@ -113,6 +133,9 @@ const _crSeriaData = (json, option, config, chartId) => {
            option: { _high: _high, _low: _low }
         })
     )
+    if (isDividend) {
+      _addDividendPointTo(_dataDividend, _dateMs, _point)
+    }
 
     if (_minClose > _close) {
       _minClose = _close
@@ -130,6 +153,7 @@ const _crSeriaData = (json, option, config, chartId) => {
 
   return {
     data: _data,
+    dataDividend: _dataDividend,
     minClose: _minClose,
     maxClose: _maxClose,
     dVolume: _dataVolume,
@@ -163,6 +187,7 @@ const AlphaIntradayAdapter = {
     , _chartId = value
     , {
         data, minClose, maxClose,
+        dataDividend,
         dColumn, dVolume
       } = _crSeriaData(json, option, baseConfig, _chartId )
     , {
@@ -184,6 +209,7 @@ const AlphaIntradayAdapter = {
       })
       .checkThreshold()
       .setMinMax(minClose, maxClose)
+      .addDividend({ dataDividend, minClose, maxClose })
       .addMiniVolume({
         id: _chartId,
         dVolume, dColumn,

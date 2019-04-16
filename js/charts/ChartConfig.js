@@ -85,6 +85,16 @@ var merge = _highcharts2.default.merge;
 //import HighchartsExporting from 'highcharts/lib/modules/exporting';
 //import HighchartsOfflineExporting from 'highcharts/lib/modules/offline-exporting';
 
+var _crScatterSeria = function _crScatterSeria(color, pointFormatter, data, zhSeriaId) {
+  return {
+    type: 'scatter',
+    color: color,
+    tooltip: _Chart2.default.fTooltip(pointFormatter),
+    data: data,
+    zhSeriaId: zhSeriaId
+  };
+};
+
 var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _WithPieConfig2.default, _WithStackedAreaConfig2.default, _WithStackedColumnConfig2.default, _WithTreeMapConfig2.default, {
   init: function init() {
     (0, _highchartsMore2.default)(_highcharts2.default);
@@ -127,7 +137,17 @@ var ChartConfig = (0, _extends3.default)({}, _WithIndicatorConfig2.default, _Wit
   getColor: function getColor(seriaIndex) {
     var colors = _ChartTheme2.default.colors;
     return colors[seriaIndex % colors.length];
+  },
+
+
+  crDividendSeria: function crDividendSeria(data, chartId) {
+    return _crScatterSeria(_Color2.default.EX_DIVIDEND, _Tooltip2.default.exDividend, data, chartId + '_ExDivident');
+  },
+
+  crSplitRatioSeria: function crSplitRatioSeria(data, chartId) {
+    return _crScatterSeria(_Color2.default.SPLIT_RATIO, _Tooltip2.default.splitRatio, data, chartId + '_SplitRatio');
   }
+
 });
 
 ChartConfig.fnNumberFormat = function (value) {
@@ -226,21 +246,35 @@ ChartConfig.fMarkerSplitRatio = function () {
   return point;
 };
 
-var _fScatterSeria = function _fScatterSeria(color, pointFormatter, data, zhSeriaId) {
+/*
+const _fScatterSeria = function(color, pointFormatter, data, zhSeriaId){
   return {
     type: 'scatter',
     color: color,
-    tooltip: _Chart2.default.fTooltip(pointFormatter),
-    data: data,
-    zhSeriaId: zhSeriaId
-  };
-};
-ChartConfig.fExDividendSeria = function (data, chartId) {
-  return _fScatterSeria(_Color2.default.EX_DIVIDEND, _Tooltip2.default.exDividend, data, chartId + '_ExDivident');
-};
-ChartConfig.fSplitRatioSeria = function (data, chartId) {
-  return _fScatterSeria(_Color2.default.SPLIT_RATIO, _Tooltip2.default.splitRatio, data, chartId + '_SplitRatio');
-};
+    tooltip : Chart.fTooltip(pointFormatter),
+    data : data,
+    zhSeriaId : zhSeriaId
+  }
+}
+*/
+/*
+ChartConfig.fExDividendSeria = function(data, chartId){
+  return _fScatterSeria(
+    COLOR.EX_DIVIDEND,
+    Tooltip.exDividend,
+    data,
+    chartId + '_ExDivident'
+  );
+}
+ChartConfig.fSplitRatioSeria = function(data, chartId){
+  return _fScatterSeria(
+    COLOR.SPLIT_RATIO,
+    Tooltip.splitRatio,
+    data,
+    chartId + '_SplitRatio'
+  );
+}
+*/
 
 ChartConfig.fSeries = function () {
   var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};

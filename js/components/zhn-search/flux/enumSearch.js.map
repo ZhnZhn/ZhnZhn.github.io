@@ -1,0 +1,20 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/zhn-search/flux/enumSearch.js"
+ ],
+ "file": "../../../../src/components/zhn-search/flux/enumSearch.js",
+ "names": [
+  "enumSearch",
+  "LOADING",
+  "LOADING_FAILED",
+  "LOADED",
+  "SET_TICKET",
+  "SHOW_OPTIONS",
+  "HIDE_OPTIONS",
+  "TOGGLE_OPTIONS",
+  "Object",
+  "freeze"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,aAAa;AACjBC,WAAS,SADQ;AAEjBC,kBAAgB,gBAFC;AAGjBC,UAAQ,QAHS;;AAKjBC,cAAY,YALK;;AAOjBC,gBAAc,cAPG;AAQjBC,gBAAc,cARG;AASjBC,kBAAgB;AATC,CAAnB;;kBAYeC,OAAOC,MAAP,CAAcT,UAAd,C"
+}

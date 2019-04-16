@@ -261,6 +261,22 @@ var ChartFn = (0, _extends3.default)({}, _WithAreaChartFn2.default, {
     if (min < Number.POSITIVE_INFINITY) {
       _setPlotLine(plotLines[1], min);
     }
+  },
+
+  calcMinY: function calcMinY(_ref5) {
+    var min = _ref5.min,
+        max = _ref5.max;
+    return max > Number.NEGATIVE_INFINITY && min < Number.POSITIVE_INFINITY ? min - (max - min) * 1 / 6 : void 0;
+  },
+
+  setYToPoints: function setYToPoints(data, y) {
+    if (y == null) {
+      return;
+    }
+    var max = data.length;
+    for (var i = 0; i < max; i++) {
+      data[i].y = y;
+    }
   }
 
 });

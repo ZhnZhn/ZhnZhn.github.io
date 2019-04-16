@@ -16,10 +16,16 @@ var _AlphaSectorDialog = require('./AlphaSectorDialog');
 
 var _AlphaSectorDialog2 = _interopRequireDefault(_AlphaSectorDialog);
 
+var _AlphaSearchDialog = require('./AlphaSearchDialog');
+
+var _AlphaSearchDialog2 = _interopRequireDefault(_AlphaSearchDialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AlphaDialog = {
-  Indicator: _AlphaIndicatorDialog2.default, Intraday: _AlphaIntradayDialog2.default, Sector: _AlphaSectorDialog2.default
+  Indicator: _AlphaIndicatorDialog2.default, Intraday: _AlphaIntradayDialog2.default,
+  Sector: _AlphaSectorDialog2.default,
+  Search: _AlphaSearchDialog2.default
 };
 
 exports.default = AlphaDialog;

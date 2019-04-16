@@ -9,7 +9,12 @@ import Tooltip from './Tooltip'
 import SeriaBuilder from './SeriaBuilder'
 
 const { findMinY, findMaxY } = seriaFns;
-const { setPlotLinesMinMax } = ChartFn;
+const {
+  setPlotLinesMinMax,
+  calcMinY,
+  setYToPoints,
+} = ChartFn;
+const { crDividendSeria } = ChartConfig;
 
 const C = {
   CATEGORIES_X_AXIS: {
@@ -142,7 +147,7 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
     )
     return this;
   },
-  addCaption(title='', subtitle=''){    
+  addCaption(title='', subtitle=''){
     return this
       .addTitle(title)
       .addSubtitle(subtitle);
@@ -276,6 +281,18 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype , {
           }
         }
       )
+    }
+    return this;
+  },
+
+  addDividend({ dataDividend, minClose, maxClose }) {
+    if (dataDividend.length > 0) {
+      setYToPoints(
+        dataDividend,
+        calcMinY({ min: minClose, max: maxClose })
+      );
+      this.config.series.push(crDividendSeria(dataDividend, 'exDividend'));
+      this.config.chart.spacingBottom = 40;
     }
     return this;
   },

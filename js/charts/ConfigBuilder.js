@@ -44,7 +44,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var findMinY = _seriaFn2.default.findMinY,
     findMaxY = _seriaFn2.default.findMaxY;
-var setPlotLinesMinMax = _ChartFn2.default.setPlotLinesMinMax;
+var setPlotLinesMinMax = _ChartFn2.default.setPlotLinesMinMax,
+    calcMinY = _ChartFn2.default.calcMinY,
+    setYToPoints = _ChartFn2.default.setYToPoints;
+var crDividendSeria = _ChartConfig2.default.crDividendSeria;
 
 
 var C = {
@@ -289,6 +292,18 @@ ConfigBuilder.prototype = Object.assign(ConfigBuilder.prototype, (0, _extends3.d
           turboThreshold: 0
         }
       });
+    }
+    return this;
+  },
+  addDividend: function addDividend(_ref) {
+    var dataDividend = _ref.dataDividend,
+        minClose = _ref.minClose,
+        maxClose = _ref.maxClose;
+
+    if (dataDividend.length > 0) {
+      setYToPoints(dataDividend, calcMinY({ min: minClose, max: maxClose }));
+      this.config.series.push(crDividendSeria(dataDividend, 'exDividend'));
+      this.config.chart.spacingBottom = 40;
     }
     return this;
   },

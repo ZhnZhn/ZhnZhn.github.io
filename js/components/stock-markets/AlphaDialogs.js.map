@@ -1,1 +1,15 @@
-{"version":3,"sources":["../../../src/components/stock-markets/AlphaDialogs.js"],"names":["AlphaDialog","Indicator","Intraday","Sector"],"mappings":";;;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,cAAc;AAClBC,2CADkB,EACPC,uCADO,EACGC;AADH,CAApB;;kBAIeH,W","file":"AlphaDialogs.js","sourcesContent":["\r\nimport Indicator from './AlphaIndicatorDialog'\r\nimport Intraday from './AlphaIntradayDialog'\r\nimport Sector from './AlphaSectorDialog'\r\n\r\nconst AlphaDialog = {\r\n  Indicator, Intraday, Sector\r\n};\r\n\r\nexport default AlphaDialog\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/stock-markets/AlphaDialogs.js"
+ ],
+ "file": "../../../src/components/stock-markets/AlphaDialogs.js",
+ "names": [
+  "AlphaDialog",
+  "Indicator",
+  "Intraday",
+  "Sector",
+  "Search"
+ ],
+ "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,cAAc;AAClBC,2CADkB,EACPC,uCADO;AAElBC,qCAFkB;AAGlBC;AAHkB,CAApB;;kBAMeJ,W"
+}

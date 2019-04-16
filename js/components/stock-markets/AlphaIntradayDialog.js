@@ -44,6 +44,12 @@ var _MenuMore2 = _interopRequireDefault(_MenuMore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var D_ADJ = 'DAILY_ADJUSTED';
+
+var _isDailyAdj = function _isDailyAdj(dfT) {
+  return dfT === D_ADJ;
+};
+
 var DF = {
   INTERVAL: '15min',
   PERIOD: 'compact'
@@ -110,7 +116,7 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
   function AlphaIntradayDialog(props) {
     (0, _classCallCheck3.default)(this, AlphaIntradayDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AlphaIntradayDialog.__proto__ || Object.getPrototypeOf(AlphaIntradayDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AlphaIntradayDialog.__proto__ || Object.getPrototypeOf(AlphaIntradayDialog)).call(this, props));
 
     _this._handleSelectInterval = function (item) {
       _this.interval = item;
@@ -120,17 +126,24 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
       var _this$props = _this.props,
           dfT = _this$props.dfT,
           dataSource = _this$props.dataSource,
+          loadId = _this$props.loadId,
           _ticket = _this.ticketComp.isValid() ? _this.ticketComp.getValue() : undefined,
           _options = _crLoadOptions(dfT, _this.interval),
           _value = (_ticket || '') + ' (' + _options.interval + ')';
 
       _this.props.onLoad((0, _extends3.default)({
-        loadId: 'AL_I'
+        //loadId: 'AL_I',
+        loadId: loadId
       }, _options, {
         ticket: _ticket,
         value: _value, //for label
+        hasDividend: _this._hasDividend,
         dataSource: dataSource
       }));
+    };
+
+    _this._toggleDividend = function () {
+      _this._hasDividend = !_this._hasDividend;
     };
 
     _this._handleClose = function () {
@@ -141,17 +154,21 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
       _this.ticketComp = comp;
     };
 
+    _this._isDailyAdj = _isDailyAdj(props.dfT);
+    _this._hasDividend = false;
+
     _this._menuMore = (0, _MenuMore2.default)(_this, {
       toggleToolBar: _this._toggleWithToolbar,
       onAbout: _this._clickInfoWithToolbar
     });
 
-    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true });
+    _this.toolbarButtons = _this._createType2WithToolbar(props, { noDate: true, isOptions: _this._isDailyAdj });
     _this._commandButtons = _this._crCommandsWithLoad(_this);
 
     _this.state = {
       isToolbar: true,
-      isShowLabels: true
+      isShowLabels: true,
+      isOptions: false
     };
     return _this;
   }
@@ -177,7 +194,8 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
           dfT = _props.dfT,
           _state = this.state,
           isToolbar = _state.isToolbar,
-          isShowLabels = _state.isShowLabels;
+          isShowLabels = _state.isShowLabels,
+          isOptions = _state.isOptions;
 
 
       return _react2.default.createElement(
@@ -198,7 +216,7 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
         _react2.default.createElement(_DialogCell2.default.RowPattern, {
           ref: this._refTicket,
           isShowLabels: isShowLabels,
-          title: 'Ticket',
+          caption: 'Ticket',
           placeholder: 'Nyse or Nasdaq Ticket',
           onTest: _testTicket,
           errorMsg: 'Not Empty'
@@ -210,7 +228,16 @@ var AlphaIntradayDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Dec
           //placeholder="Default: 15min"
           //options={_intervalOptions}
           onSelect: this._handleSelectInterval
-        }))
+        })),
+        this._isDailyAdj && _react2.default.createElement(
+          _DialogCell2.default.ShowHide,
+          { isShow: isOptions },
+          _react2.default.createElement(_DialogCell2.default.RowCheckBox, {
+            initValue: false,
+            caption: "With Dividend History",
+            onToggle: this._toggleDividend
+          })
+        )
       );
     }
   }]);

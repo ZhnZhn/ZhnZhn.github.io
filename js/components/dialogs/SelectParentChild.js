@@ -26,7 +26,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _RowInputSelect = require('./RowInputSelect');
+var _RowInputSelect = require('./rows/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 
@@ -35,9 +35,6 @@ var _withLoadOptions = require('./decorators/withLoadOptions');
 var _withLoadOptions2 = _interopRequireDefault(_withLoadOptions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//const defaultChildOptions = [];
-
 
 var SelectParentChild = (0, _withLoadOptions2.default)(_class = (_temp = _class2 = function (_Component) {
   (0, _inherits3.default)(SelectParentChild, _Component);

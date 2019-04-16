@@ -8,10 +8,8 @@ import { BrowserType, LoadType } from '../../constants/Type'
 import ChartType from '../../constants/ChartType'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog'
-import Button from '../dialogs/Button'
-import DatesFragment from '../zhn-moleculs/DatesFragment'
+import D from '../dialogs/DialogCell'
 import ValidationMessages from '../zhn/ValidationMessages'
-import Row from '../dialogs/Row'
 
 import withValidationLoad from '../dialogs/decorators/withValidationLoad'
 
@@ -49,7 +47,7 @@ class LoadItemDialog extends Component {
            } = props.data;
 
     this._commandButtons = [
-       <Button.Load
+       <D.Button.Load
          key="load"
          onClick={this._handleLoad}
        />
@@ -129,11 +127,11 @@ class LoadItemDialog extends Component {
          commandButtons={this._commandButtons}
          onClose={this._handleClose}
       >
-        <Row.Text
+        <D.Row.Text
           caption="Item:"
           text={caption}
         />
-        <DatesFragment
+        <D.DatesFragment
             ref={c => this.datesFragment = c}
             initFromDate={initFromDate}
             initToDate={initToDate}

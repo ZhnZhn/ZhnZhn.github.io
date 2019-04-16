@@ -6,9 +6,7 @@ import safeFn from '../../utils/safeFn'
 
 import withTheme from '../hoc/withTheme'
 
-import RowPattern from '../dialogs/RowPattern'
-import RowInputSelect from '../dialogs/RowInputSelect'
-import RowCheckBox from '../dialogs/RowCheckBox'
+import D from '../dialogs/DialogCell'
 import FlatButton from '../zhn-m/FlatButton'
 import RowButtons from './RowButtons'
 
@@ -90,39 +88,39 @@ class PaneOptions extends Component {
         , _isNotZoomToMinMax = safeFn(data, MODE_ZOOM, false)();
     return (
       <div>
-        <RowPattern
+        <D.RowPattern
            ref={this._refProxy}
-           titleStyle={titleStyle}
-           title="Https Proxy:"
+           captionStyle={titleStyle}
+           caption="Https Proxy:"
            placeholder="Https Proxy for CORS"
            initValue={_proxy}
            onEnter={this._setProxy}
         />
-        <RowInputSelect
+        <D.RowInputSelect
            caption="UI Theme"
            captionStyle={titleStyle}
            options={UI_THEME_OPTIONS}
            onSelect={this._hSelectTheme}
         />
-       <RowCheckBox
+       <D.RowCheckBox
           initValue={_isAdminMode}
           caption="View in Admin Mode"
           onCheck={this._hMode.bind(null, MODE_ADMIN, true)}
           onUnCheck={this._hMode.bind(null, MODE_ADMIN, false)}
        />
-       <RowCheckBox
+       <D.RowCheckBox
           initValue={_isDrawDeltaExtrems}
           caption="Draw Delta Extrems"
           onCheck={this._hMode.bind(null, MODE_DELTA, true)}
           onUnCheck={this._hMode.bind(null, MODE_DELTA, false)}
        />
-       <RowCheckBox
+       <D.RowCheckBox
           initValue={_isNotZoomToMinMax}
           caption="Not Zoom to Min-Max"
           onCheck={this._hMode.bind(null, MODE_ZOOM, true)}
           onUnCheck={this._hMode.bind(null, MODE_ZOOM, false)}
        />
-       <RowCheckBox
+       <D.RowCheckBox
           initValue={false}
           caption="Without Points Halo"
           onCheck={this._setHalo.bind(null, false)}

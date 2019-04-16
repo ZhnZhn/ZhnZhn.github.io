@@ -6,7 +6,8 @@ import HandleF from '../f-handle/HandleF'
 import CellColor from '../zhn-moleculs/CellColor'
 import ModalPalette from '../zhn-moleculs/ModalPalette'
 import InputSelect from '../zhn-select/InputSelect'
-import RowCheckBox from '../dialogs/RowCheckBox'
+import D from '../dialogs/DialogCell'
+//import RowCheckBox from '../dialogs/RowCheckBox'
 
 const DF = {
   COLOR: '#7cb5ec'
@@ -117,7 +118,7 @@ class SeriaRow extends Component {
 
     return (
       <div style={S.ROOT}>
-        <RowCheckBox
+        <D.RowCheckBox
            rootStyle={S.ROW_CHECK_BOX}
            caption=""
            onCheck={this._hCheck}

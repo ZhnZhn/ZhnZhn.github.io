@@ -30,7 +30,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _RowInputSelect = require('./RowInputSelect');
+var _RowInputSelect = require('./rows/RowInputSelect');
 
 var _RowInputSelect2 = _interopRequireDefault(_RowInputSelect);
 

@@ -47,6 +47,8 @@ const S = {
   }
 };
 
+const _isFn = fn => typeof fn === 'function';
+
 class DraggableDialog extends Component {
   /*
   static propTypes = {
@@ -65,22 +67,27 @@ class DraggableDialog extends Component {
     onClose: () => {}
   }
 
+  state = {
+    isMore: false
+  }
 
+  /*
   constructor(props){
     super(props)
 
     //this.rootDiv = null
-    this._refRootDiv = this._refRootDiv.bind(this)
+    //this._refRootDiv = this._refRootDiv.bind(this)
     //this.btMore = null
-    this._refBtMore = this._refBtMore.bind(this)
+    //this._refBtMore = this._refBtMore.bind(this)
 
-    this._hKeyDown = this._hKeyDown.bind(this)
-    this._hClose = this._hClose.bind(this)
+    //this._hKeyDown = this._hKeyDown.bind(this)
+    //this._hClose = this._hClose.bind(this)
 
     this.state = {
       isMore: false
     }
   }
+  */
 
   componentDidMount(){
      Interact.makeDragable(this.rootDiv);
@@ -98,14 +105,14 @@ class DraggableDialog extends Component {
     }
   }
 
-  _hKeyDown(evt) {
+  _hKeyDown = evt => {
     if ( isKeyEscape(evt) ) {
       evt.preventDefault()
       evt.stopPropagation()
       this._hClose()
     }
   }
-  _hClose() {
+  _hClose = () => {
      this.props.onClose()
      this.focusPrev()
   }
@@ -117,7 +124,7 @@ class DraggableDialog extends Component {
   }
 
   _renderMenuMore = (menuModel, isMore, TS) => {
-    return menuModel && <ModalSlider
+     return menuModel && <ModalSlider
       isShow={isMore}
       className={CL.MENU_MORE}
       style={TS.EL_BORDER}
@@ -125,6 +132,7 @@ class DraggableDialog extends Component {
       onClose={this._toggleMore}
     />
   }
+
   _renderBtMore = (menuModel) => {
     return menuModel && <SvgMore
       btRef={this._refBtMore}
@@ -139,8 +147,7 @@ class DraggableDialog extends Component {
       <div style={S.COMMAND_DIV}>
         {commandButtons}
         {
-          typeof onShowChart === 'function' &&
-          <FlatButton
+          _isFn(onShowChart) && <FlatButton
             key="show"
             rootStyle={S.BT_ROOT}
             caption="Show"
@@ -161,12 +168,9 @@ class DraggableDialog extends Component {
     );
   }
 
-  _refBtMore(node) {
-    this.btMore = node
-  }
-  _refRootDiv(node){
-    this.rootDiv = node
-  }
+  _refBtMore = node => this.btMore = node
+  _refRootDiv = node => this.rootDiv = node
+
 
   render(){
     const {
@@ -220,7 +224,7 @@ class DraggableDialog extends Component {
 
   focus() {
     this._prevFocused = document.activeElement
-    focusNode(this.btMore || this.rootDiv)    
+    focusNode(this.btMore || this.rootDiv)
   }
 
   focusPrev() {

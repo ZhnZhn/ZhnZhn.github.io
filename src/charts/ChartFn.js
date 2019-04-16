@@ -213,6 +213,21 @@ const ChartFn = {
     if ( min<Number.POSITIVE_INFINITY ){
       _setPlotLine(plotLines[1], min)
     }
+  },
+
+  calcMinY: ({ min, max }) => max>Number.NEGATIVE_INFINITY
+   && min<Number.POSITIVE_INFINITY
+     ? min - ((max-min)*1/6)
+     : void 0,
+
+  setYToPoints: (data, y) => {
+    if (y == null) {
+      return;
+    }
+    const max=data.length;
+    for (let i=0; i<max; i++ ){
+      data[i].y = y;
+    }
   }
 
 }

@@ -24,9 +24,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Row = require('./Row');
+var _DialogCell = require('./DialogCell');
 
-var _Row2 = _interopRequireDefault(_Row);
+var _DialogCell2 = _interopRequireDefault(_DialogCell);
 
 var _ButtonCircle = require('../zhn/ButtonCircle');
 
@@ -34,6 +34,7 @@ var _ButtonCircle2 = _interopRequireDefault(_ButtonCircle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import Row from './Row';
 var STYLE = {
   ROW: {
     paddingTop: '4px',
@@ -91,7 +92,7 @@ var ToolbarButtonCircle = function (_Component) {
       var buttons = this.props.buttons;
 
       return _react2.default.createElement(
-        _Row2.default.Plain,
+        _DialogCell2.default.Row.Plain,
         { style: STYLE.ROW },
         this._renderButtons(buttons)
       );

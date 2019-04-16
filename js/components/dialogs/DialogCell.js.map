@@ -7,22 +7,16 @@
  "names": [
   "DialogCell",
   "DraggableDialog",
-  "DatesFragment",
   "ShowHide",
   "ValidationMessages",
   "ToolbarButtonCircle",
   "Toolbar",
   "RowInputText",
   "RowInputColor",
-  "RowInputSelect",
-  "RowChart",
   "SelectWithLoad",
   "SelectParentChild",
-  "RowPattern",
-  "RowCheckBox",
-  "Row",
-  "RowDate",
-  "Button"
+  "Button",
+  "Rows"
  ],
- "mappings": ";;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,aAAa;AACjBC,4CADiB;AAEjBC,wCAFiB;AAGjBC,8BAHiB;AAIjBC,kDAJiB;;AAMjBC,oDANiB;AAOjBC,4BAPiB;AAQjBC,sCARiB;AASjBC,wCATiB;AAUjBC,0CAViB;AAWjBC,8BAXiB;AAYjBC,0CAZiB;AAajBC,gDAbiB;AAcjBC,kCAdiB;AAejBC,oCAfiB;AAgBjBC,oBAhBiB;AAiBjBC,4BAjBiB;AAkBjBC;AAlBiB,CAAnB;;kBAqBejB,U"
+ "mappings": ";;;;;;;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA;AACJC,4CADI;AAEJC,8BAFI;AAGJC,kDAHI;;AAKJC,oDALI;AAMJC,4BANI;AAOJC,sCAPI;AAQJC,wCARI;AASJC,0CATI;AAUJC,gDAVI;AAWJC;AAXI,GAYDC,cAZC,CAAN;;kBAeeX,U"
 }

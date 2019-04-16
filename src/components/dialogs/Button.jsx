@@ -11,7 +11,7 @@ const S = {
   }
 };
 
-const Load = ({ onClick }) =>
+const Load = ({ onClick }) => (
   <FlatButton
     rootStyle={S.LOAD}
     caption="Load"
@@ -19,15 +19,16 @@ const Load = ({ onClick }) =>
     //accessKey="l"
     onClick={onClick}
   />
+);
 
-  const Show = ({ onClick }) =>
-    <FlatButton
-      rootStyle={S.SHOW}
-      caption="Show"
-      title="Show Pane Container"
-      //accessKey="s"
-      onClick={onClick}
-    />
-
+const Show = ({ onClick }) => (
+  <FlatButton
+    rootStyle={S.SHOW}
+    caption="Show"
+    title="Show Pane Container"
+    //accessKey="s"
+    onClick={onClick}
+  />
+);
 
 export default { Load, Show, Flat: FlatButton }

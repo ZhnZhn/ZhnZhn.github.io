@@ -1,0 +1,15 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../../src/components/dialogs/rows/useRow.js"
+ ],
+ "file": "../../../../src/components/dialogs/rows/useRow.js",
+ "names": [
+  "useRow",
+  "isOc",
+  "isShowLabels",
+  "caption",
+  "captionStyle"
+ ],
+ "mappings": ";;;;;;;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,SAAS,SAATA,MAAS,OAIZC,IAJY;AAAA,MACbC,YADa,QACbA,YADa;AAAA,MAEbC,OAFa,QAEbA,OAFa;AAAA,MAGbC,YAHa,QAGbA,YAHa;AAAA,oCAMV,2BAAY,EAAEF,0BAAF,EAAgBE,0BAAhB,EAAZ,EAA4CH,IAA5C,CANU,EAQV,6BAAcE,OAAd,CARU;AAAA,CAAf;;kBAWeH,M"
+}
