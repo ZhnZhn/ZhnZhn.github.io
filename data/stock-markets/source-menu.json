@@ -34,7 +34,7 @@
         { "id": "SM_IEX_DIVIDENDS_2Y"}
       ]
     },{
-      "caption": "Intrinio: US PC Financials", "isInitClose": true,
+      "caption": "Intrinio: U.S. PC Financials", "isInitClose": true,
       "items": [
         { "id": "SM_INTR_CALC" },
         { "id": "SM_INTR_INCOME" },
