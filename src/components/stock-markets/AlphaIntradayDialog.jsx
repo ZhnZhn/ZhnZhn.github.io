@@ -4,9 +4,10 @@ import D from '../dialogs/DialogCell'
 import Decor from '../dialogs/decorators/Decorators'
 import crMenuMore from '../dialogs/MenuMore'
 
-
+const DAILY = 'DAILY';
 const D_ADJ = 'DAILY_ADJUSTED';
 
+const _isDaily = dfT => dfT.indexOf(DAILY) !== -1;
 const _isDailyAdj = dfT => dfT === D_ADJ;
 
 const DF = {
@@ -25,8 +26,8 @@ const _intervalOptions = [
 ]
 
 const _periodOptions = [
-  { caption: 'compact (100 days)', value: 'compact' },
-  { caption: 'full (of 20+ years, about 1MB)', value: 'full' },
+  { caption: 'Compact (100 days)', value: 'compact' },
+  { caption: 'Full (of 20+ years, about 1MB)', value: 'full' },
 ];
 
 const _r = {
@@ -54,7 +55,7 @@ const _rDaily = {
   }
 };
 
-const _getConf = (key) => _r[key] || _r['DAILY'];
+const _getConf = (key) => _r[key] || _r.DAILY;
 
 
 const _getInterval = (input, df) => input
@@ -84,8 +85,11 @@ class AlphaIntradayDialog extends Component {
   constructor(props){
     super(props)
 
-    this._isDailyAdj = _isDailyAdj(props.dfT)
+    const { dfT } = props
+    this._isDaily = _isDaily(dfT)
+    this._isDailyAdj = _isDailyAdj(dfT)
     this._hasDividend = false
+    this._hasFilterZero = false
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -93,7 +97,7 @@ class AlphaIntradayDialog extends Component {
     })
 
     this.toolbarButtons = this._createType2WithToolbar(
-      props, { noDate: true, isOptions: this._isDailyAdj }
+      props, { noDate: true, isToggleOptions: this._isDaily }
     )
     this._commandButtons = this._crCommandsWithLoad(this)
 
@@ -101,7 +105,7 @@ class AlphaIntradayDialog extends Component {
     this.state = {
       isToolbar: true,
       isShowLabels: true,
-      isOptions: false
+      isToggleOptions: false
     }
   }
 
@@ -127,18 +131,21 @@ class AlphaIntradayDialog extends Component {
     , _value = `${_ticket || ''} (${_options.interval})`;
 
     this.props.onLoad({
-      //loadId: 'AL_I',
       loadId,
       ..._options,
       ticket: _ticket,
       value: _value, //for label
       hasDividend: this._hasDividend,
+      hasFilterZero: this._hasFilterZero,
       dataSource
     })
   }
 
   _toggleDividend = () => {
     this._hasDividend = !this._hasDividend
+  }
+  _toggleFilterZero = () => {
+    this._hasFilterZero = !this._hasFilterZero
   }
 
   _handleClose = () => {
@@ -159,7 +166,7 @@ class AlphaIntradayDialog extends Component {
     , {
       isToolbar,
       isShowLabels,
-      isOptions
+      isToggleOptions
     } = this.state;
 
     return (
@@ -192,11 +199,17 @@ class AlphaIntradayDialog extends Component {
             //options={_intervalOptions}
             onSelect={this._handleSelectInterval}
           />
-          {this._isDailyAdj && <D.ShowHide isShow={isOptions}>
+          {this._isDaily && <D.ShowHide isShow={isToggleOptions}>
+              { this._isDailyAdj && <D.RowCheckBox
+                  initValue={false}
+                  caption={"With Dividend History"}
+                  onToggle={this._toggleDividend}
+                />
+              }
               <D.RowCheckBox
                 initValue={false}
-                caption={"With Dividend History"}
-                onToggle={this._toggleDividend}
+                caption={"Filter Zero Values"}
+                onToggle={this._toggleFilterZero}
               />
            </D.ShowHide>
          }

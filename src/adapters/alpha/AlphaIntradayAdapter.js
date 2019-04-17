@@ -50,10 +50,11 @@ const _fMarkerColor = (date) => {
   return { marker, color };
 }
 
-const _crSeriaOptions = ({ dfT, hasDividend }) => {
+const _crSeriaOptions = ({ dfT, hasFilterZero, hasDividend }) => {
   const _isIntraday = dfT === INTRADAY;
   const _isAdjusted = dfT === DAILY_ADJUSTED;
   return {
+    notFilterZero: !hasFilterZero,
     isDividend: _isAdjusted && hasDividend,
     toUTC: _isIntraday
       ? ymdhmsToUTC
@@ -83,6 +84,8 @@ const _addDividendPointTo = (arr, dateMs, p) => {
   }
 };
 
+const _notZeros = (v1, v2) => v1 !== 0 && v2 !== 0;
+
 const _crSeriaData = (json, option, config, chartId) => {
   const { interval } = option
   , _propName = `Time Series (${interval})`
@@ -94,7 +97,7 @@ const _crSeriaData = (json, option, config, chartId) => {
   , _dataVolume = [], _dataVolumeColumn = []
   , _dataHigh = [], _dataLow = [], _dataOpen = []
   , {
-    isDividend,
+    notFilterZero, isDividend,
     toUTC, pnClose, pnVolume
   } = _crSeriaOptions(option);
 
@@ -107,41 +110,44 @@ const _crSeriaData = (json, option, config, chartId) => {
   for (i; i<_max; i++) {
     _date = _dateKeys[i]
     _point = _value[_date]
-    _open = parseFloat(_point['1. open'])
-    _high = parseFloat(_point['2. high'])
-    _low = parseFloat(_point['3. low'])
     _closeV = parseFloat(_point['4. close'])
     _close = parseFloat(_point[pnClose])
-    _volume = parseFloat(_point[pnVolume])
 
-    _dateMs = toUTC(_date)
-    _data.push({
-      x: _dateMs, y: _close, ..._fMarkerColor(_date)
-    })
+    if (notFilterZero || _notZeros(_closeV, _close) ) {
+      _open = parseFloat(_point['1. open'])
+      _high = parseFloat(_point['2. high'])
+      _low = parseFloat(_point['3. low'])
+      _volume = parseFloat(_point[pnVolume])
 
-    _dataHigh.push([_dateMs, _high])
-    _dataLow.push([_dateMs, _low])
-    _dataOpen.push([_dateMs, _open])
+      _dateMs = toUTC(_date)
+      _data.push({
+        x: _dateMs, y: _close, ..._fMarkerColor(_date)
+      })
 
-    _dataVolume.push([_dateMs, _volume])
-    _dataVolumeColumn.push(
-        volumeColumnPoint({
-           open: _open,
-           close: _closeV,
-           volume: _volume,
-           date: _dateMs,
-           option: { _high: _high, _low: _low }
-        })
-    )
-    if (isDividend) {
-      _addDividendPointTo(_dataDividend, _dateMs, _point)
-    }
+      _dataHigh.push([_dateMs, _high])
+      _dataLow.push([_dateMs, _low])
+      _dataOpen.push([_dateMs, _open])
 
-    if (_minClose > _close) {
-      _minClose = _close
-    }
-    if (_maxClose < _close ) {
-      _maxClose = _close
+      _dataVolume.push([_dateMs, _volume])
+      _dataVolumeColumn.push(
+          volumeColumnPoint({
+             open: _open,
+             close: _closeV,
+             volume: _volume,
+             date: _dateMs,
+             option: { _high: _high, _low: _low }
+          })
+      )
+      if (isDividend) {
+        _addDividendPointTo(_dataDividend, _dateMs, _point)
+      }
+
+      if (_minClose > _close) {
+        _minClose = _close
+      }
+      if (_maxClose < _close ) {
+        _maxClose = _close
+      }
     }
   }
 

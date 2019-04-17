@@ -79,11 +79,13 @@ var _fMarkerColor = function _fMarkerColor(date) {
 
 var _crSeriaOptions = function _crSeriaOptions(_ref) {
   var dfT = _ref.dfT,
+      hasFilterZero = _ref.hasFilterZero,
       hasDividend = _ref.hasDividend;
 
   var _isIntraday = dfT === INTRADAY;
   var _isAdjusted = dfT === DAILY_ADJUSTED;
   return {
+    notFilterZero: !hasFilterZero,
     isDividend: _isAdjusted && hasDividend,
     toUTC: _isIntraday ? ymdhmsToUTC : ymdToUTC,
     pnClose: _isAdjusted ? '5. adjusted close' : '4. close',
@@ -104,6 +106,10 @@ var _addDividendPointTo = function _addDividendPointTo(arr, dateMs, p) {
   }
 };
 
+var _notZeros = function _notZeros(v1, v2) {
+  return v1 !== 0 && v2 !== 0;
+};
+
 var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
   var interval = option.interval,
       _propName = 'Time Series (' + interval + ')',
@@ -117,6 +123,7 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
       _dataLow = [],
       _dataOpen = [],
       _crSeriaOptions2 = _crSeriaOptions(option),
+      notFilterZero = _crSeriaOptions2.notFilterZero,
       isDividend = _crSeriaOptions2.isDividend,
       toUTC = _crSeriaOptions2.toUTC,
       pnClose = _crSeriaOptions2.pnClose,
@@ -139,38 +146,41 @@ var _crSeriaData = function _crSeriaData(json, option, config, chartId) {
   for (i; i < _max; i++) {
     _date = _dateKeys[i];
     _point = _value[_date];
-    _open = parseFloat(_point['1. open']);
-    _high = parseFloat(_point['2. high']);
-    _low = parseFloat(_point['3. low']);
     _closeV = parseFloat(_point['4. close']);
     _close = parseFloat(_point[pnClose]);
-    _volume = parseFloat(_point[pnVolume]);
 
-    _dateMs = toUTC(_date);
-    _data.push((0, _extends3.default)({
-      x: _dateMs, y: _close }, _fMarkerColor(_date)));
+    if (notFilterZero || _notZeros(_closeV, _close)) {
+      _open = parseFloat(_point['1. open']);
+      _high = parseFloat(_point['2. high']);
+      _low = parseFloat(_point['3. low']);
+      _volume = parseFloat(_point[pnVolume]);
 
-    _dataHigh.push([_dateMs, _high]);
-    _dataLow.push([_dateMs, _low]);
-    _dataOpen.push([_dateMs, _open]);
+      _dateMs = toUTC(_date);
+      _data.push((0, _extends3.default)({
+        x: _dateMs, y: _close }, _fMarkerColor(_date)));
 
-    _dataVolume.push([_dateMs, _volume]);
-    _dataVolumeColumn.push(volumeColumnPoint({
-      open: _open,
-      close: _closeV,
-      volume: _volume,
-      date: _dateMs,
-      option: { _high: _high, _low: _low }
-    }));
-    if (isDividend) {
-      _addDividendPointTo(_dataDividend, _dateMs, _point);
-    }
+      _dataHigh.push([_dateMs, _high]);
+      _dataLow.push([_dateMs, _low]);
+      _dataOpen.push([_dateMs, _open]);
 
-    if (_minClose > _close) {
-      _minClose = _close;
-    }
-    if (_maxClose < _close) {
-      _maxClose = _close;
+      _dataVolume.push([_dateMs, _volume]);
+      _dataVolumeColumn.push(volumeColumnPoint({
+        open: _open,
+        close: _closeV,
+        volume: _volume,
+        date: _dateMs,
+        option: { _high: _high, _low: _low }
+      }));
+      if (isDividend) {
+        _addDividendPointTo(_dataDividend, _dateMs, _point);
+      }
+
+      if (_minClose > _close) {
+        _minClose = _close;
+      }
+      if (_maxClose < _close) {
+        _maxClose = _close;
+      }
     }
   }
 
