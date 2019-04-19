@@ -68,7 +68,7 @@ var InputPattern = (_temp = _class = function (_Component) {
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
-     initValue: PropTypes.string,     
+     initValue: PropTypes.string,
      placeholder: PropTypes.string,
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,

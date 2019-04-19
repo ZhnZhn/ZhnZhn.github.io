@@ -105,11 +105,7 @@ const _router = {
   get DialogEurostat2() {
     return this.getES()
       .then(D => D.Eurostat2);
-  },
-  get DialogEurostat3() {
-    return this.getES()
-      .then(D => D.Eurostat3);
-  },
+  },  
   get DialogEurostat3A() {
     return this.getES()
       .then(D => D.Eurostat3A);

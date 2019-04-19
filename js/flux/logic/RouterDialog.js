@@ -144,11 +144,6 @@ var _router = {
       return D.Eurostat2;
     });
   },
-  get DialogEurostat3() {
-    return this.getES().then(function (D) {
-      return D.Eurostat3;
-    });
-  },
   get DialogEurostat3A() {
     return this.getES().then(function (D) {
       return D.Eurostat3A;

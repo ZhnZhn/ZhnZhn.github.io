@@ -109,7 +109,7 @@
         "noDate": true,
         "valueFn" : "ROne",
         "loadId" : "BLS",
-        "isProxy": true,        
+        "isProxy": true,
         "dataSource": "U.S. Bureau of Labor Statistics (BSL)"
       }
     },
@@ -498,9 +498,9 @@
       "dialogProps" : {
         "descrUrl": "./data/usa-economy/zillow.html",
         "nInitFromDate" : 10,
-        "oneCaption" : "Indicator",
-        "oneURI" : "./data/usa-economy/zillow-indicators.json",
-        "oneJsonProp" : "indicators",
+        "oneCaption" : "Metric",
+        "oneURI" : "./data/usa-economy/zillow-metrics.json",
+        "oneJsonProp" : "metrics",
         "twoCaption" : "Area Type",
         "twoURI" : "./data/usa-economy/zillow-area.json",
         "twoJsonProp" : "places",

@@ -6,14 +6,15 @@
  "file": "../../../../src/components/dialogs/rows/Rows.js",
  "names": [
   "Rows",
-  "DatesFragment",
   "RowInputSelect",
   "RowInputSearch",
   "RowChart",
+  "DatesFragment",
+  "SelectOneTwo",
   "RowPattern",
   "RowDate",
   "RowCheckBox",
   "Row"
  ],
- "mappings": ";;;;;;AACA;;;;AAKA;;;;AACA;;;;AACA;;;;AAGA;;;;AACA;;;;AACA;;;;AACA;;;;;;AACA;;AANA;AACA;AAOA,IAAMA,OAAO;AACXC,wCADW;AAEXC,0CAFW;AAGXC,0CAHW;AAIXC,8BAJW;;AAMXC,kCANW;AAOXC,4BAPW;AAQXC,oCARW;AASXC;AATW,CAAb;AAfA;AACA;AACA;AACA;kBAwBeR,I"
+ "mappings": ";;;;;;AAEA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,OAAO;AACXC,0CADW;AAEXC,0CAFW;AAGXC,8BAHW;;AAKXC,wCALW;AAMXC,sCANW;;AAQXC,kCARW;AASXC,4BATW;AAUXC,oCAVW;AAWXC;AAXW,CAAb;;kBAceT,I"
 }

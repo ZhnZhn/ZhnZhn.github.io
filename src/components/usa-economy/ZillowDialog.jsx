@@ -12,35 +12,34 @@ const S = {
   }
 };
 
+const _isFn = fn => typeof fn === 'function';
+const _isByZipCode = item => item && item.value === 'Z';
+
 const _loadFn = (props, options) => {
   const { fnValue, dataColumn, loadId, dataSource } = props
-      , { one, two, three, fromDate, toDate, zipCode } = options
-      , _isKeyFeature = (two.value === 'Z')
-           ? true
-           : false
-      , _three = (two.value !== 'Z')
-           ? three
-           : { value:zipCode, caption: zipCode }
-      , _value = (typeof fnValue === 'function')
-           ? fnValue(one.value, two.value, _three.value)
-           : undefined
+  , { one, two, three, fromDate, toDate, zipCode } = options
+  , _hasZipCode = _isByZipCode(two)
+  , _three = !_hasZipCode
+       ? three
+       : { value: zipCode, caption: zipCode }
+  , _value = _isFn(fnValue)
+       ? fnValue(one.value, two.value, _three.value)
+       : void 0;
   return {
-    value : _value,
+    value: _value,
     fromDate: fromDate,
     toDate: toDate,
-    dataColumn : dataColumn,
-    loadId : loadId,
-    title : `${two.caption} : ${_three.caption}`,
-    subtitle : one.caption,
-    dataSource : dataSource,
-    isKeyFeature: _isKeyFeature
-  }
+    dataColumn: dataColumn,
+    loadId: loadId,
+    title: `${two.caption}: ${_three.caption}`,
+    subtitle: one.caption,
+    dataSource: dataSource,
+    isKeyFeature: _hasZipCode
+  };
 };
 
 const _reZipCode = /^\d{5}$/;
-const _isZipCode = (value) => {
-  return _reZipCode.test(value);
-}
+const _isZipCode = value => _reZipCode.test(value.trim());
 
 @Decor.withToolbar
 @Decor.withValidationLoad
@@ -48,7 +47,7 @@ const _isZipCode = (value) => {
 class  ZillowDialog extends Component {
 
   constructor(props){
-    super()
+    super(props)
 
     this._menuMore = crMenuMore(this, {
       toggleToolBar: this._toggleWithToolbar,
@@ -61,8 +60,8 @@ class  ZillowDialog extends Component {
     this.state = {
       isToolbar: true,
       isShowLabels: true,
-      isShowDate : true,
-      isShowPattern : false,
+      isShowDate: true,
+      isShowPattern: false,
       validationMessages: []
     }
   }
@@ -76,11 +75,11 @@ class  ZillowDialog extends Component {
     return true;
   }
 
-  _handleSelectOne = (one) => {
-    this.one = one;
+  _hSelectMetric = (metric) => {
+    this.metric = metric;
   }
   _handleSelectType = (type) => {
-    if (type && type.value === 'Z'){
+    if (_isByZipCode(type)){
       this.setState({ isShowPattern: true })
     } else {
       this.setState({ isShowPattern: false })
@@ -97,33 +96,41 @@ class  ZillowDialog extends Component {
      const { oneCaption } = this.props;
      let msg = [];
 
-     if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
+     if (!this.metric) {
+       msg.push(this.props.msgOnNotSelected(oneCaption));
+     }
 
-     const { parent } = this.parentChild.getValues()
-     if (parent && parent.value === 'Z'){
+     const { one } = this.inputTypeCode.getValues()
+     if (_isByZipCode(one)) {
        if (!this.inputZipCode.isValid()){
          msg = msg.concat('Zip Code is not valid')
        }
      } else {
-       const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
+       const { isValid:isValid1, msg:msg1 } = this.inputTypeCode.getValidation();
        if (!isValid1) { msg = msg.concat(msg1); }
      }
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
      if (!isValid) { msg = msg.concat(datesMsg); }
 
-     msg.isValid = (msg.length === 0) ? true : false;
+     msg.isValid = msg.length === 0
+        ? true
+        : false;
      return msg;
   }
 
   _createLoadOption = () => {
-    const { parent:two, child:three } = this.parentChild.getValues()
+    const { one:two, two:three } = this.inputTypeCode.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues()
         , zipCode = this.inputZipCode.getValue();
 
     return _loadFn(
-      this.props,
-      { one : this.one, two, three, fromDate, toDate, zipCode }
+      this.props, {
+        one: this.metric,
+        two, three,
+        fromDate, toDate,
+        zipCode
+      }
     );
   }
 
@@ -131,32 +138,32 @@ class  ZillowDialog extends Component {
     this._handleWithValidationClose()
   }
 
-  _refItems = c => this.parentChild = c
+  _refTypeCode = c => this.inputTypeCode = c
   _refZip = n => this.inputZipCode = n
   _refDates = c => this.datesFragment = c
 
   render(){
     const {
-           caption, isShow, onShow, onFront,
-           oneCaption, oneURI, oneJsonProp,
-           twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
-           initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
-          } = this.props
-        , {
-            isToolbar,
-            isShowLabels, isShowDate, isShowPattern,
-            validationMessages
-          } = this.state;
+      caption, isShow, onShow, onFront,
+      oneCaption, oneURI, oneJsonProp,
+      twoCaption, twoURI, twoJsonProp, threeCaption, msgOnNotSelected,
+      initFromDate, initToDate, nForecastDate, msgOnNotValidFormat, onTestDate
+    } = this.props
+    , {
+      isToolbar,
+      isShowLabels, isShowDate, isShowPattern,
+      validationMessages
+    } = this.state;
 
     return(
         <D.DraggableDialog
-             isShow={isShow}
-             caption={caption}
-             menuModel={this._menuMore}
-             commandButtons={this._commandButtons}
-             onShowChart={onShow}
-             onFront={onFront}
-             onClose={this._handleClose}
+           isShow={isShow}
+           caption={caption}
+           menuModel={this._menuMore}
+           commandButtons={this._commandButtons}
+           onShowChart={onShow}
+           onFront={onFront}
+           onClose={this._handleClose}
          >
              <D.Toolbar
                 isShow={isToolbar}
@@ -169,29 +176,28 @@ class  ZillowDialog extends Component {
                jsonProp={oneJsonProp}
                caption={oneCaption}
                optionNames="Items"
-               onSelect={this._handleSelectOne}
+               onSelect={this._hSelectMetric}
              />
-
-             <D.SelectParentChild
-                 ref={this._refItems}
+             <D.SelectOneTwo
+                 ref={this._refTypeCode}
                  isShow={isShow}
                  isShowLabels={isShowLabels}
+                 isHideTwo={isShowPattern}
                  uri={twoURI}
-                 parentCaption={twoCaption}
-                 parentOptionNames="Items"
-                 parentJsonProp={twoJsonProp}
-                 childCaption={threeCaption}
+                 oneCaption={twoCaption}
+                 oneJsonProp={twoJsonProp}
+                 twoCaption={threeCaption}
                  msgOnNotSelected={msgOnNotSelected}
-                 onSelectParent={this._handleSelectType}
+                 onSelectOne={this._handleSelectType}
              />
              <D.ShowHide isShow={isShowPattern}>
                 <D.RowPattern
                   ref={this._refZip}
                   isShowLabels={isShowLabels}
-                  caption="Zip Code*"
-                  placeholder="Zip Code, 5 Digit"
+                  caption="*Zip Code"
+                  placeholder="Zip Code, 5 Digits"
                   onTest={_isZipCode}
-                  errorMsg="5 digit format must be"
+                  errorMsg="5 digits format is required"
                 />
              </D.ShowHide>
              <D.ShowHide isShow={isShowDate}>
@@ -207,7 +213,7 @@ class  ZillowDialog extends Component {
              </D.ShowHide>
              <D.ShowHide isShow={isShowPattern}>
                <div style={S.TIP}>
-                 * Not for all Zip Code data are available.
+                 *Not for all Zip Codes data is available
                </div>
              </D.ShowHide>
              <D.ValidationMessages

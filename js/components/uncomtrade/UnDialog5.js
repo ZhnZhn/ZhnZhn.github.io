@@ -71,9 +71,9 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     _this._createValidationMessages = function () {
       var msg = [];
 
-      var _this$parentChild$get = _this.parentChild.getValidation(),
-          isValid1 = _this$parentChild$get.isValid,
-          msg1 = _this$parentChild$get.msg;
+      var _this$groupItem$getVa = _this.groupItem.getValidation(),
+          isValid1 = _this$groupItem$getVa.isValid,
+          msg1 = _this$groupItem$getVa.msg;
 
       if (!isValid1) {
         msg = msg.concat(msg1);
@@ -92,14 +92,13 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
     };
 
     _this._createLoadOption = function () {
-      var _this$parentChild$get2 = _this.parentChild.getValues(),
-          two = _this$parentChild$get2.parent,
-          three = _this$parentChild$get2.child;
+      var _this$groupItem$getVa2 = _this.groupItem.getValues(),
+          two = _this$groupItem$getVa2.one,
+          three = _this$groupItem$getVa2.two;
 
       return _this.props.loadFn(_this.props, {
         one: _this.one, two: two, three: three,
         tradeFlow: _this.tradeFlow
-        //hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
       });
     };
 
@@ -111,8 +110,8 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
       _this[propName] = value;
     };
 
-    _this._refItems = function (c) {
-      return _this.parentChild = c;
+    _this._refGroupItem = function (c) {
+      return _this.groupItem = c;
     };
 
     _this._refDates = function (c) {
@@ -204,15 +203,14 @@ var UnDialog5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.d
           placeholder: 'Default: All',
           onSelect: this._handleSelectOne
         }),
-        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
-          ref: this._refItems,
+        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
+          ref: this._refGroupItem,
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: twoURI,
-          parentCaption: twoCaption,
-          parentOptionNames: 'Items',
-          parentJsonProp: twoJsonProp,
-          childCaption: threeCaption,
+          oneCaption: twoCaption,
+          oneJsonProp: twoJsonProp,
+          twoCaption: threeCaption,
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(

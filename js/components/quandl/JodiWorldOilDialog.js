@@ -107,8 +107,8 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
 
     _this._createLoadOption = function () {
       var _this$productFlow$get2 = _this.productFlow.getValues(),
-          product = _this$productFlow$get2.parent,
-          flow = _this$productFlow$get2.child,
+          product = _this$productFlow$get2.one,
+          flow = _this$productFlow$get2.two,
           _this$datesFragment$g2 = _this.datesFragment.getValues(),
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate,
@@ -231,15 +231,14 @@ var JodiWorldOilDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Deco
           optionNames: 'Items',
           onSelect: this._hSelectCountry
         }),
-        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
+        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
           ref: this._refProductFlow,
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: parentChildURI,
-          parentCaption: parentCaption,
-          parentOptionNames: 'Items',
-          parentJsonProp: parentJsonProp,
-          childCaption: childCaption,
+          oneCaption: parentCaption,
+          oneJsonProp: parentJsonProp,
+          twoCaption: childCaption,
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {

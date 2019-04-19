@@ -73,7 +73,7 @@ class FuturesWikiDialog extends Component {
     return msg;
   }
   _createLoadOption = () => {
-    const { parent:exchange, child:item } = this.exchangeItem.getValues()
+    const { one:exchange, two:item } = this.exchangeItem.getValues()
         , { isContinious } = this.props
         , fromDate = (isContinious)
               ? this.fromDate.getValue()
@@ -118,15 +118,15 @@ class FuturesWikiDialog extends Component {
               buttons={this.toolbarButtons}
            />
 
-           <D.SelectParentChild
+           <D.SelectOneTwo
                ref={this._refExchangeItem}
                isShow={isShow}
                isShowLabels={isShowLabels}
                uri={futuresURI}
-               parentCaption="Exchange"
-               parentOptionNames="Exchanges"
-               parentJsonProp="futures"
-               childCaption="Asset"
+               oneCaption="Exchange"
+               oneOptionNames="Exchanges"
+               oneJsonProp="futures"
+               twoCaption="Asset"
                msgOnNotSelected={msgOnNotSelected}
            />
            <D.RowInputSelect

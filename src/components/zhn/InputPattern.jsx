@@ -17,7 +17,7 @@ class InputPattern extends Component {
    static propTypes = {
      rootStyle: PropTypes.object,
      inputStyle: PropTypes.object,
-     initValue: PropTypes.string,     
+     initValue: PropTypes.string,
      placeholder: PropTypes.string,
      errorMsg: PropTypes.string,
      onTest: PropTypes.func,
@@ -117,9 +117,8 @@ class InputPattern extends Component {
            onChange={this._handleChangeValue}
            onBlur={this._handleBlurValue}
            onKeyDown={this._handleKeyDown}
-        >
-        </input>
-        <hr style={{ ...STYLE.HR, ..._styleHr}}></hr>
+        />
+        <hr style={{ ...STYLE.HR, ..._styleHr}} />
         <div style={STYLE.ERR_MSG}>
           {errorInput}
         </div>

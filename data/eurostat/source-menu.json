@@ -29,8 +29,7 @@
         { "id" : "ES_E_EFFICIENCY" },
         { "id" : "ES_E_RENEWABLE_SHARE" },
         { "id" : "ES_E_INDIC" },
-        { "id" : "ES_I_ENERGY" },
-        { "id" : "ES_E_STAT_Q" },
+        { "id" : "ES_I_ENERGY" },        
         { "id" : "ES_I_ELECTRICITY_GENERATION" },
         { "id" : "ES_E_STC_ELECTRICITY" },
         { "id" : "ES_E_STAT_PR" },
@@ -478,19 +477,6 @@
           "twoURI" : "./data/eurostat/energy-indicators.json",
           "twoJsonProp" : "indicators",
           "mapDateDf" : 2
-        }
-    },
-    "ES_E_STAT_Q" : {
-        "type" : "ES_E_STAT_Q",
-        "menuTitle" : "Statistics Quantities",
-        "dialogCaption" : "Energy Statistics Quantities",
-        "dialogType" : "DialogEurostat3",
-        "addProps": "ES_COUNTRIES_BASE",
-        "dialogProps" : {
-          "twoCaption" : "Group",
-          "twoURI" : "./data/eurostat/energy-quantities.json",
-          "twoJsonProp" : "groups",
-          "threeCaption" : "Metric"
         }
     },
     "ES_E_STAT_PR" : {

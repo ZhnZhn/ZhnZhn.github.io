@@ -88,8 +88,8 @@ var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decor
 
     _this._createLoadOption = function () {
       var _this$exchangeItem$ge2 = _this.exchangeItem.getValues(),
-          exchange = _this$exchangeItem$ge2.parent,
-          item = _this$exchangeItem$ge2.child,
+          exchange = _this$exchangeItem$ge2.one,
+          item = _this$exchangeItem$ge2.two,
           isContinious = _this.props.isContinious,
           fromDate = isContinious ? _this.fromDate.getValue() : undefined;
 
@@ -171,15 +171,15 @@ var FuturesWikiDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decor
           isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
+        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
           ref: this._refExchangeItem,
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: futuresURI,
-          parentCaption: 'Exchange',
-          parentOptionNames: 'Exchanges',
-          parentJsonProp: 'futures',
-          childCaption: 'Asset',
+          oneCaption: 'Exchange',
+          oneOptionNames: 'Exchanges',
+          oneJsonProp: 'futures',
+          twoCaption: 'Asset',
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {

@@ -3,7 +3,7 @@ import useRow from './useRow'
 
 const useRowOptions = ({
   isShowLabels,
-  caption,
+  caption='',
   captionStyle,
   ...rest
 }, { isOc }={}) => ({

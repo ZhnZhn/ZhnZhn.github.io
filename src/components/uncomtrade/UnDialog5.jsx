@@ -75,7 +75,7 @@ class  UnDialog5 extends Component {
 
      const {
              isValid:isValid1, msg:msg1
-           } = this.parentChild.getValidation();
+           } = this.groupItem.getValidation();
      if (!isValid1) { msg = msg.concat(msg1); }
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
@@ -86,13 +86,12 @@ class  UnDialog5 extends Component {
   }
 
   _createLoadOption = () => {
-    const { parent:two, child:three } = this.parentChild.getValues()
+    const { one:two, two:three } = this.groupItem.getValues()
 
     return this.props.loadFn(
       this.props, {
       one : this.one, two, three,
       tradeFlow: this.tradeFlow
-      //hasSecondYAxis: this[HAS_SECOND_Y_AXIS]
     });
   }
 
@@ -104,7 +103,7 @@ class  UnDialog5 extends Component {
      this[propName] = value
   }
 
-  _refItems = c => this.parentChild = c
+  _refGroupItem = c => this.groupItem = c
   _refDates = c => this.datesFragment = c
 
   render(){
@@ -145,15 +144,14 @@ class  UnDialog5 extends Component {
                onSelect={this._handleSelectOne}
              />
 
-             <D.SelectParentChild
-                 ref={this._refItems}
+             <D.SelectOneTwo
+                 ref={this._refGroupItem}
                  isShow={isShow}
                  isShowLabels={isShowLabels}
                  uri={twoURI}
-                 parentCaption={twoCaption}
-                 parentOptionNames="Items"
-                 parentJsonProp={twoJsonProp}
-                 childCaption={threeCaption}
+                 oneCaption={twoCaption}
+                 oneJsonProp={twoJsonProp}
+                 twoCaption={threeCaption}
                  msgOnNotSelected={msgOnNotSelected}
              />
 

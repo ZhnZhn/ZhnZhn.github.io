@@ -44,10 +44,6 @@ var _SelectWithLoad = require('./SelectWithLoad');
 
 var _SelectWithLoad2 = _interopRequireDefault(_SelectWithLoad);
 
-var _SelectParentChild = require('./SelectParentChild');
-
-var _SelectParentChild2 = _interopRequireDefault(_SelectParentChild);
-
 var _Button = require('./Button');
 
 var _Button2 = _interopRequireDefault(_Button);
@@ -64,7 +60,6 @@ var DialogCell = (0, _extends3.default)({
   RowInputText: _RowInputText2.default,
   RowInputColor: _RowInputColor2.default,
   SelectWithLoad: _SelectWithLoad2.default,
-  SelectParentChild: _SelectParentChild2.default,
   Button: _Button2.default
 }, _Rows2.default);
 

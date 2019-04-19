@@ -75,9 +75,9 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
         msg.push(_this.props.msgOnNotSelected(oneCaption));
       }
 
-      var _this$parentChild$get = _this.parentChild.getValidation(),
-          isValid1 = _this$parentChild$get.isValid,
-          msg1 = _this$parentChild$get.msg;
+      var _this$twoThree$getVal = _this.twoThree.getValidation(),
+          isValid1 = _this$twoThree$getVal.isValid,
+          msg1 = _this$twoThree$getVal.msg;
 
       if (!isValid1) {
         msg = msg.concat(msg1);
@@ -96,9 +96,9 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
     };
 
     _this._createLoadOption = function () {
-      var _this$parentChild$get2 = _this.parentChild.getValues(),
-          two = _this$parentChild$get2.parent,
-          three = _this$parentChild$get2.child,
+      var _this$twoThree$getVal2 = _this.twoThree.getValues(),
+          two = _this$twoThree$getVal2.one,
+          three = _this$twoThree$getVal2.two,
           _this$datesFragment$g2 = _this.datesFragment.getValues(),
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate,
@@ -121,6 +121,14 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
 
     _this._handlerSelectChartType = function (item) {
       _this.chartType = item;
+    };
+
+    _this._refTwoThree = function (c) {
+      return _this.twoThree = c;
+    };
+
+    _this._refDates = function (c) {
+      return _this.datesFragment = c;
     };
 
     _this._menuMore = (0, _MenuMore2.default)(_this, {
@@ -158,8 +166,6 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           caption = _props.caption,
           isShow = _props.isShow,
@@ -211,26 +217,21 @@ var DialogType5 = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2
           optionNames: 'Items',
           onSelect: this._handleSelectOne
         }),
-        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
-          ref: function ref(c) {
-            return _this2.parentChild = c;
-          },
+        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
+          ref: this._refTwoThree,
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: twoURI,
-          parentCaption: twoCaption,
-          parentOptionNames: 'Items',
-          parentJsonProp: twoJsonProp,
-          childCaption: threeCaption,
+          oneCaption: twoCaption,
+          oneJsonProp: twoJsonProp,
+          twoCaption: threeCaption,
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-            ref: function ref(c) {
-              return _this2.datesFragment = c;
-            },
+            ref: this._refDates,
             isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,

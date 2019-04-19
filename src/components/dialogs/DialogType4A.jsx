@@ -57,7 +57,7 @@ class DialogType4A extends Component {
   _createValidationMessages = () => {
      let msg = [];
 
-     const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
+     const { isValid:isValid1, msg:msg1 } = this.oneTwo.getValidation();
      if (!isValid1) { msg = msg.concat(msg1); }
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
@@ -68,7 +68,7 @@ class DialogType4A extends Component {
   }
 
   _createLoadOption = () => {
-    const { parent:one, child:two } = this.parentChild.getValues()
+    const { one, two } = this.oneTwo.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues();
     return this.props.loadFn(
        this.props, {
@@ -85,6 +85,9 @@ class DialogType4A extends Component {
   _handleMode = (propName, value) => {
      this[propName] = value
   }
+
+  _refOneTwo = c => this.oneTwo = c
+  _refDates = c => this.datesFragment = c
 
   render(){
     const {
@@ -112,21 +115,20 @@ class DialogType4A extends Component {
                isShow={isToolbar}
                buttons={this.toolbarButtons}
              />
-             <D.SelectParentChild
-                 ref={c => this.parentChild = c}
+             <D.SelectOneTwo
+                 ref={this._refOneTwo}
                  isShow={isShow}
                  isShowLabels={isShowLabels}
                  uri={oneURI}
-                 parentCaption={oneCaption}
-                 parentOptionNames="Items"
-                 parentJsonProp={oneJsonProp}
-                 childCaption={twoCaption}
+                 oneCaption={oneCaption}
+                 oneJsonProp={oneJsonProp}
+                 twoCaption={twoCaption}
                  msgOnNotSelected={msgOnNotSelected}
              />
 
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
-                 ref={c => this.datesFragment = c}
+                 ref={this._refDates}
                  isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}

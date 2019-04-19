@@ -33,7 +33,7 @@ class  DialogType5 extends Component {
       onClick: this._handleClickOptions
     })
     this._commandButtons = this._crCommandsWithLoad(this)
-    
+
     this.state = {
       isToolbar: true,
       isShowLabels: true,
@@ -72,7 +72,7 @@ class  DialogType5 extends Component {
 
      if (!this.one)    { msg.push(this.props.msgOnNotSelected(oneCaption));}
 
-     const { isValid:isValid1, msg:msg1 } = this.parentChild.getValidation();
+     const { isValid:isValid1, msg:msg1 } = this.twoThree.getValidation();
      if (!isValid1) { msg = msg.concat(msg1); }
 
      const {isValid, datesMsg} = this.datesFragment.getValidation();
@@ -83,7 +83,7 @@ class  DialogType5 extends Component {
   }
 
   _createLoadOption = () => {
-    const { parent:two, child:three } = this.parentChild.getValues()
+    const { one:two, two:three } = this.twoThree.getValues()
         , { fromDate, toDate } = this.datesFragment.getValues()
         , seriaType = this.chartType
              ? this.chartType.value
@@ -107,6 +107,9 @@ class  DialogType5 extends Component {
   _handlerSelectChartType = (item) => {
     this.chartType = item
   }
+
+  _refTwoThree = c => this.twoThree = c
+  _refDates = c => this.datesFragment = c
 
   render(){
     const {
@@ -146,21 +149,20 @@ class  DialogType5 extends Component {
                onSelect={this._handleSelectOne}
              />
 
-             <D.SelectParentChild
-                 ref={c => this.parentChild = c}
+             <D.SelectOneTwo
+                 ref={this._refTwoThree}
                  isShow={isShow}
                  isShowLabels={isShowLabels}
                  uri={twoURI}
-                 parentCaption={twoCaption}
-                 parentOptionNames="Items"
-                 parentJsonProp={twoJsonProp}
-                 childCaption={threeCaption}
+                 oneCaption={twoCaption}
+                 oneJsonProp={twoJsonProp}
+                 twoCaption={threeCaption}
                  msgOnNotSelected={msgOnNotSelected}
              />
 
              <D.ShowHide isShow={isShowDate}>
                <D.DatesFragment
-                 ref={c => this.datesFragment = c}
+                 ref={this._refDates}
                  isShowLabels={isShowLabels}
                  initFromDate={initFromDate}
                  initToDate={initToDate}

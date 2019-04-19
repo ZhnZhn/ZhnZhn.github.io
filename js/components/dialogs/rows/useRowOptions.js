@@ -23,7 +23,8 @@ var useRowOptions = function useRowOptions(_ref) {
       isOc = _ref2.isOc;
 
   var isShowLabels = _ref.isShowLabels,
-      caption = _ref.caption,
+      _ref$caption = _ref.caption,
+      caption = _ref$caption === undefined ? '' : _ref$caption,
       captionStyle = _ref.captionStyle,
       rest = (0, _objectWithoutProperties3.default)(_ref, ['isShowLabels', 'caption', 'captionStyle']);
   return (0, _extends3.default)({}, (0, _useRow2.default)({ isShowLabels: isShowLabels, caption: caption, captionStyle: captionStyle }, isOc), {

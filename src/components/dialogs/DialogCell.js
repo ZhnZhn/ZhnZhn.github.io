@@ -10,7 +10,6 @@ import Toolbar from './Toolbar'
 import RowInputText from './RowInputText'
 import RowInputColor from './RowInputColor'
 import SelectWithLoad from './SelectWithLoad'
-import SelectParentChild from './SelectParentChild'
 import Button from './Button'
 
 const DialogCell = {
@@ -23,7 +22,6 @@ const DialogCell = {
   RowInputText,
   RowInputColor,
   SelectWithLoad,
-  SelectParentChild,
   Button,
   ...Rows
 };

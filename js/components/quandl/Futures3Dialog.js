@@ -88,8 +88,8 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
 
     _this._createLoadOption = function () {
       var _this$itemMonth$getVa2 = _this.itemMonth.getValues(),
-          item = _this$itemMonth$getVa2.parent,
-          month = _this$itemMonth$getVa2.child,
+          item = _this$itemMonth$getVa2.one,
+          month = _this$itemMonth$getVa2.two,
           isContinious = _this.props.isContinious,
           fromDate = isContinious ? _this.fromDate.getValue() : undefined;
 
@@ -171,15 +171,15 @@ var Futures3Dialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorato
           isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
+        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
           ref: this._refItemMonth,
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: futuresURI,
-          parentCaption: 'Futures',
-          parentOptionNames: 'Futures',
-          parentJsonProp: 'futures',
-          childCaption: 'Month',
+          oneCaption: 'Futures',
+          oneOptionNames: 'Futures',
+          oneJsonProp: 'futures',
+          twoCaption: 'Month',
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(_DialogCell2.default.RowInputSelect, {

@@ -48,6 +48,13 @@ var S = {
   }
 };
 
+var _isFn = function _isFn(fn) {
+  return typeof fn === 'function';
+};
+var _isByZipCode = function _isByZipCode(item) {
+  return item && item.value === 'Z';
+};
+
 var _loadFn = function _loadFn(props, options) {
   var fnValue = props.fnValue,
       dataColumn = props.dataColumn,
@@ -59,9 +66,9 @@ var _loadFn = function _loadFn(props, options) {
       fromDate = options.fromDate,
       toDate = options.toDate,
       zipCode = options.zipCode,
-      _isKeyFeature = two.value === 'Z' ? true : false,
-      _three = two.value !== 'Z' ? three : { value: zipCode, caption: zipCode },
-      _value = typeof fnValue === 'function' ? fnValue(one.value, two.value, _three.value) : undefined;
+      _hasZipCode = _isByZipCode(two),
+      _three = !_hasZipCode ? three : { value: zipCode, caption: zipCode },
+      _value = _isFn(fnValue) ? fnValue(one.value, two.value, _three.value) : void 0;
 
   return {
     value: _value,
@@ -69,16 +76,16 @@ var _loadFn = function _loadFn(props, options) {
     toDate: toDate,
     dataColumn: dataColumn,
     loadId: loadId,
-    title: two.caption + ' : ' + _three.caption,
+    title: two.caption + ': ' + _three.caption,
     subtitle: one.caption,
     dataSource: dataSource,
-    isKeyFeature: _isKeyFeature
+    isKeyFeature: _hasZipCode
   };
 };
 
 var _reZipCode = /^\d{5}$/;
 var _isZipCode = function _isZipCode(value) {
-  return _reZipCode.test(value);
+  return _reZipCode.test(value.trim());
 };
 
 var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators2.default.withValidationLoad, _dec3 = _Decorators2.default.withLoad, _dec(_class = _dec2(_class = _dec3(_class = function (_Component) {
@@ -87,14 +94,14 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
   function ZillowDialog(props) {
     (0, _classCallCheck3.default)(this, ZillowDialog);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ZillowDialog.__proto__ || Object.getPrototypeOf(ZillowDialog)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ZillowDialog.__proto__ || Object.getPrototypeOf(ZillowDialog)).call(this, props));
 
-    _this._handleSelectOne = function (one) {
-      _this.one = one;
+    _this._hSelectMetric = function (metric) {
+      _this.metric = metric;
     };
 
     _this._handleSelectType = function (type) {
-      if (type && type.value === 'Z') {
+      if (_isByZipCode(type)) {
         _this.setState({ isShowPattern: true });
       } else {
         _this.setState({ isShowPattern: false });
@@ -110,21 +117,21 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
 
       var msg = [];
 
-      if (!_this.one) {
+      if (!_this.metric) {
         msg.push(_this.props.msgOnNotSelected(oneCaption));
       }
 
-      var _this$parentChild$get = _this.parentChild.getValues(),
-          parent = _this$parentChild$get.parent;
+      var _this$inputTypeCode$g = _this.inputTypeCode.getValues(),
+          one = _this$inputTypeCode$g.one;
 
-      if (parent && parent.value === 'Z') {
+      if (_isByZipCode(one)) {
         if (!_this.inputZipCode.isValid()) {
           msg = msg.concat('Zip Code is not valid');
         }
       } else {
-        var _this$parentChild$get2 = _this.parentChild.getValidation(),
-            isValid1 = _this$parentChild$get2.isValid,
-            msg1 = _this$parentChild$get2.msg;
+        var _this$inputTypeCode$g2 = _this.inputTypeCode.getValidation(),
+            isValid1 = _this$inputTypeCode$g2.isValid,
+            msg1 = _this$inputTypeCode$g2.msg;
 
         if (!isValid1) {
           msg = msg.concat(msg1);
@@ -144,23 +151,28 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     };
 
     _this._createLoadOption = function () {
-      var _this$parentChild$get3 = _this.parentChild.getValues(),
-          two = _this$parentChild$get3.parent,
-          three = _this$parentChild$get3.child,
+      var _this$inputTypeCode$g3 = _this.inputTypeCode.getValues(),
+          two = _this$inputTypeCode$g3.one,
+          three = _this$inputTypeCode$g3.two,
           _this$datesFragment$g2 = _this.datesFragment.getValues(),
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate,
           zipCode = _this.inputZipCode.getValue();
 
-      return _loadFn(_this.props, { one: _this.one, two: two, three: three, fromDate: fromDate, toDate: toDate, zipCode: zipCode });
+      return _loadFn(_this.props, {
+        one: _this.metric,
+        two: two, three: three,
+        fromDate: fromDate, toDate: toDate,
+        zipCode: zipCode
+      });
     };
 
     _this._handleClose = function () {
       _this._handleWithValidationClose();
     };
 
-    _this._refItems = function (c) {
-      return _this.parentChild = c;
+    _this._refTypeCode = function (c) {
+      return _this.inputTypeCode = c;
     };
 
     _this._refZip = function (n) {
@@ -250,19 +262,19 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           jsonProp: oneJsonProp,
           caption: oneCaption,
           optionNames: 'Items',
-          onSelect: this._handleSelectOne
+          onSelect: this._hSelectMetric
         }),
-        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
-          ref: this._refItems,
+        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
+          ref: this._refTypeCode,
           isShow: isShow,
           isShowLabels: isShowLabels,
+          isHideTwo: isShowPattern,
           uri: twoURI,
-          parentCaption: twoCaption,
-          parentOptionNames: 'Items',
-          parentJsonProp: twoJsonProp,
-          childCaption: threeCaption,
+          oneCaption: twoCaption,
+          oneJsonProp: twoJsonProp,
+          twoCaption: threeCaption,
           msgOnNotSelected: msgOnNotSelected,
-          onSelectParent: this._handleSelectType
+          onSelectOne: this._handleSelectType
         }),
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,
@@ -270,10 +282,10 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           _react2.default.createElement(_DialogCell2.default.RowPattern, {
             ref: this._refZip,
             isShowLabels: isShowLabels,
-            caption: 'Zip Code*',
-            placeholder: 'Zip Code, 5 Digit',
+            caption: '*Zip Code',
+            placeholder: 'Zip Code, 5 Digits',
             onTest: _isZipCode,
-            errorMsg: '5 digit format must be'
+            errorMsg: '5 digits format is required'
           })
         ),
         _react2.default.createElement(
@@ -295,7 +307,7 @@ var ZillowDialog = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           _react2.default.createElement(
             'div',
             { style: S.TIP },
-            '* Not for all Zip Code data are available.'
+            '*Not for all Zip Codes data is available'
           )
         ),
         _react2.default.createElement(_DialogCell2.default.ValidationMessages, {

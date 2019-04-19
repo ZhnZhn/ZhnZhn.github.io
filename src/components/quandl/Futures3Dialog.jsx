@@ -79,7 +79,7 @@ class Futures3Dialog extends Component {
   }
 
   _createLoadOption = () => {
-    const { parent:item, child:month } = this.itemMonth.getValues()
+    const { one:item, two:month } = this.itemMonth.getValues()
         , { isContinious } = this.props
         , fromDate = (isContinious)
               ? this.fromDate.getValue()
@@ -123,15 +123,15 @@ class Futures3Dialog extends Component {
               isShow={isToolbar}
               buttons={this.toolbarButtons}
            />
-           <D.SelectParentChild
+           <D.SelectOneTwo
                ref={this._refItemMonth}
                isShow={isShow}
                isShowLabels={isShowLabels}
                uri={futuresURI}
-               parentCaption="Futures"
-               parentOptionNames="Futures"
-               parentJsonProp="futures"
-               childCaption="Month"
+               oneCaption="Futures"
+               oneOptionNames="Futures"
+               oneJsonProp="futures"
+               twoCaption="Month"
                msgOnNotSelected={msgOnNotSelected}
            />
            <D.RowInputSelect

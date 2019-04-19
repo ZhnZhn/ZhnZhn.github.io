@@ -100,7 +100,7 @@ class JodiWorldOilDialog extends Component {
      return msg;
    }
    _createLoadOption = () => {
-      const { parent:product, child:flow } = this.productFlow.getValues()
+      const { one:product, two:flow } = this.productFlow.getValues()
           , { fromDate, toDate } = this.datesFragment.getValues()
           , seriaType = this.chartType ? this.chartType.value: undefined
           , { fnValue, dataColumn, loadId, dataSource } = this.props;
@@ -158,15 +158,14 @@ class JodiWorldOilDialog extends Component {
              optionNames="Items"
              onSelect={this._hSelectCountry}
           />
-          <D.SelectParentChild
+          <D.SelectOneTwo
              ref={this._refProductFlow}
              isShow={isShow}
              isShowLabels={isShowLabels}
              uri={parentChildURI}
-             parentCaption={parentCaption}
-             parentOptionNames="Items"
-             parentJsonProp={parentJsonProp}
-             childCaption={childCaption}
+             oneCaption={parentCaption}
+             oneJsonProp={parentJsonProp}
+             twoCaption={childCaption}
              msgOnNotSelected={msgOnNotSelected}
           />
           <D.RowInputSelect

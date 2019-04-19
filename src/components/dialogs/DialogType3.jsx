@@ -69,7 +69,7 @@ class DialogType3 extends Component {
       })
     }
     this._commandButtons = this._crCommandsWithLoad(this)
-    
+
     this.state = {
        isToolbar: true,
        isShowLabels: true,

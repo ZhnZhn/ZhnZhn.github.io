@@ -61,9 +61,9 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     _this._createValidationMessages = function () {
       var msg = [];
 
-      var _this$parentChild$get = _this.parentChild.getValidation(),
-          isValid1 = _this$parentChild$get.isValid,
-          msg1 = _this$parentChild$get.msg;
+      var _this$oneTwo$getValid = _this.oneTwo.getValidation(),
+          isValid1 = _this$oneTwo$getValid.isValid,
+          msg1 = _this$oneTwo$getValid.msg;
 
       if (!isValid1) {
         msg = msg.concat(msg1);
@@ -82,9 +82,9 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
     };
 
     _this._createLoadOption = function () {
-      var _this$parentChild$get2 = _this.parentChild.getValues(),
-          one = _this$parentChild$get2.parent,
-          two = _this$parentChild$get2.child,
+      var _this$oneTwo$getValue = _this.oneTwo.getValues(),
+          one = _this$oneTwo$getValue.one,
+          two = _this$oneTwo$getValue.two,
           _this$datesFragment$g2 = _this.datesFragment.getValues(),
           fromDate = _this$datesFragment$g2.fromDate,
           toDate = _this$datesFragment$g2.toDate;
@@ -101,6 +101,14 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
 
     _this._handleMode = function (propName, value) {
       _this[propName] = value;
+    };
+
+    _this._refOneTwo = function (c) {
+      return _this.oneTwo = c;
+    };
+
+    _this._refDates = function (c) {
+      return _this.datesFragment = c;
     };
 
     _this._menuMore = (0, _MenuMore2.default)(_this, {
@@ -139,8 +147,6 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           caption = _props.caption,
           oneCaption = _props.oneCaption,
@@ -178,26 +184,21 @@ var DialogType4A = (_dec = _Decorators2.default.withToolbar, _dec2 = _Decorators
           isShow: isToolbar,
           buttons: this.toolbarButtons
         }),
-        _react2.default.createElement(_DialogCell2.default.SelectParentChild, {
-          ref: function ref(c) {
-            return _this2.parentChild = c;
-          },
+        _react2.default.createElement(_DialogCell2.default.SelectOneTwo, {
+          ref: this._refOneTwo,
           isShow: isShow,
           isShowLabels: isShowLabels,
           uri: oneURI,
-          parentCaption: oneCaption,
-          parentOptionNames: 'Items',
-          parentJsonProp: oneJsonProp,
-          childCaption: twoCaption,
+          oneCaption: oneCaption,
+          oneJsonProp: oneJsonProp,
+          twoCaption: twoCaption,
           msgOnNotSelected: msgOnNotSelected
         }),
         _react2.default.createElement(
           _DialogCell2.default.ShowHide,
           { isShow: isShowDate },
           _react2.default.createElement(_DialogCell2.default.DatesFragment, {
-            ref: function ref(c) {
-              return _this2.datesFragment = c;
-            },
+            ref: this._refDates,
             isShowLabels: isShowLabels,
             initFromDate: initFromDate,
             initToDate: initToDate,
