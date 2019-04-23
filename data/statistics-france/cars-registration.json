@@ -1,15 +1,1 @@
-{
-  "items": [
-    { "caption": "New Passenger Cars Registrations (Raw)", "value": "001641573" },
-    { "caption": "New Passenger Cars Registrations (SA-WDA)", "value": "001641574" },
-    { "caption": "New Trucks Over 3.5 tonnes", "value": "001634716" },
-    { "caption": "Used Trucks", "value": "001634717" },
-    { "caption": "Light commercial vehicles under 3.5 tonnes", "value": "001634718" },
-    { "caption": "New Buses and Coaches", "value": "001634719" },
-    { "caption": "Passenger Cars - French Brands", "value": "000439798" },
-    { "caption": "Passenger Cars - Foreign Brands", "value": "000439799" },
-    { "caption": "Passenger Cars - Gasoline Engines", "value": "000439800" },
-    { "caption": "Passenger Cars - Diesel Engines", "value": "000439801" },
-    { "caption": "Transactions of Used Passenger Cars", "value": "000439802" }
-  ]
-}
+{"items":[{"caption":"New Passenger Cars Registrations (Raw)","value":"001641573"},{"caption":"New Passenger Cars Registrations (SA-WDA)","value":"001641574"},{"caption":"New Trucks Over 3.5 tonnes","value":"001634716"},{"caption":"Used Trucks","value":"001634717"},{"caption":"Light commercial vehicles under 3.5 tonnes","value":"001634718"},{"caption":"New Buses and Coaches","value":"001634719"},{"caption":"Passenger Cars - French Brands","value":"000439798"},{"caption":"Passenger Cars - Foreign Brands","value":"000439799"},{"caption":"Passenger Cars - Gasoline Engines","value":"000439800"},{"caption":"Passenger Cars - Diesel Engines","value":"000439801"},{"caption":"Transactions of Used Passenger Cars","value":"000439802"}]}

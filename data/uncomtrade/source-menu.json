@@ -166,7 +166,7 @@
         "descrUrl": "./data/uncomtrade/uncomtrade.html",
         "nInitFromDate": 5,
         "oneCaption": "Country",
-        "oneURI": "./data/uncomtrade/country.json",
+        "oneURI": "./data/uncomtrade/countries.json",
         "oneJsonProp": "countries",
         "twoCaption": "SubGroup",
         "twoJsonProp": "groups",

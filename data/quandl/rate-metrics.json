@@ -1,6 +1,1 @@
-{
-  "metrics" : [
-    { "value":"CPI" , "caption":"Consumer Price Index (CPI)" },
-    { "value":"INFLATION" , "caption":"Inflation YOY" }
-  ]
-}
+{"metrics":[{"value":"CPI","caption":"Consumer Price Index (CPI)"},{"value":"INFLATION","caption":"Inflation YOY"}]}

@@ -1,16 +1,1 @@
-{
-  "indicators" : [
-    { "caption" : "Simple Moving Average (SMA)" , "value" : "SMA" },
-    { "caption" : "Exponential Moving Average (EMA)" , "value" : "EMA" },
-    { "caption" : "Relative Strenght Index (RSI)" , "value" : "RSI" },
-    { "caption" : "Average Diractional Movement (ADX)" , "value" : "ADX" },
-    { "caption" : "Commodity Channel Index (CCI)" , "value" : "CCI" },
-    { "caption" : "Momentum (MOM)" , "value" : "MOM" },
-    { "caption" : "Rate of Change (ROC)" , "value" : "ROC" },
-    { "caption" : "Moving Average Convergence/Divergence (MACD)" , "value" : "MACD" },
-    { "caption" : "Stochastic Oscillator (STOCH)", "value": "STOCH" },
-    { "caption" : "Bollinger Bands (BBANDS)", "value": "BBANDS" },
-    { "caption" : "On Balance Volume (OBV)", "value": "OBV" },
-    { "caption" : "Chaikin A/D Line (AD)", "value": "AD" }                
-  ]
-}
+{"indicators":[{"caption":"Simple Moving Average (SMA)","value":"SMA"},{"caption":"Exponential Moving Average (EMA)","value":"EMA"},{"caption":"Relative Strenght Index (RSI)","value":"RSI"},{"caption":"Average Diractional Movement (ADX)","value":"ADX"},{"caption":"Commodity Channel Index (CCI)","value":"CCI"},{"caption":"Momentum (MOM)","value":"MOM"},{"caption":"Rate of Change (ROC)","value":"ROC"},{"caption":"Moving Average Convergence/Divergence (MACD)","value":"MACD"},{"caption":"Stochastic Oscillator (STOCH)","value":"STOCH"},{"caption":"Bollinger Bands (BBANDS)","value":"BBANDS"},{"caption":"On Balance Volume (OBV)","value":"OBV"},{"caption":"Chaikin A/D Line (AD)","value":"AD"}]}

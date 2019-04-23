@@ -1,5 +1,1 @@
-{"items":[
-{"value":"TXG_FOB_USD","caption":"Exports Goods, Free on board (FOB), US Dollars"},
-{"value":"TMG_CIF_USD","caption":"Imports Goods, Cost, Insurance, Freight (CIF), US Dollars"},
-{"value":"TBG_USD","caption":"Trade Goods Balance, US Dollars"}
-]}
+{"items":[{"value":"TXG_FOB_USD","caption":"Exports Goods, Free on board (FOB), US Dollars"},{"value":"TMG_CIF_USD","caption":"Imports Goods, Cost, Insurance, Freight (CIF), US Dollars"},{"value":"TBG_USD","caption":"Trade Goods Balance, US Dollars"}]}

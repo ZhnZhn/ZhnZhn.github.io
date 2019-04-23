@@ -1,10 +1,1 @@
-{
-  "items": [
-    { "caption": "Consumer Prices Abroad, % Change from same Month in Previous Year", "value": "iukpaus" },
-    { "caption": "GDP, Real Values, % Change from Previous Period", "value": "iugdphp" },
-    { "caption": "Retail turnover", "value": "conretail" },
-    { "caption": "Swiss Stock Indices", "value": "capchstocki" },
-    { "caption": "Unemployment abroad", "value": "iualoaus" },
-    { "caption": "Tourism in Switzerland - Monthly", "value": "contourismm" }
-  ]
-}
+{"items":[{"caption":"Consumer Prices Abroad, % Change from same Month in Previous Year","value":"iukpaus"},{"caption":"GDP, Real Values, % Change from Previous Period","value":"iugdphp"},{"caption":"Retail turnover","value":"conretail"},{"caption":"Swiss Stock Indices","value":"capchstocki"},{"caption":"Unemployment abroad","value":"iualoaus"},{"caption":"Tourism in Switzerland - Monthly","value":"contourismm"}]}

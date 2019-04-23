@@ -1,7 +1,1 @@
-{
-  "items":[
-    {"value":"CV0000","caption":"New commercial vehicles"},
-    {"value":"CVH000","caption":"New heavy commercial vehicles"},
-    {"value":"CVL000","caption":"New light commercial vehicles"},
-    {"value":"PC0000","caption":"New passenger car"}
-]}
+{"items":[{"value":"CV0000","caption":"New commercial vehicles"},{"value":"CVH000","caption":"New heavy commercial vehicles"},{"value":"CVL000","caption":"New light commercial vehicles"},{"value":"PC0000","caption":"New passenger car"}]}

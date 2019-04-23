@@ -1,7 +1,1 @@
-{
-  "items":[
-    {"caption":"Nutrient Nitrogen N (total)","value":"3102"},
-    {"caption":"Nutrient Phospate P205 (total)","value":"3103"},
-    {"caption":"Nutrient Potash K20 (total)","value":"3104"}
-  ]
-}
+{"items":[{"caption":"Nutrient Nitrogen N (total)","value":"3102"},{"caption":"Nutrient Phospate P205 (total)","value":"3103"},{"caption":"Nutrient Potash K20 (total)","value":"3104"}]}

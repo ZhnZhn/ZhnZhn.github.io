@@ -43,7 +43,7 @@
       "dialogProps": {
         "descrUrl": "./data/faostat/faostat.html",
         "oneCaption": "Country",
-        "oneURI": "./data/faostat/country.json",
+        "oneURI": "./data/faostat/countries.json",
         "oneJsonProp": "countries",
         "twoCaption": "Item",
         "twoJsonProp": "items",

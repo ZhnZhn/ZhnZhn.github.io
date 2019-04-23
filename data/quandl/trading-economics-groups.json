@@ -1,10 +1,1 @@
-{
-  "groups" : [
-    {
-      "caption" : "Salary", "value" : "Salary",
-      "columns" : [
-        { "caption" : "Minimum Wage", "value" : "MINWG" }
-      ]
-    }
-  ]
-}
+{"groups":[{"caption":"Salary","value":"Salary","columns":[{"caption":"Minimum Wage","value":"MINWG"}]}]}
