@@ -31,6 +31,7 @@ var _rToConfig = {
   MAP: _toMap2.default.createConfig,
   COLUMN_SET: _toCategory2.default.createConfig,
   BAR_SET: _toCategory2.default.createConfig,
+  BAR_WITH_LABELS: _toCategory2.default.createConfig,
   DOT_SET: _toCategory2.default.createConfig
 };
 
@@ -40,6 +41,7 @@ var _rToSeria = {
   COLUMN: _toArea2.default.createSeria,
   COLUMN_SET: _toCategory2.default.createSeria,
   BAR_SET: _toCategory2.default.createSeria,
+  BAR_WITH_LABELS: _toCategory2.default.createSeria,
   DOT_SET: _toCategory2.default.createSeria
 };
 

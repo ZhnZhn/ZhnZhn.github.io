@@ -43,6 +43,18 @@ var _ModalPopup = require('../zhn-moleculs/ModalPopup');
 
 var _ModalPopup2 = _interopRequireDefault(_ModalPopup);
 
+var _RowGrowthRate = require('./RowGrowthRate');
+
+var _RowGrowthRate2 = _interopRequireDefault(_RowGrowthRate);
+
+var _RowPlusMinus = require('./RowPlusMinus');
+
+var _RowPlusMinus2 = _interopRequireDefault(_RowPlusMinus);
+
+var _RowSma = require('./RowSma');
+
+var _RowSma2 = _interopRequireDefault(_RowSma);
+
 var _InputText = require('../zhn/InputText');
 
 var _InputText2 = _interopRequireDefault(_InputText);
@@ -63,60 +75,43 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var growthRate = _seriaFn2.default.growthRate,
     normalize = _seriaFn2.default.normalize;
-var removeSeriaFrom = _IndicatorBuilder2.default.removeSeriaFrom,
-    addSmaTo = _IndicatorBuilder2.default.addSmaTo,
-    crMfiConfig = _IndicatorBuilder2.default.crMfiConfig,
+var crMfiConfig = _IndicatorBuilder2.default.crMfiConfig,
     crMomAthConfig = _IndicatorBuilder2.default.crMomAthConfig;
 
 
-var INIT_MFI = "14",
-    SMA = { MONTH: '12', YEAR: '50' };
-
+var INIT_MFI = "14";
 var C_GROW = '#90ed7d';
 
 var STYLE = {
   PANE: {
-    width: '220px',
-    margin: '8px'
-  },
-  GR: {
-    display: 'inline-block',
-    color: 'black',
-    fontWeight: 'bold',
-    paddingRight: '8px',
-    paddingBottom: '6px'
+    width: 220,
+    margin: 8
   },
   CAPTION: {
     display: 'inline-block',
     color: 'black',
-    fontWeight: 'bold',
-    width: '48px'
+    width: 48,
+    fontWeight: 'bold'
   },
   MOM_ATH: {
     display: 'inline-block',
     color: 'black',
-    fontWeight: 'bold',
-    paddingRight: '6px'
+    paddingRight: 6,
+    fontWeight: 'bold'
   },
   ROW: {
-    paddingTop: '5px'
+    paddingTop: 5
   },
   fnSpan: function fnSpan(color) {
-    return { color: color, paddingLeft: '8px' };
-  },
-  SMA_PLUS: {
-    marginLeft: '16px',
-    color: 'black'
+    return {
+      color: color, paddingLeft: 8
+    };
   },
   N2: {
-    width: '48px'
-  },
-  N3: {
-    width: '56px'
+    width: 48
   }
 };
 
-var _isArray = Array.isArray;
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
@@ -139,13 +134,8 @@ var _isSeriaInst = function _isSeriaInst(s) {
 };
 
 var FNS = {
-  GR: ['_grSeria', 'isGrowRate', C_GROW, growthRate],
-  NORM: ['_normSeria', 'isNormalize', C_GROW, normalize]
-};
-
-var _findInitSma = function _findInitSma(config) {
-  var _d = (((config || {}).series || [])[0] || {}).data;
-  return !_isArray(_d) ? '0' : _d.length > 150 ? SMA.YEAR : SMA.MONTH;
+  GR: ['_grSeria', 'isGrowthRate', C_GROW, growthRate, true],
+  NORM: ['_normSeria', 'isNormalize', C_GROW, normalize, false]
 };
 
 var NORM_CAPTION_EL = _react2.default.createElement(
@@ -166,23 +156,6 @@ var NORM_CAPTION_EL = _react2.default.createElement(
   ')'
 );
 
-var RowMinusPlus = function RowMinusPlus(_ref) {
-  var is = _ref.is,
-      caption = _ref.caption,
-      onMinus = _ref.onMinus,
-      onPlus = _ref.onPlus;
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'span',
-      { style: STYLE.GR },
-      caption
-    ),
-    is ? _react2.default.createElement(_SvgMinus2.default, { onClick: onMinus }) : _react2.default.createElement(_SvgPlus2.default, { onClick: onPlus })
-  );
-};
-
 var ModalMenuIndicator = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(ModalMenuIndicator, _Component);
 
@@ -195,7 +168,6 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
 
     var config = props.config;
 
-    _this._INIT_SMA = _findInitSma(config);
     _this._isMfi = !!config.zhIsMfi;
     _this._momAthEl = config.zhIsMomAth ? _react2.default.createElement(
       'div',
@@ -211,14 +183,12 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
     _this._addGrowRate = _this._addSeriaBy.bind(_this, FNS.GR);
     _this._removeGrowRate = _this._hideSeriaBy.bind(_this, FNS.GR);
 
-    _this._addNormalize = _this._addSeriaBy.bind(_this, FNS.NORM);
+    _this._addNormalize = _this._addSeriaBy.bind(_this, FNS.NORM, {});
     _this._removeNormalize = _this._hideSeriaBy.bind(_this, FNS.NORM);
 
     _this.state = {
-      isGrowRate: false,
+      isGrowthRate: false,
       isNormalize: false,
-      plusSma: 5,
-      descr: [],
       mfiDescrs: []
     };
     return _this;
@@ -236,11 +206,11 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
 
   (0, _createClass3.default)(ModalMenuIndicator, [{
     key: '_addSeriaBy',
-    value: function _addSeriaBy(arr) {
-      var seriaPropName = arr[0],
-          statePropName = arr[1],
-          color = arr[2],
-          fn = arr[3];
+    value: function _addSeriaBy(confArr, seriaOptions) {
+      var seriaPropName = confArr[0],
+          statePropName = confArr[1],
+          color = confArr[2],
+          fn = confArr[3];
 
       var _seria = this[seriaPropName];
       if (!this._chart) {
@@ -254,21 +224,27 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
               seriaData = fn(data);
           this[seriaPropName] = this._chart.zhAddSeriaToYAxis({
             data: seriaData,
-            color: color,
+            color: seriaOptions.color || color,
             index: -1
-          });
+          }, seriaOptions);
         }
         this.setState((0, _defineProperty3.default)({}, statePropName, true));
       }
     }
   }, {
     key: '_hideSeriaBy',
-    value: function _hideSeriaBy(arr) {
-      var seriaPropName = arr[0],
-          statePropName = arr[1];
-      var _seria = this[seriaPropName];
+    value: function _hideSeriaBy(confArr) {
+      var seriaPropName = confArr[0],
+          statePropName = confArr[1],
+          isRemove = confArr[4],
+          _seria = this[seriaPropName];
       if (_isSeriaInst(_seria)) {
-        _seria.setVisible(false);
+        if (isRemove) {
+          _seria.yAxis.remove();
+          this[seriaPropName] = null;
+        } else {
+          _seria.setVisible(false);
+        }
         this.setState((0, _defineProperty3.default)({}, statePropName, false));
       }
     }
@@ -278,14 +254,14 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
       var _props = this.props,
           isShow = _props.isShow,
           config = _props.config,
+          getChart = _props.getChart,
           onClose = _props.onClose,
           _config$zhConfig = config.zhConfig,
           zhConfig = _config$zhConfig === undefined ? {} : _config$zhConfig,
           isWithoutSma = zhConfig.isWithoutSma,
           _state = this.state,
-          isGrowRate = _state.isGrowRate,
-          isNormalize = _state.isNormalize,
-          plusSma = _state.plusSma;
+          isGrowthRate = _state.isGrowthRate,
+          isNormalize = _state.isNormalize;
 
       return _react2.default.createElement(
         _ModalPopup2.default,
@@ -297,20 +273,21 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
         _react2.default.createElement(
           'div',
           { style: STYLE.PANE },
-          _react2.default.createElement(RowMinusPlus, {
-            is: isGrowRate,
-            caption: 'Growth Rate',
+          _react2.default.createElement(_RowGrowthRate2.default, {
+            is: isGrowthRate,
             onMinus: this._removeGrowRate,
             onPlus: this._addGrowRate
           }),
-          _react2.default.createElement(RowMinusPlus, {
+          _react2.default.createElement(_RowPlusMinus2.default, {
             is: isNormalize,
             caption: NORM_CAPTION_EL,
             onMinus: this._removeNormalize,
             onPlus: this._addNormalize
           }),
-          !isWithoutSma && this._renderSma(plusSma),
-          this._renderIndicators(),
+          !isWithoutSma && _react2.default.createElement(_RowSma2.default, {
+            config: config,
+            getChart: getChart
+          }),
           this._renderMfiPart(this._isMfi),
           this._momAthEl
         )
@@ -322,43 +299,6 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
   getChart: function getChart() {}
 }, _initialiseProps = function _initialiseProps() {
   var _this2 = this;
-
-  this._handleAddSma = function (ev, isPlus) {
-    var period = isPlus ? _this2.inputSmaPlus.getValue() : _this2.inputSmaComp.getValue(),
-        plus = isPlus ? _this2.inputPlusSma.getValue() : undefined,
-        descr = _this2.state.descr,
-        id = isPlus ? 'SMA+(' + period + ') +(' + plus + ')' : 'SMA(' + period + ')';
-
-
-    if (!_isInArrObjWithId(descr, id)) {
-      var chart = _this2.props.getChart(),
-          color = addSmaTo(chart, {
-        id: id, period: period, isPlus: isPlus, plus: plus
-      });
-      if (color) {
-        _this2.setState(function (prevState) {
-          prevState.descr.push({ id: id, color: color });
-          if (isPlus) {
-            prevState.plusSma = plus;
-          }
-          return prevState;
-        });
-      }
-    }
-  };
-
-  this._handleRemoveSma = function (id) {
-    var chart = _this2.props.getChart();
-    if (removeSeriaFrom(chart, id)) {
-      _this2.setState(function (prevState) {
-        return {
-          descr: prevState.descr.filter(function (d) {
-            return d.id !== id;
-          })
-        };
-      });
-    }
-  };
 
   this._handleRemoveMfi = function (id) {
     _this2.props.onRemoveMfi(id);
@@ -394,81 +334,6 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
     if (config) {
       _this2.props.onAddMfi(config, 'MOM_ATH');
     }
-  };
-
-  this._renderSma = function (plusSma) {
-    return _react2.default.createElement(
-      _react.Fragment,
-      null,
-      _this2._INIT_SMA === SMA.YEAR && _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'span',
-          { style: STYLE.CAPTION },
-          'SMA+'
-        ),
-        _react2.default.createElement(_InputText2.default, {
-          ref: _this2._refSmaPlus,
-          style: STYLE.N3,
-          initValue: _this2._INIT_SMA,
-          type: 'number'
-        }),
-        _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddSma.bind(null, true) }),
-        _react2.default.createElement(
-          'span',
-          { style: STYLE.SMA_PLUS },
-          '+'
-        ),
-        _react2.default.createElement(_InputText2.default, {
-          ref: _this2._refPlusSma,
-          initValue: plusSma,
-          type: 'number'
-        })
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'span',
-          { style: STYLE.CAPTION },
-          'SMA'
-        ),
-        _react2.default.createElement(_InputText2.default, {
-          ref: _this2._refSmaComp,
-          type: 'number',
-          style: STYLE.N3,
-          initValue: _this2._INIT_SMA,
-          onEnter: _this2._handleAddSma
-        }),
-        _react2.default.createElement(_SvgPlus2.default, { onClick: _this2._handleAddSma })
-      )
-    );
-  };
-
-  this._renderIndicators = function () {
-    var _descr = _this2.state.descr.map(function (descr) {
-      var id = descr.id,
-          color = descr.color;
-
-      return _react2.default.createElement(
-        'div',
-        { key: id, style: STYLE.ROW },
-        _react2.default.createElement(_SvgMinus2.default, {
-          onClick: _this2._handleRemoveSma.bind(null, id)
-        }),
-        _react2.default.createElement(
-          'span',
-          { style: STYLE.fnSpan(color) },
-          id
-        )
-      );
-    });
-    return _react2.default.createElement(
-      'div',
-      null,
-      _descr
-    );
   };
 
   this._renderMfi = function () {
@@ -522,18 +387,6 @@ var ModalMenuIndicator = (_temp = _class = function (_Component) {
 
   this._refMfiComp = function (c) {
     return _this2.inputMfiComp = c;
-  };
-
-  this._refSmaPlus = function (c) {
-    return _this2.inputSmaPlus = c;
-  };
-
-  this._refPlusSma = function (c) {
-    return _this2.inputPlusSma = c;
-  };
-
-  this._refSmaComp = function (c) {
-    return _this2.inputSmaComp = c;
   };
 }, _temp);
 exports.default = ModalMenuIndicator;

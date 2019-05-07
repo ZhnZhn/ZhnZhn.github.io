@@ -23,7 +23,7 @@ const _isDataArr = data => _isArr(data)
 const fn = {
   growthRate: (d, rt=1) => {
     const _rt = parseInt(rt, 10);
-    if (!_isArr(d) || _isNumber(_rt)) {
+    if ( !(_isArr(d) && _isNumber(_rt)) ) {
       return [];
     }
 

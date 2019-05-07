@@ -18,8 +18,11 @@ class DateField extends Component {
      onEnter: PropTypes.func
    }
    */
+
    static defaultProps = {
-      onTest: () => { return true; }
+     placeholder: 'YYYY-MM-DD',
+     name: 'text-date',
+     onTest: () => true
    }
 
    constructor(props){
@@ -84,11 +87,13 @@ class DateField extends Component {
     }
   }
 
+  _refDate = node => this.inputDate = node
 
   render(){
     const {
             rootStyle, inputStyle,
-            placeholder='YYYY-MM-DD'
+            placeholder,
+            name
           } = this.props
         , { value, errorInput, isValid } = this.state
         , _styleHr = isValid
@@ -97,23 +102,22 @@ class DateField extends Component {
     return (
       <div style={{...STYLE.ROOT, ...rootStyle}}>
         <input
+           ref={this._refDate}
            style={{...STYLE.INPUT, ...inputStyle}}
-           name="text-date"
+           name={name}
            //autoComplete="new-text-date"
            autoComplete="off"
            autoCorrect="off"
            autoCapitalize="off"
            spellCheck={false}
-           ref={input => this.inputDate = input }
            type="text"
            placeholder={placeholder}
            value={value}
            onChange={this._handleChangeValue}
            onBlur={this._handleBlurValue}
            onKeyDown={this._handleKeyDown}
-        >
-        </input>
-        <hr style={Object.assign({}, STYLE.HR, _styleHr)}></hr>
+        />
+        <hr style={{...STYLE.HR, ..._styleHr}} />
         <div style={STYLE.ERR_MSG}>
           {errorInput}
         </div>

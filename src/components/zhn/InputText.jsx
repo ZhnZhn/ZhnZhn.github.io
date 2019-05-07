@@ -45,7 +45,7 @@ class InputText extends Component {
   }
   */
   static defaultProps = {
-    maxLenght: 125
+    maxLength: 125
   }
 
   constructor(props){
@@ -71,8 +71,8 @@ class InputText extends Component {
 
   _handleInputChange = (event) => {
     const value = event.target.value
-    , { maxLenght, onInputChange } = this.props;
-    if (value.length <= maxLenght) {
+    , { maxLength, onInputChange } = this.props;
+    if (value.length <= maxLength) {
       this.setState({ value })
       if ( _isFn(onInputChange)) {
         onInputChange(value)
@@ -98,7 +98,8 @@ class InputText extends Component {
     const {
            style, type,
            spellCheck, placeholder,
-           maxLenght
+           maxLength,
+           min, max, step
          } = this.props
         , { value } = this.state
         , _autoCorrect = spellCheck
@@ -120,7 +121,10 @@ class InputText extends Component {
         translate={false}
         value={value}
         placeholder={placeholder}
-        maxLength={maxLenght}
+        maxLength={maxLength}
+        min={min}
+        max={max}
+        step={step}
         onChange={this._handleInputChange}
         onKeyDown={this._handleKeyDown}
       />

@@ -1,48 +1,72 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
-import { Direction } from '../../constants/Type'
+import { Direction as D } from '../../constants/Type'
 
 import SvgDown from '../zhn/SvgDown'
 import SvgUp from '../zhn/SvgUp'
 import SvgEqual from '../zhn/SvgEqual'
-import ShowHide from '../zhn/ShowHide'
 
 import SpanValue from '../zhn-span/SpanValue'
 import SpanDate from '../zhn-span/SpanDate'
-import PanelValueMoving from './PanelValueMoving'
+import ModalValueMoving from './ModalValueMoving'
 
 const S = {
   ROOT: {
-    display : 'inline-block',
     position: 'relative',
-    marginLeft : '10px'
-    //cursor: 'pointer'
+    display: 'inline-block',
+    marginLeft: 10
   },
   DELTA: {
-    marginLeft : '5px',
-    fontWeight : 'bold'
+    marginLeft: 5,
+    fontWeight: 'bold'
   },
   DATE: {
-    marginLeft: '10px'
+    marginLeft: 10
   },
   UP: {
-    color: '#4CAF50'
+    color: '#4caf50'
   },
   DOWN: {
-    //color: '#ED5813'
-    color : '#F44336'
+    color: '#f44336'
   },
   EQUAL: {
-    color : '#2F7ED8'
+    color: '#2f7ed8'
+  },
+  BT: {
+    cursor: 'pointer'
   },
   SHOW_HIDE: {
     position: 'absolute',
-    top: '0px',
-    left: '0px',
+    top: 0,
+    left: 0,
     zIndex: 20
   }
-}
+};
+
+const _getDirection = (direction) => {
+  switch(direction){
+    case D.DOWN:
+      return {
+        _svgDirection: <SvgDown />,
+        _dStyle: S.DOWN
+      };
+    case D.UP:
+      return {
+        _svgDirection: <SvgUp />,
+        _dStyle: S.UP
+      };
+    case D.EQUAL:
+      return {
+        _svgDirection: <SvgEqual />,
+        _dStyle: S.EQUAL
+      };
+    default:
+      return {
+        _svgDirection: null
+      };
+  }
+};
 
 class ValueMovingBadge extends Component {
   /*
@@ -65,28 +89,32 @@ class ValueMovingBadge extends Component {
   */
 
   static defaultProps = {
-    valueMoving : {
-      value : 0,
-      delta : 0,
-      percent : 0,
-      direction : Direction.EQUAL,
-      date : ''
+    valueMoving: {
+      value: 0,
+      delta: 0,
+      percent: 0,
+      direction: D.EQUAL,
+      date: ''
     }
   }
 
   constructor(props){
-    super()
+    super(props)
     this.state = {
-      isShowPanel : false,
+      isShowModal : false,
       valueMoving : props.valueMoving
     }
   }
 
-  _handleClickRoot = () => {
+  _hClickBt = () => {
     this.setState(prev => ({
-        isShowPanel: !prev.isShowPanel
+        isShowModal: !prev.isShowModal
     }))
   }
+  _hCloseModal = (event) => {
+    this.setState({ isShowModal: false })
+  }
+
 
   _updateDateTo = (dateTo) => {
     const valueMoving = this.props.crValueMoving(this.state.valueMoving, dateTo)
@@ -98,41 +126,26 @@ class ValueMovingBadge extends Component {
     }
   }
 
+
   render(){
     const { isAdminMode } = this.props
-        , {
-            isShowPanel,
-            valueMoving,
-            msgDateTo
-          } = this.state
-        , {
-            value, delta, percent,
-            direction,
-            date
-          } = valueMoving;
-
-    let _svgDirection, _dStyle;
-    switch(direction){
-      case Direction.DOWN:
-        _svgDirection = <SvgDown />;
-        _dStyle = S.DOWN;
-        break;
-      case Direction.UP:
-        _svgDirection = <SvgUp />;
-        _dStyle = S.UP;
-        break;
-      case Direction.EQUAL:
-        _svgDirection = <SvgEqual />;
-        _dStyle = S.EQUAL;
-        break;
-      default:
-        _svgDirection = null;
-    }
+    , {
+        isShowModal,
+        valueMoving,
+        msgDateTo
+      } = this.state
+    , {
+        value, delta, percent,
+        direction,
+        date
+      } = valueMoving,
+      {
+        _svgDirection,
+        _dStyle
+      } = _getDirection(direction);
 
     return (
-      <span
-         style={S.ROOT}
-      >
+      <span style={S.ROOT}>
          <SpanValue value={value} />
          {_svgDirection}
          <span style={{...S.DELTA, ..._dStyle}}>
@@ -141,22 +154,18 @@ class ValueMovingBadge extends Component {
          <span style={{...S.DELTA, ..._dStyle}}>
            {delta}
          </span>
-         <button onClick={this._handleClickRoot}>
+         <button style = {S.BT} onClick={this._hClickBt} >
            <SpanDate style={S.DATE} date={date} />
          </button>
          {
-           _svgDirection !== null &&
-           <ShowHide
-              style={S.SHOW_HIDE}
-              isShow={isShowPanel}
-           >
-             <PanelValueMoving
+           _svgDirection !== null && <ModalValueMoving
+                isShow={isShowModal}
+                onClose={this._hCloseModal}
                 valueMoving={valueMoving}
                 isAdminMode={isAdminMode}
                 msgDateTo={msgDateTo}
                 updateDateTo={this._updateDateTo}
              />
-           </ShowHide>
          }
       </span>
     );

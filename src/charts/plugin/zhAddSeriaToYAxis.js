@@ -29,7 +29,8 @@ const _crAxis = (id, color) => ({
       style: {
         color: color
       }
-    }
+    },
+    showEmpty: false
 });
 
 const _crSeria = ({ id, color, data }, options) => ({

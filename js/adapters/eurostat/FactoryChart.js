@@ -4,8 +4,36 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var DF_COLOR = '#7cb5ec';
 var _assign = Object.assign;
+
+var BAR_CHART = {
+  type: 'bar',
+  marginTop: 75,
+  height: 600
+};
+var DATA_LABELS = {
+  enabled: true,
+  color: 'black',
+  crop: false,
+  overflow: 'allow',
+  zIndex: 10,
+  style: {
+    fontSize: '14px'
+  }
+};
+var SCATTER_CHART = {
+  type: 'scatter',
+  inverted: true,
+  marginTop: 75,
+  height: 600
+};
 
 var _crColumnConfig = function _crColumnConfig(_ref) {
   var _ref$seriaColor = _ref.seriaColor,
@@ -39,7 +67,9 @@ var _crColumnConfig = function _crColumnConfig(_ref) {
       },
       title: {
         text: ''
-      }
+      },
+      gridLineDashStyle: 'Solid',
+      gridLineWidth: 0.2
     },
     legend: {
       enabled: true,
@@ -75,27 +105,23 @@ var _crColumnConfig = function _crColumnConfig(_ref) {
 };
 var _crBarConfig = function _crBarConfig(option) {
   var config = _crColumnConfig(option);
-  _assign(config.chart, {
-    type: 'bar',
-    marginTop: 75,
-    height: 600
-  });
+  _assign(config.chart, BAR_CHART);
+  if (option.seriaType === 'BAR_WITH_LABELS') {
+    config.plotOptions.bar.dataLabels = (0, _extends3.default)({}, DATA_LABELS);
+  }
   return config;
 };
 var _crDotConfig = function _crDotConfig(option) {
   var seriaColor = option.seriaColor;
 
   var config = _crColumnConfig(option);
-  _assign(config.chart, {
-    type: 'scatter',
-    inverted: true,
-    marginTop: 75,
-    height: 600
-  });
+  _assign(config.chart, SCATTER_CHART);
+  /*
   _assign(config.xAxis, {
     gridLineDashStyle: "Dot",
     gridLineWidth: 1
-  });
+  })
+  */
   _assign(config.series[0], {
     //color: hexToRgba(seriaColor),
     color: seriaColor,
@@ -110,6 +136,7 @@ var _crDotConfig = function _crDotConfig(option) {
 var _r = {
   COLUMN_SET: _crColumnConfig,
   BAR_SET: _crBarConfig,
+  BAR_WITH_LABELS: _crBarConfig,
   DOT_SET: _crDotConfig
 };
 

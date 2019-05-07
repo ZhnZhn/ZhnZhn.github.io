@@ -4,8 +4,7 @@ import fn from '../../charts/seriaFns'
 
 import ModalDialog from '../zhn-moleculs/ModalDialog';
 import Button from './Button'
-import Cell from './DialogCell'
-
+import D from './DialogCell'
 
 const S = {
   TEXT: {
@@ -83,7 +82,7 @@ class ColumnRangeDialog extends Component {
          onClick={this._hAdd}
       />
     ]
-    this._heWidth = _fHeValue('_pointWidth', -1, 4).bind(this)
+    this._heWidth = _fHeValue('_pointWidth', -1, 7).bind(this)
     this._heRadius1 = _fHeValue('_r1', -1, 9).bind(this)
     this._heRadius2 = _fHeValue('_r2', -1, 9).bind(this)
     this._r1 = INIT.R1
@@ -123,6 +122,11 @@ class ColumnRangeDialog extends Component {
        color: this._color,
        index: 0
      }, _crSeriaOptions(this._pointWidth))
+     console.log(this._pointWidth)
+     console.log(_crSeriaOptions(this._pointWidth))
+     console.log(this._refW.current.getValue())
+     chart.zhEnableDataLables()
+
 
      onClose()
   }
@@ -156,26 +160,29 @@ class ColumnRangeDialog extends Component {
           Connect dots series by column range?
         </div>
         <div style={S.ROW}>
-          <Cell.RowInputColor
+          <D.RowInputColor
             styleRoot={S.INLINE}
             styleCaption={S.CAPTION_1}
             initValue={c1}
             onEnter={this._heColor}
-            maxLenght={7}
+            maxLength={7}
           />
-          <Cell.RowInputText
+          <D.RowInputText
              ref={this._refW}
              styleRoot={S.INLINE}
              styleCaption={S.CAPTION_1}
              styleInput={S.INPUT}
              caption="Width"
              initValue={INIT.POIN_WIDTH}
+             maxLength={2}
              type="number"
-             maxLenght={2}
+             min={0}
+             max={6}
+             step={1}
           />
         </div>
         <div style={S.ROW}>
-          <Cell.RowInputText
+          <D.RowInputText
              ref={this._refR1}
              styleRoot={S.INLINE}
              styleCaption={{ ...S.CAPTION_2, ...{ color: c1 }}}
@@ -183,9 +190,9 @@ class ColumnRangeDialog extends Component {
              caption={`R ${n1}`}
              initValue={INIT.R1}
              type="number"
-             maxLenght={2}
+             maxLength={2}
           />
-          <Cell.RowInputText
+          <D.RowInputText
              ref={this._refR2}
              styleRoot={S.INLINE}
              styleCaption={{ ...S.CAPTION_2, ...{ color: c2 }}}
@@ -193,7 +200,7 @@ class ColumnRangeDialog extends Component {
              caption={`R ${n2}`}
              initValue={INIT.R2}
              type="number"
-             maxLenght={2}
+             maxLength={2}
           />
        </div>
       </ModalDialog>

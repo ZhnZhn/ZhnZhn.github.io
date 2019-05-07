@@ -83,10 +83,10 @@ var InputText = (_temp = _class = function (_Component) {
     _this._handleInputChange = function (event) {
       var value = event.target.value,
           _this$props = _this.props,
-          maxLenght = _this$props.maxLenght,
+          maxLength = _this$props.maxLength,
           onInputChange = _this$props.onInputChange;
 
-      if (value.length <= maxLenght) {
+      if (value.length <= maxLength) {
         _this.setState({ value: value });
         if (_isFn(onInputChange)) {
           onInputChange(value);
@@ -143,7 +143,10 @@ var InputText = (_temp = _class = function (_Component) {
           type = _props.type,
           spellCheck = _props.spellCheck,
           placeholder = _props.placeholder,
-          maxLenght = _props.maxLenght,
+          maxLength = _props.maxLength,
+          min = _props.min,
+          max = _props.max,
+          step = _props.step,
           value = this.state.value,
           _autoCorrect = spellCheck ? C.ON : C.OFF,
           _spellCheck = spellCheck ? true : false;
@@ -160,7 +163,10 @@ var InputText = (_temp = _class = function (_Component) {
         translate: false,
         value: value,
         placeholder: placeholder,
-        maxLength: maxLenght,
+        maxLength: maxLength,
+        min: min,
+        max: max,
+        step: step,
         onChange: this._handleInputChange,
         onKeyDown: this._handleKeyDown
       });
@@ -192,7 +198,7 @@ var InputText = (_temp = _class = function (_Component) {
   }]);
   return InputText;
 }(_react.Component), _class.defaultProps = {
-  maxLenght: 125
+  maxLength: 125
 }, _temp);
 exports.default = InputText;
 //# sourceMappingURL=InputText.js.map

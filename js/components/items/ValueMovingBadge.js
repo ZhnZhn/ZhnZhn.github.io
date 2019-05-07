@@ -45,10 +45,6 @@ var _SvgEqual = require('../zhn/SvgEqual');
 
 var _SvgEqual2 = _interopRequireDefault(_SvgEqual);
 
-var _ShowHide = require('../zhn/ShowHide');
-
-var _ShowHide2 = _interopRequireDefault(_ShowHide);
-
 var _SpanValue = require('../zhn-span/SpanValue');
 
 var _SpanValue2 = _interopRequireDefault(_SpanValue);
@@ -57,41 +53,66 @@ var _SpanDate = require('../zhn-span/SpanDate');
 
 var _SpanDate2 = _interopRequireDefault(_SpanDate);
 
-var _PanelValueMoving = require('./PanelValueMoving');
+var _ModalValueMoving = require('./ModalValueMoving');
 
-var _PanelValueMoving2 = _interopRequireDefault(_PanelValueMoving);
+var _ModalValueMoving2 = _interopRequireDefault(_ModalValueMoving);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var S = {
   ROOT: {
-    display: 'inline-block',
     position: 'relative',
-    marginLeft: '10px'
-    //cursor: 'pointer'
+    display: 'inline-block',
+    marginLeft: 10
   },
   DELTA: {
-    marginLeft: '5px',
+    marginLeft: 5,
     fontWeight: 'bold'
   },
   DATE: {
-    marginLeft: '10px'
+    marginLeft: 10
   },
   UP: {
-    color: '#4CAF50'
+    color: '#4caf50'
   },
   DOWN: {
-    //color: '#ED5813'
-    color: '#F44336'
+    color: '#f44336'
   },
   EQUAL: {
-    color: '#2F7ED8'
+    color: '#2f7ed8'
+  },
+  BT: {
+    cursor: 'pointer'
   },
   SHOW_HIDE: {
     position: 'absolute',
-    top: '0px',
-    left: '0px',
+    top: 0,
+    left: 0,
     zIndex: 20
+  }
+};
+
+var _getDirection = function _getDirection(direction) {
+  switch (direction) {
+    case _Type.Direction.DOWN:
+      return {
+        _svgDirection: _react2.default.createElement(_SvgDown2.default, null),
+        _dStyle: S.DOWN
+      };
+    case _Type.Direction.UP:
+      return {
+        _svgDirection: _react2.default.createElement(_SvgUp2.default, null),
+        _dStyle: S.UP
+      };
+    case _Type.Direction.EQUAL:
+      return {
+        _svgDirection: _react2.default.createElement(_SvgEqual2.default, null),
+        _dStyle: S.EQUAL
+      };
+    default:
+      return {
+        _svgDirection: null
+      };
   }
 };
 
@@ -101,14 +122,18 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
   function ValueMovingBadge(props) {
     (0, _classCallCheck3.default)(this, ValueMovingBadge);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ValueMovingBadge.__proto__ || Object.getPrototypeOf(ValueMovingBadge)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ValueMovingBadge.__proto__ || Object.getPrototypeOf(ValueMovingBadge)).call(this, props));
 
-    _this._handleClickRoot = function () {
+    _this._hClickBt = function () {
       _this.setState(function (prev) {
         return {
-          isShowPanel: !prev.isShowPanel
+          isShowModal: !prev.isShowModal
         };
       });
+    };
+
+    _this._hCloseModal = function (event) {
+      _this.setState({ isShowModal: false });
     };
 
     _this._updateDateTo = function (dateTo) {
@@ -122,7 +147,7 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
     };
 
     _this.state = {
-      isShowPanel: false,
+      isShowModal: false,
       valueMoving: props.valueMoving
     };
     return _this;
@@ -151,40 +176,22 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
     value: function render() {
       var isAdminMode = this.props.isAdminMode,
           _state = this.state,
-          isShowPanel = _state.isShowPanel,
+          isShowModal = _state.isShowModal,
           valueMoving = _state.valueMoving,
           msgDateTo = _state.msgDateTo,
           value = valueMoving.value,
           delta = valueMoving.delta,
           percent = valueMoving.percent,
           direction = valueMoving.direction,
-          date = valueMoving.date;
+          date = valueMoving.date,
+          _getDirection2 = _getDirection(direction),
+          _svgDirection = _getDirection2._svgDirection,
+          _dStyle = _getDirection2._dStyle;
 
-
-      var _svgDirection = void 0,
-          _dStyle = void 0;
-      switch (direction) {
-        case _Type.Direction.DOWN:
-          _svgDirection = _react2.default.createElement(_SvgDown2.default, null);
-          _dStyle = S.DOWN;
-          break;
-        case _Type.Direction.UP:
-          _svgDirection = _react2.default.createElement(_SvgUp2.default, null);
-          _dStyle = S.UP;
-          break;
-        case _Type.Direction.EQUAL:
-          _svgDirection = _react2.default.createElement(_SvgEqual2.default, null);
-          _dStyle = S.EQUAL;
-          break;
-        default:
-          _svgDirection = null;
-      }
 
       return _react2.default.createElement(
         'span',
-        {
-          style: S.ROOT
-        },
+        { style: S.ROOT },
         _react2.default.createElement(_SpanValue2.default, { value: value }),
         _svgDirection,
         _react2.default.createElement(
@@ -199,22 +206,17 @@ var ValueMovingBadge = (_temp = _class = function (_Component) {
         ),
         _react2.default.createElement(
           'button',
-          { onClick: this._handleClickRoot },
+          { style: S.BT, onClick: this._hClickBt },
           _react2.default.createElement(_SpanDate2.default, { style: S.DATE, date: date })
         ),
-        _svgDirection !== null && _react2.default.createElement(
-          _ShowHide2.default,
-          {
-            style: S.SHOW_HIDE,
-            isShow: isShowPanel
-          },
-          _react2.default.createElement(_PanelValueMoving2.default, {
-            valueMoving: valueMoving,
-            isAdminMode: isAdminMode,
-            msgDateTo: msgDateTo,
-            updateDateTo: this._updateDateTo
-          })
-        )
+        _svgDirection !== null && _react2.default.createElement(_ModalValueMoving2.default, {
+          isShow: isShowModal,
+          onClose: this._hCloseModal,
+          valueMoving: valueMoving,
+          isAdminMode: isAdminMode,
+          msgDateTo: msgDateTo,
+          updateDateTo: this._updateDateTo
+        })
       );
     }
   }]);

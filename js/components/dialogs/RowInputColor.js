@@ -158,6 +158,7 @@ var RowInputColor = (_temp = _class = function (_Component) {
           _react2.default.createElement(_InputText2.default, {
             style: (0, _extends3.default)({}, S.INPUT_TEXT, styleInput),
             initValue: value,
+            maxLength: 20,
             onEnter: this._hEnter
           })
         ),

@@ -35,6 +35,7 @@ var V = {
   B: 'BAR_SET',
   B_C: 'BAR_CLUSTER',
   B_2: 'BAR_BY_2',
+  B_L: 'BAR_WITH_LABELS',
   D: 'DOT_SET',
   TM: 'TREE_MAP',
   TM_C: 'TREE_MAP_CLUSTER',
@@ -42,12 +43,14 @@ var V = {
   TM_2_C: 'TREE_MAP_2_CLUSTER'
 };
 
+var CATEGORY_TYPES = [V.M, V.C, V.C_C, V.C_2, V.B, V.B_C, V.B_2, V.B_L, V.D, V.TM, V.TM_C, V.TM_2, V.TM_2_C];
+
 var C = {
   EMPTY: ''
 };
 
 var _crDF = function _crDF() {
-  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Area', value: V.A }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Dots: All Countries', value: V.D }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
+  return [{ caption: 'Default: Spline', value: V.S }, { caption: 'Area', value: V.A }, { caption: 'Column', value: V.S_C }, { caption: 'Bar: All Countries', value: V.B }, { caption: 'Bar+Labels: All Countries', value: V.B_L }, { caption: 'Column: All Countries', value: V.C }, { caption: 'Dots: All Countries', value: V.D }, { caption: 'Map: All Countries', value: V.M, compType: _Type.CompItemType.EUROSTAT_MAP }];
 };
 
 var _crDF3 = function _crDF3() {
@@ -125,8 +128,6 @@ var _crT4 = function _crT4(oneCaption, twoCaption) {
     dim: twoCaption
   }]);
 };
-
-var CATEGORY_TYPES = [V.M, V.C, V.C_C, V.C_2, V.B, V.B_C, V.B_2, V.D, V.TM, V.TM_C, V.TM_2, V.TM_2_C];
 
 var _crCaptions = function _crCaptions(_ref) {
   var dims = _ref.dims,

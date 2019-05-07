@@ -61,7 +61,7 @@ var Msg = {
     },
     NETWORK_ERROR: {
       caption: 'Network Error',
-      descr: 'Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond, 503.'
+      descr: 'Network error is encountered. Failed to fetch. Maybe you are offline or a DNS lookup failure or a data provider does not respond.'
     },
     ZH_1000: {
       token: 'ZH_1000',

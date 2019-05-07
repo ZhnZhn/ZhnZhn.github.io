@@ -1,0 +1,14 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/hooks/useRefInit.js"
+ ],
+ "file": "../../../src/components/hooks/useRefInit.js",
+ "names": [
+  "useRefInit",
+  "ref",
+  "crValue",
+  "current"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,aAAa,SAAbA,UAAa,CAACC,GAAD,EAAMC,OAAN;AAAA,SAAkBD,IAAIE,OAAJ,GACjCF,IAAIE,OAD6B,GAEhCF,IAAIE,OAAJ,GAAcD,SAFA;AAAA,CAAnB;;kBAIeF,U"
+}

@@ -3,17 +3,17 @@ const STYLE = {
   ROOT: {
     position: 'absolute',
     zIndex: 1010,
-    top: '30px',
-    left: '-5px',
+    top: 30,
+    left: -5,
     backgroundColor: 'inherit',
     border: '2px solid #1b2836',
-    borderRadius: '5px',
+    borderRadius: 5,
     boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 0 5px'
   },
   PANE: {
-    width: '120px',
-    margin: '8px'
+    width: 120,
+    margin: 8
   }
-}
+};
 
 export default STYLE

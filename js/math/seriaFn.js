@@ -32,7 +32,7 @@ var fn = {
     var rt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
     var _rt = parseInt(rt, 10);
-    if (!_isArr(d) || _isNumber(_rt)) {
+    if (!(_isArr(d) && _isNumber(_rt))) {
       return [];
     }
 

@@ -19,7 +19,7 @@ var C = {
   DF_TAIL: "precision=1"
 };
 
-var CATEGORY_TYPES = ['MAP', 'COLUMN_SET', 'BAR_SET', 'DOT_SET'];
+var CATEGORY_TYPES = ['MAP', 'COLUMN_SET', 'BAR_SET', 'BAR_WITH_LABELS', 'DOT_SET'];
 
 var apiFn = {
   URL: C.URL,

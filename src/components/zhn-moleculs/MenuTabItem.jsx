@@ -3,22 +3,19 @@ import React, { Component } from 'react'
 import MenuTab from './MenuTab'
 
 class MenuTabItem extends Component {
-  constructor(props){
-    super()
-    this.state = {
-      isShow: false
-    }
+  state = {
+    isShow: false
   }
 
-  _handleClickTab = () => {    
-    this.setState({ isShow: !this.state.isShow })
+  _hClickTab = () => {
+    this.setState(prevState => ({
+      isShow: !prevState.isShow
+    }))
   }
-  _handleCloseTab = (event) => {
-    if (!this.tabNode.contains(event.target)) {
-      this.setState({ isShow: false })
-    }
+  _hCloseTab = (event) => {
+     this.setState({ isShow: false })
   }
-  _handleRegTab = (node) => {
+  _hRegTab = (node) => {
     this.tabNode = node
   }
 
@@ -26,7 +23,7 @@ class MenuTabItem extends Component {
     return React.Children.map(children, child => {
        return React.cloneElement(child, {
           isShow: isShow,
-          onClose: this._handleCloseTab
+          onClose: this._hCloseTab
        });
     });
   }
@@ -39,8 +36,8 @@ class MenuTabItem extends Component {
         style={style}
         isShow={isShow}
         caption={caption}
-        onClick={this._handleClickTab}
-        onReg={this._handleRegTab}
+        onClick={this._hClickTab}
+        onReg={this._hRegTab}
       >
         { this._renderChildren(children, isShow) }
      </MenuTab>

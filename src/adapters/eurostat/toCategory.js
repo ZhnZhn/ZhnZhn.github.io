@@ -37,7 +37,7 @@ const toCategory = {
         , data = JsonStatFn.trJsonToSeria(json, configSlice, categories)
         , _seriaProps = seriaType === 'DOT_SET'
             ? _crScatterProps(seriaColor)
-            : undefined;
+            : void 0;
     return {
       zhSeriaId: 'optionKey',
       zhValueText: 'Value',

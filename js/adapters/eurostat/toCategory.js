@@ -60,7 +60,7 @@ var toCategory = {
         seriaType = option.seriaType,
         _name = configSlice.time || time,
         data = _JsonStatFn2.default.trJsonToSeria(json, configSlice, categories),
-        _seriaProps = seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : undefined;
+        _seriaProps = seriaType === 'DOT_SET' ? _crScatterProps(seriaColor) : void 0;
 
     return (0, _extends3.default)({
       zhSeriaId: 'optionKey',

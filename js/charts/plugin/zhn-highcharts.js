@@ -32,6 +32,10 @@ var _zhToggle2H = require('./zhToggle2H');
 
 var _zhToggle2H2 = _interopRequireDefault(_zhToggle2H);
 
+var _zhEnableDataLabels = require('./zhEnableDataLabels');
+
+var _zhEnableDataLabels2 = _interopRequireDefault(_zhEnableDataLabels);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HighchartsZhn = function HighchartsZhn(Highcharts) {
@@ -45,6 +49,7 @@ var HighchartsZhn = function HighchartsZhn(Highcharts) {
   (0, _zhToggleSeria2.default)(Chart);
   (0, _zhTogglePlotLines2.default)(Chart);
   (0, _zhToggle2H2.default)(Chart);
+  (0, _zhEnableDataLabels2.default)(Chart);
 };
 
 exports.default = HighchartsZhn;

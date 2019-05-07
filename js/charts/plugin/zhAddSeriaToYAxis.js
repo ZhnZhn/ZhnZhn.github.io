@@ -36,7 +36,8 @@ var _crAxis = function _crAxis(id, color) {
       style: {
         color: color
       }
-    }
+    },
+    showEmpty: false
   };
 };
 

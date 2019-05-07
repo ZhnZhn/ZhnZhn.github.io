@@ -109,6 +109,10 @@ var DateField = (_temp = _class = function (_Component) {
       }
     };
 
+    _this._refDate = function (node) {
+      return _this.inputDate = node;
+    };
+
     _this.getValue = function () {
       return _this.state.value;
     };
@@ -142,17 +146,14 @@ var DateField = (_temp = _class = function (_Component) {
    }
    */
 
-
   (0, _createClass3.default)(DateField, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           rootStyle = _props.rootStyle,
           inputStyle = _props.inputStyle,
-          _props$placeholder = _props.placeholder,
-          placeholder = _props$placeholder === undefined ? 'YYYY-MM-DD' : _props$placeholder,
+          placeholder = _props.placeholder,
+          name = _props.name,
           _state = this.state,
           value = _state.value,
           errorInput = _state.errorInput,
@@ -163,16 +164,14 @@ var DateField = (_temp = _class = function (_Component) {
         'div',
         { style: (0, _extends3.default)({}, _InputStyle2.default.ROOT, rootStyle) },
         _react2.default.createElement('input', {
+          ref: this._refDate,
           style: (0, _extends3.default)({}, _InputStyle2.default.INPUT, inputStyle),
-          name: 'text-date'
+          name: name
           //autoComplete="new-text-date"
           , autoComplete: 'off',
           autoCorrect: 'off',
           autoCapitalize: 'off',
           spellCheck: false,
-          ref: function ref(input) {
-            return _this2.inputDate = input;
-          },
           type: 'text',
           placeholder: placeholder,
           value: value,
@@ -180,7 +179,7 @@ var DateField = (_temp = _class = function (_Component) {
           onBlur: this._handleBlurValue,
           onKeyDown: this._handleKeyDown
         }),
-        _react2.default.createElement('hr', { style: Object.assign({}, _InputStyle2.default.HR, _styleHr) }),
+        _react2.default.createElement('hr', { style: (0, _extends3.default)({}, _InputStyle2.default.HR, _styleHr) }),
         _react2.default.createElement(
           'div',
           { style: _InputStyle2.default.ERR_MSG },
@@ -191,6 +190,8 @@ var DateField = (_temp = _class = function (_Component) {
   }]);
   return DateField;
 }(_react.Component), _class.defaultProps = {
+  placeholder: 'YYYY-MM-DD',
+  name: 'text-date',
   onTest: function onTest() {
     return true;
   }

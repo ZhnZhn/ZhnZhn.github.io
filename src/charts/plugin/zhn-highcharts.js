@@ -5,6 +5,7 @@ import zhAddSeriaToYAxis from './zhAddSeriaToYAxis'
 import zhToggleSeria from './zhToggleSeria'
 import zhTogglePlotLines from './zhTogglePlotLines'
 import zhToggle2H from './zhToggle2H'
+import zhEnableDataLabels from './zhEnableDataLabels'
 
 const HighchartsZhn = (Highcharts) => {
   const { wrap, Chart } = Highcharts;
@@ -15,6 +16,7 @@ const HighchartsZhn = (Highcharts) => {
   zhToggleSeria(Chart)
   zhTogglePlotLines(Chart)
   zhToggle2H(Chart)
+  zhEnableDataLabels(Chart)
 };
 
 export default HighchartsZhn

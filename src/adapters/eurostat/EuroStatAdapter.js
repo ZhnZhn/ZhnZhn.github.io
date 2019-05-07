@@ -12,6 +12,7 @@ const _rToConfig = {
   MAP: toMap.createConfig,
   COLUMN_SET: toCategory.createConfig,
   BAR_SET: toCategory.createConfig,
+  BAR_WITH_LABELS: toCategory.createConfig,
   DOT_SET: toCategory.createConfig
 };
 
@@ -21,7 +22,8 @@ const _rToSeria = {
   COLUMN: toArea.createSeria,
   COLUMN_SET: toCategory.createSeria,
   BAR_SET: toCategory.createSeria,
-  DOT_SET: toCategory.createSeria  
+  BAR_WITH_LABELS: toCategory.createSeria,
+  DOT_SET: toCategory.createSeria
 };
 
 const _checkSeriaType = (router, option, dfType=DF_TYPE) => {

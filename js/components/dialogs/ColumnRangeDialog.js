@@ -126,7 +126,7 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
       , isPrimary: true,
       onClick: _this._hAdd
     })];
-    _this._heWidth = _fHeValue('_pointWidth', -1, 4).bind(_this);
+    _this._heWidth = _fHeValue('_pointWidth', -1, 7).bind(_this);
     _this._heRadius1 = _fHeValue('_r1', -1, 9).bind(_this);
     _this._heRadius2 = _fHeValue('_r2', -1, 9).bind(_this);
     _this._r1 = INIT.R1;
@@ -188,7 +188,7 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
             styleCaption: S.CAPTION_1,
             initValue: c1,
             onEnter: this._heColor,
-            maxLenght: 7
+            maxLength: 7
           }),
           _react2.default.createElement(_DialogCell2.default.RowInputText, {
             ref: this._refW,
@@ -197,8 +197,11 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
             styleInput: S.INPUT,
             caption: 'Width',
             initValue: INIT.POIN_WIDTH,
+            maxLength: 2,
             type: 'number',
-            maxLenght: 2
+            min: 0,
+            max: 6,
+            step: 1
           })
         ),
         _react2.default.createElement(
@@ -212,7 +215,7 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
             caption: 'R ' + n1,
             initValue: INIT.R1,
             type: 'number',
-            maxLenght: 2
+            maxLength: 2
           }),
           _react2.default.createElement(_DialogCell2.default.RowInputText, {
             ref: this._refR2,
@@ -222,7 +225,7 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
             caption: 'R ' + n2,
             initValue: INIT.R2,
             type: 'number',
-            maxLenght: 2
+            maxLength: 2
           })
         )
       );
@@ -257,6 +260,10 @@ var ColumnRangeDialog = (_temp = _class = function (_Component) {
       color: _this2._color,
       index: 0
     }, _crSeriaOptions(_this2._pointWidth));
+    console.log(_this2._pointWidth);
+    console.log(_crSeriaOptions(_this2._pointWidth));
+    console.log(_this2._refW.current.getValue());
+    chart.zhEnableDataLables();
 
     onClose();
   };

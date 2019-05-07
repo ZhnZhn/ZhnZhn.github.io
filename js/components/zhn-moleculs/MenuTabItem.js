@@ -33,38 +33,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MenuTabItem = function (_Component) {
   (0, _inherits3.default)(MenuTabItem, _Component);
 
-  function MenuTabItem(props) {
+  function MenuTabItem() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     (0, _classCallCheck3.default)(this, MenuTabItem);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (MenuTabItem.__proto__ || Object.getPrototypeOf(MenuTabItem)).call(this));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this._handleClickTab = function () {
-      _this.setState({ isShow: !_this.state.isShow });
-    };
-
-    _this._handleCloseTab = function (event) {
-      if (!_this.tabNode.contains(event.target)) {
-        _this.setState({ isShow: false });
-      }
-    };
-
-    _this._handleRegTab = function (node) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MenuTabItem.__proto__ || Object.getPrototypeOf(MenuTabItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      isShow: false
+    }, _this._hClickTab = function () {
+      _this.setState(function (prevState) {
+        return {
+          isShow: !prevState.isShow
+        };
+      });
+    }, _this._hCloseTab = function (event) {
+      _this.setState({ isShow: false });
+    }, _this._hRegTab = function (node) {
       _this.tabNode = node;
-    };
-
-    _this._renderChildren = function (children, isShow) {
+    }, _this._renderChildren = function (children, isShow) {
       return _react2.default.Children.map(children, function (child) {
         return _react2.default.cloneElement(child, {
           isShow: isShow,
-          onClose: _this._handleCloseTab
+          onClose: _this._hCloseTab
         });
       });
-    };
-
-    _this.state = {
-      isShow: false
-    };
-    return _this;
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
   (0, _createClass3.default)(MenuTabItem, [{
@@ -82,8 +81,8 @@ var MenuTabItem = function (_Component) {
           style: style,
           isShow: isShow,
           caption: caption,
-          onClick: this._handleClickTab,
-          onReg: this._handleRegTab
+          onClick: this._hClickTab,
+          onReg: this._hRegTab
         },
         this._renderChildren(children, isShow)
       );

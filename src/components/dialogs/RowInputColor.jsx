@@ -110,6 +110,7 @@ class RowInputColor extends Component {
           <InputText
              style={{...S.INPUT_TEXT, ...styleInput}}
              initValue={value}
+             maxLength={20}
              onEnter={this._hEnter}
           />
         </label>

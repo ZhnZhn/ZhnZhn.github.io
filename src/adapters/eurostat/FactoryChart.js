@@ -2,6 +2,28 @@
 const DF_COLOR = '#7cb5ec';
 const _assign = Object.assign;
 
+const BAR_CHART = {
+  type: 'bar',
+  marginTop: 75,
+  height: 600
+};
+const DATA_LABELS = {
+  enabled: true,
+  color: 'black',
+  crop: false,
+  overflow: 'allow',
+  zIndex: 10,
+  style: {
+    fontSize: '14px'
+  }
+};
+const SCATTER_CHART = {
+  type: 'scatter',
+  inverted: true,
+  marginTop: 75,
+  height: 600,
+};
+
 const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
   chart: {
     type: 'column',
@@ -31,7 +53,9 @@ const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
     },
     title: {
       text: ''
-    }
+    },
+    gridLineDashStyle: 'Solid',
+    gridLineWidth: 0.2
   },
   legend : {
     enabled : true,
@@ -66,26 +90,22 @@ const _crColumnConfig = ({ seriaColor=DF_COLOR }) => ({
 });
 const _crBarConfig = (option) => {
   const config = _crColumnConfig(option);
-  _assign(config.chart, {
-    type: 'bar',
-    marginTop: 75,
-    height: 600
-  })
+  _assign(config.chart, BAR_CHART )
+  if (option.seriaType === 'BAR_WITH_LABELS') {
+    config.plotOptions.bar.dataLabels = {...DATA_LABELS}
+  }
   return config;
 };
 const _crDotConfig = (option) => {
   const { seriaColor } = option;
   const config = _crColumnConfig(option);
-  _assign(config.chart, {
-    type: 'scatter',
-    inverted: true,
-    marginTop: 75,
-    height: 600,
-  })
+  _assign(config.chart, SCATTER_CHART)
+  /*
   _assign(config.xAxis, {
     gridLineDashStyle: "Dot",
     gridLineWidth: 1
   })
+  */
   _assign(config.series[0], {
     //color: hexToRgba(seriaColor),
     color: seriaColor,
@@ -100,6 +120,7 @@ const _crDotConfig = (option) => {
 const _r = {
   COLUMN_SET: _crColumnConfig,
   BAR_SET: _crBarConfig,
+  BAR_WITH_LABELS: _crBarConfig,
   DOT_SET: _crDotConfig
 };
 
