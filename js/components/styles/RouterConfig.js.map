@@ -7,8 +7,13 @@
  "names": [
   "router",
   "DF",
+  "General",
   "HEADER_BAR",
-  "ELEMENT"
+  "HeaderBar",
+  "ELEMENT",
+  "Element",
+  "ROW_CHECKBOX",
+  "RowCheckBox"
  ],
- "mappings": ";;;;;;AAAA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,SAAS;AACbC,6BADa;AAEb;;;;;;;;;AASAC,uCAXa;AAYb;;;;AAIAC;AAhBa,CAAf;;kBAmBeH,M"
+ "mappings": ";;;;;;AAAA;;;;AACA;;;;AAEA;;;;AACA;;;;;;AAEA,IAAMA,SAAS;AACbC,MAAIC,uBADS;AAEb;;;;;;;;;AASAC,cAAYC,yBAXC;AAYb;;;;;AAKAC,WAASC,uBAjBI;AAkBbC,gBAAcC;AAlBD,CAAf;;kBAqBeR,M"
 }

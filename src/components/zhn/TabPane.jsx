@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 const styles = {
   ulStyle : {
@@ -12,16 +12,18 @@ const styles = {
 };
 
 class TabPane extends Component {
+  /*
   static propTypes = {
     isUpdateInit: PropTypes.bool,
     width: PropTypes.string,
     height: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.node)
   }
+  */
 
 
   constructor(props){
-    super();
+    super(props);
 
     this.isUpdateInit = props.isUpdateInit
 

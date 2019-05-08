@@ -16,17 +16,21 @@ var _ConfigElement = require('./ConfigElement');
 
 var _ConfigElement2 = _interopRequireDefault(_ConfigElement);
 
+var _ConfigRowCheckBox = require('./ConfigRowCheckBox');
+
+var _ConfigRowCheckBox2 = _interopRequireDefault(_ConfigRowCheckBox);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = {
   DF: _ConfigGeneral2.default,
   /*
   ABOUT: General,
+  BROWSER: General,
   DRAGGABLE_DIALOG: General,
   MODAL_DIALOG: General,
-  BROWSER: General,
-  CHART_CONTAINER: General,
   MODAL_PANE: General,
+  CHART_CONTAINER: General,
   SCROLL_PANE: General,
   */
   HEADER_BAR: _ConfigHeaderBar2.default,
@@ -34,7 +38,9 @@ var router = {
     BrowserCaption, ButtonTab, MenuBadge, Tab,
     MenuTab, ModalPopup
   */
-  ELEMENT: _ConfigElement2.default
+
+  ELEMENT: _ConfigElement2.default,
+  ROW_CHECKBOX: _ConfigRowCheckBox2.default
 };
 
 exports.default = router;

@@ -37,7 +37,8 @@ var fn = {
     }
 
     var _d = [],
-        max = d.length;
+        max = d.length,
+        prevStep = _rt - 1;
     var pPrev = d[0],
         pNext = void 0,
         i = _rt;
@@ -47,7 +48,7 @@ var fn = {
         x: pNext.x,
         y: _calcY(pPrev, pNext)
       });
-      pPrev = pNext;
+      pPrev = d[i - prevStep];
     }
     return _d;
   },

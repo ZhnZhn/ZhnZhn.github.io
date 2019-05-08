@@ -16,29 +16,29 @@ var S = {
     //display: 'block',
     display: 'flex',
     alignItems: 'center',
-    marginRight: '5px',
-    marginTop: '5px',
-    marginLeft: '5px',
-    marginBottom: '5px'
+    marginRight: 5,
+    marginTop: 5,
+    marginLeft: 5,
+    marginBottom: 5
   },
   ROW_OC: {
     lineHeight: 'unset',
-    marginRight: '5px',
-    marginTop: '5px',
-    marginLeft: '5px',
-    marginBottom: '-4px'
+    marginRight: 5,
+    marginTop: 5,
+    marginLeft: 5,
+    marginBottom: -4
   },
   ROW_SHORT: {
-    marginLeft: '12px',
-    marginRight: '12px'
+    marginLeft: 12,
+    marginRight: 12
   },
   LABEL: {
-    color: '#1B75BB',
+    color: '#1b75bb',
     display: 'inline-block',
     //verticalAlign: 'top',
     textAlign: 'right',
-    width: '100px',
-    paddingRight: '5px',
+    width: 100,
+    paddingRight: 5,
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none'
@@ -75,19 +75,23 @@ var DialogStyles = {
   },
 
   //ValidationMessagesFragment
-  validationContainer: {
-    paddingLeft: '10px',
-    paddingTop: '5px',
-    color: '#F44336'
+  VM_CONT: {
+    paddingLeft: 10,
+    paddingTop: 5,
+    color: '#f44336'
   },
-  validationMessageNumber: {
+  VM_MSG_NUMBER: {
     display: 'inline-block',
-    width: '22px',
-    height: '22px',
+    width: 22,
+    height: 22,
     border: 'solid 2px #F44336',
     borderRadius: '50%',
     textAlign: 'center',
-    marginRight: '5px'
+    marginRight: 5
+  },
+  VM_MSG: {
+    whiteSpace: 'pre',
+    fontWeight: 'bold'
   }
 
 };

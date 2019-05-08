@@ -1,1 +1,28 @@
-{"version":3,"sources":["../../../src/components/zhn-sparklines/SparklinesReferenceLine.jsx"],"names":["SparklinesReferenceLine","props","points","margin","type","style","value","ypoints","map","p","y","x","length","propTypes","oneOf","number","object","defaultProps","stroke","strokeOpacity","strokeDasharray"],"mappings":";;;;;;AAAA;;;;AACA;;;;AACA;;;;AAEA,IAAMA,0BAA0B,SAA1BA,uBAA0B,CAACC,KAAD,EAAW;AAAA,QACjCC,MADiC,GACMD,KADN,CACjCC,MADiC;AAAA,QACzBC,MADyB,GACMF,KADN,CACzBE,MADyB;AAAA,QACjBC,IADiB,GACMH,KADN,CACjBG,IADiB;AAAA,QACXC,KADW,GACMJ,KADN,CACXI,KADW;AAAA,QACJC,KADI,GACML,KADN,CACJK,KADI;AAAA,QAEnCC,OAFmC,GAEzBL,OAAOM,GAAP,CAAW;AAAA,eAAKC,EAAEC,CAAP;AAAA,KAAX,CAFyB;AAAA,QAGnCA,CAHmC,GAG9BN,SAAS,QAAV,GACEE,KADF,GAEE,UAAeF,IAAf,EAAqBG,OAArB,CAL6B;;;AAOzC,WACI;AACI,YAAIL,OAAO,CAAP,EAAUS,CADlB,EACqB,IAAID,IAAIP,MAD7B;AAEI,YAAID,OAAOA,OAAOU,MAAP,GAAgB,CAAvB,EAA0BD,CAFlC,EAEqC,IAAID,IAAIP,MAF7C;AAGI,eAAOE,KAHX,GADJ;AAMD,CAbD;;AAeAL,wBAAwBa,SAAxB,2CAAoC;AAChCT,UAAM,oBAAUU,KAAV,CAAgB,CAAC,KAAD,EAAQ,KAAR,EAAe,MAAf,EAAuB,KAAvB,EAA8B,QAA9B,EAAwC,QAAxC,CAAhB,CAD0B;AAEhCR,WAAO,oBAAUS,MAFe;AAGhCV,WAAO,oBAAUW;AAHe,CAApC;;AAMAhB,wBAAwBiB,YAAxB,GAAuC;AACnCb,UAAM,MAD6B;AAEnCC,WAAO,EAAEa,QAAQ,KAAV,EAAiBC,eAAe,GAAhC,EAAqCC,iBAAiB,MAAtD;AAF4B,CAAvC;;kBAKepB,uB","file":"SparklinesReferenceLine.js","sourcesContent":["import React from 'react';\r\nimport PropTypes from 'prop-types'\r\nimport { hm as dataProcessing } from './dataProcessing/index';\r\n\r\nconst SparklinesReferenceLine = (props) => {\r\n  const { points, margin, type, style, value } = props\r\n      , ypoints = points.map(p => p.y)\r\n      , y = (type === 'custom')\r\n            ? value\r\n            : dataProcessing[type](ypoints);\r\n\r\n  return (\r\n      <line\r\n          x1={points[0].x} y1={y + margin}\r\n          x2={points[points.length - 1].x} y2={y + margin}\r\n          style={style} />\r\n  )\r\n}\r\n\r\nSparklinesReferenceLine.propTypes = {\r\n    type: PropTypes.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),\r\n    value: PropTypes.number,\r\n    style: PropTypes.object\r\n};\r\n\r\nSparklinesReferenceLine.defaultProps = {\r\n    type: 'mean',\r\n    style: { stroke: 'red', strokeOpacity: .75, strokeDasharray: '2, 2' }\r\n};\r\n\r\nexport default SparklinesReferenceLine\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn-sparklines/SparklinesReferenceLine.js"
+ ],
+ "file": "../../../src/components/zhn-sparklines/SparklinesReferenceLine.js",
+ "names": [
+  "SparklinesReferenceLine",
+  "props",
+  "points",
+  "margin",
+  "type",
+  "style",
+  "value",
+  "ypoints",
+  "map",
+  "p",
+  "y",
+  "dataProcessing",
+  "x",
+  "length",
+  "defaultProps",
+  "stroke",
+  "strokeOpacity",
+  "strokeDasharray"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;AAEA,IAAMA,0BAA0B,SAA1BA,uBAA0B,CAACC,KAAD,EAAW;AAAA,QACjCC,MADiC,GACMD,KADN,CACjCC,MADiC;AAAA,QACzBC,MADyB,GACMF,KADN,CACzBE,MADyB;AAAA,QACjBC,IADiB,GACMH,KADN,CACjBG,IADiB;AAAA,QACXC,KADW,GACMJ,KADN,CACXI,KADW;AAAA,QACJC,KADI,GACML,KADN,CACJK,KADI;AAAA,QAEnCC,OAFmC,GAEzBL,OAAOM,GAAP,CAAW;AAAA,eAAKC,EAAEC,CAAP;AAAA,KAAX,CAFyB;AAAA,QAGnCA,CAHmC,GAG9BN,SAAS,QAAV,GACEE,KADF,GAEEK,UAAeP,IAAf,EAAqBG,OAArB,CAL6B;;;AAOzC,WACI;AACI,YAAIL,OAAO,CAAP,EAAUU,CADlB,EACqB,IAAIF,IAAIP,MAD7B;AAEI,YAAID,OAAOA,OAAOW,MAAP,GAAgB,CAAvB,EAA0BD,CAFlC,EAEqC,IAAIF,IAAIP,MAF7C;AAGI,eAAOE,KAHX,GADJ;AAMD,CAbD;;AAeA;;;;;;;;AAlBA;AA0BAL,wBAAwBc,YAAxB,GAAuC;AACnCV,UAAM,MAD6B;AAEnCC,WAAO,EAAEU,QAAQ,KAAV,EAAiBC,eAAe,GAAhC,EAAqCC,iBAAiB,MAAtD;AAF4B,CAAvC;;kBAKejB,uB"
+}

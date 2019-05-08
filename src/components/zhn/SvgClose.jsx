@@ -1,12 +1,9 @@
 import React from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 const STYLE = {
-  //"#ED5813"
-  COLOR : '#F44336',
-  SVG : {
-    padding: '3px',
-  }
+  COLOR: '#f44336',
+  SVG: { padding: 3 }
 };
 
 const SvgClose = ({ style, onClose }) => (
@@ -21,16 +18,17 @@ const SvgClose = ({ style, onClose }) => (
           stroke={STYLE.COLOR}
           strokeLinecap="round"
       >
-        <path d="M 0,0 L 12,12"></path>
-        <path d="M 12,0 L 0,12"></path>
+        <path d="M 0,0 L 12,12" />
+        <path d="M 12,0 L 0,12" />
      </svg>
    </div>
 )
-
+/*
 SvgClose.propTypes = {
   style: PropTypes.object,
   onClose: PropTypes.func
 }
+*/
 SvgClose.defaultProps = {
   onClose: () => {}
 }

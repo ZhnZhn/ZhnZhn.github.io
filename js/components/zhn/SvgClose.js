@@ -8,18 +8,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import PropTypes from "prop-types";
+
 var STYLE = {
-  //"#ED5813"
-  COLOR: '#F44336',
-  SVG: {
-    padding: '3px'
-  }
+  COLOR: '#f44336',
+  SVG: { padding: 3 }
 };
 
 var SvgClose = function SvgClose(_ref) {
@@ -45,11 +40,12 @@ var SvgClose = function SvgClose(_ref) {
     )
   );
 };
-
-SvgClose.propTypes = process.env.NODE_ENV !== "production" ? {
-  style: _propTypes2.default.object,
-  onClose: _propTypes2.default.func
-} : {};
+/*
+SvgClose.propTypes = {
+  style: PropTypes.object,
+  onClose: PropTypes.func
+}
+*/
 SvgClose.defaultProps = {
   onClose: function onClose() {}
 };

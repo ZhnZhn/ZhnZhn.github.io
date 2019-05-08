@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _index = require('./dataProcessing/index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -34,12 +30,15 @@ var SparklinesReferenceLine = function SparklinesReferenceLine(props) {
         style: style });
 };
 
-SparklinesReferenceLine.propTypes = process.env.NODE_ENV !== "production" ? {
-    type: _propTypes2.default.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
-    value: _propTypes2.default.number,
-    style: _propTypes2.default.object
-} : {};
+/*
+SparklinesReferenceLine.propTypes = {
+    type: PropTypes.oneOf(['max', 'min', 'mean', 'avg', 'median', 'custom']),
+    value: PropTypes.number,
+    style: PropTypes.object
+};
+*/
 
+//import PropTypes from 'prop-types'
 SparklinesReferenceLine.defaultProps = {
     type: 'mean',
     style: { stroke: 'red', strokeOpacity: .75, strokeDasharray: '2, 2' }

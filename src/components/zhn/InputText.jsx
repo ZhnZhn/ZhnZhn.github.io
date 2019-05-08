@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
 const S = {
-  INPUT_TEXT : {
-    display : 'inline',
+  INPUT: {
+    display: 'inline',
     background: 'transparent none repeat scroll 0 0',
     border: 'medium none',
     outline: 'medium none',
-    height: '26px',
-    paddingLeft: '5px',
+    height: 26,
+    paddingLeft: 5,
     color: 'green',
-    width: '40px',
+    width: 40,
     fontSize: '16px',
     fontWeight: 'bold',
-    backgroundColor : '#E1E1CB',
-    marginLeft : '5px',
-    marginRight : '5px',
+    backgroundColor: '#e1e1cb',
+    marginLeft: 5,
+    marginRight: 5,
+    boxShadow: '0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1)'
   }
 };
 
@@ -25,7 +26,7 @@ const C = {
   //NEW_TEXT: 'new-text',
   ON: 'on',
   OFF: 'off'
-}
+};
 
 const _isFn = fn => typeof fn === 'function';
 
@@ -111,7 +112,7 @@ class InputText extends Component {
     return (
       <input
         ref={this._refInput}
-        style={{ ...S.INPUT_TEXT, ...style }}
+        style={{ ...S.INPUT, ...style }}
         type={type || C.TEXT}
         name={C.TEXT}
         autoCapitalize={C.OFF}

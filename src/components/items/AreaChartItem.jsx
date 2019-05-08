@@ -6,9 +6,9 @@ import safeGet from '../../utils/safeGet'
 import ShowHide from '../zhn/ShowHide';
 import HighchartWrapper from '../zhn/HighchartWrapper';
 import Legend from '../zhn/Legend';
+import ChartToolBar from '../toolbars/ChartToolBar';
 import crModelMore from './AreaMore'
 import Header from './Header';
-import ChartToolBar from './ChartToolBar';
 import MiniCharts from './MiniCharts';
 import PanelDataInfo from './PanelDataInfo';
 

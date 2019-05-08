@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import SparklinesLine from './SparklinesLine';
 
 import SparklinesSpots from './SparklinesSpots';
@@ -22,6 +22,7 @@ const DEFAULT_DATA = []
     , DEFAULT_MARGIN = 2;
 
 class Sparklines extends PureComponent {
+   /*
      static propTypes = {
         data: PropTypes.array,
         limit: PropTypes.number,
@@ -35,34 +36,38 @@ class Sparklines extends PureComponent {
         min: PropTypes.number,
         max: PropTypes.number
      }
-   
-    render() {
-        const {
-               data=DEFAULT_DATA, limit,
-               width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
-               svgWidth, svgHeight,
-               preserveAspectRatio=DEFAULT_RATIO,
-               margin=DEFAULT_MARGIN,
-               //marginLeft, marginRight,
-               style, max, min
-             } = this.props;
+  */
 
-        if (data.length === 0) return null;
+  render() {
+      const {
+        data=DEFAULT_DATA, limit,
+        width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
+        svgWidth, svgHeight,
+        preserveAspectRatio=DEFAULT_RATIO,
+        margin=DEFAULT_MARGIN,
+        style, max, min
+      } = this.props;
 
-        const points = dataToPoints({ data, limit, width, height, margin, max, min })
-            , svgOpts = { style: style, viewBox: `0 0 ${width} ${height}`, preserveAspectRatio: preserveAspectRatio };
+      if (data.length === 0) return null;
 
-        if (svgWidth > 0) svgOpts.width = svgWidth;
-        if (svgHeight > 0) svgOpts.height = svgHeight;
+      const points = dataToPoints({ data, limit, width, height, margin, max, min })
+      , svgOpts = {
+        style: style,
+        viewBox: `0 0 ${width} ${height}`,
+        preserveAspectRatio: preserveAspectRatio
+      };
 
-        return (
-            <svg {...svgOpts} >
-                {React.Children.map(this.props.children, child =>
-                    React.cloneElement(child, { data, points, width, height, margin })
-                )}
-            </svg>
-        );
-    }
+      if (svgWidth > 0) svgOpts.width = svgWidth;
+      if (svgHeight > 0) svgOpts.height = svgHeight;
+
+      return (
+        <svg {...svgOpts} >
+            {React.Children.map(this.props.children, child =>
+                React.cloneElement(child, { data, points, width, height, margin })
+            )}
+        </svg>
+     );
+   }
 }
 
 export {

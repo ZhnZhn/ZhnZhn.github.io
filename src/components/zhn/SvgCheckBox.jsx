@@ -20,15 +20,14 @@ const E = {
   KEY_CODE: 32
 };
 
-
 const C_GREY = "#777777";
 
-const EL_CHECKED = (
+const SvgChecked = ({ stroke }) => (
   <path
       d="M 2,5 L 8,14 14,1"
       strokeWidth="2"
       strokeLinecap="round"
-      stroke={C.YELLOW}
+      stroke={stroke}
       fill={C.BLANK}
   />
 );
@@ -46,10 +45,18 @@ class SvgCheckBox extends Component {
     initValue: PropTypes.bool,
     value: PropTypes.bool,
     style: PropTypes.object,
+    checkedRestStroke: PropTypes.string,
+    checkedRestFill: PropTypes.string,
+    checkedColor: PropTypes.string,
     onCheck: PropTypes.func,
     onUnCheck: PropTypes.func
   }
   */
+  static defaultProps = {
+    checkedRestStroke: C_GREY,
+    checkedRestFill: C.BLANK,
+    checkedColor: C.YELLOW
+  }
 
   constructor(props){
     super(props);
@@ -94,11 +101,13 @@ class SvgCheckBox extends Component {
   render(){
     const {
       style,
+      checkedRestStroke,
+      checkedRestFill,
+      checkedColor,
       value=this.state.isChecked
     } = this.props
-    , _elChecked = (value)
-        ? EL_CHECKED
-        : null;
+    , _restStroke = value ? checkedRestStroke : C_GREY
+    , _restFill = value ? checkedRestFill : C.BLANK;
     return (
       <div
          role="checkbox"
@@ -118,9 +127,13 @@ class SvgCheckBox extends Component {
              x="1" y="1"
              height="14" width="14"
              strokeWidth="2" rx="3"
-             stroke={C_GREY}  fill={C.BLANK}
+             stroke={_restStroke}
+             fill={_restFill}
           />
-          {_elChecked}
+          { value
+             ? <SvgChecked stroke={checkedColor} />
+             : null
+          }
         </svg>
       </div>
     );

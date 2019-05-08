@@ -1,1 +1,23 @@
-{"version":3,"sources":["../../../src/components/zhn/ValidationMessages.jsx"],"names":["styles","STYLE","MSG_SPAN","whiteSpace","fontWeight","ValidationMessages","_renderValidationMessages","validationMessages","map","msg","index","validationMessageNumber","props","validationContainer","defaultProps","propTypes","array"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AAEA;;;;;;AAEA,IAAMA,+BAAN;AACA,IAAMC,QAAQ;AACZC,YAAW;AACTC,gBAAa,KADJ;AAETC,gBAAa;AAFJ;AADC,CAAd;;IAOMC,kB;;;;;;;;;;;;;;4NAQJC,yB,GAA4B,UAACC,kBAAD,EAAuB;AACjD,aAAOA,mBAAmBC,GAAnB,CAAuB,UAACC,GAAD,EAAMC,KAAN,EAAc;AAC1C,eACE;AAAA;AAAA,YAAK,KAAKA,KAAV;AACE;AAAA;AAAA,cAAK,OAAOV,OAAOW,uBAAnB;AAA6CD,oBAAM;AAAnD,WADF;AAEE;AAAA;AAAA,cAAM,OAAOT,MAAMC,QAAnB;AAA8BO;AAA9B;AAFF,SADF;AAMD,OAPM,CAAP;AAQD,K;;;;;6BAEO;AAAA,UACEF,kBADF,GACyB,KAAKK,KAD9B,CACEL,kBADF;;AAEN,aACE;AAAA;AAAA,UAAK,OAAOP,OAAOa,mBAAnB;AACG,aAAKP,yBAAL,CAA+BC,kBAA/B;AADH,OADF;AAKD;;;4BAtBOO,Y,GAAe;AACpBP,sBAAqB;AADD,C;AAJnBF,kB,CACIU,S,2CAAY;AACjBR,sBAAqB,oBAAUS;AADd,C;kBA4BPX,kB","file":"ValidationMessages.js","sourcesContent":["import React, { Component } from 'react';\r\nimport PropTypes from \"prop-types\";\r\n\r\nimport DialogStyles from '../styles/DialogStyles';\r\n\r\nconst styles = DialogStyles;\r\nconst STYLE = {\r\n  MSG_SPAN : {\r\n    whiteSpace : 'pre',\r\n    fontWeight : 'bold'\r\n  }\r\n}\r\n\r\nclass ValidationMessages extends Component {\r\n   static propTypes = {\r\n     validationMessages : PropTypes.array\r\n   }\r\n   static defaultProps = {\r\n     validationMessages : []\r\n   }\r\n\r\n  _renderValidationMessages = (validationMessages) =>{\r\n    return validationMessages.map((msg, index)=>{\r\n      return (\r\n        <div key={index}>\r\n          <div style={styles.validationMessageNumber}>{index+1}</div>\r\n          <span style={STYLE.MSG_SPAN}>{msg}</span>\r\n        </div>\r\n      )\r\n    });\r\n  }\r\n\r\n  render(){\r\n    const { validationMessages } = this.props;\r\n    return (\r\n      <div style={styles.validationContainer}>\r\n        {this._renderValidationMessages(validationMessages)}\r\n      </div>\r\n    )\r\n  }\r\n}\r\n\r\nexport default ValidationMessages\r\n"]}
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/zhn/ValidationMessages.js"
+ ],
+ "file": "../../../src/components/zhn/ValidationMessages.js",
+ "names": [
+  "ValidationMessages",
+  "_renderValidationMessages",
+  "validationMessages",
+  "map",
+  "msg",
+  "index",
+  "STYLE",
+  "VM_MSG_NUMBER",
+  "VM_MSG",
+  "props",
+  "VM_CONT",
+  "Component",
+  "defaultProps"
+ ],
+ "mappings": ";;;;;;;;;;;;;;;;;;;;;;;AACA;;AADA;;;;AAGA;;;;;;IAEMA,kB;;;;;;;;;;;;;;4NAUJC,yB,GAA4B,UAACC,kBAAD,EAAuB;AACjD,aAAOA,mBAAmBC,GAAnB,CAAuB,UAACC,GAAD,EAAMC,KAAN,EAAgB;AAC5C,eACE;AAAA;AAAA,YAAK,KAAKD,GAAV;AACE;AAAA;AAAA,cAAK,OAAOE,uBAAMC,aAAlB;AAAkCF,oBAAM;AAAxC,WADF;AAEE;AAAA;AAAA,cAAM,OAAOC,uBAAME,MAAnB;AAA4BJ;AAA5B;AAFF,SADF;AAMD,OAPM,CAAP;AAQD,K;;AAlBD;;;;;;;;;6BAoBQ;AAAA,UACEF,kBADF,GACyB,KAAKO,KAD9B,CACEP,kBADF;;AAEN,aACE;AAAA;AAAA,UAAK,OAAOI,uBAAMI,OAAlB;AACG,aAAKT,yBAAL,CAA+BC,kBAA/B;AADH,OADF;AAKD;;;EA5B8BS,gB,UAMvBC,Y,GAAe;AACpBV,sBAAoB;AADA,C;kBAyBVF,kB"
+}

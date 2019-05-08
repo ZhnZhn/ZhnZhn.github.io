@@ -4,19 +4,24 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _calcDirection = require('./dataProcessing/calcDirection');
 
 var _calcDirection2 = _interopRequireDefault(_calcDirection);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _crWidth = function _crWidth(points, strokeWidth) {
+    return points && points.length >= 2 ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth)) : 0;
+};
+//import PropTypes from 'prop-types';
 
 var SparklinesBars = function SparklinesBars(props) {
     var _props$points = props.points,
@@ -30,7 +35,7 @@ var SparklinesBars = function SparklinesBars(props) {
         barStrokeColors = props.barStrokeColors,
         _style$strokeWidth = style.strokeWidth,
         strokeWidth = _style$strokeWidth === undefined ? 0 : _style$strokeWidth,
-        _width = barWidth || (points && points.length >= 2 ? Math.ceil(Math.max(0, points[1].x - points[0].x - strokeWidth)) : 0);
+        _width = barWidth || _crWidth(points);
 
     return _react2.default.createElement(
         'g',
@@ -38,7 +43,7 @@ var SparklinesBars = function SparklinesBars(props) {
         points.map(function (p, i) {
             var x = p.x,
                 y = p.y,
-                _style = i === pointIndex ? Object.assign({}, style, { fill: barStrokeColors[(0, _calcDirection2.default)(points, pointIndex)] }) : style;
+                _style = i === pointIndex ? (0, _extends3.default)({}, style, { fill: barStrokeColors[(0, _calcDirection2.default)(points, pointIndex)] }) : style;
 
             return _react2.default.createElement('rect', {
                 key: i,
@@ -52,12 +57,14 @@ var SparklinesBars = function SparklinesBars(props) {
     );
 };
 
-SparklinesBars.propTypes = process.env.NODE_ENV !== "production" ? {
-    points: _propTypes2.default.arrayOf(_propTypes2.default.object),
-    height: _propTypes2.default.number,
-    style: _propTypes2.default.object,
-    barWidth: _propTypes2.default.number
-} : {};
+/*
+SparklinesBars.propTypes = {
+    points: PropTypes.arrayOf(PropTypes.object),
+    height: PropTypes.number,
+    style: PropTypes.object,
+    barWidth: PropTypes.number
+};
+*/
 SparklinesBars.defaultProps = {
     style: { fill: 'slategray' },
     barStrokeColors: {

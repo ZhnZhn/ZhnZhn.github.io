@@ -1,0 +1,16 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/styles/ConfigRowCheckBox.js"
+ ],
+ "file": "../../../src/components/styles/ConfigRowCheckBox.js",
+ "names": [
+  "styleConfig",
+  "createStyle",
+  "CSS_RULE",
+  "CHECKED_COLOR",
+  "BG",
+  "backgroundColor"
+ ],
+ "mappings": ";;;;;;AACA,IAAMA,cAAc;AAClBC,eAAa,qBAACC,QAAD;AAAA,WAAe;AAC1BC,qBAAeD,SAASE,EAAT,CAAYC;AADD,KAAf;AAAA;AADK,CAApB;;kBAMeL,W"
+}

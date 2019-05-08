@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.SparklinesMaxLabel = exports.SparklinesMinLabel = exports.SparklinesReferenceLine = exports.SparklinesBars = exports.SparklinesSpot = exports.SparklinesSpots = exports.SparklinesLine = exports.Sparklines = undefined;
 
@@ -24,10 +24,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _SparklinesLine = require('./SparklinesLine');
 
@@ -65,6 +61,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //fork https://github.com/borisyankov/react-sparklines
 
+//import PropTypes from 'prop-types';
 var DEFAULT_DATA = [],
     DEFAULT_WIDTH = 240,
     DEFAULT_HEIGHT = 60,
@@ -72,68 +69,76 @@ var DEFAULT_DATA = [],
     DEFAULT_MARGIN = 2;
 
 var Sparklines = function (_PureComponent) {
-    (0, _inherits3.default)(Sparklines, _PureComponent);
+  (0, _inherits3.default)(Sparklines, _PureComponent);
 
-    function Sparklines() {
-        (0, _classCallCheck3.default)(this, Sparklines);
-        return (0, _possibleConstructorReturn3.default)(this, (Sparklines.__proto__ || Object.getPrototypeOf(Sparklines)).apply(this, arguments));
+  function Sparklines() {
+    (0, _classCallCheck3.default)(this, Sparklines);
+    return (0, _possibleConstructorReturn3.default)(this, (Sparklines.__proto__ || Object.getPrototypeOf(Sparklines)).apply(this, arguments));
+  }
+
+  (0, _createClass3.default)(Sparklines, [{
+    key: 'render',
+
+    /*
+      static propTypes = {
+         data: PropTypes.array,
+         limit: PropTypes.number,
+         width: PropTypes.number,
+         height: PropTypes.number,
+         svgWidth: PropTypes.number,
+         svgHeight: PropTypes.number,
+         preserveAspectRatio: PropTypes.string,
+         margin: PropTypes.number,
+         style: PropTypes.object,
+         min: PropTypes.number,
+         max: PropTypes.number
+      }
+    */
+
+    value: function render() {
+      var _props = this.props,
+          _props$data = _props.data,
+          data = _props$data === undefined ? DEFAULT_DATA : _props$data,
+          limit = _props.limit,
+          _props$width = _props.width,
+          width = _props$width === undefined ? DEFAULT_WIDTH : _props$width,
+          _props$height = _props.height,
+          height = _props$height === undefined ? DEFAULT_HEIGHT : _props$height,
+          svgWidth = _props.svgWidth,
+          svgHeight = _props.svgHeight,
+          _props$preserveAspect = _props.preserveAspectRatio,
+          preserveAspectRatio = _props$preserveAspect === undefined ? DEFAULT_RATIO : _props$preserveAspect,
+          _props$margin = _props.margin,
+          margin = _props$margin === undefined ? DEFAULT_MARGIN : _props$margin,
+          style = _props.style,
+          max = _props.max,
+          min = _props.min;
+
+
+      if (data.length === 0) return null;
+
+      var points = (0, _dataToPoints2.default)({ data: data, limit: limit, width: width, height: height, margin: margin, max: max, min: min }),
+          svgOpts = {
+        style: style,
+        viewBox: '0 0 ' + width + ' ' + height,
+        preserveAspectRatio: preserveAspectRatio
+      };
+
+      if (svgWidth > 0) svgOpts.width = svgWidth;
+      if (svgHeight > 0) svgOpts.height = svgHeight;
+
+      return _react2.default.createElement(
+        'svg',
+        svgOpts,
+        _react2.default.Children.map(this.props.children, function (child) {
+          return _react2.default.cloneElement(child, { data: data, points: points, width: width, height: height, margin: margin });
+        })
+      );
     }
-
-    (0, _createClass3.default)(Sparklines, [{
-        key: 'render',
-        value: function render() {
-            var _props = this.props,
-                _props$data = _props.data,
-                data = _props$data === undefined ? DEFAULT_DATA : _props$data,
-                limit = _props.limit,
-                _props$width = _props.width,
-                width = _props$width === undefined ? DEFAULT_WIDTH : _props$width,
-                _props$height = _props.height,
-                height = _props$height === undefined ? DEFAULT_HEIGHT : _props$height,
-                svgWidth = _props.svgWidth,
-                svgHeight = _props.svgHeight,
-                _props$preserveAspect = _props.preserveAspectRatio,
-                preserveAspectRatio = _props$preserveAspect === undefined ? DEFAULT_RATIO : _props$preserveAspect,
-                _props$margin = _props.margin,
-                margin = _props$margin === undefined ? DEFAULT_MARGIN : _props$margin,
-                style = _props.style,
-                max = _props.max,
-                min = _props.min;
-
-
-            if (data.length === 0) return null;
-
-            var points = (0, _dataToPoints2.default)({ data: data, limit: limit, width: width, height: height, margin: margin, max: max, min: min }),
-                svgOpts = { style: style, viewBox: '0 0 ' + width + ' ' + height, preserveAspectRatio: preserveAspectRatio };
-
-            if (svgWidth > 0) svgOpts.width = svgWidth;
-            if (svgHeight > 0) svgOpts.height = svgHeight;
-
-            return _react2.default.createElement(
-                'svg',
-                svgOpts,
-                _react2.default.Children.map(this.props.children, function (child) {
-                    return _react2.default.cloneElement(child, { data: data, points: points, width: width, height: height, margin: margin });
-                })
-            );
-        }
-    }]);
-    return Sparklines;
+  }]);
+  return Sparklines;
 }(_react.PureComponent);
 
-Sparklines.propTypes = process.env.NODE_ENV !== "production" ? {
-    data: _propTypes2.default.array,
-    limit: _propTypes2.default.number,
-    width: _propTypes2.default.number,
-    height: _propTypes2.default.number,
-    svgWidth: _propTypes2.default.number,
-    svgHeight: _propTypes2.default.number,
-    preserveAspectRatio: _propTypes2.default.string,
-    margin: _propTypes2.default.number,
-    style: _propTypes2.default.object,
-    min: _propTypes2.default.number,
-    max: _propTypes2.default.number
-} : {};
 exports.Sparklines = Sparklines;
 exports.SparklinesLine = _SparklinesLine2.default;
 exports.SparklinesSpots = _SparklinesSpots2.default;

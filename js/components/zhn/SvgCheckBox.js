@@ -56,21 +56,24 @@ var E = {
 
 var C_GREY = "#777777";
 
-var EL_CHECKED = _react2.default.createElement('path', {
-  d: 'M 2,5 L 8,14 14,1',
-  strokeWidth: '2',
-  strokeLinecap: 'round',
-  stroke: _Color2.default.YELLOW,
-  fill: _Color2.default.BLANK
-});
+var SvgChecked = function SvgChecked(_ref) {
+  var stroke = _ref.stroke;
+  return _react2.default.createElement('path', {
+    d: 'M 2,5 L 8,14 14,1',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    stroke: stroke,
+    fill: _Color2.default.BLANK
+  });
+};
 
 var _isFn = function _isFn(fn) {
   return typeof fn === 'function';
 };
 
-var _getInitStateFrom = function _getInitStateFrom(_ref) {
-  var initValue = _ref.initValue,
-      value = _ref.value;
+var _getInitStateFrom = function _getInitStateFrom(_ref2) {
+  var initValue = _ref2.initValue,
+      value = _ref2.value;
   return {
     initValue: initValue,
     isChecked: !!value
@@ -79,16 +82,6 @@ var _getInitStateFrom = function _getInitStateFrom(_ref) {
 
 var SvgCheckBox = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(SvgCheckBox, _Component);
-
-  /*
-  static propTypes = {
-    initValue: PropTypes.bool,
-    value: PropTypes.bool,
-    style: PropTypes.object,
-    onCheck: PropTypes.func,
-    onUnCheck: PropTypes.func
-  }
-  */
 
   function SvgCheckBox(props) {
     (0, _classCallCheck3.default)(this, SvgCheckBox);
@@ -106,15 +99,32 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
     _this.state = _getInitStateFrom(props);
     return _this;
   }
+  /*
+  static propTypes = {
+    initValue: PropTypes.bool,
+    value: PropTypes.bool,
+    style: PropTypes.object,
+    checkedRestStroke: PropTypes.string,
+    checkedRestFill: PropTypes.string,
+    checkedColor: PropTypes.string,
+    onCheck: PropTypes.func,
+    onUnCheck: PropTypes.func
+  }
+  */
+
 
   (0, _createClass3.default)(SvgCheckBox, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
           style = _props.style,
+          checkedRestStroke = _props.checkedRestStroke,
+          checkedRestFill = _props.checkedRestFill,
+          checkedColor = _props.checkedColor,
           _props$value = _props.value,
           value = _props$value === undefined ? this.state.isChecked : _props$value,
-          _elChecked = value ? EL_CHECKED : null;
+          _restStroke = value ? checkedRestStroke : C_GREY,
+          _restFill = value ? checkedRestFill : _Color2.default.BLANK;
 
       return _react2.default.createElement(
         'div',
@@ -138,9 +148,10 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
             x: '1', y: '1',
             height: '14', width: '14',
             strokeWidth: '2', rx: '3',
-            stroke: C_GREY, fill: _Color2.default.BLANK
+            stroke: _restStroke,
+            fill: _restFill
           }),
-          _elChecked
+          value ? _react2.default.createElement(SvgChecked, { stroke: checkedColor }) : null
         )
       );
     }
@@ -151,7 +162,11 @@ var SvgCheckBox = (_temp = _class = function (_Component) {
     }
   }]);
   return SvgCheckBox;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
+}(_react.Component), _class.defaultProps = {
+  checkedRestStroke: C_GREY,
+  checkedRestFill: _Color2.default.BLANK,
+  checkedColor: _Color2.default.YELLOW
+}, _initialiseProps = function _initialiseProps() {
   var _this2 = this;
 
   this._hClick = function () {

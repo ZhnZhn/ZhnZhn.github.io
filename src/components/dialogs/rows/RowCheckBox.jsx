@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 //import PropTypes from "prop-types";
 
+import withTheme from '../../hoc/withTheme'
+
 import SvgCheckBox from '../../zhn/SvgCheckBox'
 
-const STYLE = {
-  ROOT : {
-    paddingTop: '6px',
-    paddingLeft : '16px'
+const TH_ID = 'ROW_CHECKBOX';
+
+const S = {
+  ROOT: {
+    paddingTop: 6,
+    paddingLeft: 16
   },
-  CAPTION : {
+  CAPTION: {
     display: 'inline-block',
     color: 'grey',
-    paddingLeft: '12px',
+    paddingLeft: 12,
     fontSize: '16px',
     fontWeight: 'bold',
     userSelect: 'none',
@@ -37,6 +41,10 @@ class RowCheckBox extends Component {
     onToggle: PropTypes.func
   }
   */
+  static defaultProps = {
+    checkedRestStroke: 'black',
+    checkedRestFill: 'black'
+  }
 
   constructor(props){
     super(props)
@@ -47,7 +55,7 @@ class RowCheckBox extends Component {
     }
   }
 
-  _handleCheck = () => {
+  _hCheck = () => {
     const { onCheck, onToggle } = this.props;
     if (_isFn(onCheck)){
       onCheck()
@@ -58,7 +66,7 @@ class RowCheckBox extends Component {
       this.setState({ isChecked: true })
     }
   }
-  _handleUnCheck = () => {
+  _hUnCheck = () => {
     const { onUnCheck, onToggle } = this.props;
     if (_isFn(onUnCheck)){
       onUnCheck()
@@ -69,35 +77,49 @@ class RowCheckBox extends Component {
       this.setState({ isChecked: false })
     }
   }
-  _handleToggle = () => {
+  _hToggle = () => {
     const _is = this.state
       ? this.state.isChecked
-      : this.props.value
+      : this.props.value;
     if (_is) {
-      this._handleUnCheck()
+      this._hUnCheck()
     } else {
-      this._handleCheck()
+      this._hCheck()
     }
   }
 
   render(){
-    const { rootStyle, caption, value } = this.props
-        , _value = this.state
-             ? this.state.isChecked
-             : value
-        , _style = _value ? STYLE.CHECKED : null;
+    const {
+      theme,
+      rootStyle,
+      caption,
+      styleCaption,
+      value,
+      checkedRestStroke,
+      checkedRestFill
+    } = this.props
+    , TS = theme.getStyle(TH_ID)
+    , _value = this.state
+         ? this.state.isChecked
+         : value
+    , _style = _value
+        ? { ...styleCaption, ...S.CHECKED }
+        : styleCaption;
     return (
-      <div style={{...STYLE.ROOT, ...rootStyle}}>
+      <div style={{...S.ROOT, ...rootStyle}}>
         <SvgCheckBox
           value={_value}
-          onCheck={this._handleCheck}
-          onUnCheck={this._handleUnCheck}
+          checkedRestStroke={checkedRestStroke}
+          checkedRestFill={checkedRestFill}
+          checkedColor={TS.CHECKED_COLOR}
+          onCheck={this._hCheck}
+          onUnCheck={this._hUnCheck}
         />
         {
           caption && (
             <span
-              style={{...STYLE.CAPTION, ..._style }}
-              onClick={this._handleToggle}
+              style={{...S.CAPTION, ..._style }}
+              onClick={this._hToggle}
             >
               {caption}
             </span>
@@ -108,4 +130,4 @@ class RowCheckBox extends Component {
   }
 }
 
-export default RowCheckBox
+export default withTheme(RowCheckBox)

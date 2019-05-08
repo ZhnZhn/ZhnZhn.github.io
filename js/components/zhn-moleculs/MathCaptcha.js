@@ -24,10 +24,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _InputSlider = require('../zhn/InputSlider');
 
 var _InputSlider2 = _interopRequireDefault(_InputSlider);
@@ -35,6 +31,7 @@ var _InputSlider2 = _interopRequireDefault(_InputSlider);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MSG = 'Before loading, please, enter sum using slider';
+//import PropTypes from "prop-types";
 
 var S = {
   MSG: {
@@ -44,7 +41,7 @@ var S = {
   P_SUM: {
     textAlign: 'center',
     fontSize: '22px',
-    paddingTop: '4px'
+    paddingTop: 4
   },
   SUM_OK: {
     color: '#4caf50'
@@ -54,7 +51,7 @@ var S = {
   }
 };
 
-var _fnRandomNumber = function _fnRandomNumber() {
+var _crRandomNumber = function _crRandomNumber() {
   var m = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
@@ -64,12 +61,18 @@ var _fnRandomNumber = function _fnRandomNumber() {
 var MatchCaptcha = function (_Component) {
   (0, _inherits3.default)(MatchCaptcha, _Component);
 
+  /*
+  static propTypes = {
+    rootStyle: PropTypes.object
+  }
+  */
+
   function MatchCaptcha(props) {
     (0, _classCallCheck3.default)(this, MatchCaptcha);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (MatchCaptcha.__proto__ || Object.getPrototypeOf(MatchCaptcha)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (MatchCaptcha.__proto__ || Object.getPrototypeOf(MatchCaptcha)).call(this, props));
 
-    _this._handleChangeSlider = function (event, value) {
+    _this._hChangeSlider = function (event, value) {
       var _isOk = _this.firstNumber + _this.secondNumber === value ? true : false;
       _this.setState({
         isOk: _isOk,
@@ -77,12 +80,8 @@ var MatchCaptcha = function (_Component) {
       });
     };
 
-    _this.isOk = function () {
-      return _this.state.isOk;
-    };
-
-    _this.firstNumber = _fnRandomNumber(0, 10);
-    _this.secondNumber = _fnRandomNumber(0, 10);
+    _this.firstNumber = _crRandomNumber(0, 10);
+    _this.secondNumber = _crRandomNumber(0, 10);
     _this.state = {
       isOk: false,
       resultSum: ''
@@ -122,16 +121,18 @@ var MatchCaptcha = function (_Component) {
           )
         ),
         _react2.default.createElement(_InputSlider2.default, {
-          onChange: this._handleChangeSlider
+          onChange: this._hChangeSlider
         })
       );
+    }
+  }, {
+    key: 'isOk',
+    value: function isOk() {
+      return this.state.isOk;
     }
   }]);
   return MatchCaptcha;
 }(_react.Component);
 
-MatchCaptcha.propTypes = process.env.NODE_ENV !== "production" ? {
-  rootStyle: _propTypes2.default.object
-} : {};
 exports.default = MatchCaptcha;
 //# sourceMappingURL=MathCaptcha.js.map

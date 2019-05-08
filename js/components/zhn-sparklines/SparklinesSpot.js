@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _calcDirection = require('./dataProcessing/calcDirection');
 
 var _calcDirection2 = _interopRequireDefault(_calcDirection);
@@ -38,12 +34,17 @@ var SparklinesSpot = function SparklinesSpot(props) {
     );
 };
 
-SparklinesSpot.propTypes = process.env.NODE_ENV !== "production" ? {
-    size: _propTypes2.default.number,
-    style: _propTypes2.default.object,
-    spotColors: _propTypes2.default.object,
-    pointIndex: _propTypes2.default.number
-} : {};
+/*
+SparklinesSpot.propTypes = {
+    size: PropTypes.number,
+    style: PropTypes.object,
+    spotColors: PropTypes.object,
+    pointIndex: PropTypes.number
+};
+*/
+
+//import PropTypes from 'prop-types';
+
 SparklinesSpot.defaultProps = {
     size: 2,
     spotColors: {

@@ -74,7 +74,8 @@
   stroke: gray;
   cursor: pointer;
 }
-.button-circle:hover {
+.button-circle:hover,
+.button-circle:focus {
   border: 2px solid rgba(164, 135, 212, 1);
   stroke: rgba(164, 135, 212, 1);
 }

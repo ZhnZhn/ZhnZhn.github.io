@@ -51,6 +51,10 @@ var _Legend = require('../zhn/Legend');
 
 var _Legend2 = _interopRequireDefault(_Legend);
 
+var _ChartToolBar = require('../toolbars/ChartToolBar');
+
+var _ChartToolBar2 = _interopRequireDefault(_ChartToolBar);
+
 var _AreaMore = require('./AreaMore');
 
 var _AreaMore2 = _interopRequireDefault(_AreaMore);
@@ -58,10 +62,6 @@ var _AreaMore2 = _interopRequireDefault(_AreaMore);
 var _Header = require('./Header');
 
 var _Header2 = _interopRequireDefault(_Header);
-
-var _ChartToolBar = require('./ChartToolBar');
-
-var _ChartToolBar2 = _interopRequireDefault(_ChartToolBar);
 
 var _MiniCharts = require('./MiniCharts');
 

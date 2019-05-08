@@ -26,11 +26,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from "prop-types";
 
 var styles = {
   ulStyle: {
@@ -45,10 +43,19 @@ var styles = {
 var TabPane = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(TabPane, _Component);
 
+  /*
+  static propTypes = {
+    isUpdateInit: PropTypes.bool,
+    width: PropTypes.string,
+    height: PropTypes.string,
+    children: PropTypes.arrayOf(PropTypes.node)
+  }
+  */
+
   function TabPane(props) {
     (0, _classCallCheck3.default)(this, TabPane);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (TabPane.__proto__ || Object.getPrototypeOf(TabPane)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (TabPane.__proto__ || Object.getPrototypeOf(TabPane)).call(this, props));
 
     _initialiseProps.call(_this);
 
@@ -135,11 +142,5 @@ var TabPane = (_temp = _class = function (_Component) {
     return _this2.state.selectedTabIndex;
   };
 }, _temp);
-TabPane.propTypes = process.env.NODE_ENV !== "production" ? {
-  isUpdateInit: _propTypes2.default.bool,
-  width: _propTypes2.default.string,
-  height: _propTypes2.default.string,
-  children: _propTypes2.default.arrayOf(_propTypes2.default.node)
-} : {};
 exports.default = TabPane;
 //# sourceMappingURL=TabPane.js.map

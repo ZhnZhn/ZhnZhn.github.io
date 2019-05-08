@@ -1,39 +1,33 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-import DialogStyles from '../styles/DialogStyles';
-
-const styles = DialogStyles;
-const STYLE = {
-  MSG_SPAN : {
-    whiteSpace : 'pre',
-    fontWeight : 'bold'
-  }
-}
+import STYLE from '../styles/DialogStyles';
 
 class ValidationMessages extends Component {
+  /*
    static propTypes = {
      validationMessages : PropTypes.array
    }
+  */
    static defaultProps = {
-     validationMessages : []
+     validationMessages: []
    }
 
   _renderValidationMessages = (validationMessages) =>{
-    return validationMessages.map((msg, index)=>{
+    return validationMessages.map((msg, index) => {
       return (
-        <div key={index}>
-          <div style={styles.validationMessageNumber}>{index+1}</div>
-          <span style={STYLE.MSG_SPAN}>{msg}</span>
+        <div key={msg}>
+          <div style={STYLE.VM_MSG_NUMBER}>{index+1}</div>
+          <span style={STYLE.VM_MSG}>{msg}</span>
         </div>
-      )
+      );
     });
   }
 
   render(){
     const { validationMessages } = this.props;
     return (
-      <div style={styles.validationContainer}>
+      <div style={STYLE.VM_CONT}>
         {this._renderValidationMessages(validationMessages)}
       </div>
     )

@@ -28,7 +28,8 @@ const fn = {
     }
 
     const _d = []
-        , max = d.length;
+    , max = d.length
+    , prevStep = _rt-1;
     let pPrev = d[0]
       , pNext
       , i=_rt;
@@ -38,7 +39,7 @@ const fn = {
         x: pNext.x,
         y: _calcY(pPrev, pNext)
       })
-      pPrev = pNext
+      pPrev = d[i-prevStep]
     }
     return _d;
   },

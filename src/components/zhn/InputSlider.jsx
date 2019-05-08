@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 /*
  Mostly from
@@ -7,30 +7,30 @@ import PropTypes from "prop-types";
 */
 
 const S = {
-  ROOT : {
-    userSelect : 'none',
-    cursor: 'default',
-    height: '18px',
-    width: '100%',
+  ROOT: {
     position: 'relative',
-    marginTop: '8px',
-    marginBottom: '8px'
+    width: '100%',
+    height: 18,
+    marginTop: 8,
+    marginBottom: 8,
+    userSelect : 'none',
+    cursor: 'default'
   },
   ROOT_LINE : {
     position: 'absolute',
-    top: '8px',
-    left: '0px',
+    top: 8,
+    left: 0,
     width: '100%',
-    height: '2px'
+    height: 2
   },
   LINE_BEFORE : {
     position: 'absolute',
+    width: 'calc(15%)',
     height: '100%',
-    transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-    left: '0px',
+    left: 0,
+    marginRight: 6,
     backgroundColor: 'rgb(0, 188, 212)',
-    marginRight: '6px',
-    width: 'calc(15%)'
+    transition: 'margin 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
   LINE_AFTER : {
     position: 'absolute',
@@ -96,41 +96,39 @@ const S = {
   }
 }
 
-const _fnToPercent = (value, min, max) => {
-  let _percent = (value - min ) / (max - min)
+const _toPercent = (value, min, max) => {
+  const _percent = (value - min ) / (max - min);
   return isNaN(_percent) ? 0 : _percent*100;
 }
-const _fnWidthCalc = (percent) => {
-  return { width: `calc(${percent}%)`};
-}
-const _fnLeftPercent = (percent) => {
-  return { left: `${percent}%`};
-}
+const _crWidthStyle = percent => ({
+  width: `calc(${percent}%)`
+})
+const _crLeftStyle = percent => ({
+   left: `${percent}%`
+})
 
 class InputSlider extends Component {
 
+  /*
   static propTypes = {
     step : PropTypes.number,
     min : PropTypes.number,
     max : PropTypes.number,
     onChange : PropTypes.func
   }
+  */
 
   static defaultProps = {
-    min : 0,
-    max : 20,
-    step : 1
+    min: 0,
+    max: 20,
+    step: 1
   }
 
-  constructor(props){
-    super()
-    this.state = {
-      hovered : false,
-      dragged : false,
-      value : 4
-    }
+  state = {
+    hovered: false,
+    dragged: false,
+    value: 4
   }
-
 
   _handleMouseEnter = () => {
     this.setState({ hovered: true })
@@ -206,6 +204,8 @@ class InputSlider extends Component {
     }
   }
 
+  _refTrack = comp => this.trackComp = comp
+
   render(){
     const { step, min , max } = this.props
     , { hovered, dragged, value } = this.state
@@ -215,12 +215,12 @@ class InputSlider extends Component {
     , _circleStyle = (dragged) ? S.CIRCLE_DRAGGED : null
     , _emberStyle = (dragged) ? S.EMBER : null
     , _circleInnerEl = (hovered || dragged)
-          ? ( <div style={{ ...S.CIRCLE_INNER_EL, ..._emberStyle }}></div> )
+          ? <div style={{ ...S.CIRCLE_INNER_EL, ..._emberStyle }} />
           : null
-    , _percent = _fnToPercent(value, min, max)
-    , _widthBeforeStyle = _fnWidthCalc(_percent)
-    , _widthAfterStyle = _fnWidthCalc(100 - _percent)
-    , _leftStyle = _fnLeftPercent(_percent)
+    , _percent = _toPercent(value, min, max)
+    , _widthBeforeStyle = _crWidthStyle(_percent)
+    , _widthAfterStyle = _crWidthStyle(100 - _percent)
+    , _leftStyle = _crLeftStyle(_percent)
 
     return (
       <div style={S.ROOT}
@@ -229,7 +229,7 @@ class InputSlider extends Component {
         onMouseLeave={this._handleMouseLeave}
       >
         <div
-           ref={comp => this.trackComp = comp}
+           ref={this._refTrack}
            style={S.ROOT_LINE}
         >
           <div style={{...S.LINE_BEFORE, ..._widthBeforeStyle }} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 const SparklinesLine = (props) => {
         const { points=[], height, margin, color, style } = props
@@ -34,10 +34,12 @@ const SparklinesLine = (props) => {
         )
 }
 
+/*
 SparklinesLine.propTypes = {
     color: PropTypes.string,
     style: PropTypes.object
 };
+*/
 SparklinesLine.defaultProps = {
     style: {}
 };

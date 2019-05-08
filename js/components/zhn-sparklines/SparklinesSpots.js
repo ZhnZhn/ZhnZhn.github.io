@@ -8,11 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import PropTypes from 'prop-types'
 
 if (!Math.sign) {
     Math.sign = function (x) {
@@ -50,11 +48,13 @@ var SparklinesSpots = function SparklinesSpots(props) {
     );
 };
 
-SparklinesSpots.propTypes = process.env.NODE_ENV !== "production" ? {
-    size: _propTypes2.default.number,
-    style: _propTypes2.default.object,
-    spotColors: _propTypes2.default.object
-} : {};
+/*
+SparklinesSpots.propTypes = {
+    size: PropTypes.number,
+    style: PropTypes.object,
+    spotColors: PropTypes.object
+};
+*/
 SparklinesSpots.defaultProps = {
     size: 2,
     spotColors: {

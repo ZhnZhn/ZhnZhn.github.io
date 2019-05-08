@@ -99,26 +99,32 @@ var RowInputText = (_temp2 = _class = function (_Component) {
     value: function render() {
       var _props = this.props,
           styleRoot = _props.styleRoot,
+          rootStyle = _props.rootStyle,
+          captionStyle = _props.captionStyle,
           styleCaption = _props.styleCaption,
           caption = _props.caption,
+          inputStyle = _props.inputStyle,
           styleInput = _props.styleInput,
-          rest = (0, _objectWithoutProperties3.default)(_props, ['styleRoot', 'styleCaption', 'caption', 'styleInput']),
+          rest = (0, _objectWithoutProperties3.default)(_props, ['styleRoot', 'rootStyle', 'captionStyle', 'styleCaption', 'caption', 'inputStyle', 'styleInput']),
+          _rootStyle = rootStyle || (0, _extends3.default)({}, S.ROOT, styleRoot),
+          _captionStyle = captionStyle || (0, _extends3.default)({}, S.CAPTION, styleCaption),
+          _inputStyle = inputStyle || (0, _extends3.default)({}, S.INPUT_TEXT, styleInput),
           _caption = caption.indexOf(COLLON) === -1 ? caption + COLLON : caption;
 
       return _react2.default.createElement(
         'div',
-        { style: (0, _extends3.default)({}, S.ROOT, styleRoot) },
+        { style: _rootStyle },
         _react2.default.createElement(
           'label',
           null,
           _react2.default.createElement(
             'span',
-            { style: (0, _extends3.default)({}, S.CAPTION, styleCaption) },
+            { style: _captionStyle },
             _caption
           ),
           _react2.default.createElement(_InputText2.default, (0, _extends3.default)({
             ref: this._refInput,
-            style: (0, _extends3.default)({}, S.INPUT_TEXT, styleInput)
+            style: _inputStyle
           }, rest))
         )
       );

@@ -1,63 +1,65 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import InputSlider from '../zhn/InputSlider'
 
 const MSG = 'Before loading, please, enter sum using slider'
 
 const S = {
-  MSG : {
+  MSG: {
     color: 'grey',
     fontWeight: 'bold'
   },
-  P_SUM : {
+  P_SUM: {
     textAlign: 'center',
     fontSize: '22px',
-    paddingTop: '4px'
+    paddingTop: 4
   },
-  SUM_OK : {
+  SUM_OK: {
     color: '#4caf50'
   },
-  SUM_NOT_OK : {
+  SUM_NOT_OK: {
     color: '#f44336'
   }
-}
+};
 
-const _fnRandomNumber = (m=0, n=10) => {
+const _crRandomNumber = (m=0, n=10) => {
   return m + (Math.floor((n-m+1)*Math.random()));
 }
 
 class MatchCaptcha extends Component {
+  /*
   static propTypes = {
     rootStyle: PropTypes.object
   }
+  */
 
   constructor(props){
-    super()
-    this.firstNumber = _fnRandomNumber(0, 10)
-    this.secondNumber = _fnRandomNumber(0, 10)
+    super(props)
+    this.firstNumber = _crRandomNumber(0, 10)
+    this.secondNumber = _crRandomNumber(0, 10)
     this.state = {
-      isOk : false,
-      resultSum : ''
+      isOk: false,
+      resultSum: ''
     }
   }
 
-  _handleChangeSlider = (event, value) => {
+  _hChangeSlider = (event, value) => {
     const _isOk = (this.firstNumber + this.secondNumber === value)
-            ? true
-            : false
+      ? true
+      : false;
     this.setState({
-       isOk : _isOk,
-       resultSum : value
+       isOk: _isOk,
+       resultSum: value
     })
   }
 
   render(){
     const { rootStyle } = this.props
-        , { isOk, resultSum } = this.state
-        , _sumStyle = (isOk)
-             ? S.SUM_OK
-             : S.SUM_NOT_OK;
+    , { isOk, resultSum } = this.state
+    , _sumStyle = isOk
+         ? S.SUM_OK
+         : S.SUM_NOT_OK;
     return(
       <div style={rootStyle} >
         <p style={S.MSG}>
@@ -72,13 +74,13 @@ class MatchCaptcha extends Component {
           </span>
         </p>
         <InputSlider
-            onChange={this._handleChangeSlider}
+            onChange={this._hChangeSlider}
         />
       </div>
     );
   }
 
-  isOk = () => {
+  isOk() {
     return this.state.isOk;
   }
 

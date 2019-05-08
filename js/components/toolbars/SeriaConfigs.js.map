@@ -1,0 +1,22 @@
+{
+ "version": 3,
+ "sources": [
+  "../../../src/components/toolbars/SeriaConfigs.js"
+ ],
+ "file": "../../../src/components/toolbars/SeriaConfigs.js",
+ "names": [
+  "S",
+  "ROW",
+  "paddingTop",
+  "fnSpan",
+  "color",
+  "paddingLeft",
+  "SeriaConfigs",
+  "configs",
+  "onRemove",
+  "map",
+  "id",
+  "bind"
+ ],
+ "mappings": ";;;;;;AAAA;;;;AAEA;;;;;;AAEA,IAAMA,IAAI;AACRC,OAAK;AACHC,gBAAY;AADT,GADG;AAIRC,UAAQ;AAAA,WAAU;AAChBC,kBADgB,EACTC,aAAa;AADJ,KAAV;AAAA;AAJA,CAAV;;AASA,IAAMC,eAAe,SAAfA,YAAe;AAAA,MAAGC,OAAH,QAAGA,OAAH;AAAA,MAAYC,QAAZ,QAAYA,QAAZ;AAAA,SACnB;AAAA;AAAA;AACED,YAAQE,GAAR,CAAY;AAAA,UAAGC,EAAH,SAAGA,EAAH;AAAA,UAAON,KAAP,SAAOA,KAAP;AAAA,aACV;AAAA;AAAA,UAAK,KAAKM,EAAV,EAAc,OAAOV,EAAEC,GAAvB;AACE,sCAAC,WAAD,CAAG,QAAH,IAAY,SAASO,SAASG,IAAT,CAAc,IAAd,EAAoBD,EAApB,CAArB,GADF;AAEE;AAAA;AAAA,YAAM,OAAOV,EAAEG,MAAF,CAASC,KAAT,CAAb;AAA+BM;AAA/B;AAFF,OADU;AAAA,KAAZ;AADF,GADmB;AAAA,CAArB;;kBAYeJ,Y"
+}

@@ -21,28 +21,17 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp2;
+//import PropTypes from "prop-types";
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _DialogStyles = require('../styles/DialogStyles');
 
 var _DialogStyles2 = _interopRequireDefault(_DialogStyles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var styles = _DialogStyles2.default;
-var STYLE = {
-  MSG_SPAN: {
-    whiteSpace: 'pre',
-    fontWeight: 'bold'
-  }
-};
 
 var ValidationMessages = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(ValidationMessages, _Component);
@@ -62,21 +51,27 @@ var ValidationMessages = (_temp2 = _class = function (_Component) {
       return validationMessages.map(function (msg, index) {
         return _react2.default.createElement(
           'div',
-          { key: index },
+          { key: msg },
           _react2.default.createElement(
             'div',
-            { style: styles.validationMessageNumber },
+            { style: _DialogStyles2.default.VM_MSG_NUMBER },
             index + 1
           ),
           _react2.default.createElement(
             'span',
-            { style: STYLE.MSG_SPAN },
+            { style: _DialogStyles2.default.VM_MSG },
             msg
           )
         );
       });
     }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
+  /*
+   static propTypes = {
+     validationMessages : PropTypes.array
+   }
+  */
+
 
   (0, _createClass3.default)(ValidationMessages, [{
     key: 'render',
@@ -85,7 +80,7 @@ var ValidationMessages = (_temp2 = _class = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: styles.validationContainer },
+        { style: _DialogStyles2.default.VM_CONT },
         this._renderValidationMessages(validationMessages)
       );
     }
@@ -94,8 +89,5 @@ var ValidationMessages = (_temp2 = _class = function (_Component) {
 }(_react.Component), _class.defaultProps = {
   validationMessages: []
 }, _temp2);
-ValidationMessages.propTypes = process.env.NODE_ENV !== "production" ? {
-  validationMessages: _propTypes2.default.array
-} : {};
 exports.default = ValidationMessages;
 //# sourceMappingURL=ValidationMessages.js.map

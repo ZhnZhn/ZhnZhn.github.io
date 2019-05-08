@@ -48,7 +48,6 @@ var CL = {
 };
 
 var DF = {
-  //OPEN_COLOR: C.YELLOW,
   OPEN_COLOR: _Color2.default.TITLE,
   CLOSE_COLOR: _Color2.default.BLANK
 };
@@ -59,16 +58,14 @@ var S = {
   },
   ROOT_SVG: {
     display: 'inline-block',
-    width: '16px',
-    height: '16px',
-    marginLeft: '8px'
+    width: 16,
+    height: 16,
+    marginLeft: 8
   },
   CAPTION: {
-    //color: C.SIREN,
     color: _Color2.default.TITLE,
-    paddingLeft: '4px',
+    paddingLeft: 4,
     verticalAlign: 'top',
-    //color: 'rgba(164, 135, 212, 1)',
     fontFamily: 'Roboto, Arial Unicode MS, Arial, sans-serif',
     fontWeight: 'bold',
     fontSize: '16px',
@@ -89,23 +86,42 @@ var S = {
 var PATH_OPEN = "M 2,14 L 14,14 14,2 2,14";
 var PATH_CLOSE = "M 2,2 L 14,8 2,14 2,2";
 
+var _crConf = function _crConf(_ref) {
+  var isOpen = _ref.isOpen,
+      openColor = _ref.openColor,
+      closeColor = _ref.closeColor;
+  return isOpen ? {
+    _pathV: PATH_OPEN,
+    _fillV: openColor,
+    _rootChildStyle: S.BLOCK,
+    _rootChildCl: CL.SHOW_POPUP
+  } : {
+    _pathV: PATH_CLOSE,
+    _fillV: closeColor,
+    _rootChildStyle: S.NONE,
+    _rootChildCl: null
+  };
+};
+
 var OpenClose = (_temp = _class = function (_Component) {
   (0, _inherits3.default)(OpenClose, _Component);
 
   function OpenClose(props) {
     (0, _classCallCheck3.default)(this, OpenClose);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (OpenClose.__proto__ || Object.getPrototypeOf(OpenClose)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (OpenClose.__proto__ || Object.getPrototypeOf(OpenClose)).call(this, props));
 
-    _this._handleClick = function () {
+    _this._hClick = function () {
       _this.setState(function (prev) {
-        return { isOpen: !prev.isOpen };
+        return {
+          isOpen: !prev.isOpen
+        };
       });
     };
 
-    _this._handleKeyDown = function (event) {
+    _this._hKeyDown = function (event) {
       if ((0, _isKeyEnter2.default)(event)) {
-        _this._handleClick();
+        _this._hClick();
       }
     };
 
@@ -143,23 +159,12 @@ var OpenClose = (_temp = _class = function (_Component) {
           CompAfter = _props.CompAfter,
           childStyle = _props.childStyle,
           children = _props.children,
-          isOpen = this.state.isOpen;
-
-      var _pathV = void 0,
-          _fillV = void 0,
-          _rootChildStyle = void 0,
-          _rootChildCl = void 0;
-      if (isOpen) {
-        _pathV = PATH_OPEN;
-        _fillV = openColor;
-        _rootChildStyle = S.BLOCK;
-        _rootChildCl = CL.SHOW_POPUP;
-      } else {
-        _pathV = PATH_CLOSE;
-        _fillV = closeColor;
-        _rootChildStyle = S.NONE;
-        _rootChildCl = null;
-      }
+          isOpen = this.state.isOpen,
+          _crConf2 = _crConf({ isOpen: isOpen, openColor: openColor, closeColor: closeColor }),
+          _pathV = _crConf2._pathV,
+          _fillV = _crConf2._fillV,
+          _rootChildStyle = _crConf2._rootChildStyle,
+          _rootChildCl = _crConf2._rootChildCl;
 
       return _react2.default.createElement(
         'div',
@@ -170,12 +175,12 @@ var OpenClose = (_temp = _class = function (_Component) {
           _react2.default.createElement(
             'div',
             {
+              role: 'menuitem',
+              tabIndex: '0',
               className: CL.ROOT,
               style: ocStyle,
-              onClick: this._handleClick,
-              tabIndex: '0',
-              role: 'menuitem',
-              onKeyDown: this._handleKeyDown
+              onClick: this._hClick,
+              onKeyDown: this._hKeyDown
             },
             _react2.default.createElement(
               'div',
@@ -188,10 +193,10 @@ var OpenClose = (_temp = _class = function (_Component) {
                   style: S.INLINE_BLOCK
                 },
                 _react2.default.createElement('path', {
-                  d: _pathV,
                   fill: _fillV,
                   strokeWidth: '1',
-                  stroke: openColor
+                  stroke: openColor,
+                  d: _pathV
                 })
               )
             ),

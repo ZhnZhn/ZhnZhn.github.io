@@ -45,21 +45,30 @@ class RowInputText extends Component {
 
   render(){
     const {
-      styleRoot, styleCaption, caption,
-      styleInput, ...rest
+      styleRoot, rootStyle,
+      captionStyle, styleCaption,
+      caption,
+      inputStyle, styleInput,
+      ...rest
     } = this.props
+    , _rootStyle = rootStyle
+         || {...S.ROOT, ...styleRoot}
+    , _captionStyle = captionStyle
+         || {...S.CAPTION, ...styleCaption}
+    , _inputStyle = inputStyle
+         || {...S.INPUT_TEXT, ...styleInput}
     , _caption = caption.indexOf(COLLON) === -1
         ? caption + COLLON
         : caption;
     return (
-      <div style={{...S.ROOT, ...styleRoot}}>
+      <div style={_rootStyle}>
         <label>
-          <span style={{...S.CAPTION, ...styleCaption}}>
+          <span style={_captionStyle}>
             {_caption}
           </span>
           <InputText
              ref={this._refInput}
-             style={{...S.INPUT_TEXT, ...styleInput}}
+             style={_inputStyle}
              {...rest}
           />
         </label>
